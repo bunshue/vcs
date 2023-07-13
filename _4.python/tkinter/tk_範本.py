@@ -165,7 +165,7 @@ button11 = tk.Button(window, width = w, height = h, command = button11Click, tex
 button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button12 = tk.Button(window, width = w, height = h, command = button12Click, text = 'xxx')
 button12.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button13 = tk.Button(window, width = w, height = h, command = button13Click, text = 'xxx')
+button13 = tk.Button(window, width = w, height = h, command = window.destroy, text = '關閉視窗')
 button13.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button14 = tk.Button(window, width = w, height = h, command = button14Click, text = 'Send Data')
 button14.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)

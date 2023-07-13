@@ -179,3 +179,57 @@ for i in range(4):
 
 
 
+
+import pandas as pd
+import numpy as np
+import random
+
+my_array = np.arange(10)  # [0 1 2 3 4]
+
+print('原list')
+print(my_array)
+
+print('shuffle list')
+np.random.shuffle(my_array)
+print(my_array)
+
+print('shuffle list')
+np.random.shuffle(my_array)
+print(my_array)
+
+print('shuffle list')
+np.random.shuffle(my_array)
+print(my_array)
+
+sum_my_array = sum(my_array)
+print('和')
+print(sum_my_array)
+
+'''
+index = []
+ran = random.sample(range(0, 10),2)
+for i in ran:
+    index.append(i)
+index.sort()
+'''
+
+for i in range(10):
+    timeout = random.choice(range(80,180))
+    print('timeout', timeout)
+
+import random
+import time
+
+n = 10
+lst = list(range(n))
+print(lst)
+random.shuffle(lst)
+print(lst)
+startTime = time.time()
+lst.sort()
+print("Sort time in Python is", int(time.time() - startTime), "seconds")
+
+print(lst)
+
+
+

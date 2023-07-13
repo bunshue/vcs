@@ -30,7 +30,7 @@ def colorUpdate():
 
     color = "#" + redHex + greenHex + blueHex
     canvas.config(bg=color)
-    #window.after(100, colorUpdate)    #這行是什麼意思
+    #window.after(100, colorUpdate)    #這行是什麼意思, delay 100 msec
     print('設定顏色' + color)
 
 def incrementColor(colorValue, increment, direction):

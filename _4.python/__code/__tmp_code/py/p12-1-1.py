@@ -1,17 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[7]:
-
-
-get_ipython().run_line_magic('pip', 'install pyautogui')
-
-
-# In[9]:
-
-
 import pyautogui as auto
 from IPython.display import clear_output
+
 import time
 while True:
     x, y = auto.position()
@@ -20,10 +9,6 @@ while True:
     time.sleep(0.5)
     if x < 10:
         break
-
-
-# In[6]:
-
 
 import pyautogui as auto
 import time
@@ -38,10 +23,6 @@ auto.typewrite("https://hophd.wordpress.com")
 time.sleep(2)
 auto.press("enter")
 
-
-# In[5]:
-
-
 from selenium import webdriver
 import time
 url = "https://hophd.wordpress.com"
@@ -51,10 +32,5 @@ web.get(url)
 web.set_window_position(0, 0)
 time.sleep(10)
 web.quit()
-
-
-# In[ ]:
-
-
 
 

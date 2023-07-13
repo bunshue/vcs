@@ -69,19 +69,6 @@ else:
     print("The decimal value for hex number", hex, "is", decimal) 
 
 
-
-
-username = 'david'
-password = '1234'
-if username=='david' and password=='1234':
-    print('歡迎光臨本網站！')
-else:
-    print('帳號或密碼錯誤！')
-
-
-
-
-
 from urllib import parse
 
 string = '豬頭三'
@@ -89,62 +76,6 @@ string = '豬頭三'
 string_url = parse.quote(string)
 print('原字串:\t' + string)
 print('轉網址:\t' + string_url)
-
-
-
-
-import pandas as pd
-import numpy as np
-import random
-
-my_array = np.arange(10)  # [0 1 2 3 4]
-
-print('原list')
-print(my_array)
-
-print('shuffle list')
-np.random.shuffle(my_array)
-print(my_array)
-
-print('shuffle list')
-np.random.shuffle(my_array)
-print(my_array)
-
-print('shuffle list')
-np.random.shuffle(my_array)
-print(my_array)
-
-sum_my_array = sum(my_array)
-print('和')
-print(sum_my_array)
-
-'''
-index = []
-ran = random.sample(range(0, 10),2)
-for i in ran:
-    index.append(i)
-index.sort()
-'''
-
-for i in range(10):
-    timeout = random.choice(range(80,180))
-    print('timeout', timeout)
-
-import random
-import time
-
-n = 10
-lst = list(range(n))
-print(lst)
-random.shuffle(lst)
-print(lst)
-startTime = time.time()
-lst.sort()
-print("Sort time in Python is", int(time.time() - startTime), "seconds")
-
-print(lst)
-
-
 
 
 '''
@@ -186,9 +117,6 @@ print(VERSION)
 
 import selenium
 print(selenium.__version__)
-
-
-
 
 '''
 import win32api, win32con
@@ -436,26 +364,16 @@ for i in range(0, (total+1)):
     #print(i)	# 0 ~ 7
     print(u"download: " + str(100 * i / total ) + " %.")
 
-
-
-
 #替代字串
 TABLE_NAME = 'people'
 SELECT = 'select * from %s order by age, name' % TABLE_NAME
 
-
 print('select * from %s order by age, name' % TABLE_NAME)
 print(SELECT)
-
-
-
-
 
 key_id = 1234
 SELECT = 'SELECT * FROM memos WHERE key=?', (str(key_id))
 print(SELECT)
-
-
 
 print('----------------------------------------------------------------------')	#70個
 
@@ -557,23 +475,18 @@ longlist = '-l'
 filename = 'test01_io.py'
 
 sts = os.system('ls ' + longlist + ' ' + filename)
-
 if sts:
     msg('"ls -l" exit status: ' + repr(sts))
 
-
 sts = os.system('ls ' + filename)
-
 if sts:
     msg('"ls -l" exit status: ' + repr(sts))
 
 sts = os.system('dir')
-
 if sts:
     msg('"ls -l" exit status: ' + repr(sts))
 else:
     print(sts)
-
 
 foldername = '__code'
 names = os.listdir(foldername)

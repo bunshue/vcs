@@ -5,25 +5,6 @@ print(ord(string))
 
 print(hex(ord(string)))
 
-number1 = 3
-number2 = 5
-
-try:
-    result = number1 / number2
-    print("Result is " + str(result))
-except ZeroDivisionError:
-    print("Division by zero!")
-except SyntaxError:
-    print("A comma may be missing in the input")
-except:
-    print("Something wrong in the input")
-else:
-    print("No exceptions")
-finally:
-    print("The finally clause is executed")
-
-
-
 print('十進位 轉 十六進位')
 
 # Convert a decimal to a hex as a string 
@@ -118,6 +99,92 @@ for y in range(0, H, h):
         #print(x, y)
         #print(box)
 
+
+
+import os
+import sys
+
+__version__ = 1, 7, 0
+
+
+def fail(msg):
+    out = sys.stderr.write
+    out(msg + "\n\n")
+    return 0
+
+filename = 'ccccc'
+fail("couldn't open " + filename)
+
+
+'''
+        os.remove(fname)
+        os.rename(temp_fname, fname)
+
+'''
+
+llll = ['aa', 'bb', 'cc', 'dd', 'ee']
+pppp = llll[2:] #第二項(含)以後的
+print(llll)
+print(pppp)
+
+table1 = [] #list
+table2 = {} #dict
+print(type(table1))
+print(type(table2))
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+mod = os.path.basename(filename)
+print(mod)
+print(mod[-3:])
+
+head, tail = os.path.split(filename)
+print(head)
+print(tail)
+tempname = os.path.join(head, '@' + tail)
+print(tempname)
+
+
+curdir = [os.curdir]
+print(curdir)
+
+pardir = [os.pardir]
+print(pardir)
+
+
+err = sys.stderr.write
+dbg = err
+rep = sys.stdout.write
+
+msg = 'cccccc'
+usage = 'dddddddddddd'
+err(str(msg) + '\n')
+err(msg)
+err('-i option or file-or-directory missing\n')
+err(usage)
+err('%s: cannot open: %r\n' % (filename, msg))
+err('%s: cannot create: %r\n' % (tempname, msg))
+
+
+'''
+word = word.strip()
+
+
+        if os.path.isdir(arg):
+            if recursedown(arg): bad = 1
+        elif os.path.islink(arg):
+            err(arg + ': will not process symbolic links\n')
+            bad = 1
+        else:
+            if fix(arg): bad = 1
+
+    dbg('recursedown(%r)\n' % (dirname,))
+##  dbg('fix(%r)\n' % (filename,))
+
+
+'''
+
+prog = sys.argv[0]
+print(prog)
 
 
 

@@ -1,25 +1,12 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
-
 import json
 import requests
+
 api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
 res = requests.get(api_url).text
-
-
-# In[12]:
-
 
 data = json.loads(res)
 for post in data:
     print(post["title"])
-
-
-# In[14]:
-
 
 import urllib.request
 import time
@@ -34,9 +21,4 @@ for post in data:
                 urllib.request.urlretrieve(imgurl, os.path.basename(imgurl))
             time.sleep(3)
 
-
-# In[6]:
-
-
 print(res)
-

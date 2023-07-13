@@ -33,7 +33,7 @@ face_cascade_classifier = cv2.CascadeClassifier(xml_filename)   #建立辨識物
 
 recogname = "media\\recogface.jpg"  #使用者人臉檔案
 loginname = "media\\loginface.jpg"  #登入者人臉檔案
-os.system("cls")  #清除螢幕
+os.system('cls')  #在cmd視窗下清除螢幕
 if(os.path.exists(recogname)):  #如果使用者人臉檔案已存在
     msg = "按任意鍵建立登入者臉譜。\n攝影機開啟後按「z」拍照比對！"
     makeFace(loginname, msg, "")  #建立登入者人臉檔案

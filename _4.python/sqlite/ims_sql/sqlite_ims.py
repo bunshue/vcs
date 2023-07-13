@@ -1033,7 +1033,7 @@ if flag_debug_mode == True:
     button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
     button12 = tk.Button(window, width = w, height = h, command = button12Click, text = '顯示記憶體資料')
     button12.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-    button13 = tk.Button(window, width = w, height = h, command = button13Click, text = '')
+    button13 = tk.Button(window, width = w, height = h, command = window.destroy, text = '關閉視窗')
     button13.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
     button14 = tk.Button(window, width = w, height = h, command = button14Click, text = 'Send Data')
     button14.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)

@@ -1,4 +1,4 @@
-# python import module : time, datetime, calendar
+# python import module : time, datetime
 
 import time
 import datetime
@@ -426,5 +426,27 @@ print(ttt)
 
 
 
+import datetime
+print('datetime from lambda:', datetime.datetime.today())
+today = datetime.datetime.today()
+print('datetime from flex:', today)
+
+today = str(datetime.datetime.today().date())
+current = str(datetime.datetime.today())
+
+
+
+import time
+
+print(time.localtime()) #獲取格式化的時間
+
+localtime = time.asctime(time.localtime())
+print (localtime)
+
+#格式化日期成2016-03-20 11:45:39形式
+print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
+# 格式化成Sat Mar 28 22:24:24 2016形式
+print (time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
 

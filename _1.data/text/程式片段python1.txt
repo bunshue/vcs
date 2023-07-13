@@ -1,4 +1,14 @@
 
+os.system('cls') #在cmd視窗下清除螢幕
+
+os.system('cls' if os.name == 'nt' else 'clear')
+
+    os_name = platform.system().lower()
+    if 'windows' in os_name:
+        system('cls')
+    else:
+        system('clear')
+
 
 input("按任意鍵繼續")
  

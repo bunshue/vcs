@@ -3,16 +3,6 @@ import sys
 
 print('---- os ------------------------------------------------------------------')	#70個
 
-major, minor, micro, level, serial = sys.version_info
-
-print('version_info')
-print(sys.version_info)
-print(major)
-print(minor)
-print(micro)
-print(level)
-print(serial)
-
 import os
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -25,14 +15,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 size = os.stat(filename).st_size
 print(size)
 
-
-
 import os
 user = os.getlogin()
 print(user)
-
-version = __version__ = "4.61.0.166 Unreleased"
-print(version)
 
 font_file = os.path.join(os.path.dirname(__file__), "OpenFlame.ttf")
 print(font_file)
@@ -41,8 +26,6 @@ import os
 
 print(os.listdir())
 print(os.listdir('/'))
-
-
 
 import sys, os
 
@@ -101,38 +84,11 @@ try:
 
 print('---- sys ------------------------------------------------------------------')	#70個
 
-import sys
-vi = sys.version_info
-install_group = "Python %d.%d" % (vi[0], vi[1])
-print(install_group)
-
 
 print('---- time ------------------------------------------------------------------')	#70個
-import datetime
-print('datetime from lambda:', datetime.datetime.today())
-today = datetime.datetime.today()
-print('datetime from flex:', today)
-
-today = str(datetime.datetime.today().date())
-current = str(datetime.datetime.today())
-
 
 
 print('---- print ------------------------------------------------------------------')	#70個
-
-import time
-
-print(time.localtime()) #獲取格式化的時間
-
-localtime = time.asctime(time.localtime())
-print (localtime)
-
-#格式化日期成2016-03-20 11:45:39形式
-print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-
-# 格式化成Sat Mar 28 22:24:24 2016形式
-print (time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
-
 
 import sys
 import os

@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[28]:
-
-
 import requests
 url = "https://www.lexuscpo.com.tw/Home/CarStock"
 headers = {
@@ -22,8 +16,6 @@ form_data = {
 res = requests.post(url, data=form_data, headers=headers)
 data = res.text
 
-
-# In[38]:
 
 
 import json

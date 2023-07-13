@@ -1,5 +1,5 @@
 def menu(status):
-    os.system("cls")
+    os.system('cls')	#在cmd視窗下清除螢幕
     print("wav 播放器  {}".format(status))
     print("--------------------------------------")
     print("1. 播  放")

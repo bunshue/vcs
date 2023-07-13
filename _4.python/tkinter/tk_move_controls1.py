@@ -1,3 +1,4 @@
+import math
 import tkinter as tk
 
 # 建立主視窗
@@ -25,10 +26,14 @@ canvas = tk.Canvas(window, bg = 'pink', width = width, height = height)
 canvas.pack()
 
 radius = 20
-x = 0 # Starting x position
-y = 100
-sleepTime = 100 # Set a sleep time
-canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill = 'red', tags = "moving")
+x1 = 0 # Starting x position
+y1 = 100
+sleepTime = 100 #Sleep 一段時間(msec)
+canvas.create_oval(x1 - radius, y1 - radius, x1 + radius, y1 + radius, fill = 'red', tags = 'moving1')
+
+x2 = x1
+y2 = 200
+canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'red', tags = 'moving2')
 
 dx = 10
 
@@ -40,19 +45,27 @@ label1 = tk.Label(window, textvariable = msg, fg = 'red', font=("新細明體", 
 label1.pack() 
 
 while True:
-    canvas.move('moving', dx, 0) #移動那個被畫上去的移動物件
-    canvas.after(sleepTime) # Sleep for 100 milliseconds
+    #移動法
+    canvas.move('moving1', dx, 0) #移動那個被畫上去的移動物件
+    canvas.after(sleepTime) #Sleep 一段時間(msec)
     canvas.update() # Update canvas
     count = count + 1
     msg.set(count)
     
-    if x < width:
-        x += dx  # Set new position 
+    if x1 < width:
+        x1 += dx  # Set new position 
     else:
-        x = 0
-        canvas.delete('moving') #刪除所有移動物件
+        x1 = 0
+        canvas.delete('moving1') #刪除所有移動物件
         #畫 移動物件
-        canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill = 'red', tags = "moving")
+        canvas.create_oval(x1 - radius, y1 - radius, x1 + radius, y1 + radius, fill = 'red', tags = 'moving1')
+
+    #重畫法
+    canvas.delete('moving2') #刪除所有移動物件
+    y2 = 200 + 50 * math.sin(count / 5)
+    x2 = x1
+    canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'red', tags = 'moving2')
+
 
 window.mainloop()
 

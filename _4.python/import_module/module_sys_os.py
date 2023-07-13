@@ -23,12 +23,12 @@ print("打印系統路徑")
 print(sys.path)
 
 print('系統命令');
-os.system("cls")  # 清除螢幕
-os.system("clear")
-os.system("ls")
-#os.system("pause") 暫停
-os.system("mkdir dir2")  # 建立 dir2 目錄
-os.system("copy ossystem.py dir2\copyfile.py") # 複製檔案 
+os.system('cls')  #在cmd視窗下清除螢幕
+os.system('clear')
+os.system('ls')
+#os.system('pause') 暫停
+os.system('mkdir dir2')  # 建立 dir2 目錄
+os.system('copy ossystem.py dir2\copyfile.py') # 複製檔案 
 
 print('系統命令, 開啟外部程式')
 
@@ -56,6 +56,25 @@ if sys.version < '3':
     print('python 舊版')
 else:
     print('python 新版')
+
+major, minor, micro, level, serial = sys.version_info
+
+print('version_info')
+print(sys.version_info)
+print(major)
+print(minor)
+print(micro)
+print(level)
+print(serial)
+
+
+import sys
+python_version = "Python %d.%d" % (sys.version_info[0], sys.version_info[1])
+print(python_version)
+
+
+version = __version__ = "4.61.0.166 Unreleased"
+print(version)
 
 
 import os

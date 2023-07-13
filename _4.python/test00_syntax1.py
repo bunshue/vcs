@@ -105,6 +105,26 @@ except:
 finally:
     print('一定會執行的程式區塊')
 
+
+number1 = 3
+number2 = 5
+
+try:
+    result = number1 / number2
+    print("Result is " + str(result))
+except ZeroDivisionError:
+    print("Division by zero!")
+except SyntaxError:
+    print("A comma may be missing in the input")
+except:
+    print("Something wrong in the input")
+else:
+    print("No exceptions")
+finally:
+    print("The finally clause is executed")
+
+
+
 n=2
 try:
     n+=1

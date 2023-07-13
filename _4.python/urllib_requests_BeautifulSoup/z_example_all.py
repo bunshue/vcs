@@ -57,10 +57,10 @@ def example02():
     print(soup.title.string)#抓標籤裡面的文字
 
     #尋找class = 'title' 的 div 標籤
-    titles = soup.find("div", class_= "title")
+    titles = soup.find("div", class_ = "title")
 
     #尋找所有class = 'title' 的 div 標籤 用列表表示
-    titles = soup.find_all("div", class_= "title")
+    titles = soup.find_all("div", class_ = "title")
 
     #print(titles)
     for title in titles:
@@ -97,7 +97,7 @@ def example03():
     items = tree[0].findall('item')
     print('findall 方法：' + items[0][0].text)
 
-    items = list(tree.iter(tag='item'))
+    items = list(tree.iter(tag = 'item'))
     print('iter 方法：' + items[0][0].text)
 
     import requests
@@ -146,9 +146,9 @@ def example04():
     earthquakes = json.loads(html_data.text)
      
     for eq in earthquakes['features']:
-        if(float(eq['properties']['mag'])>5.0):
-            eptime = float(eq['properties']['time']) /1000.0
-            d = datetime.datetime.fromtimestamp(eptime). strftime('%Y-%m-%d %H:%M:%S')
+        if(float(eq['properties']['mag']) > 5.0):
+            eptime = float(eq['properties']['time']) / 1000.0
+            d = datetime.datetime.fromtimestamp(eptime).strftime('%Y-%m-%d %H:%M:%S')
             print("{}, 震度:{}, 地點:{}".format(d, eq['properties']['mag'], eq['properties']['place']))
 
 def example05():
@@ -168,22 +168,22 @@ def example05():
     
     sp = BeautifulSoup(html_data.text, 'html.parser')
     # 找到威力彩的區塊
-    datas = sp.find('div', class_='contents_box02')
+    datas = sp.find('div', class_ = 'contents_box02')
     # 開獎期數
     title = datas.find('span', 'font_black15').text
     print('威力彩期數：', title)
     # 開獎號碼
-    nums = datas.find_all('div', class_='ball_tx ball_green')
+    nums = datas.find_all('div', class_ = 'ball_tx ball_green')
     # 開出順序
-    print('開出順序：', end=' ')
+    print('開出順序：', end = ' ')
     for i in range(0,6):
-        print(nums[i].text, end=' ')
+        print(nums[i].text, end = ' ')
     # 大小順序
-    print('\n大小順序：', end=' ')
+    print('\n大小順序：', end = ' ')
     for i in range(6,12):
-        print(nums[i].text, end=' ')
+        print(nums[i].text, end = ' ')
     # 第二區
-    num = datas.find('div', class_='ball_red').text
+    num = datas.find('div', class_ = 'ball_red').text
     print('\n第二區：', num)
 
 #取得氣象資料 ST
@@ -252,8 +252,8 @@ def get_data(html_text):
         if inf[1].find('span') is None:
             temperature_highest = None
         else:
-            temperature_highest=inf[1].find('span').string
-            temperature_highestm  =temperature_highest.replace("℃","")
+            temperature_highest = inf[1].find('span').string
+            temperature_highestm = temperature_highest.replace("℃","")
         temperature_lowest = inf[1].find('i').string
         temperature_lowest = temperature_lowest.replace('℃','')
         temp.append(temperature_highest)
@@ -262,7 +262,7 @@ def get_data(html_text):
     return final
 
 def write_data(data, name):
-    file_name =name
+    file_name = name
     with open(file_name, 'a', errors = 'ignore', newline = '') as f:
         f_csv = csv.writer(f)
         f_csv.writerows(data)
@@ -271,11 +271,11 @@ def example06():
     print('取得氣象資料')
     print('取得氣象資料')
     url = 'http://www.weather.com.cn/weather/101190401.shtml'   #蘇州
-    url = 'http://www.weather.com.cn/weather/101340101.shtml'  #台北
+    url = 'http://www.weather.com.cn/weather/101340101.shtml'   #台北
     html_data = get_content(url)
     #print(html_data)
     result = get_data(html_data)
-    write_data(result,'weather.csv')
+    write_data(result, 'weather.csv')
 
 #取得氣象資料 SP
     
@@ -327,11 +327,11 @@ def example07():
             else:
                     word_count[word] = 1
 
-            sorted_wc = sorted(word_count.items(), key=operator.itemgetter(1), reverse=True)
+            sorted_wc = sorted(word_count.items(), key = operator.itemgetter(1), reverse = True)
 
     '''
     for item in sorted_wc:
-            if item[1]>1:
+            if item[1] > 1:
                     print(item)
             else:
                     break

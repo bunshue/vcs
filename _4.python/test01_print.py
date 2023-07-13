@@ -243,6 +243,36 @@ usage(msg)
 
 #print("Serving {} on port {}, control-C to stop".format(path, port))
 
+print('恢復正常顯示')
 
+import sys
 
+filename = 'aaaaa'
+msg = 'bbbbb'
+sys.stderr.write('紅字打印 : %s: can\'t open: %s\n' % (filename, str(msg)))
+
+data = 'cccccccccccc'
+sys.stdout.write(data)
+
+print()
+
+print('恢復正常顯示')
+
+import os
+sys.stdout = sys.stderr
+print('Usage:', os.path.basename(sys.argv[0]), end = ' ')
+print('[-cdu] [file] ...')
+print('-c: print callers per objectfile')
+print('-d: print callees per objectfile')
+print('-u: print usage of undefined symbols')
+print('If none of -cdu is specified, all are assumed.')
+print('Use "nm -o" to generate the input (on IRIX: "nm -Bo"),')
+print('e.g.: nm -o /lib/libc.a | objgraph')
+
+sys.stdout = sys.stdout
+import sysconfig
+SRCDIR = sysconfig.get_config_var('srcdir')
+print(SRCDIR)
+
+print('不能 恢復正常顯示')
 

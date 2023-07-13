@@ -1,11 +1,7 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[39]:
-
-
-import requests, time
+import requests
+import time
 from bs4 import BeautifulSoup
+
 target_url = 'https://www.nkust.edu.tw/p/403-1000-12-{}.php'
 
 data = list()
@@ -22,17 +18,10 @@ for page in range(1, 6):
     time.sleep(3)
 
 
-# In[3]:
-
-
 from platform import python_version
 print(python_version())
 import bs4
 print(bs4.__version__)
-
-
-# In[41]:
-
 
 contents = list()
 for article in data[6:7]:
@@ -53,10 +42,6 @@ for article in data[6:7]:
     time.sleep(3)
 print(contents)
 
-
-# In[36]:
-
-
 for article in data[5:6]:
     content = dict()
     url = article[1]
@@ -76,23 +61,13 @@ for article in data[5:6]:
     time.sleep(3)
 
 
-# In[7]:
-
-
 get_ipython().system('pip install pymongo')
-
-
-# In[1]:
-
 
 from pymongo import MongoClient
 conn = MongoClient()
 db = conn.news
 collection = db.nkust
 collection.insert_one(content)
-
-
-# In[38]:
 
 
 from pymongo import MongoClient

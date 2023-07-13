@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import json
 import urllib.parse
 import requests
@@ -12,27 +6,16 @@ html = requests.get(url).text
 data = json.loads(html)
 
 
-# In[9]:
-
-
 titles = data['lists']
 for title in titles:
     print(title['title'])
     print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
-
-
-# In[10]:
-
 
 import requests
 url = "https://ck101.com/forum-3590-1.html?ref=nav"
 res = requests.get(url)
 print(res)
 print(res.text)
-
-
-# In[11]:
-
 
 import requests
 url = "https://ck101.com/forum-3590-1.html?ref=nav"
