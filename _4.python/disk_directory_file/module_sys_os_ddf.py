@@ -330,26 +330,6 @@ file, ext = os.path.splitext(filename)
 print(file)
 print(ext)
 
-
-
-
-
-
-
-
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-import os
-from stat import ST_MTIME
-from stat import ST_CTIME
-
-st = os.stat(filename)
-
-print(st)
-
-print(st[ST_MTIME])
-print(st[ST_CTIME])
-
 base = os.path.basename(filename)
 print(base)
 

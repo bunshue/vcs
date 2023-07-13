@@ -1,6 +1,5 @@
 
 os.system('cls') #在cmd視窗下清除螢幕
-
 os.system('cls' if os.name == 'nt' else 'clear')
 
     os_name = platform.system().lower()
@@ -11,13 +10,8 @@ os.system('cls' if os.name == 'nt' else 'clear')
 
 
 input("按任意鍵繼續")
- 
-
 
 Firebase 專案是應用程式的容器
-
-
-    os.system("cls")
 
 檢查key
 def CkeckKey(no):
@@ -28,14 +22,6 @@ def CkeckKey(no):
                 key_id = key
                 break
     return key_id
-        
-
-
-
-
-
-
-
 
 
 plt有此語法否?
@@ -122,8 +108,6 @@ print('usage: findlinksto pattern directory ...')
 
 
 
-
-os.system("cls")  #清除螢幕
 
 
 #另存新檔
@@ -1043,8 +1027,6 @@ filename2 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
 filename3 = 'C:/_git/vcs/_1.data/______test_files1'
 
 ----------------import os 大集合----------------
-
-size = os.stat(fullpath).st_size
 
 
 os.chdir(dir)

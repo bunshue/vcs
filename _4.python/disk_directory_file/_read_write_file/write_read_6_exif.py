@@ -9,14 +9,17 @@ def get_year_month(fullpathname):
     if 'EXIF DateTimeOriginal' in exif:
         print('有 EXIF 資料')
         ym = exif['EXIF DateTimeOriginal'].values
+        print(ym)
     else:
         print('無 EXIF 資料, 使用檔案時間')
         ym = time.strftime('%Y:%m:%d', time.localtime(os.stat(fullpathname).st_ctime))
         fp.close()
-    return ym[0:4], ym[5:7]
+        print(ym)
+    return ym[0:4], ym[5:7], ym[8:10]
 
 imagefile = 'C:/_git/vcs/_1.data/______test_files1/orient1.jpg'
-y, m = get_year_month(imagefile)
-print(y)
-print(m)
+yyyy, mm, dd = get_year_month(imagefile)
+print('年', yyyy)
+print('月', mm)
+print('日', dd)
 

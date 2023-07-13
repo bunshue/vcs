@@ -68,6 +68,7 @@ def button12Click():
 
 def button13Click():
     print('你按了button13')
+    window.destroy()
 
 def button14Click():
     #print('你按了button14')
@@ -165,7 +166,7 @@ button11 = tk.Button(window, width = w, height = h, command = button11Click, tex
 button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button12 = tk.Button(window, width = w, height = h, command = button12Click, text = 'xxx')
 button12.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button13 = tk.Button(window, width = w, height = h, command = window.destroy, text = '關閉視窗')
+button13 = tk.Button(window, width = w, height = h, command = button13Click, text = '關閉視窗')
 button13.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button14 = tk.Button(window, width = w, height = h, command = button14Click, text = 'Send Data')
 button14.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)

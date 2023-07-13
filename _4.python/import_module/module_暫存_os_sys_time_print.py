@@ -10,12 +10,6 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 print(base_dir)
 
 import os
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-size = os.stat(filename).st_size
-print(size)
-
-import os
 user = os.getlogin()
 print(user)
 
