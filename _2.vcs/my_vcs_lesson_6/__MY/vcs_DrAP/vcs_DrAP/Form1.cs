@@ -54,6 +54,7 @@ namespace vcs_DrAP
         string audio_player_path = String.Empty;
         string picture_viewer_path = String.Empty;
         string text_editor_path = String.Empty;
+        string python_editor_path = String.Empty;
         string search_path = @"C:\_git\vcs\_2.vcs";
         string specified_search_path = String.Empty;
 
@@ -263,8 +264,9 @@ namespace vcs_DrAP
             bt_search_pattern_python.Location = new Point(x_st, y_st + dy);
             bt_search_pattern_cuda.Location = new Point(x_st + dx, y_st + dy);
             bt_search_pattern_opengl.Location = new Point(x_st + dx * 2, y_st + dy);
-            cb_option1.Location = new Point(x_st + dx * 3, y_st + dy);
-            cb_option2.Location = new Point(x_st + dx * 3, y_st + dy + 20);
+            bt_edit_python_files.Location = new Point(x_st + dx * 3, y_st + dy);
+            cb_option1.Location = new Point(x_st + dx * 4, y_st + dy);
+            cb_option2.Location = new Point(x_st + dx * 4, y_st + dy + 20);
 
             bt_open_dir2.Location = new Point(x_st + dx * 2, y_st);
             bt_save_file_data.Location = new Point(x_st + dx * 3, y_st);
@@ -1207,7 +1209,6 @@ namespace vcs_DrAP
                     richTextBox2.Text += "video_player_path = " + video_player_path + "\n";
                     richTextBox2.Text += "fullname = " + fullname + "\n";
 
-
                     if (video_player_path == String.Empty)
                     {
                         //Process.Start(fullname); //使用預設程式開啟
@@ -1222,9 +1223,6 @@ namespace vcs_DrAP
             {
                 //Process.Start(text_editor_path, fullname);
             }
-
-
-
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1302,6 +1300,13 @@ namespace vcs_DrAP
                     if (System.IO.File.Exists(text_editor_path) == true)
                     {
                         Process.Start(text_editor_path, fullname);
+                    }
+                }
+                else if (fi.Extension == ".py")
+                {
+                    if (System.IO.File.Exists(python_editor_path) == true)
+                    {
+                        Process.Start(python_editor_path, fullname);
                     }
                 }
                 else
@@ -1428,6 +1433,114 @@ namespace vcs_DrAP
                     Process.Start(text_editor_path, all_filename);
                 }
             }
+        }
+
+        private void bt_edit_python_files_Click(object sender, EventArgs e)
+        {
+            /*
+            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            {
+                richTextBox2.Text += listView1.SelectedItems[i].SubItems[1].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+            }
+            richTextBox2.Text += "開啟\n";
+            */
+
+            int selNdx;
+            string all_filename = string.Empty;
+
+            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+            {
+                richTextBox2.Text += "無檔案\n";
+                return;
+            }
+
+            //richTextBox2.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            {
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
+
+                if (flag_function == FUNCTION_SEARCH_TEXT)
+                {
+                    all_filename += " \"" + listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].Text + "\"";
+                }
+                else
+                {
+                    all_filename += " \"" + listView1.Items[selNdx].SubItems[3].Text + "\\" + listView1.Items[selNdx].SubItems[2].Text + "\"";
+                }
+            }
+
+            richTextBox2.Text += "all_filename : " + all_filename + "\n";
+
+            string prog = @"C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\idlelib\idle.pyw";
+
+            if (python_editor_path == string.Empty)
+            {
+                python_editor_path = prog;
+            }
+
+            Process.Start(python_editor_path, all_filename);
+
+            return;
+
+            //指定應用程式路徑
+            string target = String.Empty;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+
+            if (flag_search_vcs_pattern == 0)
+            {
+                target = video_player_path;
+            }
+            else
+            {
+                target = text_editor_path;
+            }
+
+            if (flag_search_vcs_pattern == 0)
+            {
+                ProcessStartInfo pInfo = new ProcessStartInfo(target);
+                pInfo.Arguments = all_filename;
+
+                /*
+                // debug mesg
+                richTextBox2.Text += "target : " + target + "\n";
+                richTextBox2.Text += "all_filename : " + all_filename + "\n";
+                */
+
+                if (video_player_path == String.Empty)
+                {
+                    all_filename = all_filename.Trim().Replace("\"", "");
+                    Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
+                }
+                else
+                {
+                    Process.Start(video_player_path, all_filename);    //指名播放程式開啟
+                }
+
+                /*
+                using (Process process = new Process())
+                {
+                    process.StartInfo = pInfo;
+                    process.Start();
+                }
+                */
+            }
+            else
+            {
+                if (System.IO.File.Exists(text_editor_path) == true)
+                {
+                    Process.Start(text_editor_path, all_filename);
+                }
+            }
+
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -2978,6 +3091,8 @@ namespace vcs_DrAP
             audio_player_path = Properties.Settings.Default.audio_player_path;
             picture_viewer_path = Properties.Settings.Default.picture_viewer_path;
             text_editor_path = Properties.Settings.Default.text_editor_path;
+            python_editor_path = Properties.Settings.Default.python_editor_path;
+
             if (Properties.Settings.Default.search_path != "")
                 search_path = Properties.Settings.Default.search_path;
 
@@ -3000,6 +3115,11 @@ namespace vcs_DrAP
             {
                 richTextBox2.Text += "文字編輯程式不存在 : " + Properties.Settings.Default.text_editor_path + "\n使用Windows預設文字編輯程式\n";
                 text_editor_path = String.Empty;
+            }
+            if (System.IO.File.Exists(Properties.Settings.Default.python_editor_path) == false)
+            {
+                richTextBox2.Text += "python編輯程式不存在 : " + Properties.Settings.Default.python_editor_path + "\n使用Windows預設文字編輯程式\n";
+                python_editor_path = String.Empty;
             }
 
             //預設搜尋路徑

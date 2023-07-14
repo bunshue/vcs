@@ -28,9 +28,36 @@ sqlite基本範例 一個
 '''
 
 print('----------------------------------------------------------------------')	#70個
+print('準備工作')
+
+import sqlite3
+
+def show_data_base_contents(db_filename, table_name, length):
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+    sqlstr = 'SELECT * FROM {};'.format(table_name)#same
+    sqlstr = 'SELECT * FROM %s' % table_name
+    cursor = conn.execute(sqlstr)
+
+    n = 0
+    for row in cursor:
+        print(row)
+        n = n + 1
+        #讀取 N 筆資料, 即跳出
+        if n == length:
+            break
+    conn.close()  # 關閉資料庫連線
+
+def show_data_base_contents_all(db_filename, table_name):
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+    sqlstr = 'SELECT * FROM {};'.format(table_name)#same
+    sqlstr = 'SELECT * FROM %s' % table_name
+    results = str(conn.execute(sqlstr).fetchall())
+    print(results)
+    conn.close()  # 關閉資料庫連線
+
+print('----------------------------------------------------------------------')	#70個
 
 import time
-import sqlite3
 
 db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.a.qlite';
 

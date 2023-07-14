@@ -335,14 +335,6 @@ foldername = os.path.dirname(filename)
 print(filename)
 print(foldername)
 
-mode = os.stat(filename).st_mode
-print(mode)
-print(stat.S_IWOTH)
-print(mode & stat.S_IWOTH)
-print(mode)
-print(stat.S_IWGRP)
-print(mode & stat.S_IWGRP)
-
 if os.path.exists(filename):
     print('True')
 else:
@@ -447,29 +439,6 @@ print(pathlist)
 
 def msg(str):
     sys.stderr.write(str + '\n')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-try:
-    st = os.stat(filename)
-except OSError:
-    print('error')
-if not S_ISREG(st[ST_MODE]):
-    msg(filename + ': not a disk file')
-else:
-    mode = S_IMODE(st[ST_MODE])
-    if mode & 0o111:
-        if not ident:
-            print(filename)
-            ident = st[:3]
-        else:
-            if st[:3] == ident:
-                s = 'same as: '
-            else:
-                s = 'also: '
-            msg(s + filename)
-    else:
-        msg(filename + ': not executable')
 
 longlist = '-l'
 filename = 'test01_io.py'

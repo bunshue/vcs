@@ -121,6 +121,7 @@
     <None Include="img\clipboard.png" />
     <None Include="img\cuda.png" />
     <None Include="img\opengl.bmp" />
+    <None Include="img\python2.png" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

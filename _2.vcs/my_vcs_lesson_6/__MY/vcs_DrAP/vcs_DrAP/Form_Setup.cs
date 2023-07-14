@@ -28,14 +28,15 @@ namespace vcs_DrAP
             lb_setup1.Text = "播放音樂程式";
             lb_setup2.Text = "播放圖片程式";
             lb_setup3.Text = "文字編輯程式";
-            lb_setup4.Text = "搜尋預設路徑";
-            lb_setup5.Text = "";
+            lb_setup4.Text = "預設搜尋路徑";
+            lb_setup5.Text = "Python編輯路徑";
 
             tb_setup0.Text = Properties.Settings.Default.video_player_path;
             tb_setup1.Text = Properties.Settings.Default.audio_player_path;
             tb_setup2.Text = Properties.Settings.Default.picture_viewer_path;
             tb_setup3.Text = Properties.Settings.Default.text_editor_path;
             tb_setup4.Text = Properties.Settings.Default.search_path;
+            tb_setup5.Text = Properties.Settings.Default.python_editor_path;
 
             show_item_location();
         }
@@ -194,6 +195,7 @@ namespace vcs_DrAP
             Properties.Settings.Default.picture_viewer_path = tb_setup2.Text;
             Properties.Settings.Default.text_editor_path = tb_setup3.Text;
             Properties.Settings.Default.search_path = tb_setup4.Text;
+            Properties.Settings.Default.python_editor_path = tb_setup5.Text;
 
             Properties.Settings.Default.Save();
             show_main_message("儲存設定完成", S_OK, 30);

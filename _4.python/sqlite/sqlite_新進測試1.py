@@ -4,11 +4,38 @@
 
 '''
 
-#----------------------------------------------------------------
+print('----------------------------------------------------------------------')	#70個
+print('準備工作')
+
+import sqlite3
+
+def show_data_base_contents(db_filename, table_name, length):
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+    sqlstr = 'SELECT * FROM {};'.format(table_name)#same
+    sqlstr = 'SELECT * FROM %s' % table_name
+    cursor = conn.execute(sqlstr)
+
+    n = 0
+    for row in cursor:
+        print(row)
+        n = n + 1
+        #讀取 N 筆資料, 即跳出
+        if n == length:
+            break
+    conn.close()  # 關閉資料庫連線
+
+def show_data_base_contents_all(db_filename, table_name):
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+    sqlstr = 'SELECT * FROM {};'.format(table_name)#same
+    sqlstr = 'SELECT * FROM %s' % table_name
+    results = str(conn.execute(sqlstr).fetchall())
+    print(results)
+    conn.close()  # 關閉資料庫連線
+
+print('----------------------------------------------------------------------')	#70個
 
 print('新進測試')
 
-import sqlite3
 
 db_filename  = 'ims_sql/db_ims.sqlite'
 db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite'
@@ -32,6 +59,13 @@ for row in cursor:
 
 conn.close()  # 關閉資料庫連線
 
+print('-------------------')
+table_name  = 'prices'
+length = 5
+show_data_base_contents(db_filename, table_name, length)
+print('-------------------')
+show_data_base_contents_all(db_filename, table_name)
+
 #----------------------------------------------------------------
 
 
@@ -48,8 +82,7 @@ conn.close()  # 關閉資料庫連線
 
 '''
 
-#----------------------------------------------------------------
-
+print('----------------------------------------------------------------------')	#70個
 print('新進測試')
 
 import sqlite3
@@ -118,11 +151,82 @@ for row in cursor:
 conn.close()  # 關閉資料庫連線
 
 
-print("程式執行完畢！")
+print('----------------------------------------------------------------------')	#70個
+print('一次寫入多行的語法')
+
+import sqlite3
+import datetime
+
+db_filename  = 'sssss4_many1.sqlite'
+
+print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
+cursor = conn.cursor() # 建立 cursor 物件
+conn.execute("CREATE virtual TABLE table01 using fts3(name, ingredients)")
+conn.executescript("""
+    INSERT INTO table01 (name, ingredients) VALUES ('broccoli stew', 'broccoli peppers cheese tomatoes');
+    INSERT INTO table01 (name, ingredients) VALUES ('pumpkin stew', 'pumpkin onions garlic celery');
+    INSERT INTO table01 (name, ingredients) VALUES ('broccoli pie', 'broccoli cheese onions flour');
+    INSERT INTO table01 (name, ingredients) VALUES ('pumpkin pie', 'pumpkin sugar flour butter');
+    """)
+
+for row in conn.execute("select rowid, name, ingredients from table01 where name match 'pie'"):
+    print(row)
 
 
+#conn.commit() # 更新
+
+table_name  = 'table01'
+show_data_base_contents_all(db_filename, table_name)
 
 
+print('----------------------------------------------------------------------')	#70個
+print('一次寫入多行的語法')
+
+import sqlite3
+
+con = sqlite3.connect(":memory:")
+cur = con.cursor()
+cur.executescript("""
+    CREATE TABLE person(
+        firstname,
+        lastname,
+        age
+    );
+
+    CREATE TABLE book(
+        title,
+        author,
+        published
+    );
+
+    INSERT INTO book(title, author, published)
+    VALUES (
+        'Dirk Gently''s Holistic Detective Agency',
+        'Douglas Adams',
+        1987
+    );
+    """)
+
+
+print('----------------------------------------------------------------------')	#70個
+print('xxxxx')
+
+
+import sqlite3
+
+con = sqlite3.connect(":memory:")
+cur = con.cursor()
+cur.execute("CREATE TABLE people (name_last, age)")
+
+who = 'David'
+age = 18
+
+cur.execute("INSERT INTO people VALUES (?, ?)", (who, age))
+
+
+print('----------------------------------------------------------------------')	#70個
+print('xxxxx')
 
 
 

@@ -8,7 +8,6 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 print(filename)
 
 statinfo = os.stat(filename)
-statinfo = os.stat(filename)
 
 print(statinfo)
 
@@ -171,7 +170,8 @@ st_mtime: 最後一次修改的時間。
 print('將檔案1的時間拷貝到檔案2')
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/aaaaaaab.txt'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/country_data_out1.xml'
-   
+
+''' TBD
 try:
     stat1 = os.stat(filename1)
     print(stat1[ST_ATIME])
@@ -184,8 +184,86 @@ try:
 except OSError:
     sys.stderr.write(filename2 + ': cannot change time\n')
     sys.exit(2)
+'''
 
 
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+from stat import *
+
+mtime = None
+atime = None
+# First copy the file's mode to the temp file
+
+statbuf = os.stat(filename)
+mtime = statbuf.st_mtime
+atime = statbuf.st_atime
+print(type(mtime))
+print(mtime)
+print(type(atime))
+print(atime)
+print(statbuf[ST_MODE])
+print(statbuf[ST_MODE] & 0o7777)
+
+'''    
+try:
+    os.rename(filename, filename + '~')
+except OSError as msg:
+    err('%s: warning: backup failed (%r)\n' % (filename, msg))
+'''
+
+'''
+#修改atime, mtime
+try:
+    os.utime(filename, (atime, mtime))
+    except OSError as msg:
+        err('%s: reset of timestamp failed (%r)\n' % (filename, msg))
+'''
+
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+st = os.stat(filename) # Get the mode
+mode = stat.S_IMODE(st[stat.ST_MODE])
+print(st)
+print(mode)
+
+
+
+mode = os.stat(filename).st_mode
+print(mode)
+print(stat.S_IWOTH)
+print(mode & stat.S_IWOTH)
+print(mode)
+print(stat.S_IWGRP)
+print(mode & stat.S_IWGRP)
+
+
+def msg(str):
+    sys.stderr.write(str + '\n')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+try:
+    st = os.stat(filename)
+except OSError:
+    print('error')
+if not S_ISREG(st[ST_MODE]):
+    msg(filename + ': not a disk file')
+else:
+    mode = S_IMODE(st[ST_MODE])
+    if mode & 0o111:
+        if not ident:
+            print(filename)
+            ident = st[:3]
+        else:
+            if st[:3] == ident:
+                s = 'same as: '
+            else:
+                s = 'also: '
+            msg(s + filename)
+    else:
+        msg(filename + ': not executable')
 
 

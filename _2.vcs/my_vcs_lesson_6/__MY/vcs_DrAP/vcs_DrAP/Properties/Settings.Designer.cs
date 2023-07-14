@@ -82,5 +82,17 @@ namespace vcs_DrAP.Properties {
                 this["search_path"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string python_editor_path {
+            get {
+                return ((string)(this["python_editor_path"]));
+            }
+            set {
+                this["python_editor_path"] = value;
+            }
+        }
     }
 }

@@ -42,40 +42,6 @@ foldername = 'C:/_git/vcs/_1.data/______test_files1/_opencv'
 #lll(foldername)
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-from stat import *
-
-mtime = None
-atime = None
-# First copy the file's mode to the temp file
-
-statbuf = os.stat(filename)
-mtime = statbuf.st_mtime
-atime = statbuf.st_atime
-print(type(mtime))
-print(mtime)
-print(type(atime))
-print(atime)
-print(statbuf[ST_MODE])
-print(statbuf[ST_MODE] & 0o7777)
-
-'''    
-try:
-    os.rename(filename, filename + '~')
-except OSError as msg:
-    err('%s: warning: backup failed (%r)\n' % (filename, msg))
-'''
-
-'''
-#修改atime, mtime
-try:
-    os.utime(filename, (atime, mtime))
-    except OSError as msg:
-        err('%s: reset of timestamp failed (%r)\n' % (filename, msg))
-'''
-
-
 print('---- sys ------------------------------------------------------------------')	#70個
 
 
@@ -86,7 +52,6 @@ print('---- print --------------------------------------------------------------
 
 import sys
 import os
-from stat import *
 
 join = os.path.join
 
@@ -94,27 +59,10 @@ error = 'mkreal error'
 
 BUFSIZE = 32*1024
 
-def test_file(name):
-    st = os.stat(name) # Get the mode
-    mode = S_IMODE(st[ST_MODE])
-    print(st)
-    print(mode)
-
-    files = os.listdir(name)
-    
-    for filename in files:
-        print(filename)
-
 sys.stdout = sys.stderr
 progname = os.path.basename(sys.argv[0])
 
 print(progname)
-
-#name = 'cccc.dat'
-name = 'dddd.pdf'
-name = 'C:/_git/vcs/_4.python/__code/__tmp_code/scripts1/'
-
-test_file(name)
 
 
 

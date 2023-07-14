@@ -78,6 +78,8 @@
             this.bt_test2 = new System.Windows.Forms.Button();
             this.bt_save_file_data = new System.Windows.Forms.Button();
             this.bt_clear3 = new System.Windows.Forms.Button();
+            this.cb_option2 = new System.Windows.Forms.CheckBox();
+            this.bt_edit_python_files = new System.Windows.Forms.Button();
             this.bt_search_pattern_opengl = new System.Windows.Forms.Button();
             this.bt_open_dir2 = new System.Windows.Forms.Button();
             this.bt_search_pattern_cuda = new System.Windows.Forms.Button();
@@ -91,7 +93,6 @@
             this.bt_start_files = new System.Windows.Forms.Button();
             this.bt_open_dir = new System.Windows.Forms.Button();
             this.bt_save_data = new System.Windows.Forms.Button();
-            this.cb_option2 = new System.Windows.Forms.CheckBox();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -646,6 +647,29 @@
             this.bt_clear3.UseVisualStyleBackColor = true;
             this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
             // 
+            // cb_option2
+            // 
+            this.cb_option2.AutoSize = true;
+            this.cb_option2.Location = new System.Drawing.Point(1472, 31);
+            this.cb_option2.Name = "cb_option2";
+            this.cb_option2.Size = new System.Drawing.Size(84, 16);
+            this.cb_option2.TabIndex = 61;
+            this.cb_option2.Text = "指定資料夾";
+            this.cb_option2.UseVisualStyleBackColor = true;
+            this.cb_option2.CheckedChanged += new System.EventHandler(this.cb_option2_CheckedChanged);
+            // 
+            // bt_edit_python_files
+            // 
+            this.bt_edit_python_files.BackgroundImage = global::vcs_DrAP.Properties.Resources.python2;
+            this.bt_edit_python_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_edit_python_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_edit_python_files.Location = new System.Drawing.Point(1606, 8);
+            this.bt_edit_python_files.Name = "bt_edit_python_files";
+            this.bt_edit_python_files.Size = new System.Drawing.Size(50, 50);
+            this.bt_edit_python_files.TabIndex = 62;
+            this.bt_edit_python_files.UseVisualStyleBackColor = true;
+            this.bt_edit_python_files.Click += new System.EventHandler(this.bt_edit_python_files_Click);
+            // 
             // bt_search_pattern_opengl
             // 
             this.bt_search_pattern_opengl.BackgroundImage = global::vcs_DrAP.Properties.Resources.opengl;
@@ -804,22 +828,12 @@
             this.bt_save_data.UseVisualStyleBackColor = true;
             this.bt_save_data.Click += new System.EventHandler(this.bt_save_data_Click);
             // 
-            // cb_option2
-            // 
-            this.cb_option2.AutoSize = true;
-            this.cb_option2.Location = new System.Drawing.Point(1472, 31);
-            this.cb_option2.Name = "cb_option2";
-            this.cb_option2.Size = new System.Drawing.Size(84, 16);
-            this.cb_option2.TabIndex = 61;
-            this.cb_option2.Text = "指定資料夾";
-            this.cb_option2.UseVisualStyleBackColor = true;
-            this.cb_option2.CheckedChanged += new System.EventHandler(this.cb_option2_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.bt_edit_python_files);
             this.Controls.Add(this.cb_option2);
             this.Controls.Add(this.bt_search_pattern_opengl);
             this.Controls.Add(this.bt_open_dir2);
@@ -951,6 +965,7 @@
         private System.Windows.Forms.Button bt_open_dir2;
         private System.Windows.Forms.Button bt_search_pattern_opengl;
         private System.Windows.Forms.CheckBox cb_option2;
+        private System.Windows.Forms.Button bt_edit_python_files;
     }
 }
 
