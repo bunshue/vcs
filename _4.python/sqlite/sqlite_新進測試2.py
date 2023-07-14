@@ -46,11 +46,19 @@ disk_conn = sqlite3.connect('example.db') # 建立資料庫連線, 磁碟
 cursor = mem_conn.cursor()
 cursor.execute("CREATE TABLE table01 (name_last, age)")
 
+print('目前共有修改資料次數 : ', mem_conn.total_changes)
+
 who = "David"
 age = 18
 
 cursor.execute("INSERT INTO table01 VALUES (?, ?)", (who, age))
 
+print('目前共有修改資料次數 : ', mem_conn.total_changes)
+
+cursor.execute("INSERT INTO table01 VALUES (?, ?)", (who, age))
+cursor.execute("INSERT INTO table01 VALUES (?, ?)", (who, age))
+cursor.execute("INSERT INTO table01 VALUES (?, ?)", (who, age))
+print('目前共有修改資料次數 : ', mem_conn.total_changes)
 
 cursor.execute('''CREATE TABLE stocks (date text, trans text, symbol text, qty real, price real)''')
 cursor.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
@@ -98,9 +106,89 @@ show_data_base_contents_all(db_filename, table_name)
 
 
 print('----------------------------------------------------------------------')	#70個
-print('xxxxx')
+print('測 executemany')
+
+import sqlite3
+stocks = [('2006-01-05', 'BUY', 'RHAT', 100, 35.14),
+          ('2006-03-28', 'BUY', 'IBM', 1000, 45.0),
+          ('2006-04-06', 'SELL', 'IBM', 500, 53.0),
+          ('2006-04-05', 'BUY', 'MSFT', 1000, 72.0)]
+conn = sqlite3.connect(":memory:")
+conn.execute("create table stocks (date text, buysell text, symb text, amount int, price real)")
+conn.executemany("insert into stocks values (?, ?, ?, ?, ?)", stocks)    
+cur = conn.cursor()
+    
+for row in cur.execute('SELECT * FROM stocks ORDER BY price'):
+    print(row)
+    
+# Output:
+# ('2006-01-05', 'BUY', 'RHAT', 100, 35.14)
+# ('2006-03-28', 'BUY', 'IBM', 1000, 45.0)
+# ('2006-04-06', 'SELL', 'IBM', 500, 53.0)
+# ('2006-04-05', 'BUY', 'MSFT', 1000, 72.0)
+
+
+cur.execute('SELECT * FROM stocks ORDER BY price')
+
+one_row_data = cur.fetchone()
+print('fetchone', one_row_data)
+
+while one_row_data:
+    one_row_data = cur.fetchone()
+    print('fetchone', one_row_data)
+    
+
+print('----------------------------------------------------------------------')	#70個
+print('測試各種fetch')
+'''
+fetchone()	#抓一行 tuple
+fetchmany(size=cursor.arraysize)	#抓n行 list
+fetchall()	#抓取剩下的全部 list
+
+'''
+
+db_filename  = 'ims_sql/db_ims.sqlite'
+db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite'
+#db_filename  = 'db_20230703_113217.sqlite'
+
+print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
+
+cursor = conn.execute('SELECT * FROM prices;')
+
+aaaa = cursor.fetchone()
+print(type(aaaa))
+print(aaaa)
+
+aaaa = cursor.fetchone()
+print(type(aaaa))
+print(aaaa)
+
+bbbb = cursor.fetchmany(3)
+print(type(bbbb))
+print(bbbb)
+
+cccc = cursor.fetchall()
+print(type(cccc))
+#print(cccc)
+
+
+
+
+
+
+
+conn.close()  # 關閉資料庫連線
 
 
 
 print("程式執行完畢！")
 
+
+
+
+'''
+
+注意：不要使用%s 將字串插入 SQL 命令，因為它可能使你的程式容易受到 SQL 注入攻擊（請參閱 SQL 注入 ）。
+
+'''

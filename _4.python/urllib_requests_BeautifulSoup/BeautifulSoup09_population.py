@@ -114,3 +114,61 @@ plt.ylabel("戶數")
 plt.show()
 
 
+
+
+'''
+url = 'https://siluo.household.yunlin.gov.tw/popul05/List.aspx?Parser=99,5,47,,,,,,,,,,,,,,,,,,,,,4'
+content = requests.get(url).text
+soup = BeautifulSoup(content, "html.parser")
+
+#print(soup)
+
+links = soup.find_all("li", class_="list_date")    # 文章標題
+for link in links:
+    print(link.text.strip()) # strip()用來刪除文字前面和後面多餘的空白
+    dddd = link.find_all("span", role="gridcell")    # 文章標題
+    for ddd in dddd:
+        print(ddd.text.strip())
+    print()
+
+
+'''
+
+'''
+
+#人口統計
+person_data = list()    #人口統計資料
+data1 = soup.find("tbody")
+#print(data1)
+
+
+<li class="list_date">
+
+
+rows = data1.find_all("tr")
+for row in rows:
+    cols = row.find_all("td")
+    if(len(cols) > 0):
+        if cols[1].text != "─":
+            person_data.append(((int)(cols[0].text.strip()[:-1]), (int)(cols[1].text), (int)(cols[2].text), (int)(cols[3].text)))
+        else:
+            print('xxxxxx1111')
+    else:
+        print('xxxxxx2222')
+
+person_data.reverse()   #反相
+length = len(person_data)
+year1 = []
+person1 = []
+person2 = []
+person3 = []
+for i in range(0, length): 
+    year1.append(person_data[i][0])
+    person1.append(person_data[i][1])
+    person2.append(person_data[i][2])
+    person3.append(person_data[i][3])
+'''
+
+
+
+
