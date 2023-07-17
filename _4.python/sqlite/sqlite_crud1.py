@@ -4,7 +4,7 @@ sqlite基本範例 一個
 
 '''
 原始資料 9 筆
-	id	name	money
+	id_num	name	money
 第1筆 : 5	Apple	333
 第2筆 : 1	Banana	777
 第3筆 : 4	Cat	444    (此筆資料多餘, 應刪除)
@@ -49,6 +49,7 @@ def show_data_base_contents(db_filename, table_name, length):
 
 def show_data_base_contents_all(db_filename, table_name):
     conn = sqlite3.connect(db_filename) # 建立資料庫連線
+    #SELECT * : 取得所有資料
     sqlstr = 'SELECT * FROM {};'.format(table_name)#same
     sqlstr = 'SELECT * FROM %s' % table_name
     results = str(conn.execute(sqlstr).fetchall())
@@ -67,20 +68,20 @@ cursor = conn.cursor() # 建立 cursor 物件
 
 print('建立一個資料表')
 ''' 其他寫法
-#cursor.execute("CREATE TABLE table01 ( id_num char(5), subjectId char(4) not null, " +
-#               "animalNumber integer, title varchar(50) not null, primary key (id_num))")   #id_num不可重複
+#cursor.execute("CREATE TABLE table01 ( id_num CHAR(5), subjectId CHAR(4) NOT NULL, " +
+#               "animalNumber INTEGER, title VARCHAR(50) NOT NULL, PRIMARY KEY (id_num))")   #id_num不可重複
 
 #id_num可重複
-#cursor.execute("CREATE TABLE table01 ( id_num char(5), subjectId char(4) not null, " +
-#               "animalNumber integer, title varchar(50) not null)")
+#cursor.execute("CREATE TABLE table01 ( id_num CHAR(5), subjectId CHAR(4) NOT NULL, " +
+#               "animalNumber INTEGER, title VARCHAR(50) NOT NULL)")
 
 #id_num可重複, 若資料庫已存在 則不用重新建立
-cursor.execute("CREATE TABLE IF NOT EXISTS table01 ( id_num char(5), subjectId char(4) not null, " +
-               "animalNumber integer, title varchar(50) not null)")
+cursor.execute("CREATE TABLE IF NOT EXISTS table01 ( id_num CHAR(5), subjectId CHAR(4) NOT NULL, " +
+               "animalNumber INTEGER, title VARCHAR(50) NOT NULL)")
 '''
 #CREATE 建立
 #CREATE TABLE table01, id_num(int) 和 name(text) 和 money(int),
-#primary key (id_num), id_num不可重複
+#PRIMARY KEY (id_num), id_num不可重複
 #sqlstr = 'CREATE TABLE IF NOT EXISTS table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money" INTEGER NOT NULL)'
 #多了檢查條件
 sqlstr = '''
@@ -95,7 +96,6 @@ cursor.execute(sqlstr)
 conn.commit() # 更新
 
 print('新增資料 3 筆 寫法一')
-#INSERT 增加
 #INSERT 新增資料, id_num不可重複
 sqlstr = 'INSERT INTO table01 VALUES (5, "Apple", 333)'
 cursor.execute(sqlstr)
@@ -105,20 +105,21 @@ sqlstr = 'INSERT INTO table01 VALUES (4, "Cat", 444)'
 cursor.execute(sqlstr)
 
 print('新增資料 2 筆 寫法二')
-cursor.execute("INSERT INTO table01 (id_num, name, money) " + "VALUES (9, 'Dog', 888)")
+cursor.execute("INSERT INTO table01 (id_num, name, money) VALUES (9, 'Dog', 888)")
 #id_num不重複 但name money 重複
-cursor.execute("INSERT INTO table01 (id_num, name, money) " + "VALUES (2, 'Dog', 888)")
+cursor.execute("INSERT INTO table01 (id_num, name, money) VALUES (2, 'Dog', 888)")
 
 print('新增資料 2 筆 寫法三')
 # 定義資料串列
-datas = [[8, 'Frog', 666],
-        [3, 'Giraffe', 222],]
+datas = [
+    [8, 'Frog', 666],
+    [3, 'Giraffe', 222]
+    ]
 
-#INSERT
 for data in datas:
     # 新增資料
-    # print("INSERT INTO table01 (id_num, name, money) VALUES ({}, '{}', '{}')".format(data[0], data[1], data[2]))
-    conn.execute("INSERT INTO table01 (id_num, name, money) VALUES ({}, '{}', '{}')".format(data[0], data[1], data[2]))
+    sqlstr = "INSERT INTO table01 (id_num, name, money) VALUES ({}, '{}', '{}')".format(data[0], data[1], data[2])
+    cursor.execute(sqlstr)
 conn.commit() # 更新
 
 print('新增資料 2 筆 寫法四')
@@ -153,49 +154,15 @@ conn.execute("DELETE FROM table01 WHERE id_num = {}".format(4))
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 
-#SELECT 讀取
-print('讀取資料庫資料')
+#SELECT 取得
+print('讀取資料庫資料, 全部1')
+show_data_base_contents_all(db_filename, 'table01')
+
+
+print('讀取資料庫資料, 全部2')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-cursor = conn.execute('SELECT * FROM table01')  #SELECT * : 取得所有資料
-conn.commit() # 更新
-conn.close()  # 關閉資料庫連線
-
-#SELECT 讀取
-#print('建立資料庫連線, 資料庫 : ' + db_filename)
-conn = sqlite3.connect(db_filename) # 建立資料庫連線
-print('指明抓一筆資料, 9號')
-number = 9
-cursor = conn.execute('SELECT * FROM table01 WHERE id_num = ' + str(number))    #條件
-row = cursor.fetchone()
-if not row == None:
-    print("{}\t{}\t{}".format(row[0], row[1], row[2]))
-else:
-    print('找不到' + str(number) + '號資料')
-
-print('指明抓一筆資料, 15號')
-number = 15
-cursor = conn.execute('SELECT * FROM table01 WHERE id_num = ' + str(number))    #條件
-row = cursor.fetchone()
-if not row == None:
-    print("{}\t{}\t{}".format(row[0], row[1], row[2]))
-else:
-    print('找不到' + str(number) + '號資料')
-    
-conn.commit() # 更新
-conn.close()  # 關閉資料庫連線
-
-
-'''
-#讀取一筆資料
-row = cursor.fetchone()
-print(row[0], row[1], row[2])
-#再讀取一筆資料
-row = cursor.fetchone()
-print(row[0], row[1], row[2])
-'''
-
-'''
+cursor = conn.execute('SELECT * FROM table01')      #SELECT * : 取得所有資料
 rows = cursor.fetchall()    #讀取全部資料
 print('共有 : ' + str(len(rows)) + " 筆資料")
 print('顯示原始資料')
@@ -204,7 +171,32 @@ print(rows)
 print('逐筆顯示資料')
 for row in rows:
     print(row[0], row[1], row[2])
-'''
+
+conn.close()  # 關閉資料庫連線
+
+#SELECT 取得
+#print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
+print('指明抓一筆資料, 9號')
+number = 9
+cursor = conn.execute('SELECT * FROM table01 WHERE id_num = ' + str(number))    #條件
+row = cursor.fetchone() #讀取一筆資料
+if not row == None:
+    print("{}\t{}\t{}".format(row[0], row[1], row[2]))
+else:
+    print('找不到' + str(number) + '號資料')
+
+print('指明抓一筆資料, 15號')
+number = 15
+cursor = conn.execute('SELECT * FROM table01 WHERE id_num = ' + str(number))    #條件
+row = cursor.fetchone() #讀取一筆資料
+if not row == None:
+    print("{}\t{}\t{}".format(row[0], row[1], row[2]))
+else:
+    print('找不到' + str(number) + '號資料')
+    
+conn.commit() # 更新
+conn.close()  # 關閉資料庫連線
 
 print('尋找資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)

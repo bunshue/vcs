@@ -35,7 +35,7 @@ TableName
 ColumnName    DataType
 欄名      
 
-SELECT陳述式 FROM陳述式
+SELECT 陳述式 FROM 陳述式
 
 取得
 SELECT * FROM 哪裏;   取得所有資料
@@ -90,8 +90,8 @@ cursor = conn.cursor() # 建立 cursor 物件
 print('建立表單')
 cursor.execute("CREATE TABLE talbe01"
 "("
-"   filename varchar(32),"
-"   filesize varchar(32)"
+"   filename VARCHAR(32),"
+"   filesize VARCHAR(32)"
 ")")
 
 
@@ -207,7 +207,7 @@ row = cursor.fetchone()
 if row == None:
     print("{} 帳號不存在!".format(name), '無法刪除資料')
 else:
-    sqlstr = "delete from password where name = '{}'".format(name)
+    sqlstr = "DELETE FROM password WHERE name = '{}'".format(name)
     conn.execute(sqlstr)
     conn.commit()
     print("刪除{}的資料!：".format(name), '已完成')
@@ -258,28 +258,25 @@ import datetime
 
 con = sqlite3.connect(":memory:")
 cur = con.cursor()
-cur.execute("CREATE TABLE table01(d DATE, ts TIMESTAMP)")
+cur.execute("CREATE TABLE table01(my_date DATE, my_timestamp TIMESTAMP)")
 
 today = datetime.date.today()
 now = datetime.datetime.now()
 
-cur.execute("insert into table01(d, ts) VALUES (?, ?)", (today, now))
-cur.execute("select d, ts from table01")
+cur.execute("INSERT INTO table01(my_date, my_timestamp) VALUES (?, ?)", (today, now))
+cur.execute("SELECT my_date, my_timestamp FROM table01")
 row = cur.fetchone()
 print(today, "=>", row[0], type(row[0]))
 print(now, "=>", row[1], type(row[1]))
 
-cur.execute('select current_date as "d [date]", current_timestamp as "ts [timestamp]"')
+cur.execute('SELECT current_date as "my_date [date]", current_timestamp as "my_timestamp [timestamp]"')
 row = cur.fetchone()
 print("current_date", row[0], type(row[0]))
 print("current_timestamp", row[1], type(row[1]))
 
-
 print('----------------------------------------------------------------------')	#70個
 
-
 print('測試 xxxx')
-
 
 import sqlite3
 
@@ -291,16 +288,16 @@ persons = [
 con = sqlite3.connect(":memory:")
 
 # Create the table
-con.execute("create table person(firstname, lastname)")
+con.execute("CREATE TABLE person(firstname, lastname)")
 
 # Fill the table
-con.executemany("insert into person(firstname, lastname) values (?, ?)", persons)
+con.executemany("INSERT INTO person(firstname, lastname) VALUES (?, ?)", persons)
 
 # Print the table contents
-for row in con.execute("select firstname, lastname from person"):
+for row in con.execute("SELECT firstname, lastname FROM person"):
     print(row)
 
-print("I just deleted", con.execute("delete from person").rowcount, "rows")
+print("I just deleted", con.execute("DELETE FROM person").rowcount, "rows")
 
 
 
