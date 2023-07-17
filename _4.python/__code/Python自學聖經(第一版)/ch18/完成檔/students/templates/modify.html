@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>新增資料</title>
+</head>
+<body>
+	<h2>新增資料</h2>
+    <form method='post' action="/modify/?name={{name}}">
+        {% csrf_token %}
+        <p>姓名：<input type='text' name='name' value={{name}}></p>
+        <p>性別：<input type='text' name='sex' value={{sex}}></p>
+        <p>生日：<input type='text' name='birthday' value={{birthday}}></p>
+        <p>郵件：<input type='text' name='email' value={{email}}></p>
+        <p>電話：<input type='text' name='phone' value={{phone}}></p>
+        <p>地址：<input type='text' name='addr' value={{addr}}></p>
+        <p><button type='submit'>確定</button></p>
+    </form>
+</body> 
+</html>

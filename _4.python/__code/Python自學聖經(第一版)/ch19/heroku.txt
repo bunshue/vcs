@@ -1,0 +1,54 @@
+cd herokuenv1
+Scripts\activate
+
+
+pip install django==2.2.2
+pip install dj-database-url dj-static gunicorn psycopg2
+
+
+cd c:\herokuenv1\newshero
+pip freeze > requirements.txt
+
+
+web: gunicorn --pythonpath news news.wsgi
+
+
+python-3.7.4
+
+
+from .settings import *
+STATIC_ROOT = 'staticfiles'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ALLOWED_HOSTS = ['*']
+DEBUG = False
+
+
+*.pyc
+__pycache__
+staticfiles
+
+
+from dj_static import Cling
+
+application = Cling(get_wsgi_application())
+
+
+heroku login
+
+
+git init
+
+
+heroku git:remote -a newsdjan
+
+
+heroku config:set DJANGO_SETTINGS_MODULE=news.prod_settings
+
+
+git add .
+
+
+git commit -am "init commit"
+
+
+git push heroku master
