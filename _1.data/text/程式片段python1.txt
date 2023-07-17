@@ -1,5 +1,6 @@
 
 os.system('cls') #在cmd視窗下清除螢幕
+
 os.system('cls' if os.name == 'nt' else 'clear')
 
     os_name = platform.system().lower()
@@ -163,7 +164,7 @@ sys.stderr.write('%s: %s\n%s' % (sys.argv[0], msg, usage))
 sys.stderr.write("%s: %s\n" % (sys.argv[0], msg))
 
 
-print("%s:%d:%s" % (filename, row, line), end=' ')
+print("%s:%d:%s" % (filename, row, line), end = '')
 
 
 if os.path.normcase(fn).endswith(".py") or os.path.isdir(fn):
@@ -226,7 +227,7 @@ import tempfile
 
 print(__doc__ % globals())
 
-    print("-"*70)
+print("-"*70)
 
 
 def chop(line):
