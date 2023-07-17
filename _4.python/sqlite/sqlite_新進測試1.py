@@ -152,7 +152,7 @@ conn.close()  # 關閉資料庫連線
 
 
 print('----------------------------------------------------------------------')	#70個
-print('一次寫入多行的語法')
+print('一次寫入多行的語法 executescript')
 
 import sqlite3
 import datetime
@@ -170,9 +170,8 @@ conn.executescript("""
     INSERT INTO table01 (name, ingredients) VALUES ('pumpkin pie', 'pumpkin sugar flour butter');
     """)
 
-for row in conn.execute("select rowid, name, ingredients from table01 where name match 'pie'"):
+for row in conn.execute("SELECT rowid, name, ingredients FROM table01 WHERE name MATCH 'pie'"):
     print(row)
-
 
 #conn.commit() # 更新
 
@@ -181,7 +180,7 @@ show_data_base_contents_all(db_filename, table_name)
 
 
 print('----------------------------------------------------------------------')	#70個
-print('一次寫入多行的語法')
+print('一次寫入多行的語法 executescript')
 
 import sqlite3
 
@@ -208,10 +207,8 @@ cur.executescript("""
     );
     """)
 
-
 print('----------------------------------------------------------------------')	#70個
 print('xxxxx')
-
 
 import sqlite3
 

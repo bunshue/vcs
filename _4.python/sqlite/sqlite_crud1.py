@@ -123,7 +123,7 @@ for data in datas:
 conn.commit() # 更新
 
 print('新增資料 2 筆 寫法四')
-#INSERT
+#INSERT 新增資料
 number = 7
 name = 'Happy'
 money = 999

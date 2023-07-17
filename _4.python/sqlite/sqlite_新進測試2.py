@@ -182,6 +182,45 @@ conn.close()  # 關閉資料庫連線
 
 
 
+print('----------------------------------------------------------------------')	#70個
+print('xxxxx new 0717')
+
+conn = sqlite3.connect(":memory:")
+cursor = conn.cursor()
+cursor.execute("CREATE TABLE table01(key INTEGER PRIMARY KEY, task TEXT)")
+
+tasks = (
+'give food to fish',
+'prepare group meeting',
+'fight with a zebra',
+)
+
+for task in tasks:
+    cursor.execute("INSERT INTO table01 VALUES(NULL, ?)", (task,))
+
+cursor.execute("SELECT * FROM table01")
+print(cursor.fetchall())
+
+
+# Update a record, just for good measure.
+cursor.execute("UPDATE table01 SET task = 'learn italian' WHERE key = 1")
+
+
+cursor.execute("SELECT * FROM table01")
+print(cursor.fetchall())
+
+
+key_id = 2
+cursor.execute("SELECT * FROM table01 WHERE key=?", (str(key_id),))
+key, task = cursor.fetchone()
+
+print(key)
+print(task)
+
+
+
+
+
 print("程式執行完畢！")
 
 

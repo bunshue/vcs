@@ -29,3 +29,25 @@ import math
 math.sin(math.pi * i / 2)
 
 
+
+import os
+import sys
+from distutils.util import get_platform
+PLAT_SPEC = "%s-%s" % (get_platform(), sys.version[0:3])
+src = os.path.join("build", "lib.%s" % PLAT_SPEC)
+#sys.path.append(src)
+print(src)
+
+print(sys.argv)
+
+foldername = 'C:/_git/vcs/_1.data/______test_files2/'
+
+for root, dirs, files in os.walk(foldername):
+    for fn in files:
+        #fn = join(root, fn)
+        print(fn)
+
+
+
+
+
