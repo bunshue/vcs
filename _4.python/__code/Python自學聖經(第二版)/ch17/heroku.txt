@@ -1,0 +1,21 @@
+cd c:\herokuenv
+pip freeze > requirements.txt
+
+
+web: gunicorn weather:app
+
+
+python-3.7.4
+
+
+heroku login
+
+git init
+
+heroku git:remote -a weathflask
+
+git add .
+
+git commit -m "init commit"
+
+git push heroku master

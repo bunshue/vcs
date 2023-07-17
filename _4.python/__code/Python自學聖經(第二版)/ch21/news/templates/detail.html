@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block content %}
+	<div class="contentbox">
+		<table width="100%">
+		<tr>
+		  <th align="left"><span class="typeblock">{{category}}&nbsp;&nbsp;</span>&nbsp;&nbsp;{{title}}</th>
+		</tr>
+		<tr>
+		  <td>
+			<span class="newsinfo">
+				<img src="{% static "images/date.png" %}" alt="" width="16" height="16" />&nbsp;{{pubtime}}&nbsp;
+				<img src="{% static "images/user.png" %}" alt="" width="16" height="16" />&nbsp;{{nickname}}
+				<p>&nbsp;&nbsp;{{message}}</p>
+			</span>
+		  </td>
+		</tr>
+		</table>
+		<div class="topfunction">
+			<a href="/index/3/" title="返回首頁">
+			<img src="{% static "images/home.png" %}" alt="返回首頁" width="86" height="32" /></a>
+		</div>
+	</div>
+{% endblock %}

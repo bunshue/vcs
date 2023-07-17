@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %} 
+{% block content %}
+	<div class="contentbox">
+		<table width="100%">
+		<tr>
+		  <th align="left">分類</th>
+		  <th align="left">標題</th>
+		  <th align="left">時間</th>
+		  <th align="left">點閱</th>
+		</tr>
+		{% for unit in newsunits %}
+			<tr class="alt">
+				<td><div class="typeblock">【{{ unit.catego }}】</div></td>
+				<td><a href="/detail/{{unit.id}}/">{{ unit.title }}</a></td>
+				<td>{{ unit.pubtime }}</td>
+				<td>{{ unit.press }}</td>
+			</tr>
+		{% empty %}
+			<div class="status warning">
+				<p><img src="{% static "images/icon_warning.png" %}" alt="Warning" /><span>注意</span> 目前新聞資料庫中沒有任何資料！</p>
+			</div>
+		{% endfor %}
+		</table>
+		<div class="topfunction">
+			{% if currentpage > 1 %}
+				<a href="/index/1/" title="上一頁">
+				<img src="{% static "images/prevpage.png" %}" alt="上一頁" width="64" height="24" /></a>
+			{% endif %}
+			{% if currentpage < totpage %}
+				<a href="/index/2/" title="下一頁">
+				<img src="{% static "images/nextpage.png" %}" alt="下一頁" width="64" height="24" /></a>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
