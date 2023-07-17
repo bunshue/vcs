@@ -1,0 +1,21 @@
+import numpy as np
+#array()
+np1 = np.array([1,2,3,4])	#使用list
+np2 = np.array((5,6,7,8))	#使用tuple
+print('np1=', np1, type(np1))
+print('np2=', np2, type(np2))
+#arange()
+np3 = np.arange(0, 11, 2)
+print('np3=', np3)
+#linespace()
+np4 = np.linspace(1, 9, 3)
+print('np4=', np4)
+#zeros()
+np5 = np.zeros((2,))
+print('np5=', np5)
+#ones()
+np6 = np.ones((2,))
+print('np6=', np6)
+#empty()
+np7 = np.empty((2,))
+print('np7=', np7)

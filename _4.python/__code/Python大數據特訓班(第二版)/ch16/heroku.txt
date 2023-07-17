@@ -1,0 +1,29 @@
+pip install virtualenv
+
+virtualenv herokuenv
+
+Scripts\activate
+
+pip install flask==1.1.1
+
+pip install gunicorn==19.9.0
+
+
+
+
+heroku login
+
+git init
+
+heroku git:remote -a threedayflask
+
+git add .
+
+git commit -m "init commit"
+
+git push heroku master
+
+
+
+
+
