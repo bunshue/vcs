@@ -183,20 +183,6 @@ word = word.strip()
 
 '''
 
-prog = sys.argv[0]
-print(prog)
-
-
-
-
-import time
-
-copyright = '1990-%s, Python Software Foundation' % time.strftime('%Y')
-
-print(copyright)
-
-
-
 
 a_dict = {}
 print(type(a_dict))
@@ -204,15 +190,6 @@ print(type(a_dict))
 
 a_list = []
 print(type(a_list))
-
-model = 'aaaa'
-year = '2023'
-mileage = 1234
-money = 123456
-
-message = "{:<10}({}年式)，{:>10,}KM，售價：{:>10,}元"
-
-print(message.format(model, year, mileage, money))
 
 
 target_url = 'https://www.nkust.edu.tw/p/403-1000-12-{}.php'
@@ -345,16 +322,6 @@ print('---------------------------------------------')
 import platform, subprocess
 print(platform.system())
 
-
-
-testno = 20
-s ='abc'
-fmt = 'def'
-result = 'hij'
-err = 'mnp'
-sys.stdout.write("xfmt%d  format  %s  '%s'  ->  \"%s\"\n" % (testno, s, fmt, result))
-sys.stdout.write("xfmt%d  format  %s  '%s'  ->  '%s'\n" % (testno, s, fmt, result))
-sys.stderr.write("%s  %s  %s\n" % (err, s, fmt))
 
 
 

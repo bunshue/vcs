@@ -10,7 +10,13 @@ for i in range (0, length):
 
 if len(sys.argv) > 1:
     files = sys.argv[1:]
-print(files)
+    print(files)
+
+
+
+prog = sys.argv[0]
+print(prog)
+
 
 
 

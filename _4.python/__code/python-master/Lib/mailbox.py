@@ -1,11 +1,3 @@
-"""Read/write support for Maildir, mbox, MH, Babyl, and MMDF mailboxes."""
-
-# Notes for authors of new mailbox subclasses:
-#
-# Remember to fsync() changes to disk before closing a modified file
-# or returning from a flush() method.  See functions _sync_flush() and
-# _sync_close().
-
 import os
 import time
 import calendar
@@ -2086,51 +2078,3 @@ def _lock_file(f, dotlock=True):
         if dotlock_done:
             os.remove(f.name + '.lock')
         raise
-
-def _unlock_file(f):
-    """Unlock file f using lockf and dot locking."""
-    if fcntl:
-        fcntl.lockf(f, fcntl.LOCK_UN)
-    if os.path.exists(f.name + '.lock'):
-        os.remove(f.name + '.lock')
-
-def _create_carefully(path):
-    """Create a file if it doesn't exist and open for reading and writing."""
-    fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_RDWR, 0o666)
-    try:
-        return open(path, 'rb+')
-    finally:
-        os.close(fd)
-
-def _create_temporary(path):
-    """Create a temp file based on path and open for reading and writing."""
-    return _create_carefully('%s.%s.%s.%s' % (path, int(time.time()),
-                                              socket.gethostname(),
-                                              os.getpid()))
-
-def _sync_flush(f):
-    """Ensure changes to file f are physically on disk."""
-    f.flush()
-    if hasattr(os, 'fsync'):
-        os.fsync(f.fileno())
-
-def _sync_close(f):
-    """Close file f, ensuring all changes are physically on disk."""
-    _sync_flush(f)
-    f.close()
-
-
-class Error(Exception):
-    """Raised for module-specific errors."""
-
-class NoSuchMailboxError(Error):
-    """The specified mailbox does not exist and won't be created."""
-
-class NotEmptyError(Error):
-    """The specified mailbox is not empty and deletion was requested."""
-
-class ExternalClashError(Error):
-    """Another process caused an action to fail."""
-
-class FormatError(Error):
-    """A file appears to have an invalid format."""

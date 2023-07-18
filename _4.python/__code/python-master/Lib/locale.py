@@ -1,16 +1,3 @@
-""" Locale support.
-
-    The module provides low-level access to the C lib's locale APIs
-    and adds high level number formatting APIs as well as a locale
-    aliasing engine to complement these.
-
-    The aliasing engine includes support for many commonly used locale
-    names and maps them to values suitable for passing to the C lib's
-    setlocale() function. It also includes default encodings for all
-    supported locale names.
-
-"""
-
 import sys
 import encodings
 import encodings.aliases
@@ -543,18 +530,6 @@ def getdefaultlocale(envvars=('LC_ALL', 'LC_CTYPE', 'LANG', 'LANGUAGE')):
         return code, encoding
 
     # fall back on POSIX behaviour
-    import os
-    lookup = os.environ.get
-    for variable in envvars:
-        localename = lookup(variable,None)
-        if localename:
-            if variable == 'LANGUAGE':
-                localename = localename.split(':')[0]
-            break
-    else:
-        localename = 'C'
-    return _parse_localename(localename)
-
 
 def getlocale(category=LC_CTYPE):
 
@@ -1629,48 +1604,6 @@ def _print_locale():
         print('   Encoding: ', enc or '(undefined)')
         print()
 
-    print()
-    print('Locale settings after calling resetlocale():')
-    print('-'*72)
-    resetlocale()
-    for name,category in categories.items():
-        print(name, '...')
-        lang, enc = getlocale(category)
-        print('   Language: ', lang or '(undefined)')
-        print('   Encoding: ', enc or '(undefined)')
-        print()
+_print_locale()
 
-    try:
-        setlocale(LC_ALL, "")
-    except:
-        print('NOTE:')
-        print('setlocale(LC_ALL, "") does not support the default locale')
-        print('given in the OS environment variables.')
-    else:
-        print()
-        print('Locale settings after calling setlocale(LC_ALL, ""):')
-        print('-'*72)
-        for name,category in categories.items():
-            print(name, '...')
-            lang, enc = getlocale(category)
-            print('   Language: ', lang or '(undefined)')
-            print('   Encoding: ', enc or '(undefined)')
-            print()
 
-###
-
-try:
-    LC_MESSAGES
-except NameError:
-    pass
-else:
-    __all__.append("LC_MESSAGES")
-
-if __name__=='__main__':
-    print('Locale aliasing:')
-    print()
-    _print_locale()
-    print()
-    print('Number formatting:')
-    print()
-    _test()

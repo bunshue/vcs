@@ -1,4 +1,8 @@
-# print data
+'''
+
+各種 print 技巧 與 字串處理
+
+'''
 
 print('-' * 70)	#70個
 print('----------------------------------------------------------------------')	#70個
@@ -257,6 +261,62 @@ sys.stdout.write(data)
 print()
 
 print('恢復正常顯示')
+
+
+
+import time
+
+copyright = '1990-%s, Python Software Foundation' % time.strftime('%Y')
+
+print(copyright)
+
+
+
+model = 'aaaa'
+year = '2023'
+mileage = 1234
+money = 123456
+
+message = "{:<10}({}年式)，{:>10,}KM，售價：{:>10,}元"
+
+print(message.format(model, year, mileage, money))
+
+
+
+
+testno = 20
+s ='abc'
+fmt = 'def'
+result = 'hij'
+err = 'mnp'
+sys.stdout.write("xfmt%d  format  %s  '%s'  ->  \"%s\"\n" % (testno, s, fmt, result))
+sys.stdout.write("xfmt%d  format  %s  '%s'  ->  '%s'\n" % (testno, s, fmt, result))
+sys.stderr.write("%s  %s  %s\n" % (err, s, fmt))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import os
 sys.stdout = sys.stderr
