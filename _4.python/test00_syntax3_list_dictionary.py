@@ -1,4 +1,8 @@
-pieSeries = [
+'''
+一個list 裡面每個元件都是 dictionary
+
+'''
+price_data = [
 {"name":"112/03/13","data":[{"name":"98 無鉛汽油","y":32.7,"GroupID":7}]},
 {"name":"112/03/20","data":[{"name":"98 無鉛汽油","y":32.4,"GroupID":6}]},
 {"name":"112/03/27","data":[{"name":"98 無鉛汽油","y":31.9,"GroupID":5}]},
@@ -8,28 +12,20 @@ pieSeries = [
 {"name":"112/04/24","data":[{"name":"98 無鉛汽油","y":33.1,"GroupID":1}]},
 {"name":"112/03/13","data":[{"name":"95 無鉛汽油","y":30.7,"GroupID":7}]},
 {"name":"112/03/20","data":[{"name":"95 無鉛汽油","y":30.4,"GroupID":6}]},
-{"name":"112/03/27","data":[{"name":"95 無鉛汽油","y":29.9,"GroupID":5}]},
-{"name":"112/04/03","data":[{"name":"95 無鉛汽油","y":30.4,"GroupID":4}]},
-{"name":"112/04/10","data":[{"name":"95 無鉛汽油","y":31.0,"GroupID":3}]},
-{"name":"112/04/17","data":[{"name":"95 無鉛汽油","y":31.3,"GroupID":2}]},
-{"name":"112/04/24","data":[{"name":"95 無鉛汽油","y":31.1,"GroupID":1}]},
-{"name":"112/03/13","data":[{"name":"92 無鉛汽油","y":29.2,"GroupID":7}]},
-{"name":"112/03/20","data":[{"name":"92 無鉛汽油","y":28.9,"GroupID":6}]},
-{"name":"112/03/27","data":[{"name":"92 無鉛汽油","y":28.4,"GroupID":5}]},
-{"name":"112/04/03","data":[{"name":"92 無鉛汽油","y":28.9,"GroupID":4}]},
-{"name":"112/04/10","data":[{"name":"92 無鉛汽油","y":29.5,"GroupID":3}]},
-{"name":"112/04/17","data":[{"name":"92 無鉛汽油","y":29.8,"GroupID":2}]},
-{"name":"112/04/24","data":[{"name":"92 無鉛汽油","y":29.6,"GroupID":1}]}
+{"name":"112/03/27","data":[{"name":"95 無鉛汽油","y":29.9,"GroupID":5}]}
 ];
 
-print('資料型態 :\t', type(pieSeries))
-print('資料長度 :\t', len(pieSeries))
+print('資料型態 :\t', type(price_data))
+print('資料長度 :\t', len(price_data))
 print('資料內容')
-for info in pieSeries:
-    #print(info)
+for info in price_data:
+    print(type(info))
+    print(info)
     print('日期:', info['name'])
     #print(info['data'])
     for infos in info['data']:
+        print(type(infos))
+        print(infos)
         print('油品:', infos['name'])
         print('價格:', infos['y'])
 
