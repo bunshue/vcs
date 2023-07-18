@@ -94,4 +94,48 @@ scrollbar.config(command = text3.yview)
 button1 = tk.Button(window, text = "取得Text的資料", command = getTextData3)
 button1.pack()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+import time
+
+frame1 = tk.Frame(window, bg = 'pink') # Hold four labels for displaying cards
+frame1.pack()
+
+LOG_LINE_NUM = 0
+
+#獲取當前時間
+def get_current_time():
+    current_time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+    return current_time
+
+#日志動態打印
+def write_log():
+    global LOG_LINE_NUM
+    current_time = get_current_time()
+    logmsg_in = str(current_time) +" " + '要記錄的訊息' + "\n"      #換行
+    if LOG_LINE_NUM <= 7:
+        text4.insert(tk.END, logmsg_in)
+        LOG_LINE_NUM = LOG_LINE_NUM + 1
+    else:
+        text4.delete(1.0,2.0)
+        text4.insert(tk.END, logmsg_in)
+
+scrollbar = tk.Scrollbar(frame1)
+scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
+#日誌框
+text4 = tk.Text(frame1, width = 80, height = 10, wrap = tk.WORD, yscrollcommand = scrollbar.set)  # 放入多行輸入框
+text4.pack()
+scrollbar.config(command = text4.yview)
+
+button2 = tk.Button(window, text = '寫日誌', command = write_log)
+button2.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
+
+
 window.mainloop()

@@ -1,3 +1,7 @@
+'''
+使用pack Entry
+'''
+
 # Python 測試 tkinter, Entry
 
 import tkinter as tk
