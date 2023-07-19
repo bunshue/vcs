@@ -122,6 +122,12 @@ def write_log():
         text4.delete(1.0,2.0)
         text4.insert(tk.END, logmsg_in)
 
+def add_text():
+    string = '測試字串.......'
+    #輸出到界面
+    text4.delete(1.0, tk.END)
+    text4.insert(1.0, string)
+
 scrollbar = tk.Scrollbar(frame1)
 scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
 #日誌框
@@ -131,6 +137,9 @@ scrollbar.config(command = text4.yview)
 
 button2 = tk.Button(window, text = '寫日誌', command = write_log)
 button2.pack()
+
+button3 = tk.Button(window, text = '蓋過字串', command = add_text)
+button3.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 

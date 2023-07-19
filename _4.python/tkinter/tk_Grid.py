@@ -17,8 +17,8 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
-for j in range(0, 10):
-    for i in range(0, 10):
+for j in range(0, 16):
+    for i in range(0, 16):
         #print(i)
         label_n = tk.Label(window, text = str(i) + ',' + str(j))
         label_n.grid(row = j, column = i)
@@ -38,12 +38,19 @@ button0.grid(row = 2, column = 2)
 若不指名 rowspan / columnspan, 則所佔為1格
 會依據控件的大小 將所在格撐大成設定的格數
 
-
-
-
-
 '''
 
+for j in range(4, 14, 3):
+    for i in range(4, 14, 3):
+        entry = tk.Entry(window, width = 10) #寬度為5個字
+        if(i == 4):
+            entry.grid(row = j, column = i) #預設, 占用1欄
+        elif(i == 7):
+            entry.grid(row = j, column = i, columnspan = 1) #占用1欄
+        elif(i == 10):
+            entry.grid(row = j, column = i, columnspan = 2) #占用2欄
+        else:
+            entry.grid(row = j, column = i, columnspan = 3) #占用3欄
 
 window.mainloop()
 
