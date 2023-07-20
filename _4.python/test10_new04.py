@@ -41,7 +41,23 @@ print(no_asm)
 ADDRESS = r'\\.\pipe\_test_pipe-%s' % os.getpid()
 print(ADDRESS)
 
- 
- 
 
- 
+import sys
+def errprint(*args):
+    sep = ""
+    for arg in args:
+        sys.stderr.write(sep + str(arg))
+        sep = " "
+    sys.stderr.write("\n")
+
+
+msg = 'this is a lion-mouse'
+errprint(msg)
+
+print(msg)
+
+
+
+
+
+

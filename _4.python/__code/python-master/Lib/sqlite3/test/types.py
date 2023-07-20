@@ -1,26 +1,3 @@
-#-*- coding: iso-8859-1 -*-
-# pysqlite2/test/types.py: tests for type conversion and detection
-#
-# Copyright (C) 2005 Gerhard Häring <gh@ghaering.de>
-#
-# This file is part of pysqlite.
-#
-# This software is provided 'as-is', without any express or implied
-# warranty.  In no event will the authors be held liable for any damages
-# arising from the use of this software.
-#
-# Permission is granted to anyone to use this software for any purpose,
-# including commercial applications, and to alter it and redistribute it
-# freely, subject to the following restrictions:
-#
-# 1. The origin of this software must not be misrepresented; you must not
-#    claim that you wrote the original software. If you use this software
-#    in a product, an acknowledgment in the product documentation would be
-#    appreciated but is not required.
-# 2. Altered source versions must be plainly marked as such, and must not be
-#    misrepresented as being the original software.
-# 3. This notice may not be removed or altered from any source distribution.
-
 import datetime
 import unittest
 import sqlite3 as sqlite
@@ -41,10 +18,10 @@ class SqliteTypeTests(unittest.TestCase):
         self.con.close()
 
     def CheckString(self):
-        self.cur.execute("insert into test(s) values (?)", ("Österreich",))
+        self.cur.execute("insert into test(s) values (?)", ("Ã–sterreich",))
         self.cur.execute("select s from test")
         row = self.cur.fetchone()
-        self.assertEqual(row[0], "Österreich")
+        self.assertEqual(row[0], "Ã–sterreich")
 
     def CheckSmallInt(self):
         self.cur.execute("insert into test(i) values (?)", (42,))
@@ -75,9 +52,9 @@ class SqliteTypeTests(unittest.TestCase):
         self.assertEqual(row[0], sample)
 
     def CheckUnicodeExecute(self):
-        self.cur.execute("select 'Österreich'")
+        self.cur.execute("select 'Ã–sterreich'")
         row = self.cur.fetchone()
-        self.assertEqual(row[0], "Österreich")
+        self.assertEqual(row[0], "Ã–sterreich")
 
 class DeclTypesTests(unittest.TestCase):
     class Foo:

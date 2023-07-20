@@ -5,22 +5,6 @@ binhex(inputfilename, outputfilename)
 hexbin(inputfilename, outputfilename)
 """
 
-#
-# Jack Jansen, CWI, August 1995.
-#
-# The module is supposed to be as compatible as possible. Especially the
-# easy interface should work "as expected" on any platform.
-# XXXX Note: currently, textfiles appear in mac-form on all platforms.
-# We seem to lack a simple character-translate in python.
-# (we should probably use ISO-Latin-1 on all but the mac platform).
-# XXXX The simple routines are too simple: they expect to hold the complete
-# files in-core. Should be fixed.
-# XXXX It would be nice to handle AppleDouble format on unix
-# (for servers serving macs).
-# XXXX I don't understand what happens when you get 0x90 times the same byte on
-# input. The resulting code (xx 90 90) would appear to be interpreted as an
-# escaped *value* of 0x90. All coders I've seen appear to ignore this nicety...
-#
 import io
 import os
 import struct

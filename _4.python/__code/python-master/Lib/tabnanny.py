@@ -1,23 +1,3 @@
-#! /usr/bin/env python3
-
-"""The Tab Nanny despises ambiguous indentation.  She knows no mercy.
-
-tabnanny -- Detection of ambiguous indentation
-
-For the time being this module is intended to be called as a script.
-However it is possible to import it into an IDE and use the function
-check() described below.
-
-Warning: The API provided by this module is likely to change in future
-releases; such changes may not be backward compatible.
-"""
-
-# Released to the public domain, by Tim Peters, 15 April 1998.
-
-# XXX Note: this is now a standard library module.
-# XXX The API needs to undergo changes however; the current code is too
-# XXX script-like.  This will be addressed later.
-
 __version__ = "6"
 
 import os
