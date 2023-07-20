@@ -1077,6 +1077,7 @@ def setLoggerClass(klass):
     _loggerClass = klass
 
 def getLoggerClass():
+    print('cccccccccccccccc')
     """
     Return the class to be used when instantiating a logger.
     """

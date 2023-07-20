@@ -41,14 +41,12 @@ class ScrolledText(Text):
         return str(self.frame)
 
 
-def example():
-    from tkinter.constants import END
+from tkinter.constants import END
 
-    stext = ScrolledText(bg='white', height=10)
-    stext.insert(END, __doc__)
-    stext.pack(fill=BOTH, side=LEFT, expand=True)
-    stext.focus_set()
-    stext.mainloop()
+stext = ScrolledText(bg = 'white', height = 10)
+stext.insert(END, __doc__)
+stext.pack(fill = BOTH, side = LEFT, expand = True)
+stext.focus_set()
+stext.mainloop()
 
-if __name__ == "__main__":
-    example()
+

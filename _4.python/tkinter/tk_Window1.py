@@ -32,21 +32,23 @@ window.minsize(200, 100)
 # window.maxsize(800, 700)
 # window.resizable(True,False)
 
-# window attributes
-window.attributes('-alpha', 1)
-# window.attributes('-topmost', True)
+print('設定視窗透明度')
+window.attributes('-alpha', 0.9) #虛化，值越小虛化程度越高
+
+print('設定視窗最上層顯示')
+window.attributes('-topmost', True)
+
+#window.attributes('-disable', True)
+
+#print('設定視窗全螢幕')
+#window.attributes('-fullscreen', True)
 
 # security event 
 window.bind('<Escape>', lambda event: window.quit())
-
-# window.attributes('-disable', True)
-# window.attributes('-fullscreen', True)
 
 # title bar 
 window.overrideredirect(True)
 grip = ttk.Sizegrip(window)
 grip.place(relx = 1.0, rely = 1.0, anchor = 'se')
 
-# run
 window.mainloop()
-

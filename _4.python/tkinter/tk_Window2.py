@@ -17,6 +17,13 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
+print('設定視窗背景顏色')
+window['bg'] = 'pink'           #窗口背景色，其他背景色見：blog.csdn.net/chl0000/article/details/7657887
+print('設定視窗透明度')
+window.attributes('-alpha', 0.9) #虛化，值越小虛化程度越高
+
+#window.attributes("-transparent", True)
+
 def popup():
     popupwindow = tk.Toplevel(window)
     popupwindow.title('新視窗')
@@ -33,8 +40,5 @@ button.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
-
-#window.destroy()
-
 
 

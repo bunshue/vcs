@@ -1,5 +1,3 @@
-"""Loading unittests."""
-
 import os
 import re
 import sys

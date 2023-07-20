@@ -2,18 +2,15 @@
 Drag-and-drop support for Tkinter.
 """
 
-import tkinter
-
+import tkinter as tk
 
 # The factory function
-
 def dnd_start(source, event):
     h = DndHandler(source, event)
     if h.root:
         return h
     else:
         return None
-
 
 # The class that does the work
 
@@ -121,7 +118,7 @@ class Icon:
             self.detach()
         if not canvas:
             return
-        label = tkinter.Label(canvas, text=self.name,
+        label = tk.Label(canvas, text=self.name,
                               borderwidth=2, relief="raised")
         id = canvas.create_window(x, y, window=label, anchor="nw")
         self.canvas = canvas
@@ -170,8 +167,8 @@ class Icon:
 class Tester:
 
     def __init__(self, root):
-        self.top = tkinter.Toplevel(root)
-        self.canvas = tkinter.Canvas(self.top, width=100, height=100)
+        self.top = tk.Toplevel(root)
+        self.canvas = tk.Canvas(self.top, width=100, height=100)
         self.canvas.pack(fill="both", expand=1)
         self.canvas.dnd_accept = self.dnd_accept
 
@@ -202,9 +199,9 @@ class Tester:
         source.attach(self.canvas, x, y)
 
 def test():
-    root = tkinter.Tk()
+    root = tk.Tk()
     root.geometry("+1+1")
-    tkinter.Button(command=root.quit, text="Quit").pack()
+    tk.Button(command=root.quit, text="Quit").pack()
     t1 = Tester(root)
     t1.top.geometry("+1+60")
     t2 = Tester(root)
