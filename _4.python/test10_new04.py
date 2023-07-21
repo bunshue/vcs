@@ -73,4 +73,15 @@ print('檔頭的註解')
 print(__doc__)
 
 
+import time
+print('存檔紀念')
+
+fp = open('Build.txt', 'w')
+fp.write("# BUILD INFO\n")
+fp.write("# Date: %s\n" % time.ctime())
+#fp.write("# By: %s\n" % pwd.getpwuid(os.getuid()).pw_gecos)
+fp.close()
+
+
+
 

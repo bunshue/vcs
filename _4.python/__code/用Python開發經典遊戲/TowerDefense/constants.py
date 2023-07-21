@@ -1,0 +1,2 @@
+OSWALD = 'Oswald'
+CENTER = 'center'
