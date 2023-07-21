@@ -16,31 +16,6 @@ print(user)
 font_file = os.path.join(os.path.dirname(__file__), "OpenFlame.ttf")
 print(font_file)
 
-import os
-
-print(os.listdir())
-print(os.listdir('/'))
-
-import sys, os
-
-def lll(dirname):
-    for name in os.listdir(dirname):
-        print(name)
-        if name not in (os.curdir, os.pardir):
-            print(name)
-            full = os.path.join(dirname, name)
-            if os.path.islink(full):    #尋找link
-                print('link')
-                print(name, '->', os.readlink(full))
-            else:
-                print('f')
-        else:
-            print('x')
-
-foldername = 'C:/_git/vcs/_1.data/______test_files1/_opencv'
-
-#lll(foldername)
-
 
 print('---- sys ------------------------------------------------------------------')	#70個
 
@@ -52,8 +27,6 @@ print('---- print --------------------------------------------------------------
 
 import sys
 import os
-
-join = os.path.join
 
 error = 'mkreal error'
 

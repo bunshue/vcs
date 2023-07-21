@@ -6,6 +6,7 @@ class Chooser(Dialog):
     command = "tk_chooseColor"
 
     def _fixoptions(self):
+        print('1111')
         try:
             # make sure initialcolor is a tk color string
             color = self.options["initialcolor"]
@@ -16,6 +17,7 @@ class Chooser(Dialog):
             pass
 
     def _fixresult(self, widget, result):
+        print('2222')
         # result can be somethings: an empty tuple, an empty string or
         # a Tcl_Obj, so this somewhat weird check handles that
         if not result or not str(result):
@@ -35,5 +37,5 @@ def askcolor(color = None, **options):
 
     return Chooser(**options).show()
 
-if __name__ == "__main__":
-    print("color", askcolor())
+choose_color = askcolor()
+print('你選擇了顏色 : ', choose_color)

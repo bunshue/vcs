@@ -30,14 +30,6 @@ import shutil
 shutil.rmtree("C:\\dddddddddd\\aaa" )  # 刪除目錄
 '''
 
-import os
-filenames = os.listdir('.')
-print("列出所有檔案", filenames)
-
-zz = [name for name in filenames if name.endswith(('.jpg', '.h'))]
-print('*.jpg *.h files:')
-print(zz)
-
 #重新命名檔案
 #os.rename("foo.txt", "foo2.txt")
 #刪除檔案
@@ -60,7 +52,6 @@ print("檔案時間 : ", os.path.getmtime(filename_r))
 import time
 print("檔案時間 : ", time.ctime(os.path.getmtime(filename_r)))
 
-
 print("檔案是否存在 : ", os.path.isfile(filename_r))
 
 
@@ -70,31 +61,6 @@ filename = os.path.abspath("test10_new10.py")
 if os.path.exists(filename): #檢查檔案是否存在
     print("完整路徑名稱：" + filename)
     print("檔案大小：" , os.path.getsize(filename))
-
-
-
-    
-import os, shutil, glob
-
-print("單層資料夾內所有檔案容量")
-
-source_dir = 'C:/_git/vcs/_1.data/______test_files1/__pic/_peony1/'
-
-pngfiles = glob.glob(source_dir + "*.png")
-jpgfiles = glob.glob(source_dir + "*.jpg")
-giffiles = glob.glob(source_dir + "*.gif")
-bmpfiles = glob.glob(source_dir + "*.bmp")
-allfiles = pngfiles + jpgfiles + giffiles + bmpfiles
-
-allfilesize = 0
-for f in allfiles:
-    allfilesize += os.path.getsize(f)
-    print("檔案 : " + f + ", 大小 : " + str(os.path.getsize(f)) + " 拜")
-
-print("總容量 : " + str(allfilesize) + " 拜")
-
-
-
 
 
 
@@ -243,23 +209,8 @@ if not os.path.exists(source_dir):
 '''
 
 
-
-
 print(os.curdir)
 
-
-
-foldername = 'C:/_git/vcs/_1.data/______test_files2'
-
-filenames = os.listdir(foldername)
-print(filenames)
-for filename in filenames:
-    print(filename, end = '')
-    if os.path.isdir(filename):
-        print('資料夾', end = '')
-    if os.path.islink(filename):
-        print('連結', end = '')
-    print()
 
 '''
 dirname = 'New Folder'
@@ -280,29 +231,6 @@ if not os.path.isdir(dirname):
 else:
     print('資料夾已存在, 無法再建立')
 '''    
-
-
-def testdir(foldername):
-    try:
-        names = [n for n in os.listdir(foldername) if n.endswith('.py')]
-    except OSError:
-        print("Directory not readable: %s" % foldername, file=sys.stderr)
-    else:
-        for n in names:
-            fullname = os.path.join(foldername, n)
-            if os.path.isfile(fullname):
-                output = io.StringIO()
-                print('Testing %s' % fullname)
-                try:
-                    roundtrip(fullname, output)
-                except Exception as e:
-                    print('  Failed to compile, exception is %s' % repr(e))
-            elif os.path.isdir(fullname):
-                testdir(fullname)
-
-foldername = 'C:/_git/vcs/_1.data/______test_files2'
-testdir(foldername)
-
 
 
 

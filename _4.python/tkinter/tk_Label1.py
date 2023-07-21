@@ -49,6 +49,14 @@ tk.Label(window, text = '有背景色的Label 藍', bg = 'blue',  width = 20).pa
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+image = tk.PhotoImage(file = "image/queen.gif")
+
+tk.Label(window, image = image).pack()
+
+tk.Label(window, width = 20, height = 5, bg = "red").pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 tk.Label(window, text = "Blue", bg = "blue").pack()
 #tk.Label(window, text = "Red", bg = "red").pack(fill = tk.BOTH, expand = 1)
 tk.Label(window, text = "Red", bg = "red").pack(fill = tk.BOTH)

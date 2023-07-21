@@ -47,14 +47,6 @@ hi_there.pack(side = tk.LEFT)
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 
-tk.Label(window, text = "Blue", bg = "blue").place(x = 20, y = 20)
-tk.Label(window, text = "Red", bg = "red").place(x = 50, y = 50)
-tk.Label(window, text = "Green", bg = "green").place(x = 80, y = 80)
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
 
 window.mainloop()
 
