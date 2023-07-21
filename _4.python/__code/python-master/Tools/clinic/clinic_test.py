@@ -1,8 +1,3 @@
-# Argument Clinic
-# Copyright 2012-2013 by Larry Hastings.
-# Licensed to the PSF under a contributor agreement.
-#
-
 import builtins
 import clinic
 from clinic import DSLParser

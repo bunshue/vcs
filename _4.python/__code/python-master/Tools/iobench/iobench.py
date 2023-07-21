@@ -265,18 +265,18 @@ def warm_cache(filename):
 def run_all_tests(options):
     def print_label(filename, func):
         name = re.split(r'[-.]', filename)[0]
-        out.write(
+        sys.stdout.write(
             ("[%s] %s... "
                 % (name.center(7), func.__doc__.strip())
             ).ljust(52))
-        out.flush()
+        sys.stdout.flush()
 
     def print_results(size, n, real, cpu):
         bw = n * float(size) / 1024 ** 2 / real
         bw = ("%4d MB/s" if bw > 100 else "%.3g MB/s") % bw
-        out.write(bw.rjust(12) + "\n")
+        sys.stdout.write(bw.rjust(12) + "\n")
         if cpu < 0.90 * real:
-            out.write("   warning: test above used only %d%% CPU, "
+            sys.stdout.write("   warning: test above used only %d%% CPU, "
                 "result may be flawed!\n" % (100.0 * cpu / real))
 
     def run_one_test(name, size, open_func, test_func, *args):
@@ -291,7 +291,7 @@ def run_all_tests(options):
     def run_test_family(tests, mode_filter, files, open_func, *make_args):
         for test_func in tests:
             if test_func is None:
-                out.write("\n")
+                sys.stdout.write("\n")
                 continue
             if mode_filter in test_func.file_open_mode:
                 continue
@@ -469,7 +469,9 @@ def main():
         globals()['open'] = __import__(options.io_module, {}, {}, ['open']).open
 
     prepare_files()
-    run_all_tests(test_options)
+
+    #以下會跑很久
+    #run_all_tests(test_options)
 
 if __name__ == "__main__":
     main()

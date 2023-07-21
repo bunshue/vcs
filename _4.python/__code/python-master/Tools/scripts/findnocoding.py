@@ -1,15 +1,5 @@
-#!/usr/bin/env python3
-
-"""List all those Python files that require a coding directive
-
-Usage: findnocoding.py dir1 [dir2...]
-"""
-
-__author__ = "Oleg Broytmann, Georg Brandl"
-
 import sys, os, re, getopt
 
-# our pysource module finds Python source files
 try:
     import pysource
 except ImportError:

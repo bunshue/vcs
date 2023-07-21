@@ -1,34 +1,3 @@
-#!/usr/bin/env python3
-"""
-GUI framework and application for use with Python unit testing framework.
-Execute tests written using the framework provided by the 'unittest' module.
-
-Updated for unittest test discovery by Mark Roddy and Python 3
-support by Brian Curtin.
-
-Based on the original by Steve Purcell, from:
-
-  http://pyunit.sourceforge.net/
-
-Copyright (c) 1999, 2000, 2001 Steve Purcell
-This module is free software, and you may redistribute it and/or modify
-it under the same terms as Python itself, so long as this copyright message
-and disclaimer are retained in their original form.
-
-IN NO EVENT SHALL THE AUTHOR BE LIABLE TO ANY PARTY FOR DIRECT, INDIRECT,
-SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OF
-THIS CODE, EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
-DAMAGE.
-
-THE AUTHOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-PARTICULAR PURPOSE.  THE CODE PROVIDED HEREUNDER IS ON AN "AS IS" BASIS,
-AND THERE IS NO OBLIGATION WHATSOEVER TO PROVIDE MAINTENANCE,
-SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
-"""
-
-__author__ = "Steve Purcell (stephen_purcell@yahoo.com)"
-
 import sys
 import traceback
 import unittest
@@ -37,9 +6,6 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import filedialog
 from tkinter import simpledialog
-
-
-
 
 ##############################################################################
 # GUI framework classes

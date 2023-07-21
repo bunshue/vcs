@@ -112,3 +112,28 @@ for o, a in opts:
     if o in ("-h", "--help"):
         print(__doc__, end=' ')
 
+
+print('ccccccc')
+
+import argparse
+cmdline = argparse.ArgumentParser()
+print(cmdline)
+
+cmdline.add_argument("-f", "--force", action='store_true')
+cmdline.add_argument("-o", "--output", type=str)
+cmdline.add_argument("-v", "--verbose", action='store_true')
+cmdline.add_argument("--converters", action='store_true')
+cmdline.add_argument("--make", action='store_true')
+cmdline.add_argument("filename", type=str, nargs="*")
+print('---------------------')
+print(cmdline)
+
+cmdline.print_usage()
+
+
+
+
+
+
+
+

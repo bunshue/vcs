@@ -1,7 +1,3 @@
-#! /usr/bin/env python3
-# Check that all ".pyc" files exist and are up-to-date
-# Uses module 'os'
-
 import sys
 import os
 from stat import ST_MTIME
@@ -11,24 +7,16 @@ import importlib.util
 cache_from_source = (importlib.util.cache_from_source if sys.implementation.cache_tag
                      else lambda path: path + 'c')
 
-
 def main():
-    if len(sys.argv) > 1:
-        verbose = (sys.argv[1] == '-v')
-        silent = (sys.argv[1] == '-s')
-    else:
-        verbose = silent = False
-    MAGIC = importlib.util.MAGIC_NUMBER
-    if not silent:
-        print('Using MAGIC word', repr(MAGIC))
-    for dirname in sys.path:
+    foldername = 'C:/_git/vcs/_1.data/______test_files3'
+    for dirname in foldername:
         try:
             names = os.listdir(dirname)
         except OSError:
             print('Cannot list directory', repr(dirname))
             continue
-        if not silent:
-            print('Checking ', repr(dirname), '...')
+        print('Checking ', repr(dirname), '...')
+        verbose = 1
         for name in sorted(names):
             if name.endswith('.py'):
                 name = os.path.join(dirname, name)
