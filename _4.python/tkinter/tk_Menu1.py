@@ -6,37 +6,37 @@ window = tk.Tk()
 window.geometry('600x400')
 window.title('Menu')
 
-# menu
+#建立功能選單
 menu = tk.Menu(window)
+window.config(menu = menu)   #顯示功能表單
 
-# sub menu 
-file_menu = tk.Menu(menu, tearoff = False)
-file_menu.add_command(label = 'New', command = lambda: print('New file'))
-file_menu.add_command(label = 'Open', command = lambda: print('Open file'))
-file_menu.add_separator()
-menu.add_cascade(label = 'File', menu = file_menu)
+#第1排功能選單
+menu1 = tk.Menu(menu, tearoff = False)
+menu1.add_command(label = 'New', command = lambda: print('New file'))
+menu1.add_command(label = 'Open', command = lambda: print('Open file'))
+menu1.add_separator()
+menu.add_cascade(label = 'File', menu = menu1)
 
-# another sub menu
-help_menu = tk.Menu(menu, tearoff = False)
-help_menu.add_command(label = 'Help entry', command = lambda: print(help_check_string.get()))
+#第2排功能選單
+menu2 = tk.Menu(menu, tearoff = False)
+menu2.add_command(label = 'Help entry', command = lambda: print(help_check_string.get()))
 
 help_check_string = tk.StringVar()
-help_menu.add_checkbutton(label = 'check', onvalue = 'on', offvalue = 'off', variable = help_check_string)
+menu2.add_checkbutton(label = 'check', onvalue = 'on', offvalue = 'off', variable = help_check_string)
 
-menu.add_cascade(label = 'Help', menu = help_menu)
+menu.add_cascade(label = 'Help', menu = menu2)
 
+#第3排功能選單
 # add another menu to the main menu, this one should have a sub menu
 # try to read the website below and add a submenu
 # docs: https://www.tutorialspoint.com/python/tk_menu.htm
-exercise_menu = tk.Menu(menu, tearoff = False)
-exercise_menu.add_command(label = 'exercise test 1')
-menu.add_cascade(label = 'Exercise', menu = exercise_menu)
+menu3 = tk.Menu(menu, tearoff = False)
+menu3.add_command(label = 'exercise test 1')
+menu.add_cascade(label = 'Exercise', menu = menu3)
 
-exercise_sub_menu = tk.Menu(menu, tearoff = False)
-exercise_sub_menu.add_command(label = 'some more stuff')
-exercise_menu.add_cascade(label = 'more stuff', menu = exercise_sub_menu)
-
-window.configure(menu = menu)
+menu3b = tk.Menu(menu, tearoff = False)
+menu3b.add_command(label = 'some more stuff')
+menu3.add_cascade(label = 'more stuff', menu = menu3b)
 
 # menu button
 menu_button = ttk.Menubutton(window, text = 'Menu Button')

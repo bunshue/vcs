@@ -391,6 +391,14 @@ print('新進未整理------------------------------')  #30個
 
 
 
+def output(string = '', end = '\n'):
+    sys.stdout.write(string + end)
+
+
+def output(*strings):
+    for s in strings:
+        sys.stdout.write(str(s) + "\n")
+
 
 import glob
 import sys
@@ -427,6 +435,26 @@ for root, dirs, files in os.walk(foldername):
         #fn = join(root, fn)
         print(fn)
 '''
+
+
+
+
+'''
+foldername = '__code'
+names = os.listdir(foldername)
+for name in names:
+    print(name)
+'''
+
+
+
+
+os.chdir(foldername)
+curdir = os.getcwd()
+print(curdir)
+
+for fn in os.listdir(foldername):
+    print(fn)
 
 
 

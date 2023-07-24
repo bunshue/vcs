@@ -29,28 +29,27 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
+#建立功能選單
+menu = tk.Menu(window)
+window.config(menu = menu)   #顯示功能表單
 
-# Create a menu bar
-menubar = tk.Menu(window)
-window.config(menu = menubar) # Display the menu bar
+#第1排功能選單
+menu1 = tk.Menu(menu, tearoff = 0)
+menu.add_cascade(label = "Operation", menu = menu1)
+menu1.add_command(label = "Add", command = add)
+menu1.add_command(label = "Subtract", command = subtract)
+menu1.add_separator()
+menu1.add_command(label = "Multiply", command = multiply)
+menu1.add_command(label = "Divide", command = divide)
 
-# create a pulldown menu, and add it to the menu bar
-operationMenu = tk.Menu(menubar, tearoff = 0)
-menubar.add_cascade(label = "Operation", menu = operationMenu)
-operationMenu.add_command(label = "Add", command = add)
-operationMenu.add_command(label = "Subtract", command = subtract)
-operationMenu.add_separator()
-operationMenu.add_command(label = "Multiply", command = multiply)
-operationMenu.add_command(label = "Divide", command = divide)
-
-# create more pulldown menus
-exitmenu = tk.Menu(menubar, tearoff = 0)
-menubar.add_cascade(label = "Exit", menu = exitmenu)
-exitmenu.add_command(label = "Quit", command = window.quit)
+#第2排功能選單
+menu2 = tk.Menu(menu, tearoff = 0)
+menu.add_cascade(label = "Exit", menu = menu2)
+menu2.add_command(label = "Quit", command = window.quit)
 
 
 # Add labels and entries to frame1
-frame1 = tk.Frame(window)
+frame1 = tk.Frame(window, bg = 'pink')
 frame1.grid(row = 2, column = 1, pady = 10)
 tk.Label(frame1, text = "Number 1:").pack(side = tk.LEFT)
 string1 = tk.StringVar()

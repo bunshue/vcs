@@ -43,42 +43,6 @@ print(" * PY_RELEASE_LEVEL = %r = %s" % (level, hex(levelnum)))
 
 print('------------------------------')  #30個
 
-
-target = 'https://tw.appledaily.com/new/realtime/{}'
-
-for page in range(1, 11):
-    url = target.format(page)
-    print(url)
-
-'''
-filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
-with open(filename, "w", encoding = 'utf-8') as fp:
-    print(filename + " is dumping...")
-    json.dump(titles, fp)
-'''
-
-
-
-query_string = 'abcdefghijklmn'
-query_number = 12345678901234
-replace_parameter = "無f替換變數"
-replace_parameter += " WHERE {query_string}"
-replace_parameter += " ORDER BY record_no DESC LIMIT {query_number}"
-print(replace_parameter)
-
-
-replace_parameter = "有f替換變數"
-replace_parameter += f" WHERE {query_string}"
-replace_parameter += f" ORDER BY record_no DESC LIMIT {query_number}"
-print(replace_parameter)
-
-
-table_columns = '(alpaca_name, training, duration, date)'
-postgres_insert_query = f"""INSERT INTO alpaca_training {table_columns} VALUES (%s,%s,%s,%s)"""
-
-print(postgres_insert_query)
-
-
 print('------------------------------')  #30個
 
 
@@ -89,20 +53,13 @@ import sys
 __version__ = 1, 7, 0
 
 
-def fail(msg):
-    out = sys.stderr.write
-    out(msg + "\n\n")
-    return 0
-
-filename = 'ccccc'
-fail("couldn't open " + filename)
-
+'''
+os.remove(fname)
+os.rename(temp_fname, fname)
 
 '''
-        os.remove(fname)
-        os.rename(temp_fname, fname)
 
-'''
+print('list之使用')
 
 llll = ['aa', 'bb', 'cc', 'dd', 'ee']
 pppp = llll[2:] #第二項(含)以後的
@@ -231,6 +188,7 @@ print('------------------------------')  #30個
 import platform, subprocess
 print(platform.system())
 
+print('------------------------------')  #30個
 
 
 
@@ -265,6 +223,8 @@ old_cd = os.getcwd()
 
 print(old_cd)
 
+print('------------------------------')  #30個
+
 
 #os.chdir(os.path.join(ROOT, TK, "win"))
 
@@ -286,16 +246,7 @@ def copy(src, dst):
     shutil.copy(src, dst)
 
 
-
-def output(string='', end='\n'):
-    sys.stdout.write(string + end)
-
-
-def output(*strings):
-    for s in strings:
-        sys.stdout.write(str(s) + "\n")
-
-
+print('------------------------------')  #30個
 
 import os
 
@@ -369,6 +320,10 @@ def buildPythonDocs():
     os.rename(os.path.join(buildDir, 'build', 'html'), docdir)
 
 
+print('------------------------------')  #30個
+
+
+
 import os
 import sys
 import shutil
@@ -389,13 +344,6 @@ print('目前位置 : ', os.getcwd())
 #未知用意
 #os.symlink('python', os.path.join(foldername2, 'python.exe'))
 
-
-os.chdir(foldername1)
-curdir = os.getcwd()
-print(curdir)
-
-for fn in os.listdir(foldername1):
-    print(fn)
 
 import time
 
@@ -419,6 +367,8 @@ print(string)
 string = string.replace('lion', 'mouse')
 print(string)
 
+print('------------------------------')  #30個
+
 
 '''
 import sys, os
@@ -427,6 +377,7 @@ print('目前位置 : ', os.getcwd())
 os.chdir(os.path.expanduser('~/Documents'))
 print('目前位置 : ', os.getcwd())
 '''
+print('------------------------------')  #30個
 
 
 
@@ -442,6 +393,12 @@ print(id)
 import sys
 if sys.version_info.major < 3 or sys.version_info.minor < 3:
     sys.exit("Error: clinic.py requires Python 3.3 or greater.")
+
+
+print('------------------------------')  #30個
+
+
+
 
 
 

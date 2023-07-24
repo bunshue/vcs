@@ -19,25 +19,22 @@ window.title(title)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-
-
-tk.Label(text='Scrollbar測試').pack()
+tk.Label(text = 'Listbox 測試').pack()
+tk.Label(text = 'Scrollbar 測試').pack()
 
 scrollbar = tk.Scrollbar(window)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
 
-tk.Label(text='Listbox測試').pack()
-listbox = tk.Listbox(window, yscrollcommand=scrollbar.set)
+listbox = tk.Listbox(window, yscrollcommand = scrollbar.set)
+#Listbox內加入項目
 for i in range(100):
     listbox.insert(tk.END, str(i))
     
-listbox.pack(side=tk.LEFT, fill=tk.BOTH)
+listbox.pack(side = tk.LEFT, fill = tk.BOTH)
 
-scrollbar.config(command=listbox.yview)
-
+scrollbar.config(command = listbox.yview)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
 
 window.mainloop()
 

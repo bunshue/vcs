@@ -15,6 +15,66 @@ Place methods are redirected to the Frame widget however.
 import sys
 
 
+print('字串處理專區------------------------------')  #30個
+
+
+
+target = 'https://tw.appledaily.com/new/realtime/{}'
+
+for page in range(1, 11):
+    url = target.format(page)
+    print(url)
+
+'''
+filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
+with open(filename, "w", encoding = 'utf-8') as fp:
+    print(filename + " is dumping...")
+    json.dump(titles, fp)
+'''
+
+
+
+query_string = 'abcdefghijklmn'
+query_number = 12345678901234
+replace_parameter = "無f替換變數"
+replace_parameter += " WHERE {query_string}"
+replace_parameter += " ORDER BY record_no DESC LIMIT {query_number}"
+print(replace_parameter)
+
+
+replace_parameter = "有f替換變數"
+replace_parameter += f" WHERE {query_string}"
+replace_parameter += f" ORDER BY record_no DESC LIMIT {query_number}"
+print(replace_parameter)
+
+
+table_columns = '(alpaca_name, training, duration, date)'
+postgres_insert_query = f"""INSERT INTO alpaca_training {table_columns} VALUES (%s,%s,%s,%s)"""
+
+print(postgres_insert_query)
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+
 print('列印專區------------------------------')  #30個
 
 
@@ -74,8 +134,103 @@ print(msg)
 print('------------------------------')  #30個
 
 
+
+def output(string = '', end = '\n'):
+    sys.stdout.write(string + end)
+
+
+def output(*strings):
+    for s in strings:
+        sys.stdout.write(str(s) + "\n")
+
+
 pos = 'abcd'
 output("Lexical error at position %s" % pos)
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+def fail(msg):
+    out = sys.stderr.write
+    out(msg + "\n\n")
+    return 0
+
+filename = 'ccccc'
+fail("couldn't open " + filename)
+
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+arg = 'abcdefg'
+sys.stderr.write("Can't find %s\n" % arg)
+
+
+print('------------------------------')  #30個
+
+
+
+
+print('------------------------------')  #30個
+
+import sys
+
+usage = """Usage: %s [-cd] paths...
+    -c: recognize Python source files trying to compile them
+    -d: debug output""" % sys.argv[0]
+
+print('msgsssssss', file = sys.stderr)
+print(usage, file = sys.stderr)
+
+
+print('------------------------------')  #30個
+
+total = 7
+for i in range(0, (total+1)):
+    #print(i)	# 0 ~ 7
+    print(u"download: " + str(100 * i / total ) + " %.")
+
+#替代字串
+TABLE_NAME = 'people'
+SELECT = 'select * from %s order by age, name' % TABLE_NAME
+
+print('select * from %s order by age, name' % TABLE_NAME)
+print(SELECT)
+
+key_id = 1234
+SELECT = 'SELECT * FROM memos WHERE key=?', (str(key_id))
+print(SELECT)
+
+
+
+
+
+
+print('------------------------------')  #30個
+
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/aaaaa.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/bbbbb.jpg'
+
+print("Copied %s to %s" % (filename1, filename2))
+
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print(filename)
+
+print('file: %s' % filename)
+print('file: %r' % filename)
+
 
 
 
@@ -252,15 +407,24 @@ for i in range(0, 10):
 
 print(s)
 
-
-
+print('------------------------------')  #30個
 
 import time
 
 randseed = int(time.time())
 random.seed(randseed)
 
+print('------------------------------')  #30個
 
+import sys, os, time, difflib, argparse
+from datetime import datetime, timezone
+
+path = 'C:/_git/vcs/_4.python'
+t1 = datetime.fromtimestamp(os.stat(path).st_mtime, timezone.utc)
+print(t1)
+
+t2 = t1.astimezone().isoformat()
+print(t2)
 
 print('------------------------------')  #30個
 
@@ -285,6 +449,8 @@ if os.system(cmd) != 0:
 
 print('------------------------------')  #30個
 
+def msg(str):
+    sys.stderr.write(str + '\n')
 
 longlist = '-l'
 filename = 'test01_io.py'
@@ -401,12 +567,6 @@ else:
     print('3333')
 '''
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/aaaaa.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/bbbbb.jpg'
-
-print("Copied %s to %s" % (filename1, filename2))
-
-
 print('------------------------------')  #30個
 
 print('兩點距離')
@@ -498,10 +658,10 @@ b = "Python?"
 
 print(len(a))
 print(a[2])
-print(a[4:7])
+print(a[4 : 7])
 print(a.replace("learn", "teach"))
 print(a.split(" "))
-print(a+b)
+print(a + b)
 
 
 string = '測試字串是不是有被包含'
@@ -540,25 +700,6 @@ is_contains_chinese()
 print('------------------------------')  #30個
 
 
-import sys, os, time, difflib, argparse
-from datetime import datetime, timezone
-
-path = 'C:/_git/vcs/_4.python'
-t1 = datetime.fromtimestamp(os.stat(path).st_mtime, timezone.utc)
-print(t1)
-
-t2 = t1.astimezone().isoformat()
-print(t2)
-
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-print(filename)
-
-
-print('file: %s' % filename)
-print('file: %r' % filename)
-
 '''
 print('一種寫入檔案的方法')
 filename = 'tmp.txt'
@@ -583,16 +724,6 @@ print('[FILES]', file=fp)
 print('', file=fp)
 fp.close()
 '''
-
-import sys
-
-usage = """Usage: %s [-cd] paths...
-    -c: recognize Python source files trying to compile them
-    -d: debug output""" % sys.argv[0]
-
-print('msgsssssss', file = sys.stderr)
-print(usage, file = sys.stderr)
-
 print('------------------------------')  #30個
 
 
@@ -624,31 +755,7 @@ if os.path.isdir(filename):
 else:
     print('False')
 
-if os.listdir(foldername):
-    print('True')
-else:
-    print('False')
-
-
-total = 7
-for i in range(0, (total+1)):
-    #print(i)	# 0 ~ 7
-    print(u"download: " + str(100 * i / total ) + " %.")
-
-#替代字串
-TABLE_NAME = 'people'
-SELECT = 'select * from %s order by age, name' % TABLE_NAME
-
-print('select * from %s order by age, name' % TABLE_NAME)
-print(SELECT)
-
-key_id = 1234
-SELECT = 'SELECT * FROM memos WHERE key=?', (str(key_id))
-print(SELECT)
-
-print('----------------------------------------------------------------------')	#70個
-
-print('-' * 70)	#70個
+print('------------------------------')  #30個
 
 from random import randint
 
@@ -703,6 +810,8 @@ print(b.color)
 b = ballList.pop()
 print(b.color)
 
+print('------------------------------')  #30個
+
 import os
 import sys
 from stat import *
@@ -715,141 +824,7 @@ pathlist = os.environ['PATH'].split(os.pathsep)
 print(pathlist)
 
 #filename = os.path.join(dir, prog)
-
-def msg(str):
-    sys.stderr.write(str + '\n')
-
-
-
-foldername = '__code'
-names = os.listdir(foldername)
-for name in names:
-    print(name)
-
-arg = 'abcdefg'
-sys.stderr.write("Can't find %s\n" % arg)
-
-stats = {}
-
-def addstats(ext, key, n):
-    d = stats.setdefault(ext, {})
-    d[key] = d.get(key, 0) + n
-
-def statdir(dir):
-    try:
-        names = os.listdir(dir)
-    except OSError as err:
-        sys.stderr.write("Can't list %s: %s\n" % (dir, err))
-        return
-    for name in sorted(names):
-        if name.startswith(".#"):
-            continue  # Skip CVS temp files
-        if name.endswith("~"):
-            continue  # Skip Emacs backup files
-        full = os.path.join(dir, name)
-        if os.path.islink(full):
-            addstats("<lnk>", "links", 1)
-        elif os.path.isdir(full):
-            statdir(full)
-        else:
-            statfile(full)
-
-def statfile(filename):
-    head, ext = os.path.splitext(filename)
-    head, base = os.path.split(filename)
-    if ext == base:
-        ext = ""  # E.g. .cvsignore is deemed not to have an extension
-    ext = os.path.normcase(ext)
-    if not ext:
-        ext = "<none>"
-    addstats(ext, "files", 1)
-    try:
-        with open(filename, "rb") as f:
-            data = f.read()
-    except IOError as err:
-        sys.stderr.write("Can't open %s: %s\n" % (filename, err))
-        addstats(ext, "unopenable", 1)
-        return
-    addstats(ext, "bytes", len(data))
-    if b'\0' in data:
-        addstats(ext, "binary", 1)
-        return
-    if not data:
-        addstats(ext, "empty", 1)
-    # addstats(ext, "chars", len(data))
-    lines = str(data, "latin-1").splitlines()
-    addstats(ext, "lines", len(lines))
-    del lines
-    words = data.split()
-    addstats(ext, "words", len(words))
-
-def report():
-    exts = sorted(stats)
-    # Get the column keys
-    columns = {}
-    for ext in exts:
-        columns.update(stats[ext])
-    cols = sorted(columns)
-    colwidth = {}
-    colwidth["ext"] = max([len(ext) for ext in exts])
-    minwidth = 6
-    stats["TOTAL"] = {}
-    for col in cols:
-        total = 0
-        cw = max(minwidth, len(col))
-        for ext in exts:
-            value = stats[ext].get(col)
-            if value is None:
-                w = 0
-            else:
-                w = len("%d" % value)
-                total += value
-            cw = max(cw, w)
-        cw = max(cw, len(str(total)))
-        colwidth[col] = cw
-        stats["TOTAL"][col] = total
-    exts.append("TOTAL")
-    for ext in exts:
-        stats[ext]["ext"] = ext
-    cols.insert(0, "ext")
-
-    def printheader():
-        for col in cols:
-            print("%*s" % (colwidth[col], col), end=' ')
-        print()
-
-    printheader()
-    for ext in exts:
-        for col in cols:
-            value = stats[ext].get(col, "")
-            print("%*s" % (colwidth[col], value), end=' ')
-        print()
-    printheader()  # Another header at the bottom
-
-
-"""Show file statistics by extension."""
-
-#filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/'
-
-if os.path.isdir(filename):
-    print('目錄')
-    statdir(filename)
-elif os.path.isfile(filename):
-    statfile(filename)
-    print('檔案')
-elif os.path.islink(filename):
-    print('連結')
-    linkto = os.readlink(filename)
-    print(linkto)
-else:
-    print('不詳')    
-
-print(type(stats))
-print(stats)
-
-report()
-
+print('------------------------------')  #30個
 
 
 print('------------------------------')  #30個
