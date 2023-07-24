@@ -93,7 +93,7 @@ print('SHA256')
 print('預設答案 : ', '5d57e3deb441b789f6035d28dcbbaf6a436c54450972786fad4ce4527059d291')
 print('計算結果 : ', calculated_filehash)
 
-
+print('------------------------------')  #30個
 
 print('算一個字串的hashcode')
 import hashlib
@@ -104,6 +104,8 @@ s.update(data.encode('utf-8'))
 h = s.hexdigest()
 print(h)
 
+
+print('------------------------------')  #30個
 
 print('算一個檔案的hashcode')
 
@@ -119,8 +121,66 @@ with open(filename, 'rb') as f:
 
 h = s.hexdigest()
 print(h)
-
+'''
 string = 'this is a lion-mouse'
 md5 = hashlib.md5(string).hexdigest()
 print('md5 : ', md5)
+'''
+
+print('------------------------------')  #30個
+
+
+#字符串轉 md5 工具
+import hashlib
+
+string = 'lion-mouse'
+print(string)
+
+string_data = string.strip().replace("\n","").encode()
+
+myMd5 = hashlib.md5()
+myMd5.update(string_data)
+myMd5_Digest = myMd5.hexdigest()
+print(myMd5_Digest)
+
+
+print('------------------------------')  #30個
+
+import hashlib
+
+def compute_checksum(input, length=None):
+    input = input or ''
+    s = hashlib.sha1(input.encode('utf-8')).hexdigest()
+    if length:
+        s = s[:length]
+    return s
+
+input = 'cat-dog'
+output = 'lion-mouse'
+computed = compute_checksum(output, 20)
+print(computed)
+
+computed = "output={} input={}".format(compute_checksum(output, 16), compute_checksum(input, 16))
+
+print(computed)
+
+
+
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
 

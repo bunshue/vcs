@@ -43,7 +43,7 @@ window.title(title)
 #window.configure(bg = "#7AFEC6")
 
 #像是richTextBox
-text1 = tk.Text(window, width = 80, height = 10)  # 放入多行輸入框
+text1 = tk.Text(window, width = 80, height = 6)  # 放入多行輸入框
 text1.pack()
 #text1.place(x = 100, y = 100)
 
@@ -54,7 +54,7 @@ bt_clear.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-text2 = tk.Text(window, width = 80, height = 10)  # 放入多行輸入框
+text2 = tk.Text(window, width = 80, height = 6)  # 放入多行輸入框
 text2.insert(tk.INSERT, "Tkinter 套件是圖形使用者介面，\n")
 text2.insert(tk.INSERT, "雖然功能略為陽春，\n")
 text2.insert(tk.INSERT, "但已足夠一般應用程式使用，\n")
@@ -87,7 +87,7 @@ def getTextData3():
     
 scrollbar = tk.Scrollbar(frame1)
 scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
-text3 = tk.Text(frame1, width = 80, height = 10, wrap = tk.WORD, yscrollcommand = scrollbar.set)  # 放入多行輸入框
+text3 = tk.Text(frame1, width = 80, height = 6, wrap = tk.WORD, yscrollcommand = scrollbar.set)  # 放入多行輸入框
 text3.pack()
 scrollbar.config(command = text3.yview)
 
@@ -131,7 +131,7 @@ def add_text():
 scrollbar = tk.Scrollbar(frame1)
 scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
 #日誌框
-text4 = tk.Text(frame1, width = 80, height = 10, wrap = tk.WORD, yscrollcommand = scrollbar.set)  # 放入多行輸入框
+text4 = tk.Text(frame1, width = 80, height = 6, wrap = tk.WORD, yscrollcommand = scrollbar.set)  # 放入多行輸入框
 text4.pack()
 scrollbar.config(command = text4.yview)
 
@@ -143,8 +143,18 @@ button3.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+text1 = tk.Text(window, width = 50, height = 6, padx = 15, pady = 15)
+text1.insert(1.0, '要加到Text內的文字')
+text1.tag_configure("center", justify = "center")
+text1.tag_add("center", 1.0, "end")
+#text1.grid(column = 1, row = 4)
+text1.pack()
 
 
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 
 window.mainloop()

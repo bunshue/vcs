@@ -1,3 +1,6 @@
+print('------------------------------')  #30個
+
+
 print('字元轉unicode')
 string = '你'
 
@@ -33,16 +36,12 @@ decimalValue = 65535
 hexValue = decimalToHex(decimalValue)
 print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
 
-
-print(__doc__)
-print(globals())
-
 level = 123
 levelnum = 170
 print(" * PY_RELEASE_LEVEL = %r = %s" % (level, hex(levelnum)))
 
 
-
+print('------------------------------')  #30個
 
 
 target = 'https://tw.appledaily.com/new/realtime/{}'
@@ -80,24 +79,7 @@ postgres_insert_query = f"""INSERT INTO alpaca_training {table_columns} VALUES (
 print(postgres_insert_query)
 
 
-print('全圖640X480, 每160X160裁一塊出來')
-W = 640
-H = 480
-w = 160
-h = 160
-
-'''
-for(y = 0; y < H; y += h)
-  for(x = 0; x < W; x += w)
-'''
-for y in range(0, H, h):
-    for x in range(0, W, w):
-        box = x, y, min(W, x + w), min(H, y + h)
-        print(box)
-        #tile = ImageTk.PhotoImage(image.crop(box))
-        #canvas.create_image(x, y, image = tile, anchor = NW)
-        #print(x, y)
-        #print(box)
+print('------------------------------')  #30個
 
 
 
@@ -151,37 +133,7 @@ pardir = [os.pardir]
 print(pardir)
 
 
-err = sys.stderr.write
-dbg = err
-rep = sys.stdout.write
-
-msg = 'cccccc'
-usage = 'dddddddddddd'
-err(str(msg) + '\n')
-err(msg)
-err('-i option or file-or-directory missing\n')
-err(usage)
-err('%s: cannot open: %r\n' % (filename, msg))
-err('%s: cannot create: %r\n' % (tempname, msg))
-
-
-'''
-word = word.strip()
-
-
-        if os.path.isdir(arg):
-            if recursedown(arg): bad = 1
-        elif os.path.islink(arg):
-            err(arg + ': will not process symbolic links\n')
-            bad = 1
-        else:
-            if fix(arg): bad = 1
-
-    dbg('recursedown(%r)\n' % (dirname,))
-##  dbg('fix(%r)\n' % (filename,))
-
-
-'''
+print('------------------------------')  #30個
 
 
 a_dict = {}
@@ -264,40 +216,6 @@ print('aaa', get_sys_version_info())
 print('bbb', get_version_info())
 
 
-
-
-print('for-test')
-for i in range(4, -1, -1):
-    print(i)
-
-for i in range(0, 6):
-    print(i)
-
-
-
- 
-#產生連續的整數
-for num in range(10):
-    print(num)
-
-for num in range(2, 7):
-    print(num)
-
-import sys
-#import somemodule as sm	#幫模組取個別名
-
-print (sys.argv)
-#print (s.argv)
-
-
-
-
-
-import math
-math.sin(math.pi * i / 2)
-
-
-
 import os
 import sys
 from distutils.util import get_platform
@@ -308,42 +226,11 @@ print(src)
 
 print(sys.argv)
 
-'''
-foldername = 'C:/_git/vcs/_1.data/______test_files2/'
-
-for root, dirs, files in os.walk(foldername):
-    for fn in files:
-        #fn = join(root, fn)
-        print(fn)
-'''
-
-print('---------------------------------------------')
+print('------------------------------')  #30個
 
 import platform, subprocess
 print(platform.system())
 
-
-
-
-
-import random
-s = ''
-for i in range(0, 10):
-    s += random.choice('<>=^')
-    s += random.choice('+- ')
-    s += str(random.randrange(1, 100))
-    s += str(random.randrange(100))
-    s += random.choice(('', 'E', 'e', 'G', 'g', 'F', 'f', '%'))
-
-print(s)
-
-
-
-
-import time
-
-randseed = int(time.time())
-random.seed(randseed)
 
 
 
@@ -378,12 +265,6 @@ old_cd = os.getcwd()
 
 print(old_cd)
 
-print('製作cmd指令')
-
-cmd = 'dir'
-if os.system(cmd) != 0:
-    raise RuntimeError(cmd)
-
 
 #os.chdir(os.path.join(ROOT, TK, "win"))
 
@@ -416,68 +297,7 @@ def output(*strings):
 
 
 
-import glob
-import sys
-
-foldername = 'C:/_git/vcs/_1.data/______test_files2/'
-files = glob.glob(foldername)
-
-for file in files:
-    print('aaaa')
-    output(file)
-
-
-'''
-
-pos = 'abcd'
-output("Lexical error at position %s" % pos)
-
-
-os.system('cmd')
-'''
-
-
-
-
-
-"""A ScrolledText widget feels like a text widget but also has a
-vertical scroll bar on its right.  (Later, options may be added to
-add a horizontal bar as well, to make the bars disappear
-automatically when not needed, to move them to the other side of the
-window, etc.)
-
-Configuration options are passed to the Text widget.
-A Frame widget is inserted between the master and the text, to hold
-the Scrollbar widget.
-Most methods calls are inherited from the Text widget; Pack, Grid and
-Place methods are redirected to the Frame widget however.
-"""
-
-#字符串轉 md5 工具
-import hashlib
-
-string = 'lion-mouse'
-print(string)
-
-string_data = string.strip().replace("\n","").encode()
-
-myMd5 = hashlib.md5()
-myMd5.update(string_data)
-myMd5_Digest = myMd5.hexdigest()
-print(myMd5_Digest)
-
-
 import os
-
-'''
-
-foldername = 'C:/_git/vcs/_1.data/______test_files2'
-
-for cursrc, dirs, files in os.walk(foldername):
-    print('----------------')
-    print(cursrc, dirs, files)
-    print('----------------')
-'''
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
@@ -496,45 +316,6 @@ print(no_asm)
 ADDRESS = r'\\.\pipe\_test_pipe-%s' % os.getpid()
 print(ADDRESS)
 
-
-import sys
-def errprint(*args):
-    sep = ""
-    for arg in args:
-        sys.stderr.write(sep + str(arg))
-        sep = " "
-    sys.stderr.write("\n")
-
-
-msg = 'this is a lion-mouse'
-errprint(msg)
-
-print(msg)
-
-print('檔頭的註解')
-print(__doc__)
-
-
-import time
-print('存檔紀念')
-
-fp = open('Build.txt', 'w')
-fp.write("# BUILD INFO\n")
-fp.write("# Date: %s\n" % time.ctime())
-#fp.write("# By: %s\n" % pwd.getpwuid(os.getuid()).pw_gecos)
-fp.close()
-
-
-
-
-
-
-import datetime
-
-
-seconds = datetime.datetime(2004, 10, 26, 10, 33, 33, tzinfo=datetime.timezone(datetime.timedelta(0))).timestamp()
-
-print(seconds)
 
 
 def copy(src, dst, mkdirs=0):
@@ -650,44 +431,17 @@ print('目前位置 : ', os.getcwd())
 
 
 import abc
-import hashlib
-import uuid
-
-def compute_checksum(input, length=None):
-    input = input or ''
-    s = hashlib.sha1(input.encode('utf-8')).hexdigest()
-    if length:
-        s = s[:length]
-    return s
-
 metaclass = abc.ABCMeta
 print(metaclass)
 
+import uuid
 id = str(uuid.uuid4())
 print(id)
     
-input = 'cat-dog'
-output = 'lion-mouse'
-computed = compute_checksum(output, 20)
-print(computed)
-
-computed = "output={} input={}".format(compute_checksum(output, 16), compute_checksum(input, 16))
-
-print(computed)
-
 
 import sys
 if sys.version_info.major < 3 or sys.version_info.minor < 3:
     sys.exit("Error: clinic.py requires Python 3.3 or greater.")
-
-
-
-
-
-
-
-
-
 
 
 

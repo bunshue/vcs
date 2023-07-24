@@ -1,4 +1,186 @@
 
+"""A ScrolledText widget feels like a text widget but also has a
+vertical scroll bar on its right.  (Later, options may be added to
+add a horizontal bar as well, to make the bars disappear
+automatically when not needed, to move them to the other side of the
+window, etc.)
+
+Configuration options are passed to the Text widget.
+A Frame widget is inserted between the master and the text, to hold
+the Scrollbar widget.
+Most methods calls are inherited from the Text widget; Pack, Grid and
+Place methods are redirected to the Frame widget however.
+"""
+
+import sys
+
+
+print('列印專區------------------------------')  #30個
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+
+err = sys.stderr.write
+dbg = err
+rep = sys.stdout.write
+
+msg = 'cccccc'
+usage = 'dddddddddddd'
+err(str(msg) + '\n')
+err(msg)
+err('-i option or file-or-directory missing\n')
+err(usage)
+err('%s: cannot open: %r\n' % (filename, msg))
+
+
+'''
+word = word.strip()
+
+
+        if os.path.isdir(arg):
+            if recursedown(arg): bad = 1
+        elif os.path.islink(arg):
+            err(arg + ': will not process symbolic links\n')
+            bad = 1
+        else:
+            if fix(arg): bad = 1
+
+    dbg('recursedown(%r)\n' % (dirname,))
+##  dbg('fix(%r)\n' % (filename,))
+
+
+'''
+print('------------------------------')  #30個
+
+
+
+import sys
+def errprint(*args):
+    sep = ""
+    for arg in args:
+        sys.stderr.write(sep + str(arg))
+        sep = " "
+    sys.stderr.write("\n")
+
+
+msg = 'this is a lion-mouse'
+errprint(msg)
+print(msg)
+
+
+
+
+print('------------------------------')  #30個
+
+
+pos = 'abcd'
+output("Lexical error at position %s" % pos)
+
+
+
+
+
+
+print('python語言區------------------------------')  #30個
+
+
+
+
+
+print(__doc__)
+print(globals())
+
+
+print(__file__)
+print(__file__.upper())
+print(__file__.lower())
+print(__name__)
+print(__name__)
+#print(__name__._version)
+print(__doc__)
+print(__doc__)  # the docstring of this module above
+
+import sympy
+VERSION = sympy.__version__
+print(VERSION)
+
+import selenium
+print(selenium.__version__)
+
+
+
+
+
+import sys
+#import somemodule as sm	#幫模組取個別名
+
+print (sys.argv)
+#print (s.argv)
+
+
+print('檔頭的註解')
+print(__doc__)
+
+
+
+
+
+print('語法專區------------------------------')  #30個
+
+
+
+
+print('for-test')
+for i in range(4, -1, -1):
+    print(i)
+
+for i in range(0, 6):
+    print(i)
+
+
+
+
+#產生連續的整數
+for num in range(10):
+    print(num)
+
+for num in range(2, 7):
+    print(num)
+
+
+
+
+
+ 
+
+print('全圖640X480, 每160X160裁一塊出來')
+W = 640
+H = 480
+w = 160
+h = 160
+
+'''
+for(y = 0; y < H; y += h)
+  for(x = 0; x < W; x += w)
+'''
+for y in range(0, H, h):
+    for x in range(0, W, w):
+        box = x, y, min(W, x + w), min(H, y + h)
+        print(box)
+        #tile = ImageTk.PhotoImage(image.crop(box))
+        #canvas.create_image(x, y, image = tile, anchor = NW)
+        #print(x, y)
+        #print(box)
+
+
+
+
+
+
+
+print('------------------------------')  #30個
+
 print('字串處理')
 
 items = "03/11/2006".split("/")
@@ -14,18 +196,123 @@ print(type(name))
 ccc = name.reverse()
 print(ccc)
 
-
+print('------------------------------')  #30個
 x = 2
 y = 0.5
 
 print("x**y = " + str(x ** y))
 
-
+print('------------------------------')  #30個
+print('list 使用')
 lst = [3, 2, 1, 5, 9, 0]
 print(type(lst))
 print(lst)
 sorted(lst)
 print(lst)
+
+print('------------------------------')  #30個
+
+
+
+
+
+print('datatime time random math------------------------------')  #30個
+
+import datetime
+seconds = datetime.datetime(2004, 10, 26, 10, 33, 33, tzinfo = datetime.timezone(datetime.timedelta(0))).timestamp()
+print(seconds)
+
+
+import time
+print('存檔紀念')
+
+fp = open('Build.txt', 'w')
+fp.write("# BUILD INFO\n")
+fp.write("# Date: %s\n" % time.ctime())
+#fp.write("# By: %s\n" % pwd.getpwuid(os.getuid()).pw_gecos)
+fp.close()
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+import random
+s = ''
+for i in range(0, 10):
+    s += random.choice('<>=^')
+    s += random.choice('+- ')
+    s += str(random.randrange(1, 100))
+    s += str(random.randrange(100))
+    s += random.choice(('', 'E', 'e', 'G', 'g', 'F', 'f', '%'))
+
+print(s)
+
+
+
+
+import time
+
+randseed = int(time.time())
+random.seed(randseed)
+
+
+
+print('------------------------------')  #30個
+
+i = 30
+import math
+math.sin(math.pi * i / 2)
+
+
+print('------------------------------')  #30個
+
+
+
+print('os.system------------------------------')  #30個
+
+
+print('製作cmd指令')
+
+cmd = 'dir'
+if os.system(cmd) != 0:
+    raise RuntimeError(cmd)
+
+
+print('------------------------------')  #30個
+
+
+longlist = '-l'
+filename = 'test01_io.py'
+
+sts = os.system('ls ' + longlist + ' ' + filename)
+if sts:
+    msg('"ls -l" exit status: ' + repr(sts))
+
+sts = os.system('ls ' + filename)
+if sts:
+    msg('"ls -l" exit status: ' + repr(sts))
+
+sts = os.system('dir')
+if sts:
+    msg('"ls -l" exit status: ' + repr(sts))
+else:
+    print(sts)
+
+
+print('------------------------------')  #30個
+
+
+os.system('cmd')
+
+
+
+print('------------------------------')  #30個
+
 
 
 print('處理網址資料')
@@ -69,6 +356,8 @@ else:
     print("The decimal value for hex number", hex, "is", decimal) 
 
 
+print('------------------------------')  #30個
+
 from urllib import parse
 
 string = '豬頭三'
@@ -101,23 +390,6 @@ cnstr = '中文 test'
 print(cnstr, len(cnstr))
 #utfstr = unicode(cnstr, 'utf-8')
 '''
-
-print(__file__)
-print(__file__.upper())
-print(__file__.lower())
-print(__name__)
-print(__name__)
-#print(__name__._version)
-print(__doc__)
-print(__doc__)  # the docstring of this module above
-
-import sympy
-VERSION = sympy.__version__
-print(VERSION)
-
-import selenium
-print(selenium.__version__)
-
 '''
 import win32api, win32con
 rc = win32api.MessageBox(0, 'kkkkk', "Installation Error", win32con.MB_ABORTRETRYIGNORE)
@@ -133,6 +405,9 @@ filename1 = 'C:/_git/vcs/_1.data/______test_files1/aaaaa.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/bbbbb.jpg'
 
 print("Copied %s to %s" % (filename1, filename2))
+
+
+print('------------------------------')  #30個
 
 print('兩點距離')
 x1, y1 = 0, 0
@@ -205,6 +480,7 @@ printArea(height = 5, width = 3) # Keyword arguments width
 printArea(width = 1.2) # Default height = 2
 printArea(height = 6.2) # Default widht = 1
 
+print('------------------------------')  #30個
 
 
 a = 5
@@ -261,7 +537,7 @@ search_word = '英國'
 is_contains_chinese()
 
 
-
+print('------------------------------')  #30個
 
 
 import sys, os, time, difflib, argparse
@@ -316,6 +592,9 @@ usage = """Usage: %s [-cd] paths...
 
 print('msgsssssss', file = sys.stderr)
 print(usage, file = sys.stderr)
+
+print('------------------------------')  #30個
+
 
 import os
 import sys
@@ -440,22 +719,7 @@ print(pathlist)
 def msg(str):
     sys.stderr.write(str + '\n')
 
-longlist = '-l'
-filename = 'test01_io.py'
 
-sts = os.system('ls ' + longlist + ' ' + filename)
-if sts:
-    msg('"ls -l" exit status: ' + repr(sts))
-
-sts = os.system('ls ' + filename)
-if sts:
-    msg('"ls -l" exit status: ' + repr(sts))
-
-sts = os.system('dir')
-if sts:
-    msg('"ls -l" exit status: ' + repr(sts))
-else:
-    print(sts)
 
 foldername = '__code'
 names = os.listdir(foldername)
@@ -586,6 +850,19 @@ print(stats)
 
 report()
 
+
+
+print('------------------------------')  #30個
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+print('------------------------------')  #30個
 
 
 

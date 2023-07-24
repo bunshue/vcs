@@ -26,6 +26,8 @@ cbtBold.grid(row = 1, column = 1)
 rbRed.grid(row = 1, column = 2)
 rbYellow.grid(row = 1, column = 3)
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 #Window下的第二個Frame
 # Add a button, a check button, and a radio button to frame1
 frame2 = tk.Frame(window, bg = 'pink') # Create and add a frame to window
@@ -40,6 +42,8 @@ label.grid(row = 1, column = 1)
 entryName.grid(row = 1, column = 2)
 btGetName.grid(row = 1, column = 3)
 message.grid(row = 1, column = 4)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 #Window下的Text
 text1 = tk.Text(window)

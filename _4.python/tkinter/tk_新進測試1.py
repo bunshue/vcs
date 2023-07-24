@@ -26,61 +26,48 @@ def changeString():
     entry.insert(0, stringToCopy)
 
 entry = tk.Entry(window)
-button = tk.Button(window, text = "Change", command = changeString)
-
 entry.pack()
-button.pack()
 
-def say_hi():
-    print("hi there, everyone!")
+button0 = tk.Button(window, text = 'Change', command = changeString)
+button0.pack()
 
 frame = tk.Frame()
 frame.pack()
 
-button = tk.Button(frame, text = "QUIT", fg = "red", command = frame.quit)
-button.pack(side = tk.LEFT)
+button1 = tk.Button(frame, text = 'QUIT', fg = 'red', command = frame.quit)
+button1.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
 
-hi_there = tk.Button(frame, text = "Hello", command = say_hi)
-hi_there.pack(side = tk.LEFT)
+button2 = tk.Button(frame, text = 'Hello')
+button2.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
 
+button3 = tk.Button(frame, text = 'New')
+button3.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+#button3.pack() #這一行結束
+
+button4 = tk.Button(frame, text = 'New')
+button4.pack()
+
+button5 = tk.Button(frame, text = 'New')
+button5.pack()
+
+button6 = tk.Button(frame, text = 'New')
+button6.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+def display():
+    number = int(order.get())
+    print('取得 order = ', number)
+                
+frame1 = tk.Frame(window, bg = 'pink') # Create and add a frame to window
+frame1.pack()
 
+tk.Label(frame1, text = "Enter an order: ").pack(side = tk.LEFT)
+order = tk.StringVar()
+entry = tk.Entry(frame1, textvariable = order, justify = tk.RIGHT).pack(side = tk.LEFT)
+tk.Button(frame1, text = 'Display Sierpinski Triangle', command = display).pack(side = tk.LEFT)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
-
-
-'''
-        # Add a label, an entry, and a button to frame1
-        frame1 = Frame(window, bg = 'pink') # Create and add a frame to window
-        frame1.pack()
-        
-        Label(frame1, text = "Enter an order: ").pack(side = LEFT)
-        self.order = StringVar()
-        entry = Entry(frame1, textvariable = self.order, justify = RIGHT).pack(side = LEFT)
-        Button(frame1, text = "Display Sierpinski Triangle", command = self.display).pack(side = LEFT)
-
-
-
-displayTriangles(int(order.get()), p1, p2, p3)
-
-
-
-
-btOK = Button(window, text = "OK", fg = "red", command = '') 
-btCancel = Button(window, text = "Cancel", bg = "yellow", command = '') 
-
-btOK = Button(root, text = "OK", fg = "red", command = '') 
-btCancel = Button(root, text = "Cancel", bg = "yellow", command = '') 
-
-
-
-
-
-
-
-
-
-'''
 

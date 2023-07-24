@@ -105,6 +105,16 @@ frame.pack()
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print('Toolbox 測試')
+tk.Button(window, text = "OK").pack(side = tk.LEFT)
+tk.Button(window, text = "Cancel").pack(side = tk.LEFT)
+tk.Label(window, text = "Enter your name:").pack(side = tk.LEFT)
+tk.Entry(window, text = "Type Name").pack(side = tk.LEFT)
+tk.Checkbutton(window, text = "Bold").pack(side = tk.LEFT)
+tk.Checkbutton(window, text = "Italic").pack(side = tk.LEFT)
+tk.Radiobutton(window, text = "Red").pack(side = tk.LEFT)
+tk.Radiobutton(window, text = "Yellow").pack(side = tk.LEFT)
+
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
