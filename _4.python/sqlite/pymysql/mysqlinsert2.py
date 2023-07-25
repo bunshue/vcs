@@ -1,6 +1,6 @@
 import pymysql
 
-conn = pymysql.connect('localhost',port=3306,user='root',passwd='1234',charset='utf8', db='pythondb')  #連結資料庫
+conn = pymysql.connect(host = 'localhost', port = 3306, user = 'root', passwd = '1234', charset = 'utf8', db = 'pythondb')  #連結資料庫
 cursor = conn.cursor()
 
 sql = "insert into score (姓名,座號,國文,數學) values (1,'李大毛','1',92,80)"

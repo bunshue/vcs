@@ -1,17 +1,34 @@
-def clickDown():  #按「下載影片」鈕後處理函式
+def rbVideo():  #點選選項按鈕後處理函式
     global getvideo
+    labelMsg.config(text="")
+    getvideo = videorb.get()
+    
+def clickDown():  #按「下載影片」鈕後處理函式
+    global getvideo, strftype, listradio
     
     labelMsg.config(text="")  #清除提示訊息
     if(url.get()==""):  #若未輸入網址就顯示提示訊息
         labelMsg.config(text="網址欄位必須輸入！")
-    else:
-        urlin = url.get()
+        return
+
     if(path.get()==""):
         pathdir = 'download'
     else:
         pathdir = path.get()
         pathdir = pathdir.replace("\\", "\\\\")  #將「\」轉換為「\\」
-    
+
+    if not os.path.isdir(pathdir):  #如果資料夾不存在就建立
+        os.mkdir(pathdir)
+
+    '''
+    try:
+        yt = YouTube(url.get(), use_oauth = True, allow_oauth_cache = True)
+        yt.streams.filter(subtype='mp4', res=getvideo, progressive=True).first().download(pathdir)  #下載mp4影片
+        labelMsg.config(text="下載完成！")
+    except:
+        labelMsg.config(text="影片無法下載！")
+    '''
+
     playlist = Playlist(urlin)  #建立物件  
     videolist = playlist.video_urls  #取得所有影片連結
     
@@ -22,18 +39,22 @@ def clickDown():  #按「下載影片」鈕後處理函式
         yt.streams.filter(subtype = 'mp4', res = getvideo, progressive = True).first().download(pathdir)  #下載mp4影片
         n = n + 1
     labelMsg.config(text="下載完成！")
+
+
+
+
+
+
     
-def rbVideo():  #點選選項按鈕後處理函式
-    global getvideo
-    getvideo = videorb.get()
-    
+import os
+import tkinter as tk
 from pytube import YouTube
 from pytube import Playlist
-import tkinter as tk
 
 win=tk.Tk()
-win.geometry("530x280")  #設定主視窗解析度
+win.geometry("560x280")  #設定主視窗解析度
 win.title("下載Youtube影片")
+
 getvideo = "360p"  #影片格式
 videorb = tk.StringVar()  #選項按鈕值
 url = tk.StringVar()  #影片網址
@@ -42,13 +63,13 @@ path = tk.StringVar()  #存檔資料夾
 label1=tk.Label(win, text="Youtube網址：")
 label1.place(x=123, y=30)
 entryUrl = tk.Entry(win, textvariable=url)
-entryUrl.config(width=40)
+entryUrl.config(width=45)
 entryUrl.place(x=220, y=30)
 
 label2=tk.Label(win, text="存檔路徑(預設為download資料夾)：")
 label2.place(x=10, y=70)
 entryPath = tk.Entry(win, textvariable=path)
-entryPath.config(width=40)
+entryPath.config(width=45)
 entryPath.place(x=220, y=70)
 
 btnDown = tk.Button(win, text="下載影片", command=clickDown)

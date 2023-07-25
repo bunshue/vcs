@@ -1,6 +1,6 @@
 import pymysql
 
-conn = pymysql.connect('localhost',port=3306,user='root',passwd='1234',charset='utf8', db='pythondb')  #連結資料庫
+conn = pymysql.connect(host = 'localhost', port = 3306, user = 'root', passwd = '1234', charset = 'utf8', db = 'pythondb')  #連結資料庫
 
 with conn.cursor() as cursor:
     sql = "select * from scores"

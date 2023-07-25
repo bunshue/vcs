@@ -1,6 +1,7 @@
 import pymysql
 
-conn = pymysql.connect('localhost',port=3306,user='root',passwd='1234',charset='utf8', db='pythondb')  #連結資料庫
+conn = pymysql.connect(host = 'localhost', port = 3306, user = 'root', passwd = '1234', charset = 'utf8', db = 'pythondb')  #連結資料庫
+
 cursor = conn.cursor()
 
 cursor.execute("drop table if exists score")  #如果資料表已經存在,刪除後重建
