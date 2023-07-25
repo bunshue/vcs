@@ -1,4 +1,5 @@
 import requests
+
 url = 'https://irs.thsrc.com.tw/IMINT/'
 # 自訂表頭
 headers={
@@ -6,4 +7,5 @@ headers={
 }
 # 將自訂表頭加入 GET 請求中
 html = requests.get(url, headers=headers)
+
 print(html)

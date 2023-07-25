@@ -18,6 +18,7 @@ else:
                 urls.append(tem)
             
 print('共有 ' + str(len(urls)) + ' 部影片')
+print(urls)
 
 pathdir = 'download'  #下載資料夾
 print('開始下載：')
@@ -32,3 +33,4 @@ except:
     pass
 
 print('下載完成！')
+

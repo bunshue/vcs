@@ -1,7 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://www.taiwanlottery.com.tw/'
 r = requests.get(url)
+#sp = BeautifulSoup(r.text, 'lxml')
 sp = BeautifulSoup(r.text, 'html.parser')
 # 找到威力彩的區塊
 datas = sp.find('div', class_='contents_box02')
@@ -21,3 +23,5 @@ for i in range(6,12):
 # 第二區
 num = datas.find('div', class_='ball_red').text
 print('\n第二區：', num)
+
+

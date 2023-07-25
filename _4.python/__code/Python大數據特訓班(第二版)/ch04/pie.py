@@ -13,7 +13,9 @@ plt.pie(sizes,
 	pctdistance = 0.6,
 	shadow = True,
 	startangle = 90)
+
 # 設定中文字型及負號正確顯示
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" 
 plt.rcParams["axes.unicode_minus"] = False	
+
 plt.show()

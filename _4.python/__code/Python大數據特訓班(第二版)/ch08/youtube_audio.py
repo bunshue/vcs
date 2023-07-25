@@ -9,3 +9,4 @@ yt.streams.filter(mime_type='audio/mp4').first().download(pathdir)  #下載mp4�
 yt.streams.filter(mime_type='audio/webm')[2].download(pathdir)  #下載webm聲音檔
 #yt.streams.filter(only_audio=True).first().download(pathdir)  #下載聲音檔
 print('下載完成！')
+

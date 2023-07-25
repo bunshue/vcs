@@ -1,4 +1,5 @@
 from selenium import webdriver
+
 # 設定facebook登入資訊
 url = 'https://www.facebook.com/'
 email='你的faceook電子郵件'

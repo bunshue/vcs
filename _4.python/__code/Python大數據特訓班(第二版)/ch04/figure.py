@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+
 # 新增圖表區
 plt.figure()
 plt.plot([1,2,3])

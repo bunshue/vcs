@@ -1,4 +1,5 @@
 from selenium import webdriver
+
 # 高鐵時刻表查詢網站
 url = 'http://www.thsrc.com.tw/tw/TimeTable/SearchResult'
 ss='台中站'      #出發站
