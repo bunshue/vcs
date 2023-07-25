@@ -13,10 +13,8 @@ import argparse
 from pytube import YouTube
 import PySimpleGUI as sg
 
-
-
 def downloadFile(url):
-    name = YouTube(url).streams.first().download()
+    name = YouTube(url, use_oauth = True, allow_oauth_cache = True).streams.first().download()
     newname = name.replace(' ','_')
     os.rename(name,newname)
     return newname

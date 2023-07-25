@@ -459,6 +459,102 @@ for fn in os.listdir(foldername):
 
 
 
+#Python 列出目錄中所有檔案教學：os.listdir 與 os.walk
+
+#os.listdir 取得檔案列表
+#os.listdir 可以取得指定目錄中所有的檔案與子目錄名稱，以下是一個簡單的範例：
+
+from os import listdir
+from os.path import isfile, isdir, join
+
+# 取得所有檔案與子目錄名稱
+files = listdir(foldername)
+
+# 以迴圈處理
+for f in files:
+  # 產生檔案的絕對路徑
+  fullpath = join(foldername, f)
+  # 判斷 fullpath 是檔案還是目錄
+  if isfile(fullpath):
+    print("檔案：", f)
+  elif isdir(fullpath):
+    print("目錄：", f)
+    
+
+#os.walk 遞迴搜尋檔案
+#os.walk 是一個以遞迴方式列出特定路徑下，所有子目錄與檔案的函數
+
+from os import walk
+
+# 遞迴列出所有子目錄與檔案
+for root, dirs, files in os.walk(foldername):
+  print("路徑：", root)
+  print("  目錄：", dirs)
+  print("  檔案：", files)
+  
+  
+#若要取得所有檔案的絕對路徑，讓程式逐一處理的話，可以這樣寫：
+
+from os import walk
+from os.path import join
+
+# 遞迴列出所有檔案的絕對路徑
+for root, dirs, files in os.walk(foldername):
+  for f in files:
+    fullpath = join(root, f)
+    print(fullpath)
+    
+
+from os import listdir
+from os.path import isfile, isdir, join
+
+# 取得所有檔案與子目錄名稱
+files = listdir(foldername)
+
+# 以迴圈處理
+for f in files:
+  # 產生檔案的絕對路徑
+  fullpath = join(foldername, f)
+  # 判斷 fullpath 是檔案還是目錄
+  if isfile(fullpath):
+    print("檔案：", f)
+  elif isdir(fullpath):
+    print("目錄：", f)
+    
+    
+#os.walk 遞迴搜尋檔案
+#os.walk 是一個以遞迴方式列出特定路徑下，所有子目錄與檔案的函數
+
+from os import walk
+
+# 遞迴列出所有子目錄與檔案
+for root, dirs, files in walk(foldername):
+  print("路徑：", root)
+  print("  目錄：", dirs)
+  print("  檔案：", files)
+  
+  
+#若要取得所有檔案的絕對路徑，讓程式逐一處理的話，可以這樣寫：
+
+from os import walk
+from os.path import join
+
+# 遞迴列出所有檔案的絕對路徑
+for root, dirs, files in walk(foldername):
+  for f in files:
+    fullpath = join(root, f)
+    print(fullpath)
+    
+
+
+
+
+
+files = glob.glob("glob.py") + glob.glob("os*.py") + glob.glob("*.txt")
+
+for file in files:
+    print(file)
+
 
 
 

@@ -18,8 +18,8 @@ def clickDown():  #按「下載影片」鈕後處理函式
     pathdir = 'download'  #下載資料夾
     n = 1
     for video in videolist:
-        yt = YouTube(video)
-        yt.streams.filter(subtype='mp4', res=getvideo, progressive=True).first().download(pathdir)  #下載mp4影片
+        yt = YouTube(video, use_oauth = True, allow_oauth_cache = True)
+        yt.streams.filter(subtype = 'mp4', res = getvideo, progressive = True).first().download(pathdir)  #下載mp4影片
         n = n + 1
     labelMsg.config(text="下載完成！")
     

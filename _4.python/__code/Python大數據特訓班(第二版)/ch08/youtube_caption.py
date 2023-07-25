@@ -2,7 +2,7 @@ from pytube import YouTube
 
 url = 'https://www.youtube.com/watch?v=TfhlV9_w-nQ'
 
-#yt = YouTube('https://www.youtube.com/watch?v=RIIU6rRj7Eo')
+#yt = YouTube('https://www.youtube.com/watch?v=RIIU6rRj7Eo', use_oauth = True, allow_oauth_cache = True)
 yt = YouTube(url)
 print(yt)
 print(yt.captions)

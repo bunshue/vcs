@@ -1,6 +1,6 @@
 from pytube import YouTube
 
-yt = YouTube('https://www.youtube.com/watch?v=27ob2G3GUCQ')
+yt = YouTube('https://www.youtube.com/watch?v=27ob2G3GUCQ', use_oauth = True, allow_oauth_cache = True)
 #print(yt.streams.filter(only_audio=True))
 #print(yt.streams.filter(mime_type='audio/webm'))
 pathdir = 'download'  #下載資料夾

@@ -1,6 +1,6 @@
 from pytube import YouTube
 
-yt = YouTube('https://www.youtube.com/watch?v=27ob2G3GUCQ')
+yt = YouTube('https://www.youtube.com/watch?v=27ob2G3GUCQ', use_oauth = True, allow_oauth_cache = True)
 print("影片名稱：" + yt.title)
 print("影片格式共有 " + str(len(yt.streams)) + ' 種')
 print("影片型態為 mp4 且影像及聲音都有的影片：")

@@ -25,7 +25,7 @@ print('開始下載：')
 n = 1
 try:
     for video in urls:
-        yt = YouTube(video)
+        yt = YouTube(video, use_oauth = True, allow_oauth_cache = True)
         print(str(n) + '. ' + yt.title)  #顯示標題
         yt.streams.filter(subtype='mp4', res='360p', progressive=True).first().download(pathdir)  #下載mp4,360p影片
         n = n + 1

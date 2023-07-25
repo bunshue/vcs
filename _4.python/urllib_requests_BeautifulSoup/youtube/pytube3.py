@@ -14,7 +14,7 @@ from pytube import YouTube
 # 超好用的10個Win10小技巧，學會讓你事半功倍！ | 零度解說
 url = 'https://www.youtube.com/watch?v=36asE86iGmQ'
 
-yt = YouTube(url)
+yt = YouTube(url, use_oauth = True, allow_oauth_cache = True)
 print("影片名稱：" + yt.title)
 
 #print('所有影片格式')

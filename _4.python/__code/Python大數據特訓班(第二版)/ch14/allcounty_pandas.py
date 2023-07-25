@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+
 # 取得所有縣市
 url = 'http://www.ibon.com.tw/retail_inquiry.aspx#gsc.tab=0'
 r = requests.get(url)

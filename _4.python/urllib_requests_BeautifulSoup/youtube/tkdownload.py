@@ -19,7 +19,7 @@ def clickDown():  #按「下載影片」鈕後處理函式
         os.mkdir(pathdir)
 
     try:
-        yt = YouTube(url.get())
+        yt = YouTube(url.get(), use_oauth = True, allow_oauth_cache = True)
         yt.streams.filter(subtype='mp4', res=getvideo, progressive=True).first().download(pathdir)  #下載mp4影片
         labelMsg.config(text="下載完成！")
     except:

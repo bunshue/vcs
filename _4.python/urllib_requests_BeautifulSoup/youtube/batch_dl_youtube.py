@@ -42,7 +42,7 @@ for video in videourlList:
     print(video)
     if len(video) > 16:
         print('https://www.youtube.com' + video)
-        yt = YouTube('https://www.youtube.com' + video)
+        yt = YouTube('https://www.youtube.com' + video, use_oauth = True, allow_oauth_cache = True)
         print(str(n) + '. ' + yt.title)  #顯示標題
         yt.streams.filter(subtype='mp4', res='360p', progressive=True).first().download(foldername)  #下載mp4,360p影片
         n = n + 1
