@@ -29,11 +29,16 @@ print('Youtube 測試 1 影片資訊')
 
 print("影片名稱：" + yt.title)
 
+#print(yt.captions)
 length = len(yt.captions)
 print('字幕個數 : ', length)
 if length > 0:
         for cc in yt.captions:
+                print(type(cc))
                 print(cc)
+                print(cc.url)
+                print(cc.name)
+                print(cc.code)
 
 #print('所有影片格式')
 #print(yt.streams)
@@ -81,6 +86,7 @@ print('Youtube 測試 3 下載聲音')
 #print(yt.streams.filter(only_audio=True))
 #print(yt.streams.filter(mime_type='audio/webm'))
 
+
 print('開始下載聲音檔：')
 yt.streams.filter(mime_type='audio/mp4').first().download(foldername)  #下載mp4聲音檔
 yt.streams.filter(mime_type='audio/webm')[2].download(foldername)  #下載webm聲音檔
@@ -90,6 +96,9 @@ print('下載完成')
 
 print('----------------------------------------------------------------------')	#70個
 print('Youtube 測試 4 下載字幕 TBD')
+
+#yt = YouTube('https://www.youtube.com/watch?v=RIIU6rRj7Eo', use_oauth = True, allow_oauth_cache = True)
+
 
 print("影片名稱：" + yt.title)
 
@@ -117,6 +126,17 @@ print(srt)
 caption = yt.captions['zh-Hans']
 srt = caption.generate_srt_captions()
 file = open('download/youtube.srt', 'w', encoding = 'UTF-8')
+file.write(srt)
+file.close()
+print(srt)
+'''
+
+'''
+#{'a.en': <Caption lang="English (auto-generated)" code="a.en">}
+
+caption = yt.captions['en']
+srt = caption.generate_srt_captions()
+file = open('youtube.srt', 'w', encoding='UTF-8')
 file.write(srt)
 file.close()
 print(srt)

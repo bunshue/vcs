@@ -1,21 +1,4 @@
-# Mimic the sqlite3 console shell's .dump command
-# Author: Paul Kippes <kippesp@gmail.com>
-
-# Every identifier in sql is quoted based on a comment in sqlite
-# documentation "SQLite adds new keywords from time to time when it
-# takes on new features. So to prevent your code from being broken by
-# future enhancements, you should normally quote any identifier that
-# is an English language word, even if you do not have to."
-
 def _iterdump(connection):
-    """
-    Returns an iterator to the dump of the database in an SQL text format.
-
-    Used to produce an SQL dump of the database.  Useful to save an in-memory
-    database for later restoration.  This function should not be called
-    directly but instead called from the Connection method, iterdump().
-    """
-
     cu = connection.cursor()
     yield('BEGIN TRANSACTION;')
 
