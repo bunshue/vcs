@@ -104,9 +104,6 @@ import makemakefile
 import parsesetup
 import bkfile
 
-
-# Main program
-
 def main():
     # overridable context
     prefix = None                       # settable with -p option
@@ -137,89 +134,12 @@ def main():
     makefile = 'Makefile'
     subsystem = 'console'
 
-    # parse command line by first replacing any "-i" options with the
-    # file contents.
-    pos = 1
-    while pos < len(sys.argv)-1:
-        # last option can not be "-i", so this ensures "pos+1" is in range!
-        if sys.argv[pos] == '-i':
-            try:
-                options = open(sys.argv[pos+1]).read().split()
-            except IOError as why:
-                usage("File name '%s' specified with the -i option "
-                      "can not be read - %s" % (sys.argv[pos+1], why) )
-            # Replace the '-i' and the filename with the read params.
-            sys.argv[pos:pos+2] = options
-            pos = pos + len(options) - 1 # Skip the name and the included args.
-        pos = pos + 1
-
-    # Now parse the command line with the extras inserted.
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], 'r:a:dEe:hmo:p:P:qs:wX:x:l:')
-    except getopt.error as msg:
-        usage('getopt error: ' + str(msg))
-
-    # proces option arguments
-    for o, a in opts:
-        if o == '-h':
-            print(__doc__)
-            return
-        if o == '-d':
-            debug = debug + 1
-        if o == '-e':
-            extensions.append(a)
-        if o == '-m':
-            modargs = 1
-        if o == '-o':
-            odir = a
-        if o == '-p':
-            prefix = a
-        if o == '-P':
-            exec_prefix = a
-        if o == '-q':
-            debug = 0
-        if o == '-w':
-            win = not win
-        if o == '-s':
-            if not win:
-                usage("-s subsystem option only on Windows")
-            subsystem = a
-        if o == '-x':
-            exclude.append(a)
-        if o == '-X':
-            exclude.append(a)
-            fail_import.append(a)
-        if o == '-E':
-            error_if_any_missing = 1
-        if o == '-l':
-            addn_link.append(a)
-        if o == '-a':
-            modulefinder.AddPackagePath(*a.split("=", 2))
-        if o == '-r':
-            f,r = a.split("=", 2)
-            replace_paths.append( (f,r) )
-
-    # modules that are imported by the Python runtime
-    implicits = []
-    for module in ('site', 'warnings', 'encodings.utf_8', 'encodings.latin_1'):
-        if module not in exclude:
-            implicits.append(module)
-
-    # default prefix and exec_prefix
-    if not exec_prefix:
-        if prefix:
-            exec_prefix = prefix
-        else:
-            exec_prefix = sys.exec_prefix
-    if not prefix:
-        prefix = sys.prefix
-
     # determine whether -p points to the Python source tree
     ishome = os.path.exists(os.path.join(prefix, 'Python', 'ceval.c'))
 
     # locations derived from options
     version = sys.version[:3]
-    flagged_version = version + sys.abiflags
+    flagged_version = version
     if win:
         extensions_c = 'frozen_extensions.c'
     if ishome:
@@ -292,18 +212,9 @@ def main():
         if not os.path.isfile(arg):
             usage('%s: not a plain file' % arg)
 
-    # process non-option arguments
-    scriptfile = args[0]
-    modules = args[1:]
-
     # derive target name from script name
     base = os.path.basename(scriptfile)
     base, ext = os.path.splitext(base)
-    if base:
-        if base != scriptfile:
-            target = base
-        else:
-            target = base + '.bin'
 
     # handle -o option
     base_frozen_c = frozen_c
@@ -339,9 +250,7 @@ def main():
             usage(why)
 
 
-    # Actual work starts here...
 
-    # collect all modules of the program
     dir = os.path.dirname(scriptfile)
     path[0] = dir
     mf = modulefinder.ModuleFinder(path, debug, exclude, replace_paths)
@@ -368,22 +277,6 @@ def main():
     # Alias "importlib._bootstrap" to "_frozen_importlib" so that the
     # import machinery can bootstrap.
     mf.modules["_frozen_importlib"] = mf.modules["importlib._bootstrap"]
-
-    # Add the main script as either __main__, or the actual module name.
-    if python_entry_is_main:
-        mf.run_script(scriptfile)
-    else:
-        mf.load_file(scriptfile)
-
-    if debug > 0:
-        mf.report()
-        print()
-    dict = mf.modules
-
-    if error_if_any_missing:
-        missing = mf.any_missing()
-        if missing:
-            sys.exit("There are some missing modules: %r" % missing)
 
     # generate output for frozen modules
     files = makefreeze.makefreeze(base, dict, debug, custom_entry_point,
@@ -481,22 +374,10 @@ def main():
     finally:
         outfp.close()
 
-    # Done!
-
-    if odir:
-        print('Now run "make" in', odir, end=' ')
-        print('to build the target:', base_target)
-    else:
-        print('Now run "make" to build the target:', base_target)
-
-
-# Print usage message and exit
 
 def usage(msg):
     sys.stdout = sys.stderr
     print("Error:", msg)
     print("Use ``%s -h'' for help" % sys.argv[0])
-    sys.exit(2)
-
 
 main()

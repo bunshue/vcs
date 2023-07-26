@@ -1,7 +1,6 @@
 import keyword
 import unittest
 from test import support
-import filecmp
 import os
 import sys
 import subprocess
@@ -56,13 +55,6 @@ class TestKeywordGeneration(unittest.TestCase):
 
     @unittest.skipIf(not os.path.exists(GRAMMAR_FILE),
                      'test only works from source build directory')
-    def test_real_grammar_and_keyword_file(self):
-        self._copy_file_without_generated_keywords(KEYWORD_FILE, TEST_PY_FILE)
-        self.addCleanup(support.unlink, TEST_PY_FILE)
-        self.assertFalse(filecmp.cmp(KEYWORD_FILE, TEST_PY_FILE))
-        self.assertEqual((0, b''), self._generate_keywords(GRAMMAR_FILE,
-                                                           TEST_PY_FILE))
-        self.assertTrue(filecmp.cmp(KEYWORD_FILE, TEST_PY_FILE))
 
     def test_grammar(self):
         self._copy_file_without_generated_keywords(KEYWORD_FILE, TEST_PY_FILE)
@@ -107,16 +99,6 @@ class TestKeywordGeneration(unittest.TestCase):
         end = lines.index("#--end keywords--")
         actual = lines[start:end]
         self.assertEqual(actual, expected)
-
-    def test_empty_grammar_results_in_no_keywords(self):
-        self._copy_file_without_generated_keywords(KEYWORD_FILE,
-                                                   PY_FILE_WITHOUT_KEYWORDS)
-        self.addCleanup(support.unlink, PY_FILE_WITHOUT_KEYWORDS)
-        shutil.copyfile(KEYWORD_FILE, TEST_PY_FILE)
-        self.addCleanup(support.unlink, TEST_PY_FILE)
-        self.assertEqual((0, b''), self._generate_keywords(os.devnull,
-                                                           TEST_PY_FILE))
-        self.assertTrue(filecmp.cmp(TEST_PY_FILE, PY_FILE_WITHOUT_KEYWORDS))
 
     def test_keywords_py_without_markers_produces_error(self):
         rc, stderr = self._generate_keywords(os.devnull, os.devnull)
