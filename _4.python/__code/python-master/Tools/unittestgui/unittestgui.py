@@ -40,6 +40,7 @@ class BaseGUITestRunner(object):
         pass
 
     def runClicked(self):
+        print('你按了 runClicked')
         "To be called in response to user choosing to run a test"
         if self.running: return
         if not self.test_suite:
@@ -59,6 +60,7 @@ class BaseGUITestRunner(object):
             self.currentResult.stop()
 
     def discoverClicked(self):
+        print('你按了 discoverClicked')
         self.__rollbackImporter.rollbackImports()
         directory = self.getDirectoryToDiscover()
         if not directory:
@@ -200,6 +202,7 @@ class DiscoverSettingsDialog(simpledialog.Dialog):
         return None
 
     def selectDirClicked(self, master):
+        print('你按了 selectDirClicked')
         dir_path = filedialog.askdirectory(parent=master)
         if dir_path:
             self.dirVar.set(dir_path)
@@ -236,6 +239,7 @@ class TkTestRunner(BaseGUITestRunner):
         return filedialog.askdirectory()
 
     def settingsClicked(self):
+        print('你按了 settingsClicked')
         d = DiscoverSettingsDialog(self.top, self.top_level_dir, self.test_file_glob_pattern)
         self.top_level_dir = d.top_level_dir
         self.test_file_glob_pattern = d.test_file_glob_pattern
@@ -284,7 +288,6 @@ class TkTestRunner(BaseGUITestRunner):
 
         tk.Button(buttonFrame, text="Discover Tests",
                   command=self.discoverClicked).pack(fill=tk.X)
-
 
         self.stopGoButton = tk.Button(buttonFrame, text="Start",
                                       command=self.runClicked, state=tk.DISABLED)
@@ -429,16 +432,11 @@ class ProgressBar(tk.Frame):
                                             anchor=tk.CENTER,
                                             text=percentString)
 
-def main(initialTestName=""):
-    root = tk.Tk()
-    root.title("PyUnit")
-    runner = TkTestRunner(root, initialTestName)
-    root.protocol('WM_DELETE_WINDOW', root.quit)
-    root.mainloop()
+initialTestName = 'lion-mouse'
 
+window = tk.Tk()
+window.title("PyUnit")
+runner = TkTestRunner(window, initialTestName)
+window.protocol('WM_DELETE_WINDOW', window.quit)
 
-if __name__ == '__main__':
-    if len(sys.argv) == 2:
-        main(sys.argv[1])
-    else:
-        main()
+window.mainloop()
