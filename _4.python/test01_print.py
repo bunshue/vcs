@@ -247,6 +247,15 @@ usage(msg)
 
 #print("Serving {} on port {}, control-C to stop".format(path, port))
 
+
+def usage3(msg):
+    sys.stderr.write("%s: %s\n" % (sys.argv[0], msg))
+    sys.stderr.write("Usage: %s [-l] file ...\n" % sys.argv[0])
+    sys.stderr.write("Try `%s -h' for more information.\n" % sys.argv[0])
+
+msg = 'aaaa'
+usage3(msg)
+
 print('恢復正常顯示')
 
 import sys
