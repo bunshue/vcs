@@ -1,19 +1,11 @@
-
-"""A ScrolledText widget feels like a text widget but also has a
-vertical scroll bar on its right.  (Later, options may be added to
-add a horizontal bar as well, to make the bars disappear
-automatically when not needed, to move them to the other side of the
-window, etc.)
-
-Configuration options are passed to the Text widget.
-A Frame widget is inserted between the master and the text, to hold
-the Scrollbar widget.
-Most methods calls are inherited from the Text widget; Pack, Grid and
-Place methods are redirected to the Frame widget however.
+"""在檔頭用註解寫的字1
+在檔頭用註解寫的字2
+在檔頭用註解寫的字3
+在檔頭用註解寫的字4
+在檔頭用註解寫的字5
 """
 
 import sys
-
 
 print('字串處理專區------------------------------')  #30個
 
@@ -31,8 +23,6 @@ with open(filename, "w", encoding = 'utf-8') as fp:
     print(filename + " is dumping...")
     json.dump(titles, fp)
 '''
-
-
 
 query_string = 'abcdefghijklmn'
 query_number = 12345678901234
@@ -223,7 +213,6 @@ filename2 = 'C:/_git/vcs/_1.data/______test_files1/bbbbb.jpg'
 print("Copied %s to %s" % (filename1, filename2))
 
 
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print(filename)
@@ -243,29 +232,30 @@ print('python語言區------------------------------')  #30個
 
 
 
-print(__doc__)
+
 print(globals())
 
 
+print('__doc__ : 檔頭的註解')
+print(__doc__)
+
+print('__file__ : 此檔案長檔名')
 print(__file__)
-print(__file__.upper())
-print(__file__.lower())
-print(__name__)
+print(__file__.upper()) #長檔名轉大寫
+print(__file__.lower()) #長檔名轉小寫
+
+print('__name__ : 目前所在模組名')
 print(__name__)
 #print(__name__._version)
-print(__doc__)
-print(__doc__)  # the docstring of this module above
 
+print('sympy模組的版本')
 import sympy
 VERSION = sympy.__version__
 print(VERSION)
 
+print('selenium模組的版本')
 import selenium
 print(selenium.__version__)
-
-
-
-
 
 import sys
 #import somemodule as sm	#幫模組取個別名
@@ -274,16 +264,7 @@ print (sys.argv)
 #print (s.argv)
 
 
-print('檔頭的註解')
-print(__doc__)
-
-
-
-
-
 print('語法專區------------------------------')  #30個
-
-
 
 
 print('for-test')

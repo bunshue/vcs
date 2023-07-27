@@ -209,22 +209,11 @@ for name in os.listdir(foldername):
     destname = os.path.normpath(os.path.join(dest, name))
     #print("%s -> %s" % (filename, destname))
 
-here = os.path.abspath(os.path.dirname(__file__))
-par = os.path.pardir
-
-print(here)
-print(par)
-
-ROOT = os.path.abspath(os.path.join(here, par, par))
-
-print(ROOT)
-
 old_cd = os.getcwd()
 
 print(old_cd)
 
 print('------------------------------')  #30個
-
 
 #os.chdir(os.path.join(ROOT, TK, "win"))
 

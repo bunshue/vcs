@@ -15,9 +15,12 @@ def usage(msg = ''):
 usage()
 
 
+print()
+print(globals())
+print()
 
-
-import sys
+print('__doc__ : 檔頭的註解')
+print(__doc__)
 
 string = 'this is a lion-mouse'
 

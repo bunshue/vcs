@@ -207,14 +207,6 @@ class MultiProcessingCmdLineMixin():
             pyc_file = support.make_legacy_pyc(script_name)
             self._check_script(script_dir)
 
-    def test_zipfile(self):
-        source = self.main_in_children_source
-        with temp_dir() as script_dir:
-            script_name = _make_test_script(script_dir, '__main__',
-                                            source=source)
-            zip_name, run_name = make_zip_script(script_dir, 'test_zip', script_name)
-            self._check_script(zip_name)
-
     def test_zipfile_compiled(self):
         source = self.main_in_children_source
         with temp_dir() as script_dir:
