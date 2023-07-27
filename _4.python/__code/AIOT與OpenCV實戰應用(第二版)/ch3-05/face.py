@@ -1,3 +1,5 @@
+#臉部偵測
+
 import cv2
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')

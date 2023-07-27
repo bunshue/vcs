@@ -1,3 +1,7 @@
+'''
+用 opencv 寫字
+'''
+
 import numpy as np
 import cv2
 
@@ -25,3 +29,4 @@ for f in font:
 cv2.imshow("draw", gc)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+

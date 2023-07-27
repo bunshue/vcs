@@ -95,8 +95,9 @@ CREATE TABLE IF NOT EXISTS table01 (
 cursor.execute(sqlstr)
 conn.commit() # 更新
 
+#INSERT 新增資料
 print('新增資料 3 筆 寫法一')
-#INSERT 新增資料, id_num不可重複
+#id_num不可重複
 sqlstr = 'INSERT INTO table01 VALUES (5, "Apple", 333)'
 cursor.execute(sqlstr)
 sqlstr = 'INSERT INTO table01 VALUES (1, "Banana", 777)'
@@ -122,18 +123,17 @@ for data in datas:
     cursor.execute(sqlstr)
 conn.commit() # 更新
 
-print('新增資料 2 筆 寫法四')
-#INSERT 新增資料
+print('新增資料 1 筆 寫法四')
 number = 7
 name = 'Happy'
 money = 999
 sqlstr = "INSERT INTO table01 VALUES ({},'{}','{}');".format(number, name, money)
 cursor.execute(sqlstr)
-number = 6
-name = 'India'
-money = 555
-sqlstr = "INSERT INTO table01 VALUES ({},'{}','{}');".format(number, name, money)
-cursor.execute(sqlstr)
+
+print('新增資料 1 筆 寫法五')
+data = (6, 'India', 555)
+cursor.execute('INSERT INTO table01 VALUES (?, ?, ?)', data)
+
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 
@@ -194,6 +194,14 @@ if not row == None:
     print("{}\t{}\t{}".format(row[0], row[1], row[2]))
 else:
     print('找不到' + str(number) + '號資料')
+
+print('指明抓名字有pp的資料')
+data = ('%pp%',)    #pp在中間 前後要有%
+cursor = conn.execute('SELECT * FROM table01 WHERE name like ?', data)    #條件
+rows = cursor.fetchall()    #讀取全部資料
+print('共有 : ' + str(len(rows)) + " 筆資料")
+print('顯示原始資料')
+print(rows)
     
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
