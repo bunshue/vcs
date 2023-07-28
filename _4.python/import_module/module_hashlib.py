@@ -18,8 +18,6 @@ value = hashlib.md5(string.encode('utf8'))
 print(value)
 
 #計算 MD5 雜湊值
-# 引入 hashlib 模組
-import hashlib
 
 # 建立 MD5 物件
 m = hashlib.md5()
@@ -36,7 +34,6 @@ h = m.hexdigest()
 print(h)
 
 #計算檔案的 MD5 雜湊值
-import hashlib
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt'
 
@@ -48,18 +45,6 @@ with open(filename, "rb") as f:
     m.update(chunk)
 
 h = m.hexdigest()
-print(h)
-
-
-print('計算 SHA 雜湊值')
-import hashlib
-
-# 建立 SHA1 物件
-s = hashlib.sha1()
-
-data = "G. T. Wang"
-s.update(data.encode("utf-8"))
-h = s.hexdigest()
 print(h)
 
 '''
@@ -95,58 +80,26 @@ print('計算結果 : ', calculated_filehash)
 
 print('------------------------------')  #30個
 
-print('算一個字串的hashcode')
-import hashlib
+print('算一個字串的hashcode SHA1')
+print('ccccccccccccccccccccccccccc')
 
 s = hashlib.sha1()
-data = "this is a lion-mouse"
-s.update(data.encode('utf-8'))
-h = s.hexdigest()
-print(h)
+string = "this is a lion-mouse"
+s.update(string.encode('utf-8'))
+result = s.hexdigest()
+print(result)
+
+print('計算 SHA 雜湊值')
+s = hashlib.sha1()  # 建立 SHA1 物件
+s.update(string.encode("utf-8"))
+result = s.hexdigest()
+print(result)
+
+result = hashlib.sha1(string.encode('utf-8')).hexdigest()
+print(result)
 
 
 print('------------------------------')  #30個
-
-print('算一個檔案的hashcode')
-
-import hashlib
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-s = hashlib.sha1()
-s.update(filename.encode('utf-8'))
-
-with open(filename, 'rb') as f:
-    s.update(f.read())
-
-h = s.hexdigest()
-print(h)
-'''
-string = 'this is a lion-mouse'
-md5 = hashlib.md5(string).hexdigest()
-print('md5 : ', md5)
-'''
-
-print('------------------------------')  #30個
-
-
-#字符串轉 md5 工具
-import hashlib
-
-string = 'lion-mouse'
-print(string)
-
-string_data = string.strip().replace("\n","").encode()
-
-myMd5 = hashlib.md5()
-myMd5.update(string_data)
-myMd5_Digest = myMd5.hexdigest()
-print(myMd5_Digest)
-
-
-print('------------------------------')  #30個
-
-import hashlib
 
 def compute_checksum(input, length=None):
     input = input or ''
@@ -164,9 +117,44 @@ computed = "output={} input={}".format(compute_checksum(output, 16), compute_che
 
 print(computed)
 
+print('------------------------------')  #30個
+
+print('算一個檔案的hashcode SHA1')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+s = hashlib.sha1()
+s.update(filename.encode('utf-8'))
+
+with open(filename, 'rb') as f:
+    s.update(f.read())
+
+h = s.hexdigest()
+print(h)
+
+print('------------------------------')  #30個
+
+#字符串轉 md5 工具
+
+string = 'lion-mouse'
+print(string)
+
+string_data = string.strip().replace("\n","").encode()
+
+myMd5 = hashlib.md5()
+myMd5.update(string_data)
+myMd5_Digest = myMd5.hexdigest()
+print(myMd5_Digest)
 
 
 
+print('------------------------------')  #30個
+
+string = 'this is a lion-mouse'
+md5 = hashlib.md5(string.encode()).hexdigest()
+print('md5 : ', md5)
+
+print('------------------------------')  #30個
 
 
 
@@ -174,12 +162,7 @@ print('------------------------------')  #30個
 
 
 
-
-
-
 print('------------------------------')  #30個
-
-
 
 
 

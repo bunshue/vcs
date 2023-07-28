@@ -1,27 +1,21 @@
-import sys, os
+from random import randint, random, getrandbits
 
-execdir = os.path.dirname(sys.argv[0])
-executable = os.path.join(execdir, "Python")
-resdir = os.path.join(os.path.dirname(execdir), "Resources")
-libdir = os.path.join(os.path.dirname(execdir), "Frameworks")
-mainprogram = os.path.join(resdir, "idlemain.py")
+def getrandbytes(size):
+    return getrandbits(8 * size).to_bytes(size, 'little')
 
-sys.argv.insert(1, mainprogram)
-if 0 or 0:
-    os.environ["PYTHONPATH"] = resdir
-    if 0:
-        os.environ["PYTHONHOME"] = resdir
-else:
-    pypath = os.getenv("PYTHONPATH", "")
-    if pypath:
-        pypath = ":" + pypath
-    os.environ["PYTHONPATH"] = resdir + pypath
-os.environ["PYTHONEXECUTABLE"] = executable
-os.environ["DYLD_LIBRARY_PATH"] = libdir
-os.environ["DYLD_FRAMEWORK_PATH"] = libdir
-os.execve(executable, sys.argv, os.environ)
+
+ccc = b'111' + getrandbytes(100)
+
+print(type(ccc))
+print(ccc)
+
+datacount = randint(16, 64) * 1024 + randint(1, 1024)
+
+ddd = random() * randint(-1000, 1000)
+print(ddd)
 
 
 
-
+    
+    
 

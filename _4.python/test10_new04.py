@@ -5,7 +5,6 @@ import itertools
 import threading
 import subprocess
 from optparse import OptionParser, SUPPRESS_HELP
-import platform
 
 def bark(duration):
 
@@ -19,41 +18,16 @@ def bark(duration):
     end_time = start_time + duration * 2.0
     i = 0
     while _time() < end_time:
-        print('b')
+        print('b', end = ' ')
         i += 1
 
 
 bark(0.2)
 
 
-import platform
-
-print("== %s %s (%s) ==" % (
-    platform.python_implementation(),
-    platform.python_version(),
-    platform.python_build()[0],
-))
-
-# Processor identification often has repeated spaces
-cpu = ' '.join(platform.processor().split())
-print("== %s %s on '%s' ==" % (
-    platform.machine(),
-    platform.system(),
-    cpu,
-))
-print()
+print('------------------------------')  #30個
 
 
-
-'''
-import hashlib
-
-string = 'lion-mouse'
-
-result = hashlib.sha1(string).digest() 
-
-print(result)
-'''
 
 import sys
 import time
@@ -142,6 +116,12 @@ name = '%04i-%02i-%02i %02i:%02i:%02i' % \
 print(name)
 
 
+print('------------------------------')  #30個
+
+
+print('------------------------------')  #30個
+
+
 
 # Ring bell
 sys.stderr.write('\007')
@@ -152,13 +132,15 @@ __version__ = '2.1'
 print('-' * LINE)
 print('PYBENCH %s' % __version__)
 print('-' * LINE)
-print('* using %s %s' % (
-    getattr(platform, 'python_implementation', lambda:'Python')(),
-    ' '.join(sys.version.split())))
 
 
-print('字串的 title 用法')
-s = 'this is a lion mouse'
+print('------------------------------')  #30個
 
-print(s.title())
+
+
+
+
+print('------------------------------')  #30個
+
+
 

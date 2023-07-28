@@ -27,6 +27,11 @@ yt = YouTube(url, use_oauth = True, allow_oauth_cache = True)
 print('----------------------------------------------------------------------')	#70個
 print('Youtube 測試 1 影片資訊')
 
+#print('所有影片格式')
+#print(yt.streams)
+length = len(yt.streams)
+print("影片格式共有 " + str(length) + ' 種')
+
 print("影片名稱：" + yt.title)
 
 #print(yt.captions)
@@ -39,11 +44,6 @@ if length > 0:
                 print(cc.url)
                 print(cc.name)
                 print(cc.code)
-
-#print('所有影片格式')
-#print(yt.streams)
-length = len(yt.streams)
-print("影片格式共有 " + str(length) + ' 種')
 
 # 打印出视频支持下载的音频/视频格式，分辨率，视频编解码方式，音频码率，每条流对应的itag
 print(type(yt.streams))

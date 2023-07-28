@@ -1,15 +1,6 @@
-"""在檔頭用註解寫的字1
-在檔頭用註解寫的字2
-在檔頭用註解寫的字3
-在檔頭用註解寫的字4
-在檔頭用註解寫的字5
-"""
-
 import sys
 
 print('字串處理專區------------------------------')  #30個
-
-
 
 target = 'https://tw.appledaily.com/new/realtime/{}'
 
@@ -47,14 +38,6 @@ print(postgres_insert_query)
 
 print('------------------------------')  #30個
 
-
-
-
-print('------------------------------')  #30個
-
-
-
-print('------------------------------')  #30個
 
 
 
@@ -234,10 +217,6 @@ print('python語言區------------------------------')  #30個
 
 
 print(globals())
-
-
-print('__doc__ : 檔頭的註解')
-print(__doc__)
 
 print('__file__ : 此檔案長檔名')
 print(__file__)
@@ -427,40 +406,9 @@ cmd = 'dir'
 if os.system(cmd) != 0:
     raise RuntimeError(cmd)
 
-
-print('------------------------------')  #30個
-
-def msg(str):
-    sys.stderr.write(str + '\n')
-
-longlist = '-l'
-filename = 'test01_io.py'
-
-sts = os.system('ls ' + longlist + ' ' + filename)
-if sts:
-    msg('"ls -l" exit status: ' + repr(sts))
-
-sts = os.system('ls ' + filename)
-if sts:
-    msg('"ls -l" exit status: ' + repr(sts))
-
-sts = os.system('dir')
-if sts:
-    msg('"ls -l" exit status: ' + repr(sts))
-else:
-    print(sts)
-
-
-print('------------------------------')  #30個
-
-
 os.system('cmd')
 
-
-
 print('------------------------------')  #30個
-
-
 
 print('處理網址資料')
 
