@@ -26,5 +26,6 @@ cv2.drawContours(frame, [approx_rect], -1, (0, 0, 255), 5)
 cv2.drawContours(frame, [approx_hex], -1, (0, 0, 255), 5)
 
 cv2.imshow('frame', frame)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()

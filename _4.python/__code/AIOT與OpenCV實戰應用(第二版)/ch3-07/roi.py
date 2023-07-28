@@ -21,16 +21,16 @@ while True:
     ret, frame = cap.read()
     frame = cv2.flip(frame, 1)
 
-#### 在while內
-    # 取出子畫面
+    # 取出子畫面 並做影像處理
     roi = roiarea(frame)
     roi = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+    
     # 將處理完的子畫面貼回到原本畫面中
     frame = replaceroi(frame, roi)
 
-#### 在while內
     # 在 ROI 範圍處畫個框
     cv2.rectangle(frame, RECT[0], RECT[1], (0,0,255), 2)
+    
     cv2.imshow('frame', frame)
     
     if cv2.waitKey(1) == 27: 

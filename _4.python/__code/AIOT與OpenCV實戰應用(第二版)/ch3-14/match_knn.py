@@ -1,15 +1,15 @@
 import cv2
-import argparse
 
-ap = argparse.ArgumentParser()
-ap.add_argument('-i1', '--image1', required=True,
-    help='first image')
-ap.add_argument('-i2', '--image2', required=True,
-    help='second image')
-args = vars(ap.parse_args())
+filename1 = 'box.png'
+filename2 = 'box_in_scene.png'
 
-img1 = cv2.imread(args['image1'])
-img2 = cv2.imread(args['image2'])
+'''
+img1 = cv2.imread(filename1, -1)
+img2 = cv2.imread(filename2, -1)
+'''
+
+img1 = cv2.imread(filename1)
+img2 = cv2.imread(filename2)
 
 #feature = cv2.xfeatures2d.SIFT_create()
 feature = cv2.xfeatures2d.SURF_create()
@@ -30,6 +30,8 @@ img3 = cv2.drawMatchesKnn(img1, kp1, img2, kp2, [good], outImg=None,
 width, height, channel = img3.shape
 ratio = float(width) / float(height)
 img3 = cv2.resize(img3, (1024, int(1024 * ratio)))
+
 cv2.imshow('video', img3)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()

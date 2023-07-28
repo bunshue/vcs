@@ -103,6 +103,9 @@ else:
     print(filename, '不是 資料夾')
 
 
+
+
+
 print('----長檔名 轉 短檔名 basename()--------------------------')  #30個
 
 print('長檔名 轉 短檔名 basename()')
@@ -569,6 +572,140 @@ os.path.basename(script):
 installer_name = os.path.abspath(installer_name)
 
 if os.path.exists(installer_name): os.unlink(installer_name)
+
+
+
+os.chdir(dir)
+os.rename(fn, ','+fn)
+
+if os.path.normcase(fn).endswith(".py") or os.path.isdir(fn):
+        
+
+os.remove(os.path.join(lib_dir, "win32", "dbi.pyd.old"))
+
+
+
+import os
+
+開啟外部程式
+#rc = os.system("nasm -f win64 -DNEAR -Ox -g ms\\uptable.asm")
+
+rc = os.system('calc')
+
+os.system('cls') #在cmd視窗下清除螢幕
+
+os.system('cls' if os.name == 'nt' else 'clear')
+
+
+        if os.path.isfile(arg):
+        elif os.path.isdir(arg):
+
+    if os.path.isfile(file):
+        test = os.path.join(dir, "test")
+        if os.path.isdir(test):
+            # Add the "test" directory to PYTHONPATH.
+            sys.path = sys.path + [test]
+
+
+TEST_SUPPORT_DIR = os.path.dirname(os.path.abspath(__file__))
+TEST_HOME_DIR = os.path.dirname(TEST_SUPPORT_DIR)
+self._environ = os.environ
+
+self.procfile = '/proc/{pid}/statm'.format(pid=os.getpid())
+
+
+
+pathdir = 'd:\\tem1'  #下載資料夾
+if not os.path.isdir(pathdir):  #如果資料夾不存在就建立
+    os.mkdir(pathdir)
+
+
+import os
+
+dir = "myDir"
+
+if not os.path.exists(dir):
+    os.mkdir(dir)
+else:
+    print(dir + "已經建立!")   
+
+
+if os.path.isdir(foldername):
+    print('T')
+else:
+    print('F')
+
+if os.path.exists(foldername):
+    print('T')
+else:
+    print('F')
+
+
+cur_path = os.path.dirname(__file__) # 取得目前路徑
+
+
+
+import os
+dir = "myDir"
+if os.path.exists(dir):
+    os.rmdir(dir)
+else:
+    print(dir + "目錄未建立!")  
+ 
+ 
+ import os
+file = "myFile.txt"
+if os.path.exists(file):
+    os.remove(file)
+else:
+    print(file + "檔案未建立!")   
+
+
+import os
+
+cur_path=os.path.dirname(__file__) # 取得目前路徑  
+os.system("cls")  # 清除螢幕
+os.system("mkdir dir2")  # 建立 dir2 目錄
+os.system("copy ossystem.py dir2\copyfile.py") # 複製檔案 
+file=cur_path + "\dir2\copyfile.py" 
+os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
+
+
+cur_path = os.path.dirname(__file__) # 取得目前路徑
+
+
+import sys
+
+sys.path.insert(0, "../src")
+
+
+if not os.path.exists("fb-photos"):  # 建立 fb-photos 目錄
+    os.mkdir("fb-photos")
+
+
+       filename = img['source'].split('/')[-1].split('?')[0]
+       print(filename)
+
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+dirname = os.path.dirname(__file__)"
+
+import os
+
+DB_FILE = "mydb"
+if os.path.exists(DB_FILE):
+    os.remove(DB_FILE)
+
+
+
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+directory = os.path.dirname(filename) or '.'
+
+
 
 
 '''

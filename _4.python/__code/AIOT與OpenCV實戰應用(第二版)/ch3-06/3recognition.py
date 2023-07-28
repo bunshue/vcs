@@ -5,6 +5,7 @@ model.read('faces.data')
 print('load training data done')
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
 cap = cv2.VideoCapture(0)
 cv2.namedWindow('video', cv2.WINDOW_NORMAL)
 # 可識別化名稱
