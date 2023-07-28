@@ -7,10 +7,11 @@ lower = np.array(color[0], dtype="uint8")
 upper = np.array(color[1], dtype="uint8")
 
 cap = cv2.VideoCapture(0)
-ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / \
-        cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+
+ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 WIDTH = 400
 HEIGHT = int(WIDTH / ratio)
+
 while True:
     ret, frame = cap.read()
     frame = cv2.resize(frame, (WIDTH, HEIGHT))

@@ -1,6 +1,11 @@
 import cv2
 
-RECT = ((220, 20), (370, 190))
+x_st = 150
+y_st = 150
+x_sp = x_st + 200
+y_sp = y_st + 100
+
+RECT = ((x_st, y_st), (x_sp, y_sp))
 (left, top), (right, bottom) = RECT
 
 def roiarea(frame):
@@ -11,15 +16,9 @@ def replaceroi(frame, roi):
     return frame
 
 cap = cv2.VideoCapture(0)
-ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / \
-        cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-
-WIDTH = 400
-HEIGHT = int(WIDTH / ratio)
 
 while True:
     ret, frame = cap.read()
-    frame = cv2.resize(frame, (WIDTH, HEIGHT))
     frame = cv2.flip(frame, 1)
 
 #### 在while內

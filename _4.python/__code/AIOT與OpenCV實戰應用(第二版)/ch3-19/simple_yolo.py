@@ -38,15 +38,12 @@ def drawBox(image, classes, confs, boxes, names, colors):
     return new_image
 
 model, names, colors = initNet()
+
 cap = cv2.VideoCapture(0)
-ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-WIDTH = 800
-HEIGHT = int(WIDTH / ratio)
 
 while True:
     begin_time = time.time()
     ret, frame = cap.read()
-    frame = cv2.resize(frame, (WIDTH, HEIGHT))
     
     classes, confs, boxes = nnProcess(frame, model)
     frame = drawBox(frame, classes, confs, boxes, names, colors)

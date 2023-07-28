@@ -1,5 +1,7 @@
 import cv2
+
 cap = cv2.VideoCapture('vtest.avi')
+
 bg = None
 
 while True:
@@ -35,3 +37,4 @@ while True:
     if cv2.waitKey(100) == 27:
         cv2.destroyAllWindows()
         break
+

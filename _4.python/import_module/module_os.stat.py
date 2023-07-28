@@ -267,3 +267,21 @@ else:
         msg(filename + ': not executable')
 
 
+print('------------------------------')  #30個
+
+foldername1 = 'C:/_git/vcs/_1.data/______test_files1'
+foldername2 = 'C:/_git/vcs/_1.data/______test_files2'
+foldername3 = 'C:/_git/vcs/_1.data/______test_files3'
+
+if os.stat(foldername1).st_mtime < os.stat(foldername2).st_mtime:
+    print('foldername1 較早')
+else:
+    print('foldername1 較晚')
+
+
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
