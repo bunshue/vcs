@@ -71,13 +71,6 @@ err('%s: cannot open: %r\n' % (filename, msg))
 word = word.strip()
 
 
-        if os.path.isdir(arg):
-            if recursedown(arg): bad = 1
-        elif os.path.islink(arg):
-            err(arg + ': will not process symbolic links\n')
-            bad = 1
-        else:
-            if fix(arg): bad = 1
 
     dbg('recursedown(%r)\n' % (dirname,))
 ##  dbg('fix(%r)\n' % (filename,))
@@ -397,17 +390,6 @@ print('------------------------------')  #30個
 
 
 
-print('os.system------------------------------')  #30個
-
-
-print('製作cmd指令')
-
-cmd = 'dir'
-if os.system(cmd) != 0:
-    raise RuntimeError(cmd)
-
-os.system('cmd')
-
 print('------------------------------')  #30個
 
 print('處理網址資料')
@@ -656,36 +638,6 @@ fp.close()
 print('------------------------------')  #30個
 
 
-import os
-import sys
-
-print(sys.maxsize)
-print(2 ** 32)
-
-import os
-import stat
-
-print(os.name)
-print(os.sep)
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-foldername = os.path.dirname(filename)
-print(filename)
-print(foldername)
-
-if os.path.exists(filename):
-    print('True')
-else:
-    print('False')
-
-if os.path.isdir(filename):
-    print('True')
-else:
-    print('False')
-
-print('------------------------------')  #30個
-
 from random import randint
 
 # Return a random color string in the form #RRGGBB
@@ -741,21 +693,336 @@ print(b.color)
 
 print('------------------------------')  #30個
 
+
+print('------------------------------')  #30個
+
+
+print('字元轉unicode')
+string = '你'
+
+print(ord(string))
+
+#print(hex(ord(string)))
+
+print('十進位 轉 十六進位')
+
+# Convert a decimal to a hex as a string 
+def decimalToHex(decimalValue):
+    hex = ""
+ 
+    while decimalValue != 0:
+        hexValue = decimalValue % 16 
+        hex = toHexChar(hexValue) + hex
+        decimalValue = decimalValue // 16
+    
+    return hex
+  
+# Convert an integer to a single hex digit in a character 
+def toHexChar(hexValue):
+    if 0 <= hexValue <= 9:
+        return chr(hexValue + ord('0'))
+    else:  # 10 <= hexValue <= 15
+        return chr(hexValue - 10 + ord('A'))
+
+decimalValue = 170
+hexValue = decimalToHex(decimalValue)
+print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
+
+decimalValue = 65535
+hexValue = decimalToHex(decimalValue)
+print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
+
+level = 123
+levelnum = 170
+print(" * PY_RELEASE_LEVEL = %r = %s" % (level, hex(levelnum)))
+
+
+print('------------------------------')  #30個
+
+print('------------------------------')  #30個
+
+print('list之使用')
+
+llll = ['aa', 'bb', 'cc', 'dd', 'ee']
+pppp = llll[2:] #第二項(含)以後的
+print(llll)
+print(pppp)
+
+table1 = [] #list
+table2 = {} #dict
+print(type(table1))
+print(type(table2))
+
+print('------------------------------')  #30個
+
+a_dict = {}
+print(type(a_dict))
+
+a_list = []
+print(type(a_list))
+
+
+target_url = 'https://www.nkust.edu.tw/p/403-1000-12-{}.php'
+
+for page in range(1, 6):
+    html = target_url.format(page)
+    print(html)
+
+
+data = list()
+for page in range(1, 6):
+    pdate = 'aaaa'
+    title = 'bbbb'
+    link = 'cccc'
+    data.append((pdate, link, title))
+print(type(data))
+print(data)
+
+
+print('------------------------------')  #30個
+
+print('------------------------------')  #30個
+
+contents = list()
+
+for page in range(1, 6):
+    content = dict()
+    content['link'] = 'aaaaa'
+    content['content'] = 'bbbbb'
+    content['date'] = 'ccccc'
+    content['title'] = 'ddddd'
+    contents.append(content)
+    
+print(contents)
+
+print('------------------------------')  #30個
+
+print('------------------------------')  #30個
+
+
+print('------------------------------')  #30個
+
+print('------------------------------')  #30個
+
+
+
+import abc
+metaclass = abc.ABCMeta
+print(metaclass)
+
+import uuid
+id = str(uuid.uuid4())
+print(id)
+    
+
+import sys
+if sys.version_info.major < 3 or sys.version_info.minor < 3:
+    sys.exit("Error: clinic.py requires Python 3.3 or greater.")
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+print('格式化字串')
+
+print(12345)
+
+print('八位數 前面補0')
+print('{:08d}\n{:08d}\n{:08d}'.format(123, 1234, 12345))
+
+
+
+
+print('------------------------------')  #30個
+
+
+import tempfile
+
+cabname = tempfile.mktemp(suffix=".cab")
+print(cabname)
+
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+print('字串的 title 用法')
+s = 'this is a lion mouse'
+
+print(s.title())
+
+
+
+print('------------------------------')  #30個
+
+import test
+packagedir = os.path.dirname(test.__file__)
+
+import email
+packagedir = os.path.dirname(email.__file__)
+print(packagedir)
+
+'''
+import time
+print(time.strptime(date, '%Y-%m-%d'))
+print(time.strptime(time_, '%H:%M:%S'))
+'''
+
+print('------------------------------')  #30個
+
+
+print('------------------------------')  #30個
+
+
+
+import time
 import os
 import sys
-from stat import *
+import itertools
+import threading
+import subprocess
+from optparse import OptionParser, SUPPRESS_HELP
 
-print('顯示目前 PATH')
-print(sys.path)
-print(sys.path[0])
+def bark(duration):
 
-pathlist = os.environ['PATH'].split(os.pathsep)
-print(pathlist)
+    _time = time.time
+    _sleep = time.sleep
+    
+    # We give the parent some time to be ready.
+    _sleep(1.0)
 
-#filename = os.path.join(dir, prog)
+    start_time = _time()
+    end_time = start_time + duration * 2.0
+    i = 0
+    while _time() < end_time:
+        print('b', end = ' ')
+        i += 1
+
+
+bark(0.2)
+
+
 print('------------------------------')  #30個
 
 
+
+import sys
+import time
+import platform
+CALIBRATION_LOOPS = 10
+calibration_loops = range(CALIBRATION_LOOPS)
+
+print(type(calibration_loops))
+print(calibration_loops)
+
+
+MILLI_SECONDS = 1e3
+MICRO_SECONDS = 1e6
+PERCENT = 100
+LINE = 79
+MIN_TEST_RUNTIME = 1e-3
+
+
+name = 'david'
+min_time = 11.11
+avg_time = 22.22
+op_avg = 33.33
+min_overhead = 44.44
+total_min_time = 55.55
+total_avg_time = 66.66
+other_min_time = 77.77
+warp = 88.88
+min_diff = 99.99
+other_avg_time = 12.34
+avg_diff =  23.45
+overhead_times = 34.56
+overhead_times = 45.67
+eff_time = 56.78
+abs_time = 67.89
+min_overhead = 78.90
+
+print('%30s:  %5.0fms  %5.0fms  %6.2fus  %7.3fms' % \
+      (name,
+       min_time * MILLI_SECONDS,
+       avg_time * MILLI_SECONDS,
+       op_avg * MICRO_SECONDS,
+       min_overhead *MILLI_SECONDS))
+print('-' * LINE)
+print('Totals:                        '
+      ' %6.0fms %6.0fms' %
+      (total_min_time * MILLI_SECONDS,
+       total_avg_time * MILLI_SECONDS,
+       ))
+print()
+
+print('%30s: %5.0fms %5.0fms %7s %5.0fms %5.0fms %7s' % \
+      (name,
+       min_time * MILLI_SECONDS,
+       other_min_time * MILLI_SECONDS * warp / warp,
+       min_diff,
+       avg_time * MILLI_SECONDS,
+       other_avg_time * MILLI_SECONDS * warp / warp,
+       avg_diff))
+
+'''
+print('%30s:  %6.3fms  %6.3fms' % \
+      (name,
+       min(overhead_times) * MILLI_SECONDS,
+       max(overhead_times) * MILLI_SECONDS))
+'''
+
+print('    %5.0fms    %5.0fms %7.3fms' % \
+      (eff_time * MILLI_SECONDS,
+       abs_time * MILLI_SECONDS,
+       min_overhead * MILLI_SECONDS))
+
+i = 123
+print(' Round %-25i  effective   absolute  overhead' % (i+1))
+
+print('%30s:' % name, end=' ')
+
+
+print('Calib. prep time     = %.6fms' % (
+    total_min_time * MILLI_SECONDS))
+
+
+# Name of the benchmark
+name = '%04i-%02i-%02i %02i:%02i:%02i' % \
+       (time.localtime(time.time())[:6])
+
+print(name)
+
+
+print('------------------------------')  #30個
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
 print('------------------------------')  #30個
 
 
@@ -770,6 +1037,45 @@ print('------------------------------')  #30個
 
 
 
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+print('------------------------------')  #30個
+
+'''  最後放 os sys 大集合
+os.
+os.
+sys.
+sys.
+'''
+
+
+import os
+import sys
+
+print(sys.maxsize)
+print(2 ** 32)
+
+import os
+import stat
+
+print(os.name)
+print(os.sep)
+
+
+
+print('------------------------------')  #30個
 
 
 

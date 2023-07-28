@@ -1,4 +1,5 @@
 import cv2
+
 RECT = ((220, 20), (370, 190))
 (left, top), (right, bottom) = RECT
 

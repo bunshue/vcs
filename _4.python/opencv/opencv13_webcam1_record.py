@@ -6,6 +6,8 @@ WebCam 使用
 目前 webcam 僅 x64 電腦可用
 '''
 
+ESC = 27
+
 import cv2
 import time
 import sys
@@ -18,6 +20,15 @@ fourcc = cv2.VideoWriter_fourcc(*'XVID')
 # 建立 VideoWriter 物件，輸出影片至檔案
 # FPS 值為 20.0，解析度為 640x360
 out = cv2.VideoWriter(filename, fourcc, 20.0, (640, 480))
+
+''' 調整影片大小
+ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+WIDTH = 400
+HEIGHT = int(WIDTH / ratio)
+
+fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+out = cv2.VideoWriter('video.mp4', fourcc, 30, (WIDTH, HEIGHT))
+'''
 
 # 解析 Fourcc 格式資料的函數
 def decode_fourcc(v):
@@ -54,6 +65,11 @@ while True:
       print('無影像, 離開')
       break
 
+    ''' 調整影片大小
+    frame = cv2.resize(frame, (WIDTH, HEIGHT))
+    frame = cv2.flip(frame, 1)
+    '''
+
     #改變圖片大小
     #frame = cv2.resize(frame, None, fx = 1.5, fy = 1.5, interpolation = cv2.INTER_AREA)
 
@@ -63,10 +79,10 @@ while True:
     cv2.imshow('WebCam', frame)    # 顯示圖片
 
     # 寫入影格
-    out.write(frame)
+    out.write(frame)  # 影像大小必須與設定一致，否則會輸出失敗
 
     k = cv2.waitKey(1)
-    if k == 27:     #ESC
+    if k == ESC:     #ESC
         break
     elif k == ord('q'): # 若按下 q 鍵則離開迴圈
         break

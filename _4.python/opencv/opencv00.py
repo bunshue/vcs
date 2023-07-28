@@ -54,6 +54,16 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 print('----------------------------------------------------------------------')	#70個
 
+import cv2
+print('開啟一圖, 直接變成灰階')
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接變成灰階
+cv2.imshow('image', image)
+
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
+cv2.destroyAllWindows()
+print('----------------------------------------------------------------------')	#70個
+
 
 '''
 #播放檔案
