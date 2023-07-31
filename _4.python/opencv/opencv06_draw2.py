@@ -1,7 +1,7 @@
 import cv2 
 import numpy as np
 
-gc = np.zeros((512, 512, 3), dtype=np.uint8)
+gc = np.zeros((512, 512, 3), dtype = np.uint8)
 gc.fill(255)
 
 cv2.line(gc, (10, 50), (400, 300), (255, 0, 0), 5)

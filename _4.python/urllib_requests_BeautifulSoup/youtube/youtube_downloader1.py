@@ -51,7 +51,7 @@ if length > 0:
         print(cc.name)
         print(cc.code)
 
-# 打印出视频支持下载的音频/视频格式，分辨率，视频编解码方式，音频码率，每条流对应的itag
+# 打印出視頻支持下載的音頻/視頻格式，分辨率，視頻編解碼方式，音頻碼率，每條流對應的itag
 print(type(yt.streams))
 length = len(yt.streams)
 print('有', length, '種格式')
@@ -149,6 +149,8 @@ print(srt)
 '''
 
 print('----------------------------------------------------------------------')	#70個
+print('----------------------------------------------------------------------')	#70個
+print('----------------------------------------------------------------------')	#70個
 print('Youtube 測試 1 播放清單 影片資訊')
 
 print('從播放清單取得所有影片連結')
@@ -158,6 +160,7 @@ if '&list' not in url_playlist:
 else:
     print('這 是 播放清單')
 
+print('取得清單內的影片資料1')
 playlist = Playlist(url_playlist)  #建立物件  
 videolist = playlist.video_urls  #取得所有影片連結
 print('共有 ' + str(len(videolist)) + ' 部影片')
@@ -167,6 +170,29 @@ for video in videolist:
     # 初始化YouTube下載控件
     yt = YouTube(video, use_oauth = True, allow_oauth_cache = True)
     print('標題', yt.title)  #顯示標題
+
+playlist = Playlist(url_playlist)  #建立物件
+videos = list(playlist)
+print(videos)
+
+playlist = Playlist(url_playlist)  #建立物件
+videolist = playlist.video_urls  #取得所有影片連結
+print('共有 ' + str(len(videolist)) + ' 部影片')
+
+print('取得清單內的影片資料2')
+urlhead = url[:32]
+urltail = url[43:]
+res = requests.get(url_playlist)
+vlist = re.findall(r'watch\?v=.*?list', res.text)
+urls = []
+for v in vlist:
+    if len(v) < 100:
+        tem = urlhead + v[8:19] + urltail
+        if tem not in urls:
+            urls.append(tem)
+            
+print('共有 ' + str(len(urls)) + ' 部影片')
+print(urls)
 
 print('----------------------------------------------------------------------')	#70個
 print('Youtube 測試 2 播放清單 下載影片')
@@ -185,67 +211,6 @@ for video in videolist:
     #yt.streams.filter(subtype = 'mp4', res = '360p', progressive = True).first().download(foldername)
     n = n + 1
 
-print('下載完成')
-
-print('----------------------------------------------------------------------')	#70個
-print('Youtube 測試 3 播放清單 下載影片')
-
-urlhead = url[:32]
-urltail = url[43:]
-print(url_playlist)
-if '&list' not in url_playlist:
-    print('這不是播放清單')
-else:
-    res = requests.get(url_playlist)
-    vlist = re.findall(r'watch\?v=.*?list', res.text)
-    urls = []
-    for v in vlist:
-        if len(v) < 100:
-            tem = urlhead + v[8:19] + urltail
-            if tem not in urls:
-                urls.append(tem)
-            
-print('共有 ' + str(len(urls)) + ' 部影片')
-print(urls)
-
-print('開始下載：')
-n = 1
-try:
-    for video in urls:
-        # 初始化YouTube下載控件
-        yt = YouTube(video, use_oauth = True, allow_oauth_cache = True)
-        print(str(n) + '. ' + yt.title)  #顯示標題
-        #下載mp4影片 360p
-        #yt.streams.filter(subtype = 'mp4', res = '360p', progressive = True).first().download(foldername)
-        n = n + 1
-except:
-    pass
-
-print('下載完成')
-
-print('----------------------------------------------------------------------')	#70個
-print('Youtube 測試 4 播放清單 下載影片')
-
-print('列印播放清單')
-
-playlist = Playlist(url_playlist)  #建立物件
-videos = list(playlist)
-print(videos)
-
-playlist = Playlist(url_playlist)  #建立物件
-videolist = playlist.video_urls  #取得所有影片連結
-print('共有 ' + str(len(videolist)) + ' 部影片')
-
-print('開始下載：')
-n = 1
-for video in videolist:
-    # 初始化YouTube下載控件
-    yt = YouTube(video, use_oauth = True, allow_oauth_cache = True)
-    print(str(n) + '. ' + yt.title)  #顯示標題
-    #下載mp4影片 360p
-    #yt.streams.filter(subtype = 'mp4', res = '360p', progressive = True).first().download(foldername)
-    n = n + 1
-    
 print('下載完成')
 
 print('----------------------------------------------------------------------')	#70個
@@ -268,20 +233,19 @@ print(res1)
 for temurl in res1:
     print(temurl)
     if temurl not in videourlList:  #如果串列中不存在就加入串列
-        print('1111')
         print(temurl)
         videourlList.append(temurl)
 
-print('----------------------------------------------------------------------')	#70個
-print('Youtube 測試 6 播放清單 下載影片')
-
-print('222')
-print(videourlList)
 print('開始下載：')
 n = 1
+
 for video in videourlList:
-    print('333')
-    print(video)
+    print('網址', video)
+    # 初始化YouTube下載控件
+    #yt = YouTube(video, use_oauth = True, allow_oauth_cache = True)
+    #yt = YouTube('https://www.youtube.com' + video, use_oauth = True, allow_oauth_cache = True)
+    #print('標題', yt.title)  #顯示標題
+    
     '''
     #有些有問題
     if len(video) > 16 and len(video) < 30::
@@ -297,4 +261,3 @@ for video in videourlList:
 print('下載完成')
 
 print('\n\nYoutube 測試 作業完成\n')
-

@@ -431,3 +431,17 @@ class StripViewer:
     def save_options(self, optiondb):
         optiondb['UPWHILEDRAG'] = self.__uwdvar.get()
         optiondb['HEXSTRIP'] = self.__hexpvar.get()
+
+
+
+
+print('color test')
+
+
+#color = (R,G,B) = (127, 163, 196)
+#red, green, blue = ColorDB.rrggbb_to_triplet(color)
+
+
+
+
+

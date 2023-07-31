@@ -6,7 +6,7 @@ import numpy as np
 import cv2
 
 #建立 512x512 的黑色畫布
-gc = np.zeros((512, 512, 3), np.uint8)
+gc = np.zeros((512+100, 512-100, 3), np.uint8)  #H, W
 #用(B, G, R) = (255, 255, 255): 白色填滿畫布
 gc.fill(255)
 
@@ -23,10 +23,11 @@ font = [
 
 y = 50
 for f in font:
-    cv2.putText(gc, 'OpenCV', (10,y), f, 2, (0,0,0), 2, cv2.LINE_AA)
+    cv2.putText(gc, 'OpenCV', (10, y), f, 2, (0, 0, 0), 2, cv2.LINE_AA)
     y += 60
 
 cv2.imshow("draw", gc)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 

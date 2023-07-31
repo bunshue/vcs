@@ -1,11 +1,3 @@
-""" List all available codec modules.
-
-(c) Copyright 2005, Marc-Andre Lemburg (mal@lemburg.com).
-
-    Licensed to PSF under a Contributor Agreement.
-
-"""
-
 import os, codecs, encodings
 
 _debug = 0

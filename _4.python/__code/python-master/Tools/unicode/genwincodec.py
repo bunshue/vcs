@@ -1,8 +1,3 @@
-"""This script generates a Python codec module from a Windows Code Page.
-
-It uses the function MultiByteToWideChar to generate a decoding table.
-"""
-
 import ctypes
 from ctypes import wintypes
 from gencodec import codegen
@@ -58,4 +53,9 @@ def genwincodec(codepage):
 
 if __name__ == '__main__':
     import sys
-    genwincodec(int(sys.argv[1]))
+    genwincodec(950)
+
+
+import platform
+print(platform.win32_ver())
+

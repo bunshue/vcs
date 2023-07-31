@@ -32,8 +32,6 @@ DEFAULT_DB = None
 SPACE = ' '
 COMMASPACE = ', '
 
-
-
 # generic class
 class ColorDB:
     def __init__(self, fp):
@@ -242,11 +240,10 @@ def triplet_to_brightness(rgbtuple):
     g = 0.587
     b = 0.114
     return r*rgbtuple[0] + g*rgbtuple[1] + b*rgbtuple[2]
-
-
 
 if __name__ == '__main__':
-    colordb = get_colordb('/usr/openwin/lib/rgb.txt')
+    rgb_filename = 'C:/_git/vcs/_4.python/__code/python-master/Tools/pynche/X/rgb.txt'
+    colordb = get_colordb(rgb_filename)
     if not colordb:
         print('No parseable color database found')
         sys.exit(1)
@@ -269,5 +266,6 @@ if __name__ == '__main__':
     for n in colordb.unique_names():
         r, g, b = colordb.find_byname(n)
         aliases = colordb.aliases_of(r, g, b)
-        print('%20s: (%3d/%3d/%3d) == %s' % (n, r, g, b,
-                                             SPACE.join(aliases[1:])))
+        print('%20s: (%3d/%3d/%3d) == %s' % (n, r, g, b, SPACE.join(aliases[1:])))
+
+
