@@ -77,6 +77,7 @@ while True:
         #frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2)))    #調整畫面大小
         cv2.imshow('Video Player', frame)
         if cv2.waitKey(1) == 27:
+            #cv2.destroyAllWindows()
             break
     else:
         break

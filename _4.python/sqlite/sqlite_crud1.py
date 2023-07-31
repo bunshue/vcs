@@ -154,26 +154,27 @@ conn.execute("DELETE FROM table01 WHERE id_num = {}".format(4))
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 
+print('----------------------------------------------------------------------')	#70個
 #SELECT 取得
 print('讀取資料庫資料, 全部1')
 show_data_base_contents_all(db_filename, 'table01')
 
-
+print('----------------------------------------------------------------------')	#70個
 print('讀取資料庫資料, 全部2')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.execute('SELECT * FROM table01')      #SELECT * : 取得所有資料
 rows = cursor.fetchall()    #讀取全部資料
 print('共有 : ' + str(len(rows)) + " 筆資料")
-print('顯示原始資料')
-print(rows)
-
+#print('顯示原始資料')
+#print(rows)
 print('逐筆顯示資料')
 for row in rows:
     print(row[0], row[1], row[2])
 
 conn.close()  # 關閉資料庫連線
 
+print('----------------------------------------------------------------------')	#70個
 #SELECT 取得
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -186,6 +187,7 @@ if not row == None:
 else:
     print('找不到' + str(number) + '號資料')
 
+print('----------------------------------------------------------------------')	#70個
 print('指明抓一筆資料, 15號')
 number = 15
 cursor = conn.execute('SELECT * FROM table01 WHERE id_num = ' + str(number))    #條件
@@ -195,9 +197,10 @@ if not row == None:
 else:
     print('找不到' + str(number) + '號資料')
 
+print('----------------------------------------------------------------------')	#70個
 print('指明抓名字有pp的資料')
 data = ('%pp%',)    #pp在中間 前後要有%
-cursor = conn.execute('SELECT * FROM table01 WHERE name like ?', data)    #條件
+cursor = conn.execute('SELECT * FROM table01 WHERE name LIKE ?', data)    #條件
 rows = cursor.fetchall()    #讀取全部資料
 print('共有 : ' + str(len(rows)) + " 筆資料")
 print('顯示原始資料')
@@ -206,6 +209,7 @@ print(rows)
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 
+print('----------------------------------------------------------------------')	#70個
 print('尋找資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -224,6 +228,7 @@ if len(rows) > 0:
 else:
     print('找不到資料')
 
+print('----------------------------------------------------------------------')	#70個
 print('不是用fetchall()讀取 全部資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -237,6 +242,7 @@ for row in cursor:
     i = i + 1
 conn.close()  # 關閉資料庫連線
 
+print('----------------------------------------------------------------------')	#70個
 print('用fetchall()讀取 全部資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -251,6 +257,7 @@ for i in range(length):
     print("{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2]))
 conn.close()  # 關閉資料庫連線
 
+print('----------------------------------------------------------------------')	#70個
 print('用fetchall()讀取 全部資料 預設排序(依第1項升冪排序)')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -265,6 +272,7 @@ for i in range(length):
     print("{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2]))
 conn.close()  # 關閉資料庫連線
 
+print('----------------------------------------------------------------------')	#70個
 print('用fetchall()讀取 全部資料 依 name 排序, 升冪')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -280,6 +288,7 @@ for i in range(length):
     print("{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2]))
 conn.close()  # 關閉資料庫連線
 
+print('----------------------------------------------------------------------')	#70個
 print('用fetchall()讀取 全部資料 依 money 排序, 降冪')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -296,6 +305,7 @@ for i in range(length):
 conn.close()  # 關閉資料庫連線
 
 '''
+print('----------------------------------------------------------------------')	#70個
 print('刪除資料庫中的資料表')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線

@@ -45,7 +45,9 @@ WIDTH = 320
 HEIGHT = int(WIDTH / ratio)
 '''
 
+time_old =time.time()
 while True:
+    #begin_time = time.time()  # 計算fps
     ret, frame = cap.read()   # 從攝影機擷取一張影像
 
     if ret == False:
@@ -59,6 +61,12 @@ while True:
     '''
 
     cv2.imshow('WebCam', frame)    # 顯示圖片, 原圖
+
+    time_new = time.time()
+
+    fps = 1 / (time_new - time_old)
+    print('{:.1f}'.format(fps))
+    time_old = time_new
 
     k = cv2.waitKey(1)
     if k == ESC:     #ESC

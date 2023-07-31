@@ -1,7 +1,7 @@
 '''
 WebCam 使用
 一般使用
-錄影存檔
+錄影存檔, 兩種存檔格式
 
 目前 webcam 僅 x64 電腦可用
 '''
@@ -12,30 +12,35 @@ import cv2
 import time
 import sys
 
-filename = 'C:/_git/vcs/_1.data/______test_files2/webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
+cap = cv2.VideoCapture(0)
+
+#用XVID格式存avi檔
+filename1 = 'C:/_git/vcs/_1.data/______test_files2/webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
+
+#用MP4V格式存mp4檔
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp4'
 
 #準備存檔用設定
+'''
 #使用 XVID 編碼
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 # 建立 VideoWriter 物件，輸出影片至檔案
 # FPS 值為 20.0，解析度為 640x360
-out = cv2.VideoWriter(filename, fourcc, 20.0, (640, 480))
+out = cv2.VideoWriter(filename1, fourcc, 20.0, (640, 480))
+'''
 
-''' 調整影片大小
+#''' 調整影片大小
 ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 WIDTH = 400
 HEIGHT = int(WIDTH / ratio)
 
 fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-out = cv2.VideoWriter('video.mp4', fourcc, 30, (WIDTH, HEIGHT))
-'''
+out = cv2.VideoWriter(filename2, fourcc, 30, (WIDTH, HEIGHT))
 
 # 解析 Fourcc 格式資料的函數
 def decode_fourcc(v):
   v = int(v)
   return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
-
-cap = cv2.VideoCapture(0)
 
 # 取得影像的尺寸大小
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
@@ -96,4 +101,5 @@ out.release()
 cap.release()   # 釋放攝影機
 cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
 
-print('已存檔 ' + filename)
+#print('已存檔 ' + filename1)
+print('已存檔 ' + filename2)

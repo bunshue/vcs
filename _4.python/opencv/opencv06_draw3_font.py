@@ -6,9 +6,11 @@ import numpy as np
 import cv2
 
 #建立 512x512 的黑色畫布
-gc = np.zeros((512+100, 512-100, 3), np.uint8)  #H, W
+gc = np.zeros((512 + 100, 512 - 100, 3), dtype = np.uint8)  #H, W
 #用(B, G, R) = (255, 255, 255): 白色填滿畫布
-gc.fill(255)
+
+#gc.fill(255)#將這個矩陣全部填入255 => 白色
+gc[:] = [48, 213, 254]#將這個矩陣全部填入指定顏色
 
 font = [
     cv2.FONT_HERSHEY_SIMPLEX,
