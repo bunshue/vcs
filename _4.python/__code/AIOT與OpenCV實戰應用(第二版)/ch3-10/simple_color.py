@@ -23,8 +23,8 @@ while True:
 
 #### 在while中
     mask = cv2.inRange(hsv, lower, upper)
-    mask = cv2.erode(mask, None, iterations=2)
-    mask = cv2.dilate(mask, None, iterations=2)
+    mask = cv2.erode(mask, None, iterations = 2)
+    mask = cv2.dilate(mask, None, iterations = 2)
 
 #### 在while中
     contours, hierarchy = cv2.findContours(
@@ -33,24 +33,24 @@ while True:
         cv2.CHAIN_APPROX_SIMPLE)
 
     if len(contours) > 0:
-        cnt = max(contours, key=cv2.contourArea)
+        cnt = max(contours, key = cv2.contourArea)
         if cv2.contourArea(cnt) < 100:
             continue
         x, y, w, h = cv2.boundingRect(cnt)
         p1 = (x - 2, y - 2)
         p2 = (x + w + 4, y + h + 4)
 
-        out = cv2.bitwise_and(hsv, hsv, mask=mask)
-        cv2.rectangle(frame, p1, p2, (0,255,255), 2)
+        out = cv2.bitwise_and(hsv, hsv, mask = mask)
+        cv2.rectangle(frame, p1, p2, (0, 255, 255), 2)
 
-        cv2.rectangle(hsv, p1, p2, (0,255,255), 2)
-        cv2.rectangle(out, p1, p2, (0,255,255), 2)
+        cv2.rectangle(hsv, p1, p2, (0, 255, 255), 2)
+        cv2.rectangle(out, p1, p2, (0, 255, 255), 2)
         frame = cv2.hconcat([frame, hsv, out])
 
 #### 在while中
     cv2.imshow("frame", frame)
+    
     if cv2.waitKey(1) == 27:
         cv2.destroyAllWindows() 
         break
-
 

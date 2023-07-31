@@ -12,6 +12,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg'
 
 # OpenCV 人臉識別分類器
 xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+#xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_alt2.xml'
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 image = cv2.imread(filename)	#讀取本機圖片
@@ -51,6 +52,13 @@ for (x, y, w, h) in faces:
     cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
     roi_gray = gray[y : y + h, x : x + w]
     roi_color = image[y : y + h, x : x + w]
+
+'''
+for (x, y, w, h) in faces:
+    image = cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 3)
+'''
+
+cv2.namedWindow('video', cv2.WINDOW_NORMAL)
 
 # 顯示結果
 #cv2.imshow(image)

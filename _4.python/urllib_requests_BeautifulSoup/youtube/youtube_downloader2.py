@@ -1,5 +1,5 @@
 '''
-不用 pytube的
+使用 requests / BeautifulSoup 做 YouTube下載
 
 '''
 
@@ -15,7 +15,7 @@ foldername = 'C:/_git/vcs/_1.data/______test_files2/youtube_download'
 
 #準備輸出資料夾 若不存在, 則建立
 if not os.path.exists(foldername):
-        os.mkdir(foldername)
+    os.mkdir(foldername)
 
 # 超好用的10個Win10小技巧，學會讓你事半功倍！ | 零度解說
 url = 'https://www.youtube.com/watch?v=36asE86iGmQ'
