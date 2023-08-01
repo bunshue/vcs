@@ -4,4 +4,5 @@
 
 
 def my_function(number: int):
+    print('zzzz')
     return "even" if number % 2 == 0 else "odd"
