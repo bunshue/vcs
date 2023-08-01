@@ -57,6 +57,41 @@ filenames = os.listdir('/')
 print(type(filenames))
 print(filenames)
 
+
+print('------------------------------')  #30個
+
+import os
+for f in os.listdir(foldername):
+    if os.path.isdir(f):
+        print('dir : ', f)
+    else:
+        print('file : ', f)
+
+
+for file in os.listdir(foldername):
+    afile = os.path.join(foldername, file)
+    if os.path.isdir(afile):
+        print('dir : ', afile)
+    else:
+        print('file : ', afile)
+        
+
+print('------------------------------')  #30個
+
+names = os.listdir(foldername)
+
+for name in sorted(names):
+    full = name
+    if os.path.islink(full):
+        print('link')
+    elif os.path.isdir(full):
+        print('dir')
+    else:
+        print('file')
+
+
+
+
 print('指定目錄下之ls (單層)')
 filenames = os.listdir(foldername)    #單層
 print(type(filenames))
@@ -208,6 +243,38 @@ testdir(foldername)
 
 print('------------------------------')  #30個
 
+
+import sys
+import ast
+import tokenize
+import io
+import os
+
+def testdir(a):
+    try:
+        names = [n for n in os.listdir(a) if n.endswith('.py')]
+    except OSError:
+        print("Directory not readable: %s" % a, file=sys.stderr)
+    else:
+        for n in names:
+            fullname = os.path.join(a, n)
+            if os.path.isfile(fullname):
+                output = io.StringIO()
+                print('Testing %s' % fullname)
+                try:
+                    roundtrip(fullname, output)
+                except Exception as e:
+                    print('  Failed to compile, exception is %s' % repr(e))
+            elif os.path.isdir(fullname):
+                testdir(fullname)
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+
+testdir(foldername)
+
+
+print('------------------------------')  #30個
+
 def getFolderSize(foldername):
     size = 0 # Store the total size of all files
 
@@ -350,7 +417,23 @@ for file in files:
         print()
 
 
+print('------------------------------')  #30個
 
+import glob
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+
+pattern = '*'
+
+filenames = glob.glob1(foldername, pattern)
+
+print(filenames)
+
+for f in glob.glob1(foldername, "*.dll"):
+    print(f)
+
+for f in glob.glob1(foldername, "*.pyd"):
+    print(f)
 
 print('------------------------------')  #30個
     
@@ -378,6 +461,47 @@ print('------------------------------')  #30個
 
 
 print('------------------------------')  #30個
+
+import os
+import sys
+
+def process(filename, listnames):
+    print('process : ', filename)
+    if os.path.isdir(filename):
+        return processdir(filename, listnames)
+    try:
+        print(filename)
+    except IOError as msg:
+        sys.stderr.write("Can't open: %s\n" % msg)
+        return 1
+
+def processdir(dir, listnames):
+    print('processdir : ', dir)
+    try:
+        names = os.listdir(dir)
+    except OSError as msg:
+        sys.stderr.write("Can't list directory: %s\n" % dir)
+        return 1
+    files = []
+    for name in names:
+        print(name)
+        fn = os.path.join(dir, name)
+        print(fn)
+        if os.path.normcase(fn).endswith(".py") or os.path.isdir(fn):
+            files.append(fn)
+    files.sort(key=os.path.normcase)
+    exit = None
+    for fn in files:
+        x = process(fn, listnames)
+        exit = exit or x
+    return exit
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+listnames = 1  # or 1
+x = process(foldername, listnames)
+print(x)
+
+
 
 
 
@@ -556,5 +680,39 @@ for file in files:
     print(file)
 
 
+'''
+# 新進未整理
 
+
+
+
+
+mkdir多一層保護
+        try:
+            os.mkdir(odir)
+            print("Created output directory", odir)
+        except OSError as msg:
+            usage('%s: mkdir failed (%s)' % (odir, str(msg)))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 

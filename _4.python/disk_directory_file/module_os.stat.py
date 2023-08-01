@@ -285,3 +285,152 @@ print('------------------------------')  #30個
 
 
 print('------------------------------')  #30個
+
+
+
+
+
+'''
+# 新進未整理
+
+            fileSize = os.stat(web+fileName)[6] #檔案大小
+            if fileSize != None:
+                f = open(web+fileName, 'r') #開啟檔案
+                client.write(httpResponse)  #伺服器回應
+                while True:
+                    data = f.read(256) #次每次讀取 128 個字元
+                    if len(data) == 0: #讀取完畢
+                        break
+                    client.write(data)   #伺服器回應
+                f.close()
+            else:
+                err(client, "404", "Not Found")      
+
+------------------------------------
+
+    if httpMethod == 'GET': # 接受GET 請求
+        fileName = path.strip('/')
+        if fileName == '':
+            fileName = 'index.html'
+        print("傳送檔案",web+fileName)
+        fileSize = os.stat(web+fileName)[6] #檔案大小
+        if fileSize != None:
+            f = open(web+fileName, 'r') #開啟檔案
+            client.write(httpResponse)  #伺服器回應
+            while True:
+                data = f.read(128) #次每次讀取 128 個字元
+                if len(data) == 0: #讀取完畢                        
+                    break
+                client.write(data)   #伺服器回應
+            f.close()
+        else:
+            err(client, "404", "Not Found")      
+
+
+------------------------------------
+
+
+        statbuf = os.stat(filename)
+        os.chmod(tempname, statbuf[ST_MODE] & 0o7777)
+
+------------------------------------
+
+
+import os
+import time
+
+print('touch的效果')
+
+檔案touch前的時間
+filename1 = 'aaa.py'
+
+o_time = os.stat(filename1).st_mtime
+print(o_time)
+
+filename2 = 'nnnnn.txt'
+
+n_time = os.stat(filename2).st_mtime
+print(n_time)
+
+print(n_time-o_time)
+
+os.utime(filename1, (n_time, n_time))
+
+now = time.time()
+
+os.utime(filename1, (now, now))
+
+
+檔案touch後的時間
+
+
+
+------------------------------------
+
+            mode = ((os.stat(tempname).st_mode) | 0o555) & 0o7777
+            os.chmod(tempname, mode)
+
+
+
+------------------------------------
+
+
+
+
+# Copy one file's atime and mtime to another
+import sys
+import os
+from stat import ST_ATIME, ST_MTIME # Really constants 7 and 8
+
+        stat1 = os.stat(file1)
+
+        os.utime(file2, (stat1[ST_ATIME], stat1[ST_MTIME]))
+
+
+
+
+
+------------------------------------
+
+
+import sys, os, time, difflib, optparse
+from datetime import datetime, timezone
+
+def file_mtime(path):
+    t = datetime.fromtimestamp(os.stat(path).st_mtime,
+                               timezone.utc)
+    return t.astimezone().isoformat()
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+fromdate = file_mtime(filename)
+print(fromdate)
+
+string = 'aaaaaaa '
+sys.stdout.writelines(string)
+print(string)
+
+
+    fromdate = file_mtime(fromfile)
+      todate = file_mtime(tofile)
+    with open(fromfile) as ff:
+        fromlines = ff.readlines()
+    with open(tofile) as tf:
+        tolines = tf.readlines()
+
+
+
+
+------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+'''

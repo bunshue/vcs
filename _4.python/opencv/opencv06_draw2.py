@@ -1,27 +1,35 @@
+'''
+OpenCV 畫圖
+
+'''
 import cv2 
 import numpy as np
 
-gc = np.zeros((512, 512, 3), dtype = np.uint8)
-gc.fill(255)
+print('OpenCV 畫圖')
+#-----------------------------------------------------------------------------
+W = 512 + 200
+H = 512
+#建立 512x512 的黑色畫布
+image = np.zeros((H, W, 3), dtype = np.uint8)  #H, W
+#用(B, G, R) = (255, 255, 255): 白色填滿畫布
+#image.fill(255) #將這個矩陣全部填入255 => 白色
+image[:] = [48, 213, 254]#將這個矩陣全部填入指定顏色
 
-cv2.line(gc, (10, 50), (400, 300), (255, 0, 0), 5)
+cv2.line(image, (10, 50), (400, 300), (255, 0, 0), 5)
 #畫矩形
-cv2.rectangle(gc, (30, 50), (200, 280), (0, 0, 255), 5)
-cv2.rectangle(gc, (100, 200), (196, 276), (234, 151, 102), -1)#線條寬度為負數 代表實心
+cv2.rectangle(image, (30, 50), (200, 280), (0, 0, 255), 5)
+cv2.rectangle(image, (100, 200), (196, 276), (234, 151, 102), -1)#線條寬度為負數 代表實心
 #畫圓
-cv2.circle(gc, (200, 100), 80, (255, 255, 0), -1)
-cv2.circle(gc, (280, 180), 60, (147, 113, 217), 3)
-#畫橢圓           軸心     長軸 短軸 旋轉  開始 結束角度 顏色      線寬
-cv2.ellipse(gc, (200, 100), (80, 40), 45, 0, 360, (80, 127, 255), 5)
-cv2.ellipse(gc, (250, 200), (70, 70), 0, 0, 135, (44, 141, 108), -1)
+cv2.circle(image, (200, 100), 80, (255, 255, 0), -1)
+cv2.circle(image, (280, 180), 60, (147, 113, 217), 3)
+#畫橢圓           中心     長軸 短軸 旋轉  開始 結束角度 顏色      線寬
+cv2.ellipse(image, (200, 100), (80, 40), 45, 0, 360, (80, 127, 255), 5)
+cv2.ellipse(image, (250, 200), (70, 70), 0, 0, 135, (44, 141, 108), -1)
 
 #設定頂點座標
 pts = np.array(((10,5), (100,100), (170,120), (200,50)))
 #True:頭尾相連; False:頭尾不相連
-cv2.polylines(gc, [pts], True, (105, 105, 105), 2)
-
-font = cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(gc, 'OpenCV', (10,200), font, 4, (0,0,0), 2, cv2.LINE_AA)
+cv2.polylines(image, [pts], True, (105, 105, 105), 2)
 
 cx = 200
 cy = 400
@@ -30,10 +38,39 @@ b = 100
 angle = 0  #旋轉角度
 color = (0, 0, 255)
 linewidth = 5
-cv2.ellipse(gc, (cx, cy), (a, b), angle, 0, 360, color, linewidth)
+#畫橢圓           中心     長軸 短軸 旋轉  開始 結束角度 顏色      線寬
+cv2.ellipse(image, (cx, cy), (a, b), angle, 0, 360, color, linewidth)
 
-cv2.imshow('draw', gc)
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(image, 'OpenCV', (10,200), font, 4, (0,0,0), 2, cv2.LINE_AA)
+
+
+
+fonts = [
+    cv2.FONT_HERSHEY_SIMPLEX,
+    cv2.FONT_HERSHEY_PLAIN,
+    cv2.FONT_HERSHEY_DUPLEX,
+    cv2.FONT_HERSHEY_COMPLEX,
+    cv2.FONT_HERSHEY_TRIPLEX,
+    cv2.FONT_HERSHEY_COMPLEX_SMALL,
+    cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,
+    cv2.FONT_HERSHEY_SCRIPT_COMPLEX
+]
+
+text = 'OpenCV'
+x_st = 450
+y_st = 50
+font_size = 2
+color = (0, 0, 0)
+line_width = 2
+for font in fonts:
+    cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, cv2.LINE_AA)
+    y_st += 60
+
+
+cv2.imshow('draw', image)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
 

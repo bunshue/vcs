@@ -13,9 +13,8 @@ print('設定圖片大小')
 W = 800
 H = 600
 BORDER = 100
-image = np.zeros((H, W, 3))
 #image = np.zeros((H, W, 3))
-image = np.zeros((H, W, 3), np.uint8)
+image = np.zeros((H, W, 3), dtype = np.uint8)
 
 image[:] = (128, 128, 128)  #將所有點著色
 
@@ -63,7 +62,11 @@ cx = int(W / 2)
 cy = int(H / 2)
 a = 250  #長軸
 b = 100  #短軸
-cv2.ellipse(image, (cx, cy), (a, b), 0, 0, 360, (255, 255, 0), 2)
+angle = 0  #旋轉角度
+color = (0, 0, 255)
+linewidth = 5 #線條寬度為負數 代表實心
+#畫橢圓             中心  長軸 短軸 旋轉 開始 結束角度 顏色 線寬
+cv2.ellipse(image, (cx, cy), (a, b), 0, 0, 360, color, linewidth)
 #-----------------------------------------------------------------------------
 print('畫多邊形')
 px1 = int(W / 2)
@@ -98,12 +101,12 @@ y_st = H - 70
 cv2.putText(image, 'Only Show English', (x_st, y_st), font, 2, (255, 255, 0), 2)
 
 text = 'Hello, World!'
-font_size = 1
-line_width = 1
 x_st = 20
 y_st = 20
-cv2.putText(image, text, (x_st, y_st), cv2.FONT_HERSHEY_SIMPLEX, font_size, (0, 0, 255), line_width, cv2.LINE_AA)
-
+font_size = 1
+color = (0, 0, 255)
+line_width = 1
+cv2.putText(image, text, (x_st, y_st), cv2.FONT_HERSHEY_SIMPLEX, font_size, color, line_width, cv2.LINE_AA)
 
 #-----------------------------------------------------------------------------
 

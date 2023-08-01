@@ -90,17 +90,58 @@ foldername = 'C:/_git/vcs/_1.data/______test_files2/'
 
 print('----判斷檔案或資料夾 is exists--------------------------')  #30個
 
-if os.path.exists(filename):
-    print(filename, '存在')
-else:
-    print(filename, '不 存在')
+file_or_folder_name = filename  #檔案或資料夾皆可
 
-if os.path.isdir(filename):
-    print(filename, '是 資料夾')
-elif os.path.islink(filename):
-    print(filename, '是 連結')
+if os.path.exists(file_or_folder_name):
+    print('檔案或資料夾 : ', filename, '存在')
 else:
-    print(filename, '不是 資料夾')
+    print('檔案或資料夾 : ', filename, '不 存在')
+
+if not os.path.exists(file_or_folder_name):
+    print('檔案或資料夾 : ', filename, '不 存在')
+else:
+    print('檔案或資料夾 : ', filename, '存在')
+
+if os.path.isdir(file_or_folder_name):
+    print(filename, '是 資料夾')
+
+if not os.path.isdir(file_or_folder_name):
+    print('資料夾不存在')
+
+if os.path.islink(file_or_folder_name):
+    print(filename, '是 連結')
+
+if os.path.isfile(file_or_folder_name):
+    print('aaaa')
+
+
+#--------------------- new
+
+'''
+    os.remove(file)
+    os.rmdir(dir)
+    os.remove(file)
+    os.mkdir(dir)
+    os.mkdir("fb-photos")
+    os.mkdir(pathdir)
+
+ os.unlink(installer_name)
+
+
+
+
+
+installer_name = os.path.abspath(installer_name)
+
+        test = os.path.join(dir, "test")
+        
+            # Add the "test" directory to PYTHONPATH.
+            sys.path = sys.path + [test]
+
+    
+
+
+'''
 
 
 
@@ -129,6 +170,19 @@ print('取得檔案/資料夾的絕對位置 abspath()')
 long_foldername = os.path.abspath("../..")
 print('本檔長資料夾(絕對位置)', long_foldername)
 
+'''
+補兩個狀況
+
+filename = 'xxx.py'
+long_filename = os.path.abspath(filename)
+print('長檔名(絕對位置)', long_filename)
+
+filename = '../../xxxx/xxx.py'
+long_filename = os.path.abspath(filename)
+print('長檔名(絕對位置)', long_filename)
+
+
+'''
 
 print('----取得所在的資料夾 dirname()--------------------------')  #30個
 
@@ -139,6 +193,57 @@ print('本檔長資料夾(絕對位置)', long_foldername)
 print('----連結資料夾 join(A, B)--------------------------')  #30個
 
 print('------------------------------')  #30個
+
+
+excecdir = 'aaaaaa'
+executable = os.path.join('ppppp', "Python")
+print(executable)
+
+print('join')
+resdir = os.path.join('bbbb', "Resources")
+print(resdir)
+
+print('join')
+libdir = os.path.join('aaaa', "Frameworks")
+print(libdir)
+
+mainprogram = os.path.join(resdir, "idlemain.py")
+print(mainprogram)
+
+
+fpath = 'aaaaaaaaaaa'
+correctfile = os.path.join(os.getcwd(), fpath)
+
+correctfile = os.path.normpath(correctfile)
+
+ccc = os.path.join(os.getcwd(), 'ziptest2dir')
+print(ccc)
+
+
+
+
+
+#filename = os.path.join(dir, prog)
+
+#os.chdir(os.path.join(ROOT, TK, "win"))
+
+
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+
+DIRS = os.path.join(BASE_DIR, 'templates')
+NAME = os.path.join(BASE_DIR, 'db.sqlite3')
+AAAA = os.path.join(BASE_DIR, 'static')
+
+print(DIRS)
+print(NAME)
+print(AAAA)
+
+
+
+
 
 
 
@@ -200,35 +305,12 @@ print('長資料夾 + 前檔名', retval)
 
 print('------------------------------')  #30個
 
-fpath = 'aaaaaaaaaaa'
-correctfile = os.path.join(os.getcwd(), fpath)
-
-correctfile = os.path.normpath(correctfile)
-
-ccc = os.path.join(os.getcwd(), 'ziptest2dir')
-print(ccc)
-
 print('------------------------------')  #30個
 
 filename = "python-%s%s.msi" % (full_current_version, 'ccccc')
 print(filename)
 
 print('------------------------------')  #30個
-
-excecdir = 'aaaaaa'
-executable = os.path.join('ppppp', "Python")
-print(executable)
-
-print('join')
-resdir = os.path.join('bbbb', "Resources")
-print(resdir)
-
-print('join')
-libdir = os.path.join('aaaa', "Frameworks")
-print(libdir)
-
-mainprogram = os.path.join(resdir, "idlemain.py")
-print(mainprogram)
 
 print('------------------------------')  #30個
 
@@ -287,8 +369,6 @@ os.chdir(os.path.expanduser('~/Documents'))
 
 '''
 print('------------------------------')  #30個
-
-#os.chdir(os.path.join(ROOT, TK, "win"))
 
 def cmp(f1, f2):
     bufsize = 1024 * 8
@@ -405,10 +485,6 @@ print(sys.path[0])
 pathlist = os.environ['PATH'].split(os.pathsep)
 print(pathlist)
 
-#filename = os.path.join(dir, prog)
-
-
-
 
 print('------------------------------')  #30個
 
@@ -480,15 +556,14 @@ print('目前位置 : ', pwd)
 cur_path = os.getcwd() # 取得目前路徑
 print("現在路徑："+cur_path)
 
+'''
 cur_path = os.getcwd() # 取得目前路徑
 file=cur_path + "\dir2\copyfile.py" 
 os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
-
-
+'''
 
 print(os.sep)
 print(os.altsep)
-
 
 
 ADDRESS = r'\\.\pipe\_test_pipe-%s' % os.getpid()
@@ -496,19 +571,9 @@ print(ADDRESS)
 
 
 
-
 '''
 未整理
 os.chdir(foldername2)
-
-
-DIRS = os.path.join(BASE_DIR, 'templates')
-NAME = os.path.join(BASE_DIR, 'db.sqlite3')
-AAAA = os.path.join(BASE_DIR, 'static')
-
-print(DIRS)
-print(NAME)
-print(AAAA)
 
 
 ----
@@ -549,11 +614,8 @@ for name in os.listdir(foldername):
     #print("%s -> %s" % (filename, destname))
 '''
 '''
-foldername1 = 'C:/_git/vcs/_1.data/______test_files3'
-foldername2 = foldername1 + 'aaaa'
-if os.path.exists(foldername2):
-    print('rmtree : ', foldername2)
-    shutil.rmtree(foldername2)
+
+shutil.rmtree(foldername2)
 
 os.makedirs(foldername2)
 
@@ -565,20 +627,19 @@ os.makedirs(foldername2)
 
 '''
 import os
-dirname=os.path.dirname(__file__)
+
+dirname = os.path.dirname(__file__)
 
 os.path.basename(script):
-
-installer_name = os.path.abspath(installer_name)
-
-if os.path.exists(installer_name): os.unlink(installer_name)
 
 
 
 os.chdir(dir)
 os.rename(fn, ','+fn)
 
-if os.path.normcase(fn).endswith(".py") or os.path.isdir(fn):
+if os.path.normcase(fn).endswith(".py")
+
+
         
 
 os.remove(os.path.join(lib_dir, "win32", "dbi.pyd.old"))
@@ -597,14 +658,6 @@ os.system('cls') #在cmd視窗下清除螢幕
 os.system('cls' if os.name == 'nt' else 'clear')
 
 
-        if os.path.isfile(arg):
-        elif os.path.isdir(arg):
-
-    if os.path.isfile(file):
-        test = os.path.join(dir, "test")
-        if os.path.isdir(test):
-            # Add the "test" directory to PYTHONPATH.
-            sys.path = sys.path + [test]
 
 
 TEST_SUPPORT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -615,50 +668,13 @@ self.procfile = '/proc/{pid}/statm'.format(pid=os.getpid())
 
 
 
-pathdir = 'd:\\tem1'  #下載資料夾
-if not os.path.isdir(pathdir):  #如果資料夾不存在就建立
-    os.mkdir(pathdir)
-
-
 import os
 
 dir = "myDir"
-
-if not os.path.exists(dir):
-    os.mkdir(dir)
-else:
-    print(dir + "已經建立!")   
-
-
-if os.path.isdir(foldername):
-    print('T')
-else:
-    print('F')
-
-if os.path.exists(foldername):
-    print('T')
-else:
-    print('F')
 
 
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 
-
-
-import os
-dir = "myDir"
-if os.path.exists(dir):
-    os.rmdir(dir)
-else:
-    print(dir + "目錄未建立!")  
- 
- 
- import os
-file = "myFile.txt"
-if os.path.exists(file):
-    os.remove(file)
-else:
-    print(file + "檔案未建立!")   
 
 
 import os
@@ -679,25 +695,10 @@ import sys
 sys.path.insert(0, "../src")
 
 
-if not os.path.exists("fb-photos"):  # 建立 fb-photos 目錄
-    os.mkdir("fb-photos")
-
-
        filename = img['source'].split('/')[-1].split('?')[0]
        print(filename)
 
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 dirname = os.path.dirname(__file__)"
-
-import os
-
-DB_FILE = "mydb"
-if os.path.exists(DB_FILE):
-    os.remove(DB_FILE)
-
 
 
 
