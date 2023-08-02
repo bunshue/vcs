@@ -56,9 +56,11 @@ print(type(yt.streams))
 length = len(yt.streams)
 print('有', length, '種格式')
 
+'''
 for media_type in yt.streams:
     print(media_type)
     print(media_type.type)
+'''
 
 print("影片名稱：" + yt.title)
 print("影片格式共有 " + str(len(yt.streams)) + ' 種')
@@ -87,14 +89,48 @@ print('開始下載 mp4, 360p 的影片：')
 #print(yt.streams.filter(only_audio=True))
 #print(yt.streams.filter(mime_type='audio/webm'))
 
-'''
 print('開始下載聲音檔：')
-yt.streams.filter(mime_type='audio/mp4').first().download(foldername)  #下載mp4聲音檔
-yt.streams.filter(mime_type='audio/webm')[2].download(foldername)  #下載webm聲音檔
+#yt.streams.filter(mime_type='audio/mp4').first().download(foldername)  #下載mp4聲音檔
+#yt.streams.filter(mime_type='audio/webm')[2].download(foldername)  #下載webm聲音檔
 #yt.streams.filter(only_audio=True).first().download(foldername)  #下載聲音檔
-'''
+
+print('取得檔案大小')
+video = yt.streams.filter(progressive=True, file_extension='mp4').first()
+print('FileSize : ' + str(round(video.filesize / (1024 * 1024))) + 'MB')
 
 print('下載完成')
+
+
+# Stream(video).on_progress()
+        
+print('測試下載進度條')
+#这计算转换文件大小和剩余字节数的百分比
+def percent(tem, total):
+        perc = (float(tem) / float(total)) * float(100)
+        return perc
+
+#进度功能
+def progress_function(stream, chunk,file_handle, bytes_remaining):
+    size = stream.filesize
+    p = 0
+    while p <= 100:
+        progress = p
+        print(str(p)+'%')
+        p = percent(bytes_remaining, size)
+
+'''
+
+from pytube import YouTube
+from pytube.cli import on_progress #this module contains the built in progress bar.
+# 初始化YouTube下載控件
+#yt = YouTube(url, use_oauth = True, allow_oauth_cache = True)
+yt = YouTube(url, use_oauth = True, allow_oauth_cache = True, on_progress_callback = progress_function)
+video = yt.streams.first()
+video.download()
+
+print('OK')
+'''
+sys.exit()
 
 print('----------------------------------------------------------------------')	#70個
 print('Youtube 測試 3 下載字幕 TBD')
@@ -110,43 +146,30 @@ if length > 0:
     for cc in yt.captions:
         print(cc)
 
-# 目前無法下載字幕
+print(type(yt.captions))
+print(yt.captions)
 
 '''
-#caption = yt.captions.get_by_language_code('a.en')
-caption = yt.captions['Chinese (Traditional)']
-srt = caption.generate_srt_captions()
-file = open('youtube.srt', 'w', encoding = 'UTF-8')
-file.write(srt)
-file.close()
-print(srt)
-'''
 
-'''
-#caption = yt.captions.get_by_language_code('a.en')
-caption = yt.captions['zh-Hans']
-srt = caption.generate_srt_captions()
-file = open('download/youtube.srt', 'w', encoding = 'UTF-8')
-file.write(srt)
-file.close()
-print(srt)
-'''
-
-'''
-#{'a.en': <Caption lang="English (auto-generated)" code="a.en">}
-
-caption = yt.captions['en']
-srt = caption.generate_srt_captions()
-file = open('youtube.srt', 'w', encoding='UTF-8')
-file.write(srt)
-file.close()
-print(srt)
-'''
-
-'''
+字幕個數 :  2
 <Caption lang="Chinese (Simplified)" code="zh-Hans">
 <Caption lang="Chinese (Traditional)" code="zh-Hant">
 '''
+#caption = yt.captions.get_by_language_code('zh-Hant') old
+caption = yt.captions['zh-Hant']
+
+#print(caption.xml_captions)
+
+'''
+'<?xml version="1.0" encoding="utf-8" ?><transcript><text start="10.2" dur="0.94">K-pop!</text>...'
+'''
+
+#srt = caption.generate_srt_captions() old
+srt = caption.xml_captions
+file = open(title + '.srt', 'w', encoding = 'UTF-8')
+file.write(srt)
+file.close()
+
 
 print('----------------------------------------------------------------------')	#70個
 print('----------------------------------------------------------------------')	#70個

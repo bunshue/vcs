@@ -24,10 +24,16 @@ def listcodecs(dir):
     return names
 
 
-if __name__ == '__main__':
-    names = listcodecs(encodings.__path__[0])
-    names.sort()
-    print('all_codecs = [')
-    for name in names:
-        print('    %r,' % name)
-    print(']')
+print()
+print(encodings)
+print(encodings.__path__)
+print(encodings.__path__[0])
+print()
+names = listcodecs(encodings.__path__[0])
+names.sort()
+print('all_codecs = [')
+for name in names:
+    print('    %r,' % name)
+print(']')
+
+

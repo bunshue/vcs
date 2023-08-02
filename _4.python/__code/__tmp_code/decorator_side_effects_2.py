@@ -1,10 +1,3 @@
-"""Clean Code in Python - Chapter 5: Decorators
-
-> Example of desired side effects on decorators
-
-"""
-
-
 EVENTS_REGISTRY = {}
 
 
@@ -39,3 +32,10 @@ def test():
     >>> sorted(EVENTS_REGISTRY.keys()) == sorted(('UserLoginEvent', 'UserLogoutEvent'))
     True
     """
+
+test()
+
+print(EVENTS_REGISTRY.keys())
+
+
+
