@@ -1,3 +1,7 @@
+
+import warnings
+warnings.warn('Use importlib.util.find_spec() instead.', DeprecationWarning, stacklevel = 1)
+
 print('建立一組密碼 並將此密碼拷貝至剪貼簿')
 import random
 import pyperclip

@@ -5,18 +5,19 @@ sqlite基本範例 一個
 '''
 原始資料 9 筆
 	id_num	name	money
-第1筆 : 5	Apple	333
-第2筆 : 1	Banana	777
-第3筆 : 4	Cat	444    (此筆資料多餘, 應刪除)
+第1筆 : 5	lion	333
+第2筆 : 1	mouse	777
+第3筆 : 4	dinosaur444    (此筆資料多餘, 應刪除)
 
-第4筆 : 9	Dog	888
-第5筆 : 2	Dog	888    (此筆資料錯誤, 應為Eagle 111)
+第4筆 : 9	hippo	888
+第5筆 : 2	bear	888    (此筆資料錯誤, 應為panda 111)
 
-第6筆 : 8	Frog	666    (詢問是否刪除此筆資料)
-第7筆 : 3	Giraffe	222
+第6筆 : 8	koala	666    (詢問是否刪除此筆資料)
+第7筆 : 3	penguin	222
 
-第8筆 : 7	Happy	999
-第9筆 : 6	India	555
+第8筆 : 7	zebra	999
+
+第9筆 : 6	tiger	555
 
 修改2號的name
 
@@ -98,23 +99,23 @@ conn.commit() # 更新
 #INSERT 新增資料
 print('新增資料 3 筆 寫法一')
 #id_num不可重複
-sqlstr = 'INSERT INTO table01 VALUES (5, "Apple", 333)'
+sqlstr = 'INSERT INTO table01 VALUES (5, "lion", 333)'
 cursor.execute(sqlstr)
-sqlstr = 'INSERT INTO table01 VALUES (1, "Banana", 777)'
+sqlstr = 'INSERT INTO table01 VALUES (1, "mouse", 777)'
 cursor.execute(sqlstr)
-sqlstr = 'INSERT INTO table01 VALUES (4, "Cat", 444)'
+sqlstr = 'INSERT INTO table01 VALUES (4, "dinosaur", 444)'
 cursor.execute(sqlstr)
 
 print('新增資料 2 筆 寫法二')
-cursor.execute("INSERT INTO table01 (id_num, name, money) VALUES (9, 'Dog', 888)")
+cursor.execute("INSERT INTO table01 (id_num, name, money) VALUES (9, 'hippo', 888)")
 #id_num不重複 但name money 重複
-cursor.execute("INSERT INTO table01 (id_num, name, money) VALUES (2, 'Dog', 888)")
+cursor.execute("INSERT INTO table01 (id_num, name, money) VALUES (2, 'bear', 888)")
 
 print('新增資料 2 筆 寫法三')
 # 定義資料串列
 datas = [
-    [8, 'Frog', 666],
-    [3, 'Giraffe', 222]
+    [8, 'koala', 666],
+    [3, 'penguin', 222]
     ]
 
 for data in datas:
@@ -125,13 +126,13 @@ conn.commit() # 更新
 
 print('新增資料 1 筆 寫法四')
 number = 7
-name = 'Happy'
+name = 'zebra'
 money = 999
 sqlstr = "INSERT INTO table01 VALUES ({},'{}','{}');".format(number, name, money)
 cursor.execute(sqlstr)
 
 print('新增資料 1 筆 寫法五')
-data = (6, 'India', 555)
+data = (6, 'tiger', 555)
 cursor.execute('INSERT INTO table01 VALUES (?, ?, ?)', data)
 
 conn.commit() # 更新
@@ -141,7 +142,7 @@ conn.close()  # 關閉資料庫連線
 print('更新資料, 修改2號的資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-conn.execute("UPDATE table01 SET name = '{}'  WHERE id_num = {}".format('Eagle', 2))  #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+conn.execute("UPDATE table01 SET name = '{}'  WHERE id_num = {}".format('panda', 2))  #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
 conn.execute("UPDATE table01 SET money = '{}' WHERE id_num = {}".format(111, 2))      #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線

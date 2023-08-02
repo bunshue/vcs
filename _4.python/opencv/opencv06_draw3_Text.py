@@ -7,8 +7,8 @@ import time
 import numpy as np
 
 print('----------------------------------------------------------------------')	#70個
-print('OpenCV 畫圖')
-#-----------------------------------------------------------------------------
+print('OpenCV 畫圖, 寫字集合')
+print('----------------------------------------------------------------------')	#70個
 W = 512 + 200
 H = 512
 #建立 512x512 的黑色畫布
@@ -18,68 +18,54 @@ image.fill(255) #將這個矩陣全部填入255 => 白色
 #image[:] = [48, 213, 254]#將這個矩陣全部填入指定顏色
 # Fill image with gray color(set each pixel to gray)
 #image[:] = (128, 128, 128)
-
+print('----------------------------------------------------------------------')	#70個
 font = cv2.FONT_HERSHEY_SIMPLEX
 line_type = cv2.LINE_AA #文字線條樣式
 
+#畫字時, 起點是左下角
+
 print('----------------------------------------------------------------------')	#70個
 print('畫字')
-text = 'Only Show English'
-x_st = 100
-y_st = H - 70
-font_size = 2
-color = (255, 255, 0)
-line_width = 2
-cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width)
-print('----------------------------------------------------------------------')	#70個
 text = 'Hello, World!'
 x_st = 20
-y_st = 20
-font_size = 1
-color = (0, 0, 255)
+y_st = 80
+font_size = 1 #文字縮放比例
+color = (0, 0, 255) #B G R
 line_width = 1
+cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width)
+y_st += 30
 cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)
 print('----------------------------------------------------------------------')	#70個
 #繪製顯示系統當前時間
 localtime = time.localtime()
 text = time.strftime("%Y-%m-%d %I:%M:%S %p", localtime)
-x_st = 100
-y_st = 50
-font_size = 1
-color = (0, 255, 255)
+x_st = 20
+y_st = 40
+font_size = 1 #文字縮放比例
+color = (0, 255, 0) #B G R
 line_width = 1
 cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)
 print('----------------------------------------------------------------------')	#70個
-text = '777'
-x_st = 20
-y_st = 20
-font = cv2.FONT_HERSHEY_COMPLEX
-font_size = 3
-color = (0, 255, 255)
-line_width = 2
-testSize = cv2.getTextSize(text, font, font_size, line_width)
-print(testSize)
-bottomLeftX = 64-int(testSize[0][0]/2)
-bottomLeftY = 64+int(testSize[0][1]/2)
-cv2.putText(image, text, (bottomLeftX, bottomLeftY), font, font_size, color, line_width, line_type)
-print('----------------------------------------------------------------------')	#70個
+print('寫在正中央, 先量測字體大小')
 text = 'Hello, World!'
-x_st = 0; #文字[左下角]的位置
-y_st = 100;
-font = cv2.FONT_HERSHEY_SIMPLEX
-font = cv2.FONT_HERSHEY_PLAIN
-font = cv2.FONT_HERSHEY_DUPLEX
+x_st = 20
+y_st = 200
 font = cv2.FONT_HERSHEY_COMPLEX
-font = cv2.FONT_HERSHEY_TRIPLEX
-font = cv2.FONT_HERSHEY_COMPLEX_SMALL
-font = cv2.FONT_HERSHEY_SCRIPT_SIMPLEX
-font = cv2.FONT_HERSHEY_SCRIPT_COMPLEX
+font_size = 2 #文字縮放比例
+color = (255, 0, 0) #B G R
+line_width = 2
+text_size = cv2.getTextSize(text, font, font_size, line_width)
+print('字體大小 : ', text_size)
+w = text_size[0][0]
+h = text_size[0][1]
+x_st = W // 2 - w // 2
+y_st = H // 2 + h // 2
+print(x_st, y_st)
 
-font_size = 1 #文字縮放比例
-color = (0, 0, 255)    #B G R
-line_width = 1 #文字線條粗細度
-bottomLeftOrigin = False;   #False: 從左上畫起, True:從左下畫起
-cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, bottomLeftOrigin)
+cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)  #預設, False
+#cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, False)    #False: 從左上畫起
+#cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, True)     #True:  從左下畫起
+cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), (0, 0, 255), 2)
 
 print('----------------------------------------------------------------------')	#70個
 fonts = [
@@ -96,9 +82,9 @@ fonts = [
 text = 'OpenCV'
 x_st = 450
 y_st = 50
-font_size = 2
-color = (0, 0, 0)
-line_width = 2
+font_size = 2 #文字縮放比例
+color = (0, 0, 0)   #B G R
+line_width = 1
 for font in fonts:
     cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)
     y_st += 60
