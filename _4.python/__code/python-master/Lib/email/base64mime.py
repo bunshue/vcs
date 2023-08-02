@@ -1,29 +1,3 @@
-# Copyright (C) 2002-2007 Python Software Foundation
-# Author: Ben Gertzfield
-# Contact: email-sig@python.org
-
-"""Base64 content transfer encoding per RFCs 2045-2047.
-
-This module handles the content transfer encoding method defined in RFC 2045
-to encode arbitrary 8-bit data using the three 8-bit bytes in four 7-bit
-characters encoding known as Base64.
-
-It is used in the MIME standards for email to attach images, audio, and text
-using some 8-bit character sets to messages.
-
-This module provides an interface to encode and decode both headers and bodies
-with Base64 encoding.
-
-RFC 2045 defines a method for including character set information in an
-`encoded-word' in a header.  This method is commonly used for 8-bit real names
-in To:, From:, Cc:, etc. fields, as well as Subject: lines.
-
-This module does not do the line wrapping or end-of-line character conversion
-necessary for proper internationalized headers; it only does dumb encoding and
-decoding.  To deal with the various line wrapping issues, use the email.header
-module.
-"""
-
 __all__ = [
     'body_decode',
     'body_encode',

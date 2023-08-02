@@ -1,11 +1,3 @@
-# Copyright (C) 2002-2007 Python Software Foundation
-# Contact: email-sig@python.org
-
-"""Email address parsing code.
-
-Lifted directly from rfc822.py.  This should eventually be rewritten.
-"""
-
 __all__ = [
     'mktime_tz',
     'parsedate',

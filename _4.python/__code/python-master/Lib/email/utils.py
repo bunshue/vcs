@@ -1,27 +1,3 @@
-# Copyright (C) 2001-2010 Python Software Foundation
-# Author: Barry Warsaw
-# Contact: email-sig@python.org
-
-"""Miscellaneous utilities."""
-
-__all__ = [
-    'collapse_rfc2231_value',
-    'decode_params',
-    'decode_rfc2231',
-    'encode_rfc2231',
-    'formataddr',
-    'formatdate',
-    'format_datetime',
-    'getaddresses',
-    'make_msgid',
-    'mktime_tz',
-    'parseaddr',
-    'parsedate',
-    'parsedate_tz',
-    'parsedate_to_datetime',
-    'unquote',
-    ]
-
 import os
 import re
 import time
@@ -48,72 +24,6 @@ TICK = "'"
 specialsre = re.compile(r'[][\\()<>@,:;".]')
 escapesre = re.compile(r'[\\"]')
 
-def _has_surrogates(s):
-    """Return True if s contains surrogate-escaped binary data."""
-    # This check is based on the fact that unless there are surrogates, utf8
-    # (Python's default encoding) can encode any string.  This is the fastest
-    # way to check for surrogates, see issue 11454 for timings.
-    try:
-        s.encode()
-        return False
-    except UnicodeEncodeError:
-        return True
-
-# How to deal with a string containing bytes before handing it to the
-# application through the 'normal' interface.
-def _sanitize(string):
-    # Turn any escaped bytes into unicode 'unknown' char.  If the escaped
-    # bytes happen to be utf-8 they will instead get decoded, even if they
-    # were invalid in the charset the source was supposed to be in.  This
-    # seems like it is not a bad thing; a defect was still registered.
-    original_bytes = string.encode('utf-8', 'surrogateescape')
-    return original_bytes.decode('utf-8', 'replace')
-
-
-
-# Helpers
-
-def formataddr(pair, charset='utf-8'):
-    """The inverse of parseaddr(), this takes a 2-tuple of the form
-    (realname, email_address) and returns the string value suitable
-    for an RFC 2822 From, To or Cc header.
-
-    If the first element of pair is false, then the second element is
-    returned unmodified.
-
-    Optional charset if given is the character set that is used to encode
-    realname in case realname is not ASCII safe.  Can be an instance of str or
-    a Charset-like object which has a header_encode method.  Default is
-    'utf-8'.
-    """
-    name, address = pair
-    # The address MUST (per RFC) be ascii, so raise an UnicodeError if it isn't.
-    address.encode('ascii')
-    if name:
-        try:
-            name.encode('ascii')
-        except UnicodeEncodeError:
-            if isinstance(charset, str):
-                charset = Charset(charset)
-            encoded_name = charset.header_encode(name)
-            return "%s <%s>" % (encoded_name, address)
-        else:
-            quotes = ''
-            if specialsre.search(name):
-                quotes = '"'
-            name = escapesre.sub(r'\\\g<0>', name)
-            return '%s%s%s <%s>' % (quotes, name, quotes, address)
-    return address
-
-
-
-def getaddresses(fieldvalues):
-    """Return a list of (REALNAME, EMAIL) for each fieldvalue."""
-    all = COMMASPACE.join(fieldvalues)
-    a = _AddressList(all)
-    return a.addresslist
-
-
 
 ecre = re.compile(r'''
   =\?                   # literal =?
@@ -136,21 +46,6 @@ def _format_timetuple_and_zone(timetuple, zone):
         zone)
 
 def formatdate(timeval=None, localtime=False, usegmt=False):
-    """Returns a date string as specified by RFC 2822, e.g.:
-
-    Fri, 09 Nov 2001 01:08:47 -0000
-
-    Optional timeval if given is a floating point time value as accepted by
-    gmtime() and localtime(), otherwise the current time is used.
-
-    Optional localtime is a flag that when True, interprets timeval, and
-    returns a date relative to the local timezone instead of UTC, properly
-    taking daylight savings time into account.
-
-    Optional argument usegmt means that the timezone is written out as
-    an ascii string, not numeric one (so "GMT" instead of "+0000"). This
-    is needed for HTTP, and is only used when localtime==False.
-    """
     # Note: we cannot use strftime() because that honors the locale and RFC
     # 2822 requires that day and month names be the English abbreviations.
     if timeval is None:
@@ -360,19 +255,6 @@ def collapse_rfc2231_value(value, errors='replace',
 #
 
 def localtime(dt=None, isdst=-1):
-    """Return local time as an aware datetime object.
-
-    If called without arguments, return current time.  Otherwise *dt*
-    argument should be a datetime instance, and it is converted to the
-    local time zone according to the system time zone database.  If *dt* is
-    naive (that is, dt.tzinfo is None), it is assumed to be in local time.
-    In this case, a positive or zero value for *isdst* causes localtime to
-    presume initially that summer time (for example, Daylight Saving Time)
-    is or is not (respectively) in effect for the specified time.  A
-    negative value for *isdst* causes the localtime() function to attempt
-    to divine whether summer time is in effect for the specified time.
-
-    """
     if dt is None:
         return datetime.datetime.now(datetime.timezone.utc).astimezone()
     if dt.tzinfo is not None:
@@ -397,3 +279,30 @@ def localtime(dt=None, isdst=-1):
         else:
             tz = datetime.timezone(delta)
     return dt.replace(tzinfo=tz)
+
+
+ccc = formatdate(timeval=None, localtime=False, usegmt=False)
+print(ccc)
+
+timeval = time.time()
+print(timeval)
+now = time.localtime(timeval)
+print(type(now))
+print(now)
+
+ccc = datetime.datetime.now(datetime.timezone.utc).astimezone()
+print(ccc)
+
+    
+
+
+
+'''
+dt = datet
+def format_datetime(dt, usegmt=False):
+'''
+
+
+
+    
+

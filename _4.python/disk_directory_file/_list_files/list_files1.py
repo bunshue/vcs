@@ -62,35 +62,18 @@ print('------------------------------')  #30個
 
 import os
 for f in os.listdir(foldername):
-    if os.path.isdir(f):
-        print('dir : ', f)
-    else:
-        print('file : ', f)
-
+    print(f):
 
 for file in os.listdir(foldername):
     afile = os.path.join(foldername, file)
-    if os.path.isdir(afile):
-        print('dir : ', afile)
-    else:
-        print('file : ', afile)
-        
+    print(afile)
 
 print('------------------------------')  #30個
 
 names = os.listdir(foldername)
 
 for name in sorted(names):
-    full = name
-    if os.path.islink(full):
-        print('link')
-    elif os.path.isdir(full):
-        print('dir')
-    else:
-        print('file')
-
-
-
+    print(name)
 
 print('指定目錄下之ls (單層)')
 filenames = os.listdir(foldername)    #單層
@@ -101,20 +84,11 @@ filenames = os.listdir(foldername)    #單層
 print(filenames)
 for filename in filenames:
     print(filename, end = '')
-    if os.path.isdir(filename):
-        print('資料夾', end = '')
-    if os.path.islink(filename):
-        print('連結', end = '')
-    print()
 
 filelist = []
 for filename in filenames:
     fn = os.path.join(foldername, filename)
     print(fn, end = '\t')
-    if os.path.isdir(fn):
-        print('資料夾')
-    else:
-        print('檔案')
 
 filelist.sort(key = os.path.normcase)
 
@@ -527,7 +501,7 @@ def output(*strings):
 import glob
 import sys
 
-foldername = 'C:/_git/vcs/_1.data/______test_files2/'
+foldername = 'C:/_git/vcs/_1.data/______test_files5/'
 files = glob.glob(foldername)
 
 for file in files:
@@ -537,7 +511,7 @@ for file in files:
 
 '''
 
-foldername = 'C:/_git/vcs/_1.data/______test_files2'
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
 
 for cursrc, dirs, files in os.walk(foldername):
     print('----------------')
@@ -552,7 +526,7 @@ for cursrc, dirs, files in os.walk(foldername):
 
 
 '''
-foldername = 'C:/_git/vcs/_1.data/______test_files2/'
+foldername = 'C:/_git/vcs/_1.data/______test_files5/'
 
 for root, dirs, files in os.walk(foldername):
     for fn in files:
@@ -598,12 +572,7 @@ files = listdir(foldername)
 for f in files:
   # 產生檔案的絕對路徑
   fullpath = join(foldername, f)
-  # 判斷 fullpath 是檔案還是目錄
-  if isfile(fullpath):
-    print("檔案：", f)
-  elif isdir(fullpath):
-    print("目錄：", f)
-    
+  print(fullpath)
 
 #os.walk 遞迴搜尋檔案
 #os.walk 是一個以遞迴方式列出特定路徑下，所有子目錄與檔案的函數
@@ -639,12 +608,7 @@ files = listdir(foldername)
 for f in files:
   # 產生檔案的絕對路徑
   fullpath = join(foldername, f)
-  # 判斷 fullpath 是檔案還是目錄
-  if isfile(fullpath):
-    print("檔案：", f)
-  elif isdir(fullpath):
-    print("目錄：", f)
-    
+  print(fullpath)
     
 #os.walk 遞迴搜尋檔案
 #os.walk 是一個以遞迴方式列出特定路徑下，所有子目錄與檔案的函數

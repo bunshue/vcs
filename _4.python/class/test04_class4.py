@@ -60,3 +60,52 @@ eee = ccc.path_mtime('aaaaa')
 print(type(eee))
 print(eee)
 
+
+class BufferedSubFile(object):
+    def __init__(self):
+        self.mesg_stack = []
+        self.mesg_count = 0
+        self._closed = False
+
+    def push_mesg(self, mesg):
+        self.mesg_stack.append(mesg)
+        self.mesg_count += 1
+
+    def pop_mesg(self):
+        if self.mesg_count > 0:
+            mesg = self.mesg_stack.pop()
+            self.mesg_count -= 1
+        else:
+            mesg = '無資料'
+        return mesg
+
+    def close(self):
+        self.mesg_stack = []
+        self.mesg_count = 0
+        self._closed = True
+
+
+ccc = BufferedSubFile()
+ccc.push_mesg('aaa')
+ccc.push_mesg('bbb')
+ccc.push_mesg('ccc')
+
+ppp = ccc.pop_mesg()
+print(ppp)
+ppp = ccc.pop_mesg()
+print(ppp)
+ppp = ccc.pop_mesg()
+print(ppp)
+ppp = ccc.pop_mesg()
+print(ppp)
+ppp = ccc.pop_mesg()
+print(ppp)
+
+
+
+
+
+
+
+
+

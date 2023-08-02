@@ -108,12 +108,11 @@ if os.path.isdir(file_or_folder_name):
 if not os.path.isdir(file_or_folder_name):
     print('資料夾不存在')
 
+if os.path.isfile(file_or_folder_name):
+    print(filename, '是 檔案')
+
 if os.path.islink(file_or_folder_name):
     print(filename, '是 連結')
-
-if os.path.isfile(file_or_folder_name):
-    print('aaaa')
-
 
 #--------------------- new
 
