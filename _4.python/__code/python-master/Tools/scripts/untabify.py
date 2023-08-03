@@ -1,7 +1,3 @@
-#! /usr/bin/env python3
-
-"Replace tabs with spaces in argument files.  Print names of changed files."
-
 import os
 import sys
 import getopt

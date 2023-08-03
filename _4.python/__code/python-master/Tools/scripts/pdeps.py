@@ -1,32 +1,7 @@
-#! /usr/bin/env python3
-
-# pdeps
-#
-# Find dependencies between a bunch of Python modules.
-#
-# Usage:
-#       pdeps file1.py file2.py ...
-#
-# Output:
-# Four tables separated by lines like '--- Closure ---':
-# 1) Direct dependencies, listing which module imports which other modules
-# 2) The inverse of (1)
-# 3) Indirect dependencies, or the closure of the above
-# 4) The inverse of (3)
-#
-# To do:
-# - command line options to select output type
-# - option to automatically scan the Python library for referenced modules
-# - option to limit output to particular modules
-
-
 import sys
 import re
 import os
 
-
-# Main program
-#
 def main():
     args = sys.argv[1:]
     if not args:
@@ -116,50 +91,5 @@ def closure(table):
     return reach
 
 
-# Invert a table (this is again totally general).
-# All keys of the original table are made keys of the inverse,
-# so there may be empty lists in the inverse.
-#
-def inverse(table):
-    inv = {}
-    for key in table.keys():
-        if key not in inv:
-            inv[key] = []
-        for item in table[key]:
-            store(inv, item, key)
-    return inv
 
 
-# Store "item" in "dict" under "key".
-# The dictionary maps keys to lists of items.
-# If there is no list for the key yet, it is created.
-#
-def store(dict, key, item):
-    if key in dict:
-        dict[key].append(item)
-    else:
-        dict[key] = [item]
-
-
-# Tabulate results neatly
-#
-def printresults(table):
-    modules = sorted(table.keys())
-    maxlen = 0
-    for mod in modules: maxlen = max(maxlen, len(mod))
-    for mod in modules:
-        list = sorted(table[mod])
-        print(mod.ljust(maxlen), ':', end=' ')
-        if mod in list:
-            print('(*)', end=' ')
-        for ref in list:
-            print(ref, end=' ')
-        print()
-
-
-# Call main and honor exit status
-if __name__ == '__main__':
-    try:
-        sys.exit(main())
-    except KeyboardInterrupt:
-        sys.exit(1)

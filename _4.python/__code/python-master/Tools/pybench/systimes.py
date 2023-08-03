@@ -1,54 +1,6 @@
-#!/usr/bin/env python
-
-""" systimes() user and system timer implementations for use by
-    pybench.
-
-    This module implements various different strategies for measuring
-    performance timings. It tries to choose the best available method
-    based on the platform and available tools.
-
-    On Windows, it is recommended to have the Mark Hammond win32
-    package installed. Alternatively, the Thomas Heller ctypes
-    packages can also be used.
-
-    On Unix systems, the standard resource module provides the highest
-    resolution timings. Unfortunately, it is not available on all Unix
-    platforms.
-
-    If no supported timing methods based on process time can be found,
-    the module reverts to the highest resolution wall-clock timer
-    instead. The system time part will then always be 0.0.
-
-    The module exports one public API:
-
-    def systimes():
-
-        Return the current timer values for measuring user and system
-        time as tuple of seconds (user_time, system_time).
-
-    Copyright (c) 2006, Marc-Andre Lemburg (mal@egenix.com). See the
-    documentation for further information on copyrights, or contact
-    the author. All Rights Reserved.
-
-"""
-
 from __future__ import print_function
 
 import time, sys
-
-#
-# Note: Please keep this module compatible to Python 1.5.2.
-#
-# TODOs:
-#
-# * Add ctypes wrapper for new clock_gettime() real-time POSIX APIs;
-#   these will then provide nano-second resolution where available.
-#
-# * Add a function that returns the resolution of systimes()
-#   values, ie. systimesres().
-#
-
-### Choose an implementation
 
 SYSTIMES_IMPLEMENTATION = None
 USE_CTYPES_GETPROCESSTIMES = 'ctypes GetProcessTimes() wrapper'
@@ -187,7 +139,10 @@ def some_workload():
     for i in range(10000000):
         x = x + 1
 
-def test_workload():
+if __name__ == '__main__':
+    print('Using %s as timer' % SYSTIMES_IMPLEMENTATION)
+    print()
+    
     print('Testing systimes() under load conditions')
     t0 = systimes()
     some_workload()
@@ -197,7 +152,6 @@ def test_workload():
     print('differences:', (t1[0] - t0[0], t1[1] - t0[1]))
     print()
 
-def test_idle():
     print('Testing systimes() under idle conditions')
     t0 = systimes()
     time.sleep(1)
@@ -207,8 +161,3 @@ def test_idle():
     print('differences:', (t1[0] - t0[0], t1[1] - t0[1]))
     print()
 
-if __name__ == '__main__':
-    print('Using %s as timer' % SYSTIMES_IMPLEMENTATION)
-    print()
-    test_workload()
-    test_idle()

@@ -55,6 +55,7 @@ def main():
                 print(line)
 
 
+
 def usage(msg, code=2):
     sys.stdout = sys.stderr
     print(msg)
@@ -62,5 +63,5 @@ def usage(msg, code=2):
     sys.exit(code)
 
 
-if __name__ == '__main__':
-    main()
+usage("not enough arguments")
+

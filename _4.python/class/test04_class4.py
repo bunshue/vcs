@@ -1,12 +1,40 @@
-
 import os
 import logging
 
+__copyright__ = """\
+Copyright (c), 1997-2006, Marc-Andre Lemburg (mal@lemburg.com)
+Copyright (c), 2000-2006, eGenix.com Software GmbH (info@egenix.com)
+See the documentation for further information on copyrights,
+or contact the author. All Rights Reserved.
+"""
+__version__ = '1.2'
+
+# Name (defaults to program name)
+name = ''
+optionlist = None   # List of passed options
+
 class MyLog(object):
+
+    options = []
+    # Header (default to program name)
+    header = ''
+
+    # Synopsis (%(name)s is replaced by the program name)
+    synopsis = '%(name)s [option] files...'
+
+    # General information printed after the possible options (optional)
+    about = ''
+
+    # Copyright to show
+    copyright = __copyright__
+
+    # Version (optional)
+    version = ''
 
     def __init__(self, log):
         self.log = log
         self.first_log = True
+        self.name = name
 
     def set_filename(self, filename):
         self.filename = filename
@@ -26,6 +54,67 @@ class MyLog(object):
     def path_mtime(self, filename):
         filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
         return os.stat(filename)
+
+    def print_header(self):
+
+        print('-'*72)
+        print(self.header % self.__dict__)
+        print('-'*72)
+        print()
+
+    def handle__copyright(self,arg):
+
+        self.print_header()
+        copyright = self.copyright % self.__dict__
+        print(copyright.strip())
+        print()
+        return 0
+
+    def help(self,note=''):
+
+        if self.synopsis:
+            print('Synopsis:')
+            # To remain backward compatible:
+            try:
+                synopsis = self.synopsis % self.name
+            except (NameError, KeyError, TypeError):
+                synopsis = self.synopsis % self.__dict__
+            print(' ' + synopsis)
+        print()
+        self.print_options()
+        if self.version:
+            print('Version:')
+            print(' %s' % self.version)
+            print()
+        if self.about:
+            about = self.about % self.__dict__
+            print(about.strip())
+            print()
+        if note:
+            print('-'*72)
+            print('Note:',note)
+            print()
+
+    def notice(self,note):
+
+        print('-'*72)
+        print('Note:',note)
+        print('-'*72)
+        print()
+
+    def print_options(self):
+
+        options = self.options
+        print('Options and default settings:')
+        if not options:
+            print('  None')
+            return
+        int = [x for x in options if x.prefix == '--']
+        short = [x for x in options if x.prefix == '-']
+        items = short + int
+        for o in options:
+            print(' ',o)
+        print()
 
 
         
@@ -60,6 +149,9 @@ eee = ccc.path_mtime('aaaaa')
 print(type(eee))
 print(eee)
 
+fff = ccc.handle__copyright('tttt')
+
+ggg = ccc.help('222')
 
 class BufferedSubFile(object):
     def __init__(self):

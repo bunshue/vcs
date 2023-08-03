@@ -60,3 +60,71 @@ if __name__ == '__main__':
     text = infile.read()
     defs = parse(text)
     writefile(outfile,defs)
+
+
+
+
+
+
+import __future__
+import tokenize
+import os
+import sys
+
+dryrun  = 0
+recurse = 0
+verbose = 0
+
+def errprint(*args):
+    strings = map(str, args)
+    msg = ' '.join(strings)
+    if msg[-1:] != '\n':
+        msg += '\n'
+    sys.stderr.write(msg)
+
+msg = 'aaaaaaaaaaaaaa'
+errprint(msg)
+
+errprint("Usage:", __doc__)
+
+
+    if os.path.isdir(file) and not os.path.islink(file):
+        if verbose:
+            print("listing directory", file)
+        names = os.listdir(file)
+        for name in names:
+            fullname = os.path.join(file, name)
+            if ((recurse and os.path.isdir(fullname) and
+                 not os.path.islink(fullname))
+                or name.lower().endswith(".py")):
+                check(fullname)
+        return
+
+                errprint("Skipping file %r; can't parse line %d:\n%s" %
+                         (self.fname, srow, line))
+
+
+
+import sys, re, os
+
+        sys.stderr.write('Cannot open %s\n' % filename)
+
+    base = os.path.basename(filename)
+    if base[-3:] == '.py':
+        base = base[:-3]
+    s = base + '\t' + filename + '\t' + '1\n'
+    tags.append(s)
+    while 1:
+        line = fp.readline()
+        if not line:
+            break
+
+
+
+import sys
+
+print(sys.version)
+
+
+
+
