@@ -1,6 +1,7 @@
-import tkinter, PyPDF2
-from tkinter import filedialog 
+import tkinter
+import PyPDF2
 
+from tkinter import filedialog 
 
 def openFile():
     filename = filedialog.askopenfilename(title="Open PDF file", 

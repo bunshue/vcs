@@ -50,5 +50,5 @@ for x in mycol.find({},{ "address": 0 }):
   print(x)
 
 #Print all documents with name Jane
-for x in mycol.find({"name":"Jane}):
+for x in mycol.find({"name":"Jane"}):
   print(x)
