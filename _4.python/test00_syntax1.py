@@ -1,8 +1,8 @@
-"""
+'''
 ====================
 各種python專用的語法
 ====================
-"""
+'''
 
 #打印使用說明
 print(__doc__)
@@ -16,6 +16,21 @@ print(pd.__name__)
 
 if __name__ == '__main__':
     print('happy new year !!')
+
+
+#使用dir()內置函數返回一個包含一個模塊中定義名稱的字符串的排序列表。
+#該列表包含在一個模塊中定義的所有模塊，變量和函數的名稱。
+
+#查看 math
+import math
+content = dir(math)
+print("math 模組所支援的指令 : " + str(content))
+
+#查看 serial
+import serial
+content = dir(serial)
+print("serial 模組所支援的指令 : " + str(content))
+
 
 menu = {'拉麵':500, '炒飯':430, '煎餃':210}
 print(type(menu))
@@ -40,19 +55,6 @@ for kid in family:
 	print('吃早餐')
 	continue
 	print('出門上學')
-
-#使用dir()內置函數返回一個包含一個模塊中定義名稱的字符串的排序列表。
-#該列表包含在一個模塊中定義的所有模塊，變量和函數的名稱。
-
-#查看 math
-import math
-content = dir(math)
-print("math 模組所支援的指令 : " + str(content))
-
-#查看 serial
-import serial
-content = dir(serial)
-print("serial 模組所支援的指令 : " + str(content))
 
 print('設定變數')
 ROWS, COLUMNS = 19, 4
