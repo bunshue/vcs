@@ -2,8 +2,6 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTableWidget, QT
 import sys
 import openpyxl
 
-
-
 class Main(QWidget):
     def __init__(self):
         super(Main, self).__init__()
@@ -18,7 +16,7 @@ class Main(QWidget):
         self.load_data()
         
     def load_data(self):
-        path = "D:\codefirst.io\PyQt5 Excel to QTableWidget\list-countries-world.xlsx"
+        path = "C:/_git/vcs/_4.python/__code/codefirstio/excel-data-with-pyqt5-qtablewidget-main/list-countries-world.xlsx"
         workbook = openpyxl.load_workbook(path)
         sheet = workbook.active
         
@@ -35,11 +33,10 @@ class Main(QWidget):
                 self.table_widget.setItem(row_index , col_index, QTableWidgetItem(str(value)))
                 col_index += 1
             row_index += 1
-        
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = Main()
     window.showMaximized()
     app.exec_()
+

@@ -2,8 +2,8 @@ import openpyxl
 from docxtpl import DocxTemplate
 import datetime
 
-# Load data from Excel
-path = "D:\codefirst.io\Excel Sheet to Word Documents\student_data.xlsx"
+path = "C:/_git/vcs/_4.python/__code/codefirstio/excel-to-word-docs-main/student_data2.xlsx"
+
 workbook = openpyxl.load_workbook(path)
 sheet = workbook.active
 
@@ -20,4 +20,6 @@ for value_tuple in list_values[1:]:
                 "instructor":value_tuple[3]})
     
     doc_name = "certificate" + value_tuple[0] + value_tuple[1] + ".docx"
+    print(doc_name)
     doc.save(doc_name)
+

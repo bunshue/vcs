@@ -18,7 +18,7 @@ file_path = ""
 def add_image():
     global file_path
     file_path = filedialog.askopenfilename(
-        initialdir="D:/codefirst.io/Tkinter Image Editor/Pictures")
+        initialdir = 'C:/dddddddddd/____download')
     image = Image.open(file_path)
     width, height = int(image.width / 2), int(image.height / 2)
     image = image.resize((width, height), Image.ANTIALIAS)

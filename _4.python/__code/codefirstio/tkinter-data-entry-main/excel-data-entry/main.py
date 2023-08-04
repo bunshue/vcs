@@ -2,6 +2,7 @@ import tkinter
 from tkinter import ttk
 from tkinter import messagebox
 import os
+import time
 import openpyxl
 
 def enter_data():
@@ -28,7 +29,7 @@ def enter_data():
             print("Registration status", registration_status)
             print("------------------------------------------")
             
-            filepath = "D:\codefirst.io\Tkinter Data Entry\data.xlsx"
+            filepath = 'excel_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.xlsx'
             
             if not os.path.exists(filepath):
                 workbook = openpyxl.Workbook()

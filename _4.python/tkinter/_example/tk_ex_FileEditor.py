@@ -37,8 +37,8 @@ class FileEditor:
         frame0.grid(row = 1, column = 1, sticky = tk.W)
         
         # Create images
-        opneImage = tk.PhotoImage(file = "image/open.gif")
-        saveImage = tk.PhotoImage(file = "image/save.gif")
+        opneImage = tk.PhotoImage(file = "../image/open.gif")
+        saveImage = tk.PhotoImage(file = "../image/save.gif")
         
         tk.Button(frame0, image = opneImage, command = self.openFile).grid(row = 1, column = 1, sticky = tk.W)
         tk.Button(frame0, image = saveImage, command = self.saveFile).grid(row = 1, column = 2)

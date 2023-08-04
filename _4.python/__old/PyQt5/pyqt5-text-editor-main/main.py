@@ -41,7 +41,7 @@ class Main(QMainWindow):
             self.saveFileAs()
 
     def saveFileAs(self):
-        pathname = QFileDialog.getSaveFileName(self, 'Save file', 'D:\codefirst.io\PyQt5 Text Editor', 'Text files(*.txt)')
+        pathname = QFileDialog.getSaveFileName(self, 'Save file', 'C:\dddddddddd', 'Text files(*.txt)')
         filetext = self.textEdit.toPlainText()
         with open(pathname[0], 'w') as f:
             f.write(filetext)
@@ -49,7 +49,7 @@ class Main(QMainWindow):
         self.setWindowTitle(pathname[0])
 
     def openFile(self):
-        fname = QFileDialog.getOpenFileName(self, 'Open file', 'D:\codefirst.io\PyQt5 Text Editor', 'Text files (*.txt)')
+        fname = QFileDialog.getOpenFileName(self, 'Open file', 'C:\dddddddddd', 'Text files (*.txt)')
         self.setWindowTitle(fname[0])
         with open(fname[0], 'r') as f:
             filetext = f.read()

@@ -3,7 +3,7 @@ from tkinter import ttk
 import openpyxl
 
 def load_data():
-    path = "D:\codefirst.io\Tkinter Excel Viewer\list-countries-world.xlsx"
+    path = 'C:/_git/vcs/_4.python/__code/codefirstio/tkinter-excel-viewer-main/list-countries-world.xlsx'
     workbook = openpyxl.load_workbook(path)
     sheet = workbook.active
 
@@ -24,3 +24,4 @@ window.title("Excel Viewer")
 load_data()
 
 window.mainloop()
+

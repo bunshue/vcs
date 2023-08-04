@@ -10,7 +10,7 @@ class MainWindow(QDialog):
         self.browse.clicked.connect(self.browsefiles)
 
     def browsefiles(self):
-        fname=QFileDialog.getOpenFileName(self, 'Open file', 'D:\codefirst.io\PyQt5 tutorials\Browse Files', 'Images (*.png, *.xmp *.jpg)')
+        fname=QFileDialog.getOpenFileName(self, 'Open file', 'C:\dddddddddd\____download', 'Images (*.png, *.xmp *.jpg)')
         self.filename.setText(fname[0])
 
 app=QApplication(sys.argv)

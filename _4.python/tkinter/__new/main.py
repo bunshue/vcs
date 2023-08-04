@@ -1,20 +1,18 @@
 import tkinter
-import PyPDF2
 
 from tkinter import filedialog 
 
 def openFile():
-    filename = filedialog.askopenfilename(title="Open PDF file", 
-                                                  initialdir='D:\codefirst.io\Tkinter Extract PDF Text',
+    pdf_filename = filedialog.askopenfilename(title="Open PDF file", 
+                                                  initialdir='C:/dddddddddd/____download',
                                                   filetypes=[('PDF files', '*.pdf')])
-    print(filename)
+    print(pdf_filename)
     
-    filename_label.configure(text=filename)    
+    filename_label.configure(text=pdf_filename)    
     outputfile_text.delete("1.0", tkinter.END)
-    reader = PyPDF2.PdfReader(filename)
-    for i in range (reader.numPages):
-        current_text = reader.getPage(i).extractText()
-        outputfile_text.insert(tkinter.END, current_text)
+    
+    current_text = 'aaaaaaaa'
+    outputfile_text.insert(tkinter.END, current_text)
 
 
 root = tkinter.Tk()
