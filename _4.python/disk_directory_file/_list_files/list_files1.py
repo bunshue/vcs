@@ -15,15 +15,7 @@ import os
 import glob
 
 import sys
-import shutil
-
 import stat
-import time
-import hashlib
-
-import ast
-import tokenize
-import io
 
 foldername = 'C:/_git/vcs/_1.data/______test_files4'
 
@@ -41,7 +33,7 @@ for root, dirs, filenames in filenames:
 
 print('------------------------------')  #30個
 
-print('撈出資料夾下所有檔案, 多層')
+print('撈出資料夾下所有檔案, 多層1')
 foldername = 'C:/_git/vcs/_1.data/______test_files5/'
 
 print('搜尋路徑：', foldername)
@@ -52,14 +44,14 @@ for root, dirs, filenames in os.walk(foldername):
     print()
 
 print('------------------------------')  #30個
-  
+
+print('撈出資料夾下所有檔案, 多層2')  
 # 遞迴列出所有檔案的絕對路徑
 for root, dirs, filenames in os.walk(foldername):
     for filename in filenames:
-        print(filename)
+        print(filename, end = '\t\t')
         long_filename = os.path.join(root, filename)  # 取得檔案的絕對路徑
         print(long_filename)
-
 print('----------------------------------------------------------------------')	#70個
 print('ls 測試 os.listdir')
 
@@ -83,12 +75,6 @@ print(type(filenames))
 print(filenames)
 
 print('------------------------------')  #30個
-zz = [name for name in filenames if name.endswith(('.jpg', '.h'))]
-print('*.jpg *.h files:')
-print(zz)
-
-
-print('------------------------------')  #30個
 
 
 filename = os.listdir(foldername)
@@ -98,8 +84,6 @@ for sub in filename:
     print(fullname)
 
 print('------------------------------')  #30個
-
-
 
 print('指定目錄下之ls (單層)')
 filenames = os.listdir(foldername)    #單層
@@ -113,6 +97,11 @@ for filename in filenames:
 print('排序印出')
 for filename in sorted(filenames):
     print(filename)
+
+print('印出 filenames 內特定附檔名之檔案')
+zz = [name for name in filenames if name.endswith(('.jpg', '.txt'))]
+print('*.jpg *.txt files:')
+print(zz)
 
 print('------------------------------')  #30個
 
@@ -131,7 +120,7 @@ filelist.sort(key = os.path.normcase)
 
 print('------------------------------')  #30個
 
-print('撈出資料夾下所有檔案, 多層')
+print('撈出資料夾下所有檔案, 多層3')
 def list_files1(foldername, callback):
     for filename in os.listdir(foldername):    #單層
         long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
@@ -177,7 +166,7 @@ def read_files(foldername, showProgress = False, readPixelData=False, force=Fals
     _listFiles(filelist, basedir)
     print(filelist)
 
-print('撈出資料夾下所有檔案, 多層')
+print('撈出資料夾下所有檔案, 多層4')
 
 '''
 find_files(foldername)
@@ -201,7 +190,7 @@ list_files3(foldername)
 
 print('------------------------------')  #30個
 
-print('撈出資料夾下所有檔案, 多層')
+print('撈出資料夾下所有檔案, 多層5')
 
 def list_files4(foldername):
     filenames = os.listdir(foldername)
@@ -303,9 +292,6 @@ for filename in filenames:
 
 print('------------------------------')  #30個
 
-
-print('------------------------------')  #30個
-
 #尋找檔案
 print('尋找目前目錄下之 *.py *.txt')
 filenames = glob.glob("glob.py") + glob.glob("os*.py") + glob.glob("*.txt") 
@@ -324,20 +310,7 @@ for filename in filenames:
 print("完成...")
 
 filenames = glob.glob('*.jpg') + glob.glob('*.png')
-
-allmd5s = dict()
-for filename in filenames:
-    print(filename + " is processing...")
-    img_md5 = hashlib.md5(open(filename,'rb').read()).digest()
-    if img_md5 in allmd5s:
-        print("---------------")
-        print("以下為重覆的檔案：")
-        #print(os.path.abspath(filename))
-        #print(allmd5s[img_md5])
-        os.system("open " + os.path.abspath(filename))
-        os.system("open " + allmd5s[img_md5])
-    else:
-        allmd5s[img_md5] = os.path.abspath(filename) 
+print(filenames)
 
 print('------------------------------')  #30個
 

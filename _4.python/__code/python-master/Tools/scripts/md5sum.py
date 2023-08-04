@@ -69,25 +69,17 @@ def printsumfp(fp, filename, out=sys.stdout):
     out.write('%s %s\n' % (m.hexdigest(), filename))
     return 0
 
-def main(args = sys.argv[1:], out=sys.stdout):
-    global fnfilter, rmode, bufsize
-    try:
-        opts, args = getopt.getopt(args, 'blts:')
-    except getopt.error as msg:
-        sys.stderr.write('%s: %s\n%s' % (sys.argv[0], msg, usage))
-        return 2
-    for o, a in opts:
-        if o == '-l':
-            fnfilter = os.path.basename
-        elif o == '-b':
-            rmode = 'rb'
-        elif o == '-t':
-            rmode = 'r'
-        elif o == '-s':
-            bufsize = int(a)
-    if not args:
-        args = ['-']
-    return sum(args, out)
+def main():
+    global fnfilter, rmode
+    fnfilter = os.path.basename
+    rmode = 'rb'
 
-if __name__ == '__main__' or __name__ == sys.argv[0]:
-    sys.exit(main(sys.argv[1:], sys.stdout))
+    filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+    return sum(filename)
+
+
+sys.stderr.write('%s: %s\n%s' % ('aaaa', 'bbbbb', usage))
+
+main()
+

@@ -224,7 +224,8 @@ cursor = conn.execute(sqlstr)
 rows = cursor.fetchall()    #讀取全部資料
 if len(rows) > 0:
     print("找到資料 {}\t{}\t{}\t{}".format(rows[0][0], rows[0][1], rows[0][2], rows[0][3]))
-    answer = input("確定要刪除嗎？(y/n)")
+    #answer = input('確定要刪除嗎？(y/n)')
+    answer = 'n'
     if answer == 'y' or answer == 'Y':
         sqlstr = "DELETE FROM table01 WHERE id_num = {};".format(number)
         conn.execute(sqlstr)

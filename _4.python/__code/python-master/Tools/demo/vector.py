@@ -1,33 +1,4 @@
-#!/usr/bin/env python3
-
-"""
-A demonstration of classes and their special methods in Python.
-"""
-
 class Vec:
-    """A simple vector class.
-
-    Instances of the Vec class can be constructed from numbers
-
-    >>> a = Vec(1, 2, 3)
-    >>> b = Vec(3, 2, 1)
-
-    added
-    >>> a + b
-    Vec(4, 4, 4)
-
-    subtracted
-    >>> a - b
-    Vec(-2, 0, 2)
-
-    and multiplied by a scalar on the left
-    >>> 3.0 * a
-    Vec(3.0, 6.0, 9.0)
-
-    or on the right
-    >>> a * 3.0
-    Vec(3.0, 6.0, 9.0)
-    """
     def __init__(self, *v):
         self.v = list(v)
 
@@ -66,9 +37,30 @@ class Vec:
 
     __rmul__ = __mul__
 
+a = Vec(1, 2, 3)
+b = Vec(3, 2, 1)
 
-def test():
-    import doctest
-    doctest.testmod()
+c = a + b
+print(c)
 
-test()
+c = a - b
+print(c)
+
+c = 3.0 * a
+print(c)
+
+c = a * 3.0
+print(c)
+
+'''
+    >>> a - b
+    Vec(-2, 0, 2)
+
+    and multiplied by a scalar on the left
+    >>> 3.0 * a
+    Vec(3.0, 6.0, 9.0)
+
+    or on the right
+    >>> a * 3.0
+    Vec(3.0, 6.0, 9.0)
+'''

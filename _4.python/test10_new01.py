@@ -40,6 +40,31 @@ print('------------------------------')  #30個
 
 
 
+print('------------------------------')  #30個
+
+
+print('字典的用法')
+plats = {
+    'Linux': 'platform_linux_distribution',
+    'Mac': 'platform_mac_ver',
+    'Windows': 'platform_win32_ver',
+}
+
+print(type(plats))
+print(plats)
+
+for name, func in plats.items():
+    plat = '%s %r' % (name, func)
+    print(plat)
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
 
 print('------------------------------')  #30個
 
@@ -349,17 +374,6 @@ print('------------------------------')  #30個
 
 
 
-import random
-s = ''
-for i in range(0, 10):
-    s += random.choice('<>=^')
-    s += random.choice('+- ')
-    s += str(random.randrange(1, 100))
-    s += str(random.randrange(100))
-    s += random.choice(('', 'E', 'e', 'G', 'g', 'F', 'f', '%'))
-
-print(s)
-
 print('------------------------------')  #30個
 
 import time
@@ -380,10 +394,6 @@ t2 = t1.astimezone().isoformat()
 print(t2)
 
 print('------------------------------')  #30個
-
-i = 30
-import math
-math.sin(math.pi * i / 2)
 
 
 print('------------------------------')  #30個
@@ -844,12 +854,6 @@ print('{:08d}\n{:08d}\n{:08d}'.format(123, 1234, 12345))
 print('------------------------------')  #30個
 
 
-import tempfile
-
-cabname = tempfile.mktemp(suffix=".cab")
-print(cabname)
-
-
 print('------------------------------')  #30個
 
 
@@ -1076,6 +1080,296 @@ print(os.sep)
 
 
 print('------------------------------')  #30個
+
+
+
+
+
+import time
+import datetime
+
+
+#>>> from time import gmtime, strftime
+
+
+ttt = time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
+
+print(ttt)
+
+#'Thu, 28 Jun 2001 14:17:15 +0000'
+
+
+print('------------------------------')  #30個
+
+
+
+
+import time
+
+ddd = time.strptime("30 Nov 00", "%d %b %y")
+print(ddd)
+
+'''
+time.struct_time(tm_year=2000, tm_mon=11, tm_mday=30, tm_hour=0, tm_min=0,
+                 tm_sec=0, tm_wday=3, tm_yday=335, tm_isdst=-1)
+'''
+
+
+
+print('量測時間 ST') 
+# Start the stopwatch / counter
+t1_start = time.perf_counter()
+ 
+time.sleep(1.2345)   # 暫停 1.2345 秒
+ 
+# Stop the stopwatch / counter
+t1_stop = time.perf_counter()
+
+print('量測時間 SP')  
+print(t1_stop, t1_start)
+print(t1_stop - t1_start, '秒')
+
+from time import perf_counter_ns
+ 
+print('量測時間 ST') 
+# Start the stopwatch / counter
+t1_start = time.perf_counter_ns()
+
+time.sleep(1.2345)   # 暫停 1.2345 秒 
+ 
+# Stop the stopwatch / counter
+t1_stop = time.perf_counter_ns()
+
+print('量測時間 SP')
+print(t1_stop, 'ns', t1_start, 'ns')
+ 
+print(t1_stop - t1_start, 'ns')
+
+
+import time
+
+start = time.time()
+
+time.sleep(0.12345)
+
+stop = time.time()
+
+print(stop - start)
+
+
+print('測試hasattr功能')
+print('內建函數 (function) hasattr() ，判斷參數 (parameter) name 是否為 object 的屬性名稱')
+
+class Demo:
+    def __init__(self, i):
+        self.i = i
+        self.x = "xxx"
+        self.y = "yyy"
+        self.z = "zzz"
+     
+    def __str__(self):
+        return str(self.i)
+          
+    def hello(self):
+        print("hello " + self.__str__())
+ 
+d = Demo(22)
+
+print(hasattr(d, "t"))  #不是
+print(hasattr(d, "u"))  #不是
+print(hasattr(d, "v"))  #不是
+print(hasattr(d, "w"))  #不是
+print(hasattr(d, "x"))  #是
+print(hasattr(d, "y"))  #是
+print(hasattr(d, "z"))  #是
+
+
+print('------------------------------')  #30個
+
+
+print('建一個測試list')
+
+class User:
+    user_id: int
+    first_name: str
+    last_name: str
+
+USERS = [(i, f"first_name_{i}", f"last_name_{i}") for i in range(2_0)]
+
+print(type(USERS))
+print(USERS)
+
+
+def show_price(price: float) -> str:
+    return "$ {0:,.2f}".format(price)
+
+
+print(show_price(1000))
+#    '$ 1,000.00'
+
+print(show_price(1_250.75))
+#    '$ 1,250.75'
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+
+import os
+
+def getuser():
+    for name in ('LOGNAME', 'USER', 'LNAME', 'USERNAME'):
+        print(name)
+        user = os.environ.get(name)
+        if user:
+            print(user)
+            return user
+
+print('get user name')
+ccc = getuser()
+print(ccc)
+
+
+print('------------------------------')  #30個
+
+
+
+def gcd(a, b):
+    """Calculate the Greatest Common Divisor of a and b.
+
+    Unless b==0, the result will have the same sign as b (so that when
+    b is divided by it, the result comes out positive).
+    """
+    while b:
+        a, b = b, a%b
+    return a
+
+a = 28
+b = 49
+c = gcd(a, b)
+print(c)
+
+
+print('------------------------------')  #30個
+
+
+import sys
+
+def test():
+    '''Test program.
+    Usage: ftp [-d] [-r[file]] host [-l[dir]] [-d[dir]] [-p] [file] ...
+
+    -d dir
+    -l list
+    -p password
+    '''
+
+    if len(sys.argv) < 2:
+        print(test.__doc__)
+        sys.exit(0)
+
+test()
+
+
+
+print('------------------------------')  #30個
+
+
+
+from random import randint, random, getrandbits
+
+def getrandbytes(size):
+    return getrandbits(8 * size).to_bytes(size, 'little')
+
+
+ccc = b'111' + getrandbytes(100)
+
+print(type(ccc))
+print(ccc)
+
+datacount = randint(16, 64) * 1024 + randint(1, 1024)
+
+ddd = random() * randint(-1000, 1000)
+print(ddd)
+
+
+
+    
+    
+
+print('------------------------------')  #30個
+
+
+import sys
+bytes = sys.maxsize  # smallest total size so far
+print(bytes)
+
+print("Best:", end = ' ', file = sys.stderr)
+
+
+
+print('------------------------------')  #30個
+
+
+import os
+import sys
+m = sys.modules.get('__main__')
+
+print(m)
+
+
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+name = os.path.basename(filename)
+
+print(name)
+
+
+globs = {}
+globs = globs.copy()
+print(globs)
+
+print()
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+if filename.endswith(".jpg"):
+    # It is a module -- insert its dir into sys.path and try to
+    # import it. If it is part of a package, that possibly
+    # won't work because of package imports.
+    dirname, filename = os.path.split(filename)
+    print(filename[:-3])
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+
+
+
+
 
 
 

@@ -395,6 +395,95 @@ print(data)
 print('----------------------------------------------------------------------')	#70個
 print('requests 測試 22')
 
+import requests
+import re
+
+print('抓取網頁中的電話號碼')
+
+url = 'https://www.taichung.gov.tw/10179/12034/'
+
+html = requests.get(url).text
+
+regex04a = r'\(\d{2}\)\d{4}-?\d{4}'
+regex04b = r'\d{2}-\d{4}-?\d{4}'
+regex0800 = r'0800-\d{6}'
+matches = re.findall(regex04a, html)
+matches += re.findall(regex04b, html)
+matches += re.findall(regex0800, html)
+
+for match in matches:
+    print('抓到符合條件的 : ', match)
+    
+print('全部資料')
+print(matches)
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+import requests
+
+print('查詢一個網頁有出現的詞的次數')
+
+url = 'https://udn.com/news/breaknews/1/99#breaknews'
+
+resp = requests.get(url)
+html = resp.text
+print(resp.status_code)
+
+q = input("請輸入你要查詢的詞：")
+while q != "":
+    print('出現次數 : ', html.count(q))
+    q = input("請輸入你要查詢的詞：")
+
+
+
+
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+print('抓取網頁中的e-mail地址')
+
+import requests, re
+
+regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]+)"
+url = 'http://csharphelper.com/blog/'
+
+html = requests.get(url, verify = False).text
+    
+emails = re.findall(regex, html)
+for email in emails:
+    print(email)
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
+import requests
+import re
+
+print('抓取網頁內的所有圖片連結')
+
+url = 'https://www.bagong.cn/dog/'
+
+html = requests.get(url).text
+
+regex = r'https?://.+.jpg'
+photos = re.findall(regex, html)
+for photo in photos:
+    print(photo)
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
 
 
 

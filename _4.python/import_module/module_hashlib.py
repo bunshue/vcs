@@ -4,7 +4,6 @@
 
 '''
 
-import hashlib
 
 '''
 print('可用的雜湊演算法')
@@ -146,6 +145,15 @@ myMd5.update(string_data)
 myMd5_Digest = myMd5.hexdigest()
 print(myMd5_Digest)
 
+print('------------------------------')  #30個
+
+m = hashlib.md5()
+m.update(b"Nobody inspects")
+m.update(b" the spammish repetition")
+m.digest()
+print(m.digest())
+
+#    b'\\xbbd\\x9c\\x83\\xdd\\x1e\\xa5\\xc9\\xd9\\xde\\xc9\\xa1\\x8d\\xf0\\xff\\xe9'
 
 
 print('------------------------------')  #30個
@@ -156,14 +164,45 @@ print('md5 : ', md5)
 
 print('------------------------------')  #30個
 
+print('算一個檔案的hash值')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+image_md5 = hashlib.md5(open(filename, 'rb').read()).digest()
+print(image_md5)
 
 
 print('------------------------------')  #30個
+import os
+print('用hash值找一個資料夾內的重複的檔案')
+foldername = 'C:/_git/vcs/_1.data/______test_files1/compare'
+filenames = os.listdir(foldername)    #單層
+print(filenames)
+allmd5s = dict()
+for filename in filenames:
+    long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+    img_md5 = hashlib.md5(open(long_filename,'rb').read()).digest()
+    if img_md5 in allmd5s:
+        print("---------------")
+        print("以下為重覆的檔案：")
+        print(os.path.abspath(filename))
+        print(allmd5s[img_md5])
+        os.system("open " + os.path.abspath(filename))
+        os.system("open " + allmd5s[img_md5])
+    else:
+        allmd5s[img_md5] = os.path.abspath(filename) 
+
+print('------------------------------')  #30個
+
+import hashlib
+
+def md5sum(t):
+    return hashlib.md5(t).hexdigest()
+
+
 
 
 
 print('------------------------------')  #30個
-
 
 
 

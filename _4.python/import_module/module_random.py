@@ -36,6 +36,8 @@ for i in string_message:
     
 print(pretty_text)
 
+print('------------------------------')  #30個
+
 def randomNoun():
     nouns = ["cats", "hippos", "cakes"]
     noun = random.choice(nouns)
@@ -58,6 +60,8 @@ while True:
     if x == 6:
         break
 
+print('------------------------------')  #30個
+
 import random as r
 
 while True:
@@ -68,6 +72,8 @@ while True:
     else:  
         print("遊戲結束！")
         break
+
+print('------------------------------')  #30個
 
 import random as r
 
@@ -80,6 +86,7 @@ for i in range(0,6):
     else:    print(str(list1[i]), end=", ")
 print("本期大樂透特別號為：" + str(special))
 
+print('------------------------------')  #30個
 
 print("亂數分配工作")
 member = ["花媽", "花橘子", "花柚子", "花爸"]
@@ -87,6 +94,8 @@ housework = ["掃地", "拖地", "洗衣服", "擦窗戶"]
 random.shuffle(housework)
 for i in range(4):
     print("%s今天負責%s" % (member[i], housework[i]))
+
+print('------------------------------')  #30個
 
 for count in range(20):
     x = random.randrange(-10, 10)       #-10~9之間的整數
@@ -103,11 +112,14 @@ def randomAnimal():
 for count in range(10):
     print(randomAnimal())
 
+print('------------------------------')  #30個
+
 from random import randint
 print("1到6選一個")
 for count in range(10):
     print(randint(1, 6))
 
+print('------------------------------')  #30個
 
 import random as R
 print("1到6選一個")
@@ -117,6 +129,8 @@ for count in range(10):
 print("任選一個")
 for count in range(10):
     print(random.choice(['a', 'b', 'c']))
+
+print('------------------------------')  #30個
 
 #values = [1,2,3,4,5,6]
 values = ['alpha','bravo','charlie','delta','echo','foxtrot']
@@ -158,6 +172,8 @@ while True:
     break;
 '''
 
+print('------------------------------')  #30個
+
 #發牌遊戲
 
 # Create a deck of cards
@@ -177,8 +193,7 @@ for i in range(4):
     rank = ranks[deck[i] % 13]
     print("Card number", deck[i], "is", rank, "of", suit)
 
-
-
+print('------------------------------')  #30個
 
 import pandas as pd
 import numpy as np
@@ -213,9 +228,13 @@ for i in ran:
 index.sort()
 '''
 
+print('------------------------------')  #30個
+
 for i in range(10):
     timeout = random.choice(range(80,180))
     print('timeout', timeout)
+
+print('------------------------------')  #30個
 
 import random
 import time
@@ -230,6 +249,31 @@ lst.sort()
 print("Sort time in Python is", int(time.time() - startTime), "seconds")
 
 print(lst)
+
+print('------------------------------')  #30個
+
+
+import random
+s = ''
+for i in range(0, 10):
+    s += random.choice('<>=^')
+    s += random.choice('+- ')
+    s += str(random.randrange(1, 100))
+    s += str(random.randrange(100))
+    s += random.choice(('', 'E', 'e', 'G', 'g', 'F', 'f', '%'))
+
+print(s)
+
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
 
 
 

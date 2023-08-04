@@ -19,7 +19,7 @@ print("16的平方根 為 : "+str(r))
 print('取1024以2為底的log：')
 print(math.log(1024, 2)) # 10
 
-import math # import Math module to use the math functions
+print('------------------------------')  #30個
  
 # Test algebraic functions
 print("exp(1.0) =", math.exp(1))
@@ -34,8 +34,7 @@ print("tan(PI / 2) =", math.tan(math.pi / 2))
 print("degrees(1.57) =", math.degrees(1.57))
 print("radians(90) =", math.radians(90))
 
-
-import math
+print('------------------------------')  #30個
 
 x1, y1 = 0, 0
 x2, y2 = 4, 0
@@ -53,4 +52,18 @@ print('計算三角形3個內角角度 : ',
       round(A * 100) / 100.0,
       round(B * 100) / 100.0,
       round(C * 100) / 100.0)
+
+print('------------------------------')  #30個
+
+angle = 30
+
+math.sin(math.pi * angle / 2)
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+
 

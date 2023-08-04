@@ -3,6 +3,7 @@
 import time
 import datetime
 
+'''
 print("測試兩事件所經歷的時間 ST")
 time_start = time.time()
 
@@ -360,6 +361,8 @@ print(filename)
 string = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 print(string)
 
+'''
+
 print('----- new -----------------------------------------------------------------')	#70個
 
 
@@ -373,19 +376,13 @@ print(current_time)
 
 startTime_seconds = time.time()
 
-'''
-do something
-'''
+time.sleep(0.3456)  #過了一段時間
 
 elapsedTime_seconds = time.time() - startTime_seconds
 print("Time for LinkedList is", elapsedTime_seconds, "seconds")
 
 start = datetime.datetime(2016, 1, 1)
 end = datetime.datetime(2017, 1, 1)
-
-now = datetime.datetime.now()
-
-filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
 
 
 t0 = time.time()
@@ -448,5 +445,135 @@ print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
 # 格式化成Sat Mar 28 22:24:24 2016形式
 print (time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
+
+print('------------------------------')  #30個
+
+timestamp = time.strftime('%Y-%m-%d %H:%M%z')
+
+print(timestamp)
+
+
+print('------------------------------')  #30個
+
+now = datetime.datetime.now()
+filename = now.strftime("%y-%m-%d-%H-%M-%S.json")
+print(filename)
+
+now = datetime.datetime.now()
+filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
+print(filename)
+
+
+import time
+
+imagepath = '-%04d-%02d-%02d'%(time.localtime()[:3])
+imagepath = imagepath + '.dmg'
+
+print(imagepath)
+
+
+
+filename = '-%04d-%02d-%02d'%(time.localtime()[:3])
+print(filename)
+
+print('------------------------------')  #30個
+
+#獲取當前時間
+def get_current_time():
+    current_time = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+    return current_time
+
+current_time = get_current_time()
+print('當前時間 :', current_time)
+
+print('------------------------------')  #30個
+
+import datetime
+import time
+
+
+def DateFromTicks(ticks):
+    return Date(*time.localtime(ticks)[:3])
+
+def TimeFromTicks(ticks):
+    return Time(*time.localtime(ticks)[3:6])
+
+def TimestampFromTicks(ticks):
+    return Timestamp(*time.localtime(ticks)[:6])
+
+print(datetime.datetime)
+print(datetime.date)
+print(datetime.time)
+
+
+'''
+datetime(2016, 7, 20, 15, 45),
+"timestamp": "2016-07-20 15:45",
+'''
+
+'''
+"timestamp": self.event.timestamp.strftime("%Y-%m-%d %H:%M"),
+'''
+#timestamp = time.strftime('%Y-%m-%d %H:%M+%Z')
+
+
+
+print('------------------------------')  #30個
+
+
+def format_time(field_timestamp: datetime) -> str:
+    return field_timestamp.strftime("%Y-%m-%d %H:%M")
+
+
+
+print('------------------------------')  #30個
+
+
+start_time = time.time()
+
+time.sleep(0.3456)  #過了一段時間
+
+latency = time.time() - start_time
+print("it took %.2f", latency)
+
+
+print('------------------------------')  #30個
+
+t1 = time.time()
+
+t2 = time.time()
+
+t3 = time.time()
+
+print("_safe_repr:", t2 - t1)
+print("pformat:", t3 - t2)
+
+print('------------------------------')  #30個
+
+
+print(datetime.datetime.now())
+
+print('------------------------------')  #30個
+
+start_date = datetime.datetime(2016, 7, 17)
+print(start_date)
+end_date = datetime.datetime(2016, 7, 24)
+print(end_date)
+expected = [datetime.datetime(2016, 7, i) for i in range(17, 24)]
+print(expected)
+
+print('------------------------------')  #30個
+
+ufrom = 'From nobody ' + time.ctime(time.time())
+print(ufrom)
+
+
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
 
 
