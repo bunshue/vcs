@@ -56,8 +56,7 @@ namespace vcs_DrAP
         string text_editor_path = String.Empty;
         string python_editor_path = String.Empty;
         string search_path = @"C:\_git\vcs\_2.vcs";
-        string specified_search_path = String.Empty;
-
+        string specified_search_path = @"C:\_git\vcs\_4.python\__code";
         string default_vcs_path = @"C:\_git\vcs\_2.vcs";
         string default_python_path = @"C:\_git\vcs\_4.python";
         string default_matlab_path = @"C:\_git\vcs\_7.cmpp\_matlab1_test";
@@ -3332,8 +3331,8 @@ namespace vcs_DrAP
         {
             if (cb_option2.Checked == true)
             {
-                richTextBox1.Text += "search_path = " + search_path + "\n";
-                folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
+                richTextBox1.Text += "search_path = " + specified_search_path + "\n";
+                folderBrowserDialog1.SelectedPath = specified_search_path;  //預設開啟的路徑
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 {
                     specified_search_path = folderBrowserDialog1.SelectedPath;

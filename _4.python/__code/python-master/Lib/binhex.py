@@ -1,10 +1,3 @@
-"""Macintosh binhex compression/decompression.
-
-easy interface:
-binhex(inputfilename, outputfilename)
-hexbin(inputfilename, outputfilename)
-"""
-
 import io
 import os
 import struct
@@ -453,3 +446,16 @@ def hexbin(inp, out):
         ofp.close()
 
     ifp.close()
+
+inputfilename = ''
+outputfilename = ''
+
+
+"""Macintosh binhex compression/decompression.
+
+easy interface:
+binhex(inputfilename, outputfilename)
+hexbin(inputfilename, outputfilename)
+"""
+
+
