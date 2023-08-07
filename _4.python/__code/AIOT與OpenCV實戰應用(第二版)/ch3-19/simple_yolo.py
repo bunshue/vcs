@@ -1,6 +1,8 @@
+ESC = 27
+
 import cv2
-import numpy as np
 import time
+import numpy as np
 
 def initNet():
     CONFIG = 'yolov4-tiny.cfg'
@@ -10,12 +12,12 @@ def initNet():
     # 讀取物件名稱以及設定外框顏色
     with open(NAMES, 'r') as f:
         names = [line.strip() for line in f.readlines()]
-        colors = np.random.uniform(0, 255, size=(len(names), 3))
+        colors = np.random.uniform(0, 255, size = (len(names), 3))
 
     # 設定神經網路
     net = cv2.dnn.readNet(CONFIG, WEIGHT)
     model = cv2.dnn_DetectionModel(net)
-    model.setInputParams(size=(416, 416), scale=1/255.0)
+    model.setInputParams(size = (416, 416), scale = 1 / 255.0)
     # YOLO 要對調顏色
     model.setInputSwapRB(True)
 
@@ -52,9 +54,15 @@ while True:
     cv2.putText(frame, fps, (10, 30), 
         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 204, 255), 2
     )
-    cv2.imshow('video', frame)
-    if cv2.waitKey(1) == 27:
-        cv2.destroyAllWindows()
+
+### 在 while 內
+    cv2.imshow("video", frame)
+
+    k = cv2.waitKey(1)
+    if k == ESC:     #ESC
         break
-    
+
+# 釋放所有資源
+cap.release()   # 釋放攝影機
+cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
 

@@ -2,6 +2,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 print('取得 OpenCV 版本')
+
 import cv2
 
 (major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')

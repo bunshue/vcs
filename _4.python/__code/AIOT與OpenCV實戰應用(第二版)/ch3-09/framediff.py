@@ -1,6 +1,9 @@
 import cv2
 
-cap = cv2.VideoCapture('vtest.avi')
+# 開啟影片檔案
+filename = 'vtest.avi'
+
+cap = cv2.VideoCapture(filename)
 
 bg = None
 
@@ -16,8 +19,8 @@ while True:
 #### 在while內
     diff = cv2.absdiff(gray, bg)
     diff = cv2.threshold(diff, 30, 255, cv2.THRESH_BINARY)[1]
-    diff = cv2.erode(diff, None, iterations=2)
-    diff = cv2.dilate(diff, None, iterations=2)
+    diff = cv2.erode(diff, None, iterations = 2)
+    diff = cv2.dilate(diff, None, iterations = 2)
 
 #### 在while內
     cnts, hierarchy = cv2.findContours(
@@ -30,7 +33,7 @@ while True:
             continue
             
         (x, y, w, h) = cv2.boundingRect(c)
-        cv2.rectangle(frame, (x,y), (x+w, y+h), (0,255,0), 2)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 #### 在while內        
     cv2.imshow("frame", frame)

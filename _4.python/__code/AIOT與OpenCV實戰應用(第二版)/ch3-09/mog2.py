@@ -1,9 +1,10 @@
 import cv2
 
 bs = cv2.bgsegm.createBackgroundSubtractorGMG()
+
 cap = cv2.VideoCapture(0)
-ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / \
-        cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+
+ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
 WIDTH = 400
 HEIGHT = int(WIDTH / ratio)
@@ -16,8 +17,8 @@ while True:
 #### 在while內
     gray = bs.apply(frame)
     mask = cv2.threshold(gray, 30, 255, cv2.THRESH_BINARY)[1]
-    mask = cv2.erode(mask, None, iterations=2)
-    mask = cv2.dilate(mask, None, iterations=10)
+    mask = cv2.erode(mask, None, iterations = 2)
+    mask = cv2.dilate(mask, None, iterations = 10)
 
 #### 在while內
     cnts, hierarchy = cv2.findContours(
@@ -29,10 +30,10 @@ while True:
         if cv2.contourArea(c) < 200:
             continue
         # 畫出輪廓
-        cv2.drawContours(frame, cnts, -1, (0,255,255), 2)
+        cv2.drawContours(frame, cnts, -1, (0, 255, 255), 2)
         # 畫出矩型
         (x, y, w, h) = cv2.boundingRect(c)
-        cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0), 2)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 #### 在while內
     mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR) 
@@ -42,3 +43,4 @@ while True:
         cv2.destroyAllWindows()
         break
         
+

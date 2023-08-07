@@ -1,9 +1,19 @@
 import cv2
 import numpy as np
 
-src = cv2.imread('cup.jpg', -1)
-src = cv2.resize(src, (403, 302))
-gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+filename = 'cup.jpg'
+
+print('顯示圖片')
+image = cv2.imread(filename, -1)
+
+shape = image.shape
+h = shape[0]    #高
+w = shape[1]    #寬
+h, w, d = image.shape   #d為dimension d=3 全彩 d=1 灰階
+print("寬 = ", w, ", 高 = ", h, ", D = ", d)
+
+image = cv2.resize(image, (403, 302))
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.GaussianBlur(gray, (5, 5), 0)
 circles = cv2.HoughCircles(
     gray, 
@@ -19,17 +29,18 @@ circles = cv2.HoughCircles(
 
 circles = circles.astype(int)
 if len(circles) > 0:
-    out = src.copy()
+    out = image.copy()
     for x, y, r in circles[0]:
         # 畫圓
-        cv2.circle(out, (x, y), r, (0,0,255), 3)
+        cv2.circle(out, (x, y), r, (0, 0, 255), 3)
         # 畫圓心
-        cv2.circle(out, (x, y), 2, (0,255,0), 3)
-    src = cv2.hconcat([src, out])
+        cv2.circle(out, (x, y), 2, (0, 255, 0), 3)
+    image = cv2.hconcat([image, out])
 
 cv2.namedWindow('image', cv2.WINDOW_NORMAL)
-cv2.imshow('image', src)
+cv2.imshow('image', image) #顯示圖片
 
-cv2.waitKey(0)
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
 cv2.destroyAllWindows()
 

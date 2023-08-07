@@ -1,3 +1,5 @@
+ESC = 27
+
 import cv2
 import time
 
@@ -14,6 +16,18 @@ model = cv2.dnn_DetectionModel(net)
 model.setInputParams(size=(300, 300), scale=1.0)
 
 cap = cv2.VideoCapture(0)
+
+# 取得影像的尺寸大小
+w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+print("Image Size: %d x %d" % (w, h))
+
+if not cap.isOpened():
+    print('Could not open video device')
+    sys.exit()
+else:
+    print('Video device opened')
+
 ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
 WIDTH = 600
@@ -44,6 +58,13 @@ while True:
 
 ### 在 while 內
     cv2.imshow("video", frame)
-    if cv2.waitKey(1) == 27:
-        cv2.destroyAllWindows()
+
+    k = cv2.waitKey(1)
+    if k == ESC:     #ESC
         break
+
+# 釋放所有資源
+cap.release()   # 釋放攝影機
+cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
+
+

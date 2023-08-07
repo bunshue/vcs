@@ -1,6 +1,8 @@
 import cv2
 
-cap = cv2.VideoCapture('coin.jpg')
+filename = 'coin.jpg'
+
+cap = cv2.VideoCapture(filename)    #用VideoCapture讀取本機圖片
 
 ret, frame = cap.read()
 
@@ -15,12 +17,13 @@ contours, hierarchy = cv2.findContours(
     cv2.CHAIN_APPROX_SIMPLE)
 
 out = frame.copy()
-cv2.drawContours(out, contours, -1, (0, 255, 128), 2)
+cv2.drawContours(out, contours, -1, (0, 0, 255), 3) #用紅框標示出來
 
 frame = cv2.hconcat([frame, out])
 
-cv2.imshow('frame', frame)
+cv2.imshow('Picture Viewer', frame) #顯示圖片
 
-cv2.waitKey(0)
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
 cv2.destroyAllWindows()
 
