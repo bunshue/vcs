@@ -593,3 +593,31 @@ def pstdev(data, mu=None):
         return var.sqrt()
     except AttributeError:
         return math.sqrt(var)
+
+
+
+aaa= mean([-1.0, 2.5, 3.25, 5.75])
+print(aaa)
+#2.625
+
+
+bbb = median([2, 3, 4, 5])
+print(bbb)
+#3.5
+
+ccc = median_grouped([2, 2, 3, 3, 3, 4])  #doctest: +ELLIPSIS
+print(ccc)
+#2.8333333333...
+
+
+ddd = stdev([2.5, 3.25, 5.5, 11.25, 11.75])  #doctest: +ELLIPSIS
+print(ddd)
+#4.38961843444...
+
+data = [1, 2, 2, 4, 4, 4, 5, 6]
+mu = mean(data)
+eee = pvariance(data, mu)
+print(eee)
+#2.5
+
+

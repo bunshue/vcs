@@ -16,8 +16,8 @@ class App(ttk.Frame):
 
         # Make the app responsive
         for index in [0, 1, 2]:
-            self.columnconfigure(index=index, weight=1)
-            self.rowconfigure(index=index, weight=1)
+            self.columnconfigure(index = index, weight = 1)
+            self.rowconfigure(index = index, weight = 1)
 
         # Create value lists
         self.option_menu_list = ["", "OptionMenu", "Option 1", "Option 2"]
@@ -290,8 +290,8 @@ if __name__ == "__main__":
     root.title("")
 
     # Simply set the theme
-    root.tk.call("source", "azure.tcl")
-    root.tk.call("set_theme", "dark")
+    #root.tk.call("source", "azure.tcl")
+    #root.tk.call("set_theme", "dark")
 
     app = App(root)
     app.pack(fill="both", expand=True)

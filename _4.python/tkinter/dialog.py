@@ -1,25 +1,25 @@
-from tkinter import *
-from tkinter import _cnfmerge
+import tkinter as tk
+#from tkinter import _cnfmerge
 
 #DIALOG_ICON = 'warning'
 DIALOG_ICON = 'questhead'
 
-class Dialog(Widget):
-    def __init__(self, master=None, cnf={}, **kw):
-        cnf = _cnfmerge((cnf, kw))
+class Dialog(tk.Widget):
+    def __init__(self, master = None, cnf = {}, **kw):
+        cnf = tk._cnfmerge((cnf, kw))
         self.widgetName = '__dialog__'
-        Widget._setup(self, master, cnf)
+        tk.Widget._setup(self, master, cnf)
         self.num = self.tk.getint(
                 self.tk.call(
                       'tk_dialog', self._w,
                       cnf['title'], cnf['text'],
                       cnf['bitmap'], cnf['default'],
                       *cnf['strings']))
-        try: Widget.destroy(self)
+        try: tk.Widget.destroy(self)
         except TclError: pass
     def destroy(self): pass
 
-def _test():
+def open_dialog():
     d = Dialog(None, {'title': 'File Modified',
                       'text':
                       'File "Python.h" has been modified'
@@ -31,12 +31,12 @@ def _test():
                       'strings': ('Save File',
                                   'Discard Changes',
                                   'Return to Editor')})
-    print(d.num)
+    print('你選擇了', d.num)
 
 
-print(TkVersion)
+print(tk.TkVersion)
 
-t = Button(None, {'text': 'Test', 'command': _test, Pack: {}})
-q = Button(None, {'text': 'Quit', 'command': t.quit, Pack: {}})
+t = tk.Button(None, {'text': 'Test', 'command': open_dialog, tk.Pack: {}})
+q = tk.Button(None, {'text': 'Quit', 'command': t.quit, tk.Pack: {}})
 t.mainloop()
 

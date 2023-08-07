@@ -1,8 +1,8 @@
+import datetime
 import tkinter
 from tkinter import ttk
-from docxtpl import DocxTemplate
-import datetime
 from tkinter import messagebox
+from docxtpl import DocxTemplate
 
 def clear_item():
     qty_spinbox.delete(0, tkinter.END)

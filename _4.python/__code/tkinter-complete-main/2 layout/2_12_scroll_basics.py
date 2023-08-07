@@ -62,3 +62,4 @@ scrollbar_table.place(relx = 1, rely = 0, relheight = 1, anchor = 'ne')
 
 # run window
 window.mainloop()
+
