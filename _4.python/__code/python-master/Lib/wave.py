@@ -501,3 +501,40 @@ def open(f, mode=None):
         raise Error("mode must be 'r', 'rb', 'w', or 'wb'")
 
 openfp = open # B/W compatibility
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav'
+
+fp = open(filename, 'r')
+
+print(fp._file)
+print(fp._nchannels)
+print(fp._nframes)
+print(fp._sampwidth)
+print(fp._framerate)
+print(fp._comptype)
+print(fp._compname)
+print(fp._soundpos)
+
+
+fp.close()
+
+'''
+    _file -- the open file with methods read(), close(), and seek()
+              set through the __init__() method
+    _nchannels -- the number of audio channels
+              available through the getnchannels() method
+    _nframes -- the number of audio frames
+              available through the getnframes() method
+    _sampwidth -- the number of bytes per audio sample
+              available through the getsampwidth() method
+    _framerate -- the sampling frequency
+              available through the getframerate() method
+    _comptype -- the AIFF-C compression type ('NONE' if AIFF)
+              available through the getcomptype() method
+    _compname -- the human-readable AIFF-C compression type
+              available through the getcomptype() method
+    _soundpos -- the position in the audio stream
+
+'''
+

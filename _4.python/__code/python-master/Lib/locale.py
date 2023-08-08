@@ -1588,7 +1588,7 @@ def _print_locale():
     _init_categories()
     del categories['LC_ALL']
 
-    print('Locale defaults as determined by getdefaultlocale():')
+    print('AAAAA Locale defaults as determined by getdefaultlocale():')
     print('-'*72)
     lang, enc = getdefaultlocale()
     print('Language: ', lang or '(undefined)')
@@ -1604,6 +1604,9 @@ def _print_locale():
         print('   Encoding: ', enc or '(undefined)')
         print()
 
+
+print('call _print_locale()')
 _print_locale()
+
 
 

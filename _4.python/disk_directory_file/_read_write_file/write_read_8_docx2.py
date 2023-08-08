@@ -1,17 +1,23 @@
+'''
+讀取excel檔, 製作word檔
+'''
+
 import openpyxl
 from docxtpl import DocxTemplate
 import datetime
 
-path = "C:/_git/vcs/_4.python/__code/codefirstio/excel-to-word-docs-main/student_data2.xlsx"
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_excel/python_ReadWrite_EXCEL6_student_data2.xlsx'
 
-workbook = openpyxl.load_workbook(path)
+workbook = openpyxl.load_workbook(filename)
 sheet = workbook.active
 
 list_values = list(sheet.values)
 print(list_values)
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_word/python_ReadWrite_WORD1_certificate.docx'
+
 # Generate docs
-doc = DocxTemplate("certificate.docx")
+doc = DocxTemplate(filename)
 
 for value_tuple in list_values[1:]:
     doc.render({"name": value_tuple[0],

@@ -450,6 +450,8 @@ def hexbin(inp, out):
 inputfilename = ''
 outputfilename = ''
 
+#binhex(inputfilename, outputfilename)
+
 
 """Macintosh binhex compression/decompression.
 

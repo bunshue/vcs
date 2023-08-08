@@ -2,10 +2,14 @@ import socket
 
 HOST = 'localhost'
 PORT = 6688
+
 s = socket.socket()
-s.bind((HOST, PORT))
-s.listen(5) #監聽客戶端的連線請求
+s.bind((HOST, PORT))    #設定哪個IP與port可接受連線, 空字串代表所有IP
+#s.bind(('', PORT))    #設定哪個IP與port可接受連線, 空字串代表所有IP
+
+s.listen(5) #監聽客戶端的連線請求個數
 print('{} 伺服器在 {} 埠建立！'.format(HOST, PORT))
+
 client, addr = s.accept() #接受客戶端的連線
 print('客戶端位址：{}，埠號：{}'.format(addr[0], addr[1]))
 

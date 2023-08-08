@@ -1,25 +1,11 @@
-#
-# The ndarray object from _testbuffer.c is a complete implementation of
-# a PEP-3118 buffer provider. It is independent from NumPy's ndarray
-# and the tests don't require NumPy.
-#
-# If NumPy is present, some tests check both ndarray implementations
-# against each other.
-#
-# Most ndarray tests also check that memoryview(ndarray) behaves in
-# the same way as the original. Thus, a substantial part of the
-# memoryview tests is now in this module.
-#
-
-import unittest
-from test import support
 from itertools import permutations, product
 from random import randrange, sample, choice
 from sysconfig import get_config_var
 import warnings
 import sys, array, io
 from decimal import Decimal
-from fractions import Fraction
+
+#from fractions import Fraction
 
 try:
     from _testbuffer import *
@@ -44,6 +30,8 @@ except ImportError:
 
 
 SHORT_TEST = True
+
+
 
 
 # ======================================================================
@@ -752,9 +740,7 @@ if SHORT_TEST:
     permutations = rpermutation
 
 
-@unittest.skipUnless(struct, 'struct module required for this test.')
-@unittest.skipUnless(ndarray, 'ndarray object required for this test')
-class TestBufferProtocol(unittest.TestCase):
+class TestBufferProtocol():
 
     def setUp(self):
         # The suboffsets tests need sizeof(void *).
@@ -3309,142 +3295,6 @@ class TestBufferProtocol(unittest.TestCase):
                 m = memoryview(nd)
                 self.assertEqual(m, nd)
 
-    def test_memoryview_compare_multidim_c(self):
-
-        # C-contiguous, different values
-        nd1 = ndarray(list(range(-15, 15)), shape=[3, 2, 5], format='@h')
-        nd2 = ndarray(list(range(0, 30)), shape=[3, 2, 5], format='@h')
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertNotEqual(v, nd2)
-        self.assertNotEqual(w, nd1)
-        self.assertNotEqual(v, w)
-
-        # C-contiguous, different values, struct module
-        nd1 = ndarray([(0, 1, 2)]*30, shape=[3, 2, 5], format='=f q xxL')
-        nd2 = ndarray([(-1.2, 1, 2)]*30, shape=[3, 2, 5], format='< f 2Q')
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertNotEqual(v, nd2)
-        self.assertNotEqual(w, nd1)
-        self.assertNotEqual(v, w)
-
-        # C-contiguous, different shape
-        nd1 = ndarray(list(range(30)), shape=[2, 3, 5], format='L')
-        nd2 = ndarray(list(range(30)), shape=[3, 2, 5], format='L')
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertNotEqual(v, nd2)
-        self.assertNotEqual(w, nd1)
-        self.assertNotEqual(v, w)
-
-        # C-contiguous, different shape, struct module
-        nd1 = ndarray([(0, 1, 2)]*21, shape=[3, 7], format='! b B xL')
-        nd2 = ndarray([(0, 1, 2)]*21, shape=[7, 3], format='= Qx l xxL')
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertNotEqual(v, nd2)
-        self.assertNotEqual(w, nd1)
-        self.assertNotEqual(v, w)
-
-        # C-contiguous, different format, struct module
-        nd1 = ndarray(list(range(30)), shape=[2, 3, 5], format='L')
-        nd2 = ndarray(list(range(30)), shape=[2, 3, 5], format='l')
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertEqual(v, nd2)
-        self.assertEqual(w, nd1)
-        self.assertEqual(v, w)
-
-    def test_memoryview_compare_multidim_fortran(self):
-
-        # Fortran-contiguous, different values
-        nd1 = ndarray(list(range(-15, 15)), shape=[5, 2, 3], format='@h',
-                      flags=ND_FORTRAN)
-        nd2 = ndarray(list(range(0, 30)), shape=[5, 2, 3], format='@h',
-                      flags=ND_FORTRAN)
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertNotEqual(v, nd2)
-        self.assertNotEqual(w, nd1)
-        self.assertNotEqual(v, w)
-
-        # Fortran-contiguous, different values, struct module
-        nd1 = ndarray([(2**64-1, -1)]*6, shape=[2, 3], format='=Qq',
-                      flags=ND_FORTRAN)
-        nd2 = ndarray([(-1, 2**64-1)]*6, shape=[2, 3], format='=qQ',
-                      flags=ND_FORTRAN)
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertNotEqual(v, nd2)
-        self.assertNotEqual(w, nd1)
-        self.assertNotEqual(v, w)
-
-        # Fortran-contiguous, different shape
-        nd1 = ndarray(list(range(-15, 15)), shape=[2, 3, 5], format='l',
-                      flags=ND_FORTRAN)
-        nd2 = ndarray(list(range(-15, 15)), shape=[3, 2, 5], format='l',
-                      flags=ND_FORTRAN)
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertNotEqual(v, nd2)
-        self.assertNotEqual(w, nd1)
-        self.assertNotEqual(v, w)
-
-        # Fortran-contiguous, different shape, struct module
-        nd1 = ndarray(list(range(-15, 15)), shape=[2, 3, 5], format='0ll',
-                      flags=ND_FORTRAN)
-        nd2 = ndarray(list(range(-15, 15)), shape=[3, 2, 5], format='l',
-                      flags=ND_FORTRAN)
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertNotEqual(v, nd2)
-        self.assertNotEqual(w, nd1)
-        self.assertNotEqual(v, w)
-
-        # Fortran-contiguous, different format, struct module
-        nd1 = ndarray(list(range(30)), shape=[5, 2, 3], format='@h',
-                      flags=ND_FORTRAN)
-        nd2 = ndarray(list(range(30)), shape=[5, 2, 3], format='@b',
-                      flags=ND_FORTRAN)
-        v = memoryview(nd1)
-        w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertEqual(v, nd2)
-        self.assertEqual(w, nd1)
-        self.assertEqual(v, w)
-
-    def test_memoryview_compare_multidim_mixed(self):
-
         # mixed C/Fortran contiguous
         lst1 = list(range(-15, 15))
         lst2 = transpose(lst1, [3, 2, 5])
@@ -3452,10 +3302,6 @@ class TestBufferProtocol(unittest.TestCase):
         nd2 = ndarray(lst2, shape=[3, 2, 5], format='l', flags=ND_FORTRAN)
         v = memoryview(nd1)
         w = memoryview(nd2)
-
-        self.assertEqual(v, nd1)
-        self.assertEqual(w, nd2)
-        self.assertEqual(v, w)
 
         # mixed C/Fortran contiguous, struct module
         lst1 = [(-3.3, -22, b'x')]*30
@@ -3751,80 +3597,6 @@ class TestBufferProtocol(unittest.TestCase):
             self.assertNotEqual(a, y)
             self.assertNotEqual(b, x)
 
-    def test_memoryview_check_released(self):
-
-        a = array.array('d', [1.1, 2.2, 3.3])
-
-        m = memoryview(a)
-        m.release()
-
-        # PyMemoryView_FromObject()
-        self.assertRaises(ValueError, memoryview, m)
-        # memoryview.cast()
-        self.assertRaises(ValueError, m.cast, 'c')
-        # getbuffer()
-        self.assertRaises(ValueError, ndarray, m)
-        # memoryview.tolist()
-        self.assertRaises(ValueError, m.tolist)
-        # memoryview.tobytes()
-        self.assertRaises(ValueError, m.tobytes)
-        # sequence
-        self.assertRaises(ValueError, eval, "1.0 in m", locals())
-        # subscript
-        self.assertRaises(ValueError, m.__getitem__, 0)
-        # assignment
-        self.assertRaises(ValueError, m.__setitem__, 0, 1)
-
-        for attr in ('obj', 'nbytes', 'readonly', 'itemsize', 'format', 'ndim',
-                     'shape', 'strides', 'suboffsets', 'c_contiguous',
-                     'f_contiguous', 'contiguous'):
-            self.assertRaises(ValueError, m.__getattribute__, attr)
-
-        # richcompare
-        b = array.array('d', [1.1, 2.2, 3.3])
-        m1 = memoryview(a)
-        m2 = memoryview(b)
-
-        self.assertEqual(m1, m2)
-        m1.release()
-        self.assertNotEqual(m1, m2)
-        self.assertNotEqual(m1, a)
-        self.assertEqual(m1, m1)
-
-    def test_memoryview_tobytes(self):
-        # Many implicit tests are already in self.verify().
-
-        t = (-529, 576, -625, 676, -729)
-
-        nd = ndarray(t, shape=[5], format='@h')
-        m = memoryview(nd)
-        self.assertEqual(m, nd)
-        self.assertEqual(m.tobytes(), nd.tobytes())
-
-        nd = ndarray([t], shape=[1], format='>hQiLl')
-        m = memoryview(nd)
-        self.assertEqual(m, nd)
-        self.assertEqual(m.tobytes(), nd.tobytes())
-
-        nd = ndarray([t for _ in range(12)], shape=[2,2,3], format='=hQiLl')
-        m = memoryview(nd)
-        self.assertEqual(m, nd)
-        self.assertEqual(m.tobytes(), nd.tobytes())
-
-        nd = ndarray([t for _ in range(120)], shape=[5,2,2,3,2],
-                     format='<hQiLl')
-        m = memoryview(nd)
-        self.assertEqual(m, nd)
-        self.assertEqual(m.tobytes(), nd.tobytes())
-
-        # Unknown formats are handled: tobytes() purely depends on itemsize.
-        if ctypes:
-            # format: "T{>l:x:>l:y:}"
-            class BEPoint(ctypes.BigEndianStructure):
-                _fields_ = [("x", ctypes.c_long), ("y", ctypes.c_long)]
-            point = BEPoint(100, 200)
-            a = memoryview(point)
-            self.assertEqual(a.tobytes(), bytes(point))
 
     def test_memoryview_get_contiguous(self):
         # Many implicit tests are already in self.verify().
@@ -4092,203 +3864,5 @@ class TestBufferProtocol(unittest.TestCase):
         nd.pop() # pop the current view
         self.assertEqual(x.tolist(), nd.tolist())
 
-        del nd
-        m1.release()
-        x.release()
-
-        # If multiple memoryviews share the same managed buffer, implicit
-        # release() in the context manager's __exit__() method should still
-        # work.
-        def catch22(b):
-            with memoryview(b) as m2:
-                pass
-
-        x = bytearray(b'123')
-        with memoryview(x) as m1:
-            catch22(m1)
-            self.assertEqual(m1[0], ord(b'1'))
-
-        x = ndarray(list(range(12)), shape=[2,2,3], format='l')
-        y = ndarray(x, getbuf=PyBUF_FULL_RO, flags=ND_REDIRECT)
-        z = ndarray(y, getbuf=PyBUF_FULL_RO, flags=ND_REDIRECT)
-        self.assertIs(z.obj, x)
-        with memoryview(z) as m:
-            catch22(m)
-            self.assertEqual(m[0:1].tolist(), [[[0, 1, 2], [3, 4, 5]]])
-
-        # Test garbage collection.
-        for flags in (0, ND_REDIRECT):
-            x = bytearray(b'123')
-            with memoryview(x) as m1:
-                del x
-                y = ndarray(m1, getbuf=PyBUF_FULL_RO, flags=flags)
-                with memoryview(y) as m2:
-                    del y
-                    z = ndarray(m2, getbuf=PyBUF_FULL_RO, flags=flags)
-                    with memoryview(z) as m3:
-                        del z
-                        catch22(m3)
-                        catch22(m2)
-                        catch22(m1)
-                        self.assertEqual(m1[0], ord(b'1'))
-                        self.assertEqual(m2[1], ord(b'2'))
-                        self.assertEqual(m3[2], ord(b'3'))
-                        del m3
-                    del m2
-                del m1
-
-            x = bytearray(b'123')
-            with memoryview(x) as m1:
-                del x
-                y = ndarray(m1, getbuf=PyBUF_FULL_RO, flags=flags)
-                with memoryview(y) as m2:
-                    del y
-                    z = ndarray(m2, getbuf=PyBUF_FULL_RO, flags=flags)
-                    with memoryview(z) as m3:
-                        del z
-                        catch22(m1)
-                        catch22(m2)
-                        catch22(m3)
-                        self.assertEqual(m1[0], ord(b'1'))
-                        self.assertEqual(m2[1], ord(b'2'))
-                        self.assertEqual(m3[2], ord(b'3'))
-                        del m1, m2, m3
-
-        # memoryview.release() fails if the view has exported buffers.
-        x = bytearray(b'123')
-        with self.assertRaises(BufferError):
-            with memoryview(x) as m:
-                ex = ndarray(m)
-                m[0] == ord(b'1')
-
-    def test_memoryview_redirect(self):
-
-        nd = ndarray([1.0 * x for x in range(12)], shape=[12], format='d')
-        a = array.array('d', [1.0 * x for x in range(12)])
-
-        for x in (nd, a):
-            y = ndarray(x, getbuf=PyBUF_FULL_RO, flags=ND_REDIRECT)
-            z = ndarray(y, getbuf=PyBUF_FULL_RO, flags=ND_REDIRECT)
-            m = memoryview(z)
-
-            self.assertIs(y.obj, x)
-            self.assertIs(z.obj, x)
-            self.assertIs(m.obj, x)
-
-            self.assertEqual(m, x)
-            self.assertEqual(m, y)
-            self.assertEqual(m, z)
-
-            self.assertEqual(m[1:3], x[1:3])
-            self.assertEqual(m[1:3], y[1:3])
-            self.assertEqual(m[1:3], z[1:3])
-            del y, z
-            self.assertEqual(m[1:3], x[1:3])
-
-    def test_memoryview_from_static_exporter(self):
-
-        fmt = 'B'
-        lst = [0,1,2,3,4,5,6,7,8,9,10,11]
-
-        # exceptions
-        self.assertRaises(TypeError, staticarray, 1, 2, 3)
-
-        # view.obj==x
-        x = staticarray()
-        y = memoryview(x)
-        self.verify(y, obj=x,
-                    itemsize=1, fmt=fmt, readonly=1,
-                    ndim=1, shape=[12], strides=[1],
-                    lst=lst)
-        for i in range(12):
-            self.assertEqual(y[i], i)
-        del x
-        del y
-
-        x = staticarray()
-        y = memoryview(x)
-        del y
-        del x
-
-        x = staticarray()
-        y = ndarray(x, getbuf=PyBUF_FULL_RO)
-        z = ndarray(y, getbuf=PyBUF_FULL_RO)
-        m = memoryview(z)
-        self.assertIs(y.obj, x)
-        self.assertIs(m.obj, z)
-        self.verify(m, obj=z,
-                    itemsize=1, fmt=fmt, readonly=1,
-                    ndim=1, shape=[12], strides=[1],
-                    lst=lst)
-        del x, y, z, m
-
-        x = staticarray()
-        y = ndarray(x, getbuf=PyBUF_FULL_RO, flags=ND_REDIRECT)
-        z = ndarray(y, getbuf=PyBUF_FULL_RO, flags=ND_REDIRECT)
-        m = memoryview(z)
-        self.assertIs(y.obj, x)
-        self.assertIs(z.obj, x)
-        self.assertIs(m.obj, x)
-        self.verify(m, obj=x,
-                    itemsize=1, fmt=fmt, readonly=1,
-                    ndim=1, shape=[12], strides=[1],
-                    lst=lst)
-        del x, y, z, m
-
-        # view.obj==NULL
-        x = staticarray(legacy_mode=True)
-        y = memoryview(x)
-        self.verify(y, obj=None,
-                    itemsize=1, fmt=fmt, readonly=1,
-                    ndim=1, shape=[12], strides=[1],
-                    lst=lst)
-        for i in range(12):
-            self.assertEqual(y[i], i)
-        del x
-        del y
-
-        x = staticarray(legacy_mode=True)
-        y = memoryview(x)
-        del y
-        del x
-
-        x = staticarray(legacy_mode=True)
-        y = ndarray(x, getbuf=PyBUF_FULL_RO)
-        z = ndarray(y, getbuf=PyBUF_FULL_RO)
-        m = memoryview(z)
-        self.assertIs(y.obj, None)
-        self.assertIs(m.obj, z)
-        self.verify(m, obj=z,
-                    itemsize=1, fmt=fmt, readonly=1,
-                    ndim=1, shape=[12], strides=[1],
-                    lst=lst)
-        del x, y, z, m
-
-        x = staticarray(legacy_mode=True)
-        y = ndarray(x, getbuf=PyBUF_FULL_RO, flags=ND_REDIRECT)
-        z = ndarray(y, getbuf=PyBUF_FULL_RO, flags=ND_REDIRECT)
-        m = memoryview(z)
-        # Clearly setting view.obj==NULL is inferior, since it
-        # messes up the redirection chain:
-        self.assertIs(y.obj, None)
-        self.assertIs(z.obj, y)
-        self.assertIs(m.obj, y)
-        self.verify(m, obj=y,
-                    itemsize=1, fmt=fmt, readonly=1,
-                    ndim=1, shape=[12], strides=[1],
-                    lst=lst)
-        del x, y, z, m
-
-    def test_memoryview_getbuffer_undefined(self):
-
-        # getbufferproc does not adhere to the new documentation
-        nd = ndarray([1,2,3], [3], flags=ND_GETBUF_FAIL|ND_GETBUF_UNDEFINED)
-        self.assertRaises(BufferError, memoryview, nd)
-
-    def test_issue_7385(self):
-        x = ndarray([1,2,3], shape=[3], flags=ND_GETBUF_FAIL)
-        self.assertRaises(BufferError, memoryview, x)
 
 
-if __name__ == "__main__":
-    unittest.main()
