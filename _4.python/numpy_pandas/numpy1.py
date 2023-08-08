@@ -2,13 +2,13 @@
 
 import numpy as np
 
-print("建立陣列")
+print('建立陣列')
 x = np.array([1, 2, 3])
 y = np.arange(10)  # 類似 Python 的 range, 但是回傳 array
 print(x)
 print(y)
 
-print("基本運算")
+print('基本運算')
 a = np.array([1, 2, 3, 6])
 print(a)
 b = np.linspace(0, 2, 4)  # 建立一個array, 在0與2的範圍之間讓4個點等分
@@ -17,22 +17,17 @@ c = a - b
 print(c)
 print(a**2)
 
-print("全域方法")
+print('全域方法')
 x = np.linspace(-np.pi, np.pi, 11) 
 y1 = np.sin(x)
 y2 = np.cos(x)
 y3 = np.tan(x)
 y4 = np.sinc(x)
-print("x")
-print(x)
-print("sin(x) = ")
-print(y1)
-print("cos(x) = ")
-print(y2)
-print("tan(x) = ")
-print(y3)
-print("sinc(x) = ")
-print(y4)
+print('x', x)
+print('sin(x) = ', y1)
+print('cos(x) = ', y2)
+print('tan(x) = ', y3)
+print('sinc(x) = ' , y4)
 
 print('亂數')
 r = np.random.rand(3, 3)      # 建立一個 3x3 隨機矩陣
@@ -67,8 +62,6 @@ print('中位數：%.2f' % np.median(data))
 print('標準差：%.2f' % np.std(data))
 print('變異數：%.2f' % np.var(data))
 print('極差值：%.2f' % np.ptp(data))
-
-
 
 np1 = np.array([1,2,3,4])	#使用list
 np2 = np.array((5,6,7,8))	#使用tuple
@@ -188,6 +181,149 @@ print(np.sort(a, axis=0))
 print('將每一橫列進行排序：')
 print(np.sort(a, axis=1))
 
+
+
+#mat == matrix
+
+#基本操作
+print('創建矩陣')
+m = np.mat([1,2,3])
+print(m)
+#matrix([[1, 2, 3]])
+
+print(m[0])                #取一行
+#matrix([[1, 2, 3]])
+print(m[0,1])              #第一行，第2个数据
+
+#将Python的列表转换成NumPy的矩阵
+list=[1,2,3]
+print(np.mat(list))
+#matrix([[1, 2, 3]])
+
+#Numpy dnarray转换成Numpy矩阵
+n = np.array([1,2,3])
+print(n)
+#array([1, 2, 3])
+
+print(np.mat(n))
+#matrix([[1, 2, 3]])
+
+print('排序')
+m=np.mat([[2,5,1],[4,6,2]])    #创建2行3列矩阵
+print(m)
+'''
+matrix([[2, 5, 1],
+        [4, 6, 2]])
+
+'''
+
+m.sort()                    #对每一行进行排序
+print(m)
+'''
+matrix([[1, 2, 5],
+        [2, 4, 6]])
+'''
+
+print(m.shape)                     #获得矩阵的行列数
+#(2, 3)
+print(m.shape[0])                  #获得矩阵的行数
+#2
+print(m.shape[1])                  #获得矩阵的列数
+#3
+
+print('索引取值')
+print(m[1,:])                      #取得第一行的所有元素
+#matrix([[2, 4, 6]])
+
+print(m[1,0:1])                    #第一行第0个元素，注意左闭右开
+#matrix([[2]])
+
+print(m[1,0:3])
+#matrix([[2, 4, 6]])
+
+print(m[1,0:2])
+#matrix([[2, 4]])
+
+print('矩陣乘法')
+
+a = np.mat([[1,2,3], [2,3,4]])
+b = np.mat([[1,2], [3,4], [5,6]])
+print(a)
+print(b)
+'''
+matrix([[1, 2, 3],
+        [2, 3, 4]])
+matrix([[1, 2],
+        [3, 4],
+        [5, 6]])
+'''
+c = a * b         #方法一
+print(c)
+
+c2 = np.matmul(a, b)   #方法二
+print(c2)
+
+c3 = np.dot(a, b)     #方法三
+print(c3)
+
+'''
+matrix([[22, 28],
+        [31, 40]])
+matrix([[22, 28],
+        [31, 40]])
+matrix([[22, 28],
+        [31, 40]])
+'''
+
+print('矩陣點乘')
+#点乘，只剩下multiply方法了。
+
+a = np.mat([[1,2], [3,4]])
+b = np.mat([[2,2], [3,3]])
+c = np.multiply(a, b)
+print(c)
+'''
+matrix([[ 2,  4],
+        [ 9, 12]])
+'''
+
+print('矩陣轉置')
+ 
+#转置有两种方法：
+
+print(a)
+'''
+matrix([[1, 2],
+        [3, 4]])
+'''
+print(a.T)           #方法一，ndarray也行
+'''
+matrix([[1, 3],
+        [2, 4]])
+'''
+print(np.transpose(a))   #方法二
+'''
+matrix([[1, 3],
+        [2, 4]])
+'''
+#值得一提的是，matrix中求逆还有一种简便方法（ndarray中不行）：
+
+print(a)
+'''
+matrix([[1, 2],
+        [3, 4]])
+'''
+print(a.I)
+'''
+matrix([[-2. ,  1. ],
+        [ 1.5, -0.5]])
+'''
+ 
+
+x = np.linspace(0, 5, 6)
+print(x)
+X = np.mat(x).T #array轉矩陣再轉置
+print(X)
 
 
 
