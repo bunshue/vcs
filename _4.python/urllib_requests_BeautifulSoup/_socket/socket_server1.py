@@ -1,16 +1,16 @@
 import socket
 
+#設定哪個IP與port可接受連線, 空字串代表所有IP
 HOST = 'localhost'
 PORT = 6688
 
-s = socket.socket()
-s.bind((HOST, PORT))    #設定哪個IP與port可接受連線, 空字串代表所有IP
-#s.bind(('', PORT))    #設定哪個IP與port可接受連線, 空字串代表所有IP
+skt = socket.socket()
+skt.bind((HOST, PORT))    
 
-s.listen(5) #監聽客戶端的連線請求個數
+skt.listen(5) #監聽客戶端的連線請求個數
 print('{} 伺服器在 {} 埠建立！'.format(HOST, PORT))
 
-client, addr = s.accept() #接受客戶端的連線
+client, addr = skt.accept() #接受客戶端的連線
 print('客戶端位址：{}，埠號：{}'.format(addr[0], addr[1]))
 
 while True:

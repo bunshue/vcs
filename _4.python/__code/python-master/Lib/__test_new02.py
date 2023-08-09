@@ -2,5 +2,6 @@ import argparse
 
 parser = argparse.ArgumentParser(description='aaaaa')
 
-print('here')
+print('初始化這個 會打印信息')
+
     
