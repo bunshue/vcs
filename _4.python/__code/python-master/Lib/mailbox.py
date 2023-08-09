@@ -10,440 +10,9 @@ import email.message
 import email.generator
 import io
 import contextlib
-try:
-    import fcntl
-except ImportError:
-    fcntl = None
 
-__all__ = [ 'Mailbox', 'Maildir', 'mbox', 'MH', 'Babyl', 'MMDF',
-            'Message', 'MaildirMessage', 'mboxMessage', 'MHMessage',
-            'BabylMessage', 'MMDFMessage']
+'''
 
-linesep = os.linesep.encode('ascii')
-
-class Mailbox:
-    """A group of messages in a particular place."""
-
-    def __init__(self, path, factory=None, create=True):
-        """Initialize a Mailbox instance."""
-        self._path = os.path.abspath(os.path.expanduser(path))
-        self._factory = factory
-
-    def add(self, message):
-        """Add message and return assigned key."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def remove(self, key):
-        """Remove the keyed message; raise KeyError if it doesn't exist."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def __delitem__(self, key):
-        self.remove(key)
-
-    def discard(self, key):
-        """If the keyed message exists, remove it."""
-        try:
-            self.remove(key)
-        except KeyError:
-            pass
-
-    def __setitem__(self, key, message):
-        """Replace the keyed message; raise KeyError if it doesn't exist."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def get(self, key, default=None):
-        """Return the keyed message, or default if it doesn't exist."""
-        try:
-            return self.__getitem__(key)
-        except KeyError:
-            return default
-
-    def __getitem__(self, key):
-        """Return the keyed message; raise KeyError if it doesn't exist."""
-        if not self._factory:
-            return self.get_message(key)
-        else:
-            with contextlib.closing(self.get_file(key)) as file:
-                return self._factory(file)
-
-    def get_message(self, key):
-        """Return a Message representation or raise a KeyError."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def get_string(self, key):
-        """Return a string representation or raise a KeyError.
-
-        Uses email.message.Message to create a 7bit clean string
-        representation of the message."""
-        return email.message_from_bytes(self.get_bytes(key)).as_string()
-
-    def get_bytes(self, key):
-        """Return a byte string representation or raise a KeyError."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def get_file(self, key):
-        """Return a file-like representation or raise a KeyError."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def iterkeys(self):
-        """Return an iterator over keys."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def keys(self):
-        """Return a list of keys."""
-        return list(self.iterkeys())
-
-    def itervalues(self):
-        """Return an iterator over all messages."""
-        for key in self.iterkeys():
-            try:
-                value = self[key]
-            except KeyError:
-                continue
-            yield value
-
-    def __iter__(self):
-        return self.itervalues()
-
-    def values(self):
-        """Return a list of messages. Memory intensive."""
-        return list(self.itervalues())
-
-    def iteritems(self):
-        """Return an iterator over (key, message) tuples."""
-        for key in self.iterkeys():
-            try:
-                value = self[key]
-            except KeyError:
-                continue
-            yield (key, value)
-
-    def items(self):
-        """Return a list of (key, message) tuples. Memory intensive."""
-        return list(self.iteritems())
-
-    def __contains__(self, key):
-        """Return True if the keyed message exists, False otherwise."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def __len__(self):
-        """Return a count of messages in the mailbox."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def clear(self):
-        """Delete all messages."""
-        for key in self.keys():
-            self.discard(key)
-
-    def pop(self, key, default=None):
-        """Delete the keyed message and return it, or default."""
-        try:
-            result = self[key]
-        except KeyError:
-            return default
-        self.discard(key)
-        return result
-
-    def popitem(self):
-        """Delete an arbitrary (key, message) pair and return it."""
-        for key in self.iterkeys():
-            return (key, self.pop(key))     # This is only run once.
-        else:
-            raise KeyError('No messages in mailbox')
-
-    def update(self, arg=None):
-        """Change the messages that correspond to certain keys."""
-        if hasattr(arg, 'iteritems'):
-            source = arg.iteritems()
-        elif hasattr(arg, 'items'):
-            source = arg.items()
-        else:
-            source = arg
-        bad_key = False
-        for key, message in source:
-            try:
-                self[key] = message
-            except KeyError:
-                bad_key = True
-        if bad_key:
-            raise KeyError('No message with key(s)')
-
-    def flush(self):
-        """Write any pending changes to the disk."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def lock(self):
-        """Lock the mailbox."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def unlock(self):
-        """Unlock the mailbox if it is locked."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def close(self):
-        """Flush and close the mailbox."""
-        raise NotImplementedError('Method must be implemented by subclass')
-
-    def _string_to_bytes(self, message):
-        # If a message is not 7bit clean, we refuse to handle it since it
-        # likely came from reading invalid messages in text mode, and that way
-        # lies mojibake.
-        try:
-            return message.encode('ascii')
-        except UnicodeError:
-            raise ValueError("String input must be ASCII-only; "
-                "use bytes or a Message instead")
-
-    # Whether each message must end in a newline
-    _append_newline = False
-
-    def _dump_message(self, message, target, mangle_from_=False):
-        # This assumes the target file is open in binary mode.
-        """Dump message contents to target file."""
-        if isinstance(message, email.message.Message):
-            buffer = io.BytesIO()
-            gen = email.generator.BytesGenerator(buffer, mangle_from_, 0)
-            gen.flatten(message)
-            buffer.seek(0)
-            data = buffer.read()
-            data = data.replace(b'\n', linesep)
-            target.write(data)
-            if self._append_newline and not data.endswith(linesep):
-                # Make sure the message ends with a newline
-                target.write(linesep)
-        elif isinstance(message, (str, bytes, io.StringIO)):
-            if isinstance(message, io.StringIO):
-                warnings.warn("Use of StringIO input is deprecated, "
-                    "use BytesIO instead", DeprecationWarning, 3)
-                message = message.getvalue()
-            if isinstance(message, str):
-                message = self._string_to_bytes(message)
-            if mangle_from_:
-                message = message.replace(b'\nFrom ', b'\n>From ')
-            message = message.replace(b'\n', linesep)
-            target.write(message)
-            if self._append_newline and not message.endswith(linesep):
-                # Make sure the message ends with a newline
-                target.write(linesep)
-        elif hasattr(message, 'read'):
-            if hasattr(message, 'buffer'):
-                warnings.warn("Use of text mode files is deprecated, "
-                    "use a binary mode file instead", DeprecationWarning, 3)
-                message = message.buffer
-            lastline = None
-            while True:
-                line = message.readline()
-                # Universal newline support.
-                if line.endswith(b'\r\n'):
-                    line = line[:-2] + b'\n'
-                elif line.endswith(b'\r'):
-                    line = line[:-1] + b'\n'
-                if not line:
-                    break
-                if mangle_from_ and line.startswith(b'From '):
-                    line = b'>From ' + line[5:]
-                line = line.replace(b'\n', linesep)
-                target.write(line)
-                lastline = line
-            if self._append_newline and lastline and not lastline.endswith(linesep):
-                # Make sure the message ends with a newline
-                target.write(linesep)
-        else:
-            raise TypeError('Invalid message type: %s' % type(message))
-
-
-class Maildir(Mailbox):
-    """A qmail-style Maildir mailbox."""
-
-    colon = ':'
-
-    def __init__(self, dirname, factory=None, create=True):
-        """Initialize a Maildir instance."""
-        Mailbox.__init__(self, dirname, factory, create)
-        self._paths = {
-            'tmp': os.path.join(self._path, 'tmp'),
-            'new': os.path.join(self._path, 'new'),
-            'cur': os.path.join(self._path, 'cur'),
-            }
-        if not os.path.exists(self._path):
-            if create:
-                os.mkdir(self._path, 0o700)
-                for path in self._paths.values():
-                    os.mkdir(path, 0o700)
-            else:
-                raise NoSuchMailboxError(self._path)
-        self._toc = {}
-        self._toc_mtimes = {'cur': 0, 'new': 0}
-        self._last_read = 0         # Records last time we read cur/new
-        self._skewfactor = 0.1      # Adjust if os/fs clocks are skewing
-
-    def add(self, message):
-        """Add message and return assigned key."""
-        tmp_file = self._create_tmp()
-        try:
-            self._dump_message(message, tmp_file)
-        except BaseException:
-            tmp_file.close()
-            os.remove(tmp_file.name)
-            raise
-        _sync_close(tmp_file)
-        if isinstance(message, MaildirMessage):
-            subdir = message.get_subdir()
-            suffix = self.colon + message.get_info()
-            if suffix == self.colon:
-                suffix = ''
-        else:
-            subdir = 'new'
-            suffix = ''
-        uniq = os.path.basename(tmp_file.name).split(self.colon)[0]
-        dest = os.path.join(self._path, subdir, uniq + suffix)
-        if isinstance(message, MaildirMessage):
-            os.utime(tmp_file.name,
-                     (os.path.getatime(tmp_file.name), message.get_date()))
-        # No file modification should be done after the file is moved to its
-        # final position in order to prevent race conditions with changes
-        # from other programs
-        try:
-            if hasattr(os, 'link'):
-                os.link(tmp_file.name, dest)
-                os.remove(tmp_file.name)
-            else:
-                os.rename(tmp_file.name, dest)
-        except OSError as e:
-            os.remove(tmp_file.name)
-            if e.errno == errno.EEXIST:
-                raise ExternalClashError('Name clash with existing message: %s'
-                                         % dest)
-            else:
-                raise
-        return uniq
-
-    def remove(self, key):
-        """Remove the keyed message; raise KeyError if it doesn't exist."""
-        os.remove(os.path.join(self._path, self._lookup(key)))
-
-    def discard(self, key):
-        """If the keyed message exists, remove it."""
-        # This overrides an inapplicable implementation in the superclass.
-        try:
-            self.remove(key)
-        except (KeyError, FileNotFoundError):
-            pass
-
-    def __setitem__(self, key, message):
-        """Replace the keyed message; raise KeyError if it doesn't exist."""
-        old_subpath = self._lookup(key)
-        temp_key = self.add(message)
-        temp_subpath = self._lookup(temp_key)
-        if isinstance(message, MaildirMessage):
-            # temp's subdir and suffix were specified by message.
-            dominant_subpath = temp_subpath
-        else:
-            # temp's subdir and suffix were defaults from add().
-            dominant_subpath = old_subpath
-        subdir = os.path.dirname(dominant_subpath)
-        if self.colon in dominant_subpath:
-            suffix = self.colon + dominant_subpath.split(self.colon)[-1]
-        else:
-            suffix = ''
-        self.discard(key)
-        tmp_path = os.path.join(self._path, temp_subpath)
-        new_path = os.path.join(self._path, subdir, key + suffix)
-        if isinstance(message, MaildirMessage):
-            os.utime(tmp_path,
-                     (os.path.getatime(tmp_path), message.get_date()))
-        # No file modification should be done after the file is moved to its
-        # final position in order to prevent race conditions with changes
-        # from other programs
-        os.rename(tmp_path, new_path)
-
-    def get_message(self, key):
-        """Return a Message representation or raise a KeyError."""
-        subpath = self._lookup(key)
-        with open(os.path.join(self._path, subpath), 'rb') as f:
-            if self._factory:
-                msg = self._factory(f)
-            else:
-                msg = MaildirMessage(f)
-        subdir, name = os.path.split(subpath)
-        msg.set_subdir(subdir)
-        if self.colon in name:
-            msg.set_info(name.split(self.colon)[-1])
-        msg.set_date(os.path.getmtime(os.path.join(self._path, subpath)))
-        return msg
-
-    def get_bytes(self, key):
-        """Return a bytes representation or raise a KeyError."""
-        with open(os.path.join(self._path, self._lookup(key)), 'rb') as f:
-            return f.read().replace(linesep, b'\n')
-
-    def get_file(self, key):
-        """Return a file-like representation or raise a KeyError."""
-        f = open(os.path.join(self._path, self._lookup(key)), 'rb')
-        return _ProxyFile(f)
-
-    def iterkeys(self):
-        """Return an iterator over keys."""
-        self._refresh()
-        for key in self._toc:
-            try:
-                self._lookup(key)
-            except KeyError:
-                continue
-            yield key
-
-    def __contains__(self, key):
-        """Return True if the keyed message exists, False otherwise."""
-        self._refresh()
-        return key in self._toc
-
-    def __len__(self):
-        """Return a count of messages in the mailbox."""
-        self._refresh()
-        return len(self._toc)
-
-    def flush(self):
-        """Write any pending changes to disk."""
-        # Maildir changes are always written immediately, so there's nothing
-        # to do.
-        pass
-
-    def lock(self):
-        """Lock the mailbox."""
-        return
-
-    def unlock(self):
-        """Unlock the mailbox if it is locked."""
-        return
-
-    def close(self):
-        """Flush and close the mailbox."""
-        return
-
-    def list_folders(self):
-        """Return a list of folder names."""
-        result = []
-        for entry in os.listdir(self._path):
-            if len(entry) > 1 and entry[0] == '.' and \
-               os.path.isdir(os.path.join(self._path, entry)):
-                result.append(entry[1:])
-        return result
-
-    def get_folder(self, folder):
-        """Return a Maildir instance for the named folder."""
-        return Maildir(os.path.join(self._path, '.' + folder),
-                       factory=self._factory,
-                       create=False)
-
-    def add_folder(self, folder):
-        """Create a folder and return a Maildir instance representing it."""
-        path = os.path.join(self._path, '.' + folder)
-        result = Maildir(path, factory=self._factory)
-        maildirfolder_path = os.path.join(path, 'maildirfolder')
-        if not os.path.exists(maildirfolder_path):
-            os.close(os.open(maildirfolder_path, os.O_CREAT | os.O_WRONLY,
-                0o666))
-        return result
 
     def remove_folder(self, folder):
         """Delete the named folder, which must be empty."""
@@ -476,6 +45,7 @@ class Maildir(Mailbox):
 
     def _create_tmp(self):
         """Create a file in the tmp subdirectory and open and return it."""
+        
         now = time.time()
         hostname = socket.gethostname()
         if '/' in hostname:
@@ -484,6 +54,7 @@ class Maildir(Mailbox):
             hostname = hostname.replace(':', r'\072')
         uniq = "%s.M%sP%sQ%s.%s" % (int(now), int(now % 1 * 1e6), os.getpid(),
                                     Maildir._count, hostname)
+        
         path = os.path.join(self._path, 'tmp', uniq)
         try:
             os.stat(path)
@@ -500,19 +71,6 @@ class Maildir(Mailbox):
 
     def _refresh(self):
         """Update table of contents mapping."""
-        # If it has been less than two seconds since the last _refresh() call,
-        # we have to unconditionally re-read the mailbox just in case it has
-        # been modified, because os.path.mtime() has a 2 sec resolution in the
-        # most common worst case (FAT) and a 1 sec resolution typically.  This
-        # results in a few unnecessary re-reads when _refresh() is called
-        # multiple times in that interval, but once the clock ticks over, we
-        # will only re-read as needed.  Because the filesystem might be being
-        # served by an independent system with its own clock, we record and
-        # compare with the mtimes from the filesystem.  Because the other
-        # system's clock might be skewing relative to our clock, we add an
-        # extra delta to our wait.  The default is one tenth second, but is an
-        # instance variable and so can be adjusted if dealing with a
-        # particularly skewed or irregular system.
         if time.time() - self._last_read > 2 + self._skewfactor:
             refresh = False
             for subdir in self._toc_mtimes:
@@ -914,7 +472,6 @@ class MMDF(_mboxMMDF):
         self._file.seek(0, 2)
         self._file_length = self._file.tell()
 
-
 class MH(Mailbox):
     """An MH mailbox."""
 
@@ -1218,7 +775,6 @@ class MH(Mailbox):
                 all_sequences[sequence] = [key]
         self.set_sequences(all_sequences)
 
-
 class Babyl(_singlefileMailbox):
     """An Rmail-style Babyl mailbox."""
 
@@ -1466,7 +1022,7 @@ class Babyl(_singlefileMailbox):
             raise TypeError('Invalid message type: %s' % type(message))
         stop = self._file.tell()
         return (start, stop)
-
+'''
 
 class Message(email.message.Message):
     """Message with mailbox-format-specific properties."""
@@ -2078,3 +1634,30 @@ def _lock_file(f, dotlock=True):
         if dotlock_done:
             os.remove(f.name + '.lock')
         raise
+
+
+
+
+
+
+
+print('here')
+
+#os.utime(tmp_path,(os.path.getatime(tmp_path), message.get_date()))
+
+
+import datetime
+dt = datetime.datetime.now()
+date_time = dt.strftime("%Y/%m/%d %H:%M:%S")
+print("時間 :", date_time)
+
+
+'''
+print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
+print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
+'''
+
+
+
+
+
