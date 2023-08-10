@@ -1,16 +1,3 @@
-# Copyright pydicom authors 2019. See LICENSE file for details
-"""
-======================================
-Show working with memory-based dataset
-======================================
-
-Show how to write a DICOM dataset into a byte array and to read
-it back from a byte array. This can be helpful for example if working with
-datasets saved as blobs in a database.
-
-"""
-
-
 from io import BytesIO
 
 from pydicom import dcmread, dcmwrite
@@ -19,7 +6,6 @@ from pydicom.filebase import DicomFileLike
 print(__doc__)
 
 usage = "Usage: python memory_dataset.py dicom_filename"
-
 
 def write_dataset_to_bytes(dataset):
     # create a buffer
@@ -55,19 +41,19 @@ class DummyDataBase:
         return self._blobs.get(name)
 
 
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
+
 if __name__ == '__main__':
     import sys
 
-    if len(sys.argv) != 2:
-        print("Please supply a dicom file name:\n")
-        print(usage)
-        sys.exit(-1)
-    file_path = sys.argv[1]
     db = DummyDataBase()
 
     # Convert a dataset to a byte array:
     # - read the dataset from a file
-    dataset = dcmread(file_path)
+    dataset = dcmread(filename2)
+    print('1111')
     print(dataset)
     # - convert the dataset to bytes
     ds_bytes = write_dataset_to_bytes(dataset)
@@ -79,6 +65,8 @@ if __name__ == '__main__':
     read_bytes = db.load('dataset')
     # - convert the bytes into a dataset and do something interesting with it
     read_dataset = adapt_dataset_from_bytes(read_bytes)
+    print('2222')
     print(read_dataset)
-    # - you can write your dataset to a file if wanted
-    dcmwrite(file_path + '_new', read_dataset)
+
+    filename = 'new_dicom_file.dcm'
+    dcmwrite(filename, read_dataset)

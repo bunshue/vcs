@@ -2,8 +2,10 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
+api_key = 'C:/_git/vcs/_1.data/______test_files1/_key/david-firebase-proj-firebase-adminsdk.json'
+
 # Setup
-cred = credentials.Certificate("serviceAccountKey.json")
+cred = credentials.Certificate(api_key)
 firebase_admin.initialize_app(cred)
 
 db=firestore.client()

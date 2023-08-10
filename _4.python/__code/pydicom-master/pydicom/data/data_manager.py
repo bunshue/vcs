@@ -385,6 +385,7 @@ def get_testdata_files(pattern: str = "**/*") -> List[str]:
     list of str
         A list of absolute paths to matching files.
     """
+    print('get_testdata_files get_testdata_files get_testdata_files')
     data_path = Path(DATA_ROOT) / 'test_files'
 
     files = get_files(base=data_path, pattern=pattern, dtype=DataTypes.DATASET)

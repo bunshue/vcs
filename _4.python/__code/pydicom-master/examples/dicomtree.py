@@ -74,18 +74,15 @@ def recurse_tree(tree, dataset, parent, hide=False):
                 tree.hlist.hide_entry(item_id)
                 recurse_tree(tree, dataset, item_id, hide=True)
 
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
 
-if __name__ == '__main__':
-    import sys
-    import pydicom
+import pydicom
 
-    if len(sys.argv) != 2:
-        print("Please supply a dicom file name:\n")
-        print(usage)
-        sys.exit(-1)
-    root = tkinter_tix.Tk()
-    root.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
-    root.title("DICOM tree viewer - " + sys.argv[1])
+root = tkinter_tix.Tk()
+root.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
+root.title("DICOM tree viewer - " + filename1)
 
-    RunTree(root, sys.argv[1])
-    root.mainloop()
+RunTree(root, filename1)
+root.mainloop()

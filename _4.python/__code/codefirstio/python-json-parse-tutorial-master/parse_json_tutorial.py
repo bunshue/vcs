@@ -1,4 +1,3 @@
-#built-in package JSON
 import json
 
 #json file

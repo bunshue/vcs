@@ -4,7 +4,6 @@ from tkinter import colorchooser
 from PIL import Image, ImageOps, ImageTk, ImageFilter
 from tkinter import ttk
 
-
 root = tk.Tk()
 root.geometry("1000x600")
 root.title("Image Drawing Tool")
@@ -13,7 +12,6 @@ root.config(bg="white")
 pen_color = "black"
 pen_size = 5
 file_path = ""
-
 
 def add_image():
     global file_path

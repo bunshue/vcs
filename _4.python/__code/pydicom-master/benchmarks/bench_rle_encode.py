@@ -9,6 +9,9 @@ from pydicom.uid import RLELossless
 
 # 8/8-bit, 1 sample/pixel, 1 frame
 EXPL_8_1_1F = get_testdata_file("OBXXXX1A.dcm")
+
+
+'''
 # 8/8-bit, 3 sample/pixel, 1 frame
 EXPL_8_3_1F = get_testdata_file("SC_rgb.dcm")
 # 16/16-bit, 1 sample/pixel, 1 frame
@@ -19,7 +22,7 @@ EXPL_16_3_1F = get_testdata_file("SC_rgb_16bit.dcm")
 EXPL_32_1_1F = get_testdata_file("rtdose_1frame.dcm")
 # 32/32-bit, 3 sample/pixel, 1 frame
 EXPL_32_3_1F = get_testdata_file("SC_rgb_32bit.dcm")
-
+'''
 
 class TimeRLEEncodeFrame:
     """Time tests for rle_handler.rle_encode_frame."""
