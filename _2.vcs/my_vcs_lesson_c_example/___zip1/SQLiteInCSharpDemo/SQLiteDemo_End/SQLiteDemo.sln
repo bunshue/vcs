@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormUI", "WinFormUI\WinFormUI.csproj", "{DBE9FA39-35E6-470D-AEB7-5E84C0872E3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoLibrary", "DemoLibrary\DemoLibrary.csproj", "{51E35D36-70F2-4A6C-AD5B-A68104FBE126}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBE9FA39-35E6-470D-AEB7-5E84C0872E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBE9FA39-35E6-470D-AEB7-5E84C0872E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBE9FA39-35E6-470D-AEB7-5E84C0872E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBE9FA39-35E6-470D-AEB7-5E84C0872E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51E35D36-70F2-4A6C-AD5B-A68104FBE126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E35D36-70F2-4A6C-AD5B-A68104FBE126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E35D36-70F2-4A6C-AD5B-A68104FBE126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E35D36-70F2-4A6C-AD5B-A68104FBE126}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2E183DF-0F90-499C-9BF2-E4EB7D7D5E92}
+	EndGlobalSection
+EndGlobal

@@ -20,7 +20,8 @@ window.title(title)
 # frame1
 frame1 = tk.Frame(window, bg = 'pink', width = 200, height = 200, borderwidth = 10, relief = tk.GROOVE)
 frame1.pack_propagate(False)
-frame1.pack(side = 'left')
+#frame1.pack(side = 'left')
+frame1.pack()
 
 # master setting
 label = tk.Label(frame1, text = 'Frame1內之Label')
@@ -29,18 +30,26 @@ label.pack()
 button = tk.Button(frame1, text = 'Frame1內之Button')
 button.pack()
 
-# example 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 label2 = tk.Label(window, text = 'Frame1外之Label')
-label2.pack(side = 'left')
+#label2.pack(side = 'left')
+label2.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 # frame2
 # create another frame with a label, a button and an entry and place it to the right
 # of the other widgets 
 frame2 = tk.Frame(window, bg = 'yellow')
 tk.Label(frame2, text = 'Frame2內之Label').pack()
-tk.Button(frame2, text = 'Frame1內之Button').pack()
+tk.Button(frame2, text = 'Frame2內之Button').pack()
 tk.Entry(frame2).pack()
-frame2.pack(side = 'left')
+#frame2.pack(side = 'left')
+frame2.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 
 window.mainloop()
 

@@ -31,6 +31,8 @@ scale = ttk.Scale(
 	variable = scale_float)
 scale.pack()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 # progress bar
 progress = ttk.Progressbar(
 	window, 
@@ -41,11 +43,16 @@ progress = ttk.Progressbar(
 	length = 400)
 progress.pack()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 # progress.start(1000)
 
 # Scrolledtext
 scrolled_text = scrolledtext.ScrolledText(window, width = 100, height = 5)
 scrolled_text.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 
 # exercise 
 # create a progress that is vertical, starts automatically and also show the progress as a number
@@ -55,11 +62,16 @@ exercise_progress = ttk.Progressbar(window, orient = 'vertical', variable = exer
 exercise_progress.pack()
 exercise_progress.start()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
 label = ttk.Label(window, textvariable = exercise_int)
 label.pack()
 
 exercise_scale = ttk.Scale(window, variable = exercise_int, from_ = 0, to = 100)
 exercise_scale.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
 

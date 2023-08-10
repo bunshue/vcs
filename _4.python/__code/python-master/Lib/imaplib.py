@@ -1,25 +1,3 @@
-"""IMAP4 client.
-
-Based on RFC 2060.
-
-Public class:           IMAP4
-Public variable:        Debug
-Public functions:       Internaldate2tuple
-                        Int2AP
-                        ParseFlags
-                        Time2Internaldate
-"""
-
-# Author: Piers Lauder <piers@cs.su.oz.au> December 1997.
-#
-# Authentication code contributed by Donn Cave <donn@u.washington.edu> June 1998.
-# String method conversion by ESR, February 2001.
-# GET/SETACL contributed by Anthony Baxter <anthony@interlink.com.au> April 2001.
-# IMAP4_SSL contributed by Tino Lange <Tino.Lange@isg.de> March 2002.
-# GET/SETQUOTA contributed by Andreas Zeidler <az@kreativkombinat.de> June 2002.
-# PROXYAUTH contributed by Rick Holbert <holbert.13@osu.edu> November 2002.
-# GET/SETANNOTATION contributed by Tomas Lindroos <skitta@abo.fi> June 2005.
-
 __version__ = "2.58"
 
 import binascii, errno, random, re, socket, subprocess, sys, time, calendar
@@ -43,14 +21,7 @@ IMAP4_PORT = 143
 IMAP4_SSL_PORT = 993
 AllowedVersions = ('IMAP4REV1', 'IMAP4')        # Most recent first
 
-# Maximal line length when calling readline(). This is to prevent
-# reading arbitrary length lines. RFC 3501 and 2060 (IMAP 4rev1)
-# don't specify a line length. RFC 2683 however suggests limiting client
-# command lines to 1000 octets and server command lines to 8000 octets.
-# We have selected 10000 for some extra margin and since that is supposedly
-# also what UW and Panda IMAP does.
 _MAXLINE = 10000
-
 
 #       Commands
 
@@ -113,54 +84,7 @@ Untagged_response = re.compile(br'\* (?P<type>[A-Z-]+)( (?P<data>.*))?')
 Untagged_status = re.compile(
     br'\* (?P<data>\d+) (?P<type>[A-Z-]+)( (?P<data2>.*))?', re.ASCII)
 
-
-
 class IMAP4:
-
-    """IMAP4 client class.
-
-    Instantiate with: IMAP4([host[, port]])
-
-            host - host's name (default: localhost);
-            port - port number (default: standard IMAP4 port).
-
-    All IMAP4rev1 commands are supported by methods of the same
-    name (in lower-case).
-
-    All arguments to commands are converted to strings, except for
-    AUTHENTICATE, and the last argument to APPEND which is passed as
-    an IMAP4 literal.  If necessary (the string contains any
-    non-printing characters or white-space and isn't enclosed with
-    either parentheses or double quotes) each string is quoted.
-    However, the 'password' argument to the LOGIN command is always
-    quoted.  If you want to avoid having an argument string quoted
-    (eg: the 'flags' argument to STORE) then enclose the string in
-    parentheses (eg: "(\Deleted)").
-
-    Each command returns a tuple: (type, [data, ...]) where 'type'
-    is usually 'OK' or 'NO', and 'data' is either the text from the
-    tagged response, or untagged results from command. Each 'data'
-    is either a string, or a tuple. If a tuple, then the first part
-    is the header of the response, and the second part contains
-    the data (ie: 'literal' value).
-
-    Errors raise the exception class <instance>.error("<reason>").
-    IMAP4 server errors raise <instance>.abort("<reason>"),
-    which is a sub-class of 'error'. Mailbox status changes
-    from READ-WRITE to READ-ONLY raise the exception class
-    <instance>.readonly("<reason>"), which is a sub-class of 'abort'.
-
-    "error" exceptions imply a program error.
-    "abort" exceptions imply the connection should be reset, and
-            the command re-tried.
-    "readonly" exceptions imply the command should be re-tried.
-
-    Note: to use this module, you must read the RFCs pertaining to the
-    IMAP4 protocol, as the semantics of the arguments to each IMAP4
-    command are left to the invoker, not to mention the results. Also,
-    most IMAP servers implement a sub-set of the commands available here.
-    """
-
     class error(Exception): pass    # Logical errors - debug required
     class abort(error): pass        # Service errors - close and retry
     class readonly(abort): pass     # Mailbox status changed to READ-ONLY
@@ -238,30 +162,20 @@ class IMAP4:
             return getattr(self, attr.lower())
         raise AttributeError("Unknown IMAP4 command: '%s'" % attr)
 
-
-
     #       Overridable methods
-
 
     def _create_socket(self):
         return socket.create_connection((self.host, self.port))
 
     def open(self, host = '', port = IMAP4_PORT):
-        """Setup connection to remote server on "host:port"
-            (default: localhost:standard IMAP4 port).
-        This connection will be used by the routines:
-            read, readline, send, shutdown.
-        """
         self.host = host
         self.port = port
         self.sock = self._create_socket()
         self.file = self.sock.makefile('rb')
 
-
     def read(self, size):
         """Read 'size' bytes from remote."""
         return self.file.read(size)
-
 
     def readline(self):
         """Read line from remote."""
@@ -270,11 +184,9 @@ class IMAP4:
             raise self.error("got more than %d bytes" % _MAXLINE)
         return line
 
-
     def send(self, data):
         """Send data to remote."""
         self.sock.sendall(data)
-
 
     def shutdown(self):
         """Close I/O established in "open"."""
@@ -288,28 +200,12 @@ class IMAP4:
         finally:
             self.sock.close()
 
-
     def socket(self):
-        """Return socket instance used to connect to IMAP4 server.
-
-        socket = <instance>.socket()
-        """
         return self.sock
-
-
 
     #       Utility methods
 
-
     def recent(self):
-        """Return most recent 'RECENT' responses if any exist,
-        else prompt server for an update using the 'NOOP' command.
-
-        (typ, [data]) = <instance>.recent()
-
-        'data' is None if no new messages,
-        else list of RECENT responses, most recent last.
-        """
         name = 'RECENT'
         typ, dat = self._untagged_response('OK', [None], name)
         if dat[-1]:
@@ -319,26 +215,11 @@ class IMAP4:
 
 
     def response(self, code):
-        """Return data for response 'code' if received, or None.
-
-        Old value for response 'code' is cleared.
-
-        (code, [data]) = <instance>.response(code)
-        """
         return self._untagged_response(code, [None], code.upper())
-
-
 
     #       IMAP4 commands
 
-
     def append(self, mailbox, flags, date_time, message):
-        """Append message to named mailbox.
-
-        (typ, [data]) = <instance>.append(mailbox, flags, date_time, message)
-
-                All args except `message' can be None.
-        """
         name = 'APPEND'
         if not mailbox:
             mailbox = 'INBOX'
@@ -356,26 +237,7 @@ class IMAP4:
 
 
     def authenticate(self, mechanism, authobject):
-        """Authenticate command - requires response processing.
-
-        'mechanism' specifies which authentication mechanism is to
-        be used - it must appear in <instance>.capabilities in the
-        form AUTH=<mechanism>.
-
-        'authobject' must be a callable object:
-
-                data = authobject(response)
-
-        It will be called to process server continuation responses; the
-        response argument it is passed will be a bytes.  It should return bytes
-        data that will be base64 encoded and sent to the server.  It should
-        return None if the client abort response '*' should be sent instead.
-        """
         mech = mechanism.upper()
-        # XXX: shouldn't this code be removed, not commented out?
-        #cap = 'AUTH=%s' % mech
-        #if not cap in self.capabilities:       # Let the server decide!
-        #    raise self.error("Server doesn't allow %s authentication." % mech)
         self.literal = _Authenticator(authobject).process
         typ, dat = self._simple_command('AUTHENTICATE', mech)
         if typ != 'OK':
@@ -1539,9 +1401,6 @@ if __name__ == '__main__':
         print('\nTests failed.')
 
         if not Debug:
-            print('''
-If you would like to see debugging output,
-try: %s -d5
-''' % sys.argv[0])
-
+            print('xxxxxx')
         raise
+

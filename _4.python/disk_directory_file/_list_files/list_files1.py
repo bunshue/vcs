@@ -17,14 +17,16 @@ import glob
 import sys
 import stat
 
-foldername = 'C:/_git/vcs/_1.data/______test_files4'
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
 
 print('----------------------------------------------------------------------')	#70個
 print('ls 測試 os.walk')
+print('----------------------------------------------------------------------')	#70個
+print('撈出資料夾下所有檔案, 單層')
 print('搜尋路徑：', foldername)
 filenames = os.walk(foldername)
 print(type(filenames))  #很奇怪的結構
-print(filenames)
+#print(filenames)
 for root, dirs, filenames in filenames:
     print('路徑：', root)
     print('路徑下之目錄：', dirs)   
@@ -54,6 +56,7 @@ for root, dirs, filenames in os.walk(foldername):
         print(long_filename)
 print('----------------------------------------------------------------------')	#70個
 print('ls 測試 os.listdir')
+print('----------------------------------------------------------------------')	#70個
 
 print('當前目錄下之ls (單層)')
 filenames = os.listdir()
@@ -249,14 +252,11 @@ print('------------------------------')  #30個
 
 print('----------------------------------------------------------------------')	#70個
 print('ls 測試 glob.glob')
-
+print('----------------------------------------------------------------------')	#70個
+print('撈出資料夾下所有檔案, 單層')
 print('資料夾: ' + foldername)
+print('資料夾: {}'.format(foldername))
 
-print('Processing: {}'.format(foldername))
-
-#撈出資料夾下所有檔案
-
-#單層
 filenames = glob.glob(foldername + '/*.jpg') + glob.glob(foldername + '/*.png')
 print(filenames)
 
@@ -269,9 +269,9 @@ for target_image in filenames:
     '''
 print("完成")
 
+print('------------------------------')  #30個
 
-
-
+print('撈出資料夾下所有檔案, 單層')
 foldername = 'C:/_git/vcs/_1.data/______test_files5/'
 filenames = glob.glob(foldername)
 
@@ -280,6 +280,7 @@ for filename in filenames:
 
 print('------------------------------')  #30個
 
+print('撈出資料夾下所有檔案, 單層')
 os.chdir(foldername)
 curdir = os.getcwd()
 
@@ -445,9 +446,6 @@ print('------------------------------')  #30個
 # 新進未整理
 
 
-
-
-
 mkdir多一層保護
         try:
             os.mkdir(odir)
@@ -472,20 +470,3 @@ mkdir多一層保護
 
 
 
-'''
-    def glob(self, pattern, exclude = None):
-        """Add a list of files to the current component as specified in the
-        glob pattern. Individual files can be excluded in the exclude list."""
-        files = glob.glob1(self.absolute, pattern)
-        for f in files:
-            if exclude and f in exclude: continue
-            self.add_file(f)
-        return files
-
-            filenames = glob.glob(name)
-            filename_list = []
-            for filename in filenames:
-                filename_list.extend(getFilesForName(filename))
-            return filename_list
-
-'''

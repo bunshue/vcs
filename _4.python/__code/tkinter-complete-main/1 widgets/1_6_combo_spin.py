@@ -33,6 +33,9 @@ combo.bind('<<ComboboxSelected>>', lambda event: combo_label.config(text = f'Sel
 combo_label = ttk.Label(window, text = 'a label')
 combo_label.pack()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
 # Spinbox
 spin_int = tk.IntVar(value = 12)
 spin = ttk.Spinbox(
@@ -47,7 +50,8 @@ spin.bind('<<Decrement>>', lambda event: print('down'))
 # spin['value'] = (1,2,3,4,5)
 spin.pack()
 
-# exercise: 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 # create a spinbox that contains the letters A B C D E 
 # and print the value whenever the value is decreased
 
@@ -58,5 +62,5 @@ exercise_spin.pack()
 
 exercise_spin.bind('<<Decrement>>', lambda event: print(exercise_string.get()))
 
-# run
 window.mainloop()
+

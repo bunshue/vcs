@@ -30,6 +30,56 @@ data_elements = ['PatientID',
 for de in data_elements:
     print(dataset.data_element(de))
 
+
+print('----------------------------------------------------------------------')	#70個
+
+import matplotlib.pyplot as plt
+import pydicom
+
+ds = pydicom.dcmread(filename3)
+plt.imshow(ds.pixel_array, cmap=plt.cm.bone)
+plt.show()
+
+print('----------------------------------------------------------------------')	#70個
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
+
+print('修改Dicom內的資料')
+
+# Read DICOM file
+ds = pydicom.dcmread(filename1)
+
+# 更改 Patient Name 資料
+#ds.PhotometricInterpretation = "gary"
+
+# 另存 DICOM 檔案，指定存檔位置
+filename = 'change_info.dcm'
+ds.save_as(filename)
+
+print(f"File {filename1} processed and saved as {filename}")
+       
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
+
+
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
+
 '''
 #修改資料內容
 dataset.data_element('PatientBirthDate').value = '19000101'
@@ -43,23 +93,9 @@ dataset.save_as('kkkk.dcm')
 ds = dcmread(filename)
 
 print(ds.SeriesNumber)
-# 更改 Patient Name 資料
-ds.PhotometricInterpretation = "gary"
-
-# 另存 DICOM 檔案，指定存檔位置
-ds.save_as("de-identification.dcm")
-
 
 
 '''
 
-
-
-import matplotlib.pyplot as plt
-import pydicom
-
-ds = pydicom.dcmread(filename3)
-plt.imshow(ds.pixel_array, cmap=plt.cm.bone)
-plt.show()
 
 

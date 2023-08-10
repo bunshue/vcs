@@ -43,8 +43,9 @@ print("第6以後字元 " + s[6:])    # prints "Python"
 
 print(7/3)
 
-s = "Hello Python"
+print('----------------------------------------------------------------------')	#70個
 
+s = "Hello Python"
 print(s + ' ' + s) # print concatenated string.
 
 print("轉成大寫");
@@ -97,7 +98,8 @@ while i < 17:
   i=i+1
 
 print("moneytotal list 長度 : "+ str(len(moneytotal)))
-    
+
+print('----------------------------------------------------------------------')	#70個
     
 print("格式化列印")
 print("姓名   座號  國文  數學  英文")
@@ -149,6 +151,7 @@ var2 = "Python Programming"
 print('var1[0]: ', var1[0])
 print('var2[1:5]: ', var2[1:5])
 
+print('----------------------------------------------------------------------')	#70個
 
 import sys
 
@@ -196,6 +199,8 @@ print('Error: %s' % string1, file = sys.stderr)
 
 debug = False #debug訊息之開關
 
+print('----------------------------------------------------------------------')	#70個
+
 def print_debug(msg):
     if debug: print(msg)
 
@@ -214,6 +219,7 @@ rep('CCCCC')
 
 err('-i option or file-or-directory missing\n')
 
+print('----------------------------------------------------------------------')	#70個
 
 
 import sys
@@ -271,6 +277,7 @@ print()
 
 print('恢復正常顯示')
 
+print('----------------------------------------------------------------------')	#70個
 
 
 import time
@@ -279,6 +286,7 @@ copyright = '1990-%s, Python Software Foundation' % time.strftime('%Y')
 
 print(copyright)
 
+print('----------------------------------------------------------------------')	#70個
 
 
 model = 'aaaa'
@@ -291,6 +299,7 @@ message = "{:<10}({}年式)，{:>10,}KM，售價：{:>10,}元"
 print(message.format(model, year, mileage, money))
 
 
+print('----------------------------------------------------------------------')	#70個
 
 
 testno = 20
@@ -307,22 +316,26 @@ sys.stderr.write("%s  %s  %s\n" % (err, s, fmt))
 
 
 
+print('----------------------------------------------------------------------')	#70個
 
 
+def log(message):
+    sys.stderr.write('log: %s\n' % str(message))
 
+def log_info(message, type='info'):
+    ignore_log_types = frozenset(['warning'])
+    if type not in ignore_log_types:
+        print('%s: %s' % (type, message))
 
+log('uncaptured python exception, closing channel')
 
+log_info('uncaptured python exception, closing channel %s (%s:%s %s)'
+         % ('aaaa', 'bbbb', 'pppp', 'qqqq' ), 'error')
 
+log_info('unhandled incoming priority event', 'warning')
+log_info('unhandled read event', 'warning')
 
-
-
-
-
-
-
-
-
-
+print('----------------------------------------------------------------------')	#70個
 
 
 
@@ -344,4 +357,28 @@ SRCDIR = sysconfig.get_config_var('srcdir')
 print(SRCDIR)
 
 print('不能 恢復正常顯示')
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
 
