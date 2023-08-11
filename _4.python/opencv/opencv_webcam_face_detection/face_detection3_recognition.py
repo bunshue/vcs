@@ -2,6 +2,7 @@ import cv2
 
 model = cv2.face.LBPHFaceRecognizer_create()
 model.read('faces.data')
+
 print('load training data done')
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -9,7 +10,7 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 cv2.namedWindow('video', cv2.WINDOW_NORMAL)
 # 可識別化名稱
-names = ['ckk']
+names = ['david']
 
 while True:
     ret, frame = cap.read()
@@ -29,8 +30,11 @@ while True:
         face_img = cv2.resize(face_img, (400, 400))
 
         val = model.predict(face_img)
+        
         print('label:{}, conf:{:.1f}'.format(val[0], val[1]))
         if val[1] < 50:
+            print('找到人臉, val =', val)
+            print('找到人臉, val[0] =', val[0], 'val[1] =', val[1], 'name =', names[val[0]])
             cv2.putText(
                 frame, names[val[0]], (x, y - 10), 
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,0), 3

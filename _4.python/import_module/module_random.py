@@ -267,6 +267,45 @@ print(s)
 
 print('------------------------------')  #30個
 
+import time
+
+randseed = int(time.time())
+random.seed(randseed)
+
+
+
+print('------------------------------')  #30個
+
+import random
+
+tttt = hex(random.getrandbits(64))  # 64 bits randomness
+print(tttt)
+
+
+
+print('------------------------------')  #30個
+
+import random
+
+first_names = ['Bob', 'Maria', 'Alex', 'James', 'Susan', 'Henry', 'Lisa', 'Anna', 'Lisa']
+last_names = ['Smith', 'Brown', 'Wilson', 'Thomson', 'Cook', 'Taylor', 'Walker', 'Clark']
+
+for i in range(10):
+    first = random.choice(first_names)
+    last = random.choice(last_names)
+    print(first, last)
+
+    
+print('------------------------------')  #30個
+import random
+
+data = [random.uniform(-2, 9) for _ in range(10)]
+
+print(len(data))
+print(type(data))
+print(data)
+
+
 
 
 print('------------------------------')  #30個
@@ -275,5 +314,8 @@ print('------------------------------')  #30個
 
 print('------------------------------')  #30個
 
+
+
+print('------------------------------')  #30個
 
 
