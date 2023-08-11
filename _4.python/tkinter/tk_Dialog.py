@@ -1,5 +1,21 @@
 import tkinter as tk
-#from tkinter import _cnfmerge
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
 
 #DIALOG_ICON = 'warning'
 DIALOG_ICON = 'questhead'
@@ -36,7 +52,8 @@ def open_dialog():
 
 print(tk.TkVersion)
 
-t = tk.Button(None, {'text': 'Test', 'command': open_dialog, tk.Pack: {}})
-q = tk.Button(None, {'text': 'Quit', 'command': t.quit, tk.Pack: {}})
-t.mainloop()
+button1 = tk.Button(window, {'text': 'Test', 'command': open_dialog, tk.Pack: {}})
+button2 = tk.Button(window, {'text': 'Quit', 'command': window.destroy, tk.Pack: {}})
+
+window.mainloop()
 

@@ -34,7 +34,7 @@ print("%s:" % filename, im.format, "%dx%d" % im.size, im.mode)
 print(im.info, im.tile)
 '''
 
-
+print('----------------------------------------------------------------------')	#70個
 filename = 'C:/_git/vcs/_1.data/______test_files1/poetry.txt'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/quotes.txt'
 
@@ -48,7 +48,7 @@ try:
 finally:
     fp.close()
 
-
+print('----------------------------------------------------------------------')	#70個
 with open(filename, 'r', encoding = 'UTF-8') as file:
     line = file.readlines()
 #print(line)
@@ -58,7 +58,7 @@ for l in line:
     print(l[:3])    #每行的前三字
     print(l[3:])    #每行的第三字開始到最後
     
-
+print('----------------------------------------------------------------------')	#70個
 '''
 fp = open(filename, 'r', encoding = 'UTF-8')
 line = fp.readlines()
@@ -66,4 +66,28 @@ fp.close()
 
 print(line)
 '''
+
+print('----------------------------------------------------------------------')	#70個
+#簡易播放一檔
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+from matplotlib import pyplot as plt
+img = cv2.imread(filename)
+plt.imshow(img)
+plt.show()
+
+
+print('----------------------------------------------------------------------')	#70個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
+
+
+from pygame import mixer  # Load the popular external library
+
+mixer.init()
+mixer.music.load(filename)
+#mixer.music.play()
+
+
 

@@ -88,7 +88,19 @@ y = r*sin(t)
 #第五張圖
 plt.subplot(235)
 
+x = np.linspace(-5, 5, 200)
+siny = np.sin(x)
 
+y = siny + np.random.rand(1, len(siny)) * 1.5 #加入雜訊的點集
+y = y.tolist()[0]
+
+plt.plot(x, siny, c = 'r', label = 'sin(x)', linewidth = 1)
+plt.plot(x, y, c = 'g', label = 'sin(x)', linewidth = 1)
+
+plt.xlabel('x')
+plt.ylabel('sin(x)')
+plt.title('')
+plt.legend()
 
 #第六張圖
 plt.subplot(236)

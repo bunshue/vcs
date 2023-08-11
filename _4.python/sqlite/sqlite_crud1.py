@@ -94,27 +94,31 @@ CREATE TABLE IF NOT EXISTS table01 (
     "weight" INTEGER NOT NULL CHECK(weight > 0) -- 預設錯誤時會顯示
 );
 '''
+
 #有寫NOT NULL表示一定要填寫, 若無此條件, 則可以不寫
 
 cursor.execute(sqlstr)
 conn.commit() # 更新
 
 #INSERT 新增資料
-print('新增資料 3 筆 寫法一, 必須要寫滿所有欄位')
+print('新增資料 2 筆 寫法一, 必須要寫滿所有欄位')
 #id_num不可重複
 sqlstr = 'INSERT INTO table01 VALUES (5, "lion", "獅子", 270)'
 cursor.execute(sqlstr)
 sqlstr = 'INSERT INTO table01 VALUES (1, "mouse", "老鼠", 1)'
 cursor.execute(sqlstr)
-sqlstr = 'INSERT INTO table01 VALUES (4, "dinosaur", "恐龍", 5566)'
-cursor.execute(sqlstr)
 
-print('新增資料 2 筆 寫法二, 有些欄位可以不寫')
+print('新增資料 1 筆 寫法二, 有些欄位可以不寫, 使用tuple')
+sqlstr = 'INSERT INTO table01 (id_num, ename, cname, weight) VALUES (?, ?, ?, ?)'
+data_insert_tuple = (4, "dinosaur", "恐龍", 5566)
+cursor.execute(sqlstr, data_insert_tuple)
+
+print('新增資料 2 筆 寫法三, 有些欄位可以不寫')
 cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (9, 'hippo', 996)")
 #id_num不重複 但name weight 重複
 cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (2, 'bear', 567)")
 
-print('新增資料 2 筆 寫法三, 有些欄位可以不寫')
+print('新增資料 2 筆 寫法四, 有些欄位可以不寫')
 # 定義資料串列
 datas = [
     [8, 'koala', 13],
@@ -127,7 +131,7 @@ for data in datas:
     cursor.execute(sqlstr)
 conn.commit() # 更新
 
-print('新增資料 1 筆 寫法四, 必須要寫滿所有欄位')
+print('新增資料 1 筆 寫法五, 必須要寫滿所有欄位')
 number = 7
 ename = 'zebra'
 cname = ''
@@ -135,7 +139,7 @@ weight = 365
 sqlstr = "INSERT INTO table01 VALUES ({},'{}','{}','{}');".format(number, ename, cname, weight)
 cursor.execute(sqlstr)
 
-print('新增資料 1 筆 寫法五, 必須要寫滿所有欄位')
+print('新增資料 1 筆 寫法六, 必須要寫滿所有欄位')
 data = (6, 'tiger', '', 240)
 cursor.execute('INSERT INTO table01 VALUES (?, ?, ?, ?)', data)
 

@@ -65,7 +65,7 @@ while True:
     time_new = time.time()
 
     fps = 1 / (time_new - time_old)
-    print('{:.1f}'.format(fps))
+    #print('{:.1f}'.format(fps))
     time_old = time_new
 
     k = cv2.waitKey(1)

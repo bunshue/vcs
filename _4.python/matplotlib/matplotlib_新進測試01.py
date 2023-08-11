@@ -1,32 +1,22 @@
+import numpy as np
+import matplotlib.pyplot as plt
 
 '''
+normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
 
 #盒鬚圖（Box plot）
-import numpy as np
-import matplotlib.pyplot as plt
-
-normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-
-plt.boxplot(normal_samples)
-plt.show()
+#plt.boxplot(normal_samples)
 
 
-
-
-
-#存圖
-import numpy as np
-import matplotlib.pyplot as plt
-normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
 plt.hist(normal_samples)
-plt.savefig(fname = "my_hist.png", format = "png")
-
+plt.show()
+'''
 
 
 #plot + bar
-import matplotlib.pyplot as plt
+
 #import matplotlib.gridspec as gridspec
-import numpy as np
+
 
 x = np.linspace(0, 6.28, 10)
 y = np.sin(x * 2)
@@ -48,15 +38,13 @@ axx.bar(
 )
 
 plt.show()
+
+
+
 '''
 
 
-'''
 
-
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams['savefig.facecolor'] = "0.8"
 
@@ -103,8 +91,8 @@ plt.show()
 #foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 foldername = 'C:/_git/vcs/_1.data/______test_files1'
 
-import numpy as np
-import matplotlib.pyplot as plt
+
+
 import glob,cv2
 
 files = glob.glob(foldername + "/*.jpg")  #建立測試資料
@@ -119,7 +107,7 @@ for file in files:
 print(test_feature)
 
 print('畫多張圖')
-import matplotlib.pyplot as plt
+
 
 plt.gcf().set_size_inches(12, 14)
 

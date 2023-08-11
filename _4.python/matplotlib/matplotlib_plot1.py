@@ -262,6 +262,7 @@ plt.plot(x1, y1 * 10000)
 #第四張圖
 plt.subplot(234)
 
+
 #第五張圖
 plt.subplot(235)
 
@@ -271,6 +272,7 @@ plt.subplot(236)
 
 
 plt.show()
+
 
 
 # plot 集合

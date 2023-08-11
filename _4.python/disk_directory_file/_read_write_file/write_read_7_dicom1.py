@@ -97,6 +97,8 @@ print(ds.SeriesNumber)
 
 '''
 
+print('----------------------------------------------------------------------')	#70個
+
 
 
 
@@ -105,5 +107,33 @@ from pydicom.filereader import dcmread
 dataset = dcmread(filename1)
 dataset.PatientName = 'anonymous'
 dataset.save_as("file2.dcm")
+
+print('----------------------------------------------------------------------')	#70個
+
+
+
+print('判斷 dicom 檔案')
+def is_dicom(filename):
+    with open(filename, 'rb') as fp:
+        fp.read(128)  # preamble
+        return fp.read(4) == b"DICM"
+
+
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
+filename4 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print(is_dicom(filename1))
+print(is_dicom(filename2))
+print(is_dicom(filename3))
+print(is_dicom(filename4))
+print(is_dicom(filename1))
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
 
 
