@@ -3,6 +3,9 @@ import socket
 skt = socket.socket()
 skt.connect(('localhost', 6688))
 
+name = skt.getsockname()
+print('取得socket name :', name)
+
 while True:
     msg = input('請輸入訊息：')
     skt.send(msg.encode('utf8'))

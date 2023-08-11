@@ -1,4 +1,5 @@
 import sys
+import random
 
 print('字串處理專區------------------------------')  #30個
 
@@ -76,26 +77,10 @@ print('------------------------------')  #30個
 print('列印專區------------------------------')  #30個
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-
-err = sys.stderr.write
-dbg = err
-rep = sys.stdout.write
-
-msg = 'cccccc'
-usage = 'dddddddddddd'
-err(str(msg) + '\n')
-err(msg)
-err('-i option or file-or-directory missing\n')
-err(usage)
-err('%s: cannot open: %r\n' % (filename, msg))
 
 
 '''
 word = word.strip()
-
-
 
     dbg('recursedown(%r)\n' % (dirname,))
 ##  dbg('fix(%r)\n' % (filename,))
@@ -106,64 +91,8 @@ print('------------------------------')  #30個
 
 
 
-import sys
-def errprint(*args):
-    sep = ""
-    for arg in args:
-        sys.stderr.write(sep + str(arg))
-        sep = " "
-    sys.stderr.write("\n")
-
-
-msg = 'this is a lion-mouse'
-errprint(msg)
-print(msg)
-
-
-
-
 print('------------------------------')  #30個
 
-
-
-def output(string = '', end = '\n'):
-    sys.stdout.write(string + end)
-
-
-def output(*strings):
-    for s in strings:
-        sys.stdout.write(str(s) + "\n")
-
-
-pos = 'abcd'
-output("Lexical error at position %s" % pos)
-
-
-
-print('------------------------------')  #30個
-
-
-
-
-def fail(msg):
-    out = sys.stderr.write
-    out(msg + "\n\n")
-    return 0
-
-filename = 'ccccc'
-fail("couldn't open " + filename)
-
-
-
-
-
-print('------------------------------')  #30個
-
-
-
-
-arg = 'abcdefg'
-sys.stderr.write("Can't find %s\n" % arg)
 
 
 print('------------------------------')  #30個
@@ -173,14 +102,13 @@ print('------------------------------')  #30個
 
 print('------------------------------')  #30個
 
-import sys
 
-usage = """Usage: %s [-cd] paths...
-    -c: recognize Python source files trying to compile them
-    -d: debug output""" % sys.argv[0]
+print('------------------------------')  #30個
 
-print('msgsssssss', file = sys.stderr)
-print(usage, file = sys.stderr)
+
+
+
+print('------------------------------')  #30個
 
 
 print('------------------------------')  #30個
@@ -207,20 +135,6 @@ print(SELECT)
 
 
 print('------------------------------')  #30個
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/aaaaa.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/bbbbb.jpg'
-
-print("Copied %s to %s" % (filename1, filename2))
-
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-print(filename)
-
-print('file: %s' % filename)
-print('file: %r' % filename)
-
 
 
 
@@ -351,47 +265,6 @@ print('------------------------------')  #30個
 
 print('datatime time random math------------------------------')  #30個
 
-import datetime
-seconds = datetime.datetime(2004, 10, 26, 10, 33, 33, tzinfo = datetime.timezone(datetime.timedelta(0))).timestamp()
-print(seconds)
-
-
-import time
-print('存檔紀念')
-
-fp = open('Build.txt', 'w')
-fp.write("# BUILD INFO\n")
-fp.write("# Date: %s\n" % time.ctime())
-#fp.write("# By: %s\n" % pwd.getpwuid(os.getuid()).pw_gecos)
-fp.close()
-
-
-
-
-print('------------------------------')  #30個
-
-
-
-
-
-print('------------------------------')  #30個
-
-import time
-
-randseed = int(time.time())
-random.seed(randseed)
-
-print('------------------------------')  #30個
-
-import sys, os, time, difflib, argparse
-from datetime import datetime, timezone
-
-path = 'C:/_git/vcs/_4.python'
-t1 = datetime.fromtimestamp(os.stat(path).st_mtime, timezone.utc)
-print(t1)
-
-t2 = t1.astimezone().isoformat()
-print(t2)
 
 print('------------------------------')  #30個
 
@@ -742,11 +615,6 @@ decimalValue = 65535
 hexValue = decimalToHex(decimalValue)
 print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
 
-level = 123
-levelnum = 170
-print(" * PY_RELEASE_LEVEL = %r = %s" % (level, hex(levelnum)))
-
-
 print('------------------------------')  #30個
 
 print('------------------------------')  #30個
@@ -868,24 +736,6 @@ s = 'this is a lion mouse'
 
 print(s.title())
 
-
-
-print('------------------------------')  #30個
-
-import test
-packagedir = os.path.dirname(test.__file__)
-
-import email
-packagedir = os.path.dirname(email.__file__)
-print(packagedir)
-
-'''
-import time
-print(time.strptime(date, '%Y-%m-%d'))
-print(time.strptime(time_, '%H:%M:%S'))
-'''
-
-print('------------------------------')  #30個
 
 
 print('------------------------------')  #30個
@@ -1057,105 +907,6 @@ print('------------------------------')  #30個
 
 print('------------------------------')  #30個
 
-'''  最後放 os sys 大集合
-os.
-os.
-sys.
-sys.
-'''
-
-
-import os
-import sys
-
-print(sys.maxsize)
-print(2 ** 32)
-
-import os
-import stat
-
-print(os.name)
-print(os.sep)
-
-
-
-print('------------------------------')  #30個
-
-
-
-
-
-import time
-import datetime
-
-
-#>>> from time import gmtime, strftime
-
-
-ttt = time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
-
-print(ttt)
-
-#'Thu, 28 Jun 2001 14:17:15 +0000'
-
-
-print('------------------------------')  #30個
-
-
-
-
-import time
-
-ddd = time.strptime("30 Nov 00", "%d %b %y")
-print(ddd)
-
-'''
-time.struct_time(tm_year=2000, tm_mon=11, tm_mday=30, tm_hour=0, tm_min=0,
-                 tm_sec=0, tm_wday=3, tm_yday=335, tm_isdst=-1)
-'''
-
-
-
-print('量測時間 ST') 
-# Start the stopwatch / counter
-t1_start = time.perf_counter()
- 
-time.sleep(1.2345)   # 暫停 1.2345 秒
- 
-# Stop the stopwatch / counter
-t1_stop = time.perf_counter()
-
-print('量測時間 SP')  
-print(t1_stop, t1_start)
-print(t1_stop - t1_start, '秒')
-
-from time import perf_counter_ns
- 
-print('量測時間 ST') 
-# Start the stopwatch / counter
-t1_start = time.perf_counter_ns()
-
-time.sleep(1.2345)   # 暫停 1.2345 秒 
- 
-# Stop the stopwatch / counter
-t1_stop = time.perf_counter_ns()
-
-print('量測時間 SP')
-print(t1_stop, 'ns', t1_start, 'ns')
- 
-print(t1_stop - t1_start, 'ns')
-
-
-import time
-
-start = time.time()
-
-time.sleep(0.12345)
-
-stop = time.time()
-
-print(stop - start)
-
 
 print('測試hasattr功能')
 print('內建函數 (function) hasattr() ，判斷參數 (parameter) name 是否為 object 的屬性名稱')
@@ -1225,21 +976,6 @@ print('------------------------------')  #30個
 print('------------------------------')  #30個
 
 
-import os
-
-def getuser():
-    for name in ('LOGNAME', 'USER', 'LNAME', 'USERNAME'):
-        print(name)
-        user = os.environ.get(name)
-        if user:
-            print(user)
-            return user
-
-print('get user name')
-ccc = getuser()
-print(ccc)
-
-
 print('------------------------------')  #30個
 
 
@@ -1261,25 +997,6 @@ print(c)
 
 
 print('------------------------------')  #30個
-
-
-import sys
-
-def test():
-    '''Test program.
-    Usage: ftp [-d] [-r[file]] host [-l[dir]] [-d[dir]] [-p] [file] ...
-
-    -d dir
-    -l list
-    -p password
-    '''
-
-    if len(sys.argv) < 2:
-        print(test.__doc__)
-        sys.exit(0)
-
-test()
-
 
 
 print('------------------------------')  #30個
@@ -1314,43 +1031,170 @@ import sys
 bytes = sys.maxsize  # smallest total size so far
 print(bytes)
 
-print("Best:", end = ' ', file = sys.stderr)
+print('------------------------------')  #30個
 
 
 
 print('------------------------------')  #30個
 
 
-import os
-import sys
-m = sys.modules.get('__main__')
-
-print(m)
+print('------------------------------')  #30個
 
 
-
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-name = os.path.basename(filename)
-
-print(name)
+for name in ('__repr__', '__str__', '__format__', '__reduce_ex__'):
+    print(name)
 
 
-globs = {}
-globs = globs.copy()
-print(globs)
+for x in (15, 25, 35, 45, 55):
+    print(x)
 
+
+
+'''    
+_b85alphabet = (b"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                b"abcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~")
+
+
+_b85chars = [bytes((i,)) for i in _b85alphabet]
+print(_b85chars)
 print()
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+_b85chars2 = [(a + b) for a in _b85chars for b in _b85chars]
 
-if filename.endswith(".jpg"):
-    # It is a module -- insert its dir into sys.path and try to
-    # import it. If it is part of a package, that possibly
-    # won't work because of package imports.
-    dirname, filename = os.path.split(filename)
-    print(filename[:-3])
+print(_b85chars2)
+
+'''
+
+print('------------------------------')  #30個
+
+
+
+
+
+
+
+
+from itertools import islice as _islice, count as _count
+
+# Helper to generate new thread names
+_counter = _count().__next__
+_counter() # Consume 0 so first non-main thread has id 1.
+def _newname(template="Thread-%d"):
+    return template % _counter()
+
+print(_newname())
+print(_newname())
+print(_newname())
+print(_newname())
+print(_newname())
+print(_newname())
+
+print('------------------------------')  #30個
+
+
+
+print('字串轉拜列')
+string = 'lion'
+data = repr(string).encode('utf-8') + b'\0'
+print(type(data))
+print(data)
+
+        
+print('------------------------------')  #30個
+
+
+print('------------------------------')  #30個
+
+
+import importlib
+import platform
+import sys
+from types import ModuleType
+from typing import Optional, Tuple, List, cast
+
+
+
+def print_table(version_rows: List[Tuple[str, str]]) -> None:
+    row_format = "{:12} | {}"
+    print(row_format.format("module", "version"))
+    print(row_format.format("------", "-------"))
+    for module, version in version_rows:
+        # Some version strings have multiple lines and need to be squashed
+        print(row_format.format(module, version.replace("\n", " ")))
+
+
+def extract_version(module: ModuleType) -> Optional[str]:
+    if module.__name__ == "gdcm":
+        return cast(Optional[str], getattr(module, "GDCM_VERSION", None))
+
+    return cast(Optional[str], getattr(module, "__version__", None))
+
+
+
+
+version_rows = [("platform", platform.platform()), ("Python", sys.version)]
+print(version_rows)
+
+modules = (
+    "os", "sys", "cv2", "numpy", "PIL", "pylibjpeg",
+    "openjpeg", "libjpeg",
+)
+
+for module in modules:
+    try:
+        m = importlib.import_module(module)
+    except ImportError:
+        version = "_module not found_"
+    else:
+        version = extract_version(m) or "**cannot determine version**"
+
+    version_rows.append((module, version))
+
+print('print_table')
+print_table(version_rows)
+
+print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+_size_factors = {
+    "kb": 1000, "mb": 1000 * 1000, "gb": 1000 * 1000 * 1000,
+    "kib": 1024, "mib": 1024 * 1024, "gib": 1024 * 1024 * 1024,
+}
+
+for aaa in _size_factors:
+    print(aaa, _size_factors[aaa])
+
+
+print('------------------------------')  #30個
+
+
+_deprecations = {
+    "JPEGBaseline": "JPEGBaseline8Bit",
+    "JPEGExtended": "JPEGExtended12Bit",
+    "JPEGLossless": "JPEGLosslessSV1",
+    "JPEGLSLossy": "JPEGLSNearLossless",
+    "JPEG2000MultiComponentLossless": "JPEG2000MCLossless",
+    "JPEG2000MultiComponent": "JPEG2000MC",
+}
+
+for name in _deprecations:
+    print(name)
+
+print('------------------------------')  #30個
+
+
+import hashlib
+
+
+
+hash_val = hashlib.sha512('aaaaaaa'.encode("utf-8"))
+print(hash_val)
+
+dicom_uid = str(int(hash_val.hexdigest(), 16))
+print(dicom_uid)
 
 
 
@@ -1360,7 +1204,35 @@ print('------------------------------')  #30個
 
 
 
+
+
 print('------------------------------')  #30個
+
+
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
+
+
+print('------------------------------')  #30個
+
+
+
+
 
 
 
