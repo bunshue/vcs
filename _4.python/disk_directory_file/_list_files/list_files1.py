@@ -54,6 +54,44 @@ for root, dirs, filenames in os.walk(foldername):
         print(filename, end = '\t\t')
         long_filename = os.path.join(root, filename)  # 取得檔案的絕對路徑
         print(long_filename)
+
+
+print('------------------------------')  #30個
+print('撈出資料夾下所有檔案, 單層')
+print('搜尋路徑：', foldername)
+
+for dirpath, _, filenames in os.walk(foldername):
+    for fn in filenames:
+        if fn.endswith('.jpg') or fn.endswith('.png'):
+            print(os.path.join(dirpath, fn))
+
+
+print('------------------------------')  #30個
+print('撈出資料夾下所有檔案, 單層')
+print('搜尋路徑：', foldername)
+
+for root, dirs, files in os.walk(foldername):
+    if '.svn' in dirs:
+        print('.svn')
+
+print('------------------------------')  #30個
+print('撈出資料夾下所有檔案, 單層')
+print('搜尋路徑：', foldername)
+
+for root, dirs, files in os.walk(foldername):
+    if '.svn' in dirs:
+        print('delete')
+        #dirs.remove('.svn')
+    for fn in files:
+        path = os.path.join(root, fn)
+        print(path)
+
+
+
+print('------------------------------')  #30個
+
+
+        
 print('----------------------------------------------------------------------')	#70個
 print('ls 測試 os.listdir')
 print('----------------------------------------------------------------------')	#70個
@@ -120,6 +158,28 @@ for filename in filenames:
     print(long_filename)
 
 filelist.sort(key = os.path.normcase)
+
+print('------------------------------')  #30個
+
+print('指定目錄下之ls (單層)')
+
+filenames = os.listdir(foldername)
+filenames.sort()
+
+for filename in filenames:
+    long_filename = os.path.join(foldername, filename)
+    print(long_filename)
+
+print('------------------------------')  #30個
+
+fix_names = []
+for filename in sorted(os.listdir(foldername)):
+    if filename.startswith("fix_") and filename.endswith(".py"):
+        if remove_prefix:
+            filename = filename[4:]
+        fix_names.append(filename[:-3])
+
+print(fix_names)
 
 print('------------------------------')  #30個
 
@@ -438,6 +498,12 @@ print('------------------------------')  #30個
 print('------------------------------')  #30個
 
 print('------------------------------')  #30個
+
+print('-------')
+print(os.curdir)
+print('-------')
+print(os.pardir)
+print('-------')
     
 print('------------------------------')  #30個
 
@@ -452,21 +518,112 @@ mkdir多一層保護
             print("Created output directory", odir)
         except OSError as msg:
             usage('%s: mkdir failed (%s)' % (odir, str(msg)))
+     
+print('ls 測試 os.listdir') SP
+print('ls 測試 os.walk') ST
+print('ls 測試 glob.glob') ST
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+filenames
+
+----------------------------------------------------------------
+
+檔案操作
+
+
+os.readlink(long_filename))
+
+os.path.islink(long_filename)
+
+os.path.isdir(file)
+
+os.path.isdir(foldername):
+os.path.exists(name):
 
 
 
-        #if not (filename.endswith('.c') or filename.endswith('.h')):
-        #    continue
 
 
-            if os.path.islink(long_filename):    #尋找link
-                print('link')
-                print(filename, '->', os.readlink(long_filename))
-            else:
-                print('f')
+
+if filename.lower().endswith(".py"):
+if filename.endswith('.jpg'):
+
+
+if os.path.normcase(filename[-3:]) == ".py":
+
+
+if filename.lower().endswith(".py"):
+
+if filename.endswith('.c'):
+
+
+----------------------------------------------------------------
+print('ls 測試 os.listdir') ST
+
+
+
+----------------------------------------------------------------
+
+
+        
+print('ls 測試 os.listdir') SP
+
+----------------------------------------------------------------
+print('ls 測試 os.walk') ST
+
+
+----------------------------------------------------------------
+
+
+
+print('ls 測試 os.walk') SP
+
+----------------------------------------------------------------
+
+
+print('ls 測試 glob.glob') ST
+
+
+----------------------------------------------------------------
+
+    def glob(self, pattern, exclude = None):
+        """Add a list of files to the current component as specified in the
+        glob pattern. Individual files can be excluded in the exclude list."""
+        files = glob.glob1(self.absolute, pattern)
+        for f in files:
+            if exclude and f in exclude: continue
+            self.add_file(f)
+        return files
+
+            filenames = glob.glob(name)
+            filename_list = []
+            for filename in filenames:
+                filename_list.extend(getFilesForName(filename))
+            return filename_list
+
+
+----------------------------------------------------------------
+
+
+
+----------------------------------------------------------------
+
+
+
+----------------------------------------------------------------
+
+
+
+----------------------------------------------------------------
+
+
+
+print('ls 測試 glob.glob') SP
+
+----------------------------------------------------------------
+
+
+
 
 
 '''
-
-
-

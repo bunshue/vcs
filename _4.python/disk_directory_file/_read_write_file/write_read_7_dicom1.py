@@ -99,3 +99,11 @@ print(ds.SeriesNumber)
 
 
 
+
+print('讀 改寫 dicom 檔案')
+from pydicom.filereader import dcmread
+dataset = dcmread(filename1)
+dataset.PatientName = 'anonymous'
+dataset.save_as("file2.dcm")
+
+
