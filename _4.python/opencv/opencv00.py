@@ -12,6 +12,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print('顯示圖片')
 image = cv2.imread(filename)	#讀取本機圖片
+#image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)	#讀取本機圖片, 不改變顏色通道
+#image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接變成灰階
+#image = cv2.imread(filename, cv2.IMREAD_COLOR)         #讀取本機圖片, 改為BGR三通道(預設)
 
 shape = image.shape
 h = shape[0]    #高
