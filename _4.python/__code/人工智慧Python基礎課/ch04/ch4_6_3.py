@@ -1,0 +1,12 @@
+a = 3      # 000000011
+print("a = " + str(a))
+r = a << 1 # 左移運算
+print("a << 1 = " + str(r))
+r = a << 2 # 左移運算
+print("a << 2 = " + str(r))
+b = 120    # 01111000
+print("b = " + str(b))
+r = b >> 1 # 右移運算
+print("b >> 1 = " + str(r))
+r = b >> 2 # 右移運算
+print("b >> 2 = " + str(r))
