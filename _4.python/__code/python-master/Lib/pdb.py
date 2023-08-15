@@ -1098,6 +1098,7 @@ class Pdb(bdb.Bdb, cmd.Cmd):
     complete_debug = _complete_expression
 
     def do_quit(self, arg):
+        print('qqqqqqq')
         """q(uit)\nexit
         Quit from the debugger. The program being executed is aborted.
         """
