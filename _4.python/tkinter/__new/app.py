@@ -1,22 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 
-class App(tk.Tk):
-	def __init__(self, title, size):
-		
-		# main setup
-		super().__init__()
-		self.title(title)
-		self.geometry(f'{size[0]}x{size[1]}')
-		self.minsize(size[0],size[1])
-
-		# widgets 
-		self.menu = Menu(self)
-		self.main = Main(self)
-
-		# run 
-		self.mainloop()
-
 class Menu(ttk.Frame):
 	def __init__(self, parent):
 		super().__init__(parent)
@@ -64,8 +48,12 @@ class Main(ttk.Frame):
 	def __init__(self, parent):
 		super().__init__(parent)
 		self.place(relx = 0.3, y = 0, relwidth = 0.7, relheight = 1)
-		Entry(self, 'Entry 1','Button 1','green')
-		Entry(self, 'Entry 2','Button 2','blue')
+		#Entry(self, 'Entry 1','Button 1','green')
+		#Entry(self, 'Entry 2','Button 2','blue')
+		my_list(self, 'Entry 1', 'Entry 2', 'Entry 3', 'Button 1', 'blue')
+		my_list(self, 'Entry 1', 'Entry 2', 'Entry 3', 'Button 1', 'red')
+		my_list(self, 'Entry 1', 'Entry 2', 'Entry 3', 'Button 1', 'red')
+		my_list(self, 'Entry 1', 'Entry 2', 'Entry 3', 'Button 1', 'red')
 
 class Entry(ttk.Frame):
 	def __init__(self, parent, label_text, button_text, label_background):
@@ -79,5 +67,32 @@ class Entry(ttk.Frame):
 
 		self.pack(side = 'left', expand = True, fill = 'both', padx = 20, pady = 20)
 
+class my_list(ttk.Frame):
+	def __init__(self, parent, entry_text1, entry_text2, entry_text3, button_text, button_background):
+		super().__init__(parent)
+		entry1 = tk.Entry(self, background = 'red', text = entry_text1)
+		entry1.pack(side = 'left')
+		entry2 = tk.Entry(self, background = 'green', text = entry_text2)
+		entry2.pack(side = 'left')
+		entry3 = tk.Entry(self, foreground = 'blue', text = entry_text3)
+		entry3.pack(side = 'left')
+		button = ttk.Button(self, text = button_text)
+		button.pack(side = 'left')
+		#self.pack(side = 'left', expand = True, fill = 'both', padx = 20, pady = 20)
+		self.pack()
 
-App('Class based app', (600,600))
+window = tk.Tk()
+
+size = (800, 600)
+window.geometry(f'{size[0]}x{size[1]}')
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+# widgets 
+menu = Menu(window)
+main = Main(window)
+
+window.mainloop()
+

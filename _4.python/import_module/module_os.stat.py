@@ -3,6 +3,69 @@ import os
 import stat
 import time
 
+#exists的原型
+def exists(path):
+    """Test whether a path exists.  Returns False for broken symbolic links"""
+    try:
+        os.stat(path)
+    except OSError:
+        return False
+    return True
+
+#isfile的原型
+def isfile(path):
+    try:
+        st = os.stat(path)
+    except OSError:
+        return False
+    return stat.S_ISREG(st.st_mode)
+
+#isdir的原型
+def isdir(s):
+    try:
+        st = os.stat(s)
+    except OSError:
+        return False
+    return stat.S_ISDIR(st.st_mode)
+
+#getsize的原型
+def getsize(filename):
+    """Return the size of a file, reported by os.stat()."""
+    return os.stat(filename).st_size
+
+#getmtime的原型
+def getmtime(filename):
+    """Return the last modification time of a file, reported by os.stat()."""
+    return os.stat(filename).st_mtime
+
+#getatime的原型
+def getatime(filename):
+    """Return the last access time of a file, reported by os.stat()."""
+    return os.stat(filename).st_atime
+
+#getctime的原型
+def getctime(filename):
+    """Return the metadata change time of a file, reported by os.stat()."""
+    return os.stat(filename).st_ctime
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+status = exists(filename)
+print('exists :', status)
+status = isfile(filename)
+print('isfile :', status)
+status = isdir(filename)
+print('isdir :', status)
+
+size = getsize(filename)
+print('size :', size)
+mtime = getmtime(filename)
+print('mtime :', mtime)
+atime = getatime(filename)
+print('atime :', atime)
+ctime = getctime(filename)
+print('ctime :', ctime)
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print(filename)
@@ -281,6 +344,59 @@ else:
 
 
 print('------------------------------')  #30個
+
+
+
+print('------------------------------')  #30個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+file_stats = os.stat(filename)
+mtime = time.ctime(file_stats.st_mtime)
+print(mtime)
+
+mtime = int(os.stat(filename).st_mtime)
+print(mtime)
+
+
+
+cc1 = os.stat(filename)
+print(cc1)
+
+cc2 = os.lstat(filename)
+print(cc2)
+
+
+# 获取元组
+info = os.lstat(filename)
+
+print('文件信息 :', info)
+
+# 获取文件 uid
+print('文件 UID  : %d' % info.st_uid)
+
+# 获取文件 gid
+print('文件 GID : %d' % info.st_gid)
+
+
+
+size = os.stat(filename).st_size
+print('檔案大小 :', size)
+
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+stat = os.stat(filename)
+print(stat.st_size)
+print(stat.st_mtime)
+
+
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+
+nnnn = os.stat(foldername)
+print(type(nnnn))
+print(nnnn)
 
 
 

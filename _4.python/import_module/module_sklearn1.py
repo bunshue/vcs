@@ -2,9 +2,11 @@
 pip install scikit-learn
 '''
 
+'''
 import numpy as np
 from scipy.linalg import norm
 from sklearn.feature_extraction.text import TfidfVectorizer
+'''
 
 '''
 def similarity_tfidf(s1, s2):
@@ -35,6 +37,8 @@ else:
     print('Sorry, 無法接受訂餐')
 '''
 
+#---------------------------------------------------------------------------------------
+
 '''
 import seaborn as sns
 iris = sns.load_dataset('iris')
@@ -42,5 +46,29 @@ iris.head()
 
 sns.set()
 sns.pairplot(iris, hue='species', height=3);
+
+print(iris)
+print('cccc')
 '''
+
+
+# seaborn
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+import plotly.offline
+import plotly.express as px
+import plotly.graph_objects as go
+import plotly.subplots
+#import squarify
+
+plt.rcParams["font.sans-serif"]='Microsoft JhengHei'
+
+
+tips = sns.load_dataset("tips")
+print(tips)
+
 

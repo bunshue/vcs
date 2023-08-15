@@ -21,8 +21,10 @@ main() # Call the main function
 
 print('------------------------------')  #30個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_pickle/pickle_test1.dat'
+
 import pickle
-fp = open("pickle_test1.dat", "rb")
+fp = open(filename, "rb")
 num = pickle.load(fp)
 print(num)
 str1 = pickle.load(fp)
