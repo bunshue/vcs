@@ -8,6 +8,7 @@ y = np.arange(10)  # 類似 Python 的 range, 但是回傳 array
 print(x)
 print(y)
 
+print('------------------------------')  #30個
 print('基本運算')
 a = np.array([1, 2, 3, 6])
 print(a)
@@ -16,6 +17,8 @@ print(b)
 c = a - b
 print(c)
 print(a**2)
+
+print('------------------------------')  #30個
 
 print('全域方法')
 x = np.linspace(-np.pi, np.pi, 11) 
@@ -28,6 +31,8 @@ print('sin(x) = ', y1)
 print('cos(x) = ', y2)
 print('tan(x) = ', y3)
 print('sinc(x) = ' , y4)
+
+print('------------------------------')  #30個
 
 print('亂數')
 r = np.random.rand(3, 3)      # 建立一個 3x3 隨機矩陣
@@ -42,8 +47,7 @@ print('最小值 : ', np.min(r))
 print('平均值 : ', np.mean(r))
 print('中間值 : ', np.median(r))
 
-
-import numpy as np
+print('------------------------------')  #30個
 
 data = [37, 24, 6, 51, 83, 28, 51, 58, 82, 95,
 8, 43, 86, 78, 71, 82, 58, 10, 15, 56,
@@ -89,6 +93,8 @@ print(b)
 c = np.empty((5,))
 print(c)
 
+print('------------------------------')  #30個
+
 listdata = [[1,2,3,4,5],
             [6,7,8,9,10],
             [11,12,13,14,15]]
@@ -103,6 +109,8 @@ print(adata)
 bdata = adata.reshape(4,4)
 print(bdata)
 
+print('------------------------------')  #30個
+
 na = np.arange(0,6)
 print(na)           #[0 1 2 3 4 5]
 print(na[0])        #0
@@ -113,6 +121,8 @@ print(na[5:1:-1])   #[5 4 3 2]
 print(na[:])        #[0 1 2 3 4 5]
 print(na[:3])       #[0 1 2]
 print(na[3:])       #[3 4 5]
+
+print('------------------------------')  #30個
 
 na = np.arange(1, 17).reshape(4, 4)
 print(na[2, 3])			#12
@@ -182,7 +192,7 @@ print('將每一橫列進行排序：')
 print(np.sort(a, axis=1))
 
 
-
+print('------------------------------')  #30個
 #mat == matrix
 
 #基本操作
@@ -319,12 +329,13 @@ matrix([[-2. ,  1. ],
         [ 1.5, -0.5]])
 '''
  
+print('------------------------------')  #30個
 
 x = np.linspace(0, 5, 6)
 print(x)
 X = np.mat(x).T #array轉矩陣再轉置
 print(X)
 
-
+print('------------------------------')  #30個
 
 

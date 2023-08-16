@@ -7,17 +7,16 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
-'''
-#case1
+print('------------------------------')  #30個
+
 df = pd.read_csv("hours_used_performance.csv")
 df.plot(kind="scatter", 
         x="hours_used",
         y="work_performance")
 print(df.corr())
-'''
 
-'''
-#case2
+print('------------------------------')  #30個
+
 df = pd.read_csv("fb_tracking_happiness.csv")
 print(df.head())
 
@@ -34,8 +33,8 @@ df_std.plot(kind="scatter",
             x="fb_tracking_s",
             y="happiness_s")
 
-'''
-#case3
+print('------------------------------')  #30個
+
 df = pd.read_csv("fb_tracking_happiness.csv")
 print(df.head())
 
@@ -54,6 +53,8 @@ df_minmax.plot(kind="scatter",
                y="happiness_m")
 
 plt.show()
+
+print('------------------------------')  #30個
 
 
 

@@ -1,11 +1,14 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------')  #30個
 
 df = pd.DataFrame([[250,320,300,312,280],
                    [280,300,280,290,310],
@@ -18,16 +21,7 @@ g3 = df.plot(kind='bar', stacked=True, title='堆疊圖', figsize=[10,5])
 
 plt.show()
 
-
-
-import pandas as pd
-import matplotlib.pyplot as plt
-
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+print('------------------------------')  #30個
 
 df = pd.DataFrame([[250,320,300,312,280],
                    [280,300,280,290,310],
@@ -40,16 +34,7 @@ g1 = df.iloc[2].plot(kind='line', legend=True, xticks=range(2015,2020))
 
 plt.show()
 
-
-
-import pandas as pd
-import matplotlib.pyplot as plt
-
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+print('------------------------------')  #30個
 
 df = pd.DataFrame([[250,320,300,312,280],
                    [280,300,280,290,310],
@@ -60,12 +45,8 @@ df.plot(kind='pie', subplots=True, figsize=[20,20]) # 繪圖 plot
 
 plt.show()
 
+print('------------------------------')  #30個
 
-
-# 載入所需套件 import packages
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
 # 創造一些隨機資料 create some data with random value
 ts = pd.Series(np.random.randn(1000), index=pd.date_range('1/1/2000', periods=1000))
@@ -77,12 +58,7 @@ df.plot()       # 繪圖 plot
 
 plt.show()
 
-
-
-
-
-import pandas as pd
-import matplotlib.pyplot as plt
+print('------------------------------')  #30個
 
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
 indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
@@ -91,4 +67,6 @@ df = pd.DataFrame(datas, columns=columns,  index=indexs)
 df.plot(kind='bar', title='一年甲班成績單', fontsize=12)
 
 plt.show()
+
+print('------------------------------')  #30個
 

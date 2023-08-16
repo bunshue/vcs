@@ -1,3 +1,8 @@
+import sys
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
 # 載入資料集
 
 # 鐵達尼號資料集是一個CSV檔案：titanic_data.csv，我們可以建立DataFrame物件來載入資料集，如下所示：
@@ -14,29 +19,33 @@
 
 '''
 
-import pandas as pd
-
 titanic = pd.read_csv("titanic_data.csv")
+
+print('資料shape')
 print(titanic.shape)
+print()
+
+print('資料')
+print(titanic)
+print()
+
+print('資料.head()')
+print(titanic.head())
+print()
 
 
-import numpy as np
-
+print('size')
 print(np.unique(titanic["PassengerId"].values).size)
-
+print()
 
 
 titanic.set_index(["PassengerId"], inplace=True)
 print(titanic.head())
-
-
-print('------------------------------')  #30個
-
+print()
 
 titanic["SexCode"] = np.where(titanic["Sex"]=="female", 1, 0)
 print(titanic.head())
-
-
+print()
 
 print('------------------------------')  #30個
 
@@ -47,24 +56,24 @@ label_encoder = preprocessing.LabelEncoder()
 titanic["PClass"] = label_encoder.fit_transform(titanic["PClass"])
 print(titanic.head())
 
-
+print('isnull().sum()')
 print(titanic.isnull().sum())
 
 
-
+print('age.isnull()')
 print(sum(titanic["Age"].isnull()))
 
 avg_age = titanic["Age"].mean()
-print(avg_age)
+print('average age =', avg_age)
+
 
 titanic["Age"].fillna(avg_age, inplace=True)
-
 print(sum(titanic["Age"].isnull()))
 
-
+print('1111')
 print(titanic["Sex"].groupby(titanic["Sex"]).size())
 
-
+print('2222')
 print(titanic.groupby("Sex")["Age"].mean())
 
 
@@ -74,6 +83,8 @@ print('------------------------------')  #30個
 
 #探索性資料分析
 
+
+print('3333')
 titanic["Died"] = np.where(titanic["Survived"]==0, 1, 0)
 print(titanic.head())
 
@@ -84,11 +95,10 @@ df["Age"].plot(kind="hist", bins=15)
 df = titanic[titanic.Survived == 1]
 df["Age"].plot(kind="hist", bins=15)
 
+plt.show()
 
 
 print('------------------------------')  #30個
-
-import matplotlib.pyplot as plt
 
 fig, axes = plt.subplots(nrows=1, ncols=2)
 df = titanic[["Survived","Died"]].groupby(titanic["Sex"]).sum()
@@ -96,10 +106,7 @@ df.plot(kind="bar", ax=axes[0])
 df = titanic[["Survived","Died"]].groupby(titanic["Sex"]).mean()
 df.plot(kind="bar", ax=axes[1])
 
-fig.show()
-
-
-
+plt.show()
 
 print('------------------------------')  #30個
 
@@ -107,9 +114,7 @@ print('------------------------------')  #30個
 df = titanic[['Survived',"Died"]].groupby(titanic["PClass"]).sum()
 df.plot(kind="bar")
 
-
-fig.show()
-
+plt.show()
 
 
 print('------------------------------')  #30個
@@ -117,8 +122,8 @@ print('------------------------------')  #30個
 df = titanic[['Survived',"Died"]].groupby(titanic["PClass"]).mean()
 df.plot(kind="bar")
 
+plt.show()
 
-fig.show()
 
 print('------------------------------')  #30個
 
@@ -126,32 +131,14 @@ print('------------------------------')  #30個
 df = titanic.drop("Died", axis=1)
 print(df.corr())
 
-fig.show()
+plt.show()
 
 
 print('------------------------------')  #30個
-
-
-
-print('------------------------------')  #30個
-
-
-print('------------------------------')  #30個
-
-
-print('------------------------------')  #30個
-
-
-print('------------------------------')  #30個
-
-
-
 
 
 
 '''
-import pandas as pd
-import matplotlib.pyplot as plt
 
 #設定中文字型及負號正確顯示
 #設定中文字型檔
