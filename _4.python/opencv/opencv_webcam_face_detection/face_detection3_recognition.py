@@ -5,7 +5,10 @@ model.read('faces.data')
 
 print('load training data done')
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+# OpenCV 人臉識別分類器
+xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+#xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_alt2.xml'
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 cap = cv2.VideoCapture(0)
 cv2.namedWindow('video', cv2.WINDOW_NORMAL)
@@ -19,7 +22,7 @@ while True:
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 #### 在while內
-    faces = face_cascade.detectMultiScale(gray, 1.1, 3)
+    faces = face_cascade_classifier.detectMultiScale(gray, 1.1, 3)
     for (x, y, w, h) in faces:
         frame = cv2.rectangle(
             frame, 

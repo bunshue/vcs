@@ -1,6 +1,8 @@
-import cv2,re
+import re
+import cv2
 import matplotlib.pyplot as plt
 import numpy as np
+
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
@@ -64,39 +66,14 @@ def codeocr(offset):
                 if count <= 6:  #週圍少於等於6個白點
                     inv[i][j] = 0  #將白點去除    
             
-    dilation = cv2.dilate(inv, (8,8), iterations=1)  #圖形加粗
-    cv2.imwrite("final.png",dilation)
-    
-    #文字辨識       
-    from PIL import Image
-    import sys
-    import pyocr
-    import pyocr.builders
-    
-    tools = pyocr.get_available_tools()
-    if len(tools) == 0:
-        print("No OCR tool found")
-        sys.exit(1)
-    tool = tools[0]  #取得可用工具
-    
-    result = tool.image_to_string(
-        Image.open('final.png'),
-        builder=pyocr.builders.TextBuilder()
-    )
-    
+    dilation = cv2.dilate(inv, (8, 8), iterations = 1)  #圖形加粗
+    cv2.imwrite("final.png", dilation)
+
 # 主程式  
-offset=1
-results=[]
-while offset<20:
-    print("\noffset=",offset,end="   ")
-    offset+=1
+offset = 1
+results = []
+while offset < 5:
+    print("offset =", offset)
+    offset += 1
     codeocr(offset)
-    result=result.replace(" ","").strip()
-    result=re.findall('[a-zA-Z0-9]*',result)[0]
-    if len(result)==4:
-        results.append(result)
-        print("find:",result)
-    else:   
-        print("no fonud!")
     
-print("Results=" , results) 

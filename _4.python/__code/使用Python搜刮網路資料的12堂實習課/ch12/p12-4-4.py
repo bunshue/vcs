@@ -1,4 +1,5 @@
-import requests, time
+import time
+import requests
 from bs4 import BeautifulSoup
 
 url = "https://www.mobile01.com/topiclist.php?f=751"

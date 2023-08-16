@@ -172,4 +172,12 @@ print(Eastern)
 print(Central)
 print(Mountain)
 print(Pacific)
+print(type(Pacific))
 
+print(Pacific.stdoffset)
+print(Pacific.reprname)
+print(Pacific.stdname)
+print(Pacific.dstname)
+
+
+        

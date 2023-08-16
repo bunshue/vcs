@@ -1,6 +1,7 @@
+import time
 import pyautogui as auto
 from IPython.display import clear_output
-import time
+
 while True:
     x, y = auto.position()
     clear_output()
@@ -13,6 +14,7 @@ print('------------------------------------------------------------')	#60個
 
 import pyautogui as auto
 import time
+
 auto.PAUSE = 1
 x, y = 630, 20
 auto.moveTo(x, y, 2)
@@ -23,11 +25,6 @@ auto.click()
 auto.typewrite("https://hophd.wordpress.com")
 time.sleep(2)
 auto.press("enter")
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -41,21 +38,17 @@ web.set_window_position(0, 0)
 time.sleep(10)
 web.quit()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 import json
 import requests
+
 api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
 res = requests.get(api_url).text
 
 data = json.loads(res)
 for post in data:
     print(post["title"])
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -76,12 +69,11 @@ print(res)
 
 print('------------------------------------------------------------')	#60個
 
-
 import json
 import requests
+
 api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
 res = requests.get(api_url).text
-
 
 data = json.loads(res)
 for post in data:
@@ -94,7 +86,9 @@ print('------------------------------------------------------------')	#60個
 import json
 import urllib.parse
 import requests
+
 url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+
 html = requests.get(url).text
 data = json.loads(html)
 
@@ -102,7 +96,6 @@ titles = data['lists']
 for title in titles:
     print(title['title'])
     print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -112,13 +105,7 @@ res = requests.get(url)
 print(res)
 print(res.text)
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
 
 import requests
 url = "https://ck101.com/forum-3590-1.html?ref=nav"
@@ -129,21 +116,12 @@ res = requests.get(url, headers=headers)
 print(res)
 print(res.text)
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 import requests
 url = "https://www.mobile01.com/topiclist.php?f=751"
 res = requests.get(url)
 print(res)
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -156,15 +134,10 @@ html = requests.get(url, headers=headers).text
 
 print('------------------------------------------------------------')	#60個
 
-
 from bs4 import BeautifulSoup
 soup = BeautifulSoup(html, "html.parser")
 pages = soup.find_all("a", class_="c-pagination")
 print(pages[-1].text)
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -174,8 +147,6 @@ for title in titles:
     print(title)
     print(title.a.text)
     print(title.a['href'])
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -197,12 +168,7 @@ form_data = {
 res = requests.post(url, data=form_data, headers=headers)
 data = res.text
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
 
 import json
 cars = json.loads(data)
@@ -214,16 +180,6 @@ for car in cars:
         car['Year'],
         car['Mileage'],
         car['SellPrice']))
-
-
-
-
-
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 

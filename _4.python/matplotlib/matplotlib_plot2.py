@@ -1,18 +1,19 @@
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-
 import matplotlib.pyplot as plt
 import numpy as np
 
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'plot 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)
@@ -41,14 +42,6 @@ for cnt in range(3):
 #第二張圖
 plt.subplot(232)
 
-import math
-import matplotlib
-import matplotlib.pyplot as plt
-import numpy as np
-
-from numpy import sin
-from numpy import cos
-
 plt.plot(np.random.randn(100))
 
 
@@ -66,24 +59,21 @@ plt.subplot(234)
 
 pi = 3.14159
 r = 3
-t = np.linspace(-1*pi, 1*pi, 50)
+t = np.linspace(-1 * pi, 1 * pi, 50)
 
-x = r*cos(t)
-y = r*sin(t)
+x = r * np.cos(t)
+y = r * np.sin(t)
 
 
-r = 3*(1-sin(t))
-x = r*cos(t)
-y = r*sin(t)
-
+r = 3 * (1 - np.sin(t))
+x = r * np.cos(t)
+y = r * np.sin(t)
 
 plt.plot(x, y, lw=3)
 
-
-r = 3*(1-sin(t))
-x = r*cos(t)
-y = r*sin(t)
-
+r = 3 * (1 - np.sin(t))
+x = r * np.cos(t)
+y = r * np.sin(t)
 
 #第五張圖
 plt.subplot(235)
@@ -105,11 +95,9 @@ plt.legend()
 #第六張圖
 plt.subplot(236)
 
-
-
 plt.show()
 
-
+print('------------------------------------------------------------')	#60個
 
 # plot 集合
 
@@ -191,6 +179,7 @@ plt.subplot(236)
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 # plot 集合
 

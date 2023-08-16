@@ -7,6 +7,9 @@ import random
 foldername = 'C:/_git/vcs/_1.data/______test_files5'
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
+print('------------------------------------------------------------')	#60個
+
+
 print('---- os --------------------------------------------------------')	#60個
 
 import test

@@ -1,7 +1,9 @@
+import os
 import sys
+import time
 import random
 
-
+print('------------------------------------------------------------')	#60個
 
 print('---- 字串處理專區 --------------------------------------------------------')	#60個
 
@@ -141,7 +143,6 @@ print('selenium模組的版本')
 import selenium
 print(selenium.__version__)
 
-import sys
 #import somemodule as sm	#幫模組取個別名
 
 print (sys.argv)
@@ -301,16 +302,6 @@ print('轉網址:\t' + string_url)
 cnstr = '中文 test'
 print(cnstr, len(cnstr))
 #utfstr = unicode(cnstr, 'utf-8')
-'''
-'''
-import win32api, win32con
-rc = win32api.MessageBox(0, 'kkkkk', "Installation Error", win32con.MB_ABORTRETRYIGNORE)
-if rc == win32con.IDABORT:
-    print('1111')
-elif rc == win32con.IDIGNORE:
-    print('2222')
-else:
-    print('3333')
 '''
 
 print('------------------------------------------------------------')	#60個
@@ -627,25 +618,6 @@ print(contents)
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-
-import abc
-metaclass = abc.ABCMeta
-print(metaclass)
-
-import uuid
-id = str(uuid.uuid4())
-print(id)
-    
-
-import sys
 if sys.version_info.major < 3 or sys.version_info.minor < 3:
     sys.exit("Error: clinic.py requires Python 3.3 or greater.")
 
@@ -693,10 +665,6 @@ print(s.title())
 print('------------------------------------------------------------')	#60個
 
 
-
-import time
-import os
-import sys
 import itertools
 import threading
 import subprocess
@@ -1138,15 +1106,80 @@ for name in _deprecations:
 print('------------------------------------------------------------')	#60個
 
 
-import hashlib
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import os
+from os.path import abspath
+
+def _basename(path):
+    # A basename() variant which first strips the trailing slash, if present.
+    # Thus we always get the last component of the path, even for directories.
+    sep = os.path.sep + (os.path.altsep or '')
+    return os.path.basename(path.rstrip(sep))
 
 
 
-hash_val = hashlib.sha512('aaaaaaa'.encode("utf-8"))
-print(hash_val)
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+base_name = _basename(filename)
+print(base_name)
 
-dicom_uid = str(int(hash_val.hexdigest(), 16))
-print(dicom_uid)
+
+
+src = abspath(base_name)
+print(src)
+
+
+zip_filename = base_name + ".zip"
+
+print(zip_filename)
+
+
+print('------------------------------------------------------------')	#60個
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+
+normdir = os.path.normcase(foldername)
+print(normdir)
+
+
+print('------------------------------------------------------------')	#60個
+
+import collections
+
+import nt
+_ntuple_diskusage = collections.namedtuple('usage', 'total used free')
+
+def disk_usage(path):
+    total, free = nt._getdiskusage(path)
+    used = total - free
+    return _ntuple_diskusage(total, used, free)
+
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+ret = disk_usage(foldername)
+print(ret)
+
+print('------------------------------------------------------------')	#60個
+
+import re
+
+ispythonprog = re.compile('^[a-zA-Z0-9_]+\.py$')
+def ispython(name):
+    return bool(ispythonprog.match(name))
+
+
+short_filename = 'picture1.jpg'
+status = ispython(short_filename)
+print(status)
+
+short_filename = 'test10_new02.py'
+status = ispython(short_filename)
+print(status)
+
+
 
 
 
@@ -1155,12 +1188,84 @@ print('------------------------------------------------------------')	#60個
 
 
 
+import os
+import sys
+import time
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print('尋找python程式碼的所在地')
+
+module_name = 'pytube'
+code_place = os.path.dirname(__import__(module_name).__file__)
+print(code_place)
+
+
+print('取得相對路徑')
+foldername = 'C:/_git/vcs/_1.data/______test_files1/'
+fn = os.path.relpath(foldername, code_place)
+
+print(fn)
+
+print('------------------------------------------------------------')	#60個
+
+def test():
+    for x in 'abcde':
+        for y in '12345':
+            print(y, x, end = ' ')
+
+test()
+print('------------------------------------------------------------')	#60個
+
+
+ENDMARKER = 0
+NAME = 1
+NUMBER = 2
+STRING = 3
+NEWLINE = 4
+INDENT = 5
+DEDENT = 6
+LPAR = 7
+RPAR = 8
+LSQB = 9
+RSQB = 10
+PERCENT = 24
+LBRACE = 25
+RBRACE = 26
+EQEQUAL = 27
+N_TOKENS = 54
+NT_OFFSET = 256
+
+tok_name = {value: name
+            for name, value in globals().items()
+            if isinstance(value, int) and not name.startswith('_')}
+
+print(type(tok_name))
+print(tok_name)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import os
+print(os.name)
+print(os.name)
+print(os.name)
+
+if os.name == 'nt':
+    print('kkk')
+    import nt
+    if sys.getwindowsversion()[:2] >= (6, 0):
+        print('aaa')
+    else:
+        print('bbb')
 
 
 
 print('------------------------------------------------------------')	#60個
 
 
+print('------------------------------------------------------------')	#60個
 
 
 

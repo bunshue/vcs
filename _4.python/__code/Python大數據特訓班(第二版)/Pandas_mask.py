@@ -15,9 +15,9 @@ Pandas資料應用專題
 
 print('Pandas資料讀取與顯示')
 
-import pandas
+import pandas as pd
 
-df = pandas.read_csv('https://data.nhi.gov.tw/DataSets/DataSetResource.ashx?rId=A21030000I-D21005-001')
+df = pd.read_csv('https://data.nhi.gov.tw/DataSets/DataSetResource.ashx?rId=A21030000I-D21005-001')
 
 # df.head()
 # df.tail()
@@ -51,7 +51,7 @@ print('口罩何處尋 健保藥局查詢程式')
 
 import pandas
 
-# df = pandas.read_csv('https://data.nhi.gov.tw/DataSets/DataSetResource.ashx?rId=A21030000I-D21005-001')
+# df = pd.read_csv('https://data.nhi.gov.tw/DataSets/DataSetResource.ashx?rId=A21030000I-D21005-001')
 
 df1 = df[['醫事機構名稱','電話','地址','備註']]
 

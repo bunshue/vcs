@@ -1,6 +1,9 @@
-# python import module : numpy
+'''
+numpy的使用
 
+'''
 import numpy as np
+print('------------------------------------------------------------')	#60個
 
 print('建立陣列')
 x = np.array([1, 2, 3])

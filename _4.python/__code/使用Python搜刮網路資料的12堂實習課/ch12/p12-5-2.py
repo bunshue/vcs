@@ -1,8 +1,12 @@
-import requests, json
+import json
+import requests
+
 url = "https://www.lexuscpo.com.tw/Home/CarStock"
+
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
+
 form_data = {
     "CarType":"", 
     "Series": "",
@@ -13,6 +17,7 @@ form_data = {
     "Page": "",
     "Limit": "500"
 }
+
 data = requests.post(url, data=form_data, headers=headers).text
 cars = json.loads(data)
 cars = cars['rows']

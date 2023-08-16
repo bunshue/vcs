@@ -1,18 +1,22 @@
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-
 import matplotlib.pyplot as plt
 import numpy as np
+import math
+import matplotlib
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
 
 #第一張圖
 plt.subplot(231)
@@ -93,11 +97,6 @@ plt.title('三角函數')
 #第三張圖
 plt.subplot(233)
 
-import math
-import matplotlib
-import matplotlib.pyplot as plt
-import numpy as np
-
 #t = np.linspace(0, 1, 100)
 t = np.linspace(-360, 360, 100)
 #b = np.exp(-a)
@@ -142,7 +141,6 @@ plt.ylabel('Volt')
 plt.title('Volt/Time chart')
 plt.ylim(-1.2, 1.2)
 plt.legend()
-
 
 #第五張圖
 plt.subplot(235)
@@ -206,29 +204,13 @@ plt.tick_params(axis = 'both', labelsize = 16, color = 'red')#xy軸多加tick
 #plt.tick_params(axis = 'y', color = 'red')#y軸多加tick
 
 
-
-
-
 plt.show()
 
-
-
+print('------------------------------------------------------------')	#60個
 
 # plot 集合
-
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-
-import matplotlib.pyplot as plt
-import numpy as np
-
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'plot 集合 2 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 #第一張圖
 plt.subplot(231)
@@ -270,26 +252,13 @@ plt.subplot(235)
 #第六張圖
 plt.subplot(236)
 
-
 plt.show()
 
-
-
+print('------------------------------------------------------------')	#60個
 # plot 集合
-
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'plot 集合 3 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 #第一張圖
 plt.subplot(231)
@@ -367,21 +336,12 @@ plt.plot(x2, y2, lw = 2, label = 'Tom')
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+
 # plot 集合
-
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 #          編號                          圖像大小[英吋]          解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'plot 集合 4 測試畫點畫線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 x = np.linspace(0, 6.28, 20)
 y = np.sin(x)
@@ -430,8 +390,6 @@ plt.show()
 
 #          編號                                     圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'plot 集合 5 不使用subplot畫多圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-import matplotlib.pyplot as plt
 
 print("在圖表的指定地方畫圖, 不用subplot")
 
