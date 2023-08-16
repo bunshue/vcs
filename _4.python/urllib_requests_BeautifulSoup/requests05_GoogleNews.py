@@ -43,7 +43,7 @@ for trendingSearchesDay in trendingSearchesDays:
         cnt1 += 1
         if(cnt1 == 3):
             break
-    print('----------------------------------------------------------------------')	#70個
+    print('------------------------------------------------------------')	#60個
         
 #存成純文字檔
 for trendingSearchesDay in trendingSearchesDays:

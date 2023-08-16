@@ -16,7 +16,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 '''
 #畫派圖1 繪製預設的圓形圖
@@ -31,7 +31,7 @@ plt.pie(sales_dep["value"], labels=sales_dep["label"],
         autopct="%1.1f%%")
 '''
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 '''
 #畫派圖2 從12點鐘方向開始繪製的圓形圖
@@ -48,7 +48,7 @@ plt.pie(sales_dep["value"], labels=sales_dep["label"],
         autopct="%1.1f%%", startangle=90, counterclock=False) 
 '''
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 '''
 #畫派圖3 只變更要強調的扇形的顏色
@@ -72,7 +72,7 @@ plt.pie(sales_dep["value"], labels=sales_dep["label"],
         autopct="%1.1f%%", startangle=90, counterclock=False,
         colors=palette)
 '''
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 '''
 #畫派圖4 利用plotly繪製圓形圖
@@ -85,7 +85,7 @@ fig = go.Figure(data=[go.Pie(labels=sales_dep["label"],
 
 '''
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 '''
@@ -113,7 +113,7 @@ fig.update_layout(title_text="各部門業績",
 
 '''
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 # 折線圖
 # 日本各都市平均氣溫全年資料
@@ -139,7 +139,7 @@ sns.lineplot(data=weather, x="年月", y="東京-平均氣溫(℃)")
 # 讓年月轉成90度的直書格式，才更方便閱讀
 plt.xticks(rotation=90)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 '''
@@ -151,7 +151,7 @@ fig.show()
 plt.show()
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 weather_index = pd.read_csv("weather_sample.csv", header=0,
                              parse_dates=["年月"], index_col=0) 
@@ -173,7 +173,7 @@ ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
 
 plt.show()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 #將多張折線圖的折線設定為同一種類的範例
 
@@ -193,7 +193,7 @@ ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
 
 plt.show()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 #強調特定折線圖的範例
 #sns.set(style="white", font="meiryo") 
@@ -223,7 +223,7 @@ ax.legend(loc="lower left", bbox_to_anchor=(1, 0))
 
 plt.show()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 #利用plotly繪製折線圖的範例
 fig = px.line(weather, x="年月", y="東京-平均氣溫(℃)")
@@ -261,7 +261,7 @@ sns.heatmap(cafe, linewidths=.1, annot=True, fmt="d")
 
 sns.heatmap(cafe, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 #瀑布圖
 fig = go.Figure(go.Waterfall(    
@@ -398,7 +398,7 @@ df = df.stack().rename_axis(["姓名", "label"]).reset_index().rename(columns={0
 fig = px.line_polar(df, r="value", theta="label", color="姓名", line_close=True) 
 fig.show()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 

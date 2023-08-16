@@ -5,7 +5,7 @@ filename = tempfile.NamedTemporaryFile().name
 print('製作暫存檔案')
 print(filename)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 (os_id, abs_path) = tempfile.mkstemp(suffix='.pgm')
 
@@ -31,7 +31,7 @@ print(tmp_filename)
 tmp_filename = os.path.join(tempdir, 'pywin32_postinstall.log', 'ccccc')
 print(tmp_filename)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 import tempfile
@@ -41,7 +41,7 @@ print(cabname)
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 import tempfile
 
@@ -62,9 +62,9 @@ print(data)
 #os.unlink(tmp_filename)   #等於是刪除tmp_filename
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 

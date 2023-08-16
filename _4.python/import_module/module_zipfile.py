@@ -4,7 +4,7 @@
 
 import zipfile
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 zip_filename = 'C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip'
 #zip_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_ntuh.zip'
@@ -16,7 +16,7 @@ with zipfile.ZipFile(zip_filename, 'r') as zipfp:   #開啟壓縮檔
         zipfp.extract(filename, file_dir) #擷取壓縮檔案
         print('解壓縮檔案 : ', filename) #印出解壓縮檔案名稱
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('判斷是否為一個壓縮檔')
 #zip_filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -26,7 +26,7 @@ if zipfile.is_zipfile(zip_filename):
 else:
     print('不是壓縮檔')
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
@@ -47,7 +47,7 @@ with zipfile.ZipFile(zip_filename, 'r') as zipfp:   #開啟壓縮檔
     print('Contents of %r:' % zip_filename)
     zipfp.printdir()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 zip_filename = 'C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip'
 zip_filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip'
@@ -75,14 +75,14 @@ with zipfile.ZipFile(zip_filename, 'r') as zipfp:   #開啟壓縮檔
     #info2 = zipfp.getinfo('PIL/PIL00.py')
     #print(info2)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 with zipfile.ZipFile(zip_filename, 'r') as zipfp:   #開啟壓縮檔
     zinfo = zipfp.getinfo('PIL/PIL02.py')
     print('--------------')
     print(zinfo)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 zip_filename = 'PIL2222.zip'
 #with zipfile.ZipFile(zip_filename, "w") as zipfp:
@@ -112,7 +112,7 @@ with zipfile.ZipFile(zip_filename, "r") as zipfp:
     print(zipfp, zipfile.ZipFile)
     print(zipfp.comment, b"this is a comment")
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 zip_filename = 'PIL4444.zip'
 compression = zipfile.ZIP_LZMA
@@ -122,10 +122,10 @@ zipfp.writestr("b.txt", "hello world", compress_type = compression)
 info = zipfp.getinfo('b.txt')
 print(info)
 
-print('------------------------------')  #30個
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('各種壓縮方法 壓縮同樣的檔案 比較壓縮率')
 
@@ -165,7 +165,7 @@ compression = zipfile.ZIP_LZMA
 make_test_archive(zip_filename, compression)
 '''
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 '''
 

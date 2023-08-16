@@ -1,4 +1,4 @@
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('準備工作')
 
 import os
@@ -22,7 +22,7 @@ url_playlist = 'https://www.youtube.com/watch?v=GwP1aUC_NKE&list=PLKtM4AyTKoVd1I
 # 初始化YouTube下載控件
 yt = YouTube(url, use_oauth = True, allow_oauth_cache = True)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 
 def rbVideo():  #點選選項按鈕後處理函式
     global getvideo

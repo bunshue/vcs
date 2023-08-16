@@ -6,9 +6,9 @@ import cv2
 import time
 import numpy as np
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('OpenCV 畫圖, 寫字集合')
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 W = 512 + 200
 H = 512
 #建立 512x512 的黑色畫布
@@ -18,13 +18,13 @@ image.fill(255) #將這個矩陣全部填入255 => 白色
 #image[:] = [48, 213, 254]#將這個矩陣全部填入指定顏色
 # Fill image with gray color(set each pixel to gray)
 #image[:] = (128, 128, 128)
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 font = cv2.FONT_HERSHEY_SIMPLEX
 line_type = cv2.LINE_AA #文字線條樣式
 
 #畫字時, 起點是左下角
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('畫字')
 text = 'Hello, World!'
 x_st = 20
@@ -35,7 +35,7 @@ line_width = 1
 cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width)
 y_st += 30
 cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 #繪製顯示系統當前時間
 localtime = time.localtime()
 text = time.strftime("%Y-%m-%d %I:%M:%S %p", localtime)
@@ -45,7 +45,7 @@ font_size = 1 #文字縮放比例
 color = (0, 255, 0) #B G R
 line_width = 1
 cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('寫在正中央, 先量測字體大小')
 text = 'Hello, World!'
 x_st = 20
@@ -67,7 +67,7 @@ cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_
 #cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, True)     #True:  從左下畫起
 cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), (0, 0, 255), 2)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 fonts = [
     cv2.FONT_HERSHEY_SIMPLEX,
     cv2.FONT_HERSHEY_PLAIN,
@@ -88,7 +88,7 @@ line_width = 1
 for font in fonts:
     cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)
     y_st += 60
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('把圖片顯示出來')
 cv2.imshow('OpenCV Draw Picture', image)
 #-----------------------------------------------------------------------------

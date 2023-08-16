@@ -8,7 +8,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
@@ -18,7 +18,7 @@ df.plot(xticks=range(0,4))
 
 plt.show()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV5_Kobe_stats.csv'
@@ -33,7 +33,7 @@ data.plot(kind="line")
 
 plt.show()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV5_HOU_players_stats.csv'
 df = pd.read_csv(filename)
@@ -45,7 +45,7 @@ points.plot(kind="bar")
 
 plt.show()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 

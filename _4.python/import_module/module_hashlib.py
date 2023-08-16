@@ -77,7 +77,7 @@ print('SHA256')
 print('預設答案 : ', '5d57e3deb441b789f6035d28dcbbaf6a436c54450972786fad4ce4527059d291')
 print('計算結果 : ', calculated_filehash)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('算一個字串的hashcode SHA1')
 print('ccccccccccccccccccccccccccc')
@@ -98,7 +98,7 @@ result = hashlib.sha1(string.encode('utf-8')).hexdigest()
 print(result)
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 def compute_checksum(input, length=None):
     input = input or ''
@@ -116,7 +116,7 @@ computed = "output={} input={}".format(compute_checksum(output, 16), compute_che
 
 print(computed)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('算一個檔案的hashcode SHA1')
 
@@ -131,7 +131,7 @@ with open(filename, 'rb') as f:
 h = s.hexdigest()
 print(h)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 #字符串轉 md5 工具
 
@@ -145,7 +145,7 @@ myMd5.update(string_data)
 myMd5_Digest = myMd5.hexdigest()
 print(myMd5_Digest)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 m = hashlib.md5()
 m.update(b"Nobody inspects")
@@ -156,13 +156,13 @@ print(m.digest())
 #    b'\\xbbd\\x9c\\x83\\xdd\\x1e\\xa5\\xc9\\xd9\\xde\\xc9\\xa1\\x8d\\xf0\\xff\\xe9'
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 string = 'this is a lion-mouse'
 md5 = hashlib.md5(string.encode()).hexdigest()
 print('md5 : ', md5)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('算一個檔案的hash值')
 
@@ -171,7 +171,7 @@ image_md5 = hashlib.md5(open(filename, 'rb').read()).digest()
 print(image_md5)
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 import os
 print('用hash值找一個資料夾內的重複的檔案')
 foldername = 'C:/_git/vcs/_1.data/______test_files1/compare'
@@ -191,7 +191,7 @@ for filename in filenames:
     else:
         allmd5s[img_md5] = os.path.abspath(filename) 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 import hashlib
 
@@ -202,7 +202,7 @@ def md5sum(t):
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 

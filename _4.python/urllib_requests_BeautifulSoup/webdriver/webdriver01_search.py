@@ -14,7 +14,7 @@ driver.set_window_size(800, 600)	#設定視窗大小
 
 search_word = '獅子'
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('在 google 輸入搜尋字串')
 
 url = 'https://www.google.com/'
@@ -50,7 +50,7 @@ time.sleep(4)
 driver.save_screenshot('screenshot_google.png')  #存圖
 time.sleep(1)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('在 youtube 輸入搜尋字串')
 
 url = 'https://www.youtube.com/'
@@ -79,7 +79,7 @@ time.sleep(4)
 driver.save_screenshot('screenshot_youtube.png')  #存圖
 time.sleep(1)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('在 yahoo 輸入搜尋字串')
 
 url = 'https://tw.yahoo.com/?p=us'
@@ -109,7 +109,7 @@ time.sleep(4)
 driver.save_screenshot('screenshot_yahoo.png')  #存圖
 time.sleep(1)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('在 維基百科 輸入搜尋字串')
 
 url = 'https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5'
@@ -137,7 +137,7 @@ time.sleep(4)
 driver.save_screenshot('screenshot_wiki.png')  #存圖
 time.sleep(1)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('完成')
 
 '''

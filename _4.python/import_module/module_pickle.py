@@ -19,7 +19,7 @@ def main():
 
 main() # Call the main function
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_pickle/pickle_test1.dat'
 
@@ -33,7 +33,7 @@ lst1 = pickle.load(fp)
 print(lst1)
 fp.close()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 import pickle
 fp = open("pickle_test2.dat", "wb")
@@ -43,7 +43,7 @@ pickle.dump([1, 2, 3, 4], fp)
 fp.close()
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 

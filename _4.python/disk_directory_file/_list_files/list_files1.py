@@ -19,9 +19,9 @@ import stat
 
 foldername = 'C:/_git/vcs/_1.data/______test_files5'
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('ls 測試 os.walk')
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('撈出資料夾下所有檔案, 單層')
 print('搜尋路徑：', foldername)
 filenames = os.walk(foldername)
@@ -33,7 +33,7 @@ for root, dirs, filenames in filenames:
     print('路徑下之檔案：', filenames)
     print()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('撈出資料夾下所有檔案, 多層1')
 foldername = 'C:/_git/vcs/_1.data/______test_files5/'
@@ -45,7 +45,7 @@ for root, dirs, filenames in os.walk(foldername):
     print('路徑下之檔案：', filenames)
     print()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('撈出資料夾下所有檔案, 多層2')  
 # 遞迴列出所有檔案的絕對路徑
@@ -56,7 +56,7 @@ for root, dirs, filenames in os.walk(foldername):
         print(long_filename)
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 print('撈出資料夾下所有檔案, 單層')
 print('搜尋路徑：', foldername)
 
@@ -66,7 +66,7 @@ for dirpath, _, filenames in os.walk(foldername):
             print(os.path.join(dirpath, fn))
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 print('撈出資料夾下所有檔案, 單層')
 print('搜尋路徑：', foldername)
 
@@ -74,7 +74,7 @@ for root, dirs, files in os.walk(foldername):
     if '.svn' in dirs:
         print('.svn')
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 print('撈出資料夾下所有檔案, 單層')
 print('搜尋路徑：', foldername)
 
@@ -88,34 +88,34 @@ for root, dirs, files in os.walk(foldername):
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
         
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('ls 測試 os.listdir')
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 
 print('當前目錄下之ls (單層)')
 filenames = os.listdir()
 print(type(filenames))
 print(filenames)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('當前目錄下之ls (單層)')
 filenames = os.listdir('.')
 print(type(filenames))
 print(filenames)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('根目錄下之ls (單層)')
 filenames = os.listdir('/')
 print(type(filenames))
 print(filenames)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 filename = os.listdir(foldername)
@@ -124,7 +124,7 @@ for sub in filename:
     fullname = 'aaaa' + "." + sub
     print(fullname)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('指定目錄下之ls (單層)')
 filenames = os.listdir(foldername)    #單層
@@ -144,7 +144,7 @@ zz = [name for name in filenames if name.endswith(('.jpg', '.txt'))]
 print('*.jpg *.txt files:')
 print(zz)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('指定目錄下之ls (單層)')
 filenames = os.listdir(foldername)    #單層
@@ -159,7 +159,7 @@ for filename in filenames:
 
 filelist.sort(key = os.path.normcase)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('指定目錄下之ls (單層)')
 
@@ -170,7 +170,7 @@ for filename in filenames:
     long_filename = os.path.join(foldername, filename)
     print(long_filename)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 fix_names = []
 for filename in sorted(os.listdir(foldername)):
@@ -181,7 +181,7 @@ for filename in sorted(os.listdir(foldername)):
 
 print(fix_names)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('撈出資料夾下所有檔案, 多層3')
 def list_files1(foldername, callback):
@@ -203,7 +203,7 @@ def visitfile(file):
 
 list_files1(foldername, visitfile)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 def _listFiles(files, foldername):
 
@@ -236,7 +236,7 @@ find_files(foldername)
 '''
 all_series = read_files(foldername, True, False, False)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('撈出資料夾下所有檔案, 單層')
 def list_files3(foldername):
@@ -251,7 +251,7 @@ def list_files3(foldername):
 
 list_files3(foldername)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('撈出資料夾下所有檔案, 多層5')
 
@@ -266,7 +266,7 @@ def list_files4(foldername):
             print('f', long_filename, os.stat(long_filename).st_size)
 
 list_files4(foldername)
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 def list_files5(foldername):
     try:
@@ -289,7 +289,7 @@ def list_files5(foldername):
 foldername = 'C:/_git/vcs/_1.data/______test_files5'
 list_files5(foldername)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 def getFolderSize(foldername):
     size = 0 # Store the total size of all files
@@ -307,12 +307,12 @@ folder_size = getFolderSize(foldername)
 
 print('資料夾大小 : ', folder_size, '拜')
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('ls 測試 glob.glob')
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('撈出資料夾下所有檔案, 單層')
 print('資料夾: ' + foldername)
 print('資料夾: {}'.format(foldername))
@@ -329,7 +329,7 @@ for target_image in filenames:
     '''
 print("完成")
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('撈出資料夾下所有檔案, 單層')
 foldername = 'C:/_git/vcs/_1.data/______test_files5/'
@@ -338,7 +338,7 @@ filenames = glob.glob(foldername)
 for filename in filenames:
     print(filename)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('撈出資料夾下所有檔案, 單層')
 os.chdir(foldername)
@@ -351,7 +351,7 @@ filenames = glob.glob("glob.py") + glob.glob("os*.py") + glob.glob("*.txt")
 for filename in filenames:
     print(filenames)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 #尋找檔案
 print('尋找目前目錄下之 *.py *.txt')
@@ -373,7 +373,7 @@ print("完成...")
 filenames = glob.glob('*.jpg') + glob.glob('*.png')
 print(filenames)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('kkkkkkkkkkkkkkkkkkkkk')
 print('撈出一層資料 .jpg檔  FAIL')
@@ -405,7 +405,7 @@ for filename in filenames:
         print('新全檔名', long_filename)
         print()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('指名pattern的搜尋')
 foldername = 'C:/_git/vcs/_1.data/______test_files5'
@@ -421,7 +421,7 @@ for filename in glob.glob1(foldername, "*.dll"):
 for filename in glob.glob1(foldername, "*.pyd"):
     print(filename)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
     
 print("單層資料夾內所有檔案容量")
 
@@ -439,14 +439,14 @@ for filename in filenames:
 print("總容量 : " + str(allfilesize) + " 拜")
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 def process(filename, listnames):
     print('process : ', filename)
@@ -487,17 +487,17 @@ print(x)
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 print('新進未整理------------------------------')  #30個
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 print('-------')
 print(os.curdir)
@@ -505,7 +505,7 @@ print('-------')
 print(os.pardir)
 print('-------')
     
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 '''

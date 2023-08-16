@@ -1,7 +1,7 @@
 # Python 測試 BeautifulSoup
 #解讀 遠端 網頁資料, 都是使用 html.parser 解析器
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('準備工作')
 
 import re
@@ -40,7 +40,7 @@ def get_soup_from_url(url):
     print("取得網頁標題", soup.title)
     return soup
     
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 1')
 
 url = 'http://www.e-happy.com.tw'
@@ -58,7 +58,7 @@ print("取得Yahoo奇摩新聞-科技新聞-標題")
 for news in soup.findAll('item'):
     print(news.title)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 2')
 
 url = 'https://www.google.com.tw/'
@@ -72,7 +72,7 @@ for link in all_links:
                 print('取得資料')
                 print(href)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 3')
 
 url = 'http://ehappy.tw/bsdemo1.htm'
@@ -83,7 +83,7 @@ print("取得網頁標題", soup.title.text)
 print("取得 h1: ", soup.h1)
 print("取得 p: ", soup.p)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 4')
 
 url = 'https://oldsiao.neocities.org/'
@@ -100,7 +100,7 @@ print(soup.find("div"))
 print("尋找標籤「<title>」")
 print(soup.find_all("title"))
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 5')
 
 #PTT C_Chat板每篇文章的標題
@@ -113,7 +113,7 @@ links = soup.find_all("div", class_="title")    # 文章標題
 for link in links:
     print(link.text.strip()) # strip()用來刪除文字前面和後面多餘的空白
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 6')
 
 url = 'http://blog.castman.net/web-crawler-tutorial/ch1/connect.html'
@@ -135,7 +135,7 @@ if h2:
 else:
     print('h2 tag not found!')
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 7')
 
 url = 'https://www.nkust.edu.tw/'
@@ -152,7 +152,7 @@ target = soup.p
 print(target)
 print()
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 8')
 
 url = 'https://newcar.u-car.com.tw/newcar'
@@ -165,7 +165,7 @@ for make in makes:
         makers[int(make['value'])] = make.text
 print(makers)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 9')
 
 url = 'https://newcar.u-car.com.tw/newcar'
@@ -182,7 +182,7 @@ for model in models:
         cars.append(car)
 print(cars)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 10')
 
 url = 'https://newcar.u-car.com.tw/newcar'
@@ -206,7 +206,7 @@ for model in models:
         cars.append(car)
 print(cars)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 11')
 
 url = 'https://www.bagong.cn/dog/'
@@ -217,7 +217,7 @@ for photo in photos:
     if photo['src'].startswith('http'):
         print(photo['src'])
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 12')
 
 #台灣彩券官網首頁
@@ -258,7 +258,7 @@ data1 = soup.find("a", {"id":"link1"})
 print(data1.get("href")) # http://example.com/elsie
 print(data1["href"])     # http://example.com/elsie
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 13')
 
 #台灣彩券官網首頁
@@ -301,7 +301,7 @@ red = data2.find('div', {'class':'ball_red'})
 print("\n第二區：{}".format(red.text)) 
 
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 17 udn news a')
 
 #聯合新聞網
@@ -314,7 +314,7 @@ target = soup.find_all("h2", {"class":"breaking-news"})
 for news in target:
     print(news.a['title'])
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 17 udn news b')
 
 url = 'https://udn.com/news/breaknews/1'
@@ -343,7 +343,7 @@ for link in links:
 
 print(headlines)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 17 udn news c')
 
 url = 'https://autos.udn.com/autos/story/9060/2187994'
@@ -378,7 +378,7 @@ for link in photos:
     
 print("Done...")
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 18')
 
 url = 'https://www.ptt.cc/bbs/C_Chat/index.html'
@@ -405,7 +405,7 @@ for link in all_links:
                 print(domain + t)
                 print('domain : ', domain + t)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 19')
 
 domain = "{}://{}".format(urllib.parse.urlparse(url).scheme, urllib.parse.urlparse(url).hostname)
@@ -441,7 +441,7 @@ for link in all_links:
             fp.close()
 
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 20')
 
 post_html = '''
@@ -550,7 +550,7 @@ fp.write(pre_html+html_body+post_html)
 fp.close()            
 '''
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 21')
 
 from urllib.request import urlopen
@@ -577,7 +577,7 @@ else:
     print("取得網頁標題:")
     print(title)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 22')
 
 import urllib.parse
@@ -621,7 +621,7 @@ for plate_number in plate_numbers:
     print('aaaaaaaaaaaaaa')
     print(plate_number.text)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 23')
 
 

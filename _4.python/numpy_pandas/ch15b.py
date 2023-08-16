@@ -47,7 +47,7 @@ titanic["SexCode"] = np.where(titanic["Sex"]=="female", 1, 0)
 print(titanic.head())
 print()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 from sklearn import preprocessing
@@ -79,7 +79,7 @@ print(titanic.groupby("Sex")["Age"].mean())
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 #探索性資料分析
 
@@ -98,7 +98,7 @@ df["Age"].plot(kind="hist", bins=15)
 plt.show()
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 fig, axes = plt.subplots(nrows=1, ncols=2)
 df = titanic[["Survived","Died"]].groupby(titanic["Sex"]).sum()
@@ -108,7 +108,7 @@ df.plot(kind="bar", ax=axes[1])
 
 plt.show()
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 df = titanic[['Survived',"Died"]].groupby(titanic["PClass"]).sum()
@@ -117,7 +117,7 @@ df.plot(kind="bar")
 plt.show()
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 df = titanic[['Survived',"Died"]].groupby(titanic["PClass"]).mean()
 df.plot(kind="bar")
@@ -125,7 +125,7 @@ df.plot(kind="bar")
 plt.show()
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 df = titanic.drop("Died", axis=1)
@@ -134,7 +134,7 @@ print(df.corr())
 plt.show()
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 

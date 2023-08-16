@@ -4,7 +4,7 @@
 
 import csv
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 1 寫入")
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/TestCSVFileW1.csv'
@@ -29,7 +29,7 @@ finally:
 
 print("寫入檔案 " + filename + " 完成")
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 2 寫入")
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/TestCSVFileW2.csv'
@@ -48,7 +48,7 @@ with open(filename, 'w', newline = '') as csvfile:
 
 print("寫入檔案 " + filename + " 完成")
     
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 3 寫入")
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/python_ReadWrite_CSV2.csv'
@@ -64,7 +64,7 @@ with open(filename, 'w', newline = '') as csvfile:
 
 print("寫入檔案 " + filename + " 完成")
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 4 寫入")
 
 # 建立csv二維串列資料
@@ -85,7 +85,7 @@ with open(filename, 'w', newline = '') as csvfile:
 
 print("寫入檔案 " + filename + " 完成")
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 1 讀取 gggg")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV2.csv'
@@ -117,7 +117,7 @@ with open(filename, newline = '') as csvfile:
         print(type(row))
         #print(len(row))
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 2 讀取")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV2.csv'
@@ -152,7 +152,7 @@ print(data[1]['體重'])
 import sys
 sys.exit()
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 3 讀取")
 
 from urllib.request import urlopen
@@ -180,7 +180,7 @@ rows = csv.reader(csvfile)  # 讀取 csv 檔案內容
 for row in rows:
 	print("The album \"" + row[0] + "\" was released in " + str(row[1]))
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 4 讀取 many")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/zipcode.csv'
@@ -193,7 +193,7 @@ with open(filename, 'r', encoding = 'utf-8') as csvfile:
             #print(sqlstr) many
             #cursor.execute(sqlstr)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 7 讀取")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV3_eword.csv'
@@ -210,7 +210,7 @@ with open(filename, 'r', encoding = 'UTF-8-sig') as csvfile:
         if count == 10:
             break
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 8 讀取")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV1.csv'
@@ -220,7 +220,7 @@ with open(filename, 'rt') as csvfile:
 print(type(data))
 print(data)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 9 讀取")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV1.csv'
@@ -234,7 +234,7 @@ with open(filename, 'rt') as csvfile:
         data.append(dict(row))
 pp.pprint(data)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 10 讀取")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV1.csv'
@@ -245,7 +245,7 @@ with open(filename, 'rt') as csvfile:
     data = [dict(row) for row in rows]
 pp.pprint(data)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 11 讀取")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV1.csv'
@@ -260,7 +260,7 @@ with open(filename, 'rt') as csvfile:
         data.append(temp)
 pp.pprint(data)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 12 讀取 pandas")
 
 import pandas as pd
@@ -278,7 +278,7 @@ print()
 
 print(dfprice)
 
-print('----------------------------------------------------------------------')	#70個
+print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 13")
 
 

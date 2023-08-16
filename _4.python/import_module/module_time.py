@@ -446,14 +446,14 @@ print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 # 格式化成Sat Mar 28 22:24:24 2016形式
 print (time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 timestamp = time.strftime('%Y-%m-%d %H:%M%z')
 
 print(timestamp)
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 now = datetime.datetime.now()
 filename = now.strftime("%y-%m-%d-%H-%M-%S.json")
@@ -476,7 +476,7 @@ print(imagepath)
 filename = '-%04d-%02d-%02d'%(time.localtime()[:3])
 print(filename)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 #獲取當前時間
 def get_current_time():
@@ -486,7 +486,7 @@ def get_current_time():
 current_time = get_current_time()
 print('當前時間 :', current_time)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 import datetime
 import time
@@ -518,7 +518,7 @@ datetime(2016, 7, 20, 15, 45),
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 def format_time(field_timestamp: datetime) -> str:
@@ -526,7 +526,7 @@ def format_time(field_timestamp: datetime) -> str:
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 start_time = time.time()
@@ -537,7 +537,7 @@ latency = time.time() - start_time
 print("it took %.2f", latency)
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 t1 = time.time()
 
@@ -548,12 +548,12 @@ t3 = time.time()
 print("_safe_repr:", t2 - t1)
 print("pformat:", t3 - t2)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 print(datetime.datetime.now())
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 start_date = datetime.datetime(2016, 7, 17)
 print(start_date)
@@ -562,18 +562,18 @@ print(end_date)
 expected = [datetime.datetime(2016, 7, i) for i in range(17, 24)]
 print(expected)
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 ufrom = 'From nobody ' + time.ctime(time.time())
 print(ufrom)
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 
-print('------------------------------')  #30個
+print('------------------------------------------------------------')	#60個
 
 
 
