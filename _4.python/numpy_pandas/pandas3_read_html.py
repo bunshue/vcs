@@ -1,5 +1,7 @@
 import pandas as pd
 
+print('------------------------------------------------------------')	#60個
+
 print("使用pandas讀取網頁表單");
     
 url = 'https://www.tiobe.com/tiobe-index/'
@@ -8,9 +10,7 @@ tables = pd.read_html(url, header=0, keep_default_na=False)
 print("結果");
 print(tables[0])
 
-
-
-import pandas as pd
+print('------------------------------------------------------------')	#60個
 
 #原物料商品行情
 tables = pd.read_html("http://www.stockq.org/market/commodity.php")
@@ -22,8 +22,7 @@ for table in tables:
     print()
     n += 1
 
-
-import pandas as pd
+print('------------------------------------------------------------')	#60個
 
 #原物料商品行情
 tables = pd.read_html("http://www.stockq.org/market/commodity.php")
@@ -38,5 +37,10 @@ table.index = range(len(table.index))
 
 print(table)
 '''
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
 
 

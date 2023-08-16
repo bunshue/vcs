@@ -18,8 +18,8 @@ import matplotlib.pyplot as plt
     Age欄位有很多遺漏值，我們準備使用Age欄位的平均值來補值。
 
 '''
-
-titanic = pd.read_csv("titanic_data.csv")
+filename = 'data/titanic_data.csv'
+titanic = pd.read_csv(filename)
 
 print('資料shape')
 print(titanic.shape)
@@ -49,7 +49,6 @@ print()
 
 print('------------------------------------------------------------')	#60個
 
-
 from sklearn import preprocessing
 
 label_encoder = preprocessing.LabelEncoder()
@@ -66,7 +65,6 @@ print(sum(titanic["Age"].isnull()))
 avg_age = titanic["Age"].mean()
 print('average age =', avg_age)
 
-
 titanic["Age"].fillna(avg_age, inplace=True)
 print(sum(titanic["Age"].isnull()))
 
@@ -76,18 +74,13 @@ print(titanic["Sex"].groupby(titanic["Sex"]).size())
 print('2222')
 print(titanic.groupby("Sex")["Age"].mean())
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
 #探索性資料分析
 
-
 print('3333')
 titanic["Died"] = np.where(titanic["Survived"]==0, 1, 0)
 print(titanic.head())
-
 
 titanic["Age"].plot(kind="hist", bins=15)
 df = titanic[titanic.Survived == 0]
@@ -96,7 +89,6 @@ df = titanic[titanic.Survived == 1]
 df["Age"].plot(kind="hist", bins=15)
 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -110,12 +102,10 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 df = titanic[['Survived',"Died"]].groupby(titanic["PClass"]).sum()
 df.plot(kind="bar")
 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -124,19 +114,14 @@ df.plot(kind="bar")
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
-
 
 df = titanic.drop("Died", axis=1)
 print(df.corr())
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
-
-
 
 '''
 

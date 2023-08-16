@@ -118,8 +118,8 @@ print('------------------------------------------------------------')	#60個
 # 折線圖
 # 日本各都市平均氣溫全年資料
 
-weather = pd.read_csv("weather_sample.csv", header=0, parse_dates=["年月"])
-
+filename = 'data/weather_sample.csv'
+weather = pd.read_csv(filename, header=0, parse_dates=["年月"])
 
 #折線圖的繪製範例
 #sns.set(style="whitegrid", font="meiryo")
@@ -128,8 +128,6 @@ weather = pd.read_csv("weather_sample.csv", header=0, parse_dates=["年月"])
 plt.ylim([0, 30])
 
 sns.lineplot(data=weather, x="年月", y="東京-平均氣溫(℃)")
-
-
 
 
 #sns.set(style="whitegrid", font="meiryo")
@@ -153,7 +151,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-weather_index = pd.read_csv("weather_sample.csv", header=0,
+filename = 'data/weather_sample.csv'
+weather_index = pd.read_csv(filename, header=0,
                              parse_dates=["年月"], index_col=0) 
 tmp_ave = weather_index[["東京-平均氣溫(℃)", "大阪-平均氣溫(℃)",
                          "那霸-平均氣溫(℃)", "函館-平均氣溫(℃)"]] 
@@ -251,7 +250,8 @@ fig.show()
 #咖啡廳每月商品銷售量資料
 
 # 載入資料與定義資料
-cafe = pd.read_csv("cafe.csv", header=0, index_col=0)
+filename = 'data/cafe.csv'
+cafe = pd.read_csv(filename, header=0, index_col=0)
 print(cafe)
 
 #sns.set(font="meiryo")

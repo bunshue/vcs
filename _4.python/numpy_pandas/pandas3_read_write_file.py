@@ -1,9 +1,10 @@
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-print('pandas DataFrame資料輸出到csv檔')
+print('------------------------------------------------------------')	#60個
 
-import pandas as pd
+print('pandas DataFrame資料輸出到csv檔')
 
 scores = {'國文':{'王小明':65,'李小美':90,'陳大同':81,'林小玉':79},
           '英文':{'王小明':92,'李小美':72,'陳大同':85,'林小玉':53},
@@ -17,10 +18,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files2/score_this.csv'
 df.to_csv(filename, encoding='utf-8-sig')
 print("寫入完成")
 
+print('------------------------------------------------------------')	#60個
 
 print('pandas 讀取 csv檔')
-
-import numpy as np
 
 print("讀取 .csv 檔 1")
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores.csv'
@@ -39,9 +39,9 @@ total2 = na[:,1:4].sum(axis=1)
 print(total2)
 print('全班最高總分：',total2.max())
 
+print('------------------------------------------------------------')	#60個
 print('pandas 讀取 csv檔')
 
-import pandas as pd
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores2.csv'
 data = pd.read_csv(filename, header=0, index_col=0)
 print('打印資料')
@@ -49,11 +49,10 @@ print(data)
 #print('打印資料型態')
 #print(type(data))
 
-
+print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/score333.csv'
 
-import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
 indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
 columns = ["國文", "數學", "英文", "自然", "社會"]
@@ -62,17 +61,16 @@ print(df)
 
 df.to_csv(filename, encoding="utf-8-sig")
 
+print('------------------------------------------------------------')	#60個
 
-import pandas as pd
 data = pd.read_csv(filename, encoding="utf-8-sig",index_col=0)
 
 print(data)
 
-
+print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/score444.json'
 
-import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
 indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
 columns = ["國文", "數學", "英文", "自然", "社會"]
@@ -81,16 +79,16 @@ print(df)
 
 df.to_json(filename, force_ascii=False)
 
+print('------------------------------------------------------------')	#60個
 
-import pandas as pd
 data = pd.read_json(filename, typ='series')
 
 print(data)
 
+print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/score555.xlsx'
 
-import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
 indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
 columns = ["國文", "數學", "英文", "自然", "社會"]
@@ -100,11 +98,13 @@ print(df)
 df.to_excel(filename, encoding="utf-8-sig")
 
 
-import pandas as pd
+print('------------------------------------------------------------')	#60個
+
 data = pd.read_excel(filename, encoding="utf-8-sig",index_col=0)
 
 print(data)
 
+print('------------------------------------------------------------')	#60個
 
 
 

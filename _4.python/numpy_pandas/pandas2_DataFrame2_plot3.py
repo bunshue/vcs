@@ -9,7 +9,8 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-df = pd.read_csv("hours_used_performance.csv")
+filename = 'data/hours_used_performance.csv'
+df = pd.read_csv(filename)
 df.plot(kind="scatter", 
         x="hours_used",
         y="work_performance")
@@ -17,7 +18,8 @@ print(df.corr())
 
 print('------------------------------------------------------------')	#60個
 
-df = pd.read_csv("fb_tracking_happiness.csv")
+filename = 'data/fb_tracking_happiness.csv'
+df = pd.read_csv(filename)
 print(df.head())
 
 from sklearn import preprocessing
@@ -35,7 +37,8 @@ df_std.plot(kind="scatter",
 
 print('------------------------------------------------------------')	#60個
 
-df = pd.read_csv("fb_tracking_happiness.csv")
+filename = 'data/fb_tracking_happiness.csv'
+df = pd.read_csv(filename)
 print(df.head())
 
 from sklearn import preprocessing

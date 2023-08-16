@@ -35,7 +35,7 @@ time4 = time.localtime()
 print(time3)
 print(time4)
 
-print('----- 現在時間 -----------------------------------------------------------------')	#70個
+print('---- 現在時間 --------------------------------------------------------')	#60個
 
 print("現在時間")
 now = datetime.datetime.today()
@@ -154,7 +154,7 @@ johnbirthday = datetime.datetime(1978, 4, 5, 12, 0)
 
 #print(relativedelta(NOW, johnbirthday))
 
-print('----- timediff -----------------------------------------------------------------')	#70個
+print('---- timediff --------------------------------------------------------')	#60個
 
 a = datetime.datetime(2012, 3, 1)
 b = datetime.datetime(2012, 2, 28)
@@ -230,7 +230,7 @@ print(d3.ctime())
 #time.ctime([ sec ])
 print("time.ctime() : %s" % time.ctime())
 
-print('----- datetime.now() -----------------------------------------------------------------')	#70個
+print('---- datetime.now() --------------------------------------------------------')	#60個
 
 tt = datetime.datetime.strptime("2018-01-31", "%Y-%m-%d")
 print(tt)
@@ -315,7 +315,7 @@ new_date = transform_date(old_date)
 
 print(new_date)
 
-print('----- strftime() 可以將時間格式化 -----------------------------------------------------------------')	#70個
+print('---- strftime() 可以將時間格式化 --------------------------------------------------------')	#60個
 
 # 格式化為 2020-09-26 21:14:30
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
@@ -363,8 +363,7 @@ print(string)
 
 '''
 
-print('----- new -----------------------------------------------------------------')	#70個
-
+print('---- new --------------------------------------------------------')	#60個
 
 string = ("%d" % datetime.datetime.now().year)
 print(string)

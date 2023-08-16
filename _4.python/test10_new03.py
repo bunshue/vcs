@@ -24,15 +24,15 @@ zip_filename = base_name + ".zip"
 print(zip_filename)
 
 
+print('------------------------------------------------------------')	#60個
+
 foldername = 'C:/_git/vcs/_1.data/______test_files5'
 
 normdir = os.path.normcase(foldername)
 print(normdir)
 
 
-
-
-
+print('------------------------------------------------------------')	#60個
 
 import collections
 
@@ -49,4 +49,34 @@ foldername = 'C:/_git/vcs/_1.data/______test_files5'
 ret = disk_usage(foldername)
 print(ret)
 
+print('------------------------------------------------------------')	#60個
+
+import re
+
+ispythonprog = re.compile('^[a-zA-Z0-9_]+\.py$')
+def ispython(name):
+    return bool(ispythonprog.match(name))
+
+
+short_filename = 'picture1.jpg'
+status = ispython(short_filename)
+print(status)
+
+short_filename = 'test10_new02.py'
+status = ispython(short_filename)
+print(status)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
 

@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 from scipy import integrate
 from scipy import special
 
+print('------------------------------------------------------------')	#60個
+
 a = special.exp10(3)
 print('10^3 =', a)
 b = special.exp2(3)
@@ -18,6 +20,8 @@ y = special.exp10(x)
 
 plt.plot(x, y)
 plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 
 print('積分')
@@ -67,6 +71,8 @@ x = np.arange(-10, 10, 0.1)
 plt.plot(x, f(x)) 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+
 
 result = optimize.minimize(f, x0=0)
 print(result.x)
@@ -87,6 +93,8 @@ x = np.arange(5, 20)
 y = special.exp2(x/3.0)
 plt.plot(x, y, 'o')
 plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 
 f = interpolate.interp1d(x, y)
@@ -158,13 +166,14 @@ plt.title("Linear Chirp")
 plt.xlabel('time in sec)')
 plt.show()
 
-img = np.load("images/digit8.npy")
+img = np.load("data/digit8.npy")
 
 plt.figure()
 plt.imshow(img, cmap="gray")
 plt.axis("off")
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 
 edge = [
@@ -187,6 +196,9 @@ plt.title("edge-detection image")
 plt.show()
 
 
+print('------------------------------------------------------------')	#60個
+
+
 sharpen = [
     [0, -1, 0],
     [-1, 5, -1],
@@ -206,9 +218,10 @@ plt.axis("off")
 plt.title("sharpen image")
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 
-img = np.load("images/digit3.npy")
+img = np.load("data/digit3.npy")
 filters = [[
     [-1, -1, -1],
     [ 1,  1,  1],

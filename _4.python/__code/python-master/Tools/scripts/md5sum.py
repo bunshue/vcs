@@ -1,8 +1,5 @@
-#! /usr/bin/env python3
-
 """Python utility to print MD5 checksums of argument files.
 """
-
 
 bufsize = 8096
 fnfilter = None
@@ -69,17 +66,14 @@ def printsumfp(fp, filename, out=sys.stdout):
     out.write('%s %s\n' % (m.hexdigest(), filename))
     return 0
 
-def main():
-    global fnfilter, rmode
-    fnfilter = os.path.basename
-    rmode = 'rb'
-
-    filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-    return sum(filename)
-
-
 sys.stderr.write('%s: %s\n%s' % ('aaaa', 'bbbbb', usage))
 
-main()
+fnfilter = os.path.basename
+rmode = 'rb'
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print(filename)
+print(sum(filename))
+
 

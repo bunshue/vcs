@@ -11,6 +11,7 @@ from PIL import Image
 import pandas as pd
 
 
+print('------------------------------------------------------------')	#60個
 
 #繪製英文的文字雲
 
@@ -28,6 +29,8 @@ plt.axis("off")
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+
 #中日文文章的視覺化手法
 
 # 利用半形空白字元切割的中文文章
@@ -43,6 +46,7 @@ plt.axis("off")
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 #文章拆寫範例
 # 中文的文章
@@ -100,7 +104,7 @@ plt.axis("off")
 
 plt.show()
 
-
+print('------------------------------------------------------------')	#60個
 
 
 #就算名詞只有一個字也繪製的範例
@@ -122,6 +126,9 @@ plt.axis("off")
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+
+
 #調整文字雲的形狀
 #愛心形狀的文字雲繪製範例
 # 原始文章
@@ -131,7 +138,7 @@ Love in its various forms acts as a major facilitator of interpersonal relations
 Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
 
 # 載入遮罩圖片
-mask_image = np.array(Image.open("heart.png")) 
+mask_image = np.array(Image.open("data/heart.png")) 
 
 # 產生以圖片作為遮罩的文字雲
 wc = wordcloud.WordCloud(width=700, height=700, background_color="white",
@@ -144,10 +151,9 @@ wc.generate(text_love)
 plt.imshow(wc) 
 plt.axis("off")
 
-
-
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 # 指定特定文字的顏色
 # 原始文章
@@ -190,7 +196,8 @@ wc.recolor(color_func=color_func)
 plt.imshow(wc) 
 plt.axis("off")
 
-
-
 plt.show()
+
+print('------------------------------------------------------------')	#60個
+
 

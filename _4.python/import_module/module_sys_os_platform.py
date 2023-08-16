@@ -10,7 +10,7 @@ print(platform)
 
 print(platform.uname())
 
-print('---------------作業系統---------------')  #30個
+print('---- 作業系統 --------------------------------------------------------')	#60個
 
 print('作業系統 : ', platform.system())
 print('作業系統版本 : ', platform.platform())
@@ -18,13 +18,13 @@ print('作業系統版本 : ', platform.platform(aliased=0, terse=0))
 print('作業系統版本 : ', platform.release())
 print('作業系統版本 : ', platform.version())
 
-print('---------------硬體---------------')  #30個
+print('---- 硬體 --------------------------------------------------------')	#60個
 
 print('CPU : ', platform.processor())
 print('機器 : ', platform.machine())
 print('機器名稱 : ', platform.node())
 
-print('---------------Python---------------')  #30個
+print('---- Python --------------------------------------------------------')	#60個
 
 print('Python版本 : ', platform._sys_version(sys_version = None))
 print('Python版本 : ', platform.python_implementation())
@@ -80,7 +80,7 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 '''
 
-print('----基本設定--------------------------')  #30個
+print('---- 基本設定 --------------------------------------------------------')	#60個
 
 filename = __file__
 print('本檔長檔名', __file__)
@@ -88,7 +88,7 @@ print('本檔長檔名 : ', filename)
 
 foldername = 'C:/_git/vcs/_1.data/______test_files2/'
 
-print('----判斷檔案或資料夾 is exists--------------------------')  #30個
+print('---- 判斷檔案或資料夾 is exists --------------------------------------------------------')	#60個
 
 file_or_folder_name = filename  #檔案或資料夾皆可
 
@@ -143,10 +143,7 @@ installer_name = os.path.abspath(installer_name)
 '''
 
 
-
-
-
-print('----長檔名 轉 短檔名 basename()--------------------------')  #30個
+print('---- 長檔名 轉 短檔名 basename() --------------------------------------------------------')	#60個
 
 print('長檔名 轉 短檔名 basename()')
 short_filename = os.path.basename(filename)
@@ -154,8 +151,7 @@ print('短檔名 : ', short_filename)
 
 print('副檔名', short_filename[-3:])
 
-
-print('----取得檔案/資料夾的絕對位置 abspath()--------------------------')  #30個
+print('---- 取得檔案/資料夾的絕對位置 abspath() --------------------------------------------------------')	#60個
 
 print('取得檔案/資料夾的絕對位置 abspath()')
 long_filename = os.path.abspath(filename)
@@ -183,13 +179,13 @@ print('長檔名(絕對位置)', long_filename)
 
 '''
 
-print('----取得所在的資料夾 dirname()--------------------------')  #30個
+print('---- 取得所在的資料夾 dirname() --------------------------------------------------------')	#60個
 
 print('取得所在的資料夾 dirname()')
 long_foldername = os.path.dirname(filename)
 print('本檔長資料夾(絕對位置)', long_foldername)
 
-print('----連結資料夾 join(A, B)--------------------------')  #30個
+print('---- 連結資料夾 join(A, B) --------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
@@ -241,15 +237,10 @@ print(NAME)
 print(AAAA)
 
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 
-print('----混和應用--------------------------')  #30個
+print('---- 混和應用 --------------------------------------------------------')	#60個
 
 major = 3
 minor = 8
