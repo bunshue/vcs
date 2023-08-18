@@ -1,0 +1,11 @@
+# ch9_15.py
+players = {'Stephen Curry':'Golden State Warriors',
+           'Kevin Durant':'Golden State Warriors',
+           'Lebron James':'Cleveland Cavaliers',
+           'James Harden':'Houston Rockets',
+           'Paul Gasol':'San Antonio Spurs'
+          }
+for name, team in players.items( ):
+    print("姓名: ", name)
+    print("隊名: ", team, end='\n\n')
+
