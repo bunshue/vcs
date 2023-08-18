@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+print('------------------------------------------------------------')	#60個
+
 '''
 normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
 
@@ -41,6 +44,9 @@ plt.show()
 
 
 
+print('------------------------------------------------------------')	#60個
+
+
 '''
 
 
@@ -60,7 +66,7 @@ plt.tight_layout()
 
 plt.show()
 
-
+print('------------------------------------------------------------')	#60個
 
 plt.close('all')
 arr = np.arange(100).reshape((10, 10))
@@ -72,6 +78,8 @@ plt.colorbar(im)
 plt.tight_layout()
 plt.show()
 
+
+print('------------------------------------------------------------')	#60個
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
@@ -91,7 +99,7 @@ plt.show()
 #foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 foldername = 'C:/_git/vcs/_1.data/______test_files1'
 
-
+print('------------------------------------------------------------')	#60個
 
 import glob,cv2
 
@@ -124,6 +132,43 @@ plt.show()
 
 
 '''
+
+
+print('------------------------------------------------------------')	#60個
+
+
+#描點畫圓
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 角度
+th = np.arange(0, 360)
+
+# 圓周上的點P座標 
+x = np.cos(np.radians(th))
+y = np.sin(np.radians(th))
+
+# 繪圖
+plt.plot(x, y)
+plt.axis('equal')
+plt.grid(color='0.8')
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 10, 50)
+sinus = np.sin(x)
+cosinus = np.cos(x)
+plt.plot(x, sinus, x, cosinus)
+plt.show()
+
+
+
 
 
 

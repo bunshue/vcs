@@ -1,0 +1,444 @@
+'''
+import numpy as np
+import matplotlib.pyplot as plt
+
+print('------------------------------------------------------------')	#60個
+
+# 資料
+x = [1, 2, 3, 4, 5, 6, 7]
+y = [64.3, 63.8, 63.6, 64.0, 63.5, 63.2, 63.1]
+
+
+# y = 3 * x - 24
+y = []
+for x in range(1, 11):
+    y.append(3 * x - 24)
+print(type(y))
+print(y)
+
+
+
+# 資料
+x = np.arange(-1.0, 1.01, 0.01)
+
+y = x ** 2
+
+
+
+# 繪圖
+plt.plot(x, y)        # 描繪折線
+plt.grid(color='0.8') # 顯示格線
+plt.show()            # 顯示在畫面上
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+#連接2點的直線
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 資料
+x = np.arange(1, 5.1, 0.1)
+y = 1/2*x + (1/2)
+
+# 繪圖
+plt.scatter(x, y)
+plt.grid(color='0.8')
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+import pandas as pd
+
+# 讀入score.csv
+dat = pd.read_csv('score.csv', encoding='UTF-8')
+print(dat.head())
+
+print('------------------------------------------------------------')	#60個
+
+#計算平均數、中位數、眾數
+
+import pandas as pd
+import numpy as np
+
+# 讀入score.csv
+dat = pd.read_csv('score.csv', encoding='UTF-8')
+
+# 平均數、中位數
+print('平均數', np.mean(dat['數學']))
+print('中位數', np.median(dat['數學']))
+
+# 眾數
+bincnt = np.bincount(dat['數學'])  # 計算同樣的值的個數
+mode = np.argmax(bincnt)  # 取得bincnt中最大的值
+print('眾數', mode)
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print('畫出頻率分布圖')
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# 讀入score.csv
+dat = pd.read_csv('score.csv', encoding='UTF-8')
+
+# 計算各組別頻率
+hist = [0]*10 # 頻率（元素個數10，初始化為0）
+for dat in dat['數學']:
+    if dat < 10:   hist[0] += 1
+    elif dat < 20:  hist[1] += 1
+    elif dat < 30:  hist[2] += 1
+    elif dat < 40:  hist[3] += 1
+    elif dat < 50:  hist[4] += 1
+    elif dat < 60:  hist[5] += 1
+    elif dat < 70:  hist[6] += 1
+    elif dat < 80:  hist[7] += 1
+    elif dat < 90:  hist[8] += 1
+    elif dat <= 100:  hist[9] += 1 
+print('頻率:', hist)
+
+# 頻率分布圖
+x = list(range(1,11))  # x軸的值
+labels = ['0~','10~','20~','30~','40~','50~','60~','70~','80~','90~']  # x軸的刻度標籤
+plt.bar(x, hist, tick_label=labels, width=1)# 描繪長條圖
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+print('描繪頻率分布圖')
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# 讀入資料
+dat = pd.read_csv('onigiri.csv', encoding='UTF-8')
+
+# 頻率分布圖
+plt.hist(dat['店長'], bins=range(0, 200, 10), alpha=0.5)
+plt.hist(dat['太郎'], bins=range(0, 200, 10), alpha=0.5) 
+plt.show()
+
+print('計算平均數、變異數、標準差')
+
+
+import numpy as np
+print('店長---------')
+print('平均:', np.mean(dat['店長']))
+print('變異數:', np.var(dat['店長']))
+print('標準差:', np.std(dat['店長']))
+
+print('太郎---------')
+print('平均:', np.mean(dat['太郎']))
+print('變異數:', np.var(dat['太郎']))
+print('標準差:', np.std(dat['太郎']))
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('繪製散布圖')
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# 讀入資料
+dat = pd.read_csv('score.csv', encoding='UTF-8')
+
+# 散布圖
+plt.scatter(dat['數學'], dat['理科'])
+plt.axis('equal')
+plt.show()
+
+#共變異數與相關係數
+import numpy as np
+correlation = np.corrcoef(dat['數學'], dat['理科']) # 計算相關係數
+correlation[0,1]  # 顯示在畫面
+
+
+
+print('------------------------------------------------------------')	#60個
+print('繪製移動平均圖')
+
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+# 讀入氣溫資料
+dat= pd.read_csv('temperature.csv', encoding='UTF-8')
+
+n = len(dat)       # 資料筆數
+x = range(1, n+1)  #  x軸的值（1～資料筆數）
+
+# 氣溫
+y = dat['平均氣溫']  # y軸的值（平均氣溫）
+plt.plot(x, y)       # 繪圖
+
+# 區間大小:9 的移動平均
+v = np.ones(9)/9.0
+y2 = np.convolve(y, v, mode='same')  # 計算移動平均
+plt.plot(x[4:n-4], y2[4:n-4])        # 繪圖
+plt.show()
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print('計算迴歸直線')
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 資料
+x = np.array([23,24,28,24,27,21,18,25,28,20])  # 氣溫
+y = np.array([37,22,62,32,74,16,10,69,83,7])   # 果汁販賣數量
+
+# 迴歸直線
+a, b = np.polyfit(x, y, 1)
+y2 = a * x + b
+print('斜率: {0}, 截距:{1}'.format(a, b))
+
+# 繪圖
+plt.scatter(x, y)  # 散布圖
+plt.plot(x, y2)    # 迴歸直線
+plt.show()
+
+# 預測在氣溫33度時的販賣數量
+# a * 33 + b
+
+
+print('------------------------------------------------------------')	#60個
+print('亂數')
+
+import random
+rand = [] 
+for i in range(10):
+    rand.append(random.randint(0,100)) # 產生0～100的亂數
+print(rand)
+
+print('------------------------------------------------------------')	#60個
+
+
+a = 4     # 亂數的初始值
+b = 7
+c = 9
+rn = 1    
+rand = []
+for i in range(20):
+    rn = ((a * rn + b) % c)    # 產生亂數
+    rand.append(rn)
+print(rand)
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print('畫出年收入圖')
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# 讀入salary.csv
+dat = pd.read_csv('salary.csv', encoding='UTF-8')
+
+# 設定資料
+x = dat['年齡']
+y = dat['年收入']
+
+# 繪圖
+plt.plot(x, y)
+plt.grid(color='0.8')
+plt.show()
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print('描繪差額圖')
+# 資料筆數
+cnt = len(dat)
+
+# 取差額
+diff_y = []
+for i in range(0, cnt-1):
+    diff_y.append(y[i+1] - y[i])
+
+# 繪圖
+plt.plot(x[1:], diff_y)
+plt.grid(color='0.8')
+plt.show()
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print('畫出函數與導函數的圖')
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# x的值
+x = np.arange(-10, 10, 0.1)
+
+# 原來的函數 f(x) = x**3 + 3x**2 + 3x + 1
+y = x**3 + 3*x**2 + 3*x + 1
+plt.plot(x, y)
+plt.grid(color='0.8')
+plt.show()
+
+# 導函數 f'(x) = 3x**2 + 6x + 3
+y2 = 3*x**2 + 6*x + 3
+plt.plot(x, y2)
+plt.grid(color='0.8')
+plt.show()
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+#SciPy.integrate.quad()函式
+
+
+from scipy import integrate
+
+# f(x) = x**2 + 2x + 5
+def func(x):
+    return x**2 + 2*x + 5
+
+print(integrate.quad(func, -3, 3))
+
+#(47.99999999999999, 5.32907051820075e-13)
+
+
+
+print('------------------------------------------------------------')	#60個
+print('描繪切線')
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# x的值
+x = np.arange(-1, 1, 0.1)
+
+# 原來的函數
+y = 2*x*x + 3
+
+# 切線
+a = 4*0.25            # 導函數 f'(x)= 4x（斜率）
+b = 3.125 - a * 0.25  # 截距 b = y - ax
+y2 = a*x + b          # 切線的式子
+
+# 繪圖
+plt.plot(x, y)   # 原來的函數
+plt.plot(x, y2)  # 切線
+plt.grid(color='0.8')
+plt.show()
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print('萃取圖片的輪廓')
+
+import matplotlib.pyplot as plt
+from PIL import Image
+
+# 讀入圖片
+src_img = Image.open('sample.png')
+plt.imshow(src_img)
+plt.show()
+
+# 圖片大小
+width, height = src_img.size
+
+# 輸出用
+dst_img = Image.new('RGB', (width, height))
+
+# 彩色 -> 單色
+src_img = src_img.convert("L")
+
+# 萃取輪廓
+for y in range(0, height-1):
+    for x in range(0, width-1):
+        # 計算亮度差
+        diff_x = src_img.getpixel((x+1, y)) - src_img.getpixel((x, y))
+        diff_y = src_img.getpixel((x, y+1)) - src_img.getpixel((x, y))
+        diff = diff_x + diff_y
+        
+        # 輸出
+        if diff >= 20:
+            dst_img.putpixel((x, y), (255, 255, 255))
+        else:
+            dst_img.putpixel((x, y), (0, 0, 0))
+plt.imshow(dst_img)
+plt.show()
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+from scipy import integrate
+import math
+
+# 計算半徑為r的圓的圓周
+def calc_area(r):
+    return 2 * math.pi * r
+
+# 半徑2～5範圍的圓周總和
+s = integrate.quad(calc_area, 2, 5)
+print(s)
+
+# 廁所衛生紙長度
+x = s[0] / 0.011
+print(x)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+

@@ -1269,6 +1269,147 @@ print('------------------------------------------------------------')	#60個
 
 
 
+print('------------------------------------------------------------')	#60個
+
+rad = np.arctan2(3, 4)  # 求角度（radian）
+th = np.degrees(rad)    # 轉成度數
+
+import math
+rad = math.atan2(3, 2)  # 計算角度（radian）
+th = math.degrees(rad)  # 轉成度數
+th
+
+import math
+10 * math.cos(math.radians(60)) 
+
+
+
+# 計算角度
+rad = math.acos(3/5)
+deg = math.degrees(rad)
+print(deg)
+
+print('------------------------------------------------------------')	#60個
+
+
+### 列表3-8　繪製半徑300的圓（y >= 0）
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 圓的方程式
+r = 300  # 半徑
+x = np.arange(-r, r+1)    # x: -300～300
+y = np.sqrt(r**2 - x**2)  # y
+
+# 繪圖
+plt.plot(x, y)
+plt.axis('equal') 
+plt.grid(color='0.8')
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+dist = 384400                   # 地球到月亮距離
+speed = 1225                    # 馬赫速度每小時1225公里
+total_hours = dist // speed     # 計算小時數
+days, hours = divmod(total_hours, 24)   # 商和餘數
+print("總供需要天數")
+print(days)
+print("小時數")
+print(hours)
+
+
+print('------------------------------------------------------------')	#60個
+
+x1 = 97
+x2 = chr(x1)      
+print(x2)             # 輸出數值97的字元
+x3 = ord(x2)
+print(x3)             # 輸出字元x3的Unicode碼值
+x4 = '魁'
+print(ord(x4))        # 輸出字元'魁'的Unicode碼值
+
+print('------------------------------------------------------------')	#60個
+
+print(" 姓名    國文    英文    總分")
+print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
+print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
+print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
+print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
+
+x = 100
+print("x=/%-6d/" % x)
+y = 10.5
+print("y=/%-6.2f/" % y)
+s = "Deep"
+print("s=/%-6s/" % s)
+
+x = 100
+print("x=/%6d/" % x)
+y = 10.5
+print("y=/%6.2f/" % y)
+s = "Deep"
+print("s=/%6s/" % s)
+print("以下是保留格數空間不足的實例")
+print("x=/%2d/" % x)
+print("y=/%3.2f/" % y)
+print("s=/%2s/" % s)
+
+
+title = "南極旅遊講座"
+print("/{0:*^20s}/".format(title))
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import math
+
+r = 6371                        # 地球半徑
+x1, y1 = 22.2838, 114.1731      # 香港紅磡車站經緯度
+x2, y2 = 25.0452, 121.5168      # 台北車站經緯度
+
+d = 6371*math.acos(math.sin(math.radians(x1))*math.sin(math.radians(x2))+
+                   math.cos(math.radians(x1))*math.cos(math.radians(x2))*
+                   math.cos(math.radians(y1-y2)))
+
+print("distance = ", d)
+
+
+print('------------------------------------------------------------')	#60個
+
+#貸款試算
+loan = 10000 #貸款金額
+year = 1 #年限
+rate = 10 #年利率%
+month_rate = rate / (12*100)             # 改成百分比以及月利率
+
+# 計算每月還款金額
+molecules = loan * month_rate
+denominator = 1 - (1 / (1 + month_rate) ** (year * 12))
+monthly_pay = molecules / denominator    # 每月還款金額
+total_pay = monthly_pay * year * 12      # 總共還款金額
+
+print("每月還款金額 %d" % int(monthly_pay))
+print("總共還款金額 %d" % int(total_pay))
+
+
+
+print('------------------------------------------------------------')	#60個
+
+numberStr = input("請輸入數值公式 : ")
+number = eval(numberStr)
+print("計算結果 : %5.2f" % number)
+
+
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
