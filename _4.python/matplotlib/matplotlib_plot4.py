@@ -1,13 +1,3 @@
-'''
-import matplotlib.pyplot as plt
-import numpy as np
-
-#由標準常態分布隨機取100個數。
-
-plt.plot(np.random.randn(100))
-plt.show()
-'''
-
 import matplotlib.pyplot as plt
 
 #新增圖表
