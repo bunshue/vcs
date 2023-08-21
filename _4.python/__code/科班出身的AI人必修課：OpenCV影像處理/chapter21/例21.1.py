@@ -1,21 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Sep 11 21:05:58 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Sep 11 21:04:51 2018
-
-@author: Administrator
-"""
-
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+
+
 #第1步 准备数据
 # A等级的笔试、面试分数
 a = np.random.randint(95,100, (20, 2)).astype(np.float32)
