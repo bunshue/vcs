@@ -2,6 +2,7 @@ import os
 import sys
 import time
 import random
+import numpy as np
 
 print('------------------------------------------------------------')	#60個
 
@@ -464,62 +465,6 @@ fp.close()
 print('------------------------------------------------------------')	#60個
 
 
-from random import randint
-
-# Return a random color string in the form #RRGGBB
-def getRandomColor():
-    color = "#"
-    for j in range(6):
-        color += toHexChar(randint(0, 15)) # Add a random digit
-    return color
-
-# Convert an integer to a single hex digit in a character 
-def toHexChar(hexValue):
-    if 0 <= hexValue <= 9:
-        return chr(hexValue + ord('0'))
-    else:  # 10 <= hexValue <= 15
-        return chr(hexValue - 10 + ord('A'))
-
-class Ball:
-    def __init__(self):
-        self.x = 0 # Starting center position
-        self.y = 0 
-        self.dx = 2 # Move right by default
-        self.dy = 2 # Move down by default
-        self.radius = 3 # The radius is fixed
-        self.color = getRandomColor() # Get random color
-
-ballList = [] # Create a list for balls
-
-length = len(ballList)
-print('length = ', length)
-
-for i in range(6):
-    ballList.append(Ball())
-
-length = len(ballList)
-print('length = ', length)
-
-for i in range(length):
-    print('第', i, '個 : ', ballList[i].color)
-
-'''
-for ball in ballList:
-    print(ball.color)
-'''
-
-b = ballList.pop()
-print(b.color)
-
-b = ballList.pop()
-print(b.color)
-
-b = ballList.pop()
-print(b.color)
-
-print('------------------------------------------------------------')	#60個
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -923,24 +868,6 @@ print('------------------------------------------------------------')	#60個
 
 
 
-from random import randint, random, getrandbits
-
-def getrandbytes(size):
-    return getrandbits(8 * size).to_bytes(size, 'little')
-
-
-ccc = b'111' + getrandbytes(100)
-
-print(type(ccc))
-print(ccc)
-
-datacount = randint(16, 64) * 1024 + randint(1, 1024)
-
-ddd = random() * randint(-1000, 1000)
-print(ddd)
-
-
-
     
     
 
@@ -1158,7 +1085,7 @@ def disk_usage(path):
     return _ntuple_diskusage(total, used, free)
 
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'C:/_git/vcs/_1.data/______test_files1'
 ret = disk_usage(foldername)
 print(ret)
 
@@ -1290,28 +1217,6 @@ deg = math.degrees(rad)
 print(deg)
 
 print('------------------------------------------------------------')	#60個
-
-
-### 列表3-8　繪製半徑300的圓（y >= 0）
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-# 圓的方程式
-r = 300  # 半徑
-x = np.arange(-r, r+1)    # x: -300～300
-y = np.sqrt(r**2 - x**2)  # y
-
-# 繪圖
-plt.plot(x, y)
-plt.axis('equal') 
-plt.grid(color='0.8')
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 
 dist = 384400                   # 地球到月亮距離

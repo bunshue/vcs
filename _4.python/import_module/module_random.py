@@ -2,29 +2,45 @@
 
 import random
 
-number1 = random.randint(0, 10)  #0~10之間的整數 包含 0 10
+print('--- random.randint ---------------------------------------------------------')	#60個
 
-R = random.randint(0, 1023) # 產生 0~1023 的亂數
-G = random.randint(0, 1023) # 產生 0~1023 的亂數
-B = random.randint(0, 1023) # 產生 0~1023 的亂數
-print(R,G,B)
+
+R = random.randint(0, 255) #產生 0~255 之間的亂數整數 包含邊界
+G = random.randint(0, 255) #產生 0~255 之間的亂數整數 包含邊界
+B = random.randint(0, 255) #產生 0~255 之間的亂數整數 包含邊界
+print("取得亂數: ", R, G, B)
+print("取得亂數1: {} 亂數2: {} 亂數3: {}".format(R, G, B))
+print("取得亂數: (%d, %d, %d)" % (R, G, B))
 
 maxNo=10
 result = random.randrange(1, 10)
 print("取得亂數 : " + str(result))
 
-x = random.randint(1,6)
-print("取得亂數 : " + str(x))
-while x != 6:
-  x = random.randint(1,6)
-  print("取得亂數 : " + str(x))
+while True:
+    x = random.randint(1,6)
+    print(x)
+    if x == 6:
+        break
 
-no1 = random.randint(1,6)   # 1~6
-no2 = random.randint(1,6)   # 1~6
-no3 = random.randint(1,6)   # 1~6
+num = random.randint(1,6)
+print("你擲的骰子點數為：" + str(num))
 
-print("亂數1：{}\n亂數2：{}\n亂數3：{}".format(no1, no2, no3))
-print("取得亂數(%d, %d, %d)" % (no1, no2, no3))
+print("1到6選一個")
+for count in range(10):
+    print(random.randint(1, 6))
+
+
+
+print('--- random.choice ---------------------------------------------------------')	#60個
+
+for i in range(10):
+    timeout = random.choice(range(80,180))
+    print('timeout', timeout)
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 pretty_note = '♫♪♬'
 pretty_text = ''
@@ -35,6 +51,46 @@ for i in string_message:
     pretty_text += random.choice(pretty_note)
     
 print(pretty_text)
+
+
+
+def randomAnimal():
+    nouns = ["lion", "mouse", "cat", "dog"]
+    noun = random.choice(nouns)     #在名詞字串中隨機選取一個字串
+    return noun
+
+for count in range(10):
+    print(randomAnimal())
+
+
+print("任選一個")
+for count in range(10):
+    print(random.choice(['a', 'b', 'c']))
+
+
+#values = [1,2,3,4,5,6]
+values = ['alpha','bravo','charlie','delta','echo','foxtrot']
+
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+
+
+
+first_names = ['Bob', 'Maria', 'Alex', 'James', 'Susan', 'Henry', 'Lisa', 'Anna', 'Lisa']
+last_names = ['Smith', 'Brown', 'Wilson', 'Thomson', 'Cook', 'Taylor', 'Walker', 'Clark']
+
+for i in range(10):
+    first = random.choice(first_names)
+    last = random.choice(last_names)
+    print(first, last)
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -54,30 +110,18 @@ for i in range(4):
   sentence = "david " + verb + " " + noun
   print(sentence)
 
-while True:
-    x = random.randint(1,6)
-    print(x)
-    if x == 6:
-        break
 
 print('------------------------------------------------------------')	#60個
 
-import random as r
 
-while True:
-    inkey = input("按任意鍵再按[ENTER]鍵擲骰子，直接按[ENTER]鍵結束:")
-    if len(inkey) > 0:
-        num = r.randint(1,6)
-        print("你擲的骰子點數為：" + str(num))
-    else:  
-        print("遊戲結束！")
-        break
+
 
 print('------------------------------------------------------------')	#60個
 
-import random as r
 
-list1 = r.sample(range(1,50), 7)
+print('--- random.sample ---------------------------------------------------------')	#60個
+
+list1 = random.sample(range(1,50), 7)
 special = list1.pop()
 list1.sort()
 print("本期大樂透中獎號碼為：", end="")
@@ -87,6 +131,10 @@ for i in range(0,6):
 print("本期大樂透特別號為：" + str(special))
 
 print('------------------------------------------------------------')	#60個
+
+
+print('--- random.shuffle ---------------------------------------------------------')	#60個
+
 
 print("亂數分配工作")
 member = ["花媽", "花橘子", "花柚子", "花爸"]
@@ -104,73 +152,11 @@ for count in range(20):
     shape = random.randrange(3, 8)      #3~7之間的整數
     print(count, x, y, length, shape)
 
-def randomAnimal():
-    nouns = ["lion", "mouse", "cat", "dog"]
-    noun = random.choice(nouns)     #在名詞字串中隨機選取一個字串
-    return noun
+print('------------------------------------------------------------')	#60個
 
-for count in range(10):
-    print(randomAnimal())
 
 print('------------------------------------------------------------')	#60個
 
-from random import randint
-print("1到6選一個")
-for count in range(10):
-    print(randint(1, 6))
-
-print('------------------------------------------------------------')	#60個
-
-import random as R
-print("1到6選一個")
-for count in range(10):
-    print(R.randint(1, 6))
-
-print("任選一個")
-for count in range(10):
-    print(random.choice(['a', 'b', 'c']))
-
-print('------------------------------------------------------------')	#60個
-
-#values = [1,2,3,4,5,6]
-values = ['alpha','bravo','charlie','delta','echo','foxtrot']
-
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-
-print("猜數字遊戲")
-'''
-game_count = 0
-all_counts = []
-while True:
-  game_count += 1 
-  guess_count = 0
-  answer = random.randint(0,99)
-  while True:
-    guess = int(input("請猜一個數字(0-99)："))
-    guess_count += 1
-    if guess == answer:
-      print("恭禧你，猜中了")
-      print("你總共猜了" + str(guess_count) + "次")
-      all_counts.append(guess_count)
-      break;
-    elif guess > answer:
-      print("你猜的數字太大了")
-    else:
-      print("你猜的數字太小了")
-  onemore = input("還要再玩一次嗎(Y/N)？")
-  if onemore != 'Y' and onemore != 'y':
-    print("歡迎下次再來玩！")
-    print("您的成績如下：")
-    print(all_counts)
-    print("平均猜中次數" + str(sum(all_counts)/float(len(all_counts))))
-    break;
-'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -197,7 +183,6 @@ print('------------------------------------------------------------')	#60個
 
 import pandas as pd
 import numpy as np
-import random
 
 my_array = np.arange(10)  # [0 1 2 3 4]
 
@@ -230,13 +215,6 @@ index.sort()
 
 print('------------------------------------------------------------')	#60個
 
-for i in range(10):
-    timeout = random.choice(range(80,180))
-    print('timeout', timeout)
-
-print('------------------------------------------------------------')	#60個
-
-import random
 import time
 
 n = 10
@@ -253,7 +231,6 @@ print(lst)
 print('------------------------------------------------------------')	#60個
 
 
-import random
 s = ''
 for i in range(0, 10):
     s += random.choice('<>=^')
@@ -267,37 +244,21 @@ print(s)
 
 print('------------------------------------------------------------')	#60個
 
-import time
 
 randseed = int(time.time())
 random.seed(randseed)
 
 
-
 print('------------------------------------------------------------')	#60個
-
-import random
 
 tttt = hex(random.getrandbits(64))  # 64 bits randomness
 print(tttt)
 
 
-
 print('------------------------------------------------------------')	#60個
-
-import random
-
-first_names = ['Bob', 'Maria', 'Alex', 'James', 'Susan', 'Henry', 'Lisa', 'Anna', 'Lisa']
-last_names = ['Smith', 'Brown', 'Wilson', 'Thomson', 'Cook', 'Taylor', 'Walker', 'Clark']
-
-for i in range(10):
-    first = random.choice(first_names)
-    last = random.choice(last_names)
-    print(first, last)
 
     
 print('------------------------------------------------------------')	#60個
-import random
 
 data = [random.uniform(-2, 9) for _ in range(10)]
 
@@ -305,9 +266,6 @@ print(len(data))
 print(type(data))
 print(data)
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -318,4 +276,37 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
+
+print("猜數字遊戲")
+'''
+game_count = 0
+all_counts = []
+while True:
+  game_count += 1 
+  guess_count = 0
+  answer = random.randint(0,99)
+  while True:
+    guess = int(input("請猜一個數字(0-99)："))
+    guess_count += 1
+    if guess == answer:
+      print("恭禧你，猜中了")
+      print("你總共猜了" + str(guess_count) + "次")
+      all_counts.append(guess_count)
+      break;
+    elif guess > answer:
+      print("你猜的數字太大了")
+    else:
+      print("你猜的數字太小了")
+  onemore = input("還要再玩一次嗎(Y/N)？")
+  if onemore != 'Y' and onemore != 'y':
+    print("歡迎下次再來玩！")
+    print("您的成績如下：")
+    print(all_counts)
+    print("平均猜中次數" + str(sum(all_counts)/float(len(all_counts))))
+    break;
+'''
+
+
+
+print('------------------------------------------------------------')	#60個
 

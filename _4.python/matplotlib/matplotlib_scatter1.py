@@ -1,19 +1,20 @@
 # scatter 集合
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-
 import matplotlib.pyplot as plt
 from numpy.random import rand
 import numpy as np
 
-#          編號                  圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'scatter 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+#          編號                  圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'scatter 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)
@@ -164,8 +165,7 @@ ylabel("Tonnage (BOM)")
 grid(True, ls='-', c='#a0a0a0')
 
 #存圖命令
-savefig("Weight Growth of RN First Rate Line-of-Battle Ships 1630-1875.svg")
-
+#savefig("Weight Growth of RN First Rate Line-of-Battle Ships 1630-1875.svg")
 
 
 #第四張圖
@@ -179,10 +179,22 @@ plt.scatter(speed, dist)
 #第五張圖
 plt.subplot(235)
 
+x = np.linspace(0, 2 * np.pi, 50)
+y = np.sin(x)
+plt.scatter(x, y)
 
 
 #第六張圖
 plt.subplot(236)
+
+
+
+x = np.random.rand(1000)
+y = np.random.rand(1000)
+size = np.random.rand(1000) * 50
+color = np.random.rand(1000)
+plt.scatter(x, y, size, color)
+plt.colorbar()
 
 
 

@@ -21,52 +21,7 @@ plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, fac
 #第一張圖
 plt.subplot(231)
 
-x = np.linspace(0, 6.28, 10)
-y = np.sin(x / 2)
 
-dx = 0.3
-#連線
-plt.plot(x + dx * 0, y, color = 'red')
-
-#linestyle 虛線樣式
-plt.plot(x + dx * 1, y, color = 'red', linestyle = "--")
-
-#linestyle 虛點樣式
-plt.plot(x + dx * 2, y, color = 'red', linestyle = "-.")
-
-#linestyle 虛點樣式「:」
-plt.plot(x + dx * 3, y, color = 'red', linestyle = ":")
-
-#marker 點「.」標記
-#因為需要展示出效果，因此把 linestyle 設為實線，linewidth 為 2.0，markersize 設為 8
-plt.plot(x + dx * 4, y, color = 'red', linestyle = "-", linewidth = "2", markersize = "8", marker = ".")
-
-#marker 圓「o」標記
-plt.plot(x + dx * 5, y, color = 'red', linestyle = "-", linewidth = "2", markersize = "8", marker = "o")
-
-#marker 星「*」標記
-plt.plot(x + dx * 6, y, color = 'red', linestyle = "-", linewidth = "2", markersize = "8", marker = "*")
-
-#marker 矩形「s」標記
-plt.plot(x + dx * 7, y, color = 'red', linestyle = "-", linewidth = "2", markersize = "8", marker = "s")
-
-plt.plot(x + dx * 8, y, color = 'red', linestyle = "-", linewidth = "2", markersize = "8", marker = ".", label = "Test")
-
-# 繪製折線圖，顏色「紅色」，線條樣式「-」，線條寬度「2」，標記大小「16」，標記樣式「.」，圖例名稱「Plot 1」
-plt.plot(x + dx * 9, y, color = 'red', linestyle = "-", linewidth = "2", markersize = "8", marker = ".", label = "Plot 1")
-
-# 繪製折線圖，顏色「藍色」，線條樣式「-」，線條寬度「2」，標記大小「16」，標記樣式「.」，圖例名稱「Plot 2」
-plt.plot(x + dx * 9, y, color = 'blue', linestyle = "-", linewidth = "2", markersize = "8", marker = ".", label = "Plot 2")
-
-plt.xlabel('x label', fontsize = "10") # 設定 x 軸標題內容及大小
-plt.ylabel('y label', fontsize = "10") # 設定 y 軸標題內容及大小
-plt.title('Plot title', fontsize = "18") # 設定圖表標題內容及大小
-
-#設定 x, y 軸座標範圍
-#plt.xlim(0, 30) # 設定 x 軸座標範圍
-#plt.ylim(0, 50) # 設定 y 軸座標範圍
-
-plt.legend()
 
 
 #第二張圖
@@ -206,6 +161,8 @@ plt.tick_params(axis = 'both', labelsize = 16, color = 'red')#xy軸多加tick
 
 plt.show()
 
+
+
 print('------------------------------------------------------------')	#60個
 
 # plot 集合
@@ -339,54 +296,6 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 # plot 集合
-
-#          編號                          圖像大小[英吋]          解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 4 測試畫點畫線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-x = np.linspace(0, 6.28, 20)
-y = np.sin(x)
-
-#第一張圖
-plt.subplot(231)
-#plt.subplot(2, 3, 1)   same
-#plt.title('231')   same
-
-plt.title(label = '231')
-plt.plot(x, y, 'ro-')
-
-#第二張圖
-plt.subplot(232)
-
-plt.title(label = '232')
-plt.plot(x, y, 'g.-')
-
-#第三張圖
-plt.subplot(233)
-
-plt.title(label = '233')
-plt.plot(x, y, 'b:o')
-
-#第四張圖
-plt.subplot(234)
-
-plt.title(label = '234')
-plt.plot(x, y, 'y--o')
-
-#第五張圖
-plt.subplot(235)
-
-plt.title(label = '235')
-plt.plot(x, y, 'm.-')
-
-#第六張圖
-plt.subplot(236)
-
-plt.title(label = '236')
-plt.plot(x, y, 'c.-')
-#plt.axes([0.2, 0.2, 0.4, 0.4]) #設定顯示位置
-
-plt.show()
-
 
 #          編號                                     圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'plot 集合 5 不使用subplot畫多圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)

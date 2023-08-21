@@ -2,105 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-print('------------------------------------------------------------')	#60個
-
-'''
-normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-
-#盒鬚圖（Box plot）
-#plt.boxplot(normal_samples)
-
-
-plt.hist(normal_samples)
-plt.show()
-'''
-
-
-#plot + bar
-
-#import matplotlib.gridspec as gridspec
-
-
-x = np.linspace(0, 6.28, 10)
-y = np.sin(x * 2)
-y2 = np.sin(x * 2) * np.sin(x * 2) *10
-
-fig = plt.figure(figsize=(12, 8))	#圖像大小[英吋]
-#gs = gridspec.GridSpec(4, 1, figure=fig)
-ax = fig.add_subplot()
-
-ax.plot(x, y, marker="", alpha=0.8)
-
-ax.grid(20)
-axx = ax.twinx()
-axx.bar(
-	x, y2,
-	alpha=0.2,
-	label="hold_volume",
-	color="pink",
-)
-
-plt.show()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-'''
-
-
-
-
-plt.rcParams['savefig.facecolor'] = "0.8"
-
-arr = np.arange(100).reshape((10, 10))
-
-plt.close('all')
-fig = plt.figure(figsize=(5, 4))	#圖像大小[英吋]
-
-ax = plt.subplot()
-im = ax.imshow(arr, interpolation="none")
-
-plt.tight_layout()
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-plt.close('all')
-arr = np.arange(100).reshape((10, 10))
-fig = plt.figure(figsize=(4, 4))	#圖像大小[英吋]
-im = plt.imshow(arr, interpolation="none")
-
-plt.colorbar(im)
-
-plt.tight_layout()
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-from mpl_toolkits.axes_grid1 import make_axes_locatable
-
-plt.close('all')
-arr = np.arange(100).reshape((10, 10))
-fig = plt.figure(figsize=(4, 4))	#圖像大小[英吋]
-im = plt.imshow(arr, interpolation="none")
-
-divider = make_axes_locatable(plt.gca())
-cax = divider.append_axes("right", "5%", pad="3%")
-plt.colorbar(im, cax=cax)
-
-plt.tight_layout()
-
-plt.show()
-
 #foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 foldername = 'C:/_git/vcs/_1.data/______test_files1'
 
-print('------------------------------------------------------------')	#60個
 
+'''
 import glob,cv2
 
 files = glob.glob(foldername + "/*.jpg")  #建立測試資料
@@ -134,38 +40,11 @@ plt.show()
 '''
 
 
-print('------------------------------------------------------------')	#60個
 
-
-#描點畫圓
-import matplotlib.pyplot as plt
-import numpy as np
-
-# 角度
-th = np.arange(0, 360)
-
-# 圓周上的點P座標 
-x = np.cos(np.radians(th))
-y = np.sin(np.radians(th))
-
-# 繪圖
-plt.plot(x, y)
-plt.axis('equal')
-plt.grid(color='0.8')
-plt.show()
 
 
 print('------------------------------------------------------------')	#60個
 
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-cosinus = np.cos(x)
-plt.plot(x, sinus, x, cosinus)
-plt.show()
 
 
 

@@ -42,58 +42,24 @@ for cnt in range(3):
 #第二張圖
 plt.subplot(232)
 
-plt.plot(np.random.randn(100))
-
 
 #第三張圖
 plt.subplot(233)
 
-speed = [4, 4, 7, 7, 8, 9, 10, 10, 10, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 16, 16, 17, 17, 17, 18, 18, 18, 18, 19, 19, 19, 20, 20, 20, 20, 20, 22, 23, 24, 24, 24, 24, 25]
-dist = [2, 10, 4, 22, 16, 10, 18, 26, 34, 17, 28, 14, 20, 24, 28, 26, 34, 34, 46, 26, 36, 60, 80, 20, 26, 54, 32, 40, 32, 40, 50, 42, 56, 76, 84, 36, 46, 68, 32, 48, 52, 56, 64, 66, 54, 70, 92, 93, 120, 85]
-
-plt.plot(speed, dist)
 
 
 #第四張圖
 plt.subplot(234)
 
-pi = 3.14159
-r = 3
-t = np.linspace(-1 * pi, 1 * pi, 50)
-
-x = r * np.cos(t)
-y = r * np.sin(t)
-
-
-r = 3 * (1 - np.sin(t))
-x = r * np.cos(t)
-y = r * np.sin(t)
-
-plt.plot(x, y, lw=3)
-
-r = 3 * (1 - np.sin(t))
-x = r * np.cos(t)
-y = r * np.sin(t)
 
 #第五張圖
 plt.subplot(235)
 
-x = np.linspace(-5, 5, 200)
-siny = np.sin(x)
-
-y = siny + np.random.rand(1, len(siny)) * 1.5 #加入雜訊的點集
-y = y.tolist()[0]
-
-plt.plot(x, siny, c = 'r', label = 'sin(x)', linewidth = 1)
-plt.plot(x, y, c = 'g', label = 'sin(x)', linewidth = 1)
-
-plt.xlabel('x')
-plt.ylabel('sin(x)')
-plt.title('')
-plt.legend()
 
 #第六張圖
 plt.subplot(236)
+
+
 
 plt.show()
 

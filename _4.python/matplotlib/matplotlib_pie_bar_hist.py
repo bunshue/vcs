@@ -141,6 +141,9 @@ plt.ylabel("零用金數目")
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+
+
 # hist 集合
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
@@ -193,6 +196,7 @@ plt.subplot(236)
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 
 # 派圖 集合
@@ -302,8 +306,6 @@ indexes = np.arange(len(values))
 plt.bar(indexes, values, width = 0.5)
 plt.xticks(indexes, labels)
 
-
-
 #第六張圖
 plt.subplot(236)
 
@@ -320,10 +322,150 @@ plt.title("零用金統計")
 plt.xlabel("年齡")
 plt.ylabel("零用金數目")
 
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = '新進1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+
+
+labels = ["Python","C++","Java","JS","C","C#"]
+index = np.arange(len(labels))
+ratings = [5.16, 5.73, 14.99, 3.17, 11.86, 4.45]
+change = [1.12, 0.3, -1.69, 0.29, 3.41, -0.45]
+
+
+plt.bar(index, ratings)
+plt.xticks(index, labels)
+plt.ylabel("使用率")
+plt.title("程式語言的使用率") 
+
+#第二張圖
+plt.subplot(232)
+
+
+plt.barh(index, ratings)
+plt.yticks(index, labels)
+plt.xlabel("使用率")
+plt.title("程式語言的使用率") 
+
+
+
+
+#第三張圖
+plt.subplot(233)
+
+
+index = np.arange(len(labels)*2)
+
+plt.bar(index[0::2], ratings, label="rating")
+plt.bar(index[1::2], change, label="change",
+        color="r")
+plt.legend()
+plt.xticks(index[0::2], labels)
+plt.ylabel("使用率")
+plt.title("程式語言的使用率") 
+
+
+
+#第四張圖
+plt.subplot(234)
+
+
+
+x = [21,42,23,4,5,26,77,88,9,10,31,32,33,
+     34,35,36,37,18,49,50,100]
+num_bins = 5
+n, bins, patches = plt.hist(x, num_bins)
+print(n)
+print(bins)
+
+
+
+#第五張圖
+plt.subplot(235)
+
+
+x = np.random.randn(1000)
+num_bins = 50
+plt.hist(x, num_bins)
+
+
+
+#第六張圖
+plt.subplot(236)
+
+
+labels = ["Python","C++","Java","JS","C","C#"]
+ratings = [5, 6, 15, 3, 12, 4]
+
+plt.pie(ratings, labels=labels)
+plt.title("程式語言的使用率") 
+plt.axis("equal")
+
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 
+
+
+
+print('------------------------------------------------------------')	#60個
+
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = '新進2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+patches, texts = plt.pie(ratings, labels=labels)
+plt.legend(patches, labels, loc="best")
+plt.title("程式語言的使用率") 
+plt.axis("equal")
+
+
+
+#第二張圖
+plt.subplot(232)
+
+
+
+
+
+#第三張圖
+plt.subplot(233)
+
+
+
+
+
+#第四張圖
+plt.subplot(234)
+
+
+
+
+
+#第五張圖
+plt.subplot(235)
+
+
+
+#第六張圖
+plt.subplot(236)
+
+
+
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 

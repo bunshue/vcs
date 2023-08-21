@@ -37,21 +37,6 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-#連接2點的直線
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-# 資料
-x = np.arange(1, 5.1, 0.1)
-y = 1/2*x + (1/2)
-
-# 繪圖
-plt.scatter(x, y)
-plt.grid(color='0.8')
-plt.show()
-
-
 print('------------------------------------------------------------')	#60個
 '''
 
@@ -70,8 +55,9 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 import pandas as pd
 
-# 讀入score.csv
-dat = pd.read_csv('score.csv', encoding='UTF-8')
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/vcs_ReadWrite_CSV_score.csv'
+
+dat = pd.read_csv(filename, encoding='UTF-8')
 print(dat.head())
 
 print('------------------------------------------------------------')	#60個
@@ -81,8 +67,9 @@ print('------------------------------------------------------------')	#60個
 import pandas as pd
 import numpy as np
 
-# 讀入score.csv
-dat = pd.read_csv('score.csv', encoding='UTF-8')
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/vcs_ReadWrite_CSV_score.csv'
+
+dat = pd.read_csv(filename, encoding='UTF-8')
 
 # 平均數、中位數
 print('平均數', np.mean(dat['數學']))
@@ -102,8 +89,9 @@ print('畫出頻率分布圖')
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# 讀入score.csv
-dat = pd.read_csv('score.csv', encoding='UTF-8')
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/vcs_ReadWrite_CSV_score.csv'
+
+dat = pd.read_csv(filename, encoding='UTF-8')
 
 # 計算各組別頻率
 hist = [0]*10 # 頻率（元素個數10，初始化為0）
@@ -159,73 +147,17 @@ print('標準差:', np.std(dat['太郎']))
 
 print('------------------------------------------------------------')	#60個
 
-print('繪製散布圖')
-import matplotlib.pyplot as plt
-import pandas as pd
-
-# 讀入資料
-dat = pd.read_csv('score.csv', encoding='UTF-8')
-
-# 散布圖
-plt.scatter(dat['數學'], dat['理科'])
-plt.axis('equal')
-plt.show()
-
-#共變異數與相關係數
-import numpy as np
-correlation = np.corrcoef(dat['數學'], dat['理科']) # 計算相關係數
-correlation[0,1]  # 顯示在畫面
-
-
-
-print('------------------------------------------------------------')	#60個
-print('繪製移動平均圖')
-
-import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
-
-# 讀入氣溫資料
-dat= pd.read_csv('temperature.csv', encoding='UTF-8')
-
-n = len(dat)       # 資料筆數
-x = range(1, n+1)  #  x軸的值（1～資料筆數）
-
-# 氣溫
-y = dat['平均氣溫']  # y軸的值（平均氣溫）
-plt.plot(x, y)       # 繪圖
-
-# 區間大小:9 的移動平均
-v = np.ones(9)/9.0
-y2 = np.convolve(y, v, mode='same')  # 計算移動平均
-plt.plot(x[4:n-4], y2[4:n-4])        # 繪圖
-plt.show()
 
 
 
 
 print('------------------------------------------------------------')	#60個
-print('計算迴歸直線')
 
-import matplotlib.pyplot as plt
-import numpy as np
 
-# 資料
-x = np.array([23,24,28,24,27,21,18,25,28,20])  # 氣溫
-y = np.array([37,22,62,32,74,16,10,69,83,7])   # 果汁販賣數量
 
-# 迴歸直線
-a, b = np.polyfit(x, y, 1)
-y2 = a * x + b
-print('斜率: {0}, 截距:{1}'.format(a, b))
 
-# 繪圖
-plt.scatter(x, y)  # 散布圖
-plt.plot(x, y2)    # 迴歸直線
-plt.show()
+print('------------------------------------------------------------')	#60個
 
-# 預測在氣溫33度時的販賣數量
-# a * 33 + b
 
 
 print('------------------------------------------------------------')	#60個
