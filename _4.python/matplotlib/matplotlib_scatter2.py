@@ -101,7 +101,11 @@ plt.axis('equal')
 #第五張圖
 plt.subplot(235)
 
+# Generate 100 random data points along 3 dimensions
+x, y, scale = np.random.randn(3, 100)
 
+# Map each onto a scatterplot we'll create with Matplotlib
+plt.scatter(x=x, y=y, c=scale, s=np.abs(scale)*500)
 
 #第六張圖
 plt.subplot(236)
