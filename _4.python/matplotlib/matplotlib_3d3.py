@@ -4,7 +4,7 @@ from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 
 print('------------------------------------------------------------')	#60個
-
+'''
 fig = plt.figure()
 
 #ax = fig.gca(projection='3d') old
@@ -20,10 +20,12 @@ fig.colorbar(surf, shrink = 0.5, aspect = 5)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+#3D 畫圖
 
 from mpl_toolkits.mplot3d import Axes3D
 
 fig = plt.figure()
+
 π = np.pi
 θ = np.linspace(-5*π, 5*π, 200)
 
@@ -35,6 +37,98 @@ z = θ/(5*π)
 ax = fig.add_axes(Axes3D(fig))
 plt.plot(x, y, z)
 
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+#scatter
+
+fig = plt.figure()
+
+x = np.random.randn(100)
+y = np.random.randn(100)
+z = np.random.randn(100)
+
+#ax = fig.gca(projection='3d') old
+ax = fig.add_axes(Axes3D(fig))
+ax.scatter(x, y, z, c='r')
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+#曲面
+
+fig = plt.figure()
+
+x = y  = np.linspace(-3, 3, 300)
+X, Y = np.meshgrid(x, y)
+
+Z = np.sin(np.sqrt(X**2 + Y**2))
+
+#ax = fig.gca(projection='3d') old
+ax = fig.add_axes(Axes3D(fig))
+ax.plot_surface(X, Y, Z)
+plt.show()
+
+plt.contour(X, Y, Z)
+
+plt.show()
+
+plt.contourf(X, Y, Z)
+plt.show()
+'''
+print('------------------------------------------------------------')	#60個
+
+fig = plt.figure()
+
+x = np.linspace(0, 5, 10)
+y = np.linspace(0, 5, 10)
+X, Y = np.meshgrid(x, y)
+
+Z = 2*X + Y
+#ax = fig.gca(projection='3d') old
+ax = fig.add_axes(Axes3D(fig))
+ax.scatter(X, Y, Z+0.7*np.random.randn(10,10))
+ax.plot_surface(X, Y, Z, alpha=0.3)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+#contour
+
+np.random.randint(0,3,10)
+x = np.array([1,2,3,4])
+y = np.array([5,6,7,8])
+X, Y = np.meshgrid(x, y)
+plt.scatter(X.ravel(), Y.ravel(), 
+            c = [0, 1, 2, 1,
+                1, 2, 1, 1,
+                0, 1, 1, 0,
+                0, 0, 2, 1], cmap="Paired")
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+Z = np.random.randint(0, 3, (4,4))
+plt.contour(X, Y, Z)
+
+plt.show()
+
+
+plt.contourf(X, Y, Z)
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+for i in range(4):
+    plt.subplot(2, 2, i+1)
+    Z = np.random.randint(0, 3, (4, 4))
+    plt.contour(X, Y, Z, cmap="Paired")
+    plt.scatter(X.ravel(), Y.ravel(), c=Z.ravel(),
+                s = 20,
+                cmap="Paired")
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -157,6 +251,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 fig = plt.figure()
+
 #ax = fig.gca(projection='3d') old
 ax = fig.add_axes(Axes3D(fig))
 
@@ -295,7 +390,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 #matplotlib.use("Agg")
+
 fig = plt.figure()
+
 ax = Axes3D(fig)
 # X, Y value
 X = np.arange(-4, 4, 0.25)
@@ -318,7 +415,4 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 
-
-
-#plt.show()
 

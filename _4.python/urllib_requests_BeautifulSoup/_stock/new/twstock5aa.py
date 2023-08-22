@@ -20,7 +20,7 @@ plt.grid('k:', alpha=0.5)
 plt.ylim(88,93)
 plt.yticks([88,89,90,91,92,93])
 plt.rcParams["font.sans-serif"] = "mingliu"
-#plt.rcParams["font.sans-serif"] = "SimHei" 
+#plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 plt.rcParams["axes.unicode_minus"] = False
 
 plt.show() 

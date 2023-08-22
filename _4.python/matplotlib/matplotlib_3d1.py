@@ -8,7 +8,7 @@ https://officeguide.cc/python-matplotlib-three-dimensional-plotting-tutorial-exa
 
 # 3D plot 集合
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np

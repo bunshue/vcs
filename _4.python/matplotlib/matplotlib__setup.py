@@ -9,7 +9,7 @@ import numpy as np
 import math
 import matplotlib
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
@@ -21,10 +21,14 @@ print('------------------------------------------------------------')	#60個
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'plot 集合 1 函數曲線', figsize = (10, 8), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-offset = 10
+offset = 0.3
 
-x = np.linspace(-10, 10, 21)
-y00 = x ** 2
+#x = np.linspace(-10, 10, 21)
+#y00 = x ** 2
+
+x = np.linspace(-2*np.pi, 2*np.pi, 41)
+y00 = np.cos(x)
+
 y01 = y00 + offset * 1
 y02 = y00 + offset * 2
 y03 = y00 + offset * 3
@@ -47,12 +51,18 @@ y19 = y00 + offset * 19
 y20 = y00 + offset * 20
 
 
-plt.plot(x, y01, "r-o")
+plt.plot(x, y01, "r-o", lw = 5)
 plt.plot(x, y02, "g--")
 plt.plot(x, y03, "b:o")
 plt.plot(x, y04, "g--s")
 plt.plot(x, y05, 'g.-')
 plt.plot(x, y06, 'y--o')
+#plt.plot(x, y07, 'y--o')
+plt.plot(x, y07, c = '#00a676', lw = 5)
+#plt.plot(x, y08, marker='o')
+plt.plot(x, y08, lw=3, marker='o', ms=10)
+plt.plot(x, y09, lw=3, marker='o', ms=10, markevery=4)   #隔 4 個畫一個 marker
+
 
 #連線
 plt.plot(x, y10, color = 'red')
@@ -100,6 +110,10 @@ plt.title('Plot title', fontsize = "18") # 設定圖表標題內容及大小
 plt.title('圖形標題')
 plt.xlabel('x軸標記')
 plt.ylabel('y軸標記')
+
+plt.xticks([0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi],
+          ['$0$', '$\pi/2$', '$-\pi$', '$-3\pi/2$', '$-2\pi$']);
+
 #plt.axis('equal')       #軸比例
 #xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
 #plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
@@ -109,10 +123,13 @@ plt.ylabel('y軸標記')
 #設定 x, y 軸座標範圍
 #plt.xlim(0, 30) # 設定 x 軸座標範圍
 #plt.ylim(0, 50) # 設定 y 軸座標範圍
+#邊界的設定
+#plt.xlim(-6,6)
+#plt.ylim(-1.2,1.2)
 
 #plt.legend()
 
-print(plt.axis())
+#print(plt.axis())
 
 
 #plt.grid(True)  #顯示格線

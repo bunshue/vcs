@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 # imshow 集合
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 filename = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 
 import matplotlib.pyplot as plt

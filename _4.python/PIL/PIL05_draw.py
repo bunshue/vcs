@@ -2,13 +2,13 @@ from PIL import Image, ImageDraw, ImageFont
 
 import matplotlib.pyplot as plt
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 font_size=30
 
 mesg = 'this is a lion mouse'
 
-font = ImageFont.truetype(selected_font, font_size)
+font = ImageFont.truetype(font_filename, font_size)
 font_size = font.getsize(mesg)
 print(font_size)
 
@@ -36,7 +36,7 @@ plt.show()
 from PIL import Image, ImageDraw, ImageFont
 
 msg = 'lion-mouse'
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 font_size = 30; #文字大小
 font_r = 255;   #紅色值
@@ -47,7 +47,7 @@ fill = (font_r, font_g, font_b)
 
 im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
-font = ImageFont.truetype(selected_font,font_size)
+font = ImageFont.truetype(font_filename,font_size)
 fn_w, fn_h = dw0.textsize(msg, font=font)
 
 print(fn_w)
@@ -88,7 +88,7 @@ print('新檔存圖, 已寫入檔案：'+filename+'.png')
 import sys, os, glob
 from PIL import Image, ImageDraw, ImageFont
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
@@ -107,7 +107,7 @@ print("在圖上作畫")
 
 dw = ImageDraw.Draw(im)
 
-font = ImageFont.truetype(selected_font, 80)
+font = ImageFont.truetype(font_filename, 80)
 fn_w, fn_h = dw.textsize(text_msg, font=font)
 
 x = w/2-fn_w/2
@@ -130,7 +130,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/pil_test03.png'
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 #要做浮水印的文字
 msg = "lion-mouse"
@@ -143,7 +143,7 @@ im_w, im_h = im.size
 
 im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
-font = ImageFont.truetype(selected_font, font_size)
+font = ImageFont.truetype(font_filename, font_size)
 fn_w, fn_h = dw0.textsize(msg, font=font)
 im = Image.new('RGBA', (fn_w, fn_h), (255,0,0,0))
 dw = ImageDraw.Draw(im)
@@ -167,7 +167,7 @@ print('新檔存圖, 已寫入檔案：' + filename2)
 
 from PIL import Image, ImageDraw, ImageFont
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
 filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
@@ -185,7 +185,7 @@ print("在圖上作畫")
 dw = ImageDraw.Draw(im)
 
 mesg = 'This is a lion-mouse'
-font = ImageFont.truetype(selected_font, 80)
+font = ImageFont.truetype(font_filename, 80)
 #fn_w, fn_h = dw.textsize(unicode(mesg, 'utf-8'), font=font)
 fn_w, fn_h = dw.textsize(str(mesg), font=font)
 

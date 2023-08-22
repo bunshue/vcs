@@ -40,7 +40,8 @@ else:
 #---------------------------------------------------------------------------------------
 
 '''
-import seaborn as sns
+import seaborn as sns #海生, 自動把圖畫得比較好看
+
 iris = sns.load_dataset('iris')
 iris.head()
 
@@ -57,7 +58,8 @@ print('cccc')
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
+
+import seaborn as sns #海生, 自動把圖畫得比較好看
 
 import plotly.offline
 import plotly.express as px

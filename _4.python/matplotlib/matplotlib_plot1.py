@@ -5,7 +5,7 @@ import numpy as np
 import math
 import matplotlib
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
@@ -73,7 +73,7 @@ plt.plot(t, c)
 #plt.fill(t, c)
 
 #plt.axis('off') #座標軸關閉
-myfont = matplotlib.font_manager.FontProperties(fname = selected_font)
+myfont = matplotlib.font_manager.FontProperties(fname = font_filename)
 plt.xlabel(u'橫座標', fontproperties = myfont)
 plt.ylabel(u'縱座標', fontproperties = myfont)
 #plt.title('三角函數')

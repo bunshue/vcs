@@ -12,7 +12,7 @@ for i in range(1,13):
 #    plt.subplot('62{}'.format(i))
 #    plt.xticks(rotation=45)
 #    plt.title(label="{}月".format(i))
-#    plt.rcParams["font.sans-serif"] = "SimHei" 
+#    plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 #    plt.rcParams["axes.unicode_minus"] = False
 #    plt.plot(listx, listy)
     print(len(slist))

@@ -13,6 +13,6 @@ plt.title("費用", fontsize=18)
 plt.xlabel("Age", fontsize=12)
 plt.ylabel("Money", fontsize=12)
 plt.tick_params(axis='y', color='red')
-plt.rcParams["font.sans-serif"] = "SimHei"
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 plt.rcParams["axes.unicode_minus"] = False
 plt.show()

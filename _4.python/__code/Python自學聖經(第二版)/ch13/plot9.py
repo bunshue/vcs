@@ -11,6 +11,6 @@ plt.title("銷售報表", fontsize=18)
 plt.xlabel("年度", fontsize=12)
 plt.ylabel("百萬", fontsize=12)
 # 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "mingliu" #也可設SimHei或DFKai-SB
+plt.rcParams["font.sans-serif"] = "mingliu" #也可設SimHei或DFKai-SB或Microsoft JhengHei
 plt.rcParams["axes.unicode_minus"] = False
 plt.show()
