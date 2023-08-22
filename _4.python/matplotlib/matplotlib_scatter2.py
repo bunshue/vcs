@@ -110,13 +110,15 @@ plt.scatter(x=x, y=y, c=scale, s=np.abs(scale)*500)
 #第六張圖
 plt.subplot(236)
 
+x = np.linspace(0, 10, 200)
+y1 = np.sin(x)
+y2 = np.sin(x) + 0.3*np.random.randn(200)
 
+plt.plot(x, y1, 'r')
 
+plt.scatter(x, y2)
 
 plt.show()
-
-
-
 
 print('------------------------------------------------------------')	#60個
 

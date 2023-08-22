@@ -1,1 +1,0 @@
-print('happy new year !!')
