@@ -201,7 +201,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 df = titanic.drop("Died", axis=1)
-print(df.corr())
+print('係數矩陣 :', df.corr())
 
 plt.show()
 

@@ -14,7 +14,7 @@ df = pd.read_csv(filename)
 df.plot(kind="scatter", 
         x="hours_used",
         y="work_performance")
-print(df.corr())
+print('係數矩陣 :', df.corr())
 
 print('------------------------------------------------------------')	#60個
 

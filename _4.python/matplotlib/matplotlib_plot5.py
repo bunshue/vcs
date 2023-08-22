@@ -153,4 +153,30 @@ plt.plot(x,y)
 plt.show()
 '''
 
+r = 3
+t = np.linspace(-2*np.pi, 2*np.pi, 200)
+x = r*np.cos(t)
+y = r*np.sin(t)
+
+
+ax = plt.gca()
+ax.set_aspect('equal')
+
+plt.plot(x, y, lw=3)
+
+plt.show()
+
+#-------------
+
+r = np.sin(5*t)
+x = r*np.cos(t)
+y = r*np.sin(t)
+
+ax = plt.gca()
+ax.set_aspect('equal')
+
+plt.plot(x,y,lw=3)
+plt.show()
+
+
 
