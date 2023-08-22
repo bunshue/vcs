@@ -1,14 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Sep 27 11:15:40 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社
-"""
-
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+
 #读取待处理图像
 img = cv2.imread('lena.bmp')
 #使用reshape将一个RGB像素点值的三个值作为一个单元
@@ -33,3 +26,4 @@ plt.axis('off')
 plt.subplot(122)
 plt.imshow(res2)
 plt.axis('off')
+

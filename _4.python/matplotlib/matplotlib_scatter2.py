@@ -158,7 +158,7 @@ print('繪製散布圖')
 import matplotlib.pyplot as plt
 import pandas as pd
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/vcs_ReadWrite_CSV_score.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
 
 # 讀入資料
 dat = pd.read_csv(filename, encoding='UTF-8')

@@ -1,7 +1,8 @@
-'''
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+'''
 print('------------------------------------------------------------')	#60個
 
 # 資料
@@ -38,14 +39,6 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-'''
-
-
-
-
-
-
-
 
 
 
@@ -55,7 +48,7 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 import pandas as pd
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/vcs_ReadWrite_CSV_score.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
 
 dat = pd.read_csv(filename, encoding='UTF-8')
 print(dat.head())
@@ -67,7 +60,7 @@ print('------------------------------------------------------------')	#60個
 import pandas as pd
 import numpy as np
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/vcs_ReadWrite_CSV_score.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
 
 dat = pd.read_csv(filename, encoding='UTF-8')
 
@@ -89,7 +82,7 @@ print('畫出頻率分布圖')
 import matplotlib.pyplot as plt
 import pandas as pd
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/vcs_ReadWrite_CSV_score.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
 
 dat = pd.read_csv(filename, encoding='UTF-8')
 
@@ -115,19 +108,24 @@ plt.bar(x, hist, tick_label=labels, width=1)# 描繪長條圖
 plt.show()
 
 
+'''
+
 print('------------------------------------------------------------')	#60個
 print('描繪頻率分布圖')
 
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# 讀入資料
-dat = pd.read_csv('onigiri.csv', encoding='UTF-8')
+# 讀入csv檔
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV7_onigiri.csv'
+dat = pd.read_csv(filename, encoding='UTF-8')
 
 # 頻率分布圖
 plt.hist(dat['店長'], bins=range(0, 200, 10), alpha=0.5)
 plt.hist(dat['太郎'], bins=range(0, 200, 10), alpha=0.5) 
 plt.show()
+
+
 
 print('計算平均數、變異數、標準差')
 
@@ -191,8 +189,9 @@ print('畫出年收入圖')
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# 讀入salary.csv
-dat = pd.read_csv('salary.csv', encoding='UTF-8')
+# 讀入csv檔
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV7_salary.csv'
+dat = pd.read_csv(filename, encoding='UTF-8')
 
 # 設定資料
 x = dat['年齡']
@@ -206,6 +205,8 @@ plt.show()
 
 
 
+import sys
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 print('描繪差額圖')
@@ -291,50 +292,13 @@ plt.plot(x, y2)  # 切線
 plt.grid(color='0.8')
 plt.show()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-print('萃取圖片的輪廓')
-
-import matplotlib.pyplot as plt
-from PIL import Image
-
-# 讀入圖片
-src_img = Image.open('sample.png')
-plt.imshow(src_img)
-plt.show()
-
-# 圖片大小
-width, height = src_img.size
-
-# 輸出用
-dst_img = Image.new('RGB', (width, height))
-
-# 彩色 -> 單色
-src_img = src_img.convert("L")
-
-# 萃取輪廓
-for y in range(0, height-1):
-    for x in range(0, width-1):
-        # 計算亮度差
-        diff_x = src_img.getpixel((x+1, y)) - src_img.getpixel((x, y))
-        diff_y = src_img.getpixel((x, y+1)) - src_img.getpixel((x, y))
-        diff = diff_x + diff_y
-        
-        # 輸出
-        if diff >= 20:
-            dst_img.putpixel((x, y), (255, 255, 255))
-        else:
-            dst_img.putpixel((x, y), (0, 0, 0))
-plt.imshow(dst_img)
-plt.show()
 
 
 
 
-print('------------------------------------------------------------')	#60個
+
+
 
 
 from scipy import integrate
@@ -355,21 +319,6 @@ print(x)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
 
 
 

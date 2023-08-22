@@ -64,7 +64,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/vcs_ReadWrite_CSV_temperature.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_temperature.csv'
 
 # 讀入氣溫資料
 dat= pd.read_csv(filename, encoding='UTF-8')

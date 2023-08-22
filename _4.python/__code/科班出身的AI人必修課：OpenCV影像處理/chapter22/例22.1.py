@@ -1,14 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Sep  4 12:53:00 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社
-"""
-
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
+
 #随机生成两组数组
 #生成60粒直径大小在[0,50]之间的xiaoMI
 xiaoMI = np.random.randint(0,50,60)
@@ -44,3 +37,5 @@ plt.plot(DM,'bs')
 plt.plot(centers[0],'rx')
 plt.plot(centers[1],'bx')
 plt.show()
+
+

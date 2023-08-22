@@ -1,14 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Sep  4 12:53:00 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社
-"""
-
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
+
 #随机生成两组数值
 #xiaomi组,长和宽的大小都在[0,20]
 xiaomi = np.random.randint(0,20,(30,2))
@@ -39,3 +32,4 @@ plt.scatter(center[0,0],center[0,1],s = 200,c = 'b', marker = 'o')
 plt.scatter(center[1,0],center[1,1],s = 200,c = 'b', marker = 's')
 plt.xlabel('Height'),plt.ylabel('Width')
 plt.show()
+
