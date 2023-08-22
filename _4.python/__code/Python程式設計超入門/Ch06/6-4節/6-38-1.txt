@@ -1,0 +1,5 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup("<html> Lollipop </html>", "html.parser")

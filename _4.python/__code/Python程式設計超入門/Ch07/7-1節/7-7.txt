@@ -1,0 +1,11 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+import tkinter as tk
+
+base = tk.Tk()
+
+button1 = tk.Button(base, text='push1', width=20).pack()
+
+button2 = tk.Button(base, text='push2', width=20).pack(side=tk.LEFT)
+
+button3 = tk.Button(base, text='push3', width=20).pack(side=tk.RIGHT)

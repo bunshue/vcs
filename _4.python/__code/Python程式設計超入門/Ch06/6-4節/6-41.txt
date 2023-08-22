@@ -1,0 +1,13 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+import requests
+
+from bs4 import BeautifulSoup
+
+yahoo_news_xml = requests.get('https://tw.news.yahoo.com/rss/technology')
+
+soup = BeautifulSoup(yahoo_news_xml.text, "html.parser")
+
+type(soup)
+
+soup.findAll('item')

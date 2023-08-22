@@ -1,0 +1,11 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+import tkinter as tk
+
+base = tk.Tk()
+
+string = tk.StringVar()
+
+entry = tk.Entry(base, textvariable=string).pack()
+
+label = tk.Label(base, textvariable=string).pack()

@@ -1,0 +1,18 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+
+pointcard = True
+
+count = 5
+
+(pointcard == True)
+
+(count == 5)
+
+((pointcard == True) and (count == 5))
+
+
+
+
+
+

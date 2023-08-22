@@ -1,0 +1,17 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+
+def washingMachine():
+
+	print('注水')
+
+	print('清洗')
+
+	print('洗淨洗劑')
+
+	print('脫水')
+
+	print('烘乾')
+
+
+washingMachine():	

@@ -1,0 +1,35 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+
+class animalBaseClass:
+
+	animallegs = 2
+
+	def walk(self):
+
+		print('走動')
+
+	def cry(self):
+
+		print('吼叫')
+
+
+
+class birdClass(animalBaseClass):
+
+	def __init__(self):
+
+		print('我是小鳥')
+
+	def cry(self):
+
+		print('啾啾')
+
+
+piyo_suke = birdClass()
+
+
+piyo_suke.walk()
+
+
+piyo_suke.cry()

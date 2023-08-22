@@ -1,0 +1,17 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+import tkinter as tk
+
+base = tk.Tk()
+
+button1 = tk.Button(base, text='push1')
+
+button2 = tk.Button(base, text='push2')
+
+button3 = tk.Button(base, text='push3')
+
+button1.grid(row=0, column=0)
+
+button2.grid(row=0, column=1)
+
+button3.grid(row=1, column=1)
