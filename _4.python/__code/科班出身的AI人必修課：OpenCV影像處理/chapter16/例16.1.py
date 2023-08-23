@@ -1,13 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Aug 24 11:20:17 2018
-@author:  天津职业技术师范大学  
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社
-"""
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+
 img = cv2.imread('computer.jpg')
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 edges = cv2.Canny(gray,50,150,apertureSize = 3)

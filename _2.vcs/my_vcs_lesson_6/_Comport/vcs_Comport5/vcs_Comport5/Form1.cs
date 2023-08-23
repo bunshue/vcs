@@ -483,6 +483,7 @@ namespace vcs_Comport5
 
             flag_comport_pc_ims_ok = false;
             show_backcolor();
+            groupBox_ae.BackColor = Color.Lime;
 
             connect_comport2(comboBox_comport2.Text);
         }
@@ -1482,16 +1483,61 @@ namespace vcs_Comport5
         private void bt_ae_off_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "自動曝光關閉\n";
-            //Send_IMS_Data(0xA0, 0x35, 0x03, 0x83);
-            Send_Data_PC_IMS(0xA0, 0x35, 0x03, 0x03);  //To manual mode
-
+            byte DongleAddr_h = 0x35;
+            byte DongleAddr_l = 0x03;
+            byte DongleData = 0x03;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+            groupBox_ae.BackColor = Color.Gray;
         }
 
         private void bt_ae_on_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "自動曝光開啟\n";
-            Send_Data_PC_IMS(0xA0, 0x35, 0x03, 0x00);  //To auto mode
-
+            byte DongleAddr_h = 0x35;
+            byte DongleAddr_l = 0x03;
+            byte DongleData = 0x00;
+            Send_IMS_Data(0xA0, DongleAddr_h, DongleAddr_l, DongleData);
+            groupBox_ae.BackColor = Color.Lime;
         }
+
+        public bool Send_IMS_Data(byte cc, byte xx, byte yy, byte zz)
+        {
+            byte[] data = new byte[5];
+
+            data[0] = cc;
+            data[1] = xx;
+            data[2] = yy;
+            data[3] = zz;
+            data[4] = CalcCheckSum(data, 4);
+
+            /*
+            if ((xx == 0x35) && (yy == 0x01))
+            {
+                richTextBox1.AppendText("xxxxxxxxxxx  [TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
+            }
+            if ((xx == 0x35) && (yy == 0x0A))
+            {
+                richTextBox1.AppendText("yyyyyyyyyyy  [TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
+            }
+            */
+
+            //richTextBox1.AppendText("[TX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + "\n");
+
+            //serialPort2.Write(data, 0, data.Length);
+            try
+            {   //可能會產生錯誤的程式區段
+                serialPort2.Write(data, 0, data.Length);
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                richTextBox1.Text += "xxx錯誤訊息e03 : " + ex.Message + "\n";
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+            }
+            return true;
+        }
+
     }
 }

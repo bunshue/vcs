@@ -10,26 +10,19 @@ print(type(x2), x2)
 x3 = np.arange(11)                  # 簡化語法產生陣列
 print(type(x3), x3)
 
-
 print('------------------------------------------------------------')	#60個
 
 #scatter 顏色
 #plt.scatter(xpt, ypt1, color=(0, 1, 0)) # 綠色
 #plt.scatter(xpt, ypt2)                  # 預設顏色
 
-
 print('------------------------------------------------------------')	#60個
-
 
 xpt = np.linspace(0, 5, 25)                        # 建立含500個元素的陣列
 ypt = 1 - 0.5*np.abs(xpt-2)                         # y陣列的變化
 lwidths = (1+xpt)**2                                # 寬度陣列  
 #plt.scatter(xpt, ypt, s=lwidths, color=(0, 1, 0))   # 綠色
 #plt.show()
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 #使用 fill_between
@@ -43,7 +36,6 @@ plt.plot(x, y)
 plt.fill_between(x, 0, y, color='green', alpha=0.1)
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 #使用 fill_between
 
@@ -56,48 +48,7 @@ plt.plot(x, y)
 plt.fill_between(x, -1, y, color='yellow', alpha=0.3)
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_26.py
-
-x = np.arange(50)
-y = x
-t = x
-plt.scatter(x, y, c=t, cmap='rainbow')
-plt.show()
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_27.py
-
-xpt = np.linspace(0, 5, 50)                            # 建立含500個元素的陣列
-ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
-  
-plt.scatter(xpt, ypt, s=50, c=ypt, cmap='hsv')          # 色彩隨y軸值變化
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_28.py
-
-xpt = np.linspace(0, 5, 500)                            # 建立含500個元素的陣列
-ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
- 
-plt.scatter(xpt, ypt, s=50, c=xpt, cmap='hsv')          # 色彩隨x軸值變化
-plt.show()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_29_1.py
-
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 
@@ -116,12 +67,7 @@ plt.colorbar()
 plt.title(r"建立$\sqrt{x^2 + y^2}$網格影像")
 plt.show()
 
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_29_2.py
-
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 plt.title('Latex使用')
@@ -130,8 +76,6 @@ plt.text(0.4, 0.3,r"$\sum_{n=1}^\infty\frac{-e^{2\pi}}{3^n}!$",fontsize=20)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_30.py
 
 from skimage import data
 
@@ -142,8 +86,6 @@ plt.show()
 
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_31.py
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 
@@ -167,8 +109,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_32.py
-
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 
 votes = [135, 412, 397]         # 得票數
@@ -187,9 +127,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_33.py
-
 from random import randint
+
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 
 def dice_generator(times, sides):
@@ -210,31 +149,8 @@ plt.ylabel('頻率')
 plt.title('測試 10000 次')
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch1\ch1_39.py
-
-img = np.array([[0, 1, 2, 3],
-                [4, 5, 6, 7],
-                [8, 9 , 10, 11],
-                [12, 13, 14, 15]])
-                
-plt.imshow(img, cmap='Blues')
-plt.colorbar()
-plt.show()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch6\ch6_1.py
-
-# ch6_1.py
 from sympy import Symbol, solve
                                 
 a = Symbol('a')                 # 定義公式中使用的變數
@@ -247,19 +163,8 @@ print(ans)
 print('a = {}'.format(ans[a]))
 print('b = {}'.format(ans[b]))
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch6\ch6_2.py
-
-# ch6_2.py
 import matplotlib.pyplot as plt
 from sympy import Symbol, solve
 import numpy as np
@@ -297,11 +202,9 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch6\ch6_3.py
-
-# ch6_3.py
 import matplotlib.pyplot as plt
-import numpy as np                            
+import numpy as np
+
 a = 0.03
 b = -18
 x = np.linspace(0, 2500, 250)
@@ -317,19 +220,11 @@ plt.ylabel("Profit")
 plt.grid()                              # 加格線
 plt.show()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch6\ch6_4.py
-
-# ch6_4.py
 import matplotlib.pyplot as plt
-import numpy as np                            
+import numpy as np
+
 a = 0.03
 b = -18
 x = np.linspace(0, 2500, 250)
@@ -345,17 +240,8 @@ plt.ylabel("Profit")
 plt.grid()                                          # 加格線
 plt.show()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch6\ch6_5.py
-
-# ch6_5.py
 import matplotlib.pyplot as plt
 from sympy import Symbol, solve
 import numpy as np
@@ -391,9 +277,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch6\ch6_6.py
-
-# ch6_6.py
 import matplotlib.pyplot as plt
 from sympy import Symbol, solve
 import numpy as np
@@ -421,17 +304,8 @@ plt.ylabel("Senior Salesman")
 plt.grid()                              # 加格線
 plt.show()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch6\ch6_7.py
-
-# ch6_7.py
 import matplotlib.pyplot as plt
 from sympy import Symbol, solve
 import numpy as np
@@ -461,17 +335,8 @@ plt.grid()                              # 加格線
 plt.axis('equal')                       # 讓x, y軸距長度一致
 plt.show()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch6\ch6_8.py
-
-# ch6_8.py
 import matplotlib.pyplot as plt
 from sympy import Symbol, solve
 import numpy as np
@@ -501,17 +366,8 @@ plt.grid()                              # 加格線
 plt.axis('equal')                       # 讓x, y軸距長度一致
 plt.show()
 
-
-
-
-
-
- 
-
 print('------------------------------------------------------------')	#60個
 
-
-# ch8_1.py
 import matplotlib.pyplot as plt
 from sympy import Symbol, solve
 import numpy as np
@@ -527,21 +383,8 @@ print('y = {}'.format(int(ans[y])))
 z = 50 * int(ans[x]) + 50 * int(ans[y])
 print('最大獲利 = {} 萬'.format(z))
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-
-# ch8_2.py
 import matplotlib.pyplot as plt
 import numpy as np
 

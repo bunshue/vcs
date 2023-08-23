@@ -1,6 +1,8 @@
 import numpy as np
 import cv2
 
+print('------------------------------------------------------------')	#60個
+
 cap = cv2.VideoCapture(0)
 while(cap.isOpened()):
     ret, frame = cap.read()
@@ -8,12 +10,11 @@ while(cap.isOpened()):
     c = cv2.waitKey(1)
     if c==27:   #ESC键
         break
+
 cap.release()
 cv2.destroyAllWindows()
 
-
-import numpy as np
-import cv2
+print('------------------------------------------------------------')	#60個
 
 cap = cv2.VideoCapture('viptrain.avi')
 while(cap.isOpened()):
@@ -22,12 +23,11 @@ while(cap.isOpened()):
     c = cv2.waitKey(1)
     if c==27:   #ESC键
         break
+
 cap.release()
 cv2.destroyAllWindows()
 
-
-import numpy as np
-import cv2
+print('------------------------------------------------------------')	#60個
 
 cap = cv2.VideoCapture(0)
 fourcc = -1
@@ -41,13 +41,12 @@ while(cap.isOpened()):
             break
     else:
         break
+
 cap.release()
 out.release()
 cv2.destroyAllWindows()
 
-
-import numpy as np
-import cv2
+print('------------------------------------------------------------')	#60個
 
 cap = cv2.VideoCapture('viptrain.avi')
 
@@ -61,8 +60,7 @@ while(cap.isOpened()):
 cap.release()
 cv2.destroyAllWindows()
 
-
-
+print('------------------------------------------------------------')	#60個
 
 
 

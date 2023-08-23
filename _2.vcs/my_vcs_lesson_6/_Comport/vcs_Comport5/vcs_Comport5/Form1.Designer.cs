@@ -387,6 +387,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lb_main_mesg0);
             this.Controls.Add(this.groupBox_comport2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "imsLink";
             this.Load += new System.EventHandler(this.Form1_Load);

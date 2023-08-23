@@ -1,4 +1,7 @@
 import cv2
+import numpy as np
+
+print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("lena.bmp",cv2.IMREAD_GRAYSCALE)
 r1=cv2.pyrDown(o)
@@ -12,24 +15,12 @@ cv2.imshow("original",o)
 cv2.imshow("r1",r1)
 cv2.imshow("r2",r2)
 cv2.imshow("r3",r3)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-
 print('------------------------------------------------------------')	#60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter11\例11.2.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Nov 10 23:04:35 2018
-
-@author: 李立宗  lilizong@gmail.com
-《OpenCV图穷匕见——Python实现》 电子工业出版社
-"""
-
-import cv2
 o=cv2.imread("lenas.bmp")
 r1=cv2.pyrUp(o)
 r2=cv2.pyrUp(r1)
@@ -42,22 +33,12 @@ cv2.imshow("original",o)
 cv2.imshow("r1",r1)
 cv2.imshow("r2",r2)
 cv2.imshow("r3",r3)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter11\例11.3.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 11 09:06:20 2018
-
-@author: 李立宗  lilizong@gmail.com
-《OpenCV图穷匕见——Python实现》 电子工业出版社
-"""
-
-import cv2
 o=cv2.imread("lena.bmp")
 down=cv2.pyrDown(o)
 up=cv2.pyrUp(down)
@@ -67,22 +48,12 @@ print("up.shape=",up.shape)
 cv2.imshow("original",o)
 cv2.imshow("up",up)
 cv2.imshow("difference",diff)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter11\例11.4.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 11 09:24:28 2018
-
-@author: 李立宗  lilizong@gmail.com
-《OpenCV图穷匕见——Python实现》 电子工业出版社
-"""
-
-import cv2
 o=cv2.imread("lena.bmp")
 up=cv2.pyrUp(o)
 down=cv2.pyrDown(up)
@@ -92,22 +63,12 @@ print("down.shape=",down.shape)
 cv2.imshow("original",o)
 cv2.imshow("down",down)
 cv2.imshow("difference",diff)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter11\例11.5.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 11 11:49:37 2018
-
-@author: 李立宗  lilizong@gmail.com
-《OpenCV图穷匕见——Python实现》 电子工业出版社
-"""
-
-import cv2
 O=cv2.imread("lena.bmp")
 G0=O
 G1=cv2.pyrDown(G0)
@@ -122,23 +83,12 @@ print("L2.shape=",L2.shape)
 cv2.imshow("L0",L0)
 cv2.imshow("L1",L1)
 cv2.imshow("L2",L2)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter11\例11.6.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 11 17:30:45 2018
-
-@author: 李立宗  lilizong@gmail.com
-《OpenCV图穷匕见——Python实现》 电子工业出版社
-"""
-
-import cv2
-import numpy as np
 O=cv2.imread("lena.bmp")
 G0=O
 G1=cv2.pyrDown(G0)
@@ -154,17 +104,6 @@ print("原始图像O与恢复图像RO差值的绝对值和：",np.sum(result))
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter11\例11.7.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Nov 11 20:47:52 2018
-
-@author: 李立宗  lilizong@gmail.com
-《OpenCV图穷匕见——Python实现》 电子工业出版社
-"""
-import cv2
-import numpy as np
 O=cv2.imread("lena.bmp")
 #=================生成高斯金字塔======================
 G0=O
@@ -196,6 +135,5 @@ print("G2.shape=",G2.shape)
 print("RG2.shape=",RG2.shape)
 result=RG2-G2  #将o和ro做减法
 print("原始图像G2与恢复图像RG2差值的绝对值和：",np.sum(abs(result)))
-
 
 print('------------------------------------------------------------')	#60個

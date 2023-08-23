@@ -1,6 +1,9 @@
-#输出边缘和结构信息
-
 import cv2
+import numpy as np
+
+print('------------------------------------------------------------')	#60個
+
+#输出边缘和结构信息
 
 image = cv2.imread('contours.bmp')  
 cv2.imshow("original", image)
@@ -13,15 +16,7 @@ cv2.imshow("result", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.2.py
-
-#输出边缘和结构信息
-
-import cv2
-import numpy as np
+print('------------------------------------------------------------')	#60個
 
 image = cv2.imread('contours.bmp')
 cv2.imshow("original", image)
@@ -42,11 +37,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.3.py
-
-import cv2
-import numpy as np
-
 image = cv2.imread('loc3.jpg')
 cv2.imshow("original", image)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -62,11 +52,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.4.py
-
-import cv2
-import numpy as np
 
 image = cv2.imread('moments.bmp')
 cv2.imshow("original", image) 
@@ -91,11 +76,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.5.py
-
-import cv2
-import numpy as np
 
 image = cv2.imread('contours.bmp')
 
@@ -123,12 +103,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.6.py
-
 #筛选出大于特定大小的轮廓
-
-import cv2
-import numpy as np
 
 image = cv2.imread('contours.bmp')
 
@@ -151,12 +126,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.7.py
-
 #筛选出大于特定大小的轮廓
-
-import cv2
-import numpy as np
 
 #--------------读取及显示原始图像--------------------
 image = cv2.imread('contours0.bmp')  
@@ -193,10 +163,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.8.py
-
-import cv2
-
 image = cv2.imread('cs1.bmp')  
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  
 HuM1=cv2.HuMoments(cv2.moments(gray)).flatten()
@@ -211,10 +177,6 @@ print("\nHu[0]-(nu02+nu20)=",
       HuM1[0]-(cv2.moments(gray)['nu20']+cv2.moments(gray)['nu02']))
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.9.py
-
-import cv2
 
 #----------------计算图像1的Hu矩-------------------
 image1 = cv2.imread('cs1.bmp')  
@@ -252,13 +214,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.10.py
-
-import cv2
-
 #--------------读取3幅原始图像--------------------
 image1 = cv2.imread('cs1.bmp')
 image2 = cv2.imread('cs2.bmp')
@@ -289,10 +244,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.11.py
-
-import cv2
-
 #---------------读取并显示原始图像------------------ 
 image = cv2.imread('cc.bmp')  
 #---------------提取图像轮廓------------------ 
@@ -312,11 +263,6 @@ print("\n顶点及长宽的元组（tuple）形式：")
 print("rect=",rect)
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.12.py
-
-import cv2
-import numpy as np
 
 #---------------读取并显示原始图像------------------
 image = cv2.imread('cc.bmp')  
@@ -340,10 +286,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.13.py
-
-import cv2
-
 #---------------读取并显示原始图像------------------ 
 image = cv2.imread('cc.bmp')
 cv2.imshow("original", image)
@@ -365,11 +307,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.14.py
-
-import cv2
-import numpy as np
-
 image = cv2.imread('cc.bmp')
 cv2.imshow("original", image)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -388,10 +325,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.15.py
-
-import cv2
-
 image = cv2.imread('cc.bmp')
 cv2.imshow("original", image)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -408,10 +341,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.16.py
-
-import cv2
-
 image = cv2.imread('cc.bmp')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
@@ -426,10 +355,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.17.py
-
-import cv2
 
 image = cv2.imread('cc.bmp')
 cv2.imshow("original", image)
@@ -448,10 +373,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.18.py
-
-import cv2
-
 image = cv2.imread('cc.bmp')
 cv2.imshow("original", image)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -468,14 +389,7 @@ cv2.imshow("result", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.19.py
-
-import cv2
 
 #----------------读取并显示原始图像-------------------------------
 image = cv2.imread('cc.bmp')
@@ -521,17 +435,10 @@ approx = cv2.approxPolyDP(contours[0],epsilon,True)
 adp=cv2.drawContours(adp,[approx],0,(0,0,255),2)
 cv2.imshow("result0.02",adp)
 
-#----------------等待释放窗口-------------------------------
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.20.py
-
-import cv2
 
 image = cv2.imread('contours.bmp')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -545,16 +452,6 @@ print("returnPoints为False时返回值hull的值：\n",hull2)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.21.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
 # --------------读取并绘制原始图像------------------
 o = cv2.imread('hand.bmp')  
 cv2.imshow("original",o)
@@ -570,21 +467,12 @@ hull = cv2.convexHull(contours[0])
 cv2.polylines(o, [hull], True, (0, 255, 0), 2)
 # --------------显示凸包------------------
 cv2.imshow("result",o)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.22.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 17:50:00 2018
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-
-import cv2
 #----------------原图--------------------------
 img = cv2.imread('hand.bmp')
 cv2.imshow('original',img)
@@ -607,24 +495,14 @@ for i in range(defects.shape[0]):
     far = tuple(cnt[f][0])
     cv2.line(img,start,end,[0,0,255],2)
     cv2.circle(img,far,5,[255,0,0],-1)
-#----------------显示结果、释放图像--------------------------
+#----------------显示结果--------------------------
 cv2.imshow('result',img)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.23.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 18:05:17 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-
-import cv2
 o = cv2.imread('hand.bmp')  
 cv2.imshow("original",o)
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
@@ -647,22 +525,12 @@ image2=cv2.drawContours(image2,[approx],0,(0,0,255),2)
 print("使用函数cv2.approxPolyDP()构造的多边形是否是凸包：",
       cv2.isContourConvex(approx))
 cv2.imshow("result2",image2)
-#------------释放窗口--------------------
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.24.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 18:24:31 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
 #----------------原始图像-------------------------
 o = cv2.imread('cs.bmp')
 cv2.imshow("original",o)
@@ -693,21 +561,12 @@ print("distC=",distC)
 #print(hull)   #测试边缘到底在哪里，然后再使用确定位置的
 #----------------显示-------------------------
 cv2.imshow("result",image)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.25.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 18:38:25 2018
-
-@author: 李立宗  lilizong@gmail.com
-"""
-
-import cv2
 #----------------原始图像-------------------------
 o = cv2.imread('cs.bmp')
 cv2.imshow("original",o)
@@ -738,21 +597,12 @@ print("distC=",distC)
 #print(hull)   #测试边缘到底在哪里，然后再使用确定位置的
 #----------------显示-------------------------
 cv2.imshow("result",image)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.26.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 15 17:33:20 2018
-
-@author: 李立宗  lilizong@gmail.com
-"""
-
-import cv2
 #-----------原始图像o1边缘--------------------
 o1 = cv2.imread('cs.bmp')
 cv2.imshow("original1",o1)
@@ -790,22 +640,12 @@ print("旋转缩放后距离d2=", d2)
 d3 = sd.computeDistance(cnt1,cnt3)
 print("不相似对象距离d3=", d3)
 #-----------显示距离--------------------
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.27.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 15 17:33:20 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-
-import cv2
 #-----------读取原始图像--------------------
 o1 = cv2.imread('cs.bmp')
 o2 = cv2.imread('cs3.bmp') 
@@ -844,21 +684,12 @@ print("旋转缩放后Hausdorff距离d2=", d2)
 d3 = hd.computeDistance(cnt1,cnt3)
 print("不相似对象Hausdorff距离d3=", d3)
 #-----------显示距离--------------------
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.28.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
 o = cv2.imread('cc.bmp')  
 cv2.imshow("original",o)
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
@@ -871,21 +702,12 @@ cv2.rectangle(o,(x,y),(x+w,y+h),(255,255,255),3)
 aspectRatio = float(w)/h
 print(aspectRatio)
 cv2.imshow("result",o)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.29.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
 o = cv2.imread('cc.bmp')  
 cv2.imshow("original",o)
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
@@ -901,24 +723,12 @@ cntArea=cv2.contourArea(contours[0])
 extend=float(cntArea)/rectArea
 print(extend)
 cv2.imshow("result",o)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.30.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
 o = cv2.imread('hand.bmp')  
 cv2.imshow("original",o)
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
@@ -932,22 +742,12 @@ cv2.polylines(o, [hull], True, (0, 255, 0), 2)
 solidity=float(cntArea)/hullArea
 print(solidity)
 cv2.imshow("result",o)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.31.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
-import numpy as np
 o = cv2.imread('cc.bmp')  
 cv2.imshow("original",o)
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
@@ -961,21 +761,12 @@ equiDiameter = np.sqrt(4*cntArea/np.pi)
 print(equiDiameter)
 cv2.circle(o,(100,100),int(equiDiameter/2),(0,0,255),3) #展示等直径大小的圆
 cv2.imshow("result",o)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.32.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
 o = cv2.imread('cc.bmp')
 cv2.imshow("original",o)  
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
@@ -994,23 +785,12 @@ print("(MA,ma)=(",MA,ma,")")
 print("angle=",angle)
 cv2.ellipse(o,ellipse,(0,0,255),2)
 cv2.imshow("result",o)
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.33.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 15 17:33:20 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-
-
-import numpy as np
 #------------生成一个都是0值的a-------------------
 a=np.zeros((5,5),dtype=np.uint8)
 #-------随机将其中10个位置上的数值设置为1------------
@@ -1030,17 +810,6 @@ print("a内非零值位置:\n",loc)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.34.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
-import numpy as np
 #-----------------读取原始图像----------------------
 o = cv2.imread('cc.bmp')  
 cv2.imshow("original",o)
@@ -1065,27 +834,12 @@ pixelpoints2 = np.transpose(np.nonzero(mask2))
 print("pixelpoints2.shape=",pixelpoints2.shape)
 print("pixelpoints2=\n",pixelpoints2)
 cv2.imshow("mask2",mask2)
-#-----------------释放窗口------------------------
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.35.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Nov 15 17:33:20 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-
-
-import cv2
-import numpy as np
 #------------生成一个都是0值的a-------------------
 a=np.zeros((5,5),dtype=np.uint8)
 #-------随机将其中10个位置上的数值设置为1------------
@@ -1105,16 +859,6 @@ print("a内非零值位置:\n",loc)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.36.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
-import numpy as np
 #-----------------读取原始图像----------------------
 o = cv2.imread('cc.bmp')  
 cv2.imshow("original",o)
@@ -1139,22 +883,12 @@ pixelpoints2 = cv2.findNonZero(mask2)
 print("pixelpoints2.shape=",pixelpoints2.shape)
 print("pixelpoints2=\n",pixelpoints2)
 cv2.imshow("mask2",mask2)
-#-----------------释放窗口------------------------
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.37.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
-import numpy as np
 o = cv2.imread('ct.png')  
 cv2.imshow("original",o)
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
@@ -1181,23 +915,12 @@ cv2.imshow("mask",loc)
 #显示灰度结果
 #loc=cv2.bitwise_and(gray,mask) 
 #cv2.imshow("mask",loc)
-#--------释放窗口-----------------
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.38.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
-import numpy as np
 #--------读取并显示原始图像-----------------
 o = cv2.imread('ct.png')  
 cv2.imshow("original",o)
@@ -1218,23 +941,12 @@ masko = np.zeros(o.shape,np.uint8)
 cv2.drawContours(masko,[cnt],-1,(255,255,255),-1)
 loc=cv2.bitwise_and(o,masko)
 cv2.imshow("mask",loc)
-#--------释放窗口-----------------
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\科班出身的AI人必修課：OpenCV影像處理\chapter12\例12.39.py
-
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov 14 11:59:57 2018
-
-@author: 李立宗  lilizong@gmail.com
-《opencv图穷匕见-python实现》 电子工业出版社 
-"""
-import cv2
-import numpy as np
 o = cv2.imread('cs.bmp')  
 #--------获取并绘制轮廓-----------------
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
@@ -1261,7 +973,7 @@ cv2.putText(o,'C',topmost, font, 1,(0,0,255),2)
 cv2.putText(o,'D',bottommost, font, 1,(0,0,255),2)
 #--------绘制图像----------------- 
 cv2.imshow("result",o)
-#--------释放窗口----------------- 
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
