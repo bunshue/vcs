@@ -131,7 +131,43 @@ for i in range(4):
                 cmap="Paired")
 plt.show()
 
+
 print('------------------------------------------------------------')	#60個
+
+x = np.array([1, 2, 3, 4])
+y = np.array([5, 6, 7, 8])
+
+X, Y = np.meshgrid(x, y)
+
+Z = np.random.randint(1, 3, (4, 4))
+
+
+Z = np.random.randint(1, 3, X.shape)    #same
+
+plt.contour(X, Y, Z)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+x = X.ravel()
+
+x.reshape(4,4)
+y = Y.ravel()
+
+z = Z.ravel()
+plt.contour(X, Y, Z)
+plt.scatter(x, y, c=z)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+plt.contourf(X, Y, Z)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
 
 #圓環與直線
 

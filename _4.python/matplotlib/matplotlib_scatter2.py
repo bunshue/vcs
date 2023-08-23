@@ -198,13 +198,23 @@ plt.grid(color='0.8')
 #第四張圖
 plt.subplot(234)
 
+x = np.random.randn(100)
+y = np.random.randn(100)
 
+plt.scatter(x, y, s=250)
 
-
-
+#畫不同顏色的scatter
+cl = np.random.randint(1, 4, 100)
+plt.scatter(x, y, s=100, c=cl, alpha=0.6, cmap="Paired")
 
 #第五張圖
 plt.subplot(235)
+
+x = np.linspace(-5, 5, 500)
+y = np.sinc(x)
+plt.plot(x,y)
+
+plt.scatter(x[y>0], y[y>0], c='r')
 
 
 

@@ -101,9 +101,10 @@ plt.plot(x, y20, color = 'blue', linestyle = "-", linewidth = "2", markersize = 
 
 
 '''
-plt.xlabel('x label', fontsize = "10") # 設定 x 軸標題內容及大小
-plt.ylabel('y label', fontsize = "10") # 設定 y 軸標題內容及大小
-plt.title('Plot title', fontsize = "18") # 設定圖表標題內容及大小
+plt.title('Plot title', fontsize = 18) # 設定圖表標題內容及大小
+plt.xlabel('x label', fontsize = 10) # 設定 x 軸標題內容及大小
+plt.ylabel('y label', fontsize = 10) # 設定 y 軸標題內容及大小
+
 '''
 
 #plt.title(label = '231')
@@ -118,7 +119,7 @@ plt.xticks([0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi],
 #xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
 #plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
 #plt.axis([0.5, 6.5, 15, 35])
-#plt.axes([0.2, 0.2, 0.4, 0.4]) #設定各軸顯示範圍
+#plt.axes([0.2, 0.2, 0.4, 0.4]) #設定各軸顯示範圍, 參數是串列
 
 #設定 x, y 軸座標範圍
 #plt.xlim(0, 30) # 設定 x 軸座標範圍
@@ -128,6 +129,20 @@ plt.xticks([0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi],
 #plt.ylim(-1.2,1.2)
 
 #plt.legend()
+plt.legend(loc='best')
+plt.legend()
+
+plt.legend(loc='upper right')
+
+'''
+plt.legend(loc=6)
+
+plt.legend(loc='upper left', bbox_to_anchor=(1,1))
+
+plt.legend(loc=6, bbox_to_anchor=(1,1))
+
+plt.tight_layout(pad=7)
+'''
 
 #print(plt.axis())
 
@@ -135,6 +150,7 @@ plt.xticks([0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi],
 #plt.grid(True)  #顯示格線
 plt.grid(color='0.8')   #顯示格線
 
+plt.text(0, 0, 'This is a lion-mouse')
 
 plt.show()
 

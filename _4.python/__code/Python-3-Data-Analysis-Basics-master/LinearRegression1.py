@@ -4,6 +4,13 @@ import pandas as pd
 
 from sklearn.linear_model import LinearRegression
 
+'''
+AI 三步驟
+
+    打造函數學習機
+    fit
+    predict
+'''
 
 print('------------------------------------------------------------')	#60個
 print('線性迴歸')
@@ -27,7 +34,7 @@ print('------------------------------------------------------------')	#60個
 #做線性迴歸
 #做線性迴歸有很多套件, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 
-regr = LinearRegression()
+regr = LinearRegression()   #函數學習機
 X = x.reshape(points, 1)
 
 regr.fit(X, y1)#學習
@@ -74,7 +81,7 @@ print(y_test)
 
 X_train = x_train.reshape(len(x_train), 1)
 
-regr = LinearRegression()
+regr = LinearRegression()   #函數學習機
 
 regr.fit(X_train, y_train)#學習
 
@@ -131,7 +138,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 #標準線性學
-regr_lin = LinearRegression()
+regr_lin = LinearRegression()   #函數學習機
 
 X = x.reshape(len(x), 1)
 
@@ -150,7 +157,7 @@ print('------------------------------------------------------------')	#60個
 
 X_poly = np.array([[k, k**2, k**3, k**4, k**5, k**6] for k in x])
 
-regr_poly = LinearRegression()
+regr_poly = LinearRegression()  #函數學習機
 
 regr_poly.fit(X_poly, y)#學習
 
@@ -176,7 +183,7 @@ X_rbf = np.array([[RBF(k, 0.5, sigma),
                   RBF(k, 3.5, sigma),
                   RBF(k, 4.5, sigma)] for k in x])
 
-regr_rbf = LinearRegression()
+regr_rbf = LinearRegression()   #函數學習機
 
 regr_rbf.fit(X_rbf, y)
 
@@ -207,7 +214,16 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 
+import seaborn as sns
 
+sns.set()
+
+#plt.plot(x_test, Ypred, 'r')
+#plt.plot(x, Y_poly, label='polynomial')
+plt.scatter(x, Y_poly)
+plt.plot(x, Y_poly, 'r')
+
+plt.show()
 
 '''
 #波士頓房價資料
