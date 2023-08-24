@@ -7,18 +7,21 @@ opencv + numpy製作資料
 import cv2
 import numpy as np
 
+import sys
 
-
+W = 300
+H = 300
 print('------------------------------------------------------------')	#60個
+print('numpy製作一個 %d X %d 的圖 黑色, 2維' % (W, H))
 
-img=np.zeros((200,200),dtype=np.uint8)    #預設為0, 黑色, 2維
+img = np.zeros((W, H), dtype = np.uint8)    #預設為0, 黑色, 2維
 
 print("img=\n",img)
 cv2.imshow("one",img)
 
-
-for i in range(50, 100):
-    for j in range(50, 100):
+print('中間一塊用填成白色')
+for i in range(100, 200):
+    for j in range(100, 200):
         img[i,j] = 255
 
 cv2.imshow("two",img)
@@ -31,21 +34,24 @@ print('------------------------------------------------------------')	#60個
 
 
 #-----------蓝色通道值--------------
-blue=np.zeros((300,300,3),dtype=np.uint8)   #預設為0, 黑色, 3維
+print('numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
+blue=np.zeros((W, H, 3),dtype=np.uint8)   #預設為0, 黑色, 3通道
 blue[:,:,0]=255     #第0通道, 藍色
 #print("blue=\n",blue)
 
 cv2.imshow("blue",blue)
 
 #-----------綠色通道值--------------
-green=np.zeros((300,300,3),dtype=np.uint8)  #預設為0, 黑色, 3維
+print('numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
+green=np.zeros((W, H, 3),dtype=np.uint8)  #預設為0, 黑色, 3通道
 green[:,:,1]=255     #第0通道, 綠色
 #print("green=\n",green)
 
 cv2.imshow("green",green)
 
 #-----------紅色通道值--------------
-red=np.zeros((300,300,3),dtype=np.uint8)    #預設為0, 黑色, 3維
+print('numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
+red=np.zeros((W, H, 3),dtype=np.uint8)    #預設為0, 黑色, 3通道
 red[:,:,2]=255     #第0通道, 紅色
 #print("red=\n",red)
 
@@ -58,11 +64,12 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=np.zeros((300,300,3),dtype=np.uint8)    #預設為0, 黑色, 3維
+print('numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
+img=np.zeros((W, H, 3),dtype=np.uint8)    #預設為0, 黑色, 3通道
 
-img[:,0:100,0]=255
-img[:,100:200,1]=255
-img[:,200:300,2]=255
+img[:,0:100,0]=255      #第0通道, 藍色通道
+img[:,100:200,1]=255    #第1通道, 綠色通道
+img[:,200:300,2]=255    #第2通道, 紅色通道
 
 print("img=\n",img)
 cv2.imshow("img",img)
@@ -70,7 +77,11 @@ cv2.imshow("img",img)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+sys.exit()
+
 print('------------------------------------------------------------')	#60個
+
+print(' ???? numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
 
 img=np.zeros((2,4,3),dtype=np.uint8)    #預設為0, 黑色, 3維
 print("img=\n",img)
@@ -85,6 +96,8 @@ print("修改后img\n",img)
 print("读取修改后像素点img[1,2,2]=",img[1,2,2])
 
 print('------------------------------------------------------------')	#60個
+
+sys.exit()
 
 
 img=np.random.randint(0,256,size=[2,4,3],dtype=np.uint8)
@@ -508,7 +521,7 @@ def Demo(event,x,y,flags,param):
         print("单击了中间键")
 #创建名称为Demo的响应（回调）函数OnMouseAction
 #将回调函数Demo与窗口“Demo19.9”建立连接
-img = np.ones((300,300,3),np.uint8)*255
+img = np.ones((W, H, 3),np.uint8)*255
 cv2.namedWindow('Demo19.9')
 cv2.setMouseCallback('Demo19.9',Demo)     
 cv2.imshow('Demo19.9',img)
@@ -634,7 +647,7 @@ if cv2.waitKey(0) == 27:
     cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-
+'''
 d=400
 global thickness
 thickness=-1
@@ -687,7 +700,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-
+'''
 
 
 print('------------------------------------------------------------')	#60個

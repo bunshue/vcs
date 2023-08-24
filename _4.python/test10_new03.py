@@ -3,13 +3,46 @@ import sys
 import time
 import random
 
-print('------------------------------------------------------------')	#60個
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+import matplotlib
 
 print('------------------------------------------------------------')	#60個
 
+print('------------------------------------------------------------')	#60個
 
+π = np.pi
+
+θ = np.linspace(0, 2*π, 500)
+
+
+r = 3
+x = r * np.cos(θ)
+y = r * np.sin(θ)
+
+#gca 的意思是 "Get Current Axes"。
+ax = plt.gca()
+ax.set_aspect('equal')
+
+plt.plot(x, y)
+
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+r = 1 - np.sin(θ)
+
+x = r * np.cos(θ)
+y = r * np.sin(θ)
+
+ax = plt.gca()
+ax.set_aspect('equal')
+
+plt.plot(x, y, 'r')
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
