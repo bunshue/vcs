@@ -1,8 +1,0 @@
-name: pandas-videos
-channels:
-  - defaults
-dependencies:
-  - pandas
-  - numpy
-  - matplotlib
-  - scikit-learn
