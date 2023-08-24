@@ -117,14 +117,28 @@ y_st = 100
 #size = str(W)+'x'+str(H)
 #size = str(W)+'x'+str(H)+'+'+str(x_st)+'+'+str(y_st)
 #window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+#window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
 #print('{0:d}x{1:d}+{2:d}+{3:d}'.format(W, H, x_st, y_st))
+
+#顯示在正中央
+screenWidth = window.winfo_screenwidth()    # 螢幕寬度
+screenHeight = window.winfo_screenheight()  # 螢幕高度
+W = 800                                     # 視窗寬
+H = 800                                     # 視窗高
+x_st = (screenWidth - W) / 2                # 視窗左上角x軸位置
+y_st = (screenHeight - H ) / 2              # 視窗左上角Y軸位置
+window.geometry("%dx%d+%d+%d" % (W, H, x_st, y_st))
 
 # 設定主視窗標題
 window.title('tk使用之範本')
 
 # 設定主視窗之背景色
 #window.configure(bg = "#7AFEC6")
+#window.configure(bg = '#00ff00')   # 視窗背景顏色
+#window.configure(bg = 'yellow')    # 視窗背景顏色
+
+icon_filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.ico'
+window.iconbitmap(icon_filename)   # 更改圖示
 
 x_st = 50
 y_st = 50
