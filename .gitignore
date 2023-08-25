@@ -15,6 +15,9 @@ _1.data/______test_files5/*.*
 _4.python/sqlite/ims_sql/QC_debug/*
 _4.python/sqlite/ims_sql/QC_debug/*.*
 
+# C 相關產出之檔案
+*.so
+
 #vcs 相關產出之檔案
 *.suo
 
@@ -33,9 +36,6 @@ __pycache__
 *.pyc
 *.pyo
 
-# C 相關產出之檔案
-*.so
-
 # Distribution / packaging
 .Python
 build/
@@ -44,7 +44,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+#lib/
 lib64/
 parts/
 sdist/
