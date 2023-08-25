@@ -1,54 +1,10 @@
+import sys
 
 print('------------------------------------------------------------')	#60個
 
 
-
-
-def greeting( ):
-    """我的第一個Python函數設計"""
-    print("Python歡迎你")
-    print("祝福學習順利")
-    print("謝謝")
-
-# 以下的程式碼也可稱主程式
-greeting( )
-greeting( )
-greeting( )
-greeting( )
-greeting( )
-
-
 print('------------------------------------------------------------')	#60個
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch11\ch11_2.py
-
-# ch11_2.py
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch11\ch11_3.py
-
-# ch11_3.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi,", name, "Good Morning!")

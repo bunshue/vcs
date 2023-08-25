@@ -97,7 +97,7 @@ print('------------------------------------------------------------')	#60個
 
 #用測試資料試試我們預測準不準
 
-X_test = x_test.reshape(len(x_test),1)
+X_test = x_test.reshape(len(x_test), 1)
 Y_test = regr.predict(X_test)
 mse = np.sum((Y_test-y_test)**2) / len(y_test)
 print('MSE =', mse)
@@ -105,6 +105,7 @@ plt.scatter(x_test, y_test, c='r', s = 100)
 plt.scatter(x_test, Y_test, c='g', s = 100)
 plt.scatter(x, y0, c='b', s = 100)
 
+print('------------------------------------------------------------')	#60個
 
 from sklearn.metrics import mean_squared_error, r2_score
 

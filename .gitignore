@@ -1,9 +1,39 @@
 # Byte-compiled / optimized / DLL files
+
+# git 要忽略的檔案
+
+.gitignore
+下載一次85分鐘20230503
+_4.python/sqlite/example.db
+_4.python/sqlite/ims_sql/匯出資料範例.csv
+
+_1.data/______test_files2/*.*
+_1.data/______test_files4/*
+_1.data/______test_files4/*.*
+_1.data/______test_files5/*
+_1.data/______test_files5/*.*
+_4.python/sqlite/ims_sql/QC_debug/*
+_4.python/sqlite/ims_sql/QC_debug/*.*
+
+#vcs 相關產出之檔案
+*.suo
+
+_2.vcs/*/*/*/bin/*
+_2.vcs/*/*/*/obj/*
+
+# Python 相關產出之檔案
 __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
+*.pyc
+__pycache__
+
+# python byte-code files
+*.pyc
+*.pyo
+
+# C 相關產出之檔案
 *.so
 
 # Distribution / packaging
@@ -20,6 +50,7 @@ parts/
 sdist/
 var/
 wheels/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -38,14 +69,17 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
+.nox/
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
+*.py,cover
 .hypothesis/
 .pytest_cache/
+cover/
 
 # Translations
 *.mo
@@ -55,6 +89,7 @@ coverage.xml
 *.log
 local_settings.py
 db.sqlite3
+db.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -67,16 +102,12 @@ instance/
 docs/_build/
 
 # PyBuilder
+.pybuilder/
 target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
 
 # celery beat schedule file
 celerybeat-schedule
+celerybeat.pid
 
 # SageMath parsed files
 *.sage.py
@@ -102,3 +133,16 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+

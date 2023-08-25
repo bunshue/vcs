@@ -1,7 +1,6 @@
 
 print('------------------------------------------------------------')	#60個
 
-# ch13_1.py
 def make_icecream(*toppings):
     # 列出製作冰淇淋的配料
     print("這個冰淇淋所加配料如下")
@@ -18,37 +17,24 @@ make_icecream('草莓醬')
 make_icecream('草莓醬', '葡萄乾', '巧克力碎片')
 make_drink('large', 'coke')
 
-
 print('------------------------------------------------------------')	#60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_2.py
-
-# ch13_2.py
 import makefood         # 導入模組makefood.py
 
 makefood.make_icecream('草莓醬')
 makefood.make_icecream('草莓醬', '葡萄乾', '巧克力碎片')
 makefood.make_drink('large', 'coke')
 
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_3.py
-
-# ch13_3.py
 from makefood import make_icecream  # 導入模組makefood.py的函數make_icecream
 
 make_icecream('草莓醬')
 make_icecream('草莓醬', '葡萄乾', '巧克力碎片')
 make_drink('large', 'coke')         # 因為沒有導入此函數所以會產生錯誤
 
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_4.py
-
-# ch13_4.py
 # 導入模組makefood.py的make_icecream和make_drink函數
 from makefood import make_icecream, make_drink  
 
@@ -56,46 +42,16 @@ make_icecream('草莓醬')
 make_icecream('草莓醬', '葡萄乾', '巧克力碎片')
 make_drink('large', 'coke')         
 
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_5.py
-
-# ch13_5.py
 from makefood import *      # 導入模組makefood.py所有函數
 
 make_icecream('草莓醬')
 make_icecream('草莓醬', '葡萄乾', '巧克力碎片')
 make_drink('large', 'coke')         
 
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_6.py
-
-# ch13_6.py
-import random                       # 導入模組random
-
-min, max = 1, 10
-ans = random.randint(min, max)      # 隨機數產生答案
-while True:
-    yourNum = int(input("請猜1-10之間數字: "))
-    if yourNum == ans:
-        print("恭喜!答對了")
-        break
-    elif yourNum < ans:
-        print("請猜大一些")
-    else:
-        print("請猜小一些")
-        
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_7.py
-
-# ch13_7.py
 import random                       # 導入模組random
 
 min, max = 1, 100                   # 隨機數最小與最大值設定
@@ -112,31 +68,15 @@ while True:
     else:                           # 隨機數在此區間回應玩家猜錯
         print("答錯了!請再試一次\n")
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_8.py
-
-# ch13_8.py
 import random
 
 for i in range(5):
     print(random.random())
     
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_9.py
-
-# ch13_9.py
 import random                               # 導入模組random
 
 for i in range(5):
@@ -144,45 +84,20 @@ for i in range(5):
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_10.py
-
-# ch13_10.py
 import random                       # 導入模組random
 
 fruits = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
 print(random.choice(fruits))
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_11.py
-
-# ch13_11.py
 import random                       # 導入模組random
 
 for i in range(10):
     print(random.choice([1,2,3,4,5,6]), end=",")
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_12.py
-
-# ch13_12.py
 import random                       # 導入模組random
 
 porker = ['2', '3', '4', '5', '6', '7', '8',
@@ -191,22 +106,8 @@ for i in range(3):
     random.shuffle(porker)              # 將次序打亂重新排列
     print(porker)
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_13.py
-
-# ch13_13.py
 import random                               # 導入模組random
 
 lotterys = random.sample(range(1,50), 7)    # 7組號碼
@@ -217,40 +118,15 @@ for lottery in sorted(lotterys):            # 排序列印大樂透號碼
     print(lottery, end=" ")
 print("\n特別號:%d" % specialNum)           # 列印特別號
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_14.py
-
-# ch13_14.py
 import random
 random.seed(5)
 for i in range(5):
     print(random.random())
     
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_15.py
-
-# ch13_15.py
 import random                       # 導入模組random
 import time                         # 導入模組time
 
@@ -269,44 +145,15 @@ while True:
     else:
         print("請猜小一些")
     yourNum = int(input("請猜1-10之間數字: "))
-        
-
-
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_16.py
-
-# ch13_16.py
-import time                        # 導入模組time
-
-fruits = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
-for fruit in fruits:
-    print(fruit)
-    time.sleep(1)                   # 暫停1秒
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_17.py
-
-# ch13_17.py
 import time                         # 導入模組time
 
 print(time.asctime())               # 列出目前系統時間 
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_18.py
-
-# ch13_18.py
 import time                         # 導入模組time
 
 xtime = time.localtime()
@@ -322,28 +169,14 @@ print("星期幾   ", xtime[6])
 print("第幾天   ", xtime[7])
 print("夏令時間 ", xtime[8])
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_19.py
-
-# ch13_19.py
 import time                         # 導入模組time
 
 print(time.ctime())
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_20.py
-
-# ch13_20.py
 import time
 x = 1000000
 pi = 0
@@ -354,30 +187,8 @@ for i in range(1,x+1):
         e_time = time.clock()
         print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_21.py
-
-# ch13_21.py
 import time
 x = 1000000
 pi = 0
@@ -388,70 +199,27 @@ for i in range(1,x+1):
         e_time = time.process_time()
         print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_22.py
-
-# ch13_22.py
 import calendar
 
 print("2020年是否潤年", calendar.isleap(2020))    
 print("2021年是否潤年", calendar.isleap(2021))
 
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_23.py
-
-# ch13_23.py
 import calendar
 
 print(calendar.month(2020,1))
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_24.py
-
-# ch13_24.py
 import calendar
 
 print(calendar.calendar(2020))
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_25.py
-
-# ch13_25.py
 import random                       # 導入模組random
 money = 300                         # 賭金總額
 bet = 100                           # 賭注
@@ -477,15 +245,8 @@ while True:
 
 print("歡迎下次再來")
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch13\ch13_26.py
-
-# ch13_26.py
 import random
 
 trials = 1000000
@@ -499,13 +260,4 @@ PI = 4 * Hits / trials
 
 print("PI = ", PI)
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-

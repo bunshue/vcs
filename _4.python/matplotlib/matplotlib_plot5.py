@@ -89,8 +89,8 @@ ax.set_xlim(-6,6)
 ax.set_ylim(-1.2,1.2)
 plt.plot(x,y,lw=5,c='white')
 
-#移動 x, y 座標軸
 
+#移動 x, y 座標軸
 ax = plt.gca()
 ax.set_facecolor('#69b8bb')
 ax.set_xlim(-6,6)

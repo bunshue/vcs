@@ -17,14 +17,20 @@ print('numpy製作一個 %d X %d 的圖 黑色, 2維' % (W, H))
 img = np.zeros((W, H), dtype = np.uint8)    #預設為0, 黑色, 2維
 #print("img=\n",img)
 
-cv2.imshow("one",img)
+cv2.imshow("one",img)   #有cv2.imshow的, 要對應destroyAllWindows()
 
 print('中間一塊用填成白色')
 for i in range(100, 200):
     for j in range(100, 200):
         img[i,j] = 255
 
-cv2.imshow("two",img)
+cv2.imshow("two",img)   #有cv2.imshow的, 要對應destroyAllWindows()
+
+print('中間一塊用填成白色')
+mask=np.zeros([W, H],np.uint8)
+mask[50 : 250, 50 : 250] = 255
+
+cv2.imshow('mask', mask) #有cv2.imshow的, 要對應destroyAllWindows()
 
 cv2.waitKey()
 cv2.destroyAllWindows()
