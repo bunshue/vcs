@@ -15,8 +15,8 @@ print('------------------------------------------------------------')	#60個
 print('numpy製作一個 %d X %d 的圖 黑色, 2維' % (W, H))
 
 img = np.zeros((W, H), dtype = np.uint8)    #預設為0, 黑色, 2維
+#print("img=\n",img)
 
-print("img=\n",img)
 cv2.imshow("one",img)
 
 print('中間一塊用填成白色')
@@ -71,7 +71,8 @@ img[:,0:100,0]=255      #第0通道, 藍色通道
 img[:,100:200,1]=255    #第1通道, 綠色通道
 img[:,200:300,2]=255    #第2通道, 紅色通道
 
-print("img=\n",img)
+#print("img=\n",img)
+
 cv2.imshow("img",img)
 
 cv2.waitKey()
@@ -84,7 +85,8 @@ print('------------------------------------------------------------')	#60個
 print(' ???? numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
 
 img=np.zeros((2,4,3),dtype=np.uint8)    #預設為0, 黑色, 3維
-print("img=\n",img)
+#print("img=\n",img)
+
 print("读取像素点img[0,3]=",img[0,3])
 print("读取像素点img[1,2,2]=",img[1,2,2])
 img[0,3]=255
@@ -102,7 +104,7 @@ sys.exit()
 
 img=np.random.randint(0,256,size=[2,4,3],dtype=np.uint8)
 rst=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-print("img=\n",img)
+#print("img=\n",img)
 print("rst=\n",rst)
 print("像素点(1,0)直接计算得到的值=", img[1,0,0]*0.114+img[1,0,1]*0.587+img[1,0,2]*0.299)
 print("像素点(1,0)使用公式cv2.cvtColor()转换值=",rst[1,0])
@@ -116,7 +118,7 @@ print('------------------------------------------------------------')	#60個
 
 img=np.random.randint(0,256,size=[2,4],dtype=np.uint8)
 rst=cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
-print("img=\n",img)
+#print("img=\n",img)
 print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
@@ -124,7 +126,7 @@ print('------------------------------------------------------------')	#60個
 img=np.random.randint(0,256,size=[2,4,3],dtype=np.uint8)
 rgb=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 bgr=cv2.cvtColor(rgb,cv2.COLOR_RGB2BGR)
-print("img=\n",img)
+#print("img=\n",img)
 print("rgb=\n",rgb)
 print("bgr=\n",bgr)
 
@@ -133,17 +135,21 @@ print("bgr=\n",bgr)
 print('------------------------------------------------------------')	#60個
 
 img1=np.random.randint(0,256,size=[3,3],dtype=np.uint8)
-img2=np.random.randint(0,256,size=[3,3],dtype=np.uint8)
 print("img1=\n",img1)
+
+img2=np.random.randint(0,256,size=[3,3],dtype=np.uint8)
 print("img2=\n",img2)
+
 print("img1+img2=\n",img1+img2)
 
 print('------------------------------------------------------------')	#60個
 
 img1=np.random.randint(0,256,size=[3,3],dtype=np.uint8)
-img2=np.random.randint(0,256,size=[3,3],dtype=np.uint8)
 print("img1=\n",img1)
+
+img2=np.random.randint(0,256,size=[3,3],dtype=np.uint8)
 print("img2=\n",img2)
+
 img3=cv2.add(img1,img2)
 print("cv2.add(img1,img2)=\n",img3)
 
@@ -161,27 +167,35 @@ print("c=\n",c)
 print('------------------------------------------------------------')	#60個
 
 img1=np.ones((4,4),dtype=np.uint8)*3
+print("img1=\n",img1)
+
 img2=np.ones((4,4),dtype=np.uint8)*5
+print("img2=\n",img2)
+
 mask=np.zeros((4,4),dtype=np.uint8)
 mask[2:4,2:4]=1
-img3=np.ones((4,4),dtype=np.uint8)*66
-print("img1=\n",img1)
-print("img2=\n",img2)
 print("mask=\n",mask)
+
+img3=np.ones((4,4),dtype=np.uint8)*66
 print("初始值img3=\n",img3)
+
 img3=cv2.add(img1,img2,mask=mask)
 print("求和后img3=\n",img3)
 
 print('------------------------------------------------------------')	#60個
 
 img1=np.ones((4,4),dtype=np.uint8)*3
-img2=np.ones((4,4),dtype=np.uint8)*5
 print("img1=\n",img1)
+
+img2=np.ones((4,4),dtype=np.uint8)*5
 print("img2=\n",img2)
+
 img3=cv2.add(img1,img2)
 print("cv2.add(img1,img2)=\n",img3)
+
 img4=cv2.add(img1,6)
 print("cv2.add(img1,6)\n",img4)
+
 img5=cv2.add(6,img2)
 print("cv2.add(6,img2)=\n",img5)
 
@@ -195,22 +209,19 @@ print(img3)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
 img=np.random.randint(10,99,size=[5,5],dtype=np.uint8)
 print("img=\n",img)
+
 print("读取像素点img.item(3,2)=",img.item(3,2))
 img.itemset((3,2),255)
 print("修改后img=\n",img)
 print("修改后像素点img.item(3,2)=",img.item(3,2))
 
-
 print('------------------------------------------------------------')	#60個
 
 print('建立一個每點顏色任意顏色之圖')
 img=np.random.randint(0,256,size=[512,512],dtype=np.uint8)
+
 cv2.imshow("demo",img)
 
 cv2.waitKey()
@@ -220,6 +231,7 @@ print('------------------------------------------------------------')	#60個
 
 img=np.random.randint(10,99,size=[2,4,3],dtype=np.uint8)
 print("img=\n",img)
+
 print("读取像素点img[1,2,0]=",img.item(1,2,0))
 print("读取像素点img[0,2,1]=",img.item(0,2,1))
 print("读取像素点img[1,0,2]=",img.item(1,0,2))
@@ -326,10 +338,6 @@ print("dilation\n",dilation)
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
 img=np.random.randint(0,256,size=[4,5],dtype=np.uint8)
 t,rst=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
 print("img=\n",img)
@@ -337,8 +345,6 @@ print("t=",t)
 print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
-
-
 
 img=np.random.randint(0,256,size=[4,5],dtype=np.uint8)
 t,rst=cv2.threshold(img,127,255,cv2.THRESH_BINARY_INV)
@@ -354,7 +360,6 @@ print("t=",t)
 print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
-
 
 img=np.random.randint(0,256,size=[4,5],dtype=np.uint8)
 t,rst=cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
@@ -701,7 +706,6 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 '''
-
 
 print('------------------------------------------------------------')	#60個
 

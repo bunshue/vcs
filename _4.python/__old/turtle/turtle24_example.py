@@ -1,5 +1,13 @@
-# ch17_1.py
 import turtle
+import random
+
+#一大堆turtle範例
+
+import sys
+
+'''
+print('------------------------------------------------------------')	#60個
+print('畫一個五角星形 空心')
 t = turtle.Pen()
 sides = 5                       # 星星的個數
 angle = 180 - (180 / sides)     # 每個迴圈海龜轉動角度
@@ -8,15 +16,7 @@ for x in range(sides):
     t.forward(size)             # 海龜向前繪線移動100
     t.right(angle)              # 海龜方向左轉的度數
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_2.py
-
-# ch17_2.py
-import turtle
 
 t = turtle.Pen()
 t.pensize(5)                        # 畫筆寬度
@@ -33,15 +33,11 @@ for x in range(1, 37):
     t.left(90)
     t.forward(100)
     t.left(100)
-    
-    
+'''
 
+'''
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_3.py
-
-# ch17_3.py
-import turtle
+print('畫八卦形')
 
 t = turtle.Pen()
 colorsList = ['red','orange','yellow','green','blue','cyan','purple','violet']
@@ -52,15 +48,10 @@ for x in range(1, 41):
     t.right(45)                     # 每次旋轉角度
     tWidth += x * 0.05              # 每次畫筆寬度遞增    
     t.width(tWidth)
-    
-
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_4.py
-
-# ch17_4.py
-import turtle
+print('畫二維平面連線')
 n = 300
 step = 10
 t = turtle.Pen()
@@ -71,17 +62,11 @@ for i in range(0, n+step, step):
     t.pendown()
     t.setpos(0, n-i)
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_5.py
 
-# ch17_5.py
-import turtle
-import random
+print('畫二維平面連線')
+
 n = 300
 step = 10
 t = turtle.Pen()
@@ -94,16 +79,10 @@ for i in range(0, n+step, step):
     t.setpos(0, i-n)
     t.setpos(i, 0)
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_6.py
 
-# ch17_6.py
-import turtle
+print('畫一些圓形 1')
 
 t = turtle.Pen()
 t.color('blue')
@@ -129,14 +108,11 @@ for r in range(10, 100+step, step):
     t.setheading(0)                 
     t.pendown()                     # 將筆放下準備繪製
     t.circle(r, 90 + r*2)           # 繪製圓      
-                                     
+
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_7.py
-
-# ch17_7.py
-import turtle
+print('畫一些圓形 2')
 
 t = turtle.Pen()
 t.color('blue')
@@ -144,17 +120,10 @@ for angle in range(0, 360, 15):
     t.setheading(angle)         # 調整海龜方向
     t.circle(100)
 
-
-    
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_8.py
 
-# ch17_8.py
-import turtle
-
+print('畫一些多邊形 空心')
 t = turtle.Pen()
 t.color('blue')
 r = 30                              # 半徑
@@ -168,20 +137,10 @@ for edge in range(3, 13, 1):        # 繪3 - 12邊圖
     t.circle(r, steps=edge)
     t.penup()
     t.forward(60)
-    
- 
-
-
-    
-
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_9.py
-
-# ch17_9.py
-import turtle
-
+print('畫一些多邊形 實心')
 t = turtle.Pen()
 t.color('white')
 r = 30                              # 半徑
@@ -198,19 +157,10 @@ for edge in range(3, 13, 1):        # 繪3 - 12邊圖
     t.end_fill()
     t.penup()
     t.forward(60)
-    
-
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_10.py
-
-# ch17_10.py
-import turtle
+print('畫一個五角星形 實心')
 t = turtle.Pen()
 sides = 5                       # 星星的個數
 angle = 180 - (180 / sides)     # 每個迴圈海龜轉動角度
@@ -222,16 +172,10 @@ for x in range(sides):
     t.right(angle)              # 海龜方向左轉的度數
 t.end_fill()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_11.py
+print('畫一個五角星形 實心')
 
-# ch17_11.py
-import turtle
 def stars(sides, size, cr, x, y):
     t.penup()
     t.goto(x, y)
@@ -244,21 +188,13 @@ def stars(sides, size, cr, x, y):
         t.right(angle)              # 海龜方向左轉的度數
     t.end_fill()
 t = turtle.Pen()
-t.screen.bgcolor('blue')
+t.screen.bgcolor('blue')    #設定畫面的背景色
 stars(5, 60, 'yellow', 0, 0)
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_12.py
+print('畫任意五角星形 實心')
 
-# ch17_12.py
-import turtle
-import random
 def stars(sides, size, cr, x, y):
     t.penup()
     t.goto(x, y)
@@ -283,21 +219,12 @@ while True:
     ran_y = random.randint(-250,250)
     stars(ran_sides,ran_size,ran_color,ran_x,ran_y)
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_13.py
-
-# ch17_13.py
-import turtle 
-import random
+print('畫random walk')
 
 def is_inside():
-    ''' 測試是否在繪布範圍 '''
+    #測試是否在繪布範圍
     left = (-t.screen.window_width() / 2) + 100             # 左邊牆
     right = (t.screen.window_width() / 2) - 100             # 右邊牆
     top = (t.screen.window_height() / 2) - 100              # 上邊牆
@@ -325,20 +252,9 @@ t.screen.bgcolor('black')                       # 畫布背景
 while True:
     turtle_move()
 
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_14.py
-
-# ch17_14.py
-import turtle
-
+print('畫不同色筆連線')
 t = turtle.Pen()
 colorsList = ['red','orange','yellow','green','blue','cyan','purple','violet']
 for line in range(200):            
@@ -346,18 +262,11 @@ for line in range(200):
     t.forward(line*2)
     t.left(91)
     
- 
-
-
-    
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python邁向領航者之路_超零基礎\ch17\ch17_15.py
+'''
+print('畫不同色筆連線')
 
-# ch17_15.py
-import turtle
 turtle.tracer(0,0)                      # 終止追蹤
 t = turtle.Pen()
 
@@ -366,13 +275,6 @@ for line in range(400):
     t.color(colorsList[line % 3])
     t.forward(line)
     t.right(119)
-    
- 
-
-
-    
-
 
 print('------------------------------------------------------------')	#60個
-
 
