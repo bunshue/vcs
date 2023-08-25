@@ -14,6 +14,7 @@ for index in range(10):
 
 print('訓練中......')
 
+#人臉特徵演算法計算特徵值(LBPH演算法)
 model = cv2.face.LBPHFaceRecognizer_create()
 model.train(np.asarray(images), np.asarray(labels))
 model.save('faces.data')

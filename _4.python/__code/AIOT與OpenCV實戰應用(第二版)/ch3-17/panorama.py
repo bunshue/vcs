@@ -1,12 +1,12 @@
 import cv2
-import argparse
 
-ap = argparse.ArgumentParser()
-ap.add_argument('img', nargs='+', help = 'input images')
-args = ap.parse_args()
+filename1 = 'penguin1.jpg'
+filename2 = 'penguin2.jpg'
+
+filenames = [filename1, filename2]
 
 img_arr = []
-for filename in args.img:
+for filename in filenames:
     image = cv2.imread(filename)
     img_arr.append(image)
     

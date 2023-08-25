@@ -102,6 +102,7 @@ px8 = W - BORDER
 py8 = BORDER
 pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6], [px7, py7], [px8, py8]])
 cv2.polylines(image, [pts], True, (255, 255, 0), 2)   #True表示封口
+#True: 頭尾相連, False: 頭尾不相連
 #-----------------------------------------------------------------------------
 '''
 pts = np.array([[300, 300], [300, 340], [350,320]], np.int32)
