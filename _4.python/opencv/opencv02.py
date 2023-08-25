@@ -51,10 +51,11 @@ cv2.IMREAD_UNCHANGED
     讀取圖片中所有的 channels，包含透明度的 channel。
 '''
 
-image_gray = cv2.imread('image.jpg', cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉為灰階
+image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉為灰階
 
 # 顯示圖片
-cv2.imshow('My Image', image)
+cv2.imshow('My Image', image_gray)
+
 
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()

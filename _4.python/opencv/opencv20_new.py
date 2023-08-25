@@ -36,16 +36,15 @@ print("Number of Contours found = " + str(len(contours)))
 cv2.drawContours(image, contours, -1, (255, 255, 255), 1)
 
 cv2.imshow('Contours', image)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-
 
 print('------------------------------------------------------------')	#60個
 
 import cv2
 
-filename = 'poly.png'
+filename = 'images/poly.png'
 
 print('顯示圖片')
 image = cv2.imread(filename)	#讀取本機圖片
@@ -89,8 +88,6 @@ cv2.imshow('image', image) #顯示圖片
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-
 
 print('------------------------------------------------------------')	#60個
 

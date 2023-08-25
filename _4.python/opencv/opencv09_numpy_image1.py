@@ -16,7 +16,7 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('測試 2')
 
-img = cv2.imread('girl.bmp')
+img = cv2.imread('images/girl.bmp')
 imgRGB=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 plt.figure("显示结果")
 plt.subplot(121)
@@ -29,7 +29,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 print('測試 3 subplot')
 
-o = cv2.imread('8.bmp')
+o = cv2.imread('images/8.bmp')
 g=cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 plt.figure("灰度图像显示演示")
 plt.subplot(221); plt.imshow(g, cmap=plt.cm.gray)
@@ -46,7 +46,7 @@ print('------------------------------------------------------------')	#60個
 
 print('測試 4 subplot')
 
-o = cv2.imread('girl.bmp')
+o = cv2.imread('images/girl.bmp')
 g=cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
 plt.figure("灰度图像显示演示")
 plt.subplot(221)
@@ -66,7 +66,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 print('測試 5')
-o=cv2.imread("boat.bmp")
+o=cv2.imread("images/boat.bmp")
 plt.hist(o.ravel(),16)
 
 plt.show()
@@ -75,7 +75,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 print('測試 6')
-o=cv2.imread("boat.jpg")
+o=cv2.imread("images/boat.jpg")
 cv2.imshow("original",o)    #有cv2.imshow的, 要對應destroyAllWindows()
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -89,7 +89,7 @@ print('------------------------------------------------------------')	#60個
 
 print('測試 7')
 
-img=cv2.imread("lena.bmp")
+img=cv2.imread("images/lena.bmp")
 hist = cv2.calcHist([img],[0],None,[256],[0,255])
 print(type(hist))
 print(hist.shape)
@@ -107,7 +107,7 @@ print('------------------------------------------------------------')	#60個
 print('測試 8')
 
 #-----------读取原始图像---------------
-img = cv2.imread('equ.bmp',cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('images/equ.bmp',cv2.IMREAD_GRAYSCALE)
 #-----------直方图均衡化处理---------------
 equ = cv2.equalizeHist(img)
 #-----------显示均衡化前后的直方图---------------
@@ -134,7 +134,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 print('測試 9')
 
-image=cv2.imread("girl.bmp",cv2.IMREAD_GRAYSCALE)
+image=cv2.imread("images/girl.bmp",cv2.IMREAD_GRAYSCALE)
 mask=np.zeros(image.shape,np.uint8)
 mask[200:400,200:400]=255
 histImage=cv2.calcHist([image],[0],None,[256],[0,255])
@@ -147,7 +147,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 print('測試 10')
 
-o=cv2.imread("boatGray.bmp")
+o=cv2.imread("images/boatGray.bmp")
 histb = cv2.calcHist([o],[0],None,[256],[0,255])
 plt.plot(histb,color='b')
 
@@ -157,7 +157,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 print('測試 11')
 
-o=cv2.imread("girl.bmp")
+o=cv2.imread("images/girl.bmp")
 histb = cv2.calcHist([o],[0],None,[256],[0,255])
 histg = cv2.calcHist([o],[1],None,[256],[0,255])
 histr = cv2.calcHist([o],[2],None,[256],[0,255])
@@ -170,7 +170,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 print('測試 12')
 
-img = cv2.imread('equ.bmp',cv2.IMREAD_GRAYSCALE)
+img = cv2.imread('images/equ.bmp',cv2.IMREAD_GRAYSCALE)
 equ = cv2.equalizeHist(img)
 plt.figure("subplot示例")
 plt.subplot(121),plt.hist(img.ravel(),256)

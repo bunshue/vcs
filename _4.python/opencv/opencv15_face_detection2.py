@@ -44,7 +44,7 @@ for(x,y,w,h) in faces:
 cv2.imshow("dect",image)
 
 #保存检测结果
-cv2.imwrite("re.jpg",image)
+#cv2.imwrite("re.jpg",image)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()

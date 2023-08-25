@@ -37,7 +37,8 @@ edges = cv2.erode(edges, None)
 cv2.imshow('Erode', edges)
 cv2.waitKey()
 
-#cv2.imwrite('C:/Temp/person-masked.jpg', masked)           # Save
+#cv2存圖
+#cv2.imwrite('person-masked.jpg', masked)
 
 '''
 # split image into channels

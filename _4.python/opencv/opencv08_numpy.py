@@ -644,7 +644,7 @@ def onValue(a):
     ret, dst = cv2.threshold(o, Value, 255, Type) 
     cv2.imshow(windowName,dst)
 
-o = cv2.imread("lena512.bmp",0)
+o = cv2.imread("images/lena512.bmp",0)
 windowName = "Demo19.13"  #窗体名
 cv2.namedWindow(windowName)
 cv2.imshow(windowName,o)
