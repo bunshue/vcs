@@ -1,0 +1,5 @@
+Microsoft Adobe AutoDesk IBM Google Facebook Oracle Asus TSMC
+Amazon Acer Python C C++ Pascal Fortran Cobol Assembly Language
+WeChar Line Messenger Telegram Keynote Pages Numbers Chrome
+Skype NASA Data Structure Database BigData NoSql PHP MySQL DOS
+Windows System PyCharm Wordcloud
