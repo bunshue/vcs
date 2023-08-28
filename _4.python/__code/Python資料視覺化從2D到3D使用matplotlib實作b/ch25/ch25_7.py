@@ -1,0 +1,19 @@
+# ch25_7.py
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+plt.rcParams["axes.unicode_minus"] = False
+x = np.arange(-10, 11) 
+y = np.arange(-10, 11) 
+X, Y = np.meshgrid(x, y)
+U, V = X, Y
+fig, ax = plt.subplots()
+ax.quiver(X, Y, U, V) 
+ax.set_title('箭袋 Quiver',fontsize=14,color='b')
+ax.set_aspect('equal')
+ax.xaxis.set_ticks([])
+ax.yaxis.set_ticks([])
+plt.show()
+
+      
