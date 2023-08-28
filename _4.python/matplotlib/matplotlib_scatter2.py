@@ -67,7 +67,7 @@ import math
 import random
 import matplotlib.pyplot as plt
 
-print('蒙地卡羅模擬')
+print('蒙地卡羅模擬 a')
 
 L = 100
 NUMBER_OF_TRIALS = 300
@@ -223,8 +223,39 @@ plt.scatter(x[y>0], y[y>0], c='r')
 #第六張圖
 plt.subplot(236)
 
+print('蒙地卡羅模擬 b')
+import random
+import math
 
+trials = 800
+Hits = 0
+radius = 50
+for i in range(trials):
+    x = random.randint(1, 100)                      # x軸座標
+    y = random.randint(1, 100)                      # y軸座標
+    if math.sqrt((x-50)**2 + (y-50)**2) < radius:   # 在圓內
+        plt.scatter(x, y, marker='.', c='r')
+        Hits += 1
+    else:
+        plt.scatter(x, y, marker='.', c='g')    
+plt.axis('equal')
 
+'''
+print('蒙地卡羅模擬 c')
+
+import random
+
+trials = 1000000
+Hits = 0
+for i in range(trials):
+    x = random.random() * 2 - 1     # x軸座標
+    y = random.random() * 2 - 1     # y軸座標
+    if x * x + y * y <= 1:          # 判斷是否在圓內
+        Hits += 1
+PI = 4 * Hits / trials
+
+print("PI = ", PI)
+'''
 
 plt.show()
 

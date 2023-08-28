@@ -1,0 +1,85 @@
+Python小專案大集合：提升功力的81個簡單有趣小程式
+
+Project 1　貝果遊戲
+Project 2　生日謬論
+Project 3　點陣圖訊息
+Project 4　二十一點
+Project 5　彈跳的 DVD 標誌
+Project 6　凱撒密碼
+Project 7　凱撒駭客
+Project 8　月曆產生器
+Project 9　盒子裡的胡蘿蔔
+Project 10　丁半
+Project 11　誘餌標題生成器
+Project 12　Collatz 序列
+Project 13　康威的生命遊戲
+Project 14　倒數計時
+Project 15　深洞
+Project 16　鑽石
+Project 17　骰子數學
+Project 18　骰子擲放
+Project 19　數字時鐘
+Project 20　文字瀑布
+Project 21　DNA 視覺化
+Project 22　小鴨子
+Project 23　蝕刻繪圖器
+Project 24　因數尋找器
+Project 25　快速拔槍
+Project 26　費氏數列
+Project 27　魚缸
+Project 28　Flooder 洪水填充遊戲
+Project 29　森林大火的模擬
+Project 30　四子棋
+Project 31　猜數字
+Project 32　容易受騙的人
+Project 33　駭客小遊戲
+Project 34　Hangman 吊死鬼和斷頭台
+Project 35　六邊形網格
+Project 36　沙漏
+Project 37　飢餓的機器人
+Project 38　J'accuse!
+Project 39　蘭頓的螞蟻
+Project 40　Leetspeak 駭客語
+Project 41　幸運星
+Project 42　魔法幸運球
+Project 43　播棋
+Project 44　2D 移動迷宮
+Project 45　3D 移動迷宮
+Project 46　百萬次擲骰統計模擬器
+Project 47　蒙德里安藝術生成器
+Project 48　蒙提霍爾問題
+Project 49　乘法表
+Project 50　九十九瓶
+Project 51　九十九瓶變奏版
+Project 52　數字系統計數器
+Project 53　元素週期表
+Project 54　豬拉丁
+Project 55　強力球樂透彩
+Project 56　質數
+Project 57　進度列
+Project 58　彩虹
+Project 59　剪刀石頭布
+Project 60　剪刀石頭布（必勝版）
+Project 61　ROT13 密碼
+Project 62　旋轉立方體
+Project 63　烏爾皇家遊戲
+Project 64　七段顯示器模組
+Project 65　鬼店地毯
+Project 66　簡單替換式密碼
+Project 67　正弦訊息
+Project 68　滑塊拼圖
+Project 69　蝸牛賽車
+Project 70　日式算盤
+Project 71　聲音模仿
+Project 72　海綿狀文字
+Project 73　數獨
+Project 74　文字轉語音揚聲器
+Project 75　賭徒三張牌
+Project 76　井字遊戲
+Project 77　河內塔
+Project 78　陷阱問題
+Project 79　2048
+Project 80　維吉尼亞密碼
+Project 81　水桶謎題
+
+

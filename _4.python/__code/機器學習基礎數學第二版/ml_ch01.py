@@ -3,13 +3,6 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
-x1 = np.linspace(0, 10, num=11)     # 使用linspace()產生陣列
-print(type(x1), x1)
-x2 = np.arange(0,11,1)              # 使用arange()產生陣列
-print(type(x2), x2)
-x3 = np.arange(11)                  # 簡化語法產生陣列
-print(type(x3), x3)
-
 print('------------------------------------------------------------')	#60個
 
 #scatter 顏色
@@ -18,13 +11,9 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-xpt = np.linspace(0, 5, 25)                        # 建立含500個元素的陣列
-ypt = 1 - 0.5*np.abs(xpt-2)                         # y陣列的變化
-lwidths = (1+xpt)**2                                # 寬度陣列  
-#plt.scatter(xpt, ypt, s=lwidths, color=(0, 1, 0))   # 綠色
-#plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
+
 #使用 fill_between
 
 left = -np.pi
@@ -48,6 +37,7 @@ plt.plot(x, y)
 plt.fill_between(x, -1, y, color='yellow', alpha=0.3)
 plt.show()
 
+
 print('------------------------------------------------------------')	#60個
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
@@ -67,6 +57,7 @@ plt.colorbar()
 plt.title(r"建立$\sqrt{x^2 + y^2}$網格影像")
 plt.show()
 
+
 print('------------------------------------------------------------')	#60個
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
@@ -74,6 +65,7 @@ plt.title('Latex使用')
 plt.text(0.4, 0.6,r"$\int_0^5 f(x)\mathrm{d}x$",fontsize=20,color="blue")
 plt.text(0.4, 0.3,r"$\sum_{n=1}^\infty\frac{-e^{2\pi}}{3^n}!$",fontsize=20)
 plt.show()
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -83,6 +75,7 @@ img = data.astronaut()
 plt.imshow(img)
 plt.show()
 
+'''
 
 
 print('------------------------------------------------------------')	#60個
@@ -103,9 +96,8 @@ plt.title("銷售報表", fontsize=24)
 plt.xlabel("年度", fontsize=14)
 plt.ylabel("銷售量", fontsize=14)
 plt.tick_params(axis='both', labelsize=12, color='red')
+
 plt.show()
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -121,9 +113,8 @@ plt.ylabel('票數')
 plt.title('選舉結果')
 plt.xticks(x, ('James', 'Peter', 'Norton'))
 plt.yticks(np.arange(0, 450, 30))
+
 plt.show()
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -147,6 +138,7 @@ print("bins的y軸 ",h[0])
 print("bins的x軸 ",h[1])
 plt.ylabel('頻率')
 plt.title('測試 10000 次')
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -165,9 +157,7 @@ print('b = {}'.format(ans[b]))
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
 from sympy import Symbol, solve
-import numpy as np
                                 
 a = Symbol('a')                 # 定義公式中使用的變數
 b = Symbol('b')                 # 定義公式中使用的變數
@@ -192,18 +182,10 @@ plt.text(pt_x2+60, pt_y2-10, 'pt2')      # 輸出文字pt2
 plt.xlabel("Customers")
 plt.ylabel("Profit")
 plt.grid()                              # 加格線
+
 plt.show()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 a = 0.03
 b = -18
@@ -218,12 +200,10 @@ plt.text(pt_x-150, pt_y+3, 'f(1500)')   # 輸出文字f(1500)
 plt.xlabel("Customers")
 plt.ylabel("Profit")
 plt.grid()                              # 加格線
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 a = 0.03
 b = -18
@@ -238,13 +218,12 @@ plt.text(pt_x-150, pt_y+3, '('+str(int(pt_x))+','+str(pt_y)+')')
 plt.xlabel("Customers")
 plt.ylabel("Profit")
 plt.grid()                                          # 加格線
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
 from sympy import Symbol, solve
-import numpy as np
                                 
 x = Symbol('x')                         # 定義公式中使用的變數
 y = Symbol('y')                         # 定義公式中使用的變數
@@ -267,19 +246,12 @@ plt.text(ans[x]-5, ans[y]+5, '('+str(ans[x])+','+str(ans[y])+')')
 plt.xlabel("Chicken")
 plt.ylabel("Rabbit")
 plt.grid()                              # 加格線
+
 plt.show()
-
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
 from sympy import Symbol, solve
-import numpy as np
                                 
 x = Symbol('x')                         # 定義公式中使用的變數
 y = Symbol('y')                         # 定義公式中使用的變數
@@ -302,13 +274,12 @@ plt.text(ans[x]-5, ans[y]+5, '('+str(ans[x])+','+str(ans[y])+')')
 plt.xlabel("Junior Salesman")
 plt.ylabel("Senior Salesman")
 plt.grid()                              # 加格線
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
 from sympy import Symbol, solve
-import numpy as np
 
 x = Symbol('x')                         # 定義公式中使用的變數
 y = Symbol('y')                         # 定義公式中使用的變數
@@ -317,7 +288,6 @@ eq2 = -x -y + 2                         # 方程式 2
 ans = solve((eq1, eq2))
 print('x = {}'.format(ans[x]))
 print('y = {}'.format(ans[y]))
-
 
 line1_x = np.linspace(-5, 5, 10)
 line1_y = [y for y in line1_x]
@@ -333,13 +303,12 @@ plt.xlabel("x-axis")
 plt.ylabel("y-axis")
 plt.grid()                              # 加格線
 plt.axis('equal')                       # 讓x, y軸距長度一致
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
 from sympy import Symbol, solve
-import numpy as np
 
 x = Symbol('x')                         # 定義公式中使用的變數
 y = Symbol('y')                         # 定義公式中使用的變數
@@ -364,13 +333,12 @@ plt.xlabel("x-axis")
 plt.ylabel("y-axis")
 plt.grid()                              # 加格線
 plt.axis('equal')                       # 讓x, y軸距長度一致
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
 from sympy import Symbol, solve
-import numpy as np
                                 
 x = Symbol('x')                         # 定義公式中使用的變數
 y = Symbol('y')                         # 定義公式中使用的變數
@@ -384,9 +352,6 @@ z = 50 * int(ans[x]) + 50 * int(ans[y])
 print('最大獲利 = {} 萬'.format(z))
 
 print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.plot([0, 0], [20, 0])              # 繪函數直線公式 1
 plt.plot([0, 0], [0, 20])              # 繪函數直線公式 2
@@ -411,27 +376,8 @@ plt.text(4.5, 5.5, '(5, 5)')            # 輸出(5, 5)
 plt.xlabel("Research")
 plt.ylabel("UI")
 plt.grid()                              # 加格線
+
 plt.show()
-
-
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
 
 print('------------------------------------------------------------')	#60個
 

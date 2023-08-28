@@ -1,0 +1,22 @@
+Taiwan scientists develop new mosquito trap that could save lives
+ 
+
+  
+Dengue-fever-carrying insects are identified within fractions of a second (By Central News Agency)    
+TAIPEI (Taiwan News) — The National Health Research Institutes (NHRI) have developed a new high-tech mosquito trap that can potentially curb the progression of virus epidemics.
+CNA reports NHRI have spent a year and a half developing what they call a “smart” mosquito trap. The trap can detect whether or not a mosquito carries dengue fever within 0.07 seconds of its capture and could be used to identify areas at high risk of an epidemic.
+The institutes held a press conference yesterday (Jan. 5) in which they shared the results of their latest research on the prevention and control of mosquito-borne illnesses.
+During an interview at the conference, NHRI biomedical engineer Liao Lun-de (廖倫德) said crucial research has been carried out over recent years on the dissemination of contagious diseases like dengue fever and zika, with particular focus on carrier mosquitos.
+ 
+Prior to now, mosquito traps have focused on eradicating the pest without identifying its species or virus-carrying capacity, he commented.
+ 
+The new mosquito trap combines photoelectric sensors and artificial intelligence technology to identify the unique flying patterns of different mosquitos by using what the institutes dub a kind of “facial-recognition” technology.
+ 
+Liao said once a mosquito flies into the trap, sensors trigger cameras that capture 10,800 images of the insect, which are used to determine whether it is of a common, harmless variety or a more dangerous, disease-carrying species.
+ 
+The technology identifies mosquito species with 90 percent accuracy. The cost of each unit is between NT$2000 and NT$4000.
+ 
+Liao explained that most mosquito traps use sticky paper that kills the insects upon landing and risks them becoming attached to other creatures such as roaches. The new trap contains (rather than kills) the insect so the blood it carries can be examined to see what kind of creature it has bitten, and whether or not it carries disease.
+ 
+Data collected from trapped mosquitos is uploaded to a system, Liao disclosed, and can be used in combination with GIS technology to predict high-risk areas. This will help enable frontline epidemic prevention units initiate preventative measures to curb the risk of diseases spreading.
+

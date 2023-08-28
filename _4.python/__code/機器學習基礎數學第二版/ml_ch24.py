@@ -5,21 +5,6 @@ import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch24\ch24_1.py
-
-# ch24_1.py
-import matplotlib.pyplot as plt
-import numpy as np
 from sklearn import datasets
 
 np.random.seed(3)                           # 設計隨機數種子
@@ -27,30 +12,11 @@ x, y = datasets.make_regression(n_features=1, noise=20)
 plt.xlim(-3, 3)
 plt.ylim(-150, 150)
 plt.scatter(x,y)
+
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch24\ch24_2.py
-
-# ch24_2.py
-import matplotlib.pyplot as plt
-import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
@@ -65,30 +31,11 @@ plt.ylim(-150, 150)
 plt.scatter(x_train,y_train,label="訓練數據")
 plt.scatter(x_test,y_test,label="測試數據")
 plt.legend()
+
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch24\ch24_3.py
-
-# ch24_3.py
-import matplotlib.pyplot as plt                                  
-import numpy as np
 from sklearn import linear_model
 
 x = np.array([[22], [26], [23], [28], [27], [32], [30]])      # 溫度
@@ -108,16 +55,11 @@ plt.plot(x, y2)                                 # 繪製迴歸直線
 sold = a*31 + b
 print('氣溫31度時的銷量 = {}'.format(int(sold)))
 plt.plot(31, int(sold), '-o') 
-plt.show()                      
 
+plt.show()                      
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch24\ch24_4.py
-
-# ch24_4.py
-import matplotlib.pyplot as plt
-import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn import linear_model
@@ -132,30 +74,8 @@ e_model.fit(x_train, y_train)
 print(f'斜率  = {e_model.coef_[0].round(2)}')
 print(f'截距  = {e_model.intercept_.round(2)}')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch24\ch24_5.py
-
-# ch24_5.py
-import matplotlib.pyplot as plt
-import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn import linear_model
@@ -185,31 +105,12 @@ r2 = r2_score(y_test, y_pred)
 print(f'決定係數 = {r2.round(2)}')
 
 plt.legend()
+
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch24\ch24_6.py
-
-# ch24_6.py
-import matplotlib.pyplot as plt
 from sklearn import datasets
-import numpy as np
 
 np.random.seed(3)                                       # 設定隨機數種子值
 
@@ -224,32 +125,13 @@ plt.rcParams["axes.unicode_minus"] = False              # 可以顯示負號
 plt.scatter(data[:,0], data[:,1], marker="o", edgecolor="black")
 
 plt.title("無監督學習")
+
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch24\ch24_7.py
-
-# ch24_7.py
-import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn import cluster
-import numpy as np
 
 np.random.seed(3)                       # 設定隨機數種子值
 # 建立 300 個點, n_features = 2
@@ -260,31 +142,10 @@ e.fit(data)                             # 將數據帶入物件, 做群集分析
 print(e.labels_)                        # 列印群集類別標籤
 print(e.cluster_centers_)               # 列印群集中心
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch24\ch24_8.py
-
-# ch24_8.py
-import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn import cluster
-import numpy as np
 
 np.random.seed(3)                       # 設定隨機數種子值
 # 建立 300 個點, n_features = 2

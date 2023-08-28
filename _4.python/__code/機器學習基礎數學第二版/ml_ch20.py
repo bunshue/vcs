@@ -2,20 +2,10 @@ import sys
 
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch20\ch20_1.py
-
-# ch20_1.py
 from sympy import Symbol, solve
 
 a = Symbol('a')
@@ -26,20 +16,7 @@ ans = solve((eq1, eq2))
 print('a = {}'.format(ans[a]))
 print('b = {}'.format(ans[b]))
 
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch20\ch20_2.py
-
-# ch20_2.py
-import numpy as np
-import math
 
 a = np.array([1, 1])
 b = np.array([5, 5])
@@ -59,20 +36,7 @@ rad = math.acos(cos_angle)              # acos轉成弧度
 deg = math.degrees(rad)                 # 轉成角度
 print('角度是 = {}'.format(deg))
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch20\ch20_3.py
-
-# ch20_3.py
-import numpy as np
 
 def cosine_similarity(va, vb):
     norm_a = np.linalg.norm(va)                 # 計算向量大小
@@ -87,18 +51,7 @@ print('a 和 b 相似度 = {0:5.3f}'.format(cosine_similarity(a, b)))
 print('a 和 c 相似度 = {0:5.3f}'.format(cosine_similarity(a, c)))
 print('b 和 c 相似度 = {0:5.3f}'.format(cosine_similarity(b, c)))
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch20\ch20_4.py
-
-# ch20_4.py
-import numpy as np
 
 x = np.array([8, 9, 10, 7, 8, 9, 5, 7, 9, 8])
 y = np.array([12, 15, 16, 18, 6, 11, 3, 12, 11, 16])             
@@ -122,21 +75,7 @@ v3 = np.sum(data3)
 r = v1 / ((v2**0.5)*(v3**0.5))
 print('coefficient = {}'.format(r))
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch20\ch20_5.py
-
-# ch20_5.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 x = np.array([8, 9, 10, 7, 8, 9, 5, 7, 9, 8])
 y = np.array([12, 15, 16, 18, 6, 11, 3, 12, 11, 16])             
@@ -151,24 +90,10 @@ plt.scatter(x, y)                       # 滿意度 vs 購買次數
 plt.plot(xpt1, ypt1, 'g')               # 平均購買次數
 plt.plot(xpt2, ypt2, 'g')               # 平均滿意度
 plt.grid()
+
 plt.show()
 
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch20\ch20_6.py
-
-# ch20_6.py
-import numpy as np
-import math
 
 a = np.array([4, 2])
 b = np.array([1, 3])
@@ -184,20 +109,7 @@ rad = math.acos(cos_angle)              # acos轉成弧度
 area = norm_a * norm_b * math.sin(rad) / 2
 print('area = {0:5.2f}'.format(area))
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\機器學習基礎數學第二版\ch20\ch20_7.py
-
-# ch20_7.py
-import numpy as np
 
 a = np.array([4, 2])
 b = np.array([1, 3])
@@ -206,25 +118,6 @@ ab_cross = np.cross(a, b)               # 計算向量外積
 area = np.linalg.norm(ab_cross) / 2     # 向量長度除以2
                     
 print('area = {0:5.2f}'.format(area))
-
-
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
 
 print('------------------------------------------------------------')	#60個
 

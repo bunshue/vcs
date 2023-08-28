@@ -125,34 +125,6 @@ plt.rcParams['axes.unicode_minus']=False # 負號不出問題
 plt.title("使用自定義的中文字型", size=15) # 不用再設字型!
 '''
 
-'''
-# 耍寶可愛的 xkcd
-
-save_state = plt.rcParams.copy()    #把之前正常狀態存起來
-
-plt.xkcd()  #恢復 plt.rcdefaults() 無效
-x = np.linspace(-5, 5, 200)
-y = np.sin(2*x) + 0.2*x
-plt.plot(x,y)
-
-plt.rcParams.update(save_state)     #恢復使用正常狀態
-
-plt.show()
-'''
-
-
-
-'''
-import seaborn as sns #海生, 自動把圖畫得比較好看
-sns.set(color_codes=True)
-x = np.linspace(-10,10,200)
-y = np.sinc(x)
-
-plt.plot(x,y)
-
-plt.show()
-'''
-
 r = 3
 t = np.linspace(-2*np.pi, 2*np.pi, 200)
 x = r*np.cos(t)
