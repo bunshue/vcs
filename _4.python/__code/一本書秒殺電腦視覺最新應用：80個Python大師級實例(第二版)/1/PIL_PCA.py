@@ -4,7 +4,13 @@ from numpy import *
 from scipy.ndimage import measurements, morphology  
 from pylab import *
 
-plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 # 加载图像和阈值，以确保它是二进制的
 figure()
 gray()
@@ -32,4 +38,5 @@ subplot(224)
 imshow(labels_open)
 axis('off')
 title(u'开运算后进行标记后的图像')
+
 show()

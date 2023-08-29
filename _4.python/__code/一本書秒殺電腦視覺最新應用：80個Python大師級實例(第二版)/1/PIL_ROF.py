@@ -5,7 +5,13 @@ from scipy.ndimage import filters
 from scipy.misc import imsave
 from PCV.tools import rof
 
-plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 # 创建合成图像与噪声
 im = zeros((500,500))
 im[100:400,100:400] = 128
@@ -33,4 +39,5 @@ imshow(U)
 #axis('equal')
 axis('off')
 title(u'ROF降噪后的图像')
+
 show()

@@ -2,7 +2,13 @@ import cv2 as cv
 import matplotlib.pyplot as plt
 import math
 import numpy as np
-plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+
+#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 original_image_test1 = cv.imread('lena.png',0)
 #用原始图像减去拉普拉斯模板直接计算得到的边缘信息

@@ -1,6 +1,13 @@
 from PIL import Image
 from pylab import *
-plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+
+#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 figure()
 # 显示原图
 pil_im = Image.open('house.jpg')
@@ -54,4 +61,5 @@ subplot(236)
 title(u'旋转45°后的图像')
 axis('off')
 imshow(pil_im)
+
 show()

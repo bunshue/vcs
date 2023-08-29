@@ -3,7 +3,13 @@ from scipy import ndimage as ndi
 from skimage import morphology,color,data,filter
 image =color.rgb2gray(data.camera())
 
-plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 denoised = filter.rank.median(image, morphology.disk(2)) #过滤噪声
 #将梯度值低于10的作为开始标记点
 markers = filter.rank.gradient(denoised, morphology.disk(5))<10

@@ -1,7 +1,13 @@
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+
+#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 def ComputeMinLevel(hist, pnum):
     index = np.add.accumulate(hist)

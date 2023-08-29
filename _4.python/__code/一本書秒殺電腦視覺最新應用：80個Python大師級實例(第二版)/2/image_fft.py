@@ -2,8 +2,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.pylab import mpl
 
-mpl.rcParams['font.sans-serif'] = ['SimHei']   #显示中文
-mpl.rcParams['axes.unicode_minus']=False       #显示负号
+#mpl.rcParams['font.sans-serif'] = ['SimHei']   #显示中文
+#mpl.rcParams['axes.unicode_minus']=False       #显示负号
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 
 Fs=1200;  #采样频率
 Ts=1/Fs;  #采样区间

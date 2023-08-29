@@ -1,8 +1,13 @@
-#-*- coding: utf-8 -*
 import numpy as np
 from scipy import ndimage
 import matplotlib.pyplot as plt
-plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+
+#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 def pic_compress(k, pic_array):
     u, sigma, vt = np.linalg.svd(pic_array)
@@ -21,4 +26,5 @@ ax[0].imshow(ori_img)
 ax[0].set_title("压缩前") 
 ax[1].imshow(new_img) 
 ax[1].set_title("压缩后") 
+
 plt.show()

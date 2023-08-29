@@ -3,7 +3,13 @@ import matplotlib.pyplot as plt
 import math
 import numpy as np
 
-plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 #高斯滤波函数
 def my_function_gaussion(x, y, sigma):
     return math.exp(-(x**2 + y**2) / (2*sigma**2)) / (2*math.pi*sigma**2)

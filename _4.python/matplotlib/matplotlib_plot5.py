@@ -123,6 +123,14 @@ plt.show()
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 plt.rcParams['axes.unicode_minus']=False # 負號不出問題
 plt.title("使用自定義的中文字型", size=15) # 不用再設字型!
+
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 '''
 
 r = 3

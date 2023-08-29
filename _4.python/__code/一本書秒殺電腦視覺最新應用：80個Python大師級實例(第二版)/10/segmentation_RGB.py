@@ -1,4 +1,3 @@
-# coding: utf-8
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -63,7 +62,12 @@ dst16 = cv2.cvtColor(dst16, cv2.COLOR_BGR2RGB)
 dst64 = cv2.cvtColor(dst64, cv2.COLOR_BGR2RGB)
 
 #用来正常显示中文标签
-plt.rcParams['font.sans-serif']=['SimHei']
+#plt.rcParams['font.sans-serif']=['SimHei']
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 #显示图像
 titles = [u'原始图像', u'聚类图像 K=2', u'聚类图像 K=4',
@@ -73,4 +77,5 @@ for i in range(6):
    plt.subplot(2,3,i+1), plt.imshow(images[i], 'gray'), 
    plt.title(titles[i])  
    plt.xticks([]),plt.yticks([])  
+
 plt.show()
