@@ -1,4 +1,3 @@
-# ch3_28_1.py
 import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
@@ -17,6 +16,6 @@ plt.tight_layout(pad=7)
 plt.title("銷售報表", fontsize=24)
 plt.xlabel("年度", fontsize=14)
 plt.ylabel("數量", fontsize=14)
-plt.show()
 
+plt.show()
 

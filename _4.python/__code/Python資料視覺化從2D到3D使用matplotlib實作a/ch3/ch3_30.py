@@ -1,4 +1,3 @@
-# ch3_30.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -25,8 +24,6 @@ plt.plot(x1*0.7, y3, 'o-', label='遮罩點')
 plt.plot(x1*1.0, y4, 'o-', label='將點設為NaN')
 plt.legend()
 plt.title('Cos函數顯示與遮蔽點的應用')
+
 plt.show()
-
-
-
 

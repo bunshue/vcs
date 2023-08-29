@@ -1,4 +1,3 @@
-# ch3_29.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -10,6 +9,7 @@ cos_line, = plt.plot(x, y2,label="Cos",lw=3)
 sin_legend = plt.legend(handles=[sin_line], loc=1)  # 建立sin圖表物件
 plt.gca().add_artist(sin_legend)    # 手動將sin圖例加入圖表
 plt.legend(handles=[cos_line], loc=4)               # 建立cos圖表
+
 plt.show()
 
 

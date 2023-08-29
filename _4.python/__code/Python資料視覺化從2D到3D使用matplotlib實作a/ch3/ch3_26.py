@@ -19,3 +19,18 @@ plt.ylabel("數量", fontsize=14)
 plt.show()
 
 
+'''
+
+#plt.legend(bbox_to_anchor=(1,1))
+
+#plt.legend(loc='upper right')
+
+#plt.legend(loc='center left')
+
+plt.legend(loc='center left',frameon=False)
+
+plt.legend(loc=6,edgecolor='b',facecolor='y')
+
+
+
+'''

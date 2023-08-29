@@ -1,4 +1,3 @@
-# ch3_20_1.py
 import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
@@ -16,6 +15,5 @@ plt.legend(loc='best')
 plt.title("銷售報表", fontsize=24)
 plt.xlabel("年度", fontsize=14)
 plt.ylabel("數量", fontsize=14)
+
 plt.show()
-
-

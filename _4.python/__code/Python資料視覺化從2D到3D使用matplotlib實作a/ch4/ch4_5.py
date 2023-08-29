@@ -1,4 +1,3 @@
-# ch4_5.py
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -9,8 +8,6 @@ plt.axhspan(ymin=0.0,ymax=0.5,fc='y',alpha=0.3) # 水平參考區間
 plt.axvspan(xmin=0.5*np.pi,xmax=1.5*np.pi,
             fc='r',alpha=0.3)                   # 垂直參考區間
 plt.legend()
+
 plt.show()
-
-
-
 
