@@ -1,3 +1,9 @@
+'''
+# 
+
+'''
+
+
 import requests
 
 
@@ -175,7 +181,9 @@ for row in soup.find_all("tr"):
         a = cell.find("a")
         if a is not None:
             print(a.text)
+
 print('------------------------------------------------------------')	#60個
+
 import requests
 from bs4 import BeautifulSoup
 url = "https://www.edu.tw/News.aspx?n=9E7AC85F1954DDA8&sms=169B8E91BB75571F"
@@ -228,7 +236,9 @@ with index_html:
                 fp.write(image_data)
 with open(os.path.join("images", "index.html"), "wt", encoding='utf-8') as fp:
     fp.write(str(index_html))
+    
 print("Done!")
+
 print('------------------------------------------------------------')	#60個
 
 from bs4 import BeautifulSoup
@@ -287,6 +297,7 @@ for item in items:
     conn.execute(sql_str)
 conn.commit()
 conn.close()
+
 print("Done!")
 
 print('------------------------------------------------------------')	#60個
@@ -345,5 +356,6 @@ for item in items:
 conn.commit()
 conn.close()
 print("Done!")
+
 print('------------------------------------------------------------')	#60個
 

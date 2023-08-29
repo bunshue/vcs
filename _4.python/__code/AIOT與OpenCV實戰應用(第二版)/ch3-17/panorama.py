@@ -1,7 +1,7 @@
 import cv2
 
-filename1 = 'penguin1.jpg'
-filename2 = 'penguin2.jpg'
+filename1 = 'penguin3.jpg'
+filename2 = 'penguin4.jpg'
 
 filenames = [filename1, filename2]
 

@@ -1,61 +1,68 @@
-import requests
+'''
+網路爬蟲類
 
+可刪除檔案
 
-print('------------------------------------------------------------')	#60個
-
+engnews.txt
+chinews.txt
 
 
 '''
+
+
+import requests
+from bs4 import BeautifulSoup
+
+import os
+
+import sys
+
+print('------------------------------------------------------------')	#60個
+print('測試 01')
+
+
 #台灣英文新聞網
-url = "https://www.taiwannews.com.tw/en/news/3610689"
+url = 'https://www.taiwannews.com.tw/en/news/3610689'
+url = 'https://www.taiwannews.com.tw/en/news/4966193'
 html = requests.get(url).text
 print(html)
-'''
-
 
 
 print('------------------------------------------------------------')	#60個
+print('測試 02')
 
-
-
-'''
-from bs4 import BeautifulSoup
-import requests
 #台灣英文新聞網
-url = "https://www.taiwannews.com.tw/en/news/3610689"
+url = 'https://www.taiwannews.com.tw/en/news/3610689'
+url = 'https://www.taiwannews.com.tw/en/news/4966193'
 html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
+soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
 title = soup.find("h1", class_="article-title")
 article = soup.find("article", class_="container-fluid article")
 print(title.text)
 print(article.text)
-'''
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
-from bs4 import BeautifulSoup
-import requests
-import os
+print('測試 03')
 
 news_title = ""
 news_content = ""
-if not os.path.exists("engnews.txt"):
+filename = 'engnews.txt'
+if not os.path.exists(filename):
     #台灣英文新聞網
-    url = "https://www.taiwannews.com.tw/en/news/3610689"
+    url = 'https://www.taiwannews.com.tw/en/news/3610689'
+    url = 'https://www.taiwannews.com.tw/en/news/4966193'
     html = requests.get(url).text
-    soup = BeautifulSoup(html, "lxml")
+    soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
     title = soup.find("h1", class_="article-title")
     article = soup.find("article", class_="container-fluid article")
     news_title = title.text
     news_content = article.text
-    with open("engnews.txt", "w", encoding="utf-8") as f:
+    with open(filename, "w", encoding="utf-8") as f:
         f.write(news_title+"\n")
         f.write(news_content)
 else:
-    with open("engnews.txt", "r", encoding="utf-8") as f:
+    with open(filename, "r", encoding="utf-8") as f:
         lines = f.readlines()
         news_title = lines[0]
         news_content = lines[1:]
@@ -65,50 +72,42 @@ print(news_content)
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-from bs4 import BeautifulSoup
-import requests
-import os
+print('測試 04')
 
 news_title = ""
 news_content = ""
-if not os.path.exists("chinews.txt"):
-    url = "https://www.cna.com.tw/news/aopl/201901050192.aspx"
+filename = "chinnews.txt"
+if not os.path.exists(filename):
+    #url = 'https://www.cna.com.tw/news/aopl/201901050192.aspx'
+    url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'
     html = requests.get(url).text
-    soup = BeautifulSoup(html, "lxml")
+    soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
     title = soup.find("title")
     article = soup.find("div", class_="paragraph")
     news_title = title.text
     news_content = article.text
-    with open("chinews.txt", "w", encoding="utf-8") as f:
+    with open(filename, "w", encoding="utf-8") as f:
         f.write(news_title+"\n")
         f.write(news_content)
 else:
-    with open("chinews.txt", "r", encoding="utf-8") as f:
+    with open(filename, "r", encoding="utf-8") as f:
         lines = f.readlines()
         news_title = lines[0]
         news_content = lines[1:]
 print(news_title)
 print(news_content)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-from bs4 import BeautifulSoup
-import requests
-import os
+print('測試 05')
 
 news_title = ""
 news_content = ""
-filename = "chinews.txt"
+filename = "chinnews.txt"
 if not os.path.exists(filename):
-    url = "https://www.cna.com.tw/news/aopl/201901050192.aspx"
+    #url = 'https://www.cna.com.tw/news/aopl/201901050192.aspx'
+    url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'
     html = requests.get(url).text
-    soup = BeautifulSoup(html, "lxml")
+    soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
     title = soup.find("title")
     article = soup.find("div", class_="paragraph")
     news_title = title.text.strip()
@@ -128,44 +127,40 @@ print(news_content)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-with open("engnews.txt", "r", encoding="utf-8") as f:
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     print(f.readline())
     print("-->Next")
-with open("engnews.txt", "r", encoding="utf-8") as f:
+
+filename = 'engnews.txt'    
+with open(filename, "r", encoding="utf-8") as f:
     print(f.read())
     print("-->Next")
-with open("engnews.txt", "r", encoding="utf-8") as f:
+
+filename = 'engnews.txt'    
+with open(filename, "r", encoding="utf-8") as f:
     print(f.readlines())
 
-print('------------------------------------------------------------')	#60個
-
-
-with open("engnews.txt", "r", encoding="utf-8") as f:
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 print(repr(data))
 
-
-print('------------------------------------------------------------')	#60個
-
-with open("engnews.txt", "r", encoding="utf-8") as f:
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 print(data.split())
 
-
-print('------------------------------------------------------------')	#60個
-
-with open("engnews.txt", "r", encoding="utf-8") as f:
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.split()
 for d in data:
     d.strip()
 print(data)
-print('------------------------------------------------------------')	#60個
 
-
-with open("engnews.txt", "r", encoding="utf-8") as f:
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.replace("(", "")
 data = data.replace(")", "")
@@ -176,11 +171,8 @@ data = data.replace("”", "")
 data = data.split()
 print(data)
 
-
-
-print('------------------------------------------------------------')	#60個
-
-with open("engnews.txt", "r", encoding="utf-8") as f:
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 special_chars = list("(),.“”")
 for char in special_chars:
@@ -188,25 +180,22 @@ for char in special_chars:
 data = data.split()
 print(data)
 
-print('------------------------------------------------------------')	#60個
-
-with open("engnews.txt", "r", encoding="utf-8") as f:
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.translate({ord('('):None, ord(')'):None, ord('.'):None, ord('“'):None, ord('”'):None})
 data = data.split()
 print(data)
 
-
-print('------------------------------------------------------------')	#60個
-with open("engnews.txt", "r", encoding="utf-8") as f:
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.translate({ord(c):None for c in list("(),.“”")})
 data = data.split()
 print(data)
 
-print('------------------------------------------------------------')	#60個
-
-with open("engnews.txt", "r", encoding="utf-8") as f:
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.translate({ord(c):None for c in list("(),.“”")})
 data = data.split()
@@ -220,9 +209,10 @@ print(word_freq)
 
 print('------------------------------------------------------------')	#60個
 
-
 import operator
-with open("engnews.txt", "r", encoding="utf-8") as f:
+
+filename = 'engnews.txt'
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.translate({ord(c):None for c in list("(),.“”")})
 data = data.split()
@@ -235,24 +225,26 @@ for word in data:
 ordered_freq = sorted(word_freq.items(), key=operator.itemgetter(1), reverse=True)
 for w, c in ordered_freq:
     print(w, c)
+
 print('------------------------------------------------------------')	#60個
 
-
 import jieba
-with open("chinews.txt", "r", encoding="utf-8") as f:
+
+filename = "chinnews.txt"
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 print(data, "\n")
 data = data.translate({ord(c):None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
 words = jieba.cut(data)
 for word in words:
     print(word, "/ ", end="")
-
-
     
 print('------------------------------------------------------------')	#60個
 
 import jieba
-with open("chinews.txt", "r", encoding="utf-8") as f:
+
+filename = "chinnews.txt"
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.translate({ord(c):None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
 words = jieba.cut(data)
@@ -270,17 +262,17 @@ print('------------------------------------------------------------')	#60個
 
 from collections import Counter
 import jieba
-with open("chinews.txt", "r", encoding="utf-8") as f:
+
+filename = "chinnews.txt"
+with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.translate({ord(c):None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
 words = jieba.cut(data)
 for w, c in Counter(words).most_common():
     if c > 1:
         print(w, c)
-        
 
 print('------------------------------------------------------------')	#60個
-
 
 s = "   this is a sample sentance. this is a cat\n "
 print(s.capitalize())
@@ -299,14 +291,15 @@ print(s.zfill(50))
 
 print('------------------------------------------------------------')	#60個
 
-
-with open("ksvote.txt", "r", encoding="utf-8") as f:
+filename = 'ksvote.txt'
+with open(filename, "r", encoding="utf-8") as f:
     ksvote = f.readlines()
 print(ksvote)
 
 print('------------------------------------------------------------')	#60個
 
-with open("ksvote.txt", "r", encoding="utf-8") as f:
+filename = 'ksvote.txt'
+with open(filename, "r", encoding="utf-8") as f:
     ksvote = f.readlines()
 num_ksvote = list()
 for line in ksvote:
@@ -316,16 +309,12 @@ print(num_ksvote)
 
 print('------------------------------------------------------------')	#60個
 
-with open("ksvote.txt", "r", encoding="utf-8") as f:
+filename = 'ksvote.txt'
+with open(filename, "r", encoding="utf-8") as f:
     ksvote = f.readlines()
 num_ksvote = [int(line.strip().replace(",","")) for line in ksvote]
 print(num_ksvote)
 
-print('------------------------------------------------------------')	#60個
-
-s = list("3874950382")
-print(s)
-print(sum(s))
 print('------------------------------------------------------------')	#60個
 
 s = list("3874950382")
@@ -358,7 +347,8 @@ print('------------------------------------------------------------')	#60個
 def fixtype(n):
     return int(n.strip().replace(",",""))
 
-with open("ksvote.txt", "r", encoding="utf-8") as f:
+filename = 'ksvote.txt'
+with open(filename, "r", encoding="utf-8") as f:
     ksvote = f.readlines()
 num_ksvote = map(fixtype, ksvote)
 for vote in num_ksvote:
@@ -372,8 +362,8 @@ for bar in map(lambda n: "*"*n, s):
 
 print('------------------------------------------------------------')	#60個
 
-
-with open("ksvote.txt", "r", encoding="utf-8") as f:
+filename = 'ksvote.txt'
+with open(filename, "r", encoding="utf-8") as f:
     ksvote = f.readlines()
 num_ksvote = map(lambda n:int(n.strip().replace(",","")), ksvote)
 for vote in num_ksvote:
