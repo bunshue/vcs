@@ -3,7 +3,7 @@ import numpy as np
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\lenaNoise.png")
+o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -16,7 +16,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\lenaNoise.png")
+o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -31,7 +31,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\lenaNoise.png")
+o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -44,7 +44,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\lenaNoise.png")
+o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -57,7 +57,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\lenaNoise.png")
+o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -70,7 +70,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\lenaNoise.png")
+o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -83,7 +83,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\lenaNoise.png")
+o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -96,7 +96,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\lenaNoise.png")
+o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -109,7 +109,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\bilTest.bmp")
+o=cv2.imread('bilTest.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -126,7 +126,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("image\\lena.bmp")
+o=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -162,16 +162,15 @@ def saltpepper(img,n):
             img[j,i,2]=0
     return img
 
-
 #上面就是椒盐噪声函数，下面是使用方法，大家可以愉快的玩耍了
-img=cv2.imread('image\\lena.bmp')
+img=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 
 print('顯示xxxx')
 saltImage=saltpepper(img,0.02)
 cv2.imshow('saltImage',saltImage)
 
-#cv2.imwrite('image\\test.jpg',img) 偽寫入
+#cv2.imwrite('test.jpg',img) 偽寫入
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()

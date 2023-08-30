@@ -211,7 +211,7 @@ print('顯示原圖')
 gray2 = cv2.cvtColor(image2,cv2.COLOR_BGR2GRAY)  
 HuM2=cv2.HuMoments(cv2.moments(gray2)).flatten()
 #----------------計算圖像3的Hu矩-------------------
-image3 = cv2.imread('lena.bmp')
+image3 = cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 
 

@@ -112,8 +112,8 @@ cv2.imshow("cropped", crop_image)
 # 寫入圖檔, 偽執行
 #cv2.imwrite('crop.jpg', crop_image)
 
-cv2.waitKey(0)
-
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print('圖片裁剪縮放')
 

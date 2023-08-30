@@ -37,7 +37,7 @@ print("rst.shape=",rst.shape)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -54,7 +54,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -73,7 +73,7 @@ sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -88,7 +88,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -159,7 +159,7 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -197,7 +197,7 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -235,7 +235,7 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -273,7 +273,7 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -311,7 +311,7 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -331,7 +331,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'lena.bmp'
+filename = 'lena_gray.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 

@@ -3,7 +3,7 @@ import numpy as np
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("lena.bmp",cv2.IMREAD_GRAYSCALE)
+o=cv2.imread('lena_gray.bmp',cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -24,7 +24,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("lenas.bmp")
+o=cv2.imread('lena_small.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -45,7 +45,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("lena.bmp")
+o=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -63,7 +63,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("lena.bmp")
+o=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -81,7 +81,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-O=cv2.imread("lena.bmp")
+O=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 
 print('顯示xxxx')
@@ -104,7 +104,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-O=cv2.imread("lena.bmp")
+O=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 
 print('顯示xxxx')
@@ -122,7 +122,7 @@ print("原始圖像O與恢復圖像RO差值的絕對值和：",np.sum(result))
 
 print('------------------------------------------------------------')	#60個
 
-O=cv2.imread("lena.bmp")
+O=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 
 print('顯示xxxx')

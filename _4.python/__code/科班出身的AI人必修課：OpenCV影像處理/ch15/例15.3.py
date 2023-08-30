@@ -11,5 +11,7 @@ loc = np.where( res >= threshold)
 for pt in zip(*loc[::-1]):
     cv2.rectangle(img, pt, (pt[0] + w, pt[1] + h), 255, 1)
 plt.imshow(img,cmap = 'gray')
-plt.xticks([]), plt.yticks([])
+plt.xticks([])
+plt.yticks([])
 
+plt.show()

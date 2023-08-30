@@ -12,10 +12,13 @@ circles = np.uint16(np.around(circles))
 for i in circles[0,:]:
   cv2.circle(o,(i[0],i[1]),i[2],(255,0,0),12)   #注意如果是白色，会显示满屏白色，不仔细分析还会以为程序错了呢
   cv2.circle(o,(i[0],i[1]),2,(255,0,0),12)
+
 plt.subplot(121)
 plt.imshow(oshow)
 plt.axis('off')
+
 plt.subplot(122)
 plt.imshow(o)
 plt.axis('off')
 
+plt.show()

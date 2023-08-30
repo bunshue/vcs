@@ -5,7 +5,7 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread("lena.bmp",0)
+a=cv2.imread('lena_gray.bmp', 0)
 print('顯示原圖')
 cv2.imshow("original",a)
 
@@ -28,7 +28,7 @@ a=cv2.imread("boat.bmp")
 print('顯示原圖')
 cv2.imshow("boat",a)
 
-b=cv2.imread("lena.bmp")
+b=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 cv2.imshow("lena",b)
 
@@ -42,11 +42,11 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-lena=cv2.imread("lena512.bmp",cv2.IMREAD_UNCHANGED)
+lena=cv2.imread('lena_gray.bmp', cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
-dollar=cv2.imread("dollar.bmp",cv2.IMREAD_UNCHANGED)
+dollar=cv2.imread("dollar.bmp", cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("dollar",dollar)
 
@@ -62,7 +62,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread("lena.bmp",0)  #通道不同
+a=cv2.imread('lena_gray.bmp', 0)  #通道不同
 print('顯示原圖')
 cv2.imshow("a",a)
 
@@ -83,7 +83,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread("lena.bmp",1)  #通道不同
+a=cv2.imread('lena_gray.bmp', 1)  #通道不同
 print('顯示原圖')
 cv2.imshow("a",a)
 
@@ -104,7 +104,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread("lena.bmp",1)
+a=cv2.imread('lena_gray.bmp', 1)
 print('顯示原圖')
 cv2.imshow("a",a)
 
@@ -125,7 +125,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #圖層提取
-lena=cv2.imread("lena.bmp",0)
+lena=cv2.imread('lena_gray.bmp', 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -146,7 +146,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #異或加密解密
-lena=cv2.imread("lena.bmp",0)
+lena=cv2.imread('lena_gray.bmp', 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -164,14 +164,13 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #讀取原始載體圖像
-lena=cv2.imread("lena.bmp",0)
+lena=cv2.imread('lena_gray.bmp', 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
 #讀取水印圖像
 watermark=cv2.imread("watermark.bmp",0)
 print('顯示原圖')
-
 
 #將水印內的255處理為1，以方便嵌入
 #后續章節會介紹使用threshold處理。
@@ -207,7 +206,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #讀取原始載體圖像
-lena=cv2.imread("lena.bmp",0)
+lena=cv2.imread('lena_gray.bmp', 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -254,7 +253,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #圖層提取
-lena=cv2.imread("lena.bmp",0)
+lena=cv2.imread('lena_gray.bmp', 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 

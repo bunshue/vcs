@@ -19,9 +19,13 @@ for line in lines:
     x2 = int(x0 - 1000*(-b))
     y2 = int(y0 - 1000*(a))
     cv2.line(orgb,(x1,y1),(x2,y2),(0,0,255),2)
+
 plt.subplot(121)
 plt.imshow(oShow)
 plt.axis('off')
+
 plt.subplot(122)
 plt.imshow(orgb)
 plt.axis('off')
+
+plt.show()

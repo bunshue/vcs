@@ -75,7 +75,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('lena.bmp',cv2.IMREAD_GRAYSCALE)
+o = cv2.imread('lena_gray.bmp',cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -139,7 +139,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-
+'''fail
 o = cv2.imread('scharr.bmp',cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
@@ -150,7 +150,7 @@ cv2.imshow("xy11",scharrxy11)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
+'''
 print('------------------------------------------------------------')	#60個
 
 o = cv2.imread('sobel4.bmp',cv2.IMREAD_GRAYSCALE)
@@ -170,7 +170,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('lena.bmp',cv2.IMREAD_GRAYSCALE)
+o = cv2.imread('lena_gray.bmp',cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
 

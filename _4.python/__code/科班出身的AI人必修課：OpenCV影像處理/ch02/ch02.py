@@ -5,7 +5,7 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('lena.bmp',0)
+img=cv2.imread('lena_gray.bmp', 0)
 print('顯示原圖')
 cv2.imshow("before",img)
 
@@ -32,8 +32,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-gray=cv2.imread("lena.bmp",0)
-color=cv2.imread("lenacolor.png")
+gray=cv2.imread('lena_gray.bmp', 0)
+color=cv2.imread('lena_color.png')
 
 print("圖像gray屬性：")
 print("gray.shape=",gray.shape)
@@ -46,7 +46,7 @@ print("color.dtype=",color.dtype)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lenacolor.png")
+img=cv2.imread('lena_color.png')
 print('顯示原圖')
 cv2.imshow("before",img)
 
@@ -97,7 +97,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread("lenacolor.png",cv2.IMREAD_UNCHANGED)
+a=cv2.imread('lena_color.png', cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original",a)
 
@@ -119,7 +119,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-lena=cv2.imread("lena512.bmp",cv2.IMREAD_UNCHANGED)
+lena=cv2.imread('lena_gray.bmp',cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 #cv2.imshow("lena",lena)
 
@@ -138,7 +138,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-lena=cv2.imread("lenacolor.png")
+lena=cv2.imread('lena_color.png')
 print('顯示原圖')
 cv2.imshow("lena1",lena)
 
@@ -169,7 +169,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 print('將一圖分解成 藍 綠 紅 三通道')
-lena=cv2.imread("lenacolor.png")
+lena=cv2.imread('lena_color.png')
 
 b,g,r=cv2.split(lena)
 
@@ -188,7 +188,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 print('將一圖分解成 藍 綠 紅 三通道')
-lena=cv2.imread("lenacolor.png")
+lena=cv2.imread('lena_color.png')
 
 b,g,r=cv2.split(lena)
 

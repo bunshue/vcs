@@ -5,7 +5,7 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+img=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -17,7 +17,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+img=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -30,7 +30,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+img=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -42,7 +42,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+img=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -54,7 +54,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+img=cv2.imread('lena_gray.bmp')
 print('顯示原圖')
 cv2.imshow("img",img)
 
