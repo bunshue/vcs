@@ -34,7 +34,6 @@ img=cv2.imread("lena.bmp")
 print('顯示原圖')
 cv2.imshow("img",img)
 
-
 t,rst=cv2.threshold(img,127,255,cv2.THRESH_TRUNC)
 cv2.imshow("rst",rst)
 
@@ -86,7 +85,6 @@ print('------------------------------------------------------------')	#60個
 img=cv2.imread("tiffany.bmp",0)
 print('顯示原圖')
 cv2.imshow("img",img)
-
 
 t1,thd=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
 t2,otsu=cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)

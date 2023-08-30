@@ -1,3 +1,8 @@
+'''
+一大堆random範例
+
+'''
+
 import random                       # 導入模組random
 
 min, max = 1, 100                   # 隨機數最小與最大值設定

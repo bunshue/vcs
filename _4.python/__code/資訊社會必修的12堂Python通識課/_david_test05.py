@@ -34,34 +34,6 @@ import builtins
 print(dir(builtins))
 
 
-week = {
-    'Sunday': "星期日", 
-    'Monday': "星期一", 
-    'Tuesday': "星期二", 
-    'Wednesday': "星期三", 
-    'Thursday': "星期四", 
-    'Friday': "星期五", 
-    'Saturday': "星期六", 
-}
-print(week)
-print(week['Sunday'])
-print(week.keys())
-print(week.values())
-print(week.items())
-
-
-
-data = {'宋遠橋':56, '俞蓮舟':55, '俞岱嚴':53}
-data['張松溪'] = 50
-data['張翠山'] = 45
-data['殷梨亭'] = 40
-data['莫聲谷'] = 28
-print(data)
-
-data = {'Tom':2230, 'Richard':28000, 'Judy':1890, 'Mary':25430}
-for name, bonus in data.items():
-    print("{:15s}${:09.2f}".format(name, bonus))
-
 import time
 print(time.time())
 
@@ -316,22 +288,6 @@ with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
 
     
 '''
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 
 print('------------------------------------------------------------')	#60個

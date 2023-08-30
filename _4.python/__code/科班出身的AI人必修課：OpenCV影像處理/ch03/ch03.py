@@ -124,7 +124,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#图层提取
+#圖層提取
 lena=cv2.imread("lena.bmp",0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
@@ -145,7 +145,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#异或加密解密
+#異或加密解密
 lena=cv2.imread("lena.bmp",0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
@@ -163,41 +163,41 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#读取原始载体图像
+#讀取原始載體圖像
 lena=cv2.imread("lena.bmp",0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
-#读取水印图像
+#讀取水印圖像
 watermark=cv2.imread("watermark.bmp",0)
 print('顯示原圖')
 
 
-#将水印内的255处理为1，以方便嵌入
-#后续章节会介绍使用threshold处理。
+#將水印內的255處理為1，以方便嵌入
+#后續章節會介紹使用threshold處理。
 w=watermark[:,:]>0
 watermark[w]=1
-#读取原始载体图像的shape值
+#讀取原始載體圖像的shape值
 r,c=lena.shape
-#============嵌入过程============
-#生成内部值都是254的数组
+#============嵌入過程============
+#生成內部值都是254的數組
 t254=np.ones((r,c),dtype=np.uint8)*254
-#获取lena图像的高7位
+#獲取lena圖像的高7位
 lenaH7=cv2.bitwise_and(lena,t254)
-#将watermark嵌入到lenaH7内
+#將watermark嵌入到lenaH7內
 e=cv2.bitwise_or(lenaH7,watermark)
-#============提取过程============
-#生成内部值都是1的数组
+#============提取過程============
+#生成內部值都是1的數組
 t1=np.ones((r,c),dtype=np.uint8)
-#从载体图像内，提取水印图像
+#從載體圖像內，提取水印圖像
 wm=cv2.bitwise_and(e,t1)
 print(wm)
-#将水印内的1处理为255以方便显示
-#后续章节会介绍threshold实现。
+#將水印內的1處理為255以方便顯示
+#后續章節會介紹threshold實現。
 w=wm[:,:]>0
 wm[w]=255
-#============显示============
-cv2.imshow("watermark",watermark*255)   #当前watermark内最大值为1
+#============顯示============
+cv2.imshow("watermark",watermark*255)   #當前watermark內最大值為1
 cv2.imshow("e",e)
 cv2.imshow("wm",wm)
 
@@ -206,36 +206,36 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#读取原始载体图像
+#讀取原始載體圖像
 lena=cv2.imread("lena.bmp",0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
-#读取原始载体图像的shape值
+#讀取原始載體圖像的shape值
 r,c=lena.shape
 mask=np.zeros((r,c),dtype=np.uint8)
 mask[220:400,250:350]=1
-#获取一个key,打码、解码所使用的密钥
+#獲取一個key,打碼、解碼所使用的密鑰
 key=np.random.randint(0,256,size=[r,c],dtype=np.uint8)
-#============获取打码脸============
-#使用密钥key加密原始图像lena
+#============獲取打碼臉============
+#使用密鑰key加密原始圖像lena
 lenaXorKey=cv2.bitwise_xor(lena,key) 
-#获取加密图像的脸部信息encryptFace
+#獲取加密圖像的臉部信息encryptFace
 encryptFace=cv2.bitwise_and(lenaXorKey,mask*255)
-#将图像lena内的脸部值设置为0，得到noFace1
+#將圖像lena內的臉部值設置為0，得到noFace1
 noFace1=cv2.bitwise_and(lena,(1-mask)*255)
-#得到打码的lena图像
+#得到打碼的lena圖像
 maskFace=encryptFace+noFace1
-#============将打码脸解码============
-#将脸部打码的lena与密钥key异或，得到脸部的原始信息
+#============將打碼臉解碼============
+#將臉部打碼的lena與密鑰key異或，得到臉部的原始信息
 extractOriginal=cv2.bitwise_xor(maskFace,key)
-#将解码的脸部信息extractOriginal提取出来得到extractFace
+#將解碼的臉部信息extractOriginal提取出來得到extractFace
 extractFace=cv2.bitwise_and(extractOriginal,mask*255)
-#从脸部打码的lena内提取没有脸部信息的lena图像，得到noFace2
+#從臉部打碼的lena內提取沒有臉部信息的lena圖像，得到noFace2
 noFace2=cv2.bitwise_and(maskFace,(1-mask)*255)
-#得到解码的lena图像
+#得到解碼的lena圖像
 extractLena=noFace2+extractFace
-#============显示图像============
+#============顯示圖像============
 cv2.imshow("mask",mask*255)
 cv2.imshow("1-mask",(1-mask)*255)
 cv2.imshow("key",key)
@@ -253,7 +253,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-#图层提取
+#圖層提取
 lena=cv2.imread("lena.bmp",0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
@@ -273,4 +273,3 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-

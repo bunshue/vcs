@@ -9,7 +9,7 @@ cv2.imshow("original",o)
 
 print('顯示xxxxx')
 sobelx = cv2.Sobel(o,-1,1,0)
-cv2.imshow("x",sobelx)
+cv2.imshow("Sobel",sobelx)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -23,7 +23,7 @@ cv2.imshow("original",o)
 print('顯示xxxxx')
 sobelx = cv2.Sobel(o,cv2.CV_64F,1,0)
 sobelx = cv2.convertScaleAbs(sobelx)   # 转回uint8  
-cv2.imshow("x",sobelx)
+cv2.imshow("Sobel",sobelx)
 
 cv2.waitKey()
 cv2.destroyAllWindows()

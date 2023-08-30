@@ -1,5 +1,10 @@
 import sys
 
+'''
+list 與 tuple 範例
+
+'''
+
 print('------------------------------------------------------------')	#60個
 
 numbers1 = (1, 2, 3, 4, 5)      # 定義元組元素是整數
@@ -115,6 +120,10 @@ print('zipData資料類型', type(zipData))     # 列印zip資料類型
 player = list(zipData)                      # 將zip資料轉成串列
 print('player 資料類型', type(player))      # 列印player資料類型
 print(player)                               # 列印串列
+
+print('player0 資料類型', type(player[0]))      # 列印player資料類型
+print('player1 資料類型', type(player[1]))      # 列印player資料類型
+print('player2 資料類型', type(player[2]))      # 列印player資料類型
 
 print('------------------------------------------------------------')	#60個
 
