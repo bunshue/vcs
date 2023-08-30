@@ -305,94 +305,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-'''
-
-from wordcloud import WordCloud
-from PIL import Image
-
-f = open('eduheadlines.txt','r', encoding='utf-8').read()
-mask = np.array(Image.open('star.jpg'))
-
-#WordCloud kilo可用  sugar不可用
-wordcloud = WordCloud(background_color="white",
-                      width=1000, height=860, 
-                      margin=2, font_path="simhei.ttf", 
-                      mask=mask).generate(f)
-plt.figure(figsize=(10,10))
-plt.imshow(wordcloud)
-plt.axis("off")
-
-plt.show()
-'''
-
-print('------------------------------------------------------------')	#60個
 
 '''
-import sqlite3
-
-from wordcloud import WordCloud
-from PIL import Image
-
-dbfile = "applenews.db"
-conn = sqlite3.connect(dbfile)
-
-sql_str = "select * from news;"
-rows = conn.execute(sql_str)
-all_news = ""
-for row in rows:
-    all_news += row[3]
-
-mask = np.array(Image.open('cloud.jpg'))
-
-#WordCloud kilo可用  sugar不可用
-wordcloud = WordCloud(background_color="white",
-                      width=1000, height=860, 
-                      margin=2, font_path="simhei.ttf", 
-                      mask=mask).generate(all_news)
-plt.figure(figsize=(10,10))
-plt.imshow(wordcloud)
-plt.axis("off")
-
-plt.show()
-'''
-
-print('------------------------------------------------------------')	#60個
-
-''' 無檔案 stopWords.txt
-import sqlite3
-
-from wordcloud import WordCloud
-from PIL import Image
-import jieba
-from collections import Counter
-
-dbfile = "applenews.db"
-conn = sqlite3.connect(dbfile)
-
-sql_str = "select * from news;"
-rows = conn.execute(sql_str)
-all_news = ""
-for row in rows:
-    all_news += row[3]
-
-stopwords = list()
-with open('stopWords.txt', 'rt', encoding='utf-8') as fp:
-    stopwords = [word.strip() for word in fp.readlines()]
-
-keyterms = [keyterm for keyterm in jieba.cut(all_news) if keyterm not in stopwords]
-text = ",".join(keyterms)
-mask = np.array(Image.open('cloud.jpg'))
-wordcloud = WordCloud(background_color="white",
-                      width=1000, height=860, 
-                      margin=2, font_path="simhei.ttf", 
-                      mask=mask).generate(text)
-plt.figure(figsize=(10,10))
-plt.imshow(wordcloud)
-plt.axis("off")
-
-plt.show()
-'''
-
 print('------------------------------------------------------------')	#60個
 
 data = pd.read_csv('hualien.csv')
@@ -430,6 +344,9 @@ fig2.plot.bar(ylim=(0,80000))
 #應顯示圖片  但無
 
 print('------------------------------------------------------------')	#60個
+
+'''
+
 
 '''
 import xlrd

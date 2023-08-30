@@ -19,7 +19,7 @@ image = cv2.imread(filename)	#讀取本機圖片
 shape = image.shape
 h = shape[0]    #高
 w = shape[1]    #寬
-h, w, d = image.shape   #d為dimension d=3 全彩 d=1 灰階
+h, w, d = image.shape   #d為dimension d=3 全彩, d=1 灰階
 print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
 cv2.imshow('Picture Viewer', image) #顯示圖片
@@ -109,8 +109,8 @@ crop_image = image[y:y+h, x:x+w]
 # 顯示圖片
 cv2.imshow("cropped", crop_image)
 
-# 寫入圖檔
-cv2.imwrite('crop.jpg', crop_image)
+# 寫入圖檔, 偽執行
+#cv2.imwrite('crop.jpg', crop_image)
 
 cv2.waitKey(0)
 
@@ -127,17 +127,16 @@ y = 100
 w = 100
 h = 100
 
-cv2.imwrite(filename2, image[y:y + h, x:x + w])
+# 寫入圖檔, 偽執行
+#cv2.imwrite(filename2, image[y:y + h, x:x + w])
 
 print('完成')
 
-
 print('------------------------------------------------------------')	#60個
+
 '''
 #儲存檔案
 image = cv2.imread(filename)	#讀取本機圖片
-
-
 
 #寫入圖片檔案
 #若要將 NumPy 陣列中儲存的圖片寫入檔案，可以使用 OpenCV 的 cv2.imwrite：
@@ -156,7 +155,6 @@ cv2.imwrite('output.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
 cv2.imwrite('output.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
 print('用matplotlib顯示圖片')
 
-
 #保存圖片 質量為5 和 100
 print('存圖, 質量為5')
 cv2.imwrite("./1.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 5])
@@ -168,14 +166,8 @@ cv2.imwrite("./3.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
 print('存圖, 壓縮為9')
 cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
 
-
-
 cv2.imwrite(filename2a, image1)
 cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
 '''
-
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個

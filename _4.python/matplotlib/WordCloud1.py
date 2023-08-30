@@ -10,21 +10,21 @@ from janome.tokenizer import Tokenizer
 from PIL import Image
 import pandas as pd
 
-
 print('------------------------------------------------------------')	#60個
 
 #繪製英文的文字雲
 
 # 原始文章
-text_love = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
+cloud_text = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
 Love is also considered to be a virtue representing human kindness, compassion, and affection, as "the unselfish loyal and benevolent concern for the good of another".[4] It may also describe compassionate and affectionate actions towards other humans, one's self or animals.[5]
 Love in its various forms acts as a major facilitator of interpersonal relationships and, owing to its central psychological importance, is one of the most common themes in the creative arts.[6] Love has been postulated to be a function to keep human beings together against menaces and to facilitate the continuation of the species.[7]
 Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, 
 and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
 
-wc_base = wordcloud.WordCloud(width=1000, height=600, background_color="white") 
-wc_base.generate(text_love) 
-plt.imshow(wc_base) 
+wc = wordcloud.WordCloud(width=1000, height=600, background_color="white") 
+wc.generate(cloud_text)
+
+plt.imshow(wc) 
 plt.axis("off")
 
 plt.show()
@@ -132,20 +132,23 @@ print('------------------------------------------------------------')	#60個
 #調整文字雲的形狀
 #愛心形狀的文字雲繪製範例
 # 原始文章
-text_love = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
+cloud_text = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
 Love is also considered to be a virtue representing human kindness, compassion, and affection, as "the unselfish loyal and benevolent concern for the good of another".[4] It may also describe compassionate and affectionate actions towards other humans, one's self or animals.[5]
 Love in its various forms acts as a major facilitator of interpersonal relationships and, owing to its central psychological importance, is one of the most common themes in the creative arts.[6] Love has been postulated to be a function to keep human beings together against menaces and to facilitate the continuation of the species.[7]
 Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
 
+
+mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
 # 載入遮罩圖片
-mask_image = np.array(Image.open("data/heart.png")) 
+mask_image = np.array(Image.open(mask_filename))
 
 # 產生以圖片作為遮罩的文字雲
-wc = wordcloud.WordCloud(width=700, height=700, background_color="white",
+wc = wordcloud.WordCloud(width=700, height=700,
+                         background_color="white",
                          font_path=r"C:\Windows\Fonts\msjh.ttc",
                          mask=mask_image, contour_width=6,
                          contour_color="pink", colormap="plasma")
-wc.generate(text_love) 
+wc.generate(cloud_text) 
 
 # 顯示文字雲
 plt.imshow(wc) 
@@ -200,4 +203,100 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+import wordcloud
+from PIL import Image
+
+cloud_text = open('eduheadlines.txt','r', encoding='utf-8').read()
+print(cloud_text)
+
+mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/star.jpg'
+# 載入遮罩圖片
+mask_image = np.array(Image.open(mask_filename))
+
+wc = wordcloud.WordCloud(width=1000, height=860,
+                         background_color="white",
+                         font_path=r"C:\Windows\Fonts\msjh.ttc",
+                         margin=2,
+                         mask=mask_image)
+wc.generate(cloud_text)
+
+# 顯示文字雲
+plt.figure(figsize=(10,10))
+plt.imshow(wc)
+plt.axis("off")
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+import sqlite3
+
+from wordcloud import WordCloud
+from PIL import Image
+
+dbfile = "applenews.db"
+conn = sqlite3.connect(dbfile)
+
+sql_str = "select * from news;"
+rows = conn.execute(sql_str)
+all_news = ""
+for row in rows:
+    all_news += row[3]
+
+mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg'
+# 載入遮罩圖片
+mask_image = np.array(Image.open(mask_filename))
+
+wordcloud = WordCloud(background_color="white",
+                      width=1000, height=860,
+                      font_path=r"C:\Windows\Fonts\msjh.ttc",
+                      margin=2,
+                      mask=mask_image).generate(all_news)
+plt.figure(figsize=(10,10))
+plt.imshow(wordcloud)
+plt.axis("off")
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+''' 無檔案 stopWords.txt
+import sqlite3
+
+from wordcloud import WordCloud
+from PIL import Image
+import jieba
+from collections import Counter
+
+dbfile = "applenews.db"
+conn = sqlite3.connect(dbfile)
+
+sql_str = "select * from news;"
+rows = conn.execute(sql_str)
+all_news = ""
+for row in rows:
+    all_news += row[3]
+
+stopwords = list()
+with open('stopWords.txt', 'rt', encoding='utf-8') as fp:
+    stopwords = [word.strip() for word in fp.readlines()]
+
+keyterms = [keyterm for keyterm in jieba.cut(all_news) if keyterm not in stopwords]
+text = ",".join(keyterms)
+
+mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg'
+# 載入遮罩圖片
+mask_image = np.array(Image.open(mask_filename))
+wordcloud = WordCloud(background_color="white",
+                      width=1000, height=860,
+                      font_path=r"C:\Windows\Fonts\msjh.ttc",
+                      margin=2,
+                      mask=mask_image).generate(text)
+plt.figure(figsize=(10,10))
+plt.imshow(wordcloud)
+plt.axis("off")
+
+plt.show()
+'''
 

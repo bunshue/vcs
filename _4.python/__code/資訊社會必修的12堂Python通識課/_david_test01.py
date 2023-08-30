@@ -3,10 +3,6 @@
 
 可刪除檔案
 
-engnews.txt
-chinews.txt
-
-
 '''
 
 
