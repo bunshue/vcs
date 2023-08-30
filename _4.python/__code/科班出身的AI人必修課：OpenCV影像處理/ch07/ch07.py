@@ -4,8 +4,11 @@ import numpy as np
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\lenaNoise.png")
-r=cv2.blur(o,(5,5))
+print('顯示原圖')
 cv2.imshow("original",o)
+
+print('顯示xxxx')
+r=cv2.blur(o,(5,5))
 cv2.imshow("result",r)
 
 cv2.waitKey()
@@ -14,9 +17,12 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\lenaNoise.png")
+print('顯示原圖')
+cv2.imshow("original",o)
+
+print('顯示xxxx')
 r5=cv2.blur(o,(5,5))      
 r30=cv2.blur(o,(30,30))      
-cv2.imshow("original",o)
 cv2.imshow("result5",r5)
 cv2.imshow("result30",r30)
 
@@ -26,8 +32,11 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\lenaNoise.png")
+print('顯示原圖')
+cv2.imshow("original",o)
+
+print('顯示xxxx')
 r=cv2.boxFilter(o,-1,(5,5)) 
-cv2.imshow("original",o)
 cv2.imshow("result",r)
 
 cv2.waitKey()
@@ -36,8 +45,11 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\lenaNoise.png")
+print('顯示原圖')
+cv2.imshow("original",o)
+
+print('顯示xxxx')
 r=cv2.boxFilter(o,-1,(5,5),normalize=0) 
-cv2.imshow("original",o)
 cv2.imshow("result",r)
 
 cv2.waitKey()
@@ -46,8 +58,11 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\lenaNoise.png")
+print('顯示原圖')
+cv2.imshow("original",o)
+
+print('顯示xxxx')
 r=cv2.boxFilter(o,-1,(2,2),normalize=0) 
-cv2.imshow("original",o)
 cv2.imshow("result",r)
 
 cv2.waitKey()
@@ -56,8 +71,11 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\lenaNoise.png")
+print('顯示原圖')
+cv2.imshow("original",o)
+
+print('顯示xxxx')
 r=cv2.GaussianBlur(o,(5,5),0,0)
-cv2.imshow("original",o)
 cv2.imshow("result",r)
 
 cv2.waitKey()
@@ -66,8 +84,11 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\lenaNoise.png")
+print('顯示原圖')
+cv2.imshow("original",o)
+
+print('顯示xxxx')
 r=cv2.medianBlur(o,3)
-cv2.imshow("original",o)
 cv2.imshow("result",r)
 
 cv2.waitKey()
@@ -76,8 +97,11 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\lenaNoise.png")
-r=cv2.bilateralFilter(o,25,100,100)
+print('顯示原圖')
 cv2.imshow("original",o)
+
+print('顯示xxxx')
+r=cv2.bilateralFilter(o,25,100,100)
 cv2.imshow("result",r)
 
 cv2.waitKey()
@@ -86,10 +110,15 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\bilTest.bmp")
-g=r=cv2.GaussianBlur(o,(55,55),0,0)
-b=cv2.bilateralFilter(o,55,100,100)
+print('顯示原圖')
 cv2.imshow("original",o)
+
+print('顯示xxxx')
+g=r=cv2.GaussianBlur(o,(55,55),0,0)
 cv2.imshow("Gaussian",g)
+
+print('顯示xxxx')
+b=cv2.bilateralFilter(o,55,100,100)
 cv2.imshow("bilateral",b)
 
 cv2.waitKey()
@@ -98,9 +127,12 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 o=cv2.imread("image\\lena.bmp")
+print('顯示原圖')
+cv2.imshow("original",o)
+
+print('顯示xxxx')
 kernel = np.ones((9,9),np.float32)/81
 r = cv2.filter2D(o,-1,kernel)
-cv2.imshow("original",o)
 cv2.imshow("Gaussian",r)
 
 cv2.waitKey()
@@ -133,10 +165,13 @@ def saltpepper(img,n):
 
 #上面就是椒盐噪声函数，下面是使用方法，大家可以愉快的玩耍了
 img=cv2.imread('image\\lena.bmp')
+print('顯示原圖')
+
+print('顯示xxxx')
 saltImage=saltpepper(img,0.02)
 cv2.imshow('saltImage',saltImage)
 
-cv2.imwrite('image\\test.jpg',img)
+#cv2.imwrite('image\\test.jpg',img) 偽寫入
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()

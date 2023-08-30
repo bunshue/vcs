@@ -100,20 +100,18 @@ plt.plot(x, y20, color = 'blue', linestyle = "-", linewidth = "2", markersize = 
 
 
 
-'''
-plt.title('Plot title', fontsize = 18) # 設定圖表標題內容及大小
-plt.xlabel('x label', fontsize = 10) # 設定 x 軸標題內容及大小
-plt.ylabel('y label', fontsize = 10) # 設定 y 軸標題內容及大小
-
-'''
-
-#plt.title(label = '231')
 plt.title('圖形標題')
+plt.title('圖形標題', fontsize = 18) # 設定圖表標題內容及大小
+plt.title(label = '圖形標題')
 plt.xlabel('x軸標記')
+plt.xlabel('x軸標記', fontsize = 10) # 設定 x 軸標題內容及大小
 plt.ylabel('y軸標記')
+plt.ylabel('y軸標記', fontsize = 10) # 設定 y 軸標題內容及大小
 
-plt.xticks([0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi],
-          ['$0$', '$\pi/2$', '$-\pi$', '$-3\pi/2$', '$-2\pi$']);
+print('標示x軸刻度記號')
+plt.xticks([-2*np.pi, -3*np.pi/2, -np.pi, -np.pi/2, 0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi],
+          ['$-2\pi$', '$-3\pi/2$', '$-\pi$', '$-\pi/2$', '$0$', '$\pi/2$', '$\pi$', '$3\pi/2$', '$2\pi$']);
+
 
 #plt.axis('equal')       #軸比例
 #xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
@@ -158,7 +156,7 @@ plt.show()
 
 '''
 
-
+# plt.figure()參數
 
 plt.figure()  #開新圖片
 plt.figure("Figure_1")
@@ -169,9 +167,7 @@ plt.figure(num = '股票分析', figsize=(10,10)) # 設定圖表區寬高
 
 
 
-
-
-# plt 存圖命令
+# plt.savefig 存圖命令
 plt.savefig('__temp\mypic.png', format='png', dpi=200)
 plt.savefig(fname = "my_hist.png", format = "png")
 plt.savefig('sin_plot.svg')
@@ -181,7 +177,6 @@ plt.savefig('sin_plot.jpg')
 plt.savefig('sin_plot222.png', format='png', transparent=True, dpi=300, pad_inches = 0)    #指定分辨率
 plt.savefig('sin_plot333.png', dpi = 300)
 plt.savefig("mandelbrot_python.svg")
-
 
 '''
 

@@ -1,8 +1,10 @@
 import cv2
 import numpy as np
 
+import sys
 print('------------------------------------------------------------')	#60個
 
+print('用np建立一個影像陣列')
 img=np.ones([2,4,3],dtype=np.uint8)
 size=img.shape[:2]
 rst=cv2.resize(img,size)
@@ -13,7 +15,10 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("test.bmp")
+filename = 'test.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rows,cols=img.shape[:2]
 size=(int(cols*0.9),int(rows*0.5))
 rst=cv2.resize(img,size)
@@ -22,14 +27,20 @@ print("rst.shape=",rst.shape)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("test.bmp")
+filename = 'test.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rst=cv2.resize(img,None,fx=2,fy=0.5)
 print("img.shape=",img.shape)
 print("rst.shape=",rst.shape)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 x=cv2.flip(img,0)
 y=cv2.flip(img,1)
 xy=cv2.flip(img,-1)
@@ -43,7 +54,10 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 height,width=img.shape[:2]
 x=100
 y=200
@@ -55,9 +69,14 @@ cv2.imshow("move",move)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+sys.exit()
+
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 height,width=img.shape[:2]
 M=cv2.getRotationMatrix2D((width/2,height/2),45,0.6)
 rotate=cv2.warpAffine(img,M,(width,height))
@@ -69,7 +88,10 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('lena.bmp')
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rows,cols,ch=img.shape
 p1=np.float32([[0,0],[cols-1,0],[0,rows-1]])
 p2=np.float32([[0,rows*0.33],[cols*0.85,rows*0.25],[cols*0.15,rows*0.7]])
@@ -83,7 +105,10 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('demo.bmp')
+filename = 'demo.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rows,cols=img.shape[:2]
 print(rows,cols)
 pts1 = np.float32([[150,50],[400,50],[60,450],[310,450]])
@@ -98,7 +123,9 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
+print('用np建立一個隨機影像陣列')
 img=np.random.randint(0,256,size=[4,5],dtype=np.uint8)
+
 rows,cols=img.shape
 mapx = np.zeros(img.shape,np.float32)
 mapy = np.zeros(img.shape,np.float32)
@@ -114,7 +141,9 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
+print('用np建立一個隨機影像陣列')
 img=np.random.randint(0,256,size=[4,5],dtype=np.uint8)
+
 rows,cols=img.shape
 mapx = np.zeros(img.shape,np.float32)
 mapy = np.zeros(img.shape,np.float32)
@@ -130,7 +159,10 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rows,cols=img.shape[:2]
 mapx = np.zeros(img.shape[:2],np.float32)
 mapy = np.zeros(img.shape[:2],np.float32)
@@ -147,7 +179,9 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
+print('用np建立一個隨機影像陣列')
 img=np.random.randint(0,256,size=[4,5],dtype=np.uint8)
+
 rows,cols=img.shape
 mapx = np.zeros(img.shape,np.float32)
 mapy = np.zeros(img.shape,np.float32)
@@ -163,7 +197,10 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rows,cols=img.shape[:2]
 mapx = np.zeros(img.shape[:2],np.float32)
 mapy = np.zeros(img.shape[:2],np.float32)
@@ -180,7 +217,9 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
+print('用np建立一個隨機影像陣列')
 img=np.random.randint(0,256,size=[4,5],dtype=np.uint8)
+
 rows,cols=img.shape
 mapx = np.zeros(img.shape,np.float32)
 mapy = np.zeros(img.shape,np.float32)
@@ -196,7 +235,10 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rows,cols=img.shape[:2]
 mapx = np.zeros(img.shape[:2],np.float32)
 mapy = np.zeros(img.shape[:2],np.float32)
@@ -213,7 +255,9 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
+print('用np建立一個隨機影像陣列')
 img=np.random.randint(0,256,size=[4,5],dtype=np.uint8)
+
 rows,cols=img.shape
 mapx = np.zeros(img.shape,np.float32)
 mapy = np.zeros(img.shape,np.float32)
@@ -229,7 +273,10 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rows,cols=img.shape[:2]
 mapx = np.zeros(img.shape[:2],np.float32)
 mapy = np.zeros(img.shape[:2],np.float32)
@@ -246,7 +293,9 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
+print('用np建立一個隨機影像陣列')
 img=np.random.randint(0,256,size=[4,6],dtype=np.uint8)
+
 rows,cols=img.shape
 mapx = np.zeros(img.shape,np.float32)
 mapy = np.zeros(img.shape,np.float32)
@@ -262,7 +311,10 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rows,cols=img.shape[:2]
 mapx = np.zeros(img.shape[:2],np.float32)
 mapy = np.zeros(img.shape[:2],np.float32)
@@ -279,7 +331,10 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp")
+filename = 'lena.bmp'
+print('讀取圖檔 :', filename)
+img=cv2.imread(filename)
+
 rows,cols=img.shape[:2]
 mapx = np.zeros(img.shape[:2],np.float32)
 mapy = np.zeros(img.shape[:2],np.float32)

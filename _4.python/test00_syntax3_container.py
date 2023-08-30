@@ -1,13 +1,61 @@
 # 各種python專用的語法 字典
 
-
-
-
 import sys
 
 print('------------------------------------------------------------')	#60個
 
 print('字典的操作')
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+animal = {'mouse':'老鼠',
+          'panda':'貓熊',
+          'penguin':'企鵝',
+          'lion':'獅子',
+          'tiger':'老虎',
+          'zebra':'斑馬',
+          'koala':'無尾熊',
+          'hippo':'河馬'}
+              
+print(animal.keys())
+
+for eng in animal.keys():
+    print(f"{eng},{animal[eng]}")
+
+print('用pickle來存取一個字典檔案, 讀寫接用 wb/rb binary')
+
+import pickle
+
+f = open("animal.pickle", 'wb')
+
+pickle.dump(animal, f)
+
+f.close()
+
+f = open("animal.pickle", 'rb')
+
+pickledict = pickle.load(f)
+f.close()
+print(pickledict)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
       
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
 print("舊fruits字典內容:", fruits)
@@ -261,6 +309,75 @@ for c in wd:
     print(morse_code[c])
 
 print('------------------------------------------------------------')	#60個
+
+
+
+'''
+新進
+
+
+Dictionary
+
+開始互動之前, 我們來補一個 Python 很重要、但我們還沒介紹的 dictionary 資料型態。
+
+mydict = {'apple':'蘋果', 'banana':'香蕉'}
+查字典
+mydict['apple']      
+
+加字進去
+mydict['orange'] = '橘子'
+
+字典裡內容一一列出
+
+for key in mydict:
+    print(key + ": " + mydict[key])
+
+
+
+
+
+----------------------------------------------------------------
+再來還有一個資料型態是「字典」。
+
+my_dict = {'spam':'午餐肉', 'egg':'雞蛋', 'ham':'火腿'}
+
+查詢 (記得 Python 的 index 都是中括號)。
+
+my_dict['ham']
+
+新增一筆記錄。
+
+
+my_dict['apple'] = '蘋果'
+
+my_dict
+
+del my_dict['ham']
+
+my_dict
+
+my_dict.keys()
+
+my_dict.values()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+
 
 
 

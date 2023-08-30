@@ -1,14 +1,22 @@
 import cv2
 import numpy as np
 
+import sys
+
 print('------------------------------------------------------------')	#60個
 
 a=cv2.imread("lena.bmp",0)
-b=a
-result1=a+b
-result2=cv2.add(a,b)
+print('顯示原圖')
 cv2.imshow("original",a)
+
+b=a
+
+print('兩圖直接相加')
+result1=a+b
 cv2.imshow("result1",result1)
+
+print('兩圖用cv相')
+result2=cv2.add(a,b)
 cv2.imshow("result2",result2)
 
 cv2.waitKey()
@@ -17,21 +25,32 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 a=cv2.imread("boat.bmp")
-b=cv2.imread("lena.bmp")
-result=cv2.addWeighted(a,0.6,b,0.4,0)
+print('顯示原圖')
 cv2.imshow("boat",a)
+
+b=cv2.imread("lena.bmp")
+print('顯示原圖')
 cv2.imshow("lena",b)
+
+print('兩圖做alpha疊加')
+result=cv2.addWeighted(a,0.6,b,0.4,0)
 cv2.imshow("result",result)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+
 print('------------------------------------------------------------')	#60個
 
 lena=cv2.imread("lena512.bmp",cv2.IMREAD_UNCHANGED)
-dollar=cv2.imread("dollar.bmp",cv2.IMREAD_UNCHANGED)
+print('顯示原圖')
 cv2.imshow("lena",lena)
+
+dollar=cv2.imread("dollar.bmp",cv2.IMREAD_UNCHANGED)
+print('顯示原圖')
 cv2.imshow("dollar",dollar)
+
+print('兩圖擷取某塊做alpha疊加, 再貼回原圖, 並顯示之')
 face1=lena[220:400,250:350]
 face2=dollar[160:340,200:300]
 add=cv2.addWeighted(face1,0.6,face2,0.4,0)
@@ -43,29 +62,41 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread("lena.bmp",0)
-b=np.zeros(a.shape,dtype=np.uint8)
-b[100:400,200:400]=255
-b[100:500,100:200]=255
-c=cv2.bitwise_and(a,b)
+a=cv2.imread("lena.bmp",0)  #通道不同
+print('顯示原圖')
 cv2.imshow("a",a)
+
+b=np.zeros(a.shape,dtype=np.uint8) #與a一樣大的黑圖
+b[100:400,200:400]=255 #某塊做mask
+b[100:500,100:200]=255 #某塊做mask
+print('顯示mask')
 cv2.imshow("b",b)
-cv2.imshow("c",c)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-a=cv2.imread("lena.bmp",1)
-b=np.zeros(a.shape,dtype=np.uint8)
-b[100:400,200:400]=255
-b[100:500,100:200]=255
-c=cv2.bitwise_and(a,b)
+print('顯示原圖與mask作用後的圖')
+c=cv2.bitwise_and(a,b)  #ab都成立的 擷取出來
 print("a.shape=",a.shape)
 print("b.shape=",b.shape)
+cv2.imshow("c",c)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print('------------------------------------------------------------')	#60個
+
+a=cv2.imread("lena.bmp",1)  #通道不同
+print('顯示原圖')
 cv2.imshow("a",a)
+
+b=np.zeros(a.shape,dtype=np.uint8) #與a一樣大的黑圖
+b[100:400,200:400]=255 #某塊做mask
+b[100:500,100:200]=255 #某塊做mask
+print('顯示mask')
 cv2.imshow("b",b)
+
+print('顯示原圖與mask作用後的圖')
+c=cv2.bitwise_and(a,b)  #ab都成立的 擷取出來
+print("a.shape=",a.shape)
+print("b.shape=",b.shape)
 cv2.imshow("c",c)
 
 cv2.waitKey()
@@ -74,14 +105,17 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 a=cv2.imread("lena.bmp",1)
+print('顯示原圖')
+cv2.imshow("a",a)
+
 w,h,c=a.shape
+
 mask=np.zeros((w,h),dtype=np.uint8)
 mask[100:400,200:400]=255
 mask[100:500,100:200]=255
 c=cv2.bitwise_and(a,a,mask)
 print("a.shape=",a.shape)
 print("mask.shape=",mask.shape)
-cv2.imshow("a",a)
 cv2.imshow("mask",mask)
 cv2.imshow("c",c)
 
@@ -92,7 +126,9 @@ print('------------------------------------------------------------')	#60個
 
 #图层提取
 lena=cv2.imread("lena.bmp",0)
+print('顯示原圖')
 cv2.imshow("lena",lena)
+
 r,c=lena.shape
 x=np.zeros((r,c,8),dtype=np.uint8)
 for i in range(8):
@@ -111,11 +147,13 @@ print('------------------------------------------------------------')	#60個
 
 #异或加密解密
 lena=cv2.imread("lena.bmp",0)
+print('顯示原圖')
+cv2.imshow("lena",lena)
+
 r,c=lena.shape
 key=np.random.randint(0,256,size=[r,c],dtype=np.uint8)
 encryption=cv2.bitwise_xor(lena,key)
 decryption=cv2.bitwise_xor(encryption,key)
-cv2.imshow("lena",lena)
 cv2.imshow("key",key)
 cv2.imshow("encryption",encryption)
 cv2.imshow("decryption",decryption)
@@ -127,8 +165,14 @@ print('------------------------------------------------------------')	#60個
 
 #读取原始载体图像
 lena=cv2.imread("lena.bmp",0)
+print('顯示原圖')
+cv2.imshow("lena",lena)
+
 #读取水印图像
 watermark=cv2.imread("watermark.bmp",0)
+print('顯示原圖')
+
+
 #将水印内的255处理为1，以方便嵌入
 #后续章节会介绍使用threshold处理。
 w=watermark[:,:]>0
@@ -153,7 +197,6 @@ print(wm)
 w=wm[:,:]>0
 wm[w]=255
 #============显示============
-cv2.imshow("lena",lena)
 cv2.imshow("watermark",watermark*255)   #当前watermark内最大值为1
 cv2.imshow("e",e)
 cv2.imshow("wm",wm)
@@ -165,6 +208,9 @@ print('------------------------------------------------------------')	#60個
 
 #读取原始载体图像
 lena=cv2.imread("lena.bmp",0)
+print('顯示原圖')
+cv2.imshow("lena",lena)
+
 #读取原始载体图像的shape值
 r,c=lena.shape
 mask=np.zeros((r,c),dtype=np.uint8)
@@ -190,7 +236,6 @@ noFace2=cv2.bitwise_and(maskFace,(1-mask)*255)
 #得到解码的lena图像
 extractLena=noFace2+extractFace
 #============显示图像============
-cv2.imshow("lena",lena)
 cv2.imshow("mask",mask*255)
 cv2.imshow("1-mask",(1-mask)*255)
 cv2.imshow("key",key)
@@ -210,7 +255,9 @@ print('------------------------------------------------------------')	#60個
 
 #图层提取
 lena=cv2.imread("lena.bmp",0)
+print('顯示原圖')
 cv2.imshow("lena",lena)
+
 r,c=lena.shape
 x=np.zeros((r,c,8),dtype=np.uint8)
 for i in range(8):
@@ -225,12 +272,5 @@ for i in range(8):
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
 

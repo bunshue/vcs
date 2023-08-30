@@ -39,45 +39,11 @@ class Card:
 
 card01 = Card(2, 3)
 card01.show()
-
+'''
         
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
-animal = {'mouse':'老鼠',
-          'panda':'貓熊',
-          'penguin':'企鵝',
-          'lion':'獅子',
-          'tiger':'老虎',
-          'zebra':'斑馬',
-          'koala':'無尾熊',
-          'hippo':'河馬'}
-              
-print(animal.keys())
-
-for eng in animal.keys():
-    print(f"{eng},{animal[eng]}")
-
-print('用pickle來存取一個字典檔案, 讀寫接用 wb/rb binary')
-
-import pickle
-
-f = open("animal.pickle", 'wb')
-
-pickle.dump(animal, f)
-
-f.close()
-
-f = open("animal.pickle", 'rb')
-
-pickledict = pickle.load(f)
-f.close()
-print(pickledict)
-
-'''
 
 print('------------------------------------------------------------')	#60個
 

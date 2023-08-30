@@ -5,15 +5,24 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena.bmp",0)
+img=cv2.imread('lena.bmp',0)
 print('顯示原圖')
 cv2.imshow("before",img)
 
-
-print('修改一部份資料')
-for i in range(50, 100):
-    for j in range(50, 100):
+print('修改一部份資料 1')
+for i in range(20, 60):    # y
+    for j in range(20, 100):    # x
         img[i,j] = 255
+
+print('修改一部份資料 2')
+#测试读取、修改单个像素值
+print("读取像素点img.item(3,2)=",img.item(3,2))
+img.itemset((3,2),255)
+print("修改后像素点img.item(3,2)=",img.item(3,2))
+#测试修改一个区域的像素值
+for i in range(100,200):    #y
+    for j in range(20,60): #x
+        img.itemset((i,j),220)
 
 print('顯示修改後的圖')
 cv2.imshow("after",img)
@@ -21,10 +30,25 @@ cv2.imshow("after",img)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+sys.exit
+'''
+print('------------------------------------------------------------')	#60個
+
+gray=cv2.imread("lena.bmp",0)
+color=cv2.imread("lenacolor.png")
+
+print("图像gray属性：")
+print("gray.shape=",gray.shape)
+print("gray.size=",gray.size)
+print("gray.dtype=",gray.dtype)
+print("图像color属性：")
+print("color.shape=",color.shape)
+print("color.size=",color.size)
+print("color.dtype=",color.dtype)
+
 print('------------------------------------------------------------')	#60個
 
 img=cv2.imread("lenacolor.png")
-
 print('顯示原圖')
 cv2.imshow("before",img)
 
@@ -48,6 +72,20 @@ for i in range(100,150):
     for j in range(0,100):
         img[i,j]=0          #黑色
 
+
+
+print("访问img.item(0,0,0)=",img.item(0,0,0))
+print("访问img.item(0,0,1)=",img.item(0,0,1))
+print("访问img.item(0,0,2)=",img.item(0,0,2))
+for i in range(200,250):
+    for j in range(0,100):
+        for k in range(0,3):
+            img.itemset((i,j,k),255)     #白色
+
+print("修改后img.item(0,0,0)=",img.item(0,0,0))
+print("修改后img.item(0,0,1)=",img.item(0,0,1))
+print("修改后img.item(0,0,2)=",img.item(0,0,2))
+
 print('顯示修改後的圖')
 cv2.imshow("after",img)
 
@@ -57,54 +95,6 @@ print("修改后img[0,0,1]=",img[0,0,1])
 print("修改后img[0,0,2]=",img[0,0,2])
 print("修改后img[50,0]=",img[50,0])
 print("修改后img[100,0]=",img[100,0])
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-img=cv2.imread("lena.bmp",0)
-
-#测试读取、修改单个像素值
-print("读取像素点img.item(3,2)=",img.item(3,2))
-img.itemset((3,2),255)
-print("修改后像素点img.item(3,2)=",img.item(3,2))
-#测试修改一个区域的像素值
-
-print('顯示原圖')
-cv2.imshow("before",img)
-
-for i in range(10,100):
-    for j in range(80,100):
-        img.itemset((i,j),255)
-
-print('顯示修改後的圖')
-cv2.imshow("after",img)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-
-img=cv2.imread("lenacolor.png")
-
-print('顯示原圖')
-cv2.imshow("before",img)
-
-print("访问img.item(0,0,0)=",img.item(0,0,0))
-print("访问img.item(0,0,1)=",img.item(0,0,1))
-print("访问img.item(0,0,2)=",img.item(0,0,2))
-for i in range(0,50):
-    for j in range(0,100):
-        for k in range(0,3):
-            img.itemset((i,j,k),255)     #白色
-
-print('顯示修改後的圖')
-cv2.imshow("after",img)
-
-print("修改后img.item(0,0,0)=",img.item(0,0,0))
-print("修改后img.item(0,0,1)=",img.item(0,0,1))
-print("修改后img.item(0,0,2)=",img.item(0,0,2))
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -112,29 +102,20 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 a=cv2.imread("lenacolor.png",cv2.IMREAD_UNCHANGED)
-
-face=a[220:400,250:350]
-
 print('顯示原圖')
 cv2.imshow("original",a)
 
-print('顯示修改後的圖')
+print('擷取一塊出來, 並顯示之')
+face=a[200:400,200:380] #h, w
 cv2.imshow("face",face)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-a=cv2.imread("lenacolor.png",cv2.IMREAD_UNCHANGED)
-
-print('顯示原圖')
-cv2.imshow("original",a)
-
-face=np.random.randint(0,256,(180,100,3))
-a[220:400,250:350]=face
-
-print('顯示修改後的圖')
+print('將其中一塊亂碼化, 並顯示之')
+x_st = 50
+y_st = 50
+w = 100
+h = 180
+face=np.random.randint(0,256,(h,w,3))
+a[y_st:y_st+h,x_st:x_st+w]=face
 cv2.imshow("result",a)
 
 cv2.waitKey()
@@ -143,16 +124,16 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 lena=cv2.imread("lena512.bmp",cv2.IMREAD_UNCHANGED)
-dollar=cv2.imread("dollar.bmp",cv2.IMREAD_UNCHANGED)
-
 print('顯示原圖')
-cv2.imshow("lena",lena)
+#cv2.imshow("lena",lena)
 
-cv2.imshow("dollar",dollar)
+dollar=cv2.imread("dollar.bmp",cv2.IMREAD_UNCHANGED)
+print('顯示原圖')
+#cv2.imshow("dollar",dollar)
 
+print('A圖抓一塊貼到B圖上')
 face=lena[220:400,250:350]
 dollar[160:340,200:300]=face
-
 print('顯示修改後的圖')
 cv2.imshow("result",dollar)
 
@@ -162,7 +143,6 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 lena=cv2.imread("lenacolor.png")
-
 print('顯示原圖')
 cv2.imshow("lena1",lena)
 
@@ -179,14 +159,18 @@ cv2.imshow("g",g)
 print('顯示 紅 通道 圖')
 cv2.imshow("r",r)
 
+
+print('設定第0通道為0')
 lena[:,:,0]=0
 cv2.imshow("lenab0",lena)
 
+print('設定第1通道為0')
 lena[:,:,1]=0
 cv2.imshow("lenab0g0",lena)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -227,19 +211,3 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-
-gray=cv2.imread("lena.bmp",0)
-color=cv2.imread("lenacolor.png")
-
-print("图像gray属性：")
-print("gray.shape=",gray.shape)
-print("gray.size=",gray.size)
-print("gray.dtype=",gray.dtype)
-print("图像color属性：")
-print("color.shape=",color.shape)
-print("color.size=",color.size)
-print("color.dtype=",color.dtype)
-
-
-print('------------------------------------------------------------')	#60個
-
