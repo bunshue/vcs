@@ -10,9 +10,68 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
+print('測試 1')
 
+print('將一圖分解成 藍 綠 紅 三通道')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/white_300X300.bmp'
+image=cv2.imread(filename)
+print('顯示原圖')
+cv2.imshow("image", image)
+
+'''same
+b=image[:,:,0]
+g=image[:,:,1]
+r=image[:,:,2]
+'''
+b,g,r=cv2.split(image)
+
+print('顯示 ch0 藍 通道 圖')
+cv2.imshow('B', b)
+
+print('顯示 ch1 綠 通道 圖')
+cv2.imshow('G', g)
+
+print('顯示 ch2 紅 通道 圖')
+cv2.imshow('R', r)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print('設定第0通道為0')
+image[:,:,0]=0
+cv2.imshow("image ch0 = 0", image)
+
+print('設定第1通道為0')
+image[:,:,1]=0
+cv2.imshow("image ch0 = ch1 = 0",image)
+
+print('設定第2通道為0')
+image[:,:,2]=0
+cv2.imshow("image ch0 = ch1 = ch2 = 0",image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
+
+print('將一圖分解成 藍 綠 紅 三通道')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+
+image=cv2.imread(filename)
+
+b,g,r=cv2.split(image)
+
+bgr=cv2.merge([b,g,r])
+rgb=cv2.merge([r,g,b])
+
+cv2.imshow("image",image)   #原圖
+cv2.imshow("B-G-R OK", bgr) #照BGR排列 OK
+cv2.imshow("R-G-B NG", rgb) #照RGB排列 錯相
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
 print('------------------------------------------------------------')	#60個
 print('測試 2')
 

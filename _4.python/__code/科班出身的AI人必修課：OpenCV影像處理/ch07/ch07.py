@@ -7,7 +7,7 @@ o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 blur 效果 1')
 r=cv2.blur(o,(5,5))
 cv2.imshow("result",r)
 
@@ -20,7 +20,7 @@ o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 blur 效果 2')
 r5=cv2.blur(o,(5,5))      
 r30=cv2.blur(o,(30,30))      
 cv2.imshow("result5",r5)
@@ -35,7 +35,7 @@ o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 boxFilter 效果 1')
 r=cv2.boxFilter(o,-1,(5,5)) 
 cv2.imshow("result",r)
 
@@ -48,7 +48,7 @@ o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 boxFilter 效果 2')
 r=cv2.boxFilter(o,-1,(5,5),normalize=0) 
 cv2.imshow("result",r)
 
@@ -61,7 +61,7 @@ o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 boxFilter 效果 3')
 r=cv2.boxFilter(o,-1,(2,2),normalize=0) 
 cv2.imshow("result",r)
 
@@ -74,7 +74,7 @@ o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 GaussianBlur 效果 1')
 r=cv2.GaussianBlur(o,(5,5),0,0)
 cv2.imshow("result",r)
 
@@ -87,7 +87,7 @@ o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 medianBlur 效果 1')
 r=cv2.medianBlur(o,3)
 cv2.imshow("result",r)
 
@@ -100,7 +100,7 @@ o=cv2.imread('lena_noise.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 bilateralFilter 效果')
 r=cv2.bilateralFilter(o,25,100,100)
 cv2.imshow("result",r)
 
@@ -113,11 +113,11 @@ o=cv2.imread('bilTest.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 GaussianBlur 效果 2')
 g=r=cv2.GaussianBlur(o,(55,55),0,0)
 cv2.imshow("Gaussian",g)
 
-print('顯示xxxx')
+print('顯示 bilateralFilter 效果')
 b=cv2.bilateralFilter(o,55,100,100)
 cv2.imshow("bilateral",b)
 
@@ -131,7 +131,7 @@ o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示xxxx')
+print('顯示 filter2D 效果')
 kernel = np.ones((9,9),np.float32)/81
 r = cv2.filter2D(o,-1,kernel)
 cv2.imshow("Gaussian",r)
@@ -168,7 +168,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bm
 img=cv2.imread(filename)
 print('顯示原圖')
 
-print('顯示xxxx')
+print('顯示 saltpepper 效果')
 saltImage=saltpepper(img,0.02)
 cv2.imshow('saltImage',saltImage)
 

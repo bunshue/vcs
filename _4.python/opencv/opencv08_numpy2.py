@@ -11,102 +11,8 @@ import sys
 
 W = 300
 H = 300
-print('------------------------------------------------------------')	#60個
-print('numpy製作一個 %d X %d 的圖 黑色, 2維' % (W, H))
-
-img = np.zeros((W, H), dtype = np.uint8)    #預設為0, 黑色, 2維
-#print("img=\n",img)
-
-cv2.imshow("one",img)   #有cv2.imshow的, 要對應destroyAllWindows()
-
-print('中間一塊用填成白色')
-for i in range(100, 200):
-    for j in range(100, 200):
-        img[i,j] = 255
-
-cv2.imshow("two",img)   #有cv2.imshow的, 要對應destroyAllWindows()
-
-print('中間一塊用填成白色')
-mask=np.zeros([W, H],np.uint8)
-mask[50 : 250, 50 : 250] = 255
-
-cv2.imshow('mask', mask) #有cv2.imshow的, 要對應destroyAllWindows()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
 
 print('------------------------------------------------------------')	#60個
-
-
-#-----------蓝色通道值--------------
-print('numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
-blue=np.zeros((W, H, 3),dtype=np.uint8)   #預設為0, 黑色, 3通道
-blue[:,:,0]=255     #第0通道, 藍色
-#print("blue=\n",blue)
-
-cv2.imshow("blue",blue)
-
-#-----------綠色通道值--------------
-print('numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
-green=np.zeros((W, H, 3),dtype=np.uint8)  #預設為0, 黑色, 3通道
-green[:,:,1]=255     #第0通道, 綠色
-#print("green=\n",green)
-
-cv2.imshow("green",green)
-
-#-----------紅色通道值--------------
-print('numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
-red=np.zeros((W, H, 3),dtype=np.uint8)    #預設為0, 黑色, 3通道
-red[:,:,2]=255     #第0通道, 紅色
-#print("red=\n",red)
-
-cv2.imshow("red",red)
-
-#-----------释放窗口--------------
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-
-print('------------------------------------------------------------')	#60個
-
-print('numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
-img=np.zeros((W, H, 3),dtype=np.uint8)    #預設為0, 黑色, 3通道
-
-img[:,0:100,0]=255      #第0通道, 藍色通道
-img[:,100:200,1]=255    #第1通道, 綠色通道
-img[:,200:300,2]=255    #第2通道, 紅色通道
-
-#print("img=\n",img)
-
-cv2.imshow("img",img)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-sys.exit()
-
-print('------------------------------------------------------------')	#60個
-
-print(' ???? numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
-
-img=np.zeros((2,4,3),dtype=np.uint8)    #預設為0, 黑色, 3維
-#print("img=\n",img)
-
-print("读取像素点img[0,3]=",img[0,3])
-print("读取像素点img[1,2,2]=",img[1,2,2])
-img[0,3]=255
-img[0,0]=[66,77,88]
-img[1,1,1]=3
-img[1,2,2]=4
-img[0,2,0]=5
-print("修改后img\n",img)
-print("读取修改后像素点img[1,2,2]=",img[1,2,2])
-
-print('------------------------------------------------------------')	#60個
-
-sys.exit()
-
 
 img=np.random.randint(0,256,size=[2,4,3],dtype=np.uint8)
 rst=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
@@ -224,14 +130,6 @@ print("修改后img=\n",img)
 print("修改后像素点img.item(3,2)=",img.item(3,2))
 
 print('------------------------------------------------------------')	#60個
-
-print('建立一個每點顏色任意顏色之圖')
-img=np.random.randint(0,256,size=[512,512],dtype=np.uint8)
-
-cv2.imshow("demo",img)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
@@ -532,7 +430,7 @@ def Demo(event,x,y,flags,param):
         print("单击了中间键")
 #创建名称为Demo的响应（回调）函数OnMouseAction
 #将回调函数Demo与窗口“Demo19.9”建立连接
-img = np.ones((W, H, 3),np.uint8)*255
+img = np.ones((H, W, 3),np.uint8)*255
 cv2.namedWindow('Demo19.9')
 cv2.setMouseCallback('Demo19.9',Demo)     
 cv2.imshow('Demo19.9',img)

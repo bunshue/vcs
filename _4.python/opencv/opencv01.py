@@ -100,7 +100,6 @@ plt.hist(image.ravel(), 256, [0,256])
 cv2.imshow('GrayScale Picture', image) #顯示圖片
 plt.show()
 
-
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -138,9 +137,6 @@ cv2.destroyAllWindows() #關閉視窗
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-
-
 
 '''
 

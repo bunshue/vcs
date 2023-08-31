@@ -1,23 +1,25 @@
 import cv2
 import numpy as np
 
+import sys
+
 print('------------------------------------------------------------')	#60個
 
-#RGB<->GRAY
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-lena=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("lena",lena)
+image=cv2.imread(filename)
+print('顯示原圖 彩色')
+cv2.imshow("image", image)
+print("image.shape=",image.shape)
 
-gray=cv2.cvtColor(lena,cv2.COLOR_BGR2GRAY)
-rgb=cv2.cvtColor(gray,cv2.COLOR_GRAY2BGR)
-#==========打印shape============
-print("lena.shape=",lena.shape)
-print("gray.shape=",gray.shape)
-print("rgb.shape=",rgb.shape)
-#==========顯示效果============
+print('原圖 彩色 轉 灰階1通道')
+gray=cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 cv2.imshow("gray",gray)
+print("gray.shape=",gray.shape)
+
+print('灰階 轉 BGR3通道')
+rgb=cv2.cvtColor(gray,cv2.COLOR_GRAY2BGR)
 cv2.imshow("rgb",rgb)
+print("rgb.shape=",rgb.shape)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -25,13 +27,13 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-lena=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("lena",lena)
+image=cv2.imread(filename)
+print('顯示原圖 BGR')
+cv2.imshow("B-G-R OK",image)
 
-print('顯示BGR2RGB')
-rgb = cv2.cvtColor(lena, cv2.COLOR_BGR2RGB)
-cv2.imshow("rgb",rgb)
+print('顯示原圖 BGR 轉 RGB')
+rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+cv2.imshow("R-G-B NG",rgb)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -40,9 +42,11 @@ print('------------------------------------------------------------')	#60個
 
 opencv=cv2.imread("opencv.jpg")
 print('顯示原圖')
-cv2.imshow('opencv',opencv)
+cv2.imshow('opencv', opencv)
 
+print('顯示原圖 BGR 轉 HSV')
 hsv = cv2.cvtColor(opencv, cv2.COLOR_BGR2HSV)
+cv2.imshow('hsv', hsv)
 
 #=============指定藍色值的范圍=============
 minBlue = np.array([110,50,50])
@@ -52,6 +56,7 @@ mask = cv2.inRange(hsv, minBlue, maxBlue)
 #通過掩碼控制的按位與，鎖定藍色區域
 blue = cv2.bitwise_and(opencv,opencv, mask= mask)
 cv2.imshow('blue',blue)
+
 #=============指定綠色值的范圍=============
 minGreen = np.array([50,50,50])
 maxGreen = np.array([70,255,255])
@@ -60,6 +65,7 @@ mask = cv2.inRange(hsv, minGreen, maxGreen)
 #通過掩碼控制的按位與，鎖定綠色區域
 green = cv2.bitwise_and(opencv,opencv, mask= mask)
 cv2.imshow('green',green)
+
 #=============指定紅色值的范圍=============
 minRed = np.array([0,50,50])
 maxRed = np.array([30,255,255])
@@ -67,11 +73,12 @@ maxRed = np.array([30,255,255])
 mask = cv2.inRange(hsv, minRed, maxRed)
 #通過掩碼控制的按位與，鎖定紅色區域
 red= cv2.bitwise_and(opencv,opencv, mask= mask)
-
 cv2.imshow('red',red)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -89,6 +96,7 @@ maxSat=166
 satMask = cv2.inRange(s, minSat, maxSat)
 mask = hueMask & satMask
 roi = cv2.bitwise_and(img,img, mask= mask)
+
 cv2.imshow("ROI",roi)
 
 cv2.waitKey()
@@ -136,9 +144,6 @@ cv2.destroyAllWindows()
 #cv2.imwrite("bgra0.png", bgra0)
 
 print('------------------------------------------------------------')	#60個
-
-
-
 
 
 

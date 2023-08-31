@@ -10,52 +10,45 @@ import cv2
 import numpy as np
 
 print('------------------------------------------------------------')	#60個
-
+'''
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-print('顯示圖片')
+
 image = cv2.imread(filename)	#讀取本機圖片
-#image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)	#讀取本機圖片, 不改變顏色通道
-#image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接變成灰階
-#image = cv2.imread(filename, cv2.IMREAD_COLOR)         #讀取本機圖片, 改為BGR三通道(預設)
+#image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)	# -1 讀取本機圖片, 不改變顏色通道
+#image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#  0 讀取本機圖片, 直接變成灰階
+#image = cv2.imread(filename, cv2.IMREAD_COLOR)         #  1 讀取本機圖片, 改為BGR三通道(預設)
 
-shape = image.shape
-h = shape[0]    #高
-w = shape[1]    #寬
-h, w, d = image.shape   #d為dimension d=3 全彩, d=1 灰階
-print("寬 = ", w, ", 高 = ", h, ", D = ", d)
-
-cv2.imshow('Picture Viewer', image) #顯示圖片
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-print('顯示圖片')
-image = cv2.imread(filename)	#讀取本機圖片
+print('cv2.IMREAD_UNCHANGED =', cv2.IMREAD_UNCHANGED)   # -1
+print('cv2.IMREAD_GRAYSCALE =', cv2.IMREAD_GRAYSCALE)   #  0
+print('cv2.IMREAD_COLOR =', cv2.IMREAD_COLOR)           #  1(預設)
 
 print('image.shape格式 :', type(image.shape))
 print('image.shape內容 :', image.shape)
 
+h = image.shape[0]    #高
+w = image.shape[1]    #寬
+d = image.shape[2]    #深
+h, w, d = image.shape   #d為dimension d=3 全彩, d=1 灰階
+print("寬 = ", w, ", 高 = ", h, ", D = ", d)
+
+cv2.imshow('Picture Viewer', image) #顯示圖片
+cv2.namedWindow('Picture Viewer')
+
 #實例化8位圖
-image_empty = np.zeros(image.shape, np.uint8)
+image_empty = np.zeros(image.shape, dtype = np.uint8)   #依照原圖大小建立一個圖像的二維陣列
+cv2.imshow("empty", image_empty)    #顯示圖片   #空圖, 全黑
+
 image_copy = image.copy()
+cv2.imshow("copy", image_copy)      #顯示圖片   #原圖拷貝
+
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)    #圖片轉為灰階
-
-#顯示圖片
-cv2.imshow("image", image)          #原圖
-cv2.imshow("empty", image_empty)    #空圖, 全黑
-cv2.imshow("copy", image_copy)      #原圖拷貝
-cv2.imshow("gray", image_gray)      #原圖黑白
-
-cv2.namedWindow("image")
+cv2.imshow("gray", image_gray)      #顯示圖片   #原圖轉黑白
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+'''
 print('------------------------------------------------------------')	#60個
 
 '''
@@ -81,30 +74,39 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #裁剪圖片
-image = cv2.imread(filename)	#讀取本機圖片
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 image = cv2.imread(filename)	#讀取本機圖片
 
 # 裁切區域的 x 與 y 座標（左上角）
-x = 100
-y = 100
+x_st = 100
+y_st = 100
 
 # 裁切區域的長度與寬度
 w = 250
 h = 250
 
 # 裁切圖片
-crop_image = image[y:y+h, x:x+w]
+crop_image = image[y_st : y_st + h, x_st : x_st + w]
 
-# 顯示圖片
-cv2.imshow("cropped", crop_image)
+cv2.imshow("cropped", crop_image)   # 顯示圖片
+
+image_empty = np.zeros(image.shape, dtype = np.uint8)   #依照原圖大小建立一個圖像的二維陣列
+
+cv2.imshow("empty", image_empty)    #顯示圖片   #空圖, 全黑
+
+#將擷取的圖貼到新建的黑圖
+image_empty[y_st : y_st + h, x_st : x_st + w] = crop_image
+cv2.imshow("cropped+new", image_empty)   # 顯示圖片
 
 # 寫入圖檔, 偽執行
 #cv2.imwrite('crop.jpg', crop_image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+import sys
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

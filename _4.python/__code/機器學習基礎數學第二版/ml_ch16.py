@@ -5,17 +5,6 @@ import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-# ch16_1.py
-import numpy as np
-
 n = np.linspace(1.1, 10, 90)            # 建立1.1-10的陣列
 count = 0                               # 用於計算每5筆輸出換行
 for i in n:
@@ -24,18 +13,8 @@ for i in n:
     if count % 5 == 0:                  # 每5筆輸出就換行
         print()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-
-
-
-# ch16_2.py
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -50,16 +29,7 @@ plt.plot(x2, y2, label="base = 0.5")
 plt.legend(loc="best")                          # 建立圖例
 plt.axis([0, 10, -5, 5])
 plt.grid()
+
 plt.show()
 
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-

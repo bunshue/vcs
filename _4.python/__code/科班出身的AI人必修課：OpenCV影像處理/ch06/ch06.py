@@ -10,60 +10,14 @@ img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img",img)
 
-t,rst=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
-cv2.imshow("rst",rst)
+print('顯示二值化圖')
+#        cv2.threshold(img, 閥值, 最大灰度值, 使用的二值化方法)
+t, rst = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+#t, rst = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
+#t, rst = cv2.threshold(img,127,255,cv2.THRESH_TRUNC)
+#t, rst = cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
+#t, rst = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("img",img)
-
-
-t,rst=cv2.threshold(img,127,255,cv2.THRESH_BINARY_INV)
-cv2.imshow("rst",rst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("img",img)
-
-t,rst=cv2.threshold(img,127,255,cv2.THRESH_TRUNC)
-cv2.imshow("rst",rst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("img",img)
-
-t,rst=cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
-cv2.imshow("rst",rst)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("img",img)
-
-t,rst=cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
 cv2.imshow("rst",rst)
 
 cv2.waitKey()

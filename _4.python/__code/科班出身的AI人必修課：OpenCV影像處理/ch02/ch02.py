@@ -125,8 +125,9 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp'
 lena=cv2.imread(filename,cv2.IMREAD_UNCHANGED)
+
 print('顯示原圖')
 #cv2.imshow("lena",lena)
 
@@ -145,73 +146,3 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-lena=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("lena1",lena)
-
-b=lena[:,:,0]
-g=lena[:,:,1]
-r=lena[:,:,2]
-
-print('顯示 藍 通道 圖')
-cv2.imshow("b",b)
-
-print('顯示 綠 通道 圖')
-cv2.imshow("g",g)
-
-print('顯示 紅 通道 圖')
-cv2.imshow("r",r)
-
-
-print('設定第0通道為0')
-lena[:,:,0]=0
-cv2.imshow("lenab0",lena)
-
-print('設定第1通道為0')
-lena[:,:,1]=0
-cv2.imshow("lenab0g0",lena)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-print('將一圖分解成 藍 綠 紅 三通道')
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-lena=cv2.imread(filename)
-
-b,g,r=cv2.split(lena)
-
-print('顯示 藍 通道 圖')
-cv2.imshow("B",b)
-
-print('顯示 綠 通道 圖')
-cv2.imshow("G",g)
-
-print('顯示 紅 通道 圖')
-cv2.imshow("R",r)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-print('將一圖分解成 藍 綠 紅 三通道')
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-lena=cv2.imread(filename)
-
-b,g,r=cv2.split(lena)
-
-bgr=cv2.merge([b,g,r])
-rgb=cv2.merge([r,g,b])
-
-cv2.imshow("lena",lena)
-
-cv2.imshow("bgr",bgr)
-
-cv2.imshow("rgb",rgb)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個

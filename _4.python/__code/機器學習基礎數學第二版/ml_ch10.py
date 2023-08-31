@@ -5,30 +5,6 @@ import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 
-x = [x for x in range(0, 11)]                   
-y = [7.5*y - 3.33 for y in x]
-plt.axis([0, 4, 0, 25])
-plt.plot(x, y)   
-plt.plot(1, 5, '-o')
-plt.plot(2, 10, '-o')
-plt.plot(3, 20, '-o')
-plt.xlabel('Times:unit=100')
-plt.ylabel('Voucher:unit=100')
-plt.grid()                              # 加格線
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-x = np.array([1, 2, 3])                 # 拜訪次數, 單位是100
-y = np.array([5, 10, 20])               # 銷售考卷數, 單位是100
-
-a, b = np.polyfit(x, y, 1)
-print('斜率 a = {0:5.2f}'.format(a))
-print('截距 a = {0:5.2f}'.format(b))
-
-print('------------------------------------------------------------')	#60個
-
 x = np.array([1, 2, 3])                 # 拜訪次數, 單位是100
 y = np.array([5, 10, 20])               # 銷售考卷數, 單位是100
 
