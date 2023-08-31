@@ -2,7 +2,7 @@
 imshow
 '''
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 import matplotlib.pyplot as plt
 import matplotlib.image as img
@@ -58,6 +58,7 @@ plt.subplot(235)
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 #裁剪圖片 plt
+
 
 import matplotlib.pyplot as plt
 import matplotlib.image as img
@@ -138,7 +139,7 @@ plt.subplot(236)
 
 plt.show()
 
-
+print('------------------------------------------------------------')	#60個
 
 '''
 

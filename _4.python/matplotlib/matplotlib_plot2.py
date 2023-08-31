@@ -12,59 +12,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#第一張圖
-plt.subplot(231)
-
-# 2D random walk
-#fig2, ax2 = plt.subplots(num="Figure_2")
-
-prng = np.random.RandomState(123)
-
-x = np.linspace(0, 10, 101)
-
-def random_walk(xy0=(0.0, 0.0), nsteps=100, std=1.0):
-    xy = np.zeros((nsteps + 1, 2))
-    xy[0,:] = xy0
-    deltas = prng.normal(loc=0.0, scale=std, size=(nsteps, 2))
-    xy[1:, :] = xy[0, :] + np.cumsum(deltas, axis=0)
-    return xy
-
-for cnt in range(3):
-    traj = random_walk()
-    plt.plot(traj[:, 0], traj[:, 1], label="Traj. {c}".format(c=cnt))
-
-#ax2.legend(loc='best')
-
-
-#第二張圖
-plt.subplot(232)
-
-
-#第三張圖
-plt.subplot(233)
-
-
-
-#第四張圖
-plt.subplot(234)
-
-
-#第五張圖
-plt.subplot(235)
-
-
-#第六張圖
-plt.subplot(236)
-
-
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 # plot 集合
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無

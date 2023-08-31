@@ -1,9 +1,11 @@
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 print('取得 OpenCV 版本')
 
 import cv2
+
+print('------------------------------------------------------------')	#60個
 
 (major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
 
@@ -142,4 +144,4 @@ cv2.destroyAllWindows()
 
 '''
 
-
+print('------------------------------------------------------------')	#60個

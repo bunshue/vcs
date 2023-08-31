@@ -1,5 +1,4 @@
 
-
 '''
 
 https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
@@ -7,7 +6,7 @@ https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
 
 '''
 
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 
@@ -18,6 +17,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+print('------------------------------------------------------------')	#60個
 
 '''
 
@@ -41,6 +41,7 @@ plt.plot(hist)
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 #對於彩色的圖片，
 #可以用 OpenCV 的 calcHist 函數分別計算統計值，
@@ -60,7 +61,7 @@ for i, col in enumerate(color):
   plt.xlim([0, 256])
 plt.show()
 '''
-
+print('------------------------------------------------------------')	#60個
 
 #配合圖形遮罩計算直方圖
 
@@ -104,4 +105,4 @@ plt.xlim([0,256])
 
 plt.show()
 
-
+print('------------------------------------------------------------')	#60個

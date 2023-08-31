@@ -1,12 +1,10 @@
-
 import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
-import cv2
-import numpy as np
+print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 #== Parameters =======================================================================
 BLUR = 21
@@ -40,6 +38,8 @@ cv2.waitKey()
 #cv2存圖
 #cv2.imwrite('person-masked.jpg', masked)
 
+print('------------------------------------------------------------')	#60個
+
 '''
 # split image into channels
 c_red, c_green, c_blue = cv2.split(image)
@@ -69,7 +69,7 @@ cv2.imshow('image', masked)                                   # Displays red, sa
 
 cv2.waitKey()
 '''
-
+print('------------------------------------------------------------')	#60個
 
 
 #直方圖二值化
@@ -91,7 +91,7 @@ cv2.imshow('Binary', th1)#顯示圖片
 
 
 
-
+print('------------------------------------------------------------')	#60個
 
 '''
 
@@ -111,7 +111,7 @@ edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
 cv2.imshow('Canny', edges)#顯示圖片
 
 
-
+print('------------------------------------------------------------')	#60個
 
 #影像邊緣檢測Sobel()函數
 
@@ -136,6 +136,8 @@ gray_image = cv2.imread(filename)	#讀取本機圖片
 
 sobel_image = sobel(gray_image)
 cv2.imshow('Sobel', sobel_image)#顯示圖片
+
+print('------------------------------------------------------------')	#60個
 
 '''
 

@@ -157,7 +157,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('lenacolor.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+o = cv2.imread(filename)
 orgb=cv2.cvtColor(o,cv2.COLOR_BGR2RGB)
 mask = np.zeros(o.shape[:2],np.uint8)
 bgdModel = np.zeros((1,65),np.float64)
@@ -178,7 +179,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-o= cv2.imread('lenacolor.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+o= cv2.imread(filename)
 orgb=cv2.cvtColor(o,cv2.COLOR_BGR2RGB)
 mask = np.zeros(o.shape[:2],np.uint8)
 bgd = np.zeros((1,65),np.float64)
@@ -205,7 +207,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-o= cv2.imread('lenacolor.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+o= cv2.imread(filename)
 orgb=cv2.cvtColor(o,cv2.COLOR_BGR2RGB)
 bgd = np.zeros((1,65),np.float64)
 fgd = np.zeros((1,65),np.float64)

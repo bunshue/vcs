@@ -117,7 +117,8 @@ o1=cv2.imread("tophat.bmp",cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original1",o1)
 
-o2=cv2.imread('lena_gray.bmp',cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+o2=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original2",o2)
 
@@ -137,7 +138,8 @@ o1=cv2.imread("blackhat.bmp",cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original1",o1)
 
-o2=cv2.imread('lena_gray.bmp',cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+o2=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original2",o2)
 

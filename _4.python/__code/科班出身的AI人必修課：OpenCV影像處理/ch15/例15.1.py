@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-img = cv2.imread('lena_gray.bmp',0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img = cv2.imread(filename, 0)
 img2 = img.copy()
 template = cv2.imread('temp.bmp',0)
 th, tw = template.shape[::]

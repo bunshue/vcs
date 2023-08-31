@@ -5,7 +5,8 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('lena_gray.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -17,7 +18,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('lena_gray.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -30,7 +32,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('lena_gray.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -42,7 +45,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('lena_gray.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -54,7 +58,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('lena_gray.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img",img)
 

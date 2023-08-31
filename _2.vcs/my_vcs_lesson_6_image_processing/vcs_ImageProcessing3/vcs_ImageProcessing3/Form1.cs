@@ -24,7 +24,7 @@ namespace vcs_ImageProcessing3
     {
         string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-        //string filename = @"C:\_git\vcs\_1.data\______test_files1\isinbaeva.jpg";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\naruto.jpg";
 
         Stopwatch sw = new Stopwatch();
@@ -303,7 +303,7 @@ namespace vcs_ImageProcessing3
 
         private void button13_Click(object sender, EventArgs e)
         {
-            filename = @"C:\_git\vcs\_1.data\______test_files1\isinbaeva.jpg";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\_image_processing\isinbaeva.jpg";
             image_processing11(filename);
         }
 

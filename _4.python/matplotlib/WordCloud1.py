@@ -21,7 +21,8 @@ Love in its various forms acts as a major facilitator of interpersonal relations
 Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, 
 and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
 
-wc = wordcloud.WordCloud(width=1000, height=600, background_color="white") 
+wc = wordcloud.WordCloud(width=1000, height=600,
+                         background_color="white")
 wc.generate(cloud_text)
 
 plt.imshow(wc) 
@@ -101,7 +102,6 @@ wc.generate(" ".join(wakatigaki))
 plt.imshow(wc) 
 plt.axis("off")
 
-
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -114,7 +114,7 @@ meishi_list = []
 for token in tk.tokenize(text):
     if token.part_of_speech.split(",")[0] == "名詞":
             meishi_list.append(token.surface)
-            
+
 # 要讓只有一個字的單字出現必須設定regexp
 wc = wordcloud.WordCloud(width=1000, height=600, background_color="white",
                          font_path=r"C:\Windows\Fonts\msjh.ttc",
@@ -122,7 +122,6 @@ wc = wordcloud.WordCloud(width=1000, height=600, background_color="white",
 wc.generate(" ".join(meishi_list)) 
 plt.imshow(wc) 
 plt.axis("off")
-
 
 plt.show()
 

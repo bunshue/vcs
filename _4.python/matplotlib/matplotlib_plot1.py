@@ -21,6 +21,26 @@ plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, fac
 #第一張圖
 plt.subplot(231)
 
+# 2D random walk
+#fig2, ax2 = plt.subplots(num="Figure_2")
+
+prng = np.random.RandomState(123)
+
+x = np.linspace(0, 10, 101)
+
+def random_walk(xy0=(0.0, 0.0), nsteps=100, std=1.0):
+    xy = np.zeros((nsteps + 1, 2))
+    xy[0,:] = xy0
+    deltas = prng.normal(loc=0.0, scale=std, size=(nsteps, 2))
+    xy[1:, :] = xy[0, :] + np.cumsum(deltas, axis=0)
+    return xy
+
+for cnt in range(3):
+    traj = random_walk()
+    plt.plot(traj[:, 0], traj[:, 1], label="Traj. {c}".format(c=cnt))
+
+#ax2.legend(loc='best')
+
 
 
 

@@ -47,7 +47,8 @@ def PrintError(data, recdata):
     print('信息丢失率：', sum2/sum1)
 
 
-img = cv2.imread('lena.jpg')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+img = cv2.imread(filename)
 blue = img[:,:,0]
 dataMat = np.mat(blue)
 lowDDataMat, reconMat = im_PCA(dataMat, 1)

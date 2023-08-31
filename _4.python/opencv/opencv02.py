@@ -1,10 +1,11 @@
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 import cv2
 import numpy as np
 
+print('------------------------------------------------------------')	#60個
 
 image = cv2.imread(filename)	#讀取本機圖片
 
@@ -51,6 +52,9 @@ cv2.IMREAD_UNCHANGED
     讀取圖片中所有的 channels，包含透明度的 channel。
 '''
 
+print('------------------------------------------------------------')	#60個
+
+
 image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉為灰階
 
 # 顯示圖片
@@ -96,6 +100,8 @@ OpenCV 顯示圖片視窗
 灰階的圖片也可以顯示，用法都相同：
 '''
 
+print('------------------------------------------------------------')	#60個
+
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
@@ -117,5 +123,8 @@ image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直
 
 # 使用 Matplotlib 顯示圖片
 plt.imshow(image_gray, cmap = 'gray')
+
 plt.show()
+
+print('------------------------------------------------------------')	#60個
 

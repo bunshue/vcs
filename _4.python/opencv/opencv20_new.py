@@ -15,7 +15,7 @@ OpenCV具有findContour()幫助從圖像中提取輪廓的功能。
 import cv2
 import numpy as np
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 image = cv2.imread(filename)
 #cv2.imshow('Input Image', image)

@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 # imshow 集合
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-filename = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 import matplotlib.pyplot as plt
 import matplotlib.image as img
@@ -84,18 +84,9 @@ ax4.set_title(title, fontsize = 12)  #X,Y軸不顯示刻度
 ax4.set_xticks([])
 ax4.set_yticks([])        
 
-
-
-
 plt.show()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
 
 foldername = 'C:/_git/vcs/_1.data/______test_files1/__pic/imagedata/'
 
@@ -127,8 +118,5 @@ for file in files:
     test_label.append(int(label))
    
 show_images_labels_predictions(test_feature,test_label,0,len(test_feature))
-
-
-
 
 print('------------------------------------------------------------')	#60個

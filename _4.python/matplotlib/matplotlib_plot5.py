@@ -1,24 +1,25 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-'''
 x = range(20)
 y = np.random.randn(20)
+plt.plot(x, y)
 
+plt.show()
 
 x = np.linspace(0, 10, 200)
 y = np.sin(5*x) / (1+x**2)
-'''
 
-'''
 plt.bar(range(1,6), np.random.randint(1,30,5))
 
 plt.show()
 
-plt.bar(np.arange(0.6, 5), np.random.randint(1,30,5))
 
+plt.bar(np.arange(0.6, 5), np.random.randint(1,30,5))
 plt.show()
 
+import sys
+sys.exit()
 
 
 #雙色的長條圖
@@ -51,7 +52,6 @@ plt.barh(x, A, fc='#e63946', ec='none')
 plt.barh(x, -B, fc='#7fb069', ec='none')
 plt.show()
 
-'''
 
 '''
 
@@ -132,31 +132,5 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 '''
-
-r = 3
-t = np.linspace(-2*np.pi, 2*np.pi, 200)
-x = r*np.cos(t)
-y = r*np.sin(t)
-
-
-ax = plt.gca()
-ax.set_aspect('equal')
-
-plt.plot(x, y, lw=3)
-
-plt.show()
-
-#-------------
-
-r = np.sin(5*t)
-x = r*np.cos(t)
-y = r*np.sin(t)
-
-ax = plt.gca()
-ax.set_aspect('equal')
-
-plt.plot(x,y,lw=3)
-plt.show()
-
 
 

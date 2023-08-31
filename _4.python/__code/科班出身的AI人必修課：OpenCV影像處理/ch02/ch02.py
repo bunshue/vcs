@@ -5,7 +5,8 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('lena_gray.bmp', 0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("before",img)
 
@@ -32,8 +33,11 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-gray=cv2.imread('lena_gray.bmp', 0)
-color=cv2.imread('lena_color.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+gray=cv2.imread(filename, 0)
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+color=cv2.imread(filename)
 
 print("圖像gray屬性：")
 print("gray.shape=",gray.shape)
@@ -46,7 +50,8 @@ print("color.dtype=",color.dtype)
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread('lena_color.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("before",img)
 
@@ -97,7 +102,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread('lena_color.png', cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+a=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original",a)
 
@@ -119,7 +125,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-lena=cv2.imread('lena_gray.bmp',cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+lena=cv2.imread(filename,cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 #cv2.imshow("lena",lena)
 
@@ -138,7 +145,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-lena=cv2.imread('lena_color.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+lena=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("lena1",lena)
 
@@ -169,7 +177,8 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 print('將一圖分解成 藍 綠 紅 三通道')
-lena=cv2.imread('lena_color.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+lena=cv2.imread(filename)
 
 b,g,r=cv2.split(lena)
 
@@ -188,7 +197,8 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 print('將一圖分解成 藍 綠 紅 三通道')
-lena=cv2.imread('lena_color.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+lena=cv2.imread(filename)
 
 b,g,r=cv2.split(lena)
 

@@ -2,7 +2,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread('lena_gray.bmp', 0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img = cv2.imread(filename, 0)
+
 f = np.fft.fft2(img)
 fshift = np.fft.fftshift(f)
 rows, cols = img.shape

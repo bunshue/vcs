@@ -89,7 +89,8 @@ print('------------------------------------------------------------')	#60個
 
 print('測試 7')
 
-img=cv2.imread("images/lena.bmp")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img=cv2.imread(filename)
 hist = cv2.calcHist([img],[0],None,[256],[0,255])
 print(type(hist))
 print(hist.shape)

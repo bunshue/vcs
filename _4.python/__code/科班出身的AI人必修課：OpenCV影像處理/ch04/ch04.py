@@ -4,7 +4,8 @@ import numpy as np
 print('------------------------------------------------------------')	#60個
 
 #RGB<->GRAY
-lena=cv2.imread("lena_color.png")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+lena=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -23,7 +24,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-lena=cv2.imread("lena_color.png")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+lena=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -110,7 +112,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lena_color.png")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img",img)
 

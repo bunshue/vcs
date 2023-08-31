@@ -154,7 +154,17 @@ plt.show()
 
 
 
+
+
 '''
+
+# plt.plot()參數
+
+plt.plot(year, city1, 'r-.s', lw=2, ms=10, label="台北")
+plt.plot(year, city2, 'g--*', lw=2, ms=10, label="台中")
+
+
+
 
 # plt.figure()參數
 

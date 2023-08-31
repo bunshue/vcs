@@ -18,46 +18,74 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-
-import matplotlib.pyplot as plt
-
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
-week = [0,1,2,3,4,5,6]
-temperature = [23,25,29,31,26,30,24]
-labels = ['Sunday','Monday','Tuesday','Wednesday',
-          'Thursday','Friday','Saturday']
 
-plt.xticks(week,labels,rotation=30) #字體加旋轉
 
-plt.plot(temperature,"-o")
-plt.title("一週的平均溫度", fontsize=24)
-plt.xlabel("星期", fontsize=14)
-plt.ylabel("溫度", fontsize=14)
-plt.show()
+
 
 
 
 
 
 '''
+調整x軸刻度 1
+week = [0,1,2,3,4,5,6]
+labels = ['Sunday','Monday','Tuesday','Wednesday',
+          'Thursday','Friday','Saturday']
+
+plt.xticks(week,labels,rotation=30) #字體加旋轉
 
 
-
+調整x軸刻度 2
 year = [2015,2016,2017,2018,2019]
 plt.xticks(year)
 
-plt.plot(year, city1, 'r-.s', lw=2, ms=10, label="台北")
-plt.plot(year, city2, 'g--*', lw=2, ms=10, label="台中")
-
-
-
-
-
+調整x軸刻度 3
 x = [0.5,1.0,10,50,100]
 labels = ['A','B','C','D','E']
 plt.xticks(x,labels)
 
+調整x軸刻度 4
+x = [0.5,1.0,10,50,100]
+value = range(len(x))
+plt.xticks(value,x)
+
+調整x軸刻度 5
+plt.xticks(np.arange(0,7,step=0.5)) # 設定x軸刻度為0 ~ 6.5, 每隔0.5
+plt.yticks(np.arange(-1,1.5,step=0.5))
+
+
+plt.xticks(np.arange(0,7,step=0.5),color='b')
+plt.yticks(np.arange(-1,1.5,step=0.5),color='g')
+
+
+調整x軸刻度 6
+x = [0.5,1.0,10,50,100]
+value = range(len(x))
+plt.xticks(value,x)
+
+調整x軸刻度 7
+
+
+
+
+plt.rcParams['xtick.labelsize'] = 34	X軸刻度的文字大小
+plt.rcParams['ytick.labelsize'] = 16	Y軸刻度的文字大小
+
+
+print('x軸刻度設定')
+plt.tick_params(axis='x',direction='in',color='b')
+print('y軸刻度設定')
+plt.tick_params(axis='y',length=10,direction='inout',color='g')
+
+plt.tick_params(axis='both',length=10,direction='inout',color='r')
+
+
+
+locs, the_labels = plt.xticks()         # 回傳位置與標籤字串
+print(f'locs       = {locs}')
+print(f'the_labels = {the_labels}')
 
 
 
@@ -77,57 +105,6 @@ print(f"ymin = {ymin}")
 print(f"ymax = {ymax}")
 plt.show()
 
-
-
-
-調整x軸刻度
-import matplotlib.pyplot as plt
-
-x = [0.5,1.0,10,50,100]
-y = [5,10,35,20,25]
-value = range(len(x))
-plt.plot(value,y,"-o")
-plt.xticks(value,x)
-plt.show()
-
-
-調整x軸刻度
-import matplotlib.pyplot as plt
-
-x = [0.5,1.0,10,50,100]
-y = [5,10,35,20,25]
-value = range(len(x))
-plt.plot(value,y,"-o")
-plt.xticks(value,x)
-plt.show()
-
-
-調整x軸刻度
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(0, 2*np.pi, 500)    # 建立含500個元素的陣列
-y1 = np.sin(x)                      # sin函數
-y2 = np.cos(x)                      # cos函數
-plt.xticks(np.arange(0,7,step=0.5))
-plt.plot(x, y1, color='c')          # 設定青色cyan            
-plt.plot(x, y2, color='r')          # 設定紅色red
-plt.show()
-
-調整xy軸刻度
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(0, 2*np.pi, 500)    # 建立含500個元素的陣列
-y1 = np.sin(x)                      # sin函數
-y2 = np.cos(x)                      # cos函數
-
-plt.xticks(np.arange(0,7,step=0.5))
-plt.yticks(np.arange(-1,1.5,step=0.5))
-
-plt.plot(x, y1, color='c')          # 設定青色cyan            
-plt.plot(x, y2, color='r')          # 設定紅色red
-plt.show()
 
 
 
@@ -151,30 +128,6 @@ plt.ylabel('y-value',fontdict=font2)
 
 plt.show()
 
-
-
-
-
-locs, the_labels = plt.xticks()         # 回傳位置與標籤字串
-print(f'locs       = {locs}')
-print(f'the_labels = {the_labels}')
-
-
-
-plt.rcParams['xtick.labelsize'] = 34	X軸刻度的文字大小
-plt.rcParams['ytick.labelsize'] = 16	Y軸刻度的文字大小
-
-
-print('x軸刻度設定')
-plt.tick_params(axis='x',direction='in',color='b')
-print('y軸刻度設定')
-plt.tick_params(axis='y',length=10,direction='inout',color='g')
-
-plt.xticks(np.arange(0,7,step=0.5),color='b')
-plt.yticks(np.arange(-1,1.5,step=0.5),color='g')
-
-
-plt.tick_params(axis='both',length=10,direction='inout',color='r')
 
 
 '''

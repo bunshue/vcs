@@ -2,6 +2,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 import matplotlib.pyplot as plt
 
+print('------------------------------------------------------------')	#60個
+
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 font_size=30
@@ -32,6 +34,7 @@ print('已寫入檔案：' + filename)
 plt.imshow(img)
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -82,6 +85,7 @@ im.save(filename+'.png', 'PNG')
 print('新檔存圖, 已寫入檔案：'+filename+'.png')
 
 
+print('------------------------------------------------------------')	#60個
 
 #在圖上寫字 OK, 只能英文字
 
@@ -90,7 +94,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
 filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 
@@ -122,13 +126,14 @@ print('新檔存圖, 已寫入檔案：' + filename)
 plt.imshow(im)
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
 #在圖上寫字
 
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/pil_test03.png'
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
@@ -156,22 +161,16 @@ im.paste(im, (x, y), im)
 im.save(filename2, 'PNG')
 print('新檔存圖, 已寫入檔案：' + filename2)
 
-
-
-
-
-
-
+print('------------------------------------------------------------')	#60個
 
 #在圖上寫字 OK, 只能英文字
 
 from PIL import Image, ImageDraw, ImageFont
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
 filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
-
 
 im = Image.open(filename1)
 im.save(filename2+'.png', 'PNG')
@@ -198,12 +197,13 @@ dw.text((x, y), str(mesg), font=font, fill=(128,255,255))
 im.save(filename3, 'PNG')
 print('新檔存圖, 已寫入檔案：'+filename3)
 
+print('------------------------------------------------------------')	#60個
 
 # 在圖上作畫
 
 from PIL import Image, ImageDraw
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
 filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 
@@ -235,13 +235,13 @@ dw.text((100,100), mesg)
 im.save(filename3, 'PNG')
 print('新檔存圖, 已寫入檔案：'+filename3)
 
-
+print('------------------------------------------------------------')	#60個
 
 from PIL import Image
 from matplotlib import patches
 import matplotlib.pyplot as plt
 
-#filename = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 '''
@@ -258,6 +258,7 @@ plt.imshow(image_1)
 plt.show()
 '''
 
+print('------------------------------------------------------------')	#60個
 
 im=Image.open(filename)
 
@@ -296,6 +297,6 @@ plt.axis("off")
 
 plt.show()
 
-
 print("作業完成")
 
+print('------------------------------------------------------------')	#60個

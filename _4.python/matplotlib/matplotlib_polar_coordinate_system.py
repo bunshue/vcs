@@ -1,9 +1,5 @@
-# plot 集合
+# plot 集合, 極坐標系 做圖
 
-'''
-無 numpy 的 matplotlib
-
-'''
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -25,13 +21,53 @@ plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, fac
 #第一張圖
 plt.subplot(231)
 
+r = 3
+t = np.linspace(-2*np.pi, 2*np.pi, 200)
+x = r*np.cos(t)
+y = r*np.sin(t)
+
+
+ax = plt.gca()
+ax.set_aspect('equal')
+
+plt.plot(x, y, lw=3)
+
+
 
 #第二張圖
 plt.subplot(232)
 
+r = np.sin(5*t)
+x = r*np.cos(t)
+y = r*np.sin(t)
+
+ax = plt.gca()
+ax.set_aspect('equal')
+
+plt.plot(x,y,lw=3)
+
+
+
 
 #第三張圖
 plt.subplot(233)
+
+
+
+pi = 3.14159
+r = 3
+t = np.linspace(-1 * pi, 1 * pi, 50)
+
+x = r * np.cos(t)
+y = r * np.sin(t)
+
+
+r = 3 * (1 - np.sin(t))
+x = r * np.cos(t)
+y = r * np.sin(t)
+
+plt.plot(x, y, lw=3)
+
 
 
 
@@ -40,15 +76,28 @@ plt.subplot(234)
 
 
 
+
+
+
 #第五張圖
 plt.subplot(235)
+
+
+
+
 
 
 #第六張圖
 plt.subplot(236)
 
 
+
+
+
+
 plt.show()
+
+
 
 
 

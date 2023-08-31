@@ -77,8 +77,9 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 #读取待处理图像
-img = cv2.imread('lena.bmp')
+img = cv2.imread(filename)
 #使用reshape将一个RGB像素点值的三个值作为一个单元
 data = img.reshape((-1,3))
 #转换为kmeans可以处理的类型

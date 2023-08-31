@@ -126,7 +126,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_gray.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -163,7 +164,8 @@ def saltpepper(img,n):
     return img
 
 #上面就是椒盐噪声函数，下面是使用方法，大家可以愉快的玩耍了
-img=cv2.imread('lena_gray.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img=cv2.imread(filename)
 print('顯示原圖')
 
 print('顯示xxxx')

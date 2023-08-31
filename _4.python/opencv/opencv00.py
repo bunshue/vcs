@@ -5,11 +5,14 @@ OpenCV 基本使用
 
 播放檔案
 '''
+
 import cv2
+import numpy as np
 
 print('------------------------------------------------------------')	#60個
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 print('顯示圖片')
 image = cv2.imread(filename)	#讀取本機圖片
 #image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)	#讀取本機圖片, 不改變顏色通道
@@ -24,20 +27,18 @@ print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
 cv2.imshow('Picture Viewer', image) #顯示圖片
 
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-#顯示圖片
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-
-import cv2
-import numpy as np
-
-print('使用 OpenCV 顯示圖片')
+print('顯示圖片')
 image = cv2.imread(filename)	#讀取本機圖片
+
+print('image.shape格式 :', type(image.shape))
+print('image.shape內容 :', image.shape)
 
 #實例化8位圖
 image_empty = np.zeros(image.shape, np.uint8)
@@ -45,28 +46,17 @@ image_copy = image.copy()
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)    #圖片轉為灰階
 
 #顯示圖片
-#cv2.imshow("image_empty", image_empty) #空圖, 全黑
-#cv2.imshow("image_copy", image_copy)   #原圖拷貝
-#cv2.imshow("image_gray", image_gray)   #原圖黑白
-cv2.imshow("image", image)              #原圖
+cv2.imshow("image", image)          #原圖
+cv2.imshow("empty", image_empty)    #空圖, 全黑
+cv2.imshow("copy", image_copy)      #原圖拷貝
+cv2.imshow("gray", image_gray)      #原圖黑白
 
-#cv2.namedWindow("image")
+cv2.namedWindow("image")
 
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
+
 print('------------------------------------------------------------')	#60個
-
-import cv2
-print('開啟一圖, 直接變成灰階')
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接變成灰階
-cv2.imshow('image', image)
-
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
-cv2.waitKey()
-cv2.destroyAllWindows()
-print('------------------------------------------------------------')	#60個
-
 
 '''
 #播放檔案
@@ -89,10 +79,11 @@ vid.release()
 cv2.destroyAllWindows()
 '''
 print('------------------------------------------------------------')	#60個
+
 #裁剪圖片
 image = cv2.imread(filename)	#讀取本機圖片
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 image = cv2.imread(filename)	#讀取本機圖片
 
 # 裁切區域的 x 與 y 座標（左上角）
@@ -115,6 +106,8 @@ cv2.imshow("cropped", crop_image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print('------------------------------------------------------------')	#60個
+
 print('圖片裁剪縮放')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -129,8 +122,6 @@ h = 100
 
 # 寫入圖檔, 偽執行
 #cv2.imwrite(filename2, image[y:y + h, x:x + w])
-
-print('完成')
 
 print('------------------------------------------------------------')	#60個
 

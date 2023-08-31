@@ -5,7 +5,8 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread('lena_gray.bmp', 0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+a=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("original",a)
 
@@ -28,7 +29,8 @@ a=cv2.imread("boat.bmp")
 print('顯示原圖')
 cv2.imshow("boat",a)
 
-b=cv2.imread('lena_gray.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+b=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("lena",b)
 
@@ -42,7 +44,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-lena=cv2.imread('lena_gray.bmp', cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+lena=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -62,7 +65,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread('lena_gray.bmp', 0)  #通道不同
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+a=cv2.imread(filename, 0)  #通道不同
 print('顯示原圖')
 cv2.imshow("a",a)
 
@@ -83,7 +87,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread('lena_gray.bmp', 1)  #通道不同
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+a=cv2.imread(filename, 1)  #通道不同
 print('顯示原圖')
 cv2.imshow("a",a)
 
@@ -104,7 +109,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread('lena_gray.bmp', 1)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+a=cv2.imread(filename, 1)
 print('顯示原圖')
 cv2.imshow("a",a)
 
@@ -125,7 +131,8 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #圖層提取
-lena=cv2.imread('lena_gray.bmp', 0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+lena=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -146,7 +153,8 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #異或加密解密
-lena=cv2.imread('lena_gray.bmp', 0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+lena=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -164,7 +172,8 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #讀取原始載體圖像
-lena=cv2.imread('lena_gray.bmp', 0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+lena=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -206,7 +215,8 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #讀取原始載體圖像
-lena=cv2.imread('lena_gray.bmp', 0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+lena=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
@@ -253,7 +263,8 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #圖層提取
-lena=cv2.imread('lena_gray.bmp', 0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+lena=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 

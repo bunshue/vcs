@@ -2,7 +2,9 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
-img = cv2.imread('lena_gray.bmp', 0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+img = cv2.imread(filename, 0)
+
 dft = cv2.dft(np.float32(img),flags = cv2.DFT_COMPLEX_OUTPUT)
 dftShift = np.fft.fftshift(dft)
 result = 20*np.log(cv2.magnitude(dftShift[:,:,0],dftShift[:,:,1]))

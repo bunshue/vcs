@@ -6,7 +6,7 @@ print('------------------------------------------------------------')	#60個
 
 print("框出照片中的人臉")
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/YaltaSummit1945.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/SolvayConference1927.jpg'
@@ -77,7 +77,7 @@ print('------------------------------------------------------------')	#60個
 
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 import numpy as np
 import cv2

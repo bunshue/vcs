@@ -25,28 +25,21 @@ plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, fac
 #第一張圖
 plt.subplot(231)
 
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-cosinus = np.cos(x)
-plt.plot(x, sinus, x, cosinus)
 
-#plt.plot(x, sinus, "r-o", x, cosinus, "g--")
+x = np.linspace(-5, 5, 200)
+siny = np.sin(x)
 
-#plt.plot(x, sinus, "r-o", label="sin(x)")
-#plt.plot(x, cosinus, "g--", label="cos(x)")
-#plt.plot(x, sinus, "r-o")
-#plt.plot(x, cosinus, "g--")
-#plt.plot(x, np.sin(x), "r-o")
-#plt.plot(x, np.cos(x), "g--")
+y = siny + np.random.rand(1, len(siny)) * 1.5 #加入雜訊的點集
+y = y.tolist()[0]
 
-#plt.legend(loc=1)
+plt.plot(x, siny, c = 'r', label = 'sin(x)', linewidth = 1)
+plt.plot(x, y, c = 'g', label = 'sin(x)', linewidth = 1)
 
-#plt.plot(x, np.sin(x))
-#plt.plot(x, np.cos(x))
-#plt.plot(x, np.tan(x))
-#plt.plot(x, np.sinh(x))
-#plt.plot(x, np.cosh(x))
-#plt.plot(x, np.tanh(x))
+plt.xlabel('x')
+plt.ylabel('sin(x)')
+plt.title('')
+plt.legend()
+
 
 
 #第二張圖
@@ -157,40 +150,10 @@ plt.figure(num = 'plot 集合 2 函數曲線', figsize = (20, 15), dpi = 84, fac
 plt.subplot(231)
 
 
-pi = 3.14159
-r = 3
-t = np.linspace(-1 * pi, 1 * pi, 50)
-
-x = r * np.cos(t)
-y = r * np.sin(t)
-
-
-r = 3 * (1 - np.sin(t))
-x = r * np.cos(t)
-y = r * np.sin(t)
-
-plt.plot(x, y, lw=3)
-
-
 
 
 #第二張圖
 plt.subplot(232)
-
-
-x = np.linspace(-5, 5, 200)
-siny = np.sin(x)
-
-y = siny + np.random.rand(1, len(siny)) * 1.5 #加入雜訊的點集
-y = y.tolist()[0]
-
-plt.plot(x, siny, c = 'r', label = 'sin(x)', linewidth = 1)
-plt.plot(x, y, c = 'g', label = 'sin(x)', linewidth = 1)
-
-plt.xlabel('x')
-plt.ylabel('sin(x)')
-plt.title('')
-plt.legend()
 
 
 
@@ -218,37 +181,4 @@ plt.subplot(236)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 3 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#第一張圖
-plt.subplot(231)
-
-
-
-#第二張圖
-plt.subplot(232)
-
-
-
-#第三張圖
-plt.subplot(233)
-
-
-#第四張圖
-plt.subplot(234)
-
-
-#第五張圖
-plt.subplot(235)
-
-
-
-#第六張圖
-plt.subplot(236)
-
-
-
-plt.show()
 
