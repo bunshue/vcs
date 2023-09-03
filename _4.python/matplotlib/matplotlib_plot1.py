@@ -41,307 +41,81 @@ for cnt in range(3):
 
 #ax2.legend(loc='best')
 
-
-
-
 #第二張圖
 plt.subplot(232)
 
-degree = np.linspace(0, 2*np.pi, 36)    #共 36 個點
- 
-#print(degree)
-x = degree
-y1 = np.sin(degree)
-#y1 = np.exp(-degree)   #指數
-y2 = np.cos(degree)
-y3 = np.tan(degree)
-#plt.plot(x, y1)    #無其他參數
-plt.plot(x, y1, color = 'red', lw = 2)
-plt.plot(x, y2, color = 'green', lw = 2)
-plt.plot(x, y3, color = 'blue', lw = 2)
-plt.plot(x, y3, 'ro')
+x = np.linspace(0, 6.4, 200)    # x是numpy.ndarray格式
 
-plt.xlim(-0.1, 6.4)
-plt.ylim(-1.1, 1.1)
+A = 0.8 #雜訊的振幅
+y = np.cos(x) + np.random.rand(1, len(x)) * A - A / 2 #加入雜訊的點集    # y是numpy.ndarray格式
 
-plt.xlabel('角度(弧度)')
-plt.ylabel('sin cos tan')
-#plt.legend()
-plt.title('三角函數')
+y = y.tolist()[0]   # y 由 numpy.ndarray格式 轉成list格式, 畫圖要用list格式
+
+plt.plot(x, np.cos(x))
+plt.plot(x, y)
+
+plt.title('畫雜訊範例')
 
 #第三張圖
 plt.subplot(233)
 
-#t = np.linspace(0, 1, 100)
-t = np.linspace(-360, 360, 100)
-#b = np.exp(-a)
-a = np.sin(2 * math.pi * t / 360)
-b = np.cos(2 * math.pi * t / 360)
-c = np.sinc(2 * math.pi * t / 360)
-
-'''另一種製造資料的方法
-# Data for plotting
-t = np.arange(-2.0 * np.pi, 2.0 * np.pi, 0.01)
-a = np.sin(t)
-b = np.cos(t)
-c = np.sinc(t)
-'''
-
-plt.plot(t, a)
-plt.plot(t, b)
-plt.plot(t, c)
-#plt.fill(t, c)
-
-#plt.axis('off') #座標軸關閉
-myfont = matplotlib.font_manager.FontProperties(fname = font_filename)
-plt.xlabel(u'橫座標', fontproperties = myfont)
-plt.ylabel(u'縱座標', fontproperties = myfont)
-#plt.title('三角函數')
-plt.title(u'三角函數', fontproperties = myfont)
-plt.grid()
-
-
+plt.plot(np.random.randn(100))
+plt.title('畫雜訊範例')
 
 #第四張圖
 plt.subplot(234)
 
-x = np.linspace(0, 10, 100)
-y = np.sin(x)
-z = np.cos(x**2)
+#描點畫圓
+# 角度
+th = np.arange(0, 360)
 
-plt.plot(x, y, label = "$sin(x)$", color = 'red', lw = 2)
-plt.plot(x, z, label = "$cos(x^2)$", color = 'b')
-plt.xlabel('Time(s)')
-plt.ylabel('Volt')
-plt.title('Volt/Time chart')
-plt.ylim(-1.2, 1.2)
-plt.legend()
+# 圓周上的點P座標 
+x = np.cos(np.radians(th))
+y = np.sin(np.radians(th))
 
-#第五張圖
-plt.subplot(235)
-from matplotlib.font_manager import FontProperties
-
-font = FontProperties(fname = r"c:\windows\Fonts\mingliu.ttc", size = 20)
-
-x = np.linspace(0, 10, 1000)
-y = np.sin(x)
-z = np.cos(x**2)
-
-plt.plot(x, y, label = "$sin(x)$", color = "red", linewidth = 2)
-plt.plot(x, z, "b--", label = "$cos(x^2)$")
-
-plt.xlabel('Time(s)', fontproperties = font)
-plt.ylabel('Amplitude', fontproperties = font)
-plt.title(u'三角函數', fontproperties = font, fontsize = 24)
-
-plt.ylim(-1.2, 1.2)
-plt.legend()
-plt.grid()
-
-
-
-#第六張圖
-plt.subplot(236)
-
-#在同一張圖 畫 兩條曲線
-
-month1 = [1,2,3,4,5,6,7,8,9,10,11,12]
-month2 = [1,2,3,4,5,6,7,8,9,10,11,12]
-
-listy1 = [128,210,199,121,105,98,152,107,150,122,180,220]
-listy2 = [150,200,180,110,100,80,80,100,130,120,110,200]
-
-plt.plot(month1, listy1) #直線連線
-plt.plot(month1, listy1, 'r-.s')#少參數
-plt.plot(month1, listy1, 'r-.s', lw = 2, ms = 10, label = "台北")#多參數
-
-plt.plot(month2, listy2) #直線連線
-plt.plot(month2, listy2, 'g--*')#少參數
-plt.plot(month2, listy2, 'g--*', lw = 2, ms = 10, label = "台中")#多參數
-
-#同一個指令畫兩條線
-#plt.plot(month1, listy1, 'r-.s', month2, listy2, 'y-s')
-
-plt.legend()
-plt.xticks(month1)
-plt.xlim(0.5, 12.5)     #x軸顯示邊界
-plt.ylim(50, 250)   #y軸顯示邊界
-plt.title("Sales Report", fontsize = 18)
-plt.xlabel("Month", fontsize = 12)
-plt.ylabel("Million", fontsize = 12)
-plt.title("銷售報表", fontsize = 18)
-plt.xlabel("月", fontsize = 12)
-plt.ylabel("百萬", fontsize = 12)
-
-plt.grid(color = 'k', ls = ':', lw = 1, alpha = 0.5)    #畫格點
-
-plt.tick_params(axis = 'both', labelsize = 16, color = 'red')#xy軸多加tick
-#plt.tick_params(axis = 'y', color = 'red')#y軸多加tick
-
-
-plt.show()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-# plot 集合
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 2 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#第一張圖
-plt.subplot(231)
-
-x = np.arange(0,360)
-y = np.sin( 2 * x * np.pi / 180.0)
-z = np.cos( x * np.pi / 180.0)
-plt.plot(x,y,color = "blue",label = "SIN(2x)")
-plt.plot(x,z,color = "red",label = "COS(x)")
-plt.xlim(0,360)
-plt.ylim(-1.2,1.2)
-plt.xlabel("Degree")
-plt.ylabel("Value")
-plt.title("SIN & COS function")
-plt.legend()
-
-#第二張圖
-plt.subplot(232)
-
-t = np.arange(0.0, 1.0, 0.01)
-s = np.sin(2 * np.pi * t)
-plt.plot(t, s, color = 'blue', lw = 2)
-
-#第三張圖
-plt.subplot(233)
-
-x1 = np.linspace(0.0, 5.0, 100)
-y1 = np.cos(2 * np.pi * x1) * np.exp(-x1)
-plt.plot(x1, y1 * 10000)
-
-#第四張圖
-plt.subplot(234)
-
+plt.plot(x, y)
+plt.axis('equal')       #軸比例
 
 #第五張圖
 plt.subplot(235)
 
+#繪製半徑300的圓（y >= 0）
+
+# 圓的方程式
+r = 300  # 半徑
+x = np.arange(-r, r + 1)    # x: -300～300
+y = np.sqrt(r ** 2 - x ** 2)  # y
+
+plt.plot(x, y)
+plt.axis('equal')       #軸比例
 
 #第六張圖
 plt.subplot(236)
 
-plt.show()
+print('繪製移動平均圖')
 
-print('------------------------------------------------------------')	#60個
-# plot 集合
+import pandas as pd
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 3 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_temperature.csv'
 
-#第一張圖
-plt.subplot(231)
+# 讀入氣溫資料
+dat= pd.read_csv(filename, encoding='UTF-8')
 
-listx = [1, 5, 7, 9, 13, 16]
-listy = [15, 50, 80, 40, 70, 50]
-plt.plot(listx, listy, 'g--*', markersize = 12)
+n = len(dat)       # 資料筆數
+x = range(1, n+1)  #  x軸的值（1～資料筆數）
 
+# 氣溫
+y = dat['平均氣溫']  # y軸的值（平均氣溫）
+plt.plot(x, y)       # 繪圖
 
-#第二張圖
-plt.subplot(232)
+# 區間大小:9 的移動平均
+v = np.ones(9)/9.0
+y2 = np.convolve(y, v, mode='same')  # 計算移動平均
+plt.plot(x[4:n-4], y2[4:n-4])        # 繪圖
 
-listx = [1, 5, 7, 9, 13, 16]
-listy = [15, 50, 80, 40, 70, 50]
-plt.plot(listx, listy, color = "red", lw = "2.0", ls = "--", label = "label")
-plt.title("Chart Title", fontsize = 20)     #圖表標題
-plt.xlabel("X-Label", fontsize = 14)        #x座標標題
-plt.ylabel("Y-Label", fontsize = 14)        #y座標標題
-plt.legend()
-
-#第三張圖
-plt.subplot(233)
-
-listx = [1, 5, 7, 9, 13, 16]
-listy = [15, 50, 80, 40, 70, 50]
-plt.plot(listx, listy, color = "red", lw = "2.0", ls = "--", label = "label")
-plt.title("Chart Title")	#圖表標題
-plt.xlabel("X-Label")		#x座標標題
-plt.ylabel("Y-Label")		#y座標標題
-plt.xlim(0, 20)            #設定x座標範圍
-plt.ylim(0, 100)             #設定y座標範圍
-plt.legend()
-
-
-#第四張圖
-plt.subplot(234)
-listx = [1, 5, 7, 9, 13, 18]
-listy = [15, 50, 80, 40, 70, 50]
-plt.plot(listx, listy, color = "red", lw = "2.0", ls = "--", label = "label")
-plt.title("Chart Title")	#圖表標題
-plt.xlabel("X-Label")		#x座標標題
-plt.ylabel("Y-Label")		#y座標標題
-plt.xlim(0, 20)            #設定x座標範圍
-plt.ylim(0, 100)             #設定y座標範圍
-plt.grid(color = 'black', linestyle = ":", linewidth = '1', alpha = 0.5)
-plt.legend()
-
-#第五張圖
-plt.subplot(235)
-
-listx1 = [1, 5, 7, 9, 13, 16]
-listy1 = [15, 50, 80, 40, 70, 50]
-plt.plot(listx1, listy1, label = "Male")
-
-listx2 = [2, 6, 8, 11, 14, 16]
-listy2 = [10, 40, 30, 50, 80, 60]
-plt.plot(listx2, listy2, color = "red", linewidth = 5, linestyle = "--", label = "Female")
-plt.legend()
-plt.xlim(0, 20)
-plt.ylim(0, 100)
-plt.title("零用金統計")
-plt.xlabel("年齡")
-plt.ylabel("零用金數目")
-
-#第六張圖
-plt.subplot(236)
-
-x1 = [1, 2, 3, 4, 5, 6]
-y1 = [20, 30, 14, 67, 42, 12]
-plt.plot(x1, y1, lw = 2, label = 'Mary')
-
-x2 = [1, 3, 4, 5, 9, 11]
-y2 = [12, 33, 43, 22, 34, 20]
-plt.plot(x2, y2, lw = 2, label = 'Tom')
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-# plot 集合
-
-#          編號                                     圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 5 不使用subplot畫多圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-print("在圖表的指定地方畫圖, 不用subplot")
-
-listx = [1, 2, 3, 4, 5]
-listy = [15, 50, 80, 40, 70]
-
-print("1左下開始(0.1, 0.1), w = 0.3, h = 0.3, 左下圖")
-plt.axes([0.1, 0.1, 0.3, 0.3])
-plt.plot(listx, listy, 'r-s')
-
-print("2左下開始(0.6, 0.1), w = 0.3, h = 0.3, 右下圖")
-plt.axes([0.6, 0.1, 0.3, 0.3])
-plt.plot(listx, listy, 'g--o')
-
-print("3左下開始(0.1, 0.6), w = 0.3, h = 0.3, 左上圖")
-plt.axes([0.1, 0.6, 0.3, 0.3])
-plt.plot(listx, listy, 'b-s')
-
-print("4左下開始(0.6, 0.6), w = 0.3, h = 0.3, 右上圖")
-plt.axes([0.6, 0.6, 0.3, 0.3])
-plt.plot(listx, listy, 'y--o')
-
-plt.show()
-
 
 

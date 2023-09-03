@@ -27,10 +27,6 @@ draw = ImageDraw.Draw(img)
 #寫字
 draw.text((0,0), mesg, (0,0,0), font)
 
-filename = 'C:/_git/vcs/_1.data/______test_files2/pil_test01.png'
-img.save(filename)
-print('已寫入檔案：' + filename)
-
 plt.imshow(img)
 plt.show()
 
@@ -79,11 +75,8 @@ im = Image.new('RGBA', (fn_w, fn_h), (255,255,255,0))
 dw = ImageDraw.Draw(im)
 dw.text((0,0), msg, font=font, fill=fill)
 
-#im.show()
-filename = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new'
-im.save(filename+'.png', 'PNG')
-print('新檔存圖, 已寫入檔案：'+filename+'.png')
-
+plt.imshow(im)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -101,9 +94,6 @@ filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 text_msg = 'Hello, world!'
 im = Image.open(filename1)
 
-im.save(filename2, 'PNG')
-print('舊檔存圖, 已寫入檔案：' + filename2)
-
 w, h = im.size
 print("W = " + str(w)+", H = " + str(h))
 
@@ -119,11 +109,8 @@ y = h/2-fn_h/2
 dw.text((x+5, y+5), text_msg, font=font, fill=(25,25,25))
 dw.text((x, y), text_msg, font=font, fill=(128,255,255))
 
-#im.show()  #顯示圖片
-im.save(filename3, 'PNG')
-print('新檔存圖, 已寫入檔案：' + filename)
-
 plt.imshow(im)
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -156,46 +143,10 @@ x = int(im_w/2 - fn_w/2)
 y = int(im_h/2 - fn_h/2)
 dw.text((0, 0), msg, font=font, fill=fill)
 im.paste(im, (x, y), im)
-#im.show()  #顯示圖片
 
-im.save(filename2, 'PNG')
-print('新檔存圖, 已寫入檔案：' + filename2)
+plt.imshow(im)
 
-print('------------------------------------------------------------')	#60個
-
-#在圖上寫字 OK, 只能英文字
-
-from PIL import Image, ImageDraw, ImageFont
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
-filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
-
-im = Image.open(filename1)
-im.save(filename2+'.png', 'PNG')
-print('舊檔存圖, 已寫入檔案：'+filename2+'.png')
-
-w, h = im.size
-print("W = " + str(w)+", H = " + str(h))
-
-print("在圖上作畫")
-
-dw = ImageDraw.Draw(im)
-
-mesg = 'This is a lion-mouse'
-font = ImageFont.truetype(font_filename, 80)
-#fn_w, fn_h = dw.textsize(unicode(mesg, 'utf-8'), font=font)
-fn_w, fn_h = dw.textsize(str(mesg), font=font)
-
-x = w/2-fn_w/2
-y = h/2-fn_h/2
-dw.text((x+5, y+5), str(mesg), font=font, fill=(25,25,25))
-dw.text((x, y), str(mesg), font=font, fill=(128,255,255))
-
-#im.show()  #顯示圖片
-im.save(filename3, 'PNG')
-print('新檔存圖, 已寫入檔案：'+filename3)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -208,9 +159,6 @@ filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
 filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 
 im = Image.open(filename1)
-
-im.save(filename2, 'PNG')
-print('舊檔存圖, 已寫入檔案：'+filename2)
 
 w, h = im.size
 print("W = " + str(w)+", H = " + str(h))
@@ -230,10 +178,9 @@ dw.ellipse((0,0,w,h),outline=(255,255,0))
 mesg = 'This is a lion-mouse'
 dw.text((100,100), mesg)
 
-#im.show()  #顯示圖片
+plt.imshow(im)
 
-im.save(filename3, 'PNG')
-print('新檔存圖, 已寫入檔案：'+filename3)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

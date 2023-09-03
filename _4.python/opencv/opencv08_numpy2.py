@@ -15,7 +15,9 @@ H = 300
 print('------------------------------------------------------------')	#60個
 
 img=np.random.randint(0,256,size=[2,4,3],dtype=np.uint8)
+print(img.shape)
 rst=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+print(rst.shape)
 #print("img=\n",img)
 print("rst=\n",rst)
 print("像素点(1,0)直接计算得到的值=", img[1,0,0]*0.114+img[1,0,1]*0.587+img[1,0,2]*0.299)
@@ -29,7 +31,9 @@ print(img[1,0,2])
 print('------------------------------------------------------------')	#60個
 
 img=np.random.randint(0,256,size=[2,4],dtype=np.uint8)
+print(img.shape)
 rst=cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
+print(rst.shape)
 #print("img=\n",img)
 print("rst=\n",rst)
 
@@ -111,6 +115,7 @@ print("cv2.add(img1,6)\n",img4)
 img5=cv2.add(6,img2)
 print("cv2.add(6,img2)=\n",img5)
 
+
 print('------------------------------------------------------------')	#60個
 
 img1=np.ones((3,4),dtype=np.uint8)*100
@@ -150,7 +155,7 @@ print("修改后像素点img[1,0,2]=",img.item(1,0,2))
 print('------------------------------------------------------------')	#60個
 
 img=np.random.randint(0,256,size=[256,256,3],dtype=np.uint8)
-
+print(img.shape)
 cv2.imshow("demo",img)
 
 cv2.waitKey()

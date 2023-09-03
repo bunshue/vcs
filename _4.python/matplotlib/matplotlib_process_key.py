@@ -31,6 +31,7 @@ def process_key(event):
     fig.canvas.draw_idle()
 
 
+print('圖片接受鍵盤指令 p n c ....')
 fig, ax = plt.subplots()
 
 #ax.volume = volume

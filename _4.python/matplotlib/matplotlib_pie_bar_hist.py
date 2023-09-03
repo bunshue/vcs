@@ -143,45 +143,41 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 # hist 集合
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'hist 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-#第一張圖
-plt.subplot(231)
-
 # Fixing random state for reproducibility
 np.random.seed(1234567)
 
-N = 10 #資料數
-plt.hist(np.random.randn(1000), N, facecolor='yellow', edgecolor='yellow')
+N = 10000 #資料個數
+num_bins = 100 #直方圖顯示時的束數
+
+#第一張圖
+plt.subplot(231)
+
+print('以直方圖顯示常態分佈')
+x = np.random.randn(N)  #常態分佈數字
+
+n, bins, patches = plt.hist(x, num_bins, facecolor='yellow', edgecolor='yellow')
+print(n)
+print(bins)
 
 #第二張圖
 plt.subplot(232)
 
-import numpy as np
-import matplotlib.pyplot as plt
-from numpy.random import normal,rand
-x = normal(size=200)
-
-N = 10 #資料數
-plt.hist(x,bins=N)
-
+normal_samples = np.random.normal(size = N) # 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+plt.hist(normal_samples, bins = num_bins)
 
 #第三張圖
 plt.subplot(233)
-normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-plt.hist(normal_samples)
 
-
+uniform_samples = np.random.uniform(size = N) # 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+plt.hist(uniform_samples, bins = num_bins)
 
 #第四張圖
 plt.subplot(234)
-
-uniform_samples = np.random.uniform(size = 100000) # 生成 100000 組介於 0 與 1 之間均勻分配隨機變數
-plt.hist(uniform_samples)
 
 
 #第五張圖
@@ -285,42 +281,25 @@ plt.legend()
 #第四張圖
 plt.subplot(234)
 
+labels = ["Python","C++","Java","JS","C","C#"]
+ratings = [5, 6, 15, 3, 12, 4]
 
-
-
-
-
+plt.pie(ratings, labels=labels)
+plt.title("程式語言的使用率") 
+plt.axis("equal")
 
 #第五張圖
 plt.subplot(235)
 
-from collections import Counter
-import matplotlib.pyplot as plt
-import numpy as np
+patches, texts = plt.pie(ratings, labels=labels)
+plt.legend(patches, labels, loc="best")
+plt.title("程式語言的使用率") 
+plt.axis("equal")
 
-cyl = [6 ,6 ,4 ,6 ,8 ,6 ,8 ,4 ,4 ,6 ,6 ,8 ,8 ,8 ,8 ,8 ,8 ,4 ,4 ,4 ,4 ,8 ,8 ,8 ,8 ,4 ,4 ,4 ,8 ,6 ,8 ,4]
-
-labels, values = zip(*Counter(cyl).items())
-indexes = np.arange(len(values))
-
-plt.bar(indexes, values, width = 0.5)
-plt.xticks(indexes, labels)
 
 #第六張圖
 plt.subplot(236)
 
-listx1 = [1,5,7,9,13,16]
-listy1 = [15,50,80,40,70,50]
-plt.bar(listx1, listy1, label="男性")
-listx2 = [2,6,8,11,14,16]
-listy2 = [10,40,30,50,80,60]
-plt.bar(listx2, listy2, color="red", label="女性")
-plt.legend()
-plt.xlim(0, 20)
-plt.ylim(0, 100)
-plt.title("零用金統計")
-plt.xlabel("年齡")
-plt.ylabel("零用金數目")
 
 plt.show()
 
@@ -332,13 +311,10 @@ plt.figure(num = '新進1', figsize = (20, 15), dpi = 84, facecolor = "whitesmok
 #第一張圖
 plt.subplot(231)
 
-
-
 labels = ["Python","C++","Java","JS","C","C#"]
 index = np.arange(len(labels))
 ratings = [5.16, 5.73, 14.99, 3.17, 11.86, 4.45]
 change = [1.12, 0.3, -1.69, 0.29, 3.41, -0.45]
-
 
 plt.bar(index, ratings)
 plt.xticks(index, labels)
@@ -371,50 +347,43 @@ plt.xticks(index[0::2], labels)
 plt.ylabel("使用率")
 plt.title("程式語言的使用率") 
 
-
-
 #第四張圖
 plt.subplot(234)
 
+from collections import Counter
 
+cyl = [6 ,6 ,4 ,6 ,8 ,6 ,8 ,4 ,4 ,6 ,6 ,8 ,8 ,8 ,8 ,8 ,8 ,4 ,4 ,4 ,4 ,8 ,8 ,8 ,8 ,4 ,4 ,4 ,8 ,6 ,8 ,4]
 
-x = [21,42,23,4,5,26,77,88,9,10,31,32,33,
-     34,35,36,37,18,49,50,100]
-num_bins = 5
-n, bins, patches = plt.hist(x, num_bins)
-print(n)
-print(bins)
+labels, values = zip(*Counter(cyl).items())
+indexes = np.arange(len(values))
 
+plt.bar(indexes, values, width = 0.5)
+plt.xticks(indexes, labels)
 
 
 #第五張圖
 plt.subplot(235)
 
 
-x = np.random.randn(1000)
-num_bins = 50
-plt.hist(x, num_bins)
-
+listx1 = [1,5,7,9,13,16]
+listy1 = [15,50,80,40,70,50]
+plt.bar(listx1, listy1, label="男性")
+listx2 = [2,6,8,11,14,16]
+listy2 = [10,40,30,50,80,60]
+plt.bar(listx2, listy2, color="red", label="女性")
+plt.legend()
+plt.xlim(0, 20)
+plt.ylim(0, 100)
+plt.title("零用金統計")
+plt.xlabel("年齡")
+plt.ylabel("零用金數目")
 
 
 #第六張圖
 plt.subplot(236)
 
 
-labels = ["Python","C++","Java","JS","C","C#"]
-ratings = [5, 6, 15, 3, 12, 4]
-
-plt.pie(ratings, labels=labels)
-plt.title("程式語言的使用率") 
-plt.axis("equal")
-
-
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -425,10 +394,63 @@ plt.figure(num = '新進2', figsize = (20, 15), dpi = 84, facecolor = "whitesmok
 #第一張圖
 plt.subplot(231)
 
-patches, texts = plt.pie(ratings, labels=labels)
-plt.legend(patches, labels, loc="best")
-plt.title("程式語言的使用率") 
-plt.axis("equal")
+plt.bar(range(1,6), np.random.randint(1,30,5))
+
+#第二張圖
+plt.subplot(232)
+
+plt.bar(np.arange(0.6, 5), np.random.randint(1,30,5))
+
+#第三張圖
+plt.subplot(233)
+
+#雙色的長條圖
+x = np.arange(1,6)
+plt.bar(x - 0.4, [3, 10, 8, 12, 6], width=0.4, ec='none', fc='#e63946')
+plt.bar(x, [6, 3, 12, 5, 8], width=0.4, ec='none', fc='#7fb069')
+
+#第四張圖
+plt.subplot(234)
+
+#疊加型的資料
+A = np.random.randint(2,15,5)
+B = np.random.randint(2,15,5)
+C = np.random.randint(2,15,5)
+
+plt.bar(x, A, fc='#e63946', ec='none')
+plt.bar(x, B, fc='#7fb069', ec='none', bottom = A)
+plt.bar(x, C, fc='#e55934', ec='none', bottom = A+B)
+
+#第五張圖
+plt.subplot(235)
+
+#橫放的長條圖
+x = np.arange(0.6, 6)
+plt.barh(x, np.random.randint(1,15,6), fc='#e55934', ec='none')
+
+#第六張圖
+plt.subplot(236)
+
+#雙向的長條圖
+x = np.arange(0.6,6)
+A = np.random.randint(1,15,6)
+B = np.random.randint(1,15,6)
+plt.barh(x, A, fc='#e63946', ec='none')
+plt.barh(x, -B, fc='#7fb069', ec='none')
+
+
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = '新進3', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+
 
 
 
@@ -467,5 +489,6 @@ plt.subplot(236)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
 
 

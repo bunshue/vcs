@@ -18,12 +18,14 @@ print(exif_data)
 from PIL.ExifTags import TAGS
 
 image = Image.open(filename1)
+
 exif_data = image._getexif()
 
 if exif_data is not None:
     for (tag, value) in exif_data.items():
 	    key = TAGS.get(tag, tag)
 	    print(key + ' = ' + str(value))
+
 
 from PIL import Image, ExifTags
 image = Image.open(filename1)
@@ -43,8 +45,4 @@ else:
             # ColorSpace:1
             # ...
             
-
-
-
-
 

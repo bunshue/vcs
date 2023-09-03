@@ -17,23 +17,16 @@ for x in range(1, 11):
 print(type(y))
 print(y)
 
-
-
 # 資料
 x = np.arange(-1.0, 1.01, 0.01)
 
 y = x ** 2
 
-
-
 # 繪圖
 plt.plot(x, y)        # 描繪折線
 plt.grid(color='0.8') # 顯示格線
-plt.show()            # 顯示在畫面上
 
-
-print('------------------------------------------------------------')	#60個
-
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -41,8 +34,7 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-
-
+print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
@@ -105,6 +97,7 @@ print('頻率:', hist)
 x = list(range(1,11))  # x軸的值
 labels = ['0~','10~','20~','30~','40~','50~','60~','70~','80~','90~']  # x軸的刻度標籤
 plt.bar(x, hist, tick_label=labels, width=1)# 描繪長條圖
+
 plt.show()
 
 
@@ -122,7 +115,8 @@ dat = pd.read_csv(filename, encoding='UTF-8')
 
 # 頻率分布圖
 plt.hist(dat['店長'], bins=range(0, 200, 10), alpha=0.5)
-plt.hist(dat['太郎'], bins=range(0, 200, 10), alpha=0.5) 
+plt.hist(dat['太郎'], bins=range(0, 200, 10), alpha=0.5)
+
 plt.show()
 
 
@@ -141,23 +135,6 @@ print('平均:', np.mean(dat['太郎']))
 print('變異數:', np.var(dat['太郎']))
 print('標準差:', np.std(dat['太郎']))
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
 print('------------------------------------------------------------')	#60個
 print('亂數')
 
@@ -169,7 +146,6 @@ print(rand)
 
 print('------------------------------------------------------------')	#60個
 
-
 a = 4     # 亂數的初始值
 b = 7
 c = 9
@@ -179,9 +155,6 @@ for i in range(20):
     rn = ((a * rn + b) % c)    # 產生亂數
     rand.append(rn)
 print(rand)
-
-
-
 
 print('------------------------------------------------------------')	#60個
 print('畫出年收入圖')
@@ -200,13 +173,8 @@ y = dat['年收入']
 # 繪圖
 plt.plot(x, y)
 plt.grid(color='0.8')
+
 plt.show()
-
-
-
-
-import sys
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 print('描繪差額圖')
@@ -221,13 +189,11 @@ for i in range(0, cnt-1):
 # 繪圖
 plt.plot(x[1:], diff_y)
 plt.grid(color='0.8')
+
 plt.show()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
+
 print('畫出函數與導函數的圖')
 
 import matplotlib.pyplot as plt
@@ -240,16 +206,15 @@ x = np.arange(-10, 10, 0.1)
 y = x**3 + 3*x**2 + 3*x + 1
 plt.plot(x, y)
 plt.grid(color='0.8')
+
 plt.show()
 
 # 導函數 f'(x) = 3x**2 + 6x + 3
 y2 = 3*x**2 + 6*x + 3
 plt.plot(x, y2)
 plt.grid(color='0.8')
+
 plt.show()
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -290,60 +255,8 @@ y2 = a*x + b          # 切線的式子
 plt.plot(x, y)   # 原來的函數
 plt.plot(x, y2)  # 切線
 plt.grid(color='0.8')
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-print('------------------------------------------------------------')	#60個
-
-N = 500
-
-#randn 由標準常態分布隨機取值
-#還可以取好高級的亂數, 從平均數 0, 標準差 1 的常態分佈中取出 n 個數字。
-
-x = np.random.randn(N)
-y = np.random.randn(N)
-print('max :', x.max())
-print('min :', x.mean())
-print('avg :', x.min())
-print('std :', x.std())
-
-plt.scatter(x, y, s=50, color='r')#s是大小
-
-#rand 隨機取值
-x = np.random.rand(N)
-y = np.random.rand(N)
-print('max :', x.max())
-print('min :', x.mean())
-print('avg :', x.min())
-print('std :', x.std())
-
-plt.scatter(x, y, s=50, color='g')#s是大小
-plt.scatter(x, y, s=50, color=(0, 1, 0))  #s是大小 # 綠色
 
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-plt.scatter(np.random.randn(100), np.random.randn(100))
-
-plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -406,39 +319,16 @@ plt.plot(x,y,'r-.')
 
 
 print('------------------------------------------------------------')	#60個
+
 plt.plot(x, y, marker='o')
 plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
-plt.show()
 
-print('------------------------------------------------------------')	#60個
-
-xpt = np.linspace(0, 5, 50)                            # 建立含500個元素的陣列
-ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
-  
-plt.scatter(xpt, ypt, s=50, c=ypt, cmap='hsv')          # 色彩隨y軸值變化
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-xpt = np.linspace(0, 5, 500)                            # 建立含500個元素的陣列
-ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
- 
-plt.scatter(xpt, ypt, s=50, c=xpt, cmap='hsv')          # 色彩隨x軸值變化
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-x = np.arange(50)
-y = x
-t = x
-plt.scatter(x, y, c=t, cmap='rainbow')
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 
-
+print('------------------------------------------------------------')	#60個
 
 
 import matplotlib.pyplot as plt
@@ -457,11 +347,10 @@ plt.title("Sales Report", fontsize=24)
 plt.xlabel("Year", fontsize=14)
 plt.ylabel("Number of Sales", fontsize=14)
 
+#後面要用
 plt.savefig('out1_14.jpg', bbox_inches='tight')
+
 plt.show()
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -471,6 +360,7 @@ import matplotlib.image as img
 
 fig = img.imread('out1_14.jpg')
 plt.imshow(fig)
+
 plt.show()
 
 

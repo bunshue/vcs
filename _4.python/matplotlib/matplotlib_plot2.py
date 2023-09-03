@@ -195,18 +195,3 @@ plt.subplot(236)
 plt.show()
 
 
-
-
-
-
-# subplot 畫兩圖
-
-
-
-
-
-plt.show()
-
-
-
-

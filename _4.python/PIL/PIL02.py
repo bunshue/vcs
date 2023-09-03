@@ -6,7 +6,7 @@ import shutil
 
 source_dir = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 target_dir = 'C:/_git/vcs/_1.data/______test_files2/resized_pic'
-#logo_filename = 'C:/_git/vcs/_1.data/______test_files1/burn.bmp'        #fail
+#logo_filename = 'C:/_git/vcs/_1.data/______test_files1/burn.bmp'        #fail, bad transparency mask
 logo_filename = 'C:/_git/vcs/_1.data/______test_files1/logo.png'
 
 #準備輸出資料夾 若已存在, 則先刪除再建立 若不存在, 則建立
@@ -27,6 +27,7 @@ allfiles = glob.glob(source_dir + '/*.jpg') + glob.glob(source_dir + '/*.png')
 
 logo = Image.open(logo_filename)    #PIL讀取本機圖片
 logo = logo.resize((150, 150))   #調整圖像大小
+#logo.show()
 
 for target_image in allfiles:
 	pathname, filename = os.path.split(target_image)

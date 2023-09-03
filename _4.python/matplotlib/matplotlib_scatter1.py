@@ -20,25 +20,24 @@ plt.figure(num = 'scatter 集合', figsize = (20, 15), dpi = 84, facecolor = "wh
 plt.subplot(231)
 
 #散點圖
-a = rand(100)
-b = rand(100)
+a = rand(500)
+b = rand(500)
 plt.scatter(a,b)
+
+
+#plt.scatter(np.random.randn(100), np.random.randn(100))
+
 
 
 #第二張圖
 plt.subplot(232)
 
-#Hyperlinks
-import numpy as np
-import matplotlib.pyplot as plt
-
-s = plt.scatter([1, 2, 3], [4, 5, 6])
-s.set_urls(['https://www.bbc.com/news', 'https://www.google.com/', None])
-'''
-filename = 'C:/_git/vcs/_1.data/______test_files2/scatter.svg'
-fig.savefig(filename)
-print('已存圖' + filename)
-'''
+x = np.random.rand(1000)
+y = np.random.rand(1000)
+size = np.random.rand(1000) * 50
+color = np.random.rand(1000)
+plt.scatter(x, y, size, color)
+plt.colorbar()
 
 #第三張圖
 plt.subplot(233)
@@ -171,33 +170,98 @@ grid(True, ls='-', c='#a0a0a0')
 #第四張圖
 plt.subplot(234)
 
-speed = [4, 4, 7, 7, 8, 9, 10, 10, 10, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 16, 16, 17, 17, 17, 18, 18, 18, 18, 19, 19, 19, 20, 20, 20, 20, 20, 22, 23, 24, 24, 24, 24, 25]
-dist = [2, 10, 4, 22, 16, 10, 18, 26, 34, 17, 28, 14, 20, 24, 28, 26, 34, 34, 46, 26, 36, 60, 80, 20, 26, 54, 32, 40, 32, 40, 50, 42, 56, 76, 84, 36, 46, 68, 32, 48, 52, 56, 64, 66, 54, 70, 92, 93, 120, 85]
+#Hyperlinks
+import numpy as np
+import matplotlib.pyplot as plt
 
-plt.scatter(speed, dist)
+s = plt.scatter([1, 2, 3], [4, 5, 6])
+s.set_urls(['https://www.bbc.com/news', 'https://www.google.com/', None])
+'''
+filename = 'C:/_git/vcs/_1.data/______test_files2/scatter.svg'
+fig.savefig(filename)
+print('已存圖' + filename)
+'''
 
 #第五張圖
 plt.subplot(235)
 
-x = np.linspace(0, 2 * np.pi, 50)
-y = np.sin(x)
-plt.scatter(x, y)
+'''
+xpt = np.linspace(0, 5, 50)                            # 建立含500個元素的陣列
+ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
+plt.scatter(xpt, ypt, s=50, c=ypt, cmap='hsv')          # 色彩隨y軸值變化
 
+
+xpt = np.linspace(0, 5, 500)                            # 建立含500個元素的陣列
+ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
+plt.scatter(xpt, ypt, s=50, c=xpt, cmap='hsv')          # 色彩隨x軸值變化
+'''
+
+x = np.arange(50)
+y = x
+t = x
+plt.scatter(x, y, c=t, cmap='rainbow')
+
+
+#第六張圖
+plt.subplot(236)
+
+N = 500
+
+#randn 由標準常態分布隨機取值
+#還可以取好高級的亂數, 從平均數 0, 標準差 1 的常態分佈中取出 n 個數字。
+
+x = np.random.randn(N)
+y = np.random.randn(N)
+print('max :', x.max())
+print('min :', x.mean())
+print('avg :', x.min())
+print('std :', x.std())
+
+plt.scatter(x, y, s=50, color='r')#s是大小
+
+#rand 隨機取值
+x = np.random.rand(N)
+y = np.random.rand(N)
+print('max :', x.max())
+print('min :', x.mean())
+print('avg :', x.min())
+print('std :', x.std())
+
+plt.scatter(x, y, s=50, color='g')#s是大小
+plt.scatter(x, y, s=50, color=(0, 1, 0))  #s是大小 # 綠色
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'scatter 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+
+#第二張圖
+plt.subplot(232)
+
+#第三張圖
+plt.subplot(233)
+
+
+#第四張圖
+plt.subplot(234)
+
+
+#第五張圖
+plt.subplot(235)
 
 #第六張圖
 plt.subplot(236)
 
 
 
-x = np.random.rand(1000)
-y = np.random.rand(1000)
-size = np.random.rand(1000) * 50
-color = np.random.rand(1000)
-plt.scatter(x, y, size, color)
-plt.colorbar()
-
-
-
 plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 

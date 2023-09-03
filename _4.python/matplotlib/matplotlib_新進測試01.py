@@ -54,18 +54,15 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-x2 = np.arange(100)
-y2 = x2 * np.random.rand(100)
+N = 10
+
+x2 = np.arange(N)
+#y2 = x2 * np.random.randn(N)
+y2 = np.random.randn(N)
+y2 = x2
 
 plt.scatter(x2, y2)
 plt.show()
-
-'''
-
-plt.hist(y2, bins = 5)
-plt.show()
-
-
 
 plt.bar(x2, y2)
 plt.show()
@@ -74,12 +71,13 @@ plt.show()
 plt.plot(x2, y2)
 plt.show()
 
-'''
 
 #箱形圖  便於確認資料分布的視覺化方法
 plt.boxplot(y2)
 plt.show()
 
+import sys
+sys.exit()
 
 
 '''
@@ -120,6 +118,15 @@ X = np.random.randn(300)
 Y = np.random.randn(300)
 plt.scatter(X, Y)
 '''
+
+
+plt.plot(np.random.randn(20))
+plt.plot(range(20), np.random.randn(20))
+
+plt.show()
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
