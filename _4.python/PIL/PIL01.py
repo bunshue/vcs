@@ -41,7 +41,8 @@ print('------------------------------------------------------------')	#60個
 
 from PIL import Image, ImageDraw, ImageFont
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'    #無中文
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
 
 filename = r'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
@@ -49,7 +50,7 @@ image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
 print("在圖上寫字")
 dw = ImageDraw.Draw(image1)
 
-mesg = 'Great'
+mesg = '牡丹亭'
 font = ImageFont.truetype(font_filename, 60)
 #fn_w, fn_h = dw.textsize(unicode(mesg, 'utf-8'), font=font)
 fn_w, fn_h = dw.textsize(str(mesg), font=font)

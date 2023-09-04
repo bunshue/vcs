@@ -124,9 +124,21 @@ plt.show()
 #對圖形套用過濾器
 im_sharp = image.filter(ImageFilter.SHARPEN)
 
+plt.imshow(im_sharp)
+plt.show()
+
 #分解圖形顏色 例如RGB的紅綠藍
 #看不出效果
 r,g,b = im_sharp.split()
+
+plt.imshow(r)
+plt.show()
+
+plt.imshow(g)
+plt.show()
+
+plt.imshow(b)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
