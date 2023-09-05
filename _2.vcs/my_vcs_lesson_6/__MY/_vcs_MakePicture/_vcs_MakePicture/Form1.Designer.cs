@@ -872,6 +872,7 @@
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(60, 60);
             this.button57.TabIndex = 61;
+            this.button57.Text = "圖加字";
             this.button57.UseVisualStyleBackColor = true;
             this.button57.Click += new System.EventHandler(this.button57_Click);
             // 
@@ -882,6 +883,7 @@
             this.button58.Name = "button58";
             this.button58.Size = new System.Drawing.Size(60, 60);
             this.button58.TabIndex = 62;
+            this.button58.Text = "取得圖片的一部分";
             this.button58.UseVisualStyleBackColor = true;
             this.button58.Click += new System.EventHandler(this.button58_Click);
             // 

@@ -99,19 +99,19 @@ plt.plot(x, y20, color = 'blue', linestyle = "-", linewidth = "2", markersize = 
 
 
 
-
 plt.title('圖形標題')
-plt.title('圖形標題', fontsize = 18) # 設定圖表標題內容及大小
-plt.title(label = '圖形標題')
+plt.title('圖形標題', fontsize = 18)                    # 設定圖表標題內容及大小
+plt.title(label = '圖形標題', fontsize = 18, color='r') # 設定圖表標題內容及大小及顏色
+
 plt.xlabel('x軸標記')
 plt.xlabel('x軸標記', fontsize = 10) # 設定 x 軸標題內容及大小
+
 plt.ylabel('y軸標記')
 plt.ylabel('y軸標記', fontsize = 10) # 設定 y 軸標題內容及大小
 
 print('標示x軸刻度記號')
 plt.xticks([-2*np.pi, -3*np.pi/2, -np.pi, -np.pi/2, 0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi],
           ['$-2\pi$', '$-3\pi/2$', '$-\pi$', '$-\pi/2$', '$0$', '$\pi/2$', '$\pi$', '$3\pi/2$', '$2\pi$']);
-
 
 #plt.axis('equal')       #軸比例
 #xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
@@ -148,7 +148,8 @@ plt.tight_layout(pad=7)
 #plt.grid(True)  #顯示格線
 plt.grid(color='0.8')   #顯示格線
 
-plt.text(0, 0, 'This is a lion-mouse')
+# 放置文字
+plt.text(0, 0, 'This is a lion-mouse', color='red')
 
 plt.show()
 

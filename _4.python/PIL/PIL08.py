@@ -1,13 +1,20 @@
-print('------------------------------------------------------------')	#60個
 print('萃取圖片的輪廓')
 
 import matplotlib.pyplot as plt
 from PIL import Image
 
+
 # 讀入圖片
+#filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/taiwan.jpg'
+#image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 image1 = Image.open('sample.png')
 plt.imshow(image1)
+plt.show()
 
+#全彩轉灰階
+image1 = image1.convert("L")
+plt.imshow(image1)
 plt.show()
 
 # 圖片大小
@@ -15,9 +22,6 @@ width, height = image1.size
 
 # 輸出用
 image2 = Image.new('RGB', (width, height))
-
-#全彩轉灰階
-image1 = image1.convert("L")
 
 # 萃取輪廓
 for y in range(0, height - 1):

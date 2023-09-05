@@ -13,6 +13,9 @@ print('圖片裁剪縮放')
 
 filename = r'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
+
+plt.imshow(image1)
+plt.show()
  
 width, height = image1.size
 print('原圖大小 W =', width, ', H =', height)
@@ -22,9 +25,6 @@ y_st = 200
 w = 200
 h = 200
 image2 = image1.crop((x_st, y_st, x_st + w, y_st + h))
-
-plt.imshow(image1)
-plt.show()
 
 plt.imshow(image2)
 plt.show()

@@ -2236,7 +2236,7 @@ namespace _vcs_MakePicture
                 }
             }
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_painting\SpringBouquet.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\SpringBouquet.jpg";
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             g.DrawImage(bitmap2, (W - bitmap2.Width) / 2, (H - bitmap2.Height) / 2, bitmap2.Width, bitmap2.Height);
@@ -2252,11 +2252,94 @@ namespace _vcs_MakePicture
 
         private void button57_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\SF0.jpg";
+            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
+            int width;
+            int height;
+
+            int W = bitmap2.Width;
+            int H = bitmap2.Height;
+
+            bitmap1 = new Bitmap(W, H);
+
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Black);
+
+            int x_st = 0;
+            int y_st = 0;
+            int dx = 100;
+            int dy = 100;
+
+            g.DrawImage(bitmap2, 0, 0, bitmap2.Width, bitmap2.Height);
+            //                 貼上的位置       貼上的大小 放大縮小用
+
+            Font f;
+            f = new Font("標楷體", 60);
+            sb = new SolidBrush(Color.Red);
+            //g.DrawString("Sugar", f, sb, new PointF(W - 250, H - 82));
+            //for(int i = 250;i<3840;i+=500)
+            x_st = 220;
+            dx = 500;
+            g.DrawString("一", f, sb, new PointF(x_st + dx * 0, 50));
+            g.DrawString("二", f, sb, new PointF(x_st + dx * 1, 50));
+            g.DrawString("三", f, sb, new PointF(x_st + dx * 2, 50));
+            g.DrawString("四", f, sb, new PointF(x_st + dx * 3, 50));
+            g.DrawString("五", f, sb, new PointF(x_st + dx * 4, 50));
+            g.DrawString("六", f, sb, new PointF(x_st + dx * 5, 50));
+            g.DrawString("七", f, sb, new PointF(x_st + dx * 6, 50));
+            g.DrawString("八", f, sb, new PointF(x_st + dx * 7, 50));
+
+            pictureBox1.Image = bitmap1;
         }
+
+        //C#獲取圖片的指定部分
+        /// <summary>
+        /// 獲取圖片指定部分
+        /// </summary>
+        /// <param name="filename">圖片路徑</param>
+        /// <param name="sx">原始圖片開始截取處的坐標X值</param>
+        /// <param name="sy">原始圖片開始截取處的坐標Y值</param>
+        /// <param name="sWidth">原始圖片的寬度</param>
+        /// <param name="sHeight">原始圖片的高度</param>
+        /// <param name="dx">目標圖片開始繪制處的坐標X值(通常為0)</param>
+        /// <param name="dy">目標圖片開始繪制處的坐標Y值(通常為0)</param>
+        /// <param name="dWidth">目標圖片的寬度</param>
+        /// <param name="dHeight">目標圖片的高度</param>
+        static Bitmap GetPart(string filename, int sx, int sy, int sWidth, int sHeight, int dx, int dy, int dWidth, int dHeight)
+        {
+            Image image = Image.FromFile(filename);
+
+            Bitmap bitmap1 = new Bitmap(dWidth, dHeight);
+            Graphics g = Graphics.FromImage(bitmap1);
+            Rectangle rec1 = new Rectangle(new Point(sx, sy), new Size(sWidth, sHeight));//原圖位置
+            Rectangle rec2 = new Rectangle(new Point(dx, dy), new Size(dWidth, dHeight));//目標位置
+
+            g.DrawImage(image, rec2, rec1, GraphicsUnit.Pixel);
+
+            return bitmap1;
+        }
+
 
         private void button58_Click(object sender, EventArgs e)
         {
+            //取得圖片的一部分
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\SF0.jpg";
+
+            int dd = 500;
+            int sx = 0 + dd * 4;
+            int sy = 0;
+            int sWidth = 700;
+            int sHeight = 735;
+            int dx = 0;
+            int dy = 0;
+            int dWidth = 700;
+            int dHeight = 735;
+
+            bitmap1 = GetPart(filename, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+            pictureBox1.Image = bitmap1;
+
+
 
         }
 

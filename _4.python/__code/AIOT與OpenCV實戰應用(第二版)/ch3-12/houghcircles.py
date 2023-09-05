@@ -1,3 +1,4 @@
+import sys
 import cv2
 import numpy as np
 
@@ -12,7 +13,7 @@ w = shape[1]    #寬
 h, w, d = image.shape   #d為dimension d=3 全彩 d=1 灰階
 print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
-image = cv2.resize(image, (403, 302))
+image = cv2.resize(image, (int(w / 10), int(h / 10)))
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.GaussianBlur(gray, (5, 5), 0)
 circles = cv2.HoughCircles(
@@ -27,7 +28,17 @@ circles = cv2.HoughCircles(
     75      # 最大圓半徑
 )
 
+print(circles)
+
+'''
+if circles == None:
+    print('找不到圓形, 離開')
+    sys.exit()
+'''
+
 circles = circles.astype(int)
+print(circles)
+
 if len(circles) > 0:
     out = image.copy()
     for x, y, r in circles[0]:

@@ -15,9 +15,7 @@ import matplotlib.pyplot as plt
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
-
 image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-
 plt.imshow(image)
 plt.show()
 
@@ -38,7 +36,6 @@ image = image_transforms(image)
 print("灰度圖像維度： ", np.array(image).shape)
 image_dim_len = len(np.array(image).shape)
 print("The dim of Image: ", image_dim_len)
-
 
 #1
 #轉為二值圖像，非黑即白。每個像素用8個bit表示，0表示黑，255表示白。
