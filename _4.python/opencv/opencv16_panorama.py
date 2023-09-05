@@ -6,10 +6,12 @@
 
 import cv2
 
-filename1 = 'penguin3.jpg'
-filename2 = 'penguin4.jpg'
+'''
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/penguin3.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/penguin4.jpg'
 output_filename = 'penguin_all.jpg'
 filenames = [filename1, filename2]
+'''
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/SF1.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/SF2.jpg'

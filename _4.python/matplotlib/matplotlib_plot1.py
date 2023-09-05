@@ -113,9 +113,39 @@ v = np.ones(9)/9.0
 y2 = np.convolve(y, v, mode='same')  # 計算移動平均
 plt.plot(x[4:n-4], y2[4:n-4])        # 繪圖
 
-
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'plot 集合 2 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+
+#第一張圖
+plt.subplot(231)
+
+
+#第二張圖
+plt.subplot(232)
+
+
+#第三張圖
+plt.subplot(233)
+
+
+#第四張圖
+plt.subplot(234)
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
 

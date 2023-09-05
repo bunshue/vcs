@@ -1,45 +1,80 @@
-import numpy as np
+# plot 集合
+
 import matplotlib.pyplot as plt
-import pandas as pd
+import numpy as np
+import math
+import matplotlib
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-#from sklearn.datasets.samples_generator import make_blobs old
-from sklearn.datasets import make_blobs
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-x, y = make_blobs(n_samples=500, centers=3,
-                 n_features=2,
-                 random_state=0)
 
-plt.scatter(x[:,0], x[:,1], c=y)
+#第一張圖
+plt.subplot(231)
+
+
+#第二張圖
+plt.subplot(232)
+
+
+#第三張圖
+plt.subplot(233)
+
+
+#第四張圖
+plt.subplot(234)
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from sklearn.model_selection import cross_val_score
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'plot 集合 2 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-from sklearn.svm import SVC
 
-clf = SVC(gamma='scale')
-scores = cross_val_score(clf, x, y, cv=5)
-print(scores)
-print(scores.mean())
+#第一張圖
+plt.subplot(231)
 
-print('------------------------------------------------------------')	#60個
 
-from sklearn.tree import DecisionTreeClassifier
-clf = DecisionTreeClassifier()
-scores = cross_val_score(clf, x, y, cv=5)
-print(scores)
-print(scores.mean())
+#第二張圖
+plt.subplot(232)
 
-print('------------------------------------------------------------')	#60個
 
-from sklearn.ensemble import RandomForestClassifier
-clf = RandomForestClassifier(n_estimators=100)
-scores = cross_val_score(clf, x, y, cv=5)
-print(scores)
-print(scores.mean())
+#第三張圖
+plt.subplot(233)
+
+
+#第四張圖
+plt.subplot(234)
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

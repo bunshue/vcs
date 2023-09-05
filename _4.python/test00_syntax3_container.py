@@ -503,3 +503,76 @@ pickledict = pickle.load(f)
 f.close()
 print(pickledict)
 '''
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('集合的操作')
+
+print('------------------------------------------------------------')	#60個
+
+big_animal = set()
+small_animal = set()
+big_animal = {'lion', 'tiger'}
+small_animal = {'mouse', 'koala'}
+
+print(big_animal)
+print(small_animal)
+
+print('在集合中新增元素')
+big_animal.add('elephant')
+big_animal.add('penguin')
+big_animal.add('dinosour')
+small_animal.add('penguin')
+small_animal.add('bird')
+small_animal.add('apple')
+
+print(big_animal)
+print(small_animal)
+
+print('在集合中刪除元素')
+big_animal.discard('dinosour')
+small_animal.remove('apple')
+
+print(big_animal)
+print(small_animal)
+
+
+print('交集 Set Intersection')
+animal = big_animal & small_animal
+print(animal)
+animal = big_animal.intersection(small_animal)
+print(animal)
+
+
+print('聯集 Set Union')
+animal = big_animal | small_animal
+print(animal)
+animal = big_animal.union(small_animal)
+print(animal)
+
+print('差集 Set Difference')
+animal = big_animal - small_animal
+print(animal)
+animal = big_animal.difference(small_animal)
+print(animal)
+
+print('對稱差集 Set Symmetric Difference')
+animal = big_animal ^ small_animal
+print(animal)
+animal = big_animal.symmetric_difference(small_animal)
+print(animal)
+
+print('集合的成員運算子')
+print('elephant' in big_animal)
+print('elephant' in small_animal)
+
+print('在集合中刪除全部元素')
+big_animal.clear()
+small_animal.clear()
+
+print(big_animal)
+print(small_animal)
+
+
