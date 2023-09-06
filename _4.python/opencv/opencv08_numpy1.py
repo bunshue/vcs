@@ -60,13 +60,8 @@ cv2.imshow("image", image)    #顯示圖片
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-import sys
-sys.exit()
-
-
 
 print('------------------------------------------------------------')	#60個
-
 
 
 

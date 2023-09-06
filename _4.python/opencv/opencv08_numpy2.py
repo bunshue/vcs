@@ -20,8 +20,8 @@ rst=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 print(rst.shape)
 #print("img=\n",img)
 print("rst=\n",rst)
-print("像素点(1,0)直接计算得到的值=", img[1,0,0]*0.114+img[1,0,1]*0.587+img[1,0,2]*0.299)
-print("像素点(1,0)使用公式cv2.cvtColor()转换值=",rst[1,0])
+print("像素點(1,0)直接計算得到的值=", img[1,0,0]*0.114+img[1,0,1]*0.587+img[1,0,2]*0.299)
+print("像素點(1,0)使用公式cv2.cvtColor()轉換值=",rst[1,0])
 '''
 print(img[1,0,0])
 print(img[1,0,1])
@@ -45,8 +45,6 @@ bgr=cv2.cvtColor(rgb,cv2.COLOR_RGB2BGR)
 #print("img=\n",img)
 print("rgb=\n",rgb)
 print("bgr=\n",bgr)
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -115,7 +113,6 @@ print("cv2.add(img1,6)\n",img4)
 img5=cv2.add(6,img2)
 print("cv2.add(6,img2)=\n",img5)
 
-
 print('------------------------------------------------------------')	#60個
 
 img1=np.ones((3,4),dtype=np.uint8)*100
@@ -129,28 +126,26 @@ print('------------------------------------------------------------')	#60個
 img=np.random.randint(10,99,size=[5,5],dtype=np.uint8)
 print("img=\n",img)
 
-print("读取像素点img.item(3,2)=",img.item(3,2))
+print("讀取像素點img.item(3,2)=",img.item(3,2))
 img.itemset((3,2),255)
 print("修改后img=\n",img)
-print("修改后像素点img.item(3,2)=",img.item(3,2))
-
-print('------------------------------------------------------------')	#60個
+print("修改后像素點img.item(3,2)=",img.item(3,2))
 
 print('------------------------------------------------------------')	#60個
 
 img=np.random.randint(10,99,size=[2,4,3],dtype=np.uint8)
 print("img=\n",img)
 
-print("读取像素点img[1,2,0]=",img.item(1,2,0))
-print("读取像素点img[0,2,1]=",img.item(0,2,1))
-print("读取像素点img[1,0,2]=",img.item(1,0,2))
+print("讀取像素點img[1,2,0]=",img.item(1,2,0))
+print("讀取像素點img[0,2,1]=",img.item(0,2,1))
+print("讀取像素點img[1,0,2]=",img.item(1,0,2))
 img.itemset((1,2,0),255)
 img.itemset((0,2,1),255)
 img.itemset((1,0,2),255)
 print("修改后img=\n",img)
-print("修改后像素点img[1,2,0]=",img.item(1,2,0))
-print("修改后像素点img[0,2,1]=",img.item(0,2,1))
-print("修改后像素点img[1,0,2]=",img.item(1,0,2))
+print("修改后像素點img[1,2,0]=",img.item(1,2,0))
+print("修改后像素點img[0,2,1]=",img.item(0,2,1))
+print("修改后像素點img[1,0,2]=",img.item(1,0,2))
 
 print('------------------------------------------------------------')	#60個
 
@@ -163,22 +158,21 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-
-#=========测试下OpenCV中蓝色的HSV模式值=============
+#=========測試下OpenCV中藍色的HSV模式值=============
 imgBlue=np.zeros([1,1,3],dtype=np.uint8)
 imgBlue[0,0,0]=255
 Blue=imgBlue
 BlueHSV=cv2.cvtColor(Blue,cv2.COLOR_BGR2HSV)
 print("Blue=\n",Blue)
 print("BlueHSV=\n",BlueHSV)
-#=========测试下OpenCV中绿色的HSV模式值=============
+#=========測試下OpenCV中綠色的HSV模式值=============
 imgGreen=np.zeros([1,1,3],dtype=np.uint8)
 imgGreen[0,0,1]=255
 Green=imgGreen
 GreenHSV=cv2.cvtColor(Green,cv2.COLOR_BGR2HSV)
 print("Green=\n",Green)
 print("GreenHSV=\n",GreenHSV)
-#=========测试下OpenCV中红色的HSV模式值=============
+#=========測試下OpenCV中紅色的HSV模式值=============
 imgRed=np.zeros([1,1,3],dtype=np.uint8)
 imgRed[0,0,2]=255
 Red=imgRed
@@ -297,40 +291,14 @@ print("otsu=\n",otsu)
 
 print('------------------------------------------------------------')	#60個
 
-n = 300
-img = np.zeros((n+1,n+1,3), np.uint8)
-img = cv2.line(img,(0,0),(n,n),(255,0,0),3)
-img = cv2.line(img,(0,100),(n,100),(0,255,0),1)
-img = cv2.line(img,(100,0),(100,n),(0,0,255),6)
-winname = 'Demo19.1'
-cv2.namedWindow(winname)
-cv2.imshow(winname, img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-n = 300
-img = np.ones((n,n,3), np.uint8)*255
-img = cv2.rectangle(img,(50,50),(n-100,n-50),(0,0,255),-1)
-winname = 'Demo19.1'
-cv2.namedWindow(winname)
-cv2.imshow(winname, img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
 d = 400
 img = np.ones((d,d,3),dtype="uint8")*255
 (centerX,centerY) = (round(img.shape[1] / 2),round(img.shape[0] / 2))
-#将图像的中心作为圆心,实际值为=d/2
-red = (0,0,255)#设置白色变量
+#將圖像的中心作為圓心,實際值為=d/2
+red = (0,0,255)#設置白色變量
 for r in range(5,round(d/2),12):
     cv2.circle(img,(centerX,centerY),r,red,3)
-    #circle(载体图像，圆心，半径，颜色)
+    #circle(載體圖像，圓心，半徑，顏色)
 cv2.imshow("Demo19.3",img)
 
 cv2.waitKey(0)
@@ -343,15 +311,15 @@ img = np.ones((d,d,3),dtype="uint8")*255
 #生成白色背景
 for i in range(0,100):
     centerX = np.random.randint(0,high = d)
-    #生成随机圆心X,确保在画布img内
+    #生成隨機圓心X,確保在畫布img內
     centerY = np.random.randint(0,high = d)
-    #生成随机圆心Y,确保在画布img内
+    #生成隨機圓心Y,確保在畫布img內
     radius = np.random.randint(5,high = d/5)
-    #生成随机半径，值范围：[5,d/5)，最大半径是d/5
+    #生成隨機半徑，值范圍：[5,d/5)，最大半徑是d/5
     color = np.random.randint(0,high = 256,size = (3,)).tolist()
-    #生成随机颜色，3个[0,256)的随机数    
+    #生成隨機顏色，3個[0,256)的隨機數    
     cv2.circle(img,(centerX,centerY),radius,color,-1)
-    #使用上述随机数，在画布img内画圆
+    #使用上述隨機數，在畫布img內畫圓
 cv2.imshow("demo19.4",img)
 
 cv2.waitKey(0)
@@ -363,14 +331,14 @@ d = 400
 img = np.ones((d,d,3),dtype="uint8")*255
 #生成白色背景
 center=(round(d/2),round(d/2))
-#注意数值类型，center=(d/2,d/2)不可以
+#注意數值類型，center=(d/2,d/2)不可以
 size=(100,200)
-#轴的长度
+#軸的長度
 for i in range(0,10):
     angle = np.random.randint(0,361)
     #偏移角度    
     color = np.random.randint(0,high = 256,size = (3,)).tolist()
-    #生成随机颜色，3个[0,256)的随机数    
+    #生成隨機顏色，3個[0,256)的隨機數    
     thickness = np.random.randint(1,9)
     cv2.ellipse(img, center, size, angle, 0, 360, color,thickness)
 cv2.imshow("demo19.5",img)
@@ -384,12 +352,12 @@ d = 400
 img = np.ones((d,d,3),dtype="uint8")*255
 #生成白色背景
 pts=np.array([[200,50],[300,200],[200,350],[100,200]], np.int32)
-#生成各个顶点,注意数据类型为int32
+#生成各個頂點,注意數據類型為int32
 pts=pts.reshape((-1,1,2))
-#第1个参数为-1, 表明这一维的长度是根据后面的维度的计算出来的。
+#第1個參數為-1, 表明這一維的長度是根據后面的維度的計算出來的。
 cv2.polylines(img,[pts],True,(0,255,0),8)
-#调用函数polylines完成多边形绘图，注意第3个参数控制多边形封闭
-# cv2.polylines(img,[pts],False,(0,255,0),8)  #不闭合的的多边形
+#調用函數polylines完成多邊形繪圖，注意第3個參數控制多邊形封閉
+# cv2.polylines(img,[pts],False,(0,255,0),8)  #不閉合的的多邊形
 cv2.imshow("demo19.6",img)
 
 cv2.waitKey(0)
@@ -426,15 +394,15 @@ print('------------------------------------------------------------')	#60個
 
 def Demo(event,x,y,flags,param):
     if event == cv2.EVENT_LBUTTONDOWN:
-        print("单击了鼠标左键")
+        print("單擊了鼠標左鍵")
     elif event==cv2.EVENT_RBUTTONDOWN :
-        print("单击了鼠标右键")
+        print("單擊了鼠標右鍵")
     elif flags==cv2.EVENT_FLAG_LBUTTON:
-        print("按住左键拖动了鼠标")
+        print("按住左鍵拖動了鼠標")
     elif event==cv2.EVENT_MBUTTONDOWN :
-        print("单击了中间键")
-#创建名称为Demo的响应（回调）函数OnMouseAction
-#将回调函数Demo与窗口“Demo19.9”建立连接
+        print("單擊了中間鍵")
+#創建名稱為Demo的響應（回調）函數OnMouseAction
+#將回調函數Demo與窗口“Demo19.9”建立連接
 img = np.ones((H, W, 3),np.uint8)*255
 cv2.namedWindow('Demo19.9')
 cv2.setMouseCallback('Demo19.9',Demo)     
@@ -466,53 +434,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-thickness=-1
-mode=1
-d=400
-def draw_circle(event,x,y,flags,param):
-    if event==cv2.EVENT_LBUTTONDOWN:
-        a=np.random.randint(1,d-50)
-        r=np.random.randint(1,d/5)
-        angle = np.random.randint(0,361)
-        color = np.random.randint(0,high = 256,size = (3,)).tolist()
-        if mode==1:
-            cv2.rectangle(img,(x,y),(a,a),color,thickness)
-        elif mode==2:
-            cv2.circle(img,(x,y),r,color,thickness)
-        elif mode==3:
-            cv2.line(img,(a,a),(x,y),color,3)  
-        elif mode==4:
-            cv2.ellipse(img, (x,y), (100,150), angle, 0, 360,color,thickness)                  
-        elif mode==5:
-            cv2.putText(img,'OpenCV',(0,round(d/2)), 
-                        cv2.FONT_HERSHEY_SIMPLEX, 2,color,5)    
-img=np.ones((d,d,3),np.uint8)*255
-cv2.namedWindow('image')
-cv2.setMouseCallback('image',draw_circle)
-while(1):
-    cv2.imshow('image',img)
-    k=cv2.waitKey(1)&0xFF
-    if k==ord('r'):
-        mode=1
-    elif k==ord('c'):
-        mode=2
-    elif k==ord('l'):
-        mode=3
-    elif k==ord('e'):
-        mode=4
-    elif k==ord('t'):
-        mode=5
-    elif k==ord('f'):
-        thickness=-1
-    elif k==ord('u'):
-        thickness=3
-    elif k==27:
-        break   
-
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
 def changeColor(x):
     r=cv2.getTrackbarPos('R','image')
     g=cv2.getTrackbarPos('G','image')
@@ -533,8 +454,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-Type=0  #阈值处理类型值
-Value=0 #使用的阈值
+Type=0  #閾值處理類型值
+Value=0 #使用的閾值
 def onType(a):
     Type= cv2.getTrackbarPos(tType, windowName)
     Value= cv2.getTrackbarPos(tValue, windowName)
@@ -548,12 +469,12 @@ def onValue(a):
     cv2.imshow(windowName,dst)
 
 o = cv2.imread("images/lena512.bmp",0)
-windowName = "Demo19.13"  #窗体名
+windowName = "Demo19.13"  #窗體名
 cv2.namedWindow(windowName)
 cv2.imshow(windowName,o)
-#创建两个滑动条
-tType = "Type"  #用来选取阈值处理类型的滚动条
-tValue = "Value"    #用来选取阈值的滚动条
+#創建兩個滑動條
+tType = "Type"  #用來選取閾值處理類型的滾動條
+tValue = "Value"    #用來選取閾值的滾動條
 cv2.createTrackbar(tType, windowName, 0, 4, onType)
 cv2.createTrackbar(tValue, windowName,0, 255, onValue) 
 
@@ -617,4 +538,3 @@ print('------------------------------------------------------------')	#60個
 '''
 
 print('------------------------------------------------------------')	#60個
-

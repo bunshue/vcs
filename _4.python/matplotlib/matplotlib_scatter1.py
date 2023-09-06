@@ -240,9 +240,13 @@ plt.figure(num = 'scatter 集合', figsize = (20, 15), dpi = 84, facecolor = "wh
 #第一張圖
 plt.subplot(231)
 
+X = np.random.randn(300)
+Y = np.random.randn(300)
+plt.scatter(X, Y)
 
 #第二張圖
 plt.subplot(232)
+
 
 #第三張圖
 plt.subplot(233)

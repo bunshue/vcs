@@ -65,7 +65,7 @@ b,g,r=cv2.split(image)
 bgr=cv2.merge([b,g,r])
 rgb=cv2.merge([r,g,b])
 
-cv2.imshow("image",image)   #原圖
+cv2.imshow("image", image)   #原圖
 cv2.imshow("B-G-R OK", bgr) #照BGR排列 OK
 cv2.imshow("R-G-B NG", rgb) #照RGB排列 錯相
 
@@ -77,11 +77,15 @@ print('測試 2')
 
 img = cv2.imread('images/girl.bmp')
 imgRGB=cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-plt.figure("显示结果")
+plt.figure("顯示結果")
+
 plt.subplot(121)
-plt.imshow(img),plt.axis('off')
+plt.imshow(img)
+plt.axis('off')
+
 plt.subplot(122)
-plt.imshow(imgRGB),plt.axis('off')
+plt.imshow(imgRGB)
+plt.axis('off')
 
 plt.show()
 
@@ -90,16 +94,22 @@ print('測試 3 subplot')
 
 o = cv2.imread('images/8.bmp')
 g=cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
-plt.figure("灰度图像显示演示")
-plt.subplot(221); plt.imshow(g, cmap=plt.cm.gray)
-plt.subplot(222); plt.imshow(g, cmap=plt.cm.gray_r)
-plt.subplot(223); plt.imshow(g, cmap='gray')
-plt.subplot(224); plt.imshow(g, cmap='gray_r')
+
+plt.figure("灰度圖像顯示演示")
+
+plt.subplot(221)
+plt.imshow(g, cmap=plt.cm.gray)
+
+plt.subplot(222)
+plt.imshow(g, cmap=plt.cm.gray_r)
+
+plt.subplot(223)
+plt.imshow(g, cmap='gray')
+
+plt.subplot(224)
+plt.imshow(g, cmap='gray_r')
 
 plt.show()
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -107,29 +117,34 @@ print('測試 4 subplot')
 
 o = cv2.imread('images/girl.bmp')
 g=cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
-plt.figure("灰度图像显示演示")
+
+plt.figure("灰度圖像顯示演示")
 plt.subplot(221)
-plt.imshow(o),plt.axis('off')
+plt.imshow(o)
+plt.axis('off')
+
 plt.subplot(222)
-plt.imshow(o,cmap=plt.cm.gray),plt.axis('off')
+plt.imshow(o,cmap=plt.cm.gray)
+plt.axis('off')
+
 plt.subplot(223)
-plt.imshow(g),plt.axis('off')
+plt.imshow(g)
+plt.axis('off')
+
 plt.subplot(224)
-plt.imshow(g,cmap=plt.cm.gray),plt.axis('off')
+plt.imshow(g,cmap=plt.cm.gray)
+plt.axis('off')
 
 plt.show()
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
 print('測試 5')
+
 o=cv2.imread("images/boat.bmp")
 plt.hist(o.ravel(),16)
 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -141,8 +156,6 @@ cv2.destroyAllWindows()
 
 plt.hist(o.ravel(),256)
 plt.show()
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -159,37 +172,31 @@ plt.plot(hist)
 
 plt.show()
 
-
-
 print('------------------------------------------------------------')	#60個
-
 
 print('測試 8')
 
-#-----------读取原始图像---------------
+#-----------讀取原始圖像---------------
 img = cv2.imread('images/equ.bmp',cv2.IMREAD_GRAYSCALE)
-#-----------直方图均衡化处理---------------
+#-----------直方圖均衡化處理---------------
 equ = cv2.equalizeHist(img)
-#-----------显示均衡化前后的直方图---------------
+#-----------顯示均衡化前后的直方圖---------------
 cv2.imshow("original",img)  #有cv2.imshow的, 要對應destroyAllWindows()
 cv2.waitKey()
 cv2.destroyAllWindows()
 cv2.imshow("result",equ)    #有cv2.imshow的, 要對應destroyAllWindows()
 cv2.waitKey()
 cv2.destroyAllWindows()
-#-----------显示均衡化前后的直方图---------------
-plt.figure("原始图像直方图")  #构建窗口
+#-----------顯示均衡化前后的直方圖---------------
+plt.figure("原始圖像直方圖")  #構建窗口
 plt.hist(img.ravel(),256)
-plt.figure("均衡化结果直方图")  #构建新窗口
+plt.figure("均衡化結果直方圖")  #構建新窗口
 plt.hist(equ.ravel(),256)
 
 plt.show()
 
-#----------等待释放窗口---------------------
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-
 
 print('------------------------------------------------------------')	#60個
 print('測試 9')
@@ -213,7 +220,6 @@ plt.plot(histb,color='b')
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 print('測試 11')
 
@@ -232,28 +238,21 @@ print('測試 12')
 
 img = cv2.imread('images/equ.bmp',cv2.IMREAD_GRAYSCALE)
 equ = cv2.equalizeHist(img)
+
 plt.figure("subplot示例")
-plt.subplot(121),plt.hist(img.ravel(),256)
-plt.subplot(122),plt.hist(equ.ravel(),256)
+plt.subplot(121)
+plt.hist(img.ravel(),256)
+
+plt.subplot(122)
+plt.hist(equ.ravel(),256)
 
 plt.show()
 
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
 
 
-
-
 print('------------------------------------------------------------')	#60個
-
 

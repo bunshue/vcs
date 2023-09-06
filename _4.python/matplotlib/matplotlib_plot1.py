@@ -124,26 +124,67 @@ plt.figure(num = 'plot 集合 2 函數曲線', figsize = (20, 15), dpi = 84, fac
 #第一張圖
 plt.subplot(231)
 
+x = [x for x in range(0, 11)]                   
+y = [(3 * y -18) for y in x]
+plt.plot(x, y, '-*')   
+
+plt.xticks(x)                           # 標記每個單一x數字
+plt.axis([0, 10, -20, 15])              # 標記刻度範圍
+plt.xlabel("children")
+plt.ylabel("Apple")
+plt.grid()                              # 加格線
+
 
 #第二張圖
 plt.subplot(232)
 
+x = [x for x in range(0, 11)]
+y1 = [2 * y for y in x]
+y2 = [3 * y for y in x]
+y3 = [4 * y for y in x]
+plt.xticks(x)
+plt.plot(x, y1, label='L1')
+plt.plot(x, y2, label='L2')
+plt.plot(x, y3, label='L3')
+plt.legend(loc='best')
+plt.grid()                              # 加格線
 
 #第三張圖
 plt.subplot(233)
 
+plt.plot(np.random.randn(20))
+plt.plot(range(20), np.random.randn(20))
 
 #第四張圖
 plt.subplot(234)
 
+x = np.linspace(-5, 5, 1000)
+y = np.sin(x) / (x**2+1)
+
+plt.plot(x,y,lw=5)
+plt.plot(x,np.cos(x))
+#plt.xticks(np.arange(-5,6))
 
 #第五張圖
 plt.subplot(235)
 
+#把這個函數大於 0 的地方標示出來。
+y = np.sinc(x)
+plt.plot(x,y)
+plt.plot(x[y>0], y[y>0], 'o')
 
 #第六張圖
 plt.subplot(236)
 
+x = [x for x in range(0, 11)]                   
+y = [(3 * y -18) for y in x]
+plt.plot(x, y, '-*')   
+
+plt.xticks(x)                           # 標記每個單一x數字
+plt.axis([0, 10, -20, 15])              # 標記刻度範圍
+plt.xlabel("children")
+plt.ylabel("Apple")
+plt.grid()                              # 加格線
 
 plt.show()
 

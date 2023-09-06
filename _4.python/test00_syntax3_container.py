@@ -6,6 +6,11 @@ print('------------------------------------------------------------')	#60個
 
 print('字典的操作')
 
+'''
+Dictionary(字典)
+Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的語法是key: value，一個key對應一個value，key不一定要是字串，但必須是唯一的。
+'''
+
 print('------------------------------------------------------------')	#60個
 
 print('建立空字典')
@@ -19,7 +24,7 @@ animal = {
     'lion':'獅子',
 }
 
-print('增加字典內容')
+print('增加字典內容')     #只要給新的key就會產生新的資料。
 animal['tiger'] = '老虎'
 animal['zebra'] = '斑馬'
 animal['koala'] = '無尾熊'
@@ -28,9 +33,23 @@ animal['hippo'] = '河馬'
 print('刪除字典內容')
 del animal['penguin']
 
+#移除dictionary
+#使用pop(key)移除該key值的資料。
+#animal.pop('penguin')
+
 print(type(animal))
+#打印字典
 print(animal)
+#語法是dict[key]，利用key來存取數量。dict[key] = value就可以改變數量。
 print(animal['tiger'])
+
+#取得所有資料
+#使用keys()取得所有key值，回傳是所有key的List。
+#取得所有數字
+#使用values()取得所有value值，回傳是所有value的List。
+#取得所有資料
+#使用item()取得所有資料組，回傳是由(key, value)所組成的List。
+
 print(animal.keys())
 print(animal.values())
 print(animal.items())
@@ -69,14 +88,22 @@ if animal_name in animal:
 else:
     print('查無此動物 :', animal_name)
 
-
 print("目前字典元素數量     = ", len(animal))
+
+print("將 字典 寫入檔案")
+filename = 'C:/_git/vcs/_1.data/______test_files2/sssssss3.txt'
+
+with open(filename,'w') as fp:
+    #將字典轉成字串寫入檔案
+    fp.write(str(animal))
+    
+print("寫入檔案 : " + filename)
+
 
 animal.clear()
 
 print("目前字典內容:", animal)
 print("目前字典元素數量     = ", len(animal))
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -232,8 +259,6 @@ for c in wd:
 
 print('------------------------------------------------------------')	#60個
 
-
-
 # 各種python專用的語法 字典
 
 adict = {'book':10, 'pen':3, 'earser':6, 'ruler':2}
@@ -251,23 +276,6 @@ print(mydict['a'])
 mydict['d'] = 7
 print(mydict)
 
-# 星座轉換字典
-zodiacSigns_convent = {
-    '1':'Aries',
-    '2':'Taurus',
-    '3':'Gemini',
-    '4':'Cancer',
-    '5':'Leo',
-    '6':'Virgo',
-    '7':'Libra',
-    '8':'Scorpio',
-    '9':'Sagittarius',
-    '10':'Capricorn',
-    '11':'Aquarius',
-    '12':'Pisces'
-}
-index = 7
-print(zodiacSigns_convent[str(index)])
 
 print("字典測試 1")
 
@@ -316,38 +324,170 @@ else:
     
 
 
+'''
+新進
 
+
+
+
+'''
+
+
+
+'''
+print('用pickle來存取一個字典檔案, 讀寫接用 wb/rb binary')
+
+import pickle
+
+f = open("animal.pickle", 'wb')
+
+pickle.dump(animal, f)
+
+f.close()
+
+f = open("animal.pickle", 'rb')
+
+pickledict = pickle.load(f)
+f.close()
+print(pickledict)
+'''
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('集合的操作')
+
+print('------------------------------------------------------------')	#60個
+
+print('建立集合')
+big_animal = set()
+small_animal = set()
+big_animal = {'lion', 'tiger'}
+small_animal = set(['mouse', 'koala']) # Create a set from a list
+
+print(big_animal)
+print(small_animal)
+
+print('在集合中新增元素')
+big_animal.add('elephant')
+big_animal.add('penguin')
+big_animal.add('dinosour')
+small_animal.add('penguin')
+small_animal.add('bird')
+small_animal.add('apple')
+
+print(big_animal)
+print(small_animal)
+
+print('在集合中刪除元素')
+big_animal.discard('dinosour')
+small_animal.remove('apple')
+
+print(big_animal)
+print(small_animal)
+
+
+print('交集 Set Intersection')
+animal = big_animal & small_animal
+print(animal)
+animal = big_animal.intersection(small_animal)
+print(animal)
+
+print('聯集 Set Union')
+animal = big_animal | small_animal
+print(animal)
+animal = big_animal.union(small_animal)
+print(animal)
+
+print('差集 Set Difference')
+animal = big_animal - small_animal
+print(animal)
+animal = big_animal.difference(small_animal)
+print(animal)
+
+print('對稱差集 Set Symmetric Difference')
+animal = big_animal ^ small_animal
+print(animal)
+animal = big_animal.symmetric_difference(small_animal)
+print(animal)
+
+print('集合的成員運算子')
+print('大象是否在集合1之中?', 'elephant' in big_animal)
+print('大象是否在集合2之中?', 'elephant' in small_animal)
+
+print("length is", len(big_animal)) # Use function len
+print("max is", max(big_animal)) # Use max
+print("min is", min(big_animal)) # Use min
+#print("sum is", sum(big_animal)) # Use sum
+
+
+
+print('在集合中刪除全部元素')
+big_animal.clear()
+small_animal.clear()
+
+print(big_animal)
+print(small_animal)
+print('------------------------------------------------------------')	#60個
+
+import random
 import time
 
-new_users = [
-{'name': 'Richard Ho'},
-{'name': 'Tom Wu'},
-{'name': 'Judy Chen'},
-{'name': 'Lisa Chang'}
-]
 
-for user in new_users:
-    print('/user', user)
-    time.sleep(0.1)
+print('set 和 list 速度比較')
+NUMBER_OF_ELEMENTS = 500
+
+# Create a list
+lst = list(range(NUMBER_OF_ELEMENTS))
+random.shuffle(lst)
+
+# Create a set from the list
+s = set(lst)
+
+# Test if an element is in the set
+startTime = time.time() # Get start time
+for i in range(NUMBER_OF_ELEMENTS):
+    i in s
+endTime = time.time() # Get end time
+runTime = int((endTime - startTime) * 1000) # Get test time
+print("To test if", NUMBER_OF_ELEMENTS, 
+    "elements are in the set\n",
+    "The runtime is", runTime, "milliseconds")
+
+# Test if an element is in the list
+startTime = time.time() # Get start time
+for i in range(NUMBER_OF_ELEMENTS):
+    i in lst
+endTime = time.time() # Get end time
+runTime = int((endTime - startTime) * 1000) # Get test time
+print("\nTo test if", NUMBER_OF_ELEMENTS, 
+    "elements are in the list\n",
+    "The runtime is", runTime, "milliseconds")
+
+# Remove elements from a set one at a time
+startTime = time.time() # Get start time
+for i in range(NUMBER_OF_ELEMENTS):
+    s.remove(i)
+endTime = time.time() # Get end time
+runTime = int((endTime - startTime) * 1000) # Get test time
+print("\nTo remove", NUMBER_OF_ELEMENTS, 
+    "elements from the set\n",
+    "The runtime is", runTime, "milliseconds")
+
+# Remove elements from a list one at a time
+startTime = time.time() # Get start time
+for i in range(NUMBER_OF_ELEMENTS):
+    lst.remove(i)
+endTime = time.time() # Get end time
+runTime = int((endTime - startTime) * 1000) # Get test time
+print("\nTo remove", NUMBER_OF_ELEMENTS, 
+    "elements from the list\n",
+    "The runtime is", runTime, "milliseconds")
+
+print('------------------------------------------------------------')	#60個
 
 
-#讀取檔案字典範例
-
-print("將 字典 寫入檔案")
-filename = 'C:/_git/vcs/_1.data/______test_files2/sssssss3.txt'
-
-scores=dict()
-
-scores[1] = 30
-scores[2] = 50
-scores[3] = 80
-scores[4] = 90
-scores[5] = 100
-
-with open(filename,'w') as fp:
-    fp.write(str(scores))
-    
-print("寫入檔案 : " + filename)
 
 print('dict使用範例')
 
@@ -418,161 +558,5 @@ for no in class_101.keys():
         sum = sum + scores[subject_no][no]
         print("{}:{:>3} ".format(subjects[subject_no], scores[subject_no][no]), end="")
     print("總分:{:>3}, 平均:{:.2f}".format(sum, float(sum)/len(scores)))
-
-
-print('dict使用範例')
-
-
-'''
-Dictionary(字典)
-
-Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的語法是key: value，一個key對應一個value，key不一定要是字串，但必須是唯一的。
-'''
-
-Number = {"five": 5, "ten": 10, "three": 3}
-print(Number)		#打印dictionary
-
-#語法是dict[key]，利用key來存取數量。dict[key] = value就可以改變數量。
-
-print(Number["five"])	#5
-Number["five"] = 50	#50
-print(Number)		#打印dictionary
-
-#增加dictionary
-#只要給新的key就會產生新的資料。
-Number["eight"] = 8
-print(Number)		#打印dictionary
-
-
-
-
-#移除dictionary
-#使用pop(key)移除該key值的資料。
-Number.pop("eight")
-print(Number)		#打印dictionary
-
-
-#取得所有資料
-#使用keys()取得所有key值，回傳是所有key的List。
-#取得所有數字
-#使用values()取得所有value值，回傳是所有value的List。
-#取得所有資料
-#使用item()取得所有資料組，回傳是由(key, value)所組成的List。
-
-print(Number.keys())
-print(Number.values())
-print(Number.items())
-
-
-
-
-
-
-
-
-
-
-'''
-新進
-
-
-
-
-
-
-
-
-'''
-
-
-
-'''
-print('用pickle來存取一個字典檔案, 讀寫接用 wb/rb binary')
-
-import pickle
-
-f = open("animal.pickle", 'wb')
-
-pickle.dump(animal, f)
-
-f.close()
-
-f = open("animal.pickle", 'rb')
-
-pickledict = pickle.load(f)
-f.close()
-print(pickledict)
-'''
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print('集合的操作')
-
-print('------------------------------------------------------------')	#60個
-
-big_animal = set()
-small_animal = set()
-big_animal = {'lion', 'tiger'}
-small_animal = {'mouse', 'koala'}
-
-print(big_animal)
-print(small_animal)
-
-print('在集合中新增元素')
-big_animal.add('elephant')
-big_animal.add('penguin')
-big_animal.add('dinosour')
-small_animal.add('penguin')
-small_animal.add('bird')
-small_animal.add('apple')
-
-print(big_animal)
-print(small_animal)
-
-print('在集合中刪除元素')
-big_animal.discard('dinosour')
-small_animal.remove('apple')
-
-print(big_animal)
-print(small_animal)
-
-
-print('交集 Set Intersection')
-animal = big_animal & small_animal
-print(animal)
-animal = big_animal.intersection(small_animal)
-print(animal)
-
-
-print('聯集 Set Union')
-animal = big_animal | small_animal
-print(animal)
-animal = big_animal.union(small_animal)
-print(animal)
-
-print('差集 Set Difference')
-animal = big_animal - small_animal
-print(animal)
-animal = big_animal.difference(small_animal)
-print(animal)
-
-print('對稱差集 Set Symmetric Difference')
-animal = big_animal ^ small_animal
-print(animal)
-animal = big_animal.symmetric_difference(small_animal)
-print(animal)
-
-print('集合的成員運算子')
-print('elephant' in big_animal)
-print('elephant' in small_animal)
-
-print('在集合中刪除全部元素')
-big_animal.clear()
-small_animal.clear()
-
-print(big_animal)
-print(small_animal)
 
 

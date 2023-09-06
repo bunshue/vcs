@@ -52,61 +52,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-#舊金山市中心（1991–2020年正常值，1849年至今極端數據） 
-
-#月份 	1月 	2月 	3月 	4月 	5月 	6月 	7月 	8月 	9月 	10月 	11月 	12月 	全年 
-
-#平均高溫 °C
-listy1 = [14.3, 15.8, 16.7, 17.2, 17.8, 19.2, 19.1, 19.9, 21.2, 21.0, 17.6, 14.4]   #, 17.8
-
-#平均低溫 °C
-listy2 = [8.1, 8.8, 9.4, 9.8, 10.8, 11.7, 12.4, 13.1, 13.1, 12.4, 10.4, 8.3]    #, 10.7
-
-#平均降雨量 mm
-listy3 = [112, 111, 80, 41, 18, 5.1, 0.25, 1.5, 2.5, 24, 66, 121]   #, 581
-
-#在同一張圖 畫 兩條曲線
-month = np.arange(1, 13)
-print(type(month))
-print(month)
-
-plt.plot(month, listy1, 'r-.s', lw = 2, markersize = 5, label = "平均高溫")
-plt.plot(month, listy2, 'g-.s', lw = 2, markersize = 5, label = "平均低溫")
-plt.plot(month, listy3, 'b--*', lw = 2, markersize = 5, label = "平均降雨量")
-
-
-'''
-plt.plot(listx, listy, color = "red", ls = "--")
-plt.plot(listx, listy, color = "red", ls = "--")
-plt.plot(listx, listy, color = "red", ls = "--")
-'''
-
-#同一個指令畫兩條線
-#plt.plot(month, listy1, 'r-.s', month, listy2, 'y-s')
-
-plt.legend()
-
-month_chi = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-plt.xticks(month, month_chi, rotation = 45)
-
-plt.xlim(0.5, 12.5) #x軸顯示邊界
-plt.ylim(-10, 150)  #y軸顯示邊界
-
-plt.grid(color = 'k', ls = ':', lw = 2, alpha = 0.5)    #畫格點
-plt.grid(color = 'r', linestyle = ":", linewidth = '1', alpha = 0.5)    #畫格點
-
-plt.show()
-
-
-
-sys.exit()
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
 N = 10
 
 x2 = np.arange(N)
@@ -115,10 +60,10 @@ y2 = np.random.randn(N)
 y2 = x2
 
 plt.scatter(x2, y2)
-plt.show()
+#plt.show()
 
 plt.bar(x2, y2)
-plt.show()
+#plt.show()
 
 
 plt.plot(x2, y2)
@@ -127,54 +72,6 @@ plt.show()
 
 #箱形圖  便於確認資料分布的視覺化方法
 plt.boxplot(y2)
-plt.show()
-
-import sys
-sys.exit()
-
-
-'''
-print('------------------------------------------------------------')	#60個
-                                
-x = [x for x in range(0, 11)]                   
-y = [(3 * y -18) for y in x]
-plt.plot(x, y, '-*')   
-
-plt.xticks(x)                           # 標記每個單一x數字
-plt.axis([0, 10, -20, 15])              # 標記刻度範圍
-plt.xlabel("children")
-plt.ylabel("Apple")
-plt.grid()                              # 加格線
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-x = [x for x in range(0, 11)]
-y1 = [2 * y for y in x]
-y2 = [3 * y for y in x]
-y3 = [4 * y for y in x]
-plt.xticks(x)
-plt.plot(x, y1, label='L1')
-plt.plot(x, y2, label='L2')
-plt.plot(x, y3, label='L3')
-plt.legend(loc='best')
-plt.grid()                              # 加格線
-plt.show()
-'''
-
-print('------------------------------------------------------------')	#60個
-
-
-
-'''
-X = np.random.randn(300)
-Y = np.random.randn(300)
-plt.scatter(X, Y)
-'''
-
-
-plt.plot(np.random.randn(20))
-plt.plot(range(20), np.random.randn(20))
 
 plt.show()
 
@@ -193,23 +90,10 @@ xx = x + 1j * x[:, np.newaxis]
 plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap='gray')
 '''
 
+
+
 print('------------------------------------------------------------')	#60個
 
-
-
-x = np.linspace(-5, 5, 1000)
-y = np.sin(x) / (x**2+1)
-
-plt.plot(x,y,lw=5)
-plt.plot(x,np.cos(x))
-#plt.xticks(np.arange(-5,6))
-
-
-
-#把這個函數大於 0 的地方標示出來。
-y = np.sinc(x)
-plt.plot(x,y)
-plt.plot(x[y>0], y[y>0], 'o')
 
 
 
@@ -217,50 +101,82 @@ plt.plot(x[y>0], y[y>0], 'o')
 print('------------------------------------------------------------')	#60個
 
 
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+'''
+
+
+
+xpt = list(range(1,11))        # 建立1-100序列x座標點
+
+plt.plot(squares, lw=10)       # 串列squares數據是y軸的值, 線條寬度是10
+plt.tick_params(axis='both', labelsize=12, color='red')
+
+plt.plot(seq, data1, 'g--', seq, data2, 'r-.', seq, data3, 'y:', seq, data4, 'k.')   
+plt.plot(seq, data1, '-*', seq, data2, '-o', seq, data3, '-^', seq, data4, '-s')   
+plt.plot(seq, Benz, '-*', seq, BMW, '-o', seq, Lexus, '-^')   
+
+seq = [2021, 2022, 2023]                # 年度
+plt.xticks(seq)                         # 設定x軸刻度
+
+plt.plot(seq, Benz, '-*', seq, BMW, '-o', seq, Lexus, '-^')   
 
 
 '''
-print('------------------------------------------------------------')	#60個
-                                
-x = [x for x in range(0, 11)]                   
-y = [(3 * y -18) for y in x]
-plt.plot(x, y, '-*')   
 
-plt.xticks(x)                           # 標記每個單一x數字
-plt.axis([0, 10, -20, 15])              # 標記刻度範圍
-plt.xlabel("children")
-plt.ylabel("Apple")
-plt.grid()                              # 加格線
-plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
-x = [x for x in range(0, 11)]
-y1 = [2 * y for y in x]
-y2 = [3 * y for y in x]
-y3 = [4 * y for y in x]
-plt.xticks(x)
-plt.plot(x, y1, label='L1')
-plt.plot(x, y2, label='L2')
-plt.plot(x, y3, label='L3')
-plt.legend(loc='best')
-plt.grid()                              # 加格線
-plt.show()
+
+
+
+print('------------------------------------------------------------')	#60個
+plt.plot(x, y, label="$sin(x)$", color='red', lw=2)
+plt.plot(x, z, label="$cos(x^2)$", color='b')
+
+
+plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
 '''
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
+'''
+plt.plot(x, np.sin(x), c='#e63946', lw=3)
+plt.plot(x, np.sin(3*x), c='#7fb069', lw=3)
+plt.scatter(x, np.random.randn(100), c='#daa73e', s=50, alpha=0.5)
+plt.bar(range(10), np.random.randint(1,30,10), fc='#e55934')
+
+plt.plot(x,y,'r-.')
 
 
 print('------------------------------------------------------------')	#60個
 
+plt.plot(x, y, marker='o')
+plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
 
+plt.show()
+
+'''
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
 
 
