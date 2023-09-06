@@ -1,108 +1,57 @@
 
-'''
-
-https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
-https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
-
-'''
-
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-
-
-#import numpy as np
+window_name = 'Show Picture'
 
 import cv2
-import numpy as np
+
+'''
+cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+
+image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
+cv2.imshow(window_name, image)
+
+cv2.imwrite('aaaaaaa.pgm', image) #無效????
+
+
+print('wait kere')
+cv2.waitKey(0)
+print('收到按鍵')
+cv2.destroyAllWindows() #銷毀建立的物件
+'''
+
+'''
+print('使用matplotlib顯示圖片')
 import matplotlib.pyplot as plt
 
+image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
 
-print('------------------------------------------------------------')	#60個
+plt.imshow(image, cmap = 'gray', interpolation = 'bicubic')
+plt.xticks([])  #隱藏x座標
+plt.yticks([])  #隱藏y座標
+plt.show()
 
 '''
 
-image = cv2.imread(filename)	#讀取本機圖片
-
-# 轉為灰階圖片
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-# 計算直方圖每個 bin 的數值
-hist = cv2.calcHist([gray], [0], None, [256], [0, 256])
-
-# 畫出直方圖
-#plt.bar(range(1,255), hist)
-
-# 畫出分佈圖
-plt.plot(hist)
-
-# 使用 ravel 將所有的像素資料轉為一維的陣列，以下是一個簡單的範例：
-# 畫出直方圖
-#plt.hist(gray.ravel(), 256, [0, 256])
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#對於彩色的圖片，
-#可以用 OpenCV 的 calcHist 函數分別計算統計值，
-#並畫出 RGB 三種顏色的分佈圖：
 
 import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
-image = cv2.imread(filename)	#讀取本機圖片
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename2a = 'C:/_git/vcs/_1.data/______test_files2/picture1a.jpg'
+filename2b = 'C:/_git/vcs/_1.data/______test_files2/picture1b.jpg'
 
-# 畫出 RGB 三種顏色的分佈圖
-color = ('b','g','r')
-for i, col in enumerate(color):
-  histr = cv2.calcHist([image],[i],None,[256],[0, 256])
-  plt.plot(histr, color = col)
-  plt.xlim([0, 256])
-plt.show()
-'''
-print('------------------------------------------------------------')	#60個
+cv2.namedWindow("ShowImage1")
+cv2.namedWindow("ShowImage2")
 
-#配合圖形遮罩計算直方圖
+image1 = cv2.imread(filename1)	#讀取本機圖片
+#image1 = cv2.imread(filename1, 1)
+image2 = cv2.imread(filename1, 0)   #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
 
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
+cv2.imshow("ShowImage1", image1) 
+cv2.imshow("ShowImage2", image2)
 
-image = cv2.imread(filename)	#讀取本機圖片
 
-# 轉為灰階圖片
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+cv2.waitKey(0)
+#cv2.waitKey(10000)
+cv2.destroyAllWindows()
 
-# 建立圖形遮罩
-mask = np.zeros(gray.shape, np.uint8)
-#mask[300:780, 300:1620] = 255
-W = 640
-H = 480
-x_st = int(W / 4)
-y_st = int(H / 4)
-w = int(W / 2)
-h = int(H / 2)
 
-mask[y_st:y_st+h, x_st:x_st+w] = 255    #先h 後 w
-#mask[0:240, 0:320] = 255
 
-# 計算套用遮罩後的圖形
-masked_gray = cv2.bitwise_and(gray, gray, mask = mask)
-
-# 以原圖計算直方圖
-hist_full = cv2.calcHist([image], [0], None, [256], [0, 256])
-
-# 以套用遮罩後的圖計算直方圖
-hist_mask = cv2.calcHist([image], [0], mask, [256], [0, 256])
-
-# 繪製結果
-plt.subplot(221), plt.imshow(gray, 'gray')
-plt.subplot(222), plt.imshow(mask, 'gray')
-plt.subplot(223), plt.imshow(masked_gray, 'gray')
-plt.subplot(224), plt.plot(hist_full), plt.plot(hist_mask)
-plt.xlim([0,256])
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個

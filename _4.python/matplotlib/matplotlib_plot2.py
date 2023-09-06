@@ -86,23 +86,12 @@ plt.title('School/Person')
 #第五張圖
 plt.subplot(235)
 
-t = np.linspace(-360, 360, 100)
-c = np.sinc(2 * math.pi * t / 360)
 
-plt.plot(t, c)
-plt.fill(t, c)
 
 #第六張圖
 plt.subplot(236)
 
-#legend的使用範例
-x = np.linspace(0, 10, 100)
-y = np.sin(x)
-z = np.cos(x**2)
 
-plt.plot(x, y, label = "$sin(x)$", color = 'red', lw = 2)
-plt.plot(x, z, label = "$cos(x^2)$", color = 'b')
-plt.legend()
 
 plt.show()
 
@@ -197,33 +186,10 @@ plt.title('1986 - 2015 (Boy:Girl)')
 #第五張圖
 plt.subplot(235)
 
-from matplotlib.font_manager import FontProperties
-
-font = FontProperties(fname = r"c:\windows\Fonts\mingliu.ttc", size = 20)
-
-x = np.linspace(0, 10, 1000)
-y = np.sin(x)
-z = np.cos(x**2)
-
-plt.plot(x, y, label = "$sin(x)$", color = "red", linewidth = 2)
-plt.plot(x, z, "b--", label = "$cos(x^2)$")
-
-plt.xlabel('Time(s)', fontproperties = font)
-plt.ylabel('Amplitude', fontproperties = font)
-plt.title(u'三角函數', fontproperties = font, fontsize = 24)
-
-plt.ylim(-1.2, 1.2)
-plt.legend()
 
 #第六張圖
 plt.subplot(236)
 
-#畫個函數, 標出正的部份!
-x = np.linspace(-5, 5, 200)
-y = np.sinc(x)
-
-plt.plot(x, y)
-plt.plot(x[y>0], y[y>0], 'o')
 
 plt.show()
 

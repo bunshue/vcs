@@ -159,6 +159,151 @@ def _random_getnode():
 print('------------------------------------------------------------')	#60個
 
 
+'''
+一大堆random範例
+
+'''
+
+import random   # 導入模組random
+
+print('------------------------------------------------------------')	#60個
+
+print('隨機分布 0 ~ 1')
+for i in range(5):
+    print(random.random())
+    
+print('------------------------------------------------------------')	#60個
+
+random.seed(5)  #固定亂數種子
+for i in range(5):
+    print(random.random())
+    
+print('------------------------------------------------------------')	#60個
+
+print('常態分布 1 ~ 10')
+for i in range(5):
+    print("uniform(1,10) : ", random.uniform(1, 10))
+
+print('------------------------------------------------------------')	#60個
+
+fruits = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
+for i in range(5):
+    print(random.choice(fruits))
+
+print('------------------------------------------------------------')	#60個
+
+for i in range(10):
+    print(random.choice([1,2,3,4,5,6]), end=",")
+
+print('------------------------------------------------------------')	#60個
+
+porker = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+for i in range(3):
+    random.shuffle(porker)              # 將次序打亂重新排列
+    print(porker)
+
+print('------------------------------------------------------------')	#60個
+
+lotterys = random.sample(range(1,50), 7)    # 7組號碼
+specialNum = lotterys.pop()                 # 特別號
+
+print("第xxx期大樂透號碼 ", end="")
+for lottery in sorted(lotterys):            # 排序列印大樂透號碼
+    print(lottery, end=" ")
+print("\n特別號:%d" % specialNum)           # 列印特別號
+
+print('------------------------------------------------------------')	#60個
+
+import time                         # 導入模組time
+
+print(time.asctime())               # 列出目前系統時間 
+
+print('------------------------------------------------------------')	#60個
+
+import time                         # 導入模組time
+
+xtime = time.localtime()
+print(xtime)                        # 列出目前系統時間
+print("年 ", xtime[0])
+print("年 ", xtime.tm_year)         # 物件設定方式顯示
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+print('------------------------------------------------------------')	#60個
+
+import time                         # 導入模組time
+
+print(time.ctime())
+
+print('------------------------------------------------------------')	#60個
+
+''' fail
+import time
+
+x = 1000000
+pi = 0
+time.clock()
+for i in range(1,x+1):
+    pi += 4*((-1)**(i+1) / (2*i-1))
+    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
+        e_time = time.clock()
+        print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
+'''
+
+print('------------------------------------------------------------')	#60個
+
+import time
+x = 1000000
+pi = 0
+time.process_time()
+for i in range(1,x+1):
+    pi += 4*((-1)**(i+1) / (2*i-1))
+    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
+        e_time = time.process_time()
+        print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
+
+print('------------------------------------------------------------')	#60個
+
+import calendar
+
+print("2020年是否潤年", calendar.isleap(2020))    
+print("2021年是否潤年", calendar.isleap(2021))
+
+print('------------------------------------------------------------')	#60個
+
+import calendar
+
+print(calendar.month(2020,1))
+
+print('------------------------------------------------------------')	#60個
+
+import calendar
+
+print(calendar.calendar(2023))
+
+print('------------------------------------------------------------')	#60個
+
+trials = 1000000
+Hits = 0
+for i in range(trials):
+    x = random.random() * 2 - 1     # x軸座標
+    y = random.random() * 2 - 1     # y軸座標
+    if x * x + y * y <= 1:          # 判斷是否在圓內
+        Hits += 1
+PI = 4 * Hits / trials
+
+print("PI = ", PI)
+
+print('------------------------------------------------------------')	#60個
+
+
+
 print('------------------------------------------------------------')	#60個
 
 

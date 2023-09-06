@@ -17,20 +17,8 @@ print('------------------------------------------------------------')	#60個
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-
 #第一張圖
 plt.subplot(231)
-
-x = [x for x in range(0, 11)]
-y1 = [2 * y for y in x]
-y2 = [3 * y for y in x]
-y3 = [4 * y for y in x]
-plt.xticks(x)
-plt.plot(x, y1, label='L1')
-plt.plot(x, y2, label='L2')
-plt.plot(x, y3, label='L3')
-plt.legend(loc='best')
-plt.grid()                              # 加格線
 
 
 #第二張圖
@@ -39,7 +27,6 @@ plt.subplot(232)
 # 資料
 x = [1, 2, 3, 4, 5, 6, 7]
 y = [64.3, 63.8, 63.6, 64.0, 63.5, 63.2, 63.1]
-
 
 # y = 3 * x - 24
 y = []

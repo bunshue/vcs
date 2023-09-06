@@ -93,7 +93,7 @@ cv2.imshow("cropped", crop_image)   # 顯示圖片
 
 image_empty = np.zeros(image.shape, dtype = np.uint8)   #依照原圖大小建立一個圖像的二維陣列
 
-cv2.imshow("empty", image_empty)    #顯示圖片   #空圖, 全黑
+#cv2.imshow("empty", image_empty)    #顯示圖片   #空圖, 全黑
 
 #將擷取的圖貼到新建的黑圖
 image_empty[y_st : y_st + h, x_st : x_st + w] = crop_image

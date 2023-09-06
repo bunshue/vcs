@@ -247,9 +247,35 @@ plt.scatter(X, Y)
 #第二張圖
 plt.subplot(232)
 
+x = np.random.rand(1000)
+y = np.random.rand(1000)
+plt.scatter(x, y, c=y, cmap='hsv')  # 色彩依 y 軸值變化
+plt.colorbar()
 
 #第三張圖
 plt.subplot(233)
+
+POINTS = 10
+#由平均 0, 標準差 1 的分布中取 20 個數
+#np.random.randn(20)
+
+#試取 100 個, 算平均、標準差
+
+x = np.arange(POINTS)
+g = np.random.randn(POINTS)
+g.mean()
+g.std()
+
+#不同的平均值和標準差
+#比如我們想要平均值變成 70, 標準差 10 怎麼做呢?
+#g2 = g*10 + 70
+
+print(g)
+#g.sort()
+print(g)
+
+plt.scatter(x, g, c = 'blue', marker = '.')
+
 
 
 #第四張圖
