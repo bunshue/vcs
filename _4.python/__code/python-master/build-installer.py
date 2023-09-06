@@ -84,49 +84,6 @@ USAGE = textwrap.dedent("""\
 """)% globals()
 
 
-def fatal(msg):
-    """
-    A fatal error, bail out.
-    """
-    sys.stderr.write('FATAL: ')
-    sys.stderr.write(msg)
-    sys.stderr.write('\n')
-    sys.exit(1)
-
-def fileContents(fn):
-    """
-    Return the contents of the named file
-    """
-    return open(fn, 'r').read()
-
-def runCommand(commandline):
-    """
-    Run a command and raise RuntimeError if it fails. Output is suppressed
-    unless the command fails.
-    """
-
-    print('runCommand ', commandline)
-    
-    fd = os.popen(commandline, 'r')
-    data = fd.read()
-    xit = fd.close()
-    if xit is not None:
-        sys.stdout.write(data)
-        raise RuntimeError("command failed: %s"%(commandline,))
-
-    if VERBOSE:
-        sys.stdout.write(data); sys.stdout.flush()
-
-def captureCommand(commandline):
-    fd = os.popen(commandline, 'r')
-    data = fd.read()
-    xit = fd.close()
-    if xit is not None:
-        sys.stdout.write(data)
-        raise RuntimeError("command failed: %s"%(commandline,))
-
-    return data
-
 
 def checkEnvironment():
     """
@@ -139,9 +96,6 @@ def checkEnvironment():
 
     for ev in list(os.environ):
         print(ev)
-
-    #runCommand('hg --version')
-    #runCommand('sphinx-build --version')
 
 def parseOptions(args=None):
     """
@@ -171,62 +125,12 @@ def parseOptions(args=None):
     print("   * C++ compiler:        %s" % CXX)
     print("")
 
-def downloadURL(url, fname):
-    """
-    Download the contents of the url into the file.
-    """
-    fpIn = urllib_request.urlopen(url)
-    fpOut = open(fname, 'wb')
-    block = fpIn.read(10240)
-    try:
-        while block:
-            fpOut.write(block)
-            block = fpIn.read(10240)
-        fpIn.close()
-        fpOut.close()
-    except:
-        try:
-            os.unlink(fname)
-        except:
-            pass
-
-def packageFromRecipe(targetDir, recipe):
-    curdir = os.getcwd()
-    try:
-        # The major version (such as 2.5) is included in the package name
-        # because having two version of python installed at the same time is
-        # common.
-        pkgname = '%s-%s'%(recipe['name'], 'aaaaa')
-        srcdir  = recipe.get('source')
-        pkgroot = recipe.get('topdir', srcdir)
-        postflight = recipe.get('postflight')
-        readme = textwrap.dedent(recipe['readme'])
-        isRequired = recipe.get('required', True)
-
-        print("- building package %s"%(pkgname,))
-
-        # Substitute some variables
-        textvars = dict(
-            VER='aaaaa',
-            FULLVER='bbbbb',
-        )
-        readme = readme % textvars
-
-        print(readme)
-
-        fp = open('ReadMeaaaa.txt', 'w')
-        fp.write(readme)
-        fp.close()
-
-        vers = 'bbbbb'
-    finally:
-        os.chdir(curdir)
-
 
 parseOptions()
 checkEnvironment()
 
   
 print(USAGE)
+
 
 

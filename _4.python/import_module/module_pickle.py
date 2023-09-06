@@ -1,50 +1,55 @@
 import pickle
 
-def main():
-    # Open file for writing binary
-    outfile = open("pickle.dat", "wb")
-    pickle.dump(45, outfile)
-    pickle.dump(56.6, outfile)
-    pickle.dump("Programming is fun", outfile)
-    pickle.dump([1, 2, 3, 4], outfile)
-    outfile.close() # Close the output file
-
-    # Open file for reading binary
-    infile = open("pickle.dat", "rb")
-    print(pickle.load(infile))
-    print(pickle.load(infile))
-    print(pickle.load(infile))
-    print(pickle.load(infile))
-    infile.close() # Close the input file
-
-main() # Call the main function
+print('使用 pickle 模組 寫讀二進位檔案')
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_pickle/pickle_test1.dat'
+filename = 'pickle.dat'
+print('寫入二進位檔案 :', filename)
+fp = open(filename, "wb")
+pickle.dump(2023, fp)           #整數
+pickle.dump('中秋節', fp)       #字串
+pickle.dump(123.456, fp)        #浮點數
+pickle.dump([1, 2, 3, 4], fp)   #串列
+fp.close()
 
-import pickle
+print('讀取二進位檔案 :', filename)
 fp = open(filename, "rb")
-num = pickle.load(fp)
-print(num)
-str1 = pickle.load(fp)
-print(str1)
-lst1 = pickle.load(fp)
-print(lst1)
+a = pickle.load(fp)
+print(type(a))
+print(a)
+b = pickle.load(fp)
+print(type(b))
+print(b)
+c = pickle.load(fp)
+print(type(c))
+print(c)
+d = pickle.load(fp)
+print(type(d))
+print(d)
 fp.close()
 
 print('------------------------------------------------------------')	#60個
 
-import pickle
-fp = open("pickle_test2.dat", "wb")
-pickle.dump(11, fp)
-pickle.dump("陳會安", fp)
-pickle.dump([1, 2, 3, 4], fp)
-fp.close()
+print('用pickle來存取一個字典檔案, 讀寫接用 wb/rb binary')
 
+animal = {
+    'mouse':'老鼠',
+    'panda':'貓熊',
+    'penguin':'企鵝',
+    'lion':'獅子',
+}
+
+f = open("animal.pickle", 'wb')
+
+pickle.dump(animal, f)
+
+f.close()
+
+f = open("animal.pickle", 'rb')
+
+pickledict = pickle.load(f)
+f.close()
+print(pickledict)
 
 print('------------------------------------------------------------')	#60個
-
-
-
-

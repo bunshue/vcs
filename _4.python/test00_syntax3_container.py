@@ -333,27 +333,6 @@ else:
 '''
 
 
-
-'''
-print('用pickle來存取一個字典檔案, 讀寫接用 wb/rb binary')
-
-import pickle
-
-f = open("animal.pickle", 'wb')
-
-pickle.dump(animal, f)
-
-f.close()
-
-f = open("animal.pickle", 'rb')
-
-pickledict = pickle.load(f)
-f.close()
-print(pickledict)
-'''
-
-
-
 print('------------------------------------------------------------')	#60個
 
 print('集合的操作')

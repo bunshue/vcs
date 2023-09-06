@@ -3,7 +3,9 @@
 使用 Python 的 hashlib 模組計算資料的 MD5 與 SHA 雜湊值
 
 '''
+import hashlib
 
+print('------------------------------------------------------------')	#60個
 
 '''
 print('可用的雜湊演算法')
@@ -198,11 +200,28 @@ import hashlib
 def md5sum(t):
     return hashlib.md5(t).hexdigest()
 
+print('------------------------------------------------------------')	#60個
 
+import hashlib
+
+hash_val = hashlib.sha512('aaaaaaa'.encode("utf-8"))
+print(hash_val)
+
+dicom_uid = str(int(hash_val.hexdigest(), 16))
+print(dicom_uid)
+
+'''
+import hashlib
+
+string = 'lion-mouse'
+h = hashlib.md5(string).hexdigest()
+    print(h)
+'''
+
+print('------------------------------------------------------------')	#60個
 
 
 
 print('------------------------------------------------------------')	#60個
-
 
 

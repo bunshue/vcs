@@ -80,44 +80,13 @@ print('%s.%s.%s.%s' % (path, int(time.time()),
                        socket.gethostname(),
                        os.getpid()))
 
-
-print('------------------------------------------------------------')	#60個
-
-
-import hashlib
-
-
-
-hash_val = hashlib.sha512('aaaaaaa'.encode("utf-8"))
-print(hash_val)
-
-dicom_uid = str(int(hash_val.hexdigest(), 16))
-print(dicom_uid)
-
-'''
-import hashlib
-
-string = 'lion-mouse'
-h = hashlib.md5(string).hexdigest()
-    print(h)
-'''
-
-
-
 print('------------------------------------------------------------')	#60個
 
 import multiprocessing
 
 print(multiprocessing.current_process().name)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 import json
 
@@ -129,7 +98,6 @@ data = [
 with open('p-data.json', 'w', encoding='utf-8') as fp:
     json.dump(data, fp)
 print("done")
-        
 
 print('------------------------------------------------------------')	#60個
 
@@ -147,8 +115,6 @@ with open('p-data.csv', 'w', encoding='utf-8', newline='') as fp:
     
 print("done")
 
-
-
 import csv
 
 data = [
@@ -164,35 +130,12 @@ print("done")
         
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-from scipy import integrate
-import math
-
-# 計算半徑為r的圓的圓周
-def calc_area(r):
-    return 2 * math.pi * r
-
-# 半徑2～5範圍的圓周總和
-s = integrate.quad(calc_area, 2, 5)
-print(s)
-
-# 廁所衛生紙長度
-x = s[0] / 0.011
-print(x)
-
-print('------------------------------------------------------------')	#60個
-
 from fractions import Fraction
 
 p = Fraction(22, 7)
 print('分數的使用 :', p)
 print('分數的使用 : {}'.format(p))
 print('分數的使用 : {}'.format(float(p)))
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
