@@ -1169,3 +1169,86 @@ print('------------------------------------------------------------')	#60個
 
 
 
+
+s = list("3874950382")
+print(s)
+numbers = list()
+for c in s:
+    numbers.append(int(c))
+print(sum(numbers))
+
+
+print('------------------------------------------------------------')	#60個
+
+s = list("3874950382")
+print(s)
+print(sum(map(int, s)))
+
+
+print('------------------------------------------------------------')	#60個
+
+def draw_bar(n):
+    return "*"*n
+
+s = [2, 5, 4, 7, 5, 4]
+for bar in map(draw_bar, s):
+    print(bar)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+s = [2, 5, 4, 7, 5, 4]
+for bar in map(lambda n: "*"*n, s):
+    print(bar)
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+b = list('子丑寅卯辰巳午未申酉戌亥')
+c = list('鼠牛虎兔龍蛇馬羊猴雞狗豬')
+print(zip(b,c))
+for item in zip(b, c):
+    print(item)
+print([item for item in zip(b, c)])
+
+
+print('------------------------------------------------------------')	#60個
+
+
+a = list('甲乙丙丁戊己庚辛壬癸')
+b = list('子丑寅卯辰巳午未申酉戌亥')
+for i in a:
+    for j in b:
+        print((i, j))
+
+print('------------------------------------------------------------')	#60個
+
+a = list('甲乙丙丁戊己庚辛壬癸')
+b = list('子丑寅卯辰巳午未申酉戌亥')
+years = list()
+a_index = 0
+b_index = 0
+for i in range(60):
+    years.append((a[a_index], b[b_index]))
+    a_index += 1
+    if a_index >= 10: 
+        a_index = 0
+    b_index += 1
+    if b_index >= 12:
+        b_index = 0
+print(years)
+
+print('------------------------------------------------------------')	#60個
+
+a = list('甲乙丙丁戊己庚辛壬癸'*6)
+b = list('子丑寅卯辰巳午未申酉戌亥'*5)
+years = list(zip(a, b))
+print(years)
+
+print('------------------------------------------------------------')	#60個
+
+
+

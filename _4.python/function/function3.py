@@ -1,3 +1,6 @@
+print("自定義函數, 寫在程式裡面")
+
+
 import sys
 '''
 
@@ -114,4 +117,133 @@ N = 10
 print(N, " 的階乘結果是 = ", factorial(N))
 
 print('------------------------------------------------------------')	#60個
+
+# 定義lambda函數
+square = lambda x: x ** 2
+
+# 輸出平方值
+print(square(10))
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+def mutifunction(x1, x2):
+    """ 加, 減, 乘, 除四則運算 """
+    addresult = x1 + x2
+    subresult = x1 - x2
+    mulresult = x1 * x2
+    divresult = x1 / x2
+    return addresult, subresult, mulresult, divresult
+
+x1 = x2 = 10
+add, sub, mul, div = mutifunction(x1, x2)
+print("加法結果 = ", add)
+print("減法結果 = ", sub)
+print("乘法結果 = ", mul)
+print("除法結果 = ", div)
+
+print('------------------------------------------------------------')	#60個
+
+'''
+def downloadURL(url, fname):
+    """
+    Download the contents of the url into the file.
+    """
+    fpIn = urllib_request.urlopen(url)
+    fpOut = open(fname, 'wb')
+    block = fpIn.read(10240)
+    try:
+        while block:
+            fpOut.write(block)
+            block = fpIn.read(10240)
+        fpIn.close()
+        fpOut.close()
+    except:
+        try:
+            os.unlink(fname)
+        except:
+            pass
+
+
+
+url = 'https://www.google.com.tw/'
+filename = 'aaaaa.html'
+
+downloadURL(url, filename)
+'''
+
+print('------------------------------------------------------------')	#60個
+
+def cat_file(filename):
+    return open(filename, 'r').read()
+
+
+print('------------------------------------------------------------')	#60個
+
+def calsum(*params):
+    total = 0
+    for param in params:
+        total += param
+    return total
+    
+print("不定數目參數範例：")
+print("2 個參數：4 + 5 = %d" % calsum(4,5))
+print("3 個參數：4 + 5 + 12 = %d" % calsum(4,5,12))
+print("4 個參數：4 + 5 + 12 + 8 = %d" % calsum(4,5,12,8))
+
+print('------------------------------------------------------------')	#60個
+
+def my_function(name):
+    """
+    >>> my_function('black')
+    'received Black'
+    """
+    return 'received {0}'.format(name.title())
+
+
+ret = my_function('david')
+
+print(ret)
+
+print('------------------------------------------------------------')	#60個
+
+def is_leap(year):
+    return year % 4 == 0 or (year % 100 == 0 and year % 400 == 0)
+
+print('------------------------------------------------------------')	#60個
+
+def foo(n):
+    print('foo(', n, ')')
+    x = bar(n*10)
+    print('bar returned', x)
+
+def bar(a):
+    print('bar(', a, ')')
+    return a/2
+
+
+foo(10)
+
+bar(20)
+
+print('------------------------------------------------------------')	#60個
+
+#預設引數
+# 函數: 計算體積
+def volume(length, width = 2, height = 3):
+    return length * width * height
+
+l, w, h = 10, 5, 15            
+print("盒子體積: ", volume(l, w, h)) 
+print("盒子體積: ", volume(l, w)) 
+print("盒子體積: ", volume(l))
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
 

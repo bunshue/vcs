@@ -1,17 +1,8 @@
 import requests
 
-
 print('------------------------------------------------------------')	#60個
 
 '''
-
-from datetime import *
-today = datetime.today()
-birthday = datetime(2018,10,27, 17, 0, 0)
-print(today - birthday)
-
-print('------------------------------------------------------------')	#60個
-
 import requests
 from bs4 import BeautifulSoup
 
@@ -33,10 +24,8 @@ print(keyword.kwlist)
 import builtins
 print(dir(builtins))
 
-
 import time
 print(time.time())
-
 
 import time
 print(time.localtime())
@@ -45,7 +34,6 @@ import time
 year, month, day, hour, minute, second, _, _, _ = time.localtime()
 print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
 
-
 import time
 print(time.asctime())
 
@@ -53,6 +41,17 @@ import time
 print(time.strftime("%Y-%m-%d %H:%M:%S %a"))
 
 '''
+
+import datetime
+#當前的日期及時間
+print(datetime.datetime.now())
+
+import datetime
+
+
+today = datetime.datetime.today()
+birthday = datetime.datetime(2018,10,27, 17, 0, 0)
+print(today - birthday)
 
 '''
 from datetime import datetime
@@ -132,7 +131,8 @@ else:
 finally:
     print("不管如何，都要執行這裡")
 
-'''
+print('------------------------------------------------------------')	#60個
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 from PIL import Image
 im = Image.open(filename)
@@ -148,11 +148,7 @@ smaller.show()
 smaller.save("new_pic.jpg")
 im.close()
 
-
-'''
-
-import os
-print(os.getcwd())
+print('------------------------------------------------------------')	#60個
 
 import os
 form PIL import Image
@@ -178,8 +174,9 @@ if os.path.exists(source):
 else:    
     print("找不到來源資料夾。")
 
-
+print('------------------------------------------------------------')	#60個
 '''
+
 import os
 from PIL import Image
 
@@ -289,18 +286,8 @@ with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
     
 '''
 
-
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 

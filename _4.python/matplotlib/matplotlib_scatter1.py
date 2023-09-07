@@ -281,9 +281,21 @@ plt.scatter(x, g, c = 'blue', marker = '.')
 #第四張圖
 plt.subplot(234)
 
+plt.xlim(-3, 3)
+plt.ylim(-3, 3)
+x1 = np.random.normal(0, 1, 1024)
+y1 = np.random.normal(0, 1, 1024)
+plt.scatter(x1, y1, alpha=0.3)
+
 
 #第五張圖
 plt.subplot(235)
+
+minutes = [45, 34, 56, 77, 90, 90, 90, 34, 45, 44, 80, 15, 10, 12]
+scores =  [90, 80, 100, 65, 5, 30, 55, 100, 90, 80, 60, 5, 0, 10]
+plt.xlabel('解題時間')
+plt.ylabel('分數')
+plt.scatter(minutes, scores)
 
 #第六張圖
 plt.subplot(236)

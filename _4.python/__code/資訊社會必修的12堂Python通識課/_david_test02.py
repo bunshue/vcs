@@ -1,31 +1,10 @@
 '''
 #網路爬蟲類
 
-
-
-
 '''
-
-
-
-
 import requests
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 '''
 import urllib.request, json
@@ -34,8 +13,8 @@ with urllib.request.urlopen(url) as jsonfile:
     data = json.loads(jsonfile.read().decode())
     print(data)
 '''
+print('------------------------------------------------------------')	#60個
 
-    
 '''
 import urllib.request, json
 url = 'https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f'
@@ -47,6 +26,7 @@ with urllib.request.urlopen(url) as jsonfile:
             data['retVal'][k]['tot'],
             data['retVal'][k]['sna']))
 '''
+print('------------------------------------------------------------')	#60個
 
 import urllib.request, json
 url = 'https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f'
@@ -75,10 +55,12 @@ with open("taoyouan-bike-v1.html", "wt", encoding='utf-8') as fp:
     fp.write(html)
 print("Done!")
 
+print('------------------------------------------------------------')	#60個
 
 from dominate import document
 html = document("My Title")
 print(html)
+print('------------------------------------------------------------')	#60個
 
 
 from dominate import document
@@ -98,8 +80,7 @@ with open("sample.html", "wt", encoding='utf-8') as fp:
     fp.write(str(html))
 print("Done!")
 
-
-
+print('------------------------------------------------------------')	#60個
 
 #以表格的方式呈現公共自行車租借站資訊
 import dominate
@@ -133,8 +114,7 @@ with open("taoyuan-bike-list.html", "wt", encoding='utf-8') as fp:
     fp.write(str(html))
 print("Done!")
 
-
-
+print('------------------------------------------------------------')	#60個
 
 import dominate
 from dominate.tags import *
@@ -174,15 +154,6 @@ with html:
 with open("taoyuan-bike.html", "wt", encoding='utf-8') as fp:
     fp.write(str(html))
 print("Done!")
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 

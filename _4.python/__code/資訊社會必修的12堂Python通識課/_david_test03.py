@@ -3,12 +3,9 @@
 
 '''
 
-
 import requests
 
-
 print('------------------------------------------------------------')	#60個
-
 
 from urllib.parse import urlparse
 u = urlparse("https://tw.stock.yahoo.com/news_list/url/d/e/N1.html?q=&pg=4")
@@ -16,13 +13,11 @@ print(u.netloc)
 print(u.path)
 print(u.query)
 
-
 print('------------------------------------------------------------')	#60個
 
 url = "https://tw.stock.yahoo.com/news_list/url/d/e/N1.html?q=&pg={}"
 for i in range(1,6):
     print(url.format(i))
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -39,7 +34,6 @@ url = "https://tw.stock.yahoo.com/news_list/url/d/e/N4.html"
 html = requests.get(url).text
 print(html)
 
-
 print('------------------------------------------------------------')	#60個
 
 import requests
@@ -47,7 +41,6 @@ import re
 url = "https://tw.stock.yahoo.com/news_list/url/d/e/N4.html"
 html = requests.get(url).text
 print(re.sub(r"<script.*>.*</script>", "", html))
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -69,8 +62,6 @@ while keyword != 'end':
     print("{}這個字在排行榜中裡面出現了{}次".format(
         keyword, html.count(keyword)))
     keyword = input("請問你要查詢的字串：")
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -104,13 +95,13 @@ url = "http://aiworker2000.pixnet.net/blog/post/16062839"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
 images = soup.find_all("img")
-if not os.path.exists("images"):
-    os.mkdir("images")
+if not os.path.exists("download_files"):
+    os.mkdir("download_files")
 for image in images:
     image_url = image["src"]
     if ".jpg" in image_url:
         image_filename = basename(image_url)
-        with open(os.path.join("images", image_filename), "wb") as fp:
+        with open(os.path.join("download_files", image_filename), "wb") as fp:
             image_data = urllib.request.urlopen(image_url).read()
             fp.write(image_data)
         print(image_url)
@@ -129,7 +120,6 @@ for image in images:
         print(image['src'])
 
 print('------------------------------------------------------------')	#60個
-
 
 import requests
 from bs4 import BeautifulSoup
@@ -165,7 +155,6 @@ for i, book in enumerate(books):
     for info in book.find("ul").find_all("li"):
         print(info.text)
     print()
-    
 
 print('------------------------------------------------------------')	#60個
 
@@ -223,18 +212,18 @@ with index_html:
     html = requests.get(url).text
     soup = BeautifulSoup(html, "lxml")
     images = soup.find_all("img")
-    if not os.path.exists("images"):
-        os.mkdir("images")
+    if not os.path.exists("download_files"):
+        os.mkdir("download_files")
     for image in images:
         image_url = image["src"]
         if ".jpg" in image_url:
             image_filename = basename(image_url)
             image_link = a(href=image_filename)
             image_link += img(src=image_filename, width=200)
-            with open(os.path.join("images", image_filename), "wb") as fp:
+            with open(os.path.join("download_files", image_filename), "wb") as fp:
                 image_data = urllib.request.urlopen(image_url).read()
                 fp.write(image_data)
-with open(os.path.join("images", "index.html"), "wt", encoding='utf-8') as fp:
+with open(os.path.join("download_files", "index.html"), "wt", encoding='utf-8') as fp:
     fp.write(str(index_html))
     
 print("Done!")
@@ -272,90 +261,5 @@ for item in items:
     article = content_soup.find("article", {"class":"ndArticle_content clearmen"})
     print(article.find("p").text)
 
-print('------------------------------------------------------------')	#60個
-from bs4 import BeautifulSoup
-import time, random
-import sqlite3
-import requests
-url = "https://tw.appledaily.com/new/realtime/"
-dbfile = "applenews.db"
-conn = sqlite3.connect(dbfile)
-html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
-headlines = soup.find("ul", {"class": "rtddd slvl"})
-items = headlines.find_all("li")
-for item in items:
-    time.sleep(random.randint(0,2))
-    content_url = item.find("a")["href"]
-    content = requests.get(content_url).text
-    content_soup = BeautifulSoup(content, "lxml")
-    title = content_soup.find("h1").text
-    print(title)
-    article = content_soup.find("article", {"class":"ndArticle_content clearmen"})
-    data = article.find("p").text
-    sql_str = "insert into news(url, title, content) values('{}','{}','{}')".format(content_url, title, data)
-    conn.execute(sql_str)
-conn.commit()
-conn.close()
-
-print("Done!")
 
 print('------------------------------------------------------------')	#60個
-
-import sqlite3
-dbfile = "applenews.db"
-conn = sqlite3.connect(dbfile)
-
-sql_str = "select * from news;"
-rows = conn.execute(sql_str)
-for row in rows:
-    for field in row:
-        print(field)
-conn.close()
-print('------------------------------------------------------------')	#60個
-import sqlite3
-dbfile = "applenews.db"
-conn = sqlite3.connect(dbfile)
-
-sql_str = "select count(*) from news;"
-result = conn.execute(sql_str)
-count = result.fetchone()[0]
-print(count)
-
-print('------------------------------------------------------------')	#60個
-
-from bs4 import BeautifulSoup
-import time, random
-import sqlite3
-import requests
-url = "https://tw.appledaily.com/new/realtime/"
-dbfile = "applenews.db"
-conn = sqlite3.connect(dbfile)
-html = requests.get(url).text
-soup = BeautifulSoup(html, "lxml")
-headlines = soup.find("ul", {"class": "rtddd slvl"})
-items = headlines.find_all("li")
-for item in items:
-    time.sleep(random.randint(0,2))
-    content_url = item.find("a")["href"]
-    
-    sql_str = "select count(*) from news where url='{}';".format(content_url)
-    result = conn.execute(sql_str)
-    count = result.fetchone()[0]
-    if count == 0:
-        content = requests.get(content_url).text
-        content_soup = BeautifulSoup(content, "lxml")
-        title = content_soup.find("h1").text
-        print(title)
-        article = content_soup.find("article", {"class":"ndArticle_content clearmen"})
-        data = article.find("p").text
-        data = data.replace("'", "")
-        data = data.replace('"', "")
-        sql_str = "insert into news(url, title, content) values('{}','{}','{}');".format(content_url, title, data)
-        conn.execute(sql_str)
-conn.commit()
-conn.close()
-print("Done!")
-
-print('------------------------------------------------------------')	#60個
-

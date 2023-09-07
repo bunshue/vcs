@@ -10,7 +10,6 @@ import re
 import os
 import sys
 import requests
-import threading as th
 from pytube import YouTube
 from pytube import Playlist
 
@@ -33,10 +32,29 @@ yt = YouTube(url, use_oauth = True, allow_oauth_cache = True)
 print('------------------------------------------------------------')	#60個
 print('Youtube 測試 1 影片資訊')
 
-#print('所有影片格式')
-#print(yt.streams)
 length = len(yt.streams)
 print("影片格式共有 " + str(length) + ' 種')
+#print('所有影片格式')
+#print(yt.streams)
+
+print('所有影片格式')
+for i in  range(length):
+    print(yt.streams[i])
+#print(yt.streams)
+
+print('只有聲音 或 只有影像 者')
+length = len(yt.streams.filter(adaptive = True))
+print("共有 " + str(length) + ' 種')
+cccc = yt.streams.filter(adaptive = True)
+for i in  range(length):
+    print(cccc[i])
+
+print('聲音 和 影像 皆有 者')
+length = len(yt.streams.filter(progressive = True))
+print("共有 " + str(length) + ' 種')
+cccc = yt.streams.filter(progressive = True)
+for i in  range(length):
+    print(cccc[i])
 
 print("影片名稱：" + yt.title)
 

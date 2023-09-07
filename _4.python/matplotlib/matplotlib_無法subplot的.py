@@ -476,7 +476,20 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+x = np.linspace(-2*np.pi, 2*np.pi, 100)
+plt.ylim((-1.2, 1.2))
+plt.plot(x, np.sin(x), label="SIN", linestyle="--")
+plt.plot(x, np.cos(x), label="COS", color="red")
+plt.xticks([-2*np.pi, -np.pi, 0, np.pi, 2*np.pi], 
+           [r'$-2\pi$', r'$-\pi$', r'$0$', r'$\pi$', r'$2\pi$'])
+plt.legend()
+ax = plt.gca()
+ax.spines['right'].set_color('none')
+ax.spines['top'].set_color('none')
+ax.spines['left'].set_position(('data', 0))
+ax.spines['bottom'].set_position(('data', 0))
 
+plt.show()
 
 
 print('------------------------------------------------------------')	#60個
