@@ -88,13 +88,11 @@ print("math.sin(rad) = ", math.sin(rad))
 print("math.cos(rad) = ", math.cos(rad))
 print("math.tan(rad) = ", math.tan(rad))
 
-
-
 print('------------------------------------------------------------')	#60個
 
-
-
-
+import math
+print('gcd(16, 40) = {}'.format(math.gcd(16, 40)))
+print('gcd(28, 56) = {}'.format(math.gcd(28, 63)))
 
 print('------------------------------------------------------------')	#60個
 

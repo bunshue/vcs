@@ -701,3 +701,195 @@ directory = os.path.dirname(filename) or '.'
 
 '''
 
+import ctypes
+
+def genwincodec():
+    import platform
+    code = '''\
+"""Python Character Mapping Codec %s generated on Windows:
+%s with the command:
+  python Tools/unicode/genwincodec.py %s
+"""#"
+''' % ('cp950', ' '.join(platform.win32_ver()), 950
+      )
+
+    print(code)
+
+import sys
+genwincodec()
+
+# Get the list of available locales.
+if platform.system() == 'Windows':
+    print('Windows')
+else:
+    print('Not Windows')
+
+    os_name = platform.system().lower()
+    if 'windows' in os_name:
+        system('cls')
+    else:
+        system('clear')
+
+
+print(sys.platform)
+
+
+
+
+print(os.path.expanduser('~'))
+history = os.path.join(os.path.expanduser('~'), '.python_history')
+print(history)
+
+print(sys.platform)
+print(sys.platform[:4])
+
+
+
+
+import os
+import sys
+from os.path import pardir, realpath
+
+_PY_VERSION = sys.version.split()[0]
+_PY_VERSION_SHORT = sys.version[:3]
+_PY_VERSION_SHORT_NO_DOT = _PY_VERSION[0] + _PY_VERSION[2]
+_PREFIX = os.path.normpath(sys.prefix)
+_BASE_PREFIX = os.path.normpath(sys.base_prefix)
+_EXEC_PREFIX = os.path.normpath(sys.exec_prefix)
+_BASE_EXEC_PREFIX = os.path.normpath(sys.base_exec_prefix)
+_CONFIG_VARS = None
+_USER_BASE = None
+
+
+
+
+def get_platform():
+    """Return a string that identifies the current platform.
+
+    This is used mainly to distinguish platform-specific build directories and
+    platform-specific built distributions.  Typically includes the OS name
+    and version and the architecture (as supplied by 'os.uname()'),
+    although the exact information included depends on the OS; eg. for IRIX
+    the architecture isn't particularly important (IRIX only runs on SGI
+    hardware), but for Linux the kernel version isn't particularly
+    important.
+
+    Examples of returned values:
+       linux-i586
+       linux-alpha (?)
+       solaris-2.6-sun4u
+       irix-5.3
+       irix64-6.2
+
+    Windows will return one of:
+       win-amd64 (64bit Windows on AMD64 (aka x86_64, Intel64, EM64T, etc)
+       win-ia64 (64bit Windows on Itanium)
+       win32 (all others - specifically, sys.platform is returned)
+
+    For other non-POSIX platforms, currently just returns 'sys.platform'.
+    """
+    if os.name == 'nt':
+        # sniff sys.version for architecture.
+        prefix = " bit ("
+        i = sys.version.find(prefix)
+        if i == -1:
+            return sys.platform
+        j = sys.version.find(")", i)
+        look = sys.version[i+len(prefix):j].lower()
+        if look == 'amd64':
+            return 'win-amd64'
+        if look == 'itanium':
+            return 'win-ia64'
+        return sys.platform
+
+    if os.name != "posix" or not hasattr(os, 'uname'):
+        # XXX what about the architecture? NT is Intel or Alpha
+        return sys.platform
+
+    # Set for cross builds explicitly
+    if "_PYTHON_HOST_PLATFORM" in os.environ:
+        return os.environ["_PYTHON_HOST_PLATFORM"]
+
+    # Try to distinguish various flavours of Unix
+    osname, host, release, version, machine = os.uname()
+
+    # Convert the OS name to lowercase, remove '/' characters
+    # (to accommodate BSD/OS), and translate spaces (for "Power Macintosh")
+    osname = osname.lower().replace('/', '')
+    machine = machine.replace(' ', '_')
+    machine = machine.replace('/', '-')
+
+    if osname[:5] == "linux":
+        # At least on Linux/Intel, 'machine' is the processor --
+        # i386, etc.
+        # XXX what about Alpha, SPARC, etc?
+        return  "%s-%s" % (osname, machine)
+    elif osname[:5] == "sunos":
+        if release[0] >= "5":           # SunOS 5 == Solaris 2
+            osname = "solaris"
+            release = "%d.%s" % (int(release[0]) - 3, release[2:])
+            # We can't use "platform.architecture()[0]" because a
+            # bootstrap problem. We use a dict to get an error
+            # if some suspicious happens.
+            bitness = {2147483647:"32bit", 9223372036854775807:"64bit"}
+            machine += ".%s" % bitness[sys.maxsize]
+        # fall through to standard osname-release-machine representation
+    elif osname[:4] == "irix":              # could be "irix64"!
+        return "%s-%s" % (osname, release)
+    elif osname[:3] == "aix":
+        return "%s-%s.%s" % (osname, version, release)
+    elif osname[:6] == "cygwin":
+        osname = "cygwin"
+        import re
+        rel_re = re.compile(r'[\d.]+')
+        m = rel_re.match(release)
+        if m:
+            release = m.group()
+    elif osname[:6] == "darwin":
+        import _osx_support
+        osname, release, machine = _osx_support.get_platform_osx(
+                                            get_config_vars(),
+                                            osname, release, machine)
+
+    return "%s-%s-%s" % (osname, release, machine)
+
+
+def get_python_version():
+    return _PY_VERSION_SHORT
+
+
+print('')
+print('')
+print('Platform: "%s"' % get_platform())
+print('')
+print('Python version: "%s"' % get_python_version())
+
+
+
+
+'''
+pybuilddir = 'build/lib.%s-%s' % (get_platform(), sys.version[:3])
+
+# Try to distinguish various flavours of Unix
+osname, host, release, version, machine = os.uname()
+
+# Convert the OS name to lowercase, remove '/' characters
+# (to accommodate BSD/OS), and translate spaces (for "Power Macintosh")
+osname = osname.lower().replace('/', '')
+machine = machine.replace(' ', '_')
+machine = machine.replace('/', '-')
+
+print(osname)
+print(machine)
+'''
+
+
+
+
+
+import sys
+
+frame = sys._getframe()
+print(frame)
+
+

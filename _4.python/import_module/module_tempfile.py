@@ -1,9 +1,18 @@
 import os
 import tempfile
 
+print('------------------------------------------------------------')	#60個
+
 filename = tempfile.NamedTemporaryFile().name
 print('製作暫存檔案')
 print(filename)
+
+
+#fp = tempfile.NamedTemporaryFile()
+
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -33,17 +42,10 @@ print(tmp_filename)
 
 print('------------------------------------------------------------')	#60個
 
-
-import tempfile
-
 cabname = tempfile.mktemp(suffix=".cab")
 print(cabname)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-import tempfile
 
 tmp_filename = tempfile.mktemp()
 print('建立臨時檔案 :', tmp_filename)
@@ -58,12 +60,59 @@ data = fp.read()
 fp.close()
 print(data)
 
-
 #os.unlink(tmp_filename)   #等於是刪除tmp_filename
+
+print('------------------------------------------------------------')	#60個
+
+
+import os
+
+import tempfile
+(fd, filename) = tempfile.mkstemp()
+os.close(fd)
+print(filename)
+
+#os.unlink(filename)
+
+
+import tempfile
+filename = tempfile.mktemp()
+with open(filename, 'w') as file:
+    text = 'AAAAAAAAAAAAAAAA'
+    file.write(text)
+
+#os.unlink(filename)
+
+
+
 
 
 print('------------------------------------------------------------')	#60個
 
+import glob
+import socket
+import tempfile
+tempdir = os.path.join(tempfile.gettempdir(),".grail-unix")
+filename = tempdir
+maybes = glob.glob(filename)
+if maybes:
+
+    print('%s started at %s\n\tLocal addr: %s\n\tRemote addr:%s' % (
+        self.__class__.__name__, time.ctime(time.time()),
+        localaddr, remoteaddr), file=DEBUGSTREAM)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+import os
+import tempfile
+
+with tempfile.TemporaryDirectory() as tmpdir:
+    fn = os.path.join(tmpdir, 'foo')
+    print(fn)
+    with open(fn, 'w') as stream:
+        stream.write("ccccccccc")
 
 print('------------------------------------------------------------')	#60個
 

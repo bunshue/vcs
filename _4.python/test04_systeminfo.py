@@ -4,7 +4,6 @@ import platform
 # Horizontal line length
 LINE = 79
 
-
 def get_machine_details():
     print('Getting machine details...')
     buildno, builddate = platform.python_build()
@@ -67,6 +66,89 @@ machine_details = None
 machine_details = get_machine_details()
 
 print_header()
+
+
+
+
+import sys
+
+
+'''
+name = 'os.path'
+module = sys.modules[name]
+spec = module.__spec__
+print(spec)
+
+#module = sys.modules.get(name)
+
+print(type(sys.modules))
+#print(sys.modules)
+for module_or_name in sys.modules:
+    print(module_or_name, end = ' ')
+print()
+
+print(sys.modules.get(name))
+print(sys.modules[name])
+loader = sys.modules[name].__loader__
+print(loader)
+'''
+
+'''
+systeminfo
+        module = sys.modules[fullname]
+        if module is None:
+            return None
+        try:
+            spec = module.__spec__
+        except AttributeError:
+            raise ValueError('{}.__spec__ is not set'.format(name))
+        else:
+            if spec is None:
+                raise ValueError('{}.__spec__ is None'.format(name))
+            return spec
+'''
+
+
+
+
+import _locale
+print(_locale._getdefaultlocale())
+print(_locale._getdefaultlocale()[1])
+
+
+import os
+import sys
+
+
+print()
+
+for path in sys.builtin_module_names:
+    print(path)
+
+print()
+
+
+
+
+
+
+PYTHONDOCS = os.environ.get("PYTHONDOCS",
+                            "http://docs.python.org/%d.%d/library"
+                            % sys.version_info[:2])
+print('PYTHONDOCS')
+print(PYTHONDOCS)
+
+encoding = sys.getfilesystemencoding()
+print(encoding)
+
+
+
+
+print('顯示模組的所有名稱')
+
+import random
+print(dir(random))
+
 
 
 

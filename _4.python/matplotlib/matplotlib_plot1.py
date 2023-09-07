@@ -157,7 +157,8 @@ plt.subplot(234)
 
 from matplotlib.font_manager import FontProperties
 
-font = FontProperties(fname = r"c:\windows\Fonts\mingliu.ttc", size = 20)
+font_filename = 'C:/Windows/Fonts/mingliu.ttc'
+font = FontProperties(fname = font_filename, size = 20)
 
 x = np.linspace(0, 10, 1000)
 y = np.sin(x)

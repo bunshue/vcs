@@ -78,8 +78,9 @@ def gameover(message):  #結束程式
 
 pygame.init()
 score = 0  #得分
-font = pygame.font.Font("mingliu.ttc", 20)  #下方訊息字體
-font1 = pygame.font.Font("mingliu.ttc", 32)  #結束程式訊息字體
+font_filename = 'C:/Windows/Fonts/mingliu.ttc'
+font = pygame.font.Font(font_filename, 20)  #下方訊息字體
+font1 = pygame.font.Font(font_filename, 32)  #結束程式訊息字體
 soundhit = pygame.mixer.Sound("media\\hit.wav")  #接到磚塊音效
 soundpad = pygame.mixer.Sound("media\\pad.wav")  #接到滑板音效
 screen = pygame.display.set_mode((600, 400))

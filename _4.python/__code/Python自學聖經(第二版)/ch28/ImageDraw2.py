@@ -15,7 +15,8 @@ drawimg.ellipse((60,80,100,100),fill="white") #白雲一
 drawimg.ellipse((100,60,130,80),fill="white") #白雲二 
 #繪文字
 drawimg.text((120,170),"e-happy",fill="orange")
-myfont=ImageFont.truetype("C:\Windows\Fonts\mingliu.ttc",16)#文字一
+font_filename = 'C:/Windows/Fonts/mingliu.ttc'
+myfont=ImageFont.truetype(font_filename, 16)#文字一
 drawimg.text((120,200),"文淵閣工作室",fill="red",font=myfont) #文字二 
 img.show()
 img.save("house.png")
