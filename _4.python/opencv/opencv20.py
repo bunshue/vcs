@@ -15,7 +15,7 @@ print("rst=\n",rst)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'test.bmp'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/test.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -27,7 +27,7 @@ print("rst.shape=",rst.shape)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'test.bmp'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/test.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 
@@ -105,7 +105,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'demo.bmp'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/demo.bmp'
 print('讀取圖檔 :', filename)
 img=cv2.imread(filename)
 

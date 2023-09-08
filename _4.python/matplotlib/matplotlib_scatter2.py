@@ -33,29 +33,10 @@ plt.scatter(x, y2, c = 'g')       #畫出每個x-y對應點
 #第二張圖
 plt.subplot(232)
 
-A = 10  #震幅
-N = 10  #總點數
-rng = np.random.RandomState(42) #固定random seed
-#print(rng)
-x = A * rng.rand(N)     #0~A取N個數出來
-print(type(x))
-y = A * rng.rand(N)     #0~A取N個數出來
 
-print(x)
-print(y)
-plt.scatter(x, y)       #畫出每個x-y對應點
 
 #第三張圖
 plt.subplot(233)
-
-
-#曲線資料加入雜訊
-x = np.linspace(-5,5,51)
-y = np.sin(x)
-yn = y + np.random.rand(1, len(y))*1.5
-
-plt.scatter(x,yn,c='blue',marker = '.')
-plt.plot(x,y+0.75,'r')
 
 
 #第四張圖
@@ -101,22 +82,58 @@ plt.axis('equal')
 #第五張圖
 plt.subplot(235)
 
-# Generate 100 random data points along 3 dimensions
-x, y, scale = np.random.randn(3, 100)
 
-# Map each onto a scatterplot we'll create with Matplotlib
-plt.scatter(x=x, y=y, c=scale, s=np.abs(scale)*500)
+
+
+print('蒙地卡羅模擬 b')
+import random
+import math
+
+trials = 800
+Hits = 0
+radius = 50
+for i in range(trials):
+    x = random.randint(1, 100)                      # x軸座標
+    y = random.randint(1, 100)                      # y軸座標
+    if math.sqrt((x-50)**2 + (y-50)**2) < radius:   # 在圓內
+        plt.scatter(x, y, marker='.', c='r')
+        Hits += 1
+    else:
+        plt.scatter(x, y, marker='.', c='g')    
+plt.axis('equal')
+
+'''
+print('蒙地卡羅模擬 c')
+
+import random
+
+trials = 1000000
+Hits = 0
+for i in range(trials):
+    x = random.random() * 2 - 1     # x軸座標
+    y = random.random() * 2 - 1     # y軸座標
+    if x * x + y * y <= 1:          # 判斷是否在圓內
+        Hits += 1
+PI = 4 * Hits / trials
+
+print("PI = ", PI)
+'''
 
 #第六張圖
 plt.subplot(236)
 
-x = np.linspace(0, 10, 200)
-y1 = np.sin(x)
-y2 = np.sin(x) + 0.3*np.random.randn(200)
+A = 10  #震幅
+N = 10  #總點數
+rng = np.random.RandomState(42) #固定random seed
+#print(rng)
+x = A * rng.rand(N)     #0~A取N個數出來
+print(type(x))
+y = A * rng.rand(N)     #0~A取N個數出來
 
-plt.plot(x, y1, 'r')
+print(x)
+print(y)
+plt.scatter(x, y)       #畫出每個x-y對應點
 
-plt.scatter(x, y2)
 
 plt.show()
 
@@ -223,39 +240,11 @@ plt.scatter(x[y>0], y[y>0], c='r')
 #第六張圖
 plt.subplot(236)
 
-print('蒙地卡羅模擬 b')
-import random
-import math
+# Generate 100 random data points along 3 dimensions
+x, y, scale = np.random.randn(3, 100)
 
-trials = 800
-Hits = 0
-radius = 50
-for i in range(trials):
-    x = random.randint(1, 100)                      # x軸座標
-    y = random.randint(1, 100)                      # y軸座標
-    if math.sqrt((x-50)**2 + (y-50)**2) < radius:   # 在圓內
-        plt.scatter(x, y, marker='.', c='r')
-        Hits += 1
-    else:
-        plt.scatter(x, y, marker='.', c='g')    
-plt.axis('equal')
-
-'''
-print('蒙地卡羅模擬 c')
-
-import random
-
-trials = 1000000
-Hits = 0
-for i in range(trials):
-    x = random.random() * 2 - 1     # x軸座標
-    y = random.random() * 2 - 1     # y軸座標
-    if x * x + y * y <= 1:          # 判斷是否在圓內
-        Hits += 1
-PI = 4 * Hits / trials
-
-print("PI = ", PI)
-'''
+# Map each onto a scatterplot we'll create with Matplotlib
+plt.scatter(x=x, y=y, c=scale, s=np.abs(scale)*500)
 
 plt.show()
 

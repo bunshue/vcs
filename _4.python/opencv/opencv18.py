@@ -25,7 +25,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-a=cv2.imread("boat.bmp")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/boat.bmp'
+a=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("boat",a)
 
@@ -42,6 +43,11 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 
+import sys
+
+sys.exit()
+
+
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp'
@@ -49,7 +55,8 @@ lena=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
-dollar=cv2.imread("dollar.bmp", cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/dollar.bmp'
+dollar=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("dollar",dollar)
 
@@ -177,8 +184,9 @@ lena=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("lena",lena)
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/watermark.bmp'
 #讀取水印圖像
-watermark=cv2.imread("watermark.bmp",0)
+watermark=cv2.imread(filename, 0)
 print('顯示原圖')
 
 #將水印內的255處理為1，以方便嵌入

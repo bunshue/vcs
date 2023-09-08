@@ -3,12 +3,11 @@ print('萃取圖片的輪廓')
 import matplotlib.pyplot as plt
 from PIL import Image
 
-
 # 讀入圖片
-#filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/taiwan.jpg'
-#image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-image1 = Image.open('sample.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample2.png'
+image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 plt.imshow(image1)
 plt.show()
 

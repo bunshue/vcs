@@ -40,7 +40,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-opencv=cv2.imread("opencv.jpg")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/opencv.jpg'
+opencv=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow('opencv', opencv)
 
@@ -82,7 +83,8 @@ sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("lesson2.jpg")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lesson2.jpg'
+img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -104,7 +106,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("barbara.bmp")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp'
+img=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img",img)
 

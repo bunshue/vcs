@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample.jpg'
 filename = r'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 plt.imshow(image1)  #原圖

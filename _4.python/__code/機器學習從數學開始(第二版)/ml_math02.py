@@ -1,3 +1,7 @@
+#normalize
+#get_feature_names
+#get_feature_names_out
+
 import os
 import sys
 import time
@@ -10,27 +14,673 @@ import matplotlib
 
 print('------------------------------------------------------------')	#60個
 
+A = np.mat(np.random.rand(3,3))
+
+B=A.I
+
+print(B*A)
+print(A*B)
+print(B)
+
+import numpy as np
+print('建立 4 X 4 的 陣列')
+A=np.random.rand(4,4)
+
+print('建立 4 X 4 的 矩陣')
+B = np.mat(np.random.rand(4,4))
+
+print('建立 3 X 3 的 矩陣')
+B=np.mat('1 2 3; 4 5 6; 7 8 9')
+
+print('矩陣 與 轉置矩陣')
+A = np.mat('1 2 3; 4 5 6; 7 8 9')
+
+A * A.T
+
+#矩阵基本运算
+
+A = np.mat('1 2 3; 4 5 6; 7 8 9')
+B = np.mat(' 4 5 6; 7 8 9; 10 11 12')
+
+A+B
+A * B
+B * A
+A * 10
+
+c = np.mat(np.random.rand(4,4))
+
+print(c)
+print(c.I)
+d = c.I
+
+c*d
+
+d * c
+
+np.linalg.matrix_rank(A)
+
+np.linalg.det(A)
+
+print(A)
+#print(A.I)
+#A.I
+#d = A.I
+#A*d
+
+#d * A
+
+
+print('------------------------------------------------------------')	#60個
+
+import numpy as np
+import pandas as pd
+import random
+import matplotlib.pyplot as plt
+import seaborn as sns
+import matplotlib as mpl
+
+x = np.array([i*np.pi/180 for i in range(60,300,4)])
+np.random.seed(10)  #Setting seed for reproducability
+y = np.sin(x) + np.random.normal(0,0.15,len(x))
+data = pd.DataFrame(np.column_stack([x,y]),columns=['x','y'])
+data.head(10)
+plt.scatter(data['x'],data['y'],s=30)
+
+plt.show()
+
+for i in range(2,16):  
+    colname = 'x_%d'%i      
+    data[colname] = data['x'] ** i
+
+tt = data.head()
+print(tt)
+
+
+print('------------------------------------------------------------')	#60個
+
+from sklearn.linear_model import LinearRegression
+
+def linear_regression(data, power, models_to_plot):
+    #initialize predictors:
+    predictors=['x']
+    if power>=2:
+        predictors.extend(['x_%d'%i for i in range(2,power+1)])
+    
+    #Fit the model
+    #linreg = LinearRegression(normalize=True)
+    linreg = LinearRegression()
+    linreg.fit(data[predictors],data['y'])
+    y_pred = linreg.predict(data[predictors])
+    
+    #Return the result in pre-defined format
+    rss = sum((y_pred-data['y'])**2)
+    ret = [rss]
+    ret.extend([linreg.intercept_])
+    ret.extend(linreg.coef_)
+    
+    #Check if a plot is to be made for the entered power
+    if power in models_to_plot:
+        plt.subplot(models_to_plot[power])
+        plt.tight_layout()
+        plt.plot(data['x'],y_pred,lw=3)
+        plt.plot(data['x'],data['y'],'.')
+        plt.title('Plot for power: %d , RSS: %.2f'% (power,rss))
+    
+    
+    return ret
+
+
+plt.rcParams['figure.figsize'] = 18,9
+
+#Initialize a dataframe to store the results:
+col = ['rss','intercept'] + ['coef_x_%d'%i for i in range(1,16)]
+ind = ['model_pow_%d'%i for i in range(1,16)]
+coef_matrix_simple = pd.DataFrame(index=ind, columns=col)
+
+#Define the powers for which a plot is required:
+models_to_plot = {1:231,3:232,6:233,9:234,12:235,15:236}
+
+#Iterate through all powers and assimilate results
+for i in range(1,16):
+    coef_matrix_simple.iloc[i-1,0:i+2] = linear_regression(data, power=i, models_to_plot=models_to_plot)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+#Set the display format to be scientific for ease of analysis
+pd.options.display.float_format = '{:,.2g}'.format
+tt = coef_matrix_simple
+print(tt)
+
+print('------------------------------------------------------------')	#60個
+
+#L2 Normalization Ridge Regression
+
+from sklearn.linear_model import Ridge
+
+def ridge_regression(data, predictors, alpha, models_to_plot={}):
+    #ridgereg = Ridge(alpha=alpha,normalize=True)
+    ridgereg = Ridge(alpha=alpha)
+    ridgereg.fit(data[predictors],data['y'])
+    y_pred = ridgereg.predict(data[predictors])
+    
+    #Return the result in pre-defined format
+    rss = sum((y_pred-data['y'])**2)
+    ret = [rss]
+    ret.extend([ridgereg.intercept_])
+    ret.extend(ridgereg.coef_)
+
+
+    #Check if a plot is to be made for the entered alpha
+    if alpha in models_to_plot:
+        plt.subplot(models_to_plot[alpha])
+        plt.tight_layout()
+        plt.plot(data['x'],y_pred,lw=3)
+        plt.plot(data['x'],data['y'],'.')
+        plt.title('Plot for alpha: %.3g ,RSS : %.2f'%(alpha,rss))
+    return ret
+
+
+#Initialize predictors to be set of 15 powers of x
+predictors=['x']
+predictors.extend(['x_%d'%i for i in range(2,16)])
+
+#Set the different values of alpha to be tested
+alpha_ridge = [1e-15, 1e-10, 1e-8, 1e-4, 1e-3,1e-2, 1, 5, 10, 20]
+
+#Initialize the dataframe for storing coefficients.
+col = ['rss','intercept'] + ['coef_x_%d'%i for i in range(1,16)]
+ind = ['alpha_%.2g'%alpha_ridge[i] for i in range(0,10)]
+coef_matrix_ridge = pd.DataFrame(index=ind, columns=col)
+
+models_to_plot = {1e-15:231, 1e-10:232, 1e-4:233, 1e-3:234, 1e-2:235, 5:236}
+for i in range(10):
+    coef_matrix_ridge.iloc[i,] = ridge_regression(data, predictors, alpha_ridge[i], models_to_plot)
+
+plt.show()        
+
+print('------------------------------------------------------------')	#60個
+
+pd.options.display.float_format = '{:,.2g}'.format
+tt = coef_matrix_ridge
+
+print(tt)
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+#有多少个系数为0
+
+coef_matrix_ridge.apply(lambda x: sum(x.values==0),axis=1)
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+''' fail
+#L1 Regulariztion Lass Regression
+
+from sklearn.linear_model import Lasso
+
+def lasso_regression(data, predictors, alpha, models_to_plot={}):
+    #Fit the model
+    #lassoreg = Lasso(alpha=alpha,normalize=True, max_iter=1e5)
+    lassoreg = Lasso(alpha=alpha, max_iter=1e5)
+    lassoreg.fit(data[predictors],data['y'])
+    y_pred = lassoreg.predict(data[predictors])
+    
+    #Return the result in pre-defined format
+    rss = sum((y_pred-data['y'])**2)
+    ret = [rss]
+    ret.extend([lassoreg.intercept_])
+    ret.extend(lassoreg.coef_)
+    
+    #Check if a plot is to be made for the entered alpha
+    if alpha in models_to_plot:
+        plt.subplot(models_to_plot[alpha])
+        plt.tight_layout()
+        plt.plot(data['x'],y_pred,lw=3)
+        plt.plot(data['x'],data['y'],'.')
+        plt.title('Plot for alpha: %.3g'%alpha)
+    
+    return ret
+
+#Initialize predictors to all 15 powers of x
+predictors=['x']
+predictors.extend(['x_%d'%i for i in range(2,16)])
+
+#Define the alpha values to test
+alpha_lasso = [1e-15, 1e-10, 1e-8, 1e-5,1e-4, 1e-3,1e-2, 1, 5, 10]
+
+#Initialize the dataframe to store coefficients
+col = ['rss','intercept'] + ['coef_x_%d'%i for i in range(1,16)]
+ind = ['alpha_%.2g'%alpha_lasso[i] for i in range(0,10)]
+coef_matrix_lasso = pd.DataFrame(index=ind, columns=col)
+
+#Define the models to plot
+models_to_plot = {1e-10:231, 1e-5:232,1e-4:233, 1e-3:234, 1e-2:235, 1:236}
+
+#Iterate over the 10 alpha values:
+for i in range(10):
+    coef_matrix_lasso.iloc[i,] = lasso_regression(data, predictors, alpha_lasso[i], models_to_plot)
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+pd.options.display.float_format = '{:,.2g}'.format
+tt = coef_matrix_lasso
+print(tt)
+
+
+coef_matrix_lasso.apply(lambda x: sum(x.values==0),axis=1)
+
+'''
+
 print('------------------------------------------------------------')	#60個
 
 
 
 print('------------------------------------------------------------')	#60個
 
+from numpy.random import RandomState
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+from sklearn.datasets import fetch_olivetti_faces
+ 
+from sklearn import decomposition 
+n_row, n_col = 2, 5
+n_components = n_row * n_col
+image_shape = (64, 64)
+rng = RandomState(0)
+
 
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
+faces = fetch_olivetti_faces(data_home='data\\',shuffle=True, random_state=rng)
+print(faces.data.shape)
 
 
 print('------------------------------------------------------------')	#60個
 
+
+fig = plt.figure(figsize=(10, 10))
+for i in range(10):
+    ax = plt.subplot2grid((1, 10), (0, i))    
+    ax.imshow(faces.data[i * 10].reshape(64, 64), cmap=plt.cm.gray)
+    ax.axis('off')
+
+plt.show()
+
 print('------------------------------------------------------------')	#60個
+
+
+pca = decomposition.PCA()
+pca.fit(faces.data)
+
+print(pca.components_.shape)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+fig = plt.figure(figsize=(10, 10))
+for i in range(10):
+    ax = plt.subplot2grid((1, 10), (0, i))
+    
+    ax.imshow(pca.components_[i].reshape(64, 64), cmap=plt.cm.gray)
+    ax.axis('off')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+# pip install scikit-image
+from skimage.io import imsave
+face = faces.data[0]
+
+trans = pca.transform(face.reshape(1, -1))
+print(trans.shape)
+for k in range(400):
+    rank_k_approx = trans[:, :k].dot(pca.components_[:k]) + pca.mean_
+    if k % 10 == 0:
+        print('{:>03}'.format(str(k)) + '.jpg')
+        #存圖fail
+        #imsave('{:>03}'.format(str(k)) + '.jpg', rank_k_approx.reshape(64, 64))
+        #imsave('cccc.jpg', rank_k_approx.reshape(64, 64))
+
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+'''
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+from IPython.core.pylabtools import figsize
+
+figsize(2 ,4)
+plt.style.use('ggplot')
+colors = ['#348ABD','#A60628','#7A68A6','#467821','#D55E00','#CC79A7','#56B4E9','#009E73','#F0E442','#0072B2']
+plt.cmap = mpl.colors.ListedColormap(colors)
+# plt.rcParams['savefig.dpi'] = 300
+# plt.rcParams['figure.dpi'] = 300
+
+import numpy as np
+from sklearn import datasets  
+digits = datasets.load_digits(n_class=10)
+X = digits.data
+y = digits.target
+n_samples, n_features = X.shape
+n_neighbors = 30
+
+print(X.shape)
+
+fig = plt.figure()
+for i in range(10):
+    ax = plt.subplot2grid((1, 10), (0, i))
+    ax.imshow(digits.data[i * 100].reshape(8, 8), cmap=plt.cm.gray)
+    ax.axis('off')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+def plot_embedding(ax , X):
+    x_min, x_max = np.min(X, 0), np.max(X, 0)
+    X = (X - x_min) / (x_max - x_min)
+    for i in range(X.shape[0]):
+        ax.text(X[i, 0], X[i, 1], str(digits.target[i]),
+                color=colors[int(y[i] % 10)],
+                fontdict={ 'size': 12})
+
+def format_plot(ax,x_label,y_label, title):
+    ax.xaxis.set_major_formatter(plt.NullFormatter())
+    ax.yaxis.set_major_formatter(plt.NullFormatter())
+
+    ax.set_title(title)
+    
+
+#PCA降维
+from sklearn import decomposition,manifold
+X_pca = decomposition.TruncatedSVD(n_components=2).fit_transform(X)
+
+
+fig, ax = plt.subplots()
+plot_embedding(ax,X_pca)
+format_plot(ax,'','', 'PCA')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+embedder = manifold.SpectralEmbedding(n_components=2, random_state=0,
+                                      eigen_solver="arpack")
+X_se = embedder.fit_transform(X)
+
+tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+
+X_tsne = tsne.fit_transform(X)
+
+mds =  manifold.MDS(n_components=2, n_init=1, max_iter=100)
+X_mds = mds.fit_transform(X)
+
+fig, ax = plt.subplots(2, 2)
+figsize(20,16)
+fig.subplots_adjust(left=0.0625, right=0.95, wspace=0.1)
+
+plot_embedding(ax[0,0],X_pca)
+format_plot(ax[0,0],'','', 'PCA') 
+
+plot_embedding(ax[0,1],X_mds)
+format_plot(ax[0,1],'','', 'MDS')
+
+plot_embedding(ax[1,0],X_se)
+format_plot(ax[1,0],'','', 'Spectral')
+
+plot_embedding(ax[1,1],X_tsne)
+format_plot(ax[1,1],'','', 'tSNE')
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+'''
+from sklearn.feature_extraction.text import  CountVectorizer
+from sklearn.preprocessing import Normalizer
+from sklearn.decomposition import TruncatedSVD
+
+import numpy
+import pandas as pd
+
+corpus = ["Python is popular in machine learning",
+         "Distributed system is important in big data analysis",
+        "Machine learning is theoretical foundation of data mining",
+        "Learning Python is fun",
+        "Playing soccer is fun",
+        "Many data scientists like playing soccer",
+        "Chinese men's soccer team failed again",
+        "Thirty two soccer teams enter World Cup finals"]
+
+vectorizer = CountVectorizer(min_df=1, stop_words="english")
+data = vectorizer.fit_transform(corpus)
+vectorizer.get_feature_names_out()
+
+tt = pd.DataFrame(data.toarray(), index=corpus, columns=vectorizer.get_feature_names_out()).head(10)
+print(tt)
+
+print('------------------------------------------------------------')	#60個
+
+
+#Singular value decomposition and LSA
+model = TruncatedSVD(2)
+data_n = model.fit_transform(data)
+data_n = Normalizer(copy=False).fit_transform(data_n)
+print(data_n)
+
+tt = pd.DataFrame(data_n, index = corpus, columns = ["component_1", "component_2"])
+print(tt)
+
+xs = data_n[:,0]
+ys = data_n[:,1]
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(4,4))
+ax = plt.gca()
+ax.set_xlim([-1, 2])
+ax.set_ylim([-1, 2])
+plt.scatter(xs, ys)
+plt.xlabel('First principal component')
+plt.ylabel('Second principal component')
+plt.title('Plot of points agains LSA principal components')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+similarity = numpy.asarray(numpy.asmatrix(data_n) * numpy.asmatrix(data_n).T)
+tt = pd.DataFrame(similarity, index = corpus, columns = corpus).head(10)
+print(tt)
+
+sns.heatmap(similarity,cmap='Reds')
+plt.show()
+
+
+print(pd.DataFrame(model.components_,index=['component_1','component_2'],columns=vectorizer.get_feature_names_out()).T)
+
+
+print('------------------------------------------------------------')	#60個
+
+#from __future__ import print_function
+
+'''
+import numpy as np
+import pandas as pd 
+import matplotlib.pyplot as plt
+import scipy.stats as stats
+import seaborn as sns
+
+train = pd.read_csv(u'data/c_13_houseprice.csv')
+print(train.head(3))
+
+
+import scipy.stats as st
+import seaborn as sns
+
+plt.figure()
+sns.distplot(train['SalePrice'])
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+#另一种查看是否服从正态分布的可视化方法
+
+plt.figure()
+res = st.probplot(train['SalePrice'], plot=plt)
+
+plt.show()
+
+'''
+
+
+y = train['SalePrice']
+
+plt.figure(1)
+sns.distplot(y,kde=False)
+
+plt.figure(2)
+plt.title('Johnson SU')
+sns.distplot(y, kde=True, fit=st.johnsonsu)
+
+
+plt.figure(3)
+plt.title('Normal')
+sns.distplot(y, kde=False, fit=st.norm)
+
+plt.figure(4)
+plt.title('Log Normal')
+sns.distplot(y, kde=False, fit=st.lognorm)
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+#另一种查看是否服从正态分布的可视化方法
+
+plt.figure()
+sns.distplot(train['SalePrice'], fit=st.norm)
+
+plt.figure()
+res = st.probplot(train['SalePrice'], plot=plt)
+
+plt.show()
+
+'''
+print('------------------------------------------------------------')	#60個
+
+#把房价做对数变换后再看
+SalePrice_log = np.log(train['SalePrice'])
+ 
+#transformed histogram and normal probability plot
+sns.distplot(SalePrice_log, fit=st.norm);
+#plt.figure()
+plt.show()
+
+
+#另一种查看是否服从正态分布的可视化方法
+res = st.probplot(SalePrice_log, plot=plt)
+print(res)
+
+plt.show()
+'''
+
+print('------------------------------------------------------------')	#60個
+
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import math
+
+from scipy.stats import norm
+
+def norm_prob(x,mu,sigma):
+    p = norm(mu,sigma).cdf(x+0.0001) - norm(mu,sigma).cdf(x-0.0001)
+    return p
+
+def loglikelihood(data,mu,sigma):
+    l = 0.0
+    for x in data:
+        l -= np.log(norm_prob(x,mu,sigma))
+    return l
+
+
+N=1000
+mu, sigma = 1.6, 0.2
+
+h=1.8
+
+data = norm.rvs(loc=mu, scale=sigma,size = N)
+
+print(data)
+
+print('------------------------------------------------------------')	#60個
+
+tt = norm.pdf(x=1.8,loc=1.6,scale=0.2)
+print(tt)
+
+tt = norm_prob(h,mu,sigma)
+print(tt)
+
+tt = loglikelihood(data,mu,sigma)
+print(tt)
+
+plt.hist(data)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+mus = [1.4,1.5,1.6,1.7,1.8,1.9,2.0]
+sigma =0.1
+print(mus)
+
+l = [loglikelihood(data,mu2,sigma) for mu2 in mus]
+print(l)
+
+import pandas as pd
+df = pd.DataFrame()
+df['mu'] = mus
+df['-logl'] =l
+print(df)
+
+plt.figure(figsize=(6,4))
+
+#sns.pointplot(df['mu'],df['-logl'], alpha=0.8) fail
+#sns.pointplot(df['mu'],df['-logl']) fail
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
 
 

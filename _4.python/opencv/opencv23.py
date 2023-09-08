@@ -3,7 +3,8 @@ import numpy as np
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("erode.bmp",cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp'
+o=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -17,7 +18,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("erode.bmp",cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp'
+o=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -31,7 +33,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("dilation.bmp",cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp'
+o=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -45,7 +48,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("dilation.bmp",cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp'
+o=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -59,11 +63,13 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img1=cv2.imread("opening.bmp")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/opening.bmp'
+img1=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img1",img1)
 
-img2=cv2.imread("opening2.bmp")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/opening2.bmp'
+img2=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img2",img2)
 
@@ -79,11 +85,13 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img1=cv2.imread("closing.bmp")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/closing.bmp'
+img1=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img1",img1)
 
-img2=cv2.imread("closing2.bmp")
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/closing2.bmp'
+img2=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("img2",img2)
 
@@ -99,7 +107,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("gradient.bmp",cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/gradient.bmp'
+o=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -113,7 +122,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o1=cv2.imread("tophat.bmp",cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/tophat.bmp'
+o1=cv2.imread(filename,cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original1",o1)
 
@@ -134,7 +144,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o1=cv2.imread("blackhat.bmp",cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/blackhat.bmp'
+o1=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original1",o1)
 
@@ -164,7 +175,8 @@ print("kernel3=\n",kernel3)
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("kernel.bmp",cv2.IMREAD_UNCHANGED)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/kernel.bmp'
+o=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
 cv2.imshow("original",o)
 

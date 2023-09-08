@@ -307,3 +307,67 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'scatter 集合 雜訊', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# y = 1.2x + 0.8
+x = np.linspace(0, 5, 50)
+y = 1.2*x + 0.8
+y = 1.2*x + 0.8 + 0.3*np.random.randn(50)   #加上noise
+
+plt.scatter(x,y)
+plt.plot(x, 1.2*x + 0.8, 'r')
+
+
+#第二張圖
+plt.subplot(232)
+
+x = np.linspace(0, 10, 200)
+y1 = np.sin(x)
+y2 = np.sin(x) + 0.3*np.random.randn(200)
+
+plt.plot(x, y1, 'r')
+
+plt.scatter(x, y2)
+
+
+#第三張圖
+plt.subplot(233)
+
+
+#曲線資料加入雜訊
+x = np.linspace(-5,5,51)
+y = np.sin(x)
+yn = y + np.random.rand(1, len(y))*1.5
+
+plt.scatter(x,yn,c='blue',marker = '.')
+plt.plot(x,y+0.75,'r')
+
+
+
+#第四張圖
+plt.subplot(234)
+
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
+
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+

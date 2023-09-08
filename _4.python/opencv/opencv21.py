@@ -25,7 +25,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("computer.jpg",0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/computer.jpg'
+img=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("img",img)
 
@@ -41,7 +42,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-img=cv2.imread("tiffany.bmp",0)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/tiffany.bmp'
+img=cv2.imread(filename, 0)
 print('顯示原圖')
 cv2.imshow("img",img)
 

@@ -7,56 +7,25 @@ import sys
 print('------------------------------------------------------------')	#60個
 
 print('寫入檔案')
-fp = open("out14_1.txt", "w") 
+fp = open("test_write1.txt", "w") 
 print("用print的方法寫入檔案", file=fp)
 fp.close( )
 
 print('------------------------------------------------------------')	#60個
 
 print('寫入檔案')
-filename = 'out14_10.txt'
+filename = 'test_write2.txt'
 str1 = '寫入檔案字串1'
 str2 = '寫入檔案字串2'
 
-with open(filename, 'w') as fp:
-    fp.write(str1)
-    fp.write(str2)
-
-print('------------------------------------------------------------')	#60個
-
-print('寫入檔案')
-filename = 'out14_11.txt'
-str1 = '寫入檔案字串1'
-str2 = '寫入檔案字串2'
-
-with open(filename, 'w') as fp:
+#with open(filename, 'w') as fp:    #覆寫模式
+with open(filename, 'a') as fp:     #附加模式
     fp.write(str1 + '\n')
     fp.write(str2 + '\n')
 
 print('------------------------------------------------------------')	#60個
 
-print('寫入檔案')
-filename = 'out14_12.txt'
-str1 = '寫入檔案字串1'
-str2 = '寫入檔案字串2'
-
-with open(filename, 'a') as fp:
-    fp.write(str1 + '\n')
-    fp.write(str2 + '\n')
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-print('讀取檔案')
-filename = 'data14_2.txt'         # 設定欲開啟的檔案
-fp =  open(filename)        # 用預設mode=r開啟檔案,傳回檔案物件fp
-data = fp.read()      # 讀取檔案到變數data
-fp.close()            # 關閉檔案物件
-print(data)                 # 輸出變數data相當於輸出檔案
-
-print('------------------------------------------------------------')	#60個
-
-print('讀取檔案')
+print('讀取檔案, 一次讀一檔')
 filename = 'data14_2.txt'         # 設定欲開啟的檔案
 with open(filename) as fp:  # 用預設mode=r開啟檔案,傳回檔案物件fp
     data = fp.read()  # 讀取檔案到變數data
@@ -64,15 +33,7 @@ with open(filename) as fp:  # 用預設mode=r開啟檔案,傳回檔案物件fp
 
 print('------------------------------------------------------------')	#60個
 
-print('讀取檔案')
-filename = 'data14_2.txt'         # 設定欲開啟的檔案
-with open(filename) as fp:  # 用預設mode=r開啟檔案,傳回檔案物件fp
-    data = fp.read()  # 讀取檔案到變數data
-    print(data.rstrip())    # 輸出變數data相當於輸出檔案,同時刪除末端字元
-
-print('------------------------------------------------------------')	#60個
-
-print('讀取檔案')
+print('讀取檔案, 一次讀一行')
 filename = 'data14_2.txt'         # 設定欲開啟的檔案
 with open(filename) as fp:  # 用預設mode=r開啟檔案,傳回檔案物件fp
     for line in fp:   # 逐行讀取檔案到變數line
@@ -80,32 +41,20 @@ with open(filename) as fp:  # 用預設mode=r開啟檔案,傳回檔案物件fp
 
 print('------------------------------------------------------------')	#60個
 
-print('讀取檔案')
-filename = 'data14_2.txt'          # 設定欲開啟的檔案
-with open(filename) as fp:   # 用預設mode=r開啟檔案,傳回檔案物件fp
-    for line in fp:    # 逐行讀取檔案到變數line
-        print(line.rstrip()) # 輸出變數line相當於輸出一行,同時刪除末端字元
-
-print('------------------------------------------------------------')	#60個
-
-print('讀取檔案')
+print('讀取檔案, 一次讀一檔, 讀成串列')
 filename = 'data14_7.txt'         # 設定欲開啟的檔案
 with open(filename) as fp:  # 用預設mode=r開啟檔案,傳回檔案物件fp
     obj_list = fp.readlines()  # 每次讀一行
 
+print(len(obj_list))
 print(obj_list)             # 列印串列
-
-print('------------------------------------------------------------')	#60個
-
-print('讀取檔案')
-filename = 'data14_7.txt'         # 設定欲開啟的檔案
-with open(filename) as fp:  # 用預設mode=r開啟檔案,傳回檔案物件fp
-    obj_list = fp.readlines()  # 每次讀一行
 
 for line in obj_list:
     print(line.rstrip())    # 列印串列
 
 print('------------------------------------------------------------')	#60個
+
+#filename = 'C:/_git/vcs/_1.data/______test_files1/poetrya.txt'
 
 def modifySong(songStr):            # 將歌曲的標點符號用空字元取代       
     for ch in songStr:
@@ -140,28 +89,3 @@ print(mydict)                       # 列印字典
 
 print('------------------------------------------------------------')	#60個
 
-import string
-
-def encrypt(text, encryDict):           # 加密文件
-    cipher = []
-    for i in text:                      # 執行每個字元加密
-        v = encryDict[i]                # 加密
-        cipher.append(v)                # 加密結果
-    return ''.join(cipher)              # 將串列轉成字串
-    
-abc = string.printable[:-3]             # 取消不可列印字元
-subText = abc[-3:] + abc[:-3]           # 加密字串字串
-encry_dict = dict(zip(subText, abc))    # 建立字典
-
-filename = "zenofPython.txt"
-with open(filename) as fp:              # 開啟檔案
-    msg = fp.read()               # 讀取檔案
-    
-ciphertext = encrypt(msg, encry_dict)
-
-print("原始字串")
-print(msg)
-print("加密字串")
-print(ciphertext)
-
-print('------------------------------------------------------------')	#60個

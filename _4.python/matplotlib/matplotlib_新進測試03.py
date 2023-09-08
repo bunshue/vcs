@@ -1,31 +1,55 @@
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-
-print('------------------------------------------------------------')	#60個
-
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# y = 1.2x + 0.8
-x = np.linspace(0, 5, 50)
-y = 1.2*x + 0.8
-y = 1.2*x + 0.8 + 0.3*np.random.randn(50)   #加上noise
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
-plt.scatter(x,y)
-plt.plot(x, 1.2*x + 0.8, 'r')
+print('------------------------------------------------------------')	#60個
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = '新進測試 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+
+#第二張圖
+plt.subplot(232)
+
+
+#第三張圖
+plt.subplot(233)
+
+
+#第四張圖
+plt.subplot(234)
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
 
 
 print('------------------------------------------------------------')	#60個
 
+
+
+print('------------------------------------------------------------')	#60個
 
 
 

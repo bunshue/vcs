@@ -125,21 +125,24 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp'
-lena=cv2.imread(filename,cv2.IMREAD_UNCHANGED)
+#A圖
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp'
+lena=cv2.imread(filename1,cv2.IMREAD_UNCHANGED)
 
 print('顯示原圖')
 #cv2.imshow("lena",lena)
 
-dollar=cv2.imread("dollar.bmp",cv2.IMREAD_UNCHANGED)
+#B圖
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+peony=cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
-#cv2.imshow("dollar",dollar)
+#cv2.imshow("peony",peony)
 
 print('A圖抓一塊貼到B圖上')
 face=lena[220:400,250:350]
-dollar[160:340,200:300]=face
+peony[160:340,200:300]=face
 print('顯示修改後的圖')
-cv2.imshow("result",dollar)
+cv2.imshow("result",peony)
 
 cv2.waitKey()
 cv2.destroyAllWindows()

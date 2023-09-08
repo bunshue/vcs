@@ -3,7 +3,8 @@ import numpy as np
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_noise.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -16,7 +17,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_noise.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -31,7 +33,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_noise.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -44,7 +47,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_noise.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -57,7 +61,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_noise.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -70,7 +75,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_noise.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -83,7 +89,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_noise.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -96,7 +103,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_noise.png')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -109,7 +117,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('bilTest.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp'
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 

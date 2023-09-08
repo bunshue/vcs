@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample.jpg'
 image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 plt.imshow(image)
 plt.show()
