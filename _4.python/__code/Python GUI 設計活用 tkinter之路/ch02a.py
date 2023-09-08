@@ -1,80 +1,34 @@
+import sys
 from tkinter import *
 from tkinter.ttk import Separator
 
 root = Tk()
 root.title("test_all")
 
-label=Label(root,text="I like tkinter", fg="blue",bg="yellow")
+#字 前景 背景 寬 高 字位置預設 字型
+label=Label(root,text="Welcome to the United States and have a nice day",
+            fg="red",bg="gray",
+            height=3,width=15,
+            font=("Helvetica",8,"bold"))
+
 label.pack()
 
-label=Label(root,text="I like tkinter",
-            fg="blue",bg="yellow",
-            height=3,width=15)
-
-label.pack()
-label=Label(root,text="I like tkinter",
-            fg="blue",bg="yellow",
+#字 前景 背景 寬 高 字位置西北
+label=Label(root,text="Welcome to the United States and have a nice day",
+            fg="blue",bg="lime",
             height=3,width=15,
             anchor="nw")
 label.pack()
-label=Label(root,text="I like tkinter",
-            fg="blue",bg="yellow",
-            height=3,width=15,
-            anchor="se")
-label.pack()
 
-label=Label(root,text="I like tkinter",
-            fg="blue",bg="yellow",
-            height=3,width=15,
-            anchor=SE)
-label.pack()
-
-label=Label(root,text="I like tkinter",
+#字 前景 背景 寬 高 字位置西北 卷寬度
+label=Label(root,text="Welcome to the United States and have a nice day",
             fg="blue",bg="yellow",
             height=3,width=15,
             anchor="nw",
-            wraplength = 40)
+            wraplength = 80,
+            justify="left")     #left / center / right
 label.pack()
 
-label=Label(root,text="I like tkinter",
-            fg="blue",bg="yellow",
-            height=3,width=15,
-            font="Helvetica 20 bold")
-label.pack()
-
-
-
-label=Label(root,text="I like tkinter",
-            fg="blue",bg="yellow",
-            height=3,width=15,
-            font=("Helvetica",20,"bold"))
-label.pack()
-
-
-label=Label(root,text="abcdefghijklmnopqrstuvwy",
-            fg="blue",bg="lightyellow",
-            wraplength=80)
-label.pack()
-
-
-label=Label(root,text="abcdefghijklmnopqrstuvwy",
-            fg="blue",bg="lightyellow",
-            wraplength=80,
-            justify="left")
-label.pack()
-
-
-label=Label(root,text="abcdefghijklmnopqrstuvwy",
-            fg="blue",bg="lightyellow",
-            wraplength=80,
-            justify="center")
-label.pack()
-
-label=Label(root,text="abcdefghijklmnopqrstuvwy",
-            fg="blue",bg="lightyellow",
-            wraplength=80,
-            justify="right")
-label.pack()  
 
 label=Label(root,bitmap="hourglass")
 label.pack()  
@@ -88,11 +42,9 @@ label=Label(root,bitmap="hourglass",
             compound="top",text="我的天空")
 label.pack()  
 
-
 label=Label(root,bitmap="hourglass",
             compound="center",text="我的天空")
 label.pack()  
-
 
 label=Label(root,text="raised",relief="raised")
 label.pack()
@@ -102,10 +54,13 @@ label=Label(root,text="raised",relief="raised",
             padx=5,pady=10)
 label.pack()
 
-
 html_gif = PhotoImage(file="html.gif")
 label=Label(root,image=html_gif)
 label.pack()
+
+
+root.mainloop()
+sys.exit()
 
 
 '''
@@ -248,7 +203,7 @@ from tkinter import *
 
 root = Tk()
 root.title("ch2_25")
-label=Label(root,text="I like tkinter")
+label=Label(root,text="Welcome to the United States and have a nice day")
 label.pack()        # 包裝與定位元件
 print(label.keys())
 
