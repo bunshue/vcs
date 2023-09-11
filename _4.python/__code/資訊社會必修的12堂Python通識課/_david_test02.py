@@ -58,13 +58,15 @@ print("Done!")
 print('------------------------------------------------------------')	#60個
 
 from dominate import document
+
 html = document("My Title")
 print(html)
-print('------------------------------------------------------------')	#60個
 
+print('------------------------------------------------------------')	#60個
 
 from dominate import document
 from dominate.tags import *
+
 html = document("桃園公共自行車各站可租數量")
 with html.head:
     meta(charset='utf-8')
@@ -86,6 +88,7 @@ print('------------------------------------------------------------')	#60個
 import dominate
 from dominate.tags import *
 import urllib.request, json
+
 url = 'https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f'
 with urllib.request.urlopen(url) as jsonfile:
     data = json.loads(jsonfile.read().decode())

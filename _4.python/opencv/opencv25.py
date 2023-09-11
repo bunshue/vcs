@@ -1,3 +1,15 @@
+'''
+圖像金字塔
+
+pyrDown
+
+pyrUp
+
+
+'''
+
+import sys
+
 import cv2
 import numpy as np
 
@@ -7,6 +19,8 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bm
 o=cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
+
+print('------------------------------------------------------------')	#60個
 
 print('顯示xxxx')
 r1=cv2.pyrDown(o)
@@ -23,9 +37,13 @@ cv2.imshow("r3",r3)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+sys.exit()
+
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread('lena_small.bmp')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_small.bmp'
+
+o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -62,6 +80,8 @@ cv2.imshow("difference",diff)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

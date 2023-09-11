@@ -1,11 +1,9 @@
 import sys
 import os
+
 import jieba
 
-
-
 print('------------------------------------------------------------')	#60個
-
 
 import jieba
 

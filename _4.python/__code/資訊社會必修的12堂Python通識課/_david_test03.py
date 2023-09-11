@@ -232,6 +232,7 @@ print('------------------------------------------------------------')	#60個
 
 from bs4 import BeautifulSoup
 import requests
+
 url = "https://tw.appledaily.com/new/realtime/"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -241,10 +242,13 @@ for item in items:
     print(item.find("h1").text)
     print(item.find("a")["href"])
     print()
+
 print('------------------------------------------------------------')	#60個
+
 from bs4 import BeautifulSoup
 import time, random
 import requests
+
 url = "https://tw.appledaily.com/new/realtime/"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -261,5 +265,5 @@ for item in items:
     article = content_soup.find("article", {"class":"ndArticle_content clearmen"})
     print(article.find("p").text)
 
-
 print('------------------------------------------------------------')	#60個
+

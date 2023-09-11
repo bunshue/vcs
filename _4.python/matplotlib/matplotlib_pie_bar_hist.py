@@ -300,6 +300,31 @@ plt.axis("equal")
 #第六張圖
 plt.subplot(236)
 
+lexus_models = {
+    'CT-200h': 139, 
+    'ES': 167, 
+    'GS': 221, 
+    'IS': 173,
+    'LC': 539,
+    'LS': 337,
+    'LX': 465,
+    'NX': 155,
+    'RC': 243,
+    'RX': 224,
+    'RX L': 260,
+    'UX': 139
+               }
+lexus_prices = np.array(list(lexus_models.values()), dtype=np.int64)
+lexus = list()
+lexus.append(np.count_nonzero(lexus_prices<=150))
+lexus.append(np.count_nonzero((lexus_prices>150)&(lexus_prices<=200)))
+lexus.append(np.count_nonzero((lexus_prices>200)&(lexus_prices<=300)))
+lexus.append(np.count_nonzero(lexus_prices>300))
+labels = ['<=150', '151~200', '201~300', '>300']
+explode = [0.2, 0, 0, 0]
+plt.pie(lexus, explode=explode, autopct='%1.0f%%', 
+        radius=2.0, labels=labels, shadow=True)
+plt.title('Lexus Models Prices')
 
 plt.show()
 

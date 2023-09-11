@@ -3,6 +3,7 @@
 
 '''
 
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -17,202 +18,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-import requests
-import pandas as pd
-
-import sys
-
-print('------------------------------------------------------------')	#60個
-
-#直方圖
-minutes = [45, 34, 56, 77, 90, 90, 90, 34, 45, 44, 80, 15, 10, 12]
-scores =  [90, 80, 100, 65, 5, 30, 55, 100, 90, 80, 60, 5, 0, 10]
-
-plt.figure()
-plt.xlabel('解題時間(分)')
-plt.ylabel('人數')
-plt.hist(minutes, bins=4, edgecolor='white', linewidth=1.2)
-
-plt.figure()
-plt.xlabel('分數')
-plt.ylabel('人數')
-plt.hist(scores, bins=4, color='red', edgecolor='white', linewidth=1.2)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#圓餅圖
-
-toyota = [8, 4, 3]
-lexus =  [0, 2, 10]
-mazda =  [5, 4, 1]
-subaru = [3, 6, 0]
-labels = ['<100', '100~149', '>=150']
-
-plt.subplot(2,2,1)
-plt.pie(toyota, radius=1.2, labels=labels, shadow=True)
-plt.title('Toyota')
-
-plt.subplot(2,2,2)
-plt.pie(lexus, radius=1.2, labels=labels, shadow=True)
-plt.title('Lexus')
-
-plt.subplot(2,2,3)
-plt.pie(mazda, radius=1.2, labels=labels, shadow=True)
-plt.title('Mazda')
-
-plt.subplot(2,2,4)
-plt.pie(subaru, radius=1.2, labels=labels, shadow=True)
-plt.title('Subaru')
-
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-lexus_models = {
-    'CT-200h': 139, 
-    'ES': 167, 
-    'GS': 221, 
-    'IS': 173,
-    'LC': 539,
-    'LS': 337,
-    'LX': 465,
-    'NX': 155,
-    'RC': 243,
-    'RX': 224,
-    'RX L': 260,
-    'UX': 139
-               }
-lexus_prices = np.array(list(lexus_models.values()), dtype=np.int64)
-lexus = list()
-lexus.append(np.count_nonzero(lexus_prices<=150))
-lexus.append(np.count_nonzero((lexus_prices>150)&(lexus_prices<=200)))
-lexus.append(np.count_nonzero((lexus_prices>200)&(lexus_prices<=300)))
-lexus.append(np.count_nonzero(lexus_prices>300))
-labels = ['<=150', '151~200', '201~300', '>300']
-explode = [0.2, 0, 0, 0]
-plt.pie(lexus, explode=explode, autopct='%1.0f%%', 
-        radius=2.0, labels=labels, shadow=True)
-plt.title('Lexus Models Prices')
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#長條圖範例
-
-ranking = {
-    'Toyota RAV4': 2958,
-    'CMC Veryca': 1312,
-    'Nissan Kicks': 1267,
-    'Honda CRV': 1209,
-    'Toyota Sienta': 1163,
-    'Toyota Yaris': 936, 
-    'Toyota': 911,
-    'Ford Focus': 873,
-    'M-Benz C-Class': 749,
-    'Honda HR-V':704
-}
-
-plt.bar(range(len(ranking.values())), ranking.values(), width=0.8)
-plt.xticks(range(len(ranking.values())), ranking.keys(), rotation=45)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-import seaborn as sns
-
-sns.set()
-ranking = {
-    'Toyota RAV4': 2958,
-    'CMC Veryca': 1312,
-    'Nissan Kicks': 1267,
-    'Honda CRV': 1209,
-    'Toyota Sienta': 1163,
-    'Toyota Yaris': 936, 
-    'Toyota': 911,
-    'Ford Focus': 873,
-    'M-Benz C-Class': 749,
-    'Honda HR-V':704
-}
-
-plt.bar(range(len(ranking.values())), ranking.values(), width=0.8)
-plt.xticks(range(len(ranking.values())), ranking.keys(), rotation=45)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-import seaborn as sns
-sns.get_dataset_names()
-
-import seaborn as sns
-
-tips = sns.load_dataset("tips")
-print(tips.shape)
-print(tips.head())
-
-print('------------------------------------------------------------')	#60個
-
-import seaborn as sns
-
-sns.set()
-tips = sns.load_dataset("tips")
-plt.scatter(tips.total_bill, tips.tip)
-plt.xlabel("Total Bill")
-plt.ylabel("Tip")
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-import seaborn as sns
-
-sns.set(style="whitegrid")
-tips = sns.load_dataset("tips")
-male_tips = tips[tips.sex=='Male']
-female_tips = tips[tips.sex=='Female']
-plt.scatter(male_tips.total_bill, male_tips.tip, label="Male tips")
-plt.scatter(female_tips.total_bill, female_tips.tip, label="Female tips")
-plt.xlabel("Total Bill")
-plt.ylabel("Tip")
-plt.legend()
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-import seaborn as sns
-
-tips = sns.load_dataset("tips")
-sns.catplot(x='day', y='tip', data=tips)
-
-'''
-
-print('------------------------------------------------------------')	#60個
-
-import seaborn as sns
-
-titanic = sns.load_dataset("titanic")
-print(titanic.head())
-
-print('------------------------------------------------------------')	#60個
-
-import seaborn as sns
-
-titanic = sns.load_dataset("titanic")
-sns.countplot(x = 'class', hue = 'survived', data = titanic)
-
-print('------------------------------------------------------------')	#60個
-
-import seaborn as sns
-
-titanic = sns.load_dataset("titanic")
-sns.countplot(x = 'sex', hue = 'survived', data = titanic)
-
-print('------------------------------------------------------------')	#60個
 
 import xlrd
 
@@ -385,7 +190,6 @@ tainan = target.loc['臺南市'][['姓名','得票數']]
 tainan = tainan.set_index(['姓名'])
 tainan.plot.pie(y='得票數')
 tainan.plot.bar()
-'''
 
 
 print('------------------------------------------------------------')	#60個

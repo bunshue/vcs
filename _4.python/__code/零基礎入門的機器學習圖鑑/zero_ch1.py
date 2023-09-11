@@ -5,8 +5,6 @@ import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 
-
-
 import pandas as pd
 from sklearn.datasets import load_iris
 
@@ -16,8 +14,6 @@ y = pd.DataFrame(data.target, columns=["Species"])
 df = pd.concat([X, y], axis=1)
 
 print(df.head())
-
-
 
 print('------------------------------------------------------------')	#60個
 

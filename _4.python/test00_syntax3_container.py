@@ -3,12 +3,39 @@ import sys
 '''
 各種python專用的語法 字典 串列 元組 集合
 
-字典 dddd 大括號 {}
-串列 llll
-元組 tttt
-集合 ssss
+字典 dddd 大括號 {} 無順序 不可重複
+串列 llll 中括號 [] 有順序 允許重複
+元組 tttt 小括號 () 有順序 允許重複
+集合 ssss 大括號 {} 無順序 不可重複
+
+
+Collections(容器)
+Python提供四種Collections，分別是List、Tuple、Set、Dictionary
+
+Collections總整理
+
+Python提供四種Collections，分別是List、Tuple、Set、Dictionary，每個Collection都有各自的特色和使用時機，下面這些不用背起來，經常使用自然就會習慣了。
+
+    列表(List)：有序且可更改的容器，允許重複的成員。
+    組合(Tuple)：有序且不可更改的容器，允許重複的成員。
+    集合(Set)：無序且未索引的容器，沒有重複的成員。
+    字典(Dict)：無序且未索引的容器，沒有重複的成員，資料格式為key: value。
 
 '''
+
+a_dict = {}
+print(type(a_dict))
+
+a_list = []
+print(type(a_list))
+
+
+table1 = [] #list
+table2 = {} #dict
+print(type(table1))
+print(type(table2))
+
+
 
 
 print('字典 dddd ST------------------------------------------------------------')	#60個
@@ -424,6 +451,56 @@ print(candyNumber.items())
 
 print('------------------------------------------------------------')	#60個
 
+print('字典範例')
+cocktail = {
+    'Blue Hawaiian':{'Rum','Sweet Wine','Cream','Pineapple Juice','Lemon Juice'},
+    'Ginger Mojito':{'Rum','Ginger','Mint Leaves','Lime Juice','Ginger Soda'},
+    'New Yorker':{'Whiskey','Red Wine','Lemon Juice','Sugar Syrup'},
+    }
+print(type(cocktail))
+
+# 列出含有Lemon Juice的酒
+print("含有Lemon Juice的酒 : ")
+for name, formulas in cocktail.items():
+    if 'Lemon Juice' in formulas:
+        print(name)
+# 列出含有Rum但是沒有薑的酒
+print("含有Rum但是沒有薑的酒 : ")
+for name, formulas in cocktail.items():
+    if 'Rum' in formulas and not ('Ginger' in formulas):
+        print(name)
+
+print('------------------------------------------------------------')	#60個
+
+
+print('字典的用法')
+plats = {
+    'Linux': 'platform_linux_distribution',
+    'Mac': 'platform_mac_ver',
+    'Windows': 'platform_win32_ver',
+}
+
+print(type(plats))
+print(plats)
+
+for name, func in plats.items():
+    plat = '%s %r' % (name, func)
+    print(plat)
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -549,6 +626,52 @@ math_sydi_physics2 = math.symmetric_difference(physics)
 print("沒有同時參加數學和物理夏令營的成員 ",math_sydi_physics2)
 
 print('------------------------------------------------------------')	#60個
+
+
+set1 = {"green", "red", "blue", "red"} # Create a set
+print(set1)
+
+set2 = set([7, 1, 2, 23, 2, 4, 5]) # Create a set from a list
+print(set2)
+
+print("Is red in set1?", "red" in set1)
+
+print("length is", len(set2)) # Use function len
+print("max is", max(set2)) # Use max
+print("min is", min(set2)) # Use min
+print("sum is", sum(set2)) # Use sum
+
+set3 = set1 | {"green", "yellow"} # Set union
+print(set3)
+
+set3 = set1 - {"green", "yellow"} # Set difference
+print(set3)
+
+set3 = set1 & {"green", "yellow"} # Set intersection
+print(set3)
+
+set3 = set1 ^ {"green", "yellow"} # Set exclusive or
+print(set3)
+
+list1 = list(set2) # Obtain a list from a set
+print(set1 == {"green", "red", "blue"}) # Compare two sets
+
+set1.add("yellow")
+print(set1)
+
+set1.remove("yellow")
+print(set1)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 print('集合 ssss SP------------------------------------------------------------')	#60個
 
@@ -699,18 +822,6 @@ print('------------------------------------------------------------')	#60個
 
 '''
 A+B可以連接A和B字串。
-
-Collections(容器)
-Python提供四種Collections，分別是List、Tuple、Set、Dictionary
-
-Collections總整理
-
-Python提供四種Collections，分別是List、Tuple、Set、Dictionary，每個Collection都有各自的特色和使用時機，下面這些不用背起來，經常使用自然就會習慣了。
-
-    列表(List)：有序且可更改的容器，允許重複的成員。
-    組合(Tuple)：有序且不可更改的容器，允許重複的成員。
-    集合(Set)：無序且未索引的容器，沒有重複的成員。
-    字典(Dict)：無序且未索引的容器，沒有重複的成員，資料格式為key: value。
 '''
 
 
@@ -883,6 +994,46 @@ print(candyCan[1:3])
 使用 extend() 將兩個List合併在一起，就像字串的Concatenation。
 '''
 
+
+print('list之使用')
+
+llll = ['aa', 'bb', 'cc', 'dd', 'ee']
+pppp = llll[2:] #第二項(含)以後的
+print(llll)
+print(pppp)
+
+print('------------------------------------------------------------')	#60個
+
+data = list()
+for page in range(1, 6):
+    pdate = 'aaaa'
+    title = 'bbbb'
+    link = 'cccc'
+    data.append((pdate, link, title))
+print(type(data))
+print(data)
+
+print('------------------------------------------------------------')	#60個
+
+
+contents = list()
+
+for page in range(1, 6):
+    content = dict()
+    content['link'] = 'aaaaa'
+    content['content'] = 'bbbbb'
+    content['date'] = 'ccccc'
+    content['title'] = 'ddddd'
+    contents.append(content)
+    
+print(contents)
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
 print('串列 llll SP------------------------------------------------------------')	#60個
 
 
@@ -1031,6 +1182,7 @@ print('各種容器轉換 比較 ST---------------------------------------------
 
 empty_dict = {}                      # 這是建立空字典
 empty_set = set()                    # 這是建立空集合
+
 fruits1 = ['apple', 'orange', 'apple', 'banana', 'orange']
 x = set(fruits1)                # 將串列轉成集合
 fruits2 = list(x)               # 將集合轉成串列
@@ -1107,6 +1259,7 @@ print('------------------------------------------------------------')	#60個
 
 empty_dict = {}                      # 這是建立空字典
 print("列印類別 = ", type(empty_dict))
+
 empty_set = set()                    # 這是建立空集合
 print("列印類別 = ", type(empty_set))
 
@@ -1142,29 +1295,6 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
-
-print('字典範例')
-cocktail = {
-    'Blue Hawaiian':{'Rum','Sweet Wine','Cream','Pineapple Juice','Lemon Juice'},
-    'Ginger Mojito':{'Rum','Ginger','Mint Leaves','Lime Juice','Ginger Soda'},
-    'New Yorker':{'Whiskey','Red Wine','Lemon Juice','Sugar Syrup'},
-    }
-print(type(cocktail))
-
-# 列出含有Lemon Juice的酒
-print("含有Lemon Juice的酒 : ")
-for name, formulas in cocktail.items():
-    if 'Lemon Juice' in formulas:
-        print(name)
-# 列出含有Rum但是沒有薑的酒
-print("含有Rum但是沒有薑的酒 : ")
-for name, formulas in cocktail.items():
-    if 'Rum' in formulas and not ('Ginger' in formulas):
-        print(name)
-
-print('------------------------------------------------------------')	#60個
-
-
 
 
 
@@ -1251,4 +1381,76 @@ print(years)
 print('------------------------------------------------------------')	#60個
 
 
+
+print('------------------------------------------------------------')	#60個
+
+_size_factors = {
+    "kb": 1000, "mb": 1000 * 1000, "gb": 1000 * 1000 * 1000,
+    "kib": 1024, "mib": 1024 * 1024, "gib": 1024 * 1024 * 1024,
+}
+
+for aaa in _size_factors:
+    print(aaa, _size_factors[aaa])
+
+
+print('------------------------------------------------------------')	#60個
+
+
+_deprecations = {
+    "JPEGBaseline": "JPEGBaseline8Bit",
+    "JPEGExtended": "JPEGExtended12Bit",
+    "JPEGLossless": "JPEGLosslessSV1",
+    "JPEGLSLossy": "JPEGLSNearLossless",
+    "JPEG2000MultiComponentLossless": "JPEG2000MCLossless",
+    "JPEG2000MultiComponent": "JPEG2000MC",
+}
+
+for name in _deprecations:
+    print(name)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import os, string
+
+
+print('字典範例')
+codecs = {
+    'cn': ('gb2312', 'gbk', 'gb18030', 'hz'),
+    'tw': ('big5', 'cp950'),
+    'hk': ('big5hkscs',),
+    'jp': ('cp932', 'shift_jis', 'euc_jp', 'euc_jisx0213', 'shift_jisx0213',
+           'euc_jis_2004', 'shift_jis_2004'),
+    'kr': ('cp949', 'euc_kr', 'johab'),
+    'iso2022': ('iso2022_jp', 'iso2022_jp_1', 'iso2022_jp_2',
+                'iso2022_jp_2004', 'iso2022_jp_3', 'iso2022_jp_ext',
+                'iso2022_kr'),
+}
+
+print(type(codecs))
+print(codecs)
+
+for loc, encodings in codecs.items():
+    for enc in encodings:
+        print(enc)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
 

@@ -44,20 +44,6 @@ print(postgres_insert_query)
 print('------------------------------------------------------------')	#60個
 
 
-print('字典的用法')
-plats = {
-    'Linux': 'platform_linux_distribution',
-    'Mac': 'platform_mac_ver',
-    'Windows': 'platform_win32_ver',
-}
-
-print(type(plats))
-print(plats)
-
-for name, func in plats.items():
-    plat = '%s %r' % (name, func)
-    print(plat)
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -507,26 +493,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-print('list之使用')
-
-llll = ['aa', 'bb', 'cc', 'dd', 'ee']
-pppp = llll[2:] #第二項(含)以後的
-print(llll)
-print(pppp)
-
-table1 = [] #list
-table2 = {} #dict
-print(type(table1))
-print(type(table2))
-
-print('------------------------------------------------------------')	#60個
-
-a_dict = {}
-print(type(a_dict))
-
-a_list = []
-print(type(a_list))
-
 
 target_url = 'https://www.nkust.edu.tw/p/403-1000-12-{}.php'
 
@@ -534,48 +500,12 @@ for page in range(1, 6):
     html = target_url.format(page)
     print(html)
 
-
-data = list()
-for page in range(1, 6):
-    pdate = 'aaaa'
-    title = 'bbbb'
-    link = 'cccc'
-    data.append((pdate, link, title))
-print(type(data))
-print(data)
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-contents = list()
-
-for page in range(1, 6):
-    content = dict()
-    content['link'] = 'aaaaa'
-    content['content'] = 'bbbbb'
-    content['date'] = 'ccccc'
-    content['title'] = 'ddddd'
-    contents.append(content)
-    
-print(contents)
-
 print('------------------------------------------------------------')	#60個
 
 if sys.version_info.major < 3 or sys.version_info.minor < 3:
     sys.exit("Error: clinic.py requires Python 3.3 or greater.")
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 
 print('格式化字串')
@@ -853,37 +783,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-_size_factors = {
-    "kb": 1000, "mb": 1000 * 1000, "gb": 1000 * 1000 * 1000,
-    "kib": 1024, "mib": 1024 * 1024, "gib": 1024 * 1024 * 1024,
-}
-
-for aaa in _size_factors:
-    print(aaa, _size_factors[aaa])
-
-
-print('------------------------------------------------------------')	#60個
-
-
-_deprecations = {
-    "JPEGBaseline": "JPEGBaseline8Bit",
-    "JPEGExtended": "JPEGExtended12Bit",
-    "JPEGLossless": "JPEGLosslessSV1",
-    "JPEGLSLossy": "JPEGLSNearLossless",
-    "JPEG2000MultiComponentLossless": "JPEG2000MCLossless",
-    "JPEG2000MultiComponent": "JPEG2000MC",
-}
-
-for name in _deprecations:
-    print(name)
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 import os
 from os.path import abspath
@@ -1146,24 +1045,13 @@ total_pay = monthly_pay * year * 12      # 總共還款金額
 print("每月還款金額 %d" % int(monthly_pay))
 print("總共還款金額 %d" % int(total_pay))
 
-
-
 print('------------------------------------------------------------')	#60個
 
 numberStr = input("請輸入數值公式 : ")
 number = eval(numberStr)
 print("計算結果 : %5.2f" % number)
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 from datetime import date, timedelta
 
@@ -1184,11 +1072,6 @@ d0 = date(2021, 5, 24)
 d1 = date(2023, 8, 21)
 
 print(d1-d0)
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1213,42 +1096,7 @@ print(token)
 boundary = ('=' * 15) + (_fmt % token) + '=='
 print(boundary)
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
-import os, string
-
-
-print('字典範例')
-codecs = {
-    'cn': ('gb2312', 'gbk', 'gb18030', 'hz'),
-    'tw': ('big5', 'cp950'),
-    'hk': ('big5hkscs',),
-    'jp': ('cp932', 'shift_jis', 'euc_jp', 'euc_jisx0213', 'shift_jisx0213',
-           'euc_jis_2004', 'shift_jis_2004'),
-    'kr': ('cp949', 'euc_kr', 'johab'),
-    'iso2022': ('iso2022_jp', 'iso2022_jp_1', 'iso2022_jp_2',
-                'iso2022_jp_2004', 'iso2022_jp_3', 'iso2022_jp_ext',
-                'iso2022_kr'),
-}
-
-print(type(codecs))
-print(codecs)
-
-for loc, encodings in codecs.items():
-    for enc in encodings:
-        print(enc)
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 import time
 import datetime
@@ -1282,10 +1130,6 @@ mm = 34
 ss = 56
 s = "%d:%02d:%02d" % (hh, mm, ss)
 print(s)
-
-
-
-
 
 
 print('------------------------------------------------------------')	#60個

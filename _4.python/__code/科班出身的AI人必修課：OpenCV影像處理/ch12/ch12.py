@@ -1,3 +1,4 @@
+import sys
 import cv2
 import numpy as np
 
@@ -7,7 +8,6 @@ print('------------------------------------------------------------')	#60個
 
 image = cv2.imread('contours.bmp')
 print('顯示原圖')
-
 
 cv2.imshow("original", image)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -23,7 +23,6 @@ print('------------------------------------------------------------')	#60個
 
 image = cv2.imread('contours.bmp')
 print('顯示原圖')
-
 
 cv2.imshow("original", image)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
