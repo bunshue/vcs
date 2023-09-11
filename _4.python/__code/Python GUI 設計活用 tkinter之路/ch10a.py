@@ -1,5 +1,8 @@
-# ch10_1.py
+import sys
+
 from tkinter import *
+
+print('------------------------------------------------------------')	#60個
 
 root = Tk()
 root.title("ch10_1")

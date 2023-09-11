@@ -1,6 +1,9 @@
-# ch9_1.py
+import sys
+
 from tkinter import *
-    
+
+print('------------------------------------------------------------')	#60個
+
 window = Tk()
 window.title("ch9_1")             # 視窗標題
 

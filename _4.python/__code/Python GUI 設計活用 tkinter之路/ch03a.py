@@ -1,30 +1,11 @@
-# ch3_1.py
+import sys
+
 from tkinter import *
 
-window = Tk()
-window.title("ch3_1")               # 視窗標題
-lab1 = Label(window,text="明志科技大學",
-              bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
-              bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
-              bg="lightblue")       # 標籤背景是淺藍色
-lab1.pack()                         # 包裝與定位元件
-lab2.pack()                         # 包裝與定位元件
-lab3.pack()                         # 包裝與定位元件
-
-window.mainloop()
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_2.py
-
-# ch3_2.py
-from tkinter import *
+print('------------------------------------------------------------')	#60個
 
 window = Tk()
-window.title("ch3_2")               # 視窗標題
+
 lab1 = Label(window,text="明志科技大學",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
@@ -34,84 +15,26 @@ lab2 = Label(window,text="長庚大學",
 lab3 = Label(window,text="長庚科技大學",
               bg="lightblue",       # 標籤背景是淺藍色
               width=15)             # 標籤寬度是15
+
 lab1.pack(side=BOTTOM)              # 包裝與定位元件
 lab2.pack(side=BOTTOM)              # 包裝與定位元件
 lab3.pack(side=BOTTOM)              # 包裝與定位元件
 
-window.mainloop()
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_3.py
-
-# ch3_3.py
-from tkinter import *
-
-window = Tk()
-window.title("ch3_3")               # 視窗標題
-lab1 = Label(window,text="明志科技大學",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = Label(window,text="長庚大學",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = Label(window,text="長庚科技大學",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
+'''
 lab1.pack(side=LEFT)                # 包裝與定位元件
 lab2.pack(side=LEFT)                # 包裝與定位元件
 lab3.pack(side=LEFT)                # 包裝與定位元件
+'''
 
-window.mainloop()
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_4.py
-
-# ch3_4.py
-from tkinter import *
-
-window = Tk()
-window.title("ch3_4")               # 視窗標題
-lab1 = Label(window,text="明志科技大學",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = Label(window,text="長庚大學",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = Label(window,text="長庚科技大學",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
+'''
 lab1.pack()                         # 包裝與定位元件
 lab2.pack(side=RIGHT)               # 靠右包裝與定位元件
 lab3.pack(side=LEFT)                # 靠左包裝與定位元件
+'''
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_5.py
-
-# ch3_5.py
-from tkinter import *
 
 Reliefs = ["flat","groove","raised","ridge","solid","sunken"]
 
@@ -125,16 +48,7 @@ for Relief in Reliefs:
 
 root.mainloop()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_5_1.py
-
-# ch3_5_1.py
-from tkinter import *
 
 bitMaps = ["error","hourglass","info","questhead","question",
            "warning","gray12","gray25","gray50","gray75"]
@@ -147,16 +61,7 @@ for bitMap in bitMaps:
 
 root.mainloop()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_6.py
-
-# ch3_6.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_6")               # 視窗標題
@@ -172,17 +77,7 @@ lab3.pack(fill=X)                   # 填滿X軸包裝與定位元件
 
 window.mainloop()
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_7.py
-
-# ch3_7.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_7")               # 視窗標題
@@ -198,17 +93,7 @@ lab3.pack(fill=X)                   # 填滿X軸包裝與定位元件
 
 window.mainloop()
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_8.py
-
-# ch3_8.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_8")               # 視窗標題
@@ -227,18 +112,7 @@ lab3.pack(padx=50)                  # 左右邊界間距是50像素
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_9.py
-
-# ch3_9.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_9")               # 視窗標題
@@ -257,24 +131,7 @@ lab3.pack(side=LEFT)                # 包裝與定位元件
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_10.py
-
-# ch3_10.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_10")               # 視窗標題
@@ -290,18 +147,7 @@ lab3.pack()                         # 包裝與定位元件
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_11.py
-
-# ch3_11.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_11")               # 視窗標題
@@ -317,18 +163,7 @@ lab3.pack(ipady=10)                 # ipady=10包裝與定位元件
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_12.py
-
-# ch3_12.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_12")
@@ -341,16 +176,7 @@ oklabel.pack(anchor=S,side=RIGHT,   # 從右開始在南方配置
 
 root.mainloop()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_13.py
-
-# ch3_13.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_13")
@@ -368,16 +194,7 @@ nolabel.pack(anchor=S,side=RIGHT,   # 從右開始在南方配置
 
 root.mainloop()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_14.py
-
-# ch3_14.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_14")              # 視窗標題
@@ -393,17 +210,7 @@ lab3.pack(fill=X)                   # 填滿X軸包裝與定位元件
 
 window.mainloop()
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_15.py
-
-# ch3_15.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_15")              # 視窗標題
@@ -419,17 +226,7 @@ lab3.pack(fill=X)                   # 填滿X軸包裝與定位元件
 
 window.mainloop()
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_16.py
-
-# ch3_16.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_16")              # 視窗標題
@@ -445,17 +242,7 @@ lab3.pack()                         # 預設從上開始配置控件
 
 window.mainloop()
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_17.py
-
-# ch3_17.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_17")              # 視窗標題
@@ -471,17 +258,7 @@ lab3.pack()                         # 預設從上開始配置控件
 
 window.mainloop()
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_18.py
-
-# ch3_18.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_18")              # 視窗標題
@@ -497,17 +274,7 @@ lab3.pack(fill=X)                   # 預設從上開始配置控件fill=X
 
 window.mainloop()
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_19.py
-
-# ch3_19.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_19")              # 視窗標題
@@ -523,17 +290,7 @@ lab3.pack(fill=BOTH)                # 預設從上開始配置控件fill=BOTH
 
 window.mainloop()
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_20.py
-
-# ch3_20.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_20")              # 視窗標題
@@ -549,17 +306,7 @@ lab3.pack(fill=BOTH,expand=True)    # fill=BOTH,expand=True
 
 window.mainloop()
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_21.py
-
-# ch3_21.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_21")               # 視窗標題
@@ -574,18 +321,7 @@ Label(root,text='Purdue',bg='blue',fg='white',
 
 root.mainloop() 
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_22.py
-
-# ch3_22.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_22")               # 視窗標題
@@ -599,18 +335,7 @@ Label(root,text='Purdue',bg='blue',fg='white',
 
 root.mainloop() 
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_23.py
-
-# ch3_23.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_23")
@@ -630,16 +355,7 @@ print("執行後",root.pack_slaves())
 
 root.mainloop()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_24.py
-
-# ch3_24.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_24")              # 視窗標題
@@ -658,18 +374,7 @@ lab3.grid(row=1,column=1)           # 格狀包裝
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_25.py
-
-# ch3_25.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_25")              # 視窗標題
@@ -688,18 +393,7 @@ lab3.grid(row=2,column=1)           # 格狀包裝
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_26.py
-
-# ch3_26.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_26")              # 視窗標題
@@ -722,18 +416,7 @@ lab8.grid(row=1,column=3)
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_27.py
-
-# ch3_27.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_27")              # 視窗標題
@@ -754,18 +437,7 @@ lab8.grid(row=1,column=3)
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_28.py
-
-# ch3_28.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_28")              # 視窗標題
@@ -786,18 +458,7 @@ lab8.grid(row=1,column=3)
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_29.py
-
-# ch3_29.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_29")              # 視窗標題
@@ -814,22 +475,7 @@ lab8.grid(row=1,column=3)
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_30.py
-
-# ch3_30.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_30")              # 視窗標題
@@ -852,18 +498,7 @@ lab8.grid(row=1,column=3,padx=5)
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_31.py
-
-# ch3_31.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_31")              # 視窗標題
@@ -878,18 +513,7 @@ lab4.grid(row=1,column=1,padx=5)
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_32.py
-
-# ch3_32.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_32")              # 視窗標題
@@ -904,18 +528,7 @@ lab4.grid(row=1,column=1,padx=5)
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_33.py
-
-# ch3_33.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_33")              # 視窗標題
@@ -930,18 +543,7 @@ lab4.grid(row=1,column=1,padx=5)
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_34.py
-
-# ch3_34.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_34")              # 視窗標題
@@ -956,18 +558,7 @@ lab4.grid(row=1,column=1,padx=5)
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_35.py
-
-# ch3_35.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_35")                # 視窗標題
@@ -981,18 +572,7 @@ for color in Colors:
 
 root.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_35_1.py
-
-# ch3_35_1.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_35_1")
@@ -1011,24 +591,7 @@ lab3.grid(row=1,column=0,columnspan=2,padx=5,pady=5)
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_35_2.py
-
-# ch3_35_2.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_35_2")
@@ -1048,24 +611,7 @@ lab3.grid(row=1,column=0,columnspan=2,padx=5,pady=5,
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_35_3.py
-
-# ch3_35_3.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_35_3")
@@ -1085,24 +631,7 @@ lab3.grid(row=1,column=0,columnspan=2,padx=5,pady=5,
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_36.py
-
-# ch3_36.py
-from tkinter import *
 
 window = Tk()
 window.title("ch3_36")              # 視窗標題
@@ -1121,18 +650,7 @@ lab3.place(x=60,y=100)              # 直接定位
 
 window.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_37.py
-
-# ch3_37.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_37")
@@ -1147,16 +665,7 @@ lab2.place(x=200,y=200,width=400,height=240)
 
 root.mainloop()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_38.py
-
-# ch3_38.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_38")
@@ -1168,16 +677,7 @@ label.place(relx=0.1,rely=0.1,relwidth=0.8,relheight=0.8)
 
 root.mainloop()
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch3\ch3_39.py
-
-# ch3_39.py
-from tkinter import *
 
 root = Tk()
 root.title("ch3_39")

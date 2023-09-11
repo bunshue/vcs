@@ -1,4 +1,10 @@
-# ch15_1.py
+import sys
+
+from tkinter import *
+
+print('------------------------------------------------------------')	#60個
+
+
 from tkinter import *
 from tkinter.ttk import *
 

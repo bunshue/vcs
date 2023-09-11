@@ -1,5 +1,9 @@
-# ch7_1.py
+import sys
+
 from tkinter import *
+
+print('------------------------------------------------------------')	#60個
+
 def printSelection():
     num = var.get()
     if num == 1:

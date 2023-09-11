@@ -1,5 +1,8 @@
-# ch6_1.py
+import sys
+
 from tkinter import *
+
+print('------------------------------------------------------------')	#60個
 
 def btn_hit():                      # 處理按鈕事件
     global msg_on                   # 這是全域變數

@@ -1,4 +1,9 @@
-# ch11_1.py
+import sys
+
+from tkinter import *
+
+print('------------------------------------------------------------')	#60個
+
 from tkinter import *
 def pythonClicked():            # Python核取方塊事件處理程式     
     if varPython.get():

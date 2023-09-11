@@ -1,6 +1,9 @@
-# ch14_1.py
+import sys
+
 from tkinter import *
-    
+
+print('------------------------------------------------------------')	#60個
+
 pw = PanedWindow(orient=VERTICAL)       # 建立PanedWindow物件
 pw.pack(fill=BOTH,expand=True)
 

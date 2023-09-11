@@ -1,5 +1,8 @@
-# ch4_1.py
+import sys
+
 from tkinter import *
+
+print('------------------------------------------------------------')	#60個
 
 def msgShow():
     label["text"] = "I love Python"

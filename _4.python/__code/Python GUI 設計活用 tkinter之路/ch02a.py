@@ -1,5 +1,9 @@
 import sys
+
 from tkinter import *
+
+print('------------------------------------------------------------')	#60個
+
 from tkinter.ttk import Separator
 
 root = Tk()
