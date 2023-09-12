@@ -1,2 +1,0 @@
-Python is good language.
-I like Python.
