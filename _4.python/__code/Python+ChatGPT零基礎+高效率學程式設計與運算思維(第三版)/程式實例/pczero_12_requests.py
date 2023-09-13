@@ -3,51 +3,24 @@ import sys
 import time
 import random
 
-print('------------------------------------------------------------')	#60個
-
-# ch21_1.ipynb
 import requests
+import re
+import bs4
+
+print('------------------------------------------------------------')	#60個
 
 url = 'http://www.mcut.edu.tw'
 htmlfile = requests.get(url)
 print(type(htmlfile))
-
-
-print('------------------------------------------------------------')	#60個
-
-
-# ch21_2.ipynb
-import requests
-
-url = 'http://www.mcut.edu.tw'
-htmlfile = requests.get(url)
 if htmlfile.status_code == requests.codes.ok:
     print("取得網頁內容成功")
     print("網頁內容大小 = ", len(htmlfile.text))
-else:
-    print("取得網頁內容失敗")
-
-
-print('------------------------------------------------------------')	#60個
-
-
-# ch21_3.ipynb
-import requests
-
-url = 'http://www.mcut.edu.tw'
-htmlfile = requests.get(url)
-if htmlfile.status_code == requests.codes.ok:
-    print("取得網頁內容成功")
     print(htmlfile.text)            # 列印網頁內容
 else:
     print("取得網頁內容失敗")
 
-    
-print('------------------------------------------------------------')	#60個
 
-# ch21_4.ipynb
-import requests
-import re
+print('------------------------------------------------------------')	#60個
 
 url = 'http://www.mcut.edu.tw'
 htmlfile = requests.get(url)
@@ -69,9 +42,6 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-# ch21_5.ipynb
-import requests
-
 url = 'http://mcut.edu.tw/file_not_existed' # 不存在的內容
 try:
     htmlfile = requests.get(url)
@@ -83,18 +53,11 @@ print("程式繼續執行 ... ")
 
 print('------------------------------------------------------------')	#60個
 
-# ch21_6.ipynb
-import requests
-
 url = 'https://www.kingstone.com.tw/' 
 htmlfile = requests.get(url)
 htmlfile.raise_for_status()
 
-
 print('------------------------------------------------------------')	#60個
-
-# ch21_7.ipynb
-import requests
 
 headers = { 'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64)\
             AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
@@ -104,11 +67,7 @@ htmlfile = requests.get(url, headers=headers)
 htmlfile.raise_for_status()
 print("偽裝瀏覽器擷取網路資料成功")
 
-
 print('------------------------------------------------------------')	#60個
-
-# ch21_8.ipynb
-import requests
 
 url = 'http://www.tenlong.com.tw'                    # 天瓏書局網址
 try:
@@ -126,26 +85,17 @@ with open(fn, 'wb') as file_Obj:                     # 以二進位儲存
 
 print('------------------------------------------------------------')	#60個
 
-# ch21_9.ipynb
-import requests, bs4
-
 htmlFile = requests.get('https://deepmind.com.tw')
 objSoup = bs4.BeautifulSoup(htmlFile.text, 'lxml')
 print("列印BeautifulSoup物件資料型態 ", type(objSoup))
 
 print('------------------------------------------------------------')	#60個
 
-# ch21_10.ipynb
-import bs4
-
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
 print("列印BeautifulSoup物件資料型態 ", type(objSoup))
 
 print('------------------------------------------------------------')	#60個
-
-# ch21_11.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -154,19 +104,12 @@ print("列印title = ", objSoup.title)
 
 print('------------------------------------------------------------')	#60個
 
-# ch21_12.ipynb
-import bs4
-
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
 print("列印title = ", objSoup.title)
 print("title內容 = ", objSoup.title.text)
 
-
 print('------------------------------------------------------------')	#60個
-
-# ch21_13.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -176,12 +119,7 @@ print("列印Tag        = ", objTag)
 print("Text屬性內容   = ", objTag.text)
 print("String屬性內容 = ", objTag.string)
 
-
 print('------------------------------------------------------------')	#60個
-
-
-# ch21_14.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -192,11 +130,7 @@ print("以下是列印串列元素 : ")
 for data in objTag:                       # 列印串列元素內容
     print(data.text)
 
-
 print('------------------------------------------------------------')	#60個
-
-# ch21_15.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -205,9 +139,6 @@ for data in objTag:                       # 列印串列元素內容
     print(data.text)
 
 print('------------------------------------------------------------')	#60個
-
-# ch21_16.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -223,20 +154,13 @@ for data in objTag:
 
 print('------------------------------------------------------------')	#60個
 
-# ch21_17.ipynb
-import bs4
-
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
 objTag = objSoup.find(id='author')
 print(objTag)
 print(objTag.text)
 
-
 print('------------------------------------------------------------')	#60個
-
-# ch21_18.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -245,11 +169,7 @@ for tag in objTag:
     print(tag)
     print(tag.text)
 
-
 print('------------------------------------------------------------')	#60個
-
-# ch21_19.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -259,13 +179,7 @@ print("串列長度     = ", len(objTag))           # 列印串列長度
 print("元素資料型態 = ", type(objTag[0]))       # 列印元素資料型態
 print("元素內容     = ", objTag[0].getText())   # 列印元素內容
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
-# ch21_20.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -275,11 +189,7 @@ print(objTag[0])
 print("列出str()轉換過的資料型態 = ", type(str(objTag[0])))
 print(str(objTag[0]))
 
-
 print('------------------------------------------------------------')	#60個
-
-# ch21_21.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -287,9 +197,6 @@ objTag = objSoup.select('#author')
 print(str(objTag[0].attrs))
 
 print('------------------------------------------------------------')	#60個
-
-# ch21_22.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -300,11 +207,7 @@ for pObj in pObjTag:
     print(pObj.getText())       # 沒有子標籤
     print(pObj.text)            # 沒有子標籤
 
-
 print('------------------------------------------------------------')	#60個
-
-# ch21_23.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -313,12 +216,7 @@ print("含<img>標籤的串列長度 = ", len(imgTag))
 for img in imgTag:              
     print(img)   
 
-
 print('------------------------------------------------------------')	#60個
-
-
-# ch21_24.ipynb
-import bs4
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -329,10 +227,6 @@ for img in imgTag:
     print("列印圖檔     = ", img.get('src'))
     print("列印圖檔     = ", img['src'])
 print('------------------------------------------------------------')	#60個
-
-
-# ch21_25.ipynb
-import requests, bs4, os
 
 url = 'http://www.xzw.com/fortune/'
 htmlfile = requests.get(url)
@@ -360,13 +254,7 @@ for photo in photos:                            # 迴圈下載圖片與儲存
         pictFile.write(diskStorage)
     pictFile.close()                            # 關閉檔案
 
-    
-
 print('------------------------------------------------------------')	#60個
-
-
-# ch21_26.ipynb
-import bs4, requests
 
 url = 'http://www.taiwanlottery.com.tw'
 html = requests.get(url)
@@ -403,31 +291,6 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
 
 
 
