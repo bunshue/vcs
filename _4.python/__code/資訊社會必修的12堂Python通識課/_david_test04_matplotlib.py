@@ -13,11 +13,11 @@ font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
 
 import xlrd
 
@@ -25,7 +25,7 @@ book = xlrd.open_workbook('election_2018.xls')
 sheet = book.sheet_by_index(0)
 for row in range(10):
     print(sheet.row_values(row))
-    
+
 print('------------------------------------------------------------')	#60個
 
 import xlrd
@@ -39,27 +39,18 @@ for row in range(rows):
 for row in range(rows):
     if table[row][0] == '':
         table[row][0] = table[row-1][0]
+
 tainan = dict()
 for row in range(rows):
     if table[row][0] == '臺南市':
         tainan[table[row][1]] = table[row][6]
+
+print(type(tainan))
 print(tainan)
-plt.bar(range(len(tainan)), tainan.values(), facecolor="#99ccff")
-plt.xticks(range(len(tainan)), tainan.keys())
-plt.ylim((0, 400000))
-for x, y in zip(range(len(tainan)), tainan.values()):
-    plt.text(x-0.05, y+5000, "{:>8,.0f}".format(y), ha='center')
-#plt.rcParams['font.sans-serif'] = [u'SimHei']
-
-plt.show()
-
-'''
 
 print('------------------------------------------------------------')	#60個
 
-
-'''
-print('------------------------------------------------------------')	#60個
+import pandas as pd
 
 data = pd.read_csv('hualien.csv')
 target = data[['年度','總人口數','平地原住民','山地原住民']]
@@ -74,8 +65,6 @@ target = pd.DataFrame(data[['年度','總人口數','平地原住民','山地原
 target = target.set_index(target['年度'])
 target = target.drop(['年度'], axis=1)
 print(target)
-
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -97,8 +86,6 @@ fig2.plot.bar(ylim=(0,80000))
 
 print('------------------------------------------------------------')	#60個
 
-'''
-
 
 '''
 import xlrd
@@ -112,8 +99,8 @@ data.head(10)
 
 print('------------------------------------------------------------')	#60個
 
-'''
 
+'''
 #pd.read_excel kilo可用  sugar不可用
 data = pd.read_excel('election_2018.xls')
 target = data.fillna(method='ffill')
@@ -190,7 +177,7 @@ tainan = target.loc['臺南市'][['姓名','得票數']]
 tainan = tainan.set_index(['姓名'])
 tainan.plot.pie(y='得票數')
 tainan.plot.bar()
-
+'''
 
 print('------------------------------------------------------------')	#60個
 

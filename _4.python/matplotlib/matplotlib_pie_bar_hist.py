@@ -407,6 +407,18 @@ plt.ylabel("零用金數目")
 #第六張圖
 plt.subplot(236)
 
+print('用bar圖畫出字典資料 並標明數值')
+ChineseZodiacSigns = {'鼠' : 5, '牛' : 32, '虎' : 17, '兔' : 8 }
+print(type(ChineseZodiacSigns))
+print(ChineseZodiacSigns)
+
+plt.bar(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.values(), facecolor="#99ccff")
+plt.xticks(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.keys())
+plt.ylim((0, 40))
+for x, y in zip(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.values()):
+    plt.text(x-0.05, y+0.5, "{:>8,.0f}".format(y), ha='center')
+
+
 
 plt.show()
 

@@ -1,8 +1,3 @@
-"""Progress Bar Simulation, by Al Sweigart al@inventwithpython.com
-A sample progress bar animation that can be used in other programs.
-This code is available at https://nostarch.com/big-book-small-python-programming
-Tags: tiny, module"""
-
 import random, time
 
 BAR = chr(9608) # Character 9608 is '█'
@@ -23,7 +18,7 @@ def main():
         # printed string to the screen:
         print(barStr, end='', flush=True)
 
-        time.sleep(0.2)  # Pause for a little bit:
+        time.sleep(0.1)  # Pause for a little bit:
 
         # Print backspaces to move the text cursor to the line's start:
         print('\b' * len(barStr), end='', flush=True)

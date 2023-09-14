@@ -5,21 +5,6 @@ import random
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
 print('2 進位整數運算')
 x = 0b1101          # 這是2進位整數
 print(x)            # 列出10進位的結果
@@ -114,9 +99,6 @@ d = r*math.acos(math.sin(math.radians(x1))*math.sin(math.radians(x2))+
                 math.cos(math.radians(y1-y2)))
 
 print(f"distance = {d:6.1f}")
-
-
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -306,10 +288,10 @@ msg = 'sonsonsonsonson'
 pattern = '(son){3,5}?'     # 非貪婪模式
 searchStr(pattern,msg)
 
-
 print('------------------------------------------------------------')	#60個
 
 import re
+
 # 測試1將字串從句子分離
 msg = 'John, Johnson, Johnnason and Johnnathan will attend my party tonight.'
 pattern = '\w+'                    # 不限長度的單字
@@ -320,7 +302,6 @@ msg = 'John, Johnson, Johnnason and Johnnathan will attend my party tonight.'
 pattern = 'John\w*'                # John開頭的單字
 txt = re.findall(pattern,msg)      # 傳回搜尋結果
 print(txt)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -333,8 +314,8 @@ print(txt)
 
 print('------------------------------------------------------------')	#60個
 
-
 import re
+
 # 測試1搜尋[aeiouAEIOU]字元
 msg = 'John, Johnson, Johnnason and Johnnathan will attend my party tonight.'
 pattern = '[aeiouAEIOU]'           
@@ -346,10 +327,10 @@ pattern = '[2-5.]'
 txt = re.findall(pattern,msg)      # 傳回搜尋結果
 print(txt)
 
-
 print('------------------------------------------------------------')	#60個
 
 import re
+
 # 測試1搜尋不在[aeiouAEIOU]的字元
 msg = 'A party tonight.'
 pattern = '[^aeiouAEIOU]'           
@@ -361,10 +342,10 @@ pattern = '[^2-5.]'
 txt = re.findall(pattern,msg)      # 傳回搜尋結果
 print(txt)
 
-
 print('------------------------------------------------------------')	#60個
 
 import re
+
 # 測試1搜尋John字串在最前面
 msg = 'John will attend my party tonight.'
 pattern = '^John'           
@@ -378,8 +359,8 @@ print(txt)
 
 print('------------------------------------------------------------')	#60個
 
-# ch16_20.ipynb
 import re
+
 # 測試1搜尋最後字元是非英文字母數字和底線字元
 msg = 'John will attend my party 28 tonight.'
 pattern = '\W$'           
@@ -401,12 +382,10 @@ pattern = '\d$'
 txt = re.findall(pattern,msg)      # 傳回搜尋結果
 print(txt)
 
-
 print('------------------------------------------------------------')	#60個
 
-
-# ch16_21.ipynb
 import re
+
 # 測試1搜尋開始到結尾皆是數字的字串
 msg = '09282028222'
 pattern = '^\d+$'           
@@ -420,8 +399,8 @@ print(txt)
 
 print('------------------------------------------------------------')	#60個
 
-# ch16_22.ipynb
 import re
+
 msg = 'cat hat sat at matter flat'
 pattern = '.at'           
 txt = re.findall(pattern,msg)      # 傳回搜尋結果
@@ -429,7 +408,6 @@ print(txt)
 
 print('------------------------------------------------------------')	#60個
 
-# ch16_23.ipynb
 import re
 
 msg = 'Name: Jiin-Kwei Hung Address: 8F, Nan-Jing E. Rd, Taipei'
@@ -441,8 +419,8 @@ print("Address: ", Address)
 
 print('------------------------------------------------------------')	#60個
 
-# ch16_24.ipynb
 import re
+
 #測試1搜尋除了換列字元以外字元
 msg = 'Name: Jiin-Kwei Hung \nAddress: 8F, Nan-Jing E. Rd, Taipei'
 pattern = '.*'
@@ -454,12 +432,10 @@ pattern = '.*'
 txt = re.search(pattern,msg,re.DOTALL) # 傳回搜尋含換列字元結果
 print("測試2輸出: ", txt.group())
 
-
-
 print('------------------------------------------------------------')	#60個
 
-# ch16_25.ipynb
 import re
+
 #測試1搜尋使用re.match()
 msg = 'John will attend my party tonight.'  # John是第一個字串
 pattern = 'John'
@@ -477,8 +453,8 @@ else:
     print("測試2搜尋失敗")
 print('------------------------------------------------------------')	#60個
 
-# ch16_26.ipynb
 import re
+
 #測試1搜尋使用re.match()
 msg = 'John will attend my party tonight.'  
 pattern = 'John'
@@ -496,8 +472,8 @@ else:
     
 print('------------------------------------------------------------')	#60個
 
-# ch16_27.ipynb
 import re
+
 #測試1搜尋使用re.match()
 msg = 'John will attend my party tonight.'  
 pattern = 'John'
@@ -513,11 +489,11 @@ if txt != None:
     print("搜尋成功字串的起始索引位置 :  ", txt.start())
     print("搜尋成功字串的結束索引位置 :  ", txt.end())
     print("搜尋成功字串的結束索引位置 :  ", txt.span())
+
 print('------------------------------------------------------------')	#60個
 
-
-# ch16_28.ipynb
 import re
+
 #測試1取代使用re.sub()結果成功
 msg = 'Eli Nan will attend my party tonight. My best friend is Eli Nan'  
 pattern = 'Eli Nan'                 # 欲搜尋字串        
@@ -534,12 +510,11 @@ if txt != msg:                      # 如果txt與msg內容不同表示取代成
     print("取代成功: ", txt)        # 列出成功取代結果
 else:
     print("取代失敗: ", txt)        # 列出失敗取代結果
-
     
 print('------------------------------------------------------------')	#60個
 
-# ch16_29.ipynb
 import re
+
 # 使用隱藏文字執行取代
 msg = 'CIA Mark told CIA Linda that secret USB had given to CIA Peter.'
 pattern = r'CIA (\w)\w*'            # 欲搜尋CIA + 空一格後的名字        
@@ -548,6 +523,28 @@ txt = re.sub(pattern,newstr,msg)    # 執行取代
 print("取代成功: ", txt)            # 列出取代結果
 
 print('------------------------------------------------------------')	#60個
+
+import re
+
+msg = '''txt@deepmind.com.tw
+         kkk@gmail.com,
+         abc@aa
+         abcdefg'''
+pattern = r'''(
+    [a-zA-Z0-9_.]+                  # 使用者帳號
+    @                               # @符號
+    [a-zA-Z0-9-.]+                  # 主機域名domain
+    [\.]                            # .符號
+    [a-zA-Z]{2,4}                   # 可能是com或edu或其它
+    ([\.])?                         # .符號, 也可能無特別是美國
+    ([a-zA-Z]{2,4})?                # 國別
+    )'''
+eMail = re.findall(pattern, msg, re.VERBOSE)     # 傳回搜尋結果
+print("以下是符合的電子郵件地址")
+for mail in eMail:
+    print(mail[0])
+    
+    
 
 
 print('------------------------------------------------------------')	#60個

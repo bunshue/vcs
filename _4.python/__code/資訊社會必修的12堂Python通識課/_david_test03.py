@@ -5,6 +5,7 @@
 
 import requests
 
+'''
 print('------------------------------------------------------------')	#60個
 
 from urllib.parse import urlparse
@@ -155,9 +156,11 @@ for i, book in enumerate(books):
     for info in book.find("ul").find_all("li"):
         print(info.text)
     print()
+'''
 
 print('------------------------------------------------------------')	#60個
 
+''' fail
 import requests
 from bs4 import BeautifulSoup
 url = "https://www.edu.tw/News.aspx?n=9E7AC85F1954DDA8&sms=169B8E91BB75571F"
@@ -170,7 +173,7 @@ for row in soup.find_all("tr"):
         a = cell.find("a")
         if a is not None:
             print(a.text)
-
+'''
 print('------------------------------------------------------------')	#60個
 
 import requests

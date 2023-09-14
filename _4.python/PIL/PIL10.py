@@ -7,8 +7,8 @@
 #顯示
 #image.show()
 
-
 '''
+
 import os
 import sys
 import time
@@ -22,6 +22,12 @@ from PIL import ImageFont
 from PIL import ImageChops
 
 import matplotlib.pyplot as plt
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print('------------------------------------------------------------')	#60個
 
 print('PIL 無圖處理')
 
@@ -55,7 +61,6 @@ plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 
 image = Image.new('RGBA', (300, 100), "Yellow")
 
@@ -123,14 +128,14 @@ print('無影像之PIL畫圖3')
 newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
 drawObj = ImageDraw.Draw(newImage)
 
-strText = 'Ming-Chi Institute of Technology'        # 設定欲列印英文字串
+strText = 'Welcome to the United States'        # 設定欲列印英文字串
 drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
 # 使用古老英文字型, 
 fontInfo = ImageFont.truetype('OLDENGL.TTF', 36)
 drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
-# 使用Google公司的NotoSansTC-Bold.otf中文字型
-strCtext = '明志科技大學'                           # 設定欲列印中文字串
-fontInfo = ImageFont.truetype('NotoSansTC-Bold.otf', 48)
+
+strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
+fontInfo = ImageFont.truetype(font_filename, 48)
 drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
 
 plt.imshow(newImage)
@@ -143,11 +148,10 @@ print('無影像之PIL畫圖4')
 newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
 drawObj = ImageDraw.Draw(newImage)
 
-strText = 'Ming-Chi Institute of Technology'        # 設定欲列印英文字串
-# 使用Google公司的NotoSansTC-Bold.otf中文字型
-strCtext = '明志科技大學'                           # 設定欲列印中文字串
+strText = 'Welcome to the United States'        # 設定欲列印英文字串
+strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
 
-fontInfo = ImageFont.truetype('NotoSansTC-Bold.otf', 48)
+fontInfo = ImageFont.truetype(font_filename, 48)
 drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
 
 plt.imshow(newImage)
@@ -155,13 +159,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
 print('PIL 有圖處理')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 image = Image.open(filename)     # 建立Pillow物件
 print("列出物件檔名 : ", image.filename)
@@ -188,7 +186,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image = Image.open(filename)     # 建立Pillow物件
 
 plt.imshow(image.rotate(90))    # 旋轉90度
@@ -202,7 +199,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image = Image.open(filename)     # 建立Pillow物件
 
 plt.imshow(image.rotate(45))   # 旋轉45度
@@ -213,7 +209,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image = Image.open(filename)     # 建立Pillow物件
 
 print('左右相反')
@@ -226,7 +221,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image = Image.open(filename)     # 建立Pillow物件
 
 x_st = 0
@@ -242,7 +236,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image = Image.open(filename)     # 建立Pillow物件
 
 print('複製圖片')
@@ -266,7 +259,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image = Image.open(filename)     # 建立Pillow物件
 
 print('複製圖片')
@@ -292,7 +284,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image = Image.open(filename)     # 建立Pillow物件
 
 print('ImageFilter.BLUR')
@@ -305,6 +296,21 @@ filterPict = image.filter(ImageFilter.CONTOUR)
 plt.imshow(filterPict)
 plt.show()
 
+print('ImageFilter.DETAIL')
+filterPict = image.filter(ImageFilter.DETAIL)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.EDGE_ENHANCE')
+filterPict = image.filter(ImageFilter.EDGE_ENHANCE)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.EDGE_ENHANCE_MORE')
+filterPict = image.filter(ImageFilter.EDGE_ENHANCE_MORE)
+plt.imshow(filterPict)
+plt.show()
+
 print('ImageFilter.EMBOSS')
 filterPict = image.filter(ImageFilter.EMBOSS)
 plt.imshow(filterPict)
@@ -312,6 +318,21 @@ plt.show()
 
 print('ImageFilter.FIND_EDGES')
 filterPict = image.filter(ImageFilter.FIND_EDGES)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.SMOOTH')
+filterPict = image.filter(ImageFilter.SMOOTH)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.SMOOTH_MORE')
+filterPict = image.filter(ImageFilter.SMOOTH_MORE)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.SHARPEN')
+filterPict = image.filter(ImageFilter.SHARPEN)
 plt.imshow(filterPict)
 plt.show()
 
@@ -334,13 +355,36 @@ image2_path = 'face.jpg'
 is_similar = compare_images(image1_path, image2_path)
 print('相似度:', is_similar)
 
+print('------------------------------------------------------------')	#60個
+
+image1 = Image.open(filename)        # 建立Pillow物件
+newPic = image1.resize((350,500))
+
+nwidth, nheight = 450, 600
+image2 = Image.new('RGB', (nwidth, nheight), "Yellow")
+
+image2.paste(newPic, (50,50))
+
+plt.imshow(image2)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+image1 = Image.open(filename)        # 建立Pillow物件
+newPic = image1.resize((350,500))
 
+nwidth, nheight = 450, 700
+image2 = Image.new('RGB', (nwidth, nheight), "Yellow")
+
+image2.paste(newPic, (50,50))
+
+drawObj = ImageDraw.Draw(image2)
+name = "牡丹亭"
+fontInfo = ImageFont.truetype(font_filename, 60)
+drawObj.text((140,600), name, fill='Blue', font=fontInfo)
+
+plt.imshow(image2)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-
-
 
