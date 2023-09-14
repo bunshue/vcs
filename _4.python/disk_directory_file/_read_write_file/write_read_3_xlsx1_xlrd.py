@@ -13,6 +13,8 @@ print(s1)
 print(s2)
 
 
+print('------------------------------------------------------------')	#60個
+
 import pprint as pp
 import xlrd
 
@@ -33,6 +35,7 @@ for sheet in sheets:
     scores[sheet.name] = rows
 pp.pprint(scores)
 
+print('------------------------------------------------------------')	#60個
 
 
 import xlrd
@@ -43,6 +46,8 @@ for row in range(s1.nrows):
     print(s1.row_values(row))
 
 '''
+
+print('------------------------------------------------------------')	#60個
 
 
 import xlrd
@@ -75,5 +80,45 @@ for n in range(len(data.sheet_names())):
         print('Page {}: '.format(n), end='')
         print(table.col_values(i))
 
+print('------------------------------------------------------------')	#60個
+
+print('用xlwt寫入xls檔案')
+
+import xlwt
+
+fn = 'tmptmp.xls'
+datahead = ['Phone', 'TV', 'Notebook']
+price = ['35000', '18000', '28000']
+wb = xlwt.Workbook()
+sh = wb.add_sheet('sheet1', cell_overwrite_ok=True)
+for i in range(len(datahead)):
+    sh.write(0, i, datahead[i])     # 寫入datahead list
+for j in range(len(price)):
+    sh.write(1, j, price[j])        # 寫入price list
+
+wb.save(fn)
+
+print('------------------------------------------------------------')	#60個
+
+print('用xlrd讀取xls檔案')
+import xlrd
+
+fn = 'tmptmp.xls'
+wb = xlrd.open_workbook(fn)
+sh = wb.sheets()[0]
+rows = sh.nrows
+for row in range(rows):
+    print(sh.row_values(row))
+    
+
+print('------------------------------------------------------------')	#60個
+
+
         
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
 

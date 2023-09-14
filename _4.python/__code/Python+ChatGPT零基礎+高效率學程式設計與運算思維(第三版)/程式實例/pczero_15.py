@@ -3,18 +3,16 @@ import sys
 import time
 import random
 
-print('------------------------------------------------------------')	#60個
-
-
-# ch24_1.ipynb
-!wget -O TaipeiSansTCBeta-Regular.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-import matplotlib as mpl
-from matplotlib.font_manager import fontManager
 import matplotlib.pyplot as plt
 import numpy as np
 
-fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
-mpl.rc('font', family='Taipei Sans TC Beta')
+print('------------------------------------------------------------')	#60個
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+print('------------------------------------------------------------')	#60個
 
 x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,21,22,23,24]
 y = [100,88,75,60,50,55,55,56,58,58,61,63,68,71,71,75,76,88,93,97,97,100]
@@ -31,13 +29,9 @@ plt.plot(reg,model(reg),color='red')
          
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
-
-# ch24_2.ipynb
 from sklearn.metrics import r2_score
-import numpy as np
 
 x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,21,22,23,24]
 y = [100,88,75,60,50,55,55,56,58,58,61,63,68,71,71,75,76,88,93,97,97,100]
@@ -46,13 +40,9 @@ coef = np.polyfit(x, y, 3)                              # 迴歸直線係數
 model = np.poly1d(coef)                                 # 線性迴歸方程式
 print(r2_score(y, model(x)).round(3))
 
-
 print('------------------------------------------------------------')	#60個
 
-
-# ch24_3.ipynb
 from sklearn.metrics import r2_score
-import numpy as np
 
 x = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19,21,22,23,24]
 y = [100,88,75,60,50,55,55,56,58,58,61,63,68,71,71,75,76,88,93,97,97,100]
@@ -62,13 +52,8 @@ model = np.poly1d(coef)                             # 線性迴歸方程式
 print(f"18點購物人數預測 = {model(18).round(2)}")
 print(f"20點購物人數預測 = {model(20).round(2)}")
 
-
-
 print('------------------------------------------------------------')	#60個
 
-# ch24_4.ipynb
-import matplotlib.pyplot as plt
-import numpy as np
 from sklearn import datasets
 
 np.random.seed(3)               # 設計隨機數種子
@@ -78,24 +63,13 @@ x, y = datasets.make_regression(n_samples=100,
 plt.xlim(-3, 3)
 plt.ylim(-150, 150)
 plt.scatter(x,y)
+
 plt.show()
-
-
 
 print('------------------------------------------------------------')	#60個
 
-
-# ch24_5.ipynb
-!wget -O TaipeiSansTCBeta-Regular.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-import matplotlib as mpl
-from matplotlib.font_manager import fontManager
-import matplotlib.pyplot as plt
-import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
-
-fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
-mpl.rc('font', family='Taipei Sans TC Beta')
 
 np.random.seed(3)                           # 設計隨機數種子
 x, y = datasets.make_regression(n_samples=100,
@@ -109,15 +83,11 @@ plt.ylim(-150, 150)
 plt.scatter(x_train,y_train,label="訓練數據")
 plt.scatter(x_test,y_test,label="測試數據")
 plt.legend()
+
 plt.show()
 
-
-
 print('------------------------------------------------------------')	#60個
-
-# ch24_6.ipynb
-import matplotlib.pyplot as plt                                  
-import numpy as np
+                                 
 from sklearn import linear_model
 
 x = np.array([[22],[26],[23],[28],[27],[32],[30]])  # 溫度
@@ -136,16 +106,12 @@ plt.plot(x, y2)                                 # 繪製迴歸直線
 
 sold = a*31 + b
 print(f"氣溫31度時的銷量 = {int(sold)}")
-plt.plot(31, int(sold), '-o') 
-plt.show()            
+plt.plot(31, int(sold), '-o')
 
+plt.show()            
 
 print('------------------------------------------------------------')	#60個
 
-
-# ch24_7.ipynb
-import matplotlib.pyplot as plt
-import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn import linear_model
@@ -164,19 +130,10 @@ print(f'截距  = {e_model.intercept_.round(2)}')
 
 print('------------------------------------------------------------')	#60個
 
-# ch24_8.ipynb
-!wget -O TaipeiSansTCBeta-Regular.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-import matplotlib as mpl
-from matplotlib.font_manager import fontManager
-import matplotlib.pyplot as plt
-import numpy as np
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn import linear_model
 from sklearn.metrics import r2_score
-
-fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
-mpl.rc('font', family='Taipei Sans TC Beta')
 
 np.random.seed(3)                               # 設計隨機數種子
 x, y = datasets.make_regression(n_samples=100,
@@ -203,15 +160,11 @@ r2 = r2_score(y_test, y_pred)
 print(f'決定係數 = {r2.round(2)}')
 
 plt.legend()
+
 plt.show()
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
-
-# ch24_9.ipynb
 from sklearn.datasets import make_blobs
 
 data, label = make_blobs(n_samples=5,n_features=2,
@@ -219,25 +172,19 @@ data, label = make_blobs(n_samples=5,n_features=2,
 print(data)
 print(f"分類 : {label}")
 
-
 print('------------------------------------------------------------')	#60個
 
-# ch24_10.ipynb
-import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
 
 data, label = make_blobs(n_samples=200,n_features=2,
                          centers=2,random_state=0)
 plt.scatter(data[:,0], data[:,1], c=label, cmap='bwr')
 plt.grid(True)
+
 plt.show()
-
-
 
 print('------------------------------------------------------------')	#60個
 
-# ch24_11.ipynb
-import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 
@@ -246,12 +193,11 @@ data, label = make_blobs(n_samples=200,n_features=2,
 d_sta = StandardScaler().fit_transform(data)    # 標準化
 plt.scatter(d_sta[:,0], d_sta[:,1], c=label, cmap='bwr')
 plt.grid(True)
-plt.show()
 
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# ch24_12.ipynb
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -270,10 +216,8 @@ print(f"標籤數據外形 : {label.shape}")
 print(f"訓練數據外形 : {label_train.shape}")
 print(f"測試數據外形 : {label_test.shape}")
 
-
 print('------------------------------------------------------------')	#60個
 
-# ch24_13.ipynb
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -299,11 +243,8 @@ print(pred)
 print(f"訓練資料的準確性 = {k_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {k_model.score(dx_test, label_test)}")
 
-
 print('------------------------------------------------------------')	#60個
 
-
-# ch24_14.ipynb
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -329,12 +270,8 @@ print(pred)
 print(f"訓練資料的準確性 = {lo_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {lo_model.score(dx_test, label_test)}")
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
-# ch24_15.ipynb
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -362,7 +299,6 @@ print(f"測試資料的準確性 = {svm_model.score(dx_test, label_test)}")
 
 print('------------------------------------------------------------')	#60個
 
-# ch24_16.ipynb
 from sklearn.datasets import make_moons
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -392,7 +328,6 @@ print(f"非線性測試資料的準確性 = {svm.score(dx_test, label_test)}")
 
 print('------------------------------------------------------------')	#60個
 
-# ch24_17.ipynb
 from sklearn import datasets
 
 data, label = datasets.load_iris(return_X_y=True)
@@ -400,11 +335,8 @@ print("鳶尾花花萼和花瓣數據")
 print(data[0:5])
 print(f"分類 : {label[0:5]}")
 
-
-
 print('------------------------------------------------------------')	#60個
 
-# ch24_18.ipynb
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -423,12 +355,8 @@ pred = tree_model.predict(dx_test)
 print(f"訓練資料的準確性 = {tree_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {tree_model.score(dx_test, label_test)}")
 
-
-
 print('------------------------------------------------------------')	#60個
 
-
-# ch24_19.ipynb
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
@@ -447,18 +375,9 @@ pred = forest_model.predict(dx_test)
 print(f"訓練資料的準確性 = {forest_model.score(dx_train, label_train)}")
 print(f"測試資料的準確性 = {forest_model.score(dx_test, label_test)}")
 
-
 print('------------------------------------------------------------')	#60個
 
-# ch24_20.ipynp
-!wget -O TaipeiSansTCBeta-Regular.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-import matplotlib as mpl
-from matplotlib.font_manager import fontManager
-import matplotlib.pyplot as plt
 from sklearn import datasets
-
-fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
-mpl.rc('font', family='Taipei Sans TC Beta')
 
 # 建立 300 個點, n_features=2, centers=3
 data, label = datasets.make_blobs(n_samples=300, n_features=2,
@@ -468,13 +387,11 @@ data, label = datasets.make_blobs(n_samples=300, n_features=2,
 plt.scatter(data[:,0], data[:,1], marker="o", edgecolor="black")
 
 plt.title("無監督學習",fontsize=16)
-plt.show()
 
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# ch24_21.ipynb
-import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn import cluster
 
@@ -487,21 +404,10 @@ e.fit(data)                         # 將數據帶入物件, 做群集分析
 print(e.labels_)                    # 列印群集類別標籤
 print(e.cluster_centers_)           # 列印群集中心
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
-# ch24_22.ipynb
-!wget -O TaipeiSansTCBeta-Regular.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-import matplotlib as mpl
-from matplotlib.font_manager import fontManager
-import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn import cluster
-
-fontManager.addfont('TaipeiSansTCBeta-Regular.ttf')
-mpl.rc('font', family='Taipei Sans TC Beta')
 
 # 建立 300 個點, n_features=2, centers=3
 data, label = datasets.make_blobs(n_samples=300, n_features=2,
@@ -518,8 +424,8 @@ plt.scatter(data[:,0], data[:,1], marker="o", c=e.labels_)
 plt.scatter(e.cluster_centers_[:,0], e.cluster_centers_[:,1],marker="*",
             color="red")
 plt.title("無監督學習",fontsize=16)
-plt.show()
 
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
