@@ -5,6 +5,105 @@ import random
 
 print('------------------------------------------------------------')	#60個
 
+print('2 進位整數運算')
+x = 0b1101          # 這是2進位整數
+print(x)            # 列出10進位的結果
+y = 13              # 這是10進位整數
+print(bin(y))       # 列出轉換成2進位的結果
+print('8 進位整數運算')
+x = 0o57            # 這是8進位整數
+print(x)            # 列出10進位的結果
+y = 47              # 這是10進位整數
+print(oct(y))       # 列出轉換成8進位的結果
+print('16 進位整數運算')
+x = 0x5D            # 這是16進位整數
+print(x)            # 列出10進位的結果
+y = 93              # 這是10進位整數
+print(hex(y))       # 列出轉換成16進位的結果
+
+print('------------------------------------------------------------')	#60個
+
+x1 = "22"
+x2 = "33"
+x3 = x1 + x2
+print("type(x3) = ", type(x3))
+print("x3 = ", x3)             # 列印字串相加
+x4 = int(x1) + int(x2)
+print("type(x4) = ", type(x4))
+print("x4 = ", x4)             # 列印整數相加
+x5 = '1100'
+print("2進位  '1100' = ", int(x5,2))
+print("8進位  '22'   = ", int(x1,8))
+print("16進位 '22'   = ", int(x1,16))
+print("16進位 '5A'   = ", int('5A',16))
+
+print('------------------------------------------------------------')	#60個
+
+str1 = "Hello!\nPython"
+print("不含r字元的輸出")
+print(str1)
+str2 = r"Hello!\nPython"
+print("含r字元的輸出")
+print(str2)
+
+print('------------------------------------------------------------')	#60個
+
+x1 = 97
+x2 = chr(x1)      
+print(x2)               # 輸出數值97的字元
+x3 = ord(x2)
+print(x3)               # 輸出字元x3的Unicode(10進位)碼值
+x4 = '魁'
+print(hex(ord(x4)))     # 輸出字元'魁'的Unicode(16進位)碼值
+
+print('------------------------------------------------------------')	#60個
+
+x = 100
+print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
+
+print('------------------------------------------------------------')	#60個
+
+r = 5
+PI = 3.14159
+area = PI * r ** 2
+print("/半徑{0:3d}圓面積是{1:10.2f}/".format(r,area))
+print("/半徑{0:>3d}圓面積是{1:>10.2f}/".format(r,area))
+print("/半徑{0:<3d}圓面積是{1:<10.2f}/".format(r,area))
+print("/半徑{0:^3d}圓面積是{1:^10.2f}/".format(r,area))
+
+print('------------------------------------------------------------')	#60個
+
+r = 5
+PI = 3.14159
+area = PI * r ** 2
+print(f"/半徑{r:3d}圓面積是{area:10.2f}/")
+print(f"/半徑{r:>3d}圓面積是{area:>10.2f}/")
+print(f"/半徑{r:<3d}圓面積是{area:<10.2f}/")
+print(f"/半徑{r:^3d}圓面積是{area:^10.2f}/")
+
+print('------------------------------------------------------------')	#60個
+
+title = "南極旅遊講座"
+print("/{0:*^20s}/".format(title))
+
+print('------------------------------------------------------------')	#60個
+
+import math
+
+r = 6371                        # 地球半徑
+x1, y1 = 22.2838, 114.1731      # 香港紅磡車站經緯度
+x2, y2 = 25.0452, 121.5168      # 台北車站經緯度
+
+d = r*math.acos(math.sin(math.radians(x1))*math.sin(math.radians(x2))+
+                math.cos(math.radians(x1))*math.cos(math.radians(x2))*
+                math.cos(math.radians(y1-y2)))
+
+print(f"distance = {d:6.1f}")
+
+
+print('------------------------------------------------------------')	#60個
+
+
 import csv
 
 fn = 'csvReport.csv'
@@ -27,43 +126,11 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-left = -2 * np.pi
-right = 2 * np.pi
-x = np.linspace(left, right, 50)
-
-f1 = 3 * np.sin(x)                  # y陣列的變化
-f2 = np.sin(x)
-f3 = 0.2 * np.sin(x)
-
-plt.plot(x, f1) 
+''''
+#plt.plot(x, f1) 
+plt.plot(x, f1, '-go')
 plt.plot(x, f2, '-x')
-plt.plot(x, f3)
-plt.plot(x, f1, 'go')
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-trials = 2000
-Hits = 0
-radius = 50
-for i in range(trials):
-    x = np.random.randint(1, 100)               # x軸座標
-    y = np.random.randint(1, 100)               # y軸座標
-    if np.sqrt((x-50)**2 + (y-50)**2) < radius: # 在圓內
-        plt.scatter(x, y, marker='.', c='y')
-        Hits += 1
-    else:
-        plt.scatter(x, y, marker='.', c='g')    
-plt.axis('equal')
-plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
 import matplotlib.pyplot as plt
@@ -88,6 +155,8 @@ t = x                                       # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap='brg')
 plt.axis('off')
 plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

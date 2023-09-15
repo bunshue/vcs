@@ -49,10 +49,8 @@ for lottery in sorted(lotterys):            # 排序列印大樂透號碼
     print(lottery, end=" ")
 print(f"\n特別號:{specialNum}")             # 列印特別號
 
-
 print('------------------------------------------------------------')	#60個
 
-# ch13_21.ipynb
 import time                         # 導入模組time
 
 xtime = time.localtime()
@@ -68,12 +66,10 @@ print("星期幾   ", xtime[6])
 print("第幾天   ", xtime[7])
 print("夏令時間 ", xtime[8])
 
-
 print('------------------------------------------------------------')	#60個
 
-
-# ch13_22.ipynb
 import time
+
 x = 1000000
 pi = 0
 time.process_time()
@@ -85,7 +81,6 @@ for i in range(1,x+1):
 
 print('------------------------------------------------------------')	#60個
 
-# ch13_23.ipynb
 import sys
 
 print("目前Python版本是: ", sys.version)
@@ -94,17 +89,14 @@ print("目前Python版本是: ", sys.version_info)
 
 print('------------------------------------------------------------')	#60個
 
-# ch13_24.ipynb
 import keyword
 
 keywordLists = ['as', 'while', 'break', 'sse', 'Python']
 for x in keywordLists:
     print(f"{x:>8s} {keyword.iskeyword(x)}")
 
-
 print('------------------------------------------------------------')	#60個
 
-# ch13_25.ipynb
 import random
 
 trials = 1000000
@@ -118,10 +110,8 @@ PI = 4 * Hits / trials
 
 print("PI = ", PI)
 
-
 print('------------------------------------------------------------')	#60個
 
-# ch13_26.ipynb
 import string
 
 def encrypt(text, encryDict):           # 加密文件
@@ -142,11 +132,7 @@ ciphertext = encrypt(msg, encry_dict)
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
 
 sc = [['John', 80],['Tom', 90], ['Kevin', 77]]
 sc.sort(key = lambda x:x[1])

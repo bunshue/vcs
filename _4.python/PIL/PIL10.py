@@ -50,13 +50,13 @@ print(ImageColor.getcolor("Blue", "RGBA"))
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.new("RGB", (300, 180), "aqua")  # 建立aqua顏色影像
+image = Image.new('RGB', (300, 180), 'aqua')  # 建立aqua顏色影像
 plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.new("RGBA", (300, 180)) # 建立完全透明影像
+image = Image.new('RGBA', (300, 180)) # 建立完全透明影像
 plt.imshow(image)
 plt.show()
 
@@ -80,11 +80,10 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 print('無影像之PIL畫圖1')
 
-newImage = Image.new('RGBA', (300, 300), "Yellow")  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(newImage)
+image = Image.new('RGBA', (300, 300), "Yellow")  # 建立300*300黃色底的影像
+drawObj = ImageDraw.Draw(image)
 
 # 繪製點
 for x in range(100, 200, 3):
@@ -100,15 +99,15 @@ for x in range(150, 300, 10):
 for y in range(150, 300, 10):
     drawObj.line([(0,y), (y-150,300)], fill="Blue")    
 
-plt.imshow(newImage)
+plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 print('無影像之PIL畫圖2')
 
-newImage = Image.new('RGBA', (300, 300), 'Yellow')  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(newImage)
+image = Image.new('RGBA', (300, 300), 'Yellow')  # 建立300*300黃色底的影像
+drawObj = ImageDraw.Draw(image)
 
 drawObj.rectangle((0,0,299,299), outline='Black')   # 影像外框線
 drawObj.ellipse((30,60,130,100),outline='Black')    # 左眼外框
@@ -118,15 +117,15 @@ drawObj.ellipse((205,65,235,95),fill='Blue')        # 右眼
 drawObj.polygon([(150,120),(180,180),(120,180),(150,120)],fill='Aqua') # 鼻子
 drawObj.rectangle((100,210,200,240), fill='Red')    # 嘴   
 
-plt.imshow(newImage)
+plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 print('無影像之PIL畫圖3')
 
-newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(newImage)
+image = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
+drawObj = ImageDraw.Draw(image)
 
 strText = 'Welcome to the United States'        # 設定欲列印英文字串
 drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
@@ -138,15 +137,15 @@ strCtext = '歡迎來到美國'                           # 設定欲列印中�
 fontInfo = ImageFont.truetype(font_filename, 48)
 drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
 
-plt.imshow(newImage)
+plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 print('無影像之PIL畫圖4')
 
-newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(newImage)
+image = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
+drawObj = ImageDraw.Draw(image)
 
 strText = 'Welcome to the United States'        # 設定欲列印英文字串
 strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
@@ -154,7 +153,7 @@ strCtext = '歡迎來到美國'                           # 設定欲列印中�
 fontInfo = ImageFont.truetype(font_filename, 48)
 drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
 
-plt.imshow(newImage)
+plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -239,22 +238,22 @@ print('------------------------------------------------------------')	#60個
 image = Image.open(filename)     # 建立Pillow物件
 
 print('複製圖片')
-copyPict = image.copy() #複製圖片
-#plt.imshow(copyPict)
+image_copied = image.copy() #複製圖片
+#plt.imshow(image_copied)
 #plt.show()
 
 x_st = 0
 y_st = 0
 w = 305/4
 h = 400/4
-#                      x_st   y_st   x_sp     y_sp
-cropPict = copyPict.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間
-copyPict.paste(cropPict, (20, 20))          # 第一次合成
-copyPict.paste(cropPict, (20, 20 + 120))    # 第二次合成
-copyPict.paste(cropPict, (20, 20 + 240))    # 第三次合成
+#                             x_st  y_st    x_sp     y_sp
+cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間
+image_copied.paste(cropPict, (20, 20))          # 第一次合成
+image_copied.paste(cropPict, (20, 20 + 120))    # 第二次合成
+image_copied.paste(cropPict, (20, 20 + 240))    # 第三次合成
 
 print('合成圖片')
-plt.imshow(copyPict)
+plt.imshow(image_copied)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -262,24 +261,24 @@ print('------------------------------------------------------------')	#60個
 image = Image.open(filename)     # 建立Pillow物件
 
 print('複製圖片')
-copyPict = image.copy() #複製圖片
+image_copied = image.copy() #複製圖片
 
 x_st = 0
 y_st = 0
 w = 305/4
 h = 400/4
-#                      x_st   y_st   x_sp     y_sp
-cropPict = copyPict.crop((x_st, y_st, x_st + w, y_st + h))    # 裁切區間
+#                             x_st  y_st    x_sp     y_sp
+cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))    # 裁切區間
 cropWidth, cropHeight = cropPict.size           # 獲得裁切區間的寬與高
 
 width, height = 600, 320                        # 新影像寬與高
-newImage = Image.new('RGB', (width, height), "Yellow")  # 建立新影像
+image = Image.new('RGB', (width, height), "Yellow")  # 建立新影像
 for x in range(20, width-20, cropWidth):         # 雙層迴圈合成
     for y in range(20, height-20, cropHeight):
-        newImage.paste(cropPict, (x, y))        # 合成
+        image.paste(cropPict, (x, y))        # 合成
 
 print('合成圖片')
-plt.imshow(newImage)
+plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -338,10 +337,10 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-def compare_images(image1_path, image2_path, threshold=0.8):
+def compare_images(filename1, filename2, threshold=0.8):
     #比較兩張圖像的相似度，返回相似度值（0~1之間的浮點數）
-    image1 = Image.open(image1_path).convert('RGBA')
-    image2 = Image.open(image2_path).convert('RGBA')
+    image1 = Image.open(filename1).convert('RGBA')
+    image2 = Image.open(filename2).convert('RGBA')
     diff = ImageChops.difference(image1, image2)
     histogram = diff.histogram()
     pixels = sum(histogram)
@@ -350,9 +349,9 @@ def compare_images(image1_path, image2_path, threshold=0.8):
     return similarity >= threshold
 
 # 測試比較相似度
-image1_path = 'star.jpg'
-image2_path = 'face.jpg'
-is_similar = compare_images(image1_path, image2_path)
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.bmp'
+is_similar = compare_images(filename1, filename2)
 print('相似度:', is_similar)
 
 print('------------------------------------------------------------')	#60個

@@ -57,7 +57,6 @@ for i in range(1,x+1):
 
 print('------------------------------------------------------------')	#60個
 
-
 fields = ['Name', 'Age', 'Hometown']
 info = ['Peter', '30', 'Chicago']
 zipData = zip(fields, info)     # 執行zip
@@ -65,10 +64,8 @@ print(type(zipData))            # 列印zip資料類型
 player = list(zipData)          # 將zip資料轉成串列
 print(player)
 
-
 print('------------------------------------------------------------')	#60個
 
-# ch8_12.ipynb
 fields = ['Name', 'Age', 'Hometown']
 info = ['Peter', '30']
 zipData = zip(fields, info)   # 執行zip
@@ -78,8 +75,6 @@ print(player)                 # 列印串列
 
 print('------------------------------------------------------------')	#60個
 
-
-# ch8_13.ipynb
 fields = ['Name', 'Age', 'Hometown']
 info = ['Peter', '30', 'Chicago']
 zipData = zip(fields, info)     # 執行zip
@@ -90,7 +85,6 @@ print(player)                   # 列印串列
 f, i = zip(*player)             # 執行unzip
 print("fields = ", f)
 print("info   = ", i)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -109,11 +103,8 @@ for account, account_info in wechat_account.items( ):
     name = account_info['last_name'] + " " + account_info['first_name']
     print(f"姓名       = {name}")                      # 列印值(value)
     print(f"城市       = {account_info['city']}")      # 列印值(value)
-    
-
 
 print('------------------------------------------------------------')	#60個
-
 
 # 建立內含字典的字典
 wechat = {'cshung':{
@@ -129,10 +120,7 @@ print(f"wechat字典元素個數       {len(wechat)}")
 print(f"wechat['cshung']元素個數 {len(wechat['cshung'])}")
 print(f"wechat['kevin']元素個數  {len(wechat['kevin'])}")
 
-
-
 print('------------------------------------------------------------')	#60個
-
 
 word = 'deepmind'
 alphabetCount = {alphabet:word.count(alphabet) for alphabet in word}

@@ -1,5 +1,6 @@
 # Python implementation of a simple English Dictionary 
 #-----------------------Importing the Modules-----------------------
+
 import json
 import pyttsx3
 from difflib import get_close_matches
@@ -27,11 +28,11 @@ engine.setProperty('voice', voices[0].id)
 def speak(s):
     engine.say(s)
     engine.runAndWait()
+
 def speakWord():
     w=(str(e1.get())).lower()
     speak(w)
     text1.insert(END,"The word pronounced is %s" %w)
-    
 
 #-----------------------Finding the Meaning of the Word-----------------------
     
@@ -63,6 +64,7 @@ b2=Button(text='Speak',bg='black',fg='white',command=lambda: speakWord())
 b2.pack()
 text1=Text(font=('Times',20),height=12)
 text1.pack()
+
 window.geometry('500x520')
 window.mainloop()
 
