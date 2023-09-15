@@ -1,4 +1,4 @@
-# plot 集合 subplot的另一種寫法
+# plot 集合 subplot的另一種寫法 1
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -14,9 +14,7 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-print('subplot的另一種寫法')
+print('subplot的另一種寫法 1')
 import matplotlib.pyplot as plt 
 import numpy as np
 

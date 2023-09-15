@@ -146,11 +146,6 @@ plt.plot(x[y>0], y[y>0], 'o')
 #第三張圖
 plt.subplot(233)
 
-t = np.linspace(-np.pi*1.5, np.pi*1.5, 100)
-c = np.sinc(t)
-
-plt.plot(t, c)
-plt.fill(t, c)
 
 #第四張圖
 plt.subplot(234)

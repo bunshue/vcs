@@ -528,5 +528,120 @@ for mail in eMail:
 print('------------------------------------------------------------')	#60個
 
 
+import re
+
+pat = re.compile('[a-z]+')
+
+m = pat.findall('tem12po')
+print(m)  # ['tem', 'po']
+
+
+
+
 print('------------------------------------------------------------')	#60個
+
+import re
+
+ispythonprog = re.compile('^[a-zA-Z0-9_]+\.py$')
+def ispython(name):
+    return bool(ispythonprog.match(name))
+
+
+short_filename = 'picture1.jpg'
+status = ispython(short_filename)
+print(status)
+
+short_filename = 'test10_new02.py'
+status = ispython(short_filename)
+print(status)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+pat = r'[0-9+]+'
+s = "Amy was 18 year old,she likes Python and C++."
+m = re.findall(pat,s)
+print(m) # ['18', '++']
+
+print('------------------------------------------------------------')	#60個
+
+pat = r'PYTHON|ANDROID'
+s = "I like Python and Android!"
+m = re.findall(pat,s,re.I)
+print(m) #['Python', 'Android']
+
+print('------------------------------------------------------------')	#60個
+
+pat = r'.*'
+s = "Do your best,\nGo Go Go!"
+m = re.search(pat,s)
+print(m.group()) # Do your best,
+m2 = re.search(r'.*',s,re.DOTALL)
+print(m2.group()) # Do your best,\nGo Go Go!
+
+print('------------------------------------------------------------')	#60個
+
+reobj = re.compile(r'[a-z]+')
+m = reobj.findall('3tem12po')
+print(m) # ['tem', 'po']
+
+print('------------------------------------------------------------')	#60個
+
+pat = re.compile('[a-z]+')
+m = pat.findall('tem12po')
+print(m)  # ['tem', 'po']
+
+print('------------------------------------------------------------')	#60個
+
+m = re.findall(r'[a-z]+', 'abc123xyz')
+print(m)    # ['abc', 'xyz']
+
+print('------------------------------------------------------------')	#60個
+
+result = re.sub(r"\d+", "*", "Password:1234,ID:5678")
+print(result) # Password:*,ID:*
+
+print('------------------------------------------------------------')	#60個
+
+m = re.search(r'[a-z]+', 'abc123xyz')
+print(m)    # <re.Match object; span=(0, 3), match='abc'>
+if m != None:
+    print(m.group())  # abc
+    print(m.start())  # 0
+    print(m.end())    # 3
+    print(m.span())   # (0,3)
+
+print('------------------------------------------------------------')	#60個
+
+
+m = re.match(r'[a-z]+','abc123xyz')
+print(m) 
+if m != None:
+    print(m.group())    #abc
+    print(m.start())    #0
+    print(m.end())      #3
+    print(m.span())     #(0, 3)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
 

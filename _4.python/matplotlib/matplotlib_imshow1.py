@@ -63,6 +63,8 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 import matplotlib.pyplot as plt
 import matplotlib.image as img
 
+print('使用 matplotlib 顯示一圖')
+image = img.imread(filename)
 image = img.imread(filename)
 
 plt.imshow(image)	#顯示圖片, 兩行都要
@@ -83,6 +85,10 @@ plt.imshow(cut_img)	#顯示圖片, 兩行都要
 
 plt.show()
 
+
+import sys
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -126,7 +132,6 @@ imgplot.set_cmap('nipy_spectral')
 #第五張圖
 plt.subplot(235)
 
-
 #4 Color scale reference
 imgplot = plt.imshow(lum_img)
 plt.colorbar()
@@ -134,6 +139,16 @@ plt.colorbar()
 
 #第六張圖
 plt.subplot(236)
+
+import matplotlib.image as img
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+pict = img.imread(filename)
+plt.axis('off')
+plt.title('牡丹亭', fontsize=24)
+plt.imshow(pict)
 
 
 
@@ -229,6 +244,21 @@ im2 = plt.imshow(Z2, cmap=plt.cm.viridis, alpha=.9, interpolation='bilinear', ex
 
 #第三張圖
 plt.subplot(233)
+
+import matplotlib.image as img
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+
+pict = img.imread(filename)
+h, w, c = pict.shape
+print(f"圖檔高度   = {h}")
+print(f"圖檔寬度   = {w}")
+print(f"圖檔通道數 = {c}")
+plt.axis('off')
+plt.title('牡丹亭', fontsize=24)
+plt.imshow(pict)
 
 
 
@@ -393,6 +423,14 @@ plt.tight_layout()
 #第四張圖
 plt.subplot(234)
 
+
+img = np.array([[0, 1, 2, 3],
+                [4, 5, 6, 7],
+                [8, 9 , 10, 11],
+                [12, 13, 14, 15]])
+                
+plt.imshow(img, cmap='Blues')
+plt.colorbar()
 
 
 #第五張圖

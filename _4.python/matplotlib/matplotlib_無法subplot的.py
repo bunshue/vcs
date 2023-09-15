@@ -22,60 +22,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-#兩Y軸不同刻度
-#plot + plot
-
-x = np.linspace(0, 10, 50)
-sinus = np.sin(x)
-sinhs = np.sinh(x)
-
-fig, ax = plt.subplots()
-
-ax.plot(x, sinus, "r-o", label="Sin(x)")
-ax.set_xlabel("x", color="green")
-ax.set_ylabel("Sin(x)", color="red")
-ax.legend(loc="best")
-
-ax2 = ax.twinx()
-
-ax2.plot(x, sinhs, "g--", label="Sinh(x)")
-ax2.set_ylabel("Sinh(x)", color="blue")
-ax2.legend(loc="best")
-
-ax.set_title('兩Y軸不同刻度 plot + plot', size=20)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#兩Y軸不同刻度
-#plot + bar
-
-import matplotlib.gridspec as gridspec
-
-x = np.linspace(0, 6.28, 10)
-y = np.sin(x * 2)
-y2 = np.sin(x * 2) * np.sin(x * 2) *10
-
-fig = plt.figure(figsize=(12, 8))	#圖像大小[英吋]
-gs = gridspec.GridSpec(4, 1, figure=fig)
-ax = fig.add_subplot()
-
-ax.plot(x, y, marker="", alpha=0.8)
-ax.grid(20)
-
-axx = ax.twinx()
-axx.bar(x, y2,
-        alpha=0.2,
-        label="hold_volume",
-        color="pink",
-)
-ax.set_title('兩Y軸不同刻度 plot + bar', size=20)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
@@ -198,38 +144,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# plot 集合
-
-#          編號                                     圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = '不使用subplot畫多圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-print("在圖表的指定地方畫圖, 不用subplot")
-
-listx = [1, 2, 3, 4, 5]
-listy = [15, 50, 80, 40, 70]
-
-print("1左下開始(0.1, 0.1), w = 0.3, h = 0.3, 左下圖")
-plt.axes([0.1, 0.1, 0.3, 0.3])
-plt.plot(listx, listy, 'r-s')
-
-print("2左下開始(0.6, 0.1), w = 0.3, h = 0.3, 右下圖")
-plt.axes([0.6, 0.1, 0.3, 0.3])
-plt.plot(listx, listy, 'g--o')
-
-print("3左下開始(0.1, 0.6), w = 0.3, h = 0.3, 左上圖")
-plt.axes([0.1, 0.6, 0.3, 0.3])
-plt.plot(listx, listy, 'b-s')
-
-print("4左下開始(0.6, 0.6), w = 0.3, h = 0.3, 右上圖")
-plt.axes([0.6, 0.6, 0.3, 0.3])
-plt.plot(listx, listy, 'y--o')
-
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-
 x = np.linspace(-2*np.pi, 2*np.pi, 200)
 y = np.sin(x)
 
@@ -238,7 +152,6 @@ ax.set_facecolor('#69b8bb')
 ax.set_xlim(-6,6)
 ax.set_ylim(-1.2,1.2)
 plt.plot(x,y,lw=5,c='white')
-
 
 #移動 x, y 座標軸
 ax = plt.gca()
@@ -306,7 +219,6 @@ print('------------------------------------------------------------')	#60個
 
 θ = np.linspace(0, 2*π, 500)
 
-
 r = 3
 x = r * np.cos(θ)
 y = r * np.sin(θ)
@@ -317,12 +229,9 @@ ax.set_aspect('equal')
 
 plt.plot(x, y)
 
-
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
-
 
 r = 1 - np.sin(θ)
 
@@ -335,11 +244,6 @@ ax.set_aspect('equal')
 plt.plot(x, y, 'r')
 
 plt.show()
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -399,83 +303,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#subplot 搭配 gridspec
-
-import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
-
-x = np.linspace(-np.pi, np.pi, num=100, endpoint=True)
-c,s,t = np.cos(x), np.sin(x), np.tan(x)
-
-# 建立 3x3 的 GridSpec 
-gs = gridspec.GridSpec(3, 3)
-
-# 第0列 第0張
-plt.subplot(gs[0, 0])
-plt.plot(x, c)
-
-# 第0列 第1張
-plt.subplot(gs[0, 1])
-plt.plot(x, c)
-
-# 第0列 第2張
-plt.subplot(gs[0, 2])
-plt.plot(x, c)
-
-# 第1列，index 從 0 開始，也可用 [1,0:3] 表示
-plt.subplot(gs[1,:])
-plt.plot(x, c)
-
-# 第2列 第0張
-plt.subplot(gs[2, 0])
-plt.plot(x, c)
-
-# 第2列 第1張
-plt.subplot(gs[2, 1])
-plt.plot(x, c)
-
-# 第2列 第2張
-plt.subplot(gs[2, 2])
-plt.plot(x, s)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#直方圖
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-np.random.seed(0)
-
-# 平均 200，標準差為 25 的分佈
-mu = 200
-sigma = 25
-x = np.random.normal(mu, sigma, size=100)
-
-# 擁有兩張子圖，大小為 15x4 inch，dpi 分辨率 為 100 px/inch，故圖大小為 1500x400 px
-fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(15, 4), dpi=100)
-
-# 分成 5 組，背景為透明度為 0.75 的綠色，並且縱軸不做正規化處理為數量，直條的間距填滿
-ax0.hist(x, 5, histtype='stepfilled', facecolor='g', alpha=0.75)
-
-ax0.set_title('stepfilled\n' + r'$\mu = 200, \sigma=25$')
-
-# 自定分組，縱軸執行正規化處理表示為機率，直條的寬度大小為 80%
-bins = [100, 150, 180, 195, 205, 220, 250, 300]
-
-ax1.hist(x, bins, histtype='bar', rwidth=0.8)
-
-ax1.set_title('unequal bins\n' + r'$\mu = 200, \sigma=25$')
-
-# 緊密排列，並填滿原圖大小
-fig.tight_layout()
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 x = np.linspace(-2*np.pi, 2*np.pi, 100)
 plt.ylim((-1.2, 1.2))
 plt.plot(x, np.sin(x), label="SIN", linestyle="--")
@@ -510,14 +337,6 @@ ax.scatter(x, y, c=colors, marker='*')      # 繪製 sin
 ax.set_title("建立畫布與軸物件,使用OO API繪圖", fontsize=16)
 
 plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 
 print('------------------------------------------------------------')	#60個

@@ -3,10 +3,10 @@ import sys
 '''
 各種python專用的語法 字典 串列 元組 集合
 
-字典 dddd 大括號 {} 無順序 不可重複
-串列 llll 中括號 [] 有順序 允許重複
-元組 tttt 小括號 () 有順序 允許重複
-集合 ssss 大括號 {} 無順序 不可重複
+dict  字典 dddd 大括號 {} 無順序 不可重複 = 集合 + list  d = {"key :value", "key :value", ...}
+lsit  串列 llll 中括號 [] 有順序 允許重複 list中的data type不用一致
+tuple 元組 tttt 小括號 () 有順序 允許重複 不可變清單	常數list
+set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
 
 
 Collections(容器)

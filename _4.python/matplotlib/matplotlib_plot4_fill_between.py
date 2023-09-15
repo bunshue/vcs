@@ -70,6 +70,11 @@ plt.grid()
 #第四張圖
 plt.subplot(234)
 
+t = np.linspace(-np.pi*1.5, np.pi*1.5, 100)
+c = np.sinc(t)
+
+plt.plot(t, c)
+plt.fill(t, c)
 
 
 

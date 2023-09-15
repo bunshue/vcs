@@ -211,12 +211,6 @@ y = 0.5
 print("x**y = " + str(x ** y))
 
 print('------------------------------------------------------------')	#60個
-print('list 使用')
-lst = [3, 2, 1, 5, 9, 0]
-print(type(lst))
-print(lst)
-sorted(lst)
-print(lst)
 
 print('------------------------------------------------------------')	#60個
 
@@ -502,8 +496,6 @@ for page in range(1, 6):
 
 print('------------------------------------------------------------')	#60個
 
-if sys.version_info.major < 3 or sys.version_info.minor < 3:
-    sys.exit("Error: clinic.py requires Python 3.3 or greater.")
 
 print('------------------------------------------------------------')	#60個
 
@@ -756,9 +748,6 @@ def extract_version(module: ModuleType) -> Optional[str]:
 
 
 
-version_rows = [("platform", platform.platform()), ("Python", sys.version)]
-print(version_rows)
-
 modules = (
     "os", "sys", "cv2", "numpy", "PIL", "pylibjpeg",
     "openjpeg", "libjpeg",
@@ -836,26 +825,6 @@ ret = disk_usage(foldername)
 print(ret)
 
 print('------------------------------------------------------------')	#60個
-
-import re
-
-ispythonprog = re.compile('^[a-zA-Z0-9_]+\.py$')
-def ispython(name):
-    return bool(ispythonprog.match(name))
-
-
-short_filename = 'picture1.jpg'
-status = ispython(short_filename)
-print(status)
-
-short_filename = 'test10_new02.py'
-status = ispython(short_filename)
-print(status)
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 import os
 import sys
@@ -1075,12 +1044,9 @@ print(d1-d0)
 
 print('------------------------------------------------------------')	#60個
 
-
-import re
 import sys
 import time
 import random
-
 
 _FMT = '[Non-text (%(type)s) part of message omitted, filename %(filename)s]'
 print(_FMT)
@@ -1143,15 +1109,635 @@ print(platform.platform())
 
 print('------------------------------------------------------------')	#60個
 
-import re
 
-pat = re.compile('[a-z]+')
+msg = '''
+翠蓋龍旗出建章,鶯啼百囀柳初黃,
+昆池冰泮三山近,阿閣花深九陌香,
+徑轉虹梁通紫極,庭含玉樹隱霓裳,
+侍臣緩步隨鑾輅,岡上應看集鳳皇,
+小苑平臨太液池,金舖約戶鎖蟠螭,
+雲中帝座飛華蓋,城上鈞陳繞翠旗,
+紫氣旋面雙鳳閣,青松還有萬年枝,
+從來清蹕深嚴地,開盡碧桃人未知
+'''
 
-m = pat.findall('tem12po')
-print(m)  # ['tem', 'po']
+print(f"<鳳>出現的次數 : {msg.count('鳳')}")
+
+msg = msg.replace('Linda','Lxx')
+print(f"新的msg內容 : {msg}")
 
 
 
+print('------------------------------------------------------------')	#60個
+
+x = [[a, b, c] for a in range(1,20) for b in range(a,20) for c in range(b,20)
+     if a ** 2 + b ** 2 == c **2]
+print(x)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+for x in range(0x2160, 0x216a):
+  print(chr(x),end=' ')
+
+print()
+  
+print('------------------------------------------------------------')	#60個
+
+
+x = 1000000
+pi = 0
+for i in range(1,x+1):
+    pi += 4*((-1)**(i+1) / (2*i-1))
+    if i % 100000 == 0:      # 隔100000執行一次
+        print(f"當 {i = :7d} 時 PI = {pi:20.19f}")
+
+print('------------------------------------------------------------')	#60個
+
+fields = ['Name', 'Age', 'Hometown']
+info = ['Peter', '30', 'Chicago']
+zipData = zip(fields, info)     # 執行zip
+print(type(zipData))            # 列印zip資料類型
+player = list(zipData)          # 將zip資料轉成串列
+print(player)
+
+print('------------------------------------------------------------')	#60個
+
+fields = ['Name', 'Age', 'Hometown']
+info = ['Peter', '30']
+zipData = zip(fields, info)   # 執行zip
+print(type(zipData))          # 列印zip資料類型
+player = list(zipData)        # 將zip資料轉成串列
+print(player)                 # 列印串列
+
+print('------------------------------------------------------------')	#60個
+
+fields = ['Name', 'Age', 'Hometown']
+info = ['Peter', '30', 'Chicago']
+zipData = zip(fields, info)     # 執行zip
+print(type(zipData))            # 列印zip資料類型
+player = list(zipData)          # 將zip資料轉成串列
+print(player)                   # 列印串列
+
+f, i = zip(*player)             # 執行unzip
+print("fields = ", f)
+print("info   = ", i)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import random
+random.seed(5)  #固定亂數種子
+for i in range(5):
+    print(random.random())
+    
+
+
+print('------------------------------------------------------------')	#60個
+
+import random                       # 導入模組random
+
+for i in range(5):
+    print("uniform(1,10) : ", random.uniform(1, 10))
+
+print('------------------------------------------------------------')	#60個
+
+import random                   # 導入模組random
+
+for i in range(10):
+    print(random.choice([1,2,3,4,5,6]), end=",")
+
+print('------------------------------------------------------------')	#60個
+
+import random                 # 導入模組random
+
+porker = ['2', '3', '4', '5', '6', '7', '8',
+          '9', '10', 'J', 'Q', 'K', 'A']
+for i in range(3):
+    random.shuffle(porker)    # 將次序打亂重新排列
+    print(porker)
+
+print('------------------------------------------------------------')	#60個
+
+import random                               # 導入模組random
+
+lotterys = random.sample(range(1,50), 7)    # 7組號碼
+specialNum = lotterys.pop()                 # 特別號
+
+print("第xxx期大樂透號碼 ", end="")
+for lottery in sorted(lotterys):            # 排序列印大樂透號碼
+    print(lottery, end=" ")
+print(f"\n特別號:{specialNum}")             # 列印特別號
+
+print('------------------------------------------------------------')	#60個
+
+import time                         # 導入模組time
+
+xtime = time.localtime()
+print(xtime)                        # 列出目前系統時間
+print("年 ", xtime[0])
+print("年 ", xtime.tm_year)         # 物件設定方式顯示
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+print('------------------------------------------------------------')	#60個
+
+import time
+
+x = 1000000
+pi = 0
+time.process_time()
+for i in range(1,x+1):
+    pi += 4*((-1)**(i+1) / (2*i-1))
+    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
+        e_time = time.process_time()
+        print(f"當 {i=:7d} 時 PI={pi:8.7f}, 所花時間={e_time}")
+
+print('------------------------------------------------------------')	#60個
+
+import sys
+
+print("目前Python版本是: ", sys.version)
+print("目前Python版本是: ", sys.version_info)
+
+import sys
+print(sys.version_info)
+print("---")
+print(sys.platform)
+print("---")
+print(sys.argv)
+print("---")
+print(sys.path)
+
+version_rows = [("platform", platform.platform()), ("Python", sys.version)]
+print(version_rows)
+
+if sys.version_info.major < 3 or sys.version_info.minor < 3:
+    sys.exit("Error: clinic.py requires Python 3.3 or greater.")
+
+print('------------------------------------------------------------')	#60個
+
+import keyword
+print(keyword.kwlist)
+
+import keyword
+
+keywordLists = ['as', 'while', 'break', 'sse', 'Python']
+for x in keywordLists:
+    print(f"{x:>8s} {keyword.iskeyword(x)}")
+
+print('------------------------------------------------------------')	#60個
+
+import random
+
+trials = 1000000
+Hits = 0
+for i in range(trials):
+    x = random.random() * 2 - 1     # x軸座標
+    y = random.random() * 2 - 1     # y軸座標
+    if x * x + y * y <= 1:          # 判斷是否在圓內
+        Hits += 1
+PI = 4 * Hits / trials
+
+print("PI = ", PI)
+
+print('------------------------------------------------------------')	#60個
+
+import string
+
+def encrypt(text, encryDict):           # 加密文件
+    cipher = []
+    for i in text:                      # 執行每個字元加密
+        v = encryDict[i]                # 加密
+        cipher.append(v)                # 加密結果
+    return ''.join(cipher)              # 將串列轉成字串
+    
+abc = string.printable[:-5]             # 取消不可列印字元
+subText = abc[-3:] + abc[:-3]           # 加密字串
+encry_dict = dict(zip(subText, abc))    # 建立字典
+print("列印編碼字典\n", encry_dict)     # 列印字典
+
+msg = 'If the implementation is easy to explain, it may be a good idea.'
+ciphertext = encrypt(msg, encry_dict)
+
+print("原始字串 ", msg)
+print("加密字串 ", ciphertext)
+
+print('------------------------------------------------------------')	#60個
+
+sc = [['John', 80],['Tom', 90], ['Kevin', 77]]
+sc.sort(key = lambda x:x[1])
+print(sc)
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print(f"全域變數 : {globals()}")
+
+print('------------------------------------------------------------')	#60個
+
+# 定義lambda函數
+square = lambda x: x ** 2
+
+# 輸出平方值
+print(square(10))
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+def gcd(a, b):
+    if a < b:
+        a, b = b, a
+    while b != 0:
+        tmp = a % b
+        a = b
+        b = tmp
+    return a
+
+a, b = 24, 36
+print("最大公約數是 : ", gcd(a, b))
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import os
+
+print('顯示資料夾內的特定格式的檔案')
+
+def is_image(filename):
+    f = filename.lower()
+    return f.endswith('.png') or f.endswith('.jpg') or \
+           f.endswith('.jpeg') or f.endswith('.bmp') or \
+           f.endswith('.gif') or '.jpg' in f or f.endswith('.svg')
+
+
+def find_similar_images(foldername):
+    image_filenames = []
+    image_filenames += [os.path.join(foldername, path) for path in os.listdir(foldername) if is_image(path)]
+    for img in sorted(image_filenames):
+        print(img)
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+find_similar_images(foldername)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+import builtins
+print(dir(builtins))
+
+import time
+print(time.time())
+
+import time
+print(time.localtime())
+
+import time
+year, month, day, hour, minute, second, _, _, _ = time.localtime()
+print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
+
+import time
+print(time.asctime())
+
+import time
+print(time.strftime("%Y-%m-%d %H:%M:%S %a"))
+
+import datetime
+#當前的日期及時間
+print(datetime.datetime.now())
+
+import datetime
+
+
+today = datetime.datetime.today()
+birthday = datetime.datetime(2018,10,27, 17, 0, 0)
+print(today - birthday)
+
+from datetime import datetime
+now = datetime.now()
+print("今天是{}".format(datetime.strftime(now, "%Y-%m-%d")))
+date = input("請輸入一個日期（yyyy-mm-dd):")
+target = datetime.strptime(date, "%Y-%m-%d")
+diff = now-target
+print("到今天共經過了{}天。".format(diff.days))
+
+print('------------------------------------------------------------')	#60個
+
+import calendar
+print(calendar.month(2018,10))
+print(calendar.calendar(2019))
+
+
+print('------------------------------------------------------------')	#60個
+
+import os
+items = os.listdir()
+print(os.path.exists('myprime.py'))
+for item in items:
+    print(os.path.abspath(item))
+
+
+print('------------------------------------------------------------')	#60個
+
+import os
+fullpath = os.path.abspath('myprime.py')
+print(fullpath)
+print("os.path.basename:", os.path.basename(fullpath))
+print("os.path.dirname:", os.path.dirname(fullpath))
+print("os.path.getatime:", os.path.getatime(fullpath))
+print("os.path.getmtime:", os.path.getmtime(fullpath))
+print("os.path.getctime:", os.path.getctime(fullpath))
+print("os.path.getsize:", os.path.getsize(fullpath))
+print("os.path.isabs:", os.path.isabs(fullpath))
+print("os.path.isfile:", os.path.isfile(fullpath))
+print("os.path.isdir:", os.path.isdir(fullpath))
+print("os.path.split:", os.path.split(fullpath))
+print("os.path.splitdrive:", os.path.splitdrive(fullpath))
+print("os.path.splitext:", os.path.splitext(fullpath))
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+'''
+
+python的日期當中分成
+1. date(日期)
+2. time(時間)
+3. datetime(混合date跟time)
+4. timedelta(計算歷時期間的型態)
+5. timezone(處理時區資訊的型態)
+
+'''
+
+import datetime
+
+#輸出當前的日期及時間
+
+print(datetime.datetime.now())
+
+print(datetime.datetime.today())
+
+#而如果只想要輸出現在的日期的話則用
+print(datetime.date.today())
+
+
+#而如果要輸出此時準確的時間的話則
+
+import time
+print(time.localtime())
+
+#而我們也可以一一拆解
+
+tonow = datetime.datetime.now()
+print(tonow.year)
+print(tonow.month)
+print(tonow.day)
+
+#而我們也可以算今天是今年的第幾天
+
+dts = '20201007'
+dt = datetime.datetime.strptime(dts,"%Y%m%d")
+another_dts = dts[:4]+"0101"
+another_dt = datetime.datetime.strptime(another_dts,"%Y%m%d")
+print(int((dt-another_dt).days)+1)
+
+
+'''
+由上可得知datetime.datetime.strptime()這個是將所輸入的dts轉換成日期的格式則格式為後面的年月日，再來取出輸入的西元年加上"0101"後一樣轉換成日期的格式最後將輸入日期減掉設定日期後+1輸出成今天為今年的第幾天
+'''
+
+loc_dt = datetime.datetime.today() 
+time_del = datetime.timedelta(hours=3) 
+new_dt = loc_dt + time_del 
+datetime_format = new_dt.strftime("%Y/%m/%d %H:%M:%S")
+loc_dt_format = loc_dt.strftime("%Y/%m/%d %H:%M:%S")
+print(loc_dt_format)
+print(datetime_format)
+
+
+'''
+由上可得知我們也可以調整時差，將我們現在的時間加上3小時的時差並將其輸出出來，一開始我們將抓出本地的時間並且將變數time_del宣告為時差差三個小時，最後將其相加就變成有時差三個小時最後將其指定格式後輸出，而以此類推我們也可以將時差晚三個小時
+'''
+
+
+loc_dt = datetime.datetime.today() 
+time_del = datetime.timedelta(hours=3) 
+new_dt = loc_dt - time_del 
+datetime_format = new_dt.strftime("%Y/%m/%d %H:%M:%S")
+loc_dt_format = loc_dt.strftime("%Y/%m/%d %H:%M:%S")
+print(loc_dt_format)
+print(datetime_format)
+
+print('------------------------------------------------------------')	#60個
+
+import codecs
+import contextlib
+import io
+import locale
+import sys
+import unittest
+import warnings
+import encodings
+
+
+all_unicode_encodings = [
+    "ascii",
+    "big5",
+    "big5hkscs",
+    "charmap",
+    "cp037",
+    "cp1006",
+    "cp1026",
+    "cp1125",
+    "cp1140",
+    "cp1250",
+    "cp1251",
+    "cp1252",
+    "cp1253",
+    "cp1254",
+    "cp1255",
+    "cp1256",
+    "cp1257",
+    "cp1258",
+    "cp424",
+    "cp437",
+    "cp500",
+    "cp720",
+    "cp737",
+    "cp775",
+    "cp850",
+    "cp852",
+    "cp855",
+    "cp856",
+    "cp857",
+    "cp858",
+    "cp860",
+    "cp861",
+    "cp862",
+    "cp863",
+    "cp864",
+    "cp865",
+    "cp866",
+    "cp869",
+    "cp874",
+    "cp875",
+    "cp932",
+    "cp949",
+    "cp950",
+    "euc_jis_2004",
+    "euc_jisx0213",
+    "euc_jp",
+    "euc_kr",
+    "gb18030",
+    "gb2312",
+    "gbk",
+    "hp_roman8",
+    "hz",
+    "idna",
+    "iso2022_jp",
+    "iso2022_jp_1",
+    "iso2022_jp_2",
+    "iso2022_jp_2004",
+    "iso2022_jp_3",
+    "iso2022_jp_ext",
+    "iso2022_kr",
+    "iso8859_1",
+    "iso8859_10",
+    "iso8859_11",
+    "iso8859_13",
+    "iso8859_14",
+    "iso8859_15",
+    "iso8859_16",
+    "iso8859_2",
+    "iso8859_3",
+    "iso8859_4",
+    "iso8859_5",
+    "iso8859_6",
+    "iso8859_7",
+    "iso8859_8",
+    "iso8859_9",
+    "johab",
+    "koi8_r",
+    "koi8_u",
+    "latin_1",
+    "mac_cyrillic",
+    "mac_greek",
+    "mac_iceland",
+    "mac_latin2",
+    "mac_roman",
+    "mac_turkish",
+    "palmos",
+    "ptcp154",
+    "punycode",
+    "raw_unicode_escape",
+    "shift_jis",
+    "shift_jis_2004",
+    "shift_jisx0213",
+    "tis_620",
+    "unicode_escape",
+    "utf_16",
+    "utf_16_be",
+    "utf_16_le",
+    "utf_7",
+    "utf_8",
+]
+
+print(type(all_unicode_encodings))
+    
+for encoding in all_unicode_encodings:
+    name = codecs.lookup(encoding).name
+    print(name)
+
+for encoding in all_unicode_encodings:
+    reader = codecs.getreader(encoding)
+    print(reader)
+
+for encoding in all_unicode_encodings:
+    decoder = codecs.getdecoder(encoding)
+
+for encoding in all_unicode_encodings:
+    encoder = codecs.getencoder(encoding)
+
+
+ALL_CJKENCODINGS = [
+# _codecs_cn
+    'gb2312', 'gbk', 'gb18030', 'hz',
+# _codecs_hk
+    'big5hkscs',
+# _codecs_jp
+    'cp932', 'shift_jis', 'euc_jp', 'euc_jisx0213', 'shift_jisx0213',
+    'euc_jis_2004', 'shift_jis_2004',
+# _codecs_kr
+    'cp949', 'euc_kr', 'johab',
+# _codecs_tw
+    'big5', 'cp950',
+# _codecs_iso2022
+    'iso2022_jp', 'iso2022_jp_1', 'iso2022_jp_2', 'iso2022_jp_2004',
+    'iso2022_jp_3', 'iso2022_jp_ext', 'iso2022_kr',
+]
+
+
+
+for enc in ALL_CJKENCODINGS:
+    code = '# coding: {}\n'.format(enc)
+    print(code)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+ticks = time.time() #至今的tick數
+print(ticks)
+
+localtime = time.localtime(ticks)   #傳回時間元組
+print(type(localtime))
+print(localtime)
+
+print('年 :', localtime[0])
+print('月 :', localtime[1])
+print('日 :', localtime[2])
+print('時 :', localtime[3])
+print('分 :', localtime[4])
+print('秒 :', localtime[5])
+
+#asctime() #傳回時間元組的日期時間字串
+formattime = time.asctime(time.localtime(ticks))
+print(formattime)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
 
 
 
@@ -1161,9 +1747,20 @@ print('------------------------------------------------------------')	#60個
 
 
 
+print('------------------------------------------------------------')	#60個
+
+
 
 print('------------------------------------------------------------')	#60個
 
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
 
 
 
