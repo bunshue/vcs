@@ -22,7 +22,14 @@ namespace vcs_Draw6_String4
         int WordSize;
         int SelectFont;
 
-        Label lb_moving = new Label();
+        public Bitmap bitmap1 = null;
+
+        Label lb_moving1 = new Label();
+
+        bool flag_making_pictures = false;
+        int makeing_pictures_count = 0;
+
+        Font font;
 
         public Form1()
         {
@@ -31,33 +38,154 @@ namespace vcs_Draw6_String4
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string Path;
+            //檢查存圖的資料夾
+            Path = Application.StartupPath + "\\png2gif";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
+
+            Path = Application.StartupPath + "\\pngfiles";
+            if (Directory.Exists(Path) == false)     //確認資料夾是否存在
+            {
+                Directory.CreateDirectory(Path);
+                richTextBox1.Text += "已建立一個新資料夾: " + Path + "\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + Path + " 已存在，不用再建立\n";
+            }
+
             textBox1.Text = "世界和平統一家庭聯合會，簡稱統一教，原名世界基督教統一神靈協會，是由文鮮明於1954年在韓國創立的新興宗教。";
+            //textBox1.Text = "世界和平統一家庭聯合會，簡稱統一教，原名";
+            bitmap1 = (Bitmap)vcs_Draw6_String4.Properties.Resources.Unification_Church_symbol_svg;
 
             // 實例化控件
 
-            lb_moving.Text = textBox1.Text;
-            lb_moving.Font = new Font("標楷體", 22);
-            lb_moving.ForeColor = Color.Black;
-            lb_moving.Location = new Point(20, 20);
-            lb_moving.AutoSize = true;
-            this.pictureBox1.Controls.Add(lb_moving);     // 將控件加入表單
+            lb_moving1.Text = textBox1.Text;
+            lb_moving1.Font = new Font("標楷體", 22);
+            lb_moving1.ForeColor = Color.Black;
+            lb_moving1.Location = new Point(20, 20);
+            lb_moving1.AutoSize = true;
+            this.pictureBox1.Controls.Add(lb_moving1);     // 將控件加入表單
+            lb_moving1.BringToFront();
+            font = lb_moving1.Font;
+
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            nud_x_st.Value = lb_moving1.Location.X;
+            nud_y_st.Value = lb_moving1.Location.Y;
+            nud_w.Value = pictureBox1.Width;
+            nud_h.Value = pictureBox1.Height;
+
+            nud_x_st.ValueChanged += new EventHandler(setup_banner_profile);
+            nud_y_st.ValueChanged += new EventHandler(setup_banner_profile);
+            nud_w.ValueChanged += new EventHandler(setup_banner_profile);
+            nud_h.ValueChanged += new EventHandler(setup_banner_profile);
+        }
+
+        private void setup_banner_profile(object sender, EventArgs e)
+        {
+            int x_st = (int)nud_x_st.Value;
+            int y_st = (int)nud_y_st.Value;
+            int w = (int)nud_w.Value;
+            int h = (int)nud_h.Value;
+
+            //lb_moving1.Location = new Point(x_st, y_st);
+            lb_moving1.Location = new Point(lb_moving1.Location.X, y_st);
+            pictureBox1.Size = new Size(w, h);
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            lb_moving.Left -= 4;
-            if (lb_moving.Right < 0)
+            lb_moving1.Left -= 4;
+            if (lb_moving1.Right < 0)
             {
-                lb_moving.Left = this.Width;
+                lb_moving1.Left = pictureBox1.Width;
+                if (flag_making_pictures == true)
+                {
+                    flag_making_pictures = false;
+                    richTextBox1.Text += "製作完成";
+                    button1.BackColor = SystemColors.ControlLight;
+                }
             }
 
+            if (flag_making_pictures == true)
+            {
+                makeing_pictures_count += timer1.Interval;
+                if (makeing_pictures_count > 1000)
+                {
+                    makeing_pictures_count = 0;
+                    richTextBox1.Text += "X";
+
+                    save_picturebox_to_image();
+                }
+            }
         }
+
+        int cnt = 0;
+        void save_picturebox_to_image()
+        {
+            using (Bitmap bmp = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    //public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize);
+                    //g.CopyFromScreen(this.pictureBox1.Location, new Point(0, 0), new Size(this.pictureBox1.Width, this.pictureBox1.Height));
+
+                    int x_st = 5 + 3;
+                    int y_st = 10 + 5 + 5 + 5 + 5;
+                    int W = pictureBox1.Width + x_st;
+                    int H = pictureBox1.Height + y_st;
+                    g.CopyFromScreen(this.Location.X + pictureBox1.Location.X + (int)x_st, this.Location.Y + pictureBox1.Location.Y + (int)y_st, 0, 0, new Size(W, H));
+
+                    //richTextBox1.Text += "W = " + this.Width.ToString() + "\n";
+                    //richTextBox1.Text += "H = " + this.Height.ToString() + "\n";
+                    IntPtr dc1 = g.GetHdc();
+                    g.ReleaseHdc(dc1);
+                }
+
+                string filename = Application.StartupPath + "\\pngfiles\\png_" + cnt.ToString("D4") + ".png";
+
+                bmp.Save(filename, ImageFormat.Png);
+
+                //存成jpg檔
+                //String filename = Application.StartupPath + "\\picture\\image_this_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                //myImage.Save(filename, ImageFormat.Jpeg);
+                richTextBox1.Text += "本程式截圖，存檔檔名：" + filename + "\n";
+                cnt++;
+
+
+            }
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += textBox1.Text + "\n";
+            timer1.Enabled = false;
+
+            int x_st = (int)nud_x_st.Value;
+            int y_st = (int)nud_y_st.Value;
+            int w = (int)nud_w.Value;
+            int h = (int)nud_h.Value;
+
+            //lb_moving1.Location = new Point(x_st, y_st);
+            lb_moving1.Location = new Point(20, y_st);
+
+            makeing_pictures_count = 0;
+            flag_making_pictures = true;
+
+            timer1.Enabled = true;
+            button1.BackColor = Color.Red;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -105,8 +233,8 @@ namespace vcs_Draw6_String4
         private void bt_font_size_10_Click(object sender, EventArgs e)
         {
             WordSize = 10;
-            lb_moving.Font = new Font("標楷體", WordSize);
-            //lb_moving.Font.Size = 10F;
+            lb_moving1.Font = new Font("標楷體", WordSize);
+            //lb_moving1.Font.Size = 10F;
             //this.comboBox_drive.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
 
         }
@@ -114,50 +242,50 @@ namespace vcs_Draw6_String4
         private void bt_font_size_20_Click(object sender, EventArgs e)
         {
             WordSize = 20;
-            lb_moving.Font = new Font("標楷體", WordSize);
+            lb_moving1.Font = new Font("標楷體", WordSize);
 
         }
 
         private void bt_font_size_30_Click(object sender, EventArgs e)
         {
             WordSize = 30;
-            lb_moving.Font = new Font("標楷體", WordSize);
+            lb_moving1.Font = new Font("標楷體", WordSize);
 
         }
 
         private void bt_font_size_40_Click(object sender, EventArgs e)
         {
             WordSize = 40;
-            lb_moving.Font = new Font("標楷體", WordSize);
+            lb_moving1.Font = new Font("標楷體", WordSize);
 
         }
 
         private void bt_font_size_50_Click(object sender, EventArgs e)
         {
             WordSize = 50;
-            lb_moving.Font = new Font("標楷體", WordSize);
+            lb_moving1.Font = new Font("標楷體", WordSize);
         }
 
         private void bt_font_size_minus_Click(object sender, EventArgs e)
         {
-            float font_size = lb_moving.Font.Size;
+            float font_size = lb_moving1.Font.Size;
             if (font_size > 5)
             {
                 font_size--;
                 //字體變小
-                lb_moving.Font = new Font("新細明體", font_size);
+                lb_moving1.Font = new Font("新細明體", font_size);
             }
 
         }
 
         private void bt_font_size_plus_Click(object sender, EventArgs e)
         {
-            float font_size = lb_moving.Font.Size;
+            float font_size = lb_moving1.Font.Size;
             if (font_size < 100)
             {
                 font_size++;
                 //字體變大
-                lb_moving.Font = new Font("新細明體", font_size);
+                lb_moving1.Font = new Font("新細明體", font_size);
             }
 
         }
@@ -165,14 +293,14 @@ namespace vcs_Draw6_String4
         private void bt_fontname1_Click(object sender, EventArgs e)
         {
             SelectFont = 1;
-            lb_moving.Font = new Font("標楷體", WordSize);
+            lb_moving1.Font = new Font("標楷體", WordSize);
 
         }
 
         private void bt_fontname2_Click(object sender, EventArgs e)
         {
             SelectFont = 2;
-            lb_moving.Font = new Font("新細明體", WordSize);
+            lb_moving1.Font = new Font("新細明體", WordSize);
 
         }
 
@@ -183,77 +311,74 @@ namespace vcs_Draw6_String4
             fontDialog1.ShowEffects = true;
             fontDialog1.ShowHelp = true;
 
-            fontDialog1.Font = lb_moving.Font;
-            fontDialog1.Color = lb_moving.ForeColor;
+            fontDialog1.Font = lb_moving1.Font;
+            fontDialog1.Color = lb_moving1.ForeColor;
 
             if (fontDialog1.ShowDialog() == DialogResult.OK)
             {
-                lb_moving.Font = fontDialog1.Font;
-                lb_moving.ForeColor = fontDialog1.Color;
+                lb_moving1.Font = fontDialog1.Font;
+                lb_moving1.ForeColor = fontDialog1.Color;
             }
 
         }
 
         private void cb_font_style_CheckedChanged(object sender, EventArgs e)
         {
-
-
-
             if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
-                    lb_moving.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                    lb_moving1.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
                 else if (SelectFont == 2)
-                    lb_moving.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+                    lb_moving1.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
             }
             else if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
-                    lb_moving.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Italic);
+                    lb_moving1.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Italic);
                 else if (SelectFont == 2)
-                    lb_moving.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Italic);
+                    lb_moving1.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Italic);
             }
             else if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
-                    lb_moving.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Underline);
+                    lb_moving1.Font = new Font("標楷體", WordSize, FontStyle.Bold | FontStyle.Underline);
                 else if (SelectFont == 2)
-                    lb_moving.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Underline);
+                    lb_moving1.Font = new Font("新細明體", WordSize, FontStyle.Bold | FontStyle.Underline);
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
-                    lb_moving.Font = new Font("標楷體", WordSize, FontStyle.Italic | FontStyle.Underline);
+                    lb_moving1.Font = new Font("標楷體", WordSize, FontStyle.Italic | FontStyle.Underline);
                 else if (SelectFont == 2)
-                    lb_moving.Font = new Font("新細明體", WordSize, FontStyle.Italic | FontStyle.Underline);
+                    lb_moving1.Font = new Font("新細明體", WordSize, FontStyle.Italic | FontStyle.Underline);
             }
             else if ((cb_font_style1.Checked == true) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
-                    lb_moving.Font = new Font("標楷體", WordSize, FontStyle.Bold);
+                    lb_moving1.Font = new Font("標楷體", WordSize, FontStyle.Bold);
                 else if (SelectFont == 2)
-                    lb_moving.Font = new Font("新細明體", WordSize, FontStyle.Bold);
+                    lb_moving1.Font = new Font("新細明體", WordSize, FontStyle.Bold);
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == true))
             {
                 if (SelectFont == 1)
-                    lb_moving.Font = new Font("標楷體", WordSize, FontStyle.Underline);
+                    lb_moving1.Font = new Font("標楷體", WordSize, FontStyle.Underline);
                 else if (SelectFont == 2)
-                    lb_moving.Font = new Font("新細明體", WordSize, FontStyle.Underline);
+                    lb_moving1.Font = new Font("新細明體", WordSize, FontStyle.Underline);
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == true) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
-                    lb_moving.Font = new Font("標楷體", WordSize, FontStyle.Italic);
+                    lb_moving1.Font = new Font("標楷體", WordSize, FontStyle.Italic);
                 else if (SelectFont == 2)
-                    lb_moving.Font = new Font("新細明體", WordSize, FontStyle.Italic);
+                    lb_moving1.Font = new Font("新細明體", WordSize, FontStyle.Italic);
             }
             else if ((cb_font_style1.Checked == false) && (cb_font_style2.Checked == false) && (cb_font_style3.Checked == false))
             {
                 if (SelectFont == 1)
-                    lb_moving.Font = new Font("標楷體", WordSize, FontStyle.Regular);
+                    lb_moving1.Font = new Font("標楷體", WordSize, FontStyle.Regular);
                 else if (SelectFont == 2)
-                    lb_moving.Font = new Font("新細明體", WordSize, FontStyle.Regular);
+                    lb_moving1.Font = new Font("新細明體", WordSize, FontStyle.Regular);
             }
 
         }
@@ -272,12 +397,64 @@ namespace vcs_Draw6_String4
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            lb_moving.Text = textBox1.Text;
+            lb_moving1.Text = textBox1.Text;
+        }
+
+        void get_string_size(string text)
+        {
+            Font font = new Font("標楷體", 60);
+            //font = lb_moving1.Font;
+            /*
+            richTextBox1.Text += font + "\n";
+            richTextBox1.Text += font.Name + "\n";
+            richTextBox1.Text += font.Size + "\n";
+            richTextBox1.Text += "len = " + lb_moving1.Text.Length + "\n";
+            */
+            int tmp_width = 0;
+            int tmp_height = 0;
+            string str = text;
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            tmp_width = g.MeasureString(str, font).ToSize().Width;
+            tmp_height = g.MeasureString(str, font).ToSize().Height;
+            richTextBox1.Text += "len = " + str.Length + "\t";
+            richTextBox1.Text += "tmp_width = " + tmp_width.ToString() + "  tmp_height = " + tmp_height.ToString() + "\n";
+
+            return;
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+
+            //richTextBox1.Clear();
+            richTextBox1.Text += lb_moving1.Location.ToString() + "\n";
+
+            string text1 = "從顧客";
+            string text2 = "從顧客、競";
+            string text3 = "從顧客、競爭對";
+            string text4 = "從顧客、競爭對手、自家公";
+            string text5 = "從顧客、競爭對手、自家公司、";
+            string text6 = "從顧客、競爭對手、自家公司、通路找";
+            string text7 = "從顧客、競爭對手、自家公司、通路找出成功因素，";
+
+            string text = "從顧客、競爭對手、自家公司、通路找出成功因素，建立戰略的手法。";
+
+            //text = text2;
+            richTextBox1.Text += text + "\n";
+
+            int len = text.Length;
+            for (int i = 0; i < len; i++)
+            {
+                string tt = text.Substring(0, i+1);
+                richTextBox1.Text += tt + "\n";
+                get_string_size(tt);
+            }
+
+
+
+            //richTextBox1.Text += text1(0:10);
+
+
         }
 
         private void bt_background_color_Click(object sender, EventArgs e)
@@ -326,15 +503,68 @@ namespace vcs_Draw6_String4
 
                 //讀取圖檔, 先放在Bitmap裏
                 string filename = openFileDialog1.FileName;
-                Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+                bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
                 //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
                 //pictureBox1.Image = bitmap1;
                 bt_open_picture.BackgroundImage = bitmap1;
+                this.pictureBox1.Invalidate();
             }
             else
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            richTextBox1.Text += "c";
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            int w = bitmap1.Width;
+            int h = bitmap1.Height;
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            richTextBox1.Text += "w = " + h.ToString() + ", W = " + h.ToString() + "\n";
+
+            /*
+            //bm_contrast = new Bitmap(ww2, hh2);
+            Bitmap bmp = new Bitmap(W, H);
+
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.White);
+
+
+
+
+            //pictureBox1.BackgroundImage = bmp;
+            */
+
+            int ww = 100;
+            int hh = 100;
+            int x_st = (W - ww) / 2;
+            int y_st = 0;
+
+            try
+            {
+                // Draw the selection rectangle.
+                using (Pen pen = new Pen(Color.Red, 2))
+                {
+                    //原圖貼上
+                    //                      貼上位置x      貼上位置y      貼上大小W            貼上大小H
+                    //e.Graphics.DrawImage(bitmap1, x_st, y_st, bitmap1.Width * 12 / 10, bitmap1.Height * 12 / 10);
+                    e.Graphics.DrawImage(bitmap1, x_st, y_st, ww, hh);
+
+                    //Rectangle rect = SelectionRectangle(true);
+                    e.Graphics.DrawRectangle(pen, 0, 0, pictureBox1.Size.Width, pictureBox1.Size.Height);
+
+                    pen.Color = Color.Green;
+                    pen.DashPattern = new float[] { 5, 5 };
+                    e.Graphics.DrawRectangle(pen, 5, 5, pictureBox1.Size.Width - 10, pictureBox1.Size.Height - 10);
+                }
+            }
+            catch
+            {
+            }
+
         }
     }
 }

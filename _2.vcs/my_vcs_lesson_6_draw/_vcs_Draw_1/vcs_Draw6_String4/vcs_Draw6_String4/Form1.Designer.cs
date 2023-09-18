@@ -56,8 +56,22 @@
             this.bt_background_color = new System.Windows.Forms.Button();
             this.bt_open_picture = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.groupBox_selection = new System.Windows.Forms.GroupBox();
+            this.nud_h = new System.Windows.Forms.NumericUpDown();
+            this.lb_x_st = new System.Windows.Forms.Label();
+            this.nud_w = new System.Windows.Forms.NumericUpDown();
+            this.lb_h = new System.Windows.Forms.Label();
+            this.nud_y_st = new System.Windows.Forms.NumericUpDown();
+            this.nud_x_st = new System.Windows.Forms.NumericUpDown();
+            this.lb_y_st = new System.Windows.Forms.Label();
+            this.lb_w = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox5.SuspendLayout();
+            this.groupBox_selection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_w)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -74,6 +88,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(800, 100);
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // textBox1
             // 
@@ -284,7 +299,7 @@
             // bt_speed_minus
             // 
             this.bt_speed_minus.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_speed_minus.Location = new System.Drawing.Point(12, 410);
+            this.bt_speed_minus.Location = new System.Drawing.Point(12, 409);
             this.bt_speed_minus.Name = "bt_speed_minus";
             this.bt_speed_minus.Size = new System.Drawing.Size(112, 40);
             this.bt_speed_minus.TabIndex = 15;
@@ -295,7 +310,7 @@
             // bt_speed_plus
             // 
             this.bt_speed_plus.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_speed_plus.Location = new System.Drawing.Point(141, 410);
+            this.bt_speed_plus.Location = new System.Drawing.Point(130, 410);
             this.bt_speed_plus.Name = "bt_speed_plus";
             this.bt_speed_plus.Size = new System.Drawing.Size(112, 40);
             this.bt_speed_plus.TabIndex = 15;
@@ -316,7 +331,7 @@
             // bt_background_color
             // 
             this.bt_background_color.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_background_color.Location = new System.Drawing.Point(270, 410);
+            this.bt_background_color.Location = new System.Drawing.Point(248, 410);
             this.bt_background_color.Name = "bt_background_color";
             this.bt_background_color.Size = new System.Drawing.Size(112, 40);
             this.bt_background_color.TabIndex = 33;
@@ -335,11 +350,126 @@
             this.bt_open_picture.UseVisualStyleBackColor = true;
             this.bt_open_picture.Click += new System.EventHandler(this.bt_open_picture_Click);
             // 
+            // groupBox_selection
+            // 
+            this.groupBox_selection.Controls.Add(this.nud_h);
+            this.groupBox_selection.Controls.Add(this.lb_x_st);
+            this.groupBox_selection.Controls.Add(this.nud_w);
+            this.groupBox_selection.Controls.Add(this.lb_h);
+            this.groupBox_selection.Controls.Add(this.nud_y_st);
+            this.groupBox_selection.Controls.Add(this.nud_x_st);
+            this.groupBox_selection.Controls.Add(this.lb_y_st);
+            this.groupBox_selection.Controls.Add(this.lb_w);
+            this.groupBox_selection.Location = new System.Drawing.Point(367, 344);
+            this.groupBox_selection.Name = "groupBox_selection";
+            this.groupBox_selection.Size = new System.Drawing.Size(272, 106);
+            this.groupBox_selection.TabIndex = 250;
+            this.groupBox_selection.TabStop = false;
+            this.groupBox_selection.Text = "位置設定";
+            // 
+            // nud_h
+            // 
+            this.nud_h.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nud_h.Location = new System.Drawing.Point(179, 65);
+            this.nud_h.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nud_h.Name = "nud_h";
+            this.nud_h.Size = new System.Drawing.Size(74, 33);
+            this.nud_h.TabIndex = 16;
+            this.nud_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_x_st
+            // 
+            this.lb_x_st.AutoSize = true;
+            this.lb_x_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_x_st.Location = new System.Drawing.Point(13, 23);
+            this.lb_x_st.Name = "lb_x_st";
+            this.lb_x_st.Size = new System.Drawing.Size(47, 24);
+            this.lb_x_st.TabIndex = 6;
+            this.lb_x_st.Text = "x_st";
+            // 
+            // nud_w
+            // 
+            this.nud_w.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nud_w.Location = new System.Drawing.Point(179, 22);
+            this.nud_w.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nud_w.Name = "nud_w";
+            this.nud_w.Size = new System.Drawing.Size(74, 33);
+            this.nud_w.TabIndex = 15;
+            this.nud_w.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_h
+            // 
+            this.lb_h.AutoSize = true;
+            this.lb_h.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_h.Location = new System.Drawing.Point(155, 65);
+            this.lb_h.Name = "lb_h";
+            this.lb_h.Size = new System.Drawing.Size(21, 24);
+            this.lb_h.TabIndex = 12;
+            this.lb_h.Text = "h";
+            // 
+            // nud_y_st
+            // 
+            this.nud_y_st.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nud_y_st.Location = new System.Drawing.Point(66, 65);
+            this.nud_y_st.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nud_y_st.Name = "nud_y_st";
+            this.nud_y_st.Size = new System.Drawing.Size(74, 33);
+            this.nud_y_st.TabIndex = 14;
+            this.nud_y_st.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // nud_x_st
+            // 
+            this.nud_x_st.Enabled = false;
+            this.nud_x_st.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nud_x_st.Location = new System.Drawing.Point(66, 22);
+            this.nud_x_st.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nud_x_st.Name = "nud_x_st";
+            this.nud_x_st.Size = new System.Drawing.Size(74, 33);
+            this.nud_x_st.TabIndex = 13;
+            this.nud_x_st.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_y_st
+            // 
+            this.lb_y_st.AutoSize = true;
+            this.lb_y_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_y_st.Location = new System.Drawing.Point(13, 65);
+            this.lb_y_st.Name = "lb_y_st";
+            this.lb_y_st.Size = new System.Drawing.Size(47, 24);
+            this.lb_y_st.TabIndex = 8;
+            this.lb_y_st.Text = "y_st";
+            // 
+            // lb_w
+            // 
+            this.lb_w.AutoSize = true;
+            this.lb_w.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_w.Location = new System.Drawing.Point(152, 27);
+            this.lb_w.Name = "lb_w";
+            this.lb_w.Size = new System.Drawing.Size(26, 24);
+            this.lb_w.TabIndex = 10;
+            this.lb_w.Text = "w";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(824, 639);
+            this.Controls.Add(this.groupBox_selection);
             this.Controls.Add(this.bt_open_picture);
             this.Controls.Add(this.bt_background_color);
             this.Controls.Add(this.bt_clear);
@@ -357,6 +487,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox_selection.ResumeLayout(false);
+            this.groupBox_selection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_h)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_w)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,6 +527,15 @@
         private System.Windows.Forms.Button bt_background_color;
         private System.Windows.Forms.Button bt_open_picture;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.GroupBox groupBox_selection;
+        private System.Windows.Forms.NumericUpDown nud_h;
+        private System.Windows.Forms.Label lb_x_st;
+        private System.Windows.Forms.NumericUpDown nud_w;
+        private System.Windows.Forms.Label lb_h;
+        private System.Windows.Forms.NumericUpDown nud_y_st;
+        private System.Windows.Forms.NumericUpDown nud_x_st;
+        private System.Windows.Forms.Label lb_y_st;
+        private System.Windows.Forms.Label lb_w;
     }
 }
 
