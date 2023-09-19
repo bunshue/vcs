@@ -17,8 +17,8 @@ image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
 plt.imshow(image1)
 plt.show()
  
-width, height = image1.size
-print('原圖大小 W =', width, ', H =', height)
+W, H = image1.size
+print('原圖大小 W =', W, ', H =', H)
 
 x_st = 100
 y_st = 200
@@ -33,34 +33,6 @@ print('把圖轉成 100X500 大小')
 image3 = image1.resize((100, 500), Image.ANTIALIAS)
 
 plt.imshow(image3)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#在圖上寫字 OK, 只能英文字
-
-from PIL import Image, ImageDraw, ImageFont
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'    #無中文
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
-
-filename = r'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
-
-print("在圖上寫字")
-dw = ImageDraw.Draw(image1)
-
-mesg = '牡丹亭'
-font = ImageFont.truetype(font_filename, 60)
-#fn_w, fn_h = dw.textsize(unicode(mesg, 'utf-8'), font=font)
-fn_w, fn_h = dw.textsize(str(mesg), font=font)
-
-x = 100
-y = 200
-dw.text((x+5, y+5), str(mesg), font=font, fill=(25,25,25))
-dw.text((x, y), str(mesg), font=font, fill=(128,255,255))
-
-plt.imshow(image1)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -84,9 +56,9 @@ if os.path.exists(target_dir):
 if not os.path.exists(target_dir):
         os.mkdir(target_dir)
 
-image_width = 800
+image_W = 800
 
-print("將資料夾 " + source_dir + " 內所有圖片檔調整寬度成 " + str(image_width) + " 像素")
+print("將資料夾 " + source_dir + " 內所有圖片檔調整寬度成 " + str(image_W) + " 像素")
 
 print('Processing: {}'.format(source_dir))
 
@@ -113,10 +85,6 @@ print('輸出圖片資料夾 : ', target_dir)
 	
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
@@ -131,8 +99,8 @@ image1g = image1.convert('L')	#轉換成灰階圖像
 plt.imshow(image1g)      #灰階圖
 plt.show()
 
-width, height = image1g.size
-print('原圖大小 W =', width, ', H =', height)
+W, H = image1g.size
+print('原圖大小 W =', W, ', H =', H)
 
 x_st = 100
 y_st = 200
@@ -196,14 +164,14 @@ plt.imshow(image1)
 plt.show()
 
 # 圖片大小
-width, height = image1.size
+W, H = image1.size
 
 # 輸出用
-image2 = Image.new('RGB', (width, height))
+image2 = Image.new('RGB', (W, H))
 
 # 萃取輪廓
-for y in range(0, height - 1):
-    for x in range(0, width - 1):
+for y in range(0, H - 1):
+    for x in range(0, W - 1):
         # 計算亮度差
         diff_x = image1.getpixel((x + 1, y)) - image1.getpixel((x, y))
         diff_y = image1.getpixel((x, y + 1)) - image1.getpixel((x, y))
@@ -316,12 +284,12 @@ from PIL import Image
 from PIL import ImageColor
 from PIL import ImageFilter
 from PIL import ImageDraw
-from PIL import ImageFont
+#from PIL import ImageFont
 from PIL import ImageChops
 
 import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
@@ -348,19 +316,22 @@ print(ImageColor.getcolor("Blue", "RGBA"))
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.new('RGB', (300, 180), 'aqua')  # 建立aqua顏色影像
+W, H = 300, 180
+image = Image.new('RGB', (W, H), 'aqua')  # 建立aqua顏色影像
 plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.new('RGBA', (300, 180)) # 建立完全透明影像
+W, H = 300, 180
+image = Image.new('RGBA', (W, H)) # 建立完全透明影像
 plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.new('RGBA', (300, 100), "Yellow")
+W, H = 300, 100
+image = Image.new('RGBA', (W, H), "Yellow")
 
 print('列印中心點的色彩')
 print(image.getpixel((150, 50)))
@@ -378,105 +349,27 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print('無影像之PIL畫圖1')
-
-image = Image.new('RGBA', (300, 300), "Yellow")  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(image)
-
-# 繪製點
-for x in range(100, 200, 3):
-    for y in range(100, 200, 3):
-        drawObj.point([(x,y)], fill='Green')
-
-# 繪製線條, 繪外框線
-drawObj.line([(0,0), (299,0), (299,299), (0,299), (0,0)], fill="Black")
-# 繪製右上角美工線
-for x in range(150, 300, 10):
-    drawObj.line([(x,0), (300,x-150)], fill="Blue")
-# 繪製左下角美工線
-for y in range(150, 300, 10):
-    drawObj.line([(0,y), (y-150,300)], fill="Blue")    
-
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('無影像之PIL畫圖2')
-
-image = Image.new('RGBA', (300, 300), 'Yellow')  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(image)
-
-drawObj.rectangle((0,0,299,299), outline='Black')   # 影像外框線
-drawObj.ellipse((30,60,130,100),outline='Black')    # 左眼外框
-drawObj.ellipse((65,65,95,95),fill='Blue')          # 左眼
-drawObj.ellipse((170,60,270,100),outline='Black')   # 右眼外框
-drawObj.ellipse((205,65,235,95),fill='Blue')        # 右眼
-drawObj.polygon([(150,120),(180,180),(120,180),(150,120)],fill='Aqua') # 鼻子
-drawObj.rectangle((100,210,200,240), fill='Red')    # 嘴   
-
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('無影像之PIL畫圖3')
-
-image = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(image)
-
-strText = 'Welcome to the United States'        # 設定欲列印英文字串
-drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
-# 使用古老英文字型, 
-fontInfo = ImageFont.truetype('OLDENGL.TTF', 36)
-drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
-
-strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
-fontInfo = ImageFont.truetype(font_filename, 48)
-drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
-
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('無影像之PIL畫圖4')
-
-image = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(image)
-
-strText = 'Welcome to the United States'        # 設定欲列印英文字串
-strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
-
-fontInfo = ImageFont.truetype(font_filename, 48)
-drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
-
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 print('PIL 有圖處理')
 
 image = Image.open(filename)     # 建立Pillow物件
 print("列出物件檔名 : ", image.filename)
 print("列出物件型態 : ", type(image))
-width, height = image.size           # 獲得影像寬度和高度
-print("寬度 = ", width)
-print("高度 = ", height)
+W, H = image.size           # 獲得影像寬度和高度
+print("寬度 = ", W)
+print("高度 = ", H)
 print("列出物件副檔名 : ", image.format)
 print("列出物件描述   : ", image.format_description)
 
 plt.imshow(image)
 plt.show()
 
-width, height = image.size
-newPict1 = image.resize((width*2, height))   # 寬度是2倍
+W, H = image.size
+newPict1 = image.resize((W * 2, H))   # 寬度是2倍
 
 plt.imshow(newPict1)
 plt.show()
 
-newPict2 = image.resize((width, height*2))   # 高度是2倍
+newPict2 = image.resize((W, H * 2))   # 高度是2倍
 
 plt.imshow(newPict2)
 plt.show()
@@ -501,7 +394,7 @@ image = Image.open(filename)     # 建立Pillow物件
 plt.imshow(image.rotate(45))   # 旋轉45度
 plt.show()
 
-plt.imshow(image.rotate(45, expand=True))   # 旋轉45度+圖像擴充
+plt.imshow(image.rotate(45, expand = True))   # 旋轉45度+圖像擴充
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -542,8 +435,8 @@ image_copied = image.copy() #複製圖片
 
 x_st = 0
 y_st = 0
-w = 305/4
-h = 400/4
+w = 305 / 4
+h = 400 / 4
 #                             x_st  y_st    x_sp     y_sp
 cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間
 image_copied.paste(cropPict, (20, 20))          # 第一次合成
@@ -563,16 +456,16 @@ image_copied = image.copy() #複製圖片
 
 x_st = 0
 y_st = 0
-w = 305/4
-h = 400/4
+w = 305 / 4
+h = 400 / 4
 #                             x_st  y_st    x_sp     y_sp
 cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))    # 裁切區間
-cropWidth, cropHeight = cropPict.size           # 獲得裁切區間的寬與高
+cropW, cropH = cropPict.size           # 獲得裁切區間的寬與高
 
-width, height = 600, 320                        # 新影像寬與高
-image = Image.new('RGB', (width, height), "Yellow")  # 建立新影像
-for x in range(20, width-20, cropWidth):         # 雙層迴圈合成
-    for y in range(20, height-20, cropHeight):
+W, H = 600, 320                        # 新影像寬與高
+image = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
+for x in range(20, W - 20, cropW):         # 雙層迴圈合成
+    for y in range(20, H - 20, cropH):
         image.paste(cropPict, (x, y))        # 合成
 
 print('合成圖片')
@@ -653,38 +546,4 @@ is_similar = compare_images(filename1, filename2)
 print('相似度:', is_similar)
 
 print('------------------------------------------------------------')	#60個
-
-image1 = Image.open(filename)        # 建立Pillow物件
-newPic = image1.resize((350,500))
-
-nwidth, nheight = 450, 600
-image2 = Image.new('RGB', (nwidth, nheight), "Yellow")
-
-image2.paste(newPic, (50,50))
-
-plt.imshow(image2)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-image1 = Image.open(filename)        # 建立Pillow物件
-newPic = image1.resize((350,500))
-
-nwidth, nheight = 450, 700
-image2 = Image.new('RGB', (nwidth, nheight), "Yellow")
-
-image2.paste(newPic, (50,50))
-
-drawObj = ImageDraw.Draw(image2)
-name = "牡丹亭"
-fontInfo = ImageFont.truetype(font_filename, 60)
-drawObj.text((140,600), name, fill='Blue', font=fontInfo)
-
-plt.imshow(image2)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-
 

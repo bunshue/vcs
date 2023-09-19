@@ -175,11 +175,27 @@ print(translation)
 
 print('------------------------------------------------------------')	#60個
 
+import keyword
 
+print(keyword.kwlist)
 
+''' 檢測按鍵
+import keyboard
+
+while True:
+    if keyboard.is_pressed('*'):
+        print('KKKK')
+        continue;
+    if keyboard.is_pressed('/'):
+        print('SSSS')
+        continue;
+'''
 
 print('------------------------------------------------------------')	#60個
 
+import locale
+
+print(locale.getpreferredencoding())
 
 print('------------------------------------------------------------')	#60個
 

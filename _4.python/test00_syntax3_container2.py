@@ -7,7 +7,7 @@ import random
 print('------------------------------------------------------------')	#60個
 
 '''
-ChineseZodiacSigns = {'鼠' : 5, '牛' : 32, '虎' : 17, '兔' : 8 }
+ChineseZodiacSigns = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8 }
 print(type(ChineseZodiacSigns))
 print(ChineseZodiacSigns)
 '''
@@ -16,16 +16,16 @@ print(ChineseZodiacSigns)
 print('------------------------------------------------------------')	#60個
 
 print('字典 操作')
-animals = {'鼠' : 5, '牛' : 32, '虎' : 17, '兔' : 8 }
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8 }
 
-animals = {'鼠' : ('mouse', 4),
+animals = {'鼠' : ('mouse', 3),
            '牛' : ('ox', 48),
            '虎' : ('tiger', 33),
            '兔' : ('rabbit', 8),
            '龍' : ('dragon', 38),
-           '蛇' : ('snake', 15),
-           '馬' : ('horse', 32),
-           '羊' : ('goat', 26),
+           '蛇' : ('snake', 16),
+           '馬' : ('horse', 36),
+           '羊' : ('goat', 29),
            '猴' : ('monkey', 22),
            '雞' : ('chicken', 6),
            '狗' : ('dog', 12),
@@ -57,14 +57,14 @@ for i in range(len(ani)):
 
 print('------------------------------------------------------------')	#60個
 
-animals = ['鼠','牛','虎','兔','龍']
-print(animals)
+animals = ['鼠', '牛', '虎', '兔', '龍']
+print("目前animals串列 : ", animals)
 animals.append('蛇')
-print(animals)
+print("目前animals串列 : ", animals)
 animals.insert(3,'馬')
-print(animals)
+print("目前animals串列 : ", animals)
 animals.remove('虎')
-print(animals)
+print("目前animals串列 : ", animals)
 
 print('------------------------------------------------------------')	#60個
 
@@ -78,7 +78,7 @@ for ani in animals[:]:
 
 print('------------------------------------------------------------')	#60個
 
-animals = ['鼠','牛','虎','兔','龍','蛇','馬','羊','猴','雞','狗','豬']
+animals = ['鼠', '牛', '虎', '兔', '龍', '蛇', '馬', '羊', '猴', '雞', '狗', '豬']
 
 print(animals)
 
@@ -94,6 +94,16 @@ print(animals[3:7])
 
 print(animals[7:])
 
+
+animals = ['鼠', '牛', '虎', '兔', '龍', '蛇', '馬', '羊', '猴', '雞', '狗', '豬']
+
+print(type(animals))
+print(animals)
+
+import numpy as np
+for i in range(10):
+    c = np.random.choice(animals)
+    print(f"本次抽中 {c}。")
 
 print('------------------------------------------------------------')	#60個
 
@@ -113,12 +123,22 @@ print(animals[-5:])
 
 print('------------------------------------------------------------')	#60個
 
-cc = [('mouse', '老鼠', 1), ('panda', '貓熊', 123), ('penguin', '企鵝', 29), ('lion', '獅子', 270), ('tiger', '老虎', 240), ('zebra', '斑馬', 365), ('koala', '無尾熊', 13), ('hippo', '河馬', 996)]
-print(type(cc))
-print(cc)
-
-
-
+print('List 操作')
+animals = [('mouse', '鼠', 3),
+      ('ox', '牛', 48),
+      ('tiger', '虎', 33),
+      ('rabbit', '兔', 8),
+      ('dragon', '龍', 38),
+      ('snake', '蛇', 16),
+      ('horse', '馬', 36),
+      ('goat', '羊', 29),
+      ('monkey', '猴', 22),
+      ('chicken', '雞', 6),
+      ('dog', '狗', 12),
+      ('pig', '豬', 42)
+      ]
+print(type(animals))
+print(animals)
 
 print('------------------------------------------------------------')	#60個
 
@@ -127,11 +147,11 @@ animals = {
     '鼠':{
         'cname':'鼠',
         'ename':'mouse',
-        'weight':'13'},
+        'weight':'3'},
     '牛':{
         'cname':'牛',
         'ename':'ox',
-        'weight':'82'}}
+        'weight':'48'}}
 
 # 列印內含字典的字典
 for animal, animal_info in animals.items( ):
@@ -187,8 +207,7 @@ sc = [['John', 80],['Tom', 90], ['Kevin', 77]]
 newsc = sorted(sc, key = lambda x:x[1])
 print(newsc)
 
-
-sc = {'John':80, 'Tom':90, 'Kevin':77}
+sc = {'John' : 80, 'Tom' : 90, 'Kevin' : 77}
 newsc1 = sorted(sc.items(), key = lambda x:x[0])  # 依照key排序
 print("依照人名排序")
 print(newsc1)
@@ -197,11 +216,9 @@ newsc2 = sorted(sc.items(), key = lambda x:x[1])  # 依照value排序
 print("依照分數排序")
 print(newsc2)
 
-
 print('------------------------------------------------------------')	#60個
 
-
-dict1={"林小明":85, "曾山水":93, "鄭美麗":67}
+dict1={"林小明" : 85, "曾山水" : 93, "鄭美麗" : 67}
 dict1["黃明品"] = 71
 dict1["陳莉莉"] = 98
 listitem = dict1.items()
@@ -209,17 +226,13 @@ for name, score in listitem:
     print("%s 的成績為 %d 分" % (name, score))
 
 
-dict1={"林小明":85, "曾山水":93, "鄭美麗":67}
+dict1={"林小明" : 85, "曾山水" : 93, "鄭美麗" : 67}
 dict1["黃明品"] = 71
 dict1["陳莉莉"] = 98
 listkey = list(dict1.keys())
 listvalue = list(dict1.values())
 for i in range(len(listkey)):
     print("%s 的成績為 %d 分" % (listkey[i], listvalue[i]))
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 

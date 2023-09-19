@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'    #無中文
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
 
-font_size=30
+font_size = 30
 
 mesg = 'this is a lion mouse'
 
@@ -35,7 +36,6 @@ print('------------------------------------------------------------')	#60個
 from PIL import Image, ImageDraw, ImageFont
 
 msg = 'lion-mouse'
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 font_size = 30; #文字大小
 font_r = 255;   #紅色值
@@ -46,8 +46,8 @@ fill = (font_r, font_g, font_b)
 
 im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
-font = ImageFont.truetype(font_filename,font_size)
-fn_w, fn_h = dw0.textsize(msg, font=font)
+font = ImageFont.truetype(font_filename, font_size)
+fn_w, fn_h = dw0.textsize(msg, font = font)
 
 print(fn_w)
 print(fn_h)
@@ -80,19 +80,13 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#在圖上寫字 OK, 只能英文字
-
 import sys, os, glob
 from PIL import Image, ImageDraw, ImageFont
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+filename = r'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
-filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
-
-text_msg = 'Hello, world!'
-im = Image.open(filename1)
+mesg = '牡丹亭'
+im = Image.open(filename)
 
 w, h = im.size
 print("W = " + str(w)+", H = " + str(h))
@@ -102,16 +96,18 @@ print("在圖上作畫")
 dw = ImageDraw.Draw(im)
 
 font = ImageFont.truetype(font_filename, 80)
-fn_w, fn_h = dw.textsize(text_msg, font=font)
+fn_w, fn_h = dw.textsize(mesg, font = font)
 
 x = w/2-fn_w/2
 y = h/2-fn_h/2
-dw.text((x+5, y+5), text_msg, font=font, fill=(25,25,25))
-dw.text((x, y), text_msg, font=font, fill=(128,255,255))
+dw.text((x+5, y+5), mesg, font=font, fill=(25,25,25))
+dw.text((x, y), mesg, font=font, fill=(128,255,255))
 
 plt.imshow(im)
 
 plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -120,9 +116,7 @@ print('------------------------------------------------------------')	#60個
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/pil_test03.png'
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 #要做浮水印的文字
 msg = "lion-mouse"
@@ -130,7 +124,7 @@ msg = "lion-mouse"
 font_size = 10
 fill = (255,255,255,100)
 
-im = Image.open(filename1)
+im = Image.open(filename)
 im_w, im_h = im.size
 
 im0 = Image.new('RGBA', (1,1))
@@ -154,11 +148,9 @@ print('------------------------------------------------------------')	#60個
 
 from PIL import Image, ImageDraw
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
-filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
-im = Image.open(filename1)
+im = Image.open(filename)
 
 w, h = im.size
 print("W = " + str(w)+", H = " + str(h))

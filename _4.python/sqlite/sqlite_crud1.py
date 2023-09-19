@@ -5,17 +5,17 @@ sqlite基本範例 一個
 '''
 原始資料 9 筆
 	id_num	ename	cname	weight
-第1筆 : 5	lion	獅子	270
-第2筆 : 1	mouse	老鼠	1
-第3筆 : 4	dinosaur恐龍	5566	(此筆資料錯誤, 應刪除)
+第1筆 : 5	horse	馬	36
+第2筆 : 1	mouse	鼠	3
+第3筆 : 4	elephant象	100	(此筆資料錯誤, 應刪除)
 
-第4筆 : 9	hippo		996
-第5筆 : 2	bear		567	(此筆資料錯誤, 應為panda 123)
+第4筆 : 9	ox		48
+第5筆 : 2	sheep		66	(此筆資料錯誤, 應為goat 29)
 
-第6筆 : 8	koala		13	(詢問是否刪除此筆資料)
-第7筆 : 3	penguin		29
+第6筆 : 8	snake		16	(詢問是否刪除此筆資料)
+第7筆 : 3	tiger		33
 
-第8筆 : 7	zebra		365
+第8筆 : 7	rabbit		8
 
 第9筆 : 6	tiger		240
 
@@ -103,26 +103,26 @@ conn.commit() # 更新
 #INSERT 新增資料
 print('新增資料 2 筆 寫法一, 必須要寫滿所有欄位')
 #id_num不可重複
-sqlstr = 'INSERT INTO table01 VALUES (5, "lion", "獅子", 270)'
+sqlstr = 'INSERT INTO table01 VALUES (5, "horse", "馬", 36)'
 cursor.execute(sqlstr)
-sqlstr = 'INSERT INTO table01 VALUES (1, "mouse", "老鼠", 1)'
+sqlstr = 'INSERT INTO table01 VALUES (1, "mouse", "鼠", 3)'
 cursor.execute(sqlstr)
 
 print('新增資料 1 筆 寫法二, 有些欄位可以不寫, 使用tuple')
 sqlstr = 'INSERT INTO table01 (id_num, ename, cname, weight) VALUES (?, ?, ?, ?)'
-data_insert_tuple = (4, "dinosaur", "恐龍", 5566)
+data_insert_tuple = (4, "elephant", "象", 100)
 cursor.execute(sqlstr, data_insert_tuple)
 
 print('新增資料 2 筆 寫法三, 有些欄位可以不寫')
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (9, 'hippo', 996)")
+cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (9, 'ox', 48)")
 #id_num不重複 但name weight 重複
-cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (2, 'bear', 567)")
+cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (2, 'sheep', 66)")
 
 print('新增資料 2 筆 寫法四, 有些欄位可以不寫')
 # 定義資料串列
 datas = [
-    [8, 'koala', 13],
-    [3, 'penguin', 29]
+    [8, 'snake', 16],
+    [3, 'tiger', 33]
     ]
 
 for data in datas:
@@ -133,9 +133,9 @@ conn.commit() # 更新
 
 print('新增資料 1 筆 寫法五, 必須要寫滿所有欄位')
 number = 7
-ename = 'zebra'
+ename = 'rabbit'
 cname = ''
-weight = 365
+weight = 8
 sqlstr = "INSERT INTO table01 VALUES ({},'{}','{}','{}');".format(number, ename, cname, weight)
 cursor.execute(sqlstr)
 
@@ -150,8 +150,8 @@ conn.close()  # 關閉資料庫連線
 print('更新資料, 修改2號的資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-conn.execute("UPDATE table01 SET ename = '{}'  WHERE id_num = {}".format('panda', 2))  #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
-conn.execute("UPDATE table01 SET weight = '{}' WHERE id_num = {}".format(123, 2))      #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+conn.execute("UPDATE table01 SET ename = '{}'  WHERE id_num = {}".format('goat', 2))  #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+conn.execute("UPDATE table01 SET weight = '{}' WHERE id_num = {}".format(29, 2))      #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 
@@ -207,8 +207,8 @@ else:
     print('找不到' + str(number) + '號資料')
 
 print('------------------------------------------------------------')	#60個
-print('指明抓名字有pp的資料')
-data = ('%pp%',)    #pp在中間 前後要有%
+print('指明抓名字有bb的資料')
+data = ('%bb%',)    #bb在中間 前後要有%
 cursor = conn.execute('SELECT * FROM table01 WHERE ename LIKE ?', data)    #條件
 rows = cursor.fetchall()    #讀取全部資料
 print('共有 : ' + str(len(rows)) + " 筆資料")
