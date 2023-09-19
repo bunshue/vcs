@@ -34,7 +34,7 @@ namespace vcs_test_all_05_RegularExpression
             int dy;
 
             //button
-            x_st = 750;
+            x_st = 600;
             y_st = 10;
             dx = 160 + 10;
             dy = 40 + 10;
@@ -81,19 +81,6 @@ namespace vcs_test_all_05_RegularExpression
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //验证手机号是否正确
-            if (!IsHandset(textBox1.Text))
-            {
-                richTextBox1.Text += "NG ";
-            }
-            else
-            {
-                richTextBox1.Text += "OK ";
-            }
-        }
-
         /// <summary>
         /// 验证手机号是否正确
         /// </summary>
@@ -129,8 +116,86 @@ namespace vcs_test_all_05_RegularExpression
             return System.Text.RegularExpressions.Regex.IsMatch(str_day, @"^((0?[1-9])|((1|2)[0-9])|30|31)$");
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
+            //驗證Email格式
+            //tb_email
+
+
+        }
+
+        //驗證Email格式
+        public bool IsEmail(string str_Email)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(str_Email, @"^([/w-/.]+)@((/[[0-9]{1,3}/.[0-9] {1,3}/.[0-9]{1,3}/.)|(([/w-]+/.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(/)?]$");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //驗證URl網址格式
+            //tb_rul
+
+
+        }
+
+        //驗證URL網址格式
+        public bool IsUrl(string str_url)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(str_url, @"http(s)?://([/w-]+/.)+[/w-]+(/[/w- ./?%&=]*)?");
+        }
+
+        string getVid(string url)
+        {
+            string strRegex = "(?<=id_)(\\w+)";
+            Regex reg = new Regex(strRegex);
+            Match match = reg.Match(url);
+            return match.ToString();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "正規表示式的使用\n";
+            string url = "http://v.youku.com/v_show/id_XNzk2NTI0MzMy.html";
+            string vid = getVid(url);
+            richTextBox1.Text += "vid : " + vid + "\n";
+
+            richTextBox1.Text += "取得email帳號\n";
+
+            //取得email帳號
+
+            string senderEmail = @"david@insighteyes.com";
+            string[] sendFromUser = senderEmail.Split('@');
+            int len = sendFromUser.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + sendFromUser[i] + "\n";
+            }
+
+
+            richTextBox1.Text += "用Regular Expression拆解e-mail帳號\n";
+
+            List<string> emailList = new List<string>();
+            string email = "xue@163.,xue@163.com12,2707@qq.com,,xue@yahoo.com.cn,xue@163.com,xue@163.com12";
+            //  Regex reg2 = new Regex(@"^\da-zA-Z_]+@([-\dA-Za-z]+\.)+[a-zA-Z]{2,}$");驗證email的正則表達式  
+
+            Regex reg = new Regex(@"(?<email>[\da-zA-Z_]+@([-\dA-Za-z]+\.)+[a-zA-Z]{2,})");
+            Match m = reg.Match(email);
+            foreach (Match item in reg.Matches(email))
+            {
+                emailList.Add(item.Groups["email"].Value);
+            }
+            len = emailList.Count;
+            richTextBox1.Text += "共取得 : " + len.ToString() + " 個帳號\n";
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + emailList[i] + "\n";
+            }
+
+            richTextBox1.Text += "正規表示式的使用";
+
+
             //正規表示式的使用
 
             //正規表示式
@@ -181,27 +246,46 @@ namespace vcs_test_all_05_RegularExpression
             result = Regex.Match("123ABC456-DeF", @"[0-9A-Za-z\-]+").ToString();//Output:"123ABC456DeF"
             richTextBox1.Text += "結果 : " + result + "\n";
 
-        }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //驗證台灣手機號碼
+            richTextBox1.Text += "檢查台灣手機號碼\n";
+
+            string text = "0922123456";
+
+            richTextBox1.Text += "Text = " + text + "\n";
             bool match;
-            match = System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, @"^09[0-9]{8}$");
+            match = System.Text.RegularExpressions.Regex.IsMatch(text, @"^09[0-9]{8}$");
             if (match == true)
             {
                 richTextBox1.Text += "OK\n";
-
             }
             else
             {
                 richTextBox1.Text += "NG\n";
             }
-        }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (Regex.IsMatch(textBox4.Text, @"^[\d,\.]+$"))
+
+            richTextBox1.Text += "檢查中國手機號碼\n";
+
+            text = "13987654321";
+
+            richTextBox1.Text += "Text = " + text + "\n";
+
+            if (!IsHandset(text))
+            {
+                richTextBox1.Text += "NG ";
+            }
+            else
+            {
+                richTextBox1.Text += "OK ";
+            }
+
+            richTextBox1.Text += "檢查是否為數值\n";
+
+            text = "0x1234";
+
+            richTextBox1.Text += "Text = " + text + "\n";
+
+            if (Regex.IsMatch(text, @"^[\d,\.]+$"))
             {
                 richTextBox1.Text += "是數值\n";
             }
@@ -209,86 +293,10 @@ namespace vcs_test_all_05_RegularExpression
             {
                 richTextBox1.Text += "不是數值\n";
             }
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //驗證Email格式
-            //tb_email
-
-
-        }
-
-        //驗證Email格式
-        public bool IsEmail(string str_Email)
-        {
-            return System.Text.RegularExpressions.Regex.IsMatch(str_Email, @"^([/w-/.]+)@((/[[0-9]{1,3}/.[0-9] {1,3}/.[0-9]{1,3}/.)|(([/w-]+/.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(/)?]$");
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //驗證URl網址格式
-            //tb_rul
-
-
-        }
-
-        //驗證URL網址格式
-        public bool IsUrl(string str_url)
-        {
-            return System.Text.RegularExpressions.Regex.IsMatch(str_url, @"http(s)?://([/w-]+/.)+[/w-]+(/[/w- ./?%&=]*)?");
-        }
-
-        string getVid(string url)
-        {
-            string strRegex = "(?<=id_)(\\w+)";
-            Regex reg = new Regex(strRegex);
-            Match match = reg.Match(url);
-            return match.ToString();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            string url = "http://v.youku.com/v_show/id_XNzk2NTI0MzMy.html";
-            string vid = getVid(url);
-            richTextBox1.Text += "vid : " + vid + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //取得email帳號
-
-            string senderEmail = @"david@insighteyes.com";
-            string[] sendFromUser = senderEmail.Split('@');
-            int len = sendFromUser.Length;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + sendFromUser[i] + "\n";
-            }
-
-
-            richTextBox1.Text += "用Regular Expression拆解e-mail帳號\n";
-
-            List<string> emailList = new List<string>();
-            string email = "xue@163.,xue@163.com12,2707@qq.com,,xue@yahoo.com.cn,xue@163.com,xue@163.com12";
-            //  Regex reg2 = new Regex(@"^\da-zA-Z_]+@([-\dA-Za-z]+\.)+[a-zA-Z]{2,}$");驗證email的正則表達式  
-
-            Regex reg = new Regex(@"(?<email>[\da-zA-Z_]+@([-\dA-Za-z]+\.)+[a-zA-Z]{2,})");
-            Match m = reg.Match(email);
-            foreach (Match item in reg.Matches(email))
-            {
-                emailList.Add(item.Groups["email"].Value);
-            }
-            len = emailList.Count;
-            richTextBox1.Text += "共取得 : " + len.ToString() + " 個帳號\n";
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + emailList[i] + "\n";
-            }
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -334,7 +342,7 @@ namespace vcs_test_all_05_RegularExpression
         private void button18_Click(object sender, EventArgs e)
         {
 
-        }
 
+        }
     }
 }

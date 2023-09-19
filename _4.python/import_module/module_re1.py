@@ -14,35 +14,108 @@ import sys
 import re
 # python import module : re
 
+print('---- re.search --------------------------------------------------------')	#60個
+
+#search 找出最早出現的英文字字串
+print('找出第一群符合全英文的字串')
+text = '123abc456def789ghi'
+pattern = r'[a-z]+'
+txt = re.search(pattern, text)
+print(txt) # <re.Match object; span=(3, 6), match='abc'>
+if txt != None:
+    print(txt.group())  # abc
+    print(txt.start())  # 3
+    print(txt.end())    # 6
+    print(txt.span())   # (3, 6)
+else:
+    print('找不到')
 
 print('------------------------------------------------------------')	#60個
 
-# 計算單字在文章中出現的頻率
-# 只列出出現超過一次以上的單字
+text = "Do your best,\nGo Go Go!"
+pattern = r'.*'
 
-'''
-fp = open("data\article.txt", "r")
-article = fp.read()
-new_article = re.sub("[^a-zA-Z\s]", "", article)
-words = new_article.split()
-word_counts = {}
-for word in words:
-    if word.upper() in word_counts:
-        word_counts[word.upper()] = word_counts[word.upper()] + 1
+print('無re.DOTALL')
+txt = re.search(pattern, text)
+print(txt.group()) # Do your best,
+
+print('傳回搜尋含換列字元結果, re.DOTALL')
+pattern = r'.*'
+txt = re.search(pattern, text, re.DOTALL)
+print(txt.group()) # Do your best,\nGo Go Go!
+
+print('------------------------------------------------------------')	#60個
+
+def searchStr(pattern, text):
+    txt = re.search(pattern, text)
+    if txt != None:
+        print("搜尋成功 ",txt.group())
     else:
-        word_counts[word.upper()] = 1
+        print("搜尋失敗 ",txt)
 
-key_list = list(word_counts.keys())
-key_list.sort()
-for key in key_list:
-    if word_counts[key] > 1:
-        print("{}:{}".format(key, word_counts[key]))
-'''
+text1 = 'son'
+text2 = 'sonson'
+text3 = 'sonsonson'
+text4 = 'sonsonsonson'
+text5 = 'sonsonsonsonson'
+pattern = '(son){3,5}'
+searchStr(pattern, text1)
+searchStr(pattern, text2)
+searchStr(pattern, text3)
+searchStr(pattern, text4)
+searchStr(pattern, text5)
 
 print('------------------------------------------------------------')	#60個
 
+text = 'sonsonsonsonson'
+pattern = '(son){3,5}'
+txt = re.search(pattern, text)
+if txt != None:
+    print("搜尋成功 ", txt.group())
+else:
+    print("搜尋失敗 ", txt)
+
+print('------------------------------------------------------------')	#60個
+
+text = 'sonsonsonsonson'
+pattern = '(son){3,5}?'     # 非貪婪模式, 多了一個?
+txt = re.search(pattern, text)
+if txt != None:
+    print("搜尋成功 ",txt.group())
+else:
+    print("搜尋失敗 ",txt)
+
+print('------------------------------------------------------------')	#60個
+
+text = 'Name: Jiin-Kwei Hung Address: 8F, Nan-Jing E. Rd, Taipei'
+pattern = 'Name: (.*) Address: (.*)'
+txt = re.search(pattern, text)      # 傳回搜尋結果
+Name, Address = txt.groups()
+print("Name:    ", Name)
+print("Address: ", Address)
+
+print('------------------------------------------------------------')	#60個
+
+#測試1搜尋除了換列字元以外字元
+text = 'Name: Jiin-Kwei Hung \nAddress: 8F, Nan-Jing E. Rd, Taipei'
+pattern = '.*'
+txt = re.search(pattern, text)           # 傳回搜尋不含換列字元結果
+print("測試1輸出: ", txt.group())
+
+#測試2搜尋包括換列字元
+text = 'Name: Jiin-Kwei Hung \nAddress: 8F, Nan-Jing E. Rd, Taipei'
+pattern = '.*'
+print('傳回搜尋含換列字元結果, re.DOTALL')
+txt = re.search(pattern, text, re.DOTALL)
+print("測試2輸出: ", txt.group())
+
+
+print('---- re.findall --------------------------------------------------------')	#60個
+
+
+print('以下搜尋所有英文字母')
 text = 'tem12po'
-pattern = '[a-z]+'
+pattern = r'[a-z]+'
 reobj = re.compile(pattern)  #compile() 建立一個正規表達式的規則
 txt = reobj.findall(text)
 print(txt)  # ['tem', 'po']
@@ -65,21 +138,20 @@ reobj = re.compile(pattern) #compile() 建立一個正規表達式的規則
 txt = reobj.findall(text)
 print(txt) # ['tem', 'po']
 
-print('------------------------------------------------------------')	#60個
-
+print('------a')
+      
 text = '3tem12po'
 pattern = r'[a-z]+'
 txt = re.findall(pattern, text)
 print(txt) # ['tem', 'po']
 
-print('------------------------------------------------------------')	#60個
 
-text = '3tem12po'
-pattern = '[a-z]+'
-txt = re.search(pattern, text)
-print(txt) # <re.Match object; span=(1, 4), match='tem'>
+text = 'tem12po'
+pattern = r'[a-z]+'
+txt = re.findall(pattern, text)
+print(txt)  # ['tem', 'po']
 
-print('------------------------------------------------------------')	#60個
+print('---- re.match --------------------------------------------------------')	#60個
 
 text = 'tem12po'
 pattern = r'[a-z]+'
@@ -90,9 +162,184 @@ print('------------------------------------------------------------')	#60個
 
 text = 'tem12po'
 pattern = r'[a-z]+'
-txt = re.findall(pattern, text)
-print(txt)  # ['tem', 'po']
+reobj = re.compile(pattern) #compile() 建立一個正規表達式的規則
+txt = reobj.match(text)
 
+print(txt) # <re.Match object; span=(0, 3), match='tem'>
+if txt != None:
+    print(txt.group()) #tem
+    print(txt.start()) #0
+    print(txt.end())   #3
+    print(txt.span())  #(0,3)
+
+
+print('------------------------------------------------------------')	#60個
+
+pattern = r'[a-z]+'
+txt = re.match(pattern, 'abc123xyz')
+print(txt)
+if txt != None:
+    print(txt.group())    #abc
+    print(txt.start())    #0
+    print(txt.end())      #3
+    print(txt.span())     #(0, 3)
+
+print('------------------------------------------------------------')	#60個
+
+text1 = '123abcd456efghijk789123'
+text2 = 'abcd456efghijk789123abc'
+
+print('match 找出從頭出現的英文字字串')
+pattern = r'[a-z]+'
+txt = re.match(pattern, text1)
+print(txt)
+if txt != None:
+    print(txt.group()) #tem
+    print(txt.start()) #0
+    print(txt.end())   #3
+    print(txt.span())  #(0, 3)
+else:
+    print('找不到')
+
+pattern = r'[a-z]+'
+txt = re.match(pattern, text2)
+print(txt)
+if txt != None:
+    print(txt.group()) #tem
+    print(txt.start()) #0
+    print(txt.end())   #3
+    print(txt.span())  #(0, 3)
+else:
+    print('找不到')
+
+print('------------------------------------------------------------')	#60個
+
+#測試1搜尋使用re.match()
+text = 'John will attend my party tonight.'  # John是第一個字串
+pattern = 'John'
+txt = re.match(pattern, text)                 # 傳回搜尋結果
+if txt != None:
+    print("測試1輸出: ", txt.group())
+else:
+    print("測試1搜尋失敗")
+
+#測試2搜尋使用re.match()
+text = 'My best friend is John.'             # John不是第一個字串
+print('傳回搜尋含換列字元結果, re.DOTALL')
+txt = re.match(pattern, text, re.DOTALL)       # 傳回搜尋結果
+if txt != None:
+    print("測試2輸出: ", txt.group())
+else:
+    print("測試2搜尋失敗")
+
+print('------------------------------------------------------------')	#60個
+
+text = 'tem12po'
+pattern = '[a-z]+'
+reobj = re.compile(pattern)  #compile() 建立一個正規表達式的規則
+
+txt = reobj.match(text)
+print(txt) # <_sre.SRE_Match object; span=(0, 3), match='tem'>
+if txt != None:
+    print(txt.group())
+    print(txt.start())
+    print(txt.end())
+    print(txt.span())
+
+print('------------------------------------------------------------')	#60個
+
+text = 'tem12po'
+pattern = r'[a-z]+'
+txt = re.match(pattern, text)
+
+print(txt) # <_sre.SRE_Match object; span=(0, 3), match='tem'>
+if txt != None:
+    print(txt.group())
+    print(txt.start())
+    print(txt.end())
+    print(txt.span())
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('---- re.sub 取代功能--------------------------------------------------------')	#60個
+
+text = 'Password:1234,ID:5678'
+pattern = r"\d+"
+substr = "*"
+txt = re.sub(pattern, substr, text)
+print(txt) # Password:*,ID:*
+print('取代功能')
+print('舊字串 :', text)
+print('新字串 :', txt)
+
+print('------------------------------------------------------------')	#60個
+
+def multiply(m):
+    v = int(m.group())
+    return str(v * 3)
+
+print('只取代前5項')
+text = "1 2 3 4 5 6 7 8 9 10"
+txt = re.sub("\d+", multiply, text, 5)
+print('取代功能')
+print('舊字串 :', text)
+print('新字串 :', txt)
+
+print('------------------------------------------------------------')	#60個
+
+#測試取代功能, 取代成功
+text = 'Python is good! I like Python.'
+pattern = 'Python'                 # 欲搜尋字串
+newstr = 'Java'            # 新字串
+txt = re.sub(pattern,newstr, text)    # 如果找到則取代
+if txt != text:                      # 如果txt與text內容不同表示取代成功
+    print("取代成功")
+    print("舊字串 :", text)
+    print("新字串 :", txt)
+else:
+    print("取代失敗: ", txt)        # 列出失敗取代結果
+
+#測試取代功能, 取代失敗
+text = 'Python is good! I like Python.'
+pattern = 'C++'             # 欲搜尋字串
+newstr = 'Java'            # 新字串
+txt = re.sub(pattern, newstr, text)    # 如果找到則取代           
+if txt != text:                      # 如果txt與text內容不同表示取代成功
+    print("取代成功")
+    print("舊字串 :", text)
+    print("新字串 :", txt)
+else:
+    print("取代失敗: ", txt)        # 列出失敗取代結果
+    
+print('------------------------------------------------------------')	#60個
+
+# 使用隱藏文字執行取代
+text = 'CIA Mark told CIA Linda that secret USB had given to CIA Peter.'
+pattern = r'CIA (\w)\w*'            # 欲搜尋CIA + 空一格後的名字        
+newstr = r'\1***'                   # 新字串使用隱藏文字
+txt = re.sub(pattern, newstr, text)    # 執行取代
+
+print('取代功能')
+print('舊字串 :', text)
+print('新字串 :', txt)
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 text = '3tem12po'
@@ -102,55 +349,11 @@ reobj = re.compile(pattern)  #compile() 建立一個正規表達式的規則
 txt = reobj.search(text)
 
 print(txt) # <re.Match object; span=(1, 4), match='tem'>
-if not txt == None:
+if txt != None:
     print(txt.group())  # tem
     print(txt.start())  # 1
     print(txt.end())    # 4
     print(txt.span())   # (1,4)
-
-print('------------------------------------------------------------')	#60個    
-
-text = 'tem12po'
-pattern = r'[a-z]+'
-reobj = re.compile(pattern) #compile() 建立一個正規表達式的規則
-
-txt = reobj.match(text)
-
-print(txt) # <re.Match object; span=(0, 3), match='tem'>
-if not txt == None:
-    print(txt.group()) #tem
-    print(txt.start()) #0
-    print(txt.end())   #3
-    print(txt.span())  #(0,3)
-
-print('------------------------------------------------------------')	#60個
-
-text = 'tem12po'
-pattern = '[a-z]+'
-reobj = re.compile(pattern)  #compile() 建立一個正規表達式的規則
-
-txt = reobj.match(text)
-print(txt) # <_sre.SRE_Match object; span=(0, 3), match='tem'>
-
-if not txt == None:
-    print(txt.group())
-    print(txt.start())
-    print(txt.end())
-    print(txt.span())
-
-print('------------------------------------------------------------')	#60個
-
-text = 'tem12po'
-pattern = r'[a-z]+'
-txt = re.match(pattern, text)
-
-print(txt) # <_sre.SRE_Match object; span=(0, 3), match='tem'>
-
-if not txt == None:
-    print(txt.group())
-    print(txt.start())
-    print(txt.end())
-    print(txt.span())
 
 print('------------------------------------------------------------')	#60個
 
@@ -160,22 +363,11 @@ reobj = re.compile(pattern)  #compile() 建立一個正規表達式的規則
 
 txt = reobj.search(text)
 print(txt) # <_sre.SRE_Match object; span=(1, 4), match='tem'>
-
-if not txt == None:
+if txt != None:
     print(txt.group())  # tem
     print(txt.start())  # 1
     print(txt.end())    # 4
     print(txt.span())   # (1,4)
-
-print('------------------------------------------------------------')	#60個
-
-text = "Amy was 18 year old,she likes Python and C++."
-pattern = r'[0-9+]+'
-txt = re.findall(pattern, text)
-print(txt) # ['18', '++']
-print('text :', text)
-print('pattern :', pattern)
-print('result :', txt)
 
 print('------------------------------------------------------------')	#60個
 
@@ -189,23 +381,13 @@ print('result :', txt)
 
 print('------------------------------------------------------------')	#60個
 
-txt = re.sub(r"\d+", "*", "Password:1234,ID:5678")
-print(txt) # Password:*,ID:*
+text = "Amy was 18 year old,she likes Python and C++."
+pattern = r'[0-9+]+'
+txt = re.findall(pattern, text)
+print(txt) # ['18', '++']
 print('text :', text)
 print('pattern :', pattern)
 print('result :', txt)
-
-print('------------------------------------------------------------')	#60個
-
-text = "Do your best,\nGo Go Go!"
-pattern = r'.*'
-
-txt = re.search(pattern, text)
-print(txt.group()) # Do your best,
-
-print('傳回搜尋含換列字元結果, re.DOTALL')
-txt = re.search(r'.*', text, re.DOTALL)
-print(txt.group()) # Do your best,\nGo Go Go!
 
 print('------------------------------------------------------------')	#60個
 
@@ -252,23 +434,6 @@ print(txt) # ['Do yo']
 
 print('------------------------------------------------------------')	#60個
 
-text = "Password:1234,ID:5678"
-pattern = r"\d+"
-substr = "*"
-txt = re.sub(pattern, substr, text)
-print(txt) # Password:*,ID:*
-
-print('------------------------------------------------------------')	#60個
-
-def multiply(m):
-    v = int(m.group())
-    return str(v * 2)
-
-txt = re.sub("\d+", multiply, "10 20 30 40 50",3)
-print(txt) # 20 40 60 40 50
-
-print('------------------------------------------------------------')	#60個
-
 text = "John is my best friend."
 pattern = r'[aeiou]*'
 reobj = re.compile(pattern)   #compile() 建立一個正規表達式的規則
@@ -299,50 +464,6 @@ print(txt) #['2020']
 txt = re.findall(r'\w+$', text)
 print(txt) #['soon']
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-text1 = '123abcd456efghijk789123'
-text2 = 'abcd456efghijk789123abc'
-
-#match 找出從頭出現的英文字字串
-pattern = r'[a-z]+'
-txt = re.match(pattern, text1)
-print('match')
-print(txt)
-if not txt == None:
-    print(txt.group()) #tem
-    print(txt.start()) #0
-    print(txt.end())   #3
-    print(txt.span())  #(0, 3)
-else:
-    print('找不到')
-
-pattern = r'[a-z]+'
-txt = re.match(pattern, text2)
-print('match')
-print(txt)
-if not txt == None:
-    print(txt.group()) #tem
-    print(txt.start()) #0
-    print(txt.end())   #3
-    print(txt.span())  #(0, 3)
-else:
-    print('找不到')
-
-#search 找出最早出現的英文字字串
-pattern = r'[a-z]+'
-txt = re.search(pattern, text1)
-print('search')
-print(txt)
-if not txt == None:
-    print(txt.group())  # abcd
-    print(txt.start())  # 3
-    print(txt.end())    # 7
-    print(txt.span())   # (3, 7)
-else:
-    print('找不到')
-  
 print('------------------------------------------------------------')	#60個
 
 '''
@@ -397,51 +518,6 @@ txt = re.findall(pattern, text, re.I)        # 傳回搜尋忽略大小寫的結
 print(txt)
 
 print('------------------------------------------------------------')	#60個
-
-def searchStr(pattern, text):
-    txt = re.search(pattern, text)
-    if txt == None:         # 搜尋失敗
-        print("搜尋失敗 ",txt)
-    else:                   # 搜尋成功
-        print("搜尋成功 ",txt.group())
-
-text1 = 'son'
-text2 = 'sonson'
-text3 = 'sonsonson'
-text4 = 'sonsonsonson'
-text5 = 'sonsonsonsonson'
-pattern = '(son){3,5}'
-searchStr(pattern, text1)
-searchStr(pattern, text2)
-searchStr(pattern, text3)
-searchStr(pattern, text4)
-searchStr(pattern, text5)
-
-print('------------------------------------------------------------')	#60個
-
-def searchStr(pattern, text):
-    txt = re.search(pattern, text)
-    if txt == None:         # 搜尋失敗
-        print("搜尋失敗 ",txt)
-    else:                   # 搜尋成功
-        print("搜尋成功 ",txt.group())
-
-text = 'sonsonsonsonson'
-pattern = '(son){3,5}'
-searchStr(pattern, text)
-
-print('------------------------------------------------------------')	#60個
-
-def searchStr(pattern, text):
-    txt = re.search(pattern, text)
-    if txt == None:         # 搜尋失敗
-        print("搜尋失敗 ",txt)
-    else:                   # 搜尋成功
-        print("搜尋成功 ",txt.group())
-
-text = 'sonsonsonsonson'
-pattern = '(son){3,5}?'     # 非貪婪模式
-searchStr(pattern, text)
 
 print('------------------------------------------------------------')	#60個
 
@@ -555,113 +631,28 @@ print(txt)
 
 print('------------------------------------------------------------')	#60個
 
-text = 'Name: Jiin-Kwei Hung Address: 8F, Nan-Jing E. Rd, Taipei'
-pattern = 'Name: (.*) Address: (.*)'
-txt = re.search(pattern, text)      # 傳回搜尋結果
-Name, Address = txt.groups()
-print("Name:    ", Name)
-print("Address: ", Address)
-
-print('------------------------------------------------------------')	#60個
-
-#測試1搜尋除了換列字元以外字元
-text = 'Name: Jiin-Kwei Hung \nAddress: 8F, Nan-Jing E. Rd, Taipei'
-pattern = '.*'
-txt = re.search(pattern, text)           # 傳回搜尋不含換列字元結果
-print("測試1輸出: ", txt.group())
-
-#測試2搜尋包括換列字元
-text = 'Name: Jiin-Kwei Hung \nAddress: 8F, Nan-Jing E. Rd, Taipei'
-pattern = '.*'
-print('傳回搜尋含換列字元結果, re.DOTALL')
-txt = re.search(pattern, text, re.DOTALL)
-print("測試2輸出: ", txt.group())
-
-print('------------------------------------------------------------')	#60個
-
-#測試1搜尋使用re.match()
-text = 'John will attend my party tonight.'  # John是第一個字串
-pattern = 'John'
-txt = re.match(pattern, text)                 # 傳回搜尋結果
-if txt != None:
-    print("測試1輸出: ", txt.group())
-else:
-    print("測試1搜尋失敗")
-
-#測試2搜尋使用re.match()
-text = 'My best friend is John.'             # John不是第一個字串
-print('傳回搜尋含換列字元結果, re.DOTALL')
-txt = re.match(pattern, text, re.DOTALL)       # 傳回搜尋結果
-if txt != None:
-    print("測試2輸出: ", txt.group())
-else:
-    print("測試2搜尋失敗")
-
-print('------------------------------------------------------------')	#60個
-
 #測試1搜尋使用re.match()
 text = 'John will attend my party tonight.'  
 pattern = 'John'
 txt = re.match(pattern, text)                 # re.match()
 if txt != None:
     print("使用re.match()輸出MatchObject物件:  ", txt)
-else:
-    print("測試1搜尋失敗")
-
-#測試1搜尋使用re.search()
-txt = re.search(pattern, text)                # re.search()
-if txt != None:
-    print("使用re.search()輸出MatchObject物件: ", txt)
-else:
-    print("測試1搜尋失敗")
-    
-print('------------------------------------------------------------')	#60個
-
-#測試1搜尋使用re.match()
-text = 'John will attend my party tonight.'  
-pattern = 'John'
-txt = re.match(pattern, text)                 # re.match()
-if txt != None:
     print("搜尋成功字串的起始索引位置 :  ", txt.start())
     print("搜尋成功字串的結束索引位置 :  ", txt.end())
     print("搜尋成功字串的結束索引位置 :  ", txt.span())
+else:
+    print("測試1搜尋失敗")
 
 #測試2搜尋使用re.search()
 text = 'My best friend is John.'  
 txt = re.search(pattern, text)                # re.search()
 if txt != None:
+    print("使用re.search()輸出MatchObject物件: ", txt)
     print("搜尋成功字串的起始索引位置 :  ", txt.start())
     print("搜尋成功字串的結束索引位置 :  ", txt.end())
     print("搜尋成功字串的結束索引位置 :  ", txt.span())
-
-print('------------------------------------------------------------')	#60個
-
-#測試1取代使用re.sub()結果成功
-text = 'Eli Nan will attend my party tonight. My best friend is Eli Nan'  
-pattern = 'Eli Nan'                 # 欲搜尋字串        
-newstr = 'Kevin Thomson'            # 新字串
-txt = re.sub(pattern,newstr, text)    # 如果找到則取代
-if txt != text:                      # 如果txt與text內容不同表示取代成功
-    print("取代成功: ", txt)        # 列出成功取代結果
 else:
-    print("取代失敗: ", txt)        # 列出失敗取代結果
-
-#測試2取代使用re.sub()結果失敗  
-pattern = 'Eli Thomson'             # 欲搜尋字串        
-txt = re.sub(pattern,newstr, text)    # 如果找到則取代           
-if txt != text:                      # 如果txt與text內容不同表示取代成功
-    print("取代成功: ", txt)        # 列出成功取代結果
-else:
-    print("取代失敗: ", txt)        # 列出失敗取代結果
-    
-print('------------------------------------------------------------')	#60個
-
-# 使用隱藏文字執行取代
-text = 'CIA Mark told CIA Linda that secret USB had given to CIA Peter.'
-pattern = r'CIA (\w)\w*'            # 欲搜尋CIA + 空一格後的名字        
-newstr = r'\1***'                   # 新字串使用隱藏文字
-txt = re.sub(pattern,newstr, text)    # 執行取代
-print("取代成功: ", txt)            # 列出取代結果
+    print("測試1搜尋失敗")
 
 print('------------------------------------------------------------')	#60個
 
@@ -728,41 +719,31 @@ print('result :', txt)
 
 print('------------------------------------------------------------')	#60個
 
-text = "Do your best,\nGo Go Go!"
-pattern = r'.*'
-txt = re.search(pattern, text)
-print(txt.group()) # Do your best,
 
-print('傳回搜尋含換列字元結果, re.DOTALL')
-txt = re.search(r'.*', text, re.DOTALL)
-print(txt.group()) # Do your best,\nGo Go Go!
+# 計算單字在文章中出現的頻率
+# 只列出出現超過一次以上的單字
 
-print('------------------------------------------------------------')	#60個
+'''
+fp = open("data\article.txt", "r")
+article = fp.read()
+new_article = re.sub("[^a-zA-Z\s]", "", article)
+words = new_article.split()
+word_counts = {}
+for word in words:
+    if word.upper() in word_counts:
+        word_counts[word.upper()] = word_counts[word.upper()] + 1
+    else:
+        word_counts[word.upper()] = 1
 
-pattern = r'[a-z]+'
-txt = re.search(pattern, 'abc123xyz')
-print(txt)    # <re.Match object; span=(0, 3), match='abc'>
-if txt != None:
-    print(txt.group())  # abc
-    print(txt.start())  # 0
-    print(txt.end())    # 3
-    print(txt.span())   # (0,3)
-
-print('------------------------------------------------------------')	#60個
-
-pattern = r'[a-z]+'
-txt = re.match(pattern, 'abc123xyz')
-print(txt) 
-if txt != None:
-    print(txt.group())    #abc
-    print(txt.start())    #0
-    print(txt.end())      #3
-    print(txt.span())     #(0, 3)
+key_list = list(word_counts.keys())
+key_list.sort()
+for key in key_list:
+    if word_counts[key] > 1:
+        print("{}:{}".format(key, word_counts[key]))
+'''
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
@@ -772,7 +753,7 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('找電話號碼')
 
-texts = ["0412345678","(04)12345678","(04)-12345678","(049)2987654","0937-998877"]
+texts = ["0412345678", "(04)12345678", "(04)-12345678", "(049)2987654", "0937-998877"]
 pattern = r'''
  \(\d{2,4}\)-?\d{6,8} #(04)12345678、(04)-12345678、(049)2987654 等電話格式
 |\d{9,10}             #0412345678 等含 9~10 位數字
@@ -782,13 +763,13 @@ pattern = r'''
 print('無VERBOSE搜尋')
 for text in texts:
     txt = re.search(pattern, text)
-    if not txt == None:
+    if txt != None:
         print(txt.group())
 
 print('有VERBOSE搜尋')
 for text in texts:
     txt = re.search(pattern, text, re.VERBOSE)
-    if not txt == None:
+    if txt != None:
         print(txt.group())
 
 print('------------------------------------------------------------')	#60個
@@ -815,7 +796,7 @@ text = "tel:04-12345678"
 pattern = r'(\d{2})-(\d{8})'
 
 txt = re.search(pattern, text)
-if not txt == None:
+if txt != None:
     print(txt.group())  #04-12345678
     print(txt.group(0)) #04-12345678
     print(txt.group(1)) #04
@@ -827,7 +808,7 @@ text = "tel:(04)12345678"
 pattern = r'(\(\d{2}\))(\d{8})'
 
 txt = re.search(pattern, text)
-if not txt == None:
+if txt != None:
     print(txt.group())  #(04)12345678
     print(txt.group(1)) #(04)
     print(txt.group(2)) #12345678
@@ -839,7 +820,7 @@ pattern = r'(\(\d{2}\))-?(\d{8})'
 
 for text in texts:
     txt = re.search(pattern, text)
-    if not txt == None:
+    if txt != None:
         print(txt.group())
         
 print('------------------------------------------------------------')	#60個        
@@ -849,7 +830,7 @@ pattern = r'\(\d{2,4}\)-?\d{6,8}|\d{9,10}|\d{4}-\d{6,8}'
 
 for text in texts:
     txt = re.search(pattern, text)
-    if not txt == None:
+    if txt != None:
         print(txt.group())
         
 print('------------------------------------------------------------')	#60個

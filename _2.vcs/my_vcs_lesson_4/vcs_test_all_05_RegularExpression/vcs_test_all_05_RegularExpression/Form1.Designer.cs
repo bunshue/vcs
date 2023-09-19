@@ -54,15 +54,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtPattern2 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.tb_email = new System.Windows.Forms.TextBox();
             this.tb_rul = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
@@ -328,34 +321,15 @@
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(925, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(765, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(381, 579);
+            this.richTextBox1.Size = new System.Drawing.Size(321, 579);
             this.richTextBox1.TabIndex = 21;
             this.richTextBox1.Text = "";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(342, 306);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 22);
-            this.textBox1.TabIndex = 20;
-            this.textBox1.Text = "13987654321";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(342, 342);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 40);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "檢查中國手機號";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(342, 431);
+            this.button2.Location = new System.Drawing.Point(341, 258);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 40);
             this.button2.TabIndex = 24;
@@ -365,64 +339,16 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(342, 394);
+            this.textBox2.Location = new System.Drawing.Point(341, 221);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(160, 22);
             this.textBox2.TabIndex = 23;
             this.textBox2.Text = "25";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(342, 492);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(160, 40);
-            this.button3.TabIndex = 25;
-            this.button3.Text = "正規表示式的使用";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(342, 253);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(160, 40);
-            this.button4.TabIndex = 27;
-            this.button4.Text = "檢查台灣手機號";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(342, 218);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 22);
-            this.textBox3.TabIndex = 26;
-            this.textBox3.Text = "0922123456";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(540, 253);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(160, 40);
-            this.button5.TabIndex = 29;
-            this.button5.Text = "檢查是否為數值";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(540, 218);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(160, 22);
-            this.textBox4.TabIndex = 28;
-            this.textBox4.Text = "0x1234";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // tb_email
             // 
-            this.tb_email.Location = new System.Drawing.Point(540, 306);
+            this.tb_email.Location = new System.Drawing.Point(341, 314);
             this.tb_email.Name = "tb_email";
             this.tb_email.Size = new System.Drawing.Size(160, 22);
             this.tb_email.TabIndex = 30;
@@ -431,7 +357,7 @@
             // 
             // tb_rul
             // 
-            this.tb_rul.Location = new System.Drawing.Point(540, 394);
+            this.tb_rul.Location = new System.Drawing.Point(341, 402);
             this.tb_rul.Name = "tb_rul";
             this.tb_rul.Size = new System.Drawing.Size(160, 22);
             this.tb_rul.TabIndex = 31;
@@ -440,7 +366,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(540, 342);
+            this.button6.Location = new System.Drawing.Point(341, 350);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 40);
             this.button6.TabIndex = 32;
@@ -450,7 +376,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(540, 431);
+            this.button7.Location = new System.Drawing.Point(341, 439);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(160, 40);
             this.button7.TabIndex = 33;
@@ -460,27 +386,26 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(748, 12);
+            this.button8.Location = new System.Drawing.Point(586, 12);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(160, 40);
             this.button8.TabIndex = 34;
-            this.button8.Text = "正規表示式的使用";
+            this.button8.Text = "all";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(748, 63);
+            this.button9.Location = new System.Drawing.Point(586, 63);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(160, 40);
             this.button9.TabIndex = 35;
-            this.button9.Text = "取得email帳號";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(748, 115);
+            this.button10.Location = new System.Drawing.Point(586, 115);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 40);
             this.button10.TabIndex = 36;
@@ -489,7 +414,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(748, 165);
+            this.button11.Location = new System.Drawing.Point(586, 165);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 40);
             this.button11.TabIndex = 37;
@@ -498,7 +423,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(748, 218);
+            this.button12.Location = new System.Drawing.Point(586, 218);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 40);
             this.button12.TabIndex = 38;
@@ -507,7 +432,7 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(748, 264);
+            this.button13.Location = new System.Drawing.Point(586, 264);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 40);
             this.button13.TabIndex = 39;
@@ -516,7 +441,7 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(748, 315);
+            this.button14.Location = new System.Drawing.Point(586, 315);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(160, 40);
             this.button14.TabIndex = 40;
@@ -525,7 +450,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(748, 366);
+            this.button15.Location = new System.Drawing.Point(586, 366);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 40);
             this.button15.TabIndex = 41;
@@ -534,7 +459,7 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(748, 419);
+            this.button16.Location = new System.Drawing.Point(586, 419);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(160, 40);
             this.button16.TabIndex = 42;
@@ -543,7 +468,7 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(748, 465);
+            this.button17.Location = new System.Drawing.Point(586, 465);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(160, 40);
             this.button17.TabIndex = 43;
@@ -552,7 +477,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(748, 511);
+            this.button18.Location = new System.Drawing.Point(586, 511);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(160, 40);
             this.button18.TabIndex = 44;
@@ -563,7 +488,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1306, 579);
+            this.ClientSize = new System.Drawing.Size(1086, 579);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
@@ -579,15 +504,8 @@
             this.Controls.Add(this.button6);
             this.Controls.Add(this.tb_rul);
             this.Controls.Add(this.tb_email);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -634,15 +552,8 @@
         internal System.Windows.Forms.Label label12;
         internal System.Windows.Forms.TextBox txtPattern2;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox tb_email;
         private System.Windows.Forms.TextBox tb_rul;
         private System.Windows.Forms.Button button6;
