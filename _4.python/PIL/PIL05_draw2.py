@@ -132,8 +132,29 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+print('無影像之PIL畫圖5 same?')
 
+from PIL import Image, ImageDraw, ImageFont
 
+W, H = 600, 300
+image = Image.new('RGBA', (W, H), 'Yellow')  # 建立600*300黃色底的影像
+
+drawObj = ImageDraw.Draw(image)
+
+strText = 'Welcome to the United States'        # 設定欲列印英文字串
+drawObj.text((50, 50), strText, fill='Blue')         # 使用預設字型與字型大小
+# 使用古老英文字型, 字型大小是36
+fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
+drawObj.text((50, 100), strText, fill='Blue', font=fontInfo)
+# 使用Microsoft所提供的新細明體中文字型處理中文字體
+strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
+
+font_filename = 'C:/Windows/Fonts/mingliu.ttc'
+fontInfo = ImageFont.truetype(font_filename, 48)
+drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
+
+plt.imshow(image)
+plt.show()
 
 
 print('------------------------------------------------------------')	#60個

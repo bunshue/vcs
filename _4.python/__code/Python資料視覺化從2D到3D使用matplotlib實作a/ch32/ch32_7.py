@@ -1,4 +1,3 @@
-# ch32_7.py
 from matplotlib.animation import FuncAnimation 
 import matplotlib.pyplot as plt   
 
@@ -11,7 +10,7 @@ plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 fig, ax = plt.subplots()
 # 建立軸物件與設定大小
 ax.set(xlim=(-1,1), ylim=(-1,1))
-string = '我的夢幻大學 - 明志科技大學'  # 設定字串
+string = '歡迎來到美國'  # 設定字串
 # 使用水平與垂直置中在座標 0,0 位置顯示字串
 label = ax.text(0,0,string[0],ha='center',va='center',
                 fontsize=20, color="b")
@@ -20,6 +19,7 @@ anim = FuncAnimation(fig,animate,
                      frames=len(string),# 字串長度當作frames數
                      interval=300)
 ax.axis('off')
+
 plt.show()
 
 

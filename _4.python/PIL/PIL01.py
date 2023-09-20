@@ -4,6 +4,8 @@
 
 '''
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
 print('------------------------------------------------------------')	#60個
 
 import matplotlib.pyplot as plt
@@ -73,8 +75,8 @@ for target_image in allfiles:
 	pathname, filename = os.path.split(target_image)
 	print(filename)
 	image = Image.open(target_image)    #PIL讀取本機圖片
-	w, h = image.size
-	image = image.resize((800, int(800 / float(w) * h)))
+	W, H = image.size
+	image = image.resize((800, int(800 / float(W) * H)))
 	image.paste(logo, (0, 0), logo)
 	image.save(target_dir + '/' + filename)
 	image.close()
@@ -82,7 +84,6 @@ for target_image in allfiles:
 print("完成")
 print('輸出圖片資料夾 : ', target_dir)
 
-	
 print('------------------------------------------------------------')	#60個
 
 import matplotlib.pyplot as plt
@@ -163,8 +164,8 @@ image1 = image1.convert("L")
 plt.imshow(image1)
 plt.show()
 
-# 圖片大小
 W, H = image1.size
+print('原圖大小 W =', W, ', H =', H)
 
 # 輸出用
 image2 = Image.new('RGB', (W, H))
@@ -188,7 +189,6 @@ plt.imshow(image2)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 
 import sys
 
@@ -253,99 +253,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
-
-'''
-共用抽出
-
-#存圖
-#image.save("xxxx.png")
-
-#顯示
-#image.show()
-
-'''
-
-import os
-import sys
-import time
-import random
-
-from PIL import Image
-from PIL import ImageColor
-from PIL import ImageFilter
-from PIL import ImageDraw
-#from PIL import ImageFont
-from PIL import ImageChops
-
-import matplotlib.pyplot as plt
-
-#font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-print('------------------------------------------------------------')	#60個
-
-print('PIL 無圖處理')
-
-print('------------------------------------------------------------')	#60個
-
-print(ImageColor.getrgb("#0000ff"))
-print(ImageColor.getrgb("rgb(0, 0, 255)"))
-print(ImageColor.getrgb("rgb(0%, 0%, 100%)"))
-print(ImageColor.getrgb("Blue"))
-print(ImageColor.getrgb("red"))
-
-print('------------------------------------------------------------')	#60個
-
-print(ImageColor.getcolor("#0000ff", "RGB"))
-print(ImageColor.getcolor("rgb(0, 0, 255)", "RGB"))
-print(ImageColor.getcolor("Blue", "RGB"))
-print(ImageColor.getcolor("#0000ff", "RGBA"))
-print(ImageColor.getcolor("rgb(0, 0, 255)", "RGBA"))
-print(ImageColor.getcolor("Blue", "RGBA"))
-
-print('------------------------------------------------------------')	#60個
-
-W, H = 300, 180
-image = Image.new('RGB', (W, H), 'aqua')  # 建立aqua顏色影像
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-W, H = 300, 180
-image = Image.new('RGBA', (W, H)) # 建立完全透明影像
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-W, H = 300, 100
-image = Image.new('RGBA', (W, H), "Yellow")
-
-print('列印中心點的色彩')
-print(image.getpixel((150, 50)))
-
-for x in range(50, 251):                            # x軸區間在50-250
-    for y in range(20, 51):                        # y軸區間在20-50
-        image.putpixel((x, y), (255, 0, 0, 255))   # 填紅色
-
-for x in range(50, 251):                            # x軸區間在50-250            
-    for y in range(51, 81):                       # y軸區間在51-80
-        image.putpixel((x, y), ImageColor.getcolor("Blue", "RGBA")) # 填藍色
-
-plt.imshow(image)
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -354,9 +262,9 @@ print('PIL 有圖處理')
 image = Image.open(filename)     # 建立Pillow物件
 print("列出物件檔名 : ", image.filename)
 print("列出物件型態 : ", type(image))
-W, H = image.size           # 獲得影像寬度和高度
-print("寬度 = ", W)
-print("高度 = ", H)
+
+W, H = image.size
+print('原圖大小 W =', W, ', H =', H)
 print("列出物件副檔名 : ", image.format)
 print("列出物件描述   : ", image.format_description)
 
@@ -474,6 +382,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+from PIL import ImageFilter
+
 image = Image.open(filename)     # 建立Pillow物件
 
 print('ImageFilter.BLUR')
@@ -528,6 +438,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+from PIL import ImageChops
+
 def compare_images(filename1, filename2, threshold=0.8):
     #比較兩張圖像的相似度，返回相似度值（0~1之間的浮點數）
     image1 = Image.open(filename1).convert('RGBA')
@@ -546,4 +458,3 @@ is_similar = compare_images(filename1, filename2)
 print('相似度:', is_similar)
 
 print('------------------------------------------------------------')	#60個
-

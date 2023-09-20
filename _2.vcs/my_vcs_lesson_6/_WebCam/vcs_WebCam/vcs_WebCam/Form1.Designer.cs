@@ -34,6 +34,7 @@
             this.lb_fps = new System.Windows.Forms.Label();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.bt_motion_detection = new System.Windows.Forms.Button();
             this.bt_record = new System.Windows.Forms.Button();
             this.rb_5X5 = new System.Windows.Forms.RadioButton();
             this.rb_4X4 = new System.Windows.Forms.RadioButton();
@@ -74,7 +75,6 @@
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_qr_code = new System.Windows.Forms.Timer(this.components);
-            this.bt_motion_detection = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -156,6 +156,17 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operation";
+            // 
+            // bt_motion_detection
+            // 
+            this.bt_motion_detection.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_motion_detection.Location = new System.Drawing.Point(188, 80);
+            this.bt_motion_detection.Name = "bt_motion_detection";
+            this.bt_motion_detection.Size = new System.Drawing.Size(75, 30);
+            this.bt_motion_detection.TabIndex = 24;
+            this.bt_motion_detection.Text = "移動偵測";
+            this.bt_motion_detection.UseVisualStyleBackColor = true;
+            this.bt_motion_detection.Click += new System.EventHandler(this.bt_motion_detection_Click);
             // 
             // bt_record
             // 
@@ -587,17 +598,6 @@
             // 
             this.timer_qr_code.Interval = 1000;
             this.timer_qr_code.Tick += new System.EventHandler(this.timer_qr_code_Tick);
-            // 
-            // bt_motion_detection
-            // 
-            this.bt_motion_detection.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_motion_detection.Location = new System.Drawing.Point(188, 80);
-            this.bt_motion_detection.Name = "bt_motion_detection";
-            this.bt_motion_detection.Size = new System.Drawing.Size(75, 30);
-            this.bt_motion_detection.TabIndex = 24;
-            this.bt_motion_detection.Text = "移動偵測";
-            this.bt_motion_detection.UseVisualStyleBackColor = true;
-            this.bt_motion_detection.Click += new System.EventHandler(this.bt_motion_detection_Click);
             // 
             // Form1
             // 

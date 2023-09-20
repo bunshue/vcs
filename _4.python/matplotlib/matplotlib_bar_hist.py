@@ -1,4 +1,4 @@
-# bar 集合
+# bar + hist 集合
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
@@ -194,142 +194,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-# 派圖 集合
-
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = '派圖 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#第一張圖
-plt.subplot(231)
-
-sizes = [25, 30, 15, 10]
-labels = ["北部", "西部", "南部", "東部"]
-colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.2, 0)        # 設定分隔的區塊位置
-plt.pie(sizes, 
-	explode = explode,      # 設定分隔的區塊位置
-	labels = labels, 
-	colors = colors,
-	labeldistance = 1.1, 
-	autopct = "%2.1f%%",    #項目百分比的格式
-	pctdistance = 0.6,
-	shadow = True,
-	startangle = 90)        # 繪製起始角度
-
-plt.axis("equal")
-plt.legend()
-
-
-#第二張圖
-plt.subplot(232)
-
-'''
-圓餅圖是使用 pie 函數繪製出來的，語法為：
-
-plt.pie(串列資料, [其餘參數值])
-
-其餘參數介紹：
-pie參數 	說明
-color 	指定圓餅圖的顏色 ('blue', 'red', 'green', 'yellow', 色碼('#CC00CC')),預設為藍色 blue
-label 	項目標題，需搭配 legend 函式才有效果
-explode 	設定分隔的區塊位置
-autopct 	項目百分比格式，語法為「%格式%%」，Example:autopct = "%2.2f%%"(表示整數2位數及小數點2位數)
-pctdistance 	數值文字與圓心距離
-shadow 	圓餅圖陰影開啟/關閉，True 有陰影，False 沒有陰影
-startangle 	繪製起始角度，繪製會以逆時鐘旋轉計算角度
-radius 	圓餅圖的半徑，預設是1
-'''
-
-#設定將使用的數值，將要有項目標題、數值串列、圓餅圖顏色、分隔的區塊位置
-labels = ['A', 'B', 'C', 'D']
-values = [60, 42, 83, 37]
-colors = ['r', 'g', 'b', 'y']
-explode = (0, 0, 0, 0.08)       #設定分隔的區塊位置
-
-#設定 pie 函數參數繪製圓餅圖
-plt.pie(
-values, # 數值
-labels = labels, # 項目標題
-colors = colors, # 指定圓餅圖的顏色
-explode = explode, # 設定分隔的區塊位置
-autopct = "%2.2f%%", # 項目百分比格式
-pctdistance = 0.5, # 數值文字與圓心距離
-shadow = True, # 圓餅圖陰影開啟/關閉
-startangle = 90, # 繪製起始角度
-radius = 0.9 # 圓餅圖的半徑，預設是1
-)
-
-#設定 legnd 的位置，將圖表顯示出來，並顯示圖例名稱
-plt.legend(loc = "right") # 設定 legnd 的位置
-
-
-#第三張圖
-plt.subplot(233)
-
-labels = ["東部", "南部", "北部", "中部"]
-sizes = [5, 10, 20, 15]
-colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.05, 0)
-plt.pie(sizes,explode = explode,labels = labels,colors = colors,\
-    labeldistance = 1.1,autopct = "%3.1f%%",shadow = True,\
-    startangle = 90,pctdistance = 0.6)
-plt.axis("equal")
-plt.legend()
-
-
-#第四張圖
-plt.subplot(234)
-
-labels = ["Python","C++","Java","JS","C","C#"]
-ratings = [5, 6, 15, 3, 12, 4]
-
-plt.pie(ratings, labels=labels)
-plt.title("程式語言的使用率") 
-plt.axis("equal")
-
-#第五張圖
-plt.subplot(235)
-
-patches, texts = plt.pie(ratings, labels=labels)
-plt.legend(patches, labels, loc="best")
-plt.title("程式語言的使用率") 
-plt.axis("equal")
-
-
-#第六張圖
-plt.subplot(236)
-
-lexus_models = {
-    'CT-200h': 139, 
-    'ES': 167, 
-    'GS': 221, 
-    'IS': 173,
-    'LC': 539,
-    'LS': 337,
-    'LX': 465,
-    'NX': 155,
-    'RC': 243,
-    'RX': 224,
-    'RX L': 260,
-    'UX': 139
-               }
-lexus_prices = np.array(list(lexus_models.values()), dtype=np.int64)
-lexus = list()
-lexus.append(np.count_nonzero(lexus_prices<=150))
-lexus.append(np.count_nonzero((lexus_prices>150)&(lexus_prices<=200)))
-lexus.append(np.count_nonzero((lexus_prices>200)&(lexus_prices<=300)))
-lexus.append(np.count_nonzero(lexus_prices>300))
-labels = ['<=150', '151~200', '201~300', '>300']
-explode = [0.2, 0, 0, 0]
-plt.pie(lexus, explode=explode, autopct='%1.0f%%', 
-        radius=2.0, labels=labels, shadow=True)
-plt.title('Lexus Models Prices')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = '新進1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -413,7 +277,13 @@ print(type(ChineseZodiacSigns))
 print(ChineseZodiacSigns)
 
 plt.bar(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.values(), facecolor="#99ccff")
-plt.xticks(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.keys())
+
+#plt.xticks(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.keys())
+#以上1行 相當於 以下3行
+seq = [0, 1, 2, 3]
+labels = ['鼠', '牛', '虎', '兔']
+plt.xticks(seq, labels)
+
 plt.ylim((0, 55))
 for x, y in zip(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.values()):
     plt.text(x-0.05, y+0.5, "{:>8,.0f}".format(y), ha='center')
@@ -487,21 +357,6 @@ plt.figure(num = '新進3', figsize = (20, 15), dpi = 84, facecolor = "whitesmok
 #第一張圖
 plt.subplot(231)
 
-area = ['大陸','東南亞','東北亞','美國','歐洲','澳紐']
-people = [10000,12600,9600,7500,5100,4800]
-
-'''
-#case 1
-plt.pie(people,labels=area)
-
-#case 2
-plt.pie(people,labels=area,autopct="%1.2f%%")
-'''
-#case 3, 突出一塊
-exp = [0.0,0.0,0.0,0.0,0.0,0.1]
-plt.pie(people,labels=area,explode=exp,autopct="%1.2f%%")
-
-plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
 
 
 
@@ -509,6 +364,23 @@ plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
 #第二張圖
 plt.subplot(232)
 
+#長條圖範例  bar圖畫字典
+
+ranking = {
+    'Toyota RAV4': 2958,
+    'CMC Veryca': 1312,
+    'Nissan Kicks': 1267,
+    'Honda CRV': 1209,
+    'Toyota Sienta': 1163,
+    'Toyota Yaris': 936, 
+    'Toyota': 911,
+    'Ford Focus': 873,
+    'M-Benz C-Class': 749,
+    'Honda HR-V':704
+}
+
+plt.bar(range(len(ranking.values())), ranking.values(), width=0.8)
+plt.xticks(range(len(ranking.values())), ranking.keys(), rotation=45)
 
 
 
@@ -516,25 +388,30 @@ plt.subplot(232)
 #第三張圖
 plt.subplot(233)
 
-
-
-
+n = 10
+x = [i for i in range(0, n+1)]                  # 長條圖x軸座標
+y = x
+width = 0.35                                    # 長條圖寬度
+plt.xticks(x)
+plt.bar(x, y, width, color='g')                 # 繪製長條圖
 
 #第四張圖
 plt.subplot(234)
 
-
+plt.bar(range(10), np.random.randint(1,30,10), fc='#e55934')
 
 
 
 #第五張圖
 plt.subplot(235)
 
+plt.bar(range(1,6), np.random.randint(1,30,5))
 
 
 #第六張圖
 plt.subplot(236)
 
+plt.bar(np.arange(0.6, 5), np.random.randint(1,30,5))
 
 
 

@@ -10,19 +10,20 @@ print(gtts.lang.tts_langs())
 
 txt = 'gTTS可以透過線上翻譯，將文字轉換為語音，並將語音存檔'
 tts = gtts.gTTS(text=txt, lang='zh-tw')
-tts.save('gtts.mp3')
+filename = 'gtts1.mp3'
+tts.save(filename)
+print('存檔完成, 檔名 :', filename)
 
 
-f = open("gtts2.mp3", "wb")
+filename = 'gtts2.mp3'
+f = open(filename, "wb")
 tts1 = gtts.gTTS(text='gTTS可以透過線上翻譯，將文字轉換為語音，並將語音存檔', lang='zh-tw')
 tts1.write_to_fp(f)
 tts2 = gtts.gTTS(text='將文字分解為多個段落，分別轉換為語音', lang='zh-tw')
 tts2.write_to_fp(f)
+print('存檔完成, 檔名 :', filename)
 
-
-
-
-
+print('------------------------------------------------------------')	#60個
 
 
 '''
@@ -32,6 +33,7 @@ pip install SpeechRecognition
 
 '''
 
+print('語音轉文字')
 import speech_recognition as sr
 r = sr.Recognizer()
 with sr.WavFile("record1.wav") as source:  #讀取wav檔
@@ -42,6 +44,7 @@ try:
 except:
     print("語音辨識失敗！")
 
+print('------------------------------------------------------------')	#60個
     
 '''
 #SpeechRecognition：語音轉文字(麥克風)
@@ -50,6 +53,8 @@ except:
 !pip install google.colab
 
 '''
+
+print('------------------------------------------------------------')	#60個
 
 '''
 google.colab 安裝失敗
@@ -125,6 +130,8 @@ except:
     print("語音辨識失敗！")
 '''
 
+print('------------------------------------------------------------')	#60個
+
 '''
 google_trans_new：文字翻譯
 
@@ -146,6 +153,8 @@ print(translator.translate("今日の天気は良いです"))
 lang = translator.detect("今日の天気は良いです")
 print(lang)
 '''
+
+print('------------------------------------------------------------')	#60個
 
 '''
 應用：AI智慧讀報機
@@ -199,6 +208,7 @@ tts.save('news.mp3')
 display.Audio("news.mp3", autoplay=True)
 
 '''
+print('------------------------------------------------------------')	#60個
 
 
 #需安裝playsound:pip install playsound
@@ -216,6 +226,7 @@ for article in paper.articles:
     url = article.url
     if '.html' in url:
         print(url)
+        '''
         try:  #有時會產生無法擷取的錯誤,故使用try
             article = Article(url)
             article.download()
@@ -231,10 +242,12 @@ for article in paper.articles:
                 playsound('news.mp3')
         except:
             pass
+        '''
 
 
+print('------------------------------------------------------------')	#60個
 
-
+'''
 import speech_recognition as sr
 
 r = sr.Recognizer()        
@@ -250,8 +263,17 @@ while True:
                 break
     except:
         print("語音無法辨識\n")
-        
+'''
 
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
 
 
 

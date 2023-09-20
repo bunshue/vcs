@@ -19,10 +19,11 @@ image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的
 plt.imshow(image)
 plt.show()
 
+W, H = image.size
+print('原圖大小 W =', W, ', H =', H)
+
 print('圖片維度 圖片資訊')
 print('Size : ', image.size, 'Mode : ', image.mode, 'Format : ', image.format)
-w, h = image.size
-print('寬 : ', w, '高 : ', h)
 
 print("RGB圖像的維度：", np.array(image).shape)
 image_dim_len = len(np.array(image).shape)
@@ -41,6 +42,7 @@ print("The dim of Image: ", image_dim_len)
 #轉為二值圖像，非黑即白。每個像素用8個bit表示，0表示黑，255表示白。
 image_1 = image.convert('1')	#轉換成二值化圖像
 plt.imshow(image_1)
+
 plt.show()
 
 

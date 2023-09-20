@@ -6,12 +6,9 @@ import random
 
 print('------------------------------------------------------------')	#60個
 
-'''
-ChineseZodiacSigns = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8 }
-print(type(ChineseZodiacSigns))
-print(ChineseZodiacSigns)
-'''
-
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8 }
+print(type(animals))
+print(animals)
 
 print('------------------------------------------------------------')	#60個
 
@@ -57,91 +54,6 @@ for i in range(len(ani)):
 
 print('------------------------------------------------------------')	#60個
 
-animals = ['鼠', '牛', '虎', '兔', '龍']
-print("目前animals串列 : ", animals)
-animals.append('蛇')
-print("目前animals串列 : ", animals)
-animals.insert(3,'馬')
-print("目前animals串列 : ", animals)
-animals.remove('虎')
-print("目前animals串列 : ", animals)
-
-print('------------------------------------------------------------')	#60個
-
-animals = ['鼠', '牛', '虎', '兔', '龍']
-print("目前animals串列 : ", animals)
-
-for ani in animals[:]:
-    animals.remove(ani)
-    print(f"刪除 {ani}")
-    print("目前animals串列 : ", animals)
-
-print('------------------------------------------------------------')	#60個
-
-animals = ['鼠', '牛', '虎', '兔', '龍', '蛇', '馬', '羊', '猴', '雞', '狗', '豬']
-
-print(animals)
-
-for ani in animals:
-    print(ani)
-
-print(animals)
-
-print(animals[:3])
-
-print(animals[3:7])
-
-
-print(animals[7:])
-
-
-animals = ['鼠', '牛', '虎', '兔', '龍', '蛇', '馬', '羊', '猴', '雞', '狗', '豬']
-
-print(type(animals))
-print(animals)
-
-import numpy as np
-for i in range(10):
-    c = np.random.choice(animals)
-    print(f"本次抽中 {c}。")
-
-print('------------------------------------------------------------')	#60個
-
-animals = list('鼠牛虎兔龍蛇馬羊猴雞狗豬')
-
-print(animals)
-print(animals[9])
-print(animals[-1])
-print(animals[3:6])
-print(animals[5:])
-print(animals[:5])
-print(animals[:-2])
-
-#測試list之最後5筆資料
-
-print(animals[-5:])
-
-print('------------------------------------------------------------')	#60個
-
-print('List 操作')
-animals = [('mouse', '鼠', 3),
-      ('ox', '牛', 48),
-      ('tiger', '虎', 33),
-      ('rabbit', '兔', 8),
-      ('dragon', '龍', 38),
-      ('snake', '蛇', 16),
-      ('horse', '馬', 36),
-      ('goat', '羊', 29),
-      ('monkey', '猴', 22),
-      ('chicken', '雞', 6),
-      ('dog', '狗', 12),
-      ('pig', '豬', 42)
-      ]
-print(type(animals))
-print(animals)
-
-print('------------------------------------------------------------')	#60個
-
 # 建立內含字典的字典
 animals = {
     '鼠':{
@@ -169,62 +81,12 @@ print(f"animals['牛']元素個數  {len(animals['牛'])}")
 
 print('------------------------------------------------------------')	#60個
 
-word = 'deepmind'
-alphabetCount = {alphabet:word.count(alphabet) for alphabet in word}
-print(alphabetCount)
-
-word = 'deepmind'
-alphabetCount = {alphabet:word.count(alphabet) for alphabet in set(word)}
-print(alphabetCount)
-
-print('------------------------------------------------------------')	#60個
-
-#set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
-
-cities = { 'Taipei', 'Beijing', 'Tokyo'}
-print(type(cities))
-print(cities)
-# 增加一般元素
-cities.add('Chicago')
-print('cities集合內容 ', cities)
-# 增加已有元素並觀察執行結果
-cities.add('Beijing')
-print('cities集合內容 ', cities)
-
-print(type(cities))
-
-A = {n for n in range(1,20,2)}
-print(type(A))
-print(A)
-
-print('------------------------------------------------------------')	#60個
-
-sc = [['John', 80],['Tom', 90], ['Kevin', 77]]
-sc.sort(key = lambda x:x[1])
-print(sc)
-
-sc = [['John', 80],['Tom', 90], ['Kevin', 77]]
-newsc = sorted(sc, key = lambda x:x[1])
-print(newsc)
-
-sc = {'John' : 80, 'Tom' : 90, 'Kevin' : 77}
-newsc1 = sorted(sc.items(), key = lambda x:x[0])  # 依照key排序
-print("依照人名排序")
-print(newsc1)
-
-newsc2 = sorted(sc.items(), key = lambda x:x[1])  # 依照value排序
-print("依照分數排序")
-print(newsc2)
-
-print('------------------------------------------------------------')	#60個
-
 dict1={"林小明" : 85, "曾山水" : 93, "鄭美麗" : 67}
 dict1["黃明品"] = 71
 dict1["陳莉莉"] = 98
 listitem = dict1.items()
 for name, score in listitem:
     print("%s 的成績為 %d 分" % (name, score))
-
 
 dict1={"林小明" : 85, "曾山水" : 93, "鄭美麗" : 67}
 dict1["黃明品"] = 71
@@ -236,18 +98,6 @@ for i in range(len(listkey)):
 
 print('------------------------------------------------------------')	#60個
 
-print('list 使用')
-lst = [3, 2, 1, 5, 9, 0]
-print(type(lst))
-print(lst)
-sorted(lst)
-print(lst)
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個

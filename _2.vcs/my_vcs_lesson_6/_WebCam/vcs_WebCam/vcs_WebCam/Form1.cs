@@ -180,6 +180,8 @@ namespace vcs_WebCam
 
             //初始化motion detector
             motion_detector = new MotionDetector(new TwoFramesDifferenceDetector(), new MotionAreaHighlighting());
+
+            pictureBox1.Image = vcs_WebCam.Properties.Resources.chicken;
         }
 
         void show_item_location()
@@ -613,6 +615,7 @@ namespace vcs_WebCam
                 }
                 Cam = null;
             }
+            pictureBox1.Image = vcs_WebCam.Properties.Resources.chicken;
         }
 
         public Bitmap bm = null;

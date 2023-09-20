@@ -6,13 +6,13 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen",      # 標籤背景是淺綠色
               width=15)             # 標籤寬度是15
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue",       # 標籤背景是淺藍色
               width=15)             # 標籤寬度是15
 
@@ -65,11 +65,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_6")               # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack(fill=X)                   # 填滿X軸包裝與定位元件
 lab2.pack(pady=10)                  # y軸增加10像素
@@ -81,11 +81,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_7")               # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack(fill=X,pady=10)           # 填滿X軸,Y軸增加10像素
 lab2.pack(pady=10)                  # Y軸增加10像素
@@ -97,13 +97,13 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_8")               # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen",      # 標籤背景是淺綠色
               width=15)             # 標籤寬度是15
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue",       # 標籤背景是淺藍色
               width=15)             # 標籤寬度是15
 lab1.pack(padx=50)                  # 左右邊界間距是50像素
@@ -116,13 +116,13 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_9")               # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen",      # 標籤背景是淺綠色
               width=15)             # 標籤寬度是15
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue",       # 標籤背景是淺藍色
               width=15)             # 標籤寬度是15
 lab1.pack(side=LEFT)                # 包裝與定位元件
@@ -135,11 +135,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_10")               # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack()                         # 包裝與定位元件
 lab2.pack(ipadx=10)                 # ipadx=10包裝與定位元件
@@ -151,11 +151,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_11")               # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack()                         # 包裝與定位元件
 lab2.pack(ipadx=10)                 # ipadx=10包裝與定位元件
@@ -198,11 +198,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_14")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack(fill=X)                   # 填滿X軸包裝與定位元件
 lab2.pack()                         # 包裝與定位元件
@@ -214,11 +214,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_15")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack(fill=X)                   # 填滿X軸包裝與定位元件
 lab2.pack(fill=Y)                   # 填滿Y軸包裝與定位元件
@@ -230,11 +230,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_16")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack(side=LEFT)                # 從左配置控件
 lab2.pack()                         # 預設從上開始配置控件
@@ -246,11 +246,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_17")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack(side=LEFT,fill=Y)         # 從左配置控件fill=Y
 lab2.pack(fill=X)                   # 預設從上開始配置控件fill=X
@@ -262,11 +262,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_18")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack(side=LEFT,fill=Y)         # 從左配置控件fill=Y
 lab2.pack(fill=X)                   # 預設從上開始配置控件fill=X
@@ -278,11 +278,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_19")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack(side=LEFT,fill=Y)         # 從左配置控件fill=Y
 lab2.pack(fill=X)                   # 預設從上開始配置控件fill=X
@@ -294,11 +294,11 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_20")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen")      # 標籤背景是淺綠色
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue")       # 標籤背景是淺藍色
 lab1.pack(side=LEFT,fill=Y)         # 從左配置控件fill=Y
 lab2.pack(fill=X)                   # 預設從上開始配置控件fill=X
@@ -359,13 +359,13 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_24")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
              bg="lightyellow",      # 標籤背景是淺黃色
              width=15)              # 標籤寬度是15     
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
              bg="lightgreen",       # 標籤背景是淺綠色
              width=15)              # 標籤寬度是15            
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
              bg="lightblue",        # 標籤背景是淺藍色
              width=15)              # 標籤寬度是15
 lab1.grid(row=0,column=0)           # 格狀包裝
@@ -378,13 +378,13 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_25")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
              bg="lightyellow",      # 標籤背景是淺黃色
              width=15)              # 標籤寬度是15     
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
              bg="lightgreen",       # 標籤背景是淺綠色
              width=15)              # 標籤寬度是15            
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
              bg="lightblue",        # 標籤背景是淺藍色
              width=15)              # 標籤寬度是15
 lab1.grid(row=0,column=0)           # 格狀包裝
@@ -502,9 +502,9 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_31")              # 視窗標題
-lab1 = Label(window,text="明志工專")
+lab1 = Label(window,text="歡迎來到美國")
 lab2 = Label(window,bg="yellow",width=20)
-lab3 = Label(window,text="明志科技大學")
+lab3 = Label(window,text="歡迎來到美國")
 lab4 = Label(window,bg="aqua",width=20)
 lab1.grid(row=0,column=0,padx=5,pady=5)
 lab2.grid(row=0,column=1,padx=5,pady=5)
@@ -517,9 +517,9 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_32")              # 視窗標題
-lab1 = Label(window,text="明志工專")
+lab1 = Label(window,text="歡迎來到美國")
 lab2 = Label(window,bg="yellow",width=20)
-lab3 = Label(window,text="明志科技大學")
+lab3 = Label(window,text="歡迎來到美國")
 lab4 = Label(window,bg="aqua",width=20)
 lab1.grid(row=0,column=0,padx=5,pady=5,sticky=W)
 lab2.grid(row=0,column=1,padx=5,pady=5)
@@ -532,9 +532,9 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_33")              # 視窗標題
-lab1 = Label(window,text="明志工專",relief="raised")
+lab1 = Label(window,text="歡迎來到美國",relief="raised")
 lab2 = Label(window,bg="yellow",width=20)
-lab3 = Label(window,text="明志科技大學",relief="raised")
+lab3 = Label(window,text="歡迎來到美國",relief="raised")
 lab4 = Label(window,bg="aqua",width=20)
 lab1.grid(row=0,column=0,padx=5,pady=5)
 lab2.grid(row=0,column=1,padx=5,pady=5)
@@ -547,9 +547,9 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_34")              # 視窗標題
-lab1 = Label(window,text="明志工專",relief="raised")
+lab1 = Label(window,text="歡迎來到美國",relief="raised")
 lab2 = Label(window,bg="yellow",width=20)
-lab3 = Label(window,text="明志科技大學",relief="raised")
+lab3 = Label(window,text="歡迎來到美國",relief="raised")
 lab4 = Label(window,bg="aqua",width=20)
 lab1.grid(row=0,column=0,padx=5,pady=5,sticky=W+E)
 lab2.grid(row=0,column=1,padx=5,pady=5)
@@ -635,13 +635,13 @@ print('------------------------------------------------------------')	#60個
 
 window = Tk()
 window.title("ch3_36")              # 視窗標題
-lab1 = Label(window,text="明志科技大學",
+lab1 = Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
-lab2 = Label(window,text="長庚大學",
+lab2 = Label(window,text="歡迎來到美國",
               bg="lightgreen",      # 標籤背景是淺綠色
               width=15)             # 標籤寬度是15
-lab3 = Label(window,text="長庚科技大學",
+lab3 = Label(window,text="歡迎來到美國",
               bg="lightblue",       # 標籤背景是淺藍色
               width=15)             # 標籤寬度是15
 lab1.place(x=0,y=0)                 # 直接定位
