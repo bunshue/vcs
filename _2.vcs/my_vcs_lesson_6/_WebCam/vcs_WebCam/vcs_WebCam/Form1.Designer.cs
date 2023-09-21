@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lb_fps = new System.Windows.Forms.Label();
@@ -75,6 +76,7 @@
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_qr_code = new System.Windows.Forms.Timer(this.components);
+            this.bt_open_folder = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -129,6 +131,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.bt_open_folder);
             this.groupBox4.Controls.Add(this.bt_motion_detection);
             this.groupBox4.Controls.Add(this.bt_record);
             this.groupBox4.Controls.Add(this.rb_5X5);
@@ -599,6 +602,16 @@
             this.timer_qr_code.Interval = 1000;
             this.timer_qr_code.Tick += new System.EventHandler(this.timer_qr_code_Tick);
             // 
+            // bt_open_folder
+            // 
+            this.bt_open_folder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_folder.Location = new System.Drawing.Point(319, 150);
+            this.bt_open_folder.Name = "bt_open_folder";
+            this.bt_open_folder.Size = new System.Drawing.Size(60, 60);
+            this.bt_open_folder.TabIndex = 59;
+            this.bt_open_folder.UseVisualStyleBackColor = true;
+            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -608,6 +621,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "WebCam";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -674,6 +688,7 @@
         private System.Windows.Forms.RadioButton rb_3X3;
         private System.Windows.Forms.Button bt_record;
         private System.Windows.Forms.Button bt_motion_detection;
+        private System.Windows.Forms.Button bt_open_folder;
     }
 }
 

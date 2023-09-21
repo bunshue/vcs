@@ -1,17 +1,15 @@
 import os
 import shutil
 
-source_foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
-target_foldername = 'my_tmp_dir1'
-
-output_dir = 'my_tmp_dir'
+source_foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'   #來源資料夾
+target_foldername = 'my_tmp_dir' #輸出資料夾
 
 sample_tree = os.walk(source_foldername)
 
 for dirname,subdir,files in sample_tree:
    allfiles = []
    basename = os.path.basename(dirname)
-   if basename == output_dir:  # output 目錄不再重複處理
+   if basename == target_foldername:  # 輸出資料夾不再重複處理
       continue
    
    for file in files:  # 讀取所有 jpg 檔名，存入 allfiles 串列中
@@ -19,8 +17,8 @@ for dirname,subdir,files in sample_tree:
       if ext == "jpg": # 讀取 *.jpg to allfiles
          allfiles.append(file)
          
-   if len(allfiles) > 0: # 將 jpg 存入 output 目錄中
-      target_dir = dirname + '/' + output_dir
+   if len(allfiles) > 0: # 將 jpg 存入 輸出資料夾 中
+      target_dir = dirname + '/' + target_foldername
       if not os.path.exists(target_dir):
          os.mkdir(target_dir)
   

@@ -792,7 +792,11 @@ print("總共還款金額 %d" % int(total_pay))
 
 print('------------------------------------------------------------')	#60個
 
-numberStr = input("請輸入數值公式 : ")
+print('測試 eval()')
+
+numberStr = '12.34*56.78'
+print('數值公式 :', numberStr)
+
 number = eval(numberStr)
 print("計算結果 : %5.2f" % number)
 
@@ -803,20 +807,18 @@ from datetime import date, timedelta
 d0 = date(1993, 12, 15)
 d1 = date(2020, 12, 15)
 
-delta = timedelta(days=1)
+delta = timedelta(days = 1)
+print('日期 :', d0 + delta)
 
-print(d0 + delta)
+delta = timedelta(days = 10000)
+print('日期 :', d0 + delta)
 
-delta = timedelta(days=10000)
+print('相距日期 :', d1 - d0, '天')
 
-print(d0 + delta)
-
-print(d1-d0)
 
 d0 = date(2021, 5, 24)
 d1 = date(2023, 8, 21)
-
-print(d1-d0)
+print('相距日期 :', d1 - d0, '天')
 
 print('------------------------------------------------------------')	#60個
 
@@ -950,13 +952,11 @@ print("info   = ", i)
 
 print('------------------------------------------------------------')	#60個
 
-
 import random
+
 random.seed(5)  #固定亂數種子
 for i in range(5):
     print(random.random())
-    
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -970,7 +970,16 @@ print('------------------------------------------------------------')	#60個
 import random                   # 導入模組random
 
 for i in range(10):
-    print(random.choice([1,2,3,4,5,6]), end=",")
+    print(random.choice([1, 2, 3, 4, 5, 6, 7]), end = ",")
+print()
+
+LETTERS = 'ABCDEFG'
+lettersList = list(LETTERS) #字串 轉 串列
+
+for i in range(10):
+    print(random.choice(lettersList), end = ",")
+
+print()
 
 print('------------------------------------------------------------')	#60個
 
@@ -993,6 +1002,21 @@ print("第xxx期大樂透號碼 ", end="")
 for lottery in sorted(lotterys):            # 排序列印大樂透號碼
     print(lottery, end=" ")
 print(f"\n特別號:{specialNum}")             # 列印特別號
+
+print('------------------------------------------------------------')	#60個
+
+import random
+
+trials = 1000000
+Hits = 0
+for i in range(trials):
+    x = random.random() * 2 - 1     # x軸座標
+    y = random.random() * 2 - 1     # y軸座標
+    if x * x + y * y <= 1:          # 判斷是否在圓內
+        Hits += 1
+PI = 4 * Hits / trials
+
+print("PI = ", PI)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1051,21 +1075,6 @@ print(version_rows)
 
 if sys.version_info.major < 3 or sys.version_info.minor < 3:
     sys.exit("Error: clinic.py requires Python 3.3 or greater.")
-
-print('------------------------------------------------------------')	#60個
-
-import random
-
-trials = 1000000
-Hits = 0
-for i in range(trials):
-    x = random.random() * 2 - 1     # x軸座標
-    y = random.random() * 2 - 1     # y軸座標
-    if x * x + y * y <= 1:          # 判斷是否在圓內
-        Hits += 1
-PI = 4 * Hits / trials
-
-print("PI = ", PI)
 
 print('------------------------------------------------------------')	#60個
 

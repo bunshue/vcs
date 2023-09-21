@@ -296,6 +296,8 @@ namespace vcs_WebCam
             bt_info.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_fullscreen.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_help.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_open_folder.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
 
             cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             cb_image_processing.Location = new Point(x_st + dx * 1, y_st + dy * 3);
@@ -1287,6 +1289,12 @@ namespace vcs_WebCam
             MessageBox.Show(message, "WebCam操作說明");
         }
 
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            //開啟檔案總管
+            Process.Start(Application.StartupPath);
+        }
+
         private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (flag_fullscreen == false)
@@ -1437,6 +1445,7 @@ namespace vcs_WebCam
 
             //writer.Open(filename, webcam_w, webcam_h, webcam_fps, VideoCodec.MPEG4);
         }
+
     }
 }
 

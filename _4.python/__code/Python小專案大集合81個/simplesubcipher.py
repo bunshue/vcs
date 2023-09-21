@@ -14,6 +14,9 @@ except ImportError:
 
 # Every possible symbol that can be encrypted/decrypted:
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+lettersList = list(LETTERS) #字串 轉 串列
+print(type(lettersList))
+print(lettersList)
 
 def main():
     print('''Simple Substitution Cipher, by Al Sweigart

@@ -108,8 +108,10 @@ def isLeapYear(year):
     return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
 
 
-year = 2006
-month = 3
-# Print calendar for the month of the year
+year, month = 2006, 3
 printMonth(year, month)
 
+print()
+
+year, month = 2023, 9
+printMonth(year, month)

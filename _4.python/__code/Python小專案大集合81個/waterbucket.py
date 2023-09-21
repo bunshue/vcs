@@ -13,7 +13,9 @@ GOAL = 4  # The exact amount of water to have in a bucket to win.
 steps = 0  # Keep track of how many steps the player made to solve this.
 
 # The amount of water in each bucket:
-waterInBucket = {'8': 0, '5': 0, '3': 0}
+waterInBucket = {'8': 0, '5': 0, '3': 0}    #字典
+print(type(waterInBucket))
+print(waterInBucket)
 
 while True:  # Main game loop.
     # Display the current state of the buckets:

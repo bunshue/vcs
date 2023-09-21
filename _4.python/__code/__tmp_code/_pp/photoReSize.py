@@ -1,8 +1,8 @@
 import os
 from PIL import Image
 
-source_foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
-target_foldername = 'my_tmp_dir2'
+source_foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'   #來源資料夾
+target_foldername = 'my_tmp_dir' #輸出資料夾
 
 sample_tree = os.walk(source_foldername)
 
@@ -11,7 +11,7 @@ image_width = 800
 for dirname, subdir, files in sample_tree:
     allfiles = [] 
     basename = os.path.basename(dirname)
-    if basename == target_foldername:  # resized_photo 目錄不再重複處理
+    if basename == target_foldername:  # 輸出資料夾不再重複處理
         continue  
     for file in files:  # 取得所有 .png .jpg 檔，存入 allfiles 串列中
         ext = file.split('.')[-1]

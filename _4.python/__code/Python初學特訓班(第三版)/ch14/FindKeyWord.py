@@ -2,16 +2,17 @@ import os
 
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 sample_tree = os.walk(cur_path)
+
 keyword = "shutil"
 
-for dirname,subdir,files in sample_tree:
+for dirname, subdir, files in sample_tree:
    allfiles = []   
    for file in files:  # 取得所有 .py .txt 檔，存入 allfiles 串列中
       ext = file.split('.')[-1]
       if ext == "py" or ext == "txt": 
          allfiles.append(dirname + '/' + file)
          
-   if len(allfiles)>0:  
+   if len(allfiles) > 0:  
       for file in allfiles:  # 讀取 allfiles 串列所有檔案  
          try:
             fp = open(file, "r", encoding = 'UTF-8')
