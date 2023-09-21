@@ -1,24 +1,62 @@
 '''
 
-裁剪圖片
+PIL 圖片相關的處理
+
+
+
+#rotate_image.save('rotate_90.jpg')#儲存90度旋轉的圖片
+#gray_iamge.save('gray_image.jpg') 
+#black_and_white.save('b_and_w.jpg')
+#convert_image.save('rgb_to_bgr.jpg')
 
 '''
+
+import sys
+import matplotlib.pyplot as plt
+from PIL import Image   # Importing Image class from PIL module
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
-from PIL import Image   # Importing Image class from PIL module
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-print('圖片裁剪縮放')
-
-filename = r'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
-
+image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
+print("列出物件檔名 : ", image1.filename)
+print("列出物件型態 : ", type(image1))
+print("列出物件副檔名 : ", image1.format)
+print("列出物件描述   : ", image1.format_description)
+W, H = image1.size
+print('原圖大小 W =', W, ', H =', H)
+print('顯示原圖')
 plt.imshow(image1)
 plt.show()
- 
+
+print('------------------------------------------------------------')	#60個
+
+print('測試 縮放 resize')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
+W, H = image1.size
+print('原圖大小 W =', W, ', H =', H)
+
+print('寬度變2倍, 高度變一半')
+W2, H2 = W * 2, H // 2
+print('把原圖轉成', W2, 'X', H2, '大小')
+image2 = image1.resize((W2, H2), Image.ANTIALIAS)
+
+plt.imshow(image2)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print('測試 裁剪 crop')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
 W, H = image1.size
 print('原圖大小 W =', W, ', H =', H)
 
@@ -26,16 +64,108 @@ x_st = 100
 y_st = 200
 w = 200
 h = 200
-image2 = image1.crop((x_st, y_st, x_st + w, y_st + h))
+#                     x_st  y_st    x_sp     y_sp
+image2 = image1.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間
 
+print('顯示一塊')
 plt.imshow(image2)
 plt.show()
 
-print('把圖轉成 100X500 大小')
-image3 = image1.resize((100, 500), Image.ANTIALIAS)
+print('------------------------------------------------------------')	#60個
 
-plt.imshow(image3)
+image = Image.open(filename)     # 建立Pillow物件
+
+print('複製圖片')
+image_copied = image.copy() #複製圖片
+#plt.imshow(image_copied)
+#plt.show()
+
+x_st = 0
+y_st = 0
+w = 305 / 4
+h = 400 / 4
+#                             x_st  y_st    x_sp     y_sp
+cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間
+image_copied.paste(cropPict, (20, 20))          # 第一次合成
+image_copied.paste(cropPict, (20, 20 + 120))    # 第二次合成
+image_copied.paste(cropPict, (20, 20 + 240))    # 第三次合成
+
+print('合成圖片')
+plt.imshow(image_copied)
 plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+image = Image.open(filename)     # 建立Pillow物件
+
+print('複製圖片')
+image_copied = image.copy() #複製圖片
+
+x_st = 0
+y_st = 0
+w = 305 / 4
+h = 400 / 4
+#                             x_st  y_st    x_sp     y_sp
+cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))    # 裁切區間
+cropW, cropH = cropPict.size           # 獲得裁切區間的寬與高
+
+W, H = 600, 320                        # 新影像寬與高
+image = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
+for x in range(20, W - 20, cropW):         # 雙層迴圈合成
+    for y in range(20, H - 20, cropH):
+        image.paste(cropPict, (x, y))        # 合成
+
+print('合成圖片')
+plt.imshow(image)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print('測試 旋轉 rotate')
+
+image = Image.open(filename)     # 建立Pillow物件
+
+print('旋轉90度')
+plt.imshow(image.rotate(90))
+plt.show()
+
+print('旋轉180度')
+plt.imshow(image.rotate(180))
+plt.show()
+
+print('旋轉270度')
+plt.imshow(image.rotate(270))
+plt.show()
+
+print('旋轉90度 ??')
+rotate_image = image.transpose(Image.ROTATE_90)
+plt.imshow(rotate_image)
+plt.show()
+
+print('旋轉45度')
+plt.imshow(image.rotate(45))
+plt.show()
+
+print('旋轉45度 + 圖像擴充')
+plt.imshow(image.rotate(45, expand = True))
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+image = Image.open(filename)     # 建立Pillow物件
+
+print('左右相反')
+plt.imshow(image.transpose(Image.FLIP_LEFT_RIGHT))   # 左右
+plt.show()
+
+print('上下顛倒')
+plt.imshow(image.transpose(Image.FLIP_TOP_BOTTOM))   # 上下
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -93,8 +223,9 @@ from PIL import Image
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample.jpg'
 filename = r'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-plt.imshow(image1)  #原圖
-plt.show()
+#print('顯示原圖')
+#plt.imshow(image1)
+#plt.show()
 
 image1g = image1.convert('L')	#轉換成灰階圖像
 plt.imshow(image1g)      #灰階圖
@@ -114,8 +245,9 @@ plt.show()
 
 image2_hist = image2.histogram()
 
-print('把圖轉成 100X500 大小')
-image3 = image1.resize((100, 500), Image.ANTIALIAS)
+W2, H2 = 400, 200
+print('把原圖轉成', W2, 'X', H2, '大小')
+image3 = image1.resize((W2, H2), Image.ANTIALIAS)
 
 plt.imshow(image3)
 plt.show()
@@ -133,11 +265,11 @@ b_hist = b.histogram()
 
 ind = np.arange(0, len(image2_hist))
 
-plt.plot(ind, image2_hist, color='cyan', label='cropped')
-plt.plot(ind, hist, color='black', lw=2, label='original')
-plt.plot(ind, r_hist, color='red', label='Red Plane')
-plt.plot(ind, g_hist, color='green', label='Green Plane')
-plt.plot(ind, g_hist, color='blue', label='Blue Plane')
+plt.plot(ind, image2_hist, color = 'cyan', label = 'cropped')
+plt.plot(ind, hist, color = 'black', lw = 2, label = 'original')
+plt.plot(ind, r_hist, color = 'red', label = 'Red Plane')
+plt.plot(ind, g_hist, color = 'green', label = 'Green Plane')
+plt.plot(ind, g_hist, color = 'blue', label = 'Blue Plane')
 plt.xlim(0, 255)
 plt.ylim(0, 8000)
 plt.legend()
@@ -156,8 +288,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample2.png'
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-plt.imshow(image1)
-plt.show()
+#print('顯示原圖')
+#plt.imshow(image1)
+#plt.show()
 
 #全彩轉灰階
 image1 = image1.convert("L")
@@ -211,8 +344,6 @@ convert_image = Image.merge('RGB', (b, g, r))
 plt.imshow(convert_image)
 plt.show()
 
-#convert_image.save('rgb_to_bgr.jpg')
-
 print('------------------------------------------------------------')	#60個
 
 from PIL import Image
@@ -223,8 +354,6 @@ black_and_white = image.convert('1')
 
 plt.imshow(black_and_white)
 plt.show()
-
-#black_and_white.save('b_and_w.jpg')
 
 print('------------------------------------------------------------')	#60個
 
@@ -237,150 +366,24 @@ gray_iamge = image.convert('L')
 plt.imshow(gray_iamge)
 plt.show()
 
-#gray_iamge.save('gray_image.jpg') 
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image
-
-image = Image.open(filename)
-
-rotate_image = image.transpose(Image.ROTATE_90)
-plt.imshow(rotate_image)
-plt.show()
-
-#rotate_image.save('rotate_90.jpg')#儲存90度旋轉的圖片
-
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print('------------------------------------------------------------')	#60個
 
-print('PIL 有圖處理')
-
-image = Image.open(filename)     # 建立Pillow物件
-print("列出物件檔名 : ", image.filename)
-print("列出物件型態 : ", type(image))
-
-W, H = image.size
-print('原圖大小 W =', W, ', H =', H)
-print("列出物件副檔名 : ", image.format)
-print("列出物件描述   : ", image.format_description)
-
-plt.imshow(image)
-plt.show()
-
-W, H = image.size
-newPict1 = image.resize((W * 2, H))   # 寬度是2倍
-
-plt.imshow(newPict1)
-plt.show()
-
-newPict2 = image.resize((W, H * 2))   # 高度是2倍
-
-plt.imshow(newPict2)
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.open(filename)     # 建立Pillow物件
-
-plt.imshow(image.rotate(90))    # 旋轉90度
-plt.show()
-
-plt.imshow(image.rotate(180))   # 旋轉180度
-plt.show()
-
-plt.imshow(image.rotate(270))   # 旋轉270度
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.open(filename)     # 建立Pillow物件
-
-plt.imshow(image.rotate(45))   # 旋轉45度
-plt.show()
-
-plt.imshow(image.rotate(45, expand = True))   # 旋轉45度+圖像擴充
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.open(filename)     # 建立Pillow物件
-
-print('左右相反')
-plt.imshow(image.transpose(Image.FLIP_LEFT_RIGHT))   # 左右
-plt.show()
-
-print('上下顛倒')
-plt.imshow(image.transpose(Image.FLIP_TOP_BOTTOM))   # 上下
-plt.show()
-
 print('------------------------------------------------------------')	#60個
 
-image = Image.open(filename)     # 建立Pillow物件
-
-x_st = 0
-y_st = 0
-w = 305/3
-h = 400/3
-#                      x_st   y_st   x_sp     y_sp
-cropPict = image.crop((x_st, y_st, x_st + w, y_st + h)) # 裁切區間
-
-print('顯示一塊')
-plt.imshow(cropPict)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)     # 建立Pillow物件
-
-print('複製圖片')
-image_copied = image.copy() #複製圖片
-#plt.imshow(image_copied)
-#plt.show()
-
-x_st = 0
-y_st = 0
-w = 305 / 4
-h = 400 / 4
-#                             x_st  y_st    x_sp     y_sp
-cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間
-image_copied.paste(cropPict, (20, 20))          # 第一次合成
-image_copied.paste(cropPict, (20, 20 + 120))    # 第二次合成
-image_copied.paste(cropPict, (20, 20 + 240))    # 第三次合成
-
-print('合成圖片')
-plt.imshow(image_copied)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)     # 建立Pillow物件
-
-print('複製圖片')
-image_copied = image.copy() #複製圖片
-
-x_st = 0
-y_st = 0
-w = 305 / 4
-h = 400 / 4
-#                             x_st  y_st    x_sp     y_sp
-cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))    # 裁切區間
-cropW, cropH = cropPict.size           # 獲得裁切區間的寬與高
-
-W, H = 600, 320                        # 新影像寬與高
-image = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
-for x in range(20, W - 20, cropW):         # 雙層迴圈合成
-    for y in range(20, H - 20, cropH):
-        image.paste(cropPict, (x, y))        # 合成
-
-print('合成圖片')
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
+print('測試 濾鏡 filter')
 
 from PIL import ImageFilter
 

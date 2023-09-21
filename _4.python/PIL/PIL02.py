@@ -54,20 +54,23 @@ print(ImageColor.getcolor("Blue", "RGBA"))
 
 print('------------------------------------------------------------')	#60個
 
-W, H = 300, 180
-image = Image.new('RGB', (W, H), 'aqua')  # 建立aqua顏色影像
+print('建立aqua顏色影像')
+W, H = 300, 100
+image = Image.new('RGB', (W, H), 'aqua')
 plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-W, H = 300, 180
-image = Image.new('RGBA', (W, H)) # 建立完全透明影像
+print('建立完全透明影像')
+W, H = 300, 100
+image = Image.new('RGBA', (W, H))
 plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+print('建立黃色影像, 在上面畫圖')
 W, H = 300, 100
 image = Image.new('RGBA', (W, H), "Yellow")
 
@@ -84,8 +87,6 @@ for x in range(50, 251):                            # x軸區間在50-250
 
 plt.imshow(image)
 plt.show()
-
-
 
 print('------------------------------------------------------------')	#60個
 

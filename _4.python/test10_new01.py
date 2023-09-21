@@ -240,34 +240,6 @@ for cate in [1, 4]:
         print(url.format(cate, pg))
 
 
-
-def hexToDecimal(hex):
-    decimalValue = 0
-    for i in range(len(hex)):
-        ch = hex[i]
-        if 'A' <= ch <= 'F' or '0' <= ch <= '9':
-            decimalValue = decimalValue * 16 + \
-                hexCharToDecimal(ch)
-        else:
-            return None
-
-    return decimalValue
-
-def hexCharToDecimal(ch):
-    if 'A' <= ch <= 'F':
-        return 10 + ord(ch) - ord('A')
-    else:
-        return ord(ch) - ord('0')
-
-hex = 'aa'
-decimal = hexToDecimal(hex.upper())
-
-if decimal == None:
-    print("Incorrect hex number")
-else:
-    print("The decimal value for hex number", hex, "is", decimal) 
-
-
 print('------------------------------------------------------------')	#60個
 
 from urllib import parse
@@ -348,18 +320,7 @@ print('無strip <<<' + input_string + '>>>')
 input_string = input_string.strip()
 print('有strip <<<' + input_string + '>>>')
 
-def printArea(width = 1, height = 2):
-    area = width * height
-    print("width:", width, "\theight:", height, "\tarea:", area)
-
-printArea() # Default arguments width = 1 and height = 2
-printArea(4, 2.5) # Positional arguments width = 4 and height = 2.5
-printArea(height = 5, width = 3) # Keyword arguments width 
-printArea(width = 1.2) # Default height = 2
-printArea(height = 6.2) # Default widht = 1
-
 print('------------------------------------------------------------')	#60個
-
 
 a = 5
 b = "Hello"
@@ -381,7 +342,6 @@ print(a.replace("learn", "teach"))
 print(a.split(" "))
 print(a + b)
 
-
 string = '測試字串是不是有被包含'
 ss = '要'
 if ss in string:
@@ -395,28 +355,7 @@ if ss in string:
 else:
     print('沒有被包含')
 
-
-
-#檢查有無包含中文
-def is_contains_chinese():
-  print('is_contains_chinese')
-  global search_word
-  for _char in search_word:
-    if '\u4e00' <= _char <= '\u9fa5':
-      print('True')
-      return True
-  print('False')
-  return False
-  
-
-search_word = 'oat'
-is_contains_chinese()
-search_word = '英國'
-is_contains_chinese()
-
-
 print('------------------------------------------------------------')	#60個
-
 
 '''
 print('一種寫入檔案的方法')
@@ -454,34 +393,6 @@ string = '你'
 print(ord(string))
 
 #print(hex(ord(string)))
-
-print('十進位 轉 十六進位')
-
-# Convert a decimal to a hex as a string 
-def decimalToHex(decimalValue):
-    hex = ""
- 
-    while decimalValue != 0:
-        hexValue = decimalValue % 16 
-        hex = toHexChar(hexValue) + hex
-        decimalValue = decimalValue // 16
-    
-    return hex
-  
-# Convert an integer to a single hex digit in a character 
-def toHexChar(hexValue):
-    if 0 <= hexValue <= 9:
-        return chr(hexValue + ord('0'))
-    else:  # 10 <= hexValue <= 15
-        return chr(hexValue - 10 + ord('A'))
-
-decimalValue = 170
-hexValue = decimalToHex(decimalValue)
-print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
-
-decimalValue = 65535
-hexValue = decimalToHex(decimalValue)
-print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
 
 print('------------------------------------------------------------')	#60個
 
@@ -527,33 +438,6 @@ s = 'this is a lion mouse'
 
 print(s.title())
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-import itertools
-import threading
-import subprocess
-from optparse import OptionParser, SUPPRESS_HELP
-
-def bark(duration):
-
-    _time = time.time
-    _sleep = time.sleep
-    
-    # We give the parent some time to be ready.
-    _sleep(1.0)
-
-    start_time = _time()
-    end_time = start_time + duration * 2.0
-    i = 0
-    while _time() < end_time:
-        print('b', end = ' ')
-        i += 1
-
-
-bark(0.2)
 
 
 print('------------------------------------------------------------')	#60個
@@ -646,24 +530,6 @@ print(name)
 
 print('------------------------------------------------------------')	#60個
 
-def gcd(a, b):
-    """Calculate the Greatest Common Divisor of a and b.
-
-    Unless b==0, the result will have the same sign as b (so that when
-    b is divided by it, the result comes out positive).
-    """
-    while b:
-        a, b = b, a%b
-    return a
-
-a = 28
-b = 49
-c = gcd(a, b)
-print(c)
-
-
-print('------------------------------------------------------------')	#60個
-
 import sys
 bytes = sys.maxsize  # smallest total size so far
 print(bytes)
@@ -721,14 +587,11 @@ print(data)
 
 print('------------------------------------------------------------')	#60個
 
-
 import importlib
 import platform
 import sys
 from types import ModuleType
 from typing import Optional, Tuple, List, cast
-
-
 
 def print_table(version_rows: List[Tuple[str, str]]) -> None:
     row_format = "{:12} | {}"
@@ -738,16 +601,13 @@ def print_table(version_rows: List[Tuple[str, str]]) -> None:
         # Some version strings have multiple lines and need to be squashed
         print(row_format.format(module, version.replace("\n", " ")))
 
-
 def extract_version(module: ModuleType) -> Optional[str]:
     if module.__name__ == "gdcm":
         return cast(Optional[str], getattr(module, "GDCM_VERSION", None))
 
     return cast(Optional[str], getattr(module, "__version__", None))
 
-
-
-
+'''
 modules = (
     "os", "sys", "cv2", "numpy", "PIL", "pylibjpeg",
     "openjpeg", "libjpeg",
@@ -765,13 +625,9 @@ for module in modules:
 
 print('print_table')
 print_table(version_rows)
+'''
 
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 import os
 from os.path import abspath
@@ -782,47 +638,23 @@ def _basename(path):
     sep = os.path.sep + (os.path.altsep or '')
     return os.path.basename(path.rstrip(sep))
 
-
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 base_name = _basename(filename)
 print(base_name)
 
-
-
 src = abspath(base_name)
 print(src)
 
-
 zip_filename = base_name + ".zip"
-
 print(zip_filename)
-
 
 print('------------------------------------------------------------')	#60個
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'C:/_git/vcs/_1.data/______test_files2'
 
 normdir = os.path.normcase(foldername)
 print(normdir)
 
-
-print('------------------------------------------------------------')	#60個
-
-import collections
-
-import nt
-_ntuple_diskusage = collections.namedtuple('usage', 'total used free')
-
-def disk_usage(path):
-    total, free = nt._getdiskusage(path)
-    used = total - free
-    return _ntuple_diskusage(total, used, free)
-
-
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
-ret = disk_usage(foldername)
-print(ret)
 
 print('------------------------------------------------------------')	#60個
 
@@ -846,15 +678,6 @@ fn = os.path.relpath(foldername, code_place)
 print(fn)
 
 print('------------------------------------------------------------')	#60個
-
-def test():
-    for x in 'abcde':
-        for y in '12345':
-            print(y, x, end = ' ')
-
-test()
-print('------------------------------------------------------------')	#60個
-
 
 ENDMARKER = 0
 NAME = 1
@@ -984,23 +807,6 @@ print("s=/%2s/" % s)
 
 title = "南極旅遊講座"
 print("/{0:*^20s}/".format(title))
-
-
-print('------------------------------------------------------------')	#60個
-
-
-import math
-
-r = 6371                        # 地球半徑
-x1, y1 = 22.2838, 114.1731      # 香港紅磡車站經緯度
-x2, y2 = 25.0452, 121.5168      # 台北車站經緯度
-
-d = 6371*math.acos(math.sin(math.radians(x1))*math.sin(math.radians(x2))+
-                   math.cos(math.radians(x1))*math.cos(math.radians(x2))*
-                   math.cos(math.radians(y1-y2)))
-
-print("distance = ", d)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1150,16 +956,6 @@ print()
   
 print('------------------------------------------------------------')	#60個
 
-
-x = 1000000
-pi = 0
-for i in range(1,x+1):
-    pi += 4*((-1)**(i+1) / (2*i-1))
-    if i % 100000 == 0:      # 隔100000執行一次
-        print(f"當 {i = :7d} 時 PI = {pi:20.19f}")
-
-print('------------------------------------------------------------')	#60個
-
 fields = ['Name', 'Age', 'Hometown']
 info = ['Peter', '30', 'Chicago']
 zipData = zip(fields, info)     # 執行zip
@@ -1255,6 +1051,7 @@ print("夏令時間 ", xtime[8])
 
 print('------------------------------------------------------------')	#60個
 
+''' fail in kilo
 import time
 
 x = 1000000
@@ -1265,6 +1062,17 @@ for i in range(1,x+1):
     if i != 1 and i % 100000 == 0:      # 隔100000執行一次
         e_time = time.process_time()
         print(f"當 {i=:7d} 時 PI={pi:8.7f}, 所花時間={e_time}")
+
+
+
+x = 1000000
+pi = 0
+for i in range(1,x+1):
+    pi += 4*((-1)**(i+1) / (2*i-1))
+    if i % 100000 == 0:      # 隔100000執行一次
+        print(f"當 {i = :7d} 時 PI = {pi:20.19f}")
+
+'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -1338,48 +1146,9 @@ print("加密字串 ", ciphertext)
 
 print('------------------------------------------------------------')	#60個
 
-sc = [['John', 80],['Tom', 90], ['Kevin', 77]]
-sc.sort(key = lambda x:x[1])
-print(sc)
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 print(f"全域變數 : {globals()}")
 
 print('------------------------------------------------------------')	#60個
-
-# 定義lambda函數
-square = lambda x: x ** 2
-
-# 輸出平方值
-print(square(10))
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-def gcd(a, b):
-    if a < b:
-        a, b = b, a
-    while b != 0:
-        tmp = a % b
-        a = b
-        b = tmp
-    return a
-
-a, b = 24, 36
-print("最大公約數是 : ", gcd(a, b))
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
 
 import os
 
@@ -1398,13 +1167,8 @@ def find_similar_images(foldername):
     for img in sorted(image_filenames):
         print(img)
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'C:/_git/vcs/_1.data/______test_files2'
 find_similar_images(foldername)
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1433,7 +1197,6 @@ print(datetime.datetime.now())
 
 import datetime
 
-
 today = datetime.datetime.today()
 birthday = datetime.datetime(2018,10,27, 17, 0, 0)
 print(today - birthday)
@@ -1452,7 +1215,6 @@ import calendar
 print(calendar.month(2018,10))
 print(calendar.calendar(2019))
 
-
 print('------------------------------------------------------------')	#60個
 
 import os
@@ -1464,6 +1226,7 @@ for item in items:
 
 print('------------------------------------------------------------')	#60個
 
+''' no file
 import os
 fullpath = os.path.abspath('myprime.py')
 print(fullpath)
@@ -1480,7 +1243,7 @@ print("os.path.split:", os.path.split(fullpath))
 print("os.path.splitdrive:", os.path.splitdrive(fullpath))
 print("os.path.splitext:", os.path.splitext(fullpath))
 
-
+'''
 
 
 print('------------------------------------------------------------')	#60個
@@ -1781,6 +1544,246 @@ print('------------------------------------------------------------')	#60個
 
 
 
+#以下為OK可以搬出的
 
 
+print('------------------------------------------------------------')	#60個
+
+
+import math
+
+r = 6371                        # 地球半徑
+x1, y1 = 22.2838, 114.1731      # 香港紅磡車站經緯度
+x2, y2 = 25.0452, 121.5168      # 台北車站經緯度
+
+d = 6371*math.acos(math.sin(math.radians(x1))*math.sin(math.radians(x2))+
+                   math.cos(math.radians(x1))*math.cos(math.radians(x2))*
+                   math.cos(math.radians(y1-y2)))
+
+print("distance = ", d)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+def hexToDecimal(hex):
+    decimalValue = 0
+    for i in range(len(hex)):
+        ch = hex[i]
+        if 'A' <= ch <= 'F' or '0' <= ch <= '9':
+            decimalValue = decimalValue * 16 + \
+                hexCharToDecimal(ch)
+        else:
+            return None
+
+    return decimalValue
+
+def hexCharToDecimal(ch):
+    if 'A' <= ch <= 'F':
+        return 10 + ord(ch) - ord('A')
+    else:
+        return ord(ch) - ord('0')
+
+hex = 'aa'
+decimal = hexToDecimal(hex.upper())
+
+if decimal == None:
+    print("Incorrect hex number")
+else:
+    print("The decimal value for hex number", hex, "is", decimal) 
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('十進位 轉 十六進位')
+
+# Convert a decimal to a hex as a string 
+def decimalToHex(decimalValue):
+    hex = ""
+ 
+    while decimalValue != 0:
+        hexValue = decimalValue % 16 
+        hex = toHexChar(hexValue) + hex
+        decimalValue = decimalValue // 16
+    
+    return hex
+  
+# Convert an integer to a single hex digit in a character 
+def toHexChar(hexValue):
+    if 0 <= hexValue <= 9:
+        return chr(hexValue + ord('0'))
+    else:  # 10 <= hexValue <= 15
+        return chr(hexValue - 10 + ord('A'))
+
+decimalValue = 170
+hexValue = decimalToHex(decimalValue)
+print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
+
+decimalValue = 65535
+hexValue = decimalToHex(decimalValue)
+print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
+
+print('------------------------------------------------------------')	#60個
+
+
+def printArea(width = 1, height = 2):
+    area = width * height
+    print("width:", width, "\theight:", height, "\tarea:", area)
+
+printArea() # Default arguments width = 1 and height = 2
+printArea(4, 2.5) # Positional arguments width = 4 and height = 2.5
+printArea(height = 5, width = 3) # Keyword arguments width 
+printArea(width = 1.2) # Default height = 2
+printArea(height = 6.2) # Default widht = 1
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+#檢查有無包含中文
+def is_contains_chinese():
+  print('is_contains_chinese')
+  global search_word
+  for _char in search_word:
+    if '\u4e00' <= _char <= '\u9fa5':
+      print('True')
+      return True
+  print('False')
+  return False
+  
+
+search_word = 'oat'
+is_contains_chinese()
+search_word = '英國'
+is_contains_chinese()
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import itertools
+import threading
+import subprocess
+from optparse import OptionParser, SUPPRESS_HELP
+
+def bark(duration):
+
+    _time = time.time
+    _sleep = time.sleep
+    
+    # We give the parent some time to be ready.
+    _sleep(1.0)
+
+    start_time = _time()
+    end_time = start_time + duration * 2.0
+    i = 0
+    while _time() < end_time:
+        print('b', end = ' ')
+        i += 1
+
+
+bark(0.2)
+
+
+print('------------------------------------------------------------')	#60個
+
+def gcd(a, b):
+    """Calculate the Greatest Common Divisor of a and b.
+
+    Unless b==0, the result will have the same sign as b (so that when
+    b is divided by it, the result comes out positive).
+    """
+    while b:
+        a, b = b, a%b
+    return a
+
+a = 28
+b = 49
+c = gcd(a, b)
+print(c)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import collections
+
+import nt
+_ntuple_diskusage = collections.namedtuple('usage', 'total used free')
+
+def disk_usage(path):
+    total, free = nt._getdiskusage(path)
+    used = total - free
+    return _ntuple_diskusage(total, used, free)
+
+foldername = 'C:/_git/vcs/_1.data/______test_files1'
+du = disk_usage(foldername)
+print(du)
+print('容量 :', du.total, '個位元組\t', du.total//1024//1024//1024, 'GB')
+print('已使用空間 :', du.used, '個位元組\t', du.used//1024//1024//1024, 'GB')
+print('可用空間 :', du.free, '個位元組\t', du.free//1024//1024//1024, 'GB')
+
+foldername = 'D:/tmp_romeo'
+du = disk_usage(foldername)
+print(du)
+print('容量 :', du.total, '個位元組\t', du.total//1024//1024//1024, 'GB')
+print('已使用空間 :', du.used, '個位元組\t', du.used//1024//1024//1024, 'GB')
+print('可用空間 :', du.free, '個位元組\t', du.free//1024//1024//1024, 'GB')
+
+print('------------------------------------------------------------')	#60個
+
+def test():
+    for x in 'abcde':
+        for y in '12345':
+            print(y, x, end = ' ')
+
+test()
+
+print('------------------------------------------------------------')	#60個
+
+
+
+# 定義lambda函數
+square = lambda x: x ** 2
+
+# 輸出平方值
+print(square(10))
+
+print('------------------------------------------------------------')	#60個
+
+def gcd(a, b):
+    if a < b:
+        a, b = b, a
+    while b != 0:
+        tmp = a % b
+        a = b
+        b = tmp
+    return a
+
+a, b = 24, 36
+print("最大公約數是 : ", gcd(a, b))
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 

@@ -21,8 +21,8 @@ Love in its various forms acts as a major facilitator of interpersonal relations
 Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, 
 and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
 
-wc = wordcloud.WordCloud(width=1000, height=600,
-                         background_color="white")
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         background_color = "white")
 wc.generate(cloud_text)
 
 #產生圖片
@@ -40,8 +40,9 @@ print('------------------------------------------------------------')	#60個
 #text_jp = """ メロスは激怒した。必ず、かの邪智暴虐じゃちぼうぎゃくの王を除かなければならぬと決意した。メロスには政治がわからぬ。メロスは、村の牧人である。笛を吹き、羊と遊んで暮して来た。けれども邪悪に対しては、人一倍に敏感であった。きょう未明メロスは村を出発し、野を越え山越え、十里はなれた此このシラクスの市にやって来た。メロスには父も、母も無い。女房も無い。十六の、内気な妹と二人暮しだ。この妹は、村の或る律気な一牧人を、近々、花婿はなむことして迎える事になっていた。結婚式も間近かなのである。メロスは、それゆえ、花嫁の衣裳やら祝宴の御馳走やらを買いに、はるばる市にやって来たのだ。先ず、その品々を買い集め、それから都の大路をぶらぶら歩いた。メロスには竹馬の友があった。セリヌンティウスである。今は此のシラクスの市で、石工をしている。その友を、これから訪ねてみるつもりなのだ。久しく逢わなかったのだから、訪ねて行くのが楽しみである。歩いているうちにメロスは、まちの様子を怪しく思った。ひっそりしている。もう既に日も落ちて、まちの暗いのは当りまえだが、けれども、なんだか、夜のせいばかりでは無く、市全体が、やけに寂しい。のんきなメロスも、だんだん不安になって来た。路で逢った若い衆をつかまえて、何かあったのか、二年まえに此の市に来たときは、夜でも皆が歌をうたって、まちは賑やかであった筈はずだが、と質問した。若い衆は、首を振って答えなかった。しばらく歩いて老爺ろうやに逢い、こんどはもっと、語勢を強くして質問した。老爺は答えなかった。メロスは両手で老爺のからだをゆすぶって質問を重ねた。老爺は、あたりをはばかる低声で、わずか答えた。"""
 text_tw = """ 梅洛絲氣急敗壞。 他決定一定要除掉那個邪惡、暴虐的國王。 梅羅斯不懂政治。 他是一個村裡的牧民。 他吹過笛子，和羊群生活過。 但他對邪惡比任何人都敏感。 而在今天黎明前，梅洛斯就離開了他的村莊，翻過田野，越過山巒，來到了十里外的錫拉庫扎城。 他沒有父親，沒有母親，也沒有妻子。 他沒有妻子。 他和靦腆的十六歲的妹妹住在一起。 妹妹要從村裡接來一個新郎，是個守規矩的牧民，很快就要結婚了。 婚禮就在眼前。 他大老遠跑來，就是為了買新娘的衣服和宴席。 他先買了貨，然後在京城的主要街道上逛了一圈。 梅羅斯有一個高蹺的朋友。 他就是塞利南提斯。 他現在是雪城這座城市的石匠。 我要去拜訪這位朋友。 好久不見，我很期待去看他。 在城市裡走來走去，梅羅斯對城市的面貌產生了懷疑。 這裡很安靜，也很荒涼。 太陽已經落山了，城市黑漆漆的可以理解，但這不僅僅是因為夜色，整個城市顯得十分寂寞。 無憂無慮的梅洛斯開始感到不安。 他抓住一個在街上遇到的年輕人，問他是不是發生了什麼事，因為兩年前他來這裡的時候，大家都在唱歌，即使到了晚上，這個城市也很熱鬧。 年輕人搖搖頭，沒有回答。 他走了一會兒，遇到老人，就問了他一個問題，這次的話更加有力。 老人沒有回答。 梅羅斯用手搖晃著老人的身體，問他更多的問題。 老人用難以捉摸的低沉聲音回答。"""
 
-wc = wordcloud.WordCloud(width=1000, height=600, background_color="white",
-                         font_path=r"C:\Windows\Fonts\msjh.ttc") 
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         background_color = "white",
+                         font_path = r"C:\Windows\Fonts\msjh.ttc") 
 #wc.generate(text_jp) 
 wc.generate(text_tw) 
 plt.imshow(wc) 
@@ -94,13 +95,14 @@ text = """梅洛絲很是氣憤。 他決心要除掉這個邪惡暴虐的國王
 
 # 拆解中文文章
 tk = Tokenizer()
-wakatigaki = tk.tokenize(text, wakati=True)
-print(wakatigaki)
+token = tk.tokenize(text, wakati = True)
+#print(token)
 
 # 利用wordcloud函式庫將分割完畢的文字資訊畫成文字雲
-wc = wordcloud.WordCloud(width=1000, height=600, background_color="white",
-                         font_path=r"C:\Windows\Fonts\msjh.ttc")
-wc.generate(" ".join(wakatigaki)) 
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         background_color = "white",
+                         font_path = r"C:\Windows\Fonts\msjh.ttc")
+wc.generate(" ".join(token)) 
 plt.imshow(wc) 
 plt.axis("off")
 
@@ -118,9 +120,10 @@ for token in tk.tokenize(text):
             meishi_list.append(token.surface)
 
 # 要讓只有一個字的單字出現必須設定regexp
-wc = wordcloud.WordCloud(width=1000, height=600, background_color="white",
-                         font_path=r"C:\Windows\Fonts\msjh.ttc",
-                         regexp="[\w']+") 
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         background_color = "white",
+                         font_path = r"C:\Windows\Fonts\msjh.ttc",
+                         regexp = "[\w']+") 
 wc.generate(" ".join(meishi_list)) 
 plt.imshow(wc) 
 plt.axis("off")
@@ -128,7 +131,6 @@ plt.axis("off")
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 
 #調整文字雲的形狀
 #愛心形狀的文字雲繪製範例
@@ -138,17 +140,18 @@ Love is also considered to be a virtue representing human kindness, compassion, 
 Love in its various forms acts as a major facilitator of interpersonal relationships and, owing to its central psychological importance, is one of the most common themes in the creative arts.[6] Love has been postulated to be a function to keep human beings together against menaces and to facilitate the continuation of the species.[7]
 Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
 
-
 mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
 # 載入遮罩圖片
 mask_image = np.array(Image.open(mask_filename))
 
 # 產生以圖片作為遮罩的文字雲
-wc = wordcloud.WordCloud(width=700, height=700,
-                         background_color="white",
-                         font_path=r"C:\Windows\Fonts\msjh.ttc",
-                         mask=mask_image, contour_width=6,
-                         contour_color="pink", colormap="plasma")
+wc = wordcloud.WordCloud(width = 700, height = 700,
+                         background_color = "white",
+                         font_path = r"C:\Windows\Fonts\msjh.ttc",
+                         mask = mask_image,
+                         contour_width = 6,
+                         contour_color = "pink",
+                         colormap = "plasma")
 wc.generate(cloud_text) 
 
 # 顯示文字雲
@@ -194,7 +197,7 @@ def color_func(word, **kwargs):
     default_color = "grey"
     return color_dict.get(word, default_color) 
 # 執行調色函數，重新替文字上色
-wc.recolor(color_func=color_func) 
+wc.recolor(color_func = color_func) 
 
 # 顯示文字雲
 plt.imshow(wc) 
@@ -208,22 +211,22 @@ import wordcloud
 from PIL import Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/eduheadlines.txt'
-cloud_text = open(filename,'r', encoding='utf-8').read()
+cloud_text = open(filename,'r', encoding = 'utf-8').read()
 print(cloud_text)
 
 mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/star.jpg'
 # 載入遮罩圖片
 mask_image = np.array(Image.open(mask_filename))
 
-wc = wordcloud.WordCloud(width=1000, height=860,
-                         background_color="white",
-                         font_path=r"C:\Windows\Fonts\msjh.ttc",
-                         margin=2,
-                         mask=mask_image)
+wc = wordcloud.WordCloud(width = 1000, height = 860,
+                         background_color = "white",
+                         font_path = r"C:\Windows\Fonts\msjh.ttc",
+                         margin = 2,
+                         mask = mask_image)
 wc.generate(cloud_text)
 
 # 顯示文字雲
-plt.figure(figsize=(10,10))
+plt.figure(figsize = (10,10))
 plt.imshow(wc)
 plt.axis("off")
 
@@ -250,12 +253,12 @@ mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg'
 # 載入遮罩圖片
 mask_image = np.array(Image.open(mask_filename))
 
-wordcloud = WordCloud(background_color="white",
-                      width=1000, height=860,
-                      font_path=r"C:\Windows\Fonts\msjh.ttc",
-                      margin=2,
-                      mask=mask_image).generate(all_news)
-plt.figure(figsize=(10,10))
+wordcloud = WordCloud(background_color = "white",
+                      width = 1000, height = 860,
+                      font_path = r"C:\Windows\Fonts\msjh.ttc",
+                      margin = 2,
+                      mask = mask_image).generate(all_news)
+plt.figure(figsize = (10,10))
 plt.imshow(wordcloud)
 plt.axis("off")
 
@@ -282,7 +285,7 @@ for row in rows:
     all_news += row[3]
 
 stopwords = list()
-with open('stopWords.txt', 'rt', encoding='utf-8') as fp:
+with open('stopWords.txt', 'rt', encoding = 'utf-8') as fp:
     stopwords = [word.strip() for word in fp.readlines()]
 
 keyterms = [keyterm for keyterm in jieba.cut(all_news) if keyterm not in stopwords]
@@ -291,12 +294,12 @@ text = ",".join(keyterms)
 mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg'
 # 載入遮罩圖片
 mask_image = np.array(Image.open(mask_filename))
-wordcloud = WordCloud(background_color="white",
-                      width=1000, height=860,
-                      font_path=r"C:\Windows\Fonts\msjh.ttc",
-                      margin=2,
-                      mask=mask_image).generate(text)
-plt.figure(figsize=(10,10))
+wordcloud = WordCloud(background_color = "white",
+                      width = 1000, height = 860,
+                      font_path = r"C:\Windows\Fonts\msjh.ttc",
+                      margin = 2,
+                      mask = mask_image).generate(text)
+plt.figure(figsize = (10,10))
 plt.imshow(wordcloud)
 plt.axis("off")
 
@@ -344,7 +347,7 @@ print('------------------------------------------------------------')	#60個
 from wordcloud import WordCloud
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_2.txt'
-with open(filename, encoding='cp950') as fp: # 含中文的文字檔
+with open(filename, encoding = 'cp950') as fp: # 含中文的文字檔
     txt = fp.read()                 # 讀取檔案
     
 wc = WordCloud().generate(txt)      # 由txt文字產生WordCloud物件
@@ -359,14 +362,14 @@ from wordcloud import WordCloud
 import jieba
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_2.txt'
-with open(filename, encoding='cp950') as fp:  # 含中文的文字檔
+with open(filename, encoding = 'cp950') as fp:  # 含中文的文字檔
     txt = fp.read()                         # 讀取檔案
 
 cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
 
 wc = WordCloud(                             # 建立詞雲物件
-    font_path=font_filename,   
-    background_color="white",width=800,height=600).generate(cut_text)
+    font_path = font_filename,   
+    background_color = "white", width = 800, height = 600).generate(cut_text)
 
 plt.imshow(wc)
 plt.show()
@@ -378,14 +381,14 @@ from wordcloud import WordCloud
 import jieba
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_2.txt'
-with open(filename, encoding='cp950') as fp:  # 含中文的文字檔
+with open(filename, encoding = 'cp950') as fp:  # 含中文的文字檔
     txt = fp.read()                     # 讀取檔案
 
 cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
 
 wc = WordCloud(                         # 建立詞雲物件
-    font_path=font_filename,
-    background_color="white",width=800,height=600).generate(cut_text)
+    font_path = font_filename,
+    background_color = "white", width = 800, height = 600).generate(cut_text)
 
 plt.imshow(wc)
 plt.show()
@@ -397,14 +400,14 @@ from wordcloud import WordCloud
 import jieba
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_2.txt'
-with open(filename, encoding='cp950') as fp:    # 含中文的文字檔
+with open(filename, encoding = 'cp950') as fp:    # 含中文的文字檔
     txt = fp.read()                     # 讀取檔案
 
 cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
 
 wc = WordCloud(                         # 建立詞雲物件
-    font_path=font_filename,
-    background_color="yellow",width=800,height=400).generate(cut_text)
+    font_path = font_filename,
+    background_color = "yellow", width = 800, height = 400).generate(cut_text)
 
 plt.imshow(wc)
 plt.axis("off")                         # 關閉顯示軸線
@@ -417,14 +420,14 @@ from wordcloud import WordCloud
 import jieba
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_6.txt'
-with open(filename, encoding="cp950") as fp:  # 含中文的文字檔
+with open(filename, encoding = "cp950") as fp:  # 含中文的文字檔
     txt = fp.read()                     # 讀取檔案
 
 cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
 
 wc = WordCloud(                         # 建立詞雲物件
-    font_path=font_filename,
-    background_color="yellow",width=800,height=400).generate(cut_text)
+    font_path = font_filename,
+    background_color = "yellow", width = 800, height = 400).generate(cut_text)
 
 plt.imshow(wc)
 plt.axis("off")                         # 關閉顯示軸線
@@ -439,7 +442,7 @@ import jieba
 import numpy as np
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_6.txt'
-with open(filename, encoding='cp950') as fp:        # 含中文的文字檔
+with open(filename, encoding = 'cp950') as fp:        # 含中文的文字檔
     txt = fp.read()                         # 讀取檔案
 cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
 
@@ -447,9 +450,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/star.gif'
 bgimage = np.array(Image.open(filename))  # 背景圖
 
 wc = WordCloud(                             # 建立詞雲物件
-    font_path=font_filename,
-    background_color="white",
-    mask=bgimage).generate(cut_text)        # mask設定
+    font_path = font_filename,
+    background_color = "white",
+    mask = bgimage).generate(cut_text)        # mask設定
 
 plt.imshow(wc)
 plt.axis("off")                             # 關閉顯示軸線
@@ -463,7 +466,7 @@ from PIL import Image
 import numpy as np
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_1.txt'
-with open(filename, encoding='cp950') as fp:        # 含中文的文字檔
+with open(filename, encoding = 'cp950') as fp:        # 含中文的文字檔
     txt = fp.read()                         # 讀取檔案
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
@@ -471,9 +474,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
 bgimage = np.array(Image.open(filename))  # 背景圖
 
 wc = WordCloud(                             # 建立詞雲物件
-    font_path="OLDENGL.TTF",
-    background_color="white",
-    mask=bgimage).generate(txt)             # mask設定
+    font_path = "OLDENGL.TTF",
+    background_color = "white",
+    mask = bgimage).generate(txt)             # mask設定
 
 plt.imshow(wc)
 plt.axis("off")                             # 關閉顯示軸線
@@ -495,8 +498,8 @@ with open(filename) as fp:   # 英文字的文字檔
     txt = fp.read()                 # 讀取檔案
     
 wc = WordCloud(
-    font_path="OLDENGL.TTF", 
-    background_color="white").generate(txt)      
+    font_path = "OLDENGL.TTF", 
+    background_color = "white").generate(txt)      
 
 plt.imshow(wc)
 plt.show()
@@ -518,9 +521,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
 bgimage = np.array(Image.open(filename))  # 背景圖
 
 wc = WordCloud(                             # 建立詞雲物件
-    font_path="OLDENGL.TTF",
-    background_color="white",
-    mask=bgimage).generate(cut_text)        # mask設定
+    font_path = "OLDENGL.TTF",
+    background_color = "white",
+    mask = bgimage).generate(cut_text)        # mask設定
 
 plt.imshow(wc)
 plt.axis("off")                             # 關閉顯示軸線
