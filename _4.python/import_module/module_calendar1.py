@@ -15,7 +15,7 @@ print("獲取一年的日曆")
 cal = calendar.calendar(2023)
 print(cal)
 
-
+print('------------------------------------------------------------')	#60個
 
 '''
 import calendar
@@ -38,6 +38,7 @@ print(datetime.now().second)
 timedelta = calendar.datetime.timedelta
 print(timedelta)
 
+print('------------------------------------------------------------')	#60個
 
 import time
 
@@ -51,7 +52,7 @@ expires = freshness_lifetime
 print("expires", time.strftime(TIME_FMT, time.gmtime(expires)))
 
 
-
+print('------------------------------------------------------------')	#60個
 
 import calendar
 calendar.setfirstweekday(calendar.MONDAY)
@@ -79,6 +80,28 @@ for i in range(1,13):
 
 weeks = calendar.monthcalendar(year, month)
 print(weeks)
+
+
+print('------------------------------------------------------------')	#60個
+
+import calendar
+print(calendar.month(2018,10))
+print(calendar.calendar(2019))
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
 
 
 

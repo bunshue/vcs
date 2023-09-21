@@ -6,6 +6,7 @@ import sys
 import datetime
 import os
 
+print('------------------------------------------------------------')	#60個
 
 TIMESTAMPS = [0, 10, 100, 1000, 10000, 100000, 1000000, 1234567890, 1262304000, 1275785153,]
 def test_timegm():
@@ -18,6 +19,8 @@ test_timegm()
 
 lang, enc = locale.getdefaultlocale()
 print(lang, enc)
+
+print('------------------------------------------------------------')	#60個
 
 '''
 lang, enc = locale.getdefaultlocale()
@@ -48,6 +51,7 @@ print(calendar.LocaleHTMLCalendar(locale=''))
 #print(cal.formatmonthname(2010, 10))
 print(calendar.TextCalendar().formatmonthname(2010, 10, 10))
 
+print('------------------------------------------------------------')	#60個
 
 print()
 print()
@@ -70,6 +74,9 @@ print('6')
 print(shrink(calendar.Calendar().yeardatescalendar(2004)))
 
 
+print('------------------------------------------------------------')	#60個
+
+
 '''
         orig = calendar.firstweekday()
         calendar.setfirstweekday(calendar.SUNDAY)
@@ -82,4 +89,19 @@ print(shrink(calendar.Calendar().yeardatescalendar(2004)))
             calendar.setfirstweekday(123)
 
 '''
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 

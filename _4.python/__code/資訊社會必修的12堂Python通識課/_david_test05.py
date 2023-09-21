@@ -1,18 +1,7 @@
-import requests
 
 print('------------------------------------------------------------')	#60個
 
 '''
-import requests
-from bs4 import BeautifulSoup
-
-url = 'https://www.ptt.cc/bbs/gossiping/index.html'
-
-html = requests.get(url=url, cookies={'over18': '1'}).text
-soup = BeautifulSoup(html, "lxml")
-titles = soup.find_all('div', class_='title')
-for title in titles:
-    print(title.a.text)
 
 print('------------------------------------------------------------')	#60個
 
@@ -37,23 +26,6 @@ else:
     print("沒有發生任何錯誤。")
 finally:
     print("不管如何，都要執行這裡")
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-from PIL import Image
-im = Image.open(filename)
-print(im.format, im.size, im.mode)
-im.close()
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-from PIL import Image
-im = Image.open(filename)
-smaller = im.resize((640,480))
-smaller.show()
-smaller.save("new_pic.jpg")
-im.close()
 
 print('------------------------------------------------------------')	#60個
 

@@ -1,6 +1,9 @@
 # python import module : math
 
 import math
+import numpy as np
+
+print('------------------------------------------------------------')	#60個
 
 print("圓周率 : ", math.pi)
 print("圓周率 : " + str(math.pi))
@@ -95,6 +98,35 @@ print('gcd(16, 40) = {}'.format(math.gcd(16, 40)))
 print('gcd(28, 56) = {}'.format(math.gcd(28, 63)))
 
 print('------------------------------------------------------------')	#60個
+
+
+#degrees(x) 將x由弧度轉角度
+#radians(x) 將x由角度轉弧度
+
+
+
+rad = np.arctan2(3, 4)  # 求角度（radian）
+th = np.degrees(rad)    # 轉成度數
+
+import math
+rad = math.atan2(3, 2)  # 計算角度（radian）
+th = math.degrees(rad)  # 轉成度數
+th
+
+import math
+10 * math.cos(math.radians(60)) 
+
+
+
+# 計算角度
+rad = math.acos(3/5)
+deg = math.degrees(rad)
+print(deg)
+
+
+
+print('------------------------------------------------------------')	#60個
+
 
 
 

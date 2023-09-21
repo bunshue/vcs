@@ -11,6 +11,7 @@ TOTAL_DISKS = 5  # More disks means a more difficult puzzle.
 # Start with all disks on tower A:
 COMPLETE_TOWER = list(range(TOTAL_DISKS, 0, -1))
 
+print(COMPLETE_TOWER)
 
 def main():
     print("""The Tower of Hanoi, by Al Sweigart al@inventwithpython.com
@@ -23,7 +24,10 @@ More info at https://en.wikipedia.org/wiki/Tower_of_Hanoi
     )
 
     # Set up the towers. The end of the list is the top of the tower.
-    towers = {'A': copy.copy(COMPLETE_TOWER), 'B': [], 'C': []}
+    towers = {'A': copy.copy(COMPLETE_TOWER), 'B': [], 'C': []} #字典
+
+    print(type(towers))
+    print(towers)
 
     while True:  # Run a single turn.
         # Display the towers and disks:

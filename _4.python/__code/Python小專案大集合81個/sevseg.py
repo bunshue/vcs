@@ -83,7 +83,7 @@ def getSevSegStr(number, minWidth=0):
 
     return '\n'.join(rows)
 
-
+'''
 # If this program isn't being imported, display the numbers 00 to 99.
 if __name__ == '__main__':
     print('This module is meant to be imported rather than run.')
@@ -96,3 +96,10 @@ if __name__ == '__main__':
     print(' __        __ ')
     print('|  | |__|  __|')
     print('|__|    | |__ ')
+
+'''
+
+
+ccc = getSevSegStr(38, 3)
+print(ccc)
+

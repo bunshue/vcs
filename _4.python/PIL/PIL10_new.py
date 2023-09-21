@@ -114,6 +114,25 @@ print('舊檔存圖, 已寫入檔案：'+filename2)
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+from PIL import Image
+im = Image.open(filename)
+print(im.format, im.size, im.mode)
+im.close()
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+from PIL import Image
+im = Image.open(filename)
+smaller = im.resize((640,480))
+smaller.show()
+smaller.save("new_pic.jpg")
+im.close()
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 print('------------------------------------------------------------')	#60個
 

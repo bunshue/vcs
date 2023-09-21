@@ -1,8 +1,10 @@
 import os
 import hashlib
 
-cur_path = os.path.dirname(__file__) # 取得目前路徑
-sample_tree = os.walk(cur_path)
+source_foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
+target_foldername = 'my_tmp_dir3'
+
+sample_tree = os.walk(source_foldername)
 
 allmd5s = dict() 
 n = 0

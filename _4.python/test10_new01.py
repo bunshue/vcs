@@ -442,8 +442,6 @@ print(s.title())
 
 print('------------------------------------------------------------')	#60個
 
-import sys
-import time
 import platform
 CALIBRATION_LOOPS = 10
 calibration_loops = range(CALIBRATION_LOOPS)
@@ -530,7 +528,6 @@ print(name)
 
 print('------------------------------------------------------------')	#60個
 
-import sys
 bytes = sys.maxsize  # smallest total size so far
 print(bytes)
 
@@ -589,7 +586,6 @@ print('------------------------------------------------------------')	#60個
 
 import importlib
 import platform
-import sys
 from types import ModuleType
 from typing import Optional, Tuple, List, cast
 
@@ -629,7 +625,6 @@ print_table(version_rows)
 
 print('------------------------------------------------------------')	#60個
 
-import os
 from os.path import abspath
 
 def _basename(path):
@@ -657,10 +652,6 @@ print(normdir)
 
 
 print('------------------------------------------------------------')	#60個
-
-import os
-import sys
-import time
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
@@ -707,7 +698,6 @@ print(tok_name)
 
 print('------------------------------------------------------------')	#60個
 
-
 import os
 print(os.name)
 print(os.name)
@@ -729,31 +719,7 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-
 print('------------------------------------------------------------')	#60個
-
-#degrees(x) 將x由弧度轉角度
-#radians(x) 將x由角度轉弧度
-
-
-
-rad = np.arctan2(3, 4)  # 求角度（radian）
-th = np.degrees(rad)    # 轉成度數
-
-import math
-rad = math.atan2(3, 2)  # 計算角度（radian）
-th = math.degrees(rad)  # 轉成度數
-th
-
-import math
-10 * math.cos(math.radians(60)) 
-
-
-
-# 計算角度
-rad = math.acos(3/5)
-deg = math.degrees(rad)
-print(deg)
 
 print('------------------------------------------------------------')	#60個
 
@@ -766,7 +732,6 @@ print("總供需要天數")
 print(days)
 print("小時數")
 print(hours)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -855,8 +820,6 @@ print(d1-d0)
 
 print('------------------------------------------------------------')	#60個
 
-import sys
-import time
 import random
 
 _FMT = '[Non-text (%(type)s) part of message omitted, filename %(filename)s]'
@@ -875,7 +838,6 @@ print(boundary)
 
 print('------------------------------------------------------------')	#60個
 
-import time
 import datetime
 
 def _format_time(hh, mm, ss, us):
@@ -1034,8 +996,6 @@ print(f"\n特別號:{specialNum}")             # 列印特別號
 
 print('------------------------------------------------------------')	#60個
 
-import time                         # 導入模組time
-
 xtime = time.localtime()
 print(xtime)                        # 列出目前系統時間
 print("年 ", xtime[0])
@@ -1052,7 +1012,6 @@ print("夏令時間 ", xtime[8])
 print('------------------------------------------------------------')	#60個
 
 ''' fail in kilo
-import time
 
 x = 1000000
 pi = 0
@@ -1076,12 +1035,9 @@ for i in range(1,x+1):
 
 print('------------------------------------------------------------')	#60個
 
-import sys
-
 print("目前Python版本是: ", sys.version)
 print("目前Python版本是: ", sys.version_info)
 
-import sys
 print(sys.version_info)
 print("---")
 print(sys.platform)
@@ -1095,17 +1051,6 @@ print(version_rows)
 
 if sys.version_info.major < 3 or sys.version_info.minor < 3:
     sys.exit("Error: clinic.py requires Python 3.3 or greater.")
-
-print('------------------------------------------------------------')	#60個
-
-import keyword
-print(keyword.kwlist)
-
-import keyword
-
-keywordLists = ['as', 'while', 'break', 'sse', 'Python']
-for x in keywordLists:
-    print(f"{x:>8s} {keyword.iskeyword(x)}")
 
 print('------------------------------------------------------------')	#60個
 
@@ -1150,8 +1095,6 @@ print(f"全域變數 : {globals()}")
 
 print('------------------------------------------------------------')	#60個
 
-import os
-
 print('顯示資料夾內的特定格式的檔案')
 
 def is_image(filename):
@@ -1177,18 +1120,10 @@ print(dir(builtins))
 
 import time
 print(time.time())
-
-import time
 print(time.localtime())
-
-import time
 year, month, day, hour, minute, second, _, _, _ = time.localtime()
 print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
-
-import time
 print(time.asctime())
-
-import time
 print(time.strftime("%Y-%m-%d %H:%M:%S %a"))
 
 import datetime
@@ -1196,7 +1131,6 @@ import datetime
 print(datetime.datetime.now())
 
 import datetime
-
 today = datetime.datetime.today()
 birthday = datetime.datetime(2018,10,27, 17, 0, 0)
 print(today - birthday)
@@ -1211,13 +1145,6 @@ print("到今天共經過了{}天。".format(diff.days))
 
 print('------------------------------------------------------------')	#60個
 
-import calendar
-print(calendar.month(2018,10))
-print(calendar.calendar(2019))
-
-print('------------------------------------------------------------')	#60個
-
-import os
 items = os.listdir()
 print(os.path.exists('myprime.py'))
 for item in items:
@@ -1227,7 +1154,6 @@ for item in items:
 print('------------------------------------------------------------')	#60個
 
 ''' no file
-import os
 fullpath = os.path.abspath('myprime.py')
 print(fullpath)
 print("os.path.basename:", os.path.basename(fullpath))
@@ -1272,8 +1198,6 @@ print(datetime.date.today())
 
 
 #而如果要輸出此時準確的時間的話則
-
-import time
 print(time.localtime())
 
 #而我們也可以一一拆解
@@ -1324,7 +1248,6 @@ import codecs
 import contextlib
 import io
 import locale
-import sys
 import unittest
 import warnings
 import encodings
@@ -1536,35 +1459,10 @@ print('------------------------------------------------------------')	#60個
 
 
 
-
-
-
-
-
-
-
-
 #以下為OK可以搬出的
 
 
 print('------------------------------------------------------------')	#60個
-
-
-import math
-
-r = 6371                        # 地球半徑
-x1, y1 = 22.2838, 114.1731      # 香港紅磡車站經緯度
-x2, y2 = 25.0452, 121.5168      # 台北車站經緯度
-
-d = 6371*math.acos(math.sin(math.radians(x1))*math.sin(math.radians(x2))+
-                   math.cos(math.radians(x1))*math.cos(math.radians(x2))*
-                   math.cos(math.radians(y1-y2)))
-
-print("distance = ", d)
-
-
-print('------------------------------------------------------------')	#60個
-
 
 def hexToDecimal(hex):
     decimalValue = 0
@@ -1591,8 +1489,6 @@ if decimal == None:
     print("Incorrect hex number")
 else:
     print("The decimal value for hex number", hex, "is", decimal) 
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1660,35 +1556,6 @@ is_contains_chinese()
 search_word = '英國'
 is_contains_chinese()
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-import itertools
-import threading
-import subprocess
-from optparse import OptionParser, SUPPRESS_HELP
-
-def bark(duration):
-
-    _time = time.time
-    _sleep = time.sleep
-    
-    # We give the parent some time to be ready.
-    _sleep(1.0)
-
-    start_time = _time()
-    end_time = start_time + duration * 2.0
-    i = 0
-    while _time() < end_time:
-        print('b', end = ' ')
-        i += 1
-
-
-bark(0.2)
-
-
 print('------------------------------------------------------------')	#60個
 
 def gcd(a, b):
@@ -1708,34 +1575,6 @@ print(c)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-import collections
-
-import nt
-_ntuple_diskusage = collections.namedtuple('usage', 'total used free')
-
-def disk_usage(path):
-    total, free = nt._getdiskusage(path)
-    used = total - free
-    return _ntuple_diskusage(total, used, free)
-
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
-du = disk_usage(foldername)
-print(du)
-print('容量 :', du.total, '個位元組\t', du.total//1024//1024//1024, 'GB')
-print('已使用空間 :', du.used, '個位元組\t', du.used//1024//1024//1024, 'GB')
-print('可用空間 :', du.free, '個位元組\t', du.free//1024//1024//1024, 'GB')
-
-foldername = 'D:/tmp_romeo'
-du = disk_usage(foldername)
-print(du)
-print('容量 :', du.total, '個位元組\t', du.total//1024//1024//1024, 'GB')
-print('已使用空間 :', du.used, '個位元組\t', du.used//1024//1024//1024, 'GB')
-print('可用空間 :', du.free, '個位元組\t', du.free//1024//1024//1024, 'GB')
-
-print('------------------------------------------------------------')	#60個
-
 def test():
     for x in 'abcde':
         for y in '12345':
@@ -1744,8 +1583,6 @@ def test():
 test()
 
 print('------------------------------------------------------------')	#60個
-
-
 
 # 定義lambda函數
 square = lambda x: x ** 2
@@ -1768,6 +1605,26 @@ a, b = 24, 36
 print("最大公約數是 : ", gcd(a, b))
 
 print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
 
 
 

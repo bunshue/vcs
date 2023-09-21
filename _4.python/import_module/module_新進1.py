@@ -176,6 +176,17 @@ print(translation)
 print('------------------------------------------------------------')	#60個
 
 import keyword
+print(keyword.kwlist)
+
+import keyword
+
+keywordLists = ['as', 'while', 'break', 'sse', 'Python']
+for x in keywordLists:
+    print(f"{x:>8s} {keyword.iskeyword(x)}")
+
+print('------------------------------------------------------------')	#60個
+
+import keyword
 
 print(keyword.kwlist)
 
