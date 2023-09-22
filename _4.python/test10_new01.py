@@ -4,6 +4,7 @@ import time
 import random
 import numpy as np
 
+'''
 print('------------------------------------------------------------')	#60個
 
 print('---- 字串處理專區 --------------------------------------------------------')	#60個
@@ -14,12 +15,7 @@ for page in range(1, 11):
     url = target.format(page)
     print(url)
 
-'''
-filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
-with open(filename, "w", encoding = 'utf-8') as fp:
-    print(filename + " is dumping...")
-    json.dump(titles, fp)
-'''
+print('------------------------------------------------------------')	#60個
 
 query_string = 'abcdefghijklmn'
 query_number = 12345678901234
@@ -50,15 +46,6 @@ print('------------------------------------------------------------')	#60個
 
 print('---- 列印專區 --------------------------------------------------------')	#60個
 
-
-'''
-word = word.strip()
-
-    dbg('recursedown(%r)\n' % (dirname,))
-##  dbg('fix(%r)\n' % (filename,))
-
-
-'''
 print('------------------------------------------------------------')	#60個
 
 
@@ -159,34 +146,6 @@ for num in range(2, 7):
 
 
 
-
- 
-
-print('全圖640X480, 每160X160裁一塊出來')
-W = 640
-H = 480
-w = 160
-h = 160
-
-'''
-for(y = 0; y < H; y += h)
-  for(x = 0; x < W; x += w)
-'''
-for y in range(0, H, h):
-    for x in range(0, W, w):
-        box = x, y, min(W, x + w), min(H, y + h)
-        print(box)
-        #tile = ImageTk.PhotoImage(image.crop(box))
-        #canvas.create_image(x, y, image = tile, anchor = NW)
-        #print(x, y)
-        #print(box)
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 print('字串處理')
@@ -249,13 +208,6 @@ string = '豬頭三'
 string_url = parse.quote(string)
 print('原字串:\t' + string)
 print('轉網址:\t' + string_url)
-
-
-'''
-cnstr = '中文 test'
-print(cnstr, len(cnstr))
-#utfstr = unicode(cnstr, 'utf-8')
-'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -357,7 +309,6 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-'''
 print('一種寫入檔案的方法')
 filename = 'tmp.txt'
 
@@ -380,7 +331,7 @@ print('', file=fp)
 print('[FILES]', file=fp)
 print('', file=fp)
 fp.close()
-'''
+
 print('------------------------------------------------------------')	#60個
 
 
@@ -498,12 +449,10 @@ print('%30s: %5.0fms %5.0fms %7s %5.0fms %5.0fms %7s' % \
        other_avg_time * MILLI_SECONDS * warp / warp,
        avg_diff))
 
-'''
 print('%30s:  %6.3fms  %6.3fms' % \
       (name,
        min(overhead_times) * MILLI_SECONDS,
        max(overhead_times) * MILLI_SECONDS))
-'''
 
 print('    %5.0fms    %5.0fms %7.3fms' % \
       (eff_time * MILLI_SECONDS,
@@ -513,7 +462,7 @@ print('    %5.0fms    %5.0fms %7.3fms' % \
 i = 123
 print(' Round %-25i  effective   absolute  overhead' % (i+1))
 
-print('%30s:' % name, end=' ')
+print('%30s:' % name, end = ' ')
 
 
 print('Calib. prep time     = %.6fms' % (
@@ -542,7 +491,7 @@ for x in (15, 25, 35, 45, 55):
 
 
 
-'''    
+
 _b85alphabet = (b"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 b"abcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~")
 
@@ -554,8 +503,6 @@ print()
 _b85chars2 = [(a + b) for a in _b85chars for b in _b85chars]
 
 print(_b85chars2)
-
-'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -603,7 +550,7 @@ def extract_version(module: ModuleType) -> Optional[str]:
 
     return cast(Optional[str], getattr(module, "__version__", None))
 
-'''
+
 modules = (
     "os", "sys", "cv2", "numpy", "PIL", "pylibjpeg",
     "openjpeg", "libjpeg",
@@ -621,7 +568,7 @@ for module in modules:
 
 print('print_table')
 print_table(version_rows)
-'''
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -822,24 +769,6 @@ print('相距日期 :', d1 - d0, '天')
 
 print('------------------------------------------------------------')	#60個
 
-import random
-
-_FMT = '[Non-text (%(type)s) part of message omitted, filename %(filename)s]'
-print(_FMT)
-
-_width = len(repr(sys.maxsize-1))
-_fmt = '%%0%dd' % _width
-
-print(_width)
-print(_fmt)
-
-token = random.randrange(sys.maxsize)
-print(token)
-boundary = ('=' * 15) + (_fmt % token) + '=='
-print(boundary)
-
-print('------------------------------------------------------------')	#60個
-
 import datetime
 
 def _format_time(hh, mm, ss, us):
@@ -885,7 +814,7 @@ print(platform.platform())
 print('------------------------------------------------------------')	#60個
 
 
-msg = '''
+msg = """
 翠蓋龍旗出建章,鶯啼百囀柳初黃,
 昆池冰泮三山近,阿閣花深九陌香,
 徑轉虹梁通紫極,庭含玉樹隱霓裳,
@@ -894,7 +823,7 @@ msg = '''
 雲中帝座飛華蓋,城上鈞陳繞翠旗,
 紫氣旋面雙鳳閣,青松還有萬年枝,
 從來清蹕深嚴地,開盡碧桃人未知
-'''
+"""
 
 print(f"<鳳>出現的次數 : {msg.count('鳳')}")
 
@@ -905,16 +834,15 @@ print(f"新的msg內容 : {msg}")
 
 print('------------------------------------------------------------')	#60個
 
-x = [[a, b, c] for a in range(1,20) for b in range(a,20) for c in range(b,20)
+x = [[a, b, c] for a in range(1, 20) for b in range(a, 20) for c in range(b, 20)
      if a ** 2 + b ** 2 == c **2]
 print(x)
 
 
 print('------------------------------------------------------------')	#60個
 
-
 for x in range(0x2160, 0x216a):
-  print(chr(x),end=' ')
+  print(chr(x), end = ' ')
 
 print()
   
@@ -952,72 +880,6 @@ print("info   = ", i)
 
 print('------------------------------------------------------------')	#60個
 
-import random
-
-random.seed(5)  #固定亂數種子
-for i in range(5):
-    print(random.random())
-
-print('------------------------------------------------------------')	#60個
-
-import random                       # 導入模組random
-
-for i in range(5):
-    print("uniform(1,10) : ", random.uniform(1, 10))
-
-print('------------------------------------------------------------')	#60個
-
-import random                   # 導入模組random
-
-for i in range(10):
-    print(random.choice([1, 2, 3, 4, 5, 6, 7]), end = ",")
-print()
-
-LETTERS = 'ABCDEFG'
-lettersList = list(LETTERS) #字串 轉 串列
-
-for i in range(10):
-    print(random.choice(lettersList), end = ",")
-
-print()
-
-print('------------------------------------------------------------')	#60個
-
-import random                 # 導入模組random
-
-porker = ['2', '3', '4', '5', '6', '7', '8',
-          '9', '10', 'J', 'Q', 'K', 'A']
-for i in range(3):
-    random.shuffle(porker)    # 將次序打亂重新排列
-    print(porker)
-
-print('------------------------------------------------------------')	#60個
-
-import random                               # 導入模組random
-
-lotterys = random.sample(range(1,50), 7)    # 7組號碼
-specialNum = lotterys.pop()                 # 特別號
-
-print("第xxx期大樂透號碼 ", end="")
-for lottery in sorted(lotterys):            # 排序列印大樂透號碼
-    print(lottery, end=" ")
-print(f"\n特別號:{specialNum}")             # 列印特別號
-
-print('------------------------------------------------------------')	#60個
-
-import random
-
-trials = 1000000
-Hits = 0
-for i in range(trials):
-    x = random.random() * 2 - 1     # x軸座標
-    y = random.random() * 2 - 1     # y軸座標
-    if x * x + y * y <= 1:          # 判斷是否在圓內
-        Hits += 1
-PI = 4 * Hits / trials
-
-print("PI = ", PI)
-
 print('------------------------------------------------------------')	#60個
 
 xtime = time.localtime()
@@ -1034,6 +896,8 @@ print("第幾天   ", xtime[7])
 print("夏令時間 ", xtime[8])
 
 print('------------------------------------------------------------')	#60個
+'''
+
 
 ''' fail in kilo
 
@@ -1057,7 +921,10 @@ for i in range(1,x+1):
 
 '''
 
+'''
 print('------------------------------------------------------------')	#60個
+
+import platform
 
 print("目前Python版本是: ", sys.version)
 print("目前Python版本是: ", sys.version_info)
@@ -1158,7 +1025,7 @@ items = os.listdir()
 print(os.path.exists('myprime.py'))
 for item in items:
     print(os.path.abspath(item))
-
+'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -1194,6 +1061,7 @@ python的日期當中分成
 
 '''
 
+'''
 import datetime
 
 #輸出當前的日期及時間
@@ -1224,10 +1092,7 @@ another_dts = dts[:4]+"0101"
 another_dt = datetime.datetime.strptime(another_dts,"%Y%m%d")
 print(int((dt-another_dt).days)+1)
 
-
-'''
-由上可得知datetime.datetime.strptime()這個是將所輸入的dts轉換成日期的格式則格式為後面的年月日，再來取出輸入的西元年加上"0101"後一樣轉換成日期的格式最後將輸入日期減掉設定日期後+1輸出成今天為今年的第幾天
-'''
+#由上可得知datetime.datetime.strptime()這個是將所輸入的dts轉換成日期的格式則格式為後面的年月日，再來取出輸入的西元年加上"0101"後一樣轉換成日期的格式最後將輸入日期減掉設定日期後+1輸出成今天為今年的第幾天
 
 loc_dt = datetime.datetime.today() 
 time_del = datetime.timedelta(hours=3) 
@@ -1238,9 +1103,7 @@ print(loc_dt_format)
 print(datetime_format)
 
 
-'''
-由上可得知我們也可以調整時差，將我們現在的時間加上3小時的時差並將其輸出出來，一開始我們將抓出本地的時間並且將變數time_del宣告為時差差三個小時，最後將其相加就變成有時差三個小時最後將其指定格式後輸出，而以此類推我們也可以將時差晚三個小時
-'''
+#由上可得知我們也可以調整時差，將我們現在的時間加上3小時的時差並將其輸出出來，一開始我們將抓出本地的時間並且將變數time_del宣告為時差差三個小時，最後將其相加就變成有時差三個小時最後將其指定格式後輸出，而以此類推我們也可以將時差晚三個小時
 
 
 loc_dt = datetime.datetime.today() 
@@ -1612,18 +1475,7 @@ def gcd(a, b):
 
 a, b = 24, 36
 print("最大公約數是 : ", gcd(a, b))
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
+'''
 print('------------------------------------------------------------')	#60個
 
 
@@ -1633,9 +1485,61 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
+import time                         # 導入模組time
 
+print(time.asctime())               # 列出目前系統時間 
 
+print('------------------------------------------------------------')	#60個
 
+import time                         # 導入模組time
+
+xtime = time.localtime()
+print(xtime)                        # 列出目前系統時間
+print("年 ", xtime[0])
+print("年 ", xtime.tm_year)         # 物件設定方式顯示
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+print('------------------------------------------------------------')	#60個
+
+import time                         # 導入模組time
+
+print(time.ctime())
+
+print('------------------------------------------------------------')	#60個
+
+''' fail
+import time
+
+x = 1000000
+pi = 0
+time.clock()
+for i in range(1,x+1):
+    pi += 4*((-1)**(i+1) / (2*i-1))
+    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
+        e_time = time.clock()
+        print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
+'''
+
+print('------------------------------------------------------------')	#60個
+
+import time
+x = 1000000
+pi = 0
+time.process_time()
+for i in range(1,x+1):
+    pi += 4*((-1)**(i+1) / (2*i-1))
+    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
+        e_time = time.process_time()
+        print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
+
+print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
@@ -1652,4 +1556,68 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('---- 新進 未整理 --------------------------------------------------------')	#60個
+
+
+
+
+
+'''
+word = word.strip()
+
+    dbg('recursedown(%r)\n' % (dirname,))
+##  dbg('fix(%r)\n' % (filename,))
+
+
+'''
+
+'''
+filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
+with open(filename, "w", encoding = 'utf-8') as fp:
+    print(filename + " is dumping...")
+    json.dump(titles, fp)
+'''
+
+
+
+print('全圖640X480, 每160X160裁一塊出來')
+W = 640
+H = 480
+w = 160
+h = 160
+
+'''
+for(y = 0; y < H; y += h)
+  for(x = 0; x < W; x += w)
+'''
+for y in range(0, H, h):
+    for x in range(0, W, w):
+        box = x, y, min(W, x + w), min(H, y + h)
+        print(box)
+        #tile = ImageTk.PhotoImage(image.crop(box))
+        #canvas.create_image(x, y, image = tile, anchor = NW)
+        #print(x, y)
+        #print(box)
+
+
+
+'''
+cnstr = '中文 test'
+print(cnstr, len(cnstr))
+#utfstr = unicode(cnstr, 'utf-8')
+'''
+
+
 

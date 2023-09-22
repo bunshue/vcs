@@ -4,6 +4,7 @@ imshow
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
+import sys
 import matplotlib.pyplot as plt
 import matplotlib.image as img
 import numpy as np
@@ -84,11 +85,6 @@ plt.imshow(cut_img)	#顯示圖片, 兩行都要
 
 
 plt.show()
-
-
-import sys
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -325,7 +321,8 @@ for iy, y in enumerate(Y):
 	for ix, x in enumerate(X):
 		Z[-iy - 1, ix] = m(x + 1j * y)
 
-pylab.save("mandel", Z)	# save array to file
+#影像存圖
+#pylab.save("mandel", Z)	# save array to file
 
 plt.imshow(Z, cmap = plt.cm.prism, interpolation = 'none', extent = (X.min(), X.max(), Y.min(), Y.max()))
 plt.xlabel("Re(c)")
@@ -335,7 +332,19 @@ plt.ylabel("Im(c)")
 #第二張圖
 plt.subplot(232)
 
+pts = np.arange(-2, 2, 0.01)
+x, y = np.meshgrid(pts, pts)
+z = np.sqrt(x**2 + y**2)
 
+ticks = np.arange(0, 500, 100)
+seq = np.arange(-2, 3)
+
+plt.imshow(z, cmap='rainbow')
+plt.xticks(ticks, seq)
+plt.yticks(ticks, seq)
+
+plt.colorbar()
+plt.title(r"建立$\sqrt{x^2 + y^2}$網格影像")
 
 #第三張圖
 plt.subplot(233)

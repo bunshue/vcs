@@ -43,15 +43,20 @@ print('原圖大小 W =', W, ', H =', H)
 print('圖片維度 圖片資訊')
 print('Size : ', image1.size, 'Mode : ', image1.mode, 'Format : ', image1.format)
 
+#PIL保存圖片的方式，調用方法 Image.save() 即可
 print('圖片另存新檔')
-image1.save('image_to_file.jpg')
-image1.save('image_to_file.png')
+image1.save('image_to_filea.jpg')
+image1.save('image_to_fileb.jpg', 'JPEG')
+image1.save('image_to_filea.png')
+image1.save('image_to_fileb.png', 'PNG')
 image1.save('image_to_file.bmp') 
 
 print('顯示原圖')
 plt.imshow(image1)
 
 plt.show()
+
+image1.close()
 
 print('------------------------------------------------------------')	#60個
 

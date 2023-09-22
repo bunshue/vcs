@@ -1599,3 +1599,27 @@ parsers = {'clinic' : DSLParser, 'python': PythonParser}
     )
 
 '''
+
+
+'''
+#list排序
+
+import SelectionSort 
+
+lst = [3, 4, 1, 2, 0]
+SelectionSort.selectionSort(lst)
+print(lst)
+'''
+
+
+'''
+添加資料(append)
+插入資料(insert)
+
+合併資料(extend)
+使用 extend() 將兩個List合併在一起，就像字串的Concatenation。
+'''
+
+
+
+
