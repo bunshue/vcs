@@ -1,14 +1,14 @@
-'''
+"""
 CH09基本自然語言處理
 
 
 
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
-'''
+
 print('OpenCC：繁體簡體轉換')
 # pip install opencc-python-reimplemented
 
@@ -98,7 +98,7 @@ breakword = jieba.cut(sentence, cut_all=False)
 print('|'.join(breakword))   
 
 print('---------')
-
+""" fail
 jieba.set_dictionary('dict.txt.big.txt')
 jieba.load_userdict('user_dict_test.txt')
 sentence = '這部電影很好看，是我的朋友陳國文主演的。'
@@ -119,8 +119,9 @@ for word in breakword:
         words.append(word)
 print('|'.join(words))
 
-'''
+"""
 print('------------------------------------------------------------')	#60個
+
 
 print('pywordseg：繁體中文斷詞')
 # pip install pywordseg
@@ -156,14 +157,82 @@ print('|'.join(stopwords))
 
 print('------------------------------------------------------------')	#60個
 
+print('sumy：對網頁或文章進行摘要')
+
+# pip install sumy
+
+import nltk
+nltk.download('punkt')
+
+from sumy.parsers.html import HtmlParser
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.utils import get_stop_words
 
 
+LANGUAGE = "chinese"
+# LANGUAGE = "english"
+SENTENCES_COUNT = 5
+# SENTENCES_COUNT = 10
+url = "https://news.ltn.com.tw/news/life/breakingnews/3649202"
+# url = "https://en.wikipedia.org/wiki/Automatic_summarization"
+parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+summarizer = Summarizer(Stemmer(LANGUAGE))
+summarizer.stop_words = get_stop_words(LANGUAGE)
+sumies = summarizer(parser.document, SENTENCES_COUNT)
+for i, sentence in enumerate(sumies):
+    print('{}. {}'.format(i+1, sentence))
 
 
-
+LANGUAGE = "chinese"
+SENTENCES_COUNT = 5
+parser = PlaintextParser.from_file("article1.txt", Tokenizer(LANGUAGE))
+summarizer = Summarizer(Stemmer(LANGUAGE))
+summarizer.stop_words = get_stop_words(LANGUAGE)
+sumies = summarizer(parser.document, SENTENCES_COUNT)
+for i, sentence in enumerate(sumies):
+    print('{}. {}'.format(i+1, sentence))    
 
 
 print('------------------------------------------------------------')	#60個
+
+print('wordcloud：文字雲')
+
+
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+import jieba
+from collections import Counter
+from PIL import Image
+import numpy as np
+import requests
+text = open('travel.txt', "r",encoding="utf-8").read()
+jieba.set_dictionary('dict.txt.big.txt')
+with open('stopWord_cloud.txt', 'r', encoding='utf-8-sig') as f:
+#with open('stopWord_cloudmod.txt', 'r', encoding='utf-8-sig') as f:
+    stops = f.read().split('\n')   
+terms = []
+for t in jieba.cut(text, cut_all=False):
+    if t not in stops:
+        terms.append(t)
+diction = Counter(terms)
+fontfile = requests.get("https://drive.google.com/uc?id=1QdaqR8Setf4HEulrIW79UEV_Lg_fuoWz&export=download")
+with open('taipei_sans_tc_beta.ttf', 'wb') as f:
+  f.write(fontfile.content)
+wordcloud = WordCloud(font_path='taipei_sans_tc_beta.ttf') 
+#mask = np.array(Image.open("heart.png")) 
+#wordcloud = WordCloud(background_color="white",mask=mask,font_path='taipei_sans_tc_beta.ttf') 
+wordcloud.generate_from_frequencies(frequencies=diction)
+plt.figure(figsize=(10, 10))
+plt.imshow(wordcloud)
+plt.axis("off")
+plt.show()
+wordcloud.to_file("bookCloud.png")
+
+
+
 
 
 print('------------------------------------------------------------')	#60個

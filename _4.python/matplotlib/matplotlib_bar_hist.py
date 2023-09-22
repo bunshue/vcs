@@ -160,7 +160,7 @@ plt.subplot(231)
 print('以直方圖顯示常態分佈')
 x = np.random.randn(N)  #常態分佈數字
 
-n, bins, patches = plt.hist(x, num_bins, facecolor='yellow', edgecolor='yellow')
+n, bins, patches = plt.hist(x, num_bins, facecolor = 'yellow', edgecolor = 'yellow')
 print(n)
 print(bins)
 
@@ -200,7 +200,7 @@ plt.figure(num = '新進1', figsize = (20, 15), dpi = 84, facecolor = "whitesmok
 #第一張圖
 plt.subplot(231)
 
-labels = ["Python","C++","Java","JS","C","C#"]
+labels = ["Python", "C++", "Java", "JS", "C", "C#"]
 index = np.arange(len(labels))
 ratings = [5.16, 5.73, 14.99, 3.17, 11.86, 4.45]
 change = [1.12, 0.3, -1.69, 0.29, 3.41, -0.45]
@@ -241,7 +241,7 @@ plt.subplot(234)
 
 from collections import Counter
 
-cyl = [6 ,6 ,4 ,6 ,8 ,6 ,8 ,4 ,4 ,6 ,6 ,8 ,8 ,8 ,8 ,8 ,8 ,4 ,4 ,4 ,4 ,8 ,8 ,8 ,8 ,4 ,4 ,4 ,8 ,6 ,8 ,4]
+cyl = [6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8, 8, 8, 8, 4, 4, 4, 8, 6, 8, 4]
 
 labels, values = zip(*Counter(cyl).items())
 indexes = np.arange(len(values))
@@ -249,10 +249,8 @@ indexes = np.arange(len(values))
 plt.bar(indexes, values, width = 0.5)
 plt.xticks(indexes, labels)
 
-
 #第五張圖
 plt.subplot(235)
-
 
 listx1 = [1,5,7,9,13,16]
 listy1 = [15,50,80,40,70,50]

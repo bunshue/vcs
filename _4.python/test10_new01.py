@@ -4,7 +4,7 @@ import time
 import random
 import numpy as np
 
-'''
+
 print('------------------------------------------------------------')	#60個
 
 print('---- 字串處理專區 --------------------------------------------------------')	#60個
@@ -174,9 +174,6 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-print('---- datatime time random math --------------------------------------------------------')	#60個
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -309,6 +306,7 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
+"""
 print('一種寫入檔案的方法')
 filename = 'tmp.txt'
 
@@ -331,11 +329,12 @@ print('', file=fp)
 print('[FILES]', file=fp)
 print('', file=fp)
 fp.close()
+"""
 
 print('------------------------------------------------------------')	#60個
 
 
-print('------------------------------------------------------------')	#60個
+print('---- char ord unicode decode encode --------------------------------------------------------')	#60個
 
 
 print('字元轉unicode')
@@ -344,6 +343,114 @@ string = '你'
 print(ord(string))
 
 #print(hex(ord(string)))
+
+""" tbd
+mesg = 'abcdefg'
+
+print('字串 轉 unicode')
+
+ccc = unicode(mesg, 'utf-8')
+print(ccc)
+
+
+print('unicode 轉 字串')
+ddd = str(ccc)
+print(ddd)
+
+
+"""
+x1 = 97
+x2 = chr(x1)      
+print(x2)             # 輸出數值97的字元
+x3 = ord(x2)
+print(x3)             # 輸出字元x3的Unicode碼值
+x4 = '魁'
+print(ord(x4))        # 輸出字元'魁'的Unicode碼值
+
+
+
+cnstr = '中文 test'
+print(cnstr, len(cnstr))
+#utfstr = unicode(cnstr, 'utf-8')
+
+'''
+s = "Hello!"
+u = unicode(s, "utf-8")
+'''
+
+#city = 'Ribeir\xc3\xa3o Preto'
+#print(city.decode('cp1252').encode('utf-8'))
+
+import sys
+print(sys.getdefaultencoding())     # 打印出目前系統字符編碼
+
+'''
+s = '你好'
+s_to_unicode = s.decode(encoding='utf-8')  # 要告訴decode原本的編碼是哪種
+print(s_to_unicode)
+'''
+
+content = '你好'
+
+print('原字串')
+print(content)
+print('字串 轉 UTF-8')
+ccc = content.encode('UTF-8')
+print(type(ccc))
+print(ccc)
+
+print(content.encode('UTF-8').decode('UTF-8'))
+
+t = b'\xe4\xbd\xa0\xe5\xa5\xbd'
+print(len(t))
+print(t.decode('UTF-8'))
+
+t = b'\xe4\xbd\xa0\xe5\xa5\xbe'
+print(len(t))
+print(t.decode('UTF-8'))
+
+
+for i in range(128):
+    c = chr(i)
+    print(c, end = '')
+
+
+
+print('------------------------------------------------------------')	#60個
+
+_b85alphabet = (b"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                b"abcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~")
+
+_b85chars = [bytes((i,)) for i in _b85alphabet]
+print(_b85chars)
+print()
+
+_b85chars2 = [(a + b) for a in _b85chars for b in _b85chars]
+print(_b85chars2)
+
+print('------------------------------------------------------------')	#60個
+
+print('字串轉拜列')
+string = 'lion'
+data = repr(string).encode('utf-8') + b'\0'
+print(type(data))
+print(data)
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+command1 = 'abcde'
+print(type(command1))
+print(command1)
+
+command2 = command1.encode()
+print(type(command2))
+print(command2)
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -448,12 +555,12 @@ print('%30s: %5.0fms %5.0fms %7s %5.0fms %5.0fms %7s' % \
        avg_time * MILLI_SECONDS,
        other_avg_time * MILLI_SECONDS * warp / warp,
        avg_diff))
-
+"""
 print('%30s:  %6.3fms  %6.3fms' % \
       (name,
        min(overhead_times) * MILLI_SECONDS,
        max(overhead_times) * MILLI_SECONDS))
-
+"""
 print('    %5.0fms    %5.0fms %7.3fms' % \
       (eff_time * MILLI_SECONDS,
        abs_time * MILLI_SECONDS,
@@ -464,16 +571,8 @@ print(' Round %-25i  effective   absolute  overhead' % (i+1))
 
 print('%30s:' % name, end = ' ')
 
-
 print('Calib. prep time     = %.6fms' % (
     total_min_time * MILLI_SECONDS))
-
-
-# Name of the benchmark
-name = '%04i-%02i-%02i %02i:%02i:%02i' % \
-       (time.localtime(time.time())[:6])
-
-print(name)
 
 print('------------------------------------------------------------')	#60個
 
@@ -491,19 +590,6 @@ for x in (15, 25, 35, 45, 55):
 
 
 
-
-_b85alphabet = (b"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                b"abcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~")
-
-
-_b85chars = [bytes((i,)) for i in _b85alphabet]
-print(_b85chars)
-print()
-
-_b85chars2 = [(a + b) for a in _b85chars for b in _b85chars]
-
-print(_b85chars2)
-
 print('------------------------------------------------------------')	#60個
 
 from itertools import islice as _islice, count as _count
@@ -520,14 +606,6 @@ print(_newname())
 print(_newname())
 print(_newname())
 print(_newname())
-
-print('------------------------------------------------------------')	#60個
-
-print('字串轉拜列')
-string = 'lion'
-data = repr(string).encode('utf-8') + b'\0'
-print(type(data))
-print(data)
 
 print('------------------------------------------------------------')	#60個
 
@@ -555,7 +633,7 @@ modules = (
     "os", "sys", "cv2", "numpy", "PIL", "pylibjpeg",
     "openjpeg", "libjpeg",
 )
-
+"""
 for module in modules:
     try:
         m = importlib.import_module(module)
@@ -568,7 +646,7 @@ for module in modules:
 
 print('print_table')
 print_table(version_rows)
-
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -682,16 +760,6 @@ print(hours)
 
 print('------------------------------------------------------------')	#60個
 
-x1 = 97
-x2 = chr(x1)      
-print(x2)             # 輸出數值97的字元
-x3 = ord(x2)
-print(x3)             # 輸出字元x3的Unicode碼值
-x4 = '魁'
-print(ord(x4))        # 輸出字元'魁'的Unicode碼值
-
-print('------------------------------------------------------------')	#60個
-
 print(" 姓名    國文    英文    總分")
 print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
 print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
@@ -749,70 +817,11 @@ print("計算結果 : %5.2f" % number)
 
 print('------------------------------------------------------------')	#60個
 
-from datetime import date, timedelta
-
-d0 = date(1993, 12, 15)
-d1 = date(2020, 12, 15)
-
-delta = timedelta(days = 1)
-print('日期 :', d0 + delta)
-
-delta = timedelta(days = 10000)
-print('日期 :', d0 + delta)
-
-print('相距日期 :', d1 - d0, '天')
-
-
-d0 = date(2021, 5, 24)
-d1 = date(2023, 8, 21)
-print('相距日期 :', d1 - d0, '天')
-
-print('------------------------------------------------------------')	#60個
-
-import datetime
-
-def _format_time(hh, mm, ss, us):
-    # Skip trailing microseconds when us==0.
-    result = "%02d:%02d:%02d" % (hh, mm, ss)
-    if us:
-        result += ".%06d" % us
-    return result
-
-year = 2023
-month = 8
-day = 11
-sep = 'W'
-hour = 12
-minute = 34
-second = 56
-microsecond = 123456
-s = _format_time(hour, minute, second, microsecond)
-print(s)
-
-
-s = ("%04d-%02d-%02d%c" % (year, month, day, sep) +
-     _format_time(hour, minute, second,microsecond))
-print(s)
-
-
-hh = 12
-mm = 34
-ss = 56
-s = "%d:%02d:%02d" % (hh, mm, ss)
-print(s)
-
-
-print('------------------------------------------------------------')	#60個
-
-
 import platform
 print(platform.win32_ver())
 print(platform.platform())
 
-
-
 print('------------------------------------------------------------')	#60個
-
 
 msg = """
 翠蓋龍旗出建章,鶯啼百囀柳初黃,
@@ -882,24 +891,10 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-xtime = time.localtime()
-print(xtime)                        # 列出目前系統時間
-print("年 ", xtime[0])
-print("年 ", xtime.tm_year)         # 物件設定方式顯示
-print("月 ", xtime[1])
-print("日 ", xtime[2])
-print("時 ", xtime[3])
-print("分 ", xtime[4])
-print("秒 ", xtime[5])
-print("星期幾   ", xtime[6])
-print("第幾天   ", xtime[7])
-print("夏令時間 ", xtime[8])
-
-print('------------------------------------------------------------')	#60個
-'''
 
 
-''' fail in kilo
+
+""" fail in kilo
 
 x = 1000000
 pi = 0
@@ -919,9 +914,9 @@ for i in range(1,x+1):
     if i % 100000 == 0:      # 隔100000執行一次
         print(f"當 {i = :7d} 時 PI = {pi:20.19f}")
 
-'''
+"""
 
-'''
+
 print('------------------------------------------------------------')	#60個
 
 import platform
@@ -994,42 +989,17 @@ print('------------------------------------------------------------')	#60個
 import builtins
 print(dir(builtins))
 
-import time
-print(time.time())
-print(time.localtime())
-year, month, day, hour, minute, second, _, _, _ = time.localtime()
-print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
-print(time.asctime())
-print(time.strftime("%Y-%m-%d %H:%M:%S %a"))
-
-import datetime
-#當前的日期及時間
-print(datetime.datetime.now())
-
-import datetime
-today = datetime.datetime.today()
-birthday = datetime.datetime(2018,10,27, 17, 0, 0)
-print(today - birthday)
-
-from datetime import datetime
-now = datetime.now()
-print("今天是{}".format(datetime.strftime(now, "%Y-%m-%d")))
-date = input("請輸入一個日期（yyyy-mm-dd):")
-target = datetime.strptime(date, "%Y-%m-%d")
-diff = now-target
-print("到今天共經過了{}天。".format(diff.days))
-
 print('------------------------------------------------------------')	#60個
 
 items = os.listdir()
 print(os.path.exists('myprime.py'))
 for item in items:
     print(os.path.abspath(item))
-'''
+
 
 print('------------------------------------------------------------')	#60個
 
-''' no file
+""" no file
 fullpath = os.path.abspath('myprime.py')
 print(fullpath)
 print("os.path.basename:", os.path.basename(fullpath))
@@ -1045,74 +1015,10 @@ print("os.path.split:", os.path.split(fullpath))
 print("os.path.splitdrive:", os.path.splitdrive(fullpath))
 print("os.path.splitext:", os.path.splitext(fullpath))
 
-'''
+"""
 
 
 print('------------------------------------------------------------')	#60個
-
-'''
-
-python的日期當中分成
-1. date(日期)
-2. time(時間)
-3. datetime(混合date跟time)
-4. timedelta(計算歷時期間的型態)
-5. timezone(處理時區資訊的型態)
-
-'''
-
-'''
-import datetime
-
-#輸出當前的日期及時間
-
-print(datetime.datetime.now())
-
-print(datetime.datetime.today())
-
-#而如果只想要輸出現在的日期的話則用
-print(datetime.date.today())
-
-
-#而如果要輸出此時準確的時間的話則
-print(time.localtime())
-
-#而我們也可以一一拆解
-
-tonow = datetime.datetime.now()
-print(tonow.year)
-print(tonow.month)
-print(tonow.day)
-
-#而我們也可以算今天是今年的第幾天
-
-dts = '20201007'
-dt = datetime.datetime.strptime(dts,"%Y%m%d")
-another_dts = dts[:4]+"0101"
-another_dt = datetime.datetime.strptime(another_dts,"%Y%m%d")
-print(int((dt-another_dt).days)+1)
-
-#由上可得知datetime.datetime.strptime()這個是將所輸入的dts轉換成日期的格式則格式為後面的年月日，再來取出輸入的西元年加上"0101"後一樣轉換成日期的格式最後將輸入日期減掉設定日期後+1輸出成今天為今年的第幾天
-
-loc_dt = datetime.datetime.today() 
-time_del = datetime.timedelta(hours=3) 
-new_dt = loc_dt + time_del 
-datetime_format = new_dt.strftime("%Y/%m/%d %H:%M:%S")
-loc_dt_format = loc_dt.strftime("%Y/%m/%d %H:%M:%S")
-print(loc_dt_format)
-print(datetime_format)
-
-
-#由上可得知我們也可以調整時差，將我們現在的時間加上3小時的時差並將其輸出出來，一開始我們將抓出本地的時間並且將變數time_del宣告為時差差三個小時，最後將其相加就變成有時差三個小時最後將其指定格式後輸出，而以此類推我們也可以將時差晚三個小時
-
-
-loc_dt = datetime.datetime.today() 
-time_del = datetime.timedelta(hours=3) 
-new_dt = loc_dt - time_del 
-datetime_format = new_dt.strftime("%Y/%m/%d %H:%M:%S")
-loc_dt_format = loc_dt.strftime("%Y/%m/%d %H:%M:%S")
-print(loc_dt_format)
-print(datetime_format)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1271,34 +1177,7 @@ for enc in ALL_CJKENCODINGS:
 print('------------------------------------------------------------')	#60個
 
 
-ticks = time.time() #至今的tick數
-print(ticks)
-
-localtime = time.localtime(ticks)   #傳回時間元組
-print(type(localtime))
-print(localtime)
-
-print('年 :', localtime[0])
-print('月 :', localtime[1])
-print('日 :', localtime[2])
-print('時 :', localtime[3])
-print('分 :', localtime[4])
-print('秒 :', localtime[5])
-
-#asctime() #傳回時間元組的日期時間字串
-formattime = time.asctime(time.localtime(ticks))
-print(formattime)
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1475,46 +1354,20 @@ def gcd(a, b):
 
 a, b = 24, 36
 print("最大公約數是 : ", gcd(a, b))
-'''
-print('------------------------------------------------------------')	#60個
-
 
 
 print('------------------------------------------------------------')	#60個
 
 
-print('------------------------------------------------------------')	#60個
-
-import time                         # 導入模組time
-
-print(time.asctime())               # 列出目前系統時間 
 
 print('------------------------------------------------------------')	#60個
 
-import time                         # 導入模組time
-
-xtime = time.localtime()
-print(xtime)                        # 列出目前系統時間
-print("年 ", xtime[0])
-print("年 ", xtime.tm_year)         # 物件設定方式顯示
-print("月 ", xtime[1])
-print("日 ", xtime[2])
-print("時 ", xtime[3])
-print("分 ", xtime[4])
-print("秒 ", xtime[5])
-print("星期幾   ", xtime[6])
-print("第幾天   ", xtime[7])
-print("夏令時間 ", xtime[8])
 
 print('------------------------------------------------------------')	#60個
 
-import time                         # 導入模組time
-
-print(time.ctime())
-
 print('------------------------------------------------------------')	#60個
 
-''' fail
+"""
 import time
 
 x = 1000000
@@ -1525,7 +1378,7 @@ for i in range(1,x+1):
     if i != 1 and i % 100000 == 0:      # 隔100000執行一次
         e_time = time.clock()
         print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -1574,21 +1427,21 @@ print('---- 新進 未整理 ---------------------------------------------------
 
 
 
-'''
+"""
 word = word.strip()
 
     dbg('recursedown(%r)\n' % (dirname,))
 ##  dbg('fix(%r)\n' % (filename,))
 
+"""
 
-'''
 
-'''
+"""
 filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
 with open(filename, "w", encoding = 'utf-8') as fp:
     print(filename + " is dumping...")
     json.dump(titles, fp)
-'''
+"""
 
 
 
@@ -1598,10 +1451,11 @@ H = 480
 w = 160
 h = 160
 
-'''
+"""
 for(y = 0; y < H; y += h)
   for(x = 0; x < W; x += w)
-'''
+"""
+
 for y in range(0, H, h):
     for x in range(0, W, w):
         box = x, y, min(W, x + w), min(H, y + h)
@@ -1613,11 +1467,7 @@ for y in range(0, H, h):
 
 
 
-'''
-cnstr = '中文 test'
-print(cnstr, len(cnstr))
-#utfstr = unicode(cnstr, 'utf-8')
-'''
+
 
 
 

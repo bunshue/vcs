@@ -1,25 +1,49 @@
 import sys
 import random
 
+'''
+random.seed()
+
+random.random()
+
+random.randint(num1, num2)
+
+random.choice
+
+random.randrange
+
+random.uniform(num1, num2)
+
+----
+
+還沒整理好的
+random.sample.....
+
+'''
+
 print('隨機變數')
 
-print('------------------------------------------------------------')	#60個
-'''
-import random
+print('---- random.seed() --------------------------------------------------------')	#60個
 
-#random.seed(5)  #固定亂數種子
+"""
+random.seed(5)  #固定亂數種子
 for i in range(10):
-    print(random.random(), end = ',')
+    print(random.random(), end = ', ')
 
-
+import time
+randseed = int(time.time())
+random.seed(randseed) #打亂亂數種子
+for i in range(10):
+    print(random.random(), end = ', ')
+""" 
 
 print('---- random.random() --------------------------------------------------------')	#60個
 
+print('random.random(), 隨機分布, 產生 0.00 ~ 1.00 之間的一個浮點數')
+for i in range(5):
+    print(random.random())
 
-#print('random.random() 測試, 0.00 ~ 1.00 之間的浮點數')
-#for i in range(10):
-#    print(random.random(), end = '\n')
-#print()
+print('------------------------------------------------------------')	#60個
 
 print('蒙地卡羅模擬')
 
@@ -36,34 +60,73 @@ PI = 4 * Hits / trials
 
 print("PI = ", PI)
 
-
-
-
 print('---- random.randint(num1, num2) --------------------------------------------------------')	#60個
 
 num1, num2 = 0, 255
-R = random.randint(num1, num2) #產生 0~255 之間的亂數整數 包含邊界
-G = random.randint(num1, num2) #產生 0~255 之間的亂數整數 包含邊界
-B = random.randint(num1, num2) #產生 0~255 之間的亂數整數 包含邊界
+R = random.randint(num1, num2) #產生 num1 ~ num2 之間的亂數整數 包含邊界
+G = random.randint(num1, num2) #產生 num1 ~ num2 之間的亂數整數 包含邊界
+B = random.randint(num1, num2) #產生 num1 ~ num2 之間的亂數整數 包含邊界
 print("取得亂數: ", R, G, B)
 print("取得亂數1: {} 亂數2: {} 亂數3: {}".format(R, G, B))
 print("取得亂數: (%d, %d, %d)" % (R, G, B))
 
-num = random.randint(1, 6)
-print(num)
+print('取出 1 ~ 6 之間的整數')
 
 num = random.randint(1, 6)
 print("你擲的骰子點數為：" + str(num))
 
-
 print('---- random.choice --------------------------------------------------------')	#60個
 
+import random                   # 導入模組random
+
+ANIMALS = '鼠牛虎兔龍蛇馬'
+animalList = list(ANIMALS) #字串 轉 串列
+print(type(animalList))
+print(animalList)
+
 for i in range(10):
-    timeout = random.choice(range(80,180))
-    print('timeout', timeout)
+    print(random.choice(animalList), end = ', ')
+print()
 
 print('------------------------------------------------------------')	#60個
 
+#animals = [1,2,3,4,5,6]
+animals = ['鼠', '牛', '虎', '兔', '龍']
+for i in range(10):
+    animal = random.choice(animals)     #在名詞字串中隨機選取一個字串
+    print(animal, end = ', ')
+print()
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+NUMBER = 11
+numberList = list(range(NUMBER))
+print(type(numberList))
+print(numberList)
+
+for i in range(10):
+    print(random.choice(numberList), end = ', ')
+print()
+
+print('------------------------------------------------------------')	#60個
+
+for i in range(10):
+    print(random.choice([1,2,3,4,5,6]), end = ', ')
+print()
+
+print('------------------------------------------------------------')	#60個
+
+for i in range(10):
+    t = random.choice(range(80, 180))
+    print(t, end = ', ')
+print()
+
+print('------------------------------------------------------------')	#60個
 
 pretty_note = '♫♪♬'
 pretty_text = ''
@@ -75,71 +138,76 @@ for i in string_message:
     
 print(pretty_text)
 
-
-
-def randomAnimal():
-    nouns = ["lion", "mouse", "cat", "dog"]
-    noun = random.choice(nouns)     #在名詞字串中隨機選取一個字串
-    return noun
-
-for count in range(10):
-    print(randomAnimal())
-
-
-print("任選一個")
-for count in range(10):
-    print(random.choice(['a', 'b', 'c']))
-
-
-#values = [1,2,3,4,5,6]
-values = ['alpha','bravo','charlie','delta','echo','foxtrot']
-
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-
-
-
-first_names = ['Bob', 'Maria', 'Alex', 'James', 'Susan', 'Henry', 'Lisa', 'Anna', 'Lisa']
-last_names = ['Smith', 'Brown', 'Wilson', 'Thomson', 'Cook', 'Taylor', 'Walker', 'Clark']
-
-for i in range(10):
-    first = random.choice(first_names)
-    last = random.choice(last_names)
-    print(first, last)
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-def randomNoun():
-    nouns = ["cats", "hippos", "cakes"]
-    noun = random.choice(nouns)
-    return noun
 
-def randomVerb():
-    verbs = ["eats", "likes", "hates", "has"]
-    verb = random.choice(verbs)
-    return verb
+s = ''
+for i in range(0, 10):
+    s += random.choice('<>=^')
+    s += random.choice('+- ')
+    s += str(random.randrange(1, 100))
+    s += str(random.randrange(100))
+    s += random.choice(('', 'E', 'e', 'G', 'g', 'F', 'f', '%'))
 
-for i in range(4):
-  verb = randomVerb()
-  noun = randomNoun()
-  sentence = "david " + verb + " " + noun
-  print(sentence)
-
+print(s)
 
 print('------------------------------------------------------------')	#60個
 
 
-maxNo=10
+
+print('---- random.randrange --------------------------------------------------------')	#60個
+
+maxNo = 10
 result = random.randrange(1, 10)
 print("取得亂數 : " + str(result))
+
+print('------------------------------------------------------------')	#60個
+
+for count in range(20):
+    x = random.randrange(-10, 10)       #-10~9之間的整數
+    y = random.randrange(-10, 10)       #-10~9之間的整數
+    length = random.randrange(10)       #0~9之間的整數
+    shape = random.randrange(3, 8)      #3~7之間的整數
+    print(count, x, y, length, shape)
+
+print('------------------------------------------------------------')	#60個
+
+
+print('randrange(300), 取出0~300間之整數')
+
+for _ in range(10):
+    x = random.randrange(300)
+    print(x)
+
+
+"""
+def _random_getnode():
+    #Get a random node ID, with eighth bit set as suggested by RFC 4122.
+    import random
+    return random.randrange(0, 1<<48) | 0x010000000000
+
+
+        return UUID(bytes=os.urandom(16), version=4)
+    except:
+        import random
+        bytes = bytes_(random.randrange(256) for i in range(16))
+        return UUID(bytes=bytes, version=4)
+
+
+        import os
+        if int(os.uname().release.split('.')[0]) >= 9:
+
+        import random
+        clock_seq = random.randrange(1<<14) # instead of stable storage
+
+"""
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -165,34 +233,13 @@ print(data)
 
 print('------------------------------------------------------------')	#60個
 
-import random                   # 導入模組random
 
-ANIMALS = '鼠牛虎兔龍蛇馬'
-animalList = list(ANIMALS) #字串 轉 串列
-print(type(animalList))
-print(animalList)
-
-for i in range(10):
-    print(random.choice(animalList), end = ',')
-print()
-
+print('常態分布 1 ~ 10')
+for i in range(5):
+    print("uniform(1,10) : ", random.uniform(1, 10))
 
 print('------------------------------------------------------------')	#60個
 
-import random                               # 導入模組random
-
-N = 7   #7組號碼
-for i in range(10):
-    numbers = random.sample(range(1, 50), N)   #結果為 1, 2, 3....49 不包含50之整數
-    #print(type(numbers))
-    print(numbers)
-
-specialNum = numbers.pop()                 # 特別號, 最後一個數字是特別號, pop出後, numbers剩下6個號碼
-
-print("第xxx期大樂透號碼 :", end = '')
-for num in sorted(numbers):            # 排序列印大樂透號碼
-    print(num, end = ' ')
-print(f"\n特別號:{specialNum}")             # 列印特別號
 
 print('------------------------------------------------------------')	#60個
 
@@ -229,6 +276,45 @@ print("本期大樂透特別號為：" + str(special))
 
 print('------------------------------------------------------------')	#60個
 
+lotterys = random.sample(range(1,50), 7)    # 7組號碼
+specialNum = lotterys.pop()                 # 特別號
+
+print("第xxx期大樂透號碼 ", end="")
+for lottery in sorted(lotterys):            # 排序列印大樂透號碼
+    print(lottery, end=" ")
+print("\n特別號:%d" % specialNum)           # 列印特別號
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import random                               # 導入模組random
+
+N = 7   #7組號碼
+for i in range(10):
+    numbers = random.sample(range(1, 50), N)   #結果為 1, 2, 3....49 不包含50之整數
+    #print(type(numbers))
+    print(numbers)
+
+specialNum = numbers.pop()                 # 特別號, 最後一個數字是特別號, pop出後, numbers剩下6個號碼
+
+print("第xxx期大樂透號碼 :", end = '')
+for num in sorted(numbers):            # 排序列印大樂透號碼
+    print(num, end = ' ')
+print(f"\n特別號:{specialNum}")             # 列印特別號
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
 
 print('--- random.shuffle(list) ---------------------------------------------------------')	#60個
 
@@ -257,43 +343,12 @@ print(animalList)
 
 print('------------------------------------------------------------')	#60個
 
-
-
 print('------------------------------------------------------------')	#60個
 
-for count in range(20):
-    x = random.randrange(-10, 10)       #-10~9之間的整數
-    y = random.randrange(-10, 10)       #-10~9之間的整數
-    length = random.randrange(10)       #0~9之間的整數
-    shape = random.randrange(3, 8)      #3~7之間的整數
-    print(count, x, y, length, shape)
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-#發牌遊戲
-
-# Create a deck of cards
-deck = [x for x in range(0, 52)]
-
-# Create suits and ranks lists
-suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
-ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9",
-      "10", "Jack", "Queen", "King"]
-        
-# Shuffle the cards
-random.shuffle(deck)
-
-# Display the first four cards
-for i in range(4):
-    suit = suits[deck[i] // 13]
-    rank = ranks[deck[i] % 13]
-    print("Card number", deck[i], "is", rank, "of", suit)
+animals = ['鼠', '牛', '虎', '兔', '龍']
+for i in range(3):
+    random.shuffle(animals)              # 將次序打亂重新排列
+    print(animals)
 
 print('------------------------------------------------------------')	#60個
 
@@ -327,28 +382,41 @@ for i in ran:
     index.append(i)
 index.sort()
 """
+print('------------------------------------------------------------')	#60個
+
+#發牌遊戲
+
+# Create a deck of cards
+deck = [x for x in range(0, 52)]
+
+# Create suits and ranks lists
+suits = ["Spades", "Hearts", "Diamonds", "Clubs"]
+ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9",
+      "10", "Jack", "Queen", "King"]
+        
+# Shuffle the cards
+random.shuffle(deck)
+
+# Display the first four cards
+for i in range(4):
+    suit = suits[deck[i] // 13]
+    rank = ranks[deck[i] % 13]
+    print("Card number", deck[i], "is", rank, "of", suit)
 
 print('------------------------------------------------------------')	#60個
 
 
-sys.exit()
-
-s = ''
-for i in range(0, 10):
-    s += random.choice('<>=^')
-    s += random.choice('+- ')
-    s += str(random.randrange(1, 100))
-    s += str(random.randrange(100))
-    s += random.choice(('', 'E', 'e', 'G', 'g', 'F', 'f', '%'))
-
-print(s)
 
 
 print('------------------------------------------------------------')	#60個
 
-import time
-randseed = int(time.time())
-random.seed(randseed)
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
@@ -393,7 +461,7 @@ print(token)
 boundary = ('=' * 15) + (_fmt % token) + '=='
 print(boundary)
 
-'''
+
 print('------------------------------------------------------------')	#60個
 
 
@@ -401,13 +469,6 @@ print('------------------------------------------------------------')	#60個
 
 
 """
-import random
-
-print('在0 <= output < 1之間產生一個浮點數')
-random.random()
-
-print('在low<= output <=hight之間產生一個整數')
-random.randint(low, hight)
 
 
 #由一個平均為0，變異數為1的高斯分布中隨機取點，並以list儲存。
@@ -505,8 +566,6 @@ print(ddd)
 
 
 
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -514,127 +573,17 @@ print('------------------------------------------------------------')	#60個
 
 
 
-
+print('random 之 dir')
 import random
 print(dir(random))
 
 
-import random
-t = random.randint(1, 100)
-print(t)
-
-import random as R
-t = R.randint(1, 100)
-print(t)
-
-
-import random
-r1 = random.randint(1, 6)
-r2 = random.randint(1, 6)
-print(r1 + r2)
-lst1 = list(range(11))
-print(lst1)
-r3 = random.choice(lst1)
-print(r3)
-
-
-import math
-for _ in range(1000):
-    x = random.random() * math.exp(random.random()*200.0 - 100.0)
-
-
-for _ in range(1000):
-    e = random.randrange(300)
-    n = random.randrange(-10**e, 10**e)
-
-
-
-"""
-def _random_getnode():
-    #Get a random node ID, with eighth bit set as suggested by RFC 4122.
-    import random
-    return random.randrange(0, 1<<48) | 0x010000000000
-
-
-        return UUID(bytes=os.urandom(16), version=4)
-    except:
-        import random
-        bytes = bytes_(random.randrange(256) for i in range(16))
-        return UUID(bytes=bytes, version=4)
-
-
-        import os
-        if int(os.uname().release.split('.')[0]) >= 9:
-
-        import random
-        clock_seq = random.randrange(1<<14) # instead of stable storage
-
-"""
-
 print('------------------------------------------------------------')	#60個
-
-import random   # 導入模組random
-
-print('------------------------------------------------------------')	#60個
-
-print('隨機分布 0 ~ 1')
-for i in range(5):
-    print(random.random())
-    
-print('------------------------------------------------------------')	#60個
-
-random.seed(5)  #固定亂數種子
-for i in range(5):
-    print(random.random())
-    
-print('------------------------------------------------------------')	#60個
-
-print('常態分布 1 ~ 10')
-for i in range(5):
-    print("uniform(1,10) : ", random.uniform(1, 10))
-
-print('------------------------------------------------------------')	#60個
-
-fruits = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
-for i in range(5):
-    print(random.choice(fruits))
-
-print('------------------------------------------------------------')	#60個
-
-for i in range(10):
-    print(random.choice([1,2,3,4,5,6]), end=",")
-
-print('------------------------------------------------------------')	#60個
-
-porker = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-for i in range(3):
-    random.shuffle(porker)              # 將次序打亂重新排列
-    print(porker)
-
-print('------------------------------------------------------------')	#60個
-
-lotterys = random.sample(range(1,50), 7)    # 7組號碼
-specialNum = lotterys.pop()                 # 特別號
-
-print("第xxx期大樂透號碼 ", end="")
-for lottery in sorted(lotterys):            # 排序列印大樂透號碼
-    print(lottery, end=" ")
-print("\n特別號:%d" % specialNum)           # 列印特別號
-
 
 print('------------------------------------------------------------')	#60個
 
 
-trials = 1000000
-Hits = 0
-for i in range(trials):
-    x = random.random() * 2 - 1     # x軸座標
-    y = random.random() * 2 - 1     # y軸座標
-    if x * x + y * y <= 1:          # 判斷是否在圓內
-        Hits += 1
-PI = 4 * Hits / trials
-
-print("PI = ", PI)
+print('------------------------------------------------------------')	#60個
 
 
 

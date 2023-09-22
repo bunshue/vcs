@@ -1,9 +1,17 @@
 # python import module : time, datetime
+"""
+python的日期當中分成
+1. date(日期)
+2. time(時間)
+3. datetime(混合date跟time)
+4. timedelta(計算歷時期間的型態)
+5. timezone(處理時區資訊的型態)
 
+"""
 import time
 import datetime
 
-'''
+
 print("測試兩事件所經歷的時間 ST")
 time_start = time.time()
 
@@ -230,6 +238,7 @@ print(d3.ctime())
 #time.ctime([ sec ])
 print("time.ctime() : %s" % time.ctime())
 
+
 print('---- datetime.now() --------------------------------------------------------')	#60個
 
 tt = datetime.datetime.strptime("2018-01-31", "%Y-%m-%d")
@@ -288,16 +297,6 @@ print('字串轉日期格式')
 date4 = '2023-04-07 15:41:26'
 date5 = datetime.datetime.strptime(date4, "%Y-%m-%d %H:%M:%S")
 print(date5)
-
-startTime = time.time() # Get start time
-
-#do something
-#do something
-#do something
-
-endTime = time.time() # Get end time
-testTime = int(endTime - startTime) # Get test time
-print("Test time is", testTime, "seconds")
 
 def transform_date(date): #轉換日期
     y, m, d, h = date[:4],date[5:7],date[8:10],date[11:13]
@@ -361,8 +360,6 @@ print(filename)
 string = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 print(string)
 
-'''
-
 print('---- new --------------------------------------------------------')	#60個
 
 string = ("%d" % datetime.datetime.now().year)
@@ -372,41 +369,6 @@ datetime_format = '%Y/%m/%d %H:%M:%S'
 now = datetime.datetime.now()
 current_time = 'DateTime_{:{}}'.format(now, datetime_format)
 print(current_time)
-
-startTime_seconds = time.time()
-
-time.sleep(0.3456)  #過了一段時間
-
-elapsedTime_seconds = time.time() - startTime_seconds
-print("Time for LinkedList is", elapsedTime_seconds, "seconds")
-
-start = datetime.datetime(2016, 1, 1)
-end = datetime.datetime(2017, 1, 1)
-
-
-t0 = time.time()
-'''
-do something
-'''
-t1 = time.time()
-
-print("Open took %.2f seconds" % (t1 - t0))
-print("\ncommand took %.2f seconds\n" % (t1 - t0))
-
-
-startTime = time.time()
-'''
-do something
-'''
-elapsedTime = time.time() - startTime
-print("Time for LinkedList is", elapsedTime, "seconds")
-
-startTime = time.time()
-
-elapsedTime = time.time() - startTime
-print("Time for list is", elapsedTime, "seconds")
-
-
 
   
 
@@ -475,6 +437,7 @@ print(imagepath)
 filename = '-%04d-%02d-%02d'%(time.localtime()[:3])
 print(filename)
 
+
 print('------------------------------------------------------------')	#60個
 
 #獲取當前時間
@@ -505,16 +468,16 @@ print(datetime.date)
 print(datetime.time)
 
 
-'''
+"""
 datetime(2016, 7, 20, 15, 45),
 "timestamp": "2016-07-20 15:45",
-'''
 
-'''
+
+
 "timestamp": self.event.timestamp.strftime("%Y-%m-%d %H:%M"),
-'''
-#timestamp = time.strftime('%Y-%m-%d %H:%M+%Z')
 
+#timestamp = time.strftime('%Y-%m-%d %H:%M+%Z')
+"""
 
 
 print('------------------------------------------------------------')	#60個
@@ -575,4 +538,324 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+
+import datetime
+
+#輸出當前的日期及時間
+
+print(datetime.datetime.now())
+
+print(datetime.datetime.today())
+
+#而如果只想要輸出現在的日期的話則用
+print(datetime.date.today())
+
+
+#而如果要輸出此時準確的時間的話則
+print(time.localtime())
+
+#而我們也可以一一拆解
+
+tonow = datetime.datetime.now()
+print(tonow.year)
+print(tonow.month)
+print(tonow.day)
+
+#而我們也可以算今天是今年的第幾天
+
+dts = '20201007'
+dt = datetime.datetime.strptime(dts,"%Y%m%d")
+another_dts = dts[:4]+"0101"
+another_dt = datetime.datetime.strptime(another_dts,"%Y%m%d")
+print(int((dt-another_dt).days)+1)
+
+#由上可得知datetime.datetime.strptime()這個是將所輸入的dts轉換成日期的格式則格式為後面的年月日，再來取出輸入的西元年加上"0101"後一樣轉換成日期的格式最後將輸入日期減掉設定日期後+1輸出成今天為今年的第幾天
+
+loc_dt = datetime.datetime.today() 
+time_del = datetime.timedelta(hours=3) 
+new_dt = loc_dt + time_del 
+datetime_format = new_dt.strftime("%Y/%m/%d %H:%M:%S")
+loc_dt_format = loc_dt.strftime("%Y/%m/%d %H:%M:%S")
+print(loc_dt_format)
+print(datetime_format)
+
+
+#由上可得知我們也可以調整時差，將我們現在的時間加上3小時的時差並將其輸出出來，一開始我們將抓出本地的時間並且將變數time_del宣告為時差差三個小時，最後將其相加就變成有時差三個小時最後將其指定格式後輸出，而以此類推我們也可以將時差晚三個小時
+
+
+loc_dt = datetime.datetime.today() 
+time_del = datetime.timedelta(hours=3) 
+new_dt = loc_dt - time_del 
+datetime_format = new_dt.strftime("%Y/%m/%d %H:%M:%S")
+loc_dt_format = loc_dt.strftime("%Y/%m/%d %H:%M:%S")
+print(loc_dt_format)
+print(datetime_format)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+from datetime import date, timedelta
+
+d0 = date(1993, 12, 15)
+d1 = date(2020, 12, 15)
+
+delta = timedelta(days = 1)
+print('日期 :', d0 + delta)
+
+delta = timedelta(days = 10000)
+print('日期 :', d0 + delta)
+
+print('相距日期 :', d1 - d0, '天')
+
+
+d0 = date(2021, 5, 24)
+d1 = date(2023, 8, 21)
+print('相距日期 :', d1 - d0, '天')
+
+print('------------------------------------------------------------')	#60個
+
+import datetime
+
+def _format_time(hh, mm, ss, us):
+    # Skip trailing microseconds when us==0.
+    result = "%02d:%02d:%02d" % (hh, mm, ss)
+    if us:
+        result += ".%06d" % us
+    return result
+
+year = 2023
+month = 8
+day = 11
+sep = 'W'
+hour = 12
+minute = 34
+second = 56
+microsecond = 123456
+s = _format_time(hour, minute, second, microsecond)
+print(s)
+
+
+s = ("%04d-%02d-%02d%c" % (year, month, day, sep) +
+     _format_time(hour, minute, second,microsecond))
+print(s)
+
+
+hh = 12
+mm = 34
+ss = 56
+s = "%d:%02d:%02d" % (hh, mm, ss)
+print(s)
+
+
+print('------------------------------------------------------------')	#60個
+import time
+print(time.time())
+print(time.localtime())
+year, month, day, hour, minute, second, _, _, _ = time.localtime()
+print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
+print(time.asctime())
+print(time.strftime("%Y-%m-%d %H:%M:%S %a"))
+
+import datetime
+#當前的日期及時間
+print(datetime.datetime.now())
+
+import datetime
+today = datetime.datetime.today()
+birthday = datetime.datetime(2018,10,27, 17, 0, 0)
+print(today - birthday)
+
+"""
+from datetime import datetime
+now = datetime.now()
+print("今天是{}".format(datetime.strftime(now, "%Y-%m-%d")))
+
+#date = input("請輸入一個日期（yyyy-mm-dd):")
+print('請輸入一個日期')
+date = '2006-03-11'
+print(date)
+target = datetime.strptime(date, "%Y-%m-%d")
+diff = now-target
+print("到今天共經過了{}天。".format(diff.days))
+"""
+
+print('------------------------------------------------------------')	#60個
+
+
+# Name of the benchmark
+name = '%04i-%02i-%02i %02i:%02i:%02i' % \
+       (time.localtime(time.time())[:6])
+
+print(name)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+xtime = time.localtime()
+print(xtime)                        # 列出目前系統時間
+print("年 ", xtime[0])
+print("年 ", xtime.tm_year)         # 物件設定方式顯示
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+print('------------------------------------------------------------')	#60個
+
+ticks = time.time() #至今的tick數
+print(ticks)
+
+localtime = time.localtime(ticks)   #傳回時間元組
+print(type(localtime))
+print(localtime)
+
+print('年 :', localtime[0])
+print('月 :', localtime[1])
+print('日 :', localtime[2])
+print('時 :', localtime[3])
+print('分 :', localtime[4])
+print('秒 :', localtime[5])
+
+#asctime() #傳回時間元組的日期時間字串
+formattime = time.asctime(time.localtime(ticks))
+print(formattime)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import time                         # 導入模組time
+
+print(time.asctime())               # 列出目前系統時間 
+
+print('------------------------------------------------------------')	#60個
+
+import time                         # 導入模組time
+
+xtime = time.localtime()
+print(xtime)                        # 列出目前系統時間
+print("年 ", xtime[0])
+print("年 ", xtime.tm_year)         # 物件設定方式顯示
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+print('------------------------------------------------------------')	#60個
+
+import time                         # 導入模組time
+
+print(time.ctime())
+
+
+print('------------------------------------------------------------')	#60個
+
+year, month, day, hours, minutes, seconds = 2023, 9, 22, 12, 34, 56
+cc = datetime.datetime(year, month, day, hours, minutes, seconds)
+print(cc)
+
+NOW = datetime.datetime.now()
+print(NOW)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+startTime = time.time() # Get start time
+
+#do something
+
+endTime = time.time() # Get end time
+testTime = int(endTime - startTime) # Get test time
+print("Test time is", testTime, "seconds")
+
+print('------------------------------------------------------------')	#60個
+
+startTime_seconds = time.time()
+
+time.sleep(0.3456)  #過了一段時間
+
+elapsedTime_seconds = time.time() - startTime_seconds
+print("Time for LinkedList is", elapsedTime_seconds, "seconds")
+
+start = datetime.datetime(2016, 1, 1)
+end = datetime.datetime(2017, 1, 1)
+
+print('------------------------------------------------------------')	#60個
+t0 = time.time()
+
+#do something
+
+t1 = time.time()
+
+print("Open took %.2f seconds" % (t1 - t0))
+print("\ncommand took %.2f seconds\n" % (t1 - t0))
+
+print('------------------------------------------------------------')	#60個
+
+startTime = time.time()
+
+#do something
+
+elapsedTime = time.time() - startTime
+print("Time for LinkedList is", elapsedTime, "seconds")
+
+startTime = time.time()
+
+elapsedTime = time.time() - startTime
+print("Time for list is", elapsedTime, "seconds")
+
+
+print('------------------------------------------------------------')	#60個
+
+import time
+
+startTime = time.time()
+
+# do something
+
+print("Sort time in Python is", int(time.time() - startTime), "seconds")
+
+print('------------------------------------------------------------')	#60個
+
+import time                         # 導入模組time
+
+starttime = int(time.time())        # 起始秒數
+
+# do something
+
+endtime = int(time.time())  # 結束秒數
+print("所花時間: ", endtime - starttime, " 秒")
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
 

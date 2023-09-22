@@ -328,9 +328,37 @@ plt.imshow(Z, cmap = plt.cm.prism, interpolation = 'none', extent = (X.min(), X.
 plt.xlabel("Re(c)")
 plt.ylabel("Im(c)")
 
-
 #第二張圖
 plt.subplot(232)
+
+xmin, xmax, ymin, ymax = -2, 0.8, -1.5, 1.5
+max_it = 3    # maximum number of iterations
+px     = 30	# vertical lines
+res    = (ymax - ymin) / px   # grid resolution
+
+def m(c):
+	z = 0
+	for n in range(1, max_it + 1):
+		z = z**2 + c
+		if abs(z) > 2:
+			return n
+	return np.NaN
+
+X = pylab.arange(xmin, xmax + res, res)
+Y = pylab.arange(ymin, ymax + res, res)
+Z = pylab.zeros((len(Y), len(X)))
+
+for iy, y in enumerate(Y):
+	#print (iy + 1, "of", len(Y))
+	for ix, x in enumerate(X):
+		Z[-iy - 1, ix] = m(x + 1j * y)
+
+plt.imshow(Z, cmap = plt.cm.prism, interpolation = 'none', extent = (X.min(), X.max(), Y.min(), Y.max()))
+plt.xlabel("Re(c)")
+plt.ylabel("Im(c)")
+
+#第三張圖
+plt.subplot(233)
 
 pts = np.arange(-2, 2, 0.01)
 x, y = np.meshgrid(pts, pts)
@@ -345,11 +373,6 @@ plt.yticks(ticks, seq)
 
 plt.colorbar()
 plt.title(r"建立$\sqrt{x^2 + y^2}$網格影像")
-
-#第三張圖
-plt.subplot(233)
-
-
 
 #第四張圖
 plt.subplot(234)
