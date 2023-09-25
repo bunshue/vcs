@@ -4,7 +4,7 @@ import time
 import random
 import numpy as np
 
-
+'''
 print('------------------------------------------------------------')	#60個
 
 print('---- 字串處理專區 --------------------------------------------------------')	#60個
@@ -160,7 +160,7 @@ print(len(name))
 print(name)
 print(type(name))
 
-ccc = name.reverse()
+ = name.reverse()
 print(ccc)
 
 print('------------------------------------------------------------')	#60個
@@ -332,88 +332,82 @@ fp.close()
 """
 
 print('------------------------------------------------------------')	#60個
-
+'''
 
 print('---- char ord unicode decode encode --------------------------------------------------------')	#60個
 
+import sys
+print('打印出目前系統字符編碼')
+print(sys.getdefaultencoding())
 
 print('字元轉unicode')
-string = '你'
 
-print(ord(string))
+text = '你'
+print('原字串 :', text)
+print('Unicode編碼後(10進位) :', ord(text))
+print('Unicode編碼後(16進位) :', hex(ord(text)))
 
-#print(hex(ord(string)))
-
-""" tbd
-mesg = 'abcdefg'
-
+print('--------')
+"""
+#unicode() 不能用
+text = '中文 test'
+print('原字串 :', text)
+print(text, len(text))
+#utfstr = unicode(text, 'utf-8')
+#-------------
+text = 'abcdefg'
 print('字串 轉 unicode')
-
-ccc = unicode(mesg, 'utf-8')
+ccc = unicode(text, 'utf-8')
 print(ccc)
-
-
+#-------------
 print('unicode 轉 字串')
 ddd = str(ccc)
 print(ddd)
+#-------------
+text = "Hello!"
+u = unicode(text, "utf-8")
+print(u)
+#-------------
 
+text = '你好'
+text_to_unicode = text.decode(encoding='utf-8')  # 要告訴decode原本的編碼是哪種
+print(text_to_unicode)
+
+#text = 'Ribeir\xc3\xa3o Preto'
+#print(text.decode('cp1252').encode('utf-8'))
 
 """
-x1 = 97
-x2 = chr(x1)      
-print(x2)             # 輸出數值97的字元
-x3 = ord(x2)
-print(x3)             # 輸出字元x3的Unicode碼值
-x4 = '魁'
-print(ord(x4))        # 輸出字元'魁'的Unicode碼值
+print('--------')
 
+num = 65
+print(chr(num)) # 輸出數值num的字元
 
+print('--------')
+text = '你好'
+print('原字串 :', text)
+print('字串 轉 UTF-8 => UTF-8 拜列')
+byte_array = text.encode('UTF-8')
+print(type(byte_array))
+print(byte_array)
+print('UTF-8 拜列 轉 字串')
+print(byte_array.decode('UTF-8'))
+print('--------')
+byte_array = b'\xe4\xbd\xa0\xe5\xa5\xbd'
+print(len(byte_array))
+print(byte_array.decode('UTF-8'))
 
-cnstr = '中文 test'
-print(cnstr, len(cnstr))
-#utfstr = unicode(cnstr, 'utf-8')
+print('--------')
+byte_array = b'\xe4\xbd\xa0\xe5\xa5\xbe'
+print(len(byte_array))
+print(byte_array.decode('UTF-8'))
 
-'''
-s = "Hello!"
-u = unicode(s, "utf-8")
-'''
+print('--------')
 
-#city = 'Ribeir\xc3\xa3o Preto'
-#print(city.decode('cp1252').encode('utf-8'))
-
-import sys
-print(sys.getdefaultencoding())     # 打印出目前系統字符編碼
-
-'''
-s = '你好'
-s_to_unicode = s.decode(encoding='utf-8')  # 要告訴decode原本的編碼是哪種
-print(s_to_unicode)
-'''
-
-content = '你好'
-
-print('原字串')
-print(content)
-print('字串 轉 UTF-8')
-ccc = content.encode('UTF-8')
-print(type(ccc))
-print(ccc)
-
-print(content.encode('UTF-8').decode('UTF-8'))
-
-t = b'\xe4\xbd\xa0\xe5\xa5\xbd'
-print(len(t))
-print(t.decode('UTF-8'))
-
-t = b'\xe4\xbd\xa0\xe5\xa5\xbe'
-print(len(t))
-print(t.decode('UTF-8'))
-
-
+"""
 for i in range(128):
     c = chr(i)
     print(c, end = '')
-
+"""
 
 
 print('------------------------------------------------------------')	#60個
@@ -431,16 +425,12 @@ print(_b85chars2)
 print('------------------------------------------------------------')	#60個
 
 print('字串轉拜列')
-string = 'lion'
-data = repr(string).encode('utf-8') + b'\0'
-print(type(data))
-print(data)
-
-
-
+text = 'lion'
+byte_array = repr(text).encode('utf-8') + b'\0'
+print(type(byte_array))
+print(byte_array)
 
 print('------------------------------------------------------------')	#60個
-
 
 command1 = 'abcde'
 print(type(command1))
@@ -449,8 +439,6 @@ print(command1)
 command2 = command1.encode()
 print(type(command2))
 print(command2)
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

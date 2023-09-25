@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LIFF 表單測試</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="row" style="margin: 10px">
+        <div class="col-12" style="margin: 10px">
+            <label>姓名</label>
+            <input type="text" id="name" class="form-control" />
+            <br />
+            <label>日期</label>
+            <input type="date" id="datetime" value="" class="form-control" />
+            <br />
+            <label>包廂</label>
+            <select id="sel_room" class="form-control">
+                <option selected>生龍廳</option>
+                <option>活虎廳</option>
+                <option>美鳳廳</option>
+                <option>帥凰廳</option>
+                <option>不使用包廂</option>
+            </select>
+            <br />
+            <button class="btn btn-success btn-block" id="sure">確定</button>
+        </div>
+    </div>
+
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+	<script>
+        function initializeLiff(myLiffId) {
+            liff.init({liffId: myLiffId });
+        }
+
+		function pushMsg(pname, pdatatime, proom) {
+			if (pname == '' || pdatatime == '' || proom == '') {  //資料檢查
+				alert('每個項目都必須輸入！');
+			 	return;
+			}
+			var msg = "###";  //回傳訊息字串
+			msg = msg + pname + "/";
+			msg = msg + pdatatime + "/";
+			msg = msg + proom;
+			liff.sendMessages([  //推播訊息
+				{ type: 'text',
+				  text: msg
+				}
+			])
+				.then(() => {
+					liff.closeWindow();  //關閉視窗
+				});
+		}
+
+		$(document).ready(function () {
+			initializeLiff('{{ liffid }}');  //接收傳遞的 liffid 參數
+			$('#sure').click(function (e) {  //按下確定鈕
+				pushMsg($('#name').val(), $('#datetime').val(), $('#sel_room').val());
+			});
+		});
+	</script>
+</body>
+</html>

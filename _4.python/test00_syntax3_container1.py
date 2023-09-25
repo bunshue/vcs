@@ -1,6 +1,6 @@
 import sys
 
-'''
+"""
 各種python專用的語法 字典 串列 元組 集合
 
 dict  字典 dddd 大括號 {} 無順序 不可重複 = 集合 + list  d = {"key :value", "key :value", ...}
@@ -35,11 +35,11 @@ print("列印類別 = ", type(empty_set))
 Dictionary(字典)
 Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的語法是key: value，一個key對應一個value，key不一定要是字串，但必須是唯一的。
 
-'''
+"""
 
 
 
-'''
+
 a_dict = {}
 print(type(a_dict))
 
@@ -236,14 +236,12 @@ weight = animal_mouse.setdefault('weight', 3)
 print("增加weight鍵 ", animal_mouse)
 print("weight = ", weight)
 
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8 }
-print(type(animals))
-print(animals)
-
 print('------------------------------------------------------------')	#60個
 
 print('字典 操作')
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8 }
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
+print(type(animals))
+print(animals)
 
 animals = {'鼠' : ('mouse', 3),
            '牛' : ('ox', 48),
@@ -387,7 +385,7 @@ for c in wd:
 
 print('------------------------------------------------------------')	#60個
 
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8}
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 
 print('打印字典的內容1')
 for key, value in animals.items():
@@ -399,7 +397,8 @@ print(animals)
 
 print('------------------------------------------------------------')	#60個
 
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8}
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
+
 #字典(dictionary)的資料型態
 print(animals['鼠'])
 animals['兔'] = 6
@@ -423,7 +422,7 @@ print('------------------------------------------------------------')	#60個
     
 print("字典測試 2")
 
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8 }
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 print('字典 轉 串列')
 item1 = list(animals.items())
 for animal, weight in item1:
@@ -433,7 +432,7 @@ print('------------------------------------------------------------')	#60個
 
 print("字典測試 3")
 
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8 }
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 listkey = list(animals.keys())
 listvalue = list(animals.values())
 for i in range(len(listkey)):
@@ -443,7 +442,7 @@ print('------------------------------------------------------------')	#60個
 
 print("字典測試 4")
 
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8 }
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 name = '鼠'
 weight = animals.get(name)
 if weight == None:  
@@ -453,20 +452,20 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-dict1={"林小明" : 85, "曾山水" : 93, "鄭美麗" : 67}
-dict1["黃明品"] = 71
-dict1["陳莉莉"] = 98
-listitem = dict1.items()
-for name, score in listitem:
-    print("%s 的成績為 %d 分" % (name, score))
+animals={"鼠" : 3, "牛" : 48, "虎" : 33}
+animals["兔"] = 8
+animals["龍"] = 38
+animals_item = animals.items()
+for name, weight in animals_item:
+    print("%s 的體重為 %d" % (name, weight))
 
-dict1={"林小明" : 85, "曾山水" : 93, "鄭美麗" : 67}
-dict1["黃明品"] = 71
-dict1["陳莉莉"] = 98
-listkey = list(dict1.keys())
-listvalue = list(dict1.values())
-for i in range(len(listkey)):
-    print("%s 的成績為 %d 分" % (listkey[i], listvalue[i]))
+animals={"鼠" : 3, "牛" : 48, "虎" : 33}
+animals["兔"] = 8
+animals["龍"] = 38
+animals_key = list(animals.keys())
+animals_value = list(animals.values())
+for i in range(len(animals_key)):
+    print("%s 的體重為 %d" % (animals_key[i], animals_value[i]))
 
 print('------------------------------------------------------------')	#60個
 
@@ -736,7 +735,7 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-'''
+
 
 
 print('集合 ssss SP------------------------------------------------------------')	#60個
@@ -744,66 +743,13 @@ print('集合 ssss SP-----------------------------------------------------------
 
 print('串列 llll ST------------------------------------------------------------')	#60個
 
-# 一個 串列 裡面每個元件都是 dictionary
-
-price_data = [
-{"name":"112/03/13","data":[{"name":"98 無鉛汽油","y":32.7,"GroupID":7}]},
-{"name":"112/03/20","data":[{"name":"98 無鉛汽油","y":32.4,"GroupID":6}]},
-{"name":"112/03/27","data":[{"name":"98 無鉛汽油","y":31.9,"GroupID":5}]},
-{"name":"112/04/03","data":[{"name":"98 無鉛汽油","y":32.4,"GroupID":4}]},
-{"name":"112/04/10","data":[{"name":"98 無鉛汽油","y":33.0,"GroupID":3}]},
-{"name":"112/04/17","data":[{"name":"98 無鉛汽油","y":33.3,"GroupID":2}]},
-{"name":"112/04/24","data":[{"name":"98 無鉛汽油","y":33.1,"GroupID":1}]},
-{"name":"112/03/13","data":[{"name":"95 無鉛汽油","y":30.7,"GroupID":7}]},
-{"name":"112/03/20","data":[{"name":"95 無鉛汽油","y":30.4,"GroupID":6}]},
-{"name":"112/03/27","data":[{"name":"95 無鉛汽油","y":29.9,"GroupID":5}]}
-];
-
-print('資料型態 :\t', type(price_data))
-print('資料長度 :\t', len(price_data))
-print('資料內容')
-for info in price_data:
-    print(type(info))
-    print(info)
-    print('日期:', info['name'])
-    #print(info['data'])
-    for infos in info['data']:
-        print(type(infos))
-        print(infos)
-        print('油品:', infos['name'])
-        print('價格:', infos['y'])
-
-'''
-    
-    for data in item['data']:
-        if(data['name'] == '超級/高級柴油'):
-            new_line = 0
-            continue
-        else:
-            new_line = 1
-        print("date:" + item['name'])   #第一層的 name 為日期
-        print(data['name'] + ":" + str(data['y']))  #後面再接一層 array data 其中的 name 為產品名, 而 y 為單價
-    if (new_line == 1):
-        print("================")
-'''
-
-
-print('------------------------------------------------------------')	#60個
-
 print('一維 串列')
-animals = ['鼠', '牛', '虎', '兔', '龍']
-print('型態 :', type(animals))
-print('長度 :', len(animals))
-print('原串列 :', animals)
-print('第1項  :', animals[1])
-print('最後1項 :', animals[-1])    ##如果索引值是負的，則代表倒數第幾個。
-print('第1~3項 :', animals[1:4], '\t要用[1:4]') #[n:m] 表示從n取到m-1，返回一個新的List。
 
-print('改變第1項的值')
-animals[1] = '豬'
-print(animals)
+print('建立串列')
 
 animals = ['鼠', '牛', '虎', '兔', '龍']
+
+
 
 print('原串列 :', animals)
 print('串列 增加項目')
@@ -813,6 +759,9 @@ animals.append('蛇')
 new_animals = ['馬', '羊']
 animals = animals + new_animals
 print('新串列 :', animals)
+print('改變第1項的值')
+animals[1] = '豬'
+print(animals)
 
 
 print('在第1項的位置安插一個項目')
@@ -854,51 +803,91 @@ for ani in animals[:]:
     print(f"刪除 {ani}")
     print("目前animals串列 : ", animals)
 
-print('------------------------------------------------------------')	#60個
+print('-----dddd-------------------------------------------------------')	#60個
 
-animals = ['鼠', '牛', '虎', '兔', '龍', '蛇', '馬', '羊', '猴', '雞', '狗', '豬']
-
-print(type(animals))
+animals = ['鼠', '牛', '虎', '兔', '龍']
+print('型態 :', type(animals))
+print('長度 :', len(animals))
+print('原串列 :', animals)
+print('列印全部項目')
 print(animals)
-
-for ani in animals:
-    print(ani)
-
-print(animals)
-
+print('列印前3個')
 print(animals[:3])
+print('列印 第1到第4個(不含)')
+print(animals[1:4])
+print('列印 第3個(含)以後')
+print(animals[3:])
+print('第1項  :', animals[1])
+print('最後1項 :', animals[-1])    ##如果索引值是負的，則代表倒數第幾個。
+print('第1~3項 :', animals[1:4], '\t要用[1:4]') #[n:m] 表示從n取到m-1，返回一個新的List。
 
-print(animals[3:7])
-
-
-print(animals[7:])
-
-
-animals = ['鼠', '牛', '虎', '兔', '龍', '蛇', '馬', '羊', '猴', '雞', '狗', '豬']
-
-print(type(animals))
-print(animals)
-
-import numpy as np
-for i in range(10):
-    c = np.random.choice(animals)
-    print(f"本次抽中 {c}。")
-
-print('------------------------------------------------------------')	#60個
-
-animals = list('鼠牛虎兔龍蛇馬羊猴雞狗豬')
-
-print(animals)
-print(animals[9])
+print(animals[3])
 print(animals[-1])
-print(animals[3:6])
-print(animals[5:])
+print(animals[1:4])
+print(animals[3:])
 print(animals[:5])
 print(animals[:-2])
 
 #測試list之最後5筆資料
+print(animals[-3:])
 
-print(animals[-5:])
+
+import numpy as np
+for i in range(5):
+    c = np.random.choice(animals)
+    print(f"本次抽中 {c}。")
+
+
+llll = ['鼠', '牛', '虎', '兔', '龍']
+pppp = llll[2:] #第二項(含)以後的
+print(llll)
+print(pppp)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('字串 轉 串列')
+animals = list('鼠牛虎兔龍蛇馬羊猴雞狗豬')
+print('列印全部項目')
+print(animals)
+
+print('------------------------------------------------------------')	#60個
+
+print('字串 轉 串列')
+
+s = list('鼠牛虎兔龍蛇馬羊猴雞狗豬')
+print(type(s))
+print(s)
+s = list("3874950382")
+
+#print(sum(map(int, s)))    fail in kilo
+
+'''
+numbers = list()
+
+for c in s:
+    numbers.append(int(c))
+#print(sum(numbers))    fail in kilo
+'''
+
+print('------------------------------------------------------------')	#60個
+
+sys.exit()
+
+print('------------------------------------------------------------')	#60個
+
+print('串列 使用')
+animals = ['鼠', '牛', '虎', '兔', '龍']
+print(type(animals))
+
+print('列印全部項目')
+print(animals)
+
+print('列印排序後的結果')
+animal_sorted = sorted(animals)
+print(animal_sorted)
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -921,49 +910,38 @@ print(animals)
 
 print('------------------------------------------------------------')	#60個
 
-print('串列 使用')
-lst = ['鼠', '牛', '虎', '兔', '龍']
-print(type(lst))
-print(lst)
-cc = sorted(lst)
-print(cc)
-
-print('------------------------------------------------------------')	#60個
-
 print('串列')
-sc = [['鼠', 3], ['牛', 48], ['虎', 33]]
-print(type(sc))
-print(sc)
+animals = [['鼠', 3], ['牛', 48], ['虎', 33]]
+print(type(animals))
+print(animals)
 
-sc.sort(key = lambda x:x[1])
-print(sc)
+animals.sort(key = lambda x:x[1])
+print(animals)
 
 print('-------------')
 print('串列')
-sc = [['鼠', 3], ['牛', 48], ['虎', 33]]
-print(type(sc))
-print(sc)
+animals = [['鼠', 3], ['牛', 48], ['虎', 33]]
+print(type(animals))
+print(animals)
 
-newsc = sorted(sc, key = lambda x:x[1])
-print(type(newsc))
-print(newsc)
+animals1 = sorted(animals, key = lambda x:x[1])
+print(type(animals1))
+print(animals1)
 
 print('-------------')
 print('字典')
-sc = {'鼠' : 3, '牛' : 48, '虎' : 33}
-print(type(sc))
-print(sc)
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33}
+print(type(animals))
+print(animals)
 
-newsc1 = sorted(sc.items(), key = lambda x:x[0])  # 依照key排序
+animals2 = sorted(animals.items(), key = lambda x:x[0])  # 依照key排序
 print("依照名稱排序")
-print(newsc1)
+print(animals2)
 
-newsc2 = sorted(sc.items(), key = lambda x:x[1])  # 依照value排序
+animals3 = sorted(animals.items(), key = lambda x:x[1])  # 依照value排序
 print("依照體重排序")
-print(newsc2)
+print(animals3)
 
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -1079,7 +1057,7 @@ print(person_data[a:b:c])
 
 #取第一欄出來 成一個 串列 ??
 
-'''
+
 print('串列 之使用')
 
 
@@ -1110,6 +1088,51 @@ for page in range(1, 6):
 print(contents)
 
 print('------------------------------------------------------------')	#60個
+
+
+
+
+# 一個 串列 裡面每個元件都是 dictionary
+
+price_data = [
+{"name":"112/03/13","data":[{"name":"98 無鉛汽油","y":32.7,"GroupID":7}]},
+{"name":"112/03/20","data":[{"name":"98 無鉛汽油","y":32.4,"GroupID":6}]},
+{"name":"112/03/27","data":[{"name":"98 無鉛汽油","y":31.9,"GroupID":5}]},
+{"name":"112/04/03","data":[{"name":"98 無鉛汽油","y":32.4,"GroupID":4}]},
+{"name":"112/04/10","data":[{"name":"98 無鉛汽油","y":33.0,"GroupID":3}]},
+{"name":"112/04/17","data":[{"name":"98 無鉛汽油","y":33.3,"GroupID":2}]},
+{"name":"112/04/24","data":[{"name":"98 無鉛汽油","y":33.1,"GroupID":1}]},
+{"name":"112/03/13","data":[{"name":"95 無鉛汽油","y":30.7,"GroupID":7}]},
+{"name":"112/03/20","data":[{"name":"95 無鉛汽油","y":30.4,"GroupID":6}]},
+{"name":"112/03/27","data":[{"name":"95 無鉛汽油","y":29.9,"GroupID":5}]}
+];
+
+print('資料型態 :\t', type(price_data))
+print('資料長度 :\t', len(price_data))
+print('資料內容')
+for info in price_data:
+    print(type(info))
+    print(info)
+    print('日期:', info['name'])
+    #print(info['data'])
+    for infos in info['data']:
+        print(type(infos))
+        print(infos)
+        print('油品:', infos['name'])
+        print('價格:', infos['y'])
+
+"""
+    for data in item['data']:
+        if(data['name'] == '超級/高級柴油'):
+            new_line = 0
+            continue
+        else:
+            new_line = 1
+        print("date:" + item['name'])   #第一層的 name 為日期
+        print(data['name'] + ":" + str(data['y']))  #後面再接一層 array data 其中的 name 為產品名, 而 y 為單價
+    if (new_line == 1):
+        print("================")
+"""
 
 
 print('------------------------------------------------------------')	#60個
@@ -1143,6 +1166,14 @@ print(animals.index('虎'))
 #tuple 範例
 
 print('------------------------------------------------------------')	#60個
+animal = ('鼠', '牛', '虎', '兔', '龍')    # 定義元組元素是字串
+print(animal[1:3])
+print(animal[:2])
+print(animal[1:])
+print(animal[-2:])
+print(animal[0:5:2])
+      
+print('------------------------------------------------------------')	#60個
 
 animal = ('鼠', '牛', '虎', '兔', '龍')    # 定義元組元素是字串
 print("animal元組長度是 %d " % len(animal))
@@ -1156,15 +1187,6 @@ print("原始animal元組元素")
 for animal_name in animal:
     print(animal_name)
 
-print('------------------------------------------------------------')	#60個
-
-animal = ('鼠', '牛', '虎', '兔', '龍')    # 定義元組元素是字串
-print(animal[1:3])
-print(animal[:2])
-print(animal[1:])
-print(animal[-2:])
-print(animal[0:5:2])
-      
 print('------------------------------------------------------------')	#60個
 
 tuple_animal = ('鼠', '牛', '虎', '兔', '龍')    # 定義元組元素是字串
@@ -1277,11 +1299,6 @@ animals2 = list(x)               # 將集合轉成串列
 print("原先串列資料animals1 = ", animals1)
 print("新的串列資料animals2 = ", animals2)
 
-
-llll = ['鼠', '牛', '虎', '兔', '龍']
-pppp = llll[2:] #第二項(含)以後的
-print(llll)
-print(pppp)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1396,27 +1413,6 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
-
-print('字串 轉 串列')
-
-s = list("3874950382")
-print(type(s))
-print(s)
-
-numbers = list()
-
-for c in s:
-    numbers.append(int(c))
-#print(sum(numbers))    fail in kilo
-
-
-print('------------------------------------------------------------')	#60個
-
-print('字串 轉 串列')
-s = list("3874950382")
-print(s)
-#print(sum(map(int, s)))    fail in kilo
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1577,9 +1573,9 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-'''
 
-'''
+
+"""
 
 container
 
@@ -1598,28 +1594,19 @@ parsers = {'clinic' : DSLParser, 'python': PythonParser}
         ({"after": {"not-a-transaction": "Tx001"}}, "UnknownEvent"),
     )
 
-'''
-
-
-'''
 #list排序
 
 import SelectionSort 
 
 lst = [3, 4, 1, 2, 0]
 SelectionSort.selectionSort(lst)
-print(lst)
-'''
 
-
-'''
 添加資料(append)
 插入資料(insert)
 
 合併資料(extend)
 使用 extend() 將兩個List合併在一起，就像字串的Concatenation。
-'''
-
+"""
 
 
 

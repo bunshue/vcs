@@ -1,11 +1,13 @@
-'''
+"""
 gTTS：文字轉語音
 pip install gTTS
 
-'''
+"""
 
+'''
 import gtts
 
+print('目前支援的語音種類 :')
 print(gtts.lang.tts_langs())
 
 txt = 'gTTS可以透過線上翻譯，將文字轉換為語音，並將語音存檔'
@@ -26,12 +28,12 @@ print('存檔完成, 檔名 :', filename)
 print('------------------------------------------------------------')	#60個
 
 
-'''
+"""
 SpeechRecognition：語音轉文字(聲音檔)
 
 pip install SpeechRecognition
 
-'''
+"""
 
 print('語音轉文字')
 import speech_recognition as sr
@@ -46,19 +48,19 @@ except:
 
 print('------------------------------------------------------------')	#60個
     
-'''
+"""
 #SpeechRecognition：語音轉文字(麥克風)
 !pip install pydub
 !pip install ffmpeg
 !pip install google.colab
 
-'''
+"""
 
+'''
 print('------------------------------------------------------------')	#60個
 
+#google.colab 安裝失敗
 '''
-google.colab 安裝失敗
-
 import speech_recognition as sr
 from pydub import AudioSegment
 from IPython.display import display, Javascript
@@ -128,18 +130,20 @@ try:
     print("語音辨識結果：\n" + word)
 except:
     print("語音辨識失敗！")
+
 '''
+
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 google_trans_new：文字翻譯
 
 pip install google_trans_new
 
-'''
+"""
 
-'''fail
+"""fail
 from google_trans_new import google_translator
 translator = google_translator()
 text="今天天氣很好"
@@ -152,18 +156,18 @@ print(translator.translate("今日の天気は良いです"))
 
 lang = translator.detect("今日の天気は良いです")
 print(lang)
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 應用：AI智慧讀報機
 !pip install newspaper3k
 !pip install gTTS
 !pip install google_trans_new
-'''
+"""
 
-''' fail
+""" fail
 import newspaper
 from newspaper import Article
 from google_trans_new import google_translator
@@ -207,7 +211,7 @@ tts = gtts.gTTS(text=ret, lang='zh-tw')
 tts.save('news.mp3')
 display.Audio("news.mp3", autoplay=True)
 
-'''
+"""
 print('------------------------------------------------------------')	#60個
 
 
@@ -222,11 +226,17 @@ from playsound import playsound
 paper = newspaper.build('http://www.cnbc.com', language='en')
 # paper = newspaper.build('http://www.bbc.co.uk', language='en')
 # paper = newspaper.build('http://www.foxnews.com', language='en')
+
+print(type(paper.articles))
+print(len(paper.articles))
+print(paper.articles)
+
+'''
 for article in paper.articles:
     url = article.url
     if '.html' in url:
         print(url)
-        '''
+        """
         try:  #有時會產生無法擷取的錯誤,故使用try
             article = Article(url)
             article.download()
@@ -242,12 +252,12 @@ for article in paper.articles:
                 playsound('news.mp3')
         except:
             pass
-        '''
-
+        """
+'''
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 import speech_recognition as sr
 
 r = sr.Recognizer()        
@@ -263,7 +273,7 @@ while True:
                 break
     except:
         print("語音無法辨識\n")
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 

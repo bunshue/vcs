@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>預約訂房</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="row" style="margin: 10px">
+        <div class="col-12" style="margin: 10px">
+            <label>房間型式</label>
+            <select id="sel_type" class="form-control">
+                <option selected>雙人房</option>
+                <option>四人房</option>
+                <option>六人房</option>
+                <option>通舖</option>
+            </select>
+            <br />
+            <label>房間數量</label>
+            <input type="number" id="txb_amount" class="form-control" />
+            <br />
+            <label>進住日期</label>
+            <input type="date" id="in_datetime" value="" class="form-control" />
+            <br />
+            <label>退房日期</label>
+            <input type="date" id="out_datetime" value="" class="form-control" />
+            <br />
+            <button class="btn btn-success btn-block" id="btn_reserve">確定</button>
+        </div>
+    </div>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+	<script>
+        function initializeLiff(myLiffId) {
+            liff.init({liffId: myLiffId });
+        }
+
+        function reserve(type, amount, in_datetime, out_datetime) {
+            if (amount == '' || type == '' || in_datetime == '' || out_datetime=='') {  //資料檢查
+                alert('所有欄位都要填寫！');
+                return;
+            }
+    		if ((Date.parse(in_datetime)).valueOf() >= (Date.parse(out_datetime)).valueOf()) {
+    			alert("退房日期不能小於等於進住日期！");
+    			return;
+    		}
+            var msg = "###";  //回傳訊息字串
+            msg = msg + type + "/";
+            msg = msg + amount + "/";
+            msg = msg + in_datetime + "/";
+            msg = msg + out_datetime + "/";
+			liff.sendMessages([  //推播訊息
+				{ type: 'text',
+				  text: msg
+				}
+			])
+				.then(() => {
+					liff.closeWindow();  //關閉視窗
+				});
+		}
+
+		$(document).ready(function () {
+			initializeLiff('{{ liffid }}');
+            $('#btn_reserve').click(function (e) {  //按下確定鈕
+                reserve($('#sel_type').val(), $('#txb_amount').val(), $('#in_datetime').val(), $('#out_datetime').val());
+            });
+		});
+	</script>
+</body>
+</html>

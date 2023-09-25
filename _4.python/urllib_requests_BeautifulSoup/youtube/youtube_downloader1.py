@@ -1,8 +1,9 @@
-'''
+"""
 使用 pytube 做 YouTube下載
 
-'''
+"""
 
+'''
 print('------------------------------------------------------------')	#60個
 print('準備工作')
 
@@ -74,11 +75,11 @@ print(type(yt.streams))
 length = len(yt.streams)
 print('有', length, '種格式')
 
-'''
+"""
 for media_type in yt.streams:
     print(media_type)
     print(media_type.type)
-'''
+"""
 
 print("影片名稱：" + yt.title)
 print("影片格式共有 " + str(len(yt.streams)) + ' 種')
@@ -136,8 +137,7 @@ def progress_function(stream, chunk,file_handle, bytes_remaining):
         print(str(p)+'%')
         p = percent(bytes_remaining, size)
 
-'''
-
+"""
 from pytube import YouTube
 from pytube.cli import on_progress #this module contains the built in progress bar.
 # 初始化YouTube下載控件
@@ -147,8 +147,7 @@ video = yt.streams.first()
 video.download()
 
 print('OK')
-'''
-sys.exit()
+"""
 
 print('------------------------------------------------------------')	#60個
 print('Youtube 測試 3 下載字幕 TBD')
@@ -167,20 +166,20 @@ if length > 0:
 print(type(yt.captions))
 print(yt.captions)
 
-'''
-
+"""
 字幕個數 :  2
 <Caption lang="Chinese (Simplified)" code="zh-Hans">
 <Caption lang="Chinese (Traditional)" code="zh-Hant">
-'''
+"""
+
 #caption = yt.captions.get_by_language_code('zh-Hant') old
 caption = yt.captions['zh-Hant']
 
 #print(caption.xml_captions)
 
-'''
+"""
 '<?xml version="1.0" encoding="utf-8" ?><transcript><text start="10.2" dur="0.94">K-pop!</text>...'
-'''
+"""
 
 #srt = caption.generate_srt_captions() old
 srt = caption.xml_captions
@@ -287,7 +286,7 @@ for video in videourlList:
     #yt = YouTube('https://www.youtube.com' + video, use_oauth = True, allow_oauth_cache = True)
     #print('標題', yt.title)  #顯示標題
     
-    '''
+    """
     #有些有問題
     if len(video) > 16 and len(video) < 30::
         print('https://www.youtube.com' + video)
@@ -297,8 +296,67 @@ for video in videourlList:
         #下載mp4影片 360p
         #yt.streams.filter(subtype = 'mp4', res = '360p', progressive = True).first().download(foldername)
         n = n + 1
-    '''
+    """
 
 print('下載完成')
 
 print('\n\nYoutube 測試 作業完成\n')
+'''
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('Pytube：下載Youtube影片')
+
+# pip install pytube
+
+from pytube import YouTube
+yt = YouTube('https://www.youtube.com/watch?v=27ob2G3GUCQ')
+print(yt.title)
+
+print(yt.streams)
+
+yt.streams.first().download("youtube")
+
+print(len(yt.streams.filter(adaptive=True)))
+
+print(yt.streams.filter(progressive=True))
+
+yt.streams.filter(subtype='mp4', res='360p', progressive=True).first().download("youtube")
+
+yt.streams.filter(subtype='mp4')[1].download("youtube")
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('應用：批次下載Youtube影片')
+
+
+from pytube import Playlist
+p = Playlist("https://www.youtube.com/watch?v=hGRplpwjbr0&list=PL316wRwpvsnHZprsPfXM8yPzyZ41bvuWl")
+print("共有 " + str(len(p.video_urls)) + " 部影片")
+pathdir = "download"  #下載資料夾
+print("開始下載：")
+try:
+  for index, video in enumerate(p.videos):
+    print(str(index+1) + '. ' + video.title)  #顯示標題
+    video.streams.first().download(pathdir)
+except:
+  pass
+print("下載完成！")
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
