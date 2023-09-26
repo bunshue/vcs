@@ -1,5 +1,7 @@
 #各種檔案寫讀範例 json
 
+print('------------------------------------------------------------')	#60個
+
 import json, datetime
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_json/data_earthquake.json'
@@ -23,6 +25,8 @@ for b_data in boundary_data['Province']:
     print("code:{}".format(b_data['code']))
     print("name:{}".format(b_data['name']))
 
+
+print('------------------------------------------------------------')	#60個
 
 
 '''
@@ -51,6 +55,7 @@ for data in dataset:
         data = '(`eqtime`,`mag`,`place`) values("{}",{},"{}");'.format(data['eqtime'], data['mag'], data['place'])
         #print(data)
 
+print('------------------------------------------------------------')	#60個
 
 
 import json, requests, hashlib, datetime, os.path
@@ -95,7 +100,7 @@ print('資料更新完成')
 
 print('測試完成')    
 
-
+print('------------------------------------------------------------')	#60個
 
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_json/jdata.json'
@@ -109,5 +114,24 @@ with open(filename, "rt") as fp:
 pp.pprint(data)
 print(data)
 
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+import json
+
+data = [
+    {'姓名':'王小明', '身高':174, '體重':56},
+    {'姓名':'林小華', '身高':185, '體重':80},
+    {'姓名':'陳小強', '身高':168, '體重':60} ]
+
+with open('p-data.json', 'w', encoding='utf-8') as fp:
+    json.dump(data, fp)
+print("done")
 
 

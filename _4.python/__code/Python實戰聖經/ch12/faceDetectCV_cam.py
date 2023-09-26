@@ -1,3 +1,6 @@
+#pip install cvzone
+#pip install mediapipe
+
 from cvzone.FaceDetectionModule import FaceDetector
 import cv2
 

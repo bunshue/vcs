@@ -1,4 +1,5 @@
 import requests
+
 try:
     import xml.etree.cElementTree as ET
 except ImportError:
@@ -19,6 +20,7 @@ def get_current():
         ret[tlist[0]] = tlist[1]
     return ret
 
-
+ret = get_current()
+print(ret)
 
 

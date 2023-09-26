@@ -1,4 +1,5 @@
 import sys
+'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -51,7 +52,7 @@ img.save('my_qrcode2.png')
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 print('schedule：定時執行任務')
 
 import schedule
@@ -89,11 +90,11 @@ while True:
 
 
 print('kkkkkk')
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 print('tqdm：進度條')
 
 from tqdm import tqdm 
@@ -111,7 +112,7 @@ for char in tlist:
     print(char)
     tlist.set_description("處理串列元素……")
     sleep(0.5)
-'''    
+"""    
 print('------------------------------------------------------------')	#60個
 
 #dist：經緯度距離
@@ -198,6 +199,8 @@ print(cnlunardate(2017, 6, 1, False).toordinal())
 n1 = cnlunardate(2017, 6, 1, False).toordinal()
 n2 = cnlunardate(2015, 10, 12, False).toordinal()
 print(n1 - n2)
+
+'''
 
 print('------------------------------------------------------------')	#60個
 

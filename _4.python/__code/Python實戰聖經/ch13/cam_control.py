@@ -10,6 +10,7 @@ model = tensorflow.keras.models.load_model('left_right.h5')
 
 cap = cv2.VideoCapture(0)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+
 while True:
     success, image = cap.read()
     if success == True:

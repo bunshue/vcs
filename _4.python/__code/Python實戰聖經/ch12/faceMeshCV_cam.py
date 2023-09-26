@@ -2,6 +2,7 @@ from cvzone.FaceMeshModule import FaceMeshDetector
 import cv2
 
 cap = cv2.VideoCapture(0)
+
 detector = FaceMeshDetector(maxFaces=5)
 
 while True:

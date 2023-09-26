@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Diagnostics;       //for Process
+using System.Runtime.InteropServices;   //for dll
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;
@@ -296,13 +297,14 @@ namespace vcs_WebCam
             bt_info.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_fullscreen.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             bt_help.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            bt_open_folder.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            bt_open_folder.Location = new Point(x_st + dx * 4 - 20, y_st + dy * 2 + 20);
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
 
             cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             cb_image_processing.Location = new Point(x_st + dx * 1, y_st + dy * 3);
             cb_auto_save.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             cb_show_grid.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            cb_rgb.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 25);
 
             rb1.Location = new Point(x_st + dx * 1, y_st + dy * 3 + 25);
             rb2.Location = new Point(x_st + dx * 1 + 30, y_st + dy * 3 + 25);
@@ -323,6 +325,23 @@ namespace vcs_WebCam
             dy = 50;
             lb_main_mesg.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             lb_fps.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+
+            x_st = BORDER;
+            y_st = 120;
+            dx = 55;
+            dy = 30;
+
+            lb_rgb_r.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lb_rgb_g.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            lb_rgb_b.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            lb_yuv_y.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lb_yuv_u.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            lb_yuv_v.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            panel1.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 0);
+
+
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -1446,6 +1465,96 @@ namespace vcs_WebCam
             //writer.Open(filename, webcam_w, webcam_h, webcam_fps, VideoCodec.MPEG4);
         }
 
+
+
+
+        [DllImport("gdi32.dll")]
+        static public extern uint GetPixel(IntPtr hDC, int XPos, int YPos);
+        [DllImport("gdi32.dll")]
+        static public extern IntPtr CreateDC(string driverName, string deviceName, string output, IntPtr lpinitData);
+        [DllImport("gdi32.dll")]
+        static public extern bool DeleteDC(IntPtr DC);
+        static public byte GetRValue(uint color)
+        {
+            return (byte)color;
+        }
+        static public byte GetGValue(uint color)
+        {
+            return ((byte)(((short)(color)) >> 8));
+        }
+        static public byte GetBValue(uint color)
+        {
+            return ((byte)((color) >> 16));
+        }
+        static public byte GetAValue(uint color)
+        {
+            return ((byte)((color) >> 24));
+        }
+
+        public Color GetColor(Point screenPoint)
+        {
+            IntPtr displayDC = CreateDC("DISPLAY", null, null, IntPtr.Zero);
+            uint colorref = GetPixel(displayDC, screenPoint.X, screenPoint.Y);
+            DeleteDC(displayDC);
+            byte Red = GetRValue(colorref);
+            byte Green = GetGValue(colorref);
+            byte Blue = GetBValue(colorref);
+            return Color.FromArgb(Red, Green, Blue);
+        }
+
+        int cccc = 0;
+        int total_RGB_R_old = -1;
+        int total_RGB_G_old = -1;
+        int total_RGB_B_old = -1;
+
+
+
+        private void timer_rgb_Tick(object sender, EventArgs e)
+        {
+            if (cb_rgb.Checked == false)
+                return;
+
+            richTextBox1.Text += "x";
+
+            Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+            Color cl = GetColor(pt);
+            panel1.BackColor = cl;
+            lb_rgb_r.Text = cl.R.ToString();
+            lb_rgb_g.Text = cl.G.ToString();
+            lb_rgb_b.Text = cl.B.ToString();
+
+            RGB pp = new RGB(cl.R, cl.G, cl.B);
+            YUV yyy = new YUV();
+            yyy = RGBToYUV(pp);
+            lb_yuv_y.Text = ((int)yyy.Y).ToString();
+            lb_yuv_u.Text = ((int)yyy.U).ToString();
+            lb_yuv_v.Text = ((int)yyy.V).ToString();
+        }
+
+        private void cb_rgb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_rgb.Checked == true)
+            {
+                timer_rgb.Enabled = true;
+                lb_rgb_r.Visible = true;
+                lb_rgb_g.Visible = true;
+                lb_rgb_b.Visible = true;
+                lb_yuv_y.Visible = true;
+                lb_yuv_u.Visible = true;
+                lb_yuv_v.Visible = true;
+                panel1.Visible = true;
+            }
+            else
+            {
+                timer_rgb.Enabled = false;
+                lb_rgb_r.Visible = false;
+                lb_rgb_g.Visible = false;
+                lb_rgb_b.Visible = false;
+                lb_yuv_y.Visible = false;
+                lb_yuv_u.Visible = false;
+                lb_yuv_v.Visible = false;
+                panel1.Visible = false;
+            }
+        }
     }
 }
-

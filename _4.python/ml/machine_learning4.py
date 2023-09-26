@@ -3,41 +3,52 @@ import sys
 import time
 import random
 
-print('------------------------------------------------------------')	#60個
-
 import math
 
-film = [5, 7, 8, 10, 2]             # 玩命關頭特徵值
-film_titles = [                     # 比較影片片名
-    '復仇者聯盟',
-    '決戰中途島',
-    '冰雪奇緣',
-    '雙子殺手',
-]
-film_features = [                   # 比較影片特徵值
-    [2, 8, 8, 5, 6],
-    [5, 6, 9, 2, 5],
-    [8, 2, 0, 0, 10],
-    [5, 8, 8, 8, 3],
+print('------------------------------------------------------------')	#60個
+
+#統率, 武力, 智力, 政治, 魅力
+main_features = [87, 86, 82, 78, 100]             # 劉備 特徵值
+people_names = [                     # 比較人物人名
+    '諸葛亮',
+    '關羽',
+    '張飛',
+    '趙雲',
+    '曹操',
+    '司馬懿',
+    '孫權',
+    '周瑜',
+    '呂布',
 ]
 
-dist = []                           # 儲存影片相似度值
-for f in film_features:
+people_features = [                   # 比較人物特徵值
+    [99, 42, 100, 100, 92],
+    [92, 100, 74, 51, 83],
+    [86, 99, 78, 36, 57],
+    [79, 94, 77, 82, 91],
+    [100, 85, 93, 96, 95],
+    [95, 62, 98, 95, 84],
+    [72, 84, 76, 85, 93],
+    [93, 71, 94, 81, 92],
+    [84, 98, 61, 12, 55],
+]
+
+dist = []                           # 儲存人物相似度值
+for feature in people_features:
     distances = 0
-    for i in range(len(f)):
-        distances += (film[i] - f[i]) ** 2
+    for i in range(len(feature)):
+        distances += (main_features[i] - feature[i]) ** 2
     dist.append(math.sqrt(distances))
     
 min_ = min(dist)                    # 求最小值
 min_index = dist.index(min_)        # 最小值的索引
 
-print(f"與玩命關頭最相似的電影 : {film_titles[min_index]}")
+print(f"與 劉備 最相似的人物 : {people_names[min_index]}")
 print(f"相似度值 : {dist[min_index]}")
 for i in range(len(dist)):
-    print(f"影片 : {film_titles[i]}, 相似度 : {dist[i]:6.2f}")
+    print(f"人物 : {people_names[i]}, 相似度 : {dist[i]:6.2f}")
 
 print('------------------------------------------------------------')	#60個
-
 
 
 
