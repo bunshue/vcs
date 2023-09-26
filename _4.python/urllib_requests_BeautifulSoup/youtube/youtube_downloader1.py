@@ -2,8 +2,8 @@
 使用 pytube 做 YouTube下載
 
 """
-
 '''
+
 print('------------------------------------------------------------')	#60個
 print('準備工作')
 
@@ -314,7 +314,10 @@ print('Pytube：下載Youtube影片')
 # pip install pytube
 
 from pytube import YouTube
-yt = YouTube('https://www.youtube.com/watch?v=27ob2G3GUCQ')
+
+url = 'https://www.youtube.com/watch?v=36asE86iGmQ'
+
+yt = YouTube(url)
 print(yt.title)
 
 print(yt.streams)
@@ -329,7 +332,7 @@ yt.streams.filter(subtype='mp4', res='360p', progressive=True).first().download(
 
 yt.streams.filter(subtype='mp4')[1].download("youtube")
 
-
+'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -337,19 +340,22 @@ print('應用：批次下載Youtube影片')
 
 
 from pytube import Playlist
-p = Playlist("https://www.youtube.com/watch?v=hGRplpwjbr0&list=PL316wRwpvsnHZprsPfXM8yPzyZ41bvuWl")
-print("共有 " + str(len(p.video_urls)) + " 部影片")
+
+url_playlist = 'https://www.youtube.com/watch?v=GwP1aUC_NKE&list=PLKtM4AyTKoVd1Ix3H0jP9Z5wYgDpat_tE'
+
+playlist = Playlist(url_playlist)
+print("共有 " + str(len(playlist.video_urls)) + " 部影片")
 pathdir = "download"  #下載資料夾
 print("開始下載：")
 try:
-  for index, video in enumerate(p.videos):
+  for index, video in enumerate(playlist.videos):
     print(str(index+1) + '. ' + video.title)  #顯示標題
-    video.streams.first().download(pathdir)
+    #video.streams.first().download(pathdir)
 except:
   pass
 print("下載完成！")
 
-
+'''
 print('------------------------------------------------------------')	#60個
 
 

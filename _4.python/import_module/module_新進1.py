@@ -154,24 +154,6 @@ notification.notify(
     message = msg
     )
 
-        
-
-print('------------------------------------------------------------')	#60個
-
-from translate import Translator 
-
-print('英翻中')
-
-trans = Translator(from_lang="english",to_lang="chinese")
-
-text = 'Welcome to the United States and have a nice day.'
-print("Copied word : ", text)
-translation = trans.translate(text)
-
-print(translation)
-
-
-
 
 print('------------------------------------------------------------')	#60個
 

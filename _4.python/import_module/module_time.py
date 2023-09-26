@@ -1,4 +1,5 @@
 # python import module : time, datetime
+
 """
 python的日期當中分成
 1. date(日期)
@@ -97,15 +98,24 @@ print("Test time is", time_elapsed, "seconds")
 
 print('------------------------------------------------------------')	#60個
 
-time1 = time.gmtime(28800)
-time2 = time.gmtime()
-print(time1)
-print(time2)
+print('ccccccc')
+ticks = time.time() #至今的tick數
+print(ticks)
 
-time3 = time.localtime(1234)
+print('從ticks取得GMT時間')
+time1 = time.gmtime(ticks)
+print('GMT時間 :', time1)
+
+time2 = time.gmtime()
+print('目前的GMT時間 :', time2)
+
+print('從ticks取得localtime時間')
+time3 = time.localtime(ticks)
+print('localtime時間 :', time3)
+
 time4 = time.localtime()
-print(time3)
-print(time4)
+print('目前的localtime時間 :', time4)
+
 
 print('---- 現在時間 --------------------------------------------------------')	#60個
 
@@ -120,11 +130,18 @@ print("Local current time :", localtime)
 time5 = time.asctime()
 print('time5 :', time5)
 
+print(time.asctime())               # 列出目前系統時間 
+
+print(time.ctime())
+
 time6 = time.ctime()
 print('time6 :', time6)
 
 time7 = time.ctime(time.time())
 print('time7 :', time7)
+
+ufrom = 'From nobody ' + time.ctime(time.time())
+print(ufrom)
 
 # time.localtime() #可以輸出 struct_time 的時間格式
 localtime = time.localtime() # 取得當前時間
@@ -219,20 +236,22 @@ day = now.strftime("%d")
 print("day:", day)
 
 current_time = now.strftime("%H:%M:%S")
-print("time:", current_time)
+print("時分秒 :", current_time)
 
-date_time = now.strftime("%Y-%m-%d, %H:%M:%S")
-print("date and time:", date_time)
+date_time = now.strftime("%Y-%m-%d %H:%M:%S")
+print("年月日時分秒 :", date_time)
 
-filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
+filename = now.strftime("news-%y-%m-%d %H-%M-%S.json")
 print(filename)
 
-string = now.strftime('%Y-%m-%d %H:%M:%S')
-print(string)
+print('------------------------------------------------------------')	#60個
+
+
 
 print('---- new --------------------------------------------------------')	#60個
 
-string = ("%d" % datetime.datetime.now().year)
+now = datetime.datetime.now()
+string = ("%d" % now.year)
 print(string)
 
 datetime_format = '%Y/%m/%d %H:%M:%S'
@@ -245,16 +264,6 @@ print('------------------------------------------------------------')	#60個
 
 timestamp = time.strftime('%Y-%m-%d %H:%M%z')
 print(timestamp)
-
-print('------------------------------------------------------------')	#60個
-
-now = datetime.datetime.now()
-filename = now.strftime("%y-%m-%d-%H-%M-%S.json")
-print(filename)
-
-now = datetime.datetime.now()
-filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
-print(filename)
 
 print('------------------------------------------------------------')	#60個
 
@@ -315,10 +324,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-ufrom = 'From nobody ' + time.ctime(time.time())
-print(ufrom)
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -331,7 +336,6 @@ import time
 print(time.localtime())
 year, month, day, hour, minute, second, _, _, _ = time.localtime()
 print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
-print(time.asctime())
 print(time.strftime("%Y-%m-%d %H:%M:%S %a"))
 
 print('------------------------------------------------------------')	#60個
@@ -350,13 +354,6 @@ print(datetime.date.today())
 
 today = str(datetime.datetime.today().date())
 current = str(datetime.datetime.today())
-
-print('------------------------------------------------------------')	#60個
-
-import datetime
-today = datetime.datetime.today()
-birthday = datetime.datetime(2006, 3, 11, 9, 15, 0)
-print('相距天時分秒 :', today - birthday)
 
 print('------------------------------------------------------------')	#60個
 
@@ -395,10 +392,6 @@ formattime = time.asctime(time.localtime(ticks))
 print(formattime)
 
 print('------------------------------------------------------------')	#60個
-
-import time                         # 導入模組time
-
-print(time.ctime())
 
 
 
@@ -452,8 +445,30 @@ johnbirthday = datetime.datetime(1978, 4, 5, 12, 0)
 
 print('---- timediff --------------------------------------------------------')	#60個
 
+#執行時間： 
+datetime_st = datetime.datetime.now()
+
+#do something
+
+datetime_sp = datetime.datetime.now()
+
+print((datetime_sp - datetime_st).seconds)
+
+print('------------------------------------------------------------')	#60個
+
+
+#兩日期相減 
+d1 = datetime.datetime(2005, 2, 16)
+d2 = datetime.datetime(2004, 12, 31)
+print((d1 - d2).days)
+
+
+print('------------------------------------------------------------')	#60個
+
 a = datetime.datetime(2012, 3, 1)
 b = datetime.datetime(2012, 2, 28)
+
+print('------------------------------------------------------------')	#60個
 
 print(a - b)
 print("兩者時間差" , a - b)
@@ -465,11 +480,42 @@ print(a - b)
 print("兩者時間差" , a - b)
 
 a = datetime.datetime(2006, 3, 11, 9, 15, 30)
-b = datetime.datetime.now
+b = datetime.datetime.now()
 
-d = datetime.datetime.now()
+print('aaa', a)
+print('bbb', b)
+
+#d = datetime.datetime.now()
 #print("現在時間" , d)
 #print("過去時間" , a)
+
+print('------------------------------------------------------------')	#60個
+
+datetime_st = datetime.datetime(2016, 1, 1)
+datetime_sp = datetime.datetime(2017, 1, 1)
+
+datetime_st = datetime.datetime(2016, 7, 17)
+print(datetime_st)
+
+datetime_sp = datetime.datetime(2016, 7, 24)
+print(datetime_sp)
+
+expected = [datetime.datetime(2016, 7, i) for i in range(17, 24)]
+print(expected)
+
+import datetime
+today = datetime.datetime.today()
+birthday = datetime.datetime(2006, 3, 11, 9, 15, 0)
+print('相距天時分秒 :', today - birthday)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 
 today = datetime.date.today()
 #month = int(input("請問你是在哪一個月份出生："))
@@ -487,13 +533,8 @@ if diff.days == 0:
 else:
   print("哇！再過 " + str(diff.days) + " 天就是你的生日了！")
 
+print('------------------------------------------------------------')	#60個
 
-
-
-#兩日期相減 
-d1 = datetime.datetime(2005, 2, 16)
-d2 = datetime.datetime(2004, 12, 31)
-print((d1 - d2).days)
 
 print('---- datetime.now() --------------------------------------------------------')	#60個
 
@@ -572,10 +613,10 @@ print('------------------------------------------------------------')	#60個
 print(time.localtime())
 
 #而我們也可以一一拆解
-tonow = datetime.datetime.now()
-print(tonow.year)
-print(tonow.month)
-print(tonow.day)
+now = datetime.datetime.now()
+print(now.year)
+print(now.month)
+print(now.day)
 
 #而我們也可以算今天是今年的第幾天
 
@@ -646,11 +687,9 @@ microsecond = 123456
 s = _format_time(hour, minute, second, microsecond)
 print(s)
 
-
 s = ("%04d-%02d-%02d%c" % (year, month, day, sep) +
      _format_time(hour, minute, second,microsecond))
 print(s)
-
 
 hh = 12
 mm = 34
@@ -658,48 +697,7 @@ ss = 56
 s = "%d:%02d:%02d" % (hh, mm, ss)
 print(s)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-import time                         # 導入模組time
-print(time.asctime())               # 列出目前系統時間 
-
-print('------------------------------------------------------------')	#60個
-
-datetime_st = datetime.datetime(2016, 1, 1)
-datetime_sp = datetime.datetime(2017, 1, 1)
-
-print('------------------------------------------------------------')	#60個
-
-#執行時間： 
-datetime_st = datetime.datetime.now()
-
-#do something
-
-datetime_sp = datetime.datetime.now()
-
-print((datetime_sp - datetime_st).seconds)
-
-print('------------------------------------------------------------')	#60個
-
-print(datetime.datetime.now())
-
-print('------------------------------------------------------------')	#60個
-
-datetime_st = datetime.datetime(2016, 7, 17)
-print(datetime_st)
-
-datetime_sp = datetime.datetime(2016, 7, 24)
-print(datetime_sp)
-
-expected = [datetime.datetime(2016, 7, i) for i in range(17, 24)]
-print(expected)
 
 print('------------------------------------------------------------')	#60個
 
@@ -734,5 +732,7 @@ print(d3.ctime())
 #print(time.ctime([sec]))#把秒數轉換成日期格式，如果不帶引數，則顯示當前的時間。
 #time.ctime([ sec ])
 print("time.ctime() : %s" % time.ctime())
+
+
 
 

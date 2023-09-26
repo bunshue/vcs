@@ -19,14 +19,14 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 1 函數曲線', figsize = (10, 8), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = 'plot 集合 1 函數曲線', figsize = (12, 12), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 offset = 0.3
 
-#x = np.linspace(-10, 10, 21)
+#x = np.linspace(-10, 10, 51)
 #y00 = x ** 2
 
-x = np.linspace(-2*np.pi, 2*np.pi, 41)
+x = np.linspace(-2 * np.pi, 2 * np.pi, 51)
 y00 = np.cos(x)
 
 y01 = y00 + offset * 1
@@ -51,7 +51,7 @@ y19 = y00 + offset * 19
 y20 = y00 + offset * 20
 
 
-plt.plot(x, y01, "r-o", lw = 5)
+plt.plot(x, y01, "r-o", lw = 1, markevery = 5)   #隔 5 個畫一個 marker
 plt.plot(x, y02, "g--")
 plt.plot(x, y03, "b:o")
 plt.plot(x, y04, "g--s")
@@ -59,9 +59,9 @@ plt.plot(x, y05, 'g.-')
 plt.plot(x, y06, 'y--o')
 #plt.plot(x, y07, 'y--o')
 plt.plot(x, y07, c = '#00a676', lw = 5)
-#plt.plot(x, y08, marker='o')
-plt.plot(x, y08, lw=3, marker='o', ms=10)
-plt.plot(x, y09, lw=3, marker='o', ms=10, markevery=4)   #隔 4 個畫一個 marker
+#plt.plot(x, y08, marker = 'o')
+plt.plot(x, y08, lw = 3, marker = 'o', ms = 10)
+plt.plot(x, y09, lw = 3, marker = 'o', ms = 10, markevery = 4)   #隔 5 個畫一個 marker
 
 
 #連線
@@ -101,7 +101,7 @@ plt.plot(x, y20, color = 'blue', linestyle = "-", linewidth = "2", markersize = 
 
 plt.title('圖形標題')
 plt.title('圖形標題', fontsize = 18)                    # 設定圖表標題內容及大小
-plt.title(label = '圖形標題', fontsize = 18, color='r') # 設定圖表標題內容及大小及顏色
+plt.title(label = '圖形標題', fontsize = 18, color = 'r') # 設定圖表標題內容及大小及顏色
 
 plt.xlabel('x軸標記')
 plt.xlabel('x軸標記', fontsize = 10) # 設定 x 軸標題內容及大小
@@ -127,29 +127,29 @@ plt.xticks([-2*np.pi, -3*np.pi/2, -np.pi, -np.pi/2, 0, np.pi/2, np.pi, 3*np.pi/2
 #plt.ylim(-1.2,1.2)
 
 #plt.legend()
-plt.legend(loc='best')
+plt.legend(loc = 'best')
 plt.legend()
 
-plt.legend(loc='upper right')
+plt.legend(loc = 'upper right')
 
 '''
-plt.legend(loc=6)
+plt.legend(loc = 6)
 
-plt.legend(loc='upper left', bbox_to_anchor=(1,1))
+plt.legend(loc = 'upper left', bbox_to_anchor = (1,1))
 
-plt.legend(loc=6, bbox_to_anchor=(1,1))
+plt.legend(loc = 6, bbox_to_anchor = (1,1))
 
-plt.tight_layout(pad=7)
+plt.tight_layout(pad = 7)
 '''
 
 #print(plt.axis())
 
 
 #plt.grid(True)  #顯示格線
-plt.grid(color='0.8')   #顯示格線
+plt.grid(color = '0.8')   #顯示格線
 
 # 放置文字
-plt.text(0, 0, 'This is a lion-mouse', color='red')
+plt.text(0, 0, 'This is a lion-mouse', color = 'red')
 
 plt.show()
 

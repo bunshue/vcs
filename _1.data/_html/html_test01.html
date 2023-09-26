@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>button test</title>
+</head>
+
+<body>
+
+            <form method='post' action=''>
+                <p>帳號：<input type='text' name='username' /></p>
+                <p>密碼：<input type='text' name='password' /></p>
+                <p><button type='submit'>確定</button></p>
+            </form>
+	
+<button class="btn btn-success btn-block" id="btn_reserve">確定</button>
+
+
+	<script>
+        function initializeLiff(myLiffId) {
+            liff.init({liffId: myLiffId });
+        }
+
+        function reserve(type, amount, in_datetime, out_datetime) {
+            if (amount == '' || type == '' || in_datetime == '' || out_datetime=='') {  //資料檢查
+                alert('所有欄位都要填寫！');
+                return;
+            }
+    		if ((Date.parse(in_datetime)).valueOf() >= (Date.parse(out_datetime)).valueOf()) {
+    			alert("退房日期不能小於等於進住日期！");
+    			return;
+    		}
+            var msg = "###";  //回傳訊息字串
+            msg = msg + type + "/";
+            msg = msg + amount + "/";
+            msg = msg + in_datetime + "/";
+            msg = msg + out_datetime + "/";
+			liff.sendMessages([  //推播訊息
+				{ type: 'text',
+				  text: msg
+				}
+			])
+				.then(() => {
+					liff.closeWindow();  //關閉視窗
+				});
+		}
+
+		$(document).ready(function () {
+			initializeLiff('{{ liffid }}');
+            $('#btn_reserve').click(function (e) {  //按下確定鈕
+                reserve($('#sel_type').val(), $('#txb_amount').val(), $('#in_datetime').val(), $('#out_datetime').val());
+            });
+		});
+	</script>
+
+
+</body>
+</html>
+
+

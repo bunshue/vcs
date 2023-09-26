@@ -124,11 +124,6 @@ plt.figure(num = 'plot 集合 2 函數曲線', figsize = (20, 15), dpi = 84, fac
 #第一張圖
 plt.subplot(231)
 
-x = np.linspace(-5, 5, 100)
-y = np.sin(x) / (x**2+1)
-
-plt.plot(x,y,lw=5)
-#plt.xticks(np.arange(-5,6))
 
 #第二張圖
 plt.subplot(232)
@@ -152,19 +147,12 @@ plt.subplot(234)
 
 from matplotlib.font_manager import FontProperties
 
-font_filename = 'C:/Windows/Fonts/mingliu.ttc'
-font = FontProperties(fname = font_filename, size = 20)
-
 x = np.linspace(0, 10, 1000)
-y = np.sin(x)
-z = np.cos(x**2)
+y1 = np.sin(x)
+y2 = np.cos(x**2)
 
-plt.plot(x, y, label = "$sin(x)$", color = "red", linewidth = 2)
-plt.plot(x, z, "b--", label = "$cos(x^2)$")
-
-plt.xlabel('Time(s)', fontproperties = font)
-plt.ylabel('Amplitude', fontproperties = font)
-plt.title(u'三角函數', fontproperties = font, fontsize = 24)
+plt.plot(x, y1, label = "$sin(x)$", color = "red", linewidth = 2)
+plt.plot(x, y2, "b--", label = "$cos(x^2)$")
 
 plt.ylim(-1.2, 1.2)
 plt.legend()
@@ -202,3 +190,22 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+
+
+'''
+
+#plt.xticks(np.arange(-5,6))
+
+
+
+
+font_filename = 'C:/Windows/Fonts/mingliu.ttc'  #中英文字型
+font = FontProperties(fname = font_filename, size = 20)
+
+plt.xlabel('Time(s)', fontproperties = font)
+plt.ylabel('Amplitude', fontproperties = font)
+plt.title(u'三角函數', fontproperties = font, fontsize = 24)
+
+
+
+'''
