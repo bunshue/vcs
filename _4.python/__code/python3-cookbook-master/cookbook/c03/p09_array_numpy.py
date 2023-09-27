@@ -1,8 +1,6 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
+
 """
 Topic: 利用numpy执行数组运算
-Desc : 
 """
 import numpy as np
 

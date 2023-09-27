@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 日期时区和本地化
-Desc : 
 """
 from datetime import datetime, timedelta
 from pytz import timezone

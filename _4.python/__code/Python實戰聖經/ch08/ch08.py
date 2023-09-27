@@ -32,13 +32,20 @@ for eachObject in detections:
 
 print('------------------------------------------------------------')	#60個
 
-'''
+
 
 from imageai.Detection import VideoObjectDetection
+
 detector = VideoObjectDetection()
 detector.setModelTypeAsYOLOv3()
-detector.setModelPath("yolo.h5")
+
+
+#detector.setModelPath("yolo.h5")
+
+'''
 detector.loadModel()
+
+
 detector.detectObjectsFromVideo(
     input_file_path="traffic-mini.mp4",
     output_file_path= "traffic_detected",
@@ -117,6 +124,7 @@ for i in range(len(prediction_groups)):
 
 print('------------------------------------------------------------')	#60個
 
+'''
 print('應用：車牌辨識')
 
 import keras_ocr
@@ -156,6 +164,7 @@ for n in range(len(prediction_groups)):
     result = result.upper()
     print('第 {} 個車牌號碼：{}'.format(n+1, result)) 
 
+'''
 
 print('------------------------------------------------------------')	#60個
 

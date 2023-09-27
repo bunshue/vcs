@@ -1,10 +1,3 @@
-'''
-import pandas as pd
-
-data = pd.read_csv("PM25_tw.csv")
-
-print(data)
-'''
 
 
 '''
@@ -14,4 +7,4 @@ pip install python-levenshtein
 
 '''
 
-from scraparazzie import scraparazzie
+#from scraparazzie import scraparazzie

@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-"""
-Topic: 四舍五入运算
-Desc : 
-"""
-
-
 def round_num():
     print(round(1.23, 1))
     print(round(1.27, 1))

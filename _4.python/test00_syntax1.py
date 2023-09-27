@@ -31,6 +31,7 @@ import serial
 content = dir(serial)
 print('serial 模組所支援的指令 : ' + str(content))
 
+print('------------------------------------------------------------')	#60個
 
 menu = {'拉麵' : 500, '炒飯' : 430, '煎餃' : 210}
 print(type(menu))
@@ -40,57 +41,12 @@ for order in menu:
 	print(menu[order] * 1.08)
 
 
-music_list = ['DEATH METAL', 'ROCK', 'ANIME', 'POP']
-print(type(music_list))
-print(music_list)
-for music in music_list:
-	print('now playing... ' + music)
-
-family = ['ryo-ko', 'mako', 'satsuki']
-print(type(family))
-print(family)
-for kid in family:
-	print('早安！' + kid)
-	print('起床')
-	print('吃早餐')
-	continue
-	print('出門上學')
+print('------------------------------------------------------------')	#60個
 
 print('設定變數')
 ROWS, COLUMNS = 19, 4
 print(ROWS)
 print(COLUMNS)
-
-#設定一個二維矩陣
-money = [[41.36, 28.96, 3.77, 8.45],
-[29.08, 3.58, 6.81, 0.77],
-[15.68, 12.76, 3.79, 3.29],
-[15.61, 10.93, 3.28, 2.95],
-[11.27, 8.89, 10.22, 1.00],
-[23.20, 2.26, 4.22, 0.58],
-[11.28, 9.14, 6.50, 2.88],
-[13.96, 9.18, 2.93, 2.84],
-[14.44, 6.94, 4.70, 2.24],
-[26.93, 0.63, 0.28, 0.47],
-[9.05, 10.95, 1.93, 2.74],
-[9.71, 7.47, 4.13, 1.90],
-[9.00, 6.18, 7.20, 0.71],
-[8.92, 8.03, 3.60, 2.15],
-[15.00, 4.89, 0.24, 1.69],
-[9.01, 8.49, 2.53, 1.77],
-[7.02, 9.09, 0.98, 3.96],
-[9.43, 0.40, 0.41, 10.57],
-[12.78, 3.75, 3.54, 0.55]]
-print(type(money))
-
-#設定一個一維矩陣
-games = ['Wii Sports', 'Super Mario Bros', 'Mario Kart Wii', 'Wii Sports Resort',
-        'Pokemon Red/Pokemon Blue', 'Tetris', 'New Super Mario Bros', 'Wii Play', 
-        'New Super Mario Bros Wii', 'Duck Hunt', 'Nintendogs', 'Mario Kart DS',
-        'Pokemon Gold/Pokemon Silver', 'Wii Fit', 'Kinect Adventures!', 'Wii Fit Plus',
-        'Gramd Theft Auto V', 'Grand Theft Auto: San Andreas','Super Mario World' ]
-
-
 
 # 各種python專用的語法
 
@@ -138,19 +94,24 @@ except Exception as e:
     print(e)
 
 try:
-    a = int(input('請輸入第一個整數：'))
-    b = int(input('請輸入第二個整數：'))
+    #a = int(input('請輸入第一個整數：'))
+    #b = int(input('請輸入第二個整數：'))
+    a = 3
+    b = 5
     r = a + b
     print('r =', r)
 except:
     print('發生輸入非數值的錯誤!')
     
-    
+
+print('------------------------------------------------------------')	#60個
+
 print('try-except 的用法')
 
 while True:
     try:
-        age = int(input('What is your age?'))
+        #age = int(input('What is your age?'))
+        age = 20
         break
     except:
         print('Please enter a number')
@@ -185,9 +146,7 @@ print(z)
 z = z**0.5    #冪次方的寫法
 print(z)
 
-
-# Python 新進測試 01
-
+print('------------------------------------------------------------')	#60個
 
 print('map 的用法')
 def pick(x):
@@ -202,6 +161,7 @@ print(type(choices))
 for choice in choices:
     print(choice)
 
+print('------------------------------------------------------------')	#60個
    
 '''    
 person = int(input('請輸入學生人數: '))
@@ -211,6 +171,8 @@ print('每個學生可分得蘋果 ' + str(ret[0]) + ' 個')
 print('蘋果剩餘 ' + str(ret[1]) + ' 個')
 '''
 
+print('------------------------------------------------------------')	#60個
+
 listname = ['林大明', '陳阿中', '張小英']
 listchinese = [100, 74, 82]
 listmath = [87, 88, 65]
@@ -219,6 +181,7 @@ print('姓名     座號  國文  數學  英文')
 for i in range(0, 3):
     print(listname[i].ljust(5), str(i+1).rjust(3), str(listchinese[i]).rjust(5), str(listmath[i]).rjust(5), str(listenglish[i]).rjust(5))
 
+print('------------------------------------------------------------')	#60個
 
 date1 = '2017-8-23'
 date1 = '西元 ' + date1
@@ -227,20 +190,7 @@ date1 = date1.replace('-', ' 月 ', 1)
 date1 += ' 日'
 print(date1)
 
-print('List的用法')
-list1 = []
-list1.append(123)
-list1.append(456)
-list1.append(234)
-list1.append(321)
-list1.append(101)
-#list1.pop()
-
-print('共輸入 %d 個數' % len(list1))
-print('最大：%d' % max(list1))
-print('最小：%d' % min(list1))
-print('總和：%d' % sum(list1))
-print('由大到小排序為：{}'.format(sorted(list1, reverse = True)))
+print('------------------------------------------------------------')	#60個
 
 
 sum = 0
@@ -252,6 +202,8 @@ for i in range(1,11):
     show(i)
     sum += i
 print('1 + 2 + ... + 10 =' + str(sum))
+
+print('------------------------------------------------------------')	#60個
 
 '''
 money = int(input('請輸入購物金額：'))
@@ -267,7 +219,7 @@ if money >= 10000:
 else:
     print(money, end = ' 元\n')  #未打折
     
-    
+print('------------------------------------------------------------')	#60個    
     
     
 n = int(input('請輸入大樓的樓層數：'))
@@ -281,11 +233,14 @@ for i in range(1, n+1):
 print()
 '''
 
+print('------------------------------------------------------------')	#60個
+
 score = [75, 100, 9]
 print('國文成績：%d 分' % score[0])
 print('數學成績：%d 分' % score[1])
 print('英文成績：%d 分' % score[2])
 
+print('------------------------------------------------------------')	#60個
 
 for i in range(2,10):
     for j in range(1,10):
@@ -293,6 +248,7 @@ for i in range(2,10):
         print('%d * %d = %-2d   ' % (i, j, product), end = '')
     print()
 
+print('------------------------------------------------------------')	#60個
 
 print('求1~N的正整數的和')
 sum = 0
@@ -302,6 +258,7 @@ for i in range(1, n + 1):
     sum += i
 print('1 到 %d 的整數和為 %d' % (n, sum))
 
+print('------------------------------------------------------------')	#60個
 
 print('求是否為質數')
 #n = int(input('請輸入大於 1 的整數：'))
@@ -316,6 +273,7 @@ else:
     else:
         print('%d 是質數！' % n)
 
+print('------------------------------------------------------------')	#60個
 
 '''
 total = person = score = 0
@@ -326,7 +284,7 @@ while score != -1:
 average = total / (person - 1)
 print('本班總成績：%d 分，平均成績：%5.2f 分' % (total, average))
 '''
-
+print('------------------------------------------------------------')	#60個
 
 '''
 score = []
@@ -341,10 +299,7 @@ average = total / (len(score) - 1)
 print('本班總成績：%d 分，平均成績：%5.2f 分' % (total, average))
 '''
 
-
-
-
-
+print('------------------------------------------------------------')	#60個
 
 '''
 nat = input('請輸入國文成績：')
@@ -354,6 +309,8 @@ sum = int(nat) + int(math) + int(eng)  #輸入值需轉換為整數
 average = sum / 3
 print('成績總分：%d，平均成績：%5.2f' % (sum, average))
 '''
+
+print('------------------------------------------------------------')	#60個
 
 '''
 score = int(input('請輸入成績：'))
@@ -368,7 +325,7 @@ elif score >= 60:
 else:
     print('丁等')
 '''
-
+print('------------------------------------------------------------')	#60個
 
 #pw = input('請輸入密碼：(1234)')
 pw = '1234'
@@ -385,6 +342,7 @@ while pAttempt != password:
     pAttempt = input('Enter the password: ')
 print('Password correct')
 
+print('------------------------------------------------------------')	#60個
 
 personName = 'lion'
 anObject = 'mouse'
@@ -392,6 +350,7 @@ place = 'cat dog'
 story = personName + ' was walking through ' + place + '. ' + place + ' was not usually very interesting. ' + personName + ' spotted a small ' + anObject + '. Suddenly the ' + anObject + ' jumped up and ran away. ' + personName + ' decided not to go to ' + place + ' again.'
 print(story)
 
+print('------------------------------------------------------------')	#60個
 
 age = 70
 if 18 <= age <= 59:
@@ -400,6 +359,8 @@ elif 60 <= age:
 	print('票價為1000元')
 else:
 	print('無法賣出電影票')
+
+print('------------------------------------------------------------')	#60個
 
 pointcard = True
 count = 5
@@ -427,7 +388,20 @@ while True:
 	if power == 0:
 		break
 
+print('------------------------------------------------------------')	#60個
 
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 
 
 

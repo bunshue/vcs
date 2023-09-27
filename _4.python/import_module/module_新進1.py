@@ -185,7 +185,79 @@ print(locale.getpreferredencoding())
 
 print('------------------------------------------------------------')	#60個
 
+import cmath
 
+def complex_math():
+    a = complex(2, 4)
+    b = 3 - 5j
+    print(a.conjugate())
+
+    # 正弦 余弦 平方根等
+    print(cmath.sin(a))
+    print(cmath.cos(a))
+    print(cmath.sqrt(a))
+
+complex_math()
+
+
+print('------------------------------------------------------------')	#60個
+
+"""
+分数运算
+
+"""
+from fractions import Fraction
+
+def frac():
+    a = Fraction(5, 4)
+    b = Fraction(7, 16)
+    print(print(a + b))
+    print(a.numerator, a.denominator)
+
+    c = a + b
+    print(float(c))
+    print(type(c.limit_denominator(8)))
+    print(c.limit_denominator(8))
+
+frac()
+
+
+print('------------------------------------------------------------')	#60個
+
+"""
+排序字典
+"""
+from collections import OrderedDict
+
+d = OrderedDict()
+d['foo'] = 1
+d['bar'] = 2
+d['spam'] = 3
+d['grok'] = 4
+# Outputs "foo 1", "bar 2", "spam 3", "grok 4"
+for key in d:
+    print(key, d[key])
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+def bin_octal():
+    x = 65535
+    print(type(bin(x)))
+    print(bin(x), oct(x), hex(x))
+
+    # format() function
+    print(format(x, 'b'))
+    print(format(x, 'o'))
+    print(format(x, 'x'))
+
+    print(int('ffff', 16))
+    print(int('10011010010', 2))
+
+
+bin_octal()
 
 
 print('------------------------------------------------------------')	#60個
@@ -194,6 +266,13 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個

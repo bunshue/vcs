@@ -1,6 +1,8 @@
 from moviepy.editor import *
 
-vsr = VideoFileClip('holo1.mp4')
+filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
+vsr = VideoFileClip(filename)
 vsr.preview()
 
 

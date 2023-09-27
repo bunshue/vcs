@@ -14,64 +14,6 @@ import matplotlib
 
 print('------------------------------------------------------------')	#60個
 
-A = np.mat(np.random.rand(3,3))
-
-B=A.I
-
-print(B*A)
-print(A*B)
-print(B)
-
-import numpy as np
-print('建立 4 X 4 的 陣列')
-A=np.random.rand(4,4)
-
-print('建立 4 X 4 的 矩陣')
-B = np.mat(np.random.rand(4,4))
-
-print('建立 3 X 3 的 矩陣')
-B=np.mat('1 2 3; 4 5 6; 7 8 9')
-
-print('矩陣 與 轉置矩陣')
-A = np.mat('1 2 3; 4 5 6; 7 8 9')
-
-A * A.T
-
-#矩阵基本运算
-
-A = np.mat('1 2 3; 4 5 6; 7 8 9')
-B = np.mat(' 4 5 6; 7 8 9; 10 11 12')
-
-A+B
-A * B
-B * A
-A * 10
-
-c = np.mat(np.random.rand(4,4))
-
-print(c)
-print(c.I)
-d = c.I
-
-c*d
-
-d * c
-
-np.linalg.matrix_rank(A)
-
-np.linalg.det(A)
-
-print(A)
-#print(A.I)
-#A.I
-#d = A.I
-#A*d
-
-#d * A
-
-
-print('------------------------------------------------------------')	#60個
-
 import numpy as np
 import pandas as pd
 import random

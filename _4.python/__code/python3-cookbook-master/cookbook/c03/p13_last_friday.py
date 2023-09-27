@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 最后的周五
 Desc : 

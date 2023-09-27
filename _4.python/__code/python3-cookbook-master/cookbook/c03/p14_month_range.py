@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
-Topic: 计算当前月份的日期范围
-Desc : 
+计算当前月份的日期范围
 """
 from datetime import datetime, date, timedelta
 import calendar

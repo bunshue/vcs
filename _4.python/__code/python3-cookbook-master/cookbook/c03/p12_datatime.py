@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 日期时间转换
-Desc : 
 """
 from datetime import timedelta
 from datetime import datetime

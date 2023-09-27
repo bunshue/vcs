@@ -1,5 +1,6 @@
 #傑卡德相似係數 Jaccard Similarity Coefficient
 
+import sys
 import numpy as np
 import scipy.spatial.distance as dist
 
@@ -9,7 +10,8 @@ mat3 = [1,1,0,1,0,1,0,0,1]  #the same as mat1
 mat4 = [0,0,1,0,1,0,1,1,0]  #invert of mat1
 
 matV = np.mat([mat1,mat4])
-
+print(type(matV))
+print(matV)
 print('dist.jaccard : ')
 print(dist.pdist(matV, 'jaccard'))
 

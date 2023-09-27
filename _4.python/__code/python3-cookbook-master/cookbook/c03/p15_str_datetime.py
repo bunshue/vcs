@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 字符串转换为datetime
-Desc : 
 """
 from datetime import datetime
 

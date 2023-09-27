@@ -1,13 +1,6 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-"""
-Topic: 精确的浮点数运算
-Desc : 
-"""
 from decimal import Decimal
 from decimal import localcontext
 import math
-
 
 def acc_deciamal():
     a = 4.2

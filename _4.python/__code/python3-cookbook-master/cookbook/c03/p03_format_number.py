@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-"""
-Topic: 格式化输出数字
-Desc : 
-"""
-
-
 def format_number():
     x = 1234.56789
     # Two decimal places of accuracy

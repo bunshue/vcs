@@ -1,11 +1,8 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: collections.deque演示
 Desc : deque有一个maxlen参数，当append的时候，如果超过，那么最前面的就被挤出队列。
 """
 from collections import deque
-
 
 def search(lines, pattern, history=5):
     previous_lines = deque(maxlen=history)

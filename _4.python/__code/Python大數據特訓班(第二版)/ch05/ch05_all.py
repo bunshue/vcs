@@ -88,8 +88,6 @@ print(na[:, 2])			#[3,7,11,15]
 print(na[1, :])			#[5,6,7,8]
 print(na[:, :])			#矩陣全部
 
-
-
 # nprandom.py
 import numpy as np
 print('1.產生2x3 0~1之間的隨機浮點數\n',
