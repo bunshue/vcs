@@ -9,6 +9,7 @@ filename2 = 'C:/_git/vcs/_1.data/______test_files2/orient2_RightTopffff.jpg'
 
 from PIL import Image
 from PIL import Image, ImageFilter
+import matplotlib.pyplot as plt
 
 image = Image.open(filename1)    #讀取的是RGB格式的圖片
 
@@ -69,12 +70,16 @@ dic_exif = {
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg'
 
-print('Processing img {}......'.format(filename))
-img = Image.open(filename)
+print('Processing image {}......'.format(filename))
+image = Image.open(filename)
+
+plt.imshow(image)
+plt.show()
+
 try:
     exif = {
         ExifTags.TAGS[k]: v
-        for k, v in img._getexif().items()
+        for k, v in image._getexif().items()
         if k in ExifTags.TAGS
         }
 except:
@@ -98,9 +103,13 @@ else:
     
 degree = dic_exif[exif['Orientation']]
 # 圖片選轉 ， expand 要設定 (不然旋轉後會有黑邊)
-img_clip = img.rotate(degree, expand = 1)
+image_rotated = image.rotate(degree, expand = 1)
 filename2 = 'cccc.jpg'
-img_clip.save(filename2, 'JPEG')
+#image_rotated.save(filename2, 'JPEG')
+
+plt.imshow(image_rotated)
+plt.show()
+
 
 
 print('------------------------------------------------------------')	#60個

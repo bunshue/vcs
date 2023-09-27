@@ -352,38 +352,6 @@ for i in range(3):
 
 print('------------------------------------------------------------')	#60個
 
-import pandas as pd
-import numpy as np
-
-my_array = np.arange(10)  # [0 1 2 3 4]
-
-print('原list')
-print(my_array)
-
-print('shuffle list')
-np.random.shuffle(my_array)
-print(my_array)
-
-print('shuffle list')
-np.random.shuffle(my_array)
-print(my_array)
-
-print('shuffle list')
-np.random.shuffle(my_array)
-print(my_array)
-
-sum_my_array = sum(my_array)
-print('和')
-print(sum_my_array)
-
-"""index = []
-ran = random.sample(range(0, 10),2)
-for i in ran:
-    index.append(i)
-index.sort()
-"""
-print('------------------------------------------------------------')	#60個
-
 #發牌遊戲
 
 # Create a deck of cards
@@ -463,30 +431,6 @@ print(boundary)
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-"""
-
-
-#由一個平均為0，變異數為1的高斯分布中隨機取點，並以list儲存。
-np.random.randn(size)
-#由low到high中產生一個size大小的list。 dtype，一般來說我們不會動到
-np.random.randint(low, high, size, dtype='l')
-
-print(np.random.randn(6))
-#output:[ 1.3265288  -0.15050998 -0.59429709  0.6356734  -0.89041176  0.2790698]
-print(np.random.randn(2,3))
-#output:[[-0.51469048 -0.82356942  0.80310762]
-#        [ 0.21914897 -0.04437828 -0.41106366]]
-print(np.random.randint(1,10,6))
-#output: [[4 6 7],[4 2 9]]
-
-
-"""
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -583,7 +527,153 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+print('---- 用 numpy 做的 random --------------------------------------------------------')	#60個
+
+import pandas as pd
+import numpy as np
+
+my_array = np.arange(10)  # [0 1 2 3 4]
+
+print('原list')
+print(my_array)
+
+print('shuffle list')
+np.random.shuffle(my_array)
+print(my_array)
+
+print('shuffle list')
+np.random.shuffle(my_array)
+print(my_array)
+
+print('shuffle list')
+np.random.shuffle(my_array)
+print(my_array)
+
+sum_my_array = sum(my_array)
+print('和')
+print(sum_my_array)
+
+"""index = []
+ran = random.sample(range(0, 10),2)
+for i in ran:
+    index.append(i)
+index.sort()
+"""
 print('------------------------------------------------------------')	#60個
 
 
+
+import numpy as np
+
+print("回傳值是10(含)至20(不含)的單一隨機數")
+x1 = np.random.randint(10, 20)
+print(x1)
+
+print("回傳一維陣列10個元素, 值是1(含)至5(不含)的隨機數")
+x2 = np.random.randint(1, 5, 10)
+print(x2)
+
+print("回傳單3*5陣列, 值是0(含)至10(不含)的隨機數")
+x3 = np.random.randint(10, size=(3, 5))     
+print(x3)
+
+
+
+A = np.random.rand(50)
+
+mydata = np.random.randn(4,3)
+df3 = pd.DataFrame(np.random.randn(3,3), columns=list("ABC"))
+
+
+"""
+
+插播一下, 平常我們要從一個平均值是 0, 標準差是 1 的常態分布中, 隨機取幾個數出來似乎有點困難。但我們打開封印後, 這件事很簡單!
+
+我們可以取整數亂數
+
+np.random.randint(a,b)
+樣取出的數字 k 會介於:
+a <= k < b
+
+k = np.random.randint(1,101)
+1~100
+
+
+
+
+
+#由一個平均為0，變異數為1的高斯分布中隨機取點，並以list儲存。
+np.random.randn(size)
+#由low到high中產生一個size大小的list。 dtype，一般來說我們不會動到
+np.random.randint(low, high, size, dtype='l')
+
+print(np.random.randn(6))
+#output:[ 1.3265288  -0.15050998 -0.59429709  0.6356734  -0.89041176  0.2790698]
+print(np.random.randn(2,3))
+#output:[[-0.51469048 -0.82356942  0.80310762]
+#        [ 0.21914897 -0.04437828 -0.41106366]]
+print(np.random.randint(1,10,6))
+#output: [[4 6 7],[4 2 9]]
+
+
+"""
+
+
+print('---- 新進 --------------------------------------------------------')	#60個
+
+
+import random                       # 導入模組random
+
+num = []
+for i in range(600):
+    num.append(random.choice([1,2,3,4,5,6]))
+    
+numCount = {i:num.count(i) for i in num}
+for num in sorted(numCount.keys()):
+    print(num, ':', numCount[num])
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+for i in range(10):
+    #time.sleep(random.randint(0,2))
+    print(random.randint(0,2))
+
+
+
+print('------------------------------------------------------------')	#60個
+
+import random
+for i in range(10):
+    print(random.uniform(1,100), " ", end="")
+
+print()
+
+print('------------------------------------------------------------')	#60個
+
+import random 
+lst = [random.randint(1,100) for i in range(100)]
+print(lst)
+print("Average of the list is", sum(lst)/float(len(lst)))
+
+print('------------------------------------------------------------')	#60個
+
+import random
+fruit = ['Apple', 'Cherry', 'Banana', 'Strawberry']
+print("Before:", fruit)
+random.shuffle(fruit)
+print("After:", fruit)
+print("Today's lucky fruit is:", random.choice(fruit))
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 
