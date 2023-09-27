@@ -1,6 +1,6 @@
 
 
-
+import sys
 
 print('------------------------------------------------------------')	#60個
 
@@ -36,7 +36,8 @@ print(tainan)
 
 print('------------------------------------------------------------')	#60個
 
-"""
+import pandas as pd
+
 import xlrd
 
 #pd.read_excel kilo可用  sugar不可用
@@ -125,9 +126,6 @@ tainan = target.loc['臺南市'][['姓名','得票數']]
 tainan = tainan.set_index(['姓名'])
 tainan.plot.pie(y='得票數')
 tainan.plot.bar()
-"""
-
-
 
 print('------------------------------------------------------------')	#60個
 

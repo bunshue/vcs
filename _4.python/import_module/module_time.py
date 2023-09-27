@@ -17,12 +17,12 @@ import datetime
 
 print('---- time.sleep(秒) --------------------------------------------------------')	#60個
 
-print("每0.3秒打印一字")
+print("每0.3456秒打印一字")
 a = 0;
 while a < 3:
     a += 1;
     print("hello " + str(a))
-    time.sleep(0.3)
+    time.sleep(0.3456)  #過了一段時間
 
 print('------------------------------------------------------------')	#60個
 
@@ -30,7 +30,7 @@ def countdown(n):
     while n > 0:
         print('數字 : ', n)
         n -= 1
-        time.sleep(0.3)
+        time.sleep(0.3456)  #過了一段時間
 
 print("倒數計時")
 countdown(5)
@@ -184,7 +184,6 @@ print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 # 格式化成Sat Mar 28 22:24:24 2016形式
 print (time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
-
 # 格式化為 2020-09-26 21:14:30
 print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
@@ -193,6 +192,27 @@ print(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
 localtime = time.strftime("%Y/%m/%d %A %H:%M:%S", time.localtime(time.time()))
 print('現在時間 :' + localtime)
+
+
+print('------------------------------------------------------------')	#60個
+
+print(time.strftime("%Y-%m-%d %H:%M:%S %a"))
+
+timestamp = time.strftime('%Y-%m-%d %H:%M%z')
+print(timestamp)
+
+print('------------------------------------------------------------')	#60個
+
+#獲取當前時間
+localtime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+print('當前時間 :', localtime)
+
+
+
+
+
+
+
 
 # 字串轉換為時間
 def strTodatetime(datestr, format):
@@ -223,7 +243,14 @@ print('---- strftime() 可以將時間格式化 --------------------------------
 
 print('------------------------------------------------------------')	#60個
 
+print('------------------------------------------------------------')	#60個
+
+
+
+print('---- now() --------------------------------------------------------')	#60個
+
 now = datetime.datetime.now()
+
 print('現在的日期時間 :', now)
 
 year = now.strftime("%Y")
@@ -244,37 +271,24 @@ print("年月日時分秒 :", date_time)
 filename = now.strftime("news-%y-%m-%d %H-%M-%S.json")
 print(filename)
 
-print('------------------------------------------------------------')	#60個
 
 
 
-print('---- new --------------------------------------------------------')	#60個
-
-now = datetime.datetime.now()
 string = ("%d" % now.year)
 print(string)
 
 datetime_format = '%Y/%m/%d %H:%M:%S'
 
-now = datetime.datetime.now()
 current_time = 'DateTime_{:{}}'.format(now, datetime_format)
 print(current_time)
 
-print('------------------------------------------------------------')	#60個
 
-timestamp = time.strftime('%Y-%m-%d %H:%M%z')
-print(timestamp)
 
 print('------------------------------------------------------------')	#60個
+
 
 filename = '-%04d-%02d-%02d' % (time.localtime()[:3]) + '.jpg'
 print(filename)
-
-print('------------------------------------------------------------')	#60個
-
-#獲取當前時間
-localtime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
-print('當前時間 :', localtime)
 
 print('------------------------------------------------------------')	#60個
 
@@ -304,7 +318,6 @@ datetime(2016, 7, 20, 15, 45),
 "timestamp": "2016-07-20 15:45",
 
 
-
 "timestamp": self.event.timestamp.strftime("%Y-%m-%d %H:%M"),
 
 #timestamp = time.strftime('%Y-%m-%d %H:%M+%Z')
@@ -331,18 +344,13 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-import time
 
-print(time.localtime())
-year, month, day, hour, minute, second, _, _, _ = time.localtime()
-print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
-print(time.strftime("%Y-%m-%d %H:%M:%S %a"))
+
 
 print('------------------------------------------------------------')	#60個
 
 import datetime
 
-print('現在的日期時間 :', datetime.datetime.now())
 print('現在的日期時間 :', datetime.datetime.today())
 print('現在的日期 :', datetime.date.today())
 
@@ -448,7 +456,7 @@ print('---- timediff --------------------------------------------------------')	
 #執行時間： 
 datetime_st = datetime.datetime.now()
 
-#do something
+time.sleep(0.3456)  #過了一段時間
 
 datetime_sp = datetime.datetime.now()
 
@@ -482,12 +490,9 @@ print("兩者時間差" , a - b)
 a = datetime.datetime(2006, 3, 11, 9, 15, 30)
 b = datetime.datetime.now()
 
-print('aaa', a)
-print('bbb', b)
-
-#d = datetime.datetime.now()
-#print("現在時間" , d)
-#print("過去時間" , a)
+print("過去時間" , a)
+print("現在時間" , b)
+print("兩者時間差" , b - a)
 
 print('------------------------------------------------------------')	#60個
 
@@ -720,9 +725,6 @@ print("昨天的時間：", yesterday)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
 #計算當前時間向後10天的時間。
 # 如果是小時 days 換成 hours
 d1 = datetime.datetime.now()
@@ -733,19 +735,14 @@ print(d3.ctime())
 #time.ctime([ sec ])
 print("time.ctime() : %s" % time.ctime())
 
-
-
-
-
-
+print('------------------------------------------------------------')	#60個
 
 '''
 print(time.strptime(date, '%Y-%m-%d'))
 print(time.strptime(time_, '%H:%M:%S'))
 '''
 
-
-
+print('------------------------------------------------------------')	#60個
 
 
 #>>> from time import gmtime, strftime
@@ -758,7 +755,7 @@ print(ttt)
 #'Thu, 28 Jun 2001 14:17:15 +0000'
 
 
-
+print('------------------------------------------------------------')	#60個
 
 ddd = time.strptime("30 Nov 00", "%d %b %y")
 print(ddd)
@@ -768,13 +765,14 @@ time.struct_time(tm_year=2000, tm_mon=11, tm_mday=30, tm_hour=0, tm_min=0,
                  tm_sec=0, tm_wday=3, tm_yday=335, tm_isdst=-1)
 '''
 
+print('------------------------------------------------------------')	#60個
 
 '''
 print('量測時間 ST') 
 # Start the stopwatch / counter
 t1_start = time.perf_counter()
  
-time.sleep(1.2345)   # 暫停 1.2345 秒
+time.sleep(0.3456)  #過了一段時間
  
 # Stop the stopwatch / counter
 t1_stop = time.perf_counter()
@@ -789,7 +787,7 @@ print('量測時間 ST')
 # Start the stopwatch / counter
 t1_start = time.perf_counter_ns()
 
-time.sleep(1.2345)   # 暫停 1.2345 秒 
+time.sleep(0.3456)  #過了一段時間
  
 # Stop the stopwatch / counter
 t1_stop = time.perf_counter_ns()
@@ -801,14 +799,14 @@ print(t1_stop - t1_start, 'ns')
 
 start = time.time()
 
-time.sleep(0.12345)
+time.sleep(0.3456)  #過了一段時間
 
 stop = time.time()
 
 print(stop - start)
 '''
 
-
+print('------------------------------------------------------------')	#60個
 
 import sys, os, time, difflib, argparse
 from datetime import datetime, timezone
@@ -820,12 +818,13 @@ print(t1)
 t2 = t1.astimezone().isoformat()
 print(t2)
 
-
+print('------------------------------------------------------------')	#60個
 
 import datetime
 seconds = datetime.datetime(2004, 10, 26, 10, 33, 33, tzinfo = datetime.timezone(datetime.timedelta(0))).timestamp()
 print(seconds)
 
+print('------------------------------------------------------------')	#60個
 
 import time
 print('存檔紀念')
@@ -835,4 +834,22 @@ fp.write("# BUILD INFO\n")
 fp.write("# Date: %s\n" % time.ctime())
 fp.close()
 
+print('------------------------------------------------------------')	#60個
 
+
+print(time.localtime())
+year, month, day, hour, minute, second, _, _, _ = time.localtime()
+print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個

@@ -591,8 +591,7 @@ def get_html_data1(url):
 
 print('#抓中央氣象局的衛星雲圖')
 
-
-url = 'https://www.cwb.gov.tw/V8/C/W/OBS_Sat.html'
+url = 'https://www.cwa.gov.tw/V8/C/W/OBS_Sat.html'
 
 #TBD
 

@@ -4,7 +4,7 @@ def createDF():
     colspans = []  #存colspan數值
     dates = []  #存日期
     days = []  #存星期幾
-    url = 'https://www.cwb.gov.tw/V8/C/W/Town/Town.html?TID=1000403'
+    url = 'https://www.cwa.gov.tw/V8/C/W/Town/Town.html?TID=1000403'
     html_data = requests.get(url)
     html_data.encoding = 'utf-8'
     
@@ -129,7 +129,7 @@ import pymysql
 
 global df
 columns = ['日期時間','星期','天氣狀況','溫度','體感溫度','蒲福風級','風向','相對溼度','降雨機率','舒適度']  #欄位名稱
-df = pandas.DataFrame(columns=columns)  #建立DataFrame
+df = pandas.DataFrame(columns = columns)  #建立DataFrame
 createDF()  #擷取天氣資料
 #writeMySql()  #寫入MySql資料庫
     

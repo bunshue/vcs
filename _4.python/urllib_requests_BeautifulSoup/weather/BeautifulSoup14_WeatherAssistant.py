@@ -1,38 +1,40 @@
 # 天氣小助理
 
+# 中央氣象署 Central Weather Administration
+
 import requests
 import json
 
-def get_cwb_key():
-    filename = 'C:/_git/vcs/_1.data/______test_files1/_key/cwb_key.txt'
+def get_cwa_key():
+    filename = 'C:/_git/vcs/_1.data/______test_files1/_key/cwa_key.txt'
 
     import os
     filename = os.path.abspath(filename)
     if not os.path.exists(filename): #檢查檔案是否存在
-        print('CWB_KEY 檔案不存在, 離開, 檔案 : ' + filename)
+        print('CWA_KEY 檔案不存在, 離開, 檔案 : ' + filename)
         return ""
 
     print("讀取檔案 : " + filename)
     fo = open(filename, 'r')
-    cwb_key = fo.read()
+    cwa_key = fo.read()
     fo.close()
 
-    length = len(cwb_key)
+    length = len(cwa_key)
     if length != 40:
-        print('CWB_KEY 錯誤, 離開')
+        print('CWA_KEY 錯誤, 離開')
         return ""
-    return cwb_key
+    return cwa_key
 
 def get_data():
-    cwb_key = get_cwb_key()
-    length = len(cwb_key)
+    cwa_key = get_cwa_key()
+    length = len(cwa_key)
     if length != 40:
-        print('CWB_KEY 錯誤, 離開')
+        print('CWA_KEY 錯誤, 離開')
         return ""
 
-    url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001"
+    url = "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001"
     params = {
-        "Authorization": cwb_key,
+        "Authorization": cwa_key,
         "locationName": "新竹市",
     }
 

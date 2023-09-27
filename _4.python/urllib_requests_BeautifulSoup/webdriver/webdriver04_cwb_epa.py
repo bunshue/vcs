@@ -2,6 +2,7 @@ print('抓 中央氣象局/環保署 資料')
 print('------------------------------------------------------------')	#60個
 print('準備工作')
 
+import sys
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -17,7 +18,7 @@ driver.maximize_window()    #全螢幕顯示
 print('------------------------------------------------------------')	#60個
 print('抓中央氣象局資料')
 
-url = 'https://www.cwb.gov.tw/V8/C/W/OBS_County.html?ID=menu'
+url = 'https://www.cwa.gov.tw/V8/C/W/OBS_County.html?ID=menu'
 
 driver.get(url)
 time.sleep(1)
@@ -37,6 +38,7 @@ print(counties)
 for c in counties:
     print(c)
 
+sys.exit()
 print('------------------------------------------------------------')	#60個
 
 print('抓環保署資料')
