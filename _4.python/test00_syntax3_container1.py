@@ -38,7 +38,7 @@ Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的
 """
 
 
-
+'''
 
 a_dict = {}
 print(type(a_dict))
@@ -863,13 +863,13 @@ s = list("3874950382")
 
 #print(sum(map(int, s)))    fail in kilo
 
-'''
+"""
 numbers = list()
 
 for c in s:
     numbers.append(int(c))
 #print(sum(numbers))    fail in kilo
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -1214,29 +1214,6 @@ print("%d 小時" % data[1])
 
 print('------------------------------------------------------------')	#60個
 
-fields = ['台北', '台中', '高雄']
-info = [80000, 50000, 60000]
-zipData = zip(fields, info)                 # 執行zip
-print('zipData資料類型', type(zipData))     # 列印zip資料類型
-player = list(zipData)                      # 將zip資料轉成串列
-print('player 資料類型', type(player))      # 列印player資料類型
-print(player)                               # 列印串列
-
-print('player0 資料類型', type(player[0]))      # 列印player資料類型
-print('player1 資料類型', type(player[1]))      # 列印player資料類型
-print('player2 資料類型', type(player[2]))      # 列印player資料類型
-
-print('------------------------------------------------------------')	#60個
-
-fields = ['台北', '台中', '高雄']
-info = [80000, 50000, 60000]
-zipData = zip(fields, info)                 # 執行zip
-sold_info = list(zipData)                   # 將zip資料轉成串列
-for city, sales in sold_info:
-    print('{} 銷售金額是 {}'.format(city, sales))
-
-print('------------------------------------------------------------')	#60個
-
 print('建立一個 元組')
 animal_tuple1 = ('鼠', '牛', '虎', '兔', '龍')
 print(animal_tuple1)
@@ -1436,15 +1413,6 @@ for bar in map(lambda n: "*"*n, s):
 
 print('------------------------------------------------------------')	#60個
 
-b = list('子丑寅卯辰巳午未申酉戌亥')
-c = list('鼠牛虎兔龍蛇馬羊猴雞狗豬')
-print(zip(b,c))
-for item in zip(b, c):
-    print(item)
-print([item for item in zip(b, c)])
-
-print('------------------------------------------------------------')	#60個
-
 a = list('甲乙丙丁戊己庚辛壬癸')
 b = list('子丑寅卯辰巳午未申酉戌亥')
 for i in a:
@@ -1469,11 +1437,6 @@ for i in range(60):
 print(years)
 
 print('------------------------------------------------------------')	#60個
-
-a = list('甲乙丙丁戊己庚辛壬癸'*6)
-b = list('子丑寅卯辰巳午未申酉戌亥'*5)
-years = list(zip(a, b))
-print(years)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1541,30 +1504,13 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+'''
+
+print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-#set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
-
-cities = { 'Taipei', 'Beijing', 'Tokyo'}
-print(type(cities))
-print(cities)
-# 增加一般元素
-cities.add('Chicago')
-print('cities集合內容 ', cities)
-# 增加已有元素並觀察執行結果
-cities.add('Beijing')
-print('cities集合內容 ', cities)
-
-print(type(cities))
-
-A = {n for n in range(1,20,2)}
-print(type(A))
-print(A)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1608,7 +1554,7 @@ SelectionSort.selectionSort(lst)
 使用 extend() 將兩個List合併在一起，就像字串的Concatenation。
 """
 
-
+print('------------------------------------------------------------')	#60個
 
 
 #設定一個二維串列
@@ -1633,13 +1579,7 @@ money = [[41.36, 28.96, 3.77, 8.45],
 [12.78, 3.75, 3.54, 0.55]]
 print(type(money))
 
-#設定一個一維串列
-games = ['Wii Sports', 'Super Mario Bros', 'Mario Kart Wii', 'Wii Sports Resort',
-        'Pokemon Red/Pokemon Blue', 'Tetris', 'New Super Mario Bros', 'Wii Play', 
-        'New Super Mario Bros Wii', 'Duck Hunt', 'Nintendogs', 'Mario Kart DS',
-        'Pokemon Gold/Pokemon Silver', 'Wii Fit', 'Kinect Adventures!', 'Wii Fit Plus',
-        'Gramd Theft Auto V', 'Grand Theft Auto: San Andreas','Super Mario World' ]
-print(type(games))
+print('------------------------------------------------------------')	#60個
 
 print('List的用法')
 list1 = []
@@ -1657,24 +1597,92 @@ print('總和：%d' % sum(list1))
 print('由大到小排序為：{}'.format(sorted(list1, reverse = True)))
 
 
+print('------------------------------------------------------------')	#60個
+
+animals = ['鼠', '牛', '虎', '兔']
+print(type(animals))
+print(animals)
+for animal in animals:
+    print('找到動物 ' + animal)
+
+print('------------------------------------------------------------')	#60個
+
+#set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
+
+animals = { '鼠', '牛', '虎'}
+print(type(animals))
+print(animals)
+# 增加一般元素
+animals.add('兔')
+print('animals集合內容 ', animals)
+# 增加已有元素並觀察執行結果
+animals.add('牛')
+print('animals集合內容 ', animals)
+
+print(type(animals))
+
+print('------------------------------------------------------------')	#60個
+
+print('數字集合')
+A = {n for n in range(1,20,2)}
+print(type(A))
+print(A)
+
+print('------------------------------------------------------------')	#60個
 
 
-music_list = ['DEATH METAL', 'ROCK', 'ANIME', 'POP']
-print(type(music_list))
-print(music_list)
-for music in music_list:
-	print('now playing... ' + music)
-
-family = ['ryo-ko', 'mako', 'satsuki']
-print(type(family))
-print(family)
-for kid in family:
-	print('早安！' + kid)
-	print('起床')
-	print('吃早餐')
-	continue
-	print('出門上學')
 
 
+
+print('---- zip() --------------------------------------------------------')	#60個
+
+animals = ['鼠', '牛', '虎']   #list
+weights = [3, 48, 33]   #list
+#把兩個[串列] zip 起來
+zipData = zip(animals, weights)                 # 執行zip
+print('zipData資料類型', type(zipData))     # 列印zip資料類型
+animal_list = list(zipData)                      # 將zip資料轉成串列
+print('animal_list 資料類型', type(animal_list))      # 列印animal_list資料類型
+print(animal_list)                               # 列印串列
+
+print('animal_list[0] 資料類型', type(animal_list[0]))      # 列印animal_list資料類型
+print('animal_list[1] 資料類型', type(animal_list[1]))      # 列印animal_list資料類型
+print('animal_list[2] 資料類型', type(animal_list[2]))      # 列印animal_list資料類型
+
+for name, weight in animal_list:
+    print('{} 的體重是 {}'.format(name, weight))
+
+
+print('------------------------------------------------------------')	#60個
+
+b = list('子丑寅卯辰巳午未申酉戌亥')    #list
+c = list('鼠牛虎兔龍蛇馬羊猴雞狗豬')    #list
+
+#把兩個[串列] zip 起來
+zipData = zip(b, c)                 # 執行zip
+
+print(zipData)
+for item in zipData:
+    print(item)
+
+print([item for item in zip(b, c)])
+
+print('------------------------------------------------------------')	#60個
+
+a = list('甲乙丙丁戊己庚辛壬癸'*6)
+b = list('子丑寅卯辰巳午未申酉戌亥'*5)
+years = list(zip(a, b))
+print(type(years))
+print(len(years))
+print(years)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 
 

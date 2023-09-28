@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import matplotlib as mpl
 
+
 x = np.array([i*np.pi/180 for i in range(60,300,4)])
 np.random.seed(10)  #Setting seed for reproducability
 y = np.sin(x) + np.random.normal(0,0.15,len(x))
@@ -165,7 +166,7 @@ coef_matrix_ridge.apply(lambda x: sum(x.values==0),axis=1)
 
 print('------------------------------------------------------------')	#60個
 
-''' fail
+""" fail
 #L1 Regulariztion Lass Regression
 
 from sklearn.linear_model import Lasso
@@ -224,7 +225,7 @@ print(tt)
 
 coef_matrix_lasso.apply(lambda x: sum(x.values==0),axis=1)
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -310,7 +311,7 @@ print('------------------------------------------------------------')	#60個
 
 
 
-'''
+"""
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from IPython.core.pylabtools import figsize
@@ -402,7 +403,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 from sklearn.feature_extraction.text import  CountVectorizer
 from sklearn.preprocessing import Normalizer
 from sklearn.decomposition import TruncatedSVD
@@ -471,7 +472,7 @@ print('------------------------------------------------------------')	#60個
 
 #from __future__ import print_function
 
-'''
+"""
 import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -500,7 +501,7 @@ res = st.probplot(train['SalePrice'], plot=plt)
 
 plt.show()
 
-'''
+"""
 
 
 y = train['SalePrice']
@@ -536,7 +537,7 @@ res = st.probplot(train['SalePrice'], plot=plt)
 
 plt.show()
 
-'''
+"""
 print('------------------------------------------------------------')	#60個
 
 #把房价做对数变换后再看
@@ -553,7 +554,8 @@ res = st.probplot(SalePrice_log, plot=plt)
 print(res)
 
 plt.show()
-'''
+"""
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -598,6 +600,8 @@ print(tt)
 plt.hist(data)
 
 plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

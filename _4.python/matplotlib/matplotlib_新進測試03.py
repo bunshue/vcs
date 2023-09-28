@@ -57,3 +57,115 @@ print('------------------------------------------------------------')	#60個
 
 
 
+'''
+print('------------------------------------------------------------')	#60個
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+import numpy as np
+
+data = np.random.randn(200)
+np.mean(data)
+
+
+ax = plt.subplot()
+sns.distplot(data, kde=False, ax=ax)
+_ = ax.set(title='Histogram of observed data', xlabel='x', ylabel='# observations');
+
+
+plt.show()
+
+'''
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+import random
+import math
+import matplotlib.pyplot as plt
+
+X = []
+Y = []
+for i in range(1000):
+    theta = 2 * random.random() * math.pi
+    r= random.random() * 5
+    x=math.cos(theta)* r +5
+    y=math.sin(theta)* r + 5
+    X.append(x)
+    Y.append(y)
+
+
+
+
+plt.figure(figsize=(6,6))
+plt.scatter(X,Y)
+len(X)
+plt.axis([0, 10, 0, 10])
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+import random
+import math
+import matplotlib.pyplot as plt
+
+X = []
+Y = []
+for i in range(1000):
+    x=random.randint(0,10)+random.random()
+    y=random.randint(0,10)+random.random()
+    if ((x-5)**2 + (y-5)**2) >25:
+        #print('Reject ({0},{1})'.format(x,y))
+        continue
+    else :
+        X.append(x)
+        Y.append(y)
+print(len(X))        
+
+plt.figure(figsize=(6,6))
+plt.scatter(X,Y)
+print(len(X))
+plt.axis([0, 10, 0, 10])
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+

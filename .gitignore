@@ -1,0 +1,145 @@
+# Byte-compiled / optimized / DLL files
+
+# git 要忽略的檔案
+
+下載一次85分鐘20230503
+_4.python/sqlite/example.db
+_4.python/sqlite/ims_sql/匯出資料範例.csv
+_1.data/______test_files3/DrAP_test/*
+_1.data/______test_files2/*.*
+_1.data/______test_files4/*
+_1.data/______test_files4/*.*
+_1.data/______test_files5/*
+_1.data/______test_files5/*.*
+_4.python/sqlite/ims_sql/QC_debug/*
+_4.python/sqlite/ims_sql/QC_debug/*.*
+
+# C 相關產出之檔案
+*.so
+
+#vcs 相關產出之檔案
+*.suo
+
+_2.vcs/*/*/*/bin/*
+_2.vcs/*/*/*/obj/*
+
+# Python 相關產出之檔案
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.pyc
+__pycache__
+
+# python byte-code files
+*.pyc
+*.pyo
+
+# Spyder 相關設定與產出檔案
+.spyderproject
+.spyproject
+
+# Python 安裝包之產出檔案
+#build/
+#dist/
+.Python
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+#lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller 相關產出之檔案
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+#*.manifest
+#*.spec
+
+# 以下應該無用了
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# celery beat schedule file
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+

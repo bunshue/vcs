@@ -99,11 +99,8 @@ print('gcd(28, 56) = {}'.format(math.gcd(28, 63)))
 
 print('------------------------------------------------------------')	#60個
 
-
 #degrees(x) 將x由弧度轉角度
 #radians(x) 將x由角度轉弧度
-
-
 
 rad = np.arctan2(3, 4)  # 求角度（radian）
 th = np.degrees(rad)    # 轉成度數
@@ -116,19 +113,12 @@ th
 import math
 10 * math.cos(math.radians(60)) 
 
-
-
 # 計算角度
 rad = math.acos(3/5)
 deg = math.degrees(rad)
 print(deg)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
 
 print('------------------------------------------------------------')	#60個
 

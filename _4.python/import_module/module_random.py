@@ -532,6 +532,89 @@ print('---- 用 numpy 做的 random --------------------------------------------
 import pandas as pd
 import numpy as np
 
+print('------------------------------------------------------------')	#60個
+
+print('亂數')
+r = np.random.rand(3, 3)      # 建立一個 3x3 隨機矩陣
+print(r)
+
+print('亂數')
+r = np.random.rand(10)
+print(r)
+
+print('最大值 : ', np.max(r))
+print('最小值 : ', np.min(r))
+print('平均值 : ', np.mean(r))
+print('中間值 : ', np.median(r))
+
+print('------------------------------------------------------------')	#60個
+
+
+print('1.產生2x3 0~1之間的隨機浮點數\n', np.random.rand(2,3))
+print('2.產生2x3常態分佈的隨機浮點數\n', np.random.randn(2,3))
+print('3.產生0~4(不含5)隨機整數\n', np.random.randint(5))
+print('4.產生2~4(不含5)5個隨機整數\n', np.random.randint(2,5,[5]))
+print('5.產生3個 0~1之間的隨機浮點數\n',
+      np.random.random(3),'\n',
+      np.random.random_sample(3),'\n',
+      np.random.sample(3))
+print('6.產生0~4(不含5)2x3的隨機整數\n', np.random.choice(5,[2,3]))
+print('7.產生0~42(不含43)6個不重複的隨機整數\n', np.random.choice(43,6,replace=False))
+
+print('------------------------------------------------------------')	#60個
+
+a = np.random.randint(100,size=50)
+print('陣列的內容：', a)
+print('1.標準差：', np.std(a))
+print('2.變異數：', np.var(a))
+print('3.中位數：', np.median(a))
+print('4.百分比值：', np.percentile(a, 80))
+print('5.最大最小差值：', np.ptp(a))
+
+print('------------------------------------------------------------')	#60個
+
+a = np.random.choice(50, size=10, replace=False)
+print('排序前的陣列：', a)
+print('排序後的陣列：', np.sort(a))
+print('排序後的索引：', np.argsort(a))
+#用索引到陣列取值
+for i in np.argsort(a):
+    print(a[i], end=',')
+
+print('------------------------------------------------------------')	#60個
+
+a = np.random.randint(0,10,(3,5))
+print('原陣列內容：')
+print(a)
+print('將每一直行進行排序：')
+print(np.sort(a, axis=0))
+print('將每一橫列進行排序：')
+print(np.sort(a, axis=1))
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+a = np.random.rand(5)
+print(a)
+
+b = np.random.rand(3, 2)  
+print(b)
+
+print('------------------------------------------------------------')	#60個
+
+c = np.random.randint(5, 10, size=5)
+print(c)
+d = np.random.randint(5, 10, size=(2,3))
+print(d)
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
 my_array = np.arange(10)  # [0 1 2 3 4]
 
 print('原list')
