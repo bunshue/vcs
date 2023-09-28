@@ -3,7 +3,7 @@ import requests
 text = '台東天氣如何？'
 r = requests.get('https://westus.api.cognitive.microsoft.com/luis/prediction/v3.0/你的App ID/slots/production/predict?subscription-key=你的Key&verbose=true&show-all-intents=true&log=true&query=' + text)
 result = r.json()
-#print(result)
+print(result)
 city = ''
 try:
     if result["prediction"]['topIntent'] == '縣市天氣':

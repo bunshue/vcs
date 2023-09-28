@@ -1386,6 +1386,282 @@ print('------------------------------------------------------------')	#60個
 
 
 
+
+print('2 進位整數運算')
+x = 0b1101          # 這是2進位整數
+print(x)            # 列出10進位的結果
+y = 13              # 這是10進位整數
+print(bin(y))       # 列出轉換成2進位的結果
+print('8 進位整數運算')
+x = 0o57            # 這是8進位整數
+print(x)            # 列出10進位的結果
+y = 47              # 這是10進位整數
+print(oct(y))       # 列出轉換成8進位的結果
+print('16 進位整數運算')
+x = 0x5D            # 這是16進位整數
+print(x)            # 列出10進位的結果
+y = 93              # 這是10進位整數
+print(hex(y))       # 列出轉換成16進位的結果
+
+print('------------------------------------------------------------')	#60個
+
+x1 = "22"
+x2 = "33"
+x3 = x1 + x2
+print("type(x3) = ", type(x3))
+print("x3 = ", x3)             # 列印字串相加
+x4 = int(x1) + int(x2)
+print("type(x4) = ", type(x4))
+print("x4 = ", x4)             # 列印整數相加
+x5 = '1100'
+print("2進位  '1100' = ", int(x5,2))
+print("8進位  '22'   = ", int(x1,8))
+print("16進位 '22'   = ", int(x1,16))
+print("16進位 '5A'   = ", int('5A',16))
+
+print('------------------------------------------------------------')	#60個
+
+str1 = "Hello!\nPython"
+print("不含r字元的輸出")
+print(str1)
+str2 = r"Hello!\nPython"
+print("含r字元的輸出")
+print(str2)
+
+print('------------------------------------------------------------')	#60個
+
+x1 = 97
+x2 = chr(x1)      
+print(x2)               # 輸出數值97的字元
+x3 = ord(x2)
+print(x3)               # 輸出字元x3的Unicode(10進位)碼值
+x4 = '魁'
+print(hex(ord(x4)))     # 輸出字元'魁'的Unicode(16進位)碼值
+
+print('------------------------------------------------------------')	#60個
+
+x = 100
+print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
+
+print('------------------------------------------------------------')	#60個
+
+r = 5
+PI = 3.14159
+area = PI * r ** 2
+print("/半徑{0:3d}圓面積是{1:10.2f}/".format(r,area))
+print("/半徑{0:>3d}圓面積是{1:>10.2f}/".format(r,area))
+print("/半徑{0:<3d}圓面積是{1:<10.2f}/".format(r,area))
+print("/半徑{0:^3d}圓面積是{1:^10.2f}/".format(r,area))
+
+print('------------------------------------------------------------')	#60個
+
+r = 5
+PI = 3.14159
+area = PI * r ** 2
+print(f"/半徑{r:3d}圓面積是{area:10.2f}/")
+print(f"/半徑{r:>3d}圓面積是{area:>10.2f}/")
+print(f"/半徑{r:<3d}圓面積是{area:<10.2f}/")
+print(f"/半徑{r:^3d}圓面積是{area:^10.2f}/")
+
+print('------------------------------------------------------------')	#60個
+
+title = "南極旅遊講座"
+print("/{0:*^20s}/".format(title))
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+import copy, random, sys, time
+
+WIDTH = 16
+HEIGHT = 8
+
+nextCells = {}  #字典
+for x in range(WIDTH):
+    for y in range(HEIGHT):
+        if random.randint(0, 1) == 0:
+            nextCells[(x, y)] = 'Y'
+        else:
+            nextCells[(x, y)] = 'N'
+
+print(type(nextCells))
+print(nextCells)
+
+cells = copy.deepcopy(nextCells)
+
+print('顯示內容')
+for y in range(HEIGHT):
+    for x in range(WIDTH):
+        print(cells[(x, y)], end = '')
+    print()
+
+print('Press Ctrl-C to quit.')
+
+while True:
+    try:
+        time.sleep(1)
+        print('A', end = ' ')
+    except KeyboardInterrupt:
+        print('你按了 ctrl + C, 離開')
+        sys.exit()
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+import os
+import sys
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print('------------------------------------------------------------')	#60個
+
+
+print('---- os --------------------------------------------------------')	#60個
+
+import test
+packagedir = os.path.dirname(test.__file__)
+
+import email
+packagedir = os.path.dirname(email.__file__)
+print(packagedir)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
+
+
+print(sys.maxsize)
+print(2 ** 32)
+
+import stat
+
+print(os.name)
+print(os.sep)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print(os.getpid())
+
+
+
+import os
+
+def getuser():
+    for name in ('LOGNAME', 'USER', 'LNAME', 'USERNAME'):
+        print(name)
+        user = os.environ.get(name)
+        if user:
+            print(user)
+            return user
+
+print('get user name')
+ccc = getuser()
+print(ccc)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import os
+import sys
+m = sys.modules.get('__main__')
+
+print(m)
+
+
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+name = os.path.basename(filename)
+
+print(name)
+
+
+globs = {}
+globs = globs.copy()
+print(globs)
+
+print()
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+if filename.endswith(".jpg"):
+    # It is a module -- insert its dir into sys.path and try to
+    # import it. If it is part of a package, that possibly
+    # won't work because of package imports.
+    dirname, filename = os.path.split(filename)
+    print(filename[:-3])
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+print(filename)
+filename = os.path.normcase(filename)
+print(filename)
+
+
+
+
+
 print('------------------------------------------------------------')	#60個
 
 

@@ -127,6 +127,8 @@ import re
 import datetime
 import pymysql
 
+print('抓取中央氣象局網頁資料 用 BeautifulSoup 解讀')
+
 global df
 columns = ['日期時間','星期','天氣狀況','溫度','體感溫度','蒲福風級','風向','相對溼度','降雨機率','舒適度']  #欄位名稱
 df = pandas.DataFrame(columns = columns)  #建立DataFrame

@@ -1,10 +1,11 @@
 import os
-import shutil
 
 source_foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'   #來源資料夾
 target_foldername = 'my_tmp_dir' #輸出資料夾
 
 sample_tree = os.walk(source_foldername)
+
+import shutil
 
 for dirname,subdir,files in sample_tree:
    allfiles = []
@@ -37,4 +38,3 @@ for dirname,subdir,files in sample_tree:
          #shutil.copy(srcfile, destfile); # 複製檔案
      
 print("完成...")
-

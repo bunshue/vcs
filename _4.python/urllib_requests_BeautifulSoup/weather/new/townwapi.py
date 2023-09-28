@@ -1,13 +1,12 @@
-from flask import Flask
-app = Flask(__name__)
-
+import sys
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import os
 
-@app.route('/<town>')
-def index(town):
+def get_city_data(town1, town2):
+
+    print('aaa')
     # 檢查是否有鄉鎮市區代碼檔
     if not os.path.isfile('district.csv'):
         df = pd.read_excel('https://www.stat.gov.tw/public/Attachment/712693030RPKUP4RX.xlsx', header=3)
@@ -15,10 +14,16 @@ def index(town):
         df.drop_duplicates(inplace=True)
         df.to_csv('district.csv', encoding='big5', index=False)
     
+
+    print('bbb')
     
     dftown = pd.read_csv('district.csv', encoding='big5')  #區鄉鎮名稱代碼資料
-    dfs = dftown[(dftown['縣市名稱']==town[:3]) & (dftown['區鄉鎮名稱']==town[3:])]
+    
+    dfs = dftown[(dftown['縣市名稱'] == town1) & (dftown['區鄉鎮名稱'] == town2)]
+
+    
     if len(dfs) > 0:  #區鄉鎮名稱存在
+        print('ccc')
         town_no = str(dfs.iloc[0,1])
         url = 'https://www.cwb.gov.tw/V8/C/W/Town/MOD/3hr/' + town_no + '_3hr_PC.html'  #三日預報網頁
         res = requests.get(url)
@@ -43,7 +48,9 @@ def index(town):
             w1.replaceWith(w1.text + ',')
         for w2 in soup.find_all('span', class_='wind_2'):
             w2.replaceWith('')    
-            
+
+        print(str(soup))
+        sys.exit()
         # pandas讀取表格
         df = pd.read_html(str(soup), header=None)[0]
         # 資料轉置
@@ -64,10 +71,15 @@ def index(town):
         # 欄位重新排序
         df1 = df1[['時間','日期','天氣狀況','溫度','降雨機率','體感溫度','相對溼度','舒適度','蒲福風級','風向']]
         # 轉為json回傳
-        return df1.to_json(orient='records', force_ascii=False)        
+        print(df1.to_json(orient='records', force_ascii=False))
+        #return df1.to_json(orient='records', force_ascii=False)
+        return
     else:
-        return '無此鄉鎮市區名稱！'
+        print('xxxxx')
+        #return '無此鄉鎮市區名稱！'
+        return
 
-if __name__ == '__main__':
-    app.run()
+town1 = '台北市'
+town2 = '文山區'
+get_city_data(town1, town2)
         

@@ -1,10 +1,11 @@
 import os
-from PIL import Image
 
 source_foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'   #來源資料夾
 target_foldername = 'my_tmp_dir' #輸出資料夾
 
 sample_tree = os.walk(source_foldername)
+
+from PIL import Image
 
 image_width = 800
 
@@ -31,4 +32,4 @@ for dirname, subdir, files in sample_tree:
             print("<{}> 複製完成!".format(target_dir + '/' + filename))
             img.close()
             
-print("完成...")  
+print("完成...")

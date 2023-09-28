@@ -1,15 +1,12 @@
 
 '''
-plt之基本設定
+ims ov sensor test
 
 '''
 
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-import matplotlib
 
-import random
+import numpy as np
+import matplotlib.pyplot as plt
 
 selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
@@ -62,8 +59,8 @@ plt.plot(X, Y, "y-o", markevery = 5)   #隔 5 個畫一個 marker
 plt.plot(X, U, "m-o", markevery = 5)   #隔 5 個畫一個 marker
 plt.plot(X, V, "c-o", markevery = 5)   #隔 5 個畫一個 marker
 
-plt.plot(X, U2, "m-*", markevery = 5)   #隔 5 個畫一個 marker
-plt.plot(X, V2, "c-*", markevery = 5)   #隔 5 個畫一個 marker
+#plt.plot(X, U2, "m-*", markevery = 5)   #隔 5 個畫一個 marker
+#plt.plot(X, V2, "c-*", markevery = 5)   #隔 5 個畫一個 marker
 
 
 
@@ -106,3 +103,30 @@ plt.show()
     B[i] = random.randrange(0, 256)       #0~255之間的整數
 
 '''
+
+R, G, B = 10, 20, 30
+Y, U, V, U2, V2 = conversion(R, G, B)
+print(Y, U, V)
+
+R, G, B = 50, 100, 150
+Y, U, V, U2, V2 = conversion(R, G, B)
+print(Y, U, V)
+
+
+R, G, B = 100, 200, 50
+Y, U, V, U2, V2 = conversion(R, G, B)
+print(Y, U, V)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

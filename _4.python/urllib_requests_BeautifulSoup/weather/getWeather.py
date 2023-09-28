@@ -41,12 +41,16 @@ url = 'https://opendata.cwa.gov.tw/fileapi/v1/opendataapi/%s?downloadType=WEB&fo
 datas = requests.get(url).json()
 
 column = ['天氣狀況','最高溫','最低溫','舒適度','降雨機率(%)']
-#county = input('請輸入查詢的縣市名：')
 county = '新竹市'
+print(county)
+
 for data in datas['cwaopendata']['dataset']['location']:
     if data['locationName'] == county.replace('台', '臺'):
+        #print(type(data['weatherElement']))
+        #print(data['weatherElement'])
         for i in range(len(data['weatherElement'])):
-            print(column[i], end=':')
+            #print(i)
+            print(column[i], end = ' : ')
             print(data['weatherElement'][i]['time'][0]['parameter']['parameterName'])
         break
 else:

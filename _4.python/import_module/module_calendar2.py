@@ -112,6 +112,16 @@ print(calendar.calendar(2023))
 print('------------------------------------------------------------')	#60個
 
 
+
+import calendar
+
+day_start, num_days = calendar.monthrange(2023, 10)
+    
+print('本月的第一天為星期 :', day_start)
+print('本月的天數 :', num_days)
+
+
+
 print('------------------------------------------------------------')	#60個
 
 

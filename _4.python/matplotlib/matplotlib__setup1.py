@@ -1,4 +1,3 @@
-
 '''
 plt之基本設定
 
@@ -154,4 +153,11 @@ plt.text(0, 0, 'This is a lion-mouse', color = 'red')
 plt.show()
 
 
+'''
+其他連線樣式 :
 
+
+
+
+
+'''

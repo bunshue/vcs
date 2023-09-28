@@ -2,6 +2,7 @@
 
 # 中央氣象署 Central Weather Administration
 
+import sys
 import requests
 import json
 
@@ -56,7 +57,7 @@ def get_data():
         comfort = weather_elements[3]["time"][0]["parameter"]["parameterName"]
         max_tem = weather_elements[4]["time"][0]["parameter"]["parameterName"]
 
-        '''
+        """
         print('地點 : ')
         print(location)
         print('預測時間啟始 : ')
@@ -73,7 +74,7 @@ def get_data():
         print(max_tem)
         print('舒適度 : ')
         print(comfort)
-        '''
+        """
 
         line_notify(tuple([location, start_time, end_time, weather_state, rain_prob, min_tem, comfort, max_tem]))
 
@@ -142,7 +143,75 @@ def line_notify(data):
     x = requests.post(url=line_url, headers=line_header, data=line_data)
     #print(x.status_code)
 
+"""
+# line_notify(tuple(["台南市", "2021-08-31", "2021-09-01", "晴", "10", "20", "舒適", "25"]))
+get_data()
+"""
 
-if __name__ == '__main__':
-    # line_notify(tuple(["台南市", "2021-08-31", "2021-09-01", "晴", "10", "20", "舒適", "25"]))
-    get_data()
+print('------------------------------------------------------------')	#60個
+
+'''
+import requests
+try:
+    import xml.etree.cElementTree as et
+except ImportError:
+    import xml.etree.ElementTree as et
+
+cwa_key = get_cwa_key()
+length = len(cwa_key)
+if length != 40:
+    print('CWA_KEY 錯誤, 離開')
+    sys.exit()
+
+url = "https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001"
+params = {
+    "Authorization": cwa_key,
+    "locationName": "新竹市",
+}
+
+doc_name = "F-C0032-001"
+
+#response = requests.get(url, params=params)
+#print(response.status_code)
+
+api_link = "https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/%s?Authorization=%s" % (doc_name, cwa_key)
+report = requests.get(api_link).text
+print(report)
+
+print('------------------------------------------------------------')	#60個
+
+
+print('下載氣象局資料')
+
+import zipfile
+import urllib.request
+
+cwa_key = get_cwa_key()
+length = len(cwa_key)
+if length != 40:
+    print('CWA_KEY 錯誤, 離開')
+    sys.exit()
+
+#doc_name = 'F-A0012-001'
+#res = "https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/%s?Authorization=%s&format=XML" % (doc_name, cwa_key)
+doc_name = 'F-D0047-093'
+res = "https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/%s?Authorization=%s" % (doc_name, cwa_key)
+
+urllib.request.urlretrieve(res,"F-D0047-093.zip")
+f=zipfile.ZipFile('F-D0047-093.zip')
+
+for filename in ['63_72hr_CH.xml', '63_72hr_EN.xml']:
+    try:
+        data = f.read(filename).decode('utf8')
+        print(data)
+    except:
+        break
+f.close()
+'''
+    
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+

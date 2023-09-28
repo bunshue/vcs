@@ -845,7 +845,36 @@ print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
 
 print('------------------------------------------------------------')	#60個
 
+
+import datetime
+print('列印一段日期')
+start = '2023-09-01'
+end   = '2023-09-05'
+
+date_start=datetime.datetime.strptime(start,'%Y-%m-%d')
+date_end  =datetime.datetime.strptime(end,'%Y-%m-%d')
+
+print(date_start)
+print(date_end)
+print('----------------------------')
+while date_start<date_end:
+    print(date_start)
+    date_start+=datetime.timedelta(days=1)    # 日期变量自增
+
+
+
 print('------------------------------------------------------------')	#60個
+
+
+'''
+import datetime
+
+dt = datetime.datetime.strptime('ttttt', '%Y-%m-%dT%H:%M')  #讀取日期時間
+dt = dt.strftime('{d}%Y-%m-%d, {t}%H:%M').format(d='日期為：', t='時間為：')  #轉為字串
+'''
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
