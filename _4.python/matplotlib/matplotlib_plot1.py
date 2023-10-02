@@ -145,25 +145,11 @@ plt.subplot(233)
 #第四張圖
 plt.subplot(234)
 
-from matplotlib.font_manager import FontProperties
 
-x = np.linspace(0, 10, 1000)
-y1 = np.sin(x)
-y2 = np.cos(x**2)
-
-plt.plot(x, y1, label = "$sin(x)$", color = "red", linewidth = 2)
-plt.plot(x, y2, "b--", label = "$cos(x^2)$")
-
-plt.ylim(-1.2, 1.2)
-plt.legend()
 
 #第五張圖
 plt.subplot(235)
 
-N = 100
-#plt.plot(np.random.randn(N))
-plt.plot(range(N), np.random.randn(N))
-plt.scatter(range(N), np.random.randn(N))
 
 #第六張圖
 plt.subplot(236)

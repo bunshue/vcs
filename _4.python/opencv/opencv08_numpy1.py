@@ -5,77 +5,7 @@ opencv + numpy製作資料
 
 import cv2
 import numpy as np
-
-import sys
-
-print('------------------------------------------------------------')	#60個
-
-#建立一黑圖
-W = 640
-H = 480
-print('numpy製作一個 %d X %d 的圖 黑色, 2維 3 通道' % (W, H))
-image = np.zeros((H, W, 3), dtype = np.uint8)    #預設為0, 黑色, 2維, 3通道
-#image = np.zeros((H, W), dtype = np.uint8)    #預設為0, 黑色, 2維, 1通道
-
-print('中間一塊用填成灰色')
-for i in range(100, 200):
-    for j in range(100, 200):
-        image[i,j] = 200
-
-print('中間一塊用填成白色')
-#     y_st y_sp  x_st y_st
-image[300 : 400, 50 : 200] = 255
-
-#image[:, :, 0] = 255 #將第0通道設為全亮 藍
-#image[:, :, 1] = 255 #將第1通道設為全亮 綠
-#image[:, :, 2] = 255 #將第0通道設為全亮 紅
-
-image[:,0:50,0]=255      #第0通道, 藍色通道
-image[:,50:100,1]=255    #第1通道, 綠色通道
-image[:,100:150,2]=255    #第2通道, 紅色通道
-
-y = 75
-#                  y   x
-print('讀取像素點 (y, 25) =', image[y, 25])
-print('讀取像素點 (y, 75) =', image[y, 75])
-print('讀取像素點 (y, 125) =', image[y, 125])
-print('讀取像素點 (y, 125) 裡面的紅 =', image[y, 125, 2])
-
-#逕行修改
-image[:, 75] = 255
-image[:, 125, 2] = 0
-
-
-print('建立一個每點顏色任意顏色之圖')
-random_image = np.random.randint(0,256,size=[100, 100, 3],dtype = np.uint8)
-
-print('將一任意圖貼上來')
-#     y_st  y_sp x_st  y_st
-image[100 : 200, 400 : 500] = random_image
-
-
-cv2.imshow("image", image)    #顯示圖片
-
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-'''
-opencv + numpy製作資料
-
-
-'''
-
-import cv2
-import numpy as np
+import matplotlib.pyplot as plt
 
 import sys
 
@@ -84,18 +14,18 @@ H = 300
 
 print('------------------------------------------------------------')	#60個
 
-img=np.random.randint(0,256,size=[2,4,3],dtype=np.uint8)
-print(img.shape)
-rst=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+image = np.random.randint(0, 256, size = [2, 4, 3], dtype = np.uint8)
+print(image.shape)
+rst=cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 print(rst.shape)
-#print("img=\n",img)
+#print("image = \n", image)
 print("rst=\n",rst)
-print("像素點(1,0)直接計算得到的值=", img[1,0,0]*0.114+img[1,0,1]*0.587+img[1,0,2]*0.299)
+print("像素點(1,0)直接計算得到的值=", image[1,0,0] * 0.114 + image[1,0,1]*0.587 + image[1,0,2]*0.299)
 print("像素點(1,0)使用公式cv2.cvtColor()轉換值=",rst[1,0])
 '''
-print(img[1,0,0])
-print(img[1,0,1])
-print(img[1,0,2])
+print(image[1,0,0])
+print(image[1,0,1])
+print(image[1,0,2])
 '''
 
 print('------------------------------------------------------------')	#60個
@@ -115,16 +45,6 @@ bgr=cv2.cvtColor(rgb,cv2.COLOR_RGB2BGR)
 #print("img=\n",img)
 print("rgb=\n",rgb)
 print("bgr=\n",bgr)
-
-print('------------------------------------------------------------')	#60個
-
-img1=np.random.randint(0,256,size=[3,3],dtype=np.uint8)
-print("img1=\n",img1)
-
-img2=np.random.randint(0,256,size=[3,3],dtype=np.uint8)
-print("img2=\n",img2)
-
-print("img1+img2=\n",img1+img2)
 
 print('------------------------------------------------------------')	#60個
 
@@ -190,32 +110,6 @@ img2=np.ones((3,4),dtype=np.uint8)*10
 gamma=3
 img3=cv2.addWeighted(img1,0.6,img2,5,gamma)
 print(img3)
-
-print('------------------------------------------------------------')	#60個
-
-img=np.random.randint(10,99,size=[5,5],dtype=np.uint8)
-print("img=\n",img)
-
-print("讀取像素點img.item(3,2)=",img.item(3,2))
-img.itemset((3,2),255)
-print("修改后img=\n",img)
-print("修改后像素點img.item(3,2)=",img.item(3,2))
-
-print('------------------------------------------------------------')	#60個
-
-img=np.random.randint(10,99,size=[2,4,3],dtype=np.uint8)
-print("img=\n",img)
-
-print("讀取像素點img[1,2,0]=",img.item(1,2,0))
-print("讀取像素點img[0,2,1]=",img.item(0,2,1))
-print("讀取像素點img[1,0,2]=",img.item(1,0,2))
-img.itemset((1,2,0),255)
-img.itemset((0,2,1),255)
-img.itemset((1,0,2),255)
-print("修改后img=\n",img)
-print("修改后像素點img[1,2,0]=",img.item(1,2,0))
-print("修改后像素點img[0,2,1]=",img.item(0,2,1))
-print("修改后像素點img[1,0,2]=",img.item(1,0,2))
 
 print('------------------------------------------------------------')	#60個
 

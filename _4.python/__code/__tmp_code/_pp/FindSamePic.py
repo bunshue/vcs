@@ -3,14 +3,14 @@ import os
 source_foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'   #來源資料夾
 target_foldername = 'my_tmp_dir' #輸出資料夾
 
-sample_tree = os.walk(source_foldername)
+filenames = os.walk(source_foldername)
 
 import hashlib
 
 allmd5s = dict() 
 n = 0
 
-for dirname, subdir, files in sample_tree:
+for dirname, subdir, files in filenames:
    allfiles = []
    for file in files:  # 取得所有 .png .jpg 檔，存入 allfiles 串列中
       print(dirname + '/' + file)
@@ -34,6 +34,7 @@ for dirname, subdir, files in sample_tree:
      
 print("完成...")
 
+'''
 print(type(allmd5s))
 #print(allmd5s)
 
@@ -50,5 +51,4 @@ print(allmd5s.values())
 print()
 print()
 print(allmd5s.items())
-
-
+'''

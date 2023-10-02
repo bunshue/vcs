@@ -1,9 +1,4 @@
-import os
 import sys
-import time
-import random
-
-print('------------------------------------------------------------')	#60個
 
 import requests
 from bs4 import BeautifulSoup
@@ -21,7 +16,9 @@ def get_html_data1(url):
     else:
         return resp
 
-print("統一發票號碼")
+print('------------------------------------------------------------')	#60個
+
+print("統一發票號碼 方法一")
 
 import requests
 import xml.etree.cElementTree as ET
@@ -36,10 +33,8 @@ else:
     print('無法取得網頁資料')
     sys.exit()
 
-print('1111')
 #print(html_data.text)
 tree = ET.fromstring(html_data.text)
-print('2222')
 print(tree)
 print('根目錄標籤：' + tree.tag)
 print('根目錄屬性：' + str(tree.attrib))
@@ -54,7 +49,42 @@ print('findall 方法：' + items[0][0].text)
 items = list(tree.iter(tag = 'item'))
 print('iter 方法：' + items[0][0].text)
 
+print('--------')
+
+
+ret = {}
+url = 'http://invoice.etax.nat.gov.tw/invoice.xml'   #統一發票中獎號碼
+html_data = get_html_data1(url)
+if html_data:
+    print("擷取網頁資料 OK")
+    #print(html_data.text)
+else:
+    print('無法取得網頁資料')
+    sys.exit()
+
+#print(html_data.text)
+tree = ET.fromstring(html_data.text)  #解析XML
+items = list(tree.iter(tag='item'))  #取得item標籤內容
+title = items[0][0].text  #期別
+ret['title'] = title + '月'
+ptext = items[0][2].text  #中獎號碼
+ptext = ptext.replace('<p>','')
+plist = ptext.split('</p>')  
+for i in range(len(plist)-1):
+    tlist = plist[i].split('：')
+    ret[tlist[0]] = tlist[1]
+print(ret)
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print("統一發票號碼 方法二")
+
 import requests
+
 url = 'https://invoice.etax.nat.gov.tw/index.html'
 # 取得網頁html
 web = get_html_data1(url)
@@ -82,7 +112,7 @@ for j in n1:
   print("　　"+j)
 print("\n")
 
-print('------------------------------------------------------------')	#60個
+
 
 
 

@@ -1,4 +1,4 @@
-'''
+"""
 print('ls 測試 os.walk')
 print('ls 測試 os.listdir')
 print('ls 測試 glob.glob')
@@ -9,15 +9,16 @@ print('ls 測試 glob.glob')
 #os.listdir 取得檔案列表
 #os.listdir 可以取得指定目錄中所有的檔案與子目錄名稱，以下是一個簡單的範例：
 
+"""
 
-'''
+
 import os
 import glob
 
 import sys
 import stat
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5/'
+foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
 print('------------------------------------------------------------')	#60個
 print('ls 測試 os.walk')
@@ -35,6 +36,9 @@ allfiles = []
 #subdir     檔案所在位置的其他資料夾
 #files      檔案名稱
 for dirname, subdir, files in filenames:
+    if 'folder_xxxxx' in subdir:  #某些資料夾下的檔案不要處理
+        print('某些資料夾下的檔案不要處理')
+        subdir.remove('folder_xxxxx')
     for file in files:  # 取得所有檔案，存入 allfiles 串列中
         #print('檔案所在資料夾 :', dirname)
         #print('檔案所在位置的其他資料夾 :', subdir)
@@ -46,27 +50,25 @@ if len(allfiles) > 0:
     for file in allfiles:
         print(file)
 
-print('------------------------------------------------------------')	#60個
-print('撈出資料夾下所有檔案, 單層')
-print('搜尋路徑：', foldername)
+"""
+分析
 
-for dirpath, _, filenames in os.walk(foldername):
-    for fn in filenames:
-        if fn.endswith('.jpg') or fn.endswith('.png'):
-            print(os.path.join(dirpath, fn))
+if file.endswith('.jpg') or file.endswith('.png'):
 
-print('------------------------------------------------------------')	#60個
+    for file in files:  # 取得所有 .png .jpg 檔，存入 allfiles 串列中
+        ext = file.split('.')[-1]
+        if ext == "png" or ext == "jpg":
+            allfiles.append(dirname +'/'+file)
 
-print('撈出資料夾下所有檔案, 單層')
-print('搜尋路徑：', foldername)
 
-for root, dirs, files in os.walk(foldername):
-    if '.svn' in dirs:
-        print('delete')
-        #dirs.remove('.svn')
-    for fn in files:
-        path = os.path.join(root, fn)
-        print(path)
+      for file in allfiles:  
+         filename = file.split('.')[0] #主檔名         
+
+
+   if basename == target_foldername:  # 輸出資料夾不再重複處理
+      continue
+
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -210,9 +212,10 @@ def read_files(foldername, showProgress = False, readPixelData=False, force=Fals
 
 print('撈出資料夾下所有檔案, 多層4')
 
-'''
+"""
 find_files(foldername)
-'''
+"""
+
 all_series = read_files(foldername, True, False, False)
 
 print('------------------------------------------------------------')	#60個
@@ -302,10 +305,10 @@ print(filenames)
 for target_image in filenames:
     pathname, filename = os.path.split(target_image)
     print(filename)
-    '''
+    """
     im = Image.open(target_image)
     w, h = im.size
-    '''
+    """
 print("完成")
 
 print('------------------------------------------------------------')	#60個
@@ -481,7 +484,7 @@ print('-------')
 print('------------------------------------------------------------')	#60個
 
 
-'''
+"""
 # 新進未整理
 
 
@@ -560,8 +563,8 @@ print('ls 測試 glob.glob') ST
 ----------------------------------------------------------------
 
     def glob(self, pattern, exclude = None):
-        """Add a list of files to the current component as specified in the
-        glob pattern. Individual files can be excluded in the exclude list."""
+        #Add a list of files to the current component as specified in the
+        #glob pattern. Individual files can be excluded in the exclude list.
         files = glob.glob1(self.absolute, pattern)
         for f in files:
             if exclude and f in exclude: continue
@@ -599,4 +602,141 @@ print('ls 測試 glob.glob') SP
 
 
 
-'''
+"""
+
+
+
+import os
+
+
+
+print('------------------------------------------------------------')	#60個
+
+stats = {}
+
+def addstats(ext, key, n):
+    d = stats.setdefault(ext, {})
+    d[key] = d.get(key, 0) + n
+
+def statdir(dir):
+    try:
+        names = os.listdir(dir)
+    except OSError as err:
+        sys.stderr.write("Can't list %s: %s\n" % (dir, err))
+        return
+    for name in sorted(names):
+        if name.startswith(".#"):
+            continue  # Skip CVS temp files
+        if name.endswith("~"):
+            continue  # Skip Emacs backup files
+        full = os.path.join(dir, name)
+        if os.path.islink(full):
+            addstats("<lnk>", "links", 1)
+        elif os.path.isdir(full):
+            statdir(full)
+        else:
+            statfile(full)
+
+def statfile(filename):
+    head, ext = os.path.splitext(filename)
+    head, base = os.path.split(filename)
+    if ext == base:
+        ext = ""  # E.g. .cvsignore is deemed not to have an extension
+    ext = os.path.normcase(ext)
+    if not ext:
+        ext = "<none>"
+    addstats(ext, "files", 1)
+    try:
+        with open(filename, "rb") as f:
+            data = f.read()
+    except IOError as err:
+        sys.stderr.write("Can't open %s: %s\n" % (filename, err))
+        addstats(ext, "unopenable", 1)
+        return
+    addstats(ext, "bytes", len(data))
+    if b'\0' in data:
+        addstats(ext, "binary", 1)
+        return
+    if not data:
+        addstats(ext, "empty", 1)
+    # addstats(ext, "chars", len(data))
+    lines = str(data, "latin-1").splitlines()
+    addstats(ext, "lines", len(lines))
+    del lines
+    words = data.split()
+    addstats(ext, "words", len(words))
+
+def report():
+    exts = sorted(stats)
+    # Get the column keys
+    columns = {}
+    for ext in exts:
+        columns.update(stats[ext])
+    cols = sorted(columns)
+    colwidth = {}
+    colwidth["ext"] = max([len(ext) for ext in exts])
+    minwidth = 6
+    stats["TOTAL"] = {}
+    for col in cols:
+        total = 0
+        cw = max(minwidth, len(col))
+        for ext in exts:
+            value = stats[ext].get(col)
+            if value is None:
+                w = 0
+            else:
+                w = len("%d" % value)
+                total += value
+            cw = max(cw, w)
+        cw = max(cw, len(str(total)))
+        colwidth[col] = cw
+        stats["TOTAL"][col] = total
+    exts.append("TOTAL")
+    for ext in exts:
+        stats[ext]["ext"] = ext
+    cols.insert(0, "ext")
+
+    def printheader():
+        for col in cols:
+            print("%*s" % (colwidth[col], col), end=' ')
+        print()
+
+    printheader()
+    for ext in exts:
+        for col in cols:
+            value = stats[ext].get(col, "")
+            print("%*s" % (colwidth[col], value), end=' ')
+        print()
+    printheader()  # Another header at the bottom
+
+#Show file statistics by extension.
+
+#filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files3/'
+
+if os.path.isdir(filename):
+    print('目錄')
+    statdir(filename)
+elif os.path.isfile(filename):
+    statfile(filename)
+    print('檔案')
+elif os.path.islink(filename):
+    print('連結')
+    linkto = os.readlink(filename)
+    print(linkto)
+else:
+    print('不詳')    
+
+print(type(stats))
+print(stats)
+
+report()
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
