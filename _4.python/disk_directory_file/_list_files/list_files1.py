@@ -17,44 +17,34 @@ import glob
 import sys
 import stat
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'C:/_git/vcs/_1.data/______test_files5/'
 
 print('------------------------------------------------------------')	#60個
 print('ls 測試 os.walk')
 print('------------------------------------------------------------')	#60個
-print('撈出資料夾下所有檔案, 單層')
+
+print('撈出資料夾下所有檔案, 多層1')
 print('搜尋路徑：', foldername)
 filenames = os.walk(foldername)
 print(type(filenames))  #很奇怪的結構
 #print(filenames)
-for root, dirs, filenames in filenames:
-    print('路徑：', root)
-    print('路徑下之目錄：', dirs)   
-    print('路徑下之檔案：', filenames)
-    print()
 
-print('------------------------------------------------------------')	#60個
+allfiles = []
 
-print('撈出資料夾下所有檔案, 多層1')
-foldername = 'C:/_git/vcs/_1.data/______test_files5/'
+#dirname    檔案所在資料夾
+#subdir     檔案所在位置的其他資料夾
+#files      檔案名稱
+for dirname, subdir, files in filenames:
+    for file in files:  # 取得所有檔案，存入 allfiles 串列中
+        #print('檔案所在資料夾 :', dirname)
+        #print('檔案所在位置的其他資料夾 :', subdir)
+        #print('檔案名稱', file)
+        allfiles.append(dirname + '/' + file)   #絕對路徑
+        #allfiles.append(os.path.join(dirname, file))   #絕對路徑
 
-print('搜尋路徑：', foldername)
-for root, dirs, filenames in os.walk(foldername):
-    print('路徑：', root)
-    print('路徑下之目錄：', dirs)
-    print('路徑下之檔案：', filenames)
-    print()
-
-print('------------------------------------------------------------')	#60個
-
-print('撈出資料夾下所有檔案, 多層2')  
-# 遞迴列出所有檔案的絕對路徑
-for root, dirs, filenames in os.walk(foldername):
-    for filename in filenames:
-        print(filename, end = '\t\t')
-        long_filename = os.path.join(root, filename)  # 取得檔案的絕對路徑
-        print(long_filename)
-
+if len(allfiles) > 0:
+    for file in allfiles:
+        print(file)
 
 print('------------------------------------------------------------')	#60個
 print('撈出資料夾下所有檔案, 單層')
@@ -65,16 +55,8 @@ for dirpath, _, filenames in os.walk(foldername):
         if fn.endswith('.jpg') or fn.endswith('.png'):
             print(os.path.join(dirpath, fn))
 
-
 print('------------------------------------------------------------')	#60個
-print('撈出資料夾下所有檔案, 單層')
-print('搜尋路徑：', foldername)
 
-for root, dirs, files in os.walk(foldername):
-    if '.svn' in dirs:
-        print('.svn')
-
-print('------------------------------------------------------------')	#60個
 print('撈出資料夾下所有檔案, 單層')
 print('搜尋路徑：', foldername)
 
@@ -86,10 +68,7 @@ for root, dirs, files in os.walk(foldername):
         path = os.path.join(root, fn)
         print(path)
 
-
-
 print('------------------------------------------------------------')	#60個
-
 
         
 print('------------------------------------------------------------')	#60個

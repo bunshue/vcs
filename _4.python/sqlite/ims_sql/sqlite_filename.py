@@ -1087,14 +1087,12 @@ text1.place(x = x_st + dx * 0, y = y_st + dy * 3 + 50)
 message = "尚未開啟資料庫"
 main_message1.set(message)
 
+
+
+
+
+
+
 window.mainloop()
-
-
-
-
-
-
-
-
 
 

@@ -38,7 +38,6 @@ Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的
 """
 
 
-'''
 
 a_dict = {}
 print(type(a_dict))
@@ -51,7 +50,6 @@ table1 = [] #list
 table2 = {} #dict
 print(type(table1))
 print(type(table2))
-
 
 
 
@@ -749,8 +747,6 @@ print('建立串列')
 
 animals = ['鼠', '牛', '虎', '兔', '龍']
 
-
-
 print('原串列 :', animals)
 print('串列 增加項目')
 animals.append('蛇')
@@ -762,7 +758,6 @@ print('新串列 :', animals)
 print('改變第1項的值')
 animals[1] = '豬'
 print(animals)
-
 
 print('在第1項的位置安插一個項目')
 print('原串列 :', animals)
@@ -780,6 +775,10 @@ for ani in animals:
     print(ani)
 
 print('直接印出 串列')
+print(animals)
+
+print('顛倒排序串列')
+animals.reverse()   # 顛倒排序串列
 print(animals)
 
 print('------------------------------------------------------------')	#60個
@@ -803,7 +802,7 @@ for ani in animals[:]:
     print(f"刪除 {ani}")
     print("目前animals串列 : ", animals)
 
-print('-----dddd-------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 
 animals = ['鼠', '牛', '虎', '兔', '龍']
 print('型態 :', type(animals))
@@ -831,19 +830,15 @@ print(animals[:-2])
 #測試list之最後5筆資料
 print(animals[-3:])
 
-
 import numpy as np
 for i in range(5):
     c = np.random.choice(animals)
     print(f"本次抽中 {c}。")
 
-
 llll = ['鼠', '牛', '虎', '兔', '龍']
 pppp = llll[2:] #第二項(含)以後的
 print(llll)
 print(pppp)
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -873,10 +868,6 @@ for c in s:
 
 print('------------------------------------------------------------')	#60個
 
-sys.exit()
-
-print('------------------------------------------------------------')	#60個
-
 print('串列 使用')
 animals = ['鼠', '牛', '虎', '兔', '龍']
 print(type(animals))
@@ -887,7 +878,6 @@ print(animals)
 print('列印排序後的結果')
 animal_sorted = sorted(animals)
 print(animal_sorted)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1035,7 +1025,7 @@ person_data = [
     (102, 47333, 44628, 91961),
     (101, 47304, 44587, 91891)]
 
-person_data.reverse()
+person_data.reverse()   # 顛倒排序串列
 print(type(person_data))
 print(person_data)
 
@@ -1504,7 +1494,6 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -1589,13 +1578,13 @@ list1.append(234)
 list1.append(321)
 list1.append(101)
 #list1.pop()
-
+"""
 print('共輸入 %d 個數' % len(list1))
 print('最大：%d' % max(list1))
 print('最小：%d' % min(list1))
 print('總和：%d' % sum(list1))
 print('由大到小排序為：{}'.format(sorted(list1, reverse = True)))
-
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -1676,13 +1665,55 @@ print(type(years))
 print(len(years))
 print(years)
 
+print('------------------------------------------------------------')	#60個
+
+fields = ['Name', 'Age', 'Hometown']
+info = ['Peter', '30', 'Chicago']
+zipData = zip(fields, info)     # 執行zip
+print(type(zipData))            # 列印zip資料類型
+player = list(zipData)          # 將zip資料轉成串列
+print(player)
 
 print('------------------------------------------------------------')	#60個
 
+fields = ['Name', 'Age', 'Hometown']
+info = ['Peter', '30']
+zipData = zip(fields, info)   # 執行zip
+print(type(zipData))          # 列印zip資料類型
+player = list(zipData)        # 將zip資料轉成串列
+print(player)                 # 列印串列
 
 print('------------------------------------------------------------')	#60個
 
+fields = ['Name', 'Age', 'Hometown']
+info = ['Peter', '30', 'Chicago']
+zipData = zip(fields, info)     # 執行zip
+print(type(zipData))            # 列印zip資料類型
+player = list(zipData)          # 將zip資料轉成串列
+print(player)                   # 列印串列
+
+f, i = zip(*player)             # 執行unzip
+print("fields = ", f)
+print("info   = ", i)
+
+
+print('---- map --------------------------------------------------------')	#60個
+
+
+print('map 的用法')
+def pick(x):
+    fruits = ['Apple', 'Banana', 'Orange', 'Tomato', 'Pine Apple', 'Berry']
+    return fruits[x]
+
+alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
+choices = map(pick, alist)
+print(type(alist))
+print(type(choices))
+
+for choice in choices:
+    print(choice)
 
 print('------------------------------------------------------------')	#60個
+   
 
 

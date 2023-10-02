@@ -1,8 +1,9 @@
-
 import os
 import sys
 import time
 import getopt
+
+print('------------------------------------------------------------')	#60個
 
 length = len(sys.argv)
 print('參數長度 : ', length);
@@ -13,8 +14,12 @@ if len(sys.argv) > 1:
     files = sys.argv[1:]
     print(files)
 
+print('------------------------------------------------------------')	#60個
+
 prog = sys.argv[0]
 print(prog)
+
+print('------------------------------------------------------------')	#60個
 
 opts, args = getopt.getopt(sys.argv[1:], "h:c:")
 if len(opts) != 1:
@@ -30,6 +35,8 @@ if len(args) != 1:
 
 if len(opts) > 0:
     print(args[0])
+
+print('------------------------------------------------------------')	#60個
 
 import sys, os
 
@@ -51,8 +58,6 @@ def errprint(*args):
         sep = " "
     sys.stderr.write("\n")
 
-
-
 #global verbose, filename_only
 try:
     opts, args = getopt.getopt(sys.argv[1:], "qv")
@@ -69,8 +74,10 @@ for arg in args:
     #check(arg)
     print(arg)
 
+print('------------------------------------------------------------')	#60個
 
 import getopt
+
 try:
     opts, args = getopt.getopt(args, "n:s:r:tcpvh",
                                ["number=", "setup=", "repeat=",
@@ -115,6 +122,8 @@ for o, a in opts:
 
 print('ccccccc')
 
+print('------------------------------------------------------------')	#60個
+
 import argparse
 cmdline = argparse.ArgumentParser()
 print(cmdline)
@@ -130,10 +139,11 @@ print(cmdline)
 
 cmdline.print_usage()
 
+print('------------------------------------------------------------')	#60個
 
 
+print('------------------------------------------------------------')	#60個
 
 
-
-
+print('------------------------------------------------------------')	#60個
 

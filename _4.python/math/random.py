@@ -1,7 +1,7 @@
 import sys
 import random
 
-'''
+"""
 random.seed()
 
 random.random()
@@ -19,14 +19,16 @@ random.uniform(num1, num2)
 還沒整理好的
 random.sample.....
 
-'''
+"""
+
 
 print('隨機變數')
 
 print('---- random.seed() --------------------------------------------------------')	#60個
 
-"""
 random.seed(5)  #固定亂數種子
+
+"""
 for i in range(10):
     print(random.random(), end = ', ')
 
@@ -35,7 +37,13 @@ randseed = int(time.time())
 random.seed(randseed) #打亂亂數種子
 for i in range(10):
     print(random.random(), end = ', ')
-""" 
+
+
+# 修改随机数生成的种子
+random.seed() # Seed based on system time or os.urandom()
+random.seed(12345) # Seed based on integer given
+random.seed(b'bytedata') # Seed based on byte data
+"""
 
 print('---- random.random() --------------------------------------------------------')	#60個
 
@@ -61,6 +69,26 @@ PI = 4 * Hits / trials
 print("PI = ", PI)
 
 print('---- random.randint(num1, num2) --------------------------------------------------------')	#60個
+
+for i in range(10):
+    print(random.randint(0, 2))
+
+print('------------------------------------------------------------')	#60個
+
+
+# 随机整数
+print(random.randint(0,10))
+print(random.randint(0,10))
+print(random.randint(0,10))
+print(random.randint(0,10))
+
+print('------------------------------------------------------------')	#60個
+
+lst = [random.randint(1, 100) for i in range(100)]
+print(lst)
+print("Average of the list is", sum(lst) / float(len(lst)))
+
+print('------------------------------------------------------------')	#60個
 
 num1, num2 = 0, 255
 R = random.randint(num1, num2) #產生 num1 ~ num2 之間的亂數整數 包含邊界
@@ -90,17 +118,10 @@ print()
 
 print('------------------------------------------------------------')	#60個
 
-#animals = [1,2,3,4,5,6]
 animals = ['鼠', '牛', '虎', '兔', '龍']
-for i in range(10):
-    animal = random.choice(animals)     #在名詞字串中隨機選取一個字串
-    print(animal, end = ', ')
-print()
-
-print('------------------------------------------------------------')	#60個
-
-
-
+print('在名詞字串中隨機選取一個字串')
+animal = random.choice(animals)
+print(animal)
 
 print('------------------------------------------------------------')	#60個
 
@@ -140,6 +161,16 @@ print(pretty_text)
 
 print('------------------------------------------------------------')	#60個
 
+print('統計1~6隨機選擇的個數')
+num = []
+for i in range(600):
+    num.append(random.choice([1, 2, 3, 4, 5, 6]))
+    
+numCount = {i:num.count(i) for i in num}
+for num in sorted(numCount.keys()):
+    print(num, ':', numCount[num])
+
+print('------------------------------------------------------------')	#60個
 
 s = ''
 for i in range(0, 10):
@@ -223,6 +254,8 @@ for i in range(30):
     print(random.uniform(num1, num2), end = '\n')
 print()
 
+print('------------------------------------------------------------')	#60個
+
 print('建立一個隨機串列')
 N = 5
 data = [random.uniform(num1, num2) for _ in range(N)]
@@ -230,9 +263,15 @@ print(type(data))
 print(len(data))
 print(data)
 
-
 print('------------------------------------------------------------')	#60個
 
+import random
+for i in range(10):
+    print(random.uniform(1, 100), " ", end="")
+
+print()
+
+print('------------------------------------------------------------')	#60個
 
 print('常態分布 1 ~ 10')
 for i in range(5):
@@ -264,6 +303,13 @@ print('------------------------------------------------------------')	#60個
 
 
 print('--- random.sample ---------------------------------------------------------')	#60個
+
+animals = ['鼠', '牛', '虎', '兔', '龍']
+
+# 抽取样本
+print(random.sample(animals, 3))
+print(random.sample(animals, 3))
+
 
 list1 = random.sample(range(1,50), 7)
 special = list1.pop()
@@ -346,9 +392,12 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 animals = ['鼠', '牛', '虎', '兔', '龍']
-for i in range(3):
-    random.shuffle(animals)              # 將次序打亂重新排列
-    print(animals)
+print('將次序打亂重新排列')
+random.shuffle(animals)
+print(animals)
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -391,6 +440,9 @@ print('------------------------------------------------------------')	#60個
 
 tttt = hex(random.getrandbits(64))  # 64 bits randomness
 print(tttt)
+
+# 随机二进制数的整数返回
+print(random.getrandbits(200))
 
 
 print('------------------------------------------------------------')	#60個
@@ -583,13 +635,13 @@ for i in np.argsort(a):
 
 print('------------------------------------------------------------')	#60個
 
-a = np.random.randint(0,10,(3,5))
+a = np.random.randint(0, 10, (3, 5))
 print('原陣列內容：')
 print(a)
 print('將每一直行進行排序：')
-print(np.sort(a, axis=0))
+print(np.sort(a, axis = 0))
 print('將每一橫列進行排序：')
-print(np.sort(a, axis=1))
+print(np.sort(a, axis = 1))
 
 print('------------------------------------------------------------')	#60個
 
@@ -604,9 +656,9 @@ print(b)
 
 print('------------------------------------------------------------')	#60個
 
-c = np.random.randint(5, 10, size=5)
+c = np.random.randint(5, 10, size = 5)
 print(c)
-d = np.random.randint(5, 10, size=(2,3))
+d = np.random.randint(5, 10, size = (2, 3))
 print(d)
 
 
@@ -704,91 +756,9 @@ print(np.random.randint(1,10,6))
 
 print('---- 新進 --------------------------------------------------------')	#60個
 
-
-import random                       # 導入模組random
-
-num = []
-for i in range(600):
-    num.append(random.choice([1,2,3,4,5,6]))
-    
-numCount = {i:num.count(i) for i in num}
-for num in sorted(numCount.keys()):
-    print(num, ':', numCount[num])
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-for i in range(10):
-    #time.sleep(random.randint(0,2))
-    print(random.randint(0,2))
-
-
-
-print('------------------------------------------------------------')	#60個
-
-import random
-for i in range(10):
-    print(random.uniform(1,100), " ", end="")
-
-print()
-
-print('------------------------------------------------------------')	#60個
-
-import random 
-lst = [random.randint(1,100) for i in range(100)]
-print(lst)
-print("Average of the list is", sum(lst)/float(len(lst)))
-
-print('------------------------------------------------------------')	#60個
-
-import random
-fruit = ['Apple', 'Cherry', 'Banana', 'Strawberry']
-print("Before:", fruit)
-random.shuffle(fruit)
-print("After:", fruit)
-print("Today's lucky fruit is:", random.choice(fruit))
-
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
-import random
-
-def random_num():
-    values = [1, 2, 3, 4, 5, 6]
-    print(random.choice(values))
-    print(random.choice(values))
-    print(random.choice(values))
-    print(random.choice(values))
-    print(random.choice(values))
-
-    # 抽取样本
-    print(random.sample(values, 2))
-    print(random.sample(values, 2))
-    print(random.sample(values, 3))
-
-    # 打算顺序
-    random.shuffle(values)
-    print(values)
-
-    # 随机整数
-    print(random.randint(0,10))
-    print(random.randint(0,10))
-    print(random.randint(0,10))
-    print(random.randint(0,10))
-
-    # 随机二进制数的整数返回
-    print(random.getrandbits(200))
-
-    # 修改随机数生成的种子
-    random.seed() # Seed based on system time or os.urandom()
-    random.seed(12345) # Seed based on integer given
-    random.seed(b'bytedata') # Seed based on byte data
-
-if __name__ == '__main__':
-    random_num()
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -797,12 +767,11 @@ import numpy as np
 
 N = 5
 
-
-'''
+"""
 #plt.plot(np.random.randn(N))
 plt.plot(range(N), np.random.randn(N))
 plt.scatter(range(N), np.random.randn(N))
-'''
+"""
 
 ccc = np.random.randn(N)
 
@@ -812,21 +781,9 @@ print(ccc)
 print(max(ccc))
 print(min(ccc))
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 
 print('------------------------------------------------------------')	#60個

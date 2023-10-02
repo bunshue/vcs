@@ -4,6 +4,38 @@
 ====================
 '''
 
+
+
+print('---- python語言區 --------------------------------------------------------')	#60個
+
+
+
+print(globals())
+
+print('__file__ : 此檔案長檔名')
+print(__file__)
+print(__file__.upper()) #長檔名轉大寫
+print(__file__.lower()) #長檔名轉小寫
+
+print('__name__ : 目前所在模組名')
+print(__name__)
+#print(__name__._version)
+
+print('sympy模組的版本')
+import sympy
+VERSION = sympy.__version__
+print(VERSION)
+
+print('selenium模組的版本')
+import selenium
+print(selenium.__version__)
+
+#import somemodule as sm	#幫模組取個別名
+
+print (sys.argv)
+#print (s.argv)
+
+
 #打印使用說明
 print(__doc__)
 
@@ -33,22 +65,12 @@ print('serial 模組所支援的指令 : ' + str(content))
 
 print('------------------------------------------------------------')	#60個
 
-menu = {'拉麵' : 500, '炒飯' : 430, '煎餃' : 210}
-print(type(menu))
-print(menu)
-for order in menu:
-	print(order)
-	print(menu[order] * 1.08)
-
-
-print('------------------------------------------------------------')	#60個
-
 print('設定變數')
 ROWS, COLUMNS = 19, 4
 print(ROWS)
 print(COLUMNS)
 
-# 各種python專用的語法
+print('------------------------------------------------------------')	#60個
 
 print('try-except-finally 的用法')
 
@@ -60,6 +82,7 @@ except:
 finally:
     print('一定會執行的程式區塊')
 
+print('------------------------------------------------------------')	#60個
 
 number1 = 3
 number2 = 5
@@ -78,7 +101,7 @@ else:
 finally:
     print('The finally clause is executed')
 
-
+print('------------------------------------------------------------')	#60個
 
 n = 2
 try:
@@ -140,6 +163,8 @@ except Exception as e:
     print('種類：{}\n訊息：{}\n資訊：{}'.format(e_type, e_value, e_tb))
 
 
+print('------------------------------------------------------------')	#60個
+
 print('冪次方的寫法')
 z = 10
 print(z)
@@ -148,21 +173,6 @@ print(z)
 
 print('------------------------------------------------------------')	#60個
 
-print('map 的用法')
-def pick(x):
-    fruits = ['Apple', 'Banana', 'Orange', 'Tomato', 'Pine Apple', 'Berry']
-    return fruits[x]
-
-alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
-choices = map(pick, alist)
-print(type(alist))
-print(type(choices))
-
-for choice in choices:
-    print(choice)
-
-print('------------------------------------------------------------')	#60個
-   
 '''    
 person = int(input('請輸入學生人數: '))
 apple = int(input('請輸入蘋果總數: '))
@@ -170,16 +180,6 @@ ret = divmod(apple, person)
 print('每個學生可分得蘋果 ' + str(ret[0]) + ' 個')
 print('蘋果剩餘 ' + str(ret[1]) + ' 個')
 '''
-
-print('------------------------------------------------------------')	#60個
-
-listname = ['林大明', '陳阿中', '張小英']
-listchinese = [100, 74, 82]
-listmath = [87, 88, 65]
-listenglish = [79, 100, 8]
-print('姓名     座號  國文  數學  英文')
-for i in range(0, 3):
-    print(listname[i].ljust(5), str(i+1).rjust(3), str(listchinese[i]).rjust(5), str(listmath[i]).rjust(5), str(listenglish[i]).rjust(5))
 
 print('------------------------------------------------------------')	#60個
 

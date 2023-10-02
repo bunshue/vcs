@@ -169,9 +169,9 @@ print('------------------------------------------------------------')	#60個
 print('算一個檔案的hash值')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-image_md5 = hashlib.md5(open(filename, 'rb').read()).digest()
-print(image_md5)
-
+md5 = hashlib.md5(open(filename, 'rb').read()).digest()
+print(type(md5))
+print(md5)
 
 print('------------------------------------------------------------')	#60個
 import os
@@ -220,6 +220,23 @@ h = hashlib.md5(string).hexdigest()
 
 print('------------------------------------------------------------')	#60個
 
+
+
+import hashlib
+
+text = 'this is a lion-mouse'
+
+print('將字串轉成md5')
+
+hashnum = hashlib.md5(bytes(text, "utf-8")).digest()
+print(hashnum)
+print(hashnum[:16])
+
+print('將字串轉成sha1')
+
+hashnum = hashlib.sha1(bytes(text, "utf-8")).digest()
+print(hashnum)
+print(hashnum[:16])
 
 
 print('------------------------------------------------------------')	#60個

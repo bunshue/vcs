@@ -93,36 +93,6 @@ print(SELECT)
 
 
 
-print('---- python語言區 --------------------------------------------------------')	#60個
-
-
-
-print(globals())
-
-print('__file__ : 此檔案長檔名')
-print(__file__)
-print(__file__.upper()) #長檔名轉大寫
-print(__file__.lower()) #長檔名轉小寫
-
-print('__name__ : 目前所在模組名')
-print(__name__)
-#print(__name__._version)
-
-print('sympy模組的版本')
-import sympy
-VERSION = sympy.__version__
-print(VERSION)
-
-print('selenium模組的版本')
-import selenium
-print(selenium.__version__)
-
-#import somemodule as sm	#幫模組取個別名
-
-print (sys.argv)
-#print (s.argv)
-
-
 print('---- 語法專區 --------------------------------------------------------')	#60個
 
 
@@ -214,6 +184,7 @@ x2, y2 = 3, 4
 distance = ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) ** 0.5
 print('兩點距離 : ', distance) 
 
+print('------------------------------------------------------------')	#60個
 
 print('if and or')
 year = 2024
@@ -754,6 +725,8 @@ print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
 print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
 print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
 
+print('------------------------------------------------------------')	#60個
+
 x = 100
 print("x=/%-6d/" % x)
 y = 10.5
@@ -772,6 +745,7 @@ print("x=/%2d/" % x)
 print("y=/%3.2f/" % y)
 print("s=/%2s/" % s)
 
+print('------------------------------------------------------------')	#60個
 
 title = "南極旅遊講座"
 print("/{0:*^20s}/".format(title))
@@ -842,40 +816,6 @@ for x in range(0x2160, 0x216a):
   print(chr(x), end = ' ')
 
 print()
-  
-print('------------------------------------------------------------')	#60個
-
-fields = ['Name', 'Age', 'Hometown']
-info = ['Peter', '30', 'Chicago']
-zipData = zip(fields, info)     # 執行zip
-print(type(zipData))            # 列印zip資料類型
-player = list(zipData)          # 將zip資料轉成串列
-print(player)
-
-print('------------------------------------------------------------')	#60個
-
-fields = ['Name', 'Age', 'Hometown']
-info = ['Peter', '30']
-zipData = zip(fields, info)   # 執行zip
-print(type(zipData))          # 列印zip資料類型
-player = list(zipData)        # 將zip資料轉成串列
-print(player)                 # 列印串列
-
-print('------------------------------------------------------------')	#60個
-
-fields = ['Name', 'Age', 'Hometown']
-info = ['Peter', '30', 'Chicago']
-zipData = zip(fields, info)     # 執行zip
-print(type(zipData))            # 列印zip資料類型
-player = list(zipData)          # 將zip資料轉成串列
-print(player)                   # 列印串列
-
-f, i = zip(*player)             # 執行unzip
-print("fields = ", f)
-print("info   = ", i)
-
-
-print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
@@ -1465,8 +1405,6 @@ print(f"/半徑{r:^3d}圓面積是{area:^10.2f}/")
 
 print('------------------------------------------------------------')	#60個
 
-title = "南極旅遊講座"
-print("/{0:*^20s}/".format(title))
 
 print('------------------------------------------------------------')	#60個
 
