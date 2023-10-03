@@ -5,16 +5,14 @@ numpy的使用 矩陣運算
 
 """
 
+import sys
 
 import numpy as np
 
-
 print('------------------------------------------------------------')	#60個
 
-'''
-
 #基本操作
-print('創建矩陣')
+print('創建 1行3列(1X3) 矩陣')
 m = np.mat([1, 2, 3])
 
 print('矩陣')
@@ -22,29 +20,33 @@ print(type(m))
 print(m)
 
 print('矩陣 第0行')
-print(m[0])                #取一行
+print(m[0])             #取一行
 
 print('矩陣 [0, 1]')
-print(m[0,1])              #第一行，第2个数据
+print(m[0, 1])          #第一行，第2个数据
 
-
-print('将Python的列表转换成NumPy的矩阵')
+print('串列轉矩陣')
 list = [1, 2, 3]
 print('矩陣')
-print(np.mat(list))
+m = np.mat(list)
+print(type(m))
+print(m)
 
-print('Numpy dnarray转换成Numpy矩阵')
+print('ndarray轉矩陣')
 n = np.array([1, 2, 3])
-print('矩陣')
+print(type(n))
 print(n)
 
-print('????將矩陣轉成矩陣?')
-print(n)
-print(np.mat(n))
-#matrix([[1, 2, 3]])
+print('矩陣')
+m = np.mat(n)
+print(type(m))
+print(m)
+
+print('------------------------------------------------------------')	#60個
 
 print('排序')
-print('创建2行3列矩阵')
+
+print('創建 2行3列(2X3) 矩陣')
 m = np.mat([[2, 5, 1], [4, 6, 2]])
 print('矩陣')
 print(m)
@@ -76,6 +78,8 @@ print(m[1,0:3])
 print(m[1,0:2])
 #matrix([[2, 4]])
 
+print('------------------------------------------------------------')	#60個
+
 print('矩陣乘法')
 
 a = np.mat([[1, 2, 3], [2, 3, 4]])      #2X3
@@ -103,6 +107,7 @@ print('方法三, dot')
 c3 = np.dot(a, b)     #方法三
 print(c3)
 
+print('------------------------------------------------------------')	#60個
 
 print('矩陣點乘, 要同大小矩陣, 相同位置的數值相乘')
 #点乘，只剩下multiply方法了。
@@ -141,6 +146,8 @@ print(a)
 matrix([[1, 2],
         [3, 4]])
 """
+
+print('反矩陣')
 print(a.I)
 """
 matrix([[-2.0,  1.0],
@@ -152,6 +159,8 @@ print('------------------------------------------------------------')	#60個
 x = np.linspace(0, 5, 6)
 print(type(x))
 print(x)
+
+print('轉置矩陣')
 X = np.mat(x).T #array轉矩陣再轉置
 print(X)
 
@@ -161,6 +170,7 @@ A = np.mat(np.random.rand(3, 3))
 print(type(A))
 print(A)
 
+print('反矩陣')
 B = A.I
 
 print(B * A)
@@ -173,16 +183,27 @@ import numpy as np
 print('建立 4 X 4 的 陣列')
 A = np.random.rand(4, 4)
 
-print('建立 4 X 4 的 矩陣')
+print('建立 4 X 4 的 矩陣 (陣列轉矩陣)')
 B = np.mat(np.random.rand(4, 4))
 
 print('建立 3 X 3 的 矩陣')
 B = np.mat('1 2 3; 4 5 6; 7 8 9')
 
-print('矩陣 與 轉置矩陣')
-A = np.mat('1 2 3; 4 5 6; 7 8 9')
+print('矩陣 與 轉置矩陣 與 反矩陣')
+#A = np.mat('1 2 3; 4 5 6; 7 8 9')  #不可求反矩陣
+A = np.matrix([[1, -2, 3], [0, 4, 5], [7, 8, -9]])
 
-A * A.T
+print('矩陣A')
+print(A)
+
+print('轉置矩陣 A.T')
+print(A.T)
+
+print('反矩陣')
+print(A.I)
+
+print('A * A.I')
+print(A * A.I)
 
 print('------------------------------------------------------------')	#60個
 
@@ -204,9 +225,12 @@ print('------------------------------------------------------------')	#60個
 
 c = np.mat(np.random.rand(4, 4))
 
+print('矩陣')
 print(c)
+print('反矩陣')
 print(c.I)
 
+print('反矩陣')
 d = c.I
 
 c * d
@@ -218,20 +242,16 @@ np.linalg.matrix_rank(A)
 np.linalg.det(A)
 
 print(A)
+print('反矩陣')
 #print(A.I)
 #A.I
+print('反矩陣')
 #d = A.I
 #A*d
 
 #d * A
 
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-import sys
-
-import numpy as np
 
 print('------------------------------------------------------------')	#60個
 
@@ -286,6 +306,8 @@ print('B * A = {}'.format(B * A))
 
 print('------------------------------------------------------------')	#60個
 
+print('反矩陣')
+
 A = np.matrix([[2, 3], [5, 7]])
 B = np.linalg.inv(A)
 print('A_inv = {}'.format(B))
@@ -308,12 +330,15 @@ A = np.array([[[1, 2],
                 [11, 12]]])
 
 print('{}'.format(A))
-print('shape = {}'.format(np.shape(A)))
+print('shape = {}'.format(np.shape(A))) #取得矩陣的行列數
+print(np.shape(A))
 
 print('------------------------------------------------------------')	#60個
 
 A = np.array([[0, 2, 4, 6],
               [1, 3, 5, 7]])              
+
+print('轉置矩陣')
 B = A.T
 print('{}'.format(B))
 C = np.transpose(A)
@@ -361,13 +386,6 @@ def matrix_linear():
     m = np.matrix([[1, -2, 3], [0, 4, 5], [7, 8, -9]])
     print(m)
 
-    # Return transpose  转置矩阵
-    print(m.T)
-
-    # Return inverse  # 逆矩阵
-    print(m.I)
-
-
     # Create a vector and multiply
     v = np.matrix([[2], [3], [4]])
     print(v)
@@ -387,7 +405,7 @@ def matrix_linear():
 
 matrix_linear()
 
-'''
+
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個

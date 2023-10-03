@@ -617,10 +617,15 @@ def read_from_db():
         conn = sqlite3.connect(db_filename) # 建立資料庫連線
 
 
-        sqlstr = "SELECT * FROM {}".format(table_list[i])
+        sqlstr = "SELECT * FROM {}".format(table_list[i])   #SELECT * : 取得所有資料
         #print(sqlstr)
         cursor = conn.execute(sqlstr)
-        rows = cursor.fetchall()
+        rows = cursor.fetchall()    #讀取全部資料
+        length = len(rows)
+        print('共有', length, '筆資料')
+
+        cursor = conn.execute(sqlstr)
+        rows = cursor.fetchall()    #讀取全部資料
         #print(rows)
         for row in rows:
             #print('{}\t{}'.format(row[0], row[1]))

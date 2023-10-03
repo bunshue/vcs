@@ -3,6 +3,7 @@ import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
+
 # 正常顯示
 x1 = np.linspace(-1.5,1.5,31)
 y1 = np.cos(x1)**2

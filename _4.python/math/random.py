@@ -39,7 +39,7 @@ for i in range(10):
     print(random.random(), end = ', ')
 
 
-# 修改随机数生成的种子
+# 修改隨機數生成的種子
 random.seed() # Seed based on system time or os.urandom()
 random.seed(12345) # Seed based on integer given
 random.seed(b'bytedata') # Seed based on byte data
@@ -75,8 +75,7 @@ for i in range(10):
 
 print('------------------------------------------------------------')	#60個
 
-
-# 随机整数
+# 隨機整數
 print(random.randint(0,10))
 print(random.randint(0,10))
 print(random.randint(0,10))
@@ -306,7 +305,7 @@ print('--- random.sample -------------------------------------------------------
 
 animals = ['鼠', '牛', '虎', '兔', '龍']
 
-# 抽取样本
+# 抽取樣本
 print(random.sample(animals, 3))
 print(random.sample(animals, 3))
 
@@ -441,7 +440,7 @@ print('------------------------------------------------------------')	#60個
 tttt = hex(random.getrandbits(64))  # 64 bits randomness
 print(tttt)
 
-# 随机二进制数的整数返回
+# 隨機二進制數的整數返回
 print(random.getrandbits(200))
 
 

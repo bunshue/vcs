@@ -105,12 +105,84 @@ plt.plot(x, y)
 plt.fill_between(x, -1, y, color='yellow', alpha=0.3)
 
 
-
-
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+
+
+print('------------------------------------------------------------')	#60個
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'plot 集合 fill_between', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+x = np.arange(0.0, 3, 0.01)
+y = np.sin(2 * np.pi * x)
+plt.plot(x, y)                  # 繪製 sin(2 * pi * x)
+
+plt.fill(x, y, 'y', alpha=0.3)  # 黃色填充
+plt.xlabel('角度')
+plt.ylabel('Sin波形值')
+plt.title('Sin波形')
+
+#第二張圖
+plt.subplot(232)
+
+import numpy as np
+
+left = -np.pi
+right = np.pi
+x = np.linspace(left, right, 100)
+y = np.sin(3*x)                  # sin(3*x)函數
+
+plt.plot(x, y) 
+plt.fill_between(x, -1, y, color='yellow', alpha=0.3)
+
+
+#第三張圖
+plt.subplot(233)
+
+import numpy as np
+
+left = -np.pi
+right = np.pi
+x = np.linspace(left, right, 100)
+y = np.sin(3*x)                  # sin(3*x)函數
+
+plt.plot(x, y) 
+plt.fill_between(x, 0, y, color='green', alpha=0.1)
+
+
+#第四張圖
+plt.subplot(234)
+
+
+
+#第五張圖
+plt.subplot(235)
+
+
+
+#第六張圖
+plt.subplot(236)
+
+x = [0, 4, 6, 4, 0]
+y = [0, 0, 2, 4, 4]
+plt.fill(x, y, 'r')
+
+x = [0, 1, 3, 2]
+y = [2, 5, 6, 0]
+x2 = [7, 8, 9]
+y2 = [0, 3, 0]
+plt.fill(x, y, 'g', x2, y2, 'b')
+
+
+
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

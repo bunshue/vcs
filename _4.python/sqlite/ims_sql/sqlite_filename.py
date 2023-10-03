@@ -615,10 +615,15 @@ def read_from_db():
         conn = sqlite3.connect(db_filename) # 建立資料庫連線
 
 
-        sqlstr = "SELECT * FROM {}".format(table_list[i])
+        sqlstr = "SELECT * FROM {}".format(table_list[i])   #SELECT * : 取得所有資料
         #print(sqlstr)
         cursor = conn.execute(sqlstr)
-        rows = cursor.fetchall()
+        rows = cursor.fetchall()    #讀取全部資料
+        length = len(rows)
+        print('共有', length, '筆資料')
+
+        cursor = conn.execute(sqlstr)
+        rows = cursor.fetchall()    #讀取全部資料
         #print(rows)
         for row in rows:
             #print('{}\t{}'.format(row[0], row[1]))
@@ -860,6 +865,9 @@ def export_data():
         text1.insert('end', message)
 
 def button00Click():
+    test_filename_db()
+    return
+
     print('你按了 新建資料庫')
     global db_filename
     db_filename = 'db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
@@ -1088,9 +1096,106 @@ message = "尚未開啟資料庫"
 main_message1.set(message)
 
 
+def test_filename_db():
+    print('你按了 新建資料庫')
+    global db_filename
+    db_filename = 'db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+    #db_filename = 'db_filename111222333444555.sqlite';
+    message = '資料庫 : ' + db_filename
+    print(message)
+    text1.insert('end', message)
+    main_message1.set(message)
+
+    print('新建資料庫完成, 檔名 :', db_filename)
+    
+    global stage
+    global tablename
+
+    tablename = 'table_filename'
+
+    #同一個資料庫內 可以放多個table table名稱不同即可
+
+    #print('建立資料庫連線, 資料庫 : ' + db_filename)
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+
+    cursor = conn.cursor() # 建立 cursor 物件
+
+    #print('建立一個資料表')
+    #Create 建立
+
+    #sqlstr = "CREATE TABLE IF NOT EXISTS '{}' ('data1' TEXT PRIMARY KEY NOT NULL".format(tablename)
+    sqlstr = "CREATE TABLE IF NOT EXISTS '{}' ('data1' TEXT NOT NULL".format(tablename)
+    sqlstr += ", '{}' TEXT NOT NULL".format('data2')
+    sqlstr += ", '{}' TEXT NOT NULL".format('data3')
+    sqlstr += ')'
+    print(sqlstr)
+
+    cursor.execute(sqlstr)
+    conn.commit() # 更新
+
+    print('加入10筆資料')
+
+    N = 1234
+    
+    #Insert
+    for i in range(0, N):
+
+        data01 = 'aaaa' + str(i)
+        data02 = 'bbbb'
+        data03 = 'cccc'
+
+        # 新增資料
+        insert_data = "INSERT INTO '{}' (".format(tablename)
+        insert_data += 'data1, '
+        insert_data += 'data2, '
+        insert_data += 'data3'
+        insert_data +=') VALUES ('
+        insert_data += "'{}', ".format(data01.strip())
+        insert_data += "'{}', ".format(data02.strip())
+        insert_data += "'{}'".format(data03.strip())
+
+        insert_data +=')'
+
+        #print(insert_data)
+        
+        #insert_data = "INSERT INTO '{}' (data1, data2, data3, data4, data5) VALUES ('{}', '{}', '{}', '{}', '{}')".format(tablename, data[1], data[2], data[3], data[4], data[5])
+        #print(insert_data)
+        conn.execute(insert_data)
+
+    conn.commit() # 更新
+    conn.close()  # 關閉資料庫連線
+
+    print('加入完成')
+
+    #print('不是用fetchall()讀取 全部資料')
+    #print('建立資料庫連線, 資料庫 : ' + db_filename)
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+    
+    cursor = conn.execute("SELECT * FROM '{}'".format(tablename))   #SELECT * : 取得所有資料
+    rows = cursor.fetchall()    #讀取全部資料
+    length = len(rows)
+    print('共有', length, '筆資料')
+
+    '''
+    cursor = conn.execute("SELECT * FROM '{}'".format(tablename))   #SELECT * : 取得所有資料
+    cnt = 0
+    for row in cursor:
+        #print(type(row))
+        #print(len(row))
+        #print('第' + str(i + 1) + '筆資料 : ', end = "")
+        #print(rows[i])
+        #print('{}\t{}\t{}\t{}\t{}'.format(row[0], row[1], row[2], row[3], row[4]))
+        for r in row:
+            print(r, end = '\t')
+        print()
+        cnt += 1
+        if cnt == 30:
+            break
+    '''
 
 
-
+    conn.close()  # 關閉資料庫連線
+    print('完成')
 
 
 window.mainloop()

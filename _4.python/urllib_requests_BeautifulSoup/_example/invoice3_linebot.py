@@ -1,8 +1,5 @@
 import requests
-try:
-    import xml.etree.cElementTree as ET
-except ImportError:
-    import xml.etree.ElementTree as ET
+import xml.etree.cElementTree as ET
 
 def showCurrent():
     try:
@@ -119,10 +116,12 @@ def show5digit(mtext, userid, mode, digit3):
         db.engine.execute(sql_cmd)
         print('模式文字檔讀取錯誤！')
 
-#顯示本期中獎號碼
+
+print('\n顯示本期中獎號碼')
 showCurrent()
 
-#顯示前期中獎號碼
+
+print('\n顯示前期中獎號碼')
 showOld()
 
 

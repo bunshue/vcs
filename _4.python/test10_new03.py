@@ -15,11 +15,19 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-
-
+import os
+print(os.name)
+print(os.sys.platform)
 
 
 print('------------------------------------------------------------')	#60個
+
+
+for envname in 'TMPDIR', 'TEMP', 'TMP':
+    dirname = os.getenv(envname)
+    print('cccccc', dirname)
+    #print(dirname)
+
 
 
 

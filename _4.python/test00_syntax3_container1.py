@@ -51,7 +51,7 @@ table2 = {} #dict
 print(type(table1))
 print(type(table2))
 
-
+animals = dict() #建立一個字典
 
 print('字典 dddd ST------------------------------------------------------------')	#60個
 
@@ -151,27 +151,7 @@ print("目前字典元素數量     = ", len(animal))
 
 print('------------------------------------------------------------')	#60個
 
-# 建立內含字串的字典
-
-animals = {
-    '鼠':['生性樂觀', '適應力強', '坐言起行'],
-    '牛':['思想細密', '目標清晰', '老實可靠', '活潑機智', '永不言倦'],
-    '虎':['胸懷大志', '生性獨立', '著重行動', '挑戰自己']
-    }
-
-print(type(animals))
-print(animals)
-
-# 列印key名字 + 字串'喜歡的運動'
-for name, character in animals.items():
-          print("動物 %s 的特性是 : " % name)
-# 列印value,這是串列
-          for ch in character:
-              print("   ", ch)
-
-print('------------------------------------------------------------')	#60個
-
-# 建立內含字典的字典
+# 建立內含{字典}的{字典}
 animals = {
     '鼠':
     {
@@ -193,54 +173,96 @@ print(type(animals))
 print(animals)
 
 # 列印字典元素個數
-print("animals字典元素個數       ", len(animals))
-print("animals['鼠']元素個數 ", len(animals['鼠']))
-print("animals['牛']元素個數  ", len(animals['牛']))
+print("animals字典元素個數   :", len(animals))
+print("animals['鼠']元素個數 :", len(animals['鼠']))
+print("animals['牛']元素個數 :", len(animals['牛']))
 
 print('------------------------------------------------------------')	#60個
 
-animals = {'鼠' : 3, '牛' : 48}
-ret_value1 = animals.get('牛')
-print("Value = ", ret_value1)
-ret_value2 = animals.get('虎')
-print("Value = ", ret_value2)
-ret_value3 = animals.get('虎', 10)
-print("Value = ", ret_value3)
+# 建立內含{集合}的{字典}
+
+print('字典範例')
+
+animals = {
+    '鼠' : {'生性樂觀', '適應力強', '坐言起行'},
+    '牛' : {'思想細密', '目標清晰', '老實可靠', '活潑機智', '永不言倦'},
+    '虎' : {'胸懷大志', '生性獨立', '著重行動', '挑戰自己'},
+    '兔' : {'性情溫馴', '挑戰自己', '坐言起行', '頭腦清晰'},
+    '龍' : {'積極進取', '胸懷大志', '行動敏捷', '性情溫馴'},
+    '蛇' : {'才智非凡', '永不言倦', '情感豐富'},
+    '馬' : {'活潑機智', '積極進取', '目標清晰', '積極進取'},
+    '羊' : {'心思慎密', '溫柔體貼', '永不言倦', '有第六感', '挑戰自己'},
+    '猴' : {'有幽默感', '頭腦清晰', '思考周詳', '行動敏捷', '生性獨立'},
+    '雞' : {'思想細密', '頭腦靈活', '胸懷大志', '永不言倦', '有第六感', '性情溫馴', '適應力強'},
+    '狗' : {'坐言起行', '直覺敏銳', '生性樂觀', '尊師重道', '直覺敏銳', ''},
+    '豬' : {'活潑機智', '生性獨立', '適應力強', '性情溫馴'},
+    }
+
+#print(type(animals))
+#print(animals)
+#print(type(animals['牛']))
+#print(animals['牛'])
+
+print("含有 適應力強 的動物 :")
+for name, character in animals.items():
+    if '適應力強' in character:
+        print(name)
+
+print("含有 適應力強 但是不含 生性樂觀 的動物 : ")
+for name, character in animals.items():
+    if '適應力強' in character and not ('生性樂觀' in character):
+        print(name)
 
 print('------------------------------------------------------------')	#60個
 
-# key在字典內
-animals = {'鼠' : 3, '牛' : 48}
-ret_value = animals.setdefault('牛')
-print("Value = ", ret_value)
-print("animals字典", animals)
-ret_value = animals.setdefault('牛',100)
-print("Value = ", ret_value)
-print("animals字典", animals)
+# 建立內含{字典}的{字典}
+animals = {
+    '鼠':{
+        'cname':'鼠',
+        'ename':'mouse',
+        'weight':'3'},
+    '牛':{
+        'cname':'牛',
+        'ename':'ox',
+        'weight':'48'}}
+
+# 列印內含字典的字典
+for animal, animal_info in animals.items( ):
+    print("名稱 = ", animal)                    # 列印鍵(key)
+    cname = animal_info['cname']
+    ename = animal_info['ename']
+    print('中文名 :', cname)
+    print('英文名 :', ename)
+    print("體重       = {animal_info['weight']}")      # 列印值(value)
+
+# 列印字典元素個數
+print(f"animals字典元素個數       {len(animals)}")
+print(f"animals['鼠']元素個數 {len(animals['鼠'])}")
+print(f"animals['牛']元素個數  {len(animals['牛'])}")
 
 print('------------------------------------------------------------')	#60個
 
-animal_mouse = {'name' : 'mouse'}
-print("原先字典內容", animal_mouse)
+# 建立內含[串列]的{字典}
 
-# 'cname'鍵不存在
-#cname = animal_mouse.setdefault('cname')    #未填入值
-cname = animal_mouse.setdefault('cname', '鼠')    #有填入值
-print("增加cname鍵 ", animal_mouse)
-print("cname = ", cname)
+animals = {
+    '鼠':['生性樂觀', '適應力強', '坐言起行'],
+    '牛':['思想細密', '目標清晰', '老實可靠', '活潑機智', '永不言倦'],
+    '虎':['胸懷大志', '生性獨立', '著重行動', '挑戰自己']
+    }
 
-# 'weight'鍵不存在
-weight = animal_mouse.setdefault('weight', 3)
-print("增加weight鍵 ", animal_mouse)
-print("weight = ", weight)
-
-print('------------------------------------------------------------')	#60個
-
-print('字典 操作')
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 print(type(animals))
 print(animals)
 
+# 列印key名字 + 字串'喜歡的運動'
+for name, character in animals.items():
+          print("動物 %s 的特性是 : " % name)
+# 列印value,這是串列
+          for ch in character:
+              print("   ", ch)
+
+print('------------------------------------------------------------')	#60個
+
+# 建立內含{元組}的{字典}
 animals = {'鼠' : ('mouse', 3),
            '牛' : ('ox', 48),
            '虎' : ('tiger', 33),
@@ -256,6 +278,9 @@ animals = {'鼠' : ('mouse', 3),
            }
 
 animals['象'] = ('elephant', 100)
+
+print(type(animals['象']))
+print(animals['象'])
 
 print(type(animals))
 print(animals)
@@ -280,30 +305,43 @@ for i in range(len(ani)):
 
 print('------------------------------------------------------------')	#60個
 
-# 建立內含字典的字典
-animals = {
-    '鼠':{
-        'cname':'鼠',
-        'ename':'mouse',
-        'weight':'3'},
-    '牛':{
-        'cname':'牛',
-        'ename':'ox',
-        'weight':'48'}}
+animals = {'鼠' : 3, '牛' : 48}
+ret_value1 = animals.get('牛')
+print("Value = ", ret_value1)
+ret_value2 = animals.get('虎')
+print("Value = ", ret_value2)
+ret_value3 = animals.get('虎', 10)
+print("Value = ", ret_value3)
+print('animals字典 :')
+print(animals)
 
-# 列印內含字典的字典
-for animal, animal_info in animals.items( ):
-    print("名稱 = ", animal)                    # 列印鍵(key)
-    cname = animal_info['cname']
-    ename = animal_info['ename']
-    print('中文名 :', cname)
-    print('英文名 :', ename)
-    print("體重       = {animal_info['weight']}")      # 列印值(value)
+print('------------------------------------------------------------')	#60個
 
-# 列印字典元素個數
-print(f"animals字典元素個數       {len(animals)}")
-print(f"animals['鼠']元素個數 {len(animals['鼠'])}")
-print(f"animals['牛']元素個數  {len(animals['牛'])}")
+# key在字典內
+animals = {'鼠' : 3, '牛' : 48}
+ret_value = animals.setdefault('牛')
+print("Value = ", ret_value)
+print("animals字典", animals)
+ret_value = animals.setdefault('牛', 100)
+print("Value = ", ret_value)
+print('animals字典 :')
+print(animals)
+
+print('------------------------------------------------------------')	#60個
+
+animal_mouse = {'name' : 'mouse'}
+print("原先字典內容", animal_mouse)
+
+# 'cname'鍵不存在
+#cname = animal_mouse.setdefault('cname')    #未填入值
+cname = animal_mouse.setdefault('cname', '鼠')    #有填入值
+print("增加cname鍵 ", animal_mouse)
+print("cname = ", cname)
+
+# 'weight'鍵不存在
+weight = animal_mouse.setdefault('weight', 3)
+print("增加weight鍵 ", animal_mouse)
+print("weight = ", weight)
 
 print('------------------------------------------------------------')	#60個
 
@@ -384,14 +422,15 @@ for c in wd:
 print('------------------------------------------------------------')	#60個
 
 animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
-
+print(animals)
+print(type(animals))
 print('打印字典的內容1')
+print(animals)
+
+print('打印字典的內容2')
 for key, value in animals.items():
     if value < 5:
       print("({},{})".format(key, value))
-
-print('打印字典的內容2')
-print(animals)
 
 print('------------------------------------------------------------')	#60個
 
@@ -467,7 +506,6 @@ for i in range(len(animals_key)):
 
 print('------------------------------------------------------------')	#60個
 
-
 print('dict使用範例')
 
 class_101 = dict() #記錄學生座號及姓名
@@ -478,11 +516,11 @@ mat_score = dict() #記錄數學成績
 subjects = ["國文", "英文", "數學"]
 scores  = [chi_score, eng_score, mat_score]
 
-class_101[1] = 'apple'
-class_101[2] = 'banana'
-class_101[4] = 'cat'
-class_101[8] = 'dog'
-print(class_101)
+class_101[1] = '牛'
+class_101[2] = '虎'
+class_101[4] = '龍'
+class_101[8] = '猴'
+print('現有動物 :', class_101)
 
 print('輸入國文成績')
 subject_no = 0
@@ -561,34 +599,6 @@ print(animals.items())
 
 print('------------------------------------------------------------')	#60個
 
-print('字典範例')
-
-animals = {
-    '鼠' : {'生性樂觀', '適應力強', '坐言起行'},
-    '牛' : {'思想細密', '目標清晰', '老實可靠', '活潑機智', '永不言倦'},
-    '虎' : {'胸懷大志', '生性獨立', '著重行動', '挑戰自己'},
-    '兔' : {'性情溫馴', '挑戰自己', '坐言起行', '頭腦清晰'},
-    '龍' : {'積極進取', '胸懷大志', '行動敏捷', '性情溫馴'},
-    '蛇' : {'才智非凡', '永不言倦', '情感豐富'},
-    '馬' : {'活潑機智', '積極進取', '目標清晰', '積極進取'},
-    '羊' : {'心思慎密', '溫柔體貼', '永不言倦', '有第六感', '挑戰自己'},
-    '猴' : {'有幽默感', '頭腦清晰', '思考周詳', '行動敏捷', '生性獨立'},
-    '雞' : {'思想細密', '頭腦靈活', '胸懷大志', '永不言倦', '有第六感', '性情溫馴', '適應力強'},
-    '狗' : {'坐言起行', '直覺敏銳', '生性樂觀', '尊師重道', '直覺敏銳', ''},
-    '豬' : {'活潑機智', '生性獨立', '適應力強', '性情溫馴'},
-    }
-
-print(type(animals))
-
-print("含有 適應力強 的動物 :")
-for name, character in animals.items():
-    if '適應力強' in character:
-        print(name)
-
-print("含有 適應力強 但是不含 生性樂觀 的動物 : ")
-for name, character in animals.items():
-    if '適應力強' in character and not ('生性樂觀' in character):
-        print(name)
 
 print('------------------------------------------------------------')	#60個
 
