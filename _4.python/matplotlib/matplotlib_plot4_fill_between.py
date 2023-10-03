@@ -159,6 +159,117 @@ plt.fill_between(x, 0, y, color='green', alpha=0.1)
 #第四張圖
 plt.subplot(234)
 
+import numpy as np
+
+# 函數的係數
+a = -1
+b = 2
+# 繪製區間圖形
+x = np.linspace(-2, 4, 1000)
+y = a*x**2 + b*x
+plt.plot(x, y, color='b')
+plt.fill_between(x, y1 = y, y2 = 0, where = (x >= -2) & (x <= 5), facecolor = 'lightgreen')
+
+plt.grid()
+
+
+#第五張圖
+plt.subplot(235)
+
+import numpy as np
+import matplotlib.pyplot as plt 
+
+x = np.arange(0,13.3,0.01)
+
+y1 = 17.5 - 2.5 * x
+y2 = 8 - 0.6 * x
+y3 = np.minimum(y1,y2)  # 取較低值
+
+plt.plot(x,y1,color="blue",label="17.5 - 2.5x")
+plt.plot(x,y2,color="green",label="8 - 0.6x")
+plt.ylim(0, 10)
+plt.fill_between(x, 0, y3, color='yellow')
+plt.legend()
+
+
+
+#第六張圖
+plt.subplot(236)
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt 
+
+x = np.arange(0,13.3,0.01)
+y = 3 - x
+y1 = 17.5 - 2.5 * x
+y2 = 8 - 0.6 * x
+y3 = np.minimum(y1,y2)  # 取較低值
+
+plt.plot(x,y,color="r",label="3 - x")
+plt.plot(x,y1,color="blue",label="17.5 - 2.5x")
+plt.plot(x,y2,color="green",label="8 - 0.6x")
+plt.ylim(0, 10)
+plt.fill_between(x, y, y3, color='yellow')
+plt.legend()
+
+
+
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'plot 集合 fill_between', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 函數f(x)的係數
+a1 = 1
+c1 = -2
+x = np.linspace(-2, 3, 1000)
+y1 = a1*x**2 + c1
+plt.plot(x, y1, color='b')      # 藍色是 f(x)
+
+# 函數g(x)的係數
+a2 = -1
+b2 = 2
+c2 = 2
+x = np.linspace(-2, 3, 1000)
+y2 = a2*x**2 + b2*x + c2
+plt.plot(x, y2, color='g')      # 綠色是 g(x)
+
+# 繪製區間
+plt.fill_between(x, y1=y1, y2=y2, where=(x>=-1)&(x<=2),
+                 facecolor='yellow')
+
+plt.grid()
+
+
+#第二張圖
+plt.subplot(232)
+
+
+
+#第三張圖
+plt.subplot(233)
+
+
+
+#第四張圖
+plt.subplot(234)
+
 
 
 #第五張圖
@@ -185,4 +296,5 @@ plt.fill(x, y, 'g', x2, y2, 'b')
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
 

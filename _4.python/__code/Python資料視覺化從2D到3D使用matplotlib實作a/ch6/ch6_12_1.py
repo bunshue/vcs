@@ -10,6 +10,3 @@ ax.plot(x, y1, lw = 2)              # 線條寬度是 2
 ax.plot(x, y2, linewidth = 5)       # 線條寬度是 5                
 plt.show()
 
-
-
-

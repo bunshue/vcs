@@ -6,14 +6,31 @@ def showCurrent():
         content = requests.get('http://invoice.etax.nat.gov.tw/invoice.xml')
         tree = ET.fromstring(content.text)  #解析XML
         items = list(tree.iter(tag='item'))  #取得item標籤內容
+        print('期別0 :', items[0][0].text)
+        print('網址0 :', items[0][1].text)
+        print('時間0 :', items[0][2].text)
+        print('號碼0 :', items[0][3].text)
+        print('期別1 :', items[1][0].text)
+        print('網址1 :', items[1][1].text)
+        print('時間1 :', items[1][2].text)
+        print('號碼1 :', items[1][3].text)
+        print('期別2 :', items[2][0].text)
+        print('網址2 :', items[2][1].text)
+        print('時間2 :', items[2][2].text)
+        print('號碼2 :', items[2][3].text)
+        print('期別3 :', items[3][0].text)
+        print('網址3 :', items[3][1].text)
+        print('時間3 :', items[3][2].text)
+        print('號碼3 :', items[3][3].text)
+        
         title = items[0][0].text  #期別
-        print(title)
-        ptext = items[0][2].text  #中獎號碼
-        print(ptext)
+        print('期別 :', title)
+        ptext = items[0][3].text  #中獎號碼
+        print('號碼 :', ptext)
         ptext = ptext.replace('<p>','').replace('</p>','\n')
         message = title + '月\n' + ptext[:-1]  #ptext[:-1]為移除最後一個\n
-        print(message)
-        print(ptext)
+        print('message :', message)
+        print('號碼 :', ptext)
     except:
         print('讀取發票號碼發生錯誤！')
 
@@ -120,10 +137,10 @@ def show5digit(mtext, userid, mode, digit3):
 print('\n顯示本期中獎號碼')
 showCurrent()
 
-
+'''
 print('\n顯示前期中獎號碼')
 showOld()
-
+'''
 
 '''
     elif len(mtext) == 3 and mtext.isdigit():

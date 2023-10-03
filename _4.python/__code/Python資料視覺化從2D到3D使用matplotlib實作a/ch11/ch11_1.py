@@ -1,4 +1,3 @@
-# ch11_1.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -14,12 +13,6 @@ plt.xticks(())                  # 不顯示 x 刻度
 plt.ylim(-3, 3)
 plt.yticks(())                  # 不顯示 y 刻度
 plt.colorbar()                  # 建立色彩條
+
 plt.show()
-
-
-
-
-
-
-
 

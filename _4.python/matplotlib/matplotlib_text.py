@@ -169,6 +169,10 @@ plt.text(0.4 ,0.1, 'sin(x)',fontsize=20)  # 輸出公式
 #第二張圖
 plt.subplot(232)
 
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+my_kwargs = dict(ha='center',va='center',fontsize=50,c='b')
+plt.text(0.5, 0.5, '歡迎來到美國', **my_kwargs)
+
 
 #第三張圖
 plt.subplot(233)

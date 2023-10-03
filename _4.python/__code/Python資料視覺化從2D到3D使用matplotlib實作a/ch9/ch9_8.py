@@ -1,4 +1,3 @@
-# ch9_8.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -10,7 +9,5 @@ size =  (30 * np.random.rand(points))**2    # 散點大小數列
 plt.scatter(x, y, s=size, c=colors)
 plt.xticks(np.arange(0,12,step=1.0))
 plt.yticks(np.arange(0,12,step=1.0))
+
 plt.show()
-
-
-

@@ -124,36 +124,6 @@ plt.figure(num = 'plot 集合 2 函數曲線', figsize = (20, 15), dpi = 84, fac
 #第一張圖
 plt.subplot(231)
 
-
-#第二張圖
-plt.subplot(232)
-
-#畫個函數, 標出正的部份!
-#把這個函數大於 0 的地方標示出來。
-
-x = np.linspace(-5, 5, 200)
-y = np.sinc(x)
-
-plt.plot(x, y)
-plt.plot(x[y>0], y[y>0], 'o')
-
-
-#第三張圖
-plt.subplot(233)
-
-
-#第四張圖
-plt.subplot(234)
-
-
-
-#第五張圖
-plt.subplot(235)
-
-
-#第六張圖
-plt.subplot(236)
-
 import matplotlib.pyplot as plt 
 import numpy as np
 
@@ -172,26 +142,37 @@ plt.annotate('局部極小值',
 plt.text(0.8,1.2,'Annotate的應用',fontsize=20,color='b')
 plt.ylim(-1.5, 1.5)
 
+#第二張圖
+plt.subplot(232)
+
+#畫個函數, 標出正的部份!
+#把這個函數大於 0 的地方標示出來。
+
+x = np.linspace(-5, 5, 200)
+y = np.sinc(x)
+
+plt.plot(x, y)
+plt.plot(x[y>0], y[y>0], 'o')
+#plt.scatter(x[y>0], y[y>0], c='r')
+
+#第三張圖
+plt.subplot(233)
+
+
+#第四張圖
+plt.subplot(234)
+
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-
-'''
-
-#plt.xticks(np.arange(-5,6))
-
-
-
-
-font_filename = 'C:/Windows/Fonts/mingliu.ttc'  #中英文字型
-font = FontProperties(fname = font_filename, size = 20)
-
-plt.xlabel('Time(s)', fontproperties = font)
-plt.ylabel('Amplitude', fontproperties = font)
-plt.title(u'三角函數', fontproperties = font, fontsize = 24)
-
-
-
-'''

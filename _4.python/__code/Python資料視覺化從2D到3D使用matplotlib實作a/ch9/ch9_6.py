@@ -1,4 +1,3 @@
-# ch9_6.py
 import matplotlib.pyplot as plt
 import numpy as np
 import itertools as it
@@ -9,7 +8,6 @@ y = np.random.random((7,10))                        # 建立 y
 for yy in y:    
     plt.scatter(x, yy, c=next(colorused), marker='*')
 plt.xticks(np.arange(0,11,step=1.0))
+
 plt.show()
-
-
 

@@ -1,4 +1,3 @@
-# ch6_14.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -6,11 +5,10 @@ import numpy as np
 x1 = np.linspace(0, 2*np.pi, 300)
 ax1 = plt.subplot(211)              
 ax1.plot(x1, np.sin(2*np.pi*x1))
+
 # 建立子圖 2
 x2 = np.linspace(0, 3*np.pi, 300)
 ax2 = plt.subplot(212)  
 ax2.plot(x2, np.sin(4*np.pi*x2))
+
 plt.show()
-
-
-

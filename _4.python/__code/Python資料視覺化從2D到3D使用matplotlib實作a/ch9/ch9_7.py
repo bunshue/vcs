@@ -1,4 +1,3 @@
-# ch9_7.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -9,7 +8,5 @@ colors = np.random.rand(points)         # 色彩數列
 plt.scatter(x, y, c=colors)
 plt.xticks(np.arange(0,11,step=1.0))
 plt.yticks(np.arange(0,11,step=1.0))
+
 plt.show()
-
-
-

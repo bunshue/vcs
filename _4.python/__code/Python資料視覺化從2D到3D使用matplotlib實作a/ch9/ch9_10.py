@@ -1,4 +1,3 @@
-# ch9_10.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -34,6 +33,7 @@ axs[1,2].scatter(x, y, s=100, c=colors, marker=r'$\heartsuit$')
 axs[1,2].set_title(r'${heartsuit=}\heartsuit$'+'標記',c='b')
 axs[1,2].axis('square')                                   # 建立矩形子圖
 plt.tight_layout()
+
 plt.show()
 
 

@@ -20,6 +20,27 @@ plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, fac
 #第一張圖
 plt.subplot(231)
 
+print('描繪切線')
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# x的值
+x = np.arange(-1, 1, 0.1)
+
+# 原來的函數
+y = 2 * x * x + 3
+
+# 切線
+a = 4 * 0.25            # 導函數 f'(x)= 4x（斜率）
+b = 3.125 - a * 0.25  # 截距 b = y - ax
+y2 = a * x + b          # 切線的式子
+
+# 繪圖
+plt.plot(x, y)   # 原來的函數
+plt.plot(x, y2)  # 切線
+plt.grid(color = '0.8')
+
 
 #第二張圖
 plt.subplot(232)
@@ -119,27 +140,6 @@ plt.figure(num = 'plot 集合 2 函數曲線', figsize = (20, 15), dpi = 84, fac
 #第一張圖
 plt.subplot(231)
 
-print('描繪切線')
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-# x的值
-x = np.arange(-1, 1, 0.1)
-
-# 原來的函數
-y = 2*x*x + 3
-
-# 切線
-a = 4*0.25            # 導函數 f'(x)= 4x（斜率）
-b = 3.125 - a * 0.25  # 截距 b = y - ax
-y2 = a*x + b          # 切線的式子
-
-# 繪圖
-plt.plot(x, y)   # 原來的函數
-plt.plot(x, y2)  # 切線
-plt.grid(color='0.8')
-
 
 #第二張圖
 plt.subplot(232)
@@ -148,27 +148,6 @@ plt.subplot(232)
 #第三張圖
 plt.subplot(233)
 
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)                         # 設定x軸刻度
-plt.plot(seq, Benz, '-*', label='Benz')
-plt.plot(seq, BMW, '-o', label='BMW')
-plt.plot(seq, Lexus, '-^', label='Lexus')
-
-
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
-
-
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)                         # 設定x軸刻度
-
 
 #第四張圖
 plt.subplot(234)
@@ -176,23 +155,6 @@ plt.subplot(234)
 
 #第五張圖
 plt.subplot(235)
-
-
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)                         # 設定x軸刻度
-plt.plot(seq, Benz, '-*', label='Benz')
-plt.plot(seq, BMW, '-o', label='BMW')
-plt.plot(seq, Lexus, '-^', label='Lexus')
-plt.legend(loc='best')
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
 
 
 #第六張圖

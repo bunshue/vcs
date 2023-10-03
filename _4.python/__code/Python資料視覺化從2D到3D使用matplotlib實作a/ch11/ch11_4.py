@@ -1,4 +1,3 @@
-# ch11_4.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -7,12 +6,5 @@ x = np.random.rand(N)
 y = np.random.rand(N)
 plt.scatter(x, y, c=x)
 plt.colorbar(orientation='horizontal')  # 建立橫向色彩條
+
 plt.show()
-
-
-
-
-
-
-
-

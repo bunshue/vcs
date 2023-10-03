@@ -1,4 +1,3 @@
-# ch10_6.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -50,7 +49,6 @@ colorbar = np.vstack((colorbar, colorbar))      # 擴充陣列為矩陣
 # cmap_list是色彩分類名稱, cmap_name是類別內的名稱
 for cmap_list, cmap_name in cmaps:
     plot_color_gradients(cmap_list, cmap_name)
+
 plt.show()
-
-
 

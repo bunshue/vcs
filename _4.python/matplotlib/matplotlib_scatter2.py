@@ -42,97 +42,15 @@ plt.subplot(233)
 #第四張圖
 plt.subplot(234)
 
-#蒙地卡羅模擬 Monte Carlo Simulation 使用亂數與機率來解決問題
-
-import math
-import random
-import matplotlib.pyplot as plt
-
-print('蒙地卡羅模擬 a')
-
-L = 100
-NUMBER_OF_TRIALS = 300
-numberOfHits = 0
-
-r = L / 2
-cx = r
-cy = r
-
-numberOfHits = 0
-for i in range(NUMBER_OF_TRIALS):
-    x = random.randint(0, L) # 0 ~ L (含前後) 之間的任意整數
-    y = random.randint(0, L) # 0 ~ L (含前後) 之間的任意整數
-    #print(x, y)
-
-    d = math.sqrt((x-cx)**2+(y-cy)**2)  #點與中心的距離
-    if d <= r:
-        numberOfHits += 1
-        plt.scatter(x, y, marker = '.', c = 'r')
-    else:
-        plt.scatter(x, y, marker = '.', c = 'g')
-        
-#求圓周率
-p = numberOfHits / NUMBER_OF_TRIALS
-pi = p * 4
-print('圓周率 = ', pi)
-
-plt.axis('equal')
-
 
 #第五張圖
 plt.subplot(235)
 
 
 
-
-print('蒙地卡羅模擬 b')
-import random
-import math
-
-trials = 800
-Hits = 0
-radius = 50
-for i in range(trials):
-    x = random.randint(1, 100)                      # x軸座標
-    y = random.randint(1, 100)                      # y軸座標
-    if math.sqrt((x-50)**2 + (y-50)**2) < radius:   # 在圓內
-        plt.scatter(x, y, marker='.', c='r')
-        Hits += 1
-    else:
-        plt.scatter(x, y, marker='.', c='g')    
-plt.axis('equal')
-
-'''
-print('蒙地卡羅模擬 c')
-
-import random
-
-trials = 1000000
-Hits = 0
-for i in range(trials):
-    x = random.random() * 2 - 1     # x軸座標
-    y = random.random() * 2 - 1     # y軸座標
-    if x * x + y * y <= 1:          # 判斷是否在圓內
-        Hits += 1
-PI = 4 * Hits / trials
-
-print("PI = ", PI)
-'''
-
 #第六張圖
 plt.subplot(236)
 
-A = 10  #震幅
-N = 10  #總點數
-rng = np.random.RandomState(42) #固定random seed
-#print(rng)
-x = A * rng.rand(N)     #0~A取N個數出來
-print(type(x))
-y = A * rng.rand(N)     #0~A取N個數出來
-
-print(x)
-print(y)
-plt.scatter(x, y)       #畫出每個x-y對應點
 
 
 plt.show()
@@ -227,11 +145,8 @@ plt.scatter(x, y, s=100, c=cl, alpha=0.6, cmap="Paired")
 #第五張圖
 plt.subplot(235)
 
-x = np.linspace(-5, 5, 500)
-y = np.sinc(x)
-plt.plot(x,y)
 
-plt.scatter(x[y>0], y[y>0], c='r')
+
 
 
 

@@ -205,30 +205,6 @@ plt.scatter(x, y, c=t, cmap='rainbow')
 #第六張圖
 plt.subplot(236)
 
-N = 500
-
-#randn 由標準常態分布隨機取值
-#還可以取好高級的亂數, 從平均數 0, 標準差 1 的常態分佈中取出 n 個數字。
-
-x = np.random.randn(N)
-y = np.random.randn(N)
-print('max :', x.max())
-print('min :', x.mean())
-print('avg :', x.min())
-print('std :', x.std())
-
-plt.scatter(x, y, s=50, color='r')#s是大小
-
-#rand 隨機取值
-x = np.random.rand(N)
-y = np.random.rand(N)
-print('max :', x.max())
-print('min :', x.mean())
-print('avg :', x.min())
-print('std :', x.std())
-
-plt.scatter(x, y, s=50, color='g')#s是大小
-plt.scatter(x, y, s=50, color=(0, 1, 0))  #s是大小 # 綠色
 
 plt.show()
 

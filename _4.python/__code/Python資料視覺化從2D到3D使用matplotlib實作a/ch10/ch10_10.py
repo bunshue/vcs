@@ -1,4 +1,3 @@
-# ch10_10.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -13,12 +12,5 @@ plt.xlim(-3, 3)
 plt.xticks(())                  # 不顯示 x 刻度
 plt.ylim(-3, 3)
 plt.yticks(())                  # 不顯示 y 刻度
+
 plt.show()
-
-
-
-
-
-
-
-

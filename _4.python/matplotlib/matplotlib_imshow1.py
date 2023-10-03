@@ -143,7 +143,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 pict = img.imread(filename)
 plt.axis('off')
-plt.title('牡丹亭', fontsize=24)
+plt.title('牡丹亭', fontsize = 24)
 plt.imshow(pict)
 
 

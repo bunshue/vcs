@@ -9,7 +9,5 @@ ax.plot(x, y)           # 使用子圖物件調用plot()函數
 ax.set_title("Sin function")
 ax.set_xlabel("x")
 ax.set_ylabel("y")
+
 plt.show()
-
-
-

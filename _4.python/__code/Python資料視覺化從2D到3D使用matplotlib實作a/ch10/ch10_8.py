@@ -1,4 +1,3 @@
-# ch10_8.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -29,8 +28,4 @@ while True:
         y[0] = y[num-1]                     # 上次結束y座標成新的起點y座標
         del x[1:]                           # 刪除舊串列x座標元素
         del y[1:]                           # 刪除舊串列y座標元素
-
-
-
-    
-
+   
