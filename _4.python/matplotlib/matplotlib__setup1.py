@@ -147,8 +147,6 @@ plt.tight_layout(pad = 7)
 #plt.grid(True)  #顯示格線
 plt.grid(color = '0.8')   #顯示格線
 
-# 放置文字
-plt.text(0, 0, 'This is a lion-mouse', color = 'red')
 
 plt.show()
 
@@ -313,12 +311,13 @@ fig.savefig(filename)
 
 --- plt.text 寫字 -------------------------------------------------------------
 
-plt.text(0.4, 0.6,r"$\int_0^5 f(x)\mathrm{d}x$",fontsize=20,color="blue")
-plt.text(0.4, 0.3,r"$\sum_{n=1}^\infty\frac{-e^{2\pi}}{3^n}!$",fontsize=20)
-plt.text(1,0,'sin(x)',fontsize=20)  # 輸出公式
 
 
 --- plt.grid 格線 -------------------------------------------------------------
+
+plt.grid()                          # 顯示XY格線
+plt.grid(axis='x')                  # 顯示X格線
+plt.grid(axis='y')                  # 顯示Y格線
 
 plt.grid(color='black', linestyle=":", linewidth='1', alpha=0.5)
 plt.grid(color='k', ls=':', lw=1, alpha=0.5)

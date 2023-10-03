@@ -17,11 +17,12 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'text 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-import math
-import numpy as np
 
-print('------------------------------------------------------------')	#60個
+#第一張圖
+plt.subplot(231)
 
 from random import randint
 
@@ -42,21 +43,40 @@ print("bins的x軸 ",h[1])
 plt.ylabel('頻率')
 plt.title('測試 10000 次')
 
+
+#第二張圖
+plt.subplot(232)
+
+import numpy as np
+
+x = np.linspace(0, 2*np.pi, 500)    # 建立含500個元素的陣列
+y1 = np.sin(x)                      # sin函數
+y2 = np.cos(x)                      # cos函數
+
+plt.plot(x, y1, label='Sin')                    
+plt.plot(x, y2, label='Cos')
+plt.legend()
+
+plt.grid(c='y',linestyle='--',lw=1) # 顯示虛線格線
+
+
+#第三張圖
+plt.subplot(233)
+
+
+#第四張圖
+plt.subplot(234)
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
+
 plt.show()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 

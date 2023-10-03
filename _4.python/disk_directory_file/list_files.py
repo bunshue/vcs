@@ -32,23 +32,46 @@ print(type(filenames))  #很奇怪的結構
 
 allfiles = []
 
-#dirname    檔案所在資料夾
+#foldername 檔案所在資料夾
 #subdir     檔案所在位置的其他資料夾
 #files      檔案名稱
-for dirname, subdir, files in filenames:
+for foldername, subdir, files in filenames:
     if 'folder_xxxxx' in subdir:  #某些資料夾下的檔案不要處理
         print('某些資料夾下的檔案不要處理')
         subdir.remove('folder_xxxxx')
-    for file in files:  # 取得所有檔案，存入 allfiles 串列中
-        #print('檔案所在資料夾 :', dirname)
+    for filename in files:  # 取得所有檔案，存入 allfiles 串列中
+        #print('檔案所在資料夾 :', foldername)
         #print('檔案所在位置的其他資料夾 :', subdir)
-        #print('檔案名稱', file)
-        allfiles.append(dirname + '/' + file)   #絕對路徑
-        #allfiles.append(os.path.join(dirname, file))   #絕對路徑
+        #print('檔案名稱', filename)
+        #allfiles.append(foldername + '/' + filename)   #絕對路徑
+        long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+        filesize = os.stat(long_filename).st_size
+        
+        allfiles.append(long_filename)   #絕對路徑
+        
+        
+
+print(len(allfiles))
 
 if len(allfiles) > 0:
-    for file in allfiles:
-        print(file)
+    for filename in allfiles:
+        #print(filename)
+        if not os.path.exists(filename):
+            print('檔案不存在')
+        else:
+            abspath = os.path.abspath(filename)
+            directory, short_filename = os.path.split(abspath)
+            print('全檔名', abspath)
+            print('檔案大小', os.stat(abspath).st_size)
+            print('資料夾', directory)
+            print('短檔名', short_filename)
+            #long_filename = os.path.join('新資料夾', short_filename)    # 取得檔案的絕對路徑
+            #print('新全檔名', long_filename)
+            print()
+
+    #long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+    #print(long_filename)
+
 
 """
 分析
@@ -58,7 +81,7 @@ if file.endswith('.jpg') or file.endswith('.png'):
     for file in files:  # 取得所有 .png .jpg 檔，存入 allfiles 串列中
         ext = file.split('.')[-1]
         if ext == "png" or ext == "jpg":
-            allfiles.append(dirname +'/'+file)
+            allfiles.append(foldername +'/'+file)
 
 
       for file in allfiles:  
@@ -248,6 +271,7 @@ def list_files4(foldername):
             print('f', long_filename, os.stat(long_filename).st_size)
 
 list_files4(foldername)
+
 print('------------------------------------------------------------')	#60個
 
 def list_files5(foldername):

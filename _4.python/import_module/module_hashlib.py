@@ -174,7 +174,9 @@ print(type(md5))
 print(md5)
 
 print('------------------------------------------------------------')	#60個
+
 import os
+
 print('用hash值找一個資料夾內的重複的檔案')
 foldername = 'C:/_git/vcs/_1.data/______test_files1/compare'
 filenames = os.listdir(foldername)    #單層
@@ -191,7 +193,7 @@ for filename in filenames:
         os.system("open " + os.path.abspath(filename))
         os.system("open " + allmd5s[img_md5])
     else:
-        allmd5s[img_md5] = os.path.abspath(filename) 
+        allmd5s[img_md5] = os.path.abspath(filename)# img_md5是key, 全路徑是value
 
 print('------------------------------------------------------------')	#60個
 

@@ -160,6 +160,11 @@ plt.figure(num = 'text 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whi
 #第一張圖
 plt.subplot(231)
 
+# 放置文字
+plt.text(0.05, 0.05, '歡迎來到美國', color = 'red')
+plt.text(0.4, 0.6, r"$\int_0^5 f(x)\mathrm{d}x$",fontsize=20,color="blue")
+plt.text(0.4, 0.3, r"$\sum_{n=1}^\infty\frac{-e^{2\pi}}{3^n}!$",fontsize=20)
+plt.text(0.4 ,0.1, 'sin(x)',fontsize=20)  # 輸出公式
 
 #第二張圖
 plt.subplot(232)

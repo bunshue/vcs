@@ -45,6 +45,12 @@ stage_no = [
 '長資料夾', '短資料夾',
 ]
 
+search_mode = [
+'全部', '檔案大小', '影像大小', '影片時長',
+'相似檔名', '零容量檔案',
+]
+
+
 table_list = [
 'table01', 'table02', 'table03', 'table04',
 'table05', 'table06', 'table07', 'table08',
@@ -880,6 +886,10 @@ def button00Click():
     clear_all_data()
 
 def button01Click():
+    foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
+    test_get_filename(foldername)
+    return
+
     print('你按了 開啟資料庫')
     button01_text.set("開啟資料庫...")
     file = askopenfile(parent = window, mode = 'rb', title = "選取資料庫", filetypes = [("資料庫檔案", "*.sqlite")])
@@ -1009,7 +1019,7 @@ dy = 80
 w = 12
 h = 3
 
-button00 = tk.Button(window, width = w, height = h, command = button00Click, text = '新建資料庫')
+button00 = tk.Button(window, width = w, height = h, command = button00Click, text = 'test00')
 button00.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 
 #開啟資料庫按鈕
@@ -1019,9 +1029,9 @@ button01_text = tk.StringVar()
 #button01 = tk.Button(window, textvariable = button01_text, command = lambda:button01Click(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
 button01 = tk.Button(window, textvariable = button01_text, width = w, height = h, command = lambda:button01Click())
 #button01 = tk.Button(window, command = xxxxxxx, text='選取檔案')
-button01_text.set("開啟資料庫")
+button01_text.set("test01")
 
-button02 = tk.Button(window, width = w, height = h, command = button02Click, text = '讀取資料庫資料')
+button02 = tk.Button(window, width = w, height = h, command = button02Click, text = 'test02')
 button02.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button03 = tk.Button(window, width = w, height = h, command = button03Click, text = '匯入生產資料\n將資料加入資料庫')
 button03.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
@@ -1074,9 +1084,12 @@ msg = tk.StringVar()
 label1 = tk.Label(window, text = '選擇顯示內容：')
 label1.pack()
 label1.place(x = x_st + dx * 0, y = y_st + dy * 2 - 20)
-label2 = tk.Label(window, fg = 'red', textvariable = msg)
+label2 = tk.Label(window, text = '搜尋模式：')
 label2.pack()
-label2.place(x = x_st + dx * 0, y = y_st + dy * 2 + 80)
+label2.place(x = x_st + dx * 0, y = y_st + dy * 2 - 20 + 45)
+label3 = tk.Label(window, fg = 'red', textvariable = msg)
+label3.pack()
+label3.place(x = x_st + dx * 0, y = y_st + dy * 2 + 80)
 
 # 加入 Checkbutton
 dx2 = dx * 4 / 4   #為了微調距離用
@@ -1086,6 +1099,15 @@ for i in range(0, len(stage_no)):
     item = tk.Checkbutton(window, text = stage_no[i], variable = choice[i], command = choose)
     item.pack()
     item.place(x = x_st + dx2 * (i % 6), y = y_st + dy * 2 + int(i / 6) * 25)
+
+# 加入 Checkbutton
+dx2 = dx * 4 / 4   #為了微調距離用
+for i in range(0, len(search_mode)):
+    item = tk.IntVar()
+    choice.append(item)
+    item = tk.Checkbutton(window, text = search_mode[i], variable = choice[i], command = choose)
+    item.pack()
+    item.place(x = x_st + dx2 * (i % 6), y = y_st + dy * 2 + int(i / 6) * 25 + 45)
 
 # 加入 Text
 text1 = tk.Text(window, width = 100, height = 30)  # 放入多行輸入框
@@ -1197,6 +1219,85 @@ def test_filename_db():
     conn.close()  # 關閉資料庫連線
     print('完成')
 
+
+def test_get_filename(foldername):
+
+    #foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
+
+    print('------------------------------------------------------------')	#60個
+    print('ls 測試 os.walk')
+    print('------------------------------------------------------------')	#60個
+
+    print('撈出資料夾下所有檔案, 多層1')
+    print('搜尋路徑：', foldername)
+    filenames = os.walk(foldername)
+    print(type(filenames))  #很奇怪的結構
+    #print(filenames)
+
+    allfiles = []
+
+    #foldername 檔案所在資料夾
+    #subdir     檔案所在位置的其他資料夾
+    #files      檔案名稱
+    for foldername, subdir, files in filenames:
+        if 'folder_xxxxx' in subdir:  #某些資料夾下的檔案不要處理
+            print('某些資料夾下的檔案不要處理')
+            subdir.remove('folder_xxxxx')
+        for filename in files:  # 取得所有檔案，存入 allfiles 串列中
+            #print('檔案所在資料夾 :', foldername)
+            #print('檔案所在位置的其他資料夾 :', subdir)
+            #print('檔案名稱', filename)
+            #allfiles.append(foldername + '/' + filename)   #絕對路徑
+            long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+            filesize = os.stat(long_filename).st_size
+            
+            allfiles.append(long_filename)   #絕對路徑
+            
+            
+
+    print(len(allfiles))
+
+    if len(allfiles) > 0:
+        for filename in allfiles:
+            #print(filename)
+            if not os.path.exists(filename):
+                print('檔案不存在')
+            else:
+                abspath = os.path.abspath(filename)
+                directory, short_filename = os.path.split(abspath)
+                print('全檔名', abspath)
+                print('檔案大小', os.stat(abspath).st_size)
+                print('資料夾', directory)
+                print('短檔名', short_filename)
+                #long_filename = os.path.join('新資料夾', short_filename)    # 取得檔案的絕對路徑
+                #print('新全檔名', long_filename)
+                print()
+
+        #long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+        #print(long_filename)
+
+
+"""
+分析
+
+if file.endswith('.jpg') or file.endswith('.png'):
+
+    for file in files:  # 取得所有 .png .jpg 檔，存入 allfiles 串列中
+        ext = file.split('.')[-1]
+        if ext == "png" or ext == "jpg":
+            allfiles.append(foldername +'/'+file)
+
+
+      for file in allfiles:  
+         filename = file.split('.')[0] #主檔名         
+
+
+   if basename == target_foldername:  # 輸出資料夾不再重複處理
+      continue
+
+"""
+
+    
 
 window.mainloop()
 

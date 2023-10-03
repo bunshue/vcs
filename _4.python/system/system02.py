@@ -1,9 +1,81 @@
-# python import module : sys, os
-
-# 不包含 DDF 磁碟檔案資料夾操作
-
-import sys
 import os
+import sys
+import platform
+
+print(platform)
+
+print(platform.uname())
+
+print('---- 作業系統 --------------------------------------------------------')	#60個
+
+print('作業系統 : ', platform.system())
+print('作業系統版本 : ', platform.platform())
+print('作業系統版本 : ', platform.platform(aliased=0, terse=0))
+print('作業系統版本 : ', platform.release())
+print('作業系統版本 : ', platform.version())
+
+print('---- 硬體 --------------------------------------------------------')	#60個
+
+print('CPU : ', platform.processor())
+print('機器 : ', platform.machine())
+print('機器名稱 : ', platform.node())
+
+print('---- Python --------------------------------------------------------')	#60個
+
+print('Python版本 : ', platform._sys_version(sys_version = None))
+print('Python版本 : ', platform.python_implementation())
+print('Python版本 : ', platform.python_version())
+print('Python版本 : ', platform.python_version_tuple())
+print('Python建立編號 : ', platform.python_build())
+print('Python建立編號 : ', platform.python_build()[0])
+print('Python分支版本 : ', platform.python_branch())
+print('Python版本 : ', platform.python_revision())
+print('Python編譯器 : ', platform.python_compiler())
+
+print('------------------------------------------------------------')	#60個
+
+print('ccccc', platform.release().split(".")[0])
+
+# Processor identification often has repeated spaces
+cpu = ' '.join(platform.processor().split())
+print("== %s %s on '%s' ==" % (
+    platform.machine(),
+    platform.system(),
+    cpu,
+))
+
+print('------------------------------------------------------------')	#60個
+
+print('* using %s %s' % (
+    getattr(platform, 'python_implementation', lambda:'Python')(),
+    ' '.join(sys.version.split())))
+
+print('------------------------------------------------------------')	#60個
+
+from distutils.util import get_platform
+
+PLAT_SPEC = "%s-%s" % (get_platform(), sys.version[0:3])
+src = os.path.join("build", "lib.%s" % PLAT_SPEC)
+#sys.path.append(src)
+print(src)
+
+print('------------------------------------------------------------')	#60個
+
+from bs4 import BeautifulSoup
+
+import bs4
+print(bs4.__version__)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
 
 print("列印參數")
 print(sys.argv)
@@ -139,6 +211,8 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
 
 
 

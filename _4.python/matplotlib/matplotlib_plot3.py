@@ -194,19 +194,11 @@ plt.title("Sales Report", fontsize=24)
 plt.xlabel("Year", fontsize=14)
 plt.ylabel("Number of Sales", fontsize=14)
 
-#後面要用
-plt.savefig('out1_14.jpg', bbox_inches='tight')
-
 
 #第六張圖
 plt.subplot(236)
 
 
-import matplotlib.pyplot as plt
-import matplotlib.image as img
-
-fig = img.imread('out1_14.jpg')
-plt.imshow(fig)
 
 
 plt.show()
