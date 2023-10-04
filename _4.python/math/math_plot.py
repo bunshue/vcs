@@ -1,7 +1,7 @@
-'''
-plt之基本設定
+"""
+把 math 畫出來
 
-'''
+"""
 
 import sys
 import math
@@ -16,7 +16,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
-'''
 print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
@@ -40,9 +39,12 @@ cy = radius
 for i in range(NUMBER_OF_TRIALS):
     x = random.randint(0, L) # 0 ~ L (含前後) 之間的任意整數
     y = random.randint(0, L) # 0 ~ L (含前後) 之間的任意整數
+    #x = np.random.randint(0, L) #使用numpy               # x軸座標
+    #y = np.random.randint(0, L) #使用numpy               # y軸座標
     #print(x, y)
 
-    d = math.sqrt((x-cx)**2+(y-cy)**2)  #點與中心的距離
+    d = math.sqrt((x - cx) ** 2 + (y - cy) ** 2)    #點與中心的距離
+    #d = np.sqrt((x - cx) ** 2 + (y - cy) ** 2)      #點與中心的距離
     if d <= radius:   # 在圓內
         numberOfHits += 1
         plt.scatter(x, y, marker = '.', c = 'r')
@@ -51,15 +53,14 @@ for i in range(NUMBER_OF_TRIALS):
 plt.axis('equal')
 
 #求圓周率
-p = numberOfHits / NUMBER_OF_TRIALS
-pi = p * 4
+pi = numberOfHits / NUMBER_OF_TRIALS * 4
 print('圓周率 = ', pi)
 
 #第二張圖
 plt.subplot(232)
 
 print('蒙地卡羅模擬 b')
-
+       
 L = 2
 NUMBER_OF_TRIALS = 300
 numberOfHits = 0
@@ -69,6 +70,8 @@ radius = L / 2
 for i in range(NUMBER_OF_TRIALS):
     x = random.random() * 2 - 1     # x軸座標
     y = random.random() * 2 - 1     # y軸座標
+    #x = np.random.random() * 2 - 1 #使用numpy  # x軸座標
+    #y = np.random.random() * 2 - 1 #使用numpy  # y軸座標
     #print(x, y)
 
     d = math.sqrt(x * x + y * y)  #點與中心的距離
@@ -80,8 +83,7 @@ for i in range(NUMBER_OF_TRIALS):
 plt.axis('equal')
 
 #求圓周率
-p = numberOfHits / NUMBER_OF_TRIALS
-pi = p * 4
+pi = numberOfHits / NUMBER_OF_TRIALS * 4
 print('圓周率 = ', pi)
 
 #第三張圖
@@ -164,7 +166,6 @@ plt.title('測試 10000 次')
 
 plt.show()
 
-'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -200,33 +201,40 @@ y2 = np.cos(x**2)
 plt.subplot(233)
 
 
-N = 100000
+N = 1000000
 #plt.plot(np.random.randn(N))
 #plt.plot(range(N), np.random.randn(N))
 #plt.scatter(range(N), np.random.randn(N))
 
+# 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+normal_samples = np.random.normal(size = N)
+
+normal_samples = np.random.randn(N)  #same
 
 print(range(N))
-A = np.random.randn(N)
-#print(A)
-#print(A * 100)
-print(max(A * 100))
-print(min(A * 100))
-
-total_array = np.zeros(600)
-#print(total_array)
-
+print(type(normal_samples))
+#print(normal_samples)
+small_numbers = 0
+big_numbers = 0
 for i in range(N):
-    xx = int(A[i] * 100) + 300
-    #print(xx, end = ' ')
-    if (xx > 0) & (xx < 600):
-        total_array[xx] = total_array[xx] + 1
-    else:
-        print(xx, end = 'X')
+    if normal_samples[i] < -3.0:
+        small_numbers += 1
+    elif normal_samples[i] > 3.0:
+        big_numbers += 1
 
-print(total_array)
+print('big = ', big_numbers)
+print('small = ', small_numbers)
 
-plt.plot(total_array)
+normal_array = np.zeros(600)
+for i in range(N):
+    z = int(normal_samples[i] * 100 + 300)
+    #print(z, end = ' ')
+    if (z >= 0) & (z < 600):
+        normal_array[z] += 1
+
+plt.plot(normal_array)
+plt.title('常態分佈')
+
 
 #第四張圖
 plt.subplot(234)
@@ -248,4 +256,3 @@ plt.subplot(236)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-

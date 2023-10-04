@@ -12,8 +12,8 @@ print("e : ", math.e)
 
 print('------------------------------------------------------------')	#60個
 
-
 print('數學函數')
+
 # Test algebraic functions
 print("exp(1.0) =", math.exp(1))
 print("log(3.78) =", math.log(math.e))
@@ -27,8 +27,6 @@ print("16的平方根 為 : "+str(r))
 print('取1024以2為底的log：')
 print(math.log(1024, 2)) # 10
 
-
-
 print('三角函數')
 print("sin(PI / 2) =", math.sin(math.pi / 2))
 print("cos(PI / 2) =", math.cos(math.pi / 2))
@@ -39,14 +37,10 @@ print("radians(90) =", math.radians(90))
 for count in range(20):
     print("sin(" + str(count) + "度) = " + str(math.sin(2*math.pi*count/360)) + ", cos(" + str(count) + "度) = " + str(math.cos(2*math.pi*count/360)))
 
-
 angle = 30
 math.sin(math.pi * angle / 2)
 
-
 print('------------------------------------------------------------')	#60個
-
-import math
 
 # 顯示數學常數
 print("math.e = ", math.e)
@@ -100,10 +94,6 @@ print('計算三角形3個內角角度 : ',
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-
-import math
 print('gcd(16, 40) = {}'.format(math.gcd(16, 40)))
 print('gcd(28, 56) = {}'.format(math.gcd(28, 63)))
 
@@ -115,12 +105,10 @@ print('------------------------------------------------------------')	#60個
 rad = np.arctan2(3, 4)  # 求角度（radian）
 th = np.degrees(rad)    # 轉成度數
 
-import math
 rad = math.atan2(3, 2)  # 計算角度（radian）
 th = math.degrees(rad)  # 轉成度數
 th
 
-import math
 10 * math.cos(math.radians(60)) 
 
 # 計算角度
@@ -130,23 +118,26 @@ print(deg)
 
 print('------------------------------------------------------------')	#60個
 
-import math
-
 r = 6371                        # 地球半徑
 x1, y1 = 22.2838, 114.1731      # 香港紅磡車站經緯度
 x2, y2 = 25.0452, 121.5168      # 台北車站經緯度
 
-d = r*math.acos(math.sin(math.radians(x1))*math.sin(math.radians(x2))+
-                math.cos(math.radians(x1))*math.cos(math.radians(x2))*
-                math.cos(math.radians(y1-y2)))
+d = r * math.acos(math.sin(math.radians(x1)) * math.sin(math.radians(x2)) +
+                  math.cos(math.radians(x1)) * math.cos(math.radians(x2)) *
+                  math.cos(math.radians(y1 - y2)))
 
 print(f"distance = {d:6.1f}")
 
+print('------------------------------------------------------------')	#60個
+
+print('兩點距離')
+x1, y1 = 0, 0
+x2, y2 = 3, 4
+distance = ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) ** 0.5
+print('兩點距離 : ', distance) 
 
 print('------------------------------------------------------------')	#60個
 
-
-import math
 import decimal
 
 def acc_deciamal():
@@ -176,8 +167,32 @@ def acc_deciamal():
 
 acc_deciamal()
 
-
 print('------------------------------------------------------------')	#60個
+
+from itertools import permutations
+from itertools import combinations
+from itertools import combinations_with_replacement
+
+
+print('排列組合')
+
+items = ['鼠', '牛', '虎']
+
+# 全排列
+for p in permutations(items):
+    print(p)
+
+# 指定长度
+for p in permutations(items, 2):
+    print(p)
+
+# 组合
+for c in combinations(items, 3):
+    print(c)
+
+# 可重复组合
+for c in combinations_with_replacement(items, 3):
+    print(c)
 
 
 print('------------------------------------------------------------')	#60個

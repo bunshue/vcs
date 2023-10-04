@@ -84,25 +84,12 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-normal_samples = np.random.normal(size = 100000)
-
-#盒鬚圖（Box plot）
-#plt.boxplot(normal_samples)
-
-plt.hist(normal_samples)
-
-plt.show()
-
 print('------------------------------------------------------------')	#60個
-
-
 
 #散點圖
 
 import numpy as np
 import matplotlib.pyplot as plt
-
 
 N = 150
 # 產生 150 個 0~2 之間的隨機半徑

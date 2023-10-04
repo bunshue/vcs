@@ -1,14 +1,15 @@
-'''
+"""
 文字資訊的視覺化手法
 繪製文字雲
-'''
+"""
 
 import wordcloud
-import matplotlib.pyplot as plt
+import sys
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 from janome.tokenizer import Tokenizer
 from PIL import Image
-import pandas as pd
 
 print('------------------------------------------------------------')	#60個
 
@@ -234,7 +235,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-''' lost db
 import sqlite3
 
 from wordcloud import WordCloud
@@ -263,11 +263,13 @@ plt.imshow(wordcloud)
 plt.axis("off")
 
 plt.show()
-'''
+
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
-''' 無檔案 stopWords.txt
+""" 無檔案 stopWords.txt
 import sqlite3
 
 from wordcloud import WordCloud
@@ -304,7 +306,7 @@ plt.imshow(wordcloud)
 plt.axis("off")
 
 plt.show()
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
@@ -313,10 +315,10 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-'''
+"""
 文字資訊的視覺化手法
 繪製文字雲
-'''
+"""
 
 import os
 import sys
@@ -327,7 +329,7 @@ import matplotlib.pyplot as plt
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
-'''
+"""
 print('------------------------------------------------------------')	#60個
 
 from wordcloud import WordCloud
@@ -483,7 +485,7 @@ plt.axis("off")                             # 關閉顯示軸線
 plt.show()
 #wc.to_file("wc08.png")               # 檔案儲存
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個

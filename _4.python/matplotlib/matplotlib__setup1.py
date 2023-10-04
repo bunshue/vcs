@@ -49,7 +49,6 @@ y18 = y00 + offset * 18
 y19 = y00 + offset * 19
 y20 = y00 + offset * 20
 
-
 plt.plot(x, y01, "r-o", lw = 1, markevery = 5)   #隔 5 個畫一個 marker
 plt.plot(x, y02, "g--")
 plt.plot(x, y03, "b:o")
@@ -61,7 +60,6 @@ plt.plot(x, y07, c = '#00a676', lw = 5)
 #plt.plot(x, y08, marker = 'o')
 plt.plot(x, y08, lw = 3, marker = 'o', ms = 10)
 plt.plot(x, y09, lw = 3, marker = 'o', ms = 10, markevery = 4)   #隔 5 個畫一個 marker
-
 
 #連線
 plt.plot(x, y10, color = 'red')
@@ -96,10 +94,6 @@ plt.plot(x, y19, color = 'red', linestyle = "-", linewidth = "2", markersize = "
 # 繪製折線圖，顏色「藍色」，線條樣式「-」，線條寬度「2」，標記大小「16」，標記樣式「.」，圖例名稱「Plot 2」
 plt.plot(x, y20, color = 'blue', linestyle = "-", linewidth = "2", markersize = "8", marker = ".", label = "Plot 2")
 
-
-
-plt.title('圖形標題')
-plt.title('圖形標題', fontsize = 18)                    # 設定圖表標題內容及大小
 plt.title(label = '圖形標題', fontsize = 18, color = 'r') # 設定圖表標題內容及大小及顏色
 
 plt.xlabel('x軸標記')
@@ -112,37 +106,11 @@ print('標示x軸刻度記號')
 plt.xticks([-2*np.pi, -3*np.pi/2, -np.pi, -np.pi/2, 0, np.pi/2, np.pi, 3*np.pi/2, 2*np.pi],
           ['$-2\pi$', '$-3\pi/2$', '$-\pi$', '$-\pi/2$', '$0$', '$\pi/2$', '$\pi$', '$3\pi/2$', '$2\pi$']);
 
-#plt.axis('equal')       #軸比例
-#xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
-#plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
-#plt.axis([0.5, 6.5, 15, 35])
-#plt.axes([0.2, 0.2, 0.4, 0.4]) #設定各軸顯示範圍, 參數是串列
-
-#設定 x, y 軸座標範圍
-#plt.xlim(0, 30) # 設定 x 軸座標範圍
-#plt.ylim(0, 50) # 設定 y 軸座標範圍
-#邊界的設定
-#plt.xlim(-6,6)
-#plt.ylim(-1.2,1.2)
-
 #plt.legend()
 plt.legend(loc = 'best')
 plt.legend()
 
 plt.legend(loc = 'upper right')
-
-'''
-plt.legend(loc = 6)
-
-plt.legend(loc = 'upper left', bbox_to_anchor = (1,1))
-
-plt.legend(loc = 6, bbox_to_anchor = (1,1))
-
-plt.tight_layout(pad = 7)
-'''
-
-#print(plt.axis())
-
 
 #plt.grid(True)  #顯示格線
 plt.grid(color = '0.8')   #顯示格線
@@ -334,6 +302,12 @@ plt.plot(x, y1, label = "$sin(x)$", color = "red", linewidth = 2)
 plt.plot(x, y2, "b--", label = "$cos(x^2)$")
 plt.legend()
 
+plt.legend(loc = 6)
+plt.legend(loc = 'upper left', bbox_to_anchor = (1,1))
+plt.legend(loc = 6, bbox_to_anchor = (1,1))
+
+plt.tight_layout(pad = 7)
+
 plt.legend()
 plt.legend(loc=4)	#  用 `loc` 去設圖例的位置, 依 1, 2, 3, ... 表示。
 
@@ -369,7 +343,6 @@ plt.legend(loc="best")                      # 建立圖例
 
 plt.title('振幅越來越小的 $\sin$')
 
-#plt.axis('off') #座標軸關閉
 myfont = matplotlib.font_manager.FontProperties(fname = font_filename)
 plt.xlabel(u'橫座標', fontproperties = myfont)
 plt.ylabel(u'縱座標', fontproperties = myfont)
@@ -445,7 +418,41 @@ plt.xlabel('日期',loc="left")         # 靠左對齊
 plt.ylabel('溫度',loc="bottom")       # 靠下對齊
 
 
-"""
+---- plt.axis ------------------------------------------------------------
+
+
+axis axes xlim ylim
+
+#plt.axis('equal')       #軸比例
+#xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
+#plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
+#plt.axis([0.5, 6.5, 15, 35])
+#plt.axes([0.2, 0.2, 0.4, 0.4]) #設定各軸顯示範圍, 參數是串列
+
+#設定 x, y 軸座標範圍
+#plt.xlim(0, 30) # 設定 x 軸座標範圍
+#plt.ylim(0, 50) # 設定 y 軸座標範圍
+#邊界的設定
+#plt.xlim(-6,6)
+#plt.ylim(-1.2,1.2)
+
+#print(plt.axis())
+
+#plt.axis('off') #座標軸關閉
+
+xmin, xmax, ymin, ymax = plt.axis()
+print(f"xmin = {xmin}")
+print(f"xmax = {xmax}")
+print(f"ymin = {ymin}")
+print(f"ymax = {ymax}")
+
+
+xmin, xmax = plt.xlim()
+ymin, ymax = plt.ylim()
+print(f"xmin = {xmin}")
+print(f"xmax = {xmax}")
+print(f"ymin = {ymin}")
+print(f"ymax = {ymax}")
 
 
 
@@ -454,7 +461,6 @@ plt.ylabel('溫度',loc="bottom")       # 靠下對齊
 
 
 
-'''
 調整x軸刻度 1
 week = [0,1,2,3,4,5,6]
 labels = ['Sunday','Monday','Tuesday','Wednesday',
@@ -516,21 +522,6 @@ print(f'the_labels = {the_labels}')
 
 
 
-xmin, xmax, ymin, ymax = plt.axis()
-print(f"xmin = {xmin}")
-print(f"xmax = {xmax}")
-print(f"ymin = {ymin}")
-print(f"ymax = {ymax}")
-
-
-xmin, xmax = plt.xlim()
-ymin, ymax = plt.ylim()
-print(f"xmin = {xmin}")
-print(f"xmax = {xmax}")
-print(f"ymin = {ymin}")
-print(f"ymax = {ymax}")
-plt.show()
-
 
 
 
@@ -556,7 +547,76 @@ plt.show()
 
 
 
-'''
+plt.title(r'$H_{2}O$')
+plt.title(r'$\pi r^{2}$')
+plt.title(r'$\binom{7}{9}$',fontsize=20)
+plt.title(r'${2}\pi > {5}x$')
+plt.title(r'${2}\pi$')
+plt.title(r'$\pi$')
+plt.title(r'$\genfrac{}{}{0}{}{7}{9}$',fontsize=20)
+plt.title(r'$\frac{7}{9}$', fontsize=20)
+plt.title(r'$\frac{7-\frac{3}{2x}}{9}$',fontsize=20)
+plt.title(r'$\Omega \/vs\/ \Delta$',fontsize=20)
+plt.title(r'$(\frac{7-\frac{3}{2x}}{9})$',fontsize=20)
+plt.title(r'$\left(\frac{7-\frac{3}{2x}}{9}\right)$',fontsize=20)
+plt.title(r'$\sqrt{7}$',fontsize=20)
+plt.title(r'$\sqrt[3]{a}$',fontsize=20)
+plt.title(r'$\sum_{i=0}^\infty x_i$',fontsize=20)
+plt.tight_layout()
+plt.title(r'$\alpha^2 > \beta_i$',fontsize=20)
+plt.title(r'$\Omega vs \Delta$',fontsize=20)
+plt.title(r'$\Omega \quad vs \quad \Delta$',fontsize=20)
+plt.title(r'$y(t) = \mathcal{A}\mathrm{cos}(2\pi \omega t)$',fontsize=20)
+plt.rcParams["mathtext.default"] = 'regular'
+plt.title(r'$y(t) = \mathcal{A}\mathrm{cos}(2\pi \omega t)$',fontsize=20)
+plt.title(r'$y(t) = \mathcal{A}\/\mathrm{cos}(2\pi \omega t)$',fontsize=20)
+plt.rcParams["mathtext.fontset"] = "dejavusans"
+plt.title(r'$y(t) = A\/\cos(2\pi \omega t)$',fontsize=20)
+plt.rcParams["mathtext.fontset"] = "dejavuserif"
+plt.title(r'$y(t) = A\/\cos(2\pi \omega t)$',fontsize=20)
+plt.rcParams["mathtext.fontset"] = "cm"
+plt.title(r'$y(t) = A\/\cos(2\pi \omega t)$',fontsize=20)
+#plt.rcParams["mathtext.fontset"] = "stix"
+plt.title(r'$y(t) = A\/\cos(2\pi \omega t)$',fontsize=20)
+#plt.rcParams["mathtext.fontset"] = "stixsans"
+plt.title(r'$y(t) = A\/\cos(2\pi \omega t)$',fontsize=20)
 
 
+
+plot 參數
+plt.tick_params(axis='both', labelsize=12, color='red')
+
+plt.plot(seq, data1, 'g--', seq, data2, 'r-.', seq, data3, 'y:', seq, data4, 'k.')   
+plt.plot(seq, data1, '-*', seq, data2, '-o', seq, data3, '-^', seq, data4, '-s')   
+plt.plot(seq, Benz, '-*', seq, BMW, '-o', seq, Lexus, '-^')   
+
+seq = [2021, 2022, 2023]                # 年度
+plt.xticks(seq)                         # 設定x軸刻度
+
+plt.plot(seq, Benz, '-*', seq, BMW, '-o', seq, Lexus, '-^')   
+
+
+plt.plot(x, y, label="$sin(x)$", color='red', lw=2)
+plt.plot(x, z, label="$cos(x^2)$", color='b')
+
+
+plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
+
+
+plt.plot(x, np.sin(x), c='#e63946', lw=3)
+plt.plot(x, np.sin(3*x), c='#7fb069', lw=3)
+plt.scatter(x, np.random.randn(100), c='#daa73e', s=50, alpha=0.5)
+plt.bar(range(10), np.random.randint(1,30,10), fc='#e55934')
+
+plt.plot(x, y, marker='o')
+plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
+
+#plt.figure(figsize=(6,6))
+
+plt.figure(figsize=(6,6))
+
+
+
+
+"""
 
