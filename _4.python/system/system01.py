@@ -1,6 +1,8 @@
 import sys
 import platform
 
+print('------------------------------------------------------------')	#60個
+
 # Horizontal line length
 LINE = 79
 
@@ -68,7 +70,7 @@ machine_details = get_machine_details()
 print_header()
 
 
-
+print('------------------------------------------------------------')	#60個
 
 import sys
 
@@ -116,11 +118,14 @@ print(_locale._getdefaultlocale())
 print(_locale._getdefaultlocale()[1])
 
 
+print('------------------------------------------------------------')	#60個
 import os
 import sys
 
 
 print()
+
+print('------------------------------------------------------------')	#60個
 
 for path in sys.builtin_module_names:
     print(path)
@@ -129,6 +134,7 @@ print()
 
 
 
+print('------------------------------------------------------------')	#60個
 
 
 
@@ -142,6 +148,7 @@ encoding = sys.getfilesystemencoding()
 print(encoding)
 
 
+print('------------------------------------------------------------')	#60個
 
 
 print('顯示模組的所有名稱')
@@ -149,9 +156,70 @@ print('顯示模組的所有名稱')
 import random
 print(dir(random))
 
+print('------------------------------------------------------------')	#60個
 
 
 
+
+
+import platform
+print(platform.win32_ver())
+print(platform.platform())
+
+print('------------------------------------------------------------')	#60個
+
+import platform
+
+print("目前Python版本是: ", sys.version)
+print("目前Python版本是: ", sys.version_info)
+
+print(sys.version_info)
+print("---")
+print(sys.platform)
+print("---")
+print(sys.argv)
+print("---")
+print(sys.path)
+
+version_rows = [("platform", platform.platform()), ("Python", sys.version)]
+print(version_rows)
+
+if sys.version_info.major < 3 or sys.version_info.minor < 3:
+    sys.exit("Error: clinic.py requires Python 3.3 or greater.")
+
+print('------------------------------------------------------------')	#60個
+
+print(f"全域變數 : {globals()}")
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import builtins
+print(dir(builtins))
+
+print('------------------------------------------------------------')	#60個
+
+
+
+maxsize = sys.maxsize  # smallest total size so far
+print(maxsize)
+
+print('------------------------------------------------------------')	#60個
+
+
+print(os.name)
+print(os.sep)
+print(os.getpid())
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 
 
 

@@ -146,6 +146,37 @@ print(f"distance = {d:6.1f}")
 print('------------------------------------------------------------')	#60個
 
 
+import math
+import decimal
+
+def acc_deciamal():
+    a = 4.2
+    b = 2.1
+    print(a + b)
+    print((a + b) == 6.3)
+
+    # 使用decimal模块
+    a = decimal.Decimal('4.2')
+    b = decimal.Decimal('2.1')
+    print(a + b)
+    print((a + b) == decimal.Decimal('6.3'))
+
+
+    a = decimal.Decimal('1.3')
+    b = decimal.Decimal('1.7')
+    print(a / b)
+    with decimal.localcontext() as ctx:
+        ctx.prec = 3
+        print(a / b)
+
+    nums = [1.23e+18, 1, -1.23e+18]
+    print(sum(nums))
+    print(math.fsum(nums))
+
+
+acc_deciamal()
+
+
 print('------------------------------------------------------------')	#60個
 
 

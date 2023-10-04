@@ -2,6 +2,8 @@ import os
 import sys
 import platform
 
+print('------------------------------------------------------------')	#60個
+
 print(platform)
 
 print(platform.uname())
@@ -91,9 +93,13 @@ for arg in sys.argv:
     print(sys.argv[i])
     i += 1
 
+print('------------------------------------------------------------')	#60個
+
 print("目前路徑 : ", sys.path)
 print("打印系統路徑")
 print(sys.path)
+
+print('------------------------------------------------------------')	#60個
 
 print('系統命令');
 os.system('cls')  #在cmd視窗下清除螢幕
@@ -112,11 +118,15 @@ if os.system(cmd) != 0:
 os.system('cmd')
 '''
 
+print('------------------------------------------------------------')	#60個
+
 print('系統命令, 開啟外部程式')
 
 filename_r = '../data/article.txt'
 os.system("notepad " + filename_r)
 #os.system("svn checkout%s -q %s %s" % (creds, url, filename))
+
+print('------------------------------------------------------------')	#60個
 
 import sys
 print(sys.version_info)
@@ -141,6 +151,7 @@ print(micro)
 print(level)
 print(serial)
 
+print('------------------------------------------------------------')	#60個
 
 import sys
 python_version = "Python %d.%d" % (sys.version_info[0], sys.version_info[1])
@@ -150,6 +161,7 @@ print(python_version)
 version = __version__ = "4.61.0.166 Unreleased"
 print(version)
 
+print('------------------------------------------------------------')	#60個
 
 import os
 
@@ -161,6 +173,8 @@ _version = os.environ.get("CI_COMMIT_TAG", "0.0.1.dev2")
 with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 '''
+
+print('------------------------------------------------------------')	#60個
 
 print(sys.platform)
 
@@ -178,6 +192,9 @@ else:
 print("Python:", sys.version)
 print(sys.version)
 print(sys.version)
+
+print('------------------------------------------------------------')	#60個
+
 
 '''
 import sys

@@ -115,7 +115,6 @@ for num in range(2, 7):
 
 
 
-
 print('------------------------------------------------------------')	#60個
 
 print('字串處理')
@@ -134,6 +133,7 @@ print(type(name))
 print(ccc)
 
 print('------------------------------------------------------------')	#60個
+
 x = 2
 y = 0.5
 
@@ -175,14 +175,6 @@ string = '豬頭三'
 string_url = parse.quote(string)
 print('原字串:\t' + string)
 print('轉網址:\t' + string_url)
-
-print('------------------------------------------------------------')	#60個
-
-print('兩點距離')
-x1, y1 = 0, 0
-x2, y2 = 3, 4
-distance = ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) ** 0.5
-print('兩點距離 : ', distance) 
 
 print('------------------------------------------------------------')	#60個
 
@@ -459,14 +451,6 @@ print(s.title())
 
 print('------------------------------------------------------------')	#60個
 
-import platform
-CALIBRATION_LOOPS = 10
-calibration_loops = range(CALIBRATION_LOOPS)
-
-print(type(calibration_loops))
-print(calibration_loops)
-
-
 MILLI_SECONDS = 1e3
 MICRO_SECONDS = 1e6
 PERCENT = 100
@@ -535,19 +519,11 @@ print('Calib. prep time     = %.6fms' % (
 
 print('------------------------------------------------------------')	#60個
 
-bytes = sys.maxsize  # smallest total size so far
-print(bytes)
-
-print('------------------------------------------------------------')	#60個
-
 for name in ('__repr__', '__str__', '__format__', '__reduce_ex__'):
     print(name)
 
-
 for x in (15, 25, 35, 45, 55):
     print(x)
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -695,8 +671,6 @@ if os.name == 'nt':
     else:
         print('bbb')
 
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -779,12 +753,6 @@ print("計算結果 : %5.2f" % number)
 
 print('------------------------------------------------------------')	#60個
 
-import platform
-print(platform.win32_ver())
-print(platform.platform())
-
-print('------------------------------------------------------------')	#60個
-
 msg = """
 翠蓋龍旗出建章,鶯啼百囀柳初黃,
 昆池冰泮三山近,阿閣花深九陌香,
@@ -820,8 +788,6 @@ print()
 print('------------------------------------------------------------')	#60個
 
 
-
-
 """ fail in kilo
 
 x = 1000000
@@ -847,27 +813,6 @@ for i in range(1,x+1):
 
 print('------------------------------------------------------------')	#60個
 
-import platform
-
-print("目前Python版本是: ", sys.version)
-print("目前Python版本是: ", sys.version_info)
-
-print(sys.version_info)
-print("---")
-print(sys.platform)
-print("---")
-print(sys.argv)
-print("---")
-print(sys.path)
-
-version_rows = [("platform", platform.platform()), ("Python", sys.version)]
-print(version_rows)
-
-if sys.version_info.major < 3 or sys.version_info.minor < 3:
-    sys.exit("Error: clinic.py requires Python 3.3 or greater.")
-
-print('------------------------------------------------------------')	#60個
-
 import string
 
 def encrypt(text, encryDict):           # 加密文件
@@ -887,10 +832,6 @@ ciphertext = encrypt(msg, encry_dict)
 
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
-
-print('------------------------------------------------------------')	#60個
-
-print(f"全域變數 : {globals()}")
 
 print('------------------------------------------------------------')	#60個
 
@@ -914,16 +855,10 @@ find_similar_images(foldername)
 
 print('------------------------------------------------------------')	#60個
 
-import builtins
-print(dir(builtins))
-
-print('------------------------------------------------------------')	#60個
-
 items = os.listdir()
 print(os.path.exists('myprime.py'))
 for item in items:
     print(os.path.abspath(item))
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1314,8 +1249,8 @@ import time
 x = 1000000
 pi = 0
 time.process_time()
-for i in range(1,x+1):
-    pi += 4*((-1)**(i+1) / (2*i-1))
+for i in range(1, x + 1):
+    pi += 4 * ((-1) ** (i + 1) / (2 * i - 1))
     if i != 1 and i % 100000 == 0:      # 隔100000執行一次
         e_time = time.process_time()
         print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
@@ -1323,9 +1258,6 @@ for i in range(1,x+1):
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
-
-
-
 
 print('2 進位整數運算')
 x = 0b1101          # 這是2進位整數
@@ -1477,18 +1409,8 @@ print('------------------------------------------------------------')	#60個
 
 
 
-
-
-
-
-print(sys.maxsize)
 print(2 ** 32)
 
-import stat
-
-print(os.name)
-print(os.sep)
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -1499,10 +1421,6 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-print(os.getpid())
-
-
 
 import os
 
@@ -1518,14 +1436,10 @@ print('get user name')
 ccc = getuser()
 print(ccc)
 
-
-
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
 
 import os
 import sys
@@ -1666,6 +1580,7 @@ for y in range(0, H, h):
         #canvas.create_image(x, y, image = tile, anchor = NW)
         #print(x, y)
         #print(box)
+
 
 
 

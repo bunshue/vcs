@@ -15,6 +15,29 @@ from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfilename
 
+TB = 1024 * 1024 * 1024 * 1024  #定義TB的計算常量
+GB = 1024 * 1024 * 1024         #定義GB的計算常量
+MB = 1024 * 1024                #定義MB的計算常量
+KB = 1024                       #定義KB的計算常量
+
+def ByteConversionTBGBMBKB(size):
+    if size < 0:
+        return "不合法的數值"
+    elif (size / TB >= 1024):    #如果目前Byte的值大於等於1024TB
+        return "無法表示"
+    elif (size / TB >= 1):   #如果目前Byte的值大於等於1TB
+        return format(size / TB, ".2f") + " TB" #將其轉換成TB
+    elif (size / GB >= 1):   #如果目前Byte的值大於等於1GB
+        return format(size / GB, ".2f") + " GB" #將其轉換成GB
+    elif (size / MB >= 1):   #如果目前Byte的值大於等於1MB
+        return format(size / MB, ".2f") + " MB" #將其轉換成MB
+    elif (size / KB >= 1):   #如果目前Byte的值大於等於1KB
+        return format(size / KB, ".2f") + " KB" #將其轉換成KB
+    else:
+        return str(size) + " Byte"    #顯示Byte值
+
+print('------------------------------------------------------------')	#60個
+
 flag_debug_mode = True
 
 # 建立csv二維串列資料
@@ -1297,6 +1320,15 @@ if file.endswith('.jpg') or file.endswith('.png'):
 
 """
 
+filesize = 123456
+print('filesize = ', filesize , '\t檔案大小 : ', ByteConversionTBGBMBKB(filesize))
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filesize = os.stat(filename).st_size
+
+print('檔案大小:\t', filesize, ' 拜')
+print('檔案大小:\t', ByteConversionTBGBMBKB(filesize))
     
 
 window.mainloop()

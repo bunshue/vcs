@@ -14,7 +14,8 @@ namespace vcs_ImageProcessingNew
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\ims_image_20230921_155302.bmp";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\ims_image_20230921_155302.bmp";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
 
         private Bitmap bitmap1 = null;  //原圖
         private Bitmap bitmap2 = null;  //從原圖修改過的
@@ -571,6 +572,50 @@ namespace vcs_ImageProcessingNew
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            //讀取圖檔, 先放在Bitmap裏
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
+            //string filename = "pic_original2.bmp";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+
+            /* 畫色塊
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            g.FillRectangle(new SolidBrush(Color.Red), 50, 100, 50, 50);
+            g.FillRectangle(new SolidBrush(Color.Lime), 50, 100+70, 50, 50);
+            g.FillRectangle(new SolidBrush(Color.Blue), 50, 100+140, 50, 50);
+            */
+
+            int i;
+            int j;
+            Color pt;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    pt = bitmap1.GetPixel(i, j);
+
+
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+
+                    byte r = pp.R;
+                    byte g = pp.G;
+                    byte b = pp.B;
+
+                    Color cc = Color.FromArgb(255, g, b, b);
+
+                    bitmap1.SetPixel(i, j, cc);
+
+                }
+            }
+            //bitmap1.Save("pic_modify3.bmp", ImageFormat.Bmp);
         }
 
         private void button2_Click(object sender, EventArgs e)

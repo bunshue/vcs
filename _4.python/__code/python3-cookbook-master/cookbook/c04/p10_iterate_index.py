@@ -1,11 +1,4 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-"""
-Topic: 迭代并跟踪索引
-Desc : 
-"""
 from collections import defaultdict
-
 
 def iterate_index():
     my_list = ['a', 'b', 'c']

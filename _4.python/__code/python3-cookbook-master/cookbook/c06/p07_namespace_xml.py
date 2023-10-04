@@ -1,11 +1,3 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
-"""
-Topic: 处理含命名空间的XML文档
-Desc : 
-"""
-
-
 class XMLNamespaces:
     def __init__(self, **kwargs):
         self.namespaces = {}
