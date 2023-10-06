@@ -23,6 +23,7 @@ cos_line, = plt.plot(x, y2, label = "Cos", lw = 3)
 
 sin_legend = plt.legend(handles = [sin_line], loc = 1)  # 建立sin圖表物件
 plt.gca().add_artist(sin_legend)    # 手動將sin圖例加入圖表
+
 plt.legend(handles = [cos_line], loc = 4)               # 建立cos圖表
 
 plt.show()
@@ -53,8 +54,7 @@ print('------------------------------------------------------------')	#60個
 
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.figure(figsize=(7,2))
+#plt.figure(figsize=(7,2))
 my_kwargs = dict(ha='center', va='center', fontsize=50, c='b')
 plt.text(0.5, 0.5, '歡迎來到美國', **my_kwargs)
 

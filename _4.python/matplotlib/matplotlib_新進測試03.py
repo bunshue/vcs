@@ -8,10 +8,13 @@ def piformat(x, pos):
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
+
 x = np.linspace(0,2*np.pi,100)
 y = np.sin(x)
+
 fig = plt.figure()
 ax = fig.add_subplot()
+
 ax.plot(x,y,label="sin(x)",color="g",linewidth=3)
 # 建立刻度間距 pi/2
 ax.xaxis.set_major_locator(MultipleLocator(np.pi/2))

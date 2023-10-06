@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+'''
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
@@ -156,7 +157,7 @@ print('------------------------------------------------------------')	#60個
 foldername = 'C:/_git/vcs/_1.data/______test_files1'
 
 
-'''
+"""
 import glob,cv2
 
 files = glob.glob(foldername + "/*.jpg")  #建立測試資料
@@ -187,11 +188,11 @@ for i in range(num):
 plt.show()
 
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 x = np.linspace(start=-10, stop=10, num=101)
 
 #plt.plot(x, np.absolute(x))
@@ -199,7 +200,7 @@ x = np.linspace(start=-10, stop=10, num=101)
 xx = x + 1j * x[:, np.newaxis]
 
 plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap='gray')
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
@@ -296,6 +297,7 @@ print('平均:', np.mean(dat['太郎']))
 print('變異數:', np.var(dat['太郎']))
 print('標準差:', np.std(dat['太郎']))
 
+'''
 print('------------------------------------------------------------')	#60個
 print('亂數')
 
@@ -309,11 +311,12 @@ print('------------------------------------------------------------')	#60個
 
 a = 4     # 亂數的初始值
 b = 7
-c = 9
-rn = 1    
+c = 9   #取亂數結果 0 ~ 8之整數
+rn = 1
+
 rand = []
 for i in range(20):
-    rn = ((a * rn + b) % c)    # 產生亂數
+    rn = (a * rn + b) % c   # 不用亂數模組, 自己運算出亂數
     rand.append(rn)
 print(rand)
 

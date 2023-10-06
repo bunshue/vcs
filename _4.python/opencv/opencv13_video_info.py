@@ -5,13 +5,14 @@ import urllib
 import urllib.request   #用來建立請求
 import numpy as np
 
+print('------------------------------------------------------------')	#60個
+
 def show_video_info(filename):
     video = cv2.VideoCapture(filename);
 
     fps = video.get(cv2.CAP_PROP_FPS)
     print("Frames per second using video.get(cv2.CAP_PROP_FPS) : {0}".format(fps))
 
-    print("data video.get(cv2.CAP_PROP_FPS) : {0}".format(video.get(cv2.CAP_PROP_FPS)))
     print("data video.get(cv2.CAP_PROP_POS_MSEC) : {0}".format(video.get(cv2.CAP_PROP_POS_MSEC)))#Current position of the video file in milliseconds.
     print("data video.get(cv2.CAP_PROP_POS_FRAMES) : {0}".format(video.get(cv2.CAP_PROP_POS_FRAMES)))#0-based index of the frame to be decoded/captured next.
     print("data video.get(cv2.CAP_PROP_POS_AVI_RATIO) : {0}".format(video.get(cv2.CAP_PROP_POS_AVI_RATIO)))#Relative position of the video file: 0=start of the film, 1=end of the film.
@@ -53,15 +54,6 @@ def show_video_info(filename):
     print("data video.get(cv2.CAP_PROP_AUTOFOCUS) : {0}".format(video.get(cv2.CAP_PROP_AUTOFOCUS)))#xxxxxxxxxxxxxxxxxxxxxxxxxxx
     video.release();
 
-def get_video_info(video):
-    video_info = {}
-    
-    video_info['frames'] = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
-    video_info['width'] = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
-    video_info['height'] = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    video_info['fps'] = video.get(cv2.CAP_PROP_FPS)
-    return video_info
-
 def loop(video, end_frame, func, transpose = False, gray = True, counter = 24):
     pos = 0
     while pos < end_frame:
@@ -88,28 +80,52 @@ def load_img_by_url(img_url):
     img = cv2.imdecode(arr, 0)
     return img
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_video/鹿港.mp4'
-show_video_info(filename)
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/鹿港.mp4'
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+show_video_info(video_filename)
 
-'''
+"""
 print('顯示網路圖片')
 url = 'https://upload.wikimedia.org/wikipedia/commons/8/85/%E5%8C%97%E7%96%86%E5%8D%9A%E7%89%A9%E9%99%A2%E5%B7%A5%E5%AD%97%E6%A5%BC.jpg'
 image = load_img_by_url(url)
 cv2.imshow('Picture Viewer', image) #顯示圖片
-'''
+"""
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 vid = cv2.VideoCapture(video_filename)
 
-'''
+"""
 print('顯示影片中的某一幀圖片')
 image = get_image_by_pos(vid, 20, False, False)
 cv2.imshow('Picture Viewer', image) #顯示圖片
+"""
 
-'''
+print('------------------------------------------------------------')	#60個
+
+import cv2
+
+def get_video_info(video):
+    video_info = {}
+    
+    video_info['width'] = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+    video_info['height'] = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    video_info['frames'] = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
+    video_info['fps'] = video.get(cv2.CAP_PROP_FPS)
+    video_info['length'] = video.get(cv2.CAP_PROP_FRAME_COUNT) / video.get(cv2.CAP_PROP_FPS)
+    print(type(video_info))
+    return video_info
+
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+vid = cv2.VideoCapture(video_filename)
 
 video_info = get_video_info(vid)
 print(video_info)
 
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
 
 

@@ -1,10 +1,11 @@
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 
 print('------------------------------------------------------------')	#60個
-'''
+
 fig = plt.figure()
 
 #ax = fig.gca(projection='3d') old
@@ -20,6 +21,7 @@ fig.colorbar(surf, shrink = 0.5, aspect = 5)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
 #3D 畫圖
 
 from mpl_toolkits.mplot3d import Axes3D
@@ -40,6 +42,7 @@ plt.plot(x, y, z)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
 #scatter
 
 fig = plt.figure()
@@ -54,8 +57,8 @@ ax.scatter(x, y, z, c='r')
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
+
 #曲面
 
 fig = plt.figure()
@@ -76,7 +79,7 @@ plt.show()
 
 plt.contourf(X, Y, Z)
 plt.show()
-'''
+
 print('------------------------------------------------------------')	#60個
 
 fig = plt.figure()
@@ -94,6 +97,7 @@ ax.plot_surface(X, Y, Z, alpha=0.3)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
 #contour
 
 np.random.randint(0,3,10)
@@ -115,10 +119,9 @@ plt.contour(X, Y, Z)
 
 plt.show()
 
-
 plt.contourf(X, Y, Z)
-plt.show()
 
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -141,7 +144,6 @@ X, Y = np.meshgrid(x, y)
 
 Z = np.random.randint(1, 3, (4, 4))
 
-
 Z = np.random.randint(1, 3, X.shape)    #same
 
 plt.contour(X, Y, Z)
@@ -149,6 +151,7 @@ plt.contour(X, Y, Z)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
 x = X.ravel()
 
 x.reshape(4,4)
@@ -168,9 +171,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 #圓環與直線
-
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -192,13 +193,12 @@ ax.plot(x, y, z, color="r")
 ax.plot(p/3., p/3., p/3., color="b")
 #plt.savefig("matplot-3D-1.png")
 print ('plot is done')
-plt.show()
 
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 #三維球
-
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
@@ -389,8 +389,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-'''
-1. 首先在進行 3D Plot 時除了導入 matplotlib ，還要額外添加一個模塊，即 Axes 3D 3D 坐標軸顯示：
+#1. 首先在進行 3D Plot 時除了導入 matplotlib ，還要額外添加一個模塊，即 Axes 3D 3D 坐標軸顯示：
 
 import matplotlib
 import numpy as np
@@ -398,7 +397,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 matplotlib.use("Agg")
 
-2. 接下來給進 X 和 Y 值，並將 X 和 Y 編織成柵格。每一個（X, Y）點對應的高度值我們用下面這個函數來計算。使用ax.plot_surface繪出網格表面圖形，並將一個 colormap rainbow 填充顏色。
+#2. 接下來給進 X 和 Y 值，並將 X 和 Y 編織成柵格。每一個（X, Y）點對應的高度值我們用下面這個函數來計算。使用ax.plot_surface繪出網格表面圖形，並將一個 colormap rainbow 填充顏色。
 
 # X, Y value
 X = np.arange(-4, 4, 0.25)
@@ -409,14 +408,11 @@ R = np.sqrt(X ** 2 + Y ** 2)
 Z = np.sin(R)
 ax.plot_surface(X, Y, Z, rstride=5, cstride=5, cmap=plt.get_cmap('rainbow'))
 
-3.將三維圖像投影到 XY 平面上做一個等高線圖。
+#3.將三維圖像投影到 XY 平面上做一個等高線圖。
 
 ax.contourf(X, Y, Z, zdir='z', offset=-2, cmap=plt.get_cmap('rainbow'))
 
-其中，rstride 和 cstride 分別代表 row 和 column 的跨度。 可比較兩個圖分別是跨度為1 和 5 的效果。 
-
-
-'''
+#其中，rstride 和 cstride 分別代表 row 和 column 的跨度。 可比較兩個圖分別是跨度為1 和 5 的效果。 
 
 #3D基本操作
 

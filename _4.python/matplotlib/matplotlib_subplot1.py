@@ -1,5 +1,6 @@
-# plot 集合 subplot的另一種寫法 1
-
+# plot 集合 subplot的另一種寫法 3
+'''
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -14,78 +15,92 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-print('subplot的另一種寫法 1')
-import matplotlib.pyplot as plt 
-import numpy as np
+print('subplot的另一種寫法 3')
 
-fig, ax = plt.subplots(2, 2)            # 建立4個子圖
-x = np.linspace(0, 2*np.pi, 300)
-y = np.sin(x**2)
-ax[0, 0].plot(x, y,'b')                 # 子圖索引 0,0
-ax[0, 0].set_title('子圖[0, 0]')
-ax[0, 1].plot(x, y,'g')                 # 子圖索引 0,1
-ax[0, 1].set_title('子圖[0, 1]')
-ax[1, 0].plot(x, y,'m')                 # 子圖索引 1,0
-ax[1, 0].set_title('子圖[1, 0]')
-ax[1, 1].plot(x, y,'r')                 # 子圖索引 1,1
-ax[1, 1].set_title('子圖[1, 1]') 
-fig.suptitle("4個子圖的實作",fontsize=16) # 圖表主標題
-plt.tight_layout()                      # 緊縮佈局
+# plot 集合
 
-plt.show()
+#          編號                                     圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = '不使用subplot畫多圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-print('------------------------------------------------------------')	#60個
+print("在圖表的指定地方畫圖, 不用subplot")
 
-print('subplot的另一種寫法')
-import matplotlib.pyplot as plt 
-import numpy as np
+listx = [1, 2, 3, 4, 5]
+listy = [15, 50, 80, 40, 70]
 
-# 繪製半徑 5 的圓
-angle = np.linspace(0, 2*np.pi, 100)
-fig, ax = plt.subplots(2, 2)    # 建立 2 x 2 子圖
+print("1左下開始(0.1, 0.1), w = 0.3, h = 0.3, 左下圖")
+plt.axes([0.1, 0.1, 0.3, 0.3])
+plt.plot(listx, listy, 'r-s')
 
-ax[0, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[0, 0].set_title('繪圓形, 看起來像橢圓')
-ax[0, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[0, 1].axis('equal')
-ax[0, 1].set_title('寬高比相同, 是圓形')
-ax[1, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[1, 0].axis('equal')
-ax[1, 0].set(xlim=(-5, 5), ylim=(-5, 5))
-ax[1, 0].set_title('設定寬和高相同區間')
-ax[1, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[1, 1].set_aspect(2)
-ax[1, 1].set_title('設定寬高比是2')
+print("2左下開始(0.6, 0.1), w = 0.3, h = 0.3, 右下圖")
+plt.axes([0.6, 0.1, 0.3, 0.3])
+plt.plot(listx, listy, 'g--o')
 
-fig.tight_layout()
+print("3左下開始(0.1, 0.6), w = 0.3, h = 0.3, 左上圖")
+plt.axes([0.1, 0.6, 0.3, 0.3])
+plt.plot(listx, listy, 'b-s')
+
+print("4左下開始(0.6, 0.6), w = 0.3, h = 0.3, 右上圖")
+plt.axes([0.6, 0.6, 0.3, 0.3])
+plt.plot(listx, listy, 'y--o')
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print('subplot的另一種寫法')
-import matplotlib.pyplot as plt 
-import numpy as np
 
-# 繪製半徑 5 的圓
-angle = np.linspace(0, 2*np.pi, 100)
-fig, ax = plt.subplots(2, 2)    # 建立 2 x 2 子圖
 
-ax[0, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[0, 0].set_title('繪圓形, 看起來像橢圓')
-ax[0, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[0, 1].axis('equal')
-ax[0, 1].set_title('寬高比相同, 是圓形')
-ax[1, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[1, 0].axis('equal')
-ax[1, 0].set(xlim=(-5, 5), ylim=(-5, 5))
-ax[1, 0].set_title('設定寬和高相同區間')
-ax[1, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[1, 1].set_aspect('equal', 'box')
-ax[1, 1].set_title('設定寬高比相同')
-fig.tight_layout()
+#subplot 搭配 gridspec
+
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+
+x = np.linspace(-np.pi, np.pi, num=100, endpoint=True)
+c,s,t = np.cos(x), np.sin(x), np.tan(x)
+
+# 建立 3x3 的 GridSpec 
+gs = gridspec.GridSpec(3, 3)
+
+# 第0列 第0張
+plt.subplot(gs[0, 0])
+plt.plot(x, c)
+
+# 第0列 第1張
+plt.subplot(gs[0, 1])
+plt.plot(x, c)
+
+# 第0列 第2張
+plt.subplot(gs[0, 2])
+plt.plot(x, c)
+
+# 第1列，index 從 0 開始，也可用 [1,0:3] 表示
+plt.subplot(gs[1,:])
+plt.plot(x, c)
+
+# 第2列 第0張
+plt.subplot(gs[2, 0])
+plt.plot(x, c)
+
+# 第2列 第1張
+plt.subplot(gs[2, 1])
+plt.plot(x, c)
+
+# 第2列 第2張
+plt.subplot(gs[2, 2])
+plt.plot(x, s)
 
 plt.show()
 
+'''
 print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
 

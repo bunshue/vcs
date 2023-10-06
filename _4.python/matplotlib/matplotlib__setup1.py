@@ -263,19 +263,14 @@ plt.plot(year, city2, 'g--*', lw=2, ms=10, label="高雄")
 
 --- plt.savefig 存圖命令 -------------------------------------------------------------
 
-plt.savefig('__temp\mypic.png', format='png', dpi=200)
-plt.savefig(fname = "my_hist.png", format = "png")
-plt.savefig('sin_plot.svg')
-plt.savefig('sin_plot111.png')
-plt.savefig('sin_plot.bmp')
-plt.savefig('sin_plot.jpg')
-plt.savefig('sin_plot222.png', format='png', transparent=True, dpi=300, pad_inches = 0)    #指定分辨率
-plt.savefig('sin_plot333.png', dpi = 300)
-plt.savefig("mandelbrot_python.svg")
-
-filename = 'Helmholtz_coil,_B_magnitude_cross_section.svg'
-fig.savefig(filename)
-
+plt.savefig('filename.png', format='png', dpi=200)
+plt.savefig(fname = 'filename.png', format = "png")
+plt.savefig('filename.svg')
+plt.savefig('filename.png')
+plt.savefig('filename.bmp')
+plt.savefig('filename.jpg')
+plt.savefig('filename.png', format='png', transparent=True, dpi=300, pad_inches = 0)    #指定分辨率
+plt.savefig('filename.png', dpi = 300)
 
 --- plt.text 寫字 -------------------------------------------------------------
 
@@ -595,27 +590,19 @@ plt.xticks(seq)                         # 設定x軸刻度
 
 plt.plot(seq, Benz, '-*', seq, BMW, '-o', seq, Lexus, '-^')   
 
-
 plt.plot(x, y, label="$sin(x)$", color='red', lw=2)
 plt.plot(x, z, label="$cos(x^2)$", color='b')
 
-
 plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
 
-
-plt.plot(x, np.sin(x), c='#e63946', lw=3)
-plt.plot(x, np.sin(3*x), c='#7fb069', lw=3)
-plt.scatter(x, np.random.randn(100), c='#daa73e', s=50, alpha=0.5)
-plt.bar(range(10), np.random.randint(1,30,10), fc='#e55934')
+plt.plot(x, np.sin(x), c = '#7fb069', lw = 3)
+plt.scatter(x, np.random.randn(100), c = '#daa73e', s = 50, alpha = 0.5)
+plt.bar(range(10), np.random.randint(1, 30, 10), fc = '#e55934')
 
 plt.plot(x, y, marker='o')
 plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
 
-#plt.figure(figsize=(6,6))
-
-plt.figure(figsize=(6,6))
-
-
+plt.figure(figsize = (6, 6))
 
 
 """

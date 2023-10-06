@@ -112,22 +112,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#圓餅圖
 
-import matplotlib.pyplot as plt
-
-labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
-sizes = [15, 30, 45, 10]
-# 分離係數，所以只有 'Hogs' 會分離
-explode = (0, 0.1, 0, 0)
-
-fig1, ax1 = plt.subplots()
-# 從 90° 開始，逆時針排列，並加上陰影，並加上每塊的比例，格式為 '%1.2f%%'
-ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.2f%%', shadow=True, startangle=90)
-# 調整比例，確認顯示為圓形
-ax1.axis('equal')
-
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -188,17 +173,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-x1 = np.linspace(-5, 5, 101)
-y1 = np.sin(x1)
-
-fig, ax = plt.subplots()
-ax.set_title("Sin")
-ax.set_xlabel("rad")
-ax.plot(x1, y1)
-handles, labels = ax.get_legend_handles_labels()
-ax.legend(handles, labels)
-
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 

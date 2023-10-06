@@ -27,8 +27,8 @@ import matplotlib.dates as mdates
 data_price = [1 ,2, 3, 4, 5]
 
 #4、绘制图片
-fig = plt.figure(figsize=(12,10))
-grid = plt.GridSpec(12, 10, wspace=0.5, hspace=0.5)
+fig = plt.figure(figsize = (12, 10))
+grid = plt.GridSpec(12, 10, wspace = 0.5, hspace = 0.5)
 #（1）绘制K线图
 # K线数据
 #ohlc = data_price[['Date','open_price','high_price','low_price','close_price']]

@@ -17,12 +17,8 @@ print('------------------------------------------------------------')	#60個
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-
 #第一張圖
 plt.subplot(231)
-
-# 2D random walk
-#fig2, ax2 = plt.subplots(num="Figure_2")
 
 prng = np.random.RandomState(123)
 
@@ -38,8 +34,6 @@ def random_walk(xy0=(0.0, 0.0), nsteps=100, std=1.0):
 for cnt in range(3):
     traj = random_walk()
     plt.plot(traj[:, 0], traj[:, 1], label="Traj. {c}".format(c=cnt))
-
-#ax2.legend(loc='best')
 
 #第二張圖
 plt.subplot(232)

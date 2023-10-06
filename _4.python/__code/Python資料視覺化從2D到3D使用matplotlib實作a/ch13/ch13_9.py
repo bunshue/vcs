@@ -1,4 +1,3 @@
-# ch13_9.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -20,6 +19,7 @@ plt.xlabel("數量", fontsize=14, color='b')
 plt.ylabel("年度", fontsize=14, color='b')
 plt.legend()                                 # 繪製圖例
 plt.yticks(X+barH, labels)                   # 加註年度標籤
+
 plt.show()
 
 

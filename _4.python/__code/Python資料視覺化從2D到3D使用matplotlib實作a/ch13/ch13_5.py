@@ -1,4 +1,3 @@
-# ch13_5.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -12,14 +11,15 @@ labels = ["2023年","2024年","2025年"]       # 年度刻度標籤
 fig = plt.figure()
 ax = fig.add_axes([0.15,0.15,0.7,0.7])
 barW = 0.22                                 # 長條圖寬度
+
 plt.bar(X+0.0,Benz,color='r',width=barW,label='Benz')
 plt.bar(X+0.25,BMW,color='g',width=barW,label='BMW')
 plt.bar(X+0.5,Lexus,color='b',width=barW,label='Lexus')
+
 plt.title("銷售報表", fontsize=24, color='b')
 plt.xlabel("年度", fontsize=14, color='b')
 plt.ylabel("數量", fontsize=14, color='b')
 plt.legend()                                # 繪製圖例
 plt.xticks(X+barW, labels)                  # 加註年度標籤
+
 plt.show()
-
-
