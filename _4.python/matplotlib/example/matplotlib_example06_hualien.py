@@ -38,7 +38,6 @@ target = target.set_index(target['年度'])
 target = target.drop(['年度'], axis=1)
 print(target)
 
-
 print('------------------------------------------------------------')	#60個
 
 import seaborn as sns

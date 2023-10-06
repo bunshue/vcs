@@ -1,7 +1,8 @@
-'''
+import xlrd
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_excel/python_ReadWrite_EXCEL1.xlsx'
 
-import xlrd
+print('------------------------------------------------------------')	#60個
 
 data = xlrd.open_workbook(filename)
 
@@ -11,7 +12,6 @@ s2 = data.sheets()[1]
 print(data)
 print(s1)
 print(s2)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -37,7 +37,6 @@ pp.pprint(scores)
 
 print('------------------------------------------------------------')	#60個
 
-
 import xlrd
 
 data = xlrd.open_workbook(filename)
@@ -45,10 +44,7 @@ s1 = data.sheets()[0]
 for row in range(s1.nrows):
     print(s1.row_values(row))
 
-'''
-
 print('------------------------------------------------------------')	#60個
-
 
 import xlrd
 
@@ -65,11 +61,11 @@ for n in range(len(data.sheet_names())):
         print('Page {}: '.format(n), end='')
         print(table.row_values(i))
 
-'''
+"""
 data.sheets()[n] 可以指定我們要讀第幾個工作表，在這裡 n 便是我工作表的 index。
 table.nrows 可以顯示我列數有幾列，在這裡我用 row_values(i) 將每一張工作表、每一列 print 出來。
 當然，你要一行行地印出來也是可行的。
-'''
+"""
 
 data = xlrd.open_workbook(filename)
 

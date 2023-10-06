@@ -4,7 +4,7 @@ import time
 import random
 import numpy as np
 
-'''
+
 print('------------------------------------------------------------')	#60個
 
 print('---- 字串處理專區 --------------------------------------------------------')	#60個
@@ -49,33 +49,10 @@ print('---- 列印專區 -------------------------------------------------------
 print('------------------------------------------------------------')	#60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-total = 7
-for i in range(0, (total+1)):
-    #print(i)	# 0 ~ 7
-    print(u"download: " + str(100 * i / total ) + " %.")
 
 #替代字串
 TABLE_NAME = 'people'
@@ -88,32 +65,44 @@ key_id = 1234
 SELECT = 'SELECT * FROM memos WHERE key=?', (str(key_id))
 print(SELECT)
 
-
-
-
-
-
 print('---- 語法專區 --------------------------------------------------------')	#60個
 
+print('for迴圈的寫法')
 
-print('for-test')
-for i in range(4, -1, -1):
+# range(N) = range(0, N) 回傳 0 ~ (N - 1) 之不可變數列(sequence)
+    
+# 0 ~ (N-1)
+N = 6
+for i in range(N):
     print(i)
 
-for i in range(0, 6):
+print('------------------------------------------------------------')	#60個
+
+N = 6
+# 0 ~ (N-1)
+for i in range(0, N):
     print(i)
 
+print('------------------------------------------------------------')	#60個
 
+N1, N2 = 3, 6
+#N1 ~ (N2-1)
+for i in range(N1, N2):
+    print(i)
 
+print('------------------------------------------------------------')	#60個
 
-#產生連續的整數
-for num in range(10):
-    print(num)
+N1, N2, INC = 3, 17, 3
+#3 ~ (N-1), 每次加3
+for i in range(N1, N2, INC):
+    print(i)
 
-for num in range(2, 7):
-    print(num)
+print('------------------------------------------------------------')	#60個
 
-
+total = 7
+for i in range(0, (total + 1)):
+    #print(i)	# 0 ~ 7
+    print(u"download: " + str(100 * i / total ) + " %.")
 
 print('------------------------------------------------------------')	#60個
 
@@ -129,7 +118,7 @@ print(len(name))
 print(name)
 print(type(name))
 
- = name.reverse()
+ccc = name.reverse()
 print(ccc)
 
 print('------------------------------------------------------------')	#60個
@@ -137,7 +126,7 @@ print('------------------------------------------------------------')	#60個
 x = 2
 y = 0.5
 
-print("x**y = " + str(x ** y))
+print("x ** y = " + str(x ** y))
 
 print('------------------------------------------------------------')	#60個
 
@@ -222,7 +211,6 @@ elif (guessDigit1 == lotteryDigit1 or guessDigit1 == lotteryDigit2
 else:
     print("Sorry, no match")
 
-
 #test strip
 #filename = input("Enter a filename: ").strip()
 
@@ -295,7 +283,7 @@ fp.close()
 """
 
 print('------------------------------------------------------------')	#60個
-'''
+
 
 print('---- char ord unicode decode encode --------------------------------------------------------')	#60個
 
@@ -1075,37 +1063,6 @@ print('------------------------------------------------------------')	#60個
 
 #以下為OK可以搬出的
 
-
-print('------------------------------------------------------------')	#60個
-
-def hexToDecimal(hex):
-    decimalValue = 0
-    for i in range(len(hex)):
-        ch = hex[i]
-        if 'A' <= ch <= 'F' or '0' <= ch <= '9':
-            decimalValue = decimalValue * 16 + \
-                hexCharToDecimal(ch)
-        else:
-            return None
-
-    return decimalValue
-
-def hexCharToDecimal(ch):
-    if 'A' <= ch <= 'F':
-        return 10 + ord(ch) - ord('A')
-    else:
-        return ord(ch) - ord('0')
-
-hex = 'aa'
-decimal = hexToDecimal(hex.upper())
-
-if decimal == None:
-    print("Incorrect hex number")
-else:
-    print("The decimal value for hex number", hex, "is", decimal) 
-
-print('------------------------------------------------------------')	#60個
-
 print('十進位 轉 十六進位')
 
 # Convert a decimal to a hex as a string 
@@ -1195,6 +1152,7 @@ def test():
             print(y, x, end = ' ')
 
 test()
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -1581,6 +1539,39 @@ for y in range(0, H, h):
         #print(x, y)
         #print(box)
 
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+def hexToDecimal(hex):
+    decimalValue = 0
+    for i in range(len(hex)):
+        ch = hex[i]
+        if 'A' <= ch <= 'F' or '0' <= ch <= '9':
+            decimalValue = decimalValue * 16 + \
+                hexCharToDecimal(ch)
+        else:
+            return None
+
+    return decimalValue
+
+def hexCharToDecimal(ch):
+    if 'A' <= ch <= 'F':
+        return 10 + ord(ch) - ord('A')
+    else:
+        return ord(ch) - ord('0')
+
+hex = 'aa'
+decimal = hexToDecimal(hex.upper())
+
+if decimal == None:
+    print("Incorrect hex number")
+else:
+    print("The decimal value for hex number", hex, "is", decimal) 
+
+print('------------------------------------------------------------')	#60個
 
 
 

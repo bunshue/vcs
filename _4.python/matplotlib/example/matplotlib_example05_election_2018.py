@@ -1,5 +1,3 @@
-
-
 import sys
 
 print('------------------------------------------------------------')	#60個
@@ -40,17 +38,16 @@ import pandas as pd
 
 import xlrd
 
-#pd.read_excel kilo可用  sugar不可用
+#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 data = pd.read_excel('election_2018.xls')
 
 data.info()
 data.head(10)
 
-
 print('------------------------------------------------------------')	#60個
 
+#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-#pd.read_excel kilo可用  sugar不可用
 data = pd.read_excel('election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
@@ -63,7 +60,8 @@ target.hist(bins=3)
 
 target
 
-#pd.read_excel kilo可用  sugar不可用
+#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+
 data = pd.read_excel('election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
@@ -72,7 +70,8 @@ target = target.drop('出生年次', axis=1)
 target = target.set_index(['地區', '推薦政黨'])
 target
 
-#pd.read_excel kilo可用  sugar不可用
+#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+
 data = pd.read_excel('election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
@@ -81,7 +80,8 @@ target = target.drop('出生年次', axis=1)
 target = target.set_index(['推薦政黨', '地區']).sort_index()
 target
 
-#pd.read_excel kilo可用  sugar不可用
+#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+
 data = pd.read_excel('election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
@@ -98,7 +98,8 @@ import seaborn as sns
 #matplotlib.font_manager._rebuild()
 #from matplotlib.font_manager import _rebuild
 
-#pd.read_excel kilo可用  sugar不可用
+#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+
 data = pd.read_excel('election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','推薦政黨','得票數']].groupby(by = '推薦政黨')['得票數'].sum()
@@ -115,7 +116,8 @@ import seaborn as sns
 #plt.rcParams['font.sans-serif'] = [u'SimHei']
 sns.set_style("darkgrid",{"font.sans-serif":[u'SimHei', 'Arial']})
 
-#pd.read_excel kilo可用  sugar不可用
+#pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
+
 data = pd.read_excel('election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
@@ -134,5 +136,4 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
 
