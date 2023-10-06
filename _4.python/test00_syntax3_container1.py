@@ -840,15 +840,13 @@ print(animals[:-2])
 #測試list之最後5筆資料
 print(animals[-3:])
 
-import numpy as np
-for i in range(5):
-    c = np.random.choice(animals)
-    print(f"本次抽中 {c}。")
+print('------------------------------------------------------------')	#60個
 
-llll = ['鼠', '牛', '虎', '兔', '龍']
-pppp = llll[2:] #第二項(含)以後的
-print(llll)
-print(pppp)
+animals = ['鼠', '牛', '虎', '兔', '龍']
+print(animals)
+
+animals_partial = animals[2:] #第二項(含)以後的
+print(animals_partial)
 
 print('------------------------------------------------------------')	#60個
 

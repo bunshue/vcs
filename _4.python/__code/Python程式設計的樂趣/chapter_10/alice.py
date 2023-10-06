@@ -1,3 +1,5 @@
+print('統計一個檔案的字數')
+
 filename = 'alice.txt'
 
 try:
