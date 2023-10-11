@@ -133,6 +133,8 @@ year = 2024
 isLeapYear = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
 print(year, "is a leap year?", isLeapYear)
 
+print('------------------------------------------------------------')	#60個
+
 print('if and or')
 number = 126
 
@@ -146,6 +148,7 @@ if (number % 2 == 0 or number % 3 == 0) and \
        not (number % 2 == 0 and number % 3 == 0):
     print(number, "divisible by 2 or 3, but not both")
 
+print('------------------------------------------------------------')	#60個
 
 print('if and or')
 lottery = 35
@@ -356,7 +359,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-
 target_url = 'https://www.nkust.edu.tw/p/403-1000-12-{}.php'
 
 for page in range(1, 6):
@@ -388,15 +390,10 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-print('字串的 title 用法')
+print('字串的 title 用法, 首字大寫')
 s = 'this is a lion mouse'
 
 print(s.title())
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -405,7 +402,6 @@ MICRO_SECONDS = 1e6
 PERCENT = 100
 LINE = 79
 MIN_TEST_RUNTIME = 1e-3
-
 
 name = 'david'
 min_time = 11.11
@@ -559,7 +555,6 @@ foldername = 'C:/_git/vcs/_1.data/______test_files2'
 normdir = os.path.normcase(foldername)
 print(normdir)
 
-
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -603,7 +598,6 @@ tok_name = {value: name
 
 print(type(tok_name))
 print(tok_name)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -718,14 +712,11 @@ print(f"<鳳>出現的次數 : {msg.count('鳳')}")
 msg = msg.replace('Linda','Lxx')
 print(f"新的msg內容 : {msg}")
 
-
-
 print('------------------------------------------------------------')	#60個
 
 x = [[a, b, c] for a in range(1, 20) for b in range(a, 20) for c in range(b, 20)
      if a ** 2 + b ** 2 == c **2]
 print(x)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -829,7 +820,6 @@ print("os.path.splitext:", os.path.splitext(fullpath))
 
 """
 
-
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
@@ -841,7 +831,6 @@ import locale
 import unittest
 import warnings
 import encodings
-
 
 all_unicode_encodings = [
     "ascii",
@@ -961,7 +950,6 @@ for encoding in all_unicode_encodings:
 for encoding in all_unicode_encodings:
     encoder = codecs.getencoder(encoding)
 
-
 ALL_CJKENCODINGS = [
 # _codecs_cn
     'gb2312', 'gbk', 'gb18030', 'hz',
@@ -979,13 +967,10 @@ ALL_CJKENCODINGS = [
     'iso2022_jp_3', 'iso2022_jp_ext', 'iso2022_kr',
 ]
 
-
-
 for enc in ALL_CJKENCODINGS:
     code = '# coding: {}\n'.format(enc)
     print(code)
 
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -1015,12 +1000,6 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
 
 #以下為OK可以搬出的
 
@@ -1054,7 +1033,6 @@ print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
 
 print('------------------------------------------------------------')	#60個
 
-
 def printArea(width = 1, height = 2):
     area = width * height
     print("width:", width, "\theight:", height, "\tarea:", area)
@@ -1065,11 +1043,7 @@ printArea(height = 5, width = 3) # Keyword arguments width
 printArea(width = 1.2) # Default height = 2
 printArea(height = 6.2) # Default widht = 1
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
 
 #檢查有無包含中文
 def is_contains_chinese():
@@ -1081,7 +1055,6 @@ def is_contains_chinese():
       return True
   print('False')
   return False
-  
 
 search_word = 'oat'
 is_contains_chinese()
@@ -1114,7 +1087,6 @@ def test():
 
 test()
 
-
 print('------------------------------------------------------------')	#60個
 
 # 定義lambda函數
@@ -1136,7 +1108,6 @@ def gcd(a, b):
 
 a, b = 24, 36
 print("最大公約數是 : ", gcd(a, b))
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1296,8 +1267,6 @@ while True:
         print('你按了 ctrl + C, 離開')
         sys.exit()
 
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -1325,13 +1294,9 @@ print(packagedir)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
 print(2 ** 32)
 
 print('------------------------------------------------------------')	#60個
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -1419,19 +1384,10 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 print(filename)
 filename = os.path.normcase(filename)
 print(filename)
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 

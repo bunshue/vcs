@@ -2,6 +2,7 @@
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -21,26 +22,6 @@ plt.figure(num = '派圖 集合 1', figsize = (20, 15), dpi = 84, facecolor = "w
 #第一張圖
 plt.subplot(231)
 
-sizes = [25, 30, 15, 10]
-labels = ["北部", "西部", "南部", "東部"]
-colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.2, 0)        # 設定分隔的區塊位置
-plt.pie(sizes, 
-	explode = explode,      # 設定分隔的區塊位置
-	labels = labels, 
-	colors = colors,
-	labeldistance = 1.1, 
-	autopct = "%2.1f%%",    #項目百分比的格式
-	pctdistance = 0.6,
-	shadow = True,
-	startangle = 90)        # 繪製起始角度
-
-plt.axis("equal")
-plt.legend()
-
-
-#第二張圖
-plt.subplot(232)
 
 '''
 圓餅圖是使用 pie 函數繪製出來的，語法為：
@@ -60,59 +41,49 @@ radius 	圓餅圖的半徑，預設是1
 '''
 
 #設定將使用的數值，將要有項目標題、數值串列、圓餅圖顏色、分隔的區塊位置
-labels = ['A', 'B', 'C', 'D']
-values = [60, 42, 83, 37]
-colors = ['r', 'g', 'b', 'y']
-explode = (0, 0, 0, 0.08)       #設定分隔的區塊位置
+values = [3, 48, 33, 8, 38]
+labels = ['鼠', '牛', '虎', '兔', '龍']
+colors = ['r', 'g', 'b', 'c', 'm']
+# 分離係數，所以只有 '虎' 會分離
+explode = (0, 0, 0.08, 0, 0)       #設定分隔的區塊位置
 
 #設定 pie 函數參數繪製圓餅圖
-plt.pie(
-values, # 數值
-labels = labels, # 項目標題
-colors = colors, # 指定圓餅圖的顏色
-explode = explode, # 設定分隔的區塊位置
-autopct = "%2.2f%%", # 項目百分比格式
-pctdistance = 0.5, # 數值文字與圓心距離
-shadow = True, # 圓餅圖陰影開啟/關閉
-startangle = 90, # 繪製起始角度
-radius = 0.9 # 圓餅圖的半徑，預設是1
-)
+# 從 90° 開始，逆時針排列，並加上陰影，並加上每塊的比例，格式為 '%1.2f%%'
+plt.pie(values,             # 數值
+        labels = labels,    # 項目標題
+        colors = colors,    # 指定圓餅圖的顏色
+        explode = explode,  # 設定分隔的區塊位置
+	labeldistance = 1.1, 
+	autopct = "%2.1f%%",    #項目百分比的格式, 顯示數字
+        pctdistance = 0.5,  # 數值文字與圓心距離
+        shadow = True,      # 圓餅圖陰影開啟/關閉
+        startangle = 90,    # 繪製起始角度
+        radius = 0.9        # 圓餅圖的半徑，預設是1
+        )
 
 #設定 legnd 的位置，將圖表顯示出來，並顯示圖例名稱
 plt.legend(loc = "right") # 設定 legnd 的位置
+#plt.legend()
+
+plt.axis('equal')   # 調整比例，確認顯示為圓形
+
+#第二張圖
+plt.subplot(232)
+
+
 
 
 #第三張圖
 plt.subplot(233)
 
-labels = ["東部", "南部", "北部", "中部"]
-sizes = [5, 10, 20, 15]
-colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.05, 0)
-plt.pie(sizes,explode = explode,labels = labels,colors = colors,\
-    labeldistance = 1.1,autopct = "%3.1f%%",shadow = True,\
-    startangle = 90,pctdistance = 0.6)
-plt.axis("equal")
-plt.legend()
 
 
 #第四張圖
 plt.subplot(234)
 
-labels = ["Python","C++","Java","JS","C","C#"]
-ratings = [5, 6, 15, 3, 12, 4]
-
-plt.pie(ratings, labels=labels)
-plt.title("程式語言的使用率") 
-plt.axis("equal")
 
 #第五張圖
 plt.subplot(235)
-
-patches, texts = plt.pie(ratings, labels=labels)
-plt.legend(patches, labels, loc="best")
-plt.title("程式語言的使用率") 
-plt.axis("equal")
 
 
 #第六張圖
@@ -138,13 +109,16 @@ lexus.append(np.count_nonzero(lexus_prices<=150))
 lexus.append(np.count_nonzero((lexus_prices>150)&(lexus_prices<=200)))
 lexus.append(np.count_nonzero((lexus_prices>200)&(lexus_prices<=300)))
 lexus.append(np.count_nonzero(lexus_prices>300))
+
 labels = ['<=150', '151~200', '201~300', '>300']
 explode = [0.2, 0, 0, 0]
-plt.pie(lexus, explode=explode, autopct='%1.0f%%', 
-        radius=2.0, labels=labels, shadow=True)
-plt.title('Lexus Models Prices')
+
+plt.pie(lexus, explode = explode, autopct = '%1.0f%%', radius = 1.0, labels = labels, shadow = True)
 
 plt.show()
+
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -155,35 +129,13 @@ plt.figure(num = '派圖 集合 2', figsize = (20, 15), dpi = 84, facecolor = "w
 #第一張圖
 plt.subplot(231)
 
-area = ['大陸','東南亞','東北亞','美國','歐洲','澳紐']
-people = [10000,12600,9600,7500,5100,4800]
-
-'''
-#case 1
-plt.pie(people,labels=area)
-
-#case 2
-plt.pie(people,labels=area,autopct="%1.2f%%")
-'''
-#case 3, 突出一塊
-exp = [0.0,0.0,0.0,0.0,0.0,0.1]
-plt.pie(people,labels=area,explode=exp,autopct="%1.2f%%")
-
-plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
 
 #第二張圖
 plt.subplot(232)
 
-country = ["美國","澳洲","日本","歐洲","英國"]
-pou = [10543, 2105, 1190, 3346, 980]
-          
-plt.pie(pou,labels=country,explode=(0,0,0.2,0,0), autopct="%1.2f%%")    # 繪製圓餅圖
 
 #第三張圖
 plt.subplot(233)
-
-
-
 
 
 #第四張圖

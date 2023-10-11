@@ -37,16 +37,16 @@ Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的
 
 """
 
-
+print('建立空容器')
 
 a_dict = {}
 print(type(a_dict))
 
-a_list = []
+a_list = [] #串列
 print(type(a_list))
 
 
-table1 = [] #list
+table1 = [] #串列
 table2 = {} #dict
 print(type(table1))
 print(type(table2))
@@ -143,7 +143,6 @@ with open(filename,'w') as fp:
     
 print("寫入檔案 : " + filename)
 
-
 animal.clear()
 
 print("目前字典內容:", animal)
@@ -151,7 +150,7 @@ print("目前字典元素數量     = ", len(animal))
 
 print('------------------------------------------------------------')	#60個
 
-# 建立內含{字典}的{字典}
+print('建立內含{字典}的{字典}')
 animals = {
     '鼠':
     {
@@ -179,7 +178,7 @@ print("animals['牛']元素個數 :", len(animals['牛']))
 
 print('------------------------------------------------------------')	#60個
 
-# 建立內含{集合}的{字典}
+print('建立內含{集合}的{字典}')
 
 print('字典範例')
 
@@ -215,7 +214,7 @@ for name, character in animals.items():
 
 print('------------------------------------------------------------')	#60個
 
-# 建立內含{字典}的{字典}
+print('建立內含{字典}的{字典}')
 animals = {
     '鼠':{
         'cname':'鼠',
@@ -242,7 +241,7 @@ print(f"animals['牛']元素個數  {len(animals['牛'])}")
 
 print('------------------------------------------------------------')	#60個
 
-# 建立內含[串列]的{字典}
+print('建立內含[串列]的{字典}')
 
 animals = {
     '鼠':['生性樂觀', '適應力強', '坐言起行'],
@@ -262,7 +261,8 @@ for name, character in animals.items():
 
 print('------------------------------------------------------------')	#60個
 
-# 建立內含{元組}的{字典}
+print('建立內含{元組}的{字典}')
+
 animals = {'鼠' : ('mouse', 3),
            '牛' : ('ox', 48),
            '虎' : ('tiger', 33),
@@ -392,7 +392,7 @@ print("列印編碼字典\n", encry_dict)     # 列印字典
 #msgTest = input("請輸入原始字串 : ")
 msgTest = 'catdogelephant'
 
-cipher = []
+cipher = [] #串列
 for i in msgTest:                       # 執行每個字元加密
     v = encry_dict[i]                   # 加密
     cipher.append(v)                    # 加密結果
@@ -513,8 +513,8 @@ chi_score = dict() #記錄國文成績
 eng_score = dict() #記錄英文成績
 mat_score = dict() #記錄數學成績
 
-subjects = ["國文", "英文", "數學"]
-scores  = [chi_score, eng_score, mat_score]
+subjects = ["國文", "英文", "數學"]   #串列
+scores  = [chi_score, eng_score, mat_score] #串列
 
 class_101[1] = '牛'
 class_101[2] = '虎'
@@ -721,7 +721,7 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-animal_list = ['鼠', '牛', '虎', '兔', '龍']
+animal_list = ['鼠', '牛', '虎', '兔', '龍'] #串列
 print('原 串列')
 print(animal_list)
 
@@ -755,14 +755,14 @@ print('一維 串列')
 
 print('建立串列')
 
-animals = ['鼠', '牛', '虎', '兔', '龍']
+animals = ['鼠', '牛', '虎', '兔', '龍'] #串列
 
 print('原串列 :', animals)
 print('串列 增加項目')
 animals.append('蛇')
 animals.append('蛇')
 animals.append('蛇')
-new_animals = ['馬', '羊']
+new_animals = ['馬', '羊']    #串列
 animals = animals + new_animals
 print('新串列 :', animals)
 print('改變第1項的值')
@@ -778,7 +778,7 @@ print('牛 是否在 串列 裏?', "牛" in animals)
 print('豬 是否在 串列 裏?', '豬' in animals)
 
 print('一維 串列')
-animals = ['鼠', '牛', '虎', '兔', '龍']
+animals = ['鼠', '牛', '虎', '兔', '龍'] #串列
 
 print('一一取出 串列 內的值')
 for ani in animals:
@@ -793,28 +793,28 @@ print(animals)
 
 print('------------------------------------------------------------')	#60個
 
-animals = ['鼠', '牛', '虎', '兔', '龍']
-print("目前animals串列 : ", animals)
+animals = ['鼠', '牛', '虎', '兔', '龍'] #串列
+print('目前animals串列 :', animals)
 animals.append('蛇')
-print("目前animals串列 : ", animals)
+print('目前animals串列 :', animals)
 animals.insert(3,'馬')
-print("目前animals串列 : ", animals)
+print('目前animals串列 :', animals)
 animals.remove('虎')
-print("目前animals串列 : ", animals)
+print('目前animals串列 :', animals)
 
 print('------------------------------------------------------------')	#60個
 
-animals = ['鼠', '牛', '虎', '兔', '龍']
-print("目前animals串列 : ", animals)
+animals = ['鼠', '牛', '虎', '兔', '龍'] #串列
+print('目前animals串列 :', animals)
 
 for ani in animals[:]:
     animals.remove(ani)
     print(f"刪除 {ani}")
-    print("目前animals串列 : ", animals)
+    print('目前animals串列 :', animals)
 
 print('------------------------------------------------------------')	#60個
 
-animals = ['鼠', '牛', '虎', '兔', '龍']
+animals = ['鼠', '牛', '虎', '兔', '龍'] #串列
 print('型態 :', type(animals))
 print('長度 :', len(animals))
 print('原串列 :', animals)
@@ -842,7 +842,7 @@ print(animals[-3:])
 
 print('------------------------------------------------------------')	#60個
 
-animals = ['鼠', '牛', '虎', '兔', '龍']
+animals = ['鼠', '牛', '虎', '兔', '龍'] #串列
 print(animals)
 
 animals_partial = animals[2:] #第二項(含)以後的
@@ -877,7 +877,7 @@ for c in s:
 print('------------------------------------------------------------')	#60個
 
 print('串列 使用')
-animals = ['鼠', '牛', '虎', '兔', '龍']
+animals = ['鼠', '牛', '虎', '兔', '龍'] #串列
 print(type(animals))
 
 print('列印全部項目')
@@ -889,7 +889,7 @@ print(animal_sorted)
 
 print('------------------------------------------------------------')	#60個
 
-print('串列 操作')
+print('串列 操作, 建立內含元組的串列')
 animals = [('mouse', '鼠', 3),
       ('ox', '牛', 48),
       ('tiger', '虎', 33),
@@ -908,7 +908,7 @@ print(animals)
 
 print('------------------------------------------------------------')	#60個
 
-print('串列')
+print('串列 操作, 建立內含串列的串列')
 animals = [['鼠', 3], ['牛', 48], ['虎', 33]]
 print(type(animals))
 print(animals)
@@ -917,7 +917,7 @@ animals.sort(key = lambda x:x[1])
 print(animals)
 
 print('-------------')
-print('串列')
+print('串列 操作, 建立內含串列的串列')
 animals = [['鼠', 3], ['牛', 48], ['虎', 33]]
 print(type(animals))
 print(animals)
@@ -1050,16 +1050,16 @@ print('提取 從a開始到b, 間隔c')
 a = 0
 b = 5
 c = 2
+print(type(person_data[a:b:c])) #串列
 print(person_data[a:b:c])
-
 
 #取第一欄出來 成一個 串列 ??
 
-
 print('串列 之使用')
 
-
 print('------------------------------------------------------------')	#60個
+
+print('串列, 建立內含元組的串列')
 
 data = list()
 for page in range(1, 6):
@@ -1072,6 +1072,7 @@ print(data)
 
 print('------------------------------------------------------------')	#60個
 
+print('串列, 建立內含字典的串列')
 
 contents = list()
 
@@ -1083,12 +1084,10 @@ for page in range(1, 6):
     content['title'] = 'ddddd'
     contents.append(content)
     
+print(type(contents))
 print(contents)
 
 print('------------------------------------------------------------')	#60個
-
-
-
 
 # 一個 串列 裡面每個元件都是 dictionary
 
@@ -1157,9 +1156,6 @@ print(animals[1:3])
 
 print(animals.count('虎'))
 print(animals.index('虎'))
-
-
-
 
 #tuple 範例
 
@@ -1271,27 +1267,24 @@ x = set(animals1)                # 將串列轉成集合
 print('串列 轉 集合')
 animals2 = list(x)               # 將集合轉成串列
 
-print("原先串列資料animals1 = ", animals1)
-print("新的串列資料animals2 = ", animals2)
-
+print('原先串列資料animals1 = ', animals1)
+print('新的串列資料animals2 = ', animals2)
 
 print('------------------------------------------------------------')	#60個
 
 list_animal = ['鼠', '牛', '虎', '兔', '龍']      # 定義串列元素是字串
 print('串列 轉 元組')
 tuple_animal = tuple(list_animal)            # 將串列改為元組
-print("列印串列", list_animal)
-print("列印元組", tuple_animal)
+print('列印串列 :', list_animal)
+print('列印元組 :', tuple_animal)
 
 #tuple禁止使用append
 #tuple_animal.append('elephant')         # 增加元素 --- 錯誤錯誤
 
 print('------------------------------------------------------------')	#60個
 
-
 import random
 import time
-
 
 print('set 和 list 速度比較')
 NUMBER_OF_ELEMENTS = 500
@@ -1371,17 +1364,17 @@ print('------------------------------------------------------------')	#60個
 print('集合 的方法 1')
 fruits = set("orange")
 print(type(fruits))
-print("字元a是屬於fruits集合?", 'a' in fruits)
-print("字元d是屬於fruits集合?", 'd' in fruits)
+print('字元a是屬於fruits集合?', 'a' in fruits)
+print('字元d是屬於fruits集合?', 'd' in fruits)
 
 print('集合 的方法 2')
-cars = {"Nissan", "Toyota", "Ford"}
+cars = {'Nissan', 'Toyota', 'Ford'}
 print(type(cars))
 
-boolean = "Ford" in cars
-print("Ford in cars", boolean)
+boolean = 'Ford' in cars
+print('Ford in cars ?', boolean)
 boolean = "Audi" in cars
-print("Audi in cars", boolean)
+print('Audi in cars ?', boolean)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1400,14 +1393,9 @@ for bar in map(draw_bar, s):
 
 print('------------------------------------------------------------')	#60個
 
-
-
 s = [2, 5, 4, 7, 5, 4]
 for bar in map(lambda n: "*"*n, s):
     print(bar)
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1473,7 +1461,8 @@ for name in _deprecations:
 
 print('------------------------------------------------------------')	#60個
 
-import os, string
+import os
+import string
 
 print('字典範例 encoding')
 codecs = {

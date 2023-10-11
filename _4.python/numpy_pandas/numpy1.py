@@ -2,6 +2,8 @@
 numpy的使用
 
 '''
+
+import sys
 import numpy as np
 
 print('------------------------------------------------------------')	#60個
@@ -23,7 +25,7 @@ print(b)
 
 c = a - b
 print(c)
-print(a**2)
+print(a ** 2)
 
 print('------------------------------------------------------------')	#60個
 
@@ -34,10 +36,10 @@ y2 = np.cos(x)
 y3 = np.tan(x)
 y4 = np.sinc(x)
 print('x', x)
-print('sin(x) = ', y1)
-print('cos(x) = ', y2)
-print('tan(x) = ', y3)
-print('sinc(x) = ' , y4)
+print('sin(x) =', y1)
+print('cos(x) =', y2)
+print('tan(x) =', y3)
+print('sinc(x) =', y4)
 
 print('------------------------------------------------------------')	#60個
 
@@ -59,15 +61,15 @@ print('標準差：%.2f' % np.std(data))
 print('變異數：%.2f' % np.var(data))
 print('極差值：%.2f' % np.ptp(data))
 
-np1 = np.array([1,2,3,4])	#使用list
-np2 = np.array((5,6,7,8))	#使用tuple
+np1 = np.array([1, 2, 3, 4])	#串列 轉 np.array
+np2 = np.array((5, 6, 7, 8))	#元組 轉 np.array
 print(np1)
 print(np2)
 print(type(np1), type(np2))
 
-na = np.array([1,2,3,4], dtype=int)
+na = np.array([1, 2, 3, 4], dtype = int)
 print(na)
-na = np.array([1,2,3,4], dtype=float)
+na = np.array([1, 2, 3, 4], dtype = float)
 print(na)
 
 na = np.arange(0, 31, 2)
@@ -87,18 +89,18 @@ print(c)
 
 print('------------------------------------------------------------')	#60個
 
-listdata = [[1,2,3,4,5],
-            [6,7,8,9,10],
-            [11,12,13,14,15]]
+listdata = [[1, 2, 3, 4, 5],
+            [6, 7, 8, 9, 10],
+            [11, 12, 13, 14, 15]]
 na = np.array(listdata)
 print(na)
 print('維度', na.ndim)
 print('形狀', na.shape)
 print('數量', na.size)
 
-adata = np.arange(1,17)
+adata = np.arange(1, 17)
 print(adata)
-bdata = adata.reshape(4,4)
+bdata = adata.reshape(4, 4)
 print(bdata)
 
 print('------------------------------------------------------------')	#60個
@@ -128,8 +130,8 @@ print(na[:, :])			#矩陣全部
 
 print('------------------------------------------------------------')	#60個
 
-a = np.arange(1,10).reshape(3,3)
-b = np.arange(10,19).reshape(3,3)
+a = np.arange(1, 10).reshape(3, 3)
+b = np.arange(10, 19).reshape(3, 3)
 print('a 陣列內容：\n', a)
 print('b 陣列內容：\n', b)
 print('a 陣列元素都加值：\n', a + 1)
@@ -139,18 +141,18 @@ print('a 陣列取出第一個row都加1：\n', a[0,:] + 1)
 print('a 陣列取出第一個col都加1：\n', a[:,0] + 1)
 print('a b 陣列對應元素相加：\n', a + b)
 print('a b 陣列對應元素相乘：\n', a * b)
-print('a b 陣列點積計算：\n', np.dot(a,b))
+print('a b 陣列點積計算：\n', np.dot(a, b))
 
 print('------------------------------------------------------------')	#60個
 
-a = np.arange(1,10).reshape(3,3)
+a = np.arange(1, 10).reshape(3, 3)
 print('陣列的內容：\n', a)
 print('1.最小值與最大值：\n', np.min(a), np.max(a))
-print('2.每一直行最小值與最大值：\n', np.min(a, axis=0), np.max(a, axis=0))
-print('3.每一橫列最小值與最大值：\n', np.min(a, axis=1), np.max(a, axis=1))
+print('2.每一直行最小值與最大值：\n', np.min(a, axis = 0), np.max(a, axis = 0))
+print('3.每一橫列最小值與最大值：\n', np.min(a, axis = 1), np.max(a, axis = 1))
 print('4.加總、乘積及平均值：\n', np.sum(a), np.prod(a), np.mean(a))
-print('5.每一直行加總、乘積與平均值：\n', np.sum(a, axis=0), np.prod(a, axis=0), np.mean(a, axis=0))
-print('6.每一橫列加總、乘積與平均值：\n', np.sum(a, axis=1), np.prod(a, axis=1), np.mean(a, axis=1))
+print('5.每一直行加總、乘積與平均值：\n', np.sum(a, axis = 0), np.prod(a, axis = 0), np.mean(a, axis = 0))
+print('6.每一橫列加總、乘積與平均值：\n', np.sum(a, axis = 1), np.prod(a, axis = 1), np.mean(a, axis = 1))
 
 print('------------------------------------------------------------')	#60個
 
@@ -180,13 +182,13 @@ print(b, c, d)
 print('------------------------------------------------------------')	#60個
 
 #arrange?
-a = np.arange(11,36)
-a = a.reshape(5,5)
+a = np.arange(11, 36)
+a = a.reshape(5, 5)
 print(a)
 
 print('------------------------------------------------------------')	#60個
 
-b = np.array([[1,2],[3,4],[5,6]])
+b = np.array([[1, 2], [3, 4], [5, 6]])
 print(b)
 
 c = b.T

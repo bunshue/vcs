@@ -15,7 +15,7 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 fill_between', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = 'plot 集合 fill_between 1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)
@@ -36,60 +36,46 @@ plt.subplot(232)
 left = -np.pi
 right = np.pi
 x = np.linspace(left, right, 100)
-y = np.sin(3*x)                  # y陣列的變化
+y = np.sin(3*x)                  # sin(3*x)函數
 
 plt.plot(x, y) 
-plt.fill_between(x, -1, y, color='yellow', alpha=0.3)
+plt.fill_between(x, 0, y, color='green', alpha=0.1)
+
 
 
 #第三張圖
 plt.subplot(233)
 
-# 函數f(x)的係數
-a1 = 1
-c1 = -2
-x = np.linspace(-2, 3, 1000)
-y1 = a1*x**2 + c1
-plt.plot(x, y1, color='b')      # 藍色是 f(x)
 
-# 函數g(x)的係數
-a2 = -1
-b2 = 2
-c2 = 2
-x = np.linspace(-2, 3, 1000)
-y2 = a2*x**2 + b2*x + c2
-plt.plot(x, y2, color='g')      # 綠色是 g(x)
+x = np.arange(0.0, 3, 0.01)
+y = np.sin(2 * np.pi * x)
+plt.plot(x, y)                  # 繪製 sin(2 * pi * x)
 
-# 繪製區間
-plt.fill_between(x, y1=y1, y2=y2, where=(x>=-1)&(x<=2),
-                 facecolor='yellow')
-
-plt.grid()
-
+plt.fill(x, y, 'y', alpha=0.3)  # 黃色填充
 
 #第四張圖
 plt.subplot(234)
 
-t = np.linspace(-np.pi*1.5, np.pi*1.5, 100)
-c = np.sinc(t)
+left = -np.pi
+right = np.pi
+x = np.linspace(left, right, 100)
+y = np.sin(3*x)                  # sin(3*x)函數
 
-plt.plot(t, c)
-plt.fill(t, c)
+plt.plot(x, y) 
+plt.fill_between(x, -1, y, color='yellow', alpha=0.3)
 
 
 
 #第五張圖
 plt.subplot(235)
 
-#使用 fill_between
 left = -np.pi
 right = np.pi
 x = np.linspace(left, right, 100)
 y = np.sin(3*x)                  # y陣列的變化
 
 plt.plot(x, y) 
-plt.fill_between(x, 0, y, color='green', alpha=0.1)
-
+plt.fill_between(x, -1, y, color='yellow', alpha=0.3)
 
 
 #第六張圖
@@ -114,52 +100,69 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 fill_between', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = 'plot 集合 fill_between 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)
 
-x = np.arange(0.0, 3, 0.01)
-y = np.sin(2 * np.pi * x)
-plt.plot(x, y)                  # 繪製 sin(2 * pi * x)
+# 函數f(x)的係數
+a1 = 1
+c1 = -2
+x = np.linspace(-2, 3, 1000)
+y1 = a1*x**2 + c1
+plt.plot(x, y1, color='b')      # 藍色是 f(x)
 
-plt.fill(x, y, 'y', alpha=0.3)  # 黃色填充
-plt.xlabel('角度')
-plt.ylabel('Sin波形值')
-plt.title('Sin波形')
+# 函數g(x)的係數
+a2 = -1
+b2 = 2
+c2 = 2
+x = np.linspace(-2, 3, 1000)
+y2 = a2*x**2 + b2*x + c2
+plt.plot(x, y2, color='g')      # 綠色是 g(x)
+
+# 繪製區間
+plt.fill_between(x, y1=y1, y2=y2, where=(x>=-1)&(x<=2),
+                 facecolor='yellow')
+
+plt.grid()
+
 
 #第二張圖
 plt.subplot(232)
 
-import numpy as np
+x = np.arange(0,13.3,0.01)
 
-left = -np.pi
-right = np.pi
-x = np.linspace(left, right, 100)
-y = np.sin(3*x)                  # sin(3*x)函數
+y1 = 17.5 - 2.5 * x
+y2 = 8 - 0.6 * x
+y3 = np.minimum(y1,y2)  # 取較低值
 
-plt.plot(x, y) 
-plt.fill_between(x, -1, y, color='yellow', alpha=0.3)
+plt.plot(x,y1,color="blue",label="17.5 - 2.5x")
+plt.plot(x,y2,color="green",label="8 - 0.6x")
+plt.ylim(0, 10)
+plt.fill_between(x, 0, y3, color='yellow')
+plt.legend()
+
 
 
 #第三張圖
 plt.subplot(233)
 
-import numpy as np
+x = np.arange(0,13.3,0.01)
+y = 3 - x
+y1 = 17.5 - 2.5 * x
+y2 = 8 - 0.6 * x
+y3 = np.minimum(y1,y2)  # 取較低值
 
-left = -np.pi
-right = np.pi
-x = np.linspace(left, right, 100)
-y = np.sin(3*x)                  # sin(3*x)函數
-
-plt.plot(x, y) 
-plt.fill_between(x, 0, y, color='green', alpha=0.1)
+plt.plot(x,y,color="r",label="3 - x")
+plt.plot(x,y1,color="blue",label="17.5 - 2.5x")
+plt.plot(x,y2,color="green",label="8 - 0.6x")
+plt.ylim(0, 10)
+plt.fill_between(x, y, y3, color='yellow')
+plt.legend()
 
 
 #第四張圖
 plt.subplot(234)
-
-import numpy as np
 
 # 函數的係數
 a = -1
@@ -176,89 +179,27 @@ plt.grid()
 #第五張圖
 plt.subplot(235)
 
-import numpy as np
-import matplotlib.pyplot as plt 
-
-x = np.arange(0,13.3,0.01)
-
-y1 = 17.5 - 2.5 * x
-y2 = 8 - 0.6 * x
-y3 = np.minimum(y1,y2)  # 取較低值
-
-plt.plot(x,y1,color="blue",label="17.5 - 2.5x")
-plt.plot(x,y2,color="green",label="8 - 0.6x")
-plt.ylim(0, 10)
-plt.fill_between(x, 0, y3, color='yellow')
-plt.legend()
-
 
 
 #第六張圖
 plt.subplot(236)
 
 
-
-import numpy as np
-import matplotlib.pyplot as plt 
-
-x = np.arange(0,13.3,0.01)
-y = 3 - x
-y1 = 17.5 - 2.5 * x
-y2 = 8 - 0.6 * x
-y3 = np.minimum(y1,y2)  # 取較低值
-
-plt.plot(x,y,color="r",label="3 - x")
-plt.plot(x,y1,color="blue",label="17.5 - 2.5x")
-plt.plot(x,y2,color="green",label="8 - 0.6x")
-plt.ylim(0, 10)
-plt.fill_between(x, y, y3, color='yellow')
-plt.legend()
-
-
-
-
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 fill_between', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = 'plot 集合 fill_between 3', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)
 
 
-import matplotlib.pyplot as plt
-import numpy as np
-
-# 函數f(x)的係數
-a1 = 1
-c1 = -2
-x = np.linspace(-2, 3, 1000)
-y1 = a1*x**2 + c1
-plt.plot(x, y1, color='b')      # 藍色是 f(x)
-
-# 函數g(x)的係數
-a2 = -1
-b2 = 2
-c2 = 2
-x = np.linspace(-2, 3, 1000)
-y2 = a2*x**2 + b2*x + c2
-plt.plot(x, y2, color='g')      # 綠色是 g(x)
-
-# 繪製區間
-plt.fill_between(x, y1=y1, y2=y2, where=(x>=-1)&(x<=2),
-                 facecolor='yellow')
-
-plt.grid()
-
 
 #第二張圖
 plt.subplot(232)
+
 
 
 
@@ -269,6 +210,14 @@ plt.subplot(233)
 
 #第四張圖
 plt.subplot(234)
+
+
+t = np.linspace(-np.pi*1.5, np.pi*1.5, 100)
+c = np.sinc(t)
+
+plt.plot(t, c)
+plt.fill(t, c)
+
 
 
 

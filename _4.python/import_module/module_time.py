@@ -10,10 +10,10 @@ python的日期當中分成
 
 """
 
+import os
 import sys
 import time
 import datetime
-
 
 print('---- time.sleep(秒) --------------------------------------------------------')	#60個
 
@@ -207,12 +207,7 @@ print('------------------------------------------------------------')	#60個
 localtime = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 print('當前時間 :', localtime)
 
-
-
-
-
-
-
+print('------------------------------------------------------------')	#60個
 
 # 字串轉換為時間
 def strTodatetime(datestr, format):
@@ -224,9 +219,6 @@ print(strTodatetime("2019-4-15","%Y-%m-%d") - strTodatetime("2006-03-11","%Y-%m-
 
 version = time.strftime("-%Y%m%d")
 print('version : ', version)
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -271,9 +263,6 @@ print("年月日時分秒 :", date_time)
 filename = now.strftime("news-%y-%m-%d %H-%M-%S.json")
 print(filename)
 
-
-
-
 string = ("%d" % now.year)
 print(string)
 
@@ -282,10 +271,7 @@ datetime_format = '%Y/%m/%d %H:%M:%S'
 current_time = 'DateTime_{:{}}'.format(now, datetime_format)
 print(current_time)
 
-
-
 print('------------------------------------------------------------')	#60個
-
 
 filename = '-%04d-%02d-%02d' % (time.localtime()[:3]) + '.jpg'
 print(filename)
@@ -323,15 +309,11 @@ datetime(2016, 7, 20, 15, 45),
 #timestamp = time.strftime('%Y-%m-%d %H:%M+%Z')
 """
 
-
 print('------------------------------------------------------------')	#60個
-
 
 def format_time(field_timestamp: datetime) -> str:
     return field_timestamp.strftime("%Y-%m-%d %H:%M")
 
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -345,11 +327,7 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-
-
 print('------------------------------------------------------------')	#60個
-
-import datetime
 
 print('現在的日期時間 :', datetime.datetime.today())
 print('現在的日期 :', datetime.date.today())
@@ -365,19 +343,16 @@ current = str(datetime.datetime.today())
 
 print('------------------------------------------------------------')	#60個
 
-"""
-from datetime import datetime
-now = datetime.now()
-print("今天是{}".format(datetime.strftime(now, "%Y-%m-%d")))
+now = datetime.datetime.now()
+print("今天是{}".format(datetime.datetime.strftime(now, "%Y-%m-%d")))
 
 #date = input("請輸入一個日期（yyyy-mm-dd):")
 print('請輸入一個日期')
 date = '2006-03-11'
 print(date)
-target = datetime.strptime(date, "%Y-%m-%d")
+target = datetime.datetime.strptime(date, "%Y-%m-%d")
 diff = now - target
 print("到今天共經過了{}天。".format(diff.days))
-"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -410,12 +385,6 @@ cc = datetime.datetime(year, month, day, hours, minutes, seconds)
 print(cc)
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -508,7 +477,6 @@ print(datetime_sp)
 expected = [datetime.datetime(2016, 7, i) for i in range(17, 24)]
 print(expected)
 
-import datetime
 today = datetime.datetime.today()
 birthday = datetime.datetime(2006, 3, 11, 9, 15, 0)
 print('相距天時分秒 :', today - birthday)
@@ -653,8 +621,6 @@ print(datetime_format)
 
 print('------------------------------------------------------------')	#60個
 
-import datetime
-
 d0 = datetime.date(1993, 12, 15)
 d1 = datetime.date(2020, 12, 15)
 
@@ -671,8 +637,6 @@ d1 = datetime.date(2023, 8, 21)
 print('相距日期 :', d1 - d0, '天')
 
 print('------------------------------------------------------------')	#60個
-
-import datetime
 
 def _format_time(hh, mm, ss, us):
     # Skip trailing microseconds when us==0.
@@ -710,7 +674,6 @@ print('------------------------------------------------------------')	#60個
 
 print('---- timedelta() --------------------------------------------------------')	#60個
 
-
 print("獲取昨天的日期");
 def getYesterday():
     today = datetime.date.today()
@@ -721,7 +684,6 @@ def getYesterday():
     return yesterday
 yesterday = getYesterday()
 print("昨天的時間：", yesterday)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -737,37 +699,36 @@ print("time.ctime() : %s" % time.ctime())
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 print(time.strptime(date, '%Y-%m-%d'))
 print(time.strptime(time_, '%H:%M:%S'))
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
+dt = time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
 
-#>>> from time import gmtime, strftime
+print('現在時間 :', dt)
 
-
-ttt = time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
-
-print(ttt)
-
-#'Thu, 28 Jun 2001 14:17:15 +0000'
-
+#Sat, 07 Oct 2023 19:15:16 +0000
 
 print('------------------------------------------------------------')	#60個
 
-ddd = time.strptime("30 Nov 00", "%d %b %y")
-print(ddd)
-
-'''
-time.struct_time(tm_year=2000, tm_mon=11, tm_mday=30, tm_hour=0, tm_min=0,
-                 tm_sec=0, tm_wday=3, tm_yday=335, tm_isdst=-1)
-'''
+dt = time.strptime("30 Sep 23", "%d %b %y")
+print('time.struct_time 結構')
+print(dt)
+print('年 :', dt.tm_year)
+print('月 :', dt.tm_mon)
+print('日 :', dt.tm_mday)
+print('時 :', dt.tm_hour)
+print('分 :', dt.tm_min)
+print('秒 :', dt.tm_sec)
+print('星 :', dt.tm_wday)
+print('第 :', dt.tm_yday, '天')
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 print('量測時間 ST') 
 # Start the stopwatch / counter
 t1_start = time.perf_counter()
@@ -804,15 +765,12 @@ time.sleep(0.3456)  #過了一段時間
 stop = time.time()
 
 print(stop - start)
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
-import sys, os, time, difflib, argparse
-from datetime import datetime, timezone
-
 path = 'C:/_git/vcs/_4.python'
-t1 = datetime.fromtimestamp(os.stat(path).st_mtime, timezone.utc)
+t1 = datetime.datetime.fromtimestamp(os.stat(path).st_mtime, datetime.timezone.utc)
 print(t1)
 
 t2 = t1.astimezone().isoformat()
@@ -820,13 +778,11 @@ print(t2)
 
 print('------------------------------------------------------------')	#60個
 
-import datetime
 seconds = datetime.datetime(2004, 10, 26, 10, 33, 33, tzinfo = datetime.timezone(datetime.timedelta(0))).timestamp()
 print(seconds)
 
 print('------------------------------------------------------------')	#60個
 
-import time
 print('存檔紀念')
 
 fp = open('Build.txt', 'w')
@@ -836,17 +792,12 @@ fp.close()
 
 print('------------------------------------------------------------')	#60個
 
-
 print(time.localtime())
 year, month, day, hour, minute, second, _, _, _ = time.localtime()
 print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
 
-
-
 print('------------------------------------------------------------')	#60個
 
-
-import datetime
 print('列印一段日期')
 start = '2023-09-01'
 end   = '2023-09-05'
@@ -865,16 +816,10 @@ while date_start<date_end:
 
 print('------------------------------------------------------------')	#60個
 
-
-'''
-import datetime
-
+"""
 dt = datetime.datetime.strptime('ttttt', '%Y-%m-%dT%H:%M')  #讀取日期時間
 dt = dt.strftime('{d}%Y-%m-%d, {t}%H:%M').format(d='日期為：', t='時間為：')  #轉為字串
-'''
-
-
-
+"""
 
 print('------------------------------------------------------------')	#60個
 

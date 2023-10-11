@@ -3,7 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-'''
+import math
+import random
+
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
@@ -54,10 +56,8 @@ plt.plot(seq,d1,'-1',seq,d2,'-2',seq,d3,'-3',seq,d4,'-4',
 #第三張圖
 plt.subplot(233)
 
-plt.plot(0, 1, '-o')    #在 (0, 1) 上 畫一點
-
-
 #畫點
+plt.plot(0, 1, '-o')    #在 (0, 1) 上 畫一點
 plt.plot(1, 5, 'r-o')
 plt.plot(2, 10, 'r-o')
 plt.plot(3, 20, 'r-o')
@@ -65,10 +65,6 @@ plt.plot(3, 20, 'r-o')
 
 #第四張圖
 plt.subplot(234)
-
-import random
-import math
-import matplotlib.pyplot as plt
 
 X = []
 Y = []
@@ -81,19 +77,13 @@ for i in range(1000):
     Y.append(y)
 
 plt.scatter(X, Y)
-len(X)
+print(len(X))
 plt.axis([0, 10, 0, 10])
 
 plt.axis('equal')       #軸比例
 
-
-
 #第五張圖
 plt.subplot(235)
-
-import random
-import math
-import matplotlib.pyplot as plt
 
 X = []
 Y = []
@@ -113,13 +103,8 @@ print(len(X))
 plt.axis([0, 10, 0, 10])
 plt.axis('equal')       #軸比例
 
-
 #第六張圖
 plt.subplot(236)
-
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -158,7 +143,7 @@ foldername = 'C:/_git/vcs/_1.data/______test_files1'
 
 
 """
-import glob,cv2
+import glob, cv2
 
 files = glob.glob(foldername + "/*.jpg")  #建立測試資料
 test_feature=[]
@@ -215,9 +200,6 @@ print('------------------------------------------------------------')	#60個
 
 #計算平均數、中位數、眾數
 
-import pandas as pd
-import numpy as np
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
 
 dat = pd.read_csv(filename, encoding='UTF-8')
@@ -233,9 +215,6 @@ print('眾數', mode)
 
 print('------------------------------------------------------------')	#60個
 print('畫出頻率分布圖')
-
-import matplotlib.pyplot as plt
-import pandas as pd
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
 
@@ -263,13 +242,8 @@ plt.bar(x, hist, tick_label=labels, width=1)# 描繪長條圖
 
 plt.show()
 
-
-
 print('------------------------------------------------------------')	#60個
 print('描繪頻率分布圖')
-
-import matplotlib.pyplot as plt
-import pandas as pd
 
 # 讀入csv檔
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV7_onigiri.csv'
@@ -281,12 +255,8 @@ plt.hist(dat['太郎'], bins=range(0, 200, 10), alpha=0.5)
 
 plt.show()
 
-
-
 print('計算平均數、變異數、標準差')
 
-
-import numpy as np
 print('店長---------')
 print('平均:', np.mean(dat['店長']))
 print('變異數:', np.var(dat['店長']))
@@ -297,11 +267,10 @@ print('平均:', np.mean(dat['太郎']))
 print('變異數:', np.var(dat['太郎']))
 print('標準差:', np.std(dat['太郎']))
 
-'''
+
 print('------------------------------------------------------------')	#60個
 print('亂數')
 
-import random
 rand = [] 
 for i in range(10):
     rand.append(random.randint(0,100)) # 產生0～100的亂數

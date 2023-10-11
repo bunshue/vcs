@@ -1,8 +1,9 @@
 # scatter 集合
 
+import sys
+import numpy as np
 import matplotlib.pyplot as plt
 from numpy.random import rand
-import numpy as np
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
@@ -24,10 +25,7 @@ a = rand(500)
 b = rand(500)
 plt.scatter(a,b)
 
-
 #plt.scatter(np.random.randn(100), np.random.randn(100))
-
-
 
 #第二張圖
 plt.subplot(232)
@@ -163,10 +161,6 @@ xlabel("Year launched")
 ylabel("Tonnage (BOM)")
 grid(True, ls='-', c='#a0a0a0')
 
-#存圖命令
-#savefig("Weight Growth of RN First Rate Line-of-Battle Ships 1630-1875.svg")
-
-
 #第四張圖
 plt.subplot(234)
 
@@ -176,11 +170,6 @@ import matplotlib.pyplot as plt
 
 s = plt.scatter([1, 2, 3], [4, 5, 6])
 s.set_urls(['https://www.bbc.com/news', 'https://www.google.com/', None])
-'''
-filename = 'C:/_git/vcs/_1.data/______test_files2/scatter.svg'
-fig.savefig(filename)
-print('已存圖' + filename)
-'''
 
 #第五張圖
 plt.subplot(235)
@@ -207,6 +196,8 @@ plt.subplot(236)
 
 
 plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

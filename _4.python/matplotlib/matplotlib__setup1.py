@@ -272,6 +272,10 @@ plt.savefig('filename.jpg')
 plt.savefig('filename.png', format='png', transparent=True, dpi=300, pad_inches = 0)    #指定分辨率
 plt.savefig('filename.png', dpi = 300)
 
+
+也可以直接寫 不用plt.
+savefig("Weight Growth of RN First Rate Line-of-Battle Ships 1630-1875.svg")
+
 --- plt.text 寫字 -------------------------------------------------------------
 
 
