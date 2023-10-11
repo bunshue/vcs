@@ -1,8 +1,10 @@
+import sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
 import seaborn as sns #海生, 自動把圖畫得比較好看
+
 import plotly.offline
 import plotly.express as px
 import plotly.graph_objects as go
@@ -18,19 +20,15 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-'''
+"""
 #Chapter6：定位資訊視覺化手法
 
 定位資訊視覺化手法
 地圖資訊的視覺化函式庫
 
-
 pip install folium
 
-'''
+"""
 
 import plotly.express as px
 import folium
@@ -38,7 +36,6 @@ import json
 import pandas as pd
 from branca.colormap import linear
 from folium.plugins import HeatMap
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -50,16 +47,15 @@ print('------------------------------------------------------------')	#60個
 gapminder = px.data.gapminder().query("year == 2007")
 print(gapminder)
 
-
-
 print('------------------------------------------------------------')	#60個
 
 #根據世界各國人均GDP標色的範例
 
-base_map = folium.Map(location=[50, 0],zoom_start=1.8)
+base_map = folium.Map(location = [50, 0], zoom_start = 1.8)
+
 # 新增Choropleth
 folium.Choropleth(
-    geo_data=json.load(open("countries.geo.json","r")),
+    geo_data=json.load(open("countries.geo.json","r", encoding ='UTF-8')),
     data=gapminder,                        # 使用的資料
     fill_opacity=1,                        # 填色的透明度
     line_color = "black",                  # 邊界顏色
@@ -68,11 +64,8 @@ folium.Choropleth(
     key_on = "feature.id",                 # 與資料對應的geo.json的Key
     fill_color = "PuRd",                   # 填色使用的調色盤
 ).add_to(base_map)
-base_map
-
 
 #將地圖資料繪製成地球儀的範例
-
 
 gapminder = px.data.gapminder().query("year == 2007")
 fig = px.scatter_geo(gapminder, locations="iso_alpha", color="continent",
@@ -82,15 +75,14 @@ fig.show()
 
 print('------------------------------------------------------------')	#60個
 
-''' file lost
 #分區標色的日本地圖
 #繪製都道府縣行政區域的範例
 
 # 定義基礎地圖 
 base_map = folium.Map(location=[35.655616, 139.338853], zoom_start=5.0) 
 # 新增Choropleth
-folium.Choropleth(geo_data=json.load(open("prefs_064/Japan.geojson", "r")),
-#folium.Choropleth(geo_data=json.load(open("prefs_064/TWN.geo.json", "r")),                  
+folium.Choropleth(geo_data=json.load(open("prefs_064/japan.geojson", "r", encoding ='UTF-8')),
+#folium.Choropleth(geo_data=json.load(open("prefs_064/TWN.geo.json", "r", encoding ='UTF-8')),                  
                   fill_color="red",   # 填色
                   fill_opacity=0.3,   # 填色的透明度
                   line_color="black", # 邊界線顏色
@@ -107,7 +99,7 @@ df = pd.read_csv("japan_pop.csv")
 # 定義基礎地圖
 base_map = folium.Map(location=[35.655616, 139.338853], zoom_start=5.0) 
 # 新增Choropleth
-folium.Choropleth(geo_data=json.load(open("prefs_064/Japan.geojson", "r")),
+folium.Choropleth(geo_data=json.load(open("prefs_064/japan.geojson", "r", encoding ='UTF-8')),
                   data=df,                          # 都道府縣的資料
                   columns=["name", "value"],        # 用於填色的Key與欄位名稱
                   key_on="feature.properties.name", # geojson的行政區域的Key
@@ -123,7 +115,8 @@ map = folium.Map(location=[35.702083, 139.745023], zoom_start=13)
 # 標記符號
 folium.Marker(location= [35.685175,139.7528]).add_to(map)
 map
-'''
+
+
 
 
 print('------------------------------------------------------------')	#60個
@@ -364,6 +357,4 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
 

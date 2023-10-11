@@ -11,9 +11,7 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'data/hours_used_performance.csv'
 df = pd.read_csv(filename)
-df.plot(kind="scatter", 
-        x="hours_used",
-        y="work_performance")
+df.plot(kind = "scatter", x = "hours_used", y = "work_performance")
 print('係數矩陣 :', df.corr())
 
 print('------------------------------------------------------------')	#60個
@@ -26,14 +24,10 @@ from sklearn import preprocessing
 
 scaler = preprocessing.StandardScaler()
 np_std = scaler.fit_transform(df)
-df_std = pd.DataFrame(np_std, 
-                      columns=["fb_tracking_s",
-                               "happiness_s"])
+df_std = pd.DataFrame(np_std, columns=["fb_tracking_s", "happiness_s"])
 print(df_std.head())
 
-df_std.plot(kind="scatter",
-            x="fb_tracking_s",
-            y="happiness_s")
+df_std.plot(kind = "scatter", x = "fb_tracking_s", y = "happiness_s")
 
 print('------------------------------------------------------------')	#60個
 
@@ -43,17 +37,12 @@ print(df.head())
 
 from sklearn import preprocessing
 
-scaler = preprocessing.MinMaxScaler(
-                       feature_range=(0, 1))
+scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
 np_minmax = scaler.fit_transform(df)
-df_minmax = pd.DataFrame(np_minmax,
-                         columns=["fb_tracking_m",
-                                  "happiness_m"])
+df_minmax = pd.DataFrame(np_minmax, columns=["fb_tracking_m", "happiness_m"])
 print(df_minmax.head())
 
-df_minmax.plot(kind="scatter",
-               x="fb_tracking_m",
-               y="happiness_m")
+df_minmax.plot(kind = "scatter", x = "fb_tracking_m", y = "happiness_m")
 
 plt.show()
 

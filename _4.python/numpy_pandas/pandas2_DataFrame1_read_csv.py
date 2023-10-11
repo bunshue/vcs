@@ -2,6 +2,7 @@
 使用pandas讀取csv檔, 讀成 DataFrame 格式
 '''
 
+import sys
 import pandas as pd
 
 print('------------------------------------------------------------')	#60個
@@ -16,15 +17,15 @@ print('資料結構訊息', df.info(), '\n')
 df1 = df.dropna()
 print('清除NA\n', df1, '\n')
 
-df2 = df.dropna(how="any")
+df2 = df.dropna(how = "any")
 print(df2)
 print()
 
-df3 = df.dropna(subset=["B", "C"])
+df3 = df.dropna(subset = ["B", "C"])
 print(df3)
 print()
 
-df4 = df.fillna(value=1)
+df4 = df.fillna(value = 1)
 print(df4)
 print()
 
@@ -53,7 +54,7 @@ df2 = df.drop_duplicates("B")
 print(df2)
 print()
 
-df3 = df.drop_duplicates("B", keep=False)
+df3 = df.drop_duplicates("B", keep = False)
 print(df3)
 print()
 
@@ -123,11 +124,11 @@ print(np.unique(titanic["PassengerId"].values).size)
 print()
 
 
-titanic.set_index(["PassengerId"], inplace=True)
+titanic.set_index(["PassengerId"], inplace = True)
 print(titanic.head())
 print()
 
-titanic["SexCode"] = np.where(titanic["Sex"]=="female", 1, 0)
+titanic["SexCode"] = np.where(titanic["Sex"] == "female", 1, 0)
 print(titanic.head())
 print()
 
@@ -142,14 +143,13 @@ print(titanic.head())
 print('isnull().sum()')
 print(titanic.isnull().sum())
 
-
 print('age.isnull()')
 print(sum(titanic["Age"].isnull()))
 
 avg_age = titanic["Age"].mean()
 print('average age =', avg_age)
 
-titanic["Age"].fillna(avg_age, inplace=True)
+titanic["Age"].fillna(avg_age, inplace = True)
 print(sum(titanic["Age"].isnull()))
 
 print('1111')
@@ -163,44 +163,44 @@ print('------------------------------------------------------------')	#60個
 #探索性資料分析
 
 print('3333')
-titanic["Died"] = np.where(titanic["Survived"]==0, 1, 0)
+titanic["Died"] = np.where(titanic["Survived"] == 0, 1, 0)
 print(titanic.head())
 
-titanic["Age"].plot(kind="hist", bins=15)
+titanic["Age"].plot(kind = "hist", bins = 15)
 df = titanic[titanic.Survived == 0]
-df["Age"].plot(kind="hist", bins=15)
+df["Age"].plot(kind = "hist", bins = 15)
 df = titanic[titanic.Survived == 1]
-df["Age"].plot(kind="hist", bins=15)
+df["Age"].plot(kind = "hist", bins = 15)
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-fig, axes = plt.subplots(nrows=1, ncols=2)
-df = titanic[["Survived","Died"]].groupby(titanic["Sex"]).sum()
-df.plot(kind="bar", ax=axes[0])
-df = titanic[["Survived","Died"]].groupby(titanic["Sex"]).mean()
-df.plot(kind="bar", ax=axes[1])
+fig, axes = plt.subplots(nrows = 1, ncols = 2)
+df = titanic[["Survived", "Died"]].groupby(titanic["Sex"]).sum()
+df.plot(kind = "bar", ax = axes[0])
+df = titanic[["Survived", "Died"]].groupby(titanic["Sex"]).mean()
+df.plot(kind = "bar", ax = axes[1])
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 df = titanic[['Survived',"Died"]].groupby(titanic["PClass"]).sum()
-df.plot(kind="bar")
+df.plot(kind = "bar")
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 df = titanic[['Survived',"Died"]].groupby(titanic["PClass"]).mean()
-df.plot(kind="bar")
+df.plot(kind = "bar")
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-df = titanic.drop("Died", axis=1)
+df = titanic.drop("Died", axis = 1)
 print('係數矩陣 :', df.corr())
 
 plt.show()
@@ -213,12 +213,7 @@ data = pd.read_csv('data/PM25_tw.csv')
 
 print(data)
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
 
 '''
 
@@ -227,8 +222,6 @@ print('------------------------------------------------------------')	#60個
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-
 
 plt.show()
 '''

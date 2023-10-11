@@ -236,7 +236,7 @@ def PyplotLineStyles():
          ('dashdotdotted', (0, (3, 5, 1, 5, 1, 5))),
          ('densely dashdotdotted', (0, (3, 1, 1, 1, 1, 1)))])
 
-    plt.figure(figsize = (10, 6))	#¹Ï¹³¤j¤p[­^¦T]
+    plt.figure(figsize = (10, 6))	#åœ–åƒå¤§å°[è‹±å‹]
     ax = plt.subplot(1, 1, 1)
 
     X, Y = np.linspace(0, 100, 10), np.zeros(10)

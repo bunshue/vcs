@@ -3,28 +3,25 @@ import sys
 import time
 import random
 
-print('------------------------------------------------------------')	#60個
-
-'''
 import pandas as pd
 import matplotlib.pyplot as plt
+
+print('------------------------------------------------------------')	#60個
 
 # Make the graphs a bit prettier, and bigger
 plt.style.use('ggplot')
 plt.rcParams['figure.figsize'] = (15, 5)
 
-
 print('------------------------------------------------------------')	#60個
 
-broken_df = pd.read_csv('../data/bikes.csv',encoding = "ISO-8859-1")
+broken_df = pd.read_csv('../data/bikes.csv', encoding = "ISO-8859-1")
 
 # Look at the first 3 rows
 print(broken_df[:3])
 
 print('------------------------------------------------------------')	#60個
 
-
-fixed_df = pd.read_csv('../data/bikes.csv', sep=';', encoding='latin1', parse_dates=['Date'], dayfirst=True, index_col='Date')
+fixed_df = pd.read_csv('../data/bikes.csv', sep = ';', encoding = 'latin1', parse_dates = ['Date'], dayfirst=True, index_col='Date')
 print(fixed_df[:3])
 
 print(fixed_df['Berri 1'])
@@ -45,14 +42,7 @@ df['Berri 1'].plot()
 
 plt.show()
 
-'''
-
 print('------------------------------------------------------------')	#60個
-
-'''
-# The usual preamble
-import pandas as pd
-import matplotlib.pyplot as plt
 
 # Make the graphs a bit prettier, and bigger
 plt.style.use('ggplot')
@@ -78,16 +68,7 @@ complaint_counts[:10]
 complaint_counts[:10].plot(kind='bar')
 plt.show()
 
-'''
-
-
 print('------------------------------------------------------------')	#60個
-
-'''
-# The usual preamble
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
 
 # Make the graphs a bit prettier, and bigger
 plt.style.use('ggplot')
@@ -116,12 +97,8 @@ noise_complaint_counts / complaint_counts.astype(float)
 (noise_complaint_counts / complaint_counts.astype(float)).plot(kind='bar')
 
 plt.show()
-'''
 
 print('------------------------------------------------------------')	#60個
-
-import pandas as pd
-import matplotlib.pyplot as plt
 
 # Make the graphs a bit prettier, and bigger
 plt.style.use('ggplot')
@@ -168,11 +145,7 @@ weekday_counts.plot(kind='bar')
 
 plt.show()
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
 
 bikes = pd.read_csv('../data/bikes.csv', 
                     sep=';', encoding='latin1', 

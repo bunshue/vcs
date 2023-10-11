@@ -1,3 +1,4 @@
+import sys
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -8,7 +9,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
 #      "國文","數學","英文","自然","社會"
 datas = [[65,92,78,83,70],  #學生A
          [90,72,76,93,56],  #學生B
@@ -31,7 +31,7 @@ data["PTS"] = df["PTS"]
 data["AST"] = df["AST"]
 data["REB"] = df["TRB"]
 data = data.set_index("Season")
-data.plot(kind="line")
+data.plot(kind = 'line')
 
 plt.show()
 
@@ -43,7 +43,7 @@ df_grouped = df.groupby("Pos")
 points = df_grouped["PTS/G"].mean()
 data = pd.DataFrame()
 data["Points"] = points
-points.plot(kind="bar")
+points.plot(kind = 'bar')
 
 plt.show()
 

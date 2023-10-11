@@ -1,12 +1,10 @@
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
 print('------------------------------------------------------------')	#60個
 
-
-
-'''
 df = pd.read_csv("grades.csv")
 
 print(df.head())
@@ -32,7 +30,7 @@ df.國文.plot()
 plt.show()
 
 
-df.國文.hist(bins=15)
+df.國文.hist(bins = 15)
 plt.show()
 
 
@@ -66,16 +64,9 @@ df["主科"] = df.數學*1.5 + df.英文
 
 print(df.head())
 
-print(df.sort_values(by="總級分", ascending=False).head(20))
+print(df.sort_values(by = "總級分", ascending = False).head(20))
 
-print(df.sort_values(by=["主科", "總級分"], ascending=False).head(20))
-
-
-
-'''
-
-
-'''
+print(df.sort_values(by = ["主科", "總級分"], ascending = False).head(20))
 
 print('------------------------------------------------------------')	#60個
 
@@ -89,27 +80,21 @@ df_state = df.groupby("State").count()
 
 print(df_state)
 
-df_state.sort_values(by="Time", ascending=False)
+df_state.sort_values(by = "Time", ascending = False)
 
 
 print(df_state)
 
 
-df_state.sort_values(by="Time", ascending=False, inplace=True)
+df_state.sort_values(by = "Time", ascending = False, inplace = True)
 
 print(df_state.head(10))
 
-df_state[:10].Time.plot(kind='bar')
+df_state[:10].Time.plot(kind = 'bar')
 
 plt.show()
 
-'''
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
