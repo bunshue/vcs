@@ -43,7 +43,7 @@ print('\n\nresult : ', ret)
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 import win32api, win32con
 rc = win32api.MessageBox(0, 'kkkkk', "Installation Error", win32con.MB_ABORTRETRYIGNORE)
 if rc == win32con.IDABORT:
@@ -53,7 +53,7 @@ elif rc == win32con.IDIGNORE:
 else:
     print('3333')
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -165,7 +165,7 @@ import keyword
 
 print(keyword.kwlist)
 
-''' 檢測按鍵
+""" 檢測按鍵
 import keyboard
 
 while True:
@@ -175,7 +175,7 @@ while True:
     if keyboard.is_pressed('/'):
         print('SSSS')
         continue;
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -256,12 +256,30 @@ def bin_octal():
     print(int('ffff', 16))
     print(int('10011010010', 2))
 
-
 bin_octal()
-
 
 print('------------------------------------------------------------')	#60個
 
+import operator
+
+print('統計字數')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/engnews.txt'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/琵琶行.txt'
+with open(filename, "r", encoding="utf-8") as f:
+#with open(filename, "r", encoding="big5") as f:    
+    data = f.read()
+data = data.translate({ord(c):None for c in list("(),.“”")})
+data = data.split()
+word_freq = dict()
+for word in data:
+    if word not in word_freq:
+        word_freq[word] = 1
+    else:
+        word_freq[word] += 1
+ordered_freq = sorted(word_freq.items(), key = operator.itemgetter(1), reverse = True)
+for w, c in ordered_freq:
+    print(w, c)
 
 print('------------------------------------------------------------')	#60個
 

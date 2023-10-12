@@ -81,8 +81,8 @@ print('------------------------------------------------------------')	#60個
 # 定義基礎地圖 
 base_map = folium.Map(location=[35.655616, 139.338853], zoom_start=5.0) 
 # 新增Choropleth
-folium.Choropleth(geo_data=json.load(open("prefs_064/japan.geojson", "r", encoding ='UTF-8')),
-#folium.Choropleth(geo_data=json.load(open("prefs_064/TWN.geo.json", "r", encoding ='UTF-8')),                  
+folium.Choropleth(geo_data=json.load(open("japan_map/japan.geojson", "r", encoding ='UTF-8')),
+#folium.Choropleth(geo_data=json.load(open("japan_map/TWN.geo.json", "r", encoding ='UTF-8')),                  
                   fill_color="red",   # 填色
                   fill_opacity=0.3,   # 填色的透明度
                   line_color="black", # 邊界線顏色
@@ -99,7 +99,7 @@ df = pd.read_csv("japan_pop.csv")
 # 定義基礎地圖
 base_map = folium.Map(location=[35.655616, 139.338853], zoom_start=5.0) 
 # 新增Choropleth
-folium.Choropleth(geo_data=json.load(open("prefs_064/japan.geojson", "r", encoding ='UTF-8')),
+folium.Choropleth(geo_data=json.load(open("japan_map/japan.geojson", "r", encoding ='UTF-8')),
                   data=df,                          # 都道府縣的資料
                   columns=["name", "value"],        # 用於填色的Key與欄位名稱
                   key_on="feature.properties.name", # geojson的行政區域的Key

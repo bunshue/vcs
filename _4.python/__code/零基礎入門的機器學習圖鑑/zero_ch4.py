@@ -98,7 +98,7 @@ print('------------------------------------------------------------')	#60個
 
 print('回帰問題における評価方法')
 
-'''
+"""
 from sklearn.datasets import load_boston
 data = load_boston()
 X = data.data[:, [5,]]
@@ -119,7 +119,7 @@ ax.scatter(X, y, color='pink', marker='s', label='data set')
 ax.plot(X, y_pred, color='blue', label='regression curve')
 ax.legend()
 plt.show()
-'''
+"""
 
 
 print('------------------------------------------------------------')	#60個
@@ -148,7 +148,7 @@ model_svr_linear.fit(X, y)
 y_svr_pred = model_svr_linear.predict(X)
 print(y_svr_pred)
 
-'''
+"""
 import matplotlib.pyplot as plt
 fig, ax = plt.subplots()
 ax.scatter(X, y, color='pink', marker='s', label='data set')
@@ -156,7 +156,7 @@ ax.plot(X, y_pred, color='blue', label='regression curve')
 ax.plot(X, y_svr_pred, color='red', label='SVR')
 ax.legend()
 plt.show()
-'''
+"""
 
 print(mean_squared_error(y, y_svr_pred)) # 平均二乗誤差 
 print(r2_score(y, y_svr_pred)) # 決定係数 
@@ -293,26 +293,6 @@ model = LinearSVC()
 model.fit(X_train_tfidf, twenty_train.target)
 predicted = model.predict(X_test_tfidf)
 np.mean(predicted == twenty_test.target)
-
-
-print('------------------------------------------------------------')	#60個
-
-print('ピクセルの情報をそのまま数値として利用する')
-
-from PIL import Image
-import numpy as np
-
-img = Image.open('mlzukan-img.png').convert('L')
-width, height = img.size
-img_pixels = []
-for y in range(height):
-    for x in range(width):
-        # getpixelで指定した位置のピクセル値を取得.
-        img_pixels.append(img.getpixel((x,y)))
-
-print(img_pixels)
-
-
 
 print('------------------------------------------------------------')	#60個
 

@@ -24,9 +24,7 @@ data = load_breast_cancer()
 X = data.data
 y = data.target
 
-
 X = X[:, :10]
-
 
 from sklearn.linear_model import LogisticRegression
 model = LogisticRegression()

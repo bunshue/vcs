@@ -71,7 +71,7 @@ print('------------------------------------------------------------')	#60個
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df = pd.read_csv('bank-additional-full.csv', sep=';')
+df = pd.read_csv('data/bank-additional-full.csv', sep = ';')
 
 print(df.shape)
 print(df.head())

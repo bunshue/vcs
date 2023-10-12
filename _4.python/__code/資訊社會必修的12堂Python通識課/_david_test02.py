@@ -1,27 +1,30 @@
-'''
+"""
 # requests 一大堆
 #網路爬蟲類
 
-'''
+"""
 
+import os
+import sys
 import requests
 from bs4 import BeautifulSoup
 
+'''
 print('------------------------------------------------------------')	#60個
+
 print('測試 01')
+print('台灣英文新聞網')
 
-
-#台灣英文新聞網
 url = 'https://www.taiwannews.com.tw/en/news/3610689'
 url = 'https://www.taiwannews.com.tw/en/news/4966193'
 html = requests.get(url).text
 print(html)
 
-
 print('------------------------------------------------------------')	#60個
-print('測試 02')
 
-#台灣英文新聞網
+print('測試 02')
+print('台灣英文新聞網')
+
 url = 'https://www.taiwannews.com.tw/en/news/3610689'
 url = 'https://www.taiwannews.com.tw/en/news/4966193'
 html = requests.get(url).text
@@ -31,9 +34,10 @@ article = soup.find("article", class_="container-fluid article")
 print(title.text)
 print(article.text)
 
-
 print('------------------------------------------------------------')	#60個
+
 print('測試 03')
+print('台灣英文新聞網')
 
 news_title = ""
 news_content = ""
@@ -59,17 +63,17 @@ else:
 print(news_title)
 print(news_content)
 
-
-
 print('------------------------------------------------------------')	#60個
+
 print('測試 04')
+print('中央通訊社新聞')
 
 news_title = ""
 news_content = ""
 filename = "chinnews.txt"
 if not os.path.exists(filename):
     #url = 'https://www.cna.com.tw/news/aopl/201901050192.aspx'
-    url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'
+    url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'   #繼探月成功後 印度又將發射太陽探測器
     html = requests.get(url).text
     soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
     title = soup.find("title")
@@ -88,14 +92,16 @@ print(news_title)
 print(news_content)
 
 print('------------------------------------------------------------')	#60個
+
 print('測試 05')
+print('中央通訊社新聞')
 
 news_title = ""
 news_content = ""
 filename = "chinnews.txt"
 if not os.path.exists(filename):
     #url = 'https://www.cna.com.tw/news/aopl/201901050192.aspx'
-    url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'
+    url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'   #繼探月成功後 印度又將發射太陽探測器
     html = requests.get(url).text
     soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
     title = soup.find("title")
@@ -113,32 +119,32 @@ else:
 print(news_title)
 print(news_content)
 
+'''
+
 print('------------------------------------------------------------')	#60個
 
-'''
-import urllib.request, json
-url = 'https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f'
-with urllib.request.urlopen(url) as jsonfile:
-    data = json.loads(jsonfile.read().decode())
-    print(data)
-'''
-print('------------------------------------------------------------')	#60個
+import urllib.request
+import json
 
-'''
-import urllib.request, json
+#桃園公共自行車即時服務資料.json
 url = 'https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f'
+
 with urllib.request.urlopen(url) as jsonfile:
     data = json.loads(jsonfile.read().decode())
+    #print(data)
+    """ ok many
     for k in data['retVal'].keys():
-        print("{:>2}/{:>2}\t{}".format(
-            data['retVal'][k]['sbi'],
-            data['retVal'][k]['tot'],
-            data['retVal'][k]['sna']))
-'''
+        print("{:>2}/{:>2}\t{}".format(data['retVal'][k]['sbi'], data['retVal'][k]['tot'], data['retVal'][k]['sna']))
+    """
+
 print('------------------------------------------------------------')	#60個
 
-import urllib.request, json
+import urllib.request
+import json
+
+#桃園公共自行車即時服務資料.json
 url = 'https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f'
+
 with urllib.request.urlopen(url) as jsonfile:
     data = json.loads(jsonfile.read().decode())
     msg = "<table>"
@@ -160,7 +166,7 @@ html = """
   </body>
 </html>
 """.format("桃園公共自行車各站可租數量", msg)
-with open("taoyouan-bike-v1.html", "wt", encoding='utf-8') as fp:
+with open("桃園公共自行車各站可租數量.html", "wt", encoding='utf-8') as fp:
     fp.write(html)
 print("Done!")
 
@@ -187,7 +193,7 @@ with html.body:
     items = ul()
     items += li("第一點")
     items += li("這是第二點")
-with open("sample.html", "wt", encoding='utf-8') as fp:
+with open("桃園公共自行車各站可租數量a.html", "wt", encoding='utf-8') as fp:
     fp.write(str(html))
 print("Done!")
 
@@ -196,9 +202,12 @@ print('------------------------------------------------------------')	#60個
 #以表格的方式呈現公共自行車租借站資訊
 import dominate
 from dominate.tags import *
-import urllib.request, json
+import urllib.request
+import json
 
+#桃園公共自行車即時服務資料.json
 url = 'https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f'
+
 with urllib.request.urlopen(url) as jsonfile:
     data = json.loads(jsonfile.read().decode())
 html = dominate.document(title="桃園公共自行車各站可租數量")
@@ -222,7 +231,7 @@ with html:
             row += td(data['retVal'][k]['sbi'])
             row += td(data['retVal'][k]['tot'])
             row += td(data['retVal'][k]['ar'])
-with open("taoyuan-bike-list.html", "wt", encoding='utf-8') as fp:
+with open("桃園公共自行車各站可租數量_list.html", "wt", encoding='utf-8') as fp:
     fp.write(str(html))
 print("Done!")
 
@@ -231,8 +240,12 @@ print('------------------------------------------------------------')	#60個
 import dominate
 from dominate.tags import *
 from dominate.util import raw
-import urllib.request, json
+import urllib.request
+import json
+
+#桃園公共自行車即時服務資料.json
 url = 'https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=5ca2bfc7-9ace-4719-88ae-4034b9a5a55c&rid=a1b4714b-3b75-4ff8-a8f2-cc377e4eaa0f'
+
 with urllib.request.urlopen(url) as jsonfile:
     data = json.loads(jsonfile.read().decode())
 html = dominate.document(title="桃園公共自行車各站可租數量")
@@ -241,13 +254,13 @@ with html.head:
     script(src="http://code.jquery.com/jquery-3.3.1.slim.js", 
            integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA=",
            crossorigin="anonymous")
-    cmd = '''
+    cmd = """
 $(document).ready(function() {
     $("#bike-station").change(function() {
         $('#target').html($("select option:selected").val())
     });
 });
-'''
+"""
     script(raw(cmd))
 with html:
     h1("桃園公共自行車各站可租數量查詢")
@@ -263,26 +276,15 @@ with html:
     d = div()
     d += h3("可租借數量/總數：")
     d += span(id="target")
-with open("taoyuan-bike.html", "wt", encoding='utf-8') as fp:
+with open("桃園公共自行車各站可租數量查詢.html", "wt", encoding='utf-8') as fp:
     fp.write(str(html))
 print("Done!")
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-'''
-# requests 一大堆
-
-'''
-
-import requests
-
-'''
-print('------------------------------------------------------------')	#60個
-
+print('解析網址')
 from urllib.parse import urlparse
+
 u = urlparse("https://tw.stock.yahoo.com/news_list/url/d/e/N1.html?q=&pg=4")
 print(u.netloc)
 print(u.path)
@@ -290,46 +292,49 @@ print(u.query)
 
 print('------------------------------------------------------------')	#60個
 
+print('拼湊網址')
 url = "https://tw.stock.yahoo.com/news_list/url/d/e/N1.html?q=&pg={}"
 for i in range(1,6):
     print(url.format(i))
 
 print('------------------------------------------------------------')	#60個
 
+print('拼湊網址')
 url = "https://tw.stock.yahoo.com/news_list/url/d/e/N{}.html?q=&pg={}"
 for t in [1, 997, 4]:
     for i in range(1,6):
         print(url.format(t, i))
 
-
 print('------------------------------------------------------------')	#60個
 
-import requests
-url = "https://tw.stock.yahoo.com/news_list/url/d/e/N4.html"
+print('抓取網頁')
+url = 'https://tw.stock.yahoo.com/tw-market'
 html = requests.get(url).text
 print(html)
 
 print('------------------------------------------------------------')	#60個
 
-import requests
+print('抓取網頁, re分析')
 import re
-url = "https://tw.stock.yahoo.com/news_list/url/d/e/N4.html"
+url = 'https://tw.stock.yahoo.com/tw-market'
 html = requests.get(url).text
 print(re.sub(r"<script.*>.*</script>", "", html))
 
 print('------------------------------------------------------------')	#60個
 
-import requests
+print('抓取網頁')
+#博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
 print(type(html))
 print("Python這個字在排行榜中裡面出現了{}次".format(
     html.count("Python")+html.count("python")))
 
-
 print('------------------------------------------------------------')	#60個
 
-import requests
+print('抓取網頁')
+
+#博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
 keyword = input("請問你要查詢的字串(end to quit)：")
@@ -340,8 +345,7 @@ while keyword != 'end':
 
 print('------------------------------------------------------------')	#60個
 
-import requests
-from bs4 import BeautifulSoup
+print('抓取網頁 bs分析')
 url = "http://aiworker2000.pixnet.net/blog/post/16062839"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -350,8 +354,7 @@ print(dir(soup))
 
 print('------------------------------------------------------------')	#60個
 
-import requests
-from bs4 import BeautifulSoup
+print('抓取網頁 bs分析')
 url = "http://aiworker2000.pixnet.net/blog/post/16062839"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -361,11 +364,12 @@ for image in images:
 
 print('------------------------------------------------------------')	#60個
 
-import requests
+print('抓取網頁 bs分析')
+
 import os
 from os.path import basename
-from bs4 import BeautifulSoup
 import urllib.request
+
 url = "http://aiworker2000.pixnet.net/blog/post/16062839"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -384,8 +388,8 @@ for image in images:
 
 print('------------------------------------------------------------')	#60個
 
-import requests
-from bs4 import BeautifulSoup
+print('抓取網頁 bs分析')
+#博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -396,8 +400,8 @@ for image in images:
 
 print('------------------------------------------------------------')	#60個
 
-import requests
-from bs4 import BeautifulSoup
+print('抓取網頁 bs分析')
+#博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -407,8 +411,8 @@ for link in links:
         print(link['href'])
 print('------------------------------------------------------------')	#60個
 
-import requests
-from bs4 import BeautifulSoup
+print('抓取網頁 bs分析')
+#博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -418,8 +422,8 @@ for i, title in enumerate(titles):
 
 print('------------------------------------------------------------')	#60個
 
-import requests
-from bs4 import BeautifulSoup
+print('抓取網頁 bs分析')
+#博客來-中文書>暢銷榜
 url = "https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -430,13 +434,14 @@ for i, book in enumerate(books):
     for info in book.find("ul").find_all("li"):
         print(info.text)
     print()
-'''
 
 print('------------------------------------------------------------')	#60個
 
-''' fail
-import requests
-from bs4 import BeautifulSoup
+""" fail
+
+print('抓取網頁 bs分析')
+
+#教育部全球資訊網-即時新聞
 url = "https://www.edu.tw/News.aspx?n=9E7AC85F1954DDA8&sms=169B8E91BB75571F"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -447,11 +452,12 @@ for row in soup.find_all("tr"):
         a = cell.find("a")
         if a is not None:
             print(a.text)
-'''
+"""
 print('------------------------------------------------------------')	#60個
 
-import requests
-from bs4 import BeautifulSoup
+print('抓取網頁 bs分析')
+
+#教育部全球資訊網-即時新聞
 url = "https://www.edu.tw/News.aspx?n=9E7AC85F1954DDA8&sms=169B8E91BB75571F"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -470,15 +476,16 @@ print("Done!")
 
 print('------------------------------------------------------------')	#60個
 
+print('抓取網頁 bs分析')
+
 import dominate
 from dominate.tags import *
 from dominate.util import raw
-import urllib.request, json
-import requests
+import urllib.request
+import json
 import os
 from os.path import basename
-from bs4 import BeautifulSoup
-import urllib.request
+
 url = "http://aiworker2000.pixnet.net/blog/post/16062839"
 index_html = dominate.document(title="圖形檔案索引")
 with index_html.head:
@@ -507,9 +514,8 @@ print("Done!")
 
 print('------------------------------------------------------------')	#60個
 
-from bs4 import BeautifulSoup
-import requests
-
+"""
+print('抓取網頁 bs分析')
 url = "https://tw.appledaily.com/new/realtime/"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -522,9 +528,9 @@ for item in items:
 
 print('------------------------------------------------------------')	#60個
 
-from bs4 import BeautifulSoup
+print('抓取網頁 bs分析')
+
 import time, random
-import requests
 
 url = "https://tw.appledaily.com/new/realtime/"
 html = requests.get(url).text
@@ -544,9 +550,9 @@ for item in items:
 
 print('------------------------------------------------------------')	#60個
 
+"""
 
-import requests
-from bs4 import BeautifulSoup
+print('抓取網頁 bs分析')
 
 url = 'https://www.ptt.cc/bbs/gossiping/index.html'
 
@@ -555,9 +561,6 @@ soup = BeautifulSoup(html, "lxml")
 titles = soup.find_all('div', class_='title')
 for title in titles:
     print(title.a.text)
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
