@@ -1,9 +1,24 @@
-'''
+"""
 #numpy 做 多項式擬合 polyfit
 
 numpy.polyfit(x, y, deg, rcond=None, full=False, w=None, cov=False)
 
-'''
+
+多項式poly1d()的方法
+
+　　　a.　　p(0.5)表示當x = 0.5時，多項式的值為多少
+
+　　　b.　　p.r表示當多項式為 0 時，此等式的根
+
+　　　c.　　p.c表示生成多項式的系數數組
+
+　　　d.　　p.order表示返回最高項的次方數
+
+　　　e.　　p[1]表示返回第一項的系數
+
+　　　f.　　多項式支持實數的四則運算
+
+"""
 
 import sys
 
@@ -56,9 +71,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
 #python多項式擬合：np.polyfit 和 np.polyld
 
 #1. 原始數據：假如要擬合的數據yyy來自sin函數，np.sin
@@ -66,8 +78,11 @@ print('------------------------------------------------------------')	#60個
 xxx = np.arange(0, 1000)  # x值，此時表示弧度
 yyy = np.sin(xxx*np.pi/180)  #函數值，轉化成度
 
-#2. 測試不同階的多項式，例如7階多項式擬合，使用np.polyfit擬合，np.polyld得到多項式系數
+#2. 測試不同階的多項式，例如7階多項式擬合，
+#使用np.polyfit擬合，
+#使用np.polyld得到多項式系數
 
+#七階多項式擬合
 z1 = np.polyfit(xxx, yyy, 7) # 用7次多項式擬合，可改變多項式階數；
 p1 = np.poly1d(z1) #得到多項式系數，按照階數從高到低排列
 print(p1)  #顯示多項式
@@ -78,18 +93,61 @@ yvals=p1(xxx) # 可直接使用yvals=np.polyval(z1,xxx)
 
 #4. 繪圖如下
 
-plt.plot(xxx, yyy, '*',label='original values')
-plt.plot(xxx, yvals, 'r',label='polyfit values')
+plt.plot(xxx, yyy, '*', label = 'original values')
+plt.plot(xxx, yvals, 'r', label = 'polyfit values')
 plt.xlabel('x axis')
 plt.ylabel('y axis')
-plt.legend(loc=4) # 指定legend在圖中的位置，類似象限的位置
+plt.legend(loc = 4) # 指定legend在圖中的位置，類似象限的位置
 plt.title('polyfitting')
 plt.show()
 
 
+#5. np.polyfit函數：採用的是最小二次擬合，
+#  numpy.polyfit(x, y, deg, rcond=None, full=False, w=None, cov=False)，前三個參數是必須的
+#6. np.polyld函數：得到多項式系數，主要有三個參數
+#   c_or_r : array_like
+#   r : bool, optional
+#   variable : str, optional
+
+#參數1表示：在沒有參數2（也就是參數2默認False時），參數1是一個數組形式，且表示從高到低的多項式系數項，
+#例如參數1為[4,5,6]表示： 4x^2+5x+6 (降冪排列)
+#參數2表示：為True時，表示將參數1中的參數作為根來形成多項式，即參數1為[4,5,6]時表示：(x-4)(x-5)(x-6)=0，
+#也就是：1x^3-15x^2+74x-120
+#參數3表示：換參數標識，用慣了x，可以用 t，s之類的
+
+#用法：
+#1. 直接進行運算，例如多項式的平方，分別得到
+
+xx = np.poly1d([1, 2, 3])   #1x^2+2x+3
+print(xx)
+yy = xx ** 2  #求平方，或者用 xx * xx => 1x^4+4x^3+10x^2+12x+9
+print(yy)
+
+# 2. 求值：
+
+print(yy(1))
+#yy(1) = 36
+
+#3. 求根：即等式為0時的未知數值
+#yy.r
+print(yy.r)
+
+#4. 得到系數形成數組：
+#yy.c 為：array([ 1,  4, 10, 12,  9])
+print(yy.c)
+
+#5. 返回最高次冪數：
+#yy.order = 4
+print(yy.order)
+
+#6. 返回系數：
+print(yy[0])    # 表示冪為0的系數
+print(yy[1])    # 表示冪為1的系數
+
 
 print('------------------------------------------------------------')	#60個
 
+sys.exit()
 
 
 print('------------------------------------------------------------')	#60個

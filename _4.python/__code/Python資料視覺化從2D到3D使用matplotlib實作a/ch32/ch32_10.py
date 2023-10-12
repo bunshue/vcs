@@ -1,4 +1,3 @@
-# ch32_10.py
 from matplotlib.animation import ArtistAnimation  
 import matplotlib.pyplot as plt  
 import numpy as np  
@@ -27,7 +26,5 @@ ani = ArtistAnimation(fig, picts,
                       repeat_delay=500,
                       repeat=True)
 plt.axis('off')
+
 plt.show()
-
-
-

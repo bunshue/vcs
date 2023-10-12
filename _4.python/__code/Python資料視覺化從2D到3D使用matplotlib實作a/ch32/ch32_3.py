@@ -1,4 +1,3 @@
-# ch32_3.py
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation

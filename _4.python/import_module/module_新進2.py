@@ -251,7 +251,6 @@ print('------------------------------------------------------------')	#60個
 
 
 import time
-import itertools
 import threading
 import subprocess
 from optparse import OptionParser, SUPPRESS_HELP

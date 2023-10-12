@@ -32,3 +32,14 @@ for a in AAA:
 
 print('------------------------------------------------------------')	#60個
 
+
+import sympy
+
+a = sympy.Symbol('a')
+b = sympy.Symbol('b')
+eq1 = -a + b -2
+eq2 = a + b - 4
+ans = sympy.solve((eq1, eq2))
+print('a = {}'.format(ans[a]))
+print('b = {}'.format(ans[b]))
+
