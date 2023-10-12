@@ -157,7 +157,7 @@ plt.xticks(index[0::2], labels)
 #第二張圖
 plt.subplot(232)
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/popu.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/台灣各縣市人口.txt'
 
 with open(filename, 'r') as fp:
 	populations = fp.readlines()

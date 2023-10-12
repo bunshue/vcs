@@ -3,8 +3,8 @@
 繪製文字雲
 """
 
-import wordcloud
 import sys
+import wordcloud
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt

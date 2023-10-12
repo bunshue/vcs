@@ -1,7 +1,14 @@
 import sys
 
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+
+print('------------------------------------------------------------')	#60個
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
@@ -50,20 +57,28 @@ print(f'mode        = {np.argmax(np.bincount(x1))}')
 
 print('------------------------------------------------------------')	#60個
 
-import statistics as st
+
+
+
+
+
+
+
+
+import statistics
 
 x1 = [0, 1, 1, 3, 2, 1]
-print(f'mode = {st.mode(x1)}')
+print(f'mode = {statistics.mode(x1)}')
 
 print('------------------------------------------------------------')	#60個
 
-import statistics as st
+import statistics
 
 sc = [60,10,40,80,80,30,80,60,70,90,50,50,50,70,60,80,80,50,60,70,
       70,40,30,70,60,80,20,80,70,50,90,80,40,40,70,60,80,30,20,70]
 print(f'平均成績 = {np.mean(sc)}')
 print(f'中位成績 = {np.median(sc)}')
-print(f'眾數成績 = {st.mode(sc)}')
+print(f'眾數成績 = {statistics.mode(sc)}')
 
 hist = [0]*9
 for s in sc:
@@ -98,13 +113,13 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import statistics as st
+import statistics
 
 sc = [60,10,40,80,80,30,80,60,70,90,50,50,50,70,60,80,80,50,60,70,
       70,40,30,70,60,80,20,80,70,50,90,80,40,40,70,60,80,30,20,70]
 print(f'平均成績 = {np.mean(sc)}')
 print(f'中位成績 = {np.median(sc)}')
-print(f'眾數成績 = {st.mode(sc)}')
+print(f'眾數成績 = {statistics.mode(sc)}')
 plt.rcParams['font.family'] = 'Microsoft JhengHei'
 plt.hist(sc, 9)
 
@@ -116,7 +131,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import statistics as st
+import statistics
 
 sc1 = [60,10,40,80,80,30,80,60,70,90,50,50,50,70,60,80,80,50,60,70,
       70,40,30,70,60,80,20,80,70,50,90,80,40,40,70,60,80,30,20,70]
@@ -147,13 +162,13 @@ print(f"變異數 : {myvar}")
 
 print('------------------------------------------------------------')	#60個
 
-import statistics as st
+import statistics
 x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
 
 print(f"Numpy模組母體變異數  : {np.var(x):6.2f}")
 print(f"Numpy模組樣本變異數  : {np.var(x,ddof=1):6.2f}")
-print(f"Statistics母體變異數 : {st.pvariance(x):6.2f}")
-print(f"Statistics樣本變異數 : {st.variance(x):6.2f}")
+print(f"Statistics母體變異數 : {statistics.pvariance(x):6.2f}")
+print(f"Statistics樣本變異數 : {statistics.variance(x):6.2f}")
 
 print('------------------------------------------------------------')	#60個
 
@@ -169,98 +184,14 @@ print(f"標準差 : {sd:6.2f}")
 
 print('------------------------------------------------------------')	#60個
 
-import statistics as st
+import statistics
 
 x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
 print(f"Numpy模組母體標準差  : {np.std(x):6.2f}")
 print(f"Numpy模組樣本標準差  : {np.std(x,ddof=1):6.2f}")
-print(f"Statistics母體標準差 : {st.pstdev(x):6.2f}")
-print(f"Statistics樣本標準差 : {st.stdev(x):6.2f}")
+print(f"Statistics母體標準差 : {statistics.pstdev(x):6.2f}")
+print(f"Statistics樣本標準差 : {statistics.stdev(x):6.2f}")
 
-print('------------------------------------------------------------')	#60個
-
-temperature = [25,31,28,22,27,30,29,33,32,26]           # 天氣溫度
-rev = [900,1200,950,600,720,1000,1020,1500,1420,1100]   # 營業額
-
-print(f"相關係數 = {np.corrcoef(temperature,rev).round(2)}")
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
-plt.scatter(temperature, rev)
-plt.title('天氣溫度與冰品銷售')
-plt.xlabel("溫度", fontsize=14)
-plt.ylabel("營業額", fontsize=14)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-temperature = [25,31,28,22,27,30,29,33,32,26]           # 天氣溫度
-rev = [900,1200,950,600,720,1000,1020,1500,1420,1100]   # 營業額 
-
-coef = np.polyfit(temperature, rev, 1)                  # 迴歸直線係數
-reg = np.poly1d(coef)                                   # 線性迴歸方程式
-print(coef.round(2))
-print(reg)              
-
-print('------------------------------------------------------------')	#60個
-
-temperature = [25,31,28,22,27,30,29,33,32,26]           # 天氣溫度
-rev = [900,1200,950,600,720,1000,1020,1500,1420,1100]   # 營業額 
-
-coef = np.polyfit(temperature, rev, 1)                  # 迴歸直線係數
-reg = np.poly1d(coef)                                   # 線性迴歸方程式
-print(f"當溫度是 35 度時冰品銷售金額 = {reg(35).round(0)}")     
-
-print('------------------------------------------------------------')	#60個
-
-temperature = [25,31,28,22,27,30,29,33,32,26]           # 天氣溫度
-rev = [900,1200,950,600,720,1000,1020,1500,1420,1100]   # 營業額 
-
-coef = np.polyfit(temperature, rev, 1)                  # 迴歸直線係數
-reg = np.poly1d(coef)                                   # 線性迴歸方程式
-     
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
-plt.scatter(temperature, rev)
-plt.plot(temperature,reg(temperature),color='red')
-plt.title('天氣溫度與冰品銷售')
-plt.xlabel("溫度", fontsize=14)
-plt.ylabel("營業額", fontsize=14)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-times = [1,2,3]                                         # 臉書行銷次數
-rev = [10,18,19]                                        # 增加業績 
-
-coef = np.polyfit(times, rev, 2)                        # 二次函數係數
-reg = np.poly1d(coef)                                   # 二次函數迴歸方程式
-print(reg)    
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
-plt.scatter(times, rev)
-plt.plot(times,reg(times),color='red')
-plt.title('臉書行銷與業績增加金額')
-plt.xlabel("臉書行銷次數", fontsize=14)
-plt.ylabel("增加業績金額", fontsize=14)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-temperature = [22,25,26,27,28,29,30,31,32,33]           # 天氣溫度
-rev = [600,900,1100,720,950,1020,1000,1200,1420,1500]   # 營業額
-
-coef = np.polyfit(temperature, rev, 2)                  # 迴歸直線係數
-reg = np.poly1d(coef)                                   # 線性迴歸方程式
-print(reg)     
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
-plt.scatter(temperature, rev)
-plt.plot(temperature,reg(temperature),color='red')
-plt.title('天氣溫度與冰品銷售')
-plt.xlabel("溫度", fontsize=14)
-plt.ylabel("營業額", fontsize=14)
-
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 

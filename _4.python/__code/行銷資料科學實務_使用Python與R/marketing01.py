@@ -3,11 +3,23 @@ import sys
 import time
 import random
 
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+import matplotlib
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 print('------------------------------------------------------------')	#60個
 
 import numpy as np
 from sklearn.linear_model import LogisticRegression
-'''
+
 print('------------------------------------------------------------')	#60個
 
 input_data = np.array([
@@ -39,32 +51,45 @@ print(predicted_output)
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
+#          編號              圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = '預測曲線', figsize = (16, 8), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#左圖
+plt.subplot(121)
 
 plt.scatter(
-    x=input_data[:,0], 
-    y=input_data[:,1], 
+    x=input_data[:,0],
+    y=input_data[:,1],
     color=[('red' if x == 1 else 'blue') for x in output_data]
 )
+
+for x in output_data:
+    print(x)
+
+
+print(input_data[:,0])
+print(input_data[:,1])
+
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('Actual')
 plt.grid()
-plt.show()
 
-print('------------------------------------------------------------')	#60個
+#右圖
+plt.subplot(122)
 
 plt.scatter(
     x=input_data[:,0], 
     y=input_data[:,1], 
     color=[('red' if x == 1 else 'blue') for x in predicted_output]
 )
+
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('Predicted')
 plt.grid()
+
 plt.show()
-'''
 
 print('------------------------------------------------------------')	#60個
 

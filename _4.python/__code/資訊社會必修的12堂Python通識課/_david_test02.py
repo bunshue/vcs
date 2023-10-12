@@ -470,7 +470,7 @@ for row in soup.find_all("tr"):
         if a is not None and a.text != "下一頁":
             headlines.append(a.text)
 news = "\n".join(headlines)
-with open("eduheadlines.txt", "wt", encoding="utf-8") as fp:
+with open("教育部全球資訊網即時新聞.txt", "wt", encoding="utf-8") as fp:
     fp.write(news)
 print("Done!")
 

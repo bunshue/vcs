@@ -3,12 +3,11 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-'''
-
 print('------------------------------------------------------------')	#60個
 
 import shutil
 import os
+
 fullpath = os.path.abspath('myprime.py')
 path, filename = os.path.split(fullpath)
 filename, extname = os.path.splitext(filename)
@@ -56,27 +55,25 @@ else:
     print("找不到來源資料夾。")
 
 print('------------------------------------------------------------')	#60個
-'''
 
 import os
 from PIL import Image
 
-pre_html = '''
+pre_html = """
 <!DOCTYPE html>
 <head>
 <meta charset='utf-8'/>
 </head>
 <body>
 <table>
-'''
+"""
 
-post_html = '''
+post_html = """
 </table>
 </body>
 </html>
-'''
+"""
 
-'''
 table_html = ""
 
 source = input("請輸入來源資料夾：")
@@ -108,12 +105,12 @@ html = pre_html + table_html + post_html
 with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
     f.write(html)
 
-'''
+print('------------------------------------------------------------')	#60個
 
 import os
 from PIL import Image
 
-pre_html = '''
+pre_html = """
 <!DOCTYPE html>
 <head>
 <meta charset='utf-8'/>
@@ -121,16 +118,16 @@ pre_html = '''
 <body>
 <table>
 <tr>
-'''
+"""
 
-post_html = '''
+post_html = """
 </tr>
 </table>
 </body>
 </html>
-'''
+"""
 
-'''
+
 table_html = ""
 
 source = input("請輸入來源資料夾：")
@@ -163,10 +160,7 @@ else:
 html = pre_html + table_html + post_html
 with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
     f.write(html)
-
     
-'''
-
 print('------------------------------------------------------------')	#60個
 
 

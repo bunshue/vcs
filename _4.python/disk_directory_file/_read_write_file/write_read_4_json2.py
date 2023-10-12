@@ -30,5 +30,25 @@ print(lats[:5])
 print('------------------------------------------------------------')	#60個
 
 
+import json
+
+numbers = [2, 3, 5, 7, 11, 13]
+
+filename = 'numbers.json'
+with open(filename, 'w') as f:
+    json.dump(numbers, f)
+
+
+
+import json
+
+filename = 'numbers.json'
+with open(filename) as f:
+    numbers = json.load(f)
+    
+print(numbers)
+
+
+
 print('------------------------------------------------------------')	#60個
 

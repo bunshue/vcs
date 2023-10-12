@@ -19,26 +19,6 @@ plt.figure(num = 'scatter 集合 1', figsize = (20, 15), dpi = 84, facecolor = "
 #第一張圖
 plt.subplot(231)
 
-print('計算迴歸直線')
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-# 資料
-x = np.array([23,24,28,24,27,21,18,25,28,20])  # 氣溫
-y = np.array([37,22,62,32,74,16,10,69,83,7])   # 果汁販賣數量
-
-# 迴歸直線
-a, b = np.polyfit(x, y, 1)
-y2 = a * x + b
-print('斜率: {0}, 截距:{1}'.format(a, b))
-
-# 繪圖
-plt.scatter(x, y)  # 散布圖
-plt.plot(x, y2)    # 迴歸直線
-
-# 預測在氣溫33度時的販賣數量
-# a * 33 + b
 
 
 
