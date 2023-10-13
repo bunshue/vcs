@@ -1,5 +1,3 @@
-# 7-3-3 用 dict 模擬 C 語言的 switch...case 語法 (3)
-
 import operator
 
 cal_dict = {

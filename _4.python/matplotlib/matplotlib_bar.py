@@ -21,22 +21,21 @@ plt.figure(num = 'bar 集合 1', figsize = (20, 15), dpi = 84, facecolor = "whit
 plt.subplot(231)
 
 print('用bar圖畫出字典資料 並標明數值')
-ChineseZodiacSigns = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8}
-print(type(ChineseZodiacSigns))
-print(ChineseZodiacSigns)
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8}
+print(type(animals))
+print(animals)
 
-plt.bar(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.values(), facecolor="#99ccff")
+plt.bar(range(len(animals)), animals.values(), facecolor="#99ccff")
 
-#plt.xticks(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.keys())
+#plt.xticks(range(len(animals)), animals.keys())
 #以上1行 相當於 以下3行
 seq = [0, 1, 2, 3]
-labels = ['鼠', '牛', '虎', '兔']
-plt.xticks(seq, labels)
+labels = ['米老鼠', '班尼牛', '跳跳虎', '彼得兔']
+plt.xticks(seq, labels, rotation = -45)
 
 plt.ylim((0, 55))
-for x, y in zip(range(len(ChineseZodiacSigns)), ChineseZodiacSigns.values()):
+for x, y in zip(range(len(animals)), animals.values()):
     plt.text(x-0.05, y+0.5, "{:>8,.0f}".format(y), ha='center')
-
 
 
 #第二張圖
@@ -61,19 +60,12 @@ print("水平長條圖");
 #plt.yticks(index, labels)       #設定y軸刻度為文字
 
 
-
-
 #第三張圖
 plt.subplot(233)
 
-
-
-
 """
 #疊加長條圖的應用
-
 #疊加長條圖是繪製出兩個長條圖，並以推疊的方式繪製而出的
-
 #設定將使用的數值，因為這邊需要兩組數值，因此有 y1, y2
 """
 

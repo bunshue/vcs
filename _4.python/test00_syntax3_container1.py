@@ -36,7 +36,7 @@ Dictionary(字典)
 Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的語法是key: value，一個key對應一個value，key不一定要是字串，但必須是唯一的。
 
 """
-
+'''
 print('建立空容器')
 
 a_dict = {}
@@ -1710,7 +1710,131 @@ print(type(choices))
 for choice in choices:
     print(choice)
 
+'''
 print('------------------------------------------------------------')	#60個
-   
+
+#字典的排序
+
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
+
+print(animals.items())
+
+print(sorted(animals.items(), key=lambda x: x[1]))
+
+print(sorted(animals.items(), key=lambda x: x[1], reverse=True))
+
+
+
+# 7-2-1 用 sort() 排序 dict
+
+xs = {'a': 4, 'c': 1, 'd': 3, 'b': 2}
+
+print(xs.items())
+
+print(sorted(xs.items()))
+
+for key, item in sorted(xs.items()):
+    print(key, item)
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+# 字典之合併: 使用 update
+
+default = {
+    'user': 'guest',
+    'lang': 'Python',
+    'version': 3.7
+    }
+
+user1 = {
+    'user': 'user 1',
+    'version': 3.8,
+    'platform': 'linux'
+    }
+
+default.update(user1)
+
+print(default)
+
+print('------------------------------------------------------------')	#60個
+
+# 7-5-4 dict 合併: 使用聯集算符 (注意: 限 Python 3.9+)
+
+default = {
+    'user': 'guest',
+    'lang': 'Python',
+    'version': 3.7
+    }
+
+user1 = {
+    'user': 'user 1',
+    'version': 3.8,
+    'platform': 'linux'
+    }
+
+new_setting = default | user1
+
+print(new_setting)
+
+default |= user1
+
+print(default)
+
+print('------------------------------------------------------------')	#60個
+
+# 7-5-3 dict 合併: 使用多重解包 (Python 3.5+)
+
+default = {
+    'user': 'guest',
+    'lang': 'Python',
+    'version': 3.7
+    }
+
+user1 = {
+    'user': 'user 1',
+    'version': 3.8,
+    'platform': 'linux'
+    }
+
+new_setting = {**default, **user1}
+
+print(new_setting)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+# 7-5-2 dict 合併: 使用 dict() 與 **
+
+default = {
+    'user': 'guest',
+    'lang': 'Python',
+    'version': 3.7
+    }
+
+user1 = {
+    'user': 'user 1',
+    'version': 3.8,
+    'platform': 'linux'
+    }
+
+new_setting = dict(default, **user1)
+
+print(new_setting)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 

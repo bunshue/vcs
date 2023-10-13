@@ -21,10 +21,11 @@ for i in range(60):
         ax.imshow(f(x, y), cmap='hsv')  
     picts.append([pict])                # 影像儲存到串列
 # interval = 20, 相當於每隔 0.1 秒執行 animate()動畫    
-ani = ArtistAnimation(fig, picts,
-                      interval=100,
-                      repeat_delay=500,
-                      repeat=False)
+ani = ArtistAnimation(fig,
+                      picts,
+                      interval = 100,
+                      repeat_delay = 500,
+                      repeat = False)   #和True比較看看
 plt.axis('off')
 
 plt.show()

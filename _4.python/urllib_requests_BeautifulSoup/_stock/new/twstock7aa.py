@@ -29,14 +29,18 @@ for i in range(1,13):
 #list1.append(list2)
 #list1
 #%%
+
 import csv
-with open('2019_2330.csv', 'w', newline='') as f:
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv'
+with open(filename, 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerows(slist)
 #%%
+
 import matplotlib.pyplot as plt
 import csv
-with open('2019_2330.csv', 'r', newline='') as f:
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv'
+with open(filename, 'r', newline='') as f:
     datas = csv.reader(f)  
     listx = []
     listy = []

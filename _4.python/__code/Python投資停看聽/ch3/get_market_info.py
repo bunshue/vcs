@@ -8,8 +8,6 @@ import pandas
 
 """"相對應書本的 p.115~117
 """
-
-
 class daily_market_info:
     """Get the CSV which is the data TAIEX's open, high, low
     and close price from API.

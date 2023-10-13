@@ -1,6 +1,7 @@
 """
 numpy的使用
 
+numpy: 數值計算的標準套件
 """
 
 import sys
@@ -980,12 +981,38 @@ print('area = {0:5.2f}'.format(area))
 print('------------------------------------------------------------')	#60個
 
 
+import numpy as np
+
+x1 = np.linspace(0, 10, num=11)     # 使用linspace()產生陣列
+print(type(x1), x1)
+x2 = np.arange(0,11,1)              # 使用arange()產生陣列
+print(type(x2), x2)
+x3 = np.arange(11)                  # 簡化語法產生陣列
+print(type(x3), x3)
+
 
 print('------------------------------------------------------------')	#60個
 
 
+import numpy as np
+
+x = np.array([1, 2, 3])         # 1 x 3 陣列 x
+y = np.array([2, 3, 4])         # 1 x 3 陣列 y
+print(f'x = {x}')
+print(f'y = {y}')
+
+print()
+
+y = y.reshape(-1,1)             # y 改為 3 x 1 陣列 
+print(f'新的 y = \n{y}')
+
+print()
+
+print(f'x + y = \n{x+y}')
+
 
 print('------------------------------------------------------------')	#60個
+
 
 
 print('------------------------------------------------------------')	#60個

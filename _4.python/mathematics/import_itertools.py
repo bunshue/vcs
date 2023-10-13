@@ -144,7 +144,74 @@ print(_newname())
 print('------------------------------------------------------------')	#60個
 
 
+# 6-8-12 itertools 模組:
+# product() 笛卡兒積
+# permutations() 排列
+# combinations() 組合
+# combinations_with_replacement() 同元素可重複的組合
+
+import itertools
+
+data1 = ['A', 'B', 'C']
+data2 = [1, 2, 3]
+
+print(list(itertools.product(data1, data2)))
+
+print(list(itertools.product(data1, data2, repeat=2)))
+
+print(list(itertools.product(data1, repeat=2)))
+
+print(list(itertools.permutations(data1, 2)))
+
+print(list(itertools.permutations(data1, 3)))
+
+print(list(itertools.combinations(data1, 2)))
+
+print(list(itertools.combinations(data1, 3)))
+
+print(list(itertools.combinations_with_replacement(data1, 2)))
+
+print(list(itertools.combinations_with_replacement(data1, 3)))
+
+print('------------------------------------------------------------')	#60個
+
+# 6-8-10 itertools 模組: tee() 同單一來源建立多個走訪器
+
+import itertools
+
+data = [1, 2, 3, 4, 5]
+
+generators = itertools.tee(data, 3)
+
+for g in generators:
+    print(list(g))
+print('------------------------------------------------------------')	#60個
+
+# 6-8-11 itertools 模組: compress() 過濾元素
+
+import itertools
+
+data = 'ABCDEFG'
+selector = [1, 0, 1, 1, 0, 1, 0]
+
+print(list(itertools.compress(data, selector)))
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+

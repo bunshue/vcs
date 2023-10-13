@@ -116,6 +116,10 @@ for i in range(1,13):
 
 #將資料寫出到csv檔        
 import csv
+
+#比較看看
+#filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/stock_data_2019_2330.csv'
+
 with open('2019_2330.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerows(slist)

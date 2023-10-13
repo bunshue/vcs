@@ -441,6 +441,7 @@ print(tt)
 
 xs = data_n[:,0]
 ys = data_n[:,1]
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 

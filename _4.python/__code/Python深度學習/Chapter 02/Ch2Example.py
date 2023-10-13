@@ -136,7 +136,7 @@ if __name__ == '__main__':
 
     nn.fit(X, y, epochs=10)
 
-    print "Final prediction"
+    print("Final prediction")
     for s in X:
         print(s, nn.predict(s))
         

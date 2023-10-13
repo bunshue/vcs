@@ -8,7 +8,6 @@ import pandas
 相對應書本的 p.113~115
 """
 
-
 def create_new_header(orignal_headers):
     new_headers = []
 
@@ -43,7 +42,6 @@ def convert_date(data_ROC):
     date_arr = data_ROC.split("/")
     new_year = int(date_arr[0]) + 1911
     return f"{new_year}-{date_arr[1]}-{date_arr[2]}"
-
 
 # API位置
 stock_symbol = "2330"

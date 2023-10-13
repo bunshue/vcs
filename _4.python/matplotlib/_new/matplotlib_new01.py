@@ -1,52 +1,47 @@
-# plot1.py
+import sys
 
-# plot2.py
-
-# plot3.py
-
-# plot4.py
 import matplotlib.pyplot as plt
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
 
 listx = [0,800,1500,3200,4100,5000]
 listy = [20,60,32,45,78,56]
 plt.plot(listx, listy)
 plt.xticks(range(0,5500,500))
 plt.tick_params(axis='both', labelsize=10, color='red')
+
 plt.show()
 
-
-# plot5.py
-
-# bar1.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
 
 listx = ['c','c++','c#','java','python']
 listy = [45,28,38,32,50]
-plt.bar(listx, listy, width=0.5, color='rgb')
+plt.bar(listx, listy, width=0.5, color='r')
 plt.title("資訊程式課程選修人數")
 plt.xlabel("程式課程")
 plt.ylabel("選修人數")
-# 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" 
-plt.rcParams["axes.unicode_minus"] = False
+
 plt.show()
 
-# bar2.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
 
 listy = ['c','c++','c#','java','python']
 listx = [45,28,38,32,50]
-plt.barh(listy, listx, height=0.5, color='rgb')
+plt.barh(listy, listx, height=0.5, color='r')
 plt.title("資訊程式課程選修人數")
 plt.xlabel("程式課程")
 plt.ylabel("選修人數")
-# 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" 
-plt.rcParams["axes.unicode_minus"] = False
+
 plt.show()
 
-# bar3.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
 
 listx = ['c','c++','c#','java','python']
 listy1 = [25,20,20,16,28]
@@ -57,13 +52,10 @@ plt.legend()
 plt.title("資訊程式課程選修人數")
 plt.xlabel("程式課程")
 plt.ylabel("選修人數")
-# 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" 
-plt.rcParams["axes.unicode_minus"] = False
+
 plt.show()
 
-# bar4.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
 
 width = 0.25
 listx = ['c','c++','c#','java','python']
@@ -78,13 +70,10 @@ plt.legend()
 plt.title("資訊程式課程選修人數")
 plt.xlabel("程式課程")
 plt.ylabel("選修人數")
-# 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" 
-plt.rcParams["axes.unicode_minus"] = False
+
 plt.show()
 
-# scatter.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
 
 listx = [31,15,20,25,12,18,45,21,33,5,18,22,37,42,10]
 listy = [68,20,61,32,45,56,10,18,70,64,43,66,19,77,21]
@@ -96,8 +85,7 @@ plt.scatter(listx, listy, c='r', s=scale, marker='o', alpha=0.5)
 
 plt.show()
 
-# pie.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
 
 sizes = [25, 30, 15, 10]
 labels = ["北部", "西部", "南部", "東部"]
@@ -112,13 +100,11 @@ plt.pie(sizes,
 	pctdistance = 0.6,
 	shadow = True,
 	startangle = 90)
-# 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" 
-plt.rcParams["axes.unicode_minus"] = False
+
 plt.show()
 
-# figure.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
+
 # 新增圖表區
 plt.figure()
 plt.plot([1,2,3])
@@ -128,8 +114,7 @@ plt.plot([1,2,3])
 
 plt.show()
 
-# subplot4.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
 
 plt.figure(figsize=[8,4])
 plt.axes([0,0,0.4,1])
@@ -142,8 +127,7 @@ plt.plot([1,2,3],'g--o')
 
 plt.show()
 
-# subplot5.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
 
 plt.figure(figsize=[8,4])
 plt.axes([0,0,0.8,1])
@@ -156,8 +140,7 @@ plt.plot([1,2,3],'g--o')
 
 plt.show()
 
-# booksale.py
-import matplotlib.pyplot as plt
+print('------------------------------------------------------------')	#60個
 
 # 設定圖書分類及銷售額比例
 listx = ['商業理財','文學小說','藝術設計','人文科普','語言電腦','心靈養生','生活風格','親子共享']
@@ -168,8 +151,6 @@ listm = [x*100 for x in listm]
 listf = [x*100 for x in listf]
 # 設定圖表區尺寸以及使用字型
 plt.figure(figsize=(12,9))
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei']
-plt.rcParams['axes.unicode_minus'] = False
 
 # 男性圖書分類銷售率圖餅圖
 plt.subplot(221)
@@ -209,3 +190,9 @@ plt.xticks(rotation=45)
 plt.legend()
 
 plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個

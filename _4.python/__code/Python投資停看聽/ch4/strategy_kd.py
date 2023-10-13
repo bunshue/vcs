@@ -3,7 +3,6 @@ from talib import abstract
 
 import db_connect
 
-
 class trade_strategy:
     def __init__(self, stock_code="2330"):
         self.df_stock = None

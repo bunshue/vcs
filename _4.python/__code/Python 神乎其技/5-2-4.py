@@ -2,6 +2,8 @@
 
 arr = bytes((0, 1, 2, 3))
 
+print(type(arr))
+
 print(arr)
 
 print(arr[1])

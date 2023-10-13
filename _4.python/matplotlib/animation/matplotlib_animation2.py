@@ -63,8 +63,12 @@ def update(n):  #n就是 FuncAnimation 裡面的 frames
     ln.set_data(xdata, ydata)    #重新設置曲線的值
     return ln,
 
-ani = FuncAnimation(fig, update, frames = np.linspace(0, 2 * np.pi, 10),     #這里的frames在調用update函數是會將frames作為實參傳遞給“n”
-                    init_func = init, interval = 100, blit = True)
+ani = FuncAnimation(fig,
+                    update,
+                    frames = np.linspace(0, 2 * np.pi, 10),     #這里的frames在調用update函數是會將frames作為實參傳遞給“n”
+                    init_func = init,
+                    interval = 100,
+                    blit = True)
 plt.show()
 
 print('------------------------------------------------------------')	#60個

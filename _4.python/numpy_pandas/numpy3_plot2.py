@@ -30,6 +30,23 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(1, 10, 10)                          # 建立 x
+y = np.random.random((7, 10))                       # 建立 y 7 X 10 的隨機陣列
+
+print(y.shape)
+print(y)
+
+for yy in y:    
+    plt.scatter(x, yy, c='r', marker='*')
+
+plt.xticks(np.arange(0,11,step=1.0))
+
+plt.show()
+
+
 
 print('------------------------------------------------------------')	#60個
 

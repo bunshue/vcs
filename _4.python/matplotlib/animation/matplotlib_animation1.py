@@ -1,9 +1,10 @@
 # plot 集合 動畫
 
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-import matplotlib
+import sys
+
+import matplotlib.pyplot as plt  
+import numpy as np  
+from matplotlib.animation import FuncAnimation
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
@@ -13,21 +14,15 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt  
-import numpy as np  
-from matplotlib.animation import FuncAnimation  
-
+'''
 # 建立最初化的 line 資料 (x, y)  
 def init():  
     line.set_data([], [])  
     return line,
 # 繪製 sin 波形, 這個函數將被重複調用
 def animate(i):        
-    #x = np.linspace(0, 2*np.pi, 500)        # 建立 sin 的 x 值, 點數多
-    x = np.linspace(0, 2*np.pi, 10)         # 建立 sin 的 x 值, 點數少
+    x = np.linspace(0, 2 * np.pi, 500)        # 建立 sin 的 x 值, 點數多
+    #x = np.linspace(0, 2 * np.pi, 10)         # 建立 sin 的 x 值, 點數少
     y = np.sin(2 * np.pi * (x - 0.01 * i))  # 建立 sin 的 y 值  
     line.set_data(x, y)                     # 更新波形的資料
     return line,
@@ -43,16 +38,11 @@ ani = FuncAnimation(fig, animate,
                     frames = 200,          
                     init_func = init,                        
                     interval = 20)          # interval是控制速度(msec)
-#偽存檔
-#ani.save('sin.gif', writer='pillow')        # 儲存 sin.gif 檔案
-
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+'''
 
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+print('------------------------------------------------------------')	#60個
 
 # 建立最初化點的位置 
 def init():
@@ -83,10 +73,15 @@ ani = FuncAnimation(fig = fig,
                     interval = 20,
                     blit = True,
                     repeat = True)
-#偽存檔
-#ani.save('sinball.gif', writer='pillow')   # 儲存 sinball.gif 檔案
-
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+
+
+#偽存檔
+#ani.save('sin.gif', writer='pillow')        # 儲存 sin.gif 檔案
+
+#偽存檔
+#ani.save('sinball.gif', writer='pillow')   # 儲存 sinball.gif 檔案
 
