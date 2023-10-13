@@ -42,7 +42,7 @@ line, = ax.plot([], [], lw=3, color='g')
 ani = FuncAnimation(fig, animate,
                     frames = 200,          
                     init_func = init,                        
-                    interval = 20)          # interval是控制速度
+                    interval = 20)          # interval是控制速度(msec)
 #偽存檔
 #ani.save('sin.gif', writer='pillow')        # 儲存 sin.gif 檔案
 
@@ -67,26 +67,26 @@ def animate(i):
 fig = plt.figure()
 N = 200
 # 建立軸物件與設定大小
-ax = plt.axes(xlim=(0, 2*np.pi), ylim=(-1.5, 1.5))
+ax = plt.axes(xlim = (0, 2 * np.pi), ylim = (-1.5, 1.5))
 # 建立和繪製 sin 波形
-x = np.linspace(0, 2*np.pi, N)
+x = np.linspace(0, 2 * np.pi, N)
 y = np.sin(x)
-line, = ax.plot(x, y, color='g',linestyle='-',linewidth=3)
+line, = ax.plot(x, y, color = 'g', linestyle = '-', linewidth = 3)
 # 建立和繪製紅點
-dot, = ax.plot([],[],color='red',marker='o',
-               markersize=15,linestyle='')
+dot, = ax.plot([], [], color = 'red', marker = 'o',
+               markersize = 15, linestyle = '')
 # interval = 20, 相當於每隔 20 毫秒執行 animate()動畫
-ani = FuncAnimation(fig=fig, func=animate,
-                    frames=N,
-                    init_func=init,
-                    interval=20,
-                    blit=True,
-                    repeat=True)
+ani = FuncAnimation(fig = fig,
+                    func = animate,
+                    frames = N,
+                    init_func = init,
+                    interval = 20,
+                    blit = True,
+                    repeat = True)
 #偽存檔
 #ani.save('sinball.gif', writer='pillow')   # 儲存 sinball.gif 檔案
 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 

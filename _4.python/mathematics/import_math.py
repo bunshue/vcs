@@ -169,34 +169,6 @@ acc_deciamal()
 
 print('------------------------------------------------------------')	#60個
 
-from itertools import permutations
-from itertools import combinations
-from itertools import combinations_with_replacement
-
-
-print('排列組合')
-
-items = ['鼠', '牛', '虎']
-
-# 全排列
-for p in permutations(items):
-    print(p)
-
-# 指定长度
-for p in permutations(items, 2):
-    print(p)
-
-# 组合
-for c in combinations(items, 3):
-    print(c)
-
-# 可重复组合
-for c in combinations_with_replacement(items, 3):
-    print(c)
-
-
-print('------------------------------------------------------------')	#60個
-
 import math
 
 N = 30

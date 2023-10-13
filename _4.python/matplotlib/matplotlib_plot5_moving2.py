@@ -24,21 +24,21 @@ from matplotlib.animation import FuncAnimation
 print('------------------------------------------------------------')	#60個
 
 """
-python学习之matplotlib绘制动图（FuncAnimation()参数）
+python學習之matplotlib繪制動圖（FuncAnimation()參數）
 
-1、函数FuncAnimation(fig,func,frames,init_func,interval,blit)是绘制动图的主要函数，其参数如下：
+1、函數FuncAnimation(fig,func,frames,init_func,interval,blit)是繪制動圖的主要函數，其參數如下：
 
-　　a.fig 绘制动图的画布名称
+　　a.fig 繪制動圖的畫布名稱
 
-　　b.func自定义动画函数，即下边程序定义的函数update
+　　b.func自定義動畫函數，即下邊程序定義的函數update
 
-　　c.frames动画长度，一次循环包含的帧数，在函数运行时，其值会传递给函数update(n)的形参“n”
+　　c.frames動畫長度，一次循環包含的幀數，在函數運行時，其值會傳遞給函數update(n)的形參“n”
 
-　　d.init_func自定义开始帧，即传入刚定义的函数init,初始化函数
+　　d.init_func自定義開始幀，即傳入剛定義的函數init,初始化函數
 
-　　e.interval更新频率，以ms计
+　　e.interval更新頻率，以ms計
 
-　　f.blit选择更新所有点，还是仅更新产生变化的点。应选择True，但mac用户请选择False，否则无法显
+　　f.blit選擇更新所有點，還是僅更新產生變化的點。應選擇True，但mac用戶請選擇False，否則無法顯
 """
 
 print('------------------------------------------------------------')	#60個
@@ -47,29 +47,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-fig, ax = plt.subplots()   #生成子图，相当于fig = plt.figure(),ax = fig.add_subplot(),其中ax的函数参数表示把当前画布进行分割，例：fig.add_subplot(2,2,2).表示将画布分割为两行两列　　　　　　　　　　　　　　　　#ax在第2个子图中绘制，其中行优先，
-xdata, ydata = [], []      #初始化两个数组
-ln, = ax.plot([], [], 'r-', animated=False)  #第三个参数表示画曲线的颜色和线型，具体参见：https://blog.csdn.net/tengqingyong/article/details/78829596
+fig, ax = plt.subplots()   #生成子圖，相當於fig = plt.figure(),ax = fig.add_subplot(),其中ax的函數參數表示把當前畫布進行分割，例：fig.add_subplot(2,2,2).表示將畫布分割為兩行兩列　　　　　　　　　　　　　　　　#ax在第2個子圖中繪制，其中行優先，
+xdata, ydata = [], []      #初始化兩個數組
+ln, = ax.plot([], [], 'r-', animated=False)  #第三個參數表示畫曲線的顏色和線型，具體參見：https://blog.csdn.net/tengqingyong/article/details/78829596
 
 def init():
-    ax.set_xlim(0, 2*np.pi)  #设置x轴的范围pi代表3.14...圆周率，
-    ax.set_ylim(-1, 1)          #设置y轴的范围
-    return ln,               #返回曲线
+    ax.set_xlim(0, 2*np.pi)  #設置x軸的範圍pi代表3.14...圓周率，
+    ax.set_ylim(-1, 1)          #設置y軸的範圍
+    return ln,               #返回曲線
 
-def update(n):
-    xdata.append(n)         #将每次传过来的n追加到xdata中
+def update(n):  #n就是 FuncAnimation 裡面的 frames
+    print(n)
+    xdata.append(n)         #將每次傳過來的n追加到xdata中
     ydata.append(np.sin(n))
-    ln.set_data(xdata, ydata)    #重新设置曲线的值
+    ln.set_data(xdata, ydata)    #重新設置曲線的值
     return ln,
 
-ani = FuncAnimation(fig, update, frames=np.linspace(0, 2*np.pi, 10),     #这里的frames在调用update函数是会将frames作为实参传递给“n”
-                    init_func=init, blit=True)
+ani = FuncAnimation(fig, update, frames = np.linspace(0, 2 * np.pi, 10),     #這里的frames在調用update函數是會將frames作為實參傳遞給“n”
+                    init_func = init, interval = 100, blit = True)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
 
 

@@ -472,23 +472,6 @@ for x in (15, 25, 35, 45, 55):
 
 print('------------------------------------------------------------')	#60個
 
-from itertools import islice as _islice, count as _count
-
-# Helper to generate new thread names
-_counter = _count().__next__
-_counter() # Consume 0 so first non-main thread has id 1.
-def _newname(template="Thread-%d"):
-    return template % _counter()
-
-print(_newname())
-print(_newname())
-print(_newname())
-print(_newname())
-print(_newname())
-print(_newname())
-
-print('------------------------------------------------------------')	#60個
-
 import importlib
 import platform
 from types import ModuleType
