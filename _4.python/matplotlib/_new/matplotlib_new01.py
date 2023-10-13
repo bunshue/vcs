@@ -1,6 +1,10 @@
 import sys
 
 import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+print('------------------------------------------------------------')	#60個
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
@@ -193,6 +197,185 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
+
+n = np.linspace(1.1, 10, 90)            # 建立1.1-10的陣列
+count = 0                               # 用於計算每5筆輸出換行
+for i in n:
+    count += 1
+    print('{0:2.1f} = {1:4.3f}'.format(i, np.log10(i)), end='    ')
+    if count % 5 == 0:                  # 每5筆輸出就換行
+        print()
+
+print('------------------------------------------------------------')	#60個
+
+x1 = np.linspace(0.1, 10, 99)                   # 建立含30個元素的陣列
+x2 = np.linspace(0.1, 10, 99)                   # 建立含30個元素的陣列
+y1 = [math.log2(x) for x in x1]
+y2 = [math.log(x, 0.5) for x in x2]
+plt.plot(x1, y1, label="base = 2")
+plt.plot(x2, y2, label="base = 0.5")
+
+plt.legend(loc="best")                          # 建立圖例
+plt.axis([0, 10, -5, 5])
+plt.grid()
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+degrees = [30, 45, 60, 90, 120, 135, 150, 180]
+for degree in degrees:
+    print('角度 = {0:3d},   弧度 = {1:6.3f}'.format(degree, math.pi*degree/180))
+
+print('------------------------------------------------------------')	#60個
+
+degrees = [30, 60, 90, 120]
+r = 10
+for degree in degrees:
+    curve = 2 * math.pi * r * degree / 360
+    print('角度 = {0:3d},   弧長 = {1:6.3f}'.format(degree, curve))
+
+print('------------------------------------------------------------')	#60個
+
+degrees = [30, 60, 90, 120]
+r = 10
+for degree in degrees:
+    area = math.pi * r * r * degree / 360
+    print('角度 = {0:3d},   扇形面積 = {1:6.3f}'.format(degree, area))
+
+print('------------------------------------------------------------')	#60個
+
+degrees = [x*30 for x in range(0,13)]
+for d in degrees:
+    rad = math.radians(d)
+    sin = math.sin(rad)
+    cos = math.cos(rad)
+    print('角度={0:3d}, 弧度={1:5.2f}, sin{2:3d}={3:5.2f}, cos{4:3d}={5:5.2f}'
+          .format(d, rad, d, sin, d, cos))
+
+print('------------------------------------------------------------')	#60個
+
+degrees = [x*15 for x in range(0,25)]
+x = [math.cos(math.radians(d)) for d in degrees]
+y = [math.sin(math.radians(d)) for d in degrees]
+
+plt.scatter(x,y)
+plt.axis('equal')
+plt.grid()
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+degrees = np.arange(0, 360)
+x = np.cos(np.radians(degrees))
+y = np.sin(np.radians(degrees))
+
+plt.plot(x,y)
+plt.axis('equal')
+plt.grid()
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+x = np.linspace(0.1, 1000, 100000)          # 建立含100000個元素的陣列
+y = [(1+1/x)**x for x in x]
+plt.axis([0, 10, 0, 3])
+plt.plot(x, y, label="Euler's Number")
+
+plt.legend(loc="best")                      # 建立圖例
+plt.grid()
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+x = np.linspace(0.1, 1000, 100000)          # 建立含100000個元素的陣列
+y = [(1+1/x)**x for x in x]
+#plt.axis([0, 10, 0, 3])
+plt.plot(x, y, label="Euler's Number")
+
+plt.legend(loc="best")                      # 建立圖例
+plt.grid()
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+x = np.linspace(-5, 5, 10000)               # 建立含10000個元素的陣列
+y = [1/(1+np.e**-x) for x in x]
+plt.axis([-5, 5, 0, 1])
+plt.plot(x, y, label="Logistic function")
+
+plt.legend(loc="best")                      # 建立圖例
+plt.grid()
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+x = np.linspace(0.01, 0.99, 100)               # 建立含1000個元素的陣列
+y = [np.log(x/(1-x)) for x in x]
+plt.axis([0, 1, -5, 5])
+plt.plot(x, y, label="Logit function")
+plt.plot(0.5, np.log(0.5/(1-0.5)),'-o')
+
+plt.legend(loc="best")                          # 建立圖例
+plt.grid()
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+input_values = [1, 2, 3, 4, 5]
+squares = [1, 4, 9, 16, 25]
+
+#plt.style.use('seaborn')
+fig, ax = plt.subplots()
+ax.plot(input_values, squares, linewidth=3)
+
+# Set size of tick labels.
+ax.tick_params(axis='both', labelsize=14)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+x_values = range(1, 1001)
+y_values = [x**2 for x in x_values]
+
+#plt.style.use('seaborn')
+fig, ax = plt.subplots()
+ax.scatter(x_values, y_values, c=y_values, cmap=plt.cm.Blues, s=10)
+
+# Set size of tick labels.
+ax.tick_params(axis='both', which='major', labelsize=14)
+
+# Set the range for each axis.
+ax.axis([0, 1100, 0, 1100000])
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+

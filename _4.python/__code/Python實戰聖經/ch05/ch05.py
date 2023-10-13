@@ -4,7 +4,7 @@ pip install gTTS
 
 """
 
-'''
+import sys
 import gtts
 
 print('目前支援的語音種類 :')
@@ -41,7 +41,8 @@ r = sr.Recognizer()
 with sr.WavFile("record1.wav") as source:  #讀取wav檔
     audio = r.record(source)
 try:
-    word = r.recognize_google(audio, language="zh-TW")
+    word = r.recognize_google(audio, language = "zh-TW")
+    print("語音辨識OK, 內容 :")
     print(word)
 except:
     print("語音辨識失敗！")
@@ -56,15 +57,15 @@ print('------------------------------------------------------------')	#60個
 
 """
 
-'''
+
 print('------------------------------------------------------------')	#60個
 
 #google.colab 安裝失敗
-'''
+
 import speech_recognition as sr
 from pydub import AudioSegment
 from IPython.display import display, Javascript
-from google.colab.output import eval_js
+#from google.colab.output import eval_js
 from base64 import b64decode
  
 def record_audio(filename):
@@ -119,6 +120,7 @@ def record_audio(filename):
   except Exception as err:
     print(str(err))
 
+#record.webm 無此檔
 record_audio("record.webm")
 sound = AudioSegment.from_file("record.webm")
 sound.export("record.wav", format ='wav')
@@ -130,8 +132,6 @@ try:
     print("語音辨識結果：\n" + word)
 except:
     print("語音辨識失敗！")
-
-'''
 
 
 print('------------------------------------------------------------')	#60個
@@ -231,7 +231,6 @@ print(type(paper.articles))
 print(len(paper.articles))
 print(paper.articles)
 
-'''
 for article in paper.articles:
     url = article.url
     if '.html' in url:
@@ -253,7 +252,7 @@ for article in paper.articles:
         except:
             pass
         """
-'''
+
 
 print('------------------------------------------------------------')	#60個
 

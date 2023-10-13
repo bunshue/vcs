@@ -17,16 +17,18 @@ y = sympy.Symbol('y')
 
 eq1 = x + y - 1
 eq2 = 5 * x + y - 3
-eq1 = -1*x + y - 2  # -x + y - 2 = 0
-eq2 = 2*x + y - 4   # 2*x + y - 4 = 0
-eq1 = -3/2*x + 6 - y  # 直線1的式子
-eq2 = 1/2*x + 2 - y   # 直線2的式子
-eq1 = 4*x - 4*y      # 4*x - 4*y = 0
-eq2 = -6*x -2*y + 4  # -6*x - 2*y + 4
+eq1 = -1 * x + y - 2  # -x + y - 2 = 0
+eq2 = 2 * x + y - 4   # 2*x + y - 4 = 0
+eq1 = -3 / 2 * x + 6 - y  # 直線1的式子
+eq2 = 1 / 2 * x + 2 - y   # 直線2的式子
+eq1 = 4 * x - 4 * y      # 4*x - 4*y = 0
+eq2 = -6 * x -2 * y + 4  # -6*x - 2*y + 4
 eq1 = -x + y -2
 eq2 = x + y - 4
 eq1 = 8 - 0.6 * x - y                   # 方程式 1
 eq2 = 17.5 - 2.5 * x - y                # 方程式 2
+eq1 = x - y                 # 方程式 1 : x - y = 0
+eq2 = x + y - 10            # 方程式 2 : x + y - 10 = 0
 
 # 解二元一次方程式
 print(sympy.solve((eq1, eq2)))
@@ -55,13 +57,13 @@ pt_y1 = ans[a] * pt_x1 + ans[b]         # 計算x=600時的y值
 pt_x2 = 1000
 pt_y2 = ans[a] * pt_x2 + ans[b]         # 計算x=1000時的y值
 
-x = np.linspace(0, 2500, 250)
-y = ans[a] * x + ans[b]
-plt.plot(x, y)                          # 繪函數直線
+xx = np.linspace(0, 2500, 250)
+yy = ans[a] * xx + ans[b]
+plt.plot(xx, yy)                          # 繪函數直線
 plt.plot(pt_x1, pt_y1, '-o')            # 繪點 pt1
-plt.text(pt_x1+60, pt_y1-10, 'pt1')      # 輸出文字pt1
+plt.text(pt_x1 + 60, pt_y1 - 10, 'pt1')      # 輸出文字pt1
 plt.plot(pt_x2, pt_y2, '-o')            # 繪點 pt2
-plt.text(pt_x2+60, pt_y2-10, 'pt2')      # 輸出文字pt2
+plt.text(pt_x2 + 60, pt_y2 - 10, 'pt2')      # 輸出文字pt2
 plt.xlabel("Customers")
 plt.ylabel("Profit")
 plt.grid()                              # 加格線
@@ -231,6 +233,7 @@ r1_y = f1(r1)                                # f1(r1)
 plt.text(r1 - 0.2, r1_y + 0.3, '(' + str(round(r1, 2)) + ',' + str(0) + ')')         
 plt.plot(r1, r1_y, '-o')                    # 標記
 print('root1 = ', r1)                       # print(r1)
+
 r2 = (-b - (b ** 2 - 4 * a * c) ** 0.5) / (2 * a)         # r2
 r2_y = f1(r2)                                # f1(r2)
 plt.text(r2 - 0.2, r2_y + 0.3, '(' + str(round(r2, 2)) + ',' + str(0) + ')') 
@@ -238,9 +241,9 @@ plt.plot(r2, r2_y, '-o')                    # 標記
 print('root2 = ', r2)                       # print(r2)
 
 # 繪製此函數圖形
-x = np.linspace(0, 4, 50)
-y = 3 * x ** 2 - 12 * x + 10
-plt.plot(x, y)
+xx = np.linspace(0, 4, 50)
+yy = 3 * xx ** 2 - 12 * xx + 10
+plt.plot(xx, yy)
 
 plt.show()
 
@@ -258,9 +261,9 @@ print('a = {}'.format(root[a]))
 print('b = {}'.format(root[b]))
 print('c = {}'.format(root[c]))
 
-x = np.linspace(0, 5, 50)
-y = [(root[a] * y ** 2 + root[b] * y + root[c]) for y in x]
-plt.plot(x, y)                          # 繪二次函數
+xx = np.linspace(0, 5, 50)
+yy = [(root[a] * yy ** 2 + root[b] * yy + root[c]) for yy in xx]
+plt.plot(xx, yy)                          # 繪二次函數
 
 x4 = 4                                  # 第400次
 y4 = root[a] * x4 ** 2 + root[b] * x4 + root[c]  # 第400次的y值
@@ -294,9 +297,9 @@ print('a = {}'.format(root[a]))
 print('b = {}'.format(root[b]))
 print('c = {}'.format(root[c]))
 
-x = np.linspace(0, 4, 50)
-y = [(root[a] * y ** 2 + root[b] * y + root[c]) for y in x]
-plt.plot(x, y)                          # 繪二次函數
+xx = np.linspace(0, 4, 50)
+yy = [(root[a] * yy ** 2 + root[b] * yy + root[c]) for yy in xx]
+plt.plot(xx, yy)                          # 繪二次函數
 
 plt.plot(1, 10, '-x', color = 'b')        # 繪1次業績點
 plt.plot(2, 18, '-x', color = 'b')        # 繪2次業績點
@@ -314,6 +317,8 @@ plt.ylabel("Performance")
 plt.grid()                              # 加格線
 
 plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

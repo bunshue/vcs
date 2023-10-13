@@ -36,7 +36,7 @@ Dictionary(字典)
 Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的語法是key: value，一個key對應一個value，key不一定要是字串，但必須是唯一的。
 
 """
-'''
+
 print('建立空容器')
 
 a_dict = {}
@@ -1664,35 +1664,41 @@ print(years)
 
 print('------------------------------------------------------------')	#60個
 
-fields = ['Name', 'Age', 'Hometown']
-info = ['Peter', '30', 'Chicago']
+fields = ['name', 'weight', 'cname']
+info = ['mouse', '3', '鼠']
+
 zipData = zip(fields, info)     # 執行zip
 print(type(zipData))            # 列印zip資料類型
+
 player = list(zipData)          # 將zip資料轉成串列
 print(player)
 
 print('------------------------------------------------------------')	#60個
 
-fields = ['Name', 'Age', 'Hometown']
-info = ['Peter', '30']
+#資料有欠缺之zip
+fields = ['name', 'weight', 'cname']
+info = ['mouse', '3']
+
 zipData = zip(fields, info)   # 執行zip
 print(type(zipData))          # 列印zip資料類型
+
 player = list(zipData)        # 將zip資料轉成串列
 print(player)                 # 列印串列
 
 print('------------------------------------------------------------')	#60個
 
-fields = ['Name', 'Age', 'Hometown']
-info = ['Peter', '30', 'Chicago']
+fields = ['name', 'weight', 'cname']
+info = ['mouse', '3', '鼠']
+
 zipData = zip(fields, info)     # 執行zip
 print(type(zipData))            # 列印zip資料類型
+
 player = list(zipData)          # 將zip資料轉成串列
 print(player)                   # 列印串列
 
 f, i = zip(*player)             # 執行unzip
 print("fields = ", f)
 print("info   = ", i)
-
 
 print('---- map --------------------------------------------------------')	#60個
 
@@ -1704,123 +1710,120 @@ def pick(x):
 
 alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
 choices = map(pick, alist)
+
 print(type(alist))
 print(type(choices))
 
 for choice in choices:
     print(choice)
 
-'''
+sys.exit()
+
 print('------------------------------------------------------------')	#60個
 
-#字典的排序
+#字典的排序, 使用lambda
 
 animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 
 print(animals.items())
 
-print(sorted(animals.items(), key=lambda x: x[1]))
+print(sorted(animals.items(), key = lambda x : x[1]))
 
-print(sorted(animals.items(), key=lambda x: x[1], reverse=True))
+print(sorted(animals.items(), key = lambda x : x[1], reverse = True))
 
 
+#字典的排序, 使用sort
 
-# 7-2-1 用 sort() 排序 dict
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
 
-xs = {'a': 4, 'c': 1, 'd': 3, 'b': 2}
+print(animals.items())
 
-print(xs.items())
+print(sorted(animals.items()))
 
-print(sorted(xs.items()))
-
-for key, item in sorted(xs.items()):
+for key, item in sorted(animals.items()):
     print(key, item)
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
 # 字典之合併: 使用 update
 
-default = {
-    'user': 'guest',
-    'lang': 'Python',
-    'version': 3.7
+animal = {
+    'name': 'mouse',
+    'class': 'A',
+    'weight': 3
     }
 
-user1 = {
-    'user': 'user 1',
-    'version': 3.8,
-    'platform': 'linux'
+animal_new_data = {
+    'name': '鼠',
+    'weight': 5,
+    'sports': 'soccer'
     }
 
-default.update(user1)
+animal.update(animal_new_data)
 
-print(default)
+print(animal)
 
 print('------------------------------------------------------------')	#60個
 
-# 7-5-4 dict 合併: 使用聯集算符 (注意: 限 Python 3.9+)
+# 字典之合併: 使用 聯集算符
 
-default = {
-    'user': 'guest',
-    'lang': 'Python',
-    'version': 3.7
+animal = {
+    'name': 'mouse',
+    'class': 'A',
+    'weight': 3
     }
 
-user1 = {
-    'user': 'user 1',
-    'version': 3.8,
-    'platform': 'linux'
+animal_new_data = {
+    'name': '鼠',
+    'weight': 5,
+    'sports': 'soccer'
     }
 
-new_setting = default | user1
+new_setting = animal | animal_new_data
 
 print(new_setting)
 
-default |= user1
+animal |= animal_new_data
 
-print(default)
+print(animal)
 
 print('------------------------------------------------------------')	#60個
 
-# 7-5-3 dict 合併: 使用多重解包 (Python 3.5+)
+# 字典之合併: 使用 多重解包
 
-default = {
-    'user': 'guest',
-    'lang': 'Python',
-    'version': 3.7
+animal = {
+    'name': 'mouse',
+    'class': 'A',
+    'weight': 3
     }
 
-user1 = {
-    'user': 'user 1',
-    'version': 3.8,
-    'platform': 'linux'
+animal_new_data = {
+    'name': '鼠',
+    'weight': 5,
+    'sports': 'soccer'
     }
 
-new_setting = {**default, **user1}
+new_setting = {**animal, **animal_new_data}
 
 print(new_setting)
 
-
-
 print('------------------------------------------------------------')	#60個
 
-# 7-5-2 dict 合併: 使用 dict() 與 **
+# 字典之合併: 使用 dict() 與 **
 
-default = {
-    'user': 'guest',
-    'lang': 'Python',
-    'version': 3.7
+animal = {
+    'name': 'mouse',
+    'class': 'A',
+    'weight': 3
     }
 
-user1 = {
-    'user': 'user 1',
-    'version': 3.8,
-    'platform': 'linux'
+animal_new_data = {
+    'name': '鼠',
+    'weight': 5,
+    'sports': 'soccer'
     }
 
-new_setting = dict(default, **user1)
+new_setting = dict(animal, **animal_new_data)
 
 print(new_setting)
 
