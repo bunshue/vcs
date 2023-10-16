@@ -403,28 +403,34 @@ print("加密字串 ", ciphertext)
 
 print('------------------------------------------------------------')	#60個
 
-print('摩斯密碼字典')
-morse_code = {'A':'.-', 'B':'-...', 'C':'-.-.','D':'-..','E':'.',
-              'F':'..-.', 'G':'--.', 'H':'....', 'I':'..', 'J':'.---',
-              'K':'-.-', 'L':'.-..','M':'--', 'N':'-.','O':'---',
-              'P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-',
-              'U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--',
-              'Z':'--..'}
+print('動物字典對應')
 
-print(type(morse_code))
+animals = {'鼠' : ('mouse', 3),
+           '牛' : ('ox', 48),
+           '虎' : ('tiger', 33),
+           '兔' : ('rabbit', 8),
+           '龍' : ('dragon', 38),
+           '蛇' : ('snake', 16),
+           '馬' : ('horse', 36),
+           '羊' : ('goat', 29),
+           '猴' : ('monkey', 22),
+           '雞' : ('chicken', 6),
+           '狗' : ('dog', 12),
+           '豬' : ('pig', 42),
+           }
 
-#wd = input("請輸入大寫英文字: ")
-wd = 'ABCDEFGHIJK'
+print(type(animals))
 
-for c in wd:
-    print(morse_code[c])
+all_animals = list('鼠牛虎兔龍蛇馬羊猴雞狗豬')
+
+for ani in all_animals:
+    print(animals[ani])
 
 print('------------------------------------------------------------')	#60個
 
 animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
-print(animals)
-print(type(animals))
 print('打印字典的內容1')
+print(type(animals))
 print(animals)
 
 print('打印字典的內容2')
@@ -862,17 +868,17 @@ print('字串 轉 串列')
 s = list('鼠牛虎兔龍蛇馬羊猴雞狗豬')
 print(type(s))
 print(s)
-s = list("3874950382")
 
-#print(sum(map(int, s)))    fail in kilo
+print('字串 轉 串列')
+s = list('0912345678')
 
-"""
 numbers = list()
 
 for c in s:
     numbers.append(int(c))
-#print(sum(numbers))    fail in kilo
-"""
+
+print(type(numbers))
+print(numbers)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1014,12 +1020,21 @@ dates = [
     ]
 ]
 
-print('印出三維 串列')
+print(type(dates))
+print(len(dates))
+print('直接印出 此 三維 串列')
+print(dates)
+             
+print('用迴圈印出 此 三維 串列')
 for i in range(5):
     for j in range(4):
          for k in range(4):
              print(format(dates[i][j][k], '4d'), end = " ")
          print()
+
+print('------------------------------------------------------------')	#60個
+
+print('二維 串列')
 
 person_data = [
     (110, 48226, 46644, 94870),
@@ -1036,7 +1051,6 @@ person_data = [
 person_data.reverse()   # 顛倒排序串列
 print(type(person_data))
 print(person_data)
-
 print(len(person_data))
 
 print('提取 前n筆資料, 組成一個二維 串列')
@@ -1055,37 +1069,36 @@ print(person_data[a:b:c])
 
 #取第一欄出來 成一個 串列 ??
 
-print('串列 之使用')
-
 print('------------------------------------------------------------')	#60個
 
 print('串列, 建立內含元組的串列')
 
-data = list()
+animals = list()
 for page in range(1, 6):
-    pdate = 'aaaa'
-    title = 'bbbb'
-    link = 'cccc'
-    data.append((pdate, link, title))
-print(type(data))
-print(data)
+    name = '鼠'
+    ename = 'mouse'
+    weight = 3
+    tt = (name, ename, weight)   #組合成一個元組
+    animals.append(tt)
+
+print(type(animals))
+print(animals)
 
 print('------------------------------------------------------------')	#60個
 
 print('串列, 建立內含字典的串列')
 
-contents = list()
+animals = list()
 
 for page in range(1, 6):
-    content = dict()
-    content['link'] = 'aaaaa'
-    content['content'] = 'bbbbb'
-    content['date'] = 'ccccc'
-    content['title'] = 'ddddd'
-    contents.append(content)
+    dd = dict()
+    dd['name'] = '鼠'
+    dd['ename'] = 'mouse'
+    dd['weight'] = '3'
+    animals.append(dd)
     
-print(type(contents))
-print(contents)
+print(type(animals))
+print(animals)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1444,23 +1457,6 @@ for aaa in _size_factors:
 
 print('------------------------------------------------------------')	#60個
 
-print('字典範例 _deprecations')
-_deprecations = {
-    "JPEGBaseline": "JPEGBaseline8Bit",
-    "JPEGExtended": "JPEGExtended12Bit",
-    "JPEGLossless": "JPEGLosslessSV1",
-    "JPEGLSLossy": "JPEGLSNearLossless",
-    "JPEG2000MultiComponentLossless": "JPEG2000MCLossless",
-    "JPEG2000MultiComponent": "JPEG2000MC",
-}
-
-print(type(_deprecations))
-
-for name in _deprecations:
-    print(name)
-
-print('------------------------------------------------------------')	#60個
-
 import os
 import string
 
@@ -1575,17 +1571,15 @@ list1.append(234)
 list1.append(321)
 list1.append(101)
 #list1.pop()
-"""
 print('共輸入 %d 個數' % len(list1))
 print('最大：%d' % max(list1))
 print('最小：%d' % min(list1))
-print('總和：%d' % sum(list1))
+#print('總和：%d' % sum(list1))
 print('由大到小排序為：{}'.format(sorted(list1, reverse = True)))
-"""
 
 print('------------------------------------------------------------')	#60個
 
-animals = ['鼠', '牛', '虎', '兔']
+animals = ['鼠', '牛', '虎', '兔', '龍'] #串列
 print(type(animals))
 print(animals)
 for animal in animals:
@@ -1717,7 +1711,6 @@ print(type(choices))
 for choice in choices:
     print(choice)
 
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -1778,7 +1771,7 @@ animal_new_data = {
     'weight': 5,
     'sports': 'soccer'
     }
-
+""" fail in kilo
 new_setting = animal | animal_new_data
 
 print(new_setting)
@@ -1786,7 +1779,7 @@ print(new_setting)
 animal |= animal_new_data
 
 print(animal)
-
+"""
 print('------------------------------------------------------------')	#60個
 
 # 字典之合併: 使用 多重解包

@@ -4,7 +4,7 @@ import time
 import random
 import numpy as np
 
-
+'''
 print('------------------------------------------------------------')	#60個
 
 print('---- 字串處理專區 --------------------------------------------------------')	#60個
@@ -71,16 +71,6 @@ print('字串處理')
 
 items = "03/11/2006".split("/")
 print(items)
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-name = filename.split('/')
-print(len(name))
-print(name)
-print(type(name))
-
-ccc = name.reverse()
-print(ccc)
 
 print('------------------------------------------------------------')	#60個
 
@@ -513,50 +503,6 @@ print_table(version_rows)
 
 print('------------------------------------------------------------')	#60個
 
-from os.path import abspath
-
-def _basename(path):
-    # A basename() variant which first strips the trailing slash, if present.
-    # Thus we always get the last component of the path, even for directories.
-    sep = os.path.sep + (os.path.altsep or '')
-    return os.path.basename(path.rstrip(sep))
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-base_name = _basename(filename)
-print(base_name)
-
-src = abspath(base_name)
-print(src)
-
-zip_filename = base_name + ".zip"
-print(zip_filename)
-
-print('------------------------------------------------------------')	#60個
-
-foldername = 'C:/_git/vcs/_1.data/______test_files2'
-
-normdir = os.path.normcase(foldername)
-print(normdir)
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-print('尋找python程式碼的所在地')
-
-module_name = 'pytube'
-code_place = os.path.dirname(__import__(module_name).__file__)
-print(code_place)
-
-
-print('取得相對路徑')
-foldername = 'C:/_git/vcs/_1.data/______test_files1/'
-fn = os.path.relpath(foldername, code_place)
-
-print(fn)
-
-print('------------------------------------------------------------')	#60個
-
 ENDMARKER = 0
 NAME = 1
 NUMBER = 2
@@ -586,27 +532,20 @@ print('------------------------------------------------------------')	#60個
 
 import os
 print(os.name)
-print(os.name)
-print(os.name)
 
 if os.name == 'nt':
-    print('kkk')
+    print('Windows NT 系統')
     import nt
+    print(sys.getwindowsversion())
+    print(sys.getwindowsversion()[:2])
     if sys.getwindowsversion()[:2] >= (6, 0):
-        print('aaa')
+        print('Win10')
     else:
-        print('bbb')
+        print('非Win10')
+else:
+    print('非 Windows NT 系統')
 
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
 
 dist = 384400                   # 地球到月亮距離
 speed = 1225                    # 馬赫速度每小時1225公里
@@ -1240,6 +1179,9 @@ for y in range(HEIGHT):
         print(cells[(x, y)], end = '')
     print()
 
+print('------------------------------------------------------------')	#60個
+
+"""
 print('Press Ctrl-C to quit.')
 
 while True:
@@ -1249,6 +1191,7 @@ while True:
     except KeyboardInterrupt:
         print('你按了 ctrl + C, 離開')
         sys.exit()
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -1256,15 +1199,6 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
-
-import os
-import sys
-
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-print('------------------------------------------------------------')	#60個
-
 
 print('---- os --------------------------------------------------------')	#60個
 
@@ -1314,34 +1248,12 @@ m = sys.modules.get('__main__')
 
 print(m)
 
-
-
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-name = os.path.basename(filename)
-
-print(name)
-
+print('------------------------------------------------------------')	#60個
 
 globs = {}
 globs = globs.copy()
 print(globs)
 
-print()
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-if filename.endswith(".jpg"):
-    # It is a module -- insert its dir into sys.path and try to
-    # import it. If it is part of a package, that possibly
-    # won't work because of package imports.
-    dirname, filename = os.path.split(filename)
-    print(filename[:-3])
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -1361,18 +1273,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-print(filename)
-filename = os.path.normcase(filename)
-print(filename)
-
-print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
@@ -1470,6 +1370,20 @@ if decimal == None:
     print("Incorrect hex number")
 else:
     print("The decimal value for hex number", hex, "is", decimal) 
+'''
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -1477,5 +1391,6 @@ print('------------------------------------------------------------')	#60個
 
 
 
+print('作業完成')
 
 

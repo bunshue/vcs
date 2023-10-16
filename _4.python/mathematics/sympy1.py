@@ -15,27 +15,15 @@ print('解二元一次方程式')
 x = sympy.Symbol('x')
 y = sympy.Symbol('y')
 
-eq1 = x + y - 1
-eq2 = 5 * x + y - 3
-eq1 = -1 * x + y - 2  # -x + y - 2 = 0
-eq2 = 2 * x + y - 4   # 2*x + y - 4 = 0
-eq1 = -3 / 2 * x + 6 - y  # 直線1的式子
-eq2 = 1 / 2 * x + 2 - y   # 直線2的式子
-eq1 = 4 * x - 4 * y      # 4*x - 4*y = 0
-eq2 = -6 * x -2 * y + 4  # -6*x - 2*y + 4
-eq1 = -x + y -2
-eq2 = x + y - 4
-eq1 = 8 - 0.6 * x - y                   # 方程式 1
-eq2 = 17.5 - 2.5 * x - y                # 方程式 2
 eq1 = x - y                 # 方程式 1 : x - y = 0
 eq2 = x + y - 10            # 方程式 2 : x + y - 10 = 0
 
 # 解二元一次方程式
-print(sympy.solve((eq1, eq2)))
-
-ans = sympy.solve((eq1, eq2))
-print('x = {}'.format(ans[x]))
-print('y = {}'.format(ans[y]))
+root = sympy.solve((eq1, eq2))
+print(type(root))
+print(root)
+print('x = {}'.format(root[x]))
+print('y = {}'.format(root[y]))
 
 print('------------------------------------------------------------')	#60個
 
@@ -44,26 +32,29 @@ print('解二元一次方程式')
 # 定義公式中使用的變數
 a = sympy.Symbol('a')                 # 定義公式中使用的變數
 b = sympy.Symbol('b')                 # 定義公式中使用的變數
-eq1 = a + b - 1                 # 方程式 1
-eq2 = 5 * a + b - 2             # 方程式 2
-ans = sympy.solve((eq1, eq2))
-print(type(ans))
-print(ans)
-print('a = {}'.format(ans[a]))
-print('b = {}'.format(ans[b]))
+eq1 = a - b                 # 方程式 1 : x - y = 0
+eq2 = a + b - 10            # 方程式 2 : x + y - 10 = 0
+root = sympy.solve((eq1, eq2))
+print(type(root))
+print(root)
+print('a = {}'.format(root[a]))
+print('b = {}'.format(root[b]))
 
-pt_x1 = 600                             
-pt_y1 = ans[a] * pt_x1 + ans[b]         # 計算x=600時的y值
-pt_x2 = 1000
-pt_y2 = ans[a] * pt_x2 + ans[b]         # 計算x=1000時的y值
+pt_x1 = 60                             
+pt_y1 = root[a] * pt_x1 + root[b]         # 計算x=60時的y值
+pt_x2 = 100
+pt_y2 = root[a] * pt_x2 + root[b]         # 計算x=100時的y值
 
-xx = np.linspace(0, 2500, 250)
-yy = ans[a] * xx + ans[b]
+xx = np.linspace(0, 250, 251)
+yy = root[a] * xx + root[b]
 plt.plot(xx, yy)                          # 繪函數直線
+
 plt.plot(pt_x1, pt_y1, '-o')            # 繪點 pt1
-plt.text(pt_x1 + 60, pt_y1 - 10, 'pt1')      # 輸出文字pt1
+plt.text(pt_x1 + 10, pt_y1 - 10, 'pt1')      # 輸出文字pt1
+
 plt.plot(pt_x2, pt_y2, '-o')            # 繪點 pt2
-plt.text(pt_x2 + 60, pt_y2 - 10, 'pt2')      # 輸出文字pt2
+plt.text(pt_x2 + 10, pt_y2 - 10, 'pt2')      # 輸出文字pt2
+
 plt.xlabel("Customers")
 plt.ylabel("Profit")
 plt.grid()                              # 加格線
@@ -79,22 +70,24 @@ x = sympy.Symbol('x')                         # 定義公式中使用的變數
 y = sympy.Symbol('y')                         # 定義公式中使用的變數
 eq1 = x + y - 35                        # 方程式 1
 eq2 = 2 * x + 4 * y - 100               # 方程式 2
-ans = sympy.solve((eq1, eq2))
-print('雞 = {}'.format(ans[x]))
-print('兔 = {}'.format(ans[y]))
+eq1 = x - y                 # 方程式 1 : x - y = 0
+eq2 = x + y - 10            # 方程式 2 : x + y - 10 = 0
+root = sympy.solve((eq1, eq2))
+print('x = {}'.format(root[x]))
+print('y = {}'.format(root[y]))
 
-line1_x = np.linspace(0, 100, 100)
-line1_y = [35 - y for y in line1_x]
-line2_x = np.linspace(0, 100, 100)
-line2_y = [25 - 0.5 * y for y in line2_x]
+line1_x = np.linspace(0, 10, 100)
+line1_y = [y for y in line1_x]
+line2_x = np.linspace(0, 10, 100)
+line2_y = [10 - y for y in line2_x]
 
-plt.plot(line1_x, line1_y)              # 繪函數直線公式 1
-plt.plot(line2_x, line2_y)              # 繪函數直線公式 2
+plt.plot(line1_x, line1_y, 'r')              # 繪函數直線公式 1
+plt.plot(line2_x, line2_y, 'g')              # 繪函數直線公式 2
 
-plt.plot(ans[x], ans[y], '-o')          # 繪交叉點
-plt.text(ans[x]-5, ans[y]+5, '('+str(ans[x])+','+str(ans[y])+')')
-plt.xlabel("Chicken")
-plt.ylabel("Rabbit")
+plt.plot(root[x], root[y], 'b-o')          # 繪交叉點
+plt.text(root[x] + 0.5, root[y] + 0, '(' + str(root[x]) + ',' + str(root[y]) + ')')
+plt.xlabel('x')
+plt.ylabel('y')
 plt.grid()                              # 加格線
 
 plt.show()
@@ -108,22 +101,24 @@ x = sympy.Symbol('x')                         # 定義公式中使用的變數
 y = sympy.Symbol('y')                         # 定義公式中使用的變數
 eq1 = x + y - 100                       # 方程式 1
 eq2 = 2 * x + 4 * y - 350               # 方程式 2
-ans = sympy.solve((eq1, eq2))
-print('菜鳥業務員須外出天數 = {}'.format(ans[x]))
-print('資深業務員須外出天數 = {}'.format(ans[y]))
+eq1 = x - y                 # 方程式 1 : x - y = 0
+eq2 = x + y - 10            # 方程式 2 : x + y - 10 = 0
+root = sympy.solve((eq1, eq2))
+print('x = {}'.format(root[x]))
+print('y = {}'.format(root[y]))
 
-line1_x = np.linspace(0, 100, 100)
-line1_y = [100 - y for y in line1_x]
-line2_x = np.linspace(0, 100, 100)
-line2_y = [(350 - 2 * y) / 4 for y in line2_x]
+line1_x = np.linspace(0, 10, 100)
+line1_y = [y for y in line1_x]
+line2_x = np.linspace(0, 10, 100)
+line2_y = [10 - y for y in line2_x]
 
-plt.plot(line1_x, line1_y)              # 繪函數直線公式 1
-plt.plot(line2_x, line2_y)              # 繪函數直線公式 2
+plt.plot(line1_x, line1_y, 'r')              # 繪函數直線公式 1
+plt.plot(line2_x, line2_y, 'g')              # 繪函數直線公式 2
 
-plt.plot(ans[x], ans[y], '-o')          # 繪交叉點
-plt.text(ans[x]-5, ans[y]+5, '('+str(ans[x])+','+str(ans[y])+')')
-plt.xlabel("Junior Salesman")
-plt.ylabel("Senior Salesman")
+plt.plot(root[x], root[y], 'b-o')          # 繪交叉點
+plt.text(root[x] + 0.5, root[y] + 0, '(' + str(root[x]) + ',' + str(root[y]) + ')')
+plt.xlabel('x')
+plt.ylabel('y')
 plt.grid()                              # 加格線
 
 plt.show()
@@ -137,22 +132,25 @@ x = sympy.Symbol('x')                         # 定義公式中使用的變數
 y = sympy.Symbol('y')                         # 定義公式中使用的變數
 eq1 = x - y                             # 方程式 1
 eq2 = -x -y + 2                         # 方程式 2
-ans = sympy.solve((eq1, eq2))
-print('x = {}'.format(ans[x]))
-print('y = {}'.format(ans[y]))
+eq1 = x - y                 # 方程式 1 : x - y = 0
+eq2 = x + y - 10            # 方程式 2 : x + y - 10 = 0
 
-line1_x = np.linspace(-5, 5, 10)
+root = sympy.solve((eq1, eq2))
+print('x = {}'.format(root[x]))
+print('y = {}'.format(root[y]))
+
+line1_x = np.linspace(0, 10, 100)
 line1_y = [y for y in line1_x]
-line2_x = np.linspace(-5, 5, 10)
-line2_y = [-y + 2 for y in line2_x]
+line2_x = np.linspace(0, 10, 100)
+line2_y = [10 - y for y in line2_x]
 
-plt.plot(line1_x, line1_y)              # 繪函數直線公式 1
-plt.plot(line2_x, line2_y)              # 繪函數直線公式 2
+plt.plot(line1_x, line1_y, 'r')              # 繪函數直線公式 1
+plt.plot(line2_x, line2_y, 'g')              # 繪函數直線公式 2
 
-plt.plot(ans[x], ans[y], '-o')          # 繪交叉點
-plt.text(ans[x]-0.5, ans[y]+0.3, '('+str(ans[x])+','+str(ans[y])+')')
-plt.xlabel("x-axis")
-plt.ylabel("y-axis")
+plt.plot(root[x], root[y], 'b-o')          # 繪交叉點
+plt.text(root[x]  + 0.5, root[y] + 0, '(' + str(root[x]) + ',' + str(root[y]) + ')')
+plt.xlabel('x')
+plt.ylabel('y')
 plt.grid()                              # 加格線
 plt.axis('equal')                       # 讓x, y軸距長度一致
 
@@ -167,22 +165,24 @@ x = sympy.Symbol('x')                         # 定義公式中使用的變數
 y = sympy.Symbol('y')                         # 定義公式中使用的變數
 eq1 = 0.5 * x - y - 0.5                 # 方程式 1
 eq2 = -2 * x - y + 7                    # 方程式 2
-ans = sympy.solve((eq1, eq2))
-print('x = {}'.format(ans[x]))
-print('y = {}'.format(ans[y]))
+eq1 = x - y                 # 方程式 1 : x - y = 0
+eq2 = x + y - 10            # 方程式 2 : x + y - 10 = 0
+root = sympy.solve((eq1, eq2))
+print('x = {}'.format(root[x]))
+print('y = {}'.format(root[y]))
 
-line1_x = np.linspace(-5, 5, 10)
-line1_y = [(0.5 * y - 0.5) for y in line1_x]
-line2_x = np.linspace(-5, 5, 10)
-line2_y = [(-2 * y + 7) for y in line2_x]
+line1_x = np.linspace(0, 10, 100)
+line1_y = [y for y in line1_x]
+line2_x = np.linspace(0, 10, 100)
+line2_y = [10 - y for y in line2_x]
 
-plt.plot(line1_x, line1_y)              # 繪函數直線公式 1
-plt.plot(line2_x, line2_y)              # 繪函數直線公式 2
+plt.plot(line1_x, line1_y, 'r')              # 繪函數直線公式 1
+plt.plot(line2_x, line2_y, 'g')              # 繪函數直線公式 2
 
-plt.plot(ans[x], ans[y], '-o')          # 繪交叉點
-plt.text(ans[x]-0.7, ans[y]+0.5, '('+str(int(ans[x]))+','+str(int(ans[y]))+')')
-plt.xlabel("x-axis")
-plt.ylabel("y-axis")
+plt.plot(root[x], root[y], 'b-o')          # 繪交叉點
+plt.text(root[x] + 0.5, root[y] + 0, '(' + str(int(root[x])) + ',' + str(int(root[y])) + ')')
+plt.xlabel('x')
+plt.ylabel('y')
 plt.grid()                              # 加格線
 plt.axis('equal')                       # 讓x, y軸距長度一致
 
@@ -208,7 +208,6 @@ print('解一元二次方程式 f = -3.5x^2 + 18.5x - 20')
 f = -3.5 * x ** 2 + 18.5 * x - 20
 
 root = sympy.solve(f)
-root = sympy.solve(f)
 
 print(root)
 
@@ -218,6 +217,8 @@ print('x1 = {}'.format(x1))
 print('x2 = {}'.format(x2))
 
 print('------------------------------------------------------------')	#60個
+
+print('解一元二次方程式')
 
 def f1(x):   #求解方程式
     return (3 * x ** 2 - 12 * x + 10)
@@ -248,6 +249,8 @@ plt.plot(xx, yy)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+print('解三元一次方程式')
 
 # 定義公式中使用的變數
 a = sympy.Symbol('a')                         # 定義公式中使用的變數
@@ -285,6 +288,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+print('解三元一次方程式')
+
 # 定義公式中使用的變數
 a = sympy.Symbol('a')                         # 定義公式中使用的變數
 b = sympy.Symbol('b')                         # 定義公式中使用的變數
@@ -317,8 +322,6 @@ plt.ylabel("Performance")
 plt.grid()                              # 加格線
 
 plt.show()
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -376,4 +379,20 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
+'''
+eq1 = x + y - 1
+eq2 = 5 * x + y - 3
+eq1 = -1 * x + y - 2  # -x + y - 2 = 0
+eq2 = 2 * x + y - 4   # 2*x + y - 4 = 0
+eq1 = -3 / 2 * x + 6 - y  # 直線1的式子
+eq2 = 1 / 2 * x + 2 - y   # 直線2的式子
+eq1 = 4 * x - 4 * y      # 4*x - 4*y = 0
+eq2 = -6 * x -2 * y + 4  # -6*x - 2*y + 4
+eq1 = -x + y -2
+eq2 = x + y - 4
+eq1 = 8 - 0.6 * x - y                   # 方程式 1
+eq2 = 17.5 - 2.5 * x - y                # 方程式 2
 
+
+
+'''

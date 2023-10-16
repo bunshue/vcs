@@ -265,7 +265,8 @@ namespace vcs_DrAP
             bt_search_pattern_opengl.Location = new Point(x_st + dx * 2, y_st + dy);
             bt_edit_python_files.Location = new Point(x_st + dx * 3, y_st + dy);
             cb_option1.Location = new Point(x_st + dx * 4, y_st + dy);
-            cb_option2.Location = new Point(x_st + dx * 4, y_st + dy + 20);
+            cb_option2.Location = new Point(x_st + dx * 4, y_st + dy + 17);
+            cb_option3.Location = new Point(x_st + dx * 4, y_st + dy + 34);
 
             bt_open_dir2.Location = new Point(x_st + dx * 2, y_st);
             bt_save_file_data.Location = new Point(x_st + dx * 3, y_st);
@@ -1707,7 +1708,37 @@ namespace vcs_DrAP
                     foreach (string subdirectory in subdirectoryEntries)
                     {
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
-                        ProcessDirectoryS(subdirectory);
+                        //richTextBox2.Text += subdirectory + "\n";
+                        if ((search_mode == SEARCH_MODE_PYTHON) && (cb_option3.Checked == true))
+                        {
+                            string search_folder = @"C:\_git\vcs\_4.python\__code";
+                            if (subdirectory.Contains(search_folder))
+                            {
+                                ProcessDirectoryS(subdirectory);
+                            }
+                            else
+                            {
+                                richTextBox2.Text += "跳過 " + subdirectory + "\n";
+                                continue;
+                            }
+                        }
+                        else if ((search_mode == SEARCH_MODE_PYTHON) && (cb_option3.Checked == false))
+                        {
+                            string skip_folder = @"C:\_git\vcs\_4.python\__code";
+                            if (subdirectory.Contains(skip_folder))
+                            {
+                                richTextBox2.Text += "跳過 " + subdirectory + "\n";
+                                continue;
+                            }
+                            else
+                            {
+                                ProcessDirectoryS(subdirectory);
+                            }
+                        }
+                        else
+                        {
+                            ProcessDirectoryS(subdirectory);
+                        }
                     }
                 }
                 catch (UnauthorizedAccessException ex)

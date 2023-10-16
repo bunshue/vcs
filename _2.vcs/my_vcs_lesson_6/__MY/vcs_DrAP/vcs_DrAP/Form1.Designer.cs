@@ -93,6 +93,7 @@
             this.bt_start_files = new System.Windows.Forms.Button();
             this.bt_open_dir = new System.Windows.Forms.Button();
             this.bt_save_data = new System.Windows.Forms.Button();
+            this.cb_option3 = new System.Windows.Forms.CheckBox();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -650,7 +651,7 @@
             // cb_option2
             // 
             this.cb_option2.AutoSize = true;
-            this.cb_option2.Location = new System.Drawing.Point(1472, 31);
+            this.cb_option2.Location = new System.Drawing.Point(1472, 24);
             this.cb_option2.Name = "cb_option2";
             this.cb_option2.Size = new System.Drawing.Size(84, 16);
             this.cb_option2.TabIndex = 61;
@@ -828,11 +829,22 @@
             this.bt_save_data.UseVisualStyleBackColor = true;
             this.bt_save_data.Click += new System.EventHandler(this.bt_save_data_Click);
             // 
+            // cb_option3
+            // 
+            this.cb_option3.AutoSize = true;
+            this.cb_option3.Location = new System.Drawing.Point(1472, 37);
+            this.cb_option3.Name = "cb_option3";
+            this.cb_option3.Size = new System.Drawing.Size(72, 16);
+            this.cb_option3.TabIndex = 63;
+            this.cb_option3.Text = "只找範例";
+            this.cb_option3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.cb_option3);
             this.Controls.Add(this.bt_edit_python_files);
             this.Controls.Add(this.cb_option2);
             this.Controls.Add(this.bt_search_pattern_opengl);
@@ -966,6 +978,7 @@
         private System.Windows.Forms.Button bt_search_pattern_opengl;
         private System.Windows.Forms.CheckBox cb_option2;
         private System.Windows.Forms.Button bt_edit_python_files;
+        private System.Windows.Forms.CheckBox cb_option3;
     }
 }
 

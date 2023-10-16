@@ -201,6 +201,130 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+print('------------------------------------------------------------')	#60個
+
+print('itertools 模組: count() 無限計數器')
+"""
+for item in itertools.count(3, 2):
+    print(item)
+"""
+
+print('itertools 模組: cycle() 無限循環')
+"""
+for item in itertools.cycle(range(3)):
+    print(item)
+"""
+
+print('itertools 模組: repeat() 無限重複')
+
+for item in itertools.repeat('Hello!', 5):
+    print(item)
+
+    
+print('itertools 模組: chain() 串聯可走訪物件')
+
+print(list(itertools.chain(
+        ['A', 'B', 'C'],
+        [1, 2, 3],
+        [True, False]
+    )))
+
+
+matrix = [
+        ['A', 'B', 'C'],
+        [1, 2, 3],
+        [True, False]
+    ]
+
+print(list(itertools.chain.from_iterable(matrix)))
+
+
+print('itertools 模組: zip_longest() - 完整走訪版 zip')
+
+x = ['A', 'B', 'C', 'D', 'E']
+y = [1, 2, 3]
+
+print(list(zip(x, y)))
+
+print(list(itertools.zip_longest(x, y)))
+
+print(list(itertools.zip_longest(x, y, fillvalue=0)))
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('itertools 模組: islice() 切片')
+
+import itertools
+
+n = [0, 1, 2, 3, 4]
+
+print(list(itertools.islice(n, 3)))
+
+print(list(itertools.islice(n, 1, 3)))
+
+print(list(itertools.islice(n, 0, 5, 2)))
+
+
+print('itertools 模組: accumulate() 累加')
+
+import itertools
+
+n = [0, 1, 2, 3, 4]
+print(list(itertools.accumulate(n)))
+
+c = ['A', 'B', 'C', 'D', 'E']
+print(list(itertools.accumulate(c)))
+
+
+data = range(1, 11)
+multiply = lambda x, y: x * y
+
+print(list(itertools.accumulate(data, multiply)))
+
+print('itertools 模組: starmap() 解包外層容器')
+
+import itertools
+
+n = [(1, 2), (2, 3), (3, 5), (5, 7), (7, 11)]
+
+print(list(itertools.starmap(lambda x, y: x * y, n)))
+
+print(list(map(lambda t: t[0] * t[1], n)))
+
+
+print('itertools 模組: groupby() 給連續資料分組')
+
+import itertools
+
+data = ['a', 'a', 'a', 'b', 'b', 'b', 'a', 'a', 'c', 'c', 'd']
+
+for key, item in itertools.groupby(data):
+    print(key, list(item))
+
+print('')
+data.sort()
+
+for key, item in itertools.groupby(data):
+    print(key, list(item))
+
+
+print('')
+data = ['Python', 'Java', 'C#', 'Perl', 'Basic', 'Go', 'COBOL', 'Ruby']
+data.sort(key=len)
+
+for key, item in itertools.groupby(data, len):
+    print(key, list(item))
+
+
+print('')
+first_letter = lambda i: i[0]
+data.sort(key=first_letter)
+
+for key, item in itertools.groupby(data, first_letter):
+    print(key, list(item))
+
 
 print('------------------------------------------------------------')	#60個
 

@@ -1,6 +1,6 @@
-'''
+"""
 使用pandas讀取csv檔, 讀成 DataFrame 格式
-'''
+"""
 
 import sys
 import pandas as pd
@@ -73,16 +73,6 @@ print(df)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
 import sys
 import numpy as np
 import pandas as pd
@@ -92,7 +82,7 @@ import matplotlib.pyplot as plt
 
 # 鐵達尼號資料集是一個CSV檔案：titanic_data.csv，我們可以建立DataFrame物件來載入資料集，如下所示：
 
-'''
+"""
 資料前處理
 
 在檢視資料集的描述資料後，我們知道目前需要處理的工作，如下所示：
@@ -102,7 +92,7 @@ import matplotlib.pyplot as plt
     PClass欄位需要處理分類資料轉換成數值的1、2和3（1是1st；2是2nd；3是3rd）。
     Age欄位有很多遺漏值，我們準備使用Age欄位的平均值來補值。
 
-'''
+"""
 filename = 'data/titanic_data.csv'
 titanic = pd.read_csv(filename)
 
@@ -179,6 +169,7 @@ print('------------------------------------------------------------')	#60個
 fig, axes = plt.subplots(nrows = 1, ncols = 2)
 df = titanic[["Survived", "Died"]].groupby(titanic["Sex"]).sum()
 df.plot(kind = "bar", ax = axes[0])
+
 df = titanic[["Survived", "Died"]].groupby(titanic["Sex"]).mean()
 df.plot(kind = "bar", ax = axes[1])
 
@@ -215,7 +206,7 @@ print(data)
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 
 #設定中文字型及負號正確顯示
 #設定中文字型檔
@@ -224,7 +215,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 plt.show()
-'''
+"""
 
 
 
