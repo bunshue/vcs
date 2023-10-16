@@ -2,20 +2,19 @@ import os
 import sys
 import docx
 
-if len(sys.argv) == 1:
-    keyword = "shutil" 
-    print("語法：python FindKeyWord3.py 搜尋字串\n")
-else:
-    keyword = sys.argv[1]  
- 
+print('搜尋字串')
+keyword = 'shutil'
+print("搜尋字串：{}".format(keyword))
+
 #cur_path = os.path.dirname(__file__) # 取得目前路徑
 cur_path = os.getcwd()
-sample_tree = os.walk(cur_path)
 print(cur_path)
+sample_tree = os.walk(cur_path)
 
 for dirname, subdir, files in sample_tree:
    allfiles = []   
    for file in files:  # 取得所有 .py .txt .docx 檔，存入 allfiles 串列中
+      print(file)
       ext = file.split('.')[-1]
       if ext == "py" or ext == "txt" or ext == "docx": 
          allfiles.append(dirname + '/' + file)

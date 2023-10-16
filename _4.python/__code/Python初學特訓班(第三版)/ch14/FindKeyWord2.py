@@ -1,17 +1,20 @@
 import os
 import docx
 
-cur_path = os.path.dirname(__file__) # 取得目前路徑
-sample_tree = os.walk(cur_path)
-
+print('搜尋字串')
 keyword = "籃球"
 print("搜尋字串：{}".format(keyword))
+
+cur_path = os.path.dirname(__file__) # 取得目前路徑
+print(cur_path)
+sample_tree = os.walk(cur_path)
 
 for dirname, subdir, files in sample_tree:
    allfiles = []   
    for file in files:  # 取得所有 .docx 檔，存入 allfiles 串列中
+      print(file)
       ext = file.split('.')[-1]
-      if ext == "docx": # get *.docx to allfiles 
+      if ext == "docx": # get *.docx to allfiles
          allfiles.append(dirname + '/' + file)
          
    for file in allfiles:

@@ -1,3 +1,7 @@
+"""
+sepal:【植】萼片
+"""
+
 from sklearn.neural_network.multilayer_perceptron import MLPClassifier
 from sklearn import datasets
 

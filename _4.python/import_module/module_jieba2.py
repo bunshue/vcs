@@ -1,6 +1,7 @@
 import sys
 import os
 
+import operator
 import jieba
 
 print('------------------------------------------------------------')	#60個
@@ -13,9 +14,13 @@ with open(filename, "r", encoding="utf-8") as f:
 print(data, "\n")
 data = data.translate({ord(c):None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
 words = jieba.cut(data)
+
+""" ok, many
+print('打印結果')
 for word in words:
     print(word, "/ ", end="")
-    
+"""
+
 print('------------------------------------------------------------')	#60個
 
 import jieba
@@ -50,23 +55,6 @@ for w, c in Counter(words).most_common():
         print(w, c)
 
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 
 print('------------------------------------------------------------')	#60個
