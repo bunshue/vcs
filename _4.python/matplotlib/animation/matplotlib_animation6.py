@@ -9,11 +9,12 @@ def animate(i):
 
 # 建立動畫需要的 Figure 物件和軸物件       
 fig, ax = plt.subplots()
-# interval = 50, 相當於每隔 0.05 秒執行 animate()動畫
+
+interval = 100   #每隔 interval msec 執行 animate()動畫
 anim = FuncAnimation(fig,
                      animate,
                      frames = 50,
-                     interval = 100)
+                     interval = interval)
 
 ax.set_axis_off()
 

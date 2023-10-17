@@ -1,8 +1,19 @@
+import sys
 import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
-ITERATIONS = 500
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+
+ITERATIONS = 50
 
 '''
 model = keras.Sequential([keras.layers.Dense(units = 1, input_shape = [1])])
@@ -14,7 +25,10 @@ model.compile(optimizer = 'sgd', loss = 'mean_squared_error')
 # y = x ^ 2
 xs = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype = float)
 ys = np.array([0.0, 1.0, 4.0, 9.0, 16.0, 25.0], dtype = float)
-
+print(type(xs))
+print(xs)
+print(type(ys))
+print(ys)
 
 model.fit(xs, ys, epochs = ITERATIONS)
 
@@ -24,87 +38,188 @@ print(model.predict([2.5]))     #[[9.230829]]
 print(model.predict([4.5]))     #[[19.108438]]
 print(model.predict([6.0]))     #[[26.516644]]
 print(model.predict([10.0]))    #[[46.271862]]
-
 '''
 
 
 model = keras.Sequential([keras.layers.Dense(units = 1, input_shape = [1])])
 model.compile(optimizer = 'sgd', loss = 'mean_squared_error')
 
-ST = 0
-SP = 10
-N = 51
+# y = x
+xs = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype = float)
+ys = np.array([0.0, 1.0, 2.0, 5.0, 4.0, 5.0], dtype = float)
+print(type(xs))
+print(xs)
+print(type(ys))
+print(ys)
 
-# yy = xx ^ 2
-xx = np.linspace(ST, SP, N, dtype = float)  # 建立一個array, 在 ST 與 SP 的範圍之間讓 N 個點等分
-yy = xx ** 2
-
-model.fit(xx, yy, epochs = ITERATIONS)
+model.fit(xs, ys, epochs = ITERATIONS)
 
 print('keras 預測')
+xx = np.linspace(0.0, 10.0, 21)
+yy = model.predict(xx)
 
-def get_predict_value(x):
-    y1 = x ** 2
-    y2 = float(model.predict([x]))
-    diff = y1 - y2
-    print('x =', x, '\t真實值 :', y1, '\t預測值 :', y2, '\t差距 :', diff)
-    return y1, y2, diff
+"""
+print(model.predict([2.5]))
+print(model.predict([4.5]))
+print(model.predict([6.0]))
+print(model.predict([10.0]))
+print(xx)
+print(yy)
+"""
 
-x = 2.5
-get_predict_value(x)
+x = np.linspace(0, 10, 100)
+plt.plot(x, x, 'b', lw = 2, label = 'y = x')
+plt.plot(xs, ys, 'g-o', lw = 1, ms = 10, label = '實驗點')
+plt.scatter(xx, yy, c = 'red', marker = 'o', lw = 4, label = '預測點')
 
-x = 4.5
-get_predict_value(x)
-
-x = 6.0
-get_predict_value(x)
-
-x = 10.0
-get_predict_value(x)
-
-px = list()
-y1 = list()
-y2 = list()
-y3 = list()
-
-for x in range(5, 110, 10):
-    yy1 , yy2, yy3 = get_predict_value(x / 10)
-    #print('get data', x, yy1, yy2, yy3)
-    #print('get type', type(x), type(yy1), type(yy2), type(yy3))
-    px.append(x / 10)
-    y1.append(yy1)
-    y2.append(yy2)
-    y3.append(yy3)
-
-
-print(px)
-print(y1)
-print(y2)
-print(y3)
-
-print(len(px))
-print(len(y1))
-print(len(y3))
-print(len(y3))
-
-plt.figure()
-
-plt.plot(px, y1, 'r:o')
-plt.plot(px, y2, 'g:o')
-#plt.plot(px, y3, 'b:o')#diff
-
-#plt.plot(xx, yy, c = 'r', label = '', linewidth = 1)
-#plt.plot(x, y, c = 'g', label = 'sin(x)', linewidth = 1)
-
-#plt.xlabel('x')
-#plt.ylabel('sin(x)')
-#plt.title('')
-#plt.legend()
-
-
-plt.xlim(-1, 12)
-plt.ylim(-1, 120)
+xmin, xmax, ymin, ymax = -1, 11, -1, 11
+plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
+plt.legend()
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+
+
+from sklearn import linear_model
+
+#x = np.array([[22],[26],[23],[28],[27],[32],[30]])  # 溫度
+#y = np.array([[15],[35],[21],[62],[48],[101],[86]]) # 飲料銷售數量
+#x = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype = float)
+#y = np.array([0.0, 1.0, 2.0, 5.0, 4.0, 5.0], dtype = float)
+xs = np.array([[0.0], [1.0], [2.0], [3.0], [4.0], [5.0]], dtype = float)
+ys = np.array([[0.0], [1.0], [2.0], [5.0], [4.0], [5.0]], dtype = float)
+
+e_model = linear_model.LinearRegression()       # 建立線性模組物件
+e_model.fit(xs, ys)
+a = e_model.coef_[0][0]                         # 取出斜率
+b = e_model.intercept_[0]                       # 取出截距
+print(f'斜率  = {a.round(2)}')
+print(f'截距  = {b.round(2)}')
+
+x = np.linspace(0, 10, 100)
+plt.plot(x, x, 'b', lw = 2, label = 'y = x')
+
+y2 = a * xs + b
+plt.plot(xs, ys, 'g-o', lw = 1, ms = 10, label = '實驗點')
+plt.plot(xs, y2, 'r', lw = 2, label = '迴歸直線')    # 繪製迴歸直線
+
+xx = 10
+predicted = a * xx + b
+print(f"x = 10 的 預測值 = {predicted}")
+#plt.plot(xx, int(predicted), 'r-o')
+plt.plot(xx, predicted, 'r-o')
+
+xmin, xmax, ymin, ymax = -1, 11, -1, 11
+plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
+plt.legend()
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+from sklearn import datasets
+
+np.random.seed(3)               # 設計隨機數種子
+x, y = datasets.make_regression(n_samples=100,
+                                n_features=1,
+                                noise=20)
+plt.xlim(-3, 3)
+plt.ylim(-150, 150)
+plt.scatter(x,y)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+
+np.random.seed(3)                           # 設計隨機數種子
+x, y = datasets.make_regression(n_samples=100,
+                                n_features=1,
+                                noise=20)
+# 數據分割為x_train,y_train訓練數據, x_test,y_test測試數據
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2)
+
+plt.xlim(-3, 3)
+plt.ylim(-150, 150)
+plt.scatter(x_train, y_train, label = '訓練數據')
+plt.scatter(x_test, y_test, label = '測試數據')
+plt.legend()
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn import linear_model
+from sklearn.metrics import r2_score
+
+np.random.seed(3)                               # 設計隨機數種子
+print('製作原始資料 x, y')
+x, y = datasets.make_regression(n_samples = 10,
+                                n_features = 1,
+                                noise = 20)
+
+# 數據分割為x_train,y_train訓練數據80%, x_test,y_test測試數據20%
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2)
+
+e_model = linear_model.LinearRegression()       # 建立線性模組物件
+e_model.fit(x_train, y_train)
+print(f'斜率  = {e_model.coef_[0].round(2)}')
+print(f'截距  = {e_model.intercept_.round(2)}')
+            
+print('預測')
+y_pred = e_model.predict(x_test)           
+
+plt.xlim(-3, 3)
+plt.ylim(-150, 150)
+plt.scatter(x, y, c = 'blue', marker = 'o', lw = 8, label = '原始資料')
+plt.scatter(x_train, y_train, c = 'red', marker = 'o', lw = 4, label = "訓練數據")
+plt.scatter(x_test, y_test, c = 'green', marker = 'o', lw = 4, label = "測試數據")
+
+# 使用測試數據 x_test 和此 x_test 預測的 y_pred 繪製迴歸直線
+plt.plot(x_test, y_pred, color = "red", label = '迴歸直線')
+
+print('x_test')
+print(x_test)
+print('y_pred')
+print(y_pred)
+
+# 將測試的 y 與預測的 y_pred 計算決定係數
+r2 = r2_score(y_test, y_pred)                           
+
+print(f'決定係數 = {r2.round(2)}')
+
+'''
+print('原始資料')
+print(x)
+print()
+print(y)
+print('train')
+print(x_train)
+print()
+print(y_train)
+print('test')
+print(x_test)
+print()
+print(y_test)
+'''
+
+plt.legend()
+
+plt.show()
+
+
+
+print('------------------------------------------------------------')	#60個
 

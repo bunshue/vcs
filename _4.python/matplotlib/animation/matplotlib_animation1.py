@@ -33,11 +33,11 @@ fig = plt.figure()
 ax = plt.axes(xlim=(0, 2*np.pi), ylim=(-2, 2))    
 # 最初化線條 line, 變數, 須留意變數 line 右邊的逗號','是必須的  
 line, = ax.plot([], [], lw=3, color='g')  
-# interval = 20, 相當於每隔 20 毫秒執行 animate()動畫  
+interval = 20   #每隔 interval msec 執行 animate()動畫
 ani = FuncAnimation(fig, animate,
                     frames = 200,          
                     init_func = init,                        
-                    interval = 20)          # interval是控制速度(msec)
+                    interval = interval)
 plt.show()
 
 '''
@@ -65,12 +65,13 @@ line, = ax.plot(x, y, color = 'g', linestyle = '-', linewidth = 3)
 # 建立和繪製紅點
 dot, = ax.plot([], [], color = 'red', marker = 'o',
                markersize = 15, linestyle = '')
-# interval = 20, 相當於每隔 20 毫秒執行 animate()動畫
+
+interval = 20   #每隔 interval msec 執行 animate()動畫
 ani = FuncAnimation(fig = fig,
                     func = animate,
                     frames = N,
                     init_func = init,
-                    interval = 20,
+                    interval = interval,
                     blit = True,
                     repeat = True)
 plt.show()

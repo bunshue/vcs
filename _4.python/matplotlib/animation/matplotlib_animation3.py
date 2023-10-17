@@ -31,11 +31,11 @@ line0, = ax0.plot(x, np.sin(x))
 # 建立 line1 變數
 line1, = ax1.plot(x, np.cos(x))
 
-# interval = 20, 相當於每隔 20 毫秒執行 animate()動畫 
+interval = 20   #每隔 interval msec 執行 animate()動畫
 ani = FuncAnimation(fig,
                     animate,
                     frames = 200,
-                    interval = 20)
+                    interval = interval)
 plt.show()
 
 '''
@@ -58,11 +58,11 @@ plt.subplot(122)
 # 建立 line1 變數
 line1, = plt.plot(x, np.cos(x))
 
-# interval = 20, 相當於每隔 20 毫秒執行 animate()動畫 
+interval = 20   #每隔 interval msec 執行 animate()動畫
 ani = FuncAnimation(fig,
                     animate,
                     frames = 200,
-                    interval = 20)
+                    interval = interval)
 plt.show()
 
 

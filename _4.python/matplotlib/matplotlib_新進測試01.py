@@ -14,7 +14,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = '新進測試 01', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -122,6 +122,102 @@ plt.axis('equal')       #軸比例
 #第六張圖
 plt.subplot(236)
 
+my_kwargs = dict(ha='center', va='center', fontsize=50, c='b')
+plt.text(0.5, 0.5, '歡迎來到美國', **my_kwargs)
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = '新進測試 02', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+listx = ['c','c++','c#','java','python']
+listy1 = [25,20,20,16,28]
+listy2 = [20,8,18,16,22]
+plt.bar(listx, listy1, width=0.5, label='男')
+plt.bar(listx, listy2, width=0.5, bottom=listy1, label='女')
+plt.legend()
+plt.title("資訊程式課程選修人數")
+plt.xlabel("程式課程")
+plt.ylabel("選修人數")
+
+
+
+#第二張圖
+plt.subplot(232)
+
+width = 0.25
+listx = ['c','c++','c#','java','python']
+listx1 = [x - width/2 for x in range(len(listx))]
+listx2 = [x + width/2 for x in range(len(listx))]
+listy1 = [25,20,20,16,28]
+listy2 = [20,8,18,16,22]
+plt.bar(listx1, listy1, width, label='男')
+plt.bar(listx2, listy2, width, label='女')
+plt.xticks(range(len(listx)), labels=listx)
+plt.legend()
+plt.title("資訊程式課程選修人數")
+plt.xlabel("程式課程")
+plt.ylabel("選修人數")
+
+
+
+#第三張圖
+plt.subplot(233)
+
+listx = [31,15,20,25,12,18,45,21,33,5,18,22,37,42,10]
+listy = [68,20,61,32,45,56,10,18,70,64,43,66,19,77,21]
+scale = [x ** 3 for x in [5,4,2,6,7,1,8,9,2,3,2,4,5,7,2]]
+
+plt.xlim(0, 50)
+plt.ylim(0, 80)
+plt.scatter(listx, listy, c = 'r', s = scale, marker = 'o', alpha = 0.5)
+
+
+#第四張圖
+plt.subplot(234)
+
+sizes = [25, 30, 15, 10]
+labels = ["北部", "西部", "南部", "東部"]
+colors = ["red", "green", "blue", "yellow"]
+explode = (0, 0, 0.2, 0)
+plt.pie(sizes, 
+	explode = explode, 
+	labels = labels, 
+	colors = colors,
+	labeldistance = 1.1, 
+	autopct = "%2.1f%%", 
+	pctdistance = 0.6,
+	shadow = True,
+	startangle = 90)
+
+
+#第五張圖
+plt.subplot(235)
+
+x1 = np.linspace(0.1, 10, 99)                   # 建立含30個元素的陣列
+x2 = np.linspace(0.1, 10, 99)                   # 建立含30個元素的陣列
+y1 = [math.log2(x) for x in x1]
+y2 = [math.log(x, 0.5) for x in x2]
+plt.plot(x1, y1, label="base = 2")
+plt.plot(x2, y2, label="base = 0.5")
+
+plt.legend(loc="best")                          # 建立圖例
+plt.axis([0, 10, -5, 5])
+plt.grid()
+
+
+#第六張圖
+plt.subplot(236)
+
 
 
 plt.show()
@@ -129,82 +225,106 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = '新進測試 03', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+degrees = [x * 15 for x in range(0,25)]
+x = [math.cos(math.radians(d)) for d in degrees]
+y = [math.sin(math.radians(d)) for d in degrees]
+
+plt.scatter(x,y)
+plt.axis('equal')
+plt.grid()
 
 
-"""
-import glob, cv2
+#第二張圖
+plt.subplot(232)
 
-files = glob.glob(foldername + "/*.jpg")  #建立測試資料
-test_feature=[]
-for file in files:
-    print(file)
-    img = cv2.imread(file)	#讀取本機圖片
-    img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  #灰階    
-    _, img = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY_INV) #轉為反相黑白 
-    test_feature.append(img)
+degrees = np.arange(0, 360)
+x = np.cos(np.radians(degrees))
+y = np.sin(np.radians(degrees))
 
-print(test_feature)
-
-print('畫多張圖')
+plt.plot(x, y)
+plt.axis('equal')
+plt.grid()
 
 
-plt.gcf().set_size_inches(12, 14)
+#第三張圖
+plt.subplot(233)
 
-num=25
+x = np.linspace(0.1, 1000, 100000)          # 建立含100000個元素的陣列
+y = [(1+1/x)**x for x in x]
+plt.axis([0, 10, 0, 3])
+plt.plot(x, y, label="Euler's Number")
 
-if num>25: num=25
-for i in range(num):
-    ax=plt.subplot(5,5, i+1)
-    #ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
-    title = 'label = ' + str(i)
-    ax.set_title(title,fontsize=12)  # X,Y軸不顯示刻度
-    ax.set_xticks([]);ax.set_yticks([])        
+plt.legend(loc="best")                      # 建立圖例
+plt.grid()
+
+
+
+#第四張圖
+plt.subplot(234)
+
+x = np.linspace(0.1, 1000, 100000)          # 建立含100000個元素的陣列
+y = [(1+1/x)**x for x in x]
+#plt.axis([0, 10, 0, 3])
+plt.plot(x, y, label="Euler's Number")
+
+plt.legend(loc="best")                      # 建立圖例
+plt.grid()
+
+
+#第五張圖
+plt.subplot(235)
+
+x = np.linspace(-5, 5, 10000)               # 建立含10000個元素的陣列
+y = [1/(1+np.e**-x) for x in x]
+plt.axis([-5, 5, 0, 1])
+plt.plot(x, y, label="Logistic function")
+
+plt.legend(loc="best")                      # 建立圖例
+plt.grid()
+
+
+#第六張圖
+plt.subplot(236)
+
+x = np.linspace(0.01, 0.99, 100)               # 建立含1000個元素的陣列
+y = [np.log(x/(1-x)) for x in x]
+plt.axis([0, 1, -5, 5])
+plt.plot(x, y, label="Logit function")
+plt.plot(0.5, np.log(0.5/(1-0.5)),'-o')
+
+plt.legend(loc="best")                          # 建立圖例
+plt.grid()
+
+
 plt.show()
+'''
 
-
-"""
 
 print('------------------------------------------------------------')	#60個
 
-"""
-x = np.linspace(start=-10, stop=10, num=101)
 
-#plt.plot(x, np.absolute(x))
 
-xx = x + 1j * x[:, np.newaxis]
-
-plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap='gray')
-"""
-
-print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
 
-dat = pd.read_csv(filename, encoding='UTF-8')
-print(dat.head())
 
 print('------------------------------------------------------------')	#60個
 
-#計算平均數、中位數、眾數
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = '新進測試 04', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-dat = pd.read_csv(filename, encoding='UTF-8')
+#第一張圖
+plt.subplot(231)
 
-# 平均數、中位數
-print('平均數', np.mean(dat['數學']))
-print('中位數', np.median(dat['數學']))
-
-# 眾數
-bincnt = np.bincount(dat['數學'])  # 計算同樣的值的個數
-mode = np.argmax(bincnt)  # 取得bincnt中最大的值
-print('眾數', mode)
-
-print('------------------------------------------------------------')	#60個
 print('畫出頻率分布圖')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
@@ -231,9 +351,10 @@ x = list(range(1,11))  # x軸的值
 labels = ['0~','10~','20~','30~','40~','50~','60~','70~','80~','90~']  # x軸的刻度標籤
 plt.bar(x, hist, tick_label=labels, width=1)# 描繪長條圖
 
-plt.show()
 
-print('------------------------------------------------------------')	#60個
+#第二張圖
+plt.subplot(232)
+
 print('描繪頻率分布圖')
 
 # 讀入csv檔
@@ -243,8 +364,6 @@ dat = pd.read_csv(filename, encoding='UTF-8')
 # 頻率分布圖
 plt.hist(dat['店長'], bins=range(0, 200, 10), alpha=0.5)
 plt.hist(dat['太郎'], bins=range(0, 200, 10), alpha=0.5)
-
-plt.show()
 
 print('計算平均數、變異數、標準差')
 
@@ -259,32 +378,29 @@ print('變異數:', np.var(dat['太郎']))
 print('標準差:', np.std(dat['太郎']))
 
 
-print('------------------------------------------------------------')	#60個
-print('亂數')
 
-rand = [] 
-for i in range(10):
-    rand.append(random.randint(0,100)) # 產生0～100的亂數
-print(rand)
 
-print('------------------------------------------------------------')	#60個
-
-a = 4     # 亂數的初始值
-b = 7
-c = 9   #取亂數結果 0 ~ 8之整數
-rn = 1
-
-rand = []
-for i in range(20):
-    rn = (a * rn + b) % c   # 不用亂數模組, 自己運算出亂數
-    rand.append(rn)
-print(rand)
-
-print('------------------------------------------------------------')	#60個
+#第三張圖
+plt.subplot(233)
 
 
 
-print('------------------------------------------------------------')	#60個
+
+#第四張圖
+plt.subplot(234)
+
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
+
+
+plt.show()
 
 
 

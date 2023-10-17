@@ -49,10 +49,10 @@ from matplotlib.animation import FuncAnimation
 
 fig, ax = plt.subplots()   #生成子圖，相當於fig = plt.figure(),ax = fig.add_subplot(),其中ax的函數參數表示把當前畫布進行分割，例：fig.add_subplot(2,2,2).表示將畫布分割為兩行兩列　　　　　　　　　　　　　　　　#ax在第2個子圖中繪制，其中行優先，
 xdata, ydata = [], []      #初始化兩個數組
-ln, = ax.plot([], [], 'r-', animated=False)  #第三個參數表示畫曲線的顏色和線型，具體參見：https://blog.csdn.net/tengqingyong/article/details/78829596
+ln, = ax.plot([], [], 'r-', animated = False)  #第三個參數表示畫曲線的顏色和線型，具體參見：https://blog.csdn.net/tengqingyong/article/details/78829596
 
 def init():
-    ax.set_xlim(0, 2*np.pi)  #設置x軸的範圍pi代表3.14...圓周率，
+    ax.set_xlim(0, 2 * np.pi)  #設置x軸的範圍pi代表3.14...圓周率，
     ax.set_ylim(-1, 1)          #設置y軸的範圍
     return ln,               #返回曲線
 
@@ -63,11 +63,12 @@ def update(n):  #n就是 FuncAnimation 裡面的 frames
     ln.set_data(xdata, ydata)    #重新設置曲線的值
     return ln,
 
+interval = 100   #每隔 interval msec 執行 animate()動畫
 ani = FuncAnimation(fig,
                     update,
                     frames = np.linspace(0, 2 * np.pi, 10),     #這里的frames在調用update函數是會將frames作為實參傳遞給“n”
                     init_func = init,
-                    interval = 100,
+                    interval = interval,
                     blit = True)
 plt.show()
 

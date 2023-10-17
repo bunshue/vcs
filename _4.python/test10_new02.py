@@ -4,7 +4,7 @@ import time
 import random
 
 print('------------------------------------------------------------')	#60個
-
+'''
 import numpy as np
 
 N = 10
@@ -77,27 +77,127 @@ print(message)
 
 print('------------------------------------------------------------')	#60個
 
+number = 123456
+NUMBER_OF_DIGITS = 10
+print(number)
+numberList = list(str(number).zfill(NUMBER_OF_DIGITS))
+print(numberList)
+numberList = list(str(number))
+print(numberList)
+
+
+print('------------------------------------------------------------')	#60個
+
+time.sleep(random.randint(20, 50) / 10.0)
+
+print('------------------------------------------------------------')	#60個
+
+"""
+drawTime = time.time()
+#等待使用者按鍵輸入
+input()  # This function call doesn't return until Enter is pressed.
+timeElapsed = time.time() - drawTime
+
+timeElapsed = round(timeElapsed, 4)
+print('You took', timeElapsed, 'seconds to draw.')
+"""
 
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
 
+try:
+    import pyperclip  # pyperclip copies text to the clipboard.
+except ImportError:
+    pass  # If pyperclip is not installed, do nothing. It's no big deal.
+
+
+pigLatin = 'this is a lion-mouse'
+
+
+try:
+    pyperclip.copy(pigLatin)
+    print('(Copied pig latin to clipboard.)')
+except NameError:
+    pass  # Do nothing if pyperclip wasn't installed.
+
+print('------------------------------------------------------------')	#60個
+
+try:
+    import pyperclip  # pyperclip copies text to the clipboard.
+except ImportError:
+    pass  # If pyperclip is not installed, do nothing. It's no big deal.
+
+
+spongecase = 'this is aaaaaaaaa'
+
+try:
+    pyperclip.copy(spongecase)
+    print('(cOpIed SpOnGeCasE to ClIpbOaRd.)')
+except:
+    pass  # Do nothing if pyperclip wasn't installed.
 
 print('------------------------------------------------------------')	#60個
 
 
+import random
+
+numberOfDice = 5
+numberOfSides = 6
+
+# Simulate the dice rolls:
+rolls = []
+for i in range(numberOfDice):
+    rollResult = random.randint(1, numberOfSides)
+    rolls.append(rollResult)
+
+print(type(rolls))
+print(rolls)
+
+# Display the total:
+print('Total:', sum(rolls))
+
+
+# Display the individual rolls:
+for i, roll in enumerate(rolls):
+    rolls[i] = str(roll)
+print(', '.join(rolls), end='')
+
+'''
+
+print('------------------------------------------------------------')	#60個
+
+try:
+    import a_python_module
+except ImportError:
+    print('匯入模組 a_python_module 失敗')
+    print('請安裝模組')
+    sys.exit()
+
+
+print('------------------------------------------------------------')	#60個
+
+import time, sys
+
+print('Press Ctrl-C to stop.')
+
+try:
+    while True:  # Main program loop.
+        print('wait', end = ' ')
+        time.sleep(1)  # Add a pause.
+except KeyboardInterrupt:
+    sys.exit()  # When Ctrl-C is pressed, end the program.
+
+
+
 print('------------------------------------------------------------')	#60個
 
 
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
+""" 統計亂數
+        if random.randint(1, 100) <= 90:
+            useUpper = not useUpper  # Flip the case.
+"""
 
 print('------------------------------------------------------------')	#60個
 

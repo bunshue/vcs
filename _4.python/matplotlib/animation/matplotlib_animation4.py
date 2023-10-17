@@ -26,11 +26,11 @@ line, = axes.plot([], [], lw = 3, color = 'g')
 # 最初化線條的 x, y 資料, xlist, ylist
 xlist, ylist = [], []    
 
-# interval = 20, 相當於每隔 20 毫秒執行 animate()動畫     
+interval = 10   #每隔 interval msec 執行 animate()動畫
 anim = FuncAnimation(fig,
                      animate,
                      init_func = init,
                      frames = 200,
-                     interval = 10)
+                     interval = interval)
 plt.show()
 

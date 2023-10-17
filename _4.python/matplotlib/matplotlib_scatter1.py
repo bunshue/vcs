@@ -147,11 +147,11 @@ for l in data.splitlines():
         ly.append(t)
 
 ll = .7
-scatter(t3x, t3y, c='b', marker='o', lw=ll, label='Sail 3-Deckers')
-scatter(s3x, s3y, c='orange', marker='o', lw=ll, label='Steam 3-Deckers')
-scatter(s2x, s2y, c='r', marker='o', lw=ll, label='Steam 2-Deckers')
-scatter(ix, iy, c='g', marker='o', lw=ll, label='Iron-clad Frigates')
-scatter(lx, ly, c='cyan', marker='o', lw=ll, label='Later Iron-clads')
+scatter(t3x, t3y, c = 'b', marker = 'o', lw = ll, label = 'Sail 3-Deckers')
+scatter(s3x, s3y, c = 'orange', marker = 'o', lw = ll, label = 'Steam 3-Deckers')
+scatter(s2x, s2y, c = 'r', marker = 'o', lw = ll, label = 'Steam 2-Deckers')
+scatter(ix, iy, c = 'g', marker = 'o', lw = ll, label = 'Iron-clad Frigates')
+scatter(lx, ly, c = 'cyan', marker = 'o', lw = ll, label = 'Later Iron-clads')
 
 legend(loc="upper left")
 ylim(0, 7000)
@@ -159,7 +159,7 @@ xlim(1630, 1875)
 xticks(range(1630, 1930, 50))
 xlabel("Year launched")
 ylabel("Tonnage (BOM)")
-grid(True, ls='-', c='#a0a0a0')
+grid(True, ls = '-', c = '#a0a0a0')
 
 #第四張圖
 plt.subplot(234)
@@ -252,7 +252,7 @@ plt.xlim(-3, 3)
 plt.ylim(-3, 3)
 x1 = np.random.normal(0, 1, 1024)
 y1 = np.random.normal(0, 1, 1024)
-plt.scatter(x1, y1, alpha=0.3)
+plt.scatter(x1, y1, alpha = 0.3)
 
 
 #第五張圖
@@ -308,10 +308,10 @@ import pandas as pd
 # y = 1.2x + 0.8
 x = np.linspace(0, 5, 50)
 y = 1.2*x + 0.8
-y = 1.2*x + 0.8 + 0.3*np.random.randn(50)   #加上noise
+y = 1.2*x + 0.8 + 0.3 * np.random.randn(50)   #加上noise
 
-plt.scatter(x,y)
-plt.plot(x, 1.2*x + 0.8, 'r')
+plt.scatter(x, y)
+plt.plot(x, 1.2 * x + 0.8, 'r')
 
 
 #第二張圖
@@ -319,7 +319,7 @@ plt.subplot(232)
 
 x = np.linspace(0, 10, 200)
 y1 = np.sin(x)
-y2 = np.sin(x) + 0.3*np.random.randn(200)
+y2 = np.sin(x) + 0.3 * np.random.randn(200)
 
 plt.plot(x, y1, 'r')
 
@@ -331,12 +331,12 @@ plt.subplot(233)
 
 
 #曲線資料加入雜訊
-x = np.linspace(-5,5,51)
+x = np.linspace(-5, 5, 51)
 y = np.sin(x)
-yn = y + np.random.rand(1, len(y))*1.5
+yn = y + np.random.rand(1, len(y)) * 1.5
 
-plt.scatter(x,yn,c='blue',marker = '.')
-plt.plot(x,y+0.75,'r')
+plt.scatter(x, yn, c = 'blue', marker = '.')
+plt.plot(x, y + 0.75, 'r')
 
 
 

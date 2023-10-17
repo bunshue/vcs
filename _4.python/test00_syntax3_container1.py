@@ -3,10 +3,10 @@ import sys
 """
 各種python專用的語法 字典 串列 元組 集合
 
-dict  字典 dddd 大括號 {} 無順序 不可重複 = 集合 + list  d = {"key :value", "key :value", ...}
-lsit  串列 llll 中括號 [] 有順序 允許重複 list中的data type不用一致
-tuple 元組 tttt 小括號 () 有順序 允許重複 不可變清單	常數list
-set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
+字 dict  字典 dddd 大括號 {} 無順序 不可重複 = 集合 + list  d = {"key :value", "key :value", ...}
+串 lsit  串列 llll 中括號 [] 有順序 允許重複 list中的data type不用一致
+元 tuple 元組 tttt 小括號 () 有順序 允許重複 不可變清單	常數list
+集 set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
 
 
 Collections(容器)
@@ -39,9 +39,14 @@ Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的
 
 print('建立空容器')
 
+#字典
+animals = dict() #建立一個字典
+
+
 a_dict = {}
 print(type(a_dict))
 
+#串列
 a_list = [] #串列
 print(type(a_list))
 
@@ -51,7 +56,6 @@ table2 = {} #dict
 print(type(table1))
 print(type(table2))
 
-animals = dict() #建立一個字典
 
 print('字典 dddd ST------------------------------------------------------------')	#60個
 
@@ -584,7 +588,8 @@ for no in class_101.keys():
 
 print('------------------------------------------------------------')	#60個
 
-print('dictionary 範例')
+print('字典的用法')
+
 animals = {'鼠': 3, '牛': 48, '虎': 33}
 print(type(animals))
 print(animals)
@@ -628,6 +633,163 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
+print('字典的用法 _size_factors')
+_size_factors = {
+    "kb": 1000, "mb": 1000 * 1000, "gb": 1000 * 1000 * 1000,
+    "kib": 1024, "mib": 1024 * 1024, "gib": 1024 * 1024 * 1024,
+}
+
+print(type(_size_factors))
+
+for aaa in _size_factors:
+    print(aaa, _size_factors[aaa])
+
+
+print('字典')
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33}
+print(type(animals))
+print(animals)
+
+animals2 = sorted(animals.items(), key = lambda x:x[0])  # 依照key排序
+print("依照名稱排序")
+print(animals2)
+
+animals3 = sorted(animals.items(), key = lambda x:x[1])  # 依照value排序
+print("依照體重排序")
+print(animals3)
+
+
+
+import os
+import string
+
+print('字典的用法 encoding')
+codecs = {
+    'cn': ('gb2312', 'gbk', 'gb18030', 'hz'),
+    'tw': ('big5', 'cp950'),
+    'hk': ('big5hkscs',),
+    'jp': ('cp932', 'shift_jis', 'euc_jp', 'euc_jisx0213', 'shift_jisx0213',
+           'euc_jis_2004', 'shift_jis_2004'),
+    'kr': ('cp949', 'euc_kr', 'johab'),
+    'iso2022': ('iso2022_jp', 'iso2022_jp_1', 'iso2022_jp_2',
+                'iso2022_jp_2004', 'iso2022_jp_3', 'iso2022_jp_ext',
+                'iso2022_kr'),
+}
+
+print(type(codecs))
+print(codecs)
+
+for loc, encodings in codecs.items():
+    for enc in encodings:
+        print(enc)
+
+print('------------------------------------------------------------')	#60個
+
+print('字典的排序, 使用lambda')
+
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
+
+print(animals.items())
+
+print(sorted(animals.items(), key = lambda x : x[1]))
+
+print(sorted(animals.items(), key = lambda x : x[1], reverse = True))
+
+
+print('字典的排序, 使用sort')
+
+animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
+
+print(animals.items())
+
+print(sorted(animals.items()))
+
+for key, item in sorted(animals.items()):
+    print(key, item)
+
+print('------------------------------------------------------------')	#60個
+
+print(' 字典之合併: 使用 update')
+
+animal = {
+    'name': 'mouse',
+    'class': 'A',
+    'weight': 3
+    }
+
+animal_new_data = {
+    'name': '鼠',
+    'weight': 5,
+    'sports': 'soccer'
+    }
+
+animal.update(animal_new_data)
+
+print(animal)
+
+print('------------------------------------------------------------')	#60個
+
+print('字典之合併: 使用 聯集算符')
+
+animal = {
+    'name': 'mouse',
+    'class': 'A',
+    'weight': 3
+    }
+
+animal_new_data = {
+    'name': '鼠',
+    'weight': 5,
+    'sports': 'soccer'
+    }
+""" fail in kilo
+new_setting = animal | animal_new_data
+
+print(new_setting)
+
+animal |= animal_new_data
+
+print(animal)
+"""
+print('------------------------------------------------------------')	#60個
+
+print('字典之合併: 使用 多重解包')
+
+animal = {
+    'name': 'mouse',
+    'class': 'A',
+    'weight': 3
+    }
+
+animal_new_data = {
+    'name': '鼠',
+    'weight': 5,
+    'sports': 'soccer'
+    }
+
+new_setting = {**animal, **animal_new_data}
+
+print(new_setting)
+
+print('------------------------------------------------------------')	#60個
+
+print('字典之合併: 使用 dict() 與 **')
+
+animal = {
+    'name': 'mouse',
+    'class': 'A',
+    'weight': 3
+    }
+
+animal_new_data = {
+    'name': '鼠',
+    'weight': 5,
+    'sports': 'soccer'
+    }
+
+new_setting = dict(animal, **animal_new_data)
+
+print(new_setting)
 
 
 print('------------------------------------------------------------')	#60個
@@ -644,115 +806,6 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 print('字典 dddd SP------------------------------------------------------------')	#60個
-
-
-print('集合 ssss ST------------------------------------------------------------')	#60個
-
-#大動物 : [牛虎龍馬豬][羊猴][象] 8
-#小動物 : [鼠兔蛇雞狗][羊猴][龜] 8
-    
-print('建立集合')
-big_animal = set()
-small_animal = set()
-big_animal = {'牛', '虎', '龍', '馬', '馬', '馬'}
-small_animal = set(['鼠', '兔', '蛇', '雞', '雞', '雞']) #由串列轉集合
-
-print('大動物 :', big_animal)
-print('小動物 :', small_animal)
-
-print('在集合中新增元素')
-big_animal.add('豬')
-big_animal.add('羊')
-big_animal.add('猴')
-big_animal.add('象')
-
-new_small_animals = {'狗', '羊', '猴', '龜'}
-small_animal.update(new_small_animals)
-
-print('大動物 :', big_animal)
-print('小動物 :', small_animal)
-
-print('在集合中刪除元素')
-big_animal.discard('象')
-small_animal.remove('龜')
-
-print('大動物 :', big_animal)
-print('小動物 :', small_animal)
-
-print('比較兩集合是否相等')
-print(big_animal == small_animal)
-
-print('交集 Set Intersection')
-animal = big_animal & small_animal
-print(animal)
-animal = big_animal.intersection(small_animal)
-print(animal)
-
-print('聯集 Set Union')
-animal = big_animal | small_animal
-print(animal)
-animal = big_animal.union(small_animal)
-print(animal)
-
-print('差集 Set Difference')
-animal = big_animal - small_animal
-print(animal)
-animal = big_animal.difference(small_animal)
-print(animal)
-
-print('對稱差集 Set Symmetric Difference')
-animal = big_animal ^ small_animal
-print(animal)
-animal = big_animal.symmetric_difference(small_animal)
-print(animal)
-
-print('集合的成員運算子')
-print('龍 是否在集合1之中?', '龍' in big_animal)
-print('龍 是否在集合2之中?', '龍' in small_animal)
-
-print("length is", len(big_animal)) # Use function len
-print("max is", max(big_animal)) # Use max
-print("min is", min(big_animal)) # Use min
-#print("sum is", sum(big_animal)) # Use sum
-
-print('在集合中刪除全部元素')
-big_animal.clear()
-small_animal.clear()
-
-print('大動物 :', big_animal)
-print('小動物 :', small_animal)
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-animal_list = ['鼠', '牛', '虎', '兔', '龍'] #串列
-print('原 串列')
-print(animal_list)
-
-print('串列 轉 集合')
-animal_set = set(animal_list)
-print(animal_set)
-
-print('集合長度 :', len(animal_set))
-print('最大 :', max(animal_set))
-print('最小 :', min(animal_set))
-
-print('集合 轉 串列')
-animal_list = list(animal_set)
-print(animal_list)
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('集合 ssss SP------------------------------------------------------------')	#60個
 
 
 print('串列 llll ST------------------------------------------------------------')	#60個
@@ -931,21 +984,6 @@ print(animals)
 animals1 = sorted(animals, key = lambda x:x[1])
 print(type(animals1))
 print(animals1)
-
-print('-------------')
-print('字典')
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33}
-print(type(animals))
-print(animals)
-
-animals2 = sorted(animals.items(), key = lambda x:x[0])  # 依照key排序
-print("依照名稱排序")
-print(animals2)
-
-animals3 = sorted(animals.items(), key = lambda x:x[1])  # 依照value排序
-print("依照體重排序")
-print(animals3)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1264,6 +1302,118 @@ print(animal_tuple4 == animal_tuple5) # Compare two tuples
 
 print('元組 tttt SP------------------------------------------------------------')	#60個
 
+
+
+print('集合 ssss ST------------------------------------------------------------')	#60個
+
+#大動物 : [牛虎龍馬豬][羊猴][象] 8
+#小動物 : [鼠兔蛇雞狗][羊猴][龜] 8
+    
+print('建立集合')
+big_animal = set()  #宣告集合
+big_animal = {'牛', '虎', '龍', '馬', '馬', '馬'}
+small_animal = set()    #宣告集合
+small_animal = set(['鼠', '兔', '蛇', '雞', '雞', '雞']) #由串列轉集合
+
+print('大動物 :', big_animal)
+print('小動物 :', small_animal)
+
+print('在集合中新增元素')
+big_animal.add('豬')
+big_animal.add('羊')
+big_animal.add('猴')
+big_animal.add('象')
+
+new_small_animals = {'狗', '羊', '猴', '龜'}
+small_animal.update(new_small_animals)
+
+print('大動物 :', big_animal)
+print('小動物 :', small_animal)
+
+print('在集合中刪除元素')
+big_animal.discard('象')
+small_animal.remove('龜')
+
+print('大動物 :', big_animal)
+print('小動物 :', small_animal)
+
+print('比較兩集合是否相等')
+print(big_animal == small_animal)
+
+print('交集 Set Intersection')
+animal = big_animal & small_animal
+print(animal)
+animal = big_animal.intersection(small_animal)
+print(animal)
+
+print('聯集 Set Union')
+animal = big_animal | small_animal
+print(animal)
+animal = big_animal.union(small_animal)
+print(animal)
+
+print('差集 Set Difference')
+animal = big_animal - small_animal
+print(animal)
+animal = big_animal.difference(small_animal)
+print(animal)
+
+print('對稱差集 Set Symmetric Difference')
+animal = big_animal ^ small_animal
+print(animal)
+animal = big_animal.symmetric_difference(small_animal)
+print(animal)
+
+print('集合的成員運算子')
+print('龍 是否在集合1之中?', '龍' in big_animal)
+print('龍 是否在集合2之中?', '龍' in small_animal)
+
+print("length is", len(big_animal)) # Use function len
+print("max is", max(big_animal)) # Use max
+print("min is", min(big_animal)) # Use min
+#print("sum is", sum(big_animal)) # Use sum
+
+print('在集合中刪除全部元素')
+big_animal.clear()
+small_animal.clear()
+
+print('大動物 :', big_animal)
+print('小動物 :', small_animal)
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+animal_list = ['鼠', '牛', '虎', '兔', '龍'] #串列
+print('原 串列')
+print(animal_list)
+
+print('串列 轉 集合')
+animal_set = set(animal_list)
+print(animal_set)
+
+print('集合長度 :', len(animal_set))
+print('最大 :', max(animal_set))
+print('最小 :', min(animal_set))
+
+print('集合 轉 串列')
+animal_list = list(animal_set)
+print(animal_list)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('集合 ssss SP------------------------------------------------------------')	#60個
+
+
+
 print('各種容器轉換 比較 ST------------------------------------------------------------')	#60個
 
 animals1 = ['鼠', '牛', '虎', '兔', '龍']
@@ -1440,45 +1590,6 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-print('字典範例 _size_factors')
-_size_factors = {
-    "kb": 1000, "mb": 1000 * 1000, "gb": 1000 * 1000 * 1000,
-    "kib": 1024, "mib": 1024 * 1024, "gib": 1024 * 1024 * 1024,
-}
-
-print(type(_size_factors))
-
-for aaa in _size_factors:
-    print(aaa, _size_factors[aaa])
-
-
-print('------------------------------------------------------------')	#60個
-
-import os
-import string
-
-print('字典範例 encoding')
-codecs = {
-    'cn': ('gb2312', 'gbk', 'gb18030', 'hz'),
-    'tw': ('big5', 'cp950'),
-    'hk': ('big5hkscs',),
-    'jp': ('cp932', 'shift_jis', 'euc_jp', 'euc_jisx0213', 'shift_jisx0213',
-           'euc_jis_2004', 'shift_jis_2004'),
-    'kr': ('cp949', 'euc_kr', 'johab'),
-    'iso2022': ('iso2022_jp', 'iso2022_jp_1', 'iso2022_jp_2',
-                'iso2022_jp_2004', 'iso2022_jp_3', 'iso2022_jp_ext',
-                'iso2022_kr'),
-}
-
-print(type(codecs))
-print(codecs)
-
-for loc, encodings in codecs.items():
-    for enc in encodings:
-        print(enc)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1714,112 +1825,9 @@ for choice in choices:
 
 print('------------------------------------------------------------')	#60個
 
-#字典的排序, 使用lambda
 
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
-
-print(animals.items())
-
-print(sorted(animals.items(), key = lambda x : x[1]))
-
-print(sorted(animals.items(), key = lambda x : x[1], reverse = True))
-
-
-#字典的排序, 使用sort
-
-animals = {'鼠' : 3, '牛' : 48, '虎' : 33, '兔' : 8, '龍' : 38}
-
-print(animals.items())
-
-print(sorted(animals.items()))
-
-for key, item in sorted(animals.items()):
-    print(key, item)
 
 print('------------------------------------------------------------')	#60個
-
-# 字典之合併: 使用 update
-
-animal = {
-    'name': 'mouse',
-    'class': 'A',
-    'weight': 3
-    }
-
-animal_new_data = {
-    'name': '鼠',
-    'weight': 5,
-    'sports': 'soccer'
-    }
-
-animal.update(animal_new_data)
-
-print(animal)
-
-print('------------------------------------------------------------')	#60個
-
-# 字典之合併: 使用 聯集算符
-
-animal = {
-    'name': 'mouse',
-    'class': 'A',
-    'weight': 3
-    }
-
-animal_new_data = {
-    'name': '鼠',
-    'weight': 5,
-    'sports': 'soccer'
-    }
-""" fail in kilo
-new_setting = animal | animal_new_data
-
-print(new_setting)
-
-animal |= animal_new_data
-
-print(animal)
-"""
-print('------------------------------------------------------------')	#60個
-
-# 字典之合併: 使用 多重解包
-
-animal = {
-    'name': 'mouse',
-    'class': 'A',
-    'weight': 3
-    }
-
-animal_new_data = {
-    'name': '鼠',
-    'weight': 5,
-    'sports': 'soccer'
-    }
-
-new_setting = {**animal, **animal_new_data}
-
-print(new_setting)
-
-print('------------------------------------------------------------')	#60個
-
-# 字典之合併: 使用 dict() 與 **
-
-animal = {
-    'name': 'mouse',
-    'class': 'A',
-    'weight': 3
-    }
-
-animal_new_data = {
-    'name': '鼠',
-    'weight': 5,
-    'sports': 'soccer'
-    }
-
-new_setting = dict(animal, **animal_new_data)
-
-print(new_setting)
-
 
 print('------------------------------------------------------------')	#60個
 

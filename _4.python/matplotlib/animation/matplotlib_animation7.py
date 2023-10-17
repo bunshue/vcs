@@ -16,14 +16,15 @@ picts = []
 for i in range(60):
     x += np.pi / 2                      # 建立影像陣列 x
     y += np.pi / 25                     # 建立影像陣列 y
-    pict = ax.imshow(f(x, y), cmap='hsv')
+    pict = ax.imshow(f(x, y), cmap = 'hsv')
     if i == 0:                          # 繪製索引 0
-        ax.imshow(f(x, y), cmap='hsv')  
+        ax.imshow(f(x, y), cmap = 'hsv')  
     picts.append([pict])                # 影像儲存到串列
-# interval = 20, 相當於每隔 0.1 秒執行 animate()動畫    
+
+interval = 100   #每隔 interval msec 執行 animate()動畫
 ani = ArtistAnimation(fig,
                       picts,
-                      interval = 100,
+                      interval = interval,
                       repeat_delay = 500,
                       repeat = False)   #和True比較看看
 plt.axis('off')
