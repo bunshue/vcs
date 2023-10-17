@@ -41,10 +41,10 @@ from sklearn import linear_model
 x = np.array([[22], [26], [23], [28], [27], [32], [30]])      # 溫度
 y = np.array([[15], [35], [21], [62], [48], [101], [86]])     # 飲料銷售數量
 
-e_model = linear_model.LinearRegression()       # 建立線性模組物件
-e_model.fit(x, y)
-a = e_model.coef_[0][0]                         # 取出斜率
-b = e_model.intercept_[0]                       # 取出截距
+regression = linear_model.LinearRegression()       # 建立線性模組物件
+regression.fit(x, y)
+a = regression.coef_[0][0]                         # 取出斜率
+b = regression.intercept_[0]                       # 取出截距
 print(f'斜率  = {a.round(2)}')
 print(f'截距  = {b.round(2)}')
 
@@ -69,10 +69,10 @@ np.random.seed(3)                                       # 設計隨機數種子
 x, y = datasets.make_regression(n_features=1, noise=20)
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
-e_model = linear_model.LinearRegression()               # 建立線性模組物件
-e_model.fit(x_train, y_train)
-print(f'斜率  = {e_model.coef_[0].round(2)}')
-print(f'截距  = {e_model.intercept_.round(2)}')
+regression = linear_model.LinearRegression()               # 建立線性模組物件
+regression.fit(x_train, y_train)
+print(f'斜率  = {regression.coef_[0].round(2)}')
+print(f'截距  = {regression.intercept_.round(2)}')
 
 print('------------------------------------------------------------')	#60個
 
@@ -85,12 +85,12 @@ np.random.seed(3)                                       # 設計隨機數種子
 x, y = datasets.make_regression(n_features=1, noise=20)
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
 
-e_model = linear_model.LinearRegression()               # 建立線性模組物件
-e_model.fit(x_train, y_train)
-print(f'斜率  = {e_model.coef_[0].round(2)}')
-print(f'截距  = {e_model.intercept_.round(2)}')
+regression = linear_model.LinearRegression()               # 建立線性模組物件
+regression.fit(x_train, y_train)
+print(f'斜率  = {regression.coef_[0].round(2)}')
+print(f'截距  = {regression.intercept_.round(2)}')
 
-y_pred = e_model.predict(x_test)
+y_pred = regression.predict(x_test)
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]    # 微軟正黑體
 plt.rcParams["axes.unicode_minus"] = False              # 可以顯示負號
 plt.xlim(-3, 3)

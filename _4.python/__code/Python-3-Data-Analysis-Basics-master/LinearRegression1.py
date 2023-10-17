@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from sklearn.linear_model import LinearRegression
+import sklearn.linear_model
 
 '''
 AI 三步驟
@@ -34,12 +34,12 @@ print('------------------------------------------------------------')	#60個
 #做線性迴歸
 #做線性迴歸有很多套件, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 
-regr = LinearRegression()   #函數學習機
+regression = sklearn.linear_model.LinearRegression()   #函數學習機
 X = x.reshape(points, 1)
 
-regr.fit(X, y1)#學習
+regression.fit(X, y1)#學習
 
-Y = regr.predict(X)
+Y = regression.predict(X)
 
 plt.plot(x, Y, 'g', lw = 5) #線性回歸曲線
 
@@ -69,8 +69,8 @@ plt.plot(x, y0, 'r')   #無 noise, 畫預設 y = x 紅線
 y1 = y0 + 0.5 * np.random.randn(points)   #加上noise
 
 #把原來的 x, y 中的 80% 給 training data, 20% 給 testing data。
-x_train, x_test, y_train, y_test = train_test_split(x, y1, test_size=0.2, random_state=1)
-#x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.2, random_state=9487)
+x_train, x_test, y_train, y_test = train_test_split(x, y1, test_size = 0.2, random_state = 1)
+#x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 9487)
                                                    
 print(len(x_train))
 print(x_train)
@@ -81,11 +81,11 @@ print(y_test)
 
 X_train = x_train.reshape(len(x_train), 1)
 
-regr = LinearRegression()   #函數學習機
+regression = sklearn.linear_model.LinearRegression()   #函數學習機
 
-regr.fit(X_train, y_train)#學習
+regression.fit(X_train, y_train)#學習
 
-Y_train = regr.predict(X_train)
+Y_train = regression.predict(X_train)
 
 plt.scatter(x_train, y_train, s = 100, c = 'r')
 plt.plot(x_train, Y_train, 'g', lw = 5) #線性回歸曲線
@@ -98,18 +98,18 @@ print('------------------------------------------------------------')	#60個
 #用測試資料試試我們預測準不準
 
 X_test = x_test.reshape(len(x_test), 1)
-Y_test = regr.predict(X_test)
-mse = np.sum((Y_test-y_test)**2) / len(y_test)
+Y_test = regression.predict(X_test)
+mse = np.sum((Y_test - y_test) ** 2) / len(y_test)
 print('MSE =', mse)
-plt.scatter(x_test, y_test, c='r', s = 100)
-plt.scatter(x_test, Y_test, c='g', s = 100)
-plt.scatter(x, y0, c='b', s = 100)
+plt.scatter(x_test, y_test, c = 'r', s = 100)
+plt.scatter(x_test, Y_test, c = 'g', s = 100)
+plt.scatter(x, y0, c = 'b', s = 100)
 
 print('------------------------------------------------------------')	#60個
 
 from sklearn.metrics import mean_squared_error, r2_score
 
-Y_test = regr.predict(X_test)
+Y_test = regression.predict(X_test)
 mse = mean_squared_error(y_test, Y_test)
 r2 = r2_score(y_test, Y_test)
 
@@ -126,11 +126,10 @@ print('------------------------------------------------------------')	#60個
 
 #不是線性的目標函數
 
-
 #f(x) = sin(3.2x) + 0.8x
 
 x = np.linspace(0, 5, 50)
-y = np.sin(3.2*x) + 0.8*x + 0.3*np.random.randn(50)
+y = np.sin(3.2 * x) + 0.8 * x + 0.3 * np.random.randn(50)
 plt.plot(x, y)
 
 plt.grid()
@@ -138,15 +137,15 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#標準線性學
-regr_lin = LinearRegression()   #函數學習機
+#標準線性學習機
+regression_lin = sklearn.linear_model.LinearRegression()   #函數學習機
 
 X = x.reshape(len(x), 1)
 
-regr_lin.fit(X,y)#學習
+regression_lin.fit(X, y)#學習
 
-plt.scatter(x,y)
-plt.plot(x, regr_lin.predict(X), 'r')
+plt.scatter(x, y)
+plt.plot(x, regression_lin.predict(X), 'r')
 
 plt.grid()
 plt.show()
@@ -156,14 +155,14 @@ print('------------------------------------------------------------')	#60個
 #多項式
 #我們來用 6 次多項式學
 
-X_poly = np.array([[k, k**2, k**3, k**4, k**5, k**6] for k in x])
+X_poly = np.array([[k, k ** 2, k ** 3, k ** 4, k ** 5, k ** 6] for k in x])
 
-regr_poly = LinearRegression()  #函數學習機
+regression_poly = sklearn.linear_model.LinearRegression()  #函數學習機
 
-regr_poly.fit(X_poly, y)#學習
+regression_poly.fit(X_poly, y)#學習
 
-plt.scatter(x,y)
-plt.plot(x, regr_poly.predict(X_poly), 'r')
+plt.scatter(x, y)
+plt.plot(x, regression_poly.predict(X_poly), 'r')
 
 plt.grid()
 plt.show()
@@ -173,7 +172,7 @@ print('------------------------------------------------------------')	#60個
 #用 RBF!!
 
 def RBF(x, center, sigma):
-    k = np.exp(-(x - center)**2/(2*sigma**2))
+    k = np.exp(-(x - center) ** 2/(2 * sigma ** 2))
     return k
 
 sigma = 0.3
@@ -184,12 +183,12 @@ X_rbf = np.array([[RBF(k, 0.5, sigma),
                   RBF(k, 3.5, sigma),
                   RBF(k, 4.5, sigma)] for k in x])
 
-regr_rbf = LinearRegression()   #函數學習機
+regression_rbf = sklearn.linear_model.LinearRegression()   #函數學習機
 
-regr_rbf.fit(X_rbf, y)
+regression_rbf.fit(X_rbf, y)
 
-plt.scatter(x,y)
-plt.plot(x, regr_rbf.predict(X_rbf), 'r')
+plt.scatter(x, y)
+plt.plot(x, regression_rbf.predict(X_rbf), 'r')
 
 plt.grid()
 plt.show()
@@ -197,15 +196,15 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 #三種一起比較
-Y_lin = regr_lin.predict(X)
-Y_poly = regr_poly.predict(X_poly)
-Y_rbf = regr_rbf.predict(X_rbf)
+Y_lin = regression_lin.predict(X)
+Y_poly = regression_poly.predict(X_poly)
+Y_rbf = regression_rbf.predict(X_rbf)
 
-plt.scatter(x,y)
+plt.scatter(x, y)
 
-plt.plot(x, Y_lin, label='linear')
-plt.plot(x, Y_poly, label='polynomial')
-plt.plot(x, Y_rbf, label='rbf')
+plt.plot(x, Y_lin, label = 'linear')
+plt.plot(x, Y_poly, label = 'polynomial')
+plt.plot(x, Y_rbf, label = 'rbf')
 
 plt.legend()
 
@@ -214,13 +213,12 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 import seaborn as sns
 
 sns.set()
 
 #plt.plot(x_test, Ypred, 'r')
-#plt.plot(x, Y_poly, label='polynomial')
+#plt.plot(x, Y_poly, label = 'polynomial')
 plt.scatter(x, Y_poly)
 plt.plot(x, Y_poly, 'r')
 

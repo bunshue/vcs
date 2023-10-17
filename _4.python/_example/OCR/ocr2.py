@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
+import sklearn.linear_model
 
 def codeocr(offset):
     global result    
@@ -34,16 +34,16 @@ def codeocr(offset):
     X = np.array([imagedata[1]])
     Y = height-imagedata[0]
     X_ = ploy_reg.fit_transform(X.T)
-    regr = LinearRegression()
-    regr.fit(X_, Y)
-    LinearRegression()
+    regression = linear_model.LinearRegression()       # 建立線性模組物件
+    regression.fit(X_, Y)
+    linear_model.LinearRegression()
     
     X2 = np.array([[i for i in range(0,width)]])
     X2_ = ploy_reg.fit_transform(X2.T)
-    plt.plot(X2.T, regr.predict(X2_), color = "blue", linewidth = 30) #顯示回歸線
+    plt.plot(X2.T, regression.predict(X2_), color = "blue", linewidth = 30) #顯示回歸線
     
     grayimg = cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY) 
-    for ele in np.column_stack([regr.predict(X2_).round(0), X2[0],] ):
+    for ele in np.column_stack([regression.predict(X2_).round(0), X2[0],] ):
         pos = height-int(ele[0])
         try:
             grayimg[pos-3:pos+3, int(ele[1])] = 255 - grayimg[pos - 3:pos + 3, int(ele[1])]
