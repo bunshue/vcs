@@ -283,6 +283,16 @@ for w, c in ordered_freq:
 
 print('------------------------------------------------------------')	#60個
 
+import transformers
+classifier = transformers.pipeline("sentiment-analysis", model="Raychanan/bert-base-chinese-FineTuned-Binary-Best")
+
+text = '食物很好吃, 可惜價位太高, 讓我無法接受'
+result = int(classifier(text)[0]['label'].split('_')[1])
+
+if result:
+    print("感謝您的評論, 歡迎下次再來!")
+else:
+    print("不好意思, 造成您不好的感受, 我們一定會改善的。")
 
 print('------------------------------------------------------------')	#60個
 

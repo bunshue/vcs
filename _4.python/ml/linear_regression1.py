@@ -28,8 +28,8 @@ b = regression.intercept_[0]                       # 取出截距
 print(f'斜率  = {a.round(2)}')
 print(f'截距  = {b.round(2)}')
 
-x = np.linspace(0, 10, 100)
-plt.plot(x, x, 'lime', lw = 3, label = '理論值 y = x')
+#畫 理論值 y = x
+plt.plot([-1, 12], [-1, 12], 'lime', lw = 3, label = '理論值 y = x')
 
 y2 = a * xs + b
 plt.plot(xs, ys, 'b-o', lw = 1, ms = 10, label = '實驗值')

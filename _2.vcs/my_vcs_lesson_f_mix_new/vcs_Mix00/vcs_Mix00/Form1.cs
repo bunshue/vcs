@@ -695,10 +695,155 @@ namespace vcs_Mix00
 
         private void button20_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Color Matrix的使用 1\n";
+
+            double E17 = -0.17453;
+            double F17 = -0.33217;
+            double G17 = 0.50107;
+            double E18 = 0.49197;
+            double F18 = -0.42067;
+            double G18 = -0.07843;
+
+            double N16 = 1.36;
+            double O16 = -0.3;
+            double P16 = -0.06;
+            double N17 = -0.2;
+            double O17 = 1.32;
+            double P17 = -0.12;
+            double N18 = -0.04;
+            double O18 = -0.55;
+            double P18 = 1.59;
+
+            double E22 = E17 * N16 + F17 * N17 + G17 * N18;	//MMULT(E17:G17,N16:N18)
+            double F22 = E17 * O16 + F17 * O17 + G17 * O18;	//MMULT(E17:G17,O16:O18)
+            double G22 = E17 * P16 + F17 * P17 + G17 * P18;	//MMULT(E17:G17,P16:P18)
+            double E23 = E18 * N16 + F18 * N17 + G18 * N18;	//MMULT(E18:G18,N16:N18)
+            double F23 = E18 * O16 + F18 * O17 + G18 * O18;	//MMULT(E18:G18,O16:O18)
+            double G23 = E18 * P16 + F18 * P17 + G18 * P18;	//MMULT(E18:G18,P16:P18)
+
+            richTextBox1.Text += "E22 = " + E22.ToString() + "\n";
+            richTextBox1.Text += "F22 = " + F22.ToString() + "\n";
+            richTextBox1.Text += "G22 = " + G22.ToString() + "\n";
+            richTextBox1.Text += "E23 = " + E23.ToString() + "\n";
+            richTextBox1.Text += "F23 = " + F23.ToString() + "\n";
+            richTextBox1.Text += "G23 = " + G23.ToString() + "\n";
+
+
+            double dMTX1 = E23 * 128;
+            double dMTX2 = F23 * 128;
+            double dMTX3 = G23 * 128;
+            double dMTX4 = E22 * 128;
+            double dMTX5 = F22 * 128;
+            double dMTX6 = G22 * 128;
+
+            richTextBox1.Text += "dMTX1 = " + dMTX1.ToString() + "\n";
+            richTextBox1.Text += "dMTX2 = " + dMTX2.ToString() + "\n";
+            richTextBox1.Text += "dMTX3 = " + dMTX3.ToString() + "\n";
+            richTextBox1.Text += "dMTX4 = " + dMTX4.ToString() + "\n";
+            richTextBox1.Text += "dMTX5 = " + dMTX5.ToString() + "\n";
+            richTextBox1.Text += "dMTX6 = " + dMTX6.ToString() + "\n";
+
+            int MTX1 = (int)Math.Round(dMTX1);
+            int MTX2 = (int)Math.Round(dMTX2);
+            int MTX3 = (int)Math.Round(dMTX3);
+            int MTX4 = (int)Math.Round(dMTX4);
+            int MTX5 = (int)Math.Round(dMTX5);
+            int MTX6 = (int)Math.Round(dMTX6);
+
+            richTextBox1.Text += "MTX1 = 0x" + MTX1.ToString("X2") + " = " + MTX1.ToString() + "\n";
+            richTextBox1.Text += "MTX2 = 0x" + MTX2.ToString("X2") + " = " + MTX2.ToString() + "\n";
+            richTextBox1.Text += "MTX3 = 0x" + MTX3.ToString("X2") + " = " + MTX3.ToString() + "\n";
+            richTextBox1.Text += "MTX4 = 0x" + MTX4.ToString("X2") + " = " + MTX4.ToString() + "\n";
+            richTextBox1.Text += "MTX5 = 0x" + MTX5.ToString("X2") + " = " + MTX5.ToString() + "\n";
+            richTextBox1.Text += "MTX6 = 0x" + MTX6.ToString("X2") + " = " + MTX6.ToString() + "\n";
+
+
+
+
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Color Matrix的使用 2\n";
+
+            int MTX1 = 0;
+            int MTX2 = 83;
+            int MTX3 = -84;
+            int MTX4 = 0;
+            int MTX5 = -29;
+            int MTX6 = 28;
+
+            int CMXSIGN = 0;
+            int CMX16 = 0;
+            int CMX15 = 0;
+            int CMX14 = 0;
+            int CMX13 = 0;
+            int CMX12 = 0;
+            int CMX11 = 0;
+
+            if (MTX1 >= 0)
+            {
+                CMX11 = MTX1;
+            }
+            else
+            {
+                CMX11 = -MTX1;
+                CMXSIGN += 1;
+            }
+            if (MTX2 >= 0)
+            {
+                CMX12 = MTX2;
+            }
+            else
+            {
+                CMX12 = -MTX2;
+                CMXSIGN += 2;
+            }
+            if (MTX3 >= 0)
+            {
+                CMX13 = MTX3;
+            }
+            else
+            {
+                CMX13 = -MTX3;
+                CMXSIGN += 4;
+            }
+            if (MTX4 >= 0)
+            {
+                CMX14 = MTX4;
+            }
+            else
+            {
+                CMX14 = -MTX4;
+                CMXSIGN += 8;
+            }
+            if (MTX5 >= 0)
+            {
+                CMX15 = MTX5;
+            }
+            else
+            {
+                CMX15 = -MTX5;
+                CMXSIGN += 16;
+            }
+            if (MTX6 >= 0)
+            {
+                CMX16 = MTX6;
+            }
+            else
+            {
+                CMX16 = -MTX6;
+                CMXSIGN += 32;
+            }
+
+            richTextBox1.Text += "CMXSIGN = 0x" + CMXSIGN.ToString("X2") + " = " + CMXSIGN.ToString() + "\n";
+            richTextBox1.Text += "CMX11 = 0x" + CMX11.ToString("X2") + " = " + CMX11.ToString() + "\n";
+            richTextBox1.Text += "CMX12 = 0x" + CMX12.ToString("X2") + " = " + CMX12.ToString() + "\n";
+            richTextBox1.Text += "CMX13 = 0x" + CMX13.ToString("X2") + " = " + CMX13.ToString() + "\n";
+            richTextBox1.Text += "CMX14 = 0x" + CMX14.ToString("X2") + " = " + CMX14.ToString() + "\n";
+            richTextBox1.Text += "CMX15 = 0x" + CMX15.ToString("X2") + " = " + CMX15.ToString() + "\n";
+            richTextBox1.Text += "CMX16 = 0x" + CMX16.ToString("X2") + " = " + CMX16.ToString() + "\n";
+
         }
 
         private void button22_Click(object sender, EventArgs e)
