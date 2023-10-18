@@ -40,8 +40,8 @@ plt.show()
 
 '''
 
-#                編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-fig = plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+# 建立動畫需要的 Figure 物件  
+fig = plt.figure()
 
 # 建立 x 資料
 x = np.arange(0, 2 * np.pi, 0.01)
@@ -65,5 +65,5 @@ ani = FuncAnimation(fig,
                     interval = interval)
 plt.show()
 
-
+print('------------------------------------------------------------')	#60個
 

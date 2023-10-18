@@ -1,9 +1,11 @@
+import sys
 import re
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn import linear_model
 import sklearn.linear_model
 
 def codeocr(offset):

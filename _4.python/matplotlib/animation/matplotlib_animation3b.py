@@ -34,3 +34,5 @@ ani = FuncAnimation(fig,
                     frames = 200000,
                     interval = interval)
 plt.show()
+
+print('------------------------------------------------------------')	#60個

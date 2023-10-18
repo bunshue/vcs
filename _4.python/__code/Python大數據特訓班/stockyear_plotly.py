@@ -1,3 +1,21 @@
+import requests
+import json
+import csv
+import pandas as pd
+import os
+import time
+import plotly
+import matplotlib.pyplot as plt
+from plotly.graph_objs import Scatter, Layout
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
 def twodigit(n):  #將數值轉為二位數字串
     if(n < 10):
         retstr = '0' + str(n)
@@ -11,14 +29,6 @@ def convertDate(date):  #轉換民國日期為西元:106/03/02->20170302
     realyear = str(int(yearstr) + 1911)  #轉為西元年
     realdate = realyear + str1[4:6] + str1[7:9]  #組合日期
     return realdate
-
-import requests
-import json, csv
-import pandas as pd
-import os
-import time
-import plotly
-from plotly.graph_objs import Scatter, Layout
 
 plotly.offline.init_notebook_mode(connected=True)
 
@@ -56,3 +66,6 @@ plotly.offline.iplot({  #以plotly繪圖
     "data": data,
     "layout": Layout(title='2017年個股統計圖')
 }) 
+
+plt.show() 
+

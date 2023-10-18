@@ -14,8 +14,8 @@ print('------------------------------------------------------------')	#60個
 
 from sklearn import linear_model
 
-#x = np.array([[22],[26],[23],[28],[27],[32],[30]])  # 溫度
-#y = np.array([[15],[35],[21],[62],[48],[101],[86]]) # 飲料銷售數量
+#x = np.array([[22], [26], [23], [28], [27], [32], [30]])      # 溫度
+#y = np.array([[15], [35], [21], [62], [48], [101], [86]])     # 飲料銷售數量
 #x = np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype = float)
 #y = np.array([0.0, 1.0, 2.0, 5.0, 4.0, 5.0], dtype = float)
 xs = np.array([[0.0], [1.0], [2.0], [3.0], [4.0], [5.0]], dtype = float)
@@ -29,21 +29,21 @@ print(f'斜率  = {a.round(2)}')
 print(f'截距  = {b.round(2)}')
 
 x = np.linspace(0, 10, 100)
-plt.plot(x, x, 'b', lw = 2, label = 'y = x')
+plt.plot(x, x, 'lime', lw = 3, label = '理論值 y = x')
 
 y2 = a * xs + b
-plt.plot(xs, ys, 'g-o', lw = 1, ms = 10, label = '實驗點')
+plt.plot(xs, ys, 'b-o', lw = 1, ms = 10, label = '實驗值')
 plt.plot(xs, y2, 'r', lw = 2, label = '迴歸直線')    # 繪製迴歸直線
 
 xx = 10
 predicted = a * xx + b
 print(f"x = 10 的 預測值 = {predicted}")
-#plt.plot(xx, int(predicted), 'r-o')
-plt.plot(xx, predicted, 'r-o')
+plt.plot(xx, predicted, 'ro', lw = 1, ms = 12, label = '預測值')
 
-xmin, xmax, ymin, ymax = -1, 11, -1, 11
+xmin, xmax, ymin, ymax = -1, 12, -1, 12
 plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
 plt.legend()
+plt.grid()
 
 plt.show()
 

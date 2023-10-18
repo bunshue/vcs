@@ -279,14 +279,94 @@ plt.barh(x, -B, fc='#7fb069', ec='none')
 
 plt.show()
 
-
-
-
-sys.exit()
-
-
+print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
+#          編號              圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'bar 集合 4', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+listx = ['c', 'c++', 'c#', 'java', 'python']
+listy1 = [25, 20, 20, 16, 28]
+listy2 = [20, 8, 18, 16, 22]
+plt.bar(listx, listy1, width = 0.5, label = '男')
+plt.bar(listx, listy2, width = 0.5, bottom = listy1, label = '女')
+plt.legend()
+plt.title("資訊程式課程選修人數")
+plt.xlabel("程式課程")
+plt.ylabel("選修人數")
+
+#第二張圖
+plt.subplot(232)
+
+width = 0.25
+listx = ['c','c++','c#','java','python']
+listx1 = [x - width/2 for x in range(len(listx))]
+listx2 = [x + width/2 for x in range(len(listx))]
+listy1 = [25, 20, 20, 16, 28]
+listy2 = [20, 8, 18, 16, 22]
+plt.bar(listx1, listy1, width, label = '男')
+plt.bar(listx2, listy2, width, label = '女')
+plt.xticks(range(len(listx)), labels = listx)
+plt.legend()
+plt.title("資訊程式課程選修人數")
+plt.xlabel("程式課程")
+plt.ylabel("選修人數")
+
+#第三張圖
+plt.subplot(233)
+
+print('畫出頻率分布圖')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
+
+dat = pd.read_csv(filename, encoding = 'UTF-8')
+
+# 計算各組別頻率
+hist = [0]*10 # 頻率（元素個數10，初始化為0）
+for dat in dat['數學']:
+    if dat < 10:   hist[0] += 1
+    elif dat < 20:  hist[1] += 1
+    elif dat < 30:  hist[2] += 1
+    elif dat < 40:  hist[3] += 1
+    elif dat < 50:  hist[4] += 1
+    elif dat < 60:  hist[5] += 1
+    elif dat < 70:  hist[6] += 1
+    elif dat < 80:  hist[7] += 1
+    elif dat < 90:  hist[8] += 1
+    elif dat <= 100:  hist[9] += 1 
+print('頻率:', hist)
+
+# 頻率分布圖
+x = list(range(1, 11))  # x軸的值
+labels = ['0~', '10~', '20~', '30~', '40~', '50~', '60~', '70~', '80~', '90~']  # x軸的刻度標籤
+plt.bar(x, hist, tick_label = labels, width = 1)  # 描繪長條圖
+
+#第四張圖
+plt.subplot(234)
+
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
+
+
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個

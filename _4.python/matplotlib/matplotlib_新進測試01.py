@@ -14,7 +14,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = '新進測試 01', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -122,14 +122,10 @@ plt.axis('equal')       #軸比例
 #第六張圖
 plt.subplot(236)
 
-my_kwargs = dict(ha='center', va='center', fontsize=50, c='b')
+my_kwargs = dict(ha = 'center', va = 'center', fontsize = 50, c = 'b')
 plt.text(0.5, 0.5, '歡迎來到美國', **my_kwargs)
 
 plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -139,104 +135,11 @@ plt.figure(num = '新進測試 02', figsize = (20, 15), dpi = 84, facecolor = "w
 #第一張圖
 plt.subplot(231)
 
-listx = ['c','c++','c#','java','python']
-listy1 = [25,20,20,16,28]
-listy2 = [20,8,18,16,22]
-plt.bar(listx, listy1, width=0.5, label='男')
-plt.bar(listx, listy2, width=0.5, bottom=listy1, label='女')
-plt.legend()
-plt.title("資訊程式課程選修人數")
-plt.xlabel("程式課程")
-plt.ylabel("選修人數")
-
-
-
-#第二張圖
-plt.subplot(232)
-
-width = 0.25
-listx = ['c','c++','c#','java','python']
-listx1 = [x - width/2 for x in range(len(listx))]
-listx2 = [x + width/2 for x in range(len(listx))]
-listy1 = [25,20,20,16,28]
-listy2 = [20,8,18,16,22]
-plt.bar(listx1, listy1, width, label='男')
-plt.bar(listx2, listy2, width, label='女')
-plt.xticks(range(len(listx)), labels=listx)
-plt.legend()
-plt.title("資訊程式課程選修人數")
-plt.xlabel("程式課程")
-plt.ylabel("選修人數")
-
-
-
-#第三張圖
-plt.subplot(233)
-
-listx = [31,15,20,25,12,18,45,21,33,5,18,22,37,42,10]
-listy = [68,20,61,32,45,56,10,18,70,64,43,66,19,77,21]
-scale = [x ** 3 for x in [5,4,2,6,7,1,8,9,2,3,2,4,5,7,2]]
-
-plt.xlim(0, 50)
-plt.ylim(0, 80)
-plt.scatter(listx, listy, c = 'r', s = scale, marker = 'o', alpha = 0.5)
-
-
-#第四張圖
-plt.subplot(234)
-
-sizes = [25, 30, 15, 10]
-labels = ["北部", "西部", "南部", "東部"]
-colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.2, 0)
-plt.pie(sizes, 
-	explode = explode, 
-	labels = labels, 
-	colors = colors,
-	labeldistance = 1.1, 
-	autopct = "%2.1f%%", 
-	pctdistance = 0.6,
-	shadow = True,
-	startangle = 90)
-
-
-#第五張圖
-plt.subplot(235)
-
-x1 = np.linspace(0.1, 10, 99)                   # 建立含30個元素的陣列
-x2 = np.linspace(0.1, 10, 99)                   # 建立含30個元素的陣列
-y1 = [math.log2(x) for x in x1]
-y2 = [math.log(x, 0.5) for x in x2]
-plt.plot(x1, y1, label="base = 2")
-plt.plot(x2, y2, label="base = 0.5")
-
-plt.legend(loc="best")                          # 建立圖例
-plt.axis([0, 10, -5, 5])
-plt.grid()
-
-
-#第六張圖
-plt.subplot(236)
-
-
-
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = '新進測試 03', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#第一張圖
-plt.subplot(231)
-
-degrees = [x * 15 for x in range(0,25)]
+degrees = [x * 15 for x in range(0, 25)]
 x = [math.cos(math.radians(d)) for d in degrees]
 y = [math.sin(math.radians(d)) for d in degrees]
 
-plt.scatter(x,y)
+plt.scatter(x, y)
 plt.axis('equal')
 plt.grid()
 
@@ -244,9 +147,10 @@ plt.grid()
 #第二張圖
 plt.subplot(232)
 
+radius = 5
 degrees = np.arange(0, 360)
-x = np.cos(np.radians(degrees))
-y = np.sin(np.radians(degrees))
+x = radius * np.cos(np.radians(degrees))
+y = radius * np.sin(np.radians(degrees))
 
 plt.plot(x, y)
 plt.axis('equal')
@@ -256,134 +160,69 @@ plt.grid()
 #第三張圖
 plt.subplot(233)
 
-x = np.linspace(0.1, 1000, 100000)          # 建立含100000個元素的陣列
-y = [(1+1/x)**x for x in x]
-plt.axis([0, 10, 0, 3])
-plt.plot(x, y, label="Euler's Number")
+x1 = np.linspace(0.1, 10, 99)                   # 建立含30個元素的陣列
+x2 = np.linspace(0.1, 10, 99)                   # 建立含30個元素的陣列
+y1 = [math.log2(x) for x in x1]
+y2 = [math.log(x, 0.5) for x in x2]
+plt.plot(x1, y1, label = "base = 2")
+plt.plot(x2, y2, label = "base = 0.5")
 
-plt.legend(loc="best")                      # 建立圖例
+plt.legend(loc = "best")                          # 建立圖例
+plt.axis([0, 10, -5, 5])
 plt.grid()
-
 
 
 #第四張圖
 plt.subplot(234)
 
 x = np.linspace(0.1, 1000, 100000)          # 建立含100000個元素的陣列
-y = [(1+1/x)**x for x in x]
-#plt.axis([0, 10, 0, 3])
-plt.plot(x, y, label="Euler's Number")
+y = [(1 + 1 / x) ** x for x in x]
+plt.axis([0, 10, 0, 3])
+plt.plot(x, y, label = "Euler's Number")
 
-plt.legend(loc="best")                      # 建立圖例
+plt.legend(loc = "best")                      # 建立圖例
 plt.grid()
-
 
 #第五張圖
 plt.subplot(235)
 
 x = np.linspace(-5, 5, 10000)               # 建立含10000個元素的陣列
-y = [1/(1+np.e**-x) for x in x]
+y = [1 / (1 + np.e ** -x) for x in x]
 plt.axis([-5, 5, 0, 1])
-plt.plot(x, y, label="Logistic function")
+plt.plot(x, y, label = "Logistic function")
 
-plt.legend(loc="best")                      # 建立圖例
+plt.legend(loc = "best")                      # 建立圖例
 plt.grid()
-
 
 #第六張圖
 plt.subplot(236)
 
 x = np.linspace(0.01, 0.99, 100)               # 建立含1000個元素的陣列
-y = [np.log(x/(1-x)) for x in x]
+y = [np.log(x / (1 - x)) for x in x]
 plt.axis([0, 1, -5, 5])
-plt.plot(x, y, label="Logit function")
-plt.plot(0.5, np.log(0.5/(1-0.5)),'-o')
+plt.plot(x, y, label = "Logit function")
+plt.plot(0.5, np.log(0.5 / (1 - 0.5)), '-o')
 
-plt.legend(loc="best")                          # 建立圖例
+plt.legend(loc = "best")                          # 建立圖例
 plt.grid()
 
-
 plt.show()
-'''
-
 
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = '新進測試 04', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '新進測試 03', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)
-
-print('畫出頻率分布圖')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
-
-dat = pd.read_csv(filename, encoding='UTF-8')
-
-# 計算各組別頻率
-hist = [0]*10 # 頻率（元素個數10，初始化為0）
-for dat in dat['數學']:
-    if dat < 10:   hist[0] += 1
-    elif dat < 20:  hist[1] += 1
-    elif dat < 30:  hist[2] += 1
-    elif dat < 40:  hist[3] += 1
-    elif dat < 50:  hist[4] += 1
-    elif dat < 60:  hist[5] += 1
-    elif dat < 70:  hist[6] += 1
-    elif dat < 80:  hist[7] += 1
-    elif dat < 90:  hist[8] += 1
-    elif dat <= 100:  hist[9] += 1 
-print('頻率:', hist)
-
-# 頻率分布圖
-x = list(range(1,11))  # x軸的值
-labels = ['0~','10~','20~','30~','40~','50~','60~','70~','80~','90~']  # x軸的刻度標籤
-plt.bar(x, hist, tick_label=labels, width=1)# 描繪長條圖
 
 
 #第二張圖
 plt.subplot(232)
 
-print('描繪頻率分布圖')
-
-# 讀入csv檔
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV7_onigiri.csv'
-dat = pd.read_csv(filename, encoding='UTF-8')
-
-# 頻率分布圖
-plt.hist(dat['店長'], bins=range(0, 200, 10), alpha=0.5)
-plt.hist(dat['太郎'], bins=range(0, 200, 10), alpha=0.5)
-
-print('計算平均數、變異數、標準差')
-
-print('店長---------')
-print('平均:', np.mean(dat['店長']))
-print('變異數:', np.var(dat['店長']))
-print('標準差:', np.std(dat['店長']))
-
-print('太郎---------')
-print('平均:', np.mean(dat['太郎']))
-print('變異數:', np.var(dat['太郎']))
-print('標準差:', np.std(dat['太郎']))
-
-
-
 
 #第三張圖
 plt.subplot(233)
-
-
 
 
 #第四張圖

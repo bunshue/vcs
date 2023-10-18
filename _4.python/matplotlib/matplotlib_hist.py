@@ -48,6 +48,27 @@ plt.hist(uniform_samples, bins = num_bins)
 #第四張圖
 plt.subplot(234)
 
+print('描繪頻率分布圖')
+
+# 讀入csv檔
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV7_onigiri.csv'
+dat = pd.read_csv(filename, encoding = 'UTF-8')
+
+# 頻率分布圖
+plt.hist(dat['店長'], bins = range(0, 200, 10), alpha = 0.5)
+plt.hist(dat['太郎'], bins = range(0, 200, 10), alpha = 0.5)
+
+print('計算平均數、變異數、標準差')
+
+print('店長---------')
+print('平均:', np.mean(dat['店長']))
+print('變異數:', np.var(dat['店長']))
+print('標準差:', np.std(dat['店長']))
+
+print('太郎---------')
+print('平均:', np.mean(dat['太郎']))
+print('變異數:', np.var(dat['太郎']))
+print('標準差:', np.std(dat['太郎']))
 
 #第五張圖
 plt.subplot(235)

@@ -1,6 +1,6 @@
-'''
+"""
 imshow
-'''
+"""
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
@@ -146,7 +146,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 
 #5
 #plt.hist(img.ravel(), bins=range(256), fc='k', ec='k')
@@ -173,7 +173,7 @@ imgplot = plt.imshow(img, interpolation="bilinear")
 imgplot = plt.imshow(img, interpolation="bicubic")
 
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -192,12 +192,12 @@ Z = (Z1 - Z2) * 2
 
 im = plt.imshow(Z, interpolation='bilinear', cmap=cm.gray,
                 origin='lower', extent=[-3, 3, -3, 3])
-'''
+"""
 im.set_url('https://www.google.com/')
 filename = 'C:/_git/vcs/_1.data/______test_files2/image.svg'
 fig.savefig(filename)
 print('已存圖' + filename)
-'''
+"""
 
 #第二張圖
 plt.subplot(232)

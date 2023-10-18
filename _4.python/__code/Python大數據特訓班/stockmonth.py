@@ -1,3 +1,12 @@
+import requests
+import json
+import csv
+import pandas as pd
+import os
+import time
+
+print('------------------------------------------------------------')	#60個
+
 def twodigit(n):  #將數值轉為二位數字串
     if(n < 10):
         retstr = '0' + str(n)
@@ -11,12 +20,6 @@ def convertDate(date):  #轉換民國日期為西元:106/03/02->20170302
     realyear = str(int(yearstr) + 1911)  #轉為西元年
     realdate = realyear + str1[4:6] + str1[7:9]  #組合日期
     return realdate
-
-import requests
-import json, csv
-import pandas as pd
-import os
-import time
 
 pd.options.mode.chained_assignment = None  #取消顯示pandas資料重設警告
 

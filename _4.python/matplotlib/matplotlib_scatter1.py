@@ -3,7 +3,6 @@
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from numpy.random import rand
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
@@ -15,30 +14,230 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 #          編號                  圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'scatter 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = 'scatter 集合 1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)
 
 #散點圖
-a = rand(500)
-b = rand(500)
-plt.scatter(a,b)
+N = 500
+#一般random
+x = np.random.rand(N)
+y = np.random.rand(N)
+plt.scatter(x, y)
 
-#plt.scatter(np.random.randn(100), np.random.randn(100))
+#常態random
+x = np.random.randn(N)
+y = np.random.randn(N)
+plt.scatter(x, y)
 
 #第二張圖
 plt.subplot(232)
 
-x = np.random.rand(1000)
-y = np.random.rand(1000)
-size = np.random.rand(1000) * 50
-color = np.random.rand(1000)
+x = np.random.rand(N)
+y = np.random.rand(N)
+
+size = np.random.rand(N) * 50
+color = np.random.rand(N)
 plt.scatter(x, y, size, color)
 plt.colorbar()
 
 #第三張圖
 plt.subplot(233)
+
+plt.xlim(-3, 3)
+plt.ylim(-3, 3)
+x1 = np.random.normal(0, 1, 1024)
+y1 = np.random.normal(0, 1, 1024)
+plt.scatter(x1, y1, alpha = 0.3)
+
+#第四張圖
+plt.subplot(234)
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
+
+N = 500
+x = np.random.rand(N)
+y = np.random.rand(N)
+plt.scatter(x, y, c=y, cmap = 'hsv')  # 色彩依 y 軸值變化
+plt.colorbar()
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'scatter 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+#Hyperlinks
+import numpy as np
+import matplotlib.pyplot as plt
+
+s = plt.scatter([1, 2, 3], [4, 5, 6])
+s.set_urls(['https://www.bbc.com/news', 'https://www.google.com/', None])
+
+
+#第二張圖
+plt.subplot(232)
+
+
+'''
+xpt = np.linspace(0, 5, 50)                            # 建立含500個元素的陣列
+ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
+plt.scatter(xpt, ypt, s=50, c=ypt, cmap='hsv')          # 色彩隨y軸值變化
+
+
+xpt = np.linspace(0, 5, 500)                            # 建立含500個元素的陣列
+ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
+plt.scatter(xpt, ypt, s=50, c=xpt, cmap='hsv')          # 色彩隨x軸值變化
+'''
+
+x = np.arange(50)
+y = x
+t = x
+plt.scatter(x, y, c=t, cmap='rainbow')
+
+
+#第三張圖
+plt.subplot(233)
+
+POINTS = 10
+#由平均 0, 標準差 1 的分布中取 20 個數
+#np.random.randn(20)
+
+#試取 100 個, 算平均、標準差
+
+x = np.arange(POINTS)
+g = np.random.randn(POINTS)
+g.mean()
+g.std()
+
+#不同的平均值和標準差
+#比如我們想要平均值變成 70, 標準差 10 怎麼做呢?
+#g2 = g*10 + 70
+
+print(g)
+#g.sort()
+print(g)
+
+plt.scatter(x, g, c = 'blue', marker = '.')
+
+
+
+#第四張圖
+plt.subplot(234)
+
+listx = [31,15,20,25,12,18,45,21,33,5,18,22,37,42,10]
+listy = [68,20,61,32,45,56,10,18,70,64,43,66,19,77,21]
+scale = [x ** 3 for x in [5,4,2,6,7,1,8,9,2,3,2,4,5,7,2]]
+
+plt.xlim(0, 50)
+plt.ylim(0, 80)
+plt.scatter(listx, listy, c = 'r', s = scale, marker = 'o', alpha = 0.5)
+
+
+#第五張圖
+plt.subplot(235)
+
+minutes = [45, 34, 56, 77, 90, 90, 90, 34, 45, 44, 80, 15, 10, 12]
+scores =  [90, 80, 100, 65, 5, 30, 55, 100, 90, 80, 60, 5, 0, 10]
+plt.xlabel('解題時間')
+plt.ylabel('分數')
+plt.scatter(minutes, scores)
+
+#第六張圖
+plt.subplot(236)
+
+import random
+
+def loc(index):
+    ''' 處理座標的移動 '''
+    x_mov = random.choice([-3,-2,-1,1,2,3])     # 隨機x軸移動值
+    xloc = x[index-1] + x_mov                   # 計算x軸新位置
+    y_mov = random.choice([-5,-3,-1,1,3,5])     # 隨機y軸移動值
+    yloc = y[index-1] + y_mov                   # 計算y軸新位置
+    x.append(xloc)                              # x軸新位置加入串列
+    y.append(yloc)                              # y軸新位置加入串列
+    
+num = 10000                                     # 設定隨機點的數量
+x = [0]                                         # 設定第一次執行x座標
+y = [0]                                         # 設定第一次執行y座標
+
+for i in range(1, num):                     # 建立點的座標
+    loc(i)
+t = x                                       # 色彩隨x軸變化
+plt.scatter(x, y, s=2, c=t, cmap='brg')
+#plt.axis('off')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'scatter 集合 3 雜訊', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# y = 1.2x + 0.8
+x = np.linspace(0, 5, 50)
+y = 1.2 * x + 0.8
+y = 1.2 * x + 0.8 + 0.3 * np.random.randn(50)   #加上noise
+
+plt.scatter(x, y)
+plt.plot(x, 1.2 * x + 0.8, 'r')
+
+
+#第二張圖
+plt.subplot(232)
+
+x = np.linspace(0, 10, 200)
+y1 = np.sin(x)
+y2 = np.sin(x) + 0.3 * np.random.randn(200)
+
+plt.plot(x, y1, 'r')
+
+plt.scatter(x, y2)
+
+
+#第三張圖
+plt.subplot(233)
+
+
+#曲線資料加入雜訊
+x = np.linspace(-5, 5, 51)
+y = np.sin(x)
+yn = y + np.random.rand(1, len(y)) * 1.5
+
+plt.scatter(x, yn, c = 'blue', marker = '.')
+plt.plot(x, y + 0.75, 'r')
+
+
+
+#第四張圖
+plt.subplot(234)
+
+
+
+#第五張圖
+plt.subplot(235)
+
+
+#第六張圖
+plt.subplot(236)
 
 from pylab import *
 
@@ -161,200 +360,190 @@ xlabel("Year launched")
 ylabel("Tonnage (BOM)")
 grid(True, ls = '-', c = '#a0a0a0')
 
-#第四張圖
-plt.subplot(234)
-
-#Hyperlinks
-import numpy as np
-import matplotlib.pyplot as plt
-
-s = plt.scatter([1, 2, 3], [4, 5, 6])
-s.set_urls(['https://www.bbc.com/news', 'https://www.google.com/', None])
-
-#第五張圖
-plt.subplot(235)
-
-'''
-xpt = np.linspace(0, 5, 50)                            # 建立含500個元素的陣列
-ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
-plt.scatter(xpt, ypt, s=50, c=ypt, cmap='hsv')          # 色彩隨y軸值變化
-
-
-xpt = np.linspace(0, 5, 500)                            # 建立含500個元素的陣列
-ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
-plt.scatter(xpt, ypt, s=50, c=xpt, cmap='hsv')          # 色彩隨x軸值變化
-'''
-
-x = np.arange(50)
-y = x
-t = x
-plt.scatter(x, y, c=t, cmap='rainbow')
-
-
-#第六張圖
-plt.subplot(236)
-
-
 plt.show()
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'scatter 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+#          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
+plt.figure(num = 'scatter 集合 4', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)
 
-X = np.random.randn(300)
-Y = np.random.randn(300)
-plt.scatter(X, Y)
+
+
 
 #第二張圖
 plt.subplot(232)
 
-x = np.random.rand(1000)
-y = np.random.rand(1000)
-plt.scatter(x, y, c=y, cmap='hsv')  # 色彩依 y 軸值變化
-plt.colorbar()
+print('繪製散布圖')
+import matplotlib.pyplot as plt
+import pandas as pd
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
+
+# 讀入資料
+dat = pd.read_csv(filename, encoding='UTF-8')
+
+# 散布圖
+plt.scatter(dat['數學'], dat['理科'])
+plt.axis('equal')
+
+
+#共變異數與相關係數
+import numpy as np
+correlation = np.corrcoef(dat['數學'], dat['理科']) # 計算相關係數
+correlation[0,1]  # 顯示在畫面
+
+
 
 #第三張圖
 plt.subplot(233)
 
-POINTS = 10
-#由平均 0, 標準差 1 的分布中取 20 個數
-#np.random.randn(20)
 
-#試取 100 個, 算平均、標準差
+#連接2點的直線
 
-x = np.arange(POINTS)
-g = np.random.randn(POINTS)
-g.mean()
-g.std()
+import matplotlib.pyplot as plt
+import numpy as np
 
-#不同的平均值和標準差
-#比如我們想要平均值變成 70, 標準差 10 怎麼做呢?
-#g2 = g*10 + 70
+# 資料
+x = np.arange(1, 5.1, 0.1)
+y = 1/2*x + (1/2)
 
-print(g)
-#g.sort()
-print(g)
+# 繪圖
+plt.scatter(x, y)
+plt.grid(color='0.8')
 
-plt.scatter(x, g, c = 'blue', marker = '.')
 
 
 
 #第四張圖
 plt.subplot(234)
 
-plt.xlim(-3, 3)
-plt.ylim(-3, 3)
-x1 = np.random.normal(0, 1, 1024)
-y1 = np.random.normal(0, 1, 1024)
-plt.scatter(x1, y1, alpha = 0.3)
+x = np.random.randn(100)
+y = np.random.randn(100)
+
+plt.scatter(x, y, s=250)
+
+#畫不同顏色的scatter
+cl = np.random.randint(1, 4, 100)
+plt.scatter(x, y, s=100, c=cl, alpha=0.6, cmap="Paired")
+
+#第五張圖
+plt.subplot(235)
+
+
+
+
+
+
+#第六張圖
+plt.subplot(236)
+
+# Generate 100 random data points along 3 dimensions
+x, y, scale = np.random.randn(3, 100)
+
+# Map each onto a scatterplot we'll create with Matplotlib
+plt.scatter(x=x, y=y, c=scale, s=np.abs(scale)*500)
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+#          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
+plt.figure(num = 'scatter 集合 5', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#第一張圖
+plt.subplot(231)
+
+N = 50                                      # 色彩數列的點數
+colorused = ['b','c','g','k','m','r','y']   # 定義顏色
+colors = []                                 # 建立色彩數列
+for i in range(N):                          # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+x = np.linspace(0.0, 2*np.pi, N)            # 建立 50 個點
+y1 = np.sin(x)
+plt.scatter(x, y1, c=colors, marker='*')    # 繪製 sine
+y2 = np.cos(x)
+plt.scatter(x, y2, c=colors, marker='s')    # 繪製 cos
+
+#第二張圖
+plt.subplot(232)
+
+N = 50                                      # 色彩數列的點數
+colorused = ['b','c','g','k','m','r','y']   # 定義顏色
+colors = []                                 # 建立色彩數列
+for i in range(N):                     # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+x = np.random.randint(1,11,N)          # 建立 x
+y = np.random.randint(1,11,N)          # 建立 y
+size =  (30 * np.random.rand(N))**2    # 散點大小數列
+plt.scatter(x, y, s=size, c=colors)         # 繪製散點
+plt.xticks(np.arange(0,12,step=1.0))        # x 軸刻度
+plt.yticks(np.arange(0,12,step=1.0))        # y 軸刻度
+
+#第三張圖
+plt.subplot(233)
+
+x = np.linspace(0, 5, 500)                # 含500個元素的陣列
+y = 1 - 0.5*np.abs(x-2)                   # y陣列的變化
+plt.scatter(x,y,s=50,c=x,cmap='rainbow')  # 色彩隨 x 軸值變化
+
+#第四張圖
+plt.subplot(234)
+
+x = np.linspace(0, 5, 500)                # 含500個元素的陣列
+y = 1 - 0.5*np.abs(x-2)                   # y陣列的變化
+plt.scatter(x,y,s=50,c=y,cmap='rainbow')  # 色彩隨 y 軸值變化
+plt.colorbar()                            # 色彩條
 
 
 #第五張圖
 plt.subplot(235)
 
-minutes = [45, 34, 56, 77, 90, 90, 90, 34, 45, 44, 80, 15, 10, 12]
-scores =  [90, 80, 100, 65, 5, 30, 55, 100, 90, 80, 60, 5, 0, 10]
-plt.xlabel('解題時間')
-plt.ylabel('分數')
-plt.scatter(minutes, scores)
-
-#第六張圖
-plt.subplot(236)
-
 import random
 
 def loc(index):
-    ''' 處理座標的移動 '''
-    x_mov = random.choice([-3,-2,-1,1,2,3])     # 隨機x軸移動值
-    xloc = x[index-1] + x_mov                   # 計算x軸新位置
-    y_mov = random.choice([-5,-3,-1,1,3,5])     # 隨機y軸移動值
-    yloc = y[index-1] + y_mov                   # 計算y軸新位置
-    x.append(xloc)                              # x軸新位置加入串列
-    y.append(yloc)                              # y軸新位置加入串列
+    #處理座標的移動
+    x_mov = random.choice([-3, 3])          # 隨機x軸移動值
+    xloc = x[index-1] + x_mov               # 計算x軸新位置
+    y_mov = random.choice([-5, -1, 1, 5])   # 隨機y軸移動值
+    yloc = y[index-1] + y_mov               # 計算y軸新位置
+    x.append(xloc)                          # x軸新位置加入串列
+    y.append(yloc)                          # y軸新位置加入串列
     
-num = 10000                                     # 設定隨機點的數量
-x = [0]                                         # 設定第一次執行x座標
-y = [0]                                         # 設定第一次執行y座標
+num = 10000                                 # 設定隨機點的數量
+x = [0]                                     # 設定第一次執行x座標
+y = [0]                                     # 設定第一次執行y座標
 
 for i in range(1, num):                     # 建立點的座標
     loc(i)
 t = x                                       # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap='brg')
-#plt.axis('off')
-
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'scatter 集合 雜訊', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#第一張圖
-plt.subplot(231)
-
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-
-# y = 1.2x + 0.8
-x = np.linspace(0, 5, 50)
-y = 1.2*x + 0.8
-y = 1.2*x + 0.8 + 0.3 * np.random.randn(50)   #加上noise
-
-plt.scatter(x, y)
-plt.plot(x, 1.2 * x + 0.8, 'r')
-
-
-#第二張圖
-plt.subplot(232)
-
-x = np.linspace(0, 10, 200)
-y1 = np.sin(x)
-y2 = np.sin(x) + 0.3 * np.random.randn(200)
-
-plt.plot(x, y1, 'r')
-
-plt.scatter(x, y2)
-
-
-#第三張圖
-plt.subplot(233)
-
-
-#曲線資料加入雜訊
-x = np.linspace(-5, 5, 51)
-y = np.sin(x)
-yn = y + np.random.rand(1, len(y)) * 1.5
-
-plt.scatter(x, yn, c = 'blue', marker = '.')
-plt.plot(x, y + 0.75, 'r')
-
-
-
-#第四張圖
-plt.subplot(234)
-
-
-
-#第五張圖
-plt.subplot(235)
+plt.axis('off')                             # 隱藏座標
 
 
 #第六張圖
 plt.subplot(236)
 
 
+x = np.linspace(0, 10, 51)
+print(type(x))
+
+y1 = np.sin(x) * 5 + 5
+y2 = np.cos(x) * 5 + 5
+
+plt.scatter(x, y1, c = 'r')       #畫出每個x-y對應點
+plt.scatter(x, y2, c = 'g')       #畫出每個x-y對應點
+
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+
+
+
+
 

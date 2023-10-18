@@ -3,7 +3,15 @@
 """
 
 import sys
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
@@ -72,11 +80,6 @@ df["Gender"] = label_encoder.fit_transform(df["Gender"])
 print(df)
 
 print('------------------------------------------------------------')	#60個
-
-import sys
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 
 # 載入資料集
 
@@ -197,8 +200,6 @@ print('係數矩陣 :', df.corr())
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-import pandas as pd
 
 data = pd.read_csv('data/PM25_tw.csv')
 

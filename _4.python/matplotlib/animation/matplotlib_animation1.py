@@ -1,10 +1,6 @@
-# plot 集合 動畫
-
-import sys
-
-import matplotlib.pyplot as plt  
-import numpy as np  
+import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import numpy as np
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
@@ -14,6 +10,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
+
 '''
 # 建立最初化的 line 資料 (x, y)  
 def init():  
@@ -77,7 +74,6 @@ ani = FuncAnimation(fig = fig,
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 
 
 #偽存檔
