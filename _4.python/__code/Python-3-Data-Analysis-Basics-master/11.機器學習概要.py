@@ -197,9 +197,7 @@ plt.show()
 #和前面 SVM 很像。
 
 from sklearn.cluster import KMeans
-
 #告訴 K-Means 要分成幾類 (我們這裡是 3 類)。
-
 clf = KMeans(n_clusters = 3)
 
 #step 2. fit 學習、訓練
@@ -215,11 +213,14 @@ print(clf.labels_)
 #當然我們還是有 predict, 所以也可以用 predict 預測, 但這電腦自己分的, 答案自然 100% 相同!
 print(clf.predict(x))
 
+y_prd = clf.predict(x)
+
 #我們可以檢查一下, 確認答案是不是真的一樣!
 print(np.array_equal(clf.labels_, clf.predict(x)))
 
 #畫圖來看看分得怎麼樣。
-plt.scatter(x[:, 0], x[:, 1], c = clf.labels_, cmap='Paired')
+#plt.scatter(x[:, 0], x[:, 1], c = y_prd)
+plt.scatter(x[:, 0], x[:, 1], c = clf.labels_, cmap = 'Paired')
 #plt.scatter(x[:, 0], x[:, 1], s = 50, c = clf.labels_)
 plt.show()
 
@@ -231,17 +232,16 @@ gd = np.array([[i,j] for i in np.arange(-4, 4, 0.4)
 
 gdc = clf.predict(gd)
 
-plt.scatter(gd[:,0], gd[:,1], s=50, c=gdc)
+plt.scatter(gd[:, 0], gd[:, 1], s = 50, c = gdc)
 plt.show()
 
-
-x1, x2 = np.meshgrid(np.arange(-0.2,1.2,0.02), np.arange(-0.2,1.2,0.02))
+x1, x2 = np.meshgrid(np.arange(-0.2, 1.2, 0.02), np.arange(-0.2, 1.2, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 
 z = Z.reshape(x1.shape)
 
-plt.contourf(x1, x2, z, alpha=0.3)
-plt.scatter(x[:,0], x[:,1], s=100, c=clf.labels_)
+plt.contourf(x1, x2, z, alpha = 0.3)
+plt.scatter(x[:, 0], x[:, 1], s = 100, c = clf.labels_)
 plt.show()
 
 #呈現出來
@@ -251,8 +251,9 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
-plt.scatter(x[:,0], x[:,1], c=clf.labels_)
+plt.contourf(xm, ym, Z, alpha = 0.3)
+plt.scatter(x[:, 0], x[:, 1], c = clf.labels_)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -327,8 +328,6 @@ x, y = make_blobs(n_samples = 500, centers = 3,
 
 plt.scatter(x[:, 0], x[:, 1], c = y, cmap = 'Paired', s = 80)
 plt.show()
-
-
 
 print('------------------------------------------------------------')	#60個
 

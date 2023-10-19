@@ -17,9 +17,10 @@ print('每個元素的平方')
 print(x ** 2)
 
 np1 = np.array([1, 2, 3, 4])	#串列 轉 np.array
-np2 = np.array((5, 6, 7, 8))	#元組 轉 np.array
 print(type(np1))
 print(np1)
+
+np2 = np.array((5, 6, 7, 8))	#元組 轉 np.array
 print(type(np2))
 print(np2)
 

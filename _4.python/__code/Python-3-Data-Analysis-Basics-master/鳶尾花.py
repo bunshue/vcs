@@ -11,6 +11,15 @@
 
 在 sklearn.datasets 有幾個數據庫可以提供給大家玩玩。
 
+以Iris dataset為例，鳶尾花資料集是非常著名的生物資訊資料集之一，
+取自美國加州大學歐文分校的機器學習資料庫http://archive.ics.uci.edu/ml/datasets/Iris
+資料的筆數為150筆，共有五個欄位：
+1. 花萼長度(Sepal Length)：計算單位是公分。
+2. 花萼寬度(Sepal Width)：計算單位是公分。
+3. 花瓣長度(Petal Length) ：計算單位是公分。
+4. 花瓣寬度(Petal Width)：計算單位是公分。
+5. 類別(Class)：可分為Setosa，Versicolor和Virginica三個品種。
+
 """
 
 import sys
@@ -30,10 +39,10 @@ print('------------------------------------------------------------')	#60個
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 
-#Iris 鳶尾花數據庫
+#Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 iris = load_iris()
 
-#看數據庫的說明
+print('看鳶尾花數據庫的說明')
 print(iris.DESCR)
 
 #看數據庫說明。我們這裡看看 features 有哪些?
@@ -44,6 +53,37 @@ print(iris.feature_names)
 #petal  花瓣
 
 print(iris.data)
+print(type(iris.data))
+print(len(iris.data))
+print(iris.data.shape)
+print(iris.data[:5])    #前5筆資料
+print(iris.target)
+
+"""
+#debug 10筆資料
+iris.data = iris.data[45:55]
+iris.target = iris.target[45:55]
+"""
+
+#debug 10筆資料
+irisdata = [[5.1, 3.5, 1.4, 0.2],
+            [4.9, 3.0, 1.4, 0.2],
+            [4.7, 3.2, 1.3, 0.2],
+            [7.0, 3.2, 4.7, 1.4],
+            [6.4, 3.2, 4.5, 1.5],
+            [6.9, 3.1, 4.9, 1.5],
+            [6.3, 2.5, 5.0, 1.9],
+            [6.5, 3.0, 5.2, 2.0],
+            [6.2, 3.4, 5.4, 2.3],
+            [5.9, 3.0, 5.1, 1.8]]
+iris.data = np.array(irisdata)
+iristarget = [0, 0, 0, 1, 1, 1, 2, 2, 2, 2]
+iris.target = np.array(iristarget)
+
+print('data')
+print(iris.data)
+print('target')
+print(iris.target)
 
 #資料內容
 #這些數據中, data 就是我們的 x (輸入), target 是 y (輸出)。
@@ -68,7 +108,8 @@ Y = y
 
 #只選兩個 features 原因之一是好畫 :)
 
-plt.scatter(X[:,0], X[:,1], s = 50, c = Y)
+plt.scatter(X[:,0], X[:,1], c = 'pink', s = 150)
+plt.scatter(X[:,0], X[:,1], s = 50, c = Y, alpha = 0.6)
 plt.title('花萼 原始資料')
 
 plt.show()
@@ -109,13 +150,11 @@ from sklearn.svm import SVC
 clf = SVC()
 
 #第二部曲：訓練
-
 clf.fit(x_train, y_train)
 
 SVC()
 
 #第三部曲：預測
-
 y_predict= clf.predict(x_test)
 
 #看看我們模型預測和真實狀況差多少?
@@ -136,9 +175,9 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
+plt.contourf(xm, ym, Z, alpha = 0.3)
 
-plt.scatter(X[:,0], X[:,1], c=Y)
+plt.scatter(X[:, 0], X[:, 1], c = Y)
 
 plt.show()
 
@@ -149,18 +188,33 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
+plt.contourf(xm, ym, Z, alpha = 0.3)
 
-plt.scatter(X[:,0], X[:,1], c=Y)
+plt.scatter(X[:, 0], X[:, 1], c = Y)
 plt.show()
+
+'''
+X, Y = np.meshgrid(np.arange(4, 8, 0.02), np.arange(2, 4.5, 0.02))
+
+x_data = np.c_[X.ravel(), Y.ravel()]
+
+data_pred = clf.predict(x_data)
+
+Z = data_pred.reshape(X.shape)
+
+plt.contourf(X, Y, Z, alpha = 0.3)
+plt.scatter(x[:, 0], x[:, 1], c = y)
+
+plt.show()
+'''
 
 #畫出結果
 
-x1, x2 = np.meshgrid(np.arange(0,7,0.02), np.arange(0,3,0.02))
+x1, x2 = np.meshgrid(np.arange(0,7, 0.02), np.arange(0,3, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 Z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, Z, alpha=0.3)
-plt.scatter(X[:,0], X[:,1], c=Y)
+plt.contourf(x1, x2, Z, alpha = 0.3)
+plt.scatter(X[:, 0], X[:, 1], c = Y)
 plt.show()
 
 
@@ -169,7 +223,7 @@ print('------------------------------------------------------------')	#60個
 #PCA 可以救鳶尾花嗎？
 from sklearn.decomposition import PCA
 
-pca = PCA(n_components=2)
+pca = PCA(n_components = 2)
 
 pca.fit(x)
 
@@ -178,17 +232,17 @@ X = pca.transform(x)
 print(x.shape)
 print(len(x))
 print(x)
-print(x[87])
+print(x[7])
 
 #經 PCA 之後, 濃縮成 2 維向量。
 print(X.shape)
 print(len(X))
 print(X)
-print(X[87])
+print(X[7])
 
 #看看 PCA 後, 來看看整個分布的狀況。
 
-plt.scatter(X[:,0], X[:,1], c=y, cmap='Paired')
+plt.scatter(X[:, 0], X[:, 1], c = y, cmap = 'Paired')
 plt.show()
 
 #看來好像真的會比較容易切開, 我們來試試是否真的這樣。先來分訓練和測試資料。
@@ -218,22 +272,12 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3, cmap='Paired')
-plt.scatter(X[:,0], X[:,1], c=y, cmap='Paired')
+plt.contourf(xm, ym, Z, alpha = 0.3, cmap = 'Paired')
+plt.scatter(X[:, 0], X[:, 1], c = y, cmap = 'Paired')
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 print('作業完成')
 

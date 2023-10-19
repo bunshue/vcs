@@ -1365,6 +1365,554 @@ else:
 '''
 print('------------------------------------------------------------')	#60個
 
+import os
+print(os.name)
+print(os.sys.platform)
+
+
+print('------------------------------------------------------------')	#60個
+
+for envname in 'TMPDIR', 'TEMP', 'TMP':
+    dirname = os.getenv(envname)
+    print('cccccc', dirname)
+    #print(dirname)
+
+print('------------------------------------------------------------')	#60個
+
+import numpy as np
+import pandas as pd
+
+print(np.__version__)
+
+import numpy 
+print(numpy.version.version)
+
+#使用 importlib.metadata 模块查找 NumPy 模块的版本
+from importlib_metadata import version
+print(version('numpy'))
+
+import pkg_resources
+print(pkg_resources.get_distribution('numpy').version)
+
+
+print('查詢已安裝的 Pandas 版本')
+print(pd.__version__)
+
+import pandas as pd
+print(pd.__version__)
+
+print('------------------------------------------------------------')	#60個
+
+#import this	可以看到 Zen of Python
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import sys
+
+'''
+import shutil
+import os
+
+fullpath = os.path.abspath('myprime.py')
+path, filename = os.path.split(fullpath)
+filename, extname = os.path.splitext(filename)
+if not os.path.exists("test-dir"):
+    os.mkdir("test-dir")
+targetfullpath = os.path.join(path, os.path.join("test-dir", "00"+extname))
+shutil.copy(fullpath, targetfullpath)
+
+try:
+    print("實際上預期可能會有例外的程式碼寫在這裡！")
+    10 / 0
+    print("在可能發生例外的指令之下的程式碼放在這邊！")
+except Exception as e:
+    print("發生錯誤了，錯誤訊息如下：")
+    print(e)
+else:
+    print("沒有發生任何錯誤。")
+finally:
+    print("不管如何，都要執行這裡")
+
+print('------------------------------------------------------------')	#60個
+
+#form PIL import Image
+
+source = input("請輸入來源資料夾：")
+if os.path.exists(source):
+    target = input("請輸入目標資料夾：")
+    if not os.path.exists(target):
+        os.mkdir(target)
+        allfiles = os.listdir(source)
+        for file in allfiles:
+            filename, ext = os.path.splitext(file)
+            filename = filename + "_s"
+            targetfile = filename + ext
+            im = Image.open(os.path.join(source, file))
+            thumbnail = im.resize((320,200))
+            thumbnail.save(os.path.join(target, targetfile))
+            im.close()
+            thumbnail.close()
+            print("{}-->{}".format(file, targetfile))
+    else:
+        print("目標資料夾已存在，無法進行。")
+else:    
+    print("找不到來源資料夾。")
+'''
+print('------------------------------------------------------------')	#60個
+
+import os
+from PIL import Image
+
+pre_html = """
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8'/>
+</head>
+<body>
+<table>
+"""
+
+post_html = """
+</table>
+</body>
+</html>
+"""
+'''
+table_html = ""
+
+source = input("請輸入來源資料夾：")
+if os.path.exists(source):
+    target = input("請輸入目標資料夾：")
+    if not os.path.exists(target):
+        os.mkdir(target)
+        allfiles = os.listdir(source)
+        for file in allfiles:
+            filename, ext = os.path.splitext(file)
+            filename = filename + "_s"
+            targetfile = filename + ext
+            im = Image.open(os.path.join(source, file))
+            thumbnail = im.resize((320,200))
+            thumbnail.save(os.path.join(target, targetfile))
+            im.close()
+            thumbnail.close()
+            print("{}-->{}".format(file, targetfile))
+#以下的程式碼用來建立HTML索引檔的表格內容            
+            table_html += "<tr><td><a href='{}'><img src='{}'></a></td></tr>".format(
+                os.path.join("..", os.path.join(source, file)),
+                targetfile)
+#以上的程式碼用來建立HTML索引檔的表格內容
+    else:
+        print("目標資料夾已存在，無法進行。")
+else:    
+    print("找不到來源資料夾。")
+html = pre_html + table_html + post_html
+with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
+    f.write(html)
+'''
+print('------------------------------------------------------------')	#60個
+
+import os
+from PIL import Image
+
+pre_html = """
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8'/>
+</head>
+<body>
+<table>
+<tr>
+"""
+
+post_html = """
+</tr>
+</table>
+</body>
+</html>
+"""
+
+
+table_html = ""
+'''
+source = input("請輸入來源資料夾：")
+if os.path.exists(source):
+    target = input("請輸入目標資料夾：")
+    if not os.path.exists(target):
+        os.mkdir(target)
+        allfiles = os.listdir(source)
+        for index, file in enumerate(allfiles):
+            filename, ext = os.path.splitext(file)
+            filename = filename + "_s"
+            targetfile = filename + ext
+            im = Image.open(os.path.join(source, file))
+            thumbnail = im.resize((320,200))
+            thumbnail.save(os.path.join(target, targetfile))
+            im.close()
+            thumbnail.close()
+            print("{}-->{}".format(file, targetfile))
+#以下的程式碼用來建立HTML索引檔的表格內容         
+            table_html += "<td><a href='{}'><img src='{}'></a></td>".format(
+                os.path.join("..", os.path.join(source, file)),
+                targetfile)
+            if (index+1) % 3 == 0:
+                table_html += "</tr><tr>"
+#以上的程式碼用來建立HTML索引檔的表格內容
+    else:
+        print("目標資料夾已存在，無法進行。")
+else:    
+    print("找不到來源資料夾。")
+html = pre_html + table_html + post_html
+with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
+    f.write(html)
+'''
+print('------------------------------------------------------------')	#60個
+
+
+import sys, os, time
+from stat import *
+
+secs_per_year = 365.0 * 24.0 * 3600.0   # Scale factor
+now = time.time()                       # Current time, for age computations
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+    
+st = os.lstat(filename)
+
+itime = ST_MTIME
+#itime = ST_CTIME
+anytime = st[itime]
+size = st[ST_SIZE]
+age = now - anytime
+byteyears = float(size) * float(age) / secs_per_year
+
+print(filename.ljust(50), end=' ')
+print(repr(int(byteyears)).rjust(8))
+
+print()
+
+print(filename.ljust(60), end=' ')
+print(repr(int(byteyears)).rjust(8))
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import os
+import sys
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+
+short_filename = os.path.basename(filename)
+
+print(short_filename)
+
+cache_dir = os.path.dirname(filename)
+print(cache_dir)
+
+head, tail = short_filename[:-3], short_filename[-3:]
+print(head)
+print(tail)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import sys
+import os
+    
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+canonic = os.path.abspath(filename)
+print(canonic)
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+canonic = os.path.normcase(filename)
+print(canonic)
+
+print('------------------------------------------------------------')	#60個
+
+
+import datetime
+
+text = '2012-09-20'
+y = datetime.datetime.strptime(text, '%Y-%m-%d')
+z = datetime.datetime.now()
+diff = z - y
+print(diff)
+
+print(z)
+nice_z = datetime.datetime.strftime(z, '%A %B %d, %Y')
+print(nice_z)
+
+
+text = '2012-09-20'
+year_s, mon_s, day_s = text.split('-')
+ttt = datetime.datetime(int(year_s), int(mon_s), int(day_s))
+print(ttt)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+print('計算字數')
+
+def count_words(filename):
+    """Count the approximate number of words in a file."""
+    try:
+        with open(filename, encoding='utf-8') as f:
+            contents = f.read()
+    except FileNotFoundError:
+        pass
+    else:
+        words = contents.split()
+        num_words = len(words)
+        print(f"The file {filename} has about {num_words} words.")
+
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/siddhartha.txt'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_dick.txt'
+filename4 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt'
+
+filenames = [filename1, filename2, filename3, filename4]
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
+
+for filename in filenames:
+    count_words(filename)
+
+print('------------------------------------------------------------')	#60個
+
+
+print('統計一個檔案的字數')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt'
+
+try:
+    with open(filename, encoding='utf-8') as f:
+        contents = f.read()
+except FileNotFoundError:
+    print(f"Sorry, the file {filename} does not exist.")
+else:
+    # Count the approximate number of words in the file.
+    words = contents.split()
+    num_words = len(words)
+    print(f"The file {filename} has about {num_words} words.")
+
+
+print('------------------------------------------------------------')	#60個
+
+'''
+import numpy as np
+
+N = 10
+
+a = np.arange(N)    #numpy.ndarray
+
+print(type(a))
+print(a)
+
+b = range(1, 11)    #range
+print(type(b))
+print(b)
+
+c = list(b)         #list
+print(type(c))
+print(c)
+
+for d in reversed(c):
+    print(d)
+
+print('------------------------------------------------------------')	#60個
+
+import numpy as np
+
+a = np.array([2,3,4,5,6])
+print(f'a = {a}')
+b = np.ma.masked_where(a > 3, a)
+print(f'b = {b}')
+
+print('------------------------------------------------------------')	#60個
+
+"""
+y = x ^ 2
+x = [x for x in range(31)]
+y = [(y * y) for y in x]
+"""
+
+print('------------------------------------------------------------')	#60個
+
+print('取得本程式名稱')
+progname = os.path.basename(sys.argv[0])
+print(progname)
+
+print('------------------------------------------------------------')	#60個
+
+n = list(range(100))
+r = list(range(25))
+n = list(range(10)) * 10
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import os
+import sys
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+head, ext = os.path.splitext(filename)
+head, base = os.path.split(filename)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+name = 'aaaamock'
+message = '%s(%%s)' % name
+
+print(message)
+
+print('------------------------------------------------------------')	#60個
+
+number = 123456
+NUMBER_OF_DIGITS = 10
+print(number)
+numberList = list(str(number).zfill(NUMBER_OF_DIGITS))
+print(numberList)
+numberList = list(str(number))
+print(numberList)
+
+
+print('------------------------------------------------------------')	#60個
+
+time.sleep(random.randint(20, 50) / 10.0)
+
+print('------------------------------------------------------------')	#60個
+
+"""
+drawTime = time.time()
+#等待使用者按鍵輸入
+input()  # This function call doesn't return until Enter is pressed.
+timeElapsed = time.time() - drawTime
+
+timeElapsed = round(timeElapsed, 4)
+print('You took', timeElapsed, 'seconds to draw.')
+"""
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+try:
+    import pyperclip  # pyperclip copies text to the clipboard.
+except ImportError:
+    pass  # If pyperclip is not installed, do nothing. It's no big deal.
+
+
+pigLatin = 'this is a lion-mouse'
+
+
+try:
+    pyperclip.copy(pigLatin)
+    print('(Copied pig latin to clipboard.)')
+except NameError:
+    pass  # Do nothing if pyperclip wasn't installed.
+
+print('------------------------------------------------------------')	#60個
+
+try:
+    import pyperclip  # pyperclip copies text to the clipboard.
+except ImportError:
+    pass  # If pyperclip is not installed, do nothing. It's no big deal.
+
+
+spongecase = 'this is aaaaaaaaa'
+
+try:
+    pyperclip.copy(spongecase)
+    print('(cOpIed SpOnGeCasE to ClIpbOaRd.)')
+except:
+    pass  # Do nothing if pyperclip wasn't installed.
+
+print('------------------------------------------------------------')	#60個
+
+
+import random
+
+numberOfDice = 5
+numberOfSides = 6
+
+# Simulate the dice rolls:
+rolls = []
+for i in range(numberOfDice):
+    rollResult = random.randint(1, numberOfSides)
+    rolls.append(rollResult)
+
+print(type(rolls))
+print(rolls)
+
+# Display the total:
+print('Total:', sum(rolls))
+
+
+# Display the individual rolls:
+for i, roll in enumerate(rolls):
+    rolls[i] = str(roll)
+print(', '.join(rolls), end='')
+
+'''
+
+print('------------------------------------------------------------')	#60個
+
+try:
+    import a_python_module
+except ImportError:
+    print('匯入模組 a_python_module 失敗')
+    print('請安裝模組')
+    sys.exit()
+
+
+print('------------------------------------------------------------')	#60個
+
+import time, sys
+
+print('Press Ctrl-C to stop.')
+
+try:
+    while True:  # Main program loop.
+        print('wait', end = ' ')
+        time.sleep(1)  # Add a pause.
+except KeyboardInterrupt:
+    sys.exit()  # When Ctrl-C is pressed, end the program.
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+""" 統計亂數
+        if random.randint(1, 100) <= 90:
+            useUpper = not useUpper  # Flip the case.
+"""
+
+print('------------------------------------------------------------')	#60個
+
 
 
 print('------------------------------------------------------------')	#60個

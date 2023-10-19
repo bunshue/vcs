@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 
 import pandas as pd
 
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -95,8 +94,8 @@ tw = dfm['Taiwan*']
 #試以德國為例, 我們看看最高峰前後兩個月的樣子。
 
 n = de.argmax()
-period = de[n-60:n+60]
-ma = period.rolling(window=7).mean()[6:]
+period = de[n - 60 : n + 60]
+ma = period.rolling(window = 7).mean()[6:]
 period[6:].plot()
 ma.plot()
 
@@ -107,21 +106,18 @@ plt.show()
 
 def peak_period(country):
     n = country.argmax()
-    period = country[n-60:n+60]
-    ma = period.rolling(window=7).mean()[6:]
+    period = country[n - 60 : n + 60]
+    ma = period.rolling(window = 7).mean()[6:]
     period[6:].plot()
     ma.plot()
 
 #日本的情況。
-
 peak_period(jp)
 plt.show()
 
 #韓國的情況。
 peak_period(kr)
 plt.show()
-
-
 
 
 print('------------------------------------------------------------')	#60個

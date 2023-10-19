@@ -696,23 +696,47 @@ namespace vcs_Mix00
         private void button20_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "Color Matrix的使用 1\n";
+            //color_correction_matrix = 
+            double[,] color_correction_matrix = new double[,] {
+            { 1.36, -0.3, -0.06},
+            { -0.20, 1.32, -0.12},
+            { -0.04, -0.55, 1.59}
+            };
 
-            double E17 = -0.17453;
-            double F17 = -0.33217;
-            double G17 = 0.50107;
-            double E18 = 0.49197;
-            double F18 = -0.42067;
-            double G18 = -0.07843;
+            richTextBox1.Text += color_correction_matrix[0, 0].ToString() + "\n";
+            richTextBox1.Text += color_correction_matrix[0, 1].ToString() + "\n";
+            richTextBox1.Text += color_correction_matrix[0, 2].ToString() + "\n";
+            richTextBox1.Text += color_correction_matrix[1, 0].ToString() + "\n";
+            richTextBox1.Text += color_correction_matrix[1, 1].ToString() + "\n";
+            richTextBox1.Text += color_correction_matrix[1, 2].ToString() + "\n";
+            richTextBox1.Text += color_correction_matrix[2, 0].ToString() + "\n";
+            richTextBox1.Text += color_correction_matrix[2, 1].ToString() + "\n";
+            richTextBox1.Text += color_correction_matrix[2, 2].ToString() + "\n";
 
-            double N16 = 1.36;
-            double O16 = -0.3;
-            double P16 = -0.06;
-            double N17 = -0.2;
-            double O17 = 1.32;
-            double P17 = -0.12;
-            double N18 = -0.04;
-            double O18 = -0.55;
-            double P18 = 1.59;
+            double N16 = color_correction_matrix[0, 0];
+            double O16 = color_correction_matrix[0, 1];
+            double P16 = color_correction_matrix[0, 2];
+            double N17 = color_correction_matrix[1, 0];
+            double O17 = color_correction_matrix[1, 1];
+            double P17 = color_correction_matrix[1, 2];
+            double N18 = color_correction_matrix[2, 0];
+            double O18 = color_correction_matrix[2, 1];
+            double P18 = color_correction_matrix[2, 2];
+
+            //保留給 RGB to YUV Conversion Matrix
+            //double[] B = new double[] { 1, 2, 3, 4, 5 };
+            double E12 = -0.31;
+            double F12 = -0.59;
+            double G12 = 0.89;
+            double E13 = 0.69;
+            double F13 = -0.59;
+            double G13 = -0.11;
+            double E17 = E12 * 0.563;
+            double F17 = F12 * 0.563;
+            double G17 = G12 * 0.563;
+            double E18 = E13 * 0.713;
+            double F18 = F13 * 0.713;
+            double G18 = G13 * 0.713;
 
             double E22 = E17 * N16 + F17 * N17 + G17 * N18;	//MMULT(E17:G17,N16:N18)
             double F22 = E17 * O16 + F17 * O17 + G17 * O18;	//MMULT(E17:G17,O16:O18)
@@ -727,7 +751,6 @@ namespace vcs_Mix00
             richTextBox1.Text += "E23 = " + E23.ToString() + "\n";
             richTextBox1.Text += "F23 = " + F23.ToString() + "\n";
             richTextBox1.Text += "G23 = " + G23.ToString() + "\n";
-
 
             double dMTX1 = E23 * 128;
             double dMTX2 = F23 * 128;
@@ -750,16 +773,30 @@ namespace vcs_Mix00
             int MTX5 = (int)Math.Round(dMTX5);
             int MTX6 = (int)Math.Round(dMTX6);
 
-            richTextBox1.Text += "MTX1 = 0x" + MTX1.ToString("X2") + " = " + MTX1.ToString() + "\n";
-            richTextBox1.Text += "MTX2 = 0x" + MTX2.ToString("X2") + " = " + MTX2.ToString() + "\n";
-            richTextBox1.Text += "MTX3 = 0x" + MTX3.ToString("X2") + " = " + MTX3.ToString() + "\n";
-            richTextBox1.Text += "MTX4 = 0x" + MTX4.ToString("X2") + " = " + MTX4.ToString() + "\n";
-            richTextBox1.Text += "MTX5 = 0x" + MTX5.ToString("X2") + " = " + MTX5.ToString() + "\n";
-            richTextBox1.Text += "MTX6 = 0x" + MTX6.ToString("X2") + " = " + MTX6.ToString() + "\n";
-
-
-
-
+            if (MTX1 >= 0)
+                richTextBox1.Text += "MTX1 = 0x" + MTX1.ToString("X2") + " = " + MTX1.ToString() + "\n";
+            else
+                richTextBox1.Text += "MTX1 = -0x" + (-MTX1).ToString("X2") + " = " + MTX1.ToString() + "\n";
+            if (MTX2 >= 0)
+                richTextBox1.Text += "MTX2 = 0x" + MTX2.ToString("X2") + " = " + MTX2.ToString() + "\n";
+            else
+                richTextBox1.Text += "MTX2 = -0x" + (-MTX2).ToString("X2") + " = " + MTX2.ToString() + "\n";
+            if (MTX3 >= 0)
+                richTextBox1.Text += "MTX3 = 0x" + MTX3.ToString("X2") + " = " + MTX3.ToString() + "\n";
+            else
+                richTextBox1.Text += "MTX3 = -0x" + (-MTX3).ToString("X2") + " = " + MTX3.ToString() + "\n";
+            if (MTX4 >= 0)
+                richTextBox1.Text += "MTX4 = 0x" + MTX4.ToString("X2") + " = " + MTX4.ToString() + "\n";
+            else
+                richTextBox1.Text += "MTX4 = -0x" + (-MTX4).ToString("X2") + " = " + MTX4.ToString() + "\n";
+            if (MTX5 >= 0)
+                richTextBox1.Text += "MTX5 = 0x" + MTX5.ToString("X2") + " = " + MTX5.ToString() + "\n";
+            else
+                richTextBox1.Text += "MTX5 = -0x" + (-MTX5).ToString("X2") + " = " + MTX5.ToString() + "\n";
+            if (MTX6 >= 0)
+                richTextBox1.Text += "MTX6 = 0x" + MTX6.ToString("X2") + " = " + MTX6.ToString() + "\n";
+            else
+                richTextBox1.Text += "MTX6 = -0x" + (-MTX6).ToString("X2") + " = " + MTX6.ToString() + "\n";
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -772,6 +809,13 @@ namespace vcs_Mix00
             int MTX4 = 0;
             int MTX5 = -29;
             int MTX6 = 28;
+
+            richTextBox1.Text += "MTX1 = 0x" + MTX1.ToString("X2") + " = " + MTX1.ToString() + "\n";
+            richTextBox1.Text += "MTX2 = 0x" + MTX2.ToString("X2") + " = " + MTX2.ToString() + "\n";
+            richTextBox1.Text += "MTX3 = 0x" + MTX3.ToString("X2") + " = " + MTX3.ToString() + "\n";
+            richTextBox1.Text += "MTX4 = 0x" + MTX4.ToString("X2") + " = " + MTX4.ToString() + "\n";
+            richTextBox1.Text += "MTX5 = 0x" + MTX5.ToString("X2") + " = " + MTX5.ToString() + "\n";
+            richTextBox1.Text += "MTX6 = 0x" + MTX6.ToString("X2") + " = " + MTX6.ToString() + "\n";
 
             int CMXSIGN = 0;
             int CMX16 = 0;

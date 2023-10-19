@@ -13,83 +13,29 @@ import json
 
 print('------------------------------------------------------------')	#60個
 
-print('測試 01')
-print('台灣英文新聞網')
-
-url = 'https://www.taiwannews.com.tw/en/news/3610689'
-url = 'https://www.taiwannews.com.tw/en/news/4966193'
-html = requests.get(url).text
-print(html)
-
-print('------------------------------------------------------------')	#60個
-
-print('測試 02')
-print('台灣英文新聞網')
-
-url = 'https://www.taiwannews.com.tw/en/news/3610689'
-url = 'https://www.taiwannews.com.tw/en/news/4966193'
-html = requests.get(url).text
-soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
-title = soup.find("h1", class_="article-title")
-article = soup.find("article", class_="container-fluid article")
-print(title.text)
-print(article.text)
-
-print('------------------------------------------------------------')	#60個
-
 print('測試 03')
 print('台灣英文新聞網')
 
 news_title = ""
 news_content = ""
 filename = 'engnews.txt'
-if not os.path.exists(filename):
-    #台灣英文新聞網
-    url = 'https://www.taiwannews.com.tw/en/news/3610689'
-    url = 'https://www.taiwannews.com.tw/en/news/4966193'
-    html = requests.get(url).text
-    soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
-    title = soup.find("h1", class_="article-title")
-    article = soup.find("article", class_="container-fluid article")
-    news_title = title.text
-    news_content = article.text
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(news_title+"\n")
-        f.write(news_content)
-else:
-    with open(filename, "r", encoding="utf-8") as f:
-        lines = f.readlines()
-        news_title = lines[0]
-        news_content = lines[1:]
+
+url = 'https://www.taiwannews.com.tw/en/news/3610689'
+url = 'https://www.taiwannews.com.tw/en/news/4966193'
+html = requests.get(url).text
+#print(html)
+soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
+title = soup.find("h1", class_ = "article-title")
+article = soup.find("article", class_ = "container-fluid article")
+news_title = title.text
+news_content = article.text
+with open(filename, "w", encoding = "utf-8") as f:
+    f.write(news_title + "\n")
+    f.write(news_content)
+
+print('標題')
 print(news_title)
-print(news_content)
-
-print('------------------------------------------------------------')	#60個
-
-print('測試 04')
-print('中央通訊社新聞')
-
-news_title = ""
-news_content = ""
-filename = "chinnews.txt"
-if not os.path.exists(filename):
-    #url = 'https://www.cna.com.tw/news/aopl/201901050192.aspx'
-    url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'   #繼探月成功後 印度又將發射太陽探測器
-    html = requests.get(url).text
-    soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
-    title = soup.find("title")
-    article = soup.find("div", class_="paragraph")
-    news_title = title.text
-    news_content = article.text
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(news_title+"\n")
-        f.write(news_content)
-else:
-    with open(filename, "r", encoding="utf-8") as f:
-        lines = f.readlines()
-        news_title = lines[0]
-        news_content = lines[1:]
-print(news_title)
+print('內容')
 print(news_content)
 
 print('------------------------------------------------------------')	#60個
@@ -100,24 +46,23 @@ print('中央通訊社新聞')
 news_title = ""
 news_content = ""
 filename = "chinnews.txt"
-if not os.path.exists(filename):
-    #url = 'https://www.cna.com.tw/news/aopl/201901050192.aspx'
-    url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'   #繼探月成功後 印度又將發射太陽探測器
-    html = requests.get(url).text
-    soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
-    title = soup.find("title")
-    article = soup.find("div", class_="paragraph")
-    news_title = title.text.strip()
-    news_content = article.text
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write(news_title+"\n")
-        f.write(news_content)
-else:
-    with open(filename, "r", encoding="utf-8") as f:
-        lines = f.readlines()
-        news_title = lines[0]
-        news_content = lines[1:]
+
+#url = 'https://www.cna.com.tw/news/aopl/201901050192.aspx'
+url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'   #繼探月成功後 印度又將發射太陽探測器
+html = requests.get(url).text
+#print(html)
+soup = BeautifulSoup(html, "html.parser")  # 解析原始碼
+title = soup.find("title")
+article = soup.find("div", class_ = "paragraph")
+news_title = title.text.strip()
+news_content = article.text
+with open(filename, "w", encoding = "utf-8") as f:
+    f.write(news_title + "\n")
+    f.write(news_content)
+
+print('標題')
 print(news_title)
+print('內容')
 print(news_content)
 
 print('------------------------------------------------------------')	#60個
