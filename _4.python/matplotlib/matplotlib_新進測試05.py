@@ -54,73 +54,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#試著做三群的數據。
-
-cx0 = 0
-cy0 = 0
-
-cx1 = -3
-cy1 = 3
-
-cx2 = 3
-cy2 = 3
-
-#每一群都是 500 個點
-
-x0 = np.random.randn(500) + cx0
-y0 = np.random.randn(500) + cy0
-
-x1 = np.random.randn(500) + cx1
-y1 = np.random.randn(500) + cy1
-
-x2 = np.random.randn(500) + cx2
-y2 = np.random.randn(500) + cy2
-
-#合併三群的點到 x, y 之中。
-x = np.concatenate((x0, x1, x2))
-y = np.concatenate((y0, y1, y2))
-
-"""
-現在第一群的點是第 0 類, 第二群是第 1 類, 第三群是第 2 類，所以我們要做個像這樣
-[0, 0, ..., 0, 1, 1, ..., 1, 2, 2, ..., 2]
-的標記。
-"""
-
-c = np.repeat([0,1,2], 500)
-
-plt.scatter(x, y, c=c, cmap='Set1')
-
-plt.show()
-
-
 print('------------------------------------------------------------')	#60個
-
-
-import matplotlib.pyplot as plt 
-
-#x，y，大小，颜色
-plt.scatter([1,2,3,4],[2,4,6,8],[10,20,30,400],['r', 'b','y','k'])   
-plt.scatter([1,2,3,4],[9,8,7,6],s=10,c='b', marker='v')   
-
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Fixing random state for reproducibility
-np.random.seed(19680801)
-
-
-N = 50
-x = np.random.rand(N)
-y = np.random.rand(N)
-colors = np.random.rand(N)
-area = (30 * np.random.rand(N))**2  # 0 to 15 point radii
-
-plt.scatter(x, y, s=area, c=colors, alpha=0.5)
-plt.show()
 
 
 

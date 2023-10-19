@@ -82,42 +82,10 @@ plt.plot(3, 20, 'r-o')
 #第四張圖
 plt.subplot(234)
 
-X = []
-Y = []
-for i in range(1000):
-    theta = 2 * random.random() * math.pi
-    r = random.random() * 5
-    x = math.cos(theta) * r + 5
-    y = math.sin(theta) * r + 5
-    X.append(x)
-    Y.append(y)
-
-plt.scatter(X, Y)
-print(len(X))
-plt.axis([0, 10, 0, 10])
-
-plt.axis('equal')       #軸比例
 
 #第五張圖
 plt.subplot(235)
 
-X = []
-Y = []
-for i in range(1000):
-    x=random.randint(0, 10) + random.random()
-    y=random.randint(0, 10) + random.random()
-    if ((x - 5) ** 2 + (y - 5) ** 2) > 25:
-        #print('Reject ({0}, {1})'.format(x, y))
-        continue
-    else :
-        X.append(x)
-        Y.append(y)
-print(len(X))        
-
-plt.scatter(X, Y)
-print(len(X))
-plt.axis([0, 10, 0, 10])
-plt.axis('equal')       #軸比例
 
 #第六張圖
 plt.subplot(236)
@@ -135,13 +103,6 @@ plt.figure(num = '新進測試 02', figsize = (20, 15), dpi = 84, facecolor = "w
 #第一張圖
 plt.subplot(231)
 
-degrees = [x * 15 for x in range(0, 25)]
-x = [math.cos(math.radians(d)) for d in degrees]
-y = [math.sin(math.radians(d)) for d in degrees]
-
-plt.scatter(x, y)
-plt.axis('equal')
-plt.grid()
 
 
 #第二張圖

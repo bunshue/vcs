@@ -2,6 +2,8 @@
 
 鳶尾花
 
+鳶尾花 (Iris) 數據庫是很有名的資料, 就是試著以一朵鳶尾花花萼、花瓣的大小來分出是哪個的大小來分出是哪個亞種的鳶尾花。
+
 標準的分類問題: 這是哪種鳶尾花
 
 鳶尾花 (Iris)  數據庫是很有名的資料,
@@ -42,11 +44,19 @@ from sklearn.model_selection import train_test_split
 #Iris 鳶尾花數據庫 150筆資料 4個欄位 3種品種 每種50筆資料
 iris = load_iris()
 
+"""
+print("另存新檔");
+filename = 'aaaa.csv'
+np.savetxt(filename, iris.data, delimiter=',')
+print("寫入完成")
+"""
+
 print('看鳶尾花數據庫的說明')
 print(iris.DESCR)
 
-#看數據庫說明。我們這裡看看 features 有哪些?
+print('看鳶尾花數據庫的features')
 print(iris.feature_names)
+
 #['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
 #有四個 features: 花萼長度、花萼寬度 和 花瓣長度、花瓣寬度
 #sepal 花萼
@@ -100,6 +110,7 @@ print(iris.target)
 # :2 是 前兩個 => 花萼
 # 2: 是 第2個(含)以後 => 花瓣
 
+#準備 inputs 和 outputs
 x = iris.data
 y = iris.target
 
@@ -142,17 +153,16 @@ plt.scatter(x_train[:, 0], x_train[:, 1], c = y_train)
 plt.title('花萼 訓練結果')
 plt.show()
 
+#鳶尾花 (Iris) 的數據, 有三類的鳶尾花我們想用 SVM 做分類。
+#開個分類機、訓練
 #再一次, 三部曲打造函數學習機。
 #第一部曲：打開一台函數學習機
 
 from sklearn.svm import SVC
-
 clf = SVC()
 
 #第二部曲：訓練
 clf.fit(x_train, y_train)
-
-SVC()
 
 #第三部曲：預測
 y_predict= clf.predict(x_test)
@@ -167,7 +177,7 @@ plt.scatter(x_test[:,0], x_test[:,1], c=y_predict - y_test)
 plt.show()
 
 #在測試資料中是全對!! 我們畫圖來看看整體表現如何?
-
+#畫出結果
 x0 = np.linspace(0, 7.5, 500)
 y0 = np.linspace(0, 2.7, 500)
 
@@ -193,7 +203,15 @@ plt.contourf(xm, ym, Z, alpha = 0.3)
 plt.scatter(X[:, 0], X[:, 1], c = Y)
 plt.show()
 
-'''
+#畫出結果
+x1, x2 = np.meshgrid(np.arange(0,7,0.02), np.arange(0,3,0.02))
+Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
+Z = Z.reshape(x1.shape)
+plt.contourf(x1, x2, Z, alpha=0.3)
+plt.scatter(X[:,0], X[:,1], c=Y)
+plt.show()
+
+"""
 X, Y = np.meshgrid(np.arange(4, 8, 0.02), np.arange(2, 4.5, 0.02))
 
 x_data = np.c_[X.ravel(), Y.ravel()]
@@ -206,7 +224,7 @@ plt.contourf(X, Y, Z, alpha = 0.3)
 plt.scatter(x[:, 0], x[:, 1], c = y)
 
 plt.show()
-'''
+"""
 
 #畫出結果
 
@@ -217,6 +235,47 @@ plt.contourf(x1, x2, Z, alpha = 0.3)
 plt.scatter(X[:, 0], X[:, 1], c = Y)
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+
+#全部訓練 SVM
+from sklearn.datasets import load_iris
+iris = load_iris()
+#資料內容 iris.data
+#鳶尾花 (Iris) 的數據, 有三類的鳶尾花我們想用 SVM 做分類。
+#答案 iris.target
+
+x = iris.data[:, :2]
+y = iris.target
+
+plt.scatter(x[:,0], x[:,1], s=50, c=y)
+plt.title('原圖')
+plt.show()
+
+from sklearn.svm import SVC
+clf = SVC()
+clf.fit(x,y)
+clf.predict(x)
+clf.predict(x) - y
+gd = np.array([[i,j] for i in np.arange(4,8,0.2) for j in np.arange(1.8,4.5,0.2)])
+gdc = clf.predict(gd)
+plt.scatter(gd[:,0], gd[:,1], s=50, c=gdc)
+plt.title('SVM結果')
+plt.show()
+
+
+#呈現學習成果
+#學出來的用比較透明的顏色, 真實資料用 100% 不透明。
+
+gd = np.array([[i,j] for i in np.arange(4,8,0.1) for j in np.arange(1.8,4.5,0.1)])
+gdc = clf.predict(gd)
+plt.scatter(gd[:,0], gd[:,1], s=50, c=gdc, alpha=0.4)
+plt.scatter(x[:,0], x[:,1], s=50, c=y)
+
+plt.title('SVM結果2')
+plt.show()
+
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

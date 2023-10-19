@@ -35,22 +35,24 @@ plt.scatter(x, y)
 #第二張圖
 plt.subplot(232)
 
-x = np.random.rand(N)
-y = np.random.rand(N)
-
-size = np.random.rand(N) * 50
-color = np.random.rand(N)
-plt.scatter(x, y, size, color)
-plt.colorbar()
-
-#第三張圖
-plt.subplot(233)
-
 plt.xlim(-3, 3)
 plt.ylim(-3, 3)
 x1 = np.random.normal(0, 1, 1024)
 y1 = np.random.normal(0, 1, 1024)
 plt.scatter(x1, y1, alpha = 0.3)
+
+
+#第三張圖
+plt.subplot(233)
+
+
+#使用 NumPy 隨機數的「常態分佈」產生 N 個數據點，再透過 matplotlib 畫出散布圖。
+N = 500
+x = np.random.normal(5, 50, N)
+y = np.random.normal(5, 50, N)
+plt.scatter(x, y, alpha = 0.5, s = 100)
+
+
 
 #第四張圖
 plt.subplot(234)
@@ -72,13 +74,6 @@ for i in range(0, 3):
 
 #第五張圖
 plt.subplot(235)
-
-#使用 NumPy 隨機數的「常態分佈」產生 N 個數據點，再透過 matplotlib 畫出散布圖。
-N = 500
-x = np.random.normal(5, 50, N)
-y = np.random.normal(5, 50, N)
-plt.scatter(x, y, alpha = 0.5, s = 100)
-
 
 #第六張圖
 plt.subplot(236)
@@ -111,22 +106,6 @@ s.set_urls(['https://www.bbc.com/news', 'https://www.google.com/', None])
 plt.subplot(232)
 
 
-'''
-xpt = np.linspace(0, 5, 50)                            # 建立含500個元素的陣列
-ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
-plt.scatter(xpt, ypt, s=50, c=ypt, cmap='hsv')          # 色彩隨y軸值變化
-
-
-xpt = np.linspace(0, 5, 500)                            # 建立含500個元素的陣列
-ypt = 1 - 0.5*np.abs(xpt-2)                             # y陣列的變化
-plt.scatter(xpt, ypt, s=50, c=xpt, cmap='hsv')          # 色彩隨x軸值變化
-'''
-
-x = np.arange(50)
-y = x
-t = x
-plt.scatter(x, y, c=t, cmap='rainbow')
-
 
 #第三張圖
 plt.subplot(233)
@@ -157,23 +136,12 @@ plt.scatter(x, g, c = 'blue', marker = '.')
 #第四張圖
 plt.subplot(234)
 
-listx = [31,15,20,25,12,18,45,21,33,5,18,22,37,42,10]
-listy = [68,20,61,32,45,56,10,18,70,64,43,66,19,77,21]
-scale = [x ** 3 for x in [5,4,2,6,7,1,8,9,2,3,2,4,5,7,2]]
-
-plt.xlim(0, 50)
-plt.ylim(0, 80)
-plt.scatter(listx, listy, c = 'r', s = scale, marker = 'o', alpha = 0.5)
 
 
 #第五張圖
 plt.subplot(235)
 
-minutes = [45, 34, 56, 77, 90, 90, 90, 34, 45, 44, 80, 15, 10, 12]
-scores =  [90, 80, 100, 65, 5, 30, 55, 100, 90, 80, 60, 5, 0, 10]
-plt.xlabel('解題時間')
-plt.ylabel('分數')
-plt.scatter(minutes, scores)
+
 
 #第六張圖
 plt.subplot(236)
@@ -251,29 +219,11 @@ plt.plot(x, y + 0.75, 'r')
 #第四張圖
 plt.subplot(234)
 
-"""
-額外設定 s、c 和 cmap，就能根據資料點的數據，對應出指定的顏色，
-假設資料的範圍是 0～100，顏色地圖是紅橙黃綠藍，
-則 0～20 對應紅色，21～40 對應橙色，
-41～60 對應黃色，61～80 對應綠色，81～100 對應藍色。
-"""
-
-x = [1,2,3,4,5,6,7,8,9,10]
-y = [11,8,26,16,9,17,23,4,14,10]
-size = [i * 100 for i in y]         # 放大資料點數據 100 倍，比較容易觀察尺寸
-plt.scatter(x, y, s = size, c = size, cmap = 'Set1')  # 使用 Set1 的 colormap
 
 
 #第五張圖
 plt.subplot(235)
 
-#加上 vmin 和 vmax 的設定，能設定顏色的最大值與最小值
-#當數值小於 1000 時，只會顯示紅色，當數值大於 2000 時，只會顯示灰色。
-
-x = [1,2,3,4,5,6,7,8,9,10]
-y = [11,8,26,16,9,17,23,4,14,10]
-size = [i * 100 for i in y]
-plt.scatter(x, y, s = size, c = size, cmap = 'Set1', vmin = 1000, vmax = 2000)
 
 
 #第六張圖
@@ -490,11 +440,6 @@ plt.subplot(235)
 #第六張圖
 plt.subplot(236)
 
-# Generate 100 random data points along 3 dimensions
-x, y, scale = np.random.randn(3, 100)
-
-# Map each onto a scatterplot we'll create with Matplotlib
-plt.scatter(x=x, y=y, c=scale, s=np.abs(scale)*500)
 
 plt.show()
 
@@ -536,17 +481,9 @@ plt.yticks(np.arange(0,12,step=1.0))        # y 軸刻度
 #第三張圖
 plt.subplot(233)
 
-x = np.linspace(0, 5, 500)                # 含500個元素的陣列
-y = 1 - 0.5*np.abs(x-2)                   # y陣列的變化
-plt.scatter(x,y,s=50,c=x,cmap='rainbow')  # 色彩隨 x 軸值變化
 
 #第四張圖
 plt.subplot(234)
-
-x = np.linspace(0, 5, 500)                # 含500個元素的陣列
-y = 1 - 0.5*np.abs(x-2)                   # y陣列的變化
-plt.scatter(x,y,s=50,c=y,cmap='rainbow')  # 色彩隨 y 軸值變化
-plt.colorbar()                            # 色彩條
 
 
 #第五張圖
@@ -577,15 +514,6 @@ plt.axis('off')                             # 隱藏座標
 #第六張圖
 plt.subplot(236)
 
-
-x = np.linspace(0, 10, 51)
-print(type(x))
-
-y1 = np.sin(x) * 5 + 5
-y2 = np.cos(x) * 5 + 5
-
-plt.scatter(x, y1, c = 'r')       #畫出每個x-y對應點
-plt.scatter(x, y2, c = 'g')       #畫出每個x-y對應點
 
 
 plt.show()

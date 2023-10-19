@@ -1008,9 +1008,21 @@ print()
 
 print(f'x + y = \n{x+y}')
 
-
 print('------------------------------------------------------------')	#60個
 
+#Python numpy 寫入 csv 
+#將 numpy array 用 savetxt 寫入 csv
+
+arr = np.asarray([
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+  ])
+
+print(type(arr)) # <class 'numpy.ndarray'>
+np.savetxt('output_data1.csv', arr, delimiter=',')
+np.savetxt('output_data2.csv', arr, delimiter=',', fmt='%d')
+np.savetxt('output_data3.csv', arr, delimiter=',', fmt='%.2f')
 
 
 print('------------------------------------------------------------')	#60個
