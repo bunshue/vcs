@@ -1,5 +1,5 @@
 """
-迴歸法預測函數.py
+迴歸法預測函數
 
 
 """
@@ -23,24 +23,24 @@ print('------------------------------------------------------------')	#60個
 #1. 線性迴歸
 
 #一條直線
-#f(x)=1.2x+0.8
+#f(x) = 1.2 x + 0.8
 
-#準備好個 50 個點
-
-x = np.linspace(0, 5, 50)
-y = 1.2*x + 0.8
+#準備好個 N 個點
+N = 100
+x = np.linspace(0, 5, N)
+y = 1.2 * x + 0.8
 
 plt.scatter(x, y)
-plt.plot(x, y, 'r')
+plt.plot(x, y, 'lime')
 plt.title('理想資料')
 plt.show()
 
 #加入 noise 項, 假設 f(x)+ε(x), 也就是都有個 noise 項。
 
-y = 1.2 * x + 0.8 + 0.6 * np.random.randn(50)
+y = 1.2 * x + 0.8 + 0.6 * np.random.randn(N)
 
 plt.scatter(x,y)
-plt.plot(x, 1.2*x + 0.8, 'r')
+plt.plot(x, 1.2*x + 0.8, 'lime')
 plt.title('理想資料加上雜訊')
 plt.show()
 
@@ -85,7 +85,6 @@ print(svr_lin.predict([[6.2]]))
 
 print(svr_lin.predict([[6.2], [7.4], [8]]))
 
-sys.exit()
 
 #方法二
 #做線性迴歸有很多套件, 但我們這裡用 sklearn 裡的 LinearRegression 來做, 嗯, 線性迴歸。
@@ -101,34 +100,85 @@ regr = LinearRegression()
 [[x1],[x2],…,[x50]]
 """
 
-X = x.reshape(len(x),1)
+X = x.reshape(len(x), 1)
 
-regr.fit(X,y)
+regr.fit(X, y)
 
 #LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
 
 Y = regr.predict(X)
 
 plt.scatter(x, y)
-
 plt.plot(x, Y, 'r')
 plt.title('線性迴歸2')
 plt.show()
 
 #2. 標準函數訓練及測試
 #分訓練資料、測試資料
-#一般我們想要看算出來的逼近函數在預測上是不是可靠, 會把一些資料留給「測試」, 就是不讓電腦在計算時「看到」這些測試資料。等函數學成了以後, 再來測試準不準確。
+#一般我們想要看算出來的逼近函數在預測上是不是可靠, 會把一些資料留給「測試」,
+#就是不讓電腦在計算時「看到」這些測試資料。等函數學成了以後, 再來測試準不準確。
 #這是我們可以用 sklearn.cross_validation 裡的 train_test_split 來亂數選一定百分比的資料來用。
+#哦, 這看起來是線性的函數 (廢話, 我們自己生的)。現在我們來做線性迴歸。
+#開始前我們來做一件事, 就是我們喜歡只拿一部份的資料來學習, 叫「訓練資料」, 另外留一部份當「測試資料」。
+#測試資料在「訓練」期電腦是沒看過的, 所以我們可以「考他」。
+#要把我們完整資料分測試、訓練很簡單, 因為 SciKit Learn 自己會幫我們做。指令叫 train_test_split (實在有夠白話)。
 
 from sklearn.model_selection import train_test_split
 
 #把原來的 x, y 中的 80% 給 training data, 20% 給 testing data。
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 9487)
+
+"""
+執行之後會回傳回四個 array, 分別是 x 的訓練、測試, y 的訓練測試。所以我們準備用
+x_train, x_test, y_train, y_test
+來「接」。接著要放我們原來的 x, y 這很自然, 然後
+test_size=0.2
+是說我們要留 20% 當測試, 這比例當然是自己可以調的。最後神奇的一步說
+random_state=9487
+這是確保你之後回來執行這個程式, 隨機取的 80% 訓練資料、20% 測試資料是一樣的 (那個數字你可以自己選)。
+為什麼我們要這樣做啊? 原因之一是因為以後我們學得比較多, 有可能第一次沒有訓練得很滿意, 我們想調整我們的「函數學習機」, 再學一次。這時如果是換了訓練資料我們就不太能確定最後學好或學壞, 是因為我們的調整, 還是不同的資料產生的結果。
+檢查訓練、測試資料是不是照我們的意思去分 (疑心病幹嘛那麼重)。
+"""
+
+print(len(x_train)) # 80%
+print(len(x_test))  # 20%
+
+"""
+再來很重要, 從現在到以後, 很多學函數的方法, 都要求我們訓練資料要排成一列一列的。也就說原本的
+[x1,x2,…,x80]
+要換成這樣
+[[x1],[x2],…,[x80]]
+好在我們學過 reshape, 這小事...
+"""
+x_train = x_train.reshape(80, 1)
+x_test = x_test.reshape(20, 1)
+
+#接下來就是召喚 LinearRegression 學習機了。
+
+
+from sklearn.linear_model import LinearRegression
+#從現在的線性迴歸, 到等一下的機器學習, 再到之後的神經網路。我們每一次其實就是先開一台空的「函數學習機」, 現在我們要開一台「迴歸機」。
+
+regr = LinearRegression()
+#因為線性迴歸實在太簡單, 通常也不太需要調校什麼, 我們就可以直接訓練了。訓練就用 fit, 然後把訓練資料餵進去...
+
+regr.fit(x_train, y_train)
+
+#然後就學完了!　我們來試用一下。因為我們的學數學習機喜歡一次吃很多資料一起告訴你答案, 所以就算只有一筆也要這樣下指令。
+print('打印一些結果')
+print(regr.predict([[1.3]]))
+print(regr.predict([[2.7],[1.5]]))
+
+
+#我們當然可以餵測試資料進去, 畢竟只有這些我們是有答案、但我們的學習機是還沒學過的。
+Y = regr.predict(x_test)
+plt.scatter(x_test,y_test)
+plt.plot(x_test, Y, 'red')
+plt.show()
 
 #我們在「訓練」這個函數時只有以下這些資料。
-
-plt.scatter(x_train, y_train)
+plt.scatter(x_train, y_train)   #原始訓練資料
 plt.title('原始訓練資料')
 plt.show()
 
@@ -141,7 +191,7 @@ svr_lin.fit(X_train,y_train)
 
 Y_train = svr_lin.predict(X_train)
 
-plt.scatter(x_train, y_train)
+plt.scatter(x_train, y_train)   #原始訓練資料
 
 plt.plot(x_train, Y_train, 'r')
 plt.title('訓練資料2')
@@ -163,45 +213,44 @@ plt.show()
 #記得現在我們只用 80% 的資料去訓練。
 
 regr = LinearRegression()
-X_train = x_train.reshape(len(x_train),1)
-regr.fit(X_train,y_train)
+X_train = x_train.reshape(len(x_train), 1)
+regr.fit(X_train, y_train)
 
 Y_train = regr.predict(X_train)
 
-plt.scatter(x_train, y_train)
+plt.scatter(x_train, y_train)   #原始訓練資料
 plt.plot(x_train, Y_train, 'r')
 plt.title('線性回歸測試結果')
 plt.show()
 
 #用測試資料試試我們預測準不準
-
-X_test = x_test.reshape(len(x_test),1)
-
+X_test = x_test.reshape(len(x_test), 1)
 Y_test = regr.predict(X_test)
-
-mse = np.sum((Y_test-y_test)**2) / len(y_test)
+mse = np.sum((Y_test - y_test) ** 2) / len(y_test)
 
 print('MSE =', mse)
 
-plt.scatter(x_test, y_test)
-
-plt.scatter(x_test, Y_test, c='r')
+plt.scatter(x_test, y_test, c = 'b')
+plt.scatter(x_test, Y_test, c = 'r')
 plt.title('測試結果2')
 plt.show()
 
 #3. 不是線性的目標函數
 #這裡我們用個非線性的函數來生假數據:
-#f(x)=sin(3.2x)+0.8x
+#f(x) = sin(3.2x) + 0.8x
 #一樣準備加上一些 noise。
 #3. 生成假資料
 
-x = np.linspace(0, 5, 50)
-y = np.sin(3.2*x) + 0.8*x + 0.3*np.random.randn(50)
+#準備好個 N 個點
+N = 50
+x = np.linspace(0, 5, N)
+y = np.sin(3.2 * x) + 0.8 * x + 0.3 * np.random.randn(N)
 
 plt.plot(x, y)
-plt.title('待處理的資料 f = sin(3.2x)+0.8x+noise')
+plt.title('待處理的資料 f = sin(3.2x) + 0.8x + noise')
 plt.show()
 
+#使用SVR
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1)
 
@@ -238,7 +287,7 @@ regr_lin = LinearRegression()
 
 X = x.reshape(len(x), 1)
 
-regr_lin.fit(X,y)
+regr_lin.fit(X, y)
 
 #LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
 
@@ -260,7 +309,6 @@ regr_poly.fit(X_poly, y)
 #LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
 
 plt.scatter(x,y)
-
 plt.plot(x, regr_poly.predict(X_poly), 'r')
 plt.title('多項式')
 
@@ -301,10 +349,9 @@ Y_poly = regr_poly.predict(X_poly)
 Y_rbf = regr_rbf.predict(X_rbf)
 
 plt.scatter(x,y)
-plt.plot(x, Y_lin, label='linear')
-plt.plot(x, Y_poly, label='polynomial')
-plt.plot(x, Y_rbf, label='rbf')
-
+plt.plot(x, Y_lin, label = 'linear')
+plt.plot(x, Y_poly, label = 'polynomial')
+plt.plot(x, Y_rbf, label = 'rbf')
 plt.legend()
 plt.title('三種一起比較')
 plt.show()

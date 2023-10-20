@@ -94,53 +94,53 @@ plt.show()
 """
 
 """ fail
-# 加载取数与绘图所需的函数包
+# 加載取數與繪圖所需的函數包
 import datetime
 from hs_udata import set_token,stock_quote_daily
 from mpl_finance import candlestick_ohlc
 import matplotlib as mpl
 import matplotlib.dates as mdates
 
-#mpl.rcParams['font.sans-serif'] = ['SimHei'] # 指定默认字体
-#mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
+#mpl.rcParams['font.sans-serif'] = ['SimHei'] # 指定默認字體
+#mpl.rcParams['axes.unicode_minus'] = False  # 解決保存圖像是負號'-'顯示為方塊的問題
 
 data_price = [1 ,2, 3, 4, 5]
 
-#4、绘制图片
+#4、繪制圖片
 fig = plt.figure(figsize = (12, 10))
 grid = plt.GridSpec(12, 10, wspace = 0.5, hspace = 0.5)
 
-ax1 = fig.add_subplot(grid[0:8,0:12])   # 设置K线图的尺寸
+ax1 = fig.add_subplot(grid[0:8,0:12])   # 設置K線圖的尺寸
 
 #candlestick_ohlc(ax1, ohlc.values.tolist(), width=.7, colorup='red', colordown='green')
 
-# （2）绘制均线
+# （2）繪制均線
 #ax1.plot(range(len(data_price)), data_price, color='red', lw=2, label='MA (5)')
 
-# 设置标注
-plt.title('test', fontsize = 14)       # 设置图片标题
-plt.ylabel('价 格（元）', fontsize = 14)   # 设置纵轴标题
-plt.legend(loc='best')                    # 绘制图例
-ax1.set_xticks([])                        # 日期标注在成交量中，故清空此处x轴刻度
-ax1.set_xticklabels([])                   # 日期标注在成交量中，故清空此处x轴
+# 設置標注
+plt.title('test', fontsize = 14)       # 設置圖片標題
+plt.ylabel('價 格（元）', fontsize = 14)   # 設置縱軸標題
+plt.legend(loc='best')                    # 繪制圖例
+ax1.set_xticks([])                        # 日期標注在成交量中，故清空此處x軸刻度
+ax1.set_xticklabels([])                   # 日期標注在成交量中，故清空此處x軸
 
-#（3）绘制成交量
-# 成交量数据
+#（3）繪制成交量
+# 成交量數據
 
 data_volume = [3, 2, 1, 4, 6]
-# 绘制成交量
-ax2 = fig.add_subplot(grid[8:10,0:12])  # 设置成交量图形尺寸
-#ax2.bar(data_volume, color='r')                    # 绘制红色柱状图
-#ax2.bar(data_volume, color='g')                    # 绘制绿色柱状图
+# 繪制成交量
+ax2 = fig.add_subplot(grid[8:10,0:12])  # 設置成交量圖形尺寸
+#ax2.bar(data_volume, color='r')                    # 繪制紅色柱狀圖
+#ax2.bar(data_volume, color='g')                    # 繪制綠色柱狀圖
 plt.xticks(rotation=30) 
-plt.xlabel('日 期',fontsize = 14)                               # 设置横轴标题
-# 修改横轴日期标注
-date_list = [1, 2, 3, 4, 5]#ohlc.index.tolist()           # 获取日期列表
-xticks_len = round(len(date_list)/(len(ax2.get_xticks())-1))      # 获取默认横轴标注的间隔
-xticks_num = range(0,len(date_list),xticks_len)                   # 生成横轴标注位置列表
-xticks_str = list(map(lambda x:date_list[int(x)],xticks_num))     # 生成正在标注日期列表
-ax2.set_xticks(xticks_num)                                        # 设置横轴标注位置
-ax2.set_xticklabels(xticks_str)                                   # 设置横轴标注日期
+plt.xlabel('日 期',fontsize = 14)                               # 設置橫軸標題
+# 修改橫軸日期標注
+date_list = [1, 2, 3, 4, 5]#ohlc.index.tolist()           # 獲取日期列表
+xticks_len = round(len(date_list)/(len(ax2.get_xticks())-1))      # 獲取默認橫軸標注的間隔
+xticks_num = range(0,len(date_list),xticks_len)                   # 生成橫軸標注位置列表
+xticks_str = list(map(lambda x:date_list[int(x)],xticks_num))     # 生成正在標注日期列表
+ax2.set_xticks(xticks_num)                                        # 設置橫軸標注位置
+ax2.set_xticklabels(xticks_str)                                   # 設置橫軸標注日期
 
 plt.show()
 """
@@ -373,7 +373,6 @@ plt.barh(listy, listx, height=0.5, color='r')
 
 
 """
-
 
 
 

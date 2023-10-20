@@ -646,7 +646,7 @@ plt.scatter(x, y, s=area, c=colors, alpha=0.5)
 #第四張圖
 plt.subplot(234)
 
-#x，y，大小，颜色
+#x，y，大小，顏色
 plt.scatter([1,2,3,4],[2,4,6,8],[10,20,30,400],['r', 'b','y','k'])   
 plt.scatter([1,2,3,4],[9,8,7,6],s=10,c='b', marker='v')   
 
@@ -796,17 +796,17 @@ matplotlib.pyplot.scatter(x,
     hold=None, 
     **kwargs)
 
-参数：
-    x，y：表示的是shape大小为(n,)的数组，也就是我们即将绘制散点图的数据点，输入数据。
-    s：表示的是大小，是一个标量或者是一个shape大小为(n,)的数组，可选，默认20。
-    c：表示的是色彩或颜色序列，可选，默认蓝色’b’。但是c不应该是一个单一的RGB数字，也不应该是一个RGBA的序列，因为不便区分。c可以是一个RGB或RGBA二维行数组。
+參數：
+    x，y：表示的是shape大小為(n,)的數組，也就是我們即將繪制散點圖的數據點，輸入數據。
+    s：表示的是大小，是一個標量或者是一個shape大小為(n,)的數組，可選，默認20。
+    c：表示的是色彩或顏色序列，可選，默認藍色’b’。但是c不應該是一個單一的RGB數字，也不應該是一個RGBA的序列，因為不便區分。c可以是一個RGB或RGBA二維行數組。
      
-    marker：MarkerStyle，表示的是标记的样式，可选，默认’o’。
-    cmap：Colormap，标量或者是一个colormap的名字，cmap仅仅当c是一个浮点数数组的时候才使用。如果没有申明就是image.cmap，可选，默认None。
-    norm：Normalize，数据亮度在0-1之间，也是只有c是一个浮点数的数组的时候才使用。如果没有申明，就是默认None。
-    vmin，vmax：标量，当norm存在的时候忽略。用来进行亮度数据的归一化，可选，默认None。
-    alpha：标量，0-1之间，可选，默认None。
-    linewidths：也就是标记点的长度，默认None。
+    marker：MarkerStyle，表示的是標記的樣式，可選，默認’o’。
+    cmap：Colormap，標量或者是一個colormap的名字，cmap僅僅當c是一個浮點數數組的時候才使用。如果沒有申明就是image.cmap，可選，默認None。
+    norm：Normalize，數據亮度在0-1之間，也是只有c是一個浮點數的數組的時候才使用。如果沒有申明，就是默認None。
+    vmin，vmax：標量，當norm存在的時候忽略。用來進行亮度數據的歸一化，可選，默認None。
+    alpha：標量，0-1之間，可選，默認None。
+    linewidths：也就是標記點的長度，默認None。
 """
 
 #第一張圖
@@ -824,7 +824,7 @@ plt.scatter(x,y,s=area,alpha=0.5)
 #第二張圖
 plt.subplot(232)
 
-#把c参数改成随机数组。
+#把c參數改成隨機數組。
 
 np.random.seed(0)
 x=np.random.rand(20)
@@ -839,7 +839,7 @@ plt.scatter(x,y,s=area,c=colors,alpha=0.5)
 #第三張圖
 plt.subplot(233)
 
-#把maker参数改成x的样本。
+#把maker參數改成x的樣本。
  
 np.random.seed(0)
 x=np.random.rand(20)
@@ -854,7 +854,7 @@ plt.scatter(x,y,s=area,c=colors,alpha=0.5,marker='x')
 #第四張圖
 plt.subplot(234)
 
-#修改其中的linewidth参数的大小，但是没什么不同，**注意：**只有marker为封闭的图案的时候，这个参数才有效。
+#修改其中的linewidth參數的大小，但是沒什么不同，**注意：**只有marker為封閉的圖案的時候，這個參數才有效。
 
 np.random.seed(0)
 x=np.random.rand(20)
@@ -871,7 +871,7 @@ plt.scatter(x,y,s=area,c=colors,alpha=0.5,marker='x',linewidths=lines)
 #第五張圖
 plt.subplot(235)
 
-#把s参数改成200。
+#把s參數改成200。
  
 np.random.seed(0)
 x=np.random.rand(20)
@@ -883,7 +883,7 @@ plt.scatter(x,y,s=200,c=colors,alpha=0.5)
 #第六張圖
 plt.subplot(236)
 
-#把linewidths参数改成数组。
+#把linewidths參數改成數組。
 
 np.random.seed(0)
 x=np.random.rand(20)
@@ -906,28 +906,28 @@ plt.figure(num = 'scatter 集合 10', figsize = (20, 15), dpi = 84, facecolor = 
 matplotlib.pyplot.scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, 
 vmax=None, alpha=None, linewidths=None, verts=None, edgecolors=None, hold=None, data=None, **kwargs)
 
-基本参数讲解
+基本參數講解
 
-x, y → 散点的坐标
-s → 散点的面积
-c → 散点的颜色（默认值为蓝色，'b'，其余颜色同plt.plot( )）
-marker → 散点样式（默认值为实心圆，'o'，其余样式同plt.plot( )）
-alpha → 散点透明度（[0, 1]之间的数，0表示完全透明，1则表示完全不透明）
-linewidths →散点的边缘线宽
-edgecolors → 散点的边缘颜色
+x, y → 散點的坐標
+s → 散點的面積
+c → 散點的顏色（默認值為藍色，'b'，其余顏色同plt.plot( )）
+marker → 散點樣式（默認值為實心圓，'o'，其余樣式同plt.plot( )）
+alpha → 散點透明度（[0, 1]之間的數，0表示完全透明，1則表示完全不透明）
+linewidths →散點的邊緣線寬
+edgecolors → 散點的邊緣顏色
 
 
-高级参数讲解
+高級參數講解
 
-cmap → 指的是matplotlib.colors.Colormap，相当于多个调色盘的合集
-norm、vmin、vmax → 散点颜色亮度设置
+cmap → 指的是matplotlib.colors.Colormap，相當于多個調色盤的合集
+norm、vmin、vmax → 散點顏色亮度設置
 
 """
 
 #第一張圖
 plt.subplot(231)
 
-n = 10 # 用于生成十个点
+n = 10 # 用于生成十個點
 x = np.random.rand(n)
 y = np.random.rand(n)
 
@@ -936,7 +936,7 @@ plt.scatter(x, y)
 #第二張圖
 plt.subplot(232)
 
-n = 10 # 用于生成十个点
+n = 10 # 用于生成十個點
 x = np.random.rand(n)
 y = np.random.rand(n)
 
@@ -950,42 +950,42 @@ plt.subplot(233)
 
 rng = np.random.RandomState(0)
 
-x = rng.randn(50)  # 随机产生50个X轴坐标
-y = rng.randn(50)  # 随机产生50个Y轴坐标
+x = rng.randn(50)  # 隨機產生50個X軸坐標
+y = rng.randn(50)  # 隨機產生50個Y軸坐標
 
-colors = rng.rand(50)  # 随机产生50个用于颜色映射的数值
-sizes = 700 * rng.rand(50)  # 随机产生50个用于改变散点面积的数值
+colors = rng.rand(50)  # 隨機產生50個用于顏色映射的數值
+sizes = 700 * rng.rand(50)  # 隨機產生50個用于改變散點面積的數值
 
 plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap='viridis')
 
 
 
-#这里从cmap中选取了一个叫做'viridis'的调色盘，
-#其作用是，将参数c中获取到的数值，映射到“色盘”中已经对应好的颜色上
+#這里從cmap中選取了一個叫做'viridis'的調色盤，
+#其作用是，將參數c中獲取到的數值，映射到“色盤”中已經對應好的顏色上
 
-#并且上图中从“色盘”viridis中获取到的颜色，
-#可以通过plt.colorbar( )显示为颜色条（与热力图同理）。
+#并且上圖中從“色盤”viridis中獲取到的顏色，
+#可以通過plt.colorbar( )顯示為顏色條（與熱力圖同理）。
 
 #第四張圖
 plt.subplot(234)
 
 rng = np.random.RandomState(0)
 
-x = rng.randn(50)  # 随机产生50个X轴坐标
-y = rng.randn(50)  # 随机产生50个Y轴坐标
+x = rng.randn(50)  # 隨機產生50個X軸坐標
+y = rng.randn(50)  # 隨機產生50個Y軸坐標
 
-colors = rng.rand(50)  # 随机产生50个用于颜色映射的数值
-sizes = 700 * rng.rand(50)  # 随机产生50个用于改变散点面积的数值
+colors = rng.rand(50)  # 隨機產生50個用于顏色映射的數值
+sizes = 700 * rng.rand(50)  # 隨機產生50個用于改變散點面積的數值
 
 plt.scatter(x, y, c=colors, s=sizes, alpha=0.3, cmap='viridis')
 
-plt.colorbar()  # 显示颜色条
+plt.colorbar()  # 顯示顏色條
 
 
 #第五張圖
 plt.subplot(235)
 
-from matplotlib import colors  # 注意！为了调整“色盘”，需要导入colors
+from matplotlib import colors  # 注意！為了調整“色盤”，需要導入colors
 
 rng = np.random.RandomState(0)
 x = rng.randn(50)
@@ -1020,17 +1020,17 @@ matplotlib.pyplot.scatter(x, y, s=None,
                             verts=None, edgecolors=None, 
                             **kwargs)
 
-x，y：输入数据的x，y轴
-s：标量或数组，可选参数，散点图点的大小
-c：颜色或颜色序列，可选参数，默认为蓝色
-marker：散点图中点的形状，默认为圆点
-cmap：色图，仅在c是浮点数组的情况下使用
-norm：设置数据亮度，用于将亮度数据缩放到0~1之间。仅当c是浮点数组的情况下使用
-vmin，vmax：亮度设置，与norm类似，只是设置缩放的范围，当使用了norm参数，则该参数无效
-alpha：透明度设置，0（透明）~1（不透明）之间
-linewidths：设置散点边界线的宽度
-verts：如果marker参数为空，则用（x，y）序列来构造marker，中心的点被置为（0，0），其他点被s重新缩放
-edgecolors：设置散点边界线的颜色
+x，y：輸入數據的x，y軸
+s：標量或數組，可選參數，散點圖點的大小
+c：顏色或顏色序列，可選參數，默認為藍色
+marker：散點圖中點的形狀，默認為圓點
+cmap：色圖，僅在c是浮點數組的情況下使用
+norm：設置數據亮度，用于將亮度數據縮放到0~1之間。僅當c是浮點數組的情況下使用
+vmin，vmax：亮度設置，與norm類似，只是設置縮放的范圍，當使用了norm參數，則該參數無效
+alpha：透明度設置，0（透明）~1（不透明）之間
+linewidths：設置散點邊界線的寬度
+verts：如果marker參數為空，則用（x，y）序列來構造marker，中心的點被置為（0，0），其他點被s重新縮放
+edgecolors：設置散點邊界線的顏色
 """
 
 #第一張圖
@@ -1038,14 +1038,14 @@ plt.subplot(231)
 
 np.random.seed(100)
 
-x = np.arange(0.0, 50.0, 1.0)   # 生成一个0到50的序列
+x = np.arange(0.0, 50.0, 1.0)   # 生成一個0到50的序列
 
-y = x ** 1.3 + np.random.rand(*x.shape) * 30.0 # y = x ^ 1.3 + 随机值 * 30 
+y = x ** 1.3 + np.random.rand(*x.shape) * 30.0 # y = x ^ 1.3 + 隨機值 * 30 
 
-plt.scatter(x,y, # 输入的数据
-           alpha=0.9, # 设置点的透明度
+plt.scatter(x,y, # 輸入的數據
+           alpha=0.9, # 設置點的透明度
            label='rand')
-plt.legend(loc='best')   # 添加图例
+plt.legend(loc='best')   # 添加圖例
 
 
 #第二張圖
@@ -1053,12 +1053,12 @@ plt.subplot(232)
 
 np.random.seed(500)
 
-N = 50                  # 数据点总数
-x = np.random.rand(N)   # x 轴数据
-y = np.random.rand(N)   # y 轴数据
-colors = np.random.rand(N)  # 颜色
+N = 50                  # 數據點總數
+x = np.random.rand(N)   # x 軸數據
+y = np.random.rand(N)   # y 軸數據
+colors = np.random.rand(N)  # 顏色
 
-area = np.pi * (15 * np.random.rand(N))**2 # 每个点对应的面积大小，（即气泡大小，这里可以放入第3个属性数据）
+area = np.pi * (15 * np.random.rand(N))**2 # 每個點對應的面積大小，（即氣泡大小，這里可以放入第3個屬性數據）
 
 plt.scatter(x,y,
            s=area,
@@ -1122,5 +1122,4 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
-
 

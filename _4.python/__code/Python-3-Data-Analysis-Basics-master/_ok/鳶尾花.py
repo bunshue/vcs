@@ -66,7 +66,9 @@ print(iris.data)
 print(type(iris.data))
 print(len(iris.data))
 print(iris.data.shape)
+print(iris.data[5])    #第5筆資料
 print(iris.data[:5])    #前5筆資料
+print('答案')
 print(iris.target)
 
 """
@@ -74,7 +76,7 @@ print(iris.target)
 iris.data = iris.data[45:55]
 iris.target = iris.target[45:55]
 """
-
+"""
 #debug 10筆資料
 irisdata = [[5.1, 3.5, 1.4, 0.2],
             [4.9, 3.0, 1.4, 0.2],
@@ -89,11 +91,16 @@ irisdata = [[5.1, 3.5, 1.4, 0.2],
 iris.data = np.array(irisdata)
 iristarget = [0, 0, 0, 1, 1, 1, 2, 2, 2, 2]
 iris.target = np.array(iristarget)
+"""
 
+"""
 print('data')
 print(iris.data)
 print('target')
 print(iris.target)
+"""
+
+print('共有 :', len(iris.data), '筆資料')
 
 #資料內容
 #這些數據中, data 就是我們的 x (輸入), target 是 y (輸出)。
@@ -114,16 +121,17 @@ print(iris.target)
 x = iris.data
 y = iris.target
 
-X = x[:, :2]
+#X = x[:, :2]   #初~2 花萼
+X = x[:, 2:]    #2~末 花瓣
 Y = y
 
 #只選兩個 features 原因之一是好畫 :)
 
 plt.scatter(X[:,0], X[:,1], c = 'pink', s = 150)
 plt.scatter(X[:,0], X[:,1], s = 50, c = Y, alpha = 0.6)
-plt.title('花萼 原始資料')
-
+plt.title('花瓣 原始資料')
 plt.show()
+
 
 #試著用我們學過的方式, 看能不能做出一個分類器函數, 來把鳶尾花正確分類!
 
@@ -132,8 +140,9 @@ plt.show()
 x = iris.data
 y = iris.target
 
-#為了表示我們很神 (事實上只是好畫圖), 我們只用兩個 features (花萼長度、寬度)。
-X = x[:, :2]
+#為了表示我們很神 (事實上只是好畫圖), 我們只用兩個 features (花瓣長度、寬度)。
+#X = x[:, :2]   #初~2 花萼
+X = x[:, 2:]    #2~末 花瓣
 Y = y
 
 #切分訓練及測試資料。
@@ -144,13 +153,12 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y,
 
 #看一下整筆數據的分佈。
 plt.scatter(X[:,0], X[:,1], c = Y, cmap = 'Paired')
-plt.title('花萼 原始資料')
-
+plt.title('花瓣 原始資料')
 plt.show()
 
 #看訓練結果
 plt.scatter(x_train[:, 0], x_train[:, 1], c = y_train)
-plt.title('花萼 訓練結果')
+plt.title('花瓣 訓練資料')
 plt.show()
 
 #鳶尾花 (Iris) 的數據, 有三類的鳶尾花我們想用 SVM 做分類。
@@ -167,13 +175,53 @@ clf.fit(x_train, y_train)
 #第三部曲：預測
 y_predict= clf.predict(x_test)
 
-#看看我們模型預測和真實狀況差多少?
+print('看看我們模型預測和真實狀況差多少?')
 print(y_predict - y_test)
 
 #看看有沒有不準的?
 y_predict = clf.predict(x_test)
 
+#這時因為如果答對了, 我們和正確答案相減就是 0。學得不錯就會大部份是 0, 錯的不是 0 畫出來就會不同色。我們來試試看。
 plt.scatter(x_test[:,0], x_test[:,1], c=y_predict - y_test)
+plt.title('看差值')
+plt.show()
+
+plt.scatter(x_test[:,0], x_test[:,1], c=y_predict)
+plt.title('看最後結果')
+plt.show()
+
+
+
+#現在我們做的是讓平面上密密麻麻的點都去看它會是哪種鳶尾花的數據。
+
+x1, y1 = np.meshgrid(np.arange(0,7,0.02), np.arange(0,3,0.02))
+
+#記得 x1, y1 是什麼樣子的, 我們要拉平之後 (x1_ravel(), y1_ravel()), 再用 np.c_ 合成一點一點的, 才可以送進去預測。
+
+Z = clf.predict(np.c_[x1.ravel(), y1.ravel()])
+
+#好奇的話可以看看我們到底送了多少點進去?
+
+print(len(x1.ravel()))
+
+#52500
+
+#等一下我們要用 contourf 做填充型的等高線, 每一點的「高度」就是我們的 SVC 學習機判斷鳶尾花的亞種。但用 contourf 輸入的格點是前面 meshgrid 後的 x1, y1, 而高度 Z 也是要用同樣的型式。
+
+Z = Z.reshape(x1.shape)
+
+#於是我們終於可以畫圖了...
+
+plt.scatter(x_test[:,0], x_test[:,1], c=y_test)
+plt.contourf(x1,y1,Z,alpha=0.3)
+plt.show()
+
+
+#這是測試資料, 之前我們已經知道我們全對!
+#不如就來看看所有鳶尾花資料我們 SVC 的表現。
+
+plt.scatter(X[:,0], X[:,1], c=Y)
+plt.contourf(x1,y1,Z,alpha=0.3)
 plt.show()
 
 #在測試資料中是全對!! 我們畫圖來看看整體表現如何?
