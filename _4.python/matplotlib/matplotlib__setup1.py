@@ -6,7 +6,6 @@ plt之基本設定
 import matplotlib.pyplot as plt
 import numpy as np
 import math
-import matplotlib
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示

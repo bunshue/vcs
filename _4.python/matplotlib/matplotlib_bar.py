@@ -318,6 +318,7 @@ plt.ylabel("選修人數")
 #第三張圖
 plt.subplot(233)
 
+import pandas as pd
 print('畫出頻率分布圖')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'

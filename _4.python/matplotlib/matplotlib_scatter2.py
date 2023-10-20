@@ -116,8 +116,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt 
-
 #x，y，大小，颜色
 plt.scatter([1,2,3,4],[2,4,6,8],[10,20,30,400],['r', 'b','y','k'])   
 plt.scatter([1,2,3,4],[9,8,7,6],s=10,c='b', marker='v')   
@@ -254,9 +252,6 @@ matplotlib.pyplot.scatter(x,
     linewidths：也就是标记点的长度，默认None。
 """
 
-import numpy as np
-import matplotlib.pyplot as plt
- 
 np.random.seed(0)
 x=np.random.rand(20)
 y=np.random.rand(20)
@@ -269,9 +264,6 @@ plt.show()
 
 #把c参数改成随机数组。
 
-import numpy as np
-import matplotlib.pyplot as plt
- 
 np.random.seed(0)
 x=np.random.rand(20)
 y=np.random.rand(20)
@@ -282,13 +274,7 @@ area=(50*np.random.rand(20))**2
 plt.scatter(x,y,s=area,c=colors,alpha=0.5)
 plt.show()
 
-
-
-
 #把maker参数改成x的样本。
-
-import numpy as np
-import matplotlib.pyplot as plt
  
 np.random.seed(0)
 x=np.random.rand(20)
@@ -300,12 +286,8 @@ area=(50*np.random.rand(20))**2
 plt.scatter(x,y,s=area,c=colors,alpha=0.5,marker='x')
 plt.show()
 
-
 #修改其中的linewidth参数的大小，但是没什么不同，**注意：**只有marker为封闭的图案的时候，这个参数才有效。
 
-import numpy as np
-import matplotlib.pyplot as plt
- 
 np.random.seed(0)
 x=np.random.rand(20)
 y=np.random.rand(20)
@@ -318,12 +300,7 @@ lines=np.zeros(220)+5
 plt.scatter(x,y,s=area,c=colors,alpha=0.5,marker='x',linewidths=lines)
 plt.show()
 
-
-
 #把s参数改成200。
-
-import numpy as np
-import matplotlib.pyplot as plt
  
 np.random.seed(0)
 x=np.random.rand(20)
@@ -333,14 +310,8 @@ colors=np.random.rand(20)
 plt.scatter(x,y,s=200,c=colors,alpha=0.5)
 plt.show()
 
-
-
-
 #把linewidths参数改成数组。
 
-import numpy as np
-import matplotlib.pyplot as plt
- 
 np.random.seed(0)
 x=np.random.rand(20)
 y=np.random.rand(20)
@@ -370,13 +341,8 @@ edgecolors → 散点的边缘颜色
 
 cmap → 指的是matplotlib.colors.Colormap，相当于多个调色盘的合集
 norm、vmin、vmax → 散点颜色亮度设置
-    
-
 
 """
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 n = 10 # 用于生成十个点
 x = np.random.rand(n)
@@ -388,9 +354,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
-import numpy as np
-
 n = 10 # 用于生成十个点
 x = np.random.rand(n)
 y = np.random.rand(n)
@@ -401,11 +364,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 #numpy.random.RandomState的用法
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 rng = np.random.RandomState(0)
 
@@ -425,11 +384,7 @@ plt.show()
 #并且上图中从“色盘”viridis中获取到的颜色，
 #可以通过plt.colorbar( )显示为颜色条（与热力图同理）。
 
-
 print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 rng = np.random.RandomState(0)
 
@@ -447,8 +402,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
-import numpy as np
 from matplotlib import colors  # 注意！为了调整“色盘”，需要导入colors
 
 rng = np.random.RandomState(0)
@@ -487,14 +440,8 @@ linewidths：设置散点边界线的宽度
 verts：如果marker参数为空，则用（x，y）序列来构造marker，中心的点被置为（0，0），其他点被s重新缩放
 edgecolors：设置散点边界线的颜色
 """
-
-
     
 print('------------------------------------------------------------')	#60個
-
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 np.random.seed(100)
 
