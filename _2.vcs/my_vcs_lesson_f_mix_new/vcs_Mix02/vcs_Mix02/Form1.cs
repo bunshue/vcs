@@ -97,14 +97,46 @@ namespace vcs_Mix02
             richTextBox1.Text += ((Button)sender).Text + "\n";
         }
 
+        enum Animal { mouse, ox, tiger, rabbit, dragon, snake, horse, goat, monkey, chicken, dog, pig };
+
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            richTextBox1.Text += "enum的用法\n";
+
+            Animal my_animal = Animal.chicken;
+
+            int animalNo = (int)my_animal;
+            richTextBox1.Text += my_animal.ToString() + "的列舉值為 : " + animalNo + "\n";
         }
+
+        struct person
+        {
+            public int age;
+            public float salary;
+            public string skin;
+        };
+        struct female
+        {
+            public person mary;
+            public string hair;
+        };
 
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            female female1;
+            female1.mary.age = 50;
+            female1.mary.salary = 23000;
+            female1.mary.skin = "黃色";
+            female1.hair = "直髮";
+            richTextBox1.Text += "年齡："+ female1.mary.age+"\n";
+            richTextBox1.Text += "收入："+ female1.mary.salary+"\n";
+            richTextBox1.Text += "膚色："+ female1.mary.skin+"\n";
+            richTextBox1.Text += "髮型："+ female1.hair+"\n";
+
         }
 
         private void button2_Click(object sender, EventArgs e)

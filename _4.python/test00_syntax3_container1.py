@@ -987,6 +987,14 @@ print(animals1)
 
 print('------------------------------------------------------------')	#60個
 
+print('依英文名字數長短排序')
+
+def compare_num_of_chars(string1): 
+    return len(string1)                  
+
+animals = ['mouse', 'ox', 'tiger', 'rabbit', 'dragon', 'snake', 'horse', 'goat', 'monkey', 'chicken', 'dog', 'pig']
+animals.sort(key = compare_num_of_chars)
+print(animals)
 
 print('------------------------------------------------------------')	#60個
 

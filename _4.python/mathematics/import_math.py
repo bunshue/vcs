@@ -2,7 +2,7 @@
 
 import math
 import numpy as np
-
+'''
 print('------------------------------------------------------------')	#60個
 
 print('數學常數')
@@ -169,8 +169,6 @@ acc_deciamal()
 
 print('------------------------------------------------------------')	#60個
 
-import math
-
 N = 30
 times = 10000000000000              # 電腦每秒可處理數列數目
 day_secs = 60 * 60 * 24             # 一天秒數
@@ -179,10 +177,27 @@ combinations = math.factorial(N)    # 組合方式
 years = combinations / (times * year_secs)
 print("需要 %d 年才可以獲得結果" % years)
 
+'''
 print('------------------------------------------------------------')	#60個
 
+z = 3 + 5j
+
+print('實部', z.real)
+print('虛部', z.imag)
 
 print('------------------------------------------------------------')	#60個
+
+import cmath
+cc = cmath.sqrt(-1)
+print(cc)
+
+print('用 math 取 平方根 :')
+cc = math.sqrt(16)
+print(cc)
+
+print('用 cmath 取 平方根 :')
+cc = cmath.sqrt(16)
+print(cc)
 
 
 print('------------------------------------------------------------')	#60個

@@ -3,7 +3,7 @@ import pickle
 print('使用 pickle 模組 寫讀二進位檔案')
 
 print('------------------------------------------------------------')	#60個
-
+'''
 filename = 'pickle.dat'
 print('寫入二進位檔案 :', filename)
 fp = open(filename, "wb")
@@ -51,5 +51,39 @@ f = open("animal.pickle", 'rb')
 pickledict = pickle.load(f)
 f.close()
 print(pickledict)
+
+print('------------------------------------------------------------')	#60個
+
+'''
+
+'''
+print('將資料寫入pickle檔案')
+a = 12
+b = 34
+c = 56
+file = open("state", 'wb')
+pickle.dump(a, file)
+pickle.dump(b, file)
+pickle.dump(c, file)
+file.close()
+
+
+print('------------------------------------------------------------')	#60個
+
+print('從pickle檔案讀出資料')
+file = open("state", 'rb')
+a = pickle.load(file)
+b = pickle.load(file)
+c = pickle.load(file)
+file.close()
+
+print('a =', a)
+print('b =', b)
+print('c =', c)
+'''
+
+
+print('------------------------------------------------------------')	#60個
+
 
 print('------------------------------------------------------------')	#60個

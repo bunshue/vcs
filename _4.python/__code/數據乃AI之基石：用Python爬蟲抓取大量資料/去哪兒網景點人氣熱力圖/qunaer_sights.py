@@ -119,5 +119,5 @@ def dump_qunaer_sights(pages):
 if __name__ == "__main__":
     init_df()
     init_csv()
-    dump_qunaer_sights(pages=400)
+    dump_qunaer_sights(pages=10)
     close_csv()
