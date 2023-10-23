@@ -25,7 +25,7 @@ print('------------------------------------------------------------')	#60個
 #隨便生個 100 點
 x = np.random.rand(100, 2)
 
-plt.scatter(x[:,0], x[:,1], s = 50)
+plt.scatter(x[:, 0], x[:, 1], s = 50)
 plt.title('原始資料')
 plt.show()
 
@@ -55,11 +55,11 @@ plt.scatter(gd[:,0], gd[:,1], s=50, cmap=plt.cm.coolwarm, c=gdc)
 plt.title('訓練好的結果2')
 plt.show()
 
-plt.scatter(gd[:,0], gd[:,1], s=50, cmap=plt.cm.prism, c=gdc)
+plt.scatter(gd[:, 0], gd[:, 1], s = 50, cmap = plt.cm.prism, c = gdc)
 plt.title('訓練好的結果3')
 plt.show()
 
-plt.scatter(gd[:,0], gd[:,1], s=50, cmap=plt.cm.Set1, c=gdc)
+plt.scatter(gd[:, 0], gd[:, 1], s = 50, cmap = plt.cm.Set1, c = gdc)
 
 plt.title('訓練好的結果4')
 plt.show()
@@ -68,7 +68,7 @@ plt.show()
 #畫完整分類
 #和以前一樣, 未來新的資料進來, 我們訓練好的也可以再做分類。
 
-x1, x2 = np.meshgrid(np.arange(-0.2,1.2,0.02), np.arange(-0.2,1.2,0.02))
+x1, x2 = np.meshgrid(np.arange(-0.2, 1.2, 0.02), np.arange(-0.2, 1.2, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 
 z = Z.reshape(x1.shape)

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExOp", "ExOp\ExOp.csproj", "{06A27BD8-1C3D-43C9-8E60-C6DB3048776B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06A27BD8-1C3D-43C9-8E60-C6DB3048776B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06A27BD8-1C3D-43C9-8E60-C6DB3048776B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06A27BD8-1C3D-43C9-8E60-C6DB3048776B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06A27BD8-1C3D-43C9-8E60-C6DB3048776B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {901727F2-1826-47E0-AEBA-72AAB9E96C76}
+	EndGlobalSection
+EndGlobal

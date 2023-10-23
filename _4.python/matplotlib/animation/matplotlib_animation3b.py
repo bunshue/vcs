@@ -13,8 +13,10 @@ print('------------------------------------------------------------')	#60個
 
 # 繪製 sin/cos 波形, 這個函數將被重複調用
 def animate(i):
-    line0.set_ydata(np.sin(x - i / 50))  # 更新 line0 變數
-    line1.set_ydata(np.cos(x - i / 50))  # 更新 line1 變數
+    y0data = np.sin(x - i / 50)
+    y1data = np.cos(x - i / 50)
+    line0.set_ydata(y0data)  # 更新 line0 變數
+    line1.set_ydata(y1data)  # 更新 line1 變數
     print(i, end = ' ')
     return line0, line1
 
@@ -22,11 +24,13 @@ fig = plt.figure(figsize = (10, 6))
 
 # 建立 x 資料
 x = np.arange(0, 2 * np.pi, 0.02)
+y0 = np.sin(x)
+y1 = np.cos(x)
 
 # 建立 line0 變數
-line0, = plt.plot(x, np.sin(x))
+line0, = plt.plot(x, y0)
 # 建立 line1 變數
-line1, = plt.plot(x, np.cos(x))
+line1, = plt.plot(x, y1)
 
 interval = 20   #每隔 interval msec 執行 animate()動畫
 ani = FuncAnimation(fig,
