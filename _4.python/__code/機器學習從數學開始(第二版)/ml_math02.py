@@ -462,7 +462,7 @@ similarity = numpy.asarray(numpy.asmatrix(data_n) * numpy.asmatrix(data_n).T)
 tt = pd.DataFrame(similarity, index = corpus, columns = corpus).head(10)
 print(tt)
 
-sns.heatmap(similarity,cmap='Reds')
+sns.heatmap(similarity, cmap = 'Reds')
 plt.show()
 
 
