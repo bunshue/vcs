@@ -32,46 +32,6 @@ TaipeiSansTCBeta-Regular.ttf'
 
 """
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/TaipeiSansTCBeta-Regular.ttf'
-
-import matplotlib as mpl
-import matplotlib.font_manager as fm
-fm.fontManager.addfont(font_filename)
-mpl.rc('font', family='Taipei Sans TC Beta')
-
-#把預設狀態存起來
-saved_state = mpl.rcParams.copy()
-
-#plt.xkcd()  #搞笑風格
-
-#多此兩行 變成海生風格
-import seaborn as sns
-sns.set()
-
-x = np.linspace(-5, 5, 200)
-y = np.sinc(x)
-
-plt.plot(x, y)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-plt.plot(x, y)
-
-plt.show()
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-mpl.rcParams.update(saved_state)
-
-plt.plot(x, y)
-
-plt.show()
 
 sys.exit()
 

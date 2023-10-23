@@ -1,0 +1,12 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P1-25頁----
+
+
+def happy():
+	print('life')
+
+
+def happy():
+print('life')

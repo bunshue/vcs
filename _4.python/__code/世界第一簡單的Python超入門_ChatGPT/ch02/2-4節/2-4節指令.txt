@@ -1,0 +1,172 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P2-17頁----
+
+'''
+Sunday
+Monday
+Tuesday
+'''
+
+
+
+'thunder' + 'bolt'
+
+
+●----P2-18頁----
+
+
+'hunter' * 2
+
+'dragon' * 'head'
+
+
+●----P2-20頁----
+
+text = 'hello'
+text.upper()
+
+
+word = 'maintenance'
+word.count('n')
+
+
+●----P2-21頁----
+
+46 < 49
+
+46 > 49
+
+true
+
+
+●----P2-22頁----
+
+Agroup = ['kazu', 'gorou']
+
+Bgroup = ['syun', 'haruka']
+
+Agroup[0]
+
+Bgroup[1]
+
+'haruka'
+
+
+●----P2-23頁----
+
+Agroup = ['kazu', 'gorou']
+Agroup.append('dai')
+Agroup
+
+
+Agroup.remove('kazu')
+Agroup
+
+
+●----P2-24頁----
+
+Agroup = ['kazu', 'gorou', 'dai']
+Agroup.sort()
+Agroup
+
+
+●----P2-25頁----
+
+test_result = [87, 55, 99, 50, 66, 78]
+test_result.sort()
+test_result
+
+
+mix_list = [85, 'kazu', 'dai', 100]
+mix_list.sort()
+
+
+●----P2-26頁----
+
+activities = {'Monday':'籃球', 'Tuesday':'自行車', 'Wednesday':'熱音', 'Friday':'游泳'}
+
+
+activities['Tuesday']
+activities['Friday']
+
+
+●----P2-27頁----
+
+activities.keys()
+
+activities.values()
+
+
+●----P2-28頁----
+
+tuple_sample = ('apple', 3, 90.4)
+tuple_sample
+
+
+flavor_list = ['薄荷', '巧克力', '草莓', '香草']
+flavor_list[0] = '蘭姆葡萄乾'
+print(flavor_list)
+
+
+flavor_tuple = ('薄荷', '巧克力', '草莓', '香草')
+flavor_tuple[0] = '蘭姆葡萄乾'
+print(flavor_tuple)
+
+
+●----P2-29頁----
+
+diary = {}
+key = ('kamata', '08-01')
+diary[key] = '70kg'
+print(diary)
+
+
+●----P2-30頁----
+
+diary = {} 建立字典
+key = ['nakata', '08-01'] 建立串列
+diary[key] = '50kg'
+
+
+diary['kamata', '08-03']
+diary['nakata', '08-09']
+diary['nakata', '08-04']
+
+
+●----P2-31頁----
+
+candy = {'delicious', 'fantastic'}
+print(candy)
+
+
+candy = set('delicious')
+print(candy)
+
+
+flavor = ['apple', 'peach', 'soda']
+candy = set(flavor)
+candy
+candy.update(['grape'])
+candy
+
+
+●----P2-32頁----
+
+music = ['my_love', 'life', 'life', 'good_time']
+music_set = set(music)
+print(music_set)
+music = list(music_set)
+print(music)
+
+
+●----P2-33頁----
+
+limited_cd = {'good_day', 'chocolate', 'loyalty'}
+
+normal_cd = {'good_day', 'chocolate'}
+
+limited_cd - normal_cd
+
+limited_cd & normal_cd

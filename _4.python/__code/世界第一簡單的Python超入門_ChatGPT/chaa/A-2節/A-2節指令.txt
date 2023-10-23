@@ -1,0 +1,84 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----PA-5頁----
+
+class Fruit:
+	color = 'red'
+	def taste(self):
+		return 'delicious'
+
+
+●----PA-7頁----
+
+apple = Fruit()
+
+apple.color
+
+apple.taste()
+
+
+●----PA-8頁----
+
+class Staff:
+	def salary():
+		return "30000 元"
+
+yamamoto = Staff()
+
+yamamoto.salary()
+
+
+●----PA-9頁----
+
+class Staff:
+	def salary(self):
+		return "30000 元"
+
+yamamoto = Staff()
+
+yamamoto.salary()
+
+
+●----PA-10頁----
+
+class staff:
+	bonus = 10000
+	def salary(self):
+		salary = 30000 + bonus
+		return salary
+
+yamamoto = staff()
+yamamoto.salary()
+
+
+●----PA-11頁----
+
+
+class Staff:
+	bonus = 10000
+	def salary(self):
+		salary = 30000 + self.bonus
+		return salary
+
+yamamoto = Staff()
+
+yamamoto.salary()
+
+
+●----PA-13頁----
+
+class Staff:
+	def __init__(self, b):
+		self.bonus = b
+	def salary(self):
+		salary = 30000 + self.bonus
+		return salary
+
+yamamoto = Staff(10000)
+
+yamamoto.salary()
+
+mary = Staff(20000)
+
+mary.salary()

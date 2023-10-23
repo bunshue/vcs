@@ -1,0 +1,38 @@
+### 24.2.4 ###
+
+請自行測試
+
+### 24.4.2 ###
+
+請自行測試
+
+### 24.5.1 ###
+
+如果你確定每組中的項目數量完全相同且項目順序正確，則可以使用zip()函數。
+否則，你可以建立一個字典，其中的鍵是兩個資料集之間共同的內容，然後從兩
+個集合中根據鍵來追加日期。
+
+### 24.5.2 ###
+
+selected = [x for x in old_list if <x meets selection criteria>]
+
+### 24.5.3 ###
+
+calls_revenue[['Team member','Month', 'Calls', 'Amount']]
+.groupby(['Team member','Month']).sum())
+
+### 24.6 ###
+
+%matplotlib inline
+import pandas as pd
+import numpy as np
+
+# see text for these
+calls = pd.read_csv("sales_calls.csv")
+revenue = pd.read_csv("sales_revenue.csv")
+calls_revenue = pd.merge(calls, revenue, on=['Territory', 'Month'])
+calls_revenue['Call_Amount'] = calls_revenue.Amount/calls_revenue.Calls
+
+# plot
+calls_revenue[['Month', 'Call_Amount']].groupby(['Month']).mean().plot()
+

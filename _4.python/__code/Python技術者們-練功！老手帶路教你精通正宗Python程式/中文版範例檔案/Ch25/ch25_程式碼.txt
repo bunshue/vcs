@@ -1,0 +1,134 @@
+### 25.1 ###
+
+>>> import requests
+>>> r = requests.get('https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt')
+>>> inventory_txt = r.text  
+
+---
+
+>>> with open("inventory.txt", "w", encoding='utf-8') as inventory_file:
+...     inventory_file.write(inventory_txt)
+
+---
+
+>>> print(inventory_txt[:137])
+
+---
+
+>>> from collections import namedtuple
+>>> Inventory = namedtuple("Inventory",
+...   ['station', 'latitude', 'longitude', 'element', 'start', 'end'])
+
+---
+
+>>> inventory = [Inventory(x[0:11], float(x[12:20]), float(x[21:30]), x[31:35], int(x[36:40]), int(x[41:45]))
+...              for x in inventory_txt.split("\n") if x.strip()]
+
+---
+
+>>> for line in inventory[:3]:
+...     print(line)
+
+>>> print(inventory[0].station)
+
+---
+
+>>> inventory_temps = [x for x in inventory 
+...                      if x.element in ['TMIN', 'TMAX'] and 
+...                      x.end >= 2015 and x.start < 1920]
+
+---
+
+>>> from pprint import pprint as pp 
+>>> pp(inventory_temps[:5])
+
+---
+
+>>> mylatitude, mylongitude = 41.882, -87.629   
+>>> inventory_temps.sort(key=lambda n:  
+...   abs(mylatitude-n.latitude) + abs(mylongitude-n.longitude))
+
+---
+
+>>> pp(inventory_temps[:5]) 
+
+### 25.2 ###
+
+　
+>>> station_id = 'USC00110338'
+>>> r = requests.get(
+...   'https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/all/{}.dly'.
+...   format(station_id))
+>>> weather = r.text
+>>> with open('weather_{}.txt'.format(station_id), "w", 
+...     encoding='utf-8') as weather_file:
+...     weather_file.write(weather)
+
+---
+
+>>> print(weather[:540])
+
+---
+
+>>> from parse_line import parse_line
+>>> parse_line(weather.split("\n")[0])
+>>> parse_line(weather.split("\n")[1])
+
+---
+
+>>> weather_data = [parse_line(x) 
+...     for x in weather.split("\n") if x]
+>>> len(weather_data)
+>>> pp(weather_data[:10])
+
+---
+
+>>> import sqlite3
+>>> conn = sqlite3.connect("weather_data.db")
+>>> cursor = conn.cursor()
+>>> create_weather = """CREATE TABLE "weather" (
+...     "id" text NOT NULL,
+...     "year" integer NOT NULL,
+...     "month" integer NOT NULL,
+...     "element" text NOT NULL,
+...     "max" real,
+...     "min" real,
+...     "mean" real,
+...     "count" integer)"""
+>>> cursor.execute(create_weather)
+>>> conn.commit()
+>>> for record in weather_data:
+...     cursor.execute("""insert into weather ( 
+...         id, year, month, element, max, min, mean, count
+...         ) values (?,?,?,?,?,?,?,?) """, record)
+>>> conn.commit()
+
+---
+
+>>> cursor.execute("""select * from weather 
+...     where element='TMAX' order by year,month""")
+>>> tmax_data = cursor.fetchall()
+>>> pp(tmax_data[:5])
+
+---
+
+>>> tmax_data = [x for x in weather_data if x[3] == 'TMAX']
+>>> tmin_data = [x for x in weather_data if x[3] == 'TMIN']
+>>> pp(tmin_data[:5])
+
+---
+
+>>> import pandas as pd
+>>> import matplotlib.pyplot as plt
+
+---
+
+>>> tmax_df = pd.DataFrame(tmax_data, columns=['Station', 'Year',
+... 'Month', 'Element', 'Max', 'Min', 'Mean', 'Days'])
+>>> tmin_df = pd.DataFrame(tmin_data, columns=['Station', 'Year',
+... 'Month', 'Element', 'Max', 'Min', 'Mean', 'Days'])
+
+---
+
+>>> tmin_df[['Year','Min', 'Mean', 'Max']].groupby('Year').mean().plot(kind='line', figsize=(16, 4))
+>>> plt.show()

@@ -1,0 +1,242 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P6-3頁----
+
+import tkinter as tk
+base = tk.Tk()
+base.mainloop()
+
+
+●----P6-5頁----
+
+import tkinter as tk
+base = tk.Tk()
+button = tk.Button(base, text='PUSH!')
+button.pack()
+base.mainloop()
+
+
+●----P6-7頁----
+
+import tkinter as tk
+base = tk.Tk()
+button1 = tk.Button(base, text='push1')
+button2 = tk.Button(base, text='push2')
+button3 = tk.Button(base, text='push3')
+button1.pack()
+button2.pack()
+button3.pack()
+base.mainloop()
+
+
+●----P6-8頁----
+
+base = tk.Tk()
+button1 = tk.Button(base, text='push1', width=20).pack()
+button2 = tk.Button(base, text='push2').pack(side=tk.LEFT)
+button3 = tk.Button(base, text='push3').pack(side=tk.RIGHT)
+base.mainloop()
+
+
+●----P6-9頁----
+
+base = tk.Tk()
+button1 = tk.Button(base, text='push1')
+button2 = tk.Button(base, text='push2')
+button3 = tk.Button(base, text='push3')
+button1.grid(row=0, column=0)
+button2.grid(row=0, column=1)
+button3.grid(row=1, column=1)
+base.mainloop()
+
+
+●----P6-10頁----
+
+base = tk.Tk()
+button1 = tk.Button(base, text='push1')
+button2 = tk.Button(base, text='push2')
+button3 = tk.Button(base, text='push3')
+button1.place(x=0, y=0)
+button2.place(x=50, y=30)
+button3.place(x=100, y=60)
+base.mainloop()
+
+
+●----P6-11頁----
+
+base = tk.Tk()
+def push():
+	print('MELON!')
+button = tk.Button(base, text="WATER", command=push).pack()
+base.mainloop()
+
+
+●----P6-12頁----
+
+base=tk.Tk()
+tk.Label(base, text='紅', bg='red', width=20).pack()
+tk.Label(base, text='藍', bg='green', width=20).pack()
+tk.Label(base, text='綠', bg='blue', width=20).pack()
+base.mainloop()
+
+
+●----P6-13頁----
+
+base = tk.Tk()
+
+topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
+
+check_value={}
+
+for i in range(len(topping)):
+	check_value[i] = tk.BooleanVar()
+	tk.Checkbutton(base, variable=check_value[i],
+
+text = topping[i]).pack(anchor=tk.W)
+
+def buy():
+	for i in check_value:
+		if check_value[i].get() == True:
+			print(topping[i])
+
+tk.Button(base, text='點餐', command=buy).pack()
+
+base.mainloop()
+
+
+●----P6-16頁----
+
+import tkinter as tk
+base=tk.Tk()
+topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
+check_value={}
+for i in range(len(topping)):
+	check_value[i] = tk.BooleanVar()
+	tk.Checkbutton(base, variable=check_value[i], text = topping[i]).pack(anchor=tk.W)
+base.mainloop()
+
+請問迴圈裡面 check_value [i] = tk.BooleanVar () 這一行，能否舉個例子，假設第 0 個按鈕被勾選，check_value 長怎樣；假設第 0、1 個按鈕被勾選，check_value 長怎樣 ... 依此類推
+
+
+●----P6-18頁----
+
+base = tk.Tk()
+radio_value = tk.IntVar()
+radio_value.set(1)
+lunch = {0:'A 套餐',1:'B 套餐',2:'C 套餐'}
+tk.Radiobutton(base, text = lunch[0], variable = radio_value, value = 0).pack()
+tk.Radiobutton(base, text = lunch[1], variable = radio_value, value = 1).pack()
+tk.Radiobutton(base, text = lunch[2], variable = radio_value, value = 2).pack()
+def buy():
+	value = radio_value.get()
+	print(lunch[value])
+
+tk.Button(base, text='點餐', command=buy).pack()
+base.mainloop()
+
+
+●----P6-22頁----
+
+base = tk.Tk()
+string = tk.StringVar()
+entry = tk.Entry(base, textvariable=string).pack()
+label = tk.Label(base, textvariable=string).pack()
+base.mainloop()
+
+
+●----P6-23頁----
+
+base = tk.Tk()
+
+def fileopen():
+	print('進行開啟檔案的處理')
+
+menubar = tk.Menu(base)
+
+filemenu = tk.Menu(menubar)
+
+menubar.add_cascade(label=' 檔案', menu=filemenu)
+
+filemenu.add_command(label='開啟檔案', command=fileopen)
+
+base.config(menu=menubar)
+
+base.mainloop()
+
+
+●----P6-25～6-26頁----
+
+import tkinter.filedialog as fd
+
+base = tk.Tk()
+
+def open(): 
+	filename = fd.askopenfilename()
+	print('open file => ' + filename)
+
+def exit(): 
+	base.destroy()
+
+def find():
+	print('find ! ')
+
+menubar = tk.Menu(base)
+
+filemenu = tk.Menu(menubar)
+
+menubar.add_cascade(label='File', menu=filemenu)
+
+filemenu.add_command(label='open', command=open)
+
+filemenu.add_separator()
+
+filemenu.add_command(label='exit', command=exit)
+
+editmenu = tk.Menu(menubar)
+
+menubar.add_cascade(label='Edit', menu=editmenu)
+
+editmenu.add_command(label='find', command=find)
+
+base.config(menu=menubar)
+
+
+●----P6-28頁----
+
+請參考以下程式，幫我利用 tkinter 生成選單視窗，需要的檔案結構如下：
+
+檔案：
+	開啟新檔
+	開啟舊檔
+	另存為
+	結束
+編輯：
+	剪下
+	複製
+	貼上
+說明：
+	關於本程式
+
+----------- 以下是參考的程式架構 --------
+import tkinter as tk
+import tkinter.filedialog as fd
+base = tk.Tk ()
+def open ():
+	filename = fd.askopenfilename ()
+print ('open file => ' + filename)
+def exit ():
+	base.destroy ()
+def find ():
+	print ('find !')
+menubar = tk.Menu (base)
+filemenu = tk.Menu (menubar)
+menubar.add_cascade (label='File', menu=filemenu)
+filemenu.add_command (label='open', command=open)
+filemenu.add_separator ()
+filemenu.add_command (label='exit', command=exit)
+editmenu = tk.Menu (menubar)
+menubar.add_cascade (label='Edit', menu=editmenu)
+editmenu.add_command (label='find', command=find)
+base.config (menu=menubar)
+base.mainloop ()

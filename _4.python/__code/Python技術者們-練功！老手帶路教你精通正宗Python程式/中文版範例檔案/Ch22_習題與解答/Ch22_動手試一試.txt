@@ -1,0 +1,87 @@
+### 22.1 ###
+
+import requests 
+
+response = requests.get("http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/heathrowdata.txt")
+data = response.text
+data_rows = []
+
+rainfall = []
+for row in data.split("\r\n")[7:]:
+    fields = [x for x in row.split(" ") if x]
+    data_rows.append(fields)
+    rainfall.append(float(fields[5]))
+
+print("Average rainfall = {} mm".format(sum(rainfall)/len(rainfall)))
+
+### 22.2 ###
+
+import requests 
+response = requests.get("https://data.cityofchicago.org/resource/6zsd-86xi.json?$where=date between '2015-01-10T12:00:00' and '2015-01-10T13:00:00'&arrest=true")
+print(response.text)
+
+### 22.3 ###
+
+import json
+import requests 
+
+response = requests.get("https://data.cityofchicago.org/resource/6zsd-86xi.json?$where=date between '2015-01-10T12:00:00' and '2015-01-10T13:00:00'&arrest=true")
+crime_data = json.loads(response.text)
+
+with open("crime_all.json", "w") as outfile:
+    json.dump(crime_data, outfile)
+
+with open("crime_series.json", "w") as outfile:
+    for record in crime_data:
+        json.dump(record, outfile)
+        outfile.write("\n")
+
+with open("crime_all.json") as infile:
+    crime_data_2 = json.load(infile)
+
+crime_data_3 = []
+with open("crime_series.json") as infile:
+    for line in infile:
+        crime_data_3 = json.loads(line)
+
+### 22.4 ###
+
+import requests
+import xmltodict
+
+response = requests.get("https://graphical.weather.gov/xml/SOAP_server/ndfdXMLclient.php?whichClient=NDFDgen&lat=41.87&lon=+-87.65&product=glance")
+parsed_dict = xmltodict.parse(response.text)
+
+layout_key = parsed_dict['dwml']['data']['time-layout'][0]['layout-key']
+forecast_temp = parsed_dict['dwml']['data']['parameters']['temperature'][0]['value'][0]
+
+print(layout_key)
+print(forecast_temp)
+
+
+### 22.5 ###
+
+import csv
+import bs4
+
+def read_html(filename):
+    with open(filename) as html_file:
+        html = html_file.read()
+        return html
+
+def parse_html(html):
+    bs = bs4.BeautifulSoup(html, "html.parser")
+    labels = [x.text for x in bs.select(".forecast-label")]
+    forecasts = [x.text for x in bs.select(".forecast-text")]
+    
+    return list(zip(labels, forecasts))
+    
+def write_to_csv(data, outfilename):
+    csv.writer(open(outfilename, "w")).writerows(data)
+        
+if __name__ == '__main__':
+    html = read_html("forecast.html")
+    values = parse_html(html)
+    write_to_csv(values, "forecast.csv")
+    print(values)
+

@@ -1,0 +1,84 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P5-21頁----
+
+import requests
+r = requests.get('https://tw.yahoo.com/')
+print(r.text)
+
+
+●----P5-23頁----
+
+import pprint
+r = requests.get('https://tw.yahoo.com/')
+pprint.pprint(r.text)
+
+
+●----P5-25頁----
+
+import requests
+
+base_url = 'https://zipcloud.ibsnet.co.jp/api/search'
+
+query_parameter = '?zipcode='
+
+zipcode = '1600021'
+
+request_url = base_url + query_parameter + zipcode
+
+request_url
+
+requests.get(request_url).json()
+
+
+●----P5-26頁----
+
+請使用 requests 模組寫一段「用郵遞區號查詢日本郵遞區域」的程式
+
+
+●----P5-27頁----
+
+有這樣的 API 啊，網址是：https://zipcloud.ibsnet.co.jp/doc/api，請幫我寫出來
+
+
+●----P5-28頁----
+
+import requests, pprint
+
+api_url = 'https://zh.wikipedia.org/w/api.php'
+
+api_params = {'format':'json', 'action':'query', 'titles':柔道', 'prop':'revisions', 'rvprop':'content'}
+
+wiki_data = requests.get(api_url, params=api_params).json()
+
+pprint.pprint(wiki_data)
+
+
+●----P5-30頁----
+
+
+pip install wikipedia
+
+
+import wikipedia
+wikipedia.set_lang ('zh')
+wikipedia.summary('柔道')
+
+
+●----P5-31頁----
+
+python wiki_sample.py
+
+
+●----P5-32頁----
+
+python try_sys.py 想查詢的關鍵字
+
+
+●----P5-34頁----
+
+python wiki_sample_final.py 柔道
+
+
+

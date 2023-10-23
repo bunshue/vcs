@@ -1,0 +1,41 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P2-8頁----
+
+tax = 0.1
+
+price = 120
+
+suzuki_telephone = '0988-123-456'
+
+
+
+tax
+
+price
+
+suzuki_telephone
+
+
+●----P2-9頁----
+
+price * tax
+
+120 * 0.1
+
+
+●----P2-10頁----
+
+value = 100
+
+_value = 300
+
+2value = 500
+
+
+●----P2-11頁----
+
+finally = 888
+
+global = 127

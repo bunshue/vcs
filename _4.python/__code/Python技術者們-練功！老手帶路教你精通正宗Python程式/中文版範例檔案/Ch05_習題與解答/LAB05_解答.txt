@@ -1,0 +1,17 @@
+temperatures = []
+with open('lab_05.txt') as infile:
+    for row in infile:
+        temperatures.append(float(row.strip())
+
+max_temp = max(temperatures)
+min_temp = min(temperatures)
+mean_temp = sum(temperatures)/len(temperatures)
+
+# 排序後取得中位數
+temperatures.sort()
+median_temp = temperatures[len(temperatures)//2]
+
+print("max = {}".format(max_temp))
+print("min = {}".format(min_temp))
+print("mean = {}".format(mean_temp))
+print("median = {}".format(median_temp))

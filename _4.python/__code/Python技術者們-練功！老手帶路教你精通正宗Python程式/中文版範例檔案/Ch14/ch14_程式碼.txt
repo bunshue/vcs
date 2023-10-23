@@ -1,0 +1,171 @@
+### 14.2.2 ###
+
+>>> alist = [1, 2, 3]
+>>> element = alist[7] 
+Traceback (innermost last):
+  File "<stdin>", line 1, in ?
+IndexError: list index out of range
+
+---
+
+>>> raise IndexError("Just kidding")
+Traceback (innermost last):
+  File "<stdin>", line 1, in ?
+IndexError: Just kidding
+
+### 14.2.3 ###
+
+try:
+    程式主體區塊
+
+except 例外類型1 as 變數1:
+    處理例外類型1的程式碼
+
+except 例外類型2 as 變數2:
+    處理例外類型2的程式碼
+.
+.
+.
+except:
+    預設的例外處理程式碼
+
+else:
+    else區塊
+
+finally:
+    finally區塊
+
+### 14.2.4 ###
+
+class MyError(Exception):
+    pass
+
+---
+
+>>> raise MyError("發生XX錯誤")
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+__main__.MyError: 發生XX錯誤
+
+---
+
+try:
+    raise MyError("發生XX錯誤")
+except MyError as error:
+    print("狀況:", error)
+
+---
+
+try:
+    raise MyError("寫入錯誤", "my_filename", 3)
+except MyError as error:
+    print("狀況: 檔案 {1} 發生 {0}\n 錯誤碼: {2}".format( 
+        error.args[0], error.args[1], error.args[2]))
+
+### 14.2.5 ###
+
+>>> x = (1, 2, 3)
+>>> assert len(x) > 5, "發生錯誤, len(x) 小於等於 5"
+Traceback (most recent call last):
+File "<stdin>", line 1, in <module>
+AssertionError: 發生錯誤, len(x) 小於等於 5
+
+---
+
+if __debug__:
+    if not 運算式:
+        raise AssertionError(參數)
+
+### 14.2.6 ###
+
+try:
+    程式主體區塊
+except LookupError as error:
+    處理LookupError例外
+except IndexError as error:
+    處理IndexError例外
+
+### 14.2.7 ###
+
+def save_to_file(filename) :
+    try:
+        save_text_to_file(filename)
+        save_formats_to_file(filename)
+        save_prefs_to_file(filename)
+        .
+        .
+        .
+    except IOError:
+        ...處理磁碟寫入的錯誤...
+def save_text_to_file(filename) 
+    ...呼叫檔案系統相關函式將文字資料寫入檔案...
+def save_prefs_to_file(filename) 
+    ...呼叫檔案系統相關函式將選項值寫入檔案...
+def save_formats_to_file(filename) 
+    ...呼叫檔案系統相關函式將使用者定義的格式寫入檔案...
+
+### 14.2.8 ###
+
+def cell_value(string):
+    try:
+        return float(string)
+    except ValueError:
+        if string == "":
+            return 0
+        else:
+            return None
+
+---
+
+def safe_apply(算術運算函式, 儲存格x, 儲存格y, 試算表資料):
+    try:
+        return算術運算函式(儲存格x, 儲存格y, 試算表資料)
+    except TypeError:
+        return None
+
+---
+
+try:
+    import Tkinter
+except ImportError:
+    import tkinter as Tkinter
+
+---
+
+def function():
+    if 檢查參數是否正常:
+        處理某事A
+        if 檢查某事A是否正常:
+            處理某事B
+            if 檢查事B是否正常:
+                完成所有檢查，執行正式的運作程式碼
+
+---
+
+ def function():
+    if 檢查參數是否錯誤:
+        raise 例外1
+ 
+    處理某事A
+    if 檢查某事A是否錯誤:
+        raise 例外2
+
+    處理某事B
+    if 檢查某事B是否錯誤:
+        raise 例外3
+
+    完成所有檢查，執行正式的運作程式碼
+
+### 14.3 ###
+
+try:
+    infile = open(filename)
+    data = infile.read()
+finally:
+    infile.close()
+
+---
+
+with open(filename) as infile:
+    data = infile.read()
+

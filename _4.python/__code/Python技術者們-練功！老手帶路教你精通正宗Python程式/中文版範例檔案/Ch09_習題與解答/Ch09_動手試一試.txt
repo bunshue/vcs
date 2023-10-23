@@ -1,0 +1,60 @@
+### 9.2 ###
+
+def my_funct(*params):
+    for i in reversed(params):
+        print(i)
+my_funct(1,2,3,4)
+
+### 9.3 ###
+
+參見 9.3 節的說明
+
+### 9.4 ###
+
+funct_1() 執行後 x 的值不變
+funct_2() 執行後 x 的值為 2
+
+### 9.7 ###
+
+>>> def four(limit):
+...     x = 0 
+...     while x < limit:
+...         print("in generator, x =", x)
+...         yield x
+...         x += 1
+... 
+>>> for i in four(4):
+...     print(i)
+
+---
+
+>>> def four(start, limit):
+...     x = start 
+...     while x < limit:
+...         print("in generator, x =", x)
+...         yield x
+...         x += 1
+... 
+>>> for i in four(1, 4):
+...     print(i)
+
+### 9.8 ###
+
+>>> def decorate(func):
+...     def wrapper_func(*args):
+...         def inner_wrapper(*args):
+...                 return_value = func(*args)
+...                 return "<html>{}<html>".format(return_value)
+...                 
+...         return inner_wrapper(*args)
+...     return wrapper_func
+... 
+>>> @decorate
+>>> def myfunction(parameter):
+...     return parameter 
+... 
+>>> print(myfunction("Test"))
+... <html>Test<html>
+
+
+

@@ -1,0 +1,235 @@
+### 21.2.1 ###
+
+>>> open('test.txt', 'wb').write(bytes([65, 66, 67, 255, 192,193]))
+
+---
+
+>>> x = open('test.txt').read()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python3.6/codecs.py", line 321, in decode
+    (result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 3: invalid start byte
+
+---
+
+>>> open('test.txt', errors='ignore').read()
+'ABC'
+>>> open('test.txt', errors='replace').read()
+'ABC���'
+>>> open('test.txt', errors='surrogateescape').read()
+'ABC\udcff\udcc0\udcc1'
+>>> open('test.txt', errors='backslashreplace').read()
+'ABC\\xff\\xc0\\xc1'
+>>>
+
+### 21.2.2 ###
+
+>>> moby_text = open("moby_01.txt").read()          #A reads all of file as a single string
+>>> moby_paragraphs = moby_text.split("\n\n")       #B Splits on two newlines together
+>>> print(moby_paragraphs[1])
+There now is your insular city of the Manhattoes, belted round by wharves
+as Indian isles by coral reefs--commerce surrounds it with her surf.
+Right and left, the streets take you waterward.  Its extreme downtown
+is the battery, where that noble mole is washed by waves, and cooled
+by breezes, which a few hours previous were out of sight of land.
+Look at the crowds of water-gazers there.
+
+---
+
+>>> moby_text = open("moby_01.txt").read()          #A reads all of file as a single string
+>>> moby_paragraphs = moby_text.split("\n\n")       
+>>> moby = moby_paragraphs[1].lower()                   #B Makes everything lower case
+>>> moby = moby.replace(".", "")          #C Removes periods
+>>> moby = moby.replace(",", "") 
+>>> moby_words = moby.split()
+>>> print(moby_words)
+['there', 'now', 'is', 'your', 'insular', 'city', 'of', 'the', 'manhattoes,', 'belted', 'round', 'by', 'wharves', 'as', 'indian', 'isles', 'by', 'coral', 'reefs--commerce', 'surrounds', 'it', 'with', 'her', 'surf', 'right', 'and', 'left,', 'the', 'streets', 'take', 'you', 'waterward', 'its', 'extreme', 'downtown', 'is', 'the', 'battery,', 'where', 'that', 'noble', 'mole', 'is', 'washed', 'by', 'waves,', 'and', 'cooled', 'by', 'breezes,', 'which', 'a', 'few', 'hours', 'previous', 'were', 'out', 'of', 'sight', 'of', 'land', 'look', 'at', 'the', 'crowds', 'of', 'water-gazers', 'there']
+
+### 21.2.3 ###
+
+州|觀察日期|平均溫度(°F)|紀錄數量
+Illinois|1979/01/01|17.48|994
+Illinois|1979/01/02|4.64|994
+Illinois|1979/01/03|11.05|994
+Illinois|1979/01/04|9.51|994
+Illinois|1979/05/15|68.42|994
+Illinois|1979/05/16|70.29|994
+Illinois|1979/05/17|75.34|994
+Illinois|1979/05/18|79.13|994
+Illinois|1979/05/19|74.94|994
+
+---
+
+>>> line = "Illinois|1979/01/01|17.48|994"
+>>> print(line.split("|"))
+['Illinois', '1979/01/01', '17.48', '994']
+
+### 21.2.4 ###
+
+>>> results = []
+>>> for line in open("temp_data_pipes_00a.txt"):
+...     fields = line.strip().split("|")
+...     results.append(fields)
+... 
+>>> results
+[['州', '觀察日期', '平均溫度(°F)', '紀錄數量'], ['Illinois', '1979/01/01',
+'17.48', '994'], ['Illinois', '1979/01/02', '4.64', '994'], ['Illinois',
+'1979/01/03', '11.05', '994'], ['Illinois', '1979/01/04', '9.51',
+'994'], ['Illinois', '1979/05/15', '68.42', '994'], ['Illinois', '1979/
+05/16', '70.29', '994'], ['Illinois', '1979/05/17', '75.34', '994'],
+['Illinois', '1979/05/18', '79.13', '994'], ['Illinois', '1979/05/19',
+'74.94', '994']]
+
+---
+
+>>> import csv
+>>> results = [fields for fields in csv.reader( 
+open("temp_data_pipes_00a.txt", newline=''), delimiter="|")]
+>>> results
+[['州', '觀察日期', '平均溫度(°F)', '紀錄數量'], ['Illinois', '1979/01/01',
+'17.48', '994'], ['Illinois', '1979/01/02', '4.64', '994'], ['Illinois',
+'1979/01/03', '11.05', '994'], ['Illinois', '1979/01/04', '9.51',
+'994'], ['Illinois', '1979/05/15', '68.42', '994'], ['Illinois', '1979/
+05/16', '70.29', '994'], ['Illinois', '1979/05/17', '75.34', '994'],
+['Illinois', '1979/05/18', '79.13', '994'], ['Illinois', '1979/05/19',
+'74.94', '994']]
+
+---
+>>> results2 = [fields for fields in csv.reader(open("temp_data_01.csv", newline='', encoding="utf-8"))]
+>>> results2
+[['備註', '州', '州編號', '觀察日期(英文)', '觀察日期(數字)', '平均溫度
+(°F)', '溫度紀錄數量', '最低溫度(°F)', '最高溫度(°F)', '平均體感溫度
+(°F)', '體感溫度紀錄數量', '最低體感溫度(°F)', '最高體感溫度(°F)', '
+體感溫度紀錄數量/溫度紀錄數量百分比'], ['', 'Illinois', '17', 'Jan 01, 
+1979', '1979/01/01', '17.48', '994', '6.00', '30.50', 'Missing', 
+'0', 'Missing', 'Missing', '0.00%'], ['', 'Illinois', '17', 
+'Jan 02, 1979', '1979/01/02', '4.64', '994', '-6.40', '15.80', 
+'Missing', '0', 'Missing', 'Missing', '0.00%'], ['', 'Illinois', 
+'17', 'Jan 03, 1979', '1979/01/03', '11.05', '994', '-0.70', 
+'24.70', 'Missing', '0', 'Missing', 'Missing', '0.00%'], ['', 
+'Illinois', '17', 'Jan 04, 1979', '1979/01/04', '9.51', '994', 
+'0.20', '27.60', 'Missing', '0', 'Missing', 'Missing', '0.00%'], 
+['', 'Illinois', '17', 'May 15, 1979', '1979/05/15', '68.42', 
+'994', '61.00', '75.10', 'Missing', '0', 'Missing', 'Missing', 
+'0.00%'], ['', 'Illinois', '17', 'May 16, 1979', '1979/05/16', 
+'70.29', '994', '63.40', '73.50', 'Missing', '0', 'Missing', 
+'Missing', '0.00%'], ['', 'Illinois', '17', 'May 17, 1979', 
+'1979/05/17', '75.34', '994', '64.00', '80.50', '82.60', '2', 
+'82.40', '82.80', '0.20%'], ['', 'Illinois', '17', 'May 18, 1979', 
+'1979/05/18', '79.13', '994', '75.50', '82.10', '81.42', '349', 
+'80.20', '83.40', '35.11%'], ['', 'Illinois', '17', 'May 19, 
+1979', '1979/05/19', '74.94', '994', '66.90', '83.10', '82.87', 
+'78', '81.60', '85.20', '7.85%']]
+
+### 21.2.5 ###
+
+>>> import csv
+>>> results = [fields for fields in csv.DictReader(open("temp_data_01.csv", newline='', encoding="utf-8"))]
+>>> results[0]
+OrderedDict([('備註', ''), ('州', 'Illinois'), ('州編號', '17'), ('
+觀察日期(英文)', 'Jan 01, 1979'), ('觀察日期(數字)', '1979/01/01'), ('
+平均溫度(°F)', '17.48'), ('溫度紀錄數量', '994'), ('最低溫度(°F)', 
+'6.00'), ('最高溫度(°F)', '30.50'), ('平均體感溫度(°F)', 'Missing'), 
+('體感溫度紀錄數量', '0'), ('最低體感溫度(°F)', 'Missing'), ('最高體感溫
+度(°F)', 'Missing'), ('體感溫度紀錄數量/溫度紀錄數量百分比', '0.00%')])
+
+---
+
+>>> results[0]['州']
+'Illinois'
+>>> results[0]['平均溫度(°F)']
+'17.48'
+
+### 21.3 ###
+
+pip install openpyxl
+
+---
+
+>>> from openpyxl import load_workbook
+>>> wb = load_workbook('temp_data_01.xlsx')
+>>> results = []
+>>> ws = wb.worksheets[0]
+>>> for row in ws.iter_rows():
+...     results.append([cell.value for cell in row])
+...  
+>>> print(results)
+[['備註', '州', '州編號', '觀察日期(英文)', '觀察日期(數字)', '平均溫度
+(°F)', '溫度紀錄數量', '最低溫度(°F)', '最高溫度(°F)', '平均體感溫度
+(°F)', '體感溫度紀錄數量', '最低體感溫度(°F)', '最高體感溫度(°F)', '
+體感溫度紀錄數量/溫度紀錄數量百分比'], ['', 'Illinois', '17', 'Jan 01, 
+1979', '1979/01/01', '17.48', '994', '6.00', '30.50', 'Missing', 
+'0', 'Missing', 'Missing', '0.00%'], ['', 'Illinois', '17', 
+'Jan 02, 1979', '1979/01/02', '4.64', '994', '-6.40', '15.80', 
+'Missing', '0', 'Missing', 'Missing', '0.00%'], ['', 'Illinois', 
+'17', 'Jan 03, 1979', '1979/01/03', '11.05', '994', '-0.70', 
+'24.70', 'Missing', '0', 'Missing', 'Missing', '0.00%'], ['', 
+'Illinois', '17', 'Jan 04, 1979', '1979/01/04', '9.51', '994', 
+'0.20', '27.60', 'Missing', '0', 'Missing', 'Missing', '0.00%'], 
+['', 'Illinois', '17', 'May 15, 1979', '1979/05/15', '68.42', 
+'994', '61.00', '75.10', 'Missing', '0', 'Missing', 'Missing', 
+'0.00%'], ['', 'Illinois', '17', 'May 16, 1979', '1979/05/16', 
+'70.29', '994', '63.40', '73.50', 'Missing', '0', 'Missing', 
+'Missing', '0.00%'], ['', 'Illinois', '17', 'May 17, 1979', 
+'1979/05/17', '75.34', '994', '64.00', '80.50', '82.60', '2', 
+'82.40', '82.80', '0.20%'], ['', 'Illinois', '17', 'May 18, 1979', 
+'1979/05/18', '79.13', '994', '75.50', '82.10', '81.42', '349', 
+'80.20', '83.40', '35.11%'], ['', 'Illinois', '17', 'May 19, 
+1979', '1979/05/19', '74.94', '994', '66.90', '83.10', '82.87', 
+'78', '81.60', '85.20', '7.85%']]
+
+### 21.4 ###
+
+>>> lines = open("datafile").readlines()
+>>> lines.sort()
+
+---
+
+sort data > data.srt
+
+---
+
+>>> lines.sort(key=str.lower)
+
+---
+
+>>> lines.sort(key=lambda x: x[5:])
+
+### 21.5.1 ###
+
+>>> temperature_data = [['州', '觀察日期', '平均溫度(°F)', '紀錄數量'], ['Illinois', '1979/01/01', '17.48', '994'], ['Illinois', 
+'1979/01/02', '4.64', '994'], ['Illinois', '1979/01/03', '11.05', 
+'994'], ['Illinois', '1979/01/04', '9.51', '994'], ['Illinois', 
+'1979/05/15', '68.42', '994'], ['Illinois', '1979/05/16', '70.29', 
+'994'], ['Illinois', '1979/05/17', '75.34', '994'], ['Illinois', 
+'1979/05/18', '79.13', '994'], ['Illinois', '1979/05/19', '74.94', 
+'994']]
+>>> csv.writer(open("temp_data_03.csv", "w", newline='', encoding="utf-8"), delimiter='|').writerows(temperature_data)
+
+---
+
+>>> data = [{'州': 'Illinois', '觀察日期': '1979/01/01', '平均溫度(°F)': '17.48', '紀錄數量': '994'},  {'州': 'Illinois', '觀察日期': '1979/01/02', '平均溫度(°F)': '4.64', '紀錄數量': '994'}]
+
+---
+
+>>> fields = ['州', '觀察日期', '平均溫度(°F)', '紀錄數量']
+>>> with open('temp_data_04.csv', 'w', newline='',       
+       encoding="utf-8") as f:
+...    dict_writer = csv.DictWriter(f, fieldnames=fields)
+...    dict_writer.writeheader()
+...    dict_writer.writerows(data)
+
+### 21.5.2 ###
+
+>>> from openpyxl import Workbook
+>>> data_rows = [fields for fields in csv.reader(open("temp_data_01.csv"))]
+>>> wb = Workbook()
+>>> ws = wb.active
+>>> ws.title = "temperature data"
+>>> for row in data_rows:
+...     ws.append(row)
+...
+>>> wb.save("temp_data_02.xlsx")
+
+

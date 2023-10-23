@@ -1,0 +1,203 @@
+### 22.1.1 ###
+
+>>> import ftplib
+>>> ftp = ftplib.FTP('tgftp.nws.noaa.gov')
+>>> ftp.login()
+'230 Login successful.'
+
+---
+
+>>> ftp.cwd('data')
+'250 Directory successfully changed.'
+>>> ftp.nlst()
+['climate', 'fnmoc', 'forecasts', 'hurricane_products', 'ls_SS_services', 'marine', 'nsd_bbsss.txt', 'nsd_cccc.txt', 'observations', 'products', 'public_statement', 'raw', 'records', 'summaries', 'tampa', 'watches_warnings', 'zonecatalog.curr', 'zonecatalog.curr.tar']
+
+---
+
+>>> with open('KORD.TXT', 'wb') as f:
+...     ftp.retrbinary('RETR observations/metar/decoded/KORD.TXT', f.write)
+'226 Transfer complete.'
+
+### 22.1.2 ###
+
+>>> import paramiko
+>>> t = paramiko.Transport((網址, 通訊埠))
+>>> t.connect(帳號, 密碼)
+>>> sftp = paramiko.SFTPClient.from_transport(t)
+>>> sftp.get(遠端檔案路徑, 本機端檔案路徑)
+
+### 22.1.3 ###
+
+>>> import requests 
+>>> response = requests.get("http://www.metoffice.gov.uk/pub/data/weather/uk/climate/stationdata/heathrowdata.txt")
+
+---
+
+>>> print(response.text)
+Heathrow (London Airport)
+Location 507800E 176700N, Lat 51.479 Lon -0.449, 25m amsl
+Estimated data is marked with a * after the value.
+Missing data (more than 2 days missing in month) is marked by  ---.
+Sunshine data taken from an automatic Kipp & Zonen sensor marked with a #, otherwise sunshine data taken from a Campbell Stokes recorder.
+   yyyy  mm   tmax    tmin      af    rain     sun
+              degC    degC    days      mm   hours
+   1948   1    8.9     3.3    ---     85.0    ---
+   1948   2    7.9     2.2    ---     26.0    ---
+   1948   3   14.2     3.8    ---     14.0    ---
+   1948   4   15.4     5.1    ---     35.0    ---
+   1948   5   18.1     6.9    ---     57.0    ---
+
+### 22.2 ###
+
+>>> import requests
+>>> response = requests.get("https://data.cityofchicago.org/resource/6zsd-86xi.json?$where=date between '2019-01-10T12:00:00' and '2019-01-10T13:00:00'")
+>>> print(response.text)
+[{"id":"11562417","case_number":"JC111532","date":"2019-
+01-10T12:00:00.000","block":"079XX S COTTAGE GROVE 
+AVE","iucr":"0880","primary_type":"THEFT","description":"PURSE-
+SNATCHING","location_description":"STREET","arrest":false,"do
+mestic":false,"beat":"0624","district":"006","ward":"8","comm
+unity_area":"44","fbi_code":"06","x_coordinate":"1182934","y_
+coordinate":"1852471","year":"2019","updated_on":"2019-
+01-18T09:37:14.000","latitude":"41.750382338","longitu
+de":"-87.605215174","location":{"type":"Point","coordinat
+es":[-87.605215174,41.750382338]},"location_address":"","location_
+city":"","location_state":"","location_zip":""},...
+
+### 22.3.1 ###
+
+>>> import json
+>>> import requests
+>>> response = requests.get("https://data.cityofchicago.org/resource/6zsd-86xi.json?$where=date between '2019-01-10T12:00:00' and '2019-01-10T13:00:00'")
+>>> j = json.loads(response.text)
+>>> j
+[{'id': '11562417', 'case_number': 'JC111532', 'date': '2019-01-
+10T12:00:00.000', 'block': '079XX S COTTAGE GROVE AVE', 'iucr': 
+'0880', 'primary_type': 'THEFT', 'description': 'PURSE-SNATCHING', 
+'location_description': 'STREET', 'arrest': False, 'domestic': 
+False, 'beat': '0624', 'district': '006', 'ward': '8', 'community_
+area': '44', 'fbi_code': '06', 'x_coordinate': '1182934', 'y_
+coordinate': '1852471', 'year': '2019', 'updated_on': '2019-
+01-18T09:37:14.000', 'latitude': '41.750382338', 'longitude': 
+'-87.605215174', 'location': {'type': 'Point', 'coordinates': 
+[-87.605215174, 41.750382338]}, 'location_address': '', 'location_
+city': '', 'location_state': '', 'location_zip': ''}, {'id': 
+'11562450', 'case_number': 'JC111592', 'date': '2019-01-
+10T12:00:00.000',...
+>>> j[0]["id"]
+'11562417'
+
+---
+
+>>> from pprint import pprint as pp
+>>> pp(j)
+[{'arrest': False,
+  'beat': '0624',
+  'block': '079XX S COTTAGE GROVE AVE',
+  'case_number': 'JC111532',
+  'community_area': '44',
+  'date': '2019-01-10T12:00:00.000',
+  'description': 'PURSE-SNATCHING',  
+...
+
+---
+
+>>> j = json.loads(response.text)
+>>> j = response.json()
+
+---
+
+>>> outfile = open("data_01.json", "w")
+>>> json.dump(j, outfile)
+>>> outfile.close()
+>>> json.dumps(j)
+'[{"id": "11562417", "case_number": "JC111532", "date": "2019-01-
+10T12:00:00.000", "block": "079XX S COTTAGE GROVE AVE", "iucr": 
+"0880", "primary_type": "THEFT", "description": "PURSE-SNATCHING", 
+"location_description": "STREET", "arrest": false, "domestic": 
+false, "beat": "0624", "district": "006", "ward": "8", "community_
+area": "44", "fbi_code": "06", "x_coordinate": "1182934", "y_
+coordinate": "1852471", "year": "2019", "updated_on": "2019-
+01-18T09:37:14.000", "latitude": "41.750382338", "longitude": 
+"-87.605215174", "location": {"type": "Point", "coordinates": 
+[-87.605215174, 41.750382338]}, "location_address": "", "location_
+city": "", "location_state": "", "location_zip": ""}, {"id": 
+"11562450", "case_number": "JC111592", "date": "2019-01-
+10T12:00:00.000",...
+
+---
+
+>>> print(json.dumps(j, indent=2))
+[
+  {
+    "id": "11562417",
+    "case_number": "JC111532",
+    "date": "2019-01-10T12:00:00.000",
+...
+
+---
+
+>>> outfile = open("data.json", "w")
+>>> weather_obj = {"reports": weather_list, "count": len(weather_list)}
+>>> json.dump(weather, outfile)
+>>> outfile.close()
+
+---
+
+>>> with open("data.json") as infile:
+>>>     weather_obj = json.load(infile)
+
+---
+
+>>> outfile = open("data.json", "w")
+>>> for report in weather_list:
+...     json.dump(weather, outfile)
+>>> outfile.close()
+
+---
+
+>>> for line in open("data.json"):
+...     weather_list.append(json.loads(line))
+
+### 22.4 ###
+
+>>> import xmltodict
+>>> data = xmltodict.parse(open("observations_01.xml").read())
+
+---
+
+>>> data["dwml"]["data"]["location"]
+OrderedDict([('location-key', 'point1'), ('point', OrderedDict([('@
+latitude', '41.78'), ('@longitude', '-88.65')]))])
+
+### 22.5 ###
+
+>>> import bs4
+>>> html = open("test.html").read()
+>>> bs = bs4.BeautifulSoup(html, "html.parser")
+
+---
+
+>>> a_list = bs("a")
+>>> print(a_list)
+[<a href="http://bitbucket.dev.null">link</a>]
+
+---
+
+>>> a_item = a_list[0]
+>>> a_item.text
+'link'
+>>> a_item["href"]
+'http://bitbucket.dev.null'
+
+---
+
+>>> special_list = bs.select(".special")
+>>> print(special_list)
+[<span class="special">this is special</span>]
+>>> special_item = special_list[0]
+>>> special_item.text
+'this is special'
+>>> special_item["class"]
+['special']
+ 

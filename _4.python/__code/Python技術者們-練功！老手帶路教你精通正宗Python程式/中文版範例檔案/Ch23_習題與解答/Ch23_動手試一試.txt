@@ -1,0 +1,63 @@
+### 23.2 ###
+
+import sqlite3
+conn = sqlite3.connect("datafile.db")
+cursor = conn.cursor()
+cursor.execute("""create table weather (id integer primary key, 
+state text, state_code text,
+              year_text text, year_code text, avg_max_temp real,  
+max_temp_count integer, 
+              max_temp_low real, max_temp_high real,
+              avg_min_temp real, min_temp_count integer,
+              min_temp_low real, min_temp_high real,
+              heat_index real, heat_index_count integer, 
+              heat_index_low real, heat_index_high real,
+              heat_index_coverage text)
+              """)
+conn.commit()
+
+### 23.4.1 ###
+
+from sqlalchemy import create_engine, select, MetaData, Table, Column, Integer, String, Float
+from sqlalchemy.orm import sessionmaker
+
+dbPath = 'datafile.db'
+engine = create_engine('sqlite:///%s' % dbPath)
+metadata = MetaData(engine)
+weather  = Table('weather', metadata, 
+                Column('id', Integer, primary_key=True),
+                Column("state", String),
+                Column("state_code", String),
+                Column("year_text", String ),
+                Column("year_code", String), 
+                Column("avg_max_temp", Float),
+                Column("max_temp_count", Integer),
+                Column("max_temp_low", Float),
+                Column("max_temp_high", Float),
+                Column("avg_min_temp", Float), 
+                Column("min_temp_count", Integer),
+                Column("min_temp_low", Float), 
+                Column("min_temp_high", Float),
+                Column("heat_index", Float), 
+                Column("heat_index_count", Integer),
+                Column("heat_index_low", Float), 
+                Column("heat_index_high", Float),
+                Column("heat_index_coverage", String)
+                )
+Session = sessionmaker(bind=engine)
+session = Session()
+result = session.execute(select([weather]))
+for row in result:
+    print(row)
+
+### 23.6 ###
+
+1. 快速查詢資料
+2. 快取
+
+### 23.7 ###
+
+大型、組織鬆散的資料適用於MongoDB，例如網頁或文件的內容。
+具有特定結構的資料比較適合於關聯式資料庫，前述氣象資料就是一個很好的例子。
+
+

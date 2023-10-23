@@ -1,0 +1,85 @@
+### 6.4.1 ###
+
+>>> x = "this is a test" 
+>>> "-".join(x.split())
+'this-is-a-test'
+
+### 6.4.2 ###
+
+只有 float("12345678901234567890") 可以轉換為數字，其他都不行
+
+### 6.4.3 ###
+
+x.strip("\n)(,") 將傳回 "name, date"
+
+### 6.5 ###
+
+字串.endswith('rejected')
+
+也可以用 line[:-8] == rejected，但是這樣比較不好讀，不是 Pythonic 的寫法
+
+### 6.6 ###
+
+>>> punct = str.maketrans("!.,:;-?", "       ")
+>>> x = "This is text, with: punctuation! Right?"
+>>> x.translate(punct)
+'This is text  with  punctuation  Right '
+
+### 6.8 ###
+
+>>> x = "{1:{0}}".format(3, 4)
+'  4'
+
+>>> x = "{0:$>5}".format(3)
+'$$$$3'
+
+>>> x = "{a:{b}}".format(a=1, b=5)
+'    1'
+
+>>> x = "{a:{b}}:{0:$>5}".format(3, 4, a=1, b=5, c=10)
+'    1:$$$$3'
+
+### 6.9 ###
+
+x = "%.2f" % 1.1111
+x 的值將是 '1.11'
+
+x = "%(a).2f" % {'a':1.1111}
+x 的值將是 '1.11'
+
+x = "%(a).08f" % {'a':1.1111}
+x 的值將是 '1.11110000'
+
+### 6.10 ###
+
+(1) 儲存影片的檔案 
+Bytes
+
+(2) 帶有重音字元的文字檔
+String
+
+(3) 僅包含大寫和小寫羅馬字元的文字檔
+String
+
+(4) 一系列不大於 255 的整數
+Byte.
+
+### 6.13 ###
+
+>>> x = ['"abc"', 'def', '"ghi"', '"klm"', 'nop']
+>>> for item in x:
+...     print(item.strip('"'))
+... 
+abc
+def
+ghi
+klm
+nop
+
+---
+
+>>> state = "Mississippi"
+>>> pos = state.rfind("p")
+>>> state = state[:pos] + state[pos+1:]
+>>> print(state)
+Mississipi

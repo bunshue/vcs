@@ -1,0 +1,325 @@
+### 8.1 ###
+
+n = 9
+r = 1
+while n > 0:
+    r = r * n
+    n = n – 1
+
+---
+
+data = get_data()
+while data != "":
+    if "Good" in data:
+        print("找到單字Good")
+        break
+    data = get_data()
+else:
+    print("找不到單字Good")
+
+---
+
+found = False
+data = get_data()
+while data != "":
+    if "Good" in data:
+        print("找到單字Good")
+        found = True
+        break
+    data = get_data()
+if not found:
+    print("找不到單字Good")
+
+### 8.2 ###
+
+if n > 100:
+    result = "success"
+else:
+    result = "failed"
+
+---
+
+result = "success" if n > 100 else "failed"
+
+---
+
+print("success" if n > 100 else "failed")
+
+---
+
+if x < 5:
+    pass
+else:
+    x = 5
+
+---
+
+def do_a_stuff():
+    #處理 a 狀況
+def do_b_stuff():
+    #處理 b 狀況
+def do_c_stiff():
+    #處理 c 狀況
+func_dict = {'a' : do_a_stuff,
+             'b' : do_b_stuff,
+             'c' : do_c_stuff }   
+x = 'a'
+func_dict[x]()
+
+### 8.3 ###
+
+x = [1.0, 2.0, 3.0]
+for n in x:
+    print(1 / n)
+
+### 8.3.1 ###
+
+x = [1, 3, -7, 4, 9, -5, 4]
+for i in range(len(x)):
+    if x[i] < 0:
+        print("Found a negative number at index ", i)
+
+### 8.3.2 ###
+
+>>> list(range(3, 7)) 
+[3, 4, 5, 6]
+>>> list(range(2, 10))
+[2, 3, 4, 5, 6, 7, 8, 9]        
+>>> list(range(5, 3))
+[]
+
+---
+
+>>> list(range(0, 10, 2))
+[0, 2, 4, 6, 8]
+>>> list(range(5, 0, -1))
+[5, 4, 3, 2, 1]
+
+### 8.3.4 ###
+
+somelist = [(1, 2), (3, 7), (9, 5)]
+result = 0
+for t in somelist:
+    result = result + (t[0] * t[1])
+
+---
+
+somelist = [(1, 2), (3, 7), (9, 5)]
+result = 0
+for num1, num2 in somelist:
+    result = result + (num1 * num2)
+
+### 8.3.5 ###
+
+>>> x = ['a', 'b', 'c']
+>>> list( enumerate(x) ) 
+[(0, 'a'), (1, 'b'), (2, 'c')] 
+
+---
+
+x = [1, 3, -7, 4, 9, -5, 4]
+for i, n in enumerate(x):                            
+    if n < 0:                                        
+        print("找到負數, 其索引值為 ", i)
+
+### 8.3.6 ###
+
+>>> x = [1, 2, 3, 4]
+>>> y = ['a', 'b', 'c']        
+>>> z = zip(x, y)
+>>> list(z)
+[(1, 'a'), (2, 'b'), (3, 'c')]
+
+### 8.4 ###
+
+>>> x = [1, 2, 3, 4]
+>>> x_squared = []
+>>> for item in x:
+...     x_squared.append(item * item)
+... 
+>>> x_squared
+[1, 4, 9, 16]
+
+### 8.4.1 ###
+
+>>> x = [1, 2, 3, 4]
+>>> x_squared = [item * item for item in x]
+>>> x_squared
+[1, 4, 9, 16]
+
+---
+
+>>> x = [1, 2, 3, 4]
+>>> x_squared = [item * item for item in x if item > 2]
+>>> x_squared
+[9, 16]
+
+---
+
+>>> x = [1, 2, 3, 4]
+>>> x_squared_dict = {item: item * item for item in x}
+>>> x_squared_dict
+{1: 1, 2: 4, 3: 9, 4: 16}
+
+---
+
+>>> x = [0, 1, 2, 3, 4, 5, 6, 7]
+>>> for i, n in enumerate(x):
+...     if i%2 == 1:
+...         del x[i]
+>>> x
+[0, 2, 3, 5, 6]
+
+---
+
+>>> list(range(len(x)-1, -1, -1))
+[7, 6, 5, 4, 3, 2, 1, 0]
+>>> for i in range(len(x)-1, -1, -1):
+...     if i%2 == 1:
+...         del x[i]
+        
+>>> x
+[0, 2, 4, 6]
+
+---
+
+x = [n for i, n in enumerate(x) if not i%2 == 1]
+
+### 8.4.2 ###
+
+>>> x = [1, 2, 3, 4]
+>>> x_squared = (item * item for item in x)
+>>> x_squared
+<generator object <genexpr> at 0x102176708>
+>>> for square in x_squared:
+...     print(square,)
+...
+1 4 9 16
+
+### 8.5 ###
+
+>>> x = 1; y = 0; z = 0
+>>> if x > 0: y = 1; z = 10
+... else: y = -1
+... 
+>>> print(x, y, z)
+1 1 10
+
+### 8.5.1 ###
+
+>>>
+>>>   x = 1
+File "<stdin>", line 1
+    x = 1
+    ^
+   IndentationError: unexpected indent
+>>>
+
+---
+
+>>> x = 1
+>>> if x == 1: 
+...    y = 2
+...    if v > 0:
+...        z = 2
+...        v = 0
+...
+>>> x = 2
+
+---
+
+>>> x = 1
+>>> if x == 1:
+           y = 2
+        z = 2
+File "<stdin>", line 3
+       z = 2
+       ^
+    IndentationError: unindent does not match any outer indentation level
+
+### 8.5.2 ###
+
+>>> print('string1', 'string2', 'string3' \
+...    , 'string4', 'string5')
+string1 string2 string3 string4 string5
+>>> x = 100 + 200 + 300 \
+...    + 400 + 500
+>>> x
+1500
+>>> v = [100, 300, 500, 700, 900,
+...    1100, 1300]
+>>> v
+[100, 300, 500, 700, 900, 1100, 1300]
+>>> max(1000, 300, 500,
+...        800, 1200)
+1200
+>>> x = (100 + 200 + 300
+...          + 400 + 500)
+>>> x
+1500
+
+### 8.6.2 ###
+
+>>> [2] and [3, 4]
+[3, 4]
+>>> [] and 5
+[]
+>>> [2] or [3, 4]
+[2]
+>>> [] or 5
+5
+>>> 
+
+---
+
+x = []
+if x and myfunc():
+    pass
+
+---
+
+>>> x = 0
+>>> x <= 0 and print("x <= 0")
+x <= 0
+>>> 1/x
+Traceback (most recent call last):
+  File "<pyshell>", line 1, in <module>
+ZeroDivisionError: division by zero
+>>> x and 1/x       
+0
+
+---
+
+>>> x = [0]
+>>> y = [x, 1]
+>>> x is y[0]
+True
+>>> x = [0]  
+>>> x is y[0]
+False
+>>> x == y[0]
+True
+
+### 8.7 ###
+
+#!/usr/bin/env python3
+""" Reads a file and returns the number of lines, words,
+    and characters - similar to the UNIX wc utility
+"""
+
+infile = open('word_count.tst')  
+lines = infile.read().split("\n")
+
+line_count = len(lines)
+word_count = 0
+char_count = 0
+
+for line in lines:
+    words = line.split()
+    word_count += len(words)
+    char_count += len(line)
+
+print("File has {0} lines, {1} words, {2} characters".format(    
+      line_count, word_count, char_count))
+
+

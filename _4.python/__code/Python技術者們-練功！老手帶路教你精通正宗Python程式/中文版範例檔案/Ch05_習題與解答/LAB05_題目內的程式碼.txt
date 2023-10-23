@@ -1,0 +1,4 @@
+temperatures = []
+with open('lab_05.txt') as infile:
+    for row in infile:
+        temperatures.append(float(row.strip())

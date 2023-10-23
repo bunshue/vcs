@@ -1,0 +1,53 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P4-18頁----
+
+open('null.txt', 'r')
+
+
+●----P4-20頁----
+
+try:
+	file_object = open('d:/null.txt', 'r')
+	print(file_object.read())
+	file_object.close()
+except:
+	print("錯誤: 此檔案不存在！請檢查後重新執行")
+
+
+●----P4-21頁----
+
+try:
+	file_object = open("d:/null.txt", "r")
+	print(file_object.read()
+	file_object.close()
+except Exception as e:
+	print("錯誤: 此檔案不存在！請檢查後重新執行")
+	print(e)
+
+
+●----P4-22頁----
+
+
+請幫我針對底下程式寫一段例外處理
+
+file_object = opena ('c:/python.txt', 'r')
+print (file_object.read())
+file_object.close()
+
+
+●----P4-23頁----
+
+
+還有其他種例外嗎，幫我考慮愈詳細愈好
+
+
+幫我把 python 所有例外情況都加到這段程式 ( 能加就加 )
+
+
+
+
+
+
+

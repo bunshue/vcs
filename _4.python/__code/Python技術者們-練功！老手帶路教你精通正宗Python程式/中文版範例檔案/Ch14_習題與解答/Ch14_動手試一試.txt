@@ -1,0 +1,56 @@
+### 14.2.3 ###
+
+# the code of your program should do the following
+x = int(input("Please enter an integer: "))
+y = int(input("Please enter another integer: "))
+try:
+    z = x / y
+except ZeroDivisionError as e:
+    print("Can't divide by zero.")
+Please enter an integer: 1
+Please enter another integer: 0
+Can't divide by zero.
+
+### 14.2.4 ###
+
+第一個會捕獲繼承 Exception 的任何異常（大多數），而第二個只有捕獲 MyError 異常。
+
+### 14.2.5 ###
+
+x = int(input("Please enter a non-zero integer: "))
+assert x != 0, "Integer can not be zero."
+
+
+Please enter a non-zero integer: 0
+----------------------------------------------------------------------
+AssertionError                       Traceback (most recent call last)
+<ipython-input-222-9f7a09820a1c> in <module>()
+      2 x = int(input("Please enter a non-zero integer: "))
+      3 
+----> 4 assert x != 0, "Integer can not be zero."
+AssertionError: Integer can not be zero.
+
+### 14.2.9 ###
+
+不會。如果正確捕獲和處理異常，程式將無需停止。
+
+---
+
+try:
+    x = my_dict[some_key]
+except KeyError as e:
+    x = None
+
+---
+
+class ValueTooLarge(Exception):
+    pass
+x = 1001
+if x > 1000:
+    raise ValueTooLarge()
+
+### 14.3 ###
+
+4
+
+

@@ -1,0 +1,384 @@
+### 17.1 ###
+
+>>> type(5)
+<class 'int'>
+>>> type(['hello', 'goodbye'])
+<class 'list'>
+
+### 17.2 ###
+
+>>> type("Hello") == type("Goodbye")
+True
+>>> type("Hello") == type(5)
+False
+
+---
+
+>>> type("")     
+<class 'str'>    
+>>> s = "Hello"
+>>> type(s) == str  
+True
+>>> type(s) == list
+False
+
+### 17.3 ###
+
+>>> class A:
+...     pass
+...
+>>> class B(A):
+...     pass
+...
+
+---
+
+>>> b = B()
+>>> type(b)
+<class '__main__.B'>
+
+---
+
+>>> b.__class__
+<class '__main__.B'>
+
+---
+
+>>> b_class = b.__class__
+>>> b_class == B
+True
+
+---
+
+>>> b_class.__name__
+'B'
+
+---
+
+>>> b_class.__bases__
+(<class '__main__.A'>,)
+
+---
+
+>>> class C:
+...     pass
+...
+>>> class D:
+...     pass
+...
+>>> class E(D):
+...     pass
+...
+>>> x = 12
+>>> c = C()
+>>> d = D()
+>>> e = E()
+>>> isinstance(x, E)
+False
+>>> isinstance(c, E)
+False
+>>> isinstance(e, E)
+True
+>>> isinstance(e, D)
+True
+>>> isinstance(e, B)
+True
+>>> isinstance(d, E)
+False
+>>> y = 12
+>>> isinstance(y, type(5))
+True
+
+---
+
+>>> issubclass(C, D)
+False
+>>> issubclass(E, D)
+True
+>>> issubclass(E, B)
+True
+>>> issubclass(e.__class__, D)
+True
+>>> issubclass(D, D) 
+True
+
+### 17.4 ###
+
+>>> sorted(['foo', 'bar', 'fox'])
+['bar', 'foo', 'fox']
+>>> sorted({'foo', 'bar', 'fox'})
+['bar', 'foo', 'fox']
+>>> sorted({'k1':'foo', 'k2':'bar', 'k3':'fox'})
+['k1', 'k2', 'k3']
+>>> sorted('foobarfox')
+['a', 'b', 'f', 'f', 'o', 'o', 'o', 'r', 'x']
+
+---
+
+>>> def calculate(x, y, z):
+...     return (x+y)*z
+...
+>>> calculate(3, 2, 2)
+10
+>>> calculate('foo', 'bar', 2)
+'foobarfoobar'
+>>> calculate([1,2], [3,4], 2)
+[1, 2, 3, 4, 1, 2, 3, 4]
+
+---
+
+try:
+    calculate('foo', 'bar', 'fox')
+except TypeError as error:
+    print("calculate()發生錯誤:", error)
+
+### 17.5 ###
+
+>>> class MyClass():
+...     def __str__(self):
+...         return "Output from __str__"
+...    
+>>> c = MyClass()
+>>> print(c)
+Output from __str__
+>>> c = C()
+>>> print(c)
+<__main__.C object at 0x05D1B3D0>  
+
+---
+
+>>> from color_module import Color
+>>> c = Color(15, 35, 3)
+
+---
+
+>>> print(c)
+Color: R=15, G=35, B=3
+
+### 17.6 ###
+
+>>> class MyList():
+...     def _ _getitem_ _ (self, index): 
+...         if index >= 5:             
+...             raise IndexError
+...         return index
+
+---
+
+>>> c = MyList()
+>>> for n in c:  
+...     print(n)
+...
+0
+1
+2
+3       
+4
+
+>>> c[2] 
+2
+
+---
+
+John Smith::37::Springfield, Massachusetts
+Ellen Nelle::25::Springfield, Connecticut
+Dale McGladdery::29::Springfield, Hawaii
+
+---
+
+fileobject = open(filename, 'r')
+lines = fileobject.readlines() 
+fileobject.close()
+for line in lines:
+    . . . 收集年齡資訊 . . .
+
+---
+
+fileobject = open(filename, 'r')
+for line in fileobject:
+    . . . 收集年齡資訊. . .
+fileobject.close()
+
+---
+
+class LineReader:
+    def __init__(self, filename):
+        self.fileobject = open(filename, 'r') 
+    def __getitem__(self, index):
+        line = self.fileobject.readline() 
+        if line == "":     
+            self.fileobject.close()   
+            raise IndexError      
+            
+        else:
+            return line.split("::")[:2]
+
+---
+
+for name, age in LineReader("test.txt"): 
+    . . . 處理名字和年齡. . .              
+
+---
+
+import myutils
+for name, age in myutils.LineReader("test.txt"):
+    . . . 處理名字和年齡. . .
+
+### 17.7 ###
+
+>>> class MyList():
+...     def _ _ init_ _(self, length):
+...         self.list = [None]*length
+...     def _ _ getitem_ _ (self, index):
+...         if index >= len(self.list):
+...             raise IndexError
+...         return self.list[index]
+...     def _ _setitem_ _ (self, index, eleme
+...         self.list[index] = element
+...         
+>>> c = MyList(3)
+>>> list(c)
+[None, None, None]
+>>> c[1] = "One"
+>>> c[1]
+'One'
+>>> list(c)
+[None, 'One', None]
+
+### 17.8 ###
+
+class TypedList:
+    def _ _ init_ _ (self, example_element, initial_list=[]):
+        self.type = type(example_element)
+        if not isinstance(initial_list, list):
+            raise TypeError("TypedList的第2個參數必須是list.")
+        for element in initial_list:
+            if not isinstance(element, self.type):
+                raise TypeError("新元素的型別不允許加入此TypedList.")
+        self.elements = initial_list[:]
+
+---
+
+x = TypedList ('Hello', ["List", "of", "strings"])
+
+---
+
+class TypedList:
+    def _ _ init_ _ (self, example_element, initial_list=[]):
+        self.type = type(example_element)
+        if not isinstance(initial_list, list):
+            raise TypeError("TypedList的第2個參數必須是list.")
+        for element in initial_list: 
+            self._ _ check(element)
+         self.elements = initial_list[:]
+    def _ _ check(self, element):
+        if type(element) != self.type:
+             raise TypeError("新元素的型別不允許加入此TypedList.")
+    def _ _ setitem_ _ (self, i, element):
+        self._ _ check(element)
+         self.elements[i] = element
+    def _ _ getitem_ _ (self, i):
+        return self.elements[i]
+
+---
+
+>>> x = TypedList("", 5 * [""])
+>>> x[2] = "Hello"
+>>> x[3] = "There"
+>>> print(x[2] + ' ' + x[3])
+Hello There
+>>> a, b, c, d, e = x
+>>> a, b, c, d, e
+('', '', 'Hello', 'There', '')
+>>> x[1] = 123
+Traceback (most recent call last):
+  File "<pyshell>", line 1, in <module>
+  File "<pyshell>", line 13, in _ _ setitem_ _
+  File "<pyshell>", line 11, in _ _ check
+TypeError: 新元素的型別不允許加入此TypedList.
+
+### 17.9.1 ###
+
+class TypedListList(list):
+    def __init__(self, example_element, initial_list=[]):
+        self.type = type(example_element)
+        if not isinstance(initial_list, list):
+            raise TypeError("Second argument of TypedList must " 
+                            "be a list.")
+        for element in initial_list: 
+            self.__check(element)
+        super().__init__(initial_list)
+
+    def __check(self, element):
+        if type(element) != self.type:
+            raise TypeError("Attempted to add an element of " 
+                            "incorrect type to a typed list.")
+
+    def __setitem__(self, i, element):
+        self.__check(element)
+        super().__setitem__(i, element)
+
+---
+
+>>> x = TypedListList("", 5 * [""])
+>>> x[2] = "Hello"
+>>> x[3] = "There"
+>>> print(x[2] + ' ' + x[3])
+Hello There
+>>> x + TypedListList("", 3 * ["str"])
+['', '', 'Hello', 'There', '', 'str', 'str', 'str']
+>>> x[:]
+['', '', 'Hello', 'There', '']
+>>> del x[2]
+>>> x[:]
+['', '', 'There', '']
+>>> x.sort()
+>>> x[:]
+['', '', '', 'There']
+>>> x[1] = 123
+Traceback (most recent call last):
+  File "<pyshell>", line 1, in <module>
+  File "<pyshell>", line 13, in _ _ setitem_ _
+  File "<pyshell>", line 11, in _ _ check
+TypeError: 新元素的型別不允許加入此TypedList.
+
+### 17.9.2 ###
+
+from collections import UserList
+class TypedUserList(UserList):
+    def __init__(self, example_element, initial_list=[]):
+        self.type = type(example_element)
+        if not isinstance(initial_list, list):
+            raise TypeError("TypedList的第2個參數必須是list.")
+        for element in initial_list: 
+            self.__check(element)
+        super().__init__(initial_list)
+
+    def __check(self, element):
+        if type(element) != self.type:
+            raise TypeError("新元素的型別不允許加入此TypedList.")
+
+    def __setitem__(self, i, element):
+        self.__check(element)
+        self.data[i] = element
+
+    def __getitem__(self, i):
+        return self.data[i]
+
+>>> x = TypedUserList("", 5 * [""])
+>>> x[2] = "Hello"
+>>> x[3] = "There"
+>>> print(x[2] + ' ' + x[3])
+Hello There
+>>> a, b, c, d, e = x
+>>> a, b, c, d
+('', '', 'Hello', 'There')
+>>> x[:]
+['', '', 'Hello', 'There', '']
+>>> del x[2]
+>>> x[:]
+['', '', 'There', '']
+>>> x.sort()
+>>> x[:]
+['', '', '', 'There']
+

@@ -1,9 +1,20 @@
+"""
+使用pandas讀寫檔案
+1111. csv檔
+2222. json
+3333. excel
+4444. html與其他
+
+"""
+
+
+
 import sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-print('------------------------------------------------------------')	#60個
+print('---- 1111 csv --------------------------------------------------------')	#60個
 
 print('pandas DataFrame資料輸出到csv檔')
 
@@ -16,7 +27,7 @@ df = pd.DataFrame(scores)
 
 print("另存新檔");
 filename = 'C:/_git/vcs/_1.data/______test_files2/score_this.csv'
-df.to_csv(filename, encoding='utf-8-sig')
+df.to_csv(filename, encoding = 'utf-8-sig')
 print("寫入完成")
 
 print('------------------------------------------------------------')	#60個
@@ -25,7 +36,7 @@ print('pandas 讀取 csv檔')
 
 print("讀取 .csv 檔 1")
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores.csv'
-na = np.genfromtxt(filename, delimiter=',', skip_header=1)
+na = np.genfromtxt(filename, delimiter = ',', skip_header = 1)
 print("資料寬高")
 print(na.shape)
 
@@ -70,6 +81,14 @@ print(data)
 
 print('------------------------------------------------------------')	#60個
 
+df = pd.read_csv("http://bit.ly/gradescsv")
+
+print(df.head())
+
+
+
+print('---- 2222 json --------------------------------------------------------')	#60個
+
 filename = 'C:/_git/vcs/_1.data/______test_files2/score444.json'
 
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
@@ -88,6 +107,13 @@ print(data)
 
 print('------------------------------------------------------------')	#60個
 
+
+
+
+print('---- 3333 excel --------------------------------------------------------')	#60個
+
+
+
 filename = 'C:/_git/vcs/_1.data/______test_files2/score555.xlsx'
 
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
@@ -105,7 +131,73 @@ data = pd.read_excel(filename, encoding="utf-8-sig",index_col=0)
 
 print(data)
 
+
 print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_excel/python_ReadWrite_EXCEL4.xlsx'
+
+print('讀取xlsx檔')
+df = pd.read_excel(filename)
+
+header = df.iloc[2]  #取得標題
+df1 = df[3:].copy()  #去除前三列
+df1 = df1.rename(columns = header)  #重置標題
+df2 = df1.drop(columns=['縣市代碼', '村里代碼', '村里名稱', '村里代碼'], axis=1)  #去除四行資料
+df3 = df2.drop_duplicates()  #移除重複資料
+
+filename = 'C:/_git/vcs/_1.data/______test_files2/district.csv'
+
+print('寫出到csv檔')
+df3.to_csv(filename, encoding = 'big5', index = False)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('---- 4444 html與其他 --------------------------------------------------------')	#60個
+
+print("使用pandas讀取網頁表單");
+    
+url = 'https://www.tiobe.com/tiobe-index/'
+tables = pd.read_html(url, header=0, keep_default_na=False)
+
+print("結果");
+print(tables[0])
+
+print('------------------------------------------------------------')	#60個
+
+#原物料商品行情
+tables = pd.read_html("http://www.stockq.org/market/commodity.php")
+
+n = 1
+for table in tables:
+    print("第 " + str(n) + " 個表格：")
+    print(table.head())
+    print()
+    n += 1
+
+print('------------------------------------------------------------')	#60個
+
+#原物料商品行情
+tables = pd.read_html("http://www.stockq.org/market/commodity.php")
+
+print(tables)
+
+'''
+table = tables[7]
+table = table.drop(table.index[[0,1]])
+table.columns = ["商品", "買價", "漲跌", "比例", "台北"]
+table.index = range(len(table.index))
+
+print(table)
+'''
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 
 

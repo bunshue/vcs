@@ -1,0 +1,34 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P6-32頁----
+
+pip install qrcode
+
+
+●----P6-33頁----
+
+import qrcode
+
+encode_text = 'https://google.com'
+
+img = qrcode.make(encode_text)
+
+type(img)
+
+img.show()
+
+
+●----P6-44頁----
+
+請幫我把存檔功能做成滑鼠右鍵
+
+
+●----P6-46頁----
+
+按右鍵不要直接存檔，出現「儲存圖片」的選單比較好
+
+
+●----P6-48頁----
+
+tearoff 參數的用途是什麼？有哪些值可以設？差在哪裡

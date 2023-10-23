@@ -1,0 +1,6 @@
+﻿num1=int(input("請輸入第一個整數: "))
+num2=int(input("請輸入第二個整數: "))
+print("第一個整數的值: %d" %num1)
+print("第二個整數的值: %d" %num2)
+print("兩個整數相加的值: %d" %(num1+num2))
+print("兩個整數相減的值: %d" %(num1-num2))

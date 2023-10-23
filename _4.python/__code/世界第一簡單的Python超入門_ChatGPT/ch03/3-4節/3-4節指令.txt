@@ -1,0 +1,39 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P3-50頁----
+
+import calendar
+print(calendar.month(2022, 7))
+
+
+●----P3-51頁----
+
+import calendar
+print(calendar.__file__)
+
+import calendar as cal
+print(cal.month(2022, 8))
+
+
+●----P3-52頁----
+
+from calendar import month, isleap
+print(month(2022, 9))
+
+
+isleap(2024)
+
+
+import calendar
+calendar.isleap(2022)
+
+
+from calendar import isleap
+isleap(2022)
+
+
+
+
+
+

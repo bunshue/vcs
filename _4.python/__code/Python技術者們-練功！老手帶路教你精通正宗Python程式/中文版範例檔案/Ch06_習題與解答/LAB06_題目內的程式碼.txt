@@ -1,0 +1,7 @@
+with open("moby_01.txt") as infile, open("moby_01_clean.txt", "w") as outfile:
+    for line in infile:
+        # 將所有字元轉成小寫
+        # 刪除所有標點符號
+        # 依照單字切割
+        # 每行放一個單字
+        outfile.write(cleaned_words)

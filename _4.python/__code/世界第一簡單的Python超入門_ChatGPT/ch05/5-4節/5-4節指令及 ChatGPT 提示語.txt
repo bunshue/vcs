@@ -1,0 +1,55 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P5-39頁----
+
+from bs4 import BeautifulSoup
+soup = BeautifulSoup('<html> Lollipop </html>', 'html.parser')
+
+
+●----P5-40頁----
+
+
+import requests
+
+from bs4 import BeautifulSoup
+
+html_data = requests.get('http://tw.yahoo.com')
+
+soup = BeautifulSoup(html_data.text,"html.parser")
+
+soup.title
+
+
+●----P5-43頁----
+
+import requests
+
+from bs4 import BeautifulSoup
+
+game_ranking_html = requests.get('https://www.kamatari.org/blog/2021/best-games-of-2021/')
+
+soup = BeautifulSoup(game_ranking_html.text, "html.parser")
+
+for game in soup.findAll('h2'):
+	print(game.text)
+
+
+●----P5-45頁----
+
+import requests
+from bs4 import BeautifulSoup
+game_ranking_html = requests.get ('https://www.kamatari.org/blog/2021/best-games-of-2021/')
+soup = BeautifulSoup (game_ranking_html.text, "html.parser" )
+for game in soup.findAll ('h2'):
+	print (game.text)
+
+請用上面的程式做範本，幫我寫一段抓遊戲排名標題的程式，希望的結果
+如下：
+1. 代號鳶
+2. 眾神派對 ...
+
+
+●----P5-46頁----
+
+執行後還是什麼都沒出現

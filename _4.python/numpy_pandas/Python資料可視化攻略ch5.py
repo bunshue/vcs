@@ -13,7 +13,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 # 定義資料 
 sales_dep = pd.DataFrame({
     "label": ["第1業務部", "第2業務部", "第3業務部",
@@ -55,6 +55,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+'''
 # 折線圖
 # 日本各都市平均氣溫全年資料
 
@@ -158,6 +159,7 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
+
 import plotly.offline
 import plotly.express as px
 import plotly.graph_objects as go
@@ -232,20 +234,6 @@ fig = go.Figure(data=[tmp_tokyo, tmp_osaka, tmp_naha, tmp_hakodate],
 
 fig.show()  # 繪製圖表
 
-#熱圖
-#咖啡廳每月商品銷售量資料
-
-# 載入資料與定義資料
-filename = 'data/cafe.csv'
-cafe = pd.read_csv(filename, header=0, index_col=0)
-print(cafe)
-
-#sns.set(font="meiryo")
-sns.heatmap(cafe)
-
-sns.heatmap(cafe, linewidths=.1, annot=True, fmt="d")
-
-sns.heatmap(cafe, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
 
 print('------------------------------------------------------------')	#60個
 

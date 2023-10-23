@@ -1,15 +1,7 @@
 """
 import seaborn as sns       #海生, 自動把圖畫得比較好看
 
-平常只要打入
-
-sns.set()
-
-seaborn 就接手了, 不過因為我們要用中文字型, 所以要這樣子打。
-sns.set(rc={'font.family':'Noto Sans CJK TC'})
-
 """
-
 
 import sys
 import numpy as np
@@ -17,7 +9,85 @@ import matplotlib.pyplot as plt
 
 import seaborn as sns       #海生, 自動把圖畫得比較好看
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/TaipeiSansTCBeta-Regular.ttf'
+
+import matplotlib as mpl
+import matplotlib.font_manager as fm
+fm.fontManager.addfont(font_filename)
+mpl.rc('font', family='Taipei Sans TC Beta')
+
+x = np.linspace(-5, 5, 200)
+y = np.sinc(x)
+
+plt.plot(x, y)
+plt.title('原圖, 無海生')
+plt.show()
+
+#把預設狀態存起來
+saved_state = mpl.rcParams.copy()
+
+#plt.xkcd()  #加此行變成搞笑風格
+
+#多此三行 變成海生風格
+import seaborn as sns
+sns.set()
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 海生設定中文字型 將字體換成 Microsoft JhengHei
+
+plt.plot(x, y)
+plt.title('使用海生')
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+plt.plot(x, y)
+plt.title('再畫一新圖, 還是海生風格')
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+mpl.rcParams.update(saved_state)
+
+plt.plot(x, y)
+plt.title('恢復成原風格, 無海生')
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
+
+
+"""
+import seaborn as sns       #海生, 自動把圖畫得比較好看
+
+"""
+
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+
+import seaborn as sns       #海生, 自動把圖畫得比較好看
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
@@ -132,8 +202,6 @@ plt.xticks(range(len(ranking.values())), ranking.keys(), rotation=45)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -148,4 +216,9 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('作業完成')
 

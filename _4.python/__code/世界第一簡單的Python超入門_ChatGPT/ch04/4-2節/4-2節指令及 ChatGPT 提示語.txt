@@ -1,0 +1,32 @@
+－－可複製底下文字快速輸入, 但仍建議初學者逐字手 key 會比較有印象！－－
+
+
+●----P4-13頁----
+
+import zipfile
+
+files = zipfile.ZipFile('C:/workplace/test.zip')
+
+files.namelist()
+
+files.extract('d/c.txt')
+
+files.extractall()
+
+files.close()
+
+
+
+●----P4-16頁----
+
+
+我想用 python 處理 zip 檔案，可以用什麼模組
+
+我想用 python 處理 excel 檔案，可以用什麼模組
+
+
+●----P4-17頁----
+
+「我想用 XXX 模組做某某事，可以用哪個 method ？」
+
+「Python XXX 模組的某 method 如何使用？」

@@ -2,11 +2,7 @@
 LinearRegression1.py
 
 """
-
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-
 import sklearn.linear_model
 
 '''
@@ -17,20 +13,32 @@ AI 三步驟
     predict
 '''
 
+import sys
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 print('------------------------------------------------------------')	#60個
 print('線性迴歸')
 
-points = 11
-x = np.linspace(0, 10, points)
+N = 11
+x = np.linspace(0, 10, N)
 
 y0 = x
 plt.plot(x, y0, 'r')   #無 noise, 畫預設 y = x 紅線
 
-y1 = y0 + 0.5 * np.random.randn(points)   #加上noise
+y1 = y0 + 0.5 * np.random.randn(N)  #加上noise
 
-plt.scatter(x, y1, s = 100)                #有 noise
-plt.plot(x, y1, 'b')             #有 noise
-
+plt.scatter(x, y1, s = 100)         #有 noise
+plt.plot(x, y1, 'b')                #有 noise
+plt.title('原始資料')
 plt.grid()
 plt.show()
 
@@ -40,18 +48,18 @@ print('------------------------------------------------------------')	#60個
 #做線性迴歸有很多套件, 用 sklearn 裡的 LinearRegression 來做線性迴歸
 
 regression = sklearn.linear_model.LinearRegression()   #函數學習機
-X = x.reshape(points, 1)
+X = x.reshape(N, 1)
 
-regression.fit(X, y1)#學習
+regression.fit(X, y1)   #學習
 
 Y = regression.predict(X)
 
 plt.plot(x, Y, 'g', lw = 5) #線性回歸曲線
 
-plt.plot(x, y0, 'r')   #無 noise, 畫預設 y = x 紅線
-plt.scatter(x, y1, s = 100)                #有 noise
-plt.plot(x, y1, 'b')             #有 noise
-
+plt.plot(x, y0, 'r')        #無 noise, 畫預設 y = x 紅線
+plt.scatter(x, y1, s = 100) #有 noise
+plt.plot(x, y1, 'b')        #有 noise
+plt.title('線性迴歸')
 plt.grid()
 plt.show()
 
@@ -65,13 +73,13 @@ print('------------------------------------------------------------')	#60個
 
 from sklearn.model_selection import train_test_split
 
-points = 11
-x = np.linspace(0, 10, points)
+N = 11
+x = np.linspace(0, 10, N)
 
 y0 = x
 plt.plot(x, y0, 'r')   #無 noise, 畫預設 y = x 紅線
 
-y1 = y0 + 0.5 * np.random.randn(points)   #加上noise
+y1 = y0 + 0.5 * np.random.randn(N)   #加上noise
 
 #把原來的 x, y 中的 80% 給 training data, 20% 給 testing data。
 x_train, x_test, y_train, y_test = train_test_split(x, y1, test_size = 0.2, random_state = 1)
@@ -94,7 +102,7 @@ Y_train = regression.predict(X_train)
 
 plt.scatter(x_train, y_train, s = 100, c = 'r')
 plt.plot(x_train, Y_train, 'g', lw = 5) #線性回歸曲線
-
+plt.title('訓練結果')
 plt.grid()
 plt.show()
 
@@ -109,6 +117,9 @@ print('MSE =', mse)
 plt.scatter(x_test, y_test, c = 'r', s = 100)
 plt.scatter(x_test, Y_test, c = 'g', s = 100)
 plt.scatter(x, y0, c = 'b', s = 100)
+plt.title('看誤差')
+plt.grid()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -124,19 +135,18 @@ print(f"R2 = {r2:.4f}")
 print("MSE =", mse)
 print("R2 =", r2)
 
-plt.grid()
-plt.show()
-
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
-#不是線性的目標函數
+print('不是線性的目標函數')
 
 #f(x) = sin(3.2x) + 0.8x
 
 x = np.linspace(0, 5, 50)
 y = np.sin(3.2 * x) + 0.8 * x + 0.3 * np.random.randn(50)
 plt.plot(x, y)
-
+plt.title('不是線性的目標函數 f(x) = sin(3.2x) + 0.8x')
 plt.grid()
 plt.show()
 
@@ -147,18 +157,18 @@ regression_lin = sklearn.linear_model.LinearRegression()   #函數學習機
 
 X = x.reshape(len(x), 1)
 
-regression_lin.fit(X, y)#學習
+regression_lin.fit(X, y)    #學習
 
 plt.scatter(x, y)
 plt.plot(x, regression_lin.predict(X), 'r')
-
+plt.title('使用 標準線性學習機 學習的結果')
 plt.grid()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 #多項式
-#我們來用 6 次多項式學
+#使用 6 次多項式 學習
 
 X_poly = np.array([[k, k ** 2, k ** 3, k ** 4, k ** 5, k ** 6] for k in x])
 
@@ -167,8 +177,8 @@ regression_poly = sklearn.linear_model.LinearRegression()  #函數學習機
 regression_poly.fit(X_poly, y)#學習
 
 plt.scatter(x, y)
-plt.plot(x, regression_poly.predict(X_poly), 'r')
-
+plt.plot(x, regression_poly.predict(X_poly), 'g')
+plt.title('使用 6 次多項式 學習的結果')
 plt.grid()
 plt.show()
 
@@ -193,8 +203,8 @@ regression_rbf = sklearn.linear_model.LinearRegression()   #函數學習機
 regression_rbf.fit(X_rbf, y)
 
 plt.scatter(x, y)
-plt.plot(x, regression_rbf.predict(X_rbf), 'r')
-
+plt.plot(x, regression_rbf.predict(X_rbf), 'b')
+plt.title('使用 RBF 學習的結果')
 plt.grid()
 plt.show()
 
@@ -207,35 +217,35 @@ Y_rbf = regression_rbf.predict(X_rbf)
 
 plt.scatter(x, y)
 
-plt.plot(x, Y_lin, label = 'linear')
-plt.plot(x, Y_poly, label = 'polynomial')
-plt.plot(x, Y_rbf, label = 'rbf')
-
+plt.plot(x, Y_lin, 'r', label = '標準線性學習機')
+plt.plot(x, Y_poly, 'g', label = '6 次多項式')
+plt.plot(x, Y_rbf, 'b', label = 'RBF')
 plt.legend()
-
+plt.title('三種一起比較')
 plt.grid()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+#改變畫風
+
 import seaborn as sns
 
 sns.set()
 
-#plt.plot(x_test, Ypred, 'r')
-#plt.plot(x, Y_poly, label = 'polynomial')
-plt.scatter(x, Y_poly)
-plt.plot(x, Y_poly, 'r')
-
+plt.plot(x, Y_lin, 'r', label = '標準線性學習機')
+plt.plot(x, Y_poly, 'g', label = '6 次多項式')
+plt.plot(x, Y_rbf, 'b', label = 'RBF')
+plt.legend()
+plt.title('三種一起比較, 使用海生畫風')
+plt.grid()
 plt.show()
+
 
 '''
 #波士頓房價資料
 
 import seaborn as sns
-
-import pandas as pd
-import numpy as np
 
 data_url = "http://lib.stat.cmu.edu/datasets/boston"
 raw_df = pd.read_csv(data_url, sep="\s+", skiprows=22, header=None)

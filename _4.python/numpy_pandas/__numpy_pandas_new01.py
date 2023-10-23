@@ -31,11 +31,6 @@ print(m.shape)
 
 print('------------------------------------------------------------')	#60個
 
-import pandas as pd
-
-df = pd.read_csv("http://bit.ly/gradescsv")
-
-print(df.head())
 
 print('------------------------------------------------------------')	#60個
 
