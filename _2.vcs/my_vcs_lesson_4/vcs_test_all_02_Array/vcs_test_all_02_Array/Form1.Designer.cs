@@ -802,6 +802,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(200, 42);
             this.button41.TabIndex = 68;
+            this.button41.Text = "ArrayList 測試";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 

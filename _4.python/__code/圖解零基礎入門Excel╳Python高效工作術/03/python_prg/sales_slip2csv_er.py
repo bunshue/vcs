@@ -6,7 +6,7 @@ try:
     lwb = openpyxl.Workbook()
     lsh = lwb.active
     list_row = 1
-    path = pathlib.Path("d:/038采實文化/9593/日經BP/excel_python/03/data/sales") 
+    path = pathlib.Path("../data/sales") 
     for pass_obj in path.iterdir():
         if pass_obj.match("*.xlsx"):
             wb = openpyxl.load_workbook(pass_obj)
