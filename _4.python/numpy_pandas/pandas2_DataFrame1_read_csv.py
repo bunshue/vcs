@@ -278,6 +278,23 @@ print('Virginica :', Virginica)
 print('------------------------------------------------------------')	#60個
 
 
+#咖啡廳每月商品銷售量資料
+# 載入資料與定義資料
+filename = 'data/cafe.csv'
+cafe = pd.read_csv(filename, header = 0, index_col = 0)
+print(cafe)
+print(type(cafe))
+print(cafe)
+print(cafe.shape)
+
+
+
+
+
+
+
+
+
 
 """
 

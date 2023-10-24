@@ -1,5 +1,7 @@
 #各種檔案寫讀範例 txt 1
 
+print('------------------------------------------------------------')	#60個
+
 filename_rw1 = 'C:/_git/vcs/_1.data/______test_files2/sample1.txt'
 
 print("將字串寫入檔案 : " + filename_rw1)
@@ -176,6 +178,7 @@ print(f.readline())  # 123中文字\n
 print(f.readline(3)) # abc
 f.close()
 
+print('------------------------------------------------------------')	#60個
 
 #各種檔案寫讀範例 txt 2
 
@@ -220,6 +223,7 @@ with open(filename_w, 'wt') as fo:
     
 fo.close()
 
+print('------------------------------------------------------------')	#60個
 
 #各種檔案寫讀範例
 
@@ -296,6 +300,7 @@ print(str)
 #關閉文件
 fo.close()
 
+print('------------------------------------------------------------')	#60個
 
 #從檔案把資料讀出來，一次讀一行
 #打開一個文件
@@ -330,7 +335,7 @@ print(str)
 #關閉文件
 fo.close()
 
-
+print('------------------------------------------------------------')	#60個
 
 
 
@@ -362,6 +367,7 @@ for item in raw_data:
 disp_area()
 disp_temp(climate_data[4])
 
+print('------------------------------------------------------------')	#60個
 
 print('各種讀取檔案的方法')
 
@@ -400,7 +406,7 @@ infile = open(filename, "r")
 print("\n(4) Using readlines(): ")
 print(infile.readlines())
 infile.close() # Close the input file
-
+print('------------------------------------------------------------')	#60個
 
 print('指定編碼讀取檔案')
 filename = 'C:/_git/vcs/_1.data/______test_files1/stopWord_test.txt'
@@ -410,6 +416,24 @@ with open(filename, 'r', encoding='utf-8-sig') as f:  #設定停用詞
 print(stops)
 
 
+print('------------------------------------------------------------')	#60個
+
+temperatures = []
+with open('data/temperature.txt') as infile:
+    for row in infile:
+        temperatures.append(float(row.strip()))
+
+print('取得溫度資料 :\n', temperatures)
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
 
 
 
