@@ -17,13 +17,14 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 #K-Means 會自動分類!
 #我們介紹一個很好用的 unsupervised learning, 叫 K-Means。
 #我們可以指定把我們資料分成幾類, 然後它就會快速分好!
 
-#隨便生個 100 點
-x = np.random.rand(100, 2)
+#生成任意 N 點
+N = 100
+x = np.random.rand(N, 2)
 
 plt.scatter(x[:, 0], x[:, 1], s = 50)
 plt.title('原始資料')
@@ -42,16 +43,68 @@ clf.fit(x)
 
 #訓練好的結果, 在神秘的 labels_ 之下。
 Z = clf.labels_
-#print(Z)
+print('訓練好的結果1 :')
+print(Z)
 
 plt.scatter(x[:,0], x[:,1], s = 50, c = Z)
 plt.title('訓練好的結果1')
 plt.show()
 
 
-gd = np.array([[i, j] for i in np.arange(-0.8, 1.2, 0.1) for j in np.arange(-0.8, 1.2, 0.1)])
+x0 = y0 = np.arange(-0.2, 1.2, 0.02)
+xm, ym = np.meshgrid(x0, y0)
+
+P = np.c_[xm.ravel(), ym.ravel()]
+z = clf.predict(P)
+Z = z.reshape(xm.shape)
+plt.contourf(xm, ym, Z, alpha=0.3)
+plt.scatter(x[:,0], x[:,1], c=clf.labels_)
+plt.title('訓練好的結果1111')
+plt.show()
+
+#Mean Shift
+
+from sklearn.cluster import MeanShift
+
+clf = MeanShift(bandwidth = 0.2)
+clf.fit(x)
+
+plt.scatter(x[:,0], x[:,1], c=clf.labels_)
+
+x0 = y0 = np.arange(-0.2, 1.2, 0.02)
+xm, ym = np.meshgrid(x0, y0)
+
+P = np.c_[xm.ravel(), ym.ravel()]
+z = clf.predict(P)
+Z = z.reshape(xm.shape)
+plt.contourf(xm, ym, Z, alpha=0.3)
+plt.show()
+
+def my_mean_shift(b=0.2):
+    clf = MeanShift(bandwidth=b)
+    clf.fit(x)
+    
+    plt.scatter(x[:,0], x[:,1], c=clf.labels_)
+
+    x0 = y0 = np.arange(-0.2, 1.2, 0.02)
+    xm, ym = np.meshgrid(x0, y0)
+
+    P = np.c_[xm.ravel(), ym.ravel()]
+    z = clf.predict(P)
+    Z = z.reshape(xm.shape)
+    plt.contourf(xm, ym, Z, alpha=0.3)
+
+my_mean_shift(0.2)
+plt.show()
+
+#畫完整分類
+#和以前一樣, 未來新的資料進來, 我們訓練好的也可以再做分類。
+
+gd = np.array([[i, j] for i in np.arange(-4, 4, 0.4)
+               for j in np.arange(-3, 3, 0.4)])
 gdc = clf.predict(gd)
-plt.scatter(gd[:,0], gd[:,1], s=50, cmap=plt.cm.coolwarm, c=gdc)
+
+plt.scatter(gd[:, 0], gd[:, 1], s = 50, cmap=plt.cm.coolwarm, c=gdc)
 plt.title('訓練好的結果2')
 plt.show()
 
@@ -98,7 +151,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-'''
 
 
 """
@@ -109,13 +161,16 @@ print('------------------------------------------------------------')	#60個
 然後 1, 2, 3! 就神奇的分好了!
 """
 
-x = np.random.randn(100, 2)
+#生成任意 N 點
+N = 100
+x = np.random.randn(N, 2)
 
 #看一下我們的資料。
-
-plt.scatter(x[:, 0], x[:, 1])
+plt.scatter(x[:, 0], x[:, 1], s = 50)
 plt.title('原始資料')
 plt.show()
+
+sys.exit()
 
 
 #到現在我們有點熟了, 就是要把 KMeans 函數學習機找來。
