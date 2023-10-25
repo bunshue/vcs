@@ -37,10 +37,10 @@ plt.show()
 
 #加入 noise 項, 假設 f(x)+ε(x), 也就是都有個 noise 項。
 
-y = 1.2 * x + 0.8 + 0.6 * np.random.randn(N)
+y = 1.2 * x + 0.8 + 0.5 * np.random.randn(N)
 
-plt.scatter(x,y)
-plt.plot(x, 1.2*x + 0.8, 'lime')
+plt.scatter(x, y)
+plt.plot(x, 1.2 * x + 0.8, 'lime')
 plt.title('理想資料加上雜訊')
 plt.show()
 
@@ -72,7 +72,7 @@ Y = svr_lin.predict(X)
 
 plt.scatter(x, y)
 plt.plot(x, Y, 'r')
-plt.plot(x, 1.2*x + 0.8, 'lime')
+plt.plot(x, 1.2 * x + 0.8, 'lime')
 
 plt.title('SVR線性迴歸1')
 plt.show()
@@ -156,7 +156,6 @@ x_test = x_test.reshape(20, 1)
 
 #接下來就是召喚 LinearRegression 學習機了。
 
-
 from sklearn.linear_model import LinearRegression
 #從現在的線性迴歸, 到等一下的機器學習, 再到之後的神經網路。我們每一次其實就是先開一台空的「函數學習機」, 現在我們要開一台「迴歸機」。
 
@@ -170,17 +169,24 @@ print('打印一些結果')
 print(regr.predict([[1.3]]))
 print(regr.predict([[2.7],[1.5]]))
 
-
 #我們當然可以餵測試資料進去, 畢竟只有這些我們是有答案、但我們的學習機是還沒學過的。
 Y = regr.predict(x_test)
-plt.scatter(x_test,y_test)
-plt.plot(x_test, Y, 'red')
+plt.scatter(x_test, y_test)
+plt.plot(x_test, Y, 'r')
+plt.title('原始測試資料')
+plt.show()
+
+plt.scatter(x_train, y_train)
+plt.plot(x_train, regr.predict(x_train), 'r')
+plt.title('訓練結果')
 plt.show()
 
 #我們在「訓練」這個函數時只有以下這些資料。
 plt.scatter(x_train, y_train)   #原始訓練資料
 plt.title('原始訓練資料')
 plt.show()
+
+sys.exit()
 
 #用訓練資料來 fit 函數 方法一
 #記得現在我們只用 80% 的資料去訓練。

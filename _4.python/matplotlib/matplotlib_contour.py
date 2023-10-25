@@ -53,16 +53,21 @@ print('------------------------------------------------------------')	#60個
 #下方的程式碼，執行後會先使用 x 和 y 畫出一個二維的直角座標系統，
 #接著 z 使用二維陣列，標記每個位置的高度，最後就會根據數據資料畫出等高線圖。
 
-x = range(5)
-y = range(5)
-z = [[0,0,0,0,0],
-    [0,1,0,0,0],
-    [0,0,2,0,0],
-    [0,0,0,0,0],
-    [0,0,0,0,0]]
-plt.contour(x,y,z,levels=5)
-plt.show()
+x = np.linspace(-2, 2, 5)   # 產生從 -2～2 共 5個 的數值的 x
+y = np.linspace(-2, 2, 5)
+#z 5 X 5
+z = [[9, 0, 0, 0, 9],
+     [0, 0, 0, 0, 0],
+     [0, 0, 9, 0, 0],
+     [0, 0, 0, 0, 0],
+     [9, 0, 0, 0, 9]]
 
+print(x.shape)
+print(y.shape)
+
+plt.contour(x, y, z, levels = 10)
+plt.contour(x, y, z)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -70,9 +75,11 @@ print('------------------------------------------------------------')	#60個
 #繪製更精緻的等高線圖
 #參考 matplotlib 官方網站的運算式，搭配 numpy 的 linspace 方法，就能做出更細緻的等高線圖。
 
-x = np.linspace(-3, 3, 200)    # 產生從 -3～3 共 200 的數值的 x
-y = np.linspace(-3, 3, 200)    # 產生從 -3～3 共 200 的數值的 y
-z = [[(1 - x[i]/2 + x[i]*3 + y[j]*5) * math.exp(-x[i]**2 - y[j]**2) for i in range(200)] for j in range(200)]
+N = 200
+x = np.linspace(-3, 3, N)    # 產生從 -3～3 共 N個 的數值的 x
+y = np.linspace(-3, 3, N)    # 產生從 -3～3 共 N個 的數值的 y
+z = [[(1 - x[i]/2 + x[i]*3 + y[j]*5) * math.exp(-x[i]**2 - y[j]**2) for i in range(N)] for j in range(N)]
+
 # 根據 x 和 y 計算出 z
 lv = np.linspace(np.min(z), np.max(z), 20)  # 根據 z 的最大值和最小值，定義 level 區間
 plt.figure(figsize=(8,6))
@@ -86,9 +93,10 @@ print('------------------------------------------------------------')	#60個
 #如果將 contour() 換成 contourf()，繪製的圖形就會變成「等高線面積圖」，
 #下方的程式碼執行後，會畫出等高線面積圖和等高線結合的圖表。
 
-x = np.linspace(-2, 2, 200)
-y = np.linspace(-2, 2, 200)
-z = [[(1 - x[i]/2 + x[i]*3 + y[j]*5) * math.exp(-x[i]**2 - y[j]**2) for i in range(200)] for j in range(200)]
+N = 200
+x = np.linspace(-2, 2, N)
+y = np.linspace(-2, 2, N)
+z = [[(1 - x[i]/2 + x[i]*3 + y[j]*5) * math.exp(-x[i]**2 - y[j]**2) for i in range(N)] for j in range(N)]
 lv = np.linspace(np.min(z), np.max(z), 10)
 plt.figure(figsize=(8,6))
 plt.contourf(x,y,z,levels=lv,cmap='Reds')           # 等高線面積圖

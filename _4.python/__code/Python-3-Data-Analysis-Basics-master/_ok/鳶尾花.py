@@ -173,7 +173,7 @@ clf = SVC()
 clf.fit(x_train, y_train)
 
 #第三部曲：預測
-y_predict= clf.predict(x_test)
+y_predict = clf.predict(x_test)
 
 print('看看我們模型預測和真實狀況差多少?')
 print(y_predict - y_test)
@@ -182,12 +182,12 @@ print(y_predict - y_test)
 y_predict = clf.predict(x_test)
 
 #這時因為如果答對了, 我們和正確答案相減就是 0。學得不錯就會大部份是 0, 錯的不是 0 畫出來就會不同色。我們來試試看。
-plt.scatter(x_test[:,0], x_test[:,1], c=y_predict - y_test)
+plt.scatter(x_test[:, 0], x_test[:, 1], c = y_predict - y_test)
 plt.title('看差值')
 plt.show()
 
-plt.scatter(x_test[:,0], x_test[:,1], c=y_predict)
-plt.title('看最後結果')
+plt.scatter(x_test[:, 0], x_test[:, 1], c = y_predict)
+plt.title('看最後預測結果')
 plt.show()
 
 
@@ -258,6 +258,18 @@ Z = Z.reshape(x1.shape)
 plt.contourf(x1, x2, Z, alpha=0.3)
 plt.scatter(X[:,0], X[:,1], c=Y)
 plt.show()
+
+x1, x2 = np.meshgrid(np.arange(0,7,0.02), np.arange(0,3,0.02))
+xx = [1,2,3,4]
+yy = [5,6,7,8]
+np.c_[xx, yy]
+Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
+Z = Z.reshape(x1.shape)
+plt.contourf(x1, x2, Z, cmap=plt.cm.coolwarm, alpha=0.8)
+plt.scatter(X[:,0], X[:,1], c=Y)
+plt.title('更炫的畫圖法')
+plt.show()
+
 
 """
 X, Y = np.meshgrid(np.arange(4, 8, 0.02), np.arange(2, 4.5, 0.02))

@@ -51,7 +51,6 @@ plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
 
 plt.show()
 
-'''
 print('------------------------------------------------------------')	#60個
 
 
@@ -104,25 +103,115 @@ print(Ym)
 #等等, 這什麼啊? 原來 meshgrid 存網格的 x 座標是一列一列存的。
 #同理我們可以理解 Ym 的內容為什麼是這樣了...
 
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
 print('------------------------------------------------------------')	#60個
 
 
 
 print('------------------------------------------------------------')	#60個
 
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+import pandas as pd
+
+#01 numpy 的 filter
+
+egg = np.array([3, -5, 10, 23, -5, 11])
+
+idx = (egg >= 0)
+
+print(idx)
+
+#array([ True, False,  True,  True, False,  True])
+
+print(egg[idx])
+
+#array([ 3, 10, 23, 11])
+
+print(egg[egg >= 0])
+
+#array([ 3, 10, 23, 11])
+
+
+x = np.linspace(-10, 10, 1000)
+
+y = np.sin(x)
+
+plt.plot(x, y)
+
+plt.scatter(x[y>0], y[y>0], c='r')
+plt.show()
+
+#02 Overfitting
+
+Px = np.random.rand(6)
+Py = np.random.rand(6)
+plt.scatter(Px, Py, c='r', s=50)
+
+plt.show()
+
+x = np.linspace(0, 1, 1000)
+
+y = 0.5*np.sin(x) + 0.5
+
+plt.scatter(Px, Py, c='r', s=50)
+
+plt.plot(x, y)
+
+plt.show()
+
+def myplot(n=1):
+
+    y = 0.5*np.sin(n*x) + 0.5
+
+    plt.scatter(Px, Py, c='r', s=50)
+
+    plt.plot(x, y)
+
+myplot(3)
+plt.show()
+'''
+
+
 
 
 print('------------------------------------------------------------')	#60個
 
 
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+from keras.datasets import mnist
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+x_train = x_train/255
+
+x_test = x_test/255
+
+from keras.utils import np_utils
+
+y_train = np_utils.to_categorical(y_train, 10)
+
+y_test = np_utils.to_categorical(y_test, 10)
+
+from keras.models import Sequential
+
+from keras.layers import Dense, Flatten
+
+from keras.optimizers import SGD
+
+model = Sequential()
+
+model.add(Flatten(input_shape=(28, 28)))
+
+model.add(Dense(20, activation='relu'))
+
 
 print('------------------------------------------------------------')	#60個
+
 
 
 

@@ -17,6 +17,8 @@ print('------------------------------------------------------------')	#60個
 import pandas as pd
 import seaborn as sns #海生, 自動把圖畫得比較好看
 
+print('------------------------------------------------------------')	#60個
+
 #熱圖
 
 df = pd.DataFrame([[65,92,78,83,70], 
@@ -25,21 +27,19 @@ df = pd.DataFrame([[65,92,78,83,70],
                    [79,53,47,94,80]],
                    index = ['王小明','李小美','陳大同','林小玉'],
                    columns = ['國文','英文','數學','自然','社會'])
+print('原資料 :\n', df, '\n')
 
+print(type(df))
 #sns.set(font="meiryo")
 sns.heatmap(df)
-
-sns.heatmap(df, linewidths=.1, annot=True, fmt="d")
-
-sns.heatmap(df, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
+#sns.heatmap(df, linewidths=.1, annot=True, fmt="d")
+#sns.heatmap(df, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
-
-#熱圖
+#熱圖 差別在 index 與 columns
 
 df = pd.DataFrame([[65,92,78,83,70], 
                    [90,72,76,93,56], 
@@ -47,12 +47,11 @@ df = pd.DataFrame([[65,92,78,83,70],
                    [79,53,47,94,80]])
 print('原資料 :\n', df, '\n')
 
+print(type(df))
 #sns.set(font="meiryo")
 sns.heatmap(df)
-
-sns.heatmap(df, linewidths=.1, annot=True, fmt="d")
-
-sns.heatmap(df, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
+#sns.heatmap(df, linewidths=.1, annot=True, fmt="d")
+#sns.heatmap(df, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
 
 plt.show()
 
@@ -85,12 +84,13 @@ ndarray2d = np.array(listdata)
 print(type(ndarray2d))
 print(ndarray2d)
 
+print(type(ndarray2d))
+print(ndarray2d.shape)
 sns.heatmap(ndarray2d, cmap = 'Reds')
 #sns.heatmap(ndarray2d, cmap="coolwarm")
 #sns.heatmap(ndarray2d, annot = True)
 
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 

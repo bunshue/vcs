@@ -27,10 +27,11 @@ N = 100
 x = np.random.rand(N, 2)
 
 plt.scatter(x[:, 0], x[:, 1], s = 50)
+#plt.scatter(x[:, 0], x[:, 1], cmap='Paired') fail
 plt.title('原始資料')
 plt.show()
 
-#製做一個 K-Means 分類器
+#step1製做一個 K-Means 分類器
 #和 SVM 很像。
 
 from sklearn.cluster import KMeans
@@ -39,17 +40,20 @@ from sklearn.cluster import KMeans
 
 clf = KMeans(n_clusters = 3)
 
+#step2學習訓練
 clf.fit(x)
 
+#step3預測
 #訓練好的結果, 在神秘的 labels_ 之下。
 Z = clf.labels_
 print('訓練好的結果1 :')
 print(Z)
 
-plt.scatter(x[:,0], x[:,1], s = 50, c = Z)
+plt.scatter(x[:, 0], x[:, 1], s = 50, c = Z)
 plt.title('訓練好的結果1')
 plt.show()
 
+#預測函數 predict
 
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
 xm, ym = np.meshgrid(x0, y0)
@@ -58,18 +62,25 @@ P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
 plt.contourf(xm, ym, Z, alpha=0.3)
-plt.scatter(x[:,0], x[:,1], c=clf.labels_)
+#plt.scatter(x[:, 0], x[:, 1], c=clf.labels_)
+plt.scatter(x[:, 0], x[:, 1], c=clf.labels_, cmap='Paired')
 plt.title('訓練好的結果1111')
 plt.show()
 
 #Mean Shift
+#Mean Shift 也會自動分類！
+#有時我們甚至不想告訴電腦, 你自動分類應該分成幾類。這時 Mean Shift 可以幫我們。
 
 from sklearn.cluster import MeanShift
 
+#step 1. 打開 MeanShift 函數學習機
 clf = MeanShift(bandwidth = 0.2)
+
+#step 2. fit 學習、訓練
 clf.fit(x)
 
-plt.scatter(x[:,0], x[:,1], c=clf.labels_)
+#step 3. predict
+
 
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
 xm, ym = np.meshgrid(x0, y0)
@@ -77,22 +88,25 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
+plt.scatter(x[:,0], x[:,1], c=clf.labels_, cmap='Paired')
+plt.contourf(xm, ym, Z, alpha = 0.3, cmap="Paired")
+plt.title('使用Mean Shift')
 plt.show()
 
-def my_mean_shift(b=0.2):
-    clf = MeanShift(bandwidth=b)
+#觀察 bandwidth 對分類的影響。
+
+def my_mean_shift(b = 0.2):
+    clf = MeanShift(bandwidth = b)
     clf.fit(x)
     
-    plt.scatter(x[:,0], x[:,1], c=clf.labels_)
-
     x0 = y0 = np.arange(-0.2, 1.2, 0.02)
     xm, ym = np.meshgrid(x0, y0)
 
     P = np.c_[xm.ravel(), ym.ravel()]
     z = clf.predict(P)
     Z = z.reshape(xm.shape)
-    plt.contourf(xm, ym, Z, alpha=0.3)
+    plt.scatter(x[:, 0], x[:, 1], c = clf.labels_, cmap="Paired")
+    plt.contourf(xm, ym, Z, alpha = 0.3, cmap = "Paired")
 
 my_mean_shift(0.2)
 plt.show()

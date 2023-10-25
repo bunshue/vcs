@@ -4,18 +4,12 @@
 機器學習概要
 
 機器學習其實基本上和我們一直以來說的一樣, 就是我們要學一個未知的函數
-
 f(x)=y
 
-如果是分類, 基本上就是有一筆資料 x=(x1,x2,…,xk)
-
-, 我們想知道這
-
+如果是分類, 基本上就是有一筆資料 x=(x1,x2,…,xk), 我們想知道這
 f(x)=y
 
-其中的 y
-
-就是某一個類別。
+其中的 y 就是某一個類別。
 
 這種學函數的方法, 又可以分為:
 
@@ -78,7 +72,7 @@ plt.show()
 from sklearn.svm import SVC
 
 clf = SVC() #打開一台機器, 就像打開「迴歸機一樣」。
-#clf = SVC(gamma='auto')
+#clf = SVC(gamma = 'auto')
 
 #學習! 這樣就做完了!!
 clf.fit(x, y)
@@ -111,12 +105,10 @@ plt.show()
 #再來視覺化一下我們的成果, 這次我們用不太一樣的方式, 但技巧都學過了!
 
 x1, x2 = np.meshgrid(np.arange(-7, 7, 0.5), np.arange(-7, 7, 0.5))
-
 X = np.c_[x1.ravel(), x2.ravel()]
-
 c = clf.predict(X)
 
-plt.scatter(X[:, 0], X[:, 1], s = 50, c = c)
+plt.scatter(X[:, 0], X[:, 1], s = 100, c = c)
 plt.grid()
 plt.show()
 
@@ -133,6 +125,32 @@ plt.contourf(x1, x2, z, alpha = 0.3)
 plt.scatter(x[:, 0], x[:, 1], s = 100, c = y)
 plt.grid()
 plt.show()
+
+#【技巧】視覺化成果之三
+
+xx = [1,2,3,4]
+yy = [5,6,7,8]
+X, Y = np.meshgrid(xx,yy)
+X, Y = np.meshgrid(np.linspace(-6,3,30), np.linspace(-8,5,30))
+
+#ravel 拉平法
+X = X.ravel()
+Y = Y.ravel()
+plt.scatter(X, Y)
+
+#zip 高級組合法
+
+xx = [1,2,3,4]
+yy = [5,6,7,8]
+list(zip(xx,yy))
+
+Z = clf.predict(list(zip(X,Y)))
+
+plt.scatter(X, Y, s=50, c=Z)
+plt.grid()
+plt.title('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+plt.show()
+
 
 #5-2 生個「像樣點」的假數據*
 #剛剛我們隨便做的數據又少、又不像真的。
@@ -209,13 +227,14 @@ plt.scatter(x[:, 0], x[:, 1], s = 100, c = y)
 plt.title('等高線圖')
 plt.grid()
 plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
+#SVM 支援向量機
 #先做個簡單的資料
 #假設我們有四個點, 有兩個類別。
 p = np.array([[1, 2], [2, 1], [1, 1], [2, 2]])
@@ -224,7 +243,7 @@ plt.scatter(p[:,0], p[:,1], c=c, cmap="Paired")
 plt.show()
 
 from sklearn.svm import SVC
-clf = SVC(gamma='auto')
+clf = SVC(gamma = 'auto')
 clf.fit(p, c)
 Ypred = clf.predict(p)
 print(Ypred)
@@ -233,6 +252,18 @@ print(c)
 print(clf.predict([[0,0]]))
 print(clf.predict([[1.5, 1.5], [0, 0]]))
 
+#111
+x = y = np.arange(0.5, 2.5, 0.02)
+X, Y = np.meshgrid(x, y)
+P = np.c_[X.ravel(), Y.ravel()]
+z = clf.predict(P)
+Z = z.reshape(X.shape)
+plt.contourf(X, Y, Z, alpha=0.3, cmap='Paired')
+plt.scatter(p[:,0], p[:,1], c=c, cmap='Paired')
+plt.show()
+
+
+#222
 x = np.linspace(0.5, 2.5, 10)
 y = np.linspace(0.5, 2.5, 10)
 X, Y = np.meshgrid(x, y)
@@ -258,11 +289,10 @@ plt.show()
 
 print('作業完成')
 
-'''
 
 #-------------------------------------------------------------------------------
 
-#iris
+#鳶尾花 Iris 數據集
 
 from sklearn.datasets import load_iris
 
@@ -272,7 +302,6 @@ x = iris.data
 y = iris.target
 
 X = x[:, :2]
-
 Y = y
 
 from sklearn.model_selection import train_test_split
@@ -281,11 +310,12 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y,
                                                    test_size = 0.2,
                                                    random_state = 0)
 
-plt.scatter(X[:,0], X[:,1], c=Y, cmap='Paired')
+plt.scatter(X[:, 0], X[:, 1], c = Y, cmap = 'Paired')
+plt.title('原始資料')
 plt.show()
 
 from sklearn.svm import SVC
-clf = SVC(gamma="scale")
+clf = SVC(gamma = "scale")
 
 clf.fit(x_train, y_train)
 
@@ -300,13 +330,12 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
-plt.scatter(X[:,0], X[:,1], c=Y)
+plt.contourf(xm, ym, Z, alpha = 0.3)
+plt.scatter(X[:, 0], X[:, 1], c = Y)
 plt.show()
 
 
-
-#PCA
+#PCA 可以救鳶尾花嗎？
 
 from sklearn.decomposition import PCA
 
@@ -316,16 +345,18 @@ pca.fit(x)
 
 X = pca.transform(x)
 
-plt.scatter(X[:, 0], X[:, 1], c = y)
+#我們稍稍的「欣賞一下」 PCA 對我們的資料集做了什麼，來看看某朵鳶尾花的資料。
+#pca.transform([[6.3, 2.3, 4.4, 1.3]])
+#真的變成平面上一個點！來看看整個分布的狀況。
 
+plt.scatter(X[:, 0], X[:, 1], c = y, cmap='Paired')
 plt.show()
-
 
 x_train, x_test, y_train, y_test = train_test_split(X, y,
                                                    test_size = 0.2,
                                                    random_state = 0)
 
-clf = SVC(gamma='scale')
+clf = SVC(gamma = 'scale')
 
 clf.fit(x_train, y_train)
 
@@ -336,8 +367,8 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.contourf(xm, ym, Z, alpha=0.3)
-plt.scatter(X[:,0], X[:,1], c=y)
+plt.contourf(xm, ym, Z, alpha = 0.3)
+plt.scatter(X[:, 0], X[:, 1], c = y)
 plt.show()
 
 
