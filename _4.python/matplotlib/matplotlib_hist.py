@@ -5,6 +5,7 @@ font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 #設定中文字型及負號正確顯示
 #設定中文字型檔
@@ -54,6 +55,9 @@ print('描繪頻率分布圖')
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV7_onigiri.csv'
 dat = pd.read_csv(filename, encoding = 'UTF-8')
 
+print(type(dat))
+print(dat)
+
 # 頻率分布圖
 plt.hist(dat['店長'], bins = range(0, 200, 10), alpha = 0.5)
 plt.hist(dat['太郎'], bins = range(0, 200, 10), alpha = 0.5)
@@ -83,5 +87,7 @@ plt.subplot(236)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+
 
 

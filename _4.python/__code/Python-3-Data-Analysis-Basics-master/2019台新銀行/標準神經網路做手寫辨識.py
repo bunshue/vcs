@@ -39,11 +39,27 @@ MNIST 可以說是 Deep Learning 最有名的範例, 它被 Deep Learning 大師
 Keras 很貼心的幫我們準備好 MNIST 數據庫, 我們可以這樣讀進來 (第一次要花點時間)。
 '''
 
+'''
 from keras.datasets import mnist
 
 #Using TensorFlow backend.
 
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
+'''
+
+
+import tensorflow as tf
+#(trainX, trainY), (testX, testY) = tf.keras.datasets.mnist.load_data()
+
+
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
+import numpy as np  
+path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
+mnist = np.load(path)  
+x_train, y_train = mnist['x_train'], mnist['y_train']  
+x_test, y_test = mnist['x_test'], mnist['y_test']  
+mnist.close()  
+
 
 
 

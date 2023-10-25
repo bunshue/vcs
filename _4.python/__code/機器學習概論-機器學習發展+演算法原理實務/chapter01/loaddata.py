@@ -1,13 +1,7 @@
-# -*- coding: utf-8 -*-
-
 import sys  
 import os
 import time
 from numpy import *
-
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 #数据文件转矩阵
 # path: 数据文件路径
@@ -27,6 +21,6 @@ root = "testdata" #数据文件所在路径
 pathlist = os.listdir(root) # 获取路径下所有数据文件
 for path in pathlist:
 	recordmat = file2matrix(root+"/"+path,"\t") # 文件到矩阵的转换
-	print shape(recordmat) # 输出解析后矩阵的行、列数
+	print(shape(recordmat)) # 输出解析后矩阵的行、列数
 
 

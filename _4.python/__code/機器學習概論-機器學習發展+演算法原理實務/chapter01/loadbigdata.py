@@ -1,13 +1,7 @@
-# -*- coding: utf-8 -*-
-
 import sys  
 import os
 import time
 from numpy import *
-
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 # 按行读文件，读取指定行数
 # nmax=0按行读取全部
@@ -26,6 +20,6 @@ def readfilelines(path,nmax=0):
 path = "testdata/01.txt" #数据文件所在路径
 # 读取10行,
 for line in readfilelines(path,nmax=10):
-	print line.strip()
+	print(line.strip())
 
 

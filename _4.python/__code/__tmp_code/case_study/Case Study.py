@@ -1,25 +1,37 @@
 import sys
+import os
 import requests
 import matplotlib.pyplot as plt
 import numpy as np
 
 r = requests.get('https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/readme.txt')
 readme = r.text
-
 print(readme)
 
-# get inventory and stations files
-r = requests.get('https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt')
-inventory_txt = r.text
-r = requests.get('https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt')
-stations_txt = r.text
+filename1 = 'inventory.txt'
+filename2 = 'stations.txt'
 
-# save both the inventory and stations files to disk, in case we need them
-with open("inventory.txt", "w", encoding = 'UTF-8') as inventory_file:
-    inventory_file.write(inventory_txt)
-    
-with open("stations.txt", "w", encoding = 'UTF-8') as stations_file:
-    stations_file.write(stations_txt)
+if os.path.exists(filename1):
+    print('檔案存在')
+    with open(filename1, "r", encoding = 'UTF-8') as inventory_file:
+        inventory_txt = inventory_file.read()
+else:
+    print('檔案不存在')
+    r = requests.get('https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt')
+    inventory_txt = r.text
+    with open("inventory.txt", "w", encoding = 'UTF-8') as inventory_file:
+        inventory_file.write(inventory_txt)
+
+if os.path.exists(filename2):
+    print('檔案存在')
+    with open(filename2, "r", encoding = 'UTF-8') as stations_file:
+        stations_txt = stations_file.read()
+else:
+    print('檔案不存在')
+    r = requests.get('https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt')
+    stations_txt = r.text
+    with open("stations.txt", "w", encoding = 'UTF-8') as stations_file:
+        stations_file.write(stations_txt)
 
 print(inventory_txt[:137])
 
@@ -27,9 +39,6 @@ print(inventory_txt[:137])
 # use namedtuple to create a custom Inventory class
 from collections import namedtuple
 Inventory = namedtuple("Inventory", ['station', 'latitude', 'longitude', 'element', 'start', 'end'])
-
-
-
 
 # parse inventory lines and convert some values to floats and ints
 inventory = [Inventory(x[0:11], float(x[12:20]), float(x[21:30]), x[31:35], int(x[36:40]), int(x[41:45]))
@@ -116,7 +125,8 @@ def parse_line(line):
 print(parse_line(weather[:270]))
 
 
-# So it looks like we have a function that will work to parse our data. If that works then we can parse the weather data and either store it or continue on with our processing.
+# So it looks like we have a function that will work to parse our data.
+# If that works then we can parse the weather data and either store it or continue on with our processing.
 
 # process all weather data
 
@@ -134,13 +144,19 @@ print(weather_data[:10])
 
 # ### Saving the weather data in a database (Optional)
 # 
-# At this point we can save all of the weather records (and the station records and inventory records as well, if we want) into a database. This would let us come back in later sessions and use the same data without having to go the hassle of fetching and parsing the data again. 
+# At this point we can save all of the weather records (and the station records and inventory records as well, if we want) into a database.
+# This would let us come back in later sessions and use the same data without having to go the hassle of fetching and parsing the data again. 
 # 
 # As an example, the code below would be how we could save the weather data into a SQLite3 database.
 
+
+import time
+#db_filename = 'C:/_git/vcs/_1.data/______test_files2/weather_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.qlite';
+db_filename = 'weather_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.qlite';
+
 import sqlite3
 
-conn = sqlite3.connect("weather_data.db")
+conn = sqlite3.connect(db_filename)
 cursor = conn.cursor()
 
 # create weather table
@@ -158,8 +174,7 @@ conn.commit()
 
 # store parsed weather data in database
 for record in weather_data:
-    cursor.execute("""insert into weather (id, year, month, element, max, min, mean, count) values (?,?,?,?,?,?,?,?) """, 
-                      record)
+    cursor.execute("""insert into weather (id, year, month, element, max, min, mean, count) values (?,?,?,?,?,?,?,?) """, record)
 
 conn.commit()
 
@@ -170,15 +185,20 @@ print(tmax_data[:5])
 
 # ### Selecting and graphing data
 # 
-# Since we're only concerned with temperature we need to select just the temperature records. We can do that quickly enough by just usign a couple of list comprehensions to pick out a list for TMAX and one for TMIN. Or we could use the features of pandas, which we'll be using for graphing the date, to filter out the records we don't want. Since were more concerned with pure Python than pandas, we'll take the first approach.
+# Since we're only concerned with temperature we need to select just the temperature records.
+# We can do that quickly enough by just usign a couple of list comprehensions to pick out a list for TMAX and one for TMIN.
+# Or we could use the features of pandas, which we'll be using for graphing the date, to filter out the records we don't want.
+#Since were more concerned with pure Python than pandas, we'll take the first approach.
 
 tmax_data = [x for x in weather_data if x[3] == 'TMAX']
 tmin_data = [x for x in weather_data if x[3] == 'TMIN']
 print(tmin_data[:5])
 
 # #### Using pandas to graph our data
-# 
-# At this point we have our data cleaned and ready to graph. To make the graphing easier we can use pandas and matplotlib as described in chapter 24. In order to do this we need to have a Jupyter server running and have pandas and matplotlib installed. We can make sure that they are installed from within our Jupyter notebook by using the following command:
+# At this point we have our data cleaned and ready to graph.
+# To make the graphing easier we can use pandas and matplotlib as described in chapter 24.
+# In order to do this we need to have a Jupyter server running and have pandas and matplotlib installed.
+# We can make sure that they are installed from within our Jupyter notebook by using the following command:
 
 import pandas as pd
 
@@ -188,16 +208,21 @@ tmax_df = pd.DataFrame(tmax_data, columns=['Station', 'Year', 'Month', 'Element'
 tmin_df = pd.DataFrame(tmin_data, columns=['Station', 'Year', 'Month', 'Element', 'Max', 'Min', 'Mean', 'Days'])
 
 
-# We could plot the monthly values, but the 123 years times 12 months of data is almost 1500 data points, and the cycle of seasons also makes picking out patterns difficult. 
-# Instead, it would probably make more sense to average the high, low, and mean monthly values into yearly values and plot those. We could do this in python, but since we already have our data loaded in a pandas data frame we can use that to group by year and give us the mean values.
+# We could plot the monthly values, but the 123 years times 12 months of data is almost 1500 data points,
+# and the cycle of seasons also makes picking out patterns difficult. 
+# Instead, it would probably make more sense to average the high, low, and mean monthly values into yearly values and plot those.
+# We could do this in python, but since we already have our data loaded in a pandas data frame we can use that to group by year
+# and give us the mean values.
 
 # select Year, Min, Max, Mean columns, group by year, average and line plot
 tmin_df[['Year','Min', 'Mean', 'Max']].groupby('Year').mean().plot( kind='line', figsize=(16, 4))
 plt.show()
 
 
-# The result above has a fair amount of variation, but does seem to indicate that the minimum temperature, at least, has been on the rise the past 20 years. 
-# 
-# Note that if you wanted to get the same graph without using Jupyter notebook and matplotlib, you could use still use pandas, but write to a csv or excel file using the data frame's `to_csv` or `to_excel` methods. Then you could load the resulting file into a spreadsheet and graph from there. 
+# The result above has a fair amount of variation, but does seem to indicate that the minimum temperature, at least,
+# has been on the rise the past 20 years. 
+# Note that if you wanted to get the same graph without using Jupyter notebook and matplotlib,
+# you could use still use pandas, but write to a csv or excel file using the data frame's `to_csv` or `to_excel` methods.
+# Then you could load the resulting file into a spreadsheet and graph from there. 
 
 print('作業完成')

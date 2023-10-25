@@ -1,13 +1,8 @@
-# -*- coding: utf-8 -*-
-
 import sys  
 import os
 import time
 from numpy import *
 
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 vector1 = mat([1,2,3])
 vector2 = mat([4,7,5])

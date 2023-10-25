@@ -9,10 +9,9 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-
+'''
 print('------------------------------------------------------------')	#60個
 
-'''
 x = np.linspace(0, 1, 200)
 y = -(x - 1) ** 2 + 1
 
@@ -171,13 +170,10 @@ def myplot(n=1):
 
 myplot(3)
 plt.show()
-'''
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
+'''
 
 import numpy as np
 
@@ -185,7 +181,14 @@ import matplotlib.pyplot as plt
 
 from keras.datasets import mnist
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
+
+import numpy as np  
+path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
+mnist = np.load(path)  
+x_train, y_train = mnist['x_train'], mnist['y_train']  
+x_test, y_test = mnist['x_test'], mnist['y_test']  
+mnist.close()  
 
 x_train = x_train/255
 

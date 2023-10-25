@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-
 import sys  
 import os
 from numpy import * 
 import matplotlib.pyplot as plt
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 base = mat([[3,1],[1,3]])
 v1 = mat([1,2])
