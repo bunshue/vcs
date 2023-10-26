@@ -84,7 +84,22 @@ for value_tuple in list_values[1:]:
     #print(type(value_tuple))
     cnt += 1
 
+print('------------------------------------------------------------')	#60個
+
+import openpyxl
+
+filename = 'data/sample.xlsx'
+
+wb = openpyxl.load_workbook(filename)
+for sheet in wb:
+    print('sheet')
+    for row in sheet:
+        #print('row')
+        for cell in row:
+            print(cell.value, end = ' ')
+        print()
 
 print('------------------------------------------------------------')	#60個
+
 print('完成')
 

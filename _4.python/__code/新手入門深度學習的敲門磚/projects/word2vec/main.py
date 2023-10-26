@@ -8,6 +8,7 @@ from gensim.test.utils import datapath, get_tmpfile
 from gensim.models import KeyedVectors
 from gensim.scripts.glove2word2vec import glove2word2vec
 
+filename = 'C:/_git/vcs/_4.python/__code/新手入門深度學習的敲門磚/glove.6B.100d.txt'
 
 def display_pca_scatterplot(model, words):
     # Take word vectors
@@ -25,8 +26,8 @@ def display_pca_scatterplot(model, words):
 
 def main():
     # Download pre-trained GloVe embeddings, turn into Word2Vec format
-    glove_file = './data/glove.6B.100d.txt'
-    word2vec_glove_file = './data/glove.6B.100d.word2vec.txt'
+    glove_file = filename
+    word2vec_glove_file = 'glove.6B.100d.word2vec.txt'
     if not os.path.isfile(word2vec_glove_file):
         glove2word2vec(glove_file, word2vec_glove_file)
 
@@ -34,20 +35,28 @@ def main():
     model = KeyedVectors.load_word2vec_format(word2vec_glove_file)
 
     # Take word, return most similar words
-    word = input('Similarity - Input word: ')
+    word = input('請輸入要尋找最接近意思的英文單詞: ')
     while word != '':
-        print(model.most_similar(word))
-        word = input('Similarity - Input word: ')
+        cc = model.most_similar(word)
+        print(type(cc))
+        print(len(cc))
+        print(cc)
+        word = input('請輸入要尋找最接近意思的英文單詞: ')
 
+    '''
     # Take a, b, c, return d for a : b = c : d
     a = input('Analogy a : b = c : d - Input a: ')
     b = input('Analogy a : b = c : d - Input b: ')
     c = input('Analogy a : b = c : d - Input c: ')
     while a != '' and b != '' and c != '':
-        print(model.most_similar(positive=[c, b], negative=[a]))
+        cc = model.most_similar(positive=[c, b], negative=[a])
+        print(type(cc))
+        print(len(cc))
+        print(cc)
         a = input('Analogy a : b = c : d - Input a: ')
         b = input('Analogy a : b = c : d - Input b: ')
         c = input('Analogy a : b = c : d - Input c: ')
+    '''
 
     # Display scatter plot for words
     choice = input('2D word vector visualization - Input \'default\' for a default list of words, or a comma-separated list of words: ')

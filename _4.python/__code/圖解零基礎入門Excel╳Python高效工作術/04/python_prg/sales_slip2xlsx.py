@@ -2,8 +2,6 @@ import pathlib  # 標準函式庫
 import openpyxl # 外部函式庫　pip install openpyxl
 import csv      # 標準函式庫
 
-
-
 lwb = openpyxl.Workbook()           #業績一覽表活頁簿
 lsh = lwb.active                    #業績一覽工作表
 list_row = 1

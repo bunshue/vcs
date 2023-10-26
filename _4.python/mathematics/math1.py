@@ -255,7 +255,6 @@ frac()
 
 print('------------------------------------------------------------')	#60個
 
-
 from fractions import Fraction
 
 p = Fraction(22, 7)
@@ -264,6 +263,17 @@ print('分數的使用 : {}'.format(p))
 print('分數的使用 : {}'.format(float(p)))
 
 print('------------------------------------------------------------')	#60個
+
+print('算圓周率')
+sigma=0
+k = 20
+
+for n in range(0,k,1):
+    if n & 1: #如果n是奇數
+        sigma += float(-1/(2*n+1))
+    else: #如果n是偶數
+        sigma += float(1/(2*n+1))
+print("PI = %f" %(sigma*4))
 
 
 
