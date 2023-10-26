@@ -199,7 +199,78 @@ print('用 cmath 取 平方根 :')
 cc = cmath.sqrt(16)
 print(cc)
 
+print('------------------------------------------------------------')	#60個
+
+import cmath
+
+def complex_math():
+    a = complex(2, 4)
+    b = 3 - 5j
+    print(a.conjugate())
+
+    # 正弦 余弦 平方根等
+    print(cmath.sin(a))
+    print(cmath.cos(a))
+    print(cmath.sqrt(a))
+
+complex_math()
 
 print('------------------------------------------------------------')	#60個
 
+r = 6371                        # 地球半徑
+x1, y1 = 22.2838, 114.1731      # 香港紅磡車站經緯度
+x2, y2 = 25.0452, 121.5168      # 台北車站經緯度
+
+d = 6371 * math.acos(math.sin(math.radians(x1)) * math.sin(math.radians(x2)) +
+                     math.cos(math.radians(x1)) * math.cos(math.radians(x2)) *
+                     math.cos(math.radians(y1 - y2)))
+
+print("distance = ", d)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+"""
+分数运算
+
+"""
+from fractions import Fraction
+
+def frac():
+    a = Fraction(5, 4)
+    b = Fraction(7, 16)
+    print(print(a + b))
+    print(a.numerator, a.denominator)
+
+    c = a + b
+    print(float(c))
+    print(type(c.limit_denominator(8)))
+    print(c.limit_denominator(8))
+
+frac()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+from fractions import Fraction
+
+p = Fraction(22, 7)
+print('分數的使用 :', p)
+print('分數的使用 : {}'.format(p))
+print('分數的使用 : {}'.format(float(p)))
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
 

@@ -36,7 +36,7 @@ Dictionary(字典)
 Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的語法是key: value，一個key對應一個value，key不一定要是字串，但必須是唯一的。
 
 """
-
+'''
 print('建立空容器')
 
 #字典
@@ -1849,11 +1849,146 @@ cc = repr(x)
 print(type(cc))
 print(cc)
 
+'''
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+#用壽司算符給 list 切片
+
+numbers = [0, 1, 2, 3, 4]
+
+print(numbers[1:3:1])
+print(numbers[1:4])
+print(numbers[::2])
+print(numbers[::-1])
+print(list(reversed(numbers)))
+
+s = 'I love Python'
+print(s[2:6])
+print(s[::-1])
+    
+print('------------------------------------------------------------')	#60個
+
+#list 生成式
+
+squares = [x ** 2 for x in range(10)]
+
+print(squares)
+
+squares = [x ** 2 for x in range(10) if x % 2 == 0]
+
+print(squares)
+
+matrix = [[x * y for x in range(3)] for y in range(4)]
+
+print(matrix)
+
+    
+print('------------------------------------------------------------')	#60個
+
+# 6-1-4 走訪 dict 鍵與值
+
+emails = {
+    'Bob': 'bob@office.com',
+    'Alice': 'aloce@office.com',
+    }
+
+for name, email in emails.items():
+    print(f'{name} -> {email}')
+    
+print('------------------------------------------------------------')	#60個
+
+
+# 用 zip() 同時走訪多個容器/旋轉二維陣列
+
+my_numbers = [1, 2, 3, 4]
+my_items = ['a', 'b', 'c']
+
+for num, item in zip(my_numbers, my_items):
+    print(f'{num} -> {item}')
+
+
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+print(list(zip(*matrix)))
+print(list(zip(*reversed(matrix))))
+   
+print('------------------------------------------------------------')	#60個
+
+#用 enumerate() 列舉元素
+my_items = ['a', 'b', 'c']
+
+for i, item in enumerate(my_items):
+    print(f'{i}: {item}')
+
+print('------------------------------------------------------------')	#60個
+
+
+salary = (86000, 72000, 83000, 47000, 55000)
+print('原有資料：')
+print(type(salary))
+print(salary)
+print('--------------------------------')
+
+# 由小而大
+print('薪資由小而大排序：',sorted(salary))
+print('--------------------------------')
+
+# 遞減排序
+print('薪資由大而小排序：', sorted(salary, reverse = True))
+print('--------------------------------')
+
+print('資料經排序後仍保留原資料位置：')
+print(salary)
+print('--------------------------------')
+
+print('------------------------------------------------------------')	#60個
+
+tup = (28, 39, 58, 67,97, 54) 
+print('目前元組內的所有元素：')
+for item in range(len(tup)):
+   print ('tup[%2d] %3d' %(item, tup[item]))
+
+
+print('------------------------------------------------------------')	#60個
+
+friendA= {"Andy", "Axel", "Michael","May"}
+friendB = {"Peter", "Axel", "Andy","Julia"}
+print(friendA & friendB)
+print(friendA | friendB)
+print(friendA - friendB)
+print(friendA ^ friendB)
+
+print('------------------------------------------------------------')	#60個
+
+print('字典子集')
+
+prices = {
+    'ACME': 45.23,
+    'AAPL': 612.78,
+    'IBM': 205.55,
+    'HPQ': 37.20,
+    'FB': 10.75
+    }
+# Make a dictionary of all prices over 200
+p1 = {key: value for key, value in prices.items() if value > 200}
+# Make a dictionary of tech stocks
+tech_names = {'AAPL', 'IBM', 'HPQ', 'MSFT'}
+p2 = {key: value for key, value in prices.items() if key in tech_names}
 
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 
 

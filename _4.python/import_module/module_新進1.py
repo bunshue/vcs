@@ -91,52 +91,7 @@ print(multiprocessing.current_process().name)
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-import csv
-
-data = [
-    ['姓名', '身高', '體重'],
-    ['王小明', 174, 56],
-    ['林小華', 185, 80],
-    ['陳小強', 168, 60] ]
-
-with open('p-data.csv', 'w', encoding='utf-8', newline='') as fp:
-    csvwriter = csv.writer(fp)
-    csvwriter.writerows(data)
-    
-print("done")
-
-import csv
-
-data = [
-    ['王小明', 174, 56],
-    ['林小華', 185, 80],
-    ['陳小強', 168, 60] ]
-
-with open('p-data2.csv', 'w', encoding='utf-8', newline='') as fp:
-    csvwriter = csv.writer(fp)
-    csvwriter.writerow(['姓名', '身高', '體重'])
-    csvwriter.writerows(data)
-print("done")
-        
-print('------------------------------------------------------------')	#60個
-
-from fractions import Fraction
-
-p = Fraction(22, 7)
-print('分數的使用 :', p)
-print('分數的使用 : {}'.format(p))
-print('分數的使用 : {}'.format(float(p)))
-
-print('------------------------------------------------------------')	#60個
-
-
-
 from plyer import notification
-
-print('------------------------------------------------------------')	#60個
 
 print('notification 測試')
 
@@ -184,42 +139,6 @@ import locale
 print(locale.getpreferredencoding())
 
 print('------------------------------------------------------------')	#60個
-
-import cmath
-
-def complex_math():
-    a = complex(2, 4)
-    b = 3 - 5j
-    print(a.conjugate())
-
-    # 正弦 余弦 平方根等
-    print(cmath.sin(a))
-    print(cmath.cos(a))
-    print(cmath.sqrt(a))
-
-complex_math()
-
-
-print('------------------------------------------------------------')	#60個
-
-"""
-分数运算
-
-"""
-from fractions import Fraction
-
-def frac():
-    a = Fraction(5, 4)
-    b = Fraction(7, 16)
-    print(print(a + b))
-    print(a.numerator, a.denominator)
-
-    c = a + b
-    print(float(c))
-    print(type(c.limit_denominator(8)))
-    print(c.limit_denominator(8))
-
-frac()
 
 
 print('------------------------------------------------------------')	#60個

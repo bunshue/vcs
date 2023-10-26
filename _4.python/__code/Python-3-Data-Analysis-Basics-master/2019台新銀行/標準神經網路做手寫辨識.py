@@ -18,12 +18,7 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
 import numpy as np
-
 import matplotlib.pyplot as plt
 
 '''
@@ -39,18 +34,7 @@ MNIST 可以說是 Deep Learning 最有名的範例, 它被 Deep Learning 大師
 Keras 很貼心的幫我們準備好 MNIST 數據庫, 我們可以這樣讀進來 (第一次要花點時間)。
 '''
 
-'''
 from keras.datasets import mnist
-
-#Using TensorFlow backend.
-
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-'''
-
-
-import tensorflow as tf
-#(trainX, trainY), (testX, testY) = tf.keras.datasets.mnist.load_data()
-
 
 #(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
 import numpy as np  
@@ -60,11 +44,248 @@ x_train, y_train = mnist['x_train'], mnist['y_train']
 x_test, y_test = mnist['x_test'], mnist['y_test']  
 mnist.close()  
 
+#我們來看看訓練資料是不是 6 萬筆、測試資料是不是有 1 萬筆。
+
+print('訓練資料長度 :', len(x_train))
+
+print('測試資料長度 :', len(x_test))
+
+"""
+2.2.2 數據庫的內容
+
+每筆輸入 (x) 就是一個手寫的 0-9 中一個數字的圖檔, 大小為 28x28。
+而輸出 (y) 當然就是「正確答案」。我們來看看編號 87 的訓練資料。
+"""
+
+#編號87的訓練資料
+X = x_train[87]
+
+print('shape :', X.shape)
 
 
+#因為是圖檔, 當然可以顯示出來!
+
+plt.imshow(X, cmap = 'Greys')
+plt.title('編號87的訓練資料')
+plt.show()
+
+print('編號87的測試資料 :', y_train[87])
+
+"""
+2.2.3 輸入格式整理
+
+我們現在要用標準神經網路學學手寫辨識。
+原來的每筆數據是個 28x28 的矩陣 (array),
+但標準神經網路只吃「平平的」, 也就是每次要 28x28=784 長的向量。
+因此我們要用 reshape 調校一下。
+"""
+
+print('x_train.shape =', x_train.shape)
+
+print('x_test.shape =', x_test.shape)
 
 
+#我們做一下 normalization, 把所有的數字都改為 0 到 1 之間。
 
+x_train = x_train/255
+x_test = x_test/255
+
+"""
+2.2.4 輸出格式整理
+
+我們可能會想, 我們想學的函數是這樣的型式:
+
+其實這樣不太好! 為什麼呢? 比如說我們的輸入 x 是一張 0 的圖,
+因為我們訓練的神經網路總會有點誤差, 所以可能會得到:
+
+那這意思是有可能是 0, 也有可能是 1 嗎!!??
+可是 0 和 1 根本不像啊。換句話說分類的問題這樣做其實不合理!
+
+於是我們會做 "1-hot enconding", 也就是
+
+    1 -> [0, 1, 0, 0, 0, 0, 0, 0, 0]
+    5 -> [0, 0, 0, 0, 0, 1, 0, 0, 0]
+
+等等。因為分類問題基本上都要做這件事, Keras 其實已幫我們準備好套件!
+"""
+
+from keras.utils import np_utils
+
+y_train = np_utils.to_categorical(y_train, 10)
+y_test = np_utils.to_categorical(y_test, 10)
+
+#我們來看看剛剛是 9 的 87 號數據的答案。
+
+print(y_train[87])
+
+#array([0., 0., 0., 0., 0., 0., 0., 0., 0., 1.], dtype=float32)
+
+#和我們想的一樣! 至此我們可以打造我們的神經網路了。
+
+"""
+2-3 打造第一個神經網路
+我們決定了我們的函數是
+^f:R784→R10
+這個樣子。而我們又說第一次要用標準神網路試試, 所以我們只需要再決定要幾個隱藏層、每層要幾個神經元, 用哪個激發函數就可以了。
+2.3.1 決定神經網路架構、讀入相關套件
+假如我們要這麼做:
+    使用 3 個 hidden layers
+    Hidden layer 1 用 6 個神經元
+    Hidden layer 2 用 28 個神經元
+    Hidden layer 3 用 2 個神經元
+    Activation Function 唯一指名 relu
+於是從 Keras 把相關套件讀進來。
+"""
+
+from keras.models import Sequential
+from keras.layers import Dense, Flatten
+from keras.optimizers import SGD
+
+"""
+2.3.2 建構我們的神經網路
+和以前做迴歸或機器學習一樣, 我們就打開個「函數學習機」。
+標準一層一層傳遞的神經網路叫 Sequential, 於是我們打開一個空的神經網路。
+"""
+
+model = Sequential()
+
+"""
+我們每次用 add 去加一層, 從第一個隱藏層開始。
+而第一個隱藏層因為 Keras 當然猜不到輸入長什麼樣子, 所以我們要告訴它。
+而全連結的神經網路其實都是一個向量輸入, 也就是要先「拉平」。
+"""
+
+model.add(Flatten(input_shape = (28, 28)))
+model.add(Dense(6, activation = 'relu'))
+
+"""
+第二層 hidden layer 因為前面輸出是 6, 現在輸入是 28, 就不用再說了!
+這裡的 28 只告訴 Keras, 我們第二層是用 28 個神經元!
+"""
+
+model.add(Dense(28, activation  = 'relu'))
+
+#第三層用 2 個神經元。
+
+model.add(Dense(2, activation = 'relu'))
+
+#輸出有 10 個數字, 所以輸出層的神經元是 10 個!
+#而如果我們的網路輸出是 (y1,y2,…,y10) 我們還希望 10∑i=1yi=1
+#這可能嗎, 結果是很容易, 就用 softmax 當激發函數就可以!!
+
+model.add(Dense(10, activation = 'softmax'))
+
+#至此我們的第一個神經網路就建好了!
+
+"""
+2.3.3 組裝
+
+和之前比較不一樣的是我們還要做 compile 才正式把我們的神經網路建好。你可以發現我們還需要做幾件事:
+    決定使用的 loss function, 一般是 mse
+    決定 optimizer, 我們用標準的 SGD
+    設 learning rate
+為了一邊訓練一邊看到結果, 我們加設
+metrics=['accuracy']
+本行基本上和我們的神經網路功能沒有什麼關係。
+"""
+
+model.compile(loss = 'mse', optimizer = SGD(lr = 0.087), metrics = ['accuracy'])
+
+"""
+2-4 檢視我們的神經網路
+
+我們可以檢視我們神經網路的架構, 可以確認一下是不是和我們想像的一樣。
+2.4.1 看 model 的 summary
+"""
+
+print(model.summary())
+
+"""
+很快算算參數數目和我們想像是否是一樣的!
+784*6 + 6
+4710
+6*28 + 28
+196
+28*2 + 2
+58
+2*10 + 10
+30
+
+2-5 訓練你的第一個神經網路
+
+恭喜! 我們完成了第一個神經網路。現在要訓練的時候, 你會發現不是像以前沒頭沒腦把訓練資料送進去就好。這裡我們還有兩件事要決定:
+
+    一次要訓練幾筆資料 (batch_size), 我們就 100 筆調一次參數好了
+    這 6 萬筆資料一共要訓練幾次 (epochs), 我們訓練個 20 次試試
+
+於是最精彩的就來了。你要有等待的心理準備...
+"""
+N = 1200
+N = 2400
+
+EPOCHS = 2 #訓練次數
+
+print('資料共有 :', len(x_train), '筆, 每', N, '筆調一次參數, 共需調', len(x_train)/N, '次')
+print('訓練次數 :', EPOCHS);
+
+model.fit(x_train, y_train, batch_size = N, epochs = EPOCHS)
+
+#2-6 試用我們的結果
+#我們 "predict" 放的是我們神經網路的學習結果。這裡用 predict_classes 會讓我們 Keras 選 10 個輸出機率最大的那類。
+
+predict = model.predict_step(x_test)
+
+print(predict)
+
+#array([7, 2, 1, ..., 7, 7, 0])
+
+#寫個小程式, 秀出某測試資料的樣子, 還有我們可愛神經網路辨識的結果。
+
+def test(num):
+    plt.imshow(x_test[num], cmap = 'Greys')
+    print('num =', num)
+    print('神經網路判斷為 : ', predict[num])
+    print()
+
+predict_number = 87
+test(predict_number)
+plt.show()
+
+#神經網路判斷為 : 3
+
+
+#到底測試資料總的狀況如何呢? 我們可以給我們神經網路「考一下試」。
+
+score = model.evaluate(x_test, y_test)
+
+print()
+print('------------------------------------------------------------')
+print('loss:', score[0])
+print('正確率', score[1])
+
+#loss: 0.06821700274944305
+#正確率 0.4345
+
+'''
+[作業]
+
+這個神經網路實在有夠遜的! 我們試試看能不能改善它, 讓正確率提升到 87% 以上!
+2-7 訓練好的神經網路存起來!
+
+如果對訓練成果滿意, 我們當然不想每次都再訓練一次! 我們可以把神經網路的架構和訓練好的參數都存起來, 以供日後使用!
+
+之前還沒裝 pyh5 要在終端機 (Anaconda Prompt) 下安裝:
+
+conda install h5py
+
+model_json = model.to_json()
+
+open('stupid_model.json', 'w').write(model_json)
+
+model.save_weights('stupid_model_weights.h5')
+
+'''
+                                                                                  
 print('------------------------------------------------------------')	#60個
 
 

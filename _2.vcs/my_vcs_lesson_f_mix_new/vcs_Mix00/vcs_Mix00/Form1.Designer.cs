@@ -370,6 +370,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(170, 70);
             this.button24.TabIndex = 124;
+            this.button24.Text = "tmp1";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -380,6 +381,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(170, 70);
             this.button25.TabIndex = 125;
+            this.button25.Text = "reverse";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -390,6 +392,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(170, 70);
             this.button26.TabIndex = 126;
+            this.button26.Text = "hanoi";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -400,6 +403,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(170, 70);
             this.button27.TabIndex = 127;
+            this.button27.Text = "class book";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -410,6 +414,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(170, 70);
             this.button28.TabIndex = 128;
+            this.button28.Text = "card";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 

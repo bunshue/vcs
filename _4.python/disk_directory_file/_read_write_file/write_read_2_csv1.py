@@ -279,7 +279,38 @@ print()
 print(dfprice)
 
 print('------------------------------------------------------------')	#60個
+
 print("python讀寫CSV檔 13")
+
+import csv
+
+data = [
+    ['姓名', '身高', '體重'],
+    ['王小明', 174, 56],
+    ['林小華', 185, 80],
+    ['陳小強', 168, 60] ]
+
+with open('p-data.csv', 'w', encoding='utf-8', newline='') as fp:
+    csvwriter = csv.writer(fp)
+    csvwriter.writerows(data)
+    
+print("done")
+
+import csv
+
+data = [
+    ['王小明', 174, 56],
+    ['林小華', 185, 80],
+    ['陳小強', 168, 60] ]
+
+with open('p-data2.csv', 'w', encoding='utf-8', newline='') as fp:
+    csvwriter = csv.writer(fp)
+    csvwriter.writerow(['姓名', '身高', '體重'])
+    csvwriter.writerows(data)
+print("done")
+        
+print('------------------------------------------------------------')	#60個
+
 
 
 

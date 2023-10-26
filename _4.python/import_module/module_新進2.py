@@ -25,33 +25,6 @@ ean.save('ean13_barcode')
 
 print('------------------------------------------------------------')	#60個
 
-print('qrcode：qrcode產生器')
-
-import qrcode
-import qrcode.image.svg
-
-text = '港町十三番地'
-#存png檔
-img = qrcode.make(text)
-img.save('my_qrcode.png')
-#存svg檔
-img = qrcode.make(text, image_factory=qrcode.image.svg.SvgPathImage)
-img.save('my_qrcode.svg')
-
-
-qr = qrcode.QRCode(
-    error_correction=qrcode.constants.ERROR_CORRECT_L,
-    box_size=10,
-    border=4,
-)
-qr.add_data(text)
-qr.make(fit=True)
-img = qr.make_image(fill_color="red", back_color="blue")
-img.save('my_qrcode2.png')
-
-
-print('------------------------------------------------------------')	#60個
-
 """
 print('schedule：定時執行任務')
 
@@ -133,22 +106,6 @@ print(dist.compute(x1, y1, x2, y2))
 
 print('------------------------------------------------------------')	#60個
 
-
-import math
-
-r = 6371                        # 地球半徑
-x1, y1 = 22.2838, 114.1731      # 香港紅磡車站經緯度
-x2, y2 = 25.0452, 121.5168      # 台北車站經緯度
-
-d = 6371*math.acos(math.sin(math.radians(x1))*math.sin(math.radians(x2))+
-                   math.cos(math.radians(x1))*math.cos(math.radians(x2))*
-                   math.cos(math.radians(y1-y2)))
-
-print("distance = ", d)
-
-
-
-print('------------------------------------------------------------')	#60個
 
 print('verifyid：驗證身分證字號')
 

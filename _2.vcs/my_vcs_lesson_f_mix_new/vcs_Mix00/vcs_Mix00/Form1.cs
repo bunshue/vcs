@@ -1058,25 +1058,192 @@ namespace vcs_Mix00
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //tmp1
+            //建立StringBuilder物件
+            StringBuilder strb = new StringBuilder();
+            Console.WriteLine("預設容量：{0}", strb.Capacity);
 
+            //使用 Append()方法附加字串
+            strb.Append(
+                "Never put off until tomorrow what you can do today.");
+            Console.WriteLine("字串長度：{0}，總容量：{1}",
+                strb.Length, strb.Capacity);
+            strb.AppendLine("\n");
+            Console.WriteLine("在字串尾端加入換行字元後");
+            Console.WriteLine("字串長度：{0}，總容量：{1}",
+            strb.Length, strb.Capacity);
+
+            strb.AppendLine(
+                "It is a wonderful English proverb.");
+            Console.WriteLine("在字串尾端加入另一個字串後: ");
+            Console.WriteLine("字串長度：{0}，總容量：{1}",
+            strb.Length, strb.Capacity);
+
+            Console.WriteLine("原來字串 -- {0}", strb);
+
+            //Remove()方法
+            string text = "English";//欲移除字串
+            //取得欲刪除字串的索引編號
+            int index = strb.ToString().IndexOf(text);
+            if (index >= 0)
+                strb.Remove(index, text.Length);
+            Console.WriteLine("變更後字串 -- {0}", strb);
+            Console.WriteLine("文件不存在！");
+
+
+            //** 日期時間輸出
+
+            Console.WriteLine(String.Format("{0:dddd, MMM d yyyy}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:HH:mm:ss}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:D}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:hh:mm:ss tt}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:T}", DateTime.Now));
+            Console.WriteLine(String.Format("{0:h:m:s}", DateTime.Now));
+
+            //** 自訂格式化輸出
+            Console.WriteLine(String.Format("{0:##,##0.00}", 8567.1));
+            Console.WriteLine(String.Format("{0:###0.00}", 566.7));
+            Console.WriteLine(String.Format("{0:0.00%}", 8));
+
+
+
+        }
+
+        static string reverse(string str)
+        {
+            char[] temp;
+            string strR = "";
+            int i;
+            temp = str.ToCharArray();
+            for (i = temp.Length - 1; i >= 0; i--)
+                strR += temp[i];
+            return strR;
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
+            string str;
+            str = "abcdefghijk";
+            richTextBox1.Text += "經反轉後的字串內容：" + reverse(str) + "\n";
+        }
+
+        static void hanoi(int n, int p1, int p2, int p3)
+        {
+            if (n == 1)
+                Console.WriteLine("盤子從 " + p1 + " 移到 " + p3);
+            else
+            {
+                hanoi(n - 1, p1, p3, p2);
+                Console.WriteLine("盤子從 " + p1 + " 移到 " + p3);
+                hanoi(n - 1, p2, p1, p3);
+            }
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            int N = 5;
+            richTextBox1.Text += "請輸入盤子數量：" + N.ToString() + "\n";
+            hanoi(N, 1, 2, 3);
+        }
+
+        class Book
+        {
+            public int books; //宣告books為公用變數
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
+            Book eng = new Book();
+            eng.books = 10;
+            Console.WriteLine("目前英文類書籍共有{0}本", eng.books);
 
+
+        }
+
+        static int top = -1;
+
+        public static void Push(int[] stack, int MAX, int val)
+        {
+            if (top >= MAX - 1)
+                Console.WriteLine("[堆疊已經滿了]");
+            else
+            {
+                top++;
+                stack[top] = val;
+            }
+        }
+
+        public static int Pop(int[] stack)
+        {
+            if (top < 0)
+                Console.WriteLine("[堆疊已經空了]");
+            else
+                top--;
+            return stack[top];
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
+            int[] card = new int[52];
+            int[] stack = new int[52];
+            int i, j, k = 0, test;
+            char ascVal = 'H';
+            int style;
+            Random intRnd = new Random();
+            for (i = 0; i < 52; i++)
+                card[i] = i;
+            Console.WriteLine("[洗牌中...請稍後!]");
+            while (k < 30)
+            {
+                for (i = 0; i < 51; i++)
+                {
+                    for (j = i + 1; j < 52; j++)
+                    {
+                        if ((intRnd.Next(10000) % 52) == 2)
+                        {
+                            test = card[i];//洗牌
+                            card[i] = card[j];
+                            card[j] = test;
+                        }
+                    }
 
+                }
+                k++;
+            }
+            i = 0;
+            while (i != 52)
+            {
+                Push(stack, 52, card[i]);  //將52張牌推入堆疊
+                i++;
+            }
+            Console.WriteLine("[逆時針發牌]");
+            Console.WriteLine("[顯示各家牌子]\n 東家\t  北家\t   西家\t    南家");
+            Console.WriteLine("=================================");
+            while (top >= 0)
+            {
+                style = stack[top] / 13;   //計算牌子花色
+                switch (style)          //牌子花色圖示對應
+                {
+                    case 0:             //梅花
+                        ascVal = 'C';
+                        break;
+                    case 1:             //方塊
+                        ascVal = 'D';
+                        break;
+                    case 2:             //紅心
+                        ascVal = 'H';
+                        break;
+                    case 3:             //黑桃
+                        ascVal = 'S';
+                        break;
+                }
+                Console.WriteLine("[" + ascVal + (stack[top] % 13 + 1) + "]");
+                Console.WriteLine('\t');
+                if (top % 4 == 0)
+                    Console.WriteLine();
+                top--;
+            }
+            //ReadKey();
         }
 
         private void button29_Click(object sender, EventArgs e)

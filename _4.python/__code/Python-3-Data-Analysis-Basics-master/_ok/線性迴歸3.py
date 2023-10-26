@@ -48,19 +48,14 @@ xx = np.array([3, 9, 8, 1, 2])
 yy = np.array([1, 3, 9, 2, 4])
 
 #目前 xx 是個 5 維向量。
-
 print(xx.shape)
 
-
 #用 reshape 改成 5×1 的矩陣。
-
 xx = xx.reshape(len(xx), 1)
 
 #正式轉我們的訓練資料
-
 x_train = x_train.reshape(len(x_train),1)
 x_test = x_test.reshape(len(x_test), 1)
-
 
 #接著進入 AI 建模三部曲。
 #step 1. 開一台「線性迴歸機」
@@ -75,41 +70,29 @@ regr.fit(x_train, y_train)
 LinearRegression()
 
 #step 3. predict 預測
-
 y_pred = regr.predict(x_test)
-
 
 plt.plot(x_test.ravel(), y_pred, 'r')
 plt.scatter(x_test.ravel(), y_test)
 plt.show()
-
 
 #計算分數
 from sklearn.metrics import mean_squared_error, r2_score
 mse_t = mean_squared_error(y_train, regr.predict(x_train))
 r2_t = r2_score(y_train, regr.predict(x_train))
 
-
 print('訓練資料')
 print('MSE =', mse_t)
 print("R2 =", r2_t)
 
-
 mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
-
 
 print("測試資料")
 print(f"MSE = {mse:.4f}")
 print(f"R2 = {r2:.4f}")
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 

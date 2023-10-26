@@ -23,15 +23,17 @@ print('------------------------------------------------------------')	#60個
 #我們可以指定把我們資料分成幾類, 然後它就會快速分好!
 
 #生成任意 N 點
-N = 100
-x = np.random.rand(N, 2)
+N = 10
+x = np.random.rand(N, 2)    #N X 2 亂數陣列
 
-plt.scatter(x[:, 0], x[:, 1], s = 50)
-#plt.scatter(x[:, 0], x[:, 1], cmap='Paired') fail
+print(x.shape)
+print(x)
+#plt.scatter(x[:, 0], x[:, 1], s = 50)
+plt.scatter(x[:, 0], x[:, 1], cmap='Paired')
 plt.title('原始資料')
 plt.show()
 
-#step1製做一個 K-Means 分類器
+#step1 : 製做一個 K-Means 分類器
 #和 SVM 很像。
 
 from sklearn.cluster import KMeans
@@ -40,10 +42,11 @@ from sklearn.cluster import KMeans
 
 clf = KMeans(n_clusters = 3)
 
-#step2學習訓練
+#step2 : 學習訓練
 clf.fit(x)
 
-#step3預測
+#step3 : 預測
+
 #訓練好的結果, 在神秘的 labels_ 之下。
 Z = clf.labels_
 print('訓練好的結果1 :')
@@ -73,14 +76,13 @@ plt.show()
 
 from sklearn.cluster import MeanShift
 
-#step 1. 打開 MeanShift 函數學習機
+#step1 : 打開 MeanShift 函數學習機
 clf = MeanShift(bandwidth = 0.2)
 
-#step 2. fit 學習、訓練
+#step2 : fit 學習、訓練
 clf.fit(x)
 
-#step 3. predict
-
+#step3 : predict
 
 x0 = y0 = np.arange(-0.2, 1.2, 0.02)
 xm, ym = np.meshgrid(x0, y0)
@@ -88,8 +90,8 @@ xm, ym = np.meshgrid(x0, y0)
 P = np.c_[xm.ravel(), ym.ravel()]
 z = clf.predict(P)
 Z = z.reshape(xm.shape)
-plt.scatter(x[:,0], x[:,1], c=clf.labels_, cmap='Paired')
-plt.contourf(xm, ym, Z, alpha = 0.3, cmap="Paired")
+plt.scatter(x[:, 0], x[:, 1], c = clf.labels_, cmap = 'Paired')
+plt.contourf(xm, ym, Z, alpha = 0.3, cmap = "Paired")
 plt.title('使用Mean Shift')
 plt.show()
 
@@ -105,7 +107,7 @@ def my_mean_shift(b = 0.2):
     P = np.c_[xm.ravel(), ym.ravel()]
     z = clf.predict(P)
     Z = z.reshape(xm.shape)
-    plt.scatter(x[:, 0], x[:, 1], c = clf.labels_, cmap="Paired")
+    plt.scatter(x[:, 0], x[:, 1], c = clf.labels_, cmap = "Paired")
     plt.contourf(xm, ym, Z, alpha = 0.3, cmap = "Paired")
 
 my_mean_shift(0.2)
@@ -118,7 +120,7 @@ gd = np.array([[i, j] for i in np.arange(-4, 4, 0.4)
                for j in np.arange(-3, 3, 0.4)])
 gdc = clf.predict(gd)
 
-plt.scatter(gd[:, 0], gd[:, 1], s = 50, cmap=plt.cm.coolwarm, c=gdc)
+plt.scatter(gd[:, 0], gd[:, 1], s = 50, cmap = plt.cm.coolwarm, c = gdc)
 plt.title('訓練好的結果2')
 plt.show()
 
@@ -127,22 +129,17 @@ plt.title('訓練好的結果3')
 plt.show()
 
 plt.scatter(gd[:, 0], gd[:, 1], s = 50, cmap = plt.cm.Set1, c = gdc)
-
 plt.title('訓練好的結果4')
 plt.show()
-
 
 #畫完整分類
 #和以前一樣, 未來新的資料進來, 我們訓練好的也可以再做分類。
 
 x1, x2 = np.meshgrid(np.arange(-0.2, 1.2, 0.02), np.arange(-0.2, 1.2, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
-
 z = Z.reshape(x1.shape)
-
 plt.contourf(x1, x2, z, alpha = 0.3)
 plt.scatter(x[:, 0], x[:, 1], s = 100, c = clf.labels_)
-
 plt.title('畫完整分類')
 plt.show()
 
@@ -160,12 +157,7 @@ print(clf2.predict([[3,4]]))
 
 f.close()
 
-
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
 
 """
 4. K-Means 是神奇的自動分類機
@@ -177,15 +169,12 @@ print('------------------------------------------------------------')	#60個
 
 #生成任意 N 點
 N = 100
-x = np.random.randn(N, 2)
+x = np.random.randn(N, 2)   #N X 2 常態亂數陣列
 
 #看一下我們的資料。
 plt.scatter(x[:, 0], x[:, 1], s = 50)
 plt.title('原始資料')
 plt.show()
-
-sys.exit()
-
 
 #到現在我們有點熟了, 就是要把 KMeans 函數學習機找來。
 
@@ -199,20 +188,16 @@ clf = KMeans(n_clusters = 3)
 
 clf.fit(x)
 
-
 #分類好的結果 KMeans 會神秘的放在 clf.labels_
-
 print(clf.labels_)
 
-
-#看一眼分類結果。
-
+#畫出分類結果
 plt.scatter(x[:, 0], x[:, 1], c = clf.labels_)
+plt.title('分類結果')
 plt.show()
 
 
 #看來還不錯! 我們仿之前 SVC 中介紹的畫法, 看 KMeans 到底怎麼分的。
-
 x1, y1 = np.meshgrid(np.arange(-3, 3, 0.02), np.arange(-4, 4, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), y1.ravel()])
 Z = Z.reshape(x1.shape)

@@ -57,17 +57,6 @@ files.close()
 
 print('------------------------------------------------------------')	#60個
 
-#pip install qrcode
-
-import qrcode
-
-encode_text = 'https://google.com'
-
-img = qrcode.make(encode_text)
-
-type(img)
-
-img.show()
 
 
 

@@ -1879,13 +1879,151 @@ print(', '.join(rolls), end='')
 '''
 
 print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+#位元運算子綜合應用
+x = 12; y = 8
+print(x & y)  
+print(x ^ y)   
+print(x | y)  
+print(~x)
+
+print('------------------------------------------------------------')	#60個
+
+word = ["holiday", "happy", "birth",
+             "yesterday", "holiday", "car",
+             "yellow", "happy", "mobile",
+             "cup", "happy", "holiday",
+             "holiday", "desk", "birth",
+             ]
+print("holiday 出現的次數", word.count("holiday"))
+
+print('------------------------------------------------------------')	#60個
+
+word = ["holiday", "happy", "birth",
+             "yesterday", "holiday", "car",
+             "yellow", "happy", "mobile",
+             "cup", "happy", "holiday",
+             "holiday", "desk", "birth",
+             ]
+search_str="yellow"
+print("單字 %s 第一次出現的索引值%d" %(search_str,word.index(search_str)))
+
+print('------------------------------------------------------------')	#60個
+
+info = [['C程式設計','朱大峰','480'],
+        ['Python程式設計','吳志明','500'],
+        ['Java程式設計','許伯如','540']]
+
+for(book, author,price) in info:
+    print('%10s %3s'%(book,author),' 書籍訂價:',price)
+
+
+info = [['C程式設計','朱大峰','480'],
+        ['Python程式設計','吳志明','500'],
+        ['Java程式設計','許伯如','540']]
+
+for(book, author,price) in info:
+    print('%10s %3s'%(book,author),' 書籍訂價:',price)
+
+str1 = '淡泊以明志，寧靜以致遠'
+print('原字串', str1)
+print('欄寬20，字串置中', str1.center(20))
+print('字串置中，# 填補', str1.center(20, '#'))
+print('欄寬20，字串靠左', str1.ljust(20, '@'))
+print('欄寬20，字串靠右', str1.rjust(20, '!'))
+
+mobilephone = '931828736'
+print('字串左側補0:', mobilephone.zfill(10))
+
+str2 = 'Time create hero.,I love my family.'
+print('以逗點分割字元', str2.partition(','))
+
+str3 = '忠孝\n仁愛\n信義\n和平'
+print('依\\n分割字串', str3.splitlines(False))
+
+
+print('------------------------------------------------------------')	#60個
+
+result = lambda x : 3*x-1  #lambda()函數
+print(result(3)) #輸出數值8
+
+print('------------------------------------------------------------')	#60個
+
+def formula(x, y): #自訂函數
+    return 3*x+2*y
+
+formula = lambda x, y : 3*x+2*y  #表示lambda有二個參數
+print(formula (5,10)) ##傳入兩個數值讓lambda()函數做運算，輸出數值35
+
+result = lambda x : 3*x-1  #lambda()函數
+print(result(3)) #輸出數值8
+
+def formula(x, y): #自訂函數
+    return 3*x+2*y
+
+formula = lambda x, y : 3*x+2*y  #表示lambda有二個參數
+print(formula (5,10)) ##傳入兩個數值讓lambda()函數做運算，輸出數值35
+
+print('------------------------------------------------------------')	#60個
+
+str1="I love python."
+print("原字串內容: ",str1)
+print("轉換成串列: ",list(str1))
+print("轉換成值組: ",tuple(str1))
+print("字串長度: ",len(str1))
+
+list1=[8,23,54,33,12,98]
+print("原串列內容: ",list1)
+print("串列中最大值: ",max(list1))
+print("串列中最小值: ",min(list1))
+
+relist=reversed(list1)#反轉串列
+for i in relist: #將反轉後的串列內容依序印出
+    print(i,end=' ')
+print()#換行
+print("串列所有元素總和: ",sum(list1))#印出總和
+print("串列元素由小到大排序: ",sorted(list1))
+
+print('------------------------------------------------------------')	#60個
+
+print('int(8.4)=',int(8.4))
+print('bin(14)=',bin(14))
+print('hex(84)=',hex(84))
+print('oct(124)=',oct(124))
+print('float(6)=',float(6))
+print('abs(-6.4)=',abs(-6.4))
+print('divmod(58,5)=',divmod(58,5))
+print('pow(3,4)=',pow(3,4))
+print('round(3.5)=',round(3.5))
+print('chr(68)=',chr(68))
+print('ord(\'%s\')=%d' %('A',ord('A')))
+print('str(1234)=',str(1234))
+print('sorted([5,7,1,8,9])=',sorted([5,7,1,8,9]))
+print('max(4,6,7,12,3)=',max(4,6,7,12,3))
+print('min(4,6,7,12,3)=',min(4,6,7,12,3))
+print('len([5,7,1,8,9])=',len([5,7,1,8,9]))
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
 
 try:
     import a_python_module
 except ImportError:
     print('匯入模組 a_python_module 失敗')
     print('請安裝模組')
-    sys.exit()
+    #sys.exit()
 
 
 print('------------------------------------------------------------')	#60個
@@ -1911,16 +2049,6 @@ print('------------------------------------------------------------')	#60個
             useUpper = not useUpper  # Flip the case.
 """
 
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
 
 
 

@@ -132,11 +132,9 @@ plt.scatter(X[:,0], X[:,1], s = 50, c = Y, alpha = 0.6)
 plt.title('花瓣 原始資料')
 plt.show()
 
-
 #試著用我們學過的方式, 看能不能做出一個分類器函數, 來把鳶尾花正確分類!
 
 #準備 inputs 和 outputs
-
 x = iris.data
 y = iris.target
 
@@ -152,7 +150,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y,
                                                     random_state = 87)
 
 #看一下整筆數據的分佈。
-plt.scatter(X[:,0], X[:,1], c = Y, cmap = 'Paired')
+plt.scatter(X[:, 0], X[:, 1], c = Y, cmap = 'Paired')
 plt.title('花瓣 原始資料')
 plt.show()
 
@@ -191,7 +189,6 @@ plt.title('看最後預測結果')
 plt.show()
 
 
-
 #現在我們做的是讓平面上密密麻麻的點都去看它會是哪種鳶尾花的數據。
 
 x1, y1 = np.meshgrid(np.arange(0,7,0.02), np.arange(0,3,0.02))
@@ -212,16 +209,16 @@ Z = Z.reshape(x1.shape)
 
 #於是我們終於可以畫圖了...
 
-plt.scatter(x_test[:,0], x_test[:,1], c=y_test)
-plt.contourf(x1,y1,Z,alpha=0.3)
+plt.scatter(x_test[:, 0], x_test[:, 1], c = y_test)
+plt.contourf(x1, y1, Z, alpha = 0.3)
 plt.show()
 
 
 #這是測試資料, 之前我們已經知道我們全對!
 #不如就來看看所有鳶尾花資料我們 SVC 的表現。
 
-plt.scatter(X[:,0], X[:,1], c=Y)
-plt.contourf(x1,y1,Z,alpha=0.3)
+plt.scatter(X[:, 0], X[:, 1], c = Y)
+plt.contourf(x1, y1, Z, alpha = 0.3)
 plt.show()
 
 #在測試資料中是全對!! 我們畫圖來看看整體表現如何?
@@ -252,21 +249,21 @@ plt.scatter(X[:, 0], X[:, 1], c = Y)
 plt.show()
 
 #畫出結果
-x1, x2 = np.meshgrid(np.arange(0,7,0.02), np.arange(0,3,0.02))
+x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 Z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, Z, alpha=0.3)
-plt.scatter(X[:,0], X[:,1], c=Y)
+plt.contourf(x1, x2, Z, alpha = 0.3)
+plt.scatter(X[:, 0], X[:, 1], c = Y)
 plt.show()
 
-x1, x2 = np.meshgrid(np.arange(0,7,0.02), np.arange(0,3,0.02))
-xx = [1,2,3,4]
-yy = [5,6,7,8]
+x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
+xx = [1, 2, 3, 4]
+yy = [5, 6, 7, 8]
 np.c_[xx, yy]
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 Z = Z.reshape(x1.shape)
-plt.contourf(x1, x2, Z, cmap=plt.cm.coolwarm, alpha=0.8)
-plt.scatter(X[:,0], X[:,1], c=Y)
+plt.contourf(x1, x2, Z, cmap = plt.cm.coolwarm, alpha = 0.8)
+plt.scatter(X[:, 0], X[:, 1], c = Y)
 plt.title('更炫的畫圖法')
 plt.show()
 
@@ -288,7 +285,7 @@ plt.show()
 
 #畫出結果
 
-x1, x2 = np.meshgrid(np.arange(0,7, 0.02), np.arange(0,3, 0.02))
+x1, x2 = np.meshgrid(np.arange(0, 7, 0.02), np.arange(0, 3, 0.02))
 Z = clf.predict(np.c_[x1.ravel(), x2.ravel()])
 Z = Z.reshape(x1.shape)
 plt.contourf(x1, x2, Z, alpha = 0.3)
@@ -307,35 +304,31 @@ iris = load_iris()
 x = iris.data[:, :2]
 y = iris.target
 
-plt.scatter(x[:,0], x[:,1], s=50, c=y)
+plt.scatter(x[:, 0], x[:, 1], s = 50, c = y)
 plt.title('原圖')
 plt.show()
 
 from sklearn.svm import SVC
 clf = SVC()
-clf.fit(x,y)
+clf.fit(x, y)
 clf.predict(x)
 clf.predict(x) - y
-gd = np.array([[i,j] for i in np.arange(4,8,0.2) for j in np.arange(1.8,4.5,0.2)])
+gd = np.array([[i, j] for i in np.arange(4, 8, 0.2) for j in np.arange(1.8, 4.5, 0.2)])
 gdc = clf.predict(gd)
-plt.scatter(gd[:,0], gd[:,1], s=50, c=gdc)
+plt.scatter(gd[:, 0], gd[:, 1], s = 50, c = gdc)
 plt.title('SVM結果')
 plt.show()
-
 
 #呈現學習成果
 #學出來的用比較透明的顏色, 真實資料用 100% 不透明。
 
-gd = np.array([[i,j] for i in np.arange(4,8,0.1) for j in np.arange(1.8,4.5,0.1)])
+gd = np.array([[i, j] for i in np.arange(4, 8, 0.1) for j in np.arange(1.8, 4.5, 0.1)])
 gdc = clf.predict(gd)
-plt.scatter(gd[:,0], gd[:,1], s=50, c=gdc, alpha=0.4)
-plt.scatter(x[:,0], x[:,1], s=50, c=y)
+plt.scatter(gd[:, 0], gd[:, 1], s = 50, c = gdc, alpha = 0.4)
+plt.scatter(x[:, 0], x[:, 1], s = 50, c = y)
 
 plt.title('SVM結果2')
 plt.show()
-
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

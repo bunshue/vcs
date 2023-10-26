@@ -8,22 +8,6 @@ import numpy as np
 
 print('------------------------------------------------------------')	#60個
 
-x = np.array( [[40, 70, 25], [75, 80, 65], [80, 90, 100]])
-
-print(x.shape)
-print(x)
-
-y = x.reshape(1, 9)
-print(y.shape)
-print(y)
-
-y = x.ravel()
-print(y.shape)
-print(y)
-
-x = [1, 2, 3, 4, 5, 6]
-print(x)
-
 
 
 print('------------------------------------------------------------')	#60個

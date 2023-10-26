@@ -96,34 +96,6 @@ roc_auc_score(y, probas[:, 1])
 
 print('------------------------------------------------------------')	#60個
 
-print('回帰問題における評価方法')
-
-"""
-from sklearn.datasets import load_boston
-data = load_boston()
-X = data.data[:, [5,]]
-y = data.target
-
-from sklearn.linear_model import LinearRegression
-model_lir = LinearRegression()
-model_lir.fit(X, y)
-y_pred = model_lir.predict(X)
-
-print(model_lir.coef_)
-print(model_lir.intercept_)
-
-
-import matplotlib.pyplot as plt
-fig, ax = plt.subplots()
-ax.scatter(X, y, color='pink', marker='s', label='data set')
-ax.plot(X, y_pred, color='blue', label='regression curve')
-ax.legend()
-plt.show()
-"""
-
-
-print('------------------------------------------------------------')	#60個
-
 print('平均二乗誤差')
 
 from sklearn.metrics import mean_squared_error

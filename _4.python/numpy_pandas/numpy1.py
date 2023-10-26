@@ -45,7 +45,7 @@ print('cos(x) =', y2)
 print('tan(x) =', y3)
 print('sinc(x) =', y4)
 
-x1 = np.linspace(0, 10, num=11)     # 使用linspace()產生陣列
+x1 = np.linspace(0, 10, num = 11)     # 使用linspace()產生陣列
 print(type(x1), x1)
 
 x2 = np.arange(0, 11, 1)              # 使用arange()產生陣列
@@ -81,6 +81,7 @@ print('------------------------------------------------------------')	#60個
 
 print('numpy 統計函數')
 
+#串列
 data = [
     37, 24, 6, 51, 83, 28, 51, 58, 82, 95,
     83, 6, 42, 53, 98, 6, 90, 4, 59, 87,
@@ -239,14 +240,14 @@ print(na)
 
 print('------------------------------------------------------------')	#60個
 
-a = np.array(range(10))
-b = a.reshape(5, 2)
-print(b.dtype)
-print(b.size)
-print(b.shape)
-print(b.itemsize)
-print(b.ndim)
-print(b.nbytes)
+na = np.array(range(10))
+na = na.reshape(5, 2)
+print(na.dtype)
+print(na.size)
+print(na.shape)
+print(na.itemsize)
+print(na.ndim)
+print(na.nbytes)
 
 print('------------------------------------------------------------')	#60個
 
@@ -343,7 +344,7 @@ print('創建數組 Linspace')
 #end:结束
 #Num:要生成的样本数，默认为50。
 
-na = np.linspace(10,100,10) 
+na = np.linspace(10, 100, 10) 
 print(na)
 
 print('創建數組 Arange')
@@ -351,26 +352,26 @@ print('創建數組 Arange')
 #np.arange(start, stop, step, dtype = None)
 #step:数值步长。
 
-na = np.arange(5,10,2) 
+na = np.arange(5, 10, 2)
 print(na)
 
 print('創建數組 Uniform')
 #np.uniform(low = 0.0, high = 1.0, size = None)
 #在上下限之间的均匀分布中生成随机样本。
 
-na = np.random.uniform(5,10,size = 4) 
+na = np.random.uniform(5, 10, size = 4)
 print(na)
  
-na = np.random.uniform(size = 5) 
+na = np.random.uniform(size = 5)
 print(na)
  
-na = np.random.uniform(size = (2,3)) 
+na = np.random.uniform(size = (2, 3))
 print(na)
 
 print('創建數組 Random.randint')
 #在一个范围内生成n个随机整数样本。
 #np.random.randint(low, high = None, size = None, dtype = int)
-na = np.random.randint(5,10,10) 
+na = np.random.randint(5, 10, 10)
 print(na)
 
 print('創建數組 Random.random')
@@ -389,7 +390,7 @@ print('創建數組 Logspace')
 #endpoint:如果为True，最后一个样本将包含在序列中。
 #base:底数。默认是10。
 
-na = np.logspace(0,10,5,base=2) 
+na = np.logspace(0, 10, 5,base = 2)
 print(na)
 
 print('創建數組 zeroes')
@@ -399,7 +400,7 @@ print('創建數組 zeroes')
 #shape:阵列的形状。
 #Dtype:生成数组所需的数据类型。' int '或默认' float '
 
-na = np.zeros((2,3),dtype='int') 
+na = np.zeros((2, 3), dtype = 'int') 
 print(na)
 
 na = np.zeros(5) 
@@ -409,7 +410,7 @@ print('創建數組 ones')
 #np.ones函数创建一个全部为1的数组。
 #np.ones(shape, dtype = None, order = 'C')
 
-na = np.ones((3,4)) 
+na = np.ones((3, 4))
 print(na)
 
 print('創建數組 full')
@@ -417,7 +418,7 @@ print('創建數組 full')
 #np.full(shape, fill_value, dtype = None)
 #fill_value:填充值。
 
-na = np.full((2,4),fill_value=2) 
+na = np.full((2, 4), fill_value = 2)
 print(na)
 
 print('創建數組 Identity')
@@ -454,7 +455,7 @@ print('unique 返回一个所有唯一元素排序的数组。')
 
 #axis:要操作的轴。默认情况下，数组被认为是扁平的。
 
-na = np.unique(arr,return_counts=True)
+na = np.unique(arr, return_counts = True)
 print(na)
 
 print('mean 返回数组的平均数')
@@ -497,33 +498,32 @@ Compares 5.4 to 4, here 3<=x so Put 4
 print('reshape 它是NumPy中最常用的函数之一。它返回一个数组，其中包含具有新形状的相同数据。')
 #np.reshape(shape)
 
-A = np.random.randint(15,size=(4,3)) 
+A = np.random.randint(15, size = (4, 3))
 print(A)
  
-na = A.reshape(3,4) 
+na = A.reshape(3, 4)
 print(na)
 
-na = A.reshape(-1)   
+na = A.reshape(-1)
 print(na)
 
 print('expand_dims 它用于扩展数组的维度。')
 #np.expand_dims(a, axis)
 print('串列 轉 numpy陣列')
-arr = np.array([ 8, 14,  1,  8, 11,  4,  9,  4, 1, 13, 13, 11]) 
-na = np.expand_dims(A,axis=0) 
+arr = np.array([8, 14, 1, 8, 11, 4, 9, 4, 1, 13, 13, 11])
+na = np.expand_dims(A, axis = 0)
 print(na)
 
-na = np.expand_dims(A,axis=1) 
+na = np.expand_dims(A, axis = 1)
 print(na)
 
 print('squeeze 通过移除一个单一维度来降低数组的维度。')
 #np.squeeze(a, axis = None)
 
 print('串列 轉 numpy陣列')
-arr = np.array([[ 8],[14],[ 1],[ 8],[11],[ 4],[ 9],[ 4],[ 1],[13],[13],[11]]) 
+arr = np.array([[8], [14], [1], [8], [11], [4], [9], [4], [1], [13], [13], [11]]) 
 na = np.squeeze(arr)
 print(na)
-
 
 print('count_nonzero 计算所有非零元素并返回它们的计数。')
 #np.count_nonzero(a, axis = None, ...)
@@ -573,26 +573,26 @@ print('round 将浮点值四舍五入到指定数目的小数点。')
 #np.round(a, decimals = 0, out = None)
 #decimals:要保留的小数点的个数。
 
-na = np.random.random(size=(3,4)) 
-print(na) 
- 
-na = np.round(a,decimals=0) 
+na = np.random.random(size = (3, 4))
 print(na)
 
-na = np.round(a,decimals=1) 
+na = np.round(a,decimals = 0)
+print(na)
+
+na = np.round(a,decimals = 1)
 print(na)
 
 print('clip 它可以将数组的裁剪值保持在一个范围内。')
 
 print('串列 轉 numpy陣列')
 arr = np.array([0, 1, -3, -4, 5, 6, 7, 2, 3]) 
-na = arr.clip(0,5) 
+na = arr.clip(0, 5)
 print(na)
 
-na = arr.clip(0,3) 
+na = arr.clip(0, 3)
 print(na)
 
-na = arr.clip(3,5) 
+na = arr.clip(3, 5)
 print(na)
 
 print('替换数组中的值 where put copyto')
@@ -601,13 +601,13 @@ print('where 返回满足条件的数组元素。')
 #np.where(condition, [x, y])
 #condition:匹配的条件。如果true则返回x，否则y。
 
-na = np.arange(12).reshape(4,3) 
+na = np.arange(12).reshape(4, 3)
 print(na)
 
-na = np.where(a>5)      ## Get The Index 
+na = np.where(a > 5)      ## Get The Index
 print(na)
  
-na = a[np.where(a>5)]  ## Get Values 
+na = a[np.where(a > 5)]  ## Get Values
 print(na)
 
 #它还可以用来替换pandas df中的元素。
@@ -681,14 +681,14 @@ np.union1d(a,b)
 print('水平分割 Hsplit函数将数据水平分割为n个相等的部分。')
 print('二維串列 轉 numpy陣列')
 A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]]) 
-np.hsplit(A,2)    ## splits the data into two equal parts 
+np.hsplit(A, 2)    ## splits the data into two equal parts 
  
-np.hsplit(A,4)    ## splits the data into four equal parts 
+np.hsplit(A, 4)    ## splits the data into four equal parts 
 
 print('垂直分割 Vsplit将数据垂直分割为n个相等的部分。')
 print('二維串列 轉 numpy陣列')
 A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]]) 
-np.vsplit(A,2) 
+np.vsplit(A, 2) 
 
 #数组叠加
 
@@ -738,44 +738,44 @@ print(na)
 
 #让我们来看一个更实际的示例，我们有一个包含按年数量销售的数据集。
 
-fruits = pd.DataFrame([ 
-    ['Mango',40], 
-    ['Apple',90], 
-    ['Banana',130] 
-],columns=['Product','ContainerSales']) 
+fruits = pd.DataFrame([
+    ['Mango', 40],
+    ['Apple', 90],
+    ['Banana', 130]
+    ],columns=['Product','ContainerSales'])
 print(fruits)
 
 #在数据集中，缺少年份列。我们尝试使用numpy添加它。
 
-fruits['year'] = np.repeat(2020,fruits.shape[0]) 
+fruits['year'] = np.repeat(2020, fruits.shape[0])
 print(fruits)
 
 print('tile 通过重复A，rep次来构造一个数组。')
 #np.tile(A, reps)
 
-na = np.tile("Ram",5)
+na = np.tile("Ram", 5)
 print(na)
  
-na = np.tile(3,(2,3)) 
+na = np.tile(3, (2, 3))
 print(na)
 
 #爱因斯坦求和
 
 print('einsum 此函数用于计算数组上的多维和线性代数运算。')
 
-a = np.arange(1,10).reshape(3,3) 
-b = np.arange(21,30).reshape(3,3) 
+a = np.arange(1, 10).reshape(3, 3)
+b = np.arange(21, 30).reshape(3, 3)
  
-na = np.einsum('ii->i',a) 
+na = np.einsum('ii->i', a)
 print(na)
 
-na = np.einsum('ji',a) 
+na = np.einsum('ji', a)
 print(na)
 
-na = np.einsum('ij,jk',a,b) 
+na = np.einsum('ij,jk', a, b)
 print(na)
 
-na = np.einsum('ii',a) 
+na = np.einsum('ii', a)
 print(na)
 
 #统计分析
@@ -783,8 +783,8 @@ print(na)
 print('直方图 这是Numpy的重要统计分析函数，可计算一组数据的直方图值。')
 
 print('二維串列 轉 numpy陣列')
-A = np.array([[3, 4, 5, 2], 
-              [6, 7, 2, 6]]) 
+A = np.array([[3, 4, 5, 2],
+              [6, 7, 2, 6]])
 na = np.histogram(A) 
 print(na)
 
@@ -794,13 +794,13 @@ print('百分位数 沿指定轴计算数据的Q-T-T百分位数。')
 #q:要计算的百分位。
 #overwrite_input:如果为true，则允许输入数组修改中间计算以节省内存。
 print('二維串列 轉 numpy陣列')
-a = np.array([[2, 4, 6], [4, 8, 12]]) 
-na = np.percentile(a, 50) 
+a = np.array([[2, 4, 6], [4, 8, 12]])
+na = np.percentile(a, 50)
 print(na)
-na = np.percentile(a, 10) 
-print(na) 
-arr = np.array([2,3,4,1,6,7]) 
-na = np.percentile(a,5) 
+na = np.percentile(a, 10)
+print(na)
+arr = np.array([2, 3, 4, 1, 6, 7])
+na = np.percentile(a, 5)
 print(na)
 
 print('标准偏差和方差 std和var是NumPy的两个函数，用于计算沿轴的标准偏差和方差。')
@@ -1035,11 +1035,45 @@ arr = np.asarray([
   ])
 
 print(type(arr)) # <class 'numpy.ndarray'>
-np.savetxt('output_data1.csv', arr, delimiter=',')
-np.savetxt('output_data2.csv', arr, delimiter=',', fmt='%d')
-np.savetxt('output_data3.csv', arr, delimiter=',', fmt='%.2f')
+np.savetxt('output_data1.csv', arr, delimiter = ',')
+np.savetxt('output_data2.csv', arr, delimiter = ',', fmt = '%d')
+np.savetxt('output_data3.csv', arr, delimiter = ',', fmt = '%.2f')
 
 print('------------------------------------------------------------')	#60個
 
+
+x = np.array( [[40, 70, 25], [75, 80, 65], [80, 90, 100]])
+
+print(x.shape)
+print(x)
+
+y = x.reshape(1, 9)
+print(y.shape)
+print(y)
+
+y = x.ravel()
+print(y.shape)
+print(y)
+
+x = [1, 2, 3, 4, 5, 6]
+print(x)
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('作業完成')
 
 
