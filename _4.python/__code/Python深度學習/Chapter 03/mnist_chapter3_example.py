@@ -1,11 +1,15 @@
-# -*- coding: utf-8 -*-
-
 from keras.datasets import mnist
 from keras.models import Sequential 
 from keras.layers.core import Dense, Activation
 from keras.utils import np_utils
 
-(X_train, Y_train), (X_test, Y_test) = mnist.load_data()
+#(X_train, Y_train), (X_test, Y_test) = mnist.load_data() 改成以下6行
+import numpy as np  
+path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
+mnist = np.load(path)  
+X_train, Y_train = mnist['x_train'], mnist['y_train']  
+X_test, Y_test = mnist['x_test'], mnist['y_test']  
+mnist.close()  
 
 X_train = X_train.reshape(60000, 784)     
 X_test = X_test.reshape(10000, 784)

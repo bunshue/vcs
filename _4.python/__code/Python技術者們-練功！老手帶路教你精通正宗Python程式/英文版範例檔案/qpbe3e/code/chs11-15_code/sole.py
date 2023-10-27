@@ -1,4 +1,3 @@
-Listing 13.2 File sole.py
 """sole module: contains functions sole, save, show"""
 import pickle
 _sole_mem_cache_d = {}

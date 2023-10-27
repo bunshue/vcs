@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+
 """n2w: number to words conversion module: contains function
    num2words. Can also be run as a script
 usage as a script: n2w num

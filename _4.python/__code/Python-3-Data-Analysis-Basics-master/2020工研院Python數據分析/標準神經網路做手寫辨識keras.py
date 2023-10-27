@@ -324,7 +324,35 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+""" 暫存
 
+import numpy as np
+import matplotlib.pyplot as plt
+from keras.datasets import mnist
+
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
+import numpy as np  
+path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
+mnist = np.load(path)  
+x_train, y_train = mnist['x_train'], mnist['y_train']  
+x_test, y_test = mnist['x_test'], mnist['y_test']  
+mnist.close()  
+
+x_train = x_train/255
+x_test = x_test/255
+
+from keras.utils import np_utils
+y_train = np_utils.to_categorical(y_train, 10)
+y_test = np_utils.to_categorical(y_test, 10)
+
+from keras.models import Sequential
+from keras.layers import Dense, Flatten
+from keras.optimizers import SGD
+model = Sequential()
+model.add(Flatten(input_shape=(28, 28)))
+model.add(Dense(20, activation='relu'))
+
+"""
 
 print('作業完成')
 
