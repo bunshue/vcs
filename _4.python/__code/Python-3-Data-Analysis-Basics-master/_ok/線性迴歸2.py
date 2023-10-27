@@ -68,10 +68,10 @@ print(X.shape)
 
 svr_lin.fit(X, y)
 
-Y = svr_lin.predict(X)
+y_pred = svr_lin.predict(X)
 
 plt.scatter(x, y)
-plt.plot(x, Y, 'r')
+plt.plot(x, y_pred, 'r')
 plt.plot(x, 1.2 * x + 0.8, 'lime')
 
 plt.title('SVR線性迴歸1')
@@ -102,14 +102,16 @@ regr = LinearRegression()
 
 X = x.reshape(len(x), 1)
 
+#step 2. fit 學習、訓練
 regr.fit(X, y)
 
 #LinearRegression(copy_X=True, fit_intercept=True, n_jobs=1, normalize=False)
 
-Y = regr.predict(X)
+#step 3. predict 預測
+y_pred = regr.predict(X)
 
 plt.scatter(x, y)
-plt.plot(x, Y, 'r')
+plt.plot(x, y_pred, 'r')
 plt.title('線性迴歸2')
 plt.show()
 
@@ -123,11 +125,31 @@ plt.show()
 #測試資料在「訓練」期電腦是沒看過的, 所以我們可以「考他」。
 #要把我們完整資料分測試、訓練很簡單, 因為 SciKit Learn 自己會幫我們做。指令叫 train_test_split (實在有夠白話)。
 
+"""
+分訓練資料、測試資料
+一般我們想要看算出來的逼近函數在預測上是不是可靠, 會把一些資料留給「測試」,
+就是不讓電腦在計算時「看到」這些測試資料。等函數學成了以後, 再來測試準不準確。這是我們可以用
+sklearn.model_selection 裡的 train_test_split 來亂數選一定百分比的資料來用。
+"""
+
 from sklearn.model_selection import train_test_split
 
 #把原來的 x, y 中的 80% 給 training data, 20% 給 testing data。
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 9487)
+x_train, x_test, y_train, y_test = train_test_split(x, y,
+                                                    test_size = 0.2,
+                                                    random_state = 9487)
+print(f"訓練資料有 {len(x_train)} 筆,")   # 80%
+print(f"測試資料有 {len(x_test)} 筆。")   # 20%
+
+xx = np.array([3, 9, 8, 1, 2])
+yy = np.array([1, 3, 9, 2, 4])
+
+#目前 xx 是個 5 維向量。
+print(xx.shape)
+
+#用 reshape 改成 5×1 的矩陣。
+xx = xx.reshape(len(xx), 1)
 
 """
 執行之後會回傳回四個 array, 分別是 x 的訓練、測試, y 的訓練測試。所以我們準備用
@@ -141,9 +163,6 @@ random_state=9487
 檢查訓練、測試資料是不是照我們的意思去分 (疑心病幹嘛那麼重)。
 """
 
-print(len(x_train)) # 80%
-print(len(x_test))  # 20%
-
 """
 再來很重要, 從現在到以後, 很多學函數的方法, 都要求我們訓練資料要排成一列一列的。也就說原本的
 [x1,x2,…,x80]
@@ -151,30 +170,52 @@ print(len(x_test))  # 20%
 [[x1],[x2],…,[x80]]
 好在我們學過 reshape, 這小事...
 """
-x_train = x_train.reshape(80, 1)
-x_test = x_test.reshape(20, 1)
+
+#正式轉我們的訓練資料
+x_train = x_train.reshape(len(x_train), 1)
+x_test = x_test.reshape(len(x_test), 1)
 
 #接下來就是召喚 LinearRegression 學習機了。
-
+#接著進入 AI 建模三部曲。
+#step 1. 開一台「線性迴歸機」
 from sklearn.linear_model import LinearRegression
 #從現在的線性迴歸, 到等一下的機器學習, 再到之後的神經網路。我們每一次其實就是先開一台空的「函數學習機」, 現在我們要開一台「迴歸機」。
-
 regr = LinearRegression()
 #因為線性迴歸實在太簡單, 通常也不太需要調校什麼, 我們就可以直接訓練了。訓練就用 fit, 然後把訓練資料餵進去...
 
+#step 2. fit 學習、訓練
 regr.fit(x_train, y_train)
 
 #然後就學完了!　我們來試用一下。因為我們的學數學習機喜歡一次吃很多資料一起告訴你答案, 所以就算只有一筆也要這樣下指令。
 print('打印一些結果')
 print(regr.predict([[1.3]]))
-print(regr.predict([[2.7],[1.5]]))
+print(regr.predict([[2.7], [1.5]]))
 
 #我們當然可以餵測試資料進去, 畢竟只有這些我們是有答案、但我們的學習機是還沒學過的。
-Y = regr.predict(x_test)
+#step 3. predict 預測
+y_pred = regr.predict(x_test)
+plt.plot(x_test, y_pred, 'r')
+#plt.plot(x_test.ravel(), y_pred, 'g')
 plt.scatter(x_test, y_test)
-plt.plot(x_test, Y, 'r')
+#plt.scatter(x_test.ravel(), y_test)
 plt.title('原始測試資料')
 plt.show()
+
+#計算分數
+from sklearn.metrics import mean_squared_error, r2_score
+mse_t = mean_squared_error(y_train, regr.predict(x_train))
+r2_t = r2_score(y_train, regr.predict(x_train))
+
+print('訓練資料')
+print('MSE =', mse_t)
+print("R2 =", r2_t)
+
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("測試資料")
+print(f"MSE = {mse:.4f}")
+print(f"R2 = {r2:.4f}")
 
 plt.scatter(x_train, y_train)
 plt.plot(x_train, regr.predict(x_train), 'r')
@@ -186,13 +227,11 @@ plt.scatter(x_train, y_train)   #原始訓練資料
 plt.title('原始訓練資料')
 plt.show()
 
-sys.exit()
-
 #用訓練資料來 fit 函數 方法一
 #記得現在我們只用 80% 的資料去訓練。
 
-svr_lin = SVR(kernel='linear', C=1e3)
-X_train = x_train.reshape(len(x_train),1)
+svr_lin = SVR(kernel = 'linear', C = 1e3)
+X_train = x_train.reshape(len(x_train), 1)
 svr_lin.fit(X_train,y_train)
 
 Y_train = svr_lin.predict(X_train)
@@ -205,13 +244,13 @@ plt.show()
 
 #用測試資料試試我們預測準不準
 
-X_test = x_test.reshape(len(x_test),1)
+X_test = x_test.reshape(len(x_test), 1)
 Y_test = svr_lin.predict(X_test)
-mse = np.sum((Y_test-y_test)**2) / len(y_test)
+mse = np.sum((Y_test - y_test) ** 2) / len(y_test)
 print('MSE =', mse)
 
 plt.scatter(x_test, y_test)
-plt.scatter(x_test, Y_test, c='r')
+plt.scatter(x_test, Y_test, c = 'r')
 plt.title('測試結果1')
 plt.show()
 
@@ -258,12 +297,14 @@ plt.show()
 
 #使用SVR
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1)
+x_train, x_test, y_train, y_test = train_test_split(x, y,
+                                                    test_size = 0.2,
+                                                    random_state = 1)
 
 #準備生這個函數
-svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.3)
-svr_lin = SVR(kernel='linear', C=1e3)
-svr_poly = SVR(kernel='poly', C=1e3, degree=4)
+svr_rbf = SVR(kernel = 'rbf', C = 1e3, gamma = 0.3)
+svr_lin = SVR(kernel = 'linear', C = 1e3)
+svr_poly = SVR(kernel = 'poly', C = 1e3, degree = 4)
 
 X_train = x_train.reshape(len(x_train), 1)
 
@@ -279,9 +320,9 @@ Y_lin = svr_lin.predict(X)
 Y_poly = svr_poly.predict(X)
 
 plt.scatter(x,y)
-plt.plot(x, Y_rbf, label='rbf')
-plt.plot(x, Y_lin, label='linear')
-plt.plot(x, Y_poly, label='polynomial')
+plt.plot(x, Y_rbf, label = 'rbf')
+plt.plot(x, Y_lin, label = 'linear')
+plt.plot(x, Y_poly, label = 'polynomial')
 
 plt.legend()
 plt.title('比較各種方法')
@@ -324,7 +365,7 @@ plt.show()
 #ϕi=e−∥x−ci∥2/2σ2
 
 def RBF(x, center, sigma):
-    k = np.exp(-(x - center)**2/(2*sigma**2))
+    k = np.exp(-(x - center) ** 2 / (2 * sigma ** 2))
     return k
 
 sigma = 0.3
@@ -368,14 +409,9 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-
-
 print('------------------------------------------------------------')	#60個
 
-
-
 print('------------------------------------------------------------')	#60個
-
 
 
 print('作業完成')

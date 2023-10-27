@@ -4,7 +4,7 @@
 
 
 
-'''
+"""
 #pip install openai
 
 import openai
@@ -26,12 +26,12 @@ response = openai.ChatCompletion.create(
 print('------------------------')
 print(response["choices"][0]["message"]["content"])
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
 
-'''
+"""
 import openai
 import os
 
@@ -68,10 +68,10 @@ while True:
     response = chat(prompt)
     print("ChatGPT  : " + response)
     prompt += response + "\n"
-'''
+"""
 
 
-
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -247,9 +247,61 @@ response = openai.ChatCompletion.create(
 answer = response.choices[0].message.content
 print(answer)
 
-
+"""
 
 print('------------------------------------------------------------')	#60個
+
+import openai
+
+openai.api_key = "你的 OpenAI API 金鑰"
+
+"""
+做 ChatGPT 方式非常簡單, 就是要用 ChatCompletion, 其中 create 就是正式送給某一個模型。
+這裡有兩個重點, 一個是 model 我們要選用的模型, 這裡用的是 gpt-3.5-turbo, 事實上就是 ChatGPT 一開始的標準版本。
+然後就是 messages 部份, 這裡就是這次聊天的過程中, 包括我們使用者輸入的, 還有之前 ChatGPT 的回應。
+可以看以下內容。後面的 content 比較容易理解, 那 role (角色) 是什麼意思呢? 我們來說明一下:
+    system: 給 ChatGPT 的「人設」。
+    user: 使用者輸入的東西。
+    assistant: ChatGPT 的回應。
+"""
+
+"""
+response = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+        {"role": "system", "content": "你是一個非常溫暖的對話機器人，回應都簡短，儘量不要超過二十個字，而且有同理心。"},
+        {"role": "user", "content": "我很難過"},
+        {"role": "assistant", "content": "很抱歉聽到你感到難過，可以跟我說說你正在遭遇什麼困難嗎？我們可以一起找尋解決問題的方式。"},
+        {"role": "user", "content": "Python程式都不會寫"}
+    ]
+)
+
+#再來就是看我們怎麼讀出 ChatGPT 的回應。
+
+print(response["choices"][0]["message"]["content"])
+
+
+"""
+
+#3. 打造可以一直聊下去的 ChatGPT!
+
+messages = [{"role": "system", "content": "你是一個非常溫暖的對話機器人，回應都簡短，儘量不要超過二十個字，而且有同理心。"}]
+
+while True:
+    prompt = input('> ')
+    if 'bye' in prompt:
+        print('再見, 下次再聊!')
+        break
+
+    messages.append({"role": "user", "content": prompt})
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages)
+
+    reply = response['choices'][0]['message']["content"]
+    print(chatbot + reply)
+    print()
+    messages.append({"role": "assistant", "content": reply})
 
 
 

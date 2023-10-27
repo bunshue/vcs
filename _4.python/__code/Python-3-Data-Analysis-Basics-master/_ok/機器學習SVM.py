@@ -69,16 +69,32 @@ plt.show()
 #是一個用曲線把資料分隔的辦法。
 #在高維度的時候自然就是曲面 (超曲面) 分隔資料的方法。
 
+step 1. 打造一個函數學習機
 from sklearn.svm import SVC
-
 clf = SVC() #打開一台機器, 就像打開「迴歸機一樣」。
 #clf = SVC(gamma = 'auto')
 
-#學習! 這樣就做完了!!
+step 2. 訓練     #學習! 這樣就做完了!!
 clf.fit(x, y)
 
-#預測結果
+step 3. 預測     #預測結果
 #先來看看我們之前用來學的有沒有做對, 你會發現用法和以前迴歸是完全一樣的。
+
+"""another
+
+Y_pred = clf.predict(X)
+
+#來看「答題狀況」。
+
+print(Y_pred == Y)
+
+#隨便丟幾組數據進去，看看模型是不是真的可以預測未知情況。
+
+print(clf.predict([[5.4, 8.7]]))
+print(clf.predict([[1, -10]]))
+
+"""
+
 
 print('原始 x 資料 :', x)
 print('原始 y 資料 :', y, '\t=> 目標')

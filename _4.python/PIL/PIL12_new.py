@@ -4,6 +4,41 @@ from PIL import Image   # Importing Image class from PIL module
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageDraw
+image = Image.new("RGB", (400, 300))
+draw = ImageDraw.Draw(image)
+draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
+plt.imshow(image)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageDraw
+image = Image.new("RGB", (400, 300), '#00FF00')
+draw = ImageDraw.Draw(image)
+draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
+plt.imshow(image)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image
+image = Image.open(filename)
+print('圖檔格式: ', image.format)
+print('圖檔的色彩模式: ', image.mode)
+print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
+print('圖片的寬度，單位像素(pixels): ', image.width)
+print('圖片的高度，單位像素(pixels): ', image.height)
+
 print('------------------------------------------------------------')	#60個
 
 from PIL import Image
@@ -44,34 +79,6 @@ image = Image.open(filename)
 pic = image.convert("1")
 plt.imshow(pic)
 plt.title('convert L')
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image
-image = Image.open(filename)
-print('圖檔格式: ', image.format)
-print('圖檔的色彩模式: ', image.mode)
-print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
-print('圖片的寬度，單位像素(pixels): ', image.width)
-print('圖片的高度，單位像素(pixels): ', image.height)
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageDraw
-image = Image.new("RGB", (400, 300))
-draw = ImageDraw.Draw(image)
-draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageDraw
-image = Image.new("RGB", (400, 300), '#00FF00')
-draw = ImageDraw.Draw(image)
-draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
-plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -125,9 +132,9 @@ print('------------------------------------------------------------')	#60個
 
 from PIL import Image, ImageDraw, ImageFont
 image = Image.open(filename)
-imfont = ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf", 120)
+imfont = ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf", 40)
 draw = ImageDraw.Draw(image)
-draw.text((100, 100), "Peony", font = imfont, fill = (0, 255, 255, 255))
+draw.text((100, 100), 'Peony', font = imfont, fill = (0, 255, 255, 255))
 plt.imshow(image)
 plt.show()
 
