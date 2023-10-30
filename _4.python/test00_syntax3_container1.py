@@ -36,7 +36,7 @@ Dictionary(字典)
 Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的語法是key: value，一個key對應一個value，key不一定要是字串，但必須是唯一的。
 
 """
-'''
+
 print('建立空容器')
 
 #字典
@@ -1200,8 +1200,6 @@ print('串列 llll SP-----------------------------------------------------------
 
 print('元組 tttt ST------------------------------------------------------------')	#60個
 
-
-
 print('元組')
 animals = ('鼠', '牛', '虎', '兔', '龍')
 print(type(animals))
@@ -1210,15 +1208,18 @@ print(animals)
 
 #animals[1] = '豬'  XXXX
 
+print('第1號動物 :')
 print(animals[1])
-print(animals[1:3])
+print('第1~3號動物 :')
+print(animals[1 : 3])
 
+print('虎 出現的次數 :')
 print(animals.count('虎'))
+print('虎 出現的索引位置 :')
 print(animals.index('虎'))
 
-#tuple 範例
-
 print('------------------------------------------------------------')	#60個
+
 animal = ('鼠', '牛', '虎', '兔', '龍')    # 定義元組元素是字串
 print(animal[1:3])
 print(animal[:2])
@@ -1390,9 +1391,6 @@ print('小動物 :', small_animal)
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
 animal_list = ['鼠', '牛', '虎', '兔', '龍'] #串列
 print('原 串列')
 print(animal_list)
@@ -1458,7 +1456,7 @@ import random
 import time
 
 print('set 和 list 速度比較')
-NUMBER_OF_ELEMENTS = 500
+NUMBER_OF_ELEMENTS = 15000
 
 # Create a list
 lst = list(range(NUMBER_OF_ELEMENTS))
@@ -1507,6 +1505,8 @@ print("\nTo remove", NUMBER_OF_ELEMENTS,
     "elements from the list\n",
     "The runtime is", runTime, "milliseconds")
 
+
+sys.exit()
 
 print('各種容器轉換 比較 SP------------------------------------------------------------')	#60個
 
@@ -1849,7 +1849,7 @@ cc = repr(x)
 print(type(cc))
 print(cc)
 
-'''
+
 print('------------------------------------------------------------')	#60個
 
 

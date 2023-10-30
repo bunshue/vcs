@@ -21,10 +21,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-import numpy as np
-import matplotlib.pyplot as plt
-
-
 """
 2-2 讀入 MNIST 數據庫
 
@@ -38,14 +34,16 @@ MNIST 可以說是 Deep Learning 最有名的範例, 它被 Deep Learning 大師
 Keras 很貼心的幫我們準備好 MNIST 數據庫, 我們可以這樣讀進來 (第一次要花點時間)。
 http://yann.lecun.com/exdb/mnist/
 
+用tensorflow讀入 MNSIT 數據集
+from tensorflow.keras.datasets import mnist
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
 """
 
 #1. 讀入 MNSIT 數據集
-
 from keras.datasets import mnist
 
 #(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
-import numpy as np  
 path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
 mnist = np.load(path)  
 x_train, y_train = mnist['x_train'], mnist['y_train']  
@@ -71,7 +69,6 @@ print('訓練資料y長度 :', len(y_train))
 print('測試資料x長度 :', len(x_test))
 print('測試資料y長度 :', len(y_test))
 
-
 """
 2.2.2 數據庫的內容
 
@@ -79,17 +76,24 @@ print('測試資料y長度 :', len(y_test))
 而輸出 (y) 當然就是「正確答案」。我們來看看編號 87 的訓練資料。
 """
 
+fig = plt.figure(figsize = (10, 10))
+for i in range(100):
+    ax = plt.subplot2grid((10, 10), (int(i / 10), int(i % 10)))
+    ax.imshow(x_train[i], cmap = plt.cm.gray)
+    ax.axis('off')
+plt.suptitle('畫前100筆資料')
+plt.show()
+
 #編號87的訓練資料
 X = x_train[87]
-print('shape :', X.shape)
 
 #因為是圖檔, 當然可以顯示出來!
 plt.imshow(X, cmap = 'Greys')
 plt.title('編號87的訓練資料')
 plt.show()
 
+print('編號87的測試資料 的 shape :', X.shape)
 print('編號87的測試資料 :', y_train[87], '(目標)')
-
 
 """
 2.2.3 輸入格式整理
@@ -106,6 +110,20 @@ print('測試資料 x_test.shape =', x_test.shape)
 #我們做一下 normalization, 把所有的數字都改為 0 到 1 之間。
 x_train = x_train / 255
 x_test = x_test / 255
+
+"""
+x_train = x_train/255
+x_test = x_test/255
+x_train.shape
+#(60000, 28, 28)
+#28*28 = 784
+x_train = x_train.reshape(60000, 784)
+x_test = x_test.reshape(10000, 784)
+from tensorflow.keras.utils import to_categorical
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+y_train[9487]
+"""
 
 """
 2.2.4 輸出格式整理
@@ -304,34 +322,15 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 """ 暫存
 
-import numpy as np
-import matplotlib.pyplot as plt
 from keras.datasets import mnist
 
 #(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
-import numpy as np  
 path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
 mnist = np.load(path)  
 x_train, y_train = mnist['x_train'], mnist['y_train']  
@@ -353,6 +352,134 @@ model.add(Flatten(input_shape=(28, 28)))
 model.add(Dense(20, activation='relu'))
 
 """
+
+
+print('使用TensorFlow')
+
+
+"""
+標準 神經網路 做手寫辨識
+
+Keras 可以用各種不同的深度學習套件當底層, 指定用 Tensorflow 以確保執行的一致性。
+
+%env KERAS_BACKEND=tensorflow
+
+"""
+
+# 讀入 Tensorflow, 其實我們沒用到, 玩爽的而已。
+
+import tensorflow as tf
+
+#1. 讀入 MNSIT 數據集
+
+#from tensorflow.keras.datasets import mnist
+#(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+#1. 讀入 MNSIT 數據集
+#from keras.datasets import mnist
+
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
+path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
+mnist = np.load(path)  
+x_train, y_train = mnist['x_train'], mnist['y_train']  
+x_test, y_test = mnist['x_test'], mnist['y_test']  
+mnist.close()  
+
+
+
+
+
+#2. 欣賞數據集內容
+
+len(x_train)
+
+#60000
+
+len(x_test)
+
+#10000
+
+n = 9487
+
+x_train[n]
+
+y_train[n]
+
+#1
+
+plt.imshow(x_train[n], cmap='Greys')
+
+
+#3. 資料整理
+
+#先看個範例, 因為 numpy 「廣播」的特性, 我們對 array 中所有數字要同除以一個數可瞬間完成!
+
+np.array([3, 78, 95, 99])/100
+
+#array([0.03, 0.78, 0.95, 0.99])
+
+#現在才是我們真的要做的, 這個動作叫 "normalization"。
+
+x_train = x_train/255
+
+x_test = x_test/255
+
+x_train.shape
+
+(60000, 28, 28)
+
+#28*28 = 784
+
+x_train = x_train.reshape(60000, 784)
+x_test = x_test.reshape(10000, 784)
+
+from tensorflow.keras.utils import to_categorical
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+y_train[9487]
+
+
+#打造神經網路
+
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import SGD
+
+model = Sequential()
+model.add(Dense(87, input_dim=784, activation='relu'))
+model.add(Dense(87, activation='relu'))
+model.add(Dense(10, activation='softmax'))
+
+#4. 組裝我們的神經網路
+
+model.compile(loss='mse', optimizer=SGD(lr=0.087), metrics=['accuracy'])
+
+model.summary()
+
+#784*87 + 87 = 68295
+
+#5. 訓練
+
+#model.fit(x_train, y_train, batch_size = 100, epochs = 20)
+#model.fit(x_train, y_train, batch_size = 1200, epochs = 1)
+model.fit(x_train, y_train, batch_size = 2400, epochs = 1)
+
+#6. 訓練成果
+
+#result = model.predict_classes(x_test) #old
+
+result = model.predict_step(x_test)
+
+n = 9999
+
+print('神經網路預測是:', result[n])
+
+plt.imshow(x_test[n].reshape(28,28), cmap='Greys')
+
+#神經網路預測是: 6
+
+
+
 
 print('作業完成')
 

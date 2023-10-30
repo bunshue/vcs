@@ -14,7 +14,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 #          編號                                     圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = '不使用subplot畫多圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -96,12 +96,12 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 import matplotlib.image as img
 from PIL import Image, ImageEnhance
 
-''' OK
+""" OK
 image1 = Image.open(filename)              # 開啟圖片
 
 # 顯示原圖
 plt.imshow(image1)                  # 在子圖表中繪製圖片
-'''
+"""
 
 plt.gcf().set_size_inches(12, 14)   #設定圖框大小
 
@@ -151,6 +151,9 @@ ax4.set_yticks([])
 
 plt.show()
 
+'''
+
+
 print('------------------------------------------------------------')	#60個
 
 foldername = 'C:/_git/vcs/_1.data/______test_files1/__pic/imagedata/'
@@ -163,7 +166,7 @@ def show_images_labels_predictions(images, labels, start_id, num = 10):
     if num > 25:
         num = 25 
     for i in range(0, num):
-        ax = plt.subplot(5,5, i + 1)
+        ax = plt.subplot(5, 5, i + 1)
         ax.imshow(images[start_id], cmap = 'binary')  #顯示黑白圖片
         title = 'label = ' + str(labels[start_id])
         ax.set_title(title, fontsize = 12)
@@ -173,17 +176,18 @@ def show_images_labels_predictions(images, labels, start_id, num = 10):
         start_id += 1 
     plt.show()
     
-files = glob.glob(foldername+'*.jpg')  #建立測試資料
-test_feature=[]
-test_label=[]
+files = glob.glob(foldername + '*.jpg')  #建立測試資料
+test_feature = []
+test_label = []
 for file in files:
     img = cv2.imread(file)	#讀取本機圖片
-    img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  #灰階    
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  #灰階    
     _, img = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY_INV) #轉為反相黑白 
     test_feature.append(img)
-    label=file[54:55]  #"imagedata\1.jpg"第10個字元1為label
+    label=file[54 : 55]  #"imagedata\1.jpg"第10個字元1為label
     test_label.append(int(label))
-   
+
+print(test_label)
 show_images_labels_predictions(test_feature, test_label, 0, len(test_feature))
 
 print('------------------------------------------------------------')	#60個

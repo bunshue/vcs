@@ -3,41 +3,41 @@
 #get_feature_names_out
 
 import os
-import sys
 import time
-import random
-
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-import matplotlib
-
-print('------------------------------------------------------------')	#60個
-
-import numpy as np
 import pandas as pd
 import random
-import matplotlib.pyplot as plt
 import seaborn as sns
 import matplotlib as mpl
 
+import sys
+import matplotlib.pyplot as plt
+import numpy as np
+import math
 
-x = np.array([i*np.pi/180 for i in range(60,300,4)])
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+x = np.array([i * np.pi / 180 for i in range(60, 300, 4)])
 np.random.seed(10)  #Setting seed for reproducability
-y = np.sin(x) + np.random.normal(0,0.15,len(x))
-data = pd.DataFrame(np.column_stack([x,y]),columns=['x','y'])
+y = np.sin(x) + np.random.normal(0, 0.15, len(x))
+data = pd.DataFrame(np.column_stack([x, y]), columns = ['x', 'y'])
 data.head(10)
-plt.scatter(data['x'],data['y'],s=30)
+plt.scatter(data['x'], data['y'], s = 30)
 
 plt.show()
 
-for i in range(2,16):  
+for i in range(2, 16):
     colname = 'x_%d'%i      
     data[colname] = data['x'] ** i
 
 tt = data.head()
 print(tt)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -45,9 +45,9 @@ from sklearn.linear_model import LinearRegression
 
 def linear_regression(data, power, models_to_plot):
     #initialize predictors:
-    predictors=['x']
-    if power>=2:
-        predictors.extend(['x_%d'%i for i in range(2,power+1)])
+    predictors = ['x']
+    if power >= 2:
+        predictors.extend(['x_%d'%i for i in range(2, power + 1)])
     
     #Fit the model
     #linreg = LinearRegression(normalize=True)
@@ -56,7 +56,7 @@ def linear_regression(data, power, models_to_plot):
     y_pred = linreg.predict(data[predictors])
     
     #Return the result in pre-defined format
-    rss = sum((y_pred-data['y'])**2)
+    rss = sum((y_pred-data['y']) ** 2)
     ret = [rss]
     ret.extend([linreg.intercept_])
     ret.extend(linreg.coef_)
@@ -65,20 +65,18 @@ def linear_regression(data, power, models_to_plot):
     if power in models_to_plot:
         plt.subplot(models_to_plot[power])
         plt.tight_layout()
-        plt.plot(data['x'],y_pred,lw=3)
-        plt.plot(data['x'],data['y'],'.')
-        plt.title('Plot for power: %d , RSS: %.2f'% (power,rss))
-    
+        plt.plot(data['x'], y_pred, lw = 3)
+        plt.plot(data['x'], data['y'], '.')
+        plt.title('Plot for power: %d , RSS: %.2f' % (power, rss))
     
     return ret
 
-
-plt.rcParams['figure.figsize'] = 18,9
+plt.rcParams['figure.figsize'] = 18, 9
 
 #Initialize a dataframe to store the results:
-col = ['rss','intercept'] + ['coef_x_%d'%i for i in range(1,16)]
-ind = ['model_pow_%d'%i for i in range(1,16)]
-coef_matrix_simple = pd.DataFrame(index=ind, columns=col)
+col = ['rss','intercept'] + ['coef_x_%d' % i for i in range(1, 16)]
+ind = ['model_pow_%d' % i for i in range(1, 16)]
+coef_matrix_simple = pd.DataFrame(index = ind, columns = col)
 
 #Define the powers for which a plot is required:
 models_to_plot = {1:231,3:232,6:233,9:234,12:235,15:236}
@@ -267,15 +265,12 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 pca = decomposition.PCA()
 pca.fit(faces.data)
 
 print(pca.components_.shape)
 
-
 print('------------------------------------------------------------')	#60個
-
 
 fig = plt.figure(figsize=(10, 10))
 for i in range(10):
