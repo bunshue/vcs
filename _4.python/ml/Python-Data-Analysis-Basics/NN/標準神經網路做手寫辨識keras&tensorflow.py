@@ -386,25 +386,17 @@ x_train, y_train = mnist['x_train'], mnist['y_train']
 x_test, y_test = mnist['x_test'], mnist['y_test']  
 mnist.close()  
 
-
-
-
-
 #2. 欣賞數據集內容
-
 len(x_train)
-
 #60000
 
 len(x_test)
-
 #10000
 
 n = 9487
 
-x_train[n]
-
-y_train[n]
+print(x_train[n])
+print(y_train[n])
 
 #1
 

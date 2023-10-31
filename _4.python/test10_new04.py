@@ -3,19 +3,8 @@ import sys
 import time
 import random
 
-
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-#3-4-1 datetime 物件
 import datetime as dt
 
 x = dt.datetime(2020, 10, 22)
@@ -232,54 +221,27 @@ print([[x, y] for x in a for y in b])
 
 print('------------------------------------------------------------')	#60個
 
-print('defaultdict 容器')
-from collections import defaultdict
 
-lst = ['foo', 'bar', 'pop', 'foo', 'bar', 'foo']
-
-d = defaultdict(int)
-
-for item in lst:
-    d[item] += 1
-
-print(d)
-
-from collections import defaultdict
-
-prices = [
-  ['apple', 50],
-  ['banana', 120],
-  ['grape', 500],
-  ['apple', 70],
-  ['banana', 150],
-  ['banana', 700]
-]
-
-fruits = defaultdict(list)
-
-for name, price in prices:
-    fruits[name].append(price)
-
-for name, prices in fruits.items():
-    print(name, prices)
 
 print('------------------------------------------------------------')	#60個
 
 
-#4-4-2 Counter 容器
-
-from collections import Counter
-
-lst = ['foo', 'bar', 'pop', 'foo', 'bar', 'foo']
-
-c = Counter(lst)
-
-print(c)
-
-for item, counter in c.items():
-    print(item, '出現', counter, '次')
-
-print('出現最多次的項目:', c.most_common(1))
 
 print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
 

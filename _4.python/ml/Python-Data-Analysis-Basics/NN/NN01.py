@@ -18,19 +18,19 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.datasets import mnist
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
+path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
+mnist = np.load(path)  
+x_train, y_train = mnist['x_train'], mnist['y_train']  
+x_test, y_test = mnist['x_test'], mnist['y_test']  
+mnist.close()  
 
-x_train = x_train/255
-x_test = x_test/255
+x_train = x_train / 255
+x_test = x_test / 255
 
 from keras.utils import np_utils
 y_train = np_utils.to_categorical(y_train, 10)
@@ -41,23 +41,24 @@ from keras.layers import Dense, Flatten
 from keras.optimizers import SGD
 
 model = Sequential()
-model.add(Flatten(input_shape=(28, 28)))
-model.add(Dense(20, activation='relu'))
-model.add(Dense(80, activation='relu'))
-model.add(Dense(100, activation='relu'))
-model.add(Dense(160, activation='relu'))
-model.add(Dense(10, activation='softmax'))
-model.compile(loss='mse', optimizer=SGD(lr=0.087), metrics=['accuracy'])
+model.add(Flatten(input_shape = (28, 28)))
+model.add(Dense(20, activation = 'relu'))
+model.add(Dense(80, activation = 'relu'))
+model.add(Dense(100, activation = 'relu'))
+model.add(Dense(160, activation = 'relu'))
+model.add(Dense(10, activation = 'softmax'))
+model.compile(loss = 'mse', optimizer = SGD(learning_rate = 0.087), metrics = ['accuracy'])
 
-model.fit(x_train, y_train, batch_size=100, epochs=20)
+#model.fit(x_train, y_train, batch_size = 100, epochs = 20)
+model.fit(x_train, y_train, batch_size = 2000, epochs = 1)
 
 print(y_train[33])
 
-#array([0., 0., 0., 0., 0., 0., 0., 0., 0., 1.], dtype=float32)
+#array([0., 0., 0., 0., 0., 0., 0., 0., 0., 1.], dtype = float32)
 
 print(y_test[2])
 
-#array([0., 1., 0., 0., 0., 0., 0., 0., 0., 0.], dtype=float32)
+#array([0., 1., 0., 0., 0., 0., 0., 0., 0., 0.], dtype = float32)
 
 #Step 3 預測
 
@@ -66,12 +67,14 @@ print(model.predict(np.array([x_test[87]])))
 #array([3])
 
 #predict = model.predict_classes(x_test)
-#predict
+predict = model.predict_step(x_test)
+
+print(predict)
 
 #array([7, 2, 1, ..., 4, 5, 6])
 
 def test(測試編號):
-    plt.imshow(x_test[測試編號], cmap='Greys')
+    plt.imshow(x_test[測試編號], cmap = 'Greys')
     print('神經網路判斷為:', predict[測試編號])
 
 test(1287)

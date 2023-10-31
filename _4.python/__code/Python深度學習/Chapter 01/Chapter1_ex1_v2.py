@@ -1,3 +1,5 @@
+#MLPClassifier（多層感知器分類器）
+
 from sklearn.neural_network.multilayer_perceptron import MLPClassifier
 from sklearn import datasets
 from sklearn.metrics import accuracy_score 

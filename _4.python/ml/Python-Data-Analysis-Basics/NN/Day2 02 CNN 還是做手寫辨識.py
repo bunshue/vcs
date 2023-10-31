@@ -32,10 +32,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from tensorflow.keras.datasets import mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
+path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
+mnist = np.load(path)  
+x_train, y_train = mnist['x_train'], mnist['y_train']  
+x_test, y_test = mnist['x_test'], mnist['y_test']  
+mnist.close()  
 
 print(x_train.shape)
-
 #(60000, 28, 28)
 
 #Channel
@@ -151,7 +155,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from keras.datasets import mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
+path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
+mnist = np.load(path)  
+x_train, y_train = mnist['x_train'], mnist['y_train']  
+x_test, y_test = mnist['x_test'], mnist['y_test']  
+mnist.close()  
 
 """
 輸入格式整理

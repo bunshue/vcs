@@ -1,5 +1,8 @@
 import calendar
 
+print('------------------------------------------------------------')	#60個
+
+
 print(calendar.__file__)
 
 print("獲取某個月的日曆，返回字串型別")
@@ -77,16 +80,15 @@ print(calendar.calendar(year, w=2, l=1, c=6, m=3))
 for i in range(1,13):
     print(calendar.month_name[i])
 
-
 weeks = calendar.monthcalendar(year, month)
 print(weeks)
-
 
 print('------------------------------------------------------------')	#60個
 
 import calendar
-print(calendar.month(2018,10))
-print(calendar.calendar(2019))
+print(calendar.calendar(2023))
+
+print(calendar.month(2023, 10))
 
 print('------------------------------------------------------------')	#60個
 

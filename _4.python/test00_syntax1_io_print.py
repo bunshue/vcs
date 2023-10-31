@@ -14,6 +14,127 @@
 print('-' * 60)	#60個
 print('------------------------------------------------------------')	#60個
 
+yourName = input("What is your name? ")
+print("Hello " + yourName)
+
+print("歡迎光臨 Python")
+name = input('請問您的大名')
+print('Hi, %s.' % name)
+
+print("計算BMI")
+#height = float(input("請輸入你的身高"))
+height = 1.55
+print ("取得身高 %s "% height )
+
+#weight = float(input("請輸入你的體重"))
+weight = 52
+print ("取得體重 %s" % weight )
+
+#age = int(input("請輸入你的年齡"))
+age = 30
+print ("取得年齡 %s" % age )
+
+bmi = weight/(height*height);
+print ("你得 BMI 值%s" % bmi )
+
+print('------------------------------------------------------------')	#60個
+
+if age < 45:
+    if bmi < 22:
+        print("Low")
+    else:
+        print("Medium")
+else:
+    if bmi < 22:
+        print("Medium")
+    else:
+        print("High")
+
+print('------------------------------------------------------------')	#60個
+
+score = int(input("Please input your score:"))
+
+if score >= 60:
+    print("You pass the test, and your grade is", end="")
+    if score >= 90:
+        print("Grade A")
+    elif score >= 80:
+        print("Grade B")
+    elif score >= 70:
+        print("Grade C")
+    else:
+        print("Grade D")
+else:
+    print("You fail the test!")
+
+print('------------------------------------------------------------')	#60個
+
+score = int(input("Please input your score:"))
+
+if score >= 90:
+    print("Grade A")
+elif score >= 80:
+    print("Grade B")
+elif score >= 70:
+    print("Grade C")
+elif score >= 60:
+    print("Grade D")
+else:
+    print("You fail the test!")
+
+print('------------------------------------------------------------')	#60個
+
+age = int(input("請輸入你的年紀："))
+with_parent = input("和父母一起來嗎？(Y/N)")
+
+if age >= 18:
+  print("可以看限制級電影")
+elif age >= 12:
+  print("可以看輔導級電影")
+elif (age >= 6 and age < 12) and (with_parent == 'Y' or with_parent == 'y'):
+  print("可以看保護級電影")
+else:
+  print("只能看普遍級電影")
+
+print('------------------------------------------------------------')	#60個
+
+input("按任意鍵繼續")
+
+print('------------------------------------------------------------')	#60個
+
+'''
+money = int(input('請輸入購物金額：'))
+if money >= 10000:
+    if money >= 100000:
+        print(money * 0.8, end = ' 元\n')  #八折
+    elif money >= 50000:
+        print(money * 0.85, end = ' 元\n')  #八五折
+    elif money >= 30000:
+        print(money * 0.9, end = ' 元\n')  #九折
+    else:
+        print(money * 0.95, end = ' 元\n')  #九五折
+else:
+    print(money, end = ' 元\n')  #未打折
+    
+print('------------------------------------------------------------')	#60個    
+    
+n = int(input('請輸入大樓的樓層數：'))
+print('本大樓具有的樓層為：')
+if n > 3:
+    n += 1
+for i in range(1, n+1):
+    if i == 4:
+        continue
+    print(i, end = ' ')
+print()
+'''
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
 print('字符串格式化操作')
 print('My name is %s and weight is %d kg!' % ('David', 82) )
 #可用%c %s %d %u %x %X %f
@@ -779,6 +900,8 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
 
 
 
