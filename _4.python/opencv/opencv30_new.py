@@ -82,7 +82,6 @@ print(approx_hex)
 for i in range(len(approx_hex)):
     print(approx_hex[i])
 
-
 cv2.imshow('image', image) #顯示圖片
 
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
@@ -90,20 +89,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-
-#opencv
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-import matplotlib.pyplot as plt
-import cv2
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-#plt.imshow(image)#直接顯示 影像錯誤 因為opencv的imread讀出來是BGR排列
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))#先轉換成RGB再顯示
-
-
-plt.show()
 
 
 
