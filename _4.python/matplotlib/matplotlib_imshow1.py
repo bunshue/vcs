@@ -379,8 +379,7 @@ plt.title('多了margins設定 ')
 
 #第五~六張圖
 
-#x, y 承上
-
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
 xx, yy = np.meshgrid(x, x)
 zz = np.sinc(np.sqrt((xx - 1)**2 + (yy - 1)**2))
 
@@ -395,9 +394,7 @@ plt.imshow(zz)
 plt.margins(0.2)
 plt.title('margins(0.2)')
 
-
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -406,7 +403,6 @@ plt.figure(num = 'imshow 集合 5', figsize = (20, 15), dpi = 84, facecolor = "w
 
 #第一張圖
 plt.subplot(231)
-
 
 print('imshow 顯示 numpy 資料')
 plt.rcParams['savefig.facecolor'] = "0.8"

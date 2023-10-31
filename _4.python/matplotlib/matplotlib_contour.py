@@ -32,24 +32,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-'''
-
-N = 5
-x1, x2 = np.meshgrid(np.arange(-N, (N + 1), 1), np.arange(-N, (N + 1), 1))
-
-print(x1)
-print(x2)
-print(x1 * x2)
-print(x1 * x1 + x2 * x2)
-
-z = x1 * x1 + x2 * x2
-
-plt.contourf(x1, x2, z, alpha = 0.3)
-plt.grid()
-plt.show()
-'''
-print('------------------------------------------------------------')	#60個
-
 #下方的程式碼，執行後會先使用 x 和 y 畫出一個二維的直角座標系統，
 #接著 z 使用二維陣列，標記每個位置的高度，最後就會根據數據資料畫出等高線圖。
 
@@ -158,6 +140,34 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+xx, yy = np.meshgrid(x, x)
+zz = np.sinc(np.sqrt((xx - 3)**2 + (yy - 3)**2))
+plt.contourf(xx, yy, zz, alpha = 0.3)
+xmin, xmax, ymin, ymax = 0, 6, 0, 6
+plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
+plt.title('二維 sinc 函數')
+plt.grid()
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+N = 5
+x1, x2 = np.meshgrid(np.arange(-N, (N + 1), 1), np.arange(-N, (N + 1), 1))
+
+print(x1)
+print(x2)
+print(x1 * x2)
+print(x1 * x1 + x2 * x2)
+
+z = x1 * x1 + x2 * x2
+
+plt.contourf(x1, x2, z, alpha = 0.3)
+
+plt.title('函數 z = x^2 + y^2')
+plt.grid()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

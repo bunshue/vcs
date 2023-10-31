@@ -5,12 +5,13 @@ from sklearn import cluster, datasets
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns # nice color
+
 iris = datasets.load_iris()
 X = iris.data[:, :2] # use only 'sepal length and sepal width'
 y_iris = iris.target
 kmr = cluster.KMeans(n_clusters=3, random_state=42).fit(X)
 labels_r = kmr.predict(X)
-%matplotlib qt
+#%matplotlib qt
 
 nboot = 500
 orig_all = np.arange(X.shape[0])
@@ -35,3 +36,4 @@ plt.show()
 print(np.min(scores_boot), np.argmin(scores_boot))
 
 pd.Series(scores_boot).describe(percentiles=[.975, .5, .025])
+
