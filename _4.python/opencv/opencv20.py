@@ -1,7 +1,7 @@
+import sys
 import cv2
 import numpy as np
 
-import sys
 print('------------------------------------------------------------')	#60個
 
 print('用np建立一個影像陣列')
@@ -68,8 +68,6 @@ cv2.imshow("move",move)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

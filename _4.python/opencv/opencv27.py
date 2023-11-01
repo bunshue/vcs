@@ -6,7 +6,7 @@ print('------------------------------------------------------------')	#60個
 
 #輸出邊緣和結構信息
 
-image = cv2.imread('contours.bmp')
+image = cv2.imread('data/contours.bmp')
 print('顯示原圖')
 
 cv2.imshow("original", image)
@@ -21,7 +21,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('contours.bmp')
+image = cv2.imread('data/contours.bmp')
 print('顯示原圖')
 
 cv2.imshow("original", image)
@@ -42,9 +42,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('loc3.jpg')
+image = cv2.imread('data/loc3.jpg')
 print('顯示原圖')
-
 
 cv2.imshow("original", image)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -61,9 +60,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('moments.bmp')
+image = cv2.imread('data/moments.bmp')
 print('顯示原圖')
-
 
 cv2.imshow("original", image) 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  
@@ -88,7 +86,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('contours.bmp')
+image = cv2.imread('data/contours.bmp')
 print('顯示原圖')
 
 gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)  
@@ -117,7 +115,7 @@ print('------------------------------------------------------------')	#60個
 
 #篩選出大于特定大小的輪廓
 
-image = cv2.imread('contours.bmp')
+image = cv2.imread('data/contours.bmp')
 print('顯示原圖')
 
 cv2.imshow("original", image)
@@ -142,7 +140,7 @@ print('------------------------------------------------------------')	#60個
 #篩選出大于特定大小的輪廓
 
 #--------------讀取及顯示原始圖像--------------------
-image = cv2.imread('contours0.bmp')
+image = cv2.imread('data/contours0.bmp')
 print('顯示原圖')
 cv2.imshow("original", image)
 
@@ -177,7 +175,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('cs1.bmp')
+image = cv2.imread('data/cs1.bmp')
 print('顯示原圖')
 
 
@@ -196,14 +194,14 @@ print("\nHu[0]-(nu02+nu20)=",
 print('------------------------------------------------------------')	#60個
 
 #----------------計算圖像1的Hu矩-------------------
-image1 = cv2.imread('cs1.bmp')
+image1 = cv2.imread('data/cs1.bmp')
 print('顯示原圖')
 
 
 gray1 = cv2.cvtColor(image1,cv2.COLOR_BGR2GRAY)  
 HuM1=cv2.HuMoments(cv2.moments(gray1)).flatten()
 #----------------計算圖像2的Hu矩-------------------
-image2 = cv2.imread('cs3.bmp')
+image2 = cv2.imread('data/cs3.bmp')
 print('顯示原圖')
 
 
@@ -242,13 +240,13 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #--------------讀取3幅原始圖像--------------------
-image1 = cv2.imread('cs1.bmp')
+image1 = cv2.imread('data/cs1.bmp')
 print('顯示原圖')
 
-image2 = cv2.imread('cs2.bmp')
+image2 = cv2.imread('data/cs2.bmp')
 print('顯示原圖')
 
-image3 = cv2.imread('cc.bmp')
+image3 = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 
 #----------打印3幅原始圖像的shape屬性值-------------
@@ -278,7 +276,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #---------------讀取并顯示原始圖像------------------ 
-image = cv2.imread('cc.bmp')
+image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 
 
@@ -301,7 +299,7 @@ print("rect=",rect)
 print('------------------------------------------------------------')	#60個
 
 #---------------讀取并顯示原始圖像------------------
-image = cv2.imread('cc.bmp')
+image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 
 
@@ -326,7 +324,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #---------------讀取并顯示原始圖像------------------ 
-image = cv2.imread('cc.bmp')
+image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original", image)
 
@@ -347,7 +345,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('cc.bmp')
+image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 
 cv2.imshow("original", image)
@@ -367,7 +365,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('cc.bmp')
+image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original", image)
 
@@ -385,9 +383,8 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('cc.bmp')
+image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
-
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
@@ -403,10 +400,9 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('cc.bmp')
+image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original", image)
-
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
@@ -423,7 +419,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('cc.bmp')
+image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original", image)
 
@@ -445,7 +441,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #----------------讀取并顯示原始圖像-------------------------------
-image = cv2.imread('cc.bmp')
+image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original", image)
 
@@ -494,7 +490,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-image = cv2.imread('contours.bmp')
+image = cv2.imread('data/contours.bmp')
 print('顯示原圖')
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -509,15 +505,16 @@ print("returnPoints為False時返回值hull的值：\n",hull2)
 print('------------------------------------------------------------')	#60個
 
 # --------------讀取并繪制原始圖像------------------
-o = cv2.imread('hand.bmp')
+o = cv2.imread('data/hand.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 # --------------提取輪廓------------------
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
-ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
+
 # --------------尋找凸包，得到凸包的角點------------------
 hull = cv2.convexHull(contours[0])
 # --------------繪制凸包------------------
@@ -531,15 +528,15 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #----------------原圖--------------------------
-img = cv2.imread('hand.bmp')
+img = cv2.imread('data/hand.bmp')
 print('顯示原圖')
 cv2.imshow('original',img)
 #----------------構造輪廓--------------------------
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray, 127, 255,0)
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_TREE,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_TREE,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 #----------------凸包--------------------------
 cnt = contours[0]
 hull = cv2.convexHull(cnt,returnPoints = False)
@@ -561,14 +558,14 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('hand.bmp')
+o = cv2.imread('data/hand.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 #--------------凸包----------------------
 image1=o.copy()
 hull = cv2.convexHull(contours[0])
@@ -591,18 +588,21 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #----------------原始圖像-------------------------
-o = cv2.imread('cs.bmp')
+o = cv2.imread('data/cs.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 #----------------獲取凸包------------------------  
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 hull = cv2.convexHull(contours[0])
+
+""" fail
 image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
 cv2.polylines(image, [hull], True, (0, 255, 0), 2)
+
 #----------------內部點A的距離-------------------------
 distA = cv2.pointPolygonTest(hull, (300, 150), True)  
 font=cv2.FONT_HERSHEY_SIMPLEX
@@ -624,20 +624,21 @@ cv2.imshow("result",image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
+"""
 print('------------------------------------------------------------')	#60個
 
 #----------------原始圖像-------------------------
-o = cv2.imread('cs.bmp')
+o = cv2.imread('data/cs.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 #----------------獲取凸包------------------------ 
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 hull = cv2.convexHull(contours[0])
+""" fail
 image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
 cv2.polylines(image, [hull], True, (0, 255, 0), 2)
 #----------------內部點A與多邊形的關系-------------------------
@@ -661,41 +662,41 @@ cv2.imshow("result",image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-
+"""
 print('------------------------------------------------------------')	#60個
 
 #-----------原始圖像o1邊緣--------------------
-o1 = cv2.imread('cs.bmp')
+o1 = cv2.imread('data/cs.bmp')
 print('顯示原圖')
 cv2.imshow("original1",o1)
 
 gray1 = cv2.cvtColor(o1,cv2.COLOR_BGR2GRAY) 
 ret, binary1 = cv2.threshold(gray1,127,255,cv2.THRESH_BINARY) 
-image,contours1, hierarchy = cv2.findContours(binary1,
-                                              cv2.RETR_LIST,
-                                              cv2.CHAIN_APPROX_SIMPLE) 
+contours1, hierarchy = cv2.findContours(binary1,
+                                        cv2.RETR_LIST,
+                                        cv2.CHAIN_APPROX_SIMPLE) 
 cnt1 = contours1[0]
 #-----------原始圖像o2邊緣--------------------
-o2 = cv2.imread('cs3.bmp')
+o2 = cv2.imread('data/cs3.bmp')
 print('顯示原圖')
 cv2.imshow("original2",o2)
 
 gray2 = cv2.cvtColor(o2,cv2.COLOR_BGR2GRAY) 
 ret, binary2 = cv2.threshold(gray2,127,255,cv2.THRESH_BINARY) 
-image,contours2, hierarchy = cv2.findContours(binary2,
-                                              cv2.RETR_LIST,
-                                              cv2.CHAIN_APPROX_SIMPLE)  
+contours2, hierarchy = cv2.findContours(binary2,
+                                        cv2.RETR_LIST,
+                                        cv2.CHAIN_APPROX_SIMPLE)  
 cnt2 = contours2[0]
 #-----------原始圖像o3邊緣--------------------
-o3 = cv2.imread('hand.bmp')
+o3 = cv2.imread('data/hand.bmp')
 print('顯示原圖')
 cv2.imshow("original3",o3)
 
 gray3 = cv2.cvtColor(o3,cv2.COLOR_BGR2GRAY) 
 ret, binary3 = cv2.threshold(gray3,127,255,cv2.THRESH_BINARY) 
-image,contours3, hierarchy = cv2.findContours(binary3,
-                                              cv2.RETR_LIST,
-                                              cv2.CHAIN_APPROX_SIMPLE)  
+contours3, hierarchy = cv2.findContours(binary3,
+                                        cv2.RETR_LIST,
+                                        cv2.CHAIN_APPROX_SIMPLE)
 cnt3 = contours3[0]
 #-----------構造距離提取算子--------------------
 sd = cv2.createShapeContextDistanceExtractor()
@@ -714,13 +715,13 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #-----------讀取原始圖像--------------------
-o1 = cv2.imread('cs.bmp')
+o1 = cv2.imread('data/cs.bmp')
 print('顯示原圖')
 
-o2 = cv2.imread('cs3.bmp')
+o2 = cv2.imread('data/cs3.bmp')
 print('顯示原圖')
 
-o3 = cv2.imread('hand.bmp')
+o3 = cv2.imread('data/hand.bmp')
 print('顯示原圖')
 
 cv2.imshow("original1",o1)
@@ -735,15 +736,15 @@ ret, binary1 = cv2.threshold(gray1,127,255,cv2.THRESH_BINARY)
 ret, binary2 = cv2.threshold(gray2,127,255,cv2.THRESH_BINARY) 
 ret, binary3 = cv2.threshold(gray3,127,255,cv2.THRESH_BINARY) 
 #-----------提取輪廓--------------------
-image,contours1, hierarchy = cv2.findContours(binary1,
-                                              cv2.RETR_LIST,
-                                              cv2.CHAIN_APPROX_SIMPLE)  
-image,contours2, hierarchy = cv2.findContours(binary2,
-                                              cv2.RETR_LIST,
-                                              cv2.CHAIN_APPROX_SIMPLE)  
-image,contours3, hierarchy = cv2.findContours(binary3,
-                                              cv2.RETR_LIST,
-                                              cv2.CHAIN_APPROX_SIMPLE)  
+contours1, hierarchy = cv2.findContours(binary1,
+                                        cv2.RETR_LIST,
+                                        cv2.CHAIN_APPROX_SIMPLE)  
+contours2, hierarchy = cv2.findContours(binary2,
+                                        cv2.RETR_LIST,
+                                        cv2.CHAIN_APPROX_SIMPLE)  
+contours3, hierarchy = cv2.findContours(binary3,
+                                        cv2.RETR_LIST,
+                                        cv2.CHAIN_APPROX_SIMPLE)  
 cnt1 = contours1[0]
 cnt2 = contours2[0]
 cnt3 = contours3[0]
@@ -763,15 +764,15 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('cc.bmp')
+o = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 x,y,w,h = cv2.boundingRect(contours[0])
 cv2.rectangle(o,(x,y),(x+w,y+h),(255,255,255),3)
 aspectRatio = float(w)/h
@@ -783,15 +784,15 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('cc.bmp')
+o = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 x,y,w,h = cv2.boundingRect(contours[0])
 cv2.drawContours(o,contours[0],-1,(0,0,255),3) 
 cv2.rectangle(o,(x,y),(x+w,y+h),(255,0,0),3)
@@ -806,14 +807,15 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('hand.bmp')
+o = cv2.imread('data/hand.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
-
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 cv2.drawContours(o,contours[0],-1,(0,0,255),3) 
 cntArea=cv2.contourArea(contours[0])
 hull = cv2.convexHull(contours[0])
@@ -828,15 +830,15 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('cc.bmp')
+o = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 cv2.drawContours(o,contours[0],-1,(0,0,255),3) 
 cntArea=cv2.contourArea(contours[0])
 equiDiameter = np.sqrt(4*cntArea/np.pi)
@@ -849,15 +851,15 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('cc.bmp')
+o = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 ellipse = cv2.fitEllipse(contours[0])
 retval=cv2.fitEllipse(contours[0])
 print("單個返回值形式：")
@@ -895,15 +897,15 @@ print("a內非零值位置:\n",loc)
 print('------------------------------------------------------------')	#60個
 
 #-----------------讀取原始圖像----------------------
-o = cv2.imread('cc.bmp')
+o = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 #-----------------獲取輪廓------------------------
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 cnt=contours[0]
 #-----------------繪制空心輪廓------------------------
 mask1 = np.zeros(gray.shape,np.uint8)
@@ -945,15 +947,15 @@ print("a內非零值位置:\n",loc)
 print('------------------------------------------------------------')	#60個
 
 #-----------------讀取原始圖像----------------------
-o = cv2.imread('cc.bmp')
+o = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
 #-----------------獲取輪廓------------------------
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 cnt=contours[0]
 #-----------------繪制空心輪廓------------------------
 mask1 = np.zeros(gray.shape,np.uint8)
@@ -975,15 +977,15 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('ct.png')
+o = cv2.imread('data/ct.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 cnt=contours[2]   #coutours[0]、coutours[1]是左側字母R
 #--------使用掩膜獲取感興趣區域的最值-----------------
 #需要注意minMaxLoc處理的對象為灰度圖像，本例中處理對象為灰度圖像gray
@@ -1010,15 +1012,15 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 #--------讀取并顯示原始圖像-----------------
-o = cv2.imread('ct.png')
+o = cv2.imread('data/ct.png')
 print('顯示原圖')
 cv2.imshow("original",o)
 #--------獲取輪廓-----------------
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,
-                                             cv2.RETR_LIST,
-                                             cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 cnt=contours[2] 
 #--------使用掩膜獲取感興趣區域的均值----------------- 
 mask = np.zeros(gray.shape,np.uint8)#構造mean所使用的掩膜，必須是單通道的
@@ -1036,13 +1038,15 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('cs.bmp')
+o = cv2.imread('data/cs.bmp')
 print('顯示原圖')
 
 #--------獲取并繪制輪廓-----------------
 gray = cv2.cvtColor(o,cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)  
-image,contours, hierarchy = cv2.findContours(binary,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)  
+contours, hierarchy = cv2.findContours(binary,
+                                       cv2.RETR_LIST,
+                                       cv2.CHAIN_APPROX_SIMPLE)  
 mask = np.zeros(gray.shape,np.uint8)
 cnt=contours[0] 
 cv2.drawContours(mask,[cnt],0,255,-1)
@@ -1069,6 +1073,11 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
+
+print('作業完成')
+
+print('------------------------------------------------------------')	#60個
+
 
 
 

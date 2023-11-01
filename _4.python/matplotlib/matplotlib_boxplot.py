@@ -14,12 +14,12 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-'''
+
 N = 11
 y = np.arange(N)
-#y = np.random.randn(N)
+y = np.random.randn(N)
 print(y)
-y[3]=10
+#y[3]=10
 print(y)
 
 #盒鬚圖（Box plot）
@@ -27,10 +27,9 @@ plt.boxplot(y) #箱形圖  便於確認資料分布的視覺化方法
 
 plt.show()
 
-'''
+
 print('------------------------------------------------------------')	#60個
 
-'''
 x = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0,
      1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
      0, 0]
@@ -41,7 +40,7 @@ print(np.min(x))
 
 plt.boxplot(x)
 plt.show()
-'''
+
 
 #python numpy求四分位數
 	

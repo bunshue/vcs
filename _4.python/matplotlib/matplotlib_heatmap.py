@@ -75,17 +75,12 @@ listdata = [[ 1.,          0.91141626,  0.99267261,  0.99020915,  0.12721213,  0
 """
 
 ndarray2d = np.array(listdata)
+print(type(ndarray2d))
 print(ndarray2d)
 print('維度', ndarray2d.ndim)
 print('形狀', ndarray2d.shape)
 print('數量', ndarray2d.size)
 
-ndarray2d = np.array(listdata)
-print(type(ndarray2d))
-print(ndarray2d)
-
-print(type(ndarray2d))
-print(ndarray2d.shape)
 sns.heatmap(ndarray2d, cmap = 'Reds')
 #sns.heatmap(ndarray2d, cmap="coolwarm")
 #sns.heatmap(ndarray2d, annot = True)

@@ -3,11 +3,10 @@ opencv + numpy製作資料
 
 """
 
+import sys
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-
-import sys
 
 W = 300
 H = 300
@@ -329,33 +328,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-d = 400
-img = np.ones((d,d,3),dtype="uint8")*255
-#生成白色背景
-font=cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img,'OpenCV',(0,200),font, 3,(0,0,255),15)
-cv2.putText(img,'OpenCV',(0,200),font, 3,(0,255,0),5)
-cv2.imshow("demo19.7",img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-d = 400
-img = np.ones((d,d,3),dtype="uint8")*255
-#生成白色背景
-font=cv2.FONT_HERSHEY_SIMPLEX
-cv2.putText(img,'OpenCV',(0,150),font, 3,(0,0,255),15)
-cv2.putText(img,'OpenCV',(0,250),font, 3,(0,255,0),15,
-            cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,True)
-cv2.imshow("demo19.7",img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
 def Demo(event,x,y,flags,param):
     if event == cv2.EVENT_LBUTTONDOWN:
         print("單擊了鼠標左鍵")
@@ -398,6 +370,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
+""" fail
 def changeColor(x):
     r=cv2.getTrackbarPos('R','image')
     g=cv2.getTrackbarPos('G','image')
@@ -415,9 +388,11 @@ while(1):
         break   
 
 cv2.destroyAllWindows()
+"""
 
 print('------------------------------------------------------------')	#60個
 
+""" fail
 Type=0  #閾值處理類型值
 Value=0 #使用的閾值
 def onType(a):
@@ -444,6 +419,8 @@ cv2.createTrackbar(tValue, windowName,0, 255, onValue)
 
 if cv2.waitKey(0) == 27:  
     cv2.destroyAllWindows()
+
+"""
 
 print('------------------------------------------------------------')	#60個
 

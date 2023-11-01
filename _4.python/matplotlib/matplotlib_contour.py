@@ -35,24 +35,43 @@ print('------------------------------------------------------------')	#60個
 #下方的程式碼，執行後會先使用 x 和 y 畫出一個二維的直角座標系統，
 #接著 z 使用二維陣列，標記每個位置的高度，最後就會根據數據資料畫出等高線圖。
 
-x = np.linspace(-2, 2, 5)   # 產生從 -2～2 共 5個 的數值的 x
-y = np.linspace(-2, 2, 5)
+x = np.linspace(-3, 3, 7)   # 產生從 -3～3 共 7個 的數值的 x
+y = np.linspace(-3, 3, 7)
 #z 5 X 5
-z = [[9, 0, 0, 0, 9],
-     [0, 0, 0, 0, 0],
-     [0, 0, 9, 0, 0],
-     [0, 0, 0, 0, 0],
-     [9, 0, 0, 0, 9]]
+z = [[0, 0, 0, 0, 0, 0, 0],
+     [0, 9, 0, 9, 0, 9, 0],
+     [0, 0, 0, 0, 0, 0, 0],
+     [0, 0, 9, 0, 9, 0, 0],
+     [0, 0, 0, 0, 0, 0, 0],
+     [0, 0, 0, 9, 0, 0, 0],
+     [0, 0, 0, 0, 0, 0, 0]]
 
 print(x.shape)
 print(y.shape)
 
-plt.contour(x, y, z, levels = 10)
-plt.contour(x, y, z)
+plt.contour(x, y, z, levels = 10)   #10階
+#plt.contour(x, y, z)    #預設維6階
+plt.show()
+
+print('畫熱圖')
+ndarray2d = np.array(z)
+print(type(ndarray2d))
+print(ndarray2d.shape)
+print(ndarray2d)
+print('維度', ndarray2d.ndim)
+print('形狀', ndarray2d.shape)
+print('數量', ndarray2d.size)
+
+ndarray2d = np.array(z)
+
+import seaborn as sns #海生, 自動把圖畫得比較好看
+sns.heatmap(ndarray2d, cmap = 'Reds')
+#sns.heatmap(ndarray2d, cmap="coolwarm")
+#sns.heatmap(ndarray2d, annot = True)
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 
 #繪製更精緻的等高線圖
 #參考 matplotlib 官方網站的運算式，搭配 numpy 的 linspace 方法，就能做出更細緻的等高線圖。
@@ -60,12 +79,15 @@ print('------------------------------------------------------------')	#60個
 N = 200
 x = np.linspace(-3, 3, N)    # 產生從 -3～3 共 N個 的數值的 x
 y = np.linspace(-3, 3, N)    # 產生從 -3～3 共 N個 的數值的 y
-z = [[(1 - x[i]/2 + x[i]*3 + y[j]*5) * math.exp(-x[i]**2 - y[j]**2) for i in range(N)] for j in range(N)]
 
 # 根據 x 和 y 計算出 z
+z = [[(1 - x[i]/2 + x[i]*3 + y[j]*5) * math.exp(-x[i]**2 - y[j]**2) for i in range(N)] for j in range(N)]
+
 lv = np.linspace(np.min(z), np.max(z), 20)  # 根據 z 的最大值和最小值，定義 level 區間
-plt.figure(figsize=(8,6))
-plt.contour(x,y,z,levels=lv)
+print(lv)   #20階
+
+#plt.contour(x, y, z)    #預設階數
+plt.contour(x, y, z, levels = lv)  #20階
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -76,13 +98,13 @@ print('------------------------------------------------------------')	#60個
 #下方的程式碼執行後，會畫出等高線面積圖和等高線結合的圖表。
 
 N = 200
-x = np.linspace(-2, 2, N)
-y = np.linspace(-2, 2, N)
+x = np.linspace(-3, 3, N)
+y = np.linspace(-3, 3, N)
 z = [[(1 - x[i]/2 + x[i]*3 + y[j]*5) * math.exp(-x[i]**2 - y[j]**2) for i in range(N)] for j in range(N)]
+
 lv = np.linspace(np.min(z), np.max(z), 10)
-plt.figure(figsize=(8,6))
-plt.contourf(x,y,z,levels=lv,cmap='Reds')           # 等高線面積圖
-plt.contour(x,y,z,levels=lv,colors=['#000','#000']) # 等高線圖
+plt.contourf(x, y, z, levels = lv, cmap = 'Reds')               # 等高線面積圖
+plt.contour(x, y, z, levels = lv, colors = ['#000', '#000'])    # 等高線圖
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -96,20 +118,6 @@ cs = plt.contourf(h, levels=[10, 30, 50],
 cs.cmap.set_over('red')
 cs.cmap.set_under('blue')
 cs.changed()
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-x = np.arange(1, 10)
-y = x.reshape(-1, 1)
-h = x * y
-
-cs = plt.contourf(h, levels=[10, 30, 50],
-    colors=['#808080', '#A0A0A0', '#C0C0C0'], extend='both')
-cs.cmap.set_over('red')
-cs.cmap.set_under('blue')
-cs.changed()
-
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -125,7 +133,6 @@ ax.pcolormesh(x, y, Z)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 
 x = np.arange(-0.5, 10, 1)  # len = 11
 y = np.arange(4.5, 11, 1)  # len = 7
@@ -152,18 +159,16 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
 N = 5
-x1, x2 = np.meshgrid(np.arange(-N, (N + 1), 1), np.arange(-N, (N + 1), 1))
+x = np.arange(-N, (N + 1), 1)
+xx, yy = np.meshgrid(x, x)
+zz = xx * xx + yy * yy
+#print(x)
+#print(xx)
+#print(yy)
+#print(zz)
 
-print(x1)
-print(x2)
-print(x1 * x2)
-print(x1 * x1 + x2 * x2)
-
-z = x1 * x1 + x2 * x2
-
-plt.contourf(x1, x2, z, alpha = 0.3)
+plt.contourf(xx, yy, zz, alpha = 0.3)
 
 plt.title('函數 z = x^2 + y^2')
 plt.grid()

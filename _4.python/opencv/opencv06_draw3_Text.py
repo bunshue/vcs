@@ -2,10 +2,11 @@
 OpenCV 畫圖
 
 '''
+import sys
 import cv2
 import time
 import numpy as np
-
+'''
 print('------------------------------------------------------------')	#60個
 print('OpenCV 畫圖, 寫字集合')
 print('------------------------------------------------------------')	#60個
@@ -97,3 +98,44 @@ cv2.waitKey(0)
 print('收到按鍵')
 cv2.destroyAllWindows() #銷毀建立的物件
 #-----------------------------------------------------------------------------
+
+'''
+print('------------------------------------------------------------')	#60個
+
+d = 400
+img = np.ones((d,d,3),dtype="uint8")*255
+#生成白色背景
+font=cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(img,'OpenCV',(0,200),font, 3,(0,0,255),15)
+cv2.putText(img,'OpenCV',(0,200),font, 3,(0,255,0),5)
+cv2.imshow("demo19.7",img)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print('------------------------------------------------------------')	#60個
+
+d = 400
+img = np.ones((d,d,3),dtype="uint8")*255
+#生成白色背景
+font=cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(img,'OpenCV',(0,150),font, 3,(0,0,255),15)
+cv2.putText(img,'OpenCV',(0,250),font, 3,(0,255,0),15,
+            cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,True)
+cv2.imshow("demo19.7",img)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
