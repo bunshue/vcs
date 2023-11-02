@@ -27,11 +27,11 @@ imshow(im2)
 subplot(2, 2, 3)
 axis('off')
 title(u'原始直方图')
-hist(im.flatten(), 128, normed=True)
+hist(im.flatten(), 128, density=True)
 subplot(2, 2, 4)
 axis('off')
 title(u'均衡化后的直方图')
-hist(im2.flatten(), 128, normed=True)
+hist(im2.flatten(), 128, density=True)
 
 show()
 

@@ -10,11 +10,8 @@ import matplotlib
 
 print('------------------------------------------------------------')	#60個
 
-'''
-data_path = u'data/c_16/'
-
-neg_data=data_path+u'neg.csv'
-pos_data=data_path+u'pos.csv'
+neg_data = u'data/neg.csv'
+pos_data = u'data/pos.csv'
 
 import pandas as pd
 
@@ -72,7 +69,9 @@ example_counts = cv.transform(examples)
 predictions = classifier.predict(example_counts)
 
 print(predictions)
-'''
+
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

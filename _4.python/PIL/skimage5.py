@@ -18,7 +18,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-'''
 """
 #直方图与均衡化
 
@@ -54,7 +53,7 @@ print(hist2)
 
 调用方式：
 
-n, bins, patches = plt.hist(arr, bins=10, normed=0, facecolor='black', edgecolor='black',alpha=1，histtype='bar')
+n, bins, patches = plt.hist(arr, bins=10, density=False, facecolor='black', edgecolor='black',alpha=1，histtype='bar')
 
 hist的参数非常多，但常用的就这六个，只有第一个是必须的，后面四个可选
 
@@ -62,7 +61,7 @@ arr: 需要计算直方图的一维数组
 
 bins: 直方图的柱数，可选项，默认为10
 
-normed: 是否将得到的直方图向量归一化。默认为0
+density: 是否将得到的直方图向量归一化。默认为False
 
 facecolor: 直方图颜色
 
@@ -74,7 +73,7 @@ histtype: 直方图类型，‘bar’, ‘barstacked’, ‘step’, ‘stepfill
 
 返回值 ：
 
-n: 直方图向量，是否归一化由参数normed设定
+n: 直方图向量，是否归一化由参数density设定
 
 bins: 返回各个bin的区间范围
 
@@ -86,8 +85,7 @@ import matplotlib.pyplot as plt
 img = data.camera()
 plt.figure("hist")
 arr = img.flatten()
-#n, bins, patches = plt.hist(arr, bins=256, normed=1,edgecolor='None',facecolor='red')
-n, bins, patches = plt.hist(arr, bins=256, edgecolor='None',facecolor='red')  
+n, bins, patches = plt.hist(arr, bins=256, density = True, edgecolor='None',facecolor='red')
 plt.show()
 
 """
@@ -110,17 +108,12 @@ from skimage import data
 import matplotlib.pyplot as plt
 img=data.astronaut()
 ar=img[:,:,0].flatten()
-#plt.hist(ar, bins=256, normed=1,facecolor='r',edgecolor='r',hold=1)
-plt.hist(ar, bins=256, facecolor='r',edgecolor='r')
+plt.hist(ar, bins=256, density = True, facecolor='r',edgecolor='r',stacked=1)
 ag=img[:,:,1].flatten()
-#plt.hist(ag, bins=256, normed=1, facecolor='g',edgecolor='g',hold=1)
-plt.hist(ag, bins=256, facecolor='g',edgecolor='g')
+plt.hist(ag, bins=256, density = True, facecolor='g',edgecolor='g',stacked=1)
 ab=img[:,:,2].flatten()
-#plt.hist(ab, bins=256, normed=1, facecolor='b',edgecolor='b')
-plt.hist(ab, bins=256, facecolor='b',edgecolor='b')
+plt.hist(ab, bins=256, density = True, facecolor='b',edgecolor='b')
 plt.show()
-
-
 
 """
 其中，加一个参数hold=1,表示可以叠加
@@ -139,16 +132,14 @@ arr=img.flatten()
 plt.subplot(221)
 plt.imshow(img,plt.cm.gray)  #原始图像
 plt.subplot(222)
-#plt.hist(arr, bins=256, normed=1,edgecolor='None',facecolor='red') #原始图像直方图
-plt.hist(arr, bins=256, edgecolor='None',facecolor='red') #原始图像直方图
+plt.hist(arr, bins=256, density = True, edgecolor='None',facecolor='red') #原始图像直方图
 
 img1=exposure.equalize_hist(img)
 arr1=img1.flatten()
 plt.subplot(223)
 plt.imshow(img1,plt.cm.gray)  #均衡化图像
 plt.subplot(224)
-#plt.hist(arr1, bins=256, normed=1,edgecolor='None',facecolor='red') #均衡化直方图
-plt.hist(arr1, bins=256, edgecolor='None',facecolor='red') #均衡化直方图
+plt.hist(arr1, bins=256, density = True,edgecolor='None',facecolor='red') #均衡化直方图
 
 plt.show()
 
@@ -403,8 +394,6 @@ plt.title('filted image')
 plt.imshow(dst,plt.cm.gray)
 
 plt.show()
-
-'''
 
 print('------------------------------------------------------------')	#60個
 

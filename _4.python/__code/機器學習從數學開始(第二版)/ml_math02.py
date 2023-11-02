@@ -244,16 +244,12 @@ n_components = n_row * n_col
 image_shape = (64, 64)
 rng = RandomState(0)
 
-
-
 print('------------------------------------------------------------')	#60個
 
 faces = fetch_olivetti_faces(data_home='data\\',shuffle=True, random_state=rng)
 print(faces.data.shape)
 
-
 print('------------------------------------------------------------')	#60個
-
 
 fig = plt.figure(figsize=(10, 10))
 for i in range(10):
@@ -475,7 +471,7 @@ import matplotlib.pyplot as plt
 import scipy.stats as stats
 import seaborn as sns
 
-train = pd.read_csv(u'data/c_13_houseprice.csv')
+train = pd.read_csv(u'data/houseprice.csv')
 print(train.head(3))
 
 

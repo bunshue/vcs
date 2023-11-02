@@ -69,11 +69,11 @@ def PyplotHistogram():
     ax0, ax1, ax2, ax3 = axes.flatten()
 
     colors = ['red', 'tan', 'lime']
-    ax0.hist(x, n_bins, normed=1, histtype='bar', color=colors, label=colors)
+    ax0.hist(x, n_bins, density=True, histtype='bar', color=colors, label=colors)
     ax0.legend(prop={'size': 10})
     ax0.set_title('bars with legend')
 
-    ax1.hist(x, n_bins, normed=1, histtype='bar', stacked=True)
+    ax1.hist(x, n_bins, density=True, histtype='bar', stacked=True)
     ax1.set_title('stacked bar')
 
     ax2.hist(x, n_bins, histtype='step', stacked=True, fill=False)
@@ -239,7 +239,7 @@ def PyplotLineStyles():
          ('dashdotdotted', (0, (3, 5, 1, 5, 1, 5))),
          ('densely dashdotdotted', (0, (3, 1, 1, 1, 1, 1)))])
 
-    plt.figure(figsize = (10, 6))	#¹Ï¹³¤j¤p[­^¦T]
+    plt.figure(figsize = (10, 6))	#åœ–åƒå¤§å°[è‹±å‹]
     ax = plt.subplot(1, 1, 1)
 
     X, Y = np.linspace(0, 100, 10), np.zeros(10)
