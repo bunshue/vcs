@@ -2,45 +2,50 @@
 OpenCV 畫圖
 
 '''
+
 import cv2
-import time
+
+import sys
+import matplotlib.pyplot as plt
 import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-print('OpenCV 畫圖')
 
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-n = 300
-img = np.zeros((n+1,n+1,3), np.uint8)
-img = cv2.line(img,(0,0),(n,n),(255,0,0),3)
-img = cv2.line(img,(0,100),(n,100),(0,255,0),1)
-img = cv2.line(img,(100,0),(100,n),(0,0,255),6)
-winname = 'Demo19.1'
-cv2.namedWindow(winname)
-cv2.imshow(winname, img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+import time
 
 print('------------------------------------------------------------')	#60個
 
 n = 300
-img = np.ones((n,n,3), np.uint8)*255
-img = cv2.rectangle(img,(50,50),(n-100,n-50),(0,0,255),-1)
-winname = 'Demo19.1'
-cv2.namedWindow(winname)
-cv2.imshow(winname, img)
+image = np.zeros((n+1,n+1,3), np.uint8)
+image = cv2.line(image,(0,0),(n,n),(255,0,0),3)
+image = cv2.line(image,(0,100),(n,100),(0,255,0),1)
+image = cv2.line(image,(100,0),(100,n),(0,0,255),6)
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+plt.imshow(image)
+#plt.title('xxxx')
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+n = 300
+image = np.ones((n,n,3), np.uint8)*255
+image = cv2.rectangle(image,(50,50),(n-100,n-50),(0,0,255),-1)
+
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+plt.imshow(image)
+#plt.title('xxxx')
+plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 thickness=-1
 mode=1

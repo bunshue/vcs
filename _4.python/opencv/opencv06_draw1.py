@@ -3,10 +3,25 @@ OpenCV 畫圖
 
 '''
 import cv2
-import time
+
+import sys
+import matplotlib.pyplot as plt
 import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
+
+import time
+
+print('------------------------------------------------------------')	#60個
+
 print('OpenCV 畫圖')
 # 無底圖作畫
 print('設定圖片大小')
@@ -118,9 +133,6 @@ print('------------------------------------------------------------')	#60個
 print('畫標示頁箋')
 
 #用 putText 繪製物件偵測的標籤
-
-import cv2
-import numpy as np
 
 def drawBoundingBox(img, bboxs):
     for box in bboxs:

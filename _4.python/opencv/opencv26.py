@@ -1,16 +1,11 @@
-'''
-import os
-import time
-import random
-'''
-
 # opencv 集合
+
+import cv2
 
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import math
-import matplotlib
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
@@ -21,9 +16,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-import cv2
-
-print('------------------------------------------------------------')	#60個
 '''
 #opencv
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'

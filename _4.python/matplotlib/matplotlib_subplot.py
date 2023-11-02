@@ -14,7 +14,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 #          編號                                     圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = '不使用subplot畫多圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -151,9 +151,6 @@ ax4.set_yticks([])
 
 plt.show()
 
-'''
-
-
 print('------------------------------------------------------------')	#60個
 
 foldername = 'C:/_git/vcs/_1.data/______test_files1/__pic/imagedata/'
@@ -192,9 +189,37 @@ show_images_labels_predictions(test_feature, test_label, 0, len(test_feature))
 
 print('------------------------------------------------------------')	#60個
 
+def plot_function_name(name, x=0, y=0):
+    plt.text(x, y, name, alpha=0.3, size=25, ha="center", va="center")
 
+x = np.arange(-3, 3.01, 0.01) # 3.01
 
+plt.subplot(231)
+plot_function_name("1: sin")
+plt.plot(x, np.sin(x))
 
+plt.subplot(232)
+plot_function_name("2: cos")
+plt.plot(x, np.cos(x))
+
+plt.subplot(233)
+plot_function_name("3: tan")
+plt.plot(x, np.tan(x))
+plt.ylim(-1, 1)  # y軸が無限まで行ってしまうので制限
+
+plt.subplot(234)
+plot_function_name("4: sinh")
+plt.plot(x, np.sinh(x))
+
+plt.subplot(235)
+plot_function_name("5: cosh", x=0, y=6)
+plt.plot(x, np.cosh(x))
+
+plt.subplot(236)
+plot_function_name("6: tanh")
+plt.plot(x, np.tanh(x))
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

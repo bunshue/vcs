@@ -1,6 +1,16 @@
 import cv2
-import numpy as np
+
+import sys
 import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
@@ -38,7 +48,6 @@ for nr in range(0,row):
         if o[nr,nc]==255:
             of[int(nr/5),int(nc/5)]+=1
 
-
 ###开始计算，数字识别，计算最近的times个数字是谁，判断结果
 d=np.zeros(100)
 for i in range(0,100):
@@ -53,7 +62,6 @@ for i in range(k):
     temp.append(d.index(min(d)))
     d[d.index(min(d))]=Inf
 #print(temp)   #看看都被识别为哪些特征值了。
-
  
 temp=[i/10 for i in temp]
 #也可以返回去，处理为array,使用函数处理，意思差不多。

@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import ndimage as ndi
-from skimage import morphology,feature
+from skimage import morphology, feature
 
 #plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
 #設定中文字型及負號正確顯示
@@ -19,9 +19,9 @@ mask_circle2 = (x - x2)**2 + (y - y2)**2 < r2**2
 image = np.logical_or(mask_circle1, mask_circle2)
 #现在我们用分水岭算法分离两个圆
 distance = ndi.distance_transform_edt(image) #距离变换
-local_maxi =feature.peak_local_max(distance, indices=False, footprint=np.ones((3, 3)),labels=image) #寻找峰值
+local_maxi = feature.peak_local_max(distance, indices=False, footprint=np.ones((3, 3)),labels=image) #寻找峰值
 markers = ndi.label(local_maxi)[0] #初始标记点
-labels =morphology.watershed(-distance, markers, mask=image) #基于距离变换的分水岭算法
+labels = morphology.watershed(-distance, markers, mask=image) #基于距离变换的分水岭算法
 fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(8, 8))
 axes = axes.ravel()
 ax0, ax1, ax2, ax3 = axes

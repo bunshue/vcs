@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import numpy  
 import theano  
 import matplotlib.pyplot as plt 
@@ -25,10 +23,10 @@ astronaut = skimage.data.astronaut()
 img = numpy.asarray(astronaut, dtype='float32') / 255
 filtered_img = f(img.transpose(2, 0, 1).reshape(1, 3, 512, 512))
 
+plt.axis('off')
+plt.imshow(img)
+plt.show()
 
-plt.axis('off') 
-plt.imshow(img) 
-plt.show()  
 for img in range(depth):
   fig = plt.figure()   
   plt.axis( 'off')   

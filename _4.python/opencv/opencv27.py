@@ -1,6 +1,16 @@
-import sys
 import cv2
+
+import sys
+import matplotlib.pyplot as plt
 import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
@@ -110,7 +120,6 @@ for i in range(n):
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-
 print('------------------------------------------------------------')	#60個
 
 #篩選出大于特定大小的輪廓
@@ -177,7 +186,6 @@ print('------------------------------------------------------------')	#60個
 
 image = cv2.imread('data/cs1.bmp')
 print('顯示原圖')
-
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  
 HuM1=cv2.HuMoments(cv2.moments(gray)).flatten()
@@ -302,7 +310,6 @@ print('------------------------------------------------------------')	#60個
 image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 
-
 cv2.imshow("original", image)
 
 #---------------提取圖像輪廓------------------
@@ -422,7 +429,6 @@ print('------------------------------------------------------------')	#60個
 image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original", image)
-
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)

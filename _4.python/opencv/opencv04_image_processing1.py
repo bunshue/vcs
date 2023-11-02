@@ -1,14 +1,25 @@
+import cv2
+
+import sys
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-
-print('取得 OpenCV 版本')
-
-import cv2
 
 print('------------------------------------------------------------')	#60個
 
 #影像對比與亮度調整
-import numpy as np
 import matplotlib.image as img
 
 # output_image = alpha * imput_image + beta
@@ -23,30 +34,26 @@ def modify_contrast_and_brightness(image, alpha=1.0, beta = 0.0):
 image = cv2.imread(filename)	#讀取本機圖片
 
 modified_image = modify_contrast_and_brightness(image, 1.5, 10.0)
-cv2.imshow('Modified Picture', modified_image) #顯示圖片
 
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
-cv2.waitKey()
-cv2.destroyAllWindows()
+modified_image = cv2.cvtColor(modified_image, cv2.COLOR_BGR2RGB)
+plt.imshow(modified_image)
+#plt.title('xxxx')
+plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 
 #影像分析工具
 #影像直方圖
 
-import numpy as np
-import matplotlib.pyplot as plt
-
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
 plt.hist(image.ravel(), 256, [0,256])
-cv2.imshow('GrayScale Picture', image) #顯示圖片
 plt.show()
 
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
-cv2.waitKey()
-cv2.destroyAllWindows()
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+plt.imshow(image)
+#plt.title('xxxx')
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -59,29 +66,22 @@ import matplotlib.pyplot as plt
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
 equa = cv2.equalizeHist(image)
-cv2.imshow('Histogram', equa)#顯示圖片
 plt.hist(equa.ravel(), 256, [0,256])
 plt.show()
 #均值化的影像
 #均衡化後的灰度直方圖分布
 
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
-cv2.waitKey()
-cv2.destroyAllWindows()
+equa = cv2.cvtColor(equa, cv2.COLOR_BGR2RGB)
+plt.imshow(equa)
+#plt.title('xxxx')
+plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 
 '''
 opencv + numpy + 圖片之影像處理
 
-
 '''
-
-import cv2
-import numpy as np
-
-import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 print('測試 1')
@@ -91,6 +91,12 @@ print('將一圖分解成 藍 綠 紅 三通道')
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/white_300X300.bmp'
 image=cv2.imread(filename)
 print('顯示原圖')
+
+image0 = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+plt.imshow(image0)
+#plt.title('xxxx')
+plt.show()
+
 cv2.imshow("image", image)
 
 '''same
@@ -325,9 +331,6 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 
-
-
-
 '''
 
 https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
@@ -338,18 +341,9 @@ https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
-
-#import numpy as np
-
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-
 print('------------------------------------------------------------')	#60個
 
 '''
-
 image = cv2.imread(filename)	#讀取本機圖片
 
 # 轉為灰階圖片
@@ -376,10 +370,6 @@ print('------------------------------------------------------------')	#60個
 #可以用 OpenCV 的 calcHist 函數分別計算統計值，
 #並畫出 RGB 三種顏色的分佈圖：
 
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
 image = cv2.imread(filename)	#讀取本機圖片
 
 # 畫出 RGB 三種顏色的分佈圖
@@ -393,10 +383,6 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 #配合圖形遮罩計算直方圖
-
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 
 image = cv2.imread(filename)	#讀取本機圖片
 
