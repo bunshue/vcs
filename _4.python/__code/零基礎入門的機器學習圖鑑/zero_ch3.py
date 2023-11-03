@@ -40,9 +40,9 @@ print(sum(model.explained_variance_ratio_)) # 累積寄与率
 
 print('------------------------------------------------------------')	#60個
 
-''' import fail
 from sklearn.decomposition import NMF
-from sklearn.datasets.samples_generator import make_blobs
+#from sklearn.datasets.samples_generator import make_blobs old
+from sklearn.datasets import make_blobs
 
 
 centers = [[5, 10, 5], [10, 4, 10], [6, 8, 8]]
@@ -54,7 +54,6 @@ W = model.transform(X) # 分解後の行列
 H = model.components_
 print(W)
 print(H)
-'''
 
 print('------------------------------------------------------------')	#60個
 

@@ -19,7 +19,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-
 #-------------------------------------------------------------------------------
 
 #鳶尾花 Iris 數據集
@@ -174,87 +173,6 @@ plt.scatter(x[:, 0], x[:, 1], c = clf.labels_)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-
-    
-
-
-print('------------------------------------------------------------')	#60個
-
-#7. 怎麼選最好參數、model？
-
-#7-1 製造像真的一様的數據
-
-from sklearn.datasets import make_blobs
-
-x, y = make_blobs(n_samples = 500,
-                  centers = 3,
-                  n_features = 2,
-                  random_state = 0)
-
-plt.scatter(x[:, 0], x[:, 1], c = y, cmap = 'Paired', s = 80)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#7-2 Cross Validation
-
-from sklearn.model_selection import cross_val_score
-
-#試用 SVC
-
-from sklearn.svm import SVC
-clf_svc = SVC()
-#clf_svc = SVC(gamma = 'scale')
-
-#看一下五次的成績。
-scores = cross_val_score(clf_svc, x, y, cv = 5)
-print(scores)
-
-#很快的算一下平均。
-print(scores.mean())
-
-
-
-#試用 Decision Tree
-from sklearn.tree import DecisionTreeClassifier
-
-clf_dt = DecisionTreeClassifier()
-
-#看一下五次的成績。
-scores = cross_val_score(clf_dt, x, y, cv = 5)
-print(scores)
-
-#很快的算一下平均。
-print(scores.mean())
-
-
-
-
-#試用 Random Forest
-from sklearn.ensemble import RandomForestClassifier
-clf_rf = RandomForestClassifier(n_estimators = 100)
-
-#看一下五次的成績。
-scores = cross_val_score(clf_rf, x, y, cv = 5)
-print(scores)
-
-#很快的算一下平均。
-print(scores.mean())
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('作業完成')
-
-
 
 
 print('------------------------------------------------------------')	#60個

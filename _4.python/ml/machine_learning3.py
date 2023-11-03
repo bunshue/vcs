@@ -17,8 +17,10 @@ print('------------------------------------------------------------')	#60個
 
 from sklearn.datasets import make_blobs
 
-data, label = make_blobs(n_samples = 5, n_features = 2,
-                         centers = 2, random_state = 0)
+data, label = make_blobs(n_samples = 5,
+                         n_features = 2,
+                         centers = 2,
+                         random_state = 0)
 print(data)
 print(f"分類 : {label}")
 
@@ -26,8 +28,10 @@ print('------------------------------------------------------------')	#60個
 
 from sklearn.datasets import make_blobs
 
-data, label = make_blobs(n_samples = 200, n_features = 2,
-                         centers = 2, random_state = 0)
+data, label = make_blobs(n_samples = 200,
+                         n_features = 2,
+                         centers = 2,
+                         random_state = 0)
 plt.scatter(data[:, 0], data[:, 1], c = label, cmap = 'bwr')
 plt.grid(True)
 
@@ -38,8 +42,10 @@ print('------------------------------------------------------------')	#60個
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 
-data, label = make_blobs(n_samples = 200, n_features = 2,
-                         centers = 2, random_state = 0)
+data, label = make_blobs(n_samples = 200,
+                         n_features = 2,
+                         centers = 2,
+                         random_state = 0)
 d_sta = StandardScaler().fit_transform(data)    # 標準化
 plt.scatter(d_sta[:, 0], d_sta[:, 1], c = label, cmap = 'bwr')
 plt.grid(True)
@@ -52,12 +58,16 @@ from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
-data, label = make_blobs(n_samples = 200, n_features = 2,
-                         centers = 2, random_state = 0)
+data, label = make_blobs(n_samples = 200,
+                         n_features = 2,
+                         centers = 2,
+                         random_state = 0)
 d_sta = StandardScaler().fit_transform(data)    # 標準化
 # 分割數據為訓練數據和測試數據
-dx_train, dx_test, label_train, label_test = train_test_split(d_sta, label,
-                                                              test_size = 0.2, random_state = 0)
+dx_train, dx_test, label_train, label_test = train_test_split(d_sta,
+                                                              label,
+                                                              test_size = 0.2,
+                                                              random_state = 0)
                                              
 print(f"特徵數據外形 : {d_sta.shape}")
 print(f"訓練數據外形 : {dx_train.shape}")
@@ -73,12 +83,16 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
-data, label = make_blobs(n_samples = 200, n_features = 2,
-                         centers = 2, random_state = 0)
+data, label = make_blobs(n_samples = 200,
+                         n_features = 2,
+                         centers = 2,
+                         random_state = 0)
 d_sta = StandardScaler().fit_transform(data)    # 標準化
 # 分割數據為訓練數據和測試數據
-dx_train, dx_test, label_train, label_test = train_test_split(d_sta, label,
-                                                              test_size = 0.2, random_state = 0)
+dx_train, dx_test, label_train, label_test = train_test_split(d_sta,
+                                                              label,
+                                                              test_size = 0.2,
+                                                              random_state = 0)
 # 建立分類模型                                             
 k_model = KNeighborsClassifier(n_neighbors = 5)       # k = 5
 # 建立訓練數據模型
@@ -100,12 +114,16 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 
-data, label = make_blobs(n_samples = 200, n_features = 2,
-                         centers = 2, random_state = 0)
+data, label = make_blobs(n_samples = 200,
+                         n_features = 2,
+                         centers = 2,
+                         random_state = 0)
 d_sta = StandardScaler().fit_transform(data)    # 標準化
 # 分割數據為訓練數據和測試數據
-dx_train, dx_test, label_train, label_test = train_test_split(d_sta, label,
-                                                              test_size = 0.2, random_state = 0)
+dx_train, dx_test, label_train, label_test = train_test_split(d_sta,
+                                                              label,
+                                                              test_size = 0.2,
+                                                              random_state = 0)
 # 建立分類模型                                             
 lo_model = LogisticRegression()
 # 建立訓練數據模型
@@ -127,12 +145,16 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
 
-data, label = make_blobs(n_samples = 200, n_features = 2,
-                         centers = 2, random_state = 0)
+data, label = make_blobs(n_samples = 200,
+                         n_features = 2,
+                         centers = 2,
+                         random_state = 0)
 d_sta = StandardScaler().fit_transform(data)    # 標準化
 # 分割數據為訓練數據和測試數據
-dx_train, dx_test, label_train, label_test = train_test_split(d_sta, label,
-                                                              test_size = 0.2, random_state = 0)
+dx_train, dx_test, label_train, label_test = train_test_split(d_sta,
+                                                              label,
+                                                              test_size = 0.2,
+                                                              random_state = 0)
 # 建立分類模型                                             
 svm_model = LinearSVC()
 # 建立訓練數據模型
@@ -158,8 +180,10 @@ data, label = make_moons(n_samples = 200, noise = 0.2, random_state = 0)
 
 d_sta = StandardScaler().fit_transform(data)    # 標準化
 # 分割數據為訓練數據和測試數據
-dx_train, dx_test, label_train, label_test = train_test_split(d_sta, label,
-                                                              test_size = 0.2, random_state = 0)
+dx_train, dx_test, label_train, label_test = train_test_split(d_sta,
+                                                              label,
+                                                              test_size = 0.2,
+                                                              random_state = 0)
 # 線性SVM 建立分類模型, 建立訓練數據模型, 對測試數據做預測                                             
 svm_model = LinearSVC()
 svm_model.fit(dx_train, label_train)
@@ -193,8 +217,10 @@ from sklearn.tree import DecisionTreeClassifier
 
 data, label = datasets.load_iris(return_X_y = True)
 # 分割數據為訓練數據和測試數據
-dx_train, dx_test, label_train, label_test = train_test_split(data, label,
-                                                              test_size = 0.2, random_state = 0)
+dx_train, dx_test, label_train, label_test = train_test_split(data,
+                                                              label,
+                                                              test_size = 0.2,
+                                                              random_state = 0)
 # 建立分類模型                                             
 tree_model = DecisionTreeClassifier()
 # 建立訓練數據模型
