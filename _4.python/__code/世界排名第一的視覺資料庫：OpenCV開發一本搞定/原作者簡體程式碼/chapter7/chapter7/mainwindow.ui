@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>595</width>
+    <height>374</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>chapter7</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QLabel" name="label1">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>271</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label2">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>30</y>
+      <width>271</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>595</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="openLenaJpg"/>
+    <addaction name="openCustomeFile"/>
+    <addaction name="restoreFile"/>
+    <addaction name="Clear"/>
+    <addaction name="exitSystem"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="copyright"/>
+    <addaction name="about"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>雕刻</string>
+    </property>
+    <widget class="QMenu" name="menu_4">
+     <property name="title">
+      <string>凸雕</string>
+     </property>
+     <addaction name="tu1"/>
+     <addaction name="tu2"/>
+     <addaction name="tu3"/>
+     <addaction name="tu4"/>
+    </widget>
+    <widget class="QMenu" name="menu_6">
+     <property name="title">
+      <string>凹雕</string>
+     </property>
+     <addaction name="aoA"/>
+     <addaction name="aoB"/>
+     <addaction name="aoC"/>
+     <addaction name="aoD"/>
+    </widget>
+    <addaction name="menu_4"/>
+    <addaction name="menu_6"/>
+   </widget>
+   <widget class="QMenu" name="menu_5">
+    <property name="title">
+     <string>颜色</string>
+    </property>
+    <widget class="QMenu" name="menu_10">
+     <property name="title">
+      <string>颜色通道</string>
+     </property>
+     <addaction name="rChanel"/>
+     <addaction name="gChanel"/>
+     <addaction name="bChanel"/>
+    </widget>
+    <addaction name="oldPic"/>
+    <addaction name="exchangeRG"/>
+    <addaction name="toGray"/>
+    <addaction name="toBin"/>
+    <addaction name="colorMap"/>
+    <addaction name="menu_10"/>
+   </widget>
+   <widget class="QMenu" name="menu_7">
+    <property name="title">
+     <string>手工画</string>
+    </property>
+    <addaction name="woodCarving"/>
+    <addaction name="pencil"/>
+    <addaction name="sketch"/>
+   </widget>
+   <widget class="QMenu" name="menu_8">
+    <property name="title">
+     <string>艺术效果</string>
+    </property>
+    <widget class="QMenu" name="menu_9">
+     <property name="title">
+      <string>滤镜</string>
+     </property>
+     <addaction name="filterMax"/>
+     <addaction name="filterMin"/>
+    </widget>
+    <addaction name="diffuse"/>
+    <addaction name="blur"/>
+    <addaction name="soft"/>
+    <addaction name="sharp"/>
+    <addaction name="menu_9"/>
+    <addaction name="picBook"/>
+    <addaction name="casting"/>
+    <addaction name="freezing"/>
+   </widget>
+   <widget class="QMenu" name="menu_11">
+    <property name="title">
+     <string>光线</string>
+    </property>
+    <addaction name="inverse"/>
+    <addaction name="highLight"/>
+    <addaction name="blackAndWhiteInverse"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_5"/>
+   <addaction name="menu_7"/>
+   <addaction name="menu_8"/>
+   <addaction name="menu_11"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="openLenaJpg">
+   <property name="text">
+    <string>打开测试文件（lena.jpg)</string>
+   </property>
+  </action>
+  <action name="openCustomeFile">
+   <property name="text">
+    <string>打开自定义文件</string>
+   </property>
+  </action>
+  <action name="restoreFile">
+   <property name="text">
+    <string>还原</string>
+   </property>
+  </action>
+  <action name="exitSystem">
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </action>
+  <action name="copyright">
+   <property name="text">
+    <string>版权</string>
+   </property>
+  </action>
+  <action name="about">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+  <action name="actionTest">
+   <property name="text">
+    <string>test</string>
+   </property>
+  </action>
+  <action name="tu1">
+   <property name="text">
+    <string>效果1</string>
+   </property>
+  </action>
+  <action name="tu2">
+   <property name="text">
+    <string>效果2</string>
+   </property>
+  </action>
+  <action name="tu3">
+   <property name="text">
+    <string>效果3</string>
+   </property>
+  </action>
+  <action name="tu4">
+   <property name="text">
+    <string>效果4</string>
+   </property>
+  </action>
+  <action name="aoA">
+   <property name="text">
+    <string>效果A</string>
+   </property>
+  </action>
+  <action name="aoB">
+   <property name="text">
+    <string>效果B</string>
+   </property>
+  </action>
+  <action name="aoC">
+   <property name="text">
+    <string>效果C</string>
+   </property>
+  </action>
+  <action name="aoD">
+   <property name="text">
+    <string>效果D</string>
+   </property>
+  </action>
+  <action name="oldPic">
+   <property name="text">
+    <string>老照片</string>
+   </property>
+  </action>
+  <action name="exchangeRG">
+   <property name="text">
+    <string>红绿互换</string>
+   </property>
+  </action>
+  <action name="toGray">
+   <property name="text">
+    <string>灰度</string>
+   </property>
+  </action>
+  <action name="toBin">
+   <property name="text">
+    <string>二值化</string>
+   </property>
+  </action>
+  <action name="woodCarving">
+   <property name="text">
+    <string>木雕</string>
+   </property>
+  </action>
+  <action name="pencil">
+   <property name="text">
+    <string>铅笔画</string>
+   </property>
+  </action>
+  <action name="sketch">
+   <property name="text">
+    <string>素描</string>
+   </property>
+  </action>
+  <action name="diffuse">
+   <property name="text">
+    <string>扩散</string>
+   </property>
+  </action>
+  <action name="blur">
+   <property name="text">
+    <string>模糊</string>
+   </property>
+  </action>
+  <action name="soft">
+   <property name="text">
+    <string>柔化</string>
+   </property>
+  </action>
+  <action name="sharp">
+   <property name="text">
+    <string>锐化</string>
+   </property>
+  </action>
+  <action name="filterMax">
+   <property name="text">
+    <string>最大值</string>
+   </property>
+  </action>
+  <action name="filterMin">
+   <property name="text">
+    <string>最小值</string>
+   </property>
+  </action>
+  <action name="picBook">
+   <property name="text">
+    <string>连环画</string>
+   </property>
+  </action>
+  <action name="colorMap">
+   <property name="text">
+    <string>颜色变换</string>
+   </property>
+  </action>
+  <action name="rChanel">
+   <property name="text">
+    <string>R通道</string>
+   </property>
+  </action>
+  <action name="gChanel">
+   <property name="text">
+    <string>G通道</string>
+   </property>
+  </action>
+  <action name="bChanel">
+   <property name="text">
+    <string>B通道</string>
+   </property>
+  </action>
+  <action name="inverse">
+   <property name="text">
+    <string>反相</string>
+   </property>
+  </action>
+  <action name="highLight">
+   <property name="text">
+    <string>强光</string>
+   </property>
+  </action>
+  <action name="blackAndWhiteInverse">
+   <property name="text">
+    <string>黑白底片</string>
+   </property>
+  </action>
+  <action name="casting">
+   <property name="text">
+    <string>熔铸</string>
+   </property>
+  </action>
+  <action name="freezing">
+   <property name="text">
+    <string>冰冻</string>
+   </property>
+  </action>
+  <action name="Clear">
+   <property name="text">
+    <string>清除</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

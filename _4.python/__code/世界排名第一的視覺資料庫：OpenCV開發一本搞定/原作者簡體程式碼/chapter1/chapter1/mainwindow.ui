@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>590</width>
+    <height>349</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>chapter1</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QLabel" name="label1">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>40</y>
+      <width>201</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>原始图像</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label2">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>40</y>
+      <width>201</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string>结果图像</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>270</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>源图像</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>270</y>
+      <width>54</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目标图像</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>590</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="openTestFile"/>
+    <addaction name="openCustomeFile"/>
+    <addaction name="restore"/>
+    <addaction name="Clear"/>
+    <addaction name="myExit"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>翻转</string>
+    </property>
+    <addaction name="Horizen"/>
+    <addaction name="vertical"/>
+    <addaction name="horizenAndVertical"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>形态</string>
+    </property>
+    <addaction name="Erosion"/>
+    <addaction name="dialation"/>
+    <addaction name="opening"/>
+    <addaction name="closing"/>
+    <addaction name="actionMorphological_Gradient"/>
+    <addaction name="topHat"/>
+    <addaction name="blackHat"/>
+   </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>滤波</string>
+    </property>
+    <widget class="QMenu" name="menuF">
+     <property name="title">
+      <string>方框滤波</string>
+     </property>
+     <addaction name="normalize"/>
+     <addaction name="NoNormalize"/>
+    </widget>
+    <addaction name="normalizeFilter"/>
+    <addaction name="menuF"/>
+    <addaction name="GaussFilter"/>
+    <addaction name="medianFilter"/>
+    <addaction name="bilateralFilter"/>
+   </widget>
+   <widget class="QMenu" name="menu_5">
+    <property name="title">
+     <string>缩放</string>
+    </property>
+    <addaction name="PyrUpAction"/>
+    <addaction name="PyrDownAction"/>
+    <addaction name="ResizeUp"/>
+    <addaction name="ResizeDown"/>
+   </widget>
+   <widget class="QMenu" name="menu_6">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="about"/>
+    <addaction name="copyright"/>
+   </widget>
+   <widget class="QMenu" name="menu_7">
+    <property name="title">
+     <string>旋转</string>
+    </property>
+    <addaction name="cNresize"/>
+    <addaction name="cResize"/>
+    <addaction name="antiClockwise"/>
+    <addaction name="NFlipResize"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_4"/>
+   <addaction name="menu_5"/>
+   <addaction name="menu_7"/>
+   <addaction name="menu_6"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="openTestFile">
+   <property name="text">
+    <string>打开测试文件</string>
+   </property>
+  </action>
+  <action name="myExit">
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </action>
+  <action name="Horizen">
+   <property name="text">
+    <string>水平</string>
+   </property>
+  </action>
+  <action name="about">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+  <action name="vertical">
+   <property name="text">
+    <string>垂直</string>
+   </property>
+  </action>
+  <action name="horizenAndVertical">
+   <property name="text">
+    <string>水平&amp;垂直</string>
+   </property>
+  </action>
+  <action name="restore">
+   <property name="text">
+    <string>复原</string>
+   </property>
+  </action>
+  <action name="openCustomeFile">
+   <property name="text">
+    <string>打开自定义文件</string>
+   </property>
+  </action>
+  <action name="copyright">
+   <property name="text">
+    <string>版权</string>
+   </property>
+  </action>
+  <action name="actionSobel">
+   <property name="text">
+    <string>sobel</string>
+   </property>
+  </action>
+  <action name="actionCanny">
+   <property name="text">
+    <string>canny</string>
+   </property>
+  </action>
+  <action name="actionLaplacian">
+   <property name="text">
+    <string>Laplacian</string>
+   </property>
+  </action>
+  <action name="normalizeFilter">
+   <property name="text">
+    <string>均值滤波</string>
+   </property>
+  </action>
+  <action name="GaussFilter">
+   <property name="text">
+    <string>高斯滤波</string>
+   </property>
+  </action>
+  <action name="medianFilter">
+   <property name="text">
+    <string>中值滤波</string>
+   </property>
+  </action>
+  <action name="bilateralFilter">
+   <property name="text">
+    <string>双边滤波</string>
+   </property>
+  </action>
+  <action name="Erosion">
+   <property name="text">
+    <string>腐蚀</string>
+   </property>
+  </action>
+  <action name="dialation">
+   <property name="text">
+    <string>膨胀</string>
+   </property>
+  </action>
+  <action name="actionMorphological_Gradient">
+   <property name="text">
+    <string>Morphological Gradient</string>
+   </property>
+  </action>
+  <action name="opening">
+   <property name="text">
+    <string>开运算</string>
+   </property>
+  </action>
+  <action name="closing">
+   <property name="text">
+    <string>闭运算</string>
+   </property>
+  </action>
+  <action name="topHat">
+   <property name="text">
+    <string>顶帽</string>
+   </property>
+  </action>
+  <action name="blackHat">
+   <property name="text">
+    <string>黑帽</string>
+   </property>
+  </action>
+  <action name="PyrUpAction">
+   <property name="text">
+    <string>放大(PyrUp)</string>
+   </property>
+  </action>
+  <action name="PyrDownAction">
+   <property name="text">
+    <string>缩小(PyrDown)</string>
+   </property>
+  </action>
+  <action name="ResizeUp">
+   <property name="text">
+    <string>放大(Resize)</string>
+   </property>
+  </action>
+  <action name="ResizeDown">
+   <property name="text">
+    <string>缩小(Resize)</string>
+   </property>
+  </action>
+  <action name="cNresize">
+   <property name="text">
+    <string>顺时针无缩放</string>
+   </property>
+  </action>
+  <action name="cResize">
+   <property name="text">
+    <string>顺时针缩放</string>
+   </property>
+  </action>
+  <action name="antiClockwise">
+   <property name="text">
+    <string>逆时针</string>
+   </property>
+  </action>
+  <action name="NFlipResize">
+   <property name="text">
+    <string>零旋转缩放</string>
+   </property>
+  </action>
+  <action name="Clear">
+   <property name="text">
+    <string>清除</string>
+   </property>
+   <property name="toolTip">
+    <string>CLEAR</string>
+   </property>
+  </action>
+  <action name="normalize">
+   <property name="text">
+    <string>归一化</string>
+   </property>
+  </action>
+  <action name="NoNormalize">
+   <property name="text">
+    <string>非归一化</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

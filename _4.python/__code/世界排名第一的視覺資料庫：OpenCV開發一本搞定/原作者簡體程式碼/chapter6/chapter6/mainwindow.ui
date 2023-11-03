@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>594</width>
+    <height>363</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>chapter6</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QLabel" name="label1">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>255</width>
+      <height>255</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label2">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>40</y>
+      <width>256</width>
+      <height>256</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>594</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="openLenaJpg"/>
+    <addaction name="openCustomeFile"/>
+    <addaction name="restoreFile"/>
+    <addaction name="Clear"/>
+    <addaction name="exitSystem"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="aboutMe"/>
+    <addaction name="contactUs"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>骰子画</string>
+    </property>
+    <addaction name="myDefine"/>
+    <addaction name="useResize"/>
+    <addaction name="windowShow"/>
+   </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>点图</string>
+    </property>
+    <addaction name="horizen"/>
+    <addaction name="vertical"/>
+    <addaction name="circle"/>
+    <addaction name="mySum"/>
+    <addaction name="myAbstrct"/>
+    <addaction name="myTriple"/>
+    <addaction name="myRand"/>
+   </widget>
+   <widget class="QMenu" name="menu_6">
+    <property name="title">
+     <string>骰子原型</string>
+    </property>
+    <addaction name="number0"/>
+    <addaction name="number1"/>
+    <addaction name="number2"/>
+    <addaction name="number3"/>
+    <addaction name="number4"/>
+    <addaction name="number5"/>
+    <addaction name="number6"/>
+    <addaction name="number7"/>
+    <addaction name="number8"/>
+    <addaction name="number9"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_6"/>
+   <addaction name="menu_4"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="openLenaJpg">
+   <property name="text">
+    <string>打开测试文件（lena.jpg)</string>
+   </property>
+  </action>
+  <action name="openCustomeFile">
+   <property name="text">
+    <string>打开自定义文件</string>
+   </property>
+  </action>
+  <action name="restoreFile">
+   <property name="text">
+    <string>还原</string>
+   </property>
+  </action>
+  <action name="exitSystem">
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </action>
+  <action name="aboutMe">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+  <action name="contactUs">
+   <property name="text">
+    <string>联系我们</string>
+   </property>
+  </action>
+  <action name="myDefine">
+   <property name="text">
+    <string>自定义特征矩阵</string>
+   </property>
+  </action>
+  <action name="useResize">
+   <property name="text">
+    <string>resize实现</string>
+   </property>
+  </action>
+  <action name="windowShow">
+   <property name="text">
+    <string>窗口显示</string>
+   </property>
+  </action>
+  <action name="horizen">
+   <property name="text">
+    <string>横向</string>
+   </property>
+  </action>
+  <action name="vertical">
+   <property name="text">
+    <string>纵向</string>
+   </property>
+  </action>
+  <action name="circle">
+   <property name="text">
+    <string>扇形</string>
+   </property>
+  </action>
+  <action name="mySum">
+   <property name="text">
+    <string>求和</string>
+   </property>
+  </action>
+  <action name="myAbstrct">
+   <property name="text">
+    <string>求差</string>
+   </property>
+  </action>
+  <action name="myTriple">
+   <property name="text">
+    <string>对角线</string>
+   </property>
+  </action>
+  <action name="myRand">
+   <property name="text">
+    <string>随机</string>
+   </property>
+  </action>
+  <action name="myIndex">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>顺序图</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="myRand2">
+   <property name="text">
+    <string>随机图</string>
+   </property>
+  </action>
+  <action name="myRand3">
+   <property name="text">
+    <string>骰子</string>
+   </property>
+  </action>
+  <action name="number0">
+   <property name="text">
+    <string>原型0</string>
+   </property>
+  </action>
+  <action name="number1">
+   <property name="text">
+    <string>原型1</string>
+   </property>
+  </action>
+  <action name="number2">
+   <property name="text">
+    <string>原型2</string>
+   </property>
+  </action>
+  <action name="number3">
+   <property name="text">
+    <string>原型3</string>
+   </property>
+  </action>
+  <action name="number4">
+   <property name="text">
+    <string>原型4</string>
+   </property>
+  </action>
+  <action name="number5">
+   <property name="text">
+    <string>原型5</string>
+   </property>
+  </action>
+  <action name="number6">
+   <property name="text">
+    <string>原型6</string>
+   </property>
+  </action>
+  <action name="number7">
+   <property name="text">
+    <string>原型7</string>
+   </property>
+  </action>
+  <action name="number8">
+   <property name="text">
+    <string>原型8</string>
+   </property>
+  </action>
+  <action name="number9">
+   <property name="text">
+    <string>原型9</string>
+   </property>
+  </action>
+  <action name="Clear">
+   <property name="text">
+    <string>清除</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
