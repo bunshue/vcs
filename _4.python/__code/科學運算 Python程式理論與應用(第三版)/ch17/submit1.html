@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>傳送留言</title>
+</head>
+
+<body>
+<table>
+  <tr>
+    <td>
+	<h1>傳送留言</h1>
+	<br />
+	<form id="form" name="form" method="post" action="addmessage.psp">
+	  <label>姓名
+	  <input type="text" name="name" />
+	  </label>
+	  <p>
+	    <label>信箱
+	    <input type="text" name="email" />
+	    </label>
+	  </p>
+	  <p>
+	    <label>網站
+	    <input type="text" name="site" />
+	    </label>
+	  </p>
+	  <p>
+	    <label>留言內容：<br />
+	    <textarea name="content" cols="50" rows="10"></textarea>
+	    </label>
+	  </p>
+	  <p>
+	    <input type="submit" name="Submit" value="傳送" />
+	    <input name="Cancel" type="reset" id="Cancel" value="重設" />
+	  </p>
+	</form>
+	</td>
+  </tr>
+</table>
+</body>
+</html>
