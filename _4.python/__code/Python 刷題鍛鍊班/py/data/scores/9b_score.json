@@ -1,0 +1,10 @@
+{
+    "class": "9b",
+    "score": [
+        {"math": 83, "literature": 85, "science": 71},
+        {"math": 62, "literature": 92, "science": 70},
+        {"math": 96, "literature": 65, "science": 69},
+        {"math": 100, "literature": 70, "science": 90},
+        {"math": 76, "literature": 89, "science": 68}
+    ]
+}

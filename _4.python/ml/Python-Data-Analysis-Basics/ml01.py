@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 
-
 """
 01.讀入基本套件
 
@@ -107,6 +106,7 @@ plt.grid()
 plt.title('aaaa')
 plt.show()
 
+
 """
 分訓練資料、測試資料
 
@@ -121,8 +121,8 @@ from sklearn.model_selection import train_test_split
 #把原來的 x, y 中的 80% 給 training data, 20% 給 testing data。
 
 x_train, x_test, y_train, y_test = train_test_split(x, y,
-                                                   test_size=0.2,
-                                                   random_state=9487)
+                                                   test_size = 0.2,
+                                                   random_state = 9487)
 
 #len(x_train)    #80%
 #len(x_test)     #20%

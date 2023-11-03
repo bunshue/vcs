@@ -87,6 +87,13 @@ plt.pie(sizes,
 #第三張圖
 plt.subplot(233)
 
+plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
+plt.rcParams['font.size']=12
+
+x = [89,58,63,50]
+labels = '高雄','台中','宜蘭','花蓮'
+explode = (0.1, 0, 0, 0)
+plt.pie(x,labels=labels, explode=explode, autopct='%.1f%%', shadow=True)
 
 
 #第四張圖
@@ -139,6 +146,7 @@ plt.figure(num = '派圖 集合 2', figsize = (20, 15), dpi = 84, facecolor = "w
 
 #第一張圖
 plt.subplot(231)
+
 
 
 #第二張圖

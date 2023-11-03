@@ -1,0 +1,27 @@
+<!-- HTML文件：Ch11-4.htm -->
+<html>
+<head>
+<title>文字區域欄位</title>
+</head>
+<body>
+<h1>請註冊網站的會員</h1><hr>
+<form name="registration" action="users.asp"
+                          method="post">
+姓名: <input name="name" size="10">
+姓別: 
+<input type="radio" name="sex" 
+       value="male" checked>男性
+<input type="radio" name="sex"
+       value="female">女性<br>
+使用者名稱: <input type="text" name="username"
+                   size="10" value="user001">
+使用者密碼: <input type="password" name="password"
+                   size="10" maxlength="5"><br>
+地址: <br>
+<textarea name="address" rows="5" cols="50" wrap="off">
+</textarea><br><br>
+<input type="submit" name="send" value="會員註冊">
+<input type="reset" name="clear" value="重設會員"><br>
+</form>
+</body>
+</html>

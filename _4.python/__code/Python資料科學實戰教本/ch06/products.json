@@ -1,0 +1,42 @@
+[
+  {
+    "image": "https://fchart.github.io/Ashion/img/product/product-1.jpg",
+    "price": "$ 59.0",
+    "title": "Buttons tweed blazer"
+  },
+  {
+    "image": "https://fchart.github.io/Ashion/img/product/product-2.jpg",
+    "price": "$ 49.0",
+    "title": "Flowy striped skirt"
+  },
+  {
+    "image": "https://fchart.github.io/Ashion/img/product/product-3.jpg",
+    "price": "$ 59.0",
+    "title": "Cotton T-Shirt"
+  },
+  {
+    "image": "https://fchart.github.io/Ashion/img/product/product-4.jpg",
+    "price": "$ 59.0",
+    "title": "Slim striped pocket shirt"
+  },
+  {
+    "image": "https://fchart.github.io/Ashion/img/product/product-5.jpg",
+    "price": "$ 59.0",
+    "title": "Fit micro corduroy shirt"
+  },
+  {
+    "image": "https://fchart.github.io/Ashion/img/product/product-6.jpg",
+    "price": "$ 49.0 $ 59.0",
+    "title": "Tropical Kimono"
+  },
+  {
+    "image": "https://fchart.github.io/Ashion/img/product/product-7.jpg",
+    "price": "$ 59.0",
+    "title": "Contrasting sunglasses"
+  },
+  {
+    "image": "https://fchart.github.io/Ashion/img/product/product-8.jpg",
+    "price": "$ 49.0 $ 59.0",
+    "title": "Water resistant backpack"
+  }
+]

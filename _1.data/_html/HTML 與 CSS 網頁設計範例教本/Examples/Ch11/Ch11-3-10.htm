@@ -1,0 +1,20 @@
+<!-- HTML文件：Ch11-3-10.htm -->
+<html>
+<head>
+<title>隱藏欄位</title>
+</head>
+<body>
+<center>
+<h1>請輸入會員資料登入網站</h1><hr>
+<form name="registration" action="users.aspx"
+                          method="post">
+使用者名稱: <input type="text" name="username"
+                   size="10" value="user001"><br>
+使用者密碼: <input type="password" name="password"
+                   size="10" maxlength="5"><hr>
+<input type="hidden" name="name" value="tom">
+<input type="submit" name="send" value="會員登入"><br>
+</center>
+</form>
+</body>
+</html>

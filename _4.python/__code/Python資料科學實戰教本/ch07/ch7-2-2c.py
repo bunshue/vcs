@@ -1,0 +1,27 @@
+import numpy as np 
+
+a = np.arange(5)
+print(a)
+print("---------------------------")
+b = np.arange(1, 6, 2)
+print(b) 
+print("===========================")
+c = np.zeros(2) 
+print(c)
+print("---------------------------")
+d = np.zeros((2,2)) 
+print(d)           
+print("===========================")
+e = np.ones(2) 
+print(e)
+print("---------------------------")
+f = np.ones((2,2)) 
+print(f)         
+print("===========================")
+g = np.full(2, 7)
+print(g)
+print("---------------------------")
+h = np.full((2,2), 7)
+print(h)  
+
+ 

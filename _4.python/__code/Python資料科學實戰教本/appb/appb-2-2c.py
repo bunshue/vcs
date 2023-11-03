@@ -1,0 +1,19 @@
+str1 = 'welcome to python' 
+
+print("str1 = " + str1)
+str2 = 'Welcome to Python'
+print("str2 = " + str2)
+str3 = 'This is a test.'
+print("str3 = " + str3)
+s = str1.capitalize()
+print("str1.capitalize() = " + s)
+s = str2.lower()
+print("str2.lower() = " + s)
+s = str1.upper()
+print("str1.upper() = " + s)
+s = str1.title()
+print("str1.title() = " + s)
+s = str2.swapcase()
+print("str2.swapcase() = " + s)
+s = str3.replace('is', 'was')
+print("str3.replace('is', 'was') = " + s)

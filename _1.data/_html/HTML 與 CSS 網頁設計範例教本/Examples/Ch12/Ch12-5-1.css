@@ -1,0 +1,16 @@
+body { font-size:10pt;
+       font-family:標楷體;
+       line-height:120%;
+     }    
+span { font-size:20pt;
+       font-family:細明體;
+     }
+p    { font-size: 12pt; 
+       color: yellow;
+       background-color: blue;
+       line-height: 25px;
+     }
+a:link    {color:blue  ; text-decoration:none}
+a:active  {color:green ; text-decoration:none}
+a:visited {color:yellow; text-decoration:none}
+a:hover   {color:red   ; text-decoration:underline}

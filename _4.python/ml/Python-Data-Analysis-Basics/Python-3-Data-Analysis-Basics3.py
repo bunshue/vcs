@@ -5,64 +5,6 @@ import random
 
 print('------------------------------------------------------------')	#60個
 
-#lambda: 臨時要使用的函數
-currency = 32.1357851   # 1美元 = 32.13台幣    台灣銀行 現金賣出價
-
-price = [100, 500, 1000] #美元
-
-ll = list(map(lambda x:currency*x, price))
-print('換算成台幣 :', ll)
-
-usb2twd = lambda x:currency*x
-
-print(usb2twd(1000))
-
-
-#print(f"1 美元合台幣 {c:.2f} 元。")
-#print(f"1 美元合台幣 {c:10.2f} 元。")
-
-print('------------------------------------------------------------')	#60個
-
-
-class Card:
-    SUITS = ["♣", "♦", "♥", "♠"]
-    RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-    
-    def __init__(self, s, r):
-        self.suit = s
-        self.rank = r
-        
-    def show(self):
-        print(self.SUITS[self.suit] + self.RANKS[self.rank])
-
-
-card01 = Card(2, 3)
-card01.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-import matplotlib as mpl
-import matplotlib.font_manager as fm
-
-
-
-
-
-for f in mpl.font_manager.fontManager.ttflist:
-    print(f.name)
-
-#[f.name for f in mpl.font_manager.fontManager.ttflist]
-
-
-
-print('matplotlib 真的「看到的」字型')
-for f in fm.fontManager.ttflist:
-    print(f.name)
-
-
 print('------------------------------------------------------------')	#60個
 
 import numpy as np

@@ -1,0 +1,1314 @@
+PassengerId,Name,PClass,Age,Sex,Survived,SexCode,Title
+1,"Allen, Miss Elisabeth Walton",1.0,29.0,female,1,1,Miss
+2,"Allison, Miss Helen Loraine",1.0,2.0,female,0,1,Miss
+3,"Allison, Mr Hudson Joshua Creighton",1.0,30.0,male,0,0,Mr
+4,"Allison, Mrs Hudson JC (Bessie Waldo Daniels)",1.0,25.0,female,0,1,Mrs
+5,"Allison, Master Hudson Trevor",1.0,0.92,male,1,0,Mr
+6,"Anderson, Mr Harry",1.0,47.0,male,1,0,Mr
+7,"Andrews, Miss Kornelia Theodosia",1.0,63.0,female,1,1,Miss
+8,"Andrews, Mr Thomas, jr",1.0,39.0,male,0,0,Mr
+9,"Appleton, Mrs Edward Dale (Charlotte Lamson)",1.0,58.0,female,1,1,Mrs
+10,"Artagaveytia, Mr Ramon",1.0,71.0,male,0,0,Mr
+11,"Astor, Colonel John Jacob",1.0,47.0,male,0,0,Mr
+12,"Astor, Mrs John Jacob (Madeleine Talmadge Force)",1.0,19.0,female,1,1,Mrs
+13,"Aubert, Mrs Leontine Pauline",1.0,30.397989417989415,female,1,1,Mrs
+14,"Barkworth, Mr Algernon H",1.0,30.397989417989415,male,1,0,Mr
+15,"Baumann, Mr John D",1.0,30.397989417989415,male,0,0,Mr
+16,"Baxter, Mrs James (Helene DeLaudeniere Chaput)",1.0,50.0,female,1,1,Mrs
+17,"Baxter, Mr Quigg Edmond",1.0,24.0,male,0,0,Mr
+18,"Beattie, Mr Thomson",1.0,36.0,male,0,0,Mr
+19,"Beckwith, Mr Richard Leonard",1.0,37.0,male,1,0,Mr
+20,"Beckwith, Mrs Richard Leonard (Sallie Monypeny)",1.0,47.0,female,1,1,Mrs
+21,"Behr, Mr Karl Howell",1.0,26.0,male,1,0,Mr
+22,"Birnbaum, Mr Jakob",1.0,25.0,male,0,0,Mr
+23,"Bishop, Mr Dickinson H",1.0,25.0,male,1,0,Mr
+24,"Bishop, Mrs Dickinson H (Helen Walton)",1.0,19.0,female,1,1,Mrs
+25,"Bjornstrm-Steffansson, Mr Mauritz Hakan",1.0,28.0,male,1,0,Mr
+26,"Blackwell, Mr Stephen Weart",1.0,45.0,male,0,0,Mr
+27,"Blank, Mr Henry",1.0,39.0,male,1,0,Mr
+28,"Bonnell, Miss Caroline",1.0,30.0,female,1,1,Miss
+29,"Bonnell, Miss Elizabeth",1.0,58.0,female,1,1,Miss
+30,"Borebank, Mr John James",1.0,30.397989417989415,male,0,0,Mr
+31,"Bowen, Miss Grace Scott",1.0,45.0,female,1,1,Miss
+32,"Bowerman, Miss Elsie Edith",1.0,22.0,female,1,1,Miss
+33,"Bradley, Mr George",1.0,30.397989417989415,male,1,0,Mr
+34,"Brady, Mr John Bertram",1.0,41.0,male,0,0,Mr
+35,"Brandeis, Mr Emil",1.0,48.0,male,0,0,Mr
+36,"Brewe, Dr Arthur Jackson",1.0,30.397989417989415,male,0,0,Mr
+37,"Brown, Mrs James Joseph (Margaret Molly"" Tobin)""",1.0,44.0,female,1,1,Mrs
+38,"Brown, Mrs John Murray (Caroline Lane Lamson)",1.0,59.0,female,1,1,Mrs
+39,"Bucknell, Mrs William Robert (Emma Eliza Ward)",1.0,60.0,female,1,1,Mrs
+40,"Butt, Major Archibald Willingham",1.0,45.0,male,0,0,Mr
+41,"Calderhead, Mr Edward P",1.0,30.397989417989415,male,1,0,Mr
+42,"Candee, Mrs Edward (Helen Churchill Hungerford)",1.0,53.0,female,1,1,Mrs
+43,"Cardeza, Mrs James Warburton Martinez (Charlotte Wardle Drake)",1.0,58.0,female,1,1,Mrs
+44,"Cardeza, Mr Thomas Drake Martinez",1.0,36.0,male,1,0,Mr
+45,"Carlsson, Mr Frans Olof",1.0,33.0,male,0,0,Mr
+46,"Carrau, Mr Francisco M",1.0,30.397989417989415,male,0,0,Mr
+47,"Carrau, Mr Jose Pedro",1.0,30.397989417989415,male,0,0,Mr
+48,"Carter, Mr William Ernest",1.0,36.0,male,1,0,Mr
+49,"Carter, Mrs William Ernest (Lucile Polk)",1.0,36.0,female,1,1,Mrs
+50,"Carter, Miss Lucile Polk",1.0,14.0,female,1,1,Miss
+51,"Carter, Master William T II",1.0,11.0,male,1,0,Mr
+52,"Case, Mr Howard Brown",1.0,49.0,male,0,0,Mr
+53,"Cassebeer, Mrs Henry Arthur jr (Genevieve Fosdick)",1.0,30.397989417989415,female,1,1,Mrs
+54,"Cavendish, Mr Tyrell William",1.0,36.0,male,0,0,Mr
+55,"Cavendish, Mrs Tyrell William Julia Florence Siegel",1.0,30.397989417989415,female,1,1,Mrs
+56,"Chaffee, Mr Herbert Fuller",1.0,46.0,male,0,0,Mr
+57,"Chaffee, Mrs Herbert Fuller (Carrie Constance Toogood)",1.0,47.0,female,1,1,Mrs
+58,"Chambers, Mr Norman Campbell",1.0,27.0,male,1,0,Mr
+59,"Chambers, Mrs Norman Campbell (Bertha Griggs)",1.0,31.0,female,1,1,Mrs
+60,"Cherry, Miss Gladys",1.0,30.397989417989415,female,1,1,Miss
+61,"Chevre, Mr Paul",1.0,30.397989417989415,male,1,0,Mr
+62,"Chibnall (Bowerman), Mrs Edith Martha",1.0,30.397989417989415,female,1,1,Mrs
+63,"Chisholm, Mr Roderick Robert",1.0,30.397989417989415,male,0,0,Mr
+64,"Clark, Mr Walter Miller",1.0,27.0,male,0,0,Mr
+65,"Clark, Mrs Walter Miller (Virginia McDowell)",1.0,26.0,female,1,1,Mrs
+66,"Clifford, Mr George Quincy",1.0,30.397989417989415,male,0,0,Mr
+67,"Colley, Mr Edward Pomeroy",1.0,30.397989417989415,male,0,0,Mr
+68,"Compton, Mrs Alexander Taylor (Mary Eliza Ingersoll)",1.0,64.0,female,1,1,Mrs
+69,"Compton, Mr Alexander Taylor, Jr",1.0,37.0,male,0,0,Mr
+70,"Compton, Miss Sara Rebecca",1.0,39.0,female,1,1,Miss
+71,"Cornell, Mrs Robert Clifford (Malvina Helen Lamson)",1.0,55.0,female,1,1,Mrs
+72,"Crafton, Mr John Bertram",1.0,30.397989417989415,male,0,0,Mr
+73,"Crosby, Captain Edward Gifford",1.0,70.0,male,0,0,Mr
+74,"Crosby, Mrs Edward Gifford (Catherine Elizabeth Halstead)",1.0,69.0,female,1,1,Mrs
+75,"Crosby, Miss Harriet R",1.0,36.0,female,1,1,Miss
+76,"Cumings, Mr John Bradley",1.0,39.0,male,0,0,Mr
+77,"Cumings, Mrs John Bradley (Florence Briggs Thayer)",1.0,38.0,female,1,1,Mrs
+78,"Daly, Mr Peter Denis ",1.0,30.397989417989415,male,1,0,Mr
+79,"Daniel, Mr Robert Williams",1.0,27.0,male,1,0,Mr
+80,"Davidson, Mr Thornton",1.0,31.0,male,0,0,Mr
+81,"Davidson, Mrs Thornton (Orian Hays)",1.0,27.0,female,1,1,Mrs
+82,"de Villiers, Madame Berthe",1.0,30.397989417989415,female,1,1,Mrs
+83,"Dick, Mr Albert Adrian",1.0,31.0,male,1,0,Mr
+84,"Dick, Mrs Albert Adrian Vera Gillespie",1.0,17.0,female,1,1,Mrs
+85,"Dodge, Dr Washington",1.0,30.397989417989415,male,1,0,Mr
+86,"Dodge, Mrs Washington (Ruth Vidaver)",1.0,30.397989417989415,female,1,1,Mrs
+87,"Dodge, Master Washington",1.0,4.0,male,1,0,Mr
+88,"Douglas, Mrs Frederick Charles (Suzette Baxter)",1.0,27.0,female,1,1,Mrs
+89,"Douglas, Mr Walter Donald",1.0,50.0,male,0,0,Mr
+90,"Douglas, Mrs Walter Donald (Mahala Dutton)",1.0,48.0,female,1,1,Mrs
+91,"Duff Gordon, Sir Cosmo Edmund",1.0,49.0,male,1,0,Mr
+92,"Duff Gordon, Lady (Lucille Wallace Sutherland)",1.0,48.0,female,1,1,Mrs
+93,"Dulles, Mr William Crothers",1.0,39.0,male,0,0,Mr
+94,"Earnshaw, Mrs Boulton (Olive Potter)",1.0,23.0,female,1,1,Mrs
+95,"Eustis, Miss Elizabeth Mussey",1.0,53.0,female,1,1,Miss
+96,"Evans, Miss Edith Corse",1.0,36.0,female,0,1,Miss
+97,"Flegenheim, Mrs Alfred (Antoinette)",1.0,30.397989417989415,female,1,1,Mrs
+98,"Flynn, Mr John Irving",1.0,30.397989417989415,male,1,0,Mr
+99,"Foreman, Mr Benjamin Laventall",1.0,30.0,male,0,0,Mr
+100,"Fortune, Miss Alice Elizabeth",1.0,24.0,female,1,1,Miss
+101,"Fortune, Mr Charles Alexander",1.0,19.0,male,0,0,Mr
+102,"Fortune, Miss Ethel Flora",1.0,28.0,female,1,1,Miss
+103,"Fortune, Miss Mabel",1.0,23.0,female,1,1,Miss
+104,"Fortune, Mr Mark",1.0,64.0,male,0,0,Mr
+105,"Fortune, Mrs Mark (Mary McDougald)",1.0,60.0,female,1,1,Mrs
+106,"Franklin, Mr Thomas Parham",1.0,30.397989417989415,male,0,0,Mr
+107,"Frauenthal, Dr Henry William",1.0,49.0,male,1,0,Mr
+108,"Frauenthal, Mrs Henry William (Clara Heinsheimer)",1.0,30.397989417989415,female,1,1,Mrs
+109,"Frauenthal, Mr Isaac Gerald",1.0,44.0,male,1,0,Mr
+110,"Frolicher, Miss Marguerite",1.0,22.0,female,1,1,Miss
+111,"Frolicher-Stehli, Mr Maxmillian",1.0,60.0,male,1,0,Mr
+112,"Frolicher-Stehli, Mrs Maxmillian (Margaretha Emerentia Stehli)",1.0,48.0,female,1,1,Mrs
+113,"Futrelle, Mr Jacques",1.0,37.0,male,0,0,Mr
+114,"Futrelle, Mrs Jacques (May Peel)",1.0,35.0,female,1,1,Mrs
+115,"Gee, Mr Arthur H",1.0,47.0,male,0,0,Mr
+116,"Gibson, Miss Dorothy",1.0,22.0,female,1,1,Miss
+117,"Gibson, Mrs Leonard (Pauline C Boeson)",1.0,45.0,female,1,1,Mrs
+118,"Goldenberg, Mr Samuel L",1.0,49.0,male,1,0,Mr
+119,"Goldenberg, Mrs Samuel L (Edwiga Grabowsko)",1.0,30.397989417989415,female,1,1,Mrs
+120,"Goldschmidt, Mr George B",1.0,71.0,male,0,0,Mr
+121,"Gracie, Colonel Archibald IV",1.0,54.0,male,1,0,Mr
+122,"Graham, Mr George Edward",1.0,38.0,male,0,0,Mr
+123,"Graham, Miss Margaret Edith",1.0,19.0,female,1,1,Miss
+124,"Graham, Mrs William Thompson (Edith Junkins)",1.0,58.0,female,1,1,Mrs
+125,"Greenfield, Mrs Leo David (Blanche Strouse)",1.0,45.0,female,1,1,Mrs
+126,"Greenfield, Mr William Bertram",1.0,23.0,male,1,0,Mr
+127,"Guggenheim, Mr Benjamin",1.0,46.0,male,0,0,Mr
+128,"Harder, Mr George Achilles",1.0,25.0,male,1,0,Mr
+129,"Harder, Mrs George Achilles (Dorothy Annan)",1.0,21.0,female,1,1,Mrs
+130,"Harper, Mr Henry Sleeper",1.0,48.0,male,1,0,Mr
+131,"Harper, Mrs Henry Sleeper (Myna Haxtun)",1.0,49.0,female,1,1,Mrs
+132,"Harris, Mr Henry Birkhardt",1.0,45.0,male,0,0,Mr
+133,"Harris, Mrs Henry Birkhardt (Irene Wallach)",1.0,36.0,female,1,1,Mrs
+134,"Hawksford, Mr Walter James",1.0,30.397989417989415,male,1,0,Mr
+135,"Hays, Mr Charles Melville",1.0,55.0,male,0,0,Mr
+136,"Hays, Mrs Charles Melville (Clara Jennings Gregg)",1.0,52.0,female,1,1,Mrs
+137,"Hays, Miss Margaret Bechstein",1.0,24.0,female,1,1,Miss
+138,"Head, Mr Christopher",1.0,30.397989417989415,male,0,0,Mr
+139,"Hilliard, Mr Herbert Henry",1.0,30.397989417989415,male,0,0,Mr
+140,"Hipkins, Mr William Edward",1.0,30.397989417989415,male,0,0,Mr
+141,"Hippach, Miss Jean Gertrude",1.0,16.0,female,1,1,Miss
+142,"Hippach, Mrs Louis Albert (Ida Sophia Fischer)",1.0,44.0,female,1,1,Mrs
+143,"Hogeboom, Mrs John C (Anna Andrews)",1.0,51.0,female,1,1,Mrs
+144,"Holverson, Mr Alexander Oskar",1.0,42.0,male,0,0,Mr
+145,"Holverson, Mrs Alexander Oskar (Mary Aline Towner)",1.0,35.0,female,1,1,Mrs
+146,"Homer, Mr Harry",1.0,35.0,male,1,0,Mr
+147,"Hoyt, Mr Frederick Maxfield",1.0,38.0,male,1,0,Mr
+148,"Hoyt, Mrs Frederick Maxfield (Jane Anne Forby)",1.0,35.0,female,1,1,Mrs
+149,"Hoyt, Mr William F",1.0,30.397989417989415,male,0,0,Mr
+150,"Isham, Miss Anne Elizabeth",1.0,50.0,female,0,1,Miss
+151,"Ismay, Mr Joseph Bruce",1.0,49.0,male,1,0,Mr
+152,"Jones, Mr Charles Cresson",1.0,46.0,male,0,0,Mr
+153,"Julian, Mr Henry Forbes",1.0,30.397989417989415,male,0,0,Mr
+154,"Kent, Mr Edward Austin",1.0,58.0,male,0,0,Mr
+155,"Kenyon, Mr Frederick R",1.0,41.0,male,0,0,Mr
+156,"Kenyon, Mrs Frederick R (Marion)",1.0,30.397989417989415,female,1,1,Mrs
+157,"Kimball, Mr Edwin Nelson Jr",1.0,42.0,male,1,0,Mr
+158,"Kimball, Mrs Edwin Nelson Jr (Gertrude Parsons)",1.0,40.0,female,1,1,Mrs
+159,"Klaber, Mr Herman",1.0,30.397989417989415,male,0,0,Mr
+160,"Leader, Dr Alice Farnham",1.0,30.397989417989415,female,1,1,Mrs
+161,"Lewy, Mr Ervin G",1.0,30.397989417989415,male,0,0,Mr
+162,"Lindeberg-Lind, Mr Erik Gustaf",1.0,42.0,male,0,0,Mr
+163,"Lindstrom, Mrs Carl Johan (Sigrid Posse)",1.0,55.0,female,1,1,Mrs
+164,"Lines, Mrs Ernest H (Elizabeth Lindsey James)",1.0,50.0,female,1,1,Mrs
+165,"Lines, Miss Mary Conover",1.0,16.0,female,1,1,Miss
+166,"Lingrey, Mr Edward",1.0,30.397989417989415,male,0,0,Mr
+167,"Long, Mr Milton Clyde",1.0,29.0,male,0,0,Mr
+168,"Longley, Miss Gretchen Fiske",1.0,21.0,female,1,1,Miss
+169,"Loring, Mr Joseph Holland",1.0,30.0,male,0,0,Mr
+170,"Madill, Miss Georgette Alexandra",1.0,15.0,female,1,1,Miss
+171,"Maguire, Mr John Edward",1.0,30.0,male,0,0,Mr
+172,"Marechal, Mr Pierre",1.0,30.397989417989415,male,1,0,Mr
+173,"Marvin, Mr Daniel Warner",1.0,30.397989417989415,male,0,0,Mr
+174,"Marvin, Mrs Daniel Warner (Mary Graham Carmichael Farquarson)",1.0,30.397989417989415,female,1,1,Mrs
+175,"McCaffry, Mr Thomas Francis",1.0,46.0,male,0,0,Mr
+176,"McCarthy, Mr Timothy J",1.0,54.0,male,0,0,Mr
+177,"McGough, Mr James R",1.0,36.0,male,1,0,Mr
+178,"Meyer, Mr Edgar Joseph",1.0,28.0,male,0,0,Mr
+179,"Meyer, Mrs Edgar Joseph (Leila Saks)",1.0,30.397989417989415,female,1,1,Mrs
+180,"Millet, Mr Francis Davis",1.0,65.0,male,0,0,Mr
+181,"Minahan, Miss Daisy E",1.0,33.0,female,1,1,Miss
+182,"Minahan, Dr William Edward",1.0,44.0,male,0,0,Mr
+183,"Minahan, Mrs William Edward (Lillian E Thorpe)",1.0,37.0,female,1,1,Mrs
+184,"Mock, Mr Philip E",1.0,30.397989417989415,male,1,0,Mr
+185,"Molson, Mr Harry Markland",1.0,55.0,male,0,0,Mr
+186,"Moore, Mr Clarence Bloomfield",1.0,47.0,male,0,0,Mr
+187,"Natsch, Mr Charles H",1.0,36.0,male,0,0,Mr
+188,"Newell, Mr Arthur Webster",1.0,58.0,male,0,0,Mr
+189,"Newell, Miss Madeleine",1.0,31.0,female,1,1,Miss
+190,"Newell, Miss Marjorie",1.0,23.0,female,1,1,Miss
+191,"Newsom, Miss Helen Monypeny",1.0,19.0,female,1,1,Miss
+192,"Nicholson, Mr Arthur Ernest",1.0,64.0,male,0,0,Mr
+193,"Omont, Mr A Fernand",1.0,30.397989417989415,male,1,0,Mr
+194,"Ostby, Mr Engelhart Cornelius",1.0,64.0,male,0,0,Mr
+195,"Ostby, Miss Helen Raghnild",1.0,22.0,female,1,1,Miss
+196,"Ovies y Rodriguez, Mr Servando",1.0,28.0,male,0,0,Mr
+197,"Parr, Mr William Henry Marsh",1.0,30.397989417989415,male,0,0,Mr
+198,"Partner, Mr Austin",1.0,30.397989417989415,male,0,0,Mr
+199,"Payne, Mr Vivian Ponsonby",1.0,22.0,male,0,0,Mr
+200,"Pears, Mr Thomas",1.0,30.397989417989415,male,0,0,Mr
+201,"Pears, Mrs Thomas (Edith)",1.0,30.397989417989415,female,1,1,Mrs
+202,"Penasco, Mr Victor de Satode",1.0,18.0,male,0,0,Mr
+203,"Penasco, Mrs Victor de Satode (Josefa de Soto)",1.0,17.0,female,1,1,Mrs
+204,"Peuchen, Major Arthur Godfrey",1.0,52.0,male,1,0,Mr
+205,"Porter, Mr Walter Chamberlain",1.0,46.0,male,0,0,Mr
+206,"Potter, Mrs Thomas, Jr (Lily Alexenia Wilson)",1.0,56.0,female,1,1,Mrs
+207,"Reuchlin, Jonkheer John George",1.0,30.397989417989415,male,0,0,Mr
+208,"Rheims, Mr George Lucien",1.0,30.397989417989415,male,1,0,Mr
+209,"Robert, Mrs Edward Scott (Elisabeth Walton McMillan)",1.0,43.0,female,1,1,Mrs
+210,"Roebling, Mr Washington Augustus 2nd",1.0,31.0,male,0,0,Mr
+211,"Romaine, Mr Charles Hallace",1.0,30.397989417989415,male,1,0,Mr
+212,"Rood, Mr Hugh R",1.0,30.397989417989415,male,0,0,Mr
+213,"Rosenbaum (Russell), Miss Edith Louise",1.0,33.0,female,1,1,Miss
+214,"Ross, Mr John Hugo",1.0,30.397989417989415,male,0,0,Mr
+215,"Rothes, the Countess of (Noel Lucy Martha Dyer-Edwardes)",1.0,27.0,female,1,1,Mrs
+216,"Rothschild, Mr Martin",1.0,55.0,male,0,0,Mr
+217,"Rothschild, Mrs Martin (Elizabeth L Barrett)",1.0,54.0,female,1,1,Mrs
+218,"Rowe, Mr Alfred G",1.0,30.397989417989415,male,0,0,Mr
+219,"Ryerson, Mr Arthur Larned",1.0,61.0,male,0,0,Mr
+220,"Ryerson, Mrs Arthur Larned (Emily Maria Borie)",1.0,48.0,female,1,1,Mrs
+221,"Ryerson, Miss Emily Borie",1.0,18.0,female,1,1,Miss
+222,"Ryerson, Master John Borie",1.0,13.0,male,1,0,Mr
+223,"Ryerson, Miss Susan (Suzette) Parker",1.0,21.0,female,1,1,Miss
+224,"Saalfeld, Mr Adolphe",1.0,30.397989417989415,male,1,0,Mr
+225,"Salomon, Mr Abraham L",1.0,30.397989417989415,male,1,0,Mr
+226,"Schabert, Mrs Paul (Emma Mock)",1.0,30.397989417989415,female,1,1,Mrs
+227,"Seward, Mr Frederic Kimber",1.0,34.0,male,1,0,Mr
+228,"Shutes, Miss Elizabeth W",1.0,40.0,female,1,1,Miss
+229,"Silverthorne, Mr Spencer Victor",1.0,36.0,male,1,0,Mr
+230,"Silvey, Mr William Baird",1.0,50.0,male,0,0,Mr
+231,"Silvey, Mrs William Baird (Alice Munger)",1.0,39.0,female,1,1,Mrs
+232,"Simonius-Blumer, Col Alfons",1.0,56.0,male,1,0,Mr
+233,"Sloper, Mr William Thompson",1.0,28.0,male,1,0,Mr
+234,"Smart, Mr John Montgomery",1.0,56.0,male,0,0,Mr
+235,"Smith, Mr James Clinch",1.0,56.0,male,0,0,Mr
+236,"Smith, Mr Lucien Philip",1.0,24.0,male,0,0,Mr
+237,"Smith, Mrs Lucien Philip (Mary Eloise Hughes",1.0,18.0,female,1,1,Mrs
+238,"Smith, Mr Richard William",1.0,30.397989417989415,male,0,0,Mr
+239,"Snyder, Mr John Pillsbury",1.0,24.0,male,1,0,Mr
+240,"Snyder, Mrs John Pillsbury (Nelle Stevenson)",1.0,23.0,female,1,1,Mrs
+241,"Spedden, Mr Frederick Oakley",1.0,45.0,male,1,0,Mr
+242,"Spedden, Mrs Frederick Oakley (Margaretta Corning Stone)",1.0,40.0,female,1,1,Mrs
+243,"Spedden, Master Robert Douglas",1.0,6.0,male,1,0,Mr
+244,"Spencer, Mr William Augustus",1.0,57.0,male,0,0,Mr
+245,"Spencer, Mrs William Augustus (Marie Eugenie)",1.0,30.397989417989415,female,1,1,Mrs
+246,"Staehlin, Dr Max",1.0,32.0,male,1,0,Mr
+247,"Stead, Mr William Thomas",1.0,62.0,male,0,0,Mr
+248,"Stengel, Mr Charles Emil Henry",1.0,54.0,male,1,0,Mr
+249,"Stengel, Mrs Charles Emil Henry (Annie May Morris)",1.0,43.0,female,1,1,Mrs
+250,"Stephenson, Mrs Walter Bertram (Martha Eustis)",1.0,52.0,female,1,1,Mrs
+251,"Stewart, Mr Albert A",1.0,30.397989417989415,male,0,0,Mr
+252,"Stone, Mrs George Nelson (Martha E)",1.0,62.0,female,1,1,Mrs
+253,"Straus, Mr Isidor",1.0,67.0,male,0,0,Mr
+254,"Straus, Mrs Isidor (Ida Blun)",1.0,63.0,female,0,1,Mrs
+255,"Sutton, Mr Frederick",1.0,61.0,male,0,0,Mr
+256,"Swift, Mrs Frederick Joel (Margaret Welles Barron)",1.0,46.0,female,1,1,Mrs
+257,"Taussig, Mr Emil",1.0,52.0,male,0,0,Mr
+258,"Taussig, Mrs Emil (Tillie Mandelbaum)",1.0,39.0,female,1,1,Mrs
+259,"Taussig, Miss Ruth",1.0,18.0,female,1,1,Miss
+260,"Taylor, Mr Elmer Zebley",1.0,48.0,male,1,0,Mr
+261,"Taylor, Mrs Elmer Zebley (Juliet Cummins Wright)",1.0,30.397989417989415,female,1,1,Mrs
+262,"Thayer, Mr John Borland",1.0,49.0,male,0,0,Mr
+263,"Thayer, Mrs John Borland (Marian Longstreth Morris)",1.0,39.0,female,1,1,Mrs
+264,"Thayer, Mr John Borland, jr",1.0,17.0,male,1,0,Mr
+265,"Thorne, Mr George (alias of: Mr George Rosenshine)",1.0,46.0,male,0,0,Mr
+266,"Thorne, Mrs Gertrude Maybelle",1.0,30.397989417989415,female,1,1,Mrs
+267,"Tucker, Mr Gilbert Milligan, jr",1.0,31.0,male,1,0,Mr
+268,"Uruchurtu, Mr Manuel E",1.0,30.397989417989415,male,0,0,Mr
+269,"Van Derhoef, Mr Wyckoff",1.0,61.0,male,0,0,Mr
+270,"Walker, Mr William Anderson",1.0,47.0,male,0,0,Mr
+271,"Warren, Mr Frank Manley",1.0,64.0,male,0,0,Mr
+272,"Warren, Mrs Frank Manley (Anna S Atkinson)",1.0,60.0,female,1,1,Mrs
+273,"Weir, Col John",1.0,60.0,male,0,0,Mr
+274,"White, Mrs J Stuart (Ella Holmes)",1.0,55.0,female,1,1,Mrs
+275,"White, Mr Percival Wayland",1.0,54.0,male,0,0,Mr
+276,"White, Mr Richard Frasar",1.0,21.0,male,0,0,Mr
+277,"Wick, Mr George Dennick",1.0,57.0,male,0,0,Mr
+278,"Wick, Mrs George Dennick (Martha Hitchcock)",1.0,45.0,female,1,1,Mrs
+279,"Wick, Miss Mary Natalie",1.0,31.0,female,1,1,Miss
+280,"Widener, Mr George Dunton",1.0,50.0,male,0,0,Mr
+281,"Widener, Mrs George Dunton (Eleanor Elkins)",1.0,50.0,female,1,1,Mrs
+282,"Widener, Mr Harry Elkins",1.0,27.0,male,0,0,Mr
+283,"Willard, Miss Constance",1.0,20.0,female,1,1,Miss
+284,"Williams, Mr Charles Duane",1.0,51.0,male,0,0,Mr
+285,"Williams, Mr Fletcher Lambert",1.0,30.397989417989415,male,0,0,Mr
+286,"Williams, Mr Richard Norris II",1.0,21.0,male,1,0,Mr
+287,"Woolner, Mr Hugh",1.0,30.397989417989415,male,1,0,Mr
+288,"Wright, Mr George",1.0,30.397989417989415,male,0,0,Mr
+289,"Young, Miss Marie Grice",1.0,36.0,female,1,1,Miss
+290,"Barber, Ms ",1.0,30.397989417989415,female,1,1,Miss
+291,"Bazzani, Ms Albina",1.0,30.397989417989415,female,1,1,Miss
+292,"Bidois, Miss Rosalie",1.0,30.397989417989415,female,1,1,Miss
+293,"Bird, Ms Ellen",1.0,30.397989417989415,female,1,1,Miss
+294,"Bissetti, Ms Amelia",1.0,30.397989417989415,female,1,1,Miss
+295,"Burns, Ms Elizabeth Margaret",1.0,30.397989417989415,female,1,1,Miss
+296,"Chaudanson, Ms         Victorine",1.0,30.397989417989415,female,1,1,Miss
+297,"Cleaver, Ms Alice",1.0,30.397989417989415,female,1,1,Miss
+298,"Daniels, Ms Sarah",1.0,30.397989417989415,female,1,1,Miss
+299,"Endres, Miss Caroline Louise",1.0,30.397989417989415,female,1,1,Miss
+300,"Farthing, Mr John",1.0,30.397989417989415,male,0,0,Mr
+301,"Fleming, Ms Margaret",1.0,30.397989417989415,female,0,1,Miss
+302,"Francatelli, Ms Laura Mabel",1.0,30.397989417989415,female,1,1,Miss
+303,"Fry, Mr Richard",1.0,30.397989417989415,male,0,0,Mr
+304,"Geiger, Miss Emily ",1.0,30.397989417989415,female,1,1,Miss
+305,"Giglio, Mr Victor",1.0,30.397989417989415,male,0,0,Mr
+306,"Harrington, Mr Charles",1.0,30.397989417989415,male,0,0,Mr
+307,"Harrison, Mr William   Henry",1.0,40.0,male,0,0,Mr
+308,"Hassah, Mr Hamad",1.0,30.397989417989415,male,0,0,Mr
+309,"Icabad (Icabod), Ms",1.0,30.397989417989415,female,1,1,Mrs
+310,"Keeping, Mr Edwin",1.0,32.0,male,0,0,Mr
+311,"Kenchen, Ms Amelia",1.0,30.397989417989415,female,1,1,Miss
+312,"LeRoy, Miss Berthe",1.0,30.397989417989415,female,1,1,Miss
+313,"Lesneur, Mr Gustave",1.0,30.397989417989415,male,0,0,Mr
+314,"Maloney, Ms",1.0,30.397989417989415,female,1,1,Mrs
+315,"Oliva, Mlle",1.0,30.397989417989415,female,0,1,Mrs
+316,"Pericault, Ms",1.0,30.397989417989415,female,1,1,Mrs
+317,"Ringhini, Mr Sante",1.0,33.0,male,0,0,Mr
+318,"Robbins, Mr Victor",1.0,30.397989417989415,male,0,0,Mr
+319,"Segesser, Mlle Emma",1.0,30.397989417989415,female,1,1,Miss
+320,"Seredeca, Ms",1.0,30.397989417989415,female,0,1,Mrs
+321,"Ward, Ms Anna",1.0,30.397989417989415,female,0,1,Miss
+322,"Wilson, Ms Helen",1.0,30.397989417989415,female,1,1,Miss
+323,"Abelson, Mr Samuel",2.0,30.0,male,0,0,Mr
+324,"Abelson, Mrs Samuel (Anna)",2.0,28.0,female,1,1,Mrs
+325,"Andrew, Mr Edgar Samuel",2.0,18.0,male,0,0,Mr
+326,"Andrew, Mr Frank",2.0,30.397989417989415,male,0,0,Mr
+327,"Angle, Mr William A",2.0,34.0,male,0,0,Mr
+328,"Angle, Mrs William A (Florence)",2.0,32.0,female,1,1,Mrs
+329,"Ashby, Mr John",2.0,57.0,male,0,0,Mr
+330,"Bailey, Mr Percy Andrew",2.0,18.0,male,0,0,Mr
+331,"Baimbrigge, Mr Charles R",2.0,23.0,male,0,0,Mr
+332,"Balls, Mrs Ada E Hall",2.0,36.0,female,1,1,Mrs
+333,"Banfield, Mr Frederick J",2.0,28.0,male,0,0,Mr
+334,"Bateman, Rev Robert James",2.0,51.0,male,0,0,Mr
+335,"Beane, Mr Edward",2.0,32.0,male,1,0,Mr
+336,"Beane, Mrs Edward (Ethel Clarke)",2.0,19.0,female,1,1,Mrs
+337,"Beauchamp, Mr Henry James",2.0,28.0,male,0,0,Mr
+338,"Becker, Mrs Allen Oliver (Nellie E Baumgardner)",2.0,36.0,female,1,1,Mrs
+339,"Becker, Miss Marion Louise",2.0,4.0,female,1,1,Miss
+340,"Becker, Master Richard F",2.0,1.0,male,1,0,Mr
+341,"Becker, Miss Ruth Elizabeth",2.0,12.0,female,1,1,Miss
+342,"Beesley, Mr Lawrence",2.0,34.0,male,1,0,Mr
+343,"Bentham, Miss Lilian W",2.0,19.0,female,1,1,Miss
+344,"Berriman, Mr William S",2.0,23.0,male,0,0,Mr
+345,"Botsford, Mr William Hull",2.0,26.0,male,0,0,Mr
+346,"Bowenur, Mr Solomon",2.0,30.397989417989415,male,0,0,Mr
+347,"Bracken, Mr James H",2.0,27.0,male,0,0,Mr
+348,"Brown, Miss Edith E",2.0,15.0,female,1,1,Miss
+349,"Brown, Mr Thomas William Solomon",2.0,45.0,male,0,0,Mr
+350,"Brown, Mrs Thomas William Solomon (Elizabeth C)",2.0,40.0,female,1,1,Mrs
+351,"Bryhl, Miss Dagmar",2.0,20.0,female,1,1,Miss
+352,"Bryhl, Mr Kurt Arnold Gottfrid",2.0,25.0,male,0,0,Mr
+353,"Buss, Miss Kate",2.0,36.0,female,1,1,Miss
+354,"Butler, Mr Reginald Fenton",2.0,25.0,male,0,0,Mr
+355,"Byles, Rev Thomas Roussel D",2.0,30.397989417989415,male,0,0,Mr
+356,"Bystrom, Mrs Carolina",2.0,42.0,female,1,1,Mrs
+357,"Caldwell, Mr Albert Francis",2.0,26.0,male,1,0,Mr
+358,"Caldwell, Mrs Albert Francis (Sylvia Mae Harbaugh)",2.0,26.0,female,1,1,Mrs
+359,"Caldwell, Master Alden Gates",2.0,0.83,male,1,0,Mr
+360,"Cameron, Miss Clear",2.0,31.0,female,1,1,Miss
+361,"Campbell, Mr William",2.0,30.397989417989415,male,0,0,Mr
+362,"Carbines, Mr William",2.0,19.0,male,0,0,Mr
+363,"Carter, Rev Ernest Courtenay",2.0,54.0,male,0,0,Mr
+364,"Carter, Mrs Ernest Courtenay (Lillian Hughes)",2.0,44.0,female,0,1,Mrs
+365,"Chapman, Mr Charles Henry",2.0,52.0,male,0,0,Mr
+366,"Chapman, Mr John Henry",2.0,30.0,male,0,0,Mr
+367,"Chapman, Mrs John Henry (Elizabeth Lawry)",2.0,30.0,female,0,1,Mrs
+368,"Christy, Mrs Alice Frances",2.0,30.397989417989415,female,1,1,Mrs
+369,"Christy, Miss Julie",2.0,30.397989417989415,female,1,1,Miss
+370,"Clarke, Mr Charles V",2.0,29.0,male,0,0,Mr
+371,"Clarke, Mrs Charles V (Ada Maria)",2.0,30.397989417989415,female,1,1,Mrs
+372,"Coleridge, Mr Reginald Charles",2.0,29.0,male,0,0,Mr
+373,"Collander, Mr Erik",2.0,27.0,male,0,0,Mr
+374,"Collett, Mr Sidney C Stuart",2.0,24.0,male,1,0,Mr
+375,"Collyer, Mr Harvey",2.0,35.0,male,0,0,Mr
+376,"Collyer, Mrs Harvey (Charlotte Tate)",2.0,31.0,female,1,1,Mrs
+377,"Collyer, Miss Marjorie",2.0,8.0,female,1,1,Miss
+378,"Cook, Mrs Selena Rogers",2.0,22.0,female,0,1,Mrs
+379,"Corbett, Mrs Walter H (Irene Colvin)",2.0,30.0,female,0,1,Mrs
+380,"Corey, Mrs Percy C (Mary Phyllis Elizabeth Miller)",2.0,30.397989417989415,female,0,1,Mrs
+381,"Cotterill, Mr Harry",2.0,20.0,male,0,0,Mr
+382,"Cunningham, Mr Alfred Fleming",2.0,30.397989417989415,male,0,0,Mr
+383,"Davies, Mr Charles Henry",2.0,21.0,male,0,0,Mr
+384,"Davis, Mrs Agnes",2.0,49.0,female,1,1,Mrs
+385,"Davis, Master John Morgan",2.0,8.0,male,1,0,Mr
+386,"Davis, Miss Mary",2.0,28.0,female,1,1,Miss
+387,"Deacon, Mr Percy",2.0,18.0,male,0,0,Mr
+388,"de Brito, Mr Jose Joaquim",2.0,30.397989417989415,male,0,0,Mr
+389,"del Carlo, Mr Sebastiano",2.0,28.0,male,0,0,Mr
+390,"del Carlo, Mrs Sebastiano (Argenia Genovese)",2.0,22.0,female,1,1,Mrs
+391,"Denbury, Mr Herbert",2.0,25.0,male,0,0,Mr
+392,"Dibden, Mr William",2.0,18.0,male,0,0,Mr
+393,"Doling, Mrs Ada",2.0,32.0,female,1,1,Mrs
+394,"Doling, Miss Elsie",2.0,18.0,female,1,1,Miss
+395,"Downton (?Douton), Mr William James",2.0,30.397989417989415,male,0,0,Mr
+396,"Drew, Mr James Vivian",2.0,42.0,male,0,0,Mr
+397,"Drew, Mrs James Vivian (Lulu Thorne Christian)",2.0,34.0,female,1,1,Mrs
+398,"Drew, Master Marshall Brines",2.0,8.0,male,1,0,Mr
+399,"Duran y More, Miss Asuncion",2.0,30.397989417989415,female,1,1,Miss
+400,"Duran y More, Miss Florentina",2.0,30.397989417989415,female,1,1,Miss
+401,"Eitemiller, Mr George Floyd",2.0,23.0,male,0,0,Mr
+402,"Enander, Mr Ingvar",2.0,21.0,male,0,0,Mr
+403,"Fahlstrom, Mr Arne Jonas",2.0,19.0,male,0,0,Mr
+404,"Faunthorpe, Mr Harry",2.0,30.397989417989415,male,0,0,Mr
+405,"Faunthorpe, Mrs Lizzie (see Wilkinson, E)",2.0,30.397989417989415,female,1,1,Mrs
+406,"Fillbrook, Mr Charles",2.0,30.397989417989415,male,0,0,Mr
+407,"Fox, Mr Stanley H",2.0,38.0,male,0,0,Mr
+408,"Frost, Mr Anthony (Archie) W",2.0,30.397989417989415,male,0,0,Mr
+409,"Funk, Miss Annie C",2.0,38.0,female,0,1,Miss
+410,"Fynney, Mr Joseph J",2.0,35.0,male,0,0,Mr
+411,"Gale, Mr Harry",2.0,35.0,male,0,0,Mr
+412,"Gale, Mr Shadrach",2.0,38.0,male,0,0,Mr
+413,"Garside, Miss Ethel",2.0,24.0,female,1,1,Miss
+414,"Gaskell, Mr Alfred",2.0,16.0,male,0,0,Mr
+415,"Gavey, Mr Lawrence",2.0,26.0,male,0,0,Mr
+416,"Gilbert, Mr William",2.0,45.0,male,0,0,Mr
+417,"Giles, Mr Edgar",2.0,24.0,male,0,0,Mr
+418,"Giles, Mr Frederick",2.0,21.0,male,0,0,Mr
+419,"Giles, Mr Ralph",2.0,22.0,male,0,0,Mr
+420,"Gill, Mr John W",2.0,30.397989417989415,male,0,0,Mr
+421,"Gillespie, Mr William",2.0,34.0,male,0,0,Mr
+422,"Givard, Mr Hans Christensen",2.0,30.0,male,0,0,Mr
+423,"Greenberg, Mr Samuel",2.0,50.0,male,0,0,Mr
+424,"Hale, Mr Reginald",2.0,30.0,male,0,0,Mr
+425,"Hamalainen, Mrs William (Anna)",2.0,23.0,female,1,1,Mrs
+426,"Hamalainen, Master Viljo",2.0,1.0,male,1,0,Mr
+427,"Harbeck, Mr William H",2.0,44.0,male,0,0,Mr
+428,"Harper, Rev John",2.0,28.0,male,0,0,Mr
+429,"Harper, Miss Nina",2.0,6.0,female,1,1,Miss
+430,"Harris, Mr George",2.0,30.0,male,1,0,Mr
+431,"Harris, Mr Walter",2.0,30.397989417989415,male,0,0,Mr
+432,"Hart, Mr Benjamin",2.0,43.0,male,0,0,Mr
+433,"Hart, Mrs Benjamin (Esther)",2.0,45.0,female,1,1,Mrs
+434,"Hart, Miss Eva Miriam",2.0,7.0,female,1,1,Miss
+435,"Herman, Miss Alice",2.0,24.0,female,1,1,Miss
+436,"Herman, Miss Kate",2.0,24.0,female,1,1,Miss
+437,"Herman, Mr Samuel",2.0,49.0,male,0,0,Mr
+438,"Herman, Mrs Samuel (Jane Laver)",2.0,48.0,female,1,1,Mrs
+439,"Hewlett, Mrs Mary D",2.0,30.397989417989415,female,1,1,Mrs
+440,"Hickman, Mr Leonard Mark",2.0,34.0,male,0,0,Mr
+441,"Hickman, Mr Lewis",2.0,32.0,male,0,0,Mr
+442,"Hickman, Mr Stanley George",2.0,21.0,male,0,0,Mr
+443,"Hiltunen, Miss Marta",2.0,18.0,female,0,1,Miss
+444,"Hocking, Mrs Elizabeth",2.0,53.0,female,1,1,Mrs
+445,"Hocking, Mr George",2.0,23.0,male,0,0,Mr
+446,"Hocking, Miss Ellen (Nellie)",2.0,21.0,female,1,1,Miss
+447,"Hocking, Mr Samuel James",2.0,30.397989417989415,male,0,0,Mr
+448,"Hodges, Mr Henry Price",2.0,52.0,male,0,0,Mr
+449,"Hold, Mr Stephen",2.0,42.0,male,0,0,Mr
+450,"Hold, Mrs Stephen (Annie Margaret)",2.0,36.0,female,1,1,Mrs
+451,"Hood, Mr Ambrose, Jr",2.0,21.0,male,0,0,Mr
+452,"Hosono, Mr Masafumi",2.0,41.0,male,1,0,Mr
+453,"Howard, Mr Benjamin",2.0,30.397989417989415,male,0,0,Mr
+454,"Howard, Mrs Benjamin (Ellen Truelove)",2.0,30.397989417989415,female,0,1,Mrs
+455,"Hunt, Mr George Henry",2.0,33.0,male,0,0,Mr
+456,"Ilett, Miss Bertha",2.0,17.0,female,1,1,Miss
+457,Jacobsohn Mr Samuel,,30.397989417989415,male,0,0,Mr
+458,"Jacobsohn, Mrs Sidney Samuel (Amy Frances Christy)",2.0,30.397989417989415,female,1,1,Mrs
+459,"Jarvis, Mr John Denzil",2.0,30.397989417989415,male,0,0,Mr
+460,"Jefferys, Mr Clifford",2.0,30.397989417989415,male,0,0,Mr
+461,"Jefferys, Mr Ernest",2.0,30.397989417989415,male,0,0,Mr
+462,"Jenkin, Mr Stephen Curnow",2.0,30.397989417989415,male,0,0,Mr
+463,"Jerwan, Mrs Amin S (Marie Thuillard)",2.0,23.0,female,1,1,Mrs
+464,"Kantor, Mr Sinai",2.0,34.0,male,0,0,Mr
+465,"Kantor, Mrs Sinai (Miriam Sternim)",2.0,30.397989417989415,female,1,1,Mrs
+466,"Karnes, Mrs J Frank (Claire Bennett)",2.0,22.0,female,0,1,Mrs
+467,"Keane, Mr Daniel",2.0,30.397989417989415,male,0,0,Mr
+468,"Keane, Miss Nora A",2.0,30.397989417989415,female,1,1,Miss
+469,"Kelly, Mrs Florence (Fannie)",2.0,45.0,female,1,1,Mrs
+470,"Kirkland, Rev Charles Leonard",2.0,30.397989417989415,male,0,0,Mr
+471,"Knight, Mr Robert",2.0,30.397989417989415,male,0,0,Mr
+472,"Kvillner, Mr Johan Henrik Johannesson",2.0,31.0,male,0,0,Mr
+473,"Lahtinen, Rev William",2.0,30.0,male,0,0,Mr
+474,"Lahtinen, Mrs William (Anna Sylvan)",2.0,26.0,female,0,1,Mrs
+475,"Lamb, Mr John James",2.0,30.397989417989415,male,0,0,Mr
+476,"Lemore, Mrs Amelia",2.0,34.0,female,1,1,Mrs
+477,"LaRoche, Mr Joseph",2.0,26.0,male,0,0,Mr
+478,"LaRoche, Mrs Joseph (Juliet)",2.0,22.0,female,1,1,Mrs
+479,"LaRoche, Miss Louise",2.0,1.0,female,1,1,Miss
+480,"LaRoche, Miss Simonne",2.0,3.0,female,1,1,Miss
+481,"Lehmann, Miss Bertha",2.0,30.397989417989415,female,1,1,Miss
+482,"Leitch, Miss Jessie",2.0,30.397989417989415,female,1,1,Miss
+483,"Levy, Mr Rene Jacques",2.0,30.397989417989415,male,0,0,Mr
+484,"Leyson, Mr Robert William Norman",2.0,25.0,male,0,0,Mr
+485,"Lingan, Mr John",2.0,30.397989417989415,male,0,0,Mr
+486,"Louch, Mr Charles Alexander",2.0,48.0,male,0,0,Mr
+487,"Louch, Mrs Charles Alexander (Alice Adelaide)",2.0,30.397989417989415,female,1,1,Mrs
+488,"Mack, Mrs Mary",2.0,57.0,female,0,1,Mrs
+489,"Malachard, Mr Noel",2.0,30.397989417989415,male,0,0,Mr
+490,"Mallet, Mr Albert",2.0,30.397989417989415,male,0,0,Mr
+491,"Mallet, Mrs Albert (Antoinette)",2.0,30.397989417989415,female,1,1,Mrs
+492,"Mallet, Master Andre",2.0,2.0,male,1,0,Mr
+493,"Mangiavacchi, Mr Serafino Emilio",2.0,30.397989417989415,male,0,0,Mr
+494,"Mantvila, Rev Joseph",2.0,27.0,male,0,0,Mr
+495,"Marshall, Mrs Kate Louise Phillips",2.0,19.0,female,1,1,Mrs
+496,"Matthews, Mr William John",2.0,30.0,male,0,0,Mr
+497,"Maybery, Mr Frank H",2.0,20.0,male,0,0,Mr
+498,"McCrae, Mr Arthur Gordon",2.0,45.0,male,0,0,Mr
+499,"McCrie, Mr James Matthew",2.0,30.397989417989415,male,0,0,Mr
+500,"McKane, Mr Peter D",2.0,46.0,male,0,0,Mr
+501,"Mellenger, Mrs Elizabeth Anne",2.0,41.0,female,1,1,Mrs
+502,"Mellenger, Miss Madeleine Violet",2.0,13.0,female,1,1,Miss
+503,"Mellor, Mr William John",2.0,19.0,male,1,0,Mr
+504,"Meyer, Mr August",2.0,30.0,male,0,0,Mr
+505,"Milling, Mr Jacob Christian",2.0,48.0,male,0,0,Mr
+506,"Mitchell, Mr Henry Michael",2.0,71.0,male,0,0,Mr
+507,"Moraweck, Dr Ernest",2.0,54.0,male,0,0,Mr
+508,"Morley, Mr William",2.0,30.397989417989415,male,0,0,Mr
+509,"Mudd, Mr Thomas C",2.0,30.397989417989415,male,0,0,Mr
+510,"Myles, Mr Thomas Francis",2.0,64.0,male,0,0,Mr
+511,"Nasser (Nasrallah), Mr Nicholas",2.0,32.0,male,0,0,Mr
+512,"Nasser (Nasrallah), Mrs Nicholas",2.0,18.0,female,1,1,Mrs
+513,"Navratil, Master Edmond Roger",2.0,2.0,male,1,0,Mr
+514,"Navratil, Mr Michel",2.0,32.0,male,0,0,Mr
+515,"Navratil, Master Michel M",2.0,3.0,male,1,0,Mr
+516,"Nesson, Mr Israel",2.0,26.0,male,0,0,Mr
+517,"Nicholls, Mr Joseph Charles",2.0,19.0,male,0,0,Mr
+518,"Norman, Mr Robert Douglas",2.0,30.397989417989415,male,0,0,Mr
+519,"Nourney, Mr Alfred (aka Baron von Drachstedt)",2.0,20.0,male,1,0,Mr
+520,"Nye, Mrs Elizabeth Ramell",2.0,29.0,female,1,1,Mrs
+521,"Otter, Mr Richard",2.0,39.0,male,0,0,Mr
+522,"Oxenham, Mr Percy Thomas",2.0,22.0,male,1,0,Mr
+523,"Padro y Manent, Mr Julian",2.0,30.397989417989415,male,1,0,Mr
+524,"Pain, Dr Alfred",2.0,24.0,male,0,0,Mr
+525,"Pallas y Castello, Mr Emilio",2.0,30.397989417989415,male,1,0,Mr
+526,"Parker, Mr Clifford R",2.0,28.0,male,0,0,Mr
+527,"Parkes, Mr Francis (Frank)",2.0,30.397989417989415,male,0,0,Mr
+528,"Parrish, Mrs Lutie Davis",2.0,50.0,female,1,1,Mrs
+529,"Pengelly, Mr Frederick",2.0,20.0,male,0,0,Mr
+530,"Peruschitz, Rev Joseph M",2.0,40.0,male,0,0,Mr
+531,"Phillips, Miss Alice",2.0,42.0,female,1,1,Miss
+532,"Phillips, Mr Robert",2.0,21.0,male,0,0,Mr
+533,"Pinsky, Miss Rosa",2.0,32.0,female,1,1,Miss
+534,"Ponesell, Mr Martin",2.0,34.0,male,0,0,Mr
+535,"Portaluppi, Mr Emilio",2.0,30.397989417989415,male,1,0,Mr
+536,"Pulbaum, Mr Frank",2.0,30.397989417989415,male,0,0,Mr
+537,"Quick, Mrs Frederick C (Jane Richards)",2.0,33.0,female,1,1,Mrs
+538,"Quick, Miss Phyllis May",2.0,2.0,female,1,1,Miss
+539,"Quick, Miss Winifred Vera",2.0,8.0,female,1,1,Miss
+540,"Reeves, Mr David",2.0,36.0,male,0,0,Mr
+541,"Renouf, Mr Peter Henry",2.0,34.0,male,0,0,Mr
+542,"Renouf, Mrs Peter Henry (Lillian Jefferys)",2.0,30.0,female,1,1,Mrs
+543,"Reynaldo, Mrs Encarnacion",2.0,28.0,female,1,1,Mrs
+544,"Richard, Mr Emil",2.0,23.0,male,0,0,Mr
+545,"Richards, Master George Sidney",2.0,0.8,male,1,0,Mr
+546,"Richards, Mrs Sidney (Emily Hocking)",2.0,25.0,female,1,1,Mrs
+547,"Richards, Master William Rowe",2.0,3.0,male,1,0,Mr
+548,"Ridsdale, Miss Lucy",2.0,50.0,female,1,1,Miss
+549,"Rogers, Mr Harry",2.0,30.397989417989415,male,0,0,Mr
+550,"Rugg, Miss Emily",2.0,21.0,female,1,1,Miss
+551,"Sedgwick, Mr Charles Frederick Waddington",2.0,30.397989417989415,male,0,0,Mr
+552,"Sharp, Mr Percival",2.0,30.397989417989415,male,0,0,Mr
+553,"Shelley, Mrs William (Imanita)",2.0,25.0,female,1,1,Mrs
+554,"Silven, Miss Lyyli",2.0,18.0,female,1,1,Miss
+555,"Sincock, Miss Maude",2.0,20.0,female,1,1,Miss
+556,"Siukonnen, Miss Anna",2.0,30.0,female,1,1,Miss
+557,"Sjostedt, Mr Ernst Adolf",2.0,59.0,male,0,0,Mr
+558,"Slayter, Miss Hilda Mary",2.0,30.0,female,1,1,Miss
+559,"Slemen, Mr Richard James",2.0,35.0,male,0,0,Mr
+560,"Smith (Schmidt), Mr Augustus",2.0,22.0,male,0,0,Mr
+561,"Smith, Miss Marion",2.0,30.397989417989415,female,1,1,Miss
+562,"Sobey, Mr Hayden",2.0,25.0,male,0,0,Mr
+563,"Stanton, Mr Samuel Ward",2.0,41.0,male,0,0,Mr
+564,"Stokes, Mr Philip Joseph",2.0,25.0,male,0,0,Mr
+565,"Sweet, Mr George",2.0,14.0,male,0,0,Mr
+566,"Toomey, Miss Ellen",2.0,50.0,female,1,1,Miss
+567,"Troupiansky, Mr Moses Aaron",2.0,22.0,male,0,0,Mr
+568,"Trout, Mrs William H (Jessie L)",2.0,30.397989417989415,female,1,1,Mrs
+569,"Troutt, Miss Edwina Celia",2.0,27.0,female,1,1,Miss
+570,"Turpin, Mr William John",2.0,29.0,male,0,0,Mr
+571,"Turpin, Mrs William John (Dorothy Anne Wonnacott)",2.0,27.0,female,0,1,Mrs
+572,"Veale, Mr James",2.0,30.0,male,0,0,Mr
+573,"Waelens, Mr Achille",2.0,22.0,male,0,0,Mr
+574,"Walcroft, Miss Nellie",2.0,35.0,female,1,1,Miss
+575,"Ware, Mr John James",2.0,30.0,male,0,0,Mr
+576,"Ware, Mrs John James (Florence Louise Long)",2.0,28.0,female,1,1,Mrs
+577,"Ware, Mr William J",2.0,23.0,male,0,0,Mr
+578,"Watson, Mr Ennis Hastings",2.0,30.397989417989415,male,0,0,Mr
+579,"Watt, Miss Bertha",2.0,12.0,female,1,1,Miss
+580,"Watt, Mrs James (Bessie Inglis Milne)",2.0,40.0,female,1,1,Mrs
+581,"Webber, Miss Susan",2.0,36.0,female,1,1,Miss
+582,"Weisz, Mr Leopold",2.0,28.0,male,0,0,Mr
+583,"Weisz, Mrs Leopold (Mathilde)",2.0,32.0,female,1,1,Mrs
+584,"Wells, Mrs Arthur H (Addie Trevaskis)",2.0,29.0,female,1,1,Mrs
+585,"Wells, Miss Joan",2.0,4.0,female,1,1,Miss
+586,"Wells, Master Ralph Lester",2.0,2.0,male,1,0,Mr
+587,"West, Miss Barbara J",2.0,30.397989417989415,female,1,1,Miss
+588,"West, Miss Constance Mirium",2.0,30.397989417989415,female,1,1,Miss
+589,"West, Mr Edwy Arthur",2.0,36.0,male,0,0,Mr
+590,"West, Mrs Edwy Arthur (Ada Mary)",2.0,33.0,female,1,1,Mrs
+591,"Wheadon, Mr Edward",2.0,30.397989417989415,male,0,0,Mr
+592,"Wheeler, Mr Edwin",2.0,30.397989417989415,male,0,0,Mr
+593,"Wheeler, Mr Frederick",2.0,30.397989417989415,male,0,0,Mr
+594,"Wilhelms, Mr Charles",2.0,32.0,male,1,0,Mr
+595,"Wilkinson, Mrs Elizabeth Anne",2.0,30.397989417989415,female,1,1,Mrs
+596,"Williams, Mr Charles Eugene",2.0,30.397989417989415,male,1,0,Mr
+597,"Wright, Miss Marion",2.0,26.0,female,1,1,Miss
+598,"Yrois, Miss Henriette",2.0,30.397989417989415,female,0,1,Miss
+599,"Aldworth, Mr Charles Augustus",2.0,30.0,male,0,0,Mr
+600,"Brown, Miss Mildred",2.0,24.0,female,1,1,Miss
+601,"Pernot, Mr Rene",2.0,30.397989417989415,male,0,0,Mr
+602,"Swane, Mr George",2.0,18.0,male,0,0,Mr
+603,"Abbing, Mr Anthony",3.0,42.0,male,0,0,Mr
+604,"Abbott, Master Eugene Joseph",3.0,13.0,male,0,0,Mr
+605,"Abbott, Mr Rossmore Edward",3.0,16.0,male,0,0,Mr
+606,"Abbott, Mrs Stanton (Rosa)",3.0,35.0,female,1,1,Mrs
+607,"Abelseth, Miss Anna Karen",3.0,16.0,female,1,1,Miss
+608,"Abelseth, Mr Olaus",3.0,25.0,male,1,0,Mr
+609,"Abraham, Mrs Joseph (Sophie Easu)",3.0,18.0,female,1,1,Mrs
+610,"Abrahamsson, Mr August",3.0,20.0,male,1,0,Mr
+611,"Adahl, Mr Mauritz Nils Martin",3.0,30.0,male,0,0,Mr
+612,"Adams, Mr John",3.0,26.0,male,0,0,Mr
+613,"Ahlin, Mrs Johanna Persdotter",3.0,40.0,female,0,1,Mrs
+614,"Ahmed, Mr Ali",3.0,24.0,male,0,0,Mr
+615,"Aijo-Nirva, Mr Isak",3.0,41.0,male,0,0,Mr
+616,"Aks, Mrs Sam (Leah Rosen)",3.0,18.0,female,1,1,Mrs
+617,"Aks, Master Philip",3.0,0.83,male,1,0,Mr
+618,"Alexander, Mr William",3.0,23.0,male,0,0,Mr
+619,"Alhomaki, Mr Ilmari Rudolf",3.0,20.0,male,0,0,Mr
+620,"Ali, Mr William",3.0,25.0,male,0,0,Mr
+621,"Allen, Mr William Henry",3.0,35.0,male,0,0,Mr
+622,"Allum, Mr Owen George",3.0,17.0,male,0,0,Mr
+623,"Andersen, Mr Albert Karvin",3.0,32.0,male,0,0,Mr
+624,"Andersen, Mr Thor Olsvigen",3.0,20.0,male,0,0,Mr
+625,"Andersson, Mr Anders Johan",3.0,39.0,male,0,0,Mr
+626,"Andersson, Mrs Anders Johan (Alfrida K Brogren)",3.0,39.0,female,0,1,Mrs
+627,"Andersson, Miss Ebba Iris",3.0,6.0,female,0,1,Miss
+628,"Andersson, Miss Ellis Anna Maria",3.0,2.0,female,0,1,Miss
+629,"Andersson, Miss Erna",3.0,17.0,female,1,1,Miss
+630,"Andersson, Miss Ida Augusta Margareta",3.0,38.0,female,0,1,Miss
+631,"Andersson, Miss Ingeborg Constancia",3.0,9.0,female,0,1,Miss
+632,"Andersson, Mr Johan Samuel",3.0,26.0,male,0,0,Mr
+633,"Andersson, Miss Sigrid Elizabeth",3.0,11.0,female,0,1,Miss
+634,"Andersson, Master Sigvard Harald Elias",3.0,4.0,male,0,0,Mr
+635,"Andreasson, Mr Paul Edvin",3.0,20.0,male,0,0,Mr
+636,"Angheloff, Mr Minko",3.0,26.0,male,0,0,Mr
+637,"Arnold, Mr Josef",3.0,25.0,male,0,0,Mr
+638,"Arnold, Mrs Josef (Josephine Frank)",3.0,18.0,female,0,1,Mrs
+639,"Aronsson, Mr Ernst Axel Algot",3.0,24.0,male,0,0,Mr
+640,"Asim, Mr Adola",3.0,35.0,male,0,0,Mr
+641,"Asplund, Mr Carl Oscar Vilhelm Gustafsson",3.0,40.0,male,0,0,Mr
+642,"Asplund, Mrs Carl Oscar (Selma Augusta Johansson)",3.0,38.0,female,1,1,Mrs
+643,"Asplund, Master Carl Edgar",3.0,5.0,male,0,0,Mr
+644,"Asplund, Master Clarence Gustaf Hugo",3.0,9.0,male,0,0,Mr
+645,"Aspland, Master Edvin Rojj Felix",3.0,3.0,male,1,0,Mr
+646,"Asplund, Master Filip Oscar",3.0,13.0,male,0,0,Mr
+647,"Asplund, Mr John Charles",3.0,23.0,male,1,0,Mr
+648,"Asplund, Miss Lillian Gertrud",3.0,5.0,female,1,1,Miss
+649,"Assaf, Mr Gerios",3.0,30.397989417989415,male,0,0,Mr
+650,"Assaf, Mrs Mariana",3.0,45.0,female,1,1,Mrs
+651,"Assam, Mr Ali",3.0,23.0,male,0,0,Mr
+652,"Attalah, Miss Malaka",3.0,17.0,female,0,1,Miss
+653,"Attala (Kalil), Mr Solomon",3.0,27.0,male,0,0,Mr
+654,"Augustsson, Mr Albert",3.0,23.0,male,0,0,Mr
+655,"Baccos, Mr Rafoul",3.0,20.0,male,0,0,Mr
+656,"Backstrom, Mr Karl Alfred",3.0,32.0,male,0,0,Mr
+657,"Backstrom, Mrs Karl Alfred (Maria Mathilda Gustafsson)",3.0,33.0,female,1,1,Mrs
+658,"Baclini, Miss Eugenie",3.0,3.0,female,1,1,Miss
+659,"Baclini, Miss Helene",3.0,30.397989417989415,female,1,1,Miss
+660,"Baclini, Miss Maria",3.0,30.397989417989415,female,1,1,Miss
+661,"Baclini, Mrs Solomon (Latifa)",3.0,30.397989417989415,female,1,1,Mrs
+662,"Badman, Miss Emily Louisa",3.0,18.0,female,1,1,Miss
+663,"Badt, Mr Mohamed",3.0,40.0,male,0,0,Mr
+664,"Balkic, Mr Cerin",3.0,26.0,male,0,0,Mr
+665,"Banoura, Miss Ayout",3.0,15.0,female,1,1,Miss
+666,"Barbara, Mrs Catherine",3.0,45.0,female,0,1,Mrs
+667,"Barbara, Miss Saude",3.0,18.0,female,0,1,Miss
+668,"Barry, Miss Julia",3.0,27.0,female,0,1,Miss
+669,"Barton, Mr David",3.0,22.0,male,0,0,Mr
+670,"Beavan, Mr William Thomas",3.0,19.0,male,0,0,Mr
+671,"Bengtsson, Mr John Viktor",3.0,26.0,male,0,0,Mr
+672,"Berglund, Mr Karl Ivar Sven",3.0,22.0,male,0,0,Mr
+673,"Betros, Mr Tannous",3.0,20.0,male,0,0,Mr
+674,"Bing, Mr Lee",3.0,32.0,male,1,0,Mr
+675,"Birkeland, Mr Hans",3.0,21.0,male,0,0,Mr
+676,"Bjorklund, Ernst Herbert",3.0,18.0,male,0,0,Mr
+677,"Bostandyeff, Mr Guentcho",3.0,26.0,male,0,0,Mr
+678,"Boulos, Master Akar",3.0,6.0,male,0,0,Mr
+679,"Boulos, Mr Hanna",3.0,30.397989417989415,male,0,0,Mr
+680,"Boulos, Mrs Joseph (Sultana)",3.0,30.397989417989415,female,0,1,Mrs
+681,"Boulos, Miss Laura",3.0,9.0,female,0,1,Miss
+682,"Bourke, Mr John",3.0,40.0,male,0,0,Mr
+683,"Bourke, Mrs John (Catherine)",3.0,32.0,female,0,1,Mrs
+684,"Bourke, Miss Mary",3.0,30.397989417989415,female,0,1,Miss
+685,"Bowen, Mr David",3.0,26.0,male,0,0,Mr
+686,"Bradley, Miss Bridget Delia",3.0,18.0,female,1,1,Miss
+687,"Braf, Miss Elin Ester Maria",3.0,20.0,female,0,1,Miss
+688,"Brahim, Mr Youssef",3.0,30.397989417989415,male,0,0,Mr
+689,"Braund, Mr Lewis Richard",3.0,29.0,male,0,0,Mr
+690,"Braund, Mr Owen Harris",3.0,22.0,male,0,0,Mr
+691,"Brobek, Mr Karl Rudolf",3.0,22.0,male,0,0,Mr
+692,"Brocklebank, Mr William Alfred",3.0,35.0,male,0,0,Mr
+693,"Buckley, Mr Daniel",3.0,21.0,male,1,0,Mr
+694,"Buckley, Miss Katherine",3.0,20.0,female,0,1,Miss
+695,"Burke, Mr Jeremiah",3.0,19.0,male,0,0,Mr
+696,"Burns, Miss Mary Delia",3.0,18.0,female,0,1,Miss
+697,"Cacic, Mr Grego",3.0,18.0,male,0,0,Mr
+698,"Cacic, Mr Luka",3.0,38.0,male,0,0,Mr
+699,"Cacic, Mr Manda",3.0,30.397989417989415,male,0,0,Mr
+700,"Cacic, Mr Maria",3.0,30.0,male,0,0,Mr
+701,"Calic, Mr Peter",3.0,17.0,male,0,0,Mr
+702,"Canavan, Miss Mary",3.0,21.0,female,0,1,Miss
+703,"Canavan, Mr Patrick",3.0,21.0,male,0,0,Mr
+704,"Cann, Mr Ernest",3.0,21.0,male,0,0,Mr
+705,"Caram (Kareem), Mr Joseph",3.0,30.397989417989415,male,0,0,Mr
+706,"Caram (Kareem), Mrs Joseph (Maria Elias)",3.0,30.397989417989415,female,0,1,Mrs
+707,"Carlsson, Mr Carl Robert",3.0,24.0,male,0,0,Mr
+708,"Carlsson, Mr Frans Olof",3.0,33.0,male,0,0,Mr
+709,"Carlsson, Mr Julius",3.0,33.0,male,0,0,Mr
+710,"Carlsson, Mr August Sigfrid",3.0,28.0,male,0,0,Mr
+711,"Carr, Miss Helen",3.0,16.0,female,1,1,Miss
+712,"Carr, Miss Jeannie",3.0,37.0,female,0,1,Miss
+713,"Carver, Mr Alfred John",3.0,28.0,male,0,0,Mr
+714,"Cassem, Mr Nassef Belmenly",3.0,30.397989417989415,male,1,0,Mr
+715,"Celotti, Mr Francesco",3.0,24.0,male,0,0,Mr
+716,"Chartens, Mr David",3.0,21.0,male,0,0,Mr
+717,"Chebab, Mr Emir Farres",3.0,30.397989417989415,male,0,0,Mr
+718,"Chip, Mr Chang",3.0,32.0,male,0,0,Mr
+719,"Christmann, Mr Emil",3.0,29.0,male,0,0,Mr
+720,"Chronopoulos, Mr Apostolos",3.0,26.0,male,0,0,Mr
+721,"Chronopoulos, Mr Demetrios",3.0,18.0,male,0,0,Mr
+722,"Coelho, Mr Domingos Fernandes",3.0,20.0,male,0,0,Mr
+723,"Cohen, Mr Gurshon (Gus)",3.0,19.0,male,1,0,Mr
+724,"Colbert, Mr Patrick",3.0,24.0,male,0,0,Mr
+725,"Coleff, Mr Fotio",3.0,24.0,male,0,0,Mr
+726,"Coleff, Mr Peyo",3.0,36.0,male,0,0,Mr
+727,"Conlin, Mr Thomas Henry",3.0,31.0,male,0,0,Mr
+728,"Connaghton, Mr Michael",3.0,31.0,male,0,0,Mr
+729,"Connolly, Miss Kate",3.0,30.0,female,0,1,Miss
+730,"Connolly, Miss Kate",3.0,22.0,female,1,1,Miss
+731,"Connors, Mr Patrick",3.0,30.397989417989415,male,0,0,Mr
+732,"Cook, Mr Jacob",3.0,43.0,male,0,0,Mr
+733,"Cor, Mr Bartol",3.0,35.0,male,0,0,Mr
+734,"Cor, Mr Ivan",3.0,27.0,male,0,0,Mr
+735,"Cor, Mr Ludovik",3.0,19.0,male,0,0,Mr
+736,"Corn, Mr Harry",3.0,30.0,male,0,0,Mr
+737,"Coutts, Mrs William (Minnie)",3.0,36.0,female,1,1,Mrs
+738,"Coutts, Master Neville",3.0,3.0,male,1,0,Mr
+739,"Coutts, Master William Leslie",3.0,9.0,male,1,0,Mr
+740,"Coxon, Mr Daniel",3.0,59.0,male,0,0,Mr
+741,"Crease, Mr Ernest James",3.0,19.0,male,0,0,Mr
+742,"Cribb, Mr John Hatfield",3.0,44.0,male,0,0,Mr
+743,"Cribb, Miss Laura Alice",3.0,17.0,female,1,1,Miss
+744,"Daher, Mr Tannous",3.0,30.397989417989415,male,0,0,Mr
+745,"Dahl, Mr Charles Edward",3.0,45.0,male,1,0,Mr
+746,"Dahlberg, Miss Gerda Ulrika",3.0,22.0,female,0,1,Miss
+747,"Dakic, Mr Branko",3.0,19.0,male,0,0,Mr
+748,"Daly, Mr Eugene",3.0,29.0,male,1,0,Mr
+749,"Daly, Miss Marcella",3.0,30.0,female,1,1,Miss
+750,"Danbom, Mr Ernst Gilbert",3.0,34.0,male,0,0,Mr
+751,"Danbom, Mrs Ernst Gilbert (Anna Sigrid Maria Brogren)",3.0,28.0,female,0,1,Mrs
+752,"Danbom, Master Gilbert Sigvard Emanuel",3.0,0.33,male,0,0,Mr
+753,"Danoff, Mr Yoto",3.0,27.0,male,0,0,Mr
+754,"Dantchoff, Mr Khristo",3.0,25.0,male,0,0,Mr
+755,"Davies, Mr Alfred",3.0,24.0,male,0,0,Mr
+756,"Davies, Mr Evan",3.0,22.0,male,0,0,Mr
+757,"Davies, Mr John",3.0,21.0,male,0,0,Mr
+758,"Davies, Mr Joseph",3.0,17.0,male,0,0,Mr
+759,"Davison, Mr Thomas Henry",3.0,30.397989417989415,male,0,0,Mr
+760,"Davison, Mrs Thomas Henry (Mary Finck)",3.0,30.397989417989415,female,1,1,Mrs
+761,"Dean, Mr Bertram",3.0,26.0,male,0,0,Mr
+762,"Dean, Mrs Bertram (Eva)",3.0,33.0,female,1,1,Mrs
+763,"Dean, Master Bertram Vere",3.0,1.0,male,1,0,Mr
+764,"Dean, Miss Elizabeth Gladys (Millvena)",3.0,0.17,female,1,1,Miss
+765,"Delalic, Mr Regyo",3.0,25.0,male,0,0,Mr
+766,"De Messemaeker, Mr William Joseph",3.0,36.0,male,1,0,Mr
+767,"De Messemaeker, Mrs William Joseph (Anna)",3.0,36.0,female,1,1,Mrs
+768,"De Mulder, Mr Theo",3.0,30.0,male,1,0,Mr
+769,"Denkoff, Mr Mito",3.0,30.397989417989415,male,0,0,Mr
+770,"Dennis, Mr Samuel",3.0,23.0,male,0,0,Mr
+771,"Dennis, Mr William",3.0,26.0,male,0,0,Mr
+772,"Devaney, Miss Margaret",3.0,19.0,female,1,1,Miss
+773,"Dewan, Mr Frank",3.0,65.0,male,0,0,Mr
+774,"Dibo, Mr Elias",3.0,30.397989417989415,male,0,0,Mr
+775,"Dimic, Mr Jovan",3.0,42.0,male,0,0,Mr
+776,"Dintcheff, Mr Valtcho",3.0,43.0,male,0,0,Mr
+777,"Dooley, Mr Patrick",3.0,32.0,male,0,0,Mr
+778,"Dorkings, Mr Edward Arthur",3.0,19.0,male,1,0,Mr
+779,"Dowdell, Miss Elizabeth",3.0,30.0,female,1,1,Miss
+780,"Doyle, Miss Elizabeth",3.0,24.0,female,0,1,Miss
+781,"Drapkin, Miss Jennie",3.0,23.0,female,1,1,Miss
+782,"Drazonovic, Mr Josef",3.0,30.397989417989415,male,0,0,Mr
+783,"Driscoll, Miss Bridget",3.0,24.0,female,1,1,Miss
+784,"Duquemin, Mr Joseph",3.0,24.0,male,1,0,Mr
+785,"Dyker, Mr Adolf Fredrik",3.0,23.0,male,0,0,Mr
+786,"Dyker, Mrs Adolf Fredrik (Anna Elizabeth Judith Andersson)",3.0,22.0,female,1,1,Mrs
+787,"Econovic, Mr Joso",3.0,30.397989417989415,male,0,0,Mr
+788,"Edvardsson, Mr Gustaf Hjalmar",3.0,18.0,male,0,0,Mr
+789,"Eklund, Mr Hans Linus",3.0,16.0,male,0,0,Mr
+790,"Ekstrom, Mr Johan",3.0,45.0,male,0,0,Mr
+791,"Elias, Mr Elias",3.0,30.397989417989415,male,0,0,Mr
+792,"Elias, Mr John",3.0,30.397989417989415,male,0,0,Mr
+793,"Elias, Mr Joseph",3.0,30.397989417989415,male,0,0,Mr
+794,"Elsbury, Mr James",3.0,47.0,male,0,0,Mr
+795,"Emanuel, Miss Virginia Ethel",3.0,5.0,female,1,1,Miss
+796,"Emmeth, Mr Thomas",3.0,30.397989417989415,male,0,0,Mr
+797,"Everett, Thomas James",3.0,30.397989417989415,male,0,0,Mr
+798,"Farrell, Mr James",3.0,30.397989417989415,male,0,0,Mr
+799,"Finoli, Mr Luigi",3.0,30.397989417989415,male,1,0,Mr
+800,"Fischer, Mr Eberhard Telander",3.0,30.397989417989415,male,0,0,Mr
+801,"Flynn, Mr James",3.0,30.397989417989415,male,0,0,Mr
+802,"Flynn, Mr John",3.0,30.397989417989415,male,0,0,Mr
+803,"Foley, Mr Joseph",3.0,30.397989417989415,male,0,0,Mr
+804,"Foley, Mr William",3.0,30.397989417989415,male,0,0,Mr
+805,"Foo, Mr Choong",3.0,30.397989417989415,male,1,0,Mr
+806,"Ford, Mr Arthur",3.0,30.397989417989415,male,0,0,Mr
+807,"Ford, Miss Doolina Margaret",3.0,21.0,female,0,1,Miss
+808,"Ford, Mr Edward Watson",3.0,18.0,male,0,0,Mr
+809,"Ford, Miss Maggie",3.0,9.0,female,0,1,Miss
+810,"Ford, Mrs Edward (Margaret Ann)",3.0,48.0,female,0,1,Mrs
+811,"Ford, Mr Neil Watson",3.0,16.0,male,0,0,Mr
+812,"Fox, Mr Patrick",3.0,30.397989417989415,male,0,0,Mr
+813,"Franklin, Mr Charles",3.0,30.397989417989415,male,0,0,Mr
+814,"Gallagher, Mr Martin",3.0,25.0,male,0,0,Mr
+815,"Garfirth, Mr John",3.0,30.397989417989415,male,0,0,Mr
+816,"Georges, Mrs Shahini Weappi",3.0,38.0,female,1,1,Mrs
+817,"Gilinski, Mr Leslie",3.0,22.0,male,0,0,Mr
+818,"Gilnagh, Miss Katie",3.0,16.0,female,1,1,Miss
+819,"Glynn, Miss Mary Agatha",3.0,30.397989417989415,female,1,1,Miss
+820,"Goldsmith, Mr Frank John",3.0,33.0,male,0,0,Mr
+821,"Goldsmith, Mrs Frank John (Emily A Brown)",3.0,30.397989417989415,female,1,1,Mrs
+822,"Goldsmith, Master Frank John William",3.0,9.0,male,1,0,Mr
+823,"Goldsmith, Mr Nathan",3.0,41.0,male,0,0,Mr
+824,"Goncalves, Mr Manuel Estanslas",3.0,38.0,male,0,0,Mr
+825,"Goodwin, Mr Frederick",3.0,40.0,male,0,0,Mr
+826,"Goodwin, Mrs Frederick (Augusta)",3.0,43.0,female,0,1,Mrs
+827,"Goodwin, Mr Charles E",3.0,14.0,male,0,0,Mr
+828,"Goodwin, Miss Lillian A",3.0,16.0,female,0,1,Miss
+829,"Goodwin, Master Harold V",3.0,9.0,male,0,0,Mr
+830,"Goodwin, Miss Jessie A",3.0,10.0,female,0,1,Miss
+831,"Goodwin, Master Sidney L",3.0,6.0,male,0,0,Mr
+832,"Goodwin, Master William F",3.0,11.0,male,0,0,Mr
+833,"Green, Mr George",3.0,40.0,male,0,0,Mr
+834,"Gronnestad, Mr Daniel Danielsen",3.0,32.0,male,0,0,Mr
+835,"Guest, Mr Robert",3.0,30.397989417989415,male,0,0,Mr
+836,"Gustafsson, Mr Alfred Ossian",3.0,20.0,male,0,0,Mr
+837,"Gustafsson, Mr Anders Vilhelm",3.0,37.0,male,0,0,Mr
+838,"Gustafsson, Mr Johan Birger",3.0,28.0,male,0,0,Mr
+839,"Gustafsson, Mr Karl Gideon",3.0,19.0,male,0,0,Mr
+840,"Haas, Miss Aloisia",3.0,24.0,female,0,1,Miss
+841,"Hagardon, Miss Kate",3.0,17.0,female,0,1,Miss
+842,"Hagland, Mr Ingvald Olsen",3.0,30.397989417989415,male,0,0,Mr
+843,"Hagland, Mr Konrad Mathias Reiersen",3.0,30.397989417989415,male,0,0,Mr
+844,"Hakkarainen, Mr Pekko Pietari",3.0,28.0,male,0,0,Mr
+845,"Hakkarainen, Mrs Pekko Pietari",3.0,24.0,female,1,1,Mrs
+846,"Hampe, Mr Leon",3.0,20.0,male,0,0,Mr
+847,"Hansen, Mr Claus Peter",3.0,41.0,male,0,0,Mr
+848,"Hansen, Mrs Claus Peter",3.0,45.0,female,1,1,Mrs
+849,"Hansen, Mr Henrik Juul",3.0,26.0,male,0,0,Mr
+850,"Hansen, Mr Henry Damsgaard",3.0,21.0,male,0,0,Mr
+851,"Harknett, Miss Alice",3.0,30.397989417989415,female,0,1,Miss
+852,"Harmer, Mr Abraham",3.0,30.397989417989415,male,0,0,Mr
+853,"Hart, Mr Henry",3.0,30.397989417989415,male,0,0,Mr
+854,"Hassan, Mr M Houssein",3.0,30.397989417989415,male,0,0,Mr
+855,"Healy, Miss Nora",3.0,30.397989417989415,female,0,1,Miss
+856,"Hedman, Mr Oscar",3.0,27.0,male,1,0,Mr
+857,"Hee, Mr Ling",3.0,30.397989417989415,male,0,0,Mr
+858,"Hegarty, Miss Nora",3.0,18.0,female,0,1,Miss
+859,"Heikkinen, Miss Laina",3.0,26.0,female,1,1,Miss
+860,"Heininen, Miss Wendla Maria",3.0,23.0,female,0,1,Miss
+861,"Hellstrom, Hilda Maria",3.0,22.0,female,1,1,Mrs
+862,"Hemming, Miss Nora",3.0,30.397989417989415,female,0,1,Miss
+863,"Hendekovic, Mr Ignaz",3.0,30.397989417989415,male,0,0,Mr
+864,"Henery, Delia",3.0,30.397989417989415,female,0,1,Mrs
+865,"Henriksson, Jenny Lovisa",3.0,28.0,female,0,1,Mrs
+866,"Hirvonen, Mrs Alexander",3.0,22.0,female,1,1,Mrs
+867,"Hirvonen, Miss Hildur E",3.0,2.0,female,0,1,Miss
+868,"Holm, Mr John Frederik Alexander",3.0,43.0,male,0,0,Mr
+869,"Holthen, Mr Johan Martin",3.0,30.397989417989415,male,0,0,Mr
+870,"Honkanen, Miss Eluna",3.0,27.0,female,1,1,Miss
+871,"Horgan, Mr John",3.0,30.397989417989415,male,0,0,Mr
+872,"Howard, Miss May",3.0,30.397989417989415,female,1,1,Miss
+873,"Humblin, Mr Adolf Mathias Nicolai Olsen",3.0,42.0,male,0,0,Mr
+874,"Hyman, Mr Abraham",3.0,30.397989417989415,male,1,0,Mr
+875,"Ilieff, Mr Ylio",3.0,30.397989417989415,male,0,0,Mr
+876,"Ilmakangas, Miss Ida Livija",3.0,27.0,female,0,1,Miss
+877,"Ilmakangas, Miss Pieta Sofia",3.0,25.0,female,0,1,Miss
+878,"Ivanoff, Mr Konio",3.0,30.397989417989415,male,0,0,Mr
+879,"Jansen, Mr Carl Olof",3.0,27.0,male,1,0,Mr
+880,"Jardin, Mr Jose Netto",3.0,30.397989417989415,male,0,0,Mr
+881,"Jensen, Miss Carla Christine",3.0,19.0,female,1,1,Miss
+882,"Jensen, Mr Hans Peder",3.0,20.0,male,0,0,Mr
+883,"Jensen, Mr Niels Peder",3.0,48.0,male,0,0,Mr
+884,"Jensen, Mr Svend Lauritz",3.0,17.0,male,0,0,Mr
+885,"Jermyn, Miss Annie",3.0,30.397989417989415,female,1,1,Miss
+886,"Johannesen-Bratthammer, Mr Bernt",3.0,30.397989417989415,male,0,0,Mr
+887,"Johanson, Mr Jakob Alfred",3.0,34.0,male,0,0,Mr
+888,"Johansson, Mr Erik",3.0,22.0,male,0,0,Mr
+889,"Johansson, Mr Gustaff Joel",3.0,33.0,male,0,0,Mr
+890,"Johansson, Mr Karl Johan",3.0,32.0,male,1,0,Mr
+891,"Johansson, Mr Nils",3.0,29.0,male,0,0,Mr
+892,"Johansson, Oscar L",3.0,26.0,male,1,0,Mr
+893,"Johnson, Mr Alfred",3.0,49.0,male,0,0,Mr
+894,"Johnson, Miss Eleanor Ileen",3.0,1.0,female,1,1,Miss
+895,"Johnson, Mr Malkolm Joackim",3.0,33.0,male,0,0,Mr
+896,"Johnson, Master Harold Theodor",3.0,4.0,male,1,0,Mr
+897,"Johnson, Mrs Oscar W",3.0,24.0,female,0,1,Mrs
+898,"Johnson, Mr William Cahoone Jr",3.0,19.0,male,0,0,Mr
+899,"Johnston, Mr Andrew G",3.0,30.397989417989415,male,0,0,Mr
+900,"Johnston, Mrs Andrew G",3.0,30.397989417989415,female,0,1,Mrs
+901,"Johnston, Miss Catherine H",3.0,30.397989417989415,female,0,1,Miss
+902,"Johnston, Master William A",3.0,30.397989417989415,male,0,0,Mr
+903,"Jonkoff, Mr Lazor",3.0,30.397989417989415,male,0,0,Mr
+904,"Jonsson, Mr Carl",3.0,32.0,male,1,0,Mr
+905,"Jonsson, Nils Hilding",3.0,27.0,male,0,0,Mr
+906,"Jussila, Miss Aina Maria",3.0,21.0,female,0,1,Miss
+907,"Jussila, Mr Erik",3.0,32.0,male,1,0,Mr
+908,"Jussila, Miss Katriina",3.0,20.0,female,0,1,Miss
+909,"Kallio, Mr Nikolai Erland",3.0,17.0,male,0,0,Mr
+910,"Kalvig, Mr Johannes K Halverson",3.0,21.0,male,0,0,Mr
+911,"Karajic, Mr Milan",3.0,30.0,male,0,0,Mr
+912,"Karlsson, Mr Einar Gervasius",3.0,21.0,male,1,0,Mr
+913,"Karlsson, Mr Julius Konrad Eugen",3.0,23.0,male,0,0,Mr
+914,"Karlsson, Mr Nils August",3.0,22.0,male,0,0,Mr
+915,"Karun, Miss Anna Mary",3.0,4.0,female,1,1,Miss
+916,"Karun, Mr Franz",3.0,39.0,male,0,0,Mr
+917,"Kassem, Mr Fared",3.0,30.397989417989415,male,0,0,Mr
+918,"Keane, Mr Andrew",3.0,20.0,male,0,0,Mr
+919,"Keefe, Mr Arthur",3.0,30.397989417989415,male,0,0,Mr
+920,"Kekic, Mr Tido",3.0,30.397989417989415,male,0,0,Mr
+921,"Kelly, Miss Anna Kate",3.0,21.0,female,1,1,Miss
+922,"Kelly, Mr James",3.0,44.0,male,0,0,Mr
+923,"Kelly, Mr James",3.0,42.0,male,0,0,Mr
+924,"Kelly, Miss Mary",3.0,21.0,female,1,1,Miss
+925,"Kennedy, Mr John",3.0,24.0,male,0,0,Mr
+926,"Khalil, Mr Betros",3.0,30.397989417989415,male,0,0,Mr
+927,"Khalil, Mrs Betros",3.0,30.397989417989415,female,0,1,Mrs
+928,"Khalil, Mr Saad",3.0,30.397989417989415,male,0,0,Mr
+929,"Kiernan, Mr John",3.0,25.0,male,0,0,Mr
+930,"Kiernan, Mr Philip",3.0,22.0,male,0,0,Mr
+931,"Kilgannon, Mr Thomas",3.0,22.0,male,0,0,Mr
+932,"Kink, Mr Anton",3.0,39.0,male,1,0,Mr
+933,"Kink, Mrs Anton (Louise Heilmann)",3.0,26.0,female,0,1,Mrs
+934,"Kink, Miss Louise Gretchen",3.0,4.0,female,1,1,Miss
+935,"Kink, Miss Maria",3.0,22.0,female,0,1,Miss
+936,"Kink, Mr Vincenz",3.0,26.0,male,0,0,Mr
+937,"Klasen, Miss Gertrud Emilia",3.0,1.5,female,0,1,Miss
+938,"Klasen, Mrs Hulda Kristina",3.0,36.0,female,0,1,Mrs
+939,"Klasen, Mr Klas Albin",3.0,18.0,male,0,0,Mr
+940,"Kraeff, Mr Theodor",3.0,30.397989417989415,male,0,0,Mr
+941,"Krekorian, Mr Neshan",3.0,25.0,male,1,0,Mr
+942,"Lahowd, Mr Sarkis",3.0,30.397989417989415,male,0,0,Mr
+943,"Laitinen, Miss Kritina Sofia",3.0,37.0,female,0,1,Miss
+944,"Laleff, Mr Kristo",3.0,30.397989417989415,male,0,0,Mr
+945,"Lam, Mr Ali",3.0,30.397989417989415,male,1,0,Mr
+946,"Lam, Mr Len",3.0,30.397989417989415,male,0,0,Mr
+947,"Landegren, Miss Aurora Adelia",3.0,22.0,female,1,1,Miss
+948,"Lane, Mr Patrick",3.0,20.0,male,0,0,Mr
+949,"Lang, Mr Fang",3.0,26.0,male,1,0,Mr
+950,"Larsson, Mr August Viktor",3.0,29.0,male,0,0,Mr
+951,"Larsson, Mr Bengt Edvin",3.0,29.0,male,0,0,Mr
+952,"Larsson-Rondberg, Mr Edvard",3.0,22.0,male,0,0,Mr
+953,"Leeni, Mr Fahim",3.0,30.397989417989415,male,1,0,Mr
+954,"Lefebre, Mrs Frank",3.0,30.397989417989415,female,0,1,Mrs
+955,"Lefebre, Master Henry",3.0,30.397989417989415,male,0,0,Mr
+956,"Lefebre, Miss Ida",3.0,30.397989417989415,female,0,1,Miss
+957,"Lefebre, Miss Jeannie",3.0,30.397989417989415,female,0,1,Miss
+958,"Lefebre, Miss Mathilde",3.0,30.397989417989415,female,0,1,Miss
+959,"Leinonen, Mr Antti Gustaf",3.0,32.0,male,0,0,Mr
+960,"Lemberopolous, Mr Peter L",3.0,30.397989417989415,male,0,0,Mr
+961,"Lemom, Mr Denis",3.0,21.0,male,0,0,Mr
+962,"Lemon, Miss Mary",3.0,21.0,female,0,1,Miss
+963,"Leonard, Mr Lionel",3.0,36.0,male,0,0,Mr
+964,"Lester, Mr James",3.0,39.0,male,0,0,Mr
+965,"Lindahl, Miss Agda V",3.0,25.0,female,0,1,Miss
+966,"Lindblom, Miss Augusta Charlotta",3.0,45.0,female,0,1,Miss
+967,"Lindell, Mr Edvard Bengtsson",3.0,36.0,male,0,0,Mr
+968,"Lindell, Mrs Edvard Bengtsson",3.0,30.0,female,0,1,Mrs
+969,"Lindqvist, Eino William",3.0,20.0,male,1,0,Mr
+970,"Linehan, Mr Michael",3.0,30.397989417989415,male,0,0,Mr
+971,"Ling, Mr Lee",3.0,30.397989417989415,male,0,0,Mr
+972,"Lithman, Mr Simon",3.0,30.397989417989415,male,0,0,Mr
+973,"Lobb, Mr William Arthur",3.0,30.397989417989415,male,0,0,Mr
+974,"Lobb, Mrs William Arthur",3.0,30.397989417989415,female,0,1,Mrs
+975,"Lockyer, Mr Edward",3.0,30.397989417989415,male,0,0,Mr
+976,"Lovell, Mr John",3.0,30.397989417989415,male,0,0,Mr
+977,"Lulich, Mr Nicola",3.0,30.397989417989415,male,1,0,Mr
+978,"Lundahl, Mr Johan",3.0,30.397989417989415,male,0,0,Mr
+979,"Lundin, Miss Olga Elida",3.0,30.397989417989415,female,1,1,Miss
+980,"Lundstrom, Mr Thure Edvin",3.0,30.397989417989415,male,0,0,Mr
+981,"Lyntakoff, Mr Stanko",3.0,30.397989417989415,male,0,0,Mr
+982,"MacKay, Mr George William",3.0,30.397989417989415,male,0,0,Mr
+983,"Madigan, Miss Margaret",3.0,30.397989417989415,female,1,1,Miss
+984,"Madsen, Mr Frithiof",3.0,30.397989417989415,male,0,0,Mr
+985,"Maenpaa, Mr Matti Alexanteri",3.0,30.397989417989415,male,0,0,Mr
+986,"Mahon, Miss Delia",3.0,30.397989417989415,female,0,1,Miss
+987,"Maisner, Mr Simon",3.0,30.397989417989415,male,0,0,Mr
+988,"Makinen, Mr Kalle Edvard",3.0,30.397989417989415,male,0,0,Mr
+989,"Mamee, Mr Hanna",3.0,30.397989417989415,male,1,0,Mr
+990,"Mangan, Miss Mary",3.0,30.397989417989415,female,0,1,Miss
+991,"Mannion, Miss Margareth",3.0,30.397989417989415,female,1,1,Miss
+992,"Mansour, Mr Hanna",3.0,30.397989417989415,male,0,0,Mr
+993,"Mardirosian, Mr Sarkis",3.0,30.397989417989415,male,0,0,Mr
+994,"Marinko, Mr Dmitri",3.0,30.397989417989415,male,0,0,Mr
+995,"Markim, Mr Johann",3.0,30.397989417989415,male,0,0,Mr
+996,"Markoff, Mr Marin",3.0,30.397989417989415,male,0,0,Mr
+997,"Masselmany, Mrs Fatima",3.0,30.397989417989415,female,1,1,Mrs
+998,"Matinoff, Mr Nicola",3.0,30.397989417989415,male,0,0,Mr
+999,"McCarthy, Miss Katie",3.0,30.397989417989415,female,1,1,Miss
+1000,"McCormack, Mr Thomas J",3.0,30.397989417989415,male,0,0,Mr
+1001,"McCoy, Miss Agnes",3.0,30.397989417989415,female,0,1,Miss
+1002,"McCoy, Miss Alice",3.0,30.397989417989415,female,0,1,Miss
+1003,"McCoy, Mr Bernard",3.0,30.397989417989415,male,0,0,Mr
+1004,"McDermott, Miss Delia",3.0,30.397989417989415,female,0,1,Miss
+1005,"McElroy, Mr Michael",3.0,30.397989417989415,male,0,0,Mr
+1006,"McGovern, Mrs Hugh",3.0,30.397989417989415,female,1,1,Mrs
+1007,"McGowan, Miss Anna",3.0,30.397989417989415,female,0,1,Miss
+1008,"McGowan, Miss Katherine",3.0,30.397989417989415,female,0,1,Miss
+1009,"McMahon, Mr Martin",3.0,30.397989417989415,male,0,0,Mr
+1010,"McNamee, Mr Neal",3.0,30.397989417989415,male,0,0,Mr
+1011,"McNamee, Mrs Neal",3.0,30.397989417989415,female,0,1,Mrs
+1012,"Meanwell, Miss Marion Ogden",3.0,30.397989417989415,female,0,1,Miss
+1013,"Mechen, Mr John",3.0,30.397989417989415,male,0,0,Mr
+1014,"Meek, Mrs Thomas",3.0,30.397989417989415,female,0,1,Mrs
+1015,"Melkebuk, Mrs Philemon",3.0,23.0,female,0,1,Mrs
+1016,"Meo, Mr Alfonso",3.0,30.397989417989415,male,0,0,Mr
+1017,"Midtsjo, Mr Karl Albert",3.0,30.397989417989415,male,1,0,Mr
+1018,"Mihoff, Mr Stoytcho",3.0,30.397989417989415,male,0,0,Mr
+1019,"Miles, Mr Frank",3.0,30.397989417989415,male,0,0,Mr
+1020,"Mineff, Mr Ivan",3.0,30.397989417989415,male,0,0,Mr
+1021,"Minkoff, Mr Lazar",3.0,30.397989417989415,male,0,0,Mr
+1022,"Mirko, Mr Dika",3.0,30.397989417989415,male,0,0,Mr
+1023,"Mitkoff, Mr Mito",3.0,30.397989417989415,male,0,0,Mr
+1024,"Mocklare, Miss Helen Mary",3.0,30.397989417989415,female,1,1,Miss
+1025,"Moen, Mr Sigurd H",3.0,30.397989417989415,male,0,0,Mr
+1026,"Moor, Mrs Beila",3.0,30.397989417989415,female,1,1,Mrs
+1027,"Moor, Master Meier",3.0,30.397989417989415,male,0,0,Mr
+1028,"Moore, Mr Leonard Charles",3.0,30.397989417989415,male,0,0,Mr
+1029,"Moran, Miss Bertha",3.0,30.397989417989415,female,1,1,Miss
+1030,"Moran, Mr Daniel J",3.0,30.397989417989415,male,0,0,Mr
+1031,"Moran, Mr James",3.0,30.397989417989415,male,0,0,Mr
+1032,"Morley, Mr Henry Samuel",3.0,30.397989417989415,male,0,0,Mr
+1033,"Morrow, Mr Thomas Rowan",3.0,30.397989417989415,male,0,0,Mr
+1034,"Moubarek (Borak), Mr Hanna (John)",3.0,30.397989417989415,male,1,0,Mr
+1035,"Moubarek, Mrs George",3.0,30.397989417989415,female,0,1,Mrs
+1036,"Moubarek, Master George",3.0,30.397989417989415,male,0,0,Mr
+1037,"Moubarek, Master William George",3.0,30.397989417989415,male,0,0,Mr
+1038,"Moss, Albert Johan",3.0,30.397989417989415,male,0,0,Mr
+1039,"Moussa, Mrs Mantoura Baloics",3.0,30.397989417989415,female,0,1,Mrs
+1040,"Moutal, Mr Rahamin",3.0,30.397989417989415,male,0,0,Mr
+1041,"Mullins, Miss Katie",3.0,30.397989417989415,female,1,1,Miss
+1042,"Mulvihill, Miss Bertha E",3.0,30.397989417989415,female,0,1,Miss
+1043,"Murdlin, Mr Joseph",3.0,30.397989417989415,male,0,0,Mr
+1044,"Murphy, Miss Katherine",3.0,30.397989417989415,female,0,1,Miss
+1045,"Murphy, Miss Margaret",3.0,30.397989417989415,female,0,1,Miss
+1046,"Murphy, Miss Nora",3.0,30.397989417989415,female,0,1,Miss
+1047,"Myhrman, Mr Pehr Fabian Oliver Malkolm",3.0,30.397989417989415,male,0,0,Mr
+1048,"Nackid, Miss Maria",3.0,30.397989417989415,female,1,1,Miss
+1049,"Nackid, Mr Said",3.0,30.397989417989415,male,0,0,Mr
+1050,"Nackid, Mrs Said",3.0,30.397989417989415,female,0,1,Mrs
+1051,"Nahill, Mr Toufik",3.0,30.397989417989415,male,0,0,Mr
+1052,"Naidenoff, Mr Penko",3.0,30.397989417989415,male,0,0,Mr
+1053,"Nancarrow, W H",3.0,30.397989417989415,male,0,0,Mr
+1054,"Niklasen, Sander",3.0,30.397989417989415,male,0,0,Mr
+1055,"Nosworthy, Richard C",3.0,30.397989417989415,male,0,0,Mr
+1056,"Najib, Miss Adele Kiamie",3.0,30.397989417989415,female,1,1,Miss
+1057,"Nancarrow, Mr William Henry",3.0,30.397989417989415,male,0,0,Mr
+1058,"Nankoff, Mr Minko",3.0,30.397989417989415,male,0,0,Mr
+1059,"Nasr, Mr Mustafa",3.0,30.397989417989415,male,0,0,Mr
+1060,"Nassr, Mr Saade Jean",3.0,30.397989417989415,male,0,0,Mr
+1061,"Naughton, Miss Hannah",3.0,30.397989417989415,female,0,1,Miss
+1062,"Nemaugh, Mr Robert",3.0,30.397989417989415,male,0,0,Mr
+1063,"Nenkoff, Mr Christo",3.0,30.397989417989415,male,0,0,Mr
+1064,"Nicola-Yarred, Miss Jamila",3.0,30.397989417989415,female,1,1,Miss
+1065,"Nicola-Yarred, Master Elias",3.0,30.397989417989415,male,0,0,Mr
+1066,"Nieminen, Miss Manta Josefina",3.0,30.397989417989415,female,0,1,Miss
+1067,"Niklasson, Mr Samuel",3.0,30.397989417989415,male,0,0,Mr
+1068,"Nilsson, Mr August Ferdinand",3.0,30.397989417989415,male,0,0,Mr
+1069,"Nilsson, Miss Berta Olivia",3.0,30.397989417989415,female,1,1,Miss
+1070,"Nilsson, Miss Helmina Josefina",3.0,30.397989417989415,female,0,1,Miss
+1071,"Niskanen, Mr Johan",3.0,30.397989417989415,male,0,0,Mr
+1072,"Nosworthy, Mr Richard Cater",3.0,30.397989417989415,male,0,0,Mr
+1073,"Novel, Mansouer",3.0,30.397989417989415,male,1,0,Mr
+1074,"Nysten, Miss Anna",3.0,30.397989417989415,female,0,1,Miss
+1075,"Nysveen, Mr Johan H",3.0,30.397989417989415,male,0,0,Mr
+1076,"O'Brien, Mr Denis",3.0,30.397989417989415,male,0,0,Mr
+1077,"O'Brien, Mr Thomas",3.0,30.397989417989415,male,0,0,Mr
+1078,"O'Brien, Mrs Thomas",3.0,30.397989417989415,female,1,1,Mrs
+1079,"O'Connell, Mr Patrick D",3.0,30.397989417989415,male,0,0,Mr
+1080,"O'Connor, Mr Maurice",3.0,30.397989417989415,male,0,0,Mr
+1081,"O'Connor, Mr Patrick",3.0,30.397989417989415,male,0,0,Mr
+1082,"Odahl, Mr Nils Martin",3.0,30.397989417989415,male,1,0,Mr
+1083,"O'Dwyer, Miss Nellie",3.0,30.397989417989415,female,0,1,Miss
+1084,"Ohman, Miss Velin",3.0,30.397989417989415,female,0,1,Miss
+1085,"O'Keefe, Mr Patrick",3.0,30.397989417989415,male,0,0,Mr
+1086,"OLeary, Miss Norah",3.0,30.397989417989415,female,0,1,Miss
+1087,"Olsen, Master Arthur",3.0,30.397989417989415,male,0,0,Mr
+1088,"Olsen, Mr Charlie (Carl)",3.0,30.397989417989415,male,0,0,Mr
+1089,"Olsen, Mr Henry Margido",3.0,30.397989417989415,male,0,0,Mr
+1090,"Olsen, Mr Ole M",3.0,30.397989417989415,male,0,0,Mr
+1091,"Olsson, Miss Elida",3.0,30.397989417989415,female,0,1,Miss
+1092,"Olsson, Mr Nils Johan",3.0,30.397989417989415,male,0,0,Mr
+1093,"Olsson, Mr Oscar Johansson",3.0,30.397989417989415,male,1,0,Mr
+1094,"O'Neill, Miss Bridget",3.0,30.397989417989415,female,0,1,Miss
+1095,"Oreskovic, Mr Jeko",3.0,30.397989417989415,male,0,0,Mr
+1096,"Oreskovic, Mr Luka",3.0,30.397989417989415,male,0,0,Mr
+1097,"Oreskovic, Mr Maria",3.0,30.397989417989415,male,0,0,Mr
+1098,"Osen, Mr Olof Elon",3.0,30.397989417989415,male,0,0,Mr
+1099,"Osman, Miss Maria",3.0,30.397989417989415,female,1,1,Miss
+1100,"O'Sullivan, Miss Bridget",3.0,30.397989417989415,female,0,1,Miss
+1101,"Panula, Mr Ernesti Arvid",3.0,30.397989417989415,male,0,0,Mr
+1102,"Panula, Mr Jaako Arnold",3.0,30.397989417989415,male,0,0,Mr
+1103,"Panula, Master Juha Niilo",3.0,30.397989417989415,male,0,0,Mr
+1104,"Panula, Mrs John",3.0,30.397989417989415,female,0,1,Mrs
+1105,"Panula, Master Urho Abraham",3.0,30.397989417989415,male,0,0,Mr
+1106,"Panula, Master William",3.0,30.397989417989415,male,0,0,Mr
+1107,"Pasic, Mr Jakob",3.0,30.397989417989415,male,0,0,Mr
+1108,"Paulner, Mr Uscher",3.0,30.397989417989415,male,0,0,Mr
+1109,"Paulsson, Master Gosta Leonard",3.0,30.397989417989415,male,0,0,Mr
+1110,"Paulsson, Mrs Nils",3.0,30.397989417989415,female,0,1,Mrs
+1111,"Paulsson, Master Paul Folke",3.0,30.397989417989415,male,0,0,Mr
+1112,"Paulsson, Miss Stina Viola",3.0,30.397989417989415,female,0,1,Miss
+1113,"Paulsson, Miss Torborg Danira",3.0,30.397989417989415,female,0,1,Miss
+1114,"Pavlovic, Mr Stefo",3.0,30.397989417989415,male,0,0,Mr
+1115,"Peacock, Master Alfred Edward",3.0,30.397989417989415,male,0,0,Mr
+1116,"Peacock, Mrs Benjamin",3.0,30.397989417989415,female,0,1,Mrs
+1117,"Peacock, Miss Treasteall",3.0,30.397989417989415,female,0,1,Miss
+1118,"Pearce, Mr Ernest",3.0,30.397989417989415,male,0,0,Mr
+1119,"Pecruic, Mr Mate",3.0,30.397989417989415,male,0,0,Mr
+1120,"Pecruic, Mr Tome",3.0,30.397989417989415,male,0,0,Mr
+1121,"Pedersen, Mr Olaf",3.0,30.397989417989415,male,0,0,Mr
+1122,"Peduzzi, Mr Joseph",3.0,30.397989417989415,male,0,0,Mr
+1123,"Pekoniemi, Mr Edvard",3.0,30.397989417989415,male,1,0,Mr
+1124,"Peltomaki, Nikolai Johannes",3.0,30.397989417989415,male,0,0,Mr
+1125,"Perkin, Mr John Henry",3.0,30.397989417989415,male,0,0,Mr
+1126,"Persson, Mr Ernst Ulrik",3.0,30.397989417989415,male,1,0,Mr
+1127,"Peter (Joseph), Miss Mary",3.0,30.397989417989415,female,0,1,Miss
+1128,"Peter (Joseph), Mrs Catherine",3.0,30.397989417989415,female,0,1,Mrs
+1129,"Peter (Joseph), Master Michael J",3.0,30.397989417989415,male,0,0,Mr
+1130,"Peters, Miss Katie",3.0,30.397989417989415,female,0,1,Miss
+1131,"Petersen, Mr Marius",3.0,30.397989417989415,male,0,0,Mr
+1132,"Petranec, Miss Matilda",3.0,30.397989417989415,female,0,1,Miss
+1133,"Petroff, Mr Nedeca",3.0,30.397989417989415,male,0,0,Mr
+1134,"Petroff, Mr Pentcho",3.0,30.397989417989415,male,0,0,Mr
+1135,"Pettersson, Miss Ellen Natalia",3.0,30.397989417989415,female,0,1,Miss
+1136,"Peterson, Mr Johan Emil",3.0,30.397989417989415,male,0,0,Mr
+1137,"Pickard (Trembisky), Mr Berk",3.0,30.397989417989415,male,1,0,Mr
+1138,"Plotcharsky, Mr Vasil",3.0,30.397989417989415,male,0,0,Mr
+1139,"Potchett, Mr George",3.0,30.397989417989415,male,0,0,Mr
+1140,"Radeff, Mr Alexander",3.0,30.397989417989415,male,0,0,Mr
+1141,"Raibid, Mr Razi",3.0,30.397989417989415,male,0,0,Mr
+1142,"Reed, Mr James George",3.0,30.397989417989415,male,0,0,Mr
+1143,"Reynolds, Mr Harold",3.0,30.397989417989415,male,0,0,Mr
+1144,"Rice, Master Albert",3.0,30.397989417989415,male,0,0,Mr
+1145,"Rice, Master Arthur",3.0,30.397989417989415,male,0,0,Mr
+1146,"Rice, Master George",3.0,30.397989417989415,male,0,0,Mr
+1147,"Rice, Master Eric",3.0,30.397989417989415,male,0,0,Mr
+1148,"Rice, Master Eugene",3.0,30.397989417989415,male,0,0,Mr
+1149,"Rice, Mrs William",3.0,30.397989417989415,female,0,1,Mrs
+1150,"Riihiivouri, Miss Sanni",3.0,30.397989417989415,female,0,1,Miss
+1151,"Rintamaki, Mr Matti",3.0,30.397989417989415,male,0,0,Mr
+1152,"Riordan, Miss Hannah",3.0,30.397989417989415,female,1,1,Miss
+1153,"Risien, Mr Samuel",3.0,30.397989417989415,male,0,0,Mr
+1154,"Risien, Mrs Samuel",3.0,30.397989417989415,female,0,1,Mrs
+1155,"Robins, Mr Alexander A",3.0,30.397989417989415,male,0,0,Mr
+1156,"Robins, Mrs Alexander A",3.0,30.397989417989415,female,0,1,Mrs
+1157,"Rommetvedt, Mr Karl Kristian Knut",3.0,30.397989417989415,male,0,0,Mr
+1158,"Rogers, Mr William John",3.0,30.397989417989415,male,0,0,Mr
+1159,"Rosblom, Mrs Viktor",3.0,30.397989417989415,female,0,1,Mrs
+1160,"Rosblom, Miss Salli Helena",3.0,30.397989417989415,female,0,1,Miss
+1161,"Rosblom, Mr Viktor Rickard",3.0,30.397989417989415,male,0,0,Mr
+1162,"Roth, Miss Sarah",3.0,30.397989417989415,female,1,1,Miss
+1163,"Rouse, Mr Richard Henry",3.0,30.397989417989415,male,0,0,Mr
+1164,"Rush, Mr Alfred George John",3.0,30.397989417989415,male,0,0,Mr
+1165,"Ryan, Mr Edward Ryan",3.0,30.397989417989415,male,1,0,Mr
+1166,"Ryan, Mr Patrick",3.0,30.397989417989415,male,0,0,Mr
+1167,"Saad, Mr Amin",3.0,30.397989417989415,male,0,0,Mr
+1168,"Saad, Khalil",3.0,30.397989417989415,male,1,0,Mr
+1169,"Sadlier, Mr Matthew",3.0,30.397989417989415,male,0,0,Mr
+1170,"Sadowitz, Mr Harry",3.0,30.397989417989415,male,0,0,Mr
+1171,"Sage, Miss Ada",3.0,30.397989417989415,female,0,1,Miss
+1172,"Sage, Miss Constance",3.0,30.397989417989415,female,0,1,Miss
+1173,"Sage, Miss Dorothy",3.0,30.397989417989415,female,0,1,Miss
+1174,"Sage, Mr Douglas",3.0,30.397989417989415,male,0,0,Mr
+1175,"Sage, Mr Frederick",3.0,30.397989417989415,male,0,0,Mr
+1176,"Sage, Mr George",3.0,30.397989417989415,male,0,0,Mr
+1177,"Sage, Mr John",3.0,30.397989417989415,male,0,0,Mr
+1178,"Sage, Mrs John",3.0,30.397989417989415,female,0,1,Mrs
+1179,"Sage, Miss Stella",3.0,30.397989417989415,female,0,1,Miss
+1180,"Sage, Thomas (child)",3.0,30.397989417989415,male,0,0,Mr
+1181,"Sage, Master William",3.0,30.397989417989415,male,0,0,Mr
+1182,"Salander, Mr Karl Johan",3.0,21.0,male,0,0,Mr
+1183,"Salkjelsvik, Miss Anna",3.0,30.397989417989415,female,1,1,Miss
+1184,"Salonen, Mr Johan Werner",3.0,30.397989417989415,male,0,0,Mr
+1185,"Samaan, Mr Elias",3.0,30.397989417989415,male,0,0,Mr
+1186,"Samaan, Mr Hanna",3.0,30.397989417989415,male,0,0,Mr
+1187,"Samaan, Mr Youssef",3.0,30.397989417989415,male,0,0,Mr
+1188,"Sandstrom, Miss Hjalmar",3.0,30.397989417989415,female,1,1,Miss
+1189,"Sandstrom, Miss Beatrice Irene",3.0,1.5,female,0,1,Miss
+1190,"Sandstrom, Miss Marguerite Rut",3.0,30.397989417989415,female,0,1,Miss
+1191,"Sather, Simon Sivertsen",3.0,30.397989417989415,male,0,0,Mr
+1192,"Saundercock, William Henry",3.0,30.397989417989415,male,0,0,Mr
+1193,"Sawyer, Mr Frederick",3.0,30.397989417989415,male,0,0,Mr
+1194,"Scanlan, Mr James",3.0,30.397989417989415,male,0,0,Mr
+1195,"Sdycoff, Mr Todor",3.0,30.397989417989415,male,0,0,Mr
+1196,Seman Master Betros,3.0,30.397989417989415,male,0,0,Mr
+1197,"Serota, Mr Maurice",3.0,30.397989417989415,male,0,0,Mr
+1198,"Shaughnesay, Mr Patrick",3.0,30.397989417989415,male,0,0,Mr
+1199,"Shedid (Sitik), Mr Daher (Docart)",3.0,30.397989417989415,male,0,0,Mr
+1200,"Sheerlinck, Mr Jean",3.0,30.397989417989415,male,1,0,Mr
+1201,"Shellard, Mr Frederick B",3.0,30.397989417989415,male,0,0,Mr
+1202,"Shine, Miss Ellen",3.0,30.397989417989415,female,1,1,Miss
+1203,"Shorney, Mr Charles",3.0,30.397989417989415,male,0,0,Mr
+1204,"Simmons, Mr John",3.0,30.397989417989415,male,0,0,Mr
+1205,"Sirayanian, Mr Arsun",3.0,30.397989417989415,male,0,0,Mr
+1206,"Sivic, Mr Husen",3.0,30.397989417989415,male,0,0,Mr
+1207,"Sivola, Mr Antti",3.0,30.397989417989415,male,0,0,Mr
+1208,"Sjoblom, Miss Anna Sofia",3.0,30.397989417989415,female,1,1,Miss
+1209,"Sholt, Mr Peter Andreas Lauritz Andersen",3.0,30.397989417989415,male,0,0,Mr
+1210,"Skinner, Mr Henry John",3.0,30.397989417989415,male,0,0,Mr
+1211,"Skoog, Master Harald",3.0,30.397989417989415,male,0,0,Mr
+1212,"Skoog, Master Karl",3.0,30.397989417989415,male,0,0,Mr
+1213,"Skoog, Miss Mabel",3.0,30.397989417989415,female,0,1,Miss
+1214,"Skoog, Miss Margit",3.0,30.397989417989415,female,0,1,Miss
+1215,"Skoog, Mr William",3.0,30.397989417989415,male,0,0,Mr
+1216,"Skoog, Mrs William",3.0,30.397989417989415,female,0,1,Mrs
+1217,"Slabenoff, Mr Petco",3.0,30.397989417989415,male,0,0,Mr
+1218,"Slocovski, Mr Selman",3.0,30.397989417989415,male,0,0,Mr
+1219,"Smiljanovic, Mr Mile",3.0,30.397989417989415,male,0,0,Mr
+1220,"Smyth, Miss Julia",3.0,30.397989417989415,female,1,1,Miss
+1221,"Solvang, Mrs Lena Jacobsen",3.0,30.397989417989415,female,0,1,Mrs
+1222,"Somerton, Mr Francis William",3.0,30.397989417989415,male,0,0,Mr
+1223,"Sop, Mr Jules",3.0,30.397989417989415,male,1,0,Mr
+1224,"Spector, Mr Woolf",3.0,30.397989417989415,male,0,0,Mr
+1225,"Staneff, Mr Ivan",3.0,30.397989417989415,male,0,0,Mr
+1226,"Stankovic, Mr Jovan",3.0,30.397989417989415,male,0,0,Mr
+1227,"Stanley, Miss Amy Zilla Elsie",3.0,30.397989417989415,female,1,1,Miss
+1228,"Stanley, Mr Edward Roland",3.0,30.397989417989415,male,0,0,Mr
+1229,"Storey, Mr Thomas",3.0,30.397989417989415,male,0,0,Mr
+1230,"Stoyehoff, Mr Ilia",3.0,30.397989417989415,male,0,0,Mr
+1231,"Strandberg, Miss Ida Sofia",3.0,30.397989417989415,female,0,1,Miss
+1232,"Stranden, Mr Juho",3.0,30.397989417989415,male,1,0,Mr
+1233,"Strilic, Mr Ivan",3.0,30.397989417989415,male,0,0,Mr
+1234,"Strom, Mrs Wilhelm",3.0,30.397989417989415,female,0,1,Mrs
+1235,"Strom, Miss Telma (Selma) Matilda",3.0,30.397989417989415,female,0,1,Miss
+1236,"Sunderland, Mr Victor Francis",3.0,30.397989417989415,male,1,0,Mr
+1237,"Sundman, Mr Johan Julian",3.0,30.397989417989415,male,0,0,Mr
+1238,"Sutehall, Mr Henry, Jr",3.0,30.397989417989415,male,0,0,Mr
+1239,"Svensson, Mr Johan",3.0,30.397989417989415,male,0,0,Mr
+1240,"Svensson, Mr Johan Cervin",3.0,30.397989417989415,male,1,0,Mr
+1241,"Svensson, Mr Olof",3.0,30.397989417989415,male,0,0,Mr
+1242,"Tannous, Mr Thomas",3.0,30.397989417989415,male,0,0,Mr
+1243,"Tenglin, Mr Gunnar Isidor",3.0,30.397989417989415,male,1,0,Mr
+1244,"Theobald, Mr Thomas Leonard",3.0,30.397989417989415,male,0,0,Mr
+1245,"Thomas, Mrs Alexander",3.0,30.397989417989415,female,1,1,Mrs
+1246,"Thomas, Master Assad Alexander",3.0,30.397989417989415,male,0,0,Mr
+1247,"Thomas, Mr Charles",3.0,30.397989417989415,male,0,0,Mr
+1248,"Thomas, Mr John, Jr",3.0,30.397989417989415,male,0,0,Mr
+1249,"Thomas, Mr John (? 1st/2nd class)",3.0,30.397989417989415,male,0,0,Mr
+1250,"Thomson, Mr Alexander",3.0,30.397989417989415,male,0,0,Mr
+1251,"Thorneycroft, Mr Percival",3.0,30.397989417989415,male,0,0,Mr
+1252,"Thorneycroft, Mrs Percival",3.0,30.397989417989415,female,1,1,Mrs
+1253,"Tikkanen, Mr Juho",3.0,30.397989417989415,male,0,0,Mr
+1254,"Tobin, Mr Roger",3.0,30.397989417989415,male,0,0,Mr
+1255,"Todoroff, Mr Lalio",3.0,30.397989417989415,male,0,0,Mr
+1256,"Toerber, Mr Ernest William",3.0,30.397989417989415,male,0,0,Mr
+1257,"Tomlin, Mr Ernest Portage",3.0,30.397989417989415,male,0,0,Mr
+1258,"Torfa, Mr Assad",3.0,30.397989417989415,male,0,0,Mr
+1259,"Tornquist, Mr William Henry",3.0,25.0,male,1,0,Mr
+1260,"Touma (Thomas), Mrs Darwin",3.0,30.397989417989415,female,0,1,Mrs
+1261,"Touma (Thomas), Master George",3.0,30.397989417989415,male,0,0,Mr
+1262,"Touma (Thomas), Miss Hannah",3.0,30.397989417989415,female,0,1,Miss
+1263,"Turcin, Mr Stefan",3.0,30.397989417989415,male,0,0,Mr
+1264,"Turja, Miss Anna Sofia",3.0,18.0,female,1,1,Miss
+1265,"Turkula, Mrs Hedvig",3.0,63.0,female,1,1,Mrs
+1266,"Uzelas, Mr Joso",3.0,30.397989417989415,male,0,0,Mr
+1267,"Van Billiard, Mr Austin Blyler",3.0,30.397989417989415,male,0,0,Mr
+1268,"Van Billiard, Master James William",3.0,30.397989417989415,male,0,0,Mr
+1269,"Van Billiard, Master Walter John",3.0,30.397989417989415,male,0,0,Mr
+1270,"Van der Planke, Miss Augusta",3.0,18.0,female,0,1,Miss
+1271,"Van der Planke, Mr Jules",3.0,31.0,male,0,0,Mr
+1272,"Van der Planke, Mrs Jules",3.0,31.0,female,0,1,Mrs
+1273,"Van der Planke, Mr Leon",3.0,15.0,male,0,0,Mr
+1274,"Van der Steen, Mr Leo Peter",3.0,28.0,male,0,0,Mr
+1275,"Van de Velde, Mr John Joseph",3.0,36.0,male,0,0,Mr
+1276,"Vandewalle, Mr Nestor Cyriel",3.0,28.0,male,0,0,Mr
+1277,"Van Impe, Miss Catharine",3.0,10.0,female,0,1,Miss
+1278,"Van Impe, Mr Jean Baptiste",3.0,36.0,male,0,0,Mr
+1279,"Van Impe, Mrs Jean Baptiste",3.0,30.0,female,0,1,Mrs
+1280,"Vartunian, Mr David",3.0,22.0,male,1,0,Mr
+1281,"Vassilios, Mr Catavelas",3.0,30.397989417989415,male,0,0,Mr
+1282,"Vendel, Mr Olof Wdvin",3.0,29.0,male,0,0,Mr
+1283,"Vereruysse, Mr Victor",3.0,47.0,male,0,0,Mr
+1284,"Vestrom, Miss Hulda Amanda Adolfina",3.0,14.0,female,0,1,Miss
+1285,"Vonk, Mr Jenko",3.0,22.0,male,0,0,Mr
+1286,"Ware, Mr Frederick",3.0,30.397989417989415,male,0,0,Mr
+1287,"Warren, Mr Charles William",3.0,30.397989417989415,male,0,0,Mr
+1288,"Wazli, Mr Yousif",3.0,30.397989417989415,male,0,0,Mr
+1289,"Webber, Mr James",3.0,30.397989417989415,male,0,0,Mr
+1290,"Wennerstrom, Mr August Edvard",3.0,30.397989417989415,male,1,0,Mr
+1291,"Wenzel, Mr Linhart",3.0,30.397989417989415,male,0,0,Mr
+1292,"Widegren, Mr Charles Peter",3.0,51.0,male,0,0,Mr
+1293,"Wiklund, Mr Jacob Alfred",3.0,18.0,male,0,0,Mr
+1294,"Wilkes, Mrs Ellen",3.0,45.0,female,1,1,Mrs
+1295,"Willer, Mr Aaron",3.0,30.397989417989415,male,0,0,Mr
+1296,"Willey, Mr Edward",3.0,30.397989417989415,male,0,0,Mr
+1297,"Williams, Mr Howard Hugh",3.0,30.397989417989415,male,0,0,Mr
+1298,"Williams, Mr Leslie",3.0,28.0,male,0,0,Mr
+1299,"Windelov, Mr Einar",3.0,21.0,male,0,0,Mr
+1300,"Wirz, Mr Albert",3.0,27.0,male,0,0,Mr
+1301,"Wiseman, Mr Phillippe",3.0,30.397989417989415,male,0,0,Mr
+1302,"Wittevrongel, Mr Camiel",3.0,36.0,male,0,0,Mr
+1303,"Yalsevac, Mr Ivan",3.0,30.397989417989415,male,1,0,Mr
+1304,"Yasbeck, Mr Antoni",3.0,27.0,male,0,0,Mr
+1305,"Yasbeck, Mrs Antoni",3.0,15.0,female,1,1,Mrs
+1306,"Youssef, Mr Gerios",3.0,30.397989417989415,male,0,0,Mr
+1307,"Zabour, Miss Hileni",3.0,30.397989417989415,female,0,1,Miss
+1308,"Zabour, Miss Tamini",3.0,30.397989417989415,female,0,1,Miss
+1309,"Zakarian, Mr Artun",3.0,27.0,male,0,0,Mr
+1310,"Zakarian, Mr Maprieder",3.0,26.0,male,0,0,Mr
+1311,"Zenni, Mr Philip",3.0,22.0,male,0,0,Mr
+1312,"Lievens, Mr Rene",3.0,24.0,male,0,0,Mr
+1313,"Zimmerman, Leo",3.0,29.0,male,0,0,Mr

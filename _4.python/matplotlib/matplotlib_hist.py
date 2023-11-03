@@ -72,7 +72,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'hist 集合 1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -135,7 +135,19 @@ print('標準差:', np.std(dat['太郎']))
 #第五張圖
 plt.subplot(235)
 
+plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
+plt.rcParams['axes.unicode_minus']=False
+plt.rcParams['font.size']=15
 
+score = [800,750,450,680,802,630,710,450,250,320,610,670,815,870,900,650,450,730,840,675,795,585,870,960,190]
+n, b, p = plt.hist(score, bins = [10,255,405,605,785,905,990], edgecolor = 'k')
+
+for i in range(len(n)):
+    plt.text(b[i]+10, n[i], int(n[i]), ha='center', va='bottom', fontsize=10)
+
+plt.title('多益成績分布直方圖')
+plt.xlabel('成績')
+plt.ylabel('人數')
 
 #第六張圖
 plt.subplot(236)
@@ -394,7 +406,7 @@ plt.xlabel('X-Values')
 plt.ylabel('Y-Values')
 
 plt.show()
-'''
+
 print('------------------------------------------------------------')	#60個
 
 
