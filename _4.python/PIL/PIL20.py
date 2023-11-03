@@ -10,6 +10,7 @@ PIL 基本使用
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
 import sys
+import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image   # Importing Image class from PIL module
 
@@ -38,22 +39,7 @@ print('------------------------------------------------------------')	#60個
 pip install Pillow
 """
 
-#一、图片的打开与显示
-
-from PIL import Image
-img = Image.open(filename)
-#img.show()
-plt.imshow(img)
-plt.show()
-
-print('图片的尺寸 :', img.size)
-print('图片的模式 :', img.mode)
-print('图片的格式 :', img.format)
-
-
-
 print('------------------------------------------------------------')	#60個
-
 
 """
 图像通道\几何变换\裁剪
@@ -63,8 +49,6 @@ print('------------------------------------------------------------')	#60個
 1、彩色图像转灰度图
 """
 
-from PIL import Image
-import matplotlib.pyplot as plt
 img=Image.open(filename)
 gray=img.convert('L')
 plt.figure('Peony')
@@ -87,8 +71,6 @@ plt.show()
 2、通道分离与合并
 """
 
-from PIL import Image
-import matplotlib.pyplot as plt
 img=Image.open(filename)  #打开图像
 gray=img.convert('L')   #转换成灰度
 r,g,b=img.split()   #分离三通道
@@ -115,8 +97,6 @@ plt.show()
 从原图片中裁剪感兴趣区域（roi),裁剪区域由4-tuple决定，该tuple中信息为(left, upper, right, lower)。 Pillow左边系统的原点（0，0）为图片的左上角。坐标中的数字单位为像素点。
 """
 
-from PIL import Image
-import matplotlib.pyplot as plt
 img=Image.open(filename)  #打开图像
 plt.figure('Peony')
 plt.subplot(1,2,1)
@@ -177,7 +157,6 @@ plt.show()
 '''
 #二、添加小图片水印
 
-from PIL import Image
 im = Image.open(filename)
 mark=Image.open("logo_small.gif")
 layer=Image.new('RGBA', im.size, (0,0,0,0))
@@ -201,18 +180,8 @@ python中利用numpy库和scipy库来进行各种数据操作和科学计算。�
 pip install numpy
 pip install scipy
 
-以后，只要是在python中进行数字图像处理，我们都需要导入这些包：
-
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
-
-打开图像并转化为矩阵，并显示：
 """
 
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
 img=np.array(Image.open(filename))  #打开图像并转化为数字矩阵
 plt.figure('Peony')
 plt.imshow(img)
@@ -239,9 +208,6 @@ img[i,j,k]
 例1：打开图片，并随机添加一些椒盐噪声
 """
 
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
 img=np.array(Image.open(filename))
 
 #随机生成5000个椒盐
@@ -263,9 +229,6 @@ plt.show()
 例2：将lena图像二值化，像素值大于128的变为1，否则变为0
 """
 
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
 img=np.array(Image.open(filename).convert('L'))
 
 rows,cols=img.shape
@@ -380,9 +343,6 @@ bins: 返回各个bin的区间范围
 patches: 返回每个bin里面包含的数据，是一个list
 """
 
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
 img=np.array(Image.open(filename).convert('L'))
 
 plt.figure('Peony')
@@ -398,9 +358,6 @@ plt.show()
 实际上是和灰度直方图一样的，只是分别画出三通道的直方图，然后叠加在一起。
 """
 
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
 src=Image.open(filename)
 r,g,b=src.split()
 

@@ -22,27 +22,23 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-print('顯示原圖')
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
+print('------------------------------------------------------------')	#60個
 
+print('顯示原圖')
+
+image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
 plt.imshow(image1)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
-print('顯示原圖 + 圖片訊息')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
+print('顯示圖片訊息')
 print("列出物件檔名 : ", image1.filename)
 print("列出物件型態 : ", type(image1))
 print("列出物件副檔名 : ", image1.format)
 print("列出物件描述   : ", image1.format_description)
+print("列出物件模式   : ", image1.mode)
 
 W, H = image1.size
 print('原圖大小 W =', W, ', H =', H)
@@ -58,15 +54,9 @@ image1.save('image_to_filea.png')
 image1.save('image_to_fileb.png', 'PNG')
 image1.save('image_to_file.bmp') 
 
-print('顯示原圖')
-plt.imshow(image1)
-
-plt.show()
-
 image1.close()
 
 print('------------------------------------------------------------')	#60個
-
 
 
 

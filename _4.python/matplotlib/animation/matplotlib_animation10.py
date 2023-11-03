@@ -16,34 +16,36 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.animation import FuncAnimation
 
-# mpl.use("Qt5Agg")
+#fig = plt.figure(figsize = (10, 6))
+fig = plt.figure()
 
-#mpl.rcParams['font.sans-serif'] = ['SimHei']
-#mpl.rcParams['font.serif'] = ['SimHei']
-#mpl.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题,或者转换负号为字符串
+# 建立 x 資料
+x = np.arange(0, 2 * np.pi, 0.02)
+y = np.sin(x)
+#y = np.exp(-x) * np.cos(2 * np.pi * x)
+line, = plt.plot(x, y, color = "cornflowerblue", lw = 3) # 建立 line 變數
 
-fig, ax = plt.subplots(1, 1)
-
-x = np.linspace(0, 2 * np.pi, 5000)
-y = np.exp(-x) * np.cos(2 * np.pi * x)
-line, = ax.plot(x, y, color="cornflowerblue", lw=3)
-ax.set_ylim(-1.0, 1.0)
-
+#ax.set_ylim(-1.0, 1.0)
 
 # to clear current frame
 def init():
     line.set_ydata([np.nan] * len(x))
     return line,
 
-
 # to update the data
-def animate(data):
-    line.set_ydata(np.exp(-x) * np.cos(2 * np.pi * x + float(data) / 100))
+def animate(i):
+    #y = np.exp(-x) * np.cos(2 * np.pi * x + float(i) / 100)
+    ydata = np.sin(x - i / 50)
+    line.set_ydata(ydata)   # 更新 line 變數
     return line,
 
-
-# to call class FuncAnimation which connects animate and init
-ani = FuncAnimation(fig, animate, init_func=init, frames=200, interval=2, blit=True)
+interval = 2   #每隔 interval msec 執行 animate()動畫
+ani = FuncAnimation(fig,
+                    animate,
+                    init_func = init,
+                    frames = 200,
+                    interval = interval,
+                    blit = True)
 
 # to save the animation
 #ani.save("movie.mp4", fps=20, writer="ffmpeg")

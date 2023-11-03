@@ -3,6 +3,7 @@ plt之基本設定
 
 '''
 
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import math

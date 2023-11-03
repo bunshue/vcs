@@ -14,8 +14,6 @@ import sys
 import matplotlib.pyplot as plt
 from PIL import Image   # Importing Image class from PIL module
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
@@ -25,14 +23,11 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-print('萃取圖片的輪廓')
-
-import matplotlib.pyplot as plt
-from PIL import Image
-
-# 讀入圖片
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample2.png'
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print('------------------------------------------------------------')	#60個
+
+print('萃取圖片的輪廓')
 
 image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 #print('顯示原圖')

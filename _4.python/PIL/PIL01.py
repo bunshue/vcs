@@ -15,10 +15,9 @@ PIL 圖片相關的處理
 '''
 
 import sys
+import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image   # Importing Image class from PIL module
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
@@ -27,11 +26,16 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print('------------------------------------------------------------')	#60個
+
 print('------------------------------------------------------------')	#60個
 
 print('測試 縮放 resize')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
 W, H = image1.size
@@ -48,8 +52,6 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 print('測試 裁剪 crop')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
 W, H = image1.size
@@ -211,12 +213,6 @@ print('輸出圖片資料夾 : ', target_dir)
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
-import numpy as np
-from PIL import Image
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample.jpg'
-filename = r'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 #print('顯示原圖')
 #plt.imshow(image1)
@@ -273,18 +269,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import sys
-
-import matplotlib.pyplot as plt
-from PIL import Image
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/flower.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image
-
 image = Image.open(filename)
 
 r, g, b = image.split()
@@ -296,8 +280,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image
-
 image = Image.open(filename)
 
 black_and_white = image.convert('1')
@@ -307,8 +289,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image
-
 image = Image.open(filename)
 
 gray_iamge = image.convert('L')
@@ -317,17 +297,6 @@ plt.imshow(gray_iamge)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -354,13 +323,7 @@ print('相似度:', is_similar)
 
 print('------------------------------------------------------------')	#60個
 
-
-import numpy as np
 import torchvision.transforms as transforms
-from PIL import Image
-import matplotlib.pyplot as plt
-
-print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample.jpg'
 image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
@@ -442,9 +405,6 @@ convert_image.save('image_bgr.png')
 
 print('------------------------------------------------------------')	#60個
 
-# PIL 測試 1
-
-from PIL import Image
 from PIL import Image, ImageFilter
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'

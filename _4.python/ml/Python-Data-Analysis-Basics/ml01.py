@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 
-'''
 
 """
 01.讀入基本套件
@@ -198,106 +197,7 @@ print(f"MSE = {mse:.4f}")
 print(f"R2 = {r2:.4f}")
 
 
-'''
 
-#07. 怎麼選最好參數、model？
-#7-1. 製造像真的一様的數據
-
-#from sklearn.datasets.samples_generator import make_blobs
-from sklearn.datasets import make_blobs
-
-x, y = make_blobs(n_samples = 500,
-                  centers = 3,
-                  n_features = 2,
-                  random_state = 0)
-
-plt.scatter(x[:, 0], x[:, 1], c = y, cmap = 'Paired', s = 80)
-
-plt.grid()
-plt.title('aaaa')
-plt.show()
-
-#07-2. Cross Validation
-
-from sklearn.model_selection import cross_val_score
-
-#試用 SVC
-
-from sklearn.svm import SVC
-
-clf_svc = SVC(gamma = 'scale')
-
-scores = cross_val_score(clf_svc, x, y, cv = 5)
-
-"""
-看一下五次的成績。
-scores
-array([0.94117647, 0.95049505, 0.97979798, 0.87878788, 0.91919192])
-很快的算一下平均。
-scores.mean()
-0.9338898595741927
-"""
-
-#試用 Decision Tree
-
-from sklearn.tree import DecisionTreeClassifier
-
-clf_dt = DecisionTreeClassifier()
-scores = cross_val_score(clf_dt, x, y, cv=5)
-
-"""
-scores
-array([0.92156863, 0.89108911, 0.94949495, 0.90909091, 0.88888889])
-scores.mean()
-0.9120264967673238
-"""
-
-#試用 Random Forest
-
-from sklearn.ensemble import RandomForestClassifier
-
-clf_rf = RandomForestClassifier(n_estimators=100)
-scores = cross_val_score(clf_rf, x, y, cv=5)
-
-"""
-scores
-
-array([0.92156863, 0.92079208, 0.96969697, 0.88888889, 0.88888889])
-
-scores.mean()
-
-0.9179670908267298
-"""
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
