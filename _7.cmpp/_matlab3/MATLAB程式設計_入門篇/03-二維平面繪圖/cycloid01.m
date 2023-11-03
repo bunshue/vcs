@@ -1,0 +1,12 @@
+clear all;
+r=1;
+t1=linspace(0,2*pi,1000);
+t2=linspace(0,6*pi,1000);
+x1=r*(t1-sin(t1));
+y1=r*(1-cos(t1));
+x2=r*(t2-sin(t2));
+y2=r*(1-cos(t2));
+subplot(2,1,1);plot(x1,y1);
+title('¤p¶ê½üºu¤@°é');
+subplot(2,1,2);plot(x2,y2);
+title('¤p¶ê½üºu¤T°é');

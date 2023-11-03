@@ -1,0 +1,1 @@
+Error in running myFibo! (Logged to error.log)

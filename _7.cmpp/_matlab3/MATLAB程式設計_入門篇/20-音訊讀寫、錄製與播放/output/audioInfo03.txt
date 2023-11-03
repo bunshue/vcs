@@ -1,0 +1,11 @@
+             Filename: 'D:\users\jang\books\matlabProgramming4beginner\example\20-音訊讀寫、錄製與播放\youAtL...'
+    CompressionMethod: 'MP3'
+          NumChannels: 2
+           SampleRate: 44100
+         TotalSamples: 317953
+             Duration: 7.2098
+                Title: '02_至少還有你'
+              Comment: []
+               Artist: '林憶蓮'
+              BitRate: 128
+

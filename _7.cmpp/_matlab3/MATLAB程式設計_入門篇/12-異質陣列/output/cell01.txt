@@ -1,0 +1,6 @@
+
+A = 
+
+    'This is the first cell.'    [1x2 double]
+                 [3x3 double]    {2x1 cell  }
+

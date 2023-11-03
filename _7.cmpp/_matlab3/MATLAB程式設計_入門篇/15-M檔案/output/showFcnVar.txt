@@ -1,0 +1,8 @@
+nargin=0
+nargout=0
+mfilename=showFcnVar
+
+ans =
+
+     0
+

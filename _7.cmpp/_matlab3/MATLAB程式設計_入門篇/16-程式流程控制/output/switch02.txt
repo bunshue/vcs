@@ -1,0 +1,12 @@
+Jan is Winter.
+Feb is Winter.
+Mar is Spring.
+Apr is Spring.
+May is Spring.
+Jun is Summer.
+Jul is Summer.
+Aug is Summer.
+Sep is Autumn.
+Dec is Winter.
+Nov is Autumn.
+Dec is Winter.

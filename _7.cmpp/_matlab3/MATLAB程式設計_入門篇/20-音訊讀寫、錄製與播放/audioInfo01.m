@@ -1,0 +1,9 @@
+fileName='welcome.wav';
+info=audioinfo(fileName);
+fprintf('檔案名稱 = %s\n', info.Filename);
+fprintf('壓縮方式 = %s\n', info.CompressionMethod);
+fprintf('通道個數 = %g 個\n', info.NumChannels);
+fprintf('取樣頻率 = %g Hz\n', info.SampleRate);
+fprintf('取樣點總個數 = %g 個\n', info.TotalSamples);
+fprintf('音訊長度 = %g 秒\n', info.Duration);
+fprintf('取樣點解析度 = %g 位元/取樣點\n', info.BitsPerSample);

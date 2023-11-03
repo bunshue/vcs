@@ -1,0 +1,38 @@
+MATLAB version = 8.5.0.197613 (R2015a)
+    AlignVertexCenters: 'off'
+            Annotation: [1x1 matlab.graphics.eventdata.Annotation]
+          BeingDeleted: 'off'
+            BusyAction: 'queue'
+         ButtonDownFcn: ''
+              Children: []
+              Clipping: 'on'
+                 Color: [0 0.4470 0.7410]
+             CreateFcn: ''
+             DeleteFcn: ''
+           DisplayName: ''
+      HandleVisibility: 'on'
+               HitTest: 'on'
+         Interruptible: 'on'
+             LineStyle: '-'
+             LineWidth: 0.5000
+                Marker: 'diamond'
+       MarkerEdgeColor: 'auto'
+       MarkerFaceColor: [1 0 0]
+            MarkerSize: 15
+                Parent: [1x1 Axes]
+         PickableParts: 'visible'
+              Selected: 'off'
+    SelectionHighlight: 'on'
+                   Tag: ''
+                  Type: 'line'
+         UIContextMenu: []
+              UserData: []
+               Visible: 'on'
+                 XData: [1x32 double]
+             XDataMode: 'manual'
+           XDataSource: ''
+                 YData: [1x32 double]
+           YDataSource: ''
+                 ZData: [1x0 double]
+           ZDataSource: ''
+

@@ -1,0 +1,6 @@
+x(1) = 1 is positive
+x(2) = 4 is positive
+x(3) = -2 is negative or zero
+x(4) = 3 is positive
+x(5) = -1 is negative or zero
+x(6) = -5 is negative or zero

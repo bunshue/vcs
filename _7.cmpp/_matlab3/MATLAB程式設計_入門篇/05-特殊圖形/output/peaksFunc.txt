@@ -1,0 +1,1 @@
+Error in running peaksFunc! (Logged to error.log)

@@ -1,0 +1,11 @@
+
+ans =
+
+  Columns 1 through 5
+
+       25105       26159          82         111         103
+
+  Columns 6 through 7
+
+         101         114
+

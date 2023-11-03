@@ -1,0 +1,15 @@
+
+andResult =
+
+     0     1     0     1     1     0     0
+
+
+orResult =
+
+     1     1     1     1     1     1     0
+
+
+notResult =
+
+     0     0     1     0     0     0     1
+

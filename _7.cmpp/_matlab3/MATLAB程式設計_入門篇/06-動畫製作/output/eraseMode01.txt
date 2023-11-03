@@ -1,0 +1,36 @@
+[Warning: The EraseMode property is no longer supported and will
+error in a future release. Use the ANIMATEDLINE function for
+animating lines and points instead of EraseMode 'none'. Removing
+instances of EraseMode set to 'normal', 'xor', and 'background' has
+minimal impact.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('eraseMode01', 'd:\users\jang\books\matlabPRogramming4beginner\example\06-動畫製作\eraseMode01.m', 8)" style="font-weight:bold">eraseMode01</a> (<a href="matlab: opentoline('d:\users\jang\books\matlabPRogramming4beginner\example\06-動畫製作\eraseMode01.m',8,0)">line 8</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 
+Elapsed time is 5.558619 seconds.
+[Warning: The EraseMode property is no longer supported and will
+error in a future release. Use the ANIMATEDLINE function for
+animating lines and points instead of EraseMode 'none'. Removing
+instances of EraseMode set to 'normal', 'xor', and 'background' has
+minimal impact.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('eraseMode01', 'd:\users\jang\books\matlabPRogramming4beginner\example\06-動畫製作\eraseMode01.m', 18)" style="font-weight:bold">eraseMode01</a> (<a href="matlab: opentoline('d:\users\jang\books\matlabPRogramming4beginner\example\06-動畫製作\eraseMode01.m',18,0)">line 18</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 
+Elapsed time is 4.329291 seconds.
+[Warning: The EraseMode property is no longer supported and will
+error in a future release. Use the ANIMATEDLINE function for
+animating lines and points instead of EraseMode 'none'. Removing
+instances of EraseMode set to 'normal', 'xor', and 'background' has
+minimal impact.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('eraseMode01', 'd:\users\jang\books\matlabPRogramming4beginner\example\06-動畫製作\eraseMode01.m', 27)" style="font-weight:bold">eraseMode01</a> (<a href="matlab: opentoline('d:\users\jang\books\matlabPRogramming4beginner\example\06-動畫製作\eraseMode01.m',27,0)">line 27</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 
+Elapsed time is 4.249303 seconds.
+[Warning: The EraseMode property is no longer supported and will
+error in a future release. Use the ANIMATEDLINE function for
+animating lines and points instead of EraseMode 'none'. Removing
+instances of EraseMode set to 'normal', 'xor', and 'background' has
+minimal impact.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('eraseMode01', 'd:\users\jang\books\matlabPRogramming4beginner\example\06-動畫製作\eraseMode01.m', 36)" style="font-weight:bold">eraseMode01</a> (<a href="matlab: opentoline('d:\users\jang\books\matlabPRogramming4beginner\example\06-動畫製作\eraseMode01.m',36,0)">line 36</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile>dummyFunction', 'd:\users\jang\books\goWriteOutputFile.m', 85)" style="font-weight:bold">goWriteOutputFile>dummyFunction</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',85,0)">line 85</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('goWriteOutputFile', 'd:\users\jang\books\goWriteOutputFile.m', 55)" style="font-weight:bold">goWriteOutputFile</a> (<a href="matlab: opentoline('d:\users\jang\books\goWriteOutputFile.m',55,0)">line 55</a>)] 
+Elapsed time is 4.196901 seconds.

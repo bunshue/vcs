@@ -1,0 +1,13 @@
+str{1}=網路上的芳鄰
+str{2}=清華大學ABCD
+Trigram of the above string is: 
+網路上
+路上的
+上的芳
+的芳鄰
+清華大
+華大學
+大學A
+學AB
+ABC
+BCD

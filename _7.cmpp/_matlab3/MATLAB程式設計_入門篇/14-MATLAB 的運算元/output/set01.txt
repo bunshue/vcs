@@ -1,0 +1,30 @@
+
+union_result =
+
+     1     2     3     4     5     6     9
+
+
+intersect_result =
+
+     1     5
+
+
+setdiff_result =
+
+     2     3     4     6
+
+
+setxor_result =
+
+     2     3     4     6     9
+
+
+setuniq_result =
+
+     1     5     9
+
+
+ismember_result =
+
+     1
+

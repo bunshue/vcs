@@ -1,0 +1,6 @@
+
+E = 
+
+    [1x3 double]
+    [1x3 double]
+

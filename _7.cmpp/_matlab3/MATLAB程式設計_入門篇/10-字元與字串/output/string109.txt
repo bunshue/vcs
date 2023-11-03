@@ -1,0 +1,11 @@
+
+x =
+
+  Columns 1 through 5
+
+       20171       26086       20108       65293       20171
+
+  Columns 6 through 7
+
+       26086       30051
+

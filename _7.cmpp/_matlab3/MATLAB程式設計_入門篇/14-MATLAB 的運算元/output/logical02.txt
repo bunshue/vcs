@@ -1,0 +1,15 @@
+
+result1 =
+
+     0
+
+
+retult2 =
+
+     1
+
+
+result3 =
+
+     0
+

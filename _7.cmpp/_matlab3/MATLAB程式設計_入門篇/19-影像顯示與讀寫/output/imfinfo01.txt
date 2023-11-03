@@ -1,0 +1,39 @@
+
+info1 = 
+
+           Filename: 'D:\users\jang\books\matlabProgramming4beginner\example\19-影像顯示與讀寫\simulinkteam.jpg'
+        FileModDate: '28-Mar-2000 17:30:36'
+           FileSize: 24071
+             Format: 'jpg'
+      FormatVersion: ''
+              Width: 234
+             Height: 126
+           BitDepth: 24
+          ColorType: 'truecolor'
+    FormatSignature: ''
+    NumberOfSamples: 3
+       CodingMethod: 'Huffman'
+      CodingProcess: 'Sequential'
+            Comment: {'CREATOR: XV Version 3.10a  Rev: 12/29/94  Quality = 95, Smoothing = 0
+'}
+
+
+info2 = 
+
+           Filename: 'D:\users\jang\books\matlabProgramming4beginner\example\19-影像顯示與讀寫\sbtree.gif'
+        FileModDate: '10-Sep-1997 14:53:14'
+           FileSize: 7121
+             Format: 'GIF'
+      FormatVersion: '87a'
+               Left: 1
+                Top: 1
+              Width: 99
+             Height: 80
+           BitDepth: 8
+          ColorType: 'indexed'
+    FormatSignature: 'GIF87a'
+    BackgroundColor: 1
+        AspectRatio: 0
+         ColorTable: [256x3 double]
+         Interlaced: 'no'
+

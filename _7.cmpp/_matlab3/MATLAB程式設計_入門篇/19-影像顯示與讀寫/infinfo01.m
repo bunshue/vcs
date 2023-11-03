@@ -1,0 +1,1 @@
+info = imfinfo('simulinkteam.jpg')

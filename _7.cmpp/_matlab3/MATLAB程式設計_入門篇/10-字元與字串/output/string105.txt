@@ -1,0 +1,11 @@
+
+sentenceAscii =
+
+  Columns 1 through 11
+
+    73    39   118   101    32   103   111   116    32    97    32
+
+  Columns 12 through 16
+
+   100    97   116   101    33
+

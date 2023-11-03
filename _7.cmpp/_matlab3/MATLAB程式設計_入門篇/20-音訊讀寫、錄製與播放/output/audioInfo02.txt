@@ -1,0 +1,11 @@
+             Filename: 'D:\users\jang\books\matlabProgramming4beginner\example\20-音訊讀寫、錄製與播放\whale.aif'
+    CompressionMethod: 'Uncompressed'
+          NumChannels: 1
+           SampleRate: 2000
+         TotalSamples: 4000
+             Duration: 2
+                Title: []
+              Comment: []
+               Artist: []
+        BitsPerSample: 16
+

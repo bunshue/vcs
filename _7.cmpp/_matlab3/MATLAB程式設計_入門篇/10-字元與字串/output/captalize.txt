@@ -1,0 +1,2 @@
+input = this is A test for Me too
+output = This Is A Test For Me Too

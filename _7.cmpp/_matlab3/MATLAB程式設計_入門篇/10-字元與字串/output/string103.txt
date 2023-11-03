@@ -1,0 +1,5 @@
+
+sentence =
+
+I've got a date!
+

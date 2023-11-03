@@ -1,0 +1,30 @@
+Show content in Sheet1(default):
+A = xlsread('1.xls')
+A =
+
+    1.0000    6.3000
+    2.0000    7.0000
+    3.0000    8.0000
+    4.0000    9.0000
+    5.0000   10.0000
+
+Show content in Sheet2(captital does matter):
+A = xlsread('1.xls', 'Sheet2')
+B =
+
+    11
+    12
+    13
+
+
+C =
+
+     []
+
+
+D = 
+
+    'Element one'
+    'Element two'
+    'Element three'
+

@@ -1,0 +1,5 @@
+
+str3 =
+
+I like MATLAB, JavaScript, and C++!
+
