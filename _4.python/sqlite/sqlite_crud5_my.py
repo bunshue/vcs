@@ -268,12 +268,12 @@ sqlstr = 'CREATE TABLE IF NOT EXISTS table01 ("filename" TEXT NOT NULL, "filesiz
 
 '''
 print('建立表單')
-cursor.execute("CREATE TABLE talbe01"
+cursor.execute("CREATE TABLE table01"
 "("
 "   filename varchar(32),"
 "   filesize varchar(32)"
 ")")
-cursor.execute("INSERT INTO talbe01"
+cursor.execute("INSERT INTO table01"
 "  (filename, filesize)"
 "  VALUES"
 "  (?, ?)",

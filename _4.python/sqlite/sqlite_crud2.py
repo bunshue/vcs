@@ -88,7 +88,7 @@ conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.cursor() # 建立 cursor 物件
 
 print('建立表單')
-cursor.execute("CREATE TABLE talbe01"
+cursor.execute("CREATE TABLE table01"
 "("
 "   filename VARCHAR(32),"
 "   filesize VARCHAR(32)"
@@ -96,7 +96,7 @@ cursor.execute("CREATE TABLE talbe01"
 
 
 print('INSERT')
-cursor.execute("INSERT INTO talbe01"
+cursor.execute("INSERT INTO table01"
 "  (filename, filesize)"
 "  VALUES"
 "  (?, ?)",
@@ -104,7 +104,7 @@ cursor.execute("INSERT INTO talbe01"
 
 
 print('SELECT')
-cursor.execute("SELECT * FROM talbe01"
+cursor.execute("SELECT * FROM table01"
 "  WHERE filename = ?",
 ('aaaa.mp4',))
 
@@ -115,7 +115,7 @@ if len(rows) > 1:
 
 '''    
     # Nope.  Someone else got there.  Remove our lock.
-    cursor.execute("DELETE FROM talbe01"
+    cursor.execute("DELETE FROM table01"
                    "  WHERE filename = ?",
                    (self.filename,))
     self.connection.commit()  # 更新
@@ -127,7 +127,7 @@ else:
 
 '''
 print('SELECT')
-cursor.execute("SELECT * FROM talbe01"
+cursor.execute("SELECT * FROM table01"
                "  WHERE filename = ?",
                (self.filename,))
 rows = cursor.fetchall()
@@ -135,7 +135,7 @@ if len(rows) == 1:
     print('aaaaaa')
 
 print('DELETE')
-cursor.execute("DELETE FROM talbe01"
+cursor.execute("DELETE FROM table01"
                "  WHERE filename = ?",
                ('aaaa.mp4',))
 '''
