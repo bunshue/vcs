@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Sealed: true
+Main-Class: com.bitmechanic.spindle.SpiderDB
+Class-Path: parseRtf.jar sqljdbc.jar bcmail-jdk14-132.jar bcprov-jdk14-132.jar FontBox-0.2.0-dev.jar fseg.jar htmlparser.jar jdom.jar je-3.2.23.jar PDFBox-0.7.4-dev-20080213.jar jai_codec.jar jai_core.jar poi-3.0.2-beta2-20080112.jar poi-contrib-3.0.2-beta2-20080112.jar poi-scratchpad-3.0.2-beta2-20080112.jar seg.jar svm.jar mysql-connector-java-5.1.5-bin.jar .

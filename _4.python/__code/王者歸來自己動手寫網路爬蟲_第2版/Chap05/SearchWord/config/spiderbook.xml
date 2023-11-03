@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<info>
+  
+ <website>
+  <url>http://book.myrice.com/</url>
+  <type>book</type>
+  <class>com.lietu.chinamet.CatGeneral</class>
+  <rank>4</rank>
+ </website>
+ 
+  <website>
+  <url>http://www3.cmfu.com/index.asp</url>
+  <type>book</type>
+  <class>com.lietu.chinamet.CatGeneral</class>
+  <rank>4</rank>
+ </website>
+ 
+</info>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<info>
+  
+ <website>
+  <url>http://www.bjedu.gov.cn/</url>
+  <type>bjedu</type>
+  <class>com.lietu.chinamet.CatGeneral</class>
+ </website>
+ 
+</info>

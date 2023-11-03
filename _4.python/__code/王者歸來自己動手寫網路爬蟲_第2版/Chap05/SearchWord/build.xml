@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Licensed to the Apache Software Foundation (ASF) under one or more
+ contributor license agreements.  See the NOTICE file distributed with
+ this work for additional information regarding copyright ownership.
+ The ASF licenses this file to You under the Apache License, Version 2.0
+ (the "License"); you may not use this file except in compliance with
+ the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+
+<project name="spider" default="makeJAR" basedir=".">
+  <description>
+    Build file for solr java client
+  </description>
+
+  <!-- set global properties for this build -->
+  <property name="product" value="spider"/>
+  <property name="src"     location="src"/>
+  <property name="bin"     location="bin"/>
+  <property name="dist"    location="dist"/>
+  <property name="lib"     location="lib"/>
+  <property name="jarfile" value="${product}.jar"/>
+
+  <path id="project.class.path">
+    <pathelement path="${java.class.path}/"/>
+  	<fileset dir="${lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="init" depends="clean">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${bin}" />
+    <mkdir dir="${dist}" />
+  </target>
+
+  <target name="compile" depends="init"
+    description="compile the source ">
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac encoding="utf-8" debug="true" srcdir="${src}" destdir="${bin}" classpathref="project.class.path" target="1.5" source="1.5"/>
+  </target>
+
+  <target name="clean" description="removes temp stuff">
+    <tstamp/>
+  	<delete dir="${bin}"/>
+ 	  <delete dir="${dist}"/>
+  </target>
+
+
+  <target name="makeJAR" depends="init,compile">
+  	<jar destfile="${dist}/${jarfile}" manifest="MANIFEST.MF">
+      <fileset dir="${bin}">
+      	<include name="**/*.class"/>
+        <exclude name="**/*.jflex"/>
+	  </fileset>
+      <fileset dir="${src}">
+      	<include name="**/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="**/Thumbs.db"/>
+        <exclude name="**/*.psd"/>
+        <exclude name="**/*.java"/>
+        <exclude name="**/*.jflex"/>
+  	  </fileset>
+    </jar>
+  </target>
+
+</project>
