@@ -179,15 +179,6 @@ cv2.imshow('Sample pic', img_masked)
 
 print('------------------------------------------------------------')	#60個
 
-print('模糊效果')
-
-img = cv2.imread(r'images/sample.jpg')
-
-Img_blur = cv2.GaussianBlur(img, (49, 49), 3)
-cv2.imshow('Sample pic', Img_blur)
-
-print('------------------------------------------------------------')	#60個
-
 print('去除圖片的雜訊 原圖')
 
 img2 = cv2.imread(r'images/sample2.jpg')
@@ -201,10 +192,4 @@ img2_denoised = cv2.fastNlMeansDenoisingColored(img2, h = 5)
 cv2.imshow('Sample pic', img2_denoised)
 
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
 

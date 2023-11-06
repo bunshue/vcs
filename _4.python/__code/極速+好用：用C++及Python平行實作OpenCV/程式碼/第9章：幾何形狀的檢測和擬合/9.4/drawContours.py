@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 import cv2
 import sys
+
 #主函数
 if __name__ =="__main__":
     #
@@ -10,7 +10,7 @@ if __name__ =="__main__":
     else:
         print "Usage draw.py image"
     #第二步：边缘检测 或者 阈值处理 生成一张二值图
-    img = cv2.GaussianBlur(img,(3,3),0.5)#高斯平滑处理
+    img = cv2.GaussianBlur(img, (3, 3), 0.5)#高斯平滑处理    #執行高斯模糊化
     binaryImg = cv2.Canny(img,50,200)
     cv2.imshow("binaryImg",binaryImg)
     #第三步：边缘的轮廓，返回的 contours 是一个 list 列表

@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
+
 #快速傅里叶变换
 def fft2Image(src):
     #得到行、列
@@ -80,7 +80,7 @@ if __name__ =="__main__":
     #显著性
     saliencymap = np.power(ifft2[:,:,0],2)+np.power(ifft2[:,:,1],2)
     #对显著性进行高斯平滑
-    saliencymap = cv2.GaussianBlur(saliencymap,(11,11),2.5)
+    saliencymap = cv2.GaussianBlur(saliencymap, (11, 11), 2.5) #執行高斯模糊化
     #显示检测到的显著性
     #cv2.normalize(saliencymap,saliencymap,0,1,cv2.NORM_MINMAX)
     saliencymap  = saliencymap/np.max(saliencymap)

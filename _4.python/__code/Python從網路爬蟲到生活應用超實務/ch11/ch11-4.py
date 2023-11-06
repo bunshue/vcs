@@ -1,0 +1,3 @@
+from image_downloader.image_downloader import download_csv_file_images
+
+download_csv_file_images("ptt_beauty.csv")

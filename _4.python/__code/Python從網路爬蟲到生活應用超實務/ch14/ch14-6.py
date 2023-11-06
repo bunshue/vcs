@@ -1,0 +1,15 @@
+import twstock
+
+stock = twstock.Stock("2330") 
+ma_p = stock.moving_average(stock.price, 5)
+print("五日均價:", ma_p)
+ma_c = stock.moving_average(stock.capacity, 5)
+print("五日均量:", ma_c)
+ma_p_cont = stock.continuous(ma_p)
+print("五日均價持續天數:", ma_p_cont)
+ma_br = stock.ma_bias_ratio(5, 10)
+print("五日、十日乖離率:", ma_br)
+ma_brp = stock.ma_bias_ratio_pivot(stock.price, 5, True)
+print("正乖離率轉折位置:", ma_brp)
+ma_brp2 = stock.ma_bias_ratio_pivot(stock.price, 5, False)
+print("負乖離率轉折位置:", ma_brp2)

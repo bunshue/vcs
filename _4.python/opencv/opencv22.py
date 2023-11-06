@@ -91,20 +91,6 @@ o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示 GaussianBlur 效果 1')
-r=cv2.GaussianBlur(o,(5,5),0,0)
-cv2.imshow("result",r)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
-
 print('顯示 medianBlur 效果 1')
 r=cv2.medianBlur(o,3)
 cv2.imshow("result",r)
@@ -133,20 +119,19 @@ o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
 
-print('顯示 GaussianBlur 效果 2')
-g=r=cv2.GaussianBlur(o,(55,55),0,0)
-cv2.imshow("Gaussian",g)
-
 print('顯示 bilateralFilter 效果')
-b=cv2.bilateralFilter(o,55,100,100)
-cv2.imshow("bilateral",b)
+b = cv2.bilateralFilter(o, 55, 100, 100)
+cv2.imshow("bilateral", b)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
+#Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+
 o=cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("original",o)
@@ -154,10 +139,36 @@ cv2.imshow("original",o)
 print('顯示 filter2D 效果')
 kernel = np.ones((9,9),np.float32)/81
 r = cv2.filter2D(o,-1,kernel)
-cv2.imshow("Gaussian",r)
+cv2.imshow('filter2D', r)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp'
+
+o = cv2.imread(filename, cv2.COLOR_BGR2GRAY)
+print('顯示原圖')
+cv2.imshow("original", o)
+
+kernel_x = np.array([[1,1,1], [0,0,0], [-1,-1,-1]], dtype = int)    #水平值一樣, 偵測水平的邊緣
+kernel_y = np.array([[-1,0,1], [-1,0,1], [-1,0,1]], dtype = int)    #垂直值一樣, 偵測垂直的邊緣
+
+print('顯示 filter2D 效果')
+
+x = cv2.filter2D(o, cv2.CV_16S, kernel_x)
+y = cv2.filter2D(o, cv2.CV_16S, kernel_y)
+
+absX = cv2.convertScaleAbs(x)
+absY = cv2.convertScaleAbs(y)
+
+cv2.imshow('Prewitt_horizon', absX) #躺平的書本的邊緣有被強調出來
+cv2.imshow('Prewitt_vertical', absY)#直放的書本的邊緣有被強調出來
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

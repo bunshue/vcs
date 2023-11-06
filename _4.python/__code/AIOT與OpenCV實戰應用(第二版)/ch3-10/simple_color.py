@@ -33,7 +33,7 @@ while True:
 
 #### 在while中
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    hsv = cv2.GaussianBlur(hsv, (11, 11), 0)
+    hsv = cv2.GaussianBlur(hsv, (11, 11), 0)    #執行高斯模糊化
 
 #### 在while中
     mask = cv2.inRange(hsv, lower, upper)

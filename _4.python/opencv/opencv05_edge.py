@@ -112,8 +112,7 @@ print('------------------------------------------------------------')	#60個
 
 gray_image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
-#執行高斯模糊化
-blur_gray = cv2.GaussianBlur(gray_image, (3,3), 0)
+blur_gray = cv2.GaussianBlur(gray_image, (3,3), 0)  #執行高斯模糊化
 threshold_1 = 30#強邊緣strong edge
 threshold_2 = 60#弱邊緣weak edge
 edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
@@ -129,7 +128,7 @@ print('------------------------------------------------------------')	#60個
 
 def sobel(image):
     kernel_size = (3, 3)
-    blur_image = cv2.GaussianBlur(image, kernel_size, 0)
+    blur_image = cv2.GaussianBlur(image, kernel_size, 0)    #執行高斯模糊化
     #水平方向梯度
     x =cv2.Sobel(blur_image, cv2.CV_16S, 1, 0, kernel_size)
     abs_x = cv2.convertScaleAbs(x)

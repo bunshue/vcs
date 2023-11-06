@@ -3,7 +3,7 @@ import cv2
 
 lane = cv2.imread("lane.jpg")
 # 高斯模糊，Canny边缘检测需要的
-lane = cv2.GaussianBlur(lane, (5, 5), 0)
+lane = cv2.GaussianBlur(lane, (5, 5), 0)    #執行高斯模糊化
 # 进行边缘检测，减少图像空间中需要检测的点数量
 lane = cv2.Canny(lane, 50, 150)
 cv2.imshow("lane", lane)

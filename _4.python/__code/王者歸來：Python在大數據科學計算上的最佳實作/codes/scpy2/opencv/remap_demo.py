@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 import cv2
 import numpy as np
 from traits.api import Array, Property, List, Bool, Event, Range, TraitError
 from traitsui.api import Item, VGroup
 from .demobase import ImageProcessDemo
-
 
 class RemapDemo(ImageProcessDemo):
     TITLE = "Remap Demo"
@@ -86,8 +84,8 @@ class RemapDemo(ImageProcessDemo):
             mask = ((self.gridx - sx)**2 + (self.gridy - sy)**2) < self.radius**2
             self.offsetx[mask] = tx - sx
             self.offsety[mask] = ty - sy
-            cv2.GaussianBlur(self.offsetx, (0, 0), self.sigma, self.offsetx)
-            cv2.GaussianBlur(self.offsety, (0, 0), self.sigma, self.offsety)
+            cv2.GaussianBlur(self.offsetx, (0, 0), self.sigma, self.offsetx)    #執行高斯模糊化
+            cv2.GaussianBlur(self.offsety, (0, 0), self.sigma, self.offsety)    #執行高斯模糊化
 
         img2 = cv2.remap(self.img,
                          self.offsetx + self.gridx,

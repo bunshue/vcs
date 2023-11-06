@@ -11,7 +11,7 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 # 图像锐化函数
 def my_not_sharpen(image, k, blur_size=(5, 5), blured_sigma=3):
-    blured_image = cv.GaussianBlur(image, blur_size, blured_sigma) 
+    blured_image = cv.GaussianBlur(image, blur_size, blured_sigma)  #執行高斯模糊化
     # 注意不能直接用减法，对于图像格式结果为负时会自动加上256
     model = np.zeros(image.shape, dtype=np.int64)
     for i in range(image.shape[0]):
@@ -24,7 +24,7 @@ def my_not_sharpen(image, k, blur_size=(5, 5), blured_sigma=3):
 
 # 提取图像边界信息函数
 def my_get_model(image, blur_size=(5, 5), blured_sigma=3):
-    blured_image = cv.GaussianBlur(image, blur_size, blured_sigma)
+    blured_image = cv.GaussianBlur(image, blur_size, blured_sigma)  #執行高斯模糊化
     model = np.zeros(image.shape, dtype=np.int64)
     for i in range(image.shape[0]):
         for j in range(image.shape[1]):

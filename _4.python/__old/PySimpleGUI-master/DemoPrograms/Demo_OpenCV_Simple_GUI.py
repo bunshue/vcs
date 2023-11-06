@@ -55,7 +55,7 @@ def main():
         elif values['-CANNY-']:
             frame = cv2.Canny(frame, values['-CANNY SLIDER A-'], values['-CANNY SLIDER B-'])
         elif values['-BLUR-']:
-            frame = cv2.GaussianBlur(frame, (21, 21), values['-BLUR SLIDER-'])
+            frame = cv2.GaussianBlur(frame, (21, 21), values['-BLUR SLIDER-'])  #執行高斯模糊化
         elif values['-HUE-']:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
             frame[:, :, 0] += int(values['-HUE SLIDER-'])

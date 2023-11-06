@@ -1,14 +1,18 @@
-import cv2 as cv
-import matplotlib.pyplot as plt
-import math
-import numpy as np
+import cv2
 
-#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
+import sys
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
 
 #高斯滤波函数
 def my_function_gaussion(x, y, sigma):
@@ -52,26 +56,30 @@ def my_gaussion_blur_gray(image, size, sigma):
 
 #计算彩色图像的高斯滤波
 def my_gaussion_blur_RGB(image, size, sigma):
-    (b ,r, g) = cv.split(image)
+    (b ,r, g) = cv2.split(image)
     blur_b = my_gaussion_blur_gray(b, size, sigma)
     blur_r = my_gaussion_blur_gray(r, size, sigma)
     blur_g = my_gaussion_blur_gray(g, size, sigma)
-    result = cv.merge((blur_b, blur_r, blur_g))
+    result = cv2.merge((blur_b, blur_r, blur_g))
     return result
 
-if __name__ == '__main__':
-    image_test1 = cv.imread('lena.png')
-    #进行高斯滤波器比较
-    my_image_blur_gaussion = my_gaussion_blur_RGB(image_test1, 5, 0.75)
-    computer_image_blur_gaussion = cv.GaussianBlur(image_test1, (5, 5), 0.75)
-    fig = plt.figure()
-    fig.add_subplot(131)
-    plt.title('原始图像')
-    plt.imshow(image_test1)
-    fig.add_subplot(132)
-    plt.title('自定义高斯滤波器')
-    plt.imshow(my_image_blur_gaussion)
-    fig.add_subplot(133)
-    plt.title('库高斯滤波器')
-    plt.imshow(computer_image_blur_gaussion)
-    plt.show()
+image_test1 = cv2.imread('lena.png')
+#进行高斯滤波器比较
+my_image_blur_gaussion = my_gaussion_blur_RGB(image_test1, 5, 0.75)
+computer_image_blur_gaussion = cv2.GaussianBlur(image_test1, (5, 5), 0.75)  #執行高斯模糊化
+
+fig = plt.figure(figsize = (20, 15))
+
+fig.add_subplot(131)
+plt.title('原始图像')
+plt.imshow(image_test1)
+
+fig.add_subplot(132)
+plt.title('自定义高斯滤波器')
+plt.imshow(my_image_blur_gaussion)
+
+fig.add_subplot(133)
+plt.title('库高斯滤波器')
+plt.imshow(computer_image_blur_gaussion)
+
+plt.show()

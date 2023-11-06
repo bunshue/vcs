@@ -25,7 +25,7 @@ cv2.imshow('Picture Viewer1', frame) #顯示圖片
 
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-gray = cv2.GaussianBlur(gray, (13, 13), 0)
+gray = cv2.GaussianBlur(gray, (13, 13), 0)  #執行高斯模糊化
 edged = cv2.Canny(gray, 50, 150)
 
 contours, hierarchy = cv2.findContours(

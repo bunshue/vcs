@@ -67,9 +67,9 @@ print (C)
 A1 = A
 B1 = B
 C1 = C
-A1 = cv2.GaussianBlur(A1,(3,3),1.5)
-B1 = cv2.GaussianBlur(B1,(3,3),1.5)
-C1 = cv2.GaussianBlur(C1,(3,3),1.5)
+A1 = cv2.GaussianBlur(A1, (3, 3), 1.5) #執行高斯模糊化
+B1 = cv2.GaussianBlur(B1, (3, 3), 1.5) #執行高斯模糊化
+C1 = cv2.GaussianBlur(C1, (3, 3), 1.5) #執行高斯模糊化
 print (A1)
 print (B1)
 print (C1)

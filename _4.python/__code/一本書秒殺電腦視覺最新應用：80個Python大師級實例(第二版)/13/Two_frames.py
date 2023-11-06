@@ -21,7 +21,7 @@ while(cap.isOpened()):
         currentframe = cv2.absdiff(currentframe,previousframe) 
         median = cv2.medianBlur(currentframe,3)        
         ret, threshold_frame = cv2.threshold(currentframe, 20, 255, cv2.THRESH_BINARY)
-        gauss_image = cv2.GaussianBlur(threshold_frame, (3, 3), 0)
+        gauss_image = cv2.GaussianBlur(threshold_frame, (3, 3), 0)  #執行高斯模糊化
  
         print(222) 
         # 显示结果帧

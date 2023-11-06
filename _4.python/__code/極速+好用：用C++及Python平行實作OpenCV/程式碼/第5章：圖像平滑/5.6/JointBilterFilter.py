@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
 import math
+
 #基于空间距离的权重模板 ( 和计算高斯算子的过程是一样的 )
 def getClosenessWeight(sigma_g,H,W):
     r,c = np.mgrid[0:H:1, 0:W:1]
@@ -14,7 +14,7 @@ def jointBLF(I,H,W,sigma_g,sigma_d,borderType=cv2.BORDER_DEFAULT):
     #构建空间距离的权重模板
     closenessWeight = getClosenessWeight(sigma_g,H,W)
     #对 I 进行高斯平滑
-    Ig = cv2.GaussianBlur(I,(W,H),sigma_g)
+    Ig = cv2.GaussianBlur(I, (W,H), sigma_g)    #執行高斯模糊化
     #模板的中心点位置
     cH = (H -1)/2
     cW = (W -1)/2

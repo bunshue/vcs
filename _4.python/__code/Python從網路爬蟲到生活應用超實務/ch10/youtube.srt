@@ -1,0 +1,311 @@
+1
+00:00:00,030 --> 00:00:04,589
+so you're looking to create captions or
+
+2
+00:00:01,920 --> 00:00:07,470
+subtitles for your YouTube videos well
+
+3
+00:00:04,589 --> 00:00:10,710
+subtitles is not new to video in fact
+
+4
+00:00:07,470 --> 00:00:13,290
+most films before 1930 were silent and
+
+5
+00:00:10,710 --> 00:00:16,289
+use captions with video to really tell
+
+6
+00:00:13,290 --> 00:00:17,880
+the story now Charlie Chaplin was the
+
+7
+00:00:16,289 --> 00:00:20,580
+man he didn't even have to say a word
+
+8
+00:00:17,880 --> 00:00:22,769
+and he was able to really captivate an
+
+9
+00:00:20,580 --> 00:00:24,779
+audience and in this video I'm going to
+
+10
+00:00:22,769 --> 00:00:26,880
+show you how to create captions or
+
+11
+00:00:24,779 --> 00:00:29,490
+subtitles for your YouTube videos and
+
+12
+00:00:26,880 --> 00:00:32,610
+this can really be powerful because
+
+13
+00:00:29,490 --> 00:00:35,250
+adding captions can really increase user
+
+14
+00:00:32,610 --> 00:00:36,750
+engagement and also make that video to
+
+15
+00:00:35,250 --> 00:00:42,360
+rank a little bit higher in the search
+
+16
+00:00:36,750 --> 00:00:43,829
+engines let's take a look all right to
+
+17
+00:00:42,360 --> 00:00:45,600
+add that really important transcription
+
+18
+00:00:43,829 --> 00:00:47,219
+to your video what you want to do is to
+
+19
+00:00:45,600 --> 00:00:50,670
+Mouse up to the upper right hand corner
+
+20
+00:00:47,219 --> 00:00:51,780
+mouse over to video manager and once
+
+21
+00:00:50,670 --> 00:00:54,000
+you're there you need to select the
+
+22
+00:00:51,780 --> 00:00:56,280
+video and hit the edit button that you
+
+23
+00:00:54,000 --> 00:00:58,920
+want to add that transcription to once
+
+24
+00:00:56,280 --> 00:01:01,770
+you're here you need to see the trend of
+
+25
+00:00:58,920 --> 00:01:05,489
+the captions tab here click on that and
+
+26
+00:01:01,770 --> 00:01:08,390
+what happens is YouTube automatically
+
+27
+00:01:05,489 --> 00:01:11,010
+makes captions and they're not very good
+
+28
+00:01:08,390 --> 00:01:12,659
+because it has a very difficult time all
+
+29
+00:01:11,010 --> 00:01:15,659
+the speak a little bit differently and
+
+30
+00:01:12,659 --> 00:01:18,900
+they do a horrible job at doing it huge
+
+31
+00:01:15,659 --> 00:01:21,090
+task and so what we need to do is help
+
+32
+00:01:18,900 --> 00:01:22,619
+them out so the first thing is is you
+
+33
+00:01:21,090 --> 00:01:24,900
+actually have a script that you read
+
+34
+00:01:22,619 --> 00:01:26,610
+from you can actually just upload the
+
+35
+00:01:24,900 --> 00:01:28,860
+file just click this right here and just
+
+36
+00:01:26,610 --> 00:01:31,470
+upload the file really easy it will just
+
+37
+00:01:28,860 --> 00:01:33,210
+sync and it's super easy now if you
+
+38
+00:01:31,470 --> 00:01:35,520
+don't you can go ahead and hit the
+
+39
+00:01:33,210 --> 00:01:37,530
+transcribe and sync now this is where
+
+40
+00:01:35,520 --> 00:01:40,079
+it's really cool and YouTube's making it
+
+41
+00:01:37,530 --> 00:01:41,460
+really easy for all of us to transcribe
+
+42
+00:01:40,079 --> 00:01:43,590
+our videos to make you the search
+
+43
+00:01:41,460 --> 00:01:46,380
+engines easier to to know what we're
+
+44
+00:01:43,590 --> 00:01:49,259
+saying so the great thing about it is
+
+45
+00:01:46,380 --> 00:01:52,710
+you can actually have the video start
+
+46
+00:01:49,259 --> 00:01:54,990
+playing take a few minutes and leave my
+
+47
+00:01:52,710 --> 00:02:00,979
+office get away from the game and as you
+
+48
+00:01:54,990 --> 00:02:00,979
+start typing it stops the video tickle
+
+49
+00:02:01,290 --> 00:02:06,840
+justtake now the great thing about it
+
+50
+00:02:03,330 --> 00:02:10,230
+too is if you hit shift and the left
+
+51
+00:02:06,840 --> 00:02:12,450
+arrow it takes it back five seconds and
+
+52
+00:02:10,230 --> 00:02:16,140
+then also I'm going to just pause it
+
+53
+00:02:12,450 --> 00:02:18,690
+here also you can hit shift + the space
+
+54
+00:02:16,140 --> 00:02:20,400
+key and it actually pauses it so I'm
+
+55
+00:02:18,690 --> 00:02:22,140
+going to go ahead and and go through it
+
+56
+00:02:20,400 --> 00:02:24,420
+and this is where you can go around and
+
+57
+00:02:22,140 --> 00:02:26,640
+play with it a little bit but I'm going
+
+58
+00:02:24,420 --> 00:02:28,380
+to go ahead and do the transcription
+
+59
+00:02:26,640 --> 00:02:30,840
+here real quick okay now when you have
+
+60
+00:02:28,380 --> 00:02:34,230
+the whole video transcribed all you need
+
+61
+00:02:30,840 --> 00:02:36,660
+to do now is click the sync button and
+
+62
+00:02:34,230 --> 00:02:39,600
+it's right here this blue button here
+
+63
+00:02:36,660 --> 00:02:42,030
+what it's doing it's syncing what you
+
+64
+00:02:39,600 --> 00:02:43,830
+typed with what you're saying okay you
+
+65
+00:02:42,030 --> 00:02:45,540
+actually have two active tracks now that
+
+66
+00:02:43,830 --> 00:02:47,580
+it's synced we need to get rid of the
+
+67
+00:02:45,540 --> 00:02:50,400
+automatic captions and to do that just
+
+68
+00:02:47,580 --> 00:02:54,720
+click on it come up here to actions and
+
+69
+00:02:50,400 --> 00:02:57,600
+hit disable and click over here on
+
+70
+00:02:54,720 --> 00:02:58,980
+active tracks and I want to show you
+
+71
+00:02:57,600 --> 00:03:01,290
+here so let's let me just show you what
+
+72
+00:02:58,980 --> 00:03:03,960
+it does here so let's go ahead and hit
+
+73
+00:03:01,290 --> 00:03:06,720
+this and hit play wanted to take a few
+
+74
+00:03:03,960 --> 00:03:09,090
+minutes and leave my office get away
+
+75
+00:03:06,720 --> 00:03:11,490
+from the computer and take a you know
+
+76
+00:03:09,090 --> 00:03:13,740
+just take a little jaunt this is just a
+
+77
+00:03:11,490 --> 00:03:17,270
+few blocks so you can see how great it
+
+78
+00:03:13,740 --> 00:03:17,270
+is it just works out perfectly

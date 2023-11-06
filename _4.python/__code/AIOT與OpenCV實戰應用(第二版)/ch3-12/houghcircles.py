@@ -15,7 +15,7 @@ print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
 image = cv2.resize(image, (int(w / 10), int(h / 10)))
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-gray = cv2.GaussianBlur(gray, (5, 5), 0)
+gray = cv2.GaussianBlur(gray, (5, 5), 0)    #執行高斯模糊化
 circles = cv2.HoughCircles(
     gray, 
     cv2.HOUGH_GRADIENT, # 偵測方法目前只支援這個參數

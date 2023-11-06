@@ -11,7 +11,7 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 original_img = cv2.imread("lena.png", 0)
 #canny(): 边缘检测
-img1 = cv2.GaussianBlur(original_img,(3,3),0)
+img1 = cv2.GaussianBlur(original_img, (3, 3), 0)   #執行高斯模糊化
 canny = cv2.Canny(img1, 50, 150)
 
 #形态学：边缘检测

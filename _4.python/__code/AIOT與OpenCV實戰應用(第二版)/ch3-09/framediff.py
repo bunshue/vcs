@@ -2,6 +2,7 @@ import cv2
 
 # 開啟影片檔案
 filename = 'vtest.avi'
+#filename = 'D:/Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4'
 
 cap = cv2.VideoCapture(filename)
 
@@ -10,7 +11,7 @@ bg = None
 while True:
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    gray = cv2.GaussianBlur(gray, (17, 17), 0)
+    gray = cv2.GaussianBlur(gray, (17, 17), 0)  #執行高斯模糊化
 
     if bg is None:
         bg = gray

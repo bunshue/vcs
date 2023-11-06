@@ -1,0 +1,98 @@
+player,pos,salary,TEAM,PTS,REB,AST
+Stephen Curry,Point Guard,37457154,GSW,26.4,5.1,6.1
+Chris Paul,Point Guard,35654150,HOU,18.6,5.4,7.9
+LeBron James,Small Forward,35654150,CLE,27.5,8.6,9.1
+Russell Westbrook,Point Guard,35350000,OKC,25.4,10.1,10.3
+Blake Griffin,Power Forward,32088932,DET,21.4,7.4,5.8
+Gordon Hayward,Shooting Guard,31214295,BOS,2.0,1.0,0.0
+Kyle Lowry,Point Guard,31000000,TOR,16.2,5.6,6.9
+Paul George,Small Forward,30560700,OKC,21.9,5.7,3.3
+Mike Conley,Point Guard,30521115,MEM,17.1,2.3,4.1
+James Harden,Shooting Guard,30421854,HOU,30.4,5.4,8.8
+Kevin Durant,Small Forward,30000000,GSW,26.4,6.8,5.4
+Paul Millsap,Power Forward,29230769,DEN,14.6,6.4,2.8
+Al Horford,Center,28928709,BOS,12.9,7.4,4.7
+Damian Lillard,Point Guard,27977689,POR,26.9,4.5,6.6
+Carmelo Anthony,Small Forward,27928140,OKC,16.2,5.8,1.3
+DeMar DeRozan,Shooting Guard,27739975,TOR,23.0,3.9,5.2
+Jrue Holiday,Point Guard,26161111,NOP,19.0,4.5,6.0
+Otto Porter Jr.,Small Forward,26011913,WAS,14.7,6.4,2.0
+Nikola Jokic,Center,25467250,DEN,18.5,10.7,6.1
+Anthony Davis,Power Forward,25434263,NOP,28.1,11.1,2.3
+Andre Drummond,Center,25434263,DET,15.0,16.0,3.0
+Hassan Whiteside,Center,25434263,MIA,14.0,11.4,1.0
+Bradley Beal,Shooting Guard,25434263,WAS,22.6,4.4,4.5
+Joel Embiid,Center,25250000,PHI,22.9,11.0,3.2
+Andrew Wiggins,Shooting Guard,25250000,MIN,17.7,4.4,2.0
+Steven Adams,Center,24157303,OKC,13.9,9.0,1.2
+Giannis Antetokounmpo,Small Forward,24157303,MIL,26.9,10.0,4.8
+Kevin Love,Center,24119025,CLE,17.6,9.3,1.7
+Marc Gasol,Center,24119025,MEM,17.2,8.1,4.2
+Harrison Barnes,Small Forward,24107258,DAL,18.9,6.1,2.0
+Chandler Parsons,Small Forward,24107258,MEM,7.9,2.5,1.9
+Nicolas Batum,Shooting Guard,24000000,CHA,11.6,4.8,5.5
+Rudy Gobert,Center,23491573,UTA,13.5,10.7,1.4
+Kawhi Leonard,Small Forward,23114066,SAS,16.2,4.7,2.3
+DeAndre Jordan,Center,22897200,LAC,12.0,15.2,1.5
+LaMarcus Aldridge,Power Forward,22347015,SAS,23.1,8.5,2.0
+Serge Ibaka,Power Forward,21666667,TOR,12.6,6.3,0.8
+Aaron Gordon,Power Forward,21590909,ORL,17.6,7.9,2.3
+Danilo Gallinari,Small Forward,21587579,LAC,15.3,4.8,2.0
+Victor Oladipo,Shooting Guard,21000000,IND,23.1,5.2,4.3
+Jimmy Butler,Shooting Guard,20445779,MIN,22.2,5.3,4.9
+Ryan Anderson,Power Forward,20421546,HOU,9.3,5.0,0.9
+Kyrie Irving,Point Guard,20099188,BOS,24.4,3.8,5.1
+Jabari Parker,Power Forward,20000000,MIL,12.6,4.9,1.9
+Zach LaVine,Shooting Guard,19500000,CHI,16.7,3.9,3.0
+Tyler Johnson,Shooting Guard,19245370,MIA,11.7,3.4,2.3
+John Wall,Point Guard,19169800,WAS,19.4,3.7,9.6
+George Hill,Point Guard,19000000,CLE,10.0,2.7,2.8
+Jeff Teague,Point Guard,19000000,MIN,14.2,3.0,7.0
+Klay Thompson,Shooting Guard,18988725,GSW,20.0,3.8,2.5
+Enes Kanter,Center,18622513,NYK,14.1,11.0,1.5
+Wesley Matthews,Shooting Guard,18622513,DAL,12.7,3.1,2.7
+Joakim Noah,Center,18530000,NYK,1.7,2.0,0.6
+Allen Crabbe,Shooting Guard,18500000,BKN,13.2,4.3,1.6
+Goran Dragic,Point Guard,18109175,MIA,17.3,4.1,4.8
+Kent Bazemore,Small Forward,18089887,ATL,12.9,3.8,3.5
+Luol Deng,Small Forward,18000000,LAL,2.0,0.0,1.0
+Evan Turner,Shooting Guard,17868852,POR,8.2,3.1,2.2
+Tristan Thompson,Center,17469565,CLE,5.8,6.6,0.6
+Draymond Green,Power Forward,17469565,GSW,11.0,7.6,7.3
+Tim Hardaway Jr.,Shooting Guard,17325000,NYK,17.5,3.9,2.7
+Reggie Jackson,Point Guard,17043478,DET,14.6,2.8,5.3
+Evan Fournier,Shooting Guard,17000000,ORL,17.8,3.2,2.9
+Bismack Biyombo,Center,17000000,ORL,5.7,5.7,0.8
+Derrick Favors,Power Forward,16900000,UTA,12.3,7.2,1.3
+Jonas Valanciunas,Center,16539326,TOR,12.7,8.6,1.1
+Gary Harris,Shooting Guard,16517857,DEN,17.5,2.6,2.9
+Timofey Mozgov,Center,16000000,BKN,4.2,3.2,0.4
+Andre Iguodala,Small Forward,16000000,GSW,6.0,3.8,3.3
+Pau Gasol,Power Forward,16000000,SAS,10.1,8.0,3.1
+Ian Mahinmi,Center,15944154,WAS,4.8,4.1,0.7
+Dennis Schroder,Point Guard,15500000,ATL,19.4,3.1,6.2
+DeMarre Carroll,Small Forward,15400000,BKN,13.5,6.6,2.0
+Clint Capela,Center,15293103,HOU,13.9,10.8,0.9
+Gorgui Dieng,Center,15170787,MIN,5.9,4.6,0.9
+Trevor Ariza,Small Forward,15000000,HOU,11.7,4.4,1.6
+Eric Bledsoe,Point Guard,15000000,MIL,17.7,3.8,5.0
+Ricky Rubio,Point Guard,14975000,UTA,13.1,4.6,5.3
+Tobias Harris,Small Forward,14800000,LAC,18.6,5.5,2.4
+James Johnson,Power Forward,14651700,MIA,10.8,4.9,3.8
+Robin Lopez,Center,14357750,CHI,11.8,4.5,1.9
+Marvin Williams,Power Forward,14087500,CHA,9.5,4.7,1.2
+Taj Gibson,Power Forward,14000000,MIN,12.2,7.1,1.2
+Jeremy Lin,Point Guard,13768421,BKN,18.0,0.0,4.0
+Thaddeus Young,Power Forward,13764045,IND,11.8,6.3,1.9
+Kenneth Faried,Power Forward,13764045,DEN,5.9,4.8,0.6
+Tyson Chandler,Center,13585000,PHX,6.5,9.1,1.2
+Marcin Gortat,Center,13565218,WAS,8.4,7.6,1.8
+Cody Zeller,Power Forward,13528090,CHA,7.1,5.4,0.9
+Eric Gordon,Shooting Guard,13500375,HOU,18.0,2.5,2.2
+Joe Ingles,Small Forward,13045455,UTA,11.5,4.2,4.8
+Khris Middleton,Small Forward,13000000,MIL,20.1,5.2,4.0
+Michael Kidd-Gilchrist,Small Forward,13000000,CHA,9.2,4.1,1.0
+Mason Plumlee,Center,12917808,DEN,7.1,5.4,1.9
+Wilson Chandler,Small Forward,12800562,DEN,10.0,5.4,2.1
+Solomon Hill,Small Forward,12752928,NOP,2.4,3.0,1.8
+Nikola Vucevic,Center,12750000,ORL,16.5,9.2,3.4
