@@ -14,9 +14,12 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+
+print('------------------------------------------------------------')	#60個
+
 window_name = 'Show Picture'
 
-'''
 cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
 
 image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
@@ -34,9 +37,7 @@ print('wait kere')
 cv2.waitKey(0)
 print('收到按鍵')
 cv2.destroyAllWindows() #銷毀建立的物件
-'''
 
-'''
 print('使用matplotlib顯示圖片')
 import matplotlib.pyplot as plt
 
@@ -45,9 +46,8 @@ image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色
 plt.imshow(image, cmap = 'gray', interpolation = 'bicubic')
 plt.xticks([])  #隱藏x座標
 plt.yticks([])  #隱藏y座標
-plt.show()
 
-'''
+plt.show()
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename2a = 'C:/_git/vcs/_1.data/______test_files2/picture1a.jpg'
@@ -66,7 +66,4 @@ image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
 plt.imshow(image2)
 #plt.title('xxxx')
 plt.show()
-
-
-
 

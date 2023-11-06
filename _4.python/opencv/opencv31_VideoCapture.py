@@ -77,6 +77,29 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
+#播放檔案
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+vid = cv2.VideoCapture(video_filename)
+#In the [your_file_name] mention the Video File that you want to process and detect the Face in
+
+while True:
+    ret, frame = vid.read()
+    if ret == True:
+        #frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2)))    #調整畫面大小
+        cv2.imshow('Video Player', frame)
+        if cv2.waitKey(1) == 27:
+            #cv2.destroyAllWindows()
+            break
+    else:
+        break
+
+vid.release()
+cv2.destroyAllWindows()
+
+print('------------------------------------------------------------')	#60個
+
+
+
 print('------------------------------------------------------------')	#60個
 
 

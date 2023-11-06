@@ -1,10 +1,10 @@
-'''
+"""
 OpenCV 基本使用
 
 顯示圖片
 
 播放檔案
-'''
+"""
 
 import cv2
 
@@ -22,10 +22,9 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-'''
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-
+'''
 image = cv2.imread(filename)	#讀取本機圖片
 #image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)	# -1 讀取本機圖片, 不改變顏色通道
 #image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#  0 讀取本機圖片, 直接變成灰階
@@ -60,66 +59,6 @@ cv2.imshow("gray", image_gray)      #顯示圖片   #原圖轉黑白
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-'''
-print('------------------------------------------------------------')	#60個
-
-'''
-#播放檔案
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
-vid = cv2.VideoCapture(video_filename)
-#In the [your_file_name] mention the Video File that you want to process and detect the Face in
-
-while True:
-    ret, frame = vid.read()
-    if ret == True:
-        #frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2)))    #調整畫面大小
-        cv2.imshow('Video Player', frame)
-        if cv2.waitKey(1) == 27:
-            #cv2.destroyAllWindows()
-            break
-    else:
-        break
-
-vid.release()
-cv2.destroyAllWindows()
-'''
-print('------------------------------------------------------------')	#60個
-
-#裁剪圖片
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-image = cv2.imread(filename)	#讀取本機圖片
-
-# 裁切區域的 x 與 y 座標（左上角）
-x_st = 100
-y_st = 100
-
-# 裁切區域的長度與寬度
-w = 250
-h = 250
-
-# 裁切圖片
-crop_image = image[y_st : y_st + h, x_st : x_st + w]
-
-cv2.imshow("cropped", crop_image)   # 顯示圖片
-
-image_empty = np.zeros(image.shape, dtype = np.uint8)   #依照原圖大小建立一個圖像的二維陣列
-
-#cv2.imshow("empty", image_empty)    #顯示圖片   #空圖, 全黑
-
-#將擷取的圖貼到新建的黑圖
-image_empty[y_st : y_st + h, x_st : x_st + w] = crop_image
-cv2.imshow("cropped+new", image_empty)   # 顯示圖片
-
-# 寫入圖檔, 偽執行
-#cv2.imwrite('crop.jpg', crop_image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-import sys
-sys.exit()
-
 print('------------------------------------------------------------')	#60個
 
 print('圖片裁剪縮放')
@@ -137,9 +76,10 @@ h = 100
 # 寫入圖檔, 偽執行
 #cv2.imwrite(filename2, image[y:y + h, x:x + w])
 
+'''
+
 print('------------------------------------------------------------')	#60個
 
-'''
 #儲存檔案
 image = cv2.imread(filename)	#讀取本機圖片
 
@@ -158,7 +98,10 @@ cv2.imwrite('output.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
 
 # 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
 cv2.imwrite('output.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
+
 print('用matplotlib顯示圖片')
+plt.imshow(image)
+plt.show()
 
 #保存圖片 質量為5 和 100
 print('存圖, 質量為5')
@@ -171,8 +114,7 @@ cv2.imwrite("./3.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
 print('存圖, 壓縮為9')
 cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
 
-cv2.imwrite(filename2a, image1)
-cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
-'''
-print('------------------------------------------------------------')	#60個
+#cv2.imwrite(filename2a, image1)
+#cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
 
+print('------------------------------------------------------------')	#60個

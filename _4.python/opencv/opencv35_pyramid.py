@@ -1,4 +1,4 @@
-'''
+"""
 圖像金字塔
 
 pyrDown
@@ -6,7 +6,7 @@ pyrDown
 pyrUp
 
 
-'''
+"""
 
 import cv2
 
