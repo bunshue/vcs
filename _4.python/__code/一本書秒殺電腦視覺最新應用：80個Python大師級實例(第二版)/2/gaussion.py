@@ -17,6 +17,7 @@ print('------------------------------------------------------------')	#60個
 #高斯滤波函数
 def my_function_gaussion(x, y, sigma):
     return math.exp(-(x**2 + y**2) / (2*sigma**2)) / (2*math.pi*sigma**2)
+
 #产生高斯滤波矩阵
 def my_get_gaussion_blur_retric(size, sigma):
     n = size // 2
@@ -31,6 +32,7 @@ def my_get_gaussion_blur_retric(size, sigma):
     blur_retric = blur_retric.astype(np.uint32)
     #返回高斯矩阵
     return blur_retric
+
 #计算灰度图像的高斯滤波
 def my_gaussion_blur_gray(image, size, sigma):
     blur_retric = my_get_gaussion_blur_retric(size, sigma)

@@ -47,12 +47,12 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp'
 o=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
-cv2.imshow("original",o)
+cv2.imshow("original", o)
 
 print('顯示 dilate 效果 1')
-kernel = np.ones((9,9),np.uint8)
-dilation = cv2.dilate(o,kernel)
-cv2.imshow("dilation",dilation)
+kernel = np.ones((9, 9), np.uint8)
+dilation = cv2.dilate(o, kernel)
+cv2.imshow("dilation", dilation)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -62,11 +62,11 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp'
 o=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
-cv2.imshow("original",o)
+cv2.imshow("original", o)
 
 print('顯示 dilate 效果 2')
-kernel = np.ones((5,5),np.uint8)
-dilation = cv2.dilate(o,kernel,iterations = 9)
+kernel = np.ones((5, 5), np.uint8)
+dilation = cv2.dilate(o, kernel, iterations = 9)
 cv2.imshow("dilation", dilation)
 
 cv2.waitKey()
@@ -77,19 +77,19 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/opening.bmp'
 img1=cv2.imread(filename)
 print('顯示原圖')
-cv2.imshow("img1",img1)
+cv2.imshow("img1", img1)
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/opening2.bmp'
 img2=cv2.imread(filename)
 print('顯示原圖')
-cv2.imshow("img2",img2)
+cv2.imshow("img2", img2)
 
 print('顯示 morphologyEx 效果 1')
-k=np.ones((10,10),np.uint8)
-r1=cv2.morphologyEx(img1,cv2.MORPH_OPEN,k)
-r2=cv2.morphologyEx(img2,cv2.MORPH_OPEN,k)
-cv2.imshow("result1",r1)
-cv2.imshow("result2",r2)
+k = np.ones((10, 10), np.uint8)
+r1 = cv2.morphologyEx(img1, cv2.MORPH_OPEN, k)
+r2 = cv2.morphologyEx(img2, cv2.MORPH_OPEN, k)
+cv2.imshow("result1", r1)
+cv2.imshow("result2", r2)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -97,21 +97,21 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/closing.bmp'
-img1=cv2.imread(filename)
+img1 = cv2.imread(filename)
 print('顯示原圖')
-cv2.imshow("img1",img1)
+cv2.imshow("img1", img1)
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/closing2.bmp'
-img2=cv2.imread(filename)
+img2 = cv2.imread(filename)
 print('顯示原圖')
-cv2.imshow("img2",img2)
+cv2.imshow("img2", img2)
 
 print('顯示 morphologyEx 效果 2')
-k=np.ones((10,10),np.uint8)
-r1=cv2.morphologyEx(img1,cv2.MORPH_CLOSE,k,iterations=3)
-r2=cv2.morphologyEx(img2,cv2.MORPH_CLOSE,k,iterations=3)
-cv2.imshow("result1",r1)
-cv2.imshow("result2",r2)
+k = np.ones((10, 10), np.uint8)
+r1 = cv2.morphologyEx(img1, cv2.MORPH_CLOSE, k, iterations = 3)
+r2 = cv2.morphologyEx(img2, cv2.MORPH_CLOSE, k, iterations = 3)
+cv2.imshow("result1", r1)
+cv2.imshow("result2", r2)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -121,12 +121,12 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/gradient.bmp'
 o=cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 print('顯示原圖')
-cv2.imshow("original",o)
+cv2.imshow("original", o)
 
 print('顯示 morphologyEx 效果 3')
-k=np.ones((5,5),np.uint8)
-r=cv2.morphologyEx(o,cv2.MORPH_GRADIENT,k)
-cv2.imshow("result",r)
+k=np.ones((5, 5), np.uint8)
+r=cv2.morphologyEx(o, cv2.MORPH_GRADIENT, k)
+cv2.imshow("result", r)
 
 cv2.waitKey()
 cv2.destroyAllWindows()

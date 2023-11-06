@@ -104,11 +104,54 @@ cv2.imshow("Gaussian",g)
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+o=cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
+r1=cv2.Canny(o,128,200)
+r2=cv2.Canny(o,32,128)
+
+cv2.imshow("Original",o)
+cv2.imshow("Canny 1",r1)
+cv2.imshow("Canny 2",r2)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print('------------------------------------------------------------')	#60個
 
 
 
 print('------------------------------------------------------------')	#60個
 
 
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+"""
+#執行高斯模糊化
+
+def CannyThreshold(lowThreshold):
+    detected_edges = cv2.GaussianBlur(gray, (3, 3), 0) #執行高斯模糊化
+    detected_edges = cv2.Canny(detected_edges,
+                               lowThreshold,
+                               lowThreshold*ratio,
+                               apertureSize = kernel_size)
+    dst = cv2.bitwise_and(img,img,mask = detected_edges)  # 只需在原始图像的边缘添加一些颜色
+    cv2.imshow('canny demo',dst)
+
+
+
+original_img = cv2.imread("lena.png", 0)
+#canny(): 边缘检测
+img1 = cv2.GaussianBlur(original_img, (3, 3), 0)   #執行高斯模糊化
+canny = cv2.Canny(img1, 50, 150)
+
+
+
+"""
 
