@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from traits.api import HasTraits, Float, Int, Property, Instance, Range
 from traitsui.api import View, Item, Controller, Group
 import numpy as np
@@ -7,7 +6,6 @@ from matplotlib.figure import Figure
 from matplotlib.animation import FuncAnimation
 
 from scpy2.traits.mpl_figure_editor import MPLFigureEditor
-
 
 class Catenary(HasTraits):
     
