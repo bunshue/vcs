@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+
+<head>
+  <title>Fake News</title>
+  <meta charset="utf-8" />
+</head>
+<!-- body -->
+
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Your news review:</h1>
+  </header>
+  <div>
+    {{ content }}
+  </div>
+  <br>
+  <br>
+  <div>
+    This news review is <strong>{{ prediction }}</strong>(probability: <strong>{{ probability }}%</strong>).
+  </div>
+  <br>
+  <br>
+  <div>
+    <form action="/">
+      <input type=submit value='Submit another review'>
+    </form>
+  </div>
+</body>
+
+</html>

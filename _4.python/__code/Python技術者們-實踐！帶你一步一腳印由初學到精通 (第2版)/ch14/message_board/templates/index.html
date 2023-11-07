@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+
+<head>
+  <title>網頁留言板</title>
+  <meta charset="utf-8" />
+</head>
+<!-- body -->
+
+<body>
+  <!-- Header -->
+  <header>
+    <h1>網頁留言板</h1>
+  </header>
+  <!-- form -->
+  <div>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>標題</th>
+          <th>作者</th>
+          <th>Email</th>
+          <th>留言</th>
+          <th>留言時間</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for say in says %}
+        <tr>
+          <td>{{ say[0] }}</td>
+          <td>{{ say[1] }}</td>
+          <td>{{ say[2] }}</td>
+          <td>{{ say[3] }}</td>
+          <td>{{ say[4] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>請輸入留言：</h3>
+  </div>
+  <!-- form -->
+  <div>
+    <form method=post action="{{ url_for('index') }}">
+      <table>
+        <tr>
+          <td>
+            {{ form.title.label }} {{ form.title() }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.username.label }} {{ form.username() }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.email.label }} {{ form.email() }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            {{ form.message_text.label }} {{ form.message_text() }}
+          </td>
+        </tr>
+      </table>
+      <br>
+      <div>
+        <input type=submit value='送出留言'>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

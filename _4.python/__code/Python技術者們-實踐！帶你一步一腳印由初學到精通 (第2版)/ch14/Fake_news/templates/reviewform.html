@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+
+<head>
+  <title>Fake News</title>
+  <meta charset="utf-8" />
+</head>
+<!-- body -->
+
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Fake News</h1>
+    <h2>Please enter your news description:</h2>
+  </header>
+  <!-- form -->
+  <form method=post action="/results">
+    <div>
+      {{ form.review.label }} {{ form.review(cols='100', rows='10') }}
+    </div>
+    {% if form.review.errors %}
+    <ul>
+      {% for error in form.review.errors %}
+      <li>
+        {{ error }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    <div>
+      <input type=submit value='Submit review'>
+    </div>
+  </form>
+</body>
+
+</html>
