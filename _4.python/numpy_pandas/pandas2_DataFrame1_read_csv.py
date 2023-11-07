@@ -1,5 +1,6 @@
 """
 使用pandas讀取csv檔, 讀成 DataFrame 格式
+
 """
 
 import sys
@@ -14,12 +15,35 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/animals.csv'
+df = pd.read_csv(filename)
+
+print('資料結構訊息', df.info())
+print('資料shape :', df.shape)
+print('資料內容\n', df)
+print('資料head\n', df.head())
+
+print('------------------------------------------------------------')	#60個
+
+#咖啡廳每月商品銷售量資料
+# 載入資料與定義資料
+filename = 'data/cafe.csv'
+cafe = pd.read_csv(filename, header = 0, index_col = 0)
+print(cafe)
+print(type(cafe))
+print(cafe)
+print(cafe.shape)
+
+print('------------------------------------------------------------')	#60個
+
+print('有缺資料之dataframe')
+
 filename = 'data/missing_data.csv'
+
 df = pd.read_csv(filename)
 
 print('原資料\n', df, '\n')
-
 print('資料結構訊息', df.info(), '\n')
 
 df1 = df.dropna()
@@ -110,11 +134,9 @@ print('資料.head()')
 print(titanic.head())
 print()
 
-
 print('size')
 print(np.unique(titanic["PassengerId"].values).size)
 print()
-
 
 titanic.set_index(["PassengerId"], inplace = True)
 print(titanic.head())
@@ -200,12 +222,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-data = pd.read_csv('data/PM25_tw.csv')
-
-print(data)
-'''
-print('------------------------------------------------------------')	#60個
-
 filename = 'data/iris_sample.csv'
 
 iris = pd.read_csv(filename)
@@ -229,7 +245,6 @@ print(type(iris))
 
 print('資料.head()')
 print(iris.head())
-
 
 print('size')
 print(np.unique(iris["花萼長度"].values).size)
@@ -276,24 +291,6 @@ print('Versicolour :', Versicolour)
 print('Virginica :', Virginica)
 
 print('------------------------------------------------------------')	#60個
-
-
-#咖啡廳每月商品銷售量資料
-# 載入資料與定義資料
-filename = 'data/cafe.csv'
-cafe = pd.read_csv(filename, header = 0, index_col = 0)
-print(cafe)
-print(type(cafe))
-print(cafe)
-print(cafe.shape)
-
-
-
-
-
-
-
-
 
 
 """
