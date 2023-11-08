@@ -24,7 +24,7 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-'''
+
 image = cv2.imread(filename)	#讀取本機圖片
 #image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)	# -1 讀取本機圖片, 不改變顏色通道
 #image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#  0 讀取本機圖片, 直接變成灰階
@@ -61,22 +61,7 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-print('圖片裁剪縮放')
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/picture1_partial.jpg'
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-x = 100
-y = 100
-w = 100
-h = 100
-
-# 寫入圖檔, 偽執行
-#cv2.imwrite(filename2, image[y:y + h, x:x + w])
-
-'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -118,3 +103,31 @@ cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
 #cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
 
 print('------------------------------------------------------------')	#60個
+
+
+"""
+
+#保存圖片 質量為5 和 100
+print('存圖, 質量為5')
+cv2.imwrite("./1.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 5])
+print('存圖, 質量為100')
+cv2.imwrite("./2.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
+#png壓縮大小
+print('存圖, 壓縮為0')
+cv2.imwrite("./3.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
+print('存圖, 壓縮為9')
+cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
+
+
+
+cv2.imwrite(filename2a, image1)
+cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
+
+#保存检测结果
+#cv2.imwrite("re.jpg",image)
+"""
+
+
+print('------------------------------------------------------------')	#60個
+
+

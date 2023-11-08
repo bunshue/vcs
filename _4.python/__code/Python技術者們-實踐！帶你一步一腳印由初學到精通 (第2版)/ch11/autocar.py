@@ -2,7 +2,12 @@ import cv2
 import autocar_module as m
 import numpy as np
 
-capture = cv2.VideoCapture('road.mp4')      # 建立 VideoCapture 物件
+video_filename = 'C:/_git/__大檔與暫存區/GRENZEL 雲創 E3W WiFi 行車記錄器 1080 30fps 日間測試 高速公路 - Mobile01.mp4'
+video_filename = 'C:/_git/__大檔與暫存區/DOD行車記錄器-LS300W 日間高速公路實拍.mp4'
+video_filename = 'C:/_git/__大檔與暫存區/響尾蛇行車記錄器高解析度1080P - 高速公路白天行駛記錄 -.mp4'
+video_filename = 'road.mp4'
+
+capture = cv2.VideoCapture(video_filename)      # 建立 VideoCapture 物件
 if capture.isOpened():
     while True:
         sucess, img = capture.read()            # 讀取影像

@@ -574,8 +574,10 @@ namespace vcs_ColorHistogram
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
             pictureBox3.Size = new Size(512, 300);
-            int tt = 290;
-            richTextBox1.Size = new Size(W, 1080 - 480 - 200 + tt - 140);
+            pictureBox4.Size = new Size(512, 300);
+            pictureBox5.Size = new Size(512, 300);
+            int tt = -80;
+            richTextBox1.Size = new Size(W, 1080 - 480 - 200 + tt - 140-0);
 
             x_st = 0;
             y_st = 00;
@@ -586,8 +588,18 @@ namespace vcs_ColorHistogram
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 330 - tt);
+            pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 330 - tt+0);
             richTextBox1.BringToFront();
+
+            x_st = 20;
+            dx = 100;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 2-20);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 20);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 20);
+            button3.Location = new Point(x_st + dx * 3, y_st + dy * 2 - 20);
 
             //button
             x_st = 20;
@@ -651,6 +663,11 @@ namespace vcs_ColorHistogram
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -831,6 +848,7 @@ namespace vcs_ColorHistogram
             //bitmap1.Save("pic_modify3.bmp", ImageFormat.Bmp);
 
         }
+
 
 
     }

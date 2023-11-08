@@ -37,7 +37,6 @@ result1 = img_dct.astype(np.uint8)
 print('顯示 DCT 結果')
 cv2.imshow("DCT Result", result1)
 
-
 #做IDCT
 img_idct = cv2.idct(img_dct)
 #將型態轉成OpenCV允許顯示的型態
@@ -46,11 +45,24 @@ result2 = img_idct.astype(np.uint8)
 print('顯示 IDCT 結果')
 cv2.imshow("IDCT Result", result2)
 
-
-
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+#用matplotlib顯示
+plt.figure('DCT-IDCT', figsize = (16, 12))
+plt.subplot(131)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title('經過DCT')
+plt.imshow(cv2.cvtColor(result1, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title('再經過IDCT')
+plt.imshow(cv2.cvtColor(result2, cv2.COLOR_BGR2RGB))
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

@@ -24,32 +24,40 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp'
+
+#原圖
 image = cv2.imread(filename, 0)
-print('顯示原圖')
-cv2.imshow("original", image)
 
 # 高斯模糊，Canny边缘检测需要的
-image = cv2.GaussianBlur(image, (5, 5), 0)    #執行高斯模糊化
-cv2.imshow('GaussianBlur', image)
+image_blur = cv2.GaussianBlur(image, (5, 5), 0)    #執行高斯模糊化
 
 # 进行边缘检测，减少图像空间中需要检测的点数量
-image = cv2.Canny(image, 50, 150)
-cv2.imshow('Canny', image)
+image_canny = cv2.Canny(image_blur, 50, 150)
 
+#用cv2顯示
+cv2.imshow("Original", image)
+cv2.imshow('GaussianBlur', image_blur)
+cv2.imshow('Canny', image_canny)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+#用matplotlib顯示
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(131)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title('GaussianBlur')
+plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title('Canny')
+plt.imshow(cv2.cvtColor(image_canny, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
 print('------------------------------------------------------------')	#60個
-
-print('模糊效果')
-
-img = cv2.imread(filename)
-
-Img_blur = cv2.GaussianBlur(img, (49, 49), 3)   #執行高斯模糊化
-cv2.imshow('Sample pic', Img_blur)
-
-print('------------------------------------------------------------')	#60個
-
 
 #Gaussian lowpass filter
 
@@ -76,20 +84,19 @@ img = cv2.imread(filename)
 blur = cv2.GaussianBlur(img, (5, 5), 0) #執行高斯模糊化
 
 plt.subplot(121)
-plt.imshow(img)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.title('Original')
 plt.xticks([])
 plt.yticks([])
 
 plt.subplot(122)
-plt.imshow(blur)
+plt.imshow(cv2.cvtColor(blur, cv2.COLOR_BGR2RGB))
 plt.title('Blurred')
 plt.xticks([])
 plt.yticks([])
 
 plt.tight_layout()
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -110,12 +117,31 @@ o=cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 r1=cv2.Canny(o,128,200)
 r2=cv2.Canny(o,32,128)
 
-cv2.imshow("Original",o)
-cv2.imshow("Canny 1",r1)
-cv2.imshow("Canny 2",r2)
+cv2.imshow("Original", o)
+cv2.imshow("Canny 1", r1)
+cv2.imshow("Canny 2", r2)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+#用matplotlib顯示
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(131)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title('Canny 1')
+plt.imshow(cv2.cvtColor(r1, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title('Canny 2')
+plt.imshow(cv2.cvtColor(r2, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
+
+
 
 print('------------------------------------------------------------')	#60個
 

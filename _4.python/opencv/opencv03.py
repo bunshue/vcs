@@ -32,7 +32,6 @@ plt.show()
 
 #cv2.imwrite('aaaaaaa.pgm', image) #無效????
 
-
 print('wait kere')
 cv2.waitKey(0)
 print('收到按鍵')

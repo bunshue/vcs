@@ -1,6 +1,7 @@
 import cv2
 
 cap = cv2.VideoCapture(0)
+
 img_pre = None   # 前影像, 預設是空的
 while cap.isOpened():
     success, img = cap.read()

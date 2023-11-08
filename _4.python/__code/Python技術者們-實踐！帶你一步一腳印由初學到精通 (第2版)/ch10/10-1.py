@@ -1,4 +1,4 @@
-import cv2  # 匯入 cv2 套件
+import cv2
 
 capture = cv2.VideoCapture(0)   # 建立攝影機物件
 if capture.isOpened():

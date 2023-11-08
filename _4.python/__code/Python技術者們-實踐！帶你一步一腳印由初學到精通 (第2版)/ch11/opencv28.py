@@ -1,21 +1,60 @@
+"""
+
+#GaussianBlur
+
+#Canny
+
+
+"""
+
 import cv2
 
-img = cv2.imread('road.jpg')    # 讀取圖片
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    # 灰階處理
-blur = cv2.GaussianBlur(gray, (3, 3), 0)        # 高斯模糊
+import sys
+import matplotlib.pyplot as plt
+import numpy as np
+import math
 
-cv2.imshow('Normal', img)   # 顯示原始圖片
-cv2.imshow('Gray', gray)    # 顯示灰階圖片
-cv2.imshow('Blur', blur)    # 顯示高斯模糊圖片
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch11\11-1.py
+filename = 'road.jpg'
 
-import cv2
+print('------------------------------------------------------------')	#60個
+
+img = cv2.imread(filename)    # 讀取圖片
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    # 灰階處理
+blur = cv2.GaussianBlur(gray, (3, 3), 0)        # 高斯模糊
+
+#用cv2顯示
+#cv2.imshow('Normal', img)   # 顯示原始圖片
+#cv2.imshow('Gray', gray)    # 顯示灰階圖片
+#cv2.imshow('Blur', blur)    # 顯示高斯模糊圖片
+#cv2.waitKey(0)
+#cv2.destroyAllWindows()
+
+#用matplotlib顯示
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(311)
+plt.title('Normal')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(312)
+plt.title('Gray')
+plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
+
+plt.subplot(313)
+plt.title('Blur')
+plt.imshow(cv2.cvtColor(blur, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 def get_edge(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    # 灰階處理
@@ -24,34 +63,32 @@ def get_edge(img):
     return canny
 
 #----------------------------------------------#
-img = cv2.imread('road.jpg')    # 讀取圖片
+img = cv2.imread(filename)    # 讀取圖片
 edge = get_edge(img)
 cv2.imshow('Edge', edge)        # 顯示邊緣圖
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title('顯示邊緣圖')
+plt.show()
+
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch11\11-2.py
-
-import cv2
-import matplotlib.pyplot as plt	  # 匯入 pyplot
 import autocar_module as m	    # 匯入自訂模組
 
-img = cv2.imread('road.jpg')    # 讀取圖片
+img = cv2.imread(filename)    # 讀取圖片
 edge = m.get_edge(img)       # 取得邊緣圖
-plt.imshow(edge)            # 顯示邊緣圖及座標
-plt.show()					     # 顯示
+
+plt.imshow(cv2.cvtColor(edge, cv2.COLOR_BGR2RGB))
+plt.title('顯示邊緣圖')
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch11\11-3.py
-
-import cv2
 import autocar_module as m
-import numpy as np
 
-img = cv2.imread('road.jpg')
+img = cv2.imread(filename)
 edge = m.get_edge(img)              # 邊緣偵測
 mask = np.zeros_like(edge)          # 全黑遮罩
 points = np.array([[[146, 539],     # 建立多邊座標
@@ -63,13 +100,13 @@ cv2.imshow('Mask', mask)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
+plt.title('顯示mask圖')
+plt.show()
+
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch11\11-4.py
-
-import cv2
 import autocar_module as m
-import numpy as np
 
 def get_roi(img):
     mask = np.zeros_like(img)           # 全黑遮罩
@@ -83,20 +120,20 @@ def get_roi(img):
 
 #---------------------------------------------------#
 
-img = cv2.imread('road.jpg')        # 讀取圖片
+img = cv2.imread(filename)        # 讀取圖片
 edge = m.get_edge(img)              # 邊緣偵測
 roi = get_roi(edge)                 # 取得 ROI
 cv2.imshow('ROI', roi)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+plt.imshow(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
+plt.title('顯示ROI圖')
+plt.show()
+
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch11\11-5.py
-
-import cv2
 import autocar_module as m
-import numpy as np
 
 def draw_lines(img, lines):             # 建立自訂函式
     for line in lines:
@@ -108,7 +145,7 @@ def draw_lines(img, lines):             # 建立自訂函式
     return img                          # 回傳繪製直線後的影像
 
 #------------------------------------------------------------------#
-img = cv2.imread('road.jpg')           # 讀取圖片
+img = cv2.imread(filename)           # 讀取圖片
 edge = m.get_edge(img)                 # 邊緣偵測
 roi = m.get_roi(edge)                  # 取得 ROI
 lines = cv2.HoughLinesP(image=roi,     # Hough 轉換取得線段座標陣列
@@ -127,13 +164,13 @@ cv2.imshow('Line', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title('顯示直線線段圖')
+plt.show()
+
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch11\11-6.py
-
-import cv2
 import autocar_module as m
-import numpy as np
 
 def get_avglines(lines):
     if lines is None:                   # 如果有找到線段
@@ -174,7 +211,7 @@ def get_sublines(img, avglines):
 
 #-------------------------------------------------------------#
 
-img = cv2.imread('road.jpg')            # 讀取圖片
+img = cv2.imread(filename)            # 讀取圖片
 edge = m.get_edge(img)                  # 邊緣偵測
 roi = m.get_roi(edge)                   # 取得 ROI
 lines = cv2.HoughLinesP(image=roi,      # Hough 轉換取得線段座標陣列
@@ -190,6 +227,10 @@ if avglines is not None:
     cv2.imshow('Line', img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+   
+    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    plt.title('顯示直線圖')
+    plt.show()
 
 print('------------------------------------------------------------')	#60個
 
