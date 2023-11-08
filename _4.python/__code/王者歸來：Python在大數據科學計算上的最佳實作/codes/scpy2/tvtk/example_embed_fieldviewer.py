@@ -1,5 +1,3 @@
-#ecoding=utf8
-###1###
 import numpy as np
 
 from traits.api import HasTraits, Float, Int, Bool, Range, Str, Button, Instance
@@ -10,7 +8,6 @@ from mayavi.core.ui.mayavi_scene import MayaviScene
 from scpy2.tvtk import fix_mayavi_bugs
 
 fix_mayavi_bugs()
-
 
 class FieldViewer(HasTraits):
     
@@ -105,3 +102,4 @@ if __name__ == '__main__':
     app = FieldViewer()
     app.configure_traits()
 ###1###
+    

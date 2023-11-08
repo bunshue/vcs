@@ -16,24 +16,37 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
+# 載入資料與定義資料
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/animals.csv'
-df = pd.read_csv(filename)
+filename = 'data/animals.csv'
+filename = 'data/cafe.csv'
 
+df = pd.read_csv(filename)
+print(df)
+print('--------')
+df = pd.read_csv(filename, header = 0, index_col = 0)
+print(df)
+print('--------')
+df = pd.read_csv(filename, header = 0, index_col = 1)
+print(df)
+print('--------')
+df = pd.read_csv(filename, header = 1, index_col = 0)
+print(df)
+print('--------')
+df = pd.read_csv(filename, header = 1, index_col = 1)
+print(df)
+print('--------')
+
+'''
 print('資料結構訊息', df.info())
 print('資料shape :', df.shape)
 print('資料內容\n', df)
 print('資料head\n', df.head())
-
-print('------------------------------------------------------------')	#60個
-
-#咖啡廳每月商品銷售量資料
-# 載入資料與定義資料
-filename = 'data/cafe.csv'
-cafe = pd.read_csv(filename, header = 0, index_col = 0)
-print(cafe)
-print(type(cafe))
-print(cafe)
-print(cafe.shape)
+print(type(df))
+print(df)
+print(df.shape)
+'''
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

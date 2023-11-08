@@ -8,11 +8,16 @@ TRACK_SPACING = 40  # 設定搜索軌跡間的距離
 
 # 設定視窗
 screen = turtle.Screen()
-screen.setup(width=SA_X, height=SA_Y)
+screen.setup(width = SA_X, height = SA_Y)
 turtle.resizemode('user')
 screen.title("Search Pattern")
 rand_x = random.randint(0, int(SA_X / 2)) * random.choice([-1, 1])
 rand_y = random.randint(0, int(SA_Y / 2)) * random.choice([-1, 1])
+
+rand_x = 0
+rand_y = 0
+
+print('人的位置 :', rand_x, ' ', rand_y)
 
 # 設定 turtle 圖案
 seaman_image = 'seaman.gif'
@@ -51,9 +56,11 @@ for i in range(int(SA_Y / TRACK_SPACING)):
     turtle.lt(90)
     turtle.shape(copter_image_right)
     if turtle.ycor() - seaman.ycor() <= 10:
+        print('turtle.ycor() =', turtle.ycor())
+        print('seaman.ycor() =', seaman.ycor())
         turtle.write("      Seaman found!",
-                     align='left',
-                     font=("Arial", 15, 'normal', 'bold', 'italic'))
+                     align = 'left',
+                     font = ("Arial", 15, 'normal', 'bold', 'italic'))
         time.sleep(3)
 
         break

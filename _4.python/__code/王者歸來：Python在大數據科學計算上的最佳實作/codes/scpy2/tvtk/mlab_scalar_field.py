@@ -1,6 +1,7 @@
 import numpy as np
 from mayavi import mlab
 from scpy2.tvtk import fix_mayavi_bugs
+
 fix_mayavi_bugs()
 
 x, y, z = np.ogrid[-2:2:40j, -2:2:40j, -2:0:40j]
@@ -22,3 +23,4 @@ cut.enable_contours = True
 cut.contour.number_of_contours = 40
 mlab.gcf().scene.background = (0.8, 0.8, 0.8)
 mlab.show()
+

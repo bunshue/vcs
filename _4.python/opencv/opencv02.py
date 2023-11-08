@@ -114,7 +114,6 @@ print('------------------------------------------------------------')	#60個
 image_bgr = cv2.imread(filename)  #讀取本機圖片
 
 # 將 OpenCV 讀入的 BGR 格式轉為 Matplotlib 用的 RGB 格式，再交給 Matplotlib 顯示
-
 image_rgb = image_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
 
 # 或是這樣亦可

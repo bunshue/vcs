@@ -25,9 +25,8 @@ cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
 image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
 cv2.imshow(window_name, image)
 
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-plt.imshow(image)
-#plt.title('xxxx')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('xxxx')
 plt.show()
 
 #cv2.imwrite('aaaaaaa.pgm', image) #無效????
@@ -37,16 +36,18 @@ cv2.waitKey(0)
 print('收到按鍵')
 cv2.destroyAllWindows() #銷毀建立的物件
 
+print('------------------------------------------------------------')	#60個
+
 print('使用matplotlib顯示圖片')
 import matplotlib.pyplot as plt
 
 image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
 
-plt.imshow(image, cmap = 'gray', interpolation = 'bicubic')
-plt.xticks([])  #隱藏x座標
-plt.yticks([])  #隱藏y座標
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), cmap = 'gray', interpolation = 'bicubic')
 
 plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename2a = 'C:/_git/vcs/_1.data/______test_files2/picture1a.jpg'

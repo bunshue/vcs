@@ -1,5 +1,7 @@
 from PIL import Image, ImageDraw
-from matplotlib import pyplot as plt
+
+#from matplotlib import pyplot as plt
+import matplotlib.pyplot as plt
 
 # 載入影像並從平行於 y 軸的水平剖面獲取 x 和 z 值
 y_coord = 202
@@ -12,7 +14,8 @@ z_vals = [im.getpixel((x, y_coord)) for x in x_vals]
 draw = ImageDraw.Draw(im)
 draw.line((0, y_coord, width, y_coord), fill=255, width=3)
 draw.text((100, 165), 'Olympus Mons', fill=255)
-im.show()    
+im.show()
+
 
 # 繪製剖面圖
 fig, ax = plt.subplots(figsize=(9, 4))
