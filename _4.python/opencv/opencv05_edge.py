@@ -30,26 +30,38 @@ MASK_COLOR = (0.0,0.0,1.0) # In BGR format
 
 #-- Read image -----------------------------------------------------------------------
 image = cv2.imread(filename)	#讀取本機圖片
+
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(231)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)    #圖片轉為灰階
+
+plt.subplot(232)
+plt.title('灰階')
+plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))
 
 #-- Edge detection -------------------------------------------------------------------
 
 edges = cv2.Canny(image_gray, CANNY_THRESH_1, CANNY_THRESH_2)
 
-edges = cv2.cvtColor(edges, cv2.COLOR_BGR2RGB)
-plt.imshow(edges)
-plt.show()
+plt.subplot(234)
+plt.title('Canny')
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
 
 edges = cv2.dilate(edges, None)
 
-edges = cv2.cvtColor(edges, cv2.COLOR_BGR2RGB)
-plt.imshow(edges)
-plt.show()
+plt.subplot(235)
+plt.title('Dilate')
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
 
 edges = cv2.erode(edges, None)
 
-edges = cv2.cvtColor(edges, cv2.COLOR_BGR2RGB)
-plt.imshow(edges)
+plt.subplot(236)
+plt.title('Erode')
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+
 plt.show()
 
 #cv2存圖
@@ -60,16 +72,13 @@ print('------------------------------------------------------------')	#60個
 # split image into channels
 c_red, c_green, c_blue = cv2.split(image)
 
-c_red = cv2.cvtColor(c_red, cv2.COLOR_BGR2RGB)
-plt.imshow(c_red)
+plt.imshow(cv2.cvtColor(c_red, cv2.COLOR_BGR2RGB))
 plt.show()
 
-c_green = cv2.cvtColor(c_green, cv2.COLOR_BGR2RGB)
-plt.imshow(c_green)
+plt.imshow(cv2.cvtColor(c_green, cv2.COLOR_BGR2RGB))
 plt.show()
 
-c_blue = cv2.cvtColor(c_blue, cv2.COLOR_BGR2RGB)
-plt.imshow(c_blue)
+plt.imshow(cv2.cvtColor(c_blue, cv2.COLOR_BGR2RGB))
 plt.show()
 
 # merge with mask got on one of a previous steps
@@ -102,8 +111,20 @@ image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接�
 
 ret, th1 = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
 
-th1 = cv2.cvtColor(th1, cv2.COLOR_BGR2RGB)
-plt.imshow(th1)
+plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('th1')
+plt.imshow(cv2.cvtColor(th1, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -115,12 +136,27 @@ gray_image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直
 blur_gray = cv2.GaussianBlur(gray_image, (3,3), 0)  #執行高斯模糊化
 threshold_1 = 30#強邊緣strong edge
 threshold_2 = 60#弱邊緣weak edge
+
 edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
 
-edges = cv2.cvtColor(edges, cv2.COLOR_BGR2RGB)
-plt.imshow(edges)
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
 plt.title('Canny')
+
 plt.show()
+
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(gray_image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('Canny')
+plt.imshow(cv2.cvtColor(edges, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -143,12 +179,24 @@ gray_image = cv2.imread(filename)	#讀取本機圖片
 
 sobel_image = sobel(gray_image)
 
-sobel_image = cv2.cvtColor(sobel_image, cv2.COLOR_BGR2RGB)
-plt.imshow(sobel_image)
+plt.imshow(cv2.cvtColor(sobel_image, cv2.COLOR_BGR2RGB))
 plt.title('Sobel')
+
+plt.show()
+
+
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(gray_image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('Sobel')
+plt.imshow(cv2.cvtColor(sobel_image, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 
 

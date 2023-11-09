@@ -18,7 +18,9 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('sobel4.bmp',cv2.IMREAD_GRAYSCALE)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp'
+
+o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -84,7 +86,9 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('scharr.bmp',cv2.IMREAD_GRAYSCALE)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp'
+
+o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -114,7 +118,9 @@ cv2.imshow("Scharr xy",scharrxy)
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('scharr.bmp',cv2.IMREAD_GRAYSCALE)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp'
+
+o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -124,7 +130,9 @@ print('顯示 Scharr 效果 4 fail')
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('sobel4.bmp',cv2.IMREAD_GRAYSCALE)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp'
+
+o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
 
@@ -142,6 +150,7 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+
 o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
@@ -165,7 +174,9 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-o = cv2.imread('Laplacian.bmp',cv2.IMREAD_GRAYSCALE)
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/laplacian.bmp'
+
+o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 print('顯示原圖')
 cv2.imshow("original",o)
 

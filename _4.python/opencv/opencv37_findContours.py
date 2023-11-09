@@ -28,8 +28,10 @@ cap = cv2.VideoCapture(filename)    #用VideoCapture讀取本機圖片
 
 ret, frame = cap.read()
 
-print('顯示原圖')
-cv2.imshow('Picture Viewer1', frame) #顯示圖片
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
 
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -46,18 +48,16 @@ cv2.drawContours(out, contours, -1, (0, 0, 255), 3) #用紅框標示出來
 
 frame = cv2.hconcat([frame, out])
 
-cv2.imshow('Picture Viewer2', frame) #顯示圖片
+plt.subplot(122)
+plt.title('結果')
+plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
 
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 圖片邊緣檢測
 
 圖片轉換成灰階Grayscale的部分，
@@ -65,39 +65,48 @@ print('------------------------------------------------------------')	#60個
 
 OpenCV具有findContour()幫助從圖像中提取輪廓的功能。
 
-
 再來就把所有輪廓繪製起來，最後show出圖片 利用imshow語法。
-
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 image = cv2.imread(filename)
-#cv2.imshow('Input Image', image)
-#cv2.waitKey(0)
+
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(231)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
+plt.subplot(232)
+plt.title('gray')
+plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
+
 edged = cv2.Canny(gray, 30, 200)
-#cv2.imshow('Canny Edges', edged)
-#cv2.waitKey(0)
+
+plt.subplot(233)
+plt.title('Canny Edges')
+plt.imshow(cv2.cvtColor(edged, cv2.COLOR_BGR2RGB))
 
 contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-#cv2.imshow('Canny Edges After Contouring', edged)
-#cv2.waitKey(0)
+
+plt.subplot(234)
+plt.title('Canny Edges After Contouring')
+plt.imshow(cv2.cvtColor(edged, cv2.COLOR_BGR2RGB))
 
 print("Number of Contours found = " + str(len(contours)))
 
 cv2.drawContours(image, contours, -1, (255, 0, 0), 2)
 
-cv2.imshow('Contours', image)
+plt.subplot(235)
+plt.title('Contours')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-sys.exit()
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -105,6 +114,11 @@ filename = 'images/poly.png'
 
 print('顯示圖片')
 image = cv2.imread(filename)	#讀取本機圖片
+
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(211)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 shape = image.shape
 h = shape[0]    #高
@@ -139,19 +153,14 @@ print(approx_hex)
 for i in range(len(approx_hex)):
     print(approx_hex[i])
 
-cv2.imshow('image', image) #顯示圖片
+plt.subplot(212)
+plt.title('image')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-
 
 
 print('------------------------------------------------------------')	#60個
