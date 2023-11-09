@@ -34,14 +34,6 @@ image_blur = cv2.GaussianBlur(image, (5, 5), 0)    #執行高斯模糊化
 # 进行边缘检测，减少图像空间中需要检测的点数量
 image_canny = cv2.Canny(image_blur, 50, 150)
 
-#用cv2顯示
-cv2.imshow("Original", image)
-cv2.imshow('GaussianBlur', image_blur)
-cv2.imshow('Canny', image_canny)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-#用matplotlib顯示
 plt.figure('影像處理', figsize = (16, 12))
 plt.subplot(131)
 plt.title('原圖')
@@ -55,6 +47,7 @@ plt.subplot(133)
 plt.title('Canny')
 plt.imshow(cv2.cvtColor(image_canny, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -62,38 +55,43 @@ print('------------------------------------------------------------')	#60個
 #Gaussian lowpass filter
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
+image = cv2.imread(filename)
 
-print('顯示 GaussianBlur 效果 1')
+print('GaussianBlur 1')
 kernel_size = (5, 5)   #卷積的矩陣大小 ksize 指定區域單位 ( 必須是大於 1 的奇數 )
 sigma = 0       #sigma值     sigmaX X 方向標準差，預設 0，sigmaY Y 方向標準差，預設 0
-r = cv2.GaussianBlur(o, kernel_size, 0) #執行高斯模糊化
-cv2.imshow("result",r)
+image_blur = cv2.GaussianBlur(image, kernel_size, 0) #執行高斯模糊化
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('GaussianBlur', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('GaussianBlur')
+plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-img = cv2.imread(filename)
+image = cv2.imread(filename)
 
-blur = cv2.GaussianBlur(img, (5, 5), 0) #執行高斯模糊化
+image_blur = cv2.GaussianBlur(image, (5, 5), 0) #執行高斯模糊化
 
+plt.figure('GaussianBlur', figsize = (16, 12))
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-plt.title('Original')
-plt.xticks([])
-plt.yticks([])
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('原圖')
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(blur, cv2.COLOR_BGR2RGB))
-plt.title('Blurred')
-plt.xticks([])
-plt.yticks([])
+plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
+plt.title('GaussianBlur')
 
 plt.tight_layout()
 plt.show()
@@ -101,54 +99,46 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
+image = cv2.imread(filename)
 
-print('顯示 GaussianBlur 效果 2')
-g = r = cv2.GaussianBlur(o, (55, 55), 0) #執行高斯模糊化
-cv2.imshow("Gaussian",g)
+print('GaussianBlur 2')
+image_blur = cv2.GaussianBlur(image, (55, 55), 0) #執行高斯模糊化
+
+plt.figure('GaussianBlur', figsize = (16, 12))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('原圖')
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
+plt.title('GaussianBlur')
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-o=cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-r1=cv2.Canny(o,128,200)
-r2=cv2.Canny(o,32,128)
+image_canny1 = cv2.Canny(image,128,200)
+image_canny2 = cv2.Canny(image,32,128)
 
-cv2.imshow("Original", o)
-cv2.imshow("Canny 1", r1)
-cv2.imshow("Canny 2", r2)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-#用matplotlib顯示
 plt.figure('影像處理', figsize = (16, 12))
 plt.subplot(131)
 plt.title('原圖')
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(132)
 plt.title('Canny 1')
-plt.imshow(cv2.cvtColor(r1, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image_canny1, cv2.COLOR_BGR2RGB))
 
 plt.subplot(133)
 plt.title('Canny 2')
-plt.imshow(cv2.cvtColor(r2, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image_canny2, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()
 plt.show()
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 

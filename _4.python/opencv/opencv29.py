@@ -15,6 +15,7 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+
 img = cv2.imread(filename, 0)
 img2 = img.copy()
 template = cv2.imread('images/temp.bmp',0)

@@ -15,11 +15,9 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("img",img)
+img = cv2.imread(filename)
 
-print('顯示二值化圖')
+print('二值化')
 #        cv2.threshold(img, 閥值, 最大灰度值, 使用的二值化方法)
 t, rst = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 #t, rst = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
@@ -27,44 +25,67 @@ t, rst = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 #t, rst = cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
 #t, rst = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
 
-cv2.imshow("rst",rst)
+plt.figure('二值化', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(122)
+plt.title('二值化圖')
+plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/computer.jpg'
-img=cv2.imread(filename, 0)
-print('顯示原圖')
-cv2.imshow("img",img)
+img = cv2.imread(filename, 0)
 
-t1,thd=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
-athdMEAN=cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,3,5)
-athdGAUS=cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,3,5)
-cv2.imshow("thd",thd)
-cv2.imshow("athdMEAN",athdMEAN)
-cv2.imshow("athdGAUS",athdGAUS)
+t1,thd = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+athdMEAN = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 3, 5)
+athdGAUS = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 3, 5)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('', figsize = (16, 12))
+plt.subplot(221)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(222)
+plt.title('thd')
+plt.imshow(cv2.cvtColor(thd, cv2.COLOR_BGR2RGB))
+
+plt.subplot(223)
+plt.title('athdMEAN')
+plt.imshow(cv2.cvtColor(athdMEAN, cv2.COLOR_BGR2RGB))
+
+plt.subplot(224)
+plt.title('athdGAUS')
+plt.imshow(cv2.cvtColor(athdGAUS, cv2.COLOR_BGR2RGB))
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/tiffany.bmp'
-img=cv2.imread(filename, 0)
-print('顯示原圖')
-cv2.imshow("img",img)
+img = cv2.imread(filename, 0)
 
 t1,thd=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
 t2,otsu=cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
-cv2.imshow("thd",thd)
-cv2.imshow("otus",otsu)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('', figsize = (16, 12))
+plt.subplot(131)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title('thd')
+plt.imshow(cv2.cvtColor(thd, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title('otsu')
+plt.imshow(cv2.cvtColor(otsu, cv2.COLOR_BGR2RGB))
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-
 

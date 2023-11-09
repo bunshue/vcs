@@ -13,7 +13,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print('用np建立一個影像陣列')
 img = np.ones([2, 4, 3], dtype = np.uint8)
 size = img.shape[:2]
@@ -44,24 +44,7 @@ img = cv2.imread(filename)
 rst = cv2.resize(img, None, fx = 2, fy = 0.5)
 print("img.shape =", img.shape)
 print("rst.shape =", rst.shape)
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-print('讀取圖檔 :', filename)
-img = cv2.imread(filename)
-
-x = cv2.flip(img, 0)
-y = cv2.flip(img, 1)
-xy = cv2.flip(img, -1)
-cv2.imshow("img", img)
-cv2.imshow("x", x)
-cv2.imshow("y", y)
-cv2.imshow("xy", xy)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
+'''
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
@@ -73,11 +56,18 @@ x = 100
 y = 200
 M = np.float32([[1, 0, x], [0, 1, y]])
 move = cv2.warpAffine(img, M, (width, height))
-cv2.imshow("original", img)
-cv2.imshow("move", move)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('影像處理 move', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('move')
+plt.imshow(cv2.cvtColor(move, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -88,11 +78,18 @@ img = cv2.imread(filename)
 height,width = img.shape[:2]
 M = cv2.getRotationMatrix2D((width / 2, height / 2), 45, 0.6)
 rotate = cv2.warpAffine(img,M,(width, height))
-cv2.imshow("original", img)
-cv2.imshow("rotation", rotate)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('rotate', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('rotate')
+plt.imshow(cv2.cvtColor(rotate, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -105,11 +102,18 @@ p1 = np.float32([[0, 0], [cols - 1, 0], [0, rows - 1]])
 p2 = np.float32([[0, rows * 0.33], [cols * 0.85, rows * 0.25], [cols * 0.15, rows * 0.7]])
 M = cv2.getAffineTransform(p1, p2)
 dst = cv2.warpAffine(img,M,(cols, rows))
-cv2.imshow("origianl", img)
-cv2.imshow("result", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('xxxxxx1', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('result')
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -123,11 +127,18 @@ pts1 = np.float32([[150, 50], [400, 50], [60, 450], [310, 450]])
 pts2 = np.float32([[50, 50], [rows - 50, 50], [50, cols - 50], [rows - 50, cols - 50]])
 M = cv2.getPerspectiveTransform(pts1, pts2)
 dst = cv2.warpPerspective(img,M,(cols, rows))
-cv2.imshow("img", img)
-cv2.imshow("dst", dst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('xxxxxx2', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('result')
+plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -179,11 +190,18 @@ for i in range(rows):
         mapx.itemset((i, j), j)
         mapy.itemset((i, j), i)
 rst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
-cv2.imshow("original",img)
-cv2.imshow("result",rst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('xxxxxx3', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('result')
+plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -217,11 +235,18 @@ for i in range(rows):
         mapx.itemset((i, j), j)
         mapy.itemset((i, j), rows - 1 - i)
 rst = cv2.remap(img,mapx,mapy,cv2.INTER_LINEAR)
-cv2.imshow("original", img)
-cv2.imshow("result", rst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('xxxxxx4', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('result')
+plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -255,11 +280,18 @@ for i in range(rows):
             mapx.itemset((i, j), cols - 1 - j)
             mapy.itemset((i, j), i)
 rst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
-cv2.imshow("original", img)
-cv2.imshow("result", rst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('xxxxxx5', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('result')
+plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -293,11 +325,18 @@ for i in range(rows):
             mapx.itemset((i, j), cols - 1 - j)
             mapy.itemset((i, j), rows - 1 - i)
 rst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
-cv2.imshow("original", img)
-cv2.imshow("result", rst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('xxxxxx6', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('result')
+plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -331,11 +370,18 @@ for i in range(rows):
             mapx.itemset((i, j), cols - 1 - j)
             mapy.itemset((i, j), rows - 1 - i)
 rst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
-cv2.imshow("original", img)
-cv2.imshow("result", rst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('xxxxxx7', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('上下顛倒')
+plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -355,11 +401,18 @@ for i in range(rows):
                 mapx.itemset((i, j), 0)
                 mapy.itemset((i, j), 0)
 rst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
-cv2.imshow("original", img)
-cv2.imshow("result", rst)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('xxxxxx8', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('縮小圖')
+plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

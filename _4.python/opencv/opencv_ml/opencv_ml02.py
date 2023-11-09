@@ -15,7 +15,7 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 #读取样本（特征）图像的值
-s='images2\\'  #图像所在路径
+s='images\\'  #图像所在路径
 num=100 #共有样本数量
 row=240 #每个数字图像的行数
 col=240 #每个数字图像的列数
@@ -40,7 +40,7 @@ for ni in range(0,num):
 f=feature   #简化变量名称
 
 #####计算当前待识别图像的特征值
-o=cv2.imread('images2\\test\\5.bmp',0) #读取待测图像
+o=cv2.imread('images\\test\\5.bmp',0) #读取待测图像
 ##读取图像值
 of=np.zeros((round(row/5),round(col/5))) #用来存储测试图像的特征值
 for nr in range(0,row):
@@ -116,7 +116,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 #读取样本（特征）图像的值
-s='images2\\'  #图像所在路径
+s='images\\'  #图像所在路径
 num=100 #共有样本数量
 row=240 #每个数字图像的行数
 col=240 #每个数字图像的列数
@@ -148,7 +148,7 @@ trainLabels = [int(i/10)  for i in range(0,100)]
 trainLabels=np.asarray(trainLabels)
 #print(*trainLabels)   #打印测试看看标签值
 ##读取图像值
-o=cv2.imread('images2\\test\\5.bmp',0) #读取待测图像
+o=cv2.imread('images\\test\\5.bmp',0) #读取待测图像
 of=np.zeros((round(row/5),round(col/5))) #用来存储测试图像的特征值
 for nr in range(0,row):
     for nc in range(0,col):

@@ -135,6 +135,32 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+print('讀取圖檔 :', filename)
+img = cv2.imread(filename)
+
+x = cv2.flip(img, 0)
+y = cv2.flip(img, 1)
+xy = cv2.flip(img, -1)
+
+plt.figure('鏡射', figsize = (16, 12))
+plt.subplot(221)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(222)
+plt.title('x鏡射')
+plt.imshow(cv2.cvtColor(x, cv2.COLOR_BGR2RGB))
+
+plt.subplot(223)
+plt.title('y鏡射')
+plt.imshow(cv2.cvtColor(y, cv2.COLOR_BGR2RGB))
+
+plt.subplot(224)
+plt.title('xy鏡射')
+plt.imshow(cv2.cvtColor(xy, cv2.COLOR_BGR2RGB))
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

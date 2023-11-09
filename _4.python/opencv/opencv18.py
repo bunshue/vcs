@@ -35,21 +35,23 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/boat.bmp'
-a=cv2.imread(filename)
+a = cv2.imread(filename)
 print('顯示原圖')
 cv2.imshow("boat",a)
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-b=cv2.imread(filename)
+b = cv2.imread(filename)
 print('顯示原圖')
-cv2.imshow("lena",b)
+cv2.imshow("lena", b)
 
 print('兩圖做alpha疊加')
-result=cv2.addWeighted(a,0.6,b,0.4,0)
-cv2.imshow("result",result)
+result = cv2.addWeighted(a, 0.6, b, 0.4, 0)
+cv2.imshow("result", result)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
