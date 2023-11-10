@@ -333,6 +333,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(170, 70);
             this.button16.TabIndex = 92;
+            this.button16.Text = "color overlap";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -416,7 +417,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(547, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(780, 480);
+            this.pictureBox1.Size = new System.Drawing.Size(780, 550);
             this.pictureBox1.TabIndex = 117;
             this.pictureBox1.TabStop = false;
             // 

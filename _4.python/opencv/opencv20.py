@@ -13,7 +13,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 print('用np建立一個影像陣列')
 img = np.ones([2, 4, 3], dtype = np.uint8)
 size = img.shape[:2]
@@ -44,7 +44,7 @@ img = cv2.imread(filename)
 rst = cv2.resize(img, None, fx = 2, fy = 0.5)
 print("img.shape =", img.shape)
 print("rst.shape =", rst.shape)
-'''
+
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
@@ -415,5 +415,4 @@ plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
 

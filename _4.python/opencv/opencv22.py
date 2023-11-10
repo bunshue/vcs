@@ -15,146 +15,201 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
+o = cv2.imread(filename)
 
-print('顯示 blur 效果 1')
-r=cv2.blur(o,(5,5))
-cv2.imshow("result",r)
+print('blur 效果 1')
+r = cv2.blur(o, (5, 5))
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('blur 效果', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
 
-print('------------------------------------------------------------')	#60個
+plt.subplot(122)
+plt.title('blur 效果 1')
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
-
-print('顯示 blur 效果 2')
-r5=cv2.blur(o,(5,5))      
-r30=cv2.blur(o,(30,30))      
-cv2.imshow("result5",r5)
-cv2.imshow("result30",r30)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
 o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
 
-print('顯示 boxFilter 效果 1')
+print('blur 效果 2')
+r5 = cv2.blur(o, (5, 5))      
+r30 = cv2.blur(o, (30, 30))      
+
+plt.figure('blur 效果', figsize = (16, 12))
+plt.subplot(131)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title('blur 效果 2')
+plt.imshow(cv2.cvtColor(r5, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title('blur 效果 2')
+plt.imshow(cv2.cvtColor(r30, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o=cv2.imread(filename)
+
+print('boxFilter 效果 1')
 r=cv2.boxFilter(o,-1,(5,5)) 
-cv2.imshow("result",r)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('boxFilter 效果', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
 
-print('------------------------------------------------------------')	#60個
+plt.subplot(122)
+plt.title('boxFilter 效果 1')
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
-
-print('顯示 boxFilter 效果 2')
-r=cv2.boxFilter(o,-1,(5,5),normalize=0) 
-cv2.imshow("result",r)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
+o = cv2.imread(filename)
 
-print('顯示 boxFilter 效果 3')
-r=cv2.boxFilter(o,-1,(2,2),normalize=0) 
-cv2.imshow("result",r)
+print('boxFilter 效果 2')
+r = cv2.boxFilter(o,-1,(5,5),normalize=0) 
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
 
-print('------------------------------------------------------------')	#60個
+plt.subplot(122)
+plt.title('boxFilter 效果 2')
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
-
-print('顯示 medianBlur 效果 1')
-r=cv2.medianBlur(o,3)
-cv2.imshow("result",r)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
+o = cv2.imread(filename)
 
-print('顯示 bilateralFilter 效果')
-r=cv2.bilateralFilter(o,25,100,100)
-cv2.imshow("result",r)
+print('boxFilter 效果 3')
+r = cv2.boxFilter(o,-1,(2,2),normalize=0) 
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('boxFilter 效果 3')
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o = cv2.imread(filename)
+
+print('medianBlur 效果 1')
+r = cv2.medianBlur(o,3)
+
+plt.figure('', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('medianBlur 效果 1')
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
+o = cv2.imread(filename)
+
+print('bilateralFilter 效果')
+r = cv2.bilateralFilter(o,25,100,100)
+
+plt.figure('', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('bilateralFilter 效果')
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp'
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
+o = cv2.imread(filename)
 
-print('顯示 bilateralFilter 效果')
+print('bilateralFilter 效果')
 b = cv2.bilateralFilter(o, 55, 100, 100)
-cv2.imshow("bilateral", b)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('bilateralFilter 效果')
+plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 #Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+o = cv2.imread(filename)
 
-o=cv2.imread(filename)
-print('顯示原圖')
-cv2.imshow("original",o)
-
-print('顯示 filter2D 效果')
+print('filter2D 效果')
 kernel = np.ones((9,9),np.float32)/81
 r = cv2.filter2D(o,-1,kernel)
-cv2.imshow('filter2D', r)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('filter2D 效果', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
 
+plt.subplot(122)
+plt.title('filter2D 效果')
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp'
 
 o = cv2.imread(filename, cv2.COLOR_BGR2GRAY)
-print('顯示原圖')
-cv2.imshow("original", o)
 
 kernel_x = np.array([[1,1,1], [0,0,0], [-1,-1,-1]], dtype = int)    #水平值一樣, 偵測水平的邊緣
 kernel_y = np.array([[-1,0,1], [-1,0,1], [-1,0,1]], dtype = int)    #垂直值一樣, 偵測垂直的邊緣
 
-print('顯示 filter2D 效果')
+print('filter2D 效果')
 
 x = cv2.filter2D(o, cv2.CV_16S, kernel_x)
 y = cv2.filter2D(o, cv2.CV_16S, kernel_y)
@@ -162,13 +217,23 @@ y = cv2.filter2D(o, cv2.CV_16S, kernel_y)
 absX = cv2.convertScaleAbs(x)
 absY = cv2.convertScaleAbs(y)
 
-cv2.imshow('Prewitt_horizon', absX) #躺平的書本的邊緣有被強調出來
-cv2.imshow('Prewitt_vertical', absY)#直放的書本的邊緣有被強調出來
+plt.figure('', figsize = (16, 12))
+plt.subplot(131)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(132)
+plt.title('Prewitt_horizon')
+#躺平的書本的邊緣有被強調出來
+plt.imshow(cv2.cvtColor(absX, cv2.COLOR_BGR2RGB))
 
-sys.exit()
+plt.subplot(133)
+plt.title('Prewitt_vertical')
+#直放的書本的邊緣有被強調出來
+plt.imshow(cv2.cvtColor(absY, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -196,20 +261,25 @@ def saltpepper(img,n):
 
 #上面就是椒盐噪声函数，下面是使用方法，大家可以愉快的玩耍了
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img=cv2.imread(filename)
-print('顯示原圖')
+img = cv2.imread(filename)
 
-print('顯示 saltpepper 效果')
-saltImage=saltpepper(img,0.02)
-cv2.imshow('saltImage',saltImage)
+print('saltpepper 效果')
+saltImage = saltpepper(img, 0.02)
 
-#cv2.imwrite('test.jpg',img) 偽寫入
+plt.figure('saltpepper 效果', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.subplot(122)
+plt.title('saltpepper 效果')
+plt.imshow(cv2.cvtColor(saltImage, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
+print('作業完成')
 
 

@@ -19,6 +19,7 @@ k=np.ones((5,5),np.uint8)
 e=cv2.erode(o,k)
 b=cv2.subtract(o,e)
 
+plt.figure('', figsize = (16, 8))
 plt.subplot(131)
 plt.imshow(o)
 
@@ -28,6 +29,7 @@ plt.imshow(e)
 plt.subplot(133)
 plt.imshow(b)
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -42,6 +44,7 @@ opening = cv2.morphologyEx(thresh,cv2.MORPH_OPEN,kernel, iterations = 2)
 dist_transform = cv2.distanceTransform(opening,cv2.DIST_L2,5)
 ret, fore = cv2.threshold(dist_transform,0.7*dist_transform.max(),255,0)
 
+plt.figure('', figsize = (16, 8))
 plt.subplot(131)
 plt.imshow(ishow)
 
@@ -51,6 +54,7 @@ plt.imshow(dist_transform)
 plt.subplot(133)
 plt.imshow(fore)
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -68,6 +72,7 @@ ret, fore = cv2.threshold(dist,0.7*dist.max(),255,0)
 fore = np.uint8(fore)
 un = cv2.subtract(bg,fore)
 
+plt.figure('', figsize = (16, 12))
 plt.subplot(221)
 plt.imshow(ishow)
 
@@ -80,6 +85,7 @@ plt.imshow(fore)
 plt.subplot(224)
 plt.imshow(un)
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -98,6 +104,7 @@ fore = np.uint8(fore)
 ret, markers = cv2.connectedComponents(fore)
 print(ret)
 
+plt.figure('', figsize = (16, 8))
 plt.subplot(131)
 plt.imshow(ishow)
 
@@ -107,6 +114,7 @@ plt.imshow(fore)
 plt.subplot(133)
 plt.imshow(markers)
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -129,12 +137,14 @@ ret, markers2 = cv2.connectedComponents(foreAdv)
 markers2 = markers2+1
 markers2[unknown==255] = 0
 
+plt.figure('', figsize = (16, 8))
 plt.subplot(121)
 plt.imshow(markers1)
 
 plt.subplot(122)
 plt.imshow(markers2)
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -157,12 +167,14 @@ markers[unknown==255] = 0
 markers = cv2.watershed(img,markers)
 img[markers == -1] = [0,255,0]
 
+plt.figure('', figsize = (16, 8))
 plt.subplot(121)
 plt.imshow(ishow)
 
 plt.subplot(122)
 plt.imshow(img)
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -177,14 +189,16 @@ rect = (50,50,400,400)
 cv2.grabCut(o,mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)
 mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
 ogc = o*mask2[:,:,np.newaxis]
-ogc=cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
+ogc = cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
 
+plt.figure('', figsize = (16, 8))
 plt.subplot(121)
 plt.imshow(orgb)
 
 plt.subplot(122)
 plt.imshow(ogc)
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -205,14 +219,16 @@ mask[mask2 == 255] = 1
 mask, bgd, fgd = cv2.grabCut(o,mask,None,bgd,fgd,5,cv2.GC_INIT_WITH_MASK)
 mask = np.where((mask==2)|(mask==0),0,1).astype('uint8')
 ogc = o*mask[:,:,np.newaxis]
-ogc=cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
+ogc = cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
 
+plt.figure('', figsize = (16, 8))
 plt.subplot(121)
 plt.imshow(m2rgb)
 
 plt.subplot(122)
 plt.imshow(ogc)
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -228,17 +244,19 @@ mask2[50:300,150:200]=1
 cv2.grabCut(o,mask2,None,bgd,fgd,5,cv2.GC_INIT_WITH_MASK)
 mask2 = np.where((mask2==2)|(mask2==0),0,1).astype('uint8')
 ogc = o*mask2[:,:,np.newaxis]
-ogc=cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
+ogc = cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
 
+plt.figure('', figsize = (16, 8))
 plt.subplot(121)
 plt.imshow(orgb)
 
 plt.subplot(122)
 plt.imshow(ogc)
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
+print('作業完成')
 

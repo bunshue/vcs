@@ -13,7 +13,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 #輸出邊緣和結構信息
 
 image = cv2.imread('data/contours.bmp')
@@ -208,7 +208,7 @@ for i in range(n):
 
 cv2.waitKey()
 cv2.destroyAllWindows()
-'''
+
 print('------------------------------------------------------------')	#60個
 
 image = cv2.imread('data/cs1.bmp')
@@ -639,7 +639,7 @@ print("returnPoints為False時返回值hull的值：\n",hull2)
 
 print('------------------------------------------------------------')	#60個
 
-# --------------讀取并繪制原始圖像------------------
+# --------------讀取并繪製原始圖像------------------
 o = cv2.imread('data/hand.bmp')
 print('顯示原圖')
 cv2.imshow("original",o)
@@ -652,7 +652,7 @@ contours, hierarchy = cv2.findContours(binary,
 
 # --------------尋找凸包，得到凸包的角點------------------
 hull = cv2.convexHull(contours[0])
-# --------------繪制凸包------------------
+# --------------繪製凸包------------------
 cv2.polylines(o, [hull], True, (0, 255, 0), 2)
 # --------------顯示凸包------------------
 cv2.imshow("result",o)
@@ -1042,14 +1042,14 @@ contours, hierarchy = cv2.findContours(binary,
                                        cv2.RETR_LIST,
                                        cv2.CHAIN_APPROX_SIMPLE)  
 cnt=contours[0]
-#-----------------繪制空心輪廓------------------------
+#-----------------繪製空心輪廓------------------------
 mask1 = np.zeros(gray.shape,np.uint8)
 cv2.drawContours(mask1,[cnt],0,255,2)
 pixelpoints1 = np.transpose(np.nonzero(mask1))
 print("pixelpoints1.shape=",pixelpoints1.shape)
 print("pixelpoints1=\n",pixelpoints1)
 cv2.imshow("mask1",mask1)
-#-----------------繪制實心輪廓---------------------
+#-----------------繪製實心輪廓---------------------
 mask2 = np.zeros(gray.shape,np.uint8)
 cv2.drawContours(mask2,[cnt],0,255,-1)
 pixelpoints2 = np.transpose(np.nonzero(mask2))
@@ -1092,14 +1092,14 @@ contours, hierarchy = cv2.findContours(binary,
                                        cv2.RETR_LIST,
                                        cv2.CHAIN_APPROX_SIMPLE)  
 cnt=contours[0]
-#-----------------繪制空心輪廓------------------------
+#-----------------繪製空心輪廓------------------------
 mask1 = np.zeros(gray.shape,np.uint8)
 cv2.drawContours(mask1,[cnt],0,255,2)
 pixelpoints1 = cv2.findNonZero(mask1)
 print("pixelpoints1.shape=",pixelpoints1.shape)
 print("pixelpoints1=\n",pixelpoints1)
 cv2.imshow("mask1",mask1)
-#-----------------繪制實心輪廓---------------------
+#-----------------繪製實心輪廓---------------------
 mask2 = np.zeros(gray.shape,np.uint8)
 cv2.drawContours(mask2,[cnt],0,255,-1)
 pixelpoints2 = cv2.findNonZero(mask2)
@@ -1176,7 +1176,7 @@ print('------------------------------------------------------------')	#60個
 o = cv2.imread('data/cs.bmp')
 print('顯示原圖')
 
-#--------獲取并繪制輪廓-----------------
+#--------獲取并繪製輪廓-----------------
 gray = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255, cv2.THRESH_BINARY)  
 contours, hierarchy = cv2.findContours(binary,
@@ -1195,13 +1195,13 @@ print("leftmost=",leftmost)
 print("rightmost=",rightmost)
 print("topmost=",topmost)
 print("bottommost=",bottommost)
-#--------繪制說明文字----------------- 
+#--------繪製說明文字----------------- 
 font=cv2.FONT_HERSHEY_SIMPLEX
 cv2.putText(o,'A',leftmost, font, 1,(0,0,255),2)
 cv2.putText(o,'B',rightmost, font, 1,(0,0,255),2)
 cv2.putText(o,'C',topmost, font, 1,(0,0,255),2)
 cv2.putText(o,'D',bottommost, font, 1,(0,0,255),2)
-#--------繪制圖像----------------- 
+#--------繪製圖像----------------- 
 cv2.imshow("result",o)
 
 cv2.waitKey()

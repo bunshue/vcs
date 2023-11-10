@@ -32,9 +32,7 @@ plt.show()
 '''
 print('------------------------------------------------------------')	#60個
 
-#11-2-1 用 OpenCV 讀取並顯示圖片
-
-# 執行本章各行範例前, 請先執行此儲存格, 確認 cv2 已確實匯入
+#用 OpenCV 讀取並顯示圖片
 
 def aidemy_imshow(name, img):
     b, g, r = cv2.split(img)
@@ -55,9 +53,9 @@ cv2.imshow('Sample pic', img)
 
 print('------------------------------------------------------------')	#60個
 
-print('OpenCV建立檔案')
+print('OpenCV建立檔案 256X256之紅圖')
 img_size = 256
-img = np.array([[(255, 255, 0) for x in range(img_size)] for x in range(img_size)])
+img = np.array([[(0, 0, 255) for x in range(img_size)] for x in range(img_size)])
 cv2.imshow('Sample pic 2', img)
 #cv2.imwrite(r'sample_222.jpg', img)
 
@@ -193,3 +191,4 @@ cv2.imshow('Sample pic', img2_denoised)
 
 print('------------------------------------------------------------')	#60個
 
+print('作業完成')

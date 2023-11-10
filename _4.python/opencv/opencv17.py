@@ -41,6 +41,7 @@ plt.subplot(122)
 plt.title('修改後的圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -112,6 +113,7 @@ plt.subplot(122)
 plt.title('修改後的圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -143,6 +145,7 @@ plt.subplot(133)
 plt.title('將其中一塊亂碼化')
 plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -172,6 +175,7 @@ plt.subplot(133)
 plt.title('顯示修改後的圖')
 plt.imshow(cv2.cvtColor(peony, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個

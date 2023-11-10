@@ -34,6 +34,7 @@ plt.subplot(122)
 plt.title('二值化圖')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -62,6 +63,7 @@ plt.subplot(224)
 plt.title('athdGAUS')
 plt.imshow(cv2.cvtColor(athdGAUS, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -85,7 +87,9 @@ plt.subplot(133)
 plt.title('otsu')
 plt.imshow(cv2.cvtColor(otsu, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+print('作業完成')

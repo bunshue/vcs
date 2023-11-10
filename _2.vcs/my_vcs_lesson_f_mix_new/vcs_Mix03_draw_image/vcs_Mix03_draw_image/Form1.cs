@@ -963,11 +963,11 @@ namespace vcs_Mix03_draw_image
 
             //test
 
-          //title: "Wavelength",
-          //value: 500,
-          //units: "nm",
-          //range:[380,780],
-          //resolution:1
+            //title: "Wavelength",
+            //value: 500,
+            //units: "nm",
+            //range:[380,780],
+            //resolution:1
             /*
             int wavelength = 720;
             nmToRGB(wavelength);
@@ -985,7 +985,7 @@ namespace vcs_Mix03_draw_image
 
             g.DrawRectangle(Pens.Red, 0, 0, 440, 300);
 
-            for (int wavelength = 380; wavelength <= 780; wavelength+=4)
+            for (int wavelength = 380; wavelength <= 780; wavelength += 4)
             {
                 nmToRGB(wavelength);
                 Color cc = Color.FromArgb(255, (int)red, (int)green, (int)blue);
@@ -1282,6 +1282,70 @@ namespace vcs_Mix03_draw_image
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            int W = 500;
+            int H = 500;
+
+            richTextBox1.Text += "建立空白 Bitmap\n";
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            richTextBox1.Text += "對此Bitmap畫圖\n";
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            Color pt;
+            int ALPHA = 255;
+            int i, j, w, h;
+            int x_st, y_st;
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    bitmap1.SetPixel(i, j, Color.FromArgb(ALPHA, 0, 0, 0));
+                }
+            }
+
+            x_st = 50;
+            y_st = 50 + 50;
+            w = 300;
+            h = 300;
+            for (j = y_st; j < y_st + h; j++)
+            {
+                for (i = x_st; i < x_st + w; i++)
+                {
+                    pt = bitmap1.GetPixel(i, j);
+                    bitmap1.SetPixel(i, j, Color.FromArgb(ALPHA, 255, pt.G, pt.B));
+                }
+            }
+
+            x_st = 150;
+            y_st = 50;
+            w = 300;
+            h = 300;
+
+            for (j = y_st; j < y_st + h; j++)
+            {
+                for (i = x_st; i < x_st + w; i++)
+                {
+                    pt = bitmap1.GetPixel(i, j);
+                    bitmap1.SetPixel(i, j, Color.FromArgb(ALPHA, pt.R, 255, pt.B));
+                }
+            }
+
+            x_st = 100;
+            y_st = 150;
+            w = 300;
+            h = 300;
+
+            for (j = y_st; j < y_st + h; j++)
+            {
+                for (i = x_st; i < x_st + w; i++)
+                {
+                    pt = bitmap1.GetPixel(i, j);
+                    bitmap1.SetPixel(i, j, Color.FromArgb(ALPHA, pt.R, pt.G, 255));
+                }
+            }
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button17_Click(object sender, EventArgs e)

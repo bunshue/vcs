@@ -40,6 +40,7 @@
             this.button0 = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.bt_open_picture = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -81,12 +82,13 @@
             this.pictureBox0.Location = new System.Drawing.Point(12, 12);
             this.pictureBox0.Name = "pictureBox0";
             this.pictureBox0.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox0.TabIndex = 24;
             this.pictureBox0.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 550);
+            this.button1.Location = new System.Drawing.Point(98, 520);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 40);
             this.button1.TabIndex = 28;
@@ -113,7 +115,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(98, 550);
+            this.button2.Location = new System.Drawing.Point(184, 520);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 40);
             this.button2.TabIndex = 31;
@@ -123,7 +125,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(184, 550);
+            this.button3.Location = new System.Drawing.Point(270, 520);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(80, 40);
             this.button3.TabIndex = 32;
@@ -133,7 +135,7 @@
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(12, 504);
+            this.button0.Location = new System.Drawing.Point(12, 520);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(80, 40);
             this.button0.TabIndex = 33;
@@ -159,11 +161,22 @@
             this.pictureBox5.TabIndex = 35;
             this.pictureBox5.TabStop = false;
             // 
+            // bt_open_picture
+            // 
+            this.bt_open_picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_picture.Location = new System.Drawing.Point(12, 454);
+            this.bt_open_picture.Name = "bt_open_picture";
+            this.bt_open_picture.Size = new System.Drawing.Size(60, 60);
+            this.bt_open_picture.TabIndex = 249;
+            this.bt_open_picture.UseVisualStyleBackColor = true;
+            this.bt_open_picture.Click += new System.EventHandler(this.bt_open_picture_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1007, 617);
+            this.Controls.Add(this.bt_open_picture);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.button0);
@@ -203,6 +216,7 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Button bt_open_picture;
     }
 }
 

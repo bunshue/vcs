@@ -1,7 +1,8 @@
-'''
+"""
 各種邊緣檢測的方法
 
-'''
+"""
+
 import cv2
 
 import sys
@@ -20,174 +21,247 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp'
 
-o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print('顯示原圖')
-cv2.imshow("original",o)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(231)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 print('------------------------------------------------------------')	#60個
 
 print('顯示 Sobel 效果 1')
-sobelx = cv2.Sobel(o,-1,1,0)
-cv2.imshow("Sobel 1",sobelx)
+sobelx = cv2.Sobel(image, -1, 1, 0)
+
+plt.subplot(232)
+plt.title('Sobel 效果 1')
+plt.imshow(cv2.cvtColor(sobelx, cv2.COLOR_BGR2RGB))
 
 print('------------------------------------------------------------')	#60個
 
 print('顯示 Sobel 效果 2 x 方向')
-sobelx = cv2.Sobel(o,cv2.CV_64F,1,0)
+sobelx = cv2.Sobel(image, cv2.CV_64F,1,0)
 sobelx = cv2.convertScaleAbs(sobelx)   # 转回uint8  
-cv2.imshow("Sobel x",sobelx)
+
+plt.subplot(233)
+plt.title('Sobel 效果 2 x 方向')
+plt.imshow(cv2.cvtColor(sobelx, cv2.COLOR_BGR2RGB))
 
 print('------------------------------------------------------------')	#60個
 
 print('顯示 Sobel 效果 3 y 方向')
-sobely = cv2.Sobel(o,cv2.CV_64F,0,1)
+sobely = cv2.Sobel(image, cv2.CV_64F,0,1)
 sobely = cv2.convertScaleAbs(sobely)
-cv2.imshow("Sobel y",sobely)
+
+plt.subplot(234)
+plt.title('Sobel 效果 3 y 方向')
+plt.imshow(cv2.cvtColor(sobely, cv2.COLOR_BGR2RGB))
 
 print('------------------------------------------------------------')	#60個
 
 print('顯示 Sobel 效果 4 x-y 方向')
-sobelxy=cv2.Sobel(o,cv2.CV_64F,1,1)
+sobelxy=cv2.Sobel(image, cv2.CV_64F,1,1)
 sobelxy=cv2.convertScaleAbs(sobelxy) 
-cv2.imshow("Sobel xy",sobelxy)
+
+plt.subplot(235)
+plt.title('Sobel 效果 4 x-y 方向')
+plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
 
 print('------------------------------------------------------------')	#60個
 
 print('顯示 Sobel 效果 5 先x 再y 方向')
-sobelx = cv2.Sobel(o,cv2.CV_64F,1,0)
-sobely = cv2.Sobel(o,cv2.CV_64F,0,1)
+sobelx = cv2.Sobel(image, cv2.CV_64F, 1, 0)
+sobely = cv2.Sobel(image, cv2.CV_64F, 0, 1)
 sobelx = cv2.convertScaleAbs(sobelx)   # 转回uint8  
 sobely = cv2.convertScaleAbs(sobely)  
 sobelxy =  cv2.addWeighted(sobelx,0.5,sobely,0.5,0)  
-cv2.imshow("Sobel xy",sobelxy)
+
+plt.subplot(236)
+plt.title('Sobel 效果 5 先x 再y 方向')
+plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print('顯示原圖')
-cv2.imshow("original",o)
-
-print('------------------------------------------------------------')	#60個
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 print('顯示 Sobel 效果 6')
-sobelx = cv2.Sobel(o,cv2.CV_64F,1,0)
-sobely = cv2.Sobel(o,cv2.CV_64F,0,1)
+sobelx = cv2.Sobel(image, cv2.CV_64F,1,0)
+sobely = cv2.Sobel(image, cv2.CV_64F,0,1)
 sobelx = cv2.convertScaleAbs(sobelx)   # 转回uint8  
 sobely = cv2.convertScaleAbs(sobely)  
 sobelxy =  cv2.addWeighted(sobelx,0.5,sobely,0.5,0)  
-sobelxy11=cv2.Sobel(o,cv2.CV_64F,1,1)
+sobelxy11=cv2.Sobel(image, cv2.CV_64F,1,1)
 sobelxy11=cv2.convertScaleAbs(sobelxy11)
-cv2.imshow("Sobel xy",sobelxy)
-cv2.imshow("Sobel xy11",sobelxy11)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('', figsize = (16, 12))
+plt.subplot(131)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title('Sobel xy')
+plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title('Sobel xy11')
+plt.imshow(cv2.cvtColor(sobelxy11, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp'
 
-o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print('顯示原圖')
-cv2.imshow("original",o)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-print('------------------------------------------------------------')	#60個
-
-print('顯示 Scharr 效果 1')
-scharrx = cv2.Scharr(o,cv2.CV_64F,1,0)
+print('Scharr 效果 1')
+scharrx = cv2.Scharr(image, cv2.CV_64F, 1, 0)
 scharrx = cv2.convertScaleAbs(scharrx)   # 转回uint8  
-cv2.imshow("Scharr x",scharrx)
 
-print('------------------------------------------------------------')	#60個
-
-print('顯示 Scharr 效果 2')
-scharry = cv2.Scharr(o,cv2.CV_64F,0,1)
+print('Scharr 效果 2')
+scharry = cv2.Scharr(image, cv2.CV_64F, 0, 1)
 scharry = cv2.convertScaleAbs(scharry)  
-cv2.imshow("Scharr y",scharry)
 
-print('------------------------------------------------------------')	#60個
-
-print('顯示 Scharr 效果 3')
-scharrx = cv2.Scharr(o,cv2.CV_64F,1,0)
-scharry = cv2.Scharr(o,cv2.CV_64F,0,1)
+print('Scharr 效果 3')
+scharrx = cv2.Scharr(image, cv2.CV_64F, 1, 0)
+scharry = cv2.Scharr(image, cv2.CV_64F, 0, 1)
 scharrx = cv2.convertScaleAbs(scharrx)   # 转回uint8  
 scharry = cv2.convertScaleAbs(scharry)  
 scharrxy =  cv2.addWeighted(scharrx,0.5,scharry,0.5,0)  
-cv2.imshow("Scharr xy",scharrxy)
+
+plt.figure('Scharr', figsize = (16, 12))
+plt.subplot(221)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(222)
+plt.title('Scharr 效果 1')
+plt.imshow(cv2.cvtColor(scharrx, cv2.COLOR_BGR2RGB))
+
+plt.subplot(223)
+plt.title('Scharr 效果 2')
+plt.imshow(cv2.cvtColor(scharry, cv2.COLOR_BGR2RGB))
+
+plt.subplot(224)
+plt.title('Scharr 效果 3')
+plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/scharr.bmp'
 
-o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print('顯示原圖')
-cv2.imshow("original",o)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-print('顯示 Scharr 效果 4 fail')
-#scharrxy11=cv2.Scharr(o,cv2.CV_64F,1,1)
-#cv2.imshow("xy11 aaaa",scharrxy11)
+print('Scharr 效果')
+#scharrxy11 = cv2.Scharr(image, cv2.CV_64F, 1, 1)   #fail
+scharrxy11 = cv2.Scharr(image, cv2.CV_64F, 1, 0)    #ok
+scharrxy11 = cv2.convertScaleAbs(scharrxy11)   # 转回uint8  
+
+plt.figure('', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('Scharr 效果')
+plt.imshow(cv2.cvtColor(scharrxy11, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sobel.bmp'
 
-o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print('顯示原圖')
-cv2.imshow("original",o)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 print('顯示 Sobel 效果 1')
-scharrx = cv2.Sobel(o,cv2.CV_64F,1,0,-1)
-scharry = cv2.Sobel(o,cv2.CV_64F,0,1,-1)
+scharrx = cv2.Sobel(image, cv2.CV_64F,1,0,-1)
+scharry = cv2.Sobel(image, cv2.CV_64F,0,1,-1)
 scharrx = cv2.convertScaleAbs(scharrx)   # 转回uint8  
 scharry = cv2.convertScaleAbs(scharry) 
-cv2.imshow("Sobel x",scharrx)
-cv2.imshow("Sobel y",scharry)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('', figsize = (16, 12))
+plt.subplot(131)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title('Sobel x')
+plt.imshow(cv2.cvtColor(scharrx, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title('Sobel y')
+plt.imshow(cv2.cvtColor(scharry, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 
-o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print('顯示原圖')
-cv2.imshow("original",o)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 print('顯示 Sobel 效果 2')
-sobelx = cv2.Sobel(o,cv2.CV_64F,1,0,ksize=3)
-sobely = cv2.Sobel(o,cv2.CV_64F,0,1,ksize=3)
+sobelx = cv2.Sobel(image, cv2.CV_64F,1,0,ksize=3)
+sobely = cv2.Sobel(image, cv2.CV_64F,0,1,ksize=3)
 sobelx = cv2.convertScaleAbs(sobelx)   # 转回uint8  
 sobely = cv2.convertScaleAbs(sobely)  
 sobelxy =  cv2.addWeighted(sobelx,0.5,sobely,0.5,0) 
-scharrx = cv2.Scharr(o,cv2.CV_64F,1,0)
-scharry = cv2.Scharr(o,cv2.CV_64F,0,1)
+scharrx = cv2.Scharr(image, cv2.CV_64F,1,0)
+scharry = cv2.Scharr(image, cv2.CV_64F,0,1)
 scharrx = cv2.convertScaleAbs(scharrx)   # 转回uint8  
 scharry = cv2.convertScaleAbs(scharry)  
 scharrxy =  cv2.addWeighted(scharrx,0.5,scharry,0.5,0) 
-cv2.imshow("Sobel xy",sobelxy)
-cv2.imshow("Scharr xy",scharrxy)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('', figsize = (16, 12))
+plt.subplot(131)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title('Sobel xy')
+plt.imshow(cv2.cvtColor(sobelxy, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title('Scharr xy')
+plt.imshow(cv2.cvtColor(scharrxy, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/laplacian.bmp'
 
-o = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print('顯示原圖')
-cv2.imshow("original",o)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 print('顯示 Laplacian 效果')
-Laplacian = cv2.Laplacian(o,cv2.CV_64F)
+Laplacian = cv2.Laplacian(image, cv2.CV_64F)
 Laplacian = cv2.convertScaleAbs(Laplacian)   
-cv2.imshow("Laplacian",Laplacian)
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.figure('Laplacian', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('Laplacian')
+plt.imshow(cv2.cvtColor(Laplacian, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+print('作業完成')
 
