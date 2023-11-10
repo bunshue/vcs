@@ -18,11 +18,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 #Python繪圖的方法-使用 seaborn
 
 #匯入必要模組
@@ -30,6 +25,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+
 #匯入data
 fmri = sns.load_dataset("fmri")#觀察fmri的資料型態是pandas
 print(type(fmri))
@@ -72,7 +68,7 @@ plt.show()
 sns.lineplot(data=flights, x="year", y="passengers", size="month")
 plt.show()
 
-#replot
+#relplot
 
 #畫出不同region和event組合下不同的subject的signal vs. timepoint
 sns.relplot(x="timepoint", y="signal", hue="subject", col="region", 
@@ -107,6 +103,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+
 fig,axs=plt.subplots(1,2,figsize=(20,8))
 data=sns.load_dataset('tips')
 print(data)
@@ -117,6 +114,8 @@ axs[1].set_title('Plot2')
 axs[0].set_ylim(0,30)
 # axs[1].set_xlim(0,4)axs[0].legend(loc=2)
 plt.subplots_adjust(wspace=0.2)
+plt.show()
+
 ##若分組想要取其他種類的統計量，要透過estimator
 fig.ax=plt.subplots()
 #palette是著色表，可以參考以下網址
@@ -130,7 +129,9 @@ plt.show()
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as snsdata=sns.load_dataset("penguins")
+import seaborn as sns
+
+data=sns.load_dataset("penguins")
 print(data)
 
 fig,axs=plt.subplots(1,2,figsize=(20,8))
@@ -159,12 +160,13 @@ axs[2][1].set_title('stat=probability, fill=False')
 
 plt.show()
 
-
 #X 和 Y都指定的histplot
 
 plt.subplots(figsize=(10,5))
 data1=data
 sns.histplot(data=data1, x="bill_depth_mm", y="body_mass_g", hue="species",cbar=True, cbar_kws=dict(shrink=.75))
+
+plt.show()
 
 plt.subplots(figsize=(10,5))
 data2=sns.load_dataset('planets')
@@ -180,10 +182,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-tips=sns.load_dataset('tips')
+tips = sns.load_dataset('tips')
 fig,axs=plt.subplots(2,1,figsize=(10,20))
-sns.scatterplot(data=tips, x="total_bill", y="tip", hue="day", style="time",ax=axs[0])
-sns.scatterplot(data=tips, x="total_bill", y="tip", hue="size",size="size",sizes=(20, 80), legend="full")
+sns.scatterplot(data = tips, x="total_bill", y="tip", hue="day", style="time",ax=axs[0])
+sns.scatterplot(data = tips, x="total_bill", y="tip", hue="size",size="size",sizes=(20, 80), legend="full")
 axs[0].legend(loc=1)
 
 plt.show()
@@ -219,33 +221,45 @@ import matplotlib.pyplot as plt
 
 #分類散點圖
 #stript plot
-sns.load_dataset("tips")
+
+tips = sns.load_dataset('tips')
 sns.catplot(x="day", y="total_bill", data=tips);
+plt.show()
+
 #stript plot + jitter
 sns.catplot(x="day", y="total_bill", jitter=False, data=tips);
+plt.show()
+
 #swarm plot
 sns.catplot(x="day", y="total_bill", hue="sex", kind="swarm", data=tips);
-
 plt.show()
 
 
 #分類分布圖
 ##boxplot
 sns.catplot(x="day", y="total_bill", kind="box", data=tips);
+plt.show()
+
 sns.catplot(x="day", y="total_bill", hue="smoker", kind="box", data=tips);
 plt.show()
 
 #小提琴圖(violin plot)
 sns.catplot(x="total_bill", y="day", hue="time", kind="violin", data=tips);
+plt.show()
+
 sns.catplot(x="day", y="total_bill", hue="sex", kind="violin", split=True, data=tips);
+plt.show()
+
 g=sns.catplot(x="day", y="total_bill", kind="violin", data=tips);
 sns.swarmplot(x="day", y="total_bill", color="k", size=3, data=tips, ax=g.ax);
 plt.show()
 
 #分類統計估計圖#barplot
 titanic = sns.load_dataset("titanic")
-g1=sns.catplot(x="sex", y="survived", hue="class", kind="bar", data=titanic,ci=None);
-g2=sns.catplot(x="survived", hue="class", kind="count", palette="pastel", edgecolor=".6", data=titanic);
+g1=sns.catplot(x="sex", y="survived", hue="class", kind="bar", data=titanic,ci=None)
+plt.show()
+
+g2=sns.catplot(x="survived", hue="class", kind="count", palette="pastel", edgecolor=".6", data=titanic)
 #catplot本身是個FacetGrid
 g1.ax.set_title('Survived vs. sex between differenrt class')
 plt.show()
@@ -265,20 +279,20 @@ plt.show()
 
 penguins = sns.load_dataset("penguins")
 sns.jointplot(data=penguins, x="bill_length_mm", y="bill_depth_mm")
-sns.jointplot(data=penguins, x="bill_length_mm", y="bill_depth_mm", hue="species")
-sns.jointplot(data=penguins, x="bill_length_mm", y="bill_depth_mm", kind="reg")
+plt.show()
 
+sns.jointplot(data=penguins, x="bill_length_mm", y="bill_depth_mm", hue="species")
+plt.show()
+
+sns.jointplot(data=penguins, x="bill_length_mm", y="bill_depth_mm", kind="reg")
 plt.show()
 
 g = sns.jointplot(data=penguins, x="bill_length_mm", y="bill_depth_mm")
 g.plot_joint(sns.kdeplot, color="r", zorder=0, levels=6)
-# g.plot_marginals(sns.rugplot, color="r", height=-.15, clip_on=False)
-
 plt.show()
 
-
+g = sns.jointplot(data=penguins, x="bill_length_mm", y="bill_depth_mm")
 g.plot_marginals(sns.rugplot, color="r", height=-.15, clip_on=False)
-
 plt.show()
 
 #FacetGrid
@@ -290,12 +304,15 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 ## g.map內的plotting function可以是任何matplotlib, sns繪圖方法
 tips=sns.load_dataset('tips')
+
 g1 = sns.FacetGrid(tips, col="sex", hue="smoker")
 g1.map(plt.scatter, "total_bill", "tip", alpha=.7)
-g1.add_legend();g2 = sns.FacetGrid(tips, col="sex", hue="smoker")
+g1.add_legend();
+plt.show()
+
+g2 = sns.FacetGrid(tips, col="sex", hue="smoker")
 g2.map(sns.scatterplot, "total_bill", "tip", alpha=.7)
 g2.add_legend();
-
 plt.show()
 
 #heatmap
@@ -330,9 +347,9 @@ ax = sns.heatmap(flights, ax=ax,cbar_ax=cbar_ax,cbar_kws={"orientation": "horizo
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
+print('作業完成')
 
 print('------------------------------------------------------------')	#60個
 
