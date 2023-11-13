@@ -1,1 +1,0 @@
-請將本資料夾的檔案複製到 Jupyter Notebook 可開啟的位置

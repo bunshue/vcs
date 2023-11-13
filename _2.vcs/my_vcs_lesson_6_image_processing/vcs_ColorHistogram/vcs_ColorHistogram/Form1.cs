@@ -726,8 +726,6 @@ namespace vcs_ColorHistogram
             g_s.DrawRectangle(p, x_st - 4, y_st - 4, w + 8, h + 8);
             pbox_source.Image = bitmap1;
 
-
-
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             richTextBox1.Text += "圖片大小 : W = " + W.ToString() + ", H = " + H.ToString() + "\n";
@@ -773,16 +771,20 @@ namespace vcs_ColorHistogram
         {
             int i;
             int most = 0;
+            int most_index = 0;
 
             for (i = 0; i < 256; i++)
             {
                 //richTextBox1.Text += color_data[i].ToString() + " ";
                 if (color_data[i] > most)
+                {
                     most = color_data[i];
+                    most_index = i;
+                }
                 if (color_data[i] == 0)
                     color_data[i] = 5;
             }
-            richTextBox1.Text += "最多 " + most.ToString() + "\n";
+            richTextBox1.Text += "最多 " + most.ToString() + "\t出現在 " + most_index.ToString() + "\n";
 
             int ww = 512;
             int hh1 = 300;
@@ -842,6 +844,22 @@ namespace vcs_ColorHistogram
             {
                 g1.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
             }
+
+            //標出最大值
+            richTextBox1.Text += "最多 " + most.ToString() + "\t出現在 " + most_index.ToString() + "\n";
+            if (color == Color.Red)
+            {
+                g1.DrawString(most.ToString(), f, new SolidBrush(Color.Blue), new PointF(most_index * 2 - 31, 20));
+                p = new Pen(Color.Blue, 3);
+                g1.DrawLine(p, most_index * 2, 0, most_index * 2, hh2);
+            }
+            else
+            {
+                g1.DrawString(most.ToString(), f, new SolidBrush(Color.Red), new PointF(most_index * 2 - 31, 20));
+                p = new Pen(Color.Red, 3);
+                g1.DrawLine(p, most_index * 2, 0, most_index * 2, hh2);
+            }
+
             pbox.Image = bitmap1;
         }
 
