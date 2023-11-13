@@ -35,7 +35,7 @@ rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  #轉換為RGB
 plt.imshow(rgb)
 plt.show()
 
-coordinate = rgb[131,81] #輸入要取得顏色的指定座標
+coordinate = rgb[131, 81] #輸入要取得顏色的指定座標
 print(coordinate)
 
 #print(array([255, 219,  79], dtype=uint8))

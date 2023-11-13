@@ -14,10 +14,10 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-o=cv2.imread("images/rice.png",cv2.IMREAD_UNCHANGED)
-k=np.ones((5,5),np.uint8)
-e=cv2.erode(o,k)
-b=cv2.subtract(o,e)
+o = cv2.imread("images/rice.png", cv2.IMREAD_UNCHANGED)
+k = np.ones((5, 5), np.uint8)
+e = cv2.erode(o, k)
+b = cv2.subtract(o, e)
 
 plt.figure('', figsize = (16, 8))
 plt.subplot(131)

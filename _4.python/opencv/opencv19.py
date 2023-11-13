@@ -53,6 +53,7 @@ print('原圖 BGR 轉 RGB')
 rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 plt.figure('影像處理', figsize = (16, 12))
+
 plt.subplot(121)
 plt.title('原圖 B-G-R OK')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -105,8 +106,8 @@ plt.subplot(232)
 plt.title('HSV')
 plt.imshow(cv2.cvtColor(hsv, cv2.COLOR_BGR2RGB))
 
-plt.subplot(233)
-plt.title('')
+#plt.subplot(233)
+#plt.title('')
 
 plt.subplot(234)
 plt.title('R')
@@ -130,26 +131,24 @@ img = cv2.imread(filename)
 
 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 h,s,v=cv2.split(hsv)
-minHue=5
-maxHue=170
-hueMask=cv2.inRange(h, minHue, maxHue)
-minSat=25
-maxSat=166
+minHue = 5
+maxHue = 170
+hueMask = cv2.inRange(h, minHue, maxHue)
+minSat = 25
+maxSat = 166
 satMask = cv2.inRange(s, minSat, maxSat)
 mask = hueMask & satMask
-roi = cv2.bitwise_and(img,img, mask= mask)
+roi = cv2.bitwise_and(img, img, mask = mask)
 
-plt.figure('影像處理 ROI', figsize = (16, 12))
-plt.subplot(121)
+plt.figure('影像處理', figsize = (16, 12))
+
+plt.subplot(221)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
-plt.subplot(122)
+plt.subplot(222)
 plt.title('ROI')
 plt.imshow(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -162,12 +161,11 @@ v[:,:]=255
 newHSV=cv2.merge([h,s,v])
 art = cv2.cvtColor(newHSV, cv2.COLOR_HSV2BGR)
 
-plt.figure('影像處理', figsize = (16, 12))
-plt.subplot(121)
+plt.subplot(223)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
-plt.subplot(122)
+plt.subplot(224)
 plt.title('art')
 plt.imshow(cv2.cvtColor(art, cv2.COLOR_BGR2RGB))
 

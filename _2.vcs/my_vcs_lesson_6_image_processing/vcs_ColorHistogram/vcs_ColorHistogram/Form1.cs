@@ -614,6 +614,11 @@ namespace vcs_ColorHistogram
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 20);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 20);
             button3.Location = new Point(x_st + dx * 3, y_st + dy * 2 - 20);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 30);
+            button5.Location = new Point(x_st + dx * 1, y_st + dy * 2 + 30);
+            button6.Location = new Point(x_st + dx * 2, y_st + dy * 2 + 30);
+            button7.Location = new Point(x_st + dx * 3, y_st + dy * 2 + 30);
+
             bt_open_picture.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 20);
             bt_open_picture.BackgroundImage = vcs_ColorHistogram.Properties.Resources.open_folder;
 
@@ -758,317 +763,86 @@ namespace vcs_ColorHistogram
 
             richTextBox1.Text += "共量測 " + total_points.ToString() + " 個點\n";
 
-            draw_yuv_rgb(pbox_y, pbox_r, pbox_g, pbox_b);
-            //draw_yuv_rgb(pbox_y);
+            draw_color_histogram(yuv_data_y, pbox_y, Color.Yellow);
+            draw_color_histogram(rgb_data_r, pbox_r, Color.Red);
+            draw_color_histogram(rgb_data_g, pbox_g, Color.Green);
+            draw_color_histogram(rgb_data_b, pbox_b, Color.Blue);
         }
 
-        void draw_yuv_rgb(PictureBox pbox_y, PictureBox pbox_r, PictureBox pbox_g, PictureBox pbox_b)
+        void draw_color_histogram(int[] color_data, PictureBox pbox, Color color)
         {
             int i;
-            int most_all = 0;
-            int most_y = 0;
-            int most_u = 0;
-            int most_v = 0;
-            int most_r = 0;
-            int most_g = 0;
-            int most_b = 0;
-            for (i = 0; i < 256; i++)
-            {
-                //richTextBox1.Text += yuv_data_y[i].ToString() + " ";
-                if (yuv_data_y[i] > most_y)
-                    most_y = yuv_data_y[i];
-                if (yuv_data_y[i] == 0)
-                    yuv_data_y[i] = 5;
-            }
-            richTextBox1.Text += "Y最多 " + most_y.ToString() + "\n";
-            for (i = 0; i < 256; i++)
-            {
-                //richTextBox1.Text += yuv_data_u[i].ToString() + " ";
-                if (yuv_data_u[i] > most_u)
-                    most_u = yuv_data_u[i];
-                if (yuv_data_u[i] == 0)
-                    yuv_data_u[i] = 5;
-            }
-            richTextBox1.Text += "U最多 " + most_u.ToString() + "\n";
-            for (i = 0; i < 256; i++)
-            {
-                //richTextBox1.Text += yuv_data_v[i].ToString() + " ";
-                if (yuv_data_v[i] > most_v)
-                    most_v = yuv_data_v[i];
-                if (yuv_data_v[i] == 0)
-                    yuv_data_v[i] = 5;
-            }
-            richTextBox1.Text += "V最多 " + most_v.ToString() + "\n";
-            for (i = 0; i < 256; i++)
-            {
-                //richTextBox1.Text += rgb_data_r[i].ToString() + " ";
-                if (rgb_data_r[i] > most_r)
-                    most_r = rgb_data_r[i];
-                if (rgb_data_r[i] == 0)
-                    rgb_data_r[i] = 5;
-            }
-            richTextBox1.Text += "R最多 " + most_r.ToString() + "\n";
-            for (i = 0; i < 256; i++)
-            {
-                //richTextBox1.Text += rgb_data_g[i].ToString() + " ";
-                if (rgb_data_g[i] > most_g)
-                    most_g = rgb_data_g[i];
-                if (rgb_data_g[i] == 0)
-                    rgb_data_g[i] = 5;
-            }
-            richTextBox1.Text += "G最多 " + most_g.ToString() + "\n";
-            for (i = 0; i < 256; i++)
-            {
-                //richTextBox1.Text += rgb_data_b[i].ToString() + " ";
-                if (rgb_data_b[i] > most_b)
-                    most_b = rgb_data_b[i];
-                if (rgb_data_b[i] == 0)
-                    rgb_data_b[i] = 5;
-            }
-            richTextBox1.Text += "B最多 " + most_b.ToString() + "\n";
+            int most = 0;
 
-            /*
-            if (most_all < most_y)
-                most_all = most_y;
-            if (most_all < most_u)
-                most_all = most_u;
-            if (most_all < most_v)
-                most_all = most_v;
-            if (most_all < most_r)
-                most_all = most_r;
-            if (most_all < most_g)
-                most_all = most_g;
-            if (most_all < most_b)
-                most_all = most_b;
-
-            richTextBox1.Text += "全部最多 " + most_all.ToString() + "\n";
-            most_y = most_all;
-            most_u = most_all;
-            most_v = most_all;
-            most_r = most_all;
-            most_g = most_all;
-            most_b = most_all;
-            */
+            for (i = 0; i < 256; i++)
+            {
+                //richTextBox1.Text += color_data[i].ToString() + " ";
+                if (color_data[i] > most)
+                    most = color_data[i];
+                if (color_data[i] == 0)
+                    color_data[i] = 5;
+            }
+            richTextBox1.Text += "最多 " + most.ToString() + "\n";
 
             int ww = 512;
             int hh1 = 300;
             int hh2 = 256;
             Pen p = new Pen(Color.Blue, 2);
             Brush b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
+            Brush br = new SolidBrush(color);
             double ratio = 0;
             Font f = new Font("標楷體", 20);
 
-            //畫Y
-            Bitmap bitmap_y = new Bitmap(ww, hh1);
-            Graphics g_y = Graphics.FromImage(bitmap_y);
-            g_y.Clear(Color.Pink);
+            Bitmap bitmap1 = new Bitmap(ww, hh1);
+            Graphics g1 = Graphics.FromImage(bitmap1);
+            g1.Clear(Color.Pink);
             p = new Pen(Color.Blue, 2);
-            ratio = (double)hh2 / most_y;
+            ratio = (double)hh2 / most;
             richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
             for (i = 0; i < 256; i++)
             {
-                //g_y.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(yuv_data_y[i] * ratio));
-                g_y.FillRectangle(Brushes.Yellow, i * 2, hh2 - (float)(yuv_data_y[i] * ratio), 2, (float)(yuv_data_y[i] * ratio));
+                //g1.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(color_data[i] * ratio));
+                g1.FillRectangle(br, i * 2, hh2 - (float)(color_data[i] * ratio), 2, (float)(color_data[i] * ratio));
             }
 
-            g_y.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
-            g_y.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
+            g1.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
+            g1.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
 
             b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
-            g_y.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
+            g1.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
 
-            p = new Pen(Color.Green, 3);
-            g_y.DrawLine(p, min * 2, hh2, max * 2, 0);
+            p = new Pen(color, 3);
+            g1.DrawLine(p, min * 2, hh2, max * 2, 0);
 
             f = new Font("標楷體", 20);
 
             if ((min >= 0) && (min <= 103))
             {
-                g_y.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, hh2));
+                g1.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, hh2));
             }
             else if (min < 0)
             {
-                g_y.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
+                g1.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
             }
             else
             {
-                g_y.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, hh2));
+                g1.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, hh2));
             }
 
             if ((max <= 255) && (max >= 152))
             {
-                g_y.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, hh2));
+                g1.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, hh2));
             }
             else if (max > 255)
             {
-                g_y.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, hh2));
+                g1.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, hh2));
             }
             else
             {
-                g_y.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
+                g1.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
             }
-            pbox_y.Image = bitmap_y;
-
-            //畫R
-            Bitmap bitmap_r = new Bitmap(ww, hh1);
-            Graphics g_r = Graphics.FromImage(bitmap_r);
-            g_r.Clear(Color.Pink);
-            p = new Pen(Color.Blue, 2);
-            ratio = (double)hh2 / most_r;
-            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
-
-            for (i = 0; i < 256; i++)
-            {
-                //g_r.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(rgb_data_r[i] * ratio));
-                g_r.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(rgb_data_r[i] * ratio), 2, (float)(rgb_data_r[i] * ratio));
-            }
-
-            g_r.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
-            g_r.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
-
-            b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
-            g_r.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
-
-            p = new Pen(Color.Green, 3);
-            g_r.DrawLine(p, min * 2, hh2, max * 2, 0);
-
-            f = new Font("標楷體", 20);
-
-            if ((min >= 0) && (min <= 103))
-            {
-                g_r.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, hh2));
-            }
-            else if (min < 0)
-            {
-                g_r.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
-            }
-            else
-            {
-                g_r.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, hh2));
-            }
-
-            if ((max <= 255) && (max >= 152))
-            {
-                g_r.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, hh2));
-            }
-            else if (max > 255)
-            {
-                g_r.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, hh2));
-            }
-            else
-            {
-                g_r.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
-            }
-            pbox_r.Image = bitmap_r;
-
-            //畫G
-            Bitmap bitmap_g = new Bitmap(ww, hh1);
-            Graphics g_g = Graphics.FromImage(bitmap_g);
-            g_g.Clear(Color.Pink);
-            p = new Pen(Color.Blue, 2);
-            ratio = (double)hh2 / most_g;
-            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
-
-            for (i = 0; i < 256; i++)
-            {
-                //g_g.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(rgb_data_g[i] * ratio));
-                g_g.FillRectangle(Brushes.Green, i * 2, hh2 - (float)(rgb_data_g[i] * ratio), 2, (float)(rgb_data_g[i] * ratio));
-            }
-
-            g_g.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
-            g_g.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
-
-            b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
-            g_g.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
-
-            p = new Pen(Color.Green, 3);
-            g_g.DrawLine(p, min * 2, hh2, max * 2, 0);
-
-            f = new Font("標楷體", 20);
-
-            if ((min >= 0) && (min <= 103))
-            {
-                g_g.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, hh2));
-            }
-            else if (min < 0)
-            {
-                g_g.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
-            }
-            else
-            {
-                g_g.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, hh2));
-            }
-
-            if ((max <= 255) && (max >= 152))
-            {
-                g_g.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, hh2));
-            }
-            else if (max > 255)
-            {
-                g_g.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, hh2));
-            }
-            else
-            {
-                g_g.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
-            }
-            pbox_g.Image = bitmap_g;
-
-
-            //畫B
-            Bitmap bitmap_b = new Bitmap(ww, hh1);
-            Graphics g_b = Graphics.FromImage(bitmap_b);
-            g_b.Clear(Color.Pink);
-            p = new Pen(Color.Blue, 2);
-            ratio = (double)hh2 / most_b;
-            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
-
-            for (i = 0; i < 256; i++)
-            {
-                //g_b.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(rgb_data_b[i] * ratio));
-                g_b.FillRectangle(Brushes.Blue, i * 2, hh2 - (float)(rgb_data_b[i] * ratio), 2, (float)(rgb_data_b[i] * ratio));
-            }
-
-            g_b.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
-            g_b.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
-
-            b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
-            g_b.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
-
-            p = new Pen(Color.Green, 3);
-            g_b.DrawLine(p, min * 2, hh2, max * 2, 0);
-
-            f = new Font("標楷體", 20);
-
-            if ((min >= 0) && (min <= 103))
-            {
-                g_b.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, hh2));
-            }
-            else if (min < 0)
-            {
-                g_b.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
-            }
-            else
-            {
-                g_b.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, hh2));
-            }
-
-            if ((max <= 255) && (max >= 152))
-            {
-                g_b.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, hh2));
-            }
-            else if (max > 255)
-            {
-                g_b.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, hh2));
-            }
-            else
-            {
-                g_b.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
-            }
-            pbox_b.Image = bitmap_b;
-
-
-
+            pbox.Image = bitmap1;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1079,7 +853,6 @@ namespace vcs_ColorHistogram
 
         private void button3_Click(object sender, EventArgs e)
         {
-
             //Channel 交換
 
             //讀取圖檔, 先放在Bitmap裏
@@ -1107,8 +880,6 @@ namespace vcs_ColorHistogram
                 {
                     pt = bitmap1.GetPixel(i, j);
 
-
-
                     RGB pp = new RGB(pt.R, pt.G, pt.B);
 
                     byte r = pp.R;
@@ -1122,6 +893,28 @@ namespace vcs_ColorHistogram
                 }
             }
             //bitmap1.Save("pic_modify3.bmp", ImageFormat.Bmp);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = null;
+            pictureBox2.Image = null;
+            pictureBox3.Image = null;
+            pictureBox4.Image = null;
+            pictureBox5.Image = null;
         }
 
         private void bt_open_picture_Click(object sender, EventArgs e)

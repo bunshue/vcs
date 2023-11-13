@@ -21,7 +21,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 #numpy 傅立葉
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
@@ -33,21 +33,22 @@ magnitude_spectrum = 20 * np.log(np.abs(fshift))
 
 plt.figure('傅立葉', figsize = (16, 12))
 plt.subplot(121)
+plt.title('原圖')
 plt.imshow(img, cmap = 'gray')
-plt.title('original')
 
 plt.subplot(122)
+plt.title('fftshift')
 plt.imshow(magnitude_spectrum, cmap = 'gray')
-plt.title('result')
 
 plt.suptitle('numpy 傅立葉')
 plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
 #逆傅立葉
 
 img = cv2.imread('images/boat.bmp', 0)
+
 f = np.fft.fft2(img)
 fshift = np.fft.fftshift(f)
 ishift = np.fft.ifftshift(fshift)

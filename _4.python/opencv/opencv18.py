@@ -14,9 +14,11 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/boat.bmp'
+image1 = cv2.imread(filename)
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-image1 = cv2.imread(filename, 0)
-image2 = image1
+image2 = cv2.imread(filename)
 
 print('兩圖直接相加')
 result1 = image1 + image2
@@ -24,47 +26,35 @@ result1 = image1 + image2
 print('兩圖用cv相加')
 result2 = cv2.add(image1, image2)
 
-plt.figure('a', figsize = (16, 12))
-plt.subplot(131)
+plt.figure('相加', figsize = (16, 12))
+plt.subplot(231)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 
-plt.subplot(132)
+plt.subplot(232)
 plt.title('兩圖直接相加')
 plt.imshow(cv2.cvtColor(result1, cv2.COLOR_BGR2RGB))
 
-plt.subplot(133)
+plt.subplot(233)
 plt.title('兩圖用cv相加')
 plt.imshow(cv2.cvtColor(result2, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/boat.bmp'
-image1 = cv2.imread(filename)
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-image2 = cv2.imread(filename)
 
 print('兩圖做alpha疊加')
 result = cv2.addWeighted(image1, 0.6, image2, 0.4, 0)
 
-plt.figure('b', figsize = (16, 12))
-plt.subplot(131)
+plt.subplot(234)
 plt.title('原圖1')
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 
-plt.subplot(132)
+plt.subplot(235)
 plt.title('原圖2')
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 
-plt.subplot(133)
+plt.subplot(236)
 plt.title('兩圖做alpha疊加')
 plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
+#plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -75,12 +65,12 @@ lena = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/dollar.bmp'
 dollar = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
-plt.figure('c', figsize = (16, 12))
-plt.subplot(131)
+plt.figure('疊加', figsize = (16, 12))
+plt.subplot(231)
 plt.title('原圖1')
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
 
-plt.subplot(132)
+plt.subplot(232)
 plt.title('原圖2')
 plt.imshow(cv2.cvtColor(dollar, cv2.COLOR_BGR2RGB))
 
@@ -90,12 +80,9 @@ face2=dollar[160:340,200:300]
 add=cv2.addWeighted(face1,0.6,face2,0.4,0)
 dollar[160:340,200:300]=add
 
-plt.subplot(133)
+plt.subplot(233)
 plt.title('兩圖擷取某塊做alpha疊加, 再貼回原圖')
 plt.imshow(cv2.cvtColor(dollar, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -111,20 +98,19 @@ c=cv2.bitwise_and(a,b)  #ab都成立的 擷取出來
 print("a.shape=",a.shape)
 print("b.shape=",b.shape)
 
-plt.figure('d', figsize = (16, 12))
-plt.subplot(131)
+plt.subplot(234)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
 
-plt.subplot(132)
+plt.subplot(235)
 plt.title('mask')
 plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
 
-plt.subplot(133)
+plt.subplot(236)
 plt.title('顯示原圖與mask作用後的圖')
 plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
+#plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -132,8 +118,8 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 a = cv2.imread(filename, 1)  #通道不同
 
-plt.figure('e', figsize = (16, 12))
-plt.subplot(131)
+plt.figure('mask', figsize = (16, 12))
+plt.subplot(231)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
 
@@ -141,7 +127,7 @@ b = np.zeros(a.shape,dtype=np.uint8) #與a一樣大的黑圖
 b[100:400,200:400]=255 #某塊做mask
 b[100:500,100:200]=255 #某塊做mask
 
-plt.subplot(132)
+plt.subplot(232)
 plt.title('mask')
 plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
 
@@ -150,20 +136,16 @@ c=cv2.bitwise_and(a,b)  #ab都成立的 擷取出來
 print("a.shape=",a.shape)
 print("b.shape=",b.shape)
 
-plt.subplot(133)
+plt.subplot(233)
 plt.title('顯示原圖與mask作用後的圖')
 plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 a = cv2.imread(filename, 1)
 
-plt.figure('f', figsize = (16, 12))
-plt.subplot(131)
+plt.subplot(234)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
 
@@ -176,15 +158,15 @@ c=cv2.bitwise_and(a,a,mask)
 print("a.shape=",a.shape)
 print("mask.shape=",mask.shape)
 
-plt.subplot(132)
+plt.subplot(235)
 plt.title('mask')
 plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB))
 
-plt.subplot(133)
+plt.subplot(236)
 plt.title('顯示原圖與mask作用後的圖')
 plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
+#plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個

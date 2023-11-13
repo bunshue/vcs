@@ -34,6 +34,7 @@ print('------------------------------------------------------------')	#60個
 
 #用 OpenCV 讀取並顯示圖片
 
+#等同於 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)) #BGR轉RGB再交由matplotlib顯示之
 def aidemy_imshow(name, img):
     b, g, r = cv2.split(img)
     img = cv2.merge([r, g, b])
@@ -84,19 +85,6 @@ print('裁剪圖片b')
 img_cut = img[0:(H * 1 // 2), 0:(W * 1 // 2)]
 print(img_cut.shape)
 cv2.imshow('Sample pic', img_cut)
-
-print('------------------------------------------------------------')	#60個
-
-print('縮放圖片')
-
-img = cv2.imread(r'images/sample.jpg')
-print(img.shape)
-
-H = img.shape[0]
-W = img.shape[1]
-img_resize = cv2.resize(img, (W * 3, H * 2))
-cv2.imshow('Sample pic', img_resize)
-print(img_resize.shape)
 
 print('------------------------------------------------------------')	#60個
 

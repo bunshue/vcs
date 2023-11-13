@@ -44,6 +44,23 @@ print(subminor_ver)
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+gray = cv2.imread(filename, 0)
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+color = cv2.imread(filename)
+
+print("圖像gray屬性：")
+print("gray.shape=",gray.shape)
+print("gray.size=",gray.size)
+print("gray.dtype=",gray.dtype)
+print("圖像color屬性：")
+print("color.shape=",color.shape)
+print("color.size=",color.size)
+print("color.dtype=",color.dtype)
+
+print('------------------------------------------------------------')	#60個
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 

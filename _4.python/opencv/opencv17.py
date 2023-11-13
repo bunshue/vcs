@@ -18,7 +18,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bm
 img = cv2.imread(filename, 0)
 
 plt.figure('修改一部份資料', figsize = (16, 12))
-plt.subplot(121)
+plt.subplot(221)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
@@ -37,37 +37,16 @@ for i in range(100,200):    #y
     for j in range(20,60): #x
         img.itemset((i,j),220)
 
-plt.subplot(122)
+plt.subplot(222)
 plt.title('修改後的圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-gray = cv2.imread(filename, 0)
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-color = cv2.imread(filename)
-
-print("圖像gray屬性：")
-print("gray.shape=",gray.shape)
-print("gray.size=",gray.size)
-print("gray.dtype=",gray.dtype)
-print("圖像color屬性：")
-print("color.shape=",color.shape)
-print("color.size=",color.size)
-print("color.dtype=",color.dtype)
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 img = cv2.imread(filename)
 
-plt.figure('修改一部份資料', figsize = (16, 12))
-plt.subplot(121)
+plt.subplot(223)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
@@ -109,7 +88,7 @@ print("修改後img[0,0,2]=",img[0,0,2])
 print("修改後img[50,0]=",img[50,0])
 print("修改後img[100,0]=",img[100,0])
 
-plt.subplot(122)
+plt.subplot(224)
 plt.title('修改後的圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
@@ -122,14 +101,14 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.p
 a = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
 plt.figure('擷取一塊處理', figsize = (16, 12))
-plt.subplot(131)
+plt.subplot(231)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
 
 print('擷取一塊出來, 並顯示之')
 face = a[200:400,200:380] #h, w
 
-plt.subplot(132)
+plt.subplot(232)
 plt.title('擷取一塊出來')
 plt.imshow(cv2.cvtColor(face, cv2.COLOR_BGR2RGB))
 
@@ -141,12 +120,9 @@ h = 180
 face=np.random.randint(0,256,(h,w,3))
 a[y_st:y_st+h,x_st:x_st+w]=face
 
-plt.subplot(133)
+plt.subplot(233)
 plt.title('將其中一塊亂碼化')
 plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -154,8 +130,8 @@ print('------------------------------------------------------------')	#60個
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp'
 lena = cv2.imread(filename1,cv2.IMREAD_UNCHANGED)
 
-plt.figure('A圖抓一塊貼到B圖上', figsize = (16, 12))
-plt.subplot(131)
+#A圖抓一塊貼到B圖上
+plt.subplot(234)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
 
@@ -163,7 +139,7 @@ plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 peony = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
-plt.subplot(132)
+plt.subplot(235)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(peony, cv2.COLOR_BGR2RGB))
 
@@ -171,7 +147,7 @@ print('A圖抓一塊貼到B圖上')
 face = lena[220:400,250:350]
 peony[160:340,200:300] = face
 
-plt.subplot(133)
+plt.subplot(236)
 plt.title('顯示修改後的圖')
 plt.imshow(cv2.cvtColor(peony, cv2.COLOR_BGR2RGB))
 
