@@ -63,24 +63,11 @@ import serial
 content = dir(serial)
 print('serial 模組所支援的指令 : ' + str(content))
 
-import sklearn as skl
-print(skl.__version__)
-
-
-from sklearn import datasets, svm, metrics
-print(dir(datasets))
-
-import sklearn
-print(sklearn)
-
 print('------------------------------------------------------------')	#60個
-
 
 print("global: ", list(globals().keys()))
 print("進入 local:", locals())
 print("離開 local:", locals().keys())
-
-
 
 print('------------------------------------------------------------')	#60個
 

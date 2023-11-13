@@ -1,7 +1,9 @@
 import openpyxl
 from openpyxl.chart import RadarChart, Reference
 
-wb = openpyxl.load_workbook(r"..\data\radar_chart.xlsx")
+print('在excel檔案內加入雷達圖')
+
+wb = openpyxl.load_workbook(r"data/radar_chart.xlsx")
 sh = wb.active
 
 data = Reference(sh, min_col=2, max_col=4, min_row=1, max_row=sh.max_row)
@@ -16,4 +18,4 @@ chart.add_data(data, titles_from_data=True)
 chart.set_categories(labels)
 
 sh.add_chart(chart, "F2")
-wb.save(r"..\data\radar_chart.xlsx")
+wb.save(r"add_radar_chart.xlsx")

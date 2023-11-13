@@ -72,7 +72,29 @@ print(np2)
 
 print('------------------------------------------------------------')	#60個
 
+print('建立np陣列')
+a = np.arange(15).reshape(3, 5)
+print(a)
 
+print('np陣列存檔成np之文字格式')
+np.savetxt('np_asc.txt' , a)
+
+print('讀取np之文字格式檔案成np陣列')
+b = np.loadtxt('np_asc.txt')
+print(b)
+
+print('np陣列存檔成np之binary格式')
+np.save('np_bin.npy' , a)
+
+print('讀取np之binary格式檔案成np陣列')
+c = np.load('np_bin.npy')
+print(c)
+
+
+
+
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

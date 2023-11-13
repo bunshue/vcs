@@ -1,14 +1,37 @@
-'''
+"""
 pip install scikit-learn
-'''
 
-'''
+"""
+
+
+print('------------------------------------------------------------')	#60個
+
+import sklearn as skl
+print(skl.__version__)
+
+
+from sklearn import datasets, svm, metrics
+print(dir(datasets))
+
+import sklearn
+print(sklearn)
+
+print('------------------------------------------------------------')	#60個
+
+
+from sklearn.linear_model import LinearRegression
+lm = LinearRegression()
+X = [[1], [2], [3], [4], [5]]
+y = [88, 72, 90, 76, 92]
+lm.fit(X, y)
+print('第6次考試分數：', lm.predict([[6]]))
+
+print('------------------------------------------------------------')	#60個
+
 import numpy as np
 from scipy.linalg import norm
 from sklearn.feature_extraction.text import TfidfVectorizer
-'''
 
-'''
 def similarity_tfidf(s1, s2):
     def add_space(s):
         return ' '.join(list(s))
@@ -35,11 +58,9 @@ if result > 0.2:
     print('OK, 一個漢堡蛋')
 else:
     print('Sorry, 無法接受訂餐')
-'''
 
 #---------------------------------------------------------------------------------------
 
-'''
 import seaborn as sns #海生, 自動把圖畫得比較好看
 
 iris = sns.load_dataset('iris')
@@ -50,7 +71,6 @@ sns.pairplot(iris, hue='species', height=3);
 
 print(iris)
 print('cccc')
-'''
 
 
 # seaborn

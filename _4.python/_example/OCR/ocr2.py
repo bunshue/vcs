@@ -12,7 +12,7 @@ def codeocr(offset):
     global result    
     img = cv2.imread("img_source.png")	#讀取本機圖片
     dst = cv2.fastNlMeansDenoisingColored(img, None, 30, 30, 7, 21) # 去雜點
-    ret,thresh = cv2.threshold(dst, 127, 255, cv2.THRESH_BINARY_INV)  #黑白
+    ret, thresh = cv2.threshold(dst, 127, 255, cv2.THRESH_BINARY_INV)  #黑白
     imgarr = cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY) #灰階    
 #    plt.imshow(thresh)
 #    plt.show()
