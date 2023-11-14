@@ -1,26 +1,6 @@
 #from *.py 合併
 
-print('------------------------------------------------------------')	#60個
-
-#練習 01 暖身題----猜數字遊戲
-
-import random
-
-def guessing_game():
-    answer = random.randint(0, 100)
- 
-    while True:
-        user_guess = int(input('請猜數字 (0~99): '))
- 
-        if user_guess == answer:
-            print('答對了! 答案是', answer)
-            break
-        elif user_guess > answer:
-            print('猜得太高, 再試一次')
-        else:
-            print('猜得太低, 再試一次')
-
-guessing_game()
+import sys
 
 print('------------------------------------------------------------')	#60個
 
@@ -36,38 +16,12 @@ print(my_sum(10, 20, 30, 40, 50))
 
 print('------------------------------------------------------------')	#60個
 
-#練習 03 計算平均練跑時間
-
-def run_timing():
-    total_time = 0.0
-    number_of_runs = 0
- 
-    while True:
-        run_time = input('輸入跑 10 公里時間: (直接按 Enter 結束) ')
-        if run_time == '':
-            break
-        try:
-            run_time_value = float(run_time)
-            total_time += run_time_value
-            number_of_runs += 1
-        except Exception as e:
-            print('產生錯誤:', e)
- 
-    if number_of_runs > 0:
-        average_time = (total_time / number_of_runs)
-    else:
-        average_time = 0.0
- 
-    print('跑', number_of_runs, '次的平均時間為', average_time, '分鐘')
-
-run_timing()
-
 print('------------------------------------------------------------')	#60個
 
 #練習 04 將 16 進位數轉為 10 進位
 
 def hex_to_dec():
-    hexnum = input('輸入十六進位數字: ')
+    hexnum = 'ff'
     decnum = 0
  
     for power, digit in enumerate(reversed(hexnum)):
@@ -224,18 +178,8 @@ menu = {
     '沙拉': 30
     }
 
-def order_meal():
-    total = 0
-    while order := input('請點餐: '):
-        if order in menu:
-            price = menu[order]
-            total += price
-            print(f'{order} {price} 元, 總金額 {total}')
-        else:
-            print(f'抱歉! 我們沒有供應{order}')
-    print(f'您的帳單為 {total} 元')
-
-order_meal()
+price = menu['三明治']
+print(price)
 
 print('------------------------------------------------------------')	#60個
 
@@ -528,9 +472,9 @@ print('------------------------------------------------------------')	#60個
 
 #練習 32 顛倒一個 dict 的鍵與值
 
-def flipped_dict(input_dict):
+def flipped_dict(my_dict):
     return {value: key
-            for key, value in input_dict.items()}
+            for key, value in my_dict.items()}
 
 print(flipped_dict({'a': 1, 'b': 2, 'c': 3}))
 
@@ -580,13 +524,13 @@ def gematria_value(word):
                for char in word.lower()
                if char in GEMATRIA)
 
-def gematria_equal_words(input_word, filename):
-    input_value = gematria_value(input_word)
+def gematria_equal_words(my_word, filename):
+    my_value = gematria_value(my_word)
     with open(filename, 'r', encoding='utf-8') as f:
         return [word
                 for line in f
                 for word in line.lower().split()
-                if input_value == gematria_value(word)]
+                if my_value == gematria_value(word)]
 
 print(gematria_equal_words('programming', r'.\data\book.txt'))
 
@@ -616,13 +560,9 @@ def calculate_tax(amount):
 
 # 匯入 \data 下的模組
 
-​
-
 import sys
 
 sys.path.append(r'.\data')
-
-​
 
 # 主程式
 
@@ -631,8 +571,8 @@ from income_tax import calculate_tax
 print(calculate_tax(77000))
 
 print('------------------------------------------------------------')	#60個
-#練習 37 函式選單模組
 
+#練習 37 函式選單模組
 
 # 以下為 \data\menu.py 檔的內容：
 
@@ -649,17 +589,11 @@ def menu(**options):
 
 # 匯入 \data 下的模組
 
-​
-
 import sys
 
 sys.path.append(r'.\data')
 
-​
-
 # 主程式
-
-
 from menu import menu
 
 def func_a():

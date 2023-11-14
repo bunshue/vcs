@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;
+using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Drawing2D; //for DashStyle
 
 namespace vcs_ColorHistogram
 {
@@ -275,6 +276,7 @@ namespace vcs_ColorHistogram
                     brightness_sp = i;
                 }
             }
+
             richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
             richTextBox1.Text += "亮度範圍 : " + brightness_st.ToString() + " 到 " + brightness_sp.ToString() + "\n";
             richTextBox1.Text += "亮差 : " + (brightness_sp - brightness_st).ToString() + "\n";
@@ -282,7 +284,6 @@ namespace vcs_ColorHistogram
             richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
             richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
             richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
-
 
             //一維陣列用法：
             double[] sd_num = new double[total_points];
@@ -550,7 +551,6 @@ namespace vcs_ColorHistogram
             return sd;
         }
 
-
         public Form1()
         {
             InitializeComponent();
@@ -559,6 +559,8 @@ namespace vcs_ColorHistogram
         private void Form1_Load(object sender, EventArgs e)
         {
             filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
+            tb_filename.Text = filename;
+
             show_item_location();
 
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
@@ -567,11 +569,131 @@ namespace vcs_ColorHistogram
             W = bitmap1.Width;
             H = bitmap1.Height;
 
+            nud_x_st.ValueChanged += new EventHandler(select_crop_area);
+            nud_y_st.ValueChanged += new EventHandler(select_crop_area);
+            nud_w.ValueChanged += new EventHandler(select_crop_area);
+            nud_h.ValueChanged += new EventHandler(select_crop_area);
+
+            rb_selection1.CheckedChanged += new EventHandler(rb_selection_CheckedChanged);
+            rb_selection2.CheckedChanged += new EventHandler(rb_selection_CheckedChanged);
+            rb_selection3.CheckedChanged += new EventHandler(rb_selection_CheckedChanged);
+
             //量測範圍
             measure_x_st = 50;
             measure_y_st = 50;
             measure_w = W - 50 * 2;
             measure_h = H - 50 * 2;
+            nud_x_st.Value = measure_x_st;
+            nud_y_st.Value = measure_y_st;
+            nud_w.Value = measure_w;
+            nud_h.Value = measure_h;
+        }
+
+        private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
+
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
+        }
+
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
+        }
+
+        private void select_crop_area(object sender, EventArgs e)
+        {
+            int x_st = (int)nud_x_st.Value;
+            int y_st = (int)nud_y_st.Value;
+            int w = (int)nud_w.Value;
+            int h = (int)nud_h.Value;
+
+            /*
+            measure_x_st = x_st;
+            measure_y_st = y_st;
+            measure_w = w;
+            measure_h = h;
+            */
+
+            SelectionRectangle = MakeRectangle(x_st, y_st, x_st + w, y_st + h);
+
+            if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
+                return;
+            if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
+                return;
+            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
+                return;
+            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
+                return;
+            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
+                return;
+
+            draw_selectionBox();
+        }
+
+        private void rb_selection_CheckedChanged(object sender, EventArgs e)
+        {
+            //量測範圍
+
+            if (rb_selection1.Checked == true)
+            {
+                richTextBox1.Text += "大\n";
+                measure_x_st = 50;
+                measure_y_st = 50;
+                measure_w = W - measure_x_st * 2;
+                measure_h = H - measure_y_st * 2;
+            }
+            else if (rb_selection2.Checked == true)
+            {
+                richTextBox1.Text += "中\n";
+                measure_w = 200;
+                measure_h = 200;
+                measure_x_st = (int)((W - measure_w) / 2);
+                measure_y_st = (int)((H - measure_h) / 2);
+            }
+            else if (rb_selection3.Checked == true)
+            {
+                richTextBox1.Text += "小\n";
+                measure_w = 100;
+                measure_h = 100;
+                measure_x_st = (int)((W - measure_w) / 2);
+                measure_y_st = (int)((H - measure_h) / 2);
+            }
+            else
+            {
+                richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXX\n";
+
+            }
+            nud_x_st.Value = measure_x_st;
+            nud_y_st.Value = measure_y_st;
+            nud_w.Value = measure_w;
+            nud_h.Value = measure_h;
+        }
+
+        void draw_selectionBox()
+        {
+            filename = tb_filename.Text;
+            richTextBox1.Text += "draw_selectionBox() filename : " + filename + "\n";
+            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            Graphics g_s = Graphics.FromImage(bitmap1);
+            Pen p = new Pen(Color.Red, 3);
+
+            //g_s.DrawRectangle(p, x_st - 4, y_st - 4, w + 8, h + 8);
+
+            Brush brush = new SolidBrush(Color.Red);
+            Pen pen = new Pen(brush, 3);
+            pen.DashStyle = DashStyle.Dash;
+            //g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+
+            g_s.DrawRectangle(pen, SelectionRectangle.X - 4, SelectionRectangle.Y - 4, SelectionRectangle.Width + 8, SelectionRectangle.Height + 8);
+            //g_s.DrawRectangle(pen, x_st - 4, y_st - 4, w + 8, h + 8);
+
+            //g_s.DrawRectangle(pen, 100, 100, 200, 200);
+            g_s.Dispose();
+
+            pictureBox0.Image = bitmap1;
         }
 
         void show_item_location()
@@ -609,7 +731,10 @@ namespace vcs_ColorHistogram
             richTextBox1.BringToFront();
 
             x_st = 20;
+            y_st = -80;
             dx = 100;
+            tb_filename.Size = new Size(800, 50);
+            tb_filename.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 70);
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 20);
             button1.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 20);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 20);
@@ -621,6 +746,8 @@ namespace vcs_ColorHistogram
 
             bt_open_picture.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 20);
             bt_open_picture.BackgroundImage = vcs_ColorHistogram.Properties.Resources.open_folder;
+
+            groupBox_selection.Location = new Point(x_st + dx * 5, y_st + dy * 2 - 20);
 
             //button
             x_st = 20;
@@ -693,6 +820,7 @@ namespace vcs_ColorHistogram
 
         private void button1_Click(object sender, EventArgs e)
         {
+            clear_all_pictures();
             measure_brightness(pictureBox0, pictureBox2, pictureBox3, pictureBox4, pictureBox5);
         }
 
@@ -713,17 +841,23 @@ namespace vcs_ColorHistogram
             rgb_data_b = new int[256];
 
             //量測範圍
+            measure_x_st = (int)nud_x_st.Value;
+            measure_y_st = (int)nud_y_st.Value;
+            measure_w = (int)nud_w.Value;
+            measure_h = (int)nud_h.Value;
             x_st = measure_x_st;
             y_st = measure_y_st;
             w = measure_w;
             h = measure_h;
 
             Bitmap bitmap1 = (Bitmap)pbox_source.Image;
-
             Graphics g_s = Graphics.FromImage(bitmap1);
-            Pen p = new Pen(Color.Red, 3);
 
-            g_s.DrawRectangle(p, x_st - 4, y_st - 4, w + 8, h + 8);
+            Brush brush = new SolidBrush(Color.Red);
+            Pen pen = new Pen(brush, 3);
+            pen.DashStyle = DashStyle.Dash;
+
+            g_s.DrawRectangle(pen, x_st - 4, y_st - 4, w + 8, h + 8);
             pbox_source.Image = bitmap1;
 
             int W = bitmap1.Width;
@@ -755,9 +889,10 @@ namespace vcs_ColorHistogram
                 }
             }
 
+            // 若有 純色 存在, 可能數字會很大, 會讓畫圖效果變差
             //一律忽視最亮和最暗的數值
-            yuv_data_y[0] = 0;
-            yuv_data_y[255] = 0;
+            //yuv_data_y[0] = 0;
+            //yuv_data_y[255] = 0;
 
             richTextBox1.Text += "共量測 " + total_points.ToString() + " 個點\n";
 
@@ -847,16 +982,25 @@ namespace vcs_ColorHistogram
 
             //標出最大值
             richTextBox1.Text += "最多 " + most.ToString() + "\t出現在 " + most_index.ToString() + "\n";
+            int linewidth = 5;
+            if ((most_index < 5) || (most_index > 250))
+                linewidth = 30;
             if (color == Color.Red)
             {
-                g1.DrawString(most.ToString(), f, new SolidBrush(Color.Blue), new PointF(most_index * 2 - 31, 20));
-                p = new Pen(Color.Blue, 3);
+                if (most_index < 220)
+                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Blue), new PointF(most_index * 2 + 15, 20));
+                else
+                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Blue), new PointF(most_index * 2 - 110, 20));
+                p = new Pen(Color.Blue, linewidth);
                 g1.DrawLine(p, most_index * 2, 0, most_index * 2, hh2);
             }
             else
             {
-                g1.DrawString(most.ToString(), f, new SolidBrush(Color.Red), new PointF(most_index * 2 - 31, 20));
-                p = new Pen(Color.Red, 3);
+                if (most_index < 220)
+                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Red), new PointF(most_index * 2 + 15, 20));
+                else
+                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Red), new PointF(most_index * 2 - 110, 20));
+                p = new Pen(Color.Red, linewidth);
                 g1.DrawLine(p, most_index * 2, 0, most_index * 2, hh2);
             }
 
@@ -928,11 +1072,7 @@ namespace vcs_ColorHistogram
 
         private void button7_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = null;
-            pictureBox2.Image = null;
-            pictureBox3.Image = null;
-            pictureBox4.Image = null;
-            pictureBox5.Image = null;
+            clear_all_pictures();
         }
 
         private void bt_open_picture_Click(object sender, EventArgs e)
@@ -943,10 +1083,12 @@ namespace vcs_ColorHistogram
             openFileDialog1.Filter = "jpg (*.jpg)|*.jpg|bmp (*.bmp)|*.bmp|png (*.png)|*.png";	//限定檔案格式
             openFileDialog1.FilterIndex = 2;
             //openFileDialog1.RestoreDirectory = false;
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files6";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                clear_all_pictures();
                 richTextBox1.Text += "4 get filename : " + openFileDialog1.FileName + "\n";
+                tb_filename.Text = openFileDialog1.FileName;
 
                 bitmap1 = (Bitmap)Image.FromFile(openFileDialog1.FileName);	//Image.FromFile出來的是Image格式
                 pictureBox0.Image = bitmap1;
@@ -960,12 +1102,32 @@ namespace vcs_ColorHistogram
                 measure_w = W - 50 * 2;
                 measure_h = H - 50 * 2;
 
+                nud_x_st.Value = measure_x_st;
+                nud_y_st.Value = measure_y_st;
+                nud_w.Value = measure_w;
+                nud_h.Value = measure_h;
+
+                rb_selection1.Checked = true;
+                rb_selection2.Checked = false;
+                rb_selection3.Checked = false;
+
+                select_crop_area(sender, e);
+
                 richTextBox1.Text += "開啟圖片完成\n";
             }
             else
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
+        }
+
+        void clear_all_pictures()
+        {
+            pictureBox1.Image = null;
+            pictureBox2.Image = null;
+            pictureBox3.Image = null;
+            pictureBox4.Image = null;
+            pictureBox5.Image = null;
         }
     }
 }

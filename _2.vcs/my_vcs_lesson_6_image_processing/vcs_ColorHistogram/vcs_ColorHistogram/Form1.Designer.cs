@@ -45,12 +45,30 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.groupBox_selection = new System.Windows.Forms.GroupBox();
+            this.rb_selection2 = new System.Windows.Forms.RadioButton();
+            this.rb_selection1 = new System.Windows.Forms.RadioButton();
+            this.nud_h = new System.Windows.Forms.NumericUpDown();
+            this.lb_x_st = new System.Windows.Forms.Label();
+            this.nud_w = new System.Windows.Forms.NumericUpDown();
+            this.lb_h = new System.Windows.Forms.Label();
+            this.nud_y_st = new System.Windows.Forms.NumericUpDown();
+            this.nud_x_st = new System.Windows.Forms.NumericUpDown();
+            this.lb_y_st = new System.Windows.Forms.Label();
+            this.lb_w = new System.Windows.Forms.Label();
+            this.tb_filename = new System.Windows.Forms.TextBox();
+            this.rb_selection3 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            this.groupBox_selection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_w)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox3
@@ -212,11 +230,172 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // groupBox_selection
+            // 
+            this.groupBox_selection.Controls.Add(this.rb_selection3);
+            this.groupBox_selection.Controls.Add(this.rb_selection2);
+            this.groupBox_selection.Controls.Add(this.rb_selection1);
+            this.groupBox_selection.Controls.Add(this.nud_h);
+            this.groupBox_selection.Controls.Add(this.lb_x_st);
+            this.groupBox_selection.Controls.Add(this.nud_w);
+            this.groupBox_selection.Controls.Add(this.lb_h);
+            this.groupBox_selection.Controls.Add(this.nud_y_st);
+            this.groupBox_selection.Controls.Add(this.nud_x_st);
+            this.groupBox_selection.Controls.Add(this.lb_y_st);
+            this.groupBox_selection.Controls.Add(this.lb_w);
+            this.groupBox_selection.Location = new System.Drawing.Point(571, 156);
+            this.groupBox_selection.Name = "groupBox_selection";
+            this.groupBox_selection.Size = new System.Drawing.Size(300, 200);
+            this.groupBox_selection.TabIndex = 254;
+            this.groupBox_selection.TabStop = false;
+            this.groupBox_selection.Text = "選取區域";
+            // 
+            // rb_selection2
+            // 
+            this.rb_selection2.AutoSize = true;
+            this.rb_selection2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_selection2.Location = new System.Drawing.Point(179, 49);
+            this.rb_selection2.Name = "rb_selection2";
+            this.rb_selection2.Size = new System.Drawing.Size(42, 20);
+            this.rb_selection2.TabIndex = 21;
+            this.rb_selection2.Text = "中";
+            this.rb_selection2.UseVisualStyleBackColor = true;
+            // 
+            // rb_selection1
+            // 
+            this.rb_selection1.AutoSize = true;
+            this.rb_selection1.Checked = true;
+            this.rb_selection1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_selection1.Location = new System.Drawing.Point(179, 27);
+            this.rb_selection1.Name = "rb_selection1";
+            this.rb_selection1.Size = new System.Drawing.Size(42, 20);
+            this.rb_selection1.TabIndex = 20;
+            this.rb_selection1.TabStop = true;
+            this.rb_selection1.Text = "大";
+            this.rb_selection1.UseVisualStyleBackColor = true;
+            // 
+            // nud_h
+            // 
+            this.nud_h.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nud_h.Location = new System.Drawing.Point(83, 152);
+            this.nud_h.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nud_h.Name = "nud_h";
+            this.nud_h.Size = new System.Drawing.Size(74, 33);
+            this.nud_h.TabIndex = 16;
+            this.nud_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_x_st
+            // 
+            this.lb_x_st.AutoSize = true;
+            this.lb_x_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_x_st.Location = new System.Drawing.Point(30, 27);
+            this.lb_x_st.Name = "lb_x_st";
+            this.lb_x_st.Size = new System.Drawing.Size(47, 24);
+            this.lb_x_st.TabIndex = 6;
+            this.lb_x_st.Text = "x_st";
+            // 
+            // nud_w
+            // 
+            this.nud_w.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nud_w.Location = new System.Drawing.Point(83, 110);
+            this.nud_w.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nud_w.Name = "nud_w";
+            this.nud_w.Size = new System.Drawing.Size(74, 33);
+            this.nud_w.TabIndex = 15;
+            this.nud_w.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_h
+            // 
+            this.lb_h.AutoSize = true;
+            this.lb_h.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_h.Location = new System.Drawing.Point(42, 153);
+            this.lb_h.Name = "lb_h";
+            this.lb_h.Size = new System.Drawing.Size(21, 24);
+            this.lb_h.TabIndex = 12;
+            this.lb_h.Text = "h";
+            // 
+            // nud_y_st
+            // 
+            this.nud_y_st.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nud_y_st.Location = new System.Drawing.Point(83, 69);
+            this.nud_y_st.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nud_y_st.Name = "nud_y_st";
+            this.nud_y_st.Size = new System.Drawing.Size(74, 33);
+            this.nud_y_st.TabIndex = 14;
+            this.nud_y_st.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // nud_x_st
+            // 
+            this.nud_x_st.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.nud_x_st.Location = new System.Drawing.Point(83, 26);
+            this.nud_x_st.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nud_x_st.Name = "nud_x_st";
+            this.nud_x_st.Size = new System.Drawing.Size(74, 33);
+            this.nud_x_st.TabIndex = 13;
+            this.nud_x_st.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_y_st
+            // 
+            this.lb_y_st.AutoSize = true;
+            this.lb_y_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_y_st.Location = new System.Drawing.Point(30, 69);
+            this.lb_y_st.Name = "lb_y_st";
+            this.lb_y_st.Size = new System.Drawing.Size(47, 24);
+            this.lb_y_st.TabIndex = 8;
+            this.lb_y_st.Text = "y_st";
+            // 
+            // lb_w
+            // 
+            this.lb_w.AutoSize = true;
+            this.lb_w.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_w.Location = new System.Drawing.Point(42, 111);
+            this.lb_w.Name = "lb_w";
+            this.lb_w.Size = new System.Drawing.Size(26, 24);
+            this.lb_w.TabIndex = 10;
+            this.lb_w.Text = "w";
+            // 
+            // tb_filename
+            // 
+            this.tb_filename.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_filename.Location = new System.Drawing.Point(13, 414);
+            this.tb_filename.Name = "tb_filename";
+            this.tb_filename.Size = new System.Drawing.Size(59, 30);
+            this.tb_filename.TabIndex = 255;
+            // 
+            // rb_selection3
+            // 
+            this.rb_selection3.AutoSize = true;
+            this.rb_selection3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_selection3.Location = new System.Drawing.Point(179, 75);
+            this.rb_selection3.Name = "rb_selection3";
+            this.rb_selection3.Size = new System.Drawing.Size(42, 20);
+            this.rb_selection3.TabIndex = 22;
+            this.rb_selection3.Text = "小";
+            this.rb_selection3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1007, 617);
+            this.Controls.Add(this.tb_filename);
+            this.Controls.Add(this.groupBox_selection);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -243,7 +422,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            this.groupBox_selection.ResumeLayout(false);
+            this.groupBox_selection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_h)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_w)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -266,6 +452,19 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.GroupBox groupBox_selection;
+        private System.Windows.Forms.RadioButton rb_selection2;
+        private System.Windows.Forms.RadioButton rb_selection1;
+        private System.Windows.Forms.NumericUpDown nud_h;
+        private System.Windows.Forms.Label lb_x_st;
+        private System.Windows.Forms.NumericUpDown nud_w;
+        private System.Windows.Forms.Label lb_h;
+        private System.Windows.Forms.NumericUpDown nud_y_st;
+        private System.Windows.Forms.NumericUpDown nud_x_st;
+        private System.Windows.Forms.Label lb_y_st;
+        private System.Windows.Forms.Label lb_w;
+        private System.Windows.Forms.TextBox tb_filename;
+        private System.Windows.Forms.RadioButton rb_selection3;
     }
 }
 
