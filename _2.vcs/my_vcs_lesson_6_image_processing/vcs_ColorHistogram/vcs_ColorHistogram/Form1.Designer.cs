@@ -46,6 +46,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox_selection = new System.Windows.Forms.GroupBox();
+            this.rb_selection3 = new System.Windows.Forms.RadioButton();
             this.rb_selection2 = new System.Windows.Forms.RadioButton();
             this.rb_selection1 = new System.Windows.Forms.RadioButton();
             this.nud_h = new System.Windows.Forms.NumericUpDown();
@@ -57,7 +58,6 @@
             this.lb_y_st = new System.Windows.Forms.Label();
             this.lb_w = new System.Windows.Forms.Label();
             this.tb_filename = new System.Windows.Forms.TextBox();
-            this.rb_selection3 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -114,7 +114,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 40);
             this.button1.TabIndex = 28;
-            this.button1.Text = "統計";
+            this.button1.Text = "統計1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -126,6 +126,7 @@
             this.bt_clear.TabIndex = 30;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click_1);
             // 
             // richTextBox1
             // 
@@ -208,6 +209,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(80, 40);
             this.button5.TabIndex = 251;
+            this.button5.Text = "統計2";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -249,6 +251,17 @@
             this.groupBox_selection.TabIndex = 254;
             this.groupBox_selection.TabStop = false;
             this.groupBox_selection.Text = "選取區域";
+            // 
+            // rb_selection3
+            // 
+            this.rb_selection3.AutoSize = true;
+            this.rb_selection3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_selection3.Location = new System.Drawing.Point(179, 75);
+            this.rb_selection3.Name = "rb_selection3";
+            this.rb_selection3.Size = new System.Drawing.Size(42, 20);
+            this.rb_selection3.TabIndex = 22;
+            this.rb_selection3.Text = "小";
+            this.rb_selection3.UseVisualStyleBackColor = true;
             // 
             // rb_selection2
             // 
@@ -377,17 +390,6 @@
             this.tb_filename.Name = "tb_filename";
             this.tb_filename.Size = new System.Drawing.Size(59, 30);
             this.tb_filename.TabIndex = 255;
-            // 
-            // rb_selection3
-            // 
-            this.rb_selection3.AutoSize = true;
-            this.rb_selection3.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_selection3.Location = new System.Drawing.Point(179, 75);
-            this.rb_selection3.Name = "rb_selection3";
-            this.rb_selection3.Size = new System.Drawing.Size(42, 20);
-            this.rb_selection3.TabIndex = 22;
-            this.rb_selection3.Text = "小";
-            this.rb_selection3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
