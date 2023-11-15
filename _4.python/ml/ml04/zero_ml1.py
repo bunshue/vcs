@@ -1,7 +1,122 @@
 import sys
-
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+from sklearn.datasets import load_iris
+
+data = load_iris()
+X = pd.DataFrame(data.data, columns = data.feature_names)
+y = pd.DataFrame(data.target, columns = ["Species"])
+df = pd.concat([X, y], axis = 1)
+
+print(df.head())
+
+print('------------------------------------------------------------')	#60個
+
+#學習分類
+from sklearn.datasets import load_breast_cancer
+data = load_breast_cancer()
+
+X = data.data
+y = data.target
+
+X = X[:, :10]
+
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+
+model.fit(X, y)
+
+y_pred = model.predict(X)
+
+from sklearn.metrics import accuracy_score
+accuracy_score(y, y_pred)
+
+print('------------------------------------------------------------')	#60個
+
+from sklearn.datasets import load_wine
+data = load_wine()
+
+X = data.data[:, [0, 9]]
+
+from sklearn.cluster import KMeans
+n_clusters = 3
+model = KMeans(n_clusters = n_clusters)
+
+pred = model.fit_predict(X)
+
+fig, ax = plt.subplots()
+ax.scatter(X[pred == 0, 0], X[pred == 0, 1], color = 'red', marker = 's', label = 'Label1')
+ax.scatter(X[pred == 1, 0], X[pred == 1, 1], color = 'blue', marker = 's', label = 'Label2')
+ax.scatter(X[pred == 2, 0], X[pred == 2, 1], color = 'green', marker = 's', label = 'Label3')
+ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], s = 200, color = 'yellow', marker = "*", label = "center")
+ax.legend()
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+from sklearn.datasets import load_wine
+
+data = load_wine()
+
+x3 = data.data[:, [0]]
+y3 = data.data[:, [9]]
+
+plt.scatter(x3, y3)
+plt.show()
+
+plt.hist(y3, bins = 5)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+from sklearn.datasets import load_wine
+
+data = load_wine()
+df_X = pd.DataFrame(data.data, columns = data.feature_names)
+
+print(df_X.head())
+
+df_y = pd.DataFrame(data.target, columns = ["kind(target)"])
+
+print(df_y.head())
+
+df = pd.concat([df_X, df_y], axis = 1)
+
+print(df.head())
+
+plt.hist(df.loc[:, "alcohol"])
+
+plt.show()
+
+plt.boxplot(df.loc[:, "alcohol"])
+
+plt.show()
+
+print(df.corr())
+print(df.describe())
+
+print('------------------------------------------------------------')	#60個
+
+from pandas.plotting import scatter_matrix
+_ = scatter_matrix(df, figsize = (15, 15))
+
+plt.show()
+
+_ = scatter_matrix(df.iloc[:, [0, 9, -1]])
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -18,11 +133,9 @@ print(y_pred) # x=0, x=1に対する予測結果
 
 print('------------------------------------------------------------')	#60個
 
-import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
-
 
 train_size = 20
 test_size = 12
@@ -40,12 +153,9 @@ test_pred_y = model.predict(test_poly_X)
 print(mean_squared_error(train_pred_y, train_y))
 print(mean_squared_error(test_pred_y, test_y))
 
-
 print('------------------------------------------------------------')	#60個
 
-import numpy as np
 from sklearn.linear_model import LogisticRegression
-
 
 X_train = np.r_[np.random.normal(3, 1, size=50), np.random.normal(-1, 1, size=50)].reshape((100, -1))
 y_train = np.r_[np.ones(50), np.zeros(50)]
@@ -53,14 +163,12 @@ model = LogisticRegression()
 model.fit(X_train, y_train)
 print(model.predict_proba([[0], [1], [2]])[:, 1])
 
-
 print('------------------------------------------------------------')	#60個
 
 from sklearn.svm import LinearSVC
 from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-
 
 # データ生成
 centers = [(-1, -0.125), (0.5, 0.5)]
@@ -77,7 +185,6 @@ from sklearn.svm import SVC
 from sklearn.datasets import make_gaussian_quantiles
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-
 
 # データ生成
 X, y = make_gaussian_quantiles(n_features=2, n_classes=2, n_samples=300)
@@ -103,14 +210,12 @@ model = MultinomialNB()
 model.fit(X_train, y_train) # 学習
 print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])) # 評価
 
-
 print('------------------------------------------------------------')	#60個
 
 from sklearn.datasets import load_wine
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-
 
 # データ読み込み
 data = load_wine()
@@ -126,7 +231,6 @@ from sklearn.datasets import load_digits
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-
 
 # データ読み込み
 data = load_digits()
@@ -146,7 +250,6 @@ from sklearn.datasets import make_moons
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-
 # データ生成
 X, y = make_moons(noise=0.3)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
@@ -159,5 +262,6 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
 
 

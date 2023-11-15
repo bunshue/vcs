@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import numpy               
 
 from keras.datasets import cifar10
@@ -15,7 +13,13 @@ classes = 10
 epochs = 20
 
 (X_train, Y_train), (X_test, Y_test) = cifar10.load_data()
-
+"""
+下載
+https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+將檔案改名成
+cifar-10-batches-py.tar.gz
+放在C:/Users/070601/.keras/datasets/之下
+"""
 
 Y_train = np_utils.to_categorical(Y_train, classes)     
 Y_test = np_utils.to_categorical(Y_test, classes)
@@ -42,7 +46,6 @@ model.add(Activation('relu'))
 model.add(Dropout(0.5))      
 model.add(Dense(classes)) 
 model.add(Activation('softmax'))
-     
 
 model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adadelta')
 

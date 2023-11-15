@@ -1,7 +1,14 @@
 import sys
-
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
@@ -44,13 +51,11 @@ print('再現率')
 from sklearn.metrics import recall_score
 recall_score(y, y_pred)
 
-
 print('------------------------------------------------------------')	#60個
 
 print('F値')
 from sklearn.metrics import f1_score
 f1_score(y, y_pred)
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -58,7 +63,7 @@ print('予測確率')
 model_lor.predict_proba(X)
 
 print('------------------------------------------------------------')	#60個
-import numpy as np
+
 y_pred2 = (model_lor.predict_proba(X)[:, 1]>0.1).astype(np.int)
 print(confusion_matrix(y, y_pred2))
 
@@ -72,11 +77,8 @@ from sklearn.metrics import roc_curve
 probas = model_lor.predict_proba(X)
 fpr, tpr, thresholds = roc_curve(y, probas[:, 1])
 
-
-
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
 
 fig, ax = plt.subplots()
@@ -121,7 +123,6 @@ y_svr_pred = model_svr_linear.predict(X)
 print(y_svr_pred)
 
 """
-import matplotlib.pyplot as plt
 fig, ax = plt.subplots()
 ax.scatter(X, y, color='pink', marker='s', label='data set')
 ax.plot(X, y_pred, color='blue', label='regression curve')
@@ -229,10 +230,8 @@ grid_search = GridSearchCV(model_rfc_2, param_grid, cv=cv, scoring='f1')
 
 print('------------------------------------------------------------')	#60個
 
-
 print('機械学習モデルへの適用')
 
-import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.svm import LinearSVC
 from sklearn.datasets import fetch_20newsgroups

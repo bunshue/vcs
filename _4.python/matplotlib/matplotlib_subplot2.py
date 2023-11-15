@@ -117,7 +117,7 @@ print('一次畫一大堆範例... 久')
 #1. 讀入 MNSIT 數據集
 from keras.datasets import mnist
 
-#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下6行
+#(x_train, y_train), (x_test, y_test) = mnist.load_data() 改成以下5行
 path = 'C:/_git/vcs/_4.python/ml/mnist.npz'
 mnist = np.load(path)  
 x_train, y_train = mnist['x_train'], mnist['y_train']  

@@ -78,10 +78,6 @@ namespace vcs_ColorHistogram
 
         //int[] yuv_data_y = new int[256];
 
-        //int max = 255;
-        //int min = 0;
-
-
         public struct RGB
         {
             private byte _r;
@@ -987,32 +983,48 @@ namespace vcs_ColorHistogram
             p = new Pen(color, 3);
             g1.DrawLine(p, min * 2, y_offset + hh2, max * 2, y_offset + 0);
 
-            f = new Font("標楷體", 20);
+            //richTextBox1.Text += "max = " + max.ToString() + "\n";
+            //richTextBox1.Text += "min = " + min.ToString() + "\n";
+
+            f = new Font("標楷體", 16);
+
+            int draw_max = max;
+            int draw_min = min;
+            int draw_most_index = most_index;
+            if ((message == "U") || (message == "V"))
+            {
+                draw_max = max - 128;
+                draw_min = min - 128;
+                draw_most_index = most_index - 128;
+
+                //多畫一個0
+                g1.DrawLine(p, 128 * 2, y_offset + hh2 + 15, 128 * 2, y_offset + hh2 - 15);
+                g1.DrawString("0", f, new SolidBrush(Color.Blue), new PointF(128 * 2, y_offset + hh2));
+            }
 
             if ((min >= 0) && (min <= 103))
             {
-                g1.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, y_offset + hh2));
+                g1.DrawString(draw_min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, y_offset + hh2));
             }
             else if (min < 0)
             {
-                g1.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, y_offset + hh2));
+                g1.DrawString(draw_min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, y_offset + hh2));
             }
             else
             {
-                g1.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, y_offset + hh2));
+                g1.DrawString(draw_min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, y_offset + hh2));
             }
-
             if ((max <= 255) && (max >= 152))
             {
-                g1.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, y_offset + hh2));
+                g1.DrawString(draw_max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, y_offset + hh2));
             }
             else if (max > 255)
             {
-                g1.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, y_offset + hh2));
+                g1.DrawString(draw_max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, y_offset + hh2));
             }
             else
             {
-                g1.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, y_offset + hh2));
+                g1.DrawString(draw_max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, y_offset + hh2));
             }
 
             //標出最大值
@@ -1028,6 +1040,8 @@ namespace vcs_ColorHistogram
                     g1.DrawString(most.ToString(), f, new SolidBrush(Color.Blue), new PointF(most_index * 2 - 110, y_offset + 20));
                 p = new Pen(Color.Blue, linewidth);
                 g1.DrawLine(p, most_index * 2, y_offset + 0, most_index * 2, y_offset + hh2);
+
+                g1.DrawString(draw_most_index.ToString(), f, new SolidBrush(Color.Blue), new PointF(most_index * 2 - 16, y_offset + hh2 + 16));
             }
             else
             {
@@ -1037,22 +1051,18 @@ namespace vcs_ColorHistogram
                     g1.DrawString(most.ToString(), f, new SolidBrush(Color.Red), new PointF(most_index * 2 - 110, y_offset + 20));
                 p = new Pen(Color.Red, linewidth);
                 g1.DrawLine(p, most_index * 2, y_offset + 0, most_index * 2, y_offset + hh2);
+
+                g1.DrawString(draw_most_index.ToString(), f, new SolidBrush(Color.Red), new PointF(most_index * 2 - 16, y_offset + hh2 + 16));
             }
 
-            g1.DrawString(message, f, new SolidBrush(Color.Red), new PointF(10, y_offset+40));
+            g1.DrawString(message, f, new SolidBrush(Color.Red), new PointF(10, y_offset + 40));
 
+            double offset = 0.0;
             if ((message == "U") || (message == "V"))
             {
-
-                
-
+                offset = -128.0;
             }
-            g1.DrawString(((double)total_values / total_points).ToString("F2"), f, new SolidBrush(Color.Red), new PointF(10, y_offset + 70));
-
-
-
-            //richTextBox1.Text += "平均 : " + ((double)total_values / total_points).ToString("F2") + "\n";
-
+            g1.DrawString((((double)total_values / total_points) + offset).ToString("F2"), f, new SolidBrush(Color.Red), new PointF(10, y_offset + 70));
 
             return bitmap1;
         }
@@ -1139,7 +1149,7 @@ namespace vcs_ColorHistogram
         {
             int ww = 512;
             int hh1 = 900;
-            int hh2 = 256;
+            //int hh2 = 256;
             bitmap1 = new Bitmap(ww, hh1);
 
             Color color = Color.Red;
@@ -1153,7 +1163,6 @@ namespace vcs_ColorHistogram
             color = Color.Blue;
             color_data = yuv_data_v;
             pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 600, "V");
-
         }
 
         private void button6_Click(object sender, EventArgs e)

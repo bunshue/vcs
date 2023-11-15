@@ -1,14 +1,19 @@
 import sys
-
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-
 from sklearn.decomposition import PCA
 from sklearn.datasets import load_iris
-
 
 data = load_iris()
 n_components = 2 # 削減後の次元を2に設定
@@ -18,9 +23,7 @@ print(model.transform(data.data)) # 変換したデータ
 
 print('------------------------------------------------------------')	#60個
 
-
 from sklearn.decomposition import TruncatedSVD
-
 
 data = [[1, 0, 0, 0],
 [1, 0, 0, 0],
@@ -37,13 +40,11 @@ print(model.transform(data)) # 変換したデータ
 print(model.explained_variance_ratio_) # 寄与率 
 print(sum(model.explained_variance_ratio_)) # 累積寄与率
 
-
 print('------------------------------------------------------------')	#60個
 
 from sklearn.decomposition import NMF
 #from sklearn.datasets.samples_generator import make_blobs old
 from sklearn.datasets import make_blobs
-
 
 centers = [[5, 10, 5], [10, 4, 10], [6, 8, 8]]
 X, _ = make_blobs(centers=centers) # centersを中心としたデータを生成
@@ -56,7 +57,6 @@ print(W)
 print(H)
 
 print('------------------------------------------------------------')	#60個
-
 
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import CountVectorizer
@@ -76,13 +76,10 @@ model.fit(tf)
 print(model.components_) # 各トピックが持つ単語分布 
 print(model.transform(tf)) # トピックで表現された文書
 
-
 print('------------------------------------------------------------')	#60個
-
 
 from sklearn.cluster import KMeans
 from sklearn.datasets import load_iris
-
 
 data = load_iris()
 n_clusters = 3 # クラスタ数を3に設定
@@ -95,7 +92,6 @@ print('------------------------------------------------------------')	#60個
 
 from sklearn.datasets import load_iris
 from sklearn.mixture import GaussianMixture
-
 
 data = load_iris()
 n_components = 3 # ガウス分布の数
@@ -126,7 +122,6 @@ print('------------------------------------------------------------')	#60個
 
 from sklearn.manifold import TSNE
 from sklearn.datasets import load_digits
-
 
 data = load_digits()
 n_components = 2 # 削減後の次元を2に設定
