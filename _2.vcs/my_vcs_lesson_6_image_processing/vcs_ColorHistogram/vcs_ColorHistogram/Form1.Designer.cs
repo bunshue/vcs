@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -58,6 +59,7 @@
             this.lb_y_st = new System.Windows.Forms.Label();
             this.lb_w = new System.Windows.Forms.Label();
             this.tb_filename = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -219,6 +221,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(80, 40);
             this.button6.TabIndex = 252;
+            this.button6.Text = "統計3 3秒一次";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -391,6 +394,11 @@
             this.tb_filename.Size = new System.Drawing.Size(59, 30);
             this.tb_filename.TabIndex = 255;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -417,6 +425,7 @@
             this.Controls.Add(this.pictureBox0);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -467,6 +476,7 @@
         private System.Windows.Forms.Label lb_w;
         private System.Windows.Forms.TextBox tb_filename;
         private System.Windows.Forms.RadioButton rb_selection3;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -18,7 +18,6 @@ print(sklearn)
 
 print('------------------------------------------------------------')	#60個
 
-
 from sklearn.linear_model import LinearRegression
 lm = LinearRegression()
 X = [[1], [2], [3], [4], [5]]
@@ -44,9 +43,7 @@ def similarity_tfidf(s1, s2):
 
     return np.dot(vectors[0], vectors[1])/(norm(vectors[0]) * norm(vectors[1]))
 
-
 string1 = '漢堡蛋'
-
 string2 = '我要一份漢堡蛋'
 #string2 = '請給我來一份漢堡蛋'
 #string2 = '你是一個漢堡蛋嗎?'
@@ -72,7 +69,6 @@ sns.pairplot(iris, hue='species', height=3);
 print(iris)
 print('cccc')
 
-
 # seaborn
 
 import numpy as np
@@ -94,3 +90,4 @@ tips = sns.load_dataset("tips")
 print(tips)
 
 
+print('作業完成')

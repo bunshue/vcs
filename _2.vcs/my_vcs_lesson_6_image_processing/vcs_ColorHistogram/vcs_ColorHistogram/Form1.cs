@@ -10,10 +10,40 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for DashStyle
 
+using System.Diagnostics;       //for StopWatch
+using System.Drawing.Imaging;   //for ImageFormat
+
+using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
+using AForge.Video.DirectShow;
+
+//使用Aforge的VideoSourcePlayer, 在要再多添加4個.dll
+
+/*
+Aforge.Net 安裝路徑設定
+Solution Explorer(方案總管) => References(參考)(右鍵) => Add Reference(加入參考) => AForge.Net的Release資料夾
+加入AForge.Video.dll、AForge.Video.DirectShow.dll
+*/
+
 namespace vcs_ColorHistogram
 {
     public partial class Form1 : Form
     {
+        bool flag_webcam_mode = true;
+
+        //參考
+        //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
+        //https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
+
+        //AForge下載鏈結
+        //http://www.aforgenet.com/framework/downloads.html
+
+        public FilterInfoCollection USBWebcams = null;
+        public VideoCaptureDevice Cam = null;
+
+        Stopwatch stopwatch;
+
+        private const int BORDER = 0;
+
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\ims_image_20230921_155302.bmp";
         string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
         //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
@@ -488,7 +518,6 @@ namespace vcs_ColorHistogram
             g4.DrawRectangle(Pens.Red, 800, hh2 - brightness_max_mod, width, brightness_max_mod - brightness_min_mod);
             g4.DrawLine(Pens.Red, 800, hh2 - brightness_avg, 800 + width, hh2 - brightness_avg);
 
-
             richTextBox1.Text += "eeeee2222\n";
 
             pictureBox2.Image = bmp4;
@@ -583,6 +612,120 @@ namespace vcs_ColorHistogram
             nud_y_st.Value = measure_y_st;
             nud_w.Value = measure_w;
             nud_h.Value = measure_h;
+
+            if (flag_webcam_mode == true)
+            {
+                USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+                if (USBWebcams.Count > 0)  // The quantity of WebCam must be more than 0.
+                {
+                    Cam = new VideoCaptureDevice(USBWebcams[0].MonikerString);  //實例化對象
+
+                    Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                    Cam.Start();   // WebCam starts capturing images.
+
+                    //以下為WebCam訊息與調整視窗大小
+                    Cam.VideoResolution = Cam.VideoCapabilities[0];
+                    string webcam_name = string.Empty;
+                    int ww;
+                    int hh;
+                    ww = Cam.VideoCapabilities[0].FrameSize.Width;
+                    hh = Cam.VideoCapabilities[0].FrameSize.Height;
+                    webcam_name = USBWebcams[0].Name + " " + Cam.VideoCapabilities[0].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[0].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[0].AverageFrameRate.ToString() + " Hz";
+                    this.Text = webcam_name;
+
+                    //有抓到WebCam, 重新設定pictureBox和vsp的大小和位置
+                    pictureBox0.Size = new Size(ww, hh);
+                    pictureBox0.Location = new Point(BORDER, BORDER);
+
+                    stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                }
+                else
+                {
+                    this.Text = "無影像裝置";
+                }
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
+        }
+
+        public Bitmap bm = null;
+        //自定義函數, 捕獲每一幀圖像並顯示
+        Graphics g;
+
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                bm = (Bitmap)eventArgs.Frame.Clone();
+                //bm.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e06 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return;
+            }
+
+            try
+            {
+                g = Graphics.FromImage(bm);
+
+                Pen p = new Pen(Color.Red, 3);
+                Brush brush = new SolidBrush(Color.Red);
+                Pen pen = new Pen(brush, 3);
+                pen.DashStyle = DashStyle.Dash;
+
+                g.DrawRectangle(pen, SelectionRectangle.X - 4, SelectionRectangle.Y - 4, SelectionRectangle.Width + 8, SelectionRectangle.Height + 8);
+
+                g.Dispose();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e07 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return;
+            }
+
+            pictureBox0.Image = bm;
+
+            GC.Collect();       //回收資源
+        }
+
+        void Start_Webcam()
+        {
+            if (Cam != null)
+            {
+                Cam.Start();   // WebCam starts capturing images.
+            }
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                //show_main_message("停止", S_OK, 20);
+                Cam.Stop();  // WebCam stops capturing images.
+                Cam.SignalToStop();
+                Cam.WaitForStop();
+                while (Cam.IsRunning)
+                {
+                }
+                Cam = null;
+            }
         }
 
         private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
@@ -625,7 +768,10 @@ namespace vcs_ColorHistogram
             if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
                 return;
 
-            draw_selectionBox();
+            if (flag_webcam_mode == false)
+            {
+                draw_selectionBox();
+            }
         }
 
         private void rb_selection_CheckedChanged(object sender, EventArgs e)
@@ -1167,20 +1313,16 @@ namespace vcs_ColorHistogram
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int i;
-            richTextBox1.Text += "UUUU\n";
-            for (i = 0; i < 256; i++)
+            if (timer1.Enabled == false)
             {
-                richTextBox1.Text += yuv_data_u[i].ToString() + " ";
+                timer1.Enabled = true;
+                button6.BackColor = Color.Pink;
             }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "VVVV\n";
-            for (i = 0; i < 256; i++)
+            else
             {
-                richTextBox1.Text += yuv_data_v[i].ToString() + " ";
+                timer1.Enabled = false;
+                button6.BackColor = SystemColors.ControlLight;
             }
-            richTextBox1.Text += "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1190,6 +1332,7 @@ namespace vcs_ColorHistogram
 
         private void bt_open_picture_Click(object sender, EventArgs e)
         {
+            Stop_Webcam();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "開啟圖片";
             openFileDialog1.FileName = "";
@@ -1231,6 +1374,7 @@ namespace vcs_ColorHistogram
             else
             {
                 richTextBox1.Text += "未選取檔案\n";
+                Start_Webcam();
             }
         }
 
@@ -1246,6 +1390,12 @@ namespace vcs_ColorHistogram
         private void bt_clear_Click_1(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "A ";
+            button5_Click(sender, e);
         }
     }
 }
