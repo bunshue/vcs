@@ -1,0 +1,34 @@
+<aiml version="1.0.1" encoding="UTF-8">
+
+    <!-- start-->
+    <category>
+      <pattern>I LIKE *</pattern>
+      <template>
+         I too like <star/>.
+      </template>
+    </category>
+   
+    <category>
+      <pattern>DO YOU LIKE * OR *</pattern>
+      <template>
+         I like <star index = "1"/> better than <star index = "2"/>.
+      </template>
+    </category>
+
+    <category>
+      <pattern>I AM *</pattern>
+      <template>
+         Hello <set name = "username"> <star/>! </set>
+      </template>  
+    </category>  
+   
+    <category>
+      <pattern>GOOD NIGHT</pattern>
+      <template>
+         Hi <get name = "username"/> !
+      </template>  
+    </category>  
+ 
+
+    
+</aiml>

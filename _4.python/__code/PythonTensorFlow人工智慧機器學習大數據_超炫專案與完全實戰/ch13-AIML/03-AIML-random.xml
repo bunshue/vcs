@@ -1,0 +1,12 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <category>
+        <pattern>WHAT DO YOU WANT TO EAT</pattern>
+        <template>
+            <random>
+                <li>Pizza.</li>
+                <li>Apple.</li>
+                <li>Noodle.</li>
+            </random>
+        </template>
+    </category>
+</aiml>

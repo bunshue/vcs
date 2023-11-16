@@ -11,60 +11,25 @@ import random
 
 print('------------------------------------------------------------')	#60個
 
-#8-1 載入外部檔案並做資料整理
-#8-1-1 使用 Pandas 讀取 CSV 檔
-
-"""
-
-抓資料fail
-
 import pandas as pd
-
-url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
-
-df = pd.read_csv(url, header = None)
-
-df.columns = ['sepal length', 'sepal width', 'petal length', 'petal width', 'class']
-
-print(df)       
-
-     sepal length  sepal width  petal length  petal width           class
-
-0             5.1          3.5           1.4          0.2     Iris-setosa
-
-1             4.9          3.0           1.4          0.2     Iris-setosa
-
-2             4.7          3.2           1.3          0.2     Iris-setosa
-
-3             4.6          3.1           1.5          0.2     Iris-setosa
-
-4             5.0          3.6           1.4          0.2     Iris-setosa
-
-..            ...          ...           ...          ...             ...
-
-145           6.7          3.0           5.2          2.3  Iris-virginica
-
-146           6.3          2.5           5.0          1.9  Iris-virginica
-
-147           6.5          3.0           5.2          2.0  Iris-virginica
-
-148           6.2          3.4           5.4          2.3  Iris-virginica
-
-149           5.9          3.0           5.1          1.8  Iris-virginica
-
-
-
-[150 rows x 5 columns]
-
-
-"""
-
+import numpy as np
+from numpy import nan
 
 print('------------------------------------------------------------')	#60個
 
-#8-1-2 將 DataFrame 的內容寫入到 CSV 檔
+#載入外部檔案並做資料整理
+#使用 Pandas 讀取 CSV 檔
 
-import pandas as pd
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+url = 'iris.data'
+df = pd.read_csv(url, header = None)
+df.columns = ['sepal length', 'sepal width', 'petal length', 'petal width', 'class']
+
+print(df)
+
+print('------------------------------------------------------------')	#60個
+
+#將 DataFrame 的內容寫入到 CSV 檔
 
 data = {'city': ['Nagano', 'Sydney', 'Salt Lake City', 'Athens',
                  'Torino', 'Beijing', 'Vancouver', 'London',
@@ -79,12 +44,8 @@ df = pd.DataFrame(data)
 
 print('------------------------------------------------------------')	#60個
 
-
-#8-2 處理 DataFrame 中的缺漏值
-#8-2-1 用 dropna() 刪除含有 NaN ( 缺漏值 ) 的列
-import numpy as np
-from numpy import nan
-import pandas as pd
+#處理 DataFrame 中的缺漏值
+#用 dropna() 刪除含有 NaN ( 缺漏值 ) 的列
 
 #   借用 NumPy 的 nan 來設定 NaN 值
 np.random.seed(0)       
@@ -119,13 +80,7 @@ print(sample_df_dropped_2)
 
 print('------------------------------------------------------------')	#60個
 
-#8-2-2 用 fllna() 填補 NaN 值
-
-import numpy as np
-
-from numpy import nan
-
-import pandas as pd
+#用 fllna() 填補 NaN 值
 
 np.random.seed(0)
 
@@ -155,22 +110,17 @@ print(sample_df_fill_3)
 
 print('------------------------------------------------------------')	#60個
 
-#8-3-1 duplicated()、drop_duplicated() - 尋找或刪除 DataFrame 內重複的資料
-
-import pandas as pd
+#duplicated()、drop_duplicated() - 尋找或刪除 DataFrame 內重複的資料
 
 dupli_df = pd.DataFrame({'col1':[1, 1, 2, 3, 4, 4, 5, 5],       
                            'col2':['a', 'b', 'b', 'b', 'c', 'c', 'b', 'b']})
 
 print(dupli_df)
-
 print(dupli_df.duplicated())
 
 print('------------------------------------------------------------')	#60個
 
-#8-3-2 map() - 利用 DataFrame 的既有欄位生成新的欄位
-
-import pandas as pd
+#map() - 利用 DataFrame 的既有欄位生成新的欄位
 
 people_data = {'ID': ['100', '101', '102', '103', '104',        
                       '106', '108', '110', '111', '113'],
@@ -199,9 +149,7 @@ print(people_df)
 
 print('------------------------------------------------------------')	#60個
 
-#8-3-3 用 cut() 劃分、篩選資料
-
-import pandas as pd
+#用 cut() 劃分、篩選資料
 
 people_data = {'ID': ['100', '101', '102', '103', '104',
                       '106', '108', '110', '111', '113'],
@@ -235,10 +183,7 @@ print(people_df)
 
 print('------------------------------------------------------------')	#60個
 
-#8-4-1 取頭尾列 - head()、tail()
-
-import numpy as np
-import pandas as pd
+#取頭尾列 - head()、tail()
 
 np.random.seed(0)
 
@@ -264,11 +209,7 @@ print('----倒數 5 列----\n', df_tail)
 
 print('------------------------------------------------------------')	#60個
 
-#8-4-2 對 DataFrame 的值做運算
-
-import numpy as np
-
-import pandas as pd
+#對 DataFrame 的值做運算
 
 np.random.seed(0)
 
@@ -299,11 +240,7 @@ print('----sqrt_df----\n', sqrt_df)
 
 print('------------------------------------------------------------')	#60個
 
-#8-4-3 快速取得 DataFrame 各種統計數據
-
-import numpy as np
-
-import pandas as pd
+#快速取得 DataFrame 各種統計數據
 
 np.random.seed(0)
 
@@ -325,11 +262,7 @@ print(df.describe())
 
 print('------------------------------------------------------------')	#60個
 
-#8-4-4 計算行(列)之間的差 (diﬀ)
-
-import numpy as np
-
-import pandas as pd
+#計算行(列)之間的差 (diff)
 
 np.random.seed(0)
 
@@ -352,9 +285,7 @@ print(df_diff)
 
 print('------------------------------------------------------------')	#60個
 
-#8-4-5 用 groupy() 做分組統計
-
-import pandas as pd
+#用 groupy() 做分組統計
 
 prefecture_df = pd.DataFrame([["Tokyo", 2190, 13636, "Kanto"],
                               ["Kanagawa", 2415, 9145, "Kanto"],
@@ -362,13 +293,11 @@ prefecture_df = pd.DataFrame([["Tokyo", 2190, 13636, "Kanto"],
                               ["Kyoto", 4610, 2605, "Kinki"],
                               ["Aichi", 5172, 7505, "Chubu"]],
                              columns=["Prefecture", "Area", "Population", "Region"])
-
 print(prefecture_df)
 
 grouped_region = prefecture_df.groupby("Region")
 
 mean_df = grouped_region.mean()
-
 print(mean_df)
 
 print('------------------------------------------------------------')	#60個

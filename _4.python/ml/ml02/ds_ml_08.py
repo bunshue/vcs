@@ -31,13 +31,13 @@ print(df.head())
 df.plot(kind='scatter', x='T', y='Q')
 plt.show()
 
-
 df_X = df[['T']]    # 雙層的中括號(特徵值)，設定成資料框
 df_y = df['Q']      # 單層的中括號(標籤)，設定成序列
 print(df_X.head())
 
 print(df_y.head())
 
+print('------------------------------------------------------------')	#60個
 
 #8-2 機器學習實作
 

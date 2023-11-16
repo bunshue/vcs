@@ -17,7 +17,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 #          編號                  圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'scatter 集合 1a random', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -93,10 +93,19 @@ for i in range(0, 3):
 #第五張圖
 plt.subplot(235)
 
+np.random.seed(0)
+x = np.random.randn(100)    
+y = np.random.randn(100)
+plt.scatter(x, y)
 
 #第六張圖
 plt.subplot(236)
 
+np.random.seed(0)
+
+x = np.random.randn(100)
+y = np.random.randn(100)
+plt.scatter(x, y, marker = '^', color = 'red')
 
 plt.show()
 
@@ -269,7 +278,16 @@ plt.scatter(x, g, c = 'blue', marker = '.')
 #第四張圖
 plt.subplot(234)
 
+#設定資料點的大小
+np.random.seed(0)
 
+x = np.random.randn(100)
+y = np.random.randn(100)
+
+size = np.random.choice(np.arange(100), 100)
+
+plt.scatter(x, y, s=30)
+plt.tight_layout()
 
 #第五張圖
 plt.subplot(235)
@@ -348,6 +366,13 @@ plt.title('曲線資料加入雜訊')
 #第二張圖
 plt.subplot(232)
 
+#給散佈圖的點套上不同深淺顏色
+
+np.random.seed(0)
+x = np.random.randn(100)
+y = np.random.randn(100)
+c = np.random.choice(np.arange(100), 100)
+plt.scatter(x, y, s=c, c=c, cmap='viridis')
 
 #第三張圖
 plt.subplot(233)
@@ -663,7 +688,7 @@ plt.colorbar()                            # 色彩條
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-'''
+
 #          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
 plt.figure(num = 'scatter 集合 7', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 

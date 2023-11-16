@@ -61,7 +61,6 @@ print('------------------------------------------------------------')	#60個
 from sklearn.datasets import fetch_20newsgroups
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
- 
 
 # removeで本文以外の情報を取り除く
 data = fetch_20newsgroups(remove=('headers', 'footers', 'quotes'))
@@ -101,13 +100,11 @@ print(model.predict(data.data)) # クラスを予測
 print(model.means_) # 各ガウス分布の平均 
 print(model.covariances_) # 各ガウス分布の分散
 
-
 print('------------------------------------------------------------')	#60個
 
 ''' import fail
 from sklearn.datasets import samples_generator
 from sklearn.manifold import LocallyLinearEmbedding
-
 
 data, color = samples_generator.make_swiss_roll(n_samples=1500)
 n_neighbors = 12 # 近傍点の数 
@@ -129,8 +126,8 @@ model = TSNE(n_components=n_components)
 print(model.fit_transform(data.data))
 
 print('------------------------------------------------------------')	#60個
-
-
+print('作業完成')
+print('------------------------------------------------------------')	#60個
 
 
 

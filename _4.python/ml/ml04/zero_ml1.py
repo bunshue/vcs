@@ -46,6 +46,7 @@ accuracy_score(y, y_pred)
 print('------------------------------------------------------------')	#60個
 
 from sklearn.datasets import load_wine
+
 data = load_wine()
 
 X = data.data[:, [0, 9]]
@@ -62,6 +63,8 @@ ax.scatter(X[pred == 1, 0], X[pred == 1, 1], color = 'blue', marker = 's', label
 ax.scatter(X[pred == 2, 0], X[pred == 2, 1], color = 'green', marker = 's', label = 'Label3')
 ax.scatter(model.cluster_centers_[:, 0], model.cluster_centers_[:, 1], s = 200, color = 'yellow', marker = "*", label = "center")
 ax.legend()
+plt.title('wine')
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -73,10 +76,14 @@ data = load_wine()
 x3 = data.data[:, [0]]
 y3 = data.data[:, [9]]
 
+plt.subplot(121)
 plt.scatter(x3, y3)
-plt.show()
+plt.title('wine')
 
+plt.subplot(122)
 plt.hist(y3, bins = 5)
+plt.title('wine')
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -85,21 +92,18 @@ from sklearn.datasets import load_wine
 
 data = load_wine()
 df_X = pd.DataFrame(data.data, columns = data.feature_names)
-
 print(df_X.head())
 
 df_y = pd.DataFrame(data.target, columns = ["kind(target)"])
-
 print(df_y.head())
 
 df = pd.concat([df_X, df_y], axis = 1)
-
 print(df.head())
 
+plt.subplot(121)
 plt.hist(df.loc[:, "alcohol"])
 
-plt.show()
-
+plt.subplot(122)
 plt.boxplot(df.loc[:, "alcohol"])
 
 plt.show()
@@ -109,13 +113,13 @@ print(df.describe())
 
 print('------------------------------------------------------------')	#60個
 
+print('使用 scatter_matrix')
 from pandas.plotting import scatter_matrix
-_ = scatter_matrix(df, figsize = (15, 15))
 
+_ = scatter_matrix(df, figsize = (15, 15))
 plt.show()
 
 _ = scatter_matrix(df.iloc[:, [0, 9, -1]])
-
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -128,6 +132,7 @@ model = LinearRegression()
 model.fit(X, y) 
 print(model.intercept_) # 切片 
 print(model.coef_) # 傾き
+
 y_pred = model.predict([[0], [1]]) 
 print(y_pred) # x=0, x=1に対する予測結果
 
@@ -253,14 +258,13 @@ from sklearn.metrics import accuracy_score
 # データ生成
 X, y = make_moons(noise=0.3)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
-model = KNeighborsClassifier() 
+model = KNeighborsClassifier()
 model.fit(X_train, y_train) # 学習
-y_pred = model.predict(X_test) 
+y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test)) # 評価
 
 print('------------------------------------------------------------')	#60個
-
-
+print('作業完成')
 print('------------------------------------------------------------')	#60個
 
 

@@ -1,0 +1,6 @@
+#!/usr/bin/env
+__author__ = "Powen Ko, www.powenko.com"
+a=range(10)
+print(a)         # Pyton 2.x
+print(list(a))   # Pyton 3.x
+print(a[2])

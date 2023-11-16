@@ -135,11 +135,7 @@ plt.pie(lexus, explode = explode, autopct = '%1.0f%%', radius = 1.0, labels = la
 
 plt.show()
 
-
-sys.exit()
-
 print('------------------------------------------------------------')	#60個
-
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = '派圖 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
@@ -147,15 +143,33 @@ plt.figure(num = '派圖 集合 2', figsize = (20, 15), dpi = 84, facecolor = "w
 #第一張圖
 plt.subplot(231)
 
+#給圓餅圖各區域設定標籤並顯示百分比
 
+data = [60, 20, 10, 5, 3, 2]
+labels = ['Apple', 'Orange', 'Banana', 'Pineapple', 'Kiwifruit', 'Strawberry']  
+plt.pie(data, labels=labels,autopct="%.2f%%")   
+plt.tight_layout()
 
 #第二張圖
 plt.subplot(232)
 
+#將圓餅圖的特定區塊向外推
+
+data = [60, 20, 10, 5, 3, 2]
+labels = ['Apple', 'Orange', 'Banana', 'Pineapple', 'Kiwifruit', 'Strawberry']
+explode = [0, 0, 0.1, 0.2, 0, 0]    
+plt.pie(data, labels=labels, explode=explode,autopct="%.2f%%")
+plt.tight_layout()
 
 #第三張圖
 plt.subplot(233)
 
+#給圓餅圖加入立體陰影
+
+data = [60, 20, 10, 5, 3, 2]
+labels = ['Apple', 'Orange', 'Banana', 'Pineapple', 'Kiwifruit', 'Strawberry']
+explode = [0, 0, 0.2, 0, 0, 0]      
+plt.pie(data, labels=labels, explode=explode, shadow=True)  
 
 #第四張圖
 plt.subplot(234)

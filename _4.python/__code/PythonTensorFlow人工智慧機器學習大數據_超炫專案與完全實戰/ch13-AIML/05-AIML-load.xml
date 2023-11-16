@@ -1,0 +1,11 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <category>
+        <pattern>LOAD AIML B</pattern>
+        <template>
+            <learn>01-AIML-hello.xml</learn>
+            <learn>02-AIML-helloChinese.xml</learn>
+            <learn>03-AIML-random.xml</learn>
+            <learn>04-AIML-all.xml</learn>
+        </template>
+    </category>
+</aiml>

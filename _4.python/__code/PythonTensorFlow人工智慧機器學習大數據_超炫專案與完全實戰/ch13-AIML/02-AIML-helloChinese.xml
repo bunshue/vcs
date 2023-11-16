@@ -1,0 +1,30 @@
+<aiml version="1.0.1" encoding="UTF-8">
+<!-- basic_chat.aiml -->
+    <category>
+        <pattern>你好</pattern>
+        <template>
+            我很好, 你好!
+        </template>
+    </category>
+    <category>
+        <pattern>你</pattern>
+        <template>
+            我很好
+        </template>
+    </category>
+    
+    <category>
+        <pattern>你是誰</pattern>
+        <template>
+            我是機器人, 先生!
+        </template>
+    </category>
+
+    <category>
+        <pattern>你的名字</pattern>
+        <template>
+            我的名字是柯博文。
+        </template>
+    </category>
+    
+</aiml>

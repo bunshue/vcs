@@ -103,14 +103,11 @@ print('平均二乗誤差')
 from sklearn.metrics import mean_squared_error
 mean_squared_error(y, y_pred)
 
-
-
 print('------------------------------------------------------------')	#60個
 print('決定係数')
 
 from sklearn.metrics import r2_score
 print(r2_score(y, y_pred))
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -136,7 +133,6 @@ print(r2_score(y, y_svr_pred)) # 決定係数
 print(model_svr_linear.coef_) # 傾き 
 print(model_svr_linear.intercept_) # 切片
 
-
 print('------------------------------------------------------------')	#60個
 
 print('ハイパーパラメータの設定')
@@ -155,7 +151,6 @@ test_y_pred = model_svr_rbf_1.predict(test_X)
 print(mean_squared_error(test_y, test_y_pred)) # 平均二乗誤差 
 print(r2_score(test_y, test_y_pred)) # 決定係数
 
-
 print('------------------------------------------------------------')	#60個
 
 print('学習データと検証データに分割')
@@ -167,7 +162,6 @@ y = data.target
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-
 from sklearn.svm import SVC
 model_svc = SVC()
 model_svc.fit(X_train, y_train)
@@ -177,7 +171,6 @@ from sklearn.metrics import accuracy_score
 print(accuracy_score(y_train, y_train_pred))
 print(accuracy_score(y_test, y_test_pred))
 
-
 from sklearn.ensemble import RandomForestClassifier
 model_rfc = RandomForestClassifier()
 model_rfc.fit(X_train, y_train)
@@ -186,8 +179,6 @@ y_test_pred = model_rfc.predict(X_test)
 from sklearn.metrics import accuracy_score
 print(accuracy_score(y_train, y_train_pred))
 print(accuracy_score(y_test, y_test_pred))
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -201,7 +192,6 @@ cross_val_score(model_rfc_1, X, y, cv=cv, scoring='accuracy')
 
 cross_val_score(model_rfc_1, X, y, cv=cv, scoring="f1")
 
-
 print('------------------------------------------------------------')	#60個
 
 print('ハイパーパラメータの探索')
@@ -212,7 +202,6 @@ X = data.data
 y = 1 - data.target # ラベルの0と1を反転
 X = X[:, :10]
 
-
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import KFold
@@ -221,7 +210,6 @@ param_grid = {'max_depth': [5, 10, 15], 'n_estimators': [10, 20, 30]}
 model_rfc_2 = RandomForestClassifier()
 grid_search = GridSearchCV(model_rfc_2, param_grid, cv=cv, scoring='accuracy')
 grid_search.fit(X, y)
-
 
 print(grid_search.best_score_)
 print(grid_search.best_params_)
@@ -245,7 +233,6 @@ twenty_test = fetch_20newsgroups(subset='test',
                                  remove=remove, 
                                  categories=categories) # 検証データ
 
-
 count_vect = CountVectorizer() # 単語カウント
 X_train_counts = count_vect.fit_transform(twenty_train.data)
 X_test_count = count_vect.transform(twenty_test.data)
@@ -254,7 +241,6 @@ model = LinearSVC()
 model.fit(X_train_counts, twenty_train.target)
 predicted = model.predict(X_test_count)
 np.mean(predicted == twenty_test.target)
-
 
 tf_vec = TfidfVectorizer()  # tf-idf
 X_train_tfidf = tf_vec.fit_transform(twenty_train.data)
@@ -287,18 +273,8 @@ predicted = model.predict(data[n_samples // 2:])
 
 print(metrics.classification_report(expected, predicted))
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
+print('作業完成')
 print('------------------------------------------------------------')	#60個
 
 
