@@ -1,8 +1,5 @@
-#!/usr/bin/python
-try:
-  import Tkinter as tk
-except ImportError:
-  import tkinter as tk
+import tkinter as tk
+
 win = tk.Tk()
 
 label1 =tk.Label(win,text="Hello World!")
@@ -15,4 +12,5 @@ label4 =tk.Label(win,text="Hello No4!")
 label4.place(x=120, y=160)
 label5 =tk.Label(win,text="Powen Ko",bg="#ff0000")
 label5.place(x=120, y=140)
+
 win.mainloop()

@@ -79,8 +79,8 @@ namespace vcs_ColorHistogram
 
         bool flag_no_update_crop_picture = false;
 
-        private Bitmap bitmap1 = null;  //原圖
-        private Bitmap bitmap2 = null;  //從原圖修改過的
+        private Bitmap bitmap0 = null;  //原圖
+        private Bitmap bitmap1 = null;  //處理後的圖 或 處理結果
 
         //private int W = 0;  //原圖的寬
         //private int H = 0;  //原圖的高
@@ -210,7 +210,7 @@ namespace vcs_ColorHistogram
             return new RGB((byte)r, (byte)g, (byte)b);
         }
 
-        void get_brigheness_data(Bitmap bitmap1, int x_st, int y_st, int w, int h)
+        void get_brigheness_data(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
             richTextBox1.Text += "x_st = " + x_st.ToString() + "\ty_st = " + y_st.ToString() + "\tw = " + w.ToString() + "\th = " + h.ToString() + "\n";
             yuv_data_y = new int[256];
@@ -225,7 +225,7 @@ namespace vcs_ColorHistogram
             {
                 for (i = 0; i < w; i++)
                 {
-                    pt = bitmap1.GetPixel(x_st + i, y_st + j);
+                    pt = bmp.GetPixel(x_st + i, y_st + j);
 
                     RGB pp = new RGB(pt.R, pt.G, pt.B);
                     YUV yyy = new YUV();
@@ -262,17 +262,16 @@ namespace vcs_ColorHistogram
             richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
         }
 
-        void measure_brightness()
+        void measure_brightness(Bitmap bmp)
         {
             //量測範圍
-            x_st = measure_x_st;
-            y_st = measure_y_st;
-            w = measure_w;
-            h = measure_h;
+            x_st = SelectionRectangle.X;
+            y_st = SelectionRectangle.Y;
+            w = SelectionRectangle.Width;
+            h = SelectionRectangle.Height;
 
-            //量測原圖 bitmap1
-
-            get_brigheness_data(bitmap1, x_st, y_st, w, h);
+            //量測原圖 bmp
+            get_brigheness_data(bmp, x_st, y_st, w, h);
 
             int i;
             int most = 0;
@@ -320,7 +319,7 @@ namespace vcs_ColorHistogram
             {
                 for (i = 0; i < w; i++)
                 {
-                    pt = bitmap1.GetPixel(x_st + i, y_st + j);
+                    pt = bmp.GetPixel(x_st + i, y_st + j);
 
                     RGB pp = new RGB(pt.R, pt.G, pt.B);
                     YUV yyy = new YUV();
@@ -330,8 +329,6 @@ namespace vcs_ColorHistogram
                     index++;
                 }
             }
-
-            //return;
 
             double sd = SD(sd_num);
             //richTextBox1.Text += "標準差 " + sd.ToString("F2") + "\n";
@@ -357,8 +354,6 @@ namespace vcs_ColorHistogram
             {
                 g4.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(yuv_data_y[i] * ratio), 2, (float)(yuv_data_y[i] * ratio));
             }
-
-            //return;
 
             g4.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
             g4.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
@@ -404,8 +399,6 @@ namespace vcs_ColorHistogram
                 g4.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
             }
 
-            //return;
-
             int y_min = 0;
             int y_max = 0;
             FindYMaxYMin(yuv_data_y, out y_min, out y_max);
@@ -422,19 +415,19 @@ namespace vcs_ColorHistogram
             g4.DrawString("SD : " + sd.ToString("F2"), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 7);
 
             float rr_sp = 2.0f;
-            bool flag_modify_boundary_sp = true;
+            //bool flag_modify_boundary_sp = true;
             if ((brightness_sp - average_brightness) < sd * rr_sp)
             {
                 g4.DrawString("YMax太近", new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 8);
-                flag_modify_boundary_sp = false;
+                //flag_modify_boundary_sp = false;
             }
 
             float rr_st = 3.0f;
-            bool flag_modify_boundary_st = true;
+            //bool flag_modify_boundary_st = true;
             if ((average_brightness - brightness_st) < sd * rr_st)
             {
                 g4.DrawString("YMin太近", new Font("標楷體", 18), new SolidBrush(Color.Navy), 512 + 100, 10 + dy * 8);
-                flag_modify_boundary_st = false;
+                //flag_modify_boundary_st = false;
             }
 
             g4.DrawString(((int)Math.Round((average_brightness - sd * rr_st))).ToString() + " " +
@@ -452,9 +445,6 @@ namespace vcs_ColorHistogram
                 g4.DrawString("暗場未調整", new Font("標楷體", 13), new SolidBrush(Color.Red), 512, 10 + dy * 10);
             }
             */
-
-            richTextBox1.Text += "dddddd";
-            //return;
 
             int boundary_st = (int)Math.Round(average_brightness - sd * rr_st);
             int boundary_sp = (int)Math.Round(average_brightness + sd * rr_sp);
@@ -481,11 +471,7 @@ namespace vcs_ColorHistogram
             for (i = 0; i < 256; i++)
             {
                 g4.DrawLine(Pens.Red, 750, hh2 - i, 750 + (int)(yuv_data_y[i] / rr), hh2 - i);
-
             }
-
-            richTextBox1.Text += "eeeee\n";
-            //return;
 
             Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
             for (i = 0; i < 256; i++)
@@ -514,8 +500,6 @@ namespace vcs_ColorHistogram
 
             g4.DrawRectangle(Pens.Red, 800, hh2 - brightness_max_mod, width, brightness_max_mod - brightness_min_mod);
             g4.DrawLine(Pens.Red, 800, hh2 - brightness_avg, 800 + width, hh2 - brightness_avg);
-
-            richTextBox1.Text += "eeeee2222\n";
 
             pictureBox1.Image = bmp4;
         }
@@ -585,11 +569,11 @@ namespace vcs_ColorHistogram
 
             show_item_location();
 
-            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            pictureBox0.Image = bitmap1;
+            bitmap0 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            pictureBox0.Image = bitmap0;
 
-            W = bitmap1.Width;
-            H = bitmap1.Height;
+            W = bitmap0.Width;
+            H = bitmap0.Height;
 
             nud_x_st.ValueChanged += new EventHandler(select_crop_area);
             nud_y_st.ValueChanged += new EventHandler(select_crop_area);
@@ -636,6 +620,8 @@ namespace vcs_ColorHistogram
 
                     stopwatch = new Stopwatch();
                     stopwatch.Start();
+
+                    timer1.Enabled = true;
                 }
                 else
                 {
@@ -679,16 +665,7 @@ namespace vcs_ColorHistogram
 
             try
             {
-                g = Graphics.FromImage(bm);
-
-                Pen p = new Pen(Color.Red, 3);
-                Brush brush = new SolidBrush(Color.Red);
-                Pen pen = new Pen(brush, 3);
-                pen.DashStyle = DashStyle.Dash;
-
-                g.DrawRectangle(pen, SelectionRectangle.X - 4, SelectionRectangle.Y - 4, SelectionRectangle.Width + 8, SelectionRectangle.Height + 8);
-
-                g.Dispose();
+                bm = draw_selectionArea(bm, SelectionRectangle);    //畫紅框
             }
             catch (Exception ex)
             {
@@ -812,27 +789,24 @@ namespace vcs_ColorHistogram
 
         void draw_selectionBox()
         {
+            //畫紅框 需要重新讀取圖片
             filename = tb_filename.Text;
-            richTextBox1.Text += "draw_selectionBox() filename : " + filename + "\n";
-            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            bitmap0 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
-            Graphics g_s = Graphics.FromImage(bitmap1);
-            Pen p = new Pen(Color.Red, 3);
+            //畫紅框
+            bitmap0 = draw_selectionArea(bitmap0, SelectionRectangle);  //畫紅框
 
-            //g_s.DrawRectangle(p, x_st - 4, y_st - 4, w + 8, h + 8);
+            pictureBox0.Image = bitmap0;
+        }
 
-            Brush brush = new SolidBrush(Color.Red);
-            Pen pen = new Pen(brush, 3);
+        Bitmap draw_selectionArea(Bitmap bmp, Rectangle rectangle)
+        {
+            Graphics g = Graphics.FromImage(bmp);
+            Pen pen = new Pen(Color.Red, 3);
             pen.DashStyle = DashStyle.Dash;
-            //g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
-
-            g_s.DrawRectangle(pen, SelectionRectangle.X - 4, SelectionRectangle.Y - 4, SelectionRectangle.Width + 8, SelectionRectangle.Height + 8);
-            //g_s.DrawRectangle(pen, x_st - 4, y_st - 4, w + 8, h + 8);
-
-            //g_s.DrawRectangle(pen, 100, 100, 200, 200);
-            g_s.Dispose();
-
-            pictureBox0.Image = bitmap1;
+            g.DrawRectangle(pen, rectangle.X - 4, rectangle.Y - 4, rectangle.Width + 8, rectangle.Height + 8);
+            g.Dispose();
+            return bmp;
         }
 
         void show_item_location()
@@ -847,8 +821,7 @@ namespace vcs_ColorHistogram
 
             pictureBox0.Size = new Size(W, H);
             //pictureBox1.Size = new Size(W, H);
-            pictureBox1.Size = new Size(512 * 2 + 100, 900);
-
+            pictureBox1.Size = new Size(512 * 2 + 240, 1060);
             richTextBox1.Size = new Size(W, H - 100);
 
             x_st = 0;
@@ -857,7 +830,7 @@ namespace vcs_ColorHistogram
             dy = H;
 
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox1.Location = new Point(x_st + dx * 1+10, y_st + dy * 0+10);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             x_st = 20;
@@ -953,6 +926,52 @@ namespace vcs_ColorHistogram
             richTextBox1.Clear();
         }
 
+        void do_channel_conversion()
+        {
+            //Channel 交換
+
+            //讀取圖檔
+            //原圖
+            bitmap0 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            //準備要放資料的位圖
+            bitmap1 = new Bitmap(bitmap0.Width, bitmap0.Height);
+
+            /* 畫色塊 為了做驗證比較好用
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            g.FillRectangle(new SolidBrush(Color.Red), 50, 100, 50, 50);
+            g.FillRectangle(new SolidBrush(Color.Lime), 50, 100+70, 50, 50);
+            g.FillRectangle(new SolidBrush(Color.Blue), 50, 100+140, 50, 50);
+            */
+
+            int i;
+            int j;
+            Color pt;
+            int W = bitmap0.Width;
+            int H = bitmap0.Height;
+
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    pt = bitmap0.GetPixel(i, j);
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+
+                    byte r = pp.R;
+                    byte g = pp.G;
+                    byte b = pp.B;
+
+                    Color cc = Color.FromArgb(255, g, b, b);
+
+                    bitmap1.SetPixel(i, j, cc);
+                }
+            }
+
+            pictureBox0.Image = bitmap0;    //原圖
+            pictureBox1.Image = bitmap1;    //處理後的圖
+        }
+
         void measure_brightness0(PictureBox pbox_source)
         {
             yuv_data_y = new int[256];
@@ -972,20 +991,14 @@ namespace vcs_ColorHistogram
             w = measure_w;
             h = measure_h;
 
-            Bitmap bitmap1 = (Bitmap)pbox_source.Image;
-            Graphics g_s = Graphics.FromImage(bitmap1);
+            //把圖複製出來 量測資料用
+            Bitmap bmp = (Bitmap)pbox_source.Image;
 
-            Brush brush = new SolidBrush(Color.Red);
-            Pen pen = new Pen(brush, 3);
-            pen.DashStyle = DashStyle.Dash;
-
-            g_s.DrawRectangle(pen, x_st - 4, y_st - 4, w + 8, h + 8);
-            pbox_source.Image = bitmap1;
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            richTextBox1.Text += "圖片大小 : W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-            richTextBox1.Text += "量測範圍 : x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
+            //開始量測圖的資料
+            int W = bmp.Width;
+            int H = bmp.Height;
+            //richTextBox1.Text += "圖片大小 : W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //richTextBox1.Text += "量測範圍 : x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
             int i;
             int j;
@@ -995,7 +1008,7 @@ namespace vcs_ColorHistogram
             {
                 for (i = x_st; i < (x_st + w); i++)
                 {
-                    Color pt = bitmap1.GetPixel(i, j);
+                    Color pt = bmp.GetPixel(i, j);
                     rgb_data_r[pt.R]++;
                     rgb_data_g[pt.G]++;
                     rgb_data_b[pt.B]++;
@@ -1019,13 +1032,13 @@ namespace vcs_ColorHistogram
             richTextBox1.Text += "共量測 " + total_points.ToString() + " 個點\n";
         }
 
-        Bitmap draw_color_histogram0(Bitmap bitmap1, int[] color_data, Color color, int x_offset, int y_offset, string message)
+        Bitmap draw_color_histogram0(Bitmap bmp, int[] color_data, Color color, int x_offset, int y_offset, string message)
         {
             int ww = 512;
             int hh1 = 300;
             int hh2 = 256;
 
-            Graphics g1 = Graphics.FromImage(bitmap1);
+            Graphics g1 = Graphics.FromImage(bmp);
 
             int i;
             int most = 0;
@@ -1165,7 +1178,7 @@ namespace vcs_ColorHistogram
             }
             g1.DrawString((((double)total_values / total_points) + offset).ToString("F2"), f, new SolidBrush(Color.Red), new PointF(x_offset + 10, y_offset + 70));
 
-            return bitmap1;
+            return bmp;
         }
 
         void do_measure_brightness_all()
@@ -1190,35 +1203,39 @@ namespace vcs_ColorHistogram
 
         void draw_color_histogram_all(PictureBox pbox)
         {
-            //int ww = 512;
-            int ww = 512 * 2 + 100;
-            int hh1 = 900;
-            //int hh2 = 256;
-            bitmap1 = new Bitmap(ww, hh1);
+            int BORDER = 20;
+            int x_st = BORDER;
+            int y_st = BORDER;
+            int dx = 512 + BORDER;
+            int dy = 300 + BORDER;
+
+            int ww = 512 * 2 + 100+100;
+            int hh = 900+100;
+            bitmap1 = new Bitmap(ww, hh);
 
             Color color = Color.Red;
             int[] color_data = rgb_data_r;
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 0, 0, "R");
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, x_st + dx * 0, y_st + dy * 0, "R");
 
             color = Color.Green;
             color_data = rgb_data_g;
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 0, 300, "G");
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, x_st + dx * 0, y_st + dy * 1, "G");
 
             color = Color.Blue;
             color_data = rgb_data_b;
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 0, 600, "B");
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, x_st + dx * 0, y_st + dy * 2, "B");
 
             color = Color.Yellow;
             color_data = yuv_data_y;
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 600, 0, "Y");
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, x_st + dx * 1, y_st + dy * 0, "Y");
 
             color = Color.Green;
             color_data = yuv_data_u;
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 600, 300, "U");
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, x_st + dx * 1, y_st + dy * 1, "U");
 
             color = Color.Blue;
             color_data = yuv_data_v;
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 600, 600, "V");
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, x_st + dx * 1, y_st + dy * 2, "V");
         }
 
         void do_select_picture(object sender, EventArgs e)
@@ -1237,11 +1254,11 @@ namespace vcs_ColorHistogram
                 richTextBox1.Text += "4 get filename : " + openFileDialog1.FileName + "\n";
                 tb_filename.Text = openFileDialog1.FileName;
 
-                bitmap1 = (Bitmap)Image.FromFile(openFileDialog1.FileName);	//Image.FromFile出來的是Image格式
-                pictureBox0.Image = bitmap1;
+                bitmap0 = (Bitmap)Image.FromFile(openFileDialog1.FileName);	//Image.FromFile出來的是Image格式
+                pictureBox0.Image = bitmap0;
 
-                W = bitmap1.Width;
-                H = bitmap1.Height;
+                W = bitmap0.Width;
+                H = bitmap0.Height;
 
                 //量測範圍
                 measure_x_st = 50;
@@ -1312,51 +1329,19 @@ namespace vcs_ColorHistogram
         private void button1_Click(object sender, EventArgs e)
         {
             //亮度量測
-            measure_brightness();
+            bitmap0 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            bitmap0 = draw_selectionArea(bitmap0, SelectionRectangle);  //畫紅框
+
+            pictureBox0.Image = bitmap0;
+
+            measure_brightness(bitmap0);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             //Channel 交換
-
-            //讀取圖檔, 先放在Bitmap裏
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            pictureBox1.Image = bitmap1;
-
-            /* 畫色塊
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            g.FillRectangle(new SolidBrush(Color.Red), 50, 100, 50, 50);
-            g.FillRectangle(new SolidBrush(Color.Lime), 50, 100+70, 50, 50);
-            g.FillRectangle(new SolidBrush(Color.Blue), 50, 100+140, 50, 50);
-            */
-
-            int i;
-            int j;
-            Color pt;
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            for (j = 0; j < H; j++)
-            {
-                for (i = 0; i < W; i++)
-                {
-                    pt = bitmap1.GetPixel(i, j);
-
-                    RGB pp = new RGB(pt.R, pt.G, pt.B);
-
-                    byte r = pp.R;
-                    byte g = pp.G;
-                    byte b = pp.B;
-
-                    Color cc = Color.FromArgb(255, g, b, b);
-
-                    bitmap1.SetPixel(i, j, cc);
-
-                }
-            }
-            //bitmap1.Save("pic_modify3.bmp", ImageFormat.Bmp);
+            do_channel_conversion();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1367,20 +1352,24 @@ namespace vcs_ColorHistogram
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (timer1.Enabled == false)
-            {
-                timer1.Enabled = true;
-                button4.BackColor = Color.Pink;
-            }
-            else
-            {
-                timer1.Enabled = false;
-                button4.BackColor = SystemColors.ControlLight;
-            }
+            //停止統計
+            timer1.Enabled = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //test
+            int x_st = 100;
+            int y_st = 100;
+            int w = 200;
+            int h = 100;
+
+            SelectionRectangle = MakeRectangle(x_st, y_st, x_st + w, y_st + h);
+
+            Bitmap bmp1 = (Bitmap)pictureBox0.Image;    //原圖
+            Bitmap bmp2 = draw_selectionArea(bmp1, SelectionRectangle); //畫紅框
+
+            pictureBox1.Image = bmp2;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -1407,4 +1396,3 @@ namespace vcs_ColorHistogram
         }
     }
 }
-

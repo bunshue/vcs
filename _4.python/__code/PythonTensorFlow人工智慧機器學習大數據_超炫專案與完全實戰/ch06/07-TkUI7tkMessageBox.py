@@ -1,12 +1,6 @@
-#!/usr/bin/python 
-__author__ = "Powen Ko, www.powenko.com"
-try:
-  import Tkinter as tk
-  import tkMessageBox
-except ImportError:
-  import tkinter as tk
-  import tkinter.messagebox as tkMessageBox
-  #import tkinter.messagebox
+import tkinter as tk
+import tkinter.messagebox as tkMessageBox
+#import tkinter.messagebox
 
 win = tk.Tk()
 def hello():

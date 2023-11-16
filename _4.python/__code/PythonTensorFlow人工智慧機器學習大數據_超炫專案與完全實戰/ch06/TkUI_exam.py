@@ -1,8 +1,4 @@
-#!/usr/bin/python 
-try:
-  import Tkinter as tk 
-except ImportError:
-  import tkinter as tk 
+import tkinter as tk
 from PIL import ImageTk, Image
 
 win = tk.Tk()
@@ -23,29 +19,5 @@ entry1=tk.Entry(win)
 entry1.pack()
 btn1 =tk.Button(win,text="press me",command=event1)
 btn1.pack()
+
 win.mainloop()
-
-
-""" 
-TW
-
-________
-
-
-buton
-
-US_____
-
-"""
-
-
-"""   US ______
-     button
-     ________
-
-"""
-
-
-
-
-

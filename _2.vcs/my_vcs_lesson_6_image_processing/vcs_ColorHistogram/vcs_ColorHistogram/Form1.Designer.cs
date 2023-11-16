@@ -57,8 +57,8 @@
             this.tb_filename = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox_control = new System.Windows.Forms.GroupBox();
-            this.button8 = new System.Windows.Forms.Button();
             this.bt_save_picture = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             this.groupBox_selection.SuspendLayout();
@@ -162,7 +162,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(80, 40);
             this.button4.TabIndex = 250;
-            this.button4.Text = "統計 3秒一次";
+            this.button4.Text = "停止統計";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -377,16 +377,6 @@
             this.groupBox_control.TabStop = false;
             this.groupBox_control.Text = "功能";
             // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(178, 121);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(80, 40);
-            this.button8.TabIndex = 254;
-            this.button8.Text = "Clear";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
             // bt_save_picture
             // 
             this.bt_save_picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -396,6 +386,16 @@
             this.bt_save_picture.TabIndex = 255;
             this.bt_save_picture.UseVisualStyleBackColor = true;
             this.bt_save_picture.Click += new System.EventHandler(this.bt_save_picture_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(178, 121);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(80, 40);
+            this.button8.TabIndex = 254;
+            this.button8.Text = "Clear";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // Form1
             // 

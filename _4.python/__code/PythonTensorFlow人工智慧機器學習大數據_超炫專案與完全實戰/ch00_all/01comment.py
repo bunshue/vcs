@@ -1,21 +1,6 @@
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
-
-# comment
-"""
-comment
-"""
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\02value.py
-
-#!/usr/bin/env                             
-__author__ = "Powen Ko, www.powenko.com"     
-#  sample code
 a=33
 b="abc"
 c=33.4
@@ -26,14 +11,10 @@ print("c=%f" % c)
 print("c=%.1f  b=%s" % (c,b))
 print(a+c)                               
 
-
-
 print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\03ConvertValue.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
 v1 = int(2.7) # 2
 print(v1)
 v2 = int(-3.9) # -3
@@ -67,8 +48,7 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\04math.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
+
 a=5
 b=2.2
 print(a+b)
@@ -94,8 +74,7 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\05print.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
+
 a=4
 b=2.2
 c="hello"
@@ -125,8 +104,7 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\06if.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
+
 a=4
 if a == 1:
    print('1')
@@ -145,7 +123,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\07if2.py
 
-#!/usr/bin/env
 a='2'
 b='2'
 if a == '2' and b=='1':
@@ -164,8 +141,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\08array.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
 a=['Apple', 'Watermelon', 'Banana']
 print(a[1])
 
@@ -175,8 +150,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\09array1.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
 a=[123,456,789]
 print(a[1])
 
@@ -186,8 +159,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\09array2.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
 a=[[11,22,33],
    [44,55,66],
    [77,88,99]]
@@ -198,8 +169,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\11range.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
 a=range(10)
 print(a)         # Pyton 2.x
 print(list(a))   # Pyton 3.x
@@ -209,8 +178,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\12range2.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
 a=range(2,6)
 print(a)         # Pyton 2.x
 print(list(a))   # Pyton 3.x
@@ -219,7 +186,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\13range3.py
 
-#!/usr/bin/env
 a=range(0,6,2)
 print(a)         # Pyton 2.x
 print(list(a))   # Pyton 3.x
@@ -228,7 +194,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\14range4.py
 
-#!/usr/bin/env
 a=range(6,0,-2)
 print(a)         # Pyton 2.x
 print(list(a))   # Pyton 3.x
@@ -238,8 +203,7 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\15for1.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
+
 for x in range(10):  #0,1,2....,9
     print(x)
 print("end")
@@ -249,8 +213,7 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\16for2.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
+
 a=range(10)
 print(list(a))
 for x in a:
@@ -261,8 +224,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\17for3.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
 for x in range(2,6):
     print(x)
 print("end")
@@ -271,8 +232,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\18for4.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
 for x in range(0,6,2):    # [0,2,4]
     print(x)
 print("end")
@@ -294,8 +253,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\19for5.py
 
-#!/usr/bin/env
-__author__ = "Powen Ko, www.powenko.com"
 for x in range(6,0,-2):    #[6,4,2]
     print(x)
 print("end")
@@ -305,7 +262,6 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\20for6.py
 
-#!/usr/bin/env
 a=['Apple', 'Watermelon', 'Banana']
 for x in a:
     print(x)
@@ -316,9 +272,8 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\21for6-exam99.py
 
-#!/usr/bin/env
 # -*- coding:utf-8  -*-
-__author__ = "Powen Ko, www.powenko.com"
+
 
 for x in range(1,10):
    for y in range(1,10):
@@ -331,9 +286,8 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\22utf-8.py
 
-#!/usr/bin/env
 # -*- coding:utf-8  -*-
-__author__ = "Powen Ko, www.powenko.com"
+
 
 try:            #python 3.x
    name= input("名字:")
@@ -347,9 +301,8 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\23while1.py
 
-#!/usr/bin/env
 # -*- coding:utf-8  -*-
-__author__ = "Powen Ko, www.powenko.com"
+
 
 x=0
 while x<5:
@@ -370,9 +323,8 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\24while2.py
 
-#!/usr/bin/env
 # -*- coding:utf-8  -*-
-__author__ = "Powen Ko, www.powenko.com"
+
 
 x=0
 while x<=20:
@@ -385,9 +337,8 @@ print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\25while3.py
 
-#!/usr/bin/env
 # -*- coding:utf-8  -*-
-__author__ = "Powen Ko, www.powenko.com"
+
 
 x=0
 while x<9:

@@ -1,11 +1,5 @@
-#!/usr/bin/python 
-# import Tkinter
-try:
-  import Tkinter as tk
-  import tkMessageBox
-except ImportError:
-  import tkinter as tk
-  import tkinter.messagebox as tkMessageBox
+import tkinter as tk
+import tkinter.messagebox as tkMessageBox
 
 win = tk.Tk()
 def hello():
@@ -20,7 +14,6 @@ def hello():
    print(result)
    result=tkMessageBox.askretrycancel("PowenKo.com", "askretrycancel")
    print(result)
-
 
 B1 = tk.Button(win, text = "Say Hello", command = hello)
 B1.pack()

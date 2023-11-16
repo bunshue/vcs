@@ -1,9 +1,5 @@
-#!/usr/bin/python 
-try:
-  import Tkinter as tk 
-except ImportError:
-  import tkinter as tk
-  from tkinter import StringVar
+import tkinter as tk
+from tkinter import StringVar
 
 def event1():
     print(entry1.get())
@@ -19,7 +15,5 @@ v = StringVar()     #
 label1 =tk.Label(win,text="Hello World!", textvariable=v)
 label1.pack()
 v.set("New Text!")
+
 win.mainloop()
-
-
-
