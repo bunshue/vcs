@@ -27,8 +27,13 @@ _4.python/sqlite/ims_sql/QC_debug/*.*
 #vcs 相關產出之檔案
 *.suo
 
+#目前難以避掉所有的vcs之bin和obj
 _2.vcs/*/*/*/bin/*
 _2.vcs/*/*/*/obj/*
+_2.vcs/*/*/*/bin
+_2.vcs/*/*/*/obj
+_2.vcs/*/*/*/vcs_RichTextBox5_Conversion/bin
+_2.vcs/my_vcs_lesson_3/_RichTextBox/vcs_RichTextBox5_Conversion/vcs_RichTextBox5_Conversion/obj
 
 # Python 相關產出之檔案
 __pycache__/

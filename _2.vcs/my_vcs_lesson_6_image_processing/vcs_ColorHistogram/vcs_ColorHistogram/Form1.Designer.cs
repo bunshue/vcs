@@ -56,6 +56,9 @@
             this.lb_w = new System.Windows.Forms.Label();
             this.tb_filename = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox_control = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.bt_save_picture = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             this.groupBox_selection.SuspendLayout();
@@ -63,6 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
+            this.groupBox_control.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -86,55 +90,55 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(98, 520);
+            this.button1.Location = new System.Drawing.Point(92, 20);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 40);
             this.button1.TabIndex = 28;
-            this.button1.Text = "統計1";
+            this.button1.Text = "亮度量測";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(903, 514);
+            this.bt_clear.Location = new System.Drawing.Point(25, 190);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(69, 32);
             this.bt_clear.TabIndex = 30;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
-            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click_1);
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(428, 373);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 135);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(567, 187);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 29;
             this.richTextBox1.Text = "";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(184, 520);
+            this.button2.Location = new System.Drawing.Point(178, 20);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 40);
             this.button2.TabIndex = 31;
-            this.button2.Text = "亮度量測";
+            this.button2.Text = "Channel 交換";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(270, 520);
+            this.button3.Location = new System.Drawing.Point(6, 68);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(80, 40);
             this.button3.TabIndex = 32;
-            this.button3.Text = "Channel 交換";
+            this.button3.Text = "統計";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(12, 520);
+            this.button0.Location = new System.Drawing.Point(6, 20);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(80, 40);
             this.button0.TabIndex = 33;
@@ -145,7 +149,7 @@
             // bt_open_picture
             // 
             this.bt_open_picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_picture.Location = new System.Drawing.Point(12, 454);
+            this.bt_open_picture.Location = new System.Drawing.Point(264, 20);
             this.bt_open_picture.Name = "bt_open_picture";
             this.bt_open_picture.Size = new System.Drawing.Size(60, 60);
             this.bt_open_picture.TabIndex = 249;
@@ -154,40 +158,38 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 566);
+            this.button4.Location = new System.Drawing.Point(92, 68);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(80, 40);
             this.button4.TabIndex = 250;
+            this.button4.Text = "統計 3秒一次";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(98, 566);
+            this.button5.Location = new System.Drawing.Point(178, 66);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(80, 40);
             this.button5.TabIndex = 251;
-            this.button5.Text = "統計2";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(184, 565);
+            this.button6.Location = new System.Drawing.Point(6, 121);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(80, 40);
             this.button6.TabIndex = 252;
-            this.button6.Text = "統計3 3秒一次";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(270, 565);
+            this.button7.Location = new System.Drawing.Point(92, 121);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(80, 40);
             this.button7.TabIndex = 253;
-            this.button7.Text = "Clear";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -204,9 +206,9 @@
             this.groupBox_selection.Controls.Add(this.nud_x_st);
             this.groupBox_selection.Controls.Add(this.lb_y_st);
             this.groupBox_selection.Controls.Add(this.lb_w);
-            this.groupBox_selection.Location = new System.Drawing.Point(571, 156);
+            this.groupBox_selection.Location = new System.Drawing.Point(224, 190);
             this.groupBox_selection.Name = "groupBox_selection";
-            this.groupBox_selection.Size = new System.Drawing.Size(300, 200);
+            this.groupBox_selection.Size = new System.Drawing.Size(238, 193);
             this.groupBox_selection.TabIndex = 254;
             this.groupBox_selection.TabStop = false;
             this.groupBox_selection.Text = "選取區域";
@@ -345,9 +347,9 @@
             // tb_filename
             // 
             this.tb_filename.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_filename.Location = new System.Drawing.Point(13, 414);
+            this.tb_filename.Location = new System.Drawing.Point(118, 135);
             this.tb_filename.Name = "tb_filename";
-            this.tb_filename.Size = new System.Drawing.Size(59, 30);
+            this.tb_filename.Size = new System.Drawing.Size(100, 30);
             this.tb_filename.TabIndex = 255;
             // 
             // timer1
@@ -355,24 +357,56 @@
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // groupBox_control
+            // 
+            this.groupBox_control.Controls.Add(this.bt_save_picture);
+            this.groupBox_control.Controls.Add(this.button8);
+            this.groupBox_control.Controls.Add(this.bt_open_picture);
+            this.groupBox_control.Controls.Add(this.button0);
+            this.groupBox_control.Controls.Add(this.button1);
+            this.groupBox_control.Controls.Add(this.button7);
+            this.groupBox_control.Controls.Add(this.button2);
+            this.groupBox_control.Controls.Add(this.button6);
+            this.groupBox_control.Controls.Add(this.button3);
+            this.groupBox_control.Controls.Add(this.button5);
+            this.groupBox_control.Controls.Add(this.button4);
+            this.groupBox_control.Location = new System.Drawing.Point(224, 12);
+            this.groupBox_control.Name = "groupBox_control";
+            this.groupBox_control.Size = new System.Drawing.Size(346, 172);
+            this.groupBox_control.TabIndex = 256;
+            this.groupBox_control.TabStop = false;
+            this.groupBox_control.Text = "功能";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(178, 121);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(80, 40);
+            this.button8.TabIndex = 254;
+            this.button8.Text = "Clear";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // bt_save_picture
+            // 
+            this.bt_save_picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_save_picture.Location = new System.Drawing.Point(264, 93);
+            this.bt_save_picture.Name = "bt_save_picture";
+            this.bt_save_picture.Size = new System.Drawing.Size(60, 60);
+            this.bt_save_picture.TabIndex = 255;
+            this.bt_save_picture.UseVisualStyleBackColor = true;
+            this.bt_save_picture.Click += new System.EventHandler(this.bt_save_picture_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 617);
+            this.ClientSize = new System.Drawing.Size(763, 481);
+            this.Controls.Add(this.groupBox_control);
             this.Controls.Add(this.tb_filename);
             this.Controls.Add(this.groupBox_selection);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.bt_open_picture);
-            this.Controls.Add(this.button0);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox0);
             this.Name = "Form1";
@@ -387,6 +421,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).EndInit();
+            this.groupBox_control.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -421,6 +456,9 @@
         private System.Windows.Forms.TextBox tb_filename;
         private System.Windows.Forms.RadioButton rb_selection3;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.GroupBox groupBox_control;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button bt_save_picture;
     }
 }
 

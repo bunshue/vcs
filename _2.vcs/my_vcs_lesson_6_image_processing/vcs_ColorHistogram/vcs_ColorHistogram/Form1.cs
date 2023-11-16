@@ -9,9 +9,7 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for DashStyle
-
 using System.Diagnostics;       //for StopWatch
-using System.Drawing.Imaging;   //for ImageFormat
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;
@@ -475,7 +473,6 @@ namespace vcs_ColorHistogram
 
             g4.DrawRectangle(Pens.Red, 750, hh2 - brightness_sp, width, brightness_sp - brightness_st);
 
-
             //richTextBox1.Text += "brightness data :\n";
             //printArrayData(yuv_data_y);
             int mm = yuv_data_y.Max();
@@ -849,8 +846,10 @@ namespace vcs_ColorHistogram
             int H = 480;
 
             pictureBox0.Size = new Size(W, H);
-            pictureBox1.Size = new Size(W, H);
-            richTextBox1.Size = new Size(W, H-160);
+            //pictureBox1.Size = new Size(W, H);
+            pictureBox1.Size = new Size(512 * 2 + 100, 900);
+
+            richTextBox1.Size = new Size(W, H - 100);
 
             x_st = 0;
             y_st = 0;
@@ -864,37 +863,47 @@ namespace vcs_ColorHistogram
             x_st = 20;
             y_st = -80;
             dx = 100;
-            tb_filename.Size = new Size(800, 50);
-            tb_filename.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 70);
-            button0.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 20);
-            button1.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 20);
-            button2.Location = new Point(x_st + dx * 2, y_st + dy * 2 - 20);
-            button3.Location = new Point(x_st + dx * 3, y_st + dy * 2 - 20);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 30);
-            button5.Location = new Point(x_st + dx * 1, y_st + dy * 2 + 30);
-            button6.Location = new Point(x_st + dx * 2, y_st + dy * 2 + 30);
-            button7.Location = new Point(x_st + dx * 3, y_st + dy * 2 + 30);
+            tb_filename.Size = new Size(620, 50);
+            tb_filename.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 15);
 
-            bt_open_picture.Location = new Point(x_st + dx * 4, y_st + dy * 2 - 20);
-            bt_open_picture.BackgroundImage = vcs_ColorHistogram.Properties.Resources.open_folder;
-
-            groupBox_selection.Location = new Point(x_st + dx * 5, y_st + dy * 2 - 20);
+            groupBox_control.Size = new Size(360, 170);
+            groupBox_control.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 20);
+            groupBox_selection.Size = new Size(250, 170);
+            groupBox_selection.Location = new Point(x_st + dx * 4 - 30, y_st + dy * 2 + 20);
 
             //button
             x_st = 20;
-            y_st = 30;
-            dx = 190;
-            dy = 45;
+            y_st = 20;
+            dx = 80 + 10;
+            dy = 40 + 10;
 
-            x_st = 610;
-            y_st = 30;
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button8.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_open_picture.Location = new Point(x_st + dx * 3, y_st + dy * 0 + 5);
+            bt_open_picture.BackgroundImage = vcs_ColorHistogram.Properties.Resources.open_folder;
+            bt_save_picture.Location = new Point(x_st + dx * 3, y_st + dy * 1 + 30 - 5);
+            bt_save_picture.BackgroundImage = vcs_ColorHistogram.Properties.Resources.save;
 
-            max = 255;
-            min = 0;
-            brightness = 128;
-            brightness_old = 128;
-            contrast = 128;
-            contrast_old = 128;
+            dx = 60;
+            dy = 36;
+            lb_x_st.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lb_y_st.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lb_w.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_h.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            nud_x_st.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            nud_y_st.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            nud_w.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            nud_h.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            rb_selection1.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 0);
+            rb_selection2.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 1);
+            rb_selection3.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 2);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -942,15 +951,6 @@ namespace vcs_ColorHistogram
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
         }
 
         void measure_brightness0(PictureBox pbox_source)
@@ -1168,68 +1168,9 @@ namespace vcs_ColorHistogram
             return bitmap1;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        void do_measure_brightness_all()
         {
-            //亮度量測
-            measure_brightness();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            //Channel 交換
-
-            //讀取圖檔, 先放在Bitmap裏
-            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            pictureBox1.Image = bitmap1;
-
-            /* 畫色塊
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            g.FillRectangle(new SolidBrush(Color.Red), 50, 100, 50, 50);
-            g.FillRectangle(new SolidBrush(Color.Lime), 50, 100+70, 50, 50);
-            g.FillRectangle(new SolidBrush(Color.Blue), 50, 100+140, 50, 50);
-            */
-
-            int i;
-            int j;
-            Color pt;
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            for (j = 0; j < H; j++)
-            {
-                for (i = 0; i < W; i++)
-                {
-                    pt = bitmap1.GetPixel(i, j);
-
-                    RGB pp = new RGB(pt.R, pt.G, pt.B);
-
-                    byte r = pp.R;
-                    byte g = pp.G;
-                    byte b = pp.B;
-
-                    Color cc = Color.FromArgb(255, g, b, b);
-
-                    bitmap1.SetPixel(i, j, cc);
-
-                }
-            }
-            //bitmap1.Save("pic_modify3.bmp", ImageFormat.Bmp);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //統計2
             clear_all_pictures();
-
-            pictureBox1.Size = new Size(512 * 2 + 100, 900);
-            pictureBox1.BringToFront();
 
             measure_brightness_all(pictureBox0, pictureBox1);
         }
@@ -1280,26 +1221,7 @@ namespace vcs_ColorHistogram
             pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 600, 600, "V");
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            if (timer1.Enabled == false)
-            {
-                timer1.Enabled = true;
-                button6.BackColor = Color.Pink;
-            }
-            else
-            {
-                timer1.Enabled = false;
-                button6.BackColor = SystemColors.ControlLight;
-            }
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            clear_all_pictures();
-        }
-
-        private void bt_open_picture_Click(object sender, EventArgs e)
+        void do_select_picture(object sender, EventArgs e)
         {
             Stop_Webcam();
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -1347,20 +1269,142 @@ namespace vcs_ColorHistogram
             }
         }
 
+        void do_save_picture(object sender, EventArgs e)
+        {
+            if (bitmap1 != null)
+            {
+                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+                try
+                {
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e40 : " + ex.Message + "\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+            }
+            return;
+        }
+
         void clear_all_pictures()
         {
             pictureBox1.Image = null;
         }
 
-        private void bt_clear_Click_1(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
-            richTextBox1.Text += "A ";
-            button5_Click(sender, e);
+            do_measure_brightness_all();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //亮度量測
+            measure_brightness();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Channel 交換
+
+            //讀取圖檔, 先放在Bitmap裏
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+
+            /* 畫色塊
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            g.FillRectangle(new SolidBrush(Color.Red), 50, 100, 50, 50);
+            g.FillRectangle(new SolidBrush(Color.Lime), 50, 100+70, 50, 50);
+            g.FillRectangle(new SolidBrush(Color.Blue), 50, 100+140, 50, 50);
+            */
+
+            int i;
+            int j;
+            Color pt;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    pt = bitmap1.GetPixel(i, j);
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+
+                    byte r = pp.R;
+                    byte g = pp.G;
+                    byte b = pp.B;
+
+                    Color cc = Color.FromArgb(255, g, b, b);
+
+                    bitmap1.SetPixel(i, j, cc);
+
+                }
+            }
+            //bitmap1.Save("pic_modify3.bmp", ImageFormat.Bmp);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //統計
+            do_measure_brightness_all();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (timer1.Enabled == false)
+            {
+                timer1.Enabled = true;
+                button4.BackColor = Color.Pink;
+            }
+            else
+            {
+                timer1.Enabled = false;
+                button4.BackColor = SystemColors.ControlLight;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            clear_all_pictures();
+        }
+
+        private void bt_open_picture_Click(object sender, EventArgs e)
+        {
+            do_select_picture(sender, e);
+        }
+
+        private void bt_save_picture_Click(object sender, EventArgs e)
+        {
+            do_save_picture(sender, e);
         }
     }
 }
+
