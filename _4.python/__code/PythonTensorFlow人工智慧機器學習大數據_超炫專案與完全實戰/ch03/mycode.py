@@ -1,1 +1,0 @@
-print("see you again,powenko")

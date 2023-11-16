@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# author: Powen Ko  柯博文老師  www.powenko.com
-# -*- coding: utf-8 -*-
-
 import cv2
 import numpy as np
 import tensorflow as tf
@@ -18,7 +14,6 @@ model.load_weights("model.h5")
 model.compile(loss=tf.keras.losses.categorical_crossentropy,
             optimizer=tf.keras.optimizers.Adadelta(),
             metrics=['accuracy'])
-
 
 def CNN():
     img_rows=28
@@ -52,8 +47,6 @@ def draw_circle(event,x,y,flags,param):
         drawing = False
         cv2.circle(img,(x,y),1,(255),-1)
 cv2.setMouseCallback('image', draw_circle)
-
-
 
 while (1):
     cv2.imshow('image', img)

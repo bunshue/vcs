@@ -1,14 +1,8 @@
-#!/usr/bin/env python
-# author: Powen Ko  柯博文老師  www.powenko.com
-# -*- coding: utf-8 -*-
-
 import cv2
 import numpy as np
 
-
 img = np.full(shape=(28, 28, 1), fill_value=0, dtype=np.uint8)
 cv2.namedWindow('image')
-
 
 drawing = False
 def draw_circle(event,x,y,flags,param):

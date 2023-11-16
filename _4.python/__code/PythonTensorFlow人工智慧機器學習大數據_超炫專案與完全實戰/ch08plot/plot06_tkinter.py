@@ -1,7 +1,3 @@
-#!/usr/bin/env
-# -*- coding: utf-8 -*-    
-__author__ = "Powen Ko, www.powenko.com"
-
 try:
   import Tkinter as tk 
 except ImportError:

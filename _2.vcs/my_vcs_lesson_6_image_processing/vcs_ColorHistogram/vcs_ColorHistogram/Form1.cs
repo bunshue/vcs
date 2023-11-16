@@ -28,7 +28,7 @@ namespace vcs_ColorHistogram
 {
     public partial class Form1 : Form
     {
-        bool flag_webcam_mode = true;
+        bool flag_webcam_mode = false;
 
         //參考
         //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
@@ -520,7 +520,7 @@ namespace vcs_ColorHistogram
 
             richTextBox1.Text += "eeeee2222\n";
 
-            pictureBox2.Image = bmp4;
+            pictureBox1.Image = bmp4;
         }
 
         void FindYMaxYMin(int[] array, out int y_min, out int y_max)
@@ -850,12 +850,7 @@ namespace vcs_ColorHistogram
 
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
-            pictureBox2.Size = new Size(W, H);
-            pictureBox3.Size = new Size(512, 300);
-            pictureBox4.Size = new Size(512, 300);
-            pictureBox5.Size = new Size(512, 300);
-            int tt = -80;
-            richTextBox1.Size = new Size(W, 1080 - 480 - 200 + tt - 140 - 0);
+            richTextBox1.Size = new Size(W, H-160);
 
             x_st = 0;
             y_st = 0;
@@ -864,13 +859,7 @@ namespace vcs_ColorHistogram
 
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox5.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1 + 330 - tt + 0);
-            richTextBox1.BringToFront();
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             x_st = 20;
             y_st = -80;
@@ -962,30 +951,6 @@ namespace vcs_ColorHistogram
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //統計1
-            clear_all_pictures();
-
-            pictureBox2.Size = new Size(512, 300);
-            pictureBox5.Visible = true;
-
-            measure_brightness(pictureBox0, pictureBox2, pictureBox3, pictureBox4, pictureBox5);
-        }
-
-        void measure_brightness(PictureBox pbox_source, PictureBox pbox_y, PictureBox pbox_r, PictureBox pbox_g, PictureBox pbox_b)
-        {
-            richTextBox1.Text += "\n\n圖片 : " + filename + "\n";
-            if (pbox_source.Image == null)
-            {
-                richTextBox1.Text += pbox_source.Name + " 無影像, 離開\n";
-                return;
-            }
-
-            measure_brightness0(pbox_source);
-
-            draw_color_histogram(yuv_data_y, pbox_y, Color.Yellow, "Y");
-            draw_color_histogram(rgb_data_r, pbox_r, Color.Red, "R");
-            draw_color_histogram(rgb_data_g, pbox_g, Color.Green, "G");
-            draw_color_histogram(rgb_data_b, pbox_b, Color.Blue, "B");
         }
 
         void measure_brightness0(PictureBox pbox_source)
@@ -1054,17 +1019,7 @@ namespace vcs_ColorHistogram
             richTextBox1.Text += "共量測 " + total_points.ToString() + " 個點\n";
         }
 
-        void draw_color_histogram(int[] color_data, PictureBox pbox, Color color, string message)
-        {
-            int ww = 512;
-            int hh1 = 300;
-            //int hh2 = 256;
-            bitmap1 = new Bitmap(ww, hh1);
-
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 0, message);
-        }
-
-        Bitmap draw_color_histogram0(Bitmap bitmap1, int[] color_data, Color color, int y_offset, string message)
+        Bitmap draw_color_histogram0(Bitmap bitmap1, int[] color_data, Color color, int x_offset, int y_offset, string message)
         {
             int ww = 512;
             int hh1 = 300;
@@ -1108,26 +1063,26 @@ namespace vcs_ColorHistogram
 
             for (i = 0; i < 256; i++)
             {
-                g1.FillRectangle(br, i * 2, y_offset + hh2 - (float)(color_data[i] * ratio), 2, (float)(color_data[i] * ratio));
+                g1.FillRectangle(br, x_offset + i * 2, y_offset + hh2 - (float)(color_data[i] * ratio), 2, (float)(color_data[i] * ratio));
             }
 
             //畫連線
             Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
             for (i = 0; i < 256; i++)
             {
-                curvePoints[i].X = i * 2;
+                curvePoints[i].X = x_offset + i * 2;
                 curvePoints[i].Y = y_offset + hh2 - (int)(color_data[i] * ratio);
             }
             g1.DrawCurve(new Pen(Color.Cyan, 3), curvePoints); //畫曲線
 
-            g1.DrawRectangle(p, 0 + 1, y_offset + 0 + 1, ww - 2, hh1 - 2);
-            g1.DrawRectangle(p, 0 + 1, y_offset + 0 + 1, ww - 2, hh2 - 2);
+            g1.DrawRectangle(p, x_offset + 0 + 1, y_offset + 0 + 1, ww - 2, hh1 - 2);
+            g1.DrawRectangle(p, x_offset + 0 + 1, y_offset + 0 + 1, ww - 2, hh2 - 2);
 
             b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
-            g1.FillRectangle(b, min * 2, y_offset + 0, (max - min) * 2, hh1);
+            g1.FillRectangle(b, x_offset + min * 2, y_offset + 0, (max - min) * 2, hh1);
 
             p = new Pen(color, 3);
-            g1.DrawLine(p, min * 2, y_offset + hh2, max * 2, y_offset + 0);
+            g1.DrawLine(p, x_offset + min * 2, y_offset + hh2, x_offset + max * 2, y_offset + 0);
 
             //richTextBox1.Text += "max = " + max.ToString() + "\n";
             //richTextBox1.Text += "min = " + min.ToString() + "\n";
@@ -1144,33 +1099,33 @@ namespace vcs_ColorHistogram
                 draw_most_index = most_index - 128;
 
                 //多畫一個0
-                g1.DrawLine(p, 128 * 2, y_offset + hh2 + 15, 128 * 2, y_offset + hh2 - 15);
-                g1.DrawString("0", f, new SolidBrush(Color.Blue), new PointF(128 * 2, y_offset + hh2));
+                g1.DrawLine(p, x_offset + 128 * 2, y_offset + hh2 + 15, x_offset + 128 * 2, y_offset + hh2 - 15);
+                g1.DrawString("0", f, new SolidBrush(Color.Blue), new PointF(x_offset + 128 * 2, y_offset + hh2));
             }
 
             if ((min >= 0) && (min <= 103))
             {
-                g1.DrawString(draw_min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, y_offset + hh2));
+                g1.DrawString(draw_min.ToString(), f, new SolidBrush(Color.Blue), new PointF(x_offset + min * 2, y_offset + hh2));
             }
             else if (min < 0)
             {
-                g1.DrawString(draw_min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, y_offset + hh2));
+                g1.DrawString(draw_min.ToString(), f, new SolidBrush(Color.Blue), new PointF(x_offset + 0, y_offset + hh2));
             }
             else
             {
-                g1.DrawString(draw_min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, y_offset + hh2));
+                g1.DrawString(draw_min.ToString(), f, new SolidBrush(Color.Blue), new PointF(x_offset + 103 * 2, y_offset + hh2));
             }
             if ((max <= 255) && (max >= 152))
             {
-                g1.DrawString(draw_max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, y_offset + hh2));
+                g1.DrawString(draw_max.ToString(), f, new SolidBrush(Color.Blue), new PointF(x_offset + max * 2 - 50, y_offset + hh2));
             }
             else if (max > 255)
             {
-                g1.DrawString(draw_max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, y_offset + hh2));
+                g1.DrawString(draw_max.ToString(), f, new SolidBrush(Color.Blue), new PointF(x_offset + 512 - 50, y_offset + hh2));
             }
             else
             {
-                g1.DrawString(draw_max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, y_offset + hh2));
+                g1.DrawString(draw_max.ToString(), f, new SolidBrush(Color.Blue), new PointF(x_offset + 152 * 2 - 50, y_offset + hh2));
             }
 
             //標出最大值
@@ -1181,34 +1136,34 @@ namespace vcs_ColorHistogram
             if (color == Color.Red)
             {
                 if (most_index < 220)
-                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Blue), new PointF(most_index * 2 + 15, y_offset + 20));
+                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Blue), new PointF(x_offset + most_index * 2 + 15, y_offset + 20));
                 else
-                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Blue), new PointF(most_index * 2 - 110, y_offset + 20));
+                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Blue), new PointF(x_offset + most_index * 2 - 110, y_offset + 20));
                 p = new Pen(Color.Blue, linewidth);
-                g1.DrawLine(p, most_index * 2, y_offset + 0, most_index * 2, y_offset + hh2);
+                g1.DrawLine(p, x_offset + most_index * 2, y_offset + 0, x_offset + most_index * 2, y_offset + hh2);
 
-                g1.DrawString(draw_most_index.ToString(), f, new SolidBrush(Color.Blue), new PointF(most_index * 2 - 16, y_offset + hh2 + 16));
+                g1.DrawString(draw_most_index.ToString(), f, new SolidBrush(Color.Blue), new PointF(x_offset + most_index * 2 - 16, y_offset + hh2 + 16));
             }
             else
             {
                 if (most_index < 220)
-                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Red), new PointF(most_index * 2 + 15, y_offset + 20));
+                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Red), new PointF(x_offset + most_index * 2 + 15, y_offset + 20));
                 else
-                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Red), new PointF(most_index * 2 - 110, y_offset + 20));
+                    g1.DrawString(most.ToString(), f, new SolidBrush(Color.Red), new PointF(x_offset + most_index * 2 - 110, y_offset + 20));
                 p = new Pen(Color.Red, linewidth);
-                g1.DrawLine(p, most_index * 2, y_offset + 0, most_index * 2, y_offset + hh2);
+                g1.DrawLine(p, x_offset + most_index * 2, y_offset + 0, x_offset + most_index * 2, y_offset + hh2);
 
-                g1.DrawString(draw_most_index.ToString(), f, new SolidBrush(Color.Red), new PointF(most_index * 2 - 16, y_offset + hh2 + 16));
+                g1.DrawString(draw_most_index.ToString(), f, new SolidBrush(Color.Red), new PointF(x_offset + most_index * 2 - 16, y_offset + hh2 + 16));
             }
 
-            g1.DrawString(message, f, new SolidBrush(Color.Red), new PointF(10, y_offset + 40));
+            g1.DrawString(message, f, new SolidBrush(Color.Red), new PointF(x_offset + 10, y_offset + 40));
 
             double offset = 0.0;
             if ((message == "U") || (message == "V"))
             {
                 offset = -128.0;
             }
-            g1.DrawString((((double)total_values / total_points) + offset).ToString("F2"), f, new SolidBrush(Color.Red), new PointF(10, y_offset + 70));
+            g1.DrawString((((double)total_values / total_points) + offset).ToString("F2"), f, new SolidBrush(Color.Red), new PointF(x_offset + 10, y_offset + 70));
 
             return bitmap1;
         }
@@ -1273,12 +1228,13 @@ namespace vcs_ColorHistogram
             //統計2
             clear_all_pictures();
 
-            pictureBox2.Size = new Size(512, 900);
-            pictureBox5.Visible = false;
-            measure_brightness_mix(pictureBox0, pictureBox2);
+            pictureBox1.Size = new Size(512 * 2 + 100, 900);
+            pictureBox1.BringToFront();
+
+            measure_brightness_all(pictureBox0, pictureBox1);
         }
 
-        void measure_brightness_mix(PictureBox pbox_source, PictureBox pbox_destination)
+        void measure_brightness_all(PictureBox pbox_source, PictureBox pbox_destination)
         {
             richTextBox1.Text += "\n\n圖片 : " + filename + "\n";
             if (pbox_source.Image == null)
@@ -1288,27 +1244,40 @@ namespace vcs_ColorHistogram
             }
             measure_brightness0(pbox_source);
 
-            draw_color_histogram_mix(pbox_destination);
+            draw_color_histogram_all(pbox_destination);
         }
 
-        void draw_color_histogram_mix(PictureBox pbox)
+        void draw_color_histogram_all(PictureBox pbox)
         {
-            int ww = 512;
+            //int ww = 512;
+            int ww = 512 * 2 + 100;
             int hh1 = 900;
             //int hh2 = 256;
             bitmap1 = new Bitmap(ww, hh1);
 
             Color color = Color.Red;
-            int[] color_data = yuv_data_y;
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 0, "Y");
+            int[] color_data = rgb_data_r;
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 0, 0, "R");
+
+            color = Color.Green;
+            color_data = rgb_data_g;
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 0, 300, "G");
+
+            color = Color.Blue;
+            color_data = rgb_data_b;
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 0, 600, "B");
+
+            color = Color.Yellow;
+            color_data = yuv_data_y;
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 600, 0, "Y");
 
             color = Color.Green;
             color_data = yuv_data_u;
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 300, "U");
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 600, 300, "U");
 
             color = Color.Blue;
             color_data = yuv_data_v;
-            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 600, "V");
+            pbox.Image = draw_color_histogram0(bitmap1, color_data, color, 600, 600, "V");
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -1381,10 +1350,6 @@ namespace vcs_ColorHistogram
         void clear_all_pictures()
         {
             pictureBox1.Image = null;
-            pictureBox2.Image = null;
-            pictureBox3.Image = null;
-            pictureBox4.Image = null;
-            pictureBox5.Image = null;
         }
 
         private void bt_clear_Click_1(object sender, EventArgs e)
