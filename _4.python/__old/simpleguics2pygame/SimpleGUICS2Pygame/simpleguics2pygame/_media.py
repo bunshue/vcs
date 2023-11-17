@@ -31,12 +31,8 @@ import os  # noqa
 
 import pygame
 
-if version_info[0] >= 3:
-    from urllib.parse import urlsplit
-    from urllib.request import urlopen
-else:
-    from urlparse import urlsplit  # type: ignore  # pylint: disable=import-error  # noqa
-    from urllib2 import urlopen  # type: ignore  # pylint: disable=import-error  # noqa
+from urllib.parse import urlsplit
+from urllib.request import urlopen
 
 try:
     from typing import Dict, List, Optional, Union

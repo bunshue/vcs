@@ -31,7 +31,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 #下方的程式碼，執行後會先使用 x 和 y 畫出一個二維的直角座標系統，
 #接著 z 使用二維陣列，標記每個位置的高度，最後就會根據數據資料畫出等高線圖。
 
@@ -173,7 +173,92 @@ plt.contourf(xx, yy, zz, alpha = 0.3)
 plt.title('函數 z = x^2 + y^2')
 plt.grid()
 plt.show()
+'''
+print('------------------------------------------------------------')	#60個
+
+
 
 print('------------------------------------------------------------')	#60個
 
+x = np.array([1,2,3,4])
+y = np.array([5,6,7,8])
+X, Y = np.meshgrid(x, y)
+
+
+Z = np.random.randint(0, 3, (4,4))
+plt.contour(X, Y, Z)
+
+plt.show()
+
+plt.contourf(X, Y, Z)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+for i in range(4):
+    plt.subplot(2, 2, i+1)
+    Z = np.random.randint(0, 3, (4, 4))
+    plt.contour(X, Y, Z, cmap="Paired")
+    plt.scatter(X.ravel(), Y.ravel(), c=Z.ravel(),
+                s = 20,
+                cmap="Paired")
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+x = np.array([1, 2, 3, 4])
+y = np.array([5, 6, 7, 8])
+
+X, Y = np.meshgrid(x, y)
+
+Z = np.random.randint(1, 3, (4, 4))
+
+Z = np.random.randint(1, 3, X.shape)    #same
+
+plt.contour(X, Y, Z)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+x = X.ravel()
+
+x.reshape(4,4)
+y = Y.ravel()
+
+z = Z.ravel()
+plt.contour(X, Y, Z)
+plt.scatter(x, y, c=z)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+plt.contourf(X, Y, Z)
+
+plt.show()
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
 

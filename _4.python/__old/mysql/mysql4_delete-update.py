@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
 try:
  import MySQLdb                         # pip install MySQL-python
 except:
@@ -25,6 +22,3 @@ cursor.execute("SELECT * FROM mytable")
 result = cursor.fetchall()
 for record in result:
     print("value01=%s value02=%s" %(record[0],record[1]))
-
-
-    

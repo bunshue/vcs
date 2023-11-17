@@ -4,7 +4,7 @@ import tkinter.messagebox as tkMessageBox
 
 win = tk.Tk()
 def hello():
-   tkMessageBox.showinfo("Say Hello", "Hello World")
+   tkMessageBox.showinfo('訊息框', "Hello World")
 
 B1 = tk.Button(win, text = "Say Hello", command = hello)
 B1.pack()

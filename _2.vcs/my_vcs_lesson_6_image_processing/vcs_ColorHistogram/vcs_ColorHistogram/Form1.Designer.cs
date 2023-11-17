@@ -59,6 +59,15 @@
             this.groupBox_control = new System.Windows.Forms.GroupBox();
             this.bt_save_picture = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.lb_rgb_r = new System.Windows.Forms.Label();
+            this.lb_rgb_g = new System.Windows.Forms.Label();
+            this.lb_rgb_b = new System.Windows.Forms.Label();
+            this.lb_yuv_y = new System.Windows.Forms.Label();
+            this.lb_yuv_u = new System.Windows.Forms.Label();
+            this.lb_yuv_v = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox_color = new System.Windows.Forms.GroupBox();
+            this.timer_rgb = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             this.groupBox_selection.SuspendLayout();
@@ -67,6 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
             this.groupBox_control.SuspendLayout();
+            this.groupBox_color.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -397,11 +407,105 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // lb_rgb_r
+            // 
+            this.lb_rgb_r.AutoSize = true;
+            this.lb_rgb_r.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_r.ForeColor = System.Drawing.Color.Red;
+            this.lb_rgb_r.Location = new System.Drawing.Point(18, 18);
+            this.lb_rgb_r.Name = "lb_rgb_r";
+            this.lb_rgb_r.Size = new System.Drawing.Size(30, 32);
+            this.lb_rgb_r.TabIndex = 257;
+            this.lb_rgb_r.Text = "R";
+            // 
+            // lb_rgb_g
+            // 
+            this.lb_rgb_g.AutoSize = true;
+            this.lb_rgb_g.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_g.ForeColor = System.Drawing.Color.Green;
+            this.lb_rgb_g.Location = new System.Drawing.Point(35, 18);
+            this.lb_rgb_g.Name = "lb_rgb_g";
+            this.lb_rgb_g.Size = new System.Drawing.Size(30, 32);
+            this.lb_rgb_g.TabIndex = 258;
+            this.lb_rgb_g.Text = "G";
+            // 
+            // lb_rgb_b
+            // 
+            this.lb_rgb_b.AutoSize = true;
+            this.lb_rgb_b.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_b.ForeColor = System.Drawing.Color.Blue;
+            this.lb_rgb_b.Location = new System.Drawing.Point(53, 18);
+            this.lb_rgb_b.Name = "lb_rgb_b";
+            this.lb_rgb_b.Size = new System.Drawing.Size(30, 32);
+            this.lb_rgb_b.TabIndex = 259;
+            this.lb_rgb_b.Text = "B";
+            // 
+            // lb_yuv_y
+            // 
+            this.lb_yuv_y.AutoSize = true;
+            this.lb_yuv_y.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_y.ForeColor = System.Drawing.Color.Gold;
+            this.lb_yuv_y.Location = new System.Drawing.Point(88, 18);
+            this.lb_yuv_y.Name = "lb_yuv_y";
+            this.lb_yuv_y.Size = new System.Drawing.Size(30, 32);
+            this.lb_yuv_y.TabIndex = 260;
+            this.lb_yuv_y.Text = "Y";
+            // 
+            // lb_yuv_u
+            // 
+            this.lb_yuv_u.AutoSize = true;
+            this.lb_yuv_u.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_u.ForeColor = System.Drawing.Color.Blue;
+            this.lb_yuv_u.Location = new System.Drawing.Point(109, 18);
+            this.lb_yuv_u.Name = "lb_yuv_u";
+            this.lb_yuv_u.Size = new System.Drawing.Size(30, 32);
+            this.lb_yuv_u.TabIndex = 261;
+            this.lb_yuv_u.Text = "U";
+            // 
+            // lb_yuv_v
+            // 
+            this.lb_yuv_v.AutoSize = true;
+            this.lb_yuv_v.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_v.ForeColor = System.Drawing.Color.Red;
+            this.lb_yuv_v.Location = new System.Drawing.Point(140, 18);
+            this.lb_yuv_v.Name = "lb_yuv_v";
+            this.lb_yuv_v.Size = new System.Drawing.Size(30, 32);
+            this.lb_yuv_v.TabIndex = 262;
+            this.lb_yuv_v.Text = "V";
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(23, 49);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(90, 60);
+            this.panel1.TabIndex = 263;
+            // 
+            // groupBox_color
+            // 
+            this.groupBox_color.Controls.Add(this.lb_rgb_r);
+            this.groupBox_color.Controls.Add(this.panel1);
+            this.groupBox_color.Controls.Add(this.lb_yuv_v);
+            this.groupBox_color.Controls.Add(this.lb_yuv_u);
+            this.groupBox_color.Controls.Add(this.lb_rgb_g);
+            this.groupBox_color.Controls.Add(this.lb_yuv_y);
+            this.groupBox_color.Controls.Add(this.lb_rgb_b);
+            this.groupBox_color.Location = new System.Drawing.Point(18, 250);
+            this.groupBox_color.Name = "groupBox_color";
+            this.groupBox_color.Size = new System.Drawing.Size(200, 117);
+            this.groupBox_color.TabIndex = 264;
+            this.groupBox_color.TabStop = false;
+            // 
+            // timer_rgb
+            // 
+            this.timer_rgb.Enabled = true;
+            this.timer_rgb.Tick += new System.EventHandler(this.timer_rgb_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(763, 481);
+            this.Controls.Add(this.groupBox_color);
             this.Controls.Add(this.groupBox_control);
             this.Controls.Add(this.tb_filename);
             this.Controls.Add(this.groupBox_selection);
@@ -422,6 +526,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).EndInit();
             this.groupBox_control.ResumeLayout(false);
+            this.groupBox_color.ResumeLayout(false);
+            this.groupBox_color.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -459,6 +565,15 @@
         private System.Windows.Forms.GroupBox groupBox_control;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button bt_save_picture;
+        private System.Windows.Forms.Label lb_rgb_r;
+        private System.Windows.Forms.Label lb_rgb_g;
+        private System.Windows.Forms.Label lb_rgb_b;
+        private System.Windows.Forms.Label lb_yuv_y;
+        private System.Windows.Forms.Label lb_yuv_u;
+        private System.Windows.Forms.Label lb_yuv_v;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox_color;
+        private System.Windows.Forms.Timer timer_rgb;
     }
 }
 

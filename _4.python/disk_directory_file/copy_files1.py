@@ -31,3 +31,4 @@ for imagefile in allfiles:
 
 print("完成")
 print('輸出資料夾 : ', target_dir)
+

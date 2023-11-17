@@ -1,5 +1,7 @@
 import xlrd
 
+print('------------------------------------------------------------')	#60個
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_excel/python_ReadWrite_EXCEL1.xlsx'
 
 print('------------------------------------------------------------')	#60個
@@ -106,11 +108,80 @@ rows = sh.nrows
 for row in range(rows):
     print(sh.row_values(row))
     
+print('------------------------------------------------------------')	#60個
+
+
+import xlrd
+import xlwt
+
+filename_r = 'data/water10705.xls'
+filename_w = 'write1.xls'
+
+print('讀取xls檔, 檔案 :', filename_r)
+
+read = xlrd.open_workbook(filename_r)
+
+sheet = read.sheets()[0]
+#sheet=read.sheets("Sheet5")
+print(sheet.nrows)
+print(sheet.ncols)
+
+write = xlwt.Workbook()
+x1 = 0
+write2 = write.add_sheet('MySheet')
+for i in range(10,36):
+    print(sheet.cell(i,12).value)
+    value=sheet.cell(i,12).value
+    try:
+      x1=x1+float(value)
+    except:
+      print("")
+    write2.write(i, 0, value)
+
+print("total:",x1)
+
+print('寫入xls檔, 檔案 :', filename_w)
+
+write.save(filename_w)
+
+print('------------------------------------------------------------')	#60個
+
+import xlrd
+import xlwt
+
+filename_r = 'data/workfile.xls'
+filename_w = 'write2.xls'
+
+print('讀取xls檔, 檔案 :', filename_r)
+
+read=xlrd.open_workbook(filename_r)
+sheet=read.sheets()[0]
+#sheet=read.sheets("Sheet5")
+print(sheet.nrows)
+print(sheet.ncols)
+
+print(sheet.cell(5,1).value)
+
+write = xlwt.Workbook()
+write2 = write.add_sheet('MySheet')
+for i in range(0,sheet.nrows):
+    print(sheet.cell(i,1).value)
+    value=sheet.cell(i,1).value
+    write2.write(i, 0, value)
+
+print('寫入xls檔, 檔案 :', filename_w)
+write.save(filename_w)
 
 print('------------------------------------------------------------')	#60個
 
 
-        
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
 
 
 

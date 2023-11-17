@@ -1,22 +1,37 @@
-'''
+"""
 參考 使用Matplotlib绘制3D图形
 https://paul.pub/matplotlib-3d-plotting/
 
 參考 Python 使用 Matplotlib 繪製 3D 資料圖形教學與範例
 https://officeguide.cc/python-matplotlib-three-dimensional-plotting-tutorial-examples/
-'''
 
-# 3D plot 集合
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
+"""
+
+# 3D plot 集合 1
+
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
+import math
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 from matplotlib.collections import PolyCollection
 from mpl_toolkits.mplot3d import axes3d
 from matplotlib.cm import viridis as colormap
+
+print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小[英吋]     解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(num = '3D繪圖 集合 1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
@@ -96,10 +111,8 @@ z = 3.*np.cos(np.pi/6.)
 ax.plot(x, y, z, color="r")
 ax.plot(p/3., p/3., p/3., color="b")
 #plt.savefig("matplot-3D-1.png")
-print ('plot is done')
 
 ax.set_title('XXXXXXX2')
-
 
 #等高線
 ax = fig.add_subplot(235, projection='3d')  #第五張圖
@@ -142,8 +155,9 @@ ax.set_yticks(np.arange(2016, 2020))
 ax.set_zlabel('Precipitation')
 ax.set_title('柱狀圖')
 
-
 plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小[英吋]     解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(num = '3D繪圖 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
@@ -270,6 +284,8 @@ ax.quiver(x, y, z, u, v, w, length=0.1, normalize=True)
 ax.set_title('3D 向量場')
 
 plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小[英吋]     解析度    背景色                      邊框顏色                      邊框有無
 fig = plt.figure(num = '3D繪圖 集合 3', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)

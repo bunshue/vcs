@@ -1,8 +1,4 @@
-try:
-  import Tkinter as tk 
-except ImportError:
-  import tkinter as tk
-
+import tkinter as tk
 
 import matplotlib
 matplotlib.use("TkAgg")
@@ -20,10 +16,4 @@ x = [5,6,7,8]
 ax.plot(x)
 
 tk.mainloop()
-
-
-
-
-
-
 

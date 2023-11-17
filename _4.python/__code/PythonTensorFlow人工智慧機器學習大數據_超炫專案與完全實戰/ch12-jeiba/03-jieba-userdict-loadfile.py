@@ -1,9 +1,8 @@
-# -*- coding: UTF-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
 import sys
 from os import path
 import jieba
 import jieba.analyse
+
 d = path.dirname(__file__)
 
 if (sys.version_info > (3, 0)):

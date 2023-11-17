@@ -177,6 +177,24 @@ plt.text(0.5, 0.5, '歡迎來到美國', **my_kwargs)
 #第三張圖
 plt.subplot(233)
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+
+import matplotlib.pyplot as plt
+import matplotlib.image as img
+
+t=[10, 20, 30, 40]
+
+plt.xlabel('xlabel')
+plt.ylabel('ylabel')
+plt.title('title')
+
+image = img.imread(filename)
+imgplot = plt.imshow(image)
+
+plt.plot(t, t, 'r--')
+plt.text(70, 10, '牡丹亭')
+
 
 #第四張圖
 plt.subplot(234)

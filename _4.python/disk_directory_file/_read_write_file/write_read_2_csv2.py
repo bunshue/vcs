@@ -3,6 +3,7 @@ import sys
 import time
 import random
 
+'''
 print('------------------------------------------------------------')	#60個
 
 import csv
@@ -58,13 +59,13 @@ with open(infn, encoding='utf-8') as csvRFile: # 開啟csv檔案供讀取
     csvReader = csv.reader(csvRFile)    # 讀檔案建立Reader物件
     listReport = list(csvReader)        # 將資料轉成串列 
 
-'''
+"""
 print('寫入 csv 檔案')
 with open(outfn,'w',newline='') as csvOFile:  
     csvWriter = csv.writer(csvOFile)    # 建立Writer物件   
     for row in listReport:              # 將串列寫入
         csvWriter.writerow(row)
-'''
+"""
 print('------------------------------------------------------------')	#60個
 
 import csv
@@ -109,7 +110,37 @@ for row in listReport:
 print("Steve's Total Revenue of 2025 = ", total2025)
 print("Steveis Total Revenue of 2026 = ", total2026)
 
+'''
+print('------------------------------------------------------------')	#60個
+
+
+import csv
+
+filename_r = 'data/workfile.csv'
+filename_w = 'write.csv'
+
+print('讀取csv檔, 檔案 :', filename_r)
+
+with open(filename_r, 'r') as fin:
+    with open(filename_w, 'w') as fout:
+        read = csv.reader(fin, delimiter=',')
+        write = csv.writer(fout, delimiter=',')
+        header = next(read)
+        print(header)
+        # get number of columns
+        #array = header.split(',')
+        first_item = header[0]
+        write.writerow(header)
+        for row in read:
+            print(','.join(row))
+            write.writerow(row)
+            print(row[2])
+
+print('寫入csv檔, 檔案 :', filename_w)
+
 
 print('------------------------------------------------------------')	#60個
 
 
+
+print('------------------------------------------------------------')	#60個

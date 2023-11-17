@@ -1,13 +1,7 @@
-# -*- coding: UTF-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
-
 import sys
 import jieba
 import jieba.analyse
-try:
-    import urllib2 as httplib   # 2.x
-except Exception:
-    import urllib.request as httplib  # 3.x
+import urllib.request as httplib
 
 try:
     url="http://www.powenko.com/wordpress/"
@@ -46,4 +40,3 @@ try:
 
 except:
     print("error")
-

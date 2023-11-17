@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for DashStyle
 using System.Diagnostics;       //for StopWatch
+using System.Runtime.InteropServices;   //for dll
 
 using AForge.Video;             //需要添加這兩個.dll, 參考/加入參考/瀏覽此二檔
 using AForge.Video.DirectShow;
@@ -821,7 +822,7 @@ namespace vcs_ColorHistogram
 
             pictureBox0.Size = new Size(W, H);
             //pictureBox1.Size = new Size(W, H);
-            pictureBox1.Size = new Size(512 * 2 + 240, 1060);
+            pictureBox1.Size = new Size(512 * 2 + 240, 1000);
             richTextBox1.Size = new Size(W, H - 100);
 
             x_st = 0;
@@ -830,7 +831,7 @@ namespace vcs_ColorHistogram
             dy = H;
 
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            pictureBox1.Location = new Point(x_st + dx * 1+10, y_st + dy * 0+10);
+            pictureBox1.Location = new Point(x_st + dx * 1 + 10, y_st + dy * 0 + 10);
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             x_st = 20;
@@ -843,6 +844,8 @@ namespace vcs_ColorHistogram
             groupBox_control.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 20);
             groupBox_selection.Size = new Size(250, 170);
             groupBox_selection.Location = new Point(x_st + dx * 4 - 30, y_st + dy * 2 + 20);
+            groupBox_color.Size = new Size(290, 64);
+            groupBox_color.Location = new Point(x_st + dx * 6 + 30, y_st + dy * 2 + 130);
 
             //button
             x_st = 20;
@@ -877,6 +880,21 @@ namespace vcs_ColorHistogram
             rb_selection1.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 0);
             rb_selection2.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 1);
             rb_selection3.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 2);
+
+            x_st = 10;
+            y_st = 8;
+            dx = 55;
+            dy = 24;
+
+            lb_rgb_r.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lb_rgb_g.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            lb_rgb_b.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            lb_yuv_y.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lb_yuv_u.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            lb_yuv_v.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            panel1.Size = new Size(100, 50);
+            panel1.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 0 + 3);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -1209,8 +1227,8 @@ namespace vcs_ColorHistogram
             int dx = 512 + BORDER;
             int dy = 300 + BORDER;
 
-            int ww = 512 * 2 + 100+100;
-            int hh = 900+100;
+            int ww = 512 * 2 + 100 + 100;
+            int hh = 1000;
             bitmap1 = new Bitmap(ww, hh);
 
             Color color = Color.Red;
@@ -1319,6 +1337,57 @@ namespace vcs_ColorHistogram
         private void timer1_Tick(object sender, EventArgs e)
         {
             do_measure_brightness_all();
+        }
+
+        [DllImport("gdi32.dll")]
+        static public extern uint GetPixel(IntPtr hDC, int XPos, int YPos);
+        [DllImport("gdi32.dll")]
+        static public extern IntPtr CreateDC(string driverName, string deviceName, string output, IntPtr lpinitData);
+        [DllImport("gdi32.dll")]
+        static public extern bool DeleteDC(IntPtr DC);
+        static public byte GetRValue(uint color)
+        {
+            return (byte)color;
+        }
+        static public byte GetGValue(uint color)
+        {
+            return ((byte)(((short)(color)) >> 8));
+        }
+        static public byte GetBValue(uint color)
+        {
+            return ((byte)((color) >> 16));
+        }
+        static public byte GetAValue(uint color)
+        {
+            return ((byte)((color) >> 24));
+        }
+
+        public Color GetColor(Point screenPoint)
+        {
+            IntPtr displayDC = CreateDC("DISPLAY", null, null, IntPtr.Zero);
+            uint colorref = GetPixel(displayDC, screenPoint.X, screenPoint.Y);
+            DeleteDC(displayDC);
+            byte Red = GetRValue(colorref);
+            byte Green = GetGValue(colorref);
+            byte Blue = GetBValue(colorref);
+            return Color.FromArgb(Red, Green, Blue);
+        }
+
+        private void timer_rgb_Tick(object sender, EventArgs e)
+        {
+            Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+            Color cl = GetColor(pt);
+            panel1.BackColor = cl;
+            lb_rgb_r.Text = cl.R.ToString();
+            lb_rgb_g.Text = cl.G.ToString();
+            lb_rgb_b.Text = cl.B.ToString();
+
+            RGB pp = new RGB(cl.R, cl.G, cl.B);
+            YUV yyy = new YUV();
+            yyy = RGBToYUV(pp);
+            lb_yuv_y.Text = ((int)yyy.Y).ToString();
+            lb_yuv_u.Text = ((int)yyy.U).ToString();
+            lb_yuv_v.Text = ((int)yyy.V).ToString();
         }
 
         private void button0_Click(object sender, EventArgs e)

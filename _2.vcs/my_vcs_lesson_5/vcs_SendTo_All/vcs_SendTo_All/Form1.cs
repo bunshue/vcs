@@ -20,6 +20,11 @@ namespace vcs_SendTo_All
         private const int MODE1 = 0x01;   //檢視檔案內容
         private const int MODE2 = 0x02;   //簡中轉正中
         private const int MODE3 = 0x03;   //計算檔案之MD5值
+        private const int MODE4 = 0x04;   //grep 一層
+        private const int MODE5 = 0x05;   //grep 多層
+        private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字
+
+
         //使用系統 kernel32.dll LCMapString進行轉換
         internal const int LOCALE_SYSTEM_DEFAULT = 0x0800;
         internal const int LCMAP_SIMPLIFIED_CHINESE = 0x02000000;

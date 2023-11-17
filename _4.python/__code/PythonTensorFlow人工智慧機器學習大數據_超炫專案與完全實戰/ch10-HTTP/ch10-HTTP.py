@@ -1,10 +1,6 @@
-# -*- coding: UTF-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
 import sys 
-try:
-    import urllib2 as httplib   # 2.x
-except Exception:
-    import urllib.request as httplib  # 3.x
+import urllib.request as httplib
+
 try:
     url="http://www.powenko.com/download_release/get.php?name=powenko"
     #url="http://data.taipei/opendata/datalist/datasetMeta/download?id=5bc82dc7-f2a2-4351-abc8-c09c8a8d7529&rid=1f1aaba5-616a-4a33-867d-878142cac5c4"
@@ -21,17 +17,8 @@ except:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch10-HTTP\02HTTP_GET_OpenData.py
-
-#!/usr/bin/env python
-# coding=utf8
-__author__ = "Powen Ko, www.powenko.com"
-
-import sys 
-try:
-    import urllib2 as httplib   # 2.x
-except Exception:
-    import urllib.request as httplib  # 3.x
+import sys
+import urllib.request as httplib
 
 try:
 
@@ -49,17 +36,9 @@ except:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch10-HTTP\03HTTP_POST.py
-
-#!/usr/bin/env python
-# coding=utf8
-__author__ = "Powen Ko, www.powenko.com"
 import sys
-try:
-    import urllib
-    import urllib2 as httplib   #  python 2.x
-except Exception:
-    import urllib.request as httplib  # python 3.x
+import urllib.request as httplib
+import urllib
 
 try:
     url="http://www.powenko.com/download_release/post.php"
@@ -142,19 +121,9 @@ print_node(node_findall)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch10-HTTP\05HTTP_GET_XML_OpenData.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
-
 import sys 
 from xml.etree import ElementTree
-try:
-    import urllib2 as httplib   # 2.x
-except Exception:
-    import urllib.request as httplib  # 3.x
-
+import urllib.request as httplib
 
 def print_node(node):
     try:
@@ -187,26 +156,16 @@ except:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch10-HTTP\05HTTP_GET_XML_OpenData-Map.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
-
 import sys 
 from xml.etree import ElementTree
-try:
-    import urllib2 as httplib   # 2.x
-except Exception:
-    import urllib.request as httplib  # 3.x
 
+import urllib.request as httplib
 
 def print_node(node):
     try:
        print("node.text:%s" % node.text)
     except:
        print("node.text:null")
-
 
 try:
     url="http://data.taipei/opendata/datalist/datasetMeta/download?id=ece023db-a5f8-4399-97da-f04d7f4009e3&rid=1a2d417e-c121-4a12-835f-97ee6852c4b8"
@@ -248,18 +207,9 @@ print('------------------------------------------------------------')	#60個
 from xml.etree import ElementTree
 import sys
 
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
-
 import sys
 from xml.etree import ElementTree
-try:
-    import urllib2 as httplib   # 2.x
-except Exception:
-    import urllib.request as httplib  # 3.x
-
+import urllib.request as httplib
 
 def print_node(node):
     try:
@@ -342,26 +292,13 @@ with open('data.json', 'r') as f:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch10-HTTP\07HTTP_JSON-openData-Park.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
 import json
-import sys 
-try:
-    import urllib2 as httplib   # 2.x
-except Exception:
-    import urllib.request as httplib  # 3.x
-    import ssl
-    import urllib.request
-
-
+import sys
+import urllib.request as httplib
+import ssl
+import urllib.request
 
 url="https://parks.taipei/parks/api/"
-
-
-
 
 req=httplib.Request(url)
 try:
@@ -382,11 +319,6 @@ except:                                                                 #  處�
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch10-HTTP\07HTTP_JSON-openData-Ubike.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "Powen Ko, www.powenko.com"
 """
 Mac 的使用者　如果出現　SSL Certificate Error
 請執行以下的程式，HTTPS 就能工作
@@ -394,13 +326,10 @@ Mac 的使用者　如果出現　SSL Certificate Error
 """
 
 import json
-import sys 
-try:
-    import urllib2 as httplib   # 2.x
-except Exception:
-    import urllib.request as httplib  # 3.x
-
+import sys
+import urllib.request as httplib
 import ssl
+
 context = ssl._create_unverified_context()
 
 url="http://data.taipei/opendata/datalist/datasetMeta/download?id=ea732fb5-4bec-4be7-93f2-8ab91e74a6c6&rid=bf073841-c734-49bf-a97f-3757a6013812"
