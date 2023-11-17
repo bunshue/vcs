@@ -14,7 +14,7 @@ namespace vcs_SendTo_All
 {
     public partial class Form1 : Form
     {
-        int flag_operation_mode = MODE2;
+        int flag_operation_mode = MODE0;
 
         private const int MODE0 = 0x00;   //顯示檔案名稱
         private const int MODE1 = 0x01;   //檢視檔案內容
@@ -24,6 +24,27 @@ namespace vcs_SendTo_All
         private const int MODE5 = 0x05;   //grep 多層
         private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字
 
+        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
+        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
+        const int MB = 1024 * 1024;//定義MB的計算常量
+        const int KB = 1024;//定義KB的計算常量
+        public string ByteConversionTBGBMBKB(Int64 size)
+        {
+            if (size < 0)
+                return "不合法的數值";
+            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
+                return "無法表示";
+            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
+                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
+            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
+                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
+            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
+            else
+                return size.ToString() + " Byte";//顯示Byte值
+        }
 
         //使用系統 kernel32.dll LCMapString進行轉換
         internal const int LOCALE_SYSTEM_DEFAULT = 0x0800;
@@ -86,7 +107,40 @@ namespace vcs_SendTo_All
             for (i = 0; i < (len - 1); i++)
             {
                 string filename = filenames[i];
-                if (flag_operation_mode == MODE1)
+                if (flag_operation_mode == MODE0)
+                {
+                    richTextBox1.Text += filename + "\t";
+
+                    if (File.Exists(filename) == true)
+                    {
+                        FileInfo fi;
+
+                        try
+                        {   //可能會產生錯誤的程式區段
+                            fi = new FileInfo(filename);
+                            richTextBox1.Text += "檔案, 大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+                        }
+                        catch (Exception ex)
+                        {   //定義產生錯誤時的例外處理程式碼
+                            richTextBox1.Text += "錯誤訊息1 : " + ex.Message + "\n";
+                            return;
+                        }
+                        finally
+                        {
+                            //一定會被執行的程式區段
+                        }
+                    }
+                    else if (Directory.Exists(filename) == true)
+                    {
+                        richTextBox1.Text += "資料夾\n";
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "XXXXXXXXXXXX\n";
+                    }
+                }
+                else if (flag_operation_mode == MODE1)
                 {
                     //檢視檔案內容
                     print_file_content(filename);

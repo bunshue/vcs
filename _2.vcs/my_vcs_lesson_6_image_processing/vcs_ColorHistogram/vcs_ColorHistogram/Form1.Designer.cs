@@ -68,6 +68,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox_color = new System.Windows.Forms.GroupBox();
             this.timer_rgb = new System.Windows.Forms.Timer(this.components);
+            this.hScrollBar3 = new System.Windows.Forms.HScrollBar();
+            this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
+            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             this.groupBox_selection.SuspendLayout();
@@ -182,6 +185,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(80, 40);
             this.button5.TabIndex = 251;
+            this.button5.Text = "顏色比例";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -500,11 +504,38 @@
             this.timer_rgb.Enabled = true;
             this.timer_rgb.Tick += new System.EventHandler(this.timer_rgb_Tick);
             // 
+            // hScrollBar3
+            // 
+            this.hScrollBar3.Location = new System.Drawing.Point(488, 278);
+            this.hScrollBar3.Name = "hScrollBar3";
+            this.hScrollBar3.Size = new System.Drawing.Size(124, 22);
+            this.hScrollBar3.TabIndex = 266;
+            this.hScrollBar3.Value = 100;
+            // 
+            // hScrollBar2
+            // 
+            this.hScrollBar2.Location = new System.Drawing.Point(488, 240);
+            this.hScrollBar2.Name = "hScrollBar2";
+            this.hScrollBar2.Size = new System.Drawing.Size(124, 22);
+            this.hScrollBar2.TabIndex = 267;
+            this.hScrollBar2.Value = 100;
+            // 
+            // hScrollBar1
+            // 
+            this.hScrollBar1.Location = new System.Drawing.Point(488, 200);
+            this.hScrollBar1.Name = "hScrollBar1";
+            this.hScrollBar1.Size = new System.Drawing.Size(124, 22);
+            this.hScrollBar1.TabIndex = 265;
+            this.hScrollBar1.Value = 100;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(763, 481);
+            this.Controls.Add(this.hScrollBar3);
+            this.Controls.Add(this.hScrollBar2);
+            this.Controls.Add(this.hScrollBar1);
             this.Controls.Add(this.groupBox_color);
             this.Controls.Add(this.groupBox_control);
             this.Controls.Add(this.tb_filename);
@@ -574,6 +605,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox_color;
         private System.Windows.Forms.Timer timer_rgb;
+        private System.Windows.Forms.HScrollBar hScrollBar3;
+        private System.Windows.Forms.HScrollBar hScrollBar2;
+        private System.Windows.Forms.HScrollBar hScrollBar1;
     }
 }
 

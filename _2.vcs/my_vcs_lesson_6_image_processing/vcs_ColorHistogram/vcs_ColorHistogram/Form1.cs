@@ -847,6 +847,13 @@ namespace vcs_ColorHistogram
             groupBox_color.Size = new Size(290, 64);
             groupBox_color.Location = new Point(x_st + dx * 6 + 30, y_st + dy * 2 + 130);
 
+            hScrollBar1.Size = new Size(200, 22);
+            hScrollBar1.Location = new Point(x_st + dx * 9 + 40, y_st + dy * 2 + 130);
+            hScrollBar2.Size = new Size(200, 22);
+            hScrollBar2.Location = new Point(x_st + dx * 9 + 40, y_st + dy * 2 + 130+23);
+            hScrollBar3.Size = new Size(200, 22);
+            hScrollBar3.Location = new Point(x_st + dx * 9 + 40, y_st + dy * 2 + 130+46);
+
             //button
             x_st = 20;
             y_st = 20;
@@ -1392,7 +1399,29 @@ namespace vcs_ColorHistogram
 
         private void button0_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "SetPixel 彩色轉灰階\n";
 
+            Bitmap bmp = (Bitmap)pictureBox0.Image;    //原圖
+
+            int xx;
+            int yy;
+
+            for (yy = 0; yy < bmp.Height; yy++)
+            {
+                for (xx = 0; xx < bmp.Width; xx++)
+                {
+                    byte rrr = bmp.GetPixel(xx, yy).R;
+                    byte ggg = bmp.GetPixel(xx, yy).G;
+                    byte bbb = bmp.GetPixel(xx, yy).B;
+
+                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
+
+                    bmp.SetPixel(xx, yy, zz);
+                }
+            }
+            pictureBox0.Image = bmp;
+            pictureBox1.Image = bmp;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1427,6 +1456,60 @@ namespace vcs_ColorHistogram
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //顏色比例
+
+            int ratio_r = hScrollBar1.Value;
+            int ratio_g = hScrollBar2.Value;
+            int ratio_b = hScrollBar3.Value;
+
+            Bitmap bmp = (Bitmap)pictureBox0.Image;    //原圖
+
+            int W = bmp.Width;
+            int H = bmp.Height;
+
+            richTextBox1.Text += "圖片寬度 : " + W.ToString() + "\n";
+            richTextBox1.Text += "圖片高度 : " + H.ToString() + "\n";
+
+            int i;
+            int j;
+
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    Color cc = bmp.GetPixel(i, j);
+                    //bmp.SetPixel(i, j, Color.FromArgb(255, cc.R, cc.B, 0));
+                    int R_old = cc.R;
+                    int G_old = cc.G;
+                    int B_old = cc.B;
+                    int R_new = R_old * ratio_r / 100;
+                    int G_new = G_old * ratio_g / 100;
+                    int B_new = B_old * ratio_b / 100;
+
+                    R_new -= 50;
+                    if (R_new < 0)
+                        R_new = 0;
+
+                    B_new += 50;
+                    if (B_new > 255)
+                        B_new = 255;
+
+                    bmp.SetPixel(i, j, Color.FromArgb(255, R_new, G_new, B_new));
+                }
+            }
+            //Graphics g = Graphics.FromImage(bmp);
+            //g.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
+
+            pictureBox1.Image = bmp;
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
             //test
             int x_st = 100;
             int y_st = 100;
@@ -1439,14 +1522,8 @@ namespace vcs_ColorHistogram
             Bitmap bmp2 = draw_selectionArea(bmp1, SelectionRectangle); //畫紅框
 
             pictureBox1.Image = bmp2;
-        }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-        }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
         }
 
         private void button8_Click(object sender, EventArgs e)

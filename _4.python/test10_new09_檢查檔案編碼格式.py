@@ -3,31 +3,23 @@ import sys
 import time
 import random
 
+import glob
+
+import chardet  #檔案編碼格式
+
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
-print('chardet：檔案編碼格式')
-
-import chardet
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/2.utf_to_ascii.txt'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/3.ascii_to_unicode.txt'
-filename4 = '__code/PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰/ch03/mycode.py'
-filename5 = '__code/PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰/ch07/05-Dictionaries1.py'
-filename6 = '__code/PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰/ch17_numpy/06-Datatype.py'
-
-files = [filename4, filename5, filename6]
-for f in files:
-    text = open(f, 'rb').read()
+filenames = glob.glob('*.py')
+for filename in filenames:
+    text = open(filename, 'rb').read()
     codetype = chardet.detect(text)
-    print('{}\n編碼格式：{}'.format(f, codetype))
+    #print(type(codetype))
+    #print(codetype['encoding'])
+    #print('{} 編碼格式：{}'.format(filename, codetype))
+
+    #印出不是utf-8格式的檔案名稱
+    if not codetype['encoding'] == 'utf-8':
+        print('{} 編碼格式：{}'.format(filename, codetype))
 
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
 

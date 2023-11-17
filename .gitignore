@@ -27,6 +27,10 @@ _4.python/sqlite/ims_sql/QC_debug/*.*
 #vcs 相關產出之檔案
 *.suo
 
+#完全清除所有的vcs之bin和obj
+bin/
+obj/
+
 #目前難以避掉所有的vcs之bin和obj
 _2.vcs/*/*/*/bin/*
 _2.vcs/*/*/*/obj/*
