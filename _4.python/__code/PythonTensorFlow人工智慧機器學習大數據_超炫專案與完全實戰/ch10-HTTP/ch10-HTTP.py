@@ -1,5 +1,7 @@
-import sys 
+import sys
 import urllib.request as httplib
+
+print('------------------------------------------------------------')	#60個
 
 try:
     url="http://www.powenko.com/download_release/get.php?name=powenko"
@@ -17,9 +19,6 @@ except:
 
 print('------------------------------------------------------------')	#60個
 
-import sys
-import urllib.request as httplib
-
 try:
 
     url="http://data.taipei/opendata/datalist/datasetMeta/download?id=5bc82dc7-f2a2-4351-abc8-c09c8a8d7529&rid=1f1aaba5-616a-4a33-867d-878142cac5c4"
@@ -36,8 +35,6 @@ except:
 
 print('------------------------------------------------------------')	#60個
 
-import sys
-import urllib.request as httplib
 import urllib
 
 try:
@@ -61,12 +58,7 @@ except:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch10-HTTP\04XML.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
 from xml.etree import ElementTree
-import sys
 
 def print_node(node):
     print("==============================================")
@@ -121,9 +113,7 @@ print_node(node_findall)
 
 print('------------------------------------------------------------')	#60個
 
-import sys 
 from xml.etree import ElementTree
-import urllib.request as httplib
 
 def print_node(node):
     try:
@@ -156,10 +146,7 @@ except:
 
 print('------------------------------------------------------------')	#60個
 
-import sys 
 from xml.etree import ElementTree
-
-import urllib.request as httplib
 
 def print_node(node):
     try:
@@ -193,30 +180,18 @@ try:
             LAT = root3.findall("LAT")
             LON = root3.findall("LON")
             print("ADDRESS:%s   LAT:%s  LON:%s " % (ADDRESS[0].text, LAT[0].text,LON[0].text))
-
-
 except:
     print("error")
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch10-HTTP\05HTTP_GET_XML_OpenData-weather.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
 from xml.etree import ElementTree
-import sys
-
-import sys
-from xml.etree import ElementTree
-import urllib.request as httplib
 
 def print_node(node):
     try:
        print("node.text:%s" % node.text)
     except:
        print("node.text:null")
-
 
 try:
     url="http://data.taipei/opendata/datalist/datasetMeta/download?id=ece023db-a5f8-4399-97da-f04d7f4009e3&rid=1a2d417e-c121-4a12-835f-97ee6852c4b8"
@@ -248,8 +223,6 @@ try:
         for node in lst_node:
             print_node(node)
 
-
-
         root2 = root.findall("dataset/locations/location")
         for root3 in root2:
             #print_node(node)
@@ -257,17 +230,11 @@ try:
             root3_dataTime = root3.findall("weatherElement/time/dataTime")
             root3_value= root3.findall("weatherElement/time/elementValue/value")
             print("地區:%s   溫度:%s  時間:%s " % (root3_locationName[0].text,root3_value[0].text,root3_dataTime[0].text))
-
-
 except:
     print("error")
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch10-HTTP\06JSON.py
-
-#!/usr/bin/env python
-# coding=utf8
 import json
 
 data = {
@@ -289,12 +256,9 @@ with open('data.json', 'w') as f:
 with open('data.json', 'r') as f:
     data = json.load(f)
 
-
 print('------------------------------------------------------------')	#60個
 
 import json
-import sys
-import urllib.request as httplib
 import ssl
 import urllib.request
 
@@ -326,8 +290,6 @@ Mac 的使用者　如果出現　SSL Certificate Error
 """
 
 import json
-import sys
-import urllib.request as httplib
 import ssl
 
 context = ssl._create_unverified_context()

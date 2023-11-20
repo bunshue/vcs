@@ -1,5 +1,8 @@
+import sys
 import requests
 from bs4 import BeautifulSoup 
+
+print('------------------------------------------------------------')	#60個
 
 url = "https://fchart.github.io/"
 response = requests.get(url)
@@ -12,11 +15,6 @@ else:
     print("錯誤! HTTP請求失敗...")
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-1-2.py
-
-import requests 
-from bs4 import BeautifulSoup
 
 url = "https://fchart.github.io/"
 response = requests.get(url)
@@ -34,11 +32,6 @@ print("屬性: ", tag.attrs)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-1-3.py
-
-import requests
-from bs4 import BeautifulSoup 
-
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
@@ -53,13 +46,7 @@ tags = soup.select(".response")
 print("li: ", tags[0].text)
 print("li: ", tags[1].text)
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-1-3a.py
-
-import requests
-from bs4 import BeautifulSoup 
 
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
@@ -77,13 +64,7 @@ tags_a = tag.find_all("li", {"class":"response"})
 for tag in tags_a:
     print("Ans: ", tag.text)
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-1-3b.py
-
-import requests
-from bs4 import BeautifulSoup 
 
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
@@ -101,13 +82,7 @@ tags_a = tag.find_all("li", class_="response")
 for tag in tags_a:                           
     print("Ans: ", tag.text)
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-1-3c.py
-
-import requests
-from bs4 import BeautifulSoup 
 
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
@@ -115,13 +90,7 @@ soup = BeautifulSoup(response.text, "lxml")
 tags_li = soup.find_all("li", class_="response", limit=3)
 print(tags_li)
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-1-3d.py
-
-import requests
-from bs4 import BeautifulSoup 
 
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
@@ -227,13 +196,9 @@ links = re.findall(r'href="https://.*?"', response.text)
 for link in links:
     print(link)
 
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-3-1.py
-
 from selenium import webdriver
-from bs4 import BeautifulSoup
 
 driver = webdriver.Chrome("./chromedriver")
 driver.implicitly_wait(10)
@@ -280,10 +245,7 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-3-2b.py
-
 from selenium import webdriver
-from bs4 import BeautifulSoup
 
 driver = webdriver.Chrome("./chromedriver")
 driver.implicitly_wait(10)
@@ -338,10 +300,6 @@ print(r.text)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-4-2.py
-
-import requests
-from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import random
 
@@ -379,10 +337,6 @@ print(r.text)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-4-2b.py
-
-import requests
-from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import random
 
@@ -418,10 +372,6 @@ while True:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-5.py
-
-import requests 
-from bs4 import BeautifulSoup
 import csv
 
 url = "https://www.bbc.com/zhongwen/trad/business"
@@ -446,16 +396,10 @@ with open(csvfile, 'w+', newline='') as fp:
     writer.writerow(["title","summary","href"])
     for row in output:
         writer.writerow(row)
-    
-
-
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-6.py
-
 from selenium import webdriver
-from bs4 import BeautifulSoup
 import time
 
 email_address = "<電子郵件地址>"

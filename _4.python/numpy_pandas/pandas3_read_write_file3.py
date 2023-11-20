@@ -6,8 +6,8 @@ print('------------------------------------------------------------')	#60個
 
 # pip install xlsxwriter
 
-#data = pd.read_csv('ExpensesRecord.csv')
-df = pd.read_excel('ExpensesRecord.xls', 'sheet')
+#data = pd.read_csv('data/ExpensesRecord.csv')
+df = pd.read_excel('data/ExpensesRecord.xls', 'sheet')
 #data = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html')
 print(df.head(5) )
 
@@ -19,22 +19,23 @@ writer.save()
 
 print('------------------------------------------------------------')	#60個
 
-df = pd.read_csv('ExpensesRecord.csv')
+df = pd.read_csv('data/ExpensesRecord.csv')
 print(df.head(5) )
 df.to_csv("test.csv")
 
 print('------------------------------------------------------------')	#60個
 
+"""
 df = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html')
 print(df[0].head(5) )
 
-
 #df = pd.read_html('http://news.baidu.com/tech')
 #print(df[0].head(5) )
+"""
 
 print('------------------------------------------------------------')	#60個
 
-DataFrame = pd.read_csv('ExpensesRecord.csv')
+DataFrame = pd.read_csv('data/ExpensesRecord.csv')
 print(DataFrame["說明"])
 print(DataFrame[["說明","支出金額"]] )
 
@@ -43,7 +44,7 @@ print(df[["Math","English"]])
 
 print('------------------------------------------------------------')	#60個
 
-DataFrame = pd.read_csv('ExpensesRecord.csv')
+DataFrame = pd.read_csv('data/ExpensesRecord.csv')
 DataFrame["單價"]=DataFrame["支出金額"]/DataFrame["數量"]
 print(DataFrame[["數量","支出金額","單價"]] )
 
@@ -54,7 +55,7 @@ pd.core.common.is_list_like = pd.api.types.is_list_like
 from pandas_datareader import data, wb
 import pandas_datareader.data as web
 
-import fix_yahoo_finance as yf
+import yfinance as yf
 yf.pdr_override()
 
 df = web.get_data_yahoo("AAPL", start="2018-01-01", end="2018-12-02")
@@ -203,4 +204,7 @@ dfMonthsPivot.plot(kind = 'box',title = 'Months High')
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
+
 

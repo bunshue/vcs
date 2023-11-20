@@ -1,10 +1,5 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
-
-
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.cluster import KMeans
@@ -13,9 +8,7 @@ from sklearn import metrics
 # Load the diabetes dataset
 iris = datasets.load_iris()
 
-
 iris_X_train , iris_X_test , iris_y_train , iris_y_test = train_test_split(iris.data,iris.target,test_size=0.2)
-
 
 # KMeans 演算法
 kmeans  = KMeans(n_clusters = 3)

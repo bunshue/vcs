@@ -1,4 +1,4 @@
-'''
+"""
 OpenCV 基本使用
 
 顯示圖片
@@ -9,7 +9,7 @@ vs
 
 使用 matplotlib 顯示圖片
 
-'''
+"""
 
 import cv2
 
@@ -235,7 +235,7 @@ image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直
 
 #以 cv2.imread 讀進來的資料，會儲存成一個 NumPy 的陣列
 
-'''
+"""
 # 查看資料型態
 print(type(image))
 print(type(image_gray))
@@ -272,7 +272,7 @@ cv2.IMREAD_GRAYSCALE
     以灰階的格式來讀取圖片。
 cv2.IMREAD_UNCHANGED
     讀取圖片中所有的 channels，包含透明度的 channel。
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -283,7 +283,7 @@ plt.imshow(image_gray)
 plt.show()
 
 
-'''
+"""
 這裡 cv2.waitKey 函數是用來等待與讀取使用者按下的按鍵，而其參數是等待時間（單位為毫秒），
 若設定為 0 就表示持續等待至使用者按下按鍵為止，
 這樣當我們按下任意按鍵之後，就會呼叫 cv2.destroyAllWindows 關閉所有 OpenCV 的視窗。
@@ -316,7 +316,7 @@ cv2.destroyAllWindows() # 關閉所有 OpenCV 的視窗
 OpenCV 顯示圖片視窗
 
 灰階的圖片也可以顯示，用法都相同：
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -338,6 +338,8 @@ image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直
 plt.imshow(image_gray, cmap = 'gray')
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+print('作業完成')
 print('------------------------------------------------------------')	#60個
 
 

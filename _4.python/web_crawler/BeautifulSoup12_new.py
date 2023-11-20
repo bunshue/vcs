@@ -1,8 +1,10 @@
+import sys
 import requests
 from bs4 import BeautifulSoup
 
 print('------------------------------------------------------------')	#60個
 
+"""
 req=requests.get('http://www.powenko.com/wordpress/')
 print(req.text.encode('utf-8'))
 soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
@@ -11,6 +13,7 @@ print(soup.title.string)
 print(soup.p)
 print(soup.a)
 print(soup.find_all('a'))
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -44,6 +47,8 @@ for link in soup.select('a'):
 
 print('------------------------------------------------------------')	#60個
 
+""" NG
+
 req=requests.get("http://www.powenko.com/wordpress")
 soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
 largefeaturepowenA2=soup.select('.largefeaturepowenA2')
@@ -54,6 +59,8 @@ for area in largefeature0.select('.area'):
   print(area.select('a')[1].contents[0])
 
 print('------------------------------------------------------------')	#60個
+
+"""
 
 req=requests.get("http://news.baidu.com/tech")
 soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
