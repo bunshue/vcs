@@ -224,6 +224,17 @@ plt.ylim(0, 100)
 #第六張圖
 plt.subplot(236)
 
+#繪製堆疊長條圖
+
+x = [1, 2, 3, 4, 5, 6]
+y1 = [12, 41, 32, 36, 21, 17]
+y2 = [43, 1, 6, 17, 17, 9]
+
+labels = ['Apple', 'Orange', 'Banana', 'Pineapple', 'Kiwifruit', 'Strawberry']
+plt.bar(x, y1, tick_label=labels)				#繪製 y1 長條圖
+plt.bar(x, y2, tick_label=labels, bottom=y1)	#繪製 y2 長條圖
+
+plt.legend(('y1', 'y2'))			#顯示圖例來識別 y1 與 y2
 
 plt.show()
 
@@ -266,6 +277,11 @@ plt.bar(x, C, fc='#e55934', ec='none', bottom = A+B)
 #第五張圖
 plt.subplot(235)
 
+#設定長條圖橫軸標籤
+x = [1, 2, 3, 4, 5, 6]
+y = [12, 41, 32, 36, 21, 17]
+labels = ['Apple', 'Orange', 'Banana', 'Pineapple', 'Kiwifruit', 'Strawberry']
+plt.bar(x, y, tick_label=labels)
 
 #第六張圖
 plt.subplot(236)

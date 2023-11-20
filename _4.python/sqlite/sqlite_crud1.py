@@ -1,8 +1,8 @@
-'''
+"""
 sqlite基本範例 一個
-'''
 
-'''
+
+
 原始資料 9 筆
 	id_num	ename	cname	weight
 第1筆 : 5	horse	馬	36
@@ -27,7 +27,18 @@ sqlite基本範例 一個
 6. 搜尋
 7. 各種排序顯示資料庫內容
 
-'''
+
+
+SQLite Autoincrement（自動遞增）
+
+SQLite 的 AUTOINCREMENT 是一個關鍵字，用于表中的字段值自動遞增。
+我們可以在創建表時在特定的列名稱上使用 AUTOINCREMENT 關鍵字實現該字段值的自動增加。
+關鍵字 AUTOINCREMENT 只能用于整型（INTEGER）字段。
+
+"""
+
+
+
 
 print('------------------------------------------------------------')	#60個
 print('準備工作')
@@ -69,7 +80,7 @@ conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.cursor() # 建立 cursor 物件
 
 print('建立一個資料表')
-''' 其他寫法
+""" 其他寫法
 #cursor.execute("CREATE TABLE table01 ( id_num CHAR(5), subjectId CHAR(4) NOT NULL, " +
 #               "animalNumber INTEGER, title VARCHAR(50) NOT NULL, PRIMARY KEY (id_num))")   #id_num不可重複
 
@@ -80,20 +91,24 @@ print('建立一個資料表')
 #id_num可重複, 若資料庫已存在 則不用重新建立
 cursor.execute("CREATE TABLE IF NOT EXISTS table01 ( id_num CHAR(5), subjectId CHAR(4) NOT NULL, " +
                "animalNumber INTEGER, title VARCHAR(50) NOT NULL)")
-'''
+"""
 #CREATE 建立
 #CREATE TABLE table01, id_num(int) 和 ename(text) 和 weight(int),
 #PRIMARY KEY (id_num), id_num不可重複
 #sqlstr = 'CREATE TABLE IF NOT EXISTS table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "ename"  TEXT NOT NULL, "weight" INTEGER NOT NULL)'
 #多了檢查條件
-sqlstr = '''
+
+#序號 自動遞增 不可重複
+
+sqlstr = """
 CREATE TABLE IF NOT EXISTS table01 (
-    "id_num" INTEGER PRIMARY KEY NOT NULL,
-    "ename"  TEXT NOT NULL,
-    "cname"  TEXT,
-    "weight" INTEGER NOT NULL CHECK(weight > 0) -- 預設錯誤時會顯示
+    idx    INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_num INTEGER NOT NULL,
+    ename  TEXT NOT NULL,
+    cname  TEXT,
+    weight INTEGER NOT NULL CHECK(weight > 0) -- 預設錯誤時會顯示
 );
-'''
+"""
 
 #有寫NOT NULL表示一定要填寫, 若無此條件, 則可以不寫
 
@@ -103,9 +118,9 @@ conn.commit() # 更新
 #INSERT 新增資料
 print('新增資料 2 筆 寫法一, 必須要寫滿所有欄位')
 #id_num不可重複
-sqlstr = 'INSERT INTO table01 VALUES (5, "horse", "馬", 36)'
+sqlstr = 'INSERT INTO table01 VALUES (20, 5, "horse", "馬", 36)'
 cursor.execute(sqlstr)
-sqlstr = 'INSERT INTO table01 VALUES (1, "mouse", "鼠", 3)'
+sqlstr = 'INSERT INTO table01 VALUES (50, 1, "mouse", "鼠", 3)'
 cursor.execute(sqlstr)
 
 print('新增資料 1 筆 寫法二, 有些欄位可以不寫, 使用tuple')
@@ -113,12 +128,12 @@ sqlstr = 'INSERT INTO table01 (id_num, ename, cname, weight) VALUES (?, ?, ?, ?)
 data_insert_tuple = (4, "elephant", "象", 100)
 cursor.execute(sqlstr, data_insert_tuple)
 
-print('新增資料 2 筆 寫法三, 有些欄位可以不寫')
+print('新增資料 2 筆 寫法三, 有些欄位可以不寫, 序號自動遞增')
 cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (9, 'ox', 48)")
 #id_num不重複 但name weight 重複
 cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (2, 'sheep', 66)")
 
-print('新增資料 2 筆 寫法四, 有些欄位可以不寫')
+print('新增資料 2 筆 寫法四, 有些欄位可以不寫, 序號自動遞增')
 # 定義資料串列
 datas = [
     [8, 'snake', 16],
@@ -131,17 +146,19 @@ for data in datas:
     cursor.execute(sqlstr)
 conn.commit() # 更新
 
+
 print('新增資料 1 筆 寫法五, 必須要寫滿所有欄位')
+index = 70
 number = 7
 ename = 'rabbit'
 cname = ''
 weight = 8
-sqlstr = "INSERT INTO table01 VALUES ({},'{}','{}','{}');".format(number, ename, cname, weight)
+sqlstr = "INSERT INTO table01 VALUES ({},{},'{}','{}','{}');".format(index, number, ename, cname, weight)
 cursor.execute(sqlstr)
 
 print('新增資料 1 筆 寫法六, 必須要寫滿所有欄位')
-data = (6, 'tiger', '', 240)
-cursor.execute('INSERT INTO table01 VALUES (?, ?, ?, ?)', data)
+data = (80, 6, 'tiger', '', 240)
+cursor.execute('INSERT INTO table01 VALUES (?, ?, ?, ?, ?)', data)
 
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
@@ -179,7 +196,7 @@ print('共有 : ' + str(len(rows)) + " 筆資料")
 #print(rows)
 print('逐筆顯示資料')
 for row in rows:
-    print(row[0], row[1], row[2])
+    print(row[0], row[1], row[2], row[3], row[4])
 
 conn.close()  # 關閉資料庫連線
 
@@ -192,7 +209,7 @@ number = 9
 cursor = conn.execute('SELECT * FROM table01 WHERE id_num = ' + str(number))    #條件
 row = cursor.fetchone() #讀取一筆資料
 if not row == None:
-    print("{}\t{}\t{}\t{}".format(row[0], row[1], row[2], row[3]))
+    print("{}\t{}\t{}\t{}".format(row[0], row[1], row[2], row[3], row[4]))
 else:
     print('找不到' + str(number) + '號資料')
 
@@ -202,7 +219,7 @@ number = 15
 cursor = conn.execute('SELECT * FROM table01 WHERE id_num = ' + str(number))    #條件
 row = cursor.fetchone() #讀取一筆資料
 if not row == None:
-    print("{}\t{}\t{}\t{}".format(row[0], row[1], row[2], row[3]))
+    print("{}\t{}\t{}\t{}".format(row[0], row[1], row[2], row[3], row[4]))
 else:
     print('找不到' + str(number) + '號資料')
 
@@ -248,7 +265,7 @@ for row in cursor:
     #print(type(rows[i]))
     print('第' + str(i + 1) + '筆資料 : ', end = '')
     #print(rows[i])
-    print("{}\t{}\t{}\t{}".format(row[0], row[1], row[2], row[3]))
+    print("{}\t{}\t{}\t{}".format(row[0], row[1], row[2], row[3], row[4]))
     i = i + 1
 conn.close()  # 關閉資料庫連線
 
@@ -283,6 +300,7 @@ for i in range(length):
 conn.close()  # 關閉資料庫連線
 
 print('------------------------------------------------------------')	#60個
+
 print('用fetchall()讀取 全部資料 依 ename 排序, 升冪')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -314,7 +332,7 @@ for i in range(length):
     print("{}\t{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2], rows[i][3]))
 conn.close()  # 關閉資料庫連線
 
-'''
+"""
 print('------------------------------------------------------------')	#60個
 print('刪除資料庫中的資料表')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
@@ -322,7 +340,9 @@ conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.execute('DROP TABLE table01')
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
-'''
+"""
 
-print("程式執行完畢！")
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
 

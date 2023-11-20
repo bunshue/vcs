@@ -1,3 +1,4 @@
+import sys
 
 print('------------------------------------------------------------')	#60個
 
@@ -12,8 +13,6 @@ print("c=%.1f  b=%s" % (c,b))
 print(a+c)                               
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\03ConvertValue.py
 
 v1 = int(2.7) # 2
 print(v1)
@@ -40,14 +39,7 @@ print(vC)
 vD = bool(True) # False; bool fn since Python 2.2.1
 print(vD)
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\04math.py
-
 
 a=5
 b=2.2
@@ -63,17 +55,7 @@ d=4.3
 print(d/3)
 print(d//3)
 
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\05print.py
-
 
 a=4
 b=2.2
@@ -89,75 +71,7 @@ print("a=%d b=%.1f" % (a,b))
 print("a="+str(a)+" b="+str(b)+" c="+c)
 print("a=%d b=%0.1f c=%s" % (a,b,c))
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\06if.py
-
-
-a=4
-if a == 1:
-   print('1')
-elif a == 2:
-   print('2')
-else:
-   print('3')
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\07if2.py
-
-a='2'
-b='2'
-if a == '2' and b=='1':
-   print("b=1")
-elif a == '2' and b=='2':
-   print('b=2')
-elif a == '3':                                        
-   print('3')
-elif a == '4':                                    
-   print('4')
-else:                                                    
-   print ('other')
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\08array.py
-
-a=['Apple', 'Watermelon', 'Banana']
-print(a[1])
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\09array1.py
-
-a=[123,456,789]
-print(a[1])
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\09array2.py
 
 a=[[11,22,33],
    [44,55,66],
@@ -167,8 +81,6 @@ print(a[1][0])
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\11range.py
-
 a=range(10)
 print(a)         # Pyton 2.x
 print(list(a))   # Pyton 3.x
@@ -176,23 +88,17 @@ print(a[2])
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\12range2.py
-
 a=range(2,6)
 print(a)         # Pyton 2.x
 print(list(a))   # Pyton 3.x
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\13range3.py
-
 a=range(0,6,2)
 print(a)         # Pyton 2.x
 print(list(a))   # Pyton 3.x
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\14range4.py
 
 a=range(6,0,-2)
 print(a)         # Pyton 2.x
@@ -201,18 +107,12 @@ print(list(a))   # Pyton 3.x
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\15for1.py
-
-
 for x in range(10):  #0,1,2....,9
     print(x)
 print("end")
 
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\16for2.py
-
 
 a=range(10)
 print(list(a))
@@ -222,15 +122,11 @@ print("end")
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\17for3.py
-
 for x in range(2,6):
     print(x)
 print("end")
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\18for4.py
 
 for x in range(0,6,2):    # [0,2,4]
     print(x)
@@ -251,16 +147,12 @@ for (x=0;x<6;x=x+2){
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\19for5.py
-
 for x in range(6,0,-2):    #[6,4,2]
     print(x)
 print("end")
 
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\20for6.py
 
 a=['Apple', 'Watermelon', 'Banana']
 for x in a:
@@ -269,11 +161,6 @@ print("end")
 
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\21for6-exam99.py
-
-# -*- coding:utf-8  -*-
-
 
 for x in range(1,10):
    for y in range(1,10):
@@ -284,11 +171,6 @@ print("end")
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\22utf-8.py
-
-# -*- coding:utf-8  -*-
-
-
 try:            #python 3.x
    name= input("名字:")
    print(" 你好! " + name)
@@ -298,11 +180,6 @@ except:         #python 2.x
    print(" 你好! " + nameutf8)
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\23while1.py
-
-# -*- coding:utf-8  -*-
-
 
 x=0
 while x<5:
@@ -321,11 +198,6 @@ while (x<5){
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\24while2.py
-
-# -*- coding:utf-8  -*-
-
-
 x=0
 while x<=20:
     print(x)
@@ -334,11 +206,6 @@ print("end")
 
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch04\25while3.py
-
-# -*- coding:utf-8  -*-
-
 
 x=0
 while x<9:

@@ -1,45 +1,7 @@
 """
 CH09基本自然語言處理
 
-
-
-
 """
-
-print('------------------------------------------------------------')	#60個
-
-
-print('OpenCC：繁體簡體轉換')
-# pip install opencc-python-reimplemented
-
-from opencc import OpenCC
-
-cc = OpenCC('t2s')
-text = '自然語言認知和理解是讓電腦把輸入的語言變成有意思的符號和關係，然後根據目的再處理。自然語言生成系統則是把計算機數據轉化為自然語言。'
-print(cc.convert(text))
-
-cc = OpenCC('s2t')
-text = '自然语言认知和理解是让电脑把输入的语言变成有意思的符号和关系，然后根据目的再处理。自然语言生成系统则是把计算机数据转化为自然语言。'
-print(cc.convert(text))
-
-
-text = '滑鼠在螢幕上移動'
-cc = OpenCC('t2s')
-print('一般轉換：{}'.format(cc.convert(text)))
-cc = OpenCC('tw2sp')
-print('慣用語轉換：{}'.format(cc.convert(text)))
-
-text = '鼠标在屏幕上移动'
-cc = OpenCC('s2t')
-print('一般轉換：{}'.format(cc.convert(text)))
-cc = OpenCC('s2twp')
-print('片語轉換：{}'.format(cc.convert(text)))
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 print('lotecc：繁簡批次檔案轉換')
 
@@ -123,6 +85,7 @@ print('|'.join(words))
 print('------------------------------------------------------------')	#60個
 
 
+"""
 print('pywordseg：繁體中文斷詞')
 # pip install pywordseg
 
@@ -149,7 +112,7 @@ for word in words[0]:
         stopwords.append(word)
 print('|'.join(stopwords))   
 
-
+"""
 
 
 

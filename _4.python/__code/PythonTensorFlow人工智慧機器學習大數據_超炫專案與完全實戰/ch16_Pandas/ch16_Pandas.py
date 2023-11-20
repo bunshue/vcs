@@ -1,7 +1,10 @@
+import sys
 import numpy as np
 import pandas as pd
 
 print('------------------------------------------------------------')	#60個
+
+# pip install xlsxwriter
 
 #data = pd.read_csv('ExpensesRecord.csv')
 df = pd.read_excel('ExpensesRecord.xls', 'sheet')
@@ -22,7 +25,6 @@ df.to_csv("test.csv")
 
 print('------------------------------------------------------------')	#60個
 
-
 df = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html')
 print(df[0].head(5) )
 
@@ -30,29 +32,20 @@ print(df[0].head(5) )
 #df = pd.read_html('http://news.baidu.com/tech')
 #print(df[0].head(5) )
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 DataFrame = pd.read_csv('ExpensesRecord.csv')
 print(DataFrame["說明"])
 print(DataFrame[["說明","支出金額"]] )
 
-
 df = pd.DataFrame({'Math': [90, 91,92, 93, 94],'English': np.arange(80,85,1) })
 print(df[["Math","English"]])
-
 
 print('------------------------------------------------------------')	#60個
 
 DataFrame = pd.read_csv('ExpensesRecord.csv')
 DataFrame["單價"]=DataFrame["支出金額"]/DataFrame["數量"]
 print(DataFrame[["數量","支出金額","單價"]] )
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -69,7 +62,6 @@ print(df.head())
 writer=pd.ExcelWriter('AAPL.xlsx')
 df.to_excel(writer,'AAPL')
 writer.save()
-
 
 from pandas import ExcelWriter
 

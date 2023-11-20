@@ -1733,15 +1733,404 @@ namespace vcs_Mix03_draw_image
 
         }
 
+        //public void bitSlicing(Bitmap Image)
+        public void bitSlicing()
+        {
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            int xx;
+            int yy;
+
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    byte rrr = bitmap1.GetPixel(xx, yy).R;
+                    byte ggg = bitmap1.GetPixel(xx, yy).G;
+                    byte bbb = bitmap1.GetPixel(xx, yy).B;
+
+                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
+
+                    bitmap1.SetPixel(xx, yy, zz);
+                }
+            }
+            pictureBox1.Image = bitmap1;
+
+            //Bitmap GrayImg = imop.getGrayImage8(Image);
+
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
+
+            Bitmap level1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level2 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level3 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level4 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level5 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level6 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level7 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level8 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+
+            BitmapData level1Data = level1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level2Data = level2.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level3Data = level3.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level4Data = level4.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level5Data = level5.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level6Data = level6.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level7Data = level7.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level8Data = level8.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData GrayImgData = bitmap1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int size = GrayImgData.Stride * GrayImgData.Height;
+
+            IntPtr intPtr = GrayImgData.Scan0;
+            IntPtr intPtr1 = level1Data.Scan0;
+            IntPtr intPtr2 = level2Data.Scan0;
+            IntPtr intPtr3 = level3Data.Scan0;
+            IntPtr intPtr4 = level4Data.Scan0;
+            IntPtr intPtr5 = level5Data.Scan0;
+            IntPtr intPtr6 = level6Data.Scan0;
+            IntPtr intPtr7 = level7Data.Scan0;
+            IntPtr intPtr8 = level8Data.Scan0;
+
+
+            byte[] GrayImgBytes = new byte[size];
+            byte[] level1Bytes = new byte[size];
+            byte[] level2Bytes = new byte[size];
+            byte[] level3Bytes = new byte[size];
+            byte[] level4Bytes = new byte[size];
+            byte[] level5Bytes = new byte[size];
+            byte[] level6Bytes = new byte[size];
+            byte[] level7Bytes = new byte[size];
+            byte[] level8Bytes = new byte[size];
+
+            Marshal.Copy(intPtr, GrayImgBytes, 0, size);
+            Marshal.Copy(intPtr1, level1Bytes, 0, size);
+            Marshal.Copy(intPtr2, level2Bytes, 0, size);
+            Marshal.Copy(intPtr3, level3Bytes, 0, size);
+            Marshal.Copy(intPtr4, level4Bytes, 0, size);
+            Marshal.Copy(intPtr5, level5Bytes, 0, size);
+            Marshal.Copy(intPtr6, level6Bytes, 0, size);
+            Marshal.Copy(intPtr7, level7Bytes, 0, size);
+            Marshal.Copy(intPtr8, level8Bytes, 0, size);
+
+            int k = 3;
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    byte R = GrayImgBytes[i * GrayImgData.Stride + j * k];
+                    int L1 = R & 1;
+                    if (L1 != 0) { L1 = 255; }
+                    int L2 = R & 2;
+                    if (L2 != 0) { L2 = 255; }
+                    int L3 = R & 4;
+                    if (L3 != 0) { L3 = 255; }
+                    int L4 = R & 8;
+                    if (L4 != 0) { L4 = 255; }
+                    int L5 = R & 16;
+                    if (L5 != 0) { L5 = 255; }
+                    int L6 = R & 32;
+                    if (L6 != 0) { L6 = 255; }
+                    int L7 = R & 64;
+                    if (L7 != 0) { L7 = 255; }
+                    int L8 = R & 128;
+                    if (L8 != 0) { L8 = 255; }
+                    level1Bytes[i * GrayImgData.Stride + j * k] = (byte)L1;
+                    level1Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L1;
+                    level1Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L1;
+                    level2Bytes[i * GrayImgData.Stride + j * k] = (byte)L2;
+                    level2Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L2;
+                    level2Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L2;
+                    level3Bytes[i * GrayImgData.Stride + j * k] = (byte)L3;
+                    level3Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L3;
+                    level3Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L3;
+                    level4Bytes[i * GrayImgData.Stride + j * k] = (byte)L4;
+                    level4Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L4;
+                    level4Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L4;
+                    level5Bytes[i * GrayImgData.Stride + j * k] = (byte)L5;
+                    level5Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L5;
+                    level5Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L5;
+                    level6Bytes[i * GrayImgData.Stride + j * k] = (byte)L6;
+                    level6Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L6;
+                    level6Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L6;
+                    level7Bytes[i * GrayImgData.Stride + j * k] = (byte)L7;
+                    level7Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L7;
+                    level7Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L7;
+                    level8Bytes[i * GrayImgData.Stride + j * k] = (byte)L8;
+                    level8Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)L8;
+                    level8Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)L8;
+                }
+            }
+            Marshal.Copy(level1Bytes, 0, intPtr1, level1Bytes.Length);
+            Marshal.Copy(level2Bytes, 0, intPtr2, level2Bytes.Length);
+            Marshal.Copy(level3Bytes, 0, intPtr3, level3Bytes.Length);
+            Marshal.Copy(level4Bytes, 0, intPtr4, level4Bytes.Length);
+            Marshal.Copy(level5Bytes, 0, intPtr5, level5Bytes.Length);
+            Marshal.Copy(level6Bytes, 0, intPtr6, level6Bytes.Length);
+            Marshal.Copy(level7Bytes, 0, intPtr7, level7Bytes.Length);
+            Marshal.Copy(level8Bytes, 0, intPtr8, level8Bytes.Length);
+
+            level1.UnlockBits(level1Data);
+            level2.UnlockBits(level2Data);
+            level3.UnlockBits(level3Data);
+            level4.UnlockBits(level4Data);
+            level5.UnlockBits(level5Data);
+            level6.UnlockBits(level6Data);
+            level7.UnlockBits(level7Data);
+            level8.UnlockBits(level8Data);
+            bitmap1.UnlockBits(GrayImgData);
+
+            int W = pictureBox1.Size.Width;
+            int H = pictureBox1.Size.Height;
+            Bitmap bmp = new Bitmap(W - 50, H - 50);
+
+            Graphics g = Graphics.FromImage(bmp);
+            //g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+
+            int w = 640 * 3 / 8;
+            int h = 480 * 3 / 9;
+            int x_st = 20;
+            int y_st = 20;
+            int dx = w + 20;
+            int dy = h + 20;
+
+            g.DrawImage(level1, x_st + dx * 0, y_st + dy * 0, w, h);
+            g.DrawImage(level2, x_st + dx * 0, y_st + dy * 1, w, h);
+            g.DrawImage(level3, x_st + dx * 0, y_st + dy * 2, w, h);
+            g.DrawImage(level4, x_st + dx * 0, y_st + dy * 3, w, h);
+            g.DrawImage(level5, x_st + dx * 1, y_st + dy * 0, w, h);
+            g.DrawImage(level6, x_st + dx * 1, y_st + dy * 1, w, h);
+            g.DrawImage(level7, x_st + dx * 1, y_st + dy * 2, w, h);
+            g.DrawImage(level8, x_st + dx * 1, y_st + dy * 3, w, h);
+
+            pictureBox1.Image = bmp;
+
+        }
+
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //灰階位圖分割 (bit-plane slicing)
+            //自然二進位分割
+
+            pictureBox1.BackColor = Color.Pink;
+            pictureBox1.Size = new Size(512 * 2 - 250, 800);
+
+            bitSlicing();
+        }
+
+        //public void grayCodeSlicing(Bitmap Image)
+        public void grayCodeSlicing()
+        {
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp"; //stomach
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            int xx;
+            int yy;
+
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    byte rrr = bitmap1.GetPixel(xx, yy).R;
+                    byte ggg = bitmap1.GetPixel(xx, yy).G;
+                    byte bbb = bitmap1.GetPixel(xx, yy).B;
+
+                    int Gray = (rrr * 299 + ggg * 587 + bbb * 114 + 500) / 1000;
+                    Color zz = Color.FromArgb(255, Gray, Gray, Gray);
+
+                    bitmap1.SetPixel(xx, yy, zz);
+                }
+            }
+            pictureBox1.Image = bitmap1;
+
+            //Bitmap GrayImg = imop.getGrayImage8(Image);
+
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
+
+            Bitmap level1 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level2 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level3 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level4 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level5 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level6 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level7 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+            Bitmap level8 = new Bitmap(width, height, PixelFormat.Format24bppRgb);
+
+
+            BitmapData level1Data = level1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level2Data = level2.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level3Data = level3.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level4Data = level4.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level5Data = level5.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level6Data = level6.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level7Data = level7.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData level8Data = level8.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            BitmapData GrayImgData = bitmap1.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int size = GrayImgData.Stride * GrayImgData.Height;
+
+            IntPtr intPtr = GrayImgData.Scan0;
+            IntPtr intPtr1 = level1Data.Scan0;
+            IntPtr intPtr2 = level2Data.Scan0;
+            IntPtr intPtr3 = level3Data.Scan0;
+            IntPtr intPtr4 = level4Data.Scan0;
+            IntPtr intPtr5 = level5Data.Scan0;
+            IntPtr intPtr6 = level6Data.Scan0;
+            IntPtr intPtr7 = level7Data.Scan0;
+            IntPtr intPtr8 = level8Data.Scan0;
+
+
+            byte[] GrayImgBytes = new byte[size];
+            byte[] level1Bytes = new byte[size];
+            byte[] level2Bytes = new byte[size];
+            byte[] level3Bytes = new byte[size];
+            byte[] level4Bytes = new byte[size];
+            byte[] level5Bytes = new byte[size];
+            byte[] level6Bytes = new byte[size];
+            byte[] level7Bytes = new byte[size];
+            byte[] level8Bytes = new byte[size];
+
+            Marshal.Copy(intPtr, GrayImgBytes, 0, size);
+            Marshal.Copy(intPtr1, level1Bytes, 0, size);
+            Marshal.Copy(intPtr2, level2Bytes, 0, size);
+            Marshal.Copy(intPtr3, level3Bytes, 0, size);
+            Marshal.Copy(intPtr4, level4Bytes, 0, size);
+            Marshal.Copy(intPtr5, level5Bytes, 0, size);
+            Marshal.Copy(intPtr6, level6Bytes, 0, size);
+            Marshal.Copy(intPtr7, level7Bytes, 0, size);
+            Marshal.Copy(intPtr8, level8Bytes, 0, size);
+
+            int k = 3;
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    byte R = GrayImgBytes[i * GrayImgData.Stride + j * k];
+                    int L1 = R & 1;
+                    if (L1 != 0) { L1 = 1; }
+                    int L2 = R & 2;
+                    if (L2 != 0) { L2 = 1; }
+                    int L3 = R & 4;
+                    if (L3 != 0) { L3 = 1; }
+                    int L4 = R & 8;
+                    if (L4 != 0) { L4 = 1; }
+                    int L5 = R & 16;
+                    if (L5 != 0) { L5 = 1; }
+                    int L6 = R & 32;
+                    if (L6 != 0) { L6 = 1; }
+                    int L7 = R & 64;
+                    if (L7 != 0) { L7 = 1; }
+                    int L8 = R & 128;
+                    if (L8 != 0) { L8 = 1; }
+
+                    int G8 = L8;
+                    if (G8 != 0) { G8 = 255; }
+                    int G7 = L8 ^ L7;
+                    if (G7 != 0) { G7 = 255; }
+                    int G6 = L7 ^ L6;
+                    if (G6 != 0) { G6 = 255; }
+                    int G5 = L6 ^ L5;
+                    if (G5 != 0) { G5 = 255; }
+                    int G4 = L5 ^ L4;
+                    if (G4 != 0) { G4 = 255; }
+                    int G3 = L4 ^ L3;
+                    if (G3 != 0) { G3 = 255; }
+                    int G2 = L3 ^ L2;
+                    if (G2 != 0) { G2 = 255; }
+                    int G1 = L2 ^ L1;
+                    if (G1 != 0) { G1 = 255; }
+
+                    level1Bytes[i * GrayImgData.Stride + j * k] = (byte)G1;
+                    level1Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G1;
+                    level1Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G1;
+                    level2Bytes[i * GrayImgData.Stride + j * k] = (byte)G2;
+                    level2Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G2;
+                    level2Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G2;
+                    level3Bytes[i * GrayImgData.Stride + j * k] = (byte)G3;
+                    level3Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G3;
+                    level3Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G3;
+                    level4Bytes[i * GrayImgData.Stride + j * k] = (byte)G4;
+                    level4Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G4;
+                    level4Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G4;
+                    level5Bytes[i * GrayImgData.Stride + j * k] = (byte)G5;
+                    level5Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G5;
+                    level5Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G5;
+                    level6Bytes[i * GrayImgData.Stride + j * k] = (byte)G6;
+                    level6Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G6;
+                    level6Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G6;
+                    level7Bytes[i * GrayImgData.Stride + j * k] = (byte)G7;
+                    level7Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G7;
+                    level7Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G7;
+                    level8Bytes[i * GrayImgData.Stride + j * k] = (byte)G8;
+                    level8Bytes[i * GrayImgData.Stride + j * k + 1] = (byte)G8;
+                    level8Bytes[i * GrayImgData.Stride + j * k + 2] = (byte)G8;
+                }
+            }
+            Marshal.Copy(level1Bytes, 0, intPtr1, level1Bytes.Length);
+            Marshal.Copy(level2Bytes, 0, intPtr2, level2Bytes.Length);
+            Marshal.Copy(level3Bytes, 0, intPtr3, level3Bytes.Length);
+            Marshal.Copy(level4Bytes, 0, intPtr4, level4Bytes.Length);
+            Marshal.Copy(level5Bytes, 0, intPtr5, level5Bytes.Length);
+            Marshal.Copy(level6Bytes, 0, intPtr6, level6Bytes.Length);
+            Marshal.Copy(level7Bytes, 0, intPtr7, level7Bytes.Length);
+            Marshal.Copy(level8Bytes, 0, intPtr8, level8Bytes.Length);
+
+            level1.UnlockBits(level1Data);
+            level2.UnlockBits(level2Data);
+            level3.UnlockBits(level3Data);
+            level4.UnlockBits(level4Data);
+            level5.UnlockBits(level5Data);
+            level6.UnlockBits(level6Data);
+            level7.UnlockBits(level7Data);
+            level8.UnlockBits(level8Data);
+            bitmap1.UnlockBits(GrayImgData);
+
+
+            int W = pictureBox1.Size.Width;
+            int H = pictureBox1.Size.Height;
+            Bitmap bmp = new Bitmap(W - 50, H - 50);
+
+            Graphics g = Graphics.FromImage(bmp);
+            //g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+
+            int w = 640 * 3 / 8;
+            int h = 480 * 3 / 9;
+            int x_st = 20;
+            int y_st = 20;
+            int dx = w + 20;
+            int dy = h + 20;
+
+            g.DrawImage(level1, x_st + dx * 0, y_st + dy * 0, w, h);
+            g.DrawImage(level2, x_st + dx * 0, y_st + dy * 1, w, h);
+            g.DrawImage(level3, x_st + dx * 0, y_st + dy * 2, w, h);
+            g.DrawImage(level4, x_st + dx * 0, y_st + dy * 3, w, h);
+            g.DrawImage(level5, x_st + dx * 1, y_st + dy * 0, w, h);
+            g.DrawImage(level6, x_st + dx * 1, y_st + dy * 1, w, h);
+            g.DrawImage(level7, x_st + dx * 1, y_st + dy * 2, w, h);
+            g.DrawImage(level8, x_st + dx * 1, y_st + dy * 3, w, h);
+
+            pictureBox1.Image = bmp;
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //格雷碼風格
+
+            pictureBox1.BackColor = Color.Pink;
+            pictureBox1.Size = new Size(512 * 2 - 250, 800);
+
+            grayCodeSlicing();
         }
+
 
         private void button20_Click(object sender, EventArgs e)
         {

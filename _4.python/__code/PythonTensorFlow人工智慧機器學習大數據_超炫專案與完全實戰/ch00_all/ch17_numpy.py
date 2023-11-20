@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
 import numpy as np
 
 a = np.array([1, 2, 3])   # Create a rank 1 array
@@ -15,15 +12,6 @@ print(b[0, 0], b[0, 1], b[1, 0])   # Prints "1 2 4"
 
 print('------------------------------------------------------------')	#60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch17_numpy\02-zeros.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
-import numpy as np
 a = np.zeros((2,2))
 print(a) # Prints "[[ 0. 0.]
 # [0. 0.]]"
@@ -37,19 +25,12 @@ print(c)
 d = np.eye(3)
 print(d)
 
-
 e = np.random.random((2,2)) # Create an array (lled with random values
 print(e) # Might print "[[ 0.91940167 0.08143941]
 # [ 0.68744134 0.87236687]]"
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch17_numpy\03-ArrayIndexing.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-import numpy as np
 a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
 b= a[0:2,1:3]         # 定義b為a 的部分資料
 #b= a[0:2,1:3].copy() # 複製b為a 的部分資料
@@ -60,13 +41,6 @@ print(a)              # 輸出[[ 1 99  3  4],[ 5  6  7  8],[ 9 10 11 12]]
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch17_numpy\04-slider.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
-import numpy as np
 a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
 row_r1 = a[1, :]
 row_r2 = a[1:2, :]
@@ -79,13 +53,6 @@ print(col_r2, col_r2.shape)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch17_numpy\05-Index.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
-import numpy as np
 a = np.array([[1,2], [3, 4], [5, 6]])
 print(a[0, 0])
 print(a[1, 1])
@@ -98,13 +65,6 @@ print(a[[0,1,2], [0,1,0]])
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch17_numpy\06-Datatype.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
-import numpy as np
 x = np.array([1, 2])  #numpy自動設定
 print(x.dtype)         # 輸出 "int64"
 x = np.array([1.0, 2.0])  #numpy自動設定
@@ -112,16 +72,7 @@ print(x.dtype)             # 輸出 "float64"
 x = np.array([1, 2], dtype=np.int64)  #設定為int64
 print(x.dtype)                         # 輸出 "int64"
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch17_numpy\07-math.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
-import numpy as np
 
 x = np.array([[1,2],[3,4]], dtype=np.float64)
 y = np.array([[5,6],[7,8]], dtype=np.float64)
@@ -151,14 +102,6 @@ print(np.dot(x, y))   # [[5+14 , 6+16] []]
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch17_numpy\08-statistics.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
-
-import numpy as np
 x = np.array([[-1,2,3],[13,14,15]])
 print(x)
 print(np.sum(x))       # 輸出46   全部累加
@@ -181,14 +124,6 @@ print(x.T)       # 輸出 [[-1 13] [ 2 14] [ 3 15]]
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch17_numpy\09-if.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
-
-import numpy as np
 a = np.array([[1,2,3,4], [5,6,7,8], [9,10,11,12]])
 bool_idx =  ((a % 2)==0)
 print(bool_idx)
@@ -198,12 +133,6 @@ print(a[a%2==1]*10)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch17_numpy\10-tile.py
-
-#!/usr/bin/env python
-# -*- coding=utf-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-import numpy as np
 #方法1
 x = np.array([[1,2,3], [4,5,6]])
 v = np.array([1, 0, 1])
@@ -219,8 +148,6 @@ print(x+v2) #輸出[[2 2 4] [5 5 7]]
 
 #方法3
 print(x+v)  #輸出[[2 2 4] [5 5 7]]
-
-
 
 print('------------------------------------------------------------')	#60個
 

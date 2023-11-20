@@ -34,132 +34,10 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
-#XXXXXXX1
 ax = fig.add_subplot(231, projection='3d')  #第一張圖
-
-#ax = fig.gca(projection='3d') old
-#ax = fig.add_axes(Axes3D(fig))
-
-x = np.arange(-10, 11, 1)   # -10 .... 10
-y = np.arange(-10, 11, 1)   # -10 .... 10
-X, Y = np.meshgrid(x, y)
-
-Z = np.add(np.power(X, 2), np.power(Y, 2))
-surf = ax.plot_surface(X, Y, Z, cmap = cm.gist_rainbow)
-fig.colorbar(surf, shrink = 0.5, aspect = 5)
-
-ax.set_title('XXXXXXX1')
-
-#XXXXXXX2
-ax = fig.add_subplot(232, projection='3d')  #第二張圖
-
-π = np.pi
-θ = np.linspace(-5*π, 5*π, 200)
-
-x = np.cos(θ)
-y = np.sin(θ)
-z = θ/(5*π)
-
-#ax = fig.gca(projection='3d') old
-#ax = fig.add_axes(Axes3D(fig))
-plt.plot(x, y, z)
-ax.set_title('3D 畫圖')
-
-#XXXXXXX3
-ax = fig.add_subplot(233, projection='3d')  #第三張圖
-
-x = np.random.randn(100)
-y = np.random.randn(100)
-z = np.random.randn(100)
-
-#ax = fig.gca(projection='3d') old
-#ax = fig.add_axes(Axes3D(fig))
-ax.scatter(x, y, z, c='r')
-
-ax.set_title('XXXXXXX3')
-
-#XXXXXXX4
-ax = fig.add_subplot(234, projection='3d')  #第四張圖
-
-#曲面 contour
-
-x = y  = np.linspace(-3, 3, 300)
-X, Y = np.meshgrid(x, y)
-
-Z = np.sin(np.sqrt(X**2 + Y**2))
-
-#ax = fig.gca(projection='3d') old
-#ax = fig.add_axes(Axes3D(fig))
-ax.plot_surface(X, Y, Z)
-
-ax.set_title('曲面 surface')
-
-#XXXXXXX5
-ax = fig.add_subplot(235, projection='3d')  #第五張圖
-
-#曲面 contour
-plt.contour(X, Y, Z)
-ax.set_title('曲面 contour')
-
-#XXXXXXX6
-ax = fig.add_subplot(236, projection='3d')  #第六張圖
-
-#曲面 contourf
-plt.contourf(X, Y, Z)
-ax.set_title('曲面 contourf')
-
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
-fig = plt.figure(num = '3D繪圖 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-#XXXXXXX1
-ax = fig.add_subplot(231, projection='3d')  #第一張圖
-
-t = np.linspace(-2 * np.pi, 2 * np.pi)      
-x, y = np.meshgrid(t, t)                
-z = np.sin(np.sqrt(x ** 2 + y ** 2))        
-ax.plot_surface(x, y, z)   #畫出三軸資料所構成的曲面
-plt.tight_layout()
-
-ax.set_title('XXXXXXX1')
-
-#繪製曲面 – plot_surface()
-ax = fig.add_subplot(232, projection='3d')  #第二張圖
-
-t = np.linspace(-5, 5, num=50)  
-x, y = np.meshgrid(t, t)            
-z = x * y                       
-
-ax.plot_surface(x, y, z)
-
-ax.set_title('繪製曲面')
-
-#給曲面套上顏色
-
-ax = fig.add_subplot(233, projection='3d')  #第三張圖
-
-t = np.linspace(-5, 5)
-x, y = np.meshgrid(t, t)
-z = x * y
-
-ax.plot_surface(x, y, z, cmap='viridis') 
-ax.set_title('給曲面套上顏色')
 
 #繪製 3D 長條圖
-ax = fig.add_subplot(234, projection='3d')  #第四張圖
-
 #plt.rcParams['font.size'] = 16
-
 #fig = plt.figure(figsize=(12, 8))
 
 xpos = np.arange(10)        
@@ -175,73 +53,11 @@ ax.bar3d(xpos, ypos, zpos, dx, dy, dz)
 ax.set_title('繪製 3D 長條圖')
 
 
-#繪製 3D 散佈圖 – scatter3D()
-
-ax = fig.add_subplot(235, projection='3d')  #第五張圖
-
-plt.rcParams['font.size'] = 16
-x = np.random.randn(1000)       
-y = np.random.randn(1000)       
-z = np.random.randn(1000)       
-
-ax.scatter3D(x, y, z)
-
-ax.set_title('繪製 3D 散佈圖 – scatter3D()')
-
-#XXXXXXX6
-ax = fig.add_subplot(236, projection='3d')  #第六張圖
-
-x = np.linspace(0, 5, 10)
-y = np.linspace(0, 5, 10)
-X, Y = np.meshgrid(x, y)
-
-Z = 2*X + Y
-#ax = fig.gca(projection='3d') old
-#ax = fig.add_axes(Axes3D(fig))
-ax.scatter(X, Y, Z+0.7*np.random.randn(10,10))
-ax.plot_surface(X, Y, Z, alpha=0.3)
-
-ax.set_title('XXXXXXX6')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
-fig = plt.figure(num = '3D繪圖 集合 3', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-#XXXXXXX1
-ax = fig.add_subplot(231, projection='3d')  #第一張圖
-
-#圓環與直線
-
-#ax = fig.gca(projection='3d') old
-#ax = fig.add_axes(Axes3D(fig))
-
-#ax.set_aspect("equal")
-
-# draw ring
-p = np.mgrid[0:2.*np.pi:20j]
-x = 3.*np.cos(p)*np.sin(np.pi/6.)
-y = 3.*np.sin(p)*np.sin(np.pi/6.)
-z = 3.*np.cos(np.pi/6.)
-ax.plot(x, y, z, color="r")
-ax.plot(p/3., p/3., p/3., color="b")
-#plt.savefig("matplot-3D-1.png")
-
 ax.set_title('XXXXXXX1')
 
-#XXXXXXX2
 ax = fig.add_subplot(232, projection='3d')  #第二張圖
 
 #三維球
-
 #ax = fig.gca(projection='3d') old
 #ax = fig.add_axes(Axes3D(fig))
 
@@ -458,13 +274,136 @@ ax.set_title('XXXXXXX6')
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+
+#          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
+fig = plt.figure(num = '3D繪圖 集合 2 散點圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+#XXXXXXX1
+ax = fig.add_subplot(231, projection='3d')  #第一張圖
+
+
+x = np.random.randn(100)
+y = np.random.randn(100)
+z = np.random.randn(100)
+
+#ax = fig.gca(projection='3d') old
+#ax = fig.add_axes(Axes3D(fig))
+ax.scatter(x, y, z, c='r')
+
+
+ax.set_title('XXXXXXX1')
+
+#XXXXXXX2
+ax = fig.add_subplot(232, projection='3d')  #第二張圖
+
+
+count = 100
+range = 100
+
+xs = np.random.rand(count) * range
+ys = np.random.rand(count) * range
+zs = np.random.rand(count) * range
+
+ax.scatter(xs, ys, zs, s=zs, c=zs)
+
+ax.set_xlabel('X Label')
+ax.set_ylabel('Y Label')
+ax.set_zlabel('Z Label')
+ax.set_title('散點圖')
+
+
+ax.set_title('XXXXXXX2')
+
+#XXXXXXX3
+ax = fig.add_subplot(233, projection='3d')  #第三張圖
+
+#3D 座標點
+#在三維空間中繪製座標點是最常用到的基本功能。
+
+# 產生 3D 座標資料
+z1 = np.random.randn(50)
+x1 = np.random.randn(50)
+y1 = np.random.randn(50)
+z2 = np.random.randn(50)
+x2 = np.random.randn(50)
+y2 = np.random.randn(50)
+
+# 繪製 3D 座標點
+ax.scatter(x1, y1, z1, c=z1, cmap='Reds', marker='^', label='My Points 1')
+ax.scatter(x2, y2, z2, c=z2, cmap='Blues', marker='o', label='My Points 2')
+
+ax.legend() # 顯示圖例
+
+ax.set_title('3D 座標點')
+
+
+#XXXXXXX4
+ax = fig.add_subplot(234, projection='3d')  #第四張圖
+
+#3D 曲線
+#這是將 3D 的曲線與座標點畫在同一張圖的範例。
+
+# 產生 3D 座標資料
+z = np.linspace(0, 15, 100)
+x = np.sin(z)
+y = np.cos(z)
+
+# 繪製 3D 曲線
+ax.plot(x, y, z, color='gray', label='My Curve')
+
+# 產生 3D 座標資料
+x2 = np.sin(z) + 0.1 * np.random.randn(100)
+y2 = np.cos(z) + 0.1 * np.random.randn(100)
+
+# 繪製 3D 座標點
+ax.scatter(x2, y2, z, c=z, cmap='jet', label='My Points')
+
+ax.legend() # 顯示圖例
+
+ax.set_title('3D 曲線')
+
+
+#XXXXXXX5
+ax = fig.add_subplot(235, projection='3d')  #第五張圖
+
+x = np.linspace(0, 5, 10)
+y = np.linspace(0, 5, 10)
+X, Y = np.meshgrid(x, y)
+
+Z = 2*X + Y
+#ax = fig.gca(projection='3d') old
+#ax = fig.add_axes(Axes3D(fig))
+ax.scatter(X, Y, Z+0.7*np.random.randn(10,10))
+ax.plot_surface(X, Y, Z, alpha=0.3)
+
+
+#XXXXXXX6
+ax = fig.add_subplot(236, projection='3d')  #第六張圖
+
+#繪製 3D 散佈圖 – scatter3D()
+plt.rcParams['font.size'] = 16
+x = np.random.randn(1000)       
+y = np.random.randn(1000)       
+z = np.random.randn(1000)       
+ax.scatter3D(x, y, z)
+ax.set_title('繪製 3D 散佈圖 – scatter3D()')
+
+
+plt.show()
 
 sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
-fig = plt.figure(num = '3D繪圖 集合 4', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+fig = plt.figure(num = '3D繪圖 集合 3', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #設定中文字型及負號正確顯示
 #設定中文字型檔
@@ -515,11 +454,10 @@ ax.set_title('XXXXXXX6')
 
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小             解析度    背景色                      邊框顏色                      邊框有無
-fig = plt.figure(num = '3D繪圖 集合 5', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+fig = plt.figure(num = '3D繪圖 集合 4', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #設定中文字型及負號正確顯示
 #設定中文字型檔

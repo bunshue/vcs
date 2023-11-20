@@ -1,3 +1,4 @@
+import sys
 
 print('------------------------------------------------------------')	#60個
 
@@ -76,7 +77,7 @@ grobj.launch()
 
 print('------------------------------------------------------------')	#60個
 
-
+"""
 #英文對話(GPT-2)
 # pip install git+https://github.com/huggingface/transformers.git
 
@@ -96,15 +97,19 @@ def generate_text(inp):
 out = gr.outputs.Textbox(label='GPT-2回應')
 grobj = gr.Interface(generate_text,inputs="textbox", outputs=out, title="GPT-2")
 grobj.launch()
+"""
 
 print('------------------------------------------------------------')	#60個
 
+'''
 #自動歌詞產生器
 
 import gradio as gr
 
 grobj = gr.Interface.load("huggingface/uer/gpt2-chinese-lyric", inputs="text", outputs="text")
 grobj.launch()
+'''
+
 
 #pip install opencc
 
@@ -128,6 +133,7 @@ grobj.launch()
 
 
 
+sys.exit()
 
 
 print('------------------------------------------------------------')	#60個

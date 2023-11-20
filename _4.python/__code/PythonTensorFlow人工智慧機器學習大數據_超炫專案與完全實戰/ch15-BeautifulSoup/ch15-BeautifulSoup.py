@@ -1,8 +1,7 @@
-# -*- coding: UTF-8 -*-
-__author__ = "柯博文老師 Powen Ko, www.powenko.com"
-
 import requests
 from bs4 import BeautifulSoup
+
+print('------------------------------------------------------------')	#60個
 
 req=requests.get('http://www.powenko.com/wordpress/')
 print(req.text.encode('utf-8'))
@@ -14,16 +13,6 @@ print(soup.a)
 print(soup.find_all('a'))
 
 print('------------------------------------------------------------')	#60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch15-BeautifulSoup\02-BeautifulSoup-API.py
-
-#!/usr/bin/env
-# -*- coding: utf-8 -*-    
-__author__ = "Powen Ko, www.powenko.com"
-import requests
-from bs4 import BeautifulSoup
 
 text1="""
 <head>
@@ -51,15 +40,9 @@ print(soup.select('a'))
 print(soup.select('.redcolor'))   # class="redcolor"
 print(soup.select('#link3'))     # id="link3"
 for link in soup.select('a'):
-	print(link.string)
-
+        print(link.string)
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch15-BeautifulSoup\03-powenko.py
-
-import requests
-from bs4 import BeautifulSoup
 
 req=requests.get("http://www.powenko.com/wordpress")
 soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
@@ -71,11 +54,6 @@ for area in largefeature0.select('.area'):
   print(area.select('a')[1].contents[0])
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch15-BeautifulSoup\04-Baidu.py
-
-import requests
-from bs4 import BeautifulSoup
 
 req=requests.get("http://news.baidu.com/tech")
 soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
@@ -89,11 +67,6 @@ for area in largefeature0.select('li'):
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch15-BeautifulSoup\05-feebee.py
-
-import requests
-from bs4 import BeautifulSoup
-
 req=requests.get("https://feebee.com.tw/s/?q=raspberry+pi+3")
 soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
 
@@ -102,15 +75,7 @@ for line in soup.select('.items'):
    print(line.select('.ellipsis')[0].text)
    print(line.select('a')[0].get("href"))
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch15-BeautifulSoup\06-chinesetimes.py
-
-import requests
-from bs4 import BeautifulSoup
 
 req=requests.get("https://www.chinatimes.com/?chdtv")
 soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
@@ -120,11 +85,6 @@ for listRight in soup.select('.focus-news'):
      print(line.select('a')[0].text)
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\PythonTensorFlow人工智慧機器學習大數據_超炫專案與完全實戰\ch15-BeautifulSoup\07-goodinfo.py
-
-import requests
-from bs4 import BeautifulSoup
 
 req=requests.get("https://goodinfo.tw/StockInfo/StockDividendSchedule.asp?STOCK_ID=2892")
 soup=BeautifulSoup(req.text.encode('utf-8'), "html.parser")
