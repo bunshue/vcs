@@ -15,82 +15,82 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img = cv2.imread(filename, 0)
+image = cv2.imread(filename, 0)
 
 plt.figure('修改一部份資料', figsize = (16, 12))
 plt.subplot(221)
 plt.title('原圖')
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 print('修改一部份資料 1')
 for i in range(20, 60):    # y
     for j in range(20, 100):    # x
-        img[i,j] = 255
+        image[i,j] = 255
 
 print('修改一部份資料 2')
 #測試讀取、修改單個像素值
-print("讀取像素點img.item(3,2)=",img.item(3,2))
-img.itemset((3,2),255)
-print("修改後像素點img.item(3,2)=",img.item(3,2))
+print("讀取像素點image.item(3,2)=", image.item(3,2))
+image.itemset((3,2),255)
+print("修改後像素點image.item(3,2)=", image.item(3,2))
 #測試修改一個區域的像素值
 for i in range(100,200):    #y
     for j in range(20,60): #x
-        img.itemset((i,j),220)
+        image.itemset((i,j),220)
 
 plt.subplot(222)
 plt.title('修改後的圖')
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-img = cv2.imread(filename)
+image = cv2.imread(filename)
 
 plt.subplot(223)
 plt.title('原圖')
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-print("讀取img[0,0]=",img[0,0])
-print("讀取img[0,0,0]=",img[0,0,0])
-print("讀取img[0,0,1]=",img[0,0,1])
-print("讀取img[0,0,2]=",img[0,0,2])
-print("讀取img[50,0]=",img[50,0])
-print("讀取img[100,0]=",img[100,0])
+print("讀取image[0,0]=", image[0,0])
+print("讀取image[0,0,0]=", image[0,0,0])
+print("讀取image[0,0,1]=", image[0,0,1])
+print("讀取image[0,0,2]=", image[0,0,2])
+print("讀取image[50,0]=", image[50,0])
+print("讀取image[100,0]=", image[100,0])
 #區域1
-for i in range(0,50):
-    for j in range(0,100):
-        for k in range(0,3):
-            img[i,j,k]=255  #白色
+for i in range(0, 50):
+    for j in range(0, 100):
+        for k in range(0, 3):
+            image[i, j, k] = 255  #白色
 #區域2
-for i in range(50,100):
-    for j in range(0,100):
-        img[i,j]=[128,128,128]  #灰色
+for i in range(50, 100):
+    for j in range(0, 100):
+        image[i, j] = [128, 128, 128]  #灰色
 #區域3
-for i in range(100,150):
-    for j in range(0,100):
-        img[i,j]=0          #黑色
+for i in range(100, 150):
+    for j in range(0, 100):
+        image[i, j]=0          #黑色
 #區域4
-print("讀取img.item(0,0,0)=",img.item(0,0,0))
-print("讀取img.item(0,0,1)=",img.item(0,0,1))
-print("讀取img.item(0,0,2)=",img.item(0,0,2))
-for i in range(200,250):
-    for j in range(0,100):
-        for k in range(0,3):
-            img.itemset((i,j,k),255)     #白色
+print("讀取image.item(0, 0, 0) = ", image.item(0, 0, 0))
+print("讀取image.item(0, 0, 1) = ", image.item(0, 0, 1))
+print("讀取image.item(0, 0, 2) = ", image.item(0, 0, 2))
+for i in range(200, 250):
+    for j in range(0, 100):
+        for k in range(0, 3):
+            image.itemset((i, j, k), 255)     #白色
 
-print("修改後img.item(0,0,0)=",img.item(0,0,0))
-print("修改後img.item(0,0,1)=",img.item(0,0,1))
-print("修改後img.item(0,0,2)=",img.item(0,0,2))
-print("修改後img[0,0]=",img[0,0])
-print("修改後img[0,0,0]=",img[0,0,0])
-print("修改後img[0,0,1]=",img[0,0,1])
-print("修改後img[0,0,2]=",img[0,0,2])
-print("修改後img[50,0]=",img[50,0])
-print("修改後img[100,0]=",img[100,0])
+print("修改後image.item(0, 0, 0) = ", image.item(0, 0, 0))
+print("修改後image.item(0, 0, 1) = ", image.item(0, 0, 1))
+print("修改後image.item(0, 0, 2) = ", image.item(0, 0, 2))
+print("修改後image[0, 0] = ",image[0, 0])
+print("修改後image[0, 0, 0] = ",image[0, 0, 0])
+print("修改後image[0, 0, 1] = ",image[0, 0, 1])
+print("修改後image[0, 0, 2] = ",image[0, 0, 2])
+print("修改後image[50, 0] = ",image[50, 0])
+print("修改後image[100, 0] = ",image[100, 0])
 
 plt.subplot(224)
 plt.title('修改後的圖')
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()
 plt.show()
@@ -155,4 +155,5 @@ plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
+print('作業完成')
+print('------------------------------------------------------------')	#60個

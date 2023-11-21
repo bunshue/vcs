@@ -550,8 +550,8 @@ print('------------------------------------------------------------')	#60個
 x = 1000000
 pi = 0
 time.process_time()
-for i in range(1,x+1):
-    pi += 4*((-1)**(i+1) / (2*i-1))
+for i in range(1, x + 1):
+    pi += 4*((-1) ** (i + 1) / (2 * i - 1))
     if i != 1 and i % 100000 == 0:      # 隔100000執行一次
         e_time = time.process_time()
         print(f"當 {i=:7d} 時 PI={pi:8.7f}, 所花時間={e_time}")
@@ -560,8 +560,8 @@ for i in range(1,x+1):
 
 x = 1000000
 pi = 0
-for i in range(1,x+1):
-    pi += 4*((-1)**(i+1) / (2*i-1))
+for i in range(1, x + 1):
+    pi += 4 * ((-1) ** (i + 1) / (2 * i - 1))
     if i % 100000 == 0:      # 隔100000執行一次
         print(f"當 {i = :7d} 時 PI = {pi:20.19f}")
 
@@ -889,32 +889,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-import copy, random, sys, time
-
-WIDTH = 16
-HEIGHT = 8
-
-nextCells = {}  #字典
-for x in range(WIDTH):
-    for y in range(HEIGHT):
-        if random.randint(0, 1) == 0:
-            nextCells[(x, y)] = 'Y'
-        else:
-            nextCells[(x, y)] = 'N'
-
-print(type(nextCells))
-print(nextCells)
-
-cells = copy.deepcopy(nextCells)
-
-print('顯示內容')
-for y in range(HEIGHT):
-    for x in range(WIDTH):
-        print(cells[(x, y)], end = '')
-    print()
 
 print('------------------------------------------------------------')	#60個
 
@@ -1319,11 +1293,7 @@ with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
 '''
 print('------------------------------------------------------------')	#60個
 
-import sys, os, time
 from stat import *
-
-secs_per_year = 365.0 * 24.0 * 3600.0   # Scale factor
-now = time.time()                       # Current time, for age computations
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
     
@@ -1333,17 +1303,7 @@ itime = ST_MTIME
 #itime = ST_CTIME
 anytime = st[itime]
 size = st[ST_SIZE]
-age = now - anytime
-byteyears = float(size) * float(age) / secs_per_year
-
-print(filename.ljust(50), end=' ')
-print(repr(int(byteyears)).rjust(8))
-
-print()
-
-print(filename.ljust(60), end=' ')
-print(repr(int(byteyears)).rjust(8))
-
+print('檔案大小 :', size, '拜')
 
 print('------------------------------------------------------------')	#60個
 
@@ -1460,19 +1420,6 @@ else:
 print('------------------------------------------------------------')	#60個
 
 '''
-import numpy as np
-
-N = 10
-
-a = np.arange(N)    #numpy.ndarray
-
-print(type(a))
-print(a)
-
-b = range(1, 11)    #range
-print(type(b))
-print(b)
-
 c = list(b)         #list
 print(type(c))
 print(c)
@@ -1505,15 +1452,6 @@ print(progname)
 
 print('------------------------------------------------------------')	#60個
 
-n = list(range(100))
-r = list(range(25))
-n = list(range(10)) * 10
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
 import os
 import sys
 
@@ -1543,7 +1481,7 @@ print(numberList)
 
 print('------------------------------------------------------------')	#60個
 
-time.sleep(random.randint(20, 50) / 10.0)
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -1556,9 +1494,6 @@ timeElapsed = time.time() - drawTime
 timeElapsed = round(timeElapsed, 4)
 print('You took', timeElapsed, 'seconds to draw.')
 """
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1620,10 +1555,6 @@ for i, roll in enumerate(rolls):
 print(', '.join(rolls), end='')
 
 '''
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1688,36 +1619,32 @@ print('以逗點分割字元', str2.partition(','))
 str3 = '忠孝\n仁愛\n信義\n和平'
 print('依\\n分割字串', str3.splitlines(False))
 
-
 print('------------------------------------------------------------')	#60個
 
-result = lambda x : 3*x-1  #lambda()函數
+result = lambda x : 3 * x - 1  #lambda()函數
 print(result(3)) #輸出數值8
 
 print('------------------------------------------------------------')	#60個
 
 def formula(x, y): #自訂函數
-    return 3*x+2*y
+    return 3 * x + 2 * y
 
-formula = lambda x, y : 3*x+2*y  #表示lambda有二個參數
-print(formula (5,10)) ##傳入兩個數值讓lambda()函數做運算，輸出數值35
-
-result = lambda x : 3*x-1  #lambda()函數
+result = lambda x : 3 * x - 1  #lambda()函數
 print(result(3)) #輸出數值8
 
 def formula(x, y): #自訂函數
-    return 3*x+2*y
+    return 3 * x + 2 * y
 
-formula = lambda x, y : 3*x+2*y  #表示lambda有二個參數
-print(formula (5,10)) ##傳入兩個數值讓lambda()函數做運算，輸出數值35
+formula = lambda x, y : 3 * x + 2 * y  #表示lambda有二個參數
+print(formula (5, 10)) #傳入兩個數值讓lambda()函數做運算，輸出數值35
 
 print('------------------------------------------------------------')	#60個
 
 str1="I love python."
-print("原字串內容: ",str1)
-print("轉換成串列: ",list(str1))
-print("轉換成值組: ",tuple(str1))
-print("字串長度: ",len(str1))
+print("原字串內容: ", str1)
+print("轉換成串列: ", list(str1))
+print("轉換成值組: ", tuple(str1))
+print("字串長度: ", len(str1))
 
 list1=[8,23,54,33,12,98]
 print("原串列內容: ",list1)
@@ -1752,14 +1679,7 @@ print('len([5,7,1,8,9])=',len([5,7,1,8,9]))
 
 print('------------------------------------------------------------')	#60個
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 try:
     import a_python_module
@@ -1767,7 +1687,6 @@ except ImportError:
     print('匯入模組 a_python_module 失敗')
     print('請安裝模組')
     #sys.exit()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1782,15 +1701,7 @@ try:
 except KeyboardInterrupt:
     sys.exit()  # When Ctrl-C is pressed, end the program.
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
-""" 統計亂數
-        if random.randint(1, 100) <= 90:
-            useUpper = not useUpper  # Flip the case.
-"""
 
 
 
@@ -1822,6 +1733,36 @@ for i in zip(*t):
 
 
 print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
 
 
 
