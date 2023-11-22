@@ -1,6 +1,6 @@
+import sys
+import requests
 
-import requests 
- 
 url = "https://fchart.github.io/test.html"
 response = requests.get(url)
 if response.status_code == 200:
@@ -10,15 +10,8 @@ if response.status_code == 200:
 else:
     print("錯誤! HTTP請求失敗...")
 
-
-
 print('------------------------------------------------------------')	#60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-1-1a.py
-
-import requests 
- 
 url_params = {'name': '陳會安', 'grade': 95}
 r = requests.get("http://httpbin.org/get", params=url_params)
 if r.status_code == 200:
@@ -26,12 +19,7 @@ if r.status_code == 200:
 else:
     print("錯誤! HTTP請求失敗...")
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-1-2.py
-
-import requests 
 
 url = "http://httpbin.org/user-agent"
  
@@ -39,28 +27,14 @@ headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 r = requests.get(url, headers=headers)
 print(r.text)
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-1-2a.py
-
-import requests 
 
 url = "http://httpbin.org/user-agent"
  
 r = requests.get(url)
 print(r.text)
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-1-2b.py
-
-import requests 
 
 url = "http://httpbin.org/cookies"
 
@@ -68,24 +42,13 @@ cookies = dict(name='Joe Chen')
 r = requests.get(url, cookies=cookies)
 print(r.text)
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-1-3.py
-
-import requests
-	
 post_data = {'name': '陳會安', 'grade': 95}
 r = requests.post("http://httpbin.org/post", data=post_data)
 print(r.text)
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-2-2.py
 
 from selenium import webdriver
 
@@ -99,8 +62,6 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-2-2a.py
-
 from selenium import webdriver
 
 driver = webdriver.Chrome("./chromedriver")
@@ -113,23 +74,13 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-2-2b.py
-
-import requests 
-
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 
 cookies = { "over18": "1" }
 r = requests.get(url, cookies=cookies)
 print(r.text)
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-2-2c.py
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -146,29 +97,18 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-3.py
-
-import requests
-	
 url = "https://www.taifex.com.tw/cht/3/totalTableDate"
 post_data = "queryType=1&goDay=&doQuery=1&dateaddcnt=&queryDate=2020%2F08%2F07"
 r = requests.post(url, data=post_data)
 print(r.text)
 
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-4-2.py
-
-import requests 
- 
 url = "https://api.sgx.com/derivatives/v1.0/contract-code/TW?order=asc&orderby=delivery-month&category=futures&session=-1&t=1596956628001&showTAICTrades=false"
 r = requests.get(url)
 print(r.text)
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-5.py
 
 from selenium import webdriver
 import time
@@ -188,9 +128,6 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch04\ch4-6.py
-
-import requests 
 import json
 import csv
 
@@ -231,5 +168,3 @@ with open(csvfile, 'w+', newline='') as fp:
         writer.writerow(row)
 
 print('------------------------------------------------------------')	#60個
-
-

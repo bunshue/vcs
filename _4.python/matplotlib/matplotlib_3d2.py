@@ -34,7 +34,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
-ax = fig.add_subplot(231, projection='3d')  #第一張圖
+ax = fig.add_subplot(231, projection = '3d')  #第一張圖
 
 #繪製 3D 長條圖
 #plt.rcParams['font.size'] = 16
@@ -55,10 +55,10 @@ ax.set_title('繪製 3D 長條圖')
 
 ax.set_title('XXXXXXX1')
 
-ax = fig.add_subplot(232, projection='3d')  #第二張圖
+ax = fig.add_subplot(232, projection = '3d')  #第二張圖
 
 #三維球
-#ax = fig.gca(projection='3d') old
+#ax = fig.gca(projection = '3d') old
 #ax = fig.add_axes(Axes3D(fig))
 
 #ax.set_aspect("equal")
@@ -88,11 +88,11 @@ ax.set_zlabel('z', fontsize=15)
 
 ax.set_title('三維球')
 
-ax = fig.add_subplot(233, projection='3d')  #第三張圖
+ax = fig.add_subplot(233, projection = '3d')  #第三張圖
 
 #3D quiver  3維向量
 
-#ax = fig.gca(projection='3d') old
+#ax = fig.gca(projection = '3d') old
 #ax = fig.add_axes(Axes3D(fig))
 #ax.set_aspect("equal")
 
@@ -124,12 +124,12 @@ ax.quiver(0,0,0,v123[0],v123[1],v123[2],color='r',arrow_length_ratio = 0.1)
 ax.set_title('#3D quiver  3維向量')
 
 
-ax = fig.add_subplot(234, projection='3d')  #第四張圖
+ax = fig.add_subplot(234, projection = '3d')  #第四張圖
 
 #正交曲線座標系統
 #球座標當中的三個曲面交出三條曲線，這三個曲線形成了廣義的正交曲線座標系統(generalized orthonormal curved coordinates)
 
-#ax = fig.gca(projection='3d') old
+#ax = fig.gca(projection = '3d') old
 #ax = fig.add_axes(Axes3D(fig))
 
 #ax.set_aspect("equal")
@@ -195,11 +195,11 @@ ax.set_zlabel('z', fontsize=15)
 ax.set_title('正交曲線座標系統')
 
 
-ax = fig.add_subplot(235, projection='3d')  #第五張圖
+ax = fig.add_subplot(235, projection = '3d')  #第五張圖
 
 #三維等位面與法線
 
-#ax = fig.gca(projection='3d') old
+#ax = fig.gca(projection = '3d') old
 #ax = fig.add_axes(Axes3D(fig))
 
 x=np.linspace(2.,5.,10)
@@ -212,22 +212,22 @@ ax.scatter([3], [4], [5], color="k", s=40)
 
 #ax.set_aspect("equal")
 
-ax.plot_surface(X, Y, Z, label='C=0')
-ax.plot_surface(X, Y, Z2, label='C=6')
-ax.plot_surface(X, Y, Z3, label='C=12')
-ax.quiver(3.,4.,5.,6./5.,8./5.,-10./5.,color='b')
-ax.set_title("$f(x,y,z)=x^2+y^2-z=C$", fontsize=15)
+ax.plot_surface(X, Y, Z, label = 'C=0')
+ax.plot_surface(X, Y, Z2, label = 'C=6')
+ax.plot_surface(X, Y, Z3, label = 'C=12')
+ax.quiver(3.,4.,5.,6./5.,8./5.,-10./5.,color = 'b')
+ax.set_title("$f(x,y,z)=x^2+y^2-z=C$", fontsize = 15)
 #ax.plot_surface(X, Y, Z)
 
-ax.set_xlabel('x', fontsize=15)
-ax.set_ylabel('y', fontsize=15)
-ax.set_zlabel('z', fontsize=15)
+ax.set_xlabel('x', fontsize = 15)
+ax.set_ylabel('y', fontsize = 15)
+ax.set_zlabel('z', fontsize = 15)
 #ax.legend()
 
 ax.set_title('三維等位面與法線')
 
 #XXXXXXX6
-ax = fig.add_subplot(236, projection='3d')  #第六張圖
+ax = fig.add_subplot(236, projection = '3d')  #第六張圖
 
 #1. 首先在進行 3D Plot 時除了導入 matplotlib ，還要額外添加一個模塊，即 Axes 3D 3D 坐標軸顯示：
 
@@ -286,23 +286,21 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 #XXXXXXX1
-ax = fig.add_subplot(231, projection='3d')  #第一張圖
-
+ax = fig.add_subplot(231, projection = '3d')  #第一張圖
 
 x = np.random.randn(100)
 y = np.random.randn(100)
 z = np.random.randn(100)
 
-#ax = fig.gca(projection='3d') old
+#ax = fig.gca(projection = '3d') old
 #ax = fig.add_axes(Axes3D(fig))
-ax.scatter(x, y, z, c='r')
+ax.scatter(x, y, z, c = 'r')
 
 
 ax.set_title('XXXXXXX1')
 
 #XXXXXXX2
-ax = fig.add_subplot(232, projection='3d')  #第二張圖
-
+ax = fig.add_subplot(232, projection = '3d')  #第二張圖
 
 count = 100
 range = 100
@@ -311,18 +309,17 @@ xs = np.random.rand(count) * range
 ys = np.random.rand(count) * range
 zs = np.random.rand(count) * range
 
-ax.scatter(xs, ys, zs, s=zs, c=zs)
+ax.scatter(xs, ys, zs, s = zs, c = zs)
 
 ax.set_xlabel('X Label')
 ax.set_ylabel('Y Label')
 ax.set_zlabel('Z Label')
 ax.set_title('散點圖')
 
-
 ax.set_title('XXXXXXX2')
 
 #XXXXXXX3
-ax = fig.add_subplot(233, projection='3d')  #第三張圖
+ax = fig.add_subplot(233, projection = '3d')  #第三張圖
 
 #3D 座標點
 #在三維空間中繪製座標點是最常用到的基本功能。
@@ -336,16 +333,15 @@ x2 = np.random.randn(50)
 y2 = np.random.randn(50)
 
 # 繪製 3D 座標點
-ax.scatter(x1, y1, z1, c=z1, cmap='Reds', marker='^', label='My Points 1')
-ax.scatter(x2, y2, z2, c=z2, cmap='Blues', marker='o', label='My Points 2')
+ax.scatter(x1, y1, z1, c = z1, cmap = 'Reds', marker = '^', label = 'My Points 1')
+ax.scatter(x2, y2, z2, c = z2, cmap = 'Blues', marker = 'o', label = 'My Points 2')
 
 ax.legend() # 顯示圖例
 
 ax.set_title('3D 座標點')
 
-
 #XXXXXXX4
-ax = fig.add_subplot(234, projection='3d')  #第四張圖
+ax = fig.add_subplot(234, projection = '3d')  #第四張圖
 
 #3D 曲線
 #這是將 3D 的曲線與座標點畫在同一張圖的範例。
@@ -356,14 +352,14 @@ x = np.sin(z)
 y = np.cos(z)
 
 # 繪製 3D 曲線
-ax.plot(x, y, z, color='gray', label='My Curve')
+ax.plot(x, y, z, color = 'gray', label = 'My Curve')
 
 # 產生 3D 座標資料
 x2 = np.sin(z) + 0.1 * np.random.randn(100)
 y2 = np.cos(z) + 0.1 * np.random.randn(100)
 
 # 繪製 3D 座標點
-ax.scatter(x2, y2, z, c=z, cmap='jet', label='My Points')
+ax.scatter(x2, y2, z, c = z, cmap = 'jet', label = 'My Points')
 
 ax.legend() # 顯示圖例
 
@@ -371,21 +367,21 @@ ax.set_title('3D 曲線')
 
 
 #XXXXXXX5
-ax = fig.add_subplot(235, projection='3d')  #第五張圖
+ax = fig.add_subplot(235, projection = '3d')  #第五張圖
 
 x = np.linspace(0, 5, 10)
 y = np.linspace(0, 5, 10)
 X, Y = np.meshgrid(x, y)
 
 Z = 2*X + Y
-#ax = fig.gca(projection='3d') old
+#ax = fig.gca(projection = '3d') old
 #ax = fig.add_axes(Axes3D(fig))
 ax.scatter(X, Y, Z+0.7*np.random.randn(10,10))
 ax.plot_surface(X, Y, Z, alpha=0.3)
 
 
 #XXXXXXX6
-ax = fig.add_subplot(236, projection='3d')  #第六張圖
+ax = fig.add_subplot(236, projection = '3d')  #第六張圖
 
 #繪製 3D 散佈圖 – scatter3D()
 plt.rcParams['font.size'] = 16
@@ -412,7 +408,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 #XXXXXXX1
-ax = fig.add_subplot(231, projection='3d')  #第一張圖
+ax = fig.add_subplot(231, projection = '3d')  #第一張圖
 
 
 
@@ -420,33 +416,33 @@ ax = fig.add_subplot(231, projection='3d')  #第一張圖
 ax.set_title('XXXXXXX1')
 
 #XXXXXXX2
-ax = fig.add_subplot(232, projection='3d')  #第二張圖
+ax = fig.add_subplot(232, projection = '3d')  #第二張圖
 
 
 
 ax.set_title('XXXXXXX2')
 
 #XXXXXXX3
-ax = fig.add_subplot(233, projection='3d')  #第三張圖
+ax = fig.add_subplot(233, projection = '3d')  #第三張圖
 
 
 ax.set_title('XXXXXXX3')
 
 #XXXXXXX4
-ax = fig.add_subplot(234, projection='3d')  #第四張圖
+ax = fig.add_subplot(234, projection = '3d')  #第四張圖
 
 
 ax.set_title('XXXXXXX4')
 
 
 #XXXXXXX5
-ax = fig.add_subplot(235, projection='3d')  #第五張圖
+ax = fig.add_subplot(235, projection = '3d')  #第五張圖
 
 
 ax.set_title('XXXXXXX5')
 
 #XXXXXXX6
-ax = fig.add_subplot(236, projection='3d')  #第六張圖
+ax = fig.add_subplot(236, projection = '3d')  #第六張圖
 
 
 
@@ -466,7 +462,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 #XXXXXXX1
-ax = fig.add_subplot(231, projection='3d')  #第一張圖
+ax = fig.add_subplot(231, projection = '3d')  #第一張圖
 
 
 
@@ -474,33 +470,33 @@ ax = fig.add_subplot(231, projection='3d')  #第一張圖
 ax.set_title('XXXXXXX1')
 
 #XXXXXXX2
-ax = fig.add_subplot(232, projection='3d')  #第二張圖
+ax = fig.add_subplot(232, projection = '3d')  #第二張圖
 
 
 
 ax.set_title('XXXXXXX2')
 
 #XXXXXXX3
-ax = fig.add_subplot(233, projection='3d')  #第三張圖
+ax = fig.add_subplot(233, projection = '3d')  #第三張圖
 
 
 ax.set_title('XXXXXXX3')
 
 #XXXXXXX4
-ax = fig.add_subplot(234, projection='3d')  #第四張圖
+ax = fig.add_subplot(234, projection = '3d')  #第四張圖
 
 
 ax.set_title('XXXXXXX4')
 
 
 #XXXXXXX5
-ax = fig.add_subplot(235, projection='3d')  #第五張圖
+ax = fig.add_subplot(235, projection = '3d')  #第五張圖
 
 
 ax.set_title('XXXXXXX5')
 
 #XXXXXXX6
-ax = fig.add_subplot(236, projection='3d')  #第六張圖
+ax = fig.add_subplot(236, projection = '3d')  #第六張圖
 
 
 

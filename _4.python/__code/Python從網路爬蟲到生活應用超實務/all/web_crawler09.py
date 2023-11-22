@@ -1,4 +1,6 @@
+import sys
 import requests 
+from bs4 import BeautifulSoup
  
 URL = "https://maker.ifttt.com/trigger/{0}/with/key/{1}/?"
 event_name = "web_scraping"
@@ -21,14 +23,7 @@ def email_alert(first, second=None, third=None):
 
 email_alert("測試值1", 100)
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch09\ch9-1-3a.py
-
-import requests 
  
 URL = "https://maker.ifttt.com/trigger/{0}/with/key/{1}/?"
 event_name = "web_scraping"
@@ -48,14 +43,8 @@ def email_alert(first, second=None, third=None):
 
 email_alert("測試值2", 150, 200)
 
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch09\ch9-2-2.py
-
-import requests 
- 
 token = "<存取權杖>"
 headers = {
     "Authorization": "Bearer " + token,
@@ -69,13 +58,8 @@ if r.status_code == 200:
 else:
     print("錯誤! 寄送通知訊息失敗...")
 
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch09\ch9-3-2.py
-
-import requests 
- 
 token = "<API權杖>"
 chat_id = "<聊天室識別碼>"
 
@@ -87,10 +71,7 @@ def telegram_bot_sendText(msg):
 test = telegram_bot_sendText("大家好!")
 print(test)
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch09\ch9-3-3.py
 
 import telegram
  
@@ -105,11 +86,6 @@ test = telegram_bot_sendText("測試Telegram模組!")
 print(test)
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch09\ch9-4.py
-
-import requests 
-from bs4 import BeautifulSoup
 
 url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
 response = requests.get(url)
@@ -138,14 +114,7 @@ def email_alert(first, second=None, third=None):
 
 email_alert(temp, summary)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch09\ch9-4a.py
-
-import requests 
-from bs4 import BeautifulSoup
 
 url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
 response = requests.get(url)
@@ -170,14 +139,7 @@ def LINE_alert(msg):
 
 LINE_alert(temp +"/" + summary)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch09\ch9-4b.py
-
-import requests 
-from bs4 import BeautifulSoup
 
 url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
 response = requests.get(url)
@@ -194,8 +156,6 @@ def telegram_bot_sendText(msg):
     return r.json()
 
 telegram_bot_sendText(temp +"/" + summary)
-
-
 
 print('------------------------------------------------------------')	#60個
 

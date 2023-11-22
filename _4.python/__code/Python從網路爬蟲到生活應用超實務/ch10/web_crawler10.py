@@ -1,5 +1,6 @@
+import sys
 from selenium import webdriver
-
+'''
 url = "https://www.youtube.com/results?search_query=pytube3"
 
 driver = webdriver.Chrome("./chromedriver")
@@ -16,12 +17,7 @@ for tag in tags:
 print(len(links))
 driver.quit()
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch10\ch10-1-1a.py
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -44,8 +40,6 @@ print(len(links))
 driver.quit()
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch10\ch10-1-2.py
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By 
@@ -78,10 +72,8 @@ for link in links:
     print("描述:", description.strip())
     print("---------------------------")
 driver.quit()
-
+'''
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch10\ch10-2-1.py
 
 from pytube import YouTube
 
@@ -101,6 +93,9 @@ yt = YouTube("https://www.youtube.com/watch?v=i5sgmjOMLJY")
 print("正在下載影片:", yt.title)
 yt.streams.first().download()
 print("影片下載完成...")
+
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
