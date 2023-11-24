@@ -1,5 +1,12 @@
-import requests 
+import sys
+
+print('------------------------------------------------------------')	#60個
+
+import csv
+import requests
 from bs4 import BeautifulSoup
+
+print('------------------------------------------------------------')	#60個
 
 url = "http://app2.atmovies.com.tw/boxoffice/"
 r = requests.get(url)
@@ -17,16 +24,7 @@ for row in rows:
 
 print(items)
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-1-2.py
-
-import requests 
-from bs4 import BeautifulSoup
-import csv
 
 url = "https://movies.yahoo.com.tw/chart.html"
 csvfile = "yahoomovies.csv"
@@ -60,11 +58,6 @@ with open(csvfile, 'w+', newline='') as fp:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-1-3.py
-
-from bs4 import BeautifulSoup
-import requests
-
 url = "https://ifoodie.tw/explore/台北市/list?sortby=rating"
 r = requests.get(url)
 soup = BeautifulSoup(r.text, 'lxml')
@@ -86,11 +79,6 @@ for index in range(5):
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-1-4.py
-
-import requests
-from bs4 import BeautifulSoup
-import csv
 from fake_useragent import UserAgent
 
 csvfile = "books.csv"
@@ -124,11 +112,8 @@ with open(csvfile, 'w+', newline='') as fp:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-2-2.py
-
 import re
 import json
-import requests
 import pandas as pd
 
 date = "20200813"
@@ -148,11 +133,8 @@ print(df.head())
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-2-2a.py
-
 import re
 import json
-import requests
 import pandas as pd
 import datetime
 from fake_useragent import UserAgent
@@ -189,174 +171,5 @@ df = pd.concat(all_items, ignore_index=True)
 df.to_csv("trends.csv",index=False)
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-3-1.py
-
-from pytrends.request import TrendReq
-
-pytrend = TrendReq(hl="zh-TW", tz=-480)
-keywords = ["Python", "Java", "C++"]
-pytrend.build_payload(
-     kw_list=keywords,
-     cat=0,
-     timeframe="2020-07-01 2020-07-31",
-     geo="TW",
-     gprop="")
-
-print(pytrend.interest_over_time())
-
-
+print('作業完成')
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-3-2.py
-
-from pytrends.request import TrendReq
-
-pytrend = TrendReq()
-df = pytrend.trending_searches(pn='taiwan')
-print(df.head(10))
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-3-2a.py
-
-from pytrends.request import TrendReq
-
-pytrend = TrendReq()
-df = pytrend.top_charts(2019, hl="zh-tw", tz=-480, geo="TW")
-print(df)
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-3-2b.py
-
-import pandas as pd
-from pytrends.request import TrendReq
-
-pytrend = TrendReq()
-dic = pytrend.suggestions(keyword="python")
-print(pd.DataFrame(dic).drop("mid", axis=1))
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-3-2c.py
-
-from pytrends.request import TrendReq
-
-pytrend = TrendReq(hl="zh-TW", tz=-480)
-pytrend.build_payload(kw_list=["Python"])
-
-df = pytrend.interest_by_region()
-print(df.sort_values(["Python"], ascending=False).head(10))
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-3-2d.py
-
-from pytrends.request import TrendReq
-
-pytrend = TrendReq(hl="zh-TW", tz=-480)
-pytrend.build_payload(kw_list=["Python"])
-
-dic = pytrend.related_queries()
-print(dic["Python"]["top"].head(10))
-print(dic["Python"]["rising"].head(10))
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-3-2e.py
-
-from pytrends.request import TrendReq
-
-pytrend = TrendReq(hl="zh-TW", tz=-480)
-pytrend.build_payload(kw_list=["Python"])
-
-dic = pytrend.related_topics()
-df = dic["Python"]["rising"]
-df = df.drop(["link","topic_mid"], axis=1)
-print(df.head(10))
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-4.py
-
-from pytrends.request import TrendReq
-
-pytrend = TrendReq(hl="zh-TW", tz=-480)
-pytrend.build_payload(
-     kw_list=["Python", "R"],
-     timeframe="today 3-m",
-     geo="TW")
-
-df = pytrend.interest_over_time()
-df = df.drop(["isPartial"], axis=1)
-df.plot(kind="line", title="Python vs R")
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-4a.py
-
-from pytrends.request import TrendReq
-
-pytrend = TrendReq(hl="zh-TW", tz=-480)
-pytrend.build_payload(kw_list=["Python"])
-
-df = pytrend.interest_by_region()
-df = df.sort_values(["Python"], ascending=False).head(10)
-df.plot(kind="bar")
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-4b.py
-
-import pandas as pd
-from pytrends.request import TrendReq
-
-pytrend = TrendReq(hl="en-US", tz=360)
-pytrend.build_payload(
-     kw_list=["Coronavirus"],
-     timeframe="2020-02-01 2020-03-31",
-     geo="US-NY")
-
-df = pytrend.interest_over_time()
-df = df.drop(["isPartial"], axis=1)
-df["timestamp"] = pd.to_datetime(df.index)
-print(df.head())
-df.plot(kind="line", x="timestamp", y="Coronavirus", 
-        title="Searches for Coronavirus in NY")
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch08\ch8-4c.py
-
-import pandas as pd
-from pytrends.request import TrendReq
-
-pytrend = TrendReq(hl="en-US", tz=360)
-
-def get_trends(keywords, state): 
-    pytrend.build_payload(
-         kw_list=keywords,
-         timeframe="2020-02-01 2020-03-31",
-         geo=state)
-    df = pytrend.interest_over_time()
-    df = df.drop(["isPartial"], axis=1)
-    df.columns = [state]
-    return df
-    
-
-df = get_trends(["Coronavirus"], "US-NY")
-df2 = get_trends(["Coronavirus"], "US-CA")
- 
-df3 = pd.concat([df, df2], axis=1)
-print(df3.head())
-
-df3["timestamp"] = pd.to_datetime(df.index)
-print(df3.head())
-df3.plot(kind="line", x="timestamp", y=["US-NY","US-CA"], 
-        title="Searches for Coronavirus in NY/CA")
-
-print('------------------------------------------------------------')	#60個
-
