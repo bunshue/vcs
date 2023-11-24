@@ -19,8 +19,8 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-import pandas as pd
 import random
+import pandas as pd
 
 print('------------------------------------------------------------')	#60個
 
@@ -151,21 +151,11 @@ plt.hist(data, bins='auto')
 
 plt.show()
 
-
 np.random.seed(0)
 data = np.random.randn(10000)
 plt.hist(data, bins='auto', density=True)
 
 plt.show()
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-import pandas as pd
-import random
 
 print('------------------------------------------------------------')	#60個
 
@@ -182,19 +172,11 @@ TaipeiSansTCBeta-Regular.ttf'
 
 """
 
-
-sys.exit()
-
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-''' ok
 
 # 饼图的绘制
 # 导入第三方模块
 import matplotlib
-import matplotlib.pyplot as plt
 
 plt.rcParams['font.sans-serif']=['Simhei']
 plt.rcParams['axes.unicode_minus']=False
@@ -243,9 +225,6 @@ plt.title('失信用户的受教育水平分布')
 # 显示图形
 plt.show()
 
-# 导入第三方模块
-import pandas as pd
-import matplotlib.pyplot as plt
 # 构建序列
 data1 = pd.Series({'中专':0.2515,'大专':0.3724,'本科':0.3336,'硕士':0.0368,'其他':0.0057})
 print(data1)
@@ -265,20 +244,7 @@ textprops = {'fontsize':10, 'color':'black'} # 设置文本标签的属性值
 # 显示图形
 plt.show()
 
-'''
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('aaaaaaaaaa')
-
 
 import matplotlib as mpl
 
@@ -348,13 +314,8 @@ plt.title('鸢尾花的花瓣宽度与长度关系')
 # 显示图形
 plt.show()
 """
-
-
 print('------------------------------------------------------------')	#60個
 
-
-
-'''
 # 一個完全乾淨、空白的figure:
 fig = plt.figure()
 
@@ -386,16 +347,12 @@ fig2.savefig('./sample.png') #將圖片輸出成檔案.
 
 plt.show()
 
-'''
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-'''
+
 #Python繪圖的方法-使用 Matplotlib
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 """
 Matplotlib 繪圖
@@ -461,12 +418,11 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import numpy as np
 # from basic_units import cm, inch
-import matplotlib.pyplot as plt
 
 cm=1
 inch=cm*0.039
+
 fig, ax = plt.subplots()
 N = 5
 ind = np.arange(N)    # the x locations for the groups
@@ -488,9 +444,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import numpy as np
-import matplotlib.pyplot as plt
-
 N = 5
 menMeans = (20, 35, 30, 35, 27)
 womenMeans = (25, 32, 34, 20, 25)
@@ -511,8 +464,6 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 #Scatter plot
-
-import matplotlib.pyplot as plt
 
 fig, ax = plt.subplots()
 N=50
@@ -539,9 +490,6 @@ print('------------------------------------------------------------')	#60個
 
 #Hist. plot
 
-import numpy as np
-import matplotlib.pyplot as plt
-
 fig,ax=plt.subplots(1,3,figsize=(10,8))
 
 normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
@@ -560,10 +508,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 #Box plot
-
-import matplotlib.pyplot as plt 
-import numpy as np 
-  
+ 
 # Creating dataset 
 np.random.seed(10) 
   
@@ -582,14 +527,13 @@ bp = ax.boxplot(data,labels=['mu=100','mu=90','mu=80','mu=70'])
 ax.set_title('Box plot')
 
 plt.show()
-'''
+
 print('------------------------------------------------------------')	#60個
 
 print('subplot 100張圖')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-import matplotlib.pyplot as plt
 import matplotlib.image as img
 
 print('使用 matplotlib 顯示一圖')
@@ -616,3 +560,11 @@ print('------------------------------------------------------------')	#60個
 
 
 
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個

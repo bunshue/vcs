@@ -1,4 +1,4 @@
-# 新進測試01
+# 新進測試01 整理成6個一圖
 
 import sys
 import matplotlib.pyplot as plt

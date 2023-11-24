@@ -14,7 +14,6 @@ AQI綜合指標（Air Quality Index 空氣品質指標）
 '''
 
 import requests
-
 import urllib.request   #用來建立請求
 import zipfile
 import csv
@@ -31,6 +30,8 @@ import hashlib
 import sqlite3
 import ast
 from bs4 import BeautifulSoup
+
+print('------------------------------------------------------------')	#60個
 
 def get_epa_key():
     filename = 'C:/_git/vcs/_1.data/______test_files1/_key/epa_key.txt'
@@ -103,6 +104,7 @@ print(r.text)
 '''
 
 print('------------------------------------------------------------')	#60個
+
 time.sleep(3)
 
 print('讀取遠端 json 檔案')
@@ -112,6 +114,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_
 urllib.request.urlretrieve(url, filename) #下載遠端 json 檔案
 
 print('------------------------------------------------------------')	#60個
+
 time.sleep(3)
 
 format = 'csv'
@@ -122,6 +125,7 @@ data = pd.read_csv(url)
 print(data)
 
 print('------------------------------------------------------------')	#60個
+
 time.sleep(3)
 
 #JSON格式
@@ -143,6 +147,7 @@ print(f'AQI: {data["aqi"]}')
 print(f'PM2.5: {data["pm2.5"]}')
 
 print('------------------------------------------------------------')	#60個
+
 time.sleep(3)
 
 #CSV格式
@@ -153,7 +158,6 @@ def getAQI_csv(key, filters):
     csv = r.text
     r.close()
     return csv
-
 
 #filters = 'sitename,EQ,桃園'
 filters = 'siteid,EQ,17'
@@ -170,6 +174,7 @@ print(f'AQI: {data["aqi"]}')
 print(f'PM2.5: {data["pm2.5"]}')
 
 print('------------------------------------------------------------')	#60個
+
 time.sleep(3)
 
 def downloadAQI():
@@ -205,8 +210,8 @@ def downloadAQI():
 downloadAQI()
 
 print('------------------------------------------------------------')	#60個
-time.sleep(3)
 
+time.sleep(3)
 
 db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/DataBasePM25.sqlite'
 md5_filename = 'C:/_git/vcs/_1.data/______test_files2/old_md5.txt'
@@ -318,5 +323,7 @@ else:
 
 conn.close()  # 關閉資料庫連線
 
+print('------------------------------------------------------------')	#60個
 print('作業完成')
+print('------------------------------------------------------------')	#60個
 

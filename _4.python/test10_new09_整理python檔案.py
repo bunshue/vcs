@@ -1,3 +1,12 @@
+"""
+整理python檔案
+
+1. 檢查檔案編碼格式
+2. 轉換為utf-8格式
+3. 簡中轉正中
+
+"""
+
 import os
 import sys
 import time
@@ -9,7 +18,7 @@ import chardet  #檔案編碼格式
 
 print('------------------------------------------------------------')	#60個
 
-filenames = glob.glob('*.py')
+filenames = glob.glob('*')
 for filename in filenames:
     text = open(filename, 'rb').read()
     codetype = chardet.detect(text)
