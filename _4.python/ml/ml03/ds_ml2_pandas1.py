@@ -181,7 +181,6 @@ order_df = pd.DataFrame( [[1000, 2546, 103],
                           [1001, 4352, 101],
                           [1002, 342, 101]],
                          columns = ["id", "item_id", "customer_id"])
-
 print(order_df)
 
 print('------------------------------------------------------------')	#60個
@@ -238,11 +237,8 @@ print('------------------------------------------------------------')	#60個
 data = {"fruits": ["apple", "orange", "banana", "strawberry", "kiwifruit"],
         "year": [2001, 2002, 2001, 2008, 2006],
         "time": [1, 4, 5, 6, 3]}
-
 df = pd.DataFrame(data)
-
 df["price"] = [150, 120, 100, 300, 150]
-
 print(df)
 
 index = ['鼠', '牛', '虎', '兔', '龍']
@@ -262,13 +258,10 @@ print('------------------------------------------------------------')	#60個
 data = {"fruits": ["apple", "orange", "banana", "strawberry", "kiwifruit"],
         "year": [2001, 2002, 2001, 2008, 2006],
         "time": [1, 4, 5, 6, 3]}
-
 df = pd.DataFrame(data)
-
 print(df)
 
 df = df.loc[[1,2],["time","year"]]
-
 print(df)
 
 np.random.seed(0)
@@ -280,7 +273,6 @@ for column in columns:
 print(df)
 
 df = df.loc[range(2,6),["banana","kiwifruit"]]
-
 print(df)
 
 data = {"fruits": ["apple", "orange", "banana", "strawberry",
@@ -288,11 +280,9 @@ data = {"fruits": ["apple", "orange", "banana", "strawberry",
         "time": [1, 4, 5, 6, 3],
         "year": [2001, 2002, 2001, 2008, 2006] }
 df = pd.DataFrame(data)
-
 print(df)
 
 df = df.iloc[[1, 3], [0, 2]]
-
 print(df)
 
 print('------------------------------------------------------------')	#60個
@@ -332,9 +322,7 @@ data = {"fruits": ["apple", "orange", "banana", "strawberry",
                    "kiwifruit"],
         "time": [1, 4, 3, 6, 3],
         "year": [2001, 2002, 2001, 2008, 2006]}
-
 df = pd.DataFrame(data)
-
 print(df)
 
 df = df.sort_values(by = "year", ascending = True)

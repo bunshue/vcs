@@ -28,23 +28,33 @@ print('產生測試資料 並畫出')
 
 from sklearn.datasets import make_blobs
 
-print('產生500筆資料 2維 2群')
-dx, dy = make_blobs(n_samples = 500, n_features = 2, centers = 2, random_state = 0)
+N = 500
+print('產生', N, '筆資料 2維 2群')
+dx, dy = make_blobs(n_samples = N, n_features = 2, centers = 2, random_state = 0)
+
 print(dx.shape)
 print(dy.shape)
+#print(dx)
+#print(dy)
 
 plt.scatter(dx.T[0], dx.T[1], c = dy, cmap = 'Dark2')
+plt.title('dx的分佈狀況, dy是用顏色表示')
 plt.grid(True)
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+#StandardScaler
+#將資料常態分布化，平均值會變為0, 標準差變為1，使離群值影響降低
+#MinMaxScaler與StandardScaler類似
+
 from sklearn.datasets import make_blobs
 from sklearn.preprocessing import StandardScaler
 
-print('產生500筆資料 2維 2群')
-dx, dy = make_blobs(n_samples = 500, n_features = 2, centers = 2, random_state = 0)
+N = 500
+print('產生', N, '筆資料 2維 2群')
+dx, dy = make_blobs(n_samples = N, n_features = 2, centers = 2, random_state = 0)
 
 dx_std = StandardScaler().fit_transform(dx)
 

@@ -84,6 +84,10 @@ print(x)
 x = np.linspace(N1, N2)  #若沒有給定N值, 則分成 50 個, 包含頭尾
 print(x)
 
+#np.linspace 若只給a b 則代表分成50點
+x = np.linspace(0, 2 * np.pi)   
+print(x.shape)
+
 
 sys.exit()
 

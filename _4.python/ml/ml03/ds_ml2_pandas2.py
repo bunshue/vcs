@@ -98,24 +98,20 @@ data1 = {"fruits": ["apple", "orange", "banana", "strawberry", "kiwifruit"],
          "year": [2001, 2002, 2001, 2008, 2006],
          "amount": [1, 4, 5, 6, 3]}
 df1 = pd.DataFrame(data1)
+print('df1 :\n', df1)
 
 data2 = {"fruits": ["apple", "orange", "banana", "strawberry", "mango"],
          "year": [2001, 2002, 2001, 2008, 2007],
          "price": [150, 120, 100, 250, 3000]}
-
 df2 = pd.DataFrame(data2)
-
-print('---- df1 ----\n', df1)
-print('---- df2 ----\n', df2)
+print('df2 :\n', df2)
 
 df3 = pd.merge(df1, df2, on = "fruits", how = "inner")
+print('df3 :\n', df3)
 
-print('---- df3 ----\n', df3)
 #用 merge() 做 DataFrame 的聯集合併
-
 df3 = pd.merge(df1, df2, on = "fruits", how = "outer")
-
-print('---- df3 ----\n', df3)
+print('df3 :\n', df3)
 
 #透過「具關聯性的欄位」合併多個 DataFrame(一)
 
@@ -123,24 +119,17 @@ order_df = pd.DataFrame([[1000, 2546, 103],
                          [1001, 4352, 101],
                          [1002, 342, 101]],
                         columns = ["id", "item_id", "customer_id"])
-
-print('-----order_df-----')
-print(order_df)
+print('order_df :\n', order_df)
 
 customer_df = pd.DataFrame([[101, "Tanaka"],
                             [102, "Suzuki"],
                             [103, "Kato"]],
                            columns = ["id", "name"])
+print('customer_df :\n', customer_df)
 
-print('-----customer_df-----')
-print(customer_df)
-
-order_df = pd.merge(order_df, customer_df, left_on = "customer_id",
-
-right_on = "id", how = "inner")
-
+order_df = pd.merge(order_df, customer_df, left_on = "customer_id", right_on = "id", how = "inner")
 print('-----交集合併-----')
-print(order_df)
+print('order_df :\n', order_df)
 
 print('------------------------------------------------------------')	#60個
 
@@ -162,13 +151,9 @@ customer_df.index = [101, 102, 103]
 
 print('----客戶資訊----\n', customer_df)
 
-order_df = pd.merge(order_df, customer_df, left_on = "customer_id",
-                    right_index = True, how = "inner")
+order_df = pd.merge(order_df, customer_df, left_on = "customer_id", right_index = True, how = "inner")
 
 print('----order_df----\n', order_df)
-
-
-print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 

@@ -19,7 +19,7 @@ for filename in filenames:
 
     #印出不是utf-8格式的檔案名稱
     if not codetype['encoding'] == 'utf-8':
-        print('{} 編碼格式：{}'.format(filename, codetype))
+        print('不是utf-8格式\t{} 編碼格式：{}'.format(filename, codetype))
 
 print('------------------------------------------------------------')	#60個
 

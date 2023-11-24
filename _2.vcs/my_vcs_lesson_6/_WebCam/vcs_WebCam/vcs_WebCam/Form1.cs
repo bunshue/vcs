@@ -741,7 +741,6 @@ namespace vcs_WebCam
                             int hh = HH;
                             int total_Y = 0;
 
-
                             for (j = 0; j < hh; j++)
                             {
                                 for (i = 0; i < ww; i++)
@@ -1028,7 +1027,8 @@ namespace vcs_WebCam
 
         private void bt_snapshot_Click(object sender, EventArgs e)
         {
-            save_image_to_drive();
+            //save_image_to_drive();
+            save_image_to_drive30();
         }
 
         private void bt_motion_detection_Click(object sender, EventArgs e)
@@ -1244,6 +1244,122 @@ namespace vcs_WebCam
                 richTextBox1.Text += "無圖可存\n";
                 show_main_message("無圖可存", S_OK, 20);
             }
+        }
+
+        void save_image_to_drive30()
+        {
+            show_main_message("截圖30", S_OK, 20);
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            //int W = bitmap1.Width;
+            //int H = bitmap1.Height;
+            //Bitmap bitmap_all = (Bitmap)pictureBox1.Image;
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int i;
+            int j;
+            int k;
+            Color pt;
+            int total_pictures = 5;
+
+            double[, ,] total_RGB = new double[W, H, 3];
+            Bitmap bitmap_average = new Bitmap(W, H);
+
+            for (k = 0; k < total_pictures; k++)
+            {
+                bitmap1 = (Bitmap)pictureBox1.Image;
+                bitmap1.Save("picture" + k.ToString() + ".bmp", ImageFormat.Bmp);
+
+                for (j = 0; j < H; j++)
+                {
+                    for (i = 0; i < W; i++)
+                    {
+                        pt = bitmap1.GetPixel(i, j);
+
+                        double R = (double)pt.R;
+                        double G = (double)pt.G;
+                        double B = (double)pt.B;
+
+                        total_RGB[i, j, 0] += R;
+                        total_RGB[i, j, 1] += G;
+                        total_RGB[i, j, 2] += B;
+
+                        //bitmap_average.SetPixel(i, j, Color.FromArgb(pt.R, pt.G, pt.B));
+
+                        if ((i == 320) && (j == 240))
+                        {
+                            richTextBox1.Text += "pt = " + pt.ToString() + "\n";
+                            richTextBox1.Text += "R = " + R.ToString() + "\n";
+                            richTextBox1.Text += "G = " + G.ToString() + "\n";
+                            richTextBox1.Text += "B = " + B.ToString() + "\n";
+                            richTextBox1.Text += "RR = " + total_RGB[i, j, 0].ToString() + "\n";
+                            richTextBox1.Text += "GG = " + total_RGB[i, j, 1].ToString() + "\n";
+                            richTextBox1.Text += "BB = " + total_RGB[i, j, 2].ToString() + "\n";
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(200);
+                Application.DoEvents();
+            }
+
+
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+            
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+
+                    bitmap_average.SetPixel(i, j, Color.FromArgb(255, (byte)(total_RGB[i, j, 0] / total_pictures), (byte)(total_RGB[i, j, 1] / total_pictures), (byte)(total_RGB[i, j, 2] / total_pictures)));
+
+                    if ((i == 320) && (j == 240))
+                    {
+                        richTextBox1.Text += "R = " + (total_RGB[i, j, 0] / total_pictures).ToString() + "\n";
+                        richTextBox1.Text += "G = " + (total_RGB[i, j, 1] / total_pictures).ToString() + "\n";
+                        richTextBox1.Text += "B = " + (total_RGB[i, j, 2] / total_pictures).ToString() + "\n";
+                    }
+
+
+                }
+            }
+
+
+            if (bitmap_average != null)
+            {
+                String filename = string.Empty;
+                filename = Application.StartupPath + "\\ims_image_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+                //String file1 = file + ".jpg";
+                String filename2 = filename + ".bmp";
+                //String file3 = file + ".png";
+                try
+                {
+                    //bitmap_average.Save(@file1, ImageFormat.Jpeg);
+                    bitmap_average.Save(filename2, ImageFormat.Bmp);
+                    //bitmap_average.Save(@file3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    show_main_message("已存檔", S_OK, 10);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息b : " + ex.Message + "\n";
+                    show_main_message("存檔失敗", S_OK, 30);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message("無圖可存", S_OK, 20);
+            }
+
+
         }
 
         void pictureBox1_KeyDown(object sender, KeyEventArgs e)

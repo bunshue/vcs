@@ -24,7 +24,6 @@ url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 url = 'iris.data'
 df = pd.read_csv(url, header = None)
 df.columns = ['sepal length', 'sepal width', 'petal length', 'petal width', 'class']
-
 print(df)
 
 print('------------------------------------------------------------')	#60個
@@ -40,7 +39,8 @@ data = {'city': ['Nagano', 'Sydney', 'Salt Lake City', 'Athens',
                    'summer', 'winter', 'summer', 'winter', 'summer']}
 df = pd.DataFrame(data)
 
-#df.to_csv('C:\\(自行指定存檔路徑)\\olympics.csv')
+print('df存成csv檔')
+df.to_csv('olympics.csv')
 
 print('------------------------------------------------------------')	#60個
 
@@ -112,9 +112,8 @@ print('------------------------------------------------------------')	#60個
 
 #duplicated()、drop_duplicated() - 尋找或刪除 DataFrame 內重複的資料
 
-dupli_df = pd.DataFrame({'col1':[1, 1, 2, 3, 4, 4, 5, 5],       
-                           'col2':['a', 'b', 'b', 'b', 'c', 'c', 'b', 'b']})
-
+dupli_df = pd.DataFrame({'col1':[1, 1, 2, 3, 4, 4, 5, 5],
+                         'col2':['a', 'b', 'b', 'b', 'c', 'c', 'b', 'b']})
 print(dupli_df)
 print(dupli_df.duplicated())
 
@@ -122,21 +121,17 @@ print('------------------------------------------------------------')	#60個
 
 #map() - 利用 DataFrame 的既有欄位生成新的欄位
 
-people_data = {'ID': ['100', '101', '102', '103', '104',        
+people_data = {'ID': ['100', '101', '102', '103', '104',
                       '106', '108', '110', '111', '113'],
-       'birth_year': [1990, 1989, 1992, 1997, 1982,     
-                      1991, 1988, 1990, 1995, 1981],
-             'name': ['Hiroshi', 'Akiko', 'Yuki', 'Satoru', 
-                      'Steeve', 'Mituru', 'Aoi', 'Tarou',
-                      'Suguru', 'Mitsuo'],
-'city': ['東京', '大阪', '京都', '札幌',            
-                      '東京', '東京', '大阪', '京都',
-                      '札幌', '東京']}
+               'birth_year': [1990, 1989, 1992, 1997, 1982,
+                              1991, 1988, 1990, 1995, 1981],
+               'name': ['Hiroshi', 'Akiko', 'Yuki', 'Satoru', 'Steeve', 'Mituru', 'Aoi', 'Tarou', 'Suguru', 'Mitsuo'],
+               'city': ['東京', '大阪', '京都', '札幌', '東京', '東京', '大阪', '京都', '札幌', '東京']}
 
 people_df = pd.DataFrame(people_data)
 print(people_df)
 
-city_map = {'東京': '關東',     
+city_map = {'東京': '關東',
             '札幌': '北海道',
             '大阪': '關西',
             '京都': '關西'}
@@ -153,11 +148,11 @@ print('------------------------------------------------------------')	#60個
 
 people_data = {'ID': ['100', '101', '102', '103', '104',
                       '106', '108', '110', '111', '113'],
-             'name': ['Hiroshi', 'Akiko', 'Yuki', 'Satoru',
-                      'Steeve', 'Mituru', 'Aoi', 'Tarou',
-                      'Suguru', 'Mitsuo'],
-       'birth_year': [1990, 1989, 1992, 1997, 1982,
-                      1991, 1988, 1990, 1995, 1981]}
+               'name': ['Hiroshi', 'Akiko', 'Yuki', 'Satoru',
+                        'Steeve', 'Mituru', 'Aoi', 'Tarou',
+                        'Suguru', 'Mitsuo'],
+               'birth_year': [1990, 1989, 1992, 1997, 1982,
+                              1991, 1988, 1990, 1995, 1981]}
 
 people_df = pd.DataFrame(people_data)
 print(people_df)
