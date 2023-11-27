@@ -1,3 +1,4 @@
+import sys
 import requests
 from bs4 import BeautifulSoup
 
@@ -8,6 +9,8 @@ span = soup.find('span', class_="current")
 print(span.text)
 print(span.get("aria-label"))
 
+
+sys.exit()
 print('------------------------------------------------------------')	#60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-1-2.py
