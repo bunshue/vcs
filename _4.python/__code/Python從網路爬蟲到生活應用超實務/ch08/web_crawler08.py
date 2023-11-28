@@ -5,7 +5,7 @@ print('------------------------------------------------------------')	#60個
 import csv
 import requests
 from bs4 import BeautifulSoup
-
+'''
 print('------------------------------------------------------------')	#60個
 
 url = "http://app2.atmovies.com.tw/boxoffice/"
@@ -109,26 +109,8 @@ with open(csvfile, 'w+', newline='') as fp:
     writer.writerow(["排名","名稱","網址","圖片","價格"])
     for item in items:
         writer.writerow(item)
-
+'''
 print('------------------------------------------------------------')	#60個
-
-import re
-import json
-import pandas as pd
-
-date = "20200813"
-URL = "https://trends.google.com.tw/trends/api/dailytrends?hl=zh-TW&tz=-480&ed={}&geo=TW&ns=15"
-url = URL.format(date)
-r = requests.get(url)
-json_str = re.sub("\)\]\}\',\n", "", r.text)
-data = json.loads(json_str)
-results = data["default"]["trendingSearchesDays"][0]["trendingSearches"]
-items = []
-for item in results:
-    items.append(item["title"])
-df = pd.DataFrame(items)
-
-print(df.head())
 
 
 print('------------------------------------------------------------')	#60個
