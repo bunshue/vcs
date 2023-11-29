@@ -543,6 +543,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(135, 45);
             this.button32.TabIndex = 62;
+            this.button32.Text = "RGB三原色";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 

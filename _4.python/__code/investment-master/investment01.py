@@ -62,9 +62,8 @@ df = pd.read_csv(filename, index_col=False)
 #df.drop(df.index[len(df.index)-1], inplace=True)
 
 print(df)
-'''
-print('------------------------------------------------------------')	#60個
 
+print('------------------------------------------------------------')	#60個
 
 
 #下載月營收
@@ -288,37 +287,220 @@ df = pd.read_csv(StringIO(r.text))
 
 print(df.set_index('月別'))
 
+'''
+
+print('------------------------------------------------------------')	#60個
+
+""" 沒效果
+#使用 Google Trends 來判斷股價高點
+
+from pytrends.request import TrendReq
+
+import pandas as pd
+
+keyword = '股票'
+
+pytrend = TrendReq(hl='zh-TW')
+
+pytrend.build_payload(kw_list=[keyword])
+
+df = pytrend.interest_over_time()
+
+print(df)
+
+# 用來比對大盤漲跌
+
+#df['股票']['2017-09-01':].plot()
+#plt.show()
+"""
+
+print('------------------------------------------------------------')	#60個
+
+print('興櫃公司基本資料')
+
+import requests
+
+import pandas as pd
+
+from io import StringIO
+
+# 讀取興櫃公司基本資料
+
+
+#r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_R.csv")
+#r.encoding = "big5"
+#df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
+
+filename = 't187ap03_R.csv'
+df = pd.read_csv(filename, index_col=False, skiprows=1)
+
+
+df.drop(df.index[len(df.index)-1], inplace=True)
+
+print(df)
 
 
 print('------------------------------------------------------------')	#60個
 
+""" NG 無檔案
+print('證券商分公司基本資料')
 
+import requests
 
+import pandas as pd
 
+from io import StringIO
+
+# 讀取證券商分公司基本資料
+
+r = requests.get("http://www.twse.com.tw/brokerService/branchList.csv")
+r.encoding = "big5"
+df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
+
+print(df)
+"""
+
+print('------------------------------------------------------------')	#60個
+
+"""無檔案
+print('證券商總公司基本資料')
+
+import requests
+
+import pandas as pd
+
+from io import StringIO
+
+# 讀取證券商總公司基本資料
+
+r = requests.get("http://www.twse.com.tw/brokerService/brokerList.csv?lang=zh")
+
+r.encoding = "big5"
+
+df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
+
+print(df)
+
+"""
+
+print('------------------------------------------------------------')	#60個
+
+""" NG 資料抓不下來
+print('讀取 Nasdaq 的股價歷史資料')
+
+import requests
+from bs4 import BeautifulSoup
+
+symbol = 'GOOG'.lower()
+
+url_template = "https://www.nasdaq.com/symbol/{symbol}/historical"
+url = url_template.format(symbol=symbol)
+
+print(url)
+
+rs = requests.session()
+r = rs.get(url)
+soup = BeautifulSoup(r.text, 'lxml')
+params = soup.select('#getFile input')
+# 時間長短：5d, 1m, 3m, 6m, 1y, 18m, 2y, 3y, 4y, 5y, 6y, 7y, 8y, 9y, 10y
+timeframe = '{timestr}|true|{symbol}'.format(timestr='3m', symbol=symbol.upper())
+payload = {}
+
+for tag in params:
+    if tag['name'] != 'ctl00$quotes_content_left$submitString':
+        payload[tag['name']] = tag['value']
+    else:
+        payload[tag['name']] = timeframe
+
+#r = rs.post(url, data=payload)
+r = rs.post(url, data=payload, verify=False)
+print(r.text)
+"""
+
+print('------------------------------------------------------------')	#60個
+
+""" NG 資料抓不下來
+print('讀取 NASDAQ, NYSE, AMEX 公司資料')
+
+import pandas as pd
+
+url_template = "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange={}&render=download"
+
+url = url_template.format('NASDAQ')
+
+df = pd.read_csv(url)
+
+df = df.loc[:, ~df.columns.str.contains("Unnamed")]
+
+print(df)
+"""
+
+print('------------------------------------------------------------')	#60個
+
+print('讀取景氣對策信號')
+
+"""
+網址：政府開放資料 - 國發會 景氣指標及燈號
+https://www.ndc.gov.tw/News_Content.aspx?n=9D32B61B1E56E558&sms=9D3CAFD318C60877&s=C367F13BF38C5711
+應用：
+可以利用景氣對策信號判斷 ETF 的進入點。
+"""
+
+"""無檔案
+import pandas as pd
+import requests
+from io import BytesIO
+
+# 讀取 .xlsx 檔
+
+r = requests.get('https://ws.ndc.gov.tw/Download.ashx?u=LzAwMS9hZG1pbmlzdHJhdG9yLzEwL3JlbGZpbGUvNTc4MS82MzkyL2VmMWQ4ZjliLTMxOGMtNDFmZC1hNzgzLWVjNGY5MTMwMjRmOC54bHN4&n=5paw6IGe56i%2f6ZmE5Lu25pW45YiXLnhsc3g%3d&icon=..xlsx')
+df = pd.read_excel(BytesIO(r.content))
+
+df = df.set_index('DATE')
+
+df['2010-01-01':]['景氣對策信號綜合分數'].plot()
+
+plt.show()
+"""
+
+print('------------------------------------------------------------')	#60個
+
+"""無檔案
+print('讀取集保股權分散表')
+
+import requests
+
+import pandas as pd
+
+from bs4 import BeautifulSoup
+
+url = "http://www.tdcc.com.tw/smWeb/QryStock.jsp"
+
+r = requests.get(url)
+
+soup = BeautifulSoup(r.text, 'lxml')
+
+sca_date = soup.select("option")
+
+url = "http://www.tdcc.com.tw/smWeb/QryStock.jsp?SCA_DATE={}&SqlMethod=StockNo&StockNo={}&StockName=&sub=%ACd%B8%DF"
+
+full_url = url.format(sca_date[0].text, '2330')
+
+r = requests.get(full_url)
+
+soup = BeautifulSoup(r.text, 'lxml')
+
+html_table = soup.select('.mt')
+
+dfs = pd.read_html(str(html_table[1]), header=0)
+
+print(dfs[0])
+"""
 
 print('------------------------------------------------------------')	#60個
 
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
 
 
 print('------------------------------------------------------------')	#60個

@@ -5208,6 +5208,129 @@ namespace vcs_Draw_Example1
 
         private void button32_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "RGB三原色\n";
+
+            int W = pictureBox1.ClientSize.Width;
+            int H = pictureBox1.ClientSize.Height;
+
+
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+
+            W = 512;
+            H = 512;
+
+            int R = W / 5;
+            int cx = W / 2;
+            int cy = H / 2;
+            int angle = -90;
+            int px1 = cx + (int)(R * Math.Cos(Math.PI * (angle) / 180));
+            int py1 = cy + (int)(R * Math.Sin(Math.PI * (angle) / 180));
+            richTextBox1.Text += "px1 = " + px1.ToString() + "\n";
+            richTextBox1.Text += "py1 = " + py1.ToString() + "\n";
+            angle -= 120;
+            int px2 = cx + (int)(R * Math.Cos(Math.PI * (angle) / 180));
+            int py2 = cy + (int)(R * Math.Sin(Math.PI * (angle) / 180));
+            richTextBox1.Text += "px2 = " + px2.ToString() + "\n";
+            richTextBox1.Text += "py2 = " + py2.ToString() + "\n";
+            angle -= 120;
+            int px3 = cx + (int)(R * Math.Cos(Math.PI * (angle) / 180));
+            int py3 = cy + (int)(R * Math.Sin(Math.PI * (angle) / 180));
+            richTextBox1.Text += "px3 = " + px2.ToString() + "\n";
+            richTextBox1.Text += "py3 = " + py2.ToString() + "\n";
+
+            bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);
+
+            int i;
+            int j;
+            int r = 120;
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    int d1 = (int)(Math.Sqrt((px1 - i) * (px1 - i) + (py1 - j) * (py1 - j)));
+                    int d2 = (int)(Math.Sqrt((px2 - i) * (px2 - i) + (py2 - j) * (py2 - j)));
+                    int d3 = (int)(Math.Sqrt((px3 - i) * (px3 - i) + (py3 - j) * (py3 - j)));
+                    if ((d1 < r) && (d2 < r) && (d3 < r))
+                    {
+                        bitmap1.SetPixel(i, j, Color.FromArgb(255, 0xff, 0xff, 0xff));
+                    }
+                    else if ((d1 < r) && (d2 < r))
+                    {
+                        bitmap1.SetPixel(i, j, Color.FromArgb(255, 0xff, 0xff, 0x00));
+                    }
+                    else if ((d2 < r) && (d3 < r))
+                    {
+                        bitmap1.SetPixel(i, j, Color.FromArgb(255, 0x00, 0xff, 0xff));
+                    }
+                    else if ((d1 < r) && (d3 < r))
+                    {
+                        bitmap1.SetPixel(i, j, Color.FromArgb(255, 0xff, 0x00, 0xff));
+                    }
+                    else if (d1 < r)
+                    {
+                        bitmap1.SetPixel(i, j, Color.FromArgb(255, 0xff, 0x00, 0x00));
+                    }
+                    else if (d2 < r)
+                    {
+                        bitmap1.SetPixel(i, j, Color.FromArgb(255, 0x00, 0xff, 0x00));
+                    }
+                    else if (d3 < r)
+                    {
+                        bitmap1.SetPixel(i, j, Color.FromArgb(255, 0x00, 0x00, 0xff));
+                    }
+                    else
+                    {
+                        bitmap1.SetPixel(i, j, Color.FromArgb(255, 0x00, 0x00, 0x00));
+                    }
+                }
+            }
+
+            /* debug
+            g.FillEllipse(Brushes.Red, px1 - 5, py1 - 5, 10, 10);
+            g.FillEllipse(Brushes.Green, px2 - 5, py2 - 5, 10, 10);
+            g.FillEllipse(Brushes.Blue, px3 - 5, py3 - 5, 10, 10);
+            g.DrawLine(new Pen(new SolidBrush(Color.Black), 3), px1, py1, px2, py2);
+            g.DrawLine(new Pen(new SolidBrush(Color.Black), 3), px1, py1, px3, py3);
+            g.DrawLine(new Pen(new SolidBrush(Color.Black), 3), px2, py2, px3, py3);
+            */
+
+            int x_st = 50;
+            int y_st = 450;
+            int dx = 45;
+
+            g.FillRectangle(Brushes.White, x_st-20, y_st+25, 450, 25);
+
+            g.DrawString("R", new Font("標楷體", 36), new SolidBrush(Color.FromArgb(255, 0xff, 0x00, 0x00)), new PointF(x_st, y_st));
+            x_st += dx;
+            g.DrawString("G", new Font("標楷體", 36), new SolidBrush(Color.FromArgb(255, 0x00, 0xff, 0x00)), new PointF(x_st, y_st));
+            x_st += dx;
+            g.DrawString("B", new Font("標楷體", 36), new SolidBrush(Color.FromArgb(255, 0x00, 0x00, 0xff)), new PointF(x_st, y_st));
+            x_st += dx;
+            g.DrawString("紅", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0x00, 0x00)), new PointF(x_st, y_st));
+            x_st += dx;
+            g.DrawString("綠", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0xff, 0x00)), new PointF(x_st, y_st));
+            x_st += dx;
+            g.DrawString("藍", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0x00, 0xff)), new PointF(x_st, y_st));
+            x_st += dx;
+            g.DrawString("三", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0x00, 0x00)), new PointF(x_st, y_st));
+            x_st += dx;
+            g.DrawString("原", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0xff, 0x00)), new PointF(x_st, y_st));
+            x_st += dx;
+            g.DrawString("色", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0x00, 0xff)), new PointF(x_st, y_st));
+
+            /*
+            g.DrawString("紅", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0xff, 0xff)), new PointF(px1, py1));
+            g.DrawString("綠", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0x00, 0xff)), new PointF(px2, py2));
+            g.DrawString("藍", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0xff, 0x00)), new PointF(px3, py3));
+            */
+
+            pictureBox1.Image = bitmap1;
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(filename, ImageFormat.Bmp);
+
         }
 
         private void button33_Click(object sender, EventArgs e)
