@@ -5,22 +5,22 @@ import random
 
 print('------------------------------------------------------------')	#60個
 
-
-#上市公司基本資料
-
 import requests
+import numpy as np
 import pandas as pd
 from io import StringIO
-# 讀取上市公司基本資料
+
+print('------------------------------------------------------------')	#60個
+
+print('讀取上市公司基本資料')
+
 
 """
 r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_L.csv")
 r.encoding = "big5"
 """
 
-'''
 filename = 't187ap03_L.csv'
-
 #filename = 'test.csv'
 
 #df = pd.read_csv(filename, index_col=False, skiprows=1)
@@ -29,27 +29,14 @@ df = pd.read_csv(filename, index_col=False)
 #df.drop(df.index[len(df.index)-1], inplace=True)
 
 print(df)
-
 print()
-
 print(df['公司代號'])
-
-print()
 print()
 print(df[df['公司代號']==2330])
 
 print('------------------------------------------------------------')	#60個
 
-
-#上櫃公司基本資料
-
-import requests
-
-import pandas as pd
-
-from io import StringIO
-
-# 讀取上櫃公司基本資料
+print('讀取上櫃公司基本資料')
 
 #r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_O.csv")
 #r.encoding = "big5"
@@ -66,12 +53,7 @@ print(df)
 print('------------------------------------------------------------')	#60個
 
 
-#下載月營收
-
-import pandas as pd
-import requests
-from io import StringIO
-import time
+print('下載月營收')
 
 def monthly_report(year, month):
 
@@ -120,10 +102,6 @@ print('------------------------------------------------------------')	#60個
 
 print('下載台股單日股價行情')
 
-import requests
-from io import StringIO
-import pandas as pd
-
 datestr = '20180131'
 
 r = requests.get('http://www.twse.com.tw/exchangeReport/MI_INDEX?response=csv&date=' + datestr + '&type=ALL')
@@ -143,10 +121,6 @@ print(df)
 print('------------------------------------------------------------')	#60個
 
 print('下載財報')
-
-import requests
-import pandas as pd
-import numpy as np
 
 def financial_statement(year, season, exchange='sii', type='綜合損益表'):
     if year > 1911:
@@ -209,8 +183,6 @@ print('------------------------------------------------------------')	#60個
 print('台股即時股價資料')
 
 import json
-import time
-import requests
 
 # 參考 twstock 取得需要的 URL
 SESSION_URL = 'http://mis.twse.com.tw/stock/index.jsp'
@@ -236,11 +208,7 @@ print('------------------------------------------------------------')	#60個
 print('台股股價歷史資料')
 
 """ Fail
-import requests
-import pandas as pd
-from io import StringIO
-
-# 讀取台股股價資料
+print('讀取台股股價資料')
 
 url = "http://www.twse.com.tw/exchangeReport/STOCK_DAY"
 params = {}
@@ -251,6 +219,7 @@ params['response'] = "csv"
 r = requests.get(url, params=params)
 
 import datetime
+
 df = pd.read_csv(StringIO(r.text), engine='python', skiprows=1, skipfooter=4, thousands=',')
 
 def DateConvert(twdate):
@@ -266,18 +235,8 @@ print('------------------------------------------------------------')	#60個
 
 print('國內主要金融指標')
 
-
-
 #政府開放資料平台 - 國內主要金融指標
 #https://data.gov.tw/dataset/30815
-
-
-import requests
-
-import pandas as pd
-
-from io import StringIO
-
 
 url_by_month = "https://apiservice.mol.gov.tw/OdService/download/A17030000J-000037-51i"
 print(url_by_month)
@@ -287,16 +246,12 @@ df = pd.read_csv(StringIO(r.text))
 
 print(df.set_index('月別'))
 
-'''
-
 print('------------------------------------------------------------')	#60個
 
 """ 沒效果
 #使用 Google Trends 來判斷股價高點
 
 from pytrends.request import TrendReq
-
-import pandas as pd
 
 keyword = '股票'
 
@@ -316,16 +271,7 @@ print(df)
 
 print('------------------------------------------------------------')	#60個
 
-print('興櫃公司基本資料')
-
-import requests
-
-import pandas as pd
-
-from io import StringIO
-
-# 讀取興櫃公司基本資料
-
+print('讀取興櫃公司基本資料')
 
 #r = requests.get("http://dts.twse.com.tw/opendata/t187ap03_R.csv")
 #r.encoding = "big5"
@@ -334,53 +280,31 @@ from io import StringIO
 filename = 't187ap03_R.csv'
 df = pd.read_csv(filename, index_col=False, skiprows=1)
 
-
 df.drop(df.index[len(df.index)-1], inplace=True)
-
 print(df)
-
 
 print('------------------------------------------------------------')	#60個
 
 """ NG 無檔案
 print('證券商分公司基本資料')
 
-import requests
-
-import pandas as pd
-
-from io import StringIO
-
 # 讀取證券商分公司基本資料
 
 r = requests.get("http://www.twse.com.tw/brokerService/branchList.csv")
 r.encoding = "big5"
 df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
-
 print(df)
 """
 
 print('------------------------------------------------------------')	#60個
 
 """無檔案
-print('證券商總公司基本資料')
-
-import requests
-
-import pandas as pd
-
-from io import StringIO
-
-# 讀取證券商總公司基本資料
+print('讀取證券商總公司基本資料')
 
 r = requests.get("http://www.twse.com.tw/brokerService/brokerList.csv?lang=zh")
-
 r.encoding = "big5"
-
 df = pd.read_csv(StringIO(r.text), index_col=False, skiprows=1)
-
 print(df)
-
 """
 
 print('------------------------------------------------------------')	#60個
@@ -388,14 +312,12 @@ print('------------------------------------------------------------')	#60個
 """ NG 資料抓不下來
 print('讀取 Nasdaq 的股價歷史資料')
 
-import requests
 from bs4 import BeautifulSoup
 
 symbol = 'GOOG'.lower()
 
 url_template = "https://www.nasdaq.com/symbol/{symbol}/historical"
 url = url_template.format(symbol=symbol)
-
 print(url)
 
 rs = requests.session()
@@ -422,16 +344,12 @@ print('------------------------------------------------------------')	#60個
 """ NG 資料抓不下來
 print('讀取 NASDAQ, NYSE, AMEX 公司資料')
 
-import pandas as pd
-
 url_template = "https://www.nasdaq.com/screening/companies-by-industry.aspx?exchange={}&render=download"
 
 url = url_template.format('NASDAQ')
 
 df = pd.read_csv(url)
-
 df = df.loc[:, ~df.columns.str.contains("Unnamed")]
-
 print(df)
 """
 
@@ -447,8 +365,7 @@ https://www.ndc.gov.tw/News_Content.aspx?n=9D32B61B1E56E558&sms=9D3CAFD318C60877
 """
 
 """無檔案
-import pandas as pd
-import requests
+
 from io import BytesIO
 
 # 讀取 .xlsx 檔
@@ -467,10 +384,6 @@ print('------------------------------------------------------------')	#60個
 
 """無檔案
 print('讀取集保股權分散表')
-
-import requests
-
-import pandas as pd
 
 from bs4 import BeautifulSoup
 
@@ -498,7 +411,6 @@ print(dfs[0])
 """
 
 print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 

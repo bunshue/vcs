@@ -872,7 +872,7 @@
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(60, 60);
             this.button57.TabIndex = 61;
-            this.button57.Text = "圖加字";
+            this.button57.Text = "OpenCV測試圖";
             this.button57.UseVisualStyleBackColor = true;
             this.button57.Click += new System.EventHandler(this.button57_Click);
             // 

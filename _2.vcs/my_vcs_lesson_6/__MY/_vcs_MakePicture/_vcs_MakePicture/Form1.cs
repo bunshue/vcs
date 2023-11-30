@@ -2252,45 +2252,41 @@ namespace _vcs_MakePicture
 
         private void button57_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\SF0.jpg";
-            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            //OpenCV測試圖
 
+            //逐點製作圖檔
             int width;
             int height;
+            int xx;
+            int yy;
 
-            int W = bitmap2.Width;
-            int H = bitmap2.Height;
+            width = 256;
+            height = 300;
+            bitmap1 = new Bitmap(width, height);
 
-            bitmap1 = new Bitmap(W, H);
-
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.Black);
-
-            int x_st = 0;
-            int y_st = 0;
-            int dx = 100;
-            int dy = 100;
-
-            g.DrawImage(bitmap2, 0, 0, bitmap2.Width, bitmap2.Height);
-            //                 貼上的位置       貼上的大小 放大縮小用
-
-            Font f;
-            f = new Font("標楷體", 60);
-            sb = new SolidBrush(Color.Red);
-            //g.DrawString("Sugar", f, sb, new PointF(W - 250, H - 82));
-            //for(int i = 250;i<3840;i+=500)
-            x_st = 220;
-            dx = 500;
-            g.DrawString("一", f, sb, new PointF(x_st + dx * 0, 50));
-            g.DrawString("二", f, sb, new PointF(x_st + dx * 1, 50));
-            g.DrawString("三", f, sb, new PointF(x_st + dx * 2, 50));
-            g.DrawString("四", f, sb, new PointF(x_st + dx * 3, 50));
-            g.DrawString("五", f, sb, new PointF(x_st + dx * 4, 50));
-            g.DrawString("六", f, sb, new PointF(x_st + dx * 5, 50));
-            g.DrawString("七", f, sb, new PointF(x_st + dx * 6, 50));
-            g.DrawString("八", f, sb, new PointF(x_st + dx * 7, 50));
-
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    //bitmap1.SetPixel(xx, yy, background_color);
+                    if (yy < 100)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0x00, 0x00));
+                    else if (yy < 200)
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0xff, 0x00));
+                    else
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, 0xff));
+                }
+            }
             pictureBox1.Image = bitmap1;
+
+            string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            bitmap1.Save(@filename, ImageFormat.Bmp);
+
+            richTextBox1.Text += "存檔成功\n";
+            richTextBox1.Text += "已存檔 : " + filename + "\n";
         }
 
         //C#獲取圖片的指定部分

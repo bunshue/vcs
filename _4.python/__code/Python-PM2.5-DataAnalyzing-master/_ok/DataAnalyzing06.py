@@ -12,11 +12,10 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-'''
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 import seaborn as sns
+
+print('------------------------------------------------------------')	#60個
 
 plt.style.use('fivethirtyeight')
 
@@ -41,12 +40,8 @@ ax=df.plot(kind='scatter',x='TEMP',y="PM25")
 ax.set_title('TEMP v.s. PM25')
 plt.show()
 
-
 cc = df.corr()
-
 print(cc)
-'''
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -58,15 +53,8 @@ print('------------------------------------------------------------')	#60個
 
 #高雄2008年至2018年之資料
 
-import pandas as pd
 
 import pandas_profiling
-
-import numpy as np
-
-import matplotlib.pyplot as plt
-
-import seaborn as sns
 
 plt.style.use('fivethirtyeight')
 
@@ -81,17 +69,11 @@ profile.to_file(outputfile="output.html")  #支援輸出html
 
 print('------------------------------------------------------------')	#60個
 
-'''
 #空氣盒子數據PM25與各項因子之視覺化散布圖
 #高雄1982至2018年之PM25與各氣象因子視覺化散布圖
 #高雄2008至2018年之PM25與各氣象因子視覺化散布圖
 
 #高雄1982年至2018年之資料 高雄2008年至2018年之資料
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 plt.style.use('fivethirtyeight')
 
@@ -166,8 +148,6 @@ plt.show()
 heatmap = df.corr()
 sns.heatmap(heatmap,cmap='coolwarm')
 plt.show()
-
-'''
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')

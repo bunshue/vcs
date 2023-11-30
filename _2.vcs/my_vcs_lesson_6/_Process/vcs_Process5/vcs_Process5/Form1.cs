@@ -13,7 +13,7 @@ namespace vcs_Process5
 {
     public partial class Form1 : Form
     {
-        bool falg_keep_program_running = true;
+        bool flag_keep_program_running = true;
 
         string program_name = "AMCAP";
         string program_path = @"C:\Program Files (x86)\Noel Danjou\AMCap\AMCap.exe";
@@ -21,7 +21,7 @@ namespace vcs_Process5
         //string program_name = "MegaDownloader";
         //string program_path = @"C:\____backup\MegaDownloaderNoinstall_1.8_azo\MegaDownloaderNoinstall\MegaDownloader.exe";
 
-        bool falg_program_running = false;
+        bool flag_program_running = false;
 
         private Process[] processes;
         bool flag_EnableRaisingEvents = false;
@@ -38,12 +38,13 @@ namespace vcs_Process5
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
 
-            label1.Text = "偵測程式 : " + program_name;
-            richTextBox1.Text += "偵測程式 : " + program_name + " 開始, 時間 : " + DateTime.Now.ToString() + "\n";
-            if (falg_keep_program_running == true)
+            if (flag_keep_program_running == true)
                 richTextBox1.Text += "維持程式運行模式\n";
             else
                 richTextBox1.Text += "監控模式\n";
+
+            label1.Text = "偵測程式 : " + program_name;
+            richTextBox1.Text += "偵測程式 : " + program_name + " 開始, 時間 : " + DateTime.Now.ToString() + "\n";
         }
 
         private void process_exited(object sender, EventArgs e)//被觸發的程序
@@ -51,16 +52,16 @@ namespace vcs_Process5
             richTextBox1.Text += "偵測到程式 " + program_name + " 被關閉, 時間 : " + DateTime.Now.ToString() + "\n";
 
             flag_EnableRaisingEvents = false;
-            falg_program_running = false;
+            flag_program_running = false;
         }
 
         int program_executed_time = 1;
         int count = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (falg_keep_program_running == true)
+            if (flag_keep_program_running == true)
             {
-                if (falg_program_running == true)
+                if (flag_program_running == true)
                 {
                     //richTextBox1.Text += "O";
                 }
@@ -92,7 +93,7 @@ namespace vcs_Process5
                         richTextBox1.Text += "\n第 " + (program_executed_time++).ToString() + " 次偵測到程式 " + program_name + " 被開啟, 時間 : " + DateTime.Now.ToString() + "\n";
                         process.EnableRaisingEvents = true;//設置進程終止時觸發的時間
                         process.Exited += new EventHandler(process_exited);//發現外部程序關閉即觸發方法process_exited
-                        falg_program_running = true;
+                        flag_program_running = true;
                     }
                 }
             }

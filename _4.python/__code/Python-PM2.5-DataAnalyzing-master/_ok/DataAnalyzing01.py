@@ -14,7 +14,6 @@ print('------------------------------------------------------------')	#60個
 
 import pandas as pd
 
-'''
 filename = 'AQI_20231124.csv'
 
 df = pd.read_csv(filename)
@@ -28,7 +27,6 @@ print(df.describe())
 print(df['aqi'])
 
 #print(df[(df.aqi < 30)&(df.wind_speed>2)])
-
 
 #mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']    # 指定默认字体：解决plot不能显示中文问题
 #mpl.rcParams['axes.unicode_minus'] = False 
@@ -71,6 +69,7 @@ print(pic)
 
 print(df.corr())
 
+
 print('------------------------------------------------------------')	#60個
 
 filename = 'AQI_20231124b.csv'
@@ -101,7 +100,7 @@ pic1=df.plot(kind = 'scatter', x = 'wind_speed', y = 'aqi',title = '風速與AQI
 print(pic1)
 
 plt.show()
-'''
+
 print('------------------------------------------------------------')	#60個
 
 

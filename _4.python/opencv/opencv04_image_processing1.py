@@ -75,60 +75,80 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-'''
-opencv + numpy + 圖片之影像處理
-
-'''
-
-print('------------------------------------------------------------')	#60個
 print('測試 1')
 
 print('將一圖分解成 藍 綠 紅 三通道')
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/white_300X300.bmp'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/white_300X300.bmp'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
 
 image = cv2.imread(filename)
 
-print('顯示原圖')
+plt.subplot(331)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title('原圖')
-plt.show()
 
-cv2.imshow("image", image)
-
-'''same
+"""same
 b=image[:,:,0]
 g=image[:,:,1]
 r=image[:,:,2]
-'''
-b,g,r=cv2.split(image)
+"""
+
+b, g, r = cv2.split(image)
+
+print(image.shape)
+print(image)
+
+print(b.shape)
+print(b)
+
+print(g.shape)
+print(g)
+
+print(r.shape)
+print(r)
 
 print('顯示 ch0 藍 通道 圖')
-cv2.imshow('B', b)
+#cv2.imshow('B', b)
+plt.subplot(334)
+plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
+plt.title('藍')
 
 print('顯示 ch1 綠 通道 圖')
-cv2.imshow('G', g)
+#cv2.imshow('G', g)
+plt.subplot(335)
+plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
+plt.title('綠')
 
 print('顯示 ch2 紅 通道 圖')
-cv2.imshow('R', r)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
+#cv2.imshow('R', r)
+plt.subplot(336)
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+plt.title('紅')
 
 print('設定第0通道為0')
 image[:,:,0]=0
-cv2.imshow("image ch0 = 0", image)
+#cv2.imshow("image ch0 = 0", image)
+plt.subplot(337)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('設定第0通道為0')
 
 print('設定第1通道為0')
 image[:,:,1]=0
-cv2.imshow("image ch0 = ch1 = 0",image)
+#cv2.imshow("image ch0 = ch1 = 0",image)
+plt.subplot(338)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('設定第1通道為0')
+
 
 print('設定第2通道為0')
 image[:,:,2]=0
-cv2.imshow("image ch0 = ch1 = ch2 = 0",image)
+#cv2.imshow("image ch0 = ch1 = ch2 = 0",image)
+plt.subplot(339)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('設定第2通道為0')
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -321,20 +341,16 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-'''
-
+"""
 https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
 https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
-
-'''
+"""
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 print('------------------------------------------------------------')	#60個
 
-'''
 image = cv2.imread(filename)	#讀取本機圖片
 
 # 轉為灰階圖片
@@ -370,7 +386,7 @@ for i, col in enumerate(color):
   plt.plot(histr, color = col)
   plt.xlim([0, 256])
 plt.show()
-'''
+
 print('------------------------------------------------------------')	#60個
 
 #配合圖形遮罩計算直方圖
