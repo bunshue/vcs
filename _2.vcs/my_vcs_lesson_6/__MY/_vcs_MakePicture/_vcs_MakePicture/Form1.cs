@@ -2272,11 +2272,11 @@ namespace _vcs_MakePicture
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
                     //bitmap1.SetPixel(xx, yy, background_color);
                     if (yy < 100)
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0x00, 0x00));
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (xx%256), 0x00, 0x00));
                     else if (yy < 200)
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0xff, 0x00));
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, (xx % 256), 0x00));
                     else
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, 0xff));
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, 0x00, (xx % 256)));
                 }
             }
             pictureBox1.Image = bitmap1;

@@ -5213,7 +5213,6 @@ namespace vcs_Draw_Example1
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
 
-
             richTextBox1.Text += "W = " + W.ToString() + "\n";
             richTextBox1.Text += "H = " + H.ToString() + "\n";
 
@@ -5287,6 +5286,25 @@ namespace vcs_Draw_Example1
                 }
             }
 
+            int x_st = 128 * 3;
+            int y_st = 0;
+            int w = 128;
+            int h = 150;
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    //bitmap1.SetPixel(xx, yy, background_color);
+                    if (j < 50)
+                        bitmap1.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, ((i * 2) % 256), 0x00, 0x00));
+                    else if (j < 100)
+                        bitmap1.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, 0x00, ((i * 2) % 256), 0x00));
+                    else
+                        bitmap1.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, 0x00, 0x00, ((i * 2) % 256)));
+                }
+            }
+
             /* debug
             g.FillEllipse(Brushes.Red, px1 - 5, py1 - 5, 10, 10);
             g.FillEllipse(Brushes.Green, px2 - 5, py2 - 5, 10, 10);
@@ -5296,11 +5314,11 @@ namespace vcs_Draw_Example1
             g.DrawLine(new Pen(new SolidBrush(Color.Black), 3), px2, py2, px3, py3);
             */
 
-            int x_st = 50;
-            int y_st = 450;
+            x_st = 50;
+            y_st = 450;
             int dx = 45;
 
-            g.FillRectangle(Brushes.White, x_st-20, y_st+25, 450, 25);
+            g.FillRectangle(Brushes.White, x_st - 20, y_st + 25, 450, 25);
 
             g.DrawString("R", new Font("標楷體", 36), new SolidBrush(Color.FromArgb(255, 0xff, 0x00, 0x00)), new PointF(x_st, y_st));
             x_st += dx;

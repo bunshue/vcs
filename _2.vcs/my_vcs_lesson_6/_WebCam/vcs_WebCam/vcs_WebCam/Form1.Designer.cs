@@ -32,9 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lb_rgb_r = new System.Windows.Forms.Label();
+            this.lb_rgb_g = new System.Windows.Forms.Label();
+            this.lb_rgb_b = new System.Windows.Forms.Label();
+            this.lb_yuv_y = new System.Windows.Forms.Label();
+            this.lb_yuv_u = new System.Windows.Forms.Label();
+            this.lb_yuv_v = new System.Windows.Forms.Label();
             this.lb_fps = new System.Windows.Forms.Label();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cb_rgb = new System.Windows.Forms.CheckBox();
             this.bt_open_folder = new System.Windows.Forms.Button();
             this.bt_motion_detection = new System.Windows.Forms.Button();
             this.bt_record = new System.Windows.Forms.Button();
@@ -77,15 +85,8 @@
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_qr_code = new System.Windows.Forms.Timer(this.components);
-            this.cb_rgb = new System.Windows.Forms.CheckBox();
             this.timer_rgb = new System.Windows.Forms.Timer(this.components);
-            this.lb_rgb_r = new System.Windows.Forms.Label();
-            this.lb_rgb_g = new System.Windows.Forms.Label();
-            this.lb_rgb_b = new System.Windows.Forms.Label();
-            this.lb_yuv_y = new System.Windows.Forms.Label();
-            this.lb_yuv_u = new System.Windows.Forms.Label();
-            this.lb_yuv_v = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.cb_corner = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -124,6 +125,79 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Message";
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(143, 74);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(90, 60);
+            this.panel1.TabIndex = 203;
+            // 
+            // lb_rgb_r
+            // 
+            this.lb_rgb_r.AutoSize = true;
+            this.lb_rgb_r.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_r.ForeColor = System.Drawing.Color.Red;
+            this.lb_rgb_r.Location = new System.Drawing.Point(68, 164);
+            this.lb_rgb_r.Name = "lb_rgb_r";
+            this.lb_rgb_r.Size = new System.Drawing.Size(25, 28);
+            this.lb_rgb_r.TabIndex = 197;
+            this.lb_rgb_r.Text = "R";
+            // 
+            // lb_rgb_g
+            // 
+            this.lb_rgb_g.AutoSize = true;
+            this.lb_rgb_g.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_g.ForeColor = System.Drawing.Color.Green;
+            this.lb_rgb_g.Location = new System.Drawing.Point(85, 164);
+            this.lb_rgb_g.Name = "lb_rgb_g";
+            this.lb_rgb_g.Size = new System.Drawing.Size(25, 28);
+            this.lb_rgb_g.TabIndex = 198;
+            this.lb_rgb_g.Text = "G";
+            // 
+            // lb_rgb_b
+            // 
+            this.lb_rgb_b.AutoSize = true;
+            this.lb_rgb_b.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_rgb_b.ForeColor = System.Drawing.Color.Blue;
+            this.lb_rgb_b.Location = new System.Drawing.Point(103, 164);
+            this.lb_rgb_b.Name = "lb_rgb_b";
+            this.lb_rgb_b.Size = new System.Drawing.Size(25, 28);
+            this.lb_rgb_b.TabIndex = 199;
+            this.lb_rgb_b.Text = "B";
+            // 
+            // lb_yuv_y
+            // 
+            this.lb_yuv_y.AutoSize = true;
+            this.lb_yuv_y.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_y.ForeColor = System.Drawing.Color.Gold;
+            this.lb_yuv_y.Location = new System.Drawing.Point(138, 164);
+            this.lb_yuv_y.Name = "lb_yuv_y";
+            this.lb_yuv_y.Size = new System.Drawing.Size(25, 28);
+            this.lb_yuv_y.TabIndex = 200;
+            this.lb_yuv_y.Text = "Y";
+            // 
+            // lb_yuv_u
+            // 
+            this.lb_yuv_u.AutoSize = true;
+            this.lb_yuv_u.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_u.ForeColor = System.Drawing.Color.Blue;
+            this.lb_yuv_u.Location = new System.Drawing.Point(159, 164);
+            this.lb_yuv_u.Name = "lb_yuv_u";
+            this.lb_yuv_u.Size = new System.Drawing.Size(25, 28);
+            this.lb_yuv_u.TabIndex = 201;
+            this.lb_yuv_u.Text = "U";
+            // 
+            // lb_yuv_v
+            // 
+            this.lb_yuv_v.AutoSize = true;
+            this.lb_yuv_v.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_yuv_v.ForeColor = System.Drawing.Color.Red;
+            this.lb_yuv_v.Location = new System.Drawing.Point(190, 164);
+            this.lb_yuv_v.Name = "lb_yuv_v";
+            this.lb_yuv_v.Size = new System.Drawing.Size(25, 28);
+            this.lb_yuv_v.TabIndex = 202;
+            this.lb_yuv_v.Text = "V";
+            // 
             // lb_fps
             // 
             this.lb_fps.AutoSize = true;
@@ -147,6 +221,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.cb_corner);
             this.groupBox4.Controls.Add(this.cb_rgb);
             this.groupBox4.Controls.Add(this.bt_open_folder);
             this.groupBox4.Controls.Add(this.bt_motion_detection);
@@ -176,6 +251,19 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operation";
+            // 
+            // cb_rgb
+            // 
+            this.cb_rgb.AutoSize = true;
+            this.cb_rgb.Checked = true;
+            this.cb_rgb.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_rgb.Location = new System.Drawing.Point(18, 193);
+            this.cb_rgb.Name = "cb_rgb";
+            this.cb_rgb.Size = new System.Drawing.Size(48, 16);
+            this.cb_rgb.TabIndex = 60;
+            this.cb_rgb.Text = "RGB";
+            this.cb_rgb.UseVisualStyleBackColor = true;
+            this.cb_rgb.CheckedChanged += new System.EventHandler(this.cb_rgb_CheckedChanged);
             // 
             // bt_open_folder
             // 
@@ -629,96 +717,22 @@
             this.timer_qr_code.Interval = 1000;
             this.timer_qr_code.Tick += new System.EventHandler(this.timer_qr_code_Tick);
             // 
-            // cb_rgb
-            // 
-            this.cb_rgb.AutoSize = true;
-            this.cb_rgb.Checked = true;
-            this.cb_rgb.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_rgb.Location = new System.Drawing.Point(18, 193);
-            this.cb_rgb.Name = "cb_rgb";
-            this.cb_rgb.Size = new System.Drawing.Size(48, 16);
-            this.cb_rgb.TabIndex = 60;
-            this.cb_rgb.Text = "RGB";
-            this.cb_rgb.UseVisualStyleBackColor = true;
-            this.cb_rgb.CheckedChanged += new System.EventHandler(this.cb_rgb_CheckedChanged);
-            // 
             // timer_rgb
             // 
             this.timer_rgb.Enabled = true;
             this.timer_rgb.Tick += new System.EventHandler(this.timer_rgb_Tick);
             // 
-            // lb_rgb_r
+            // cb_corner
             // 
-            this.lb_rgb_r.AutoSize = true;
-            this.lb_rgb_r.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rgb_r.ForeColor = System.Drawing.Color.Red;
-            this.lb_rgb_r.Location = new System.Drawing.Point(68, 164);
-            this.lb_rgb_r.Name = "lb_rgb_r";
-            this.lb_rgb_r.Size = new System.Drawing.Size(25, 28);
-            this.lb_rgb_r.TabIndex = 197;
-            this.lb_rgb_r.Text = "R";
-            // 
-            // lb_rgb_g
-            // 
-            this.lb_rgb_g.AutoSize = true;
-            this.lb_rgb_g.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rgb_g.ForeColor = System.Drawing.Color.Green;
-            this.lb_rgb_g.Location = new System.Drawing.Point(85, 164);
-            this.lb_rgb_g.Name = "lb_rgb_g";
-            this.lb_rgb_g.Size = new System.Drawing.Size(25, 28);
-            this.lb_rgb_g.TabIndex = 198;
-            this.lb_rgb_g.Text = "G";
-            // 
-            // lb_rgb_b
-            // 
-            this.lb_rgb_b.AutoSize = true;
-            this.lb_rgb_b.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_rgb_b.ForeColor = System.Drawing.Color.Blue;
-            this.lb_rgb_b.Location = new System.Drawing.Point(103, 164);
-            this.lb_rgb_b.Name = "lb_rgb_b";
-            this.lb_rgb_b.Size = new System.Drawing.Size(25, 28);
-            this.lb_rgb_b.TabIndex = 199;
-            this.lb_rgb_b.Text = "B";
-            // 
-            // lb_yuv_y
-            // 
-            this.lb_yuv_y.AutoSize = true;
-            this.lb_yuv_y.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_yuv_y.ForeColor = System.Drawing.Color.Gold;
-            this.lb_yuv_y.Location = new System.Drawing.Point(138, 164);
-            this.lb_yuv_y.Name = "lb_yuv_y";
-            this.lb_yuv_y.Size = new System.Drawing.Size(25, 28);
-            this.lb_yuv_y.TabIndex = 200;
-            this.lb_yuv_y.Text = "Y";
-            // 
-            // lb_yuv_u
-            // 
-            this.lb_yuv_u.AutoSize = true;
-            this.lb_yuv_u.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_yuv_u.ForeColor = System.Drawing.Color.Blue;
-            this.lb_yuv_u.Location = new System.Drawing.Point(159, 164);
-            this.lb_yuv_u.Name = "lb_yuv_u";
-            this.lb_yuv_u.Size = new System.Drawing.Size(25, 28);
-            this.lb_yuv_u.TabIndex = 201;
-            this.lb_yuv_u.Text = "U";
-            // 
-            // lb_yuv_v
-            // 
-            this.lb_yuv_v.AutoSize = true;
-            this.lb_yuv_v.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_yuv_v.ForeColor = System.Drawing.Color.Red;
-            this.lb_yuv_v.Location = new System.Drawing.Point(190, 164);
-            this.lb_yuv_v.Name = "lb_yuv_v";
-            this.lb_yuv_v.Size = new System.Drawing.Size(25, 28);
-            this.lb_yuv_v.TabIndex = 202;
-            this.lb_yuv_v.Text = "V";
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(143, 74);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(90, 60);
-            this.panel1.TabIndex = 203;
+            this.cb_corner.AutoSize = true;
+            this.cb_corner.Checked = true;
+            this.cb_corner.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_corner.Location = new System.Drawing.Point(103, 193);
+            this.cb_corner.Name = "cb_corner";
+            this.cb_corner.Size = new System.Drawing.Size(48, 16);
+            this.cb_corner.TabIndex = 61;
+            this.cb_corner.Text = "截角";
+            this.cb_corner.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -806,6 +820,7 @@
         private System.Windows.Forms.Label lb_yuv_u;
         private System.Windows.Forms.Label lb_yuv_v;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox cb_corner;
     }
 }
 

@@ -305,10 +305,11 @@ namespace vcs_WebCam
             cb_auto_save.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             cb_show_grid.Location = new Point(x_st + dx * 3, y_st + dy * 3);
             cb_rgb.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 25);
+            cb_corner.Location = new Point(x_st + dx * 1, y_st + dy * 3 + 25);
 
-            rb1.Location = new Point(x_st + dx * 1, y_st + dy * 3 + 25);
-            rb2.Location = new Point(x_st + dx * 1 + 30, y_st + dy * 3 + 25);
-            rb3.Location = new Point(x_st + dx * 1 + 60, y_st + dy * 3 + 25);
+            rb1.Location = new Point(x_st + dx * 2, y_st + dy * 3 + 25);
+            rb2.Location = new Point(x_st + dx * 2 + 30, y_st + dy * 3 + 25);
+            rb3.Location = new Point(x_st + dx * 2 + 60, y_st + dy * 3 + 25);
 
             rb_3X3.Location = new Point(x_st + dx * 3 + 45, y_st + dy * 3 - 20);
             rb_4X4.Location = new Point(x_st + dx * 3 + 45, y_st + dy * 3);
@@ -670,9 +671,44 @@ namespace vcs_WebCam
 
                 GC.Collect();       //回收資源
 
+                if (cb_corner.Checked == true)
+                {
+                    Graphics g;
+                    try
+                    {
+                        g = Graphics.FromImage(bm);
+                    }
+                    catch (Exception ex)
+                    {
+                        GC.Collect();       //回收資源
+                        return;
+                    }
+
+                    SolidBrush sb = new SolidBrush(Color.Black);
+                    Point[] points = new Point[3];
+                    int dd = 90;
+                    points[0] = new Point(0, 0);
+                    points[1] = new Point(dd, 0);
+                    points[2] = new Point(0, dd);
+                    g.FillPolygon(sb, points);
+                    points[0] = new Point(640 - dd, 0);
+                    points[1] = new Point(640, 0);
+                    points[2] = new Point(640, dd);
+                    g.FillPolygon(sb, points);
+                    points[0] = new Point(0, 480);
+                    points[1] = new Point(0, 480 - dd);
+                    points[2] = new Point(dd, 480);
+                    g.FillPolygon(sb, points);
+                    points[0] = new Point(640 - dd, 480);
+                    points[1] = new Point(640, 480);
+                    points[2] = new Point(640, 480 - dd);
+                    g.FillPolygon(sb, points);
+                }
+
                 if (flag_motion_detection == true)
                 {
-                    Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
+                    //Bitmap bitmap1 = (Bitmap)eventArgs.Frame.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
+                    Bitmap bitmap1 = (Bitmap)bm.Clone(); // get a copy of the BitMap from the VideoCaptureDevice
                     Bitmap bitmap2 = (Bitmap)bitmap1.Clone(); // clone the bits from the current frame
 
                     if (motion_detector.ProcessFrame(bitmap2) > 0.001) // feed the bits to the MD
@@ -703,6 +739,30 @@ namespace vcs_WebCam
                 bm.RotateFlip(rotate_flip_type);                        //鏡射旋轉
 
                 g = Graphics.FromImage(bm);
+
+                //畫截角
+                if (cb_corner.Checked == true)
+                {
+                    SolidBrush sb = new SolidBrush(Color.Black);
+                    Point[] points = new Point[3];
+                    int dd = 90;
+                    points[0] = new Point(0, 0);
+                    points[1] = new Point(dd, 0);
+                    points[2] = new Point(0, dd);
+                    g.FillPolygon(sb, points);
+                    points[0] = new Point(640 - dd, 0);
+                    points[1] = new Point(640, 0);
+                    points[2] = new Point(640, dd);
+                    g.FillPolygon(sb, points);
+                    points[0] = new Point(0, 480);
+                    points[1] = new Point(0, 480 - dd);
+                    points[2] = new Point(dd, 480);
+                    g.FillPolygon(sb, points);
+                    points[0] = new Point(640 - dd, 480);
+                    points[1] = new Point(640, 480);
+                    points[2] = new Point(640, 480 - dd);
+                    g.FillPolygon(sb, points);
+                }
 
                 //顯示時間
                 SolidBrush drawBrush;
