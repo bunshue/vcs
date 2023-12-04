@@ -5338,6 +5338,25 @@ namespace vcs_Draw_Example1
             x_st += dx;
             g.DrawString("色", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0x00, 0xff)), new PointF(x_st, y_st));
 
+            x_st = 20;
+            y_st = 20;
+            int dy = 50;
+            g.DrawString("紅", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0x00, 0x00)), new PointF(x_st, y_st));
+            y_st += dy;
+            g.DrawString("綠", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0xff, 0x00)), new PointF(x_st, y_st));
+            y_st += dy;
+            g.DrawString("藍", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0x00, 0xff)), new PointF(x_st, y_st));
+
+            x_st = 20+50;
+            y_st = 20;
+            g.DrawString("紅", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0xff, 0xff)), new PointF(x_st, y_st));
+            y_st += dy;
+            g.DrawString("綠", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0xff, 0xff)), new PointF(x_st, y_st));
+            y_st += dy;
+            g.DrawString("藍", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0xff, 0xff)), new PointF(x_st, y_st));
+
+
+
             /*
             g.DrawString("紅", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0xff, 0xff)), new PointF(px1, py1));
             g.DrawString("綠", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0x00, 0xff)), new PointF(px2, py2));

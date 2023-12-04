@@ -18,7 +18,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 print('------------------------------------------------------------')	#60個
-
+'''
 #影像對比與亮度調整
 import matplotlib.image as img
 
@@ -31,27 +31,35 @@ def modify_contrast_and_brightness(image, alpha=1.0, beta = 0.0):
     image = np.clip(image, 0, 255)
     return image
 
+plt.figure(num = '影像對比與亮度調整', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 image = cv2.imread(filename)	#讀取本機圖片
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('原圖')
 
 modified_image = modify_contrast_and_brightness(image, 1.5, 10.0)
-
+plt.subplot(122)
 plt.imshow(cv2.cvtColor(modified_image, cv2.COLOR_BGR2RGB))
 plt.title('影像對比與亮度調整')
+
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+plt.figure(num = '影像分析工具 影像直方圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #影像分析工具
 #影像直方圖
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
+plt.subplot(221)
 plt.hist(image.ravel(), 256, [0,256])
-plt.show()
+plt.title('原圖轉灰階')
 
+plt.subplot(222)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title('影像直方圖')
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -62,25 +70,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
-
 equa = cv2.equalizeHist(image)
+
+plt.subplot(223)
 plt.hist(equa.ravel(), 256, [0,256])
-plt.show()
+plt.title('原圖轉灰階')
+
 #均值化的影像
 #均衡化後的灰度直方圖分布
-
+plt.subplot(224)
 plt.imshow(cv2.cvtColor(equa, cv2.COLOR_BGR2RGB))
 plt.title('均衡化後的灰度直方圖分布')
+
 plt.show()
 
+'''
 print('------------------------------------------------------------')	#60個
 
-print('測試 1')
+plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-print('將一圖分解成 藍 綠 紅 三通道')
-
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/white_300X300.bmp'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
 
 image = cv2.imread(filename)
 
@@ -97,63 +107,59 @@ r=image[:,:,2]
 b, g, r = cv2.split(image)
 
 print(image.shape)
-print(image)
+#print(image)
 
 print(b.shape)
-print(b)
+#print(b)
 
 print(g.shape)
-print(g)
+#print(g)
 
 print(r.shape)
-print(r)
-
-print('顯示 ch0 藍 通道 圖')
-#cv2.imshow('B', b)
-plt.subplot(334)
-plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
-plt.title('藍')
-
-print('顯示 ch1 綠 通道 圖')
-#cv2.imshow('G', g)
-plt.subplot(335)
-plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
-plt.title('綠')
+#print(r)
 
 print('顯示 ch2 紅 通道 圖')
-#cv2.imshow('R', r)
-plt.subplot(336)
+plt.subplot(334)
 plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
-plt.title('紅')
+plt.title('紅 第2通道')
 
-print('設定第0通道為0')
-image[:,:,0]=0
-#cv2.imshow("image ch0 = 0", image)
-plt.subplot(337)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title('設定第0通道為0')
+print('顯示 ch1 綠 通道 圖')
+plt.subplot(335)
+plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
+plt.title('綠 第1通道')
 
-print('設定第1通道為0')
-image[:,:,1]=0
-#cv2.imshow("image ch0 = ch1 = 0",image)
-plt.subplot(338)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title('設定第1通道為0')
-
+print('顯示 ch0 藍 通道 圖')
+plt.subplot(336)
+plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
+plt.title('藍  第0通道')
 
 print('設定第2通道為0')
 image[:,:,2]=0
-#cv2.imshow("image ch0 = ch1 = ch2 = 0",image)
-plt.subplot(339)
+plt.subplot(337)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title('設定第2通道為0')
+
+print('再設定第1通道為0')
+image[:,:,1]=0
+plt.subplot(338)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('再設定第1通道為0')
+
+print('再設定第0通道為0')
+image[:,:,0]=0
+plt.subplot(339)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('再設定第0通道為0')
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print('將一圖分解成 藍 綠 紅 三通道')
+plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
 
 image = cv2.imread(filename)
 
@@ -162,35 +168,54 @@ b, g, r = cv2.split(image)
 bgr = cv2.merge([b, g, r])
 rgb = cv2.merge([r, g, b])
 
-cv2.imshow("image", image)   #原圖
-cv2.imshow("B-G-R OK", bgr)  #照BGR排列 OK
-cv2.imshow("R-G-B NG", rgb)  #照RGB排列 錯相
+plt.subplot(231)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('原圖')
+plt.subplot(232)
+plt.imshow(cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB))    #照BGR排列 OK
+plt.title('B-G-R OK')
+plt.subplot(233)
+plt.imshow(cv2.cvtColor(rgb, cv2.COLOR_BGR2RGB))    #照RGB排列 錯相
+plt.title('R-G-B NG')
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.subplot(234)
+plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
+plt.title('R分量')
+plt.subplot(235)
+plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
+plt.title('G分量')
+plt.subplot(236)
+plt.imshow(cv2.cvtColor(b, cv2.COLOR_BGR2RGB))
+plt.title('B分量')
+
+plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 print('測試 2')
 
 img = cv2.imread('images/girl.bmp')
 imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-plt.figure("顯示結果")
+
+plt.figure(num = '顯示結果', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title('原圖BGR OK')
 
 plt.subplot(122)
 plt.imshow(cv2.cvtColor(imgRGB, cv2.COLOR_BGR2RGB))
+plt.title('原圖RGB NG')
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-print('測試 3 subplot')
+
+plt.figure(num = '灰度圖像顯示演示', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 o = cv2.imread('images/8.bmp')
 g = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
-
-plt.figure("灰度圖像顯示演示")
 
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB), cmap = plt.cm.gray)
@@ -208,7 +233,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print('測試 4 subplot')
+plt.figure(num = '灰度圖像顯示演示', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 o = cv2.imread('images/girl.bmp')
 g = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
@@ -325,12 +350,12 @@ plt.plot(histr, color = 'r')
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-print('測試 12')
+
+plt.figure(num = 'subplot示例', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 img = cv2.imread('images/equ.bmp', cv2.IMREAD_GRAYSCALE)
 equ = cv2.equalizeHist(img)
 
-plt.figure("subplot示例")
 plt.subplot(121)
 plt.hist(img.ravel(), 256)
 
@@ -389,7 +414,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#配合圖形遮罩計算直方圖
+plt.figure(num = '配合圖形遮罩計算直方圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 image = cv2.imread(filename)	#讀取本機圖片
 

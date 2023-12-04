@@ -85,7 +85,8 @@ namespace vcs_DrAP
 
         private void bt_exit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
+            this.Close();
         }
 
         void bt_exit_setup()
