@@ -4,7 +4,12 @@ from bs4 import BeautifulSoup
 
 print('------------------------------------------------------------')	#60個
 
-url = "https://fchart.github.io/"
+print('抓取一個網頁的所有連結網址')
+#html使用<a>標籤來製作連結
+#抓取網頁所有的 <a href="XXXXXXXXXXXXX">YYYYYYYYYY</a> 之XXXXXXXXXXXXX部分 即網頁連結
+
+url = 'https://hispark.hccg.gov.tw/'    #新竹市路邊停車收費網
+
 response = requests.get(url)
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, "lxml")
@@ -14,18 +19,45 @@ if response.status_code == 200:
 else:
     print("錯誤! HTTP請求失敗...")
 
+print('抓取一個網頁的所有圖片連結網址')
+#html使用<img>來顯示圖片
+#<img src="https://hispark.hccg.gov.tw/uploadfile/images/relatedlink/relatedlink_2.jpg" width="170" height="67" border="0" />
+
+response = requests.get(url)
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, "lxml")
+    tags = soup("img")
+    for tag in tags:
+        print(tag.get("src", None))
+else:
+    print("錯誤! HTTP請求失敗...")
+
+
 print('------------------------------------------------------------')	#60個
 
-url = "https://fchart.github.io/"
+url = 'https://hispark.hccg.gov.tw/'    #新竹市路邊停車收費網
+
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
+
+print('找所有連結a')
 tags = soup("a")
+print('共找到', len(tags), '個連結')
+#print(tags)
+
+print('看第12個連結')
 tag = tags[12]
 print("URL網址: ", tag.get("href", None))
 print("標籤內容: ", tag.text)
 print("target屬性: ", tag["target"])
+
+print('找所有圖片img')
 tags = soup("img")
-tag = tags[1]
+print('共找到', len(tags), '個圖片')
+#print(tags)
+
+print('看第0個圖片')
+tag = tags[0]
 print("圖片網址: ", tag.get("src", None))
 print("alt屬性: ", tag["alt"])
 print("屬性: ", tag.attrs)
@@ -34,14 +66,19 @@ print('------------------------------------------------------------')	#60個
 
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
+
 soup = BeautifulSoup(response.text, "lxml")
+
 tag = soup.select_one("h2")
 print("h2: ", tag.text)
+
 tags = soup.select("b")
 print("b: ", tags[0].text)
+
 tag = soup.select_one("#q2")
 tag2 = tag.select_one("b")
 print("b: ", tag2.text)
+
 tags = soup.select(".response")
 print("li: ", tags[0].text)
 print("li: ", tags[1].text)
@@ -50,16 +87,22 @@ print('------------------------------------------------------------')	#60個
 
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
+
 soup = BeautifulSoup(response.text, "lxml")
+
 tag = soup.find("h2")
 print("h2: ", tag.text)
+
 tag = soup.find("b")
 print("b: ", tag.text)
+
 tags = soup.find_all("b")
 print("b: ", tags[0].text)
+
 tag = soup.find("li", {"id":"q2"})
 tag_q = tag.find("b")
 print("Question: ", tag_q.text)
+
 tags_a = tag.find_all("li", {"class":"response"})
 for tag in tags_a:
     print("Ans: ", tag.text)
@@ -68,16 +111,22 @@ print('------------------------------------------------------------')	#60個
 
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
+
 soup = BeautifulSoup(response.text, "lxml")
+
 tag = soup.find("h2")
 print("h2: ", tag.text)
+
 tag = soup.find("b")
 print("b: ", tag.text)
+
 tags = soup.find_all("b")
 print("b: ", tags[0].text)
+
 tag = soup.find("li", {"id":"q2"})
 tag_q = tag.find("b")
 print("Question: ", tag_q.text)
+
 tags_a = tag.find_all("li", class_="response")
 for tag in tags_a:                           
     print("Ans: ", tag.text)
@@ -85,6 +134,7 @@ for tag in tags_a:
 print('------------------------------------------------------------')	#60個
 
 url = "https://fchart.github.io/Elements.html"
+
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
 tags_li = soup.find_all("li", class_="response", limit=3)
@@ -93,17 +143,18 @@ print(tags_li)
 print('------------------------------------------------------------')	#60個
 
 url = "https://fchart.github.io/Elements.html"
+
 response = requests.get(url)
+
 soup = BeautifulSoup(response.text, "lxml")
+
 tag_ans1 = soup.find("li", class_="response")
 print(tag_ans1.text)
+
 tag_ans2 = tag_ans1.find_next()
 print(tag_ans2.text)
 
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-1-4.py
 
 import csv
 
@@ -117,8 +168,6 @@ with open(csvfile, 'w+', newline='') as fp:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-2-2.py
-
 import re
 
 str1 = """Joe's email is joe@gmail.com,  
@@ -129,11 +178,7 @@ if match:
 else:
     print("沒有找到符合的字串!")
     
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-2-2a.py
 
 import re
 
@@ -147,12 +192,8 @@ if match:
     print(match.group(2))
 else:
     print("沒有找到符合的字串!")
-    
-
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-2-2b.py
 
 import re
 
@@ -163,12 +204,8 @@ if match:
     print(match)
 else:
     print("沒有找到符合的字串!")
-    
-
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-2-2c.py
 
 import re
 
@@ -180,12 +217,8 @@ if match:
     print(match.group())
 else:
     print("沒有找到符合的字串!")
-    
-
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-2-3.py
 
 import requests
 import re
@@ -213,8 +246,6 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-3-2.py
-
 from selenium import webdriver
 
 driver = webdriver.Chrome("./chromedriver")
@@ -228,8 +259,6 @@ for tag in tags_li:
 driver.quit()
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-3-2a.py
 
 from selenium import webdriver
 
@@ -261,8 +290,6 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-4-1.py
-
 from fake_useragent import UserAgent
 
 ua = UserAgent()
@@ -273,8 +300,6 @@ print(ua.safari)
 print(ua.random)
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch05\ch5-4-1a.py
 
 import requests
 from fake_useragent import UserAgent
@@ -425,4 +450,9 @@ print(tag_title.text)
 driver.quit()
 
 print('------------------------------------------------------------')	#60個
+
+
+
+#html使用<div>標籤來分割網頁區塊，多用來指定套用CSS的範圍
+
 
