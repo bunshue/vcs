@@ -564,8 +564,40 @@ namespace vcs_Mix00
             }
         }
 
+        //以色調的PLC的命令位址和資料位址為基準
+        private const int ADDR_CMMMD_AWB = 0x1010;
+        private const int ADDR_DATA_AWB = 0x1080;
+        //PC的位址比PLC多0xA00
+        private const int OFFSET_PLC_PC = 0xA00;
+
+        //燒錄位址又比色調位址多
+        private const int OFFSET_AWB_CMMD = 0;
+        private const int OFFSET_AWB_DATA = 0;
+        private const int OFFSET_WD_CMMD = 0x20;
+        private const int OFFSET_WD_DATA = 0x40;
+
         private void button13_Click(object sender, EventArgs e)
         {
+
+            //燒錄位址又比色調位址多
+            int offset_cmmd_operation_mode = OFFSET_AWB_CMMD;
+            int offset_data_operation_mode = OFFSET_AWB_DATA;
+
+            richTextBox1.Text += "色調交握:\n";
+            richTextBox1.Text += "PLC CMMD : " + "W" + (ADDR_CMMMD_AWB + offset_cmmd_operation_mode).ToString("X4") + "\n";
+            richTextBox1.Text += "PLC DATA : " + "W" + (ADDR_DATA_AWB + offset_data_operation_mode).ToString("X4") + "\n";
+            richTextBox1.Text += "PC  CMMD : " + "W" + (ADDR_CMMMD_AWB + offset_cmmd_operation_mode + OFFSET_PLC_PC).ToString("X4") + "\n";
+            richTextBox1.Text += "PC  DATA : " + "W" + (ADDR_DATA_AWB + offset_data_operation_mode + OFFSET_PLC_PC).ToString("X4") + "\n";
+
+
+            offset_cmmd_operation_mode = OFFSET_WD_CMMD;
+            offset_data_operation_mode = OFFSET_WD_DATA;
+
+            richTextBox1.Text += "燒錄交握:\n";
+            richTextBox1.Text += "PLC CMMD : " + "W" + (ADDR_CMMMD_AWB + offset_cmmd_operation_mode).ToString("X4") + "\n";
+            richTextBox1.Text += "PLC DATA : " + "W" + (ADDR_DATA_AWB + offset_data_operation_mode).ToString("X4") + "\n";
+            richTextBox1.Text += "PC  CMMD : " + "W" + (ADDR_CMMMD_AWB + offset_cmmd_operation_mode + OFFSET_PLC_PC).ToString("X4") + "\n";
+            richTextBox1.Text += "PC  DATA : " + "W" + (ADDR_DATA_AWB + offset_data_operation_mode + OFFSET_PLC_PC).ToString("X4") + "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)
