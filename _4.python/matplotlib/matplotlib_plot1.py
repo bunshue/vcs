@@ -1,4 +1,4 @@
-# plot 集合
+# plot 集合 1
 
 import sys
 import matplotlib.pyplot as plt

@@ -14,11 +14,8 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-
 import pandas as pd
 
-
-'''
 x0 = np.arange(-5, 5, 1)
 y0 = np.arange(-5, 5, 1)
 x, y = np.meshgrid(x0, y0)
@@ -41,12 +38,9 @@ plt.scatter(z[:, 0], z[:, 1], s = 100)
 plt.grid()
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
 
-
-
-X, Y = np.meshgrid(np.linspace(-6,3,30), np.linspace(-8,5,30))
+X, Y = np.meshgrid(np.linspace(-6, 3, 30), np.linspace(-8, 5, 30))
 
 #ravel 拉平法
 
@@ -63,36 +57,25 @@ print('------------------------------------------------------------')	#60個
 """ fail
 #zip 高級組合法
 
-xx = [1,2,3,4]
+xx = [1, 2, 3, 4]
+yy = [5, 6, 7, 8]
+list(zip(xx, yy))
 
-yy = [5,6,7,8]
-
-list(zip(xx,yy))
-
-Z = list(zip(X,Y))
+Z = list(zip(X, Y))
 print(Z)
 
-plt.scatter(X, Y, s=50, c=Z)
+plt.scatter(X, Y, s = 50, c = Z)
 plt.show()
 """
 
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
-'''
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-N = 10
+N = 100
 
 sinc2d = np.zeros((N, N))
 for x, x1 in enumerate(np.linspace(-10, 10, N)):
      for y, x2 in enumerate(np.linspace(-10, 10, N)):
-         sinc2d[x,y] = np.sin(x1) * np.sin(x2) / (x1*x2)
+         sinc2d[x,y] = np.sin(x1) * np.sin(x2) / (x1 * x2)
 #print(sinc2d)
 
 # same
@@ -101,20 +84,10 @@ x2 = np.linspace(-10, 10, N)
 sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
 #print(sinc2d)
 
-
-
-
 plt.imshow(sinc2d)
 plt.show()
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
 
 
 print('------------------------------------------------------------')	#60個

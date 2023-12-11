@@ -51,32 +51,32 @@ dfcvs = DataFrame([
 ])
 
 dfcvs.columns = ['時間','開盤','最高','最低','收盤']
-dfcvs['時間']=pd.to_datetime(dfcvs['時間'],format="%Y/%m/%d-%H:%M")
+dfcvs['時間'] = pd.to_datetime(dfcvs['時間'],format = "%Y/%m/%d-%H:%M")
 
 #matplotlib的date2num將日期轉換爲浮點數，整數部分區分日期，小數區分小時和分鐘
-#因爲小數太小了，需要將小時和分鐘變成整數，需要乘以24（小時）×60（分鐘）=1440，這樣小時和分鐘也能成爲整數
+#因爲小數太小了，需要將小時和分鐘變成整數，需要乘以24（小時）×60（分鐘）= 1440，這樣小時和分鐘也能成爲整數
 #這樣就可以一分鐘就佔一個位置
 
  
 
-dfcvs['時間']=dfcvs['時間'].apply(lambda x:dates.date2num(x)*1440)
-data_mat=dfcvs.values
+dfcvs['時間'] = dfcvs['時間'].apply(lambda x:dates.date2num(x) * 1440)
+data_mat = dfcvs.values
     
-fig,ax=plt.subplots(figsize=(10, 6))
+fig,ax = plt.subplots(figsize = (10, 6))
  
-fig.subplots_adjust(bottom=0.1)   
-mpf.candlestick_ohlc(ax,data_mat,colordown='#53c156', colorup='#ff1717',width=0.2,alpha=1)
+fig.subplots_adjust(bottom = 0.1)   
+mpf.candlestick_ohlc(ax, data_mat, colordown = '#53c156', colorup = '#ff1717', width = 0.2, alpha = 1)
 
 #將x軸的浮點數格式化成日期小時分鐘
 #默認的x軸格式化是日期被dates.date2num之後的浮點數，因爲在上面乘以了1440，所以默認是錯誤的
 #只能自己將浮點數格式化爲日期時間分鐘
 #參考https://matplotlib.org/examples/pylab_examples/date_index_formatter.html
 class MyFormatter(Formatter):
-            def __init__(self, dates, fmt='%Y%m%d %H:%M'):
+            def __init__(self, dates, fmt = '%Y%m%d %H:%M'):
                 self.dates = dates
                 self.fmt = fmt
     
-            def __call__(self, x, pos=0):
+            def __call__(self, x, pos = 0):
                 'Return the label for time x at position pos'
                 ind = int(np.round(x))
                 #ind就是x軸的刻度數值，不是日期的下標
@@ -110,17 +110,17 @@ data_price = [1 ,2, 3, 4, 5]
 fig = plt.figure(figsize = (12, 10))
 grid = plt.GridSpec(12, 10, wspace = 0.5, hspace = 0.5)
 
-ax1 = fig.add_subplot(grid[0:8,0:12])   # 設置K線圖的尺寸
+ax1 = fig.add_subplot(grid[0 : 8, 0 : 12])   # 設置K線圖的尺寸
 
-#candlestick_ohlc(ax1, ohlc.values.tolist(), width=.7, colorup='red', colordown='green')
+#candlestick_ohlc(ax1, ohlc.values.tolist(), width = 0.7, colorup = 'red', colordown = 'green')
 
 # （2）繪制均線
-#ax1.plot(range(len(data_price)), data_price, color='red', lw=2, label='MA (5)')
+#ax1.plot(range(len(data_price)), data_price, color = 'red', lw = 2, label = 'MA (5)')
 
 # 設置標注
 plt.title('test', fontsize = 14)       # 設置圖片標題
 plt.ylabel('價 格（元）', fontsize = 14)   # 設置縱軸標題
-plt.legend(loc='best')                    # 繪制圖例
+plt.legend(loc = 'best')                    # 繪制圖例
 ax1.set_xticks([])                        # 日期標注在成交量中，故清空此處x軸刻度
 ax1.set_xticklabels([])                   # 日期標注在成交量中，故清空此處x軸
 
@@ -129,16 +129,16 @@ ax1.set_xticklabels([])                   # 日期標注在成交量中，故清
 
 data_volume = [3, 2, 1, 4, 6]
 # 繪制成交量
-ax2 = fig.add_subplot(grid[8:10,0:12])  # 設置成交量圖形尺寸
-#ax2.bar(data_volume, color='r')                    # 繪制紅色柱狀圖
-#ax2.bar(data_volume, color='g')                    # 繪制綠色柱狀圖
-plt.xticks(rotation=30) 
-plt.xlabel('日 期',fontsize = 14)                               # 設置橫軸標題
+ax2 = fig.add_subplot(grid[8 : 10, 0 : 12])  # 設置成交量圖形尺寸
+#ax2.bar(data_volume, color = 'r')                    # 繪制紅色柱狀圖
+#ax2.bar(data_volume, color = 'g')                    # 繪制綠色柱狀圖
+plt.xticks(rotation = 30) 
+plt.xlabel('日 期', fontsize = 14)                               # 設置橫軸標題
 # 修改橫軸日期標注
 date_list = [1, 2, 3, 4, 5]#ohlc.index.tolist()           # 獲取日期列表
-xticks_len = round(len(date_list)/(len(ax2.get_xticks())-1))      # 獲取默認橫軸標注的間隔
-xticks_num = range(0,len(date_list),xticks_len)                   # 生成橫軸標注位置列表
-xticks_str = list(map(lambda x:date_list[int(x)],xticks_num))     # 生成正在標注日期列表
+xticks_len = round(len(date_list) / (len(ax2.get_xticks()) - 1))      # 獲取默認橫軸標注的間隔
+xticks_num = range(0, len(date_list), xticks_len)                   # 生成橫軸標注位置列表
+xticks_str = list(map(lambda x:date_list[int(x)], xticks_num))     # 生成正在標注日期列表
 ax2.set_xticks(xticks_num)                                        # 設置橫軸標注位置
 ax2.set_xticklabels(xticks_str)                                   # 設置橫軸標注日期
 
@@ -148,24 +148,26 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 # 設定圖書分類及銷售額比例
-listx = ['商業理財','文學小說','藝術設計','人文科普','語言電腦','心靈養生','生活風格','親子共享']
-listm = [0.14,0.16,0.08,0.13,0.16,0.12,0.16,0.05] #男性比例
-listf = [0.1,0.19,0.06,0.1,0.13,0.13,0.2,0.09] #女性比例
+listx = ['商業理財', '文學小說', '藝術設計', '人文科普', '語言電腦', '心靈養生', '生活風格', '親子共享']
+listm = [0.14, 0.16, 0.08, 0.13, 0.16, 0.12, 0.16, 0.05] #男性比例
+listf = [0.1, 0.19, 0.06, 0.1, 0.13, 0.13, 0.2, 0.09] #女性比例
+
 # 將比例乘以100
-listm = [x*100 for x in listm] 
-listf = [x*100 for x in listf]
+listm = [x * 100 for x in listm] 
+listf = [x * 100 for x in listf]
+
 # 設定圖表區尺寸以及使用字型
-plt.figure(figsize=(12,9))
+plt.figure(figsize = (12, 9))
 
 # 男性圖書分類銷售率圖餅圖
 plt.subplot(221)
-plt.title('圖書分類銷售比率-男性', fontsize=16)
-plt.pie(listm, labels = listx, autopct='%2.1f%%')
+plt.title('圖書分類銷售比率-男性', fontsize = 16)
+plt.pie(listm, labels = listx, autopct = '%2.1f%%')
 
 # 女性圖書分類銷售率圖餅圖
 plt.subplot(222)
-plt.title('圖書分類銷售比率-女性', fontsize=16)
-plt.pie(listf, labels = listx, autopct='%2.1f%%')
+plt.title('圖書分類銷售比率-女性', fontsize = 16)
+plt.pie(listf, labels = listx, autopct = '%2.1f%%')
 
 # 圖書分類男女銷售率長條圖
 plt.subplot(223)
@@ -173,25 +175,25 @@ width = 0.4
 listx1 = [x- width/2 for x in range(len(listx))]
 listx2 = [x+ width/2 for x in range(len(listx))]
 
-plt.title('圖書分類銷售長條圖-性別', fontsize=16)
-plt.xlabel('圖書分類', fontsize=12)
-plt.ylabel('銷售比率(%)', fontsize=12)
+plt.title('圖書分類銷售長條圖-性別', fontsize = 16)
+plt.xlabel('圖書分類', fontsize = 12)
+plt.ylabel('銷售比率(%)', fontsize = 12)
 
-plt.bar(listx1, listm, width, label='男')
-plt.bar(listx2, listf, width, label='女')
-plt.xticks(range(len(listx)), labels=listx, rotation=45)
+plt.bar(listx1, listm, width, label = '男')
+plt.bar(listx2, listf, width, label = '女')
+plt.xticks(range(len(listx)), labels = listx, rotation = 45)
 plt.legend()
 
 # 圖書分類男女銷售率折線圖
 plt.subplot(224)
-plt.title('圖書分類銷售折線圖-性別', fontsize=16)
-plt.xlabel('圖書分類', fontsize=12)
-plt.ylabel('銷售比率(%)', fontsize=12)
+plt.title('圖書分類銷售折線圖-性別', fontsize = 16)
+plt.xlabel('圖書分類', fontsize = 12)
+plt.ylabel('銷售比率(%)', fontsize = 12)
 
-plt.plot(listx, listm, marker='s', label='男')
-plt.plot(listx, listf, marker='s', label='女')
+plt.plot(listx, listm, marker = 's', label = '男')
+plt.plot(listx, listf, marker = 's', label = '女')
 plt.gca().grid(True)
-plt.xticks(rotation=45)
+plt.xticks(rotation = 45)
 plt.legend()
 
 plt.show()
@@ -202,7 +204,7 @@ n = np.linspace(1.1, 10, 90)            # 建立1.1-10的陣列
 count = 0                               # 用於計算每5筆輸出換行
 for i in n:
     count += 1
-    print('{0:2.1f} = {1:4.3f}'.format(i, np.log10(i)), end='    ')
+    print('{0:2.1f} = {1:4.3f}'.format(i, np.log10(i)), end = '    ')
     if count % 5 == 0:                  # 每5筆輸出就換行
         print()
 
@@ -210,7 +212,7 @@ print('------------------------------------------------------------')	#60個
 
 degrees = [30, 45, 60, 90, 120, 135, 150, 180]
 for degree in degrees:
-    print('角度 = {0:3d},   弧度 = {1:6.3f}'.format(degree, math.pi*degree/180))
+    print('角度 = {0:3d},   弧度 = {1:6.3f}'.format(degree, math.pi * degree / 180))
 
 print('------------------------------------------------------------')	#60個
 
@@ -296,7 +298,7 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
 
-dat = pd.read_csv(filename, encoding='UTF-8')
+dat = pd.read_csv(filename, encoding = 'UTF-8')
 print(dat.head())
 
 print('------------------------------------------------------------')	#60個
@@ -305,7 +307,7 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
 
-dat = pd.read_csv(filename, encoding='UTF-8')
+dat = pd.read_csv(filename, encoding = 'UTF-8')
 
 # 平均數、中位數
 print('平均數', np.mean(dat['數學']))
@@ -321,7 +323,7 @@ print('亂數')
 
 rand = [] 
 for i in range(10):
-    rand.append(random.randint(0,100)) # 產生0～100的亂數
+    rand.append(random.randint(0, 100)) # 產生0～100的亂數
 print(rand)
 
 print('------------------------------------------------------------')	#60個
@@ -364,12 +366,12 @@ print('------------------------------------------------------------')	#60個
 
 """
 plt.xticks(range(0,5500,500))
-plt.tick_params(axis='both', labelsize=10, color='red')
+plt.tick_params(axis = 'both', labelsize = 10, color = 'red')
 
-plt.bar(listx, listy, width=0.5, color='r')
+plt.bar(listx, listy, width = 0.5, color = 'r')
 
 
-plt.barh(listy, listx, height=0.5, color='r')
+plt.barh(listy, listx, height = 0.5, color = 'r')
 
 
 """

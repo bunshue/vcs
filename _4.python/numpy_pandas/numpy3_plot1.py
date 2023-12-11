@@ -14,7 +14,11 @@ W, H, D = 5, 5, 3
 print('建立 0 ~ 255 的隨機陣列')
 image1 = np.random.randint(0, 256, size = [W, H, D], dtype = np.uint8)
 print(image1.shape)
-#print(image1)
+
+image1[:, :, 0] = 0;    #R通道
+image1[:, :, 1] = 0;    #G通道
+image1[:, :, 2] = 0;    #B通道
+print(image1)
 
 plt.imshow(image1)
 plt.show()
