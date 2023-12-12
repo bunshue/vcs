@@ -14,7 +14,7 @@ namespace vcs_SendTo_All
 {
     public partial class Form1 : Form
     {
-        int flag_operation_mode = MODE0;
+        int flag_operation_mode = MODE6;
 
         private const int MODE0 = 0x00;   //顯示檔案名稱
         private const int MODE1 = 0x01;   //檢視檔案內容
@@ -23,6 +23,9 @@ namespace vcs_SendTo_All
         private const int MODE4 = 0x04;   //grep 一層
         private const int MODE5 = 0x05;   //grep 多層
         private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字
+
+        bool flag_show_big_files_only = false;  //false : 顯示所有檔案, true : 僅顯示大檔
+        long file_size_limit = 0;   //檔案界限
 
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
@@ -72,6 +75,18 @@ namespace vcs_SendTo_All
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            flag_show_big_files_only = Properties.Settings.Default.show_big_files_only;
+            if (flag_show_big_files_only == true)
+            {
+                richTextBox1.Text += "僅顯示大檔, ";
+                file_size_limit = Properties.Settings.Default.file_size_limit * 1024 * 1024;
+                richTextBox1.Text += "檔案界限 : " + file_size_limit.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "顯示所有檔案\n";
+            }
+
             if (flag_operation_mode == MODE0)
                 this.Text = "顯示檔案名稱";
             else if (flag_operation_mode == MODE1)
@@ -80,10 +95,20 @@ namespace vcs_SendTo_All
                 this.Text = "簡中轉正中";
             else if (flag_operation_mode == MODE3)
                 this.Text = "計算檔案之MD5值";
+            else if (flag_operation_mode == MODE6)
+            {
+                if (flag_show_big_files_only == false)
+                    this.Text = "轉出檔案目錄資料 目錄下檔名轉出純文字(全部)";
+                else
+                    this.Text = "轉出檔案目錄資料 目錄下檔名轉出純文字(僅大檔)";
+            }
             else
                 this.Text = "未定義";
 
             bt_copy.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y);
+            bt_save.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width * 2, richTextBox1.Location.Y);
+            bt_setup.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height);
+
             string sendto_folder = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
             //richTextBox1.Text += "[傳送到]資料夾位置:\n" + sendto_folder + "\n";
 
@@ -149,6 +174,11 @@ namespace vcs_SendTo_All
                 {
                     //簡中轉正中
                     convert_sc_to_tc(filename);
+                }
+                else if (flag_operation_mode == MODE6)
+                {
+                    //轉出檔案目錄資料 目錄下檔名轉出純文字 全部
+                    export_filename(filename, 0);
                 }
             }
         }
@@ -235,6 +265,100 @@ namespace vcs_SendTo_All
             {
                 MessageBox.Show("找不到檔案");
             }
+        }
+
+        //轉出檔案目錄資料 目錄下檔名轉出純文字
+        void export_filename(string target_dir, int mode)
+        {
+            //mode = 0 匯出所有檔案
+            //mode = 1 僅匯出大檔
+
+            if (Directory.Exists(target_dir) == false)     //確認資料夾是否存在
+                return;
+            //撈出多層
+            //string target_dir = @"C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路";
+            richTextBox1.Text += "資料夾: " + target_dir + "\n";
+            ShowDirectory(target_dir, mode);
+        }
+
+        public bool ShowDirectory(string target_dir, int mode)
+        {
+            bool result = false;
+            string[] files = Directory.GetFiles(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
+            richTextBox1.Text += "資料夾: " + target_dir + "\t";
+            richTextBox1.Text += "檔案個數 = " + files.Length.ToString() + "\n";
+            foreach (string file in files)
+            {
+                FileInfo fi = new FileInfo(file);
+                long filesize = fi.Length;
+
+                //richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
+                //richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
+                //richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
+                //richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
+                //richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
+                //richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
+
+
+                if ((mode == 0) || ((mode == 1) && (filesize > 1024 * 1024 * 1024)))
+                {
+                    richTextBox1.Text += "檔案: " + file + "\t";
+                    richTextBox1.Text += "Size: " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+                }
+            }
+            richTextBox1.Text += "\n";
+            foreach (string dir in dirs)
+            {
+                //richTextBox1.Text += "資料夾: " + dir + "\n";
+                ShowDirectory(dir, mode);
+            }
+            return result;
+        }
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            string filename = "filename_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+
+            saveFileDialog1.Title = "儲存資料";
+            saveFileDialog1.FileName = filename;
+            saveFileDialog1.Filter = "文字檔|*.txt|所有檔|*.*";   //限定檔案格式
+            saveFileDialog1.FilterIndex = 1;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.InitialDirectory = Application.StartupPath; //從目前目錄開始尋找檔案
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //richTextBox1.Text += "2 get filename : " + saveFileDialog1.FileName + "\n";
+                //richTextBox1.Text += "length : " + saveFileDialog1.FileName.Length.ToString() + "\n";
+
+                //StreamReader sr = new StreamReader(saveFileDialog1.FileName);
+                //StreamReader sr = new StreamReader(fileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+
+                FileStream filestream = File.Open(saveFileDialog1.FileName, FileMode.Create);
+                StreamWriter str_writer = new StreamWriter(filestream);
+
+                str_writer.WriteLine(richTextBox1.Text);
+                // Dispose StreamWriter
+                str_writer.Dispose();
+                // Close FileStream
+                filestream.Close();
+
+                richTextBox1.Text += "儲存資料完畢，檔案：" + saveFileDialog1.FileName + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+        }
+
+        private void bt_setup_Click(object sender, EventArgs e)
+        {
+            //設定頁
+
+            Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
+            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示 frm 視窗
         }
     }
 }

@@ -1822,7 +1822,8 @@ namespace vcs_DiskDirectoryFile1
             foreach (string file in files)
             {
                 richTextBox1.Text += "檔案: " + file + "\t";
-                richTextBox1.Text += "Size: " + file.Length.ToString() + " 拜\n";
+                //richTextBox1.Text += "Size: " + file.Length.ToString() + " 拜\n"; wrong
+
             }
             richTextBox1.Text += "\n";
             foreach (string dir in dirs)

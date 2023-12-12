@@ -22,5 +22,29 @@ namespace vcs_SendTo_All.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public long file_size_limit {
+            get {
+                return ((long)(this["file_size_limit"]));
+            }
+            set {
+                this["file_size_limit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool show_big_files_only {
+            get {
+                return ((bool)(this["show_big_files_only"]));
+            }
+            set {
+                this["show_big_files_only"] = value;
+            }
+        }
     }
 }

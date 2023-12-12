@@ -19,8 +19,16 @@ print('用np建立一個影像陣列')
 W = 640
 H = 480
 D = 3
-image = np.ones([H, W, D], dtype = np.uint8)*128  # 填滿 128
 
+#建立陣列
+image = np.ones([H, W, D], dtype = np.uint8) * 128  # 填滿 128
+
+#改變陣列內容
+image[:, :, 0] = 0;     #第0通道 B
+image[:, :, 1] = 255;   #第1通道 G
+image[:, :, 2] = 255;   #第2通道 R
+
+#做resize
 size = H, W
 print(size)
 rst = cv2.resize(image, size)
@@ -44,7 +52,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# 51 X 512 之紅圖
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 print('讀取圖檔 :', filename)
 image = cv2.imread(filename)

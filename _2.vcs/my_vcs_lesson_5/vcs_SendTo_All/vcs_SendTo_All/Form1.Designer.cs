@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_copy = new System.Windows.Forms.Button();
+            this.bt_save = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.bt_setup = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -56,11 +59,39 @@
             this.bt_copy.UseVisualStyleBackColor = true;
             this.bt_copy.Click += new System.EventHandler(this.bt_copy_Click);
             // 
+            // bt_save
+            // 
+            this.bt_save.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_save.BackgroundImage")));
+            this.bt_save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bt_save.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save.ForeColor = System.Drawing.Color.Black;
+            this.bt_save.Location = new System.Drawing.Point(524, 12);
+            this.bt_save.Name = "bt_save";
+            this.bt_save.Size = new System.Drawing.Size(40, 40);
+            this.bt_save.TabIndex = 45;
+            this.bt_save.UseVisualStyleBackColor = true;
+            this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
+            // 
+            // bt_setup
+            // 
+            this.bt_setup.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_setup.BackgroundImage")));
+            this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bt_setup.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_setup.ForeColor = System.Drawing.Color.Black;
+            this.bt_setup.Location = new System.Drawing.Point(570, 58);
+            this.bt_setup.Name = "bt_setup";
+            this.bt_setup.Size = new System.Drawing.Size(40, 40);
+            this.bt_setup.TabIndex = 46;
+            this.bt_setup.UseVisualStyleBackColor = true;
+            this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 535);
+            this.Controls.Add(this.bt_setup);
+            this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_copy);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
@@ -74,6 +105,9 @@
 
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_copy;
+        private System.Windows.Forms.Button bt_save;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button bt_setup;
     }
 }
 
