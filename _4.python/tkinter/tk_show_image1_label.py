@@ -48,7 +48,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/�
 
 image2 = Image.open(filename)
 image2 = ImageTk.PhotoImage(image2)
-label2 = tk.Label(image = image2)
+label2 = tk.Label(window, image = image2)   #用Label顯示圖片
 label2.image = image
 label2.pack()
 
