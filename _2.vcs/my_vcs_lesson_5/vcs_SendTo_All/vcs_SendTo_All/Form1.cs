@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Runtime.InteropServices;   //for DllImport
 using System.IO;                        //for FileAccess, File
+using System.Runtime.InteropServices;   //for DllImport
+using System.Globalization; //for CultureInfo
+
+using MediaInfoNET;
 
 namespace vcs_SendTo_All
 {
@@ -26,6 +29,12 @@ namespace vcs_SendTo_All
 
         bool flag_show_big_files_only = false;  //false : 顯示所有檔案, true : 僅顯示大檔
         long file_size_limit = 0;   //檔案界限
+
+        Int64 total_size = 0;
+        Int64 total_files = 0;
+        Int64 total_folders = 0;
+        Int64 folder_size = 0;
+        Int64 folder_files = 0;
 
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
         const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
@@ -66,6 +75,64 @@ namespace vcs_SendTo_All
             String tTarget = new String(' ', strGB2312.Length);
             int tReturn = LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_TRADITIONAL_CHINESE, strGB2312, strGB2312.Length, tTarget, strGB2312.Length);
             return tTarget;
+        }
+
+        //不用宣告長度的陣列(Array)
+        // 宣告fileinfos 為List
+        // 以下List 裡為MyFileInfo 型態
+        List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+        List<MyFolderInfo> folderinfos = new List<MyFolderInfo>();
+
+        public class MyFileInfo
+        {
+            public string filename;
+            public string filepath;
+            public string fileextension;
+            public long filesize;
+            public DateTime filecreationtime;
+
+            public int video_width;
+            public int video_height;
+            public int video_fps;
+            public string video_duration;
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+            }
+
+            public MyFileInfo(string n, string p, string e, long s, DateTime c, int w, int h, int f, string d)
+            {
+                this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+
+                this.video_width = w;
+                this.video_height = h;
+                this.video_fps = f;
+                this.video_duration = d;
+            }
+        }
+
+        public class MyFolderInfo
+        {
+            public string foldername;
+            public string folderpath;
+            public long foldersize;
+            public DateTime foldercreationtime;
+            public MyFolderInfo(string n, string p, long s, DateTime c)
+            {
+                this.foldername = n;
+                this.folderpath = p;
+                this.foldersize = s;
+                this.foldercreationtime = c;
+            }
         }
 
         public Form1()
@@ -136,7 +203,7 @@ namespace vcs_SendTo_All
                 {
                     richTextBox1.Text += filename + "\t";
 
-                    if (File.Exists(filename) == true)
+                    if (System.IO.File.Exists(filename) == true)
                     {
                         FileInfo fi;
 
@@ -181,6 +248,53 @@ namespace vcs_SendTo_All
                     export_filename(filename, 0);
                 }
             }
+
+            fileinfos.Clear();
+            total_size = 0;
+            total_files = 0;
+
+            //string foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_SendTo_All\vcs_SendTo_All\bin\Debug";
+            string foldername = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案\小赠品";
+            export_filename(foldername, 0);
+
+            if (fileinfos.Count == 0)
+                richTextBox1.Text += "找不到資料\n";
+            else
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+
+            for (i = 0; i < fileinfos.Count; i++)
+            {
+                richTextBox1.Text += fileinfos[i].filename + "\n";
+
+                MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + fileinfos[i].filename);
+                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
+                {
+                    richTextBox1.Text += "影片檔案\n";
+
+                    FileInfo fi = new FileInfo(fileinfos[i].filename);
+                    //richTextBox1.Text += fi.FullName + "\n";
+                    //richTextBox1.Text += fi.Length + "\n";
+                    //richTextBox1.Text += f.Video[0].FrameRate.ToString()+"\n";
+                    //richTextBox1.Text += f.General.DurationString + "\n";
+
+                    int w = f.Video[0].Width;
+                    int h = f.Video[0].Height;
+                    richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                    richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                    //richTextBox1.Text += "  xxxxx: " + xxxxx + "\n";
+
+
+                    richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                        fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(12345)), w.ToString(), h.ToString(),
+                        f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+
+                }
+                else
+                {
+                    richTextBox1.Text += "非 影片檔案\n";
+
+                }
+            }
         }
 
         private void bt_copy_Click(object sender, EventArgs e)
@@ -197,7 +311,7 @@ namespace vcs_SendTo_All
 
             StringBuilder sb = new StringBuilder();
 
-            string[] Txt_All_Lines = File.ReadAllLines(filename, Encoding.GetEncoding("utf-8"));   //指名編碼格式
+            string[] Txt_All_Lines = System.IO.File.ReadAllLines(filename, Encoding.GetEncoding("utf-8"));   //指名編碼格式
 
             foreach (string Single_Line in Txt_All_Lines)
             {
@@ -213,7 +327,7 @@ namespace vcs_SendTo_All
         {
             richTextBox1.Text += "\n#檔案 : " + filename + "\n\n";
 
-            if (File.Exists(filename) == true)  //確認檔案是否存在
+            if (System.IO.File.Exists(filename) == true)  //確認檔案是否存在
             {
                 richTextBox1.Text += "檔名(包含副檔名)： " + Path.GetFileName(filename) + "\n";
                 richTextBox1.Text += "檔名(不包含副檔名)： " + Path.GetFileNameWithoutExtension(filename) + "\n";
@@ -229,9 +343,9 @@ namespace vcs_SendTo_All
 
                 richTextBox1.Text += "新檔名： " + backup_filename + "\n";
 
-                if (File.Exists(backup_filename) == false)
+                if (System.IO.File.Exists(backup_filename) == false)
                 {
-                    File.Copy(filename, backup_filename);     //若檔案已存在, 會出現IOException
+                    System.IO.File.Copy(filename, backup_filename);     //若檔案已存在, 會出現IOException
                 }
                 else
                 {
@@ -247,7 +361,7 @@ namespace vcs_SendTo_All
 
             try
             {
-                string all_text = File.ReadAllText(filename, Encoding.UTF8);
+                string all_text = System.IO.File.ReadAllText(filename, Encoding.UTF8);
 
                 //簡中轉正中
                 string all_tc_text = GB2312translateBig5(all_text);
@@ -293,18 +407,22 @@ namespace vcs_SendTo_All
                 FileInfo fi = new FileInfo(file);
                 long filesize = fi.Length;
 
-                //richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
-                //richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
-                //richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
-                //richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
-                //richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
-                //richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
-
+                /*
+                richTextBox1.Text += "資料夾：" + fi.Directory + Environment.NewLine;
+                richTextBox1.Text += "檔名：" + fi.Name + Environment.NewLine;
+                richTextBox1.Text += "檔案大小：" + fi.Length.ToString() + Environment.NewLine;
+                richTextBox1.Text += "建立時間1：" + fi.CreationTime.ToString() + Environment.NewLine;
+                richTextBox1.Text += "建立時間2：" + fi.CreationTimeUtc.ToString() + Environment.NewLine;
+                richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
+                */
 
                 if ((mode == 0) || ((mode == 1) && (filesize > 1024 * 1024 * 1024)))
                 {
                     richTextBox1.Text += "檔案: " + file + "\t";
                     richTextBox1.Text += "Size: " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+                    string FolederName = fi.Directory.ToString();
+                    fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
                 }
             }
             richTextBox1.Text += "\n";
@@ -335,7 +453,7 @@ namespace vcs_SendTo_All
                 //StreamReader sr = new StreamReader(saveFileDialog1.FileName);
                 //StreamReader sr = new StreamReader(fileName, Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
 
-                FileStream filestream = File.Open(saveFileDialog1.FileName, FileMode.Create);
+                FileStream filestream = System.IO.File.Open(saveFileDialog1.FileName, FileMode.Create);
                 StreamWriter str_writer = new StreamWriter(filestream);
 
                 str_writer.WriteLine(richTextBox1.Text);

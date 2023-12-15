@@ -144,7 +144,7 @@ namespace vcs_DrAP
 
             update_default_setting();
 
-            //search_path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+            //search_path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
             //this.listBox1.Items.Add(search_path);
             // 可用foreach 取出List 裡的值
             //richTextBox2.Text += "\n可用foreach 取出List 裡的值\n";
@@ -409,7 +409,7 @@ namespace vcs_DrAP
 
             if (path == String.Empty)
                 path = search_path;
-            //path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+            //path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
 
             FolederName = path;
             richTextBox1.Text += path + "\n\n";
