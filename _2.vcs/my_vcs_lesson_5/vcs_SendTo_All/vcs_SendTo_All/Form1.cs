@@ -17,7 +17,7 @@ namespace vcs_SendTo_All
 {
     public partial class Form1 : Form
     {
-        int flag_operation_mode = MODE6;
+        int flag_operation_mode = MODE0;
 
         private const int MODE0 = 0x00;   //顯示檔案名稱
         private const int MODE1 = 0x01;   //檢視檔案內容
@@ -320,7 +320,7 @@ namespace vcs_SendTo_All
 
             richTextBox1.Text += sb.ToString() + "\n";
 
-            richTextBox1.Text += "print('------------------------------------------------------------')	#60個\n";
+            richTextBox1.Text += "print(\"------------------------------------------------------------\")  # 60個\n";
         }
 
         void convert_sc_to_tc(string filename)
