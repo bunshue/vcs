@@ -17,7 +17,7 @@ namespace vcs_SendTo_All
 {
     public partial class Form1 : Form
     {
-        int flag_operation_mode = MODE0;
+        int flag_operation_mode = MODE1;
 
         private const int MODE0 = 0x00;   //顯示檔案名稱
         private const int MODE1 = 0x01;   //檢視檔案內容
@@ -151,7 +151,7 @@ namespace vcs_SendTo_All
             }
             else
             {
-                richTextBox1.Text += "顯示所有檔案\n";
+                //richTextBox1.Text += "顯示所有檔案\n";
             }
 
             if (flag_operation_mode == MODE0)
@@ -249,6 +249,7 @@ namespace vcs_SendTo_All
                 }
             }
 
+            /*
             fileinfos.Clear();
             total_size = 0;
             total_files = 0;
@@ -295,6 +296,7 @@ namespace vcs_SendTo_All
 
                 }
             }
+            */
         }
 
         private void bt_copy_Click(object sender, EventArgs e)
