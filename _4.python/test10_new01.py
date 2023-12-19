@@ -1082,60 +1082,62 @@ if decimal == None:
 else:
     print("The decimal value for hex number", hex, "is", decimal) 
 '''
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import os
+
 print(os.name)
 print(os.sys.platform)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-for envname in 'TMPDIR', 'TEMP', 'TMP':
+for envname in "TMPDIR", "TEMP", "TMP":
     dirname = os.getenv(envname)
-    print('cccccc', dirname)
-    #print(dirname)
+    print("cccccc", dirname)
+    # print(dirname)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import numpy as np
 import pandas as pd
 
 print(np.__version__)
 
-import numpy 
+import numpy
+
 print(numpy.version.version)
 
-#使用 importlib.metadata 模块查找 NumPy 模块的版本
+# 使用 importlib.metadata 模块查找 NumPy 模块的版本
 from importlib_metadata import version
-print(version('numpy'))
+
+print(version("numpy"))
 
 import pkg_resources
-print(pkg_resources.get_distribution('numpy').version)
+
+print(pkg_resources.get_distribution("numpy").version)
 
 
-print('查詢已安裝的 Pandas 版本')
+print("查詢已安裝的 Pandas 版本")
 print(pd.__version__)
 
 import pandas as pd
+
 print(pd.__version__)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#import this	可以看到 Zen of Python
+# import this	可以看到 Zen of Python
 
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
 import sys
 
-'''
+"""
 import shutil
 import os
 
@@ -1183,8 +1185,8 @@ if os.path.exists(source):
         print("目標資料夾已存在，無法進行。")
 else:    
     print("找不到來源資料夾。")
-'''
-print('------------------------------------------------------------')	#60個
+"""
+print("------------------------------------------------------------")  # 60個
 
 import os
 from PIL import Image
@@ -1203,7 +1205,7 @@ post_html = """
 </body>
 </html>
 """
-'''
+"""
 table_html = ""
 
 source = input("請輸入來源資料夾：")
@@ -1234,8 +1236,8 @@ else:
 html = pre_html + table_html + post_html
 with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
     f.write(html)
-'''
-print('------------------------------------------------------------')	#60個
+"""
+print("------------------------------------------------------------")  # 60個
 
 import os
 from PIL import Image
@@ -1259,7 +1261,7 @@ post_html = """
 
 
 table_html = ""
-'''
+"""
 source = input("請輸入來源資料夾：")
 if os.path.exists(source):
     target = input("請輸入目標資料夾：")
@@ -1290,29 +1292,28 @@ else:
 html = pre_html + table_html + post_html
 with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
     f.write(html)
-'''
-print('------------------------------------------------------------')	#60個
+"""
+print("------------------------------------------------------------")  # 60個
 
 from stat import *
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-    
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
 st = os.lstat(filename)
 
 itime = ST_MTIME
-#itime = ST_CTIME
+# itime = ST_CTIME
 anytime = st[itime]
 size = st[ST_SIZE]
-print('檔案大小 :', size, '拜')
+print("檔案大小 :", size, "拜")
 
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
 import os
 import sys
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 
 short_filename = os.path.basename(filename)
@@ -1327,58 +1328,55 @@ print(head)
 print(tail)
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
 import sys
 import os
-    
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 canonic = os.path.abspath(filename)
 print(canonic)
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 canonic = os.path.normcase(filename)
 print(canonic)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 import datetime
 
-text = '2012-09-20'
-y = datetime.datetime.strptime(text, '%Y-%m-%d')
+text = "2012-09-20"
+y = datetime.datetime.strptime(text, "%Y-%m-%d")
 z = datetime.datetime.now()
 diff = z - y
 print(diff)
 
 print(z)
-nice_z = datetime.datetime.strftime(z, '%A %B %d, %Y')
+nice_z = datetime.datetime.strftime(z, "%A %B %d, %Y")
 print(nice_z)
 
 
-text = '2012-09-20'
-year_s, mon_s, day_s = text.split('-')
+text = "2012-09-20"
+year_s, mon_s, day_s = text.split("-")
 ttt = datetime.datetime(int(year_s), int(mon_s), int(day_s))
 print(ttt)
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('計算字數')
+print("計算字數")
+
 
 def count_words(filename):
     """Count the approximate number of words in a file."""
     try:
-        with open(filename, encoding='utf-8') as f:
+        with open(filename, encoding="utf-8") as f:
             contents = f.read()
     except FileNotFoundError:
         pass
@@ -1387,26 +1385,31 @@ def count_words(filename):
         num_words = len(words)
         print(f"The file {filename} has about {num_words} words.")
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/siddhartha.txt'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_dick.txt'
-filename4 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt'
+
+filename1 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
+filename2 = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/siddhartha.txt"
+)
+filename3 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_dick.txt"
+filename4 = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
+)
 
 filenames = [filename1, filename2, filename3, filename4]
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
+filename = "C:/_git/vcs/_1.data/______test_files1/poetry2.txt"
 
 for filename in filenames:
     count_words(filename)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('統計一個檔案的字數')
+print("統計一個檔案的字數")
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt'
+filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
 
 try:
-    with open(filename, encoding='utf-8') as f:
+    with open(filename, encoding="utf-8") as f:
         contents = f.read()
 except FileNotFoundError:
     print(f"Sorry, the file {filename} does not exist.")
@@ -1417,7 +1420,7 @@ else:
     print(f"The file {filename} has about {num_words} words.")
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 '''
 c = list(b)         #list
@@ -1556,172 +1559,200 @@ print(', '.join(rolls), end='')
 
 '''
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#位元運算子綜合應用
-x = 12; y = 8
-print(x & y)  
-print(x ^ y)   
-print(x | y)  
+# 位元運算子綜合應用
+x = 12
+y = 8
+print(x & y)
+print(x ^ y)
+print(x | y)
 print(~x)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-word = ["holiday", "happy", "birth",
-             "yesterday", "holiday", "car",
-             "yellow", "happy", "mobile",
-             "cup", "happy", "holiday",
-             "holiday", "desk", "birth",
-             ]
+word = [
+    "holiday",
+    "happy",
+    "birth",
+    "yesterday",
+    "holiday",
+    "car",
+    "yellow",
+    "happy",
+    "mobile",
+    "cup",
+    "happy",
+    "holiday",
+    "holiday",
+    "desk",
+    "birth",
+]
 print("holiday 出現的次數", word.count("holiday"))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-word = ["holiday", "happy", "birth",
-             "yesterday", "holiday", "car",
-             "yellow", "happy", "mobile",
-             "cup", "happy", "holiday",
-             "holiday", "desk", "birth",
-             ]
-search_str="yellow"
-print("單字 %s 第一次出現的索引值%d" %(search_str,word.index(search_str)))
+word = [
+    "holiday",
+    "happy",
+    "birth",
+    "yesterday",
+    "holiday",
+    "car",
+    "yellow",
+    "happy",
+    "mobile",
+    "cup",
+    "happy",
+    "holiday",
+    "holiday",
+    "desk",
+    "birth",
+]
+search_str = "yellow"
+print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search_str)))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-info = [['C程式設計','朱大峰','480'],
-        ['Python程式設計','吳志明','500'],
-        ['Java程式設計','許伯如','540']]
+info = [
+    ["C程式設計", "朱大峰", "480"],
+    ["Python程式設計", "吳志明", "500"],
+    ["Java程式設計", "許伯如", "540"],
+]
 
-for(book, author,price) in info:
-    print('%10s %3s'%(book,author),' 書籍訂價:',price)
+for book, author, price in info:
+    print("%10s %3s" % (book, author), " 書籍訂價:", price)
 
 
-info = [['C程式設計','朱大峰','480'],
-        ['Python程式設計','吳志明','500'],
-        ['Java程式設計','許伯如','540']]
+info = [
+    ["C程式設計", "朱大峰", "480"],
+    ["Python程式設計", "吳志明", "500"],
+    ["Java程式設計", "許伯如", "540"],
+]
 
-for(book, author,price) in info:
-    print('%10s %3s'%(book,author),' 書籍訂價:',price)
+for book, author, price in info:
+    print("%10s %3s" % (book, author), " 書籍訂價:", price)
 
-str1 = '淡泊以明志，寧靜以致遠'
-print('原字串', str1)
-print('欄寬20，字串置中', str1.center(20))
-print('字串置中，# 填補', str1.center(20, '#'))
-print('欄寬20，字串靠左', str1.ljust(20, '@'))
-print('欄寬20，字串靠右', str1.rjust(20, '!'))
+str1 = "淡泊以明志，寧靜以致遠"
+print("原字串", str1)
+print("欄寬20，字串置中", str1.center(20))
+print("字串置中，# 填補", str1.center(20, "#"))
+print("欄寬20，字串靠左", str1.ljust(20, "@"))
+print("欄寬20，字串靠右", str1.rjust(20, "!"))
 
-mobilephone = '931828736'
-print('字串左側補0:', mobilephone.zfill(10))
+mobilephone = "931828736"
+print("字串左側補0:", mobilephone.zfill(10))
 
-str2 = 'Time create hero.,I love my family.'
-print('以逗點分割字元', str2.partition(','))
+str2 = "Time create hero.,I love my family."
+print("以逗點分割字元", str2.partition(","))
 
-str3 = '忠孝\n仁愛\n信義\n和平'
-print('依\\n分割字串', str3.splitlines(False))
+str3 = "忠孝\n仁愛\n信義\n和平"
+print("依\\n分割字串", str3.splitlines(False))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-result = lambda x : 3 * x - 1  #lambda()函數
-print(result(3)) #輸出數值8
+result = lambda x: 3 * x - 1  # lambda()函數
+print(result(3))  # 輸出數值8
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-def formula(x, y): #自訂函數
+
+def formula(x, y):  # 自訂函數
     return 3 * x + 2 * y
 
-result = lambda x : 3 * x - 1  #lambda()函數
-print(result(3)) #輸出數值8
 
-def formula(x, y): #自訂函數
+result = lambda x: 3 * x - 1  # lambda()函數
+print(result(3))  # 輸出數值8
+
+
+def formula(x, y):  # 自訂函數
     return 3 * x + 2 * y
 
-formula = lambda x, y : 3 * x + 2 * y  #表示lambda有二個參數
-print(formula (5, 10)) #傳入兩個數值讓lambda()函數做運算，輸出數值35
 
-print('------------------------------------------------------------')	#60個
+formula = lambda x, y: 3 * x + 2 * y  # 表示lambda有二個參數
+print(formula(5, 10))  # 傳入兩個數值讓lambda()函數做運算，輸出數值35
 
-str1="I love python."
+print("------------------------------------------------------------")  # 60個
+
+str1 = "I love python."
 print("原字串內容: ", str1)
 print("轉換成串列: ", list(str1))
 print("轉換成值組: ", tuple(str1))
 print("字串長度: ", len(str1))
 
-list1=[8,23,54,33,12,98]
-print("原串列內容: ",list1)
-print("串列中最大值: ",max(list1))
-print("串列中最小值: ",min(list1))
+list1 = [8, 23, 54, 33, 12, 98]
+print("原串列內容: ", list1)
+print("串列中最大值: ", max(list1))
+print("串列中最小值: ", min(list1))
 
-relist=reversed(list1)#反轉串列
-for i in relist: #將反轉後的串列內容依序印出
-    print(i,end=' ')
-print()#換行
-print("串列所有元素總和: ",sum(list1))#印出總和
-print("串列元素由小到大排序: ",sorted(list1))
+relist = reversed(list1)  # 反轉串列
+for i in relist:  # 將反轉後的串列內容依序印出
+    print(i, end=" ")
+print()  # 換行
+print("串列所有元素總和: ", sum(list1))  # 印出總和
+print("串列元素由小到大排序: ", sorted(list1))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('int(8.4)=',int(8.4))
-print('bin(14)=',bin(14))
-print('hex(84)=',hex(84))
-print('oct(124)=',oct(124))
-print('float(6)=',float(6))
-print('abs(-6.4)=',abs(-6.4))
-print('divmod(58,5)=',divmod(58,5))
-print('pow(3,4)=',pow(3,4))
-print('round(3.5)=',round(3.5))
-print('chr(68)=',chr(68))
-print('ord(\'%s\')=%d' %('A',ord('A')))
-print('str(1234)=',str(1234))
-print('sorted([5,7,1,8,9])=',sorted([5,7,1,8,9]))
-print('max(4,6,7,12,3)=',max(4,6,7,12,3))
-print('min(4,6,7,12,3)=',min(4,6,7,12,3))
-print('len([5,7,1,8,9])=',len([5,7,1,8,9]))
+print("int(8.4)=", int(8.4))
+print("bin(14)=", bin(14))
+print("hex(84)=", hex(84))
+print("oct(124)=", oct(124))
+print("float(6)=", float(6))
+print("abs(-6.4)=", abs(-6.4))
+print("divmod(58,5)=", divmod(58, 5))
+print("pow(3,4)=", pow(3, 4))
+print("round(3.5)=", round(3.5))
+print("chr(68)=", chr(68))
+print("ord('%s')=%d" % ("A", ord("A")))
+print("str(1234)=", str(1234))
+print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
+print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
+print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
+print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 try:
     import a_python_module
 except ImportError:
-    print('匯入模組 a_python_module 失敗')
-    print('請安裝模組')
-    #sys.exit()
+    print("匯入模組 a_python_module 失敗")
+    print("請安裝模組")
+    # sys.exit()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import time, sys
 
-print('Press Ctrl-C to stop.')
+print("Press Ctrl-C to stop.")
 
 try:
     while True:  # Main program loop.
-        print('wait', end = ' ')
+        print("wait", end=" ")
         time.sleep(1)  # Add a pause.
 except KeyboardInterrupt:
     sys.exit()  # When Ctrl-C is pressed, end the program.
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 loc = ([1, 2, 3, 4], [11, 12, 13, 14])
 for i in zip(*loc):
     print(i)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 loc = ([1, 2, 3, 4], [11, 12, 13, 14])
 print(type(loc))
 print(loc)
 print(loc[::-1])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 x = [1, 2, 3]
 y = [4, 5, 6]
@@ -1732,49 +1763,31 @@ for i in zip(*t):
     print(i)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('作業完成')
-
-
+print("作業完成")

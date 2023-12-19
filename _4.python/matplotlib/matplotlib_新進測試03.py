@@ -10,19 +10,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import random
 import pandas as pd
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 '''
 plt.figure(figsize = [8,4])
@@ -411,77 +411,79 @@ ax.legend(labels = ['Men', 'Women'])
 
 plt.show()
 '''
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('散佈圖')
+print("散佈圖")
 
 fig, ax = plt.subplots()
 
 N = 50
-x = np.random.randint(30, size = N)
-y = np.random.randint(30, size = N)
-c = np.random.randint(30, size = N)
-size = np.exp(np.random.randint(10, size = N) * 200)
-sc = ax.scatter(x = x, y = y, c = c, s = c, alpha = 0.5,label = 'scatter plot')
+x = np.random.randint(30, size=N)
+y = np.random.randint(30, size=N)
+c = np.random.randint(30, size=N)
+size = np.exp(np.random.randint(10, size=N) * 200)
+sc = ax.scatter(x=x, y=y, c=c, s=c, alpha=0.5, label="scatter plot")
 
-ax.set_xlabel('X軸', loc = 'left')
-ax.set_ylabel('Y軸', loc = 'top')
-ax.legend(loc = 1)
+ax.set_xlabel("X軸", loc="left")
+ax.set_ylabel("Y軸", loc="top")
+ax.legend(loc=1)
 cbar = fig.colorbar(sc)
-cbar.set_label('Z軸', loc = 'center')
+cbar.set_label("Z軸", loc="center")
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('Hist圖')
+print("Hist圖")
 
-fig,ax = plt.subplots(1, 3, figsize = (10, 8))
+fig, ax = plt.subplots(1, 3, figsize=(10, 8))
 
-normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-uniform_samples = np.random.uniform(size = 100000) # 生成 100000 組介於 0 與 1 之間均勻分配隨機變數
-exp_samples = np.random.exponential(scale = 2, size = 100000)
+normal_samples = np.random.normal(
+    size=100000
+)  # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+uniform_samples = np.random.uniform(size=100000)  # 生成 100000 組介於 0 與 1 之間均勻分配隨機變數
+exp_samples = np.random.exponential(scale=2, size=100000)
 
-ax[0].hist(x = normal_samples, bins = 1000, label = 'Normal distribution')
-ax[1].hist(x = uniform_samples, bins = 1000, label = 'Uniform distribution')
-ax[2].hist(x = exp_samples, bins = 1000, label = 'Exponential distribution')
+ax[0].hist(x=normal_samples, bins=1000, label="Normal distribution")
+ax[1].hist(x=uniform_samples, bins=1000, label="Uniform distribution")
+ax[2].hist(x=exp_samples, bins=1000, label="Exponential distribution")
 ax[0].legend()
 ax[1].legend()
 ax[2].legend()
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('箱圖')
+print("箱圖")
 
-# Creating dataset 
-np.random.seed(10) 
-data_1 = np.random.normal(100, 10, 200) 
-data_2 = np.random.normal(90, 20, 200) 
-data_3 = np.random.normal(80, 30, 200) 
-data_4 = np.random.normal(70, 40, 200) 
+# Creating dataset
+np.random.seed(10)
+data_1 = np.random.normal(100, 10, 200)
+data_2 = np.random.normal(90, 20, 200)
+data_3 = np.random.normal(80, 30, 200)
+data_4 = np.random.normal(70, 40, 200)
 data = [data_1, data_2, data_3, data_4]
 
-fig = plt.figure(figsize = (10, 7)) 
-  
-#圖加軸
-ax = fig.add_axes([0, 0, 1, 1]) 
-  
-bp = ax.boxplot(data, labels = ['mu = 100','mu = 90','mu = 80','mu = 70']) 
-ax.set_title('Box plot')
+fig = plt.figure(figsize=(10, 7))
+
+# 圖加軸
+ax = fig.add_axes([0, 0, 1, 1])
+
+bp = ax.boxplot(data, labels=["mu = 100", "mu = 90", "mu = 80", "mu = 70"])
+ax.set_title("Box plot")
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('subplot 100張圖')
+print("subplot 100張圖")
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 import matplotlib.image as img
 
-#print('使用 matplotlib 顯示一圖')
+# print('使用 matplotlib 顯示一圖')
 image = img.imread(filename)
 
 N = 100
@@ -491,25 +493,18 @@ for i in range(N):
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個

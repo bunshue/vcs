@@ -5,14 +5,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 '''
 fig = plt.figure()
 
@@ -201,24 +201,32 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 '''
-#線框圖
+# 線框圖
 
 from mpl_toolkits.mplot3d import axes3d
 
-fig = plt.figure(num = '3D繪圖 集合 1', figsize = (14, 14), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-#fig = plt.figure()
-ax = fig.add_subplot(111, projection = '3d')
+fig = plt.figure(
+    num="3D繪圖 集合 1",
+    figsize=(14, 14),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+# fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
 
-#生成一系列的測試數據
+# 生成一系列的測試數據
 N = 0.05
-X, Y, Z = axes3d.get_test_data(N)   #(1/N*6) X (1/N*6)
-print(1/N*6)
+X, Y, Z = axes3d.get_test_data(N)  # (1/N*6) X (1/N*6)
+print(1 / N * 6)
 print(X.shape)
 print(Y.shape)
 print(Z.shape)
-#畫線框圖
-#ax.plot_wireframe(X, Y, Z)
-ax.plot_wireframe(X, Y, Z, rstride = 2, cstride = 2)
+# 畫線框圖
+# ax.plot_wireframe(X, Y, Z)
+ax.plot_wireframe(X, Y, Z, rstride=2, cstride=2)
 
 # cstride column 每幾點畫一條線 x軸
 # rstride row    每幾點畫一條線 y軸
@@ -235,49 +243,46 @@ rcount:行數上限
 ccount:列數上限
 """
 
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_zlabel("z")
 
 plt.show()
 
 sys.exit()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from math import floor
 from matplotlib import cm
 
+
 def blending(t):
-    return 6 * (t ** 5) - 15 * (t ** 4) + 10 * (t ** 3)
+    return 6 * (t**5) - 15 * (t**4) + 10 * (t**3)
+
 
 def lerp(g1, g2, t):
     return g1 + t * (g2 - g1)
 
-def grad2(hashvalue, dx, dy):
-    return [dy, dx + dy, dx, dx - dy, -dy, -dx - dy, -dx, -dx + dy][hashvalue % 8];
 
-rand_table = np.random.randint(255, size = 256).tolist()
+def grad2(hashvalue, dx, dy):
+    return [dy, dx + dy, dx, dx - dy, -dy, -dx - dy, -dx, -dx + dy][hashvalue % 8]
+
+
+rand_table = np.random.randint(255, size=256).tolist()
+
 
 def _perlin2(x, y):
     xi = floor(x)
     yi = floor(y)
 
-    aa = rand_table[
-        (rand_table[xi % 256] + yi) % 256
-    ]
-    ba = rand_table[
-        (rand_table[(xi + 1) % 256] + yi) % 256
-    ]
-    ab = rand_table[
-        (rand_table[xi % 256] + yi + 1) % 256
-    ]
-    bb = rand_table[
-        (rand_table[(xi + 1) % 256] + yi + 1) % 256
-    ]
+    aa = rand_table[(rand_table[xi % 256] + yi) % 256]
+    ba = rand_table[(rand_table[(xi + 1) % 256] + yi) % 256]
+    ab = rand_table[(rand_table[xi % 256] + yi + 1) % 256]
+    bb = rand_table[(rand_table[(xi + 1) % 256] + yi + 1) % 256]
 
     dx = x - xi
-    dy = y - yi    
+    dy = y - yi
 
     u = blending(dx)
     v = blending(dy)
@@ -286,32 +291,33 @@ def _perlin2(x, y):
     g2 = lerp(grad2(ab, dx, dy - 1), grad2(bb, dx - 1, dy - 1), u)
 
     return lerp(g1, g2, v)
+
+
 _perlin2 = np.frompyfunc(_perlin2, 2, 1)
+
 
 def perlin2(x, y):
     cx, cy = np.meshgrid(x, y)
     return _perlin2(cx, cy).astype(float)
 
+
 width = 100
 x = np.arange(width)
 y = np.arange(width)
 
-X, Y = np.meshgrid(x, y) 
+X, Y = np.meshgrid(x, y)
 Z = perlin2(x / 25, y / 25)
 
-ax = plt.axes(projection = '3d')
-ax.plot_surface(X, Y, Z, cmap = cm.gist_earth) # 用地形高度顏色來著色
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
+ax = plt.axes(projection="3d")
+ax.plot_surface(X, Y, Z, cmap=cm.gist_earth)  # 用地形高度顏色來著色
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_zlabel("z")
 ax.set_box_aspect((1, 1, 25 / width))
-plt.title('Perlin noise')
+plt.title("Perlin noise")
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
-
-
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個

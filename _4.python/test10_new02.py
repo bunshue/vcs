@@ -4,9 +4,9 @@ import time
 import random
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 #! /usr/bin/env python3
@@ -19,70 +19,108 @@ print('------------------------------------------------------------')	#60個
 
 import sys, string, argparse
 
-#數字與英文的對應字典
-_1to9dict = {'0': '', '1': 'one', '2': 'two', '3': 'three', '4': 'four',
-             '5': 'five', '6': 'six', '7': 'seven', '8': 'eight',
-             '9': 'nine'}
-_10to19dict = {'0': 'ten', '1': 'eleven', '2': 'twelve',
-               '3': 'thirteen', '4': 'fourteen', '5': 'fifteen',
-               '6': 'sixteen', '7': 'seventeen', '8': 'eighteen', 
-               '9': 'nineteen'}
-_20to90dict = {'2': 'twenty', '3': 'thirty', '4': 'forty', '5': 'fifty',
-               '6': 'sixty', '7': 'seventy', '8': 'eighty', '9': 'ninety'}
+# 數字與英文的對應字典
+_1to9dict = {
+    "0": "",
+    "1": "one",
+    "2": "two",
+    "3": "three",
+    "4": "four",
+    "5": "five",
+    "6": "six",
+    "7": "seven",
+    "8": "eight",
+    "9": "nine",
+}
+_10to19dict = {
+    "0": "ten",
+    "1": "eleven",
+    "2": "twelve",
+    "3": "thirteen",
+    "4": "fourteen",
+    "5": "fifteen",
+    "6": "sixteen",
+    "7": "seventeen",
+    "8": "eighteen",
+    "9": "nineteen",
+}
+_20to90dict = {
+    "2": "twenty",
+    "3": "thirty",
+    "4": "forty",
+    "5": "fifty",
+    "6": "sixty",
+    "7": "seventy",
+    "8": "eighty",
+    "9": "ninety",
+}
 
-#數字位數與數字英文單位的對應串列(list)
-_magnitude_list = [(0, ''), (3, ' thousand '), (6, ' million '), 
-                  (9, ' billion '), (12, ' trillion '),(15, '')]
+# 數字位數與數字英文單位的對應串列(list)
+_magnitude_list = [
+    (0, ""),
+    (3, " thousand "),
+    (6, " million "),
+    (9, " billion "),
+    (12, " trillion "),
+    (15, ""),
+]
 
-#數字轉英文的函式
+
+# 數字轉英文的函式
 def num2words(num_string):
     """num2words(num_string): convert number to English words"""
-    if num_string == '0':                                             
-        return 'zero'
+    if num_string == "0":
+        return "zero"
     num_string = num_string.replace(",", "")
-    num_length = len(num_string) 
+    num_length = len(num_string)
     max_digits = _magnitude_list[-1][0]
     if num_length > max_digits:
-        return "Sorry, can't handle numbers with more than  " \
-               "{0} digits".format(max_digits)
-    num_string = '00' + num_string 
-    word_string = ''
+        return "Sorry, can't handle numbers with more than  " "{0} digits".format(
+            max_digits
+        )
+    num_string = "00" + num_string
+    word_string = ""
 
-    #用迴圈從數字最右邊逐次取三個數字來處理，亦即從右邊三個一組進行轉換
+    # 用迴圈從數字最右邊逐次取三個數字來處理，亦即從右邊三個一組進行轉換
     for mag, name in _magnitude_list:
         if mag >= num_length:
             return word_string
         else:
-            hundreds, tens, ones = num_string[-mag-3], \
-                 num_string[-mag-2], num_string[-mag-1]               
-            if not (hundreds == tens == ones == '0'):                 
-                word_string = _handle1to999(hundreds, tens, ones) + \
-                                            name + word_string        
-                 
-#處理1~999的函式
+            hundreds, tens, ones = (
+                num_string[-mag - 3],
+                num_string[-mag - 2],
+                num_string[-mag - 1],
+            )
+            if not (hundreds == tens == ones == "0"):
+                word_string = _handle1to999(hundreds, tens, ones) + name + word_string
+
+
+# 處理1~999的函式
 def _handle1to999(hundreds, tens, ones):
-    if hundreds == '0':
+    if hundreds == "0":
         return _handle1to99(tens, ones)
     else:
-        return _1to9dict[hundreds] + ' hundred ' + _handle1to99(tens, ones)
+        return _1to9dict[hundreds] + " hundred " + _handle1to99(tens, ones)
 
-#處理1~99的函式
+
+# 處理1~99的函式
 def _handle1to99(tens, ones):
-    if tens == '0': 
+    if tens == "0":
         return _1to9dict[ones]
-    elif tens == '1':
+    elif tens == "1":
         return _10to19dict[ones]
     else:
-        return _20to90dict[tens] + ' ' + _1to9dict[ones]
+        return _20to90dict[tens] + " " + _1to9dict[ones]
 
-num = '12345678'
-#將第一個命令列參數值轉為英文，其餘命令列參數不處理
+
+num = "12345678"
+# 將第一個命令列參數值轉為英文，其餘命令列參數不處理
 result = num2words(num)
 print("{0} 的英文念法是: {1}".format(num, result))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-rawdata = '''我
+rawdata = """我
 我的
 眼睛
 妳
@@ -105,77 +143,83 @@ rawdata = '''我
 吹過
 思念
 靈魂
-停止'''
-words = rawdata.split('\n')
+停止"""
+words = rawdata.split("\n")
+
+
 def poem():
-    n = np.random.randint(2, 8) # 2-8句, 決定有幾句
+    n = np.random.randint(2, 8)  # 2-8句, 決定有幾句
 
     for i in range(n):
-        m = np.random.randint(1, 6) # 決定每句的長度
+        m = np.random.randint(1, 6)  # 決定每句的長度
         sentence = np.random.choice(words, m, replace=False)
         print(" ".join(sentence))
+
+
 poem()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-
-word = 'maintenance'
-word.count('n')
-
-len('thunderbolt')
+print("------------------------------------------------------------")  # 60個
 
 
-animal = ['cat','dog','duck']
+word = "maintenance"
+word.count("n")
+
+len("thunderbolt")
+
+
+animal = ["cat", "dog", "duck"]
 len(animal)
 
 
-max(100,10,50)
-min(300,30,3000)
+max(100, 10, 50)
+min(300, 30, 3000)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import zipfile
 
-files = zipfile.ZipFile('C:/workplace/test.zip')
+files = zipfile.ZipFile("C:/workplace/test.zip")
 
 files.namelist()
 
-files.extract('d/c.txt')
+files.extract("d/c.txt")
 
 files.extractall()
 
 files.close()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import requests
-r = requests.get('https://tw.yahoo.com/')
+
+r = requests.get("https://tw.yahoo.com/")
 print(r.text)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import pprint
-r = requests.get('https://tw.yahoo.com/')
+
+r = requests.get("https://tw.yahoo.com/")
 pprint.pprint(r.text)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import requests
 
-base_url = 'https://zipcloud.ibsnet.co.jp/api/search'
+base_url = "https://zipcloud.ibsnet.co.jp/api/search"
 
-query_parameter = '?zipcode='
+query_parameter = "?zipcode="
 
-zipcode = '1600021'
+zipcode = "1600021"
 
 request_url = base_url + query_parameter + zipcode
 
@@ -184,113 +228,113 @@ request_url
 requests.get(request_url).json()
 
 
+# 有這樣的 API 啊，網址是：https://zipcloud.ibsnet.co.jp/doc/api，請幫我寫出來
 
-#有這樣的 API 啊，網址是：https://zipcloud.ibsnet.co.jp/doc/api，請幫我寫出來
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import requests, pprint
 
-api_url = 'https://zh.wikipedia.org/w/api.php'
+api_url = "https://zh.wikipedia.org/w/api.php"
 
-api_params = {'format':'json', 'action':'query', 'titles':柔道', 'prop':'revisions', 'rvprop':'content'}
+api_params = {
+    "format": "json",
+    "action": "query",
+    "titles": "柔道",
+    "prop": "revisions",
+    "rvprop": "content",
+}
 
 wiki_data = requests.get(api_url, params=api_params).json()
 
 pprint.pprint(wiki_data)
 
 
-
-#pip install wikipedia
+# pip install wikipedia
 
 
 import wikipedia
-wikipedia.set_lang ('zh')
-wikipedia.summary('柔道')
+
+wikipedia.set_lang("zh")
+wikipedia.summary("柔道")
 
 
-
-#python wiki_sample.py
-
+# python wiki_sample.py
 
 
-
-#python try_sys.py 想查詢的關鍵字
-
+# python try_sys.py 想查詢的關鍵字
 
 
-
-#python wiki_sample_final.py 柔道
-
+# python wiki_sample_final.py 柔道
 
 
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
-soup = BeautifulSoup('<html> Lollipop </html>', 'html.parser')
 
-print('------------------------------------------------------------')	#60個
+soup = BeautifulSoup("<html> Lollipop </html>", "html.parser")
+
+print("------------------------------------------------------------")  # 60個
 
 import requests
 
 from bs4 import BeautifulSoup
 
-html_data = requests.get('http://tw.yahoo.com')
+html_data = requests.get("http://tw.yahoo.com")
 
-soup = BeautifulSoup(html_data.text,"html.parser")
+soup = BeautifulSoup(html_data.text, "html.parser")
 
 soup.title
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import requests
 
 from bs4 import BeautifulSoup
 
-game_ranking_html = requests.get('https://www.kamatari.org/blog/2021/best-games-of-2021/')
+game_ranking_html = requests.get(
+    "https://www.kamatari.org/blog/2021/best-games-of-2021/"
+)
 
 soup = BeautifulSoup(game_ranking_html.text, "html.parser")
 
-for game in soup.findAll('h2'):
-	print(game.text)
+for game in soup.findAll("h2"):
+    print(game.text)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import requests
 from bs4 import BeautifulSoup
-game_ranking_html = requests.get ('https://www.kamatari.org/blog/2021/best-games-of-2021/')
-soup = BeautifulSoup (game_ranking_html.text, "html.parser" )
-for game in soup.findAll ('h2'):
-	print (game.text)
+
+game_ranking_html = requests.get(
+    "https://www.kamatari.org/blog/2021/best-games-of-2021/"
+)
+soup = BeautifulSoup(game_ranking_html.text, "html.parser")
+for game in soup.findAll("h2"):
+    print(game.text)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 import os
@@ -298,7 +342,7 @@ import sys
 import time
 import random
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 '''
@@ -353,13 +397,10 @@ print('y:',y, y.shape)
 z = np.r_[x,y]
 print('z:',z, z.shape)
 '''
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 import os
@@ -712,56 +753,57 @@ window.mainloop()
 
 '''
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import requests
 
-api_url = 'https://collectionapi.metmuseum.org/public/collection/v1/objects'
+api_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
 
 response = requests.get(api_url)
 
 response_dict = response.json()
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 response_dict.keys()
-response_dict['total']
+response_dict["total"]
 
 
 import requests, pprint
-search_api_url = 'https://collectionapi.metmuseum.org/public/collection/v1/search?'
-query_parameter = 'q=python&hasImages=true'
+
+search_api_url = "https://collectionapi.metmuseum.org/public/collection/v1/search?"
+query_parameter = "q=python&hasImages=true"
 search_url = search_api_url + query_parameter
 print(search_url)
 search_response = requests.get(search_url)
 pprint.pprint(search_response.json())
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-get_object_url = 'https://collectionapi.metmuseum.org/public/collection/v1/objects/435864'
+get_object_url = (
+    "https://collectionapi.metmuseum.org/public/collection/v1/objects/435864"
+)
 
 object_response = requests.get(get_object_url)
 
-object_response.json()['objectURL']
+object_response.json()["objectURL"]
 
-object_response.json()['title']
+object_response.json()["title"]
 
-object_response.json()['primaryImageSmall']
+object_response.json()["primaryImageSmall"]
 
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
 
 
 import os
@@ -769,7 +811,7 @@ import sys
 import time
 import random
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import datetime as dt
 
@@ -779,62 +821,62 @@ print(x)
 x = dt.datetime(year=2020, month=10, day=22)
 print(x)
 
-y = dt.datetime(2020, 10, 22, 10, 30, 45) #設定日期與時間
+y = dt.datetime(2020, 10, 22, 10, 30, 45)  # 設定日期與時間
 print(y)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#3-4-2 timedelta 物件
+# 3-4-2 timedelta 物件
 
-x = dt.timedelta(hours=1, minutes=30) #1 小時又 30 分
+x = dt.timedelta(hours=1, minutes=30)  # 1 小時又 30 分
 
 print(x)
-y = dt.timedelta(days=1, seconds=30) #1 天又 30 秒
+y = dt.timedelta(days=1, seconds=30)  # 1 天又 30 秒
 print(y)
 
-#3-4-3 用 timedelta 來增減 datetime 或 timedelta 的時間
+# 3-4-3 用 timedelta 來增減 datetime 或 timedelta 的時間
 
 import datetime as dt
 
-x = dt.datetime(2020, 10, 22, 10, 30, 45) #原始時間
+x = dt.datetime(2020, 10, 22, 10, 30, 45)  # 原始時間
 
 y = dt.timedelta(days=1, hours=2, minutes=5)
 
 print(x)
 
-print(x + y) #用 timedelta 來增減 datetime 的時間
+print(x + y)  # 用 timedelta 來增減 datetime 的時間
 
 print(x - y)
 
 print(x + y * 2)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#3-4-4 將 datetime 時間以格式化方式輸出
+# 3-4-4 將 datetime 時間以格式化方式輸出
 
 import datetime as dt
 
 x = dt.datetime(2020, 10, 22, 10, 30, 45)
 
-s1 = x.strftime('%Y/%m/%d %H-%M-%S')
+s1 = x.strftime("%Y/%m/%d %H-%M-%S")
 
 print(s1)
 
-s2 = x.strftime('%Y 年 %m 月 %d 日 %H : %M : %S')
+s2 = x.strftime("%Y 年 %m 月 %d 日 %H : %M : %S")
 
 print(s2)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#3-4-5 用字串來建立 datetime 物件
+# 3-4-5 用字串來建立 datetime 物件
 
 import datetime as dt
 
-s = '2020/10/22 10-30-45' #含有特定格式之日期時間字串
+s = "2020/10/22 10-30-45"  # 含有特定格式之日期時間字串
 
-x = dt.datetime.strptime(s, '%Y/%m/%d %H-%M-%S')
+x = dt.datetime.strptime(s, "%Y/%m/%d %H-%M-%S")
 
 
 print(x)
@@ -842,11 +884,11 @@ print(x)
 print(type(x))
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#4-1-1 lambda 函式簡介
+# 4-1-1 lambda 函式簡介
 
-power = lambda x: x ** 2
+power = lambda x: x**2
 
 print(power(10))
 
@@ -855,71 +897,65 @@ add = lambda a, b: a + b
 
 print(add(5, 3))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#4-1-2 在 lambda 內使用一行 if 條件判斷式
+# 4-1-2 在 lambda 內使用一行 if 條件判斷式
 
 absolute = lambda x: x if x >= 0 else -x
 
-func = lambda x: (x ** 2 - 40 * x + 350) if 10 <= x < 30 else 50
+func = lambda x: (x**2 - 40 * x + 350) if 10 <= x < 30 else 50
 
-#4-2-1 str.split()：分割字串為 list 元素
+# 4-2-1 str.split()：分割字串為 list 元素
 
-sentence = 'This is a test sentence'
+sentence = "This is a test sentence"
 
-print(sentence.split (' '))
+print(sentence.split(" "))
 
-['This', 'is', 'a', 'test', 'sentence']
+["This", "is", "a", "test", "sentence"]
 
-#4-2-2 用字串正規化分割字串為 list
+# 4-2-2 用字串正規化分割字串為 list
 
 import re
 
-sentence = 'This,is a,test.sentence'
-time_data = '2020/05/20_12:30:45'
+sentence = "This,is a,test.sentence"
+time_data = "2020/05/20_12:30:45"
 
-print(re.split('[,. ]', sentence)) #用逗點、句點和空格來分割字串
+print(re.split("[,. ]", sentence))  # 用逗點、句點和空格來分割字串
 
-print(re.split('[/_:]', time_data))
+print(re.split("[/_:]", time_data))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 a = [1, -2, 3, -4, 5]
 
 new = []
 
 for x in a:
-    new.append(abs(x)) #走訪 a 的元素, 取絕對值後放入 new
+    new.append(abs(x))  # 走訪 a 的元素, 取絕對值後放入 new
 
 print(new)
 
-str_list = ['This', 'is', 'a', 'test', 'sentence']
+str_list = ["This", "is", "a", "test", "sentence"]
 
 print(list(map(str.upper, str_list)))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#4-2-4 用 flter() 篩選容器元素
+# 4-2-4 用 flter() 篩選容器元素
 
-str_list = ['This', 'is', 'a', 'test', 'sentence']
+str_list = ["This", "is", "a", "test", "sentence"]
 
 print(list(filter(lambda x: len(x) >= 3, str_list)))
 
-['This', 'test', 'sentence']
+["This", "test", "sentence"]
 
-#4-2-5 再探 sorted()：自訂目標容器的排序方式
+# 4-2-5 再探 sorted()：自訂目標容器的排序方式
 
-str_list = ['This', 'is', 'a', 'test', 'sentence']
+str_list = ["This", "is", "a", "test", "sentence"]
 
 print(sorted(str_list, key=len, reverse=True))
 
-nest_list = [
-  [0, 9],
-  [1, 8],
-  [2, 7],
-  [3, 6],
-  [4, 5]
-]
+nest_list = [[0, 9], [1, 8], [2, 7], [3, 6], [4, 5]]
 
 print(sorted(nest_list))
 
@@ -927,38 +963,38 @@ print(sorted(nest_list, key=lambda x: x[1]))
 
 print(sorted(nest_list, key=lambda x: x[1], reverse=True))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#4-3-1 介紹 list 生成式
+# 4-3-1 介紹 list 生成式
 
 a = [1, -2, 3, -4, 5]
 
 print([abs(x) for x in a])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 a = [1, -2, 3, -4, 5]
 
-print([x ** 2 for x in a])
+print([x**2 for x in a])
 
-str_list = ['This', 'is', 'a', 'test', 'sentence']
+str_list = ["This", "is", "a", "test", "sentence"]
 
 print([s.upper() for s in str_list])
 
-#4-3-2 在 list 生成式使用 if 過濾元素
+# 4-3-2 在 list 生成式使用 if 過濾元素
 
 a = [1, -2, 3, -4, 5]
 
 print([x for x in a if x > 0])
 
-str_list = ['This', 'is', 'a', 'test', 'sentence']
+str_list = ["This", "is", "a", "test", "sentence"]
 
 print([x for x in str_list if len(x) >= 3])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-#4-3-3 在 list 生成式用 zip() 同時走訪多個容器
+# 4-3-3 在 list 生成式用 zip() 同時走訪多個容器
 
 a = [1, -2, 3, -4, 5]
 b = [9, 8, -7, -6, -5]
@@ -966,49 +1002,39 @@ b = [9, 8, -7, -6, -5]
 print([[x, y] for x, y in zip(a, b)])
 print([x + y for x, y in zip(a, b)])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 a = [1, -2, 3, -4, 5]
 
 b = [9, 8, -7, -6, -5]
 
-print([x + y
-  for x, y in zip(a, b)
-  if x + y >= 0])
+print([x + y for x, y in zip(a, b) if x + y >= 0])
 
 
-#4-3-4 以巢狀 list 生成式產生複合 list
+# 4-3-4 以巢狀 list 生成式產生複合 list
 
 a = [1, 2, 3]
 
-b = ['A', 'B']
+b = ["A", "B"]
 
 print([[x, y] for x in a for y in b])
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
+print("------------------------------------------------------------")  # 60個

@@ -5,19 +5,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 import random
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 python用mpl_finance中的candlestick_ohlc畫分時圖
@@ -145,107 +145,109 @@ ax2.set_xticklabels(xticks_str)                                   # 設置橫軸
 plt.show()
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 設定圖書分類及銷售額比例
-listx = ['商業理財', '文學小說', '藝術設計', '人文科普', '語言電腦', '心靈養生', '生活風格', '親子共享']
-listm = [0.14, 0.16, 0.08, 0.13, 0.16, 0.12, 0.16, 0.05] #男性比例
-listf = [0.1, 0.19, 0.06, 0.1, 0.13, 0.13, 0.2, 0.09] #女性比例
+listx = ["商業理財", "文學小說", "藝術設計", "人文科普", "語言電腦", "心靈養生", "生活風格", "親子共享"]
+listm = [0.14, 0.16, 0.08, 0.13, 0.16, 0.12, 0.16, 0.05]  # 男性比例
+listf = [0.1, 0.19, 0.06, 0.1, 0.13, 0.13, 0.2, 0.09]  # 女性比例
 
 # 將比例乘以100
-listm = [x * 100 for x in listm] 
+listm = [x * 100 for x in listm]
 listf = [x * 100 for x in listf]
 
 # 設定圖表區尺寸以及使用字型
-plt.figure(figsize = (12, 9))
+plt.figure(figsize=(12, 9))
 
 # 男性圖書分類銷售率圖餅圖
 plt.subplot(221)
-plt.title('圖書分類銷售比率-男性', fontsize = 16)
-plt.pie(listm, labels = listx, autopct = '%2.1f%%')
+plt.title("圖書分類銷售比率-男性", fontsize=16)
+plt.pie(listm, labels=listx, autopct="%2.1f%%")
 
 # 女性圖書分類銷售率圖餅圖
 plt.subplot(222)
-plt.title('圖書分類銷售比率-女性', fontsize = 16)
-plt.pie(listf, labels = listx, autopct = '%2.1f%%')
+plt.title("圖書分類銷售比率-女性", fontsize=16)
+plt.pie(listf, labels=listx, autopct="%2.1f%%")
 
 # 圖書分類男女銷售率長條圖
 plt.subplot(223)
 width = 0.4
-listx1 = [x- width/2 for x in range(len(listx))]
-listx2 = [x+ width/2 for x in range(len(listx))]
+listx1 = [x - width / 2 for x in range(len(listx))]
+listx2 = [x + width / 2 for x in range(len(listx))]
 
-plt.title('圖書分類銷售長條圖-性別', fontsize = 16)
-plt.xlabel('圖書分類', fontsize = 12)
-plt.ylabel('銷售比率(%)', fontsize = 12)
+plt.title("圖書分類銷售長條圖-性別", fontsize=16)
+plt.xlabel("圖書分類", fontsize=12)
+plt.ylabel("銷售比率(%)", fontsize=12)
 
-plt.bar(listx1, listm, width, label = '男')
-plt.bar(listx2, listf, width, label = '女')
-plt.xticks(range(len(listx)), labels = listx, rotation = 45)
+plt.bar(listx1, listm, width, label="男")
+plt.bar(listx2, listf, width, label="女")
+plt.xticks(range(len(listx)), labels=listx, rotation=45)
 plt.legend()
 
 # 圖書分類男女銷售率折線圖
 plt.subplot(224)
-plt.title('圖書分類銷售折線圖-性別', fontsize = 16)
-plt.xlabel('圖書分類', fontsize = 12)
-plt.ylabel('銷售比率(%)', fontsize = 12)
+plt.title("圖書分類銷售折線圖-性別", fontsize=16)
+plt.xlabel("圖書分類", fontsize=12)
+plt.ylabel("銷售比率(%)", fontsize=12)
 
-plt.plot(listx, listm, marker = 's', label = '男')
-plt.plot(listx, listf, marker = 's', label = '女')
+plt.plot(listx, listm, marker="s", label="男")
+plt.plot(listx, listf, marker="s", label="女")
 plt.gca().grid(True)
-plt.xticks(rotation = 45)
+plt.xticks(rotation=45)
 plt.legend()
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-n = np.linspace(1.1, 10, 90)            # 建立1.1-10的陣列
-count = 0                               # 用於計算每5筆輸出換行
+n = np.linspace(1.1, 10, 90)  # 建立1.1-10的陣列
+count = 0  # 用於計算每5筆輸出換行
 for i in n:
     count += 1
-    print('{0:2.1f} = {1:4.3f}'.format(i, np.log10(i)), end = '    ')
-    if count % 5 == 0:                  # 每5筆輸出就換行
+    print("{0:2.1f} = {1:4.3f}".format(i, np.log10(i)), end="    ")
+    if count % 5 == 0:  # 每5筆輸出就換行
         print()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 degrees = [30, 45, 60, 90, 120, 135, 150, 180]
 for degree in degrees:
-    print('角度 = {0:3d},   弧度 = {1:6.3f}'.format(degree, math.pi * degree / 180))
+    print("角度 = {0:3d},   弧度 = {1:6.3f}".format(degree, math.pi * degree / 180))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 degrees = [30, 60, 90, 120]
 r = 10
 for degree in degrees:
     curve = 2 * math.pi * r * degree / 360
-    print('角度 = {0:3d},   弧長 = {1:6.3f}'.format(degree, curve))
+    print("角度 = {0:3d},   弧長 = {1:6.3f}".format(degree, curve))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 degrees = [30, 60, 90, 120]
 r = 10
 for degree in degrees:
     area = math.pi * r * r * degree / 360
-    print('角度 = {0:3d},   扇形面積 = {1:6.3f}'.format(degree, area))
+    print("角度 = {0:3d},   扇形面積 = {1:6.3f}".format(degree, area))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-degrees = [x*30 for x in range(0,13)]
+degrees = [x * 30 for x in range(0, 13)]
 for d in degrees:
     rad = math.radians(d)
     sin = math.sin(rad)
     cos = math.cos(rad)
-    print('角度={0:3d}, 弧度={1:5.2f}, sin{2:3d}={3:5.2f}, cos{4:3d}={5:5.2f}'
-          .format(d, rad, d, sin, d, cos))
+    print(
+        "角度={0:3d}, 弧度={1:5.2f}, sin{2:3d}={3:5.2f}, cos{4:3d}={5:5.2f}".format(
+            d, rad, d, sin, d, cos
+        )
+    )
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-#foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
+# foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
+foldername = "C:/_git/vcs/_1.data/______test_files1"
 
 
 """
@@ -282,7 +284,7 @@ plt.show()
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 x = np.linspace(start=-10, stop=10, num=101)
@@ -294,74 +296,77 @@ xx = x + 1j * x[:, np.newaxis]
 plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap='gray')
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
+filename = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv"
+)
 
-dat = pd.read_csv(filename, encoding = 'UTF-8')
+dat = pd.read_csv(filename, encoding="UTF-8")
 print(dat.head())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#計算平均數、中位數、眾數
+# 計算平均數、中位數、眾數
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv'
+filename = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv"
+)
 
-dat = pd.read_csv(filename, encoding = 'UTF-8')
+dat = pd.read_csv(filename, encoding="UTF-8")
 
 # 平均數、中位數
-print('平均數', np.mean(dat['數學']))
-print('中位數', np.median(dat['數學']))
+print("平均數", np.mean(dat["數學"]))
+print("中位數", np.median(dat["數學"]))
 
 # 眾數
-bincnt = np.bincount(dat['數學'])  # 計算同樣的值的個數
+bincnt = np.bincount(dat["數學"])  # 計算同樣的值的個數
 mode = np.argmax(bincnt)  # 取得bincnt中最大的值
-print('眾數', mode)
+print("眾數", mode)
 
-print('------------------------------------------------------------')	#60個
-print('亂數')
+print("------------------------------------------------------------")  # 60個
+print("亂數")
 
-rand = [] 
+rand = []
 for i in range(10):
-    rand.append(random.randint(0, 100)) # 產生0～100的亂數
+    rand.append(random.randint(0, 100))  # 產生0～100的亂數
 print(rand)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-a = 4     # 亂數的初始值
+a = 4  # 亂數的初始值
 b = 7
-c = 9   #取亂數結果 0 ~ 8之整數
+c = 9  # 取亂數結果 0 ~ 8之整數
 rn = 1
 
 rand = []
 for i in range(20):
-    rn = (a * rn + b) % c   # 不用亂數模組, 自己運算出亂數
+    rn = (a * rn + b) % c  # 不用亂數模組, 自己運算出亂數
     rand.append(rn)
 print(rand)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
 """
@@ -377,14 +382,6 @@ plt.barh(listy, listx, height = 0.5, color = 'r')
 """
 
 
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個

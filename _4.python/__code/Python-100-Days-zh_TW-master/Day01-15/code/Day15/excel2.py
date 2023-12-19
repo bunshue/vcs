@@ -1,11 +1,7 @@
 """
 读取Excel文件
 
-Version: 0.1
-Author: 骆昊
-Date: 2018-03-26
 """
-
 from openpyxl import load_workbook
 from openpyxl import Workbook
 

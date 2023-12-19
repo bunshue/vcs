@@ -3,7 +3,7 @@ import sys
 import time
 import random
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 """
@@ -20,15 +20,14 @@ for num in range(100, 1000):
     low = num % 10
     mid = num // 10 % 10
     high = num // 100
-    if num == low ** 3 + mid ** 3 + high ** 3:
+    if num == low**3 + mid**3 + high**3:
         print(num)
 
 
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 函数的定义和使用 - 求最大公约数和最小公倍数
+
 
 def gcd(x, y):
     if x > y:
@@ -47,7 +46,7 @@ print(gcd(15, 27))
 print(lcm(15, 27))
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import time
 import shutil
@@ -62,25 +61,22 @@ print(localtime.tm_mon)
 print(localtime.tm_mday)
 asctime = time.asctime(localtime)
 print(asctime)
-strtime = time.strftime('%Y-%m-%d %H:%M:%S', localtime)
+strtime = time.strftime("%Y-%m-%d %H:%M:%S", localtime)
 print(strtime)
-mydate = time.strptime('2018-1-1', '%Y-%m-%d')
+mydate = time.strptime("2018-1-1", "%Y-%m-%d")
 print(mydate)
 
-#shutil.copy('/Users/Hao/hello.py', '/Users/Hao/Desktop/first.py')
-os.system('ls -l')
-#os.chdir('/Users/Hao')
-os.system('ls -l')
-#os.mkdir('test')
+# shutil.copy('/Users/Hao/hello.py', '/Users/Hao/Desktop/first.py')
+os.system("ls -l")
+# os.chdir('/Users/Hao')
+os.system("ls -l")
+# os.mkdir('test')
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 用range创建数值列表
 list1 = list(range(1, 11))  # 不含尾
 print(list1)
 
 
-print('------------------------------------------------------------')	#60個
-
-
-
+print("------------------------------------------------------------")  # 60個

@@ -1,9 +1,6 @@
 """
 读取PDF文件
 
-Version: 0.1
-Author: 骆昊
-Date: 2018-03-26
 """
 
 from PyPDF2 import PdfFileReader

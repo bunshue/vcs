@@ -3,44 +3,43 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
-#import pandas as pd
+
+# import pandas as pd
 
 x = np.arange(5)
 height = [90, 175, 110, 186, 125]
 
-plt.xkcd()  #xkcd漫畫風格
+plt.xkcd()  # xkcd漫畫風格
 
 plt.bar(x, height)
 
-plt.xticks(x, ('apple', 'banana', 'cat', 'dog', 'elephant'))
+plt.xticks(x, ("apple", "banana", "cat", "dog", "elephant"))
 
-'''
+"""
 #plt.plot(x, y)
 
 plt.xkcd()
 
 plt.plot(x,y)
-'''
+"""
 
 plt.show()
 
 
-
-
-'''
+"""
 xkcd
 
 使用matplotlib绘制xkcd动漫风格的图表（解决中文字体问题）
 
-'''
+"""
 
-'''
+"""
 import numpy as np
 
 #  使用动漫风格
@@ -79,9 +78,9 @@ plt.savefig("cnbotop5_300.png")
 
 plt.show()
 
-'''
+"""
 
-'''
+"""
 def xkcd(scale=1, length=100, randomness=2):
     return _xkcd(scale, length, randomness)
 
@@ -124,10 +123,10 @@ class _xkcd:
         dict.update(rcParams, self._orig)
         
 
-'''
+"""
 
 
-'''
+"""
 import matplotlib.pyplot as plt
 
 plt.rcParams.update({'font.family': "Comic Sans"})
@@ -136,19 +135,18 @@ with plt.xkcd():
     plt.bar([1,2,3],[1,2,3])
     plt.title('test')
 plt.show()
-'''
+"""
 
 import matplotlib.pyplot as plt
 
 plt.xkcd()
-plt.rcParams.update({'font.family': "FZKaTong-M19S"})
-plt.bar([1,2,3],[1,2,3])
+plt.rcParams.update({"font.family": "FZKaTong-M19S"})
+plt.bar([1, 2, 3], [1, 2, 3])
 plt.title("测试")
 plt.show()
 
 
-
-'''
+"""
 # 耍寶可愛的 xkcd
 
 save_state = plt.rcParams.copy()    #把之前正常狀態存起來
@@ -162,8 +160,4 @@ plt.rcParams.update(save_state)     #恢復使用正常狀態
 
 plt.show()
 
-'''
-
-
-
-
+"""

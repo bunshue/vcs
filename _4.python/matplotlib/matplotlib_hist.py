@@ -58,115 +58,159 @@ histtype: 直方圖類型，『bar』, 『barstacked』, 『step』, 『stepfill
 
 # hist 集合
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'hist 集合 1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(
+    num="hist 集合 1",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 # Fixing random state for reproducibility
 np.random.seed(1234567)
 
-N = 10000 #資料個數
-num_bins = 100 #直方圖顯示時的束數
+N = 10000  # 資料個數
+num_bins = 100  # 直方圖顯示時的束數
 
-#第一張圖
+# 第一張圖
 plt.subplot(231)
 
-print('以直方圖顯示常態分佈')
-x = np.random.randn(N)  #常態分佈數字
+print("以直方圖顯示常態分佈")
+x = np.random.randn(N)  # 常態分佈數字
 
-n, bins, patches = plt.hist(x, num_bins, facecolor = 'yellow', edgecolor = 'yellow')
+n, bins, patches = plt.hist(x, num_bins, facecolor="yellow", edgecolor="yellow")
 print(n)
 print(bins)
 
-#第二張圖
+# 第二張圖
 plt.subplot(232)
 
-normal_samples = np.random.normal(size = N) # 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-plt.hist(normal_samples, bins = num_bins)
+normal_samples = np.random.normal(size=N)  # 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+plt.hist(normal_samples, bins=num_bins)
 
-#第三張圖
+# 第三張圖
 plt.subplot(233)
 
-uniform_samples = np.random.uniform(size = N) # 生成 N 組介於 0 與 1 之間均勻分配隨機變數
-plt.hist(uniform_samples, bins = num_bins)
+uniform_samples = np.random.uniform(size=N)  # 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+plt.hist(uniform_samples, bins=num_bins)
 
-#第四張圖
+# 第四張圖
 plt.subplot(234)
 
-print('描繪頻率分布圖')
+print("描繪頻率分布圖")
 
 # 讀入csv檔
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV7_onigiri.csv'
-dat = pd.read_csv(filename, encoding = 'UTF-8')
+filename = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV7_onigiri.csv"
+)
+dat = pd.read_csv(filename, encoding="UTF-8")
 
 print(type(dat))
 print(dat)
 
 # 頻率分布圖
-plt.hist(dat['店長'], bins = range(0, 200, 10), alpha = 0.5)
-plt.hist(dat['太郎'], bins = range(0, 200, 10), alpha = 0.5)
+plt.hist(dat["店長"], bins=range(0, 200, 10), alpha=0.5)
+plt.hist(dat["太郎"], bins=range(0, 200, 10), alpha=0.5)
 
-print('計算平均數、變異數、標準差')
+print("計算平均數、變異數、標準差")
 
-print('店長---------')
-print('平均:', np.mean(dat['店長']))
-print('變異數:', np.var(dat['店長']))
-print('標準差:', np.std(dat['店長']))
+print("店長---------")
+print("平均:", np.mean(dat["店長"]))
+print("變異數:", np.var(dat["店長"]))
+print("標準差:", np.std(dat["店長"]))
 
-print('太郎---------')
-print('平均:', np.mean(dat['太郎']))
-print('變異數:', np.var(dat['太郎']))
-print('標準差:', np.std(dat['太郎']))
+print("太郎---------")
+print("平均:", np.mean(dat["太郎"]))
+print("變異數:", np.var(dat["太郎"]))
+print("標準差:", np.std(dat["太郎"]))
 
-#第五張圖
+# 第五張圖
 plt.subplot(235)
 
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-plt.rcParams['axes.unicode_minus']=False
-plt.rcParams['font.size']=15
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
+plt.rcParams["axes.unicode_minus"] = False
+plt.rcParams["font.size"] = 15
 
-score = [800,750,450,680,802,630,710,450,250,320,610,670,815,870,900,650,450,730,840,675,795,585,870,960,190]
-n, b, p = plt.hist(score, bins = [10,255,405,605,785,905,990], edgecolor = 'k')
+score = [
+    800,
+    750,
+    450,
+    680,
+    802,
+    630,
+    710,
+    450,
+    250,
+    320,
+    610,
+    670,
+    815,
+    870,
+    900,
+    650,
+    450,
+    730,
+    840,
+    675,
+    795,
+    585,
+    870,
+    960,
+    190,
+]
+n, b, p = plt.hist(score, bins=[10, 255, 405, 605, 785, 905, 990], edgecolor="k")
 
 for i in range(len(n)):
-    plt.text(b[i]+10, n[i], int(n[i]), ha='center', va='bottom', fontsize=10)
+    plt.text(b[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=10)
 
-plt.title('多益成績分布直方圖')
-plt.xlabel('成績')
-plt.ylabel('人數')
+plt.title("多益成績分布直方圖")
+plt.xlabel("成績")
+plt.ylabel("人數")
 
-#第六張圖
+# 第六張圖
 plt.subplot(236)
 
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'hist 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(
+    num="hist 集合 2",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 # Fixing random state for reproducibility
 np.random.seed(1234567)
 
-N = 10000 #資料個數
-num_bins = 100 #直方圖顯示時的束數
+N = 10000  # 資料個數
+num_bins = 100  # 直方圖顯示時的束數
 
-#第一張圖
+# 第一張圖
 plt.subplot(231)
 
 
@@ -177,18 +221,18 @@ mu, sigma = 100, 15
 x = mu + sigma * np.random.randn(10000)
 
 # the histogram of the data
-n, bins, patches = plt.hist(x, 50, density = True, facecolor='g', alpha=0.75)
+n, bins, patches = plt.hist(x, 50, density=True, facecolor="g", alpha=0.75)
 
-plt.xlabel('Smarts')
-plt.ylabel('Probability')
-plt.title('Histogram of IQ')
-plt.text(60, .025, r'$\mu=100,\ \sigma=15$')
+plt.xlabel("Smarts")
+plt.ylabel("Probability")
+plt.title("Histogram of IQ")
+plt.text(60, 0.025, r"$\mu=100,\ \sigma=15$")
 plt.xlim(40, 160)
 plt.ylim(0, 0.03)
 plt.grid(True)
 
 
-#第二張圖
+# 第二張圖
 plt.subplot(232)
 
 
@@ -198,69 +242,67 @@ sigma = 21
 x = mu + sigma * np.random.randn(1000)
 
 num_bins = 100
-   
-n, bins, patches = plt.hist(x, num_bins,
-                            density = 1,
-                            color ='green',
-                            alpha = 0.7)
-   
-y = ((1 / (np.sqrt(2 * np.pi) * sigma)) *
-     np.exp(-0.5 * (1 / sigma * (bins - mu))**2))
-  
-plt.plot(bins, y, '--', color ='black')
-  
-plt.xlabel('X-Axis')
-plt.ylabel('Y-Axis') 
-  
-plt.title('matplotlib.pyplot.hist() function Example\n\n',
-          fontweight ="bold")
 
-#第三張圖
+n, bins, patches = plt.hist(x, num_bins, density=1, color="green", alpha=0.7)
+
+y = (1 / (np.sqrt(2 * np.pi) * sigma)) * np.exp(-0.5 * (1 / sigma * (bins - mu)) ** 2)
+
+plt.plot(bins, y, "--", color="black")
+
+plt.xlabel("X-Axis")
+plt.ylabel("Y-Axis")
+
+plt.title("matplotlib.pyplot.hist() function Example\n\n", fontweight="bold")
+
+# 第三張圖
 plt.subplot(233)
 
-np.random.seed(10**7) 
+np.random.seed(10**7)
 n_bins = 20
-x = np.random.randn(10000, 3) 
-    
-colors = ['green', 'blue', 'lime'] 
-  
-plt.hist(x, n_bins, density = True,  
-         histtype ='bar', 
-         color = colors, 
-         label = colors) 
-  
-plt.legend(prop ={'size':10}) 
-  
-plt.title('matplotlib.pyplot.hist() function Example\n\n', 
-          fontweight ="bold") 
+x = np.random.randn(10000, 3)
 
-#第四張圖
+colors = ["green", "blue", "lime"]
+
+plt.hist(x, n_bins, density=True, histtype="bar", color=colors, label=colors)
+
+plt.legend(prop={"size": 10})
+
+plt.title("matplotlib.pyplot.hist() function Example\n\n", fontweight="bold")
+
+# 第四張圖
 plt.subplot(234)
 
 
-#第五張圖
+# 第五張圖
 plt.subplot(235)
 
 
-
-#第六張圖
+# 第六張圖
 plt.subplot(236)
 
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'hist 集合 3', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(
+    num="hist 集合 3",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 # Fixing random state for reproducibility
 np.random.seed(1234567)
 
-N = 10000 #資料個數
-num_bins = 100 #直方圖顯示時的束數
+N = 10000  # 資料個數
+num_bins = 100  # 直方圖顯示時的束數
 
-#第一張圖
+# 第一張圖
 plt.subplot(231)
 
 # 生成三组随机数据
@@ -269,129 +311,142 @@ data2 = np.random.normal(2, 1, 1000)
 data3 = np.random.normal(-2, 1, 1000)
 
 # 绘制直方图
-plt.hist(data1, bins=30, alpha=0.5, label='Data 1')
-plt.hist(data2, bins=30, alpha=0.5, label='Data 2')
-plt.hist(data3, bins=30, alpha=0.5, label='Data 3')
+plt.hist(data1, bins=30, alpha=0.5, label="Data 1")
+plt.hist(data2, bins=30, alpha=0.5, label="Data 2")
+plt.hist(data3, bins=30, alpha=0.5, label="Data 3")
 
 # 设置图表属性
-plt.title('RUNOOB hist() TEST')
-plt.xlabel('Value')
-plt.ylabel('Frequency')
+plt.title("RUNOOB hist() TEST")
+plt.xlabel("Value")
+plt.ylabel("Frequency")
 plt.legend()
 
 
-#第二張圖
+# 第二張圖
 plt.subplot(232)
 
-#同坐標軸的多個頻次直方圖
+# 同坐標軸的多個頻次直方圖
 
 x1 = np.random.normal(0, 0.8, 1000)
 x2 = np.random.normal(-2, 1, 1000)
 x3 = np.random.normal(3, 2, 1000)
-kwargs = dict(histtype='stepfilled', alpha=0.3, density=True, bins=40)
+kwargs = dict(histtype="stepfilled", alpha=0.3, density=True, bins=40)
 plt.hist(x1, **kwargs)
 plt.hist(x2, **kwargs)
 plt.hist(x3, **kwargs)
 
 
-#第三張圖
+# 第三張圖
 plt.subplot(233)
 
 
-#第四張圖
+# 第四張圖
 plt.subplot(234)
 
 
-#第五張圖
+# 第五張圖
 plt.subplot(235)
 
 
-
-#第六張圖
+# 第六張圖
 plt.subplot(236)
 
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'hist 集合 4', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(
+    num="hist 集合 4",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 # Fixing random state for reproducibility
 np.random.seed(1234567)
 
-N = 10000 #資料個數
-num_bins = 100 #直方圖顯示時的束數
+N = 10000  # 資料個數
+num_bins = 100  # 直方圖顯示時的束數
 
-#第一張圖
+# 第一張圖
 plt.subplot(231)
 
 # 生成一组随机数据
 data = np.random.randn(1000)
 
 # 绘制直方图
-plt.hist(data, bins=30, color='skyblue', alpha=0.8)
+plt.hist(data, bins=30, color="skyblue", alpha=0.8)
 
 # 设置图表属性
-plt.title('RUNOOB hist() Test')
-plt.xlabel('Value')
-plt.ylabel('Frequency')
+plt.title("RUNOOB hist() Test")
+plt.xlabel("Value")
+plt.ylabel("Frequency")
 
 
-#第二張圖
+# 第二張圖
 plt.subplot(232)
 
-plt.style.use('seaborn-white')
+plt.style.use("seaborn-white")
 data = np.random.randn(1000)
 plt.hist(data)
 
 
-#第三張圖
+# 第三張圖
 plt.subplot(233)
 
 
-plt.hist(data, bins=30, density=True, alpha=0.5, histtype='stepfilled', color='steelblue', edgecolor='none')
+plt.hist(
+    data,
+    bins=30,
+    density=True,
+    alpha=0.5,
+    histtype="stepfilled",
+    color="steelblue",
+    edgecolor="none",
+)
 
 
-#第四張圖
+# 第四張圖
 plt.subplot(234)
 
 
-#第五張圖
+# 第五張圖
 plt.subplot(235)
 
 
-
-#第六張圖
+# 第六張圖
 plt.subplot(236)
 
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 使用 NumPy 生成随机数
 random_data = np.random.normal(170, 10, 250)
- 
+
 # 将数据转换为 Pandas DataFrame
 dataframe = pd.DataFrame(random_data)
- 
+
 # 使用 Pandas hist() 方法绘制直方图
 dataframe.hist()
 
 # 设置图表属性
-plt.title('RUNOOB hist() Test')
-plt.xlabel('X-Value')
-plt.ylabel('Y-Value')
+plt.title("RUNOOB hist() Test")
+plt.xlabel("X-Value")
+plt.ylabel("Y-Value")
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 # 生成随机数据
 data = pd.Series(np.random.normal(size=100))
@@ -401,24 +456,20 @@ data = pd.Series(np.random.normal(size=100))
 plt.hist(data, bins=10)
 
 # 设置图形标题和坐标轴标签
-plt.title('RUNOOB hist() Tes')
-plt.xlabel('X-Values')
-plt.ylabel('Y-Values')
+plt.title("RUNOOB hist() Tes")
+plt.xlabel("X-Values")
+plt.ylabel("Y-Values")
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 """

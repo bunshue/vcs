@@ -1,67 +1,77 @@
 # 熱圖 heatmap 集合
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
-import seaborn as sns #海生, 自動把圖畫得比較好看
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#熱圖
+# 熱圖
 
-df = pd.DataFrame([[65,92,78,83,70], 
-                   [90,72,76,93,56], 
-                   [81,85,91,89,77], 
-                   [79,53,47,94,80]],
-                   index = ['王小明','李小美','陳大同','林小玉'],
-                   columns = ['國文','英文','數學','自然','社會'])
-print('原資料 :\n', df, '\n')
+df = pd.DataFrame(
+    [
+        [65, 92, 78, 83, 70],
+        [90, 72, 76, 93, 56],
+        [81, 85, 91, 89, 77],
+        [79, 53, 47, 94, 80],
+    ],
+    index=["王小明", "李小美", "陳大同", "林小玉"],
+    columns=["國文", "英文", "數學", "自然", "社會"],
+)
+print("原資料 :\n", df, "\n")
 
 print(type(df))
-#sns.set(font="meiryo")
+# sns.set(font="meiryo")
 sns.heatmap(df)
-#sns.heatmap(df, linewidths=.1, annot=True, fmt="d")
-#sns.heatmap(df, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
+# sns.heatmap(df, linewidths=.1, annot=True, fmt="d")
+# sns.heatmap(df, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#熱圖 差別在 index 與 columns
+# 熱圖 差別在 index 與 columns
 
-df = pd.DataFrame([[65,92,78,83,70], 
-                   [90,72,76,93,56], 
-                   [81,85,91,89,77], 
-                   [79,53,47,94,80]])
-print('原資料 :\n', df, '\n')
+df = pd.DataFrame(
+    [
+        [65, 92, 78, 83, 70],
+        [90, 72, 76, 93, 56],
+        [81, 85, 91, 89, 77],
+        [79, 53, 47, 94, 80],
+    ]
+)
+print("原資料 :\n", df, "\n")
 
 print(type(df))
-#sns.set(font="meiryo")
+# sns.set(font="meiryo")
 sns.heatmap(df)
-#sns.heatmap(df, linewidths=.1, annot=True, fmt="d")
-#sns.heatmap(df, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
+# sns.heatmap(df, linewidths=.1, annot=True, fmt="d")
+# sns.heatmap(df, linewidths=.5, cmap="coolwarm", fmt="d", annot=True)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-listdata = [[15, 13, 10, 13, 15],
-            [12, 8, 5, 8, 12],
-            [10, 5, 0, 5, 10],
-            [12, 8, 5, 8, 12],
-            [15, 13, 10, 13, 15]]
+listdata = [
+    [15, 13, 10, 13, 15],
+    [12, 8, 5, 8, 12],
+    [10, 5, 0, 5, 10],
+    [12, 8, 5, 8, 12],
+    [15, 13, 10, 13, 15],
+]
 
 """
 listdata = [[ 1.,          0.91141626,  0.99267261,  0.99020915,  0.12721213,  0.328172,       -0.1305195,  -0.23568907],
@@ -77,16 +87,14 @@ listdata = [[ 1.,          0.91141626,  0.99267261,  0.99020915,  0.12721213,  0
 ndarray2d = np.array(listdata)
 print(type(ndarray2d))
 print(ndarray2d)
-print('維度', ndarray2d.ndim)
-print('形狀', ndarray2d.shape)
-print('數量', ndarray2d.size)
+print("維度", ndarray2d.ndim)
+print("形狀", ndarray2d.shape)
+print("數量", ndarray2d.size)
 
-sns.heatmap(ndarray2d, cmap = 'Reds')
-#sns.heatmap(ndarray2d, cmap="coolwarm")
-#sns.heatmap(ndarray2d, annot = True)
+sns.heatmap(ndarray2d, cmap="Reds")
+# sns.heatmap(ndarray2d, cmap="coolwarm")
+# sns.heatmap(ndarray2d, annot = True)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
