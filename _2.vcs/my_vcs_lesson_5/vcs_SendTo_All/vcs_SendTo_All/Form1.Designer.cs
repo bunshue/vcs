@@ -34,6 +34,7 @@
             this.bt_save = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bt_setup = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -85,11 +86,25 @@
             this.bt_setup.UseVisualStyleBackColor = true;
             this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
             // 
+            // bt_clear
+            // 
+            this.bt_clear.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_clear.BackgroundImage")));
+            this.bt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.ForeColor = System.Drawing.Color.Black;
+            this.bt_clear.Location = new System.Drawing.Point(524, 58);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(40, 40);
+            this.bt_clear.TabIndex = 47;
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 535);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.bt_copy);
@@ -108,6 +123,7 @@
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button bt_setup;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

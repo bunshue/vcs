@@ -142,18 +142,6 @@ namespace vcs_SendTo_All
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            flag_show_big_files_only = Properties.Settings.Default.show_big_files_only;
-            if (flag_show_big_files_only == true)
-            {
-                richTextBox1.Text += "僅顯示大檔, ";
-                file_size_limit = Properties.Settings.Default.file_size_limit * 1024 * 1024;
-                richTextBox1.Text += "檔案界限 : " + file_size_limit.ToString() + "\n";
-            }
-            else
-            {
-                //richTextBox1.Text += "顯示所有檔案\n";
-            }
-
             if (flag_operation_mode == MODE0)
                 this.Text = "顯示檔案名稱";
             else if (flag_operation_mode == MODE1)
@@ -164,17 +152,27 @@ namespace vcs_SendTo_All
                 this.Text = "計算檔案之MD5值";
             else if (flag_operation_mode == MODE6)
             {
+                flag_show_big_files_only = Properties.Settings.Default.show_big_files_only;
                 if (flag_show_big_files_only == false)
+                {
+                    richTextBox1.Text += "顯示所有檔案\n";
                     this.Text = "轉出檔案目錄資料 目錄下檔名轉出純文字(全部)";
+                }
                 else
+                {
+                    richTextBox1.Text += "僅顯示大檔\n";
                     this.Text = "轉出檔案目錄資料 目錄下檔名轉出純文字(僅大檔)";
+                }
+                file_size_limit = Properties.Settings.Default.file_size_limit * 1024 * 1024;
+                richTextBox1.Text += "檔案界限 : " + file_size_limit.ToString() + "\n\n";
             }
             else
                 this.Text = "未定義";
 
             bt_copy.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y);
             bt_save.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width * 2, richTextBox1.Location.Y);
-            bt_setup.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height);
+            bt_setup.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height * 2);
 
             string sendto_folder = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
             //richTextBox1.Text += "[傳送到]資料夾位置:\n" + sendto_folder + "\n";
@@ -196,9 +194,14 @@ namespace vcs_SendTo_All
 
             filenames.Sort();
 
+            fileinfos.Clear();
+            total_size = 0;
+            total_files = 0;
+
             for (i = 0; i < (len - 1); i++)
             {
                 string filename = filenames[i];
+
                 if (flag_operation_mode == MODE0)
                 {
                     richTextBox1.Text += filename + "\t";
@@ -246,11 +249,51 @@ namespace vcs_SendTo_All
                 {
                     //轉出檔案目錄資料 目錄下檔名轉出純文字 全部
                     export_filename(filename, 0);
+
+
+
                 }
             }
 
+            if (fileinfos.Count == 0)
+                richTextBox1.Text += "找不到資料\n";
+            else
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+
+            for (i = 0; i < fileinfos.Count; i++)
+            {
+                string filename = fileinfos[i].filename;
+                //richTextBox1.Text += filename + "\n";
+
+                FileInfo fi = new FileInfo(fileinfos[i].filepath + "\\" + filename);
+                richTextBox1.Text += fi.FullName + "\t";
+                //richTextBox1.Text += fi.Length.ToString() + "\t";
+                richTextBox1.Text += ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+                MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + filename);
+
+                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
+                {
+                    richTextBox1.Text += "影片檔案\t";
+
+                    int w = f.Video[0].Width;
+                    int h = f.Video[0].Height;
+                    richTextBox1.Text += w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
+                    richTextBox1.Text += f.Video[0].FrameRate.ToString() + "\t";
+                    richTextBox1.Text += f.General.DurationString + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "非 影片檔案\n";
+                }
+            }
+
+            //return;
+            //debug
+
             if (flag_operation_mode == MODE6)
             {
+
                 fileinfos.Clear();
                 total_size = 0;
                 total_files = 0;
@@ -266,45 +309,31 @@ namespace vcs_SendTo_All
 
                 for (i = 0; i < fileinfos.Count; i++)
                 {
-                    richTextBox1.Text += fileinfos[i].filename + "\n";
+                    string filename = fileinfos[i].filename;
+                    //richTextBox1.Text += filename + "\n";
 
-                    MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + fileinfos[i].filename);
+                    FileInfo fi = new FileInfo(fileinfos[i].filepath + "\\" + filename);
+                    richTextBox1.Text += fi.FullName + "\t";
+                    //richTextBox1.Text += fi.Length.ToString() + "\t";
+                    richTextBox1.Text += ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+                    MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + filename);
+
                     if ((f.InfoAvailable == true) && (f.Video.Count > 0))
                     {
-                        richTextBox1.Text += "影片檔案\n";
-
-                        FileInfo fi = new FileInfo(fileinfos[i].filename);
-                        richTextBox1.Text += fi.FullName + "\n";
-                        //richTextBox1.Text += fi.Length + "\n";    ?????
-                        richTextBox1.Text += f.Video[0].FrameRate.ToString()+"\n";
-                        richTextBox1.Text += f.General.DurationString + "\n";
+                        richTextBox1.Text += "影片檔案\t";
 
                         int w = f.Video[0].Width;
                         int h = f.Video[0].Height;
-                        richTextBox1.Text += "輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                        richTextBox1.Text += "FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-
-                        //richTextBox1.Text += "FullName: " + fi.FullName + "\n";
-                        //richTextBox1.Text += "FullName: " + fi.Length.ToString() + "\n";
-                        //richTextBox1.Text += "size: " + ByteConversionTBGBMBKB(Convert.ToInt64(12345)) + "\n";
-                        //richTextBox1.Text += "DurationString: " + f.General.DurationString + "\n";
-
-
-                        richTextBox1.Text += "\n";
-                        /*
-
-                        richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                            fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(12345)), w.ToString(), h.ToString(),
-                            f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-                        */
+                        richTextBox1.Text += w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
+                        richTextBox1.Text += f.Video[0].FrameRate.ToString() + "\t";
+                        richTextBox1.Text += f.General.DurationString + "\n";
                     }
                     else
                     {
                         richTextBox1.Text += "非 影片檔案\n";
-
                     }
                 }
-
             }
         }
 
@@ -484,11 +513,14 @@ namespace vcs_SendTo_All
         private void bt_setup_Click(object sender, EventArgs e)
         {
             //設定頁
-
             Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
             frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
             frm.ShowDialog();   //顯示 frm 視窗
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
     }
 }
-
