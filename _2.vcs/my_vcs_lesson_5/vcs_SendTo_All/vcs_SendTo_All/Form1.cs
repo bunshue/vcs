@@ -17,7 +17,7 @@ namespace vcs_SendTo_All
 {
     public partial class Form1 : Form
     {
-        int flag_operation_mode = MODE1;
+        int flag_operation_mode = MODE6;
 
         private const int MODE0 = 0x00;   //顯示檔案名稱
         private const int MODE1 = 0x01;   //檢視檔案內容
@@ -249,54 +249,63 @@ namespace vcs_SendTo_All
                 }
             }
 
-            /*
-            fileinfos.Clear();
-            total_size = 0;
-            total_files = 0;
-
-            //string foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_SendTo_All\vcs_SendTo_All\bin\Debug";
-            string foldername = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案\小赠品";
-            export_filename(foldername, 0);
-
-            if (fileinfos.Count == 0)
-                richTextBox1.Text += "找不到資料\n";
-            else
-                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
-
-            for (i = 0; i < fileinfos.Count; i++)
+            if (flag_operation_mode == MODE6)
             {
-                richTextBox1.Text += fileinfos[i].filename + "\n";
+                fileinfos.Clear();
+                total_size = 0;
+                total_files = 0;
 
-                MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + fileinfos[i].filename);
-                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-                {
-                    richTextBox1.Text += "影片檔案\n";
+                //string foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_SendTo_All\vcs_SendTo_All\bin\Debug";
+                string foldername = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案\小赠品";
+                export_filename(foldername, 0);
 
-                    FileInfo fi = new FileInfo(fileinfos[i].filename);
-                    //richTextBox1.Text += fi.FullName + "\n";
-                    //richTextBox1.Text += fi.Length + "\n";
-                    //richTextBox1.Text += f.Video[0].FrameRate.ToString()+"\n";
-                    //richTextBox1.Text += f.General.DurationString + "\n";
-
-                    int w = f.Video[0].Width;
-                    int h = f.Video[0].Height;
-                    richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
-                    richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
-                    //richTextBox1.Text += "  xxxxx: " + xxxxx + "\n";
-
-
-                    richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
-                        fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(12345)), w.ToString(), h.ToString(),
-                        f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
-
-                }
+                if (fileinfos.Count == 0)
+                    richTextBox1.Text += "找不到資料\n";
                 else
-                {
-                    richTextBox1.Text += "非 影片檔案\n";
+                    richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
 
+                for (i = 0; i < fileinfos.Count; i++)
+                {
+                    richTextBox1.Text += fileinfos[i].filename + "\n";
+
+                    MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + fileinfos[i].filename);
+                    if ((f.InfoAvailable == true) && (f.Video.Count > 0))
+                    {
+                        richTextBox1.Text += "影片檔案\n";
+
+                        FileInfo fi = new FileInfo(fileinfos[i].filename);
+                        richTextBox1.Text += fi.FullName + "\n";
+                        //richTextBox1.Text += fi.Length + "\n";    ?????
+                        richTextBox1.Text += f.Video[0].FrameRate.ToString()+"\n";
+                        richTextBox1.Text += f.General.DurationString + "\n";
+
+                        int w = f.Video[0].Width;
+                        int h = f.Video[0].Height;
+                        richTextBox1.Text += "輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                        richTextBox1.Text += "FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+
+                        //richTextBox1.Text += "FullName: " + fi.FullName + "\n";
+                        //richTextBox1.Text += "FullName: " + fi.Length.ToString() + "\n";
+                        //richTextBox1.Text += "size: " + ByteConversionTBGBMBKB(Convert.ToInt64(12345)) + "\n";
+                        //richTextBox1.Text += "DurationString: " + f.General.DurationString + "\n";
+
+
+                        richTextBox1.Text += "\n";
+                        /*
+
+                        richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                            fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(12345)), w.ToString(), h.ToString(),
+                            f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                        */
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "非 影片檔案\n";
+
+                    }
                 }
+
             }
-            */
         }
 
         private void bt_copy_Click(object sender, EventArgs e)

@@ -1,15 +1,4 @@
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 # 6 - axis setting
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
-Tutorial reference:
-http://www.scipy-lectures.org/intro/matplotlib/matplotlib.html
-"""
 
 import matplotlib.pyplot as plt
 import numpy as np
