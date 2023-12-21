@@ -58,13 +58,13 @@ namespace vcs_Communication_Tx
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //將文本框中的值， 發送給接收端
-            string strURL = "將文本框中的值， 發送給接收端";
+            string message = "傳送訊息 : " + textBox1.Text;
             CopyDataStruct cds;
             cds.dwData = (IntPtr)1; //這裡可以傳入一些自定義的數據，但只能是4字節整數      
-            cds.lpData = strURL;    //消息字符串
-            cds.cbData = System.Text.Encoding.Default.GetBytes(strURL).Length + 1;  //注意，這裡的長度是按字節來算的
+            cds.lpData = message;    //消息字符串
+            cds.cbData = System.Text.Encoding.Default.GetBytes(message).Length + 1;  //注意，這裡的長度是按字節來算的
             SendMessage(FindWindow(null, "Rx"), WM_COPYDATA, 0, ref cds);       // 這裡要修改成接收窗口的標題“接收端”
         }
     }
 }
+

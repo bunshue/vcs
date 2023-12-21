@@ -40,6 +40,7 @@ namespace vcs_SendTo_All
 
             lb_main_mesg1.Text = "";
             lb_main_mesg2.Text = "";
+            tb_filesize_mb.Focus();
         }
 
         void show_item_location()
@@ -121,6 +122,14 @@ namespace vcs_SendTo_All
             //richTextBox1.Text += "檔案界限 : " + file_size_limit.ToString() + "\n";
 
             Properties.Settings.Default.Save();
+        }
+
+        private void tb_filesize_mb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (Char)13)
+            {
+                bt_save_Click(sender, e);
+            }
         }
     }
 }

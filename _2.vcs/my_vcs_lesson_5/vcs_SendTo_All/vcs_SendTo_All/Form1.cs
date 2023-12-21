@@ -19,6 +19,8 @@ namespace vcs_SendTo_All
     {
         int flag_operation_mode = MODE6;
 
+        bool flag_debug_mode = false;  //debug模式
+
         private const int MODE0 = 0x00;   //顯示檔案名稱
         private const int MODE1 = 0x01;   //檢視檔案內容
         private const int MODE2 = 0x02;   //簡中轉正中
@@ -163,8 +165,9 @@ namespace vcs_SendTo_All
                     richTextBox1.Text += "僅顯示大檔\n";
                     this.Text = "轉出檔案目錄資料 目錄下檔名轉出純文字(僅大檔)";
                 }
+                //檔案界限
                 file_size_limit = Properties.Settings.Default.file_size_limit * 1024 * 1024;
-                richTextBox1.Text += "檔案界限 : " + file_size_limit.ToString() + "\n\n";
+                richTextBox1.Text += "檔案界限 : " + Properties.Settings.Default.file_size_limit.ToString() + " MB\n\n";
             }
             else
                 this.Text = "未定義";
@@ -248,13 +251,37 @@ namespace vcs_SendTo_All
                 else if (flag_operation_mode == MODE6)
                 {
                     //轉出檔案目錄資料 目錄下檔名轉出純文字 全部
-                    export_filename(filename, 0);
-
-
-
+                    export_filename(filename);
                 }
             }
 
+            if (flag_operation_mode == MODE6)
+            {
+                //顯示檔案目錄資料
+                show_filename_data();
+            }
+
+            if (flag_debug_mode == true)
+            {
+                //以下為 MODE6 的 debug
+                if (flag_operation_mode == MODE6)
+                {
+                    fileinfos.Clear();
+                    total_size = 0;
+                    total_files = 0;
+
+                    string foldername = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案\小赠品";
+                    export_filename(foldername);
+
+                    //顯示檔案目錄資料
+                    show_filename_data();
+                }
+            }
+        }
+
+        void show_filename_data()
+        {
+            int i;
             if (fileinfos.Count == 0)
                 richTextBox1.Text += "找不到資料\n";
             else
@@ -287,54 +314,6 @@ namespace vcs_SendTo_All
                     richTextBox1.Text += "非 影片檔案\n";
                 }
             }
-
-            //return;
-            //debug
-
-            if (flag_operation_mode == MODE6)
-            {
-
-                fileinfos.Clear();
-                total_size = 0;
-                total_files = 0;
-
-                //string foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_5\vcs_SendTo_All\vcs_SendTo_All\bin\Debug";
-                string foldername = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案\小赠品";
-                export_filename(foldername, 0);
-
-                if (fileinfos.Count == 0)
-                    richTextBox1.Text += "找不到資料\n";
-                else
-                    richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
-
-                for (i = 0; i < fileinfos.Count; i++)
-                {
-                    string filename = fileinfos[i].filename;
-                    //richTextBox1.Text += filename + "\n";
-
-                    FileInfo fi = new FileInfo(fileinfos[i].filepath + "\\" + filename);
-                    richTextBox1.Text += fi.FullName + "\t";
-                    //richTextBox1.Text += fi.Length.ToString() + "\t";
-                    richTextBox1.Text += ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
-
-                    MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + filename);
-
-                    if ((f.InfoAvailable == true) && (f.Video.Count > 0))
-                    {
-                        richTextBox1.Text += "影片檔案\t";
-
-                        int w = f.Video[0].Width;
-                        int h = f.Video[0].Height;
-                        richTextBox1.Text += w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\t";
-                        richTextBox1.Text += f.Video[0].FrameRate.ToString() + "\t";
-                        richTextBox1.Text += f.General.DurationString + "\n";
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "非 影片檔案\n";
-                    }
-                }
-            }
         }
 
         private void bt_copy_Click(object sender, EventArgs e)
@@ -359,7 +338,6 @@ namespace vcs_SendTo_All
             }
 
             richTextBox1.Text += sb.ToString() + "\n";
-
             richTextBox1.Text += "print(\"------------------------------------------------------------\")  # 60個\n";
         }
 
@@ -422,26 +400,22 @@ namespace vcs_SendTo_All
         }
 
         //轉出檔案目錄資料 目錄下檔名轉出純文字
-        void export_filename(string target_dir, int mode)
+        void export_filename(string target_dir)
         {
-            //mode = 0 匯出所有檔案
-            //mode = 1 僅匯出大檔
-
             if (Directory.Exists(target_dir) == false)     //確認資料夾是否存在
                 return;
             //撈出多層
-            //string target_dir = @"C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路";
-            richTextBox1.Text += "資料夾: " + target_dir + "\n";
-            ShowDirectory(target_dir, mode);
+            //richTextBox1.Text += "資料夾: " + target_dir + "\n";
+            ShowDirectory(target_dir);
         }
 
-        public bool ShowDirectory(string target_dir, int mode)
+        public bool ShowDirectory(string target_dir)
         {
             bool result = false;
             string[] files = Directory.GetFiles(target_dir);
             string[] dirs = Directory.GetDirectories(target_dir);
-            richTextBox1.Text += "資料夾: " + target_dir + "\t";
-            richTextBox1.Text += "檔案個數 = " + files.Length.ToString() + "\n";
+            //richTextBox1.Text += "資料夾: " + target_dir + "\t檔案個數 = " + files.Length.ToString() + "\n";
+
             foreach (string file in files)
             {
                 FileInfo fi = new FileInfo(file);
@@ -456,7 +430,7 @@ namespace vcs_SendTo_All
                 richTextBox1.Text += "最近寫入時間：" + fi.LastWriteTime.ToString() + Environment.NewLine;
                 */
 
-                if ((mode == 0) || ((mode == 1) && (filesize > 1024 * 1024 * 1024)))
+                if ((flag_show_big_files_only == false) || (filesize > file_size_limit))
                 {
                     richTextBox1.Text += "檔案: " + file + "\t";
                     richTextBox1.Text += "Size: " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
@@ -469,7 +443,7 @@ namespace vcs_SendTo_All
             foreach (string dir in dirs)
             {
                 //richTextBox1.Text += "資料夾: " + dir + "\n";
-                ShowDirectory(dir, mode);
+                ShowDirectory(dir);
             }
             return result;
         }
@@ -524,3 +498,4 @@ namespace vcs_SendTo_All
         }
     }
 }
+

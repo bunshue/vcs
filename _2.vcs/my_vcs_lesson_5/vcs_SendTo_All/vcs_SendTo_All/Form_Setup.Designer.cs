@@ -46,6 +46,7 @@
             this.tb_filesize_mb.TabIndex = 27;
             this.tb_filesize_mb.Text = "5";
             this.tb_filesize_mb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tb_filesize_mb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_filesize_mb_KeyPress);
             // 
             // cb_search_big_files
             // 
