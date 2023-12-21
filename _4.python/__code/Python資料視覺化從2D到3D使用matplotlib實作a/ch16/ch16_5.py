@@ -1,4 +1,3 @@
-# ch16_5.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -15,8 +14,6 @@ labels = ['data1','data2','data3','data4','data5']
 my_mark = dict(markerfacecolor='r',marker='o')
 plt.boxplot(data,labels=labels,flierprops=my_mark)
 plt.title("5 組數據的箱線圖",fontsize=16,color='b')
+
 plt.show() 
-
-
-
-      
+     

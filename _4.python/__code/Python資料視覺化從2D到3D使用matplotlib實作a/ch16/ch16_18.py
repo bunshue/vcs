@@ -1,4 +1,3 @@
-# ch16_18.py
 import matplotlib.pyplot as plt
 import numpy as np
 

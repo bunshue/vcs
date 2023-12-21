@@ -1,4 +1,3 @@
-# ch16_3.py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -14,8 +13,6 @@ data = [data1, data2, data3, data4, data5]
 labels = ['data1','data2','data3','data4','data5']
 plt.boxplot(data,labels=labels)
 plt.title("5 組數據的箱線圖",fontsize=16,color='b')
+
 plt.show() 
-
-
-
       
