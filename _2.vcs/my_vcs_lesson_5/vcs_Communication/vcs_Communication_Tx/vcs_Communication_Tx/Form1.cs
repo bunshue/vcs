@@ -11,7 +11,6 @@ using System.Runtime.InteropServices;
 
 /*
 這種方法的原理就是，利用FindWindow函數通過窗體標題查找出對方的進程，然後取得窗口
-
 Handle，再通過DLL庫中的SendMessage函數發送消息給接收端，這樣就完成了程序的直接通信。
 */
 
@@ -26,7 +25,6 @@ namespace vcs_Communication_Tx
             public int cbData;
 
             [MarshalAs(UnmanagedType.LPStr)]
-
             public string lpData;
         }
 

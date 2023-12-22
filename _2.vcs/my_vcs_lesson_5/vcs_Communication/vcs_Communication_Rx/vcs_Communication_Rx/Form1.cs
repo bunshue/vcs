@@ -30,8 +30,7 @@ namespace vcs_Communication_Rx
             if (e.Msg == WM_COPYDATA)
             {
                 CopyDataStruct cds = (CopyDataStruct)e.GetLParam(typeof(CopyDataStruct));
-                richTextBox1.Text += cds.lpData.ToString() + "\n";  //將文本信息顯示到文本框
-                //MessageBox.Show(cds.lpData);
+                richTextBox1.Text += "取得訊息: " + cds.lpData.ToString() + "\n";
             }
             base.WndProc(ref e);
         }
