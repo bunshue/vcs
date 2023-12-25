@@ -1,4 +1,27 @@
+
+print('寫入一些日誌')
+
 import logging
+
+logging.basicConfig(filename = 'log_filename.txt', level = logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
+logging.debug('這是一個日誌訊息 DEBUG')
+logging.info('這是一個日誌訊息 INFO')
+logging.warning('這是一個日誌訊息 WARNING')
+logging.error('這是一個日誌訊息 ERROR')
+logging.critical('這是一個日誌訊息 CRITCAL')
+
+"""
+2023-12-25 13:23:29,817 - DEBUG - 這是一個日誌訊息 DEBUG
+2023-12-25 13:23:29,819 - INFO - 這是一個日誌訊息 INFO
+2023-12-25 13:23:29,819 - WARNING - 這是一個日誌訊息 WARNING
+2023-12-25 13:23:29,819 - ERROR - 這是一個日誌訊息 ERROR
+2023-12-25 13:23:29,819 - CRITICAL - 這是一個日誌訊息 CRITCAL
+"""
+
+print('------------------------------------------------------------')	#60個
+
 
 logger = logging.getLogger("untar")
 
@@ -11,7 +34,7 @@ logging.warning("Unknown Error, exiting")
 
 
 
-
+print('------------------------------------------------------------')	#60個
 
 
 '''
@@ -55,16 +78,6 @@ log.info("Storing {}".format(src_file))
 log.info("Rebuilding Python modules")
 
 log.debug("Already has src {}".format(src_file))
-
-
-
-
-
-
-
-
-
-
 
 
 print('------------------------------------------------------------')	#60個

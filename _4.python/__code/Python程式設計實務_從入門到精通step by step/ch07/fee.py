@@ -1,0 +1,5 @@
+money=int(input('請輸入班遊剩餘的金額:'))
+num=int(input('請輸入這次出遊的總人數:'))
+ans=divmod(money,num)
+print('每一位同學的平均退費為',ans[0],'元')
+print('剩餘可以存入班費共同基金為 ',ans[1],'元')

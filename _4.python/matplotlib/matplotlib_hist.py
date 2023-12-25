@@ -188,6 +188,18 @@ plt.ylabel("人數")
 # 第六張圖
 plt.subplot(236)
 
+N = 100
+d1 = np.random.randint(1, 6+1, 1000)#不含尾
+d2 = np.random.randint(1, 6+1, 1000)
+
+dsums = d1 + d2
+
+#count, bins, ignored = plt.hist(dsums, 11, density=True)   #以密度表示
+count, bins, ignored = plt.hist(dsums, 11)  #以總數表示
+plt.title("擲兩個骰子多次 看其分布")
+plt.show()
+
+
 
 plt.show()
 
