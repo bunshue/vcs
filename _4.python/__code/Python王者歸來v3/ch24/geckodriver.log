@@ -1,0 +1,555 @@
+1700032599805	geckodriver	INFO	Listening on 127.0.0.1:58057
+1700032602772	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofile9F0L39"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700032603378	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700032603477	Marionette	INFO	Listening on port 58067
+Read port: 58067
+1700032603688	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700032633477	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1700032784990	Marionette	INFO	Stopped listening on port 58067
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700034081431	geckodriver	INFO	Listening on 127.0.0.1:58266
+1700034084389	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileocqfqH"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700034084775	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700034084876	Marionette	INFO	Listening on port 58276
+Read port: 58276
+1700034085092	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700034090531	Marionette	INFO	Stopped listening on port 58276
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700034178694	geckodriver	INFO	Listening on 127.0.0.1:58313
+1700034181658	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilewT5q5c"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700034182026	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700034182110	Marionette	INFO	Listening on port 58323
+Read port: 58323
+1700034182315	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700034195130	Marionette	INFO	Stopped listening on port 58323
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700035460814	geckodriver	INFO	Listening on 127.0.0.1:58942
+1700035463777	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilekJpRfQ"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700035464150	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700035464234	Marionette	INFO	Listening on port 58952
+Read port: 58952
+1700035464461	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700035495049	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1700035631581	Marionette	INFO	Stopped listening on port 58952
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700035659422	geckodriver	INFO	Listening on 127.0.0.1:62777
+1700035662374	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilekW49Ca"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700035662901	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700035662999	Marionette	INFO	Listening on port 62787
+Read port: 62787
+1700035663259	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700035693216	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1700035974795	Marionette	INFO	Stopped listening on port 62787
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700036022950	geckodriver	INFO	Listening on 127.0.0.1:62893
+1700036025904	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileWD9MQD"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700036026534	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700036026628	Marionette	INFO	Listening on port 62903
+Read port: 62903
+1700036026882	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700036044443	Marionette	INFO	Stopped listening on port 62903
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700036240507	geckodriver	INFO	Listening on 127.0.0.1:62949
+1700036243475	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofile8K5PIb"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700036243846	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700036243930	Marionette	INFO	Listening on port 62959
+Read port: 62959
+1700036244137	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700036246426	Marionette	WARN	Ignoring event 'pageshow' because document has an invalid readyState of 'uninitialized'.
+1700036258728	Marionette	INFO	Stopped listening on port 62959
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700036271738	geckodriver	INFO	Listening on 127.0.0.1:62986
+1700036274708	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileCUMRaZ"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700036275068	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700036275151	Marionette	INFO	Listening on port 62996
+Read port: 62996
+1700036275363	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700036277798	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz, line 277: Script terminated by timeout at:
+a/<@https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz:277:113
+
+1700036306216	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c, line 487: Script terminated by timeout at:
+aa.uh@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:487:89
+get@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:485:119
+stop@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:485:87
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:485:412
+
+1700036417699	Marionette	INFO	Stopped listening on port 62996
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700036428503	geckodriver	INFO	Listening on 127.0.0.1:63066
+1700036431462	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilevhimDF"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700036431839	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700036431924	Marionette	INFO	Listening on port 63076
+Read port: 63076
+1700036432127	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700036434610	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz, line 277: Script terminated by timeout at:
+a/<@https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz:277:113
+
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c, line 143: Script terminated by timeout at:
+Sa@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:143:437
+jp@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:371:423
+fq@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:374:766
+iG/<@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:536:153
+aa.Ik/<@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:486:126
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:485:420
+
+1700036459979	Marionette	INFO	Stopped listening on port 63076
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700037010551	geckodriver	INFO	Listening on 127.0.0.1:63171
+1700037013512	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileOMV7zf"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700037013894	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700037013981	Marionette	INFO	Listening on port 63181
+Read port: 63181
+1700037014234	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700037043981	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c, line 526: Script terminated by timeout at:
+aa.uh@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:526:89
+get@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:119
+stop@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:87
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:412
+
+1700037108588	Marionette	INFO	Stopped listening on port 63181
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700037115930	geckodriver	INFO	Listening on 127.0.0.1:63339
+1700037118876	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileaUBK4C"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700037119484	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700037119571	Marionette	INFO	Listening on port 63349
+Read port: 63349
+1700037119783	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700037149519	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript error: https://www.mcut.edu.tw/var/file/0/1000/img/2047/countup.min.js, line 1: TypeError: e.data(...) is null
+JavaScript error: https://www.mcut.edu.tw/var/file/0/1000/img/2047/countup.min.js, line 1: TypeError: e.data(...) is null
+JavaScript error: https://www.mcut.edu.tw/var/file/0/1000/img/2047/countup.min.js, line 1: TypeError: e.data(...) is null
+JavaScript error: https://www.mcut.edu.tw/var/file/0/1000/img/2047/countup.min.js, line 1: TypeError: e.data(...) is null
+JavaScript error: https://www.mcut.edu.tw/var/file/0/1000/img/2047/countup.min.js, line 1: TypeError: e.data(...) is null
+JavaScript error: https://www.mcut.edu.tw/var/file/0/1000/img/2047/countup.min.js, line 1: TypeError: e.data(...) is null
+JavaScript error: https://www.mcut.edu.tw/var/file/0/1000/img/2047/countup.min.js, line 1: TypeError: null has no properties
+JavaScript error: https://www.mcut.edu.tw/var/file/0/1000/img/2047/countup.min.js, line 1: TypeError: null has no properties
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c, line 153: Script terminated by timeout at:
+l@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:153:17
+mq.prototype.flush@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:389:198
+mq.prototype.push@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:387:207
+fq@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:384:789
+iG/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:575:153
+aa.Ik/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:525:126
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:420
+
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1700037230076	Marionette	INFO	Stopped listening on port 63349
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700037242038	geckodriver	INFO	Listening on 127.0.0.1:63509
+1700037244993	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilehCEA8X"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700037245358	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700037245442	Marionette	INFO	Listening on port 63520
+Read port: 63520
+1700037245680	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700037275431	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+JavaScript warning: https://connect.facebook.net/en_US/fbevents.js, line 24: Script terminated by timeout at:
+value@https://connect.facebook.net/en_US/fbevents.js:24:7878
+@https://connect.facebook.net/en_US/fbevents.js:24:69164
+
+1700037331736	Marionette	INFO	Stopped listening on port 63520
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700037384522	geckodriver	INFO	Listening on 127.0.0.1:63688
+1700037387480	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileusvFPz"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700037387853	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700037387936	Marionette	INFO	Listening on port 63698
+Read port: 63698
+1700037388150	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700037417898	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c, line 526: Script terminated by timeout at:
+aa.uh@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:526:42
+get@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:119
+stop@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:87
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:412
+
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1700037690568	Marionette	INFO	Stopped listening on port 63698
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+: https://www.mcut.edu.tw."
+1700037579468	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript warning: https://www.youtube.com/s/player/f279c958/www-embed-player.vflset/www-embed-player.js, line 886: Script terminated by timeout at:
+yl@https://www.youtube.com/s/player/f279c958/www-embed-player.vflset/www-embed-player.js:886:16
+R@https://www.youtube.com/s/player/f279c958/www-embed-player.vflset/www-embed-player.js:884:135
+Yx<@https://www.youtube.com/s/player/f279c958/www-embed-player.vflset/www-embed-player.js:1879:98
+jl/<@https://www.youtube.com/s/player/f279c958/www-embed-player.vflset/www-embed-player.js:868:63
+
+JavaScript warning: https://www.google.com/js/th/lYY52XQrUlH64Wh-f-QMzQSikq1nuSlNPE5Z4_DU2e4.js line 2 > eval line 3626 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.google.com/js/th/lYY52XQrUlH64Wh-f-QMzQSikq1nuSlNPE5Z4_DU2e4.js line 2 > eval line 1835 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1700037687697	Marionette	INFO	Stopped listening on port 63873
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+n port 64075
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700037714489	geckodriver	INFO	Listening on 127.0.0.1:64393
+1700037717426	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileOnykKz"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700037718044	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700037718132	Marionette	INFO	Listening on port 64405
+Read port: 64405
+1700037718340	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700037748072	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c, line 524: Script terminated by timeout at:
+get@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:115
+stop@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:87
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:412
+
+1700037773080	Marionette	INFO	Stopped listening on port 64405
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700037780883	geckodriver	INFO	Listening on 127.0.0.1:64579
+1700037783852	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilewTTA97"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700037784216	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700037784300	Marionette	INFO	Listening on port 64589
+Read port: 64589
+1700037784508	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700037814977	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.mcut.edu.tw."
+1700037858413	Marionette	INFO	Stopped listening on port 64589
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700038362209	geckodriver	INFO	Listening on 127.0.0.1:64929
+1700038365170	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofile02Fhjo"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700038365542	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700038365637	Marionette	INFO	Listening on port 64941
+Read port: 64941
+1700038365893	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://library.mcut.edu.tw."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://library.mcut.edu.tw."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://library.mcut.edu.tw."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://library.mcut.edu.tw."
+1700038388687	Marionette	INFO	Stopped listening on port 64941
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700038502054	geckodriver	INFO	Listening on 127.0.0.1:65156
+1700038505021	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilexfhOjI"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700038505386	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700038505470	Marionette	INFO	Listening on port 65175
+Read port: 65175
+1700038505550	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://library.mcut.edu.tw."
+1700038535468	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-GP1TE08TYG&l=dataLayer&cx=c, line 488: Script terminated by timeout at:
+aa.uh@https://www.googletagmanager.com/gtag/js?id=G-GP1TE08TYG&l=dataLayer&cx=c:488:89
+get@https://www.googletagmanager.com/gtag/js?id=G-GP1TE08TYG&l=dataLayer&cx=c:486:119
+stop@https://www.googletagmanager.com/gtag/js?id=G-GP1TE08TYG&l=dataLayer&cx=c:486:87
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-GP1TE08TYG&l=dataLayer&cx=c:486:412
+
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1700038624357	Marionette	INFO	Stopped listening on port 65175
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700038749770	geckodriver	INFO	Listening on 127.0.0.1:65384
+1700038752729	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofile5H7uRY"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700038753099	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700038753184	Marionette	INFO	Listening on port 65395
+Read port: 65395
+1700038753394	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://pagead2.googlesyndication.com/bg/GOa2ZK97xVqw-WOSDw2lqG4V8l_qTiI5JNj0tnI6N88.js line 2 > eval line 5851 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+1700038785819	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1700038851120	Marionette	INFO	Stopped listening on port 65395
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700039322501	geckodriver	INFO	Listening on 127.0.0.1:49379
+1700039325460	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofile5gu4l7"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700039325847	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700039325939	Marionette	INFO	Listening on port 49390
+Read port: 49390
+1700039326157	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.google.com."
+1700039329826	Marionette	INFO	Stopped listening on port 49390
+Dynamically enable window occlusion 1
+1700039408578	geckodriver	INFO	Listening on 127.0.0.1:49476
+1700039411526	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileZfh9tW"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700039411904	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700039411987	Marionette	INFO	Listening on port 49489
+Read port: 49489
+1700039412194	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.google.com."
+JavaScript warning: https://www.google.com/xjs/_/js/k=xjs.s.zh_TW.0du1jf_xQ4s.O/am=ChAAAAIEAAAAAAAAAAAAAAgAAAAAgKiAcAhgAwjAXwYBAAKAAAAoqBWFEAwAEOD5T4QEEAAAEyAIAEMAkeLHPAAAJFAF2AEAAACO_QAAAAAgAAAAAwAAIKBRBAcIgQoBAQAAAOQBwPMAhoMICwAAAAAAAAAAAAAEPEEwOCD9ERAAAQAAAAAAAAAAAAApafJyAAEAMA/d=1/ed=1/dg=2/rs=ACT90oEv1LCKKcUv-Lfg0cJZTZmuLfI09g/ee=cEt90b:ws9Tlc;qddgKe:x4FYXe,d7YSfd;yxTchf:KUM7Z;dtl0hd:lLQWFe;eHDfl:ofjVkb;qaS3gd:yiLg6e;nAFL3:NTMZac,s39S4;oGtAuc:sOXFj;iFQyKf:vfuNJf,QIhFr;SNUn3:ZwDk9d,x8cHvb;io8t5d:sgY6Zb;Oj465e:KG2eXe,KG2eXe;Erl4fe:FloWmf,FloWmf;JsbNhc:Xd8iUd;sP4Vbe:VwDzFe;kMFpHd:OTA3Ae;uY49fb:COQbmf;Pjplud:PoEs9b,EEDORb;QGR0gd:Mlhmy;a56pNe:JEfCwb;Me32dd:MEeYgc;wR5FRb:TtcOte,O1Gjze;pXdRYb:JKoKVe;dIoSBb:ZgGg9b;EmZ2Bf:zr1jrb;NSEoX:lazG7b;eBAeSb:Ck63tb;WCEKNd:I46Hvd;wV5Pjc:L8KGxe;EVNhjf:pw70Gc;sTsDMc:kHVSUb;wQlYve:aLUfP;zOsCQe:Ko78Df;KcokUb:KiuZBf;YV5bee:IvPZ6d;kbAm9d:MkHyGd;ZWEUA:afR4Cf;g8nkx:U4MzKc;qZx2Fc:j0xrE;lzgfYb:PI40bd;w9w86d:dt4g2b;GleZL:J1A7Od;bcPXSc:gSZLJb;JXS8fb:Qj0suc;IoGlCf:b5lhvb;VN6jIc:ddQyuf;vfVwPd:lcrkwe;xBbsrc:NEW1Qc;pNsl2d:j9Yuyc;VGRfx:VFqbr;BjwMce:cXX2Wb;ESrPQc:mNTJvc;R9Ulx:CR7Ufe;kY7VAf:d91TEb;NPKaK:SdcwHb;LBgRLc:XVMNvd,SdcwHb;UyG7Kb:wQd0G;LsNahb:ucGLNb;KpRAue:Tia57b;jY0zg:Q6tNgc;coJ8e:KvoW8;oSUNyd:fTfGO,fTfGO,pnvXVc;SMDL4c:fTfGO,pnvXVc;aZ61od:arTwJ;eO3lse:nFClrf;zaIgPb:Qtpxbd;HMDDWe:G8QUdb;w4rSdf:XKiZ9;h3MYod:cEt90b;ShpF6e:N0pvGc;k2Qxcb:XY51pe;IBADCc:RYquRb;pKJiXd:VCenhc;rQSrae:C6D5Fc;kCQyJ:ueyPK;EABSZ:MXZt9d;qavrXe:zQzcXe,mYbt1d;TxfV6d:YORN0b;UDrY1c:eps46d;F9mqte:UoRcbe;Nyt6ic:jn2sGd;w3bZCb:ZPGaIb;G0KhTb:LIaoZ;XUezZ:sa7lqb;aAJE9c:WHW6Ef;V2HTTe:RolTY;Wfmdue:g3MJlb;imqimf:jKGL2e;BgS6mb:fidj5d;gtVSi:ekUOYd;KQzWid:ZMKkN;UVmjEd:EesRsb;z97YGf:oug9te;AfeaP:TkrAjf;eBZ5Nd:audvde;CxXAWb:YyRLvc;OgagBe:cNTe0;SLtqO:Kh1xYe;tosKvd:ZCqP3;VOcgDe:YquhTb;uuQkY:u2V3ud;WDGyFe:jcVOxd;trZL0b:qY8PFe;VxQ32b:k0XsBb;DULqB:RKfG5c;Np8Qkd:Dpx6qc;cFTWae:gT8qnd;gaub4:TN6bMe;DpcR3d:zL72xf;hjRo6e:F62sG;yGxLoc:FmAr0c;pj82le:mg5CW;dLlj2:Qqt3Gf;qGV2uc:HHi04c;oUlnpc:RagDlc;R2kc8b:ALJqWb;xbe2wc:wbTLEd;Q1Ow7b:x5CSu;bFZ6gf:RsDQqe;okUaUd:wItadb;KOxcK:bFOvTc;G6wU6e:hezEbd;uknmt:GkPrzb;U96pRd:FsR04;PqHfGe:im2cZe;Fmv9Nc:O1Tzwc;hK67qb:QWEO5b;BMxAGc:E5bFse;R4IIIb:QWfeKf;whEZac:F4AmNb;tH4IIe:Ymry6;lkq0A:JyBE3e;heHB1:sFczq;daB6be:lMxGPd;LEikZe:byfTOb,lsjVmc/m=attn,cdos,cr,gwc,hsm,jsa,mb4ZUb,d,csi,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl, line 409: Script terminated by timeout at:
+_.k.init@https://www.google.com/xjs/_/js/k=xjs.s.zh_TW.0du1jf_xQ4s.O/am=ChAAAAIEAAAAAAAAAAAAAAgAAAAAgKiAcAhgAwjAXwYBAAKAAAAoqBWFEAwAEOD5T4QEEAAAEyAIAEMAkeLHPAAAJFAF2AEAAACO_QAAAAAgAAAAAwAAIKBRBAcIgQoBAQAAAOQBwPMAhoMICwAAAAAAAAAAAAAEPEEwOCD9ERAAAQAAAAAAAAAAAAApafJyAAEAMA/d=1/ed=1/dg=2/rs=ACT90oEv1LCKKcUv-Lfg0cJZTZmuLfI09g/ee=cEt90b:ws9Tlc;qddgKe:x4FYXe,d7YSfd;yxTchf:KUM7Z;dtl0hd:lLQWFe;eHDfl:ofjVkb;qaS3gd:yiLg6e;nAFL3:NTMZac,s39S4;oGtAuc:sOXFj;iFQyKf:vfuNJf,QIhFr;SNUn3:ZwDk9d,x8cHvb;io8t5d:sgY6Zb;Oj465e:KG2eXe,KG2eXe;Erl4fe:FloWmf,FloWmf;JsbNhc:Xd8iUd;sP4Vbe:VwDzFe;kMFpHd:OTA3Ae;uY49fb:COQbmf;Pjplud:PoEs9b,EEDORb;QGR0gd:Mlhmy;a56pNe:JEfCwb;Me32dd:MEeYgc;wR5FRb:TtcOte,O1Gjze;pXdRYb:JKoKVe;dIoSBb:ZgGg9b;EmZ2Bf:zr1jrb;NSEoX:lazG7b;eBAeSb:Ck63tb;WCEKNd:I46Hvd;wV5Pjc:L8KGxe;EVNhjf:pw70Gc;sTsDMc:kHVSUb;wQlYve:aLUfP;zOsCQe:Ko78Df;KcokUb:KiuZBf;YV5bee:IvPZ6d;kbAm9d:MkHyGd;ZWEUA:afR4Cf;g8nkx:U4MzKc;qZx2Fc:j0xrE;lzgfYb:PI40bd;w9w86d:dt4g2b;GleZL:J1A7Od;bcPXSc:gSZLJb;JXS8fb:Qj0suc;IoGlCf:b5lhvb;VN6jIc:ddQyuf;vfVwPd:lcrkwe;xBbsrc:NEW1Qc;pNsl2d:j9Yuyc;VGRfx:VFqbr;BjwMce:cXX2Wb;ESrPQc:mNTJvc;R9Ulx:CR7Ufe;kY7VAf:d91TEb;NPKaK:SdcwHb;LBgRLc:XVMNvd,SdcwHb;UyG7Kb:wQd0G;LsNahb:ucGLNb;KpRAue:Tia57b;jY0zg:Q6tNgc;coJ8e:KvoW8;oSUNyd:fTfGO,fTfGO,pnvXVc;SMDL4c:fTfGO,pnvXVc;aZ61od:arTwJ;eO3lse:nFClrf;zaIgPb:Qtpxbd;HMDDWe:G8QUdb;w4rSdf:XKiZ9;h3MYod:cEt90b;ShpF6e:N0pvGc;k2Qxcb:XY51pe;IBADCc:RYquRb;pKJiXd:VCenhc;rQSrae:C6D5Fc;kCQyJ:ueyPK;EABSZ:MXZt9d;qavrXe:zQzcXe,mYbt1d;TxfV6d:YORN0b;UDrY1c:eps46d;F9mqte:UoRcbe;Nyt6ic:jn2sGd;w3bZCb:ZPGaIb;G0KhTb:LIaoZ;XUezZ:sa7lqb;aAJE9c:WHW6Ef;V2HTTe:RolTY;Wfmdue:g3MJlb;imqimf:jKGL2e;BgS6mb:fidj5d;gtVSi:ekUOYd;KQzWid:ZMKkN;UVmjEd:EesRsb;z97YGf:oug9te;AfeaP:TkrAjf;eBZ5Nd:audvde;CxXAWb:YyRLvc;OgagBe:cNTe0;SLtqO:Kh1xYe;tosKvd:ZCqP3;VOcgDe:YquhTb;uuQkY:u2V3ud;WDGyFe:jcVOxd;trZL0b:qY8PFe;VxQ32b:k0XsBb;DULqB:RKfG5c;Np8Qkd:Dpx6qc;cFTWae:gT8qnd;gaub4:TN6bMe;DpcR3d:zL72xf;hjRo6e:F62sG;yGxLoc:FmAr0c;pj82le:mg5CW;dLlj2:Qqt3Gf;qGV2uc:HHi04c;oUlnpc:RagDlc;R2kc8b:ALJqWb;xbe2wc:wbTLEd;Q1Ow7b:x5CSu;bFZ6gf:RsDQqe;okUaUd:wItadb;KOxcK:bFOvTc;G6wU6e:hezEbd;uknmt:GkPrzb;U96pRd:FsR04;PqHfGe:im2cZe;Fmv9Nc:O1Tzwc;hK67qb:QWEO5b;BMxAGc:E5bFse;R4IIIb:QWfeKf;whEZac:F4AmNb;tH4IIe:Ymry6;lkq0A:JyBE3e;heHB1:sFczq;daB6be:lMxGPd;LEikZe:byfTOb,lsjVmc/m=attn,cdos,cr,gwc,hsm,jsa,mb4ZUb,d,csi,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl:409:171
+_.Ik@https://www.google.com/xjs/_/js/k=xjs.s.zh_TW.0du1jf_xQ4s.O/am=ChAAAAIEAAAAAAAAAAAAAAgAAAAAgKiAcAhgAwjAXwYBAAKAAAAoqBWFEAwAEOD5T4QEEAAAEyAIAEMAkeLHPAAAJFAF2AEAAACO_QAAAAAgAAAAAwAAIKBRBAcIgQoBAQAAAOQBwPMAhoMICwAAAAAAAAAAAAAEPEEwOCD9ERAAAQAAAAAAAAAAAAApafJyAAEAMA/d=1/ed=1/dg=2/rs=ACT90oEv1LCKKcUv-Lfg0cJZTZmuLfI09g/ee=cEt90b:ws9Tlc;qddgKe:x4FYXe,d7YSfd;yxTchf:KUM7Z;dtl0hd:lLQWFe;eHDfl:ofjVkb;qaS3gd:yiLg6e;nAFL3:NTMZac,s39S4;oGtAuc:sOXFj;iFQyKf:vfuNJf,QIhFr;SNUn3:ZwDk9d,x8cHvb;io8t5d:sgY6Zb;Oj465e:KG2eXe,KG2eXe;Erl4fe:FloWmf,FloWmf;JsbNhc:Xd8iUd;sP4Vbe:VwDzFe;kMFpHd:OTA3Ae;uY49fb:COQbmf;Pjplud:PoEs9b,EEDORb;QGR0gd:Mlhmy;a56pNe:JEfCwb;Me32dd:MEeYgc;wR5FRb:TtcOte,O1Gjze;pXdRYb:JKoKVe;dIoSBb:ZgGg9b;EmZ2Bf:zr1jrb;NSEoX:lazG7b;eBAeSb:Ck63tb;WCEKNd:I46Hvd;wV5Pjc:L8KGxe;EVNhjf:pw70Gc;sTsDMc:kHVSUb;wQlYve:aLUfP;zOsCQe:Ko78Df;KcokUb:KiuZBf;YV5bee:IvPZ6d;kbAm9d:MkHyGd;ZWEUA:afR4Cf;g8nkx:U4MzKc;qZx2Fc:j0xrE;lzgfYb:PI40bd;w9w86d:dt4g2b;GleZL:J1A7Od;bcPXSc:gSZLJb;JXS8fb:Qj0suc;IoGlCf:b5lhvb;VN6jIc:ddQyuf;vfVwPd:lcrkwe;xBbsrc:NEW1Qc;pNsl2d:j9Yuyc;VGRfx:VFqbr;BjwMce:cXX2Wb;ESrPQc:mNTJvc;R9Ulx:CR7Ufe;kY7VAf:d91TEb;NPKaK:SdcwHb;LBgRLc:XVMNvd,SdcwHb;UyG7Kb:wQd0G;LsNahb:ucGLNb;KpRAue:Tia57b;jY0zg:Q6tNgc;coJ8e:KvoW8;oSUNyd:fTfGO,fTfGO,pnvXVc;SMDL4c:fTfGO,pnvXVc;aZ61od:arTwJ;eO3lse:nFClrf;zaIgPb:Qtpxbd;HMDDWe:G8QUdb;w4rSdf:XKiZ9;h3MYod:cEt90b;ShpF6e:N0pvGc;k2Qxcb:XY51pe;IBADCc:RYquRb;pKJiXd:VCenhc;rQSrae:C6D5Fc;kCQyJ:ueyPK;EABSZ:MXZt9d;qavrXe:zQzcXe,mYbt1d;TxfV6d:YORN0b;UDrY1c:eps46d;F9mqte:UoRcbe;Nyt6ic:jn2sGd;w3bZCb:ZPGaIb;G0KhTb:LIaoZ;XUezZ:sa7lqb;aAJE9c:WHW6Ef;V2HTTe:RolTY;Wfmdue:g3MJlb;imqimf:jKGL2e;BgS6mb:fidj5d;gtVSi:ekUOYd;KQzWid:ZMKkN;UVmjEd:EesRsb;z97YGf:oug9te;AfeaP:TkrAjf;eBZ5Nd:audvde;CxXAWb:YyRLvc;OgagBe:cNTe0;SLtqO:Kh1xYe;tosKvd:ZCqP3;VOcgDe:YquhTb;uuQkY:u2V3ud;WDGyFe:jcVOxd;trZL0b:qY8PFe;VxQ32b:k0XsBb;DULqB:RKfG5c;Np8Qkd:Dpx6qc;cFTWae:gT8qnd;gaub4:TN6bMe;DpcR3d:zL72xf;hjRo6e:F62sG;yGxLoc:FmAr0c;pj82le:mg5CW;dLlj2:Qqt3Gf;qGV2uc:HHi04c;oUlnpc:RagDlc;R2kc8b:ALJqWb;xbe2wc:wbTLEd;Q1Ow7b:x5CSu;bFZ6gf:RsDQqe;okUaUd:wItadb;KOxcK:bFOvTc;G6wU6e:hezEbd;uknmt:GkPrzb;U96pRd:FsR04;PqHfGe:im2cZe;Fmv9Nc:O1Tzwc;hK67qb:QWEO5b;BMxAGc:E5bFse;R4IIIb:QWfeKf;whEZac:F4AmNb;tH4IIe:Ymry6;lkq0A:JyBE3e;heHB1:sFczq;daB6be:lMxGPd;LEikZe:byfTOb,lsjVmc/m=attn,cdos,cr,gwc,hsm,jsa,mb4ZUb,d,csi,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl:406:1386
+lva@https://www.google.com/xjs/_/js/k=xjs.s.zh_TW.0du1jf_xQ4s.O/am=ChAAAAIEAAAAAAAAAAAAAAgAAAAAgKiAcAhgAwjAXwYBAAKAAAAoqBWFEAwAEOD5T4QEEAAAEyAIAEMAkeLHPAAAJFAF2AEAAACO_QAAAAAgAAAAAwAAIKBRBAcIgQoBAQAAAOQBwPMAhoMICwAAAAAAAAAAAAAEPEEwOCD9ERAAAQAAAAAAAAAAAAApafJyAAEAMA/d=1/ed=1/dg=2/rs=ACT90oEv1LCKKcUv-Lfg0cJZTZmuLfI09g/ee=cEt90b:ws9Tlc;qddgKe:x4FYXe,d7YSfd;yxTchf:KUM7Z;dtl0hd:lLQWFe;eHDfl:ofjVkb;qaS3gd:yiLg6e;nAFL3:NTMZac,s39S4;oGtAuc:sOXFj;iFQyKf:vfuNJf,QIhFr;SNUn3:ZwDk9d,x8cHvb;io8t5d:sgY6Zb;Oj465e:KG2eXe,KG2eXe;Erl4fe:FloWmf,FloWmf;JsbNhc:Xd8iUd;sP4Vbe:VwDzFe;kMFpHd:OTA3Ae;uY49fb:COQbmf;Pjplud:PoEs9b,EEDORb;QGR0gd:Mlhmy;a56pNe:JEfCwb;Me32dd:MEeYgc;wR5FRb:TtcOte,O1Gjze;pXdRYb:JKoKVe;dIoSBb:ZgGg9b;EmZ2Bf:zr1jrb;NSEoX:lazG7b;eBAeSb:Ck63tb;WCEKNd:I46Hvd;wV5Pjc:L8KGxe;EVNhjf:pw70Gc;sTsDMc:kHVSUb;wQlYve:aLUfP;zOsCQe:Ko78Df;KcokUb:KiuZBf;YV5bee:IvPZ6d;kbAm9d:MkHyGd;ZWEUA:afR4Cf;g8nkx:U4MzKc;qZx2Fc:j0xrE;lzgfYb:PI40bd;w9w86d:dt4g2b;GleZL:J1A7Od;bcPXSc:gSZLJb;JXS8fb:Qj0suc;IoGlCf:b5lhvb;VN6jIc:ddQyuf;vfVwPd:lcrkwe;xBbsrc:NEW1Qc;pNsl2d:j9Yuyc;VGRfx:VFqbr;BjwMce:cXX2Wb;ESrPQc:mNTJvc;R9Ulx:CR7Ufe;kY7VAf:d91TEb;NPKaK:SdcwHb;LBgRLc:XVMNvd,SdcwHb;UyG7Kb:wQd0G;LsNahb:ucGLNb;KpRAue:Tia57b;jY0zg:Q6tNgc;coJ8e:KvoW8;oSUNyd:fTfGO,fTfGO,pnvXVc;SMDL4c:fTfGO,pnvXVc;aZ61od:arTwJ;eO3lse:nFClrf;zaIgPb:Qtpxbd;HMDDWe:G8QUdb;w4rSdf:XKiZ9;h3MYod:cEt90b;ShpF6e:N0pvGc;k2Qxcb:XY51pe;IBADCc:RYquRb;pKJiXd:VCenhc;rQSrae:C6D5Fc;kCQyJ:ueyPK;EABSZ:MXZt9d;qavrXe:zQzcXe,mYbt1d;TxfV6d:YORN0b;UDrY1c:eps46d;F9mqte:UoRcbe;Nyt6ic:jn2sGd;w3bZCb:ZPGaIb;G0KhTb:LIaoZ;XUezZ:sa7lqb;aAJE9c:WHW6Ef;V2HTTe:RolTY;Wfmdue:g3MJlb;imqimf:jKGL2e;BgS6mb:fidj5d;gtVSi:ekUOYd;KQzWid:ZMKkN;UVmjEd:EesRsb;z97YGf:oug9te;AfeaP:TkrAjf;eBZ5Nd:audvde;CxXAWb:YyRLvc;OgagBe:cNTe0;SLtqO:Kh1xYe;tosKvd:ZCqP3;VOcgDe:YquhTb;uuQkY:u2V3ud;WDGyFe:jcVOxd;trZL0b:qY8PFe;VxQ32b:k0XsBb;DULqB:RKfG5c;Np8Qkd:Dpx6qc;cFTWae:gT8qnd;gaub4:TN6bMe;DpcR3d:zL72xf;hjRo6e:F62sG;yGxLoc:FmAr0c;pj82le:mg5CW;dLlj2:Qqt3Gf;qGV2uc:HHi04c;oUlnpc:RagDlc;R2kc8b:ALJqWb;xbe2wc:wbTLEd;Q1Ow7b:x5CSu;bFZ6gf:RsDQqe;okUaUd:wItadb;KOxcK:bFOvTc;G6wU6e:hezEbd;uknmt:GkPrzb;U96pRd:FsR04;PqHfGe:im2cZe;Fmv9Nc:O1Tzwc;hK67qb:QWEO5b;BMxAGc:E5bFse;R4IIIb:QWfeKf;whEZac:F4AmNb;tH4IIe:Ymry6;lkq0A:JyBE3e;heHB1:sFczq;daB6be:lMxGPd;LEikZe:byfTOb,lsjVmc/m=attn,cdos,cr,gwc,hsm,jsa,mb4ZUb,d,csi,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl:418:347
+b@https://www.google.com/xjs/_/js/k=xjs.s.zh_TW.0du1jf_xQ4s.O/am=ChAAAAIEAAAAAAAAAAAAAAgAAAAAgKiAcAhgAwjAXwYBAAKAAAAoqBWFEAwAEOD5T4QEEAAAEyAIAEMAkeLHPAAAJFAF2AEAAACO_QAAAAAgAAAAAwAAIKBRBAcIgQoBAQAAAOQBwPMAhoMICwAAAAAAAAAAAAAEPEEwOCD9ERAAAQAAAAAAAAAAAAApafJyAAEAMA/d=1/ed=1/dg=2/rs=ACT90oEv1LCKKcUv-Lfg0cJZTZmuLfI09g/ee=cEt90b:ws9Tlc;qddgKe:x4FYXe,d7YSfd;yxTchf:KUM7Z;dtl0hd:lLQWFe;eHDfl:ofjVkb;qaS3gd:yiLg6e;nAFL3:NTMZac,s39S4;oGtAuc:sOXFj;iFQyKf:vfuNJf,QIhFr;SNUn3:ZwDk9d,x8cHvb;io8t5d:sgY6Zb;Oj465e:KG2eXe,KG2eXe;Erl4fe:FloWmf,FloWmf;JsbNhc:Xd8iUd;sP4Vbe:VwDzFe;kMFpHd:OTA3Ae;uY49fb:COQbmf;Pjplud:PoEs9b,EEDORb;QGR0gd:Mlhmy;a56pNe:JEfCwb;Me32dd:MEeYgc;wR5FRb:TtcOte,O1Gjze;pXdRYb:JKoKVe;dIoSBb:ZgGg9b;EmZ2Bf:zr1jrb;NSEoX:lazG7b;eBAeSb:Ck63tb;WCEKNd:I46Hvd;wV5Pjc:L8KGxe;EVNhjf:pw70Gc;sTsDMc:kHVSUb;wQlYve:aLUfP;zOsCQe:Ko78Df;KcokUb:KiuZBf;YV5bee:IvPZ6d;kbAm9d:MkHyGd;ZWEUA:afR4Cf;g8nkx:U4MzKc;qZx2Fc:j0xrE;lzgfYb:PI40bd;w9w86d:dt4g2b;GleZL:J1A7Od;bcPXSc:gSZLJb;JXS8fb:Qj0suc;IoGlCf:b5lhvb;VN6jIc:ddQyuf;vfVwPd:lcrkwe;xBbsrc:NEW1Qc;pNsl2d:j9Yuyc;VGRfx:VFqbr;BjwMce:cXX2Wb;ESrPQc:mNTJvc;R9Ulx:CR7Ufe;kY7VAf:d91TEb;NPKaK:SdcwHb;LBgRLc:XVMNvd,SdcwHb;UyG7Kb:wQd0G;LsNahb:ucGLNb;KpRAue:Tia57b;jY0zg:Q6tNgc;coJ8e:KvoW8;oSUNyd:fTfGO,fTfGO,pnvXVc;SMDL4c:fTfGO,pnvXVc;aZ61od:arTwJ;eO3lse:nFClrf;zaIgPb:Qtpxbd;HMDDWe:G8QUdb;w4rSdf:XKiZ9;h3MYod:cEt90b;ShpF6e:N0pvGc;k2Qxcb:XY51pe;IBADCc:RYquRb;pKJiXd:VCenhc;rQSrae:C6D5Fc;kCQyJ:ueyPK;EABSZ:MXZt9d;qavrXe:zQzcXe,mYbt1d;TxfV6d:YORN0b;UDrY1c:eps46d;F9mqte:UoRcbe;Nyt6ic:jn2sGd;w3bZCb:ZPGaIb;G0KhTb:LIaoZ;XUezZ:sa7lqb;aAJE9c:WHW6Ef;V2HTTe:RolTY;Wfmdue:g3MJlb;imqimf:jKGL2e;BgS6mb:fidj5d;gtVSi:ekUOYd;KQzWid:ZMKkN;UVmjEd:EesRsb;z97YGf:oug9te;AfeaP:TkrAjf;eBZ5Nd:audvde;CxXAWb:YyRLvc;OgagBe:cNTe0;SLtqO:Kh1xYe;tosKvd:ZCqP3;VOcgDe:YquhTb;uuQkY:u2V3ud;WDGyFe:jcVOxd;trZL0b:qY8PFe;VxQ32b:k0XsBb;DULqB:RKfG5c;Np8Qkd:Dpx6qc;cFTWae:gT8qnd;gaub4:TN6bMe;DpcR3d:zL72xf;hjRo6e:F62sG;yGxLoc:FmAr0c;pj82le:mg5CW;dLlj2:Qqt3Gf;qGV2uc:HHi04c;oUlnpc:RagDlc;R2kc8b:ALJqWb;xbe2wc:wbTLEd;Q1Ow7b:x5CSu;bFZ6gf:RsDQqe;okUaUd:wItadb;KOxcK:bFOvTc;G6wU6e:hezEbd;uknmt:GkPrzb;U96pRd:FsR04;PqHfGe:im2cZe;Fmv9Nc:O1Tzwc;hK67qb:QWEO5b;BMxAGc:E5bFse;R4IIIb:QWfeKf;whEZac:F4AmNb;tH4IIe:Ymry6;lkq0A:JyBE3e;heHB1:sFczq;daB6be:lMxGPd;LEikZe:byfTOb,lsjVmc/m=attn,cdos,cr,gwc,hsm,jsa,mb4ZUb,d,csi,cEt90b,SNUn3,qddgKe,sTsDMc,dtl0hd,eHDfl:414:49
+
+1700039431668	Marionette	INFO	Stopped listening on port 49489
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700039511162	geckodriver	INFO	Listening on 127.0.0.1:49582
+1700039514129	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileLLMrla"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700039514537	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700039514624	Marionette	INFO	Listening on port 49593
+Read port: 49593
+1700039514861	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700039544702	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://accounts.google.com."
+1700039558170	Marionette	INFO	Stopped listening on port 49593
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700039596551	geckodriver	INFO	Listening on 127.0.0.1:49693
+1700039599508	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofile8MRVZt"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700039599872	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700039599960	Marionette	INFO	Listening on port 49705
+Read port: 49705
+1700039600169	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.google.com."
+1700039629978	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 573: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1700039782779	Marionette	INFO	Stopped listening on port 49705
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700039869154	geckodriver	INFO	Listening on 127.0.0.1:49913
+1700039872115	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilehMU9p3"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700039872494	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700039872588	Marionette	INFO	Listening on port 49924
+Read port: 49924
+1700039872797	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700039902956	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1700062641147	geckodriver	INFO	Listening on 127.0.0.1:62638
+1700062644125	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileM1MDol"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700062644783	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700062644882	Marionette	INFO	Listening on port 62650
+Read port: 62650
+1700062645079	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.google.com."
+1700062675241	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+1700063007350	geckodriver	INFO	Listening on 127.0.0.1:59957
+1700063010317	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileFPfnFs"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700063010712	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700063010813	Marionette	INFO	Listening on port 59969
+Read port: 59969
+1700063011091	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700063041554	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c, line 144: Script terminated by timeout at:
+ha@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:144:189
+Cn@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:347:333
+Lq@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:391:54
+Mq@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:390:506
+aa.Km@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:563:491
+aa.Jm/k/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:555:121
+Qj@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:295:342
+dk@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:298:350
+k@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:555:107
+c@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:345:169
+yn@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:346:269
+aa.Jm@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:555:144
+c@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:574:751
+nq@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:386:298
+mq.prototype.flush@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:389:263
+mq.prototype.push@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:387:207
+fq@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:384:789
+iG/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:575:153
+aa.Ik/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:525:126
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:420
+
+1700063050544	Marionette	INFO	Stopped listening on port 59969
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700063090156	geckodriver	INFO	Listening on 127.0.0.1:60166
+1700063093095	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileOdg0J2"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700063093693	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700063093777	Marionette	INFO	Listening on port 60178
+Read port: 60178
+1700063093987	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700063123711	addons.xpi	ERROR	System addon update list error SyntaxError: XMLHttpRequest.open: 'http://%(server)s/dummy-system-addons.xml' is not a valid URL.
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c, line 334: Script terminated by timeout at:
+Am@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:334:396
+Em@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:334:616
+aa.Km@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:563:3
+aa.Jm/k/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:555:121
+Qj@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:295:342
+dk@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:298:350
+k@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:555:107
+c@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:345:169
+yn@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:346:269
+aa.Jm@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:555:144
+c@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:574:751
+nq@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:386:298
+mq.prototype.flush@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:389:263
+mq.prototype.push@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:387:207
+fq@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:384:789
+iG/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:575:153
+aa.Ik/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:525:126
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-V4ESMGV6GH&l=dataLayer&cx=c:524:420
+
+1700063141144	Marionette	INFO	Stopped listening on port 60178
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700063309413	geckodriver	INFO	Listening on 127.0.0.1:60448
+1700063312378	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileixT3bi"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700063312739	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700063312830	Marionette	INFO	Listening on port 60460
+Read port: 60460
+1700063313102	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700063315688	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz, line 277: Script terminated by timeout at:
+a/<@https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz:277:113
+
+1700063328389	Marionette	INFO	Stopped listening on port 60460
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/ih0Rs6m7KYJ.js?_nc_x=Ij3Wp8lg5Kz, line 54: Script terminated by timeout at:
+resize@https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/ih0Rs6m7KYJ.js?_nc_x=Ij3Wp8lg5Kz:54:617
+
+Dynamically enable window occlusion 1
+1700063353564	geckodriver	INFO	Listening on 127.0.0.1:60556
+1700063356520	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilePBHSlx"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700063356890	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700063356974	Marionette	INFO	Listening on port 60568
+Read port: 60568
+1700063357185	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz, line 277: Script terminated by timeout at:
+a/<@https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz:277:113
+
+1700063371520	Marionette	INFO	Stopped listening on port 60568
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/ih0Rs6m7KYJ.js?_nc_x=Ij3Wp8lg5Kz, line 54: Script terminated by timeout at:
+resize@https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/ih0Rs6m7KYJ.js?_nc_x=Ij3Wp8lg5Kz:54:617
+
+Dynamically enable window occlusion 1
+1700063533401	geckodriver	INFO	Listening on 127.0.0.1:60734
+1700063536368	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofileVsDoek"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700063536766	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700063536850	Marionette	INFO	Listening on port 60746
+Read port: 60746
+1700063537056	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz, line 277: Script terminated by timeout at:
+a/<@https://static.xx.fbcdn.net/rsrc.php/v3/yW/r/vWBWSuhur5X.js?_nc_x=Ij3Wp8lg5Kz:277:113
+
+JavaScript warning: https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c, line 487: Script terminated by timeout at:
+aa.uh@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:487:89
+get@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:485:119
+stop@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:485:87
+aa.Ik/c/<@https://www.googletagmanager.com/gtag/js?id=G-LLMRYTSES8&l=dataLayer&cx=c:485:412
+
+1700063556874	Marionette	INFO	Stopped listening on port 60746
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1700063769018	geckodriver	INFO	Listening on 127.0.0.1:60910
+1700063771976	mozrunner::runner	INFO	Running command: "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\User\\AppData\\Local\\Temp\\rust_mozprofilef1kuGt"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1700063772347	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1700063772432	Marionette	INFO	Listening on port 60922
+Read port: 60922
+1700063772642	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1700063777284	Marionette	INFO	Stopped listening on port 60922
+Dynamically enable window occlusion 1
+JavaScript error: chrome://remote/content/marionette/cert.sys.mjs, line 51: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
