@@ -1,0 +1,5 @@
+微軟 Adobe AutoDesk IBM 谷歌 臉書 甲骨文 華碩 台積電 聯電 富邦
+亞馬遜 宏碁 Python C C++ Pascal Fortran Cobol 組合語言 合作金庫
+微信 Line Messenger Telegram Keynote Pages Numbers Chrome 第一金
+S軟體銀行 NASA 文魁 資料庫 大數據 NoSql PHP MySQL DOS 資料結構
+W視窗 瀏覽器 PyCharm Wordcloud

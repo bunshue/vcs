@@ -1,9 +1,12 @@
 # 新進測試06
 
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -11,8 +14,6 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -34,15 +35,7 @@ print(rad)
 th = np.degrees(rad)
 print(th)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 # 時序圖
 import pandas as pd
@@ -70,7 +63,6 @@ plt.bar(list(data.keys()), list(data.values()))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 條形圖
 data = {'apples': 10, 'oranges': 15, 'lemons': 5, 'limes': 20}
@@ -127,7 +119,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 # 小提琴圖
 data = np.random.rand(20, 5)
 plt.violinplot(data,showmeans=False,showmedians=True)
@@ -149,8 +140,6 @@ ax.set_zlabel('Z')
 ax.set_ylabel('Y')
 ax.set_xlabel('X')
 plt.show()
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -213,6 +202,7 @@ ax3 = plt.subplot(223)
 ax3.plot([1,2,3,3,3])
 ax4 = plt.subplot(224)
 ax4.plot([5,4,3,3,3])
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -224,8 +214,8 @@ ax3 = plt.subplot2grid((3,3), (1,0), rowspan = 2)
 ax4 = plt.subplot2grid((3,3), (1,1)) # rowspan/colspan默認爲1 
 ax5 = plt.subplot2grid((3,3), (2,1), colspan = 2) 
 ax5.plot([1,2,3,4,1])
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -261,7 +251,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 # 導出圖表
-
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -329,15 +318,9 @@ plt.show()
 
 print(matplotlib.artist.getp(fig.patch))  # 顯示繪製對象的各個屬性值
 
-
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 

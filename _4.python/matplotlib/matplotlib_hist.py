@@ -197,9 +197,9 @@ dsums = d1 + d2
 #count, bins, ignored = plt.hist(dsums, 11, density=True)   #以密度表示
 count, bins, ignored = plt.hist(dsums, 11)  #以總數表示
 plt.title("擲兩個骰子多次 看其分布")
-plt.show()
-
-
+plt.xlabel("兩個骰子和")
+#plt.ylabel("密度")   #density = True
+plt.ylabel("次數")
 
 plt.show()
 
@@ -224,7 +224,6 @@ num_bins = 100  # 直方圖顯示時的束數
 
 # 第一張圖
 plt.subplot(231)
-
 
 # Fixing random state for reproducibility
 np.random.seed(19680801)
@@ -434,53 +433,9 @@ plt.subplot(235)
 # 第六張圖
 plt.subplot(236)
 
-
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-# 使用 NumPy 生成随机数
-random_data = np.random.normal(170, 10, 250)
-
-# 将数据转换为 Pandas DataFrame
-dataframe = pd.DataFrame(random_data)
-
-# 使用 Pandas hist() 方法绘制直方图
-dataframe.hist()
-
-# 设置图表属性
-plt.title("RUNOOB hist() Test")
-plt.xlabel("X-Value")
-plt.ylabel("Y-Value")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 生成随机数据
-data = pd.Series(np.random.normal(size=100))
-
-# 绘制直方图
-# bins 参数指定了直方图中的柱子数量
-plt.hist(data, bins=10)
-
-# 设置图形标题和坐标轴标签
-plt.title("RUNOOB hist() Tes")
-plt.xlabel("X-Values")
-plt.ylabel("Y-Values")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 

@@ -1,4 +1,6 @@
 
+import sys
+
 print('寫入一些日誌')
 
 import logging
@@ -21,6 +23,19 @@ logging.critical('這是一個日誌訊息 CRITCAL')
 """
 
 print('------------------------------------------------------------')	#60個
+
+import logging
+#不知道這樣是把log寫到哪?
+logging.basicConfig(level=logging.DEBUG)    # 等級是DEBUG
+logging.debug('logging message, DEBUG')
+logging.info('logging message, INFO')
+logging.warning('logging message, WARNING')
+logging.error('logging message, ERROR')
+logging.critical('logging message, CRITICAL')
+
+print('------------------------------------------------------------')	#60個
+
+sys.exit()
 
 
 logger = logging.getLogger("untar")

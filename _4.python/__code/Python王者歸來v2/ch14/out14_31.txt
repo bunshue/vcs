@@ -1,0 +1,10 @@
+Beautiful is better than ugly.
+Explicit is better than implicits.
+Simple is better than complex.
+Flat is better than nested.
+Sparse is better than desse.
+Readability counts.
+Special cases aren't special enough to break the rules.
+...
+...
+By Tim Peters

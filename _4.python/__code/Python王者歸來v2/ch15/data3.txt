@@ -1,0 +1,4 @@
+The Big Data deals with the acquisition, analysis, and 
+curation of the complex data sets. The issues of dealing 
+with Big Data have become a big challenge in both 
+private and public sectors, as well as in academic researches.
