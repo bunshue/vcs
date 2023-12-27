@@ -19,7 +19,7 @@ namespace vcs_SendTo_All
     {
         int flag_operation_mode = MODE6;
 
-        bool flag_debug_mode = false;  //debug模式
+        bool flag_debug_mode = true;  //debug模式
 
         private const int MODE0 = 0x00;   //顯示檔案名稱
         private const int MODE1 = 0x01;   //檢視檔案內容
@@ -172,10 +172,7 @@ namespace vcs_SendTo_All
             else
                 this.Text = "未定義";
 
-            bt_copy.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y);
-            bt_save.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width * 2, richTextBox1.Location.Y);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height);
-            bt_setup.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height * 2);
+            show_item_location();
 
             string sendto_folder = Environment.GetFolderPath(Environment.SpecialFolder.SendTo);
             //richTextBox1.Text += "[傳送到]資料夾位置:\n" + sendto_folder + "\n";
@@ -277,6 +274,14 @@ namespace vcs_SendTo_All
                     show_filename_data();
                 }
             }
+        }
+
+        void show_item_location()
+        {
+            bt_copy.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y);
+            bt_save.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width * 2, richTextBox1.Location.Y);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height);
+            bt_setup.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height * 2);
         }
 
         void show_filename_data()
@@ -496,6 +501,10 @@ namespace vcs_SendTo_All
         {
             richTextBox1.Clear();
         }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
     }
 }
-

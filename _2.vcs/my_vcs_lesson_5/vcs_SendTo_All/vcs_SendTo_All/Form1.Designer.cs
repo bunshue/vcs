@@ -112,6 +112,7 @@
             this.Name = "Form1";
             this.Text = "檢視檔案內容";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.ResumeLayout(false);
 
         }

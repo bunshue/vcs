@@ -305,7 +305,7 @@ namespace vcs_LOG
             {
                 // 等待信號通知
                 _mre.WaitOne();
-                
+
                 FlashLogMessage msg;
                 // 判斷是否有內容需要如磁盤 // 從列隊中獲取內容，並刪除列隊中的內容
                 while (_que.Count > 0 && _que.TryDequeue(out msg))
@@ -468,6 +468,28 @@ namespace vcs_LOG
         {
             Logger.WriteLog("寫log的方法6 " + (i6++).ToString());
         }
+
+        public static List<string> Logs = new List<string>();
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "加入log\n";
+            var msg = "要加入的日誌資料";
+            string message1 = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "\t" + msg;
+            Logs.Add(message1);
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "顯示log, 並清除\n";
+            int len = Logs.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += Logs[i] + "\n";
+            }
+            Logs.Clear();
+        }
     }
 
     public class LogAPI
@@ -590,4 +612,3 @@ namespace vcs_LOG
         }
     }
 }
-
