@@ -11,6 +11,8 @@ namespace vcs_SendTo_All
 {
     public partial class Form_Setup : Form
     {
+        Button bt_clear = new Button();
+
         public Form_Setup()
         {
             InitializeComponent();
@@ -61,15 +63,32 @@ namespace vcs_SendTo_All
             dy = 55;
 
             cb_search_big_files.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            tb_filesize_mb.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            lb_filesize.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            tb_filesize_mb.Location = new Point(x_st + dx * 1 + 40, y_st + dy * 0);
+            lb_filesize.Location = new Point(x_st + dx * 2 + 40, y_st + dy * 0);
+            cb_search_video_files.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            cb_search_audio_files.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
-            bt_save.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
             lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             lb_main_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
             bt_exit_setup();
+
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+            bt_clear.Width = w;
+            bt_clear.Height = h;
+            bt_clear.Text = "";
+            bt_clear.Name = "bt_clear";
+            bt_clear.BackgroundImage = vcs_SendTo_All.Properties.Resources.clear;
+            bt_clear.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_clear.Location = new Point(this.ClientSize.Width - w - 5, this.ClientSize.Height - h - 5);
+            // 加入按鈕事件
+            //bt_clear.Click += new EventHandler(bt_clear_Click);   //same
+            bt_clear.Click += bt_clear_Click;
+            this.Controls.Add(bt_clear);
+            bt_clear.BringToFront();
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -101,6 +120,11 @@ namespace vcs_SendTo_All
 
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void bt_save_Click(object sender, EventArgs e)

@@ -91,6 +91,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="img\clear.png" />
+    <None Include="img\refresh.bmp" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

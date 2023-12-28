@@ -29,6 +29,8 @@ namespace vcs_SendTo_All
         private const int MODE5 = 0x05;   //grep 多層
         private const int MODE6 = 0x06;   //轉出檔案目錄資料 目錄下檔名轉出純文字
 
+        ListView listView1 = new ListView();
+
         bool flag_show_big_files_only = false;  //false : 顯示所有檔案, true : 僅顯示大檔
         long file_size_limit = 0;   //檔案界限
 
@@ -272,16 +274,63 @@ namespace vcs_SendTo_All
 
                     //顯示檔案目錄資料
                     show_filename_data();
+
+                    show_listView();
                 }
             }
         }
 
         void show_item_location()
         {
-            bt_copy.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y);
-            bt_save.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width * 2, richTextBox1.Location.Y);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height);
-            bt_setup.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy.Size.Width, richTextBox1.Location.Y + bt_setup.Size.Height * 2);
+            richTextBox1.Dock = DockStyle.Fill;
+            bt_copy.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width, 0);
+            bt_save.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0);
+            bt_refresh.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width * 2, 0 + bt_refresh.Size.Height);
+            bt_clear.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width, 0 + bt_setup.Size.Height);
+            bt_setup.Location = new Point(this.ClientSize.Width - bt_copy.Size.Width, 0 + bt_setup.Size.Height * 2);
+
+            bt_refresh.BackgroundImage = vcs_SendTo_All.Properties.Resources.refresh;
+        }
+
+        void show_listView()
+        {
+            this.Size = new Size(640 * 2, 480 * 2);
+
+            //richTextBox1.Dock = DockStyle.Right;
+
+            richTextBox1.Text += "W = " + this.ClientSize.Width.ToString() + "\n";
+            richTextBox1.Text += "H = " + this.ClientSize.Height.ToString() + "\n";
+
+            richTextBox1.Text += "W = " + richTextBox1.Size.Width.ToString() + "\n";
+            richTextBox1.Text += "H = " + richTextBox1.Size.Height.ToString() + "\n";
+
+
+            richTextBox1.Visible = false;
+
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.Clear();
+
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.Clear();
+
+            this.listView1.GridLines = true;
+            this.listView1.Size = new Size(640 * 2, 480 * 2);
+
+
+            listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 150, HorizontalAlignment.Left);
+            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
+            listView1.Visible = true;
+
+            this.Controls.Add(listView1);
+
+
         }
 
         void show_filename_data()
@@ -500,6 +549,11 @@ namespace vcs_SendTo_All
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void bt_refresh_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了 refresh\n";
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)

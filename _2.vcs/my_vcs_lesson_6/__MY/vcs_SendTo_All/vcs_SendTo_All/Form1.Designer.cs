@@ -35,15 +35,15 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bt_setup = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.bt_refresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(198, 184);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(622, 535);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -79,7 +79,7 @@
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bt_setup.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_setup.ForeColor = System.Drawing.Color.Black;
-            this.bt_setup.Location = new System.Drawing.Point(570, 58);
+            this.bt_setup.Location = new System.Drawing.Point(570, 104);
             this.bt_setup.Name = "bt_setup";
             this.bt_setup.Size = new System.Drawing.Size(40, 40);
             this.bt_setup.TabIndex = 46;
@@ -92,18 +92,31 @@
             this.bt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.bt_clear.ForeColor = System.Drawing.Color.Black;
-            this.bt_clear.Location = new System.Drawing.Point(524, 58);
+            this.bt_clear.Location = new System.Drawing.Point(570, 58);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(40, 40);
             this.bt_clear.TabIndex = 47;
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // bt_refresh
+            // 
+            this.bt_refresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bt_refresh.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_refresh.ForeColor = System.Drawing.Color.Black;
+            this.bt_refresh.Location = new System.Drawing.Point(524, 58);
+            this.bt_refresh.Name = "bt_refresh";
+            this.bt_refresh.Size = new System.Drawing.Size(40, 40);
+            this.bt_refresh.TabIndex = 48;
+            this.bt_refresh.UseVisualStyleBackColor = true;
+            this.bt_refresh.Click += new System.EventHandler(this.bt_refresh_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 535);
+            this.Controls.Add(this.bt_refresh);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.bt_save);
@@ -125,6 +138,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button bt_refresh;
     }
 }
 
