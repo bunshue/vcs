@@ -1,4 +1,3 @@
-# ch20_23.py
 import matplotlib.pyplot as plt
 import random
 

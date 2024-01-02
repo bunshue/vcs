@@ -1,4 +1,3 @@
-# ch14_8.py
 import os
 
 newdir = 'D:\\Python'

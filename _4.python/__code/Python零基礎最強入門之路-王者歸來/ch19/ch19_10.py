@@ -1,4 +1,3 @@
-# ch19_10.py
 from tkinter import *
 def bgUpdate(source):
     ''' 更改畫布背景顏色 '''
@@ -20,18 +19,5 @@ gSlider.grid(row=1, column=2)                           # 第一行第二欄
 bSlider.grid(row=1, column=3)                           # 第一行第三欄
 canvas.grid(row=2, column=1, columnspan=3)              # 第二行全部
 mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

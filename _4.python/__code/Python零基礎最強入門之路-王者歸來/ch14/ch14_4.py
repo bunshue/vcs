@@ -1,4 +1,3 @@
-# ch14_4.py
 import os
 
 print("檔案或資料夾存在 = ", os.path.exists('ch14'))

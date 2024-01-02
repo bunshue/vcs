@@ -1,4 +1,3 @@
-# ch20_29.py
 import matplotlib.pyplot as plt
 
 sorts = ["Travel","Entertainment","Education","Transporation","Food"]

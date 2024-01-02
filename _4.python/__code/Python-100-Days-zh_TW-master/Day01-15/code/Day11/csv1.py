@@ -1,9 +1,9 @@
 import csv
 
-filename = 'example.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/animals.csv'
 
 try:
-    with open(filename) as f:
+    with open(filename, encoding = 'utf-8') as f:
         reader = csv.reader(f)
         data = list(reader)
 except FileNotFoundError:

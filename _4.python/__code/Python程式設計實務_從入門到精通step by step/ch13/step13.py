@@ -49,41 +49,41 @@ image = Image.open(filename)       # 建立Pillow物件
 
 print('------------------------------------------------------------')	#60個
 
-pictObj = Image.new("RGB", (300, 180), "aqua")  # 建立aqua顏色影像
-#pictObj.save("out17_7.jpg")
+image = Image.new("RGB", (300, 180), "aqua")  # 建立aqua顏色影像
+#image.save("out17_7.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-pictObj = Image.new("RGBA", (300, 180))     # 建立完全透明影像
-#pictObj.save("out17_8.png")
+image = Image.new("RGBA", (300, 180))     # 建立完全透明影像
+#image.save("out17_8.png")
 
 print("------------------------------------------------------------")  # 60個
 
-pict = Image.open(filename)           # 建立Pillow物件
-width, height = pict.size
-newPict1 = pict.resize((width*2, height))   # 寬度是2倍
+image = Image.open(filename)           # 建立Pillow物件
+width, height = image.size
+newPict1 = image.resize((width*2, height))   # 寬度是2倍
 #newPict1.save("out17_9_1.jpg")
-newPict2 = pict.resize((width, height*2))   # 高度是2倍
+newPict2 = image.resize((width, height*2))   # 高度是2倍
 #newPict2.save("out17_9_2.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-pict = Image.open(filename)           # 建立Pillow物件
-#pict.rotate(90).save("out17_10_1.jpg")      # 旋轉90度
-#pict.rotate(180).save("out17_10_2.jpg")     # 旋轉180度
-#pict.rotate(270).save("out17_10_3.jpg")     # 旋轉270度
+image = Image.open(filename)           # 建立Pillow物件
+#image.rotate(90).save("out17_10_1.jpg")      # 旋轉90度
+#image.rotate(180).save("out17_10_2.jpg")     # 旋轉180度
+#image.rotate(270).save("out17_10_3.jpg")     # 旋轉270度
 
 print("------------------------------------------------------------")  # 60個
 
-pict = Image.open(filename)                       # 建立Pillow物件
-#pict.rotate(45).save("out17_11_1.jpg")                  # 旋轉45度
-#pict.rotate(45, expand=True).save("out17_11_2.jpg")     # 旋轉45度圖像擴充
+image = Image.open(filename)                       # 建立Pillow物件
+#image.rotate(45).save("out17_11_1.jpg")                  # 旋轉45度
+#image.rotate(45, expand=True).save("out17_11_2.jpg")     # 旋轉45度圖像擴充
 
 print("------------------------------------------------------------")  # 60個
 
-pict = Image.open(filename)                     # 建立Pillow物件
-#pict.transpose(Image.FLIP_LEFT_RIGHT).save("out17_12_1.jpg")    # 左右
-#pict.transpose(Image.FLIP_TOP_BOTTOM).save("out17_12_2.jpg")    # 上下
+image = Image.open(filename)                     # 建立Pillow物件
+#image.transpose(Image.FLIP_LEFT_RIGHT).save("out17_12_1.jpg")    # 左右
+#image.transpose(Image.FLIP_TOP_BOTTOM).save("out17_12_2.jpg")    # 上下
 
 print("------------------------------------------------------------")  # 60個
 
@@ -106,20 +106,20 @@ for x in range(50, 251):                                # x軸區間在50-250
 
 print("------------------------------------------------------------")  # 60個
 
-pict = Image.open(filename)           # 建立Pillow物件
-cropPict = pict.crop((80, 30, 150, 100))   # 裁切區間
+image = Image.open(filename)           # 建立Pillow物件
+cropPict = image.crop((80, 30, 150, 100))   # 裁切區間
 #cropPict.save("out17_15.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-pict = Image.open(filename)           # 建立Pillow物件
-copyPict = pict.copy()                      # 複製
+image = Image.open(filename)           # 建立Pillow物件
+copyPict = image.copy()                      # 複製
 #copyPict.save("out17_16.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-pict = Image.open(filename)               # 建立Pillow物件
-copyPict = pict.copy()                          # 複製
+image = Image.open(filename)               # 建立Pillow物件
+copyPict = image.copy()                          # 複製
 cropPict = copyPict.crop((80, 30, 150, 100))    # 裁切區間
 copyPict.paste(cropPict, (20, 20))              # 第一次合成
 copyPict.paste(cropPict, (20, 100))             # 第二次合成
@@ -127,8 +127,8 @@ copyPict.paste(cropPict, (20, 100))             # 第二次合成
 
 print("------------------------------------------------------------")  # 60個
 
-pict = Image.open(filename)               # 建立Pillow物件
-copyPict = pict.copy()                          # 複製
+image = Image.open(filename)               # 建立Pillow物件
+copyPict = image.copy()                          # 複製
 cropPict = copyPict.crop((80, 30, 150, 100))    # 裁切區間
 cropWidth, cropHeight = cropPict.size           # 獲得裁切區間的寬與高
 
@@ -246,7 +246,7 @@ print("檔案格式", type(img))
 
 import qrcode
 im = qrcode.make("https://pmm.zct.com.tw/trial/")
-im.save( "pic/qrcode.jpg")
+#im.save("qrcode.jpg")
 
 
 print("------------------------------------------------------------")  # 60個

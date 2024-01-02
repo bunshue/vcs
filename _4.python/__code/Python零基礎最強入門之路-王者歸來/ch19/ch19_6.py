@@ -1,4 +1,3 @@
-# ch19_6.py
 from tkinter import *
 
 tk = Tk()

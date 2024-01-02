@@ -1,4 +1,3 @@
-# ch20_12_6.py
 import matplotlib.pyplot as plt
 
 Benz = [3367, 4120, 5539]               # Benz線條
@@ -13,10 +12,7 @@ lineLexus, = plt.plot(seq, Lexus, '-^', label='Lexus')
 plt.legend(handles=[lineBenz, lineBMW, lineLexus], loc='upper left',
            bbox_to_anchor=(1,1))
 plt.tight_layout(pad=7)
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
+
 plt.tick_params(axis='both', labelsize=12, color='red')
+
 plt.show()
-
-

@@ -3,15 +3,10 @@
 使用tkinter创建GUI
 - 在窗口上制作动画
 
-Version: 0.1
-Author: 骆昊
-Date: 2018-03-14
-
 """
 
 import tkinter
 import time
-
 
 # 播放动画效果的函数
 def play_animation():

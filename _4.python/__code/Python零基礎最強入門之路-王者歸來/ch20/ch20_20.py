@@ -1,4 +1,3 @@
-# ch20_20.py
 import matplotlib.pyplot as plt
 import numpy as np
 

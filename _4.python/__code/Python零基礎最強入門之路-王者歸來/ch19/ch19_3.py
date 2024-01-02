@@ -1,4 +1,3 @@
-# ch19_3.py
 from tkinter import *
 from random import *
 

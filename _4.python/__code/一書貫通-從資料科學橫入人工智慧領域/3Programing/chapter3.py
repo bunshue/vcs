@@ -1,208 +1,14 @@
 
-# coding: utf-8
-
-# # 第3讲 Python语言基础
-
-# ## 3.1 Python数据类型
-
-# ### 3.1.1 字符串
-
-# 在Python中用引号引起来的字符集称之为字符串，比如：'hello'、"my Python"、"2+3"等都是字符串
-# Python中字符串中使用的引号可以是单引号、双引号跟三引号
-
-# In[ ]:
-
-print ('hello world!')
-
-
-# In[ ]:
-
-c = 'It is a "dog"!'
-print (c)
-
-
-# In[ ]:
-
-c1= "It's a dog!"
-print (c1)
-
-
-# In[ ]:
-
-c2 = """hello
-world
-!"""
-print (c2)
-
-
-# - 转义字符'\'
-
-# 转义字符\可以转义很多字符，比如\n表示换行，\t表示制表符，字符\本身也要转义，所以\\表示的字符就是\
-
-# In[ ]:
-
-print ('It\'s a dog!')
-print ("hello world!\nhello Python!")
-print ('\\\t\\')
-
-
 # 原样输出引号内字符串可以使用在引号前加r
-
-# In[ ]:
 
 print (r'\\\t\\')
 
 
-# - 子字符串及运算
-
-# In[ ]:
-
-s = 'Python'
-print( 'Py' in s)
-
-
-# 取子字符串有两种方法，使用[]索引或者切片运算法[:]，这两个方法使用面非常广
-
-# In[ ]:
-
-print (s[2])
-
-
-# In[ ]:
-
-print (s[1:4])
-
-
-# - 字符串连接与格式化输出
-
-# In[ ]:
-
-word1 = '"hello"'
-word2 = '"world"'
-sentence = word1.strip('"') + ' ' + word2.strip('"') + '!'
-
-print( 'The first word is %s, and the second word is %s' %(word1, word2))
-print (sentence)
-
-
-# ### 3.1.2 整数与浮点数
-
-# Python可以处理任意大小的整数，当然包括负整数，在程序中的表示方法和数学上的写法一模一样
-
-# In[ ]:
-
-i = 7
-print (i)
-
-
-# In[ ]:
-
-7 + 3
-
-
-# In[ ]:
-
-7 - 3
-
-
-# In[ ]:
-
-7 * 3
-
-
-# In[ ]:
-
-7 ** 3
-
-
-# In[ ]:
-
-7 / 3#Python3之后，整数除法和浮点数除法已经没有差异
-
-
-# In[ ]:
-
-7 % 3
-
-
-# 浮点数
-
-# In[ ]:
-
-7.0 / 3
-
-
-# In[ ]:
-
-3.14 * 10 ** 2
-
-
-# 其它表示方法
-
-# In[ ]:
-
-0b1111
-
-
-# In[ ]:
-
-0xff
-
-
-# In[ ]:
-
-1.2e-5
-
-
-# 更多运算
-
-# In[ ]:
 
 import math
 
 print (math.log(math.e)) # 更多运算可查阅文档
 
-
-# ### 3.1.3 布尔值
-
-# In[ ]:
-
-True
-
-
-# In[ ]:
-
-False
-
-
-# In[ ]:
-
-True and False
-
-
-# In[ ]:
-
-True or False
-
-
-# In[ ]:
-
-not True
-
-
-# In[ ]:
-
-True + False
-
-
-# In[ ]:
-
-18 >= 6 * 3 and 'py' in 'Python'
-
-
-# ### 3.1.4 日期时间
-
-# In[ ]:
 
 import time
 
@@ -210,17 +16,11 @@ now = time.strptime('2016-07-20', '%Y-%m-%d')
 print (now)
 
 
-# In[ ]:
-
 type(now)
 
 
-# In[ ]:
-
 time.strftime('%Y-%m-%d', now)
 
-
-# In[ ]:
 
 import datetime
 
@@ -254,47 +54,7 @@ cplx = (4 + 2j) * (3 + 0.2j)
 print (cplx)
 
 
-# - 查看变量类型
-
-# In[ ]:
-
-type(None)
-
-
-# In[ ]:
-
-type(s)
-
-
-# In[ ]:
-
-type(cplx)
-
-
-# - 类型转换
-
-# In[ ]:
-
-str(10086)
-
-
-# In[ ]:
-
-float(10086)
-
-
-# In[ ]:
-
-int('10086')
-
-
-# In[ ]:
-
-complex(10086)
-
-
 # ## 3.2 Python数据结构
-
 # 列表（list）、元组（tuple）、集合（set）、字典（dict）
 
 # ### 3.2.1 列表(list)

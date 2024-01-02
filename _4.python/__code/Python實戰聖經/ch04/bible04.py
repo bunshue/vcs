@@ -145,7 +145,7 @@ drawimg = ImageDraw.Draw(img)
 
 drawimg.text((120,80), "English Demo", fill="red")  #繪製英文文字
 
-myfont = ImageFont.truetype("taipei_sans_tc_beta.ttf", 24)
+myfont = ImageFont.truetype("../taipei_sans_tc_beta.ttf", 24)
 
 drawimg.text((120,150), "中文字型示範", fill="blue", font=myfont) #繪製中文文字
 
@@ -181,7 +181,7 @@ drawimg.ellipse((100,200,200,220), fill="red") #嘴巴
 #繪文字
 drawimg.text((130,280), "e-happy", fill="orange")  #英文字
 
-myfont = ImageFont.truetype("taipei_sans_tc_beta.ttf", 16)
+myfont = ImageFont.truetype("../taipei_sans_tc_beta.ttf", 16)
 
 drawimg.text((110,320), "文淵閣工作室", fill="red", font=myfont) #中文字 
 

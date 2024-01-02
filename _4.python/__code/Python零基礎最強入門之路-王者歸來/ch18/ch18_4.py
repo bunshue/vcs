@@ -1,4 +1,3 @@
-# ch18_4.py
 from tkinter import *
 
 window = Tk()

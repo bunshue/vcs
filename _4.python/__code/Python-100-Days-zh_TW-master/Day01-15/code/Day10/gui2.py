@@ -3,13 +3,8 @@
 - 使用画布绘图
 - 处理鼠标事件
 
-Version: 0.1
-Author: 骆昊
-Date: 2018-03-14
 """
-
 import tkinter
-
 
 def mouse_evt_handler(evt=None):
     row = round((evt.y - 20) / 40)
@@ -17,7 +12,6 @@ def mouse_evt_handler(evt=None):
     pos_x = 40 * col
     pos_y = 40 * row
     canvas.create_oval(pos_x, pos_y, 40 + pos_x, 40 + pos_y, fill='black')
-
 
 top = tkinter.Tk()
 # 设置窗口尺寸

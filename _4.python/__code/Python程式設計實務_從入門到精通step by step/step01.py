@@ -5,12 +5,6 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\align.py
-
 str1 = 'Python is funny and powerful'
 print('原字串', str1)
 print('欄寬40，字串置中', str1.center(40))
@@ -28,12 +22,6 @@ str3 = '禮\n義\n廉\n恥'
 print('依\\n分割字串', str3.splitlines(False))
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\count.py
 
 str1="Happy birthday to my best friend."
 s1=str1.count("to",0) #從str1字串索引0的位置開始搜尋
@@ -62,8 +50,6 @@ print("不足數位補0(以*替代)：%0*.2f\n" %(6, 1.2345))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\ExInteger.py
-
 print("\n不足數位補0：%05d\n" %(66))
 
 print("不足數位預設空格：%5d\n" %(66))
@@ -74,16 +60,12 @@ print("不足數位補0(以*替代)：%0*d\n" %(5, 66))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\ExList.py
-
 list1 = ["A", True, 10, 3.14, "G"]
 
 for i in range(len(list1)):
    print("索引位置：%s\t對應值：%s\t型態：%s\n" %(i, list1[i], type(list1[i])))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\ExList2.py
 
 person = ["John", "Merry", "Mi", "Jason"]
 
@@ -101,8 +83,6 @@ print("複製原串列：", person1)
 print("原串列：", person)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\ExSet.py
 
 likeBasketball = set(("class A", "class B", "class C"))
 likeDodgeball = set(("class A", "class F", "class k"))
@@ -124,16 +104,12 @@ print("\nlikeBasketball以及likeDodgeball的對稱差：", setSymmetric_differe
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\ExSlice.py
-
 Index = "Hello Python, This is Program"
 
 print("Index字串：", Index)
 print(Index[-3:-25:-2])
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\ExString.py
 
 strName = "台北永和三支"
 strCode = "3388128"
@@ -169,8 +145,6 @@ print("總共有 %d 個不幸運的數字" %len(badnum), badnum)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\phrase.py
-
 phrase = 'Happy holiday.'
 print('原字串：', phrase)
 print('將首字大寫 ', phrase.capitalize())
@@ -190,8 +164,6 @@ s1=s.replace("宜蘭高中", "高雄中學")
 print(s1)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\rev.py
 
 fruit = ['apple', 'orange', 'watermelon']
 print('反轉前內容：', fruit)

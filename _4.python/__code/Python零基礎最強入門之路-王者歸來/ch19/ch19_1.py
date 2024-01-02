@@ -1,4 +1,3 @@
-# ch19_1.py
 from tkinter import *
 import math
 

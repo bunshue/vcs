@@ -1,4 +1,3 @@
-# ch19_2.py
 from tkinter import *
 import math
 
@@ -8,11 +7,4 @@ canvas.pack()
 canvas.create_line(100,100,500,100)
 canvas.create_line(100,125,500,125,width=5)
 canvas.create_line(100,150,500,150,width=10,fill='blue')
-
-
-
-
-
-
-
 

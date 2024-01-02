@@ -5,14 +5,9 @@
 - 布局
 - 事件回调
 
-Version: 0.1
-Author: 骆昊
-Date: 2018-03-14
 """
-
 import tkinter
 import tkinter.messagebox
-
 
 def main():
     flag = True
@@ -49,7 +44,6 @@ def main():
     panel.pack(side='bottom')
     # 开启主事件循环
     tkinter.mainloop()
-
 
 if __name__ == '__main__':
     main()

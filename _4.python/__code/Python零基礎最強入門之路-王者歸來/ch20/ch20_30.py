@@ -1,4 +1,3 @@
-# ch20_30.py
 import matplotlib.pyplot as plt
 from pylab import mpl
 

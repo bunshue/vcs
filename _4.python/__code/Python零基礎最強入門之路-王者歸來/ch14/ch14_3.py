@@ -1,4 +1,3 @@
-# ch14_3.py
 import os
 
 print(os.path.relpath('D:\\'))              # 列出目前工作目錄至D:\的相對路徑
