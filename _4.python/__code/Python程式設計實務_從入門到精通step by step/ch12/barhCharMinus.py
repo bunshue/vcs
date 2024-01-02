@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*- 
-
 import matplotlib.pyplot as plt
 
 plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
@@ -11,4 +9,5 @@ plt.barh(x, s,color='red')
 plt.ylabel('季別')
 plt.xlabel('損益金額')
 plt.title('今年度營業獲利的概況')
+
 plt.show()

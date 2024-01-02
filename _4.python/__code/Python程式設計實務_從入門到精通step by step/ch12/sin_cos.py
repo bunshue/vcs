@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 正弦函數 s=sin(x) 
 餘弦函數 c=cos(x)

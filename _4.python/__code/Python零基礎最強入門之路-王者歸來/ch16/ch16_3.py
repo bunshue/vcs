@@ -1,4 +1,3 @@
-# ch16_3.py
 import turtle
 
 t = turtle.Pen()

@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*- 
-
 import matplotlib.pyplot as plt
 import numpy as np
+
 plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
 
 x=['上學期', '下學期']

@@ -3,14 +3,8 @@ import sys
 import time
 import random
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_11.py
-
-# ch6_11.py
 num1 = [1, 3, 5]
 num2 = [2, 4, 6]
 num3 = num1 + num2           # 字串為主的串列相加
@@ -18,9 +12,6 @@ print(num3)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_12.py
-
-# ch6_12.py
 cars = ['toyota', 'nissan', 'honda']
 nums = [1, 3, 5]
 carslist = cars * 3           # 串列乘以數字
