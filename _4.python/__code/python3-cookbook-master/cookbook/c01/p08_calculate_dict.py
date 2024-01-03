@@ -1,11 +1,6 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 字典的数据运算
-Desc : 
 """
-
-
 def calc_dict():
     prices = {
         'ACME': 45.23,

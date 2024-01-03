@@ -7,7 +7,6 @@ Desc :
 
 from collections import ChainMap
 
-
 def combine_map():
     a = {'x': 1, 'z': 3 }
     b = {'y': 2, 'z': 4 }

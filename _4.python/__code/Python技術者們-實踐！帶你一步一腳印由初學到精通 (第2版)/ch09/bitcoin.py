@@ -25,4 +25,5 @@ print("total=", total, " Best MA=", best_ma, " Best stop earn", best_stop_earn)
 bitcoin['ma'] = bitcoin['twd'].rolling(window=best_ma).mean()
 bitcoin[['twd', 'ma']].plot(
     kind='line', figsize=[15, 5], xlim=('2021-01-15', '2021-02-28'))
+
 plt.show()

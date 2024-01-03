@@ -8,10 +8,7 @@ r = requests.get(
 
 print(r.text)
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch06\6-0.py
+print('------------------------------------------------------------')	#60個
 
 import requests
 
@@ -24,8 +21,6 @@ r = requests.get(
 print(r.text)
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch06\6-1.py
 
 import requests
 from io import StringIO
@@ -52,8 +47,6 @@ print(filter_df)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch06\6-2.py
-
 import datetime
 
 date = '20210311'
@@ -61,8 +54,6 @@ date = datetime.datetime.strptime(date, '%Y%m%d')
 print(date.weekday())
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch06\6-3.py
 
 import datetime
 
@@ -82,8 +73,6 @@ print(dates)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch06\6-4.py
-
 def get_setting():    #←將「讀取設定檔」寫成函式, 可讓程式易讀易用
 	res = []     #←準備一個空串列來存放讀取及解析的結果
 	try:              # 使用 try 來預防開檔或讀檔錯誤
@@ -100,8 +89,6 @@ stock = get_setting()     # 呼叫上面的函式
 print('傳回：', stock)    # 輸出傳回的結果
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch06\6-5.py
 
 import matplotlib.pyplot as plt
 import crawler_module as m
@@ -138,12 +125,9 @@ plt.xticks(fontsize=10, rotation=45)
 plt.yticks(fontsize=10)
 plt.legend(loc="best", fontsize=20)
 
-
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python技術者們-實踐！帶你一步一腳印由初學到精通 (第2版)\ch06\6-6.py
 
 import matplotlib.pyplot as plt
 import crawler_module as m

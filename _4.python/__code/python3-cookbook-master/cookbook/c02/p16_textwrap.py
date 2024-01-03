@@ -1,12 +1,8 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 格式化字符串为指定宽度
-Desc : 
 """
 import textwrap
 import os
-
 
 def reformat_width():
     s = "Look into my eyes, look into my eyes, the eyes, the eyes, \

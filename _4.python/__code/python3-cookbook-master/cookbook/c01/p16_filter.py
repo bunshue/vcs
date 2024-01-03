@@ -1,11 +1,8 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 序列元素过滤
 Desc :
 """
 from itertools import compress
-
 
 def cb_filter():
     mylist = [1, 4, -5, 10, -7, 2, 3, -1]

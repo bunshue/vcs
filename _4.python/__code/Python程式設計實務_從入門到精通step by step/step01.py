@@ -41,21 +41,15 @@ for j in range(5):
 print("------------------------------------------------------------")  # 60個
 
 print("\n不足數位補0：%06.2f\n" %(1.2345))
-
 print("不足數位預設空格：%6.2f\n" %(1.2345))
-
 print("小數點保留2位：%.2f\n" %(1.2345))
-
 print("不足數位補0(以*替代)：%0*.2f\n" %(6, 1.2345))
 
 print("------------------------------------------------------------")  # 60個
 
 print("\n不足數位補0：%05d\n" %(66))
-
 print("不足數位預設空格：%5d\n" %(66))
-
 print("小於位數則輸出全部：%2d\n" %(666))
-
 print("不足數位補0(以*替代)：%0*d\n" %(5, 66))
 
 print("------------------------------------------------------------")  # 60個
@@ -68,7 +62,6 @@ for i in range(len(list1)):
 print("------------------------------------------------------------")  # 60個
 
 person = ["John", "Merry", "Mi", "Jason"]
-
 addPerson = "David"
 
 if person.count(addPerson) == 0:
@@ -94,7 +87,6 @@ print("likeDodgeball差集：", setDifference)
 
 setIntersection = likeBasketball.intersection(likeDodgeball)
 print("\nlikeBasketball以及likeDodgeball的交集：", setIntersection)
-
 
 setUnion = likeBasketball.union(likeDodgeball)
 print("\nlikeBasketball以及likeDodgeball的聯集：", setUnion)
@@ -125,7 +117,6 @@ if intMoney < 20000:
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("="*30, "\n")
 
 print("------------------------------------------------------------")  # 60個
@@ -155,8 +146,6 @@ print('是否皆為大寫字元', phrase.isupper())
 print('是否皆為小寫字元', phrase.islower())
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\replace.py
 
 s= "我畢業於宜蘭高中."
 print(s)
@@ -189,15 +178,11 @@ print(letter)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\split.py
-
 str1 = "happy \nclever \nwisdom"
 print( str1.split() ) #以空格與換行符號(\n)來分割
 print( str1.split(' ', 2 ) ) 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\startswith.py
 
 wd = 'Alex is optimistic and clever.'
 print('字串:', wd)
@@ -220,19 +205,16 @@ print(pay)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\unpack01.py
-
 word1 = "zoo"
 word2 = "animal"
 print("交換前: ")
 print('單字1={},單字2={}'.format(word1,word2))
+
 word2,word1 = word1,word2
 print("交換後: ")
 print('單字1={},單字2={}'.format(word1,word2))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch06\unpack02.py
 
 product = (('iPhone','手機','我預算的首選'),
         ('iPad','平板','視股票獲利'),
@@ -251,8 +233,6 @@ print(func(1,2,3))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch07\func1.py
-
 def func(a,b,c):
     x = a +b +c
     print(x)
@@ -260,8 +240,6 @@ def func(a,b,c):
 print(func(1,2,3))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch07\keyword.py
 
 def equation(x,y,z):
     ans = x*y+z*x+y*z
@@ -283,8 +261,6 @@ print('數值 1+數值 2 =',total(num1,num2))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch07\math.py
-
 score=[97,76,89,76,90,100,87,65]
 print('本學期總共考過的數學小考次數', len(score))
 print('所有成績由小到大排序的結果為: {}'.format(sorted(score)))
@@ -294,8 +270,6 @@ print('本學期考最差的分數為', min(score))
 print('本學期考最好的分數為', max(score))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch07\para.py
 
 def square_sum(*arg):
     ans=0
@@ -318,8 +292,6 @@ def progname(**arg):
 print(progname(d1='python', d2='java', d3='visual basic'))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch07\para1.py
 
 def dinner(mainmeal, *sideorder):
     #列出所點餐點的主餐及點心副餐
@@ -346,8 +318,6 @@ print('次方運算結果：%d' %Pow(x, y))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch07\seq.py
-
 import random
 
 val=0
@@ -363,8 +333,6 @@ for i in range(10):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch07\swap.py
-
 def swap_test(x,y):
     print('函數內交換前：x=%d, y=%d' %(x,y))
     x,y=y,x #交換過程
@@ -377,8 +345,6 @@ swap_test(a,b) #函數呼叫
 print('函數外交換後：a=%d, b=%d' %(a,b))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch07\value.py
 
 print('int(9.6)=',int(9.6))
 print('bin(20)=',bin(20))
@@ -428,34 +394,24 @@ if math.isnan(h) == False:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch08\ExRandomSort.py
-
 import random
+
 name = ["小明", "小黃", "小紅", "小綠", "小白"]
 
 print("抽取一個元素：", random.choice(name))
-
 print("抽取三個元素：", random.sample(name, 3))
-
 print("抽取三個元素：", random.shuffle(name))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch08\ExRandrange.py
-
 import random
 
 print("任一整數", random.randrange(100))
-
 print("任一整數", random.randrange(52, 100))
-
 print("奇數", random.randrange(1, 100, 2))
-
 print("偶數", random.randrange(0, 100, 2))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch08\ExTime.py
 
 import time
 
@@ -466,8 +422,6 @@ print("轉換時間形式(年/月/日)：", time.strftime("%Y/%m/%d", tLocal))
 print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime (tLocal))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch08\GetParam.py
 
 import sys
 if len(sys.argv) < 0:
@@ -481,8 +435,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch08\import.py
-
 import random
 
 for i in range(5):
@@ -495,30 +447,6 @@ random.shuffle(word)  #使用shuffle函數打亂字的順序
 print(word)#將打亂後字依序輸出
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個

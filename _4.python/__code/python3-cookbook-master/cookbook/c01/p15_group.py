@@ -1,12 +1,9 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 分组迭代
 Desc : 
 """
 from operator import itemgetter
 from itertools import groupby
-
 
 def group_iter():
     rows = [

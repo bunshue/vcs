@@ -1,15 +1,9 @@
-"""Leetspeak, by Al Sweigart al@inventwithpython.com
-Translates English messages into l33t5p34]<.
-This code is available at https://nostarch.com/big-book-small-python-programming
-Tags: tiny, beginner, word"""
-
 import random
 
 try:
     import pyperclip  # pyperclip copies text to the clipboard.
 except ImportError:
     pass  # If pyperclip is not installed, do nothing. It's no big deal.
-
 
 def main():
     print('''L3375P34]< (leetspeek)

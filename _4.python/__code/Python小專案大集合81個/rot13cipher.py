@@ -1,9 +1,3 @@
-"""ROT13 Cipher, by Al Sweigart al@inventwithpython.com
-The simplest shift cipher for encrypting and decrypting text.
-More info at https://en.wikipedia.org/wiki/ROT13
-This code is available at https://nostarch.com/big-book-small-python-programming
-Tags: tiny, cryptography"""
-
 try:
     import pyperclip  # pyperclip copies text to the clipboard.
 except ImportError:

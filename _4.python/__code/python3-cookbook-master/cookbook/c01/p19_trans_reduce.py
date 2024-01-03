@@ -1,11 +1,8 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 转换并聚集函数
 Desc : 
 """
 import os
-
 
 def trans_reduce():
     nums = [1, 2, 3, 4, 5]

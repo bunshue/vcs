@@ -1,11 +1,8 @@
-#!/usr/bin/env python
-# -*- encoding: utf-8 -*-
 """
 Topic: 通过名称访问序列
-Desc : 
 """
-from collections import namedtuple
 
+from collections import namedtuple
 
 def name_seq():
     subscriber = namedtuple('Subscriber', ['addr', 'joined'])

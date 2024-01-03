@@ -1,5 +1,7 @@
+import requests
 
-import requests  # 匯入 requests 套件
+print('------------------------------------------------------------')	#60個
+
 r = requests.get('http://www.flag.com.tw') # 向旗標網站發出 GET 請求,並將回應物件儲存到 r
 
 if r.status_code == 200:   # 回應的狀態碼若為 200 表示 OK
@@ -9,9 +11,6 @@ else:
     
 print('------------------------------------------------------------')	#60個
 
-
-import requests
-
 url = 'https://httpbin.org/get'
 hd = {'user-key': '7ADGS9S'}  # 標頭參數(以字典儲存)
 pm = {'id': 1023, 'neme': 'joe'}   # 網址參數(以字典儲存)
@@ -20,19 +19,13 @@ print(r.text)   # 將回應的文字印出來
 
 print('------------------------------------------------------------')	#60個
 
-
-import requests
-
 url = 'http://httpbin.org/post' # 使用測試服務網站, POST 方法網址要加 /post
 r = requests.post(url, data = 'Hello')  # 送出字串資料
 print(r.text)
 r = requests.post(url, data = {'id':'123', 'name':'Joe'})
 print(r.text)
+
 print('------------------------------------------------------------')	#60個
-
-
-
-import requests
 
 r = requests.put('https://httpbin.org/put', data = {'key':'abc'})
 print(r.text)
@@ -41,11 +34,7 @@ print(r.text)
 r = requests.delete('https://httpbin.org/delete')
 print(r.text)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-
 
 page = """
 <html>

@@ -1,5 +1,33 @@
+import sys
+import random
 
 print('------------------------------------------------------------')	#60個
+
+import linecache
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt'
+
+getLines = linecache.getlines(filename)
+
+print(getLines)
+
+print("取得{}檔案原內容：\n{}".format(filename, getLines))
+
+#打亂次數
+times = 5
+
+for i in range(times):
+    random.shuffle(getLines)
+    print(getLines)
+
+print("\n隨機抽取：\n", random.choice(getLines))
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
 '''
 import warnings
 warnings.warn('Use importlib.util.find_spec() instead.', DeprecationWarning, stacklevel = 1)
@@ -250,9 +278,7 @@ print(rows_by_weight)
 rows_by_cename = sorted(rows, key = operator.itemgetter('cname','ename'))
 print(rows_by_cename)
 
-'''
 print('------------------------------------------------------------')	#60個
-
 
 import io
 
@@ -299,9 +325,7 @@ print('鍵種類 =', len(inventory))
 
 print('值總和 =', sum(inventory.values()))
 
-
 import sys
-'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -459,8 +483,6 @@ n1 = cnlunardate(2017, 6, 1, False).toordinal()
 n2 = cnlunardate(2015, 10, 12, False).toordinal()
 print(n1 - n2)
 
-'''
-
 print('------------------------------------------------------------')	#60個
 
 print('chardet：檔案編碼格式')
@@ -476,9 +498,6 @@ for f in files:
     text = open(f, 'rb').read()
     codetype = chardet.detect(text)
     print('{} 編碼格式：{}'.format(f, codetype))
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -508,7 +527,6 @@ print('可用空間 :', du.free, '個位元組\t', du.free//1024//1024//1024, 'G
 
 print('------------------------------------------------------------')	#60個
 
-
 import time
 import threading
 import subprocess
@@ -529,7 +547,6 @@ def bark(duration):
         print('b', end = ' ')
         i += 1
 
-
 bark(0.2)
 
 print('------------------------------------------------------------')	#60個
@@ -544,14 +561,13 @@ print(summary)
 
 print('------------------------------------------------------------')	#60個
 
-
 import shelve
+
 book = shelve.open("addresses")
 
 book['167'] = ('邱大熊', '0912-345678', '台北市忠孝路1號')
 book['928'] = ('陳小天', '0987-654321', '新竹市中山路2號')
 book.close()
-
 
 import shelve
 book = shelve.open("addresses")
@@ -567,10 +583,6 @@ abs_path = path.resolve()
 print(abs_path)
 new_path = str(abs_path) + ".old"
 print(new_path)
-
-
-
-print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
@@ -607,8 +619,7 @@ for name, prices in fruits.items():
 
 print('------------------------------------------------------------')	#60個
 
-
-#4-4-2 Counter 容器
+# Counter 容器
 
 from collections import Counter
 
@@ -623,18 +634,8 @@ for item, counter in c.items():
 
 print('出現最多次的項目:', c.most_common(1))
 
+'''
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 
 print('------------------------------------------------------------')	#60個

@@ -18,7 +18,7 @@ import chardet  # 檔案編碼格式
 
 print("------------------------------------------------------------")  # 60個
 
-filenames = glob.glob("*")
+filenames = glob.glob("*.txt")
 for filename in filenames:
     text = open(filename, "rb").read()
     codetype = chardet.detect(text)

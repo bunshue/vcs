@@ -38,8 +38,6 @@ for i in range(len(photo_list)):
 
 print("\n下載完畢")
 
-
-
 print('------------------------------------------------------------')	#60個
 
 import photo_module as m
