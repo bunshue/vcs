@@ -1,6 +1,8 @@
 import json 
 import requests
 
+print("------------------------------------------------------------")  # 60個
+
 url = "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=Python&projection=lite"
 jsonfile = "GoogleBooks.json"
 r = requests.get(url)
@@ -9,11 +11,7 @@ json_data = json.loads(r.text)
 with open(jsonfile, 'w') as fp:
     json.dump(json_data, fp)    
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-2.py
 
 import requests
 
@@ -44,11 +42,8 @@ if r.status_code == requests.codes.ok:
     print(r.text)        
 else:
     print("HTTP請求錯誤..." + URL)
- 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-2b.py
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -67,11 +62,8 @@ fp.write(html)
 print("寫入檔案NBA.html...")
 fp.close()
 driver.quit()
- 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-2c.py
 
 import time
 import requests
@@ -84,11 +76,8 @@ for i in range(1, 10):
     print(r.status_code)
     print("等待5秒鐘...")
     time.sleep(5) 
-   
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-2d.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -109,10 +98,7 @@ if r.status_code == requests.codes.ok:
 else:
     print("HTTP請求錯誤..." + URL)
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-2e.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -135,8 +121,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-2f.py
-
 from urllib.parse import urljoin
 
 URL = "http://www.majortests.com/word-lists/word-list-01.html"
@@ -151,11 +135,8 @@ print("-----------------")
 for item in catalog:
     url = urljoin(PTT, "../{0}/index.html".format(item))
     print(url)
- 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-3-1.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -214,8 +195,6 @@ with open("movies.csv", "w+",newline="",encoding="utf-8") as fp:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-3-2.py
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -253,8 +232,6 @@ with open("products.json", "w", encoding="utf-8") as fp: # 寫入JSON檔案
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-3-3.py
-
 import requests 
 from bs4 import BeautifulSoup
 import csv
@@ -277,8 +254,6 @@ with open(csvfile,'w+',newline='',encoding="big5") as fp:
         writer.writerow(lst)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-4-1.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -345,8 +320,6 @@ with open("all_movies.csv", "w+",newline="",encoding="utf-8") as fp:
         writer.writerow(item)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-4-2.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -419,8 +392,6 @@ with open("all_movies2.csv", "w+",newline="",encoding="utf-8") as fp:
         writer.writerow(item)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-4-3.py
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By

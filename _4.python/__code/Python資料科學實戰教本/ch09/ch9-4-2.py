@@ -11,13 +11,13 @@ dists = {"name": ["Zhongzheng", "Banqiao", "Taoyuan", "Beitun",
                         225561, 302070]}
 df = pd.DataFrame(dists)
 print(df) 
-df.to_html("ch9-4-2-01.html")
+#df.to_html("ch9-4-2-01.html")  #df轉html
 df.plot()
 
 df2 = pd.DataFrame(dists, 
                    columns=["population"],
                    index=dists["name"])
 print(df2)
-df2.to_html("ch9-4-2-02.html")
+#df2.to_html("ch9-4-2-02.html")  #df轉html
 df2.plot()
 plt.show()

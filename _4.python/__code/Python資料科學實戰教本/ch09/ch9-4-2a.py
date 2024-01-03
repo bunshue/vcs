@@ -20,4 +20,5 @@ df.plot(xticks=range(len(df.index)),
 df.plot(xticks=range(len(df.index)),
         use_index=True,
         rot=90)
+
 plt.show()

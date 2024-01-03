@@ -3,28 +3,16 @@ import sys
 import time
 import random
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_1.py
-
-# ch12_1.py
 class Banks():
     # 定義銀行類別
     title = 'Taipei Bank'       # 定義屬性
     def motto(self):            # 定義方法
         return "以客為尊"
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_2.py
-
-# ch12_2.py
 class Banks():
     # 定義銀行類別
     title = 'Taipei Bank'       # 定義屬性
@@ -35,13 +23,8 @@ userbank = Banks()              # 定義物件userbank
 print("目前服務銀行是 ", userbank.title)
 print("銀行服務理念是 ", userbank.motto())
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_3.py
-
-# ch12_3.py
 class Banks():
     # 定義銀行類別
     title = 'Taipei Bank'                   # 定義屬性
@@ -55,16 +38,8 @@ class Banks():
 hungbank = Banks('hung', 100)               # 定義物件hungbank
 print(hungbank.name.title( ), " 存款餘額是 ", hungbank.get_balance())
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_4.py
-
-# ch12_4.py
 class Banks():
     # 定義銀行類別
     title = 'Taipei Bank'                   # 定義屬性
@@ -90,16 +65,8 @@ hungbank.get_balance()                      # 獲得存款餘額
 hungbank.withdraw_money(200)                # 提款200元
 hungbank.get_balance()                      # 獲得存款餘額
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_5.py
-
-# ch12_5.py
 class Banks():
     # 定義銀行類別
     title = 'Taipei Bank'                   # 定義屬性
@@ -127,19 +94,8 @@ johnbank.withdraw_money(150)                # john提款150
 hungbank.get_balance()                      # 獲得hung存款餘額                
 johnbank.get_balance()                      # 獲得john存款餘額
 
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_6.py
-
-# ch12_6.py
 class Banks():
     # 定義銀行類別
 
@@ -165,20 +121,8 @@ hungbank.get_balance()                      # 獲得hung存款餘額
 hungbank.save_money(100)                    # hung存款100
 hungbank.get_balance()                      # 獲得hung存款餘額                
 
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_7.py
-
-# ch12_7.py
 class Banks():
     # 定義銀行類別
 
@@ -203,22 +147,8 @@ hungbank.get_balance()
 hungbank.balance = 10000                    # 類別外直接竄改存款餘額
 hungbank.get_balance()
 
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_8.py
-
-# ch12_8.py
 class Banks():
     # 定義銀行類別
 
@@ -243,22 +173,8 @@ hungbank.get_balance()
 hungbank.balance = 10000                    # 類別外直接竄改存款餘額
 hungbank.get_balance()
 
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_9.py
-
-# ch12_9.py
 class Banks():
     # 定義銀行類別
 
@@ -291,23 +207,8 @@ hungbank = Banks('hung')                    # 定義物件hungbank
 usdallor = 50
 print(usdallor, " 美金可以兌換 ", hungbank.usa_to_taiwan(usdallor), " 台幣") 
 
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_10.py
-
-# ch12_10.py
 class Banks():
     # 定義銀行類別
 
@@ -344,22 +245,8 @@ hungbank = Shilin_Banks('hung')             # 定義物件hungbank
 hungbank.save_money(500)
 hungbank.get_balance()
 
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_11.py
-
-# ch12_11.py
 class Banks():
     # 定義銀行類別
 
@@ -398,24 +285,8 @@ class Shilin_Banks(Banks):
 hungbank = Shilin_Banks('hung')             # 定義物件hungbank
 print("我的存款銀行是: ", hungbank.bank_title())
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_12.py
-
-# ch12_12.py
 class Banks():
     # 定義銀行類別
 
@@ -457,25 +328,8 @@ print("James's banks = ", jamesbank.title)  # 列印銀行名稱
 hungbank = Shilin_Banks('Hung')             # 定義Shilin_Banks類別物件
 print("Hung's banks  = ", hungbank.title)   # 列印銀行名稱
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_13.py
-
-# ch12_12.py
 class Banks():
     # 定義銀行類別
 
@@ -519,25 +373,8 @@ print("James's banks = ", jamesbank.bank_title())  # 列印銀行名稱
 hungbank = Shilin_Banks('Hung')             # 定義Shilin_Banks類別物件
 print("Hung's banks  = ", hungbank.bank_title())   # 列印銀行名稱
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_14.py
-
-# ch12_14.py
 class Animals():
     """Animals類別, 這是基底類別 """
     def __init__(self, animal_name, animal_age ):
@@ -559,14 +396,9 @@ mycat.run()
 mydog = Dogs('lily', 6)         # 建立Dogs物件以及測試
 print(mydog.name.title(), ' is ', mydog.age, " years old.")
 mydog.run()
-        
-        
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_15.py
-
-# ch12_15
 class Grandfather():
     """ 定義祖父的資產 """
     def __init__(self):
@@ -629,12 +461,8 @@ class Ivan(Father):                                 # 父類別是Father
 ivan = Ivan()
 ivan.get_money()                                    # 取得資產明細
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_17.py
-
-# ch12_17.py
 class Animals():
     """Animals類別, 這是基底類別 """
     def __init__(self, animal_name):
@@ -670,13 +498,8 @@ doing(my_dog)
 my_monkey = Monkeys('taylor')           # Monkeys物件
 doing(my_monkey)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_18.py
-
-# ch12_18.py
 class Grandfather():
     """ 定義祖父類別 """
     def action1(self):
@@ -702,14 +525,8 @@ ivan.action3()              # 順序 Ivan
 ivan.action2()              # 順序 Ivan -> Father
 ivan.action1()              # 順序 Ivan -> Father -> Grandfather
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_19.py
-
-# ch12_19.py
 class Grandfather():
     """ 定義祖父類別 """
     def action1(self):
@@ -736,14 +553,8 @@ ivan.action3()              # 順序 Ivan -> Father
 ivan.action2()              # 順序 Ivan -> Father -> Uncle
 ivan.action1()              # 順序 Ivan -> Father -> Uncle -> Grandfather
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_20.py
-
-# ch12_20.py
 class Grandfather():
     """ 定義祖父類別 """
     pass
@@ -765,12 +576,8 @@ print("father物件類型     : ", type(father))
 print("ivan物件類型       : ", type(ivan))
 print("ivan物件fn方法類型 : ", type(ivan.fn))
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch12\ch12_21.py
-
-# ch12_21.py
 class Grandfather():
     """ 定義祖父類別 """
     pass
@@ -797,24 +604,6 @@ print("grandfa屬於Ivan類別: ", isinstance(grandfa, Ivan))
 print("grandfa屬於Father類別: ", isinstance(grandfa, Father))
 print("grandfa屬於Grandfather類別: ", isinstance(grandfa, Grandfather))
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個

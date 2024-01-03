@@ -3,13 +3,8 @@ import sys
 import time
 import random
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_1.py
-
-# ch11_1.py
 def greeting( ):
     """我的第一個Python函數設計"""
     print("Python歡迎你")
@@ -45,63 +40,28 @@ print("Python歡迎你")
 print("祝福學習順利")
 print("謝謝")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_3.py
-
-# ch11_3.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi,", name, "Good Morning!")
 greeting('Nelson')
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_3_1.py
-
-# ch11_3_1.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi, " + name + " Good Morning!")
 greeting('Nelson')
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_4.py
-
-# ch11_4.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi, " + name + " Good Morning!")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_5.py
-
-# ch11_5.py
-def subtract(x1, x2):
-    """ 減法設計 """
-    result = x1 - x2
-    print(result)               # 輸出減法結果
-print("本程式會執行 a - b 的運算")     
-a = int(input("a = "))
-b = int(input("b = "))
-print("a - b = ", end="")       # 輸出a-b字串,接下來輸出不跳行
-subtract(a, b)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_6.py
-
-# ch11_6.py
 def interest(interest_type, subject):
     """ 顯示興趣和主題 """
     print("我的興趣是 " + interest_type )
@@ -111,16 +71,8 @@ def interest(interest_type, subject):
 interest('旅遊', '敦煌')
 interest('程式設計', 'Python')
 
-
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_7.py
-
-# ch11_7.py
 def interest(interest_type, subject):
     """ 顯示興趣和主題 """
     print("我的興趣是 " + interest_type )
@@ -130,16 +82,8 @@ def interest(interest_type, subject):
 interest(interest_type = '旅遊', subject = '敦煌')  # 位置正確
 interest(subject = '敦煌', interest_type = '旅遊')  # 位置更動
 
-
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_8.py
-
-# ch11_8.py
 def interest(interest_type, subject = '敦煌'):
     """ 顯示興趣和主題 """
     print("我的興趣是 " + interest_type )
@@ -153,32 +97,18 @@ interest(interest_type = '旅遊', subject = '張家界') # 傳遞二個參數
 interest(subject = '張家界', interest_type = '旅遊') # 傳遞二個參數
 interest('閱讀', '旅遊類')                # 傳遞二個參數,不同的主題
 
-
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_9.py
-
-# ch11_9.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi, ", name, " Good Morning!")
+
 ret_value = greeting('Nelson')
 print("greeting( )傳回值 = ", ret_value)
 print(ret_value, " 的 type  = ", type(ret_value))
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_10.py
-
-# ch11_10.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi, ", name, " Good Morning!")
@@ -187,60 +117,8 @@ ret_value = greeting('Nelson')
 print("greeting( )傳回值 = ", ret_value)
 print(ret_value, " 的 type  = ", type(ret_value))
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_11.py
-
-# ch11_11.py
-def subtract(x1, x2):
-    """ 減法設計 """
-    result = x1 - x2
-    return result                   # 回傳減法結果
-print("本程式會執行 a - b 的運算")     
-a = int(input("a = "))
-b = int(input("b = "))
-print("a - b = ", subtract(a, b))   # 輸出a-b字串和結果
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_12.py
-
-# ch11_12.py
-def subtract(x1, x2):
-    """ 減法設計 """
-    return x1 - x2                     # 回傳減法結果
-def addition(x1, x2):
-    """ 加法設計 """
-    return x1 + x2                     # 回傳加法結果
-
-# 使用者輸入
-print("請輸入運算")
-print("1:加法")
-print("2:減法")
-op = int(input("輸入1/2: "))
-a = int(input("a = "))
-b = int(input("b = "))
-
-# 程式運算
-if op == 1:
-    print("a + b = ", addition(a, b))   # 輸出a-b字串和結果
-elif op == 2:
-    print("a - b = ", subtract(a, b))   # 輸出a-b字串和結果
-else:
-    print("運算方法輸入錯誤")
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_13.py
-
-# ch11_13.py
 def mutifunction(x1, x2):
     """ 加, 減, 乘, 除四則運算 """
     addresult = x1 + x2
@@ -256,13 +134,8 @@ print("減法結果 = ", sub)
 print("乘法結果 = ", mul)
 print("除法結果 = ", div)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_14.py
-
-# ch11_14.py
 def guest_info(firstname, middlename, lastname, gender):
     """ 整合客戶名字資料 """
     if gender == "M":
@@ -334,35 +207,6 @@ print(member2)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_18.py
-
-# ch11_18.py
-def build_vip(id, name, tel = ''):
-    """ 建立VIP資訊 """
-    vip_dict = {'VIP_ID':id, 'Name':name}
-    if tel:
-        vip_dict['Tel'] = tel
-    return vip_dict
-
-while True:
-    print("建立VIP資訊系統")
-    idnum = input("請輸入ID: ")
-    name = input("請輸入姓名: ")    
-    tel = input("請輸入電話號碼: ")        # 如果直接按Enter可不建立此欄位
-    member = build_vip(idnum, name, tel)   # 建立字典
-    print(member, '\n')
-    repeat = input("是否繼續(y/n)? 輸入非y字元可結束系統: ")
-    if repeat != 'y':
-        break
-
-print("歡迎下次再使用")
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_19.py
-
-# ch11_19
 def product_msg(customers):
     str1 = '親愛的: '
     str2 = '本公司將在2020年12月20日北京舉行產品發表會'
@@ -374,13 +218,8 @@ def product_msg(customers):
 members = ['Damon', 'Peter', 'Mary']
 product_msg(members)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_20.py
-
-# ch11_20.py
 def kitchen(unserved, served):
     """ 將未服務的餐點轉為已經服務 """
     print("廚房處理顧客所點的餐點")
@@ -516,12 +355,8 @@ print("\n", "=== 廚房處理結束 ===", "\n")
 show_order_meal(order_list)                         # 列出所點的餐點
 show_served_meal(served_list)                       # 列出已服務餐點
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_23.py
-
-# ch11_23.py
 def make_icecream(*toppings):
     # 列出製作冰淇淋的配料
     print("這個冰淇淋所加配料如下")
@@ -546,12 +381,8 @@ def make_icecream(icecream_type, *toppings):
 make_icecream('香草', '草莓醬')
 make_icecream('芒果', '草莓醬', '葡萄乾', '巧克力碎片')
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_25.py
-
-# ch11_25.py
 def build_dict(name, age, **players):
     # 建立NBA球員的字典資料
     info = {}           # 建立空字典
@@ -567,13 +398,8 @@ player_dict = build_dict('James', '32',
 
 print(player_dict)      # 列印所建字典
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_26.py
-
-# ch11_26.py
 def factorial(n):
     # 計算n的階乘, n 必須是正整數
     if n == 1:
@@ -586,14 +412,8 @@ print(value, " 的階乘結果是 = ", factorial(value))
 value = 5
 print(value, " 的階乘結果是 = ", factorial(value))
 
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_27.py
-
-# ch11_27.py
 def printmsg( ):
     # 函數本身沒有定義變數, 只有執行列印全域變數功能
     print("函數列印: ", msg)    # 列印全域變數
@@ -602,13 +422,9 @@ msg = 'Global Variable'         # 設定全域變數
 print("主程式列印: ", msg)      # 列印全域變數
 printmsg( )                     # 呼叫函數
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_28.py
-
-# ch11_28.py
+print("111")
 def printmsg( ):
     # 函數本身有定義變數, 將執行列印區域變數功能
     msg = 'Local Variable'      # 設定區域變數
@@ -618,13 +434,9 @@ msg = 'Global Variable'         # 這是全域變數
 print("主程式列印: ", msg)      # 列印全域變數
 printmsg( )                     # 呼叫函數
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_29.py
-
-# ch11_29.py
+print("222")
 def defmsg( ):
     msg = 'pringmsg variable'
 
@@ -633,44 +445,17 @@ def printmsg( ):
 
 printmsg( )         # 呼叫printmsg( )
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_30.py
+print("333")
 
-# ch11_30.py
 def defmsg( ):
     msg = 'pringmsg variable'
 
 print(msg)         # 主程式列印區域變數產生錯誤
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_30_1.py
-
-# ch11_30_1.py
-def printmsg():
-    print("列印全域變數: ", msg)
-    msg = "Java"        # 嘗試更改全域變數造成錯誤
-    print("更改後: ", msg)
-msg = "Python"
-printmsg()
-
-
-
-
-   
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_30_2.py
-
-# ch11_30_2.py
 def printmsg():
     global msg
     msg = "Java"        # 更改全域變數
@@ -679,23 +464,13 @@ msg = "Python"
 print("更改前: ", msg)
 printmsg()
 
-
-
-
-   
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_31.py
-
-# ch11_31.py
 # 定義lambda函數
 square = lambda x: x ** 2
 
 # 輸出平方值
 print(square(10))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -710,26 +485,16 @@ def square(x):
 # 輸出平方值
 print(square(10))
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_33.py
-
-# ch11_33.py
 # 定義lambda函數
 product = lambda x, y: x * y
 
 # 輸出相乘結果
 print(product(5, 10))
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_34.py
-
-# ch11_34.py
 def oddfn(x):
     return x if (x % 2 == 1) else None
 
@@ -757,15 +522,8 @@ oddlist = [item for item in filter_object]
 # 輸出奇數串列
 print("奇數串列: ",oddlist)
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_36.py
-
-# ch11_36.py
 mylist = [5, 10, 15, 20, 25, 30]
 
 oddlist = list(filter(lambda x: (x % 2 == 1), mylist))
@@ -786,44 +544,19 @@ squarelist = list(map(lambda x: x ** 2, mylist))
 # 輸出串列元素的平方值
 print("串列的平方值: ",squarelist)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_38.py
-
-# ch11_38.py
 def fun(arg):
     pass
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_39.py
-
-# ch11_39.py
 def fun(arg):
     pass
 
 print("列出fun的type類型   :      ", type(fun))
 print("列出lambda的type類型:      ", type(lambda x:x))
 print("列出內建函數abs的type類型: ", type(abs))
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 

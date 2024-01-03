@@ -6,152 +6,22 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_1.py
-
-# ch9_1.py
-fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
-noodles = {'牛肉麵':100, '肉絲麵':80, '陽春麵':60}
-print(fruits)
-print(noodles)
-# 列出字典資料型態
-print("字典fruits資料型態是: ",type(fruits))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_2.py
-
-# ch9_2.py
-soldier0 = {'tag':'red', 'score':3}
-print(soldier0)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_3.py
-
-# ch9_3.py
-fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
-noodles = {'牛肉麵':100, '肉絲麵':80, '陽春麵':60}
-print("水蜜桃一斤 = ", fruits['水蜜桃'], "元")
-print("牛肉麵一碗 = ", noodles['牛肉麵'], "元")
-   
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_4.py
-
-# ch9_4.py
-soldier0 = {'tag':'red', 'score':3}
-print("你剛打死標記 %s 小兵" % soldier0['tag'])
-print("可以得到 ", soldier0['score'], " 分")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_4_1.py
-
-# ch9_4_1.py
-fruits = {0:'西瓜', 1:'香蕉', 2:'水蜜桃'}
-print(fruits[0], fruits[1], fruits[2])
-
-
-   
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_5.py
-
-# ch9_5.py
-fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
-fruits['橘子'] = 18
-print(fruits)
-print("橘子一斤 = ", fruits['橘子'], "元")
-
-   
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_6.py
-
-# ch9_6.py
-soldier0 = {'tag':'red', 'score':3}
-soldier0['xpos'] = 100
-soldier0['ypos'] = 30
-soldier0['speed'] = 'slow'
-print("小兵的 x 座標  = ", soldier0['xpos'])
-print("小兵的 y 座標  = ", soldier0['ypos'])
-print("小兵的移動速度 = ", soldier0['speed'])
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_7.py
-
-# ch9_7.py
-fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
-print("舊價格香蕉一斤 = ", fruits['香蕉'], "元")
-fruits['香蕉'] = 12
-print("新價格香蕉一斤 = ", fruits['香蕉'], "元")
-
-   
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_8.py
-
-# ch9_8.py
-soldier0 = {'tag':'red', 'score':3, 'xpos':100,
-            'ypos':30, 'speed':'slow' }
-print("小兵的 x,y 舊座標  = ", soldier0['xpos'], ",", soldier0['ypos'] )
-if soldier0['speed'] == 'slow':         # 慢
-    x_move = 1
-elif soldier0['speed'] == 'medium':     # 中
-    x_move = 3
-else:
-    x_move = 5                          # 快
-soldier0['xpos'] += x_move
-print("小兵的 x,y 新座標  = ", soldier0['xpos'], ",", soldier0['ypos'] )
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_9.py
-
-# ch9_9.py
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
 print("舊fruits字典內容:", fruits)
 del fruits['西瓜']
 print("新fruits字典內容:", fruits)
-
    
 
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_10.py
-
-# ch9_10.py
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
 print("舊fruits字典內容:", fruits)
 fruits.clear( )
 print("新fruits字典內容:", fruits)
-
-   
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_11.py
-
-# ch9_11.py
-fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
-print("舊fruits字典內容:", fruits)
-del fruits
-print("新fruits字典內容:", fruits)       # 錯誤! 錯誤!
-
-   
+ 
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_12.py
-
-# ch9_12
 soldier0 = {}           # 建立空字典
 print("空小兵字典", soldier0)
 soldier0['tag'] = 'red'
@@ -182,25 +52,6 @@ print("empty_dict字典元素數量 = ", len(empty_dict))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_15.py
-
-# ch9_15.py
-fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
-key = input("請輸入鍵(key) = ")
-value = input("請輸入值(value) = ")
-if key in fruits:
-    print("%s已經在字典了" % key)
-else:
-    fruits[key] = value
-    print("新的fruits字典內容 = ", fruits)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_16.py
-
-# ch9_16.py
 players = {'Stephen Curry':'Golden State Warriors',
            'Kevin Durant':'Golden State Warriors',
            'Lebron James':'Cleveland Cavaliers',
@@ -321,13 +172,9 @@ for soldier in armys[:3]:
     print(soldier)
 # 列印小兵數量
 print("小兵數量 = ", len(armys))
-    
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_24.py
-
-# ch9_24.py
 armys = []                      # 建立小兵空串列
 # 建立50個小兵
 for soldier_number in range(50):
@@ -347,13 +194,9 @@ for soldier in armys[35:38]:
 print("列印編號35到40小兵資料")
 for soldier in armys[34:40]:
     print(soldier)
-    
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_25.py
-
-# ch9_25.py
 # 建立內含字串的字典
 sports = {'Curry':['籃球', '美式足球'],
           'Durant':['棒球'],
@@ -365,12 +208,8 @@ for name, favorite_sport in sports.items( ):
           for sport in favorite_sport:
               print("   ", sport)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_26.py
-
-# ch9_26.py
 # 建立內含字典的字典
 wechat_account = {'cshung':{
                         'last_name':'洪',
@@ -390,37 +229,6 @@ for account, account_info in wechat_account.items( ):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_27.py
-
-# ch9_27.py
-survey_dict = {}                        # 建立市場調查空字典
-market_survey = True                    # 設定迴圈布林值     
-
-# 讀取參加市場調查者姓名和夢幻旅遊景點
-while market_survey:
-    name = input("\n請輸入姓名  : ")
-    travel_location = input("夢幻旅遊景點: ")
-
-# 將輸入存入survey_dict字典
-    survey_dict[name] = travel_location
-
-# 可由此決定是否離開市場調查
-    repeat = input("是否有人要參加市場調查?(y/n) ")
-    if repeat != 'y':               # 不是輸入y,則離開while迴圈
-        market_survey = False
-
-# 市場調查結束
-print("\n\n以下是市場調查的結果")
-for user, location in survey_dict.items( ):
-    print(user, "夢幻旅遊景點: ", location)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_28.py
-
-# ch9_28.py
 # 建立內含字典的字典
 wechat_account = {'cshung':{
                         'last_name':'洪',
@@ -455,9 +263,6 @@ print("字典4 ", tup_dict2)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_30.py
-
-# ch9_30.py
 fruits = {'Apple':20, 'Orange':25}
 ret_value1 = fruits.get('Orange')
 print("Value = ", ret_value1)
@@ -466,23 +271,5 @@ print("Value = ", ret_value2)
 ret_value3 = fruits.get('Grape', 10)
 print("Value = ", ret_value3)
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個

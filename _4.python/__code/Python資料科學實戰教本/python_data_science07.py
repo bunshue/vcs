@@ -1,5 +1,7 @@
 import numpy as np 
 
+print("------------------------------------------------------------")  # 60個
+
 a = np.array([1, 2, 3, 4, 5]) 
 b = np.array((1, 2, 3, 4, 5)) 
 print(type(a), type(b))  
@@ -12,10 +14,7 @@ print("---------------------------")
 b[4] = 0
 print(b)
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-2a.py
+print("------------------------------------------------------------")  # 60個
 
 import numpy as np 
 
@@ -163,8 +162,6 @@ for ele in a:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-5.py
-
 import numpy as np 
 
 a = np.arange(10)
@@ -174,8 +171,6 @@ with open(outputfile, 'wb') as fp:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-5a.py
-
 import numpy as np 
 
 a = np.array([[1,2,3],[4,5,6]])
@@ -183,8 +178,6 @@ outputfile = "Example.out"
 np.savetxt(outputfile, a, delimiter=',')
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch07\ch7-2-5b.py
 
 import numpy as np 
 

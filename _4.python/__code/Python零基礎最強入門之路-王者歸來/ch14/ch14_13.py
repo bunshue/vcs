@@ -1,4 +1,3 @@
-# ch14_13.py
 import os
 
 totalsizes = 0
@@ -8,14 +7,7 @@ for file in os.listdir('D:\\Python\\ch14'):
     totalsizes += os.path.getsize(os.path.join('D:\\Python\\ch14', file))
 
 print("全部檔案大小是 = ", totalsizes)
-
-    
-
-
-
-
-
-      
+   
 
 
 

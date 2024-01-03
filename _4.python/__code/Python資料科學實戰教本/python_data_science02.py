@@ -20,8 +20,6 @@ print(r.url)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-2-1c.py
-
 from urlencode import urlencode 
 
 url_params = {'name': '陳會安', 'score': 95}
@@ -94,8 +92,6 @@ print(r.status_code == requests.codes.all_good)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-3-3a.py
-
 import requests
 
 r = requests.get("http://www.google.com/404")
@@ -105,8 +101,6 @@ print(r.status_code == requests.codes.ok)
 print(r.raise_for_status())
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-3-4.py
 
 import requests 
 
@@ -119,8 +113,6 @@ print(r.headers['Server'])
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-3-4a.py
-
 import requests 
 
 r = requests.get("http://www.google.com")
@@ -131,8 +123,6 @@ print(r.headers.get('Date'))
 print(r.headers.get('Server'))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-4-1.py
 
 import requests
 
@@ -155,12 +145,7 @@ response = session.get("http://www.google.com")
 v = session.cookies.get_dict()
 print(v)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-4-2.py
 
 import requests
 
@@ -176,12 +161,6 @@ print(r.text)
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-4-3.py
-
 import requests
 
 url = "https://www.googleapis.com/books/v1/volumes"
@@ -194,8 +173,6 @@ print(r.json())
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-4-4.py
-
 import requests
 
 try: 
@@ -206,8 +183,6 @@ except requests.exceptions.Timeout as ex:
     
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-4-5.py
 
 import requests 
 
@@ -227,8 +202,6 @@ except requests.exceptions.Timeout as ex4:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-5-2.py
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -243,8 +216,6 @@ print(html)
 driver.quit()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-5-2_edge.py
 
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
@@ -261,8 +232,6 @@ driver.quit()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-5-2a.py
-
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -278,8 +247,6 @@ driver.quit()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-5-2a_edge.py
-
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
@@ -294,8 +261,6 @@ print(driver.title)
 driver.quit()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-5-2b.py
 
 import requests   
 
@@ -307,8 +272,6 @@ print(r.text)
 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch03\ch3-5-2c.py
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options

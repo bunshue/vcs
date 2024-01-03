@@ -1,6 +1,7 @@
 import os
 
 newdir = 'D:\\Python'
+
 currentdir = os.getcwd()
 print("列出目前工作資料夾 ", currentdir)
 
@@ -18,7 +19,4 @@ print("列出最新工作資料夾 ", os.getcwd())
 # 將目前工作資料夾返回
 os.chdir(currentdir)
 print("列出返回工作資料夾 ", currentdir)
-
-
-
 

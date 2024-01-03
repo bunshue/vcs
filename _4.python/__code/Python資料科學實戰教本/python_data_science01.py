@@ -8,21 +8,7 @@ print(a and b) # 邏輯AND: 顯示 "False"
 print(a or b)  # 邏輯OR: 顯示"True"
 print(not a)   # 邏輯NOT: 顯示 "False"
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-2-4e.py
 
 s = "hello"
 print(s.capitalize())  # 第1個字元大寫: 顯示 "Hello"
@@ -32,18 +18,7 @@ print(s.center(7))     # 置中顯示: 顯示 " hello "
 print(s.replace('l', 'L'))  # 取代字串: 顯示 "heLLo"
 print('  python '.strip())  # 刪除空白字元: 顯示 "python"
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-3-2a.py
 
 # 擁有1個參數的range()函數
 for i in range(5):
@@ -71,20 +46,7 @@ for i in range(0, -10, -1):
 for i in range(0, -10, -2):
     print("range(0,-10,-2)的值 = " + str(i))
     
-    
-    
-    
-    
-    
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-4-1.py
 
 # 定義函數
 def print_msg():
@@ -111,39 +73,13 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-4-2.py
-
-import random
-
-target = random.randint(1, 100)
-print("1~100亂數值: " + str(target))
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-4-2a.py
-
-import random as R
-
-target = R.randint(1, 100)
-print("1~100亂數值: " + str(target))
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-4-2b.py
-
 from bs4 import BeautifulSoup
 
 html_str = "<p>Hello World!</p>"
 soup = BeautifulSoup(html_str, "lxml")
 print(soup)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch02\ch2-4-3.py
 
 try: 
     fp = open("myfile.txt", "r")
@@ -151,8 +87,6 @@ try:
     fp.close()
 except FileNotFoundError:
     print("錯誤: myfile.txt檔案不存在!")
-
-
 
 
 print("------------------------------------------------------------")  # 60個

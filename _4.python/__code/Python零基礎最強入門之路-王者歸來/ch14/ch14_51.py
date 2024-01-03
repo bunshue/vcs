@@ -1,4 +1,3 @@
-# ch14_51.py
 def modifySong(songStr):            # 將歌曲的標點符號用空字元取代       
     for ch in songStr:
         if ch in ".,?":
@@ -29,11 +28,4 @@ print(song)
 wordCount(song)                     # 執行歌曲單字計數
 print("以下是最後執行結果")
 print(dict)                         # 列印字典
-
-
-
-
-
-
-
 

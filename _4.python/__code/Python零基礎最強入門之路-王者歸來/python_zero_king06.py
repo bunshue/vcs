@@ -128,31 +128,8 @@ carN = "我現在開的車子是 " + cars[0].upper( )
 print(carF)
 print(carN)
 
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_20.py
-
-# ch6_20.py
-cars = []     
-print("目前串列內容 = ",cars)
-cars.append('Honda')
-print("目前串列內容 = ",cars)
-cars.append('Toyota')
-print("目前串列內容 = ",cars)
-cars.append('Ford')
-print("目前串列內容 = ",cars)
-
-
-    
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_21.py
-
-# ch6_21.py
 cars = ['Honda','Toyota','Ford']     
 print("目前串列內容 = ",cars)
 print("在索引1位置插入Nissan")
@@ -162,13 +139,8 @@ print("在索引0位置插入BMW")
 cars.insert(0,'BMW')
 print("最新串列內容 = ",cars)
 
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_22.py
-
-# ch6_22.py
 cars = ['Honda','Toyota','Ford','BMW']     
 print("目前串列內容 = ",cars)
 print("使用pop( )刪除串列元素")
@@ -308,24 +280,14 @@ print("所搜尋元素 %s 第一次出現位置索引是 %d" % (search_val, j))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_30.py
-
-# ch6_30.py
 James = ['Lebron James',23, 19, 22, 31, 18] # 定義James串列
 games = len(James)                          # 求元素數量
 score_Max = max(James[1:games])             # 最高得分
 i = James.index(score_Max)                  # 場次
 print(James[0], "在第 %d 場得最高分 %d" % (i, score_Max))
 
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_31.py
-
-# ch6_31.py
 cars = ['toyota', 'nissan', 'honda']
 search_str = 'nissan'
 num1 = cars.count(search_str)
@@ -338,9 +300,6 @@ print("所搜尋元素 %s 出現 %d 次" % (search_val, num2))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_31_1.py
-
-# ch6_31_1.py
 char = '-'
 lst = ['Silicon', 'Stone', 'Education']
 print(char.join(lst))
@@ -351,18 +310,8 @@ char = '\n'             # 換行字元
 lst = ['Silicon', 'Stone', 'Education']
 print(char.join(lst))
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_32.py
-
-# ch6_32.py
 James = [['Lebron James','SF','12/30/84'],23,19,22,31,18] # 定義James串列
 games = len(James)                                        # 求元素數量
 score_Max = max(James[1:games])                           # 最高得分
@@ -375,15 +324,8 @@ print("位置     : ", position)
 print("出生日期 : ", born)
 print("在第 %d 場得最高分 %d" % (i, score_Max))
 
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_33.py
-
-# ch6_33.py
 cars1 = ['toyota', 'nissan', 'honda']
 cars2 = ['ford', 'audi']
 print("原先cars1串列內容 = ", cars1)
@@ -448,13 +390,9 @@ print("列出mysports位址     = ", id(mysports))
 print("列出friendsports位址 = ", id(friendsports))
 print("我喜歡的最新運動     = ", mysports)
 print("我朋友喜歡的最新運動 = ", friendsports)
-                   
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_38.py
-
-# ch6_38.py
 mysports = ['basketball', 'baseball']
 friendsports = mysports[:]
 print("列出mysports位址     = ", id(mysports))
@@ -468,13 +406,9 @@ print("列出mysports位址     = ", id(mysports))
 print("列出friendsports位址 = ", id(friendsports))
 print("我喜歡的最新運動     = ", mysports)
 print("我朋友喜歡的最新運動 = ", friendsports)
-                   
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_39.py
-
-# ch6_39.py
 string = "Python"
 # 正值索引
 print(" string[0] = ", string[0],
@@ -556,50 +490,8 @@ print("字串開頭是CIA: ", msg.startswith("CIA"))
 print("字串結尾是CIA: ", msg.endswith("CIA"))
 print("CIA出現的次數: ",msg.count("CIA"))
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_42.py
-
-# ch6_42.py
-password = 'deepstone'
-ch = input("請輸入字元 = ")
-print("in運算式")
-if ch in password:
-    print("輸入字元在密碼中")
-else:
-    print("輸入字元不在密碼中")
-    
-print("not in運算式")
-if ch not in password:
-    print("輸入字元不在密碼中")
-else:
-    print("輸入字元在密碼中")
-        
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_43.py
-
-# ch6_43.py
-fruits = ['apple', 'banana', 'watermelon']
-fruit = input("請輸入水果 = ")
-if fruit in fruits:
-    print("這個水果已經有了")
-else:
-    fruits.append(fruit)
-    print("謝謝提醒已經加入水果清單: ", fruits)
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_44.py
-
-# ch6_44.py
 x = 10
 y = 10
 z = 15
@@ -612,14 +504,8 @@ print("x = %d, y = %d, z = %d, r = %d" % (x, y, z, r))
 print("x位址 = %d, y位址 = %d, z位址 = %d, r位址 = %d"
       % (id(x), id(y), id(z), id(r)))
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_45.py
-
-# ch6_45.py
 x = 10
 y = 10
 z = 15
@@ -650,9 +536,6 @@ print("x = %d, r = %d, " % (x, r), boolean_value)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_46.py
-
-# ch6_46.py
 mysports = ['basketball', 'baseball']
 sports1 = mysports          # 拷貝位址
 sports2 = mysports[:]       # 拷貝新串列
@@ -673,25 +556,11 @@ print("我喜歡的運動 is not 運動 2 = ", boolean_value)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_47.py
-
-# ch6_47.py
 drinks = ["coffee", "tea", "wine"]
 enumerate_drinks = enumerate(drinks)        # 數值初始是0
 print(enumerate_drinks)                     # 傳回enumerate物件所在記憶體
 print("下列是輸出enumerate物件類型")
 print(type(enumerate_drinks))               # 列出物件類型
-
-
-
-
-
-
-
-
-          
-
-
 
 print("------------------------------------------------------------")  # 60個
 

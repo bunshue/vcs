@@ -26,5 +26,5 @@ plt.ylabel('Frequency')
 plt.title('Test 600 times')
 plt.xticks(x, ('1', '2', '3', '4', '5', '6'))
 plt.yticks(np.arange(0, 150, 15))
-plt.show()
 
+plt.show()

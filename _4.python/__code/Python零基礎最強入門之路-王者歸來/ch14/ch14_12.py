@@ -1,4 +1,3 @@
-# ch14_12.py
 import os
 
 print(os.listdir("D:\\Python\\ch14"))

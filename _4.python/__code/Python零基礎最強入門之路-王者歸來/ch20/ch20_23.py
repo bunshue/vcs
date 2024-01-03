@@ -13,24 +13,13 @@ def loc(index):
 num = 10000                                     # 設定隨機點的數量
 x = [0]                                         # 設定第一次執行x座標
 y = [0]                                         # 設定第一次執行y座標
-while True:
-    for i in range(1, num):                     # 建立點的座標
-        loc(i)
-    t = x                                       # 色彩隨x軸變化
-    plt.scatter(x, y, s=2, c=t, cmap='brg')
-    plt.axes().get_xaxis().set_visible(False)   # 隱藏x軸座標
-    plt.axes().get_yaxis().set_visible(False)   # 隱藏y軸座標
-    plt.show()
-    yORn = input("是否繼續 ?(y/n) ")            # 詢問是否繼續
-    if yORn == 'n' or yORn == 'N':              # 輸入n或N則程式結束
-        break
-    else:
-        x[0] = x[num-1]                         # 上次結束x座標成新的起點x座標
-        y[0] = y[num-1]                         # 上次結束y座標成新的起點y座標
-        del x[1:]                               # 刪除舊串列x座標元素
-        del y[1:]                               # 刪除舊串列y座標元素
 
+for i in range(1, num):                     # 建立點的座標
+    loc(i)
+t = x                                       # 色彩隨x軸變化
+plt.scatter(x, y, s=2, c=t, cmap='brg')
+#plt.axes().get_xaxis().set_visible(False)   # 隱藏x軸座標
+#plt.axes().get_yaxis().set_visible(False)   # 隱藏y軸座標
 
-
-    
+plt.show()
 

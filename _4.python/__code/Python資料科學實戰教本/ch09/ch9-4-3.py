@@ -20,9 +20,11 @@ df = pd.DataFrame(dists,
                   columns=["人口", "面積"],
                   index=dists["區名"])
 print(df)
-df.to_html("ch9-4-3.html")
+#df.to_html("ch9-4-3.html")  #df轉html
 df["面積"] *= 1000
 df.plot(xticks=range(len(df.index)),
         use_index=True,
-        rot=90)
+        rot=45)
+
 plt.show()
+
