@@ -545,29 +545,6 @@ print()
 print('------------------------------------------------------------')	#60個
 
 
-""" fail in kilo
-
-x = 1000000
-pi = 0
-time.process_time()
-for i in range(1, x + 1):
-    pi += 4*((-1) ** (i + 1) / (2 * i - 1))
-    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
-        e_time = time.process_time()
-        print(f"當 {i=:7d} 時 PI={pi:8.7f}, 所花時間={e_time}")
-
-
-
-x = 1000000
-pi = 0
-for i in range(1, x + 1):
-    pi += 4 * ((-1) ** (i + 1) / (2 * i - 1))
-    if i % 100000 == 0:      # 隔100000執行一次
-        print(f"當 {i = :7d} 時 PI = {pi:20.19f}")
-
-"""
-
-
 print('------------------------------------------------------------')	#60個
 
 import string
@@ -779,30 +756,7 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-"""
-import time
-
-x = 1000000
-pi = 0
-time.clock()
-for i in range(1,x+1):
-    pi += 4*((-1)**(i+1) / (2*i-1))
-    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
-        e_time = time.clock()
-        print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
-"""
-
 print('------------------------------------------------------------')	#60個
-
-import time
-x = 1000000
-pi = 0
-time.process_time()
-for i in range(1, x + 1):
-    pi += 4 * ((-1) ** (i + 1) / (2 * i - 1))
-    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
-        e_time = time.process_time()
-        print("當 i={:7d} 時 PI={:8.7f}, 所花時間={}".format(i, pi, e_time))
 
 print('------------------------------------------------------------')	#60個
 
@@ -1488,15 +1442,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-"""
-drawTime = time.time()
-#等待使用者按鍵輸入
-input()  # This function call doesn't return until Enter is pressed.
-timeElapsed = time.time() - drawTime
-
-timeElapsed = round(timeElapsed, 4)
-print('You took', timeElapsed, 'seconds to draw.')
-"""
 
 print('------------------------------------------------------------')	#60個
 

@@ -18,15 +18,6 @@ print(sklearn)
 
 print('------------------------------------------------------------')	#60個
 
-from sklearn.linear_model import LinearRegression
-lm = LinearRegression()
-X = [[1], [2], [3], [4], [5]]
-y = [88, 72, 90, 76, 92]
-lm.fit(X, y)
-print('第6次考試分數：', lm.predict([[6]]))
-
-print('------------------------------------------------------------')	#60個
-
 import numpy as np
 from scipy.linalg import norm
 from sklearn.feature_extraction.text import TfidfVectorizer
