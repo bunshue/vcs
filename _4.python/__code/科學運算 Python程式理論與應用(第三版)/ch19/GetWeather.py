@@ -1,6 +1,3 @@
-#coding=utf-8
-# file: GetWeather.py
-#
 import tkinter
 import json
 import urllib.request
@@ -118,7 +115,7 @@ def getCityWeather_AllDay(cityID):
 
 class Window:
 	def __init__(self, root):
-		self.citys=self.getCitys('E:\Python\第19章\city.txt')
+		self.citys=self.getCitys('city.txt')
 		self.root = root									# 建立元件
 		self.label = tkinter.Label(root, text = '輸入城市:')
 		self.label.place(x = 5, y = 15)

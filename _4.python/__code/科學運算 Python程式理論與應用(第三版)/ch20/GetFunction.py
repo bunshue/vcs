@@ -1,8 +1,6 @@
-# -*- coding:utf-8 -*-
-# file : GetFunction.py
-# 
 import re
 import sys
+
 def DealWithFunc(s):
 	r = re.compile(r'''
 		(?<=def\s)	# 前邊必須含有def且def後跟一個空格

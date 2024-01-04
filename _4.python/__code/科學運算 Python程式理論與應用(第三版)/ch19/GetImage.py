@@ -1,9 +1,7 @@
-# -*- coding:utf-8 -*-
-# file: GetImage.py
-#
 import tkinter
 import urllib.request
 from  html.parser import HTMLParser
+
 class MyHTMLParser(HTMLParser):						# 建立HTML解析類別
 	def __init__(self):
 		HTMLParser.__init__(self)
@@ -52,6 +50,7 @@ class Window:
 			self.edit.insert(tkinter.END, jpg + '\n')
 		self.edit.insert(tkinter.END, '===========\n')
 		page.close()
+
 root = tkinter.Tk()
 window = Window(root)
 root.minsize(600,480)

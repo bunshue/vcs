@@ -1,9 +1,7 @@
-# -*- coding:utf-8 -*-
-# file: pyRSS.py
-#
 import tkinter
 import urllib.request
 import xml.parsers.expat
+
 class MyXML:									# XML解析類別
 	def __init__(self, edit):
 		self.parser = xml.parsers.expat.ParserCreate()			# 產生XMLParser
@@ -60,6 +58,7 @@ class Window:
 		data = page.read()							# 讀取URL內容
 		parser = MyXML(self.edit)						# 產生案例物件
 		parser.feed(data)							# 處理XML資料
+
 root = tkinter.Tk()
 window = Window(root)
 root.minsize(600,480)

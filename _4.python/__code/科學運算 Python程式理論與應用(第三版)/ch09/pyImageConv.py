@@ -1,6 +1,3 @@
-# -*- coding:utf-8 -*-
-# file: pyImageConv.py
-#
 import os										# 匯入模組
 from PIL import Image
 import tkinter
