@@ -1,0 +1,5 @@
+print("請輸入日期(YYYY-MM-DD)：")
+year=input()
+month=input()
+day=input()
+print("日期：%s-%s-%s" %(year, month, day))

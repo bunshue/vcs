@@ -1,0 +1,1 @@
+請解釋Python程式碼print(f"從{start}加到{stop} = {total}")

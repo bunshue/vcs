@@ -1,0 +1,6 @@
+print("13579")
+print("1+2")
+print("Hello, how are you?")
+print("I'm all right, but it's raining.")
+print('I\'m all right, but it\'s raining.')
+print("I"m all right, but it"s raining.")

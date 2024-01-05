@@ -1,0 +1,9 @@
+請使用Python語言和PEP8風格寫出下列說明的程式碼，並且加上Step的繁體中文註解文字，其步驟如下：
+Step 1：指定數變數score1的值是35。
+Step 2：指定整數變數score2的值是10。
+Step 3：指定整數變數score3的值是10。
+Step 4：更改變數score2的值成為常數值27。
+Step 5：更改變數score3的值成為變數score2。
+Step 6：輸出文字內容"第一節= "和變數score1的值。
+Step 7：輸出文字內容"第二節= "和變數score2的值。
+Step 8：輸出文字內容"第三節= "和變數score3的值。

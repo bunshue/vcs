@@ -1,0 +1,14 @@
+lst1 = list('Hello World!')
+print("lst1 = ", lst1)
+s = lst1[1:3]
+print("lst1[1:3] = ", s)
+s = lst1[1:5]
+print("lst1[1:5] = ", s)
+s = lst1[:7]
+print("lst1[:7] = ", s)
+s = lst1[4:]
+print("lst1[4:] = ", s)
+s = lst1[1:-1]
+print("lst1[1:-1] = ", s)
+s = lst1[6:-2]
+print("lst1[6:-2] = ", s)

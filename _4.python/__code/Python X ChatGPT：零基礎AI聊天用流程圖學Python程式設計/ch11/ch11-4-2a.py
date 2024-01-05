@@ -1,0 +1,5 @@
+fp = open("temp/note.txt", "w")
+fp.write("陳會安")
+fp.write("江小魚")
+print("已經寫入2個姓名到檔案note.txt!")
+fp.close()

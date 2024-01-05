@@ -1,0 +1,2 @@
+請使用Python語言和PEP8風格寫出一個clean_string()函數，參數s是傳入的參數，和使用繁體中文的註解文字。我們可以呼叫此函數刪除str1字串中的'\n'和"\r"字元，和前後的空白字元。欲處理的str1字串，如下所示：
+str1 = "  Python is a \nprogramming language.\n\r   "

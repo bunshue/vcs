@@ -1,0 +1,7 @@
+我忘了BMI公式，請幫我寫完下列的程式碼，如下：
+weight = float(input("請輸入您的體重（公斤）："))
+height = float(input("請輸入您的身高（公尺）："))
+
+bmi = 
+
+print("您的BMI值為：", round(bmi, 2))

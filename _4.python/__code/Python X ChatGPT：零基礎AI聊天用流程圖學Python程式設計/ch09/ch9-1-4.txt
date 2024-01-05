@@ -1,0 +1,3 @@
+請使用Python語言和PEP8風格寫出一個Python程式，可以將str1字串的英文文字內容，使用空白字元切割成串列lst1後，顯示此串列內容，然後使用「,」逗號將此串列合併成CSV字串str2，和顯示字串內容。欲處理的str1字串，如下所示：
+str1 = """Python is a programming language that lets you work quickly
+and integrate systems more effectively."""

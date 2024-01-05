@@ -1,0 +1,7 @@
+請使用Python語言和PEP8風格寫出下列說明的程式碼，並且加上Step的繁體中文註解文字，其步驟如下：
+Step 1：指定整數變數grade的值是75。
+Step 2：指定浮點變數height的值是175.5。
+Step 3：指定浮點變數weight的值是75.5。
+Step 4：輸出文字內容"成績= "和變數grade的值。
+Step 5：輸出文字內容"身高= "和變數height的值。
+Step 6：輸出文字內容"體重= "和變數weight的值。

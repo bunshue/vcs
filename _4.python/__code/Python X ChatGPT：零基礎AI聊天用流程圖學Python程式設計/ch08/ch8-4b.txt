@@ -1,0 +1,2 @@
+我寫了一個Python程式，執行時出現錯誤了下列的錯誤訊息，請問我需如何處理此問題，如下：
+NameError: name '程式設計' is not defined
