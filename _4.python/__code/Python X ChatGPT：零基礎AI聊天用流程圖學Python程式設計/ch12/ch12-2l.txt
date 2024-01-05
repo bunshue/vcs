@@ -1,7 +1,0 @@
-請改寫下列Python程式，加上繁體中文的註解文字，而且是使用程式框來顯示程式碼，如下：
-height = float(input("請輸入您的身高（公分）：")) / 100
-weight = float(input("請輸入您的體重（公斤）："))
-
-bmi = weight / (height ** 2)
-
-print("您的BMI值為：", round(bmi, 2))

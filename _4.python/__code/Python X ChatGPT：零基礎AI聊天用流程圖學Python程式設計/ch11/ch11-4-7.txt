@@ -1,1 +1,0 @@
-請寫一個Python函數check_txt_file()，參數是.txt檔案路徑，可以檢查檔案是否存在，檔案存在回傳True；不存在，就回傳False。

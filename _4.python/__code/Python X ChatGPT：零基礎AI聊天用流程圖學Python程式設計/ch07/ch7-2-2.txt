@@ -1,1 +1,0 @@
-請使用Python語言和PEP8風格寫出程式和函數，和加上繁體中文註解文字，sum_to_n()函數的參數是start和stop，可以使用for迴圈計算從start加至stop的總和，計數器變數是i，總和是儲存至變數total，在函數最後使用print()函數輸出文字內容"從start加到stop = "和變數total的值，並且寫出呼叫sum_to_n(1, 5)函數的Python程式。

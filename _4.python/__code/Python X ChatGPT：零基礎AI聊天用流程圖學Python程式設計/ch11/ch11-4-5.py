@@ -1,7 +1,0 @@
-fp = open("note.txt", "r")
-str1 = fp.read(1)
-str2 = fp.read(2)
-print("檔案內容:")
-print(str1)
-print(str2)
-fp.close()

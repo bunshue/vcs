@@ -1,6 +1,0 @@
-t4 = tuple()
-t5 = tuple(["tom", "mary", "joe"])
-t6 = tuple("python")
-print("t4 = " + str(t4))
-print("t5 = " + str(t5))
-print("t6 = " + str(t6))
