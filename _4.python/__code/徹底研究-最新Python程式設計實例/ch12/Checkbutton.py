@@ -1,4 +1,5 @@
 ﻿from tkinter import *
+
 wnd = Tk()
 wnd.title(' GUI介面- Checkbutton 核取方塊')
 

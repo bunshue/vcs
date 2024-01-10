@@ -40,11 +40,11 @@ img.save('my_qrcode2.png')
 
 print('------------------------------------------------------------')	#60個
 
-
 import qrcode
 
 im = qrcode.make("https://www.google.com.tw/")
 im.save("pic_qrcode.jpg")
+
 
 print('------------------------------------------------------------')	#60個
 

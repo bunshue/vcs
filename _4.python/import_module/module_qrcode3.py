@@ -1,7 +1,11 @@
+"""
+QR Code 產生器
+"""
 import qrcode as qr
 import tkinter as tk
 import tkinter.filedialog as fd
 from PIL import ImageTk
+
 base = tk.Tk()
 base.title('QRcode Generator')
 input_area = tk.Frame(base, relief=tk.RAISED, bd=2)
@@ -34,4 +38,6 @@ filemenu.add_command(label='save', command=save)
 filemenu.add_separator()
 filemenu.add_command(label='exit', command=exit)
 base.config(menu=menubar)
+
 base.mainloop()
+
