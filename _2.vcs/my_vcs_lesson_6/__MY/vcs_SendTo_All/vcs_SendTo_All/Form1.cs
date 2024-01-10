@@ -304,8 +304,10 @@ namespace vcs_SendTo_All
             richTextBox1.Text += "W = " + richTextBox1.Size.Width.ToString() + "\n";
             richTextBox1.Text += "H = " + richTextBox1.Size.Height.ToString() + "\n";
 
-
-            richTextBox1.Visible = false;
+            //richTextBox1.Visible = false;
+            richTextBox1.Dock = DockStyle.None;
+            richTextBox1.Size = new Size(1000, 400);
+            richTextBox1.Location = new Point(0, 400);
 
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
@@ -318,7 +320,6 @@ namespace vcs_SendTo_All
             this.listView1.GridLines = true;
             this.listView1.Size = new Size(640 * 2, 480 * 2);
 
-
             listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
             listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
             listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
@@ -327,9 +328,29 @@ namespace vcs_SendTo_All
             listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
             listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
             listView1.Visible = true;
+            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
 
             this.Controls.Add(listView1);
 
+
+            //加入
+
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            /*
+            int selNdx;
+            string fullname;
+
+            selNdx = listView1.SelectedIndices[0];
+
+
+            richTextBox1.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox1.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            */
 
         }
 

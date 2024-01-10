@@ -22,3 +22,4 @@ for row in rows:
         for item in range(0,len(cols)):
             print(cols[item], end = ' ')
         print() #換行
+

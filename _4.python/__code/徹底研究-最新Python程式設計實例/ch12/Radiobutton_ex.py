@@ -1,4 +1,5 @@
 ﻿from tkinter import *
+
 wnd = Tk()
 wnd.title('運動類型調查表')
 def select():
@@ -11,6 +12,7 @@ place = [('籃球', 1), ('桌球', 2),
           ('游泳', 3)]
 var = IntVar()
 var.set(3)
+
 for item, val in place:
     Radiobutton(wnd, text = item, value = val,
         font = ft, variable = var, padx = 20,

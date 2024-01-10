@@ -1,6 +1,3 @@
-#=============== Program Description ===============
-#程式目的： 老鼠走迷宮
-
 class Node:
     def __init__(self,x,y):
         self.x=x

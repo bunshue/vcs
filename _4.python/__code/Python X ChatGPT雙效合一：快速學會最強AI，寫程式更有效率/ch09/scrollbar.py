@@ -1,4 +1,5 @@
 from tkinter import *
+
 win = Tk()
 win.title("ScrollBar捲軸")
 win.geometry('300x200')

@@ -19,7 +19,6 @@ def Copyright():
     messagebox.showinfo('版權宣告',
         '我的第一支含視窗功能表程式-使用Python語言撰寫')
 
-
 wnd = Tk()#主視窗物件
 wnd.title('GUI介面-Menu')
 

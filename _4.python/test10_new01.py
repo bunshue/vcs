@@ -4,7 +4,6 @@ import time
 import random
 import numpy as np
 
-'''
 print('------------------------------------------------------------')	#60個
 
 print('---- 字串處理專區 --------------------------------------------------------')	#60個
@@ -867,8 +866,10 @@ print('------------------------------------------------------------')	#60個
 
 print('---- os --------------------------------------------------------')	#60個
 
+"""
 import test
 packagedir = os.path.dirname(test.__file__)
+"""
 
 import email
 packagedir = os.path.dirname(email.__file__)
@@ -1035,7 +1036,7 @@ if decimal == None:
     print("Incorrect hex number")
 else:
     print("The decimal value for hex number", hex, "is", decimal) 
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 import os
@@ -1373,10 +1374,9 @@ else:
     num_words = len(words)
     print(f"The file {filename} has about {num_words} words.")
 
-
 print("------------------------------------------------------------")  # 60個
 
-'''
+b = 'abcdefg'
 c = list(b)         #list
 print(type(c))
 print(c)
@@ -1501,8 +1501,6 @@ print('Total:', sum(rolls))
 for i, roll in enumerate(rolls):
     rolls[i] = str(roll)
 print(', '.join(rolls), end='')
-
-'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1641,7 +1639,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("int(8.4)=", int(8.4))
 print("bin(14)=", bin(14))
-print("hex(84)=", hex(84))
+#print("hex(84)=", hex(84))
 print("oct(124)=", oct(124))
 print("float(6)=", float(6))
 print("abs(-6.4)=", abs(-6.4))
@@ -1658,8 +1656,6 @@ print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
 try:
     import a_python_module
 except ImportError:
@@ -1669,6 +1665,7 @@ except ImportError:
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 import time, sys
 
 print("Press Ctrl-C to stop.")
@@ -1679,12 +1676,9 @@ try:
         time.sleep(1)  # Add a pause.
 except KeyboardInterrupt:
     sys.exit()  # When Ctrl-C is pressed, end the program.
+"""
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 loc = ([1, 2, 3, 4], [11, 12, 13, 14])
 for i in zip(*loc):
@@ -1707,7 +1701,6 @@ print(t)
 for i in zip(*t):
     print(i)
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1733,6 +1726,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+

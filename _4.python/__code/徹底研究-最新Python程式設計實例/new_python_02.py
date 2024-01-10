@@ -5,60 +5,6 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\append.py
-
-num=int(input('請輸入總人數: '))
-student = [] #建立空的list串列
-print('請輸入{0}個數值：'.format(num))
-
-# 以for/in廻圈依序讀取要輸入的分數
-for item in range(1,num+1):
-    score = int(input()) #取得輸入數值
-    student.append(score) #將輸入數值新增到串列
-
-print('已輸入完畢')
-#輸出資料
-print('總共輸入的分數', end = '\n')
-for item in student:   
-    print('{:3d} '.format(item), end = '')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\copy.py
-
-parents= ["勤儉", "老實", "客氣"]
-child=parents[:]
-daughter=parents[:]
-print("parents特點",parents)
-print("child特點",child)
-print("daughter特點",daughter)
-child.append("毅力")
-daughter.append("時尚")
-print("分別新增小孩的特點後:")
-print("child特點",child)
-print("daughter特點",daughter)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\copy1.py
-
-parents= ["勤儉", "老實", "客氣"]
-child=parents
-daughter=parents
-print("parents特點",parents)
-print("child特點",child)
-print("daughter特點",daughter)
-child.append("毅力")
-daughter.append("時尚")
-print("分別新增小孩的特點後:")
-print("child特點",child)
-print("daughter特點",daughter)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\count.py
-
 word = ["holiday", "happy", "birth",
              "yesterday", "holiday", "car",
              "yellow", "happy", "mobile",
@@ -68,52 +14,6 @@ word = ["holiday", "happy", "birth",
 print("holiday 出現的次數", word.count("holiday"))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\dict.py
-
-labor = {'高中仁':'RD', '許富強':'SA'} #設定字典的資料
-labor['陳月風'] = 'CEO' #新增一個項目
-labor.setdefault('陳月風')
-print('目前字典:')
-print(labor)
-labor['陳月風'] ='PRESIDENT' 
-#以update()方法更新字典
-labor.update({'周慧宏':'RD', '鄭大富':'SA'})
-print('依名字遞增排序:')
-for key in sorted(labor):
-    print('%8s %9s' % (key, labor[key]))
-
-person = {'陳志強':'SA','蔡工元':'RD'}
-labor.update(person) # 更新字典
-labor.update(胡慧蘭 = 'RD', 周大全 = 'SA')#以指派方式更新
-print('更新字典內容：\n', labor)
-labor.pop('陳志強')#刪除指定資料
-print('刪除後依名字排序:')
-for value in sorted(labor, reverse = False):
-    print('%8s %9s' % (value, labor[value]))
-print('將字典內容清空:')
-print(labor.clear())
-print(labor)#輸出字典
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\english.py
-
-#小班制的同學清單
-classmate={'陳大慶','許大為','朱時中','莊秀文','吳彩鳳',
-           '黃小惠','曾明宗','馬友友','韓正文','胡天明'}
-test1={'陳大慶','許大為','朱時中','馬友友','胡天明'} #中高級名單
-test2={'許大為','朱時中','吳彩鳳','黃小惠','馬友友','韓正文'} #中級名單
-goodguy=test1 | test2
-print("全班有 %d 人通過兩種檢定其中一種" %len(goodguy), goodguy)
-bestguy=test1 & test2
-print("全班有 %d 人兩種檢定全部通過" %len(bestguy), bestguy)
-poorguy=classmate -goodguy
-print("全班有 %d 人沒有通過任何檢定" %len(poorguy), poorguy)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\index.py
 
 word = ["holiday", "happy", "birth",
              "yesterday", "holiday", "car",
@@ -125,8 +25,6 @@ search_str="yellow"
 print("單字 %s 第一次出現的索引值%d" %(search_str,word.index(search_str)))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\listsort.py
 
 no = [105, 25, 8, 179, 60, 57]
 print('排序前的資料順序：',no)
@@ -141,21 +39,8 @@ print(zoo)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\reverse.py
-
-no = [185, 278, 97, 48, 33, 61]
-print('反轉前內容：', no)
-no.reverse() 
-print('反轉後內容：', no)
-
-zoo = ['tiger', 'lion', 'horse', 'cattle']
-print('反轉前內容：', zoo)
-zoo.reverse() 
-print('反轉後內容：', zoo)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\set.py
 
 friendA= {"Andy", "Axel", "Michael","May"}
 friendB = {"Peter", "Axel", "Andy","Julia"}
@@ -165,8 +50,6 @@ print(friendA - friendB)
 print(friendA ^ friendB)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\swap.py
 
 x = 859
 y = 935
@@ -178,16 +61,12 @@ print('x={},y={}'.format(x,y))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\tuple_create.py
-
 tup = (28, 39, 58, 67,97, 54) 
 print('目前元組內的所有元素：')
 for item in range(len(tup)):
    print ('tup[%2d] %3d' %(item, tup[item]))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\tuple_sorted.py
 
 salary = (86000, 72000, 83000, 47000, 55000)
 print('原有資料：')
@@ -208,8 +87,6 @@ print('--------------------------------')
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\unpack.py
-
 info = [['C程式設計','朱大峰','480'],
         ['Python程式設計','吳志明','500'],
         ['Java程式設計','許伯如','540']]
@@ -218,8 +95,6 @@ for(book, author,price) in info:
     print('%10s %3s'%(book,author),' 書籍訂價:',price)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch06\word.py
 
 original= ["abase", "abate", "abdicate","abhor", "abate", "acrid","appoint", "abate", "kindle"]
 print("單字收集的原始內容: ")
@@ -233,10 +108,6 @@ not_duplicatd.sort()
 print(not_duplicatd)
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\align.py
 
 str1 = '淡泊以明志，寧靜以致遠'
 print('原字串', str1)
@@ -255,8 +126,6 @@ str3 = '忠孝\n仁愛\n信義\n和平'
 print('依\\n分割字串', str3.splitlines(False))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\arg.py
 
 def fun1(obj, price):
     obj = 'Microwave'
@@ -279,30 +148,9 @@ print('分數:', price1) #串列內容已改變
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\blessings.py
-
-def blessings():
-    print('一元復始，萬象更新')
-
-blessings()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\blessings_para.py
-
-def blessings(str1):
-    print(str1)
-
-blessings('一元復始，萬象更新')
-blessings('恭賀新喜，財源滾滾')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\bonus.py
-
 def payment():
-    price = float(input("產品單價："))
-    num = float(input("銷售數量："))
+    price = 100
+    num = 30
     rate = 0.35  #抽取獎金的百分比
     total = price*num * rate
     return price*num, total
@@ -312,26 +160,6 @@ print("總銷售業績{},應付獎金：{}".format(e1, e2))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\common.py
-
-def Common_Divisor():
-    print("請輸入兩個數值")
-    Num1=int(input("數值 1："))
-    Num2=int(input("數值 2："))
-    print(Num1,'及',Num2)
-    while Num2 != 0: #利用輾轉相除法計算最大公因數
-        Temp=Num1 % Num2
-        Num1 = Num2
-        Num2 = Temp
-    return Num1
-
-Min=Common_Divisor(); #函數呼叫
-print("的最大公因數為：",Min)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\count.py
-
 str1="do your best what you can do"
 s1=str1.count("do",0)
 s2=str1.count("o",0,20)
@@ -339,50 +167,6 @@ print("{}\n「do」出現{}次,「o」出現{}次".format(str1,s1,s2))
 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\func.py
-
-def func(a,b):
-    x = a * b
-    return x
-
-print(func(4,3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\func_default.py
-
-def func(a,b,c=10):
-    x = a - b + c
-    return x
-
-print(func(3,1,3)) # a=3 b=1 c=3
-print(func(5,2))  # a=5 b=2 c=10
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\func_noreturn.py
-
-def func(a,b):
-    x = a * b
-    print(x)
-
-print(func(4,3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\func1.py
-
-def func(a,b):
-    x = a * b
-    print(x)
-
-print(func(4,3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\hello.py
-
 def hello(word):
       print(word)
 
@@ -480,8 +264,6 @@ print(myfruit(d1='apple', d2='mango', d3='grape'))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\pow.py
-
 #引數：x 為底數       
 #y 為指數       
 #傳回值：次方運算結果 
@@ -498,16 +280,13 @@ print("次方運算結果: %d" %Pow(int(x), int(y)))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\replace.py
-
+print('字串replace')
 s= "My favorite sport is baseball."
 print(s)
 s1=s.replace("baseball", "basketball")
 print(s1)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\return01.py
 
 def func(a,b):
     p1 = a * b
@@ -624,8 +403,6 @@ print(items)#將洗牌後的序列輸出
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\lastDay.py
-
 import datetime as d
 
 def check(y,m):    
@@ -641,8 +418,8 @@ def check(y,m):
         
     return d.date(temp_year,temp_month,1)+ d.timedelta(days=-1)
 
-year=int(input("請輸入要查詢的西元年："))
-month=int(input("請輸入要查詢的月份1-12："))
+year=2023
+month=12
 print("你要查詢的月份的最後一天是西元",check(year,month))
 
 print("------------------------------------------------------------")  # 60個
@@ -656,8 +433,6 @@ print("fmod(16,5)= ",m.fmod(16,5)) # 16%5
 print("floor(3.14)= ",m.floor(3.14)) # 3
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\my_module.py
 
 '''
     函數功能：計算獎金的百分比
@@ -677,6 +452,7 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\os.py
 
+""" os 模組
 import os
 directory=os.getcwd()
 
@@ -692,6 +468,7 @@ print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
 os.rmdir(directory+"/doc")
 directory_listdir=os.listdir( directory )
 print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -740,20 +517,20 @@ for j in range(3): #以迴圈執行3次
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\test_argv.py
-
 import sys
 
 print("sys.argv:{}".format(sys.argv))
 print("文件名稱{}".format(sys.argv[0]))
 length = len(sys.argv)
- 
+
+""" 
 if len(sys.argv) < 2:
     sys.exit(0)
 
 for i in range(1,length):
      n1 = sys.argv[i]
      print( "第{}個引數是{}".format(i,n1))
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -800,41 +577,6 @@ print(datetime.time(18,25,33, 32154).microsecond)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\use_my_module.py
-
-import my_module #匯入自己建立的模組
-e1 ,e2 = my_module.payment()  #呼叫自訂模組內的函數
-print("總銷售業績{},應付獎金：{}".format(e1, e2))
-
-print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch10\bubble.py
-
-data=[99,95,90,88,78,67,33,26,12]#原始資料 
-print('氣泡排序法：原始資料為：')
-for i in range(len(data)):
-    print('%3d' %data[i],end='')
-print()
-
-for i in range(len(data)-1,0,-1): #掃描次數
-    for j in range(i):
-        if data[j]>data[j+1]:#比較,交換的次數
-            data[j],data[j+1]=data[j+1],data[j]#比較相鄰兩數,如果第一數較大則交換
-    print('第 %d 次排序後的結果是：' %(len(data)-i),end='') #把各次掃描後的結果印出
-    for j in range(len(data)):
-        print('%3d' %data[j],end='')
-    print()
-	
-print('排序後結果為：')
-for j in range(len(data)):
-    print('%3d' %data[j],end='')
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch10\fib.py
-
 def fib(n):	# 定義函數fib()
     if n==0 :
         return 0 # 如果n=0 則傳回 0
@@ -843,7 +585,8 @@ def fib(n):	# 定義函數fib()
     else:   # 否則傳回 fib(n-1)+fib(n-2)
         return (fib(n-1)+fib(n-2))
 
-n=int(input('請輸入所要計算第幾個費式數列:'))
+print('輸入所要計算第幾個費式數列:')
+n=10
 for i in range(n+1):# 計算前n個費氏數列
     print('fib(%d)=%d' %(i,fib(i)))
 
@@ -995,7 +738,7 @@ def quick(d,size,lf,rg):
 		
 def main():
     data=[0]*100
-    size=int(input('請輸入陣列大小(100以下)：'))
+    size=10
     inputarr (data,size)
     print('您輸入的原始資料是：')
     showdata (data,size)
@@ -1008,116 +751,16 @@ main()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch10\search.py
+N = 50
+data=[0] * N
 
-import random
+print(type(data))
+print(len(data))
 
-def bin_search(data,val):
-    low=0
-    high=49
-    while low <= high and val !=-1:
-        mid=int((low+high)/2)
-        if val<data[mid]:
-            print('%d 介於位置 %d[%3d]及中間值 %d[%3d]，找左半邊' \
-                   %(val,low+1,data[low],mid+1,data[mid]))
-            high=mid-1
-        elif val>data[mid]:
-            print('%d 介於中間值位置 %d[%3d] 及 %d[%3d]，找右半邊' \
-                  %(val,mid+1,data[mid],high+1,data[high]))
-            low=mid+1
-        else:
-            return mid
-    return -1
-
-val=1
-data=[0]*50
-for i in range(50):
-    data[i]=val
-    val=val+random.randint(1,5)
-
-while True:
-    num=0
-    val=int(input('請輸入搜尋鍵值(1-150)，輸入-1結束：'))
-    if val ==-1:
-        break
-    num=bin_search(data,val)
-    if num==-1:
-        print('##### 沒有找到[%3d] #####' %val)
-    else:
-        print('在第 %2d個位置找到 [%3d]' %(num+1,data[num]))
-
-print('資料內容：')
-for i in range(5):
-    for j in range(10):
-        print('%3d-%-3d' %(i*10+j+1,data[i*10+j]), end='')
-    print()
+for i in range(len(data)):
+    data[i]=i
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch10\sentry.py
-
-#加入崗哨的改良氣泡排序法
-def showdata(data):    #利用迴圈列印資料
-    for i in range(len(data)):
-        print('%3d' %data[i],end='')
-    print()
-    
-def bubble (data):
-    for i in range(len(data)-1,0,-1):
-        flag=0 #flag用來判斷是否有執行交換的動作
-        for j in range(i):
-            if data[j+1]<data[j]:
-                data[j],data[j+1]=data[j+1],data[j]
-                flag+=1  #如果有執行過交換，則flag不為0
-        if flag==0:
-            break
-        #當執行完一次掃描就判斷是否做過交換動作，如果沒有交換過資料
-	#，表示此時陣列已完成排序，故可直接跳出迴圈   
-        print('第 %d 次排序：' %(len(data)-i),end='')
-        for j in range(len(data)):
-            print('%3d' %data[j],end='')
-        print()
-    print('排序後結果為：',end='')
-    showdata (data)
-
-def main():
-    data=[1,2,3,4,5,6,8,9,7]  #原始資料
-    print('原始資料：')
-    showdata(data)
-    print('改良氣泡排序法原始資料為：')
-    bubble (data)
-    
-main()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch10\sequential.py
-
-import random
-
-val=0
-data=[3,5,7,8,1,12,16,17,15,10,
-      23,25,27,29,20,32,34,45,56,37]
-      
-while val!=-1:
-    find=0
-    val=int(input('請輸入搜尋鍵值(1-100)，輸入-1離開：'))
-    for i in range(20):
-        if data[i]==val:
-            print('在第 %3d個位置找到鍵值 [%3d]' %(i+1,data[i]))
-            find+=1
-    if find==0 and val !=-1 :
-        print('######沒有找到 [%3d]######' %val)
-print('資料內容：')
-for i in range(4):
-    for j in range(5):
-        print('%2d[%3d] ' %(i*5+j+1,data[i*5+j]),end='')
-    print('')
-
-print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\book.py
 
 class Book:
     #定義方法一：取得書籍名稱和價格
@@ -1426,27 +1069,6 @@ print("要付給這位工讀生的薪水總額:", obj1.pay(),"元")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\private_error.py
-
-class Wage:
-	def __init__(self, h=80):
-		self.__hour=h
-
-	def getHour(self):
-		return self.__hour
-
-	def pay(self):
-		return hour_fee*self.__hour
-hour_fee=200
-obj1=Wage(100)
-print("每小時基本工資為:",hour_fee,"元")
-print("總共工作的小時數:", obj1.__hour)
-print("要付給這位工讀生的薪水總額:", obj1.pay(),"元")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\single.py
-
 class MobilePhone: #基礎類別
     def touch(self):
         print('我能提供螢幕觸控操作的功能')
@@ -1459,8 +1081,6 @@ u11 = HTC()
 u11.touch()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\single1.py
 
 class MobilePhone: #基礎類別
     def touch(self):
@@ -1476,8 +1096,6 @@ u11 = HTC()
 u11.touch()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\super1.py
 
 #在子類別呼叫父類別方法—使用super()函式
 
@@ -1518,18 +1136,6 @@ class Human(Animal): #子類別
         print('我也屬於人類類別')
 
 man = Human('黃種人')#子類別實體
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 

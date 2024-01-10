@@ -32,4 +32,6 @@ btnQuit.grid(row = 2, column = 1, pady = 4)
 btnShow = Button(wnd, text = '購買明細', font = ft2,
     command = check)
 btnShow.grid(row = 2, column = 2, pady = 4)
+
 mainloop()
+

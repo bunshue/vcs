@@ -1,6 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-
-def bless():
+﻿def bless():
      btnvar.set("心想事成，天天開心")
 
 def changecolor():

@@ -1,4 +1,5 @@
 import tkinter as tk
+
 win = tk.Tk()
 win.title("")
 win.geometry('300x200')
@@ -17,4 +18,5 @@ window_menu = tk.Menu(menubar)
 menubar.add_cascade(label = "視窗", menu = window_menu)
 online_menu = tk.Menu(menubar)
 menubar.add_cascade(label = "線上說明", menu = online_menu)
+
 win.mainloop()

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*- 
-
 import matplotlib.pyplot as plt
 import numpy as np
 	
@@ -10,4 +8,5 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.title('Unary equation')
 plt.grid(b=True, which='major')
+
 plt.show()

@@ -1,6 +1,5 @@
-﻿# -*- coding: utf-8 -*-
+﻿import tkinter as tk
 
-import tkinter as tk
 win = tk.Tk()
 win.title("GUI介面-entry")
 

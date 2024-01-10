@@ -1,6 +1,4 @@
-﻿# -*- coding: utf-8 -*- 
-
-import matplotlib.pyplot as plt
+﻿import matplotlib.pyplot as plt
 
 plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
 plt.rcParams['font.size']=12

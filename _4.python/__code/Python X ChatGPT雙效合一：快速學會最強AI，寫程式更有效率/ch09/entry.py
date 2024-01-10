@@ -1,4 +1,5 @@
 import tkinter as tk
+
 win = tk.Tk()
 win.title("密碼資料")
 win.geometry('300x200')

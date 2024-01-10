@@ -1,4 +1,5 @@
 from tkinter import *
+
 wnd = Tk()
 wnd.title('Checkbutton 核取方塊')
 
@@ -27,4 +28,5 @@ chk3.pack()
 btnShow = Button(wnd, text = '列出選修結果', font = ft2,
     command = check)
 btnShow.pack()
+
 mainloop()

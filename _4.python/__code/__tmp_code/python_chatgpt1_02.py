@@ -5,9 +5,6 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-1.py
-
 str1 = "Python程式設計"
 str2 = 'Hello'
 ch1 = "A"
@@ -953,6 +950,271 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("------------------------------------------------------------")  # 60個
+
+r = abs(-10)
+print("abs(-10) = ", r)
+r = abs(5)
+print("abs(5) = ", r)
+r = pow(8, 2)
+print("pow(8, 2) = ", r)
+r = pow(2, 3)
+print("pow(2, 3) = ", r)
+r = max(9, 3, 12, 32, 81, 92)
+print("max(9, 3, 12, 32, 81, 92) = ", r)
+r = min(9, 3, 12, 32, 81, 92)
+print("min(9, 3, 12, 32, 81, 92) = ", r)
+r = round(5.32)
+print("round(5.32) = ", r)
+r = round(5.52)
+print("round(5.52) = ", r)
+r = round(3.14568757, 3)
+print("round(3.14568757, 3) = ", r)
+r = round(3.14568757, 1)
+print("round(3.14568757, 1) = ", r)
+
+bmi = 1.23456789
+
+print("您的BMI值為：", round(bmi, 2))
+
+# 輸出BMI值，並四捨五入到小數點後兩位
+print("您的BMI值為：", round(bmi, 2))
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+path = os.getcwd() + "\\temp"
+os.chdir(path)
+print(path)
+print(os.listdir(path))
+
+print("------------------------------------------------------------")  # 60個
+ 
+path = os.getcwd()
+new_path = os.getcwd() + "\\temp"
+print("目前工作路徑: ", path)
+print(new_path)
+os.chdir(new_path)
+print("chdir(): ", new_path)
+os.mkdir('newDir')
+print("mkdir(): ", os.listdir(new_path))
+
+print("------------------------------------------------------------")  # 60個
+
+new_path = os.getcwd() + "\\temp"
+print(new_path)
+os.chdir(new_path)
+os.rename('newDir','newDir2')
+print("rename(): ", os.listdir(new_path))
+
+print("------------------------------------------------------------")  # 60個
+
+new_path = os.getcwd() + "\\temp"
+print(new_path)
+os.chdir(new_path)
+os.rmdir('newDir2')
+fp = open("aa.txt", "w")
+fp.close()
+print("rmdir(): ", os.listdir(new_path))
+os.remove("aa.txt")
+print("remove(): ", os.listdir(new_path))
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+ 
+fname = path.realpath("ch11-2-2.py")
+print(fname)
+r = path.split(fname)
+print("os.path.split() =", r)
+r = path.splitext(fname)
+print("os.path.splitext() =", r)
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+ 
+fname = path.realpath("ch11-2-2.py")
+print(fname)
+p = path.dirname(fname)
+print("p = os.path.dirname() =", p)
+f = path.basename(fname)
+print("f = os.path.basename() =", f)
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+ 
+p = "D:\PythonChatGPT\ch11"
+f = "ch11-2-2.py"
+print(p, f)
+r = path.join(p, f)
+print("os.path.join(p,f) =", r)
+
+print("------------------------------------------------------------")  # 60個
+
+import math
+ 
+# 顯示數學常數
+print("math.e = ", math.e)
+print("math.pi = ", math.pi)
+
+print("------------------------------------------------------------")  # 60個
+
+import math
+ 
+# 數學函數
+no = -19.536
+print("測試值no = ", no)
+print("math.fabs(no) =  ", math.fabs(no))
+print("math.ceil(no) = ", math.ceil(no))
+print("math.floor(no) = ", math.floor(no))
+# 指數和對數函數
+x, y = 13.536, 3.57
+print("測試值x / y = ", x, "/", y)
+print("math.exp(x) = ", math.exp(x))
+print("math.log(x) = ", math.log(x))
+print("math.pow(x,y) = ", math.pow(x,y))
+print("math.sqrt(x) = ", math.sqrt(x))
+# 三角函數
+deg = 60.0
+rad = math.radians(deg)
+print("測試值deg / rad = ", deg, "/", rad)
+print("math.sin(rad) = ", math.sin(rad))
+print("math.cos(rad) = ", math.cos(rad))
+print("math.tan(rad) = ", math.tan(rad)) 
+
+print("------------------------------------------------------------")  # 60個
+
+fp = open("note.txt", "w")
+fp.write("陳會安\n")
+fp.write("江小魚\n")
+print("已經寫入2個姓名到檔案note.txt!")
+fp.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-2a.py
+
+fp = open("note.txt", "w")
+fp.write("陳會安")
+fp.write("江小魚")
+print("已經寫入2個姓名到檔案note.txt!")
+fp.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-3.py
+
+fp = open("note.txt", "a")
+fp.write("陳允傑\n")
+print("已經新增1個姓名到檔案note.txt!")
+fp.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-3a.py
+
+fp = open("note.txt", "a")
+fp.write("陳允傑")
+print("已經新增1個姓名到檔案note.txt!")
+fp.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-4.py
+
+fp = open("note.txt", "r")
+str1 = fp.read()
+print("檔案內容:")
+print(str1)
+fp.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-4a.py
+
+fp = open("note.txt", "r")
+list1 = fp.readlines()
+print("檔案內容:")
+print(list1)
+for line in list1:
+    print(line, end="")    
+fp.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-5.py
+
+fp = open("note.txt", "r")
+str1 = fp.read(1)
+str2 = fp.read(2)
+print("檔案內容:")
+print(str1)
+print(str2)
+fp.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-5a.py
+
+fp = open("note.txt", "r")
+str1 = fp.readline()
+str2 = fp.readline()
+print("檔案內容:")
+print(str1)
+print(str2)
+fp.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-6.py
+
+with open("note.txt", "r") as fp:
+    str1 = fp.read()
+    print("檔案內容:")
+    print(str1)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-6a.py
+
+fp = open("note.txt", "r")
+print("檔案內容(有換行):")
+for line in fp:
+    print(line)
+fp.close() 
+fp = open("note.txt", "r")   
+print("檔案內容(沒換行):")
+for line in fp:
+    print(line, end="")    
+fp.close()
+
+print("------------------------------------------------------------")  # 60個
+
+try:
+    fp = open("myfile.txt", "r")
+    print(fp.read())
+    fp.close()
+except FileNotFoundError:
+    print("錯誤! myfile.txt檔案不存在!")
+
+print("------------------------------------------------------------")  # 60個
+
+m = 10
+eval("print('Python')")
+eval("print(50 + 10)")
+eval("print(55 / 7)")
+eval("print(m + 5)")
+eval("print('m' * 5)")
+
+print("------------------------------------------------------------")  # 60個
+
+def convert_to_f(c):
+    f = (9.0 * c) / 5.0 + 32.0
+    return f
 
 print("------------------------------------------------------------")  # 60個
 

@@ -12,3 +12,24 @@ else:
     print('檔案複製成功')
     file1.close() 
     file2.close() 
+
+print("------------------------------------------------------------")  # 60個
+
+file1=open("phrase.txt","r")
+
+text=file1.read(1) #以read()方法讀取檔案
+print(text)
+
+text=file1.read(3) #以read()方法讀取檔案
+print(text)
+
+text=file1.read(2) #以read()方法讀取檔案
+print(text)
+
+text=file1.read(2) #以read()方法讀取檔案
+print(text)
+
+file1.close()
+
+print("------------------------------------------------------------")  # 60個
+

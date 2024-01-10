@@ -68,7 +68,7 @@ namespace vcs_SendTo_All
             cb_search_video_files.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             cb_search_audio_files.Location = new Point(x_st + dx * 0, y_st + dy * 2);
 
-            bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_save.Location = new Point(x_st + dx * 0, y_st + dy * 6);
 
             lb_main_mesg1.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             lb_main_mesg2.Location = new Point(x_st + dx * 0, y_st + dy * 6);

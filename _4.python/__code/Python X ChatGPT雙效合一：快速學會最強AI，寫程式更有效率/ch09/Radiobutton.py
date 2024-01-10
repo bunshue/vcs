@@ -1,6 +1,8 @@
 from tkinter import *
+
 wnd = Tk()
 wnd.title('Radiobutton元件')
+
 def select():
     print('你的選項是 :', var.get())
 
@@ -16,4 +18,5 @@ for item, val in place:
     Radiobutton(wnd, text = item, value = val,
         font = ft, variable = var, padx = 20,
         command = select).pack(anchor = W)
+
 mainloop()

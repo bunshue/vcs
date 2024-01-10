@@ -1,8 +1,11 @@
 ﻿from tkinter import *
+
 wnd = Tk()
 wnd.title('GUI介面-Radiobutton')
+
 def select():
     print('你的選項是 :', var.get())
+
 ft = ('標楷體', 14)
 Label(wnd, 
       text = "請選擇喜愛的景點: ", font = ft,
