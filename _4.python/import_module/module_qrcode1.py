@@ -46,6 +46,22 @@ im = qrcode.make("https://www.google.com.tw/")
 im.save("pic_qrcode.jpg")
 
 
+import qrcode
+
+codeText = 'https://www.google.com.tw/'
+img = qrcode.make(codeText)                 # 建立QR code 物件
+print("檔案格式", type(img))
+img.save("tmp_pic28_qr_code1.jpg")
+
+import qrcode
+im = qrcode.make("https://www.google.com.tw/")
+im.save("tmp_pic28_qr_code2.jpg")
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 print('------------------------------------------------------------')	#60個
 
 

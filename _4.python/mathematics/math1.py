@@ -2,8 +2,14 @@
 
 import math
 import numpy as np
-'''
+
 print('------------------------------------------------------------')	#60個
+
+
+# 顯示數學常數
+print("math.e = ", math.e)
+print("math.pi = ", math.pi)
+
 
 print('數學常數')
 print("圓周率 : ", math.pi)
@@ -41,6 +47,52 @@ angle = 30
 math.sin(math.pi * angle / 2)
 
 print('------------------------------------------------------------')	#60個
+
+
+# 數學函數
+no = -19.536
+print("測試值no = ", no)
+print("math.fabs(no) =  ", math.fabs(no))
+print("math.ceil(no) = ", math.ceil(no))
+print("math.floor(no) = ", math.floor(no))
+# 指數和對數函數
+x, y = 13.536, 3.57
+print("測試值x / y = ", x, "/", y)
+print("math.exp(x) = ", math.exp(x))
+print("math.log(x) = ", math.log(x))
+print("math.pow(x,y) = ", math.pow(x,y))
+print("math.sqrt(x) = ", math.sqrt(x))
+# 三角函數
+deg = 60.0
+rad = math.radians(deg)
+print("測試值deg / rad = ", deg, "/", rad)
+print("math.sin(rad) = ", math.sin(rad))
+print("math.cos(rad) = ", math.cos(rad))
+print("math.tan(rad) = ", math.tan(rad)) 
+
+print("------------------------------------------------------------")  # 60個
+
+import math as m #以別名取代
+
+print("sqrt(16)= ",m.sqrt(16)) #平方根
+print("fabs(-8)= ",m.fabs(-8)) #取絕對值
+print("fmod(16,5)= ",m.fmod(16,5)) # 16%5
+print("floor(3.14)= ",m.floor(3.14)) # 3
+
+"""
+import math
+x = 10
+y = -2
+
+z = math.fabs(x / y)
+h = math.factorial(z)
+
+if math.isnan(h) == False:
+    print("計算後數值：", h)
+    print("最大公約數：", math.gcd(h, x))
+"""
+
+print("------------------------------------------------------------")  # 60個
 
 # 顯示數學常數
 print("math.e = ", math.e)
@@ -177,7 +229,6 @@ combinations = math.factorial(N)    # 組合方式
 years = combinations / (times * year_secs)
 print("需要 %d 年才可以獲得結果" % years)
 
-'''
 print('------------------------------------------------------------')	#60個
 
 z = 3 + 5j
@@ -308,6 +359,7 @@ for i in range(1, x + 1):
         print("當 i={:7d} 時 PI={:20.19f}, 所花時間={}".format(i, pi, e_time))
 
 print('------------------------------------------------------------')	#60個
+
 
 
 

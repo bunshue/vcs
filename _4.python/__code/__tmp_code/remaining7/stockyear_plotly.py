@@ -4,7 +4,9 @@ import csv
 import pandas as pd
 import os
 import time
+import plotly
 import matplotlib.pyplot as plt
+from plotly.graph_objs import Scatter, Layout
 
 #設定中文字型及負號正確顯示
 #設定中文字型檔
@@ -28,11 +30,13 @@ def convertDate(date):  #轉換民國日期為西元:106/03/02->20170302
     realdate = realyear + str1[4:6] + str1[7:9]  #組合日期
     return realdate
 
+plotly.offline.init_notebook_mode(connected=True)
+
 pd.options.mode.chained_assignment = None  #取消顯示pandas資料重設警告
 
 urlbase = 'http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=2017'  #網址前半
 urltail = '01&stockNo=2317&_=1521363562193'  #網址後半
-filepath = 'stockyear2017.csv'
+filepath = 'tmp_stockyear2017b.csv'
 
 if not os.path.isfile(filepath):  #如果檔案不存在就建立檔案
     for i in range(1, 13):  #取1到12數字
@@ -53,6 +57,15 @@ pdstock = pd.read_csv(filepath, encoding='utf-8')  #以pandas讀取檔案
 for i in range(len(pdstock['日期'])):  #轉換日期式為西元年格式
     pdstock['日期'][i] = convertDate(pdstock['日期'][i])
 pdstock['日期'] = pd.to_datetime(pdstock['日期'])  #轉換日期欄位為日期格式
-pdstock.plot(kind='line', figsize=(12, 6), x='日期', y=['收盤價', '最低價', '最高價'])  #繪製統計圖
+data = [
+    Scatter(x=pdstock['日期'], y=pdstock['收盤價'], name='收盤價'),
+    Scatter(x=pdstock['日期'], y=pdstock['最低價'], name='最低價'),
+    Scatter(x=pdstock['日期'], y=pdstock['最高價'], name='最高價')
+]
+plotly.offline.iplot({  #以plotly繪圖
+    "data": data,
+    "layout": Layout(title='2017年個股統計圖')
+}) 
 
 plt.show() 
+

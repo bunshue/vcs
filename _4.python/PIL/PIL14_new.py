@@ -36,7 +36,7 @@ with Image.open(filename) as im:
     y1 = 350
     new_im = im.crop((x, y, x1, y1))
     print(new_im.size)
-    new_im.save("pic_crop.jpg")
+    new_im.save("tmp_pic_crop.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -44,7 +44,7 @@ from PIL import Image,ImageEnhance
 
 with Image.open(filename) as im:
     new_im = ImageEnhance.Brightness(im).enhance(2.5)
-    new_im.save("pic_brightness.jpg")
+    new_im.save("tmp_pic_brightness.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -72,44 +72,44 @@ with Image.open(filename) as im:
     h = int(im.size[1]*r) #依縮放比例計算高度
     new_im = im.resize((w, h))
     print(new_im.size)
-    new_im.save("pic_view_resize.jpg" )
+    new_im.save("tmp_pic_view_resize.jpg" )
 
 print("------------------------------------------------------------")  # 60個
 
 with Image.open(filename) as im:
     new_im = im.rotate(180)
-    new_im.save("pic_rotate180.jpg")
+    new_im.save("tmp_pic_rotate180.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
 with Image.open(filename) as im:
     new_im = im.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
-    new_im.save("pic_rotate111.jpg")
+    new_im.save("tmp_pic_rotate111.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
 with Image.open(filename) as im:
     new_im = im.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
-    new_im.save("pic_rotate000.jpg")
+    new_im.save("tmp_pic_rotate000.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
 with Image.open(filename) as im:
     new_im = im.transpose(Image.ROTATE_90)
-    new_im.save("pic_transpose90.jpg")
+    new_im.save("tmp_pic_transpose90.jpg")
     new_im = im.transpose(Image.FLIP_LEFT_RIGHT)
-    new_im.save("pic_transposeLR.jpg")
+    new_im.save("tmp_pic_transposeLR.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
 im = Image.open(filename)
-im.save("pic_quality95.jpg", quality=95 )
+im.save("tmp_pic_quality95.jpg", quality=95 )
 im.close()
 
 print("------------------------------------------------------------")  # 60個
 
 im = Image.open(filename)
-im.save("pic_quality_default.jpg")
+im.save("tmp_pic_quality_default.jpg")
 im.close()
 
 print("------------------------------------------------------------")  # 60個

@@ -797,7 +797,65 @@ dt = dt.strftime('{d}%Y-%m-%d, {t}%H:%M').format(d='日期為：', t='時間為�
 
 print('------------------------------------------------------------')	#60個
 
+import time  # 導入模組time
+
+print(time.asctime())  # 列出目前系統時間
+
+print("------------------------------------------------------------")  # 60個
+
+import time  # 導入模組time
+
+xtime = time.localtime()
+print(xtime)  # 列出目前系統時間
+print("年 ", xtime[0])
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+import time
+
+t = time.time()
+tLocal = time.localtime(t)
+
+print("轉換時間形式(年/月/日)：", time.strftime("%Y/%m/%d", tLocal))
+print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime (tLocal))
+
+print("------------------------------------------------------------")  # 60個
+
+
+import time as t
+
+print(t.time())
+print(t.localtime())
+
+field=t.localtime(t.time())#以元組資料的名稱去取得資料
+print('tm_year= ',field.tm_year)
+print('tm_mon= ',field.tm_mon)
+print('tm_mday= ',field.tm_mday)
+print('tm_hour= ',field.tm_hour)
+print('tm_min= ',field.tm_min)
+print('tm_mec= ',field.tm_sec)
+print('tm_wday= ',field.tm_wday)
+print('tm_yday= ',field.tm_yday)
+print('tm_isdst= ',field.tm_isdst)
+
+for j in range(9):#以元組的索引值取得的資料內容
+    print('以元組的索引值取得資料= ',field[j])
+            
+print("我有一句話想對你說:")
+t.sleep(1) #程式停1秒
+print("學習Python的過程唯然漫長,但最終的果實是甜美的")
+print("程式執行到目前的時間是"+str(t.process_time()))
+t.sleep(2) #程式停2秒
+print("程式執行到目前的時間是"+str(t.perf_counter()))
+
 print('------------------------------------------------------------')	#60個
+
 
 
 print('------------------------------------------------------------')	#60個

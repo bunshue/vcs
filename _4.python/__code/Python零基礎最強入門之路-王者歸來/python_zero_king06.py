@@ -590,6 +590,807 @@ print("轉成串列輸出, 初始值是10 = ", list(enumerate_drinks))
 print("------------------------------------------------------------")  # 60個
 
 
+import os
+import sys
+import time
+import random
+
+print("------------------------------------------------------------")  # 60個
+
+players = ['Curry', 'Jordan', 'James', 'Durant', 'Obama']
+for player in players:
+    print(player)
+    
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_4.py
+
+# ch7_4.py
+players = ['Curry', 'Jordan', 'James', 'Durant', 'Obama']
+for player in players:print(player)
+    
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_5.py
+
+# ch7_5.py
+players = ['curry', 'jordan', 'james', 'durant', 'obama']
+for player in players:
+    print(player.title( ) + ", it was a great game.")
+    print("I can not wait to see your next game, " + player.title( ))
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_6.py
+
+# ch7_6.py
+players = ['Curry', 'Jordan', 'James', 'Durant', 'Obama']
+print("列印前3位球員")
+for player in players[:3]:
+    print(player)
+print("列印後3位球員")
+for player in players[-3:]:
+    print(player)
+    
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_7.py
+
+# ch7_7.py
+n = 5
+number1 = list(range(n))
+print("當n值是%d時的range( )串列 = " % n, number1)
+n = 8
+number2 = list(range(n))
+print("當n值是%d時的range( )串列 = " % n, number2)
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_8.py
+
+# ch7_8.py
+n = 5
+print("當n值是%d時的range( )串列元素:" % n)
+for number in range(n):
+    print(number)
+n = 8
+print("當n值是%d時的range( )串列元素:" % n)
+for number in range(n):
+    print(number)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_9.py
+
+# ch7_9.py
+start = 2
+end = 6
+number1 = list(range(start, end))
+print("當start值是%2d, end值是%2d時的range( )串列 = " % (start, end), number1)
+start = -2
+end = 3
+number2 = list(range(start, end))
+print("當start值是%2d, end值是%2d時的range( )串列 = " % (start, end), number2)
+start = -5
+end = -1
+number3 = list(range(start, end))
+print("當start值是%2d, end值是%2d時的range( )串列 = " % (start, end), number3)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_10.py
+
+# ch7_10.py
+start = 2
+end = 6
+print("當start值是%d, end值是%d時的range( )串列元素:" % (start, end))
+for number in range(start,end):
+    print(number)
+start = -2
+end = 3
+print("當start值是%d, end值是%d時的range( )串列元素:" % (start, end))
+for number in range(start,end):
+    print(number)
+start = -5
+end = -1
+print("當start值是%d, end值是%d時的range( )串列元素:" % (start, end))
+for number in range(start,end):
+    print(number)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_11.py
+
+# ch7_11.py
+start = 2
+end = 9
+step = 2
+number1 = list(range(start, end, step))
+print("當start值是%2d, end值是%2d, step值是%2d時的range( )串列 = " % (start, end, step), number1)
+start = -2
+end = 9
+step = 3
+number2 = list(range(start, end, step))
+print("當start值是%2d, end值是%2d, step值是%2d時的range( )串列 = " % (start, end, step), number2)
+start = 5
+end = -5
+step = -3
+number3 = list(range(start, end, step))
+print("當start值是%2d, end值是%2d, step值是%2d時的range( )串列 = " % (start, end, step), number3)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_12.py
+
+# ch7_12.py
+start = 2
+end = 9
+step = 2
+number1 = list(range(start, end, step))
+print("當start值是%2d, end值是%2d, step值是%2d時的range( )串列元素:" % (start, end, step))
+for number in range(start,end,step):
+    print(number)
+start = -2
+end = 9
+step = 3
+number2 = list(range(start, end, step))
+print("當start值是%2d, end值是%2d, step值是%2d時的range( )串列元素:" % (start, end, step))
+for number in range(start,end,step):
+    print(number)
+start = 5
+end = -5
+step = -3
+number3 = list(range(start, end, step))
+print("當start值是%2d, end值是%2d, step值是%2d時的range( )串列元素:" % (start, end, step))
+for number in range(start,end,step):
+    print(number)
+
+print("------------------------------------------------------------")  # 60個
+
+n = 100
+number = list(range(n + 1))
+total = sum(number)
+print("從1到%d的總和是 = " % n, total)
+
+print("------------------------------------------------------------")  # 60個
+
+n = 100
+number = list(range(n + 1))
+total = sum(number)
+print("從1到%d的總和是 = " % n, total)
+
+print("------------------------------------------------------------")  # 60個
+
+n = 100
+number = list(range(n + 1))       # 建立串列
+total = 0                         # 總計
+for i in number:
+    total += i
+print("從1到%d的總和是 = " % n, total)
+
+print("------------------------------------------------------------")  # 60個
+
+n = 100
+total = 0                         # 總計
+for i in range(1, n+1):
+    total += i
+print("從1到%d的總和是 = " % n, total)
+
+print("------------------------------------------------------------")  # 60個
+
+squares = []                     # 建立空串列
+n = 100
+if n > 10 : n = 10               # 最大值是10
+for num in range(1, n+1):        
+    value = num * num            # 元素平方
+    squares.append(value)        # 加入串列
+print(squares)
+
+print("------------------------------------------------------------")  # 60個
+
+squares = []                     # 建立空串列
+n = 100
+if n > 10 : n = 10               # 最大值是10
+for num in range(1, n+1):        
+    squares.append(num ** 2)     # 加入串列
+print(squares)
+
+print("------------------------------------------------------------")  # 60個
+
+n = 100
+if n > 10 : n = 10               # 最大值是10
+squares = [num ** 2 for num in range(1, n+1)]
+print(squares)
+
+print("------------------------------------------------------------")  # 60個
+
+for i in range(1, 10):
+    for j in range(1, 10):
+        result = i * j
+        print("%d*%d=%-3d" % (i, j, result), end=" ")
+    print()         # 換行輸出
+    
+
+print("------------------------------------------------------------")  # 60個
+
+for i in range(1, 10):
+    for j in range(1, 10):
+        if j <= i:
+            print("aa", end="")
+    print()                # 換行輸出
+    
+
+print("------------------------------------------------------------")  # 60個
+
+print("測試1")
+for digit in range(1, 11):
+    if digit == 5:
+        break
+    print(digit, end=', ')
+print( )
+print("測試2")
+for digit in range(0, 11, 2):
+    if digit == 5:
+        break
+    print(digit, end=', ')
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_22.py
+
+# ch7_22.py
+players = ['Curry', 'Jordan', 'James', 'Durant', 'Obama', 'Kevin', 'Lin']
+n = 10
+if n > len(players) : n = len(players)  # 列出人數不大於串列元素數
+index = 0                               # 索引
+for player in players:
+    if index == n:
+        break
+    print(player, end=" ")
+    index += 1                          # 索引加1
+
+print("------------------------------------------------------------")  # 60個
+
+players = [['James', 202],
+           ['Curry', 193],
+           ['Durant', 205],
+           ['Jordan', 199],
+           ['David', 211]]
+for player in players:
+    if player[1] < 200:
+        continue
+    print(player)
+
+print("------------------------------------------------------------")  # 60個
+
+print("請輸入大於1的整數做質數測試 = 119")
+
+num = 119
+
+if num == 2:                                # 2是質數所以直接輸出
+    print("%d是質數" % num)
+else:
+    for n in range(2, num):                 # 用2 .. num-1當除數測試
+        if num % n == 0:                    # 如果整除則不是質數
+            print("%d不是質數" % num)
+            break                           # 離開迴圈
+    else:                                   # 否則是質數
+        print("%d是質數" % num)
+
+print("------------------------------------------------------------")  # 60個
+
+i = 1                   # 設定i初始值
+while i <= 9:           # 當i大於9跳出外層迴圈
+    j = 1               # 設定j初始值
+    while j <= 9:       # 當j大於9跳出內層迴圈
+        result = i * j
+        print("%d*%d=%-3d" % (i, j, result), end=" ")
+        j += 1          # 內層迴圈加1
+    print()             # 換行輸出
+    i += 1              # 外層迴圈加1
+
+print("------------------------------------------------------------")  # 60個
+
+players = ['Curry', 'Jordan', 'James', 'Durant', 'Obama', 'Kevin', 'Lin']
+n = 5
+if n > len(players) : n = len(players)  # 列出人數不大於串列元素數
+index = 0                               # 索引index
+while index < len(players):             # 是否index在串列長度範圍
+    if index == n:                      # 是否達到想列出的人數
+        break
+    print(players[index], end=" ")
+    index += 1                          # 索引index加1
+
+print("------------------------------------------------------------")  # 60個
+
+index = 0
+while index <= 10:
+    index += 1
+    if ( index % 2 != 0 ):  # 測試是否奇數
+        continue            # 不往下執行
+    print(index)            # 輸出偶數
+        
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_35.py
+
+# ch7_35.py
+fruits = ['apple', 'orange', 'apple', 'banana', 'apple']
+fruit = 'apple'
+print("刪除前的fruits", fruits)
+while fruit in fruits:      # 只要串列內有apple迴圈就繼續
+    fruits.remove(fruit)
+print("刪除後的fruits", fruits)
+
+print("------------------------------------------------------------")  # 60個
+
+buyers = [['James', 1030],              # 建立買家購買紀錄
+           ['Curry', 893],
+           ['Durant', 2050],
+           ['Jordan', 990],
+           ['David', 2110]]
+goldbuyers = []                         # Gold買家串列
+vipbuyers =[]                           # VIP買家串列
+while buyers:                           # 執行買家分類迴圈分類完成迴圈才會結束
+    index_buyer = buyers.pop()
+    if index_buyer[1] >= 1000:          # 用1000圓執行買家分類條件
+        vipbuyers.append(index_buyer)   # 加入VIP買家串列
+    else:
+        goldbuyers.append(index_buyer)  # 加入Gold買家串列
+print("VIP 買家資料", vipbuyers)
+print("Gold買家資料", goldbuyers)
+
+print("------------------------------------------------------------")  # 60個
+
+drinks = ["coffee", "tea", "wine"]
+
+# 解析enumerate物件
+for drink in enumerate(drinks):             # 數值初始是0
+    print(drink)
+for count, drink in enumerate(drinks):
+    print(count, drink)
+
+print("****************")   
+
+# 解析enumerate物件
+for drink in enumerate(drinks, 10):         # 數值初始是10
+    print(drink)
+for count, drink in enumerate(drinks, 10):
+    print(count, drink)
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+import sys
+import time
+import random
+
+print("------------------------------------------------------------")  # 60個
+
+numbers1 = (1, 2, 3, 4, 5)      # 定義元組元素是整數
+fruits = ('apple', 'orange')    # 定義元組元素是字串
+mixed = ('James', 50)           # 定義元組元素是不同型態資料
+val_tuple = (10,)               # 只有一個元素的元祖
+print(numbers1)
+print(fruits)
+print(mixed)
+print(val_tuple)
+# 列出元組資料型態
+print("元組mixed資料型態是: ",type(mixed))
+
+print("------------------------------------------------------------")  # 60個
+
+numbers1 = (1, 2, 3, 4, 5)      # 定義元組元素是整數
+fruits = ('apple', 'orange')    # 定義元組元素是字串
+val_tuple = (10,)               # 只有一個元素的元祖
+print(numbers1[0])              # 以中括號索引值讀取元素內容
+print(numbers1[4])
+print(fruits[0],fruits[1])
+print(val_tuple[0])
+x, y = ('apple', 'orange')      # 有趣的應用也可以用x,y=fruits
+print(x,y)
+
+print("------------------------------------------------------------")  # 60個
+
+keys = ('magic', 'xaab', 9099)      # 定義元組元素是字串與數字
+for key in keys:
+    print(key)
+
+print("------------------------------------------------------------")  # 60個
+
+fruits = ('apple', 'orange')        # 定義元組元素是水果
+print("原始fruits元組元素")
+for fruit in fruits:
+    print(fruit)
+
+fruits = ('watermelon', 'grape')    # 定義新的元組元素
+print("\n新的fruits元組元素")
+for fruit in fruits:
+    print(fruit)
+
+print("------------------------------------------------------------")  # 60個
+
+fruits = ('apple', 'orange', 'banana', 'watermelon', 'grape')
+print(fruits[1:3])
+print(fruits[:2])
+print(fruits[1:])
+print(fruits[-2:])
+print(fruits[0:5:2])
+
+print("------------------------------------------------------------")  # 60個
+
+keys = ('magic', 'xaab', 9099)      # 定義元組元素是字串與數字
+print("keys元組長度是 %d " % len(keys))
+
+print("------------------------------------------------------------")  # 60個
+
+keys = ('magic', 'xaab', 9099)      # 定義元組元素是字串與數字
+list_keys = list(keys)              # 將元組改為串列
+list_keys.append('secret')          # 增加元素
+print("列印元組", keys)
+print("列印串列", list_keys)
+
+print("------------------------------------------------------------")  # 60個
+
+keys = ['magic', 'xaab', 9099]      # 定義串列元素是字串與數字
+tuple_keys = tuple(keys)            # 將串列改為元組
+print("列印串列", keys)
+print("列印元組", tuple_keys)
+
+print("------------------------------------------------------------")  # 60個
+
+tup = (1, 3, 5, 7, 9)
+print("tup最大值是", max(tup))
+print("tup最小值是", min(tup))
+
+print("------------------------------------------------------------")  # 60個
+
+drinks = ("coffee", "tea", "wine")
+enumerate_drinks = enumerate(drinks)                # 數值初始是0
+print("轉成元組輸出, 初始值是 0 = ", tuple(enumerate_drinks))
+
+enumerate_drinks = enumerate(drinks, start = 10)    # 數值初始是10
+print("轉成元組輸出, 初始值是10 = ", tuple(enumerate_drinks))
+
+print("------------------------------------------------------------")  # 60個
+
+drinks = ("coffee", "tea", "wine")
+# 解析enumerate物件
+for drink in enumerate(drinks):             # 數值初始是0
+    print(drink)
+for count, drink in enumerate(drinks):
+    print(count, drink)
+print("****************")   
+# 解析enumerate物件
+for drink in enumerate(drinks, 10):         # 數值初始是10
+    print(drink)
+for count, drink in enumerate(drinks, 10):
+    print(count, drink)
+
+print("------------------------------------------------------------")  # 60個
+
+fields = ['Name', 'Age', 'Hometown']
+info = ['Peter', '30', 'Chicago']
+zipData = zip(fields, info)         # 執行zip
+print(type(zipData))                # 列印zip資料類型
+player = list(zipData)              # 將zip資料轉成串列
+print(player)                       # 列印串列
+
+print("------------------------------------------------------------")  # 60個
+
+fields = ['Name', 'Age', 'Hometown']
+info = ['Peter', '30']
+zipData = zip(fields, info)         # 執行zip
+print(type(zipData))                # 列印zip資料類型
+player = list(zipData)              # 將zip資料轉成串列
+print(player)                       # 列印串列
+
+print("------------------------------------------------------------")  # 60個
+
+fields = ['Name', 'Age', 'Hometown']
+info = ['Peter', '30', 'Chicago']
+zipData = zip(fields, info)         # 執行zip
+print(type(zipData))                # 列印zip資料類型
+player = list(zipData)              # 將zip資料轉成串列
+print(player)                       # 列印串列
+
+f, i = zip(*player)                 # 執行unzip
+print("fields = ", f)
+print("info   = ", i)
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+import sys
+import time
+import random
+
+
+print("------------------------------------------------------------")  # 60個
+
+fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
+print("舊fruits字典內容:", fruits)
+del fruits['西瓜']
+print("新fruits字典內容:", fruits)
+   
+
+print("------------------------------------------------------------")  # 60個
+
+fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
+print("舊fruits字典內容:", fruits)
+fruits.clear( )
+print("新fruits字典內容:", fruits)
+ 
+
+print("------------------------------------------------------------")  # 60個
+
+soldier0 = {}           # 建立空字典
+print("空小兵字典", soldier0)
+soldier0['tag'] = 'red'
+soldier0['score'] = 3
+print("新小兵字典", soldier0)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_13.py
+
+# ch9_13.py
+fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25, '蘋果':18}
+cfruits = fruits.copy( )
+print("位址 = ", id(fruits), "  fruits元素 = ", fruits)
+print("位址 = ", id(cfruits), "  fruits元素 = ", cfruits)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_14.py
+
+# ch9_14.py
+fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25, '蘋果':18}
+noodles = {'牛肉麵':100, '肉絲麵':80, '陽春麵':60}
+empty_dict = {}
+print("fruits字典元素數量     = ", len(fruits))
+print("noodles字典元素數量    = ", len(noodles))
+print("empty_dict字典元素數量 = ", len(empty_dict))
+
+print("------------------------------------------------------------")  # 60個
+
+players = {'Stephen Curry':'Golden State Warriors',
+           'Kevin Durant':'Golden State Warriors',
+           'Lebron James':'Cleveland Cavaliers',
+           'James Harden':'Houston Rockets',
+           'Paul Gasol':'San Antonio Spurs'}
+print("Stephen Curry是 %s 的球員" % players['Stephen Curry'])
+print("Kevin Durant是 %s 的球員" % players['Kevin Durant'])
+print("Paul Gasol是 %s 的球員" % players['Paul Gasol']) 
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_17.py
+
+# ch9_17.py
+players = {'Stephen Curry':'Golden State Warriors',
+           'Kevin Durant':'Golden State Warriors',
+           'Lebron James':'Cleveland Cavaliers',
+           'James Harden':'Houston Rockets',
+           'Paul Gasol':'San Antonio Spurs'}
+for name, team in players.items( ):
+    print("\n姓名: ", name)
+    print("隊名: ", team)
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_18.py
+
+# ch9_18.py
+players = {'Stephen Curry':'Golden State Warriors',
+           'Kevin Durant':'Golden State Warriors',
+           'Lebron James':'Cleveland Cavaliers',
+           'James Harden':'Houston Rockets',
+           'Paul Gasol':'San Antonio Spurs'}
+for name in players.keys( ):
+    print("姓名: ", name)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_19.py
+
+# ch9_19.py
+players = {'Stephen Curry':'Golden State Warriors',
+           'Kevin Durant':'Golden State Warriors',
+           'Lebron James':'Cleveland Cavaliers',
+           'James Harden':'Houston Rockets',
+           'Paul Gasol':'San Antonio Spurs'}
+for name in players:
+    print(name)
+    print("Hi! %s 我喜歡看你在 %s 的表現" % (name, players[name]))
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_20.py
+
+# ch9_20.py
+players = {'Stephen Curry':'Golden State Warriors',
+           'Kevin Durant':'Golden State Warriors',
+           'Lebron James':'Cleveland Cavaliers',
+           'James Harden':'Houston Rockets',
+           'Paul Gasol':'San Antonio Spurs'}
+for name in sorted(players.keys( )):
+    print(name)
+    print("Hi! %s 我喜歡看你在 %s 的表現" % (name, players[name]))
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_21.py
+
+# ch9_21.py
+players = {'Stephen Curry':'Golden State Warriors',
+           'Kevin Durant':'Golden State Warriors',
+           'Lebron James':'Cleveland Cavaliers',
+           'James Harden':'Houston Rockets',
+           'Paul Gasol':'San Antonio Spurs'}
+for team in players.values( ):
+    print(team)
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_21_1.py
+
+# ch9_21_1.py
+players = {'Stephen Curry':'Golden State Warriors',
+           'Kevin Durant':'Golden State Warriors',
+           'Lebron James':'Cleveland Cavaliers',
+           'James Harden':'Houston Rockets',
+           'Paul Gasol':'San Antonio Spurs'}
+for team in set(players.values( )):
+    print(team)
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_22.py
+
+# ch9_22.py
+soldier0 = {'tag':'red', 'score':3, 'speed':'slow'}         # 建立小兵
+soldier1 = {'tag':'blue', 'score':5, 'speed':'medium'}
+soldier2 = {'tag':'green', 'score':10, 'speed':'fast'}
+armys = [soldier0, soldier1, soldier2]                      # 小兵組成串列
+for army in armys:                                          # 列印小兵
+    print(army)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_23.py
+
+# ch9_23.py
+armys = []                      # 建立小兵空串列
+# 建立50個小兵
+for soldier_number in range(50):
+    soldier = {'tag':'red', 'score':3, 'speed':'slow'}
+    armys.append(soldier)
+# 列印前3個小兵
+for soldier in armys[:3]:
+    print(soldier)
+# 列印小兵數量
+print("小兵數量 = ", len(armys))
+
+print("------------------------------------------------------------")  # 60個
+
+armys = []                      # 建立小兵空串列
+# 建立50個小兵
+for soldier_number in range(50):
+    soldier = {'tag':'red', 'score':3, 'speed':'slow'}
+    armys.append(soldier)
+# 列印前3個小兵
+print("前3名小兵資料")
+for soldier in armys[:3]:
+    print(soldier)
+# 更改編號36到38的小兵
+for soldier in armys[35:38]:
+    if soldier['tag'] == 'red':
+        soldier['tag'] = 'blue'
+        soldier['score'] = 5
+        soldier['speed'] = 'medium'
+# 列印編號35到40的小兵
+print("列印編號35到40小兵資料")
+for soldier in armys[34:40]:
+    print(soldier)
+
+print("------------------------------------------------------------")  # 60個
+
+# 建立內含字串的字典
+sports = {'Curry':['籃球', '美式足球'],
+          'Durant':['棒球'],
+          'James':['美式足球', '棒球', '籃球']}
+# 列印key名字 + 字串'喜歡的運動'
+for name, favorite_sport in sports.items( ):
+          print("%s 喜歡的運動是: " % name)
+# 列印value,這是串列
+          for sport in favorite_sport:
+              print("   ", sport)
+
+print("------------------------------------------------------------")  # 60個
+
+# 建立內含字典的字典
+wechat_account = {'cshung':{
+                        'last_name':'洪',
+                        'first_name':'錦魁',
+                        'city':'台北'},
+                  'kevin':{
+                        'last_name':'鄭',
+                        'first_name':'義盟',
+                        'city':'北京'}}
+# 列印內含字典的字典
+for account, account_info in wechat_account.items( ):
+    print("使用者帳號 = ", account)                   # 列印鍵(key)
+    name = account_info['last_name'] + " " + account_info['first_name']
+    print("姓名       = ", name)                      # 列印值(value)
+    print("城市       = ", account_info['city'])      # 列印值(value)
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 建立內含字典的字典
+wechat_account = {'cshung':{
+                        'last_name':'洪',
+                        'first_name':'錦魁',
+                        'city':'台北'},
+                  'kevin':{
+                        'last_name':'鄭',
+                        'first_name':'義盟',
+                        'city':'北京'}}
+# 列印字典元素個數
+print("wechat_account字典元素個數       ", len(wechat_account))
+print("wechat_account['cshung']元素個數 ", len(wechat_account['cshung']))
+print("wechat_account['kevin']元素個數  ", len(wechat_account['kevin']))
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_29.py
+
+# ch9_29.py
+# 將串列轉成字典
+seq1 = ['name', 'city']         # 定義串列
+list_dict1 = dict.fromkeys(seq1)
+print("字典1 ", list_dict1)
+list_dict2 = dict.fromkeys(seq1, 'Chicago')
+print("字典2 ", list_dict2)
+# 將元組轉成字典
+seq2 = ['name', 'city']         # 定義元組
+tup_dict1 = dict.fromkeys(seq2)
+print("字典3 ", tup_dict1)
+tup_dict2 = dict.fromkeys(seq2, 'New York')
+print("字典4 ", tup_dict2)
+
+print("------------------------------------------------------------")  # 60個
+
+fruits = {'Apple':20, 'Orange':25}
+ret_value1 = fruits.get('Orange')
+print("Value = ", ret_value1)
+ret_value2 = fruits.get('Grape')
+print("Value = ", ret_value2)
+ret_value3 = fruits.get('Grape', 10)
+print("Value = ", ret_value3)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 

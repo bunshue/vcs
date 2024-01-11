@@ -9,3 +9,5 @@ print('通訊協定:'+result.scheme)
 print('網站網址:', result.netloc)
 print('路徑:', result.path)
 print('查詢字串:', result.query)
+
+
