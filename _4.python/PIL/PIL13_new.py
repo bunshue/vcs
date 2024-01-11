@@ -1,4 +1,5 @@
 import sys
+
 from PIL import Image
 from PIL import ImageColor
 
@@ -205,13 +206,13 @@ from PIL import Image, ImageDraw, ImageFont
 newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
 drawObj = ImageDraw.Draw(newImage)
 
-strText = 'Ming-Chi Institute of Technology'        # 設定欲列印英文字串
+strText = 'Welcome to the United States'        # 設定欲列印英文字串
 drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
 # 使用古老英文字型, 字型大小是36
 fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
 drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
 # 處理中文字體
-strCtext = '明志科技大學'                           # 設定欲列印中文字串
+strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
 
 #fontInfo = ImageFont.truetype('C:\Windows\Fonts\ebas927.ttf', 48)
 #drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
@@ -225,30 +226,16 @@ from PIL import Image, ImageDraw, ImageFont
 newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
 drawObj = ImageDraw.Draw(newImage)
 
-strText = 'Ming-Chi Institute of Technology'        # 設定欲列印英文字串
+strText = 'Welcome to the United States'        # 設定欲列印英文字串
 drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
 # 使用古老英文字型, 字型大小是36
 fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
 drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
 # 使用Microsoft所提供的新細明體中文字型處理中文字體
-strCtext = '明志科技大學'                           # 設定欲列印中文字串
+strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
 fontInfo = ImageFont.truetype('C:\Windows\Fonts\mingliu.ttc', 48)
 drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
 newImage.save("tmp_pic27.png")
-
-print("------------------------------------------------------------")  # 60個
-
-import qrcode
-
-codeText = 'http://www.deepstone.com.tw'
-img = qrcode.make(codeText)                 # 建立QR code 物件
-print("檔案格式", type(img))
-img.save("tmp_pic28_qr_code1.jpg")
-
-import qrcode
-im = qrcode.make("https://pmm.zct.com.tw/trial/")
-im.save("tmp_pic28_qr_code2.jpg")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -280,7 +267,7 @@ print('------------------------------------------------------------')	#60個
 
 #filter
 from PIL import Image,ImageFilter
-image=Image.open("pic/car.jpg")
+image=Image.open(filename)
 image2=image.filter(ImageFilter.EDGE_ENHANCE)
 #image2.show()
 
@@ -289,12 +276,12 @@ print('------------------------------------------------------------')	#60個
 #crop
 
 from PIL import Image
-with Image.open("pic/4.jpg") as image:
+with Image.open(filename) as image:
     print('原圖片的尺寸大小:',im.size)
-    x = 100
-    y = 100
-    x1 = 1000
-    y1 = 1400
+    x = 50
+    y = 50
+    x1 = 250
+    y1 = 300
     image2 = image.crop((x, y, x1, y1))
     print('圖片經裁切後的尺寸大小:', image2.size)
     image2.save("tmp_pic29.jpg")
@@ -304,7 +291,7 @@ print('------------------------------------------------------------')	#60個
 #rotate0
 
 from PIL import Image
-with Image.open("pic/3.jpg") as image:
+with Image.open(filename) as image:
   image2 = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
   image2.save("tmp_pic30.jpg")
 
@@ -312,7 +299,7 @@ print('------------------------------------------------------------')	#60個
 
 # rotate1
 from PIL import Image
-with Image.open("pic/3.jpg") as image:
+with Image.open(filename) as image:
   image2 = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
   image2.save( "tmp_pic31_rotate.jpg")
   
@@ -322,9 +309,9 @@ print('------------------------------------------------------------')	#60個
 # resize
 
 from PIL import Image
-with Image.open("pic/2.jpg") as image:
+with Image.open(filename) as image:
     print('原圖片的尺寸大小:',im.size)
-    w=300
+    w=100
     r = w/image.size[0]
     h = int(image.size[1]*r)
     image2 = image.resize((w, h))
@@ -345,7 +332,7 @@ print('------------------------------------------------------------')	#60個
 # transpose
 
 from PIL import Image,ImageEnhance
-with Image.open("pic/8.jpg") as image:
+with Image.open(filename) as image:
     image2 = image.transpose(Image.FLIP_LEFT_RIGHT)
     image2.save( "tmp_pic33b.jpg")
     image2 = image.transpose(Image.FLIP_TOP_BOTTOM)

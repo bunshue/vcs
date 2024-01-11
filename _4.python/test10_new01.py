@@ -1479,31 +1479,6 @@ except:
 print('------------------------------------------------------------')	#60個
 
 
-import random
-
-numberOfDice = 5
-numberOfSides = 6
-
-# Simulate the dice rolls:
-rolls = []
-for i in range(numberOfDice):
-    rollResult = random.randint(1, numberOfSides)
-    rolls.append(rollResult)
-
-print(type(rolls))
-print(rolls)
-
-# Display the total:
-print('Total:', sum(rolls))
-
-
-# Display the individual rolls:
-for i, roll in enumerate(rolls):
-    rolls[i] = str(roll)
-print(', '.join(rolls), end='')
-
-print("------------------------------------------------------------")  # 60個
-
 # 位元運算子綜合應用
 x = 12
 y = 8

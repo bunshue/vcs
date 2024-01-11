@@ -233,20 +233,6 @@ if __name__ == '__main__':
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-import numpy as np
-
-a = np.random.randint(0, 5, 10)
-print(a)
-print(np.unique(a))  # unique統計陣列中所有不同的值
-
-print(np.bincount(a))  # bincount統計整數陣列中每個元素出現的次數
-
-
-print("------------------------------------------------------------")  # 60個
-
 import datetime
 
 def is_leap(year):
@@ -289,29 +275,6 @@ print(sys.getsizeof(f))  # 查看對象佔用內存的字節數
 
 print("------------------------------------------------------------")  # 60個
 
-print("設計一個函數產生指定長度的驗證碼，驗證碼由大小寫字母和數字構成。\n")
-
-import random
-
-
-def generate_code(code_len=4):
-    """
-    生成指定長度的驗證碼
-
-    :param code_len: 驗證碼的長度(默認4個字符)
-
-    :return: 由大小寫英文字母和數字構成的隨機驗證碼
-    """
-    all_chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    last_pos = len(all_chars) - 1
-    code = ""
-    for _ in range(code_len):
-        index = random.randint(0, last_pos)
-        code += all_chars[index]
-    return code
-
-
-print(generate_code(10))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -452,34 +415,6 @@ print(a[::3])
 
 print("------------------------------------------------------------")  # 60個
 
-print("np亂數建立一維陣列 1 ~ 7(不含尾), 300個")
-a = np.random.randint(1, 7, 300)
-print(a)
-
-print("np亂數建立二維陣列 1 ~ 7(不含尾), 6X4")
-a = np.random.randint(1, 7, (6, 4))
-print(a)
-
-for _ in range(10):
-    a = np.random.uniform()
-    print(a)
-
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.random.normal(1,4,(3,5))
-x = np.random.normal(1,4,(3,5))
-y = np.argmax(x,axis=1)
-print(x)
-print(x.shape)
-print(y)
-print(y.shape)
-                                                                                                                  
-print('查詢函數用法')
-help(np.max)
-
-print("------------------------------------------------------------")  # 60個
-
 print("使用 numpy函數 對 list做處理")
 
 x = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0]
@@ -520,12 +455,6 @@ print(a.dtype.type)
 
 
 print("------------------------------------------------------------")  # 60個
-
-N = 10
-y = np.random.randn(N)
-
-print(y)
-
 
 print("分段函數")
 
@@ -602,18 +531,6 @@ fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
 cfruits = fruits.copy()
 print("位址 = ", id(fruits), "  fruits元素 = ", fruits)
 print("位址 = ", id(cfruits), "  fruits元素 = ", cfruits)
-
-
-print("------------------------------------------------------------")  # 60個
-
-import random  # 導入模組random
-
-fruits = ["蘋果", "香蕉", "西瓜", "水蜜桃", "百香果"]
-
-count = []
-for _ in range(10):
-    cc = random.choice(fruits)
-    print(cc)
 
 print("------------------------------------------------------------")  # 60個
 

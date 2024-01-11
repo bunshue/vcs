@@ -388,21 +388,6 @@ print(datetime.timedelta(days=1))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\import.py
-
-import random
-
-for i in range(5):
-    a = random.randint(1,10) #隨機取得整數
-    print(a,end=' ')
-print()
-#給定items數列的初始值
-items = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-random.shuffle(items)  #使用shuffle函數洗牌
-print(items)#將洗牌後的序列輸出
-
-print("------------------------------------------------------------")  # 60個
-
 import datetime as d
 
 def check(y,m):    
@@ -469,51 +454,6 @@ os.rmdir(directory+"/doc")
 directory_listdir=os.listdir( directory )
 print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
 """
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\random.py
-
-import random as r
-
-print( r.random() ) #產生隨機浮點數n,0 <= n < 1.0
-print( r.uniform(101, 200) ) #產生101-200之間的隨機浮點數
-print( r.randint(-50, 0) ) #產生-50-0之間的隨機整數
-print( r.randrange(0, 88, 11) ) #從序列中取一個隨機數
-print( r.choice(["健康", "運勢", "事業", "感情", "流年"]) ) #
-
-items = ['a','b','c','d']
-r.shuffle(items) #將items序列打亂
-print( items )
-#從序列或集合擷取12個不重複的元素
-print( r.sample('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 12))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\range1.py
-
-import random as r #以別名方式匯入random模組
-for i in range(10): #執行10次
-    print ( r.randrange(2, 500, 2) ) #從2-500間取10個偶數
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\range2.py
-
-import random as r #以別名方式匯入random模組
-for i in range(10): #執行10次
-    print(r.randrange(100)) #從0-100取隨機整數
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\rint.py
-
-import random as r #為random模組取別名
-for j in range(6): #以迴圈執行6次
-    print(r.randint(1,42), end=' ')#產生1-42的整數亂數
-print() #換行1
-for j in range(3): #以迴圈執行3次
-    print(r.uniform(1,10), end=' ')#產生1-10間的亂數
 
 print("------------------------------------------------------------")  # 60個
 
@@ -694,60 +634,6 @@ for i in range(10):
     print()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch10\quick.py
-
-import random
-
-def inputarr(data,size):
-    for i in range(size):
-        data[i]=random.randint(1,100)
-        
-def showdata(data,size):
-    for i in range(size):
-        print('%3d' %data[i],end='')
-    print()
-
-def quick(d,size,lf,rg):
-    #第一筆鍵值為d[lf]
-    if lf<rg:  #排序資料的左邊與右邊
-        lf_idx=lf+1
-        while d[lf_idx]<d[lf]:
-            if lf_idx+1 >size:
-                break
-            lf_idx +=1
-        rg_idx=rg
-        while d[rg_idx] >d[lf]:
-            rg_idx -=1
-        while lf_idx<rg_idx:
-            d[lf_idx],d[rg_idx]=d[rg_idx],d[lf_idx]
-            lf_idx +=1
-            while d[lf_idx]<d[lf]:
-                lf_idx +=1
-            rg_idx -=1
-            while d[rg_idx] >d[lf]:
-                rg_idx -=1
-        d[lf],d[rg_idx]=d[rg_idx],d[lf]
-
-        for i in range(size):
-            print('%3d' %d[i],end='')
-        print()
-       
-        quick(d,size,lf,rg_idx-1)   #以rg_idx為基準點分成左右兩半以遞迴方式
-        quick(d,size,rg_idx+1,rg)   #分別為左右兩半進行排序直至完成排序               
-		
-def main():
-    data=[0]*100
-    size=10
-    inputarr (data,size)
-    print('您輸入的原始資料是：')
-    showdata (data,size)
-    print('排序過程如下：')
-    quick(data,size,0,size-1)
-    print('最終排序結果：')
-    showdata(data,size)
-
-main()
 
 print("------------------------------------------------------------")  # 60個
 

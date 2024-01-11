@@ -1,5 +1,7 @@
 #以BeautifulSoup套件進行網頁解析
+
 from bs4 import BeautifulSoup
+
 content="""
 <!DOCTYPE html>
 <html lang="zh-TW">
