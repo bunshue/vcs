@@ -1,3 +1,10 @@
+"""
+範例來的混合資料 2
+
+
+"""
+
+
 import os
 import sys
 import time
@@ -5,86 +12,38 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-str1 = "Python程式設計"
-str2 = 'Hello'
-ch1 = "A"
-print(str1)
-print("str2: ", str2)
-print(ch1)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-1a.py
-
-name1 = str()
-name2 = str("陳會安")
-print("name1 = " + name1)
-print("name2 = " + name2)
+animals = '鼠牛虎兔龍蛇馬羊猴雞狗豬'
+for animal in animals:
+    print(animal)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-1b.py
-
-str2 = 'Hello'
-for ch in str2:
-    print(ch)
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-1c.py
-
-str1 = "Python程式設計"
-print(str1[0])
-print(str1[1])
-print(str1[-1])
-print(str1[-2])
+animals = "Python程式設計"
+print(animals[0])
+print(animals[1])
+print(animals[-1])
+print(animals[-2])
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-2.py
-
-print("姓名: \'陳會安\'")
-print('同學: \"陳允傑\"')
-print("D:\\PythonChatGPT\\ch09")
-print("Python\n程式設計")
-print("HEX: \x48\x45\x58")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-3.py
-
-str1 = "Python"
-print(str1.islower())
+animals = "Python"
+print(animals.islower())
 print("2023".isdigit())
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-3a.py
-
-# 字元函數
-ch1 = "A"
-print("ch1 = ", ch1)
-a = ord(ch1)
-print("ord(ch1) = ", a)
-a = chr(97)
-print("chr(97) = " + a)
-a = ord('B')
-print("ord('B') = ", a)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-3b.py
-
 # 字串函數
-str1 = 'Hello World!'
-print("str1 = ", str1)
-s = len(str1)
-print("len(str1) = ", str(s))
-s = max(str1)
-print("max(str1) = ", s)
-s = min(str1)
-print("min(str1) = ", s)
+animals = 'Hello World!'
+print("animals = ", animals)
+s = len(animals)
+print("len(animals) = ", str(s))
+s = max(animals)
+print("max(animals) = ", s)
+s = min(animals)
+print("min(animals) = ", s)
 str2 = 'Python程式設計'
 print("str2 = ", str2)
 s = len(str2)
@@ -94,26 +53,28 @@ print("max(str2) = ", s)
 s = min(str2)
 print("min(str2) = ", s)
 
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-3c.py
 
-str1 = 'welcome to python'
-print("str1 = ", str1)
-b = str1.isalnum()
-print("str1.isalnum() = ", b)
-b = str1.isalpha()
-print("str1.isalpha() = ", b)
-b = str1.isdigit()
-print("str1.isdigit() = ", b)
+animals = 'welcome to python'
+print("animals = ", animals)
+b = animals.isalnum()
+print("animals.isalnum() = ", b)
+b = animals.isalpha()
+print("animals.isalpha() = ", b)
+b = animals.isdigit()
+print("animals.isdigit() = ", b)
 b = "2023".isdigit()
 print('"2023".isdigit() = ', b)
-b = str1.isidentifier()
-print("str1.isidentifier() = ", b)
-b = str1.islower()
-print("str1.islower() = ", b)
-b = str1.isupper()
-print("str1.isupper() = ", b)
+b = animals.isidentifier()
+print("animals.isidentifier() = ", b)
+b = animals.islower()
+print("animals.islower() = ", b)
+b = animals.isupper()
+print("animals.isupper() = ", b)
 b = "   ".isspace()
 print('"   ".isspace() = ', b)
 
@@ -121,45 +82,45 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-3d.py
 
-str1 = 'welcome to python'
-print("str1 = ", str1)
-b = str1.endswith('thon')
-print("str1.endswith('thon') = ", b)
-b = str1.startswith('hello')
-print("str1.startswith('hello') = ", b)
-b = str1.count('o')
-print("str1.count('o') = ", b)
-b = str1.find('come')
-print("str1.find('come') = ", b)
-b = str1.find('become')
-print("str1.find('become') = ", b)
-b = str1.find('o')
-print("str1.find('o') = ", b)
-b = str1.find('e')
-print("str1.find('e') = ", b)
-b = str1.rfind('o')
-print("str1.rfind('o') = ", b)
-b = str1.rfind('e')
-print("str1.rfind('e') = ", b)
+animals = 'welcome to python'
+print("animals = ", animals)
+b = animals.endswith('thon')
+print("animals.endswith('thon') = ", b)
+b = animals.startswith('hello')
+print("animals.startswith('hello') = ", b)
+b = animals.count('o')
+print("animals.count('o') = ", b)
+b = animals.find('come')
+print("animals.find('come') = ", b)
+b = animals.find('become')
+print("animals.find('become') = ", b)
+b = animals.find('o')
+print("animals.find('o') = ", b)
+b = animals.find('e')
+print("animals.find('e') = ", b)
+b = animals.rfind('o')
+print("animals.rfind('o') = ", b)
+b = animals.rfind('e')
+print("animals.rfind('e') = ", b)
 
 print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-3e.py
 
-str1 = 'welcome to python'
-print("str1 = ", str1)
+animals = 'welcome to python'
+print("animals = ", animals)
 str2 = 'Welcome to Python'
 print("str2 = ", str2)
 str3 = 'This is a test.'
 print("str3 = ", str3)
-s = str1.capitalize()
-print("str1.capitalize() = ", s)
+s = animals.capitalize()
+print("animals.capitalize() = ", s)
 s = str2.lower()
 print("str2.lower() = ", s)
-s = str1.upper()
-print("str1.upper() = ", s)
-s = str1.title()
-print("str1.title() = ", s)
+s = animals.upper()
+print("animals.upper() = ", s)
+s = animals.title()
+print("animals.title() = ", s)
 s = str2.swapcase()
 print("str2.swapcase() = ", s)
 s = str3.replace('is', 'was')
@@ -169,11 +130,11 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-1-4_gpt.py
 
-str1 = """Python is a programming language that lets you work quickly
+animals = """Python is a programming language that lets you work quickly
 and integrate systems more effectively."""
 
-# 將 str1 以空白字元切割成串列 lst1
-lst1 = str1.split()
+# 將 animals 以空白字元切割成串列 lst1
+lst1 = animals.split()
 
 # 顯示 lst1 內容
 print(lst1)
@@ -201,8 +162,8 @@ def clean_string(s):
     s = s.strip()
     return s
 
-str1 = "  Python is a \nprogramming language.\n\r   "
-cleaned_str = clean_string(str1)
+animals = "  Python is a \nprogramming language.\n\r   "
+cleaned_str = clean_string(animals)
 print(cleaned_str)  # "Python is a programming language."
 
 
@@ -275,15 +236,10 @@ for e1 in lst2:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-2-2c.py
-
 lst2 = [[2, 4], ['cat', 'dog', 'bat'], [1, 3, 5]]
-print(lst2[0][6])
-
+print(lst2[0][1])
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-2-3.py
 
 lst1 = [1, 5]
 lst1.append(7)
@@ -325,8 +281,8 @@ s = max(lst1)
 print("max(lst1) = ", s)
 s = min(lst1)
 print("min(lst1) = ", s)
-str1 = 'Hello World!'
-lst2 = list(str1)
+animals = 'Hello World!'
+lst2 = list(animals)
 print("lst2 = ", lst2)
 for i, v in enumerate(lst2, 0):
     print(i, ":", v, end=" ")
@@ -450,8 +406,8 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch09\ch9-4.py
 
-str1 = "This is a pen."
-lst1 = str1.split()
+animals = "This is a pen."
+lst1 = animals.split()
 print(lst1)
 
 print("------------------------------------------------------------")  # 60個
@@ -525,8 +481,8 @@ s = max(t1)
 print("max(t1) = ", s)
 s = min(t1)
 print("min(t1) = ", s)
-str1 = 'Hello World!'
-t2 = tuple(str1)
+animals = 'Hello World!'
+t2 = tuple(animals)
 print("t2 = ", t2)
 for i, v in enumerate(t2, 0):
     print(str(i) + ":" + v, end=" ")
@@ -778,8 +734,8 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch10\ch10-3-1.py
 
-str1, str2 = "Hello ", "World!"
-str3 = str1 + str2
+animals, str2 = "Hello ", "World!"
+str3 = animals + str2
 print(str3)
 lst1, lst2 = [2, 4], [6, 8, 10]
 lst3 = lst1 + lst2
@@ -792,8 +748,8 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch10\ch10-3-2.py
 
-str1 = "Hello"
-str2 = str1 * 3
+animals = "Hello"
+str2 = animals * 3
 print(str2)
 lst1 = [1, 2]
 lst2 = lst1 * 3
@@ -838,20 +794,20 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch10\ch10-3-5.py
 
-str1 = 'Hello World!'
-print("str1 = ",str1)
-s = str1[1:3]
-print("str1[1:3] = ", s)
-s = str1[1:5]
-print("str1[1:5] = ", s)
-s = str1[:7]
-print("str1[:7] = ", s)
-s = str1[4:]
-print("str1[4:] = ", s)
-s = str1[1:-1]
-print("str1[1:-1] = ", s)
-s = str1[6:-2]
-print("str1[6:-2] = ", s)
+animals = 'Hello World!'
+print("animals = ",animals)
+s = animals[1:3]
+print("animals[1:3] = ", s)
+s = animals[1:5]
+print("animals[1:5] = ", s)
+s = animals[:7]
+print("animals[:7] = ", s)
+s = animals[4:]
+print("animals[4:] = ", s)
+s = animals[1:-1]
+print("animals[1:-1] = ", s)
+s = animals[6:-2]
+print("animals[6:-2] = ", s)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1088,134 +1044,12 @@ print("math.tan(rad) = ", math.tan(rad))
 
 print("------------------------------------------------------------")  # 60個
 
-fp = open("note.txt", "w")
-fp.write("陳會安\n")
-fp.write("江小魚\n")
-print("已經寫入2個姓名到檔案note.txt!")
-fp.close()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-2a.py
-
-fp = open("note.txt", "w")
-fp.write("陳會安")
-fp.write("江小魚")
-print("已經寫入2個姓名到檔案note.txt!")
-fp.close()
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-3.py
-
-fp = open("note.txt", "a")
-fp.write("陳允傑\n")
-print("已經新增1個姓名到檔案note.txt!")
-fp.close()
-
 print("------------------------------------------------------------")  # 60個
+print("保留區")
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-3a.py
 
-fp = open("note.txt", "a")
-fp.write("陳允傑")
-print("已經新增1個姓名到檔案note.txt!")
-fp.close()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-4.py
-
-fp = open("note.txt", "r")
-str1 = fp.read()
-print("檔案內容:")
-print(str1)
-fp.close()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-4a.py
-
-fp = open("note.txt", "r")
-list1 = fp.readlines()
-print("檔案內容:")
-print(list1)
-for line in list1:
-    print(line, end="")    
-fp.close()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-5.py
-
-fp = open("note.txt", "r")
-str1 = fp.read(1)
-str2 = fp.read(2)
-print("檔案內容:")
-print(str1)
-print(str2)
-fp.close()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-5a.py
-
-fp = open("note.txt", "r")
-str1 = fp.readline()
-str2 = fp.readline()
-print("檔案內容:")
-print(str1)
-print(str2)
-fp.close()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-6.py
-
-with open("note.txt", "r") as fp:
-    str1 = fp.read()
-    print("檔案內容:")
-    print(str1)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT：零基礎AI聊天用流程圖學Python程式設計\ch11\ch11-4-6a.py
-
-fp = open("note.txt", "r")
-print("檔案內容(有換行):")
-for line in fp:
-    print(line)
-fp.close() 
-fp = open("note.txt", "r")   
-print("檔案內容(沒換行):")
-for line in fp:
-    print(line, end="")    
-fp.close()
-
-print("------------------------------------------------------------")  # 60個
-
-try:
-    fp = open("myfile.txt", "r")
-    print(fp.read())
-    fp.close()
-except FileNotFoundError:
-    print("錯誤! myfile.txt檔案不存在!")
-
-print("------------------------------------------------------------")  # 60個
-
-m = 10
-eval("print('Python')")
-eval("print(50 + 10)")
-eval("print(55 / 7)")
-eval("print(m + 5)")
-eval("print('m' * 5)")
-
-print("------------------------------------------------------------")  # 60個
-
-def convert_to_f(c):
-    f = (9.0 * c) / 5.0 + 32.0
-    return f
-
-print("------------------------------------------------------------")  # 60個
 
 

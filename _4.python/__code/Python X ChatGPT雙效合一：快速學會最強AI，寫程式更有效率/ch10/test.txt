@@ -1,5 +1,0 @@
-Hello Python!!
-My name is John.
-I love programming.
-Time create heroes.
-Happy new year.

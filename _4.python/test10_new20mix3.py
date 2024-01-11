@@ -1,579 +1,9 @@
-"""
-範例來的混合資料 1
-
-
-"""
-
-
 import os
 import sys
 import time
 import random
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch01\height.py
-
-height=178
-print("小郭的身高：%d" % height)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch01\hello.py
-
-#我寫的程式
-print("Hello World!")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch01\setwidth.py
-
-name1="多益題庫大全"
-name2="國小單字入門手冊"
-name3="英檢初級及中級合輯"
-price1=500
-price2=45
-price3=125.85
-print("%5s 商品價格為 %4d 元" % (name1, price1))
-print("%5s 商品價格為 %4d 元" % (name2, price2))
-print("%5s 商品價格為 %5.2f 元" % (name3, price3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch02\comment.py
-
-'''
-   範例程式:comment.py
-   程式功能:本程式示範如何使用多行註解及單行註解
-'''
-number = 10 #將數值10設定給number
-print(number) #輸出number變數值
-a=b=c=55 #a, b, c三個變數的值都是55
-a,b,c = 55,55,55 #也可以利用","隔開變數名稱,就能在同一列設定值
-print(a) #輸出a變數值
-print(b) #輸出b變數值
-print(c) #輸出c變數值
-a,f,name = 66,10.58, "Michael " #也可以混搭不同型態的變數一起宣告
-print(a) #輸出a變數值,各位可以發現其值已被重新給定
-print(f) #輸出f變數值
-print(name) #輸出name變數值
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch02\escape.py
-
-print("顯示反斜線: " + '\\')
-print("顯示單引號: " + '\'');
-print("顯示雙引號: " + '\"');
-print("顯示16進位數: " + '\u0068')
-print("顯示8進位數: " + '\123')
-print("顯示倒退一個字元: " + '\b' + "xyz")
-print("顯示空字元: " + "xy\0z")
-print("雙引號的應用->\n\"跳脫字元的綜合運用\"")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch02\format.py
-
-name1="多益題庫大全"
-name2="國小單字入門手冊"
-name3="英檢初級及中級合輯"
-price1=500
-price2=45
-price3=125.85
-print("%5s 商品價格為 %4d 元" % (name1, price1))
-print("%5s 商品價格為 %4d 元" % (name2, price2))
-print("%5s 商品價格為 %5.2f 元" % (name3, price3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch02\format_para.py
-
-num1=9.86353
-print("num1= {:.3f}".format(num1))  
-num2=524.12345
-print("num2= {:12.3f}".format(num2))
-company="智能AI科技股份有限公司"
-year=18
-print("{} 已設立公司 {} 年" .format (company, year))
-print("{0} 成立至今已 {1} 歲".format(company, year))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch02\strtoint.py
-
-no1=input("請輸入甲班全班人數：")
-no2=input("請輸入乙班全班人數：")
-total1=no1+no2
-print(type(total1))
-print("兩班總人數為%s" %total1)    
-total2=int(no1)+int(no2)
-print(type(total2))
-print("兩班總人數為%d" %total2)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch02\type.py
-
-a=8
-b=3.14
-c=True
-print(a)
-print(type(a))
-print(b)
-print(type(b))
-print(c)
-print(type(c))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch03\AddMinus.py
-
-num1=int(input("請輸入第一個整數: "))
-num2=int(input("請輸入第二個整數: "))
-print("第一個整數的值: %d" %num1)
-print("第二個整數的值: %d" %num2)
-print("兩個整數相加的值: %d" %(num1+num2))
-print("兩個整數相減的值: %d" %(num1-num2))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch03\compound.py
-
-"""
-指派運算子練習
-"""
-
-a =3
-b =1
-c =2
-
-x = a + b * c
-print("{}".format(x)) #x=3+1*2=5
-a += c 
-print("a={0}".format(a,b))  #a=3+2=5
-a -= b  
-print("a={0}".format(a,b))  #a=5-1=4
-a *= b
-print("a={0}".format(a,b))  #a=4*1=4
-a **= b
-print("a={0}".format(a,b))  #a=4**1=4
-a /= b
-print("a={0}".format(a,b))  #a=4/1=4
-a //= b
-print("a={0}".format(a,b))  #a=4//1=4
-a %= c
-print("a={0}".format(a,b))  #a=4%2=0
-s = "程式設計" + "很有趣"
-print(s)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch03\exchange.py
-
-num=int(input("請輸入將兌換金額:")) 
-hundred=num//100
-fifty=(num-hundred*100)//50
-ten=(num-hundred*100-fifty*50)//10
-print("百元鈔有 %d 張 五十元鈔有 %d 張 十元鈔有 %d 張" %(hundred,fifty,ten))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch03\logic.py
-
-a,b,c=3,5,7;     #宣告a、b及c三個整數變數
-print("a= %d b= %d c= %d" %(a,b,c))
-print("====================================")
-#包含關係與邏輯運算子的運算式求值
-print("a<b and b<c or c<a = %d" %(a<b and b<c or c<a))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch03\precedence.py
-
-a = 12
-b = 2
-c = 6*(24/a + (5+a)/b)
-
-print("a=", a)
-print("b=", b)
-print("6*(24/a + (5+a)/b)=", c)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch03\relation.py
-
-a = 54
-b = 35
-c = 21
-ans1 = (a == b)  #判斷a是否等於b
-ans2 = (b != c) #判斷b是否不等於c
-ans3 = (a <= c) #判斷a是否大於等於c
-print(ans1) 
-print (ans2) 
-print (ans3) 
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch03\score.py
-
-s1=int(input("請輸入第一次月考成績: "))
-s2=int(input("請輸入第二次月考成績: "))
-s3=int(input("請輸入第三次月考成績: "))
-print("三次月考的加總分數: %d" %(s1+s2+s3))
-avg=(s1+s2+s3)/3
-print("三次月考的平均分數: %3.1f" %avg)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch03\temperature.py
-
-"""
-輸入華氏(Fahrenheit)溫度轉換攝氏(Celsius)溫度
-提示：C=5/9*(F-32)
-"""
-F= float( input("請輸入華氏溫度："))
-C=5/9*(F-32)
-print("華氏溫度 %3.1f 轉換為攝氏溫度為 %3.1f" %(F,C))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch04\discount.py
-
-cost=float(input("請輸入消費總金額:"))    
-if cost>=100000:
-    cost=cost*0.85 #10萬元以上打85折       
-elif cost>=50000:
-    cost=cost*0.9  #5萬元到10萬元之間打9折     
-else:
-    cost=cost*0.95 #5萬元以下打95折
-print("實際消費總額:%.1f元" %cost)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch04\if.py
-
-Money=int(input("請輸入消費的金額:"))
-if Money<1200:
-    Money*=1.1; #消費未滿 1200，加收服務費1成
-print("需繳付的實際金額是 %5.0f 元" %Money)   
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch04\if_else.py
-
-num = int(input('請輸入一個整數？'))
-if num%5:
-    print(num, '不是5的倍數')
-else:
-    print(num, '為5的倍數')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch04\if_else-1.py
-
-value=int(input("請任意輸入一個整數：")) #輸入一個整數
-#判斷是否為2或3的倍數   
-if value%2==0 or value%3==0:
-    if value%6!=0:
-        print("符合所要的條件")
-    else:
-        print("不符合所要的條件") #為6的倍數  
-else:
-    print("不符合所要的條件")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch04\if_fee.py
-
-print("停車超過一小時,每小時收費40元")
-t=int(input("請輸入停車幾小時: ")) #輸入時數	     
-if t>=1:
-    total=t*40 #計算費用
-    print("停車%d小時,總費用為:%d元" %(t,total))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch04\if_weight.py
-
-weight = input('請輸入體重: ')
-andy = int(weight) #將輸入體重的字串型態轉換為整數
-if andy >= 80:    #體重大於或等於80
-    print('體重過胖，要小心身材變形')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch04\leapYear.py
-
-"""
-程式名稱：閏年判斷程式
-題目要求：
-輸入西元年(4位數的整數year)判斷是否為閏年
-條件1.逢4閏(除4可整除)而且逢100不閏(除100不可整除)
-條件2.逢400閏(除400可整除)
-滿足兩個條件之一即是閏年
-"""
-year = int(input("請輸入西元年份："))
-
-if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
-    print("{0}是閏年".format(year))
-else :
-    print("{0}是平年".format(year))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch04\pos.py
-
-print("目前提供的選擇如下") 
-print(" 0.查詢其他相關的點心資料")
-print(" 1.吉事漢堡" )
-print(" 2.咖哩珍豬飽")
-print(" 3.六塊麥克雞")
-print("請點選您要的項目:" )
-Select=int(input()) #輸入餐點的項目
-if Select == 0: #選擇第0項?
-    print("請稍等... 正在查詢其他相關的點心資料")
-elif Select == 1: #是否選擇第1項?
-    print("這個項目的單價:%d" %45)
-elif Select == 2: #是否選擇第2項?
-    print("這個項目的單價:%d" %55)
-elif Select == 3: #是否選擇第3項?
-    print("這個項目的單價:%d" %65)
-else: #輸入錯誤的處理
-    print("您可能輸入錯誤.... 請重新輸入")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\99table.py
-
-"""
-程式名稱：九九乘法表
-"""
-for x in range(1, 10):
-    for y in range(1, 10):
-        print("{0}*{1}={2: ^2}".format(y, x, x * y), end=" ")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\break.py
-
-# break練習
-total=0
-for i in range(1,201,2):
-    if i==101:
-        break #跳出迴圈
-    total+=i
-print("1~99的奇數總和:%d" %total)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\breaktable.py
-
-# 九九乘法表的雙重迴圈
-for i in range(1,10):
-    for j in range (1,10):
-        print('{0}*{1}={2:2d}  '.format(i,j,i*j), sep='\t',end='')
-        if j>=7:
-            break #設定跳出的條件
-    print('\n-------------------------------------------------------\n')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\continue.py
-
-#continue練習 
-for a in range(10): #外層for迴圈控制y軸輸出
-    for b in range(a+1): #內層for迴圈控制x軸輸出
-        if b==6:
-            continue
-        print("%d " %b,end='')#印出b的值
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\divide.py
-
-print("求取兩正整數的最大公因數(g.c.d):")
-print("輸入兩個正整數:")
-#輸入兩數
-Num1=int(input())
-Num2=int(input())
-if Num1 < Num2:
-    TmpNum=Num1                           
-    Num1=Num2
-    Num2=TmpNum#找出兩數較大值
-while Num2 != 0:
-    TmpNum=Num1 % Num2            
-    Num1=Num2                              
-    Num2=TmpNum #輾轉相除法
-print("最大公因數(g.c.d)的值為:%d" %Num1)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\donate.py
-
-total = 0
-money = -1
-count = 0 #計數器
-
-# 進入while迴圈
-while money != 0:
-   money = int(input('輸入捐款金額：')) #以int()轉為整數
-   total += money
-   print('累計:', total)
-   
-print('最後總捐款金額總計:', total, '元')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\fac.py
-
-#計算10! 的值
-product=1
-for i in range(1,11): #定義for迴圈
-    product*=i
-print("product=%d" %product) #印出乘積的結果
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\fac_total.py
-
-product=0
-n1=1
-n=int(input("請輸入任一整數:"))
-for i in range(1,n+1):
-    for j in range(1,i+1):
-        n1*=j; # n!的值
-    product+=n1;# 1!+2!+3!+..n!
-    n1=1
-print("1!+2!+3!+...+{0}!={1}".format(n,product))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\password.py
-
-"""
-讓使用者輸入密碼，並且進行密碼驗證,
-輸入次數以三次為限，超過三次則不准登入，
-假如目前密碼為3388。
-"""
-password=3388 #利用變數來儲存密碼以供驗證
-i=1
-
-while i<=3: #輸入次數以三次為限
-    new_pw=int(input("請輸入密碼:"))
-    if new_pw != password:  #如果輸入的密碼與預設密碼不同
-        print("密碼發生錯誤!!")
-        i=i+1
-        continue #跳回while開始處
-    else:
-        print("密碼正確!!")
-        break
-if i>3:
-        print("密碼錯誤三次，取消登入!!\n"); #密碼錯誤處理
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\pi.py
-
-sigma=0
-k=int(input("請輸入k值：")) #輸入k值
-for n in range(0,k,1):
-    if n & 1: #如果n是奇數
-        sigma += float(-1/(2*n+1))
-    else: #如果n是偶數
-        sigma += float(1/(2*n+1))
-print("PI = %f" %(sigma*4))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\range.py
-
-sum = 0 #儲存加總結果,初值為0
-print('進行加總前的起始值', sum) #輸出加總前的起始值
-for i in range(11, 21):   
-    sum += i  #將數值累加   
-    print('累加值=', sum) #輸出累加結果
-else:   
-    print('數值累加完畢...')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\reverse.py
-
-n=int(input("請輸入任一整數:"))
-print("反向輸出的結果:",end='') 
-while n!=0:  #while迴圈
-    print("%d" %(n%10),end='') #求出餘數值
-    n//=10
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch05\while.py
-
-x,sum=1,1000
-while sum>0: #while迴圈
-    sum-=x
-    x=x+1
-print(x-1)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\append.py
-
-num=int(input('請輸入總人數: '))
-student = [] #建立空的list串列
-print('請輸入{0}個數值：'.format(num))
-
-# 以for/in廻圈依序讀取要輸入的分數
-for item in range(1,num+1):
-    score = int(input()) #取得輸入數值
-    student.append(score) #將輸入數值新增到串列
-
-print('已輸入完畢')
-#輸出資料
-print('總共輸入的分數', end = '\n')
-for item in student:   
-    print('{:3d} '.format(item), end = '')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\copy.py
-
-parents= ["勤儉", "老實", "客氣"]
-child=parents[:]
-daughter=parents[:]
-print("parents特點",parents)
-print("child特點",child)
-print("daughter特點",daughter)
-child.append("毅力")
-daughter.append("時尚")
-print("分別新增小孩的特點後:")
-print("child特點",child)
-print("daughter特點",daughter)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\copy1.py
-
-parents= ["勤儉", "老實", "客氣"]
-child=parents
-daughter=parents
-print("parents特點",parents)
-print("child特點",child)
-print("daughter特點",daughter)
-child.append("毅力")
-daughter.append("時尚")
-print("分別新增小孩的特點後:")
-print("child特點",child)
-print("daughter特點",daughter)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\count.py
 
 word = ["holiday", "happy", "birth",
              "yesterday", "holiday", "car",
@@ -585,52 +15,6 @@ print("holiday 出現的次數", word.count("holiday"))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\dict.py
-
-labor = {'高中仁':'RD', '許富強':'SA'} #設定字典的資料
-labor['陳月風'] = 'CEO' #新增一個項目
-labor.setdefault('陳月風')
-print('目前字典:')
-print(labor)
-labor['陳月風'] ='PRESIDENT' 
-#以update()方法更新字典
-labor.update({'周慧宏':'RD', '鄭大富':'SA'})
-print('依名字遞增排序:')
-for key in sorted(labor):
-    print('%8s %9s' % (key, labor[key]))
-
-person = {'陳志強':'SA','蔡工元':'RD'}
-labor.update(person) # 更新字典
-labor.update(胡慧蘭 = 'RD', 周大全 = 'SA')#以指派方式更新
-print('更新字典內容：\n', labor)
-labor.pop('陳志強')#刪除指定資料
-print('刪除後依名字排序:')
-for value in sorted(labor, reverse = False):
-    print('%8s %9s' % (value, labor[value]))
-print('將字典內容清空:')
-print(labor.clear())
-print(labor)#輸出字典
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\english.py
-
-#小班制的同學清單
-classmate={'陳大慶','許大為','朱時中','莊秀文','吳彩鳳',
-           '黃小惠','曾明宗','馬友友','韓正文','胡天明'}
-test1={'陳大慶','許大為','朱時中','馬友友','胡天明'} #中高級名單
-test2={'許大為','朱時中','吳彩鳳','黃小惠','馬友友','韓正文'} #中級名單
-goodguy=test1 | test2
-print("全班有 %d 人通過兩種檢定其中一種" %len(goodguy), goodguy)
-bestguy=test1 & test2
-print("全班有 %d 人兩種檢定全部通過" %len(bestguy), bestguy)
-poorguy=classmate -goodguy
-print("全班有 %d 人沒有通過任何檢定" %len(poorguy), poorguy)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\index.py
-
 word = ["holiday", "happy", "birth",
              "yesterday", "holiday", "car",
              "yellow", "happy", "mobile",
@@ -641,8 +25,6 @@ search_str="yellow"
 print("單字 %s 第一次出現的索引值%d" %(search_str,word.index(search_str)))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\listsort.py
 
 no = [105, 25, 8, 179, 60, 57]
 print('排序前的資料順序：',no)
@@ -657,21 +39,8 @@ print(zoo)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\reverse.py
-
-no = [185, 278, 97, 48, 33, 61]
-print('反轉前內容：', no)
-no.reverse() 
-print('反轉後內容：', no)
-
-zoo = ['tiger', 'lion', 'horse', 'cattle']
-print('反轉前內容：', zoo)
-zoo.reverse() 
-print('反轉後內容：', zoo)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\set.py
 
 friendA= {"Andy", "Axel", "Michael","May"}
 friendB = {"Peter", "Axel", "Andy","Julia"}
@@ -681,8 +50,6 @@ print(friendA - friendB)
 print(friendA ^ friendB)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\swap.py
 
 x = 859
 y = 935
@@ -694,16 +61,12 @@ print('x={},y={}'.format(x,y))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\tuple_create.py
-
 tup = (28, 39, 58, 67,97, 54) 
 print('目前元組內的所有元素：')
 for item in range(len(tup)):
    print ('tup[%2d] %3d' %(item, tup[item]))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\tuple_sorted.py
 
 salary = (86000, 72000, 83000, 47000, 55000)
 print('原有資料：')
@@ -724,8 +87,6 @@ print('--------------------------------')
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\unpack.py
-
 info = [['C程式設計','朱大峰','480'],
         ['Python程式設計','吳志明','500'],
         ['Java程式設計','許伯如','540']]
@@ -734,8 +95,6 @@ for(book, author,price) in info:
     print('%10s %3s'%(book,author),' 書籍訂價:',price)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch06\word.py
 
 original= ["abase", "abate", "abdicate","abhor", "abate", "acrid","appoint", "abate", "kindle"]
 print("單字收集的原始內容: ")
@@ -749,8 +108,6 @@ not_duplicatd.sort()
 print(not_duplicatd)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\align.py
 
 str1 = '淡泊以明志，寧靜以致遠'
 print('原字串', str1)
@@ -769,8 +126,6 @@ str3 = '忠孝\n仁愛\n信義\n和平'
 print('依\\n分割字串', str3.splitlines(False))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\arg.py
 
 def fun1(obj, price):
     obj = 'Microwave'
@@ -793,30 +148,9 @@ print('分數:', price1) #串列內容已改變
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\blessings.py
-
-def blessings():
-    print('一元復始，萬象更新')
-
-blessings()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\blessings_para.py
-
-def blessings(str1):
-    print(str1)
-
-blessings('一元復始，萬象更新')
-blessings('恭賀新喜，財源滾滾')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\bonus.py
-
 def payment():
-    price = float(input("產品單價："))
-    num = float(input("銷售數量："))
+    price = 100
+    num = 30
     rate = 0.35  #抽取獎金的百分比
     total = price*num * rate
     return price*num, total
@@ -826,26 +160,6 @@ print("總銷售業績{},應付獎金：{}".format(e1, e2))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\common.py
-
-def Common_Divisor():
-    print("請輸入兩個數值")
-    Num1=int(input("數值 1："))
-    Num2=int(input("數值 2："))
-    print(Num1,'及',Num2)
-    while Num2 != 0: #利用輾轉相除法計算最大公因數
-        Temp=Num1 % Num2
-        Num1 = Num2
-        Num2 = Temp
-    return Num1
-
-Min=Common_Divisor(); #函數呼叫
-print("的最大公因數為：",Min)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\count.py
-
 str1="do your best what you can do"
 s1=str1.count("do",0)
 s2=str1.count("o",0,20)
@@ -853,50 +167,6 @@ print("{}\n「do」出現{}次,「o」出現{}次".format(str1,s1,s2))
 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\func.py
-
-def func(a,b):
-    x = a * b
-    return x
-
-print(func(4,3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\func_default.py
-
-def func(a,b,c=10):
-x = a - b + c
-return x
-
-print(func(3,1,3)) # a=3 b=1 c=3
-print(func(5,2))  # a=5 b=2 c=10
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\func_noreturn.py
-
-def func(a,b):
-    x = a * b
-    print(x)
-
-print(func(4,3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\func1.py
-
-def func(a,b):
-    x = a * b
-    print(x)
-
-print(func(4,3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\hello.py
-
 def hello(word):
       print(word)
 
@@ -905,7 +175,7 @@ hello('Birthday')
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\keyword.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\keyword.py
 
 def func(x,y,z):
     formula = x*x+y*y+z*z
@@ -918,14 +188,14 @@ print(func(7, y=2 , z=5))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\lambda1.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\lambda1.py
 
 result = lambda x : 3*x-1  #lambda()函數
 print(result(3)) #輸出數值8
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\lambda2.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\lambda2.py
 
 def formula(x, y): #自訂函數
     return 3*x+2*y
@@ -935,7 +205,7 @@ print(formula (5,10)) ##傳入兩個數值讓lambda()函數做運算，輸出數
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\letterpy.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\letterpy.py
 
 phrase = 'never put off until tomorrow what you can do today.'
 print('原字串：', phrase)
@@ -948,7 +218,7 @@ print('是否皆為小寫字元', phrase.islower())
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\numberfun.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\numberfun.py
 
 print('int(8.4)=',int(8.4))
 print('bin(14)=',bin(14))
@@ -969,7 +239,7 @@ print('len([5,7,1,8,9])=',len([5,7,1,8,9]))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\para.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\para.py
 
 def factorial(*arg):
     product=1
@@ -994,8 +264,6 @@ print(myfruit(d1='apple', d2='mango', d3='grape'))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\pow.py
-
 #引數：x 為底數       
 #y 為指數       
 #傳回值：次方運算結果 
@@ -1012,16 +280,13 @@ print("次方運算結果: %d" %Pow(int(x), int(y)))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\replace.py
-
+print('字串replace')
 s= "My favorite sport is baseball."
 print(s)
 s1=s.replace("baseball", "basketball")
 print(s1)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\return01.py
 
 def func(a,b):
     p1 = a * b
@@ -1034,7 +299,7 @@ print(num2)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\return02.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\return02.py
 
 def func(length,width,height):
     p1 = length*width*height
@@ -1049,7 +314,7 @@ print(num3)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\sequence.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\sequence.py
 
 str1="I love python."
 print("原字串內容: ",str1)
@@ -1071,7 +336,7 @@ print("串列元素由小到大排序: ",sorted(list1))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\split.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\split.py
 
 str1 = "apple \nbanana \ngrape \norange"
 print( str1.split() )
@@ -1079,7 +344,7 @@ print( str1.split(' ', 2 ) )
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch07\startswith.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch07\startswith.py
 
 wd = 'Python is funny and powerful.'
 print('字串:', wd)
@@ -1090,7 +355,8 @@ print('powerful.為結尾字串嗎', wd.endswith('powerful.'))  #回傳True
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\attribute.py
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\attribute.py
 
 import datetime
 print(datetime.date.min)
@@ -1101,7 +367,7 @@ print(datetime.date(2019,8,24).day)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\date.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\date.py
 
 import datetime
 print(datetime.date.today())
@@ -1112,7 +378,7 @@ print(datetime.date(2019,5,7).isocalendar())
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\datetime.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\datetime.py
 
 import datetime
 print(datetime.date(2018,5,25))
@@ -1122,7 +388,7 @@ print(datetime.timedelta(days=1))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\import.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\import.py
 
 import random
 
@@ -1136,8 +402,6 @@ random.shuffle(items)  #使用shuffle函數洗牌
 print(items)#將洗牌後的序列輸出
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\lastDay.py
 
 import datetime as d
 
@@ -1154,13 +418,13 @@ def check(y,m):
         
     return d.date(temp_year,temp_month,1)+ d.timedelta(days=-1)
 
-year=int(input("請輸入要查詢的西元年："))
-month=int(input("請輸入要查詢的月份1-12："))
+year=2023
+month=12
 print("你要查詢的月份的最後一天是西元",check(year,month))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\math.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\math.py
 
 import math as m #以別名取代
 print("sqrt(16)= ",m.sqrt(16)) #平方根
@@ -1169,8 +433,6 @@ print("fmod(16,5)= ",m.fmod(16,5)) # 16%5
 print("floor(3.14)= ",m.floor(3.14)) # 3
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\my_module.py
 
 '''
     函數功能：計算獎金的百分比
@@ -1188,8 +450,9 @@ def payment():
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\os.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\os.py
 
+""" os 模組
 import os
 directory=os.getcwd()
 
@@ -1205,10 +468,11 @@ print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
 os.rmdir(directory+"/doc")
 directory_listdir=os.listdir( directory )
 print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\random.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\random.py
 
 import random as r
 
@@ -1226,7 +490,7 @@ print( r.sample('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 12))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\range1.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\range1.py
 
 import random as r #以別名方式匯入random模組
 for i in range(10): #執行10次
@@ -1234,7 +498,7 @@ for i in range(10): #執行10次
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\range2.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\range2.py
 
 import random as r #以別名方式匯入random模組
 for i in range(10): #執行10次
@@ -1242,7 +506,7 @@ for i in range(10): #執行10次
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\rint.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\rint.py
 
 import random as r #為random模組取別名
 for j in range(6): #以迴圈執行6次
@@ -1253,24 +517,24 @@ for j in range(3): #以迴圈執行3次
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\test_argv.py
-
 import sys
 
 print("sys.argv:{}".format(sys.argv))
 print("文件名稱{}".format(sys.argv[0]))
 length = len(sys.argv)
- 
+
+""" 
 if len(sys.argv) < 2:
     sys.exit(0)
 
 for i in range(1,length):
      n1 = sys.argv[i]
      print( "第{}個引數是{}".format(i,n1))
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\time.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\time.py
 
 import time as t
 
@@ -1301,7 +565,7 @@ print("程式執行到目前的時間是"+str(t.perf_counter()))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\time_fun.py
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch08\time_fun.py
 
 import datetime
 print(datetime.time.min)
@@ -1313,25 +577,571 @@ print(datetime.time(18,25,33, 32154).microsecond)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\輕鬆學會運算思維與Python程式設計\ch08\use_my_module.py
+def fib(n):	# 定義函數fib()
+    if n==0 :
+        return 0 # 如果n=0 則傳回 0
+    elif n==1 or n==2:
+        return 1
+    else:   # 否則傳回 fib(n-1)+fib(n-2)
+        return (fib(n-1)+fib(n-2))
 
-import my_module #匯入自己建立的模組
-e1 ,e2 = my_module.payment()  #呼叫自訂模組內的函數
-print("總銷售業績{},應付獎金：{}".format(e1, e2))
+print('輸入所要計算第幾個費式數列:')
+n=10
+for i in range(n+1):# 計算前n個費氏數列
+    print('fib(%d)=%d' %(i,fib(i)))
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch10\mouse.py
+
+#老鼠走迷宮
+class Node:
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+        self.next=None
+
+class Mouse:
+    def __init__(self):
+        self.first=None
+        self.last=None
+        
+    def empty(self):
+            return self.first==None
+
+    def add(self,x,y):
+        newNode=Node(x,y)
+        if self.first==None:
+            self.first=newNode
+            self.last=newNode
+        else:
+            self.last.next=newNode
+            self.last=newNode
+        
+    def remove(self):
+        if self.first==None:
+            print('[佇列已經空了]')
+            return
+        newNode=self.first
+        while newNode.next!=self.last:
+            newNode=newNode.next
+        newNode.next=self.last.next
+        self.last=newNode
+        
+ExitX= 8	#出口的X座標
+ExitY= 10	#出口的Y座標
+#宣告迷宮陣列
+arr= [[1,1,1,1,1,1,1,1,1,1,1,1], \
+       [1,0,0,0,1,1,1,1,1,1,1,1], \
+       [1,1,1,0,1,1,0,0,0,0,1,1], \
+       [1,1,1,0,1,1,0,1,1,0,1,1], \
+       [1,1,1,0,0,0,0,1,1,0,1,1], \
+       [1,1,1,0,1,1,0,1,1,0,1,1], \
+       [1,1,1,0,1,1,0,1,1,0,1,1], \
+       [1,1,1,1,1,1,0,1,1,0,1,1], \
+       [1,1,0,0,0,0,0,0,1,0,0,1], \
+       [1,1,1,1,1,1,1,1,1,1,1,1]]
+
+def find(x,y,ex,ey):
+    if x==ex and y==ey:     
+        if(arr[x-1][y]==1 or arr[x+1][y]==1 or arr[x][y-1] ==1 or arr[x][y+1]==2):
+            return 1
+        if(arr[x-1][y]==1 or arr[x+1][y]==1 or arr[x][y-1] ==2 or arr[x][y+1]==1):
+            return 1
+        if(arr[x-1][y]==1 or arr[x+1][y]==2 or arr[x][y-1] ==1 or arr[x][y+1]==1):
+            return 1
+        if(arr[x-1][y]==2 or arr[x+1][y]==1 or arr[x][y-1] ==1 or arr[x][y+1]==1):
+            return 1
+    return 0
+
+#主程式
+
+
+path=Mouse()
+x=1	
+y=1
+
+print('[迷宮的路徑(0的部分)]')
+for i in range(10):
+    for j in range(12):
+        print(arr[i][j],end='')
+    print()
+while x<=ExitX and y<=ExitY:
+    arr[x][y]=2
+    if arr[x-1][y]==0:
+        x -= 1
+        path.add(x,y)
+    elif arr[x+1][y]==0:
+        x+=1
+        path.add(x,y)
+    elif arr[x][y-1]==0:
+        y-=1
+        path.add(x,y)
+    elif arr[x][y+1]==0:
+        y+=1
+        path.add(x,y)
+    elif find(x,y,ExitX,ExitY)==1:
+        break
+    else:
+        arr[x][y]=2
+        path.remove()
+        x=path.last.x
+        y=path.last.y
+print('[老鼠走過的路徑(2的部分)]')
+for i in range(10):
+    for j in range(12):
+        print(arr[i][j],end='')
+    print()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch10\quick.py
+
+import random
+
+def inputarr(data,size):
+    for i in range(size):
+        data[i]=random.randint(1,100)
+        
+def showdata(data,size):
+    for i in range(size):
+        print('%3d' %data[i],end='')
+    print()
+
+def quick(d,size,lf,rg):
+    #第一筆鍵值為d[lf]
+    if lf<rg:  #排序資料的左邊與右邊
+        lf_idx=lf+1
+        while d[lf_idx]<d[lf]:
+            if lf_idx+1 >size:
+                break
+            lf_idx +=1
+        rg_idx=rg
+        while d[rg_idx] >d[lf]:
+            rg_idx -=1
+        while lf_idx<rg_idx:
+            d[lf_idx],d[rg_idx]=d[rg_idx],d[lf_idx]
+            lf_idx +=1
+            while d[lf_idx]<d[lf]:
+                lf_idx +=1
+            rg_idx -=1
+            while d[rg_idx] >d[lf]:
+                rg_idx -=1
+        d[lf],d[rg_idx]=d[rg_idx],d[lf]
+
+        for i in range(size):
+            print('%3d' %d[i],end='')
+        print()
+       
+        quick(d,size,lf,rg_idx-1)   #以rg_idx為基準點分成左右兩半以遞迴方式
+        quick(d,size,rg_idx+1,rg)   #分別為左右兩半進行排序直至完成排序               
+		
+def main():
+    data=[0]*100
+    size=10
+    inputarr (data,size)
+    print('您輸入的原始資料是：')
+    showdata (data,size)
+    print('排序過程如下：')
+    quick(data,size,0,size-1)
+    print('最終排序結果：')
+    showdata(data,size)
+
+main()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 50
+data=[0] * N
+
+print(type(data))
+print(len(data))
+
+for i in range(len(data)):
+    data[i]=i
+
+print("------------------------------------------------------------")  # 60個
+
+class Book:
+    #定義方法一：取得書籍名稱和價格
+    def setInfo(self, title, price):
+        self.title = title
+        self.price = price
+    #定義方法二：輸出書籍名稱和價格
+    def showInfo(self):
+        print('書籍名稱:{0:6s}, 價格:{1:4s}元'.format(
+            self.title, self.price))
+# 產生物件
+book1=Book()#物件1
+book1.setInfo('Python一週速成', '360')
+book1.showInfo() #呼叫方法
+book2=Book()#物件2
+book2.setInfo('網路行銷與社群行銷', '520')
+book2.showInfo()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\brother.py
+
+class Tom():#父類別
+    def __init__(self):
+        self.height1=178
+
+class Andy(Tom):#父類別是Tom
+    def __init__(self):
+        self.height2=180
+        super().__init__()
+
+class Michael(Tom):#父類別是Tom
+    def __init__(self):
+        self.height3=185
+        super().__init__()
+    def display(self):
+        print('父親Tom的身高:', self.height1,'公分')
+        print('兄弟Andy的身高:', Andy().height2,'公分')
+        print('自己Michael的身高:', m1.height3,'公分')
+
+m1=Michael()
+m1.display()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\class.py
+
+class Book:
+    #定義方法一：取得書籍名稱和價格
+    def setData(self, title, price):
+        self.title = title
+        self.price = price
+    #定義方法二：輸出書籍名稱和價格
+    def showData(self):
+        print('書籍名稱:{0:6s}, 價格:{1:4s}'.format(
+            self.title, self.price))
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\company.py
+
+#此程式單純類別定義,沒有任何輸出到螢幕的執行結果
+class Company: #定義公司類別
+    name='賺大錢有限公司'
+    def slogan(self):
+        print('優良品質 創新研發 強力行銷')
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\datatype.py
+
+class Date:
+    def setDate(self,birthday): #第一種方法
+        self.birthday =birthday
+    def showDate(self): #第二種方法
+        print("出生年月日:",self.birthday)
+d1 = Date()#第一個物件
+d1.setDate("民國67年7月3日")#呼叫方法時傳入字串
+d1.showDate()
+d2 = Date()#第二個物件
+d2.setDate([67,7,3])#呼叫方法時傳入串列
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\init1.py
+
+class Wage:
+	def __init__(self, fee=200, hour=80):
+		self.fee=fee
+		self.hour=hour
+
+	def getArea(self):
+		return self.fee* self.hour
+
+tom=Wage()
+print("透過init()方法預設值的總薪資: ",tom.getArea(),"元")
+
+jane= Wage(250,100)
+print("透過init()方法傳入參數的總薪資: ",jane.getArea(),"元")
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\isinstance.py
+
+class Animal: #祖父類別
+    def feature1(self):
+        print('大多數動物能自發且獨立地移動')
+        
+class Human(Animal): #父類別一
+    def feature2(self):
+        print('人類是一種有思考能力與情感的高級動物')
+        
+class Fish(Animal): #父類別二
+    def feature3(self):
+        print('水生脊椎動物的總稱')
+
+class Mermaid(Human, Fish): #子類別同時繼承兩種類別
+    def feature4(self):
+        print('又稱人魚,傳說中的生物同時具備人及魚的部份特性')
+
+#產生子類別實體
+tiger = Animal()
+daniel= Human()
+goldfish=Fish()
+alice = Mermaid()
+print("tiger是屬於Animal類別:",isinstance(tiger,Animal))
+print("daniel是屬於Animal類別:",isinstance(daniel,Animal))
+print("goldfish是屬於Animal類別:",isinstance(goldfish,Animal))
+print("alice是屬於Animal類別:",isinstance(alice,Animal))
+print("===============================================")
+print("tiger是屬於Human類別:",isinstance(tiger,Human))
+print("daniel是屬於Human類別:",isinstance(daniel,Human))
+print("goldfish是屬於Human類別:",isinstance(goldfish,Human))
+print("alice是屬於Human類別:",isinstance(alice,Human))
+print("===============================================")
+print("tiger是屬於Fish類別:",isinstance(tiger,Fish))
+print("daniel是屬於Fish類別:",isinstance(daniel,Fish))
+print("goldfish是屬於Fish類別:",isinstance(goldfish,Fish))
+print("alice是屬於Fish類別:",isinstance(alice,Fish))
+print("===============================================")
+print("tiger是屬於Mermaid類別:",isinstance(tiger,Mermaid))
+print("daniel是屬於Mermaid類別:",isinstance(daniel,Mermaid))
+print("goldfish是屬於Mermaid類別:",isinstance(goldfish,Mermaid))
+print("alice是屬於Mermaid類別:",isinstance(alice,Mermaid))
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\issubclass.py
+
+class Animal: #祖父類別
+    def feature1(self):
+        print('大多數動物能自發且獨立地移動')
+        
+class Human(Animal): #父類別一
+    def feature2(self):
+        print('人類是一種有思考能力與情感的高級動物')
+        
+class Fish(Animal): #父類別二
+    def feature3(self):
+        print('水生脊椎動物的總稱')
+
+class Mermaid(Human, Fish): #子類別同時繼承兩種類別
+    def feature4(self):
+        print('又稱人魚,傳說中的生物同時具備人及魚的部份特性')
+
+print("Mermaid是屬於Fish子類別:",issubclass(Mermaid,Fish))
+print("Mermaid是屬於Human子類別:",issubclass(Mermaid,Human))
+print("Mermaid是屬於Animal子類別:",issubclass(Mermaid,Animal))
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\multiple1.py
+
+#多重繼承範例1
+
+class Animal: #祖父類別
+    def feature1(self):
+        print('大多數動物能自發且獨立地移動')
+        
+class Human(Animal): #父類別一
+    def feature2(self):
+        print('人類是一種有思考能力與情感的高級動物')
+        
+class Fish(Animal): #父類別二
+    def feature2(self):
+        print('水生脊椎動物的總稱')
+
+class Mermaid(Human, Fish): #子類別同時繼承兩種類別
+    def feature3(self):
+        print('又稱人魚,傳說中的生物同時具備人及魚的部份特性')
+
+#產生子類別實體
+alice = Mermaid()
+alice.feature1()
+alice.feature2()
+alice.feature3()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\multiple2.py
+
+#多重繼承範例2
+
+class Animal: #祖父類別
+    def feature1(self):
+        print('大多數動物能自發且獨立地移動')
+        
+class Human(Animal): #父類別一
+    def feature2(self):
+        print('人類是一種有思考能力與情感的高級動物')
+        
+class Fish(Animal): #父類別二
+    def feature3(self):
+        print('水生脊椎動物的總稱')
+
+class Mermaid(Human, Fish): #子類別同時繼承兩種類別
+    def feature4(self):
+        print('又稱人魚,傳說中的生物同時具備人及魚的部份特性')
+
+#產生子類別實體
+alice = Mermaid()
+alice.feature1()
+alice.feature2()
+alice.feature3()
+alice.feature4()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\override.py
+
+#子類別覆寫父類別的方法
+class Normal(): #父類別
+    def subsidy(self, income):
+        self.money = income
+        if self.money >= 500000:
+            print('小康家庭補助金額：', end = ' ')
+            return 5000
+        
+class Poor(Normal): #子類別
+    def subsidy(self, income): #覆寫subsidy方法
+        self.money = income
+        if self.money < 300000:
+            print('中低收入家庭補助金額：', end = ' ')
+            return 10000
+
+student1 = Normal()#建立父類別物件
+print(student1.subsidy(780000),'元')
+
+student2 = Poor()#建立子類別物件
+print(student2.subsidy(250000),'元')
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\polymorphism.py
+
+#多型實作
+class Colleague(): #父類別
+    def __init__(self, name, income):
+        self.name = name
+        self.income = income
+
+    def bonus(self):
+        return self.income
+    
+    def title(self):
+        return self.name
+    
+class Manager(Colleague):#子類別
+    def bonus(self):        
+        return self.income * 1.5
+    
+class Director(Colleague): #子類別
+    def bonus(self):
+        return self.income * 1.2
+print('===============================')
+obj1 = Colleague('一般性員工', 50000) #父類別物件
+print('{:8s} 紅利 {:,}'.format(obj1.title(), obj1.bonus()))
+
+print('===============================')
+obj2 = Manager('經理級年終', 80000) #子類別物件
+print('{:8s} 紅利 {:,}'.format(obj2.title(), obj2.bonus()))
+
+print('===============================')
+obj3 = Director('芏任級年終', 65000) #子類別物件
+print('{:8s} 紅利 {:,}'.format(obj3.title(), obj3.bonus()))
+print('===============================')
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\private.py
+
+class Wage:
+	def __init__(self, h=80):
+		self.__hour=h
+
+	def getHour(self):
+		return self.__hour
+
+	def pay(self):
+		return hour_fee*self.__hour
+hour_fee=200
+obj1=Wage(100)
+print("每小時基本工資為:",hour_fee,"元")
+print("總共工作的小時數:", obj1.getHour())
+print("要付給這位工讀生的薪水總額:", obj1.pay(),"元")
+
+print("------------------------------------------------------------")  # 60個
+
+class MobilePhone: #基礎類別
+    def touch(self):
+        print('我能提供螢幕觸控操作的功能')
+        
+class HTC(MobilePhone): #衍生類別
+    pass
+
+#產生子類別實體
+u11 = HTC()
+u11.touch()
+
+print("------------------------------------------------------------")  # 60個
+
+class MobilePhone: #基礎類別
+    def touch(self):
+        print('我能提供螢幕觸控操作的功能')
+        
+class HTC(MobilePhone): #衍生類別
+    def touch(self):
+        MobilePhone.touch(self)
+        print('我也能提供多點觸控的操作方式')
+
+#產生子類別實體
+u11 = HTC()
+u11.touch()
+
+print("------------------------------------------------------------")  # 60個
+
+#在子類別呼叫父類別方法—使用super()函式
+
+class Weekday(): #父類別
+    def display(self, pay):
+        self.price=pay
+        print('歡迎來購物')
+        print('購買總金額{:,}'.format(self.price))
+        
+class Holiday(Weekday): #子類別
+    def display(self, pay): #覆寫display方法        
+        super().display(pay)
+        if self.price >= 15000:            
+            self.price *= 0.8
+        else:
+            self.price        
+        print('8折 {:,}'.format(self.price))
+        
+monday = Weekday()#父類別物件
+monday.display(25000)
+
+Christmas = Holiday()#子類別物件
+Christmas.display(18000)
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\徹底研究-最新Python程式設計實例\ch11\super2.py
+
+#__init__()方法呼叫super()
+
+class Animal():#父類別
+    def __init__(self):
+        print('我屬於動物類別')
+        
+class Human(Animal): #子類別
+    def __init__(self, name):
+        super().__init__()
+        print('我也屬於人類類別')
+
+man = Human('黃種人')#子類別實體
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
+a,b,c=3,5,7;     #宣告a、b及c三個整數變數
+print("a= %d b= %d c= %d" %(a,b,c))
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
