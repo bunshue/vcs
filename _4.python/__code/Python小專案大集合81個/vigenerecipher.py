@@ -5,11 +5,6 @@ More info at: https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher
 This code is available at https://nostarch.com/big-book-small-python-programming
 Tags: short, cryptography, math"""
 
-try:
-    import pyperclip  # pyperclip copies text to the clipboard.
-except ImportError:
-    pass  # If pyperclip is not installed, do nothing. It's no big deal.
-
 # Every possible symbol that can be encrypted/decrypted:
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -53,22 +48,13 @@ powerful enough to remain unbroken for centuries.''')
     print('%sed message:' % (myMode.title()))
     print(translated)
 
-    try:
-        pyperclip.copy(translated)
-        print('Full %sed text copied to clipboard.' % (myMode))
-    except:
-        pass  # Do nothing if pyperclip wasn't installed.
-
-
 def encryptMessage(message, key):
     """Encrypt the message using the key."""
     return translateMessage(message, key, 'encrypt')
 
-
 def decryptMessage(message, key):
     """Decrypt the message using the key."""
     return translateMessage(message, key, 'decrypt')
-
 
 def translateMessage(message, key, mode):
     """Encrypt or decrypt the message using the key."""

@@ -1,0 +1,155 @@
+import os
+import sys
+import numpy as np
+import pandas as pd
+
+loanfile=os.listdir()
+createVar=locals()
+for i in loanfile:
+    print(i)
+    if i.endswith("csv"):
+        createVar[i.split('.')[0]]=pd.read_csv(i,encoding='gbk')
+        print(i.split('.')[0])
+
+print("------------------------------------------------------------")  # 60個
+#创建被解释变量：
+
+bad_good={'B':1, 'D':1, 'A':0, 'C': 2}
+loans['bad_good']=loans.status.map(bad_good)
+loans.head()
+
+
+#表征信息：
+data2=pd.merge(loans,disp,on='account_id',how='left')
+data2=pd.merge(data2,clients,on='client_id',how='left')
+data2=data2[data2.type=='所有者']
+data2.head()
+# ## 1.4、借款人居住地的经济状况
+
+#状态信息：
+data3 = pd.merge(data2, district, left_on = 'district_id', right_on = 'A1', how = 'left')
+data3.head()
+
+#行为信息：
+data_4temp1=pd.merge(loans[['account_id','date']],trans[['account_id','type','amount','balance','date']],on='account_id')
+data_4temp1.columns=['account_id','date','type','amount','balance','t_date']
+data_4temp1=data_4temp1.sort_values(by=['account_id','t_date'])
+data_4temp1['date']=pd.to_datetime(data_4temp1['date'])
+data_4temp1['t_date']=pd.to_datetime(data_4temp1['t_date'])
+data_4temp1['balance2']=data_4temp1['balance'].map(lambda x:int(''.join(x[1:].split(','))))
+data_4temp1['amount2']=data_4temp1['amount'].map(lambda x:int(''.join(x[1:].split(','))))
+
+import datetime
+data_4temp2=data_4temp1[data_4temp1.date>data_4temp1.t_date][data_4temp1.date<data_4temp1.t_date+datetime.timedelta(days=365)]
+data_4temp2.head()
+
+data_4temp3=data_4temp2.groupby('account_id')['balance2'].agg([('avg_balance','mean'),('stdev_balance','std')])
+data_4temp3['cv_balance']=data_4temp3[['avg_balance','stdev_balance']].apply(lambda x:x[1]/x[0],axis=1)
+
+data_4temp3.head()
+
+# ### 1.5.2 平均支出和平均收入的比例
+
+type_dict={'借':'out','贷':'income'}
+data_4temp2['type1']=data_4temp2.type.map(type_dict)
+data_4temp4=data_4temp2.groupby(['account_id','type1'])[['amount2']].sum()
+data_4temp4.head(2)
+
+
+data_4temp5=pd.pivot_table(data_4temp4,values='amount2',index='account_id',columns='type1')
+data_4temp5.fillna(0,inplace=True)
+data_4temp5['r_out_in']=data_4temp5[['out','income']].apply(lambda x:x[0]/x[1],axis=1)
+data_4temp5.head(2)
+
+
+data4=pd.merge(data3,data_4temp3,left_on='account_id',right_index=True,how='left')
+data4=pd.merge(data4,data_4temp5,left_on='account_id',right_index=True,how='left')
+
+data4.head()
+
+# ## 1.6、计算贷存比，贷收比
+
+data4['r_lb']=data4[['amount','avg_balance']].apply(lambda x:x[0]/x[1],axis=1)
+data4['r_lincome']=data4[['amount','income']].apply(lambda x:x[0]/x[1],axis=1)
+
+data4.head()
+
+
+#建立分析模型：
+#样本随机抽样，建立训练集与测试集：
+
+data_model=data4[data4.status!='C']
+for_predict=data4[data4.status=='C']
+train=data_model.sample(frac=0.7,random_state=1235).copy()
+test=data_model[~data_model.index.isin(train.index)].copy()
+print('训练集样本量：%i\n测试集样本量：%i'%(len(train),len(test)))
+
+#训练集样本量：195
+#测试集样本量：84
+
+#向前逐步法
+
+import statsmodels.formula.api as smf
+import statsmodels.api as sm
+def forward_select(data, response):
+    import statsmodels.api as sm
+    import statsmodels.formula.api as smf
+    remaining = set(data.columns)
+    remaining.remove(response)
+    selected = []
+    current_score, best_new_score = float('inf'), float('inf')
+    while remaining:
+        aic_with_candidates=[]
+        for candidate in remaining:
+            formula = "{} ~ {}".format(
+                response,' + '.join(selected + [candidate]))
+            aic = smf.glm(
+                formula=formula, data=data, 
+                family=sm.families.Binomial(sm.families.links.logit)
+            ).fit().aic
+            aic_with_candidates.append((aic, candidate))
+        aic_with_candidates.sort(reverse=True)
+        best_new_score, best_candidate=aic_with_candidates.pop()
+        if current_score > best_new_score: 
+            remaining.remove(best_candidate)
+            selected.append(best_candidate)
+            current_score = best_new_score
+            print ('aic is {},continuing!'.format(current_score))
+        else:        
+            print ('forward selection over!')
+            break
+            
+    formula = "{} ~ {} ".format(response,' + '.join(selected))
+    print('final formula is {}'.format(formula))
+    model = smf.glm(
+        formula=formula, data=data, 
+        family=sm.families.Binomial(sm.families.links.logit)
+    ).fit()
+    return(model)
+
+#采用向前逐步法进行逻辑回归建模：
+
+candidates=['bad_good','A1','GDP','A4','A10','A11','A12','amount','duration','A13','A14','A15','a16','avg_balance','stdev_balance','cv_balance','income','out','r_out_in','r_lb','r_lincome']
+data_for_select=train[candidates]
+lg_m1=forward_select(data=data_for_select,response='bad_good')
+lg_m1.summary().tables[1]
+
+#模型效果评估：
+
+import sklearn.metrics as metrics
+import matplotlib.pyplot as plt
+fpr, tpr, th = metrics.roc_curve(test.bad_good, lg_m1.predict(test))
+plt.figure(figsize=[6, 6])
+plt.plot(fpr, tpr, 'b--')
+plt.title('ROC curve')
+plt.show()
+
+print('AUC = %.4f' %metrics.auc(fpr, tpr))
+
+#AUC = 0.8846
+
+#模型应用---预测：
+
+for_predict['prob']=lg_m1.predict(for_predict)
+for_predict[['account_id','prob']].head()
+

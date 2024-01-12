@@ -1,10 +1,5 @@
 import random
 
-try:
-    import pyperclip  # pyperclip copies text to the clipboard.
-except ImportError:
-    pass  # If pyperclip is not installed, do nothing. It's no big deal.
-
 def main():
     print('''L3375P34]< (leetspeek)
 By Al Sweigart al@inventwithpython.com
@@ -14,15 +9,6 @@ Enter your leet message:''')
     print()
     leetspeak = englishToLeetspeak(english)
     print(leetspeak)
-
-    try:
-        # Trying to use pyperclip will raise a NameError exception if
-        # it wasn't imported:
-        pyperclip.copy(leetspeak)
-        print('(Copied leetspeak to clipboard.)')
-    except NameError:
-        pass  # Do nothing if pyperclip wasn't installed.
-
 
 def englishToLeetspeak(message):
     """Convert the English string in message and return leetspeak."""

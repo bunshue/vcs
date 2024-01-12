@@ -5,11 +5,6 @@ More info at: https://en.wikipedia.org/wiki/Caesar_cipher
 View this code at https://nostarch.com/big-book-small-python-projects
 Tags: short, beginner, cryptography, math"""
 
-try:
-    import pyperclip  # pyperclip copies text to the clipboard.
-except ImportError:
-    pass  # If pyperclip is not installed, do nothing. It's no big deal.
-
 # Every possible symbol that can be encrypted/decrypted:
 # (!) You can add numbers and punctuation marks to encrypt those
 # symbols as well.
@@ -80,9 +75,3 @@ for symbol in message:
 
 # Display the encrypted/decrypted string to the screen:
 print(translated)
-
-try:
-    pyperclip.copy(translated)
-    print('Full {}ed text copied to clipboard.'.format(mode))
-except:
-    pass  # Do nothing if pyperclip wasn't installed.

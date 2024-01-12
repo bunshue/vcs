@@ -1,8 +1,3 @@
-try:
-    import pyperclip  # pyperclip copies text to the clipboard.
-except ImportError:
-    pass  # If pyperclip is not installed, do nothing. It's no big deal.
-
 # Set up the constants:
 UPPER_LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 LOWER_LETTERS = 'abcdefghijklmnopqrstuvwxyz'
@@ -36,10 +31,3 @@ while True:  # Main program loop.
     print('The translated message is:')
     print(translated)
     print()
-
-    try:
-        # Copy the translation to the clipboard:
-        pyperclip.copy(translated)
-        print('(Copied to clipboard.)')
-    except:
-        pass

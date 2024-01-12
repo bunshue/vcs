@@ -32,15 +32,14 @@ print('------------------------------------------------------------')	#60個
 import warnings
 warnings.warn('Use importlib.util.find_spec() instead.', DeprecationWarning, stacklevel = 1)
 
-print('建立一組密碼 並將此密碼拷貝至剪貼簿')
+print('建立一組密碼')
 import random
-import pyperclip
+
 chars = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()'
 password = ''
 for c in range(20):
    password += random.choice(chars)
-print('建立一組密碼:\t%r, 並已拷貝至剪貼簿' %(password))
-pyperclip.copy(password)
+print('建立一組密碼:\t%r' %(password))
 
 print('------------------------------------------------------------')	#60個
 
