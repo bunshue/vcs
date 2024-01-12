@@ -13,6 +13,14 @@ from PIL import Image
 
 print('------------------------------------------------------------')	#60個
 
+font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
+font_filename = r"C:\Windows\Fonts\msjh.ttc"
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+
+print('------------------------------------------------------------')	#60個
+
+
+'''
 #繪製英文的文字雲
 
 # 原始文章
@@ -43,7 +51,7 @@ text_tw = """ 梅洛絲氣急敗壞。 他決定一定要除掉那個邪惡、�
 
 wc = wordcloud.WordCloud(width = 1000, height = 600,
                          background_color = "white",
-                         font_path = r"C:\Windows\Fonts\msjh.ttc") 
+                         font_path = font_filename) 
 #wc.generate(text_jp) 
 wc.generate(text_tw) 
 plt.imshow(wc) 
@@ -102,7 +110,7 @@ token = tk.tokenize(text, wakati = True)
 # 利用wordcloud函式庫將分割完畢的文字資訊畫成文字雲
 wc = wordcloud.WordCloud(width = 1000, height = 600,
                          background_color = "white",
-                         font_path = r"C:\Windows\Fonts\msjh.ttc")
+                         font_path = font_filename)
 wc.generate(" ".join(token)) 
 plt.imshow(wc) 
 plt.axis("off")
@@ -123,7 +131,7 @@ for token in tk.tokenize(text):
 # 要讓只有一個字的單字出現必須設定regexp
 wc = wordcloud.WordCloud(width = 1000, height = 600,
                          background_color = "white",
-                         font_path = r"C:\Windows\Fonts\msjh.ttc",
+                         font_path = font_filename,
                          regexp = "[\w']+") 
 wc.generate(" ".join(meishi_list)) 
 plt.imshow(wc) 
@@ -142,13 +150,14 @@ Love in its various forms acts as a major facilitator of interpersonal relations
 Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
 
 mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
+
 # 載入遮罩圖片
 mask_image = np.array(Image.open(mask_filename))
 
 # 產生以圖片作為遮罩的文字雲
 wc = wordcloud.WordCloud(width = 700, height = 700,
                          background_color = "white",
-                         font_path = r"C:\Windows\Fonts\msjh.ttc",
+                         font_path = font_filename,
                          mask = mask_image,
                          contour_width = 6,
                          contour_color = "pink",
@@ -221,7 +230,7 @@ mask_image = np.array(Image.open(mask_filename))
 
 wc = wordcloud.WordCloud(width = 1000, height = 860,
                          background_color = "white",
-                         font_path = r"C:\Windows\Fonts\msjh.ttc",
+                         font_path = font_filename,
                          margin = 2,
                          mask = mask_image)
 wc.generate(cloud_text)
@@ -240,7 +249,7 @@ import sqlite3
 from wordcloud import WordCloud
 from PIL import Image
 
-dbfile = "applenews.db"
+dbfile = "data/applenews.db"
 conn = sqlite3.connect(dbfile)
 
 sql_str = "select * from news;"
@@ -255,7 +264,7 @@ mask_image = np.array(Image.open(mask_filename))
 
 wordcloud = WordCloud(background_color = "white",
                       width = 1000, height = 860,
-                      font_path = r"C:\Windows\Fonts\msjh.ttc",
+                      font_path = font_filename,
                       margin = 2,
                       mask = mask_image).generate(all_news)
 plt.figure(figsize = (10,10))
@@ -277,7 +286,7 @@ from PIL import Image
 import jieba
 from collections import Counter
 
-dbfile = "applenews.db"
+dbfile = "data/applenews.db"
 conn = sqlite3.connect(dbfile)
 
 sql_str = "select * from news;"
@@ -298,7 +307,7 @@ mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg'
 mask_image = np.array(Image.open(mask_filename))
 wordcloud = WordCloud(background_color = "white",
                       width = 1000, height = 860,
-                      font_path = r"C:\Windows\Fonts\msjh.ttc",
+                      font_path = font_filename,
                       margin = 2,
                       mask = mask_image).generate(text)
 plt.figure(figsize = (10,10))
@@ -326,8 +335,6 @@ import time
 import random
 
 import matplotlib.pyplot as plt
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 """
 print('------------------------------------------------------------')	#60個
@@ -520,6 +527,7 @@ with open(filename) as fp:            # 含中文的文字檔
 cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
+
 bgimage = np.array(Image.open(filename))  # 背景圖
 
 wc = WordCloud(                             # 建立詞雲物件
@@ -531,7 +539,7 @@ plt.imshow(wc)
 plt.axis("off")                             # 關閉顯示軸線
 plt.show()
 #wc.to_file("wc10.png")               # 檔案儲存
-
+'''
 print('------------------------------------------------------------')	#60個
 
 
@@ -541,15 +549,44 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+print('wordcloud：文字雲')
 
+
+#from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+import jieba
+from collections import Counter
+from PIL import Image
+import numpy as np
+import requests
+cloud_text = open('data/travel.txt', "r",encoding="utf-8").read()
+jieba.set_dictionary('data/dict.txt.big.txt')
+with open('data/stopWord_cloud.txt', 'r', encoding='utf-8-sig') as f:
+#with open('data/stopWord_cloudmod.txt', 'r', encoding='utf-8-sig') as f:
+    stops = f.read().split('\n')   
+terms = []
+for t in jieba.cut(cloud_text, cut_all=False):
+    if t not in stops:
+        terms.append(t)
+diction = Counter(terms)
+
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         background_color = "white",
+                         font_path = font_filename)
+
+#mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
+#mask = np.array(Image.open(mask_filename)) 
+#wc = WordCloud(background_color="white",mask=mask,font_path = font_filename)
+#wc.generate_from_frequencies(frequencies=diction)
+wc.generate(cloud_text)
+
+plt.figure(figsize=(10, 10))
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+wc.to_file("tmp_bookCloud.png")
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
-
+print('作業完成')
+print('------------------------------------------------------------')	#60個
 

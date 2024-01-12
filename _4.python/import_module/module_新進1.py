@@ -646,5 +646,12 @@ print(locale.getpreferredencoding())
 print('------------------------------------------------------------')	#60個
 
 
+print("將檔案移到資源回收筒")
+
+import send2trash
+filename = "picture1cccc.jpg"
+send2trash.send2trash(filename)  
+
+
 print('------------------------------------------------------------')	#60個
 

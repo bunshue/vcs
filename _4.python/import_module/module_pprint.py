@@ -30,6 +30,19 @@ pprint(config, indent=4, sort_dicts=False)
 print('------------------------------------------------------------')	#60個
 
 
+print("print與 pprint的比較")
+
+import sys
+from pprint import pprint
+
+print("使用print")
+print(sys.path)
+
+print("使用pprint")
+pprint(sys.path)
+
+
+
 
 print('------------------------------------------------------------')	#60個
 

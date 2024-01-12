@@ -8,7 +8,7 @@ print('------------------------------------------------------------')	#60個
 
 import jieba
 
-filename = "chinnews.txt"
+filename = "data/cna_news.txt"
 with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 print(data, "\n")
@@ -25,7 +25,7 @@ print('------------------------------------------------------------')	#60個
 
 import jieba
 
-filename = "chinnews.txt"
+filename = "data/cna_news.txt"
 with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.translate({ord(c):None for c in list("(),.“”（）「」，。、：；！|\n/ ")})
@@ -45,7 +45,7 @@ print('------------------------------------------------------------')	#60個
 from collections import Counter
 import jieba
 
-filename = "chinnews.txt"
+filename = "data/cna_news.txt"
 with open(filename, "r", encoding="utf-8") as f:
     data = f.read()
 data = data.translate({ord(c):None for c in list("(),.“”（）「」，。、：；！|\n/ ")})

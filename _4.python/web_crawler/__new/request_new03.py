@@ -45,7 +45,7 @@ print('中央通訊社新聞')
 
 news_title = ""
 news_content = ""
-filename = "chinnews.txt"
+filename = "cna_news.txt"
 
 #url = 'https://www.cna.com.tw/news/aopl/201901050192.aspx'
 url = 'https://www.cna.com.tw/news/ait/202308280292.aspx'   #繼探月成功後 印度又將發射太陽探測器
