@@ -7,7 +7,7 @@ invoice : 發票，發貨單
 import datetime
 from docxtpl import DocxTemplate
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_word/python_ReadWrite_WORD2_invoice_template.docx'
+filename1 = 'data/python_ReadWrite_WORD2_invoice_template.docx'
 
 doc = DocxTemplate(filename1)
 
@@ -36,6 +36,6 @@ doc.render({"name":name,
             "salestax":str(salestax*100)+"%",
             "total":total})
 
-filename2 = "new_invoice" + name + datetime.datetime.now().strftime("%Y-%m-%d-%H%M%S") + ".docx"
+filename2 = "tmp_new_invoice" + name + datetime.datetime.now().strftime("%Y-%m-%d-%H%M%S") + ".docx"
 doc.save(filename2)
 

@@ -18,4 +18,4 @@ chart.add_data(data, titles_from_data=True)
 chart.set_categories(labels)
 
 sh.add_chart(chart, "F2")
-wb.save(r"add_radar_chart.xlsx")
+wb.save(r"tmp_add_radar_chart.xlsx")

@@ -3,12 +3,18 @@
 繪製文字雲
 """
 
+print('------------------------------------------------------------')	#60個
+
 import sys
 import wordcloud
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import jieba
+import requests
+
 from janome.tokenizer import Tokenizer
+from collections import Counter
 from PIL import Image
 
 print('------------------------------------------------------------')	#60個
@@ -19,9 +25,7 @@ font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 print('------------------------------------------------------------')	#60個
 
-
-'''
-#繪製英文的文字雲
+print("英文文章做成文字雲")
 
 # 原始文章
 cloud_text = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
@@ -34,7 +38,6 @@ wc = wordcloud.WordCloud(width = 1000, height = 600,
                          background_color = "white")
 wc.generate(cloud_text)
 
-#產生圖片
 #plt.figure(figsize = (6, 6))	#圖像大小[英吋]
 plt.imshow(wc) 
 plt.axis("off")
@@ -43,9 +46,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#中日文文章的視覺化手法
+print("中日文文章做成文字雲")
 
-# 利用半形空白字元切割的中文文章
 #text_jp = """ メロスは激怒した。必ず、かの邪智暴虐じゃちぼうぎゃくの王を除かなければならぬと決意した。メロスには政治がわからぬ。メロスは、村の牧人である。笛を吹き、羊と遊んで暮して来た。けれども邪悪に対しては、人一倍に敏感であった。きょう未明メロスは村を出発し、野を越え山越え、十里はなれた此このシラクスの市にやって来た。メロスには父も、母も無い。女房も無い。十六の、内気な妹と二人暮しだ。この妹は、村の或る律気な一牧人を、近々、花婿はなむことして迎える事になっていた。結婚式も間近かなのである。メロスは、それゆえ、花嫁の衣裳やら祝宴の御馳走やらを買いに、はるばる市にやって来たのだ。先ず、その品々を買い集め、それから都の大路をぶらぶら歩いた。メロスには竹馬の友があった。セリヌンティウスである。今は此のシラクスの市で、石工をしている。その友を、これから訪ねてみるつもりなのだ。久しく逢わなかったのだから、訪ねて行くのが楽しみである。歩いているうちにメロスは、まちの様子を怪しく思った。ひっそりしている。もう既に日も落ちて、まちの暗いのは当りまえだが、けれども、なんだか、夜のせいばかりでは無く、市全体が、やけに寂しい。のんきなメロスも、だんだん不安になって来た。路で逢った若い衆をつかまえて、何かあったのか、二年まえに此の市に来たときは、夜でも皆が歌をうたって、まちは賑やかであった筈はずだが、と質問した。若い衆は、首を振って答えなかった。しばらく歩いて老爺ろうやに逢い、こんどはもっと、語勢を強くして質問した。老爺は答えなかった。メロスは両手で老爺のからだをゆすぶって質問を重ねた。老爺は、あたりをはばかる低声で、わずか答えた。"""
 text_tw = """ 梅洛絲氣急敗壞。 他決定一定要除掉那個邪惡、暴虐的國王。 梅羅斯不懂政治。 他是一個村裡的牧民。 他吹過笛子，和羊群生活過。 但他對邪惡比任何人都敏感。 而在今天黎明前，梅洛斯就離開了他的村莊，翻過田野，越過山巒，來到了十里外的錫拉庫扎城。 他沒有父親，沒有母親，也沒有妻子。 他沒有妻子。 他和靦腆的十六歲的妹妹住在一起。 妹妹要從村裡接來一個新郎，是個守規矩的牧民，很快就要結婚了。 婚禮就在眼前。 他大老遠跑來，就是為了買新娘的衣服和宴席。 他先買了貨，然後在京城的主要街道上逛了一圈。 梅羅斯有一個高蹺的朋友。 他就是塞利南提斯。 他現在是雪城這座城市的石匠。 我要去拜訪這位朋友。 好久不見，我很期待去看他。 在城市裡走來走去，梅羅斯對城市的面貌產生了懷疑。 這裡很安靜，也很荒涼。 太陽已經落山了，城市黑漆漆的可以理解，但這不僅僅是因為夜色，整個城市顯得十分寂寞。 無憂無慮的梅洛斯開始感到不安。 他抓住一個在街上遇到的年輕人，問他是不是發生了什麼事，因為兩年前他來這裡的時候，大家都在唱歌，即使到了晚上，這個城市也很熱鬧。 年輕人搖搖頭，沒有回答。 他走了一會兒，遇到老人，就問了他一個問題，這次的話更加有力。 老人沒有回答。 梅羅斯用手搖晃著老人的身體，問他更多的問題。 老人用難以捉摸的低沉聲音回答。"""
 
@@ -61,7 +63,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#文章拆寫範例
+print("文章拆寫範例")
+
 # 中文的文章
 text = """梅洛絲很是氣憤。 他決心要除掉這個邪惡暴虐的國王。 梅羅斯不懂政治。 梅羅斯是村裡的牧民。 他一生都在吹笛子，和羊群玩耍。 但他對邪惡比大多數人更敏感。 今天黎明時分，梅羅斯離開了自己的村莊，穿過田野和山林，來到了十里外的這座錫拉庫扎城。 他沒有父親，沒有母親，沒有妻子。 他沒有妻子。 他和年僅16歲的羞澀妹妹單獨生活。 妹妹要接受村裡某位守法的牧民作為她的新郎。 婚禮即將舉行。 因此，梅洛絲大老遠地來到集市上買新娘的衣服和宴席。 先是買了這些東西，然後他就在城市的大街小巷裡轉悠。 梅洛斯有一個高蹺的朋友。 他就是塞利農提斯。 他現在是錫拉庫扎市的一名石匠。 他要去看望他的朋友。 很久沒有見到他了，所以我很期待去看他。 走著走著，梅洛斯對這個小鎮產生了懷疑。 它是如此的安靜。 太陽已經落山了，城市自然是一片漆黑，但這不僅僅是因為夜晚，整個城市顯得十分寂寞。 就連無憂無慮的梅洛斯也開始感到不安。 他抓住一個在街上遇到的年輕人，問他是不是出了什麼事，他說："兩年前我來這個市場的時候，大家連晚上都在唱歌，鎮上一定很熱鬧。 年輕人搖搖頭，沒有回答。 走了一會兒，遇到老人，他用比較強硬的語氣問了他一個問題。 老人沒有回答。 梅洛斯雙手搖晃著老人的身體，問了更多的問題。 老人低沉地回答道。
 "王者殺人。
@@ -119,8 +122,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-#就算名詞只有一個字也繪製的範例
+print("就算名詞只有一個字也繪製的範例")
 
 meishi_list = [] 
 
@@ -141,8 +143,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#調整文字雲的形狀
-#愛心形狀的文字雲繪製範例
+print("顯示心形文字雲")
+
 # 原始文章
 cloud_text = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
 Love is also considered to be a virtue representing human kindness, compassion, and affection, as "the unselfish loyal and benevolent concern for the good of another".[4] It may also describe compassionate and affectionate actions towards other humans, one's self or animals.[5]
@@ -172,7 +174,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# 指定特定文字的顏色
+print("指定特定文字的顏色")
+
 # 原始文章
 text = """The Zen of Python, by Tim Peters
 Beautiful is better than ugly.
@@ -217,12 +220,11 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import wordcloud
-from PIL import Image
+print("顯示星形文字雲")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/eduheadlines.txt'
 cloud_text = open(filename,'r', encoding = 'utf-8').read()
-print(cloud_text)
+#print(cloud_text)
 
 mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/star.jpg'
 # 載入遮罩圖片
@@ -235,8 +237,7 @@ wc = wordcloud.WordCloud(width = 1000, height = 860,
                          mask = mask_image)
 wc.generate(cloud_text)
 
-# 顯示文字雲
-plt.figure(figsize = (10,10))
+#plt.figure(figsize = (10,10))
 plt.imshow(wc)
 plt.axis("off")
 
@@ -244,10 +245,9 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import sqlite3
+print("顯示雲形文字雲")
 
-from wordcloud import WordCloud
-from PIL import Image
+import sqlite3
 
 dbfile = "data/applenews.db"
 conn = sqlite3.connect(dbfile)
@@ -262,29 +262,49 @@ mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg'
 # 載入遮罩圖片
 mask_image = np.array(Image.open(mask_filename))
 
-wordcloud = WordCloud(background_color = "white",
+wordcloud = wordcloud.WordCloud(background_color = "white",
                       width = 1000, height = 860,
                       font_path = font_filename,
                       margin = 2,
                       mask = mask_image).generate(all_news)
-plt.figure(figsize = (10,10))
 plt.imshow(wordcloud)
 plt.axis("off")
 
 plt.show()
 
+print('------------------------------------------------------------')	#60個
 
-sys.exit()
+""" 有點問題
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_1.txt'
+with open(filename) as fp:    # 英文字的文字檔
+    txt = fp.read()                 # 讀取檔案
+
+# 載入遮罩圖片
+mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
+mask_image = np.array(Image.open(mask_filename))
+
+# 由txt文字產生WordCloud物件
+#wc = wordcloud.WordCloud().generate(txt)      
+
+wc = wordcloud.WordCloud(background_color = "white",
+                      width = 1000, height = 860,
+                      font_path = font_filename,
+                      margin = 2,
+                      mask = mask_image).generate(txt)
+plt.imshow(wc)
+plt.show()
+
+"""
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
 """ 無檔案 stopWords.txt
 import sqlite3
-
-from wordcloud import WordCloud
-from PIL import Image
-import jieba
-from collections import Counter
 
 dbfile = "data/applenews.db"
 conn = sqlite3.connect(dbfile)
@@ -305,12 +325,13 @@ text = ",".join(keyterms)
 mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg'
 # 載入遮罩圖片
 mask_image = np.array(Image.open(mask_filename))
-wordcloud = WordCloud(background_color = "white",
+wordcloud = wordcloud.WordCloud(background_color = "white",
                       width = 1000, height = 860,
                       font_path = font_filename,
                       margin = 2,
                       mask = mask_image).generate(text)
-plt.figure(figsize = (10,10))
+
+#plt.figure(figsize = (10,10))
 plt.imshow(wordcloud)
 plt.axis("off")
 
@@ -318,57 +339,19 @@ plt.show()
 """
 
 print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
 
-
-"""
-文字資訊的視覺化手法
-繪製文字雲
-"""
-
-import os
-import sys
-import time
-import random
-
-import matplotlib.pyplot as plt
-
-"""
-print('------------------------------------------------------------')	#60個
-
-from wordcloud import WordCloud
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_1.txt'
-with open(filename) as fp:    # 英文字的文字檔
-    txt = fp.read()                 # 讀取檔案
-    
-wc = WordCloud().generate(txt)      # 由txt文字產生WordCloud物件
-
-plt.imshow(wc)
-plt.show()
-#wc.to_file("wc01.png")               # 檔案儲存
-
-print('------------------------------------------------------------')	#60個
-
-from wordcloud import WordCloud
-
+""" 有點問題
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_2.txt'
 with open(filename, encoding = 'cp950') as fp: # 含中文的文字檔
     txt = fp.read()                 # 讀取檔案
     
-wc = WordCloud().generate(txt)      # 由txt文字產生WordCloud物件
+wc = wordcloud.WordCloud().generate(txt)      # 由txt文字產生WordCloud物件
 
 plt.imshow(wc)
 plt.show()
-#wc.to_file("wc02.png")               # 檔案儲存
+
 
 print('------------------------------------------------------------')	#60個
-
-from wordcloud import WordCloud
-import jieba
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_2.txt'
 with open(filename, encoding = 'cp950') as fp:  # 含中文的文字檔
@@ -376,18 +359,14 @@ with open(filename, encoding = 'cp950') as fp:  # 含中文的文字檔
 
 cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
 
-wc = WordCloud(                             # 建立詞雲物件
+wc = wordcloud.WordCloud(                             # 建立詞雲物件
     font_path = font_filename,   
     background_color = "white", width = 800, height = 600).generate(cut_text)
 
 plt.imshow(wc)
 plt.show()
-#wc.to_file("wc03.png")               # 檔案儲存
 
 print('------------------------------------------------------------')	#60個
-
-from wordcloud import WordCloud
-import jieba
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_2.txt'
 with open(filename, encoding = 'cp950') as fp:  # 含中文的文字檔
@@ -395,7 +374,7 @@ with open(filename, encoding = 'cp950') as fp:  # 含中文的文字檔
 
 cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
 
-wc = WordCloud(                         # 建立詞雲物件
+wc = wordcloud.WordCloud(                         # 建立詞雲物件
     font_path = font_filename,
     background_color = "white", width = 800, height = 600).generate(cut_text)
 
@@ -405,16 +384,13 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from wordcloud import WordCloud
-import jieba
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_2.txt'
 with open(filename, encoding = 'cp950') as fp:    # 含中文的文字檔
     txt = fp.read()                     # 讀取檔案
 
 cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
 
-wc = WordCloud(                         # 建立詞雲物件
+wc = wordcloud.WordCloud(                         # 建立詞雲物件
     font_path = font_filename,
     background_color = "yellow", width = 800, height = 400).generate(cut_text)
 
@@ -425,16 +401,13 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from wordcloud import WordCloud
-import jieba
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_6.txt'
 with open(filename, encoding = "cp950") as fp:  # 含中文的文字檔
     txt = fp.read()                     # 讀取檔案
 
 cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
 
-wc = WordCloud(                         # 建立詞雲物件
+wc = wordcloud.WordCloud(                         # 建立詞雲物件
     font_path = font_filename,
     background_color = "yellow", width = 800, height = 400).generate(cut_text)
 
@@ -445,11 +418,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from wordcloud import WordCloud
-from PIL import Image
-import jieba
-import numpy as np
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_6.txt'
 with open(filename, encoding = 'cp950') as fp:        # 含中文的文字檔
     txt = fp.read()                         # 讀取檔案
@@ -458,7 +426,7 @@ cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/star.gif'
 bgimage = np.array(Image.open(filename))  # 背景圖
 
-wc = WordCloud(                             # 建立詞雲物件
+wc = wordcloud.WordCloud(                             # 建立詞雲物件
     font_path = font_filename,
     background_color = "white",
     mask = bgimage).generate(cut_text)        # mask設定
@@ -470,10 +438,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from wordcloud import WordCloud
-from PIL import Image
-import numpy as np
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/data18_1.txt'
 with open(filename, encoding = 'cp950') as fp:        # 含中文的文字檔
     txt = fp.read()                         # 讀取檔案
@@ -482,7 +446,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
 
 bgimage = np.array(Image.open(filename))  # 背景圖
 
-wc = WordCloud(                             # 建立詞雲物件
+wc = wordcloud.WordCloud(                             # 建立詞雲物件
     font_path = "OLDENGL.TTF",
     background_color = "white",
     mask = bgimage).generate(txt)             # mask設定
@@ -492,21 +456,13 @@ plt.axis("off")                             # 關閉顯示軸線
 plt.show()
 #wc.to_file("wc08.png")               # 檔案儲存
 
-"""
-
 print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-from wordcloud import WordCloud
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/edata18_1.txt'
 with open(filename) as fp:   # 英文字的文字檔
     txt = fp.read()                 # 讀取檔案
     
-wc = WordCloud(
+wc = wordcloud.WordCloud(
     font_path = "OLDENGL.TTF", 
     background_color = "white").generate(txt)      
 
@@ -515,11 +471,6 @@ plt.show()
 #wc.to_file("wc09.png")               # 檔案儲存
 
 print('------------------------------------------------------------')	#60個
-
-from wordcloud import WordCloud
-from PIL import Image
-import jieba
-import numpy as np
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_wc/edata18_1.txt'
 with open(filename) as fp:            # 含中文的文字檔
@@ -530,7 +481,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
 
 bgimage = np.array(Image.open(filename))  # 背景圖
 
-wc = WordCloud(                             # 建立詞雲物件
+wc = wordcloud.WordCloud(                             # 建立詞雲物件
     font_path = "OLDENGL.TTF",
     background_color = "white",
     mask = bgimage).generate(cut_text)        # mask設定
@@ -539,26 +490,11 @@ plt.imshow(wc)
 plt.axis("off")                             # 關閉顯示軸線
 plt.show()
 #wc.to_file("wc10.png")               # 檔案儲存
-'''
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('wordcloud：文字雲')
 
-
-#from wordcloud import WordCloud
-import matplotlib.pyplot as plt
-import jieba
-from collections import Counter
-from PIL import Image
-import numpy as np
-import requests
 cloud_text = open('data/travel.txt', "r",encoding="utf-8").read()
 jieba.set_dictionary('data/dict.txt.big.txt')
 with open('data/stopWord_cloud.txt', 'r', encoding='utf-8-sig') as f:
@@ -576,17 +512,23 @@ wc = wordcloud.WordCloud(width = 1000, height = 600,
 
 #mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
 #mask = np.array(Image.open(mask_filename)) 
-#wc = WordCloud(background_color="white",mask=mask,font_path = font_filename)
+#wc = wordcloud.WordCloud(background_color="white",mask=mask,font_path = font_filename)
 #wc.generate_from_frequencies(frequencies=diction)
 wc.generate(cloud_text)
 
-plt.figure(figsize=(10, 10))
+#plt.figure(figsize=(10, 10))
 plt.imshow(wc)
 plt.axis("off")
+
 plt.show()
 wc.to_file("tmp_bookCloud.png")
+"""
+
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
 
+#wc.to_file("wc01.png")               # 檔案儲存
+#wc.to_file("wc02.png")               # 檔案儲存
+#wc.to_file("wc03.png")               # 檔案儲存

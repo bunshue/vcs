@@ -21,7 +21,7 @@ print("# Courses: ", numcourses, "# Semesters: ", numsemesters)
 print("Registration status", registration_status)
 print("------------------------------------------")
 
-filepath = 'excel_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.xlsx'
+filepath = 'tmp_excel_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.xlsx'
             
 if not os.path.exists(filepath):
     workbook = openpyxl.Workbook()

@@ -8,6 +8,13 @@ python 之 Exception
 
 print('------------------------------------------------------------')	#60個
 
+quotient, remainder = divmod(1234, 100)   # 商和餘數
+print("商")
+print(quotient)
+print("餘數")
+print(remainder)
+
+
 
 
 print('------------------------------------------------------------')	#60個

@@ -1,3 +1,37 @@
+import os
+import sys
+import time
+import random
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'data14_8.txt'         # 設定欲開啟的檔案
+
+with open(filename, 'r', encoding='cp950') as fObj:
+    print(f"指針位置 {fObj.tell()}")    
+    txt1 = fObj.read(3)
+    print(f"{txt1}, 指針位置 {fObj.tell()}")
+    txt2 = fObj.read(3)
+    print(f"{txt2}, 指針位置 {fObj.tell()}")
+    txt3 = fObj.read(3)
+    print(f"{txt3}, 指針位置 {fObj.tell()}")     
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'data14_9.txt'             # 設定欲開啟的檔案
+
+chunk = 100
+msg = ''
+with open(filename, 'r', encoding='cp950') as fObj: 
+    while True:
+        txt = fObj.read(chunk)  # 一次讀取chunk數量
+        if not txt:
+            break
+        msg += txt
+print(msg)
+
+print('------------------------------------------------------------')	#60個
+
 '''
 檔案讀寫
 
@@ -88,4 +122,10 @@ print("以下是最後執行結果")
 print(mydict)                       # 列印字典
 
 print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
+
 

@@ -2,10 +2,10 @@ import xlrd
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_excel/python_ReadWrite_EXCEL1.xlsx'
+filename = 'data/python_ReadWrite_EXCEL1.xlsx'
 
 print('------------------------------------------------------------')	#60個
-
+"""
 data = xlrd.open_workbook(filename)
 
 s1 = data.sheets()[0]
@@ -50,7 +50,7 @@ print('------------------------------------------------------------')	#60個
 
 import xlrd
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_excel/python_ReadWrite_EXCEL2.xlsx'
+filename = 'data/python_ReadWrite_EXCEL2.xlsx'
 
 data = xlrd.open_workbook(filename)
 
@@ -63,11 +63,9 @@ for n in range(len(data.sheet_names())):
         print('Page {}: '.format(n), end='')
         print(table.row_values(i))
 
-"""
-data.sheets()[n] 可以指定我們要讀第幾個工作表，在這裡 n 便是我工作表的 index。
-table.nrows 可以顯示我列數有幾列，在這裡我用 row_values(i) 將每一張工作表、每一列 print 出來。
-當然，你要一行行地印出來也是可行的。
-"""
+#data.sheets()[n] 可以指定我們要讀第幾個工作表，在這裡 n 便是我工作表的 index。
+#table.nrows 可以顯示我列數有幾列，在這裡我用 row_values(i) 將每一張工作表、每一列 print 出來。
+#當然，你要一行行地印出來也是可行的。
 
 data = xlrd.open_workbook(filename)
 
@@ -77,14 +75,14 @@ for n in range(len(data.sheet_names())):
     for i in range(table.ncols):
         print('Page {}: '.format(n), end='')
         print(table.col_values(i))
-
+"""
 print('------------------------------------------------------------')	#60個
 
 print('用xlwt寫入xls檔案')
 
 import xlwt
 
-fn = 'tmptmp.xls'
+fn = 'tmp_excel.xls'
 datahead = ['Phone', 'TV', 'Notebook']
 price = ['35000', '18000', '28000']
 wb = xlwt.Workbook()
@@ -101,7 +99,7 @@ print('------------------------------------------------------------')	#60個
 print('用xlrd讀取xls檔案')
 import xlrd
 
-fn = 'tmptmp.xls'
+fn = 'tmp_excel.xls'
 wb = xlrd.open_workbook(fn)
 sh = wb.sheets()[0]
 rows = sh.nrows
@@ -115,7 +113,7 @@ import xlrd
 import xlwt
 
 filename_r = 'data/water10705.xls'
-filename_w = 'write1.xls'
+filename_w = 'tmp_excel2.xls'
 
 print('讀取xls檔, 檔案 :', filename_r)
 
@@ -150,7 +148,7 @@ import xlrd
 import xlwt
 
 filename_r = 'data/workfile.xls'
-filename_w = 'write2.xls'
+filename_w = 'tmp_excel3.xls'
 
 print('讀取xls檔, 檔案 :', filename_r)
 

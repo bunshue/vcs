@@ -48,5 +48,48 @@ print('------------------------------------------------------------')	#60個
 
 
 
+import requests, pprint
+
+api_url = "https://zh.wikipedia.org/w/api.php"
+
+api_params = {
+    "format": "json",
+    "action": "query",
+    "titles": "柔道",
+    "prop": "revisions",
+    "rvprop": "content",
+}
+
+wiki_data = requests.get(api_url, params=api_params).json()
+
+pprint.pprint(wiki_data)
+
+
 
 print('------------------------------------------------------------')	#60個
+
+
+import requests, pprint
+
+search_api_url = "https://collectionapi.metmuseum.org/public/collection/v1/search?"
+query_parameter = "q=python&hasImages=true"
+search_url = search_api_url + query_parameter
+print(search_url)
+search_response = requests.get(search_url)
+pprint.pprint(search_response.json())
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import pprint
+
+r = requests.get("https://tw.yahoo.com/")
+pprint.pprint(r.text)
+print("------------------------------------------------------------")  # 60個
+
+
+
+print('------------------------------------------------------------')	#60個
+

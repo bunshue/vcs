@@ -9,7 +9,7 @@ print("寫讀 xlsx")
 
 print("建立 xlsx")
 
-filename = 'C:/_git/vcs/_1.data/______test_files2/test1.xlsx'
+filename = 'tmp_test1.xlsx'
 
 workbook=openpyxl.Workbook()    # 建立一個工作簿
 # 取得第 1 個工作表
@@ -31,7 +31,7 @@ print("建立 xlsx OK, 檔案 : " + filename)
 print('------------------------------------------------------------')	#60個
 print('excel讀寫測試 2')
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_excel/python_ReadWrite_EXCEL3.xlsx'
+filename = 'data/python_ReadWrite_EXCEL3.xlsx'
 
 print("讀取 xlsx, 檔案 : " + filename)
 
@@ -52,7 +52,7 @@ for i in range(1, sheet.max_row+1):
 sheet['A3'] = 'David' 
 
 print("另存新檔");
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/test2b.xlsx'
+filename2 = 'tmp_test2b.xlsx'
 workbook.save(filename2)
 print("另存新檔 OK, 檔案 : " + filename2)
 
@@ -62,7 +62,7 @@ print('excel讀寫測試 3')
 #各種檔案寫讀範例 xlsx 2
 
 import openpyxl
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_excel/python_ReadWrite_EXCEL5_population2.xlsx'
+filename = 'data/python_ReadWrite_EXCEL5_population2.xlsx'
 
 print("讀取 xlsx, 檔案 : " + filename)
 

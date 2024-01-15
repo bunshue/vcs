@@ -26,6 +26,6 @@ for p in prices:
           format(p[0],p[1],p[2],p[3])
 html_file = pre_html + html_body + post_html
 
-fp = open('oilprice.html','w')
+fp = open('tmp_oilprice.html','w')
 fp.write(html_file)
 fp.close()

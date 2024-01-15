@@ -260,7 +260,71 @@ print("{}到{}期間有幾個閏年:{}".format(y, y+ys, calendar.leapdays(y, y+y
 
 print('------------------------------------------------------------')	#60個
 
+
+
 print('------------------------------------------------------------')	#60個
+
+import calendar
+print(calendar.month(2022, 7))
+
+
+import calendar
+print(calendar.__file__)
+
+import calendar as cal
+print(cal.month(2022, 8))
+
+from calendar import month, isleap
+print(month(2022, 9))
+
+isleap(2024)
+
+import calendar
+calendar.isleap(2022)
+
+from calendar import isleap
+isleap(2022)
+
+import calendar
+
+print("2020年是否潤年", calendar.isleap(2020))    
+print("2021年是否潤年", calendar.isleap(2021))
+
+print("------------------------------------------------------------")  # 60個
+
+import calendar
+
+print(calendar.month(2020,1))
+
+print("------------------------------------------------------------")  # 60個
+
+import calendar
+
+print(calendar.calendar(2020))
+
+
+print('------------------------------------------------------------')	#60個
+
+import calendar
+
+y = int(input("請輸入年份:"))
+m = int(input("請輸入月份:"))
+ys = int(input("列印n年內為閏年的月曆:"))
+notLeap = []
+
+calendar.setfirstweekday(calendar.SUNDAY)
+
+for i in range(ys):
+    if calendar.isleap(y+i) == True:
+        print("\n")
+        calendar.prmonth(y+i, m)
+    else:
+        notLeap.append(y+i)
+
+print("\n以下非閏年:", notLeap)
+print("{}到{}期間有幾個閏年:{}".format(y, y+ys, calendar.leapdays(y, y+ys)))
+
+
 
 print('------------------------------------------------------------')	#60個
 
