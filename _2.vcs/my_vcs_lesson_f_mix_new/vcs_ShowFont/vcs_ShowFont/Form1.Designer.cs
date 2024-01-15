@@ -33,6 +33,9 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.bt_minus = new System.Windows.Forms.Button();
+            this.bt_plus = new System.Windows.Forms.Button();
+            this.tb_font_size = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // bt_open_folder
@@ -82,11 +85,41 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "label2";
             // 
+            // bt_minus
+            // 
+            this.bt_minus.Location = new System.Drawing.Point(643, 78);
+            this.bt_minus.Name = "bt_minus";
+            this.bt_minus.Size = new System.Drawing.Size(60, 60);
+            this.bt_minus.TabIndex = 5;
+            this.bt_minus.UseVisualStyleBackColor = true;
+            this.bt_minus.Click += new System.EventHandler(this.bt_minus_Click);
+            // 
+            // bt_plus
+            // 
+            this.bt_plus.Location = new System.Drawing.Point(643, 12);
+            this.bt_plus.Name = "bt_plus";
+            this.bt_plus.Size = new System.Drawing.Size(60, 60);
+            this.bt_plus.TabIndex = 6;
+            this.bt_plus.UseVisualStyleBackColor = true;
+            this.bt_plus.Click += new System.EventHandler(this.bt_plus_Click);
+            // 
+            // tb_font_size
+            // 
+            this.tb_font_size.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_font_size.Location = new System.Drawing.Point(557, 12);
+            this.tb_font_size.Name = "tb_font_size";
+            this.tb_font_size.Size = new System.Drawing.Size(80, 36);
+            this.tb_font_size.TabIndex = 7;
+            this.tb_font_size.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 670);
+            this.Controls.Add(this.tb_font_size);
+            this.Controls.Add(this.bt_plus);
+            this.Controls.Add(this.bt_minus);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.comboBox1);
@@ -95,6 +128,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,6 +141,9 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button bt_minus;
+        private System.Windows.Forms.Button bt_plus;
+        private System.Windows.Forms.TextBox tb_font_size;
     }
 }
 

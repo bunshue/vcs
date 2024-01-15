@@ -23,16 +23,40 @@ namespace vcs_ShowFont
         {
             label1.Text = "瀏覽資料夾內的字型檔";
             label2.Text = "唐 王昌齡 出塞\n秦時明月漢時關\n萬里長征人未還\n但使龍城飛將在\n不教胡馬度陰山。";
+            tb_font_size.Text = label2.Font.Size.ToString();
             bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_plus.BackgroundImage = Properties.Resources.plus;
+            bt_plus.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_minus.BackgroundImage = Properties.Resources.minus;
+            bt_minus.BackgroundImageLayout = ImageLayout.Zoom;
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            int BORDER = 10;
+            bt_plus.Location = new Point(this.ClientSize.Width - bt_plus.Size.Width - BORDER, 0 + BORDER);
+            bt_minus.Location = new Point(this.ClientSize.Width - bt_minus.Size.Width - BORDER, 0 + BORDER + bt_plus.Height + BORDER);
+            tb_font_size.Location = new Point(this.ClientSize.Width - bt_plus.Size.Width - BORDER - tb_font_size.Width - BORDER, 0 + BORDER);
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            show_item_location();
         }
 
         private void bt_open_folder_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
 
-            folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
-            folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files5";
+            //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
+            //folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files5";
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
@@ -56,6 +80,7 @@ namespace vcs_ShowFont
                     int pos = filename.LastIndexOf('.');
                     string extension = filename.Substring(pos).ToLower();
                     if ((extension == ".ttf") ||
+                        (extension == ".ttc") ||
                         (extension == ".otf"))
                     {
                         files.Add(filename);
@@ -105,6 +130,36 @@ namespace vcs_ShowFont
 
             //設置字體
             label2.Font = f;
+        }
+
+        private void bt_plus_Click(object sender, EventArgs e)
+        {
+            string old_font_name = label2.Font.Name;
+            float old_font_size = label2.Font.Size;
+            old_font_size += 4;
+
+            //實例化字體
+            Font f = new Font(old_font_name, old_font_size);
+
+            //設置字體
+            label2.Font = f;
+            tb_font_size.Text = label2.Font.Size.ToString();
+        }
+
+        private void bt_minus_Click(object sender, EventArgs e)
+        {
+            string old_font_name = label2.Font.Name;
+            float old_font_size = label2.Font.Size;
+            old_font_size -= 4;
+            if (old_font_size < 10)
+                old_font_size = 10;
+
+            //實例化字體
+            Font f = new Font(old_font_name, old_font_size);
+
+            //設置字體
+            label2.Font = f;
+            tb_font_size.Text = label2.Font.Size.ToString();
         }
     }
 }

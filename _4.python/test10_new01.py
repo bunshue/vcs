@@ -80,18 +80,6 @@ print("x ** y = " + str(x ** y))
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
 print('處理網址資料')
 
 url = "https://www.nkust.edu.tw/p/403-1000-12-{}.php?Lang=zh-tw"
@@ -237,12 +225,6 @@ fp.close()
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
 target_url = 'https://www.nkust.edu.tw/p/403-1000-12-{}.php'
 
 for page in range(1, 6):
@@ -251,33 +233,12 @@ for page in range(1, 6):
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
 print('格式化字串')
 
 print(12345)
 
 print('八位數 前面補0')
 print('{:08d}\n{:08d}\n{:08d}'.format(123, 1234, 12345))
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print('字串的 title 用法, 首字大寫')
-s = 'this is a lion mouse'
-
-print(s.title())
 
 print('------------------------------------------------------------')	#60個
 
@@ -424,14 +385,15 @@ print(tok_name)
 
 print('------------------------------------------------------------')	#60個
 
-dist = 384400                   # 地球到月亮距離
-speed = 1225                    # 馬赫速度每小時1225公里
-total_hours = dist // speed     # 計算小時數
-days, hours = divmod(total_hours, 24)   # 商和餘數
-print("總供需要天數")
-print(days)
-print("小時數")
-print(hours)
+
+quotient, remainder = divmod(1234, 100)   # 商和餘數
+print("商")
+print(quotient)
+print("餘數")
+print(remainder)
+
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -571,62 +533,6 @@ find_similar_images(foldername)
 
 print('------------------------------------------------------------')	#60個
 
-items = os.listdir()
-print(os.path.exists('myprime.py'))
-for item in items:
-    print(os.path.abspath(item))
-
-print('------------------------------------------------------------')	#60個
-
-""" no file
-fullpath = os.path.abspath('myprime.py')
-print(fullpath)
-print("os.path.basename:", os.path.basename(fullpath))
-print("os.path.dirname:", os.path.dirname(fullpath))
-print("os.path.getatime:", os.path.getatime(fullpath))
-print("os.path.getmtime:", os.path.getmtime(fullpath))
-print("os.path.getctime:", os.path.getctime(fullpath))
-print("os.path.getsize:", os.path.getsize(fullpath))
-print("os.path.isabs:", os.path.isabs(fullpath))
-print("os.path.isfile:", os.path.isfile(fullpath))
-print("os.path.isdir:", os.path.isdir(fullpath))
-print("os.path.split:", os.path.split(fullpath))
-print("os.path.splitdrive:", os.path.splitdrive(fullpath))
-print("os.path.splitext:", os.path.splitext(fullpath))
-
-"""
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
 #以下為OK可以搬出的
 
 print('十進位 轉 十六進位')
@@ -706,15 +612,6 @@ print(c)
 
 print('------------------------------------------------------------')	#60個
 
-def test():
-    for x in 'abcde':
-        for y in '12345':
-            print(y, x, end = ' ')
-
-test()
-
-print('------------------------------------------------------------')	#60個
-
 def gcd(a, b):
     if a < b:
         a, b = b, a
@@ -726,6 +623,15 @@ def gcd(a, b):
 
 a, b = 24, 36
 print("最大公約數是 : ", gcd(a, b))
+
+print('------------------------------------------------------------')	#60個
+
+def test():
+    for x in 'abcde':
+        for y in '12345':
+            print(y, x, end = ' ')
+
+test()
 
 print('------------------------------------------------------------')	#60個
 
@@ -822,56 +728,7 @@ print(f"/半徑{r:^3d}圓面積是{area:^10.2f}/")
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-print('---- os --------------------------------------------------------')	#60個
-
-"""
-import test
-packagedir = os.path.dirname(test.__file__)
-"""
-
-print('------------------------------------------------------------')	#60個
-
 print(2 ** 32)
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-import os
-
-def getuser():
-    for name in ('LOGNAME', 'USER', 'LNAME', 'USERNAME'):
-        print(name)
-        user = os.environ.get(name)
-        if user:
-            print(user)
-            return user
-
-print('get user name')
-ccc = getuser()
-print(ccc)
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -885,47 +742,6 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('---- 新進 未整理 --------------------------------------------------------')	#60個
-
-
-
 
 
 """
@@ -1001,224 +817,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-for envname in "TMPDIR", "TEMP", "TMP":
-    dirname = os.getenv(envname)
-    print("cccccc", dirname)
-    # print(dirname)
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import sys
-
-"""
-import shutil
-import os
-
-fullpath = os.path.abspath('myprime.py')
-path, filename = os.path.split(fullpath)
-filename, extname = os.path.splitext(filename)
-if not os.path.exists("test-dir"):
-    os.mkdir("test-dir")
-targetfullpath = os.path.join(path, os.path.join("test-dir", "00"+extname))
-shutil.copy(fullpath, targetfullpath)
-
-try:
-    print("實際上預期可能會有例外的程式碼寫在這裡！")
-    10 / 0
-    print("在可能發生例外的指令之下的程式碼放在這邊！")
-except Exception as e:
-    print("發生錯誤了，錯誤訊息如下：")
-    print(e)
-else:
-    print("沒有發生任何錯誤。")
-finally:
-    print("不管如何，都要執行這裡")
-
-print('------------------------------------------------------------')	#60個
-
-#form PIL import Image
-
-source = input("請輸入來源資料夾：")
-if os.path.exists(source):
-    target = input("請輸入目標資料夾：")
-    if not os.path.exists(target):
-        os.mkdir(target)
-        allfiles = os.listdir(source)
-        for file in allfiles:
-            filename, ext = os.path.splitext(file)
-            filename = filename + "_s"
-            targetfile = filename + ext
-            im = Image.open(os.path.join(source, file))
-            thumbnail = im.resize((320,200))
-            thumbnail.save(os.path.join(target, targetfile))
-            im.close()
-            thumbnail.close()
-            print("{}-->{}".format(file, targetfile))
-    else:
-        print("目標資料夾已存在，無法進行。")
-else:    
-    print("找不到來源資料夾。")
-"""
-print("------------------------------------------------------------")  # 60個
-
-import os
-from PIL import Image
-
-pre_html = """
-<!DOCTYPE html>
-<head>
-<meta charset='utf-8'/>
-</head>
-<body>
-<table>
-"""
-
-post_html = """
-</table>
-</body>
-</html>
-"""
-"""
-table_html = ""
-
-source = input("請輸入來源資料夾：")
-if os.path.exists(source):
-    target = input("請輸入目標資料夾：")
-    if not os.path.exists(target):
-        os.mkdir(target)
-        allfiles = os.listdir(source)
-        for file in allfiles:
-            filename, ext = os.path.splitext(file)
-            filename = filename + "_s"
-            targetfile = filename + ext
-            im = Image.open(os.path.join(source, file))
-            thumbnail = im.resize((320,200))
-            thumbnail.save(os.path.join(target, targetfile))
-            im.close()
-            thumbnail.close()
-            print("{}-->{}".format(file, targetfile))
-#以下的程式碼用來建立HTML索引檔的表格內容            
-            table_html += "<tr><td><a href='{}'><img src='{}'></a></td></tr>".format(
-                os.path.join("..", os.path.join(source, file)),
-                targetfile)
-#以上的程式碼用來建立HTML索引檔的表格內容
-    else:
-        print("目標資料夾已存在，無法進行。")
-else:    
-    print("找不到來源資料夾。")
-html = pre_html + table_html + post_html
-with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
-    f.write(html)
-"""
-print("------------------------------------------------------------")  # 60個
-
-import os
-from PIL import Image
-
-pre_html = """
-<!DOCTYPE html>
-<head>
-<meta charset='utf-8'/>
-</head>
-<body>
-<table>
-<tr>
-"""
-
-post_html = """
-</tr>
-</table>
-</body>
-</html>
-"""
-
-
-table_html = ""
-"""
-source = input("請輸入來源資料夾：")
-if os.path.exists(source):
-    target = input("請輸入目標資料夾：")
-    if not os.path.exists(target):
-        os.mkdir(target)
-        allfiles = os.listdir(source)
-        for index, file in enumerate(allfiles):
-            filename, ext = os.path.splitext(file)
-            filename = filename + "_s"
-            targetfile = filename + ext
-            im = Image.open(os.path.join(source, file))
-            thumbnail = im.resize((320,200))
-            thumbnail.save(os.path.join(target, targetfile))
-            im.close()
-            thumbnail.close()
-            print("{}-->{}".format(file, targetfile))
-#以下的程式碼用來建立HTML索引檔的表格內容         
-            table_html += "<td><a href='{}'><img src='{}'></a></td>".format(
-                os.path.join("..", os.path.join(source, file)),
-                targetfile)
-            if (index+1) % 3 == 0:
-                table_html += "</tr><tr>"
-#以上的程式碼用來建立HTML索引檔的表格內容
-    else:
-        print("目標資料夾已存在，無法進行。")
-else:    
-    print("找不到來源資料夾。")
-html = pre_html + table_html + post_html
-with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
-    f.write(html)
-"""
-print("------------------------------------------------------------")  # 60個
-
-from stat import *
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-st = os.lstat(filename)
-
-itime = ST_MTIME
-# itime = ST_CTIME
-anytime = st[itime]
-size = st[ST_SIZE]
-print("檔案大小 :", size, "拜")
-
-print("------------------------------------------------------------")  # 60個
-
-
-import os
-import sys
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-
-short_filename = os.path.basename(filename)
-
-print(short_filename)
-
-cache_dir = os.path.dirname(filename)
-print(cache_dir)
-
-head, tail = short_filename[:-3], short_filename[-3:]
-print(head)
-print(tail)
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-import os
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-canonic = os.path.abspath(filename)
-print(canonic)
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-canonic = os.path.normcase(filename)
-print(canonic)
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -1283,29 +881,11 @@ for d in reversed(c):
 
 print('------------------------------------------------------------')	#60個
 
-import numpy as np
-
-a = np.array([2,3,4,5,6])
-print(f'a = {a}')
-b = np.ma.masked_where(a > 3, a)
-print(f'b = {b}')
-
-print('------------------------------------------------------------')	#60個
-
 """
 y = x ^ 2
 x = [x for x in range(31)]
 y = [(y * y) for y in x]
 """
-
-print('------------------------------------------------------------')	#60個
-
-import os
-import sys
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-head, ext = os.path.splitext(filename)
-head, base = os.path.split(filename)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1622,34 +1202,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-""" no file
-import zipfile
-
-files = zipfile.ZipFile("C:/workplace/test.zip")
-
-files.namelist()
-
-files.extract("d/c.txt")
-
-files.extractall()
-
-files.close()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 import requests
 
 r = requests.get("https://tw.yahoo.com/")
 print(r.text)
-
-print("------------------------------------------------------------")  # 60個
-
-import pprint
-
-r = requests.get("https://tw.yahoo.com/")
-pprint.pprint(r.text)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1690,20 +1246,6 @@ wiki_data = requests.get(api_url, params=api_params).json()
 
 pprint.pprint(wiki_data)
 
-
-# pip install wikipedia
-
-
-import wikipedia
-
-wikipedia.set_lang("zh")
-wikipedia.summary("柔道")
-
-# python wiki_sample.py
-
-# python try_sys.py 想查詢的關鍵字
-
-# python wiki_sample_final.py 柔道
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1753,56 +1295,6 @@ for game in soup.findAll("h2"):
 
 print("------------------------------------------------------------")  # 60個
 
-print(np.c_[np.array([1, 2, 3]), np.array([4, 5, 6])])
-print(np.c_[np.array([[1, 2, 3]]), 0, 0, np.array([[4, 5, 6]])])
-
-"""
-array([[1, 4],
-       [2, 5],
-       [3, 6]])
-"""
-
-#array([[1, 2, 3, ..., 4, 5, 6]])
-
-print('------------------------------------------------------------')	#60個
-
-#numpy.c_() and numpy.r_()的用法
-
-
-#####np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等，类似于pandas中的merge()。
-#####np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等，类似于pandas中的concat()。
-
-#np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等。
-#np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等。
-
-
-#1.numpy.c_:
-
-import numpy as np
-
-x = np.arange(12).reshape(3,4)
-print('x:',x, x.shape)
-
-y = np.arange(10,22).reshape(3,4)
-print('y:',y, y.shape)
-
-z = np.c_[x,y]
-print('z:',z, z.shape)
-
-#2.numpy.r_用法:
-
-import numpy as np
-
-x = np.arange(12).reshape(3,4)
-print('x:',x, x.shape)
-
-y = np.arange(10,22).reshape(3,4)
-print('y:',y, y.shape)
-
-z = np.r_[x,y]
-print('z:',z, z.shape)
-
-print("------------------------------------------------------------")  # 60個
 import requests
 
 # 郵遞區號
@@ -1873,276 +1365,10 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image
-
-def blue_to_red(image_path):
-    img = Image.open(image_path)
-    r, g, b = img.split() # 分離三個通道
-    img = Image.merge("RGB",(b,g,r))# 將藍色通道和通道互換
-    img.show()
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-#blue_to_red(filename)
 
 print('------------------------------------------------------------')	#60個
 
-"""
-from PIL import Image
-
-def blue_to_red2(image_path):
-    img = Image.open(image_path)
-    pixels = img.load()
-
-    for y in range(img.height):
-        for x in range(img.width):
-            r, g, b = pixels[x, y]
-
-            #若該點的藍色成分明顯超過紅色及綠色,我們便將之視為藍色
-            if b > r and b > g:
-                #將藍色分轉為紅色
-                pixels[x, y] = (b, g, r)
-    img.show()
-    
-    
-    
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-blue_to_red2(filename)
-"""    
-
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter.messagebox as msg
-
-response = msg.askyesno('糟糕了!!!', '還好嗎？')
-
-if (response == True):
-	print('還 OK')
-else:
-	print('有點麻煩')
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-import calendar
-print(calendar.month(2022, 7))
-
-
-import calendar
-print(calendar.__file__)
-
-import calendar as cal
-print(cal.month(2022, 8))
-
-from calendar import month, isleap
-print(month(2022, 9))
-
-isleap(2024)
-
-import calendar
-calendar.isleap(2022)
-
-from calendar import isleap
-isleap(2022)
-
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter as tk
-
-window=tk.Tk()
-tk.Label(window, text='紅', bg='red', width=20).pack()
-tk.Label(window, text='藍', bg='green', width=20).pack()
-tk.Label(window, text='綠', bg='blue', width=20).pack()
-window.mainloop()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-window = tk.Tk()
-
-topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
-
-check_value={}
-
-for i in range(len(topping)):
-	check_value[i] = tk.BooleanVar()
-	tk.Checkbutton(window, variable=check_value[i],
-
-text = topping[i]).pack(anchor=tk.W)
-
-def buy():
-	for i in check_value:
-		if check_value[i].get() == True:
-			print(topping[i])
-
-tk.Button(window, text='點餐', command=buy).pack()
-
-window.mainloop()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter as tk
-window=tk.Tk()
-topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
-check_value={}
-for i in range(len(topping)):
-	check_value[i] = tk.BooleanVar()
-	tk.Checkbutton(window, variable=check_value[i], text = topping[i]).pack(anchor=tk.W)
-window.mainloop()
-
-"""
-請問迴圈裡面 check_value [i] = tk.BooleanVar() 這一行，能否舉個例子，假設第 0 個按鈕被勾選，check_value 長怎樣；假設第 0、1 個按鈕被勾選，check_value 長怎樣 ... 依此類推
-"""
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-radio_value = tk.IntVar()
-radio_value.set(1)
-lunch = {0:'A 套餐',1:'B 套餐',2:'C 套餐'}
-tk.Radiobutton(window, text = lunch[0], variable = radio_value, value = 0).pack()
-tk.Radiobutton(window, text = lunch[1], variable = radio_value, value = 1).pack()
-tk.Radiobutton(window, text = lunch[2], variable = radio_value, value = 2).pack()
-def buy():
-	value = radio_value.get()
-	print(lunch[value])
-
-tk.Button(window, text='點餐', command=buy).pack()
-window.mainloop()
-
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-string = tk.StringVar()
-entry = tk.Entry(window, textvariable=string).pack()
-label = tk.Label(window, textvariable=string).pack()
-window.mainloop()
-
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-
-def fileopen():
-	print('進行開啟檔案的處理')
-
-menubar = tk.Menu(window)
-
-filemenu = tk.Menu(menubar)
-
-menubar.add_cascade(label=' 檔案', menu=filemenu)
-
-filemenu.add_command(label='開啟檔案', command=fileopen)
-
-window.config(menu=menubar)
-
-window.mainloop()
-
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter.filedialog as fd
-
-window = tk.Tk()
-
-def open(): 
-	filename = fd.askopenfilename()
-	print('open file => ' + filename)
-
-def exit(): 
-	window.destroy()
-
-def find():
-	print('find ! ')
-
-menubar = tk.Menu(window)
-
-filemenu = tk.Menu(menubar)
-
-menubar.add_cascade(label='File', menu=filemenu)
-
-filemenu.add_command(label='open', command=open)
-
-filemenu.add_separator()
-
-filemenu.add_command(label='exit', command=exit)
-
-editmenu = tk.Menu(menubar)
-
-menubar.add_cascade(label='Edit', menu=editmenu)
-
-editmenu.add_command(label='find', command=find)
-
-window.config(menu=menubar)
-
-
-print('------------------------------------------------------------')	#60個
-
-"""
-請參考以下程式，幫我利用 tkinter 生成選單視窗，需要的檔案結構如下：
-
-檔案：
-	開啟新檔
-	開啟舊檔
-	另存為
-	結束
-編輯：
-	剪下
-	複製
-	貼上
-說明：
-	關於本程式
-
------------ 以下是參考的程式架構 --------
-"""
-""" TBD
-import tkinter as tk
-import tkinter.filedialog as fd
-window = tk.Tk()
-def open():
-	filename = fd.askopenfilename()
-print('open file => ' + filename)
-def exit():
-	window.destroy()
-def find():
-	print('find !')
-menubar = tk.Menu(window)
-filemenu = tk.Menu(menubar)
-menubar.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='open', command=open)
-filemenu.add_separator()
-filemenu.add_command(label='exit', command=exit)
-editmenu = tk.Menu(menubar)
-menubar.add_cascade(label='Edit', menu=editmenu)
-editmenu.add_command(label='find', command=find)
-window.config(menu=menubar)
-window.mainloop()
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2190,77 +1416,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-import datetime as dt
-
-x = dt.datetime(2020, 10, 22)
-print(x)
-
-x = dt.datetime(year=2020, month=10, day=22)
-print(x)
-
-y = dt.datetime(2020, 10, 22, 10, 30, 45)  # 設定日期與時間
-print(y)
-
-print("------------------------------------------------------------")  # 60個
-
-# 3-4-2 timedelta 物件
-
-x = dt.timedelta(hours=1, minutes=30)  # 1 小時又 30 分
-
-print(x)
-y = dt.timedelta(days=1, seconds=30)  # 1 天又 30 秒
-print(y)
-
-# 3-4-3 用 timedelta 來增減 datetime 或 timedelta 的時間
-
-import datetime as dt
-
-x = dt.datetime(2020, 10, 22, 10, 30, 45)  # 原始時間
-
-y = dt.timedelta(days=1, hours=2, minutes=5)
-
-print(x)
-
-print(x + y)  # 用 timedelta 來增減 datetime 的時間
-
-print(x - y)
-
-print(x + y * 2)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-""" fail
-# 3-4-4 將 datetime 時間以格式化方式輸出
-
-import datetime as dt
-
-x = dt.datetime(2020, 10, 22, 10, 30, 45)
-
-s1 = x.strftime("%Y/%m/%d %H-%M-%S")
-print(s1)
-
-s2 = x.strftime("%Y 年 %m 月 %d 日 %H : %M : %S")
-print(s2)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-# 3-4-5 用字串來建立 datetime 物件
-
-import datetime as dt
-
-s = "2020/10/22 10-30-45"  # 含有特定格式之日期時間字串
-
-x = dt.datetime.strptime(s, "%Y/%m/%d %H-%M-%S")
-
-
-print(x)
-
-print(type(x))
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2442,11 +1597,6 @@ print(soup)
 
 print("------------------------------------------------------------")  # 60個
 
-
-x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-print(type(x))
-
-print("------------------------------------------------------------")  # 60個
 
 str1 = "Hello!\nPython"
 print("不含r字元的輸出")
@@ -2640,7 +1790,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("設計一個函數返回給定文件名的後綴名。\n")
 
-
 def get_suffix(filename, has_dot=False):
     """
     獲取文件名的後綴名
@@ -2698,188 +1847,6 @@ print(which_day(2018, 1, 1))
 print(which_day(2016, 3, 1))
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-
-print("二維陣列 6 X 4")
-a = np.array(
-    [[0, 0, 0, 1], [1, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4], [4, 4, 4, 5], [5, 5, 5, 6]]
-)
-print(a)
-print(a.shape)
-print(a.dtype)
-print(a.ndim)
-print(a.size)
-print(a.nbytes)
-
-print("第3列 之 第1~4項(不含尾)")
-print(a[3, 1:4])
-
-print("前2列 之 第2欄之後")
-print(a[:2, 2:])
-
-print("第2列 之 全部")
-print(a[2, :])
-
-print("全部列 之 第3欄, 轉成row")
-print(a[:, 3])
-
-print("全部列 之 偶數欄")
-print(a[:, ::2])
-
-print("偶數列 之 036欄")
-print(a[::2, ::3])
-
-# axis = 0 : 第0維 直行
-# axis = 1 : 第1維 橫列
-print("全部和:", a.sum())
-print("直行加:", a.sum(axis=0))
-print("橫列加:", a.sum(axis=1))
-
-# np.argmin()求最小值對應的索引
-# np.argmax()求最大值對應的索引
-
-print("每個直行的最小值:", a.min(axis=0))
-print("每個直行的最小值對應的索引:", a.argmin(axis=0))
-print("每個直行的標準差:", a.std(axis=0))
-
-print("全部平均:", a.mean())
-print("直行平均:", a.mean(axis=0))
-print("橫列平均:", a.mean(axis=1))
-
-print("------------------------------------------------------------")  # 60個
-
-print("一維陣列 10個元素")
-a = np.arange(10)
-print(a)
-
-print("前4項")
-print(a[:4])
-
-print("第3項 至 第7項(不含尾)")
-print(a[3:7])
-
-print("第5項 至 最後")
-print(a[5:])
-
-print("第3至第9項 跳一個")
-print(a[3:9:2])
-
-print("第2項開始至最後, 跳一個")
-print(a[2::2])
-
-print("從頭至最後, 跳二個")
-print(a[::3])
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用 numpy函數 對 list做處理")
-
-x = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0]
-
-print(np.max(x))
-print(np.mean(x))
-print(np.min(x))
-
-print("------------------------------------------------------------")  # 60個
-
-print("用numpy建立資料")
-a = np.arange(5)
-print(a)
-a = np.arange(2,5,1)
-print(a)
-a = np.linspace(2,5,4)
-print(a)
-a = np.logspace(0,2,5)
-print(a)
-
-a = np.empty(5) # 生成5個元素，值爲隨機數的數組（速度快）
-print(a)
-a = np.zeros(5) # 生成5個值全爲0的數組
-print(a)
-a = np.ones(5) # 生成5個值全爲1的數組
-print(a)
-a = np.full(5, 6) # 生成5個值全爲6的數組
-print(a)
-
-print("------------------------------------------------------------")  # 60個
-
-a = np.array([1,2,3,4,5,6], dtype=np.int64)
-print(a.dtype) 
-a = a.astype(np.float32)
-print(a.dtype) 
-print(a.dtype.type)
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("分段函數")
-
-x=np.arange(10)
-print(x)
-
-print(np.where(x<5, x, 9-x))
-
-
-a=np.arange(10)
-print(np.select([x<3,x>6], [-1,1], 0))
-
-
-a=np.arange(10)
-print(np.piecewise(x, [x<3,x>6], [lambda x: x * 2, lambda x: x * 3]))
-
-print("------------------------------------------------------------")  # 60個
-
-print("統計函數")
-a=np.arange(10,0,-1)
-print(a)
-print(a.mean())
-print(a.var())
-print(a.std())
-print(np.average(a, weights=np.arange(0,10,1)))
-print(np.median(a))
-print(np.percentile(a, 75))
-
-
-print(a.min())
-print(a.max())
-print(a.ptp())
-print(a.argmin())
-print(a.argmax())
-print(a.argsort())
-a.sort()
-print(a)
-
-a=np.random.randint(0,5,10)
-print(a) 
-print(np.unique(a)) 
-print(np.bincount(a)) 
-print(np.histogram(a,bins=5))
-
-print("------------------------------------------------------------")  # 60個
-
-print("矩陣與二維數組")
-a = np.mat(np.mat([[1,2,3],[4,5,6]]))
-print(type(a))
-
-a = np.mat(np.random.random((2,2)))
-print(a)
-print(np.eye(2))
-print(np.diag([2,3]))
-
-a = np.mat([[1.,2.],[3.,4.]])
-print(np.dot(a,a))    # 矩陣乘積
-print(np.multiply(a,a))    # 矩陣點乘
-print(a.T)   # 矩陣轉置
-print(a.I)   # 矩陣求逆
-print(np.trace(a))    # 求矩陣的跡
-print(np.linalg.eig(a))   # 特徵分解
-
-a = np.mat(np.mat([[1,2,3],[4,5,6]]))
-print(a.sum())
-print(a.sum(axis=0))
-print(a.sum(axis=1))
-
 print("------------------------------------------------------------")  # 60個
 
 # id的用法
@@ -2890,51 +1857,6 @@ print("位址 = ", id(fruits), "  fruits元素 = ", fruits)
 print("位址 = ", id(cfruits), "  fruits元素 = ", cfruits)
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-双色球随机选号程序
-"""
-
-from random import randrange, randint, sample
-
-
-def display(balls):
-    """
-    输出列表中的双色球号码
-    """
-    for index, ball in enumerate(balls):
-        if index == len(balls) - 1:
-            print("|", end=" ")
-        print("%02d" % ball, end=" ")
-    print()
-
-
-def random_select():
-    """
-    随机选择一组号码
-    """
-    red_balls = [x for x in range(1, 34)]
-    selected_balls = []
-    for _ in range(6):
-        index = randrange(len(red_balls))
-        selected_balls.append(red_balls[index])
-        del red_balls[index]
-    # 上面的for循环也可以写成下面这行代码
-    # sample函数是random模块下的函数
-    # selected_balls = sample(red_balls, 6)
-    selected_balls.sort()
-    selected_balls.append(randint(1, 16))
-    return selected_balls
-
-
-def main():
-    n = int(input("机选几注: "))
-    for _ in range(n):
-        display(random_select())
-
-
-if __name__ == "__main__":
-    main()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2994,12 +1916,6 @@ strtime = time.strftime("%Y-%m-%d %H:%M:%S", localtime)
 print(strtime)
 mydate = time.strptime("2018-1-1", "%Y-%m-%d")
 print(mydate)
-
-# shutil.copy('/Users/Hao/hello.py', '/Users/Hao/Desktop/first.py')
-os.system("ls -l")
-# os.chdir('/Users/Hao')
-os.system("ls -l")
-# os.mkdir('test')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4694,76 +3610,6 @@ print("您的BMI值為：", round(bmi, 2))
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-path = os.getcwd() + "\\temp"
-os.chdir(path)
-print(path)
-print(os.listdir(path))
-
-print("------------------------------------------------------------")  # 60個
- 
-path = os.getcwd()
-new_path = os.getcwd() + "\\temp"
-print("目前工作路徑: ", path)
-print(new_path)
-os.chdir(new_path)
-print("chdir(): ", new_path)
-os.mkdir('newDir')
-print("mkdir(): ", os.listdir(new_path))
-
-print("------------------------------------------------------------")  # 60個
-
-new_path = os.getcwd() + "\\temp"
-print(new_path)
-os.chdir(new_path)
-os.rename('newDir','newDir2')
-print("rename(): ", os.listdir(new_path))
-
-print("------------------------------------------------------------")  # 60個
-
-new_path = os.getcwd() + "\\temp"
-print(new_path)
-os.chdir(new_path)
-os.rmdir('newDir2')
-fp = open("aa.txt", "w")
-fp.close()
-print("rmdir(): ", os.listdir(new_path))
-os.remove("aa.txt")
-print("remove(): ", os.listdir(new_path))
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-import os.path as path
- 
-fname = path.realpath("ch11-2-2.py")
-print(fname)
-r = path.split(fname)
-print("os.path.split() =", r)
-r = path.splitext(fname)
-print("os.path.splitext() =", r)
-
-print("------------------------------------------------------------")  # 60個
-
-import os.path as path
- 
-fname = path.realpath("ch11-2-2.py")
-print(fname)
-p = path.dirname(fname)
-print("p = os.path.dirname() =", p)
-f = path.basename(fname)
-print("f = os.path.basename() =", f)
-
-print("------------------------------------------------------------")  # 60個
-
-import os.path as path
- 
-p = "D:\PythonChatGPT\ch11"
-f = "ch11-2-2.py"
-print(p, f)
-r = path.join(p, f)
-print("os.path.join(p,f) =", r)
-
 print("------------------------------------------------------------")  # 60個
 
 word = ["holiday", "happy", "birth",
@@ -5684,6 +4530,16 @@ print('數值 1+數值 2 =',total(num1,num2))
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("字串 字典 集合 串列 元組
+print("------------------------------------------------------------")  # 60個
+
 animals = "This is a pen."
 lst1 = animals.split()
 print(lst1)
@@ -5733,14 +4589,14 @@ print(s1)
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
+print('字串的 title 用法, 首字大寫')
+s = 'this is a lion mouse'
 
-print("------------------------------------------------------------")  # 60個
+print(s.title())
+
+print('------------------------------------------------------------')	#60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5764,4 +4620,1203 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+items = os.listdir()
+print(os.path.exists('myprime.py'))
+for item in items:
+    print(os.path.abspath(item))
+
+print('------------------------------------------------------------')	#60個
+
+""" no file
+fullpath = os.path.abspath('myprime.py')
+print(fullpath)
+print("os.path.basename:", os.path.basename(fullpath))
+print("os.path.dirname:", os.path.dirname(fullpath))
+print("os.path.getatime:", os.path.getatime(fullpath))
+print("os.path.getmtime:", os.path.getmtime(fullpath))
+print("os.path.getctime:", os.path.getctime(fullpath))
+print("os.path.getsize:", os.path.getsize(fullpath))
+print("os.path.isabs:", os.path.isabs(fullpath))
+print("os.path.isfile:", os.path.isfile(fullpath))
+print("os.path.isdir:", os.path.isdir(fullpath))
+print("os.path.split:", os.path.split(fullpath))
+print("os.path.splitdrive:", os.path.splitdrive(fullpath))
+print("os.path.splitext:", os.path.splitext(fullpath))
+
+"""
+
+
+print('---- os --------------------------------------------------------')	#60個
+
+"""
+import test
+packagedir = os.path.dirname(test.__file__)
+"""
+
+
+print('------------------------------------------------------------')	#60個
+import os
+
+def getuser():
+    for name in ('LOGNAME', 'USER', 'LNAME', 'USERNAME'):
+        print(name)
+        user = os.environ.get(name)
+        if user:
+            print(user)
+            return user
+
+print('get user name')
+ccc = getuser()
+print(ccc)
+
+print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+for envname in "TMPDIR", "TEMP", "TMP":
+    dirname = os.getenv(envname)
+    print("cccccc", dirname)
+    # print(dirname)
+
+print("------------------------------------------------------------")  # 60個
+
+import shutil
+import os
+
+fullpath = os.path.abspath('myprime.py')
+path, filename = os.path.split(fullpath)
+filename, extname = os.path.splitext(filename)
+if not os.path.exists("test-dir"):
+    os.mkdir("test-dir")
+targetfullpath = os.path.join(path, os.path.join("test-dir", "00"+extname))
+shutil.copy(fullpath, targetfullpath)
+
+try:
+    print("實際上預期可能會有例外的程式碼寫在這裡！")
+    10 / 0
+    print("在可能發生例外的指令之下的程式碼放在這邊！")
+except Exception as e:
+    print("發生錯誤了，錯誤訊息如下：")
+    print(e)
+else:
+    print("沒有發生任何錯誤。")
+finally:
+    print("不管如何，都要執行這裡")
+
+print('------------------------------------------------------------')	#60個
+
+from stat import *
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+st = os.lstat(filename)
+
+itime = ST_MTIME
+# itime = ST_CTIME
+anytime = st[itime]
+size = st[ST_SIZE]
+print("檔案大小 :", size, "拜")
+
+print("------------------------------------------------------------")  # 60個
+
+
+import os
+import sys
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+
+short_filename = os.path.basename(filename)
+
+print(short_filename)
+
+cache_dir = os.path.dirname(filename)
+print(cache_dir)
+
+head, tail = short_filename[:-3], short_filename[-3:]
+print(head)
+print(tail)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+import os
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+canonic = os.path.abspath(filename)
+print(canonic)
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+canonic = os.path.normcase(filename)
+print(canonic)
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import os
+import sys
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+head, ext = os.path.splitext(filename)
+head, base = os.path.split(filename)
+
+print('------------------------------------------------------------')	#60個
+
+
+# shutil.copy('/Users/Hao/hello.py', '/Users/Hao/Desktop/first.py')
+os.system("ls -l")
+# os.chdir('/Users/Hao')
+os.system("ls -l")
+# os.mkdir('test')
+
+"""
+path = os.getcwd() + "\\temp"
+os.chdir(path)
+print(path)
+print(os.listdir(path))
+
+print("------------------------------------------------------------")  # 60個
+ 
+path = os.getcwd()
+new_path = os.getcwd() + "\\temp"
+print("目前工作路徑: ", path)
+print(new_path)
+os.chdir(new_path)
+print("chdir(): ", new_path)
+os.mkdir('newDir')
+print("mkdir(): ", os.listdir(new_path))
+
+print("------------------------------------------------------------")  # 60個
+
+new_path = os.getcwd() + "\\temp"
+print(new_path)
+os.chdir(new_path)
+os.rename('newDir','newDir2')
+print("rename(): ", os.listdir(new_path))
+
+print("------------------------------------------------------------")  # 60個
+
+new_path = os.getcwd() + "\\temp"
+print(new_path)
+os.chdir(new_path)
+os.rmdir('newDir2')
+fp = open("aa.txt", "w")
+fp.close()
+print("rmdir(): ", os.listdir(new_path))
+os.remove("aa.txt")
+print("remove(): ", os.listdir(new_path))
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+ 
+fname = path.realpath("ch11-2-2.py")
+print(fname)
+r = path.split(fname)
+print("os.path.split() =", r)
+r = path.splitext(fname)
+print("os.path.splitext() =", r)
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+ 
+fname = path.realpath("ch11-2-2.py")
+print(fname)
+p = path.dirname(fname)
+print("p = os.path.dirname() =", p)
+f = path.basename(fname)
+print("f = os.path.basename() =", f)
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+ 
+p = "D:\PythonChatGPT\ch11"
+f = "ch11-2-2.py"
+print(p, f)
+r = path.join(p, f)
+print("os.path.join(p,f) =", r)
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("numpy")
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+
+a = np.array([2,3,4,5,6])
+print(f'a = {a}')
+b = np.ma.masked_where(a > 3, a)
+print(f'b = {b}')
+
+print('------------------------------------------------------------')	#60個
+
+
+print(np.c_[np.array([1, 2, 3]), np.array([4, 5, 6])])
+print(np.c_[np.array([[1, 2, 3]]), 0, 0, np.array([[4, 5, 6]])])
+
+"""
+array([[1, 4],
+       [2, 5],
+       [3, 6]])
+"""
+
+#array([[1, 2, 3, ..., 4, 5, 6]])
+
+print('------------------------------------------------------------')	#60個
+
+#numpy.c_() and numpy.r_()的用法
+
+
+#####np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等，类似于pandas中的merge()。
+#####np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等，类似于pandas中的concat()。
+
+#np.c_是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等。
+#np.r_是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等。
+
+
+#1.numpy.c_:
+
+import numpy as np
+
+x = np.arange(12).reshape(3,4)
+print('x:',x, x.shape)
+
+y = np.arange(10,22).reshape(3,4)
+print('y:',y, y.shape)
+
+z = np.c_[x,y]
+print('z:',z, z.shape)
+
+#2.numpy.r_用法:
+
+import numpy as np
+
+x = np.arange(12).reshape(3,4)
+print('x:',x, x.shape)
+
+y = np.arange(10,22).reshape(3,4)
+print('y:',y, y.shape)
+
+z = np.r_[x,y]
+print('z:',z, z.shape)
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+print(type(x))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+import numpy as np
+
+print("二維陣列 6 X 4")
+a = np.array(
+    [[0, 0, 0, 1], [1, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4], [4, 4, 4, 5], [5, 5, 5, 6]]
+)
+print(a)
+print(a.shape)
+print(a.dtype)
+print(a.ndim)
+print(a.size)
+print(a.nbytes)
+
+print("第3列 之 第1~4項(不含尾)")
+print(a[3, 1:4])
+
+print("前2列 之 第2欄之後")
+print(a[:2, 2:])
+
+print("第2列 之 全部")
+print(a[2, :])
+
+print("全部列 之 第3欄, 轉成row")
+print(a[:, 3])
+
+print("全部列 之 偶數欄")
+print(a[:, ::2])
+
+print("偶數列 之 036欄")
+print(a[::2, ::3])
+
+# axis = 0 : 第0維 直行
+# axis = 1 : 第1維 橫列
+print("全部和:", a.sum())
+print("直行加:", a.sum(axis=0))
+print("橫列加:", a.sum(axis=1))
+
+# np.argmin()求最小值對應的索引
+# np.argmax()求最大值對應的索引
+
+print("每個直行的最小值:", a.min(axis=0))
+print("每個直行的最小值對應的索引:", a.argmin(axis=0))
+print("每個直行的標準差:", a.std(axis=0))
+
+print("全部平均:", a.mean())
+print("直行平均:", a.mean(axis=0))
+print("橫列平均:", a.mean(axis=1))
+
+print("------------------------------------------------------------")  # 60個
+
+print("一維陣列 10個元素")
+a = np.arange(10)
+print(a)
+
+print("前4項")
+print(a[:4])
+
+print("第3項 至 第7項(不含尾)")
+print(a[3:7])
+
+print("第5項 至 最後")
+print(a[5:])
+
+print("第3至第9項 跳一個")
+print(a[3:9:2])
+
+print("第2項開始至最後, 跳一個")
+print(a[2::2])
+
+print("從頭至最後, 跳二個")
+print(a[::3])
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用 numpy函數 對 list做處理")
+
+x = [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0]
+
+print(np.max(x))
+print(np.mean(x))
+print(np.min(x))
+
+print("------------------------------------------------------------")  # 60個
+
+print("用numpy建立資料")
+a = np.arange(5)
+print(a)
+a = np.arange(2,5,1)
+print(a)
+a = np.linspace(2,5,4)
+print(a)
+a = np.logspace(0,2,5)
+print(a)
+
+a = np.empty(5) # 生成5個元素，值爲隨機數的數組（速度快）
+print(a)
+a = np.zeros(5) # 生成5個值全爲0的數組
+print(a)
+a = np.ones(5) # 生成5個值全爲1的數組
+print(a)
+a = np.full(5, 6) # 生成5個值全爲6的數組
+print(a)
+
+print("------------------------------------------------------------")  # 60個
+
+a = np.array([1,2,3,4,5,6], dtype=np.int64)
+print(a.dtype) 
+a = a.astype(np.float32)
+print(a.dtype) 
+print(a.dtype.type)
+
+print("------------------------------------------------------------")  # 60個
+
+print("分段函數")
+
+x=np.arange(10)
+print(x)
+
+print(np.where(x<5, x, 9-x))
+
+
+a=np.arange(10)
+print(np.select([x<3,x>6], [-1,1], 0))
+
+
+a=np.arange(10)
+print(np.piecewise(x, [x<3,x>6], [lambda x: x * 2, lambda x: x * 3]))
+
+print("------------------------------------------------------------")  # 60個
+
+print("統計函數")
+a=np.arange(10,0,-1)
+print(a)
+print(a.mean())
+print(a.var())
+print(a.std())
+print(np.average(a, weights=np.arange(0,10,1)))
+print(np.median(a))
+print(np.percentile(a, 75))
+
+
+print(a.min())
+print(a.max())
+print(a.ptp())
+print(a.argmin())
+print(a.argmax())
+print(a.argsort())
+a.sort()
+print(a)
+
+a=np.random.randint(0,5,10)
+print(a) 
+print(np.unique(a)) 
+print(np.bincount(a)) 
+print(np.histogram(a,bins=5))
+
+print("------------------------------------------------------------")  # 60個
+
+print("矩陣與二維數組")
+a = np.mat(np.mat([[1,2,3],[4,5,6]]))
+print(type(a))
+
+a = np.mat(np.random.random((2,2)))
+print(a)
+print(np.eye(2))
+print(np.diag([2,3]))
+
+a = np.mat([[1.,2.],[3.,4.]])
+print(np.dot(a,a))    # 矩陣乘積
+print(np.multiply(a,a))    # 矩陣點乘
+print(a.T)   # 矩陣轉置
+print(a.I)   # 矩陣求逆
+print(np.trace(a))    # 求矩陣的跡
+print(np.linalg.eig(a))   # 特徵分解
+
+a = np.mat(np.mat([[1,2,3],[4,5,6]]))
+print(a.sum())
+print(a.sum(axis=0))
+print(a.sum(axis=1))
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+import datetime as dt
+
+x = dt.datetime(2020, 10, 22)
+print(x)
+
+x = dt.datetime(year=2020, month=10, day=22)
+print(x)
+
+y = dt.datetime(2020, 10, 22, 10, 30, 45)  # 設定日期與時間
+print(y)
+
+print("------------------------------------------------------------")  # 60個
+
+# 3-4-2 timedelta 物件
+
+x = dt.timedelta(hours=1, minutes=30)  # 1 小時又 30 分
+
+print(x)
+y = dt.timedelta(days=1, seconds=30)  # 1 天又 30 秒
+print(y)
+
+# 3-4-3 用 timedelta 來增減 datetime 或 timedelta 的時間
+
+import datetime as dt
+
+x = dt.datetime(2020, 10, 22, 10, 30, 45)  # 原始時間
+
+y = dt.timedelta(days=1, hours=2, minutes=5)
+
+print(x)
+
+print(x + y)  # 用 timedelta 來增減 datetime 的時間
+
+print(x - y)
+
+print(x + y * 2)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+""" fail
+# 3-4-4 將 datetime 時間以格式化方式輸出
+
+import datetime as dt
+
+x = dt.datetime(2020, 10, 22, 10, 30, 45)
+
+s1 = x.strftime("%Y/%m/%d %H-%M-%S")
+print(s1)
+
+s2 = x.strftime("%Y 年 %m 月 %d 日 %H : %M : %S")
+print(s2)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+# 3-4-5 用字串來建立 datetime 物件
+
+import datetime as dt
+
+s = "2020/10/22 10-30-45"  # 含有特定格式之日期時間字串
+
+x = dt.datetime.strptime(s, "%Y/%m/%d %H-%M-%S")
+
+
+print(x)
+
+print(type(x))
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print('開始計時')
+starttime = int(time.time())    # 起始秒數
+
+print("------------------------------------------------------------")  # 60個
+
+import time                         # 導入模組time
+
+print("計算1970年1月1日00:00:00至今的秒數 = ", int(time.time()))
+
+print("------------------------------------------------------------")  # 60個
+
+import time                         # 導入模組time
+
+print(time.asctime())               # 列出目前系統時間 
+
+print("------------------------------------------------------------")  # 60個
+
+import time                         # 導入模組time
+
+xtime = time.localtime()
+print(xtime)                        # 列出目前系統時間
+print("年 ", xtime[0])
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+endtime = int(time.time())  # 結束秒數
+print("所花時間: ", endtime - starttime, " 秒")
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+import sys
+
+"""
+#form PIL import Image
+
+source = input("請輸入來源資料夾：")
+if os.path.exists(source):
+    target = input("請輸入目標資料夾：")
+    if not os.path.exists(target):
+        os.mkdir(target)
+        allfiles = os.listdir(source)
+        for file in allfiles:
+            filename, ext = os.path.splitext(file)
+            filename = filename + "_s"
+            targetfile = filename + ext
+            im = Image.open(os.path.join(source, file))
+            thumbnail = im.resize((320,200))
+            thumbnail.save(os.path.join(target, targetfile))
+            im.close()
+            thumbnail.close()
+            print("{}-->{}".format(file, targetfile))
+    else:
+        print("目標資料夾已存在，無法進行。")
+else:    
+    print("找不到來源資料夾。")
+"""
+print("------------------------------------------------------------")  # 60個
+
+import os
+from PIL import Image
+
+pre_html = """
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8'/>
+</head>
+<body>
+<table>
+"""
+
+post_html = """
+</table>
+</body>
+</html>
+"""
+"""
+table_html = ""
+
+source = input("請輸入來源資料夾：")
+if os.path.exists(source):
+    target = input("請輸入目標資料夾：")
+    if not os.path.exists(target):
+        os.mkdir(target)
+        allfiles = os.listdir(source)
+        for file in allfiles:
+            filename, ext = os.path.splitext(file)
+            filename = filename + "_s"
+            targetfile = filename + ext
+            im = Image.open(os.path.join(source, file))
+            thumbnail = im.resize((320,200))
+            thumbnail.save(os.path.join(target, targetfile))
+            im.close()
+            thumbnail.close()
+            print("{}-->{}".format(file, targetfile))
+#以下的程式碼用來建立HTML索引檔的表格內容            
+            table_html += "<tr><td><a href='{}'><img src='{}'></a></td></tr>".format(
+                os.path.join("..", os.path.join(source, file)),
+                targetfile)
+#以上的程式碼用來建立HTML索引檔的表格內容
+    else:
+        print("目標資料夾已存在，無法進行。")
+else:    
+    print("找不到來源資料夾。")
+html = pre_html + table_html + post_html
+with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
+    f.write(html)
+"""
+print("------------------------------------------------------------")  # 60個
+
+import os
+from PIL import Image
+
+pre_html = """
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8'/>
+</head>
+<body>
+<table>
+<tr>
+"""
+
+post_html = """
+</tr>
+</table>
+</body>
+</html>
+"""
+
+
+table_html = ""
+"""
+source = input("請輸入來源資料夾：")
+if os.path.exists(source):
+    target = input("請輸入目標資料夾：")
+    if not os.path.exists(target):
+        os.mkdir(target)
+        allfiles = os.listdir(source)
+        for index, file in enumerate(allfiles):
+            filename, ext = os.path.splitext(file)
+            filename = filename + "_s"
+            targetfile = filename + ext
+            im = Image.open(os.path.join(source, file))
+            thumbnail = im.resize((320,200))
+            thumbnail.save(os.path.join(target, targetfile))
+            im.close()
+            thumbnail.close()
+            print("{}-->{}".format(file, targetfile))
+#以下的程式碼用來建立HTML索引檔的表格內容         
+            table_html += "<td><a href='{}'><img src='{}'></a></td>".format(
+                os.path.join("..", os.path.join(source, file)),
+                targetfile)
+            if (index+1) % 3 == 0:
+                table_html += "</tr><tr>"
+#以上的程式碼用來建立HTML索引檔的表格內容
+    else:
+        print("目標資料夾已存在，無法進行。")
+else:    
+    print("找不到來源資料夾。")
+html = pre_html + table_html + post_html
+with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
+    f.write(html)
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
+from PIL import Image
+
+def blue_to_red(image_path):
+    img = Image.open(image_path)
+    r, g, b = img.split() # 分離三個通道
+    img = Image.merge("RGB",(b,g,r))# 將藍色通道和通道互換
+    img.show()
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+#blue_to_red(filename)
+
+print('------------------------------------------------------------')	#60個
+
+"""
+from PIL import Image
+
+def blue_to_red2(image_path):
+    img = Image.open(image_path)
+    pixels = img.load()
+
+    for y in range(img.height):
+        for x in range(img.width):
+            r, g, b = pixels[x, y]
+
+            #若該點的藍色成分明顯超過紅色及綠色,我們便將之視為藍色
+            if b > r and b > g:
+                #將藍色分轉為紅色
+                pixels[x, y] = (b, g, r)
+    img.show()
+    
+    
+    
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+blue_to_red2(filename)
+"""    
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+import tkinter.messagebox as msg
+
+response = msg.askyesno('糟糕了!!!', '還好嗎？')
+
+if (response == True):
+	print('還 OK')
+else:
+	print('有點麻煩')
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+import tkinter as tk
+
+window=tk.Tk()
+tk.Label(window, text='紅', bg='red', width=20).pack()
+tk.Label(window, text='藍', bg='green', width=20).pack()
+tk.Label(window, text='綠', bg='blue', width=20).pack()
+window.mainloop()
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+window = tk.Tk()
+
+topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
+
+check_value={}
+
+for i in range(len(topping)):
+	check_value[i] = tk.BooleanVar()
+	tk.Checkbutton(window, variable=check_value[i],
+
+text = topping[i]).pack(anchor=tk.W)
+
+def buy():
+	for i in check_value:
+		if check_value[i].get() == True:
+			print(topping[i])
+
+tk.Button(window, text='點餐', command=buy).pack()
+
+window.mainloop()
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+import tkinter as tk
+window=tk.Tk()
+topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
+check_value={}
+for i in range(len(topping)):
+	check_value[i] = tk.BooleanVar()
+	tk.Checkbutton(window, variable=check_value[i], text = topping[i]).pack(anchor=tk.W)
+window.mainloop()
+
+"""
+請問迴圈裡面 check_value [i] = tk.BooleanVar() 這一行，能否舉個例子，假設第 0 個按鈕被勾選，check_value 長怎樣；假設第 0、1 個按鈕被勾選，check_value 長怎樣 ... 依此類推
+"""
+
+print('------------------------------------------------------------')	#60個
+
+window = tk.Tk()
+radio_value = tk.IntVar()
+radio_value.set(1)
+lunch = {0:'A 套餐',1:'B 套餐',2:'C 套餐'}
+tk.Radiobutton(window, text = lunch[0], variable = radio_value, value = 0).pack()
+tk.Radiobutton(window, text = lunch[1], variable = radio_value, value = 1).pack()
+tk.Radiobutton(window, text = lunch[2], variable = radio_value, value = 2).pack()
+def buy():
+	value = radio_value.get()
+	print(lunch[value])
+
+tk.Button(window, text='點餐', command=buy).pack()
+window.mainloop()
+
+
+print('------------------------------------------------------------')	#60個
+
+window = tk.Tk()
+string = tk.StringVar()
+entry = tk.Entry(window, textvariable=string).pack()
+label = tk.Label(window, textvariable=string).pack()
+window.mainloop()
+
+
+print('------------------------------------------------------------')	#60個
+
+window = tk.Tk()
+
+def fileopen():
+	print('進行開啟檔案的處理')
+
+menubar = tk.Menu(window)
+
+filemenu = tk.Menu(menubar)
+
+menubar.add_cascade(label=' 檔案', menu=filemenu)
+
+filemenu.add_command(label='開啟檔案', command=fileopen)
+
+window.config(menu=menubar)
+
+window.mainloop()
+
+
+print('------------------------------------------------------------')	#60個
+
+import tkinter.filedialog as fd
+
+window = tk.Tk()
+
+def open(): 
+	filename = fd.askopenfilename()
+	print('open file => ' + filename)
+
+def exit(): 
+	window.destroy()
+
+def find():
+	print('find ! ')
+
+menubar = tk.Menu(window)
+
+filemenu = tk.Menu(menubar)
+
+menubar.add_cascade(label='File', menu=filemenu)
+
+filemenu.add_command(label='open', command=open)
+
+filemenu.add_separator()
+
+filemenu.add_command(label='exit', command=exit)
+
+editmenu = tk.Menu(menubar)
+
+menubar.add_cascade(label='Edit', menu=editmenu)
+
+editmenu.add_command(label='find', command=find)
+
+window.config(menu=menubar)
+
+
+
+
+
+"""
+請參考以下程式，幫我利用 tkinter 生成選單視窗，需要的檔案結構如下：
+
+檔案：
+	開啟新檔
+	開啟舊檔
+	另存為
+	結束
+編輯：
+	剪下
+	複製
+	貼上
+說明：
+	關於本程式
+
+----------- 以下是參考的程式架構 --------
+"""
+""" TBD
+import tkinter as tk
+import tkinter.filedialog as fd
+window = tk.Tk()
+def open():
+	filename = fd.askopenfilename()
+print('open file => ' + filename)
+def exit():
+	window.destroy()
+def find():
+	print('find !')
+menubar = tk.Menu(window)
+filemenu = tk.Menu(menubar)
+menubar.add_cascade(label='File', menu=filemenu)
+filemenu.add_command(label='open', command=open)
+filemenu.add_separator()
+filemenu.add_command(label='exit', command=exit)
+editmenu = tk.Menu(menubar)
+menubar.add_cascade(label='Edit', menu=editmenu)
+editmenu.add_command(label='find', command=find)
+window.config(menu=menubar)
+window.mainloop()
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import calendar
+print(calendar.month(2022, 7))
+
+
+import calendar
+print(calendar.__file__)
+
+import calendar as cal
+print(cal.month(2022, 8))
+
+from calendar import month, isleap
+print(month(2022, 9))
+
+isleap(2024)
+
+import calendar
+calendar.isleap(2022)
+
+from calendar import isleap
+isleap(2022)
+
+import calendar
+
+print("2020年是否潤年", calendar.isleap(2020))    
+print("2021年是否潤年", calendar.isleap(2021))
+
+print("------------------------------------------------------------")  # 60個
+
+import calendar
+
+print(calendar.month(2020,1))
+
+print("------------------------------------------------------------")  # 60個
+
+import calendar
+
+print(calendar.calendar(2020))
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+""" no file
+import zipfile
+
+files = zipfile.ZipFile("C:/workplace/test.zip")
+
+files.namelist()
+
+files.extract("d/c.txt")
+
+files.extractall()
+
+files.close()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import pprint
+
+r = requests.get("https://tw.yahoo.com/")
+pprint.pprint(r.text)
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+# pip install wikipedia
+
+
+import wikipedia
+
+wikipedia.set_lang("zh")
+wikipedia.summary("柔道")
+
+# python wiki_sample.py
+
+# python try_sys.py 想查詢的關鍵字
+
+# python wiki_sample_final.py 柔道
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+双色球随机选号程序
+"""
+
+from random import randrange, randint, sample
+
+
+def display(balls):
+    """
+    输出列表中的双色球号码
+    """
+    for index, ball in enumerate(balls):
+        if index == len(balls) - 1:
+            print("|", end=" ")
+        print("%02d" % ball, end=" ")
+    print()
+
+
+def random_select():
+    """
+    随机选择一组号码
+    """
+    red_balls = [x for x in range(1, 34)]
+    selected_balls = []
+    for _ in range(6):
+        index = randrange(len(red_balls))
+        selected_balls.append(red_balls[index])
+        del red_balls[index]
+    # 上面的for循环也可以写成下面这行代码
+    # sample函数是random模块下的函数
+    # selected_balls = sample(red_balls, 6)
+    selected_balls.sort()
+    selected_balls.append(randint(1, 16))
+    return selected_balls
+
+
+def main():
+    n = int(input("机选几注: "))
+    for _ in range(n):
+        display(random_select())
+
+
+if __name__ == "__main__":
+    main()
+
+print("------------------------------------------------------------")  # 60個
+
+
+import random           # 導入模組random
+
+n = 3
+for i in range(n):
+    print("1-100     : ", random.randint(1, 100))
+
+for i in range(n):
+    print("500-1000  : ", random.randint(500, 1000))
+
+for i in range(n):
+    print("2000-3000 : ", random.randint(2000, 3000))
+
+print("------------------------------------------------------------")  # 60個
+
+import random                       # 導入模組random
+
+min, max = 1, 100                   # 隨機數最小與最大值設定
+num = random.randint(min, max)  # 產生是否讓玩家答對的隨機數
+print(num)
+
+print("------------------------------------------------------------")  # 60個
+
+import random                       # 導入模組random
+
+fruits = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
+print(random.choice(fruits))
+
+print("------------------------------------------------------------")  # 60個
+
+import random                       # 導入模組random
+
+porker = ['2', '3', '4', '5', '6', '7', '8',
+          '9', '10', 'J', 'Q', 'K', 'A']
+random.shuffle(porker)              # 將次序打亂重新排列
+print(porker)
+
+print("------------------------------------------------------------")  # 60個
+
+
+import random                       # 導入模組random
+
+min, max = 1, 10
+ans = random.randint(min, max)      # 隨機數產生答案
+print(ans)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+for _ in range(10):
+    aa = random.randint(1,10)
+    print(aa)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
