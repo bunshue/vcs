@@ -36,7 +36,7 @@ plt.show()
 
 '''
 
-#face-recognition：效果絕佳的人臉辨識
+print("face-recognition：效果絕佳的人臉辨識")
 #!pip install face_recognition
 
 import face_recognition

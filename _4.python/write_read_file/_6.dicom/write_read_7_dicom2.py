@@ -13,7 +13,6 @@ import sys
 from PySide import QtGui
 import collections
 
-
 class DicomTree(object):
     def __init__(self, filename):
         self.filename = filename
@@ -95,21 +94,14 @@ class DicomTree(object):
         app.exec_()
         return tree
 
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
+filename1 = 'data/test.dcm'
+filename2 = 'data/ims000525.dcm'
 
 dicomTree = DicomTree(filename1)
 dicomTree.show_tree()
-
 
 '''
 import pydicom
 from pydicom.data import get_testdata_files
 from pydicom.data import get_testdata_file
 '''
-
-
-
-
-

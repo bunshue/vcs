@@ -54,7 +54,7 @@ def recurse_tree(tree, dataset, parent, hide=False):
 
 import pydicom
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
+filename = 'data/CT_small.dcm'
 
 window = tix.Tk()
 window.title("DICOM tree viewer - " + filename)
@@ -62,6 +62,5 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
 print("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
 
 RunTree(window, filename)
+
 window.mainloop()
-
-

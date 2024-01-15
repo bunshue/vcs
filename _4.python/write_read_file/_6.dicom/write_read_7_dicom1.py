@@ -4,9 +4,9 @@ import pydicom
 from pydicom.data import get_testdata_files
 from pydicom.data import get_testdata_file
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
+filename1 = 'data/test.dcm'
+filename2 = 'data/ims000525.dcm'
+filename3 = 'data/CT_small.dcm'
 
 ds = pydicom.dcmread(filename1)
 #ds = pydicom.dcmread(filename2, force=True)
@@ -30,7 +30,6 @@ data_elements = ['PatientID',
 for de in data_elements:
     print(dataset.data_element(de))
 
-
 print('------------------------------------------------------------')	#60個
 
 import matplotlib.pyplot as plt
@@ -42,13 +41,9 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
+filename1 = 'data/test.dcm'
+filename2 = 'data/ims000525.dcm'
+filename3 = 'data/CT_small.dcm'
 
 print('修改Dicom內的資料')
 
@@ -110,18 +105,15 @@ dataset.save_as("file2.dcm")
 
 print('------------------------------------------------------------')	#60個
 
-
-
 print('判斷 dicom 檔案')
 def is_dicom(filename):
     with open(filename, 'rb') as fp:
         fp.read(128)  # preamble
         return fp.read(4) == b"DICM"
 
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
+filename1 = 'data/test.dcm'
+filename2 = 'data/ims000525.dcm'
+filename3 = 'data/CT_small.dcm'
 filename4 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print(is_dicom(filename1))
@@ -130,10 +122,4 @@ print(is_dicom(filename3))
 print(is_dicom(filename4))
 print(is_dicom(filename1))
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-

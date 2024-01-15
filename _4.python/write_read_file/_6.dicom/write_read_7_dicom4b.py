@@ -11,7 +11,6 @@ def get_LUT_value(data, window, level):
                         [0, 255, lambda data: ((data - (level - 0.5)) /
                          (window - 1) + 0.5) * (255 - 0)])
 
-
 def get_PIL_image(dataset):
     """Get Image object from Python Imaging Library(PIL)"""
 
@@ -65,13 +64,9 @@ import pydicom
 
 print('讀取dicom檔案內的圖片')
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
+filename1 = 'data/CT_small.dcm'
+filename2 = 'data/ims000525.dcm'
+filename3 = 'data/test.dcm'
 
 ds = pydicom.dcmread(filename3)
 show_PIL(ds)
-
-
-
-
