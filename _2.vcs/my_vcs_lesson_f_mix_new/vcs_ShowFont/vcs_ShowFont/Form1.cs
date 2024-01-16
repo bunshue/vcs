@@ -14,6 +14,8 @@ namespace vcs_ShowFont
 {
     public partial class Form1 : Form
     {
+        bool flag_debug_mode = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -31,6 +33,43 @@ namespace vcs_ShowFont
             bt_minus.BackgroundImage = Properties.Resources.minus;
             bt_minus.BackgroundImageLayout = ImageLayout.Zoom;
             show_item_location();
+
+            if (flag_debug_mode == true)
+            {
+                comboBox1.Items.Clear();
+
+                string foldername = @"C:\_git\整理字型";
+
+                richTextBox1.Text += "撈出資料夾 " + foldername + " 內所有圖片檔案合併\n";
+
+                // Get the picture files in the source directory.
+                List<string> files = new List<string>();
+                foreach (string filename in Directory.GetFiles(foldername))
+                {
+                    int pos = filename.LastIndexOf('.');
+                    string extension = filename.Substring(pos).ToLower();
+                    if ((extension == ".ttf") ||
+                        (extension == ".ttc") ||
+                        (extension == ".otf"))
+                    {
+                        files.Add(filename);
+                        comboBox1.Items.Add(filename);
+                    }
+                }
+
+                int num_images = files.Count;
+                if (num_images == 0)
+                {
+                    richTextBox1.Text += "無字型檔\n";
+                    return;
+                }
+
+                for (int i = 0; i < num_images; i++)
+                {
+                    richTextBox1.Text += "第 " + (i + 1).ToString() + " 個檔案\t" + files[i] + "\n";
+                }
+                comboBox1.SelectedIndex = 0;
+            }
         }
 
         void show_item_location()
@@ -56,7 +95,7 @@ namespace vcs_ShowFont
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
 
             //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
-            //folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files5";
+            //folderBrowserDialog1.SelectedPath = @"C:\_git\整理字型";
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";

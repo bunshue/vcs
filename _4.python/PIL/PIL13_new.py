@@ -4,6 +4,7 @@ from PIL import Image
 from PIL import ImageColor
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
 
 print('------------------------------------------------------------')	#60個
 
@@ -255,7 +256,6 @@ image.show()
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image
 image = Image.open(filename)
 print(image.format)
 print(image.mode)
@@ -274,10 +274,8 @@ image2=image.filter(ImageFilter.EDGE_ENHANCE)
 print('------------------------------------------------------------')	#60個
 
 #crop
-
-from PIL import Image
 with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',im.size)
+    print('原圖片的尺寸大小:',image.size)
     x = 50
     y = 50
     x1 = 250
@@ -289,8 +287,6 @@ with Image.open(filename) as image:
 print('------------------------------------------------------------')	#60個
 
 #rotate0
-
-from PIL import Image
 with Image.open(filename) as image:
   image2 = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
   image2.save("tmp_pic30.jpg")
@@ -298,7 +294,6 @@ with Image.open(filename) as image:
 print('------------------------------------------------------------')	#60個
 
 # rotate1
-from PIL import Image
 with Image.open(filename) as image:
   image2 = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
   image2.save( "tmp_pic31_rotate.jpg")
@@ -307,10 +302,8 @@ with Image.open(filename) as image:
 print('------------------------------------------------------------')	#60個
 
 # resize
-
-from PIL import Image
 with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',im.size)
+    print('原圖片的尺寸大小:',image.size)
     w=100
     r = w/image.size[0]
     h = int(image.size[1]*r)
@@ -321,7 +314,6 @@ with Image.open(filename) as image:
 print('------------------------------------------------------------')	#60個
 
 #sharpness
-
 from PIL import Image,ImageEnhance
 with Image.open(filename) as image:
     image2 = ImageEnhance.Contrast(image).enhance(0.3)
@@ -330,7 +322,6 @@ with Image.open(filename) as image:
 print('------------------------------------------------------------')	#60個
 
 # transpose
-
 from PIL import Image,ImageEnhance
 with Image.open(filename) as image:
     image2 = image.transpose(Image.FLIP_LEFT_RIGHT)
@@ -349,4 +340,706 @@ with Image.open(filename) as image:
     image2.save( "tmp_pic33h.jpg")
 
 print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
+
+'''
+from PIL import Image, ImageDraw
+
+im = Image.new("RGB", (400,300), '#00FF00')
+draw=ImageDraw.Draw(im)
+draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
+#im.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageDraw
+
+im = Image.new("RGB", (400,300))
+draw=ImageDraw.Draw(im)
+draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
+#im.show()
+
+print("------------------------------------------------------------")  # 60個
+
+im = Image.open(filename)
+pic=im.convert("1")
+#pic.show()
+
+print("------------------------------------------------------------")  # 60個
+
+with Image.open(filename) as im:
+    print(im.size)
+    x = 50
+    y = 50
+    x1 = 250
+    y1 = 350
+    new_im = im.crop((x, y, x1, y1))
+    print(new_im.size)
+    new_im.save("tmp_pic_crop.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image,ImageEnhance
+
+with Image.open(filename) as im:
+    new_im = ImageEnhance.Brightness(im).enhance(2.5)
+    new_im.save("tmp_pic_brightness.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image,ImageFilter
+
+im=Image.open(filename)
+new=im.filter(ImageFilter.EDGE_ENHANCE)
+#new.show()
+
+print("------------------------------------------------------------")  # 60個
+
+im = Image.open(filename)
+print('圖檔格式: ',im.format)
+print('圖檔的色彩模式: ',im.mode)
+print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ',im.size)
+print('圖片的寬度，單位像素(pixels): ',im.width)
+print('圖片的高度，單位像素(pixels): ',im.height)
+
+print("------------------------------------------------------------")  # 60個
+
+with Image.open(filename) as im:
+    print(im.size)
+    w=100
+    r = w/im.size[0]
+    h = int(im.size[1]*r) #依縮放比例計算高度
+    new_im = im.resize((w, h))
+    print(new_im.size)
+    new_im.save("tmp_pic_view_resize.jpg" )
+
+print("------------------------------------------------------------")  # 60個
+
+with Image.open(filename) as im:
+    new_im = im.rotate(180)
+    new_im.save("tmp_pic_rotate180.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+with Image.open(filename) as im:
+    new_im = im.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
+    new_im.save("tmp_pic_rotate111.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+with Image.open(filename) as im:
+    new_im = im.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
+    new_im.save("tmp_pic_rotate000.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+with Image.open(filename) as im:
+    new_im = im.transpose(Image.ROTATE_90)
+    new_im.save("tmp_pic_transpose90.jpg")
+    new_im = im.transpose(Image.FLIP_LEFT_RIGHT)
+    new_im.save("tmp_pic_transposeLR.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+im = Image.open(filename)
+im.save("tmp_pic_quality95.jpg", quality=95 )
+im.close()
+
+print("------------------------------------------------------------")  # 60個
+
+im = Image.open(filename)
+im.save("tmp_pic_quality_default.jpg")
+im.close()
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image,ImageDraw,ImageFont
+im=Image.open(filename)
+imfont=ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf",120)
+draw=ImageDraw.Draw(im)
+draw.text((50,50),"牡丹亭",font=imfont,fill=(0,255,255,255))
+im.show()
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+from PIL import Image
+
+import matplotlib.pyplot as plt
+
+img = Image.open(filename)
+
+plt.imshow(img)
+
+plt.show()
+
+w,h = img.size
+
+img1 = img.resize((w*2,h), Image.ANTIALIAS)
+
+plt.imshow(img1)
+
+plt.show()
+
+img2 = img.convert('1')
+
+plt.imshow(img2)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#Pillow：基本繪圖
+
+from PIL import Image, ImageDraw
+
+import matplotlib.pyplot as plt
+
+#繪直線
+
+img = Image.new("RGB", (400,300), "lightgray")
+
+drawimg = ImageDraw.Draw(img)
+
+drawimg.line([40,50,360,280], fill="blue", width=3)
+
+plt.imshow(img)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+#繪矩形
+
+img = Image.new("RGB", (400,300), "lightgray")
+
+drawimg = ImageDraw.Draw(img)
+
+drawimg.rectangle((100,80,300,240), fill="yellow", outline="black")
+
+plt.imshow(img)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#繪點
+
+img = Image.new("RGB", (400,300), "lightgray")
+
+drawimg = ImageDraw.Draw(img)
+
+drawimg.point([(100,100), (100,101), (100,102)], fill='red')
+
+plt.imshow(img)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#繪圓或橢圓
+
+img = Image.new("RGB", (400,300), "lightgray")
+
+drawimg = ImageDraw.Draw(img)
+
+drawimg.ellipse((50,50,350,250), fill="purple", outline="green")
+
+plt.imshow(img)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#繪多邊形
+
+img = Image.new("RGB", (400,300), "lightgray")
+
+drawimg = ImageDraw.Draw(img)
+
+drawimg.polygon([(200,40),(60,250),(320,250)], fill="brown", outline="red")
+
+plt.imshow(img)
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+#繪文字
+
+from PIL import ImageFont
+
+
+
+img = Image.new("RGB", (400,300), "lightgray")
+
+drawimg = ImageDraw.Draw(img)
+
+drawimg.text((150,80), "font demo", fill="red")  #繪英文文字
+
+myfont = ImageFont.truetype("msyh.ttc",24)
+
+drawimg.text((120,150),"雅黑字體示範", fill="blue", font=myfont)  #繪中文 
+
+plt.imshow(img)
+
+plt.show()
+
+#繪文字
+
+from PIL import Image, ImageDraw, ImageFont
+
+import matplotlib.pyplot as plt
+
+img = Image.new("RGB", (400,300), "lightgray")
+
+drawimg = ImageDraw.Draw(img)
+
+drawimg.text((120,80), "English Demo", fill="red")  #繪製英文文字
+
+myfont = ImageFont.truetype(font_filename, 24)
+
+drawimg.text((120,150), "中文字型示範", fill="blue", font=myfont) #繪製中文文字
+
+plt.imshow(img)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#Pillow：繪圖範例
+
+from PIL import Image, ImageDraw, ImageFont
+
+import matplotlib.pyplot as plt
+
+img = Image.new("RGB", (300,400), "lightgray")
+
+drawimg = ImageDraw.Draw(img)
+
+#繪圓
+drawimg.ellipse((50,50,250,250), width=3, outline="gold")# 臉
+
+#繪多邊形
+drawimg.polygon([(100,90), (120,130), (80,130)], fill="brown", outline="red") #左眼精
+drawimg.polygon([(200,90), (220,130), (180,130)],   fill="brown", outline="red")#右眼精
+
+#繪矩形
+drawimg.rectangle((140,140,160,180),    fill="blue", outline="black") #鼻子
+
+#繪橢圓
+drawimg.ellipse((100,200,200,220), fill="red") #嘴巴   
+
+#繪文字
+drawimg.text((130,280), "ABCDEFG", fill="orange")  #英文字
+
+myfont = ImageFont.truetype(font_filename, 16)
+
+drawimg.text((110,320), "測試使用中文字", fill="red", font=myfont) #中文字 
+
+plt.imshow(img)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+
+source = input("請輸入來源資料夾：")
+if os.path.exists(source):
+    target = input("請輸入目標資料夾：")
+    if not os.path.exists(target):
+        os.mkdir(target)
+        allfiles = os.listdir(source)
+        for file in allfiles:
+            filename, ext = os.path.splitext(file)
+            filename = filename + "_s"
+            targetfile = filename + ext
+            im = Image.open(os.path.join(source, file))
+            thumbnail = im.resize((320,200))
+            thumbnail.save(os.path.join(target, targetfile))
+            im.close()
+            thumbnail.close()
+            print("{}-->{}".format(file, targetfile))
+    else:
+        print("目標資料夾已存在，無法進行。")
+else:    
+    print("找不到來源資料夾。")
+"""
+print("------------------------------------------------------------")  # 60個
+
+import os
+
+pre_html = """
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8'/>
+</head>
+<body>
+<table>
+"""
+
+post_html = """
+</table>
+</body>
+</html>
+"""
+"""
+table_html = ""
+
+source = input("請輸入來源資料夾：")
+if os.path.exists(source):
+    target = input("請輸入目標資料夾：")
+    if not os.path.exists(target):
+        os.mkdir(target)
+        allfiles = os.listdir(source)
+        for file in allfiles:
+            filename, ext = os.path.splitext(file)
+            filename = filename + "_s"
+            targetfile = filename + ext
+            im = Image.open(os.path.join(source, file))
+            thumbnail = im.resize((320,200))
+            thumbnail.save(os.path.join(target, targetfile))
+            im.close()
+            thumbnail.close()
+            print("{}-->{}".format(file, targetfile))
+#以下的程式碼用來建立HTML索引檔的表格內容            
+            table_html += "<tr><td><a href='{}'><img src='{}'></a></td></tr>".format(
+                os.path.join("..", os.path.join(source, file)),
+                targetfile)
+#以上的程式碼用來建立HTML索引檔的表格內容
+    else:
+        print("目標資料夾已存在，無法進行。")
+else:    
+    print("找不到來源資料夾。")
+html = pre_html + table_html + post_html
+with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
+    f.write(html)
+"""
+print("------------------------------------------------------------")  # 60個
+
+import os
+
+pre_html = """
+<!DOCTYPE html>
+<head>
+<meta charset='utf-8'/>
+</head>
+<body>
+<table>
+<tr>
+"""
+
+post_html = """
+</tr>
+</table>
+</body>
+</html>
+"""
+
+
+table_html = ""
+"""
+source = input("請輸入來源資料夾：")
+if os.path.exists(source):
+    target = input("請輸入目標資料夾：")
+    if not os.path.exists(target):
+        os.mkdir(target)
+        allfiles = os.listdir(source)
+        for index, file in enumerate(allfiles):
+            filename, ext = os.path.splitext(file)
+            filename = filename + "_s"
+            targetfile = filename + ext
+            im = Image.open(os.path.join(source, file))
+            thumbnail = im.resize((320,200))
+            thumbnail.save(os.path.join(target, targetfile))
+            im.close()
+            thumbnail.close()
+            print("{}-->{}".format(file, targetfile))
+#以下的程式碼用來建立HTML索引檔的表格內容         
+            table_html += "<td><a href='{}'><img src='{}'></a></td>".format(
+                os.path.join("..", os.path.join(source, file)),
+                targetfile)
+            if (index+1) % 3 == 0:
+                table_html += "</tr><tr>"
+#以上的程式碼用來建立HTML索引檔的表格內容
+    else:
+        print("目標資料夾已存在，無法進行。")
+else:    
+    print("找不到來源資料夾。")
+html = pre_html + table_html + post_html
+with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
+    f.write(html)
+"""
+print("------------------------------------------------------------")  # 60個
+
+def blue_to_red(image_path):
+    img = Image.open(image_path)
+    r, g, b = img.split() # 分離三個通道
+    img = Image.merge("RGB",(b,g,r))# 將藍色通道和通道互換
+    img.show()
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+#blue_to_red(filename)
+
+print('------------------------------------------------------------')	#60個
+
+"""
+def blue_to_red2(image_path):
+    img = Image.open(image_path)
+    pixels = img.load()
+
+    for y in range(img.height):
+        for x in range(img.width):
+            r, g, b = pixels[x, y]
+
+            #若該點的藍色成分明顯超過紅色及綠色,我們便將之視為藍色
+            if b > r and b > g:
+                #將藍色分轉為紅色
+                pixels[x, y] = (b, g, r)
+    img.show()
+    
+    
+    
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+blue_to_red2(filename)
+"""    
+
+import sys
+import matplotlib.pyplot as plt
+
+from PIL import Image   # Importing Image class from PIL module
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print("------------------------------------------------------------")  # 60個
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageDraw
+
+image = Image.new("RGB", (400, 300))
+draw = ImageDraw.Draw(image)
+draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
+plt.imshow(image)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageDraw
+image = Image.new("RGB", (400, 300), '#00FF00')
+draw = ImageDraw.Draw(image)
+draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
+plt.imshow(image)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+image = Image.open(filename)
+print('圖檔格式: ', image.format)
+print('圖檔的色彩模式: ', image.mode)
+print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
+print('圖片的寬度，單位像素(pixels): ', image.width)
+print('圖片的高度，單位像素(pixels): ', image.height)
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    print(image.size)
+    x = 50
+    y = 50
+    w = 200
+    h = 200
+    new_image = image.crop((x, y, w, h))
+    print(new_image.size)
+    new_image.save('tmp_pic_crop.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageEnhance
+with Image.open(filename) as image:
+   new_image = ImageEnhance.Brightness(image).enhance(2.5)
+   new_image.save('tmp_pic_brightness.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageFilter
+image = Image.open(filename)
+plt.imshow(image)
+plt.title('原圖')
+plt.show()
+
+new = image.filter(ImageFilter.EDGE_ENHANCE)
+plt.imshow(new)
+plt.title('after filter')
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+image = Image.open(filename)
+pic = image.convert("1")
+plt.imshow(pic)
+plt.title('convert L')
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    print(image.size)
+    w = 200
+    r = w/image.size[0]
+    h = int(image.size[1]*r) #依縮放比例計算高度
+    new_image = image.resize((w, h))
+    print(new_image.size)
+    new_image.save('tmp_pic_resize.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    new_image = image.rotate(180)
+    new_image.save('tmp_pic_rotate.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    new_image = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
+    new_image.save('tmp_pic_rotate30.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    new_image = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
+    new_image.save('tmp_pic_rotate30_zero.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+image = Image.open(filename)
+image.save('tmp_pic_normal.jpg')
+image.close()
+
+print('------------------------------------------------------------')	#60個
+
+image = Image.open(filename)
+image.save('tmp_pic_high.jpg', quality = 95)
+image.close()
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageDraw, ImageFont
+image = Image.open(filename)
+imfont = ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf", 40)
+draw = ImageDraw.Draw(image)
+draw.text((100, 100), 'Peony', font = imfont, fill = (0, 255, 255, 255))
+plt.imshow(image)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    new_image = image.transpose(Image.ROTATE_90)
+    new_image.save('tmp_pic_rotate_90.jpg')
+    new_image = image.transpose(Image.FLIP_LEFT_RIGHT)
+    new_image.save('tmp_pic_flip.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+im = Image.open(filename)
+print(im.format)
+print(im.mode)
+print(im.width)
+print(im.height)
+print(im.size)
+
+print("------------------------------------------------------------")  # 60個
+
+print('保持圖片原始大小之旋轉')
+with Image.open(filename) as im:
+  new_im = im.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
+  new_im.save("tmp_pic_rotate60a.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+print('保持圖片內容大小之旋轉')
+with Image.open(filename) as im:
+  new_im = im.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
+  new_im.save("tmp_pic_rotate60b.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+with Image.open(filename) as im:
+    print('原圖片的尺寸大小:',im.size)
+    x = 50
+    y = 50
+    x1 = 150
+    y1 = 200
+    new_im = im.crop((x, y, x1, y1))
+    print('圖片經裁切後的尺寸大小:', new_im.size)
+    new_im.save("tmp_pic_crop.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+with Image.open(filename) as im:
+    print('原圖片的尺寸大小:',im.size)
+    w=100
+    r = w/im.size[0]
+    h = int(im.size[1]*r)
+    new_im = im.resize((w, h))
+    print('圖片經縮放後的尺寸大小:',new_im.size)
+    new_im.save("tmp_pic_resize.jpg" )
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image,ImageEnhance
+
+with Image.open(filename) as im:
+    new_im = ImageEnhance.Contrast(im).enhance(0.3)
+    new_im.save("tmp_pic_contrast.jpg") 
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image,ImageEnhance
+
+with Image.open(filename) as im:
+    new_im = im.transpose(Image.FLIP_LEFT_RIGHT)
+    new_im.save("tmp_pic_transpose1.jpg")
+    new_im = im.transpose(Image.FLIP_TOP_BOTTOM)
+    new_im.save("tmp_pic_transpose2.jpg")
+    new_im = im.transpose(Image.ROTATE_90)
+    new_im.save("tmp_pic_transpose3.jpg")
+    new_im = im.transpose(Image.ROTATE_180)
+    new_im.save("tmp_pic_transpose4.jpg")
+    new_im = im.transpose(Image.ROTATE_270)
+    new_im.save("tmp_pic_transpose5.jpg")
+    new_im = im.transpose(Image.TRANSPOSE)
+    new_im.save("tmp_pic_transpose6.jpg")
+    new_im = im.transpose(Image.TRANSVERSE)
+    new_im.save("tmp_pic_transpose7.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image,ImageFilter
+im=Image.open(filename)
+new=im.filter(ImageFilter.EDGE_ENHANCE)
+#new.show()
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
 

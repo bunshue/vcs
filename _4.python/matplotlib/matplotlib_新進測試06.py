@@ -17,7 +17,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
-'''
 th = np.arange(0,360,10)
 #print(th)
 
@@ -56,32 +55,8 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 柱圖
-
-data = {'apples': 10, 'oranges': 15, 'lemons': 5, 'limes': 20}
-plt.bar(list(data.keys()), list(data.values()))
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-# 條形圖
-data = {'apples': 10, 'oranges': 15, 'lemons': 5, 'limes': 20}
-error = [3, 4, 2, 7] 
-plt.barh(list(data.keys()), list(data.values()), xerr=error, align='center', 
-        color='green', ecolor='black')
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 堆疊圖
-y1 = (20, 35, 30, 35, 27)
-y2 = (25, 32, 34, 20, 25)
-x = np.arange(len(y1))
-width = 0.35
-p1 = plt.bar(x, y1, width)
-p2 = plt.bar(x, y2, width, bottom=y1) # 堆疊圖
-plt.show()
 
 
 
@@ -89,11 +64,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-# 直方圖
-x = np.random.rand(50, 2) # 產生共兩組，每組50個隨機數,
-plt.hist(x)
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -286,8 +256,6 @@ tree = etree.ElementTree(html)
 tree.write('導出圖表.html')
 #使用默認瀏覽器打開 html 文件
 webbrowser.open('導出圖表.html',new = 1)
-
-'''
 
 print("------------------------------------------------------------")  # 60個
 

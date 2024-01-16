@@ -17,13 +17,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch20\ch20_22.py
-
-import matplotlib.pyplot as plt
-import random
-
 def loc(index):
     ''' 處理座標的移動 '''
     x_mov = random.choice([-3, 3])              # 隨機x軸移動值
@@ -42,15 +35,8 @@ for i in range(1, num):                     # 建立點的座標
 t = x                                       # 色彩隨x軸變化
 plt.scatter(x, y, s=2, c=t, cmap='brg')
 plt.show()
-   
-
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch20\ch20_23.py
-
-import matplotlib.pyplot as plt
-import random
 
 def loc(index):
     ''' 處理座標的移動 '''
@@ -74,13 +60,7 @@ plt.scatter(x, y, s=2, c=t, cmap='brg')
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch20\ch20_27.py
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 votes = [135, 412, 397]         # 得票數
 N = len(votes)                  # 計算長度
@@ -96,10 +76,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch20\ch20_28.py
-
-import numpy as np
-import matplotlib.pyplot as plt
 from random import randint
 
 def dice_generator(times, sides):
@@ -129,11 +105,9 @@ plt.yticks(np.arange(0, 150, 15))
 
 plt.show()
 
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch20\ch20_29.py
-
-import matplotlib.pyplot as plt
 
 sorts = ["Travel","Entertainment","Education","Transporation","Food"]
 fee = [8000,2000,3000,5000,6000]
@@ -145,9 +119,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch20\ch20_30.py
-
-import matplotlib.pyplot as plt
 from pylab import mpl
 
 mpl.rcParams["font.sans-serif"] = ["SimHei"]        # 使用黑體
