@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_ShowFont.Properties {
+namespace vcs_MyPdfReader.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace vcs_ShowFont.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_ShowFont.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_MyPdfReader.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,52 +61,11 @@ namespace vcs_ShowFont.Properties {
         }
         
         /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        ///   查詢類似  的當地語系化字串。
         /// </summary>
-        internal static System.Drawing.Bitmap clear {
+        internal static string pdf_filename {
             get {
-                object obj = ResourceManager.GetObject("clear", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap minus {
-            get {
-                object obj = ResourceManager.GetObject("minus", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap open_folder {
-            get {
-                object obj = ResourceManager.GetObject("open_folder", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap plus {
-            get {
-                object obj = ResourceManager.GetObject("plus", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap x {
-            get {
-                object obj = ResourceManager.GetObject("x", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("pdf_filename", resourceCulture);
             }
         }
     }

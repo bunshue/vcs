@@ -14,7 +14,8 @@ namespace vcs_ShowFont
 {
     public partial class Form1 : Form
     {
-        bool flag_debug_mode = true;
+        bool flag_debug_mode = false;
+        FontFamily old_font_name;
 
         public Form1()
         {
@@ -32,6 +33,12 @@ namespace vcs_ShowFont
             bt_plus.BackgroundImageLayout = ImageLayout.Zoom;
             bt_minus.BackgroundImage = Properties.Resources.minus;
             bt_minus.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_clear.BackgroundImage = Properties.Resources.clear;
+            bt_clear.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_x.BackgroundImage = Properties.Resources.x;
+            bt_x.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_x.Visible = false;
+
             show_item_location();
 
             if (flag_debug_mode == true)
@@ -82,7 +89,15 @@ namespace vcs_ShowFont
             int BORDER = 10;
             bt_plus.Location = new Point(this.ClientSize.Width - bt_plus.Size.Width - BORDER, 0 + BORDER);
             bt_minus.Location = new Point(this.ClientSize.Width - bt_minus.Size.Width - BORDER, 0 + BORDER + bt_plus.Height + BORDER);
+            bt_x.Location = new Point(this.ClientSize.Width - bt_minus.Size.Width - BORDER, 0 + BORDER + bt_plus.Height + BORDER + bt_minus.Height + BORDER);
+
             tb_font_size.Location = new Point(this.ClientSize.Width - bt_plus.Size.Width - BORDER - tb_font_size.Width - BORDER, 0 + BORDER);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -94,18 +109,19 @@ namespace vcs_ShowFont
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
 
-            //folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
+            folderBrowserDialog1.SelectedPath = Application.StartupPath;    //預設開啟的路徑
             //folderBrowserDialog1.SelectedPath = @"C:\_git\整理字型";
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+                /*
                 richTextBox1.Text += "RootFolder: " + folderBrowserDialog1.RootFolder + "\n";
                 richTextBox1.Text += "Container: " + folderBrowserDialog1.Container + "\n";
                 richTextBox1.Text += "Description: " + folderBrowserDialog1.Description + "\n";
                 richTextBox1.Text += "ShowNewFolderButton: " + folderBrowserDialog1.ShowNewFolderButton + "\n";
                 richTextBox1.Text += "Site: " + folderBrowserDialog1.Site + "\n";
                 richTextBox1.Text += "Tag: " + folderBrowserDialog1.Tag + "\n";
-
+                */
                 comboBox1.Items.Clear();
 
                 string foldername = folderBrowserDialog1.SelectedPath;
@@ -169,11 +185,11 @@ namespace vcs_ShowFont
 
             //設置字體
             label2.Font = f;
+            old_font_name = pfc.Families[0];
         }
 
         private void bt_plus_Click(object sender, EventArgs e)
         {
-            string old_font_name = label2.Font.Name;
             float old_font_size = label2.Font.Size;
             old_font_size += 4;
 
@@ -187,7 +203,6 @@ namespace vcs_ShowFont
 
         private void bt_minus_Click(object sender, EventArgs e)
         {
-            string old_font_name = label2.Font.Name;
             float old_font_size = label2.Font.Size;
             old_font_size -= 4;
             if (old_font_size < 10)
@@ -200,5 +215,13 @@ namespace vcs_ShowFont
             label2.Font = f;
             tb_font_size.Text = label2.Font.Size.ToString();
         }
+
+        private void bt_x_Click(object sender, EventArgs e)
+        {
+            //顯示目前字型種類
+
+            richTextBox1.Text += "fontname = " + label2.Font.Name + "\n";
+        }
+
     }
 }

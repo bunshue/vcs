@@ -36,6 +36,8 @@
             this.bt_minus = new System.Windows.Forms.Button();
             this.bt_plus = new System.Windows.Forms.Button();
             this.tb_font_size = new System.Windows.Forms.TextBox();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.bt_x = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bt_open_folder
@@ -112,11 +114,31 @@
             this.tb_font_size.TabIndex = 7;
             this.tb_font_size.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(643, 144);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(60, 60);
+            this.bt_clear.TabIndex = 8;
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // bt_x
+            // 
+            this.bt_x.Location = new System.Drawing.Point(643, 210);
+            this.bt_x.Name = "bt_x";
+            this.bt_x.Size = new System.Drawing.Size(60, 60);
+            this.bt_x.TabIndex = 9;
+            this.bt_x.UseVisualStyleBackColor = true;
+            this.bt_x.Click += new System.EventHandler(this.bt_x_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 670);
+            this.Controls.Add(this.bt_x);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.tb_font_size);
             this.Controls.Add(this.bt_plus);
             this.Controls.Add(this.bt_minus);
@@ -144,6 +166,8 @@
         private System.Windows.Forms.Button bt_minus;
         private System.Windows.Forms.Button bt_plus;
         private System.Windows.Forms.TextBox tb_font_size;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button bt_x;
     }
 }
 
