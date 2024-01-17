@@ -20,6 +20,7 @@ print("------------------------------------------------------------")  # 60個
 
 filenames = glob.glob("*.txt")
 for filename in filenames:
+    print('檔案 :', filename)
     text = open(filename, "rb").read()
     codetype = chardet.detect(text)
     # print(type(codetype))
@@ -28,6 +29,8 @@ for filename in filenames:
 
     # 印出不是utf-8格式的檔案名稱
     if not codetype["encoding"] == "utf-8":
-        print("不是utf-8格式\t{} 編碼格式：{}".format(filename, codetype))
+        print("非utf-8格式, 編碼格式：{}".format(codetype))
+    else:
+        print("utf-8格式\n")
 
 print("------------------------------------------------------------")  # 60個

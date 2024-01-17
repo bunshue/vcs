@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ShowFont
+namespace vcs_test_all_04_Font2
 {
     static class Program
     {

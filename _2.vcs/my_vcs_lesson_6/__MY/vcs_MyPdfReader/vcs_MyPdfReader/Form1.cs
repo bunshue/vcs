@@ -48,7 +48,6 @@ namespace vcs_MyPdfReader
         ToolTip tooltip = new ToolTip();
 
         bool flag_debug_mode = true;
-        bool flag_repeat_mode = true;
 
         public Form1()
         {
@@ -196,17 +195,28 @@ namespace vcs_MyPdfReader
             Button bt_open_pdf = new Button();  // 實例化按鈕
             bt_open_pdf.Size = new Size(width, height);
             bt_open_pdf.Text = "";
-            bmp = new Bitmap(width, height);
-            bt_open_pdf.Image = bmp;
-            g = Graphics.FromImage(bmp);
-            g.Clear(Color.Pink);
-
-            g.DrawString("pdf", f, sb, new PointF(10, 15));
-
+            bt_open_pdf.BackgroundImage = Properties.Resources.open_folder;
+            bt_open_pdf.BackgroundImageLayout = ImageLayout.Zoom;
             bt_open_pdf.Location = new Point(x_st, y_st);
             bt_open_pdf.Click += bt_open_pdf_Click;     // 加入按鈕事件
             this.panel1.Controls.Add(bt_open_pdf); // 將按鈕加入表單
             bt_open_pdf.BringToFront();     //移到最上層
+
+            x_st = 75 + dx * 0;
+            y_st = 60 + dy * 1;
+            Button bt_open_recent_pdf = new Button();  // 實例化按鈕
+            bt_open_recent_pdf.Size = new Size(width, height);
+            bt_open_recent_pdf.Text = "";
+            bmp = new Bitmap(width, height);
+            bt_open_recent_pdf.Image = bmp;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+            g.DrawString("最近", f, sb, new PointF(4, 15));
+            bt_open_recent_pdf.Location = new Point(x_st, y_st);
+            bt_open_recent_pdf.Click += bt_open_recent_pdf_Click;     // 加入按鈕事件
+            this.panel1.Controls.Add(bt_open_recent_pdf); // 將按鈕加入表單
+            bt_open_recent_pdf.BringToFront();     //移到最上層
+
 
             //使用ToolTip
             tooltip.SetToolTip(bt_exit, "關閉");
@@ -230,6 +240,10 @@ namespace vcs_MyPdfReader
             do_open_pdf();
         }
 
+        private void bt_open_recent_pdf_Click(object sender, EventArgs e)
+        {
+            show_main_message1("開啟最近pdf", S_OK, 30);
+        }
 
         private void tb_pdf_page_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -260,7 +274,6 @@ namespace vcs_MyPdfReader
                         pdf_filename_short = Path.GetFileName(pdf_filename);
                         current_directory_pdf = Path.GetDirectoryName(pdf_filename);
                         webBrowser1.Navigate(pdf_filename);
-
                     }
                 }
             }
@@ -308,6 +321,7 @@ namespace vcs_MyPdfReader
                 show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
             }
             show_item_location();
+            this.webBrowser1.Focus();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

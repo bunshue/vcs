@@ -97,6 +97,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="img\clear.png" />
+    <None Include="img\open_folder.png" />
     <Content Include="player.ico" />
   </ItemGroup>
   <ItemGroup>

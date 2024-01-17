@@ -1,4 +1,4 @@
-﻿namespace vcs_ShowFont
+﻿namespace vcs_test_all_04_Font2
 {
     partial class Form1
     {

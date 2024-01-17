@@ -8,8 +8,8 @@
     <ProjectGuid>{73E4EB74-0D4C-461F-B959-00D4107BF442}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ShowFont</RootNamespace>
-    <AssemblyName>vcs_ShowFont</AssemblyName>
+    <RootNamespace>vcs_test_all_04_Font2</RootNamespace>
+    <AssemblyName>vcs_test_all_04_Font2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

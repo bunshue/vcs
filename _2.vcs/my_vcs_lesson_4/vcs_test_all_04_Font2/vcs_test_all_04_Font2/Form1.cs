@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Text;  //for InstalledFontCollection, PrivateFontCollection
 
-namespace vcs_ShowFont
+namespace vcs_test_all_04_Font2
 {
     public partial class Form1 : Form
     {
@@ -40,6 +40,7 @@ namespace vcs_ShowFont
             bt_x.Visible = false;
 
             show_item_location();
+            old_font_name = label2.Font.FontFamily;
 
             if (flag_debug_mode == true)
             {

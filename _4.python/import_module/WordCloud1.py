@@ -31,55 +31,43 @@ mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/cloud.jpg'
 
 print('------------------------------------------------------------')	#60個
 
-#讀取文字檔案
+#文字字串
 
-
-
-#製作mask
-mask_image = np.array(Image.open(mask_filename))
-
-print('------------------------------------------------------------')	#60個
-
-print("英文文章做成文字雲")
-
-# 原始文章
-cloud_text = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
+e_text1 = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
 Love is also considered to be a virtue representing human kindness, compassion, and affection, as "the unselfish loyal and benevolent concern for the good of another".[4] It may also describe compassionate and affectionate actions towards other humans, one's self or animals.[5]
 Love in its various forms acts as a major facilitator of interpersonal relationships and, owing to its central psychological importance, is one of the most common themes in the creative arts.[6] Love has been postulated to be a function to keep human beings together against menaces and to facilitate the continuation of the species.[7]
 Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, 
 and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
 
-wc = wordcloud.WordCloud(width = 1000, height = 600,
-                         background_color = "white")
-wc.generate(cloud_text)
 
-plt.imshow(wc) 
-plt.axis("off")
-plt.show()
+e_text2 = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
+Love is also considered to be a virtue representing human kindness, compassion, and affection, as "the unselfish loyal and benevolent concern for the good of another".[4] It may also describe compassionate and affectionate actions towards other humans, one's self or animals.[5]
+Love in its various forms acts as a major facilitator of interpersonal relationships and, owing to its central psychological importance, is one of the most common themes in the creative arts.[6] Love has been postulated to be a function to keep human beings together against menaces and to facilitate the continuation of the species.[7]
+Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
 
-print('------------------------------------------------------------')	#60個
+e_text3 = """The Zen of Python, by Tim Peters
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!"""
 
-print("中日文文章做成文字雲")
 
-#text_jp = """ メロスは激怒した。必ず、かの邪智暴虐じゃちぼうぎゃくの王を除かなければならぬと決意した。メロスには政治がわからぬ。メロスは、村の牧人である。笛を吹き、羊と遊んで暮して来た。けれども邪悪に対しては、人一倍に敏感であった。きょう未明メロスは村を出発し、野を越え山越え、十里はなれた此このシラクスの市にやって来た。メロスには父も、母も無い。女房も無い。十六の、内気な妹と二人暮しだ。この妹は、村の或る律気な一牧人を、近々、花婿はなむことして迎える事になっていた。結婚式も間近かなのである。メロスは、それゆえ、花嫁の衣裳やら祝宴の御馳走やらを買いに、はるばる市にやって来たのだ。先ず、その品々を買い集め、それから都の大路をぶらぶら歩いた。メロスには竹馬の友があった。セリヌンティウスである。今は此のシラクスの市で、石工をしている。その友を、これから訪ねてみるつもりなのだ。久しく逢わなかったのだから、訪ねて行くのが楽しみである。歩いているうちにメロスは、まちの様子を怪しく思った。ひっそりしている。もう既に日も落ちて、まちの暗いのは当りまえだが、けれども、なんだか、夜のせいばかりでは無く、市全体が、やけに寂しい。のんきなメロスも、だんだん不安になって来た。路で逢った若い衆をつかまえて、何かあったのか、二年まえに此の市に来たときは、夜でも皆が歌をうたって、まちは賑やかであった筈はずだが、と質問した。若い衆は、首を振って答えなかった。しばらく歩いて老爺ろうやに逢い、こんどはもっと、語勢を強くして質問した。老爺は答えなかった。メロスは両手で老爺のからだをゆすぶって質問を重ねた。老爺は、あたりをはばかる低声で、わずか答えた。"""
-text_tw = """ 梅洛絲氣急敗壞。 他決定一定要除掉那個邪惡、暴虐的國王。 梅羅斯不懂政治。 他是一個村裡的牧民。 他吹過笛子，和羊群生活過。 但他對邪惡比任何人都敏感。 而在今天黎明前，梅洛斯就離開了他的村莊，翻過田野，越過山巒，來到了十里外的錫拉庫扎城。 他沒有父親，沒有母親，也沒有妻子。 他沒有妻子。 他和靦腆的十六歲的妹妹住在一起。 妹妹要從村裡接來一個新郎，是個守規矩的牧民，很快就要結婚了。 婚禮就在眼前。 他大老遠跑來，就是為了買新娘的衣服和宴席。 他先買了貨，然後在京城的主要街道上逛了一圈。 梅羅斯有一個高蹺的朋友。 他就是塞利南提斯。 他現在是雪城這座城市的石匠。 我要去拜訪這位朋友。 好久不見，我很期待去看他。 在城市裡走來走去，梅羅斯對城市的面貌產生了懷疑。 這裡很安靜，也很荒涼。 太陽已經落山了，城市黑漆漆的可以理解，但這不僅僅是因為夜色，整個城市顯得十分寂寞。 無憂無慮的梅洛斯開始感到不安。 他抓住一個在街上遇到的年輕人，問他是不是發生了什麼事，因為兩年前他來這裡的時候，大家都在唱歌，即使到了晚上，這個城市也很熱鬧。 年輕人搖搖頭，沒有回答。 他走了一會兒，遇到老人，就問了他一個問題，這次的話更加有力。 老人沒有回答。 梅羅斯用手搖晃著老人的身體，問他更多的問題。 老人用難以捉摸的低沉聲音回答。"""
-
-wc = wordcloud.WordCloud(width = 1000, height = 600,
-                         background_color = "white",
-                         font_path = font_filename) 
-#wc.generate(text_jp) 
-wc.generate(text_tw) 
-
-plt.imshow(wc) 
-plt.axis("off")
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print("文章拆寫範例")
-
-# 中文的文章
-text = """梅洛絲很是氣憤。 他決心要除掉這個邪惡暴虐的國王。 梅羅斯不懂政治。 梅羅斯是村裡的牧民。 他一生都在吹笛子，和羊群玩耍。 但他對邪惡比大多數人更敏感。 今天黎明時分，梅羅斯離開了自己的村莊，穿過田野和山林，來到了十里外的這座錫拉庫扎城。 他沒有父親，沒有母親，沒有妻子。 他沒有妻子。 他和年僅16歲的羞澀妹妹單獨生活。 妹妹要接受村裡某位守法的牧民作為她的新郎。 婚禮即將舉行。 因此，梅洛絲大老遠地來到集市上買新娘的衣服和宴席。 先是買了這些東西，然後他就在城市的大街小巷裡轉悠。 梅洛斯有一個高蹺的朋友。 他就是塞利農提斯。 他現在是錫拉庫扎市的一名石匠。 他要去看望他的朋友。 很久沒有見到他了，所以我很期待去看他。 走著走著，梅洛斯對這個小鎮產生了懷疑。 它是如此的安靜。 太陽已經落山了，城市自然是一片漆黑，但這不僅僅是因為夜晚，整個城市顯得十分寂寞。 就連無憂無慮的梅洛斯也開始感到不安。 他抓住一個在街上遇到的年輕人，問他是不是出了什麼事，他說："兩年前我來這個市場的時候，大家連晚上都在唱歌，鎮上一定很熱鬧。 年輕人搖搖頭，沒有回答。 走了一會兒，遇到老人，他用比較強硬的語氣問了他一個問題。 老人沒有回答。 梅洛斯雙手搖晃著老人的身體，問了更多的問題。 老人低沉地回答道。
+c_text1 = """梅洛絲很是氣憤。 他決心要除掉這個邪惡暴虐的國王。 梅羅斯不懂政治。 梅羅斯是村裡的牧民。 他一生都在吹笛子，和羊群玩耍。 但他對邪惡比大多數人更敏感。 今天黎明時分，梅羅斯離開了自己的村莊，穿過田野和山林，來到了十里外的這座錫拉庫扎城。 他沒有父親，沒有母親，沒有妻子。 他沒有妻子。 他和年僅16歲的羞澀妹妹單獨生活。 妹妹要接受村裡某位守法的牧民作為她的新郎。 婚禮即將舉行。 因此，梅洛絲大老遠地來到集市上買新娘的衣服和宴席。 先是買了這些東西，然後他就在城市的大街小巷裡轉悠。 梅洛斯有一個高蹺的朋友。 他就是塞利農提斯。 他現在是錫拉庫扎市的一名石匠。 他要去看望他的朋友。 很久沒有見到他了，所以我很期待去看他。 走著走著，梅洛斯對這個小鎮產生了懷疑。 它是如此的安靜。 太陽已經落山了，城市自然是一片漆黑，但這不僅僅是因為夜晚，整個城市顯得十分寂寞。 就連無憂無慮的梅洛斯也開始感到不安。 他抓住一個在街上遇到的年輕人，問他是不是出了什麼事，他說："兩年前我來這個市場的時候，大家連晚上都在唱歌，鎮上一定很熱鬧。 年輕人搖搖頭，沒有回答。 走了一會兒，遇到老人，他用比較強硬的語氣問了他一個問題。 老人沒有回答。 梅洛斯雙手搖晃著老人的身體，問了更多的問題。 老人低沉地回答道。
 "王者殺人。
 "他為什麼要這麼做？
 你說他心懷不軌，但沒有人心懷不軌。
@@ -118,6 +106,52 @@ text = """梅洛絲很是氣憤。 他決心要除掉這個邪惡暴虐的國王
 　他醒來的時候，是第二天的黃昏。 梅洛斯跳起來，自言自語道："納木措，我是不是睡得太久了？ 今天，我將向國王展示人類的真相。 那麼我將帶著微笑走上十字架。 梅洛斯開始悠閒地準備著。 雨勢似乎有所減弱。 準備工作已經完成。 現在，梅羅斯揮舞著雙臂，像箭一樣在雨中奔跑。
 　我今晚就會被殺。 我是奔著被殺去的。 我跑去救我的朋友，他是我的贖金。 我是奔著打敗國王的邪惡和奸詐而去的。 我得走了 我就是這樣被殺的。 從小守護自己的榮譽。 再見了，祖國。 這對年輕的梅洛斯來說是很難的。 有好幾次，他幾乎停了下來。 他一邊跑，一邊大喊大叫，自責不已。 到了下一個村子，雨已經停了，太陽高高掛在天上，天氣越來越熱。 梅洛斯用拳頭擦了擦額頭的汗水，說："既然走到了這一步，我就沒事了。 我的姐妹們會是一對好夫妻。 我現在應該沒有任何顧慮了。 你要做的就是直接去城堡。 你不用這麼著急。 我慢慢走。"說著，他又恢復了天生的慵懶，用好聽的聲音唱起了他最喜歡的小調。 他晃晃悠悠地走了兩三里路，走到半路時，一場突如其來的災難讓他停下了腳步。 看著前面的河水。 昨日的大雨已經溢出了山中的水源，渾濁的水流在下游彙集成一股洪流，一舉摧毀了大橋，迴蕩的洪流在橋樑上彈出一片塵土。 他驚呆了，站在原地不動。 他這裡看看，那裡看看，高聲呼喚，但所有的停泊船都被海浪衝走了，沒有擺渡人的蹤影。 目前在這裡。"""
 
+
+
+
+#讀取文字檔案
+
+
+
+#製作mask
+mask_image = np.array(Image.open(mask_filename))
+
+print('------------------------------------------------------------')	#60個
+
+print("文字雲1: 英文文章做成文字雲")
+
+cloud_text = e_text1
+
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         background_color = "white")
+wc.generate(cloud_text)
+
+plt.imshow(wc) 
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print("文字雲2: 中日文文章做成文字雲")
+
+#cloud_text = """ メロスは激怒した。必ず、かの邪智暴虐じゃちぼうぎゃくの王を除かなければならぬと決意した。メロスには政治がわからぬ。メロスは、村の牧人である。笛を吹き、羊と遊んで暮して来た。けれども邪悪に対しては、人一倍に敏感であった。きょう未明メロスは村を出発し、野を越え山越え、十里はなれた此このシラクスの市にやって来た。メロスには父も、母も無い。女房も無い。十六の、内気な妹と二人暮しだ。この妹は、村の或る律気な一牧人を、近々、花婿はなむことして迎える事になっていた。結婚式も間近かなのである。メロスは、それゆえ、花嫁の衣裳やら祝宴の御馳走やらを買いに、はるばる市にやって来たのだ。先ず、その品々を買い集め、それから都の大路をぶらぶら歩いた。メロスには竹馬の友があった。セリヌンティウスである。今は此のシラクスの市で、石工をしている。その友を、これから訪ねてみるつもりなのだ。久しく逢わなかったのだから、訪ねて行くのが楽しみである。歩いているうちにメロスは、まちの様子を怪しく思った。ひっそりしている。もう既に日も落ちて、まちの暗いのは当りまえだが、けれども、なんだか、夜のせいばかりでは無く、市全体が、やけに寂しい。のんきなメロスも、だんだん不安になって来た。路で逢った若い衆をつかまえて、何かあったのか、二年まえに此の市に来たときは、夜でも皆が歌をうたって、まちは賑やかであった筈はずだが、と質問した。若い衆は、首を振って答えなかった。しばらく歩いて老爺ろうやに逢い、こんどはもっと、語勢を強くして質問した。老爺は答えなかった。メロスは両手で老爺のからだをゆすぶって質問を重ねた。老爺は、あたりをはばかる低声で、わずか答えた。"""
+cloud_text = """ 梅洛絲氣急敗壞。 他決定一定要除掉那個邪惡、暴虐的國王。 梅羅斯不懂政治。 他是一個村裡的牧民。 他吹過笛子，和羊群生活過。 但他對邪惡比任何人都敏感。 而在今天黎明前，梅洛斯就離開了他的村莊，翻過田野，越過山巒，來到了十里外的錫拉庫扎城。 他沒有父親，沒有母親，也沒有妻子。 他沒有妻子。 他和靦腆的十六歲的妹妹住在一起。 妹妹要從村裡接來一個新郎，是個守規矩的牧民，很快就要結婚了。 婚禮就在眼前。 他大老遠跑來，就是為了買新娘的衣服和宴席。 他先買了貨，然後在京城的主要街道上逛了一圈。 梅羅斯有一個高蹺的朋友。 他就是塞利南提斯。 他現在是雪城這座城市的石匠。 我要去拜訪這位朋友。 好久不見，我很期待去看他。 在城市裡走來走去，梅羅斯對城市的面貌產生了懷疑。 這裡很安靜，也很荒涼。 太陽已經落山了，城市黑漆漆的可以理解，但這不僅僅是因為夜色，整個城市顯得十分寂寞。 無憂無慮的梅洛斯開始感到不安。 他抓住一個在街上遇到的年輕人，問他是不是發生了什麼事，因為兩年前他來這裡的時候，大家都在唱歌，即使到了晚上，這個城市也很熱鬧。 年輕人搖搖頭，沒有回答。 他走了一會兒，遇到老人，就問了他一個問題，這次的話更加有力。 老人沒有回答。 梅羅斯用手搖晃著老人的身體，問他更多的問題。 老人用難以捉摸的低沉聲音回答。"""
+
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white")
+wc.generate(cloud_text)
+
+plt.imshow(wc) 
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print("文字雲3: 文章拆寫範例")
+
+text = c_text1
+
 # 拆解中文文章
 tk = Tokenizer()
 token = tk.tokenize(text, wakati = True)
@@ -125,8 +159,8 @@ token = tk.tokenize(text, wakati = True)
 
 # 利用wordcloud函式庫將分割完畢的文字資訊畫成文字雲
 wc = wordcloud.WordCloud(width = 1000, height = 600,
-                         background_color = "white",
-                         font_path = font_filename)
+                         font_path = font_filename,
+                         background_color = "white")
 wc.generate(" ".join(token)) 
 
 plt.imshow(wc) 
@@ -135,7 +169,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print("就算名詞只有一個字也繪製的範例")
+print("文字雲4: 就算名詞只有一個字也繪製的範例")
 
 meishi_list = [] 
 
@@ -145,8 +179,8 @@ for token in tk.tokenize(text):
 
 # 要讓只有一個字的單字出現必須設定regexp
 wc = wordcloud.WordCloud(width = 1000, height = 600,
-                         background_color = "white",
                          font_path = font_filename,
+                         background_color = "white",
                          regexp = "[\w']+") 
 wc.generate(" ".join(meishi_list)) 
 
@@ -156,18 +190,15 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print("製作文字雲")
+print("文字雲5: 製作文字雲")
 
 # 原始文章
-cloud_text = """Love encompasses a range of strong and positive emotional and mental states, from the most sublime virtue or good habit, the deepest interpersonal affection and to the simplest pleasure.[1][2] An example of this range of meanings is that the love of a mother differs from the love of a spouse, which differs from the love of food. Most commonly, love refers to a feeling of strong attraction and emotional attachment.[3]
-Love is also considered to be a virtue representing human kindness, compassion, and affection, as "the unselfish loyal and benevolent concern for the good of another".[4] It may also describe compassionate and affectionate actions towards other humans, one's self or animals.[5]
-Love in its various forms acts as a major facilitator of interpersonal relationships and, owing to its central psychological importance, is one of the most common themes in the creative arts.[6] Love has been postulated to be a function to keep human beings together against menaces and to facilitate the continuation of the species.[7]
-Ancient Greek philosophers identified five forms of love: essentially, familial love (in Greek, Storge), friendly love or platonic love (Philia), romantic love (Eros), guest love (Xenia) and divine love (Agape). Modern authors have distinguished further varieties of love: unrequited love, empty love, companionate love, consummate love, infatuated love, self-love, and courtly love. Asian cultures have also distinguished Ren, Kama, Bhakti, Mettā, Ishq, Chesed, and other variants or symbioses of these states.[8][9] The triangular theory of love suggests "intimacy, passion and commitment" are core components of love. Love has additional religious or spiritual meaning. This diversity of uses and meanings combined with the complexity of the feelings involved makes love unusually difficult to consistently define, compared to other emotional states."""
+cloud_text = e_text2
 
 # 產生以圖片作為遮罩的文字雲
-wc = wordcloud.WordCloud(width = 700, height = 700,
-                         background_color = "white",
+wc = wordcloud.WordCloud(width = 1000, height = 600,
                          font_path = font_filename,
+                         background_color = "white",
                          mask = mask_image,
                          contour_width = 6,
                          contour_color = "pink",
@@ -180,33 +211,13 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print("指定特定文字的顏色")
+print("文字雲6: 指定特定文字的顏色")
 
-# 原始文章
-text = """The Zen of Python, by Tim Peters
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren't special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you're Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it's a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let's do more of those!"""
+cloud_text = e_text3
 
 # 產生文字雲
 wc = wordcloud.WordCloud()
-wc.generate(text.lower()) 
+wc.generate(cloud_text.lower()) 
 
 # 定義調色函數
 def color_func(word, **kwargs):    
@@ -224,16 +235,16 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print("製作文字雲")
+print("文字雲7: 製作文字雲")
 
 text_filename = 'data/red_cliff.txt'
 
 cloud_text = open(text_filename,'r', encoding = 'utf-8').read()
 #print(cloud_text)
 
-wc = wordcloud.WordCloud(width = 1000, height = 860,
-                         background_color = "white",
+wc = wordcloud.WordCloud(width = 1000, height = 600,
                          font_path = font_filename,
+                         background_color = "white",
                          margin = 2,
                          mask = mask_image)
 wc.generate(cloud_text)
@@ -244,7 +255,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print("製作文字雲")
+print("文字雲8: 製作文字雲")
 
 import sqlite3
 
@@ -253,33 +264,37 @@ conn = sqlite3.connect(dbfile)
 
 sql_str = "select * from news;"
 rows = conn.execute(sql_str)
-all_news = ""
+cloud_text = ""
 for row in rows:
-    all_news += row[3]
+    cloud_text += row[3]
 
-wc = wordcloud.WordCloud(background_color = "white",
-                      width = 1000, height = 860,
-                      font_path = font_filename,
-                      margin = 2,
-                      mask = mask_image).generate(all_news)
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white",
+                         margin = 2,
+                         mask = mask_image)
+wc.generate(cloud_text)
+
 plt.imshow(wc)
 plt.axis("off")
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+print("文字雲9: 製作文字雲")
+
 text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
 with open(text_filename) as fp:
-    txt = fp.read()
+    cloud_text = fp.read()
 
 # 由txt文字產生WordCloud物件
-#wc = wordcloud.WordCloud().generate(txt)      
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white",
+                         margin = 2,
+                         mask = mask_image)
+wc.generate(cloud_text)
 
-wc = wordcloud.WordCloud(background_color = "white",
-                      width = 1000, height = 860,
-                      font_path = font_filename,
-                      margin = 2,
-                      mask = mask_image).generate(txt)
 plt.imshow(wc)
 plt.axis("off")
 plt.show()
@@ -287,6 +302,9 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 """ 無檔案 stopWords.txt
+
+print("文字雲10: 製作文字雲 jieba")
+
 import sqlite3
 
 dbfile = "data/applenews.db"
@@ -294,43 +312,47 @@ conn = sqlite3.connect(dbfile)
 
 sql_str = "select * from news;"
 rows = conn.execute(sql_str)
-all_news = ""
+cloud_text = ""
 for row in rows:
-    all_news += row[3]
+    cloud_text += row[3]
 
 stopwords = list()
 with open('stopWords.txt', 'rt', encoding = 'utf-8') as fp:
     stopwords = [word.strip() for word in fp.readlines()]
 
-keyterms = [keyterm for keyterm in jieba.cut(all_news) if keyterm not in stopwords]
-text = ",".join(keyterms)
+keyterms = [keyterm for keyterm in jieba.cut(cloud_text) if keyterm not in stopwords]
+cloud_text2 = ",".join(keyterms)
 
-wordcloud = wordcloud.WordCloud(background_color = "white",
-                      width = 1000, height = 860,
+wc = wordcloud.WordCloud(width = 1000, height = 600,
                       font_path = font_filename,
+                      background_color = "white",
                       margin = 2,
-                      mask = mask_image).generate(text)
+                      mask = mask_image)
+wc.generate(cloud_text2)
 
-plt.imshow(wordcloud)
+plt.imshow(wc)
 plt.axis("off")
 plt.show()
 """
 
 print('------------------------------------------------------------')	#60個
 
+print("文字雲11: 製作文字雲")
+
 text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
 with open(text_filename, encoding = 'cp950') as fp:
-    txt = fp.read()
+    cloud_text = fp.read()
 
 """
 text_filename = 'data/red_cliff.txt'  # 中文
 with open(text_filename, encoding = 'utf-8') as fp:
-    txt = fp.read()
+    cloud_text = fp.read()
 """
 
-#wc = wordcloud.WordCloud().generate(txt)      # 由txt文字產生WordCloud物件 未指定font, 字型NG
+#wc = wordcloud.WordCloud()      # 由cloud_text文字產生WordCloud物件 未指定font, 字型NG
 wc = wordcloud.WordCloud(
-    font_path = font_filename).generate(txt)      # 由txt文字產生WordCloud物件 指定font 字型OK
+    font_path = font_filename)      # 由cloud_text文字產生WordCloud物件 指定font 字型OK
+wc.generate(cloud_text)
 
 plt.imshow(wc)
 plt.axis("off")
@@ -338,125 +360,114 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
-with open(text_filename, encoding = 'cp950') as fp:
-    txt = fp.read()
-
-cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
-wc = wordcloud.WordCloud(                             # 建立詞雲物件
-    font_path = font_filename,
-    background_color = "white", width = 800, height = 600).generate(cut_text)
-
-plt.imshow(wc)
-plt.axis("off")
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
-with open(text_filename, encoding = 'cp950') as fp:
-    txt = fp.read()
-
-cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
-
-wc = wordcloud.WordCloud(                         # 建立詞雲物件
-    font_path = font_filename,
-    background_color = "white", width = 800, height = 600).generate(cut_text)
-
-plt.imshow(wc)
-plt.axis("off")
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
-with open(text_filename, encoding = 'cp950') as fp:
-    txt = fp.read()
-
-cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
-
-wc = wordcloud.WordCloud(                         # 建立詞雲物件
-    font_path = font_filename,
-    background_color = "yellow", width = 800, height = 400).generate(cut_text)
-
-plt.imshow(wc)
-plt.axis("off")
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
-with open(text_filename, encoding = "cp950") as fp:
-    txt = fp.read()
-
-cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
-
-wc = wordcloud.WordCloud(                         # 建立詞雲物件
-    font_path = font_filename,
-    background_color = "yellow", width = 800, height = 400).generate(cut_text)
-
-plt.imshow(wc)
-plt.axis("off")
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
-with open(text_filename, encoding = 'cp950') as fp:
-    txt = fp.read()
-
-cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
-
-wc = wordcloud.WordCloud(
-    font_path = font_filename,
-    background_color = "white",
-    mask = mask_image).generate(cut_text)        # mask設定
-
-plt.imshow(wc)
-plt.axis("off")
-plt.show()
-
-print('------------------------------------------------------------')	#60個
+print("文字雲12: 製作文字雲")
 
 text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
 with open(text_filename, encoding = 'cp950') as fp:        # 含中文的文字檔
-    txt = fp.read()                         # 讀取檔案
+    cloud_text = fp.read()                         # 讀取檔案
 
-wc = wordcloud.WordCloud(
-    font_path = font_filename,
-    background_color = "white",
-    mask = mask_image).generate(txt)             # mask設定
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white",
+                         mask = mask_image)             # mask設定
+wc.generate(cloud_text)
 
 plt.imshow(wc)
 plt.axis("off")
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+print("文字雲13: 製作文字雲")
 
 text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
 with open(text_filename) as fp:
-    txt = fp.read()
+    cloud_text = fp.read()
 
-wc = wordcloud.WordCloud(
-    font_path = font_filename,
-    background_color = "white").generate(txt)      
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white")
+wc.generate(cloud_text)
 
 plt.imshow(wc)
 plt.axis("off")
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+print("文字雲14: 製作文字雲 jieba")
+
+text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
+with open(text_filename, encoding = 'cp950') as fp:
+    cloud_text = fp.read()
+
+cloud_text2 = ' '.join(jieba.cut(cloud_text))     # 產生分詞的字串
+
+# 建立詞雲物件
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white")
+wc.generate(cloud_text2)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print("文字雲15: 製作文字雲 jieba")
+
+text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
+with open(text_filename, encoding = "cp950") as fp:
+    cloud_text = fp.read()
+
+cloud_text2 = ' '.join(jieba.cut(cloud_text))     # 產生分詞的字串
+
+# 建立詞雲物件
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white")
+wc.generate(cloud_text2)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print("文字雲16: 製作文字雲 jieba")
+
+text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
+with open(text_filename, encoding = 'cp950') as fp:
+    cloud_text = fp.read()
+
+cloud_text2 = ' '.join(jieba.cut(cloud_text))         # 產生分詞的字串
+
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white",
+                         mask = mask_image)  # mask設定
+wc.generate(cloud_text2)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print("文字雲17: 製作文字雲 jieba")
 
 text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
 with open(text_filename) as fp:
-    txt = fp.read()
+    cloud_text = fp.read()
 
-cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
+cloud_text2 = ' '.join(jieba.cut(cloud_text))         # 產生分詞的字串
 
-wc = wordcloud.WordCloud(
-    font_path = font_filename,
-    background_color = "white",
-    mask = mask_image).generate(cut_text)        # mask設定
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white",
+                         mask = mask_image)  # mask設定
+wc.generate(cloud_text2)
 
 plt.imshow(wc)
 plt.axis("off")
@@ -464,7 +475,26 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print('wordcloud：文字雲')
+print("文字雲18: 製作文字雲 jieba")
+
+text_filename = 'data/red_cliff_big5.txt'  # 中文大五碼
+with open(text_filename, encoding = 'cp950') as fp:
+    cloud_text = fp.read()
+
+cloud_text2 = ' '.join(jieba.cut(cloud_text))         # 產生分詞的字串
+
+wc = wordcloud.WordCloud(width = 1000, height = 600,
+                         font_path = font_filename,
+                         background_color = "white")
+wc.generate(cloud_text2)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print("文字雲19: 製作文字雲 jieba")
 
 cloud_text = open('data/travel.txt', "r",encoding="utf-8").read()
 jieba.set_dictionary('data/dict.txt.big.txt')
@@ -478,8 +508,8 @@ for t in jieba.cut(cloud_text, cut_all=False):
 diction = Counter(terms)
 
 wc = wordcloud.WordCloud(width = 1000, height = 600,
-                         background_color = "white",
-                         font_path = font_filename)
+                         font_path = font_filename,
+                         background_color = "white")
 
 #wc = wordcloud.WordCloud(background_color = "white", mask = mask_image, font_path = font_filename)
 #wc.generate_from_frequencies(frequencies=diction)
@@ -491,11 +521,13 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+print("文字雲20: 製作文字雲")
+
 from wordcloud import WordCloud, STOPWORDS
 
 # 載入文字檔並存成字串
 with open('data/hound.txt',encoding='utf-8', errors='ignore') as infile:
-    text = infile.read()
+    cloud_text = infile.read()
 
 # 將影像載入成 NumPy 陣列
 mask = np.array(Image.open('data/holmes.png'))
@@ -517,7 +549,8 @@ wc = WordCloud(max_words=500,
                random_state=6,
                contour_width=2,
                contour_color='brown',
-               colormap='copper').generate(text)
+               colormap='copper')
+wc.generate(cloud_text)
 
 # 將文字雲轉為 NumPy 陣列
 colors = wc.to_array()
