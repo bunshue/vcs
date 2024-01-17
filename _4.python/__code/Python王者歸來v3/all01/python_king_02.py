@@ -82,24 +82,6 @@ print("拷貝 - 觀察shallow_numset", shallow_numset)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_14.py
-
-# ch10_14.py
-countries = {'Japan', 'China', 'France'}
-print("刪除前的countries集合 ", countries)
-country = input("請輸入國家 : ")
-if country in countries:    
-    countries.remove('Japan')
-    print("刪除後的countries集合 ", countries)
-else:
-    print(f"{country} 不存在")
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_15.py
-
-# ch10_15.py
 animals = {'dog', 'cat', 'bird'}
 print("刪除前的animals集合    ", animals)
 # 欲刪除元素有在集合內
@@ -607,104 +589,6 @@ print(f"{ret_value} 的 type  = {type(ret_value)}")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_11.py
-
-# ch11_11.py
-def subtract(x1, x2):
-    """ 減法設計 """
-    result = x1 - x2
-    return result                   # 回傳減法結果
-print("本程式會執行 a - b 的運算")     
-a = int(input("a = "))
-b = int(input("b = "))
-print("a - b = ", subtract(a, b))   # 輸出a-b字串和結果
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_12.py
-
-# ch11_12.py
-def subtract(x1, x2):
-    """ 減法設計 """
-    return x1 - x2                     # 回傳減法結果
-def addition(x1, x2):
-    """ 加法設計 """
-    return x1 + x2                     # 回傳加法結果
-
-# 使用者輸入
-print("請輸入運算")
-print("1:加法")
-print("2:減法")
-op = int(input("輸入1/2: "))
-a = int(input("a = "))
-b = int(input("b = "))
-
-# 程式運算
-if op == 1:
-    print("a + b = ", addition(a, b))   # 輸出a-b字串和結果
-elif op == 2:
-    print("a - b = ", subtract(a, b))   # 輸出a-b字串和結果
-else:
-    print("運算方法輸入錯誤")
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_13.py
-
-# ch11_13.py
-def mutifunction(x1, x2):
-    """ 加, 減, 乘, 除四則運算 """
-    addresult = x1 + x2
-    subresult = x1 - x2
-    mulresult = x1 * x2
-    divresult = x1 / x2
-    return addresult, subresult, mulresult, divresult
-
-x1 = x2 = 10
-add, sub, mul, div = mutifunction(x1, x2)
-print("加法結果 = ", add)
-print("減法結果 = ", sub)
-print("乘法結果 = ", mul)
-print("除法結果 = ", div)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_13_1.py
-
-# ch11_13_1.py
-def mutifunction(x1, x2):
-    """ 加, 減, 乘, 除四則運算 """
-    addresult = x1 + x2
-    subresult = x1 - x2
-    mulresult = x1 * x2
-    divresult = x1 / x2
-    return addresult, subresult, mulresult, divresult
-
-x1 = x2 = 10
-ans = mutifunction(x1, x2)
-print("資料型態 : ", type(ans))
-print("加法結果 = ", ans[0])
-print("減法結果 = ", ans[1])
-print("乘法結果 = ", ans[2])
-print("除法結果 = ", ans[3])
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_14.py
-
-# ch11_14.py
 def guest_info(firstname, middlename, lastname, gender):
     """ 整合客戶名字資料 """
     if gender == "M":
@@ -717,9 +601,6 @@ info1 = guest_info('宇', '星', '洪', 'M')
 info2 = guest_info('雨', '冰', '洪', 'F')
 print(info1)
 print(info2)
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -776,35 +657,6 @@ print(member2)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_18.py
-
-# ch11_18.py
-def build_vip(id, name, tel = ''):
-    """ 建立VIP資訊 """
-    vip_dict = {'VIP_ID':id, 'Name':name}
-    if tel:
-        vip_dict['Tel'] = tel
-    return vip_dict
-
-while True:
-    print("建立VIP資訊系統")
-    idnum = input("請輸入ID: ")
-    name = input("請輸入姓名: ")    
-    tel = input("請輸入電話號碼: ")        # 如果直接按Enter可不建立此欄位
-    member = build_vip(idnum, name, tel)   # 建立字典
-    print(member, '\n')
-    repeat = input("是否繼續(y/n)? 輸入非y字元可結束系統: ")
-    if repeat != 'y':
-        break
-
-print("歡迎下次再使用")
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_19.py
-
-# ch11_19.py
 def product_msg(customers):
     str1 = '親愛的: '
     str2 = '本公司將在2023年12月20日夏威夷舉行產品發表會'
@@ -816,13 +668,8 @@ def product_msg(customers):
 members = ['Damon', 'Peter', 'Mary']
 product_msg(members)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_19_1.py
-
-# ch11_19_1.py
 def mydata(n):
     print("副程式 id(n) = : ", id(n), "\t", n)
     n = 5
@@ -2346,50 +2193,6 @@ print(mydict)                       # 列印字典
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_41.py
-
-# ch11_41.py
-def isPrime(num):
-    """ 測試num是否質數 """
-    for n in range(2, num):
-        if num % n == 0:
-            return False
-    return True
-
-num = int(input("請輸入大於1的整數做質數測試 = "))
-if isPrime(num):                   
-    print(f"{num} 是質數")
-else:                                   
-    print(f"{num} 不是質數")
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_41_1.py
-
-# ch11_41_1.py
-import math
-def isPrime(num):
-    """ 測試num是否質數 """
-    for n in range(2, int(math.sqrt(num))+1):
-        if num % n == 0:
-            return False
-    return True
-
-num = int(input("請輸入大於1的整數做質數測試 = "))
-if isPrime(num):                   
-    print(f"{num} 是質數")
-else:                                   
-    print(f"{num} 不是質數")
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_42.py
-
-# ch11_42.py
 def gcd(n1, n2):
     g = 1                               # 最初化最大公約數
     n = 2                               # 從2開始檢測
@@ -2399,10 +2202,8 @@ def gcd(n1, n2):
         n += 1
     return g
 
-n1, n2 = eval(input("請輸入2個整數值 : "))
+n1, n2 = 1233, 2477
 print("最大公約數是 : ", gcd(n1,n2))
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2418,7 +2219,7 @@ def gcd(a, b):
         b = tmp
     return a
 
-a, b = eval(input("請輸入2個整數值 : "))
+a, b = 1233,2477
 print("最大公約數是 : ", gcd(a, b))
 
 
@@ -2428,13 +2229,10 @@ print("最大公約數是 : ", gcd(a, b))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_44.py
-
-# ch11_44.py
 def gcd(a, b):
     return a if b == 0 else gcd(b, a % b)
 
-a, b = eval(input("請輸入2個整數值 : "))
+a, b = 1233,2477
 print("最大公約數是 : ", gcd(a, b))
 
 
@@ -2454,7 +2252,7 @@ def gcd(a, b):
 def lcm(a, b):
     return a * b // gcd(a, b)
 
-a, b = eval(input("請輸入2個整數值 : "))
+a, b = 1233,2477
 print("最大公約數是 : ", gcd(a, b))
 print("最小公倍數是 : ", lcm(a, b))
 
@@ -2544,26 +2342,6 @@ slow_function(3)            # 輸出 slow_function 執行需 : 3.000xxxx 秒
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_5.py
-
-# ch11_5.py
-def subtract(x1, x2):
-    """ 減法設計 """
-    result = x1 - x2
-    print(result)               # 輸出減法結果
-print("本程式會執行 a - b 的運算")     
-a = eval(input("a = "))
-b = eval(input("b = "))
-print("a - b = ", end="")       # 輸出a-b字串,接下來輸出不跳列
-subtract(a, b)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_6.py
-
-# ch11_6.py
 def interest(interest_type, subject):
     """ 顯示興趣和主題 """
     print("我的興趣是 " + interest_type )
@@ -4905,28 +4683,6 @@ except requests.exceptions.Timeout as e:
 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_37.py
-
-# ch15_37.py
-user_input = input("Please enter a number: ")
-
-try:
-    # 嘗試將使用者輸入轉換為整數
-    val = int(user_input)
-    print(f"Valid number entered: {val}")
-except ValueError:
-    # 如果輸入不能轉換為整數，處理 ValueError
-    print("That's not a number!")
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_4.py
-
-# ch15_4.py
 
 fn = 'data15_4.txt'             # 設定欲開啟的檔案
 try:

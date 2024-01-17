@@ -118,6 +118,7 @@ mask_image = np.array(Image.open(mask_filename))
 
 print('------------------------------------------------------------')	#60個
 
+'''
 print("文字雲1: 英文文章做成文字雲")
 
 cloud_text = e_text1
@@ -577,4 +578,220 @@ print('------------------------------------------------------------')	#60個
 # 檔案儲存
 #wc.to_file("tmp_WordCloud.png")
 #plt.savefig('hound_wordcloud.png')
+
+'''
+
+with open("data/data19_1.txt") as fp:    # 英文字的文字檔
+    txt = fp.read()
+    
+wc = wordcloud.WordCloud()
+wc.generate(txt)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/data19_2.txt") as fp:    # 含中文的文字檔
+    txt = fp.read()
+    
+wc = wordcloud.WordCloud()
+wc.generate(txt)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/data19_2.txt") as fp:            # 含中文的文字檔
+    txt = fp.read()
+
+cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
+
+wc = wordcloud.WordCloud(width=1000,height=600,
+               font_path="C:/Windows/Fonts\mingliu",
+               background_color="white")
+wc.generate(cut_text)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/data19_2.txt") as fp:        # 含中文的文字檔
+    txt = fp.read()
+
+cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
+
+wc = wordcloud.WordCloud(width=1000,height=600,
+               font_path="C:/Windows/Fonts\mingliu",
+               background_color="white")
+wc.generate(cut_text)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/data19_2.txt") as fp:        # 含中文的文字檔
+    txt = fp.read()
+
+cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
+
+wc = wordcloud.WordCloud(width=1000,height=600,
+               font_path="C:/Windows/Fonts\mingliu",
+               background_color="white")
+wc.generate(cut_text)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/data19_6.txt") as fp:        # 含中文的文字檔
+    txt = fp.read()
+
+cut_text = ' '.join(jieba.cut(txt))     # 產生分詞的字串
+
+wc = wordcloud.WordCloud(width=1000,height=600,
+               font_path="C:/Windows/Fonts\mingliu",
+               background_color="white")
+wc.generate(cut_text)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/data19_6.txt") as fp:            # 含中文的文字檔
+    txt = fp.read()
+cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
+
+bgimage = np.array(Image.open("data/star.gif"))  # 背景圖
+
+wc = wordcloud.WordCloud(
+    font_path="C:/Windows/Fonts\mingliu",
+    background_color="white",
+    mask=bgimage)
+wc.generate(cut_text)        # mask設定
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/data19_1.txt") as fp:            # 文字檔
+    txt = fp.read()
+
+bgimage = np.array(Image.open("data/hung.gif"))  # 背景圖
+
+wc = wordcloud.WordCloud(
+    font_path="C:/Windows/Fonts\OLDENGL.TTF",
+    background_color="white",
+    mask=bgimage)
+wc.generate(txt)             # mask設定
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/data19_6.txt") as fp:    # 含中文的文字檔
+    txt = fp.read()
+
+txt = '''這個產品非常易用, 性價比高, 客服回應速度慢。
+設計很時尚, 但運送過程中有輕微損壞。'''
+
+cut_text = ' '.join(jieba.cut(txt)) # 產生分詞的字串
+
+wc = wordcloud.WordCloud(width=1000,height=600,
+               font_path="C:/Windows/Fonts\mingliu",
+               background_color="white")
+wc.generate(cut_text)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/data19_6.txt") as fp:    # 含中文的文字檔
+    txt = fp.read()
+
+txt = '''產品性能卓越, Good, 客戶服務得到了很多正面評價,
+Top, Excellent, 新產品線也獲得了市場的熱烈反應'''
+
+cut_text = ' '.join(jieba.cut(txt)) # 產生分詞的字串
+
+wc = wordcloud.WordCloud(width=1000,height=600,
+               font_path="C:/Windows/Fonts\mingliu",
+               background_color="white")
+wc.generate(cut_text)
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+txt = '''我們的智慧手機有著卓越的電池壽命和出色的相機功能。
+它的超高解析度顯示螢幕讓視覺體驗更上一層樓。'''
+cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
+bgimage = np.array(Image.open("data/star.gif"))  # 背景圖
+
+wc = wordcloud.WordCloud(
+    font_path="C:/Windows/Fonts\mingliu",
+    background_color="white",
+    mask=bgimage)
+wc.generate(cut_text)        # mask設定
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/edata19_1.txt") as fp:   # 英文字的文字檔
+    txt = fp.read()
+    
+wc = wordcloud.WordCloud(
+    font_path="C:/Windows/Fonts\OLDENGL.TTF", 
+    background_color="white")
+wc.generate(txt)      
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+with open("data/edata19_1.txt") as fp:            # 含中文的文字檔
+    txt = fp.read()
+cut_text = ' '.join(jieba.cut(txt))         # 產生分詞的字串
+
+bgimage = np.array(Image.open("data/me.gif"))  # 背景圖
+
+wc = wordcloud.WordCloud(
+    font_path="C:/Windows/Fonts\OLDENGL.TTF",
+    background_color="white",
+    mask=bgimage)
+wc.generate(cut_text)        # mask設定
+
+plt.imshow(wc)
+plt.axis("off")
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
+
+
 

@@ -142,6 +142,17 @@ namespace vcs_ArrayList
             Console.WriteLine("    Capacity: {0}", myAL.Capacity);
             Console.Write("    Values:");
             PrintValues(myAL);
+
+            richTextBox1.Text += "顯示ArrayList的內容:\n";
+            richTextBox1.Text += "myAL\n";
+            richTextBox1.Text += "    Count:    " + myAL.Count.ToString() + "\n";
+            richTextBox1.Text += "    Capacity: " + myAL.Capacity.ToString() + "\n";
+            richTextBox1.Text += "    Values: ";
+
+            foreach (Object obj in myAL)
+                richTextBox1.Text += "   " + obj.ToString() + " ";
+
+            richTextBox1.Text += "\n";
         }
 
         public static void PrintValues(IEnumerable myList)

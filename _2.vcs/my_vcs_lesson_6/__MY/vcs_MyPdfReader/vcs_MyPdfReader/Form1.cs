@@ -25,8 +25,8 @@ namespace vcs_MyPdfReader
         int W = Screen.PrimaryScreen.WorkingArea.Width;
         int H = Screen.PrimaryScreen.WorkingArea.Height;
 
-        int debug_panel_width = 128;
-        int debug_panel_height = 0;
+        int message_panel_width = 128;
+        int message_panel_height = 0;
 
         int pdf_page = 0;
 
@@ -42,12 +42,9 @@ namespace vcs_MyPdfReader
         Panel panel1 = new Panel();
 
         Timer timer_display = new Timer();
-        Timer timer1 = new Timer();
 
         //在控件上加ToolTip
         ToolTip tooltip = new ToolTip();
-
-        bool flag_debug_mode = true;
 
         public Form1()
         {
@@ -57,58 +54,38 @@ namespace vcs_MyPdfReader
         void Init_Controls()
         {
             this.panel1.BackColor = Color.Pink;
-            this.panel1.Location = new System.Drawing.Point(W - debug_panel_width, 0);
-            this.panel1.Size = new System.Drawing.Size(debug_panel_width, debug_panel_height);
+            this.panel1.Location = new System.Drawing.Point(W - message_panel_width, 0);
+            this.panel1.Size = new System.Drawing.Size(message_panel_width, message_panel_height);
             this.Controls.Add(this.panel1);
 
-            this.richTextBox1.Location = new System.Drawing.Point(0, debug_panel_height / 2);
-            this.richTextBox1.Size = new System.Drawing.Size(debug_panel_width, debug_panel_height / 2);
+            this.richTextBox1.Location = new System.Drawing.Point(0, message_panel_height / 2);
+            this.richTextBox1.Size = new System.Drawing.Size(message_panel_width, message_panel_height / 2);
             this.panel1.Controls.Add(this.richTextBox1);
 
             timer_display.Interval = 100;
             timer_display.Tick += new EventHandler(timer_display_Tick);
-            timer1.Interval = 200;
-            timer1.Enabled = true;
-            timer1.Tick += new EventHandler(timer1_Tick);
 
-            if (flag_debug_mode == false)
-            {
-                this.panel1.Visible = false;
+            this.panel1.Visible = true;
+            this.webBrowser1 = new WebBrowser();
+            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
+            //this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(W - message_panel_width, H - 50);
+            //this.webBrowser1.TabIndex = 2;
+            //this.webBrowser1.Visible = false;   //fail
+            this.Controls.Add(this.webBrowser1);
 
-                //正常使用
-                this.webBrowser1 = new WebBrowser();
-                this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-                //this.webBrowser1.Name = "webBrowser1";
-                this.webBrowser1.Size = new System.Drawing.Size(W - 10, H - 50);
-                //this.webBrowser1.TabIndex = 2;
-                //this.webBrowser1.Visible = false;   //fail
-                this.Controls.Add(this.webBrowser1);
-            }
-            else
-            {
-                this.panel1.Visible = true;
-                //debug模式
-                this.webBrowser1 = new WebBrowser();
-                this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-                //this.webBrowser1.Name = "webBrowser1";
-                this.webBrowser1.Size = new System.Drawing.Size(W - debug_panel_width, H - 50);
-                //this.webBrowser1.TabIndex = 2;
-                //this.webBrowser1.Visible = false;   //fail
-                this.Controls.Add(this.webBrowser1);
-
-                int w = 120;
-                int h = 120;
-                tb_pdf_page.Width = w / 2;
-                tb_pdf_page.Height = h / 2;
-                tb_pdf_page.Font = new Font("Arial", 20);
-                tb_pdf_page.Text = "5";
-                //this.tb_file_l.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
-                tb_pdf_page.KeyPress += new System.Windows.Forms.KeyPressEventHandler(tb_pdf_page_KeyPress);
-                tb_pdf_page.TextAlign = HorizontalAlignment.Center;
-                tb_pdf_page.Location = new Point(75, this.panel1.Height / 2 - tb_pdf_page.Height);
-                this.panel1.Controls.Add(tb_pdf_page);    // 將控件加入表單
-                tb_pdf_page.BringToFront();
-            }
+            int w = 120;
+            int h = 120;
+            tb_pdf_page.Width = w / 2;
+            tb_pdf_page.Height = h / 2;
+            tb_pdf_page.Font = new Font("Arial", 20);
+            tb_pdf_page.Text = "5";
+            //this.tb_file_l.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            tb_pdf_page.KeyPress += new System.Windows.Forms.KeyPressEventHandler(tb_pdf_page_KeyPress);
+            tb_pdf_page.TextAlign = HorizontalAlignment.Center;
+            tb_pdf_page.Location = new Point(75, this.panel1.Height / 2 - tb_pdf_page.Height);
+            this.panel1.Controls.Add(tb_pdf_page);    // 將控件加入表單
+            tb_pdf_page.BringToFront();
         }
 
         void show_item_location()
@@ -256,7 +233,7 @@ namespace vcs_MyPdfReader
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            debug_panel_height = H - 50;
+            message_panel_height = H - 50;
 
             Init_Controls();
 
@@ -410,10 +387,6 @@ namespace vcs_MyPdfReader
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-        }
-
         void do_open_pdf()	//開啟pdf檔案
         {
             show_main_message1("開啟pdf檔案", S_OK, 30);
@@ -427,6 +400,7 @@ namespace vcs_MyPdfReader
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
             openFileDialog1.InitialDirectory = current_directory_pdf;
+            //openFileDialog1.InitialDirectory = @"D:\______C_data1\_______doc\doc1";
             openFileDialog1.Multiselect = false;    //單選
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)

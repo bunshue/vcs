@@ -1,4 +1,3 @@
-# ch27_1.py
 import PyPDF2
 
 fn = 'travel.pdf'               # 欲讀取的PDF檔案
@@ -6,12 +5,8 @@ with open(fn,'rb') as file:     # 以二進位方式開啟
     pdfRd = PyPDF2.PdfReader(file)
     print("PDF頁數是 = ", len(pdfRd.pages))
 
+print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_10.py
-
-# ch27_10.py
 import PyPDF2
 
 # 打開 PDF 文件
@@ -34,20 +29,8 @@ with open('sse.pdf', 'rb') as ssefile, open('secret.pdf', 'rb') as secretfile:
     with open('out27_10.pdf', 'wb') as output_file:
         pdfWr.write(output_file)
 
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_11.py
-
-# ch27_11.pdf
 import PyPDF2
 
 source_pdf = 'travel.pdf'
@@ -71,13 +54,8 @@ with open(output_pdf, 'wb') as output:
 
 print(f"含有 '大峽谷' 的頁面已輸出到 {output_pdf}")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_2.py
-
-# ch27_2.py
 import PyPDF2
 
 fn = 'travel.pdf'               # 欲讀取的PDF檔案
@@ -86,16 +64,9 @@ with open(fn,'rb') as file:     # 以二進位方式開啟
     page = pdfRd.pages[0]       # 讀第 0 頁
     txt = page.extract_text()   # 取得頁面內容
     print(txt)
-    
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_2_1.py
-
-# ch27_2_1.py
 import PyPDF2
 
 fn = 'member.pdf'               # 欲讀取的PDF檔案
@@ -104,16 +75,9 @@ with open(fn,'rb') as file:     # 以二進位方式開啟
     page = pdfRd.pages[0]       # 讀第 0 頁
     txt = page.extract_text()   # 取得頁面內容
     print(txt)
-    
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_3.py
-
-# ch27_3.py
 import PyPDF2
 
 fn = 'travel.pdf'               # 欲讀取的PDF檔案
@@ -127,14 +91,8 @@ with open(fn,'rb') as file:     # 以二進位方式開啟
         else:
             print("這一頁沒有文字")
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_4.py
-
-# ch27_4.py
 import PyPDF2
 
 def encryptYorN(fn):
@@ -149,19 +107,8 @@ def encryptYorN(fn):
 encryptYorN('travel.pdf')
 encryptYorN('encrypttravel.pdf')
 
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_5.py
-
-# ch27_5.py
 import PyPDF2
 
 fn = 'encrypttravel.pdf'
@@ -174,23 +121,8 @@ with open(fn,'rb') as file:
     else:
         print('解密失敗')
 
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_6.py
-
-# ch27_6.py
 import PyPDF2
 
 # 打開原始 PDF 文件
@@ -205,13 +137,8 @@ with open('travel.pdf', 'rb') as file:
     with open('out27_6.pdf', 'wb') as output_file:
         pdfWr.write(output_file)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_7.py
-
-# ch27_7.py
 import PyPDF2
 
 # 打開原始 PDF 文件
@@ -229,9 +156,6 @@ with open('travel.pdf', 'rb') as file:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_8.py
-
-# ch27_8.py
 import PyPDF2
 
 # 打開原始 PDF 文件
@@ -248,13 +172,8 @@ with open('travel.pdf', 'rb') as file:
     with open('out27_8.pdf', 'wb') as output_file:
         pdfWr.write(output_file)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_8_1.py
-
-# ch27_8_1.py
 import PyPDF2
 
 # 打開原始 PDF 文件
@@ -271,13 +190,8 @@ with open('travel.pdf', 'rb') as file:
     with open('out27_8_1.pdf', 'wb') as output_file:
         pdfWr.write(output_file)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch27\ch27_9.py
-
-# ch27_9.py
 import PyPDF2
 
 # 打開原始 PDF 文件
@@ -297,8 +211,4 @@ with open('travel.pdf', 'rb') as file:
     with open('out27_9.pdf', 'wb') as output_file:
         pdfWr.write(output_file)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
