@@ -6,7 +6,7 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-
+'''
 import csv
 
 csvfile = "tmp_Example2.csv"
@@ -49,5 +49,26 @@ with open(csvfile, 'w+', newline='') as fp:
     writer.writerow(["程式語言","開發者","上市年","副檔名"])
     for row in lst1:
         writer.writerow(row)
+
+print('------------------------------------------------------------')	#60個
+
+'''
+
+import csv
+
+# 讀取 CSV 檔案並提取電子郵件地址
+with open('data/member.csv', newline='', encoding='utf-8') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        #print(row['姓名'], end = "\t")   #不能用
+        print(row['電子郵件'], end = "\t")
+        print(row['體重'])
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
 print('------------------------------------------------------------')	#60個
 

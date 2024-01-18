@@ -1,30 +1,19 @@
-# ch24_1.py
 from selenium import webdriver
 
 driverPath = 'D:\geckodriver\geckodriver.exe'
 browser = webdriver.Firefox(executable_path=driverPath)
 print(type(browser))
 
+print("------------------------------------------------------------")  # 60個
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch24\ch24_2.py
-
-# ch24_2.py
 from selenium import webdriver
 
 dirverPath = 'D:\geckodriver\chromedriver.exe'
 browser = webdriver.Chrome(dirverPath)
 print(type(browser))
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch24\ch24_3.py
-
-# ch24_3.py
 from selenium import webdriver
 
 driverPath = 'D:\geckodriver\geckodriver.exe'
@@ -32,15 +21,8 @@ browser = webdriver.Firefox(executable_path=driverPath)
 url = 'http://aaa.24ht.com.tw'
 browser.get(url)                # 網頁下載至瀏覽器
 
-
-            
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch24\ch24_4.py
-
-# ch24_4.py
 from selenium import webdriver
 
 driverPath = 'D:\geckodriver\geckodriver.exe'
@@ -70,9 +52,6 @@ for i in range(len(tag4)):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch24\ch24_5.py
-
-# ch24_5.py
 from selenium import webdriver
 import time
 
@@ -86,18 +65,8 @@ print(type(eleLink))            # 列印eleLink資料類別
 time.sleep(5)                   # 暫停5秒
 eleLink.click()                 
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch24\ch24_6.py
-
-# ch24_6.py
 from selenium import webdriver
 import time
 
@@ -111,20 +80,8 @@ txtBox.send_keys('明志科技大學')        # 輸入表單資料
 time.sleep(5)                           # 暫停5秒
 txtBox.submit()                         # 送出表單
 
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch24\ch24_7.py
-
-# ch24_7.py
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
@@ -144,19 +101,8 @@ ele.send_keys(Keys.PAGE_UP)         # 網頁捲動到上一頁
 time.sleep(3)
 ele.send_keys(Keys.HOME)            # 網頁捲動到最上端
 
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch24\ch24_8.py
-
-# ch24_8.py
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
@@ -171,15 +117,4 @@ browser.refresh()                   # 更新網頁
 time.sleep(3)
 browser.quit()                      # 關閉網頁
 
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-

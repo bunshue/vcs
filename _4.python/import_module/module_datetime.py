@@ -80,6 +80,71 @@ print("你要查詢的月份的最後一天是西元",check(year,month))
 
 print('------------------------------------------------------------')	#60個
 
+import datetime
+
+timeNow = datetime.datetime.now()
+print(type(timeNow))
+print("列出現在時間 : ", timeNow)
+print("年 : ", timeNow.year)
+print("月 : ", timeNow.month)
+print("日 : ", timeNow.day)
+print("時 : ", timeNow.hour)
+print("分 : ", timeNow.minute)
+print("秒 : ", timeNow.second)
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+
+deltaTime = datetime.timedelta(days=3, hours=5, minutes=8, seconds=10)
+print(deltaTime.days, deltaTime.seconds, deltaTime.microseconds)
+
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+
+deltaTime = datetime.timedelta(days=100)
+timeNow = datetime.datetime.now()
+print("現在時間是 : ", timeNow)
+print("100天後是  : ", timeNow + deltaTime)
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+
+timeNow = datetime.datetime.now()
+print(timeNow.strftime("%Y/%m/%d %H:%M:%S"))
+print(timeNow.strftime("%y-%b-%d %H-%M-%S"))
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+
+import datetime
+
+timeStop = datetime.datetime(2023, 11, 18, 17, 50, 0)
+while datetime.datetime.now() < timeStop:
+    print("program is sleeping.", end="")
+print("Wake up")
+
+print("------------------------------------------------------------")  # 60個
+
+
+import datetime
+
+timeStop = datetime.datetime(2024, 1, 1, 8, 0, 0)
+while datetime.datetime.now() < timeStop:
+    pass
+print("女朋友生日")
+"""
+
+
+
+
+
+
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
