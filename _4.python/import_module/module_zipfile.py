@@ -301,6 +301,44 @@ fileUnZip.close()
 print("------------------------------------------------------------")  # 60個
 
 
+
+print('解壓縮一個zip檔')
+
+zip_filename = 'C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip'
+
+import zipfile
+
+fileUnZip = zipfile.ZipFile(zip_filename)
+fileUnZip.extractall('_tmp_unzip')
+fileUnZip.close()
+
+print("------------------------------------------------------------")  # 60個
+
+import zipfile
+
+zip_filename = 'C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip'
+
+listZipInfo = zipfile.ZipFile(zip_filename, 'r')
+print(listZipInfo.namelist())       # 以列表列出所有壓縮檔案
+print("\n")
+for info in listZipInfo.infolist():
+    print(info.filename, info.file_size, info.compress_size)
+
+print("------------------------------------------------------------")  # 60個
+
+import zipfile
+import glob, os
+
+fileZip = zipfile.ZipFile('_tmp_zzzz.zip', 'w')
+for name in glob.glob('zip_folder/*'):        # 遍歷 zip_folder 目錄
+    fileZip.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
+    
+fileZip.close()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 print('------------------------------------------------------------')	#60個
 
 

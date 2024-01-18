@@ -4,6 +4,7 @@ import time
 import random
 import numpy as np
 
+'''
 print('------------------------------------------------------------')	#60個
 
 print('---- 字串處理專區 --------------------------------------------------------')	#60個
@@ -972,25 +973,6 @@ print("串列元素由小到大排序: ", sorted(list1))
 
 print("------------------------------------------------------------")  # 60個
 
-print("int(8.4)=", int(8.4))
-print("bin(14)=", bin(14))
-#print("hex(84)=", hex(84))
-print("oct(124)=", oct(124))
-print("float(6)=", float(6))
-print("abs(-6.4)=", abs(-6.4))
-print("divmod(58,5)=", divmod(58, 5))
-print("pow(3,4)=", pow(3, 4))
-print("round(3.5)=", round(3.5))
-print("chr(68)=", chr(68))
-print("ord('%s')=%d" % ("A", ord("A")))
-print("str(1234)=", str(1234))
-print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
-print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
-print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
-print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
-
-print("------------------------------------------------------------")  # 60個
-
 loc = ([1, 2, 3, 4], [11, 12, 13, 14])
 print(type(loc))
 print(loc)
@@ -998,8 +980,7 @@ print(loc[::-1])
 
 print("------------------------------------------------------------")  # 60個
 
-'''
-#! /usr/bin/env python3
+
 """n2w: 數字轉英文模組, 包含一個num2words函式, 也能獨立執行
 獨立執行用法: n2w num
               num: 0~999,999,999,999,999 之間的整數 (可用逗號分隔)
@@ -1173,7 +1154,6 @@ requests.get(request_url).json()
 
 # 有這樣的 API 啊，網址是：https://zipcloud.ibsnet.co.jp/doc/api，請幫我寫出來
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 import requests
@@ -1545,10 +1525,10 @@ def main():
         sleep(1)
         clock.run()
 
-'''
+"""
 if __name__ == '__main__':
     main()
-'''
+"""
 
 from abc import ABCMeta, abstractmethod
 from math import pi
@@ -1857,14 +1837,6 @@ print("依\\n分割字串", str3.splitlines(False))
 
 
 print("------------------------------------------------------------")  # 60個
-math.sqrt(sum(pow(x - (sum(data) / len(data)), 2) for x in data) / len(data))
-
-mean = sum(data) / len(data)
-variance = sum(pow(x - mean, 2) for x in data) / len(data)
-std = math.sqrt(variance)
-
-
-print("------------------------------------------------------------")  # 60個
 
 print("a", "b", "c", sep="|")
 
@@ -1886,7 +1858,6 @@ prices2 = {key: value for key, value in prices.items() if value > 100}
 print(prices2)
 
 print("------------------------------------------------------------")  # 60個
-
 
 """
 迭代工具 - 排列 / 組合 / 笛卡爾積
@@ -1913,52 +1884,6 @@ counter = Counter(words)
 print(counter.most_common(3))
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-x = -10
-print("以下輸出abs( )函數的應用")
-print(x)  # 輸出x變數
-print(abs(x))  # 輸出abs(x)
-x = 5
-y = 3
-print("以下輸出pow( )函數的應用")
-print(pow(x, y))  # 輸出pow(x,y)
-x = 47.5
-print("以下輸出round(x)函數的應用")
-print(x)  # 輸出x變數
-print(round(x))  # 輸出round(x)
-x = 48.5
-print(x)  # 輸出x變數
-print(round(x))  # 輸出round(x)
-x = 49.5
-print(x)  # 輸出x變數
-print(round(x))  # 輸出round(x)
-print("以下輸出round(x,n)函數的應用")
-x = 2.15
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-x = 2.25
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-x = 2.151
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-x = 2.251
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-
-print("------------------------------------------------------------")  # 60個
-
-dist = 384400  # 地球到月亮距離
-speed = 1225  # 馬赫速度每小時1225公里
-total_hours = dist // speed  # 計算小時數
-days, hours = divmod(total_hours, 24)  # 商和餘數
-print("總供需要天數")
-print(days)
-print("小時數")
-print(hours)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2526,6 +2451,7 @@ print(equation(3, y=2 , z=1))
 
 print("------------------------------------------------------------")  # 60個
 
+print("串列")
 score=[97,76,89,76,90,100,87,65]
 
 print('本學期總共考過的數學小考次數', len(score))
@@ -2536,6 +2462,17 @@ print('本學期考最差的分數為', min(score))
 print('本學期考最好的分數為', max(score))
 
 print("------------------------------------------------------------")  # 60個
+
+score=[97,76,89,76,90,100,87,65]
+print('本學期總共考過的數學小考次數', len(score))
+print('所有成績由小到大排序的結果為: {}'.format(sorted(score)))
+print('本學期所有分數的總和', sum(score))
+print('本學期所有分數的平均', round(sum(score)/len(score),1))
+print('本學期考最差的分數為', min(score))
+print('本學期考最好的分數為', max(score))
+
+print("------------------------------------------------------------")  # 60個
+
 
 def square_sum(*arg):
     ans=0
@@ -2605,15 +2542,17 @@ print('chr(69)=',chr(69))
 print('ord(\'%s\')=%d' %('D',ord('D')))
 print('str(543)=',str(543))
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 animals = '鼠牛虎兔龍蛇馬羊猴雞狗豬'
 for animal in animals:
-    print(animal)
+    print(animal, end = ' ')
+print()
 
 print("------------------------------------------------------------")  # 60個
 
-animals = "Python程式設計"
+animals = '鼠牛虎兔龍蛇馬羊猴雞狗豬'
 print(animals[0])
 print(animals[1])
 print(animals[-1])
@@ -2629,6 +2568,7 @@ print("------------------------------------------------------------")  # 60個
 
 # 字串函數
 animals = 'Hello World!'
+animals = '鼠牛虎兔龍蛇馬羊猴雞狗豬'
 print("animals = ", animals)
 s = len(animals)
 print("len(animals) = ", str(s))
@@ -2636,14 +2576,16 @@ s = max(animals)
 print("max(animals) = ", s)
 s = min(animals)
 print("min(animals) = ", s)
-str2 = 'Python程式設計'
-print("str2 = ", str2)
-s = len(str2)
-print("len(str2) = ", str(s))
-s = max(str2)
-print("max(str2) = ", s)
-s = min(str2)
-print("min(str2) = ", s)
+
+animals = '鼠牛虎兔龍蛇馬羊猴雞狗豬'
+animals = 'Python程式設計'
+print("animals = ", animals)
+s = len(animals)
+print("len(animals) = ", str(s))
+s = max(animals)
+print("max(animals) = ", s)
+s = min(animals)
+print("min(animals) = ", s)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2693,20 +2635,20 @@ print("------------------------------------------------------------")  # 60個
 
 animals = 'welcome to python'
 print("animals = ", animals)
-str2 = 'Welcome to Python'
-print("str2 = ", str2)
+animals = 'Welcome to Python'
+print("animals = ", animals)
 str3 = 'This is a test.'
 print("str3 = ", str3)
 s = animals.capitalize()
 print("animals.capitalize() = ", s)
-s = str2.lower()
-print("str2.lower() = ", s)
+s = animals.lower()
+print("animals.lower() = ", s)
 s = animals.upper()
 print("animals.upper() = ", s)
 s = animals.title()
 print("animals.title() = ", s)
-s = str2.swapcase()
-print("str2.swapcase() = ", s)
+s = animals.swapcase()
+print("animals.swapcase() = ", s)
 s = str3.replace('is', 'was')
 print("str3.replace('is', 'was') = ", s)
 
@@ -3316,54 +3258,14 @@ print(d2)
 
 print("------------------------------------------------------------")  # 60個
 
-r = abs(-10)
-print("abs(-10) = ", r)
-r = abs(5)
-print("abs(5) = ", r)
-r = pow(8, 2)
-print("pow(8, 2) = ", r)
-r = pow(2, 3)
-print("pow(2, 3) = ", r)
-r = max(9, 3, 12, 32, 81, 92)
-print("max(9, 3, 12, 32, 81, 92) = ", r)
-r = min(9, 3, 12, 32, 81, 92)
-print("min(9, 3, 12, 32, 81, 92) = ", r)
-r = round(5.32)
-print("round(5.32) = ", r)
-r = round(5.52)
-print("round(5.52) = ", r)
-r = round(3.14568757, 3)
-print("round(3.14568757, 3) = ", r)
-r = round(3.14568757, 1)
-print("round(3.14568757, 1) = ", r)
-
-bmi = 1.23456789
-
-print("您的BMI值為：", round(bmi, 2))
-
-# 輸出BMI值，並四捨五入到小數點後兩位
-print("您的BMI值為：", round(bmi, 2))
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 word = ["holiday", "happy", "birth",
-             "yesterday", "holiday", "car",
-             "yellow", "happy", "mobile",
-             "cup", "happy", "holiday",
-             "holiday", "desk", "birth",
-             ]
+        "yesterday", "holiday", "car",
+        "yellow", "happy", "mobile",
+        "cup", "happy", "holiday",
+        "holiday", "desk", "birth",
+        ]
 print("holiday 出現的次數", word.count("holiday"))
 
-print("------------------------------------------------------------")  # 60個
-
-word = ["holiday", "happy", "birth",
-             "yesterday", "holiday", "car",
-             "yellow", "happy", "mobile",
-             "cup", "happy", "holiday",
-             "holiday", "desk", "birth",
-             ]
 search_str="yellow"
 print("單字 %s 第一次出現的索引值%d" %(search_str,word.index(search_str)))
 
@@ -3382,6 +3284,7 @@ print(zoo)
 
 print("------------------------------------------------------------")  # 60個
 
+print("集合")
 friendA= {"Andy", "Axel", "Michael","May"}
 friendB = {"Peter", "Axel", "Andy","Julia"}
 print(friendA & friendB)
@@ -3526,25 +3429,6 @@ print('全部轉為小寫字元', phrase.lower())
 print('判斷字串首字元是否為大寫', phrase.istitle())
 print('是否皆為大寫字元', phrase.isupper())
 print('是否皆為小寫字元', phrase.islower())
-
-print("------------------------------------------------------------")  # 60個
-
-print('int(8.4)=',int(8.4))
-print('bin(14)=',bin(14))
-print('hex(84)=',hex(84))
-print('oct(124)=',oct(124))
-print('float(6)=',float(6))
-print('abs(-6.4)=',abs(-6.4))
-print('divmod(58,5)=',divmod(58,5))
-print('pow(3,4)=',pow(3,4))
-print('round(3.5)=',round(3.5))
-print('chr(68)=',chr(68))
-print('ord(\'%s\')=%d' %('A',ord('A')))
-#print('str(1234)=',str(1234))
-print('sorted([5,7,1,8,9])=',sorted([5,7,1,8,9]))
-print('max(4,6,7,12,3)=',max(4,6,7,12,3))
-print('min(4,6,7,12,3)=',min(4,6,7,12,3))
-print('len([5,7,1,8,9])=',len([5,7,1,8,9]))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -6784,35 +6668,12 @@ result = not result;	#將result的值做not運算
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\math.py
-
-a=10;b=7;c=20
-print(a/b)
-print((a+b)*(c-10)/5)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\math1.py
-
-A=5;B=8;C=10
-B=B+1
-A=B*(C-A)/(B-A)
-print("A= ",A)
-print("B= ",B)
-print("C= ",C)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\mod.py
-
 print("請輸入三位數以上整數: ", end="")
 num=int(input())
 num=(num/100)%10;
 print("百位數的數字為%d" %num)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\relation.py
 
 a,b,c=3,5,7 #宣告a、b及c三個整數變
 print("a= %d b= %d c= %d" %(a,b,c))
@@ -6822,8 +6683,6 @@ print("not(a==b)and (not a<b) = %d" %(not(a==b)and (not a<b)))
 #包含關係與邏輯運算子的運算式求值
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\shift.py
 
 b = 13
 print(b << 2)
@@ -7612,16 +7471,6 @@ print('num[1]=',num[1])
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\fee.py
-
-money=int(input('請輸入班遊剩餘的金額:'))
-num=int(input('請輸入這次出遊的總人數:'))
-ans=divmod(money,num)
-print('每一位同學的平均退費為',ans[0],'元')
-print('剩餘可以存入班費共同基金為 ',ans[1],'元')
-
-print("------------------------------------------------------------")  # 60個
-
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\func.py
 
 def func(a,b,c):
@@ -7663,18 +7512,6 @@ num2=0
 num1=int(input('輸入數值 1：'))
 num2=int(input('輸入數值 2：'))
 print('數值 1+數值 2 =',total(num1,num2))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\math.py
-
-score=[97,76,89,76,90,100,87,65]
-print('本學期總共考過的數學小考次數', len(score))
-print('所有成績由小到大排序的結果為: {}'.format(sorted(score)))
-print('本學期所有分數的總和', sum(score))
-print('本學期所有分數的平均', round(sum(score)/len(score),1))
-print('本學期考最差的分數為', min(score))
-print('本學期考最好的分數為', max(score))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7784,19 +7621,6 @@ print("該工程師薪資：", CaseAmount + SalaryAmount)
 
 print("------------------------------------------------------------")  # 60個
 
-import math
-x = 10
-y = -2
-
-z = math.fabs(x / y)
-h = math.factorial(z)
-
-if math.isnan(h) == False:
-    print("計算後數值：", h)
-    print("最大公約數：", math.gcd(h, x))
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch08\ExTime.py
@@ -7827,17 +7651,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-# python 預設函數
-
-range(0
-dir()
-help()
-
-
-"""
-
 
 # 以 dir() 與 help() 探索 Python 模組與物件
 
@@ -7894,14 +7707,6 @@ number = eval(numberStr)
 print("計算結果 : %5.2f" % number)
 
 
-
-"""
-type()
-int()
-float()
-
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7962,6 +7767,180 @@ print(type(23))  #輸出結果 <class 'int'>
 print(type(3.14)) #輸出結果 <class 'float'>
 print(type("happy birthday")) #輸出結果 <class 'str'>
 print(type(True)) #輸出結果 <class 'bool'>
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+# python 預設函數
+
+range(0
+dir()
+help()
+
+
+"""
+
+
+"""
+type()
+int()
+float()
+
+
+"""
+
+
+
+
+print("python之基本函數")
+print('int(8.4)=',int(8.4))
+print('bin(14)=',bin(14))
+print('hex(84)=',hex(84))
+print('oct(124)=',oct(124))
+print('float(6)=',float(6))
+print('abs(-6.4)=',abs(-6.4))
+print('divmod(58,5)=',divmod(58,5))
+print('pow(3,4)=',pow(3,4))
+print('round(3.5)=',round(3.5))
+print('chr(68)=',chr(68))
+print('ord(\'%s\')=%d' %('A',ord('A')))
+#print('str(1234)=',str(1234))
+print('sorted([5,7,1,8,9])=',sorted([5,7,1,8,9]))
+print('max(4,6,7,12,3)=',max(4,6,7,12,3))
+print('min(4,6,7,12,3)=',min(4,6,7,12,3))
+print('len([5,7,1,8,9])=',len([5,7,1,8,9]))
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("int(8.4)=", int(8.4))
+print("bin(14)=", bin(14))
+#print("hex(84)=", hex(84))
+print("oct(124)=", oct(124))
+print("float(6)=", float(6))
+print("abs(-6.4)=", abs(-6.4))
+print("divmod(58,5)=", divmod(58, 5))
+print("pow(3,4)=", pow(3, 4))
+print("round(3.5)=", round(3.5))
+print("chr(68)=", chr(68))
+print("ord('%s')=%d" % ("A", ord("A")))
+print("str(1234)=", str(1234))
+print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
+print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
+print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
+print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+x = -10
+print("以下輸出abs( )函數的應用")
+print(x)  # 輸出x變數
+print(abs(x))  # 輸出abs(x)
+x = 5
+y = 3
+print("以下輸出pow( )函數的應用")
+print(pow(x, y))  # 輸出pow(x,y)
+x = 47.5
+print("以下輸出round(x)函數的應用")
+print(x)  # 輸出x變數
+print(round(x))  # 輸出round(x)
+x = 48.5
+print(x)  # 輸出x變數
+print(round(x))  # 輸出round(x)
+x = 49.5
+print(x)  # 輸出x變數
+print(round(x))  # 輸出round(x)
+print("以下輸出round(x,n)函數的應用")
+x = 2.15
+print(x)  # 輸出x變數
+print(round(x, 1))  # 輸出round(x,1)
+x = 2.25
+print(x)  # 輸出x變數
+print(round(x, 1))  # 輸出round(x,1)
+x = 2.151
+print(x)  # 輸出x變數
+print(round(x, 1))  # 輸出round(x,1)
+x = 2.251
+print(x)  # 輸出x變數
+print(round(x, 1))  # 輸出round(x,1)
+
+print("------------------------------------------------------------")  # 60個
+
+dist = 384400  # 地球到月亮距離
+speed = 1225  # 馬赫速度每小時1225公里
+total_hours = dist // speed  # 計算小時數
+days, hours = divmod(total_hours, 24)  # 商和餘數
+print("總供需要天數")
+print(days)
+print("小時數")
+print(hours)
+
+print("------------------------------------------------------------")  # 60個
+
+money=int(input('請輸入班遊剩餘的金額:'))
+num=int(input('請輸入這次出遊的總人數:'))
+ans=divmod(money,num)
+print('每一位同學的平均退費為',ans[0],'元')
+print('剩餘可以存入班費共同基金為 ',ans[1],'元')
+
+print("------------------------------------------------------------")  # 60個
+
+r = abs(-10)
+print("abs(-10) = ", r)
+r = abs(5)
+print("abs(5) = ", r)
+r = pow(8, 2)
+print("pow(8, 2) = ", r)
+r = pow(2, 3)
+print("pow(2, 3) = ", r)
+r = max(9, 3, 12, 32, 81, 92)
+print("max(9, 3, 12, 32, 81, 92) = ", r)
+r = min(9, 3, 12, 32, 81, 92)
+print("min(9, 3, 12, 32, 81, 92) = ", r)
+r = round(5.32)
+print("round(5.32) = ", r)
+r = round(5.52)
+print("round(5.52) = ", r)
+r = round(3.14568757, 3)
+print("round(3.14568757, 3) = ", r)
+r = round(3.14568757, 1)
+print("round(3.14568757, 1) = ", r)
+
+
+number = 3.14159
+print("四捨五入到小數點後兩位：", round(number, 4))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+math.sqrt(sum(pow(x - (sum(data) / len(data)), 2) for x in data) / len(data))
+
+mean = sum(data) / len(data)
+variance = sum(pow(x - mean, 2) for x in data) / len(data)
+std = math.sqrt(variance)
+
+
+
+import math
+x = 10
+y = -2
+
+z = math.fabs(x / y)
+h = math.factorial(z)
+
+if math.isnan(h) == False:
+    print("計算後數值：", h)
+    print("最大公約數：", math.gcd(h, x))
 
 print("------------------------------------------------------------")  # 60個
 
