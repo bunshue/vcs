@@ -3,6 +3,8 @@ import sys
 from PIL import Image
 from PIL import ImageColor
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
 print("------------------------------------------------------------")  # 60個
 
 rushMore = Image.open("rushmore.jpg")       # 建立Pillow物件
@@ -231,80 +233,11 @@ newImage.save("tmp_pic22_1.png")
 
 print("------------------------------------------------------------")  # 60個
 
-import qrcode
-
-codeText = 'http://deepwisdom.com.tw'
-img = qrcode.make(codeText)                 # 建立QR code 物件
-print("檔案格式", type(img))
-img.save("tmp_pic23.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-import qrcode
-
-codeText = 'Python王者歸來'
-img = qrcode.make(codeText)                 # 建立QR code 物件
-print("檔案格式", type(img))
-img.save("tmp_pic24.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-import qrcode
-
-qr = qrcode.QRCode(version=1,
-                   error_correction=qrcode.constants.ERROR_CORRECT_M,
-                   box_size=10,
-                   border=4)
-qr.add_data("明志科技大學")
-img = qr.make_image(fill_color='blue', back_color='yellow')
-img.save("tmp_pic25.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-import qrcode
-from PIL import Image
-
-qr = qrcode.QRCode(version=5,
-                   error_correction=qrcode.constants.ERROR_CORRECT_M,
-                   box_size=10,
-                   border=4)
-qr.add_data("明志科技大學")
-img = qr.make_image(fill_color='blue')
-width, height = img.size            # QR code的寬與高
-with Image.open('jhung.jpg') as obj:
-    obj_width, obj_height = obj.size
-    img.paste(obj, ((width-obj_width)//2, (height-obj_height)//2))
-img.save("tmp_pic26.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-import qrcode
-
-vc_str = """
-BEGIN:VCARD
-FN:洪錦魁
-TEL;CELL:0900123123
-TEL;FAX:02-27320553
-ORG:深智公司
-TITLE:作者
-EMAIL:jiinkwei@me.com
-URL:https://deepmind.com.tw
-ADR:台北市基隆路
-END:VCARD
-"""
-
-img = qrcode.make(vc_str)
-img.save("tmp_pic27.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
 '''
 print("車牌")
 import pytesseract
 text = pytesseract.image_to_string(Image.open('atq9305.jpg'))
 print(type(text), "   ", text)
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -312,7 +245,7 @@ import pytesseract
 import time
 
 carDict = {}
-myPath = "d:\\Python\\ch17\\"
+myPath = "C:\\_git\\vcs\\_4.python\\PIL\\new1\\"
 while True:
     carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
     if carPlate == 'Q' or carPlate == 'q':
@@ -332,7 +265,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pytesseract
 
-text  = pytesseract.image_to_string(Image.open('d:\\Python\\ch17\\data17_26.jpg'),
+text  = pytesseract.image_to_string(Image.open('data17_26.jpg'),
                                     lang='chi_tra')
 print(text)
 
@@ -340,7 +273,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pytesseract
 
-text  = pytesseract.image_to_string(Image.open('d:\\Python\\ch17\\data17_27.jpg'),
+text  = pytesseract.image_to_string(Image.open('data17_27.jpg'),
                                                lang='chi_sim')
 print(text)
 '''

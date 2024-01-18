@@ -77,7 +77,7 @@ try:
 except Exception as err:                                
     print("網頁下載失敗: %s" % err)
 # 儲存網頁內容
-fn = 'out21_8.txt'
+fn = 'tmp_html_text1.txt'
 with open(fn, 'wb') as file_Obj:                     # 以二進位儲存
     for diskStorage in htmlfile.iter_content(10240): # Response物件處理
         size = file_Obj.write(diskStorage)           # Response物件寫入
@@ -241,7 +241,7 @@ for con in cons:
     pict = con.a.img['src']
     photos.append(pict_url+pict)
 
-destDir = 'out21_25'
+destDir = 'tmp_dir'
 if os.path.exists(destDir) == False:            # 如果沒有此資料夾就建立
     os.mkdir(destDir)
 print("搜尋到的圖片數量 = ", len(photos))       # 列出搜尋到的圖片數量
@@ -315,6 +315,12 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+import sys, webbrowser
 
+print(sys.argv[0])
+if len(sys.argv) > 1:
+    address = " ".join(sys.argv[1:])
+webbrowser.open('http://www.google.com.tw/maps/place/' + address)
 
+print("------------------------------------------------------------")  # 60個
 

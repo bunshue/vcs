@@ -35,10 +35,8 @@ if htmlfile.status_code == requests.codes.ok:
 else:
     print("取得網頁內容失敗")
 
-print("------------------------------------------------------------")  # 60個
 
-import requests
-import re
+print('------------------------------------------------------------')	#60個
 
 url = 'http://www.mcut.edu.tw'
 htmlfile = requests.get(url)
@@ -58,9 +56,7 @@ if htmlfile.status_code == requests.codes.ok:
 else:
     print("網頁下載失敗")
 
-print("------------------------------------------------------------")  # 60個
-
-import requests
+print('------------------------------------------------------------')	#60個
 
 url = 'http://mcut.edu.tw/file_not_existed' # 不存在的內容
 try:
@@ -71,17 +67,13 @@ except Exception as err:                    # err是系統內建的錯誤訊息
     print(f"網頁下載失敗: {err}")
 print("程式繼續執行 ... ")
 
-print("------------------------------------------------------------")  # 60個
-
-import requests
+print('------------------------------------------------------------')	#60個
 
 url = 'https://www.kingstone.com.tw/' 
 htmlfile = requests.get(url)
 htmlfile.raise_for_status()
 
-print("------------------------------------------------------------")  # 60個
-
-import requests
+print('------------------------------------------------------------')	#60個
 
 headers = { 'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64)\
             AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
@@ -91,9 +83,7 @@ htmlfile = requests.get(url, headers=headers)
 htmlfile.raise_for_status()
 print("偽裝瀏覽器擷取網路資料成功")
 
-print("------------------------------------------------------------")  # 60個
-
-import requests
+print('------------------------------------------------------------')	#60個
 
 url = 'http://www.tenlong.com.tw'                    # 天瓏書局網址
 try:
@@ -120,7 +110,7 @@ print(f"列印BeautifulSoup物件資料型態 {type(objSoup)}")
 
 print("------------------------------------------------------------")  # 60個
 
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -137,7 +127,7 @@ print(f"列印title = {objSoup.title}")
 
 print("------------------------------------------------------------")  # 60個
 
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -169,9 +159,7 @@ print(f"以下是列印串列元素 : ")
 for data in objTag:                         # 列印串列元素內容
     print(data.text)
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -179,9 +167,7 @@ objTag = objSoup.find_all('h1', limit=2)
 for data in objTag:                       # 列印串列元素內容
     print(data.text)
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -195,9 +181,7 @@ print("\n使用getText()方法列印串列元素 : ")
 for data in objTag:
     print(data.getText())
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -205,9 +189,7 @@ objTag = objSoup.find(id='author')
 print(objTag)
 print(objTag.text)
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -216,9 +198,7 @@ for tag in objTag:
     print(tag)
     print(tag.text)
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -240,18 +220,14 @@ print(objTag[0])
 print(f"列出str()轉換過的資料型態 = {type(str(objTag[0]))}")
 print(str(objTag[0]))
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
 objTag = objSoup.select('#author')
 print(str(objTag[0].attrs))
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -262,9 +238,7 @@ for pObj in pObjTag:
     print(pObj.getText())       # 沒有子標籤
     print(pObj.text)            # 沒有子標籤
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -273,9 +247,7 @@ print(f"含<img>標籤的串列長度 = {len(imgTag)}")
 for img in imgTag:              
     print(img)         
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4
+print('------------------------------------------------------------')	#60個
 
 htmlFile = open('myhtml.html', encoding='utf-8')
 objSoup = bs4.BeautifulSoup(htmlFile, 'lxml')
@@ -316,9 +288,7 @@ for photo in photos:                            # 迴圈下載圖片與儲存
         pictFile.write(diskStorage)
     pictFile.close()                            # 關閉檔案    
 
-print("------------------------------------------------------------")  # 60個
-
-import bs4, requests
+print('------------------------------------------------------------')	#60個
 
 url = 'http://www.taiwanlottery.com.tw'
 html = requests.get(url)
@@ -347,7 +317,36 @@ for i in range(6,len(balls)):                   # 第7球以後是大小順序
 redball = dataTag[0].find_all('div', {'class':'ball_red'})
 print("\n第二區   :", redball[0].text)
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
+
+url = 'http://www.taiwanlottery.com.tw'
+html = requests.get(url)
+
+objSoup = bs4.BeautifulSoup(html.text, 'lxml')      # 建立BeautifulSoup物件
+
+dataTag = objSoup.select('.contents_box02')         # 尋找class是contents_box02
+        
+# 找尋開出順序與大小順序的球
+balls = dataTag[2].find_all('div', {'class':'ball_tx ball_yellow'})
+print("開出順序 : ", end='')
+for i in range(6):                                  # 前6球是開出順序
+    print(balls[i].text, end='   ')
+
+print("\n大小順序 : ", end='')
+for i in range(6,len(balls)):                       # 第7球以後是大小順序
+    print(balls[i].text, end='   ')
+
+# 找出第二區的紅球                   
+redball = dataTag[2].find_all('div', {'class':'ball_red'})
+print("\n特別號   :", redball[0].text)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
 
 import sys, webbrowser
 
