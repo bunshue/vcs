@@ -7,6 +7,16 @@ import requests
 import re
 import bs4
 
+print("------------------------------------------------------------")  # 60個
+
+import webbrowser
+webbrowser.open('http://www.mcut.edu.tw')
+
+print("------------------------------------------------------------")  # 60個
+
+#address = input("請輸入地址 : ")
+address = "新竹市東區榮光里中華路二段445號"
+webbrowser.open('http://www.google.com.tw/maps/place/' + address)
 
 print('------------------------------------------------------------')	#60個
 
@@ -16,10 +26,18 @@ print(type(htmlfile))
 if htmlfile.status_code == requests.codes.ok:
     print("取得網頁內容成功")
     print("網頁內容大小 = ", len(htmlfile.text))
-    print(htmlfile.text)            # 列印網頁內容
 else:
     print("取得網頁內容失敗")
 
+print("------------------------------------------------------------")  # 60個
+
+url = 'http://www.mcut.edu.tw'
+htmlfile = requests.get(url)
+if htmlfile.status_code == requests.codes.ok:
+    print("取得網頁內容成功")
+    print(htmlfile.text)            # 列印網頁內容
+else:
+    print("取得網頁內容失敗")
 
 print('------------------------------------------------------------')	#60個
 
@@ -308,19 +326,4 @@ redball = dataTag[2].find_all('div', {'class':'ball_red'})
 print("\n特別號   :", redball[0].text)
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-import sys, webbrowser
-
-print(sys.argv[0])
-if len(sys.argv) > 1:
-    address = " ".join(sys.argv[1:])
-webbrowser.open('http://www.google.com.tw/maps/place/' + address)
-
-print("------------------------------------------------------------")  # 60個
 
