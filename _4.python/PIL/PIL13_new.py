@@ -1127,7 +1127,119 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+from PIL import Image
+
+hungPic = Image.open(filename)        # 建立Pillow物件
+newPic = hungPic.resize((350,500))
+
+nwidth, nheight = 450, 600
+newImage = Image.new('RGB', (nwidth, nheight), "Yellow")
+
+newImage.paste(newPic, (50,50))
+newImage.save("tmp_pic_2.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+from PIL import Image
+import pytesseract
+
+text  = pytesseract.image_to_string(Image.open('data/data17_10.jpg'),
+                                               lang='chi_sim')
+print(text)
+with open('tmp_17_10.txt', 'w', encoding='utf-8') as fn:
+    fn.write(text)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+from PIL import Image
+from PIL import ImageFilter
+rushMore = Image.open(filename)       # 建立Pillow物件
+filterPict = rushMore.filter(ImageFilter.BLUR)
+filterPict.save("tmp_pic_4_BLUR.png")
+filterPict = rushMore.filter(ImageFilter.CONTOUR)
+filterPict.save("tmp_pic_4_CONTOUR.png")
+filterPict = rushMore.filter(ImageFilter.DETAIL)
+filterPict.save("tmp_pic_4_DETAIL.png")
+filterPict = rushMore.filter(ImageFilter.EDGE_ENHANCE)
+filterPict.save("tmp_pic_4_EDGE_ENHANCE.png")
+filterPict = rushMore.filter(ImageFilter.EDGE_ENHANCE_MORE)
+filterPict.save("tmp_pic_4_EDGE_ENHANCE_MORE.png")
+filterPict = rushMore.filter(ImageFilter.EMBOSS)
+filterPict.save("tmp_pic_4_EMBOSS.png")
+filterPict = rushMore.filter(ImageFilter.FIND_EDGES)
+filterPict.save("tmp_pic_4_FIND_EDGES.png")
+filterPict = rushMore.filter(ImageFilter.SMOOTH)
+filterPict.save("tmp_pic_4_SMOOTH.png")
+filterPict = rushMore.filter(ImageFilter.SMOOTH_MORE)
+filterPict.save("tmp_pic_4_SMOOTH_MORE.png")
+filterPict = rushMore.filter(ImageFilter.SHARPEN)
+filterPict.save("tmp_pic_4_SHARPEN.png")
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+from PIL import Image, ImageDraw, ImageFont
+
+hungPic = Image.open(filename)        # 建立Pillow物件
+newPic = hungPic.resize((350,500))
+
+nwidth, nheight = 450, 700
+newImage = Image.new('RGB', (nwidth, nheight), "Yellow")
+
+newImage.paste(newPic, (50,50))
+
+drawObj = ImageDraw.Draw(newImage)
+name = "牡丹亭"
+fontInfo = ImageFont.truetype('C:\Windows\Fonts\mingliu.ttc', 60)
+drawObj.text((140,600), name, fill='Blue', font=fontInfo)
+
+newImage.save("tmp_pic_6.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+from PIL import Image
+import pytesseract
+import time
+
+carDict = {}
+myPath = "foldername"
+while True:
+    carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
+    if carPlate == 'Q' or carPlate == 'q':
+        break
+    carPlate = myPath + carPlate
+    keyText = pytesseract.image_to_string(Image.open(carPlate))    
+    if keyText in carDict:
+        exitTime = time.asctime()
+        print("車輛出場時間 : ", keyText, ":", exitTime)
+        exitSecond = time.time()
+        dxSecond = exitSecond - carDict[keyText]
+        hour = dxSecond % 3600          # 由餘數判斷是否進位
+        hours = dxSecond // 3600        # 計算小時數
+        if hour != 0:
+            hours += 1
+        print("停車費用 : ", hours * 60, " 元 ")
+        del carDict[keyText]
+    else:
+        entryTime = time.asctime()
+        print("車輛入場時間 : ", keyText, ":", entryTime)
+        entrySecond = time.time()
+        carDict[keyText] = entrySecond
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
 

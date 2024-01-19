@@ -533,7 +533,6 @@ namespace vcs_Remove_Bin_Obj
             */
 
             //string path = @"C:\_git\vcs\_2.vcs";
-            //string path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
             string path = search_path;
 
             filename_rename.Clear();

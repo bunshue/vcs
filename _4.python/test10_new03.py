@@ -1,197 +1,162 @@
 import sys
 
+from moviepy.editor import VideoFileClip
+from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
+
 print("------------------------------------------------------------")  # 60個
 
-import threading, time
+if __name__=='__main__':
+	#用一位老同学写的短诗的中英文作为TextClip显示内容，由于内容过长需要滚动显示
+    text = """致敬奋战在一线的巾帼女英雄  
 
-def wakeUp():
-    print("threadObj執行緒開始")
-    time.sleep(10)              # threadObj執行緒休息10秒
-    print("女朋友生日")
-    print("threadObj執行緒結束")
+    你也是孩子的妈妈，
+
+    你也是爸妈的孩子。
+
+    但你说只要穿上白大褂，
+
+    我就是一名医护人员，
+
+    这就是我的职责。
+
+    我看不清你的长相，
+
+    在层层的防护服里，
+
+    都是一颗颗金子般的心。
+
+    “青山一道同云雨，明月何曾是两乡”
+
+    引用自王昌龄的《送柴侍御》，
+
+    为在抗击疫情一线的女性“逆行者”致敬。
+
+    中国加油！武汉加油！
+
+    武汉人民感谢所有白衣天使！
+
+    Pay tribute to the heroine fighting in the front line
+            Yao Junfeng, Wuhan University
     
-print("程式階段1")
-threadObj = threading.Thread(target=wakeUp)
-threadObj.start()               # threadObj執行緒開始工作
-time.sleep(1)                   # 主執行緒休息1秒
-print("程式階段2")
+    You are also the mother of the child,
+    You're also a parent's child.
+    But you said just put on the white coat,
+    I'm a healthcare worker,
+    This is my duty.
+    I can't see what you look like,
+    In layers of protective clothing,
+    Every heart is like gold.
+    "The green mountains are the same as the clouds and the rain. How could the bright moon be the two villages?"
+    It is quoted from Wang Changling's "See  Mr. Chai Off",
 
-print("------------------------------------------------------------")  # 60個
+    To pay tribute to the female "reverse" in the front line of fighting the epidemic.
 
-import threading, time
+    Go China! Come on, Wuhan!
 
-def wakeUp(name, blessingWord):
-    print("threadObj執行緒開始")
-    time.sleep(10)              # threadObj執行緒休息10秒
-    print(name, " ", blessingWord)
-    print("threadObj執行緒結束")
-    
-print("程式階段1")
-threadObj = threading.Thread(target=wakeUp, args=['NaNa','生日快樂'])
-threadObj.start()               # threadObj執行緒開始工作
-time.sleep(1)                   # 主執行緒休息1秒
-print("程式階段2")
+    Wuhan people thank all angels in white!
 
-print("------------------------------------------------------------")  # 60個
+    """
+    clip = VideoFileClip("kkkk.mp4", audio=False).crop(0, 300, 540, 840).subclip(0, 0.05)
+    txtclip = TextClip(text, font='仿宋_GB2312', fontsize=18, color='blue', bg_color='white', transparent=True).set_duration(30).resize((clip.size[0], clip.size[1] * 2)).set_fps(clip.fps).set_start(clip.end)
 
-import threading
-import time
+    w = None
+    h = clip.size[1]
+    x_speed = x_start = y_start = 0
+    y_speed = 20
+    txtclip = txtclip.fx(vfx.scroll, w, h, x_speed, y_speed, x_start, y_start)  # .set_start(clip.end)
 
-def worker():
-    print(threading.current_thread().name, 'Starting')
-    time.sleep(2)
-    print(threading.current_thread().name, 'Exiting')
-
-def manager():
-    print(threading.current_thread().name, 'Starting')
-    time.sleep(3)
-    print(threading.current_thread().name, 'Exiting')
-
-m = threading.Thread(target=manager)
-w = threading.Thread(target=worker)
-m.start()
-w.start()
-
-print("------------------------------------------------------------")  # 60個
-
-import threading
-import time
-
-def worker():
-    print(threading.current_thread().name, 'Starting')
-    time.sleep(2)
-    print(threading.current_thread().name, 'Exiting')
-def manager():
-    print(threading.current_thread().name, 'Starting')
-    time.sleep(3)
-    print(threading.current_thread().name, 'Exiting')
-
-m = threading.Thread(target=manager)
-w = threading.Thread(target=worker)
-w2 = threading.Thread(name='Manager',target=worker)
-m.start()
-w.start()
-w2.start()
-
+    newclip = CompositeVideoClip([txtclip, clip], bg_color=(255, 255, 255), ismask=False)
+    newclip.write_videofile(r"F:\video\WinBasedWorkHard_scroll.mp4", threads=8)
 print("------------------------------------------------------------")  # 60個
 
 
-""" many
-import requests
+
 import os
-import threading
 
-# XKCD 漫畫的基本 URL
-base_url = 'https://xkcd.com/'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-# 定義下載漫畫的函數
-def download_xkcd(start_comic, end_comic):
-    for comic_number in range(start_comic, end_comic):
-        # 跳過編號為 0 的漫畫，因為它不存在
-        if comic_number == 0:
-            continue
+if os.path.exists(filename):
+    print(filename, ":", os.path.getsize(filename))
+else:
+    print(filename,"檔案不存在")
+    
+print("------------------------------------------------------------")  # 60個
 
-        url = f'{base_url}{comic_number}/info.0.json'   # 建立API URL來獲取漫畫資訊
-        try:
-            response = requests.get(url)
-            response.raise_for_status()                 # 確保請求成功
+import shutil
 
-            comic_json = response.json()
-            comic_url = comic_json['img']               # 從JSON響應中提取圖片 URL
-            print(f'\n圖片下載中 : {comic_url}...')
+srcfilename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+dstfilename = "tmp_pic.jpg"
 
-            # 向圖片 URL 發送請求並下載圖片
-            res = requests.get(comic_url)
-            res.raise_for_status()
+shutil.copy(srcfilename, dstfilename)       # 檔案複製
 
-            # 保存圖片到本地資料夾
-            with open(os.path.join('xkcd_comics', os.path.basename(comic_url)), 'wb') as image_file:
-                for chunk in res.iter_content(100000):
-                    image_file.write(chunk)             # 寫入圖片數據
-        except requests.exceptions.HTTPError as err:
-            print(f'Failed to download comic {comic_number}: {err}')  # 輸出錯誤訊息
+print("------------------------------------------------------------")  # 60個
+"""
+srcfilename = input("請輸入來源檔案 : ")
+dstfilename = input("請輸入目的檔案 : ")        
+with open(srcfilename) as src_Obj:        # 用預設mode=r開啟檔案,傳回檔案物件src_Obj
+    data = src_Obj.read()           # 讀取檔案到變數data
 
-# 建立並啟動多個執行緒
-thread_count = 10                                       # 執行緒的數量
-comic_range = 10                                        # 每個執行緒負責下載的漫畫數量
-
-# 如果不存在, 建立一個目錄來存儲下載的漫畫
-if not os.path.exists('xkcd_comics'):
-    os.makedirs('xkcd_comics')
-
-# 建立執行緒並將它們添加到執行緒串列表
-threads = []
-for i in range(1, thread_count * comic_range, comic_range):         # 漫畫編號從 1 開始
-    start = i
-    end = i + comic_range
-    thread = threading.Thread(target=download_xkcd, args=(start, end))
-    threads.append(thread)
-    thread.start()                                      # 啟動執行緒
-
-# 等待所有執行緒完成
-for thread in threads:
-    thread.join()
-
-print('漫畫圖片下載完成')
+with open(dstfilename, 'w') as dst_Obj:   # 開啟檔案mode=w
+    dst_Obj.write(data)             # 將data輸出到檔案
 
 """
 
 print("------------------------------------------------------------")  # 60個
+"""
+import zipfile
+import glob, os
+zipdir = input("請輸入欲壓縮的目錄 : ")
+zipdir = zipdir + '/*'
+zipfilename = input("請輸入保存壓縮檔案的名稱 : ")
 
-import subprocess
+fileZip = zipfile.ZipFile(zipfilename, 'w')
+for name in glob.glob(zipdir):        # 遍歷zipdir目錄
+    fileZip.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
+    
+fileZip.close()
+"""
+print("------------------------------------------------------------")  # 60個
 
-calcPro = subprocess.Popen('calc.exe')      # 傳回值是子行程
-notePro = subprocess.Popen('notepad.exe')   # 傳回值是子行程
-writePro = subprocess.Popen('write.exe')    # 傳回值是子行程
-print(f"資料型態     = {type(calcPro)}")
-print(f"列印calcPro  = {calcPro}")
-print(f"列印notePro  = {notePro}")
-print(f"列印writePro = {writePro}")
+"""
+def modifySong(songStr):            # 將歌曲的標點符號用空字元取代       
+    for ch in songStr:
+        if ch in ".,?":
+            songStr = songStr.replace(ch,'')
+    return songStr                  # 傳回取代結果
+
+def wordCount(songCount):
+    global mydict
+    songList = songCount.split()    # 將歌曲字串轉成串列
+    mydict = {wd:songList.count(wd) for wd in set(songList)}
+
+filename = "AreYouSleeping.txt"
+with open(filename) as file_Obj:          # 開啟歌曲檔案
+    data = file_Obj.read()          # 讀取歌曲檔案
+
+mydict = {}                         # 空字典未來儲存單字計數結果
+song = modifySong(data.lower())
+
+wordCount(song)                     # 執行歌曲單字計數
+
+dictList = sorted(mydict.items(), key=lambda item:item[1], reverse=True)
+for key, val in dictList:
+    print(key,':',val)
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-import subprocess
+import os
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-paintPro = subprocess.Popen(['mspaint.exe', filename])
-print(paintPro)
-
-print("------------------------------------------------------------")  # 60個
-
-import subprocess
-
-path = r'C:\Users\User\AppData\Local\Programs\Python\Python311\python.exe'
-pyPro = subprocess.Popen([path, 'ch30_12.py'])
-print(pyPro)
+files = ['c1.py', 'c2.py', 'c3.py']
+for file in files:
+    print(os.path.join('D:\\test', file))   
 
 print("------------------------------------------------------------")  # 60個
 
-import subprocess
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/poetry.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-textPro = subprocess.Popen(['start', filename1], shell=True)
-pictPro = subprocess.Popen(['start', filename2], shell=True)
-print("文字檔案子行程 = ", textPro)
-print("圖片檔案子行程 = ", pictPro)
-
 print("------------------------------------------------------------")  # 60個
 
-import subprocess
+  
 
-calcPro = subprocess.run('calc.exe')      
-print(f"資料型態     = {type(calcPro)}")
-print(f"列印calcPro  = {calcPro}")
 
-print("------------------------------------------------------------")  # 60個
 
-import subprocess
 
-ret = subprocess.run('echo %time%', shell=True, stdout=subprocess.PIPE)
-print(f"資料型態       = {type(ret)}")
-print(f"列印ret        = {ret}")
-print(f"列印ret.stdout = {ret.stdout}")
-
-print("------------------------------------------------------------")  # 60個

@@ -175,8 +175,6 @@ namespace vcs_test_all_04_Font2
         {
             //指明使用特定字型檔
 
-            //string font_filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_4\vcs_test_all_04_Font\vcs_test_all_04_Font\font\金梅重黑浮體白字.ttf";
-
             //讀取字體文件
             PrivateFontCollection pfc = new PrivateFontCollection();
             pfc.AddFontFile(font_filename);

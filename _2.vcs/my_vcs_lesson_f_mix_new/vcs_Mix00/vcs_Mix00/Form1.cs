@@ -895,7 +895,6 @@ namespace vcs_Mix00
         {
             //代碼統計
 
-            //string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_f_mix_new\vcs_Mix00\vcs_Mix00\Form1.cs";
             //CountMethods(filename);
 
             //GetMethodNameAndLines(filename);
