@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D; //for SmoothingMode
 using System.Runtime.InteropServices;   //for DllImport
+using System.Text.RegularExpressions;
 
 namespace vcs_MyPdfReader
 {
@@ -29,6 +30,7 @@ namespace vcs_MyPdfReader
         int message_panel_height = 0;
 
         int pdf_page = 0;
+        int pdf_total_page = 0;
 
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
@@ -38,6 +40,7 @@ namespace vcs_MyPdfReader
 
         WebBrowser webBrowser1;
         TextBox tb_pdf_page = new TextBox();
+        Label lb_pdf_total_page = new Label();
         RichTextBox richTextBox1 = new RichTextBox();
         Panel panel1 = new Panel();
 
@@ -74,18 +77,25 @@ namespace vcs_MyPdfReader
             //this.webBrowser1.Visible = false;   //fail
             this.Controls.Add(this.webBrowser1);
 
-            int w = 120;
+            int w = 50;
             int h = 120;
-            tb_pdf_page.Width = w / 2;
+            tb_pdf_page.Width = w;
             tb_pdf_page.Height = h / 2;
-            tb_pdf_page.Font = new Font("Arial", 20);
+            tb_pdf_page.Font = new Font("Arial", 18);
             tb_pdf_page.Text = "5";
             //this.tb_file_l.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             tb_pdf_page.KeyPress += new System.Windows.Forms.KeyPressEventHandler(tb_pdf_page_KeyPress);
             tb_pdf_page.TextAlign = HorizontalAlignment.Center;
-            tb_pdf_page.Location = new Point(75, this.panel1.Height / 2 - tb_pdf_page.Height);
+            tb_pdf_page.Location = new Point(15, this.panel1.Height / 2 - tb_pdf_page.Height);
             this.panel1.Controls.Add(tb_pdf_page);    // 將控件加入表單
             tb_pdf_page.BringToFront();
+
+            lb_pdf_total_page.Text = "";
+            lb_pdf_total_page.Font = new Font("標楷體", 20);
+            lb_pdf_total_page.ForeColor = Color.Black;
+            lb_pdf_total_page.Location = new Point(15+50, this.panel1.Height / 2 - tb_pdf_page.Height+3);
+            lb_pdf_total_page.AutoSize = true;
+            this.panel1.Controls.Add(lb_pdf_total_page);    // 將控件加入表單
         }
 
         void show_item_location()
@@ -194,6 +204,21 @@ namespace vcs_MyPdfReader
             this.panel1.Controls.Add(bt_open_recent_pdf); // 將按鈕加入表單
             bt_open_recent_pdf.BringToFront();     //移到最上層
 
+            x_st = 75 + dx * 0;
+            y_st = 60 + dy * 2;
+            Button bt_test = new Button();  // 實例化按鈕
+            bt_test.Size = new Size(width, height);
+            bt_test.Text = "";
+            bmp = new Bitmap(width, height);
+            bt_test.Image = bmp;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+            g.DrawString("測試", f, sb, new PointF(4, 15));
+            bt_test.Location = new Point(x_st, y_st);
+            bt_test.Click += bt_test_Click;     // 加入按鈕事件
+            this.panel1.Controls.Add(bt_test); // 將按鈕加入表單
+            bt_test.BringToFront();     //移到最上層
+
 
             //使用ToolTip
             tooltip.SetToolTip(bt_exit, "關閉");
@@ -220,6 +245,44 @@ namespace vcs_MyPdfReader
         private void bt_open_recent_pdf_Click(object sender, EventArgs e)
         {
             show_main_message1("開啟最近pdf", S_OK, 30);
+        }
+
+        private void bt_test_Click(object sender, EventArgs e)
+        {
+            show_main_message1("測試", S_OK, 30);
+
+            richTextBox1.Text += "C#擷取pdf文檔的頁數\n";
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+
+            int pages = GetPDFofPageCount(filename);
+            richTextBox1.Text += "檔案 : " + filename + "\n";
+            richTextBox1.Text += "頁數 : " + pages.ToString() + "\n";
+        }
+
+        //[操作pdf文檔]之C#判斷pdf文檔的頁數：
+        /// <summary>
+        /// 擷取pdf文檔的頁數
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>-1表示檔案不存在</returns>
+        public static int GetPDFofPageCount(string filePath)
+        {
+            int count = -1;//-1表示檔案不存在
+            if (File.Exists(filePath))
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    StreamReader reader = new StreamReader(fs);
+                    //從流的目前位置到末尾讀取流
+                    string pdfText = reader.ReadToEnd();
+                    //richTextBox1.Text += pdfText + "\n";
+                    Regex rgx = new Regex(@"/Type\s*/Page[^s]");
+                    MatchCollection matches = rgx.Matches(pdfText);
+                    count = matches.Count;
+                }
+            }
+            return count;
         }
 
         private void tb_pdf_page_KeyPress(object sender, KeyPressEventArgs e)
@@ -251,6 +314,12 @@ namespace vcs_MyPdfReader
                         pdf_filename_short = Path.GetFileName(pdf_filename);
                         current_directory_pdf = Path.GetDirectoryName(pdf_filename);
                         webBrowser1.Navigate(pdf_filename);
+                        pdf_total_page = GetPDFofPageCount(pdf_filename);
+                        richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
+                        richTextBox1.Text += "頁數 : " + pdf_total_page.ToString() + "\n";
+                        pdf_page = 0;
+                        tb_pdf_page.Text = pdf_page.ToString();
+                        lb_pdf_total_page.Text = pdf_total_page.ToString();
                     }
                 }
             }
@@ -294,7 +363,11 @@ namespace vcs_MyPdfReader
                 {
                     webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0");
                 }
-
+                pdf_total_page = GetPDFofPageCount(pdf_filename);
+                richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
+                richTextBox1.Text += "頁數 : " + pdf_total_page.ToString() + "\n";
+                tb_pdf_page.Text = pdf_page.ToString();
+                lb_pdf_total_page.Text = pdf_total_page.ToString();
                 show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
             }
             show_item_location();
@@ -421,9 +494,13 @@ namespace vcs_MyPdfReader
                 pdf_filename_short = Path.GetFileName(pdf_filename);
                 current_directory_pdf = Path.GetDirectoryName(pdf_filename);
                 webBrowser1.Navigate(pdf_filename);
+                pdf_total_page = GetPDFofPageCount(pdf_filename);
+                richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
+                richTextBox1.Text += "頁數 : " + pdf_total_page.ToString() + "\n";
                 show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
                 pdf_page = 0;
                 tb_pdf_page.Text = pdf_page.ToString();
+                lb_pdf_total_page.Text = pdf_total_page.ToString();
             }
             else
             {

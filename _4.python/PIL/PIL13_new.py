@@ -24,28 +24,20 @@ print(ImageColor.getcolor("rgb(0, 0, 255)", "RGBA"))
 print(ImageColor.getcolor("Blue", "RGBA"))
 
 print('------------------------------------------------------------')	#60個
-
 image = Image.open(filename)       # 建立Pillow物件
+print("列出物件檔名 : ", image.filename)
+print("列出物件副檔名 : ", image.format)
+print("列出物件描述   : ", image.format_description)
 print("列出物件型態 : ", type(image))
 width, height = image.size               # 獲得影像寬度和高度
 print("寬度 = ", width)
 print("高度 = ", height)
 
-print('------------------------------------------------------------')	#60個
+#print(image.mode)
+#print(image.size)
 
-image = Image.open(filename)       # 建立Pillow物件
-print("列出物件檔名 : ", image.filename)
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)       # 建立Pillow物件
-print("列出物件副檔名 : ", image.format)
-print("列出物件描述   : ", image.format_description)
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)       # 建立Pillow物件
-image.save("tmp_pic01.png")
+#另存新檔
+image.save("tmp_pic_01.png")
 #image.show()
 
 print('------------------------------------------------------------')	#60個
@@ -218,6 +210,9 @@ strCtext = '歡迎來到美國'                           # 設定欲列印中�
 #fontInfo = ImageFont.truetype('C:\Windows\Fonts\ebas927.ttf', 48)
 #drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
 
+#fontInfo = ImageFont.truetype('C:\Windows\Fonts\DFZongYiStd-W9.otf', 48)
+#drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
+
 newImage.save("tmp_pic26.png")
 
 print("------------------------------------------------------------")  # 60個
@@ -256,15 +251,6 @@ image.show()
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.open(filename)
-print(image.format)
-print(image.mode)
-print(image.width)
-print(image.height)
-print(image.size)
-
-print('------------------------------------------------------------')	#60個
-
 #filter
 from PIL import Image,ImageFilter
 image=Image.open(filename)
@@ -297,7 +283,6 @@ print('------------------------------------------------------------')	#60個
 with Image.open(filename) as image:
   image2 = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
   image2.save( "tmp_pic31_rotate.jpg")
-  
 
 print('------------------------------------------------------------')	#60個
 
@@ -340,7 +325,6 @@ with Image.open(filename) as image:
     image2.save( "tmp_pic33h.jpg")
 
 print('------------------------------------------------------------')	#60個
-
 print("------------------------------------------------------------")  # 60個
 
 '''
@@ -462,8 +446,6 @@ draw.text((50,50),"牡丹亭",font=imfont,fill=(0,255,255,255))
 im.show()
 '''
 print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -576,8 +558,6 @@ print('------------------------------------------------------------')	#60個
 
 from PIL import ImageFont
 
-
-
 img = Image.new("RGB", (400,300), "lightgray")
 
 drawimg = ImageDraw.Draw(img)
@@ -650,10 +630,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
 """
-
 source = input("請輸入來源資料夾：")
 if os.path.exists(source):
     target = input("請輸入目標資料夾：")
@@ -807,8 +784,6 @@ def blue_to_red2(image_path):
                 #將藍色分轉為紅色
                 pixels[x, y] = (b, g, r)
     img.show()
-    
-    
     
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 blue_to_red2(filename)
@@ -1039,7 +1014,120 @@ new=im.filter(ImageFilter.EDGE_ENHANCE)
 #new.show()
 
 print("------------------------------------------------------------")  # 60個
-print("作業完成")
+'''
+print("車牌")
+import pytesseract
+text = pytesseract.image_to_string(Image.open('data/atq9305.jpg'))
+print(type(text), "   ", text)
+
 print("------------------------------------------------------------")  # 60個
 
+import pytesseract
+import time
+
+carDict = {}
+myPath = "C:\\_git\\vcs\\_4.python\\PIL\\new1\\"
+while True:
+    carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
+    if carPlate == 'Q' or carPlate == 'q':
+        break
+    carPlate = myPath + carPlate
+    keyText = pytesseract.image_to_string(Image.open(carPlate))    
+    if keyText in carDict:
+        exitTime = time.asctime()
+        print("車輛出場時間 : ", keyText, ":", exitTime)
+        del carDict[keyText]
+    else:
+        entryTime = time.asctime()
+        print("車輛入場時間 : ", keyText, ":", entryTime)
+        carDict[keyText] = entryTime
+
+print("------------------------------------------------------------")  # 60個
+
+import pytesseract
+
+text  = pytesseract.image_to_string(Image.open('data/data17_26.jpg'),
+                                    lang='chi_tra')
+print(text)
+
+print("------------------------------------------------------------")  # 60個
+
+import pytesseract
+
+text  = pytesseract.image_to_string(Image.open('data/data17_27.jpg'),
+                                               lang='chi_sim')
+print(text)
+'''
+print("------------------------------------------------------------")  # 60個
+
+"""
+import os
+
+def batch_resize_images(input_folder, output_folder, size=(300, 300)):
+    # 確保輸出資料夾存在
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    
+    # 遍歷輸入資料夾中的所有影像檔案
+    for filename in os.listdir(input_folder):
+        if filename.endswith(('.jpg', '.png')):
+            # 打開影像
+            img = Image.open(os.path.join(input_folder, filename))
+            # 調整影像尺寸
+            img = img.resize(size, Image.ANTIALIAS)
+            # 保存調整尺寸後的影像到輸出資料夾
+            img.save(os.path.join(output_folder, filename))
+
+# 假設有一個包含原始圖片的資料夾 'input_images' 和
+# 一個用於存放調整後圖片的資料夾 'output_images'
+input_folder = 'input_images'
+output_folder = 'output_images'
+
+# 呼叫函數，將所有圖片調整為300x300大小
+batch_resize_images(input_folder, output_folder)
+"""
+print("------------------------------------------------------------")  # 60個
+
+"""
+import os
+
+def batch_convert_images(directory, target_format='.jpg'):
+    for filename in os.listdir(directory):
+        if filename.endswith('.png'):
+            path = os.path.join(directory, filename)
+            img = Image.open(path)
+            rgb_im = img.convert('RGB')  # 轉換為RGB模式以便保存為JPEG
+            rgb_im.save(path.replace('.png', target_format), quality=95)
+
+# 呼叫批次更改函數
+batch_convert_images('images_directory')
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+from PIL import Image, ImageDraw, ImageFont
+
+def generate_product_image(product_img_path, background_img_path, promo_text):
+    # 加載產品和背景影像
+    product_img = Image.open(product_img_path).resize((200, 200))
+    background_img = Image.open(background_img_path)
+    # 在背景影像上放置產品影像
+    background_img.paste(product_img, (50, 50), product_img)
+    # 在影像上添加促銷文字
+    draw = ImageDraw.Draw(background_img)
+    font = ImageFont.truetype("arial.ttf", size=45)
+    draw.text((50, 260), promo_text, font=font, fill="white")
+    # 保存或返回影像
+    background_img.save('output_promo_image.jpg')
+
+generate_product_image('product.png', 'background.jpg', '特價促銷!')
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
