@@ -1,12 +1,18 @@
-"""
-python 之 預設函數
+import sys
 
-python 之 Exception
+"""
+各種python專用的語法 字典 串列 元組 集合
 
 
 """
 
 print('------------------------------------------------------------')	#60個
+
+
+animals = '鼠牛虎兔龍蛇馬羊猴雞狗豬'
+
+for animal in animals:
+    print(animal)
 
 
 
