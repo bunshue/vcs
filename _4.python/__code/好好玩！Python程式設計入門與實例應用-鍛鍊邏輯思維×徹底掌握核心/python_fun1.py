@@ -9,282 +9,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH01\CH0101.py
-
-print('Python is great fun!')
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH01\CH0102.py
-
-# 第一個Python程式
-"""內建函式(BIF)
-input()取得輸入值
-print()函式在螢幕上輸出字串 """
-name = input('請輸入你的名字：')
-print('Hello! ' + name)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH01\CH0103.py
-
-import time #匯入時間模組
-
-name = input('你的名字-> ')
-print('Hi', name, '現在時間：')
-print() #輸出空白行
-print(time.ctime()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0201.py
-
-import turtle          # 匯入海龜模組
-
-turtle.setup(200, 200) # 產生200 X 200畫布
-
-turtle.goto(50, 50)    # 移動畫筆到指定的x、y座標
-turtle.goto(50, -50)
-turtle.goto(-50, 50)
-turtle.goto(-50, -50)
-
-turtle.home()          # 回到原點(x = 0, y = 0)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0202.py
-
-import turtle          # 匯入海龜模組
-
-turtle.setup(200, 200) # 產生200200畫布
-
-turtle.forward(50)     # 畫筆前進
-turtle.goto(50, 50)    # 畫筆移到座標(50, 50)
-turtle.backward(50)    # 畫筆向後
-turtle.home()          # 畫筆回到原點
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0203.py
-
-import turtle          # 匯入海龜模組
-
-turtle.setup(250, 200) # 產生200 X 200畫布
-pen = turtle.Turtle()  # 建立畫布物件
-pen.penup()            # 畫筆懸空
-pen.goto(-50, 50)      # 移向指定座標
-pen.pendown()          # 落下畫筆
-pen.forward(100)       # 前進100像素
-pen.right(90)          # 畫筆右轉90度
-pen.fd(100)            # forward()方法簡寫
-pen.right(135)
-pen.fd(140)
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0204.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(250, 200)       # 產生250 X 200畫布
-turtle.bgcolor('SkyBlue')    # 背景為天空藍
-
-show = turtle.Turtle()       # 建立畫布物件
-turtle.colormode(255)        # 變更色彩以數值表示
-show.pencolor(255, 255, 255) # 畫筆為白色
-show.pensize(10)             # 畫筆大小
-show.speed(1)                # 畫筆速度為慢
-
-show.penup()                 # 畫筆懸空
-show.goto(-50, 50)           # 移向指定座標
-
-show.pendown()               # 落下畫筆
-show.forward(100)            # 前進100像素
-show.right(90)               # 畫筆右轉90度
-show.fd(100)                 # forward()方法簡寫
-show.right(135)
-show.fd(140)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0205.py
-
-import turtle          # 匯入海龜模組
-
-turtle.setup(250, 250) # 產生250 X 250畫布
-turtle.bgcolor('SkyBlue')  # 背景為天空藍
-
-pen = turtle.Turtle()
-pen.pencolor('White')
-pen.pensize(2)
-
-# X軸
-pen.up()          # 抬起畫筆
-pen.goto(-300, 0) # 前進指定座標
-pen.down()        # 放下畫筆
-pen.forward(600)  # 畫筆前進
-pen.left(90)      # 畫筆左轉
-
-# Y軸
-pen.up()          # 抬起畫筆
-pen.goto(0, -300) # 前進指定座標
-pen.down()        # 放下畫筆
-pen.forward(600)  # 畫筆前進
-pen.left(90)      # 畫筆左轉
-pen.home()        # 畫筆回到原點
-
-# 繪製兩個三角形
-pen.pencolor('Yellow')
-pen.pensize(10)
-pen.left(45)
-pen.forward(100)     
-pen.left(135)    
-pen.forward(140) 
-pen.home()
-
-pen.right(45)
-pen.forward(100)
-pen.right(135)    
-pen.forward(140)
-pen.right(135)    
-pen.forward(100)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0206.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(250, 200)     # 產生250 X 200畫布
-turtle.bgcolor('SkyBlue')  # 背景為天空藍
-
-show = turtle.Turtle()     # 建立畫布物件
-show.pencolor('Yellow')    # 畫筆為黃色
-show.pensize(10)           # 畫筆大小
-show.speed(1)              # 畫筆速度為慢
-# 畫一個簡單矩形
-show.forward(70)           # 前進70像素
-show.right(90)             # 畫筆右轉90度
-show.fd(70)                # forward()方法簡寫
-show.right(90)
-show.fd(70)
-show.right(90)
-show.home()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0207.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(250, 200)     # 產生200 X 200畫布
-turtle.bgcolor('SkyBlue')  # 背景為天空藍
-
-show = turtle.Turtle()     # 建立畫布物件
-show.color('Blue', 'Gold') # 設畫筆為藍色，塗滿金黃色
-show.pensize(10)           # 畫筆大小
-show.speed(1)              # 畫筆速度為慢
-show.pu()                  # 抬起畫筆
-show.goto(-50, 50)         # 前往指定位置
-
-# 畫一個簡單矩形
-show.begin_fill()   # 開始進行塗色
-show.pd()           # pendown()方法簡寫，放下畫筆
-show.forward(100)   # 前進100像素
-show.right(90)      # 畫筆右轉90度
-show.fd(100)        # forward()方法簡寫
-show.right(90)
-show.fd(100)
-show.right(90)
-show.fd(100)
-show.end_fill()     # 結束塗色動作
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0208.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(250, 200)     # 產生250 X 200畫布
-turtle.bgcolor('#BEBEBE')  # 背景為灰色 RGB(190, 190, 190)
-turtle.colormode(255)      # 色彩以數值表示
-show = turtle.Turtle()     # 建立畫布物件
-show.pensize(10)           # 畫筆大小
-show.speed(1)              # 畫筆速度為慢
-
-show.color((255, 0, 255), (255, 215, 0)) # 設畫筆為洋紅色，塗滿金黃色
-show.pu()                  # 抬起畫筆
-show.goto(-50, 50)         # 前往指定位置
-
-# 畫一個簡單三角形
-show.begin_fill()   # 開始塗色
-show.pd()           # pendown()方法簡寫
-show.forward(100)   # 前進100像素
-show.right(120)     # 畫筆右轉120度
-show.fd(100)        # forward()方法簡寫
-show.right(120)
-show.forward(100)
-show.end_fill()     # 結束塗色
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0209.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(250, 200)     # 產生 250 X 200畫布
-turtle.bgcolor('#BEBEBE')  # 背景為灰色 RGB(190, 190, 190)
-
-show = turtle.Turtle()     # 建立畫布物件
-show.pensize(10)           # 畫筆大小
-show.speed(1)              # 畫筆速度為慢
-
-show.color((1.0, 0, 1.0), (1.0, 0.84, 0.0)) # 設畫筆為洋紅色，塗滿金黃色
-show.pu()                  # 抬起畫筆
-show.goto(-60, 80)         # 前往指定位置
-
-# 畫一個簡單五邊形
-show.begin_fill()   # 開始進行塗色
-show.pd()           # pendown()方法簡寫
-show.forward(100)   # 前進100像素
-show.right(72)      # 畫筆右轉72度
-show.fd(100)        # forward()方法簡寫
-show.right(72)
-show.forward(100)
-show.right(72)
-show.fd(100)
-show.right(72)
-show.fd(100)
-show.end_fill()     # 結束塗色動作
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0210.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(200, 200)     # 畫布大小200 X 200
-turtle.bgcolor('#708090')  # 背景為深灰色 RGB(190, 190, 190)
-
-pen = turtle.Turtle()     # 建立畫布物件
-pen.pensize(10)           # 畫筆大小
-pen.speed(1)              # 畫筆速度為慢
-pen.pencolor('#FFFFFF')   # 設畫筆為白色
-pen.shape('turtle')       # 設畫筆形狀是海龜
-pen.pu()                  # 抬起畫筆
-pen.goto(-10, 70)
-pen.pd()                  # 放下畫筆
-pen.circle(-60, 360, 6)   # 畫出一個六邊形
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH03\CH0301.py
-
-# File: CH0301.py
-# 使用eval()函式取得連續的輸入
 
 num1, num2, num3 = eval(
     input('請輸入三個數值，以逗點隔開：'))
@@ -293,11 +18,9 @@ print('數值合計：', total)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH03\CH0302.py
 
-'''
-利用 表2-2所列的內建函數將輸入數值做轉換
-'''
+#利用 表2-2所列的內建函數將輸入數值做轉換
+
 
 #int()函式將number轉為整數型別
 number = int(input('輸入一個數值-> '))
@@ -315,11 +38,8 @@ print('十六進位：', format(number, 'x'))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH03\CH0303.py
+#CH0302.py 認識正、負無限大
 
-'''
-CH0302.py 認識正、負無限大
-'''
 import math #匯入math模組
 a = 1E309
 print('a = 1E309, 輸出', a)
@@ -336,18 +56,17 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH03\CH0304.py
 
-'''
-將兩個複數進行加減乘除
-'''
-num1 = 3 + 5j; num2 = 2-4j
+
+#將兩個複數進行加減乘除
+
+num1 = 3 + 5j
+num2 = 2-4j
 print('相加：', num1 + num2)  #回傳  5 + 1j
 print('相減：', num1 - num2)  #回傳  1 + 9j
 print('相乘：', num1 * num2)  #回傳 26 - 2j
 print('相除：', num1 / num2)  #回傳  -0.7 + 1.1j
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH03\CH0305.py
 
 # 將兩個數值以decimal型別來處理
 
@@ -367,11 +86,11 @@ print("------------------------------------------------------------")  # 60個
 
 # 將代數轉為算術運算式
 x = 23; y = 7; #指定變數x、y的值
-'''
+"""
    1. 先算出(x-5)/(y+9)
    2. 再加上 12/x 之值
    3. 最後乘 數值9 再給變數z儲存
-'''
+"""
 z = 9 * (12 / x + (x - 5) / (y + 9))
 print('z = ', z)
 
@@ -413,122 +132,6 @@ for count in range(1, 11): # 數值1~10
 else:
    print('數值累加完畢...')
    
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH04\CH0402.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(250, 200)    # 產生250 X 200畫布
-turtle.bgcolor('SkyBlue') # 背景為天空藍
-
-show = turtle.Turtle()     # 建立畫布物件
-show.pencolor('Yellow')    # 畫筆為黃色
-show.pensize(10)           # 畫筆大小
-show.speed(1)              # 畫筆速度為慢
-
-# 畫一個簡單矩形
-for item in range(4):
-   show.fd(70)       # 前進70像素
-   show.right(90)    # 畫筆右轉90度
-
-show.up()            # 抬起畫筆
-show.goto(-50, 10)   # 畫筆移向指定位置
-show.write('正方形', font = ('微軟正黑體', 40))
-
-turtle.mainloop()    # 開始主事件的循環
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH04\CH0403.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(300, 300)    # 產生300 X 300畫布
-turtle.bgcolor('Gray21')  # 背景為深灰
-
-show = turtle.Turtle()    # 建立畫布物件
-show.pencolor('White')    # 畫筆為白色
-show.pensize(2)           # 畫筆大小
-show.speed(1)             # 畫筆速度為慢
-
-# 畫一個連續矩形
-for item in range(56):
-   show.fd(item * 3) # 依值前進
-   print(item * 3)
-   show.right(90)    # 畫筆右轉90度
-
-turtle.mainloop()    # 開始主事件的循環
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH04\CH0404.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(300, 300)    # 產生300 X 300畫布
-turtle.bgcolor('Gray21')  # 背景為深灰
-
-show = turtle.Turtle()    # 建立畫布物件
-show.pencolor('White')    # 畫筆為白色
-show.pensize(1)           # 畫筆大小
-
-# 畫一個螺旋圖
-for item in range(100):
-   show.fd(item * 2) # 依值前進   
-   show.right(91)    # 畫筆右轉91度
-
-turtle.mainloop()    # 開始主事件的循環
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH04\CH0405.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(300, 300)    # 產生300 X 300畫布
-turtle.bgcolor('Gray21')  # 背景為深灰
-
-show = turtle.Turtle()    # 建立畫布物件
-show.pencolor('White')    # 畫筆為白色
-show.pensize(1)           # 畫筆大小
-
-# 畫一個螺旋圖
-for item in range(120):
-   show.fd(item * 5)  # 依值前進   
-   show.right(121)    # 畫筆右轉121度
-   
-turtle.mainloop()     # 開始主事件的循環
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH04\CH0406.py
-
-import turtle   # 匯入海龜模組
-
-turtle.setup(300, 200)    # 產生300 X 200畫布
-
-pen = turtle.Turtle()    # 建立畫布物件
-pen.pencolor('White')    # 白色畫筆
-pen.speed(1)
-
-#第一層for/in廻圈輸出4列   
-for r1 in range(5):
-
-    # 第二層for/in廻圈，依r1值遞減
-    for r2 in range(5 - r1):
-        pen.pu()            # 抬起畫筆
-        p1, p2 = -50, -50   # 設起始座標 x, y(-50, -50)
-        p1 = p1 + r1 * 30   # X軸
-        p2 = p2 + r2 * 30   # Y軸
-        pen.goto(p1, p2)    # 畫筆移向座標
-        pen.pd()            # 放下畫筆
-        pen.dot(15, 'Blue')   # 畫白色圓點
-        print(f'座標(x = {p1}, y = {p2})') # 查看畫圓點的座標位置
-    print() #換新行
-
-turtle.mainloop()    # 開始主事件的循環    
 
 print("------------------------------------------------------------")  # 60個
 
@@ -707,7 +310,7 @@ if score >= 60:
 else:
     print('E')
 
-'''    
+"""    
 # 2.使用巢狀if敘述 - 由小而大做條件判斷
 
 grade = int(input('請輸入分數-> '))
@@ -725,7 +328,7 @@ else:
                 print('D')
             else:
                 print('E')
-'''
+"""
 
 
 print("------------------------------------------------------------")  # 60個
@@ -745,7 +348,7 @@ elif score <= 90:
    print('好成績')
 else:
    print('非常好！')
-'''
+"""
 
 score = int(input('請輸入分數-> '))
 if score >= 90:
@@ -757,7 +360,7 @@ elif score >= 70:
 elif score >= 60:
    print('表現尚可')
 else:
-   print('請多多努力！')'''
+   print('請多多努力！')"""
 
 
 print("------------------------------------------------------------")  # 60個
@@ -912,21 +515,6 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH06\CH0603.py
 
-import turtle
-
-turtle.setup(300, 300)
-turtle.bgcolor('#363636')  # 設背景為深灰
-ps = turtle.Turtle()       # 產生一支畫筆
-
-colors = ('Red', 'LightGreen', 'Yellow', 'Blue')
-ps.pensize(2)      # 設畫筆大小
-
-# 以矩形為底的4色螺旋圖
-for num in range(100):
-   # %運算子取餘數來獲得色彩
-   ps.pencolor(colors[num % 4])
-   ps.forward(num * 3)
-   ps.left(91)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1063,42 +651,6 @@ print('遞增排序：', sorted(score)) # 使用BIF
 print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH06\CH0611.py
-
-import turtle   # 匯入海龜模組
-
-colors = ['Magenta', 'Gold', 'Cyan', 'PaleGreen',
-          'LemonChiffon', 'Orange', 'Pink']   # List
-turtle.setup(400, 400)     # 產生400 X 400畫布
-turtle.bgcolor('#363636')  # 背景為深灰
-
-pen = turtle.Turtle()   # 建立畫布物件
-weeks = []              # 存放輸入字串
-count = 0               # 計數器
-wk = turtle.textinput(f'一週七天 <{count}>，按0離開',
-                      '請輸入星期前三個字母：')
-
-while count <= 6:
-   weeks.append(wk)
-   #print(count, wk)
-   wk = turtle.textinput(f'一週七天 <{count}>，按0離開',
-                         '請輸入星期前三個字母：')
-   count += 1
-   
-# 畫一個螺旋形
-for item in range(120):
-   pen.pencolor(colors [item % len(weeks)]) # 依餘數取色彩值   
-   pen.pu()   # 抬起畫筆
-   pen.fd(item * 2)   # forward()方法簡寫
-   pen.pd()   # 放下畫筆
-   # 在畫布秀出星期名稱，並逐漸把字型放大
-   pen.write(weeks[item % len(weeks)],
-             font = ('Arial', int((item + 4) / 4)))
-   pen.left(360 / len(weeks) + 2)   # 依所得外角左轉
-
-turtle.done()
-
-print("------------------------------------------------------------")  # 60個
-
 #檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH06\CH0612.py
 
 # List生成式 找出10~65之間被7整除的數字
@@ -1164,10 +716,10 @@ print("------------------------------------------------------------")  # 60個
 
 # step 1. 定義函式
 def message():
-    zen = '''
+    zen = """
         Beautiful is better than ugly.
         Explicit is better than implicit.
-    '''
+    """
     print(zen)
 
 # step 2. 呼叫函式
@@ -1510,220 +1062,8 @@ print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0805.py
 
-import turtle, random   # 匯入海龜、亂數 模組
-
-tines = ['Red', 'Yellow', 'Orange',
-         'Purple', 'Cyan', 'Pink', 'LightGreen', 'Bisque']
-turtle.setup(300, 300)     # 產生300 X 300畫布
-turtle.bgcolor('Gray21')   # 背景為深灰
-
-pen = turtle.Turtle()      # 建立畫布物件
-pen.speed(0)
-
-# 隨機產生螺旋圖
-def haphazardTwist():
-   # 方法choice()讓畫筆色彩隨機變
-   pen.pencolor(random.choice(tines))
-   # 隨機產生 8~40 的大小不一的值來作為螺旋圖大小的依據
-   size = random.randint(8, 40)
-   
-   # x, y座標為視窗寬度的一半
-   w1 = -turtle.window_width() // 2
-   w2 = turtle.window_width() // 2
-   h1 = -turtle.window_height() // 2
-   h2 = turtle.window_height() // 2
-   
-   posX = random.randrange(w1, w2)
-   posY = random.randrange(h1, h2)
-   
-   pen.penup()   # 抬畫筆
-   pen.goto(posX, posY)
-   pen.pendown()
-   for item in range(size):
-      pen.forward(item * 2)
-      pen.left(91)
-
-for num in range(40):
-   haphazardTwist()
-   
-turtle.mainloop()    # 開始主事件的循環
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0806.py
-
-import time #滙入time模組
-
-#以秒數儲存epoch值, 以浮點數輸出
-seconds = time.time() 
-print('epoch:', seconds)
-
-# 取得本地的當前的日期和時間，採struct_time型式以Tuple物件回傳
-current = time.localtime(seconds)
-print(f'當地時間：{current[0]}年 {current[1]}月',
-      f'{current[2]}日 {current[3]}時',
-      f'{current[4]}分 {current[5]}秒')
-
-# 取得目當前的日期和時間，以字串回傳
-current2 = time.ctime(seconds)
-print('目前時間：', current2)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0807.py
-
-import time    # 滙入time模組
-
-current = time.localtime()    # 取得目前的日期和時間
-
-print(time.strftime('%Y-%m-%d %H:%M:%S', current))
-print(time.strftime('%Y-%m-%d 第%W週', current))   # 週數
-print(time.strftime('%Y-%m-%d 第%j天', current))   # 天數
-
-print(time.strftime('%c', current))      # 字串回傳
-print(time.strftime('%c %p', current))   # 加入AM或PM
-
-print(time.strftime('%x', current))      # 只有日期
-print(time.strftime('%X', current))      # 只有時間值
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0808.py
-
-import datetime
-work = datetime.date(2021, 10, 9)
-print(work)
-print(f'一週的第{work.weekday()}天')
-num = work.isoweekday()
-print('星期天' if num == 7 else '星期 '+ str(num))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0809.py
-
-from datetime import date, timedelta
-
-# 某個日期區間，以1日為間隔值
-begin = date(2021, 10, 1)
-end = date(2021, 10, 15)
-step = timedelta(days = 1)
-
-result = []  #空的List，用來存放日期
-
-# while迴圈 加入date物件
-while begin < end:
-    result.append(begin.strftime('%Y-%m-%d'))
-    begin += step
-    
-width = 11 #欄寬   
-# for/in 讀取並做格式化輸出
-for item in result:
-    print('{0:{width}}'.format(
-        item, width = width), end = '')
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0810.py
-
-from datetime import date, timedelta
-
-tody = date.today() # 今天日期
-yr, mt, dt = eval(input('請輸入出生的年、月、日->'))
-
-# 某人生日
-birth = date(yr, mt, dt)
-ageDays = tody - birth
-
-
-print(f'天數：{ageDays.days:,}天')
-age = ageDays/timedelta(days = 365)   # 年齡
-print(f'年齡 {age:.2f}')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0811.py
-
-from datetime import datetime, timedelta
-
-# 設兩個時間
-d1 = timedelta(days = 4, hours = 5)
-d2 = timedelta(hours = 2.8)
-
-#將兩個時間相加
-dtAdd = d1 + d2    
-print(f'共{dtAdd.days}天')
-print(f'   7.8時 = {dtAdd.seconds:7,}')
-print(f'4天7.8時 = {dtAdd.total_seconds():9,} 秒')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0812.py
-
-from datetime import datetime, timedelta
-
-d1 = datetime(2018, 9, 2)
-print('日期：', d1 + (timedelta(days = 7)))
-
-d2 = datetime(2020, 1, 22)
-d3 = timedelta(days = 106)
-dt = d2 - d3 # 將兩個日期相減
-print('日期二：', dt.strftime('%Y-%m-%d'))
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0813.py
-
-from datetime import datetime, timedelta
-
-#建立儲存星期的list物件
-weeklst = ['Monday', 'Tuesday', 'Wednesday',
-         'Thursday', 'Friday', 'Saturday', 'Sunday']
-
-# 定義函式
-def getWeeks(wkName, beginDay = None):
-    #如果未傳入beginDay之日期，就以今天為主
-    if beginDay is None:
-        beginDay = datetime.today()
-        
-    #weekday()方法回傳取得星期的索引值，Monday索引值為0
-    indexNum = beginDay.weekday()
-    target = weeklst.index(wkName)
-    lastWeek = ( 7 + indexNum - target) % 7
-    if lastWeek == 0:
-        lastWeek = 7
-        
-    #timedelta()建構式取得天數
-    lastWeek_Day = beginDay - timedelta(
-        days = lastWeek)
-    return lastWeek_Day.strftime('%Y-%m-%d')
-
-#呼叫函式，只傳入一個參數
-print('今天的上週三：', getWeeks('Wednesday'))
-
-#呼叫函式，傳入二個參數
-dt = datetime(2017, 4, 11)
-print('2017/4/11 的上週二：', getWeeks('Tuesday', dt))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH08\CH0814.py
-
-import wordcloud   # 滙入詞雲
-
-word = '''we programmed the computer to make
-decisions based on conditions. In this chapter, we’ll
-program the computer to pick a number between 1
-and 10, to play Rock-Paper-Scissors, and even to roll
-dice or pick a card!'''
-
-# 1.建立詞雲物件，背景為黑色
-sample = wordcloud.WordCloud(background_color = 'Black')
-# 2. 詞雲裡放入文字資料
-sample.generate(word)
-# 3. 產生詞雲圖片
-sample.to_file('fun.png')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1731,4 +1071,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+
+

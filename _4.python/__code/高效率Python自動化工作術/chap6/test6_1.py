@@ -11,3 +11,4 @@ try:
     print(text)
 except:
     print("程式執行失敗")
+

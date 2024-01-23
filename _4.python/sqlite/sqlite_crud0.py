@@ -89,24 +89,10 @@ conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.cursor() # 建立 cursor 物件
 
 print('建立一個資料表')
-""" 其他寫法
-#cursor.execute("CREATE TABLE table01 ( id_num CHAR(5), subjectId CHAR(4) NOT NULL, " +
-#               "animalNumber INTEGER, title VARCHAR(50) NOT NULL, PRIMARY KEY (id_num))")   #id_num不可重複
 
-#id_num可重複
-#cursor.execute("CREATE TABLE table01 ( id_num CHAR(5), subjectId CHAR(4) NOT NULL, " +
-#               "animalNumber INTEGER, title VARCHAR(50) NOT NULL)")
-
-#id_num可重複, 若資料庫已存在 則不用重新建立
-cursor.execute("CREATE TABLE IF NOT EXISTS table01 ( id_num CHAR(5), subjectId CHAR(4) NOT NULL, " +
-               "animalNumber INTEGER, title VARCHAR(50) NOT NULL)")
-"""
 #CREATE 建立
-#CREATE TABLE table01, id_num(int) 和 ename(text) 和 weight(int),
-#PRIMARY KEY (id_num), id_num不可重複
-#sqlstr = 'CREATE TABLE IF NOT EXISTS table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "ename"  TEXT NOT NULL, "weight" INTEGER NOT NULL)'
-#多了檢查條件
-
+#CREATE TABLE table01
+#PRIMARY KEY 主鍵
 #序號 自動遞增 不可重複
 
 sqlstr = """
@@ -119,58 +105,36 @@ CREATE TABLE IF NOT EXISTS table01 (
 );
 """
 
-#有寫NOT NULL表示一定要填寫, 若無此條件, 則可以不寫
-
 cursor.execute(sqlstr)
 conn.commit() # 更新
 
-#INSERT 新增資料
-print('新增資料 2 筆 寫法一, 必須要寫滿所有欄位')
-#id_num不可重複
-sqlstr = 'INSERT INTO table01 VALUES (20, 5, "horse", "馬", 36)'
-cursor.execute(sqlstr)
-sqlstr = 'INSERT INTO table01 VALUES (50, 1, "mouse", "鼠", 3)'
-cursor.execute(sqlstr)
-
-print('新增資料 1 筆 寫法二, 有些欄位可以不寫, 使用tuple')
-sqlstr = 'INSERT INTO table01 (id_num, ename, cname, weight) VALUES (?, ?, ?, ?)'
-data_insert_tuple = (4, "elephant", "象", 100)
-cursor.execute(sqlstr, data_insert_tuple)
 
 print('新增資料 2 筆 寫法三, 有些欄位可以不寫, 序號自動遞增')
+
+
+cursor.execute("INSERT INTO table01 (id_num, ename, cname, weight) VALUES (5, 'horse', '馬', 48)")
+cursor.execute("INSERT INTO table01 (id_num, ename, cname, weight) VALUES (1, 'mouse', '鼠', 66)")
+cursor.execute("INSERT INTO table01 (id_num, ename, cname, weight) VALUES (4, 'elephant', '象', 48)")
+
 cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (9, 'ox', 48)")
-#id_num不重複 但name weight 重複
 cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (2, 'sheep', 66)")
 
-print('新增資料 2 筆 寫法四, 有些欄位可以不寫, 序號自動遞增')
-# 定義資料串列
-datas = [
-    [8, 'snake', 16],
-    [3, 'tiger', 33]
-    ]
+cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (8, 'snake', 16)")
+cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (3, 'tiger', 33)")
 
-for data in datas:
-    # 新增資料
-    sqlstr = "INSERT INTO table01 (id_num, ename, weight) VALUES ({}, '{}', '{}')".format(data[0], data[1], data[2])
-    cursor.execute(sqlstr)
-conn.commit() # 更新
+cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (7, 'rabbit', 8)")
 
-
-print('新增資料 1 筆 寫法五, 必須要寫滿所有欄位')
-index = 70
-number = 7
-ename = 'rabbit'
-cname = ''
-weight = 8
-sqlstr = "INSERT INTO table01 VALUES ({},{},'{}','{}','{}');".format(index, number, ename, cname, weight)
-cursor.execute(sqlstr)
-
-print('新增資料 1 筆 寫法六, 必須要寫滿所有欄位')
-data = (80, 6, 'tiger', '', 240)
-cursor.execute('INSERT INTO table01 VALUES (?, ?, ?, ?, ?)', data)
+cursor.execute("INSERT INTO table01 (id_num, ename, weight) VALUES (6, 'tiger', 240)")
 
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
+
+"""
+#SELECT 取得
+print('讀取資料庫資料, 全部1')
+show_data_base_contents_all(db_filename, 'table01')
+"""
+
 
 #UPDATE 更新
 print('更新資料, 修改2號的資料')
@@ -350,6 +314,7 @@ cursor = conn.execute('DROP TABLE table01')
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 """
+
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')
