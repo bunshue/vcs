@@ -18,7 +18,7 @@ def replacePunctuations(line):
 
     return line
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/wordCounts1.txt'
+filename = '../../data/wordCounts1.txt'
 
 infile = open(filename, "r") # Open the file
 

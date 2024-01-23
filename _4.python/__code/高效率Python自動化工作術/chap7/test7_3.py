@@ -1,7 +1,7 @@
 from docx import Document
 
 infile = "test.docx"
-value1 = "output.docx"
+value1 = "tmp_output.docx"
 try:
     doc = Document(infile)
     doc.save(value1)

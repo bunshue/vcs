@@ -670,6 +670,7 @@ print(word)#將打亂後字依序輸出
 print("------------------------------------------------------------")  # 60個
 
 import sys
+
 cc = sys.getdefaultencoding()
 
 print(cc)
@@ -679,32 +680,36 @@ print("------------------------------------------------------------")  # 60個
 
 import threading, time
 
+
 def wakeUp():
     print("threadObj執行緒開始")
-    time.sleep(10)              # threadObj執行緒休息10秒
+    time.sleep(10)  # threadObj執行緒休息10秒
     print("女朋友生日")
     print("threadObj執行緒結束")
-    
+
+
 print("程式階段1")
 threadObj = threading.Thread(target=wakeUp)
-threadObj.start()               # threadObj執行緒開始工作
-time.sleep(1)                   # 主執行緒休息1秒
+threadObj.start()  # threadObj執行緒開始工作
+time.sleep(1)  # 主執行緒休息1秒
 print("程式階段2")
 
 print("------------------------------------------------------------")  # 60個
 
 import threading, time
 
+
 def wakeUp(name, blessingWord):
     print("threadObj執行緒開始")
-    time.sleep(10)              # threadObj執行緒休息10秒
+    time.sleep(10)  # threadObj執行緒休息10秒
     print(name, " ", blessingWord)
     print("threadObj執行緒結束")
-    
+
+
 print("程式階段1")
-threadObj = threading.Thread(target=wakeUp, args=['NaNa','生日快樂'])
-threadObj.start()               # threadObj執行緒開始工作
-time.sleep(1)                   # 主執行緒休息1秒
+threadObj = threading.Thread(target=wakeUp, args=["NaNa", "生日快樂"])
+threadObj.start()  # threadObj執行緒開始工作
+time.sleep(1)  # 主執行緒休息1秒
 print("程式階段2")
 
 print("------------------------------------------------------------")  # 60個
@@ -712,15 +717,18 @@ print("------------------------------------------------------------")  # 60個
 import threading
 import time
 
+
 def worker():
-    print(threading.current_thread().name, 'Starting')
+    print(threading.current_thread().name, "Starting")
     time.sleep(2)
-    print(threading.current_thread().name, 'Exiting')
+    print(threading.current_thread().name, "Exiting")
+
 
 def manager():
-    print(threading.current_thread().name, 'Starting')
+    print(threading.current_thread().name, "Starting")
     time.sleep(3)
-    print(threading.current_thread().name, 'Exiting')
+    print(threading.current_thread().name, "Exiting")
+
 
 m = threading.Thread(target=manager)
 w = threading.Thread(target=worker)
@@ -732,18 +740,22 @@ print("------------------------------------------------------------")  # 60個
 import threading
 import time
 
+
 def worker():
-    print(threading.current_thread().name, 'Starting')
+    print(threading.current_thread().name, "Starting")
     time.sleep(2)
-    print(threading.current_thread().name, 'Exiting')
+    print(threading.current_thread().name, "Exiting")
+
+
 def manager():
-    print(threading.current_thread().name, 'Starting')
+    print(threading.current_thread().name, "Starting")
     time.sleep(3)
-    print(threading.current_thread().name, 'Exiting')
+    print(threading.current_thread().name, "Exiting")
+
 
 m = threading.Thread(target=manager)
 w = threading.Thread(target=worker)
-w2 = threading.Thread(name='Manager',target=worker)
+w2 = threading.Thread(name="Manager", target=worker)
 m.start()
 w.start()
 w2.start()
@@ -815,9 +827,9 @@ print("------------------------------------------------------------")  # 60個
 
 import subprocess
 
-calcPro = subprocess.Popen('calc.exe')      # 傳回值是子行程
-notePro = subprocess.Popen('notepad.exe')   # 傳回值是子行程
-writePro = subprocess.Popen('write.exe')    # 傳回值是子行程
+calcPro = subprocess.Popen("calc.exe")  # 傳回值是子行程
+notePro = subprocess.Popen("notepad.exe")  # 傳回值是子行程
+writePro = subprocess.Popen("write.exe")  # 傳回值是子行程
 print(f"資料型態     = {type(calcPro)}")
 print(f"列印calcPro  = {calcPro}")
 print(f"列印notePro  = {notePro}")
@@ -827,28 +839,28 @@ print("------------------------------------------------------------")  # 60個
 
 import subprocess
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-paintPro = subprocess.Popen(['mspaint.exe', filename])
+paintPro = subprocess.Popen(["mspaint.exe", filename])
 print(paintPro)
 
 print("------------------------------------------------------------")  # 60個
 
 import subprocess
 
-path = r'C:\Users\User\AppData\Local\Programs\Python\Python311\python.exe'
-pyPro = subprocess.Popen([path, 'ch30_12.py'])
+path = r"C:\Users\User\AppData\Local\Programs\Python\Python311\python.exe"
+pyPro = subprocess.Popen([path, "ch30_12.py"])
 print(pyPro)
 
 print("------------------------------------------------------------")  # 60個
 
 import subprocess
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/poetry.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename1 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/poetry.txt"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-textPro = subprocess.Popen(['start', filename1], shell=True)
-pictPro = subprocess.Popen(['start', filename2], shell=True)
+textPro = subprocess.Popen(["start", filename1], shell=True)
+pictPro = subprocess.Popen(["start", filename2], shell=True)
 print("文字檔案子行程 = ", textPro)
 print("圖片檔案子行程 = ", pictPro)
 
@@ -856,7 +868,7 @@ print("------------------------------------------------------------")  # 60個
 
 import subprocess
 
-calcPro = subprocess.run('calc.exe')      
+calcPro = subprocess.run("calc.exe")
 print(f"資料型態     = {type(calcPro)}")
 print(f"列印calcPro  = {calcPro}")
 
@@ -864,7 +876,7 @@ print("------------------------------------------------------------")  # 60個
 
 import subprocess
 
-ret = subprocess.run('echo %time%', shell=True, stdout=subprocess.PIPE)
+ret = subprocess.run("echo %time%", shell=True, stdout=subprocess.PIPE)
 print(f"資料型態       = {type(ret)}")
 print(f"列印ret        = {ret}")
 print(f"列印ret.stdout = {ret.stdout}")
@@ -875,21 +887,21 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 import os
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 if os.path.exists(filename):
     print(filename, ":", os.path.getsize(filename))
 else:
-    print(filename,"檔案不存在")
-    
+    print(filename, "檔案不存在")
+
 print("------------------------------------------------------------")  # 60個
 
 import shutil
 
-srcfilename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+srcfilename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 dstfilename = "tmp_pic.jpg"
 
-shutil.copy(srcfilename, dstfilename)       # 檔案複製
+shutil.copy(srcfilename, dstfilename)  # 檔案複製
 
 print("------------------------------------------------------------")  # 60個
 """
@@ -949,29 +961,29 @@ print("------------------------------------------------------------")  # 60個
 
 import os
 
-files = ['c1.py', 'c2.py', 'c3.py']
+files = ["c1.py", "c2.py", "c3.py"]
 for file in files:
-    print(os.path.join('D:\\test', file))   
+    print(os.path.join("D:\\test", file))
 
 print("------------------------------------------------------------")  # 60個
 
-print('串列 裡面都是字典')
+print("串列 裡面都是字典")
 animal0 = {
-    'cname': '鼠',
-    'ename': 'mouse',
-    'weight': 3,
-    }
+    "cname": "鼠",
+    "ename": "mouse",
+    "weight": 3,
+}
 
 animal1 = {
-    'cname': '牛',
-    'ename': 'ox',
-    'weight': 48,
-    }
+    "cname": "牛",
+    "ename": "ox",
+    "weight": 48,
+}
 animal2 = {
-    'cname': '虎',
-    'ename': 'tiger',
-    'weight': 33,
-    }
+    "cname": "虎",
+    "ename": "tiger",
+    "weight": 33,
+}
 
 animal = [animal0, animal1, animal2]
 print(type(animal0))
@@ -981,26 +993,26 @@ print(type(animal))
 
 for ani in animal:
     for key, value in ani.items():
-        print(f"Key: {key}", end = "\t")
+        print(f"Key: {key}", end="\t")
         print(f"Value: {value}")
 
 print("------------------------------------------------------------")  # 60個
 
 
-print('字典 裡面都是字典')
+print("字典 裡面都是字典")
 
 animal = {
-    'mouse': {
-        'cname': '鼠',
-        'ename': 'mouse',
-        'weight': 3,
-        },
-    'ox': {
-        'cname': '牛',
-        'ename': 'ox',
-        'weight': 48,
-        },
-    }
+    "mouse": {
+        "cname": "鼠",
+        "ename": "mouse",
+        "weight": 3,
+    },
+    "ox": {
+        "cname": "牛",
+        "ename": "ox",
+        "weight": 48,
+    },
+}
 
 print(animal)
 print(type(animal))
@@ -1008,18 +1020,18 @@ print(type(animal))
 for animal_name, animal_info in animal.items():
     print(f"\nAnimalName: {animal_name}")
     name = f"{animal_info['cname']} {animal_info['ename']}"
-    weight = animal_info['weight']
+    weight = animal_info["weight"]
     print(f"\tName: {name}")
     print(f"\tweight: {weight}")
 
 print("------------------------------------------------------------")  # 60個
 
-#建立空白串列
+# 建立空白串列
 animals = []
 
 # 建立30隻動物
 for alien_number in range(30):
-    new_alien = {'color': 'green', 'points': 5, 'speed': 'slow'}
+    new_alien = {"color": "green", "points": 5, "speed": "slow"}
     animals.append(new_alien)
 
 # 顯示前5隻動物
@@ -1029,11 +1041,11 @@ print("...")
 
 # 前3隻改資料
 for alien in animals[:3]:
-    if alien['color'] == 'green':
-        alien['color'] = 'yellow'
-        alien['speed'] = 'medium'
-        alien['points'] = 10
-    
+    if alien["color"] == "green":
+        alien["color"] = "yellow"
+        alien["speed"] = "medium"
+        alien["points"] = 10
+
 # 顯示前5隻動物
 for alien in animals[:5]:
     print(alien)
@@ -1158,8 +1170,4 @@ print(os.listdir("."))      # 這代表目前工作目錄
 """
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-

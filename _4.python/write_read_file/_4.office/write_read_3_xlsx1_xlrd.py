@@ -3,7 +3,7 @@ import xlrd
 print('------------------------------------------------------------')	#60個
 
 filename = 'data/python_ReadWrite_EXCEL1.xlsx'
-
+'''
 print('------------------------------------------------------------')	#60個
 """
 data = xlrd.open_workbook(filename)
@@ -82,7 +82,7 @@ print('用xlwt寫入xls檔案')
 
 import xlwt
 
-fn = 'tmp_excel.xls'
+filename = 'tmp_excel.xls'
 datahead = ['Phone', 'TV', 'Notebook']
 price = ['35000', '18000', '28000']
 wb = xlwt.Workbook()
@@ -92,15 +92,15 @@ for i in range(len(datahead)):
 for j in range(len(price)):
     sh.write(1, j, price[j])        # 寫入price list
 
-wb.save(fn)
+wb.save(filename)
 
 print('------------------------------------------------------------')	#60個
 
 print('用xlrd讀取xls檔案')
 import xlrd
 
-fn = 'tmp_excel.xls'
-wb = xlrd.open_workbook(fn)
+filename = 'tmp_excel.xls'
+wb = xlrd.open_workbook(filename)
 sh = wb.sheets()[0]
 rows = sh.nrows
 for row in range(rows):
@@ -169,12 +169,33 @@ for i in range(0,sheet.nrows):
 
 print('寫入xls檔, 檔案 :', filename_w)
 write.save(filename_w)
-
+'''
 print('------------------------------------------------------------')	#60個
 
+import xlwt
 
+filename = 'tmp_excel_file1.xls'
+datahead = ['Phone', 'TV', 'Notebook']
+price = ['35000', '18000', '28000']
+wb = xlwt.Workbook()
+sh = wb.add_sheet('sheet1', cell_overwrite_ok=True)
+for i in range(len(datahead)):
+    sh.write(0, i, datahead[i])     # 寫入datahead list
+for j in range(len(price)):
+    sh.write(1, j, price[j])        # 寫入price list
 
+wb.save(filename)
 
+print("------------------------------------------------------------")  # 60個
+
+import xlrd
+
+filename = 'tmp_excel_file1.xls'
+wb = xlrd.open_workbook(filename)
+sh = wb.sheets()[0]
+rows = sh.nrows
+for row in range(rows):
+    print(sh.row_values(row))
 
 
 print('------------------------------------------------------------')	#60個

@@ -6,11 +6,11 @@ def countLetters(line, counts):
 
 print('統計一個檔案內每個英文字母出現的字數')
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/wordCounts1.txt'
+filename = '../../data/wordCounts1.txt'
 
 while True:
     try:
-        filename = 'C:/_git/vcs/_1.data/______test_files1/article2.txt'
+        filename = '../../data/article2.txt'
         infile = open(filename, "r") # Open the file
         break 
     except IOError:

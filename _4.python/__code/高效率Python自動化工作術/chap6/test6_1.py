@@ -1,3 +1,8 @@
+"""
+pip install pdfminer.six
+
+"""
+
 from pdfminer.high_level import extract_text
 
 infile = "test.pdf"

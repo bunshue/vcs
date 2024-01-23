@@ -10,7 +10,7 @@ keyWords = {"and", "as", "assert", "break", "class",
             "None", "nonlocal", "not", "or", "pass", "raise",
             "return", "True", "try", "while", "with", "yield"}
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/python_word_count1.txt'
+filename = '../../data/python_word_count1.txt'
 
 infile = open(filename, "r") # Open files for input 
 text = infile.read().split() # Read and split words from the file 

@@ -3,6 +3,7 @@ import random
 
 print('------------------------------------------------------------')	#60個
 
+'''
 import linecache
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt'
@@ -24,11 +25,6 @@ print("\n隨機抽取：\n", random.choice(getLines))
 
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
-'''
 import warnings
 warnings.warn('Use importlib.util.find_spec() instead.', DeprecationWarning, stacklevel = 1)
 
@@ -633,25 +629,43 @@ for item, counter in c.items():
 
 print('出現最多次的項目:', c.most_common(1))
 
-'''
 print('------------------------------------------------------------')	#60個
-
 
 import locale
 
 print(locale.getpreferredencoding())
 
-
-
 print('------------------------------------------------------------')	#60個
-
 
 print("將檔案移到資源回收筒")
 
 import send2trash
 filename = "picture1cccc.jpg"
 send2trash.send2trash(filename)  
-
+'''
 
 print('------------------------------------------------------------')	#60個
+
+import shelve
+
+with shelve.open('phonebook') as phone:
+    phone['Tom'] = ('Tom', '0912-112112', '台北市')
+    phone['John'] = ('John', '0928-888888', '台中市')
+
+print("------------------------------------------------------------")  # 60個
+
+import shelve
+
+with shelve.open('phonebook') as phone:
+    print(phone['Tom'])
+    print(phone['John'])
+
+print("------------------------------------------------------------")  # 60個
+
+
+import shelve
+with shelve.open('phonebook') as phone:
+    for name in phone:
+        print(phone[name])
+
 
