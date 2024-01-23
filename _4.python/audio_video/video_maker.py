@@ -1,6 +1,7 @@
 from moviepy.editor import VideoFileClip
 import os
 
+'''
 # 確保輸出資料夾存在
 output_folder = "tmp_video_1"
 if not os.path.exists(output_folder):
@@ -46,6 +47,7 @@ original_clip.close()
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 from moviepy.editor import VideoFileClip
 
 clip = VideoFileClip("data/short南極.mp4")
@@ -58,6 +60,7 @@ resized_480.write_videofile(r"tmp_video_3_resized_480.mp4")
 resized_half = clip.resize(0.5)
 # 保存新影片
 resized_half.write_videofile("tmp_video_3_resized_half.mp4")
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -170,9 +173,11 @@ video_fadeout = video_clip.fadeout(fade_duration)
 # 儲存帶有淡出效果的影片
 video_fadeout.write_videofile("tmp_video_10.mp4",codec="libx264",audio_codec="aac")
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 from moviepy.editor import VideoFileClip
+from moviepy.editor import VideoFileClip, vfx
 from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
 
 if __name__=='__main__':
@@ -226,8 +231,11 @@ if __name__=='__main__':
     Wuhan people thank all angels in white!
 
     """
+    font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
+    
     clip = VideoFileClip("kkkk.mp4", audio=False).crop(0, 300, 540, 840).subclip(0, 0.05)
-    txtclip = TextClip(text, font='仿宋_GB2312', fontsize=18, color='blue', bg_color='white', transparent=True).set_duration(30).resize((clip.size[0], clip.size[1] * 2)).set_fps(clip.fps).set_start(clip.end)
+    
+    txtclip = TextClip(text, fontsize=18, color='blue', bg_color='white', transparent=True).set_duration(30).resize((clip.size[0], clip.size[1] * 2)).set_fps(clip.fps).set_start(clip.end)
 
     w = None
     h = clip.size[1]
@@ -236,11 +244,10 @@ if __name__=='__main__':
     txtclip = txtclip.fx(vfx.scroll, w, h, x_speed, y_speed, x_start, y_start)  # .set_start(clip.end)
 
     newclip = CompositeVideoClip([txtclip, clip], bg_color=(255, 255, 255), ismask=False)
-    newclip.write_videofile(r"F:\video\WinBasedWorkHard_scroll.mp4", threads=8)
+    newclip.write_videofile(r"WinBasedWorkHard_scroll.mp4", threads=8)
 
 print("------------------------------------------------------------")  # 60個
 
-""" 欠缺其他程式
 from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
 
 # 載入影片
@@ -257,7 +264,8 @@ final_clip = CompositeVideoClip([video_clip, txt_clip])
 
 # 儲存結果
 final_clip.write_videofile("tmp_video_11.mp4", codec="libx264", audio_codec="aac")
-"""
+
+
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個

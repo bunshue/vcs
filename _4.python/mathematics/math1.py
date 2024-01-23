@@ -402,5 +402,30 @@ print('------------------------------------------------------------')	#60個
 
 
 
+""" 標準差
+math.sqrt(sum(pow(x - (sum(data) / len(data)), 2) for x in data) / len(data))
+
+mean = sum(data) / len(data)
+variance = sum(pow(x - mean, 2) for x in data) / len(data)
+std = math.sqrt(variance)
+
+"""
+
+#math test
+x = 10
+y = -2
+
+z = math.fabs(x / y)
+
+z = 5
+h = math.factorial(z)
+
+if math.isnan(h) == False:
+    print("計算後數值：", h)
+    print("最大公約數：", math.gcd(h, x))
+
+
+
+
 print('------------------------------------------------------------')	#60個
 

@@ -1,10 +1,10 @@
 import os
 import sys
 import time
+import math
 import random
 import numpy as np
 
-'''
 print('------------------------------------------------------------')	#60個
 
 print('---- 字串處理專區 --------------------------------------------------------')	#60個
@@ -684,10 +684,6 @@ print(globs)
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
 """
 word = word.strip()
 
@@ -695,7 +691,6 @@ word = word.strip()
 ##  dbg('fix(%r)\n' % (filename,))
 
 """
-
 
 print('全圖640X480, 每160X160裁一塊出來')
 W = 640
@@ -1105,13 +1100,7 @@ for number in range(100):
     if number % 10 == 9:
         print()
 
-
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 
 word = "maintenance"
 word.count("n")
@@ -1128,8 +1117,8 @@ min(300, 30, 3000)
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
+""" wait long
+print("requests 1")
 import requests
 
 r = requests.get("https://tw.yahoo.com/")
@@ -1137,6 +1126,7 @@ print(r.text)
 
 print("------------------------------------------------------------")  # 60個
 
+print("requests 2")
 import requests
 
 base_url = "https://zipcloud.ibsnet.co.jp/api/search"
@@ -1156,6 +1146,7 @@ requests.get(request_url).json()
 
 print("------------------------------------------------------------")  # 60個
 
+print("requests 3")
 import requests
 
 # 郵遞區號
@@ -1185,11 +1176,8 @@ else:
     print("API 查詢失敗，狀態碼：", response.status_code)
 
 
-
+"""
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
 
 """ fail
 import requests
@@ -1223,31 +1211,17 @@ else:
     print("API 查詢失敗，狀態碼：", response.status_code)
 """
 
-
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-print("------------------------------------------------------------")  # 60個
-
+"""
+print("requests 4")
 import requests
-
 api_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
-
 response = requests.get(api_url)
-
 response_dict = response.json()
-
-
-print("------------------------------------------------------------")  # 60個
 
 response_dict.keys()
 response_dict["total"]
-
-print("------------------------------------------------------------")  # 60個
 
 get_object_url = (
     "https://collectionapi.metmuseum.org/public/collection/v1/objects/435864"
@@ -1260,9 +1234,7 @@ object_response.json()["objectURL"]
 object_response.json()["title"]
 
 object_response.json()["primaryImageSmall"]
-
-print("------------------------------------------------------------")  # 60個
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1462,7 +1434,7 @@ print("------------------------------------------------------------")  # 60個
 x = 0x5D  # 這是16進為整數
 print(x)  # 列出10進位的結果
 y = 93  # 這是10進為整數
-print(hex(y))  # 列出轉換成16進位的結果
+#print(hex(y))  # 列出轉換成16進位的結果  fail in sugar
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1485,10 +1457,10 @@ print("列印james第1,3,5場得分", james[0:6:2])
 
 print("------------------------------------------------------------")  # 60個
 
+#數位時鐘
 from time import time, localtime, sleep
 
 class Clock(object):
-    """数字时钟"""
 
     def __init__(self, hour=0, minute=0, second=0):
         self._hour = hour
@@ -1501,7 +1473,7 @@ class Clock(object):
         return cls(ctime.tm_hour, ctime.tm_min, ctime.tm_sec)
 
     def run(self):
-        """走字"""
+        #走字
         self._second += 1
         if self._second == 60:
             self._second = 0
@@ -1513,7 +1485,7 @@ class Clock(object):
                     self._hour = 0
 
     def show(self):
-        """显示时间"""
+        #显示时间
         return '%02d:%02d:%02d' % \
                (self._hour, self._minute, self._second)
 
@@ -1645,7 +1617,12 @@ def get_suffix(filename, has_dot=False):
 
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
 print(get_suffix(filename))
+
+print()
+
+help(get_suffix)    #測試docstring
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1719,27 +1696,6 @@ print("c是否為複數？", isinstance(1 + 3j, complex))
 
 print("------------------------------------------------------------")  # 60個
 
-sigma = 0
-k = int(input("請輸入k值："))  # 輸入k值
-for n in range(0, k, 1):
-    if n & 1:  # 如果n是奇數
-        sigma += float(-1 / (2 * n + 1))
-    else:  # 如果n是偶數
-        sigma += float(1 / (2 * n + 1))
-print("PI = %f" % (sigma * 4))
-
-print("------------------------------------------------------------")  # 60個
-
-# 九九乘法表的雙重迴圈
-for i in range(1, 10):
-    for j in range(1, 10):
-        print("{0}*{1}={2:2d}  ".format(i, j, i * j), sep="\t", end="")
-        if j >= 7:
-            break  # 設定跳出的條件
-    print("\n-------------------------------------------------------\n")
-
-
-print("------------------------------------------------------------")  # 60個
 info = [
     ["C程式設計", "朱大峰", "480"],
     ["Python程式設計", "吳志明", "500"],
@@ -1859,9 +1815,8 @@ print(prices2)
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-迭代工具 - 排列 / 組合 / 笛卡爾積
-"""
+#迭代工具 - 排列 / 組合 / 笛卡爾積
+
 import itertools
 
 itertools.permutations('ABCD')
@@ -1869,9 +1824,8 @@ itertools.combinations('ABCDE', 3)
 itertools.product('ABCD', '123')
 
 
-"""
-找出序列中出現次數最多的元素
-"""
+#找出序列中出現次數最多的元素
+
 from collections import Counter
 
 words = [
@@ -2149,7 +2103,6 @@ print("錯誤 你得到獎金 ${money} 元")
 print("------------------------------------------------------------")  # 60個
 
 print("用字典建立個人資料")
-
 
 def build_profile(first, last, **user_info):
     """Build a dictionary containing everything we know about a user."""
@@ -2534,7 +2487,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('int(9.6)=',int(9.6))
 print('bin(20)=',bin(20))
-print('hex(66)=',hex(66))
+#print('hex(66)=',hex(66))  fail in sugar
 print('oct(135)=',oct(135))
 print('float(70)=',float(70))
 print('abs(-3.9)=',abs(-3.9))
@@ -2542,7 +2495,6 @@ print('chr(69)=',chr(69))
 print('ord(\'%s\')=%d' %('D',ord('D')))
 print('str(543)=',str(543))
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 animals = '鼠牛虎兔龍蛇馬羊猴雞狗豬'
@@ -3454,6 +3406,7 @@ print(myfruit(d1='apple', d2='mango', d3='grape'))
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 #引數：x 為底數       
 #y 為指數       
 #傳回值：次方運算結果 
@@ -3467,30 +3420,7 @@ x,y=input().split()
 print('x=',x)
 print('y=',y)
 print("次方運算結果: %d" %Pow(int(x), int(y)))
-
-print("------------------------------------------------------------")  # 60個
-
-def func(a,b):
-    p1 = a * b
-    p2 = a - b
-    return p1, p2
- 
-num1 ,num2 = func(5, 4)
-print(num1)  
-print(num2)  
-
-print("------------------------------------------------------------")  # 60個
-
-def func(length,width,height):
-    p1 = length*width*height
-    p2 = length+width+height
-    p3 = (length*width+height*length+width*height)*2
-    return p1, p2, p3
- 
-num1 ,num2, num3 = func(5, 4, 3)
-print(num1)  
-print(num2)
-print(num3)
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3559,10 +3489,6 @@ print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 def fib(n):	# 定義函數fib()
     if n==0 :
         return 0 # 如果n=0 則傳回 0
@@ -3575,8 +3501,6 @@ print('輸入所要計算第幾個費式數列:')
 n=10
 for i in range(n+1):# 計算前n個費氏數列
     print('fib(%d)=%d' %(i,fib(i)))
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3777,7 +3701,6 @@ print('------------------------------------------------------------')	#60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 for envname in "TMPDIR", "TEMP", "TMP":
     dirname = os.getenv(envname)
     print("cccccc", dirname)
@@ -3785,6 +3708,7 @@ for envname in "TMPDIR", "TEMP", "TMP":
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 import shutil
 import os
 
@@ -3794,11 +3718,12 @@ filename, extname = os.path.splitext(filename)
 if not os.path.exists("test-dir"):
     os.mkdir("test-dir")
 targetfullpath = os.path.join(path, os.path.join("test-dir", "00"+extname))
-shutil.copy(fullpath, targetfullpath)
+#shutil.copy(fullpath, targetfullpath)
 
 try:
     print("實際上預期可能會有例外的程式碼寫在這裡！")
-    10 / 0
+    #10 / 0
+    shutil.copy(fullpath, targetfullpath)
     print("在可能發生例外的指令之下的程式碼放在這邊！")
 except Exception as e:
     print("發生錯誤了，錯誤訊息如下：")
@@ -3807,23 +3732,21 @@ else:
     print("沒有發生任何錯誤。")
 finally:
     print("不管如何，都要執行這裡")
+"""
 
 print('------------------------------------------------------------')	#60個
 
-from stat import *
+import stat
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 st = os.lstat(filename)
 
-itime = ST_MTIME
-# itime = ST_CTIME
-anytime = st[itime]
-size = st[ST_SIZE]
+anytime = st[stat.ST_MTIME]
+size = st[stat.ST_SIZE]
 print("檔案大小 :", size, "拜")
 
 print("------------------------------------------------------------")  # 60個
-
 
 import os
 import sys
@@ -4204,84 +4127,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-print("------------------------------------------------------------")  # 60個
-
-total=0
-for count in range(1, 100, 2): 
-    total += count #將數值累加
-print("數值1~100之間的奇數累計=",total)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch05\prime.py
-
-n=int(input("請輸入n的值,n表示2~n之間的所有質數:"))
-i=2;
-while i<=n:
-    no_prime=0
-    for j in range(2,i,1):
-        if i%j==0:
-            no_prime=1
-            break  #跳出迴圈
-    if no_prime==0:
-        print("%d " %i); #輸出質數
-    i+=1
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch05\rev.py
-
-n=int(input("請輸入任一整數:"))
-print("反向輸出的結果:",end="")
-while n!=0:
-    print("%d" %(n%10),end="") #求出餘數值
-    n//=10
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch05\sigma.py
-
-k=int(input("請輸入k值："))
-sigma=0
-for n in range(int(k)+1):
-    if(n % 2!=0): #如果n是奇數
-        sigma += float(-1/(2*n+1))
-    else:  #如果n是偶數
-        sigma += float(1/(2*n+1))
-print("PI = %f" %(sigma*4))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch05\sum.py
-
-total=0
-for count in range(1, 101): #數值1~100
-    total += count #將數值累加
-print("數字1累加到100的總和=",total)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch05\table.py
-
-for x in range(1, 10):
-    for y in range(1, 10):
-        print("{0}*{1}={2: ^2}".format(y, x, x * y), end=" ")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch05\while.py
-
-x, y = 1, 10
-while x < y:
-    print(x, end = ' ')
-    x += 1
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 X = [1, 2,3, 4,5]
 Y = [1, 4,9,16,25]
@@ -4293,10 +4138,7 @@ X, Y = zip(*Z)  #Z裡面的點一個一個拿出來
 print(X)
 print(Y)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 a = [1, 2, 3]
 b = ['a', 'b', 'c']
@@ -4829,8 +4671,8 @@ print("------------------------------------------------------------")  # 60個
 #檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_41_2.py
 
 # ch6_41_2.py
-msg = '''CIA Mark told CIA Linda that the secret USB
-had given to CIA Peter'''
+msg = """CIA Mark told CIA Linda that the secret USB
+had given to CIA Peter"""
 print("字串開頭是CIA: ", msg.startswith("CIA"))
 print("字串結尾是CIA: ", msg.endswith("CIA"))
 print("CIA出現的次數: ",msg.count("CIA"))
@@ -6056,9 +5898,6 @@ info2 = guest_info('雨', '冰', '洪', 'F')
 print(info1)
 print(info2)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_15.py
@@ -6481,19 +6320,18 @@ print( bool("XYZ") )
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\carry.py
-
 num=123
 print(num)
 num1=bin(num) #2進位
 print(num1)
 num2=oct(num) #8進位
 print(num2)
-num3=hex(num) #16進位
+
+num3=1234
 print(num3)
 print(int(num1,2)) #將2進位的字串轉換成10進位數值
 print(int(num2,8)) #將8進位的字串轉換成10進位數值
-print(int(num3,16))#將16進位的字串轉換成10進位數值
+#print(int(num3,16))#將16進位的字串轉換成10進位數值 fail in sugar
 
 print("------------------------------------------------------------")  # 60個
 
@@ -6506,12 +6344,9 @@ print(str.format(a, b, a * int(b)))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\date.py
-
-print("請輸入日期(YYYY-MM-DD)：")
-year=input()
-month=input()
-day=input()
+year=2024
+month=1
+day=20
 print("日期：%s-%s-%s" %(year, month, day))
 
 print("------------------------------------------------------------")  # 60個
@@ -6519,21 +6354,11 @@ print("------------------------------------------------------------")  # 60個
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\digit.py
 
 print("請輸入一個十進位數: ",end="")
-Val=int(input())
+Val=1234
 print("Val的八進位數=%o" %Val)#以%o格式化字元輸出
 print("Val的十六進位數=%x" %Val)#以%x格式化字元輸出 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\earth.py
-
-print("請輸入您的體重(公斤):",end="")
-weight=int(input())#輸入體重
-print("您在月球上體重為：%.5f 公斤" %(weight * 0.17))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\format_1.py
 
 company="藍海科技股份有限公司"
 year=27
@@ -6541,15 +6366,11 @@ print("{}已成立公司 {} 年" .format (company, year))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\format_2.py
-
 print("{0:10}收入：{1:_^12}".format("Axel", 52000))
 print("{0:10}收入：{1:>12}".format("Michael", 87000))
 print("{0:10}收入：{1:*<12}".format("May", 36000))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\print_%.py
 
 num = 168
 print ("數字 %s 的浮點數：%5.1f" % (num,num))
@@ -6559,16 +6380,12 @@ print ("數字 %s 的二進位：%s" % (num,bin(num)))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\salary.py
-
 print("編號 姓名    底薪  業務獎金 加給補貼")
 print("%3d %3s %6d %6d %6d" %(801,"朱正富",32000,10000,5000))
 print("%3d %3s %6d %6d %6d" %(805,"曾自強",35000,8000,7000))
 print("%3d %3s %6d %6d %6d" %(811,"陳威動",43000,15000,6000))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\str_error.py
 
 print("13579")
 print("1+2")
@@ -6577,8 +6394,6 @@ print("I'm all right, but it's raining.")
 print('I\'m all right, but it\'s raining.')
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\type.py
 
 print(type(23))  #輸出結果 <class 'int'>
 print(type(3.14)) #輸出結果 <class 'float'>
@@ -6609,19 +6424,6 @@ print(x | y)
 print(~x)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\coin.py
-
-print("請輸入將兌換金額: ",end="")
-num=int(input())
-hundred=num//100
-fifty=(num-hundred*100)//50
-ten=(num-hundred*100-fifty*50)//10
-print("百元鈔有%d張 五十元鈔有%d張 十元鈔有%d張" %(hundred,fifty,ten))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\compare.py
 
 a=19; b=13 
 #比較運算子運算關係
@@ -6668,13 +6470,6 @@ result = not result;	#將result的值做not運算
 
 print("------------------------------------------------------------")  # 60個
 
-print("請輸入三位數以上整數: ", end="")
-num=int(input())
-num=(num/100)%10;
-print("百位數的數字為%d" %num)
-
-print("------------------------------------------------------------")  # 60個
-
 a,b,c=3,5,7 #宣告a、b及c三個整數變
 print("a= %d b= %d c= %d" %(a,b,c))
 print("====================================")
@@ -6690,229 +6485,11 @@ print(b >> 1)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch04\35.py
-
-value=int(input("請任意輸入一個整數："))
-if value%5==0 or value%7==0: #判斷是否為5或7的倍數
-    if value%35 !=0:
-         print("符合所要的條件")
-    else:
-         print("不符合所要的條件") 
-else:
-    print("不符合所要的條件")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch04\caculator.py
-
-a=float(input("請輸入a:"))
-b=float(input("請輸入b:"))
-op_key=input("請輸入+,-,*,/鍵：")#輸入字元並存入變數op_key
-if op_key=='+': #如果op_key等於'+'
-    print("{} {} {} = {}".format(a, op_key, b, a+b))
-elif op_key=='-': #如果op_key等於'-'
-    print("{} {} {} = {}".format(a, op_key, b, a-b))
-elif op_key=='*': #如果op_key等於'*'
-    print("{} {} {} = {}".format(a, op_key, b, a*b))
-elif op_key=='/': #如果op_key等於'/'
-    print("{} {} {} = {}".format(a, op_key, b, a/b))
-else: #如果op_key不等於 + - * / 任何一個
-    print("運算式有誤")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch04\exam.py
-
-#定義整數變數 Score，儲存學生成績
-Score=int(input("輸入學生的分數:"))
-if Score>=60: #if 條件敘述
-     print("得到 %d 分，還不錯唷..." %Score)
-else:
-     print("不太理想喔...，只考了 %d 分" %Score)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch04\function.py
-
-print("功能選單") 
-print(" 0.歡迎詞")
-print(" 1.註冊會員資料" )
-print(" 2.新增訂單")
-print(" 3.查詢出貨明細")
-print("請點選您要的項目:" )
-Select=int(input()) 
-if Select == 0: 
-    print("歡迎光臨本系")
-elif Select == 1: 
-    print("呼叫註冊會員資料程式")
-elif Select == 2: 
-    print("呼叫新增訂單程式" )
-elif Select == 3: 
-    print("呼叫查詢出貨明細程式" )
-else: #輸入錯誤的處理
-    print("請重新選擇")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch04\leapYear.py
-
-year = int(input("請輸入西元年份："))
-
-if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
-    print("%d 是閏年" %year)
-else :
-    print("%d 是平年" %year)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch04\lotto.py
-
-Result=77 #儲存答案
-print("猜猜今晚樂透號碼(2位數): ",end="")
-Select=int(input())
-if Select!=Result:
-     print("猜錯了....")
-     print("答案是%d" %Result)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch04\nestif.py
-
-Score=int(input("輸入學生的分數:")) #輸入學生成績
-if Score > 100:     #判斷是否超過 
-    print("輸入的分數超過 100.")
-else:
-    if Score<0: #判斷是否低於0
-        print("怎麼會有負的分數??")
-    else:
-        if Score >= 60: #判斷是否及格
-            print("得到 {}分，還不錯唷...".format(Score))
-        else:
-            print("不太理想喔...，只考了 {} 分".format(Score))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch04\shop.py
-
-print("請輸入總消費金額：",end="")
-charge=int(input())
-#如果消費金額大於等於2000
-if charge>=2000: print("請到10F領取周年慶禮品")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch04\six.py
-
-value=int(input("請任意輸入一個整數："))
-if value%2==0 or value%3==0: #判斷是否為2或3的倍數
-    if value%6!=0:
-         print("符合所要的條件")
-    else:
-         print("不符合所要的條件") #為6的倍數 
-else:
-    print("不符合所要的條件")
-
-print("------------------------------------------------------------")  # 60個
-
-total=0
-for i in range(1,201,2):
-    if i==101:
-        break
-    total+=i
-print("1~99的奇數總和:%d" %total)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\common.py
-
-a=1
-n=int(input("請輸入一個數字："))
-print("%d 的所有因數為:" %n,end="")
-while a<=n: #定義while迴圈,且設定條件為a<=n
-    if n%a==0: #當n能夠被a整除時~則a就是n的因數
-        print("%d " %a,end="")
-        if n!=a: print(",",end="")
-    a+=1 #a值遞增1
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\continue.py
-
-for x in range(1, 10):
-    if x == 5:
-        continue
-    print( x, end=" ")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\divide.py
-
-print("求取兩正整數的最大公因數(g.c.d):")
-print("輸入兩個正整數:")
-#輸入兩數
-Num1=int(input())
-Num2=int(input())
-if Num1 < Num2:
-    TmpNum=Num1                           
-    Num1=Num2
-    Num2=TmpNum#找出兩數較大值
-while Num2 != 0:
-    TmpNum=Num1 % Num2            
-    Num1=Num2                              
-    Num2=TmpNum #輾轉相除法
-print("最大公因數(g.c.d)的值為:%d" %Num1)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\enum.py
-
 phrase = ["三陽開泰", "事事如意", "五福臨門"]
 for index, x in enumerate(phrase):
     print ("{0}--{1}".format(index, x))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\equation.py
-
-total=0
-n=int(input("請輸入任一整數:"))
-if n>=1 or n<=100:
-    for i in range(n+1):
-        total+=i*i  #1*1+2*2+3*3+..n*n
-    print("1*1+2*2+3*3+...+%d*%d=%d" %(n,n,total))
-else:
-    print("輸入數字超出範圍了!")
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\fac.py
-
-total=0
-n1=1
-n=int(input("請輸入任一整數:"))
-for i in range(1,n+1):
-    for j in range(1,i+1):
-        n1*=j #n!的值
-    total+=n1 #1!+2!+3!+..n!
-    n1=1
-print("1!+2!+3!+...+%d!=%d" %(n,total))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\factor.py
-
-a=1
-n=int(input("請輸入一個整數數字："))
-print("%d的所有正因數為:" %n)
-while a<=n:
-    if n%a==0: #當n能夠被a整除時~則a就是n的因數
-        print(a,end="")
-        if n!=a: print(",",end="")
-    a+=1 #a值遞增1
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\innerbreak.py
 
 for a in range(1,6): #外層for迴圈控制
     for b in range(1,a+1): #內層for迴圈控制
@@ -6923,34 +6500,6 @@ for a in range(1,6): #外層for迴圈控制
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\max.py
-
-MAX= 0
-num=int(input("準備輸入數字的個數："))
-for i in range(num): #利用for迴圈來輸入與尋找最大值
-    print(">",end="")
-    temp=int(input())
-    if MAX<temp:
-        MAX=temp
-print("這些數字中的最大值為：%d" %MAX)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\min.py
-
-MIN= 99999
-num=int(input("準備輸入數字的個數："))
-for i in range(num): #利用for迴圈來輸入與尋找最小值
-    print(">",end="")
-    temp=int(input())
-    if MIN>temp:
-        MIN=temp
-print("這些數字中的最大小值為：%d" %MIN)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\odd.py
-
 total=0
 for count in range(1, 100, 2): 
     total += count #將數值累加
@@ -6958,36 +6507,7 @@ print("數值1~100之間的奇數累計=",total)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\prime.py
-
-n=int(input("請輸入n的值,n表示2~n之間的所有質數:"))
-i=2;
-while i<=n:
-    no_prime=0
-    for j in range(2,i,1):
-        if i%j==0:
-            no_prime=1
-            break  #跳出迴圈
-    if no_prime==0:
-        print("%d " %i); #輸出質數
-    i+=1
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\rev.py
-
-n=int(input("請輸入任一整數:"))
-print("反向輸出的結果:",end="")
-while n!=0:
-    print("%d" %(n%10),end="") #求出餘數值
-    n//=10
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\sigma.py
-
-k=int(input("請輸入k值："))
+k=20
 sigma=0
 for n in range(int(k)+1):
     if(n % 2!=0): #如果n是奇數
@@ -6998,16 +6518,27 @@ print("PI = %f" %(sigma*4))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\sum.py
-
-total=0
-for count in range(1, 101): #數值1~100
-    total += count #將數值累加
-print("數字1累加到100的總和=",total)
+#不一樣
+k = 20
+sigma = 0
+for n in range(0, k, 1):
+    if n & 1:  # 如果n是奇數
+        sigma += float(-1 / (2 * n + 1))
+    else:  # 如果n是偶數
+        sigma += float(1 / (2 * n + 1))
+print("PI = %f" % (sigma * 4))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\table.py
+# 九九乘法表的雙重迴圈
+for i in range(1, 10):
+    for j in range(1, 10):
+        print("{0}*{1}={2:2d}  ".format(i, j, i * j), sep="\t", end="")
+        if j >= 7:
+            break  # 設定跳出的條件
+    print("\n-------------------------------------------------------\n")
+
+print("------------------------------------------------------------")  # 60個
 
 for x in range(1, 10):
     for y in range(1, 10):
@@ -7045,42 +6576,6 @@ print('依\\n分割字串', str3.splitlines(False))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\append.py
-
-num=int(input('請輸入總人數: '))
-student = [] 
-print('請輸入{0}個數值：'.format(num))
-
-# 依序讀取分數
-for item in range(1,num+1):
-    score = int(input()) #取得輸入數值
-    student.append(score) #新增到串列
-
-print('總共輸入的分數', end = '\n')
-for item in student:   
-    print('{:3d} '.format(item), end = '')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\column.py
-
-print("|a1 b1|")
-print("|a2 b2|")
-arr=[[]*2 for i in range(2)]
-arr=[[0,0],[0,0]]
-arr[0][0]=int(input("請輸入a1:"))
-arr[0][1]=int(input("請輸入b1:"))
-arr[1][0]=int(input("請輸入a2:"))
-arr[1][1]=int(input("請輸入b2:"))
-ans= arr[0][0]*arr[1][1]-arr[0][1]*arr[1][0] #求二階行列式的值
-print("| %d %d |" %(arr[0][0],arr[0][1]))
-print("| %d %d |" %(arr[1][0],arr[1][1]))
-print("ans= %d" %ans)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\count.py
-
 str1="Happy birthday to my best friend."
 s1=str1.count("to",0) #從str1字串索引0的位置開始搜尋
 s2=str1.count("e",0,34) #搜尋str1從索引值0到索引值34-1的位置
@@ -7098,8 +6593,7 @@ for j in range(5):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\Exdict.py
-
+"""
 dictStudent = {}
 
 def isHasKeyAndNotNone():
@@ -7137,7 +6631,7 @@ strFieldName = str(input("請輸入欄位名稱(以逗號分隔)："))
 dictStudent = dictStudent.fromkeys(strFieldName.split(","))
 
 isHasKeyAndNotNone()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExFloat.py
@@ -7173,74 +6667,7 @@ for i in range(len(list1)):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExList2.py
-
-person = ["John", "Merry", "Mi", "Jason"]
-
-addPerson = str(input("請輸入新增人員名字："))
-
-if person.count(addPerson) == 0:
-   person.insert(len(person) - 2, addPerson)
-
-print("搜尋剛新增人員索引位置：", person.index(addPerson))
-
-person1 = person.copy()
-person.clear()
-
-print("複製原串列：", person1)
-print("原串列：", person)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExSet.py
-
-likeBasketball = set(("class A", "class B", "class C"))
-likeDodgeball = set(("class A", "class F", "class k"))
-
-setDifference = likeBasketball.difference(likeDodgeball)
-print("\nlikeBasketball差集：", setDifference)
-setDifference = likeDodgeball.difference(likeBasketball)
-print("likeDodgeball差集：", setDifference)
-
-setIntersection = likeBasketball.intersection(likeDodgeball)
-print("\nlikeBasketball以及likeDodgeball的交集：", setIntersection)
-
-
-setUnion = likeBasketball.union(likeDodgeball)
-print("\nlikeBasketball以及likeDodgeball的聯集：", setUnion)
-
-setSymmetric_difference = likeBasketball.symmetric_difference(likeDodgeball)
-print("\nlikeBasketball以及likeDodgeball的對稱差：", setSymmetric_difference)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExSlice.py
-
-Index = "Hello Python, This is Program"
-
-print("Index字串：", Index)
-print(Index[-3:-25:-2])
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExString.py
-
-strName = str(input("\n郵局："))
-strCode = str(input("郵局代號："))
-intAount = int(input ("戶頭："))
-intMoney = int(input("金額："))
-	
-print("\n郵局：%s" %(strName))
-print("郵局代號為%s，轉帳戶頭為%02d" %(strCode, intAount))
-print("匯入金額：%c%.2f" %(36, intMoney))
-	
-if intMoney < 20000:
-    print("%c\n" %("成"))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExStrMethod.py
-
+"""
 def EditData():
     if len(strEditTitle) > 0:
         print(strEditTitle)
@@ -7288,8 +6715,6 @@ EditData()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExTuple.py
-
 tupleData = ()
 listData = []
 
@@ -7317,282 +6742,6 @@ print("list轉換tuple：", listToTuple)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\lotto.py
-
-number={1,2,3,4,5,6,7,8,9,10,11,12}
-print(number)
-lotto1={3,5,7,10,12} #第一組幸運彩蛋
-print("第一組樂透:",lotto1)
-lotto2={2,5,6,11,12} #第二組幸運彩蛋
-print("第二組樂透:",lotto2)
-lucky=lotto1 | lotto2
-print("有 %d 個數字出現在其中一次開獎" %len(lucky), lucky)
-biglucky=lotto1 & lotto2
-print("有 %d 個數字出現在每一次開獎" %len(biglucky), biglucky)
-badnum=number -lucky
-print("總共有 %d 個不幸運的數字" %len(badnum), badnum)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\phrase.py
-
-phrase = 'Happy holiday.'
-print('原字串：', phrase)
-print('將首字大寫 ', phrase.capitalize())
-print('每個單字的首字會大寫', phrase.title())
-print('全部轉為小寫字元', phrase.lower()) 
-print('判斷字串首字元是否為大寫', phrase.istitle())
-print('是否皆為大寫字元', phrase.isupper())
-print('是否皆為小寫字元', phrase.islower())
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\replace.py
-
-s= "我畢業於宜蘭高中."
-print(s)
-s1=s.replace("宜蘭高中", "高雄中學")
-print(s1)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\rev.py
-
-fruit = ['apple', 'orange', 'watermelon']
-print('反轉前內容：', fruit)
-fruit.reverse() 
-print('反轉後內容：', fruit)
-score = [65,76,54,32,18]
-print('反轉前內容：', score)
-score.reverse() 
-print('反轉後內容：', score)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\sort.py
-
-score = [98, 46, 37, 66, 69]
-print('排序前順序：',score)
-score.sort() #省略reverse參數, 遞增排序
-print('遞增排序：', score)
-letter = ['one', 'time', 'happy', 'child']
-print('排序前順序：')
-print(letter)
-letter.sort(reverse = True) #依字母做遞減排序
-print('遞減排序：')
-print(letter)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\split.py
-
-str1 = "happy \nclever \nwisdom"
-print( str1.split() ) #以空格與換行符號(\n)來分割
-print( str1.split(' ', 2 ) ) 
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\startswith.py
-
-wd = 'Alex is optimistic and clever.'
-print('字串:', wd)
-print('Alex為開頭的字串嗎', wd.startswith('Alex')) 
-print('clever為開頭的字串嗎', wd.startswith('clever', 0))
-print('optimistic從指定位置的開頭的字串嗎', wd.startswith('optimisti', 8)) 
-print('clever.為結尾字串嗎', wd.endswith('clever.'))  
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\tuple_sorted.py
-
-pay = (8000, 7200, 8300, 4700, 5500)
-print(pay)
-print('由小而大：',sorted(pay))
-print('由大而小：', sorted(pay, reverse = True))
-
-print('資料仍維持原順序：')
-print(pay)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\unpack01.py
-
-word1 = "zoo"
-word2 = "animal"
-print("交換前: ")
-print('單字1={},單字2={}'.format(word1,word2))
-word2,word1 = word1,word2
-print("交換後: ")
-print('單字1={},單字2={}'.format(word1,word2))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\unpack02.py
-
-product = (('iPhone','手機','我預算的首選'),
-        ('iPad','平板','視股票獲利'),
-        ('iPod','播放','價格最親民'))
-
-for(name, c_name,memo) in product:
-    print('%-10s %-12s %-10s'%(name,c_name,memo))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\compare.py
-
-def mymax(x,y):
-    if x>y:
-        return x
-    else:
-        return y
-
-print('數字比大小')
-a=int(input('請輸入a:'))
-b=int(input('請輸入b:'))
-print("較大者之值為:%d" %mymax(a,b))#函數呼叫
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\exchange.py
-
-def exchange(num):
-    num[0],num[1]=num[1],num[0] #交換兩數過程
-
-print("請輸入兩個數值: ")
-num=[]
-num.append(int(input()))
-num.append(int(input()))
-print('num[0]=',num[0])
-print('num[1]=',num[1])
-exchange(num)
-print('------------- exchange()函數交換 ----------------')
-print('num[0]=',num[0])
-print('num[1]=',num[1])
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\func.py
-
-def func(a,b,c):
-    x = a +b +c
-    return x
-
-print(func(1,2,3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\func1.py
-
-def func(a,b,c):
-    x = a +b +c
-    print(x)
-
-print(func(1,2,3))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\keyword.py
-
-def equation(x,y,z):
-    ans = x*y+z*x+y*z
-    return ans
-
-print(equation(z=1,y=2,x=3))
-print(equation(3, 2, 1))
-print(equation(x=3, y=2 , z=1))
-print(equation(3, y=2 , z=1))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\lambda.py
-
-total=lambda a,b:a+b
-num1=0
-num2=0
-num1=int(input('輸入數值 1：'))
-num2=int(input('輸入數值 2：'))
-print('數值 1+數值 2 =',total(num1,num2))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\para.py
-
-def square_sum(*arg):
-    ans=0
-    for n in arg:
-        ans += n*n
-    return ans
-
-ans1=square_sum(1)
-print('1*1=',ans1)
-ans2=square_sum(1,2)
-print('1*1+2*2=',ans2)
-ans3=square_sum(1,2,3)
-print('1*1+2*2+3*3=',ans3)
-ans4=square_sum(1,3,5,7)
-print('1*1+3*3+5*5+7*7=',ans4)
-
-def progname(**arg):
-    return arg
-
-print(progname(d1='python', d2='java', d3='visual basic'))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\para1.py
-
-def dinner(mainmeal, *sideorder):
-    #列出所點餐點的主餐及點心副餐
-    print('所點的主餐為',mainmeal,'所點的副餐點心包括:')
-    for snack in sideorder:
-        print(snack)
-
-dinner('鐵板豬','烤玉米')
-dinner('泰式火鍋','德式香腸','香焦牛奶','幸運餅')
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\pow.py
-
-def Pow(x, y):
-    p = 1;
-    for i in range(y+1):
-        p *= x
-    return p
-print('請輸入兩數x及y的值函數：')
-x=int(input('x='))
-y=int(input('y='))
-print('次方運算結果：%d' %Pow(x, y))
-
-print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\swap.py
-
-def swap_test(x,y):
-    print('函數內交換前：x=%d, y=%d' %(x,y))
-    x,y=y,x #交換過程
-    print('函數內交換前：x=%d, y=%d' %(x,y))     
-
-a=10
-b=20 #設定a,b的初值
-print('函數外交換前：a=%d, b=%d' %(a,b))
-swap_test(a,b) #函數呼叫
-print('函數外交換後：a=%d, b=%d' %(a,b))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch07\value.py
-
-print('int(9.6)=',int(9.6))
-print('bin(20)=',bin(20))
-print('hex(66)=',hex(66))
-print('oct(135)=',oct(135))
-print('float(70)=',float(70))
-print('abs(-3.9)=',abs(-3.9))
-print('chr(69)=',chr(69))
-print('ord(\'%s\')=%d' %('D',ord('D')))
-print('str(543)=',str(543))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7600,7 +6749,6 @@ print("------------------------------------------------------------")  # 60個
 BaseSalary = 25000
 CaseBonus = 1000
 OfficeBonus = 5000
-
 
 #請輸入職位名稱(Engineer)、結案獎金金額(CaseAmount)變數
 Engineer = str(input("請輸入職位名稱："))
@@ -7618,12 +6766,8 @@ CaseAmount = CalculateCase(Case, CaseBonus)
 SalaryAmount = CalculateSalary(BaseSalary, OfficeBonus)
 
 print("該工程師薪資：", CaseAmount + SalaryAmount)
-
+"""
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch08\ExTime.py
 
 import time
 
@@ -7632,23 +6776,6 @@ tLocal = time.localtime(t)
 
 print("轉換時間形式(年/月/日)：", time.strftime("%Y/%m/%d", tLocal))
 print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime (tLocal))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch08\GetParam.py
-
-import sys
-if len(sys.argv) < 0:
-    print("未有外部傳入參數")
-else:
-    print("Python版本號：", sys.version)
-    print("作業系統：", sys.platform)
-
-    for n in range(len(sys.argv)):
-        print("param" + str(n) + "：", sys.argv[n])
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7796,7 +6923,7 @@ float()
 print("python之基本函數")
 print('int(8.4)=',int(8.4))
 print('bin(14)=',bin(14))
-print('hex(84)=',hex(84))
+#print('hex(84)=',hex(84))
 print('oct(124)=',oct(124))
 print('float(6)=',float(6))
 print('abs(-6.4)=',abs(-6.4))
@@ -7825,7 +6952,7 @@ print("pow(3,4)=", pow(3, 4))
 print("round(3.5)=", round(3.5))
 print("chr(68)=", chr(68))
 print("ord('%s')=%d" % ("A", ord("A")))
-print("str(1234)=", str(1234))
+#print("str(1234)=", str(1234))
 print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
 print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
 print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
@@ -7871,25 +6998,6 @@ print(round(x, 1))  # 輸出round(x,1)
 
 print("------------------------------------------------------------")  # 60個
 
-dist = 384400  # 地球到月亮距離
-speed = 1225  # 馬赫速度每小時1225公里
-total_hours = dist // speed  # 計算小時數
-days, hours = divmod(total_hours, 24)  # 商和餘數
-print("總供需要天數")
-print(days)
-print("小時數")
-print(hours)
-
-print("------------------------------------------------------------")  # 60個
-
-money=int(input('請輸入班遊剩餘的金額:'))
-num=int(input('請輸入這次出遊的總人數:'))
-ans=divmod(money,num)
-print('每一位同學的平均退費為',ans[0],'元')
-print('剩餘可以存入班費共同基金為 ',ans[1],'元')
-
-print("------------------------------------------------------------")  # 60個
-
 r = abs(-10)
 print("abs(-10) = ", r)
 r = abs(5)
@@ -7915,32 +7023,11 @@ print("round(3.14568757, 1) = ", r)
 number = 3.14159
 print("四捨五入到小數點後兩位：", round(number, 4))
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
-math.sqrt(sum(pow(x - (sum(data) / len(data)), 2) for x in data) / len(data))
-
-mean = sum(data) / len(data)
-variance = sum(pow(x - mean, 2) for x in data) / len(data)
-std = math.sqrt(variance)
-
-
-
-import math
-x = 10
-y = -2
-
-z = math.fabs(x / y)
-h = math.factorial(z)
-
-if math.isnan(h) == False:
-    print("計算後數值：", h)
-    print("最大公約數：", math.gcd(h, x))
 
 print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
 
