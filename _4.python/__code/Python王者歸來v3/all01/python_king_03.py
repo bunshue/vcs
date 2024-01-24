@@ -484,3 +484,512 @@ btn2.grid(row=3,column=1)
 window.mainloop()
 
 
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_19.py
+
+# ch13_19.py
+import random                               # 導入模組random
+
+lotterys = random.sample(range(1,50), 7)    # 7組號碼
+specialNum = lotterys.pop()                 # 特別號
+
+print("第xxx期大樂透號碼 ", end="")
+for lottery in sorted(lotterys):            # 排序列印大樂透號碼
+    print(lottery, end=" ")
+print(f"\n特別號:{specialNum}")             # 列印特別號
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_20.py
+
+# ch13_20.py
+import random
+random.seed(5)
+for i in range(5):
+    print(random.random())
+    
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_21.py
+
+# ch13_21.py
+import random                       # 導入模組random
+import time                         # 導入模組time
+
+min, max = 1, 10
+ans = random.randint(min, max)      # 隨機數產生答案
+yourNum = int(input("請猜1-10之間數字: "))
+starttime = int(time.time())        # 起始秒數
+while True:    
+    if yourNum == ans:
+        print("恭喜!答對了")
+        endtime = int(time.time())  # 結束秒數
+        print("所花時間: ", endtime - starttime, " 秒")
+        break
+    elif yourNum < ans:
+        print("請猜大一些")
+    else:
+        print("請猜小一些")
+    yourNum = int(input("請猜1-10之間數字: "))
+        
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_22.py
+
+# ch13_22.py
+import time                         # 導入模組time
+
+xtime = time.localtime()
+print(xtime)                        # 列出目前系統時間
+print("年 ", xtime[0])
+print("年 ", xtime.tm_year)         # 物件設定方式顯示
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_23.py
+
+# ch13_23.py
+import time
+x = 1000000
+pi = 0
+time.process_time()
+for i in range(1,x+1):
+    pi += 4*((-1)**(i+1) / (2*i-1))
+    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
+        e_time = time.process_time()
+        print(f"當 {i=:7d} 時 PI={pi:8.7f}, 所花時間={e_time}")
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_23_1.py
+
+# ch13_23_1.py
+import time
+formatted_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+print(formatted_time)
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_24.py
+
+# ch13_24.py
+import sys
+print("請輸入字串, 輸入完按Enter = ", end = "")
+msg = sys.stdin.readline()
+print(msg)
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_25.py
+
+# ch13_25.py
+import sys
+print("請輸入字串, 輸入完按Enter = ", end = "")
+msg = sys.stdin.readline(8)         # 讀8個字
+print(msg)
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_26.py
+
+# ch13_26.py
+import sys
+
+sys.stdout.write("I like Python")
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_27.py
+
+# ch13_27.py
+import sys
+for dirpath in sys.path:
+    print(dirpath)
+
+
+
+
+
+
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_28.py
+
+# ch13_28.py
+import sys
+print("命令列參數 : ", sys.argv)
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_29.py
+
+# ch13_29.py
+import keyword
+
+keywordLists = ['as', 'while', 'break', 'sse', 'Python']
+for x in keywordLists:
+    print(f"{x:>8s} {keyword.iskeyword(x)}")
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_30.py
+
+# ch13_30.py
+import sys
+from pprint import pprint
+print("使用print")
+print(sys.path)
+print("使用pprint")
+pprint(sys.path)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_31.py
+
+# ch13_31.py
+import random                       # 導入模組random
+money = 300                         # 賭金總額
+bet = 100                           # 賭注
+min, max = 1, 100                   # 隨機數最小與最大值設定
+winPercent = int(input("請輸入莊家贏的比率(0-100)之間 :"))
+
+while True:
+    print(f"歡迎光臨 : 目前籌碼金額 {money} 美金 ")
+    print(f"每次賭注 {bet} 美金 ")
+    print("猜大小遊戲: L或l表示大,  S或s表示小, Q或q則程式結束")
+    customerNum = input("= ")       # 讀取玩家輸入
+    if customerNum == 'Q' or customerNum == 'q':    # 若輸入Q或q
+        break                                       # 程式結束
+    num = random.randint(min, max)  # 產生是否讓玩家答對的隨機數
+    if num > winPercent:            # 隨機數在此區間回應玩家猜對
+        print("恭喜!答對了\n")
+        money += bet                # 賭金總額增加
+    else:                           # 隨機數在此區間回應玩家猜錯
+        print("答錯了!請再試一次\n")
+        money -= bet                # 賭金總額減少
+    if money <= 0:
+        break
+
+print("歡迎下次再來")
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_32.py
+
+# ch13_32.py
+import random
+
+trials = 1000000
+Hits = 0
+for i in range(trials):
+    x = random.random() * 2 - 1     # x軸座標
+    y = random.random() * 2 - 1     # y軸座標
+    if x * x + y * y <= 1:          # 判斷是否在圓內
+        Hits += 1
+PI = 4 * Hits / trials
+
+print("PI = ", PI)
+
+
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_33.py
+
+# ch13_33.py
+import string
+
+def encrypt(text, encryDict):           # 加密文件
+    cipher = []
+    for i in text:                      # 執行每個字元加密
+        v = encryDict[i]                # 加密
+        cipher.append(v)                # 加密結果
+    return ''.join(cipher)              # 將串列轉成字串
+    
+abc = string.printable[:-5]             # 取消不可列印字元
+subText = abc[-3:] + abc[:-3]           # 加密字串
+encry_dict = dict(zip(subText, abc))    # 建立字典
+print("列印編碼字典\n", encry_dict)     # 列印字典
+
+msg = 'If the implementation is easy to explain, it may be a good idea.'
+ciphertext = encrypt(msg, encry_dict)
+
+print("原始字串 ", msg)
+print("加密字串 ", ciphertext)
+
+
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_34.py
+
+# ch13_34.py
+import string
+import random
+def encrypt(text, encryDict):           # 加密文件
+    cipher = []
+    for i in text:                      # 執行每個字元加密
+        v = encryDict[i]                # 加密
+        cipher.append(v)                # 加密結果
+    return ''.join(cipher)              # 將串列轉成字串
+    
+abc = string.printable[:-5]             # 取消不可列印字元
+newAbc = abc[:]                         # 產生新字串拷貝
+abclist = list(newAbc)                  # 轉成串列
+random.shuffle(abclist)                 # 打亂串列順序
+subText = ''.join(abclist)              # 轉成字串
+encry_dict = dict(zip(subText, abc))    # 建立字典
+print("列印編碼字典\n", encry_dict)     # 列印字典
+
+msg = 'If the implementation is easy to explain, it may be a good idea.'
+ciphertext = encrypt(msg, encry_dict)
+
+print("原始字串 ", msg)
+print("加密字串 ", ciphertext)
+
+
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_35.py
+
+# ch13_35.py
+import random
+
+# 假設一家公司想要測試兩種不同的廣告設計, 以看哪一種效果更好
+ad_designs = ['Design A', 'Design B']
+
+# 公司有一個1000人的郵件列表, 想要隨機選擇一半接收A廣告, 一半接收B廣告
+recipients = {'Design A': [], 'Design B': []}
+
+# 隨機分配郵件
+for i in range(1, 1001):
+    chosen_design = random.choice(ad_designs)       # 隨機選擇一種設計
+    recipients[chosen_design].append(f'user_{i}')
+
+# 確保每種設計都有500個用戶
+while len(recipients['Design A']) != 500:
+    if len(recipients['Design A']) > 500:
+        user_to_move = recipients['Design A'].pop()
+        recipients['Design B'].append(user_to_move)
+    else:
+        user_to_move = recipients['Design B'].pop()
+        recipients['Design A'].append(user_to_move)
+
+# 假設這裡會發送郵件，然後根據用戶反饋進行分析
+
+# 輸出每種設計的接收者數量，確保它們是平均分配的
+print(f"A 廣告接收者數量 : {len(recipients['Design A'])}")
+print(f"B 廣告接收者數量 : {len(recipients['Design B'])}")
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_36.py
+
+# ch13_36.py
+import random
+
+# 假設有一組伺服器
+servers = ['Server1', 'Server2', 'Server3', 'Server4']
+
+# 模擬1000次請求, 隨機分配到這些伺服器
+requests = {server:0 for server in servers}
+for _ in range(1000):
+    selected_server = random.choice(servers)
+    requests[selected_server] += 1
+
+print(requests)         # 顯示每個伺服器獲得的請求數
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_37.py
+
+# ch13_37.py
+import random
+
+# 假設生產線上有一批產品序列號
+product_serials = list(range(1000, 2000))
+
+# 抽檢10個產品進行品質檢查
+samples = random.sample(product_serials, 10)
+
+for serial in samples:
+    # 這裡會有一個品質檢查的函數
+    print(f"檢查序列號 : {serial}")
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_38.py
+
+# ch13_38.py
+import time
+
+def log_event(event):
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    print(f"{timestamp} : {event}")
+
+# 假設發生了一個事件
+log_event("User login")
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_39.py
+
+# ch13_39.py
+import time
+
+def database_backup():
+    # 執行備份邏輯
+    print("資料庫備份 ... ")
+
+# 每天凌晨1點執行備份
+while True:
+    current_time = time.strftime("%H:%M", time.localtime())
+    if current_time == "01:00":
+        database_backup()
+    time.sleep(60)              # 每分鐘檢查一次
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
