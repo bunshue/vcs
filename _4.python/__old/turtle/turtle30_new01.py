@@ -2,6 +2,8 @@ import sys
 
 print("------------------------------------------------------------")  # 60個
 
+"""
+print("turtle 01")
 import turtle
 
 turtle.pensize(3)
@@ -16,10 +18,12 @@ for _ in range(36):
     turtle.right(170)
 turtle.end_fill()
 turtle.mainloop()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-import turtle          # 匯入海龜模組
+print("turtle 02")
+import turtle
 
 turtle.setup(200, 200) # 產生200 X 200畫布
 
@@ -30,11 +34,12 @@ turtle.goto(-50, -50)
 
 turtle.home()          # 回到原點(x = 0, y = 0)
 
+turtle.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0202.py
-
-import turtle          # 匯入海龜模組
+print("turtle 03")
+import turtle
 
 turtle.setup(200, 200) # 產生200200畫布
 
@@ -43,11 +48,12 @@ turtle.goto(50, 50)    # 畫筆移到座標(50, 50)
 turtle.backward(50)    # 畫筆向後
 turtle.home()          # 畫筆回到原點
 
+turtle.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0203.py
-
-import turtle          # 匯入海龜模組
+print("turtle 04")
+import turtle
 
 turtle.setup(250, 200) # 產生200 X 200畫布
 pen = turtle.Turtle()  # 建立畫布物件
@@ -60,12 +66,12 @@ pen.fd(100)            # forward()方法簡寫
 pen.right(135)
 pen.fd(140)
 
+turtle.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0204.py
-
-import turtle   # 匯入海龜模組
+print("turtle 05")
+import turtle
 
 turtle.setup(250, 200)       # 產生250 X 200畫布
 turtle.bgcolor('SkyBlue')    # 背景為天空藍
@@ -86,11 +92,12 @@ show.fd(100)                 # forward()方法簡寫
 show.right(135)
 show.fd(140)
 
+turtle.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0205.py
-
-import turtle          # 匯入海龜模組
+print("turtle 06")
+import turtle
 
 turtle.setup(250, 250) # 產生250 X 250畫布
 turtle.bgcolor('SkyBlue')  # 背景為天空藍
@@ -130,11 +137,13 @@ pen.forward(140)
 pen.right(135)    
 pen.forward(100)
 
+turtle.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0206.py
+print("turtle 07")
 
-import turtle   # 匯入海龜模組
+import turtle
 
 turtle.setup(250, 200)     # 產生250 X 200畫布
 turtle.bgcolor('SkyBlue')  # 背景為天空藍
@@ -152,11 +161,13 @@ show.fd(70)
 show.right(90)
 show.home()
 
+turtle.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0207.py
+print("turtle 08")
 
-import turtle   # 匯入海龜模組
+import turtle
 
 turtle.setup(250, 200)     # 產生200 X 200畫布
 turtle.bgcolor('SkyBlue')  # 背景為天空藍
@@ -180,11 +191,13 @@ show.right(90)
 show.fd(100)
 show.end_fill()     # 結束塗色動作
 
+turtle.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0208.py
+print("turtle 09")
 
-import turtle   # 匯入海龜模組
+import turtle
 
 turtle.setup(250, 200)     # 產生250 X 200畫布
 turtle.bgcolor('#BEBEBE')  # 背景為灰色 RGB(190, 190, 190)
@@ -207,11 +220,13 @@ show.right(120)
 show.forward(100)
 show.end_fill()     # 結束塗色
 
+turtle.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0209.py
+print("turtle 10")
 
-import turtle   # 匯入海龜模組
+import turtle
 
 turtle.setup(250, 200)     # 產生 250 X 200畫布
 turtle.bgcolor('#BEBEBE')  # 背景為灰色 RGB(190, 190, 190)
@@ -238,11 +253,12 @@ show.right(72)
 show.fd(100)
 show.end_fill()     # 結束塗色動作
 
+turtle.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH02\CH0210.py
-
-import turtle   # 匯入海龜模組
+print("turtle 11")
+import turtle
 
 turtle.setup(200, 200)     # 畫布大小200 X 200
 turtle.bgcolor('#708090')  # 背景為深灰色 RGB(190, 190, 190)
@@ -257,11 +273,12 @@ pen.goto(-10, 70)
 pen.pd()                  # 放下畫筆
 pen.circle(-60, 360, 6)   # 畫出一個六邊形
 
+turtle.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-
-
-import turtle   # 匯入海龜模組
+print("turtle 12")
+import turtle
 
 turtle.setup(250, 200)    # 產生250 X 200畫布
 turtle.bgcolor('SkyBlue') # 背景為天空藍
@@ -284,9 +301,8 @@ turtle.mainloop()    # 開始主事件的循環
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH04\CH0403.py
-
-import turtle   # 匯入海龜模組
+print("turtle 13")
+import turtle
 
 turtle.setup(300, 300)    # 產生300 X 300畫布
 turtle.bgcolor('Gray21')  # 背景為深灰
@@ -297,18 +313,18 @@ show.pensize(2)           # 畫筆大小
 show.speed(1)             # 畫筆速度為慢
 
 # 畫一個連續矩形
-for item in range(56):
+for item in range(16):
    show.fd(item * 3) # 依值前進
-   print(item * 3)
+   #print(item * 3)
    show.right(90)    # 畫筆右轉90度
 
+print("turtle 13 done")
 turtle.mainloop()    # 開始主事件的循環
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH04\CH0404.py
-
-import turtle   # 匯入海龜模組
+print("turtle 14")
+import turtle
 
 turtle.setup(300, 300)    # 產生300 X 300畫布
 turtle.bgcolor('Gray21')  # 背景為深灰
@@ -318,17 +334,18 @@ show.pencolor('White')    # 畫筆為白色
 show.pensize(1)           # 畫筆大小
 
 # 畫一個螺旋圖
-for item in range(100):
+for item in range(20):
    show.fd(item * 2) # 依值前進   
    show.right(91)    # 畫筆右轉91度
 
+print("turtle 14 done")
+
 turtle.mainloop()    # 開始主事件的循環
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH04\CH0405.py
-
-import turtle   # 匯入海龜模組
+print("turtle 15")
+import turtle
 
 turtle.setup(300, 300)    # 產生300 X 300畫布
 turtle.bgcolor('Gray21')  # 背景為深灰
@@ -338,17 +355,18 @@ show.pencolor('White')    # 畫筆為白色
 show.pensize(1)           # 畫筆大小
 
 # 畫一個螺旋圖
-for item in range(120):
+for item in range(20):
    show.fd(item * 5)  # 依值前進   
    show.right(121)    # 畫筆右轉121度
-   
+
+print("turtle 15 done")
+
 turtle.mainloop()     # 開始主事件的循環
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\好好玩！Python程式設計入門與實例應用-鍛鍊邏輯思維×徹底掌握核心\CH04\CH0406.py
-
-import turtle   # 匯入海龜模組
+print("turtle 16")
+import turtle
 
 turtle.setup(300, 200)    # 產生300 X 200畫布
 
@@ -371,11 +389,13 @@ for r1 in range(5):
         print(f'座標(x = {p1}, y = {p2})') # 查看畫圓點的座標位置
     print() #換新行
 
+print("turtle 16 done")
+
 turtle.mainloop()    # 開始主事件的循環    
 
 print("------------------------------------------------------------")  # 60個
 
-
+print("turtle 17")
 import turtle
 
 turtle.setup(300, 300)
@@ -386,13 +406,21 @@ colors = ('Red', 'LightGreen', 'Yellow', 'Blue')
 ps.pensize(2)      # 設畫筆大小
 
 # 以矩形為底的4色螺旋圖
-for num in range(100):
+for num in range(20):
    # %運算子取餘數來獲得色彩
    ps.pencolor(colors[num % 4])
    ps.forward(num * 3)
    ps.left(91)
 
-import turtle   # 匯入海龜模組
+print("turtle 17 done")
+
+turtle.mainloop()    # 開始主事件的循環
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+print("turtle 18")
+import turtle
 
 colors = ['Magenta', 'Gold', 'Cyan', 'PaleGreen',
           'LemonChiffon', 'Orange', 'Pink']   # List
@@ -425,9 +453,18 @@ for item in range(120):
 
 turtle.done()
 
+print("turtle 18 done")
+
+turtle.mainloop()    # 開始主事件的循環
+
+"""
+
 print("------------------------------------------------------------")  # 60個
 
-import turtle, random   # 匯入海龜、亂數 模組
+print("turtle 19")
+import turtle
+
+import random
 
 tines = ['Red', 'Yellow', 'Orange',
          'Purple', 'Cyan', 'Pink', 'LightGreen', 'Bisque']
@@ -460,19 +497,14 @@ def haphazardTwist():
       pen.forward(item * 2)
       pen.left(91)
 
-for num in range(40):
+for num in range(10):
    haphazardTwist()
-   
+
+print("turtle 19 done")
+
 turtle.mainloop()    # 開始主事件的循環
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 

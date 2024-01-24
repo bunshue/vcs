@@ -23,36 +23,6 @@ for i1 in range(0, 10):                                 # 第一位數
                                                 print(code)                     # 列印無效碼
 
 print("------------------------------------------------------------")  # 60個
-
-import pyautogui
-import time
-
-time.sleep(10)      # 這10秒需要繪圖視窗取得焦點,選擇畫筆和選擇顏色
-pyautogui.click()   # 按一下設定繪圖起始點                     
-displacement = 300
-while displacement > 10:
-    pyautogui.dragRel(displacement, 0, duration=0.2)
-    pyautogui.dragRel(0, displacement, duration=0.2)
-    pyautogui.dragRel(-displacement, 0, duration=0.2)
-    pyautogui.dragRel(0, -displacement, duration=0.2)
-    displacement -= 10
-
-print("------------------------------------------------------------")  # 60個
-
-import pyautogui
-import time
-
-print("請在10秒內開啟記事本並設為焦點視窗")
-time.sleep(10)
-
-pyautogui.typewrite('Ming-Chi Institute of Technology', 0.1)
-pyautogui.typewrite(['enter'],0.1)
-pyautogui.typewrite('Department of Artificial Intelligence', 0.1)
-pyautogui.typewrite(['enter'],0.1)
-pyautogui.typewrite('Name : Jiin-Kwei Hung', 0.1)
-
-print("------------------------------------------------------------")  # 60個
-
 import sqlite3
 conn = sqlite3.connect("data29_1.db")   # 資料庫連線
 sql = '''SELECT name, tel
