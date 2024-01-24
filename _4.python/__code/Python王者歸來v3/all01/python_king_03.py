@@ -1,10 +1,6 @@
-
+import sys
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch28\ch28_8.py
-
-# ch28_8.py
 
 x1 = 1
 x2 = 11
@@ -15,15 +11,8 @@ print("x= ", str(x2).rjust(4))
 print("x= ", str(x3).rjust(4))
 print("x= ", str(x4).rjust(4))
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch28\ch28_9.py
-
-# ch28_9.py
 import time, sys
 
 x1 = 1
@@ -56,12 +45,156 @@ message = client.messages.create (
 
 
 print("------------------------------------------------------------")  # 60個
+from deep_translator import GoogleTranslator
+
+# 要翻譯的文本
+text = '早安'
+
+# 翻譯成英文
+translator = GoogleTranslator(source='auto', target='en')
+translation_en = translator.translate(text)
+print("英文:", translation_en)
+
+# 翻譯成日文, 另一種寫法
+translation_ja = GoogleTranslator(source='auto', target='ja').translate(text)
+print("日文:", translation_ja)
+
+# 翻譯成韓文
+translation_ko = GoogleTranslator(source='auto', target='ko').translate(text)
+print("韓文:", translation_ko)
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+
+mywav = r'C:Windows\Media\notify.wav'
+# 讀取.wav文件
+sample_rate, data = wavfile.read(mywav)
+
+# 繪製聲波圖
+plt.figure(figsize=(10, 4))
+plt.plot(data)
+plt.title('Waveform of nofity.wav file')
+plt.ylabel('Amplitude')
+plt.xlabel('Sample')
+plt.show()
+
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+from pydub import AudioSegment
+
+mywav = r'C:Windows\Media\notify.wav'
+# 讀取.wav文件
+wav_audio = AudioSegment.from_wav(mywav)
+
+# 轉換為.mp3
+wav_audio.export("notify.mp3", format="mp3")
+
+print("------------------------------------------------------------")  # 60個
+
+import speech_recognition as sr
+
+r = sr.Recognizer()
+
+# 設定錄音檔案的儲存路徑
+audio_file_path = "out33_7.wav"
+
+with sr.Microphone() as source:
+    print("請說英文 ...")
+    audio = r.listen(source)
+
+    # 將聲音保存為 WAV 檔案
+    with open(audio_file_path, "wb") as file:
+        file.write(audio.get_wav_data())
+
+    try:
+        # 使用Google的語音識別API
+        text = r.recognize_google(audio)  
+        print("你說的英文是 : {}".format(text))
+    except:
+        print("抱歉無法聽懂你的語音")
+
+print("------------------------------------------------------------")  # 60個
+
+import speech_recognition as sr
+
+r = sr.Recognizer()
+
+# 設定錄音檔案的儲存路徑
+audio_file_path = "out33_8.wav"
+
+with sr.Microphone() as source:
+    print("請說中文 ...")
+    audio = r.listen(source)
+
+    # 將聲音保存為 WAV 檔案
+    with open(audio_file_path, "wb") as file:
+        file.write(audio.get_wav_data())
+
+    try:
+        # 使用Google的語音識別API
+        text = r.recognize_google(audio, language="zh-TW")  
+        print("你說的中文是 : {}".format(text))
+    except:
+        print("抱歉無法聽懂你的語音")
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+
+mywav = 'out33_7.wav'
+# 讀取.wav文件
+sample_rate, data = wavfile.read(mywav)
+
+# 繪製聲波圖
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+plt.rcParams["axes.unicode_minus"] = False
+plt.figure(figsize=(10, 4))
+plt.plot(data)
+plt.title('Good Morning聲波圖')
+plt.ylabel('Amplitude')
+plt.xlabel('Sample')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+from scipy.io import wavfile
+
+mywav = 'out33_8.wav'
+# 讀取.wav文件
+sample_rate, data = wavfile.read(mywav)
+
+# 繪製聲波圖
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+plt.rcParams["axes.unicode_minus"] = False
+plt.figure(figsize=(10, 4))
+plt.plot(data)
+plt.title('早安 聲波圖')
+plt.ylabel('Amplitude')
+plt.xlabel('Sample')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch32\ch32_1.py
 
-# ch32_1.py
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 import yfinance as yf
 
 apple = yf.Ticker("AAPL")                           # 建立Apple物件
@@ -186,6 +319,7 @@ sell_dates = data[data['Signal_change'] == -1].index
 print(f"買入日期: {buy_dates.tolist()}")
 print(f"賣出日期: {sell_dates.tolist()}")
 
+print("------------------------------------------------------------")  # 60個
 
 
 
@@ -193,342 +327,13 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_1.py
 
-# ch33_1.py
-import pygame
-pygame.mixer.init()
 
-mysound = r'C:\Windows\Media\notify.wav'
-soundObj = pygame.mixer.Sound(mysound)      # 建立Sound物件
-soundObj.play()                             # 撥放一次
-pygame.time.delay(3000)                     # 休息3秒
-soundObj.play(2)                            # 播放3次
 
 
 
 
 
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_10.py
-
-# ch33_10.py
-from gtts import gTTS
-import pygame
-
-text = "Hello, Machine Learning!"
-tts = gTTS(text=text, lang='en')
-tts.save("hello.mp3")
-
-pygame.mixer.init()
-pygame.mixer.music.load("hello.mp3")
-pygame.mixer.music.play()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_11.py
-
-# ch33_11.py
-from gtts import gTTS
-import pygame
-
-text = "我愛明志科技大學!"
-tts = gTTS(text=text, lang='zh-tw')
-tts.save("hello.mp3")
-
-pygame.mixer.init()
-pygame.mixer.music.load("hello.mp3")
-pygame.mixer.music.play()
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_12.py
-
-# ch33_12.py
-from deep_translator import GoogleTranslator
-
-# 要翻譯的文本
-text = '早安'
-
-# 翻譯成英文
-translator = GoogleTranslator(source='auto', target='en')
-translation_en = translator.translate(text)
-print("英文:", translation_en)
-
-# 翻譯成日文, 另一種寫法
-translation_ja = GoogleTranslator(source='auto', target='ja').translate(text)
-print("日文:", translation_ja)
-
-# 翻譯成韓文
-translation_ko = GoogleTranslator(source='auto', target='ko').translate(text)
-print("韓文:", translation_ko)
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_2.py
-
-# ch33_2.py
-import pygame
-pygame.mixer.init()
-
-mysound = r'C:\Windows\Media\notify.wav'
-pygame.time.delay(1000)                     # 先給聲音初始化工作
-
-soundObj = pygame.mixer.Sound(mysound)      # 建立Sound物件
-soundObj.play()                             # 撥放一次
-pygame.time.delay(3000)                     # 休息3秒
-soundObj.set_volume(0.1)                    # 聲音變小
-soundObj.play(2)                            # 播放3次
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_3.py
-
-# ch33_3.py
-import pygame
-import time
-pygame.mixer.init()
-
-mywav = r'C:Windows\Media\notify.wav'
-pygame.time.delay(1000)                     # 先給聲音初始化工作
-pygame.mixer.music.load(mywav)              # 下載 wav 音樂檔案
-pygame.mixer.music.play()                   # 播放 wav 音樂檔案
-
-time.sleep(5)                               # 程式休息
-mymidi = r'C:\Windows\Media\town.mid'
-pygame.time.delay(1000)                     # 先給聲音初始化工作
-pygame.mixer.music.load(mymidi)             # 下載 midi 音樂檔案
-pygame.mixer.music.play()                   # 播放 midi 音樂檔案
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_4.py
-
-# ch33_4.py
-import matplotlib.pyplot as plt
-from scipy.io import wavfile
-
-mywav = r'C:Windows\Media\notify.wav'
-# 讀取.wav文件
-sample_rate, data = wavfile.read(mywav)
-
-# 繪製聲波圖
-plt.figure(figsize=(10, 4))
-plt.plot(data)
-plt.title('Waveform of nofity.wav file')
-plt.ylabel('Amplitude')
-plt.xlabel('Sample')
-plt.show()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_5.py
-
-# ch33_5.py
-from pydub import AudioSegment
-
-mywav = r'C:Windows\Media\notify.wav'
-# 讀取.wav文件
-wav_audio = AudioSegment.from_wav(mywav)
-
-# 轉換為.mp3
-wav_audio.export("notify.mp3", format="mp3")
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_6.py
-
-# ch33_6.py
-from tkinter import *
-import pygame
-
-def playmusic():                                        # 處理按撥放紐
-    selection = var.get()                               # 獲得音樂選項
-    if selection == '1':
-        pygame.mixer.music.load('notify.mp3')           # 撥放選項1音樂
-        pygame.mixer.music.play(-1)                     # 循環撥放
-    if selection == '2':
-        town = r'C:\Windows\Media\town.mid'
-        pygame.mixer.music.load(town)                   # 撥放選項2音樂
-        pygame.mixer.music.play(-1)                     # 循環撥放
-    if selection == '3':
-        onestop = r'C:\Windows\Media\onestop.mid'
-        pygame.mixer.music.load(onestop)                # 撥放選項3音樂
-        pygame.mixer.music.play(-1)                     # 循環撥放 
-def stopmusic():                                        # 處理按結束紐
-    pygame.mixer.music.stop()                           # 停止撥放此首
-    
-# 建立音樂選項鈕內容的串列
-musics = [('notify.mp3', 1),                            # 音樂選單串列
-          ('town.mid', 2),
-          ('onestop.mid', 3)]
-
-pygame.mixer.init()                                     # 最初化mixer
-
-tk = Tk()
-tk.geometry('480x220')                                  # 開啟視窗
-tk.title('Music Player')                                # 建立視窗標題
-mp3Label = Label(tk, text='\n我的 Music 撥放程式')      # 視窗內標題
-mp3Label.pack()
-# 建立選項紐Radio button
-var = StringVar()                                       # 設定以字串表示選單編號
-var.set('1')                                            # 預設音樂是1
-for music, num in musics:                               # 建立系列選項紐
-    radioB = Radiobutton(tk, text=music, variable=var, value=num)
-    radioB.pack()
-# 建立按鈕Button
-button1 = Button(tk, text='撥放', width=10, command=playmusic)    # 撥放音樂
-button1.pack()
-button2 = Button(tk, text='結束', width=10, command=stopmusic)    # 停止撥放音樂
-button2.pack()
-mainloop()
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_7.py
-
-# ch33_7.py
-import speech_recognition as sr
-
-r = sr.Recognizer()
-
-# 設定錄音檔案的儲存路徑
-audio_file_path = "out33_7.wav"
-
-with sr.Microphone() as source:
-    print("請說英文 ...")
-    audio = r.listen(source)
-
-    # 將聲音保存為 WAV 檔案
-    with open(audio_file_path, "wb") as file:
-        file.write(audio.get_wav_data())
-
-    try:
-        # 使用Google的語音識別API
-        text = r.recognize_google(audio)  
-        print("你說的英文是 : {}".format(text))
-    except:
-        print("抱歉無法聽懂你的語音")
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_8.py
-
-# ch33_8.py
-import speech_recognition as sr
-
-r = sr.Recognizer()
-
-# 設定錄音檔案的儲存路徑
-audio_file_path = "out33_8.wav"
-
-with sr.Microphone() as source:
-    print("請說中文 ...")
-    audio = r.listen(source)
-
-    # 將聲音保存為 WAV 檔案
-    with open(audio_file_path, "wb") as file:
-        file.write(audio.get_wav_data())
-
-    try:
-        # 使用Google的語音識別API
-        text = r.recognize_google(audio, language="zh-TW")  
-        print("你說的中文是 : {}".format(text))
-    except:
-        print("抱歉無法聽懂你的語音")
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_9.py
-
-# ch33_9.py
-import matplotlib.pyplot as plt
-from scipy.io import wavfile
-
-mywav = 'out33_7.wav'
-# 讀取.wav文件
-sample_rate, data = wavfile.read(mywav)
-
-# 繪製聲波圖
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.figure(figsize=(10, 4))
-plt.plot(data)
-plt.title('Good Morning聲波圖')
-plt.ylabel('Amplitude')
-plt.xlabel('Sample')
-plt.show()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_9_1.py
-
-# ch33_9_1.py
-import matplotlib.pyplot as plt
-from scipy.io import wavfile
-
-mywav = 'out33_8.wav'
-# 讀取.wav文件
-sample_rate, data = wavfile.read(mywav)
-
-# 繪製聲波圖
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.figure(figsize=(10, 4))
-plt.plot(data)
-plt.title('早安 聲波圖')
-plt.ylabel('Amplitude')
-plt.xlabel('Sample')
-plt.show()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch36\ch36_1.py
-
-# ch36_1.py
 from pytube import YouTube
 
 yt = YouTube("https://www.youtube.com/watch?v=dhzsf5QXmns")
@@ -536,15 +341,8 @@ print("下載中   ... ")
 yt.streams[0].download()
 print("下載完成 ... ")
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch36\ch36_2.py
-
-# ch36_2.py
 from pytube import YouTube
 
 yt = YouTube("https://www.youtube.com/watch?v=dhzsf5QXmns")
@@ -559,20 +357,8 @@ print(f"影片標題     : {videoTitle}\n下載中 ... ")
 yt.streams[0].download()
 print("下載完成 ... ")
 
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch36\ch36_3.py
-
-# ch36_3.py
 from pytube import YouTube
 import os
 
@@ -592,20 +378,8 @@ print(f"影片標題     : {videoTitle}\n下載中 ... ")
 yt.streams[0].download(path)        # 所下載影音檔案儲存在path
 print("下載完成 ... ")
 
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch36\ch36_4.py
-
-# ch36_4.py
 from pytube import YouTube
 import os
 
@@ -629,20 +403,8 @@ for video in links:
     yt.streams[0].download(path)        # 所下載影音檔案儲存在path
     print("下載完成 ... ")
 
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch36\ch36_5.py
-
-# ch36_5.py
 import threading 
 import os  
 from pytube import YouTube  
@@ -687,9 +449,6 @@ print("所有影片下載完成")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch36\ch36_6.py
-
-# ch36_6.py
 from tkinter import *
 from pytube import YouTube
 
@@ -723,22 +482,5 @@ btn2 = Button(window,text="結束",command=window.destroy)
 btn2.grid(row=3,column=1)
 
 window.mainloop()
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 
