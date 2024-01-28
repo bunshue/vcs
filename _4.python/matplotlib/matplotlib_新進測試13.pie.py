@@ -23,9 +23,29 @@ import random
 print("------------------------------------------------------------")  # 60個
 
 
+#派圖
+data = {'apples': 10, 'oranges': 15, 'lemons': 5, 'limes': 20}
+explode = (0, 0.1, 0, 0)  # 向外擴展顯示的區域
+plt.pie(data.values(), explode=explode, labels=data.keys(), autopct='%1.1f%%',
+        shadow=True, startangle=90)
+plt.axis('equal') # 設置餅圖爲正圓形
+plt.show()
+
+
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+#sorts = ["Travel","Entertainment","Education","Transporation","Food"]
+sorts = [u"交通",u"娛樂",u"教育",u"交通",u"餐費"]
+
+fee = [8000,2000,3000,5000,6000]
+          
+plt.pie(fee,labels=sorts,explode=(0,0.2,0,0,0),
+        autopct="%1.2f%%")      # 繪製圓餅圖
+
+plt.show()
 
 
 

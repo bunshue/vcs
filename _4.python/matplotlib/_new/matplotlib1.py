@@ -1,77 +1,35 @@
-# ch20_1.py
-import matplotlib.pyplot as plt
+# matplotlib_新進測試 all
 
+import sys
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+import sys
+import time
+import random
+
+print("------------------------------------------------------------")  # 60個
+
+'''
+#產生兩個串列
 x = [x for x in range(9)]       # 產生0, 1, ... 8串列
-squares = [0, 1, 4, 9, 16, 25, 36, 49, 64]
-plt.plot(x, squares)            # 串列squares數據是y軸的值
+y = [0, 1, 4, 9, 16, 25, 36, 49, 64]
+
+plt.plot(x, y, lw = 2)
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-
-
-squares = [0, 1, 4, 9, 16, 25, 36, 49, 64]
-plt.plot(squares)       # 串列squares數據是y軸的值
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-
-squares = [0, 1, 4, 9, 16, 25, 36, 49, 64]
-plt.plot(squares)           # 串列squares數據是y軸的值
-plt.axis([0, 8, 0, 70])     # x軸刻度0-8, y軸刻度0-70
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_2_1.py
-
-# ch20_2_1.py
-import matplotlib.pyplot as plt
-
-squares = [0, 1, 4, 9, 16, 25, 36, 49, 64]
-plt.plot(squares)           # 串列squares數據是y軸的值
-plt.axis([0, 8, 0, 70])     # x軸刻度0-8, y軸刻度0-70
-plt.grid()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-
-squares = [0, 1, 4, 9, 16, 25, 36, 49, 64]
-plt.plot(squares, lw=10)       # 線條寬度是10
-plt.title('Test Chart', fontsize=24)
-plt.xlabel('Value', fontsize=16)
-plt.ylabel('Square')
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_4.py
-
-# ch20_4.py
-import matplotlib.pyplot as plt
-
-data1 = [1, 4, 9, 16, 25, 36, 49, 64]       # data1線條
-data2 = [1, 3, 6, 10, 15, 21, 28, 36]       # data2線條
-seq = [1,2,3,4,5,6,7,8]
-plt.plot(seq, data1, seq, data2)            # data1&2線條
-plt.title("Test Chart")                     # 字型大小是預設
-plt.xlabel("x-Value")                       # 字型大小是預設
-plt.ylabel("y-Value")                       # 字型大小是預設
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-
+         
 data1 = [1, 2, 3, 4, 5, 6, 7, 8]                # data1線條
 data2 = [1, 4, 9, 16, 25, 36, 49, 64]           # data2線條
 data3 = [1, 3, 6, 10, 15, 21, 28, 36]           # data3線條
@@ -79,223 +37,32 @@ data4 = [1, 7, 15, 26, 40, 57, 77, 100]         # data4線條
 
 seq = [1, 2, 3, 4, 5, 6, 7, 8]
 plt.plot(seq,data1,'g--',seq,data2,'r-.',seq,data3,'y:',seq,data4,'k.')   
-plt.title("Test Chart", fontsize=24)
-plt.xlabel("x-Value", fontsize=14)
-plt.ylabel("y-Value", fontsize=14)
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_5_1.py
-
-# ch20_5_1.py
-import matplotlib.pyplot as plt
-
-data1 = [1, 2, 3, 4, 5, 6, 7, 8]                # data1線條
-data2 = [1, 4, 9, 16, 25, 36, 49, 64]           # data2線條
-data3 = [1, 3, 6, 10, 15, 21, 28, 36]           # data3線條
-data4 = [1, 7, 15, 26, 40, 57, 77, 100]         # data4線條
-
-seq = [1, 2, 3, 4, 5, 6, 7, 8]
 plt.plot(seq,data1,'-*',seq,data2,'-o',seq,data3,'-^',seq,data4,'-s')   
-plt.title("Test Chart", fontsize=24)
-plt.xlabel("x-Value", fontsize=14)
-plt.ylabel("y-Value", fontsize=14)
+
 plt.show()
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_6.py
-
-# ch20_6.py
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-seq = [2021, 2022, 2023]                # 年度
-
-plt.plot(seq, Benz, '-*', seq, BMW, '-o', seq, Lexus, '-^')   
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_6_1.py
-
-# ch20_6_1.py
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)
-plt.plot(seq, Benz, '-*', seq, BMW, '-o', seq, Lexus, '-^')   
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_7.py
-
-# ch20_7.py
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-
+"""
 seq = [2021, 2022, 2023]                # 年度
 plt.xticks(seq)                         # 設定x軸刻度
-plt.plot(seq, Benz, '-*', label='Benz')
-plt.plot(seq, BMW, '-o', label='BMW')
-plt.plot(seq, Lexus, '-^', label='Lexus')
-plt.legend(loc='best')
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
-plt.show()
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_7_1.py
-
-# ch20_7_1.py
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)                         # 設定x軸刻度
 plt.plot(seq, Benz, '-*', label='Benz')
 plt.plot(seq, BMW, '-o', label='BMW')
 plt.plot(seq, Lexus, '-^', label='Lexus')
 plt.legend()
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_7_2.py
-
-# ch20_7_2.py
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)                         # 設定x軸刻度
-plt.plot(seq, Benz, '-*', label='Benz')
-plt.plot(seq, BMW, '-o', label='BMW')
-plt.plot(seq, Lexus, '-^', label='Lexus')
+plt.legend(loc='best')
 plt.legend(loc=0)
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_7_3.py
-
-# ch20_7_3.py
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)                         # 設定x軸刻度
-plt.plot(seq, Benz, '-*', label='Benz')
-plt.plot(seq, BMW, '-o', label='BMW')
-plt.plot(seq, Lexus, '-^', label='Lexus')
 plt.legend(loc='upper right')
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_7_4.py
-
-# ch20_7_4.py
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)                         # 設定x軸刻度
-plt.plot(seq, Benz, '-*', label='Benz')
-plt.plot(seq, BMW, '-o', label='BMW')
-plt.plot(seq, Lexus, '-^', label='Lexus')
 plt.legend(loc=6)
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_8.py
-
-# ch20_8.py
-import matplotlib.pyplot as plt
-
-Benz = [3367, 4120, 5539]               # Benz線條
-BMW = [4000, 3590, 4423]                # BMW線條
-Lexus = [5200, 4930, 5350]              # Lexus線條
-
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)                         # 設定x軸刻度
-plt.plot(seq, Benz, '-*', label='Benz')
-plt.plot(seq, BMW, '-o', label='BMW')
-plt.plot(seq, Lexus, '-^', label='Lexus')
 plt.legend(loc='best')
 plt.title("Sales Report", fontsize=24)
 plt.xlabel("Year", fontsize=14)
 plt.ylabel("Number of Sales", fontsize=14)
 plt.show()
-
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-import matplotlib.pyplot as plt
 import matplotlib.image as img
 
 fig = img.imread(filename)
@@ -304,36 +71,22 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
+'''
 
 xpt = [1,2,3,4,5]
 ypt = [1,4,9,16,25]
 plt.scatter(xpt, ypt)
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_11.py
-
-# ch20_11.py
-import matplotlib.pyplot as plt
 
 xpt = list(range(1,101))    # 建立1-100序列x座標點
 ypt = [x**2 for x in xpt]   # 以x平方方式建立y座標點
 plt.scatter(xpt, ypt, color='y')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_12.py
-
-# ch20_12.py
-import numpy as np
 
 x1 = np.linspace(0, 10, num=11)     # 使用linspace()產生陣列
 print(type(x1), x1)
@@ -342,21 +95,7 @@ print(type(x2), x2)
 x3 = np.arange(11)                  # 簡化語法產生陣列
 print(type(x3), x3)
 
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_13.py
-
-# ch20_13.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 xpt = np.linspace(0, 10, 500)   # 建立含500個元素的陣列
 ypt1 = np.sin(xpt)              # y陣列的變化
@@ -365,17 +104,7 @@ plt.scatter(xpt, ypt1)          # 用預設顏色
 plt.scatter(xpt, ypt2)          # 用預設顏色
 plt.show()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_14.py
-
-# ch20_14.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 N = 50                                      # 色彩數列的點數
 colorused = ['b','c','g','k','m','r','y']   # 定義顏色
@@ -389,16 +118,7 @@ y2 = np.cos(x)
 plt.scatter(x, y2, c=colors, marker='s')    # 繪製 cos 
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_15.py
-
-# ch20_15.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 left = -2 * np.pi
 right = 2 * np.pi
@@ -411,17 +131,7 @@ plt.plot(x, f2)
 plt.plot(x, f3)
 plt.show()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_16.py
-
-# ch20_16.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 points = 30
 colorused = ['b','c','g','k','m','r','y']   # 定義顏色
@@ -436,16 +146,7 @@ plt.xticks(np.arange(0,12,step=1.0))        # x 軸刻度
 plt.yticks(np.arange(0,12,step=1.0))        # y 軸刻度
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_17.py
-
-# ch20_17.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 left = -np.pi
 right = np.pi
@@ -456,17 +157,7 @@ plt.plot(x, y)
 plt.fill_between(x, 0, y, color='green', alpha=0.1)
 plt.show()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_18.py
-
-# ch20_18.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 # 函數f(x)的係數
 a1 = 1
@@ -490,44 +181,14 @@ plt.fill_between(x, y1=y1, y2=y2, where=(x>=-1)&(x<=2),
 plt.grid()
 plt.show()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_19.py
-
-# ch20_19.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 5, 500)                # 含500個元素的陣列
 y = 1 - 0.5*np.abs(x-2)                   # y陣列的變化
 plt.scatter(x,y,s=50,c=x,cmap='rainbow')  # 色彩隨 x 軸值變化
 plt.show()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_20.py
-
-# ch20_20.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 5, 500)                # 含500個元素的陣列
 y = 1 - 0.5*np.abs(x-2)                   # y陣列的變化
@@ -535,17 +196,7 @@ plt.scatter(x,y,s=50,c=y,cmap='rainbow')  # 色彩隨 y 軸值變化
 plt.colorbar()                            # 色彩條
 plt.show()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_21.py
-
-# ch20_21.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 num = 100
 while True:
@@ -556,16 +207,8 @@ while True:
     yORn = input("是否繼續 ?(y/n) ")    # 詢問是否繼續
     if yORn == 'n' or yORn == 'N':      # 輸入n或N則程式結束
         break
-    
-
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_22.py
-
-# ch20_22.py
-import matplotlib.pyplot as plt
-import random
 
 def loc(index):
     ''' 處理座標的移動 '''
@@ -594,19 +237,8 @@ while True:
         y[0] = y[num-1]                 # 上次結束y座標成新的起點y座標
         del x[1:]                               # 刪除舊串列x座標元素
         del y[1:]                               # 刪除舊串列y座標元素
-
-
-
-    
-
-
+  
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_23.py
-
-# ch20_23.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -629,15 +261,7 @@ plt.ylabel('非衰減值')
 
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_24.py
-
-# ch20_24.py
-import matplotlib.pyplot as plt
 
 data1 = [1, 2, 3, 4, 5, 6, 7, 8]        # data1線條
 data2 = [1, 4, 9, 16, 25, 36, 49, 64]   # data2線條
@@ -646,18 +270,10 @@ plt.subplot(1, 2, 1)                    # 子圖1
 plt.plot(seq, data1, '-*')
 plt.subplot(1, 2, 2)                    # 子圖2
 plt.plot(seq, data2, 'm-o')                      
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_25.py
-
-# ch20_25.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 def f(t):
     return np.exp(-t) * np.sin(2*np.pi*t)
@@ -674,18 +290,10 @@ plt.title('子圖 2')
 plt.subplot(2,2,3)          # 子圖 3
 plt.plot(x, f(x))
 plt.title('子圖 3')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_25_1.py
-
-# ch20_25_1.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 def f(t):
     return np.exp(-t) * np.sin(2*np.pi*t)
@@ -702,18 +310,10 @@ plt.title('子圖 2')
 plt.subplot(223)          # 子圖 3
 plt.plot(x, f(x))
 plt.title('子圖 3')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_26.py
-
-# ch20_26.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 def f(t):
     return np.exp(-t) * np.sin(2*np.pi*t)
@@ -730,17 +330,10 @@ plt.title('子圖 2')
 plt.subplot(2,1,2)          # 子圖 3
 plt.plot(x, f(x))
 plt.title('子圖 3')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_27.py
-
-# ch20_27.py
-import matplotlib.pyplot as plt
 
 plt.subplot(1,2,1)      # 建立子圖表 1,2,1
 plt.text(0.15,0.5,'subplot(1,2,1)',fontsize='16',c='b')
@@ -748,18 +341,10 @@ plt.subplot(2,2,2)      # 建立子圖表 2,2,2
 plt.text(0.15,0.5,'subplot(2,2,2)',fontsize='16',c='m')
 plt.subplot(2,2,4)      # 建立子圖表 2,2,4
 plt.text(0.15,0.5,'subplot(2,2,4)',fontsize='16',c='m')
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_28.py
-
-# ch20_28.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -774,17 +359,10 @@ fig = plt.figure()                          # 建立畫布物件
 ax = fig.add_subplot()                      # 建立子圖(或稱軸物件)ax
 ax.scatter(x, y, c=colors, marker='*')      # 繪製 sin
 ax.set_title("建立畫布與軸物件,使用OO API繪圖", fontsize=16)
+
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_29.py
-
-# ch20_29.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -801,19 +379,10 @@ ax[1, 1].plot(x, y,'r')                 # 子圖索引 1,1
 ax[1, 1].set_title('子圖[1, 1]') 
 fig.suptitle("4個子圖的實作",fontsize=16) # 圖表主標題
 plt.tight_layout()                      # 緊縮佈局
+
 plt.show()
 
-
-
-     
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_30.py
-
-# ch20_30.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -834,19 +403,10 @@ ax[1, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
 ax[1, 1].set_aspect('equal', 'box')
 ax[1, 1].set_title('設定寬高比相同')
 fig.tight_layout()
+
 plt.show()
 
-
-
-     
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_31.py
-
-# ch20_31.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -867,19 +427,10 @@ ax[1, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
 ax[1, 1].set_aspect(2)
 ax[1, 1].set_title('設定寬高比是2')
 fig.tight_layout()
+
 plt.show()
 
-
-
-     
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_32.py
-
-# ch20_32.py
-import numpy as np
-import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 votes = [135, 412, 397]         # 得票數
@@ -894,21 +445,12 @@ plt.xticks(x, ('James', 'Peter', 'Norton')) # x 軸刻度
 plt.yticks(np.arange(0, 450, 30))           # y 軸刻度
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_33.py
-
-# ch20_33.py
-import numpy as np
-import matplotlib.pyplot as plt
-from random import randint
 
 def dice_generator(times, sides):
     ''' 處理隨機數 '''
     for i in range(times):              
-        ranNum = randint(1, sides)      # 產生1-6隨機數
+        ranNum = random.randint(1, sides)      # 產生1-6隨機數
         dice.append(ranNum)
 def dice_count(sides):
     '''計算1-6個出現次數'''
@@ -931,21 +473,15 @@ plt.xlabel('骰子點數')
 plt.title('測試 600 次')
 plt.xticks(x, ('1', '2', '3', '4', '5', '6'))
 plt.yticks(np.arange(0, 150, 15))
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_34.py
-
-# ch20_34.py
-import matplotlib.pyplot as plt
-from random import randint
 
 def dice_generator(times, sides):
     ''' 處理隨機數 '''
     for i in range(times):              
-        ranNum = randint(1, sides)      # 產生1-6隨機數
+        ranNum = random.randint(1, sides)      # 產生1-6隨機數
         dice.append(ranNum)
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]          
@@ -958,21 +494,15 @@ print("bins的y軸 ",h[0])
 print("bins的x軸 ",h[1])
 plt.ylabel('次數')
 plt.title('測試 10000 次')
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_35.py
-
-# ch20_35.py
-import matplotlib.pyplot as plt
-from random import randint
 
 def dice_generator(times, sides):
     ''' 處理隨機數 '''
     for i in range(times):              
-        ranNum = randint(1, sides)              # 產生1-6隨機數
+        ranNum = random.randint(1, sides)              # 產生1-6隨機數
         dice.append(ranNum)
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]          
@@ -985,21 +515,15 @@ print("bins的y軸 ",h[0])
 print("bins的x軸 ",h[1])
 plt.ylabel('次數')
 plt.title('測試 10000 次')
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_36.py
-
-# ch20_36.py
-import matplotlib.pyplot as plt
-from random import randint
 
 def dice_generator(times, sides):
     ''' 處理隨機數 '''
     for i in range(times):              
-        ranNum = randint(1, sides)              # 產生1-6隨機數
+        ranNum = random.randint(1, sides)              # 產生1-6隨機數
         dice.append(ranNum)
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]          
@@ -1012,15 +536,10 @@ print("bins的y軸 ",h[0])
 print("bins的x軸 ",h[1])
 plt.ylabel('次數')
 plt.title('測試 10000 次')
+
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_37.py
-
-# ch20_37.py
-import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 area = ['大陸','東南亞','東北亞','美國','歐洲','澳紐']
@@ -1029,32 +548,17 @@ plt.pie(people,labels=area)
 plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
 plt.show()
 
-
-      
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_38.py
-
-# ch20_38.py
-import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 area = ['大陸','東南亞','東北亞','美國','歐洲','澳紐']
 people = [10000,12600,9600,7500,5100,4800]
 plt.pie(people,labels=area,autopct="%1.2f%%")
 plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
+
 plt.show()
 
-
-      
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_39.py
-
-# ch20_39.py
-import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 area = ['大陸','東南亞','東北亞','美國','歐洲','澳紐']
@@ -1062,18 +566,11 @@ people = [10000,12600,9600,7500,5100,4800]
 exp = [0.0,0.0,0.0,0.0,0.0,0.1]
 plt.pie(people,labels=area,explode=exp,autopct="%1.2f%%")
 plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
+
 plt.show()
-
-
-      
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_40.py
-
-# ch20_40.py
-import matplotlib.pyplot as plt  
-import numpy as np  
 from matplotlib.animation import FuncAnimation  
 
 # 建立最初化的 line 資料 (x, y)  
@@ -1099,15 +596,11 @@ ani = FuncAnimation(fig, animate,
                     init_func = init,                        
                     interval = 20)          # interval是控制速度
 ani.save('tmp_sin.gif', writer='pillow')        # 儲存 tmp_sin.gif 檔案
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_41.py
-
-# ch20_41.py
-import matplotlib.pyplot as plt  
-import numpy as np  
 from matplotlib.animation import FuncAnimation  
 
 # 建立最初化的 line 資料 (x, y)  
@@ -1133,12 +626,11 @@ ani = FuncAnimation(fig, animate,
                     init_func = init,                        
                     interval = 20)          # interval是控制速度
 ani.save('tmp_sin2.gif', writer='pillow')       # 儲存 tmp_sin2.gif 檔案
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 # 建立最初化點的位置 
@@ -1171,17 +663,8 @@ ani = FuncAnimation(fig=fig, func=animate,
                     repeat=True)
 plt.show()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_43.py
-
-# ch20_43.py
-import numpy as np
-import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 # 建立最初化點的位置 
@@ -1214,17 +697,7 @@ ani = FuncAnimation(fig=fig, func=animate,
                     repeat=True)
 plt.show()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_44.py
-
-# ch20_44.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -1237,55 +710,23 @@ plt.plot(x, y, 'go-')
 plt.ylabel('衰減值')
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_45.py
-
-# ch20_45.py
-import matplotlib.pyplot as plt
 
 plt.title(r'$\frac{7}{9}+\sqrt{7}+\alpha\beta$',fontsize=20)
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_46.py
-
-# ch20_46.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2*np.pi, 100)
 y = np.sin(x)
 plt.plot(1,0,'bo')                  # 輸出藍點
 plt.text(1,0,'sin(x)',fontsize=20)  # 輸出公式
 plt.plot(x,y)
-plt.grid()
+
 plt.show()
 
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_47.py
-
-# ch20_47.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False 
@@ -1303,18 +744,10 @@ plt.annotate('局部極小值',
             arrowprops=dict(arrowstyle='-'))
 plt.text(0.8,1.2,'Annotate的應用',fontsize=20,color='b')
 plt.ylim(-1.5, 1.5)
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_48.py
-
-# ch20_48.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 ax = plt.subplot(projection='polar')
@@ -1323,18 +756,10 @@ theta = 2 * 2*np.pi * r
 ax.plot(theta, r, 'm', lw=3)
 plt.title("極座標圖表",fontsize=16)
 plt.tight_layout()      # 圖表標題可以緊縮佈局
+
 plt.show()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_49.py
-
-# ch20_49.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 def f(x, y):
     return (1.2-x**2+y**5)*np.exp(-x**2-y**2)
@@ -1358,20 +783,12 @@ ax[1].contourf(X,Y,Z,12,cmap='Greens')    # 填充輪廓圖
 oval = ax[1].contour(X,Y,Z,12,colors='b') # 輪廓圖
 ax[1].clabel(oval,colors='b')             # 增加高度標記
 ax[1].set_title('指數函數等高圖level=12',fontsize=16,color='b')
+
 plt.show()
-
-
-
-      
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_49_1.py
-
-# ch20_49_1.py
 from mpl_toolkits.mplot3d import axes3d
-import matplotlib.pyplot as plt
-import numpy as np
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False
@@ -1387,19 +804,10 @@ ax[0].set_title('繪製曲線表面圖',fontsize=16,color='b')
 #ax = fig.add_subplot(111, projection='3d')
 ax[1].plot_wireframe(X, Y, Z, color='g')
 ax[1].set_title('繪製曲線框線圖',fontsize=16,color='b')
+
 plt.show()
 
-
-
-      
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_50.py
-
-# ch20_50.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 z = np.linspace(0,1,300)        # z 軸值
 x = z * np.sin(30*z)            # x 軸值
@@ -1411,19 +819,10 @@ fig,ax = plt.subplots(1,2,figsize=(8,4),subplot_kw={'projection':'3d'})
 ax[0].scatter(x, y, z, c = colors)                  # 繪製左子圖
 ax[1].scatter(x, y, z, c = colors, cmap='hsv')      # 繪製右子圖
 ax[1].set_axis_off()            # 關閉軸
+
 plt.show()
 
-
-
-      
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_51.py
-
-# ch20_51.py
-import matplotlib.pyplot as plt
-import numpy as np
 
 def f1(x, y):                                # 左邊曲面函數
     return np.exp(-(0.5*X**2+0.5*Y**2))
@@ -1453,17 +852,8 @@ ax[2].set_title(f"仰角={ax[2].elev},方位角={ax[2].azim}",color='b')
 
 plt.show()
 
-
-
-      
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\_new\new1\ch20_52.py
-
-# ch20_52.py
-import matplotlib.pyplot as plt
-import numpy as np
 from matplotlib.animation import FuncAnimation
 
 def f(x, y):                                # 左邊曲面函數

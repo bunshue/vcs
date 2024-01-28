@@ -17,8 +17,8 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
-x0 = np.arange(-5, 5, 1)
-y0 = np.arange(-5, 5, 1)
+x0 = np.arange(0, 5, 1)
+y0 = np.arange(0, 5, 1)
 x, y = np.meshgrid(x0, y0)
 z = np.c_[x.ravel(), y.ravel()]
 
@@ -32,24 +32,21 @@ print(len(z))
 print(z.shape)
 print(z)
 
+# ravel 拉平法
 print("x.ravel() = ", x.ravel())
 print("y.ravel() = ", y.ravel())
 
 plt.scatter(z[:, 0], z[:, 1], s=100)
-plt.grid()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-X, Y = np.meshgrid(np.linspace(-6, 3, 30), np.linspace(-8, 5, 30))
+x, y = np.meshgrid(np.linspace(0, 4, 5), np.linspace(0, 4, 5))
 
 # ravel 拉平法
-
-X = X.ravel()
-
-Y = Y.ravel()
-
-plt.scatter(X, Y)
+X = x.ravel()
+Y = y.ravel()
+plt.scatter(X, Y, s=100)
 
 plt.show()
 

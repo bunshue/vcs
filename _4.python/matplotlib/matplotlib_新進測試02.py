@@ -230,7 +230,7 @@ for degree in degrees:
 
 print("------------------------------------------------------------")  # 60個
 
-degrees = [x * 30 for x in range(0, 13)]
+degrees = [x * 30 for x in range(13)]
 for d in degrees:
     rad = math.radians(d)
     sin = math.sin(rad)

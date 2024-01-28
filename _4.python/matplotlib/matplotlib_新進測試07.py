@@ -21,51 +21,19 @@ print("------------------------------------------------------------")  # 60個
 正弦函數 s=sin(x) 
 餘弦函數 c=cos(x)
 """
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(-2*np.pi, 2*np.pi, 100)
 s, c=np.sin(x), np.cos(x)
 plt.plot(x, s)
 plt.plot(x, c)
 plt.xticks([-2*np.pi,-np.pi,0, np.pi, 2*np.pi],['-$2\pi$', '-$\pi$','0', '$\pi$', '$2\pi$'])
+
 plt.legend(['sin','cos'])
-
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-正弦函數 s=sin(x) 
-餘弦函數 c=cos(x)
-"""
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(-2*np.pi, 2*np.pi, 100)
-s, c=np.sin(x), np.cos(x)
-
-plt.plot(x, s)
-plt.plot(x, c)
-plt.xticks([-2*np.pi,-np.pi,0, np.pi, 2*np.pi],['-$2\pi$', '-$\pi$','0', '$\pi$', '$2\pi$'])
 plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch12\barCharDouble.py
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
 
 x=['上學期', '下學期']
 s1,s2,s3,s4 = [96.2, 87.1], [88.9, 95.2], [85.1, 91.5], [95.2, 96.7]
@@ -87,12 +55,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch12\barChart.py
-
-import matplotlib.pyplot as plt
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-
 x = ['第1學期', '第2學期', '第3學期', '第4學期','第5學期', '第6學期', '第7學期', '第8學期']
 s = [95.3, 94.2,91.4,96.2,92.3, 93.6,89.4,91.2]
 plt.bar(x, s)
@@ -103,12 +65,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch12\barChart01.py
-
-import matplotlib.pyplot as plt
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-
 x = ['第1學期', '第2學期', '第3學期', '第4學期','第5學期', '第6學期', '第7學期', '第8學期']
 s = [95.3, 94.2,91.4,96.2,92.3, 93.6,89.4,91.2]
 plt.bar(x, s,width=0.5, align='edge', color='r', ec='y',lw=2)
@@ -118,13 +74,6 @@ plt.title('大學四年各學期的平均分數')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch12\barhCharMinus.py
-
-import matplotlib.pyplot as plt
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-plt.rcParams['axes.unicode_minus']=False
 
 x = ['第一季', '第二季', '第三季', '第四季']
 s = [20000,15000,17000, -8000]
@@ -137,12 +86,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch12\barhChart.py
-
-import matplotlib.pyplot as plt
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-
 x = ['第1學期', '第2學期', '第3學期', '第4學期','第5學期', '第6學期', '第7學期', '第8學期']
 s = [95.3, 94.2,91.4,96.2,92.3, 93.6,89.4,91.2]
 plt.barh(x, s)
@@ -153,11 +96,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch12\hist.py
-
-import matplotlib.pyplot as plt
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
 plt.rcParams['font.size']=18
 
 grade = [90,72,45,18,13,81,65,68,73,84,75,79,58,78,96,100,98,64,43,2,63,71,27,35,45,65]
@@ -171,12 +109,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch12\hist01.py
-
-import matplotlib.pyplot as plt
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-plt.rcParams['axes.unicode_minus']=False
 plt.rcParams['font.size']=15
 
 grade = [90,72,45,18,13,81,65,68,73,84,75,79,58,78,96,100,98,64,43,2,63,71,27,35,45,65]
@@ -193,28 +125,17 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch12\pie.py
-
-import matplotlib.pyplot as plt
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
 plt.rcParams['font.size']=12
 
 x = [26,12,21,25,35]
 labels = '高雄','花蓮','台中','澎湖','宜蘭'
 explode = (0.2, 0, 0, 0,0)
-plt.pie(x,labels=labels, explode=explode, autopct='%.1f%%',
-        shadow=True)
+plt.pie(x,labels=labels, explode=explode, autopct='%.1f%%', shadow=True)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch12\subplot.py
-
-import matplotlib.pyplot as plt
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
 plt.rcParams['font.size']=12
 
 #折線圖

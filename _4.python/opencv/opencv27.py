@@ -13,12 +13,12 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 #輸出邊緣和結構信息
 
 image = cv2.imread('data/contours.bmp')
 
-plt.figure('輸出邊緣和結構信息', figsize = (16, 12))
+plt.figure('輸出邊緣和結構信息', figsize = (10, 6))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -39,24 +39,31 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 image = cv2.imread('data/contours.bmp')
-print('顯示原圖')
 
-cv2.imshow("original", image)
+plt.figure('影像處理1', figsize = (10, 6))
+plt.subplot(221)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ret, binary = cv2.threshold(gray,127,255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-n=len(contours)
+
+n = len(contours) #獲取輪廓個數
+print('總共找到', n, '個輪廓')
+
 contoursImg=[]
-print('n =', n)
 for i in range(n):
     temp=np.zeros(image.shape, np.uint8)
     contoursImg.append(temp)
     contoursImg[i]=cv2.drawContours(
             contoursImg[i],contours,i,(255,255,255),5) 
-    cv2.imshow("contours[" + str(i)+"]",contoursImg[i])
+    index = "22"+str(i+2)
+    plt.subplot(int(index))
+    plt.title('輪廓 '+ str(i+1))
+    plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -71,7 +78,8 @@ mask = cv2.drawContours(mask, contours, -1, (255, 255, 255), -1)
 
 loc = cv2.bitwise_and(image, mask)    
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理2', figsize = (10, 6))
+
 plt.subplot(131)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -90,21 +98,29 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 image = cv2.imread('data/moments.bmp')
-print('顯示原圖')
 
-cv2.imshow("original", image)
+plt.figure('影像處理3', figsize = (10, 6))
+plt.subplot(221)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255, cv2.THRESH_BINARY)  
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)  
 
-n = len(contours)
+n = len(contours) #獲取輪廓個數
+print('總共找到', n, '個輪廓')
+
 contoursImg=[]
 for i in range(n):
     temp=np.zeros(image.shape, np.uint8)
     contoursImg.append(temp)
     contoursImg[i]=cv2.drawContours(contoursImg[i],contours,i,255,3) 
-    cv2.imshow("contours[" + str(i)+"]",contoursImg[i]) 
+    index = "22"+str(i+2)
+    plt.subplot(int(index))
+    plt.title('輪廓 '+ str(i+1))
+    plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
+    
 print("觀察各個輪廓的矩（moments）:")
 for i in range(n):
     print("輪廓"+str(i)+"的矩:\n", cv2.moments(contours[i]))
@@ -112,20 +128,24 @@ print("觀察各個輪廓的面積:")
 for i in range(n):
     print("輪廓"+str(i)+"的面積:%d" %cv2.moments(contours[i])['m00'])
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 image = cv2.imread('data/contours.bmp')
-print('顯示原圖')
+
+plt.figure('影像處理4', figsize = (10, 6))
+plt.subplot(221)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)  
 
-cv2.imshow("original", image)
-n = len(contours)
+n = len(contours) #獲取輪廓個數
+print('總共找到', n, '個輪廓')
+
 contoursImg = []
 for i in range(n):
     print("contours["+str(i)+"]面積=", cv2.contourArea(contours[i]))
@@ -136,23 +156,32 @@ for i in range(n):
                                       i,
                                       (255,255,255),
                                       3)
-    cv2.imshow("contours[" + str(i) + "]", contoursImg[i])   
+    #cv2.imshow("contours[" + str(i) + "]", contoursImg[i])
+    index = "22"+str(i+2)
+    plt.subplot(int(index))
+    plt.title('輪廓 '+ str(i+1))
+    plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
 
-cv2.waitKey()
-cv2.destroyAllWindows()
-
+plt.show()
+'''
 print('------------------------------------------------------------')	#60個
 
 #篩選出大于特定大小的輪廓
 
 image = cv2.imread('data/contours.bmp')
-print('顯示原圖')
 
-cv2.imshow("original", image)
+plt.figure('影像處理5', figsize = (10, 6))
+plt.subplot(221)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  
 ret, binary = cv2.threshold(gray,127,255, cv2.THRESH_BINARY)  
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)  
-n = len(contours)
+
+n = len(contours) #獲取輪廓個數
+print('總共找到', n, '個輪廓')
+
 contoursImg = []
 for i in range(n):
     temp = np.zeros(image.shape, np.uint8)
@@ -163,10 +192,13 @@ for i in range(n):
                                       (255, 255, 255),
                                       3)
     if cv2.contourArea(contours[i]) > 15000:
-        cv2.imshow("contours[" + str(i) + "]", contoursImg[i])
+        #cv2.imshow("contours[" + str(i) + "]", contoursImg[i])
+        index = "22"+str(i+2)
+        plt.subplot(int(index))
+        plt.title('輪廓 '+ str(i+1))
+        plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -183,7 +215,9 @@ ret, binary = cv2.threshold(gray,127,255, cv2.THRESH_BINARY)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 #--------------計算各個輪廓的長度和、平均長度--------------------
-n=len(contours)   #獲取輪廓個數
+n = len(contours) #獲取輪廓個數
+print('總共找到', n, '個輪廓')
+
 cntLen=[]           #存儲各個輪廓的長度
 for i in range(n):
     cntLen.append(cv2.arcLength(contours[i],True))
@@ -263,7 +297,8 @@ print("\nHuM3=\n",HuM3)
 print("\nHuM1-HuM2=",HuM1-HuM2)
 print("\nHuM1-HuM3=",HuM1-HuM3)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理6', figsize = (16, 12))
+
 plt.subplot(131)
 plt.title('original1')
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
@@ -305,7 +340,8 @@ print("不相似圖像的matchShape=",ret2)
 
 #--------------顯示3幅原始圖像--------------------
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理7', figsize = (16, 12))
+
 plt.subplot(131)
 plt.title('original1')
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
@@ -347,11 +383,11 @@ print('------------------------------------------------------------')	#60個
 
 #---------------讀取并顯示原始圖像------------------
 image = cv2.imread('data/cc.bmp')
-print('顯示原圖')
 
+print('顯示原圖')
 cv2.imshow("original", image)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理8', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -383,10 +419,12 @@ print('------------------------------------------------------------')	#60個
 
 #---------------讀取并顯示原始圖像------------------ 
 image = cv2.imread('data/cc.bmp')
+
 print('顯示原圖')
 cv2.imshow("original", image)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理9', figsize = (16, 12))
+
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -420,7 +458,7 @@ print('顯示原圖')
 
 cv2.imshow("original", image)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理10', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -453,7 +491,7 @@ image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original", image)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理11', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -482,7 +520,7 @@ print('------------------------------------------------------------')	#60個
 image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理12', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -514,7 +552,7 @@ print('顯示原圖')
 
 cv2.imshow("original", image)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理13', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -546,7 +584,7 @@ image = cv2.imread('data/cc.bmp')
 print('顯示原圖')
 cv2.imshow("original", image)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('影像處理14', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))

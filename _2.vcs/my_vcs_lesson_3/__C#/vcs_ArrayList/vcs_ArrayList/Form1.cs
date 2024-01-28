@@ -22,7 +22,38 @@ namespace vcs_ArrayList
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             label1.Text = "共有 " + ArrayListData.Count.ToString() + " 個項目";
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy; ;
+
+            //button
+            x_st = 20;
+            y_st = 30;
+            dx = 130;
+            dy = 80;
+
+            /*
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            */
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -50,8 +81,6 @@ namespace vcs_ArrayList
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
-            textBox1.Clear();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -161,5 +190,6 @@ namespace vcs_ArrayList
                 Console.Write("   {0}", obj);
             Console.WriteLine();
         }
+
     }
 }

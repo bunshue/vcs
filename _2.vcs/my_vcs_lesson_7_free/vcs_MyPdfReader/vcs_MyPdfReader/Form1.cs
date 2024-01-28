@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Collections;   //for ArrayList
 using System.Drawing.Drawing2D; //for SmoothingMode
 using System.Runtime.InteropServices;   //for DllImport
 using System.Text.RegularExpressions;
@@ -17,6 +18,8 @@ namespace vcs_MyPdfReader
     public partial class Form1 : Form
     {
         private const int PDF_ZOOM_FACTOR = 130;
+
+        ArrayList pdf_filename_ArrayListData = new ArrayList();
 
         string pdf_filename = string.Empty;
         string pdf_filename_short = string.Empty;
@@ -93,7 +96,7 @@ namespace vcs_MyPdfReader
             lb_pdf_total_page.Text = "";
             lb_pdf_total_page.Font = new Font("標楷體", 20);
             lb_pdf_total_page.ForeColor = Color.Black;
-            lb_pdf_total_page.Location = new Point(15+50, this.panel1.Height / 2 - tb_pdf_page.Height+3);
+            lb_pdf_total_page.Location = new Point(15 + 50, this.panel1.Height / 2 - tb_pdf_page.Height + 3);
             lb_pdf_total_page.AutoSize = true;
             this.panel1.Controls.Add(lb_pdf_total_page);    // 將控件加入表單
         }
@@ -219,6 +222,18 @@ namespace vcs_MyPdfReader
             this.panel1.Controls.Add(bt_test); // 將按鈕加入表單
             bt_test.BringToFront();     //移到最上層
 
+            Button bt_clear = new Button();  // 實例化按鈕
+            bt_clear.Size = new Size(width, height);
+            bt_clear.Text = "";
+            bmp = new Bitmap(width, height);
+            bt_clear.Image = bmp;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+            g.DrawString("Clear", f, sb, new PointF(4, 15));
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_clear.Click += bt_clear_Click;     // 加入按鈕事件
+            this.panel1.Controls.Add(bt_clear); // 將按鈕加入表單
+            bt_clear.BringToFront();     //移到最上層
 
             //使用ToolTip
             tooltip.SetToolTip(bt_exit, "關閉");
@@ -251,6 +266,7 @@ namespace vcs_MyPdfReader
         {
             show_main_message1("測試", S_OK, 30);
 
+            /*
             richTextBox1.Text += "C#擷取pdf文檔的頁數\n";
 
             string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
@@ -258,6 +274,15 @@ namespace vcs_MyPdfReader
             int pages = GetPDFofPageCount(filename);
             richTextBox1.Text += "檔案 : " + filename + "\n";
             richTextBox1.Text += "頁數 : " + pages.ToString() + "\n";
+            */
+
+            show_pdf_filename_ArrayListData();
+
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         //[操作pdf文檔]之C#判斷pdf文檔的頁數：
@@ -336,6 +361,9 @@ namespace vcs_MyPdfReader
             richTextBox1.Text += "filename : \t" + Properties.Settings.Default.filename + "\n";
             richTextBox1.Text += "position : \t" + Properties.Settings.Default.position.ToString() + "\n";
             */
+
+            richTextBox1.Text += "讀出系統變數至ArrayList\n";
+            pdf_filename_ArrayListData = Properties.Settings.Default.pdf_filenames;
 
             pdf_filename = Properties.Settings.Default.pdf_filename;
             pdf_page = Properties.Settings.Default.pdf_page;
@@ -501,6 +529,13 @@ namespace vcs_MyPdfReader
                 pdf_page = 0;
                 tb_pdf_page.Text = pdf_page.ToString();
                 lb_pdf_total_page.Text = pdf_total_page.ToString();
+
+                //檢查ArrayList
+                update_pdf_filename_ArrayListData(pdf_filename);
+
+                richTextBox1.Text += "加入一筆資料至ArrayList\n";
+                pdf_filename_ArrayListData.Insert(0, pdf_filename); //插入一個元素
+                richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
             }
             else
             {
@@ -527,9 +562,54 @@ namespace vcs_MyPdfReader
             Properties.Settings.Default.pdf_filename = pdf_filename;
             Properties.Settings.Default.pdf_page = pdf_page;
 
+            //richTextBox1.Text += "將ArrayList寫入系統變數\n";
+            Properties.Settings.Default.pdf_filenames = pdf_filename_ArrayListData;
+
             Properties.Settings.Default.Save();
 
             Application.Exit();
+        }
+
+        void show_pdf_filename_ArrayListData()
+        {
+            richTextBox1.Text += "顯示ArrayList資料\n";
+            richTextBox1.Text += "共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+
+            int i = 0;
+            /*
+            for (i = 0; i < pdf_filename_ArrayListData.Count; i++)
+            {
+                richTextBox1.Text += (i+1).ToString() + " : " + pdf_filename_ArrayListData[i] + "\n";
+            }
+            */
+            i = 0;
+            foreach (string str_name in pdf_filename_ArrayListData)
+            {
+                i++;
+                richTextBox1.Text += i.ToString() + " : " + str_name + "\n";
+            }
+        }
+
+        void update_pdf_filename_ArrayListData(string new_data)
+        {
+            bool flag_file_exists = false;
+            foreach (string str_name in pdf_filename_ArrayListData)
+            {
+                if (new_data == str_name)
+                {
+                    flag_file_exists = true;
+                }
+            }
+
+            if (flag_file_exists == true)
+            {
+                richTextBox1.Text += "找到一樣的項目\n";
+                richTextBox1.Text += "將此項目刪除\n";
+
+                pdf_filename_ArrayListData.Remove(new_data);
+
+                //pdf_filename_ArrayListData.Insert(0, new_data); //插入一個元素
+            }
         }
     }
 }

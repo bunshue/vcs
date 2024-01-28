@@ -7,6 +7,7 @@ plt.plot(x,y,color='red')
 plt.xlabel('x')
 plt.ylabel('y')
 plt.title('Unary equation')
-plt.grid(b=True, which='major')
+
+#plt.grid(b=True, which='major') 有些問題
 
 plt.show()

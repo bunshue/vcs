@@ -16,9 +16,9 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 def loc(index):
-    ''' 處理座標的移動 '''
+    # 處理座標的移動
     x_mov = random.choice([-3, 3])              # 隨機x軸移動值
     xloc = x[index-1] + x_mov                   # 計算x軸新位置
     y_mov = random.choice([-5, -1, 1, 5])       # 隨機y軸移動值
@@ -39,7 +39,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 def loc(index):
-    ''' 處理座標的移動 '''
+    # 處理座標的移動
     x_mov = random.choice([-3, 3])              # 隨機x軸移動值
     xloc = x[index-1] + x_mov                   # 計算x軸新位置
     y_mov = random.choice([-5, -1, 1, 5])       # 隨機y軸移動值
@@ -59,6 +59,7 @@ plt.scatter(x, y, s=2, c=t, cmap='brg')
 #plt.axes().get_yaxis().set_visible(False)   # 隱藏y軸座標
 
 plt.show()
+'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -71,20 +72,21 @@ plt.bar(x, votes, width)        # 繪製長條圖
 
 plt.xticks(x, ('James', 'Peter', 'Norton'))
 plt.yticks(np.arange(0, 450, 30))
+plt.title('x用名稱 y設定範圍刻距')
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from random import randint
+import random
 
 def dice_generator(times, sides):
-    ''' 處理隨機數 '''
+    # 處理隨機數
     for i in range(times):              
-        ranNum = randint(1, sides)              # 產生1-6隨機數
+        ranNum = random.randint(1, sides)              # 產生1-6隨機數
         dice.append(ranNum)
 def dice_count(sides):
-    '''計算1-6個出現次數'''
+    # 計算1-6個出現次數
     for i in range(1, sides+1):
         frequency = dice.count(i)               # 計算i出現在dice串列的次數
         frequencies.append(frequency)
@@ -99,44 +101,13 @@ x = np.arange(6)                                # 長條圖x軸座標
 width = 0.35                                    # 長條圖寬度
 plt.bar(x, frequencies, width, color='g')       # 繪製長條圖
 plt.ylabel('Frequency')
-plt.title('Test 600 times')
+plt.title('丟骰子600次')
 plt.xticks(x, ('1', '2', '3', '4', '5', '6'))
 plt.yticks(np.arange(0, 150, 15))
 
 plt.show()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
-
-sorts = ["Travel","Entertainment","Education","Transporation","Food"]
-fee = [8000,2000,3000,5000,6000]
-          
-plt.pie(fee,labels=sorts,explode=(0,0.3,0,0,0),
-        autopct="%1.2f%%")      # 繪製圓餅圖
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from pylab import mpl
-
-mpl.rcParams["font.sans-serif"] = ["SimHei"]        # 使用黑體
-mpl.rcParams["axes.unicode_minus"] = False          # 讓可以顯示負號
-
-sorts = [u"交通",u"娛樂",u"教育",u"交通",u"餐費"]
-fee = [8000,2000,3000,5000,6000]
-          
-plt.pie(fee,labels=sorts,explode=(0,0.2,0,0,0),
-        autopct="%1.2f%%")      # 繪製圓餅圖
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 

@@ -46,5 +46,16 @@ namespace vcs_MyPdfReader.Properties {
                 this["pdf_page"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.ArrayList pdf_filenames {
+            get {
+                return ((global::System.Collections.ArrayList)(this["pdf_filenames"]));
+            }
+            set {
+                this["pdf_filenames"] = value;
+            }
+        }
     }
 }
