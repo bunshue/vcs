@@ -1,59 +1,43 @@
 import sys
 
 """
-各種python專用的語法 字典 串列 元組 集合
+各種python專用的語法 字典 串列 元組 集合 DSLT
 
 字 dict  字典 dddd 大括號 {} 無順序 不可重複 = 集合 + list  d = {"key :value", "key :value", ...}
+集 set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
 串 lsit  串列 llll 中括號 [] 有順序 允許重複 list中的data type不用一致
 元 tuple 元組 tttt 小括號 () 有順序 允許重複 不可變清單	常數list
-集 set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
-
-
-Collections(容器)
-Python提供四種Collections，分別是List、Tuple、Set、Dictionary
 
 Collections總整理
+Collections(容器)
+Python提供四種Collections，分別是Dictionary、Set、List、Tuple，
+每個Collection都有各自的特色和使用時機，下面這些不用背起來，經常使用自然就會習慣了。
 
-Python提供四種Collections，分別是List、Tuple、Set、Dictionary，每個Collection都有各自的特色和使用時機，下面這些不用背起來，經常使用自然就會習慣了。
-
+    字典(Dict)：無序且未索引的容器，沒有重複的成員，資料格式為key: value。
+    集合(Set)：無序且未索引的容器，沒有重複的成員。
     列表(List)：有序且可更改的容器，允許重複的成員。
     組合(Tuple)：有序且不可更改的容器，允許重複的成員。
-    集合(Set)：無序且未索引的容器，沒有重複的成員。
-    字典(Dict)：無序且未索引的容器，沒有重複的成員，資料格式為key: value。
-
-
-
-empty_dict = {}                      # 這是建立空字典
-empty_set = set()                    # 這是建立空集合
-
-empty_dict = {}                      # 這是建立空字典
-print("列印類別 = ", type(empty_dict))
-
-empty_set = set()                    # 這是建立空集合
-print("列印類別 = ", type(empty_set))
 
 Dictionary(字典)
 Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的語法是key: value，一個key對應一個value，key不一定要是字串，但必須是唯一的。
 
 """
+
+'''
 print("建立空容器")
 
-# 字典
-animals = dict()  # 建立一個字典
+print("建立一個空字典")
+animals = dict()
+animals = {}
 
+print("建立一個空集合")
+animals = set()
+animals = set()
 
-a_dict = {}
-print(type(a_dict))
+print("建立一個空串列")
+animals = []
 
-# 串列
-a_list = []  # 串列
-print(type(a_list))
-
-
-table1 = []  # 串列
-table2 = {}  # dict
-print(type(table1))
-print(type(table2))
+print("建立一個空元組")
 
 
 print("字典 dddd ST------------------------------------------------------------")  # 60個
@@ -283,7 +267,6 @@ print("中文名稱", "        英文名稱 ", " 體重")
 for i in range(len(ani)):
     print(f"{ani[i][0]:8s}{ani[i][1][0]:10s}{ani[i][1][1]:8d}")
 
-
 print("依體重排序")
 ani = sorted(animals.items(), key=lambda item: item[1][1])
 print("中文名稱", "        英文名稱 ", " 體重")
@@ -390,9 +373,9 @@ print("加密字串 ", ciphertext)
 
 print("------------------------------------------------------------")  # 60個
 
-print("動物字典對應")
+print("找字典內的value")
 
-animals = {
+animal_dict = {
     "鼠": ("mouse", 3),
     "牛": ("ox", 48),
     "虎": ("tiger", 33),
@@ -407,16 +390,23 @@ animals = {
     "豬": ("pig", 42),
 }
 
-print(type(animals))
+print(type(animal_dict))
 
-all_animals = list("鼠牛虎兔龍蛇馬羊猴雞狗豬")
+print('字串轉串列')
+animal_string = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
+animal_list = list(animal_string)
 
-for ani in all_animals:
-    print(animals[ani])
+print(type(animal_list))
+
+print('從字典的key找到value')
+for animal in animal_list:
+    print("key = ", animal)
+    print("value = ", animal_dict[animal])
 
 print("------------------------------------------------------------")  # 60個
 
 animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
+
 print("打印字典的內容1")
 print(type(animals))
 print(animals)
@@ -428,17 +418,35 @@ for key, value in animals.items():
 
 print("------------------------------------------------------------")  # 60個
 
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
+print("字典的用法")
 
-# 字典(dictionary)的資料型態
+animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
+animals = {"鼠": 3, "牛": 48, "虎": 33}
+print(type(animals))
+print(animals)
+
 print(animals["鼠"])
 animals["兔"] = 6
 print(animals)
+
+animals["鼠"] = 5
+print(animals)
+
+animals["兔"] = 8
+print(animals)
+
+animals.pop("兔")
+print(animals)
+
+print(animals.keys())
+print(animals.values())
+print(animals.items())
 
 print("------------------------------------------------------------")  # 60個
 
 print("字典測試 1")
 
+animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
 animals = {"mouse": 3, "ox": 48, "tiger": 33}
 
 ani = "tiger"
@@ -479,6 +487,7 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
+animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
 animals = {"鼠": 3, "牛": 48, "虎": 33}
 animals["兔"] = 8
 animals["龍"] = 38
@@ -486,6 +495,7 @@ animals_item = animals.items()
 for name, weight in animals_item:
     print("%s 的體重為 %d" % (name, weight))
 
+animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
 animals = {"鼠": 3, "牛": 48, "虎": 33}
 animals["兔"] = 8
 animals["龍"] = 38
@@ -504,7 +514,7 @@ eng_score = dict()  # 記錄英文成績
 mat_score = dict()  # 記錄數學成績
 
 subjects = ["國文", "英文", "數學"]  # 串列
-scores = [chi_score, eng_score, mat_score]  # 串列
+scores = [chi_score, eng_score, mat_score]  # 3個字典組成的串列
 
 class_101[1] = "牛"
 class_101[2] = "虎"
@@ -512,46 +522,34 @@ class_101[4] = "龍"
 class_101[8] = "猴"
 print("現有動物 :", class_101)
 
-print("輸入國文成績")
+print("國文成績")
 subject_no = 0
-no = 1
-scores[subject_no][no] = 80
-no = 2
-scores[subject_no][no] = 85
-no = 4
-scores[subject_no][no] = 78
-no = 8
-scores[subject_no][no] = 88
+scores[subject_no][1] = 80
+scores[subject_no][2] = 85
+scores[subject_no][4] = 78
+scores[subject_no][8] = 88
 
 print("顯示國文成績")
 for no, name in class_101.items():
     print("{},{}的{}成績:".format(no, name, subjects[subject_no]), scores[subject_no][no])
 
-print("輸入英文成績")
+print("英文成績")
 subject_no = 1
-no = 1
-scores[subject_no][no] = 84
-no = 2
-scores[subject_no][no] = 79
-no = 4
-scores[subject_no][no] = 92
-no = 8
-scores[subject_no][no] = 82
+scores[subject_no][1] = 84
+scores[subject_no][2] = 79
+scores[subject_no][4] = 92
+scores[subject_no][8] = 82
 
 print("顯示英文成績")
 for no, name in class_101.items():
     print("{},{}的{}成績:".format(no, name, subjects[subject_no]), scores[subject_no][no])
 
-print("輸入數學成績")
+print("數學成績")
 subject_no = 2
-no = 1
-scores[subject_no][no] = 85
-no = 2
-scores[subject_no][no] = 91
-no = 4
-scores[subject_no][no] = 84
-no = 8
-scores[subject_no][no] = 77
+scores[subject_no][1] = 85
+scores[subject_no][2] = 91
+scores[subject_no][4] = 84
+scores[subject_no][8] = 77
 
 print("顯示數學成績")
 for no, name in class_101.items():
@@ -565,31 +563,6 @@ for no in class_101.keys():
         sum = sum + scores[subject_no][no]
         print("{}:{:>3} ".format(subjects[subject_no], scores[subject_no][no]), end="")
     print("總分:{:>3}, 平均:{:.2f}".format(sum, float(sum) / len(scores)))
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典的用法")
-
-animals = {"鼠": 3, "牛": 48, "虎": 33}
-print(type(animals))
-print(animals)
-
-print(animals["鼠"])
-animals["鼠"] = 5
-print(animals)
-
-animals["兔"] = 8
-print(animals)
-
-animals.pop("兔")
-print(animals)
-
-print(animals.keys())
-print(animals.values())
-print(animals.items())
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -610,9 +583,6 @@ for cname, ename in animals.items():
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 print("字典的用法 _size_factors")
 _size_factors = {
     "kb": 1000,
@@ -628,20 +598,7 @@ print(type(_size_factors))
 for aaa in _size_factors:
     print(aaa, _size_factors[aaa])
 
-
-print("字典")
-animals = {"鼠": 3, "牛": 48, "虎": 33}
-print(type(animals))
-print(animals)
-
-animals2 = sorted(animals.items(), key=lambda x: x[0])  # 依照key排序
-print("依照名稱排序")
-print(animals2)
-
-animals3 = sorted(animals.items(), key=lambda x: x[1])  # 依照value排序
-print("依照體重排序")
-print(animals3)
-
+print("------------------------------------------------------------")  # 60個
 
 import os
 import string
@@ -680,24 +637,29 @@ for loc, encodings in codecs.items():
         print(enc)
 
 print("------------------------------------------------------------")  # 60個
+'''
 
 print("字典的排序, 使用lambda")
 
 animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
-
+animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
+print(type(animals))
 print(animals.items())
+print(animals)
 
-print(sorted(animals.items(), key=lambda x: x[1]))
+animals2 = sorted(animals.items(), key=lambda x: x[0])  # 依照key排序
+print("依照名稱排序")
+print(animals2)
 
-print(sorted(animals.items(), key=lambda x: x[1], reverse=True))
+animals3a = sorted(animals.items(), key=lambda x: x[1])  # 依照value排序
+print("依照體重排序")
+print(animals3a)
 
+animals3b = sorted(animals.items(), key=lambda x: x[1], reverse=True)
+print("依照體重排序")
+print(animals3b)
 
 print("字典的排序, 使用sort")
-
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
-
-print(animals.items())
-
 print(sorted(animals.items()))
 
 for key, item in sorted(animals.items()):
@@ -707,6 +669,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("字典之合併: 使用 update")
 
+animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
 animal = {"name": "mouse", "class": "A", "weight": 3}
 
 animal_new_data = {"name": "鼠", "weight": 5, "sports": "soccer"}
@@ -872,17 +835,9 @@ print(animals_partial)
 print("------------------------------------------------------------")  # 60個
 
 print("字串 轉 串列")
-animals = list("鼠牛虎兔龍蛇馬羊猴雞狗豬")
-print("列印全部項目")
-print(animals)
-
-print("------------------------------------------------------------")  # 60個
-
-print("字串 轉 串列")
-
-s = list("鼠牛虎兔龍蛇馬羊猴雞狗豬")
-print(type(s))
-print(s)
+animal_list = list("鼠牛虎兔龍蛇馬羊猴雞狗豬")
+print(type(animal_list))
+print(animal_list)
 
 print("字串 轉 串列")
 s = list("0912345678")
@@ -1089,7 +1044,6 @@ print("------------------------------------------------------------")  # 60個
 print("串列, 建立內含字典的串列")
 
 animals = list()
-
 for page in range(1, 6):
     dd = dict()
     dd["name"] = "鼠"
@@ -1196,11 +1150,11 @@ for animal_name in animal:
 
 print("------------------------------------------------------------")  # 60個
 
-tuple_animal = ("鼠", "牛", "虎", "兔", "龍")  # 定義元組元素是字串
-list_animal = list(tuple_animal)  # 將元組改為串列
-list_animal.append("蛇")  # 增加元素
-print("列印元組", tuple_animal)
-print("列印串列", list_animal)
+animal_tuple = ("鼠", "牛", "虎", "兔", "龍")  # 定義元組元素是字串
+animal_list = list(animal_tuple)  # 將元組改為串列
+animal_list.append("蛇")  # 增加元素
+print("列印元組", animal_tuple)
+print("列印串列", animal_list)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1267,12 +1221,61 @@ print("元組 tttt SP-----------------------------------------------------------
 
 print("集合 ssss ST------------------------------------------------------------")  # 60個
 
+print('集合的運算')
+
+# 大動物 : [牛虎龍馬豬][羊猴][象] 8
+# 小動物 : [鼠兔蛇雞狗][羊猴][龜] 8
+
+print("建立集合")
+big_animal = set()  # 宣告集合
+big_animal = {"牛", "虎", "龍", "馬", "豬", "羊", "猴", "象"}
+
+small_animal = set()  # 宣告集合
+small_animal = set(["鼠", "兔", "蛇", "雞", "狗", "羊", "猴", "龜"])  # 由串列轉集合
+
+print("大動物 :", big_animal)
+print("小動物 :", small_animal)
+
+
+print("交集 Set Intersection :")
+animal = big_animal & small_animal
+print(animal)
+animal = big_animal.intersection(small_animal)
+print(animal)
+
+print("聯集 Set Union :")
+animal = big_animal | small_animal
+print(animal)
+animal = big_animal.union(small_animal)
+print(animal)
+
+print("差集 Set Difference(大-小) :")
+animal = big_animal - small_animal
+print(animal)
+animal = big_animal.difference(small_animal)
+print(animal)
+
+print("差集 Set Difference(小-大) :")
+animal = small_animal - big_animal
+print(animal)
+animal = small_animal.difference(big_animal)
+print(animal)
+
+print("對稱差集 Set Symmetric Difference :")
+animal = big_animal ^ small_animal
+print(animal)
+animal = big_animal.symmetric_difference(small_animal)
+print(animal)
+
+print("------------------------------------------------------------")  # 60個
+
 # 大動物 : [牛虎龍馬豬][羊猴][象] 8
 # 小動物 : [鼠兔蛇雞狗][羊猴][龜] 8
 
 print("建立集合")
 big_animal = set()  # 宣告集合
 big_animal = {"牛", "虎", "龍", "馬", "馬", "馬"}
+
 small_animal = set()  # 宣告集合
 small_animal = set(["鼠", "兔", "蛇", "雞", "雞", "雞"])  # 由串列轉集合
 
@@ -1301,30 +1304,6 @@ print("小動物 :", small_animal)
 print("比較兩集合是否相等")
 print(big_animal == small_animal)
 
-print("交集 Set Intersection")
-animal = big_animal & small_animal
-print(animal)
-animal = big_animal.intersection(small_animal)
-print(animal)
-
-print("聯集 Set Union")
-animal = big_animal | small_animal
-print(animal)
-animal = big_animal.union(small_animal)
-print(animal)
-
-print("差集 Set Difference")
-animal = big_animal - small_animal
-print(animal)
-animal = big_animal.difference(small_animal)
-print(animal)
-
-print("對稱差集 Set Symmetric Difference")
-animal = big_animal ^ small_animal
-print(animal)
-animal = big_animal.symmetric_difference(small_animal)
-print(animal)
-
 print("集合的成員運算子")
 print("龍 是否在集合1之中?", "龍" in big_animal)
 print("龍 是否在集合2之中?", "龍" in small_animal)
@@ -1340,6 +1319,17 @@ small_animal.clear()
 
 print("大動物 :", big_animal)
 print("小動物 :", small_animal)
+
+print("------------------------------------------------------------")  # 60個
+
+print("字典子集")
+
+prices = {"ACME": 45.23, "AAPL": 612.78, "IBM": 205.55, "HPQ": 37.20, "FB": 10.75}
+# Make a dictionary of all prices over 200
+p1 = {key: value for key, value in prices.items() if value > 200}
+# Make a dictionary of tech stocks
+tech_names = {"AAPL", "IBM", "HPQ", "MSFT"}
+p2 = {key: value for key, value in prices.items() if key in tech_names}
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1389,14 +1379,14 @@ print("新的串列資料animals2 = ", animals2)
 
 print("------------------------------------------------------------")  # 60個
 
-list_animal = ["鼠", "牛", "虎", "兔", "龍"]  # 定義串列元素是字串
+animal_list = ["鼠", "牛", "虎", "兔", "龍"]  # 定義串列元素是字串
 print("串列 轉 元組")
-tuple_animal = tuple(list_animal)  # 將串列改為元組
-print("列印串列 :", list_animal)
-print("列印元組 :", tuple_animal)
+animal_tuple = tuple(animal_list)  # 將串列改為元組
+print("列印串列 :", animal_list)
+print("列印元組 :", animal_tuple)
 
 # tuple禁止使用append
-# tuple_animal.append('elephant')         # 增加元素 --- 錯誤錯誤
+# animal_tuple.append('elephant')         # 增加元素 --- 錯誤錯誤
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1473,9 +1463,6 @@ print(
     "milliseconds",
 )
 
-
-sys.exit()
-
 print("各種容器轉換 比較 SP------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -1485,9 +1472,12 @@ print("------------------------------------------------------------")  # 60個
 
 print("將英文字串的每一個字母(含空白標點)拆成每個字一個集合, 大小寫不同")
 
-animals_set = set("Mouse Ox Tiger Rabbit")
-print(type(animals_set))
-print(animals_set)
+print('字串 轉 集合')
+
+animal_string = "Mouse Ox Tiger Rabbit"
+animal_set = set(animal_string)
+print(type(animal_set))
+print(animal_set)
 
 text = "United States"
 alphabetCount = {alphabet: text.count(alphabet) for alphabet in text}
@@ -1522,10 +1512,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 def draw_bar(n):
     return "*" * n
-
 
 s = [2, 5, 4, 7, 5, 4]
 for bar in map(draw_bar, s):
@@ -1539,6 +1527,7 @@ for bar in map(lambda n: "*" * n, s):
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 a = list("甲乙丙丁戊己庚辛壬癸")
 b = list("子丑寅卯辰巳午未申酉戌亥")
 for i in a:
@@ -1562,7 +1551,11 @@ for i in range(60):
         b_index = 0
 print(years)
 
+"""
+
 print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1672,24 +1665,24 @@ print("------------------------------------------------------------")  # 60個
 
 # set   集合 ssss 大括號 {} 無順序 不可重複 set元素具有唯一性
 
-animals = {"鼠", "牛", "虎"}
-print(type(animals))
-print(animals)
-# 增加一般元素
-animals.add("兔")
-print("animals集合內容 ", animals)
-# 增加已有元素並觀察執行結果
-animals.add("牛")
-print("animals集合內容 ", animals)
+animal_set = {"鼠", "牛", "虎"}
+print(type(animal_set))
+print(animal_set)
 
-print(type(animals))
+# 增加一般元素
+animal_set.add("兔")
+print("animal_set 集合內容 ", animal_set)
+
+# 增加已有元素並觀察執行結果
+animal_set.add("牛")
+print("animal_set 集合內容 ", animal_set)
 
 print("------------------------------------------------------------")  # 60個
 
 print("數字集合")
-A = {n for n in range(1, 20, 2)}
-print(type(A))
-print(A)
+numbers_set = {n for n in range(1, 20, 2)}
+print(type(numbers_set))
+print(numbers_set)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1715,6 +1708,7 @@ for name, weight in animal_list:
 
 print("------------------------------------------------------------")  # 60個
 
+print('字串轉串列')
 b = list("子丑寅卯辰巳午未申酉戌亥")  # list
 c = list("鼠牛虎兔龍蛇馬羊猴雞狗豬")  # list
 
@@ -1729,7 +1723,9 @@ print([item for item in zip(b, c)])
 
 print("------------------------------------------------------------")  # 60個
 
+print('(字串*6)轉串列')
 a = list("甲乙丙丁戊己庚辛壬癸" * 6)
+print('(字串*5)轉串列')
 b = list("子丑寅卯辰巳午未申酉戌亥" * 5)
 years = list(zip(a, b))
 print(type(years))
@@ -1776,14 +1772,11 @@ print("info   = ", i)
 
 print("---- map --------------------------------------------------------")  # 60個
 
-
 print("map 的用法")
-
 
 def pick(x):
     fruits = ["Apple", "Banana", "Orange", "Tomato", "Pine Apple", "Berry"]
     return fruits[x]
-
 
 alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
 choices = map(pick, alist)
@@ -1794,14 +1787,12 @@ print(type(choices))
 for choice in choices:
     print(choice)
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
 
 x = [1, 2, 3, 4, 5]
 print(type(x))
@@ -1812,12 +1803,10 @@ cc = repr(x)
 print(type(cc))
 print(cc)
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 用壽司算符給 list 切片
 
@@ -1829,30 +1818,29 @@ print(numbers[::2])
 print(numbers[::-1])
 print(list(reversed(numbers)))
 
-s = "I love Python"
-print(s[2:6])
-print(s[::-1])
+string = "Welcome to the United States"
+print(string)
+print(string[15:28])
+print(string[::-1])
 
 print("------------------------------------------------------------")  # 60個
 
-# list 生成式
-
+# 串列 生成式
 squares = [x**2 for x in range(10)]
-
+print(type(squares))
 print(squares)
 
 squares = [x**2 for x in range(10) if x % 2 == 0]
-
+print(type(squares))
 print(squares)
 
 matrix = [[x * y for x in range(3)] for y in range(4)]
-
+print(type(matrix))
 print(matrix)
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 6-1-4 走訪 dict 鍵與值
+# 走訪 dict 鍵與值
 
 emails = {
     "Bob": "bob@office.com",
@@ -1873,7 +1861,6 @@ my_items = ["a", "b", "c"]
 for num, item in zip(my_numbers, my_items):
     print(f"{num} -> {item}")
 
-
 matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 print(list(zip(*matrix)))
@@ -1889,61 +1876,29 @@ for i, item in enumerate(my_items):
 
 print("------------------------------------------------------------")  # 60個
 
-
-salary = (86000, 72000, 83000, 47000, 55000)
+print('建立tuple資料 動物體重')
+weight_tuple = (3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42)
 print("原有資料：")
-print(type(salary))
-print(salary)
-print("--------------------------------")
+print(type(weight_tuple))
+print(weight_tuple)
 
 # 由小而大
-print("薪資由小而大排序：", sorted(salary))
-print("--------------------------------")
+print("體重由小而大排序：", sorted(weight_tuple))
 
 # 遞減排序
-print("薪資由大而小排序：", sorted(salary, reverse=True))
-print("--------------------------------")
+print("體重由大而小排序：", sorted(weight_tuple, reverse=True))
 
 print("資料經排序後仍保留原資料位置：")
-print(salary)
-print("--------------------------------")
+print(weight_tuple)
 
 print("------------------------------------------------------------")  # 60個
 
-tup = (28, 39, 58, 67, 97, 54)
+tup = (3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42)
 print("目前元組內的所有元素：")
 for item in range(len(tup)):
     print("tup[%2d] %3d" % (item, tup[item]))
 
-
 print("------------------------------------------------------------")  # 60個
-
-friendA = {"Andy", "Axel", "Michael", "May"}
-friendB = {"Peter", "Axel", "Andy", "Julia"}
-print(friendA & friendB)
-print(friendA | friendB)
-print(friendA - friendB)
-print(friendA ^ friendB)
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典子集")
-
-prices = {"ACME": 45.23, "AAPL": 612.78, "IBM": 205.55, "HPQ": 37.20, "FB": 10.75}
-# Make a dictionary of all prices over 200
-p1 = {key: value for key, value in prices.items() if value > 200}
-# Make a dictionary of tech stocks
-tech_names = {"AAPL", "IBM", "HPQ", "MSFT"}
-p2 = {key: value for key, value in prices.items() if key in tech_names}
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 # 完整動物 容器
 
@@ -1988,7 +1943,6 @@ print(animals["英文名"])
 print(animals["體重"])
 print(animals["代表"])
 
-
 print("建立串列")
 animals = [
     ["鼠", "mouse", 3, "米老鼠"],
@@ -2004,7 +1958,6 @@ animals = [
     ["狗", "dog", 12, "貴賓狗"],
     ["豬", "pig", 42, "佩佩豬"],
 ]
-
 
 print("串列 操作, 建立內含元組的串列")
 animals = [

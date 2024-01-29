@@ -14,7 +14,7 @@ namespace vcs_ReadWrite_INI3
 {
     public partial class Form1 : Form
     {
-        public string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\vcs_ReadWrite_INI3.ini";//要注意全域變數都是放在public Form1()上面
+        public string filename = @"../../vcs_ReadWrite_INI3.ini";
 
         SetupIniIP ini = new SetupIniIP();
 

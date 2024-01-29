@@ -2341,6 +2341,43 @@ namespace _vcs_MakePicture
 
         private void button59_Click(object sender, EventArgs e)
         {
+            //opencv 做 dilate erode 用
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 700;
+            height = 700;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, Color.White);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            sb = new SolidBrush(Color.Black);
+            g.FillRectangle(sb, new Rectangle(100, 100, 500, 500));
+
+            sb = new SolidBrush(Color.White);
+            g.FillRectangle(sb, new Rectangle(200, 200, 300, 300));
+
+            sb = new SolidBrush(Color.Black);
+            g.FillRectangle(sb, new Rectangle(100, 300, 500, 100));
+            g.FillRectangle(sb, new Rectangle(300, 100, 100, 500));
+
+            
+            pictureBox1.Image = bitmap1;
+
+
 
         }
 

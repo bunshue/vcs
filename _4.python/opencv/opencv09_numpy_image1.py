@@ -25,7 +25,6 @@ D = 3
 
 print('------------------------------------------------------------')	#60個
 
-'''
 image = np.zeros((H, W, D), dtype = "uint8") * 255
 
 print('初始化 H X W X D 陣列')
@@ -304,7 +303,7 @@ plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 plt.title('兩影像用cv2權重gamma相加')
 
 plt.show()
-'''
+
 print('------------------------------------------------------------')	#60個
 
 W = 640

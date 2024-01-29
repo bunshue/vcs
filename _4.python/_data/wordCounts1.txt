@@ -1,0 +1,17 @@
+Existing methods
+
+It is known several solutions for our task. They are based on the representation of the spectrum in the form of a piecewise constant functions with a constant wavelength step.
+
+In the article the spectrum is reconstructed as a linear combination of three base functions corresponding to emitting phosphor. The coefficients are obtained from the original RGB color by solving a system of linear equations.
+
+In it is proposed to take the same linear combination of the functions specified by the author: constant, sine and cosine. The coefficients are obtained in a similar manner.
+
+These two approaches allow obtaining spectra that give exactly the original RGB color after convolution with initial response curves. The disadvantage of these approaches is that they do not take into account the actual physical sense of the resulting spectrum. And the result may be a spectrum having a negative value.
+
+The author of introduced additional restrictions on the smoothness of the spectrum to get better matching of the resultant reflection spectra for the known materials. Using this restriction a set of base functions was built and the resulting spectrum is considered as a linear combination of them. The problem of this method is the inability to reconstruct a spectrum for some colors corresponding to really existing spectrum.
+
+In the spectrogram is constructed as a normalized sum of permissible partial solutions corresponding to a set of randomly selected wavelength triples. Thus the authors had obtained representative spectrum where all visible wavelengths correspond to non-zero intensity. The author also provides methods for getting the correct emission and reflection spectrum. However this method is very time consuming.
+
+A common problem of the existent methods for the correct spectrum construction is that the correctness restrictions have some particular form and are incorporated inside the method itself. Also these methods are rather complex to implement.
+
+Another problem of the RGB color to spectrum conversion methods is stability. In realistic rendering they are used to construct the spectral image from a conventional colored image. Then this spectral image is applied on the object as a texture or is used as an areal light source. If the similar colors of neighboring pixels on the image will be converted into very different spectra it will lead to the formation of noise on the final image. Therefore the color stability is one more method requirement. It can be expressed informally as follows: for any two similar colors their spectra must also be similar. Stability of most of the methods above has not been investigated and some of the techniques do not possess it. For example an iterative method is unstable due to the use of random initial approximations.

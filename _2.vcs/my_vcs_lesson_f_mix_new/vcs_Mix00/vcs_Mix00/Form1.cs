@@ -566,7 +566,37 @@ namespace vcs_Mix00
 
         private void button13_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\vcs_ReadWrite_INI2a.ini";  //INI文件的物理地址
+            richTextBox1.Text += "Read ini data from " + filename + "\n";
 
+            string strOne = System.IO.Path.GetFileNameWithoutExtension(filename); 		//獲取INI文件的文件名
+            richTextBox1.Text += "取得前檔名\n";
+            richTextBox1.Text += strOne + "\n";
+
+            byte[] buffer = new byte[100];
+            for (int i = 0; i < 26; i++)
+            {
+                buffer[i] = (byte)(65 + i);
+            }
+            richTextBox1.Text += buffer + "\n";
+            richTextBox1.Text += "len = " + buffer.Length.ToString() + "\n";
+
+            string ssss1 = System.Text.UTF8Encoding.Default.GetString(buffer);
+            richTextBox1.Text += ssss1 + "\n";
+            richTextBox1.Text += "len = " + ssss1.Length.ToString() + "\n";
+
+            int length = 26;
+            string ssss2 = System.Text.UTF8Encoding.Default.GetString(buffer, 0, length);
+            richTextBox1.Text += ssss2 + "\n";
+            richTextBox1.Text += "len = " + ssss2.Length.ToString() + "\n";
+
+            //往上兩層的檔案
+            filename = Application.StartupPath.ToString();
+            filename = filename.Substring(0, filename.LastIndexOf("\\"));
+            filename = filename.Substring(0, filename.LastIndexOf("\\"));
+            filename += @"\SystemSet.ini";
+
+            richTextBox1.Text += "filename : " + filename + "\n";
         }
 
         private void button14_Click(object sender, EventArgs e)

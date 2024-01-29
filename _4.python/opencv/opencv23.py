@@ -26,74 +26,73 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp'
+#filename = 'C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png'
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+plt.figure('erode 侵蝕 效果', figsize = (16, 12))
+
+plt.subplot(221)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 print('erode 侵蝕 效果 1')
 kernel = np.ones((5, 5), np.uint8)
 erosion = cv2.erode(image, kernel)
 
-plt.figure('', figsize = (16, 12))
-plt.subplot(221)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
 plt.subplot(222)
 plt.title('erode 侵蝕 效果 1')
 plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
 
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/erode.bmp'
-image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-
 print('erode 侵蝕 效果 2')
+kernel = np.ones((25, 25), np.uint8)
+erosion = cv2.erode(image, kernel)
+
+plt.subplot(223)
+plt.title('erode 侵蝕 效果 2')
+plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
+
+print('erode 侵蝕 效果 3 加 iterations')
 kernel = np.ones((9, 9), np.uint8)
 erosion = cv2.erode(image, kernel,iterations = 5)
 
-plt.subplot(223)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
 plt.subplot(224)
-plt.title('erode 侵蝕 效果 2')
+plt.title('erode 侵蝕 效果 3')
 plt.imshow(cv2.cvtColor(erosion, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()
 plt.show()
 
+
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp'
+filename = 'C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png'
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
-print('dilate 擴大 膨脹 效果 1')
-kernel = np.ones((9, 9), np.uint8)
-dilation = cv2.dilate(image, kernel)
-
 plt.figure('', figsize = (16, 12))
+
+print('dilate 擴大 膨脹 效果')
+
 plt.subplot(221)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(222)
 plt.title('dilate 擴大 膨脹 效果 1')
+kernel = np.ones((20, 20), np.uint8)
+dilation = cv2.dilate(image, kernel)
 plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
 
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/dilation.bmp'
-image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-
-print('dilate 擴大 膨脹 效果 2')
-kernel = np.ones((5, 5), np.uint8)
-dilation = cv2.dilate(image, kernel, iterations = 9)
-
 plt.subplot(223)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('dilate 擴大 膨脹 效果 2')
+kernel = np.ones((40, 40), np.uint8)
+dilation = cv2.dilate(image, kernel)
+plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
 
 plt.subplot(224)
-plt.title('dilate 擴大 膨脹 效果 2')
+plt.title('dilate 擴大 膨脹 效果 3 加 iterations')
+kernel = np.ones((10, 10), np.uint8)
+dilation = cv2.dilate(image, kernel, iterations = 9)
 plt.imshow(cv2.cvtColor(dilation, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()

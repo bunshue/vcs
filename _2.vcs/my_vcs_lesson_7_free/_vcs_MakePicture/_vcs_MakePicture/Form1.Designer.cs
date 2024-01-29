@@ -889,6 +889,7 @@
             // 
             // button59
             // 
+            this.button59.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button59.BackgroundImage")));
             this.button59.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button59.Location = new System.Drawing.Point(1151, 452);
             this.button59.Name = "button59";
