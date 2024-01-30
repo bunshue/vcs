@@ -1142,15 +1142,6 @@ print("{0} 的英文念法是: {1}".format(num, result))
 
 print("------------------------------------------------------------")  # 60個
 
-# 數字交換
-number1 = random.randint(0, 9)
-number2 = random.randint(0, 9)
-
-if number1 < number2:
-    number1, number2 = number2, number1
-
-print("------------------------------------------------------------")  # 60個
-
 for number in range(100):
     print(format(number, "5d"), end="")
     if number % 10 == 9:
@@ -7028,13 +7019,6 @@ print([_ for _ in dir(datetime) if "date" in _.lower()])
 # help(datetime)
 
 print("------------------------------------------------------------")  # 60個
-
-
-# syntax
-print("顯示模組的所有名稱dir()")
-print(dir(random))
-print("------------------------------------------------------------")  # 60個
-
 
 # id的用法
 

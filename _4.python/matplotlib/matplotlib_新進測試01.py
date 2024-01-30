@@ -16,7 +16,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="新進測試 01",
@@ -203,6 +203,23 @@ plt.subplot(236)
 
 
 plt.show()
-
+'''
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+#for animation
+
+X = np.random.rand(6)
+Y = np.random.rand(6)
+
+def myplot(n=1):
+    plt.scatter(X, Y, c='r', s=100)
+    x = np.linspace(0, 1, 1000)
+    y = 0.5*np.sin(n*x) + 0.5
+    plt.plot(x, y)
+
+myplot(10)
+plt.show()
+

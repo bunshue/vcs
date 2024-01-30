@@ -566,10 +566,10 @@ namespace vcs_Mix00
 
         private void button13_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\vcs_ReadWrite_INI2a.ini";  //INI文件的物理地址
-            richTextBox1.Text += "Read ini data from " + filename + "\n";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            richTextBox1.Text += "檔案 : " + filename + "\n";
 
-            string strOne = System.IO.Path.GetFileNameWithoutExtension(filename); 		//獲取INI文件的文件名
+            string strOne = System.IO.Path.GetFileNameWithoutExtension(filename);
             richTextBox1.Text += "取得前檔名\n";
             richTextBox1.Text += strOne + "\n";
 
@@ -595,8 +595,46 @@ namespace vcs_Mix00
             filename = filename.Substring(0, filename.LastIndexOf("\\"));
             filename = filename.Substring(0, filename.LastIndexOf("\\"));
             filename += @"\SystemSet.ini";
-
             richTextBox1.Text += "filename : " + filename + "\n";
+
+            string data_to_write = string.Empty;
+            string contact_address_to = string.Empty;
+            string camera_serial_data = "0123456789";
+
+            int len = camera_serial_data.Length;
+            richTextBox1.Text += "camera_serial_data_len = " + len.ToString() + "\n";
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += ((int)camera_serial_data[i]).ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+
+
+            //data_to_write = camera_serial_data.Substring(0, 16); //原本是這一行，改寫成以下。
+            try
+            {   //可能會產生錯誤的程式區段
+                if (len > 16)
+                    data_to_write = camera_serial_data.Substring(0, 16);
+                else
+                    data_to_write = camera_serial_data;
+            }
+            catch (Exception ex)
+            {   //定義產生錯誤時的例外處理程式碼
+                //MessageBox.Show(ex.Message);
+                richTextBox1.Text += "發生例外 : " + ex.Message + "\n";
+            }
+            finally
+            {
+                //一定會被執行的程式區段
+                richTextBox1.Text += "data_to_write : " + data_to_write + "\n";
+                richTextBox1.Text += "\nlen = " + data_to_write.Length.ToString() + "\n";
+            }
+
+            //string text = "abcdefg";
+            StringBuilder text = "abcdefg";
+            richTextBox1.Text += "len = " + text.Length.ToString() + "\n";
+            text[3] = 'c';
+
         }
 
         private void button14_Click(object sender, EventArgs e)

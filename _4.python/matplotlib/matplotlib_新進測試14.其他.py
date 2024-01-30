@@ -27,6 +27,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+# 氣泡圖
+N = 50
+x = np.random.rand(N)
+y = np.random.rand(N)
+colors = np.random.rand(N) # 點的顏色
+area = (30 * np.random.rand(N))**2  # 點的半徑
+plt.scatter(x, y, s=area, c=colors, alpha=0.5) # 由於點可能疊加，設置透明度爲0.5
+plt.show()
+
 
 
 

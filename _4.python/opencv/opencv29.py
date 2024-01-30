@@ -13,7 +13,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 
 img = cv2.imread(filename, 0)
@@ -77,6 +77,66 @@ plt.imshow(img,cmap = 'gray')
 
 plt.tight_layout()
 plt.show()
+'''
+
+print('------------------------------------------------------------')	#60個
+
+d = 400
+def draw(event, x, y, flags, param):
+    if event == cv2.EVENT_LBUTTONDBLCLK:
+        p1x = x
+        p1y = y
+        p2x = np.random.randint(1, d - 50)  #np.random之randint不含尾
+        p2y = np.random.randint(1, d - 50)  #np.random之randint不含尾
+        color = np.random.randint(0, high = 256, size = (3,)).tolist()  #np.random之randint不含尾
+        cv2.rectangle(image,(p1x, p1y),(p2x, p2y), color, 2)
+image = np.ones((d, d, 3), dtype = "uint8") * 255
+cv2.namedWindow('Demo19.10')
+cv2.setMouseCallback('Demo19.10', draw)
+while(1):
+    cv2.imshow('Demo19.10', image)
+    if cv2.waitKey(20) == 27:
+        break
+
+cv2.destroyAllWindows()
+
+print('------------------------------------------------------------')	#60個
+
+#fail
+d = 400
+global thickness
+thickness = -1
+def fill(x):
+    pass
+def draw(event,x,y,flags,param):
+    if event == cv2.EVENT_LBUTTONDBLCLK:
+        p1x = x
+        p1y = y
+        p2x = np.random.randint(1, d - 50)  #np.random之randint不含尾
+        p2y = np.random.randint(1, d - 50)  #np.random之randint不含尾
+        color = np.random.randint(0, high = 256, size = (3,)).tolist()  #np.random之randint不含尾
+        cv2.rectangle(image,(p1x,p1y),(p2x,p2y),color,thickness)
+
+image = np.ones((d, d, 3), np.uint8) * 255
+cv2.namedWindow('image')
+cv2.setMouseCallback('image', draw)
+cv2.createTrackbar('R', 'image', 0, 1, fill)
+while(1):
+    cv2.imshow('image', image)
+    k = cv2.waitKey(1) & 0xFF
+    g = cv2.getTrackbarPos('R', 'image')
+    if g == 0:
+        thickness = -1
+    else:
+        thickness = 2        
+    if k == 27:
+        break   
+
+cv2.destroyAllWindows()
+
+
+
+
 
 print('------------------------------------------------------------')	#60個
 

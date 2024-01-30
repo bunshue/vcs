@@ -1,4 +1,18 @@
+# PIL 集合 new
+
 import sys
+import matplotlib.pyplot as plt
+import numpy as np
+import math
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+
+print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 from PIL import ImageColor
@@ -24,6 +38,7 @@ print(ImageColor.getcolor("rgb(0, 0, 255)", "RGBA"))
 print(ImageColor.getcolor("Blue", "RGBA"))
 
 print('------------------------------------------------------------')	#60個
+
 image = Image.open(filename)       # 建立Pillow物件
 print("列出物件檔名 : ", image.filename)
 print("列出物件副檔名 : ", image.format)
@@ -36,19 +51,45 @@ print("高度 = ", height)
 #print(image.mode)
 #print(image.size)
 
-#另存新檔
-image.save("tmp_pic_01.png")
-#image.show()
+plt.imshow(image)
+plt.show()
+
+
+image = Image.open(filename)
+print('圖檔格式: ', image.format)
+print('圖檔的色彩模式: ', image.mode)
+print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ',image.size)
+print('圖片的寬度，單位像素(pixels): ',image.width)
+print('圖片的高度，單位像素(pixels): ',image.height)
+
+image = Image.open(filename)
+print('圖檔格式: ', image.format)
+print('圖檔的色彩模式: ', image.mode)
+print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
+print('圖片的寬度，單位像素(pixels): ', image.width)
+print('圖片的高度，單位像素(pixels): ', image.height)
+
+print('------------------------------------------------------------')	#60個
+
+
+image = Image.open(filename)
+print(image.format)
+print(image.mode)
+print(image.width)
+print(image.height)
+print(image.size)
 
 print('------------------------------------------------------------')	#60個
 
 image = Image.new("RGB", (300, 180), "aqua")  # 建立aqua顏色影像
-image.save("tmp_pic02.jpg")
+plt.imshow(image)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 image = Image.new("RGBA", (300, 180))     # 建立完全透明影像
-image.save("tmp_pic03.png")
+plt.imshow(image)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -56,10 +97,13 @@ image = Image.open(filename)           # 建立Pillow物件
 width, height = image.size
 
 newPict1 = image.resize((width*2, height))   # 寬度是2倍
-newPict1.save("tmp_pic04.jpg")
+plt.imshow(newPict1)
+plt.show()
 
 newPict2 = image.resize((width, height*2))   # 高度是2倍
-newPict2.save("tmp_pic05.jpg")
+plt.imshow(newPict2)
+plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -201,8 +245,12 @@ drawObj = ImageDraw.Draw(newImage)
 
 strText = 'Welcome to the United States'        # 設定欲列印英文字串
 drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
+
 # 使用古老英文字型, 字型大小是36
-fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
+# fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36) 找不到字形
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+fontInfo = ImageFont.truetype(font_filename, 36)
+
 drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
 # 處理中文字體
 strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
@@ -224,8 +272,12 @@ drawObj = ImageDraw.Draw(newImage)
 
 strText = 'Welcome to the United States'        # 設定欲列印英文字串
 drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
+
 # 使用古老英文字型, 字型大小是36
-fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
+#fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+fontInfo = ImageFont.truetype(font_filename, 36)
+
 drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
 # 使用Microsoft所提供的新細明體中文字型處理中文字體
 strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
@@ -325,127 +377,115 @@ with Image.open(filename) as image:
     image2.save( "tmp_pic33h.jpg")
 
 print('------------------------------------------------------------')	#60個
-print("------------------------------------------------------------")  # 60個
-
-'''
-from PIL import Image, ImageDraw
-
-im = Image.new("RGB", (400,300), '#00FF00')
-draw=ImageDraw.Draw(im)
-draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
-#im.show()
-
-print("------------------------------------------------------------")  # 60個
 
 from PIL import Image, ImageDraw
 
-im = Image.new("RGB", (400,300))
-draw=ImageDraw.Draw(im)
+image = Image.new("RGB", (400,300), '#00FF00')
+draw=ImageDraw.Draw(image)
 draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
-#im.show()
+#image.show()
 
 print("------------------------------------------------------------")  # 60個
 
-im = Image.open(filename)
-pic=im.convert("1")
+from PIL import Image, ImageDraw
+
+image = Image.new("RGB", (400,300))
+draw=ImageDraw.Draw(image)
+draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
+#image.show()
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)
+pic=image.convert("1")
 #pic.show()
 
 print("------------------------------------------------------------")  # 60個
 
-with Image.open(filename) as im:
-    print(im.size)
+with Image.open(filename) as image:
+    print(image.size)
     x = 50
     y = 50
     x1 = 250
     y1 = 350
-    new_im = im.crop((x, y, x1, y1))
-    print(new_im.size)
-    new_im.save("tmp_pic_crop.jpg")
+    image_new = image.crop((x, y, x1, y1))
+    print(image_new.size)
+    image_new.save("tmp_pic_crop.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image,ImageEnhance
 
-with Image.open(filename) as im:
-    new_im = ImageEnhance.Brightness(im).enhance(2.5)
-    new_im.save("tmp_pic_brightness.jpg")
+with Image.open(filename) as image:
+    image_new = ImageEnhance.Brightness(image).enhance(2.5)
+    image_new.save("tmp_pic_brightness.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image,ImageFilter
 
-im=Image.open(filename)
-new=im.filter(ImageFilter.EDGE_ENHANCE)
-#new.show()
+image = Image.open(filename)
+image_new = image.filter(ImageFilter.EDGE_ENHANCE)
+#image_new.show()
 
 print("------------------------------------------------------------")  # 60個
 
-im = Image.open(filename)
-print('圖檔格式: ',im.format)
-print('圖檔的色彩模式: ',im.mode)
-print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ',im.size)
-print('圖片的寬度，單位像素(pixels): ',im.width)
-print('圖片的高度，單位像素(pixels): ',im.height)
-
-print("------------------------------------------------------------")  # 60個
-
-with Image.open(filename) as im:
-    print(im.size)
+with Image.open(filename) as image:
+    print(image.size)
     w=100
-    r = w/im.size[0]
-    h = int(im.size[1]*r) #依縮放比例計算高度
-    new_im = im.resize((w, h))
-    print(new_im.size)
-    new_im.save("tmp_pic_view_resize.jpg" )
+    r = w/image.size[0]
+    h = int(image.size[1]*r) #依縮放比例計算高度
+    image_new = image.resize((w, h))
+    print(image_new.size)
+    image_new.save("tmp_pic_view_resize.jpg" )
 
 print("------------------------------------------------------------")  # 60個
 
-with Image.open(filename) as im:
-    new_im = im.rotate(180)
-    new_im.save("tmp_pic_rotate180.jpg")
+with Image.open(filename) as image:
+    image_new = image.rotate(180)
+    image_new.save("tmp_pic_rotate180.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-with Image.open(filename) as im:
-    new_im = im.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
-    new_im.save("tmp_pic_rotate111.jpg")
+with Image.open(filename) as image:
+    image_new = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
+    image_new.save("tmp_pic_rotate111.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-with Image.open(filename) as im:
-    new_im = im.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
-    new_im.save("tmp_pic_rotate000.jpg")
+with Image.open(filename) as image:
+    image_new = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
+    image_new.save("tmp_pic_rotate000.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-with Image.open(filename) as im:
-    new_im = im.transpose(Image.ROTATE_90)
-    new_im.save("tmp_pic_transpose90.jpg")
-    new_im = im.transpose(Image.FLIP_LEFT_RIGHT)
-    new_im.save("tmp_pic_transposeLR.jpg")
+with Image.open(filename) as image:
+    image_new = image.transpose(Image.ROTATE_90)
+    image_new.save("tmp_pic_transpose90.jpg")
+    image_new = image.transpose(Image.FLIP_LEFT_RIGHT)
+    image_new.save("tmp_pic_transposeLR.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-im = Image.open(filename)
-im.save("tmp_pic_quality95.jpg", quality=95 )
-im.close()
+image = Image.open(filename)
+image.save("tmp_pic_quality95.jpg", quality=95 )
+image.close()
 
 print("------------------------------------------------------------")  # 60個
 
-im = Image.open(filename)
-im.save("tmp_pic_quality_default.jpg")
-im.close()
+image = Image.open(filename)
+image.save("tmp_pic_quality_default.jpg")
+image.close()
 
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image,ImageDraw,ImageFont
-im=Image.open(filename)
+image=Image.open(filename)
 imfont=ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf",120)
-draw=ImageDraw.Draw(im)
+draw=ImageDraw.Draw(image)
 draw.text((50,50),"牡丹亭",font=imfont,fill=(0,255,255,255))
-im.show()
-'''
-print("------------------------------------------------------------")  # 60個
+#image.show()
+
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -454,23 +494,23 @@ from PIL import Image
 
 import matplotlib.pyplot as plt
 
-img = Image.open(filename)
+image = Image.open(filename)
 
-plt.imshow(img)
-
-plt.show()
-
-w,h = img.size
-
-img1 = img.resize((w*2,h), Image.ANTIALIAS)
-
-plt.imshow(img1)
+plt.imshow(image)
 
 plt.show()
 
-img2 = img.convert('1')
+w,h = image.size
 
-plt.imshow(img2)
+image1 = image.resize((w*2,h), Image.LANCZOS)
+
+plt.imshow(image1)
+
+plt.show()
+
+image2 = image.convert('1')
+
+plt.imshow(image2)
 
 plt.show()
 
@@ -484,13 +524,13 @@ import matplotlib.pyplot as plt
 
 #繪直線
 
-img = Image.new("RGB", (400,300), "lightgray")
+image = Image.new("RGB", (400,300), "lightgray")
 
-drawimg = ImageDraw.Draw(img)
+draw_image = ImageDraw.Draw(image)
 
-drawimg.line([40,50,360,280], fill="blue", width=3)
+draw_image.line([40,50,360,280], fill="blue", width=3)
 
-plt.imshow(img)
+plt.imshow(image)
 
 plt.show()
 
@@ -499,13 +539,13 @@ print('------------------------------------------------------------')	#60個
 
 #繪矩形
 
-img = Image.new("RGB", (400,300), "lightgray")
+image = Image.new("RGB", (400,300), "lightgray")
 
-drawimg = ImageDraw.Draw(img)
+draw_image = ImageDraw.Draw(image)
 
-drawimg.rectangle((100,80,300,240), fill="yellow", outline="black")
+draw_image.rectangle((100,80,300,240), fill="yellow", outline="black")
 
-plt.imshow(img)
+plt.imshow(image)
 
 plt.show()
 
@@ -513,13 +553,13 @@ print('------------------------------------------------------------')	#60個
 
 #繪點
 
-img = Image.new("RGB", (400,300), "lightgray")
+image = Image.new("RGB", (400,300), "lightgray")
 
-drawimg = ImageDraw.Draw(img)
+draw_image = ImageDraw.Draw(image)
 
-drawimg.point([(100,100), (100,101), (100,102)], fill='red')
+draw_image.point([(100,100), (100,101), (100,102)], fill='red')
 
-plt.imshow(img)
+plt.imshow(image)
 
 plt.show()
 
@@ -527,13 +567,13 @@ print('------------------------------------------------------------')	#60個
 
 #繪圓或橢圓
 
-img = Image.new("RGB", (400,300), "lightgray")
+image = Image.new("RGB", (400,300), "lightgray")
 
-drawimg = ImageDraw.Draw(img)
+draw_image = ImageDraw.Draw(image)
 
-drawimg.ellipse((50,50,350,250), fill="purple", outline="green")
+draw_image.ellipse((50,50,350,250), fill="purple", outline="green")
 
-plt.imshow(img)
+plt.imshow(image)
 
 plt.show()
 
@@ -541,13 +581,13 @@ print('------------------------------------------------------------')	#60個
 
 #繪多邊形
 
-img = Image.new("RGB", (400,300), "lightgray")
+image = Image.new("RGB", (400,300), "lightgray")
 
-drawimg = ImageDraw.Draw(img)
+draw_image = ImageDraw.Draw(image)
 
-drawimg.polygon([(200,40),(60,250),(320,250)], fill="brown", outline="red")
+draw_image.polygon([(200,40),(60,250),(320,250)], fill="brown", outline="red")
 
-plt.imshow(img)
+plt.imshow(image)
 
 plt.show()
 
@@ -558,17 +598,18 @@ print('------------------------------------------------------------')	#60個
 
 from PIL import ImageFont
 
-img = Image.new("RGB", (400,300), "lightgray")
+image = Image.new("RGB", (400,300), "lightgray")
 
-drawimg = ImageDraw.Draw(img)
+draw_image = ImageDraw.Draw(image)
 
-drawimg.text((150,80), "font demo", fill="red")  #繪英文文字
+draw_image.text((150,80), "font demo", fill="red")  #繪英文文字
 
-myfont = ImageFont.truetype("msyh.ttc",24)
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+myfont = ImageFont.truetype(font_filename, 24)
 
-drawimg.text((120,150),"雅黑字體示範", fill="blue", font=myfont)  #繪中文 
+draw_image.text((120,150),"雅黑字體示範", fill="blue", font=myfont)  #繪中文 
 
-plt.imshow(img)
+plt.imshow(image)
 
 plt.show()
 
@@ -578,17 +619,17 @@ from PIL import Image, ImageDraw, ImageFont
 
 import matplotlib.pyplot as plt
 
-img = Image.new("RGB", (400,300), "lightgray")
+image = Image.new("RGB", (400,300), "lightgray")
 
-drawimg = ImageDraw.Draw(img)
+draw_image = ImageDraw.Draw(image)
 
-drawimg.text((120,80), "English Demo", fill="red")  #繪製英文文字
+draw_image.text((120,80), "English Demo", fill="red")  #繪製英文文字
 
 myfont = ImageFont.truetype(font_filename, 24)
 
-drawimg.text((120,150), "中文字型示範", fill="blue", font=myfont) #繪製中文文字
+draw_image.text((120,150), "中文字型示範", fill="blue", font=myfont) #繪製中文文字
 
-plt.imshow(img)
+plt.imshow(image)
 
 plt.show()
 
@@ -600,31 +641,31 @@ from PIL import Image, ImageDraw, ImageFont
 
 import matplotlib.pyplot as plt
 
-img = Image.new("RGB", (300,400), "lightgray")
+image = Image.new("RGB", (300,400), "lightgray")
 
-drawimg = ImageDraw.Draw(img)
+draw_image = ImageDraw.Draw(image)
 
 #繪圓
-drawimg.ellipse((50,50,250,250), width=3, outline="gold")# 臉
+draw_image.ellipse((50,50,250,250), width=3, outline="gold")# 臉
 
 #繪多邊形
-drawimg.polygon([(100,90), (120,130), (80,130)], fill="brown", outline="red") #左眼精
-drawimg.polygon([(200,90), (220,130), (180,130)],   fill="brown", outline="red")#右眼精
+draw_image.polygon([(100,90), (120,130), (80,130)], fill="brown", outline="red") #左眼精
+draw_image.polygon([(200,90), (220,130), (180,130)],   fill="brown", outline="red")#右眼精
 
 #繪矩形
-drawimg.rectangle((140,140,160,180),    fill="blue", outline="black") #鼻子
+draw_image.rectangle((140,140,160,180),    fill="blue", outline="black") #鼻子
 
 #繪橢圓
-drawimg.ellipse((100,200,200,220), fill="red") #嘴巴   
+draw_image.ellipse((100,200,200,220), fill="red") #嘴巴   
 
 #繪文字
-drawimg.text((130,280), "ABCDEFG", fill="orange")  #英文字
+draw_image.text((130,280), "ABCDEFG", fill="orange")  #英文字
 
 myfont = ImageFont.truetype(font_filename, 16)
 
-drawimg.text((110,320), "測試使用中文字", fill="red", font=myfont) #中文字 
+draw_image.text((110,320), "測試使用中文字", fill="red", font=myfont) #中文字 
 
-plt.imshow(img)
+plt.imshow(image)
 
 plt.show()
 
@@ -641,10 +682,10 @@ if os.path.exists(source):
             filename, ext = os.path.splitext(file)
             filename = filename + "_s"
             targetfile = filename + ext
-            im = Image.open(os.path.join(source, file))
-            thumbnail = im.resize((320,200))
+            image = Image.open(os.path.join(source, file))
+            thumbnail = image.resize((320,200))
             thumbnail.save(os.path.join(target, targetfile))
-            im.close()
+            image.close()
             thumbnail.close()
             print("{}-->{}".format(file, targetfile))
     else:
@@ -683,10 +724,10 @@ if os.path.exists(source):
             filename, ext = os.path.splitext(file)
             filename = filename + "_s"
             targetfile = filename + ext
-            im = Image.open(os.path.join(source, file))
-            thumbnail = im.resize((320,200))
+            image = Image.open(os.path.join(source, file))
+            thumbnail = image.resize((320,200))
             thumbnail.save(os.path.join(target, targetfile))
-            im.close()
+            image.close()
             thumbnail.close()
             print("{}-->{}".format(file, targetfile))
 #以下的程式碼用來建立HTML索引檔的表格內容            
@@ -736,10 +777,10 @@ if os.path.exists(source):
             filename, ext = os.path.splitext(file)
             filename = filename + "_s"
             targetfile = filename + ext
-            im = Image.open(os.path.join(source, file))
-            thumbnail = im.resize((320,200))
+            image = Image.open(os.path.join(source, file))
+            thumbnail = image.resize((320,200))
             thumbnail.save(os.path.join(target, targetfile))
-            im.close()
+            image.close()
             thumbnail.close()
             print("{}-->{}".format(file, targetfile))
 #以下的程式碼用來建立HTML索引檔的表格內容         
@@ -760,10 +801,10 @@ with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
 print("------------------------------------------------------------")  # 60個
 
 def blue_to_red(image_path):
-    img = Image.open(image_path)
-    r, g, b = img.split() # 分離三個通道
-    img = Image.merge("RGB",(b,g,r))# 將藍色通道和通道互換
-    img.show()
+    image = Image.open(image_path)
+    r, g, b = image.split() # 分離三個通道
+    image = Image.merge("RGB",(b,g,r))# 將藍色通道和通道互換
+    image.show()
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 #blue_to_red(filename)
@@ -772,18 +813,18 @@ print('------------------------------------------------------------')	#60個
 
 """
 def blue_to_red2(image_path):
-    img = Image.open(image_path)
-    pixels = img.load()
+    image = Image.open(image_path)
+    pixels = image.load()
 
-    for y in range(img.height):
-        for x in range(img.width):
+    for y in range(image.height):
+        for x in range(image.width):
             r, g, b = pixels[x, y]
 
             #若該點的藍色成分明顯超過紅色及綠色,我們便將之視為藍色
             if b > r and b > g:
                 #將藍色分轉為紅色
                 pixels[x, y] = (b, g, r)
-    img.show()
+    image.show()
     
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 blue_to_red2(filename)
@@ -826,31 +867,22 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.open(filename)
-print('圖檔格式: ', image.format)
-print('圖檔的色彩模式: ', image.mode)
-print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
-print('圖片的寬度，單位像素(pixels): ', image.width)
-print('圖片的高度，單位像素(pixels): ', image.height)
-
-print('------------------------------------------------------------')	#60個
-
 with Image.open(filename) as image:
     print(image.size)
     x = 50
     y = 50
     w = 200
     h = 200
-    new_image = image.crop((x, y, w, h))
-    print(new_image.size)
-    new_image.save('tmp_pic_crop.jpg')
+    image_new = image.crop((x, y, w, h))
+    print(image_new.size)
+    image_new.save('tmp_pic_crop.jpg')
 
 print('------------------------------------------------------------')	#60個
 
 from PIL import Image, ImageEnhance
 with Image.open(filename) as image:
-   new_image = ImageEnhance.Brightness(image).enhance(2.5)
-   new_image.save('tmp_pic_brightness.jpg')
+   image_new = ImageEnhance.Brightness(image).enhance(2.5)
+   image_new.save('tmp_pic_brightness.jpg')
 
 print('------------------------------------------------------------')	#60個
 
@@ -880,27 +912,27 @@ with Image.open(filename) as image:
     w = 200
     r = w/image.size[0]
     h = int(image.size[1]*r) #依縮放比例計算高度
-    new_image = image.resize((w, h))
-    print(new_image.size)
-    new_image.save('tmp_pic_resize.jpg')
+    image_new = image.resize((w, h))
+    print(image_new.size)
+    image_new.save('tmp_pic_resize.jpg')
 
 print('------------------------------------------------------------')	#60個
 
 with Image.open(filename) as image:
-    new_image = image.rotate(180)
-    new_image.save('tmp_pic_rotate.jpg')
+    image_new = image.rotate(180)
+    image_new.save('tmp_pic_rotate.jpg')
 
 print('------------------------------------------------------------')	#60個
 
 with Image.open(filename) as image:
-    new_image = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
-    new_image.save('tmp_pic_rotate30.jpg')
+    image_new = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
+    image_new.save('tmp_pic_rotate30.jpg')
 
 print('------------------------------------------------------------')	#60個
 
 with Image.open(filename) as image:
-    new_image = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
-    new_image.save('tmp_pic_rotate30_zero.jpg')
+    image_new = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
+    image_new.save('tmp_pic_rotate30_zero.jpg')
 
 print('------------------------------------------------------------')	#60個
 
@@ -927,91 +959,82 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 with Image.open(filename) as image:
-    new_image = image.transpose(Image.ROTATE_90)
-    new_image.save('tmp_pic_rotate_90.jpg')
-    new_image = image.transpose(Image.FLIP_LEFT_RIGHT)
-    new_image.save('tmp_pic_flip.jpg')
+    image_new = image.transpose(Image.ROTATE_90)
+    image_new.save('tmp_pic_rotate_90.jpg')
+    image_new = image.transpose(Image.FLIP_LEFT_RIGHT)
+    image_new.save('tmp_pic_flip.jpg')
 
 print('------------------------------------------------------------')	#60個
 
-im = Image.open(filename)
-print(im.format)
-print(im.mode)
-print(im.width)
-print(im.height)
-print(im.size)
-
-print("------------------------------------------------------------")  # 60個
-
 print('保持圖片原始大小之旋轉')
-with Image.open(filename) as im:
-  new_im = im.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
-  new_im.save("tmp_pic_rotate60a.jpg")
+with Image.open(filename) as image:
+  image_new = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
+  image_new.save("tmp_pic_rotate60a.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
 print('保持圖片內容大小之旋轉')
-with Image.open(filename) as im:
-  new_im = im.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
-  new_im.save("tmp_pic_rotate60b.jpg")
+with Image.open(filename) as image:
+  image_new = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
+  image_new.save("tmp_pic_rotate60b.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-with Image.open(filename) as im:
-    print('原圖片的尺寸大小:',im.size)
+with Image.open(filename) as image:
+    print('原圖片的尺寸大小:',image.size)
     x = 50
     y = 50
     x1 = 150
     y1 = 200
-    new_im = im.crop((x, y, x1, y1))
-    print('圖片經裁切後的尺寸大小:', new_im.size)
-    new_im.save("tmp_pic_crop.jpg")
+    image_new = image.crop((x, y, x1, y1))
+    print('圖片經裁切後的尺寸大小:', image_new.size)
+    image_new.save("tmp_pic_crop.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-with Image.open(filename) as im:
-    print('原圖片的尺寸大小:',im.size)
+with Image.open(filename) as image:
+    print('原圖片的尺寸大小:',image.size)
     w=100
-    r = w/im.size[0]
-    h = int(im.size[1]*r)
-    new_im = im.resize((w, h))
-    print('圖片經縮放後的尺寸大小:',new_im.size)
-    new_im.save("tmp_pic_resize.jpg" )
+    r = w/image.size[0]
+    h = int(image.size[1]*r)
+    image_new = image.resize((w, h))
+    print('圖片經縮放後的尺寸大小:',image_new.size)
+    image_new.save("tmp_pic_resize.jpg" )
 
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image,ImageEnhance
 
-with Image.open(filename) as im:
-    new_im = ImageEnhance.Contrast(im).enhance(0.3)
-    new_im.save("tmp_pic_contrast.jpg") 
+with Image.open(filename) as image:
+    image_new = ImageEnhance.Contrast(image).enhance(0.3)
+    image_new.save("tmp_pic_contrast.jpg") 
 
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image,ImageEnhance
 
-with Image.open(filename) as im:
-    new_im = im.transpose(Image.FLIP_LEFT_RIGHT)
-    new_im.save("tmp_pic_transpose1.jpg")
-    new_im = im.transpose(Image.FLIP_TOP_BOTTOM)
-    new_im.save("tmp_pic_transpose2.jpg")
-    new_im = im.transpose(Image.ROTATE_90)
-    new_im.save("tmp_pic_transpose3.jpg")
-    new_im = im.transpose(Image.ROTATE_180)
-    new_im.save("tmp_pic_transpose4.jpg")
-    new_im = im.transpose(Image.ROTATE_270)
-    new_im.save("tmp_pic_transpose5.jpg")
-    new_im = im.transpose(Image.TRANSPOSE)
-    new_im.save("tmp_pic_transpose6.jpg")
-    new_im = im.transpose(Image.TRANSVERSE)
-    new_im.save("tmp_pic_transpose7.jpg")
+with Image.open(filename) as image:
+    image_new = image.transpose(Image.FLIP_LEFT_RIGHT)
+    image_new.save("tmp_pic_transpose1.jpg")
+    image_new = image.transpose(Image.FLIP_TOP_BOTTOM)
+    image_new.save("tmp_pic_transpose2.jpg")
+    image_new = image.transpose(Image.ROTATE_90)
+    image_new.save("tmp_pic_transpose3.jpg")
+    image_new = image.transpose(Image.ROTATE_180)
+    image_new.save("tmp_pic_transpose4.jpg")
+    image_new = image.transpose(Image.ROTATE_270)
+    image_new.save("tmp_pic_transpose5.jpg")
+    image_new = image.transpose(Image.TRANSPOSE)
+    image_new.save("tmp_pic_transpose6.jpg")
+    image_new = image.transpose(Image.TRANSVERSE)
+    image_new.save("tmp_pic_transpose7.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image,ImageFilter
-im=Image.open(filename)
-new=im.filter(ImageFilter.EDGE_ENHANCE)
-#new.show()
+image=Image.open(filename)
+image_new=image.filter(ImageFilter.EDGE_ENHANCE)
+#image_new.show()
 
 print("------------------------------------------------------------")  # 60個
 '''
@@ -1044,6 +1067,39 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
+
+"""
+from PIL import Image
+import pytesseract
+import time
+
+carDict = {}
+myPath = "foldername"
+while True:
+    carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
+    if carPlate == 'Q' or carPlate == 'q':
+        break
+    carPlate = myPath + carPlate
+    keyText = pytesseract.image_to_string(Image.open(carPlate))    
+    if keyText in carDict:
+        exitTime = time.asctime()
+        print("車輛出場時間 : ", keyText, ":", exitTime)
+        exitSecond = time.time()
+        dxSecond = exitSecond - carDict[keyText]
+        hour = dxSecond % 3600          # 由餘數判斷是否進位
+        hours = dxSecond // 3600        # 計算小時數
+        if hour != 0:
+            hours += 1
+        print("停車費用 : ", hours * 60, " 元 ")
+        del carDict[keyText]
+    else:
+        entryTime = time.asctime()
+        print("車輛入場時間 : ", keyText, ":", entryTime)
+        entrySecond = time.time()
+        carDict[keyText] = entrySecond
+"""
+print("------------------------------------------------------------")  # 60個
+
 import pytesseract
 
 text  = pytesseract.image_to_string(Image.open('data/data17_26.jpg'),
@@ -1072,11 +1128,11 @@ def batch_resize_images(input_folder, output_folder, size=(300, 300)):
     for filename in os.listdir(input_folder):
         if filename.endswith(('.jpg', '.png')):
             # 打開影像
-            img = Image.open(os.path.join(input_folder, filename))
+            image = Image.open(os.path.join(input_folder, filename))
             # 調整影像尺寸
-            img = img.resize(size, Image.ANTIALIAS)
+            image = image.resize(size, Image.ANTIALIAS)
             # 保存調整尺寸後的影像到輸出資料夾
-            img.save(os.path.join(output_folder, filename))
+            image.save(os.path.join(output_folder, filename))
 
 # 假設有一個包含原始圖片的資料夾 'input_images' 和
 # 一個用於存放調整後圖片的資料夾 'output_images'
@@ -1095,9 +1151,9 @@ def batch_convert_images(directory, target_format='.jpg'):
     for filename in os.listdir(directory):
         if filename.endswith('.png'):
             path = os.path.join(directory, filename)
-            img = Image.open(path)
-            rgb_im = img.convert('RGB')  # 轉換為RGB模式以便保存為JPEG
-            rgb_im.save(path.replace('.png', target_format), quality=95)
+            image = Image.open(path)
+            image_rgb = image.convert('RGB')  # 轉換為RGB模式以便保存為JPEG
+            image_rgb.save(path.replace('.png', target_format), quality=95)
 
 # 呼叫批次更改函數
 batch_convert_images('images_directory')
@@ -1108,18 +1164,18 @@ print("------------------------------------------------------------")  # 60個
 """
 from PIL import Image, ImageDraw, ImageFont
 
-def generate_product_image(product_img_path, background_img_path, promo_text):
+def generate_product_image(product_image_path, background_image_path, promo_text):
     # 加載產品和背景影像
-    product_img = Image.open(product_img_path).resize((200, 200))
-    background_img = Image.open(background_img_path)
+    product_image = Image.open(product_image_path).resize((200, 200))
+    background_image = Image.open(background_image_path)
     # 在背景影像上放置產品影像
-    background_img.paste(product_img, (50, 50), product_img)
+    background_image.paste(product_image, (50, 50), product_image)
     # 在影像上添加促銷文字
-    draw = ImageDraw.Draw(background_img)
+    draw = ImageDraw.Draw(background_image)
     font = ImageFont.truetype("arial.ttf", size=45)
     draw.text((50, 260), promo_text, font=font, fill="white")
     # 保存或返回影像
-    background_img.save('output_promo_image.jpg')
+    background_image.save('output_promo_image.jpg')
 
 generate_product_image('product.png', 'background.jpg', '特價促銷!')
 """
@@ -1204,42 +1260,21 @@ newImage.save("tmp_pic_6.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-from PIL import Image
-import pytesseract
-import time
-
-carDict = {}
-myPath = "foldername"
-while True:
-    carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
-    if carPlate == 'Q' or carPlate == 'q':
-        break
-    carPlate = myPath + carPlate
-    keyText = pytesseract.image_to_string(Image.open(carPlate))    
-    if keyText in carDict:
-        exitTime = time.asctime()
-        print("車輛出場時間 : ", keyText, ":", exitTime)
-        exitSecond = time.time()
-        dxSecond = exitSecond - carDict[keyText]
-        hour = dxSecond % 3600          # 由餘數判斷是否進位
-        hours = dxSecond // 3600        # 計算小時數
-        if hour != 0:
-            hours += 1
-        print("停車費用 : ", hours * 60, " 元 ")
-        del carDict[keyText]
-    else:
-        entryTime = time.asctime()
-        print("車輛入場時間 : ", keyText, ":", entryTime)
-        entrySecond = time.time()
-        carDict[keyText] = entrySecond
-"""
-print("------------------------------------------------------------")  # 60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+
+"""
+
+#另存新檔
+image.save("tmp_pic_01.png")
+#image.show()
+
+
+
+
+
+"""

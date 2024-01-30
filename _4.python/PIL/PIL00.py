@@ -26,6 +26,13 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print('------------------------------------------------------------')	#60個
 
+import PIL
+print('查詢 PIL 版本')
+print(PIL.__version__)
+
+print('------------------------------------------------------------')	#60個
+
+
 print('顯示原圖')
 
 image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式

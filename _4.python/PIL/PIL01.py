@@ -44,7 +44,7 @@ print('原圖大小 W =', W, ', H =', H)
 print('寬度變2倍, 高度變一半')
 W2, H2 = W * 2, H // 2
 print('把原圖轉成', W2, 'X', H2, '大小')
-image2 = image1.resize((W2, H2), Image.ANTIALIAS)
+image2 = image1.resize((W2, H2), Image.LANCZOS)#ANTIALIAS
 
 plt.imshow(image2)
 plt.show()

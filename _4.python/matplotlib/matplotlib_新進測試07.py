@@ -127,17 +127,6 @@ print("------------------------------------------------------------")  # 60個
 
 plt.rcParams['font.size']=12
 
-x = [26,12,21,25,35]
-labels = '高雄','花蓮','台中','澎湖','宜蘭'
-explode = (0.2, 0, 0, 0,0)
-plt.pie(x,labels=labels, explode=explode, autopct='%.1f%%', shadow=True)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.rcParams['font.size']=12
-
 #折線圖
 def lineChart(s,x):
     plt.xlabel('城市名稱')
