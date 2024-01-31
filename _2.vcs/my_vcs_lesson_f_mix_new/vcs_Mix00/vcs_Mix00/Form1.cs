@@ -630,15 +630,128 @@ namespace vcs_Mix00
                 richTextBox1.Text += "\nlen = " + data_to_write.Length.ToString() + "\n";
             }
 
-            //string text = "abcdefg";
-            StringBuilder text = "abcdefg";
-            richTextBox1.Text += "len = " + text.Length.ToString() + "\n";
-            text[3] = 'c';
-
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            /*
+            //StringBuilder
+
+            //建立StringBuilder物件
+            StringBuilder text = new StringBuilder();
+
+            richTextBox1.Text += "預設容量：" + text.Capacity.ToString() + "\n";
+
+            //使用 Append()方法附加字串
+            text.Append("ABCDEFGHIJ");
+            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
+            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
+
+            //再增加一筆資料 容量會長大
+            text.Append("ABCDEFGHIJ");
+            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
+            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
+
+            richTextBox1.Text += "在字串尾端加入換行字元後\n";
+            text.AppendLine("\n");
+            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
+            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
+
+            richTextBox1.Text += "在字串尾端加入另一個字串後\n";
+            text.AppendLine("It is a wonderful English proverb.");
+            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
+            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
+
+            richTextBox1.Text += "目前字串：" + text + "\n";
+
+            richTextBox1.Text += "改變內容\n";
+            for (int i = 0; i < 3; i++)
+            {
+                text[i] = 'X';
+            }
+
+            richTextBox1.Text += "變更後字串：" + text + "\n";
+
+
+            //Remove()方法, 只移除一次
+            string dddd = "EFG";    //欲移除字串
+            //取得欲刪除字串的索引編號
+            int index = text.ToString().IndexOf(dddd);
+            if (index >= 0)
+                text.Remove(index, dddd.Length);
+            richTextBox1.Text += "變更後字串：" + text + "\n";
+            */
+
+            int i;
+            //string camera_serial_data = "EC041302870012 @";
+            string camera_serial_data = "ABCDEFGABCDEFGAB";
+            int len = camera_serial_data.Length;
+            //richTextBox1.Text += "camera_serial_data_len = " + len.ToString() + "\n";
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += ((int)camera_serial_data[i]).ToString("X2") + " ";
+            }
+            richTextBox1.Text += "\n";
+
+
+            //檢查英數字元的正確性
+            bool flag_serial_data_wrong = false;
+            for (i = 0; i < len; i++)
+            {
+                //richTextBox1.Text += ((int)camera_serial_data[i]).ToString("X2") + " ";
+                var kk = camera_serial_data[i];
+
+                if (((kk >= 'A') && (kk <= 'Z')) || ((kk >= 'a') && (kk <= 'z')) || ((kk >= '0') && (kk <= '9')))
+                {
+                    //richTextBox1.Text += "O";
+                    flag_serial_data_wrong = false;
+                }
+                else
+                {
+                    //richTextBox1.Text += "X";
+                    flag_serial_data_wrong = true;
+                    break;
+                }
+            }
+            if (flag_serial_data_wrong == true)
+            {
+                richTextBox1.Text += "有裁剪\n";
+                int cut_length = i;
+                //richTextBox1.Text += cut_length.ToString() + "\n";
+                camera_serial_data = camera_serial_data.Substring(0, cut_length);
+            }
+            else
+            {
+                richTextBox1.Text += "無裁剪\n";
+            }
+
+            len = camera_serial_data.Length;
+            //richTextBox1.Text += "camera_serial_data_len = " + len.ToString() + "\n";
+            richTextBox1.Text += "序號資料 : " + camera_serial_data + "\n";
+
+
+
+            string camera_serial_data2 = string.Empty;
+            if (camera_serial_data.Length > 16)
+            {
+                richTextBox1.Text += "太長\n";
+                camera_serial_data2 = camera_serial_data.Substring(0, 16);
+            }
+            else if (camera_serial_data.Length < 16)
+            {
+                richTextBox1.Text += "太短\n";
+                camera_serial_data2 = camera_serial_data.PadRight(16, 'W'); //向長度小於16的字符串末尾添加空格，補足16個字符
+            }
+            else
+            {
+                richTextBox1.Text += "剛好\n";
+                camera_serial_data2 = camera_serial_data;
+
+            }
+            richTextBox1.Text += "len of camera_serial_data2 = " + camera_serial_data2.Length.ToString() + "\n";
+            richTextBox1.Text += camera_serial_data2 + "\n";
+
+
         }
 
         public void StatisticsWords(string path)
@@ -1127,36 +1240,6 @@ namespace vcs_Mix00
         private void button24_Click(object sender, EventArgs e)
         {
             //tmp1
-            //建立StringBuilder物件
-            StringBuilder strb = new StringBuilder();
-            Console.WriteLine("預設容量：{0}", strb.Capacity);
-
-            //使用 Append()方法附加字串
-            strb.Append(
-                "Never put off until tomorrow what you can do today.");
-            Console.WriteLine("字串長度：{0}，總容量：{1}",
-                strb.Length, strb.Capacity);
-            strb.AppendLine("\n");
-            Console.WriteLine("在字串尾端加入換行字元後");
-            Console.WriteLine("字串長度：{0}，總容量：{1}",
-            strb.Length, strb.Capacity);
-
-            strb.AppendLine(
-                "It is a wonderful English proverb.");
-            Console.WriteLine("在字串尾端加入另一個字串後: ");
-            Console.WriteLine("字串長度：{0}，總容量：{1}",
-            strb.Length, strb.Capacity);
-
-            Console.WriteLine("原來字串 -- {0}", strb);
-
-            //Remove()方法
-            string text = "English";//欲移除字串
-            //取得欲刪除字串的索引編號
-            int index = strb.ToString().IndexOf(text);
-            if (index >= 0)
-                strb.Remove(index, text.Length);
-            Console.WriteLine("變更後字串 -- {0}", strb);
-            Console.WriteLine("文件不存在！");
 
 
             //** 日期時間輸出

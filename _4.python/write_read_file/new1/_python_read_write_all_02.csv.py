@@ -1,6 +1,8 @@
 import sys
 
+
 print("------------------------------------------------------------")  # 60個
+
 
 import csv
 
@@ -142,15 +144,6 @@ print("最低溫 : ", lowTemps)
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch22\ch22_12.py
-
-# ch22_12.py
 import csv
 import matplotlib.pyplot as plt
 
@@ -168,12 +161,8 @@ plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch22\ch22_14.py
-
-# ch22_14.py
 import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -195,13 +184,8 @@ plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch22\ch22_15.py
-
-# ch22_15.py
 import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -224,13 +208,8 @@ plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch22\ch22_16.py
-
-# ch22_16.py
 import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -253,13 +232,8 @@ plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch22\ch22_17.py
-
-# ch22_17.py
 import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -291,13 +265,8 @@ plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch22\ch22_18.py
-
-# ch22_18.py
 import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -349,13 +318,8 @@ plt.title("2023年10月安勤公司日線圖", fontsize=24)
 plt.ylabel('價格', fontsize=14)
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch22\ch22_18_1.py
-
-# ch22_18_1.py
 import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -407,4 +371,35 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
 

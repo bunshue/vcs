@@ -93,39 +93,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-image = Image.open(filename)           # 建立Pillow物件
-width, height = image.size
-
-newPict1 = image.resize((width*2, height))   # 寬度是2倍
-plt.imshow(newPict1)
-plt.show()
-
-newPict2 = image.resize((width, height*2))   # 高度是2倍
-plt.imshow(newPict2)
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)           # 建立Pillow物件
-image.rotate(90).save("tmp_pic06.jpg")      # 旋轉90度
-image.rotate(180).save("tmp_pic07.jpg")     # 旋轉180度
-image.rotate(270).save("tmp_pic08.jpg")     # 旋轉270度
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)                       # 建立Pillow物件
-image.rotate(45).save("tmp_pic09.jpg")                  # 旋轉45度
-image.rotate(45, expand=True).save("tmp_pic10.jpg")     # 旋轉45度圖像擴充
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)                     # 建立Pillow物件
-image.transpose(Image.FLIP_LEFT_RIGHT).save("tmp_pic11.jpg")    # 左右
-image.transpose(Image.FLIP_TOP_BOTTOM).save("tmp_pic12.jpg")    # 上下
-
-print("------------------------------------------------------------")  # 60個
-
 newImage = Image.new('RGBA', (300, 100), "Yellow")
 print(newImage.getpixel((150, 50)))      # 列印中心點的色彩
 newImage.save("tmp_pic13.png")
@@ -144,6 +111,39 @@ for x in range(50, 251):                                # x軸區間在50-250
         newImage.putpixel((x, y), ImageColor.getcolor("Blue", "RGBA"))
 
 newImage.save("tmp_pic15.png")                         # 第一階段存檔
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)           # 建立Pillow物件
+width, height = image.size
+
+newPict1 = image.resize((width*2, height))   # 寬度是2倍
+plt.imshow(newPict1)
+plt.show()
+
+newPict2 = image.resize((width, height*2))   # 高度是2倍
+plt.imshow(newPict2)
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)           # 建立Pillow物件
+image090=image.rotate(90)  # 旋轉90度
+image180=image.rotate(180)  # 旋轉180度
+image270=image.rotate(270)  # 旋轉270度
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)                       # 建立Pillow物件
+image45a=image.rotate(45)  # 旋轉45度
+image45b=image.rotate(45, expand=True)  # 旋轉45度圖像擴充
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)                     # 建立Pillow物件
+image_flip1 = image.transpose(Image.FLIP_LEFT_RIGHT)  # 左右
+image_flip2 = image.transpose(Image.FLIP_TOP_BOTTOM)  # 上下
 
 print("------------------------------------------------------------")  # 60個
 
@@ -219,22 +219,6 @@ for x in range(150, 300, 10):
 for y in range(150, 300, 10):
     drawObj.line([(0,y), (y-150,300)], fill="Blue")    
 newImage.save("tmp_pic24.png")
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image, ImageDraw
-
-newImage = Image.new('RGBA', (300, 300), 'Yellow')  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(newImage)
-
-drawObj.rectangle((0,0,299,299), outline='Black')   # 影像外框線
-drawObj.ellipse((30,60,130,100),outline='Black')    # 左眼外框
-drawObj.ellipse((65,65,95,95),fill='Blue')          # 左眼
-drawObj.ellipse((170,60,270,100),outline='Black')   # 右眼外框
-drawObj.ellipse((205,65,235,95),fill='Blue')        # 右眼
-drawObj.polygon([(150,120),(180,180),(120,180),(150,120)],fill='Aqua') # 鼻子
-drawObj.rectangle((100,210,200,240), fill='Red')    # 嘴   
-newImage.save("tmp_pic25.png")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1037,7 +1021,7 @@ image_new=image.filter(ImageFilter.EDGE_ENHANCE)
 #image_new.show()
 
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 print("車牌")
 import pytesseract
 text = pytesseract.image_to_string(Image.open('data/atq9305.jpg'))
@@ -1113,7 +1097,7 @@ import pytesseract
 text  = pytesseract.image_to_string(Image.open('data/data17_27.jpg'),
                                                lang='chi_sim')
 print(text)
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 
 """

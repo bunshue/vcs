@@ -370,9 +370,7 @@ import pandas as pd
 
 print("畫出頻率分布圖")
 
-filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv"
-)
+filename = ("_data/python_ReadWrite_CSV6_score.csv")
 
 dat = pd.read_csv(filename, encoding="UTF-8")
 

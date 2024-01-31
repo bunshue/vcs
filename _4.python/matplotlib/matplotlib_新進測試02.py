@@ -17,6 +17,200 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="新進測試 01",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+plt.rcParams["axes.unicode_minus"] = False
+
+# 正常顯示
+x1 = np.linspace(-1.5, 1.5, 31)
+y1 = np.cos(x1) ** 2
+
+# 移除 y1 > 0.6 的點
+x2 = x1[y1 <= 0.6]
+y2 = y1[y1 <= 0.6]
+
+# 遮罩 y1 > 0.7 的點
+y3 = np.ma.masked_where(y1 > 0.7, y1)
+
+# 將 y1 > 0.8 的點設為 NaN
+y4 = y1.copy()
+y4[y4 > 0.8] = np.nan
+
+plt.plot(x1 * 0.1, y1, "o-", label="正常顯示")
+plt.plot(x2 * 0.4, y2, "o-", label="移除點")
+plt.plot(x1 * 0.7, y3, "o-", label="遮罩點")
+plt.plot(x1 * 1.0, y4, "o-", label="將點設為NaN")
+plt.legend()
+plt.title("Cos函數顯示與遮蔽點的應用")
+
+# 第二張圖
+plt.subplot(232)
+
+d1 = [10 for y in range(1, 9)]  # data1線條之y值
+d2 = [20 for y in range(1, 9)]  # data2線條之y值
+d3 = [30 for y in range(1, 9)]  # data3線條之y值
+d4 = [40 for y in range(1, 9)]  # data4線條之y值
+d5 = [50 for y in range(1, 9)]  # data5線條之y值
+d6 = [60 for y in range(1, 9)]  # data6線條之y值
+d7 = [70 for y in range(1, 9)]  # data7線條之y值
+d8 = [80 for y in range(1, 9)]  # data8線條之y值
+d9 = [90 for y in range(1, 9)]  # data9線條之y值
+d10 = [100 for y in range(1, 9)]  # data10線條之y值
+d11 = [110 for y in range(1, 9)]  # data11線條之y值
+d12 = [120 for y in range(1, 9)]  # data12線條之y值
+
+seq = [1, 2, 3, 4, 5, 6, 7, 8]
+plt.plot(
+    seq,
+    d1,
+    "-1",
+    seq,
+    d2,
+    "-2",
+    seq,
+    d3,
+    "-3",
+    seq,
+    d4,
+    "-4",
+    seq,
+    d5,
+    "-s",
+    seq,
+    d6,
+    "-p",
+    seq,
+    d7,
+    "-*",
+    seq,
+    d8,
+    "-+",
+    seq,
+    d9,
+    "-D",
+    seq,
+    d10,
+    "-d",
+    seq,
+    d11,
+    "-H",
+    seq,
+    d12,
+    "-h",
+)
+
+# 第三張圖
+plt.subplot(233)
+
+print("畫點")
+plt.plot(0, 1, "-o")  # 在 (0, 1) 上 畫一點
+plt.plot(1, 5, "r-o")
+plt.plot(2, 10, "r-o")
+plt.plot(3, 20, "r-o")
+
+print("寫字")
+#                      H對齊方式       V對齊方式
+my_kwargs = dict(ha="center", va="center", fontsize=30, c="b")
+my_kwargs = dict(ha="left", va="top", fontsize=30, c="b")
+x_st = 0
+y_st = 17.5
+text = "歡迎來到美國"
+plt.text(x_st, y_st, text, **my_kwargs)
+plt.plot(x_st, y_st, "r-o")  # 畫基準點
+
+plt.title("畫點 寫字")
+
+# 第四張圖
+plt.subplot(234)
+
+radius = 5
+degrees = np.arange(0, 360)
+x = radius * np.cos(np.radians(degrees))
+y = radius * np.sin(np.radians(degrees))
+
+plt.plot(x, y)
+plt.axis("equal")
+plt.grid()
+
+# 第五張圖
+plt.subplot(235)
+
+x1 = np.linspace(0.1, 10, 99)  # 建立含30個元素的陣列
+x2 = np.linspace(0.1, 10, 99)  # 建立含30個元素的陣列
+y1 = [math.log2(x) for x in x1]
+y2 = [math.log(x, 0.5) for x in x2]
+
+plt.plot(x1, y1, label="基底 = 2")
+plt.plot(x2, y2, label="基底 = 0.5")
+
+plt.axis([0, 10, -5, 5])
+plt.legend(loc="best")  # 建立圖例
+plt.grid()
+
+# 第六張圖
+plt.subplot(236)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="新進測試 03",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+
+# 第二張圖
+plt.subplot(232)
+
+
+# 第三張圖
+plt.subplot(233)
+
+
+# 第四張圖
+plt.subplot(234)
+
+
+# 第五張圖
+plt.subplot(235)
+
+
+# 第六張圖
+plt.subplot(236)
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+'''
 """
 python用mpl_finance中的candlestick_ohlc畫分時圖
 
@@ -34,7 +228,11 @@ matplotlib.finance獨立出來成爲mpl_finance，而mpl_finance中的candlestic
 最後還需要對x軸格式化，因爲自己對x軸進行了處理（乘以1440），採用默認的格式化是亂碼。需要自定義x軸的格式化函數。
 """
 
-""" OK
+
+"""
+pip install mpl_finance
+pip install --upgrade mplfinance
+"""
 from pandas import DataFrame
 import matplotlib.dates as dates
 import mpl_finance as mpf
@@ -89,9 +287,9 @@ for label in ax.get_xticklabels():
             label.set_horizontalalignment('right')
            
 plt.show()
-"""
 
-""" fail
+
+
 # 加載取數與繪圖所需的函數包
 import datetime
 from hs_udata import set_token,stock_quote_daily
@@ -141,108 +339,9 @@ ax2.set_xticks(xticks_num)                                        # 設置橫軸
 ax2.set_xticklabels(xticks_str)                                   # 設置橫軸標注日期
 
 plt.show()
-"""
+
 
 print("------------------------------------------------------------")  # 60個
-
-# 設定圖書分類及銷售額比例
-listx = ["商業理財", "文學小說", "藝術設計", "人文科普", "語言電腦", "心靈養生", "生活風格", "親子共享"]
-listm = [0.14, 0.16, 0.08, 0.13, 0.16, 0.12, 0.16, 0.05]  # 男性比例
-listf = [0.1, 0.19, 0.06, 0.1, 0.13, 0.13, 0.2, 0.09]  # 女性比例
-
-# 將比例乘以100
-listm = [x * 100 for x in listm]
-listf = [x * 100 for x in listf]
-
-# 設定圖表區尺寸以及使用字型
-plt.figure(figsize=(12, 9))
-
-# 男性圖書分類銷售率圖餅圖
-plt.subplot(221)
-plt.title("圖書分類銷售比率-男性", fontsize=16)
-plt.pie(listm, labels=listx, autopct="%2.1f%%")
-
-# 女性圖書分類銷售率圖餅圖
-plt.subplot(222)
-plt.title("圖書分類銷售比率-女性", fontsize=16)
-plt.pie(listf, labels=listx, autopct="%2.1f%%")
-
-# 圖書分類男女銷售率長條圖
-plt.subplot(223)
-width = 0.4
-listx1 = [x - width / 2 for x in range(len(listx))]
-listx2 = [x + width / 2 for x in range(len(listx))]
-
-plt.title("圖書分類銷售長條圖-性別", fontsize=16)
-plt.xlabel("圖書分類", fontsize=12)
-plt.ylabel("銷售比率(%)", fontsize=12)
-
-plt.bar(listx1, listm, width, label="男")
-plt.bar(listx2, listf, width, label="女")
-plt.xticks(range(len(listx)), labels=listx, rotation=45)
-plt.legend()
-
-# 圖書分類男女銷售率折線圖
-plt.subplot(224)
-plt.title("圖書分類銷售折線圖-性別", fontsize=16)
-plt.xlabel("圖書分類", fontsize=12)
-plt.ylabel("銷售比率(%)", fontsize=12)
-
-plt.plot(listx, listm, marker="s", label="男")
-plt.plot(listx, listf, marker="s", label="女")
-plt.gca().grid(True)
-plt.xticks(rotation=45)
-plt.legend()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-n = np.linspace(1.1, 10, 90)  # 建立1.1-10的陣列
-count = 0  # 用於計算每5筆輸出換行
-for i in n:
-    count += 1
-    print("{0:2.1f} = {1:4.3f}".format(i, np.log10(i)), end="    ")
-    if count % 5 == 0:  # 每5筆輸出就換行
-        print()
-
-print("------------------------------------------------------------")  # 60個
-
-degrees = [30, 45, 60, 90, 120, 135, 150, 180]
-for degree in degrees:
-    print("角度 = {0:3d},   弧度 = {1:6.3f}".format(degree, math.pi * degree / 180))
-
-print("------------------------------------------------------------")  # 60個
-
-degrees = [30, 60, 90, 120]
-r = 10
-for degree in degrees:
-    curve = 2 * math.pi * r * degree / 360
-    print("角度 = {0:3d},   弧長 = {1:6.3f}".format(degree, curve))
-
-print("------------------------------------------------------------")  # 60個
-
-degrees = [30, 60, 90, 120]
-r = 10
-for degree in degrees:
-    area = math.pi * r * r * degree / 360
-    print("角度 = {0:3d},   扇形面積 = {1:6.3f}".format(degree, area))
-
-print("------------------------------------------------------------")  # 60個
-
-degrees = [x * 30 for x in range(13)]
-for d in degrees:
-    rad = math.radians(d)
-    sin = math.sin(rad)
-    cos = math.cos(rad)
-    print(
-        "角度={0:3d}, 弧度={1:5.2f}, sin{2:3d}={3:5.2f}, cos{4:3d}={5:5.2f}".format(
-            d, rad, d, sin, d, cos
-        )
-    )
-
-print("------------------------------------------------------------")  # 60個
-
 
 # foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 foldername = "C:/_git/vcs/_1.data/______test_files1"
@@ -294,74 +393,417 @@ xx = x + 1j * x[:, np.newaxis]
 plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap='gray')
 """
 
+'''
 print("------------------------------------------------------------")  # 60個
-
-filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv"
-)
-
-dat = pd.read_csv(filename, encoding="UTF-8")
-print(dat.head())
 
 print("------------------------------------------------------------")  # 60個
 
-# 計算平均數、中位數、眾數
 
-filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv"
-)
 
-dat = pd.read_csv(filename, encoding="UTF-8")
 
-# 平均數、中位數
-print("平均數", np.mean(dat["數學"]))
-print("中位數", np.median(dat["數學"]))
+print("從windows字型中找出可以顯示的中文字型")
+import matplotlib as mpl
+zhfont = mpl.font_manager.FontProperties(fname='C:/Windows/Fonts/mingliu.ttc')
+plt.text(0, 0, u'測試一下 ', fontsize=20, fontproperties=zhfont)
 
-# 眾數
-bincnt = np.bincount(dat["數學"])  # 計算同樣的值的個數
-mode = np.argmax(bincnt)  # 取得bincnt中最大的值
-print("眾數", mode)
 
-print("------------------------------------------------------------")  # 60個
-print("亂數")
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+plt.rcParams['axes.unicode_minus'] = False
 
-rand = []
-for i in range(10):
-    rand.append(random.randint(0, 100))  # 產生0～100的亂數
-print(rand)
+plt.text(0.5, 0.5, u'測試一下')
 
-print("------------------------------------------------------------")  # 60個
+plt.show()
 
-a = 4  # 亂數的初始值
-b = 7
-c = 9  # 取亂數結果 0 ~ 8之整數
-rn = 1
+#文字顯示問題
 
-rand = []
-for i in range(20):
-    rn = (a * rn + b) % c  # 不用亂數模組, 自己運算出亂數
-    rand.append(rn)
-print(rand)
+from os import path
+from matplotlib.font_manager import fontManager
+
+"""
+print('顯示所有字型')
+for i in fontManager.ttflist:
+    print(i.fname, i.name)
+"""
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
+""" fail
+#zip 高級組合法
+
+xx = [1, 2, 3, 4]
+yy = [5, 6, 7, 8]
+list(zip(xx, yy))
+
+Z = list(zip(X, Y))
+print(Z)
+
+plt.scatter(X, Y, s = 50, c = Z)
+plt.show()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+N = 100
+
+sinc2d = np.zeros((N, N))
+for x, x1 in enumerate(np.linspace(-10, 10, N)):
+    for y, x2 in enumerate(np.linspace(-10, 10, N)):
+        sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)
+# print(sinc2d)
+
+# same
+x1 = np.linspace(-10, 10, N)
+x2 = np.linspace(-10, 10, N)
+sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
+# print(sinc2d)
+
+plt.imshow(sinc2d)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("matplotlib 01 ------------------------------------------------------------")  # 60個
+
+th = np.arange(0,360,10)
+#print(th)
+
+x = np.cos(np.radians(th))
+y = np.sin(np.radians(th))
+
+plt.plot(x,y)
+
+plt.show()
+
+print("matplotlib 02 ------------------------------------------------------------")  # 60個
+
+# 時序圖
+import matplotlib.dates as mdates
+
+x = ['20170808210000' ,'20170808210100' ,'20170808210200' ,'20170808210300'
+     ,'20170808210400' ,'20170808210500' ,'20170808210600' ,'20170808210700'
+     ,'20170808210800' ,'20170808210900']
+
+x = pd.to_datetime(x)
+y = [3900.0,  3903.0,  3891.0,  3888.0,  3893.0,
+     3899.0,  3906.0,  3914.0,  3911.0,  3912.0]
+
+plt.plot(x, y)
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %H:%M')) # 設置時間顯示格式
+plt.gcf().autofmt_xdate() # 自動旋轉角度，以避免重疊
+plt.show()
+
+print("matplotlib 03 ------------------------------------------------------------")  # 60個
+
+# 箱線圖
+
+data = np.random.rand(20, 5) # 生成5個維度數據，每組20個
+plt.boxplot(data)
+
+plt.show()
+
+print("matplotlib 04 ------------------------------------------------------------")  # 60個
+
+# 小提琴圖
+data = np.random.rand(20, 5)
+plt.violinplot(data,showmeans=False,showmedians=True)
+
+plt.show()
+
+print("matplotlib 05 ------------------------------------------------------------")  # 60個
+
+#fail
+
+# 三維散點圖
+from mpl_toolkits.mplot3d import Axes3D
+
+data = np.random.rand(50, 3) # 生成三維數據，每維50個
+fig = plt.figure()
+ax = Axes3D(fig)
+ax.scatter(data[:, 0], data[:, 1], data[:, 2])
+ax.set_zlabel('Z')
+ax.set_ylabel('Y')
+ax.set_xlabel('X')
+plt.show()
+
+print("matplotlib 06 ------------------------------------------------------------")  # 60個
+
+#fail
+
+# 三維柱圖
+
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure()
+ax = Axes3D(fig)
+_x = np.arange(4)
+_y = np.arange(5)
+_xx, _yy = np.meshgrid(_x, _y) # 生成網格點座標矩陣
+x, y = _xx.ravel(), _yy.ravel() # 展開爲一維數組
+
+top = x + y
+bottom = np.zeros_like(top) # 與top數組形狀一樣，內容全部爲0
+width = depth = 1
+
+ax.bar3d(x, y, bottom, width, depth, top, shade=True)
+plt.show()
+
+print("matplotlib 07 ------------------------------------------------------------")  # 60個
+
+#fail
+
+# 三維曲面圖和等高線圖
+
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure()
+ax = Axes3D(fig)
+X = np.arange(-5, 5, 0.25)
+Y = np.arange(-5, 5, 0.25)
+X, Y = np.meshgrid(X, Y)
+R = np.sqrt(X**2 + Y**2)
+Z = np.sin(R)
+surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
+ax.contourf(X,Y,Z,zdir='z',offset=-2) # 把等高線向z軸投射
+ax.set_zlim(-2,2) # 設置z軸範圍
+fig.colorbar(surf, shrink=0.5, aspect=5)
+plt.show()
+
+print("matplotlib 08 ------------------------------------------------------------")  # 60個
+
+# 繪圖區域
+
+fig = plt.figure(figsize = (8,6))  # 8x6英寸
+fig.suptitle("Title 1") # 主標題
+ax1 = plt.subplot(221) # 整體爲兩行兩列，創建其中的第一個子圖
+ax1.set_title('Title 2',fontsize=12,color='y')  # 子標題
+ax1.plot([1,2,3,4,5])
+ax2 = plt.subplot(222)
+ax2.plot([5,4,3,2,1])
+ax3 = plt.subplot(223)
+ax3.plot([1,2,3,3,3])
+ax4 = plt.subplot(224)
+ax4.plot([5,4,3,3,3])
+
+plt.show()
+
+print("matplotlib 09 ------------------------------------------------------------")  # 60個
+
+fig = plt.figure(figsize = (9,6))
+ax1 = plt.subplot2grid((3,3), (0,0), colspan = 2)
+ax2 = plt.subplot2grid((3,3), (0,2), rowspan = 2) 
+ax3 = plt.subplot2grid((3,3), (1,0), rowspan = 2) 
+ax4 = plt.subplot2grid((3,3), (1,1)) # rowspan/colspan默認爲1 
+ax5 = plt.subplot2grid((3,3), (2,1), colspan = 2) 
+ax5.plot([1,2,3,4,1])
+
+plt.show()
+
+print("matplotlib 11 ------------------------------------------------------------")  # 60個
+
+# Matplotlib技巧
+
+import matplotlib
+
+fig = plt.figure(figsize = (6,4), dpi=120) # 設置繪製對象大小
+plt.style.use('ggplot') # 設置顯示風格
+
+plt.plot([12,13,45,15,16], label='label1') # 繪圖及設置圖例文字
+plt.annotate('local max', xy=(2, 45), xytext=(3, 45),arrowprops=dict(facecolor='black',
+    shrink=0.05))  # 繪製帶箭頭的標註
+x = np.arange(0, 6)
+y = x * x
+plt.plot(x, y, marker='o', label='label2') # 繪圖及設置圖例文字
+for xy in zip(x, y):
+    plt.annotate("(%s,%s)" % xy, xy=xy, xytext=(-20, 10), # 繪製標註
+                 textcoords='offset points')
+plt.text(4.5, 10, 'Draw text', fontsize=20) # 在位置0,20繪製文字
+
+plt.legend(loc='upper left')  # 在左上角顯示圖例
+plt.xlabel("x value")  # 設置x軸上的標籤
+plt.ylabel("y value")  # 設置y軸上的標籤
+plt.xlim(-0.5,7)  # 設置x軸範圍
+plt.ylim(-5,50) # 設置y軸範圍
+plt.show()
+
+print(matplotlib.artist.getp(fig.patch))  # 顯示繪製對象的各個屬性值
+
 print("------------------------------------------------------------")  # 60個
 
+x=[1,2,3,4,5,6,7,8,9,10,11,12]
+y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
+plt.plot(x, y)
+plt.xlabel('Month')
+plt.ylabel('Sales amount')
+plt.title('2020 sales chart for per month')
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+x=[1,2,3,4,5,6,7,8,9,10,11,12]
+y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
+plt.plot(x, y, lw=8, ls='-.')
+plt.xlabel('Month')
+plt.ylabel('Sales amount')
+plt.title('2020 sales chart for per month')
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+x=[1,2,3,4,5,6,7,8,9,10,11,12]
+y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
+plt.plot(x, y, marker='*')
+plt.xlabel('Month')
+plt.ylabel('Sales amount')
+plt.title('2020 sales chart for per month')
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+x=[1,2,3,4,5,6,7,8,9,10,11,12]
+y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
+plt.plot(x, y, marker='D',ms=10, mfc='y', mec='r')
+plt.xlabel('Month')
+plt.ylabel('Sales amount')
+plt.title('2020 sales chart for per month')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x=[1,2,3,4,5,6,7,8,9,10,11,12]
+y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
+plt.plot(x, y)
+plt.plot(x, y, color='y')
+#plt.plot(x, y, color=(1,1,0))  #RGB
+#plt.plot(x, y, color='# FFFF00')  #HEX
+#plt.plot(x, y, color='yellow')  #英文全名
+#plt.plot(x, y, color='0.5')
+plt.xlabel('Month')
+plt.ylabel('Sales amount')
+plt.title('2020 sales chart for per month')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
+plt.rcParams['font.size']=12
+
+#橫條圖
+def diagram_1(s,x):
+	plt.barh(x, s)
+
+#圓餅圖
+def diagram_2(s,x):	 
+	plt.pie(s,labels=x, autopct='%.2f%%')
+#折線圖+長條圖
+
+def diagram_4(s,x):
+    plt.plot(x, s, marker='.')
+    plt.bar(x, s, alpha=0.5)	
+
+#長條圖
+def diagram_3(s,x):
+	plt.bar(x, s)	
+
+#要繪圖的數據
+x = ['高雄','台中','宜蘭','花蓮']
+s = [89,58,63,50]
+
+#設定子圖
+plt.figure(1, figsize=(8, 8),clear=True)
+plt.subplots_adjust(left=0.1, right=0.95)
+
+plt.subplot(221)
+diagram_1(s,x)
+
+plt.subplot(222)
+diagram_2(s,x)
+
+plt.subplot(223)
+diagram_3(s,x)
+
+plt.subplot(2,2,4)
+diagram_4(s,x)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+正弦函數 s=sin(x) 
+餘弦函數 c=cos(x)
+"""
+
+x = np.linspace(-2*np.pi, 2*np.pi, 100)
+s, c=np.sin(x), np.cos(x)
+plt.plot(x, s)
+plt.plot(x, c)
+plt.xticks([-2*np.pi,-np.pi,0, np.pi, 2*np.pi],['-$2\pi$', '-$\pi$','0', '$\pi$', '$2\pi$'])
+
+plt.legend(['sin','cos'])
+plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.rcParams['font.size']=12
+
+#折線圖
+def lineChart(s,x):
+    plt.xlabel('城市名稱')
+    plt.ylabel('民調原分比')
+    plt.title('各種城市喜好度比較')
+    plt.plot(x, s, marker='.')
+
+#長條圖
+def barChart(s,x):
+    plt.xlabel('城市名稱')
+    plt.ylabel('民調原分比')
+    plt.title('各種城市喜好度比較')
+    plt.bar(x, s)
+
+#橫條圖
+def barhChart(s,x):
+    plt.barh(x, s)
+
+#圓餅圖
+def pieChart(s,x):	 
+    plt.pie(s,labels=x, autopct='%.2f%%')
+
+#要繪圖的數據
+x = ['第一季', '第二季', '第三季', '第四季']
+s = [13.2, 20.1, 11.9, 14.2]
+
+#定義子圖
+plt.figure(1, figsize=(8, 6),clear=True)
+plt.subplots_adjust(left=0.1, right=0.95)
+
+plt.subplot(2,2,1)
+pieChart(s,x)
+
+x = ['程式設計概論', '多媒體概論', '計算機概論', '網路概論']
+s = [3560, 4000, 4356, 1800]
+plt.subplot(2,2,2)
+barhChart(s,x)
+
+x = ['新北市', '台北市', '高雄市', '台南市','桃園市','台中市']
+s = [0.2, 0.3, 0.15, 0.23,0.19, 0.27]
+plt.subplot(223)
+lineChart(s,x)
+
+plt.subplot(224)
+barChart(s,x)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -380,6 +822,590 @@ plt.barh(listy, listx, height = 0.5, color = 'r')
 """
 
 
+
+print("------------------------------------------------------------")  # 60個
+
+'''
+plt.figure(figsize = [8,4])
+
+x = np.linspace(0, 2 * np.pi)
+y = np.sin(x)
+
+#所佔比例 0~1, 以左下為原點
+x_st = 0.1
+y_st = 0.1
+w = 0.8
+h = 0.8
+plt.axes([x_st, y_st, w, h])
+plt.title(label = '第一張圖')
+plt.plot(x, y, 'r:o')
+
+x_st = 0.6
+y_st = 0.5
+w = 0.25
+h = 0.3
+plt.axes([x_st, y_st, w, h])
+plt.title(label = '第二張圖')
+plt.plot(x, y, 'g--o')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+x = np.linspace(0, 2 * np.pi)
+y = np.sin(x)
+
+plt.grid(True)
+
+#自訂座標軸的刻度及標籤–xticks()、yticks()
+#x座標
+ticks = [0, np.pi * 0.5, np.pi, np.pi * 1.5, np.pi * 2]
+#要在x座標寫上的標籤
+labels = ['0°', '90°', '180°', '270°', '360°']
+plt.xticks(ticks, labels)
+
+plt.plot(x, y)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#在畫布切出子圖區 , 並繪製內容–add_subplot()
+
+x = np.linspace(0, 2 * np.pi)
+y = np.sin(x)
+
+fig = plt.figure(figsize = (8, 6))        #整個圖表大小為 8 x 6 英吋
+fig.subplots_adjust(wspace = 0.5, hspace = 0.75)    #調整子圖間距
+
+ax1 = fig.add_subplot(2, 3, 1)      #←編號 1 的子圖
+ax1.plot(x, y)
+
+ax3 = fig.add_subplot(2, 3, 3)      #← 編號 3 的子圖
+#沒畫
+
+ax5 = fig.add_subplot(2, 3, 5)      #←編號 5 的子圖
+ax5.plot(x, y)
+
+ax6 = fig.add_subplot(2, 3, 6)      #←編號 6 的子圖
+ax6.plot(x, y)
+#設定子圖的座標範圍、座標說明文字與子圖標題
+ax6.set_xlim(0, 3.14/2)
+ax6.set_ylim(-0.1, 1.1)
+ax6.set_xlabel('x-axis')
+ax6.set_ylabel('y-axis')
+ax6.set_title('y = sin(x)')
+ax6.plot(x, y)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print('載入字型範例')
+
+"""
+翰字鑄造 台北黑體 regular 版本
+
+TaipeiSansTCBeta-Regular.ttf 
+
+https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
+
+TaipeiSansTCBeta-Regular.ttf'
+
+"""
+
+print('------------------------------------------------------------')	#60個
+
+# 饼图的绘制
+
+# 构造数据
+edu = [0.2515,0.3724,0.3336,0.0368,0.0057]
+labels = ['中专','大专','本科','硕士','其他']
+# 绘制饼图
+plt.pie(x = edu, # 绘图数据
+labels = labels, # 添加教育水平标签
+autopct = '%.1f%%' # 设置百分比的格式，这里保留一位小数
+)
+# 添加图标题
+plt.title('失信用户的教育水平分布')
+
+plt.show()
+
+# 构造数据
+edu = [0.2515,0.3724,0.3336,0.0368,0.0057]
+labels = ['中专','大专','本科','硕士','其他']
+# 添加修饰的饼图
+explode = [0,0.1,0,0,0] # 生成数据，用于突出显示大专学历人群
+colors = ['#9999ff','#ff9999','#7777aa','#2442aa','#dd5555'] # 自定义颜色
+# 中文乱码和坐标轴负号的处理
+plt.rcParams['font.sans-serif'] = ['Microsoft YaHei']
+plt.rcParams['axes.unicode_minus'] = False
+# 将横、纵坐标轴标准化处理，确保饼图是一个正圆，否则为椭圆
+plt.axes(aspect = 'equal')
+# 绘制饼图
+plt.pie(x = edu, # 绘图数据
+explode = explode, # 突出显示大专人群
+labels = labels, # 添加教育水平标签
+colors = colors, # 设置饼图的自定义填充色
+autopct = '%.1f%%', # 设置百分比的格式，这里保留一位小数
+pctdistance = 0.8, # 设置百分比标签与圆心的距离
+labeldistance = 1.1, # 设置教育水平标签与圆心的距离
+startangle = 180, # 设置饼图的初始角度
+radius = 1.2, # 设置饼图的半径
+counterclock = False, # 是否逆时针，这里设置为顺时针方向
+wedgeprops = {'linewidth': 1.5, 'edgecolor':'green'},# 设置饼图内外边界的属性值
+textprops = {'fontsize':10, 'color':'black'}, # 设置文本标签的属性值
+)
+# 添加图标题
+plt.title('失信用户的受教育水平分布')
+
+plt.show()
+
+# 构建序列
+data1 = pd.Series({'中专':0.2515,'大专':0.3724,'本科':0.3336,'硕士':0.0368,'其他':0.0057})
+print(data1)
+data1.name = ''
+# 控制饼图为正圆
+plt.axes(aspect = 'equal')
+# plot方法对序列进行绘图
+data1.plot(kind = 'pie', # 选择图形类型
+autopct = '%.1f%%', # 饼图中添加数值标签
+radius = 1, # 设置饼图的半径
+startangle = 180, # 设置饼图的初始角度
+counterclock = False, # 将饼图的顺序设置为顺时针方向
+title = '失信用户的受教育水平分布', # 为饼图添加标题
+wedgeprops = {'linewidth': 1.5, 'edgecolor':'green'}, # 设置饼图内外边界的属性值
+textprops = {'fontsize':10, 'color':'black'} # 设置文本标签的属性值
+)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+# 一個完全乾淨、空白的figure:
+fig1 = plt.figure()
+
+# 增新一個axes（座標軸），以供繪圖和放置資訊:
+#axs = fig1.add_subplot(1,1,1) # 1x1的座標軸
+
+# 增新很多個axes，以供繪圖和放置資訊:
+#fig1.delaxes( fig1.gca() ) # 順便示範，把剛剛1x1的座標軸刪掉
+
+#fig1 = plt.figure()  # 等價於fig1 = plt.figure(1)
+fig2 = plt.figure()  # 等價於fig2 = plt.figure(2)
+
+# 一般的情況下，axes是"hold on"的, 也就是資料不會被覆蓋掉。
+# hold on: 好處是一次要輸出一堆函數，可以把圖疊加上去。
+# hold off: 可以更新圖的內容，可是全部的資訊會被洗掉（title, legend等）
+# 如果要保留這些資訊，可以單獨抓出圖的內容，直接修改：
+x = np.linspace(0, 6.28, 100)
+y = np.sin(x)
+
+axes = fig2.add_subplot(1,1,1)
+axes.set_title('y = sin(x)')
+
+line, = axes.plot(x,y) # 這裡回傳的line就是畫在圖上的資料
+
+# 當發現畫錯想修改，可以對line修改：
+line.set_ydata(np.cos(x))
+
+#存圖
+#fig2.savefig('./picture.png')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+"""
+Matplotlib 繪圖
+    Matplotlib有很多種畫法，不同指令也可以達到相同效果 但較好也較全面的姿勢應該是先釐清fig,ax的關係
+    step1:設定好fig,ax和subplots數目及figsize
+    step2:個別指定每個ax的畫圖種類，例如line plot, bar chart or hist chart…
+    step3:個別指定每個ax的屬性，例如label, xlabel, ylabel,xlim,ylim, legend, xticklabels等等
+"""
+
+x = np.linspace(0, 6.28, 50)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+fig,axs = plt.subplots(2, 2, figsize = (10, 10), sharex = True, sharey = True)
+
+axs[0][0].plot(x, y1, label = 'Sin(x)')
+axs[0][1].plot(x, y1, label = 'Sin(x)', linewidth = 4, color = 'black')
+axs[1][0].plot(x, y1, label = 'Sin(x)')
+axs[1][1].plot(x, y1, label = 'Sin(x)')
+axs[0][0].set_title('(0, 0)')
+axs[0][1].set_title('(0, 1)')
+axs[1][0].set_title('(1, 0)')
+axs[1][1].set_title('(1, 1)')
+axs[0][0].set_xlabel('x_label0')
+axs[0][1].set_xlabel('x_label1')
+axs[1][0].set_xlabel('x_label2')
+axs[1][1].set_xlabel('x_label3')
+axs[0][0].set_ylabel('y_label0')
+axs[0][1].set_ylabel('y_label1')
+axs[1][0].set_ylabel('y_label2')
+axs[1][1].set_ylabel('y_label3')
+#axs[1][0].set_xticklabels(labels = x, rotation = 45)
+#axs[1][1].set_xticklabels(labels = x, rotation = 45)
+axs[0][0].grid(True)
+# axs[0][0].legend(['legend'], loc = 2)
+axs[0][0].plot(x, y2, label = 'Cos(x)', marker = 'x', markersize = 5, color = 'r')
+axs[0][0].legend(loc = 3)
+axs[0][0].set_ylim(-1.2, 1.2)
+
+fig.suptitle('Suptitle')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+from matplotlib import pyplot as plt
+
+X = np.linspace(-np.pi, np.pi, 200, endpoint=True)
+C, S = np.cos(X), np.sin(X)
+
+plt.figure(figsize=(20, 6), dpi=80)
+plt.subplot(1, 2, 1)
+# 使用默认设置画出余弦曲线
+plt.plot(X, C)
+# 使用默认设置画出正弦曲线
+plt.plot(X, S)
+
+plt.subplot(1, 2, 2)
+# 移动坐标轴边线
+# 坐标轴总共有四个连线，我们通过设置透明色隐藏上方和右方的边线
+# 通过 set_position() 移动左侧和下侧的边线
+# 通过 set_ticks_position() 设置坐标轴的刻度线的显示位置
+ax = plt.gca()  # gca 代表当前坐标轴，即 'get current axis'
+ax.spines['right'].set_color('none')
+ax.spines['top'].set_color('none')
+ax.xaxis.set_ticks_position('bottom')
+ax.spines['bottom'].set_position(('data',0))
+ax.yaxis.set_ticks_position('left')
+ax.spines['left'].set_position(('data',0))
+# 设置坐标刻度的字体大小，增加半透明背景
+for label in ax.get_xticklabels() + ax.get_yticklabels():
+    label.set_fontsize(16)
+    label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.65))
+    
+# 设置坐标轴的长度
+plt.xlim(X.min() * 1.1, X.max() * 1.1)
+plt.ylim(C.min() * 1.1, C.max() * 1.1)
+
+# 设置坐标轴的刻度和标签
+plt.xticks((-np.pi, -np.pi/2, np.pi/2, np.pi),
+          label=(r'$-\pi$', r'$-\pi/2$', r'$+\pi/2$', r'$+\pi$'))
+plt.yticks([-1, -0.5, 0, 0.5, 1])
+
+
+# 画出余弦曲线，并设置线条颜色，宽度，样式
+plt.plot(X, C, color="blue", linewidth=2.0, linestyle="-")
+# 画出正弦曲线，并设置线条颜色，宽度，样式
+plt.plot(X, S, color="red", linewidth=2.0, linestyle="-")
+
+# 在左上角添加铭牌
+plt.legend(loc='upper left')
+
+# 在坐标轴上标示相应的点
+t = 2 * np.pi / 3
+# 画出 cos(t) 所在的点在 X 轴上的位置，即画出 (t, 0) -> (t, cos(t)) 线段，使用虚线
+plt.plot([t, t], [0, np.cos(t)], color='blue', linewidth=1.5, linestyle="--")
+# 画出标示的坐标点，即在 (t, cos(t)) 处画一个大小为 50 的蓝色点
+plt.scatter([t, ], [np.cos(t), ], 50, color='blue')
+# 画出标示点的值，即 cos(t) 的值
+plt.annotate(r'$cos(\frac{2\pi}{3})=-\frac{1}{2}$',
+             xy=(t, np.cos(t)), xycoords='data',
+             xytext=(-90, -50), textcoords='offset points', fontsize=16,
+             arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
+# 画出 sin(t) 所在的点在 X 轴上的位置，即画出 (t, 0) -> (t, sin(t)) 线段，使用虚线
+plt.plot([t, t],[0, np.sin(t)], color='red', linewidth=1.5, linestyle="--")
+# 画出标示的坐标点，即在 (t, sin(t)) 处画一个大小为 50 的红色点
+plt.scatter([t, ],[np.sin(t), ], 50, color='red')
+# 画出标示点的值，即 sin(t) 的值
+plt.annotate(r'$sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
+             xy=(t, np.sin(t)), xycoords='data',
+             xytext=(+10, +30), textcoords='offset points', fontsize=16,
+             arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
+
+# 把结果显示在屏幕上
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+plt.figure(figsize=(18, 4))
+plt.subplot(2, 2, 1)
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, 'subplot(2,2,1)', ha='center', va='center',
+        size=20, alpha=.5)
+
+plt.subplot(2, 2, 2)
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, 'subplot(2,2,2)', ha='center', va='center',
+        size=20, alpha=.5)
+
+plt.subplot(2, 2, 3)
+plt.xticks(())
+plt.yticks(())
+
+plt.text(0.5, 0.5, 'subplot(2,2,3)', ha='center', va='center',
+        size=20, alpha=.5)
+
+plt.subplot(2, 2, 4)
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, 'subplot(2,2,4)', ha='center', va='center',
+        size=20, alpha=.5)
+
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.gridspec as gridspec
+
+plt.figure(figsize=(18, 4))
+G = gridspec.GridSpec(3, 3)
+
+axes_1 = plt.subplot(G[0, :])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, 'Axes 1', ha='center', va='center', size=24, alpha=.5)
+
+axes_2 = plt.subplot(G[1:, 0])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, 'Axes 2', ha='center', va='center', size=24, alpha=.5)
+
+axes_3 = plt.subplot(G[1:, -1])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, 'Axes 3', ha='center', va='center', size=24, alpha=.5)
+
+axes_4 = plt.subplot(G[1, -2])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, 'Axes 4', ha='center', va='center', size=24, alpha=.5)
+
+axes_5 = plt.subplot(G[-1, -2])
+plt.xticks(())
+plt.yticks(())
+plt.text(0.5, 0.5, 'Axes 5', ha='center', va='center', size=24, alpha=.5)
+
+plt.tight_layout()
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+plt.figure(figsize=(18, 4))
+
+plt.axes([.1, .1, .8, .8])
+plt.xticks(())
+plt.yticks(())
+plt.text(.2, .5, 'axes([0.1, 0.1, .8, .8])', ha='center', va='center',
+        size=20, alpha=.5)
+
+plt.axes([.5, .5, .3, .3])
+plt.xticks(())
+plt.yticks(())
+plt.text(.5, .5, 'axes([.5, .5, .3, .3])', ha='center', va='center',
+        size=16, alpha=.5)
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+def tickline():
+    plt.xlim(0, 10), plt.ylim(-1, 1), plt.yticks([])
+    ax = plt.gca()
+    ax.spines['right'].set_color('none')
+    ax.spines['left'].set_color('none')
+    ax.spines['top'].set_color('none')
+    ax.xaxis.set_ticks_position('bottom')
+    ax.spines['bottom'].set_position(('data',0))
+    ax.yaxis.set_ticks_position('none')
+    ax.xaxis.set_minor_locator(plt.MultipleLocator(0.1))
+    for label in ax.get_xticklabels() + ax.get_yticklabels():
+        label.set_fontsize(16)
+    ax.plot(np.arange(11), np.zeros(11))
+    return ax
+
+locators = [
+                'plt.NullLocator()',
+                'plt.MultipleLocator(base=1.0)',
+                'plt.FixedLocator(locs=[0, 2, 8, 9, 10])',
+                'plt.IndexLocator(base=3, offset=1)',
+                'plt.LinearLocator(numticks=5)',
+                'plt.LogLocator(base=2, subs=[1.0])',
+                'plt.MaxNLocator(nbins=3, steps=[1, 3, 5, 7, 9, 10])',
+                'plt.AutoLocator()',
+            ]
+
+n_locators = len(locators)
+
+size = 1024, 60 * n_locators
+dpi = 72.0
+figsize = size[0] / float(dpi), size[1] / float(dpi)
+fig = plt.figure(figsize=figsize, dpi=dpi)
+fig.patch.set_alpha(0)
+
+
+for i, locator in enumerate(locators):
+    plt.subplot(n_locators, 1, i + 1)
+    ax = tickline()
+    ax.xaxis.set_major_locator(eval(locator))
+    plt.text(5, 0.3, locator[3:], ha='center', size=16)
+
+plt.subplots_adjust(bottom=.01, top=.99, left=.01, right=.99)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+def plt_bar():
+    n = 12
+    X = np.arange(n)
+    Y1 = (1 - X / float(n)) * np.random.uniform(0.5, 1.0, n)
+    Y2 = (1 - X / float(n)) * np.random.uniform(0.5, 1.0, n)
+
+    plt.subplot(1, 2, 1)
+    plt.bar(X, +Y1, facecolor='#9999ff', edgecolor='white')
+    plt.bar(X, -Y2, facecolor='#ff9999', edgecolor='white')
+
+    for x, y in zip(X, Y1):
+        plt.text(x + 0.4, y + 0.05, '%.2f' % y, ha='center', va= 'bottom')
+
+    for x, y in zip(X, Y2):
+        plt.text(x + 0.4, -y - 0.05, '%.2f' % y, ha='center', va= 'top')
+
+    plt.xlim(-.5, n)
+    plt.xticks(())
+    plt.ylim(-1.25, 1.25)
+    plt.yticks(())
+
+def plt_contour():
+    def f(x,y):
+        return (1 - x / 2 + x**5 + y**3) * np.exp(-x**2 -y**2)
+
+    n = 256
+    x = np.linspace(-3, 3, n)
+    y = np.linspace(-3, 3, n)
+    X,Y = np.meshgrid(x, y)
+
+    plt.subplot(1, 2, 2)
+
+    plt.contourf(X, Y, f(X, Y), 8, alpha=.75, cmap=plt.cm.hot)
+    C = plt.contour(X, Y, f(X, Y), 8, colors='black', linewidth=.5)
+    plt.clabel(C, inline=1, fontsize=10)
+
+    plt.xticks(())
+    plt.yticks(())
+    
+plt.figure(figsize=(16, 6))
+plt_bar()
+plt_contour()
+plt.tight_layout()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+def plt_imshow():
+    def f(x, y):
+        return (1 - x / 2 + x ** 5 + y ** 3) * np.exp(-x ** 2 - y ** 2)
+
+    plt.subplot(1, 2, 1)
+    n = 10
+    x = np.linspace(-3, 3, 4 * n)
+    y = np.linspace(-3, 3, 3 * n)
+    X, Y = np.meshgrid(x, y)
+    #plt.imshow(f(X, Y), cmap='hot', origin='low')
+    plt.imshow(f(X, Y), cmap='hot')
+    plt.colorbar(shrink=.83)
+
+    plt.xticks(())
+    plt.yticks(())
+    
+def plt_pie():
+    plt.subplot(1, 2, 2)
+    n = 20
+    Z = np.ones(n)
+    Z[-1] *= 2
+    
+    plt.pie(Z, explode=Z*.05, colors = ['%f' % (i/float(n)) for i in range(n)])
+    plt.axis('equal')
+    plt.xticks(())
+    plt.yticks()
+    
+plt.figure(figsize=(16, 6))
+plt_imshow()
+plt_pie()
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+def plt_grid():
+    ax = plt.subplot(1, 2, 1)
+    
+    ax.set_xlim(0,4)
+    ax.set_ylim(0,3)
+    ax.xaxis.set_major_locator(plt.MultipleLocator(1.0))
+    ax.xaxis.set_minor_locator(plt.MultipleLocator(0.1))
+    ax.yaxis.set_major_locator(plt.MultipleLocator(1.0))
+    ax.yaxis.set_minor_locator(plt.MultipleLocator(0.1))
+    ax.grid(which='major', axis='x', linewidth=0.75, linestyle='-', color='0.75')
+    ax.grid(which='minor', axis='x', linewidth=0.25, linestyle='-', color='0.75')
+    ax.grid(which='major', axis='y', linewidth=0.75, linestyle='-', color='0.75')
+    ax.grid(which='minor', axis='y', linewidth=0.25, linestyle='-', color='0.75')
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
+    
+def plt_polar():
+    ax = plt.subplot(1, 2, 2, polar=True)
+    
+    N = 20
+    theta = np.arange(0.0, 2 * np.pi, 2 * np.pi / N)
+    radii = 10 * np.random.rand(N)
+    width = np.pi / 4 * np.random.rand(N)
+    bars = plt.bar(theta, radii, width=width, bottom=0.0)
+
+    for r,bar in zip(radii, bars):
+        bar.set_facecolor(plt.cm.jet(r/10.))
+        bar.set_alpha(0.5)
+
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
+    
+plt.figure(figsize=(16, 6))
+plt_grid()
+plt_polar()
+plt.tight_layout()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+

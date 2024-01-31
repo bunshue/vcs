@@ -32,7 +32,6 @@ print(PIL.__version__)
 
 print('------------------------------------------------------------')	#60個
 
-
 print('顯示原圖')
 
 image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
@@ -53,14 +52,6 @@ print('原圖大小 W =', W, ', H =', H)
 print('圖片維度 圖片資訊')
 print('Size : ', image1.size, 'Mode : ', image1.mode, 'Format : ', image1.format)
 
-#PIL保存圖片的方式，調用方法 Image.save() 即可
-print('圖片另存新檔')
-image1.save('image_to_filea.jpg')
-image1.save('image_to_fileb.jpg', 'JPEG')
-image1.save('image_to_filea.png')
-image1.save('image_to_fileb.png', 'PNG')
-image1.save('image_to_file.bmp') 
-
 image1.close()
 
 print('------------------------------------------------------------')	#60個
@@ -69,5 +60,15 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
+"""
+#PIL 存圖
+print('圖片另存新檔')
+image1.save('tmp_image1.jpg')
+image1.save('tmp_image2.jpg', 'JPEG')
+image1.save('tmp_image3.png')
+image1.save('tmp_image4.png', 'PNG')
+image1.save('tmp_image5.bmp') 
+
+"""
 
 

@@ -154,7 +154,7 @@ plt.imshow(out)
 plt.show()
 
 
-'''
+"""
 #二、添加小图片水印
 
 im = Image.open(filename)
@@ -166,7 +166,7 @@ out=Image.composite(layer,im,layer)
 plt.imshow(out)
 plt.show()
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -375,10 +375,10 @@ print('------------------------------------------------------------')	#60個
 
 
 
-'''
+"""
 PIL 新進
 
-'''
+"""
 
 import numpy as np
 import torchvision.transforms as transforms
@@ -387,10 +387,10 @@ import matplotlib.pyplot as plt
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 from PIL import Image,ImageDraw
 image = Image.open("captcha.png").convert("L")	#轉換成灰階圖像
-'''
+"""
 
 
 print('------------------------------------------------------------')	#60個
@@ -404,7 +404,7 @@ print('------------------------------------------------------------')	#60個
 #PIL之基本設定
 
 
-''' not ready
+""" not ready
 from PIL import Image, ImageDraw, ImageFont
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
@@ -419,7 +419,7 @@ image3 = image1.resize((100, 500), Image.ANTIALIAS)
 image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 
 
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -483,7 +483,7 @@ filename2 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X3
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.bmp'
 
-'''
+"""
 平均雜湊（aHash）
 ahash:          Average hash
 hashfunc = imagehash.average_hash
@@ -502,7 +502,7 @@ colorhash:      HSV color hash
 hashmethod == 'crop-resistant':
 crop-resistant: Crop-resistant hash
 imagehash.crop_resistant_hash
-'''
+"""
 
 from PIL import Image
 import imagehash

@@ -23,7 +23,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/iris_sample.csv"
+filename = "_data/iris_sample.csv"
 
 iris = pd.read_csv(filename)
 """
@@ -127,6 +127,78 @@ plt.legend(loc="best")  # 添加图例
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+
+"""
+import matplotlib as mpl
+
+# 获取图的坐标信息
+ax = plt.gca()
+# 设置日期的显示格式
+date_format = mpl.dates.DateFormatter("%m-%d")
+ax.xaxis.set_major_formatter(date_format)
+# 设置x轴显示多少个日期刻度
+# xlocator = mpl.ticker.LinearLocator(10)
+# 设置x轴每个刻度的间隔天数
+xlocator = mpl.ticker.MultipleLocator(7)
+ax.xaxis.set_major_locator(xlocator)
+# 为了避免x轴刻度标签的紧凑，将刻度标签旋转45度
+plt.xticks(rotation = 45)
+
+# 添加y轴标签
+plt.ylabel('人数')
+# 添加图形标题
+plt.title('每天微信文章阅读人数与人次趋势')
+# 添加图例
+plt.legend()
+# 显示图形
+plt.show()
+"""
+
+
+
+"""
+# 读入数据
+iris = pd.read_csv(r'F:\\python_Data_analysis_and_mining\\06\\iris.csv')
+print(iris.shape)
+# 绘制散点图
+plt.scatter(x = iris.Petal_Width, # 指定散点图的x轴数据
+y = iris.Petal_Length, # 指定散点图的y轴数据
+color = 'steelblue' # 指定散点图中点的颜色
+)
+# 添加x轴和y轴标签
+plt.xlabel('花瓣宽度')
+plt.ylabel('花瓣长度')
+# 添加标题
+plt.title('鸢尾花的花瓣宽度与长度关系')
+# 显示图形
+plt.show()
+
+# Pandas模块绘制散点图
+# 绘制散点图
+iris.plot(x = 'Petal_Width', y = 'Petal_Length', kind = 'scatter', title = '鸢尾花的花瓣宽度与长度关系')
+# 修改x轴和y轴标签
+plt.xlabel('花瓣宽度')
+plt.ylabel('花瓣长度')
+# 显示图形
+plt.show()
+
+# seaborn模块绘制分组散点图
+sns.lmplot(x = 'Petal_Width', # 指定x轴变量
+y = 'Petal_Length', # 指定y轴变量
+hue = 'Species', # 指定分组变量
+data = iris, # 指定绘图数据集
+legend_out = False, # 将图例呈现在图框内
+truncate = True # 根据实际的数据范围，对拟合线作截断操作
+)
+# 修改x轴和y轴标签
+plt.xlabel('花瓣宽度')
+plt.ylabel('花瓣长度')
+# 添加标题
+plt.title('鸢尾花的花瓣宽度与长度关系')
+# 显示图形
+plt.show()
+"""
 
 
 print("------------------------------------------------------------")  # 60個

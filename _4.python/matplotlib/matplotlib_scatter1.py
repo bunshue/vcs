@@ -566,9 +566,7 @@ plt.subplot(232)
 
 print("繪製散布圖")
 
-filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_score.csv"
-)
+filename = ("_data/python_ReadWrite_CSV6_score.csv")
 
 # 讀入資料
 dat = pd.read_csv(filename, encoding="UTF-8")
