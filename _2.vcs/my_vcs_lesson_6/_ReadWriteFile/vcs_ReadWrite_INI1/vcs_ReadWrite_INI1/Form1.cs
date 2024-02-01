@@ -41,17 +41,21 @@ namespace vcs_ReadWrite_INI1
             string animal_cname = "鼠";
             string animal_ename = "mouse";
             int weight = 3;
+            string address = @"C:\Users\070601\AppData\Local\Programs\Python\Python311\Lib\unittest\main.py";
             WritePrivateProfileString(section_name, "cname", animal_cname, filename);
             WritePrivateProfileString(section_name, "ename", animal_ename, filename);
             WritePrivateProfileString(section_name, "weight", weight.ToString(), filename);
+            WritePrivateProfileString(section_name, "address", address, filename);
 
             section_name = "AnimalInfo1";
             animal_cname = "牛";
             animal_ename = "ox";
             weight = 48;
+            address = "D:/.../.../.../.../.../folder/ABCD.EFG";
             WritePrivateProfileString(section_name, "cname", animal_cname, filename);
             WritePrivateProfileString(section_name, "ename", animal_ename, filename);
             WritePrivateProfileString(section_name, "weight", weight.ToString(), filename);
+            WritePrivateProfileString(section_name, "address", address, filename);
         }
 
         public string ContentReader(string area, string key, string def, string filename)
@@ -65,7 +69,7 @@ namespace vcs_ReadWrite_INI1
         {
             string filename = @"./tmp_config.ini";
             richTextBox1.Text += "Read ini data from " + filename + "\n";
-            StringBuilder temp = new StringBuilder();
+            StringBuilder temp = new StringBuilder(1024);//定義一個最大長度為1024的可變字符串
 
             string section_name = "AnimalInfo0";
 
@@ -78,14 +82,18 @@ namespace vcs_ReadWrite_INI1
             parameter_name = "weight";
             GetPrivateProfileString(section_name, parameter_name, "", temp, 255, filename);
             richTextBox1.Text += "取得資料 : " + temp + "\n";
+            parameter_name = "address";
+            GetPrivateProfileString(section_name, parameter_name, "", temp, 255, filename);
+            richTextBox1.Text += "取得資料 : " + temp + "\n";
 
             string parameter_name1 = "cname";
             string parameter_name2 = "ename";
             string parameter_name3 = "weight";
+            string parameter_name4 = "address";
             richTextBox1.Text += "第1項: " + ContentReader(section_name, parameter_name1, "", filename) + "\n";			//讀取INI文件中的第1項
             richTextBox1.Text += "第2項: " + ContentReader(section_name, parameter_name2, "", filename) + "\n";		    //讀取INI文件中的第2項
             richTextBox1.Text += "第3項: " + ContentReader(section_name, parameter_name3, "", filename) + "\n";			//讀取INI文件中的第3項
-
+            richTextBox1.Text += "第4項: " + ContentReader(section_name, parameter_name4, "", filename) + "\n";			//讀取INI文件中的第4項
 
             section_name = "AnimalInfo1";
 
@@ -98,13 +106,18 @@ namespace vcs_ReadWrite_INI1
             parameter_name = "weight";
             GetPrivateProfileString(section_name, parameter_name, "", temp, 255, filename);
             richTextBox1.Text += "取得資料 : " + temp + "\n";
+            parameter_name = "address";
+            GetPrivateProfileString(section_name, parameter_name, "", temp, 255, filename);
+            richTextBox1.Text += "取得資料 : " + temp + "\n";
 
             parameter_name1 = "cname";
             parameter_name2 = "ename";
             parameter_name3 = "weight";
+            parameter_name4 = "address";
             richTextBox1.Text += "第1項: " + ContentReader(section_name, parameter_name1, "", filename) + "\n";			//讀取INI文件中的第1項
             richTextBox1.Text += "第2項: " + ContentReader(section_name, parameter_name2, "", filename) + "\n";		    //讀取INI文件中的第2項
             richTextBox1.Text += "第3項: " + ContentReader(section_name, parameter_name3, "", filename) + "\n";			//讀取INI文件中的第3項
+            richTextBox1.Text += "第4項: " + ContentReader(section_name, parameter_name4, "", filename) + "\n";			//讀取INI文件中的第4項
         }
 
         /// <summary>

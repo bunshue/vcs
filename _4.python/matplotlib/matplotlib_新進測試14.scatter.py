@@ -197,9 +197,272 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_2.py
+
+# ch9_2.py
+import matplotlib.pyplot as plt
+
+x = [x for x in range(1,6)]
+y = [(y * y) for y in x]
+plt.scatter(x,y,color='lightgreen',edgecolor='b',s=60)
+plt.show()
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_4.py
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0.0, 2*np.pi, 50)       # 建立 35 個點
+y1 = np.sin(x)
+plt.scatter(x, y1, c='b', marker='x')   # 繪製 sine wave
+y2 = np.cos(x)
+plt.scatter(x, y2, c='g', marker='X')   # 繪製 cos wave
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_5.py
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+colorused = ['b','c','g','k','m','r','y']   # 定義顏色
+x = np.linspace(0.0, 2*np.pi, 50)           # 建立 50 個點
+y1 = np.sin(x)
+colors = []
+for i in range(50):                         # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+plt.scatter(x, y1, c=colors, marker='*')    # 繪製 sine 
+y2 = np.cos(x)
+plt.scatter(x, y2, c=colors, marker='s')    # 繪製 cos 
+
+plt.show()
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_6.py
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_7.py
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+points = 30
+x = np.random.randint(1,11,points)      # 建立 x
+y = np.random.randint(1,11,points)      # 建立 y
+colors = np.random.rand(points)         # 色彩數列
+plt.scatter(x, y, c=colors)
+plt.xticks(np.arange(0,11,step=1.0))
+plt.yticks(np.arange(0,11,step=1.0))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_8.py
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+points = 30
+x = np.random.randint(1,11,points)          # 建立 x
+y = np.random.randint(1,11,points)          # 建立 y
+colors = np.random.rand(points)             # 色彩數列
+size =  (30 * np.random.rand(points))**2    # 散點大小數列
+plt.scatter(x, y, s=size, c=colors)
+plt.xticks(np.arange(0,12,step=1.0))
+plt.yticks(np.arange(0,12,step=1.0))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_9.py
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"] 
+np.random.seed(5)                                       # 固定隨機數
+x = np.random.rand(10)
+y = np.random.rand(10)
+colors = np.array(['b','c','g','k','m','r','y','pink','purple','orange'])
+# 建立 1 x 3 的子圖
+fig, axs = plt.subplots(nrows=1, ncols=3, sharex=True, sharey=True)
+# 建立多邊形標記
+axs[0].scatter(x, y, s=75, c=colors, marker=(5, 0))
+axs[0].set_title("多邊形marker=(5, 0)")
+axs[0].axis('square')                                   # 建立矩形子圖
+# 建立星形標記
+axs[1].scatter(x, y, s=75, c=colors, marker=(5, 1))
+axs[1].set_title("星狀形marker=(5, 1)")
+axs[1].axis('square')                                   # 建立矩形子圖
+# 建立鑽石標記
+axs[2].scatter(x, y, s=75, c=colors, marker=(5, 2))
+axs[2].set_title("鑽石形marker=(5, 2)")
+axs[2].axis('square')                                   # 建立矩形子圖
+plt.tight_layout()
+plt.show()
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_10.py
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"] 
+np.random.seed(20)                                       # 固定隨機數
+x = np.random.rand(10)
+y = np.random.rand(10)
+colors = np.array(['b','c','g','k','m','r','y','pink','purple','orange'])
+# 建立 2 x 3 的子圖
+fig, axs = plt.subplots(nrows=2, ncols=3, sharex=True, sharey=True)
+# 建立 aplha 標記
+axs[0,0].scatter(x, y, s=100, c=colors, marker=r'$\alpha$')
+axs[0,0].set_title(r'${alpha=}\alpha$'+'標記',c='b')
+axs[0,0].axis('square')                                   # 建立矩形子圖
+# 建立 beta 標記
+axs[0,1].scatter(x, y, s=100, c=colors, marker=r'$\beta$')
+axs[0,1].set_title(r'${beta=}\beta$'+'標記',c='b')
+axs[0,1].axis('square')                                   # 建立矩形子圖
+# 建立 gamma 標記
+axs[0,2].scatter(x, y, s=100, c=colors, marker=r'$\gamma$')
+axs[0,2].set_title(r'${gamma=}\gamma$'+'標記',c='b')
+axs[0,2].axis('square')                                   # 建立矩形子圖
+# 建立 clubsuit 標記
+axs[1,0].scatter(x, y, s=100, c=colors, marker=r'$\clubsuit$')
+axs[1,0].set_title(r'${clubsuit=}\clubsuit$'+'標記',c='b')
+axs[1,0].axis('square')                                   # 建立矩形子圖
+# 建立 spadesuit 標記
+axs[1,1].scatter(x, y, s=100, c=colors, marker=r'$\spadesuit$')
+axs[1,1].set_title(r'${spadesuit=}\spadesuit$'+'標記',c='b')
+axs[1,1].axis('square')                                   # 建立矩形子圖
+# 建立 heartsuit 標記
+axs[1,2].scatter(x, y, s=100, c=colors, marker=r'$\heartsuit$')
+axs[1,2].set_title(r'${heartsuit=}\heartsuit$'+'標記',c='b')
+axs[1,2].axis('square')                                   # 建立矩形子圖
+plt.tight_layout()
+
+plt.show()
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_11.py
+
+# ch9_11.py
+import matplotlib.pyplot as plt
+import numpy as np
+
+points = 10
+colors = np.array(['b','c','g','k','m','r','y','pink','purple','orange'])
+x = np.random.randint(1,11,points)      # 建立 x
+y1 = np.random.randint(1,11,points)     # 建立 y1
+y2 = np.random.randint(1,11,points)     # 建立 y2
+plt.scatter(x, y1, c=colors, label='Circle')
+plt.scatter(x, y2, c=colors, marker='*', label='Star')
+plt.xticks(np.arange(0,11,step=1.0))
+plt.yticks(np.arange(0,11,step=1.0))
+plt.legend()
+plt.show()
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_13.py
+
+# ch9_13.py
+import matplotlib.pyplot as plt
+import numpy as np
+
+np.random.seed(10)                          # 固定隨機數
+N = 50                                      # 散點的數量
+r = 0.5                                     # 邊界線boundary半徑
+x = np.random.rand(N)                       # 隨機的 x 座標點
+y = np.random.rand(N)                       # 隨機的 y 座標點
+area = []
+for i in range(N):                          # 建立散點區域陣列
+    area.append(30)
+colorused = ['b','c','g','k','m','r','y']   # 定義顏色
+colors = []
+for i in range(N):                          # 隨機設定 N 個顏色
+    colors.append(np.random.choice(colorused))
+
+area1 = np.ma.masked_where(x < r, area)     # 邊界線 0.5 內區域遮罩
+area2 = np.ma.masked_where(x >= r, area)    # 邊界線 0.5 (含)外區域遮罩
+# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
+plt.scatter(x, y, s=area1, marker='*', c=colors)
+plt.scatter(x, y, s=area2, marker='o', c=colors)
+# 繪製邊界線
+plt.plot((0.5,0.5),(0,1.0))                 # 繪製邊界線
+plt.xticks(np.arange(0,1.1,step=0.1))
+plt.yticks(np.arange(0,1.1,step=0.1))
+plt.show()
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python資料視覺化從2D到3D使用matplotlib實作a\ch9\ch9_14.py
+
+# ch9_14.py
+import matplotlib.pyplot as plt
+import numpy as np
+
+np.random.seed(10)                          # 固定隨機數
+N = 50                                      # 散點的數量
+r = 0.5                                     # 邊界線boundary半徑
+x = np.random.rand(N)                       # 隨機的 x 座標點
+y = np.random.rand(N)                       # 隨機的 y 座標點
+area = np.random.randint(20,100,N)          # 散點大小
+colorused = ['b','c','g','k','m','r','y']   # 定義顏色
+colors = []
+for i in range(N):                          # 隨機設定 N 個顏色
+    colors.append(np.random.choice(colorused))
+
+r1 = np.sqrt(x ** 2 + y ** 2)               # 計算距離
+area1 = np.ma.masked_where(r1 < r, area)    # 邊界線 0.5 內區域遮罩
+area2 = np.ma.masked_where(r1 >= r, area)   # 邊界線 0.5 (含)外區域遮罩
+# 大於或等於 0.5 繪製星形, 小於 0.5 繪製圓形
+plt.scatter(x, y, s=area1, marker='*', c=colors)
+plt.scatter(x, y, s=area2, marker='o', c=colors)
+# 計算 0.5Pi 之弧度, 依據弧度產生的座標點繪製邊界線
+radian = np.arange(0, np.pi / 2, 0.01)
+plt.plot(r * np.cos(radian), r * np.sin(radian))    # 繪製邊界線
+plt.xticks(np.arange(0,1.1,step=0.1))
+plt.yticks(np.arange(0,1.1,step=0.1))
+plt.show()
+
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

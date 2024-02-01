@@ -13,18 +13,13 @@ print("x= ", str(x4).rjust(4))
 
 print("------------------------------------------------------------")  # 60個
 
-import time, sys
-
 x1 = 1
 x2 = 11
 x3 = 111
 x4 = 1111
 print("x= ", str(x1).rjust(4), end="\r", flush=True)
-time.sleep(1)
 print("x= ", str(x2).rjust(4), end="\r", flush=True)
-time.sleep(1)
 print("x= ", str(x3).rjust(4), end="\r", flush=True)
-time.sleep(1)
 print("x= ", str(x4).rjust(4), end="\r", flush=True)
 
 print("------------------------------------------------------------")  # 60個
@@ -64,24 +59,6 @@ translation_ko = GoogleTranslator(source='auto', target='ko').translate(text)
 print("韓文:", translation_ko)
 
 print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-from scipy.io import wavfile
-
-mywav = r'C:Windows\Media\notify.wav'
-# 讀取.wav文件
-sample_rate, data = wavfile.read(mywav)
-
-# 繪製聲波圖
-plt.figure(figsize=(10, 4))
-plt.plot(data)
-plt.title('Waveform of nofity.wav file')
-plt.ylabel('Amplitude')
-plt.xlabel('Sample')
-plt.show()
-
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -144,587 +121,45 @@ with sr.Microphone() as source:
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-from scipy.io import wavfile
-
-mywav = 'out33_7.wav'
-# 讀取.wav文件
-sample_rate, data = wavfile.read(mywav)
-
-# 繪製聲波圖
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.figure(figsize=(10, 4))
-plt.plot(data)
-plt.title('Good Morning聲波圖')
-plt.ylabel('Amplitude')
-plt.xlabel('Sample')
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-from scipy.io import wavfile
-
-mywav = 'out33_8.wav'
-# 讀取.wav文件
-sample_rate, data = wavfile.read(mywav)
-
-# 繪製聲波圖
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-plt.figure(figsize=(10, 4))
-plt.plot(data)
-plt.title('早安 聲波圖')
-plt.ylabel('Amplitude')
-plt.xlabel('Sample')
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import yfinance as yf
-
-apple = yf.Ticker("AAPL")                           # 建立Apple物件
-print("Apple公司財務報表")
-financials = apple.financials                       # 獲取財務報表
-print(financials)
-quarterly_financials = apple.quarterly_financials   # 獲取季度財務報表
-print(quarterly_financials)
-
-tsmc = yf.Ticker("2330.TW")                         # 建立Apple物件
-print("台積電財務報表")
-financials = tsmc.financials                        # 獲取財務報表
-print(financials)
-quarterly_financials = tsmc.quarterly_financials    # 獲取季度財務報表
-print(quarterly_financials)
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch32\ch32_2.py
-
-# ch32_2.py
-import yfinance as yf
-
-def fetch_apple_stock_price():
-    # 獲取Apple股票資料
-    apple = yf.Ticker("AAPL")
-    
-    # 獲取即時股價
-    apple_stock_info = apple.history(period="1d")
-    
-    # 輸出股價
-    print("Apple公司的股價(目前或最近交易日) : ")
-    print("開盤價：", apple_stock_info['Open'].iloc[0])
-    print("收盤價：", apple_stock_info['Close'].iloc[0])
-    print("最高價：", apple_stock_info['High'].iloc[0])
-    print("最低價：", apple_stock_info['Low'].iloc[0])
-    print("交易量：", apple_stock_info['Volume'].iloc[0])
-
-fetch_apple_stock_price()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch32\ch32_3.py
-
-# ch32_3.py
-import yfinance as yf
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-# 下載蘋果公司最近三個月的股價數據
-apple = yf.Ticker("AAPL")
-data = apple.history(period="3mo")
-
-# 計算5天和20天移動平均線
-data['MA5'] = data['Close'].rolling(window=5).mean()
-data['MA20'] = data['Close'].rolling(window=20).mean()
-
-# 繪製股價和移動平均線
-plt.figure(figsize=(10,6))
-plt.plot(data['Close'], label='AAPL Close', color='blue')
-plt.plot(data['MA5'], label='5-Day MA', color='green')
-plt.plot(data['MA20'], label='20-Day MA', color='red')
-
-# 標題和圖例
-plt.title('Apple公司股價 5 日和 20 日移動平均線')
-plt.xlabel('日期')
-plt.ylabel('價格')
-plt.legend()
-
-# 顯示圖表
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch32\ch32_4.py
-
-# ch32_4.py
-import yfinance as yf
-import matplotlib.pyplot as plt
-import numpy as np
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-# 下載台積電最近三個月的股價數據
-tsmc = yf.Ticker("2330.TW")                 
-data = tsmc.history(period='1y')
-
-# 計算5日和20日的簡單移動平均
-data['SMA5'] = data['Close'].rolling(window=5).mean()
-data['SMA20'] = data['Close'].rolling(window=20).mean()
-
-# 繪製收盤價和移動平均線
-plt.figure(figsize=(10, 6))
-plt.plot(data['Close'], label='Close Price', alpha=0.5)
-plt.plot(data['SMA5'], label='5-Day SMA', alpha=0.8)
-plt.plot(data['SMA20'], label='20-Day SMA', alpha=0.8)
-plt.title('台積電股價 5 日和 20 日移動平均線')
-plt.xlabel('日期')
-plt.ylabel('價格')
-plt.legend()
-plt.grid(True)
-plt.show()
-
-# 移動平均生成交易信號
-# 買入信號: 5日均線從下方突破20日均線
-# 賣出信號: 5日均線從上方跌破20日均線
-data['Signal'] = 0.0
-data.iloc[5:, data.columns.get_loc('Signal')] =\
-    np.where(data['SMA5'].iloc[5:] > data['SMA20'].iloc[5:], 1.0, 0.0)
-data['Signal_change'] = data['Signal'].diff()
-
-# 找出買入和賣出的日期
-buy_dates = data[data['Signal_change'] == 1].index
-sell_dates = data[data['Signal_change'] == -1].index
-
-print(f"買入日期: {buy_dates.tolist()}")
-print(f"賣出日期: {sell_dates.tolist()}")
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
-
-
-
-from pytube import YouTube
-
-yt = YouTube("https://www.youtube.com/watch?v=dhzsf5QXmns")
-print("下載中   ... ")
-yt.streams[0].download()
-print("下載完成 ... ")
-
-print("------------------------------------------------------------")  # 60個
-
-from pytube import YouTube
-
-yt = YouTube("https://www.youtube.com/watch?v=dhzsf5QXmns")
-videoViews = yt.views
-print(f"影片觀賞次數 : {videoViews}")
-videoSeconds = yt.length
-print(f"影片長度(秒) : {videoSeconds}")
-videoRating = yt.rating
-print(f"影片評價     : {videoRating}")
-videoTitle = yt.title
-print(f"影片標題     : {videoTitle}\n下載中 ... ")
-yt.streams[0].download()
-print("下載完成 ... ")
-
-print("------------------------------------------------------------")  # 60個
-
-from pytube import YouTube
-import os
-
-path = r"d:\myYouTube"
-if not os.path.isdir(path):         # 如果不存在則建立此資料夾
-    os.mkdir(path)
-
-yt = YouTube("https://www.youtube.com/watch?v=dhzsf5QXmns")
-videoViews = yt.views
-print(f"影片觀賞次數 : {videoViews}")
-videoSeconds = yt.length
-print(f"影片長度(秒) : {videoSeconds}")
-videoRating = yt.rating
-print(f"影片評價     : {videoRating}")
-videoTitle = yt.title
-print(f"影片標題     : {videoTitle}\n下載中 ... ")
-yt.streams[0].download(path)        # 所下載影音檔案儲存在path
-print("下載完成 ... ")
-
-print("------------------------------------------------------------")  # 60個
-
-from pytube import YouTube
-import os
-
-path = r"d:\myYouTube"
-if not os.path.isdir(path):             # 如果不存在則建立此資料夾
-    os.mkdir(path)
-
-links = ["https://www.youtube.com/watch?v=dhzsf5QXmns",
-         "https://www.youtube.com/watch?v=z8eE3CGyQiE"]
-for video in links:
-    yt = YouTube(video)
-    videoViews = yt.views
-    print(f"影片觀賞次數 : {videoViews}")
-    videoSeconds = yt.length
-    print(f"影片長度(秒) : {videoSeconds}")
-    videoRating = yt.rating
-    print(f"影片評價     : {videoRating}")
-    videoTitle = yt.title
-    print(f"影片標題     : {videoTitle}\n下載中 ... ")
-    print(f"影片格式數量 : {len(yt.streams)}")
-    yt.streams[0].download(path)        # 所下載影音檔案儲存在path
-    print("下載完成 ... ")
-
-print("------------------------------------------------------------")  # 60個
-
-import threading 
-import os  
-from pytube import YouTube  
-
-def download_video(url):
-    try:
-        yt = YouTube(url)                       # 建立 YouTube 物件
-        yt.streams[0].download(download_path)   # 選擇第1個並下載
-        print(f"下載完成 : {url}")              # 輸出下載完成的訊息
-    except Exception as e:
-        print(f"錯誤下載 {url}: {str(e)}")      # 如果錯誤, 輸出錯誤訊息
-
-# 下載影片的 URL 列表
-urls = [
-    "https://www.youtube.com/watch?v=dhzsf5QXmns",
-    "https://www.youtube.com/watch?v=z8eE3CGyQiE",
-    "https://www.youtube.com/watch?v=GLlsu31FBt8",
-    "https://www.youtube.com/watch?v=VMCk7fh9SGw",
-    "https://www.youtube.com/watch?v=_32sspKCF8Y",
-]
-
-# 定義當前目錄下的 out36_5 資料夾作為下載路徑
-download_path = os.path.join(os.getcwd(), 'out36_5')
-
-# 檢查該資料夾是否存在，如果不存在則建立
-if not os.path.exists(download_path):
-    os.makedirs(download_path)
-
-threads = []                                    # 建立一個空串列儲存執行緒
-
-# 為每個 URL 建立一個新的執行緒
-for url in urls:
-    thread = threading.Thread(target=download_video, args=(url,))
-    threads.append(thread)                      # 將執行緒添加到串列中
-    thread.start()                              # 開始執行緒的執行
-
-# 等待所有執行緒完成
-for thread in threads:
-    thread.join()
-
-print("所有影片下載完成")                       
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-from pytube import YouTube
-
-def loadVideo():                    # 列印下載資訊
-    vlinks = "https//www.youtube.com/watch?v="
-    vlinks = vlinks + links.get()   # 影音檔案網址
-    yt = YouTube(vlinks)
-    yt.streams[0].download()
-    x.set("影音檔案下載完成 ...")
-          
-window = Tk()
-window.title("ch35_6")              # 視窗標題
-
-x = StringVar()
-x.set("請輸入影音檔案序列碼")
-links = StringVar()
-
-lab1 = Label(window,text="輸入影音檔案序列碼 : ").grid(row=0)
-lab2 = Label(window,text="請輸入儲存的資料夾 : ").grid(row=1)
-lab3 = Label(window,textvariable=x,
-             height=3).grid(row=2,column=0,columnspan=2)
-             
-e1 = Entry(window,textvariable=links)   # 文字方塊1
-e2 = Entry(window)                      # 文字方塊2
-e1.grid(row=0,column=1)                 # 定位文字方塊1
-e2.grid(row=1,column=1)                 # 定位文字方塊2
-
-btn1 = Button(window,text="下載",command=loadVideo)
-btn1.grid(row=3,column=0)
-btn2 = Button(window,text="結束",command=window.destroy)
-btn2.grid(row=3,column=1)
-
-window.mainloop()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_19.py
-
-# ch13_19.py
-import random                               # 導入模組random
-
-lotterys = random.sample(range(1,50), 7)    # 7組號碼
-specialNum = lotterys.pop()                 # 特別號
-
-print("第xxx期大樂透號碼 ", end="")
-for lottery in sorted(lotterys):            # 排序列印大樂透號碼
-    print(lottery, end=" ")
-print(f"\n特別號:{specialNum}")             # 列印特別號
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_20.py
-
-# ch13_20.py
-import random
-random.seed(5)
-for i in range(5):
-    print(random.random())
-    
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_21.py
-
-# ch13_21.py
-import random                       # 導入模組random
-import time                         # 導入模組time
-
-min, max = 1, 10
-ans = random.randint(min, max)      # 隨機數產生答案
-yourNum = int(input("請猜1-10之間數字: "))
-starttime = int(time.time())        # 起始秒數
-while True:    
-    if yourNum == ans:
-        print("恭喜!答對了")
-        endtime = int(time.time())  # 結束秒數
-        print("所花時間: ", endtime - starttime, " 秒")
-        break
-    elif yourNum < ans:
-        print("請猜大一些")
-    else:
-        print("請猜小一些")
-    yourNum = int(input("請猜1-10之間數字: "))
-        
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_22.py
-
-# ch13_22.py
-import time                         # 導入模組time
-
-xtime = time.localtime()
-print(xtime)                        # 列出目前系統時間
-print("年 ", xtime[0])
-print("年 ", xtime.tm_year)         # 物件設定方式顯示
-print("月 ", xtime[1])
-print("日 ", xtime[2])
-print("時 ", xtime[3])
-print("分 ", xtime[4])
-print("秒 ", xtime[5])
-print("星期幾   ", xtime[6])
-print("第幾天   ", xtime[7])
-print("夏令時間 ", xtime[8])
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_23.py
-
-# ch13_23.py
-import time
-x = 1000000
-pi = 0
-time.process_time()
-for i in range(1,x+1):
-    pi += 4*((-1)**(i+1) / (2*i-1))
-    if i != 1 and i % 100000 == 0:      # 隔100000執行一次
-        e_time = time.process_time()
-        print(f"當 {i=:7d} 時 PI={pi:8.7f}, 所花時間={e_time}")
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_23_1.py
-
-# ch13_23_1.py
-import time
-formatted_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-print(formatted_time)
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_24.py
-
-# ch13_24.py
 import sys
 print("請輸入字串, 輸入完按Enter = ", end = "")
 msg = sys.stdin.readline()
 print(msg)
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_25.py
-
-# ch13_25.py
 import sys
 print("請輸入字串, 輸入完按Enter = ", end = "")
 msg = sys.stdin.readline(8)         # 讀8個字
 print(msg)
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_26.py
-
-# ch13_26.py
 import sys
 
 sys.stdout.write("I like Python")
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_27.py
-
-# ch13_27.py
 import sys
 for dirpath in sys.path:
     print(dirpath)
 
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_28.py
-
-# ch13_28.py
 import sys
 print("命令列參數 : ", sys.argv)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_29.py
-
-# ch13_29.py
 import keyword
 
 keywordLists = ['as', 'while', 'break', 'sse', 'Python']
 for x in keywordLists:
     print(f"{x:>8s} {keyword.iskeyword(x)}")
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_30.py
-
-# ch13_30.py
 import sys
 from pprint import pprint
 print("使用print")
@@ -732,85 +167,8 @@ print(sys.path)
 print("使用pprint")
 pprint(sys.path)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_31.py
-
-# ch13_31.py
-import random                       # 導入模組random
-money = 300                         # 賭金總額
-bet = 100                           # 賭注
-min, max = 1, 100                   # 隨機數最小與最大值設定
-winPercent = int(input("請輸入莊家贏的比率(0-100)之間 :"))
-
-while True:
-    print(f"歡迎光臨 : 目前籌碼金額 {money} 美金 ")
-    print(f"每次賭注 {bet} 美金 ")
-    print("猜大小遊戲: L或l表示大,  S或s表示小, Q或q則程式結束")
-    customerNum = input("= ")       # 讀取玩家輸入
-    if customerNum == 'Q' or customerNum == 'q':    # 若輸入Q或q
-        break                                       # 程式結束
-    num = random.randint(min, max)  # 產生是否讓玩家答對的隨機數
-    if num > winPercent:            # 隨機數在此區間回應玩家猜對
-        print("恭喜!答對了\n")
-        money += bet                # 賭金總額增加
-    else:                           # 隨機數在此區間回應玩家猜錯
-        print("答錯了!請再試一次\n")
-        money -= bet                # 賭金總額減少
-    if money <= 0:
-        break
-
-print("歡迎下次再來")
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_32.py
-
-# ch13_32.py
-import random
-
-trials = 1000000
-Hits = 0
-for i in range(trials):
-    x = random.random() * 2 - 1     # x軸座標
-    y = random.random() * 2 - 1     # y軸座標
-    if x * x + y * y <= 1:          # 判斷是否在圓內
-        Hits += 1
-PI = 4 * Hits / trials
-
-print("PI = ", PI)
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_33.py
-
-# ch13_33.py
 import string
 
 def encrypt(text, encryDict):           # 加密文件
@@ -831,165 +189,1256 @@ ciphertext = encrypt(msg, encry_dict)
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
 
+print("------------------------------------------------------------")  # 60個
+
+import sys
+def wordsNum(filename):
+    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    try:
+        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
+            data = file_Obj.read()  # 讀取檔案到變數data
+    except FileNotFoundError:
+        print("找不到 %s 檔案" % filename)
+    else:
+        wordList = data.split()     # 將文章轉成串列
+        print(filename, " 文章的字數是 ", len(wordList))    # 列印文章字數
+
+"""
+files = []
+for i in range(5):
+    filename = input("請輸入檔案名稱 : ")
+    files.append(filename)
+    
+for file in files:
+    wordsNum(file)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+def wordsNum(filename):
+    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    try:
+        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
+            data = file_Obj.read()  # 讀取檔案到變數data
+    except FileNotFoundError:
+        print("找不到 %s 檔案" % filename)
+    else:
+        wordList = data.split()     # 將文章轉成串列
+        print(filename, " 文章的字數是 ", len(wordList))    # 列印文章字數
+        return len(wordList)
+
+def lenWord(filename):
+    """檢查檔案長度必須是10到35個字元"""
+    wdlen = wordsNum(filename)                              # 檔案長度
+    if wdlen < 10:                                    # 檔案長度不足            
+        raise Exception('檔案長度不足')
+    if wdlen > 35:                                    # 檔案長度太長
+        raise Exception('檔案長度太長')
+    print('檔案長度正確')
+
+for file in ("data/d1.txt","data/d2.txt","data/d3.txt","data/d4.txt","data/d5.txt"):  # 測試系列檔案
+    try:
+        lenWord(file)
+    except Exception as err:
+        print("檔案長度檢查異常發生: ", str(err))
+
+print("------------------------------------------------------------")  # 60個
+
+def compareString(string):
+    """檢查是否是搜尋的字串"""
+    if string == searchStr:
+        return True
+    else:
+        return False
+
+def parseString(string):
+    global num
+    # notFoundSignal = True     # 註記沒有找到電話號碼為True
+    for i in range(len(data)):  # 用迴圈逐步抽取字串長度做測試
+        msg = data[i:i+len(string)]
+        if compareString(msg):
+            num += 1
+
+filename = 'data/ex16_2.txt'
+with open(filename) as file_obj:      # 讀取ex21_2.txt
+    data = file_obj.read()
+
+"""
+while True:
+    searchStr = input("請輸入與搜尋字串 : ")
+    num = 0
+    parseString(searchStr)
+    print("所搜尋字串 %s 共出現 %d 次" % (searchStr, num))
+    print("\n是否繼續,輸入Y或y則程式繼續")
+    again = input("= ")       # 讀取使用者輸入
+    if again == 'Y' or again == 'y':    # 若輸入Y或y
+        pass
+    else:
+        break
+"""    
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+import os
+
+files = os.listdir("data")
+txtList = []
+# 測試1
+pattern = '(.*).txt'
+print("列印*.txt")
+for filename in files:
+    #print(filename)
+    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
+    if fnresult != None:
+        txtList.append(filename)
+print(txtList)
+
+pyList = []  
+# 測試2
+print("列印ch14_10.py - ch14_19.py")
+pattern = '(ch14_1(\d).py)'
+for filename in files:
+    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
+    if fnresult != None:
+        pyList.append(filename)
+print(pyList)
 
 
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+msg = """txt@deepwisdom.comyyy.twkkk,
+         ser@deepmind.com.tw,
+         hung@gmail.com
+         aaa@gmail.comcomkk,
+         kkk@gmail.com,
+         abc@aa,
+         service@deepwidsom.com
+         mymail@yahoo.com
+         de1988@kkk
+         abcdefg"""
+pattern = r"""(
+    [a-zA-Z0-9_.]+                  # 使用者帳號
+    @                               # @符號
+    [a-zA-Z0-9-.]+                  # 主機域名domain
+    [\.]                            # .符號
+    [a-zA-Z]{2,4}\b                 # 可能是com或edu或其它
+    ([\.])?                         # .符號, 也可能無特別是美國
+    ([a-zA-Z]{2,4}\b)?              # 國別
+    )"""
+eMail = re.findall(pattern, msg, re.VERBOSE)     # 傳回搜尋結果
+for mail in eMail:
+    print(mail[0])
+
+print("------------------------------------------------------------")  # 60個
+
+import pygal.maps.world
+
+worldMap = pygal.maps.world.World()                     # 建立世界地圖物件
+worldMap.title = 'Populations in China/Japan/Thailand'  # 世界地圖標題
+worldMap.add('Asia',{'cn':1262645000,
+                     'jp':126870000,
+                     'th':63155029})                    # 標記人口資訊
+worldMap.add('Europe',{'fr':60762406,
+                     'se':1011781,
+                     'sz':7184798})                    # 標記人口資訊
+worldMap.add('Africa',{'cd':49626496,
+                     'eg':67649043,
+                     'za':44000833})                    # 標記人口資訊
+worldMap.add('North America',{'us':282162848,
+                     'mx':99959895,
+                     'ca':30770661})                    # 標記人口資訊
+worldMap.render_to_file('tmp_world_map.svg')                 # 儲存地圖檔案
+
+print("------------------------------------------------------------")  # 60個
+
+import webbrowser
+
+address = "花蓮市中正路"
+webbrowser.open('http://www.google.com.tw/maps/place/' + address)
+
+print("------------------------------------------------------------")  # 60個
+
+import bs4, requests
+"""
+url = 'http://www.taiwanlottery.com.tw'
+html = requests.get(url)
+
+objSoup = bs4.BeautifulSoup(html.text, 'lxml')      # 建立BeautifulSoup物件
+
+dataTag = objSoup.select('.contents_box02')         # 尋找class是contents_box02
+        
+# 找尋開出順序與大小順序的球
+balls = dataTag[2].find_all('div', {'class':'ball_tx ball_yellow'})
+print("開出順序 : ", end='')
+for i in range(6):                                  # 前6球是開出順序
+    print(balls[i].text, end='   ')
+
+print("\n大小順序 : ", end='')
+for i in range(6,len(balls)):                       # 第7球以後是大小順序
+    print(balls[i].text, end='   ')
+
+# 找出第二區的紅球                   
+redball = dataTag[2].find_all('div', {'class':'ball_red'})
+print("\n特別號   :", redball[0].text)
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+import time
+
+driverPath = 'D:\geckodriver\geckodriver.exe'
+browser = webdriver.Firefox(executable_path=driverPath)
+url = 'https://www.wikipedia.org/'
+browser.get(url)                    # 網頁下載至瀏覽器
+
+txtBox = browser.find_element_by_id('searchInput')
+txtBox.send_keys('Artificial Intelligence')          # 輸入表單資料
+time.sleep(5)                       # 暫停5秒
+txtBox.submit()                     # 送出表單
+
+print("------------------------------------------------------------")  # 60個
+
+from twilio.rest import Client
+
+# 你從twilio.com申請的帳號
+accountSid='AC308f91e9dc748a01538feb9d74ed993a'
+# 你從twilio.com獲得的圖騰
+authToken='f513161b63f71720f62118e4d33ca8ac'
+
+client = Client(accountSid, authToken)
+message = client.messages.create (
+            from_ = "+15052070000",         # 這是twilio.com給你的號碼
+            to = "+886952xxxxxx",           # 填上老師的號碼
+            body = "感謝老師,我們學會了Python" )   # 發送的訊息
+
+print("------------------------------------------------------------")  # 60個
+
+import smtplib
+from email.mime.text import MIMEText
+
+from_addr = 'cshung1961@gmail.com'              # 設定發信帳號
+pwd = input('請輸入 %s 的密碼 : ' % from_addr)  # 要求輸入發信帳號密碼
+to_addr_list = ['cshung@deepwisdom.com.tw', 'jiinkwei@me.com']   # 設定收件人
+
+with open('ex26_2.txt', 'rb') as filename:         # 讀取檔案內容
+    mailContent = filename.read()
+msg = MIMEText(mailContent, 'base64', 'utf-8')
+msg['Content-Type'] = 'application/octet-stream'
+msg['Content-Disposition'] = 'attachment; filename="ex26_2.txt"'
+msg['Subject'] = '傳送Python學習心得附加檔案'
+msg['From'] = '學生'
+msg['To'] = 'cshung@deepwisdom.com.tw'
+msg['Cc'] = 'jiinkwei@me.com'
+
+mySMTP = smtplib.SMTP('smtp.gmail.com', 587)    # 執行連線
+mySMTP.ehlo()                                   # 啟動對話
+mySMTP.starttls()                               # 執行TLS加密               
+mySMTP.login(from_addr, pwd)                    # 登入郵件伺服器
+status = mySMTP.sendmail(from_addr, to_addr_list, msg.as_string())  # 執行發送信件
+if status == {}:                                # 檢查是否發信成功
+    print("發送郵件成功!")
+mySMTP.quit()                                   # 結束連線
 
 
-
+print("------------------------------------------------------------")  # 60個
+"""
 
 
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_34.py
+code1 = '洪'
+print('洪')
+print(hex(ord(code1)))     # 輸出字元'洪'的Unicode(16進位)碼值
+code2 = '錦'
+print('錦')
+print(hex(ord(code2)))     # 輸出字元'錦'的Unicode(16進位)碼值
+code3 = '魁'
+print('魁')
+print(hex(ord(code3)))     # 輸出字元'魁'的Unicode(16進位)碼值
 
-# ch13_34.py
-import string
-import random
-def encrypt(text, encryDict):           # 加密文件
-    cipher = []
-    for i in text:                      # 執行每個字元加密
-        v = encryDict[i]                # 加密
-        cipher.append(v)                # 加密結果
-    return ''.join(cipher)              # 將串列轉成字串
-    
-abc = string.printable[:-5]             # 取消不可列印字元
-newAbc = abc[:]                         # 產生新字串拷貝
-abclist = list(newAbc)                  # 轉成串列
-random.shuffle(abclist)                 # 打亂串列順序
-subText = ''.join(abclist)              # 轉成字串
+
+print("------------------------------------------------------------")  # 60個
+
+print(" 姓名    國文    英文    總分    平均")
+print("%3s  %4d    %4d    %4d     %3.1f" % ("洪冰儒", 98, 90, 188, 188/2))
+print("%3s  %4d    %4d    %4d     %3.1f" % ("洪雨星", 96, 95, 191, 191/2))
+print("%3s  %4d    %4d    %4d     %3.1f" % ("洪冰雨", 92, 88, 180, 180/2))
+print("%3s  %4d    %4d    %4d     %3.1f" % ("洪星宇", 93, 97, 190, 190/2))
+
+print("------------------------------------------------------------")  # 60個
+
+wd = """The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!"""
+print("下列是Python之禪內文")
+print(wd)
+print("以分行符號將Python 之禪的行資料變成串列元素")
+songlist = wd.split('\n')
+print(songlist)
+
+print("------------------------------------------------------------")  # 60個
+
+abc = 'abcdefghijklmnopqrstuvwxyz'
+front5 = abc[:5]
+end21 = abc[5:]
+subText = end21 + front5
+print("abc     = ", abc)
+print("subText = ", subText)
+
+print("------------------------------------------------------------")  # 60個
+
+cities = ['Taipei','Beijing','Tokyo','Chicago','Nanjing']
+print(cities)
+cities.append('London')
+print(cities)
+cities.insert(3,'Xian')
+print(cities)
+cities.remove('Tokyo')
+print(cities)
+
+print("------------------------------------------------------------")  # 60個
+
+sc = [['洪錦魁', 80, 95, 88, 0, 0],
+      ['洪冰儒', 98, 97, 96, 0, 0],
+      ['洪雨星', 91, 93, 95, 0, 0],
+      ['洪冰雨', 92, 94, 90, 0, 0],
+      ['洪星宇', 92, 97, 90, 0, 0],
+     ]      
+sc[0][4] = sum(sc[0][1:4])
+sc[1][4] = sum(sc[1][1:4])
+sc[2][4] = sum(sc[2][1:4])
+sc[3][4] = sum(sc[3][1:4])
+sc[4][4] = sum(sc[4][1:4])
+sc[0][5] = round((sc[0][4] / 3), 1)
+sc[1][5] = round((sc[1][4] / 3), 1)
+sc[2][5] = round((sc[2][4] / 3), 1)
+sc[3][5] = round((sc[3][4] / 3), 1) 
+sc[4][5] = round((sc[4][4] / 3), 1) 
+print(sc[0])   
+print(sc[1])
+print(sc[2])
+print(sc[3])
+print(sc[4])
+
+print("------------------------------------------------------------")  # 60個
+
+site = input("請輸入網址 : ")
+if site.startswith("http://") or site.startswith("https://"):
+    print("網址格式正確")
+else:
+    print("網址格式錯誤")
+
+print("------------------------------------------------------------")  # 60個
+
+n = 10
+for i in range(1,n):
+    for j in range(1,n-i+1):
+        print(j, end='')
+    print()
+
+print("------------------------------------------------------------")  # 60個
+
+fruits1 = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
+fruits2 = ['香蕉', '芭樂', '西瓜']
+print("目前fruits2串列 : ", fruits2)
+for fruit in fruits2[:]:
+    if fruit in fruits1:
+        fruits2.remove(fruit)
+        print(f"刪除 {fruit}")
+print("最後fruits2串列 : ", fruits2)
+
+print("------------------------------------------------------------")  # 60個
+
+title = "9 * 9 Multiplication Table"
+print("%s" % title.center(40))
+for i in range(1,10):
+    print(f"{i:4d}", end='')
+print()                                 # 跳列輸出
+for i in range(40):
+    print("=", end='')                  # 列印分隔符號
+print()                                 # 跳列輸出
+for i in range(1, 10):
+    print(i, '|', end='')
+    for j in range(1, 10):
+        print(f"{i*j:4d}", end='')      # 列印乘法值
+    print()                             # 跳列輸出
+
+print("------------------------------------------------------------")  # 60個
+
+answer = 30                 # 正確數字
+guess = 0                   # 設定所猜數字的初始值
+index = 1                   # 猜測次數
+while guess != answer:
+    guess = int(input("請猜1-100間的數字 = "))
+    if guess > answer:
+        print("請猜小一點")
+    elif guess < answer:
+        print("請猜大一點")
+    else:
+        print("恭喜答對了")
+        print(f"共猜 {index} 次")
+    index += 1
+
+print("------------------------------------------------------------")  # 60個
+
+x1 = eval(input("請輸入數值 1 : "))
+x2 = eval(input("請輸入數值 2 : "))
+
+gcd = 1
+n = 2
+while n <= x1 and n <= x2:
+    if x1 % n == 0 and x2 % n == 0:
+        gcd = n
+    n += 1
+
+print(f"{x1} 和 {x2} 的最大公約數是 : {gcd}")
+
+print("------------------------------------------------------------")  # 60個
+
+names = ['洪錦魁','洪冰儒','東霞','大成']
+lastname = []
+for name in names:
+    if name.startswith('洪'):    # 是否姓氏洪開頭
+        lastname.append(name)    # 加入串列
+print(lastname)
+
+print("------------------------------------------------------------")  # 60個
+
+sc = [[1, '洪錦魁', 80, 95, 88, 0, 0, 0],
+      [2, '洪冰儒', 98, 97, 96, 0, 0, 0],
+      [3, '洪雨星', 91, 93, 95, 0, 0, 0],
+      [4, '洪冰雨', 92, 94, 90, 0, 0, 0],
+      [5, '洪星宇', 92, 97, 90, 0, 0, 0],
+     ]
+# 計算總分與平均
+print("原始成績單")
+for i in range(len(sc)):
+    print(sc[i])
+    sc[i][5] = sum(sc[i][2:5])              # 填入總分
+    sc[i][6] = round((sc[i][5] / 3), 1)     # 填入平均
+sc.sort(key=lambda x:x[5],reverse=True)     # 依據總分高往低排序
+# 以下填入名次
+for i in range(len(sc)):                    # 填入名次
+    sc[i][7] = i + 1
+# 以下修正相同成績應該有相同名次
+for i in range((len(sc)-1)):
+    if sc[i][5] == sc[i+1][5]:              # 如果成績相同
+        sc[i+1][7] = sc[i][7]               # 名次應該相同
+# 以下依座號排序
+sc.sort(key=lambda x:x[0])                  # 依據座號排序
+print("最後成績單")
+for i in range(len(sc)):
+    print(sc[i])
+
+print("------------------------------------------------------------")  # 60個
+
+weight = 50              
+increase = 1.2
+n = 5
+for i in range(int(n)):
+    weight += increase
+    print(f"第 {i+1} 年體重 : {weight:4.1f}")
+
+print("------------------------------------------------------------")  # 60個
+
+fahrenheit = [32, 77, 104]
+celsius = [(x - 32) * 5 / 9 for x in fahrenheit]
+print(celsius)
+
+print("------------------------------------------------------------")  # 60個
+
+n1 = [1,2,3,4,5]
+n2 = [1,2,3,4,5]
+result = [[x, y] for x in n1 for y in n2]
+print(result)
+
+print("------------------------------------------------------------")  # 60個
+
+bookclub = ('John','Peter','Curry','Mike','Kevin')
+print("讀書會成員")
+for people in bookclub:
+    print(people)
+bookclub[0] = 'Johnnason'
+for people in bookclub:
+    print(people)
+
+print("------------------------------------------------------------")  # 60個
+
+tp = (1,2,3,4,5,2,3,1,4)
+lst = list(tp)
+newlst = []
+for i in lst:
+    if i not in newlst:
+        newlst.append(i)
+newtp = tuple(newlst)
+print("新的元組內容 : ", newtp)    
+
+print("------------------------------------------------------------")  # 60個
+
+weatherH = (30, 28, 29, 31, 33, 35, 32)
+weatherL = (20, 21, 19, 22, 23, 24, 20)
+print(f"過去一周的最高溫度 {max(weatherH)}")
+print(f"過去一周的最低溫度 {min(weatherH)}")
+
+print("過去一周的平均溫度")     
+for i in range(len(weatherH)):
+    print(f"{((weatherH[i]+weatherL[i])/2):3.1f}  ", end="")
+
+print("------------------------------------------------------------")  # 60個
+
+abc = 'abcdefghijklmnopqrstuvwxyz'
+encry_dict = {}
+front3 = abc[:3]
+end23 = abc[3:]
+subText = end23 + front3
 encry_dict = dict(zip(subText, abc))    # 建立字典
 print("列印編碼字典\n", encry_dict)     # 列印字典
 
-msg = 'If the implementation is easy to explain, it may be a good idea.'
-ciphertext = encrypt(msg, encry_dict)
+msgTest = 'python'                      # 測試字串
+cipher = []
+for i in msgTest:                       # 執行每個字元加密
+    v = encry_dict[i]                   # 加密
+    cipher.append(v)                    # 加密結果
+ciphertext = ''.join(cipher)            # 將串列轉成字串
 
-print("原始字串 ", msg)
+print("原始字串 ", msgTest)
 print("加密字串 ", ciphertext)
 
+print("------------------------------------------------------------")  # 60個
 
+season = {'Spring':'春季',
+          'Summer':'夏季',
+          'Fall':'秋季',
+          'Winter':'冬季'}
 
-
-
-
-
-
+wd = input("請輸入欲查詢的單字 : ")
+if wd in season:
+    print(wd, " 中文字義是 : ", season[wd])
+else:
+    print("查無此單字")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_35.py
+month = {'一月':'January','二月':'February','三月':'March',
+         '四月':'April', '五月':'May','六月':'June',
+         '七月':'July','八月':'August','九月':'September',
+         '十月':'October','十一月':'November','十二月':'December'
+        }
+         
+key = input("請輸入月份(例如:一月) : ")
+if key in month:
+    print(month[key])
+else:
+    print('輸入錯誤')
 
-# ch13_35.py
-import random
+print("------------------------------------------------------------")  # 60個
 
-# 假設一家公司想要測試兩種不同的廣告設計, 以看哪一種效果更好
-ad_designs = ['Design A', 'Design B']
+noodles = {'牛肉麵':100, '肉絲麵':80, '陽春麵':60,
+           '大滷麵':90, '麻醬麵':70}
+print(noodles)
+for noodle, price in sorted(noodles.items(), key=lambda item:item[1]):
+    print(noodle,":",price)
 
-# 公司有一個1000人的郵件列表, 想要隨機選擇一半接收A廣告, 一半接收B廣告
-recipients = {'Design A': [], 'Design B': []}
+print("------------------------------------------------------------")  # 60個
 
-# 隨機分配郵件
-for i in range(1, 1001):
-    chosen_design = random.choice(ad_designs)       # 隨機選擇一種設計
-    recipients[chosen_design].append(f'user_{i}')
+armys = []                      # 建立小兵空串列
+# 建立50個小兵
+for soldier_number in range(50):
+    soldier = {'tag':'red', 'score':3, 'speed':'slow'}
+    armys.append(soldier)
+# 列印前3個小兵
+print("前3名小兵資料")
+for soldier in armys[:3]:
+    print(soldier)
+# 更改編號36到38的小兵
+for soldier in armys[35:38]:
+    if soldier['tag'] == 'red':
+        soldier['tag'] = 'blue'
+        soldier['score'] = 5
+        soldier['speed'] = 'medium'
+# 列印編號35到40的小兵
+print("列印編號35到40小兵資料")
+for soldier in armys[34:40]:
+    print(soldier)
+# 更改編號47到49的小兵
+for soldier in armys[47:50]:
+    if soldier['tag'] == 'red':
+        soldier['tag'] = 'green'
+        soldier['score'] = 10
+        soldier['speed'] = 'fast'
+# 列印編號47到49的小兵
+print("列印編號47到49小兵資料")
+for soldier in armys[47:50]:
+    print(soldier)   
 
-# 確保每種設計都有500個用戶
-while len(recipients['Design A']) != 500:
-    if len(recipients['Design A']) > 500:
-        user_to_move = recipients['Design A'].pop()
-        recipients['Design B'].append(user_to_move)
+print("------------------------------------------------------------")  # 60個
+
+song = """Are you sleeping, are you sleeping, Brother John, Brother John?
+Morning bells are ringing, morning bells are ringing.
+Ding ding dong, Ding ding dong."""
+
+# 以下是將歌曲大寫字母全部改成小寫
+songLower = song.lower()            # 歌曲改為小寫
+
+# 將歌曲的標點符號用空字元取代
+for ch in songLower:                
+        if ch in ".,?":
+            songLower = songLower.replace(ch,'')
+
+# 將歌曲字串轉成串列
+songList = songLower.split()        
+
+# 將歌曲串列處理成字典
+dict = {wd:songList.count(wd) for wd in songList}
+   
+maxCount = max(dict.values())       # 出現最多次數
+for key, count in dict.items():
+    if count == maxCount:
+        print(f"字串 {key} 出現最多次共出現 {count} 次")
+
+print("------------------------------------------------------------")  # 60個
+
+A = []
+for i in range(1,100,2):
+    A.append(i)
+B = []
+for i in range(0,101,5):
+    B.append(i)
+aSet = set(A)                   # 將串列A轉成集合aSet
+bSet = set(B)                   # 將串列B轉成集合bSet
+
+unionAB = aSet | bSet
+print("聯集 : ", unionAB)
+interAB = aSet & bSet
+print("交集 : ", interAB)
+A_B = aSet - bSet
+print("A-B差集 : ", A_B)
+B_A = bSet - aSet
+print("B-A差集 : ", B_A)
+
+print("------------------------------------------------------------")  # 60個
+
+A = []
+for i in range(1,100,2):
+    A.append(i)
+
+num = 2
+B = []
+primeNum = 0
+while num < 100:
+    if num == 2:                                # 2是質數所以直接輸出
+        B.append(num)
+        primeNum += 1
     else:
-        user_to_move = recipients['Design B'].pop()
-        recipients['Design A'].append(user_to_move)
+        for n in range(2, num):                 # 用2 .. num-1當除數測試
+            if num % n == 0:                    # 如果整除則不是質數
+                break                           # 離開迴圈
+        else:                                   # 否則是質數
+            primeNum += 1
+            B.append(num)
+    num += 1
 
-# 假設這裡會發送郵件，然後根據用戶反饋進行分析
+aSet = set(A)                                   # 將串列A轉成集合aSet
+bSet = set(B)                                   # 將串列B轉成集合bSet
 
-# 輸出每種設計的接收者數量，確保它們是平均分配的
-print(f"A 廣告接收者數量 : {len(recipients['Design A'])}")
-print(f"B 廣告接收者數量 : {len(recipients['Design B'])}")
+unionAB = aSet | bSet
+print("聯集 : ", unionAB)
+interAB = aSet & bSet
+print("交集 : ", interAB)
+A_B = aSet - bSet
+print("A-B差集 : ", A_B)
+B_A = bSet - aSet
+print("B-A差集 : ", B_A)
+AsdB = aSet ^ bSet
+print("AB對稱差集 : ", AsdB)
+
+print("------------------------------------------------------------")  # 60個
+
+aSet = {i for i in range(1,100,2)}
+bSet = {i for i in range(0,101,5)}
+
+unionAB = aSet | bSet
+print("聯集 : ", unionAB)
+interAB = aSet & bSet
+print("交集 : ", interAB)
+A_B = aSet - bSet
+print("A-B差集 : ", A_B)
+B_A = bSet - aSet
+print("B-A差集 : ", B_A)
+
+print("------------------------------------------------------------")  # 60個
+
+def reverse(n):
+    reverseN = 0
+    while n != 0:
+        r = n % 10
+        reverseN = reverseN * 10 + r
+        n //= 10
+    return reverseN 
+
+def isPalindrome(n):
+    return n == reverse(n)
+        
+x = eval(input("請輸入1個數值 = "))
+if isPalindrome(x):
+    print("這是回文數")
+else:
+    print("這不是回文數")
+
+print("------------------------------------------------------------")  # 60個
+
+def isPalindrome(s):
+    if len(s) <= 1:
+        return True
+    elif s[0] != s[len(s)-1]:
+        return False
+    else:
+        return isPalindrome(s[1:len(s)-1])
+
+string = input("請輸入字串 : ")
+if isPalindrome(string):
+    print(f"{string} 是回文字串")
+else:
+    print(f"{string} 不是回文字串")
+
+print("------------------------------------------------------------")  # 60個
+
+def mysum(nLst):
+    if nLst == []:
+        return 0
+    return nLst[0] + mysum(nLst[1:])
+
+data = [5, 7, 9, 15, 21, 6]
+print(f'mysum = {mysum(data)}')
+
+print("------------------------------------------------------------")  # 60個
+
+def fun(n):
+    if n == 1:
+        return 1.0 / 2
+    else:
+        return fun(n - 1) + (n * 1.0) / (n + 1)
+
+n = eval(input('請輸入整數 : '))
+for i in range(1, n + 1):
+    print(f"{i} = {fun(i):5.3f}")           
+
+print("------------------------------------------------------------")  # 60個
+
+mylist = [5, 10, 15, 20, 25, 30]
+
+evenlist = list(filter(lambda x: (x % 2 == 0), mylist))
+
+# 輸出偶數串列
+print("偶數串列: ",evenlist)
+
+print("------------------------------------------------------------")  # 60個
+
+def mymax(n1, n2):
+    """ 較大值設計 """
+    if n1 > n2:
+        print("較大值是 : ", n1)
+    else:
+        print("較大值是 : ", n2)
+        
+x1, x2 = eval(input("請輸入2個數值 = "))
+mymax(x1, x2)
+
+print("------------------------------------------------------------")  # 60個
+
+def upper(func):                # 大寫裝飾器
+    def newFunc(args):
+        oldresult = func(args)
+        newresult = oldresult.upper()
+        return newresult
+    return newFunc
+def bold(func):                 # 加粗體字串裝飾器
+    def wrapper(args):
+        return 'bold' + func(args) + 'bold'
+    return wrapper
+def italic(func):               # 加斜體字串裝飾器
+    def wrapper(args):
+        return 'italic' + func(args) + 'italic'
+    return wrapper
+@italic
+@bold                           # 設定加粗體字串裝飾器
+@upper                          # 設定大寫裝飾器
+def greeting(string):           # 問候函數
+    return string
+
+print(greeting('Hello! iPhone'))
+
+print("------------------------------------------------------------")  # 60個
+
+def factorial(n):
+    """ 計算n的階乘, n 必須是正整數 """
+    if n == 1:
+        return 1
+    else:
+        return (n * factorial(n-1))
+
+N = eval(input("請輸入城市的個數 : "))
+times = 10000000000000          # 電腦每秒可處理數列數目
+day_secs = 60 * 60 * 24         # 一天秒數
+year_secs = 365 * day_secs      # 一年秒數
+combinations = factorial(N)     # 組合方式
+years = combinations / (times * year_secs)
+print(f"城市個數 {N}, 路徑組合數 = {combinations}")
+print(f"需要 {years} 年才可以獲得結果")
+
+print("------------------------------------------------------------")  # 60個
+
+def guest_info(firstname, middlename, lastname, gender):
+    """ 整合客戶名字資料 """
+    if gender == "M":
+        welcome = 'Mr. ' + firstname + middlename + lastname + 'Welcome'
+    else:
+        welcome = 'Miss ' + firstname + middlename + lastname + 'Welcome'
+    return welcome
+
+info1 = guest_info('Ivan ', 'Carl ', 'Hung ', 'M')
+info2 = guest_info('Mary ', 'Ice ', 'Hung ', 'F')
+print(info1)
+print(info2)
+
+print("------------------------------------------------------------")  # 60個
+
+def pi(n):
+    p = 0
+    for i in range(1,n+1, 1):
+        p += 4 *((-1)**(i+1)/(2*i-1))
+    return p
+
+print("  i      PI ")
+print("================")
+for i in range(1, 10000, 1000):
+    print("%5d   %7.5f" % (i, pi(i)))
+
+print("------------------------------------------------------------")  # 60個
+
+class Myschool():
+    def __init__(self,name,score):
+        self.name = name
+        self.score = score
+    def msg(self):
+        print("Hi!" + self.name.title() + "你的成績是" + str(self.score) + "分")
+
+A = Myschool("kevin",80)
+A.msg()
+
+print("------------------------------------------------------------")  # 60個
+
+class Banks():
+    # 定義銀行類別
+
+    def __init__(self, uname):              # 初始化方法
+        self.__name = uname                 # 設定私有存款者名字
+        self.__balance = 0                  # 設定私有開戶金額是0
+        self.__bankname = "Taipei Bank"     # 設定私有銀行名稱
+        self.__rate = 30                    # 預設美金與台幣換匯比例
+        self.__service_charge = 0.01        # 換匯的服務費
+
+    def save_money(self, money):            # 設計存款方法
+        self.__balance += money             # 執行存款
+        print("存款 ", money, " 完成")      # 列印存款完成
+
+    def withdraw_money(self, money):        # 設計提款方法
+        self.__balance -= money             # 執行提款
+        print("提款 ", money, " 完成")      # 列印提款完成
+
+    def get_balance(self):                  # 獲得存款餘額
+        print(self.__name.title(), " 目前餘額: ", self.__balance)
+
+    def usa_to_taiwan(self, usa_d):         # 美金兌換台幣方法
+        self.result = self.__cal_rate(usa_d)
+        return self.result
+    def taiwan_to_usa(self, usa_d):
+        self.result = self.__newcal_rate(usa_d)
+        return self.result
+    def __newcal_rate(self, usa_d):
+        return int(usa_d * self.__rate * (1 + self.__service_charge))
+    def __cal_rate(self,usa_d):             # 計算換匯這是私有方法
+        return int(usa_d * self.__rate * (1 - self.__service_charge))
+        
+hungbank = Banks('hung')                    # 定義物件hungbank
+hungbank.save_money(5000)
+hungbank.get_balance()
+hungbank.withdraw_money(3000)
+hungbank.get_balance()
+hungbank.save_money(1500)
+hungbank.get_balance()
+print("購買100元美金")
+changedallor = hungbank.taiwan_to_usa(100)
+hungbank.withdraw_money(changedallor)
+hungbank.get_balance()
+
+print("------------------------------------------------------------")  # 60個
+
+class Animals():
+    """Animals類別, 這是基底類別 """
+    def __init__(self, animal_name, animal_age ):
+        self.name = animal_name # 紀錄動物名稱
+        self.age = animal_age   # 紀錄動物年齡
+
+    def run(self):              # 輸出動物 is running
+        print(self.name.title(), " is running")
+
+class Dogs(Animals):
+    """Dogs類別, 這是Animal的衍生類別 """
+    def __init__(self, dog_name, dog_age):
+        super().__init__('My pet ' + dog_name.title(), dog_age)
+
+class Birds(Animals):
+    """Birds類別, 這是Animal的衍生類別 """
+    def __init__(self, bird_name, bird_age):
+        super().__init__('My pet ' + bird_name.title(), bird_age)
+    def run(self):
+        print(self.name.title(), "is flying")
+
+mycat = Animals('lucy', 5)      # 建立Animals物件以及測試
+print(mycat.name.title(), ' is ', mycat.age, " years old.")
+mycat.run()
+
+mydog = Dogs('lily', 6)         # 建立Dogs物件以及測試
+print(mydog.name.title(), ' is ', mydog.age, " years old.")
+mydog.run()
+        
+mybird = Birds('Cici', 8)       # 建立Birds物件以及測試
+print(mybird.name.title(), ' is ', mybird.age, " years old.")
+mybird.run()      
+
+print("------------------------------------------------------------")  # 60個
+
+class Grandfather():
+    """ 定義祖父類別 """
+    def action1(self):
+        print("Grandfather")
+        
+class Father(Grandfather):
+    """ 定義父親類別 """
+    def action2(self):      # 定義action2()
+        print("Father")
+
+class Uncle(Grandfather):
+    """ 定義叔父類別 """
+    def action2(self):      # 定義action2()
+        print("Uncle")
+
+class Aunt(Grandfather):
+    """ 定義阿姨類別 """
+    def action2(self):      # 定義action2()
+        print("Aunt")
+        
+class Ivan(Father, Uncle, Aunt):
+    """ 定義Ivan類別 """
+    def action3(self):
+        print("Ivan")
+
+ivan = Ivan()
+ivan.action3()              # 順序 Ivan
+ivan.action2()              # 順序 Ivan -> Father
+ivan.action1()              # 順序 Ivan -> Father -> Grandfather
+
+print("------------------------------------------------------------")  # 60個
+
+class Grandfather():
+    """ 定義祖父類別 """
+    def action1(self):
+        print("Grandfather")
+        
+class Father(Grandfather):
+    """ 定義父親類別 """
+    def action2(self):      # 定義action2()
+        print("Father")
+
+class Uncle(Grandfather):
+    """ 定義叔父類別 """
+    def action2(self):      # 定義action2()
+        print("Uncle")
+
+class Aunt(Grandfather):
+    """ 定義阿姨類別 """
+    def action2(self):      # 定義action2()
+        print("Aunt")
+        
+class Ivan(Father, Uncle, Aunt):
+    """ 定義Ivan類別 """
+    def action3(self):
+        print("Ivan")
+
+ivan = Ivan()
+ivan.action3()              # 順序 Ivan
+ivan.action2()              # 順序 Ivan -> Father
+ivan.action1()              # 順序 Ivan -> Father -> Grandfather
+
+print("------------------------------------------------------------")  # 60個
+
+class Grandfather():
+    """ 定義祖父類別 """
+    def action1(self):
+        print("Grandfather")
+        
+class Father(Grandfather):
+    """ 定義父親類別 """
+    def action2(self):      # 定義action2()
+        print("Father")
+
+class Uncle(Grandfather):
+    """ 定義叔父類別 """
+    def action2(self):      # 定義action2()
+        print("Uncle")
+
+class Aunt(Grandfather):
+    """ 定義阿姨類別 """
+    def action2(self):      # 定義action2()
+        print("Aunt")
+        
+class Ivan(Uncle, Aunt, Father):
+    """ 定義Ivan類別 """
+    def action3(self):
+        print("Ivan")
+
+ivan = Ivan()
+ivan.action3()              # 順序 Ivan
+ivan.action2()              # 順序 Ivan -> Father
+ivan.action1()              # 順序 Ivan -> Father -> Grandfather
+
+print("------------------------------------------------------------")  # 60個
+
+class Grandfather():
+    """ 定義祖父類別 """
+    def action1(self):
+        print("Grandfather")
+        
+class Father(Grandfather):
+    """ 定義父親類別 """
+    def action2(self):      # 定義action2()
+        print("Father")
+
+class Uncle(Grandfather):
+    """ 定義叔父類別 """
+    def action2(self):      # 定義action2()
+        print("Uncle")
+
+class Aunt(Grandfather):
+    """ 定義阿姨類別 """
+    def action2(self):      # 定義action2()
+        print("Aunt")
+        
+class Ivan(Aunt, Father, Uncle):
+    """ 定義Ivan類別 """
+    def action3(self):
+        print("Ivan")
+
+ivan = Ivan()
+ivan.action3()              # 順序 Ivan
+ivan.action2()              # 順序 Ivan -> Father
+ivan.action1()              # 順序 Ivan -> Father -> Grandfather
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
 
 
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_36.py
+import MyMath
 
-# ch13_36.py
-import random
+# 使用者輸入
+print("請輸入運算")
+print("1:加法")
+print("2:減法")
+print("3:乘法")
+print("4:除法")
+op = int(input("輸入1/2/3/4: "))
+a = int(input("a = "))
+b = int(input("b = "))
 
-# 假設有一組伺服器
-servers = ['Server1', 'Server2', 'Server3', 'Server4']
+# 程式運算
+if op == 1:
+    print("a + b = ", MyMath.add(a, b))   # 輸出a-b字串和結果
+elif op == 2:
+    print("a - b = ", MyMath.sub(a, b))   # 輸出a-b字串和結果
+elif op == 3:
+    print("a * b = ", MyMath.mul(a, b))   # 輸出a*b字串和結果
+elif op == 4:
+    print("a / b = ", MyMath.div(a, b))   # 輸出a/b字串和結果
+else:
+    print("運算方法輸入錯誤")
 
-# 模擬1000次請求, 隨機分配到這些伺服器
-requests = {server:0 for server in servers}
-for _ in range(1000):
-    selected_server = random.choice(servers)
-    requests[selected_server] += 1
+print("------------------------------------------------------------")  # 60個
 
-print(requests)         # 顯示每個伺服器獲得的請求數
+import sys
+
+print("目前Python版本是:     ", sys.version)
+print("目前Python版本是:     ", sys.version_info)
+print("目前Python平台是:     ", sys.platform)
+print("目前Python視窗版本是: ", sys.getwindowsversion())
+print("目前Python可執行檔路徑", sys.executable)
+
+
+
+
+
 
 
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_37.py
+secretcode = '112299'                                   # 設定密碼
+codeNotFound = True                                     # 尚未找到密碼為True
+for i1 in range(0, 10):                                 # 第一位數
+    if codeNotFound:            # 檢查是否找到沒有找到才會往下執行
+        for i2 in range(0, 10):                         # 第二位數
+            if codeNotFound:    # 檢查是否找到沒有找到才會往下執行
+                for i3 in range(0, 10):                 # 第三位數
+                    if codeNotFound:
+                        for i4 in range(0, 10):
+                            if codeNotFound:
+                                for i5 in range(0, 10):
+                                    if codeNotFound:
+                                        for i6 in range(0, 10):
+                                            code = str(i1)+str(i2)+str(i3)+str(i4)+str(i5)+str(i6) # 組成密碼
+                                            if code == secretcode:              # 比對密碼
+                                                print('Bingo!', code)
+                                                codeNotFound = False            # 註明已經比對成功
+                                                break
+                                            else:
+                                                print(code)                     # 列印無效碼
 
-# ch13_37.py
-import random
+print("------------------------------------------------------------")  # 60個
+import sqlite3
+conn = sqlite3.connect("data29_1.db")   # 資料庫連線
+sql = """SELECT name, tel
+        from students
+        where gender = "F""""
+results = conn.execute(sql)
+allstudents = results.fetchall()        # 結果轉成元素是元組的串列
+for student in allstudents:
+    print(student)
+conn.close()                            # 關閉資料庫連線
 
-# 假設生產線上有一批產品序列號
-product_serials = list(range(1000, 2000))
+print("------------------------------------------------------------")  # 60個
 
-# 抽檢10個產品進行品質檢查
-samples = random.sample(product_serials, 10)
+import threading, time
 
-for serial in samples:
-    # 這裡會有一個品質檢查的函數
-    print(f"檢查序列號 : {serial}")
+def wakeUp(mytime,note,job):
+    print(job," 開始")
+    starttime = int(time.time())
+    while int(time.time()) - starttime < mytime:
+        pass
+    print(note)
+    print(job," 結束")
+    
+print("程式階段1")
+threadObj1 = threading.Thread(target=wakeUp,
+                args=[30,'買機票去北京','threadJob1'])
+threadObj1.start()              # threadObj1執行緒開始工作
+time.sleep(1)                   # 主執行緒休息1秒
+
+threadObj2 = threading.Thread(target=wakeUp,
+                args=[60,'送花給女友', 'threadJob2'])
+threadObj2.start()              # threadObj1執行緒開始工作
+time.sleep(1)                   # 主執行緒休息1秒
+
+print("程式階段2,正常工作")
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_38.py
-
-# ch13_38.py
-import time
-
-def log_event(event):
-    timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-    print(f"{timestamp} : {event}")
-
-# 假設發生了一個事件
-log_event("User login")
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\all02\ch13_39.py
-
-# ch13_39.py
-import time
-
-def database_backup():
-    # 執行備份邏輯
-    print("資料庫備份 ... ")
-
-# 每天凌晨1點執行備份
-while True:
-    current_time = time.strftime("%H:%M", time.localtime())
-    if current_time == "01:00":
-        database_backup()
-    time.sleep(60)              # 每分鐘檢查一次
-
-
-
+print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
 
+
+import csv
+
+filename = 'data/csvReport.csv'
+with open(filename) as csvFile:               # 開啟csv檔案
+    csvReader = csv.reader(csvFile)     # 讀檔案建立Reader物件
+    listReport = list(csvReader)        # 將資料轉成串列
+total2025 = 0
+total2026 = 0
+for row in listReport:
+    if row[0] == 'Steve':
+        if row[1] == '2025':
+            total2025 += int(row[5])
+        if row[1] == '2026':
+            total2026 += int(row[5])
+
+print("Steve's Total Revenue of 2025 = ", total2025)
+print("Steveis Total Revenue of 2026 = ", total2026)
+
 print("------------------------------------------------------------")  # 60個
+
+import json
+
+filename = 'data/populations.json'
+with open(filename) as fnObj:
+    getDatas = json.load(fnObj)                     # 讀json檔案
+
+i = 0
+filename = "_tmp_population.json"
+tmpdict = {}
+with open(filename, 'w') as fnObj:
+    for getData in getDatas:
+        if getData['Year'] == '2000':               # 篩選2000年的數據
+            tmpdict["Country Name"] = getData['Country Name']
+            tmpdict["Country Code"] = getData['Country Code']
+            tmpdict["Year"] = getData['Year']
+            tmpdict["Numbers"] = getData['Numbers']
+            json.dump(tmpdict, fnObj)
+
+print("------------------------------------------------------------")  # 60個
+
+import json
+
+filename = 'data/aqi.json'
+with open(filename) as fnObj:
+    getDatas = json.load(fnObj)                         # 讀json檔案
+
+for getData in getDatas:
+    if getData['County'] == '臺北市':
+        sitename = getData['SiteName']                  # 站台名稱
+        siteid = getData['SiteId']                      # 站台ID
+        pm25 = getData['PM2.5']                         # PM2.5值    
+        print('站台ID =%3s  PM2.5值 =%3s  站台名稱 = %s ' %
+              (siteid, pm25, sitename))
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 

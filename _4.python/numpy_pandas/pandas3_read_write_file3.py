@@ -50,37 +50,6 @@ print(DataFrame[["數量","支出金額","單價"]] )
 
 print('------------------------------------------------------------')	#60個
 
-pd.core.common.is_list_like = pd.api.types.is_list_like
-
-from pandas_datareader import data, wb
-import pandas_datareader.data as web
-
-import yfinance as yf
-yf.pdr_override()
-
-#蘋果股票 AAPL
-#台積電 2330.TW
-#中國銀行 601988.SS
-#恆生銀行 0011.HK
-
-df = web.get_data_yahoo("AAPL", start="2018-01-01", end="2018-12-02")   #下載股價
-print(df.head())
-
-writer=pd.ExcelWriter('AAPL.xlsx')  #檔案名稱
-df.to_excel(writer,'AAPL')  #寫入資料
-writer.save()   #儲存
-
-sys.exit()
-
-from pandas import ExcelWriter
-
-writer = ExcelWriter('testaapl.xlsx', engine='xlsxwriter')
-df.to_excel(writer, sheet_name='sheet2')
-
-df.to_csv("testaapl.csv")
-
-print('------------------------------------------------------------')	#60個
-
 df = pd.read_excel('AAPL.xlsx', 'AAPL')
 print(df.head())
 print(type(df))
