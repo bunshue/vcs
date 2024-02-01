@@ -15,6 +15,7 @@ print('建立 numpy 陣列 一維')
 print('串列 轉 numpy陣列 range() 轉 numpy陣列')
 
 x = np.array(range(10))
+print(type(x))
 print(x)
 
 print('建立 numpy陣列, 使用 np.arange()')
@@ -90,14 +91,13 @@ print('讀取np之binary格式檔案成np陣列')
 c = np.load('np_bin.npy')
 print(c)
 
-
-
-
-
-sys.exit()
-
 print('------------------------------------------------------------')	#60個
 
+my_array = np.arange(101)   # 0 1 2 ... 100
+
+sum_my_array = sum(my_array)
+print('和')
+print(sum_my_array)
 
 print('------------------------------------------------------------')	#60個
 
@@ -321,16 +321,11 @@ print('------------------------------------------------------------')	#60個
 
 """
 np.gradient(f) 计算数组f中元素的梯度，当f为多维时，返回每个维度梯度
-
 梯度：连续值之间的变化率，即斜率
-
 XY坐标轴连续三个X坐标对应的Y轴值：a, b, c，其中，b的梯度是： (c‐a)/2
 """
-
 na = np.random.randint(0, 50, (11))
-
 print(na)
-
 print(np.gradient(na))
 
 print('------------------------------------------------------------')	#60個
@@ -375,32 +370,6 @@ print('創建數組 Arange')
 #step:数值步长。
 
 na = np.arange(5, 10, 2)
-print(na)
-
-print('創建數組 Uniform')
-#np.uniform(low = 0.0, high = 1.0, size = None)
-#在上下限之间的均匀分布中生成随机样本。
-
-na = np.random.uniform(5, 10, size = 4)
-print(na)
- 
-na = np.random.uniform(size = 5)
-print(na)
- 
-na = np.random.uniform(size = (2, 3))
-print(na)
-
-print('創建數組 Random.randint')
-#在一个范围内生成n个随机整数样本。
-#np.random.randint(low, high = None, size = None, dtype = int)
-na = np.random.randint(5, 10, 10)
-print(na)
-
-print('創建數組 Random.random')
-#生成N个随机浮点数样本。
-#np.random(size = None)
-N = 10
-na = np.random.random(N)
 print(na)
 
 print('創建數組 Logspace')

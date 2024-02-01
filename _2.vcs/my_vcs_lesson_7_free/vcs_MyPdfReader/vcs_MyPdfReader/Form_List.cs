@@ -1,0 +1,335 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+using System.IO;
+using System.Collections;   //for ArrayList
+using System.Drawing.Drawing2D; //for SmoothingMode
+using System.Runtime.InteropServices;   //for DllImport
+using System.Text.RegularExpressions;
+
+namespace vcs_MyPdfReader
+{
+    public partial class Form_List : Form
+    {
+        ListView listView1 = new ListView();
+        RichTextBox richTextBox1 = new RichTextBox();
+
+        ArrayList pdf_filename_ArrayListData = new ArrayList();
+
+        string pdf_filename = string.Empty;
+        string pdf_filename_short = string.Empty;
+        string current_directory_pdf = Directory.GetCurrentDirectory();
+        bool flag_already_use_webbrowser = false;
+
+        int W = Screen.PrimaryScreen.WorkingArea.Width;
+        int H = Screen.PrimaryScreen.WorkingArea.Height;
+
+        int message_panel_width = 128;
+        int message_panel_height = 0;
+
+        int pdf_page = 0;
+        int pdf_total_page = 0;
+
+        public Form_List()
+        {
+            InitializeComponent();
+        }
+
+        private void Form_List_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+            show_recent_pdf_files();
+        }
+
+        void show_item_location()
+        {
+            this.Size = new Size(1200, 800);
+            this.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+
+            listView1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            listView1.Location = new System.Drawing.Point(0, 0);
+            listView1.Name = "listView1";
+            listView1.Size = new System.Drawing.Size(this.Size.Width - 100, 600 - 38);
+            listView1.View = System.Windows.Forms.View.Details;
+            listView1.KeyDown += new KeyEventHandler(listView1_KeyDown);
+            listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
+            listView1.MouseDoubleClick += new MouseEventHandler(listView1_MouseDoubleClick);
+
+            listView1.GridLines = true;
+            this.Controls.Add(listView1);
+
+            //設置欄名稱
+            listView1.Columns.Add("檔名", 400, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.Visible = true;
+
+            richTextBox1.Text = "";
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Location = new Point(0, this.listView1.Height + 130);
+            richTextBox1.Size = new Size(this.Size.Width - 100, 200);
+            richTextBox1.Dock = DockStyle.Bottom;
+            this.Controls.Add(richTextBox1);
+
+            int linewidth = 5;
+            Bitmap bmp;
+            Graphics g;
+            Pen p = new Pen(Color.Red, linewidth);
+            int x_st = 0;     //icon的 位置 X
+            int y_st = 0;     //icon的 位置 Y
+            int width = 50; //設定按鈕大小 W
+            int height = 50; //設定按鈕大小 H
+            int dx = width + 2;
+            int dy = height + 2;
+
+            Font f = new Font("Arial", 12);
+            SolidBrush sb = new SolidBrush(Color.Red);
+
+            Button bt_clear = new Button();  // 實例化按鈕
+            bt_clear.Size = new Size(width, height);
+            bt_clear.Text = "";
+            bmp = new Bitmap(width, height);
+            bt_clear.Image = bmp;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+            g.DrawString("Clear", f, sb, new PointF(4, 15));
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_clear.Click += bt_clear_Click;     // 加入按鈕事件
+            this.Controls.Add(bt_clear); // 將按鈕加入表單
+            bt_clear.BringToFront();     //移到最上層
+
+            f = new Font("Arial", 10);
+            x_st = listView1.Width + 15;
+            y_st = 10 + dy * 0;
+            Button bt_recent0 = new Button();  // 實例化按鈕
+            bt_recent0.Size = new Size(width, height);
+            bt_recent0.Text = "";
+            bmp = new Bitmap(width, height);
+            bt_recent0.Image = bmp;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+            g.DrawString("開啟\n檔案", f, sb, new PointF(4, 15));
+            bt_recent0.Location = new Point(x_st, y_st);
+            bt_recent0.Click += bt_recent0_Click;     // 加入按鈕事件
+            this.Controls.Add(bt_recent0); // 將按鈕加入表單
+            bt_recent0.BringToFront();     //移到最上層
+
+            x_st = listView1.Width + 15;
+            y_st = 10 + dy * 1;
+            Button bt_recent1 = new Button();  // 實例化按鈕
+            bt_recent1.Size = new Size(width, height);
+            bt_recent1.Text = "";
+            bmp = new Bitmap(width, height);
+            bt_recent1.Image = bmp;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+            g.DrawString("開啟\n資料夾", f, sb, new PointF(4, 15));
+            bt_recent1.Location = new Point(x_st, y_st);
+            bt_recent1.Click += bt_recent1_Click;     // 加入按鈕事件
+            this.Controls.Add(bt_recent1); // 將按鈕加入表單
+            bt_recent1.BringToFront();     //移到最上層
+
+            x_st = listView1.Width + 15;
+            y_st = 10 + dy * 2;
+            Button bt_recent2 = new Button();  // 實例化按鈕
+            bt_recent2.Size = new Size(width, height);
+            bt_recent2.Text = "";
+            bmp = new Bitmap(width, height);
+            bt_recent2.Image = bmp;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+            g.DrawString("清除\n無效", f, sb, new PointF(4, 15));
+            bt_recent2.Location = new Point(x_st, y_st);
+            bt_recent2.Click += bt_recent2_Click;     // 加入按鈕事件
+            this.Controls.Add(bt_recent2); // 將按鈕加入表單
+            bt_recent2.BringToFront();     //移到最上層
+
+            x_st = listView1.Width + 15;
+            y_st = 10 + dy * 3;
+            Button bt_recent3 = new Button();  // 實例化按鈕
+            bt_recent3.Size = new Size(width, height);
+            bt_recent3.Text = "";
+            bmp = new Bitmap(width, height);
+            bt_recent3.Image = bmp;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+            g.DrawString("清除\n全部", f, sb, new PointF(4, 15));
+            bt_recent3.Location = new Point(x_st, y_st);
+            bt_recent3.Click += bt_recent3_Click;     // 加入按鈕事件
+            this.Controls.Add(bt_recent3); // 將按鈕加入表單
+            bt_recent3.BringToFront();     //移到最上層
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void bt_recent0_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了 bt_recent0\n";
+        }
+
+        private void bt_recent1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了 bt_recent1\n";
+        }
+
+        private void bt_recent2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了 bt_recent2\n";
+        }
+
+        private void bt_recent3_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了 bt_recent3\n";
+        }
+
+        void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            richTextBox1.Text += "KeyDown ";
+        }
+
+        void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            richTextBox1.Text += "MouseClick ";
+        }
+
+        void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            richTextBox1.Text += "MouseDoubleClick ";
+        }
+
+        const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
+        const int GB = 1024 * 1024 * 1024;//定義GB的計算常量
+        const int MB = 1024 * 1024;//定義MB的計算常量
+        const int KB = 1024;//定義KB的計算常量
+        public string ByteConversionTBGBMBKB(Int64 size)
+        {
+            if (size < 0)
+                return "不合法的數值";
+            else if (size / TB >= 1024)//如果目前Byte的值大於等於1024TB
+                return "無法表示";
+            else if (size / TB >= 1)//如果目前Byte的值大於等於1TB
+                return (Math.Round(size / (float)TB, 2)).ToString() + " TB";//將其轉換成TB
+            else if (size / GB >= 1)//如果目前Byte的值大於等於1GB
+                return (Math.Round(size / (float)GB, 2)).ToString() + " GB";//將其轉換成GB
+            else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
+                return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
+            else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
+            else
+                return size.ToString() + " Byte";//顯示Byte值
+        }
+
+        void show_pdf_filename_ArrayListData()
+        {
+            richTextBox1.Text += "顯示ArrayList資料\n";
+            richTextBox1.Text += "共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+
+            int i = 0;
+            /*
+            for (i = 0; i < pdf_filename_ArrayListData.Count; i++)
+            {
+                richTextBox1.Text += (i+1).ToString() + " : " + pdf_filename_ArrayListData[i] + "\n";
+            }
+            */
+            i = 0;
+            foreach (string str_name in pdf_filename_ArrayListData)
+            {
+                i++;
+                richTextBox1.Text += i.ToString() + " : " + str_name + "\n";
+            }
+        }
+
+        void show_recent_pdf_files()
+        {
+            richTextBox1.Text += "讀出系統變數至ArrayList\n";
+            ArrayList tmp_array_list = Properties.Settings.Default.pdf_filenames;
+            if (tmp_array_list == null)
+            {
+                richTextBox1.Text += "XXXXXXXXXXXXXX";
+                pdf_filename_ArrayListData = new ArrayList();
+            }
+            else
+            {
+                pdf_filename_ArrayListData = tmp_array_list;
+            }
+
+            //show_pdf_filename_ArrayListData();
+
+            richTextBox1.Text += "顯示ArrayList資料\n";
+            richTextBox1.Text += "共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+
+            int len = pdf_filename_ArrayListData.Count;
+
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += pdf_filename_ArrayListData[i] + "\n";
+
+                string filename = pdf_filename_ArrayListData[i].ToString();
+                richTextBox1.Text += filename + "\n";
+
+                AddItemsToListView(filename);
+            }
+        }
+
+        void AddItemsToListView(string filename)
+        {
+            string short_filename = "";
+            string long_foldername = "";
+            string file_size = "";
+            string file_last_write_time = "";
+
+            FileInfo fi = new FileInfo(filename);
+            short_filename = fi.Name;
+
+            if (File.Exists(filename) == false)   //確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案 : " + filename + ", 不存在\n";
+            }
+            else
+            {
+                richTextBox1.Text += "名稱 : " + fi.Name + "\n";
+                richTextBox1.Text += "大小 : " + fi.Length + "\n";
+                richTextBox1.Text += "資料夾 : " + fi.Directory + "\n";
+                richTextBox1.Text += "修改日期 : " + fi.LastWriteTime + "\n";
+
+                long_foldername = fi.Directory.ToString();
+                file_size = ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length));
+                file_last_write_time = "";
+            }
+
+            ListViewItem i1 = new ListViewItem(short_filename);
+
+            i1.UseItemStyleForSubItems = false;
+
+            ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+            ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+
+            sub_i1a.Text = file_size;
+            i1.SubItems.Add(sub_i1a);
+            sub_i1b.Text = long_foldername;
+            i1.SubItems.Add(sub_i1b);
+            sub_i1a.ForeColor = System.Drawing.Color.Blue;
+            sub_i1b.ForeColor = System.Drawing.Color.Blue;
+            sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+            sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+            listView1.Items.Add(i1);
+            //設置ListView最後一行可見
+            //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+        }
+    }
+}
+
+

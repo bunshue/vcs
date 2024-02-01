@@ -121,17 +121,7 @@ plt.plot(1, 5, "r-o")
 plt.plot(2, 10, "r-o")
 plt.plot(3, 20, "r-o")
 
-print("寫字")
-#                      H對齊方式       V對齊方式
-my_kwargs = dict(ha="center", va="center", fontsize=30, c="b")
-my_kwargs = dict(ha="left", va="top", fontsize=30, c="b")
-x_st = 0
-y_st = 17.5
-text = "歡迎來到美國"
-plt.text(x_st, y_st, text, **my_kwargs)
-plt.plot(x_st, y_st, "r-o")  # 畫基準點
-
-plt.title("畫點 寫字")
+plt.title("畫點")
 
 # 第四張圖
 plt.subplot(234)
@@ -204,13 +194,11 @@ plt.subplot(236)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-'''
+print("matplotlib 01 ------------------------------------------------------------")  # 60個
+
 """
 python用mpl_finance中的candlestick_ohlc畫分時圖
 
@@ -253,8 +241,6 @@ dfcvs['時間'] = pd.to_datetime(dfcvs['時間'],format = "%Y/%m/%d-%H:%M")
 #因爲小數太小了，需要將小時和分鐘變成整數，需要乘以24（小時）×60（分鐘）= 1440，這樣小時和分鐘也能成爲整數
 #這樣就可以一分鐘就佔一個位置
 
- 
-
 dfcvs['時間'] = dfcvs['時間'].apply(lambda x:dates.date2num(x) * 1440)
 data_mat = dfcvs.values
     
@@ -288,7 +274,7 @@ for label in ax.get_xticklabels():
            
 plt.show()
 
-
+print("matplotlib 02 ------------------------------------------------------------")  # 60個
 
 # 加載取數與繪圖所需的函數包
 import datetime
@@ -340,8 +326,7 @@ ax2.set_xticklabels(xticks_str)                                   # 設置橫軸
 
 plt.show()
 
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 03 ------------------------------------------------------------")  # 60個
 
 # foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 foldername = "C:/_git/vcs/_1.data/______test_files1"
@@ -381,7 +366,7 @@ plt.show()
 
 """
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 04 ------------------------------------------------------------")  # 60個
 
 """
 x = np.linspace(start=-10, stop=10, num=101)
@@ -393,42 +378,7 @@ xx = x + 1j * x[:, np.newaxis]
 plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap='gray')
 """
 
-'''
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("從windows字型中找出可以顯示的中文字型")
-import matplotlib as mpl
-zhfont = mpl.font_manager.FontProperties(fname='C:/Windows/Fonts/mingliu.ttc')
-plt.text(0, 0, u'測試一下 ', fontsize=20, fontproperties=zhfont)
-
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-plt.rcParams['axes.unicode_minus'] = False
-
-plt.text(0.5, 0.5, u'測試一下')
-
-plt.show()
-
-#文字顯示問題
-
-from os import path
-from matplotlib.font_manager import fontManager
-
-"""
-print('顯示所有字型')
-for i in fontManager.ttflist:
-    print(i.fname, i.name)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 05 ------------------------------------------------------------")  # 60個
 
 """ fail
 #zip 高級組合法
@@ -444,7 +394,7 @@ plt.scatter(X, Y, s = 50, c = Z)
 plt.show()
 """
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 06 ------------------------------------------------------------")  # 60個
 
 N = 100
 
@@ -463,11 +413,7 @@ sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
 plt.imshow(sinc2d)
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("matplotlib 01 ------------------------------------------------------------")  # 60個
+print("matplotlib 07 ------------------------------------------------------------")  # 60個
 
 th = np.arange(0,360,10)
 #print(th)
@@ -479,7 +425,7 @@ plt.plot(x,y)
 
 plt.show()
 
-print("matplotlib 02 ------------------------------------------------------------")  # 60個
+print("matplotlib 08 ------------------------------------------------------------")  # 60個
 
 # 時序圖
 import matplotlib.dates as mdates
@@ -497,25 +443,7 @@ plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %H:%M')) # 設�
 plt.gcf().autofmt_xdate() # 自動旋轉角度，以避免重疊
 plt.show()
 
-print("matplotlib 03 ------------------------------------------------------------")  # 60個
-
-# 箱線圖
-
-data = np.random.rand(20, 5) # 生成5個維度數據，每組20個
-plt.boxplot(data)
-
-plt.show()
-
-print("matplotlib 04 ------------------------------------------------------------")  # 60個
-
-# 小提琴圖
-data = np.random.rand(20, 5)
-plt.violinplot(data,showmeans=False,showmedians=True)
-
-plt.show()
-
-print("matplotlib 05 ------------------------------------------------------------")  # 60個
-
+print("matplotlib 09 ------------------------------------------------------------")  # 60個
 #fail
 
 # 三維散點圖
@@ -530,7 +458,7 @@ ax.set_ylabel('Y')
 ax.set_xlabel('X')
 plt.show()
 
-print("matplotlib 06 ------------------------------------------------------------")  # 60個
+print("matplotlib 10 ------------------------------------------------------------")  # 60個
 
 #fail
 
@@ -552,7 +480,7 @@ width = depth = 1
 ax.bar3d(x, y, bottom, width, depth, top, shade=True)
 plt.show()
 
-print("matplotlib 07 ------------------------------------------------------------")  # 60個
+print("matplotlib 11 ------------------------------------------------------------")  # 60個
 
 #fail
 
@@ -574,7 +502,7 @@ ax.set_zlim(-2,2) # 設置z軸範圍
 fig.colorbar(surf, shrink=0.5, aspect=5)
 plt.show()
 
-print("matplotlib 08 ------------------------------------------------------------")  # 60個
+print("matplotlib 12 ------------------------------------------------------------")  # 60個
 
 # 繪圖區域
 
@@ -592,7 +520,7 @@ ax4.plot([5,4,3,3,3])
 
 plt.show()
 
-print("matplotlib 09 ------------------------------------------------------------")  # 60個
+print("matplotlib 13 ------------------------------------------------------------")  # 60個
 
 fig = plt.figure(figsize = (9,6))
 ax1 = plt.subplot2grid((3,3), (0,0), colspan = 2)
@@ -604,36 +532,7 @@ ax5.plot([1,2,3,4,1])
 
 plt.show()
 
-print("matplotlib 11 ------------------------------------------------------------")  # 60個
-
-# Matplotlib技巧
-
-import matplotlib
-
-fig = plt.figure(figsize = (6,4), dpi=120) # 設置繪製對象大小
-plt.style.use('ggplot') # 設置顯示風格
-
-plt.plot([12,13,45,15,16], label='label1') # 繪圖及設置圖例文字
-plt.annotate('local max', xy=(2, 45), xytext=(3, 45),arrowprops=dict(facecolor='black',
-    shrink=0.05))  # 繪製帶箭頭的標註
-x = np.arange(0, 6)
-y = x * x
-plt.plot(x, y, marker='o', label='label2') # 繪圖及設置圖例文字
-for xy in zip(x, y):
-    plt.annotate("(%s,%s)" % xy, xy=xy, xytext=(-20, 10), # 繪製標註
-                 textcoords='offset points')
-plt.text(4.5, 10, 'Draw text', fontsize=20) # 在位置0,20繪製文字
-
-plt.legend(loc='upper left')  # 在左上角顯示圖例
-plt.xlabel("x value")  # 設置x軸上的標籤
-plt.ylabel("y value")  # 設置y軸上的標籤
-plt.xlim(-0.5,7)  # 設置x軸範圍
-plt.ylim(-5,50) # 設置y軸範圍
-plt.show()
-
-print(matplotlib.artist.getp(fig.patch))  # 顯示繪製對象的各個屬性值
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 14 ------------------------------------------------------------")  # 60個
 
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
@@ -641,9 +540,10 @@ plt.plot(x, y)
 plt.xlabel('Month')
 plt.ylabel('Sales amount')
 plt.title('2020 sales chart for per month')
+
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 15 ------------------------------------------------------------")  # 60個
 
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
@@ -651,9 +551,10 @@ plt.plot(x, y, lw=8, ls='-.')
 plt.xlabel('Month')
 plt.ylabel('Sales amount')
 plt.title('2020 sales chart for per month')
+
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 16 ------------------------------------------------------------")  # 60個
 
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
@@ -661,9 +562,10 @@ plt.plot(x, y, marker='*')
 plt.xlabel('Month')
 plt.ylabel('Sales amount')
 plt.title('2020 sales chart for per month')
+
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 17 ------------------------------------------------------------")  # 60個
 
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
@@ -671,9 +573,10 @@ plt.plot(x, y, marker='D',ms=10, mfc='y', mec='r')
 plt.xlabel('Month')
 plt.ylabel('Sales amount')
 plt.title('2020 sales chart for per month')
+
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 18 ------------------------------------------------------------")  # 60個
 
 x=[1,2,3,4,5,6,7,8,9,10,11,12]
 y=[200000,180000,175000,215000,280000,320000,90000,365000,318000,198000,268000,348000]
@@ -686,53 +589,10 @@ plt.plot(x, y, color='y')
 plt.xlabel('Month')
 plt.ylabel('Sales amount')
 plt.title('2020 sales chart for per month')
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-plt.rcParams['font.size']=12
-
-#橫條圖
-def diagram_1(s,x):
-	plt.barh(x, s)
-
-#圓餅圖
-def diagram_2(s,x):	 
-	plt.pie(s,labels=x, autopct='%.2f%%')
-#折線圖+長條圖
-
-def diagram_4(s,x):
-    plt.plot(x, s, marker='.')
-    plt.bar(x, s, alpha=0.5)	
-
-#長條圖
-def diagram_3(s,x):
-	plt.bar(x, s)	
-
-#要繪圖的數據
-x = ['高雄','台中','宜蘭','花蓮']
-s = [89,58,63,50]
-
-#設定子圖
-plt.figure(1, figsize=(8, 8),clear=True)
-plt.subplots_adjust(left=0.1, right=0.95)
-
-plt.subplot(221)
-diagram_1(s,x)
-
-plt.subplot(222)
-diagram_2(s,x)
-
-plt.subplot(223)
-diagram_3(s,x)
-
-plt.subplot(2,2,4)
-diagram_4(s,x)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 19 ------------------------------------------------------------")  # 60個
 
 """
 正弦函數 s=sin(x) 
@@ -750,64 +610,7 @@ plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-plt.rcParams['font.size']=12
-
-#折線圖
-def lineChart(s,x):
-    plt.xlabel('城市名稱')
-    plt.ylabel('民調原分比')
-    plt.title('各種城市喜好度比較')
-    plt.plot(x, s, marker='.')
-
-#長條圖
-def barChart(s,x):
-    plt.xlabel('城市名稱')
-    plt.ylabel('民調原分比')
-    plt.title('各種城市喜好度比較')
-    plt.bar(x, s)
-
-#橫條圖
-def barhChart(s,x):
-    plt.barh(x, s)
-
-#圓餅圖
-def pieChart(s,x):	 
-    plt.pie(s,labels=x, autopct='%.2f%%')
-
-#要繪圖的數據
-x = ['第一季', '第二季', '第三季', '第四季']
-s = [13.2, 20.1, 11.9, 14.2]
-
-#定義子圖
-plt.figure(1, figsize=(8, 6),clear=True)
-plt.subplots_adjust(left=0.1, right=0.95)
-
-plt.subplot(2,2,1)
-pieChart(s,x)
-
-x = ['程式設計概論', '多媒體概論', '計算機概論', '網路概論']
-s = [3560, 4000, 4356, 1800]
-plt.subplot(2,2,2)
-barhChart(s,x)
-
-x = ['新北市', '台北市', '高雄市', '台南市','桃園市','台中市']
-s = [0.2, 0.3, 0.15, 0.23,0.19, 0.27]
-plt.subplot(223)
-lineChart(s,x)
-
-plt.subplot(224)
-barChart(s,x)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
+print("matplotlib 20 ------------------------------------------------------------")  # 60個
 
 """
 plt.xticks(range(0,5500,500))
@@ -815,17 +618,12 @@ plt.tick_params(axis = 'both', labelsize = 10, color = 'red')
 
 plt.bar(listx, listy, width = 0.5, color = 'r')
 
-
 plt.barh(listy, listx, height = 0.5, color = 'r')
-
 
 """
 
+print("matplotlib 21 ------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-'''
 plt.figure(figsize = [8,4])
 
 x = np.linspace(0, 2 * np.pi)
@@ -850,7 +648,7 @@ plt.plot(x, y, 'g--o')
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("matplotlib 22 ------------------------------------------------------------")  # 60個
 
 x = np.linspace(0, 2 * np.pi)
 y = np.sin(x)
@@ -868,7 +666,7 @@ plt.plot(x, y)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("matplotlib 23 ------------------------------------------------------------")  # 60個
 
 #在畫布切出子圖區 , 並繪製內容–add_subplot()
 
@@ -899,7 +697,7 @@ ax6.plot(x, y)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("matplotlib 24 ------------------------------------------------------------")  # 60個
 
 print('載入字型範例')
 
@@ -914,7 +712,7 @@ TaipeiSansTCBeta-Regular.ttf'
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("matplotlib 25 ------------------------------------------------------------")  # 60個
 
 # 饼图的绘制
 
@@ -930,6 +728,8 @@ autopct = '%.1f%%' # 设置百分比的格式，这里保留一位小数
 plt.title('失信用户的教育水平分布')
 
 plt.show()
+
+print("matplotlib 26 ------------------------------------------------------------")  # 60個
 
 # 构造数据
 edu = [0.2515,0.3724,0.3336,0.0368,0.0057]
@@ -961,6 +761,8 @@ plt.title('失信用户的受教育水平分布')
 
 plt.show()
 
+print("matplotlib 27 ------------------------------------------------------------")  # 60個
+
 # 构建序列
 data1 = pd.Series({'中专':0.2515,'大专':0.3724,'本科':0.3336,'硕士':0.0368,'其他':0.0057})
 print(data1)
@@ -980,7 +782,7 @@ textprops = {'fontsize':10, 'color':'black'} # 设置文本标签的属性值
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("matplotlib 28 ------------------------------------------------------------")  # 60個
 
 # 一個完全乾淨、空白的figure:
 fig1 = plt.figure()
@@ -1014,7 +816,7 @@ line.set_ydata(np.cos(x))
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("matplotlib 29 ------------------------------------------------------------")  # 60個
 
 """
 Matplotlib 繪圖
@@ -1058,11 +860,7 @@ fig.suptitle('Suptitle')
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
-'''
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 30 ------------------------------------------------------------")  # 60個
 
 from matplotlib import pyplot as plt
 
@@ -1135,95 +933,7 @@ plt.annotate(r'$sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
 # 把结果显示在屏幕上
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-
-plt.figure(figsize=(18, 4))
-plt.subplot(2, 2, 1)
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, 'subplot(2,2,1)', ha='center', va='center',
-        size=20, alpha=.5)
-
-plt.subplot(2, 2, 2)
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, 'subplot(2,2,2)', ha='center', va='center',
-        size=20, alpha=.5)
-
-plt.subplot(2, 2, 3)
-plt.xticks(())
-plt.yticks(())
-
-plt.text(0.5, 0.5, 'subplot(2,2,3)', ha='center', va='center',
-        size=20, alpha=.5)
-
-plt.subplot(2, 2, 4)
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, 'subplot(2,2,4)', ha='center', va='center',
-        size=20, alpha=.5)
-
-plt.tight_layout()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.gridspec as gridspec
-
-plt.figure(figsize=(18, 4))
-G = gridspec.GridSpec(3, 3)
-
-axes_1 = plt.subplot(G[0, :])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, 'Axes 1', ha='center', va='center', size=24, alpha=.5)
-
-axes_2 = plt.subplot(G[1:, 0])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, 'Axes 2', ha='center', va='center', size=24, alpha=.5)
-
-axes_3 = plt.subplot(G[1:, -1])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, 'Axes 3', ha='center', va='center', size=24, alpha=.5)
-
-axes_4 = plt.subplot(G[1, -2])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, 'Axes 4', ha='center', va='center', size=24, alpha=.5)
-
-axes_5 = plt.subplot(G[-1, -2])
-plt.xticks(())
-plt.yticks(())
-plt.text(0.5, 0.5, 'Axes 5', ha='center', va='center', size=24, alpha=.5)
-
-plt.tight_layout()
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-plt.figure(figsize=(18, 4))
-
-plt.axes([.1, .1, .8, .8])
-plt.xticks(())
-plt.yticks(())
-plt.text(.2, .5, 'axes([0.1, 0.1, .8, .8])', ha='center', va='center',
-        size=20, alpha=.5)
-
-plt.axes([.5, .5, .3, .3])
-plt.xticks(())
-plt.yticks(())
-plt.text(.5, .5, 'axes([.5, .5, .3, .3])', ha='center', va='center',
-        size=16, alpha=.5)
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 31 ------------------------------------------------------------")  # 60個
 
 def tickline():
     plt.xlim(0, 10), plt.ylim(-1, 1), plt.yticks([])
@@ -1269,7 +979,7 @@ for i, locator in enumerate(locators):
 plt.subplots_adjust(bottom=.01, top=.99, left=.01, right=.99)
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 32 ------------------------------------------------------------")  # 60個
 
 def plt_bar():
     n = 12
@@ -1317,7 +1027,7 @@ plt.tight_layout()
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 33 ------------------------------------------------------------")  # 60個
 
 def plt_imshow():
     def f(x, y):
@@ -1352,7 +1062,7 @@ plt_pie()
 plt.tight_layout()
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 34 ------------------------------------------------------------")  # 60個
 
 def plt_grid():
     ax = plt.subplot(1, 2, 1)
@@ -1395,11 +1105,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 

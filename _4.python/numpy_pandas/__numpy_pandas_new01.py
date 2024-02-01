@@ -212,32 +212,6 @@ print(np.piecewise(x, [x<3,x>6], [lambda x: x * 2, lambda x: x * 3]))
 
 print("------------------------------------------------------------")  # 60個
 
-print("統計函數")
-a=np.arange(10,0,-1)
-print(a)
-print(a.mean())
-print(a.var())
-print(a.std())
-print(np.average(a, weights=np.arange(0,10,1)))
-print(np.median(a))
-print(np.percentile(a, 75))
-
-
-print(a.min())
-print(a.max())
-print(a.ptp())
-print(a.argmin())
-print(a.argmax())
-print(a.argsort())
-a.sort()
-print(a)
-
-a=np.random.randint(0,5,10)
-print(a) 
-print(np.unique(a)) 
-print(np.bincount(a)) 
-print(np.histogram(a,bins=5))
-
 print("------------------------------------------------------------")  # 60個
 
 print("矩陣與二維數組")
@@ -263,19 +237,10 @@ print(a.sum(axis=0))
 print(a.sum(axis=1))
 
 
-
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
+print('常態分布 二維 轉 df')
+df3 = pd.DataFrame(np.random.randn(3,3), columns=list("ABC"))
 
 
 print('------------------------------------------------------------')	#60個

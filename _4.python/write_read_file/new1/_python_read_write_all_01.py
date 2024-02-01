@@ -45,6 +45,7 @@ print("列出返回工作資料夾 ", currentdir)
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 files = ['ch14_1.py', 'ch14_2.py', 'ch14_3.py']
 for file in files:
     print(os.path.join('D:\\Python\\ch14', file))   
@@ -69,7 +70,7 @@ for file in os.listdir('D:\\Python\\ch14'):
     totalsizes += os.path.getsize(os.path.join('D:\\Python\\ch14', file))
 
 print("全部檔案大小是 = ", totalsizes)
-   
+
 print("------------------------------------------------------------")  # 60個
 
 import glob
@@ -85,7 +86,7 @@ for file in glob.glob('ch14_1*.py'):
 print("方法3:列出目前工作目錄的特定檔案")
 for file in glob.glob('ch14_2*.*'):
     print(file)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 for dirName, sub_dirNames, fileNames in os.walk('oswalk'):
@@ -104,7 +105,7 @@ with open(fn) as file_Obj:      # 傳回檔案物件file_Obj
     print(new_data.rstrip())    # 輸出檔案
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 fn = 'sse.txt'              # 設定欲開啟的檔案
 with open(fn) as file_Obj:  # 用預設mode=r開啟檔案,傳回檔案物件file_Obj
     obj_list = file_Obj.readlines()  # 每次讀一行
@@ -118,9 +119,9 @@ if findstr in str_Obj:      # 搜尋檔案是否有欲尋找字串
     print("搜尋 %s 字串存在 %s 檔案中" % (findstr, fn))
 else:
     print("搜尋 %s 字串不存在 %s 檔案中" % (findstr, fn))
-
+"""
 print("------------------------------------------------------------")  # 60個
-
+"""
 fn = 'sse.txt'              # 設定欲開啟的檔案
 
 with open(fn) as file_Obj:  # 用預設mode=r開啟檔案,傳回檔案物件file_Obj
@@ -137,7 +138,7 @@ if  index >= 0:             # 搜尋檔案是否有欲尋找字串
     print("在索引 %s 位置出現" % index)
 else:
     print("搜尋 %s 字串不存在 %s 檔案中" % (findstr, fn))
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 msg = '''CIA Mark told CIA Linda that the secret USB
@@ -159,13 +160,13 @@ with open(fn, 'w') as file_Obj:
     file_Obj.write(string)
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 fn = 'out14_27.txt'
 x = 100
 
 with open(fn, 'w') as file_Obj:
     file_Obj.write(x)               # 直接輸出數值x產生錯誤
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 fn = 'out14_28.txt'
@@ -205,13 +206,13 @@ with open(fn, 'a') as file_Obj:
     file_Obj.write(str2 + '\n')
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 fn = 'ansi14_44.txt'                    # 設定欲開啟的檔案
 file_Obj =  open(fn, encoding='cp950')  # 用預設encoding='cp950'開啟檔案
 data = file_Obj.read()                  # 讀取檔案到變數data
 file_Obj.close()                        # 關閉檔案物件
 print(data)                             # 輸出變數data相當於輸出檔案
-  
+
 print("------------------------------------------------------------")  # 60個
 
 fn = 'utf14_45.txt'                     # 設定欲開啟的檔案
@@ -219,7 +220,7 @@ file_Obj =  open(fn, encoding='cp950')  # 用預設encoding='cp950'開啟檔案
 data = file_Obj.read()                  # 讀取檔案到變數data
 file_Obj.close()                        # 關閉檔案物件
 print(data)                             # 輸出變數data相當於輸出檔案
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 fn = 'utf14_45.txt'                     # 設定欲開啟的檔案
@@ -282,10 +283,7 @@ else:
     wordList = data.split()     # 將文章轉成串列
     print(fn, " 文章的字數是 ", len(wordList))    # 列印文章字數
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch15\ch15_7.py
 
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
@@ -298,14 +296,10 @@ def wordsNum(fn):
         wordList = data.split()     # 將文章轉成串列
         print(fn, " 文章的字數是 ", len(wordList))    # 列印文章字數
 
-
-
 file = 'ch15_6.txt'                 # 設定欲開啟的檔案
 wordsNum(file)
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch15\ch15_8.py
 
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
@@ -324,9 +318,6 @@ for file in files:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch15\ch15_10.py
-
-# ch15_10.py
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
     try:

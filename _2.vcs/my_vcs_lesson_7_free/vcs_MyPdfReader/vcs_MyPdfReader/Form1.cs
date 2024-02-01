@@ -260,6 +260,10 @@ namespace vcs_MyPdfReader
         private void bt_open_recent_pdf_Click(object sender, EventArgs e)
         {
             show_main_message1("開啟最近pdf", S_OK, 30);
+
+            Form_List frm = new Form_List();    //實體化 Form_Setup 視窗物件
+            //frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示 frm 視窗
         }
 
         private void bt_test_Click(object sender, EventArgs e)
@@ -362,8 +366,18 @@ namespace vcs_MyPdfReader
             richTextBox1.Text += "position : \t" + Properties.Settings.Default.position.ToString() + "\n";
             */
 
+
+            //取得系統參數資料
             richTextBox1.Text += "讀出系統變數至ArrayList\n";
-            pdf_filename_ArrayListData = Properties.Settings.Default.pdf_filenames;
+            ArrayList tmp_array_list = Properties.Settings.Default.pdf_filenames;
+            if (tmp_array_list == null)
+            {
+                pdf_filename_ArrayListData = new ArrayList();
+            }
+            else
+            {
+                pdf_filename_ArrayListData = tmp_array_list;
+            }
 
             pdf_filename = Properties.Settings.Default.pdf_filename;
             pdf_page = Properties.Settings.Default.pdf_page;
