@@ -5643,142 +5643,14 @@ s2 = "lions"
 print(id(s1))
 print(id(s2))
 
-print("測試 eval()")
-
-numberStr = "12.34*56.78"
-print("數值公式 :", numberStr)
-number = eval(numberStr)
-print("計算結果 : %5.2f" % number)
-
-numberStr = "1234*5678"
-print("數值公式 :", numberStr)
-number = eval(numberStr)
-print("計算結果 : %5.2f" % number)
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-# python 預設函數
-
-range()
-dir()
-help()
-
-
-"""
-
-"""
-type()
-int()
-float()
-"""
-
-print("python之基本函數")
-print("int(8.4)=", int(8.4))
-print("bin(14)=", bin(14))
-# print('hex(84)=',hex(84))
-print("oct(124)=", oct(124))
-print("float(6)=", float(6))
-print("abs(-6.4)=", abs(-6.4))
-print("divmod(58,5)=", divmod(58, 5))
-print("pow(3,4)=", pow(3, 4))
-print("round(3.5)=", round(3.5))
-print("chr(68)=", chr(68))
-print("ord('%s')=%d" % ("A", ord("A")))
-# print('str(1234)=',str(1234))
-print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
-print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
-print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
-print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
-
-print("------------------------------------------------------------")  # 60個
-
-print("int(8.4)=", int(8.4))
-print("bin(14)=", bin(14))
-# print("hex(84)=", hex(84))
-print("oct(124)=", oct(124))
-print("float(6)=", float(6))
-print("abs(-6.4)=", abs(-6.4))
-print("divmod(58,5)=", divmod(58, 5))
-print("pow(3,4)=", pow(3, 4))
-print("round(3.5)=", round(3.5))
-print("chr(68)=", chr(68))
-print("ord('%s')=%d" % ("A", ord("A")))
-# print("str(1234)=", str(1234))
-print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
-print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
-print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
-print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
-
-print("------------------------------------------------------------")  # 60個
-
-x = -10
-print("以下輸出abs( )函數的應用")
-print(x)  # 輸出x變數
-print(abs(x))  # 輸出abs(x)
-x = 5
-y = 3
-print("以下輸出pow( )函數的應用")
-print(pow(x, y))  # 輸出pow(x,y)
-x = 47.5
-print("以下輸出round(x)函數的應用")
-print(x)  # 輸出x變數
-print(round(x))  # 輸出round(x)
-x = 48.5
-print(x)  # 輸出x變數
-print(round(x))  # 輸出round(x)
-x = 49.5
-print(x)  # 輸出x變數
-print(round(x))  # 輸出round(x)
-print("以下輸出round(x,n)函數的應用")
-x = 2.15
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-x = 2.25
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-x = 2.151
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-x = 2.251
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-
-print("------------------------------------------------------------")  # 60個
-
-r = abs(-10)
-print("abs(-10) = ", r)
-r = abs(5)
-print("abs(5) = ", r)
-r = pow(8, 2)
-print("pow(8, 2) = ", r)
-r = pow(2, 3)
-print("pow(2, 3) = ", r)
-r = max(9, 3, 12, 32, 81, 92)
-print("max(9, 3, 12, 32, 81, 92) = ", r)
-r = min(9, 3, 12, 32, 81, 92)
-print("min(9, 3, 12, 32, 81, 92) = ", r)
-r = round(5.32)
-print("round(5.32) = ", r)
-r = round(5.52)
-print("round(5.52) = ", r)
-r = round(3.14568757, 3)
-print("round(3.14568757, 3) = ", r)
-r = round(3.14568757, 1)
-print("round(3.14568757, 1) = ", r)
-
-number = 3.14159
-print("四捨五入到小數點後兩位：", round(number, 4))
 
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 
@@ -6803,6 +6675,12 @@ mysports.append("football")
 friendsports.append("soccer")
 print("我喜歡的最新運動     = ", mysports)
 print("我朋友喜歡的最新運動 = ", friendsports)
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
 

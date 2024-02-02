@@ -402,13 +402,8 @@ namespace vcs_MyPdfReader
                         pdf_filename = filename;
                         pdf_filename_short = Path.GetFileName(pdf_filename);
                         current_directory_pdf = Path.GetDirectoryName(pdf_filename);
-                        webBrowser1.Navigate(pdf_filename);
-                        pdf_total_page = GetPDFofPageCount(pdf_filename);
-                        richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
-                        richTextBox1.Text += "頁數 : " + pdf_total_page.ToString() + "\n";
-                        pdf_page = 0;
-                        tb_pdf_page.Text = pdf_page.ToString();
-                        lb_pdf_total_page.Text = pdf_total_page.ToString();
+
+                        do_open_pdf0(pdf_filename);
                     }
                 }
             }
@@ -562,6 +557,27 @@ namespace vcs_MyPdfReader
             }
         }
 
+        void do_open_pdf0(string pdf_filename)	//開啟pdf檔案
+        {
+            show_item_location();
+            webBrowser1.Navigate(pdf_filename);
+            pdf_total_page = GetPDFofPageCount(pdf_filename);
+            richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
+            richTextBox1.Text += "頁數 : " + pdf_total_page.ToString() + "\n";
+            pdf_page = 0;
+            tb_pdf_page.Text = pdf_page.ToString();
+            lb_pdf_total_page.Text = pdf_total_page.ToString();
+
+            show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
+
+            //檢查ArrayList
+            update_pdf_filename_ArrayListData(pdf_filename);
+
+            richTextBox1.Text += "加入一筆資料至ArrayList\n";
+            pdf_filename_ArrayListData.Insert(0, pdf_filename); //插入一個元素
+            richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+        }
+
         void do_open_pdf()	//開啟pdf檔案
         {
             show_main_message1("開啟pdf檔案", S_OK, 30);
@@ -591,25 +607,12 @@ namespace vcs_MyPdfReader
                 richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
                 */
 
-                show_item_location();
                 pdf_filename = openFileDialog1.FileName;
                 pdf_filename_short = Path.GetFileName(pdf_filename);
                 current_directory_pdf = Path.GetDirectoryName(pdf_filename);
-                webBrowser1.Navigate(pdf_filename);
-                pdf_total_page = GetPDFofPageCount(pdf_filename);
-                richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
-                richTextBox1.Text += "頁數 : " + pdf_total_page.ToString() + "\n";
-                show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
-                pdf_page = 0;
-                tb_pdf_page.Text = pdf_page.ToString();
-                lb_pdf_total_page.Text = pdf_total_page.ToString();
 
-                //檢查ArrayList
-                update_pdf_filename_ArrayListData(pdf_filename);
+                do_open_pdf0(pdf_filename);
 
-                richTextBox1.Text += "加入一筆資料至ArrayList\n";
-                pdf_filename_ArrayListData.Insert(0, pdf_filename); //插入一個元素
-                richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
             }
             else
             {

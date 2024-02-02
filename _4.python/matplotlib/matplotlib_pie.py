@@ -241,5 +241,51 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="派圖 集合 3",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+n = 20
+Z = np.ones(n)
+Z[-1] *= 2
+
+plt.pie(Z, explode=Z*.05, colors = ['%f' % (i/float(n)) for i in range(n)])
+plt.axis('equal')
+plt.xticks(())
+plt.yticks()
+
+# 第二張圖
+plt.subplot(232)
+
+
+# 第三張圖
+plt.subplot(233)
+
+
+# 第四張圖
+plt.subplot(234)
+
+# 第五張圖
+plt.subplot(235)
+
+
+# 第六張圖
+plt.subplot(236)
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個

@@ -59,15 +59,6 @@ plt.xlabel("Year", fontsize=14)
 plt.ylabel("Number of Sales", fontsize=14)
 plt.show()
 """
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-import matplotlib.image as img
-
-fig = img.imread(filename)
-plt.imshow(fig)
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "D:\Python\ch15\ch15_17.py", line 6, in division
-    return x / y
-ZeroDivisionError: division by zero
-Traceback (most recent call last):
-  File "D:\Python\ch15\ch15_17.py", line 6, in division
-    return x / y
-TypeError: unsupported operand type(s) for /: 'str' and 'str'

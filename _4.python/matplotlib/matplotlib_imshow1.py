@@ -19,9 +19,9 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-'''
 print("------------------------------------------------------------")  # 60個
 
+'''
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="imshow 集合 1",
@@ -301,6 +301,24 @@ plt.colorbar(cax=cax)
 # 第六張圖
 plt.subplot(236)
 
+print('二維 sinc 函數')
+
+N = 100
+
+sinc2d = np.zeros((N, N))
+for x, x1 in enumerate(np.linspace(-10, 10, N)):
+    for y, x2 in enumerate(np.linspace(-10, 10, N)):
+        sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)
+# print(sinc2d)
+
+# same
+x1 = np.linspace(-10, 10, N)
+x2 = np.linspace(-10, 10, N)
+sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
+# print(sinc2d)
+
+plt.imshow(sinc2d)
+plt.title('二維 sinc 函數')
 
 plt.show()
 
@@ -504,76 +522,6 @@ plt.colorbar()
 # 第五張圖
 plt.subplot(235)
 
-
-# 第六張圖
-plt.subplot(236)
-
-
-plt.show()
-
-'''
-
-print("------------------------------------------------------------")  # 60個
-
-print('二維 sinc 函數')
-
-N = 100
-
-sinc2d = np.zeros((N, N))
-for x, x1 in enumerate(np.linspace(-10, 10, N)):
-    for y, x2 in enumerate(np.linspace(-10, 10, N)):
-        sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)
-# print(sinc2d)
-
-# same
-x1 = np.linspace(-10, 10, N)
-x2 = np.linspace(-10, 10, N)
-sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
-# print(sinc2d)
-
-plt.imshow(sinc2d)
-plt.title('二維 sinc 函數')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-def plt_imshow():
-    def f(x, y):
-        return (1 - x / 2 + x ** 5 + y ** 3) * np.exp(-x ** 2 - y ** 2)
-
-    plt.subplot(1, 2, 1)
-    n = 10
-    x = np.linspace(-3, 3, 4 * n)
-    y = np.linspace(-3, 3, 3 * n)
-    X, Y = np.meshgrid(x, y)
-    #plt.imshow(f(X, Y), cmap='hot', origin='low')
-    plt.imshow(f(X, Y), cmap='hot')
-    plt.colorbar(shrink=.83)
-
-    plt.xticks(())
-    plt.yticks(())
-    
-def plt_pie():
-    plt.subplot(1, 2, 2)
-    n = 20
-    Z = np.ones(n)
-    Z[-1] *= 2
-    
-    plt.pie(Z, explode=Z*.05, colors = ['%f' % (i/float(n)) for i in range(n)])
-    plt.axis('equal')
-    plt.xticks(())
-    plt.yticks()
-    
-plt.figure(figsize=(16, 6))
-plt_imshow()
-plt_pie()
-plt.tight_layout()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 x = np.linspace(start=-10, stop=10, num=101)
 
 #plt.plot(x, np.absolute(x))
@@ -582,14 +530,86 @@ xx = x + 1j * x[:, np.newaxis]
 
 plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap='gray')
 
+
+# 第六張圖
+plt.subplot(236)
+
+
+def f(x, y):
+    return (1 - x / 2 + x ** 5 + y ** 3) * np.exp(-x ** 2 - y ** 2)
+
+n = 10
+x = np.linspace(-3, 3, 4 * n)
+y = np.linspace(-3, 3, 3 * n)
+X, Y = np.meshgrid(x, y)
+#plt.imshow(f(X, Y), cmap='hot', origin='low')
+plt.imshow(f(X, Y), cmap='hot')
+plt.colorbar(shrink=.83)
+
+plt.xticks(())
+plt.yticks(())
+
 plt.show()
 
+'''
+print("------------------------------------------------------------")  # 60個
+
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="imshow 集合 6",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+import matplotlib.image as img
+
+image = img.imread(filename)
+plt.imshow(image)
+
+
+
+# 第二張圖
+plt.subplot(232)
+
+
+# 第三張圖
+plt.subplot(233)
+
+
+
+# 第四張圖
+plt.subplot(234)
+
+
+
+
+# 第五張圖
+plt.subplot(235)
+
+
+
+# 第六張圖
+plt.subplot(236)
+
+
+plt.show()
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
