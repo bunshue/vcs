@@ -19,65 +19,65 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 """
-#直方图与均衡化
+#直方圖與均衡化
 
-在图像处理中，直方图是非常重要，也是非常有用的一个处理要素。
+在圖像處理中，直方圖是非常重要，也是非常有用的一個處理要素。
 
-在skimage库中对直方图的处理，是放在exposure这个模块中。
+在skimage庫中對直方圖的處理，是放在exposure這個模塊中。
 
-1、计算直方图
+1、計算直方圖
 
-函数：skimage.exposure.histogram(image, nbins=256)
+函數：skimage.exposure.histogram(image, nbins=256)
 
-在numpy包中，也提供了一个计算直方图的函数histogram(),两者大同小义。
+在numpy包中，也提供了一個計算直方圖的函數histogram(),兩者大同小義。
 
-返回一个tuple（hist, bins_center), 前一个数组是直方图的统计量，后一个数组是每个bin的中间值
+返回一個tuple（hist, bins_center), 前一個數組是直方圖的統計量，后一個數組是每個bin的中間值
 """
 
 import numpy as np
 from skimage import exposure,data
 image =data.camera()*1.0
-hist1=np.histogram(image, bins=2)   #用numpy包计算直方图
-hist2=exposure.histogram(image, nbins=2)  #用skimage计算直方图
+hist1=np.histogram(image, bins=2)   #用numpy包計算直方圖
+hist2=exposure.histogram(image, nbins=2)  #用skimage計算直方圖
 print(hist1)
 print(hist2)
 
 #(array([107432, 154712], dtype=int64), array([ 0. , 127.5, 255. ]))
 #(array([107432, 154712], dtype=int64), array([ 63.75, 191.25]))
-#分成两个bin，每个bin的统计量是一样的，但numpy返回的是每个bin的两端的范围值，而skimage返回的是每个bin的中间值
+#分成兩個bin，每個bin的統計量是一樣的，但numpy返回的是每個bin的兩端的范圍值，而skimage返回的是每個bin的中間值
 
 """
-2、绘制直方图
+2、繪制直方圖
 
-绘图都可以调用matplotlib.pyplot库来进行，其中的hist函数可以直接绘制直方图。
+繪圖都可以調用matplotlib.pyplot庫來進行，其中的hist函數可以直接繪制直方圖。
 
-调用方式：
+調用方式：
 
 n, bins, patches = plt.hist(arr, bins=10, density=False, facecolor='black', edgecolor='black',alpha=1，histtype='bar')
 
-hist的参数非常多，但常用的就这六个，只有第一个是必须的，后面四个可选
+hist的參數非常多，但常用的就這六個，只有第一個是必須的，后面四個可選
 
-arr: 需要计算直方图的一维数组
+arr: 需要計算直方圖的一維數組
 
-bins: 直方图的柱数，可选项，默认为10
+bins: 直方圖的柱數，可選項，默認為10
 
-density: 是否将得到的直方图向量归一化。默认为False
+density: 是否將得到的直方圖向量歸一化。默認為False
 
-facecolor: 直方图颜色
+facecolor: 直方圖顏色
 
-edgecolor: 直方图边框颜色
+edgecolor: 直方圖邊框顏色
 
 alpha: 透明度
 
-histtype: 直方图类型，‘bar’, ‘barstacked’, ‘step’, ‘stepfilled’
+histtype: 直方圖類型，‘bar’, ‘barstacked’, ‘step’, ‘stepfilled’
 
 返回值 ：
 
-n: 直方图向量，是否归一化由参数density设定
+n: 直方圖向量，是否歸一化由參數density設定
 
-bins: 返回各个bin的区间范围
+bins: 返回各個bin的區間范圍
 
-patches: 返回每个bin里面包含的数据，是一个list
+patches: 返回每個bin里面包含的數據，是一個list
 """
 
 from skimage import data
@@ -89,18 +89,18 @@ n, bins, patches = plt.hist(arr, bins=256, density = True, edgecolor='None',face
 plt.show()
 
 """
-其中的flatten()函数是numpy包里面的，用于将二维数组序列化成一维数组。
+其中的flatten()函數是numpy包里面的，用于將二維數組序列化成一維數組。
 是按行序列，如
 mat=[[1 2 3
 　　　  4 5 6]]
 
-经过 mat.flatten()后，就变成了
+經過 mat.flatten()后，就變成了
 
 mat=[1 2 3 4 5 6]
 
-3、彩色图片三通道直方图
+3、彩色圖片三通道直方圖
 
-一般来说直方图都是征对灰度图的，如果要画rgb图像的三通道直方图，实际上就是三个直方图的叠加。
+一般來說直方圖都是征對灰度圖的，如果要畫rgb圖像的三通道直方圖，實際上就是三個直方圖的疊加。
 
 """
 
@@ -116,11 +116,11 @@ plt.hist(ab, bins=256, density = True, facecolor='b',edgecolor='b')
 plt.show()
 
 """
-其中，加一个参数hold=1,表示可以叠加
+其中，加一個參數hold=1,表示可以疊加
 
-4、直方图均衡化
+4、直方圖均衡化
 
-如果一副图像的像素占有很多的灰度级而且分布均匀，那么这样的图像往往有高对比度和多变的灰度色调。直方图均衡化就是一种能仅靠输入图像直方图信息自动达到这种效果的变换函数。它的基本思想是对图像中像素个数多的灰度级进行展宽，而对图像中像素个数少的灰度进行压缩，从而扩展取值的动态范围，提高了对比度和灰度色调的变化，使图像更加清晰。
+如果一副圖像的像素占有很多的灰度級而且分布均勻，那么這樣的圖像往往有高對比度和多變的灰度色調。直方圖均衡化就是一種能僅靠輸入圖像直方圖信息自動達到這種效果的變換函數。它的基本思想是對圖像中像素個數多的灰度級進行展寬，而對圖像中像素個數少的灰度進行壓縮，從而擴展取值的動態范圍，提高了對比度和灰度色調的變化，使圖像更加清晰。
 """
 
 from skimage import data,exposure
@@ -130,33 +130,33 @@ plt.figure("hist",figsize=(8,8))
 
 arr=img.flatten()
 plt.subplot(221)
-plt.imshow(img,plt.cm.gray)  #原始图像
+plt.imshow(img,plt.cm.gray)  #原始圖像
 plt.subplot(222)
-plt.hist(arr, bins=256, density = True, edgecolor='None',facecolor='red') #原始图像直方图
+plt.hist(arr, bins=256, density = True, edgecolor='None',facecolor='red') #原始圖像直方圖
 
 img1=exposure.equalize_hist(img)
 arr1=img1.flatten()
 plt.subplot(223)
-plt.imshow(img1,plt.cm.gray)  #均衡化图像
+plt.imshow(img1,plt.cm.gray)  #均衡化圖像
 plt.subplot(224)
-plt.hist(arr1, bins=256, density = True,edgecolor='None',facecolor='red') #均衡化直方图
+plt.hist(arr1, bins=256, density = True,edgecolor='None',facecolor='red') #均衡化直方圖
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 """
-图像简单滤波
+圖像簡單濾波
 
-对图像进行滤波，可以有两种效果：一种是平滑滤波，用来抑制噪声；另一种是微分算子，可以用来检测边缘和特征提取。
+對圖像進行濾波，可以有兩種效果：一種是平滑濾波，用來抑制噪聲；另一種是微分算子，可以用來檢測邊緣和特征提取。
 
-skimage库中通过filters模块进行滤波操作。
+skimage庫中通過filters模塊進行濾波操作。
 
 1、sobel算子
 
-sobel算子可用来检测边缘
+sobel算子可用來檢測邊緣
 
-函数格式为：skimage.filters.sobel(image, mask=None)
+函數格式為：skimage.filters.sobel(image, mask=None)
 """
 
 from skimage import data,filters
@@ -169,31 +169,31 @@ plt.show()
 """
 2、roberts算子
 
-roberts算子和sobel算子一样，用于检测边缘
+roberts算子和sobel算子一樣，用于檢測邊緣
 
-调用格式也是一样的：
+調用格式也是一樣的：
 
 edges = filters.roberts(img)
 
 3、scharr算子
 
-功能同sobel，调用格式：
+功能同sobel，調用格式：
 
 edges = filters.scharr(img)
 
 4、prewitt算子
 
-功能同sobel，调用格式：
+功能同sobel，調用格式：
 
 edges = filters.prewitt(img)
 
 5、canny算子
 
-canny算子也是用于提取边缘特征，但它不是放在filters模块，而是放在feature模块
+canny算子也是用于提取邊緣特征，但它不是放在filters模塊，而是放在feature模塊
 
-函数格式：skimage.feature.canny(image，sigma=1.0)
+函數格式：skimage.feature.canny(image，sigma=1.0)
 
-可以修改sigma的值来调整效果
+可以修改sigma的值來調整效果
 """
 
 from skimage import data,filters,feature
@@ -213,15 +213,15 @@ plt.show()
 
 """
 
-从结果可以看出，sigma越小，边缘线条越细小。
+從結果可以看出，sigma越小，邊緣線條越細小。
 
-6、gabor滤波
+6、gabor濾波
 
-gabor滤波可用来进行边缘检测和纹理特征提取。
+gabor濾波可用來進行邊緣檢測和紋理特征提取。
 
-函数调用格式：skimage.filters.gabor_filter(image, frequency)
+函數調用格式：skimage.filters.gabor_filter(image, frequency)
 
-通过修改frequency值来调整滤波效果，返回一对边缘结果，一个是用真实滤波核的滤波结果，一个是想象的滤波核的滤波结果。
+通過修改frequency值來調整濾波效果，返回一對邊緣結果，一個是用真實濾波核的濾波結果，一個是想象的濾波核的濾波結果。
 """
 
 """
@@ -247,17 +247,17 @@ plt.show()
 
 """
 
-以上为frequency=0.6的结果图。
+以上為frequency=0.6的結果圖。
 
-以上为frequency=0.1的结果图
+以上為frequency=0.1的結果圖
 
-7、gaussian滤波
+7、gaussian濾波
 
-多维的滤波器，是一种平滑滤波，可以消除高斯噪声。
+多維的濾波器，是一種平滑濾波，可以消除高斯噪聲。
 
-调用函数为：skimage.filters.gaussian_filter(image, sigma)
+調用函數為：skimage.filters.gaussian_filter(image, sigma)
 
-通过调节sigma的值来调整滤波效果
+通過調節sigma的值來調整濾波效果
 """
 
 """
@@ -279,13 +279,13 @@ plt.show()
 """
 
 """
-可见sigma越大，过滤后的图像越模糊
+可見sigma越大，過濾后的圖像越模糊
 
 8.median
 
-中值滤波，一种平滑滤波，可以消除噪声。
+中值濾波，一種平滑濾波，可以消除噪聲。
 
-需要用skimage.morphology模块来设置滤波器的形状。
+需要用skimage.morphology模塊來設置濾波器的形狀。
 """
 
 from skimage import data,filters
@@ -306,15 +306,15 @@ plt.imshow(edges2,plt.cm.gray)
 plt.show()
 
 """
-从结果可以看出，滤波器越大，图像越模糊。
+從結果可以看出，濾波器越大，圖像越模糊。
 
-9、水平、垂直边缘检测
+9、水平、垂直邊緣檢測
 
-上边所举的例子都是进行全部边缘检测，有些时候我们只需要检测水平边缘，或垂直边缘，就可用下面的方法。
+上邊所舉的例子都是進行全部邊緣檢測，有些時候我們只需要檢測水平邊緣，或垂直邊緣，就可用下面的方法。
 
-水平边缘检测：sobel_h, prewitt_h, scharr_h
+水平邊緣檢測：sobel_h, prewitt_h, scharr_h
 
-垂直边缘检测： sobel_v, prewitt_v, scharr_v
+垂直邊緣檢測： sobel_v, prewitt_v, scharr_v
 """
 
 from skimage import data,filters
@@ -335,18 +335,18 @@ plt.show()
 
 """
 
-上边左图为检测出的水平边缘，右图为检测出的垂直边缘。
+上邊左圖為檢測出的水平邊緣，右圖為檢測出的垂直邊緣。
 
-10、交叉边缘检测
+10、交叉邊緣檢測
 
-可使用Roberts的十字交叉核来进行过滤，以达到检测交叉边缘的目的。这些交叉边缘实际上是梯度在某个方向上的一个分量。
+可使用Roberts的十字交叉核來進行過濾，以達到檢測交叉邊緣的目的。這些交叉邊緣實際上是梯度在某個方向上的一個分量。
 
-其中一个核：
+其中一個核：
 
  0   1
 -1   0
 
-对应的函数：
+對應的函數：
 
 roberts_neg_diag(image）
 
@@ -369,12 +369,12 @@ plt.imshow(dst,plt.cm.gray)
 plt.show()
 
 """
-另外一个核：
+另外一個核：
 
 1   0
 0  -1
 
-对应函数为：
+對應函數為：
 
 roberts_pos_diag(image）
 """
@@ -398,28 +398,28 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 """
-图像自动阈值分割
+圖像自動閾值分割
 
-图像阈值分割是一种广泛应用的分割技术，利用图像中要提取的目标区域与其背景在灰度特性上的差异，把图像看作具有不同灰度级的两类区域(目标区域和背景区域)的组合，选取一个比较合理的阈值，以确定图像中每个像素点应该属于目标区域还是背景区域，从而产生相应的二值图像。
+圖像閾值分割是一種廣泛應用的分割技術，利用圖像中要提取的目標區域與其背景在灰度特性上的差異，把圖像看作具有不同灰度級的兩類區域(目標區域和背景區域)的組合，選取一個比較合理的閾值，以確定圖像中每個像素點應該屬于目標區域還是背景區域，從而產生相應的二值圖像。
 
-在skimage库中，阈值分割的功能是放在filters模块中。
+在skimage庫中，閾值分割的功能是放在filters模塊中。
 
-我们可以手动指定一个阈值，从而来实现分割。也可以让系统自动生成一个阈值，下面几种方法就是用来自动生成阈值。
+我們可以手動指定一個閾值，從而來實現分割。也可以讓系統自動生成一個閾值，下面幾種方法就是用來自動生成閾值。
 
 1、threshold_otsu
 
-基于Otsu的阈值分割方法，函数调用格式：
+基于Otsu的閾值分割方法，函數調用格式：
 
 skimage.filters.threshold_otsu(image, nbins=256)
 
-参数image是指灰度图像，返回一个阈值。
+參數image是指灰度圖像，返回一個閾值。
 """
 
 from skimage import data,filters
 import matplotlib.pyplot as plt
 image = data.camera()
-thresh = filters.threshold_otsu(image)   #返回一个阈值
-dst =(image <= thresh)*1.0   #根据阈值进行分割
+thresh = filters.threshold_otsu(image)   #返回一個閾值
+dst =(image <= thresh)*1.0   #根據閾值進行分割
 
 plt.figure('thresh',figsize=(8,8))
 
@@ -435,7 +435,7 @@ plt.show()
 
 """
 
-返回阈值为87，根据87进行分割得下图:
+返回閾值為87，根據87進行分割得下圖:
 
 2、threshold_yen
 
@@ -443,7 +443,7 @@ plt.show()
 
 thresh = filters.threshold_yen(image) 
 
-返回阈值为198，分割如下图：
+返回閾值為198，分割如下圖：
 
 3、threshold_li
 
@@ -451,11 +451,11 @@ thresh = filters.threshold_yen(image)
 
 thresh = filters.threshold_li(image)
 
-返回阈值64.5，分割如下图：
+返回閾值64.5，分割如下圖：
 
 4、threshold_isodata
 
-阈值计算方法：
+閾值計算方法：
 
 threshold = (image[image <= threshold].mean() +image[image > threshold].mean()) / 2.0
 
@@ -463,26 +463,26 @@ threshold = (image[image <= threshold].mean() +image[image > threshold].mean()) 
 
 thresh = filters.threshold_isodata(image)
 
-返回阈值为87，因此分割效果和threshold_otsu一样。
+返回閾值為87，因此分割效果和threshold_otsu一樣。
 
 5、threshold_adaptive
 
-调用函数为：
+調用函數為：
 
 skimage.filters.threshold_adaptive(image, block_size, method='gaussian'）
 
-block_size: 块大小，指当前像素的相邻区域大小，一般是奇数（如3，5，7。。。）
+block_size: 塊大小，指當前像素的相鄰區域大小，一般是奇數（如3，5，7。。。）
 
-method: 用来确定自适应阈值的方法，有'mean', 'generic', 'gaussian' 和 'median'。省略时默认为gaussian
+method: 用來確定自適應閾值的方法，有'mean', 'generic', 'gaussian' 和 'median'。省略時默認為gaussian
 
-该函数直接访问一个阈值后的图像，而不是阈值。
+該函數直接訪問一個閾值后的圖像，而不是閾值。
 """
 """
 #沒有 threshold_adaptive
 from skimage import data,filters
 import matplotlib.pyplot as plt
 image = data.camera()
-dst =filters.threshold_adaptive(image, 15) #返回一个阈值图像
+dst =filters.threshold_adaptive(image, 15) #返回一個閾值圖像
 
 plt.figure('thresh',figsize=(8,8))
 
@@ -499,7 +499,7 @@ plt.show()
 
 """
 
-大家可以修改block_size的大小和method值来查看更多的效果。如：
+大家可以修改block_size的大小和method值來查看更多的效果。如：
 
 dst1 =filters.threshold_adaptive(image,31,'mean') 
 dst2 =filters.threshold_adaptive(image,5,'median')
@@ -515,5 +515,4 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
 

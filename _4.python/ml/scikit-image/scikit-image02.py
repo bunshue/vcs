@@ -3,29 +3,29 @@ skimage : scikit-image SciKit (toolkit for SciPy)
 
 pip install scikit-image
 
-子模块名称　 	主要实现功能
-io 	        读取、保存和显示图片或视频
-data    	提供一些测试图片和样本数据
-color 	        颜色空间变换
-filters 	图像增强、边缘检测、排序滤波器、自动阈值等
-draw  	        操作于numpy数组上的基本图形绘制，包括线条、矩形、圆和文本等
-transform 	几何变换或其它变换，如旋转、拉伸和拉东变换等
-morphology 	形态学操作，如开闭运算、骨架提取等
-exposure 	图片强度调整，如亮度调整、直方图均衡等
-feature 	特征检测与提取等
-measure 	图像属性的测量，如相似性或等高线等
-segmentation 	图像分割
-restoration 	图像恢复
-util 	        通用函数
+子模塊名稱　 	主要實現功能
+io 	        讀取、保存和顯示圖片或視頻
+data    	提供一些測試圖片和樣本數據
+color 	        顏色空間變換
+filters 	圖像增強、邊緣檢測、排序濾波器、自動閾值等
+draw  	        操作于numpy數組上的基本圖形繪制，包括線條、矩形、圓和文本等
+transform 	幾何變換或其它變換，如旋轉、拉伸和拉東變換等
+morphology 	形態學操作，如開閉運算、骨架提取等
+exposure 	圖片強度調整，如亮度調整、直方圖均衡等
+feature 	特征檢測與提取等
+measure 	圖像屬性的測量，如相似性或等高線等
+segmentation 	圖像分割
+restoration 	圖像恢復
+util 	        通用函數
 
 skimage 內建圖片位置
-astronaut	      宇航员图片      coffee	            一杯咖啡图片
-lena(x)               lena美女图片    camera	            拿相机的人图片
-coins	              硬币图片        moon	            月亮图片
-checkerboard	      棋盘图片        horse	            马图片
-page	              书页图片        chelsea	            小猫图片
-hubble_deep_field     星空图片        text	            文字图片
-clock	              时钟图片        immunohistochemistry  结肠图片
+astronaut	      宇航員圖片      coffee	            一杯咖啡圖片
+lena(x)               lena美女圖片    camera	            拿相機的人圖片
+coins	              硬幣圖片        moon	            月亮圖片
+checkerboard	      棋盤圖片        horse	            馬圖片
+page	              書頁圖片        chelsea	            小貓圖片
+hubble_deep_field     星空圖片        text	            文字圖片
+clock	              時鐘圖片        immunohistochemistry  結腸圖片
 
 """
 
@@ -88,19 +88,19 @@ print('打印圖片訊息')
 from skimage import io,data
 img=data.chelsea()
 io.imshow(img)
-print('显示类型 :', type(img))
-print('显示尺寸 :', img.shape)
-print('图片宽度 :', img.shape[0])
-print('图片高度 :', img.shape[1])
-print('图片通道数 :', img.shape[2])
-print('显示总像素个数 :', img.size)
+print('顯示類型 :', type(img))
+print('顯示尺寸 :', img.shape)
+print('圖片寬度 :', img.shape[0])
+print('圖片高度 :', img.shape[1])
+print('圖片通道數 :', img.shape[2])
+print('顯示總像素個數 :', img.size)
 print('最大像素值 :', img.max())
 print('最小像素值 :', img.min())
 print('像素平均值 :', img.mean())
 
 print('------------------------------------------------------------')	#60個
 
-#输出小猫图片的G通道中的第20行30列的像素值
+#輸出小貓圖片的G通道中的第20行30列的像素值
 
 from skimage import io,data
 img=data.chelsea()
@@ -108,7 +108,7 @@ pixel=img[20,30,1]
 print(pixel)
 
 
-#显示红色单通道图片
+#顯示紅色單通道圖片
 
 from skimage import io,data
 img=data.chelsea()
@@ -117,13 +117,13 @@ io.imshow(R)
 
 
 #修改像素值
-#对小猫图片随机添加椒盐噪声
+#對小貓圖片隨機添加椒鹽噪聲
 
 from skimage import io,data
 import numpy as np
 img=data.chelsea()
 
-#随机生成5000个椒盐
+#隨機生成5000個椒鹽
 rows,cols,dims=img.shape
 for i in range(5000):
     x=np.random.randint(0,rows)
@@ -137,8 +137,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#通过对数组的裁剪，就可以实现对图片的裁剪。
-#对小猫图片进行裁剪
+#通過對數組的裁剪，就可以實現對圖片的裁剪。
+#對小貓圖片進行裁剪
 
 from skimage import io,data
 img=data.chelsea()
@@ -148,27 +148,27 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#对多个像素点进行操作，使用数组切片方式访问。
-#切片方式返回的是以指定间隔下标访问 该数组的像素值。
-#下面是有关灰度图像的一些例子：
+#對多個像素點進行操作，使用數組切片方式訪問。
+#切片方式返回的是以指定間隔下標訪問 該數組的像素值。
+#下面是有關灰度圖像的一些例子：
 """
-img[i,:] = im[j,:] # 将第 j 行的数值赋值给第 i 行
+img[i,:] = im[j,:] # 將第 j 行的數值賦值給第 i 行
 
-img[:,i] = 100 # 将第 i 列的所有数值设为 100
+img[:,i] = 100 # 將第 i 列的所有數值設為 100
 
-img[:100,:50].sum() # 计算前 100 行、前 50 列所有数值的和
+img[:100,:50].sum() # 計算前 100 行、前 50 列所有數值的和
 
 img[50:100,50:100] # 50~100 行，50~100 列（不包括第 100 行和第 100 列）
 
-img[i].mean() # 第 i 行所有数值的平均值
+img[i].mean() # 第 i 行所有數值的平均值
 
 img[:,-1] # 最后一列
 
-img[-2,:] (or im[-2]) # 倒数第二行
+img[-2,:] (or im[-2]) # 倒數第二行
 """
 
-#最后我们再看两个对像素值进行访问和改变的例子：
-#例5：将astronaut图片进行二值化，像素值大于128的变为1，否则变为0
+#最后我們再看兩個對像素值進行訪問和改變的例子：
+#例5：將astronaut圖片進行二值化，像素值大于128的變為1，否則變為0
 
 from skimage import io,data,color
 #img = data.astronaut()
@@ -184,7 +184,7 @@ for i in range(rows):
 io.imshow(img_gray)
 plt.show()
 
-#这个例子，使用了color模块的rgb2gray（）函数，将彩色三通道图片转换成灰度图。转换结果为float64类型的数组，范围为[0,1]之间。
+#這個例子，使用了color模塊的rgb2gray（）函數，將彩色三通道圖片轉換成灰度圖。轉換結果為float64類型的數組，范圍為[0,1]之間。
 
 from skimage import io, data
 img = data.chelsea()
@@ -193,7 +193,7 @@ img[reddish] = [0, 255, 0]
 io.imshow(img)
 plt.show()
 
-#这个例子先对R通道的所有像素值进行判断，如果大于170，则将这个地方的像素值变为[0,255,0], 即G通道值为255，R和B通道值为0。
+#這個例子先對R通道的所有像素值進行判斷，如果大于170，則將這個地方的像素值變為[0,255,0], 即G通道值為255，R和B通道值為0。
 
 
 '''
@@ -201,21 +201,21 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#图像数据类型及颜色空间转换
+#圖像數據類型及顏色空間轉換
 
 
-#数据类型
+#數據類型
 from skimage import io,data
 img=data.chelsea()
 print(img.dtype.name)
 
 
-#颜色空间及其转换
-#通过图像的颜色空间转换来改变数据类型。
-#常用的颜色空间有灰度空间、rgb空间、hsv空间和cmyk空间。颜色空间转换以后，图片类型都变成了float型。
-#所有的颜色空间转换函数，都放在skimage的color模块内。
+#顏色空間及其轉換
+#通過圖像的顏色空間轉換來改變數據類型。
+#常用的顏色空間有灰度空間、rgb空間、hsv空間和cmyk空間。顏色空間轉換以后，圖片類型都變成了float型。
+#所有的顏色空間轉換函數，都放在skimage的color模塊內。
 
-#rgb转灰度图
+#rgb轉灰度圖
 
 from skimage import io,data,color
 img=data.chelsea()
@@ -225,7 +225,7 @@ plt.show()
 
 """
 
-其它的转换，用法都是一样的，列举常用的如下：
+其它的轉換，用法都是一樣的，列舉常用的如下：
 skimage.color.rgb2grey(rgb)
 skimage.color.rgb2hsv(rgb)
 skimage.color.rgb2lab(rgb)
@@ -233,10 +233,10 @@ skimage.color.gray2rgb(image)
 skimage.color.hsv2rgb(hsv)
 skimage.color.lab2rgb(lab)
 
-实际上，上面的所有转换函数，都可以用一个函数来代替
+實際上，上面的所有轉換函數，都可以用一個函數來代替
 skimage.color.convert_colorspace(arr, fromspace, tospace)
-表示将arr从fromspace颜色空间转换到tospace颜色空间。
-例：rgb转hsv
+表示將arr從fromspace顏色空間轉換到tospace顏色空間。
+例：rgb轉hsv
 from skimage import io,data,color
 img=data.chelsea()
 hsv=color.convert_colorspace(img,'RGB','HSV')
@@ -247,9 +247,9 @@ io.imshow(hsv)
 
 print('------------------------------------------------------------')	#60個
 
-#在color模块的颜色空间转换函数中，还有一个比较有用的函数是
-#skimage.color.label2rgb(arr), 可以根据标签值对图片进行着色。以后的图片分类后着色就可以用这个函数。
-#例：将astronaut图片分成三类，然后用默认颜色对三类进行着色
+#在color模塊的顏色空間轉換函數中，還有一個比較有用的函數是
+#skimage.color.label2rgb(arr), 可以根據標簽值對圖片進行著色。以后的圖片分類后著色就可以用這個函數。
+#例：將astronaut圖片分成三類，然后用默認顏色對三類進行著色
 
 from skimage import io,data,color
 import numpy as np
@@ -270,4 +270,3 @@ io.imshow(dst)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-

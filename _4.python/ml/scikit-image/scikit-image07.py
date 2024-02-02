@@ -19,27 +19,27 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 """
-基本图形的绘制
+基本圖形的繪制
 
-图形包括线条、圆形、椭圆形、多边形等。
+圖形包括線條、圓形、橢圓形、多邊形等。
 
-在skimage包中，绘制图形用的是draw模块，不要和绘制图像搞混了。
+在skimage包中，繪制圖形用的是draw模塊，不要和繪制圖像搞混了。
 
-1、画线条
+1、畫線條
 
-函数调用格式为：
+函數調用格式為：
 
 skimage.draw.line(r1,c1,r2,c2)
 
-r1,r2: 开始点的行数和结束点的行数
+r1,r2: 開始點的行數和結束點的行數
 
-c1,c2: 开始点的列数和结束点的列数
+c1,c2: 開始點的列數和結束點的列數
 
-返回当前绘制图形上所有点的坐标，如：
+返回當前繪制圖形上所有點的坐標，如：
 
 rr, cc =draw.line(1, 5, 8, 2)
 
-表示从（1，5）到（8，2）连一条线，返回线上所有的像素点坐标[rr,cc]
+表示從（1，5）到（8，2）連一條線，返回線上所有的像素點坐標[rr,cc]
 """
 
 from skimage import draw,data
@@ -53,7 +53,7 @@ plt.imshow(img,plt.cm.gray)
 plt.show()
 
 """
-如果想画其它颜色的线条，则可以使用set_color（）函数，格式为：
+如果想畫其它顏色的線條，則可以使用set_color（）函數，格式為：
 
 skimage.draw.set_color(img, coords, color)
 
@@ -61,7 +61,7 @@ skimage.draw.set_color(img, coords, color)
 
 draw.set_color(img,[rr,cc],[255,0,0])
 
-则绘制红色线条。
+則繪制紅色線條。
 """
 
 from skimage import draw,data
@@ -73,11 +73,11 @@ plt.imshow(img,plt.cm.gray)
 plt.show()
 
 """
-2、画圆
+2、畫圓
 
-函数格式：skimage.draw.circle(cy, cx, radius）
+函數格式：skimage.draw.circle(cy, cx, radius）
 
-cy和cx表示圆心点，radius表示半径
+cy和cx表示圓心點，radius表示半徑
 """
 
 """沒有circle
@@ -91,11 +91,11 @@ plt.show()
 """
 
 """
-3、多边形
+3、多邊形
 
-函数格式：skimage.draw.polygon(Y,X)
+函數格式：skimage.draw.polygon(Y,X)
 
-Y为多边形顶点的行集合，X为各顶点的列值集合。
+Y為多邊形頂點的行集合，X為各頂點的列值集合。
 """
 
 from skimage import draw,data
@@ -110,13 +110,13 @@ plt.imshow(img,plt.cm.gray)
 plt.show()
 
 """
-我在此处只设置了四个顶点，因此是个四边形。
+我在此處只設置了四個頂點，因此是個四邊形。
 
-4、椭圆
+4、橢圓
 
 格式：skimage.draw.ellipse(cy, cx, yradius, xradius）
 
-cy和cx为中心点坐标，yradius和xradius代表长短轴。
+cy和cx為中心點坐標，yradius和xradius代表長短軸。
 """
 
 from skimage import draw,data
@@ -128,12 +128,12 @@ plt.imshow(img,plt.cm.gray)
 plt.show()
 
 """
-5、贝塞儿曲线
+5、貝塞兒曲線
 格式：skimage.draw.bezier_curve(y1,x1,y2,x2,y3,x3,weight)
-y1,x1表示第一个控制点坐标
-y2,x2表示第二个控制点坐标
-y3,x3表示第三个控制点坐标
-weight表示中间控制点的权重，用于控制曲线的弯曲度。
+y1,x1表示第一個控制點坐標
+y2,x2表示第二個控制點坐標
+y3,x3表示第三個控制點坐標
+weight表示中間控制點的權重，用于控制曲線的彎曲度。
 """
 
 from skimage import draw,data
@@ -145,10 +145,10 @@ plt.imshow(img,plt.cm.gray)
 plt.show()
 
 """
-6、画空心圆
-和前面的画圆是一样的，只是前面是实心圆，而此处画空心圆，只有边框线。
+6、畫空心圓
+和前面的畫圓是一樣的，只是前面是實心圓，而此處畫空心圓，只有邊框線。
 格式：skimage.draw.circle_perimeter(yx,yc,radius)
-yx,yc是圆心坐标，radius是半径
+yx,yc是圓心坐標，radius是半徑
 """
 
 from skimage import draw,data
@@ -160,10 +160,10 @@ plt.imshow(img,plt.cm.gray)
 plt.show()
 
 """
-7、空心椭圆
+7、空心橢圓
 格式：skimage.draw.ellipse_perimeter(cy, cx, yradius, xradius）
-cy,cx表示圆心
-yradius,xradius表示长短轴
+cy,cx表示圓心
+yradius,xradius表示長短軸
 """
 
 from skimage import draw,data
@@ -188,5 +188,4 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
 

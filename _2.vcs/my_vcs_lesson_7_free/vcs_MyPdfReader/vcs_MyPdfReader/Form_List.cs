@@ -288,6 +288,12 @@ namespace vcs_MyPdfReader
         private void bt_recent4_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "你按了 bt_recent4 清除全部\n";
+            pdf_filename_ArrayListData = new ArrayList();
+            Properties.Settings.Default.pdf_filenames = pdf_filename_ArrayListData;
+
+            Properties.Settings.Default.Save();
+
+            show_recent_pdf_files();
         }
 
         void listView1_KeyDown(object sender, KeyEventArgs e)

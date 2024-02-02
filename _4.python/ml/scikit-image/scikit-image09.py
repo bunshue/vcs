@@ -19,27 +19,27 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 """
-霍夫线变换
+霍夫線變換
 
-在图片处理中，霍夫变换主要是用来检测图片中的几何形状，包括直线、圆、椭圆等。
+在圖片處理中，霍夫變換主要是用來檢測圖片中的幾何形狀，包括直線、圓、橢圓等。
 
-在skimage中，霍夫变换是放在tranform模块内，本篇主要讲解霍夫线变换。
+在skimage中，霍夫變換是放在tranform模塊內，本篇主要講解霍夫線變換。
 
-对于平面中的一条直线，在笛卡尔坐标系中，可用y=mx+b来表示，其中m为斜率，b为截距。但是如果直线是一条垂直线，则m为无穷大，所有通常我们在另一坐标系中表示直线，即极坐标系下的r=xcos(theta)+ysin(theta)。即可用（r,theta）来表示一条直线。其中r为该直线到原点的距离，theta为该直线的垂线与x轴的夹角。如下图所示。
+對于平面中的一條直線，在笛卡爾坐標系中，可用y=mx+b來表示，其中m為斜率，b為截距。但是如果直線是一條垂直線，則m為無窮大，所有通常我們在另一坐標系中表示直線，即極坐標系下的r=xcos(theta)+ysin(theta)。即可用（r,theta）來表示一條直線。其中r為該直線到原點的距離，theta為該直線的垂線與x軸的夾角。如下圖所示。
 
-对于一个给定的点（x0,y0), 我们在极坐标下绘出所有通过它的直线（r,theta)，将得到一条正弦曲线。如果将图片中的所有非0点的正弦曲线都绘制出来，则会存在一些交点。所有经过这个交点的正弦曲线，说明都拥有同样的(r,theta), 意味着这些点在一条直线上。
+對于一個給定的點（x0,y0), 我們在極坐標下繪出所有通過它的直線（r,theta)，將得到一條正弦曲線。如果將圖片中的所有非0點的正弦曲線都繪制出來，則會存在一些交點。所有經過這個交點的正弦曲線，說明都擁有同樣的(r,theta), 意味著這些點在一條直線上。
 
-发上图所示，三个点(对应图中的三条正弦曲线）在一条直线上，因为这三个曲线交于一点，具有相同的（r, theta)。霍夫线变换就是利用这种方法来寻找图中的直线。
+發上圖所示，三個點(對應圖中的三條正弦曲線）在一條直線上，因為這三個曲線交于一點，具有相同的（r, theta)。霍夫線變換就是利用這種方法來尋找圖中的直線。
 
-函数：skimage.transform.hough_line(img)
+函數：skimage.transform.hough_line(img)
 
-返回三个值：
+返回三個值：
 
-h: 霍夫变换累积器
+h: 霍夫變換累積器
 
-theta: 点与x轴的夹角集合，一般为0-179度
+theta: 點與x軸的夾角集合，一般為0-179度
 
-distance: 点到原点的距离，即上面的所说的r.
+distance: 點到原點的距離，即上面的所說的r.
 
 """
 
@@ -47,25 +47,25 @@ import skimage.transform as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 构建测试图片
-image = np.zeros((100, 100))  #背景图
+# 構建測試圖片
+image = np.zeros((100, 100))  #背景圖
 idx = np.arange(25, 75)    #25-74序列
-image[idx[::-1], idx] = 255  # 线条\
-image[idx, idx] = 255        # 线条/
+image[idx[::-1], idx] = 255  # 線條\
+image[idx, idx] = 255        # 線條/
 
-# hough线变换
+# hough線變換
 h, theta, d = st.hough_line(image)
 
-#生成一个一行两列的窗口（可显示两张图片）.
+#生成一個一行兩列的窗口（可顯示兩張圖片）.
 fig, (ax0, ax1) = plt.subplots(1, 2, figsize=(8, 6))
 plt.tight_layout()
 
-#显示原始图片
+#顯示原始圖片
 ax0.imshow(image, plt.cm.gray)
 ax0.set_title('Input image')
 ax0.set_axis_off()
 
-#显示hough变换所得数据
+#顯示hough變換所得數據
 ax1.imshow(np.log(1 + h))
 ax1.set_title('Hough transform')
 ax1.set_xlabel('Angles (degrees)')
@@ -76,46 +76,46 @@ plt.show()
 
 """
 
-从右边那张图可以看出，有两个交点，说明原图像中有两条直线。
+從右邊那張圖可以看出，有兩個交點，說明原圖像中有兩條直線。
 
-如果我们要把图中的两条直线绘制出来，则需要用到另外一个函数：
+如果我們要把圖中的兩條直線繪制出來，則需要用到另外一個函數：
 
 skimage.transform.hough_line_peaks(hspace, angles, dists）
 
-用这个函数可以取出峰值点，即交点，也即原图中的直线。
+用這個函數可以取出峰值點，即交點，也即原圖中的直線。
 
-返回的参数与输入的参数一样。我们修改一下上边的程序，在原图中将两直线绘制出来。
+返回的參數與輸入的參數一樣。我們修改一下上邊的程序，在原圖中將兩直線繪制出來。
 """
 import skimage.transform as st
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 构建测试图片
-image = np.zeros((100, 100))  #背景图
+# 構建測試圖片
+image = np.zeros((100, 100))  #背景圖
 idx = np.arange(25, 75)    #25-74序列
-image[idx[::-1], idx] = 255  # 线条\
-image[idx, idx] = 255        # 线条/
+image[idx[::-1], idx] = 255  # 線條\
+image[idx, idx] = 255        # 線條/
 
-# hough线变换
+# hough線變換
 h, theta, d = st.hough_line(image)
 
-#生成一个一行三列的窗口（可显示三张图片）.
+#生成一個一行三列的窗口（可顯示三張圖片）.
 fig, (ax0, ax1,ax2) = plt.subplots(1, 3, figsize=(8, 6))
 plt.tight_layout()
 
-#显示原始图片
+#顯示原始圖片
 ax0.imshow(image, plt.cm.gray)
 ax0.set_title('Input image')
 ax0.set_axis_off()
 
-#显示hough变换所得数据
+#顯示hough變換所得數據
 ax1.imshow(np.log(1 + h))
 ax1.set_title('Hough transform')
 ax1.set_xlabel('Angles (degrees)')
 ax1.set_ylabel('Distance (pixels)')
 ax1.axis('image')
 
-#显示检测出的线条
+#顯示檢測出的線條
 ax2.imshow(image, plt.cm.gray)
 row1, col1 = image.shape
 for _, angle, dist in zip(*st.hough_line_peaks(h, theta, d)):
@@ -129,29 +129,29 @@ ax2.set_axis_off()
 plt.show()
 
 """
-注意，绘制线条的时候，要从极坐标转换为笛卡尔坐标，公式为：
+注意，繪制線條的時候，要從極坐標轉換為笛卡爾坐標，公式為：
 
  
 
-skimage还提供了另外一个检测直线的霍夫变换函数，概率霍夫线变换：
+skimage還提供了另外一個檢測直線的霍夫變換函數，概率霍夫線變換：
 
 skimage.transform.probabilistic_hough_line(img, threshold=10, line_length=5,line_gap=3)
 
-参数：
+參數：
 
-img: 待检测的图像。
+img: 待檢測的圖像。
 
-threshold： 阈值，可先项，默认为10
+threshold： 閾值，可先項，默認為10
 
-line_length: 检测的最短线条长度，默认为50
+line_length: 檢測的最短線條長度，默認為50
 
-line_gap: 线条间的最大间隙。增大这个值可以合并破碎的线条。默认为10
+line_gap: 線條間的最大間隙。增大這個值可以合并破碎的線條。默認為10
 
 返回：
 
-lines: 线条列表, 格式如((x0, y0), (x1, y0))，标明开始点和结束点。
+lines: 線條列表, 格式如((x0, y0), (x1, y0))，標明開始點和結束點。
 
-下面，我们用canny算子提取边缘，然后检测哪些边缘是直线？
+下面，我們用canny算子提取邊緣，然后檢測哪些邊緣是直線？
 """
 
 import skimage.transform as st
@@ -163,21 +163,21 @@ image = data.camera()
 edges = feature.canny(image, sigma=2, low_threshold=1, high_threshold=25)
 lines = st.probabilistic_hough_line(edges, threshold=10, line_length=5,line_gap=3)
 
-# 创建显示窗口.
+# 創建顯示窗口.
 fig, (ax0, ax1, ax2) = plt.subplots(1, 3, figsize=(16, 6))
 plt.tight_layout()
 
-#显示原图像
+#顯示原圖像
 ax0.imshow(image, plt.cm.gray)
 ax0.set_title('Input image')
 ax0.set_axis_off()
 
-#显示canny边缘
+#顯示canny邊緣
 ax1.imshow(edges, plt.cm.gray)
 ax1.set_title('Canny edges')
 ax1.set_axis_off()
 
-#用plot绘制出所有的直线
+#用plot繪制出所有的直線
 ax2.imshow(edges * 0)
 for line in lines:
     p0, p1 = line
@@ -194,27 +194,27 @@ print('------------------------------------------------------------')	#60個
 
 
 """
-霍夫圆和椭圆变换
+霍夫圓和橢圓變換
 
-在极坐标中，圆的表示方式为：
+在極坐標中，圓的表示方式為：
 
 x=x0+rcosθ
 
 y=y0+rsinθ
 
-圆心为(x0,y0),r为半径，θ为旋转度数，值范围为0-359
+圓心為(x0,y0),r為半徑，θ為旋轉度數，值范圍為0-359
 
-如果给定圆心点和半径，则其它点是否在圆上，我们就能检测出来了。在图像中，我们将每个非0像素点作为圆心点，以一定的半径进行检测，如果有一个点在圆上，我们就对这个圆心累加一次。如果检测到一个圆，那么这个圆心点就累加到最大，成为峰值。因此，在检测结果中，一个峰值点，就对应一个圆心点。
+如果給定圓心點和半徑，則其它點是否在圓上，我們就能檢測出來了。在圖像中，我們將每個非0像素點作為圓心點，以一定的半徑進行檢測，如果有一個點在圓上，我們就對這個圓心累加一次。如果檢測到一個圓，那么這個圓心點就累加到最大，成為峰值。因此，在檢測結果中，一個峰值點，就對應一個圓心點。
 
-霍夫圆检测的函数：
+霍夫圓檢測的函數：
 
 skimage.transform.hough_circle(image, radius)
 
-radius是一个数组，表示半径的集合，如[3，4，5，6]
+radius是一個數組，表示半徑的集合，如[3，4，5，6]
 
-返回一个3维的数组（radius index, M, N), 第一维表示半径的索引，后面两维表示图像的尺寸。
+返回一個3維的數組（radius index, M, N), 第一維表示半徑的索引，后面兩維表示圖像的尺寸。
 
-例1：绘制两个圆形，用霍夫圆变换将它们检测出来。
+例1：繪制兩個圓形，用霍夫圓變換將它們檢測出來。
 """
 
 import numpy as np
@@ -222,32 +222,32 @@ import matplotlib.pyplot as plt
 from skimage import draw,transform,feature
 
 img = np.zeros((250, 250,3), dtype=np.uint8)
-rr, cc = draw.circle_perimeter(60, 60, 50)  #以半径50画一个圆
-rr1, cc1 = draw.circle_perimeter(150, 150, 60) #以半径60画一个圆
+rr, cc = draw.circle_perimeter(60, 60, 50)  #以半徑50畫一個圓
+rr1, cc1 = draw.circle_perimeter(150, 150, 60) #以半徑60畫一個圓
 img[cc, rr,:] =255
 img[cc1, rr1,:] =255
 
 fig, (ax0,ax1) = plt.subplots(1,2, figsize=(8, 5))
 
-ax0.imshow(img)  #显示原图
+ax0.imshow(img)  #顯示原圖
 ax0.set_title('origin image')
 
-hough_radii = np.arange(50, 80, 5)  #半径范围
-hough_res =transform.hough_circle(img[:,:,0], hough_radii)  #圆变换 
+hough_radii = np.arange(50, 80, 5)  #半徑范圍
+hough_res =transform.hough_circle(img[:,:,0], hough_radii)  #圓變換 
 
-centers = []  #保存所有圆心点坐标
-accums = []   #累积值
-radii = []    #半径
+centers = []  #保存所有圓心點坐標
+accums = []   #累積值
+radii = []    #半徑
 
 for radius, h in zip(hough_radii, hough_res):
-    #每一个半径值，取出其中两个圆
+    #每一個半徑值，取出其中兩個圓
     num_peaks = 2
     peaks =feature.peak_local_max(h, num_peaks=num_peaks) #取出峰值
     centers.extend(peaks)
     accums.extend(h[peaks[:, 0], peaks[:, 1]])
     radii.extend([radius] * num_peaks)
 
-#画出最接近的圆
+#畫出最接近的圓
 image =np.copy(img)
 for idx in np.argsort(accums)[::-1][:2]:
     center_x, center_y = centers[idx]
@@ -262,39 +262,39 @@ plt.show()
 
 """
 
-结果图如下：原图中的圆用白色绘制，检测出的圆用红色绘制。
+結果圖如下：原圖中的圓用白色繪制，檢測出的圓用紅色繪制。
 
-例2，检测出下图中存在的硬币。
+例2，檢測出下圖中存在的硬幣。
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage import data, color,draw,transform,feature,util
 
-image = util.img_as_ubyte(data.coins()[0:95, 70:370]) #裁剪原图片
-edges =feature.canny(image, sigma=3, low_threshold=10, high_threshold=50) #检测canny边缘
+image = util.img_as_ubyte(data.coins()[0:95, 70:370]) #裁剪原圖片
+edges =feature.canny(image, sigma=3, low_threshold=10, high_threshold=50) #檢測canny邊緣
 
 fig, (ax0,ax1) = plt.subplots(1,2, figsize=(8, 5))
 
-ax0.imshow(edges, cmap=plt.cm.gray)  #显示canny边缘
+ax0.imshow(edges, cmap=plt.cm.gray)  #顯示canny邊緣
 ax0.set_title('original iamge')
 
-hough_radii = np.arange(15, 30, 2)  #半径范围
-hough_res =transform.hough_circle(edges, hough_radii)  #圆变换 
+hough_radii = np.arange(15, 30, 2)  #半徑范圍
+hough_res =transform.hough_circle(edges, hough_radii)  #圓變換 
 
-centers = []  #保存中心点坐标
-accums = []   #累积值
-radii = []    #半径
+centers = []  #保存中心點坐標
+accums = []   #累積值
+radii = []    #半徑
 
 for radius, h in zip(hough_radii, hough_res):
-    #每一个半径值，取出其中两个圆
+    #每一個半徑值，取出其中兩個圓
     num_peaks = 2
     peaks =feature.peak_local_max(h, num_peaks=num_peaks) #取出峰值
     centers.extend(peaks)
     accums.extend(h[peaks[:, 0], peaks[:, 1]])
     radii.extend([radius] * num_peaks)
 
-#画出最接近的5个圆
+#畫出最接近的5個圓
 image = color.gray2rgb(image)
 for idx in np.argsort(accums)[::-1][:5]:
     center_x, center_y = centers[idx]
@@ -308,50 +308,50 @@ ax1.set_title('detected image')
 plt.show()
 
 """
-椭圆变换是类似的，使用函数为：
+橢圓變換是類似的，使用函數為：
 
 skimage.transform.hough_ellipse(img,accuracy, threshold, min_size, max_size)
 
-输入参数：
+輸入參數：
 
-img: 待检测图像。
+img: 待檢測圖像。
 
-accuracy: 使用在累加器上的短轴二进制尺寸，是一个double型的值，默认为1
+accuracy: 使用在累加器上的短軸二進制尺寸，是一個double型的值，默認為1
 
-thresh: 累加器阈值，默认为4
+thresh: 累加器閾值，默認為4
 
-min_size: 长轴最小长度，默认为4
+min_size: 長軸最小長度，默認為4
 
-max_size: 短轴最大长度，默认为None,表示图片最短边的一半。
+max_size: 短軸最大長度，默認為None,表示圖片最短邊的一半。
 
-返回一个 [(accumulator, y0, x0, a, b, orientation)] 数组，accumulator表示累加器，（y0,x0)表示椭圆中心点，（a,b)分别表示长短轴，orientation表示椭圆方向
+返回一個 [(accumulator, y0, x0, a, b, orientation)] 數組，accumulator表示累加器，（y0,x0)表示橢圓中心點，（a,b)分別表示長短軸，orientation表示橢圓方向
 
-例：检测出咖啡图片中的椭圆杯口
+例：檢測出咖啡圖片中的橢圓杯口
 """
 
 """ fail
 import matplotlib.pyplot as plt
 from skimage import data,draw,color,transform,feature
 
-#加载图片，转换成灰度图并检测边缘
-image_rgb = data.coffee()[0:220, 160:420] #裁剪原图像，不然速度非常慢
+#加載圖片，轉換成灰度圖并檢測邊緣
+image_rgb = data.coffee()[0:220, 160:420] #裁剪原圖像，不然速度非常慢
 image_gray = color.rgb2gray(image_rgb)
 edges = feature.canny(image_gray, sigma=2.0, low_threshold=0.55, high_threshold=0.8)
 
-#执行椭圆变换
+#執行橢圓變換
 result =transform.hough_ellipse(edges, accuracy=20, threshold=250,min_size=100, max_size=120)
-result.sort(order='accumulator') #根据累加器排序
+result.sort(order='accumulator') #根據累加器排序
 
-#估计椭圆参数
-best = list(result[-1])  #排完序后取最后一个
+#估計橢圓參數
+best = list(result[-1])  #排完序后取最后一個
 yc, xc, a, b = [int(round(x)) for x in best[1:5]]
 orientation = best[5]
 
-#在原图上画出椭圆
+#在原圖上畫出橢圓
 cy, cx =draw.ellipse_perimeter(yc, xc, a, b, orientation)
-image_rgb[cy, cx] = (0, 0, 255) #在原图中用蓝色表示检测出的椭圆
+image_rgb[cy, cx] = (0, 0, 255) #在原圖中用藍色表示檢測出的橢圓
 
-#分别用白色表示canny边缘，用红色表示检测出的椭圆，进行对比
+#分別用白色表示canny邊緣，用紅色表示檢測出的橢圓，進行對比
 edges = color.gray2rgb(edges)
 edges[cy, cx] = (250, 0, 0) 
 
@@ -366,32 +366,32 @@ ax2.imshow(edges)
 plt.show()
 
 
-#霍夫椭圆变换速度非常慢，应避免图像太大。
+#霍夫橢圓變換速度非常慢，應避免圖像太大。
 """
 
 print('------------------------------------------------------------')	#60個
 
 
 """
-边缘与轮廓
+邊緣與輪廓
 
-在前面的python数字图像处理（10）：图像简单滤波 中，我们已经讲解了很多算子用来检测边缘，其中用得最多的canny算子边缘检测。
+在前面的python數字圖像處理（10）：圖像簡單濾波 中，我們已經講解了很多算子用來檢測邊緣，其中用得最多的canny算子邊緣檢測。
 
-本篇我们讲解一些其它方法来检测轮廓。
+本篇我們講解一些其它方法來檢測輪廓。
 
-1、查找轮廓（find_contours)
+1、查找輪廓（find_contours)
 
-measure模块中的find_contours()函数，可用来检测二值图像的边缘轮廓。
+measure模塊中的find_contours()函數，可用來檢測二值圖像的邊緣輪廓。
 
-函数原型为：
+函數原型為：
 
 skimage.measure.find_contours(array, level)
 
-array: 一个二值数组图像
+array: 一個二值數組圖像
 
-level: 在图像中查找轮廓的级别值
+level: 在圖像中查找輪廓的級別值
 
-返回轮廓列表集合，可用for循环取出每一条轮廓。
+返回輪廓列表集合，可用for循環取出每一條輪廓。
 
 """
 
@@ -400,18 +400,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 from skimage import measure,draw 
 
-#生成二值测试图像
+#生成二值測試圖像
 img=np.zeros([100,100])
 img[20:40,60:80]=1  #矩形
-rr,cc=draw.circle(60,60,10)  #小圆
-rr1,cc1=draw.circle(20,30,15) #大圆
+rr,cc=draw.circle(60,60,10)  #小圓
+rr1,cc1=draw.circle(20,30,15) #大圓
 img[rr,cc]=1
 img[rr1,cc1]=1
 
-#检测所有图形的轮廓
+#檢測所有圖形的輪廓
 contours = measure.find_contours(img, 0.5)
 
-#绘制轮廓
+#繪制輪廓
 fig, (ax0,ax1) = plt.subplots(1,2,figsize=(8,8))
 ax0.imshow(img,plt.cm.gray)
 ax1.imshow(img,plt.cm.gray)
@@ -425,7 +425,7 @@ plt.show()
 """
 
 """
-结果如下：不同的轮廓用不同的颜色显示
+結果如下：不同的輪廓用不同的顏色顯示
 
 """
 
@@ -433,13 +433,13 @@ plt.show()
 import matplotlib.pyplot as plt
 from skimage import measure,data,color
 
-#生成二值测试图像
+#生成二值測試圖像
 img=color.rgb2gray(data.horse())
 
-#检测所有图形的轮廓
+#檢測所有圖形的輪廓
 contours = measure.find_contours(img, 0.5)
 
-#绘制轮廓
+#繪制輪廓
 fig, axes = plt.subplots(1,2,figsize=(8,8))
 ax0, ax1= axes.ravel()
 ax0.imshow(img,plt.cm.gray)
@@ -456,35 +456,35 @@ plt.show()
 
 """
 
-2、逼近多边形曲线
+2、逼近多邊形曲線
 
-逼近多边形曲线有两个函数：subdivide_polygon（)和 approximate_polygon（）
+逼近多邊形曲線有兩個函數：subdivide_polygon（)和 approximate_polygon（）
 
-subdivide_polygon（)采用B样条（B-Splines)来细分多边形的曲线，该曲线通常在凸包线的内部。
+subdivide_polygon（)采用B樣條（B-Splines)來細分多邊形的曲線，該曲線通常在凸包線的內部。
 
-函数格式为：
+函數格式為：
 
 skimage.measure.subdivide_polygon(coords, degree=2, preserve_ends=False)
 
-coords: 坐标点序列。
+coords: 坐標點序列。
 
-degree: B样条的度数，默认为2
+degree: B樣條的度數，默認為2
 
-preserve_ends: 如果曲线为非闭合曲线，是否保存开始和结束点坐标，默认为false
+preserve_ends: 如果曲線為非閉合曲線，是否保存開始和結束點坐標，默認為false
 
-返回细分为的坐标点序列。
+返回細分為的坐標點序列。
 
-approximate_polygon（）是基于Douglas-Peucker算法的一种近似曲线模拟。它根据指定的容忍值来近似一条多边形曲线链，该曲线也在凸包线的内部。
+approximate_polygon（）是基于Douglas-Peucker算法的一種近似曲線模擬。它根據指定的容忍值來近似一條多邊形曲線鏈，該曲線也在凸包線的內部。
 
-函数格式为:
+函數格式為:
 
 skimage.measure.approximate_polygon(coords, tolerance)
 
-coords: 坐标点序列
+coords: 坐標點序列
 
 tolerance: 容忍值
 
-返回近似的多边形曲线坐标序列。
+返回近似的多邊形曲線坐標序列。
 
 """
 
@@ -492,7 +492,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from skimage import measure,data,color
 
-#生成二值测试图像
+#生成二值測試圖像
 hand = np.array([[1.64516129, 1.16145833],
                  [1.64516129, 1.59375],
                  [1.35080645, 1.921875],
@@ -516,7 +516,7 @@ hand = np.array([[1.64516129, 1.16145833],
                  [2.1733871, 1.703125],
                  [2.07782258, 1.16666667]])
 
-#检测所有图形的轮廓
+#檢測所有圖形的輪廓
 new_hand = hand.copy()
 for _ in range(5):
     new_hand =measure.subdivide_polygon(new_hand, degree=2)
@@ -549,5 +549,4 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
 

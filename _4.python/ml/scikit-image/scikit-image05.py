@@ -19,30 +19,30 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 """
-#对比度与亮度调整
+#對比度與亮度調整
 
-图像亮度与对比度的调整，是放在skimage包的exposure模块里面
+圖像亮度與對比度的調整，是放在skimage包的exposure模塊里面
 
-1、gamma调整
+1、gamma調整
 
 原理：I=Ig
 
-对原图像的像素，进行幂运算，得到新的像素值。公式中的g就是gamma值。
+對原圖像的像素，進行冪運算，得到新的像素值。公式中的g就是gamma值。
 
-如果gamma>1, 新图像比原图像暗
+如果gamma>1, 新圖像比原圖像暗
 
-如果gamma<1,新图像比原图像亮
+如果gamma<1,新圖像比原圖像亮
 
-函数格式为：skimage.exposure.adjust_gamma(image, gamma=1)
+函數格式為：skimage.exposure.adjust_gamma(image, gamma=1)
 
-gamma参数默认为1，原像不发生变化 。
+gamma參數默認為1，原像不發生變化 。
 """
 
 from skimage import data, exposure, img_as_float
 import matplotlib.pyplot as plt
 image = img_as_float(data.moon())
-gam1= exposure.adjust_gamma(image, 2)   #调暗
-gam2= exposure.adjust_gamma(image, 0.5)  #调亮
+gam1= exposure.adjust_gamma(image, 2)   #調暗
+gam2= exposure.adjust_gamma(image, 0.5)  #調亮
 plt.figure('adjust_gamma',figsize=(8,8))
 
 plt.subplot(131)
@@ -63,9 +63,9 @@ plt.axis('off')
 plt.show()
 
 """
-2、log对数调整
+2、log對數調整
 
-这个刚好和gamma相反
+這個剛好和gamma相反
 
 原理：I=log(I)
 """
@@ -73,7 +73,7 @@ plt.show()
 from skimage import data, exposure, img_as_float
 import matplotlib.pyplot as plt
 image = img_as_float(data.moon())
-gam1= exposure.adjust_log(image)   #对数调整
+gam1= exposure.adjust_log(image)   #對數調整
 plt.figure('adjust_gamma',figsize=(8,8))
 
 plt.subplot(121)
@@ -89,9 +89,9 @@ plt.axis('off')
 plt.show()
 
 """
-3、判断图像对比度是否偏低
-函数：is_low_contrast(img)
-返回一个bool型值
+3、判斷圖像對比度是否偏低
+函數：is_low_contrast(img)
+返回一個bool型值
 """
 
 from skimage import data, exposure
@@ -99,18 +99,18 @@ image =data.moon()
 result=exposure.is_low_contrast(image)
 print(result)
 
-#输出为False
+#輸出為False
 
 """
-4、调整强度
+4、調整強度
 
-函数：skimage.exposure.rescale_intensity(image, in_range='image', out_range='dtype')
+函數：skimage.exposure.rescale_intensity(image, in_range='image', out_range='dtype')
 
-in_range 表示输入图片的强度范围，默认为'image', 表示用图像的最大/最小像素值作为范围
+in_range 表示輸入圖片的強度范圍，默認為'image', 表示用圖像的最大/最小像素值作為范圍
 
-out_range 表示输出图片的强度范围，默认为'dype', 表示用图像的类型的最大/最小值作为范围
+out_range 表示輸出圖片的強度范圍，默認為'dype', 表示用圖像的類型的最大/最小值作為范圍
 
-默认情况下，输入图片的[min,max]范围被拉伸到[dtype.min, dtype.max]，如果dtype=uint8, 那么dtype.min=0, dtype.max=255
+默認情況下，輸入圖片的[min,max]范圍被拉伸到[dtype.min, dtype.max]，如果dtype=uint8, 那么dtype.min=0, dtype.max=255
 """
 
 import numpy as np
@@ -119,16 +119,16 @@ image = np.array([51, 102, 153], dtype=np.uint8)
 mat=exposure.rescale_intensity(image)
 print(mat)
 
-#输出为[  0 127 255]
-#即像素最小值由51变为0，最大值由153变为255，整体进行了拉伸，但是数据类型没有变，还是uint8
-#前面我们讲过，可以通过img_as_float()函数将unit8类型转换为float型，实际上还有更简单的方法，就是乘以1.0
+#輸出為[  0 127 255]
+#即像素最小值由51變為0，最大值由153變為255，整體進行了拉伸，但是數據類型沒有變，還是uint8
+#前面我們講過，可以通過img_as_float()函數將unit8類型轉換為float型，實際上還有更簡單的方法，就是乘以1.0
 
 import numpy as np
 image = np.array([51, 102, 153], dtype=np.uint8)
 print(image*1.0)
 
-#即由[51,102,153]变成了[  51.  102.  153.]
-#而float类型的范围是[0,1]，因此对float进行rescale_intensity 调整后，范围变为[0,1],而不是[0,255]
+#即由[51,102,153]變成了[  51.  102.  153.]
+#而float類型的范圍是[0,1]，因此對float進行rescale_intensity 調整后，范圍變為[0,1],而不是[0,255]
 
 import numpy as np
 from skimage import exposure
@@ -137,8 +137,8 @@ tmp=image*1.0
 mat=exposure.rescale_intensity(tmp)
 print(mat)
 
-#结果为[ 0.   0.5  1. ]
-#如果原始像素值不想被拉伸，只是等比例缩小，就使用in_range参数，如：
+#結果為[ 0.   0.5  1. ]
+#如果原始像素值不想被拉伸，只是等比例縮小，就使用in_range參數，如：
 
 import numpy as np
 from skimage import exposure
@@ -147,14 +147,14 @@ tmp=image*1.0
 mat=exposure.rescale_intensity(tmp,in_range=(0,255))
 print(mat)
 
-#输出为：[ 0.2  0.4  0.6]，即原像素值除以255
-#如果参数in_range的[main,max]范围要比原始像素值的范围[min,max] 大或者小，那就进行裁剪，如：
+#輸出為：[ 0.2  0.4  0.6]，即原像素值除以255
+#如果參數in_range的[main,max]范圍要比原始像素值的范圍[min,max] 大或者小，那就進行裁剪，如：
 
 mat=exposure.rescale_intensity(tmp,in_range=(0,102))
 print(mat)
 
-#输出[ 0.5  1.   1. ]，即原像素值除以102，超出1的变为1
-#如果一个数组里面有负数，现在想调整到正数，就使用out_range参数。如：
+#輸出[ 0.5  1.   1. ]，即原像素值除以102，超出1的變為1
+#如果一個數組里面有負數，現在想調整到正數，就使用out_range參數。如：
 
 import numpy as np
 from skimage import exposure
@@ -162,7 +162,7 @@ image = np.array([-10, 0, 10], dtype=np.int8)
 mat=exposure.rescale_intensity(image, out_range=(0, 127))
 print(mat)
 
-#输出[  0  63 127]
+#輸出[  0  63 127]
 
 
 
@@ -182,5 +182,4 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
 

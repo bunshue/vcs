@@ -385,43 +385,7 @@ namespace vcs_MyPdfReader
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            message_panel_height = H - 50;
-
-            Init_Controls();
-
-            if (Environment.GetCommandLineArgs().Length == 2)
-            {
-                string filename = Environment.GetCommandLineArgs()[1];
-
-                var GetExtension = Path.GetExtension(filename);
-
-                if (GetExtension.ToLower() == ".pdf")
-                {
-                    if (File.Exists(filename) == true)
-                    {
-                        pdf_filename = filename;
-                        pdf_filename_short = Path.GetFileName(pdf_filename);
-                        current_directory_pdf = Path.GetDirectoryName(pdf_filename);
-
-                        do_open_pdf0(pdf_filename);
-                    }
-                }
-            }
-
-            int i = 0;
-            foreach (string arg in Environment.GetCommandLineArgs())
-            {
-                //lb_main_mesg1.Text += "第 " + i.ToString() + " 項 : " + arg + "\n";
-                i++;
-            }
-
-            /*
-            richTextBox1.Text += "取得預設資料 :\n";
-            richTextBox1.Text += "filename : \t" + Properties.Settings.Default.filename + "\n";
-            richTextBox1.Text += "position : \t" + Properties.Settings.Default.position.ToString() + "\n";
-            */
-
-
+            //先讀進系統參數之資料
             //取得系統參數資料
             richTextBox1.Text += "讀出系統變數至ArrayList\n";
             ArrayList tmp_array_list = Properties.Settings.Default.pdf_filenames;
@@ -442,6 +406,46 @@ namespace vcs_MyPdfReader
                 pdf_page = 0;
             }
             tb_pdf_page.Text = pdf_page.ToString();
+
+            message_panel_height = H - 50;
+
+            Init_Controls();
+
+            int i = 0;
+            foreach (string arg in Environment.GetCommandLineArgs())
+            {
+                //lb_main_mesg1.Text += "第 " + i.ToString() + " 項 : " + arg + "\n";
+                i++;
+            }
+
+            bool flag_already_open_pdf = false;
+            if (Environment.GetCommandLineArgs().Length == 2)
+            {
+                string filename = Environment.GetCommandLineArgs()[1];
+
+                var GetExtension = Path.GetExtension(filename);
+
+                if (GetExtension.ToLower() == ".pdf")
+                {
+                    if (File.Exists(filename) == true)
+                    {
+                        pdf_filename = filename;
+                        pdf_filename_short = Path.GetFileName(pdf_filename);
+                        current_directory_pdf = Path.GetDirectoryName(pdf_filename);
+
+                        do_open_pdf0(pdf_filename);
+                        flag_already_open_pdf = true;
+                    }
+                }
+            }
+
+            if (flag_already_open_pdf == true)
+            {
+                this.webBrowser1.Focus();
+                this.BringToFront();
+                return;
+            }
+
 
             if (File.Exists(pdf_filename) == true)
             {
@@ -576,6 +580,8 @@ namespace vcs_MyPdfReader
             richTextBox1.Text += "加入一筆資料至ArrayList\n";
             pdf_filename_ArrayListData.Insert(0, pdf_filename); //插入一個元素
             richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+
+            this.webBrowser1.Focus();
         }
 
         void do_open_pdf()	//開啟pdf檔案
@@ -640,7 +646,7 @@ namespace vcs_MyPdfReader
             Properties.Settings.Default.pdf_page = pdf_page;
 
             //richTextBox1.Text += "將ArrayList寫入系統變數\n";
-            Properties.Settings.Default.pdf_filenames = pdf_filename_ArrayListData;
+            //Properties.Settings.Default.pdf_filenames = pdf_filename_ArrayListData;
 
             Properties.Settings.Default.Save();
 

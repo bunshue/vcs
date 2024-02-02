@@ -19,15 +19,15 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 """
-图像的批量处理
+圖像的批量處理
 
-有些时候，我们不仅要对一张图片进行处理，可能还会对一批图片处理。这时候，我们可以通过循环来执行处理，也可以调用程序自带的图片集合来处理。
+有些時候，我們不僅要對一張圖片進行處理，可能還會對一批圖片處理。這時候，我們可以通過循環來執行處理，也可以調用程序自帶的圖片集合來處理。
 
-图片集合函数为：
+圖片集合函數為：
 
 skimage.io.ImageCollection(load_pattern,load_func=None)
 
-这个函数是放在io模块内的，带两个参数，第一个参数load_pattern, 表示图片组的路径，可以是一个str字符串。第二个参数load_func是一个回调函数，我们对图片进行批量处理就可以通过这个回调函数实现。回调函数默认为imread(),即默认这个函数是批量读取图片。
+這個函數是放在io模塊內的，帶兩個參數，第一個參數load_pattern, 表示圖片組的路徑，可以是一個str字符串。第二個參數load_func是一個回調函數，我們對圖片進行批量處理就可以通過這個回調函數實現。回調函數默認為imread(),即默認這個函數是批量讀取圖片。
 
 """
 '''
@@ -42,13 +42,13 @@ print(len(coll))
 #表示資料夾內有 23 張圖
 
 """
-显示结果为25, 说明
+顯示結果為25, 說明
 
-系统自带了23张png的示例图片，这些图片都读取了出来，放在图片集合coll里。
-如果我们想显示其中一张图片，则可以在后加上一行代码：
+系統自帶了23張png的示例圖片，這些圖片都讀取了出來，放在圖片集合coll里。
+如果我們想顯示其中一張圖片，則可以在后加上一行代碼：
 io.imshow(coll[10])
 
-如果一个文件夹里，我们既存放了一些jpg格式的图片，又存放了一些png格式的图片，现在想把它们全部读取出来，该怎么做呢?
+如果一個文件夾里，我們既存放了一些jpg格式的圖片，又存放了一些png格式的圖片，現在想把它們全部讀取出來，該怎么做呢?
 """
 import skimage.io as io
 from skimage import data_dir
@@ -61,11 +61,11 @@ print(len(coll))
 print('------------------------------------------------------------')	#60個
 
 """
-注意这个地方'd:/pic/*.jpg:d:/pic/*.png' ，是两个字符串合在一起的，第一个是'd:/pic/*.jpg', 第二个是'd:/pic/*.png' ，合在一起后，中间用冒号来隔开，这样就可以把d:/pic/文件夹下的jpg和png格式的图片都读取出来。如果还想读取存放在其它地方的图片，也可以一并加进去，只是中间同样用冒号来隔开。
+注意這個地方'd:/pic/*.jpg:d:/pic/*.png' ，是兩個字符串合在一起的，第一個是'd:/pic/*.jpg', 第二個是'd:/pic/*.png' ，合在一起后，中間用冒號來隔開，這樣就可以把d:/pic/文件夾下的jpg和png格式的圖片都讀取出來。如果還想讀取存放在其它地方的圖片，也可以一并加進去，只是中間同樣用冒號來隔開。
 
-io.ImageCollection()这个函数省略第二个参数，就是批量读取。如果我们不是想批量读取，而是其它批量操作，如批量转换为灰度图，那又该怎么做呢？
+io.ImageCollection()這個函數省略第二個參數，就是批量讀取。如果我們不是想批量讀取，而是其它批量操作，如批量轉換為灰度圖，那又該怎么做呢？
 
-那就需要先定义一个函数，然后将这个函数作为第二个参数，如：
+那就需要先定義一個函數，然后將這個函數作為第二個參數，如：
 """
 
 from skimage import data_dir,io,color
@@ -85,7 +85,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 
-#这种批量操作对视频处理是极其有用的，因为视频就是一系列的图片组合
+#這種批量操作對視頻處理是極其有用的，因為視頻就是一系列的圖片組合
 
 
 from skimage import data_dir, io,color
@@ -106,13 +106,13 @@ print('------------------------------------------------------------')	#60個
 
 
 """
-这段代码的意思，就是将myvideo.avi这个视频中每隔10帧的图片读取出来，放在图片集合中。
+這段代碼的意思，就是將myvideo.avi這個視頻中每隔10幀的圖片讀取出來，放在圖片集合中。
 
-得到图片集合以后，我们还可以将这些图片连接起来，构成一个维度更高的数组，连接图片的函数为：
+得到圖片集合以后，我們還可以將這些圖片連接起來，構成一個維度更高的數組，連接圖片的函數為：
 
 skimage.io.concatenate_images(ic)
 
-带一个参数，就是以上的图片集合，如：
+帶一個參數，就是以上的圖片集合，如：
 """
 """
 from skimage import data_dir,io,color
@@ -121,44 +121,44 @@ coll = io.ImageCollection('C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bi
 #coll = io.ImageCollection(data_dir + '/*.png')
 mat=io.concatenate_images(coll)
 
-#使用concatenate_images(ic)函数的前提是读取的这些图片尺寸必须一致，否则会出错。我们看看图片连接前后的维度变化：
+#使用concatenate_images(ic)函數的前提是讀取的這些圖片尺寸必須一致，否則會出錯。我們看看圖片連接前后的維度變化：
 
 from skimage import data_dir,io,color
 
 coll = io.ImageCollection('C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/*.jpg')
 #coll = io.ImageCollection(data_dir + '/*.png')
-print(len(coll))      #连接的图片数量
-print(coll[0].shape)   #连接前的图片尺寸，所有的都一样
+print(len(coll))      #連接的圖片數量
+print(coll[0].shape)   #連接前的圖片尺寸，所有的都一樣
 mat=io.concatenate_images(coll)
-print(mat.shape)  #连接后的数组尺寸
+print(mat.shape)  #連接后的數組尺寸
 """
 
 
 
 """
 
-显示结果：
+顯示結果：
 
 2
 (870, 580, 3)
 (2, 870, 580, 3)
 
-可以看到，将2个3维数组，连接成了一个4维数组
+可以看到，將2個3維數組，連接成了一個4維數組
 
-如果我们对图片进行批量操作后，想把操作后的结果保存起来，也是可以办到的。
+如果我們對圖片進行批量操作后，想把操作后的結果保存起來，也是可以辦到的。
 
-例：把系统自带的所有png示例图片，全部转换成256*256的jpg格式灰度图，保存在d:/data/文件夹下
+例：把系統自帶的所有png示例圖片，全部轉換成256*256的jpg格式灰度圖，保存在d:/data/文件夾下
 
-改变图片的大小，我们可以使用tranform模块的resize()函数，后续会讲到这个模块。
+改變圖片的大小，我們可以使用tranform模塊的resize()函數，后續會講到這個模塊。
 """
 
 from skimage import data_dir,io,transform,color
 import numpy as np
 
 def convert_gray(f):
-     rgb=io.imread(f)    #依次读取rgb图片
-     gray=color.rgb2gray(rgb)   #将rgb图片转换成灰度图
-     dst=transform.resize(gray,(256,256))  #将灰度图片大小转换为256*256
+     rgb=io.imread(f)    #依次讀取rgb圖片
+     gray=color.rgb2gray(rgb)   #將rgb圖片轉換成灰度圖
+     dst=transform.resize(gray,(256,256))  #將灰度圖片大小轉換為256*256
      return dst
     
 #string = data_dir+'/*.png'
@@ -168,7 +168,7 @@ print(len(coll))
 
 for i in range(len(coll)):
     print(i)
-    #io.imsave(str(i)+'.jpg', coll[i])  #循环保存图片  fail
+    #io.imsave(str(i)+'.jpg', coll[i])  #循環保存圖片  fail
     print(str(i)+'.jpg')
     #print(str(i)+'.jpg')
     #print(i)
@@ -180,19 +180,19 @@ print('------------------------------------------------------------')	#60個
 
 
 """
-图像的形变与缩放
+圖像的形變與縮放
 
-图像的形变与缩放，使用的是skimage的transform模块，函数比较多，功能齐全。
+圖像的形變與縮放，使用的是skimage的transform模塊，函數比較多，功能齊全。
 
-1、改变图片尺寸resize
+1、改變圖片尺寸resize
 
-函数格式为：
+函數格式為：
 
 skimage.transform.resize(image, output_shape)
 
-image: 需要改变尺寸的图片
+image: 需要改變尺寸的圖片
 
-output_shape: 新的图片尺寸
+output_shape: 新的圖片尺寸
 """
 
 from skimage import transform,data
@@ -211,46 +211,46 @@ plt.imshow(dst,plt.cm.gray)
 
 plt.show()
 
-#将camera图片由原来的512*512大小，变成了80*60大小。从下图中的坐标尺，我们能够看出来：
+#將camera圖片由原來的512*512大小，變成了80*60大小。從下圖中的坐標尺，我們能夠看出來：
 
 """
-2、按比例缩放rescale
+2、按比例縮放rescale
 
-函数格式为：
+函數格式為：
 
 skimage.transform.rescale(image, scale[, ...])
 
-scale参数可以是单个float数，表示缩放的倍数，也可以是一个float型的tuple，如[0.2,0.5],表示将行列数分开进行缩放
+scale參數可以是單個float數，表示縮放的倍數，也可以是一個float型的tuple，如[0.2,0.5],表示將行列數分開進行縮放
 """
 
 from skimage import transform,data
 img = data.camera()
-print(img.shape)  #图片原始大小 
-print(transform.rescale(img, 0.1).shape)  #缩小为原来图片大小的0.1倍
-print(transform.rescale(img, [0.5,0.25]).shape)  #缩小为原来图片行数一半，列数四分之一
-print(transform.rescale(img, 2).shape)   #放大为原来图片大小的2倍
+print(img.shape)  #圖片原始大小 
+print(transform.rescale(img, 0.1).shape)  #縮小為原來圖片大小的0.1倍
+print(transform.rescale(img, [0.5,0.25]).shape)  #縮小為原來圖片行數一半，列數四分之一
+print(transform.rescale(img, 2).shape)   #放大為原來圖片大小的2倍
 """
-结果为：
+結果為：
 (512, 512)
 (51, 51)
 (256, 128)
 (1024, 1024)
 
-3、旋转 rotate
+3、旋轉 rotate
 
 skimage.transform.rotate(image, angle[, ...],resize=False)
 
-angle参数是个float类型数，表示旋转的度数
+angle參數是個float類型數，表示旋轉的度數
 
-resize用于控制在旋转时，是否改变大小 ，默认为False
+resize用于控制在旋轉時，是否改變大小 ，默認為False
 """
 from skimage import transform,data
 import matplotlib.pyplot as plt
 img = data.camera()
-print(img.shape)  #图片原始大小
-img1=transform.rotate(img, 60) #旋转90度，不改变大小 
+print(img.shape)  #圖片原始大小
+img1=transform.rotate(img, 60) #旋轉90度，不改變大小 
 print(img1.shape)
-img2=transform.rotate(img, 30,resize=True)  #旋转30度，同时改变大小
+img2=transform.rotate(img, 30,resize=True)  #旋轉30度，同時改變大小
 print(img2.shape)   
 
 plt.figure('resize')
@@ -270,24 +270,24 @@ plt.show()
 
 
 """
-4、图像金字塔
+4、圖像金字塔
 
-以多分辨率来解释图像的一种有效但概念简单的结构就是图像金字塔。图像金字塔最初用于机器视觉和图像压缩，一幅图像的金字塔是一系列以金字塔形状排列的分辨率逐步降低的图像集合。金字塔的底部是待处理图像的高分辨率表示，而顶部是低分辨率的近似。当向金字塔的上层移动时，尺寸和分辨率就降低。
+以多分辨率來解釋圖像的一種有效但概念簡單的結構就是圖像金字塔。圖像金字塔最初用于機器視覺和圖像壓縮，一幅圖像的金字塔是一系列以金字塔形狀排列的分辨率逐步降低的圖像集合。金字塔的底部是待處理圖像的高分辨率表示，而頂部是低分辨率的近似。當向金字塔的上層移動時，尺寸和分辨率就降低。
 
-在此，我们举一个高斯金字塔的应用实例，函数原型为：
+在此，我們舉一個高斯金字塔的應用實例，函數原型為：
 
 skimage.transform.pyramid_gaussian(image, downscale=2)
-downscale控制着金字塔的缩放比例
+downscale控制著金字塔的縮放比例
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage import data,transform
 
-image = data.astronaut()  #载入宇航员图片
-rows, cols, dim = image.shape  #获取图片的行数，列数和通道数
-pyramid = tuple(transform.pyramid_gaussian(image, downscale=2))  #产生高斯金字塔图像
-#共生成了log(512)=9幅金字塔图像，加上原始图像共10幅，pyramid[0]-pyramid[1]
+image = data.astronaut()  #載入宇航員圖片
+rows, cols, dim = image.shape  #獲取圖片的行數，列數和通道數
+pyramid = tuple(transform.pyramid_gaussian(image, downscale=2))  #產生高斯金字塔圖像
+#共生成了log(512)=9幅金字塔圖像，加上原始圖像共10幅，pyramid[0]-pyramid[1]
 
 """
 #composite_image = np.ones((rows, cols + cols / 2, 3), dtype=np.double)  #生成背景
@@ -295,7 +295,6 @@ composite_image = np.ones((rows, cols + 256, 3), dtype=np.double)  #生成背景
 """
 
 """
-除了高斯金字塔外，还有其它的金字塔，如：
+除了高斯金字塔外，還有其它的金字塔，如：
 skimage.transform.pyramid_laplacian(image, downscale=2)
 """
-
