@@ -100,7 +100,7 @@ print("繪製移動平均圖")
 
 import pandas as pd
 
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV6_temperature.csv"
+filename = "_data/python_ReadWrite_CSV6_temperature.csv"
 
 # 讀入氣溫資料
 dat = pd.read_csv(filename, encoding="UTF-8")
@@ -136,23 +136,7 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-import matplotlib.pyplot as plt
-import numpy as np
 
-x = np.linspace(0.0, np.pi, 500)
-y = np.cos(2 * np.pi * x)
-plt.plot(x, y, "m", lw=2)
-plt.annotate(
-    "局部極大值",
-    xy=(2, 1),
-    xytext=(2.5, 1.2),
-    arrowprops=dict(arrowstyle="->", facecolor="black"),
-)
-plt.annotate(
-    "局部極小值", xy=(1.5, -1), xytext=(2.0, -1.25), arrowprops=dict(arrowstyle="-")
-)
-plt.text(0.8, 1.2, "Annotate的應用", fontsize=20, color="b")
-plt.ylim(-1.5, 1.5)
 
 # 第二張圖
 plt.subplot(232)
@@ -186,3 +170,8 @@ plt.subplot(236)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+

@@ -473,6 +473,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(180, 50);
             this.button34.TabIndex = 68;
+            this.button34.Text = "StringBuilder語法3";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -483,6 +484,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(180, 50);
             this.button33.TabIndex = 67;
+            this.button33.Text = "StringBuilder語法2";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -493,6 +495,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(180, 50);
             this.button32.TabIndex = 66;
+            this.button32.Text = "StringBuilder語法1";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 

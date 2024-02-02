@@ -61,16 +61,16 @@ yf.pdr_override()
 df = web.get_data_yahoo("AAPL", start="2018-01-01", end="2018-12-02")   #下載股價
 print(df.head())
 
-writer=pd.ExcelWriter('AAPL.xlsx')  #檔案名稱
+writer=pd.ExcelWriter('tmp_AAPL1.xlsx')  #檔案名稱
 df.to_excel(writer,'AAPL')  #寫入資料
 writer.save()   #儲存
 
 from pandas import ExcelWriter
 
-writer = ExcelWriter('testaapl.xlsx', engine='xlsxwriter')
+writer = ExcelWriter('tmp_aapl2.xlsx', engine='xlsxwriter')
 df.to_excel(writer, sheet_name='sheet2')
 
-df.to_csv("testaapl.csv")
+df.to_csv("tmp_aapl3.csv")
 
 print("------------------------------------------------------------")  # 60個
 

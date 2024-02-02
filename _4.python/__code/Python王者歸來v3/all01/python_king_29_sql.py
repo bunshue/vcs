@@ -1,5 +1,6 @@
 import sys
 
+
 import sqlite3
 
 conn = sqlite3.connect("myData.db")
@@ -445,3 +446,45 @@ sql = "DROP TABLE IF EXISTS customers"
 mycursor.execute(sql)
 
 print("------------------------------------------------------------")  # 60個
+
+import sqlite3
+
+try:
+    # 嘗試連接到資料庫
+    conn = sqlite3.connect('example.db')
+    cursor = conn.cursor()
+    # 嘗試執行查詢，可能會引發異常
+    cursor.execute('SELECT * FROM non_existent_table')
+except sqlite3.Error as e:
+    # 捕獲並處理 SQLite 特定的異常
+    print(f"Database error: {e}")
+except Exception as e:
+    # 捕獲並處理其他所有異常
+    print(f"Exception occurred: {e}")
+finally:
+    # 確保資料庫連接被關閉
+    conn.close()
+
+print("------------------------------------------------------------")  # 60個
+
+import sqlite3
+conn = sqlite3.connect("data29_1.db")   # 資料庫連線
+sql = '''SELECT name, tel
+        from students
+        where gender = "F"'''
+results = conn.execute(sql)
+allstudents = results.fetchall()        # 結果轉成元素是元組的串列
+for student in allstudents:
+    print(student)
+conn.close()                            # 關閉資料庫連線
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+

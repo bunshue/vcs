@@ -52,6 +52,23 @@ namespace vcs_MyPdfReader
         //在控件上加ToolTip
         ToolTip tooltip = new ToolTip();
 
+
+        private string form_list_data;
+        public string SetupForm1Data
+        {
+            set
+            {
+                form_list_data = value;
+            }
+        }
+
+        public void setForm1Value()
+        {
+            //this.richTextBox1.Text += "父得到信息 : " + form_list_data + "\n";
+        }
+
+        Form_List form_list = new Form_List();     //實體化Form_List視窗物件
+
         public Form1()
         {
             InitializeComponent();
@@ -113,6 +130,8 @@ namespace vcs_MyPdfReader
 
             this.ClientSize = new Size(W, H);
             this.Location = new Point(0, 0);
+
+            lb_main_mesg1.Location = new System.Drawing.Point(500, 10);
 
             if (flag_already_use_webbrowser == false)
             {
@@ -261,9 +280,50 @@ namespace vcs_MyPdfReader
         {
             show_main_message1("開啟最近pdf", S_OK, 30);
 
-            Form_List frm = new Form_List();    //實體化 Form_Setup 視窗物件
-            //frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
-            frm.ShowDialog();   //顯示 frm 視窗
+            form_list.Owner = this;
+            //form_list.StartPosition = FormStartPosition.CenterScreen;    //設定視窗居中顯示
+            DialogResult result = form_list.ShowDialog();
+
+            if (result == DialogResult.Ignore)
+            {
+                show_main_message1(form_list_data, S_OK, 100);
+                //richTextBox1.Text += "你選擇了 " + form_list_data + "\n";
+
+                string full_filename = form_list_data;
+
+                if (File.Exists(full_filename) == false)   //確認檔案是否存在
+                {
+                    richTextBox1.Text += "檔案 : " + full_filename + ", 不存在\n";
+                    show_main_message1("未選取檔案", S_OK, 30);
+                    pdf_filename = "";
+                    current_directory_pdf = Directory.GetCurrentDirectory();
+                }
+                else
+                {
+                    show_item_location();
+                    pdf_filename = full_filename;
+                    pdf_filename_short = Path.GetFileName(pdf_filename);
+                    current_directory_pdf = Path.GetDirectoryName(pdf_filename);
+                    webBrowser1.Navigate(pdf_filename);
+                    pdf_total_page = GetPDFofPageCount(pdf_filename);
+                    richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
+                    richTextBox1.Text += "頁數 : " + pdf_total_page.ToString() + "\n";
+                    show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
+                    pdf_page = 0;
+                    tb_pdf_page.Text = pdf_page.ToString();
+                    lb_pdf_total_page.Text = pdf_total_page.ToString();
+
+                    //檢查ArrayList
+                    update_pdf_filename_ArrayListData(pdf_filename);
+
+                    richTextBox1.Text += "加入一筆資料至ArrayList\n";
+                    pdf_filename_ArrayListData.Insert(0, pdf_filename); //插入一個元素
+                    richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+
+                    //this.Focus();
+                    this.KeyPreview = true;
+                }
+            }
         }
 
         private void bt_test_Click(object sender, EventArgs e)

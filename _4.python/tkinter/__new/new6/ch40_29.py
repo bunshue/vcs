@@ -1,4 +1,3 @@
-# ch40_29.py 
 from tkinter import *
 from random import *
 import time
@@ -85,12 +84,3 @@ while ball.notTouchBottom:                      # 如果球未接觸畫布底端
     racket.racketMove()
     tk.update()
     time.sleep(speed)                           # 可以控制移動速度
-
-
-    
-
-
-
-
-
-

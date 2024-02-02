@@ -1,3 +1,5 @@
+#.format
+
 import os
 import sys
 import time
@@ -75,25 +77,16 @@ print(items)
 
 print("------------------------------------------------------------")  # 60個
 
-x = 2
-y = 0.5
-
-print("x ** y = " + str(x**y))
-
-print("------------------------------------------------------------")  # 60個
-
 print("處理網址資料")
 
 url = "https://www.nkust.edu.tw/p/403-1000-12-{}.php?Lang=zh-tw"
 for pg in range(1, 11):
     print(url.format(pg))
 
-
 url = "https://tw.stock.yahoo.com/news_list/url/d/e/N{}.html?q=&pg={}"
 for cate in [1, 4]:
     for pg in range(1, 6):
         print(url.format(cate, pg))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -287,14 +280,6 @@ print("Calib. prep time     = %.6fms" % (total_min_time * MILLI_SECONDS))
 
 print("------------------------------------------------------------")  # 60個
 
-for name in ("__repr__", "__str__", "__format__", "__reduce_ex__"):
-    print(name)
-
-for x in (15, 25, 35, 45, 55):
-    print(x)
-
-print("------------------------------------------------------------")  # 60個
-
 import importlib
 import platform
 from types import ModuleType
@@ -423,8 +408,6 @@ print("總共還款金額 %d" % int(total_pay))
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
 msg = """
 翠蓋龍旗出建章,鶯啼百囀柳初黃,
 昆池冰泮三山近,阿閣花深九陌香,
@@ -466,7 +449,6 @@ print("------------------------------------------------------------")  # 60個
 
 import string
 
-
 def encrypt(text, encryDict):  # 加密文件
     cipher = []
     for i in text:  # 執行每個字元加密
@@ -490,7 +472,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("顯示資料夾內的特定格式的檔案")
 
-
 def is_image(filename):
     f = filename.lower()
     return (
@@ -503,7 +484,6 @@ def is_image(filename):
         or f.endswith(".svg")
     )
 
-
 def find_similar_images(foldername):
     image_filenames = []
     image_filenames += [
@@ -513,7 +493,6 @@ def find_similar_images(foldername):
     ]
     for img in sorted(image_filenames):
         print(img)
-
 
 foldername = "C:/_git/vcs/_1.data/______test_files2"
 find_similar_images(foldername)
@@ -536,7 +515,6 @@ def decimalToHex(decimalValue):
 
     return hex
 
-
 # Convert an integer to a single hex digit in a character
 def toHexChar(hexValue):
     if 0 <= hexValue <= 9:
@@ -554,21 +532,6 @@ hexValue = decimalToHex(decimalValue)
 print("decimal : %d\thex : %s" % (decimalValue, hexValue))
 
 print("------------------------------------------------------------")  # 60個
-
-
-def printArea(width=1, height=2):
-    area = width * height
-    print("width:", width, "\theight:", height, "\tarea:", area)
-
-
-printArea()  # Default arguments width = 1 and height = 2
-printArea(4, 2.5)  # Positional arguments width = 4 and height = 2.5
-printArea(height=5, width=3)  # Keyword arguments width
-printArea(width=1.2)  # Default height = 2
-printArea(height=6.2)  # Default widht = 1
-
-print("------------------------------------------------------------")  # 60個
-
 
 # 檢查有無包含中文
 def is_contains_chinese():
@@ -589,10 +552,8 @@ is_contains_chinese()
 
 print("------------------------------------------------------------")  # 60個
 
-
 def gcd(a, b):
     """Calculate the Greatest Common Divisor of a and b.
-
     Unless b==0, the result will have the same sign as b (so that when
     b is divided by it, the result comes out positive).
     """
@@ -600,14 +561,12 @@ def gcd(a, b):
         a, b = b, a % b
     return a
 
-
 a = 28
 b = 49
 c = gcd(a, b)
 print(c)
 
 print("------------------------------------------------------------")  # 60個
-
 
 def gcd(a, b):
     if a < b:
@@ -618,34 +577,16 @@ def gcd(a, b):
         b = tmp
     return a
 
-
 a, b = 24, 36
 print("最大公約數是 : ", gcd(a, b))
 
 print("------------------------------------------------------------")  # 60個
 
-
 def test():
     for x in "abcde":
         for y in "12345":
             print(y, x, end=" ")
-
-
 test()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -770,7 +711,6 @@ for y in range(0, H, h):
 
 print("------------------------------------------------------------")  # 60個
 
-
 def hexToDecimal(hex):
     decimalValue = 0
     for i in range(len(hex)):
@@ -782,13 +722,11 @@ def hexToDecimal(hex):
 
     return decimalValue
 
-
 def hexCharToDecimal(ch):
     if "A" <= ch <= "F":
         return 10 + ord(ch) - ord("A")
     else:
         return ord(ch) - ord("0")
-
 
 hex = "aa"
 decimal = hexToDecimal(hex.upper())
@@ -798,15 +736,9 @@ if decimal == None:
 else:
     print("The decimal value for hex number", hex, "is", decimal)
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 print("計算字數")
-
 
 def count_words(filename):
     """Count the approximate number of words in a file."""
@@ -856,28 +788,16 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-b = "abcdefg"
+print('字串 轉 串列')
+b = "ABCDEFGHIJK"
 c = list(b)  # list
 print(type(c))
 print(c)
 
+print("反相")
 for d in reversed(c):
-    print(d)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-y = x ^ 2
-x = [x for x in range(31)]
-y = [(y * y) for y in x]
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-name = "aaaamock"
-message = "%s(%%s)" % name
-
-print(message)
+    print(d, end = " ")
+print()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -888,6 +808,103 @@ numberList = list(str(number).zfill(NUMBER_OF_DIGITS))
 print(numberList)
 numberList = list(str(number))
 print(numberList)
+
+print("------------------------------------------------------------")  # 60個
+
+str1 = "I love python."
+print("原字串內容: ", str1)
+print("轉換成串列: ", list(str1))
+print("轉換成值組: ", tuple(str1))
+print("字串長度: ", len(str1))
+
+list1 = [8, 23, 54, 33, 12, 98]
+print("原串列內容: ", list1)
+print("串列中最大值: ", max(list1))
+print("串列中最小值: ", min(list1))
+
+relist = reversed(list1)  # 反轉串列
+for i in relist:  # 將反轉後的串列內容依序印出
+    print(i, end=" ")
+print()  # 換行
+print("串列所有元素總和: ", sum(list1))  # 印出總和
+print("串列元素由小到大排序: ", sorted(list1))
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 用range创建数值列表
+list1 = list(range(1, 11))  # 不含尾
+print(list1)
+
+print("------------------------------------------------------------")  # 60個
+
+
+str1 = "設定中文字型及負號正確顯示"
+print("原字串內容: ", str1)
+print("轉換成串列: ", list(str1))
+print("轉換成值組: ", tuple(str1))
+print("字串長度: ", len(str1))
+
+list1 = list(str1)
+print("原串列內容: ", list1)
+print("串列中最大值: ", max(list1))
+print("串列中最小值: ", min(list1))
+
+relist = reversed(list1)  # 反轉串列
+for i in relist:  # 將反轉後的串列內容依序印出
+    print(i, end=" ")
+print()  # 換行
+print("串列元素由小到大排序: ", sorted(list1))
+
+
+print("------------------------------------------------------------")  # 60個
+
+lst4 = list()
+lst5 = list(["tom", "mary", "joe"])
+lst6 = list("python")
+print("lst4:" + str(lst4))
+print("lst5:" + str(lst5))
+print("lst6:" + str(lst6))
+
+print("------------------------------------------------------------")  # 60個
+
+str1 = "I love python."
+print("原字串內容: ", str1)
+print("轉換成串列: ", list(str1))
+print("轉換成值組: ", tuple(str1))
+print("字串長度: ", len(str1))
+
+list1 = [8, 23, 54, 33, 12, 98]
+print("原串列內容: ", list1)
+print("串列中最大值: ", max(list1))
+print("串列中最小值: ", min(list1))
+
+relist = reversed(list1)  # 反轉串列
+for i in relist:  # 將反轉後的串列內容依序印出
+    print(i, end=" ")
+print()  # 換行
+print("串列所有元素總和: ", sum(list1))  # 印出總和
+print("串列元素由小到大排序: ", sorted(list1))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print('y = x ^ 2')
+x = [x for x in range(21)]
+y = [(y * y) for y in x]
+
+print(x)
+print(y)
+
+print("------------------------------------------------------------")  # 60個
+
+name = "aaaamock"
+message = "%s(%%s)" % name
+
+print(message)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1001,26 +1018,6 @@ def formula(x, y):  # 自訂函數
 
 formula = lambda x, y: 3 * x + 2 * y  # 表示lambda有二個參數
 print(formula(5, 10))  # 傳入兩個數值讓lambda()函數做運算，輸出數值35
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "I love python."
-print("原字串內容: ", str1)
-print("轉換成串列: ", list(str1))
-print("轉換成值組: ", tuple(str1))
-print("字串長度: ", len(str1))
-
-list1 = [8, 23, 54, 33, 12, 98]
-print("原串列內容: ", list1)
-print("串列中最大值: ", max(list1))
-print("串列中最小值: ", min(list1))
-
-relist = reversed(list1)  # 反轉串列
-for i in relist:  # 將反轉後的串列內容依序印出
-    print(i, end=" ")
-print()  # 換行
-print("串列所有元素總和: ", sum(list1))  # 印出總和
-print("串列元素由小到大排序: ", sorted(list1))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1163,128 +1160,6 @@ max(100, 10, 50)
 min(300, 30, 3000)
 
 print("------------------------------------------------------------")  # 60個
-
-""" wait long
-print("requests 1")
-import requests
-
-r = requests.get("https://tw.yahoo.com/")
-print(r.text)
-
-print("------------------------------------------------------------")  # 60個
-
-print("requests 2")
-import requests
-
-base_url = "https://zipcloud.ibsnet.co.jp/api/search"
-
-query_parameter = "?zipcode="
-
-zipcode = "1600021"
-
-request_url = base_url + query_parameter + zipcode
-
-request_url
-
-requests.get(request_url).json()
-
-
-# 有這樣的 API 啊，網址是：https://zipcloud.ibsnet.co.jp/doc/api，請幫我寫出來
-
-print("------------------------------------------------------------")  # 60個
-
-print("requests 3")
-import requests
-
-# 郵遞區號
-zipcode = "1000001"
-
-# API 端點
-api_endpoint = f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={zipcode}"
-
-# 進行查詢
-response = requests.get(api_endpoint)
-
-# 檢查回應狀態
-if response.status_code == 200:
-    # 解析回應內容
-    data = response.json()
-
-    # 驗證 API 回應狀態
-    if data['status'] == 200:
-        # 取出第一筆地址資訊
-        address_info = data['results'][0]
-
-        # 印出完整郵遞區域
-        print(f"{address_info['address1']} {address_info['address2']} {address_info['address3']}")
-    else:
-        print("API 回應錯誤，訊息：", data['message'])
-else:
-    print("API 查詢失敗，狀態碼：", response.status_code)
-
-
-"""
-print("------------------------------------------------------------")  # 60個
-
-""" fail
-import requests
-
-# 郵遞區號
-zipcode = "100-0001"
-
-# API 端點
-api_endpoint = "http://your_api_endpoint"
-
-# 你的 API 金鑰
-api_key = "your_api_key"
-
-# 設定查詢參數
-params = {
-    'apikey': api_key,
-    'zipcode': zipcode,
-}
-
-# 進行查詢
-response = requests.get(api_endpoint, params=params)
-
-# 檢查回應狀態
-if response.status_code == 200:
-    # 解析回應內容
-    data = response.json()
-
-    # 印出郵遞區域
-    print(data['area'])
-else:
-    print("API 查詢失敗，狀態碼：", response.status_code)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-print("requests 4")
-import requests
-api_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
-response = requests.get(api_url)
-response_dict = response.json()
-
-response_dict.keys()
-response_dict["total"]
-
-get_object_url = (
-    "https://collectionapi.metmuseum.org/public/collection/v1/objects/435864"
-)
-
-object_response = requests.get(get_object_url)
-
-object_response.json()["objectURL"]
-
-object_response.json()["title"]
-
-object_response.json()["primaryImageSmall"]
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1743,12 +1618,6 @@ print(mydate)
 
 print("------------------------------------------------------------")  # 60個
 
-# 用range创建数值列表
-list1 = list(range(1, 11))  # 不含尾
-print(list1)
-
-print("------------------------------------------------------------")  # 60個
-
 c = 1 + 3j
 print("c的資料型態：", type(c))
 print("c是否為複數？", isinstance(1 + 3j, complex))
@@ -1796,27 +1665,6 @@ print("{}\n「do」出現{}次,「o」出現{}次".format(str1, s1, s2))
 
 
 print("------------------------------------------------------------")  # 60個
-
-str1 = "設定中文字型及負號正確顯示"
-print("原字串內容: ", str1)
-print("轉換成串列: ", list(str1))
-print("轉換成值組: ", tuple(str1))
-print("字串長度: ", len(str1))
-
-list1 = list(str1)
-print("原串列內容: ", list1)
-print("串列中最大值: ", max(list1))
-print("串列中最小值: ", min(list1))
-
-relist = reversed(list1)  # 反轉串列
-for i in relist:  # 將反轉後的串列內容依序印出
-    print(i, end=" ")
-print()  # 換行
-print("串列元素由小到大排序: ", sorted(list1))
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 result = lambda x: 3 * x - 1  # lambda()函數
 print(result(3))  # 輸出數值8
@@ -2401,30 +2249,6 @@ print(s1)
 
 print("------------------------------------------------------------")  # 60個
 
-fruit = ["apple", "orange", "watermelon"]
-print("反轉前內容：", fruit)
-fruit.reverse()
-print("反轉後內容：", fruit)
-score = [65, 76, 54, 32, 18]
-print("反轉前內容：", score)
-score.reverse()
-print("反轉後內容：", score)
-
-print("------------------------------------------------------------")  # 60個
-
-score = [98, 46, 37, 66, 69]
-print("排序前順序：", score)
-score.sort()  # 省略reverse參數, 遞增排序
-print("遞增排序：", score)
-letter = ["one", "time", "happy", "child"]
-print("排序前順序：")
-print(letter)
-letter.sort(reverse=True)  # 依字母做遞減排序
-print("遞減排序：")
-print(letter)
-
-print("------------------------------------------------------------")  # 60個
-
 str1 = "happy \nclever \nwisdom"
 print(str1.split())  # 以空格與換行符號(\n)來分割
 print(str1.split(" ", 2))
@@ -2741,16 +2565,6 @@ lst3 = [1, "Python", 5.5]
 print(lst1)
 print("lst2: ", lst2)
 print(lst3)
-
-print("------------------------------------------------------------")  # 60個
-
-lst4 = list()
-lst5 = list(["tom", "mary", "joe"])
-lst6 = list("python")
-print("lst4:" + str(lst4))
-print("lst5:" + str(lst5))
-print("lst6:" + str(lst6))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3547,10 +3361,9 @@ print("5*4*3=", ans3)
 ans4 = factorial(5, 4, 3, 2)
 print("5*4*3*2=", ans4)
 
-
+#不定長度參數之函數
 def myfruit(**arg):
     return arg
-
 
 print(myfruit(d1="apple", d2="mango", d3="grape"))
 
@@ -3571,26 +3384,6 @@ print('x=',x)
 print('y=',y)
 print("次方運算結果: %d" %Pow(int(x), int(y)))
 """
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "I love python."
-print("原字串內容: ", str1)
-print("轉換成串列: ", list(str1))
-print("轉換成值組: ", tuple(str1))
-print("字串長度: ", len(str1))
-
-list1 = [8, 23, 54, 33, 12, 98]
-print("原串列內容: ", list1)
-print("串列中最大值: ", max(list1))
-print("串列中最小值: ", min(list1))
-
-relist = reversed(list1)  # 反轉串列
-for i in relist:  # 將反轉後的串列內容依序印出
-    print(i, end=" ")
-print()  # 換行
-print("串列所有元素總和: ", sum(list1))  # 印出總和
-print("串列元素由小到大排序: ", sorted(list1))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4197,8 +3990,6 @@ print(str.format(a, b, a * int(b)))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python程式設計實務_從入門到精通step by step\ch02\date.py
-
 year = 2023
 month = 12
 day = 27
@@ -4350,93 +4141,14 @@ print(num3)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["toyota", "nissan", "honda"]
-nums = [1, 3, 5]
-carslist = cars * 3  # 串列乘以數字
-print(carslist)
-numslist = nums * 5  # 串列乘以數字
-print(numslist)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_13.py
-
-# ch6_13.py
-James = ["Lebron James", 23, 19, 22, 31, 18]  # 定義James串列
-Love = ["Kevin Love", 20, 18, 30, 22, 15]  # 定義Love串列
-game3 = James[4] + Love[4]
-LKgame = James[0] + " 和 " + Love[0] + "第四場總得分 = "
-print(LKgame, game3)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_14.py
-
-# ch6_14.py
-warriors = ["Curry", "Durant", "Iquodala", "Bell", "Thompson"]
-print("2018年初NBA勇士隊主將陣容", warriors)
-del warriors[3]  # 不明原因離隊
-print("2018年末NBA勇士隊主將陣容", warriors)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_15.py
-
-# ch6_15.py
-nums1 = [1, 3, 5]
-print("刪除nums1串列索引1元素前   = ", nums1)
-del nums1[1]
-print("刪除nums1串列索引1元素後   = ", nums1)
-nums2 = [1, 2, 3, 4, 5, 6]
-print("刪除nums2串列索引[0:2]前   = ", nums2)
-del nums2[0:2]
-print("刪除nums2串列索引[0:2]後   = ", nums2)
-nums3 = [1, 2, 3, 4, 5, 6]
-print("刪除nums3串列索引[0:6:2]前 = ", nums3)
-del nums3[0:6:2]
-print("刪除nums3串列索引[0:6:2]後 = ", nums3)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_16.py
-
-# ch6_16.py
-cars = ["Toyota", "Nissan", "Honda"]
-print("cars串列長度是 = %d" % len(cars))
-if len(cars) != 0:
-    del cars[0]
-    print("刪除cars串列元素成功")
-    print("cars串列長度是 = %d" % len(cars))
-else:
-    print("cars串列內沒有元素資料")
-nums = []
-print("nums串列長度是 = %d" % len(nums))
-if len(nums) != 0:
-    del nums[0]
-    print("刪除nums串列元素成功")
-else:
-    print("nums串列內沒有元素資料")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_17.py
-
-# ch6_17.py
 strN = "DeepStone"
 strU = strN.upper()  # 改成大寫
 strL = strN.lower()  # 改成小寫
 strT = strN.title()  # 改成第一個字母大寫其他小寫
 print("大寫輸出:", strU, "\n小寫輸出:", strL, "\n第一字母大寫:", strT)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_18.py
-
-# ch6_18.py
 strN = " DeepStone "
 strL = strN.lstrip()  # 刪除字串左邊多餘空白
 strR = strN.rstrip()  # 刪除字串右邊多餘空白
@@ -4449,258 +4161,11 @@ print("/%s/" % strR)
 print("/%s/" % strB)
 print("/%s/" % strO)
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_19.py
-
-# ch6_19.py
-cars = ["bmw", "benz", "audi"]
-carF = "我開的第一部車是 " + cars[1].title()
-carN = "我現在開的車子是 " + cars[0].upper()
-print(carF)
-print(carN)
-
-print("------------------------------------------------------------")  # 60個
-
-cars = ["Honda", "Toyota", "Ford"]
-print("目前串列內容 = ", cars)
-print("在索引1位置插入Nissan")
-cars.insert(1, "Nissan")
-print("新的串列內容 = ", cars)
-print("在索引0位置插入BMW")
-cars.insert(0, "BMW")
-print("最新串列內容 = ", cars)
-
-print("------------------------------------------------------------")  # 60個
-
-cars = ["Honda", "Toyota", "Ford", "BMW"]
-print("目前串列內容 = ", cars)
-print("使用pop( )刪除串列元素")
-popped_car = cars.pop()  # 刪除串列末端值
-print("所刪除的串列內容是 : ", popped_car)
-print("新的串列內容 = ", cars)
-print("使用pop(1)刪除串列元素")
-popped_car = cars.pop(1)  # 刪除串列索引為1的值
-print("所刪除的串列內容是 : ", popped_car)
-print("新的串列內容 = ", cars)
 
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_23.py
-
-# ch6_23.py
-cars = ["Honda", "bmw", "Toyota", "Ford", "bmw"]
-print("目前串列內容 = ", cars)
-print("使用remove( )刪除串列元素")
-expensive = "bmw"
-cars.remove(expensive)  # 刪除第一次出現的元素bmw
-print("所刪除的內容是: " + expensive.upper() + " 因為太貴了")
-print("新的串列內容", cars)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_24.py
-
-# ch6_24.py
-cars = ["Honda", "bmw", "Toyota", "Ford", "bmw"]
-print("目前串列內容 = ", cars)
-# 直接列印cars[::-1]顛倒排序,不更改串列內容
-print("列印使用[::-1]顛倒排序\n", cars[::-1])
-# 更改串列內容
-print("使用reverse( )顛倒排序串列元素")
-cars.reverse()  # 顛倒排序串列
-print("新的串列內容 = ", cars)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_25.py
-
-# ch6_25.py
-cars = ["honda", "bmw", "toyota", "ford"]
-print("目前串列內容 = ", cars)
-print("使用sort( )由小排到大")
-cars.sort()
-print("排序串列結果 = ", cars)
-nums = [5, 3, 9, 2]
-print("目前串列內容 = ", nums)
-print("使用sort( )由小排到大")
-nums.sort()
-print("排序串列結果 = ", nums)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_26.py
-
-# ch6_26.py
-cars = ["honda", "bmw", "toyota", "ford"]
-print("目前串列內容 = ", cars)
-print("使用sort( )由大排到小")
-cars.sort(reverse=True)
-print("排序串列結果 = ", cars)
-nums = [5, 3, 9, 2]
-print("目前串列內容 = ", nums)
-print("使用sort( )由大排到小")
-nums.sort(reverse=True)
-print("排序串列結果 = ", nums)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_27.py
-
-# ch6_27.py
-cars = ["honda", "bmw", "toyota", "ford"]
-print("目前串列car內容 = ", cars)
-print("使用sorted( )由小排到大")
-cars_sorted = sorted(cars)
-print("排序串列結果 = ", cars_sorted)
-print("原先串列car內容 = ", cars)
-nums = [5, 3, 9, 2]
-print("目前串列num內容 = ", nums)
-print("使用sorted( )由小排到大")
-nums_sorted = sorted(nums)
-print("排序串列結果 = ", nums_sorted)
-print("原先串列num內容 = ", nums)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_28.py
-
-# ch6_28.py
-cars = ["honda", "bmw", "toyota", "ford"]
-print("目前串列car內容 = ", cars)
-print("使用sorted( )由大排到小")
-cars_sorted = sorted(cars, reverse=True)
-print("排序串列結果    = ", cars_sorted)
-print("原先串列car內容 = ", cars)
-nums = [5, 3, 9, 2]
-print("目前串列num內容 = ", nums)
-print("使用sorted( )由大排到小")
-nums_sorted = sorted(nums, reverse=True)
-print("排序串列結果    = ", nums_sorted)
-print("原先串列num內容 = ", nums)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_29.py
-
-# ch6_29.py
-cars = ["toyota", "nissan", "honda"]
-search_str = "nissan"
-i = cars.index(search_str)
-print("所搜尋元素 %s 第一次出現位置索引是 %d" % (search_str, i))
-nums = [7, 12, 30, 12, 30, 9, 8]
-search_val = 30
-j = nums.index(search_val)
-print("所搜尋元素 %s 第一次出現位置索引是 %d" % (search_val, j))
-
-
-print("------------------------------------------------------------")  # 60個
-
-James = ["Lebron James", 23, 19, 22, 31, 18]  # 定義James串列
-games = len(James)  # 求元素數量
-score_Max = max(James[1:games])  # 最高得分
-i = James.index(score_Max)  # 場次
-print(James[0], "在第 %d 場得最高分 %d" % (i, score_Max))
-
-print("------------------------------------------------------------")  # 60個
-
-cars = ["toyota", "nissan", "honda"]
-search_str = "nissan"
-num1 = cars.count(search_str)
-print("所搜尋元素 %s 出現 %d 次" % (search_str, num1))
-nums = [7, 12, 30, 12, 30, 9, 8]
-search_val = 30
-num2 = nums.count(search_val)
-print("所搜尋元素 %s 出現 %d 次" % (search_val, num2))
-
-
-print("------------------------------------------------------------")  # 60個
-
-char = "-"
-lst = ["Silicon", "Stone", "Education"]
-print(char.join(lst))
-char = "***"
-lst = ["Silicon", "Stone", "Education"]
-print(char.join(lst))
-char = "\n"  # 換行字元
-lst = ["Silicon", "Stone", "Education"]
-print(char.join(lst))
-
-print("------------------------------------------------------------")  # 60個
-
-James = [["Lebron James", "SF", "12/30/84"], 23, 19, 22, 31, 18]  # 定義James串列
-games = len(James)  # 求元素數量
-score_Max = max(James[1:games])  # 最高得分
-i = James.index(score_Max)  # 場次
-name = James[0][0]
-position = James[0][1]
-born = James[0][2]
-print("姓名     : ", name)
-print("位置     : ", position)
-print("出生日期 : ", born)
-print("在第 %d 場得最高分 %d" % (i, score_Max))
-
-print("------------------------------------------------------------")  # 60個
-
-cars1 = ["toyota", "nissan", "honda"]
-cars2 = ["ford", "audi"]
-print("原先cars1串列內容 = ", cars1)
-print("原先cars2串列內容 = ", cars2)
-cars1.append(cars2)
-print("執行append( )後串列cars1內容 = ", cars1)
-print("執行append( )後串列cars2內容 = ", cars2)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_34.py
-
-# ch6_34.py
-cars1 = ["toyota", "nissan", "honda"]
-cars2 = ["ford", "audi"]
-print("原先cars1串列內容 = ", cars1)
-print("原先cars2串列內容 = ", cars2)
-cars1.extend(cars2)
-print("執行extend( )後串列cars1內容 = ", cars1)
-print("執行extend( )後串列cars2內容 = ", cars2)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_35.py
-
-# ch6_35.py
-mysports = ["basketball", "baseball"]
-friendsports = mysports
-print("我喜歡的運動     = ", mysports)
-print("我朋友喜歡的運動 = ", friendsports)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_36.py
-
-# ch6_36.py
-mysports = ["basketball", "baseball"]
-friendsports = mysports
-print("我喜歡的運動     = ", mysports)
-print("我朋友喜歡的運動 = ", friendsports)
-mysports.append("football")
-friendsports.append("soccer")
-print("我喜歡的最新運動     = ", mysports)
-print("我朋友喜歡的最新運動 = ", friendsports)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_37.py
-
-# ch6_37.py
 mysports = ["basketball", "baseball"]
 friendsports = mysports
 print("列出mysports位址     = ", id(mysports))
@@ -4770,9 +4235,6 @@ print("多重指定觀念的輸出測試 = ", s1, s2, s3, s4, s5, s6)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_40.py
-
-# ch6_40.py
 string = "Deep Learning"  # 定義字串
 print("列印string第1-3元素     = ", string[0:3])
 print("列印string第2-4元素     = ", string[1:4])
@@ -4781,12 +4243,8 @@ print("列印string第1到最後元素 = ", string[1:])
 print("列印string前3元素       = ", string[0:3])
 print("列印string後3元素       = ", string[-3:])
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_41.py
-
-# ch6_41.py
 string = "Deep Learning"  # 定義字串
 strlen = len(string)
 print("字串長度", strlen)
@@ -4795,12 +4253,8 @@ print("字串最大的unicode碼值和字元", ord(maxstr), maxstr)
 minstr = min(string)
 print("字串最小的unicode碼值和字元", ord(minstr), minstr)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_41_1.py
-
-# ch6_41_1.py
 str1 = "Silicon Stone Education"
 str2 = "DeepStone"
 str3 = "深石數位"
@@ -4815,12 +4269,8 @@ print(str2, " 串列字數是 ", len(sList2))  # 列印字數
 print(str3, " 串列內容是 ", sList3)  # 列印串列
 print(str3, " 串列字數是 ", len(sList3))  # 列印字數
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_41_2.py
-
-# ch6_41_2.py
 msg = """CIA Mark told CIA Linda that the secret USB
 had given to CIA Peter"""
 print("字串開頭是CIA: ", msg.startswith("CIA"))
@@ -4899,9 +4349,6 @@ print(type(enumerate_drinks))  # 列出物件類型
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch6\ch6_48.py
-
-# ch6_48.py
 drinks = ["coffee", "tea", "wine"]
 enumerate_drinks = enumerate(drinks)  # 數值初始是0
 print("轉成串列輸出, 初始值是 0 = ", list(enumerate_drinks))
@@ -4912,37 +4359,6 @@ print("轉成串列輸出, 初始值是10 = ", list(enumerate_drinks))
 print("------------------------------------------------------------")  # 60個
 
 players = ["Curry", "Jordan", "James", "Durant", "Obama"]
-for player in players:
-    print(player)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_4.py
-
-# ch7_4.py
-players = ["Curry", "Jordan", "James", "Durant", "Obama"]
-for player in players:
-    print(player)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_5.py
-
-# ch7_5.py
-players = ["curry", "jordan", "james", "durant", "obama"]
-for player in players:
-    print(player.title() + ", it was a great game.")
-    print("I can not wait to see your next game, " + player.title())
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_6.py
-
-# ch7_6.py
-players = ["Curry", "Jordan", "James", "Durant", "Obama"]
 print("列印前3位球員")
 for player in players[:3]:
     print(player)
@@ -4950,12 +4366,8 @@ print("列印後3位球員")
 for player in players[-3:]:
     print(player)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_7.py
-
-# ch7_7.py
 n = 5
 number1 = list(range(n))
 print("當n值是%d時的range( )串列 = " % n, number1)
@@ -4963,12 +4375,8 @@ n = 8
 number2 = list(range(n))
 print("當n值是%d時的range( )串列 = " % n, number2)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_8.py
-
-# ch7_8.py
 n = 5
 print("當n值是%d時的range( )串列元素:" % n)
 for number in range(n):
@@ -4980,9 +4388,6 @@ for number in range(n):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_9.py
-
-# ch7_9.py
 start = 2
 end = 6
 number1 = list(range(start, end))
@@ -4998,13 +4403,6 @@ print("當start值是%2d, end值是%2d時的range( )串列 = " % (start, end), n
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_10.py
-
-# ch7_10.py
 start = 2
 end = 6
 print("當start值是%d, end值是%d時的range( )串列元素:" % (start, end))
@@ -5023,9 +4421,6 @@ for number in range(start, end):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_11.py
-
-# ch7_11.py
 start = 2
 end = 9
 step = 2
@@ -5044,9 +4439,6 @@ print("當start值是%2d, end值是%2d, step值是%2d時的range( )串列 = " % 
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_12.py
-
-# ch7_12.py
 start = 2
 end = 9
 step = 2
@@ -5068,37 +4460,6 @@ number3 = list(range(start, end, step))
 print("當start值是%2d, end值是%2d, step值是%2d時的range( )串列元素:" % (start, end, step))
 for number in range(start, end, step):
     print(number)
-
-print("------------------------------------------------------------")  # 60個
-
-n = 100
-number = list(range(n + 1))
-total = sum(number)
-print("從1到%d的總和是 = " % n, total)
-
-print("------------------------------------------------------------")  # 60個
-
-n = 100
-number = list(range(n + 1))
-total = sum(number)
-print("從1到%d的總和是 = " % n, total)
-
-print("------------------------------------------------------------")  # 60個
-
-n = 100
-number = list(range(n + 1))  # 建立串列
-total = 0  # 總計
-for i in number:
-    total += i
-print("從1到%d的總和是 = " % n, total)
-
-print("------------------------------------------------------------")  # 60個
-
-n = 100
-total = 0  # 總計
-for i in range(1, n + 1):
-    total += i
-print("從1到%d的總和是 = " % n, total)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5163,9 +4524,6 @@ for digit in range(0, 11, 2):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_22.py
-
-# ch7_22.py
 players = ["Curry", "Jordan", "James", "Durant", "Obama", "Kevin", "Lin"]
 n = 10
 if n > len(players):
@@ -5244,18 +4602,6 @@ while index <= 10:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch7\ch7_35.py
-
-# ch7_35.py
-fruits = ["apple", "orange", "apple", "banana", "apple"]
-fruit = "apple"
-print("刪除前的fruits", fruits)
-while fruit in fruits:  # 只要串列內有apple迴圈就繼續
-    fruits.remove(fruit)
-print("刪除後的fruits", fruits)
-
-print("------------------------------------------------------------")  # 60個
-
 buyers = [
     ["James", 1030],  # 建立買家購買紀錄
     ["Curry", 893],
@@ -5291,6 +4637,1370 @@ for drink in enumerate(drinks, 10):  # 數值初始是10
     print(drink)
 for count, drink in enumerate(drinks, 10):
     print(count, drink)
+
+print("------------------------------------------------------------")  # 60個
+
+def greeting():
+    """我的第一個Python函數設計"""
+    print("Python歡迎你")
+    print("祝福學習順利")
+    print("謝謝")
+
+
+# 以下的程式碼也可稱主程式
+greeting()
+greeting()
+greeting()
+greeting()
+greeting()
+
+print("------------------------------------------------------------")  # 60個
+
+def greeting(name):
+    """Python函數需傳遞名字name"""
+    print("Hi,", name, "Good Morning!")
+
+greeting("Nelson")
+
+print("------------------------------------------------------------")  # 60個
+
+def greeting(name):
+    """Python函數需傳遞名字name"""
+    print("Hi, " + name + " Good Morning!")
+
+
+greeting("Nelson")
+
+print("------------------------------------------------------------")  # 60個
+
+def greeting(name):
+    """Python函數需傳遞名字name"""
+    print("Hi, " + name + " Good Morning!")
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+def interest(interest_type, subject):
+    """顯示興趣和主題"""
+    print("我的興趣是 " + interest_type)
+    print("在 " + interest_type + " 中, 最喜歡的是 " + subject)
+    print()
+
+
+interest("旅遊", "敦煌")
+interest("程式設計", "Python")
+
+print("------------------------------------------------------------")  # 60個
+
+
+def interest(interest_type, subject):
+    """顯示興趣和主題"""
+    print("我的興趣是 " + interest_type)
+    print("在 " + interest_type + " 中, 最喜歡的是 " + subject)
+    print()
+
+
+interest(interest_type="旅遊", subject="敦煌")  # 位置正確
+interest(subject="敦煌", interest_type="旅遊")  # 位置更動
+
+print("------------------------------------------------------------")  # 60個
+
+
+def interest(interest_type, subject="敦煌"):
+    """顯示興趣和主題"""
+    print("我的興趣是 " + interest_type)
+    print("在 " + interest_type + " 中, 最喜歡的是 " + subject)
+    print()
+
+
+interest("旅遊")  # 傳遞一個參數
+interest(interest_type="旅遊")  # 傳遞一個參數
+interest("旅遊", "張家界")  # 傳遞二個參數
+interest(interest_type="旅遊", subject="張家界")  # 傳遞二個參數
+interest(subject="張家界", interest_type="旅遊")  # 傳遞二個參數
+interest("閱讀", "旅遊類")  # 傳遞二個參數,不同的主題
+
+print("------------------------------------------------------------")  # 60個
+
+
+def greeting(name):
+    """Python函數需傳遞名字name"""
+    print("Hi, ", name, " Good Morning!")
+
+
+ret_value = greeting("Nelson")
+print("greeting( )傳回值 = ", ret_value)
+print(ret_value, " 的 type  = ", type(ret_value))
+
+print("------------------------------------------------------------")  # 60個
+
+
+def greeting(name):
+    """Python函數需傳遞名字name"""
+    print("Hi, ", name, " Good Morning!")
+    return  # Python將自動回傳None
+
+
+ret_value = greeting("Nelson")
+print("greeting( )傳回值 = ", ret_value)
+print(ret_value, " 的 type  = ", type(ret_value))
+
+print("------------------------------------------------------------")  # 60個
+
+
+def mutifunction(x1, x2):
+    """加, 減, 乘, 除四則運算"""
+    addresult = x1 + x2
+    subresult = x1 - x2
+    mulresult = x1 * x2
+    divresult = x1 / x2
+    return addresult, subresult, mulresult, divresult
+
+
+x1 = x2 = 10
+add, sub, mul, div = mutifunction(x1, x2)
+print("加法結果 = ", add)
+print("減法結果 = ", sub)
+print("乘法結果 = ", mul)
+print("除法結果 = ", div)
+
+print("------------------------------------------------------------")  # 60個
+
+
+def guest_info(firstname, middlename, lastname, gender):
+    """整合客戶名字資料"""
+    if gender == "M":
+        welcome = lastname + middlename + firstname + "先生歡迎你"
+    else:
+        welcome = lastname + middlename + firstname + "小姐歡迎妳"
+    return welcome
+
+
+info1 = guest_info("宇", "星", "洪", "M")
+info2 = guest_info("雨", "冰", "洪", "F")
+print(info1)
+print(info2)
+
+print("------------------------------------------------------------")  # 60個
+
+def guest_info(firstname, lastname, gender, middlename=""):
+    """整合客戶名字資料"""
+    if gender == "M":
+        welcome = lastname + middlename + firstname + "先生歡迎你"
+    else:
+        welcome = lastname + middlename + firstname + "小姐歡迎妳"
+    return welcome
+
+
+info1 = guest_info("濤", "劉", "M")
+info2 = guest_info("雨", "洪", "F", "冰")
+print(info1)
+print(info2)
+
+print("------------------------------------------------------------")  # 60個
+
+def build_vip(id, name):
+    """建立VIP資訊"""
+    vip_dict = {"VIP_ID": id, "Name": name}
+    return vip_dict
+
+
+member = build_vip("101", "Nelson")
+print(member)
+
+print("------------------------------------------------------------")  # 60個
+
+def build_vip(id, name, tel=""):
+    """建立VIP資訊"""
+    vip_dict = {"VIP_ID": id, "Name": name}
+    if tel:
+        vip_dict["Tel"] = tel
+    return vip_dict
+
+
+member1 = build_vip("101", "Nelson")
+member2 = build_vip("102", "Henry", "0952222333")
+print(member1)
+print(member2)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+def product_msg(customers):
+    str1 = "親愛的: "
+    str2 = "本公司將在2020年12月20日北京舉行產品發表會"
+    str3 = "總經理:深石敬上"
+    for customer in customers:
+        msg = str1 + customer + "\n" + str2 + "\n" + str3
+        print(msg, "\n")
+
+
+members = ["Damon", "Peter", "Mary"]
+product_msg(members)
+
+print("------------------------------------------------------------")  # 60個
+
+
+def kitchen(unserved, served):
+    """將未服務的餐點轉為已經服務"""
+    print("廚房處理顧客所點的餐點")
+    while unserved:
+        current_meal = unserved.pop()
+        # 模擬出餐點過程
+        print("菜單: ", current_meal)
+        # 將已出餐點轉入已經服務串列
+        served.append(current_meal)
+
+
+def show_unserved_meal(unserved):
+    """顯示尚未服務的餐點"""
+    print("=== 下列是尚未服務的餐點 ===")
+    if not unserved:
+        print("*** 沒有餐點 ***", "\n")
+    for unserved_meal in unserved:
+        print(unserved_meal)
+
+
+def show_served_meal(served):
+    """顯示已經服務的餐點"""
+    print("=== 下列是已經服務的餐點 ===")
+    if not served:
+        print("*** 沒有餐點 ***", "\n")
+    for served_meal in served:
+        print(served_meal)
+
+
+unserved = ["大麥克", "勁辣雞腿堡", "麥克雞塊"]  # 所點餐點
+served = []  # 已服務餐點
+
+# 列出餐廳處理前的點餐內容
+show_unserved_meal(unserved)  # 列出未服務餐點
+show_served_meal(served)  # 列出已服務餐點
+
+# 餐廳服務過程
+kitchen(unserved, served)  # 餐廳處理過程
+print("\n", "=== 廚房處理結束 ===", "\n")
+
+# 列出餐廳處理後的點餐內容
+show_unserved_meal(unserved)  # 列出未服務餐點
+show_served_meal(served)  # 列出已服務餐點
+
+print("------------------------------------------------------------")  # 60個
+
+def kitchen(unserved, served):
+    """將未服務的餐點轉為已經服務"""
+    print("廚房處理顧客所點的餐點")
+    while unserved:
+        current_meal = unserved.pop()
+        # 模擬出餐點過程
+        print("菜單: ", current_meal)
+        # 將已出餐點轉入已經服務串列
+        served.append(current_meal)
+
+
+def show_unserved_meal(unserved):
+    """顯示尚未服務的餐點"""
+    print("=== 下列是尚未服務的餐點 ===")
+    if not unserved:
+        print("*** 沒有餐點 ***", "\n")
+    for unserved_meal in unserved:
+        print(unserved_meal)
+
+
+def show_served_meal(served):
+    """顯示已經服務的餐點"""
+    print("=== 下列是已經服務的餐點 ===")
+    if not served:
+        print("*** 沒有餐點 ***", "\n")
+    for served_meal in served:
+        print(served_meal)
+
+
+order_list = ["大麥克", "勁辣雞腿堡", "麥克雞塊"]  # 所點餐點
+served_list = []  # 已服務餐點
+
+# 列出餐廳處理前的點餐內容
+show_unserved_meal(order_list)  # 列出未服務餐點
+show_served_meal(served_list)  # 列出已服務餐點
+
+# 餐廳服務過程
+kitchen(order_list, served_list)  # 餐廳處理過程
+print("\n", "=== 廚房處理結束 ===", "\n")
+
+# 列出餐廳處理後的點餐內容
+show_unserved_meal(order_list)  # 列出未服務餐點
+show_served_meal(served_list)  # 列出已服務餐點
+
+print("------------------------------------------------------------")  # 60個
+
+def kitchen(unserved, served):
+    """將所點的餐點轉為已經服務"""
+    print("廚房處理顧客所點的餐點")
+    while unserved:
+        current_meal = unserved.pop()
+        # 模擬出餐點過程
+        print("菜單: ", current_meal)
+        # 將已出餐點轉入已經服務串列
+        served.append(current_meal)
+
+
+def show_order_meal(unserved):
+    """顯示所點的餐點"""
+    print("=== 下列是所點的餐點 ===")
+    if not unserved:
+        print("*** 沒有餐點 ***", "\n")
+    for unserved_meal in unserved:
+        print(unserved_meal)
+
+
+def show_served_meal(served):
+    """顯示已經服務的餐點"""
+    print("=== 下列是已經服務的餐點 ===")
+    if not served:
+        print("*** 沒有餐點 ***", "\n")
+    for served_meal in served:
+        print(served_meal)
+
+
+order_list = ["大麥克", "勁辣雞腿堡", "麥克雞塊"]  # 所點餐點
+served_list = []  # 已服務餐點
+
+# 列出餐廳處理前的點餐內容
+show_order_meal(order_list)  # 列出所點的餐點
+show_served_meal(served_list)  # 列出已服務餐點
+
+# 餐廳服務過程
+kitchen(order_list[:], served_list)  # 餐廳處理過程
+print("\n", "=== 廚房處理結束 ===", "\n")
+
+# 列出餐廳處理後的點餐內容
+show_order_meal(order_list)  # 列出所點的餐點
+show_served_meal(served_list)  # 列出已服務餐點
+
+print("------------------------------------------------------------")  # 60個
+
+
+def make_icecream(*toppings):
+    # 列出製作冰淇淋的配料
+    print("這個冰淇淋所加配料如下")
+    for topping in toppings:
+        print("--- ", topping)
+
+
+make_icecream("草莓醬")
+make_icecream("草莓醬", "葡萄乾", "巧克力碎片")
+
+print("------------------------------------------------------------")  # 60個
+
+def make_icecream(icecream_type, *toppings):
+    # 列出製作冰淇淋的配料
+    print("這個 ", icecream_type, " 冰淇淋所加配料如下")
+    for topping in toppings:
+        print("--- ", topping)
+
+
+make_icecream("香草", "草莓醬")
+make_icecream("芒果", "草莓醬", "葡萄乾", "巧克力碎片")
+
+print("------------------------------------------------------------")  # 60個
+
+
+def build_dict(name, age, **players):
+    # 建立NBA球員的字典資料
+    info = {}  # 建立空字典
+    info["Name"] = name
+    info["Age"] = age
+    for key, value in players.items():
+        info[key] = value
+    return info  # 回傳所建的字典
+
+
+player_dict = build_dict("James", "32", City="Cleveland", State="Ohio")
+
+print(player_dict)  # 列印所建字典
+
+print("------------------------------------------------------------")  # 60個
+
+
+def factorial(n):
+    # 計算n的階乘, n 必須是正整數
+    if n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+
+value = 3
+print(value, " 的階乘結果是 = ", factorial(value))
+value = 5
+print(value, " 的階乘結果是 = ", factorial(value))
+
+print("------------------------------------------------------------")  # 60個
+
+
+def printmsg():
+    # 函數本身沒有定義變數, 只有執行列印全域變數功能
+    print("函數列印: ", msg)  # 列印全域變數
+
+
+msg = "Global Variable"  # 設定全域變數
+print("主程式列印: ", msg)  # 列印全域變數
+printmsg()  # 呼叫函數
+
+print("------------------------------------------------------------")  # 60個
+
+print("111")
+
+
+def printmsg():
+    # 函數本身有定義變數, 將執行列印區域變數功能
+    msg = "Local Variable"  # 設定區域變數
+    print("函數列印: ", msg)  # 列印區域變數
+
+
+msg = "Global Variable"  # 這是全域變數
+print("主程式列印: ", msg)  # 列印全域變數
+printmsg()  # 呼叫函數
+
+print("------------------------------------------------------------")  # 60個
+
+print("222")
+
+
+def defmsg():
+    msg = "pringmsg variable"
+
+
+def printmsg():
+    print(msg)  # 列印defmsg( )函數定義的區域變數
+
+
+printmsg()  # 呼叫printmsg( )
+
+print("------------------------------------------------------------")  # 60個
+
+print("333")
+
+
+def defmsg():
+    msg = "pringmsg variable"
+
+
+print(msg)  # 主程式列印區域變數產生錯誤
+
+print("------------------------------------------------------------")  # 60個
+
+
+def printmsg():
+    global msg
+    msg = "Java"  # 更改全域變數
+    print("更改後: ", msg)
+
+
+msg = "Python"
+print("更改前: ", msg)
+printmsg()
+
+print("------------------------------------------------------------")  # 60個
+
+# 定義lambda函數
+square = lambda x: x**2
+
+# 輸出平方值
+print(square(10))
+
+print("------------------------------------------------------------")  # 60個
+
+# 使用一般函數
+def square(x):
+    value = x**2
+    return value
+
+# 輸出平方值
+print(square(10))
+
+print("------------------------------------------------------------")  # 60個
+
+# 定義lambda函數
+product = lambda x, y: x * y
+
+# 輸出相乘結果
+print(product(5, 10))
+
+print("------------------------------------------------------------")  # 60個
+
+
+def oddfn(x):
+    return x if (x % 2 == 1) else None
+
+
+mylist = [5, 10, 15, 20, 25, 30]
+filter_object = filter(oddfn, mylist)  # 傳回filter object
+
+# 輸出奇數串列
+print("奇數串列: ", [item for item in filter_object])
+
+print("------------------------------------------------------------")  # 60個
+
+def oddfn(x):
+    return x if (x % 2 == 1) else None
+
+mylist = [5, 10, 15, 20, 25, 30]
+filter_object = filter(oddfn, mylist)  # 傳回filter object
+oddlist = [item for item in filter_object]
+# 輸出奇數串列
+print("奇數串列: ", oddlist)
+
+print("------------------------------------------------------------")  # 60個
+
+mylist = [5, 10, 15, 20, 25, 30]
+
+oddlist = list(filter(lambda x: (x % 2 == 1), mylist))
+
+# 輸出奇數串列
+print("奇數串列: ", oddlist)
+
+print("------------------------------------------------------------")  # 60個
+
+mylist = [5, 10, 15, 20, 25, 30]
+
+squarelist = list(map(lambda x: x**2, mylist))
+
+# 輸出串列元素的平方值
+print("串列的平方值: ", squarelist)
+
+print("------------------------------------------------------------")  # 60個
+
+
+def fun(arg):
+    pass
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+def fun(arg):
+    pass
+
+
+print("列出fun的type類型   :      ", type(fun))
+print("列出lambda的type類型:      ", type(lambda x: x))
+print("列出內建函數abs的type類型: ", type(abs))
+
+print("------------------------------------------------------------")  # 60個
+
+print("目前Python版本是: ", sys.version)
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print(bool(0))
+print(bool(""))
+print(bool(" "))
+print(bool(1))
+print(bool("XYZ"))
+
+print("------------------------------------------------------------")  # 60個
+
+num = 123
+print(num)
+num1 = bin(num)  # 2進位
+print(num1)
+num2 = oct(num)  # 8進位
+print(num2)
+
+num3 = 1234
+print(num3)
+print(int(num1, 2))  # 將2進位的字串轉換成10進位數值
+print(int(num2, 8))  # 將8進位的字串轉換成10進位數值
+# print(int(num3,16))#將16進位的字串轉換成10進位數值 fail in sugar
+
+print("------------------------------------------------------------")  # 60個
+
+str = "{1} * {0} = {2}"
+a = 3
+b = "5"
+print(str.format(a, b, a * int(b)))
+
+print("------------------------------------------------------------")  # 60個
+
+year = 2024
+month = 1
+day = 20
+print("日期：%s-%s-%s" % (year, month, day))
+
+print("------------------------------------------------------------")  # 60個
+
+print("請輸入一個十進位數: ", end="")
+Val = 1234
+print("Val的八進位數=%o" % Val)  # 以%o格式化字元輸出
+print("Val的十六進位數=%x" % Val)  # 以%x格式化字元輸出
+
+print("------------------------------------------------------------")  # 60個
+
+company = "藍海科技股份有限公司"
+year = 27
+print("{}已成立公司 {} 年".format(company, year))
+
+print("------------------------------------------------------------")  # 60個
+
+print("{0:10}收入：{1:_^12}".format("Axel", 52000))
+print("{0:10}收入：{1:>12}".format("Michael", 87000))
+print("{0:10}收入：{1:*<12}".format("May", 36000))
+
+print("------------------------------------------------------------")  # 60個
+
+num = 168
+print("數字 %s 的浮點數：%5.1f" % (num, num))
+print("數字 %s 的八進位：%o" % (num, num))
+print("數字 %s 的十六進位：%x" % (num, num))
+print("數字 %s 的二進位：%s" % (num, bin(num)))
+
+print("------------------------------------------------------------")  # 60個
+
+print("編號 姓名    底薪  業務獎金 加給補貼")
+print("%3d %3s %6d %6d %6d" % (801, "朱正富", 32000, 10000, 5000))
+print("%3d %3s %6d %6d %6d" % (805, "曾自強", 35000, 8000, 7000))
+print("%3d %3s %6d %6d %6d" % (811, "陳威動", 43000, 15000, 6000))
+
+print("------------------------------------------------------------")  # 60個
+
+print("13579")
+print("1+2")
+print("Hello, how are you?")
+print("I'm all right, but it's raining.")
+print("I'm all right, but it's raining.")
+
+print("------------------------------------------------------------")  # 60個
+
+print(type(23))  # 輸出結果 <class 'int'>
+print(type(3.14))  # 輸出結果 <class 'float'>
+print(type("happy birthday"))  # 輸出結果 <class 'str'>
+print(type(True))  # 輸出結果 <class 'bool'>
+
+print("------------------------------------------------------------")  # 60個
+
+num1 = 30
+print(num1)
+num1 = "happy"
+print(num1)
+a = b = 12
+print(a, b)
+name, salary, weight = "陳大富", 60000, 85.7
+print(name, salary, weight)
+
+print("------------------------------------------------------------")  # 60個
+
+num = 8
+num *= 9
+print(num)
+num += 1
+print(num)
+num //= 9
+print(num)
+num %= 5
+print(num)
+num -= 2
+print(num)
+
+print("------------------------------------------------------------")  # 60個
+
+a, b, c = 5, 10, 6
+result = a > b and b > c
+# 條件式a>b的傳回值與條件式b>c的傳回值做and運算
+result = a < b or c != a
+# 條件式a<b的傳回值與條件式c!=a的傳回值做or運算
+result = not result
+# 將result的值做not運算
+
+print("------------------------------------------------------------")  # 60個
+
+a, b, c = 3, 5, 7  # 宣告a、b及c三個整數變
+print("a= %d b= %d c= %d" % (a, b, c))
+print("====================================")
+print("a<b and b<c or c<a = %d" % (a < b and b < c or c < a))
+print("not(a==b)and (not a<b) = %d" % (not (a == b) and (not a < b)))
+# 包含關係與邏輯運算子的運算式求值
+
+print("------------------------------------------------------------")  # 60個
+
+b = 13
+print(b << 2)
+print(b >> 1)
+
+print("------------------------------------------------------------")  # 60個
+
+phrase = ["三陽開泰", "事事如意", "五福臨門"]
+for index, x in enumerate(phrase):
+    print("{0}--{1}".format(index, x))
+
+print("------------------------------------------------------------")  # 60個
+
+for a in range(1, 6):  # 外層for迴圈控制
+    for b in range(1, a + 1):  # 內層for迴圈控制
+        if b == 4:
+            break
+        print(b, end="")  # 印出b的值
+    print()
+
+print("------------------------------------------------------------")  # 60個
+
+total = 0
+for count in range(1, 100, 2):
+    total += count  # 將數值累加
+print("數值1~100之間的奇數累計=", total)
+
+print("------------------------------------------------------------")  # 60個
+
+k = 20
+sigma = 0
+for n in range(int(k) + 1):
+    if n % 2 != 0:  # 如果n是奇數
+        sigma += float(-1 / (2 * n + 1))
+    else:  # 如果n是偶數
+        sigma += float(1 / (2 * n + 1))
+print("PI = %f" % (sigma * 4))
+
+print("------------------------------------------------------------")  # 60個
+
+# 不一樣
+k = 20
+sigma = 0
+for n in range(0, k, 1):
+    if n & 1:  # 如果n是奇數
+        sigma += float(-1 / (2 * n + 1))
+    else:  # 如果n是偶數
+        sigma += float(1 / (2 * n + 1))
+print("PI = %f" % (sigma * 4))
+
+print("------------------------------------------------------------")  # 60個
+
+# 九九乘法表的雙重迴圈
+for i in range(1, 10):
+    for j in range(1, 10):
+        print("{0}*{1}={2:2d}  ".format(i, j, i * j), sep="\t", end="")
+        if j >= 7:
+            break  # 設定跳出的條件
+    print("\n-------------------------------------------------------\n")
+
+print("------------------------------------------------------------")  # 60個
+
+for x in range(1, 10):
+    for y in range(1, 10):
+        print("{0}*{1}={2: ^2}".format(y, x, x * y), end=" ")
+    print()
+
+print("------------------------------------------------------------")  # 60個
+
+x, y = 1, 10
+while x < y:
+    print(x, end=" ")
+    x += 1
+
+print("------------------------------------------------------------")  # 60個
+
+str1 = "Python is funny and powerful"
+print("原字串", str1)
+print("欄寬40，字串置中", str1.center(40))
+print("字串置中，* 填補", str1.center(40, "*"))
+print("欄寬10，字串靠左", str1.ljust(40, "="))
+print("欄寬40，字串靠右", str1.rjust(40, "#"))
+
+mobilephone = "931666888"
+print("字串左側補0:", mobilephone.zfill(10))
+
+str2 = "Mayor,President"
+print("以逗點分割字元", str2.partition(","))
+
+str3 = "禮\n義\n廉\n恥"
+print("依\\n分割字串", str3.splitlines(False))
+
+print("------------------------------------------------------------")  # 60個
+
+str1 = "Happy birthday to my best friend."
+s1 = str1.count("to", 0)  # 從str1字串索引0的位置開始搜尋
+s2 = str1.count("e", 0, 34)  # 搜尋str1從索引值0到索引值34-1的位置
+print("{}\n「to」出現{}次,「e」出現{}次".format(str1, s1, s2))
+
+print("------------------------------------------------------------")  # 60個
+
+i = 10
+for j in range(5):
+    z = i + j
+    print("小寫：%x\t大寫：%X" % (z, z))
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+dictStudent = {}
+
+def isHasKeyAndNotNone():
+    findKey = str(input("請輸入欲查詢的key："))
+    
+    if findKey in dictStudent and dictStudent.get(findKey, None) == None:
+        EditData(findKey)
+        
+    elif findKey in dictStudent and dictStudent.get(findKey, None) != None:
+        print("%s的值：%s" %(findKey, dictStudent[findKey]))
+        CheckOtherKeyValue()
+        
+    else:
+        dictStudent.setdefault(findKey, None)
+        print("%s不存在已自動建立key" %(findKey))
+
+def EditData(findKey):
+    strInputValue = str(input("請輸入值："))
+    dictStudent[findKey] = strInputValue
+    CheckOtherKeyValue()
+
+def CheckOtherKeyValue():
+    for key, values in dictStudent.items():
+        if values == None:
+            print(dictStudent)
+            strCheck = str(input("目前還有其他欄位值為None，是否繼續進行編輯(Y/N)："))
+
+            while strCheck == "Y":
+                isHasKeyAndNotNone()
+            else:
+                print(dictStudent)
+                break
+
+strFieldName = str(input("請輸入欄位名稱(以逗號分隔)："))
+dictStudent = dictStudent.fromkeys(strFieldName.split(","))
+
+isHasKeyAndNotNone()
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("\n不足數位補0：%06.2f\n" % (1.2345))
+print("不足數位預設空格：%6.2f\n" % (1.2345))
+print("小數點保留2位：%.2f\n" % (1.2345))
+print("不足數位補0(以*替代)：%0*.2f\n" % (6, 1.2345))
+
+print("------------------------------------------------------------")  # 60個
+
+print("\n不足數位補0：%05d\n" % (66))
+print("不足數位預設空格：%5d\n" % (66))
+print("小於位數則輸出全部：%2d\n" % (666))
+print("不足數位補0(以*替代)：%0*d\n" % (5, 66))
+
+print("------------------------------------------------------------")  # 60個
+
+list1 = ["A", True, 10, 3.14, "G"]
+
+for i in range(len(list1)):
+    print("索引位置：%s\t對應值：%s\t型態：%s\n" % (i, list1[i], type(list1[i])))
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+def EditData():
+    if len(strEditTitle) > 0:
+        print(strEditTitle)
+    else:
+        print(strTitle)
+
+    print("作者：", strName)
+    print("暱稱：", strId)
+    print("Gmail：", strEmail)
+    print("興趣：", strJoin)
+
+strTitle = ""
+strEditTitle = "撰寫Python小網站"
+
+isEditTitle = str(input("是否要更改名稱(Y/N)："))
+isSymbol = str(input("是否要更改前後星號(Y/N)："))
+
+if isEditTitle == "Y" and isSymbol == "Y":
+    strEditTitle = str(input("請輸入欲更改名稱："))
+    strSymbol = str(input("請輸入欲更改前後符號："))
+
+    strEditTitle = strEditTitle.center(36, strSymbol)
+    
+elif isEditTitle == "Y" and isSymbol == "N":
+    strEditTitle = str(input("請輸入欲更改名稱："))
+    strEditTitle = strEditTitle.center(36, "*")
+
+elif isEditTitle == "N" and isSymbol == "Y":
+    strSymbol = str(input("請輸入欲更改前後符號："))
+    strTitle = strTitle.center(36, strSymbol)
+
+strName = str(input("請輸入名字："))
+strId = str(input("請輸入暱稱："))
+strEmail = str(input("請輸入Gmail："))
+
+while strEmail.endswith("@gmail.com") == False:
+    strEmail = str(input("請重新輸入Gmail："))
+
+strSavor = str(input("你的興趣(以逗號分隔)："))
+strJoin = "|".join(strSavor.split(","))
+
+
+print("="*30, "\n")
+EditData()
+
+print("------------------------------------------------------------")  # 60個
+
+tupleData = ()
+listData = []
+
+print("\n\n")
+
+strFieldName = str(input("請輸入不可修改欄位名稱(逗號為分隔索引位置；頓號則為放置在同一個索引位置)："))
+strFieldData = str(input("請輸入欄位對應資料(逗號為分隔索引位置；頓號則為放置在同一個索引位置)："))
+
+for i in range(len(strFieldName.split(","))):
+    listData.append(strFieldName.split(",")[i])
+    
+for j in range(len(strFieldData.split(","))):
+    x = 0
+
+    if len(listData)%2 == 0:
+        x = len(listData) - 1
+    else:
+        x = len(listData) + 1
+        
+    listData.insert(x, [strFieldData.split(",")[j] for x in range(1)])
+    
+listToTuple = tuple(listData)
+print("\n")
+print("list轉換tuple：", listToTuple)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+#設置底薪(BaseSalary)、結案獎金件數(Case)、職位獎金(OfficeBonus)
+BaseSalary = 25000
+CaseBonus = 1000
+OfficeBonus = 5000
+
+#請輸入職位名稱(Engineer)、結案獎金金額(CaseAmount)變數
+Engineer = str(input("請輸入職位名稱："))
+Case = int(input("請輸入結案案件數(整數)："))
+
+
+#計算獎金function
+def CalculateCase(case, caseBonus):
+    return case * caseBonus
+
+def CalculateSalary(baseSalary, officeBonus):
+    return baseSalary + officeBonus
+
+CaseAmount = CalculateCase(Case, CaseBonus)
+SalaryAmount = CalculateSalary(BaseSalary, OfficeBonus)
+
+print("該工程師薪資：", CaseAmount + SalaryAmount)
+"""
+print("------------------------------------------------------------")  # 60個
+
+import time
+
+t = time.time()
+tLocal = time.localtime(t)
+
+print("轉換時間形式(年/月/日)：", time.strftime("%Y/%m/%d", tLocal))
+print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime(tLocal))
+
+print("------------------------------------------------------------")  # 60個
+
+# 以 dir() 與 help() 探索 Python 模組與物件
+
+import datetime
+
+print(dir(datetime))
+
+print("")
+
+print([_ for _ in dir(datetime) if "date" in _.lower()])
+
+# help(datetime)
+
+print("------------------------------------------------------------")  # 60個
+
+# id的用法
+
+#動物字典
+fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
+print(type(fruits))
+cfruits = fruits.copy()
+print("位址 = ", id(fruits), "  fruits元素 = ", fruits)
+print("位址 = ", id(cfruits), "  fruits元素 = ", cfruits)
+
+
+print("ccccc")
+
+s1 = "lion"
+s2 = "mouse"
+print(id(s1))
+print(id(s2))
+
+s2 = "lions"
+print(id(s1))
+print(id(s2))
+
+print("測試 eval()")
+
+numberStr = "12.34*56.78"
+print("數值公式 :", numberStr)
+number = eval(numberStr)
+print("計算結果 : %5.2f" % number)
+
+numberStr = "1234*5678"
+print("數值公式 :", numberStr)
+number = eval(numberStr)
+print("計算結果 : %5.2f" % number)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+# python 預設函數
+
+range()
+dir()
+help()
+
+
+"""
+
+"""
+type()
+int()
+float()
+"""
+
+print("python之基本函數")
+print("int(8.4)=", int(8.4))
+print("bin(14)=", bin(14))
+# print('hex(84)=',hex(84))
+print("oct(124)=", oct(124))
+print("float(6)=", float(6))
+print("abs(-6.4)=", abs(-6.4))
+print("divmod(58,5)=", divmod(58, 5))
+print("pow(3,4)=", pow(3, 4))
+print("round(3.5)=", round(3.5))
+print("chr(68)=", chr(68))
+print("ord('%s')=%d" % ("A", ord("A")))
+# print('str(1234)=',str(1234))
+print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
+print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
+print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
+print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
+
+print("------------------------------------------------------------")  # 60個
+
+print("int(8.4)=", int(8.4))
+print("bin(14)=", bin(14))
+# print("hex(84)=", hex(84))
+print("oct(124)=", oct(124))
+print("float(6)=", float(6))
+print("abs(-6.4)=", abs(-6.4))
+print("divmod(58,5)=", divmod(58, 5))
+print("pow(3,4)=", pow(3, 4))
+print("round(3.5)=", round(3.5))
+print("chr(68)=", chr(68))
+print("ord('%s')=%d" % ("A", ord("A")))
+# print("str(1234)=", str(1234))
+print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
+print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
+print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
+print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
+
+print("------------------------------------------------------------")  # 60個
+
+x = -10
+print("以下輸出abs( )函數的應用")
+print(x)  # 輸出x變數
+print(abs(x))  # 輸出abs(x)
+x = 5
+y = 3
+print("以下輸出pow( )函數的應用")
+print(pow(x, y))  # 輸出pow(x,y)
+x = 47.5
+print("以下輸出round(x)函數的應用")
+print(x)  # 輸出x變數
+print(round(x))  # 輸出round(x)
+x = 48.5
+print(x)  # 輸出x變數
+print(round(x))  # 輸出round(x)
+x = 49.5
+print(x)  # 輸出x變數
+print(round(x))  # 輸出round(x)
+print("以下輸出round(x,n)函數的應用")
+x = 2.15
+print(x)  # 輸出x變數
+print(round(x, 1))  # 輸出round(x,1)
+x = 2.25
+print(x)  # 輸出x變數
+print(round(x, 1))  # 輸出round(x,1)
+x = 2.151
+print(x)  # 輸出x變數
+print(round(x, 1))  # 輸出round(x,1)
+x = 2.251
+print(x)  # 輸出x變數
+print(round(x, 1))  # 輸出round(x,1)
+
+print("------------------------------------------------------------")  # 60個
+
+r = abs(-10)
+print("abs(-10) = ", r)
+r = abs(5)
+print("abs(5) = ", r)
+r = pow(8, 2)
+print("pow(8, 2) = ", r)
+r = pow(2, 3)
+print("pow(2, 3) = ", r)
+r = max(9, 3, 12, 32, 81, 92)
+print("max(9, 3, 12, 32, 81, 92) = ", r)
+r = min(9, 3, 12, 32, 81, 92)
+print("min(9, 3, 12, 32, 81, 92) = ", r)
+r = round(5.32)
+print("round(5.32) = ", r)
+r = round(5.52)
+print("round(5.52) = ", r)
+r = round(3.14568757, 3)
+print("round(3.14568757, 3) = ", r)
+r = round(3.14568757, 1)
+print("round(3.14568757, 1) = ", r)
+
+number = 3.14159
+print("四捨五入到小數點後兩位：", round(number, 4))
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+""" wait long
+print("requests 1")
+import requests
+
+r = requests.get("https://tw.yahoo.com/")
+print(r.text)
+
+print("------------------------------------------------------------")  # 60個
+
+print("requests 2")
+import requests
+
+base_url = "https://zipcloud.ibsnet.co.jp/api/search"
+
+query_parameter = "?zipcode="
+
+zipcode = "1600021"
+
+request_url = base_url + query_parameter + zipcode
+
+request_url
+
+requests.get(request_url).json()
+
+
+# 有這樣的 API 啊，網址是：https://zipcloud.ibsnet.co.jp/doc/api，請幫我寫出來
+
+print("------------------------------------------------------------")  # 60個
+
+print("requests 3")
+import requests
+
+# 郵遞區號
+zipcode = "1000001"
+
+# API 端點
+api_endpoint = f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={zipcode}"
+
+# 進行查詢
+response = requests.get(api_endpoint)
+
+# 檢查回應狀態
+if response.status_code == 200:
+    # 解析回應內容
+    data = response.json()
+
+    # 驗證 API 回應狀態
+    if data['status'] == 200:
+        # 取出第一筆地址資訊
+        address_info = data['results'][0]
+
+        # 印出完整郵遞區域
+        print(f"{address_info['address1']} {address_info['address2']} {address_info['address3']}")
+    else:
+        print("API 回應錯誤，訊息：", data['message'])
+else:
+    print("API 查詢失敗，狀態碼：", response.status_code)
+
+
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" fail
+import requests
+
+# 郵遞區號
+zipcode = "100-0001"
+
+# API 端點
+api_endpoint = "http://your_api_endpoint"
+
+# 你的 API 金鑰
+api_key = "your_api_key"
+
+# 設定查詢參數
+params = {
+    'apikey': api_key,
+    'zipcode': zipcode,
+}
+
+# 進行查詢
+response = requests.get(api_endpoint, params=params)
+
+# 檢查回應狀態
+if response.status_code == 200:
+    # 解析回應內容
+    data = response.json()
+
+    # 印出郵遞區域
+    print(data['area'])
+else:
+    print("API 查詢失敗，狀態碼：", response.status_code)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+print("requests 4")
+import requests
+api_url = "https://collectionapi.metmuseum.org/public/collection/v1/objects"
+response = requests.get(api_url)
+response_dict = response.json()
+
+response_dict.keys()
+response_dict["total"]
+
+get_object_url = (
+    "https://collectionapi.metmuseum.org/public/collection/v1/objects/435864"
+)
+
+object_response = requests.get(get_object_url)
+
+object_response.json()["objectURL"]
+
+object_response.json()["title"]
+
+object_response.json()["primaryImageSmall"]
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+from bs4 import BeautifulSoup
+
+html_str = "<p>Hello World!</p>"
+soup = BeautifulSoup(html_str, "lxml")
+print(soup)
+
+print("------------------------------------------------------------")  # 60個
+
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup("<html> Lollipop </html>", "html.parser")
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+
+from bs4 import BeautifulSoup
+
+html_data = requests.get("http://tw.yahoo.com")
+
+soup = BeautifulSoup(html_data.text, "html.parser")
+
+print(soup.title)
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+
+from bs4 import BeautifulSoup
+
+game_ranking_html = requests.get(
+    "https://www.kamatari.org/blog/2021/best-games-of-2021/"
+)
+
+soup = BeautifulSoup(game_ranking_html.text, "html.parser")
+
+for game in soup.findAll("h2"):
+    print(game.text)
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+from bs4 import BeautifulSoup
+
+game_ranking_html = requests.get(
+    "https://www.kamatari.org/blog/2021/best-games-of-2021/"
+)
+soup = BeautifulSoup(game_ranking_html.text, "html.parser")
+for game in soup.findAll("h2"):
+    print(game.text)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+
+
+
+fruit = ["apple", "orange", "watermelon"]
+print("反轉前內容：", fruit)
+fruit.reverse()
+print("反轉後內容：", fruit)
+score = [65, 76, 54, 32, 18]
+print("反轉前內容：", score)
+score.reverse()
+print("反轉後內容：", score)
+
+print("------------------------------------------------------------")  # 60個
+
+score = [98, 46, 37, 66, 69]
+print("排序前順序：", score)
+score.sort()  # 省略reverse參數, 遞增排序
+print("遞增排序：", score)
+letter = ["one", "time", "happy", "child"]
+print("排序前順序：")
+print(letter)
+letter.sort(reverse=True)  # 依字母做遞減排序
+print("遞減排序：")
+print(letter)
+
+print("------------------------------------------------------------")  # 60個
+
+
+fruits = ["apple", "orange", "apple", "banana", "apple"]
+fruit = "apple"
+print("刪除前的fruits", fruits)
+while fruit in fruits:  # 只要串列內有apple迴圈就繼續
+    fruits.remove(fruit)
+print("刪除後的fruits", fruits)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5451,9 +6161,6 @@ print("新小兵字典", soldier0)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_13.py
-
-# ch9_13.py
 fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
 cfruits = fruits.copy()
 print("位址 = ", id(fruits), "  fruits元素 = ", fruits)
@@ -5461,9 +6168,6 @@ print("位址 = ", id(cfruits), "  fruits元素 = ", cfruits)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_14.py
-
-# ch9_14.py
 fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
 noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60}
 empty_dict = {}
@@ -5486,9 +6190,6 @@ print("Paul Gasol是 %s 的球員" % players["Paul Gasol"])
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_17.py
-
-# ch9_17.py
 players = {
     "Stephen Curry": "Golden State Warriors",
     "Kevin Durant": "Golden State Warriors",
@@ -5500,12 +6201,8 @@ for name, team in players.items():
     print("\n姓名: ", name)
     print("隊名: ", team)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_18.py
-
-# ch9_18.py
 players = {
     "Stephen Curry": "Golden State Warriors",
     "Kevin Durant": "Golden State Warriors",
@@ -5518,9 +6215,6 @@ for name in players.keys():
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_19.py
-
-# ch9_19.py
 players = {
     "Stephen Curry": "Golden State Warriors",
     "Kevin Durant": "Golden State Warriors",
@@ -5534,9 +6228,6 @@ for name in players:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_20.py
-
-# ch9_20.py
 players = {
     "Stephen Curry": "Golden State Warriors",
     "Kevin Durant": "Golden State Warriors",
@@ -5550,9 +6241,6 @@ for name in sorted(players.keys()):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_21.py
-
-# ch9_21.py
 players = {
     "Stephen Curry": "Golden State Warriors",
     "Kevin Durant": "Golden State Warriors",
@@ -5563,12 +6251,8 @@ players = {
 for team in players.values():
     print(team)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_21_1.py
-
-# ch9_21_1.py
 players = {
     "Stephen Curry": "Golden State Warriors",
     "Kevin Durant": "Golden State Warriors",
@@ -5579,12 +6263,8 @@ players = {
 for team in set(players.values()):
     print(team)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_22.py
-
-# ch9_22.py
 soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
 soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
 soldier2 = {"tag": "green", "score": 10, "speed": "fast"}
@@ -5594,9 +6274,6 @@ for army in armys:  # 列印小兵
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_23.py
-
-# ch9_23.py
 armys = []  # 建立小兵空串列
 # 建立50個小兵
 for soldier_number in range(50):
@@ -5670,9 +6347,6 @@ print("wechat_account['kevin']元素個數  ", len(wechat_account["kevin"]))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch9\ch9_29.py
-
-# ch9_29.py
 # 將串列轉成字典
 seq1 = ["name", "city"]  # 定義串列
 list_dict1 = dict.fromkeys(seq1)
@@ -5716,18 +6390,12 @@ print(mixed_set)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch10\ch10_4.py
-
-# ch10_4.py
 x = {}  # 這是建立空字典非空集合
 print("列印     = ", x)
 print("列印類別 = ", type(x))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch10\ch10_5.py
-
-# ch10_5.py
 empty_dict = {}  # 這是建立空字典
 print("列印類別 = ", type(empty_dict))
 empty_set = set()  # 這是建立空集合
@@ -5735,18 +6403,13 @@ print("列印類別 = ", type(empty_set))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch10\ch10_6.py
-
-# ch10_6.py
-x = set("DeepStone mean Deep Learning")
+print("字串轉集合")
+x = set("United States of America")
 print(x)
 print(type(x))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch10\ch10_7.py
-
-# ch10_7.py
 # 表達方式1
 fruits = ["apple", "orange", "apple", "banana", "orange"]
 x = set(fruits)
@@ -5755,21 +6418,13 @@ print(x)
 y = set(["apple", "orange", "apple", "banana", "orange"])
 print(y)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch10\ch10_8.py
-
-# ch10_8.py
 cities = set(("Beijing", "Tokyo", "Beijing", "Taipei", "Tokyo"))
 print(cities)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch10\ch10_9.py
-
-# ch10_9.py
 fruits1 = ["apple", "orange", "apple", "banana", "orange"]
 x = set(fruits1)  # 將串列轉成集合
 fruits2 = list(x)  # 將集合轉成串列
@@ -5794,12 +6449,8 @@ print("A和B的交集是 ", AB)
 BA = B.intersection(A)  # B和A的交集
 print("B和A的交集是 ", BA)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch10\ch10_12.py
-
-# ch10_12.py
 math = {"Kevin", "Peter", "Eric"}  # 設定參加數學夏令營成員
 physics = {"Peter", "Nelson", "Tom"}  # 設定參加物理夏令營成員
 allmember = math | physics
@@ -5815,19 +6466,6 @@ print("A和B的聯集是 ", AorB)
 # 將union( )應用在B集合
 BorA = B.union(A)  # B和A的聯集
 print("B和A的聯集是 ", BorA)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch10\ch10_14.py
-
-# ch10_14.py
-math = {"Kevin", "Peter", "Eric"}  # 設定參加數學夏令營成員
-physics = {"Peter", "Nelson", "Tom"}  # 設定參加物理夏令營成員
-math_only = math - physics
-print("參加數學夏令營同時沒有參加物理夏令營的成員 ", math_only)
-physics_only = physics - math
-print("參加數學夏令營同時沒有參加物理夏令營的成員 ", physics_only)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5907,1336 +6545,264 @@ print("Audi not in cars", boolean)
 print("------------------------------------------------------------")  # 60個
 
 
-def greeting():
-    """我的第一個Python函數設計"""
-    print("Python歡迎你")
-    print("祝福學習順利")
-    print("謝謝")
+cars = ["toyota", "nissan", "honda"]
+nums = [1, 3, 5]
+carslist = cars * 3  # 串列乘以數字
+print(carslist)
+numslist = nums * 5  # 串列乘以數字
+print(numslist)
 
-
-# 以下的程式碼也可稱主程式
-greeting()
-greeting()
-greeting()
-greeting()
-greeting()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_2.py
-
-# ch11_2.py
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-
-print("------------------------------------------------------------")  # 60個
-
-
-def greeting(name):
-    """Python函數需傳遞名字name"""
-    print("Hi,", name, "Good Morning!")
-
-
-greeting("Nelson")
-
-print("------------------------------------------------------------")  # 60個
-
-
-def greeting(name):
-    """Python函數需傳遞名字name"""
-    print("Hi, " + name + " Good Morning!")
-
-
-greeting("Nelson")
-
-print("------------------------------------------------------------")  # 60個
-
-
-def greeting(name):
-    """Python函數需傳遞名字name"""
-    print("Hi, " + name + " Good Morning!")
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def interest(interest_type, subject):
-    """顯示興趣和主題"""
-    print("我的興趣是 " + interest_type)
-    print("在 " + interest_type + " 中, 最喜歡的是 " + subject)
-    print()
-
-
-interest("旅遊", "敦煌")
-interest("程式設計", "Python")
-
-print("------------------------------------------------------------")  # 60個
-
-
-def interest(interest_type, subject):
-    """顯示興趣和主題"""
-    print("我的興趣是 " + interest_type)
-    print("在 " + interest_type + " 中, 最喜歡的是 " + subject)
-    print()
-
-
-interest(interest_type="旅遊", subject="敦煌")  # 位置正確
-interest(subject="敦煌", interest_type="旅遊")  # 位置更動
-
-print("------------------------------------------------------------")  # 60個
-
-
-def interest(interest_type, subject="敦煌"):
-    """顯示興趣和主題"""
-    print("我的興趣是 " + interest_type)
-    print("在 " + interest_type + " 中, 最喜歡的是 " + subject)
-    print()
-
-
-interest("旅遊")  # 傳遞一個參數
-interest(interest_type="旅遊")  # 傳遞一個參數
-interest("旅遊", "張家界")  # 傳遞二個參數
-interest(interest_type="旅遊", subject="張家界")  # 傳遞二個參數
-interest(subject="張家界", interest_type="旅遊")  # 傳遞二個參數
-interest("閱讀", "旅遊類")  # 傳遞二個參數,不同的主題
-
-print("------------------------------------------------------------")  # 60個
-
-
-def greeting(name):
-    """Python函數需傳遞名字name"""
-    print("Hi, ", name, " Good Morning!")
-
-
-ret_value = greeting("Nelson")
-print("greeting( )傳回值 = ", ret_value)
-print(ret_value, " 的 type  = ", type(ret_value))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def greeting(name):
-    """Python函數需傳遞名字name"""
-    print("Hi, ", name, " Good Morning!")
-    return  # Python將自動回傳None
-
-
-ret_value = greeting("Nelson")
-print("greeting( )傳回值 = ", ret_value)
-print(ret_value, " 的 type  = ", type(ret_value))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def mutifunction(x1, x2):
-    """加, 減, 乘, 除四則運算"""
-    addresult = x1 + x2
-    subresult = x1 - x2
-    mulresult = x1 * x2
-    divresult = x1 / x2
-    return addresult, subresult, mulresult, divresult
-
-
-x1 = x2 = 10
-add, sub, mul, div = mutifunction(x1, x2)
-print("加法結果 = ", add)
-print("減法結果 = ", sub)
-print("乘法結果 = ", mul)
-print("除法結果 = ", div)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def guest_info(firstname, middlename, lastname, gender):
-    """整合客戶名字資料"""
-    if gender == "M":
-        welcome = lastname + middlename + firstname + "先生歡迎你"
-    else:
-        welcome = lastname + middlename + firstname + "小姐歡迎妳"
-    return welcome
-
-
-info1 = guest_info("宇", "星", "洪", "M")
-info2 = guest_info("雨", "冰", "洪", "F")
-print(info1)
-print(info2)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_15.py
-
-
-# ch11_15.py
-def guest_info(firstname, lastname, gender, middlename=""):
-    """整合客戶名字資料"""
-    if gender == "M":
-        welcome = lastname + middlename + firstname + "先生歡迎你"
-    else:
-        welcome = lastname + middlename + firstname + "小姐歡迎妳"
-    return welcome
-
-
-info1 = guest_info("濤", "劉", "M")
-info2 = guest_info("雨", "洪", "F", "冰")
-print(info1)
-print(info2)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_16.py
-
-
-# ch11_16.py
-def build_vip(id, name):
-    """建立VIP資訊"""
-    vip_dict = {"VIP_ID": id, "Name": name}
-    return vip_dict
-
-
-member = build_vip("101", "Nelson")
-print(member)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_17.py
-
-
-# ch11_17.py
-def build_vip(id, name, tel=""):
-    """建立VIP資訊"""
-    vip_dict = {"VIP_ID": id, "Name": name}
-    if tel:
-        vip_dict["Tel"] = tel
-    return vip_dict
-
-
-member1 = build_vip("101", "Nelson")
-member2 = build_vip("102", "Henry", "0952222333")
-print(member1)
-print(member2)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def product_msg(customers):
-    str1 = "親愛的: "
-    str2 = "本公司將在2020年12月20日北京舉行產品發表會"
-    str3 = "總經理:深石敬上"
-    for customer in customers:
-        msg = str1 + customer + "\n" + str2 + "\n" + str3
-        print(msg, "\n")
-
-
-members = ["Damon", "Peter", "Mary"]
-product_msg(members)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def kitchen(unserved, served):
-    """將未服務的餐點轉為已經服務"""
-    print("廚房處理顧客所點的餐點")
-    while unserved:
-        current_meal = unserved.pop()
-        # 模擬出餐點過程
-        print("菜單: ", current_meal)
-        # 將已出餐點轉入已經服務串列
-        served.append(current_meal)
-
-
-def show_unserved_meal(unserved):
-    """顯示尚未服務的餐點"""
-    print("=== 下列是尚未服務的餐點 ===")
-    if not unserved:
-        print("*** 沒有餐點 ***", "\n")
-    for unserved_meal in unserved:
-        print(unserved_meal)
-
-
-def show_served_meal(served):
-    """顯示已經服務的餐點"""
-    print("=== 下列是已經服務的餐點 ===")
-    if not served:
-        print("*** 沒有餐點 ***", "\n")
-    for served_meal in served:
-        print(served_meal)
-
-
-unserved = ["大麥克", "勁辣雞腿堡", "麥克雞塊"]  # 所點餐點
-served = []  # 已服務餐點
-
-# 列出餐廳處理前的點餐內容
-show_unserved_meal(unserved)  # 列出未服務餐點
-show_served_meal(served)  # 列出已服務餐點
-
-# 餐廳服務過程
-kitchen(unserved, served)  # 餐廳處理過程
-print("\n", "=== 廚房處理結束 ===", "\n")
-
-# 列出餐廳處理後的點餐內容
-show_unserved_meal(unserved)  # 列出未服務餐點
-show_served_meal(served)  # 列出已服務餐點
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_21.py
-
-
-# ch11_21.py
-def kitchen(unserved, served):
-    """將未服務的餐點轉為已經服務"""
-    print("廚房處理顧客所點的餐點")
-    while unserved:
-        current_meal = unserved.pop()
-        # 模擬出餐點過程
-        print("菜單: ", current_meal)
-        # 將已出餐點轉入已經服務串列
-        served.append(current_meal)
-
-
-def show_unserved_meal(unserved):
-    """顯示尚未服務的餐點"""
-    print("=== 下列是尚未服務的餐點 ===")
-    if not unserved:
-        print("*** 沒有餐點 ***", "\n")
-    for unserved_meal in unserved:
-        print(unserved_meal)
-
-
-def show_served_meal(served):
-    """顯示已經服務的餐點"""
-    print("=== 下列是已經服務的餐點 ===")
-    if not served:
-        print("*** 沒有餐點 ***", "\n")
-    for served_meal in served:
-        print(served_meal)
-
-
-order_list = ["大麥克", "勁辣雞腿堡", "麥克雞塊"]  # 所點餐點
-served_list = []  # 已服務餐點
-
-# 列出餐廳處理前的點餐內容
-show_unserved_meal(order_list)  # 列出未服務餐點
-show_served_meal(served_list)  # 列出已服務餐點
-
-# 餐廳服務過程
-kitchen(order_list, served_list)  # 餐廳處理過程
-print("\n", "=== 廚房處理結束 ===", "\n")
-
-# 列出餐廳處理後的點餐內容
-show_unserved_meal(order_list)  # 列出未服務餐點
-show_served_meal(served_list)  # 列出已服務餐點
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_22.py
-
-
-# ch11_22.py
-def kitchen(unserved, served):
-    """將所點的餐點轉為已經服務"""
-    print("廚房處理顧客所點的餐點")
-    while unserved:
-        current_meal = unserved.pop()
-        # 模擬出餐點過程
-        print("菜單: ", current_meal)
-        # 將已出餐點轉入已經服務串列
-        served.append(current_meal)
-
-
-def show_order_meal(unserved):
-    """顯示所點的餐點"""
-    print("=== 下列是所點的餐點 ===")
-    if not unserved:
-        print("*** 沒有餐點 ***", "\n")
-    for unserved_meal in unserved:
-        print(unserved_meal)
-
-
-def show_served_meal(served):
-    """顯示已經服務的餐點"""
-    print("=== 下列是已經服務的餐點 ===")
-    if not served:
-        print("*** 沒有餐點 ***", "\n")
-    for served_meal in served:
-        print(served_meal)
-
-
-order_list = ["大麥克", "勁辣雞腿堡", "麥克雞塊"]  # 所點餐點
-served_list = []  # 已服務餐點
-
-# 列出餐廳處理前的點餐內容
-show_order_meal(order_list)  # 列出所點的餐點
-show_served_meal(served_list)  # 列出已服務餐點
-
-# 餐廳服務過程
-kitchen(order_list[:], served_list)  # 餐廳處理過程
-print("\n", "=== 廚房處理結束 ===", "\n")
-
-# 列出餐廳處理後的點餐內容
-show_order_meal(order_list)  # 列出所點的餐點
-show_served_meal(served_list)  # 列出已服務餐點
-
-print("------------------------------------------------------------")  # 60個
-
-
-def make_icecream(*toppings):
-    # 列出製作冰淇淋的配料
-    print("這個冰淇淋所加配料如下")
-    for topping in toppings:
-        print("--- ", topping)
-
-
-make_icecream("草莓醬")
-make_icecream("草莓醬", "葡萄乾", "巧克力碎片")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_24.py
-
-
-# ch11_24.py
-def make_icecream(icecream_type, *toppings):
-    # 列出製作冰淇淋的配料
-    print("這個 ", icecream_type, " 冰淇淋所加配料如下")
-    for topping in toppings:
-        print("--- ", topping)
-
-
-make_icecream("香草", "草莓醬")
-make_icecream("芒果", "草莓醬", "葡萄乾", "巧克力碎片")
-
-print("------------------------------------------------------------")  # 60個
-
-
-def build_dict(name, age, **players):
-    # 建立NBA球員的字典資料
-    info = {}  # 建立空字典
-    info["Name"] = name
-    info["Age"] = age
-    for key, value in players.items():
-        info[key] = value
-    return info  # 回傳所建的字典
-
-
-player_dict = build_dict("James", "32", City="Cleveland", State="Ohio")
-
-print(player_dict)  # 列印所建字典
-
-print("------------------------------------------------------------")  # 60個
-
-
-def factorial(n):
-    # 計算n的階乘, n 必須是正整數
-    if n == 1:
-        return 1
-    else:
-        return n * factorial(n - 1)
-
-
-value = 3
-print(value, " 的階乘結果是 = ", factorial(value))
-value = 5
-print(value, " 的階乘結果是 = ", factorial(value))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def printmsg():
-    # 函數本身沒有定義變數, 只有執行列印全域變數功能
-    print("函數列印: ", msg)  # 列印全域變數
-
-
-msg = "Global Variable"  # 設定全域變數
-print("主程式列印: ", msg)  # 列印全域變數
-printmsg()  # 呼叫函數
-
-print("------------------------------------------------------------")  # 60個
-
-print("111")
-
-
-def printmsg():
-    # 函數本身有定義變數, 將執行列印區域變數功能
-    msg = "Local Variable"  # 設定區域變數
-    print("函數列印: ", msg)  # 列印區域變數
-
-
-msg = "Global Variable"  # 這是全域變數
-print("主程式列印: ", msg)  # 列印全域變數
-printmsg()  # 呼叫函數
-
-print("------------------------------------------------------------")  # 60個
-
-print("222")
-
-
-def defmsg():
-    msg = "pringmsg variable"
-
-
-def printmsg():
-    print(msg)  # 列印defmsg( )函數定義的區域變數
-
-
-printmsg()  # 呼叫printmsg( )
-
-print("------------------------------------------------------------")  # 60個
-
-print("333")
-
-
-def defmsg():
-    msg = "pringmsg variable"
-
-
-print(msg)  # 主程式列印區域變數產生錯誤
-
-print("------------------------------------------------------------")  # 60個
-
-
-def printmsg():
-    global msg
-    msg = "Java"  # 更改全域變數
-    print("更改後: ", msg)
-
-
-msg = "Python"
-print("更改前: ", msg)
-printmsg()
-
-print("------------------------------------------------------------")  # 60個
-
-# 定義lambda函數
-square = lambda x: x**2
-
-# 輸出平方值
-print(square(10))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_32.py
-
-
-# ch11_32.py
-# 使用一般函數
-def square(x):
-    value = x**2
-    return value
-
-
-# 輸出平方值
-print(square(10))
-
-print("------------------------------------------------------------")  # 60個
-
-# 定義lambda函數
-product = lambda x, y: x * y
-
-# 輸出相乘結果
-print(product(5, 10))
-
-print("------------------------------------------------------------")  # 60個
-
-
-def oddfn(x):
-    return x if (x % 2 == 1) else None
-
-
-mylist = [5, 10, 15, 20, 25, 30]
-filter_object = filter(oddfn, mylist)  # 傳回filter object
-
-# 輸出奇數串列
-print("奇數串列: ", [item for item in filter_object])
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_35.py
-
-
-# ch11_35.py
-def oddfn(x):
-    return x if (x % 2 == 1) else None
-
-
-mylist = [5, 10, 15, 20, 25, 30]
-filter_object = filter(oddfn, mylist)  # 傳回filter object
-oddlist = [item for item in filter_object]
-# 輸出奇數串列
-print("奇數串列: ", oddlist)
-
-print("------------------------------------------------------------")  # 60個
-
-mylist = [5, 10, 15, 20, 25, 30]
-
-oddlist = list(filter(lambda x: (x % 2 == 1), mylist))
-
-# 輸出奇數串列
-print("奇數串列: ", oddlist)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python零基礎最強入門之路-王者歸來\ch11\ch11_37.py
-
-# ch11_37.py
-mylist = [5, 10, 15, 20, 25, 30]
-
-squarelist = list(map(lambda x: x**2, mylist))
-
-# 輸出串列元素的平方值
-print("串列的平方值: ", squarelist)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def fun(arg):
-    pass
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def fun(arg):
-    pass
-
-
-print("列出fun的type類型   :      ", type(fun))
-print("列出lambda的type類型:      ", type(lambda x: x))
-print("列出內建函數abs的type類型: ", type(abs))
-
-print("------------------------------------------------------------")  # 60個
-
-print("目前Python版本是: ", sys.version)
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print(bool(0))
-print(bool(""))
-print(bool(" "))
-print(bool(1))
-print(bool("XYZ"))
-
-print("------------------------------------------------------------")  # 60個
-
-num = 123
-print(num)
-num1 = bin(num)  # 2進位
-print(num1)
-num2 = oct(num)  # 8進位
-print(num2)
-
-num3 = 1234
-print(num3)
-print(int(num1, 2))  # 將2進位的字串轉換成10進位數值
-print(int(num2, 8))  # 將8進位的字串轉換成10進位數值
-# print(int(num3,16))#將16進位的字串轉換成10進位數值 fail in sugar
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\change.py
-
-str = "{1} * {0} = {2}"
-a = 3
-b = "5"
-print(str.format(a, b, a * int(b)))
-
-print("------------------------------------------------------------")  # 60個
-
-year = 2024
-month = 1
-day = 20
-print("日期：%s-%s-%s" % (year, month, day))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\digit.py
-
-print("請輸入一個十進位數: ", end="")
-Val = 1234
-print("Val的八進位數=%o" % Val)  # 以%o格式化字元輸出
-print("Val的十六進位數=%x" % Val)  # 以%x格式化字元輸出
-
-print("------------------------------------------------------------")  # 60個
-
-company = "藍海科技股份有限公司"
-year = 27
-print("{}已成立公司 {} 年".format(company, year))
-
-print("------------------------------------------------------------")  # 60個
-
-print("{0:10}收入：{1:_^12}".format("Axel", 52000))
-print("{0:10}收入：{1:>12}".format("Michael", 87000))
-print("{0:10}收入：{1:*<12}".format("May", 36000))
-
-print("------------------------------------------------------------")  # 60個
-
-num = 168
-print("數字 %s 的浮點數：%5.1f" % (num, num))
-print("數字 %s 的八進位：%o" % (num, num))
-print("數字 %s 的十六進位：%x" % (num, num))
-print("數字 %s 的二進位：%s" % (num, bin(num)))
-
-print("------------------------------------------------------------")  # 60個
-
-print("編號 姓名    底薪  業務獎金 加給補貼")
-print("%3d %3s %6d %6d %6d" % (801, "朱正富", 32000, 10000, 5000))
-print("%3d %3s %6d %6d %6d" % (805, "曾自強", 35000, 8000, 7000))
-print("%3d %3s %6d %6d %6d" % (811, "陳威動", 43000, 15000, 6000))
-
-print("------------------------------------------------------------")  # 60個
-
-print("13579")
-print("1+2")
-print("Hello, how are you?")
-print("I'm all right, but it's raining.")
-print("I'm all right, but it's raining.")
-
-print("------------------------------------------------------------")  # 60個
-
-print(type(23))  # 輸出結果 <class 'int'>
-print(type(3.14))  # 輸出結果 <class 'float'>
-print(type("happy birthday"))  # 輸出結果 <class 'str'>
-print(type(True))  # 輸出結果 <class 'bool'>
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch02\variable.py
-
-num1 = 30
-print(num1)
-num1 = "happy"
-print(num1)
-a = b = 12
-print(a, b)
-name, salary, weight = "陳大富", 60000, 85.7
-print(name, salary, weight)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\bit_op.py
-
-x = 15
-y = 10
-print(x & y)
-print(x ^ y)
-print(x | y)
-print(~x)
-
-print("------------------------------------------------------------")  # 60個
-
-a = 19
-b = 13
-# 比較運算子運算關係
-print("a=%d b=%d " % (a, b))
-print("--------------------------------")
-print("a>b,比較結果為 %d 值" % (a > b))
-print("a<b,比較結果為 %d 值" % (a < b))
-print("a>=b,比較結果為 %d 值" % (a >= b))
-print("a<=b,比較結果為 %d 值" % (a <= b))
-print("a==b,比較結果為 %d 值" % (a == b))
-print("a!=b,比較結果為 %d 值" % (a != b))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\compound.py
-
-num = 8
-num *= 9
-print(num)
-num += 1
-print(num)
-num //= 9
-print(num)
-num %= 5
-print(num)
-num -= 2
-print(num)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\cost.py
-
-x = (765 / 17 + 1) * 2 * 210
-print("共需花費: %d 元" % x)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch03\logic.py
-
-a, b, c = 5, 10, 6
-result = a > b and b > c
-# 條件式a>b的傳回值與條件式b>c的傳回值做and運算
-result = a < b or c != a
-# 條件式a<b的傳回值與條件式c!=a的傳回值做or運算
-result = not result
-# 將result的值做not運算
-
-print("------------------------------------------------------------")  # 60個
-
-a, b, c = 3, 5, 7  # 宣告a、b及c三個整數變
-print("a= %d b= %d c= %d" % (a, b, c))
-print("====================================")
-print("a<b and b<c or c<a = %d" % (a < b and b < c or c < a))
-print("not(a==b)and (not a<b) = %d" % (not (a == b) and (not a < b)))
-# 包含關係與邏輯運算子的運算式求值
-
-print("------------------------------------------------------------")  # 60個
-
-b = 13
-print(b << 2)
-print(b >> 1)
-
 print("------------------------------------------------------------")  # 60個
 
-phrase = ["三陽開泰", "事事如意", "五福臨門"]
-for index, x in enumerate(phrase):
-    print("{0}--{1}".format(index, x))
+dslt
+James = ["Lebron James", 23, 19, 22, 31, 18]  # 定義James串列
+Love = ["Kevin Love", 20, 18, 30, 22, 15]  # 定義Love串列
+game3 = James[4] + Love[4]
+LKgame = James[0] + " 和 " + Love[0] + "第四場總得分 = "
+print(LKgame, game3)
 
-print("------------------------------------------------------------")  # 60個
-
-for a in range(1, 6):  # 外層for迴圈控制
-    for b in range(1, a + 1):  # 內層for迴圈控制
-        if b == 4:
-            break
-        print(b, end="")  # 印出b的值
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-total = 0
-for count in range(1, 100, 2):
-    total += count  # 將數值累加
-print("數值1~100之間的奇數累計=", total)
-
-print("------------------------------------------------------------")  # 60個
-
-k = 20
-sigma = 0
-for n in range(int(k) + 1):
-    if n % 2 != 0:  # 如果n是奇數
-        sigma += float(-1 / (2 * n + 1))
-    else:  # 如果n是偶數
-        sigma += float(1 / (2 * n + 1))
-print("PI = %f" % (sigma * 4))
-
-print("------------------------------------------------------------")  # 60個
-
-# 不一樣
-k = 20
-sigma = 0
-for n in range(0, k, 1):
-    if n & 1:  # 如果n是奇數
-        sigma += float(-1 / (2 * n + 1))
-    else:  # 如果n是偶數
-        sigma += float(1 / (2 * n + 1))
-print("PI = %f" % (sigma * 4))
-
-print("------------------------------------------------------------")  # 60個
-
-# 九九乘法表的雙重迴圈
-for i in range(1, 10):
-    for j in range(1, 10):
-        print("{0}*{1}={2:2d}  ".format(i, j, i * j), sep="\t", end="")
-        if j >= 7:
-            break  # 設定跳出的條件
-    print("\n-------------------------------------------------------\n")
-
-print("------------------------------------------------------------")  # 60個
-
-for x in range(1, 10):
-    for y in range(1, 10):
-        print("{0}*{1}={2: ^2}".format(y, x, x * y), end=" ")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch05\while.py
-
-x, y = 1, 10
-while x < y:
-    print(x, end=" ")
-    x += 1
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\align.py
-
-str1 = "Python is funny and powerful"
-print("原字串", str1)
-print("欄寬40，字串置中", str1.center(40))
-print("字串置中，* 填補", str1.center(40, "*"))
-print("欄寬10，字串靠左", str1.ljust(40, "="))
-print("欄寬40，字串靠右", str1.rjust(40, "#"))
-
-mobilephone = "931666888"
-print("字串左側補0:", mobilephone.zfill(10))
 
-str2 = "Mayor,President"
-print("以逗點分割字元", str2.partition(","))
-
-str3 = "禮\n義\n廉\n恥"
-print("依\\n分割字串", str3.splitlines(False))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "Happy birthday to my best friend."
-s1 = str1.count("to", 0)  # 從str1字串索引0的位置開始搜尋
-s2 = str1.count("e", 0, 34)  # 搜尋str1從索引值0到索引值34-1的位置
-print("{}\n「to」出現{}次,「e」出現{}次".format(str1, s1, s2))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExCarry.py
-
-i = 10
-
-for j in range(5):
-    z = i + j
-    print("小寫：%x\t大寫：%X" % (z, z))
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-dictStudent = {}
-
-def isHasKeyAndNotNone():
-    findKey = str(input("請輸入欲查詢的key："))
-    
-    if findKey in dictStudent and dictStudent.get(findKey, None) == None:
-        EditData(findKey)
-        
-    elif findKey in dictStudent and dictStudent.get(findKey, None) != None:
-        print("%s的值：%s" %(findKey, dictStudent[findKey]))
-        CheckOtherKeyValue()
-        
-    else:
-        dictStudent.setdefault(findKey, None)
-        print("%s不存在已自動建立key" %(findKey))
-
-def EditData(findKey):
-    strInputValue = str(input("請輸入值："))
-    dictStudent[findKey] = strInputValue
-    CheckOtherKeyValue()
-
-def CheckOtherKeyValue():
-    for key, values in dictStudent.items():
-        if values == None:
-            print(dictStudent)
-            strCheck = str(input("目前還有其他欄位值為None，是否繼續進行編輯(Y/N)："))
-
-            while strCheck == "Y":
-                isHasKeyAndNotNone()
-            else:
-                print(dictStudent)
-                break
-
-strFieldName = str(input("請輸入欄位名稱(以逗號分隔)："))
-dictStudent = dictStudent.fromkeys(strFieldName.split(","))
-
-isHasKeyAndNotNone()
-"""
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExFloat.py
 
-print("\n不足數位補0：%06.2f\n" % (1.2345))
+dslt
 
-print("不足數位預設空格：%6.2f\n" % (1.2345))
+warriors = ["Curry", "Durant", "Iquodala", "Bell", "Thompson"]
+print("2018年初NBA勇士隊主將陣容", warriors)
+del warriors[3]  # 不明原因離隊
+print("2018年末NBA勇士隊主將陣容", warriors)
 
-print("小數點保留2位：%.2f\n" % (1.2345))
-
-print("不足數位補0(以*替代)：%0*.2f\n" % (6, 1.2345))
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExInteger.py
 
-print("\n不足數位補0：%05d\n" % (66))
+nums1 = [1, 3, 5]
+print("刪除nums1串列索引1元素前   = ", nums1)
+del nums1[1]
+print("刪除nums1串列索引1元素後   = ", nums1)
+nums2 = [1, 2, 3, 4, 5, 6]
+print("刪除nums2串列索引[0:2]前   = ", nums2)
+del nums2[0:2]
+print("刪除nums2串列索引[0:2]後   = ", nums2)
+nums3 = [1, 2, 3, 4, 5, 6]
+print("刪除nums3串列索引[0:6:2]前 = ", nums3)
+del nums3[0:6:2]
+print("刪除nums3串列索引[0:6:2]後 = ", nums3)
 
-print("不足數位預設空格：%5d\n" % (66))
-
-print("小於位數則輸出全部：%2d\n" % (666))
-
-print("不足數位補0(以*替代)：%0*d\n" % (5, 66))
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch06\ExList.py
 
-list1 = ["A", True, 10, 3.14, "G"]
+cars = ["Toyota", "Nissan", "Honda"]
+print("cars串列長度是 = %d" % len(cars))
+if len(cars) != 0:
+    del cars[0]
+    print("刪除cars串列元素成功")
+    print("cars串列長度是 = %d" % len(cars))
+else:
+    print("cars串列內沒有元素資料")
+nums = []
+print("nums串列長度是 = %d" % len(nums))
+if len(nums) != 0:
+    del nums[0]
+    print("刪除nums串列元素成功")
+else:
+    print("nums串列內沒有元素資料")
 
-for i in range(len(list1)):
-    print("索引位置：%s\t對應值：%s\t型態：%s\n" % (i, list1[i], type(list1[i])))
-
 print("------------------------------------------------------------")  # 60個
-
-"""
-def EditData():
-    if len(strEditTitle) > 0:
-        print(strEditTitle)
-    else:
-        print(strTitle)
-
-    print("作者：", strName)
-    print("暱稱：", strId)
-    print("Gmail：", strEmail)
-    print("興趣：", strJoin)
-
-strTitle = ""
-strEditTitle = "撰寫Python小網站"
-
-isEditTitle = str(input("是否要更改名稱(Y/N)："))
-isSymbol = str(input("是否要更改前後星號(Y/N)："))
-
-if isEditTitle == "Y" and isSymbol == "Y":
-    strEditTitle = str(input("請輸入欲更改名稱："))
-    strSymbol = str(input("請輸入欲更改前後符號："))
-
-    strEditTitle = strEditTitle.center(36, strSymbol)
-    
-elif isEditTitle == "Y" and isSymbol == "N":
-    strEditTitle = str(input("請輸入欲更改名稱："))
-    strEditTitle = strEditTitle.center(36, "*")
 
-elif isEditTitle == "N" and isSymbol == "Y":
-    strSymbol = str(input("請輸入欲更改前後符號："))
-    strTitle = strTitle.center(36, strSymbol)
 
-strName = str(input("請輸入名字："))
-strId = str(input("請輸入暱稱："))
-strEmail = str(input("請輸入Gmail："))
 
-while strEmail.endswith("@gmail.com") == False:
-    strEmail = str(input("請重新輸入Gmail："))
 
-strSavor = str(input("你的興趣(以逗號分隔)："))
-strJoin = "|".join(strSavor.split(","))
+cars = ["Honda", "Toyota", "Ford"]
+print("目前串列內容 = ", cars)
+print("在索引1位置插入Nissan")
+cars.insert(1, "Nissan")
+print("新的串列內容 = ", cars)
+print("在索引0位置插入BMW")
+cars.insert(0, "BMW")
+print("最新串列內容 = ", cars)
 
-
-print("="*30, "\n")
-EditData()
-
-print("------------------------------------------------------------")  # 60個
-
-tupleData = ()
-listData = []
-
-print("\n\n")
-
-strFieldName = str(input("請輸入不可修改欄位名稱(逗號為分隔索引位置；頓號則為放置在同一個索引位置)："))
-strFieldData = str(input("請輸入欄位對應資料(逗號為分隔索引位置；頓號則為放置在同一個索引位置)："))
-
-for i in range(len(strFieldName.split(","))):
-    listData.append(strFieldName.split(",")[i])
-    
-for j in range(len(strFieldData.split(","))):
-    x = 0
-
-    if len(listData)%2 == 0:
-        x = len(listData) - 1
-    else:
-        x = len(listData) + 1
-        
-    listData.insert(x, [strFieldData.split(",")[j] for x in range(1)])
-    
-listToTuple = tuple(listData)
-print("\n")
-print("list轉換tuple：", listToTuple)
-
 print("------------------------------------------------------------")  # 60個
 
+cars = ["Honda", "Toyota", "Ford", "BMW"]
+print("目前串列內容 = ", cars)
+print("使用pop( )刪除串列元素")
+popped_car = cars.pop()  # 刪除串列末端值
+print("所刪除的串列內容是 : ", popped_car)
+print("新的串列內容 = ", cars)
+print("使用pop(1)刪除串列元素")
+popped_car = cars.pop(1)  # 刪除串列索引為1的值
+print("所刪除的串列內容是 : ", popped_car)
+print("新的串列內容 = ", cars)
 
 print("------------------------------------------------------------")  # 60個
-
-#設置底薪(BaseSalary)、結案獎金件數(Case)、職位獎金(OfficeBonus)
-BaseSalary = 25000
-CaseBonus = 1000
-OfficeBonus = 5000
 
-#請輸入職位名稱(Engineer)、結案獎金金額(CaseAmount)變數
-Engineer = str(input("請輸入職位名稱："))
-Case = int(input("請輸入結案案件數(整數)："))
+cars = ["Honda", "bmw", "Toyota", "Ford", "bmw"]
+print("目前串列內容 = ", cars)
+print("使用remove( )刪除串列元素")
+expensive = "bmw"
+cars.remove(expensive)  # 刪除第一次出現的元素bmw
+print("所刪除的內容是: " + expensive.upper() + " 因為太貴了")
+print("新的串列內容", cars)
 
-
-#計算獎金function
-def CalculateCase(case, caseBonus):
-    return case * caseBonus
-
-def CalculateSalary(baseSalary, officeBonus):
-    return baseSalary + officeBonus
-
-CaseAmount = CalculateCase(Case, CaseBonus)
-SalaryAmount = CalculateSalary(BaseSalary, OfficeBonus)
-
-print("該工程師薪資：", CaseAmount + SalaryAmount)
-"""
 print("------------------------------------------------------------")  # 60個
-
-import time
-
-t = time.time()
-tLocal = time.localtime(t)
-
-print("轉換時間形式(年/月/日)：", time.strftime("%Y/%m/%d", tLocal))
-print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime(tLocal))
 
+cars = ["Honda", "bmw", "Toyota", "Ford", "bmw"]
+print("目前串列內容 = ", cars)
+# 直接列印cars[::-1]顛倒排序,不更改串列內容
+print("列印使用[::-1]顛倒排序\n", cars[::-1])
+# 更改串列內容
+print("使用reverse( )顛倒排序串列元素")
+cars.reverse()  # 顛倒排序串列
+print("新的串列內容 = ", cars)
+
 print("------------------------------------------------------------")  # 60個
 
-# 以 dir() 與 help() 探索 Python 模組與物件
+cars = ["honda", "bmw", "toyota", "ford"]
+print("目前串列內容 = ", cars)
+print("使用sort( )由小排到大")
+cars.sort()
+print("排序串列結果 = ", cars)
+nums = [5, 3, 9, 2]
+print("目前串列內容 = ", nums)
+print("使用sort( )由小排到大")
+nums.sort()
+print("排序串列結果 = ", nums)
+
+print("------------------------------------------------------------")  # 60個
+
+cars = ["honda", "bmw", "toyota", "ford"]
+print("目前串列內容 = ", cars)
+print("使用sort( )由大排到小")
+cars.sort(reverse=True)
+print("排序串列結果 = ", cars)
+nums = [5, 3, 9, 2]
+print("目前串列內容 = ", nums)
+print("使用sort( )由大排到小")
+nums.sort(reverse=True)
+print("排序串列結果 = ", nums)
 
-import datetime
-
-print(dir(datetime))
-
-print("")
-
-print([_ for _ in dir(datetime) if "date" in _.lower()])
-
-# help(datetime)
-
 print("------------------------------------------------------------")  # 60個
-
-# id的用法
-
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
-cfruits = fruits.copy()
-print("位址 = ", id(fruits), "  fruits元素 = ", fruits)
-print("位址 = ", id(cfruits), "  fruits元素 = ", cfruits)
-
-
-print("ccccc")
-
-s1 = "lion"
-s2 = "mouse"
-
-print(id(s1))
-print(id(s2))
-
-s2 = "lions"
-
-print(id(s1))
-print(id(s2))
-
 
-print("測試 eval()")
+cars = ["honda", "bmw", "toyota", "ford"]
+print("目前串列car內容 = ", cars)
+print("使用sorted( )由小排到大")
+cars_sorted = sorted(cars)
+print("排序串列結果 = ", cars_sorted)
+print("原先串列car內容 = ", cars)
+nums = [5, 3, 9, 2]
+print("目前串列num內容 = ", nums)
+print("使用sorted( )由小排到大")
+nums_sorted = sorted(nums)
+print("排序串列結果 = ", nums_sorted)
+print("原先串列num內容 = ", nums)
 
-numberStr = "12.34*56.78"
-print("數值公式 :", numberStr)
-
-number = eval(numberStr)
-print("計算結果 : %5.2f" % number)
-
-
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
+cars = ["honda", "bmw", "toyota", "ford"]
+print("目前串列car內容 = ", cars)
+print("使用sorted( )由大排到小")
+cars_sorted = sorted(cars, reverse=True)
+print("排序串列結果    = ", cars_sorted)
+print("原先串列car內容 = ", cars)
+nums = [5, 3, 9, 2]
+print("目前串列num內容 = ", nums)
+print("使用sorted( )由大排到小")
+nums_sorted = sorted(nums, reverse=True)
+print("排序串列結果    = ", nums_sorted)
+print("原先串列num內容 = ", nums)
 
-html_str = "<p>Hello World!</p>"
-soup = BeautifulSoup(html_str, "lxml")
-print(soup)
-
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
+cars = ["toyota", "nissan", "honda"]
+search_str = "nissan"
+i = cars.index(search_str)
+print("所搜尋元素 %s 第一次出現位置索引是 %d" % (search_str, i))
+nums = [7, 12, 30, 12, 30, 9, 8]
+search_val = 30
+j = nums.index(search_val)
+print("所搜尋元素 %s 第一次出現位置索引是 %d" % (search_val, j))
 
-soup = BeautifulSoup("<html> Lollipop </html>", "html.parser")
 
 print("------------------------------------------------------------")  # 60個
-
-import requests
-
-from bs4 import BeautifulSoup
 
-html_data = requests.get("http://tw.yahoo.com")
+James = ["Lebron James", 23, 19, 22, 31, 18]  # 定義James串列
+games = len(James)  # 求元素數量
+score_Max = max(James[1:games])  # 最高得分
+i = James.index(score_Max)  # 場次
+print(James[0], "在第 %d 場得最高分 %d" % (i, score_Max))
 
-soup = BeautifulSoup(html_data.text, "html.parser")
-
-print(soup.title)
-
 print("------------------------------------------------------------")  # 60個
-
-import requests
 
-from bs4 import BeautifulSoup
+cars = ["toyota", "nissan", "honda"]
+search_str = "nissan"
+num1 = cars.count(search_str)
+print("所搜尋元素 %s 出現 %d 次" % (search_str, num1))
+nums = [7, 12, 30, 12, 30, 9, 8]
+search_val = 30
+num2 = nums.count(search_val)
+print("所搜尋元素 %s 出現 %d 次" % (search_val, num2))
 
-game_ranking_html = requests.get(
-    "https://www.kamatari.org/blog/2021/best-games-of-2021/"
-)
 
-soup = BeautifulSoup(game_ranking_html.text, "html.parser")
-
-for game in soup.findAll("h2"):
-    print(game.text)
-
 print("------------------------------------------------------------")  # 60個
 
-import requests
-from bs4 import BeautifulSoup
+char = "-"
+lst = ["Silicon", "Stone", "Education"]
+print(char.join(lst))
+char = "***"
+lst = ["Silicon", "Stone", "Education"]
+print(char.join(lst))
+char = "\n"  # 換行字元
+lst = ["Silicon", "Stone", "Education"]
+print(char.join(lst))
 
-game_ranking_html = requests.get(
-    "https://www.kamatari.org/blog/2021/best-games-of-2021/"
-)
-soup = BeautifulSoup(game_ranking_html.text, "html.parser")
-for game in soup.findAll("h2"):
-    print(game.text)
-
 print("------------------------------------------------------------")  # 60個
 
-print(type(23))  # 輸出結果 <class 'int'>
-print(type(3.14))  # 輸出結果 <class 'float'>
-print(type("happy birthday"))  # 輸出結果 <class 'str'>
-print(type(True))  # 輸出結果 <class 'bool'>
+James = [["Lebron James", "SF", "12/30/84"], 23, 19, 22, 31, 18]  # 定義James串列
+games = len(James)  # 求元素數量
+score_Max = max(James[1:games])  # 最高得分
+i = James.index(score_Max)  # 場次
+name = James[0][0]
+position = James[0][1]
+born = James[0][2]
+print("姓名     : ", name)
+print("位置     : ", position)
+print("出生日期 : ", born)
+print("在第 %d 場得最高分 %d" % (i, score_Max))
 
 print("------------------------------------------------------------")  # 60個
-
 
-"""
-# python 預設函數
+cars1 = ["toyota", "nissan", "honda"]
+cars2 = ["ford", "audi"]
+print("原先cars1串列內容 = ", cars1)
+print("原先cars2串列內容 = ", cars2)
+cars1.append(cars2)
+print("執行append( )後串列cars1內容 = ", cars1)
+print("執行append( )後串列cars2內容 = ", cars2)
 
-range(0
-dir()
-help()
-
-
-"""
-
-
-"""
-type()
-int()
-float()
-
-
-"""
-
-
-print("python之基本函數")
-print("int(8.4)=", int(8.4))
-print("bin(14)=", bin(14))
-# print('hex(84)=',hex(84))
-print("oct(124)=", oct(124))
-print("float(6)=", float(6))
-print("abs(-6.4)=", abs(-6.4))
-print("divmod(58,5)=", divmod(58, 5))
-print("pow(3,4)=", pow(3, 4))
-print("round(3.5)=", round(3.5))
-print("chr(68)=", chr(68))
-print("ord('%s')=%d" % ("A", ord("A")))
-# print('str(1234)=',str(1234))
-print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
-print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
-print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
-print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
-
 print("------------------------------------------------------------")  # 60個
-
 
-print("int(8.4)=", int(8.4))
-print("bin(14)=", bin(14))
-# print("hex(84)=", hex(84))
-print("oct(124)=", oct(124))
-print("float(6)=", float(6))
-print("abs(-6.4)=", abs(-6.4))
-print("divmod(58,5)=", divmod(58, 5))
-print("pow(3,4)=", pow(3, 4))
-print("round(3.5)=", round(3.5))
-print("chr(68)=", chr(68))
-print("ord('%s')=%d" % ("A", ord("A")))
-# print("str(1234)=", str(1234))
-print("sorted([5,7,1,8,9])=", sorted([5, 7, 1, 8, 9]))
-print("max(4,6,7,12,3)=", max(4, 6, 7, 12, 3))
-print("min(4,6,7,12,3)=", min(4, 6, 7, 12, 3))
-print("len([5,7,1,8,9])=", len([5, 7, 1, 8, 9]))
+cars1 = ["toyota", "nissan", "honda"]
+cars2 = ["ford", "audi"]
+print("原先cars1串列內容 = ", cars1)
+print("原先cars2串列內容 = ", cars2)
+cars1.extend(cars2)
+print("執行extend( )後串列cars1內容 = ", cars1)
+print("執行extend( )後串列cars2內容 = ", cars2)
 
 print("------------------------------------------------------------")  # 60個
 
+mysports = ["basketball", "baseball"]
+friendsports = mysports
+print("我喜歡的運動     = ", mysports)
+print("我朋友喜歡的運動 = ", friendsports)
 
-x = -10
-print("以下輸出abs( )函數的應用")
-print(x)  # 輸出x變數
-print(abs(x))  # 輸出abs(x)
-x = 5
-y = 3
-print("以下輸出pow( )函數的應用")
-print(pow(x, y))  # 輸出pow(x,y)
-x = 47.5
-print("以下輸出round(x)函數的應用")
-print(x)  # 輸出x變數
-print(round(x))  # 輸出round(x)
-x = 48.5
-print(x)  # 輸出x變數
-print(round(x))  # 輸出round(x)
-x = 49.5
-print(x)  # 輸出x變數
-print(round(x))  # 輸出round(x)
-print("以下輸出round(x,n)函數的應用")
-x = 2.15
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-x = 2.25
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-x = 2.151
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-x = 2.251
-print(x)  # 輸出x變數
-print(round(x, 1))  # 輸出round(x,1)
-
 print("------------------------------------------------------------")  # 60個
 
-r = abs(-10)
-print("abs(-10) = ", r)
-r = abs(5)
-print("abs(5) = ", r)
-r = pow(8, 2)
-print("pow(8, 2) = ", r)
-r = pow(2, 3)
-print("pow(2, 3) = ", r)
-r = max(9, 3, 12, 32, 81, 92)
-print("max(9, 3, 12, 32, 81, 92) = ", r)
-r = min(9, 3, 12, 32, 81, 92)
-print("min(9, 3, 12, 32, 81, 92) = ", r)
-r = round(5.32)
-print("round(5.32) = ", r)
-r = round(5.52)
-print("round(5.52) = ", r)
-r = round(3.14568757, 3)
-print("round(3.14568757, 3) = ", r)
-r = round(3.14568757, 1)
-print("round(3.14568757, 1) = ", r)
-
-
-number = 3.14159
-print("四捨五入到小數點後兩位：", round(number, 4))
+mysports = ["basketball", "baseball"]
+friendsports = mysports
+print("我喜歡的運動     = ", mysports)
+print("我朋友喜歡的運動 = ", friendsports)
+mysports.append("football")
+friendsports.append("soccer")
+print("我喜歡的最新運動     = ", mysports)
+print("我朋友喜歡的最新運動 = ", friendsports)
 
 
-print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個

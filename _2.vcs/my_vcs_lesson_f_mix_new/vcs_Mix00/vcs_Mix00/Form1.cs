@@ -634,54 +634,6 @@ namespace vcs_Mix00
 
         private void button14_Click(object sender, EventArgs e)
         {
-            /*
-            //StringBuilder
-
-            //建立StringBuilder物件
-            StringBuilder text = new StringBuilder();
-
-            richTextBox1.Text += "預設容量：" + text.Capacity.ToString() + "\n";
-
-            //使用 Append()方法附加字串
-            text.Append("ABCDEFGHIJ");
-            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
-            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
-
-            //再增加一筆資料 容量會長大
-            text.Append("ABCDEFGHIJ");
-            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
-            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
-
-            richTextBox1.Text += "在字串尾端加入換行字元後\n";
-            text.AppendLine("\n");
-            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
-            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
-
-            richTextBox1.Text += "在字串尾端加入另一個字串後\n";
-            text.AppendLine("It is a wonderful English proverb.");
-            richTextBox1.Text += "目前長度：" + text.Length.ToString() + "\n";
-            richTextBox1.Text += "目前容量：" + text.Capacity.ToString() + "\n";
-
-            richTextBox1.Text += "目前字串：" + text + "\n";
-
-            richTextBox1.Text += "改變內容\n";
-            for (int i = 0; i < 3; i++)
-            {
-                text[i] = 'X';
-            }
-
-            richTextBox1.Text += "變更後字串：" + text + "\n";
-
-
-            //Remove()方法, 只移除一次
-            string dddd = "EFG";    //欲移除字串
-            //取得欲刪除字串的索引編號
-            int index = text.ToString().IndexOf(dddd);
-            if (index >= 0)
-                text.Remove(index, dddd.Length);
-            richTextBox1.Text += "變更後字串：" + text + "\n";
-            */
-
             int i;
             //string camera_serial_data = "EC041302870012 @";
             string camera_serial_data = "ABCDEFGABCDEFGAB";
@@ -692,7 +644,6 @@ namespace vcs_Mix00
                 richTextBox1.Text += ((int)camera_serial_data[i]).ToString("X2") + " ";
             }
             richTextBox1.Text += "\n";
-
 
             //檢查英數字元的正確性
             bool flag_serial_data_wrong = false;

@@ -642,7 +642,6 @@ print("將檔案移到資源回收筒")
 import send2trash
 filename = "picture1cccc.jpg"
 send2trash.send2trash(filename)  
-'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -662,10 +661,63 @@ with shelve.open('phonebook') as phone:
 
 print("------------------------------------------------------------")  # 60個
 
-
 import shelve
 with shelve.open('phonebook') as phone:
     for name in phone:
         print(phone[name])
 
+print("------------------------------------------------------------")  # 60個
+
+from deep_translator import GoogleTranslator
+
+# 要翻譯的文本
+text = '早安'
+
+# 翻譯成英文
+translator = GoogleTranslator(source='auto', target='en')
+translation_en = translator.translate(text)
+print("英文:", translation_en)
+
+# 翻譯成日文, 另一種寫法
+translation_ja = GoogleTranslator(source='auto', target='ja').translate(text)
+print("日文:", translation_ja)
+
+# 翻譯成韓文
+translation_ko = GoogleTranslator(source='auto', target='ko').translate(text)
+print("韓文:", translation_ko)
+
+
+print("------------------------------------------------------------")  # 60個
+
+import keyword
+
+keywordLists = ['as', 'while', 'break', 'sse', 'Python']
+for x in keywordLists:
+    print(f"{x:>8s} {keyword.iskeyword(x)}")
+
+print("------------------------------------------------------------")  # 60個
+
+import pygal.maps.world
+
+worldMap = pygal.maps.world.World()                     # 建立世界地圖物件
+worldMap.title = 'Populations in China/Japan/Thailand'  # 世界地圖標題
+worldMap.add('Asia',{'cn':1262645000,
+                     'jp':126870000,
+                     'th':63155029})                    # 標記人口資訊
+worldMap.add('Europe',{'fr':60762406,
+                     'se':1011781,
+                     'sz':7184798})                    # 標記人口資訊
+worldMap.add('Africa',{'cd':49626496,
+                     'eg':67649043,
+                     'za':44000833})                    # 標記人口資訊
+worldMap.add('North America',{'us':282162848,
+                     'mx':99959895,
+                     'ca':30770661})                    # 標記人口資訊
+worldMap.render_to_file('tmp_world_map.svg')            # 儲存地圖檔案
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 

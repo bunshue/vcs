@@ -1,7 +1,25 @@
+"""
+準備清除
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_9.py
+
+# ch8_9.py
+
+
+準備撈出
+
+class bank  class Banks():
+
+def
+
+import traceback
+
+
+
+
+"""
+
 import sys
 
-
-'''
 print("------------------------------------------------------------")  # 60個
 
 import inspect
@@ -121,11 +139,6 @@ print('x = ', x)                        # 輸出x變數
 print('round(2.251,1) = ', round(x,1))  # 輸出round(x,1)
 
 
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -134,8 +147,6 @@ str2 = '明志工專'
 print(str1, str2, sep=" $$$ ")  # 以 $$$ 值位置分隔資料輸出
 
 print(str1, str2, sep="\t")     # 以Tab鍵值位置分隔資料輸出
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -150,9 +161,6 @@ print("/%10.3s/" % string)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_16.py
-
-# ch4_16.py
 r = 5
 PI = 3.14159
 area = PI * r ** 2
@@ -161,29 +169,22 @@ print("/半徑{0:>3d}圓面積是{1:>10.2f}/".format(r,area))
 print("/半徑{0:<3d}圓面積是{1:<10.2f}/".format(r,area))
 print("/半徑{0:^3d}圓面積是{1:^10.2f}/".format(r,area))
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_17.py
-
-# ch4_17.py
 title = "南極旅遊講座"
 print("/{0:*^20s}/".format(title))
 
+
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_18.py
-
-# ch4_18.py
+""" 不可用 會讓後面出現 TypeError: 'str' object is not callable
 url = "https://maps.apis.com/json?city="
 city = "taipei"
 r = 1000
 type = "school"
 print(url + city + '&radius=' + str(r) + '&type=' + type)
 print(url + "{}&radius={}&type={}".format(city, r, type))
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -196,14 +197,9 @@ print(f"/半徑{r:<3d}圓面積是{area:<10.2f}/")
 print(f"/半徑{r:^3d}圓面積是{area:^10.2f}/")
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_21.py
-
-# ch4_21.py
+""" 不可用 會讓後面出現 TypeError: 'str' object is not callable
 name = '洪錦魁'
 message = f"我是{name}"
 print(message)
@@ -215,26 +211,15 @@ type = "school"
 my_url = url + f"{city}&radius={r}&type={type}"
 print(my_url)
 
-
-
-
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_22.py
-
-# ch4_22.py
 name = '洪錦魁'
 score = 90.5
 print(f"{name = }")
 print(f"物理考試 {score = }")
 print(f"物理考試 {score = :5.2f}")
-
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -249,32 +234,21 @@ print("Office.\n\n")
 print("Best Regards")
 print("Peter Malong")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_24.py
-
-# ch4_24.py
-fobj1 = open("out24w.txt", mode="w")   # 取代先前資料
+fobj1 = open("tmp_out24w.txt", mode="w")   # 取代先前資料
 print("Testing mode=w, using utf-8 format", file=fobj1)
 fobj1.close( )
-fobj2 = open("out24a.txt", mode="a")   # 附加資料後面
+fobj2 = open("tmp_out24a.txt", mode="a")   # 附加資料後面
 print("測試 mode=a 參數, 預設 ANSI 編碼", file=fobj2)
 fobj2.close( )
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_25.py
-
-# ch4_25.py
-fobj1 = open("out25w.txt", mode="w", encoding="utf-8")   
+fobj1 = open("tmp_out25w.txt", mode="w", encoding="utf-8")   
 print("Testing mode=w, using utf-8 format", file=fobj1)
 fobj1.close( )
-fobj2 = open("out25a.txt", mode="a", encoding="cp950")   
+fobj2 = open("tmp_out25a.txt", mode="a", encoding="cp950")   
 print("測試 mode=a 參數, 預設 ANSI 編碼", file=fobj2)
 fobj2.close( )
 
@@ -308,13 +282,8 @@ average = (n1 + n2 + n3) / 3
 print(f"3個數字平均是 {average:6.2f}")
 """
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_3.py
-
-# ch4_3.py
 score = 90
 name = "洪錦魁"
 count = 1
@@ -344,28 +313,18 @@ print(f"總共還款金額 {int(totalPay)}")
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
 x = 100
 print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_5.py
-
-# ch4_5.py
 x = 10
 print("整數%d \n浮點數%f \n字串%s" % (x, x, x))
 y = 9.9
 print("整數%d \n浮點數%f \n字串%s" % (y, y, y))
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_6.py
-
-# ch4_6.py
 x = 100
 print("x=/%6d/" % x)
 y = 10.5
@@ -978,9 +937,6 @@ print(f"我朋友喜歡的最新運動 = {friendsports}")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_38.py
-
-# ch6_38.py
 string = "Abc"
 # 正值索引
 print(f" {string[0] = }",
@@ -1922,7 +1878,6 @@ list_keys.append('secret')          # 增加元素
 print("列印元組", keys)
 print("列印串列", list_keys)
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_11.py
@@ -1945,32 +1900,15 @@ tup = (1, 3, 5, 7, 9)
 print("tup最大值是", max(tup))
 print("tup最小值是", min(tup))
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_13.py
-
-# ch8_13.py
+"""
 drinks = ["coffee", "tea", "wine"]
 enumerate_drinks = enumerate(drinks)                # 數值初始是0
 lst = list(enumerate_drinks)
 print("轉成串列輸出, 初始索引值是 0 = ", lst)
 print(type(lst[0]))
-
-
-
-      
-
-
-
-
-
-
-
-
-
-          
+"""        
 
 
 
@@ -2017,78 +1955,30 @@ for drink in enumerate(drinks, 10):         # 數值初始是10
 for count, drink in enumerate(drinks, 10):
     print(count, drink)
 
-
-
-
-
-
-
-
-
-
-          
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_16.py
-
-# ch8_16.py
 fields = ['Name', 'Age', 'Hometown']
 info = ['Peter', '30', 'Chicago']
 zipData = zip(fields, info)         # 執行zip
-print(type(zipData))                # 列印zip資料類型
+#print(type(zipData))                # 列印zip資料類型
 player = list(zipData)              # 將zip資料轉成串列
 print(player)                       # 列印串列
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_17.py
-
-# ch8_17.py
 fields = ['Name', 'Age', 'Hometown']
 info = ['Peter', '30']
 zipData = zip(fields, info)         # 執行zip
-print(type(zipData))                # 列印zip資料類型
+#print(type(zipData))                # 列印zip資料類型
 player = list(zipData)              # 將zip資料轉成串列
 print(player)                       # 列印串列
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_18.py
-
-# ch8_18.py
 fields = ['Name', 'Age', 'Hometown']
 info = ['Peter', '30', 'Chicago']
 zipData = zip(fields, info)         # 執行zip
-print(type(zipData))                # 列印zip資料類型
+#print(type(zipData))                # 列印zip資料類型
 player = list(zipData)              # 將zip資料轉成串列
 print(player)                       # 列印串列
 
@@ -2096,44 +1986,18 @@ f, i = zip(*player)                 # 執行unzip
 print("fields = ", f)
 print("info   = ", i)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_19.py
-
-# ch8_19.py
 dist = 384400                   # 地球到月亮距離
 speed = 1225                    # 馬赫速度每小時1225公里
 total_hours = dist // speed     # 計算小時數
 data = divmod(total_hours, 24)  # 商和餘數
-print("divmod傳回的資料型態是 : ", type(data))
+#print("divmod傳回的資料型態是 : ", type(data))
 print(f"總共需要 {data[0]} 天")
 print(f"{data[1]} 小時")
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_2.py
-
-# ch8_2.py
 numbers1 = (1, 2, 3, 4, 5)      # 定義元組元素是整數
 fruits = ('apple', 'orange')    # 定義元組元素是字串
 val_tuple = (10,)               # 只有一個元素的元祖
@@ -2146,13 +2010,8 @@ print(x,y)
 x, y = fruits
 print(x,y)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_20.py
-
-# ch8_20.py
 fields = ['台北', '台中', '高雄']
 info = [80000, 50000, 60000]
 zipData = zip(fields, info)             # 執行zip
@@ -2197,9 +2056,7 @@ print(fruits[0])                    # 列印元組fruits[0]
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_5.py
 
-# ch8_5.py
 fruits = ('apple', 'orange')        # 定義元組元素是水果
 print("原始fruits元組元素")
 for fruit in fruits:
@@ -2223,13 +2080,9 @@ print(fruits[:2])
 print(fruits[1:])
 print(fruits[-2:])
 print(fruits[0:5:2])
-      
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_7.py
-
-# ch8_7.py
 fruits = ("apple", "banana", "cherry", "date", "cherry")
 print(f"fruits 元組長度是 {len(fruits)}")    # 輸出 5
 
@@ -2239,35 +2092,21 @@ print(f"cherry 索引位置是 {index}")          # 輸出 2
 cherry_count = fruits.count("cherry")
 print(f"cherry 出現次數是 {cherry_count}")   # 輸出 2
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_8.py
-
-# ch8_8.py
 keys = ('magic', 'xaab', 9099)      # 定義元組元素是字串與數字
 print(keys)
-print(type(keys))
+#print(type(keys))
 #key = keys.pop( )                   # 錯誤 無此方法
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_9.py
-
-# ch8_9.py
 keys = ('magic', 'xaab', 9099)      # 定義元組元素是字串與數字
 #keys.append('secret')               # 錯誤 無此方法
 
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_1.py
-
-# ch9_1.py
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
 noodles = {'牛肉麵':100, '肉絲麵':80, '陽春麵':60}
 print(fruits)
@@ -2275,28 +2114,16 @@ print(noodles)
 # 列出字典資料型態
 print("字典fruits資料型態是: ",type(fruits))
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_10.py
-
-# ch9_10.py
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
 print("舊fruits字典內容:", fruits)
 valueTup = fruits.popitem()
 print("新fruits字典內容:", fruits)
 print("刪除內容:", valueTup)
 
-
-
-   
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_11.py
-
-# ch9_11.py
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
 print("舊fruits字典內容:", fruits)
 fruits.clear()
@@ -3033,4 +2860,162 @@ print("新fruits字典內容:", fruits)
 print("刪除內容:", objKey + ":" + str(value))
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+import sys
+
+"""
+集合 的 方法
+.discard()
+.pop()
+.clear()
+
+ret_element = animals.pop( )        
+print("刪除後的animals集合 ", animals)
+print("所刪除的元素是      ", ret_element)
+
+boolean = A.isdisjoint(B)       # 有共同的元素'c'
+boolean = A.isdisjoint(C)       # 沒有共同的元素
+print("沒有共同的元素傳回值是 ", boolean)
+
+
+boolean = A.issubset(B)         # 所有A的元素皆是B的元素
+boolean = C.issubset(B)         # 有共同的元素k
+
+
+fruits1 = ['apple', 'orange', 'apple', 'banana', 'orange']
+x = set(fruits1)                # 將串列轉成集合
+fruits2 = list(x)               # 將集合轉成串列
+print("原先串列資料fruits1 = ", fruits1)
+print("新的串列資料fruits2 = ", fruits2)
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+boolean = A.issuperset(B)           # 測試
+boolean = A.issuperset(C)           # 測試
+print("A集合是C集合的父集合傳回值是 ", boolean)
+
+cars1.update(cars2)
+
+myset = {5, 3, 8, 1, 2}
+
+print(f"集合元素數量   : {len(myset)}")
+print(f"集合元素最大值 : {max(myset)}")
+print(f"集合元素最小值 : {min(myset)}")
+print(f"集合元素總和   : {sum(myset)}")
+
+# 使用 sorted() 函數對集合進行排序
+sorted_list = sorted(myset)
+print(f"小到大排序 : {sorted_list}")         # 輸出: [1, 2, 3, 5, 8]
+sorted_list_desc = sorted(myset, reverse=True)
+print(f"大到小排序 : {sorted_list_desc}")    # 輸出: [8, 5, 3, 2, 1]
+
+X = frozenset([1, 3, 5])
+Y = frozenset([5, 7, 9])
+print(X)
+print(Y)
+print("交集  = ", X & Y)
+print("聯集  = ", X | Y)
+A = X & Y
+print("交集A = ", A)
+A = X.intersection(Y)
+print("交集A = ", A)
+
+"""
+print("------------------------------------------------------------")  # 60個
+
+students = {'Peter', 'Norton', 'Kevin', 'Mary', 'John',     
+            'Ford', 'Nelson', 'Damon', 'Ivan', 'Tom'
+           }
+
+Math = {'Peter', 'Kevin', 'Damon'}          # 數學夏令營參加人員
+Physics = {'Nelson', 'Damon', 'Tom' }       # 物理夏令營參加人員
+
+MorP = Math | Physics
+print("有 %d 人參加數學或物理夏令營名單  : " % len(MorP), MorP )
+unAttend = students - MorP
+print("沒有參加任何夏令營有 %d 人名單是 : " % len(unAttend), unAttend)
+
+A = {n for n in range(1,100,2)}
+print(type(A))
+print(A)
+
+print("------------------------------------------------------------")  # 60個
+
+A = {n for n in range(1,100,2) if n % 11 == 0}
+print(type(A))
+print(A)
+
+print("------------------------------------------------------------")  # 60個
+
+word = 'deepmind'
+alphabetCount = {alphabet:word.count(alphabet) for alphabet in set(word)}
+print(alphabetCount)
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_28.py
+
+# ch10_28.py
+cocktail = {
+    'Blue Hawaiian':{'Rum','Sweet Wine','Cream','Pineapple Juice','Lemon Juice'},
+    'Ginger Mojito':{'Rum','Ginger','Mint Leaves','Lime Juice','Ginger Soda'},
+    'New Yorker':{'Whiskey','Red Wine','Lemon Juice','Sugar Syrup'},
+    'Bloody Mary':{'Vodka','Lemon Juice','Tomato Juice','Tabasco','little Sale'}
+    }
+# 列出含有Vodka的酒
+print("含有Vodka的酒 : ")
+for name, formulas in cocktail.items():
+    if 'Vodka' in formulas:
+        print(name)
+# 列出含有Lemon Juice的酒
+print("含有Lemon Juice的酒 : ")
+for name, formulas in cocktail.items():
+    if 'Lemon Juice' in formulas:
+        print(name)
+# 列出含有Rum但是沒有薑的酒
+print("含有Rum但是沒有薑的酒 : ")
+for name, formulas in cocktail.items():
+    if 'Rum' in formulas and not ('Ginger' in formulas):
+        print(name)
+# 列出含有Lemon Juice但是沒有Cream或是Tabasco的酒
+print("含有Lemon Juice但是沒有Cream或是Tabasco的酒 : ")
+for name, formulas in cocktail.items():
+    if 'Lemon Juice' in formulas and not formulas & {'Cream', 'Tabasco'}:
+        print(name)
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
 

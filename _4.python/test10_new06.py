@@ -1,138 +1,26 @@
+"""
+準備清除
+#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_9.py
+
+# ch8_9.py
+
+
+準備撈出
+
+class bank  class Banks():
+
+def
+
+import traceback
+
+
+
+
+"""
+
 import sys
 
-"""
-集合 的 方法
-.discard()
-.pop()
-.clear()
-
-ret_element = animals.pop( )        
-print("刪除後的animals集合 ", animals)
-print("所刪除的元素是      ", ret_element)
-
-boolean = A.isdisjoint(B)       # 有共同的元素'c'
-boolean = A.isdisjoint(C)       # 沒有共同的元素
-print("沒有共同的元素傳回值是 ", boolean)
-
-
-boolean = A.issubset(B)         # 所有A的元素皆是B的元素
-boolean = C.issubset(B)         # 有共同的元素k
-
-
-fruits1 = ['apple', 'orange', 'apple', 'banana', 'orange']
-x = set(fruits1)                # 將串列轉成集合
-fruits2 = list(x)               # 將集合轉成串列
-print("原先串列資料fruits1 = ", fruits1)
-print("新的串列資料fruits2 = ", fruits2)
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-boolean = A.issuperset(B)           # 測試
-boolean = A.issuperset(C)           # 測試
-print("A集合是C集合的父集合傳回值是 ", boolean)
-
-cars1.update(cars2)
-
-myset = {5, 3, 8, 1, 2}
-
-print(f"集合元素數量   : {len(myset)}")
-print(f"集合元素最大值 : {max(myset)}")
-print(f"集合元素最小值 : {min(myset)}")
-print(f"集合元素總和   : {sum(myset)}")
-
-# 使用 sorted() 函數對集合進行排序
-sorted_list = sorted(myset)
-print(f"小到大排序 : {sorted_list}")         # 輸出: [1, 2, 3, 5, 8]
-sorted_list_desc = sorted(myset, reverse=True)
-print(f"大到小排序 : {sorted_list_desc}")    # 輸出: [8, 5, 3, 2, 1]
-
-X = frozenset([1, 3, 5])
-Y = frozenset([5, 7, 9])
-print(X)
-print(Y)
-print("交集  = ", X & Y)
-print("聯集  = ", X | Y)
-A = X & Y
-print("交集A = ", A)
-A = X.intersection(Y)
-print("交集A = ", A)
-
-"""
-print("------------------------------------------------------------")  # 60個
-
-students = {'Peter', 'Norton', 'Kevin', 'Mary', 'John',     
-            'Ford', 'Nelson', 'Damon', 'Ivan', 'Tom'
-           }
-
-Math = {'Peter', 'Kevin', 'Damon'}          # 數學夏令營參加人員
-Physics = {'Nelson', 'Damon', 'Tom' }       # 物理夏令營參加人員
-
-MorP = Math | Physics
-print("有 %d 人參加數學或物理夏令營名單  : " % len(MorP), MorP )
-unAttend = students - MorP
-print("沒有參加任何夏令營有 %d 人名單是 : " % len(unAttend), unAttend)
-
-A = {n for n in range(1,100,2)}
-print(type(A))
-print(A)
-
-print("------------------------------------------------------------")  # 60個
-
-A = {n for n in range(1,100,2) if n % 11 == 0}
-print(type(A))
-print(A)
-
-print("------------------------------------------------------------")  # 60個
-
-word = 'deepmind'
-alphabetCount = {alphabet:word.count(alphabet) for alphabet in set(word)}
-print(alphabetCount)
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_28.py
-
-# ch10_28.py
-cocktail = {
-    'Blue Hawaiian':{'Rum','Sweet Wine','Cream','Pineapple Juice','Lemon Juice'},
-    'Ginger Mojito':{'Rum','Ginger','Mint Leaves','Lime Juice','Ginger Soda'},
-    'New Yorker':{'Whiskey','Red Wine','Lemon Juice','Sugar Syrup'},
-    'Bloody Mary':{'Vodka','Lemon Juice','Tomato Juice','Tabasco','little Sale'}
-    }
-# 列出含有Vodka的酒
-print("含有Vodka的酒 : ")
-for name, formulas in cocktail.items():
-    if 'Vodka' in formulas:
-        print(name)
-# 列出含有Lemon Juice的酒
-print("含有Lemon Juice的酒 : ")
-for name, formulas in cocktail.items():
-    if 'Lemon Juice' in formulas:
-        print(name)
-# 列出含有Rum但是沒有薑的酒
-print("含有Rum但是沒有薑的酒 : ")
-for name, formulas in cocktail.items():
-    if 'Rum' in formulas and not ('Ginger' in formulas):
-        print(name)
-# 列出含有Lemon Juice但是沒有Cream或是Tabasco的酒
-print("含有Lemon Juice但是沒有Cream或是Tabasco的酒 : ")
-for name, formulas in cocktail.items():
-    if 'Lemon Juice' in formulas and not formulas & {'Cream', 'Tabasco'}:
-        print(name)
-
-
-
 
 
 
@@ -665,15 +553,8 @@ def make_icecream(*toppings):
 
 make_icecream()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_24.py
-
-# ch11_24.py
 def make_icecream(icecream_type, *toppings):
     """ 列出製作冰淇淋的配料 """
     print("這個 ", icecream_type, " 冰淇淋所加配料如下")
@@ -686,9 +567,6 @@ make_icecream('芒果', '草莓醬', '葡萄乾', '巧克力碎片')
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25.py
-
-# ch11_25.py
 def build_dict(name, age, **players):
     """ 建立NBA球員的字典資料 """
     info = {}           # 建立空字典
@@ -704,13 +582,8 @@ player_dict = build_dict('James', '32',
 
 print(player_dict)      # 列印所建字典
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_1.py
-
-# ch11_25_1.py
 def total(data):
     return sum(data)
 
@@ -719,13 +592,8 @@ myList = [min, max, sum, total]
 for f in myList:
     print(f)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_10.py
-
-# ch11_25_10.py
 def factorial(n):
     """ 計算n的階乘, n 必須是正整數 """
     fact = 1
@@ -738,14 +606,9 @@ print(f"{value} 的階乘結果是 = {factorial(value)}")
 value = 5
 print(f"{value} 的階乘結果是 = {factorial(value)}")
 
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_2.py
-
-# ch11_25_2.py
+"""
 def total(data):
     return sum(data)
 
@@ -753,14 +616,10 @@ x = (1,5,10)
 myList = [min, max, sum, total]
 for f in myList:
     print(f, f(x))
-
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_3.py
-
-# ch11_25_3.py
 def add(x, y):
     return x+y
 
@@ -775,15 +634,8 @@ print(result1)
 result2 = running(mul, 5, 10)       # mul函數當作參數
 print(result2)
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_4.py
-
-# ch11_25_4.py
 def mysum(*args):
     return sum(args)
 
@@ -793,18 +645,8 @@ def run_with_multiple_args(func, *args):
 print(run_with_multiple_args(mysum,1,2,3,4,5))
 print(run_with_multiple_args(mysum,6,7,8,9))
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_5.py
-
-# ch11_25_5.py
 def dist(x1,y1,x2,y2):          # 計算2點之距離函數
     def mySqrt(z):              # 計算開根號值
         return z ** 0.5
@@ -814,17 +656,8 @@ def dist(x1,y1,x2,y2):          # 計算2點之距離函數
 
 print(dist(0,0,1,1))
 
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_5a.py
-
-# ch11_25_5a.py
 def outer():                   
     def inner(n):
         print('inner running')
@@ -839,26 +672,8 @@ y = outer()
 print(y)
 print(y(10))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_5b.py
-
-# ch11_25_5b.py
 def create_multiplier(multiplier):
     def multiplier_function(number):
         return number * multiplier
@@ -877,13 +692,8 @@ triple_function = create_multiplier(3)
 result = triple_function(5)     # 返回值是 15
 print(result)                   # 輸出: 15
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_5c.py
-
-# ch11_25_5c.py
 def outer():
     b = 10                  # inner所使用的變數值
     def inner(x):
@@ -894,34 +704,10 @@ b = 2
 f = outer()
 print(f(b))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_5d.py
-
-# ch11_25_5d.py
 def outer(a, b):
-    ''' a 和 b 將是inner()的環境變數 '''
+    # a 和 b 將是inner()的環境變數
     def inner(x):
         return a * x + b    
     return inner
@@ -930,33 +716,8 @@ f1 = outer(1, 2)
 f2 = outer(3, 4)
 print(f1(1), f2(3))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_5e.py
-
-# ch11_25_5e.py
 def lazy_evaluation(expression):
     def evaluate():
         print(f'評估 : {expression}')
@@ -1014,40 +775,6 @@ hover_handler(on_hover)
 
 print("------------------------------------------------------------")  # 60個
 
-def sum(n):    
-    if (n <= 1):                # 結束條件
-        return 1
-    else:
-        return n + sum(n-1)     
-    
-print(f"total(5) = {sum(5)}")
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_26.py
-
-# ch11_26.py
-def factorial(n):
-    """ 計算n的階乘, n 必須是正整數 """
-    if n == 1:
-        return 1
-    else:
-        return (n * factorial(n-1))
-
-value = 3
-print(f"{value} 的階乘結果是 = {factorial(value)}")
-value = 5
-print(f"{value} 的階乘結果是 = {factorial(value)}")
-
-
-    
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_27.py
-
-# ch11_27.py
 def printmsg( ):
     """ 函數本身沒有定義變數, 只有執行列印全域變數功能 """
     print("函數列印: ", msg)    # 列印全域變數
@@ -1056,13 +783,8 @@ msg = 'Global Variable'         # 設定全域變數
 print("主程式列印: ", msg)      # 列印全域變數
 printmsg( )                     # 呼叫函數
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_28.py
-
-# ch11_28.py
 def printmsg( ):
     """ 函數本身有定義變數, 將執行列印區域變數功能 """
     msg = 'Local Variable'      # 設定區域變數
@@ -1072,13 +794,8 @@ msg = 'Global Variable'         # 這是全域變數
 print("主程式列印: ", msg)      # 列印全域變數
 printmsg( )                     # 呼叫函數
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_29.py
-
-# ch11_29.py
 def printmsg():
     global msg
     msg = "Java"        # 更改全域變數
@@ -1088,16 +805,8 @@ print(f"主程式列印:更改前: {msg}")
 printmsg()
 print(f"主程式列印:更改後: {msg}")
 
-
-
-   
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_3.py
-
-# ch11_3.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi,", name, "Good Morning!")
@@ -2115,84 +1824,8 @@ ret_value = greeting('Nelson')
 print(f"greeting()傳回值 = {ret_value}")
 print(f"{ret_value} 的 type  = {type(ret_value)}")
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_1.py
-
-# ch12_1.py
-class Banks():
-    ''' 定義銀行類別 '''
-    bankname = 'Taipei Bank'        # 定義屬性
-    def motto(self):                # 定義方法
-        return "以客為尊"
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_10.py
-
-# ch12_10.py
-class Banks():
-    ''' 定義銀行類別 '''
-
-    def __init__(self, uname):              # 初始化方法
-        self.__name = uname                 # 設定私有存款者名字
-        self.__balance = 0                  # 設定私有開戶金額是0
-        self.__bankname = "Taipei Bank"     # 設定私有銀行名稱
-        self.__rate = 30                    # 預設美金與台幣換匯比例
-        self.__service_charge = 0.01        # 換匯的服務費
-
-    def save_money(self, money):            # 設計存款方法
-        self.__balance += money             # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.__balance -= money             # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.__name.title(), " 目前餘額: ", self.__balance)
-
-    def usa_to_taiwan(self, usa_d):         # 美金兌換台幣方法
-        self.result = self.__cal_rate(usa_d)
-        return self.result
-
-    def __cal_rate(self,usa_d):             # 計算換匯這是私有方法
-        return int(usa_d * self.__rate * (1 - self.__service_charge))
-
-class Shilin_Banks(Banks):
-    # 定義士林分行
-    pass
-       
-hungbank = Shilin_Banks('hung')             # 定義物件hungbank
-hungbank.save_money(500)
-hungbank.get_balance()
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_10_1.py
-
-# ch12_10_1.py
 class Father():
     def __init__(self):
         self.__address = '台北市羅斯福路'
@@ -2207,74 +1840,8 @@ ivan = Son()
 print('父類別 : ',hung.getaddr())
 print('子類別 : ',ivan.getaddr())
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_11.py
-
-# ch12_11.py
-class Banks():
-    # 定義銀行類別
-
-    def __init__(self, uname):              # 初始化方法
-        self.__name = uname                 # 設定私有存款者名字
-        self.__balance = 0                  # 設定私有開戶金額是0
-        self.__bankname = "Taipei Bank"     # 設定私有銀行名稱
-        self.__rate = 30                    # 預設美金與台幣換匯比例
-        self.__service_charge = 0.01        # 換匯的服務費
-
-    def save_money(self, money):            # 設計存款方法
-        self.__balance += money             # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.__balance -= money             # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.__name.title(), " 目前餘額: ", self.__balance)
-
-    def usa_to_taiwan(self, usa_d):         # 美金兌換台幣方法
-        self.result = self.__cal_rate(usa_d)
-        return self.result
-
-    def __cal_rate(self,usa_d):             # 計算換匯這是私有方法
-        return int(usa_d * self.__rate * (1 - self.__service_charge))
-
-    def bank_title(self):                   # 獲得銀行名稱
-        return self.__bankname
-
-class Shilin_Banks(Banks):
-    # 定義士林分行
-    pass
-
-hungbank = Shilin_Banks('hung')             # 定義物件hungbank
-print("我的存款銀行是: ", hungbank.bank_title())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_11_1.py
-
-# ch12_11_1.py
 class Person():
     def __init__(self,name):
         self.name = name
@@ -2287,87 +1854,8 @@ lawer = LawerPerson("洪錦魁")
 print(hung.name)
 print(lawer.name)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_12.py
-
-# ch12_12.py
-class Banks():
-    ''' 定義銀行類別 '''
-
-    def __init__(self, uname):              # 初始化方法
-        self.__name = uname                 # 設定私有存款者名字
-        self.__balance = 0                  # 設定私有開戶金額是0
-        self.bankname = "Taipei Bank"       # 設定公有銀行名稱
-        self.__rate = 30                    # 預設美金與台幣換匯比例
-        self.__service_charge = 0.01        # 換匯的服務費
-
-    def save_money(self, money):            # 設計存款方法
-        self.__balance += money             # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.__balance -= money             # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.__name.title(), " 目前餘額: ", self.__balance)
-
-    def usa_to_taiwan(self, usa_d):         # 美金兌換台幣方法
-        self.result = self.__cal_rate(usa_d)
-        return self.result
-
-    def __cal_rate(self,usa_d):             # 計算換匯這是私有方法
-        return int(usa_d * self.__rate * (1 - self.__service_charge))
-
-    def bank_title(self):                   # 獲得銀行名稱
-        return self.bankname
-
-class Shilin_Banks(Banks):
-    # 定義士林分行
-    def __init__(self, uname):
-        self.bankname = "Taipei Bank - Shilin Branch"  # 定義分行名稱
-
-jamesbank = Banks('James')                      # 定義Banks類別物件
-print("James's banks = ", jamesbank.bankname)   # 列印銀行名稱
-hungbank = Shilin_Banks('Hung')                 # 定義Shilin_Banks類別物件
-print("Hung's banks  = ", hungbank.bankname)    # 列印銀行名稱
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_12_1.py
-
-# ch12_12_1.py
 class Person():
     def job(self):
         print("我是老師")
@@ -2381,91 +1869,8 @@ ivan = LawerPerson()
 hung.job()
 ivan.job()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_13.py
-
-# ch12_13.py
-class Banks():
-    ''' 定義銀行類別 '''
-
-    def __init__(self, uname):              # 初始化方法
-        self.__name = uname                 # 設定私有存款者名字
-        self.__balance = 0                  # 設定私有開戶金額是0
-        self.__bankname = "Taipei Bank"     # 設定私有銀行名稱
-        self.__rate = 30                    # 預設美金與台幣換匯比例
-        self.__service_charge = 0.01        # 換匯的服務費
-
-    def save_money(self, money):            # 設計存款方法
-        self.__balance += money             # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.__balance -= money             # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.__name.title(), " 目前餘額: ", self.__balance)
-
-    def usa_to_taiwan(self, usa_d):         # 美金兌換台幣方法
-        self.result = self.__cal_rate(usa_d)
-        return self.result
-
-    def __cal_rate(self,usa_d):             # 計算換匯這是私有方法
-        return int(usa_d * self.__rate * (1 - self.__service_charge))
-
-    def bank_title(self):                   # 獲得銀行名稱
-        return self.__bankname
-
-class Shilin_Banks(Banks):
-    # 定義士林分行
-    def __init__(self, uname):
-        self.bankname = "Taipei Bank - Shilin Branch"  # 定義分行名稱
-    def bank_title(self):                   # 獲得銀行名稱
-        return self.bankname
-
-jamesbank = Banks('James')                  # 定義Banks類別物件
-print("James's banks = ", jamesbank.bank_title())  # 列印銀行名稱
-hungbank = Shilin_Banks('Hung')             # 定義Shilin_Banks類別物件
-print("Hung's banks  = ", hungbank.bank_title())   # 列印銀行名稱
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_14.py
-
-# ch12_14.py
 class Animals():
     """Animals類別, 這是基底類別 """
     def __init__(self, animal_name, animal_age ):
@@ -2763,29 +2168,8 @@ class C(A,B):
 
 x = C()
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_2.py
-
-# ch12_2.py
-class Banks():
-    ''' 定義銀行類別 '''
-    bankname = 'Taipei Bank'    # 定義屬性
-    def motto(self):            # 定義方法
-        return "以客為尊"
-
-userbank = Banks()              # 定義物件userbank
-print("目前服務銀行是 ", userbank.bankname)
-print("銀行服務理念是 ", userbank.motto())
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_20.py
-
-# ch12_20.py
 class Grandfather():
     """ 定義祖父類別 """
     pass
@@ -2847,9 +2231,9 @@ print("------------------------------------------------------------")  # 60個
 
 # ch12_22.py
 def getMax(x, y):
-    '''文件字串實例
+    """文件字串實例
 建議x, y是整數
-這個函數將傳回較大值'''
+這個函數將傳回較大值"""
     if int(x) > int(y):
         return x
     else:
@@ -2865,13 +2249,13 @@ print("------------------------------------------------------------")  # 60個
 
 # ch12_23.py
 class Myclass:
-    '''文件字串實例
-Myclass類別的應用'''
+    """文件字串實例
+Myclass類別的應用"""
     def __init__(self, x):
         self.x = x
     def printMe(self):
-        '''文字檔字串實例
-Myclass類別內printMe方法的應用'''
+        """文字檔字串實例
+Myclass類別內printMe方法的應用"""
         print("Hi", self.x)
 
 data = Myclass(100)
@@ -2922,29 +2306,6 @@ print(a)
 
 print("------------------------------------------------------------")  # 60個
 
-class Banks():
-    ''' 定義銀行類別 '''
-    bankname = 'Taipei Bank'                # 定義屬性
-    def __init__(self, uname, money):       # 初始化方法
-        self.name = uname                   # 設定存款者名字
-        self.balance = money                # 設定所存的錢
-
-    def get_balance(self):                  # 獲得存款餘額
-        return self.balance
-
-hungbank = Banks('hung', 100)               # 定義物件hungbank
-print(hungbank.name.title(), " 存款餘額是 ", hungbank.get_balance())
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_30.py
-
-# ch12_30.py
 class Name:
     def __init__(self, name):
         self.name = name
@@ -3170,255 +2531,8 @@ manager.remove_student(1)           # 移除學生ID為 1 的學生
 # 用 print(manager.students) 來查看學生字典的當前狀態
 print(manager.students)             # 輸出：{}
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_4.py
-
-# ch12_4.py
-class Banks():
-    ''' 定義銀行類別 '''
-    bankname = 'Taipei Bank'                # 定義屬性
-    def __init__(self, uname, money):       # 初始化方法
-        self.name = uname                   # 設定存款者名字
-        self.balance = money                # 設定所存的錢
-
-    def save_money(self, money):            # 設計存款方法
-        self.balance += money               # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.balance -= money               # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.name.title(), " 目前餘額: ", self.balance)
-
-hungbank = Banks('hung', 100)               # 定義物件hungbank
-hungbank.get_balance()                      # 獲得存款餘額                
-hungbank.save_money(300)                    # 存款300元
-hungbank.get_balance()                      # 獲得存款餘額
-hungbank.withdraw_money(200)                # 提款200元
-hungbank.get_balance()                      # 獲得存款餘額
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_5.py
-
-# ch12_5.py
-class Banks():
-    ''' 定義銀行類別 '''
-    bankname = 'Taipei Bank'                # 定義屬性
-    def __init__(self, uname, money):       # 初始化方法
-        self.name = uname                   # 設定存款者名字
-        self.balance = money                # 設定所存的錢
-
-    def save_money(self, money):            # 設計存款方法
-        self.balance += money               # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.balance -= money               # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.name.title(), " 目前餘額: ", self.balance)
-
-hungbank = Banks('hung', 100)               # 定義物件hungbank
-johnbank = Banks('john', 300)               # 定義物件johnbank
-hungbank.get_balance()                      # 獲得hung存款餘額                
-johnbank.get_balance()                      # 獲得john存款餘額
-hungbank.save_money(100)                    # hung存款100
-johnbank.withdraw_money(150)                # john提款150
-hungbank.get_balance()                      # 獲得hung存款餘額                
-johnbank.get_balance()                      # 獲得john存款餘額
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_6.py
-
-# ch12_6.py
-class Banks():
-    ''' 定義銀行類別 '''
-
-    def __init__(self, uname):              # 初始化方法
-        self.name = uname                   # 設定存款者名字
-        self.balance = 0                    # 設定開戶金額是0
-        self.bankname = "Taipei Bank"       # 設定銀行名稱
-
-    def save_money(self, money):            # 設計存款方法
-        self.balance += money               # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.balance -= money               # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.name.title(), " 目前餘額: ", self.balance)
-
-hungbank = Banks('hung')                    # 定義物件hungbank
-print("目前開戶銀行 ", hungbank.bankname)   # 列出目前開戶銀行
-hungbank.get_balance()                      # 獲得hung存款餘額                
-hungbank.save_money(100)                    # hung存款100
-hungbank.get_balance()                      # 獲得hung存款餘額                
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_7.py
-
-# ch12_7.py
-class Banks():
-    ''' 定義銀行類別 '''
-
-    def __init__(self, uname):              # 初始化方法
-        self.name = uname                   # 設定存款者名字
-        self.balance = 0                    # 設定開戶金額是0
-        self.bankname = "Taipei Bank"       # 設定銀行名稱
-
-    def save_money(self, money):            # 設計存款方法
-        self.balance += money               # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.balance -= money               # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.name.title(), " 目前餘額: ", self.balance)
-
-hungbank = Banks('hung')                    # 定義物件hungbank
-hungbank.get_balance()
-hungbank.balance = 10000                    # 類別外直接竄改存款餘額
-hungbank.get_balance()
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_8.py
-
-# ch12_8.py
-class Banks():
-    ''' 定義銀行類別 '''
-
-    def __init__(self, uname):              # 初始化方法
-        self.__name = uname                 # 設定私有存款者名字
-        self.__balance = 0                  # 設定私有開戶金額是0
-        self.__bankname = "Taipei Bank"     # 設定私有銀行名稱
-
-    def save_money(self, money):            # 設計存款方法
-        self.__balance += money             # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.__balance -= money             # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.__name.title(), " 目前餘額: ", self.__balance)
-
-hungbank = Banks('hung')                    # 定義物件hungbank
-hungbank.get_balance()
-hungbank.__balance = 10000                  # 類別外直接竄改存款餘額
-hungbank.get_balance()
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_9.py
-
-# ch12_9.py
-class Banks():
-    ''' 定義銀行類別 '''
-
-    def __init__(self, uname):              # 初始化方法
-        self.__name = uname                 # 設定私有存款者名字
-        self.__balance = 0                  # 設定私有開戶金額是0
-        self.__bankname = "Taipei Bank"     # 設定私有銀行名稱
-        self.__rate = 30                    # 預設美金與台幣換匯比例
-        self.__service_charge = 0.01        # 換匯的服務費
-
-    def save_money(self, money):            # 設計存款方法
-        self.__balance += money             # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.__balance -= money             # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.__name.title(), " 目前餘額: ", self.__balance)
-
-    def usa_to_taiwan(self, usa_d):         # 美金兌換台幣方法
-        self.result = self.__cal_rate(usa_d)
-        return self.result
-
-    def __cal_rate(self,usa_d):             # 計算換匯這是私有方法
-        return int(usa_d * self.__rate * (1 - self.__service_charge))
-        
-hungbank = Banks('hung')                    # 定義物件hungbank
-usdallor = 50
-print(usdallor, " 美金可以兌換 ", hungbank.usa_to_taiwan(usdallor), " 台幣") 
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_9_1.py
-
-# ch12_9_1.py
 class Score():
     def __init__(self, score):
         self.score = score
@@ -3428,18 +2542,8 @@ print(stu.score)
 stu.score = 100             
 print(stu.score)
 
-
-
-
-
-        
-        
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_9_2.py
-
-# ch12_9_2.py
 class Score():
     def __init__(self, score):
         self.__score = score
@@ -3629,32 +2733,8 @@ ivan = Son()
 hung.hometown()
 ivan.hometown()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_1.py
-
-# ch15_1.py
-def division(x, y):
-    return x / y
-
-print(division(10, 2))      # 列出10/2
-print(division(5, 0))       # 列出5/0
-print(division(6, 3))       # 列出6/3
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_10.py
-
-# ch15_10.py
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
     try:
@@ -3779,13 +2859,8 @@ for pwd in ('aaabbbccc', 'aaa', 'aaabbb'):  # 測試系列密碼值
     except Exception as err:
         print("密碼長度檢查異常發生: ", str(err))
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_16.py
-
-# ch15_16.py
 import traceback                            # 導入taceback
 
 def passWord(pwd):
@@ -3807,13 +2882,8 @@ for pwd in ('aaabbbccc', 'aaa', 'aaabbb'):  # 測試系列密碼值
         print("將Traceback寫入錯誤檔案errch15_16.txt完成")
         print("密碼長度檢查異常發生: ", str(err))
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_17.py
-
-# ch15_17.py
 import traceback
 
 def division(x, y):
@@ -3831,220 +2901,8 @@ print(division(5, 0))           # 列出5/0
 print(division('a', 'b'))       # 列出'a' / 'b'
 print(division(6, 3))           # 列出6/3
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_18.py
-
-# ch15_18.py
-def division(x, y):
-    try:                             # try - except指令
-        return x / y
-    except:                          # 捕捉所有異常
-        print("異常發生")
-    finally:                         # 離開函數前先執行此程式碼
-        print("階段任務完成")
-
-print(division(10, 2),"\n")          # 列出10/2
-print(division(5, 0),"\n")           # 列出5/0
-print(division('a', 'b'),"\n")       # 列出'a' / 'b'
-print(division(6, 3),"\n")           # 列出6/3
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_19.py
-
-# ch15_19.py
-class Banks():
-    # 定義銀行類別
-    title = 'Taipei Bank'                   # 定義屬性
-    def __init__(self, uname, money):       # 初始化方法
-        self.name = uname                   # 設定存款者名字
-        self.balance = money                # 設定所存的錢
-
-    def save_money(self, money):            # 設計存款方法
-        self.balance += money               # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        self.balance -= money               # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.name.title(), " 目前餘額: ", self.balance)
-
-hungbank = Banks('hung', 100)               # 定義物件hungbank
-hungbank.get_balance()                      # 獲得存款餘額                
-hungbank.save_money(-300)                   # 存款-300元
-hungbank.get_balance()                      # 獲得存款餘額
-hungbank.withdraw_money(700)                # 提款700元
-hungbank.get_balance()                      # 獲得存款餘額
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_2.py
-
-# ch15_2.py
-def division(x, y):
-    try:                        # try - except指令
-        return x / y
-    except ZeroDivisionError:   # 除數為0時執行
-        print("除數不可為0")
-
-print(division(10, 2))          # 列出10/2
-print(division(5, 0))           # 列出5/0
-print(division(6, 3))           # 列出6/3
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_2_1.py
-
-# ch15_2_1.py
-def division(x, y):
-    try:                        # try - except指令
-        return x / y
-    except ZeroDivisionError:   # 除數為0時執行
-        print("除數不可為0")
-
-print(division(10, 2))          # 列出10/2
-print(division('a', 'b'))       # 列出'a' / 'b'
-print(division(6, 3))           # 列出6/3
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_20.py
-
-# ch15_20.py
-class Banks():
-    # 定義銀行類別
-    title = 'Taipei Bank'                   # 定義屬性
-    def __init__(self, uname, money):       # 初始化方法
-        self.name = uname                   # 設定存款者名字
-        self.balance = money                # 設定所存的錢
-
-    def save_money(self, money):            # 設計存款方法
-        assert money > 0, '存款money必需大於0'
-        self.balance += money               # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        assert money > 0, '提款money必需大於0'
-        assert money <= self.balance, '存款金額不足'
-        self.balance -= money               # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.name.title(), " 目前餘額: ", self.balance)
-
-hungbank = Banks('hung', 100)               # 定義物件hungbank
-hungbank.get_balance()                      # 獲得存款餘額                
-hungbank.save_money(300)                    # 存款300元
-hungbank.get_balance()                      # 獲得存款餘額
-hungbank.save_money(-300)                   # 存款-300元
-hungbank.get_balance()                      # 獲得存款餘額
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_21.py
-
-# ch15_21.py
-class Banks():
-    # 定義銀行類別
-    title = 'Taipei Bank'                   # 定義屬性
-    def __init__(self, uname, money):       # 初始化方法
-        self.name = uname                   # 設定存款者名字
-        self.balance = money                # 設定所存的錢
-
-    def save_money(self, money):            # 設計存款方法
-        assert money > 0, '存款money必需大於0'
-        self.balance += money               # 執行存款
-        print("存款 ", money, " 完成")      # 列印存款完成
-
-    def withdraw_money(self, money):        # 設計提款方法
-        assert money > 0, '提款money必需大於0'
-        assert money <= self.balance, '存款金額不足'
-        self.balance -= money               # 執行提款
-        print("提款 ", money, " 完成")      # 列印提款完成
-
-    def get_balance(self):                  # 獲得存款餘額
-        print(self.name.title(), " 目前餘額: ", self.balance)
-
-hungbank = Banks('hung', 100)               # 定義物件hungbank
-hungbank.get_balance()                      # 獲得存款餘額                
-hungbank.save_money(300)                    # 存款300元
-hungbank.get_balance()                      # 獲得存款餘額
-hungbank.withdraw_money(700)                # 提款700元
-hungbank.get_balance()                      # 獲得存款餘額
-
-print("------------------------------------------------------------")  # 60個
-
-def division(x, y):
-    try:                        # try - except指令
-        ans =  x / y
-    except ZeroDivisionError:   # 除數為0時執行
-        print("除數不可為0")
-    else:
-        return ans              # 傳回正確的執行結果
-
-print(division(10, 2))          # 列出10/2
-print(division(5, 0))           # 列出5/0
-print(division(6, 3))           # 列出6/3
-
-print("------------------------------------------------------------")  # 60個
-
-import sqlite3
-
-try:
-    # 嘗試連接到資料庫
-    conn = sqlite3.connect('example.db')
-    cursor = conn.cursor()
-    # 嘗試執行查詢，可能會引發異常
-    cursor.execute('SELECT * FROM non_existent_table')
-except sqlite3.Error as e:
-    # 捕獲並處理 SQLite 特定的異常
-    print(f"Database error: {e}")
-except Exception as e:
-    # 捕獲並處理其他所有異常
-    print(f"Exception occurred: {e}")
-finally:
-    # 確保資料庫連接被關閉
-    conn.close()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_35.py
-
-# ch15_35.py
 try:
     # 嘗試打開一個不存在的檔案
     with open('non_existent_file.txt', 'r') as f:
@@ -4087,14 +2945,7 @@ except FileNotFoundError:
     print(f"找不到 {fn} 檔案")
 else:
     print(data)                 # 輸出變數data
-
-
-
-
-
-
-
-    
+   
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4241,6 +3092,1076 @@ print("I love Ming-Chi: 是台灣手機號碼", taiwanPhoneNum('I love Ming-Chi'
 print("0932-999-199:    是台灣手機號碼", taiwanPhoneNum('0932-999-199'))
 
 
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+print("------------------------------------------------------------")  # 60個
+
+x1 = 1
+x2 = 11
+x3 = 111
+x4 = 1111
+print("x= ", str(x1).rjust(4))
+print("x= ", str(x2).rjust(4))
+print("x= ", str(x3).rjust(4))
+print("x= ", str(x4).rjust(4))
+
+print("------------------------------------------------------------")  # 60個
+
+x1 = 1
+x2 = 11
+x3 = 111
+x4 = 1111
+print("x= ", str(x1).rjust(4), end="\r", flush=True)
+print("x= ", str(x2).rjust(4), end="\r", flush=True)
+print("x= ", str(x3).rjust(4), end="\r", flush=True)
+print("x= ", str(x4).rjust(4), end="\r", flush=True)
+
+print("------------------------------------------------------------")  # 60個
+
+""" error
+from twilio.rest import Client
+
+# 你從twilio.com申請的帳號
+accountSid='AC6fdc3efffd15cabcdee8b361e9d4e67'
+# 你從twilio.com獲得的圖騰
+authToken='9a6dfab51a342a480e7cf9c1f88d3e638'
+
+client = Client(accountSid, authToken)
+message = client.messages.create (
+            from_ = "+12512548607",         # 這是twilio.com給你的號碼
+            to = "+886952000000",           # 這是收簡訊方的號碼
+            body = "Python王者歸來" )       # 發送的訊息
+"""
+print("------------------------------------------------------------")  # 60個
+
+""" input
+import sys
+print("請輸入字串, 輸入完按Enter = ", end = "")
+msg = sys.stdin.readline()
+print(msg)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+print("請輸入字串, 輸入完按Enter = ", end = "")
+msg = sys.stdin.readline(8)         # 讀8個字
+print(msg)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+sys.stdout.write("I like Python")
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+for dirpath in sys.path:
+    print(dirpath)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+print("命令列參數 : ", sys.argv)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+from pprint import pprint
+print("使用print")
+print(sys.path)
+print("使用pprint")
+pprint(sys.path)
+
+print("------------------------------------------------------------")  # 60個
+
+import string
+
+def encrypt(text, encryDict):           # 加密文件
+    cipher = []
+    for i in text:                      # 執行每個字元加密
+        v = encryDict[i]                # 加密
+        cipher.append(v)                # 加密結果
+    return ''.join(cipher)              # 將串列轉成字串
+    
+abc = string.printable[:-5]             # 取消不可列印字元
+subText = abc[-3:] + abc[:-3]           # 加密字串
+encry_dict = dict(zip(subText, abc))    # 建立字典
+print("列印編碼字典\n", encry_dict)     # 列印字典
+
+msg = 'If the implementation is easy to explain, it may be a good idea.'
+ciphertext = encrypt(msg, encry_dict)
+
+print("原始字串 ", msg)
+print("加密字串 ", ciphertext)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+def wordsNum(filename):
+    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    try:
+        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
+            data = file_Obj.read()  # 讀取檔案到變數data
+    except FileNotFoundError:
+        print("找不到 %s 檔案" % filename)
+    else:
+        wordList = data.split()     # 將文章轉成串列
+        print(filename, " 文章的字數是 ", len(wordList))    # 列印文章字數
+
+"""
+files = []
+for i in range(5):
+    filename = input("請輸入檔案名稱 : ")
+    files.append(filename)
+    
+for file in files:
+    wordsNum(file)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+def wordsNum(filename):
+    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
+    try:
+        with open(filename) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
+            data = file_Obj.read()  # 讀取檔案到變數data
+    except FileNotFoundError:
+        print("找不到 %s 檔案" % filename)
+    else:
+        wordList = data.split()     # 將文章轉成串列
+        print(filename, " 文章的字數是 ", len(wordList))    # 列印文章字數
+        return len(wordList)
+
+def lenWord(filename):
+    """檢查檔案長度必須是10到35個字元"""
+    wdlen = wordsNum(filename)                              # 檔案長度
+    if wdlen < 10:                                    # 檔案長度不足            
+        raise Exception('檔案長度不足')
+    if wdlen > 35:                                    # 檔案長度太長
+        raise Exception('檔案長度太長')
+    print('檔案長度正確')
+
+for file in ("data/d1.txt","data/d2.txt","data/d3.txt","data/d4.txt","data/d5.txt"):  # 測試系列檔案
+    try:
+        lenWord(file)
+    except Exception as err:
+        print("檔案長度檢查異常發生: ", str(err))
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+msg = """txt@deepwisdom.comyyy.twkkk,
+         ser@deepmind.com.tw,
+         hung@gmail.com
+         aaa@gmail.comcomkk,
+         kkk@gmail.com,
+         abc@aa,
+         service@deepwidsom.com
+         mymail@yahoo.com
+         de1988@kkk
+         abcdefg"""
+pattern = r"""(
+    [a-zA-Z0-9_.]+                  # 使用者帳號
+    @                               # @符號
+    [a-zA-Z0-9-.]+                  # 主機域名domain
+    [\.]                            # .符號
+    [a-zA-Z]{2,4}\b                 # 可能是com或edu或其它
+    ([\.])?                         # .符號, 也可能無特別是美國
+    ([a-zA-Z]{2,4}\b)?              # 國別
+    )"""
+eMail = re.findall(pattern, msg, re.VERBOSE)     # 傳回搜尋結果
+for mail in eMail:
+    print(mail[0])
+
+print("------------------------------------------------------------")  # 60個
+
+import webbrowser
+
+address = "花蓮市中正路"
+webbrowser.open('http://www.google.com.tw/maps/place/' + address)
+
+print("------------------------------------------------------------")  # 60個
+
+import bs4, requests
+"""
+url = 'http://www.taiwanlottery.com.tw'
+html = requests.get(url)
+
+objSoup = bs4.BeautifulSoup(html.text, 'lxml')      # 建立BeautifulSoup物件
+
+dataTag = objSoup.select('.contents_box02')         # 尋找class是contents_box02
+        
+# 找尋開出順序與大小順序的球
+balls = dataTag[2].find_all('div', {'class':'ball_tx ball_yellow'})
+print("開出順序 : ", end='')
+for i in range(6):                                  # 前6球是開出順序
+    print(balls[i].text, end='   ')
+
+print("\n大小順序 : ", end='')
+for i in range(6,len(balls)):                       # 第7球以後是大小順序
+    print(balls[i].text, end='   ')
+
+# 找出第二區的紅球                   
+redball = dataTag[2].find_all('div', {'class':'ball_red'})
+print("\n特別號   :", redball[0].text)
+
+print("------------------------------------------------------------")  # 60個
+
+from selenium import webdriver
+import time
+
+driverPath = 'D:\geckodriver\geckodriver.exe'
+browser = webdriver.Firefox(executable_path=driverPath)
+url = 'https://www.wikipedia.org/'
+browser.get(url)                    # 網頁下載至瀏覽器
+
+txtBox = browser.find_element_by_id('searchInput')
+txtBox.send_keys('Artificial Intelligence')          # 輸入表單資料
+time.sleep(5)                       # 暫停5秒
+txtBox.submit()                     # 送出表單
+
+print("------------------------------------------------------------")  # 60個
+
+from twilio.rest import Client
+
+# 你從twilio.com申請的帳號
+accountSid='AC308f91e9dc748a01538feb9d74ed993a'
+# 你從twilio.com獲得的圖騰
+authToken='f513161b63f71720f62118e4d33ca8ac'
+
+client = Client(accountSid, authToken)
+message = client.messages.create (
+            from_ = "+15052070000",         # 這是twilio.com給你的號碼
+            to = "+886952xxxxxx",           # 填上老師的號碼
+            body = "感謝老師,我們學會了Python" )   # 發送的訊息
+
+print("------------------------------------------------------------")  # 60個
+
+import smtplib
+from email.mime.text import MIMEText
+
+from_addr = 'cshung1961@gmail.com'              # 設定發信帳號
+pwd = input('請輸入 %s 的密碼 : ' % from_addr)  # 要求輸入發信帳號密碼
+to_addr_list = ['cshung@deepwisdom.com.tw', 'jiinkwei@me.com']   # 設定收件人
+
+with open('ex26_2.txt', 'rb') as filename:         # 讀取檔案內容
+    mailContent = filename.read()
+msg = MIMEText(mailContent, 'base64', 'utf-8')
+msg['Content-Type'] = 'application/octet-stream'
+msg['Content-Disposition'] = 'attachment; filename="ex26_2.txt"'
+msg['Subject'] = '傳送Python學習心得附加檔案'
+msg['From'] = '學生'
+msg['To'] = 'cshung@deepwisdom.com.tw'
+msg['Cc'] = 'jiinkwei@me.com'
+
+mySMTP = smtplib.SMTP('smtp.gmail.com', 587)    # 執行連線
+mySMTP.ehlo()                                   # 啟動對話
+mySMTP.starttls()                               # 執行TLS加密               
+mySMTP.login(from_addr, pwd)                    # 登入郵件伺服器
+status = mySMTP.sendmail(from_addr, to_addr_list, msg.as_string())  # 執行發送信件
+if status == {}:                                # 檢查是否發信成功
+    print("發送郵件成功!")
+mySMTP.quit()                                   # 結束連線
+
+
+print("------------------------------------------------------------")  # 60個
+"""
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+code1 = '洪'
+print('洪')
+print(hex(ord(code1)))     # 輸出字元'洪'的Unicode(16進位)碼值
+code2 = '錦'
+print('錦')
+print(hex(ord(code2)))     # 輸出字元'錦'的Unicode(16進位)碼值
+code3 = '魁'
+print('魁')
+print(hex(ord(code3)))     # 輸出字元'魁'的Unicode(16進位)碼值
+
+
+print("------------------------------------------------------------")  # 60個
+
+print(" 姓名    國文    英文    總分    平均")
+print("%3s  %4d    %4d    %4d     %3.1f" % ("洪冰儒", 98, 90, 188, 188/2))
+print("%3s  %4d    %4d    %4d     %3.1f" % ("洪雨星", 96, 95, 191, 191/2))
+print("%3s  %4d    %4d    %4d     %3.1f" % ("洪冰雨", 92, 88, 180, 180/2))
+print("%3s  %4d    %4d    %4d     %3.1f" % ("洪星宇", 93, 97, 190, 190/2))
+
+print("------------------------------------------------------------")  # 60個
+
+wd = """The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!"""
+print("下列是Python之禪內文")
+print(wd)
+print("以分行符號將Python 之禪的行資料變成串列元素")
+songlist = wd.split('\n')
+print(songlist)
+
+print("------------------------------------------------------------")  # 60個
+
+abc = 'abcdefghijklmnopqrstuvwxyz'
+front5 = abc[:5]
+end21 = abc[5:]
+subText = end21 + front5
+print("abc     = ", abc)
+print("subText = ", subText)
+
+print("------------------------------------------------------------")  # 60個
+
+cities = ['Taipei','Beijing','Tokyo','Chicago','Nanjing']
+print(cities)
+cities.append('London')
+print(cities)
+cities.insert(3,'Xian')
+print(cities)
+cities.remove('Tokyo')
+print(cities)
+
+print("------------------------------------------------------------")  # 60個
+
+sc = [['洪錦魁', 80, 95, 88, 0, 0],
+      ['洪冰儒', 98, 97, 96, 0, 0],
+      ['洪雨星', 91, 93, 95, 0, 0],
+      ['洪冰雨', 92, 94, 90, 0, 0],
+      ['洪星宇', 92, 97, 90, 0, 0],
+     ]      
+sc[0][4] = sum(sc[0][1:4])
+sc[1][4] = sum(sc[1][1:4])
+sc[2][4] = sum(sc[2][1:4])
+sc[3][4] = sum(sc[3][1:4])
+sc[4][4] = sum(sc[4][1:4])
+sc[0][5] = round((sc[0][4] / 3), 1)
+sc[1][5] = round((sc[1][4] / 3), 1)
+sc[2][5] = round((sc[2][4] / 3), 1)
+sc[3][5] = round((sc[3][4] / 3), 1) 
+sc[4][5] = round((sc[4][4] / 3), 1) 
+print(sc[0])   
+print(sc[1])
+print(sc[2])
+print(sc[3])
+print(sc[4])
+
+print("------------------------------------------------------------")  # 60個
+
+#網址
+site = 'https://www.grenade.tw/blog/how-to-use-the-python-financial-analysis-visualization-module-mplfinance/'
+if site.startswith("http://") or site.startswith("https://"):
+    print("網址格式正確")
+else:
+    print("網址格式錯誤")
+
+print("------------------------------------------------------------")  # 60個
+
+n = 10
+for i in range(1,n):
+    for j in range(1,n-i+1):
+        print(j, end='')
+    print()
+
+print("------------------------------------------------------------")  # 60個
+
+fruits1 = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
+fruits2 = ['香蕉', '芭樂', '西瓜']
+print("目前fruits2串列 : ", fruits2)
+for fruit in fruits2[:]:
+    if fruit in fruits1:
+        fruits2.remove(fruit)
+        print(f"刪除 {fruit}")
+print("最後fruits2串列 : ", fruits2)
+
+print("------------------------------------------------------------")  # 60個
+
+title = "9 * 9 Multiplication Table"
+print("%s" % title.center(40))
+for i in range(1,10):
+    print(f"{i:4d}", end='')
+print()                                 # 跳列輸出
+for i in range(40):
+    print("=", end='')                  # 列印分隔符號
+print()                                 # 跳列輸出
+for i in range(1, 10):
+    print(i, '|', end='')
+    for j in range(1, 10):
+        print(f"{i*j:4d}", end='')      # 列印乘法值
+    print()                             # 跳列輸出
+
+print("------------------------------------------------------------")  # 60個
+
+names = ['洪錦魁','洪冰儒','東霞','大成']
+lastname = []
+for name in names:
+    if name.startswith('洪'):    # 是否姓氏洪開頭
+        lastname.append(name)    # 加入串列
+print(lastname)
+
+print("------------------------------------------------------------")  # 60個
+
+sc = [[1, '洪錦魁', 80, 95, 88, 0, 0, 0],
+      [2, '洪冰儒', 98, 97, 96, 0, 0, 0],
+      [3, '洪雨星', 91, 93, 95, 0, 0, 0],
+      [4, '洪冰雨', 92, 94, 90, 0, 0, 0],
+      [5, '洪星宇', 92, 97, 90, 0, 0, 0],
+     ]
+# 計算總分與平均
+print("原始成績單")
+for i in range(len(sc)):
+    print(sc[i])
+    sc[i][5] = sum(sc[i][2:5])              # 填入總分
+    sc[i][6] = round((sc[i][5] / 3), 1)     # 填入平均
+sc.sort(key=lambda x:x[5],reverse=True)     # 依據總分高往低排序
+# 以下填入名次
+for i in range(len(sc)):                    # 填入名次
+    sc[i][7] = i + 1
+# 以下修正相同成績應該有相同名次
+for i in range((len(sc)-1)):
+    if sc[i][5] == sc[i+1][5]:              # 如果成績相同
+        sc[i+1][7] = sc[i][7]               # 名次應該相同
+# 以下依座號排序
+sc.sort(key=lambda x:x[0])                  # 依據座號排序
+print("最後成績單")
+for i in range(len(sc)):
+    print(sc[i])
+
+print("------------------------------------------------------------")  # 60個
+
+weight = 50              
+increase = 1.2
+n = 5
+for i in range(int(n)):
+    weight += increase
+    print(f"第 {i+1} 年體重 : {weight:4.1f}")
+
+print("------------------------------------------------------------")  # 60個
+
+fahrenheit = [32, 77, 104]
+celsius = [(x - 32) * 5 / 9 for x in fahrenheit]
+print(celsius)
+
+print("------------------------------------------------------------")  # 60個
+
+n1 = [1,2,3,4,5]
+n2 = [1,2,3,4,5]
+result = [[x, y] for x in n1 for y in n2]
+print(result)
+
+print("------------------------------------------------------------")  # 60個
+
+bookclub = ['John','Peter','Curry','Mike','Kevin']
+print("讀書會成員")
+for people in bookclub:
+    print(people)
+bookclub[0] = 'Johnnason'
+for people in bookclub:
+    print(people)
+
+print("------------------------------------------------------------")  # 60個
+
+tp = (1,2,3,4,5,2,3,1,4)
+lst = list(tp)
+newlst = []
+for i in lst:
+    if i not in newlst:
+        newlst.append(i)
+newtp = tuple(newlst)
+print("新的元組內容 : ", newtp)    
+
+print("------------------------------------------------------------")  # 60個
+
+weatherH = (30, 28, 29, 31, 33, 35, 32)
+weatherL = (20, 21, 19, 22, 23, 24, 20)
+print(f"過去一周的最高溫度 {max(weatherH)}")
+print(f"過去一周的最低溫度 {min(weatherH)}")
+
+print("過去一周的平均溫度")     
+for i in range(len(weatherH)):
+    print(f"{((weatherH[i]+weatherL[i])/2):3.1f}  ", end="")
+
+print("------------------------------------------------------------")  # 60個
+
+abc = 'abcdefghijklmnopqrstuvwxyz'
+encry_dict = {}
+front3 = abc[:3]
+end23 = abc[3:]
+subText = end23 + front3
+encry_dict = dict(zip(subText, abc))    # 建立字典
+print("列印編碼字典\n", encry_dict)     # 列印字典
+
+msgTest = 'python'                      # 測試字串
+cipher = []
+for i in msgTest:                       # 執行每個字元加密
+    v = encry_dict[i]                   # 加密
+    cipher.append(v)                    # 加密結果
+ciphertext = ''.join(cipher)            # 將串列轉成字串
+
+print("原始字串 ", msgTest)
+print("加密字串 ", ciphertext)
+
+print("------------------------------------------------------------")  # 60個
+
+season = {'Spring':'春季',
+          'Summer':'夏季',
+          'Fall':'秋季',
+          'Winter':'冬季'}
+
+wd = "Spring"
+if wd in season:
+    print(wd, " 中文字義是 : ", season[wd])
+else:
+    print("查無此單字")
+
+print("------------------------------------------------------------")  # 60個
+
+month = {'一月':'January','二月':'February','三月':'March',
+         '四月':'April', '五月':'May','六月':'June',
+         '七月':'July','八月':'August','九月':'September',
+         '十月':'October','十一月':'November','十二月':'December'
+        }
+         
+key = "三月"
+if key in month:
+    print(month[key])
+else:
+    print('輸入錯誤')
+
+print("------------------------------------------------------------")  # 60個
+
+noodles = {'牛肉麵':100, '肉絲麵':80, '陽春麵':60,
+           '大滷麵':90, '麻醬麵':70}
+print(noodles)
+for noodle, price in sorted(noodles.items(), key=lambda item:item[1]):
+    print(noodle,":",price)
+
+print("------------------------------------------------------------")  # 60個
+
+armys = []                      # 建立小兵空串列
+# 建立50個小兵
+for soldier_number in range(50):
+    soldier = {'tag':'red', 'score':3, 'speed':'slow'}
+    armys.append(soldier)
+# 列印前3個小兵
+print("前3名小兵資料")
+for soldier in armys[:3]:
+    print(soldier)
+# 更改編號36到38的小兵
+for soldier in armys[35:38]:
+    if soldier['tag'] == 'red':
+        soldier['tag'] = 'blue'
+        soldier['score'] = 5
+        soldier['speed'] = 'medium'
+# 列印編號35到40的小兵
+print("列印編號35到40小兵資料")
+for soldier in armys[34:40]:
+    print(soldier)
+# 更改編號47到49的小兵
+for soldier in armys[47:50]:
+    if soldier['tag'] == 'red':
+        soldier['tag'] = 'green'
+        soldier['score'] = 10
+        soldier['speed'] = 'fast'
+# 列印編號47到49的小兵
+print("列印編號47到49小兵資料")
+for soldier in armys[47:50]:
+    print(soldier)   
+
+print("------------------------------------------------------------")  # 60個
+
+song = """Are you sleeping, are you sleeping, Brother John, Brother John?
+Morning bells are ringing, morning bells are ringing.
+Ding ding dong, Ding ding dong."""
+
+# 以下是將歌曲大寫字母全部改成小寫
+songLower = song.lower()            # 歌曲改為小寫
+
+# 將歌曲的標點符號用空字元取代
+for ch in songLower:                
+        if ch in ".,?":
+            songLower = songLower.replace(ch,'')
+
+# 將歌曲字串轉成串列
+songList = songLower.split()        
+
+# 將歌曲串列處理成字典
+dict = {wd:songList.count(wd) for wd in songList}
+   
+maxCount = max(dict.values())       # 出現最多次數
+for key, count in dict.items():
+    if count == maxCount:
+        print(f"字串 {key} 出現最多次共出現 {count} 次")
+
+print("------------------------------------------------------------")  # 60個
+
+A = []
+for i in range(1,100,2):
+    A.append(i)
+B = []
+for i in range(0,101,5):
+    B.append(i)
+aSet = set(A)                   # 將串列A轉成集合aSet
+bSet = set(B)                   # 將串列B轉成集合bSet
+
+unionAB = aSet | bSet
+print("聯集 : ", unionAB)
+interAB = aSet & bSet
+print("交集 : ", interAB)
+A_B = aSet - bSet
+print("A-B差集 : ", A_B)
+B_A = bSet - aSet
+print("B-A差集 : ", B_A)
+
+print("------------------------------------------------------------")  # 60個
+
+A = []
+for i in range(1,100,2):
+    A.append(i)
+
+num = 2
+B = []
+primeNum = 0
+while num < 100:
+    if num == 2:                                # 2是質數所以直接輸出
+        B.append(num)
+        primeNum += 1
+    else:
+        for n in range(2, num):                 # 用2 .. num-1當除數測試
+            if num % n == 0:                    # 如果整除則不是質數
+                break                           # 離開迴圈
+        else:                                   # 否則是質數
+            primeNum += 1
+            B.append(num)
+    num += 1
+
+aSet = set(A)                                   # 將串列A轉成集合aSet
+bSet = set(B)                                   # 將串列B轉成集合bSet
+
+unionAB = aSet | bSet
+print("聯集 : ", unionAB)
+interAB = aSet & bSet
+print("交集 : ", interAB)
+A_B = aSet - bSet
+print("A-B差集 : ", A_B)
+B_A = bSet - aSet
+print("B-A差集 : ", B_A)
+AsdB = aSet ^ bSet
+print("AB對稱差集 : ", AsdB)
+
+print("------------------------------------------------------------")  # 60個
+
+aSet = {i for i in range(1,100,2)}
+bSet = {i for i in range(0,101,5)}
+
+unionAB = aSet | bSet
+print("聯集 : ", unionAB)
+interAB = aSet & bSet
+print("交集 : ", interAB)
+A_B = aSet - bSet
+print("A-B差集 : ", A_B)
+B_A = bSet - aSet
+print("B-A差集 : ", B_A)
+
+print("------------------------------------------------------------")  # 60個
+
+def reverse(n):
+    reverseN = 0
+    while n != 0:
+        r = n % 10
+        reverseN = reverseN * 10 + r
+        n //= 10
+    return reverseN 
+
+def isPalindrome(n):
+    return n == reverse(n)
+        
+x = eval("123456789")
+if isPalindrome(x):
+    print("這是回文數")
+else:
+    print("這不是回文數")
+
+print("------------------------------------------------------------")  # 60個
+
+def isPalindrome(s):
+    if len(s) <= 1:
+        return True
+    elif s[0] != s[len(s)-1]:
+        return False
+    else:
+        return isPalindrome(s[1:len(s)-1])
+
+string = "ABCDEFGH"
+if isPalindrome(string):
+    print(f"{string} 是回文字串")
+else:
+    print(f"{string} 不是回文字串")
+
+print("------------------------------------------------------------")  # 60個
+
+def mysum(nLst):
+    if nLst == []:
+        return 0
+    return nLst[0] + mysum(nLst[1:])
+
+data = [5, 7, 9, 15, 21, 6]
+print(f'mysum = {mysum(data)}')
+
+print("------------------------------------------------------------")  # 60個
+
+def fun(n):
+    if n == 1:
+        return 1.0 / 2
+    else:
+        return fun(n - 1) + (n * 1.0) / (n + 1)
+
+n = 100
+for i in range(1, n + 1):
+    print(f"{i} = {fun(i):5.3f}")           
+
+print("------------------------------------------------------------")  # 60個
+
+mylist = [5, 10, 15, 20, 25, 30]
+
+evenlist = list(filter(lambda x: (x % 2 == 0), mylist))
+
+# 輸出偶數串列
+print("偶數串列: ",evenlist)
+
+print("------------------------------------------------------------")  # 60個
+
+def upper(func):                # 大寫裝飾器
+    def newFunc(args):
+        oldresult = func(args)
+        newresult = oldresult.upper()
+        return newresult
+    return newFunc
+def bold(func):                 # 加粗體字串裝飾器
+    def wrapper(args):
+        return 'bold' + func(args) + 'bold'
+    return wrapper
+def italic(func):               # 加斜體字串裝飾器
+    def wrapper(args):
+        return 'italic' + func(args) + 'italic'
+    return wrapper
+@italic
+@bold                           # 設定加粗體字串裝飾器
+@upper                          # 設定大寫裝飾器
+def greeting(string):           # 問候函數
+    return string
+
+print(greeting('Hello! iPhone'))
+
+print("------------------------------------------------------------")  # 60個
+
+def factorial(n):
+    """ 計算n的階乘, n 必須是正整數 """
+    if n == 1:
+        return 1
+    else:
+        return (n * factorial(n-1))
+
+#輸入城市的個數
+N = 10
+times = 10000000000000          # 電腦每秒可處理數列數目
+day_secs = 60 * 60 * 24         # 一天秒數
+year_secs = 365 * day_secs      # 一年秒數
+combinations = factorial(N)     # 組合方式
+years = combinations / (times * year_secs)
+print(f"城市個數 {N}, 路徑組合數 = {combinations}")
+print(f"需要 {years} 年才可以獲得結果")
+
+print("------------------------------------------------------------")  # 60個
+
+def guest_info(firstname, middlename, lastname, gender):
+    """ 整合客戶名字資料 """
+    if gender == "M":
+        welcome = 'Mr. ' + firstname + middlename + lastname + 'Welcome'
+    else:
+        welcome = 'Miss ' + firstname + middlename + lastname + 'Welcome'
+    return welcome
+
+info1 = guest_info('Ivan ', 'Carl ', 'Hung ', 'M')
+info2 = guest_info('Mary ', 'Ice ', 'Hung ', 'F')
+print(info1)
+print(info2)
+
+print("------------------------------------------------------------")  # 60個
+
+def pi(n):
+    p = 0
+    for i in range(1,n+1, 1):
+        p += 4 *((-1)**(i+1)/(2*i-1))
+    return p
+
+print("  i      PI ")
+print("================")
+for i in range(1, 10000, 1000):
+    print("%5d   %7.5f" % (i, pi(i)))
+
+print("------------------------------------------------------------")  # 60個
+
+class Myschool():
+    def __init__(self,name,score):
+        self.name = name
+        self.score = score
+    def msg(self):
+        print("Hi!" + self.name.title() + "你的成績是" + str(self.score) + "分")
+
+A = Myschool("kevin",80)
+A.msg()
+
+print("------------------------------------------------------------")  # 60個
+
+class Animals():
+    """Animals類別, 這是基底類別 """
+    def __init__(self, animal_name, animal_age ):
+        self.name = animal_name # 紀錄動物名稱
+        self.age = animal_age   # 紀錄動物年齡
+
+    def run(self):              # 輸出動物 is running
+        print(self.name.title(), " is running")
+
+class Dogs(Animals):
+    """Dogs類別, 這是Animal的衍生類別 """
+    def __init__(self, dog_name, dog_age):
+        super().__init__('My pet ' + dog_name.title(), dog_age)
+
+class Birds(Animals):
+    """Birds類別, 這是Animal的衍生類別 """
+    def __init__(self, bird_name, bird_age):
+        super().__init__('My pet ' + bird_name.title(), bird_age)
+    def run(self):
+        print(self.name.title(), "is flying")
+
+mycat = Animals('lucy', 5)      # 建立Animals物件以及測試
+print(mycat.name.title(), ' is ', mycat.age, " years old.")
+mycat.run()
+
+mydog = Dogs('lily', 6)         # 建立Dogs物件以及測試
+print(mydog.name.title(), ' is ', mydog.age, " years old.")
+mydog.run()
+        
+mybird = Birds('Cici', 8)       # 建立Birds物件以及測試
+print(mybird.name.title(), ' is ', mybird.age, " years old.")
+mybird.run()      
+
+print("------------------------------------------------------------")  # 60個
+
+class Grandfather():
+    """ 定義祖父類別 """
+    def action1(self):
+        print("Grandfather")
+        
+class Father(Grandfather):
+    """ 定義父親類別 """
+    def action2(self):      # 定義action2()
+        print("Father")
+
+class Uncle(Grandfather):
+    """ 定義叔父類別 """
+    def action2(self):      # 定義action2()
+        print("Uncle")
+
+class Aunt(Grandfather):
+    """ 定義阿姨類別 """
+    def action2(self):      # 定義action2()
+        print("Aunt")
+        
+class Ivan(Father, Uncle, Aunt):
+    """ 定義Ivan類別 """
+    def action3(self):
+        print("Ivan")
+
+ivan = Ivan()
+ivan.action3()              # 順序 Ivan
+ivan.action2()              # 順序 Ivan -> Father
+ivan.action1()              # 順序 Ivan -> Father -> Grandfather
+
+print("------------------------------------------------------------")  # 60個
+
+class Grandfather():
+    """ 定義祖父類別 """
+    def action1(self):
+        print("Grandfather")
+        
+class Father(Grandfather):
+    """ 定義父親類別 """
+    def action2(self):      # 定義action2()
+        print("Father")
+
+class Uncle(Grandfather):
+    """ 定義叔父類別 """
+    def action2(self):      # 定義action2()
+        print("Uncle")
+
+class Aunt(Grandfather):
+    """ 定義阿姨類別 """
+    def action2(self):      # 定義action2()
+        print("Aunt")
+        
+class Ivan(Father, Uncle, Aunt):
+    """ 定義Ivan類別 """
+    def action3(self):
+        print("Ivan")
+
+ivan = Ivan()
+ivan.action3()              # 順序 Ivan
+ivan.action2()              # 順序 Ivan -> Father
+ivan.action1()              # 順序 Ivan -> Father -> Grandfather
+
+print("------------------------------------------------------------")  # 60個
+
+class Grandfather():
+    """ 定義祖父類別 """
+    def action1(self):
+        print("Grandfather")
+        
+class Father(Grandfather):
+    """ 定義父親類別 """
+    def action2(self):      # 定義action2()
+        print("Father")
+
+class Uncle(Grandfather):
+    """ 定義叔父類別 """
+    def action2(self):      # 定義action2()
+        print("Uncle")
+
+class Aunt(Grandfather):
+    """ 定義阿姨類別 """
+    def action2(self):      # 定義action2()
+        print("Aunt")
+        
+class Ivan(Uncle, Aunt, Father):
+    """ 定義Ivan類別 """
+    def action3(self):
+        print("Ivan")
+
+ivan = Ivan()
+ivan.action3()              # 順序 Ivan
+ivan.action2()              # 順序 Ivan -> Father
+ivan.action1()              # 順序 Ivan -> Father -> Grandfather
+
+print("------------------------------------------------------------")  # 60個
+
+class Grandfather():
+    """ 定義祖父類別 """
+    def action1(self):
+        print("Grandfather")
+        
+class Father(Grandfather):
+    """ 定義父親類別 """
+    def action2(self):      # 定義action2()
+        print("Father")
+
+class Uncle(Grandfather):
+    """ 定義叔父類別 """
+    def action2(self):      # 定義action2()
+        print("Uncle")
+
+class Aunt(Grandfather):
+    """ 定義阿姨類別 """
+    def action2(self):      # 定義action2()
+        print("Aunt")
+        
+class Ivan(Aunt, Father, Uncle):
+    """ 定義Ivan類別 """
+    def action3(self):
+        print("Ivan")
+
+ivan = Ivan()
+ivan.action3()              # 順序 Ivan
+ivan.action2()              # 順序 Ivan -> Father
+ivan.action1()              # 順序 Ivan -> Father -> Grandfather
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+print("目前Python版本是:     ", sys.version)
+print("目前Python版本是:     ", sys.version_info)
+print("目前Python平台是:     ", sys.platform)
+print("目前Python視窗版本是: ", sys.getwindowsversion())
+print("目前Python可執行檔路徑", sys.executable)
+
+print("------------------------------------------------------------")  # 60個
+
+""" 很多
+secretcode = '112299'                                   # 設定密碼
+codeNotFound = True                                     # 尚未找到密碼為True
+for i1 in range(0, 10):                                 # 第一位數
+    if codeNotFound:            # 檢查是否找到沒有找到才會往下執行
+        for i2 in range(0, 10):                         # 第二位數
+            if codeNotFound:    # 檢查是否找到沒有找到才會往下執行
+                for i3 in range(0, 10):                 # 第三位數
+                    if codeNotFound:
+                        for i4 in range(0, 10):
+                            if codeNotFound:
+                                for i5 in range(0, 10):
+                                    if codeNotFound:
+                                        for i6 in range(0, 10):
+                                            code = str(i1)+str(i2)+str(i3)+str(i4)+str(i5)+str(i6) # 組成密碼
+                                            if code == secretcode:              # 比對密碼
+                                                print('Bingo!', code)
+                                                codeNotFound = False            # 註明已經比對成功
+                                                break
+                                            else:
+                                                print(code)                     # 列印無效碼
+"""
+print("------------------------------------------------------------")  # 60個
+
+import threading, time
+
+def wakeUp(mytime,note,job):
+    print(job," 開始")
+    starttime = int(time.time())
+    while int(time.time()) - starttime < mytime:
+        pass
+    print(note)
+    print(job," 結束")
+    
+print("程式階段1")
+threadObj1 = threading.Thread(target=wakeUp,
+                args=[30,'買機票去北京','threadJob1'])
+threadObj1.start()              # threadObj1執行緒開始工作
+time.sleep(1)                   # 主執行緒休息1秒
+
+threadObj2 = threading.Thread(target=wakeUp,
+                args=[60,'送花給女友', 'threadJob2'])
+threadObj2.start()              # threadObj1執行緒開始工作
+time.sleep(1)                   # 主執行緒休息1秒
+
+print("程式階段2,正常工作")
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 

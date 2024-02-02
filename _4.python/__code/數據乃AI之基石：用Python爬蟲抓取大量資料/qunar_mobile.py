@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import requests
 import json
 import urllib.request
@@ -12,7 +11,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
-
 
 def globalVals():
     global driver
@@ -33,7 +31,7 @@ def init_csv():
     global f_
     global writer
     global writer_
-    csvFile = "D:/qunar_routes.csv"
+    csvFile = "./tmp_qunar_routes.csv"
     f = open(csvFile, "a+", newline="", encoding='utf-8')
 
     writer = csv.writer(f)

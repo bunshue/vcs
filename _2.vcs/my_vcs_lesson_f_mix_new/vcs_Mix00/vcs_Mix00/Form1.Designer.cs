@@ -265,7 +265,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 70);
             this.button14.TabIndex = 114;
-            this.button14.Text = "StringBuilder";
+            this.button14.Text = "字串處理";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

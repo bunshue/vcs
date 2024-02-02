@@ -1,46 +1,46 @@
 """
-Python Matplotlib.pyplot.hist()用法及代码示例
+Python Matplotlib.pyplot.hist()用法及代碼示例
 
-Matplotlib是Python中的一个库，它是数字的-NumPy库的数学扩展。
-Pyplot是Matplotlib模块的基于状态的接口，该模块提供了MATLAB-like接口。
-matplotlib.pyplot.hist()函数
+Matplotlib是Python中的一個庫，它是數字的-NumPy庫的數學擴展。
+Pyplot是Matplotlib模塊的基于狀態的接口，該模塊提供了MATLAB-like接口。
+matplotlib.pyplot.hist()函數
 
-matplotlib库的pyplot模块中的hist()函数用于绘制直方图。
+matplotlib庫的pyplot模塊中的hist()函數用于繪制直方圖。
 
 用法： matplotlib.pyplot.hist(x, bins=None, range=None, density=False, weights=None, cumulative=False, bottom=None, histtype=’bar’, align=’mid’, orientation=’vertical’, rwidth=None, log=False, color=None, label=None, stacked=False, \*, data=None, \*\*kwargs)
 
-参数：此方法接受以下描述的参数：
+參數：此方法接受以下描述的參數：
 
-    x:此参数是数据序列。
-    bins:此参数是可选参数，它包含整数，序列或字符串。
-    range:此参数是可选参数，它是箱子的上下限。
-    density:此参数是可选参数，它包含布尔值。
-    weights:此参数是可选参数，并且是一个权重数组，与x的形状相同。
-    bottom:此参数是每个容器底部基线的位置。
-    histtype:此参数是可选参数，用于绘制直方图的类型。 {‘bar’，‘barstacked’，‘step’，‘stepfilled’}
-    align:此参数是可选参数，它控制如何绘制直方图。 {‘left’，‘mid’，‘right’}
-    rwidth:此参数是可选参数，它是条形图的相对宽度，是箱宽度的一部分
-    log:此参数是可选参数，用于将直方图轴设置为对数刻度
-    color:此参数是一个可选参数，它是一个颜色规格或一系列颜色规格，每个数据集一个。
-    label:此参数是可选参数，它是一个字符串或匹配多个数据集的字符串序列。
+    x:此參數是數據序列。
+    bins:此參數是可選參數，它包含整數，序列或字符串。
+    range:此參數是可選參數，它是箱子的上下限。
+    density:此參數是可選參數，它包含布爾值。
+    weights:此參數是可選參數，并且是一個權重數組，與x的形狀相同。
+    bottom:此參數是每個容器底部基線的位置。
+    histtype:此參數是可選參數，用于繪制直方圖的類型。 {‘bar’，‘barstacked’，‘step’，‘stepfilled’}
+    align:此參數是可選參數，它控制如何繪制直方圖。 {‘left’，‘mid’，‘right’}
+    rwidth:此參數是可選參數，它是條形圖的相對寬度，是箱寬度的一部分
+    log:此參數是可選參數，用于將直方圖軸設置為對數刻度
+    color:此參數是一個可選參數，它是一個顏色規格或一系列顏色規格，每個數據集一個。
+    label:此參數是可選參數，它是一個字符串或匹配多個數據集的字符串序列。
 
-返回值：这将返回以下内容：
+返回值：這將返回以下內容：
 
-    n:这将返回直方图箱的值。
-    垃圾桶：这将返回箱子的边。
-    补丁：这将返回用于创建直方图的单个补丁的列表。
-
-"""
+    n:這將返回直方圖箱的值。
+    垃圾桶：這將返回箱子的邊。
+    補丁：這將返回用于創建直方圖的單個補丁的列表。
 
 """
-以上实例中我们生成了三组不同的随机数据，并使用 hist() 函数绘制了它们的直方图。通过设置不同的均值和标准差，我们可以生成具有不同分布特征的随机数据。
 
-我们设置了 bins 参数为 30，这意味着将数据范围分成 30 个等宽的区间，然后统计每个区间内数据的频数。
-我们设置了 alpha 参数为 0.5，这意味着每个直方图的颜色透明度为 50%。
+"""
+以上實例中我們生成了三組不同的隨機數據，并使用 hist() 函數繪制了它們的直方圖。通過設置不同的均值和標準差，我們可以生成具有不同分布特征的隨機數據。
 
-我们使用 label 参数设置了每个直方图的标签，以便在图例中显示。
+我們設置了 bins 參數為 30，這意味著將數據范圍分成 30 個等寬的區間，然后統計每個區間內數據的頻數。
+我們設置了 alpha 參數為 0.5，這意味著每個直方圖的顏色透明度為 50%。
 
-然后使用 legend() 函数显示图例。最后，我们使用 title()、xlabel() 和 ylabel() 函数设置了图表的标题和坐标轴标签。
+我們使用 label 參數設置了每個直方圖的標簽，以便在圖例中顯示。
+
+然后使用 legend() 函數顯示圖例。最后，我們使用 title()、xlabel() 和 ylabel() 函數設置了圖表的標題和坐標軸標簽。
 """
 """
 plt.hist()參數設置
@@ -119,7 +119,7 @@ print("描繪頻率分布圖")
 
 # 讀入csv檔
 filename = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV7_onigiri.csv"
+    "_data/python_ReadWrite_CSV7_onigiri.csv"
 )
 dat = pd.read_csv(filename, encoding="UTF-8")
 
@@ -316,17 +316,17 @@ num_bins = 100  # 直方圖顯示時的束數
 # 第一張圖
 plt.subplot(231)
 
-# 生成三组随机数据
+# 生成三組隨機數據
 data1 = np.random.normal(0, 1, 1000)
 data2 = np.random.normal(2, 1, 1000)
 data3 = np.random.normal(-2, 1, 1000)
 
-# 绘制直方图
+# 繪制直方圖
 plt.hist(data1, bins=30, alpha=0.5, label="Data 1")
 plt.hist(data2, bins=30, alpha=0.5, label="Data 2")
 plt.hist(data3, bins=30, alpha=0.5, label="Data 3")
 
-# 设置图表属性
+# 設置圖表屬性
 plt.title("RUNOOB hist() TEST")
 plt.xlabel("Value")
 plt.ylabel("Frequency")
@@ -387,13 +387,13 @@ num_bins = 100  # 直方圖顯示時的束數
 # 第一張圖
 plt.subplot(231)
 
-# 生成一组随机数据
+# 生成一組隨機數據
 data = np.random.randn(1000)
 
-# 绘制直方图
+# 繪制直方圖
 plt.hist(data, bins=30, color="skyblue", alpha=0.8)
 
-# 设置图表属性
+# 設置圖表屬性
 plt.title("RUNOOB hist() Test")
 plt.xlabel("Value")
 plt.ylabel("Frequency")
@@ -469,3 +469,134 @@ cb = plt.colorbar(label='count in bin')
 plt.show()
 
 """
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("新進")
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 直方圖
+x = np.random.rand(50, 2) # 產生共兩組，每組50個隨機數,
+plt.hist(x)
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
+plt.rcParams['axes.unicode_minus']=False
+plt.rcParams['font.size']=15
+
+score = [800,750,450,680,802,630,710,450,250,320,610,670,815,\
+         870,900,650,450,730,840,675,795,585,870,960,190]
+
+plt.hist(score, bins = [10,255,405,605,785,905,990],edgecolor = 'k') 
+plt.title('多益成績分布直方圖')
+plt.xlabel('成績')
+plt.ylabel('人數')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
+plt.rcParams['axes.unicode_minus']=False
+plt.rcParams['font.size']=15
+
+score = [800,750,450,680,802,630,710,450,250,320,610,670,815,870,900,650,450,730,840,675,795,585,870,960,190]
+n, b, p=plt.hist(score, bins = [10,255,405,605,785,905,990], edgecolor = 'k')
+
+for i in range(len(n)):
+    plt.text(b[i]+10, n[i], int(n[i]), ha='center', va='bottom', fontsize=10)
+plt.title('多益成績分布直方圖')
+plt.xlabel('成績')
+plt.ylabel('人數')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.rcParams['font.size']=18
+
+grade = [90,72,45,18,13,81,65,68,73,84,75,79,58,78,96,100,98,64,43,2,63,71,27,35,45,65]
+
+plt.hist(grade, bins = [0,10,20,30,40,50,60,70,80,90,100],edgecolor = 'r') 
+plt.title('全班成績直方圖分布圖')
+plt.xlabel('考試分數')
+plt.ylabel('人數統計')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+plt.rcParams['font.size']=15
+
+grade = [90,72,45,18,13,81,65,68,73,84,75,79,58,78,96,100,98,64,43,2,63,71,27,35,45,65]
+
+n, b, p=plt.hist(grade, bins = [0,10,20,30,40,50,60,70,80,90,100], edgecolor = 'r') 
+
+for i in range(len(n)):
+    plt.text(b[i]+10, n[i], int(n[i]), ha='center', va='bottom', fontsize=12)
+  
+plt.title('全班成績直方圖分布圖')
+plt.xlabel('考試分數')
+plt.ylabel('人數統計')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("Hist圖")
+
+fig, ax = plt.subplots(1, 3, figsize=(10, 8))
+
+normal_samples = np.random.normal(
+    size=100000
+)  # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+uniform_samples = np.random.uniform(size=100000)  # 生成 100000 組介於 0 與 1 之間均勻分配隨機變數
+exp_samples = np.random.exponential(scale=2, size=100000)
+
+ax[0].hist(x=normal_samples, bins=1000, label="Normal distribution")
+ax[1].hist(x=uniform_samples, bins=1000, label="Uniform distribution")
+ax[2].hist(x=exp_samples, bins=1000, label="Exponential distribution")
+ax[0].legend()
+ax[1].legend()
+ax[2].legend()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#繪製直方圖
+
+plt.subplot(121)
+np.random.seed(0)
+data = np.random.randn(10000)
+plt.hist(data, bins = 'auto')
+
+plt.subplot(122)
+np.random.seed(0)
+data = np.random.randn(10000)
+plt.hist(data, bins = 'auto', density = True)   #y軸改成密度
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+

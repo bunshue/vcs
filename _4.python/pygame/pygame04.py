@@ -34,10 +34,7 @@ white = pygame.color.Color('#FFFFFF')
 #利用screen物件來作為畫布，以fill()方法填上顏色
 screen.fill(Gray)
 
-
-
-
-
+print("------------------------------------------------------------")  # 60個
 
 import pygame
 pygame.mixer.init()
@@ -47,10 +44,6 @@ soundObj = pygame.mixer.Sound(mysound)      # 建立Sound物件
 soundObj.play()                             # 撥放一次
 pygame.time.delay(3000)                     # 休息3秒
 soundObj.play(2)                            # 播放3次
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -80,10 +73,6 @@ pygame.mixer.music.play()
 
 print("------------------------------------------------------------")  # 60個
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_2.py
-
-# ch33_2.py
 import pygame
 pygame.mixer.init()
 
@@ -96,18 +85,8 @@ pygame.time.delay(3000)                     # 休息3秒
 soundObj.set_volume(0.1)                    # 聲音變小
 soundObj.play(2)                            # 播放3次
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch33\ch33_3.py
-
-# ch33_3.py
 import pygame
 import time
 pygame.mixer.init()

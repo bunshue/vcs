@@ -12,6 +12,7 @@ using System.Collections;   //for ArrayList
 using System.Drawing.Drawing2D; //for SmoothingMode
 using System.Runtime.InteropServices;   //for DllImport
 using System.Text.RegularExpressions;
+using System.Diagnostics;       //for Process
 
 namespace vcs_MyPdfReader
 {
@@ -117,12 +118,13 @@ namespace vcs_MyPdfReader
             bt_recent0.Image = bmp;
             g = Graphics.FromImage(bmp);
             g.Clear(Color.Pink);
-            g.DrawString("開啟\n檔案", f, sb, new PointF(4, 15));
+            g.DrawString("開啟\n檔案", f, sb, new PointF(8, 12));
             bt_recent0.Location = new Point(x_st, y_st);
             bt_recent0.Click += bt_recent0_Click;     // 加入按鈕事件
             this.Controls.Add(bt_recent0); // 將按鈕加入表單
             bt_recent0.BringToFront();     //移到最上層
 
+            f = new Font("Arial", 9);
             x_st = listView1.Width + 15;
             y_st = 10 + dy * 1;
             Button bt_recent1 = new Button();  // 實例化按鈕
@@ -132,12 +134,13 @@ namespace vcs_MyPdfReader
             bt_recent1.Image = bmp;
             g = Graphics.FromImage(bmp);
             g.Clear(Color.Pink);
-            g.DrawString("開啟\n資料夾", f, sb, new PointF(4, 15));
+            g.DrawString("  開啟\n資料夾", f, sb, new PointF(4, 12));
             bt_recent1.Location = new Point(x_st, y_st);
             bt_recent1.Click += bt_recent1_Click;     // 加入按鈕事件
             this.Controls.Add(bt_recent1); // 將按鈕加入表單
             bt_recent1.BringToFront();     //移到最上層
 
+            f = new Font("Arial", 10);
             x_st = listView1.Width + 15;
             y_st = 10 + dy * 2;
             Button bt_recent2 = new Button();  // 實例化按鈕
@@ -147,7 +150,7 @@ namespace vcs_MyPdfReader
             bt_recent2.Image = bmp;
             g = Graphics.FromImage(bmp);
             g.Clear(Color.Pink);
-            g.DrawString("清除\n無效", f, sb, new PointF(4, 15));
+            g.DrawString("清除", f, sb, new PointF(8, 20));
             bt_recent2.Location = new Point(x_st, y_st);
             bt_recent2.Click += bt_recent2_Click;     // 加入按鈕事件
             this.Controls.Add(bt_recent2); // 將按鈕加入表單
@@ -162,11 +165,26 @@ namespace vcs_MyPdfReader
             bt_recent3.Image = bmp;
             g = Graphics.FromImage(bmp);
             g.Clear(Color.Pink);
-            g.DrawString("清除\n全部", f, sb, new PointF(4, 15));
+            g.DrawString("清除\n無效", f, sb, new PointF(8, 12));
             bt_recent3.Location = new Point(x_st, y_st);
             bt_recent3.Click += bt_recent3_Click;     // 加入按鈕事件
             this.Controls.Add(bt_recent3); // 將按鈕加入表單
             bt_recent3.BringToFront();     //移到最上層
+
+            x_st = listView1.Width + 15;
+            y_st = 10 + dy * 4;
+            Button bt_recent4 = new Button();  // 實例化按鈕
+            bt_recent4.Size = new Size(width, height);
+            bt_recent4.Text = "";
+            bmp = new Bitmap(width, height);
+            bt_recent4.Image = bmp;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+            g.DrawString("清除\n全部", f, sb, new PointF(8, 12));
+            bt_recent4.Location = new Point(x_st, y_st);
+            bt_recent4.Click += bt_recent4_Click;     // 加入按鈕事件
+            this.Controls.Add(bt_recent4); // 將按鈕加入表單
+            bt_recent4.BringToFront();     //移到最上層
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -176,37 +194,150 @@ namespace vcs_MyPdfReader
 
         private void bt_recent0_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "你按了 bt_recent0\n";
+            open_listview_pdf_file();
         }
 
         private void bt_recent1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "你按了 bt_recent1\n";
+            if (listView1.SelectedItems.Count == 0)
+            {
+                richTextBox1.Text += "未選取檔案\n";
+                return;
+            }
+
+            int selNdx;
+            string foldername = string.Empty;
+
+            selNdx = listView1.SelectedIndices[0];
+            listView1.Items[selNdx].Selected = true;    //選到的項目
+
+            richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+
+            //richTextBox1.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            foldername = listView1.Items[selNdx].SubItems[2].Text;
+            richTextBox1.Text += foldername + "\n";
+
+            if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
+            {
+                richTextBox1.Text += "資料夾 : " + foldername + ", 不存在\n";
+            }
+            else
+            {
+                //開啟檔案總管
+                Process.Start(foldername);
+            }
         }
 
         private void bt_recent2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "你按了 bt_recent2\n";
+            if (listView1.SelectedItems.Count == 0)
+            {
+                richTextBox1.Text += "未選取檔案\n";
+                return;
+            }
+
+            int len = listView1.SelectedItems.Count;
+            richTextBox1.Text += "你選擇了 " + len.ToString() + " 個檔案, 依序是 :\n";
+
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                int selNdx;
+                string full_filename = string.Empty;
+
+                //listView1.SelectedItems[i].Remove();    //刪除之 但有問題
+
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+
+                /*
+                richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+                richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                */
+                full_filename = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+                richTextBox1.Text += full_filename + "\n";
+
+                if (File.Exists(full_filename) == false)   //確認檔案是否存在
+                {
+                    richTextBox1.Text += "檔案 : " + full_filename + ", 不存在\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "檔案 : " + full_filename + ", 存在\n";
+                    richTextBox1.Text += "刪除之\n";
+
+
+                    pdf_filename_ArrayListData.Remove(full_filename);
+
+                    //richTextBox1.Text += "顯示結果\n";
+                    //show_pdf_filename_ArrayListData();
+
+
+
+
+                }
+            }
         }
 
         private void bt_recent3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "你按了 bt_recent3\n";
+            richTextBox1.Text += "你按了 bt_recent3 清除無效\n";
+        }
+
+        private void bt_recent4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按了 bt_recent4 清除全部\n";
         }
 
         void listView1_KeyDown(object sender, KeyEventArgs e)
         {
-            richTextBox1.Text += "KeyDown ";
+            //richTextBox1.Text += "KeyDown ";
         }
 
         void listView1_MouseClick(object sender, MouseEventArgs e)
         {
-            richTextBox1.Text += "MouseClick ";
+            //richTextBox1.Text += "MouseClick ";
         }
 
         void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            richTextBox1.Text += "MouseDoubleClick ";
+            open_listview_pdf_file();
+        }
+
+        void open_listview_pdf_file()
+        {
+            if (listView1.SelectedItems.Count == 0)
+            {
+                richTextBox1.Text += "未選取檔案\n";
+                return;
+            }
+
+            int selNdx;
+            string full_filename = string.Empty;
+
+            selNdx = listView1.SelectedIndices[0];
+            listView1.Items[selNdx].Selected = true;    //選到的項目
+
+            /*
+            richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+            richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            */
+            full_filename = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+            richTextBox1.Text += full_filename + "\n";
+
+            if (File.Exists(full_filename) == false)   //確認檔案是否存在
+            {
+                richTextBox1.Text += "檔案 : " + full_filename + ", 不存在\n";
+            }
+            else
+            {
+                Form1 f1 = (Form1)this.Owner;
+                f1.SetupForm1Data = full_filename;
+                f1.setForm1Value();
+                this.DialogResult = DialogResult.Ignore;
+            }
         }
 
         const Int64 TB = (Int64)GB * 1024;//定義TB的計算常量
@@ -266,6 +397,11 @@ namespace vcs_MyPdfReader
             }
 
             //show_pdf_filename_ArrayListData();
+            listView1.Clear();
+            //設置欄名稱
+            listView1.Columns.Add("檔名", 400, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
 
             richTextBox1.Text += "顯示ArrayList資料\n";
             richTextBox1.Text += "共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";

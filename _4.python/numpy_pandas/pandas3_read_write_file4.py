@@ -2,7 +2,7 @@ import sys
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("qunar_routes.csv")
+df = pd.read_csv("data/qunar_routes.csv")
 print (df.head())
 print (df.info())
 print (df)
