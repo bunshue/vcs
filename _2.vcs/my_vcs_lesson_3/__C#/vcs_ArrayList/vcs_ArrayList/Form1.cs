@@ -191,5 +191,25 @@ namespace vcs_ArrayList
             Console.WriteLine();
         }
 
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //ArrayList 測試
+            ArrayList animal = new ArrayList();
+            string name_of_animal = string.Empty;
+            name_of_animal = "mouse";
+            animal.Add(name_of_animal);
+            name_of_animal = "ox";
+            animal.Add(name_of_animal);
+            name_of_animal = "tiger";
+            animal.Add(name_of_animal);
+            name_of_animal = "rabbit";
+            animal.Add(name_of_animal);
+
+            foreach (string temp in animal)
+            {
+                richTextBox1.Text += temp + "\n";
+            }
+        }
     }
 }
+

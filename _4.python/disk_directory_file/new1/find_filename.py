@@ -1,14 +1,16 @@
-from pathlib import Path
+import pathlib
 
-infolder = "testfolder"
-value1 = "test"
+print("搜尋資料夾內所有檔名符合特定字串的檔案")
+
+foldername = 'C:/_git/vcs/_1.data/______test_files1'
+value1 = "vcs_R"
 
 #【函數：確認在資料夾的檔案名稱是否包含特定字串】
-def findfilename(infolder, findword):
+def findfilename(foldername, findword):
     cnt = 0
     msg = ""
     filelist = []
-    for p in Path(infolder).rglob("*.*"):   #將這個資料夾以及子資料夾的所有檔案
+    for p in pathlib.Path(foldername).rglob("*.*"):   #將這個資料夾以及子資料夾的所有檔案
         if p.name[0] != ".":                #沒有隱藏檔案的話
             filelist.append(str(p))         #新增至列表
     for filename in sorted(filelist):       #再替每個檔案排序
@@ -19,5 +21,5 @@ def findfilename(infolder, findword):
     return msg
 
 #【執行函數】
-msg = findfilename(infolder, value1)
+msg = findfilename(foldername, value1)
 print(msg)

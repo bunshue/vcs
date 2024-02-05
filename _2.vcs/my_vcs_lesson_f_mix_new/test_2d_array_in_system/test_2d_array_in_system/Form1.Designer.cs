@@ -34,13 +34,13 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,9 +67,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(354, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(554, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(430, 561);
+            this.richTextBox1.Size = new System.Drawing.Size(230, 561);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -107,10 +107,57 @@
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Location = new System.Drawing.Point(20, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(292, 452);
+            this.groupBox1.Size = new System.Drawing.Size(260, 452);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ArrayList";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(124, 370);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(100, 60);
+            this.button9.TabIndex = 10;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(124, 291);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(100, 60);
+            this.button8.TabIndex = 9;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(124, 198);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(100, 60);
+            this.button7.TabIndex = 8;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(124, 112);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(100, 60);
+            this.button6.TabIndex = 7;
+            this.button6.Text = "開啟檔案";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(124, 36);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(100, 60);
+            this.button5.TabIndex = 6;
+            this.button5.Text = "檢查ArrayList";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button0
             // 
@@ -131,53 +178,6 @@
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(124, 36);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 60);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "檢查ArrayList";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(124, 112);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 60);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "開啟檔案";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(124, 198);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(100, 60);
-            this.button7.TabIndex = 8;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(124, 291);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 60);
-            this.button8.TabIndex = 9;
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(124, 370);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 60);
-            this.button9.TabIndex = 10;
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // Form1
             // 

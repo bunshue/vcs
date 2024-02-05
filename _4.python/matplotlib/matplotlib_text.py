@@ -276,10 +276,28 @@ plt.text(70, 10, "牡丹亭")
 # 第四張圖
 plt.subplot(234)
 
+print("寫字")
+#                      H對齊方式       V對齊方式
+my_kwargs = dict(ha="center", va="center", fontsize=30, c="b")
+my_kwargs = dict(ha="left", va="top", fontsize=30, c="b")
+x_st = 0
+y_st = 17.5
+text = "歡迎來到美國"
+plt.text(x_st, y_st, text, **my_kwargs)
+plt.plot(x_st, y_st, "r-o")  # 畫基準點
 
 # 第五張圖
 plt.subplot(235)
 
+print("從windows字型中找出可以顯示的中文字型")
+import matplotlib as mpl
+zhfont = mpl.font_manager.FontProperties(fname='C:/Windows/Fonts/mingliu.ttc')
+plt.text(0, 0, u'測試一下 ', fontsize=20, fontproperties=zhfont)
+
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+plt.rcParams['axes.unicode_minus'] = False
+
+plt.text(0.5, 0.5, u'測試一下')
 
 # 第六張圖
 plt.subplot(236)

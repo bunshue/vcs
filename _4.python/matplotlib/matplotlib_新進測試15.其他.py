@@ -1,5 +1,8 @@
 # matplotlib_新進測試14_其他
 
+import os
+import time
+import random
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,20 +14,6 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-
-print("------------------------------------------------------------")  # 60個
-
-
-import os
-import time
-import random
-
-print("------------------------------------------------------------")  # 60個
-
-
-import os
-import time
-import random
 
 print("------------------------------------------------------------")  # 60個
 
@@ -130,7 +119,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 def demo(ax, connectionstyle):
-    ''' 繪製子圖與箭頭樣式說明 '''
+    # 繪製子圖與箭頭樣式說明
     x1, y1 = 0.3, 0.2
     x2, y2 = 0.8, 0.6
     ax.plot([x1, x2], [y1, y2], "g.")
@@ -244,42 +233,6 @@ ax.annotate('極座標文字註解',
             horizontalalignment='left',
             verticalalignment='bottom',
             )
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("寫字")
-#                      H對齊方式       V對齊方式
-my_kwargs = dict(ha="center", va="center", fontsize=30, c="b")
-my_kwargs = dict(ha="left", va="top", fontsize=30, c="b")
-x_st = 0
-y_st = 17.5
-text = "歡迎來到美國"
-plt.text(x_st, y_st, text, **my_kwargs)
-plt.plot(x_st, y_st, "r-o")  # 畫基準點
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("從windows字型中找出可以顯示的中文字型")
-import matplotlib as mpl
-zhfont = mpl.font_manager.FontProperties(fname='C:/Windows/Fonts/mingliu.ttc')
-plt.text(0, 0, u'測試一下 ', fontsize=20, fontproperties=zhfont)
-
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-plt.rcParams['axes.unicode_minus'] = False
-
-plt.text(0.5, 0.5, u'測試一下')
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -435,124 +388,11 @@ plt.show()
 
 print(matplotlib.artist.getp(fig.patch))  # 顯示繪製對象的各個屬性值
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-plt.rcParams['font.size']=12
-
-#橫條圖
-def diagram_1(s,x):
-	plt.barh(x, s)
-
-#圓餅圖
-def diagram_2(s,x):	 
-	plt.pie(s,labels=x, autopct='%.2f%%')
-#折線圖+長條圖
-
-def diagram_4(s,x):
-    plt.plot(x, s, marker='.')
-    plt.bar(x, s, alpha=0.5)	
-
-#長條圖
-def diagram_3(s,x):
-	plt.bar(x, s)	
-
-#要繪圖的數據
-x = ['高雄','台中','宜蘭','花蓮']
-s = [89,58,63,50]
-
-#設定子圖
-plt.figure(1, figsize=(8, 8),clear=True)
-plt.subplots_adjust(left=0.1, right=0.95)
-
-plt.subplot(221)
-diagram_1(s,x)
-
-plt.subplot(222)
-diagram_2(s,x)
-
-plt.subplot(223)
-diagram_3(s,x)
-
-plt.subplot(2,2,4)
-diagram_4(s,x)
-
-plt.show()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-plt.rcParams['font.size']=12
-
-#折線圖
-def lineChart(s,x):
-    plt.xlabel('城市名稱')
-    plt.ylabel('民調原分比')
-    plt.title('各種城市喜好度比較')
-    plt.plot(x, s, marker='.')
-
-#長條圖
-def barChart(s,x):
-    plt.xlabel('城市名稱')
-    plt.ylabel('民調原分比')
-    plt.title('各種城市喜好度比較')
-    plt.bar(x, s)
-
-#橫條圖
-def barhChart(s,x):
-    plt.barh(x, s)
-
-#圓餅圖
-def pieChart(s,x):	 
-    plt.pie(s,labels=x, autopct='%.2f%%')
-
-#要繪圖的數據
-x = ['第一季', '第二季', '第三季', '第四季']
-s = [13.2, 20.1, 11.9, 14.2]
-
-#定義子圖
-plt.figure(1, figsize=(8, 6),clear=True)
-plt.subplots_adjust(left=0.1, right=0.95)
-
-plt.subplot(2,2,1)
-pieChart(s,x)
-
-x = ['程式設計概論', '多媒體概論', '計算機概論', '網路概論']
-s = [3560, 4000, 4356, 1800]
-plt.subplot(2,2,2)
-barhChart(s,x)
-
-x = ['新北市', '台北市', '高雄市', '台南市','桃園市','台中市']
-s = [0.2, 0.3, 0.15, 0.23,0.19, 0.27]
-plt.subplot(223)
-lineChart(s,x)
-
-plt.subplot(224)
-barChart(s,x)
-
-plt.show()
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-'''
 
 print("箱圖")
 
@@ -579,6 +419,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 # 導出圖表
 
 from io import BytesIO
@@ -613,20 +454,7 @@ tree = etree.ElementTree(html)
 tree.write('導出圖表.html')
 #使用默認瀏覽器打開 html 文件
 webbrowser.open('導出圖表.html',new = 1)
-'''
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 

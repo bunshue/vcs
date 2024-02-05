@@ -6,6 +6,22 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
+# 使用 json.dumps() 美觀列印 dict
+
+import json
+
+animals = {
+    "鼠": 3,
+    "牛": 48,
+    "虎": 33,
+    "兔": 8,
+    "龍": 38,
+    "蛇": 16,
+}
+
+print(type(animals))
+
+print(json.dumps(animals, indent=4, sort_keys=True))
 
 
 print("------------------------------------------------------------")  # 60個

@@ -11,6 +11,8 @@ namespace vcs_WebBrowser9_pdf
 {
     public partial class Form1 : Form
     {
+        string pdf_filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_7_free\vcs_MyPdfReader\vcs_MyPdfReader\bin\Debug\Python簡介.pdf";
+
         public Form1()
         {
             InitializeComponent();
@@ -60,73 +62,112 @@ namespace vcs_WebBrowser9_pdf
 
         private void button0_Click(object sender, EventArgs e)
         {
-            string pdf_filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_7_free\vcs_MyPdfReader\vcs_MyPdfReader\bin\Debug\Python簡介.pdf";
-
-            richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
-
-            int pdf_page = 1;   //從1開始
-
-            //1. 無參數
-            //webBrowser1.Navigate(pdf_filename);
-
-            //2.
-            //webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0");
-
-            //3. 加頁數
-            //webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0&page=" + pdf_page.ToString());
-
-            //webBrowser1.Navigate(pdf_filename + "?#initZoom = fitToPage & view = fit & navpanes = 0 & toolbar = 0 & page = " + pdf_page.ToString());
-
-
-            //顯示比例 %
-            //webBrowser1.Navigate(pdf_filename + "?#page=1 & zoom = 100");
-
-            //webBrowser1.Navigate(pdf_filename + "?#page=1 & zoom = 100, 0, 200");
-
-
-            //webBrowser1.Navigate(pdf_filename + "?#page=1 & zoom = 100, 0, 200");
-
-            webBrowser1.Navigate(pdf_filename + "?#view = fitB");
-
-
-            this.webBrowser1.Focus();
-
-
-
+            richTextBox1.Text += "無參數\n";
+            webBrowser1.Navigate(pdf_filename);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int pdf_page = 3;   //從1開始
 
+            richTextBox1.Text += "加頁數\n";
+            webBrowser1.Navigate(pdf_filename + "?#page=" + pdf_page.ToString());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //richTextBox1.Text += "顯示比例, 15%\n";
+            //webBrowser1.Navigate(pdf_filename + "?#page=1 & zoom = 15");
+
+            //richTextBox1.Text += "顯示比例, 40%\n";
+            //webBrowser1.Navigate(pdf_filename + "?#page=1 & zoom = 40");
+
+            richTextBox1.Text += "顯示比例, 60%, 並指定顯示位置\n";
+            webBrowser1.Navigate(pdf_filename + "?#page=1 & zoom = 60, 300, 300");
+
+
+            /*
+            zoom 可選
+            zoom = scale
+            zoom = scale, left, top
+            */
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //richTextBox1.Text += "顯示toolbar\n";
+            //webBrowser1.Navigate(pdf_filename + "?#toolbar = 1");
 
+            richTextBox1.Text += "不顯示toolbar\n";
+            webBrowser1.Navigate(pdf_filename + "?#toolbar = 0");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "顯示navpanes\n";
+            webBrowser1.Navigate(pdf_filename + "?#navpanes = 1");
+
+            //richTextBox1.Text += "不顯示navpanes\n";
+            //webBrowser1.Navigate(pdf_filename + "?#navpanes = 0");
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            //initZoom
+            webBrowser1.Navigate(pdf_filename + "?#initZoom = fitToPage");
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //webBrowser1.Navigate(pdf_filename + "?#initZoom = fitToPage & view = fit & navpanes = 0 & toolbar = 0");
+            int pdf_page = 3;
+
+            webBrowser1.Navigate(pdf_filename + "?#initZoom = fitToPage & view = fit & navpanes = 0 & toolbar = 0 & page = " + pdf_page.ToString());
+
+            /*            
+            view 可選
+            fit
+            fitH / fitH,top
+            fitV / fitV,left
+            fitB
+            fitBH / fitBH,top
+            fitBV / fitBV,left
+            */
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //其他 TBD
+
+            /*
+            filename.pdf#view=FitH
+             <embed src="filename.pdf?zoom=50" width="575" height="500">
+
+
+            webBrowser1.Navigate(pdf_filename + "?#initZoom = fitToPage & view = fit & navpanes = 0 & toolbar = 0 & page = " + pdf_page.ToString());
+
+            viewrect = left, top, wd, ht	#測不出來
+
+            & navpanes=0 & toolbar=0"
+
+            #toolbar=1 & navpanes=0 & scrollbar=1 & 
+
+
+
+            #zoom=scale', like this:
+
+
+            <object data="/path/to/file.pdf#zoom=scale" type="application/pdf">
+            </object>
+
+            */
+
+
+
+
 
         }
 
