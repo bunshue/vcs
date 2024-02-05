@@ -65,10 +65,17 @@ def classify_face(im):
         best_match_index = np.argmin(face_distances)
         if matches[best_match_index]:
             name = known_face_names[best_match_index]
+            print("best_match_index : ", best_match_index)
+            print("name : ", name)
 
         face_names.append(name)
-
         for (top, right, bottom, left), name in zip(face_locations, face_names):
+            print('top', top)
+            print('right', right)
+            print('bottom', bottom)
+            print('left', left)
+            print('name', name)
+
             # Draw a box around the face
             cv2.rectangle(img, (left-20, top-20), (right+20, bottom+20), (255, 0, 0), 2)
 

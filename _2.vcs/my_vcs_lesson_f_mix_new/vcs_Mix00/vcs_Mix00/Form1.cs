@@ -110,9 +110,6 @@ namespace vcs_Mix00
             pictureBox1.Size = new Size(820, 520);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
-            webBrowser1.Size = new Size(640, 240);
-            webBrowser1.Location = new Point(x_st + dx * 3, y_st + dy * 6 + 70);
-
             richTextBox1.Location = new Point(x_st + dx * 7 + 120, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);

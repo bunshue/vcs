@@ -1,11 +1,11 @@
-from cryptography.fernet import Fernet
+import time
+import cryptography.fernet
 
 '''
 def write_key():
-    key = Fernet.generate_key()
+    key = cryptography.fernet.Fernet.generate_key()
     with open("key.key", "wb") as key_file:
         key_file.write(key)'''
-
 
 def load_key():
     file = open("key.key", "rb")
@@ -13,10 +13,8 @@ def load_key():
     file.close()
     return key
 
-
 key = load_key()
-fer = Fernet(key)
-
+fer = cryptography.fernet.Fernet(key)
 
 def view():
     with open('passwords.txt', 'r') as f:
@@ -26,25 +24,17 @@ def view():
             print("User:", user, "| Password:",
                   fer.decrypt(passw.encode()).decode())
 
+print('顯示資料')
+view()
 
-def add():
-    name = input('Account Name: ')
-    pwd = input("Password: ")
+print('新增資料')
+string_data1 = 'aaaa_' + time.strftime("%Y%m%d_%H%M%S", time.localtime())
+string_data2 = 'bbbb_' + time.strftime("%Y%m%d_%H%M%S", time.localtime())
 
-    with open('passwords.txt', 'a') as f:
-        f.write(name + "|" + fer.encrypt(pwd.encode()).decode() + "\n")
+name = string_data1
+pwd = string_data2
+
+with open('passwords.txt', 'a') as f:
+    f.write(name + "|" + fer.encrypt(pwd.encode()).decode() + "\n")
 
 
-while True:
-    mode = input(
-        "Would you like to add a new password or view existing ones (view, add), press q to quit? ").lower()
-    if mode == "q":
-        break
-
-    if mode == "view":
-        view()
-    elif mode == "add":
-        add()
-    else:
-        print("Invalid mode.")
-        continue

@@ -563,6 +563,9 @@ namespace vcs_MyPdfReader
 
         void do_open_pdf0(string pdf_filename)	//開啟pdf檔案
         {
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string pdf_filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_7_free\vcs_MyPdfReader\vcs_MyPdfReader\bin\Debug\Python簡介.pdf";
+
             show_item_location();
             webBrowser1.Navigate(pdf_filename);
             pdf_total_page = GetPDFofPageCount(pdf_filename);

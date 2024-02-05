@@ -572,15 +572,6 @@ book.close()
 
 print('------------------------------------------------------------')	#60個
 
-import pathlib
-path = pathlib.Path('test10_new06.py')
-abs_path = path.resolve()
-print(abs_path)
-new_path = str(abs_path) + ".old"
-print(new_path)
-
-print('------------------------------------------------------------')	#60個
-
 print('defaultdict 容器')
 from collections import defaultdict
 

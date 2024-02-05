@@ -104,7 +104,8 @@ print('------------------------------------------------------------')	#60個
 
 import sys
 
-import shutil, pathlib
+import shutil
+import pathlib
 
 filename1 =  'temp.txt'
 filename2 =  'temp_cpd.txt'
@@ -126,7 +127,8 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-import shutil, pathlib
+import shutil
+import pathlib
 
 file = str(input("請輸入欲要複製的檔名(可含副檔名)："))
 copyFile = str(input("請輸入複製檔案的名稱(可含副檔名):"))
