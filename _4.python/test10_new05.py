@@ -116,7 +116,6 @@ for filename in files:
     if fnresult != None:
         pyList.append(filename)
 print(pyList)
-'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -206,9 +205,58 @@ for i in range(1, n + 1):
     total += i
 print("從1到%d的總和是 = " % n, total)
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 
+import numpy as np
+import math
+
+print("------------------------------------------------------------")  # 60­э
+
+num = 3.2
+print("數值{0:2.1f} 取log10 {1:4.3f}".format(num, np.log10(num)))
+
+print("------------------------------------------------------------")  # 60­э
+
+num=1234
+print("¨數值 = {0:10d},  數值 = {0:10d}".format(num, num))
+
+num=123.456789
+
+print("¨數值 = {1:6.3f},  數值 = {1:6.3f}".format(num, num))
+
+print("------------------------------------------------------------")  # 60­э
+
+degrees = [x * 30 for x in range(13)]
+for d in degrees:
+    rad = math.radians(d)
+    sin = math.sin(rad)
+    cos = math.cos(rad)
+    print(
+        "角度{0:3d}, 弧度{1:5.2f}, sin{2:3d}={3:5.2f}, cos{4:3d}={5:5.2f}".format(
+            d, rad, d, sin, d, cos
+        )
+    )
+
+print("------------------------------------------------------------")  # 60­э
+
+print("arctan 3.4")
+rad = np.arctan(3.4)
+print(rad)
+th = np.degrees(rad)
+print(th)
+
+print("------------------------------------------------------------")  # 60­э
+
+rand = []
+for i in range(10):
+    rand.append(random.randint(0, 100))
+print(rand)
+
+print("------------------------------------------------------------")  # 60­э
+
+print("------------------------------------------------------------")  # 60­э
 
 
 print("------------------------------------------------------------")  # 60個

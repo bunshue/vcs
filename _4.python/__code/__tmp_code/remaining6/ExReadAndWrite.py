@@ -10,3 +10,26 @@ print("讀取檔案(readline)：", file_r.readline())
 file_r.seek(0)
 print("讀取檔案(readlines)：", file_r.readlines())
 file_r.close()
+
+print('------------------------------------------------------------')	#60個
+
+file = open("RelatedFunctions.bin", "w+")
+file.write("HIHI!!! I like Program, Do you like this?")
+
+file.flush()
+
+print("寫入之後的游標位置：", file.tell())
+
+file.seek(8, 0)
+file.truncate(22)
+
+print(file.read())
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+

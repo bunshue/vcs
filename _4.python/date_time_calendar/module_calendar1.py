@@ -1,32 +1,36 @@
+import sys
 import calendar
 
 print('------------------------------------------------------------')	#60個
 
+#設定星期一為日曆的第一天
+calendar.setfirstweekday(calendar.MONDAY) # 設定日曆的第一天
 
 print(calendar.__file__)
 
-print("獲取某個月的日曆，返回字串型別")
-cal = calendar.month(2023, 3)
-print(cal)
-calendar.setfirstweekday(calendar.SUNDAY) # 設定日曆的第一天
-
-print("獲取日曆月份 2023/3");
-cal = calendar.month(2023, 3)
-print(cal)
-
-print("獲取一年的日曆")
-cal = calendar.calendar(2023)
-print(cal)
+print("2021年是否潤年", calendar.isleap(2021))
+print("2024年是否潤年", calendar.isleap(2024))
 
 print('------------------------------------------------------------')	#60個
 
-'''
-import calendar
+print("年曆")
+year = 2024
+cc = calendar.calendar(year)
+print(cc)
 
+print("月曆")
+year = 2024
+month = 2
+cc = calendar.month(year, month)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
 date = '%s %02d' % (calendar.month_abbr[0], dd)
-
 print(date)
-'''
+"""
 
 
 datetime = calendar.datetime.datetime
@@ -57,10 +61,6 @@ print("expires", time.strftime(TIME_FMT, time.gmtime(expires)))
 
 print('------------------------------------------------------------')	#60個
 
-import calendar
-calendar.setfirstweekday(calendar.MONDAY)
-
-print(calendar.isleap(2024))
 
 print(calendar.firstweekday())
 
@@ -74,7 +74,6 @@ calendar.monthrange(year, month)
 
 print(calendar.monthcalendar(year, month))
 
-
 print(calendar.calendar(year, w=2, l=1, c=6, m=3))
 
 for i in range(1,13):
@@ -84,11 +83,6 @@ weeks = calendar.monthcalendar(year, month)
 print(weeks)
 
 print('------------------------------------------------------------')	#60個
-
-import calendar
-print(calendar.calendar(2023))
-
-print(calendar.month(2023, 10))
 
 print('------------------------------------------------------------')	#60個
 
@@ -117,12 +111,12 @@ print(lang, enc)
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 lang, enc = locale.getdefaultlocale()
 oldlocale = locale.getlocale(locale.LC_TIME)
 locale.setlocale(locale.LC_TIME, (lang, enc))
 locale.setlocale(locale.LC_TIME, oldlocale)
-'''
+"""
 
 year = datetime.datetime.now().year
 
@@ -168,11 +162,9 @@ def shrink(cal):
 print('6')
 print(shrink(calendar.Calendar().yeardatescalendar(2004)))
 
-
 print('------------------------------------------------------------')	#60個
 
-
-'''
+"""
         orig = calendar.firstweekday()
         calendar.setfirstweekday(calendar.SUNDAY)
         self.assertEqual(calendar.firstweekday(), calendar.SUNDAY)
@@ -183,30 +175,8 @@ print('------------------------------------------------------------')	#60個
 
             calendar.setfirstweekday(123)
 
-'''
+"""
 print('------------------------------------------------------------')	#60個
-
-
-import calendar
-
-print("2020年是否潤年", calendar.isleap(2020))    
-print("2021年是否潤年", calendar.isleap(2021))
-
-print('------------------------------------------------------------')	#60個
-
-import calendar
-
-print(calendar.month(2020,1))
-
-print('------------------------------------------------------------')	#60個
-
-import calendar
-
-print(calendar.calendar(2023))
-
-print('------------------------------------------------------------')	#60個
-
-
 
 import calendar
 
@@ -215,134 +185,39 @@ day_start, num_days = calendar.monthrange(2023, 10)
 print('本月的第一天為星期 :', day_start)
 print('本月的天數 :', num_days)
 
+print('------------------------------------------------------------')	#60個
 
+import calendar
+year = 2022
+month = 12
+cal = calendar.Calendar()
+for week in cal.monthdayscalendar(year, month):
+    print(week)
 
 print('------------------------------------------------------------')	#60個
 
 import calendar
-
-print("2020年是否潤年", calendar.isleap(2020))
-print("2021年是否潤年", calendar.isleap(2021))
-
-
-print("------------------------------------------------------------")  # 60個
-
-import calendar
-
-print(calendar.month(2020, 1))
-
-print("------------------------------------------------------------")  # 60個
-
-import calendar
-
-print(calendar.calendar(2020))
-
-print("------------------------------------------------------------")  # 60個
-
-import calendar
-
-y = 2023
-m = 12
-ys = 5 # int(input("列印n年內為閏年的月曆:"))
-notLeap = []
-
-calendar.setfirstweekday(calendar.SUNDAY)
-
-for i in range(ys):
-    if calendar.isleap(y+i) == True:
-        print("\n")
-        calendar.prmonth(y+i, m)
-    else:
-        notLeap.append(y+i)
-
-print("\n以下非閏年:", notLeap)
-print("{}到{}期間有幾個閏年:{}".format(y, y+ys, calendar.leapdays(y, y+ys)))
+year = 2022
+month = 12
+print(str(year)+"年"+str(month)+"月")
+dayname = ["日","一","二","三","四","五","六"]
+print(dayname)
+cal = calendar.Calendar(calendar.SUNDAY)
+for week in cal.monthdayscalendar(year, month):
+    print(week)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
+"""
 import calendar
-print(calendar.month(2022, 7))
-
-
-import calendar
-print(calendar.__file__)
-
-import calendar as cal
-print(cal.month(2022, 8))
-
-from calendar import month, isleap
-print(month(2022, 9))
-
-isleap(2024)
-
-import calendar
-calendar.isleap(2022)
-
-from calendar import isleap
-isleap(2022)
-
-import calendar
-
-print("2020年是否潤年", calendar.isleap(2020))    
-print("2021年是否潤年", calendar.isleap(2021))
-
-print("------------------------------------------------------------")  # 60個
-
-import calendar
-
-print(calendar.month(2020,1))
-
-print("------------------------------------------------------------")  # 60個
-
-import calendar
-
-print(calendar.calendar(2020))
-
-
+year = 2022
+month = 12
+cal = calendar.Calendar(calendar.SUNDAY)
+for (row, week) in enumerate(cal.monthdayscalendar(year, month)):
+    for (col, day) in enumerate(week):
+        if day > 0 :
+            print("第",row+1,"列","第",col+1,"欄=", day)
+"""
 print('------------------------------------------------------------')	#60個
-
-import calendar
-
-y = int(input("請輸入年份:"))
-m = int(input("請輸入月份:"))
-ys = int(input("列印n年內為閏年的月曆:"))
-notLeap = []
-
-calendar.setfirstweekday(calendar.SUNDAY)
-
-for i in range(ys):
-    if calendar.isleap(y+i) == True:
-        print("\n")
-        calendar.prmonth(y+i, m)
-    else:
-        notLeap.append(y+i)
-
-print("\n以下非閏年:", notLeap)
-print("{}到{}期間有幾個閏年:{}".format(y, y+ys, calendar.leapdays(y, y+ys)))
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 

@@ -22,7 +22,6 @@ def generate():
 encode_button = tk.Button(input_area, text='QRcode!',command=generate).pack(side=tk.LEFT)
 input_area.pack(pady=5)
 image_area.pack(padx=3, pady=1)
-
 def save():
     filename = fd.asksaveasfilename(title='儲存檔案', initialfile='qrcode.png')
     if filename and hasattr(qr_label, 'qr_img'): 

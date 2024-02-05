@@ -1,20 +1,19 @@
-'''
+"""
 numpy pandas 新進
 
-'''
+"""
 
 import sys
 import numpy as np
+import pandas as pd
 
 print('------------------------------------------------------------')	#60個
 
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("numpy")
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
 
 a = np.array([2,3,4,5,6])
 print(f'a = {a}')
@@ -49,8 +48,6 @@ print('------------------------------------------------------------')	#60個
 
 #1.numpy.c_:
 
-import numpy as np
-
 x = np.arange(12).reshape(3,4)
 print('x:',x, x.shape)
 
@@ -61,8 +58,6 @@ z = np.c_[x,y]
 print('z:',z, z.shape)
 
 #2.numpy.r_用法:
-
-import numpy as np
 
 x = np.arange(12).reshape(3,4)
 print('x:',x, x.shape)
@@ -79,10 +74,6 @@ x = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 print(type(x))
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-import numpy as np
 
 print("二維陣列 6 X 4")
 a = np.array(
@@ -242,8 +233,18 @@ print('------------------------------------------------------------')	#60個
 print('常態分布 二維 轉 df')
 df3 = pd.DataFrame(np.random.randn(3,3), columns=list("ABC"))
 
-
+'''
 print('------------------------------------------------------------')	#60個
 
+filename = "data/python_ReadWrite_CSV6_score.csv"
+
+dat = pd.read_csv(filename, encoding="UTF-8")
+
+print(dat.head())
+
+print("數學平均", np.mean(dat["數學"]))
+print("數學中位數", np.median(dat["數學"]))
+
+print("------------------------------------------------------------")  # 60­э
 
 
