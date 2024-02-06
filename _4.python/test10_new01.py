@@ -26,12 +26,10 @@ replace_parameter += " WHERE {query_string}"
 replace_parameter += " ORDER BY record_no DESC LIMIT {query_number}"
 print(replace_parameter)
 
-
 replace_parameter = "有f替換變數"
 replace_parameter += f" WHERE {query_string}"
 replace_parameter += f" ORDER BY record_no DESC LIMIT {query_number}"
 print(replace_parameter)
-
 
 table_columns = "(alpaca_name, training, duration, date)"
 postgres_insert_query = (
@@ -285,7 +283,6 @@ import platform
 from types import ModuleType
 from typing import Optional, Tuple, List, cast
 
-
 def print_table(version_rows: List[Tuple[str, str]]) -> None:
     row_format = "{:12} | {}"
     print(row_format.format("module", "version"))
@@ -408,24 +405,6 @@ print("總共還款金額 %d" % int(total_pay))
 
 print("------------------------------------------------------------")  # 60個
 
-msg = """
-翠蓋龍旗出建章,鶯啼百囀柳初黃,
-昆池冰泮三山近,阿閣花深九陌香,
-徑轉虹梁通紫極,庭含玉樹隱霓裳,
-侍臣緩步隨鑾輅,岡上應看集鳳皇,
-小苑平臨太液池,金舖約戶鎖蟠螭,
-雲中帝座飛華蓋,城上鈞陳繞翠旗,
-紫氣旋面雙鳳閣,青松還有萬年枝,
-從來清蹕深嚴地,開盡碧桃人未知
-"""
-
-print(f"<鳳>出現的次數 : {msg.count('鳳')}")
-
-msg = msg.replace("Linda", "Lxx")
-print(f"新的msg內容 : {msg}")
-
-print("------------------------------------------------------------")  # 60個
-
 x = [
     [a, b, c]
     for a in range(1, 20)
@@ -441,9 +420,6 @@ for x in range(0x2160, 0x216A):
     print(chr(x), end=" ")
 
 print()
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -738,56 +714,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-print("計算字數")
-
-def count_words(filename):
-    """Count the approximate number of words in a file."""
-    try:
-        with open(filename, encoding="utf-8") as f:
-            contents = f.read()
-    except FileNotFoundError:
-        pass
-    else:
-        words = contents.split()
-        num_words = len(words)
-        print(f"The file {filename} has about {num_words} words.")
-
-
-filename1 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
-filename2 = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/siddhartha.txt"
-)
-filename3 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_dick.txt"
-filename4 = (
-    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
-)
-
-filenames = [filename1, filename2, filename3, filename4]
-
-filename = "C:/_git/vcs/_1.data/______test_files1/poetry2.txt"
-
-for filename in filenames:
-    count_words(filename)
-
-print("------------------------------------------------------------")  # 60個
-
-print("統計一個檔案的字數")
-
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
-
-try:
-    with open(filename, encoding="utf-8") as f:
-        contents = f.read()
-except FileNotFoundError:
-    print(f"Sorry, the file {filename} does not exist.")
-else:
-    # Count the approximate number of words in the file.
-    words = contents.split()
-    num_words = len(words)
-    print(f"The file {filename} has about {num_words} words.")
-
-print("------------------------------------------------------------")  # 60個
-
 print('字串 轉 串列')
 b = "ABCDEFGHIJK"
 c = list(b)  # list
@@ -831,13 +757,11 @@ print("串列元素由小到大排序: ", sorted(list1))
 
 print("------------------------------------------------------------")  # 60個
 
-
 # 用range创建数值列表
 list1 = list(range(1, 11))  # 不含尾
 print(list1)
 
 print("------------------------------------------------------------")  # 60個
-
 
 str1 = "設定中文字型及負號正確顯示"
 print("原字串內容: ", str1)
@@ -855,7 +779,6 @@ for i in relist:  # 將反轉後的串列內容依序印出
     print(i, end=" ")
 print()  # 換行
 print("串列元素由小到大排序: ", sorted(list1))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -888,10 +811,6 @@ print("串列元素由小到大排序: ", sorted(list1))
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-
 print('y = x ^ 2')
 x = [x for x in range(21)]
 y = [(y * y) for y in x]
@@ -915,49 +834,6 @@ print(x & y)
 print(x ^ y)
 print(x | y)
 print(~x)
-
-print("------------------------------------------------------------")  # 60個
-
-word = [
-    "holiday",
-    "happy",
-    "birth",
-    "yesterday",
-    "holiday",
-    "car",
-    "yellow",
-    "happy",
-    "mobile",
-    "cup",
-    "happy",
-    "holiday",
-    "holiday",
-    "desk",
-    "birth",
-]
-print("holiday 出現的次數", word.count("holiday"))
-
-print("------------------------------------------------------------")  # 60個
-
-word = [
-    "holiday",
-    "happy",
-    "birth",
-    "yesterday",
-    "holiday",
-    "car",
-    "yellow",
-    "happy",
-    "mobile",
-    "cup",
-    "happy",
-    "holiday",
-    "holiday",
-    "desk",
-    "birth",
-]
-search_str = "yellow"
-print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search_str)))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1003,18 +879,14 @@ print(result(3))  # 輸出數值8
 
 print("------------------------------------------------------------")  # 60個
 
-
 def formula(x, y):  # 自訂函數
     return 3 * x + 2 * y
-
 
 result = lambda x: 3 * x - 1  # lambda()函數
 print(result(3))  # 輸出數值8
 
-
 def formula(x, y):  # 自訂函數
     return 3 * x + 2 * y
-
 
 formula = lambda x, y: 3 * x + 2 * y  # 表示lambda有二個參數
 print(formula(5, 10))  # 傳入兩個數值讓lambda()函數做運算，輸出數值35
@@ -1113,14 +985,12 @@ def num2words(num_string):
             if not (hundreds == tens == ones == "0"):
                 word_string = _handle1to999(hundreds, tens, ones) + name + word_string
 
-
 # 處理1~999的函式
 def _handle1to999(hundreds, tens, ones):
     if hundreds == "0":
         return _handle1to99(tens, ones)
     else:
         return _1to9dict[hundreds] + " hundred " + _handle1to99(tens, ones)
-
 
 # 處理1~99的函式
 def _handle1to99(tens, ones):
@@ -1130,7 +1000,6 @@ def _handle1to99(tens, ones):
         return _10to19dict[ones]
     else:
         return _20to90dict[tens] + " " + _1to9dict[ones]
-
 
 num = "12345678"
 # 將第一個命令列參數值轉為英文，其餘命令列參數不處理
@@ -1143,23 +1012,6 @@ for number in range(100):
     print(format(number, "5d"), end="")
     if number % 10 == 9:
         print()
-
-print("------------------------------------------------------------")  # 60個
-
-word = "maintenance"
-word.count("n")
-
-len("thunderbolt")
-
-
-animal = ["cat", "dog", "duck"]
-len(animal)
-
-
-max(100, 10, 50)
-min(300, 30, 3000)
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1270,9 +1122,7 @@ print([x for x in str_list if len(x) >= 3])
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
+print('3個字典 組成 一個串列')
 person1 = {"name": "Amy", "phone": "049-1234567", "age": 20}
 person2 = {"name": "Jack", "phone": "02-4455666", "age": 25}
 person3 = {"name": "Nacy", "phone": "04-9876543", "age": 17}
@@ -1332,12 +1182,11 @@ print(d.get("pig", "N/A"))  # "pig"不存在: 顯示 "N/A"
 
 print("------------------------------------------------------------")  # 60個
 
-
 str1 = "Hello!\nPython"
 print("不含r字元的輸出")
 print(str1)
 str2 = r"Hello!\nPython"
-print("含r字元的輸出")
+print("含r字元的輸出, 有r的 後面雙引號內的內容保持不變輸出")
 print(str2)
 
 print("------------------------------------------------------------")  # 60個
@@ -1378,54 +1227,8 @@ print("列印james第1,3,5場得分", james[0:6:2])
 
 print("------------------------------------------------------------")  # 60個
 
-# 數位時鐘
-from time import time, localtime, sleep
-
-
-class Clock(object):
-    def __init__(self, hour=0, minute=0, second=0):
-        self._hour = hour
-        self._minute = minute
-        self._second = second
-
-    @classmethod
-    def now(cls):
-        ctime = localtime(time())
-        return cls(ctime.tm_hour, ctime.tm_min, ctime.tm_sec)
-
-    def run(self):
-        # 走字
-        self._second += 1
-        if self._second == 60:
-            self._second = 0
-            self._minute += 1
-            if self._minute == 60:
-                self._minute = 0
-                self._hour += 1
-                if self._hour == 24:
-                    self._hour = 0
-
-    def show(self):
-        # 显示时间
-        return "%02d:%02d:%02d" % (self._hour, self._minute, self._second)
-
-
-def main():
-    clock = Clock.now()
-    while True:
-        print(clock.show())
-        sleep(1)
-        clock.run()
-
-
-"""
-if __name__ == '__main__':
-    main()
-"""
-
 from abc import ABCMeta, abstractmethod
 from math import pi
-
 
 class Shape(object, metaclass=ABCMeta):
     @abstractmethod
@@ -1435,7 +1238,6 @@ class Shape(object, metaclass=ABCMeta):
     @abstractmethod
     def area(self):
         pass
-
 
 class Circle(Shape):
     def __init__(self, radius):
@@ -1477,10 +1279,8 @@ print("------------------------------------------------------------")  # 60個
 
 import datetime
 
-
 def is_leap(year):
     return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
-
 
 now = datetime.datetime.now()
 date = now.date
@@ -1547,7 +1347,6 @@ def get_suffix(filename, has_dot=False):
     else:
         return ""
 
-
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 print(get_suffix(filename))
@@ -1589,32 +1388,10 @@ def which_day(year, month, date):
         total += days_of_month[index]
     return total + date
 
-
 print(which_day(1980, 11, 28))
 print(which_day(1981, 12, 31))
 print(which_day(2018, 1, 1))
 print(which_day(2016, 3, 1))
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-import time
-import shutil
-import os
-
-seconds = time.time()
-print(seconds)
-localtime = time.localtime(seconds)
-print(localtime)
-print(localtime.tm_year)
-print(localtime.tm_mon)
-print(localtime.tm_mday)
-asctime = time.asctime(localtime)
-print(asctime)
-strtime = time.strftime("%Y-%m-%d %H:%M:%S", localtime)
-print(strtime)
-mydate = time.strptime("2018-1-1", "%Y-%m-%d")
-print(mydate)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1632,37 +1409,6 @@ info = [
 
 for book, author, price in info:
     print("%10s %3s" % (book, author), " 書籍訂價:", price)
-
-
-print("------------------------------------------------------------")  # 60個
-
-word = [
-    "holiday",
-    "happy",
-    "birth",
-    "yesterday",
-    "holiday",
-    "car",
-    "yellow",
-    "happy",
-    "mobile",
-    "cup",
-    "happy",
-    "holiday",
-    "holiday",
-    "desk",
-    "birth",
-]
-print("holiday 出現的次數", word.count("holiday"))
-
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "do your best what you can do"
-s1 = str1.count("do", 0)
-s2 = str1.count("o", 0, 20)
-print("{}\n「do」出現{}次,「o」出現{}次".format(str1, s1, s2))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1719,57 +1465,6 @@ prices = {
 # 用股票價格大於100元的股票構造一個新的字典
 prices2 = {key: value for key, value in prices.items() if value > 100}
 print(prices2)
-
-print("------------------------------------------------------------")  # 60個
-
-# 迭代工具 - 排列 / 組合 / 笛卡爾積
-
-import itertools
-
-itertools.permutations("ABCD")
-itertools.combinations("ABCDE", 3)
-itertools.product("ABCD", "123")
-
-
-# 找出序列中出現次數最多的元素
-
-from collections import Counter
-
-words = [
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "not",
-    "around",
-    "the",
-    "eyes",
-    "don't",
-    "look",
-    "around",
-    "the",
-    "eyes",
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "you're",
-    "under",
-]
-counter = Counter(words)
-print(counter.most_common(3))
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1950,6 +1645,7 @@ s.append("吃飯")
 s.append("睡覺")
 s.append("寫程式")
 
+print(type(s))
 print(s)
 print(s.pop())
 print(s.pop())
@@ -2008,9 +1704,6 @@ print(squares)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 print("有f代入數字")
 
 money = 12345
@@ -2020,7 +1713,6 @@ print("錯誤 你得到獎金 ${money} 元")
 print("------------------------------------------------------------")  # 60個
 
 print("用字典建立個人資料")
-
 
 def build_profile(first, last, **user_info):
     """Build a dictionary containing everything we know about a user."""
@@ -2049,11 +1741,9 @@ make_pizza(12, "mushrooms", "green peppers", "extra cheese")
 
 print("------------------------------------------------------------")  # 60個
 
-
 def printmsg():
     # 函數本身沒有定義變數, 只有執行列印全域變數功能
     print("函數列印: ", msg)  # 列印全域變數
-
 
 msg = "Global Variable"  # 設定全域變數
 print("主程式列印: ", msg)  # 列印全域變數
@@ -2061,12 +1751,10 @@ printmsg()  # 呼叫函數
 
 print("------------------------------------------------------------")  # 60個
 
-
 def printmsg():
     # 函數本身有定義變數, 將執行列印區域變數功能
     msg = "Local Variable"  # 設定區域變數
     print("函數列印: ", msg)  # 列印區域變數
-
 
 msg = "Global Variable"  # 這是全域變數
 print("主程式列印: ", msg)  # 列印全域變數
@@ -2074,12 +1762,10 @@ printmsg()  # 呼叫函數
 
 print("------------------------------------------------------------")  # 60個
 
-
 def printmsg():
     global msg
     msg = "Java"  # 更改全域變數
     print("更改後: ", msg)
-
 
 msg = "Python"
 print("更改前: ", msg)
@@ -2278,31 +1964,25 @@ for name, c_name, memo in product:
 
 print("------------------------------------------------------------")  # 60個
 
-
 def func(a, b, c):
     x = a + b + c
     return x
 
-
 print(func(1, 2, 3))
 
 print("------------------------------------------------------------")  # 60個
-
 
 def func(a, b, c):
     x = a + b + c
     print(x)
 
-
 print(func(1, 2, 3))
 
 print("------------------------------------------------------------")  # 60個
 
-
 def equation(x, y, z):
     ans = x * y + z * x + y * z
     return ans
-
 
 print(equation(z=1, y=2, x=3))
 print(equation(3, 2, 1))
@@ -2323,23 +2003,11 @@ print("本學期考最好的分數為", max(score))
 
 print("------------------------------------------------------------")  # 60個
 
-score = [97, 76, 89, 76, 90, 100, 87, 65]
-print("本學期總共考過的數學小考次數", len(score))
-print("所有成績由小到大排序的結果為: {}".format(sorted(score)))
-print("本學期所有分數的總和", sum(score))
-print("本學期所有分數的平均", round(sum(score) / len(score), 1))
-print("本學期考最差的分數為", min(score))
-print("本學期考最好的分數為", max(score))
-
-print("------------------------------------------------------------")  # 60個
-
-
 def square_sum(*arg):
     ans = 0
     for n in arg:
         ans += n * n
     return ans
-
 
 ans1 = square_sum(1)
 print("1*1=", ans1)
@@ -2350,15 +2018,12 @@ print("1*1+2*2+3*3=", ans3)
 ans4 = square_sum(1, 3, 5, 7)
 print("1*1+3*3+5*5+7*7=", ans4)
 
-
 def progname(**arg):
     return arg
-
 
 print(progname(d1="python", d2="java", d3="visual basic"))
 
 print("------------------------------------------------------------")  # 60個
-
 
 def dinner(mainmeal, *sideorder):
     # 列出所點餐點的主餐及點心副餐
@@ -2366,19 +2031,16 @@ def dinner(mainmeal, *sideorder):
     for snack in sideorder:
         print(snack)
 
-
 dinner("鐵板豬", "烤玉米")
 dinner("泰式火鍋", "德式香腸", "香焦牛奶", "幸運餅")
 
 print("------------------------------------------------------------")  # 60個
-
 
 def Pow(x, y):
     p = 1
     for i in range(y + 1):
         p *= x
     return p
-
 
 print("請輸入兩數x及y的值函數：")
 x = 3
@@ -2387,12 +2049,10 @@ print("次方運算結果：%d" % Pow(x, y))
 
 print("------------------------------------------------------------")  # 60個
 
-
 def swap_test(x, y):
     print("函數內交換前：x=%d, y=%d" % (x, y))
     x, y = y, x  # 交換過程
     print("函數內交換前：x=%d, y=%d" % (x, y))
-
 
 a = 10
 b = 20  # 設定a,b的初值
@@ -2523,7 +2183,6 @@ print("str3.replace('is', 'was') = ", s)
 
 print("------------------------------------------------------------")  # 60個
 
-
 def clean_string(s):
     """
     刪除字符串中的 '\n', '\r' 和前後的空白
@@ -2536,7 +2195,6 @@ def clean_string(s):
     # 刪除前後空白
     s = s.strip()
     return s
-
 
 animals = "  Python is a \nprogramming language.\n\r   "
 cleaned_str = clean_string(animals)
@@ -2655,7 +2313,6 @@ print("lst1.reverse() = ", lst1)
 
 print("------------------------------------------------------------")  # 60個
 
-
 def find_max_and_index(lst1):
     """
     找出串列lst1中的最大值和最大值的索引
@@ -2673,7 +2330,6 @@ def find_max_and_index(lst1):
 
     return max_val, max_idx
 
-
 # 測試程式
 my_lst = [34, 12, 45, 23, 78, 56, 98, 101, 22]
 result = find_max_and_index(my_lst)
@@ -2681,7 +2337,6 @@ print("最大值：", result[0])
 print("最大值索引：", result[1])
 
 print("------------------------------------------------------------")  # 60個
-
 
 def concatenate_strings(lst1):
     """
@@ -2695,7 +2350,6 @@ def concatenate_strings(lst1):
 
     str_lst = [item for item in lst1 if isinstance(item, str)]
     return "".join(str_lst)
-
 
 my_list = ["Hello", 42, "World", True, "Python"]
 result = concatenate_strings(my_list)
@@ -2757,6 +2411,7 @@ print("t6 = " + str(t6))
 
 print("------------------------------------------------------------")  # 60個
 
+#tuple
 t1 = (1, 2, 3, 4, 5, 6)
 print(t1[0])
 print(t1[1])
@@ -2765,12 +2420,14 @@ print(t1[-2])
 
 print("------------------------------------------------------------")  # 60個
 
+#tuple
 t1 = (1, 2, 3, 4, 5, 6)
 for e in t1:
     print(e, end=" ")
 
 print("------------------------------------------------------------")  # 60個
 
+#tuple
 t1 = (4, 2, 8, 9, 1)
 print("t1 = ", t1)
 s = len(t1)
@@ -2792,6 +2449,7 @@ print("t3 = sorted(t1) = ", t3)
 
 print("------------------------------------------------------------")  # 60個
 
+#tuple
 t1 = (4, 2, 8, 9, 1, 8)
 print("t1 = ", t1)
 s = t1.count(8)
@@ -2803,6 +2461,7 @@ print("t1.index(1) = ", s)
 
 print("------------------------------------------------------------")  # 60個
 
+#字典
 d1 = {}
 d2 = {1: "apple", 2: "ball"}
 d3 = {"name": "joe", 1: [2, 4, 6]}
@@ -2812,6 +2471,7 @@ print(d3)
 
 print("------------------------------------------------------------")  # 60個
 
+#字典
 d4 = dict()
 d5 = dict([(1, "tom"), (2, "mary"), (3, "john")])
 print("d4 = " + str(d4))
@@ -2819,6 +2479,7 @@ print("d5 = " + str(d5))
 
 print("------------------------------------------------------------")  # 60個
 
+#字典
 d1 = {"chicken": 2, "dog": 4, "cat": 3}
 print(d1["cat"])
 print(d1["dog"])
@@ -2826,18 +2487,21 @@ print(d1["chicken"])
 
 print("------------------------------------------------------------")  # 60個
 
+#字典
 d1 = {"chicken": 2, "dog": 4, "cat": 3}
 d1["cat"] = 4
 print(d1)
 
 print("------------------------------------------------------------")  # 60個
 
+#字典
 d1 = {"chicken": 2, "dog": 4, "cat": 3}
 d1["spider"] = 8
 print(d1)
 
 print("------------------------------------------------------------")  # 60個
 
+#字典
 d1 = {"chicken": 2, "dog": 4, "cat": 3}
 for animal in d1:
     legs = d1[animal]
@@ -2887,7 +2551,6 @@ print("d2 = ", d2)
 d3 = sorted(d1)
 print("d3 = sorted(d1) = ", d3)
 
-
 print("------------------------------------------------------------")  # 60個
 
 d1 = {"tom": 2, "bob": 3, "mike": 4}
@@ -2909,7 +2572,6 @@ for i in lst1:
     print(i, end=" ")
 
 print("------------------------------------------------------------")  # 60個
-
 
 def sum_dict_values(d):
     """
@@ -2952,7 +2614,6 @@ def find_max_value(d):
             max_value = value  # 將最大值更新為目前值
     return max_value  # 回傳最大值
 
-
 # 定義一個字典
 my_dict = {"apple": 5, "banana": 2, "orange": 8}
 
@@ -2963,7 +2624,6 @@ max_value = find_max_value(my_dict)
 print("最大值為：", max_value)
 
 print("------------------------------------------------------------")  # 60個
-
 
 def create_dict(keys, values):
     """
@@ -3401,8 +3061,7 @@ def payment():
 print("------------------------------------------------------------")  # 60個
 
 """ os 模組
-import os
-directory=os.getcwd()
+directory = os.getcwd()
 
 os.mkdir(directory+"/example")  #建立資料夾
 os.mkdir(directory+"/doc")  #建立資料夾
@@ -3595,9 +3254,11 @@ for item in items:
 
 print("------------------------------------------------------------")  # 60個
 
-""" no file
-fullpath = os.path.abspath('myprime.py')
+filename = "python05_simple_viewer.py";
+
+fullpath = os.path.abspath(filename)
 print(fullpath)
+
 print("os.path.basename:", os.path.basename(fullpath))
 print("os.path.dirname:", os.path.dirname(fullpath))
 print("os.path.getatime:", os.path.getatime(fullpath))
@@ -3611,20 +3272,13 @@ print("os.path.split:", os.path.split(fullpath))
 print("os.path.splitdrive:", os.path.splitdrive(fullpath))
 print("os.path.splitext:", os.path.splitext(fullpath))
 
-"""
-
-
 print("---- os --------------------------------------------------------")  # 60個
 
 """
 import test
 packagedir = os.path.dirname(test.__file__)
 """
-
-
 print("------------------------------------------------------------")  # 60個
-import os
-
 
 def getuser():
     for name in ("LOGNAME", "USER", "LNAME", "USERNAME"):
@@ -3652,7 +3306,6 @@ print("------------------------------------------------------------")  # 60個
 
 """
 import shutil
-import os
 
 fullpath = os.path.abspath('myprime.py')
 path, filename = os.path.split(fullpath)
@@ -3690,9 +3343,6 @@ print("檔案大小 :", size, "拜")
 
 print("------------------------------------------------------------")  # 60個
 
-import os
-import sys
-
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 
@@ -3709,9 +3359,6 @@ print(tail)
 
 print("------------------------------------------------------------")  # 60個
 
-import sys
-import os
-
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 canonic = os.path.abspath(filename)
@@ -3721,19 +3368,13 @@ filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 canonic = os.path.normcase(filename)
 print(canonic)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-import os
-import sys
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 head, ext = os.path.splitext(filename)
 head, base = os.path.split(filename)
 
 print("------------------------------------------------------------")  # 60個
-
 
 # shutil.copy('/Users/Hao/hello.py', '/Users/Hao/Desktop/first.py')
 os.system("ls -l")
@@ -3811,127 +3452,6 @@ print("os.path.join(p,f) =", r)
 
 
 print("------------------------------------------------------------")  # 60個
-import datetime as dt
-
-x = dt.datetime(2020, 10, 22)
-print(x)
-
-x = dt.datetime(year=2020, month=10, day=22)
-print(x)
-
-y = dt.datetime(2020, 10, 22, 10, 30, 45)  # 設定日期與時間
-print(y)
-
-print("------------------------------------------------------------")  # 60個
-
-# 3-4-2 timedelta 物件
-
-x = dt.timedelta(hours=1, minutes=30)  # 1 小時又 30 分
-
-print(x)
-y = dt.timedelta(days=1, seconds=30)  # 1 天又 30 秒
-print(y)
-
-# 3-4-3 用 timedelta 來增減 datetime 或 timedelta 的時間
-
-import datetime as dt
-
-x = dt.datetime(2020, 10, 22, 10, 30, 45)  # 原始時間
-
-y = dt.timedelta(days=1, hours=2, minutes=5)
-
-print(x)
-
-print(x + y)  # 用 timedelta 來增減 datetime 的時間
-
-print(x - y)
-
-print(x + y * 2)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-""" fail
-# 3-4-4 將 datetime 時間以格式化方式輸出
-
-import datetime as dt
-
-x = dt.datetime(2020, 10, 22, 10, 30, 45)
-
-s1 = x.strftime("%Y/%m/%d %H-%M-%S")
-print(s1)
-
-s2 = x.strftime("%Y 年 %m 月 %d 日 %H : %M : %S")
-print(s2)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-# 3-4-5 用字串來建立 datetime 物件
-
-import datetime as dt
-
-s = "2020/10/22 10-30-45"  # 含有特定格式之日期時間字串
-
-x = dt.datetime.strptime(s, "%Y/%m/%d %H-%M-%S")
-
-
-print(x)
-
-print(type(x))
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("開始計時")
-starttime = int(time.time())  # 起始秒數
-
-print("------------------------------------------------------------")  # 60個
-
-import time  # 導入模組time
-
-print("計算1970年1月1日00:00:00至今的秒數 = ", int(time.time()))
-
-print("------------------------------------------------------------")  # 60個
-
-import time  # 導入模組time
-
-print(time.asctime())  # 列出目前系統時間
-
-print("------------------------------------------------------------")  # 60個
-
-import time  # 導入模組time
-
-xtime = time.localtime()
-print(xtime)  # 列出目前系統時間
-print("年 ", xtime[0])
-print("月 ", xtime[1])
-print("日 ", xtime[2])
-print("時 ", xtime[3])
-print("分 ", xtime[4])
-print("秒 ", xtime[5])
-print("星期幾   ", xtime[6])
-print("第幾天   ", xtime[7])
-print("夏令時間 ", xtime[8])
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-endtime = int(time.time())  # 結束秒數
-print("所花時間: ", endtime - starttime, " 秒")
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 """ no file
 import zipfile
@@ -5583,30 +5103,6 @@ print("該工程師薪資：", CaseAmount + SalaryAmount)
 """
 print("------------------------------------------------------------")  # 60個
 
-import time
-
-t = time.time()
-tLocal = time.localtime(t)
-
-print("轉換時間形式(年/月/日)：", time.strftime("%Y/%m/%d", tLocal))
-print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime(tLocal))
-
-print("------------------------------------------------------------")  # 60個
-
-# 以 dir() 與 help() 探索 Python 模組與物件
-
-import datetime
-
-print(dir(datetime))
-
-print("")
-
-print([_ for _ in dir(datetime) if "date" in _.lower()])
-
-# help(datetime)
-
-print("------------------------------------------------------------")  # 60個
-
 # id的用法
 
 #動物字典
@@ -5760,11 +5256,6 @@ object_response.json()["primaryImageSmall"]
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-
-
 from bs4 import BeautifulSoup
 
 html_str = "<p>Hello World!</p>"
@@ -5817,15 +5308,6 @@ for game in soup.findAll("h2"):
     print(game.text)
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
-
-
 
 fruit = ["apple", "orange", "watermelon"]
 print("反轉前內容：", fruit)
@@ -6668,4 +6150,398 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+
+msg = """
+翠蓋龍旗出建章,鶯啼百囀柳初黃,
+昆池冰泮三山近,阿閣花深九陌香,
+徑轉虹梁通紫極,庭含玉樹隱霓裳,
+侍臣緩步隨鑾輅,岡上應看集鳳皇,
+小苑平臨太液池,金舖約戶鎖蟠螭,
+雲中帝座飛華蓋,城上鈞陳繞翠旗,
+紫氣旋面雙鳳閣,青松還有萬年枝,
+從來清蹕深嚴地,開盡碧桃人未知
+"""
+
+print(f"<鳳>出現的次數 : {msg.count('鳳')}")
+
+msg = msg.replace("Linda", "Lxx")
+print(f"新的msg內容 : {msg}")
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("計算字數")
+
+def count_words(filename):
+    """Count the approximate number of words in a file."""
+    try:
+        with open(filename, encoding="utf-8") as f:
+            contents = f.read()
+    except FileNotFoundError:
+        pass
+    else:
+        words = contents.split()
+        num_words = len(words)
+        print(f"The file {filename} has about {num_words} words.")
+
+
+filename1 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
+filename2 = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/siddhartha.txt"
+)
+filename3 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/moby_dick.txt"
+filename4 = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/little_women.txt"
+)
+
+filenames = [filename1, filename2, filename3, filename4]
+
+filename = "C:/_git/vcs/_1.data/______test_files1/poetry2.txt"
+
+for filename in filenames:
+    count_words(filename)
+
+print("------------------------------------------------------------")  # 60個
+
+print("統計一個檔案的字數")
+
+filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/english_book/alice.txt"
+
+try:
+    with open(filename, encoding="utf-8") as f:
+        contents = f.read()
+except FileNotFoundError:
+    print(f"Sorry, the file {filename} does not exist.")
+else:
+    # Count the approximate number of words in the file.
+    words = contents.split()
+    num_words = len(words)
+    print(f"The file {filename} has about {num_words} words.")
+
+print("------------------------------------------------------------")  # 60個
+
+word = [
+    "holiday",
+    "happy",
+    "birth",
+    "yesterday",
+    "holiday",
+    "car",
+    "yellow",
+    "happy",
+    "mobile",
+    "cup",
+    "happy",
+    "holiday",
+    "holiday",
+    "desk",
+    "birth",
+]
+print("holiday 出現的次數", word.count("holiday"))
+
+print("------------------------------------------------------------")  # 60個
+
+word = [
+    "holiday",
+    "happy",
+    "birth",
+    "yesterday",
+    "holiday",
+    "car",
+    "yellow",
+    "happy",
+    "mobile",
+    "cup",
+    "happy",
+    "holiday",
+    "holiday",
+    "desk",
+    "birth",
+]
+search_str = "yellow"
+print("單字 %s 第一次出現的索引值%d" % (search_str, word.index(search_str)))
+
+print("------------------------------------------------------------")  # 60個
+
+
+word = [
+    "holiday",
+    "happy",
+    "birth",
+    "yesterday",
+    "holiday",
+    "car",
+    "yellow",
+    "happy",
+    "mobile",
+    "cup",
+    "happy",
+    "holiday",
+    "holiday",
+    "desk",
+    "birth",
+]
+print("holiday 出現的次數", word.count("holiday"))
+
+print("------------------------------------------------------------")  # 60個
+
+str1 = "do your best what you can do"
+s1 = str1.count("do", 0)
+s2 = str1.count("o", 0, 20)
+print("{}\n「do」出現{}次,「o」出現{}次".format(str1, s1, s2))
+
+print("------------------------------------------------------------")  # 60個
+
+# 找出序列中出現次數最多的元素
+
+from collections import Counter
+
+words = [
+    "look",
+    "into",
+    "my",
+    "eyes",
+    "look",
+    "into",
+    "my",
+    "eyes",
+    "the",
+    "eyes",
+    "the",
+    "eyes",
+    "the",
+    "eyes",
+    "not",
+    "around",
+    "the",
+    "eyes",
+    "don't",
+    "look",
+    "around",
+    "the",
+    "eyes",
+    "look",
+    "into",
+    "my",
+    "eyes",
+    "you're",
+    "under",
+]
+counter = Counter(words)
+print(counter.most_common(3))
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+word = "maintenance"
+word.count("n")
+
+len("thunderbolt")
+
+
+animal = ["cat", "dog", "duck"]
+len(animal)
+
+
+max(100, 10, 50)
+min(300, 30, 3000)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 數位時鐘
+
+class Clock(object):
+    def __init__(self, hour=0, minute=0, second=0):
+        self._hour = hour
+        self._minute = minute
+        self._second = second
+
+    @classmethod
+    def now(cls):
+        ctime = time.localtime(time.time())
+        return cls(ctime.tm_hour, ctime.tm_min, ctime.tm_sec)
+
+    def run(self):
+        # 走字
+        self._second += 1
+        if self._second == 60:
+            self._second = 0
+            self._minute += 1
+            if self._minute == 60:
+                self._minute = 0
+                self._hour += 1
+                if self._hour == 24:
+                    self._hour = 0
+
+    def show(self):
+        # 显示时间
+        return "%02d:%02d:%02d" % (self._hour, self._minute, self._second)
+
+"""
+clock = Clock.now()
+while True:
+    print(clock.show())
+    time.sleep(1)
+    clock.run()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+seconds = time.time()
+print(seconds)
+localtime = time.localtime(seconds)
+print(localtime)
+print(localtime.tm_year)
+print(localtime.tm_mon)
+print(localtime.tm_mday)
+asctime = time.asctime(localtime)
+print(asctime)
+strtime = time.strftime("%Y-%m-%d %H:%M:%S", localtime)
+print(strtime)
+mydate = time.strptime("2018-1-1", "%Y-%m-%d")
+print(mydate)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+import datetime as dt
+
+x = dt.datetime(2020, 10, 22)
+print(x)
+
+x = dt.datetime(year=2020, month=10, day=22)
+print(x)
+
+y = dt.datetime(2020, 10, 22, 10, 30, 45)  # 設定日期與時間
+print(y)
+
+print("------------------------------------------------------------")  # 60個
+
+# 3-4-2 timedelta 物件
+
+x = dt.timedelta(hours=1, minutes=30)  # 1 小時又 30 分
+
+print(x)
+y = dt.timedelta(days=1, seconds=30)  # 1 天又 30 秒
+print(y)
+
+# 3-4-3 用 timedelta 來增減 datetime 或 timedelta 的時間
+
+import datetime as dt
+
+x = dt.datetime(2020, 10, 22, 10, 30, 45)  # 原始時間
+
+y = dt.timedelta(days=1, hours=2, minutes=5)
+
+print(x)
+
+print(x + y)  # 用 timedelta 來增減 datetime 的時間
+
+print(x - y)
+
+print(x + y * 2)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+""" fail
+# 3-4-4 將 datetime 時間以格式化方式輸出
+
+import datetime as dt
+
+x = dt.datetime(2020, 10, 22, 10, 30, 45)
+
+s1 = x.strftime("%Y/%m/%d %H-%M-%S")
+print(s1)
+
+s2 = x.strftime("%Y 年 %m 月 %d 日 %H : %M : %S")
+print(s2)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+# 3-4-5 用字串來建立 datetime 物件
+
+import datetime as dt
+
+s = "2020/10/22 10-30-45"  # 含有特定格式之日期時間字串
+
+x = dt.datetime.strptime(s, "%Y/%m/%d %H-%M-%S")
+
+
+print(x)
+
+print(type(x))
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("開始計時")
+starttime = int(time.time())  # 起始秒數
+
+print("------------------------------------------------------------")  # 60個
+
+print("計算1970年1月1日00:00:00至今的秒數 = ", int(time.time()))
+
+print("------------------------------------------------------------")  # 60個
+
+print(time.asctime())  # 列出目前系統時間
+
+print("------------------------------------------------------------")  # 60個
+
+xtime = time.localtime()
+print(xtime)  # 列出目前系統時間
+print("年 ", xtime[0])
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+print("------------------------------------------------------------")  # 60個
+
+endtime = int(time.time())  # 結束秒數
+print("所花時間: ", endtime - starttime, " 秒")
+
+print("------------------------------------------------------------")  # 60個
+
+
+t = time.time()
+tLocal = time.localtime(t)
+
+print("轉換時間形式(年/月/日)：", time.strftime("%Y/%m/%d", tLocal))
+print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime(tLocal))
+
+print("------------------------------------------------------------")  # 60個
+
+# 以 dir() 與 help() 探索 Python 模組與物件
+
+import datetime
+
+print(dir(datetime))
+
+print("")
+
+print([_ for _ in dir(datetime) if "date" in _.lower()])
+
+# help(datetime)
+
+print("------------------------------------------------------------")  # 60個
 

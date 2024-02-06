@@ -23,7 +23,6 @@ Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的
 
 """
 
-'''
 print("建立空容器")
 
 print("建立一個空字典")
@@ -637,7 +636,7 @@ for loc, encodings in codecs.items():
         print(enc)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 print("字典的排序, 使用lambda")
 
@@ -907,10 +906,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("依英文名字數長短排序")
 
-
 def compare_num_of_chars(string1):
     return len(string1)
-
 
 animals = [
     "mouse",
@@ -930,7 +927,6 @@ animals.sort(key=compare_num_of_chars)
 print(animals)
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("二維 串列")
 
@@ -988,39 +984,59 @@ for i in range(5):
 
 print("------------------------------------------------------------")  # 60個
 
-print("二維 串列")
+print("二維 串列, 裡面都是list")
 
-person_data = [
-    (110, 48226, 46644, 94870),
-    (109, 48618, 47046, 95664),
-    (108, 48532, 47018, 95550),
-    (107, 48298, 46587, 94885),
-    (106, 48156, 46295, 94451),
-    (105, 48060, 46042, 94102),
-    (104, 47861, 45482, 93343),
-    (103, 47305, 44582, 91887),
-    (102, 47333, 44628, 91961),
-    (101, 47304, 44587, 91891),
-]
+animal_list = [
+    [1, '鼠', 'mouse', 3],
+    [2, '牛', 'ox', 48],
+    [3, '虎', 'tiger', 33],
+    [4, '兔', 'rabbit', 8],
+    [5, '龍', 'dragon', 38],
+    [6, '蛇', 'snake', 16],
+    [7, '馬', 'horse', 36],
+    [8, '羊', 'goat', 29],
+    [9, '猴', 'monkey', 22],
+    [10, '雞', 'chicken', 6],
+    [11, '狗', 'dog', 12],
+    [12, '豬', 'pig', 42],
+    ]
 
-person_data.reverse()  # 顛倒排序串列
-print(type(person_data))
-print(person_data)
-print(len(person_data))
+print("二維 串列, 裡面都是tuple")
+
+animal_list = [
+    (1, '鼠', 'mouse', 3),
+    (2, '牛', 'ox', 48),
+    (3, '虎', 'tiger', 33),
+    (4, '兔', 'rabbit', 8),
+    (5, '龍', 'dragon', 38),
+    (6, '蛇', 'snake', 16),
+    (7, '馬', 'horse', 36),
+    (8, '羊', 'goat', 29),
+    (9, '猴', 'monkey', 22),
+    (10, '雞', 'chicken', 7),
+    (11, '狗', 'dog', 12),
+    (12, '豬', 'pig', 42),
+    ]
+
+print('串列反相排列')
+animal_list.reverse()  # 顛倒排序串列
+print(type(animal_list))
+print(animal_list)
+print(len(animal_list))
 
 print("提取 前n筆資料, 組成一個二維 串列")
-print(type(person_data[:5]))
-print(person_data[:5])
+print(type(animal_list[:5]))
+print(animal_list[:5])
 print("提取 第n筆資料, tuple")
-print(type(person_data[5]))
-print(person_data[5])
+print(type(animal_list[5]))
+print(animal_list[5])
 
 print("提取 從a開始到b, 間隔c")
 a = 0
 b = 5
 c = 2
-print(type(person_data[a:b:c]))  # 串列
-print(person_data[a:b:c])
+print(type(animal_list[a:b:c]))  # 串列
+print(animal_list[a:b:c])
 
 # 取第一欄出來 成一個 串列 ??
 
@@ -1029,10 +1045,10 @@ print("------------------------------------------------------------")  # 60個
 print("串列, 建立內含元組的串列")
 
 animals = list()
-for page in range(1, 6):
+for i in range(1, 6):
     name = "鼠"
     ename = "mouse"
-    weight = 3
+    weight = 3 + i
     tt = (name, ename, weight)  # 組合成一個元組
     animals.append(tt)
 
@@ -1044,11 +1060,11 @@ print("------------------------------------------------------------")  # 60個
 print("串列, 建立內含字典的串列")
 
 animals = list()
-for page in range(1, 6):
+for i in range(1, 6):
     dd = dict()
     dd["name"] = "鼠"
     dd["ename"] = "mouse"
-    dd["weight"] = "3"
+    dd["weight"] = 3 + i
     animals.append(dd)
 
 print(type(animals))
@@ -1162,16 +1178,6 @@ animal = ("鼠", "牛", "虎", "兔", "龍")  # 定義元組元素是字串
 
 print("animal最大值是", max(animal))
 print("animal最小值是", min(animal))
-
-print("------------------------------------------------------------")  # 60個
-
-dist = 384400  # 地球到月亮距離
-speed = 1225  # 馬赫速度每小時1225公里
-total_hours = dist // speed  # 計算小時數
-data = divmod(total_hours, 24)  # 商和餘數
-print("divmod傳回的資料型態是 : ", type(data))
-print("總供需要 %d 天" % data[0])
-print("%d 小時" % data[1])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1324,12 +1330,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("字典子集")
 
-prices = {"ACME": 45.23, "AAPL": 612.78, "IBM": 205.55, "HPQ": 37.20, "FB": 10.75}
-# Make a dictionary of all prices over 200
-p1 = {key: value for key, value in prices.items() if value > 200}
-# Make a dictionary of tech stocks
-tech_names = {"AAPL", "IBM", "HPQ", "MSFT"}
-p2 = {key: value for key, value in prices.items() if key in tech_names}
+animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38,
+           '蛇':16, '馬':36, '羊':29, '猴':22, '雞':6, '狗':12,'豬':42}
+
+animals1 = {key: value for key, value in animals.items() if value > 30}
+print('大於30公斤的動物 :', animals1)
+
+protected_names = {"虎", "龍", "馬", "猴"}
+animals2 = {key: value for key, value in animals.items() if key in protected_names}
+print('保育類動物動物 :', animals2)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1613,44 +1622,24 @@ SelectionSort.selectionSort(lst)
 
 print("------------------------------------------------------------")  # 60個
 
-# 設定一個二維串列
-money = [
-    [41.36, 28.96, 3.77, 8.45],
-    [29.08, 3.58, 6.81, 0.77],
-    [15.68, 12.76, 3.79, 3.29],
-    [15.61, 10.93, 3.28, 2.95],
-    [11.27, 8.89, 10.22, 1.00],
-    [23.20, 2.26, 4.22, 0.58],
-    [11.28, 9.14, 6.50, 2.88],
-    [13.96, 9.18, 2.93, 2.84],
-    [14.44, 6.94, 4.70, 2.24],
-    [26.93, 0.63, 0.28, 0.47],
-    [9.05, 10.95, 1.93, 2.74],
-    [9.71, 7.47, 4.13, 1.90],
-    [9.00, 6.18, 7.20, 0.71],
-    [8.92, 8.03, 3.60, 2.15],
-    [15.00, 4.89, 0.24, 1.69],
-    [9.01, 8.49, 2.53, 1.77],
-    [7.02, 9.09, 0.98, 3.96],
-    [9.43, 0.40, 0.41, 10.57],
-    [12.78, 3.75, 3.54, 0.55],
-]
-print(type(money))
-
-print("------------------------------------------------------------")  # 60個
-
 print("List的用法")
 list1 = []
-list1.append(123)
-list1.append(456)
-list1.append(234)
-list1.append(321)
-list1.append(101)
-# list1.pop()
-print("共輸入 %d 個數" % len(list1))
+list1.append(333)
+list1.append(777)
+list1.append(222)
+list1.append(111)
+list1.append(555)
+list1.append(666)
+list1.append(444)
+list1.append(888)
+list1.append(999)
+list1.pop()
+#原本加入9個 取出最後一個 所以剩8個
+print("串列內共有 %d 個數" % len(list1))
 print("最大：%d" % max(list1))
 print("最小：%d" % min(list1))
 # print('總和：%d' % sum(list1))
+print("由小到大排序為：{}".format(sorted(list1)))
 print("由大到小排序為：{}".format(sorted(list1, reverse=True)))
 
 print("------------------------------------------------------------")  # 60個
@@ -1704,7 +1693,6 @@ print("animal_list[2] 資料類型", type(animal_list[2]))  # 列印animal_list�
 
 for name, weight in animal_list:
     print("{} 的體重是 {}".format(name, weight))
-
 
 print("------------------------------------------------------------")  # 60個
 

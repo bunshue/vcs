@@ -82,26 +82,30 @@ d = image.shape[2]    #深
 h, w, d = image.shape   #d為dimension d=3 全彩, d=1 灰階
 print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
-cv2.imshow('Picture Viewer', image) #顯示圖片
+plt.figure('xxxxx', figsize = (16, 12))
 
-#cv2.namedWindow('Picture Viewer')
-window_name = 'Show Picture'
-cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+plt.subplot(221)
+plt.title('顯示圖片')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 
 #實例化8位圖
 image_empty = np.zeros(image.shape, dtype = np.uint8)   #依照原圖大小建立一個圖像的二維陣列
-cv2.imshow("empty", image_empty)    #顯示圖片   #空圖, 全黑
+plt.subplot(222)
+plt.title('空圖, 全黑')
+plt.imshow(cv2.cvtColor(image_empty, cv2.COLOR_BGR2RGB))    #顯示圖片   #空圖, 全黑
 
 image_copy = image.copy()
-cv2.imshow("copy", image_copy)      #顯示圖片   #原圖拷貝
+plt.subplot(223)
+plt.title('顯示圖片copy')
+plt.imshow(cv2.cvtColor(image_copy, cv2.COLOR_BGR2RGB))     #顯示圖片   #原圖拷貝
 
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)    #圖片轉為灰階
-cv2.imshow("gray", image_gray)      #顯示圖片   #原圖轉黑白
+plt.subplot(224)
+plt.title('顯示圖片gray')
+plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))     #顯示圖片   #原圖轉黑白
 
-#cv2.waitKey()
-cv2.waitKey(0)
-cv2.destroyAllWindows() #銷毀建立的物件
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

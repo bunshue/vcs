@@ -195,11 +195,6 @@ data = 'ABCDEFG'
 selector = [1, 0, 1, 1, 0, 1, 0]
 
 print(list(itertools.compress(data, selector)))
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -252,8 +247,6 @@ print(list(itertools.zip_longest(x, y, fillvalue=0)))
 
 print('------------------------------------------------------------')	#60個
 
-
-
 print('itertools 模組: islice() 切片')
 
 import itertools
@@ -266,6 +259,7 @@ print(list(itertools.islice(n, 1, 3)))
 
 print(list(itertools.islice(n, 0, 5, 2)))
 
+print('------------------------------------------------------------')	#60個
 
 print('itertools 模組: accumulate() 累加')
 
@@ -283,6 +277,8 @@ multiply = lambda x, y: x * y
 
 print(list(itertools.accumulate(data, multiply)))
 
+print('------------------------------------------------------------')	#60個
+
 print('itertools 模組: starmap() 解包外層容器')
 
 import itertools
@@ -293,6 +289,7 @@ print(list(itertools.starmap(lambda x, y: x * y, n)))
 
 print(list(map(lambda t: t[0] * t[1], n)))
 
+print('------------------------------------------------------------')	#60個
 
 print('itertools 模組: groupby() 給連續資料分組')
 
@@ -330,6 +327,22 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+# 迭代工具 - 排列 / 組合 / 笛卡爾積
+
+import itertools
+
+cc = itertools.permutations("ABCD")
+print(type(cc))
+print(cc)
+
+cc = itertools.combinations("ABCDE", 3)
+print(type(cc))
+print(cc)
+
+cc = itertools.product("ABCD", "123")
+print(type(cc))
+print(cc)
 
 
 

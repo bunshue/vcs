@@ -26,12 +26,13 @@ t, rst = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 #t, rst = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
 
 plt.figure('二值化', figsize = (16, 12))
+
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.title('二值化圖')
+plt.title('二值化圖, 閥值 127, 小於變全黑, 大於變全白')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()
@@ -90,6 +91,9 @@ plt.imshow(cv2.cvtColor(otsu, cv2.COLOR_BGR2RGB))
 plt.tight_layout()
 plt.show()
 
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
 print('------------------------------------------------------------')	#60個
 
-print('作業完成')
+
