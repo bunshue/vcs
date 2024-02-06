@@ -1,23 +1,34 @@
+"""
+#臉部辨識分析
+
+
+
+"""
+
 import os
 import sys
 import time
 import random
 
-#臉部辨識分析
-
 print("------------------------------------------------------------")  # 60個
 
+'''
+"""
+
+安裝 face-engine
+
+pip install face-engine==2.0.0
+
+將兩個dat檔 "dlib_face_recognition_resnet_model_v1.dat" "shape_predictor_5_face_landmarks.dat"
+拷貝到 face_engine 所在地
+
+#sugar
+C:/Users/070601/AppData/Local/Programs/Python/Python311/Lib/site-packages/face_engine/resources/data
 
 
-print("------------------------------------------------------------")  # 60個
+"""
 
 print("face_engine：簡單易用的臉部辨識")
-"""
-!pip install face-engine==2.0.0
-!mkdir -p /usr/local/lib/python3.7/dist-packages/face_engine/resources/data/
-!cp "dlib_face_recognition_resnet_model_v1.dat" /usr/local/lib/python3.7/dist-packages/face_engine/resources/data
-!cp "shape_predictor_5_face_landmarks.dat" /usr/local/lib/python3.7/dist-packages/face_engine/resources/data
-"""
 
 from face_engine import FaceEngine
 from PIL import Image, ImageDraw
@@ -83,6 +94,8 @@ engine = load_engine('ehappy.p')
 testimage = 'catch.jpg'
 names, boxes = engine.make_prediction(testimage)
 print(names, boxes)
+
+print("------------------------------------------------------------")  # 60個
 
 print("face-recognition：效果絕佳的人臉辨識")
 
@@ -167,6 +180,7 @@ if face == '':
 else:
     print('圖片中的人臉：' + face)
 
+print("------------------------------------------------------------")  # 60個
 
 print('fer：偵測臉部表情')
 #!pip install fer
@@ -193,9 +207,19 @@ try:
     print(emotion, score)
 except:
     print('未偵測到人臉！')
-    
+
+print("------------------------------------------------------------")  # 60個
+
 print('facemask_detection：偵測是否戴口罩')
+
+"""
 #!pip install facemask_detection
+
+下載
+https://github.com/ternaus/facemask_detection/releases/download/0.0.1/tf_efficientnet_b0_ns_2020-07-29-ffdde352.zip
+放到 C:/Users/070601/.cache/torch/hub/checkpoints/ 之下
+
+"""
 
 from facemask_detection.pre_trained_models import get_model as get_classifier
 import albumentations as A
@@ -214,11 +238,20 @@ trans_image = transform(image=image1)['image']
 input = torch.from_numpy(np.transpose(trans_image, (2, 0, 1))).unsqueeze(0)
 print("戴口罩的機率為：", model(input)[0].item())
 
+print("------------------------------------------------------------")  # 60個
+
+# """ 安裝模組失敗
 print('facemask_detection：標示人物是否戴口罩')
+
 """
-!pip install facemask_detection
-!pip install retinaface_pytorch
+# !pip install facemask_detection
+# !pip install retinaface_pytorch
+
+下載(97MB)
+https://github.com/ternaus/retinaface/releases/download/0.01/retinaface_resnet50_2020-07-20-f168fae3c.zip
+放到 C:/Users/070601/.cache/torch/hub/checkpoints/之下
 """
+
 from retinaface.pre_trained_models import get_model as get_detector
 from facemask_detection.pre_trained_models import get_model as get_classifier
 import albumentations as A
@@ -265,9 +298,19 @@ for prediction_id, annotation in enumerate(annotations):
     vis_image = cv2.putText(vis_image, text, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX,  0.4, color, 2, cv2.LINE_AA) 
 plt.imshow(vis_image)
 
+'''
+print("------------------------------------------------------------")  # 60個
+
 print('Deepface：人臉特徵分析工具')
+
+"""
 #!pip install deepface
 #人臉偵測
+下載(488MB)
+https://github.com/swghosh/DeepFace/releases/download/weights-vggface2-2d-aligned/VGGFace2_DeepFace_weights_val-0.9034.h5.zip
+放到 C:/Users/070601/.deepface/weights 之下
+要解壓縮
+"""
 
 from deepface import DeepFace
 import matplotlib.pyplot as plt
@@ -287,16 +330,33 @@ image = DeepFace.detectFace(img_path=imgpath, detector_backend='retinaface', enf
 plt.imshow(image)
 
 print('人臉驗證')
+
 face1 = 'bear1.jpg'
 face2 = 'bear2.jpg'
 #face2 = 'jeng1.jpg'
 #face2 = 'david1.jpg'
-result = DeepFace.verify(face1, face2, model_name='DeepFace', model=DeepFace.build_model('DeepFace'), enforce_detection=False)
+#result = DeepFace.verify(face1, face2, model_name='DeepFace', model=DeepFace.build_model('DeepFace'), enforce_detection=False)
+result = DeepFace.verify(face1, face2, model_name='DeepFace', enforce_detection=False)
+
 print(result)
 if result["verified"]:
     print('兩張圖片是同一人！')
 else:
     print('兩張圖片不是同一人！')
+
+"""
+下載 566MB
+https://github.com/serengil/deepface_models/releases/download/v1.0/vgg_face_weights.h5
+放在
+C:/Users/070601/.deepface/weights/vgg_face_weights.h5
+
+下載 88MB
+https://github.com/serengil/deepface_models/releases/download/v1.0/facenet_weights.h5
+放在
+C:/Users/070601/.deepface/weights/facenet_weights.h5
+
+
+"""
 
 face1 = 'bear1.jpg'
 face2 = 'jeng1.jpg'
@@ -308,6 +368,7 @@ for model in models:
 print(result)
 
 print('搜尋人臉')
+
 import pandas as pd
 import numpy as np
 #尋找單一相同人臉
@@ -335,6 +396,7 @@ else:
 print("------------------------------------------------------------")  # 60個
 
 print('範例：攝影機拍攝登入系統')
+
 from IPython.display import display, Javascript
 from google.colab.output import eval_js
 from base64 import b64decode
@@ -343,7 +405,7 @@ import pandas as pd
 import numpy as np
 
 def take_photo(filename='person.jpg', quality=0.8):
-  js = Javascript('''
+  js = Javascript("""
     async function takePhoto(quality) {
       const div = document.createElement('div');
       const capture = document.createElement('button');
@@ -366,7 +428,7 @@ def take_photo(filename='person.jpg', quality=0.8):
       div.remove();
       return canvas.toDataURL('image/jpeg', quality);
     }
-    ''')
+    """)
   display(js)
   data = eval_js('takePhoto({})'.format(quality))
   binary = b64decode(data.split(',')[1])
@@ -387,8 +449,10 @@ if count > 0:
   print('歡迎登入系統！')
 else:
   print('抱歉！你不是會員！')
+
   
 print('人臉屬性分析')
+
 face1 = 'bear1.jpg'
 img = cv2.imread(face1)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
@@ -409,7 +473,7 @@ from base64 import b64decode
 from IPython.display import Image
 
 def take_photo(filename='person.jpg', quality=0.8):
-  js = Javascript('''
+  js = Javascript("""
     async function takePhoto(quality) {
       const div = document.createElement('div');
       const capture = document.createElement('button');
@@ -432,7 +496,7 @@ def take_photo(filename='person.jpg', quality=0.8):
       div.remove();
       return canvas.toDataURL('image/jpeg', quality);
     }
-    ''')
+    """)
   display(js)
   data = eval_js('takePhoto({})'.format(quality))
   binary = b64decode(data.split(',')[1])
@@ -456,6 +520,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
+print("作業完成")
 print("------------------------------------------------------------")  # 60個
+

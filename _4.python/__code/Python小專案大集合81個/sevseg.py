@@ -1,19 +1,3 @@
-"""Sevseg, by Al Sweigart al@inventwithpython.com
-A seven-segment number display module, used by the Countdown and Digital
-Clock programs.
-More info at https://en.wikipedia.org/wiki/Seven-segment_display
-This code is available at https://nostarch.com/big-book-small-python-programming
-Tags: short, module"""
-
-"""A labeled seven-segment display, with each segment labeled A to G:
- __A__
-|     |    Each digit in a seven-segment display:
-F     B     __       __   __        __   __  __   __   __
-|__G__|    |  |   |  __|  __| |__| |__  |__    | |__| |__|
-|     |    |__|   | |__   __|    |  __| |__|   | |__|  __|
-E     C
-|__D__|"""
-
 
 def getSevSegStr(number, minWidth=0):
     """Return a seven-segment display string of number. The returned
@@ -83,23 +67,9 @@ def getSevSegStr(number, minWidth=0):
 
     return '\n'.join(rows)
 
-'''
-# If this program isn't being imported, display the numbers 00 to 99.
-if __name__ == '__main__':
-    print('This module is meant to be imported rather than run.')
-    print('For example, this code:')
-    print('    import sevseg')
-    print('    myNumber = sevseg.getSevSegStr(42, 3)')
-    print('    print(myNumber)')
-    print()
-    print('...will print 42, zero-padded to three digits:')
-    print(' __        __ ')
-    print('|  | |__|  __|')
-    print('|__|    | |__ ')
+print('七段顯示器')
 
-'''
-
-
-ccc = getSevSegStr(38, 3)
-print(ccc)
+for i in range(0, 1000, 167):
+    ccc = getSevSegStr(i, 5)
+    print(ccc)
 
