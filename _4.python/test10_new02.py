@@ -5,7 +5,6 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-'''
 # 2-5-1 Python 舊式字串格式化
 
 errno = 50159747054
@@ -49,11 +48,7 @@ name = '鮑勃'
 templ_string = '嘿 $name, 有錯誤 $error 發生了!'
 print(Template(templ_string).substitute(name=name, error=hex(errno)))
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\__tmp_code\remaining1\5-2-2.py
 
 # 5-2-2 array.array - C 語言格式數值陣列
 
@@ -81,8 +76,6 @@ print(arr)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\__tmp_code\remaining1\5-2-3.py
-
 # 5-2-3 str - 不可變 Unicode 字元陣列
 
 arr = 'abcd'
@@ -105,8 +98,6 @@ print(''.join(arr_list))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\__tmp_code\remaining1\5-2-4.py
-
 # 5-2-4 bytes - 不可變位元組陣列
 
 arr = bytes((0, 1, 2, 3))
@@ -126,8 +117,6 @@ print(bytes.decode(arr))
 #arr = bytes((0, 300))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\__tmp_code\remaining1\5-2-5.py
 
 # 5-2-5 bytearray - 可變位元組陣列
 
@@ -154,8 +143,6 @@ print(bytes(arr))
 #arr[1] = 300
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\__tmp_code\remaining1\5-5-4.py
 
 # 5-5-4 LifoQueue - 可用於多執行緒的堆疊 (2)
 
@@ -198,8 +185,6 @@ print('主程式結束')
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\__tmp_code\remaining1\5-6-2.py
-
 # 5-6-2 Queue - 可用於多執行緒的佇列
 
 import threading, queue, time
@@ -241,12 +226,9 @@ print('主程式結束')
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\__tmp_code\remaining1\5-6-3.py
-
 # 5-6-3 multiprocessing.Queue - 給多核運算用的佇列
 
 import multiprocessing, time
-
 
 def worker(queue):
     print('process 開始')
@@ -259,32 +241,28 @@ def worker(queue):
         time.sleep(0.01)
 
 
-if __name__ == '__main__':
+source = ['吃飯', '睡覺', '寫程式', '散步', '聽音樂', '打牌', '玩電動']
+process_num = 3
+
+q = multiprocessing.Queue()
+for item in source:
+    q.put(item)
     
-    source = ['吃飯', '睡覺', '寫程式', '散步', '聽音樂', '打牌', '玩電動']
-    process_num = 3
+processes = []
+for _ in range(process_num):
+    p = multiprocessing.Process(target=worker, args=(q,))
+    p.start()
+    processes.append(p)
     
-    q = multiprocessing.Queue()
-    for item in source:
-        q.put(item)
+for _ in range(process_num):
+    q.put('STOP')
     
-    processes = []
-    for _ in range(process_num):
-        p = multiprocessing.Process(target=worker, args=(q,))
-        p.start()
-        processes.append(p)
+for p in processes:
+    p.join()
     
-    for _ in range(process_num):
-        q.put('STOP')
-    
-    for p in processes:
-        p.join()
-    
-    print('主程式結束')
+print('主程式結束')
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\__tmp_code\remaining1\5-7-3.py
 
 # 5-7-3 PriorityQueue - 可用於多執行緒的 heapq
 
@@ -307,7 +285,6 @@ def worker():
         print('處理資料:', item)
         time.sleep(0.01)
         q.task_done()
-
 
 threads = []
 for _ in range(threads_num):
@@ -366,14 +343,7 @@ print('網站網址:', result.netloc)
 print('路徑:', result.path)
 print('查詢字串:', result.query)
 
-
-
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-
 
 #政府資料開放平臺 XML格式資料擷取與應用
 
@@ -383,7 +353,6 @@ import urllib.request as ur
 
 with ur.urlopen(url) as response:
     get_xml=response.read()
-    
 
 from bs4 import BeautifulSoup
 
@@ -393,7 +362,6 @@ ContactPerson = data.find_all('聯絡人')
 DuringTraining = data.find_all('訓練期間')
 ContactNumber = data.find_all('聯絡電話')
 CourseTitle = data.find_all('課程名稱')
-
 
 csv_str = ""
 for i in range(0, len(HandlingUnit)):
@@ -408,8 +376,6 @@ with open("course_xml.csv", "w") as f:
     story=f.write(csv_str)    #寫入檔案
     
 print("XML格式資料擷取與應用,已將資料寫入course_xml.csv")
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -449,7 +415,6 @@ print('--------------------------------------------------------')
 
 print('------------------------------------------------------------')	#60個
 
-
 from bs4 import BeautifulSoup
 import requests
 
@@ -474,10 +439,8 @@ for row in rows:
         for item in range(0,len(cols)):
             print(cols[item], end = ' ')
         print() #換行
+
 print('------------------------------------------------------------')	#60個
-
-
-
 
 import requests
 from bs4 import BeautifulSoup
@@ -495,178 +458,6 @@ games = soup.find_all('div', {'class': 'APP-LI-NAME'})
 for i, game in enumerate(games, 1):
     print(f"{i}. {game.text.strip()}")
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-"""
-双色球随机选号程序
-"""
-
-from random import randrange, randint, sample
-
-
-def display(balls):
-    """
-    输出列表中的双色球号码
-    """
-    for index, ball in enumerate(balls):
-        if index == len(balls) - 1:
-            print("|", end=" ")
-        print("%02d" % ball, end=" ")
-    print()
-
-
-def random_select():
-    """
-    随机选择一组号码
-    """
-    red_balls = [x for x in range(1, 34)]
-    selected_balls = []
-    for _ in range(6):
-        index = randrange(len(red_balls))
-        selected_balls.append(red_balls[index])
-        del red_balls[index]
-    # 上面的for循环也可以写成下面这行代码
-    # sample函数是random模块下的函数
-    # selected_balls = sample(red_balls, 6)
-    selected_balls.sort()
-    selected_balls.append(randint(1, 16))
-    return selected_balls
-
-
-def main():
-    n = int(input("机选几注: "))
-    for _ in range(n):
-        display(random_select())
-
-
-if __name__ == "__main__":
-    main()
-
-print("------------------------------------------------------------")  # 60個
-
-
-import random           # 導入模組random
-
-n = 3
-for i in range(n):
-    print("1-100     : ", random.randint(1, 100))
-
-for i in range(n):
-    print("500-1000  : ", random.randint(500, 1000))
-
-for i in range(n):
-    print("2000-3000 : ", random.randint(2000, 3000))
-
-print("------------------------------------------------------------")  # 60個
-
-import random                       # 導入模組random
-
-min, max = 1, 100                   # 隨機數最小與最大值設定
-num = random.randint(min, max)  # 產生是否讓玩家答對的隨機數
-print(num)
-
-print("------------------------------------------------------------")  # 60個
-
-import random                       # 導入模組random
-
-fruits = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
-print(random.choice(fruits))
-
-print("------------------------------------------------------------")  # 60個
-
-import random                       # 導入模組random
-
-porker = ['2', '3', '4', '5', '6', '7', '8',
-          '9', '10', 'J', 'Q', 'K', 'A']
-random.shuffle(porker)              # 將次序打亂重新排列
-print(porker)
-
-print("------------------------------------------------------------")  # 60個
-
-
-import random                       # 導入模組random
-
-min, max = 1, 10
-ans = random.randint(min, max)      # 隨機數產生答案
-print(ans)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-for _ in range(10):
-    aa = random.randint(1,10)
-    print(aa)
-
-import random
-
-val=0
-data=[0]*80
-for i in range(80):
-    data[i]=random.randint(1,150)
-while val!=-1:
-    find=0
-    val=int(input('請輸入搜尋鍵值(1-150)，輸入-1離開：'))
-    for i in range(80):
-        if data[i]==val:
-            print('在第 %3d個位置找到鍵值 [%3d]' %(i+1,data[i]))
-            find+=1
-    if find==0 and val !=-1 :
-        print('######沒有找到 [%3d]######' %val)
-print('資料內容：')
-for i in range(10):
-    for j in range(8):
-        print('%2d[%3d]  ' %(i*8+j+1,data[i*8+j]),end='')
-    print('')
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-name = ["小明", "小黃", "小紅", "小綠", "小白"]
-
-print("抽取一個元素：", random.choice(name))
-
-print("抽取三個元素：", random.sample(name, 3))
-
-print("抽取三個元素：", random.shuffle(name))
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python X ChatGPT雙效合一：快速學會最強AI，寫程式更有效率\ch08\ExRandrange.py
-
-import random
-
-print("任一整數", random.randrange(100))
-
-print("任一整數", random.randrange(52, 100))
-
-print("奇數", random.randrange(1, 100, 2))
-
-print("偶數", random.randrange(0, 100, 2))
-
-
-
-
-import random
-
-for i in range(5):
-    a = random.randint(1,10) #隨機取得整數
-    print(a,end=' ')
-print()
-#給定items數列的初始值
-word = ['apple','bird','tiger','happy','quick']
-random.shuffle(word)  #使用shuffle函數打亂字的順序
-print(word)#將打亂後字依序輸出
-
-'''
-
 print("------------------------------------------------------------")  # 60個
 
 import sys
@@ -677,9 +468,7 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-
 import threading, time
-
 
 def wakeUp():
     print("threadObj執行緒開始")
@@ -697,7 +486,6 @@ print("程式階段2")
 print("------------------------------------------------------------")  # 60個
 
 import threading, time
-
 
 def wakeUp(name, blessingWord):
     print("threadObj執行緒開始")
@@ -717,18 +505,15 @@ print("------------------------------------------------------------")  # 60個
 import threading
 import time
 
-
 def worker():
     print(threading.current_thread().name, "Starting")
     time.sleep(2)
     print(threading.current_thread().name, "Exiting")
 
-
 def manager():
     print(threading.current_thread().name, "Starting")
     time.sleep(3)
     print(threading.current_thread().name, "Exiting")
-
 
 m = threading.Thread(target=manager)
 w = threading.Thread(target=worker)
@@ -740,18 +525,15 @@ print("------------------------------------------------------------")  # 60個
 import threading
 import time
 
-
 def worker():
     print(threading.current_thread().name, "Starting")
     time.sleep(2)
     print(threading.current_thread().name, "Exiting")
 
-
 def manager():
     print(threading.current_thread().name, "Starting")
     time.sleep(3)
     print(threading.current_thread().name, "Exiting")
-
 
 m = threading.Thread(target=manager)
 w = threading.Thread(target=worker)
@@ -885,6 +667,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 import os
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
@@ -1189,33 +972,6 @@ print('十六進位：', format(number, 'x'))
 
 print("------------------------------------------------------------")  # 60個
 
-#認識正、負無限大
-
-import math #匯入math模組
-a = 1E309
-print('a = 1E309, 輸出', a)
-
-# 輸出True，表示它是NaN
-print('為NaN?', math.isnan(float(a/a)))
-b = -1E309
-print('b = -1309, 輸出', b)
-
-# 輸出True，表示它是Inf
-print('為Inf? ', math.isinf(float(-1E309)))
-
-print("------------------------------------------------------------")  # 60個
-
-#將兩個複數進行加減乘除
-
-num1 = 3 + 5j
-num2 = 2-4j
-print('相加：', num1 + num2)  #回傳  5 + 1j
-print('相減：', num1 - num2)  #回傳  1 + 9j
-print('相乘：', num1 * num2)  #回傳 26 - 2j
-print('相除：', num1 / num2)  #回傳  -0.7 + 1.1j
-
-print("------------------------------------------------------------")  # 60個
-
 # 將兩個數值以decimal型別來處理
 
 # 匯入decimal模組的Decimal()方法
@@ -1239,28 +995,6 @@ x = 23; y = 7; #指定變數x、y的值
 """
 z = 9 * (12 / x + (x - 5) / (y + 9))
 print('z = ', z)
-
-print("------------------------------------------------------------")  # 60個
-
-import math	#匯入math模組
-
-# 使用math類別的相關方法
-num1 = 3
-num2 = 8
-
-# 求平方、立方根
-print('平方根：', math.sqrt(num1), ', ', num2 ** 0.5)
-print(num1, '^ 3 = ', math.pow(num1, 3))
-print(num2, '立方根：', math.pow(num2, 1.0/3))
-
-print('餘數：', math.fmod(num1, num2),
-      ', GCD =', math.gcd(num1, num2))
-print('兩數平方後相加再開根號', math.hypot(num1, num2))
-
-#自然對數
-print('指數函式：', math.e)
-print('方法exp(4) =', math.exp(4))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1739,36 +1473,6 @@ def numRand2(x, y):
 
 print("------------------------------------------------------------")  # 60個
 
-from random import randint
-
-#產生10~100的整數亂數
-
-number = randint(10, 100)
-
-if __name__ == '__main__':
-    print('我是主程式')
-else:
-    print('我被當作模組')
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1779,3 +1483,11 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個

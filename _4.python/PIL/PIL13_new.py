@@ -71,7 +71,6 @@ print('圖片的高度，單位像素(pixels): ', image.height)
 
 print('------------------------------------------------------------')	#60個
 
-
 image = Image.open(filename)
 print(image.format)
 print(image.mode)

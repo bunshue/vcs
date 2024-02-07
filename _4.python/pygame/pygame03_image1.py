@@ -4,7 +4,6 @@ pygame 測試大全
 """
 
 import sys
-import time
 import pygame
 
 W, H = 800, 800
@@ -32,14 +31,20 @@ blue = pygame.color.Color('#0000FF')
 black = pygame.color.Color('#000000')
 white = pygame.color.Color('#FFFFFF')
 
+print("取得screen參數")
+print(screen.get_size())
+
 #利用screen物件來作為畫布，以fill()方法填上顏色
 screen.fill(Gray)
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-
-
+#方法load()載入圖片，convert()能提高圖片的處理速度
+img = pygame.image.load(filename)
+img.convert()
+screen.blit(img, (400, 300))
 
 print('------------------------------------------------------------')	#60個
 
@@ -55,5 +60,3 @@ while True:
             pygame.quit() #quit()方法結束Pygame程序
             sys.exit()
     pygame.display.update()
-
-

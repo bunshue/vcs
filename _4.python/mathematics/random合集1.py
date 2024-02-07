@@ -936,3 +936,156 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+双色球随机选号程序
+"""
+
+from random import randrange, randint, sample
+
+def display(balls):
+    """
+    输出列表中的双色球号码
+    """
+    for index, ball in enumerate(balls):
+        if index == len(balls) - 1:
+            print("|", end=" ")
+        print("%02d" % ball, end=" ")
+    print()
+
+def random_select():
+    """
+    随机选择一组号码
+    """
+    red_balls = [x for x in range(1, 34)]
+    selected_balls = []
+    for _ in range(6):
+        index = randrange(len(red_balls))
+        selected_balls.append(red_balls[index])
+        del red_balls[index]
+    # 上面的for循环也可以写成下面这行代码
+    # sample函数是random模块下的函数
+    # selected_balls = sample(red_balls, 6)
+    selected_balls.sort()
+    selected_balls.append(randint(1, 16))
+    return selected_balls
+
+n = 10
+for _ in range(n):
+    display(random_select())
+
+print("------------------------------------------------------------")  # 60個
+
+import random           # 導入模組random
+
+n = 3
+for i in range(n):
+    print("1-100     : ", random.randint(1, 100))
+
+for i in range(n):
+    print("500-1000  : ", random.randint(500, 1000))
+
+for i in range(n):
+    print("2000-3000 : ", random.randint(2000, 3000))
+
+print("------------------------------------------------------------")  # 60個
+
+import random                       # 導入模組random
+
+min, max = 1, 100                   # 隨機數最小與最大值設定
+num = random.randint(min, max)  # 產生是否讓玩家答對的隨機數
+print(num)
+
+print("------------------------------------------------------------")  # 60個
+
+import random                       # 導入模組random
+
+fruits = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
+print(random.choice(fruits))
+
+print("------------------------------------------------------------")  # 60個
+
+import random                       # 導入模組random
+
+porker = ['2', '3', '4', '5', '6', '7', '8',
+          '9', '10', 'J', 'Q', 'K', 'A']
+random.shuffle(porker)              # 將次序打亂重新排列
+print(porker)
+
+print("------------------------------------------------------------")  # 60個
+
+import random                       # 導入模組random
+
+min, max = 1, 10
+ans = random.randint(min, max)      # 隨機數產生答案
+print(ans)
+
+print("------------------------------------------------------------")  # 60個
+
+for _ in range(10):
+    aa = random.randint(1,10)
+    print(aa)
+
+import random
+
+val=0
+data=[0]*80
+for i in range(80):
+    data[i]=random.randint(1,150)
+while val!=-1:
+    find=0
+    val=int(input('請輸入搜尋鍵值(1-150)，輸入-1離開：'))
+    for i in range(80):
+        if data[i]==val:
+            print('在第 %3d個位置找到鍵值 [%3d]' %(i+1,data[i]))
+            find+=1
+    if find==0 and val !=-1 :
+        print('######沒有找到 [%3d]######' %val)
+print('資料內容：')
+for i in range(10):
+    for j in range(8):
+        print('%2d[%3d]  ' %(i*8+j+1,data[i*8+j]),end='')
+    print('')
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+name = ["小明", "小黃", "小紅", "小綠", "小白"]
+
+print("抽取一個元素：", random.choice(name))
+
+print("抽取三個元素：", random.sample(name, 3))
+
+print("抽取三個元素：", random.shuffle(name))
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+
+print("任一整數", random.randrange(100))
+
+print("任一整數", random.randrange(52, 100))
+
+print("奇數", random.randrange(1, 100, 2))
+
+print("偶數", random.randrange(0, 100, 2))
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+
+for i in range(5):
+    a = random.randint(1,10) #隨機取得整數
+    print(a,end=' ')
+print()
+#給定items數列的初始值
+word = ['apple','bird','tiger','happy','quick']
+random.shuffle(word)  #使用shuffle函數打亂字的順序
+print(word)#將打亂後字依序輸出
+
+
+
+print("------------------------------------------------------------")  # 60個

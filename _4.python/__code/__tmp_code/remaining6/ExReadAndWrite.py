@@ -13,7 +13,7 @@ file_r.close()
 
 print('------------------------------------------------------------')	#60個
 
-file = open("RelatedFunctions.bin", "w+")
+file = open("tmp_RelatedFunctions.bin", "w+")
 file.write("HIHI!!! I like Program, Do you like this?")
 
 file.flush()

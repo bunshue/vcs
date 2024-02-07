@@ -10,6 +10,8 @@ White = (255, 255, 255)
 screen = pygame.display.set_mode((size), 0)
 pygame.display.set_caption('白色畫布')
 
+
+
 #(2)產生Surface物件, 上色，繪製成形
 face = pygame.Surface(screen.get_size())
 print(face.get_width(), face.get_height())
@@ -17,6 +19,8 @@ face.convert()           # 產生副本
 face.fill(White)         # 填滿白色
 screen.blit(face, (0, 0))# 輸出到畫布上
 pygame.display.update()  # 繪製視窗顯示於螢幕上
+
+
 
 #(3).偵測視窗是否被關閉
 while True:

@@ -2,6 +2,9 @@ import pygame, sys # 滙入PyGame套件，系統模組
 
 pygame.init()      # 將PyGame初始化
 
+
+
+
 #設定使用參數
 size = width, height = 240, 190
 White = (255, 255, 255) # 白色
@@ -38,6 +41,8 @@ pygame.draw.arc(screen, Fuchsia, (28, 27, 195, 157), 0, 4.7, 8)
 pygame.draw.arc(screen, Green, (38, 37, 173, 137), 0, 9.9, 8)
 pygame.draw.line(screen, Yellow, (10, 100), (240, 100), 2)
 pygame.draw.line(screen, White, (125, 5), (125, 180), 2)
+
+
 
 
 

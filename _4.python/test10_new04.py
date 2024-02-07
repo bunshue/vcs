@@ -56,7 +56,6 @@ print("8進位  '22'   = ", int(x1,8))
 print("16進位 '22'   = ", int(x1,16))
 print("16進位 '5A'   = ", int('5A',16))
 
-
 print("------------------------------------------------------------")  # 60個
 
 x1 = "A"
@@ -66,7 +65,6 @@ x3 = "ABC"
 x4 = x3 * 5
 print(x4)             # 列印字串乘以整數
 
-
 print("------------------------------------------------------------")  # 60個
 
 str1 = "Hello!\nPython"
@@ -75,7 +73,6 @@ print(str1)
 str2 = r"Hello!\nPython"
 print("含r字元的輸出")
 print(str2)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -87,9 +84,7 @@ print(x3)               # 輸出字元x3的Unicode(10進位)碼值
 x4 = '魁'
 print(hex(ord(x4)))     # 輸出字元'魁'的Unicode(16進位)碼值
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print('2 進位整數運算')
 x = 0b1101          # 這是2進位整數
@@ -141,9 +136,7 @@ x = 2.251
 print('x = ', x)                        # 輸出x變數
 print('round(2.251,1) = ', round(x,1))  # 輸出round(x,1)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 str1 = '明志科技大學'
 str2 = '明志工專'
@@ -322,24 +315,15 @@ print("y=/%-8.2f/" % y)
 s = "Deep"
 print("s=/%-8s/" % s)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_8.py
-
-# ch4_8.py
 x = 10
 print("x=/%+8d/" % x)
 y = 10.5
 print("y=/%+8.2f/" % y)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch4\ch4_9.py
-
-# ch4_9.py
 print(" 姓名    國文    英文    總分")
 print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
 print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
@@ -372,23 +356,8 @@ if flag:
 else:
     print("尚未定義flag")
 
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_1.py
-
-# ch6_1.py
 james = [23, 19, 22, 31, 18]                # 定義james串列
 print("列印james串列", james)
 James = ['Lebron James',23, 19, 22, 31, 18] # 定義James串列
@@ -402,25 +371,8 @@ print("列印IELTS成績", ielts)
 # 列出串列資料型態
 #print("串列james資料型態是: ",type(james))    fail
 
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_10.py
-
-# ch6_10.py
-num1 = [1, 3, 5]
-num2 = [1, 2, 4, 6]
-num3 = num1 + num2  
-print(num3)
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_11.py
-
-# ch6_11.py
 cars = ['Benz', 'BMW', 'Honda']
 nums = [1, 3, 5]
 carslist = cars * 3           # 串列乘以數字
@@ -428,24 +380,15 @@ print(carslist)
 numslist = nums * 5           # 串列乘以數字
 print(numslist)   
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_12.py
-
-# ch6_12.py
 warriors = ['Curry','Durant','Iquodala','Bell','Thompson']
 print("2025年初NBA勇士隊主將陣容", warriors)
 del warriors[3]                 # 不明原因離隊
 print("2025年末NBA勇士隊主將陣容", warriors)
-    
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_13.py
-
-# ch6_13.py
 nums1 = [1, 3, 5]
 print(f"刪除nums1串列索引1元素前   = {nums1}")
 del nums1[1]
@@ -494,14 +437,8 @@ carN = "我現在開的車子是 " + cars[0].upper( )
 print(carF)
 print(carN)
 
-
-   
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_16.py
-
-# ch6_16.py
 strN = " DeepWisdom       "
 strL = strN.lstrip( )       # 刪除字串左邊多餘空白
 strR = strN.rstrip( )       # 刪除字串右邊多餘空白
@@ -525,22 +462,8 @@ site = "JK Hung"
 print(f"/{site.rjust(50)}/")
 print(f"/{title.zfill(50)}/")
 
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_2.py
-
-# ch6_2.py
 james = [23, 19, 22, 31, 18]                # 定義james串列
 print("列印james第1場得分", james[0])
 print("列印james第2場得分", james[1])
@@ -548,12 +471,8 @@ print("列印james第3場得分", james[2])
 print("列印james第4場得分", james[3])
 print("列印james第5場得分", james[4])
     
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_20.py
-
-# ch6_20.py
 cars = []     
 print(f"目前串列內容 = {cars}")
 cars.append('Honda')
@@ -561,15 +480,8 @@ print(f"目前串列內容 = {cars}")
 cars.append('Toyota')
 print(f"目前串列內容 = {cars}")
 
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_21.py
-
-# ch6_21.py
 cars = ['Honda','Toyota','Ford']     
 print(f"目前串列內容 = {cars}")
 print("在索引1位置插入Nissan")
@@ -579,13 +491,8 @@ print("在索引0位置插入BMW")
 cars.insert(0,'BMW')
 print(f"最新串列內容 = {cars}")
 
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_22.py
-
-# ch6_22.py
 cars = ['Honda','Toyota','Ford','BMW']     
 print("目前串列內容 = ",cars)
 print("使用pop( )刪除串列元素")
@@ -597,13 +504,8 @@ popped_car = cars.pop(1)          # 刪除串列索引為1的值
 print(f"所刪除的串列內容是 : {popped_car}")
 print("新的串列內容 = ",cars)
 
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_23.py
-
-# ch6_23.py
 cars = ['Honda','bmw','Toyota','Ford','bmw']     
 print(f"目前串列內容 = {cars}")
 print("使用remove( )刪除串列元素")
@@ -612,13 +514,8 @@ cars.remove(expensive)      # 刪除第一次出現的元素bmw
 print(f"所刪除的內容是 : {expensive.upper()} 因為重複了")
 print(f"新的串列內容 = {cars}")
 
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_24.py
-
-# ch6_24.py
 cars = ['Honda','bmw','Toyota','Ford','bmw']     
 print(f"目前串列內容 = {cars}")
 # 直接列印cars[::-1]顛倒排序,不更改串列內容
@@ -628,13 +525,8 @@ print("使用reverse( )顛倒排序串列元素")
 cars.reverse()            # 顛倒排序串列
 print(f"新的串列內容 = {cars}")
 
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_25.py
-
-# ch6_25.py
 # 基本排序
 numbers = [3, 5, 1, 4, 2]
 numbers.sort()
@@ -650,14 +542,8 @@ words = ["banana", "apple", "strawberry"]
 words.sort(key=len)
 print(words)            # 輸出：['apple', 'banana', 'strawberry]
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_26.py
-
-# ch6_26.py
 # 基本排序
 numbers = [3, 5, 1, 4, 2]
 sorted_numbers = sorted(numbers)
@@ -677,13 +563,8 @@ string = "hello"
 sorted_chars = sorted(string)
 print(sorted_chars)         # 輸出：['e', 'h', 'l', 'l', 'o']
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_27.py
-
-# ch6_27.py
 # 在串列中使用 index()
 fruits = ["apple", "banana", "cherry", "date"]
 index = fruits.index("cherry")
@@ -694,28 +575,16 @@ fruits = ["apple", "banana", "cherry", "date", "apple"]
 index_range = fruits.index("apple", 1)
 print(index_range)              # 輸出：4
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_28.py
-
-# ch6_28.py
 James = ['Lebron James',23, 19, 22, 31, 18] # 定義James串列
 games = len(James)                          # 求元素數量
 score_Max = max(James[1:games])             # 最高得分
 i = James.index(score_Max)                  # 場次
 print(f"{James[0]} 在第 {i} 場得最高分 {score_Max}")
 
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_29.py
-
-# ch6_29.py
 # 在串列中使用 count()
 fruits = ["apple", "banana", "cherry", "apple", "cherry"]
 apple_count = fruits.count("apple")
@@ -730,13 +599,8 @@ print(how_count)                    # 輸出：1
 how_count_range = text.count("how", 0, 15)
 print(how_count_range)              # 輸出：1
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_3.py
-
-# ch6_3.py
 james = [23, 19, 22, 31, 18]                # 定義james串列
 # 傳統設計方式
 game1 = james[0]
@@ -749,13 +613,8 @@ print("列印james各場次得分", game1, game2, game3, game4, game5)
 game1, game2, game3, game4, game5 = james
 print("列印james各場次得分", game1, game2, game3, game4, game5)
 
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_30.py
-
-# ch6_30.py
 James = [['Lebron James','SF','12/30/84'],23,19,22,31,18] # 定義James串列
 games = len(James)                                        # 求元素數量
 score_Max = max(James[1:games])                           # 最高得分
@@ -766,15 +625,8 @@ print("位置     : ", position)
 print("出生日期 : ", born)
 print(f"在第 {i} 場得最高分 {score_Max}")
 
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_31.py
-
-# ch6_31.py
 cars1 = ['toyota', 'nissan', 'honda']
 cars2 = ['ford', 'audi']
 print("原先cars1串列內容 = ", cars1)
@@ -783,27 +635,16 @@ cars1.append(cars2)
 print(f"執行append()後串列cars1內容 = {cars1}")
 print(f"執行append()後串列cars2內容 = {cars2}")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_32.py
-
-# ch6_32.py
 cars1 = ['toyota', 'nissan', 'honda']
 cars2 = ['ford', 'audi']
 cars1.extend(cars2)
 print(f"執行extend()後串列cars1內容 = {cars1}")
 print(f"執行extend()後串列cars2內容 = {cars2}")
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_33.py
-
-# ch6_33.py
 sc = [['洪錦魁', 80, 95, 88, 0],
       ['洪冰儒', 98, 97, 96, 0],
      ]
@@ -812,31 +653,15 @@ sc[1][4] = sum(sc[1][1:4])
 print(sc[0])
 print(sc[1])
 
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_34.py
-
-# ch6_34.py
 mysports = ['basketball', 'baseball']
 friendsports = mysports
 print(f"我喜歡的運動     = {mysports}")
 print(f"我朋友喜歡的運動 = {friendsports}")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_35.py
-
-# ch6_35.py
 mysports = ['basketball', 'baseball']
 friendsports = mysports
 print(f"我喜歡的運動     = {mysports}")
@@ -845,13 +670,9 @@ mysports.append('football')
 friendsports.append('soccer')
 print(f"我喜歡的最新運動     = {mysports}")
 print(f"我朋友喜歡的最新運動 = {friendsports}")
-                   
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_36.py
-
-# ch6_36.py
 mysports = ['basketball', 'baseball']
 friendsports = mysports
 print(f"列出mysports位址     = {id(mysports)}")
@@ -865,14 +686,9 @@ print(f"列出mysports位址     = {id(mysports)}")
 print(f"列出friendsports位址 = {id(friendsports)}")
 print(f"我喜歡的最新運動     = {mysports}")
 print(f"我朋友喜歡的最新運動 = {friendsports}")
-                   
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_37.py
-
-# ch6_37.py
 mysports = ['basketball', 'baseball']
 friendsports = mysports[:]
 print(f"列出mysports位址     = {id(mysports)}")
@@ -886,13 +702,9 @@ print(f"列出mysports位址     = {id(mysports)}")
 print(f"列出friendsports位址 = {id(friendsports)}")
 print(f"我喜歡的最新運動     = {mysports}")
 print(f"我朋友喜歡的最新運動 = {friendsports}")
-                   
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_37_1.py
-
-# ch6_37_1.py
 mysports = ['basketball', 'baseball']
 friendsports = mysports.copy()
 print(f"列出mysports位址     = {id(mysports)}")
@@ -906,7 +718,6 @@ print(f"列出mysports位址     = {id(mysports)}")
 print(f"列出friendsports位址 = {id(friendsports)}")
 print(f"我喜歡的最新運動     = {mysports}")
 print(f"我朋友喜歡的最新運動 = {friendsports}")
-                   
 
 print("------------------------------------------------------------")  # 60個
 
@@ -923,13 +734,8 @@ print(f" {string[-1] = }",
 s1, s2, s3 = string
 print(f"多重指定觀念的輸出測試 {s1}{s2}{s3}")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_39.py
-
-# ch6_39.py
 string = "Deep Learning"                # 定義字串
 print(f"列印string第0-2元素     = {string[0:3]}")
 print(f"列印string第1-3元素     = {string[1:4]}")
@@ -940,13 +746,8 @@ print(f"列印string後3元素       = {string[-3:]}")
 print("="*60)     
 print(f"列印string第1-3元素     = {'Deep Learning'[1:4]}")
 
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_4.py
-
-# ch6_4.py
 x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 print(f"串列元素如下 : {x} ")
 print(f"x[2:]       = {x[2:]}")
@@ -961,23 +762,8 @@ print(f"x[::-1]     = {x[::-1]}")
 print(f"x[-3:-7:-1] = {x[-3:-7:-1]}")
 print(f"x[-1]       = {x[-1]}")     # 這是取單一元素
 
-
-
-
-
-
-
-
-
-
-
- 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_40.py
-
-# ch6_40.py
 str1 = "Silicon Stone Education"
 str2 = "D:\Python\ch6"
 
@@ -988,14 +774,8 @@ print(f"{str1} 串列字數是 {len(sList1)}")    # 列印字數
 print(f"{str2} 串列內容是 {sList2}")         # 列印串列
 print(f"{str2} 串列字數是 {len(sList2)}")    # 列印字數
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_41.py
-
-# ch6_41.py
 path = ['D:','ch6','ch6_41.py']
 connect = '\\'                   # 路徑分隔字元
 print(connect.join(path))
@@ -1036,13 +816,8 @@ print(d is not e)           # 輸出: True
 f = d
 print(d is not f)           # 輸出: False
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_45.py
-
-# ch6_45.py
 x = 10
 y = 10
 z = 15
@@ -1053,17 +828,8 @@ r = x                               # r的值將變為10
 print(f"{x = }, {y = }, {z = }, {r = }")
 print(f"x位址={id(x)}, y位址={id(y)}, z位址={id(z)}, r位址={id(r)}")
 
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_46.py
-
-# ch6_46.py
 x = 10
 y = 10
 z = 15
@@ -1090,32 +856,14 @@ boolean = x is not r
 print(f"x位址 = {id(x)}, r位址 = {id(r)}")
 print(f"{x = }, {r = }, {boolean}")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_47.py
-
-# ch6_47.py
 drinks = ["coffee", "tea", "wine"]
 enumerate_drinks = enumerate(drinks)               # 數值初始是0
 print("轉成串列輸出, 初始索引值是 0 = ",list(enumerate_drinks))
 
 enumerate_drinks = enumerate(drinks, start = 10)   # 數值初始是10
 print("轉成串列輸出, 初始索引值是10 = ",list(enumerate_drinks))
-
-
-
-
-
-
-
-
-
-
-          
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1127,197 +875,70 @@ print("球員索引1到最後",n_to_last)
 last3 = warriors[-3:]
 print("後3名球員",last3)
 
-
-
- 
-
 print("------------------------------------------------------------")  # 60個
 james = [23, 19, 22, 31, 18]       # 定義james的得分
 print(f"James比賽場次 = {len(james)}")
 print(f"最高得分 = {max(james)}")
 print(f"最低得分 = {min(james)}")
 print(f"得分總計 = {sum(james)}")
-    
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_7.py
-
-# ch6_7.py
 James = ['Lebron James', 23, 19, 22, 31, 18]    # 比賽得分
 print(f"James比賽場次 = {len(James[1:])}")
 print(f"最高得分 = {max(James[1:])}")
 print(f"最低得分 = {min(James[1:])}")
 print(f"得分總計 = {sum(James[1:])}")
 
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_8.py
-
-# ch6_8.py
 cars = ['Toyota', 'Nissan', 'Honda']
 print("舊汽車銷售品牌", cars)
 cars[1] = 'Ford'           # 更改第二筆元素內容
 print("新汽車銷售品牌", cars)
 
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_9.py
-
-# ch6_9.py
 cars1 = ['Toyota', 'Nissan', 'Honda']
 print("舊汽車銷售品牌", cars1)
 cars2 = ['Audi', 'BMW']
 cars1 += cars2
 print("新汽車銷售品牌", cars1)
 
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-xlst = []
-xlst.append(0)
-xlst.append(1)
-xlst.append(2)
-xlst.append(3)
-xlst.append(4)
-xlst.append(5)
-print(xlst)
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_14.py
-
-# ch7_14.py
-xlst = []
-for n in range(6):
-    xlst.append(n)
-print(xlst)
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_15.py
-
-# ch7_15.py
-xlst = list(range(6))
-print(xlst)
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_16.py
-
-# ch7_16.py
-xlst = [ n for n in range(6)]
-print(xlst)
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_17_1.py
-
-# ch7_17_1.py
 celsius = [21, 25, 29]
 fahrenheit = [(x * 9 / 5 + 32) for x in celsius]
 print(fahrenheit)
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_17_2.py
-
-# ch7_17_2.py
 x = [[a, b, c] for a in range(1,20) for b in range(a,20) for c in range(b,20)
      if a ** 2 + b ** 2 == c **2]
 print(x)
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_17_3.py
-
-# ch7_17_3.py
 colors = ["Red","Green","Blue"]
 shapes = ["Circle","Square","Line"]
 result = [[color,shape] for color in colors for shape in shapes]
 print(result)
 
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_18.py
-
-# ch7_18.py
 colors = ["Red", "Green", "Blue"]
 shapes = ["Circle", "Square"]
 result = [[color, shape] for color in colors for shape in shapes]
 for color, shape in result:
     print(color, shape)
 
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_18_1.py
-
-# ch7_18_1.py
 for x in range(0x2160, 0x216a):
     print(chr(x), end=' ')
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_18_2.py
-
-# ch7_18_2.py
 fruits = ['蘋果', '香蕉', '西瓜']
 print("目前fruits串列 : ", fruits)
 
@@ -1326,24 +947,13 @@ for fruit in fruits[:]:
     print(f"刪除 {fruit}")
     print("目前fruits串列 : ", fruits)
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_19.py
-
-# ch7_19.py
 for i in range(1, 10):
     for j in range(1, 10):
         result = i * j
         print(f"{i}*{j}={result:<3d}", end=" ")
     print()         # 換列輸出
-    
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1374,13 +984,8 @@ for score in scores:
     games += 1                      # 場次加1              
 print(f"有{games}場得分超過30分")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_24.py
-
-# ch7_24.py
 players = [['James', 202],
            ['Curry', 193],
            ['Durant', 205],
@@ -1404,20 +1009,6 @@ while i <= 9:           # 當i大於9跳出外層迴圈
         j += 1          # 內層迴圈加1
     print()             # 換列輸出
     i += 1              # 外層迴圈加1
-    
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_3.py
-
-# ch7_3.py
-players = ['Curry', 'Jordan', 'James', 'Durant', 'Obama']
-for player in players:
-    print(player)
-    
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1427,30 +1018,18 @@ while index <= 10:
     if index % 2:           # 測試是否奇數
         continue            # 不往下執行
     print(index)            # 輸出偶數
-        
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_33.py
-
-# ch7_33.py
 fruits = ['apple', 'orange', 'apple', 'banana', 'apple']
 fruit = 'apple'
 print("刪除前的fruits", fruits)
 while fruit in fruits:      # 只要串列內有apple迴圈就繼續
     fruits.remove(fruit)
 print("刪除後的fruits", fruits)
-    
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_34.py
-
-# ch7_34.py
 buyers = [['James', 1030],              # 建立買家購買紀錄
            ['Curry', 893],
            ['Durant', 2050],
@@ -1466,27 +1045,9 @@ while buyers:                           # 買家分類完成,迴圈才會結束
         goldbuyers.append(index_buyer)  # 加入Gold買家串列
 print("VIP 買家資料", vipbuyers)
 print("Gold買家資料", goldbuyers)
-    
 
+print("------------------------------------------------------------")  # 60個    
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_35.py
-
-# ch7_35.py
-schools = ['明志科大', '台灣科大', '台北科大']
-for school in schools:
-    pass
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_36.py
-
-# ch7_36.py
 drinks = ["coffee", "tea", "wine"]
 # 解析enumerate物件
 for drink in enumerate(drinks):             # 數值初始是0
@@ -1500,47 +1061,13 @@ for drink in enumerate(drinks, 10):         # 數值初始是10
 for count, drink in enumerate(drinks, 10):
     print(count, drink)
 
-
-
-
-
-
-
-
-
-
-          
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_37.py
-
-# ch7_37.py
 scores = [21,29,18,33,12,17,26,28,15,19] 
 # 解析enumerate物件
 for count, score in enumerate(scores, 1):   # 初始值是 1
     if score >= 20:
         print(f"場次 {count} : 得分 {score}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1568,38 +1095,8 @@ print("最後成績單")
 for i in range(len(sc)):
     print(sc[i])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_4.py
-
-# ch7_4.py
-players = ['Curry', 'Jordan', 'James', 'Durant', 'Obama']
-for player in players:print(player)
-    
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_40.py
-
-# ch7_40.py
 sc = [[1, '洪錦魁', 80, 95, 88, 0, 0, 0],
       [2, '洪冰儒', 98, 97, 96, 0, 0, 0],
       [3, '洪雨星', 91, 93, 95, 0, 0, 0],
@@ -1624,28 +1121,8 @@ print("最後成績單")
 for i in range(len(sc)):
     print(sc[i])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_41.py
-
-# ch7_41.py
 x = 1000000
 pi = 0
 for i in range(1,x+1):
@@ -1653,30 +1130,8 @@ for i in range(1,x+1):
     if i % 100000 == 0:      # 隔100000執行一次
         print(f"當 {i = :7d} 時 PI = {pi:20.19f}")
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_42.py
-
-# ch7_42.py
 chicken = 0
 while True:
     rabbit = 35 - chicken                       # 頭的總數
@@ -1685,15 +1140,8 @@ while True:
         break
     chicken += 1
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_43.py
-
-# ch7_43.py
 sum = 0
 for i in range(64):
     if i == 0:
@@ -1703,24 +1151,8 @@ for i in range(64):
     sum += wheat       
 print(f'麥粒總共 = {sum}')
 
-
-
-
-
-
-
-        
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_44.py
-
-# ch7_44.py
 print("電影院劃位系統")
 sc = [[' ', ' 1', ' 2', ' 3', ' 4'],
       ['A', '□','□','□','□'],
@@ -1751,37 +1183,8 @@ for i in range(2,n+1):
 for i in range(n+1):
     print(fib[i], end=', ')     # 輸出費式數列
 
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_5.py
-
-# ch7_5.py
-players = ['curry', 'jordan', 'james', 'durant', 'obama']
-for player in players:
-    print(f"{player.title()}, it was a great game.")
-    print(f"我迫不及待想看下一場比賽 {player.title()}")
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_6.py
-
-# ch7_6.py
 players = ['Curry', 'Jordan', 'James', 'Durant', 'Obama']
 print("列印前3位球員")
 for player in players[:3]:
@@ -1789,14 +1192,9 @@ for player in players[:3]:
 print("列印後3位球員")
 for player in players[-3:]:
     print(player)
-    
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_7.py
-
-# ch7_7.py
 files = ['da1.c','da2.py','da3.py','da4.java']
 py = []
 for file in files:
@@ -1806,9 +1204,6 @@ print(py)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch7\ch7_9.py
-
-# ch7_9.py
 money = 50000
 rate = 0.015
 n = 5
@@ -1816,17 +1211,8 @@ for i in range(n):
     money *= (1 + rate)
     print(f"第 {i+1} 年本金和 : {int(money)}")
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_1.py
-
-# ch8_1.py
 numbers1 = (1, 2, 3, 4, 5)      # 定義元組元素是整數
 fruits = ('apple', 'orange')    # 定義元組元素是字串
 mixed = ('James', 50)           # 定義元組元素是不同型態資料
@@ -1838,13 +1224,8 @@ print(val_tuple)
 # 列出元組資料型態
 #print("元組mixed資料型態是: ",type(mixed)) fail
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_10.py
-
-# ch8_10.py
 keys = ('magic', 'xaab', 9099)      # 定義元組元素是字串與數字
 list_keys = list(keys)              # 將元組改為串列
 list_keys.append('secret')          # 增加元素
@@ -1853,22 +1234,14 @@ print("列印串列", list_keys)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_11.py
-
-# ch8_11.py
 keys = ['magic', 'xaab', 9099]      # 定義串列元素是字串與數字
 tuple_keys = tuple(keys)            # 將串列改為元組
 print("列印串列", keys)
 print("列印元組", tuple_keys)
 #tuple_keys.append('secret')         # 增加元素 --- 錯誤錯誤
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_12.py
-
-# ch8_12.py
 tup = (1, 3, 5, 7, 9)
 print("tup最大值是", max(tup))
 print("tup最小值是", min(tup))
@@ -1883,13 +1256,8 @@ print("轉成串列輸出, 初始索引值是 0 = ", lst)
 print(type(lst[0]))
 """        
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_14.py
-
-# ch8_14.py
 drinks = ("coffee", "tea", "wine")
 enumerate_drinks = enumerate(drinks)                # 數值初始是0
 print("轉成元組輸出, 初始值是 0 = ", tuple(enumerate_drinks))
@@ -1897,24 +1265,8 @@ print("轉成元組輸出, 初始值是 0 = ", tuple(enumerate_drinks))
 enumerate_drinks = enumerate(drinks, start = 10)    # 數值初始是10
 print("轉成元組輸出, 初始值是10 = ", tuple(enumerate_drinks))
 
-
-
-
-
-
-
-
-
-
-          
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_15.py
-
-# ch8_15.py
 drinks = ("coffee", "tea", "wine")
 # 解析enumerate物件
 for drink in enumerate(drinks):             # 數值初始是0
@@ -1982,43 +1334,20 @@ sold_info = tuple(zipData)              # 將zip資料轉成元組
 for city, sales in sold_info:
     print(f'{city} 銷售金額是 {sales}')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_3.py
-
-# ch8_3.py
 keys = ('magic', 'xaab', 9099)      # 定義元組元素是字串與數字
 for key in keys:
     print(key)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_4.py
-
-# ch8_4.py
 fruits = ('apple', 'orange')        # 定義元組元素是字串
 print(fruits[0])                    # 列印元組fruits[0]
 #fruits[0] = 'watermelon'            # 將元素內容改為watermelon  fail
 print(fruits[0])                    # 列印元組fruits[0]
 
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 fruits = ('apple', 'orange')        # 定義元組元素是水果
 print("原始fruits元組元素")
@@ -2030,13 +1359,8 @@ print("\n新的fruits元組元素")
 for fruit in fruits:
     print(fruit)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_6.py
-
-# ch8_6.py     
 fruits = ('apple', 'orange', 'banana', 'watermelon', 'grape')
 print(fruits[1:3])
 print(fruits[:2])
@@ -2092,38 +1416,15 @@ print("舊fruits字典內容:", fruits)
 fruits.clear()
 print("新fruits字典內容:", fruits)
 
-   
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_12.py
-
-# ch9_12.py
-week = {}           # 建立空字典
-print("星期字典", week)
-week['Sunday'] = '星期日'
-week['Monday'] = '星期一'
-print("星期字典", week)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_13.py
-
-# ch9_13.py
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25, '蘋果':18}
 cfruits = fruits.copy( )
 print("位址 = ", id(fruits), "  fruits元素 = ", fruits)
 print("位址 = ", id(cfruits), "  fruits元素 = ", cfruits)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_14.py
-
-# ch9_14.py
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25, '蘋果':18}
 noodles = {'牛肉麵':100, '肉絲麵':80, '陽春麵':60}
 empty_dict = {}
@@ -2131,13 +1432,8 @@ print("fruits字典元素數量     = ", len(fruits))
 print("noodles字典元素數量    = ", len(noodles))
 print("empty_dict字典元素數量 = ", len(empty_dict))
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_15.py
-
-# ch9_15.py
 players = {
     'Stephen Curry':'Golden State Warriors',
     'Kevin Durant':'Golden State Warriors',
@@ -2149,77 +1445,34 @@ print(f"Stephen Curry是 {players['Stephen Curry']} 的球員")
 print(f"Kevin Durant是 {players['Kevin Durant']} 的球員")
 print(f"Paul Gasol是 {players['Paul Gasol']} 的球員") 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_16.py
-
-# ch9_16.py
 dealerA = {1:'Nissan', 2:'Toyota', 3:'Lexus'}
 dealerB = {11:'BMW', 12:'Benz'}
 dealerA.update(dealerB)
 print(dealerA)
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_16_1.py
-
-# ch9_16_1.py
 dealerA = {1:'Nissan', 2:'Toyota', 3:'Lexus'}
 dealerB = {3:'BMW', 4:'Benz'}
 dealerA.update(dealerB)
 print(dealerA)
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_16_2.py
-
-# ch9_16_2.py
 nation = [['日本','東京'],['泰國','曼谷'],['英國','倫敦']]
 nationDict = dict(nation)
 print(nationDict)
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_16_3.py
-
-# ch9_16_3.py
 mydict = {"name":"Hung", "age":25, "city":"New York"}
 for key in mydict:
     print(f"{key} : {mydict[key]}")
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_17.py
-
-# ch9_17.py
 players = {'Stephen Curry':'Golden State Warriors',
            'Kevin Durant':'Golden State Warriors',
            'Lebron James':'Cleveland Cavaliers'}
@@ -2230,17 +1483,12 @@ for name, team in players.items( ):
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_18.py
-
-# ch9_18.py
 players = {'Stephen Curry':'Golden State Warriors',
            'Kevin Durant':'Golden State Warriors',
            'Lebron James':'Cleveland Cavaliers'}
 for name in players.keys():
     print(name)
     print(f"Hi! {name} 我喜歡看你在 {players[name]} 的表現")
-
-
 
 print("------------------------------------------------------------")  # 60個
 

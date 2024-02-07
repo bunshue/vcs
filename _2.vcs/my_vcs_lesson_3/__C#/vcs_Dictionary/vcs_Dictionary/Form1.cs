@@ -36,7 +36,7 @@ namespace vcs_Dictionary
             x_st = 10;
             y_st = 10;
             dx = 180;
-            dy = 80;
+            dy = 70;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -45,7 +45,9 @@ namespace vcs_Dictionary
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
@@ -61,83 +63,79 @@ namespace vcs_Dictionary
         {
             richTextBox1.Text += "Dictionary字典用法0\n";
 
-            //Dictionary的用法
-            Dictionary<string, string> AnimalData = new Dictionary<string, string>() {
-            { "mouse", "Mickey" },
-            { "bull", "Benny" },
-            { "tiger", "Eric" },
-            { "rabbit", "Cony" }
+            Dictionary<string, int> AnimalData = new Dictionary<string, int>() {
+            { "鼠", 3 },
+            { "牛", 48 },
+            { "虎", 33 },
+            { "兔", 8 }
             };
-            string animal_type;
-            string animal_name;
+            string cname;
+            int weight;
 
-            animal_type = "mouse";
-            if (AnimalData.ContainsKey(animal_type))
+            cname = "鼠";
+            if (AnimalData.ContainsKey(cname))
             {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+                weight = AnimalData[cname];
+                richTextBox1.Text += "名稱 : " + cname + ", 找到 : " + weight + "\n";
             }
             else
-                richTextBox1.Text += "no matched animal name\n";
+                richTextBox1.Text += "找不到\n";
 
-            animal_type = "bull";
-            if (AnimalData.ContainsKey(animal_type))
+            cname = "牛";
+            if (AnimalData.ContainsKey(cname))
             {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+                weight = AnimalData[cname];
+                richTextBox1.Text += "名稱 : " + cname + ", 找到 : " + weight + "\n";
             }
             else
-                richTextBox1.Text += "no matched animal name\n";
+                richTextBox1.Text += "找不到\n";
 
-            animal_type = "tiger";
-            if (AnimalData.ContainsKey(animal_type))
+            cname = "虎";
+            if (AnimalData.ContainsKey(cname))
             {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+                weight = AnimalData[cname];
+                richTextBox1.Text += "名稱 : " + cname + ", 找到 : " + weight + "\n";
             }
             else
-                richTextBox1.Text += "no matched animal name\n";
+                richTextBox1.Text += "找不到\n";
 
-            animal_type = "rabbit";
-            if (AnimalData.ContainsKey(animal_type))
+            cname = "兔";
+            if (AnimalData.ContainsKey(cname))
             {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+                weight = AnimalData[cname];
+                richTextBox1.Text += "名稱 : " + cname + ", 找到 : " + weight + "\n";
             }
             else
-                richTextBox1.Text += "no matched animal name\n";
+                richTextBox1.Text += "找不到\n";
 
-            animal_type = "dragon";
-            if (AnimalData.ContainsKey(animal_type))
+            cname = "龍";
+            if (AnimalData.ContainsKey(cname))
             {
-                animal_name = AnimalData[animal_type];
-                richTextBox1.Text += "got animal name = " + animal_name + "\n";
+                weight = AnimalData[cname];
+                richTextBox1.Text += "名稱 : " + cname + ", 找到 : " + weight + "\n";
             }
             else
-                richTextBox1.Text += "no matched animal name\n";
-
+                richTextBox1.Text += "找不到\n";
         }
-
-        // The dictionary of digit names.
-        private Dictionary<int, string> Numbers = new Dictionary<int, string>()
-        {
-            {0, "Zero"},
-            {1, "One"},
-            {2, "Two"},
-            {3, "Three"},
-            {4, "Four"},
-            {5, "Five"},
-            {6, "Six"},
-            {7, "Seven"},
-            {8, "Eight"},
-            {9, "Nine"}
-        };
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法1\n";
+            richTextBox1.Text += "Dictionary字典用法1, 數字對上中文字\n";
 
-            // Display values from the dictionary.
+            // The dictionary of digit names.
+            Dictionary<int, string> Numbers = new Dictionary<int, string>() {
+            {0, "零"},
+            {1, "壹"},
+            {2, "貳"},
+            {3, "參"},
+            {4, "肆"},
+            {5, "伍"},
+            {6, "陸"},
+            {7, "柒"},
+            {8, "捌"},
+            {9, "玖"}
+            };
+
             for (int i = 0; i < 10; i++)
             {
                 richTextBox1.Text += i.ToString() + '\t' + Numbers[i] + "\n";
@@ -148,196 +146,140 @@ namespace vcs_Dictionary
         {
             richTextBox1.Text += "Dictionary字典用法2\n";
 
-            Dictionary<string, long> population_dict = new Dictionary<string, long>();
+            Dictionary<string, int> AnimalData = new Dictionary<string, int>();
 
-            // Population data from https://en.wikipedia.org/wiki/List_of_states_and_territories_of_the_United_States_by_population.
-            population_dict.Add("AK", 731545);
-            population_dict.Add("AL", 4903185);
-            population_dict.Add("AR", 3017825);
-            population_dict.Add("AS", 55641);
-            population_dict.Add("AZ", 7278717);
-            population_dict.Add("CA", 39512223);
-            population_dict.Add("CO", 5758736);
-            population_dict.Add("CT", 3565287);
-            population_dict.Add("DC", 705749);
-            population_dict.Add("DE", 973764);
-            population_dict.Add("FL", 21477737);
-            population_dict.Add("GA", 10617423);
-            population_dict.Add("GU", 165718);
-            population_dict.Add("HI", 1415872);
-            population_dict.Add("IA", 3155070);
-            population_dict.Add("ID", 1787065);
-            population_dict.Add("IL", 12671821);
-            population_dict.Add("IN", 6732219);
-            population_dict.Add("KS", 2913314);
-            population_dict.Add("KY", 4467673);
-            population_dict.Add("LA", 4648794);
-            population_dict.Add("MA", 6949503);
-            population_dict.Add("MD", 6045680);
-            population_dict.Add("ME", 1344212);
-            population_dict.Add("MI", 9986857);
-            population_dict.Add("MN", 5639632);
-            population_dict.Add("MO", 6137428);
-            population_dict.Add("MP", 55194);
-            population_dict.Add("MS", 2976149);
-            population_dict.Add("MT", 1068778);
-            population_dict.Add("NC", 10488084);
-            population_dict.Add("ND", 762062);
-            population_dict.Add("NE", 1934408);
-            population_dict.Add("NH", 1359711);
-            population_dict.Add("NJ", 8882190);
-            population_dict.Add("NM", 2096829);
-            population_dict.Add("NV", 3080156);
-            population_dict.Add("NY", 19453561);
-            population_dict.Add("OH", 11689100);
-            population_dict.Add("OK", 3956971);
-            population_dict.Add("OR", 4217737);
-            population_dict.Add("PA", 12801989);
-            population_dict.Add("PR", 3193694);
-            population_dict.Add("RI", 1059361);
-            population_dict.Add("SC", 5148714);
-            population_dict.Add("SD", 884659);
-            population_dict.Add("TN", 6833174);
-            population_dict.Add("TX", 28995881);
-            population_dict.Add("UT", 3205958);
-            population_dict.Add("VA", 8535519);
-            population_dict.Add("VI", 104914);
-            population_dict.Add("VT", 623989);
-            population_dict.Add("WA", 7614893);
-            population_dict.Add("WI", 5822434);
-            population_dict.Add("WV", 1792147);
-            population_dict.Add("WY", 578759);
+            AnimalData.Add("鼠", 3);
+            AnimalData.Add("牛", 48);
+            AnimalData.Add("虎", 33);
+            AnimalData.Add("兔", 8);
+            AnimalData.Add("龍", 38);
+            AnimalData.Add("蛇", 16);
 
-            // Get the state population.
-            long all_pop = 0;
-            foreach (int value in population_dict.Values)
+            int all_weight = 0;
+            foreach (int value in AnimalData.Values)
             {
-                all_pop += value;
+                all_weight += value;
             }
-            population_dict.Add("ALL STATES", all_pop);
+            AnimalData.Add("全部動物", all_weight);
 
             richTextBox1.Text += "顯示此Dictionary的資料\n";
-            richTextBox1.Text += "共有 " + population_dict.Count.ToString() + " 筆資料\n";
+            richTextBox1.Text += "共有 " + AnimalData.Count.ToString() + " 筆資料\n";
 
-            foreach (string n in population_dict.Keys)  //使用Keys和values屬性迭代集合中的鍵和值, 也可從Values找回Keys
+            foreach (string n in AnimalData.Keys)  //使用Keys和values屬性迭代集合中的鍵和值, 也可從Values找回Keys
             {
-                long p;
-                richTextBox1.Text += "找到 州 " + n + "\t";
-                if (population_dict.ContainsKey(n))
-                    p = population_dict[n];
+                int p;
+                richTextBox1.Text += "找到 " + n + "\t";
+                if (AnimalData.ContainsKey(n))
+                    p = AnimalData[n];
                 else
                     p = 0;
-                richTextBox1.Text += "人口 : " + p.ToString() + "\n";
+                richTextBox1.Text += "體重 : " + p.ToString() + "\n";
             }
 
             richTextBox1.Text += "另法顯示所有資料\n";
             //迭代集合中的各個項，把每個項作為一個 KeyValuePair<K,V>實例來獲取所有Dictionary資料
-            foreach (KeyValuePair<string, long> pop in population_dict)
+            foreach (KeyValuePair<string, int> pop in AnimalData)
             {
-                richTextBox1.Text += "州 : " + pop.Key + "\t人口 : " + pop.Value + "\n";
+                richTextBox1.Text += "名稱 : " + pop.Key + "\t體重 : " + pop.Value + "\n";
             }
 
-            string state_name;
-            long population;
+            string cname;
+            int weight;
 
-            state_name = "NY";
-            if (population_dict.ContainsKey(state_name))
-                population = population_dict[state_name];
+            cname = "鼠";
+            if (AnimalData.ContainsKey(cname))
+                weight = AnimalData[cname];
             else
-                population = 0;
-            richTextBox1.Text += "州 : " + state_name + "\t人口 : " + population.ToString() + "\n";
+                weight = 0;
+            richTextBox1.Text += "名稱 : " + cname + "\t體重 : " + weight.ToString() + "\n";
 
-            state_name = "CA";
-            if (population_dict.ContainsKey(state_name))
-                population = population_dict[state_name];
+            cname = "牛";
+            if (AnimalData.ContainsKey(cname))
+                weight = AnimalData[cname];
             else
-                population = 0;
-            richTextBox1.Text += "州 : " + state_name + "\t人口 : " + population.ToString() + "\n";
+                weight = 0;
+            richTextBox1.Text += "名稱 : " + cname + "\t體重 : " + weight.ToString() + "\n";
 
-            state_name = "ALL STATES";
-            if (population_dict.ContainsKey(state_name))
-                population = population_dict[state_name];
+            cname = "全部動物";
+            if (AnimalData.ContainsKey(cname))
+                weight = AnimalData[cname];
             else
-                population = 0;
-            richTextBox1.Text += "全國 :\t人口 : " + population.ToString() + "\n";
+                weight = 0;
+            richTextBox1.Text += "全部動物 :\t體重 : " + weight.ToString() + "\n";
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法3 用Class\n";
+            richTextBox1.Text += "Dictionary字典用法3, 用Class\n";
 
-            // Make a dictionary.
-            DictionaryWithDefault<string, string> dict = new DictionaryWithDefault<string, string>("<Missing>");
+            DictionaryWithDefault<string, string> AnimalData = new DictionaryWithDefault<string, string>("<Missing>");
 
-            // Add some items to the dictionary.
-            dict["Ann"] = "Archer";
-            dict["Chuck"] = "Cider";
-            dict["Dora"] = "Deevers";
+            //加入字典
+            AnimalData["鼠"] = "mouse";
+            AnimalData["虎"] = "tiger";
+            AnimalData["兔"] = "rabbit";
 
-            // Display some values.
-            richTextBox1.Text += "Ann" + "\t" + dict["Ann"] + "\n";
-            richTextBox1.Text += "Ben" + "\t" + dict["Ben"] + "\n";
-            richTextBox1.Text += "Chuck" + "\t" + dict["Chuck"] + "\n";
-            richTextBox1.Text += "Dora" + "\t" + dict["Dora"] + "\n";
-            richTextBox1.Text += "Ed" + "\t" + dict["Ed"] + "\n";
+            //查詢字典
+            richTextBox1.Text += "鼠" + "\t" + AnimalData["鼠"] + "\n";
+            richTextBox1.Text += "牛" + "\t" + AnimalData["牛"] + "\n";
+            richTextBox1.Text += "虎" + "\t" + AnimalData["虎"] + "\n";
+            richTextBox1.Text += "兔" + "\t" + AnimalData["兔"] + "\n";
+            richTextBox1.Text += "龍" + "\t" + AnimalData["龍"] + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法4\n";
+            richTextBox1.Text += "Dictionary字典用法4, 增刪查改\n";
 
             //建立及初始化
 
-            Dictionary<string, int> myDictionary = new Dictionary<string, int>();
+            Dictionary<string, int> AnimalData = new Dictionary<string, int>();
 
             //新增元素
-
-            myDictionary.Add("C#", 0);
-            myDictionary.Add("C++", 1);
-            myDictionary.Add("C", 2);
-            myDictionary.Add("VB", 2);
+            AnimalData.Add("鼠", 3);
+            AnimalData.Add("牛", 48);
+            AnimalData.Add("虎", 33);
+            AnimalData.Add("兔", 8);
 
             //查詢元素By Key
-
-            if (myDictionary.ContainsKey("C#"))
+            string cname = "鼠";
+            if (AnimalData.ContainsKey(cname))
             {
-                Console.WriteLine("Key:{0},Value:{1}", "C#", myDictionary["C#"]);
+                richTextBox1.Text += "Key:" + cname + ",Value:" + AnimalData[cname] + "\n";
             }
 
             //遍歷元素 By KeyValuePair
 
-            foreach (KeyValuePair<string, int> kvp in myDictionary)
+            foreach (KeyValuePair<string, int> kvp in AnimalData)
             {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                richTextBox1.Text += "Key = " + kvp.Key + ",Value = " + kvp.Value + "\n";
             }
 
             //僅遍歷鍵 By Keys 屬性
-
-            Dictionary<string, int>.KeyCollection keyCol = myDictionary.Keys;
-            foreach (string key in keyCol/*string key in myDictionary.Keys*/)
+            Dictionary<string, int>.KeyCollection keyCol = AnimalData.Keys;
+            foreach (string key in keyCol/*string key in AnimalData.Keys*/)
             {
-                Console.WriteLine("Key = {0}", key);
+                richTextBox1.Text += "Key = " + key + "\n";
             }
 
             //僅遍歷值By Valus屬性
-
-            Dictionary<string, int>.ValueCollection valueCol = myDictionary.Values;
+            Dictionary<string, int>.ValueCollection valueCol = AnimalData.Values;
             foreach (int value in valueCol)
             {
-                Console.WriteLine("Value = {0}", value);
+                richTextBox1.Text += "Value = " + value + "\n";
             }
 
             //移除指定的鍵值By Remove方法
-
-            myDictionary.Remove("C#");
-            if (myDictionary.ContainsKey("C#"))
+            cname = "鼠";
+            AnimalData.Remove(cname);
+            if (AnimalData.ContainsKey(cname))
             {
-                Console.WriteLine("Key:{0},Value:{1}", "C#", myDictionary["C#"]);
+                richTextBox1.Text += "Key:" + cname + ",Value:" + AnimalData[cname] + "\n";
             }
             else
             {
-                Console.WriteLine("不存在 Key : C#");
+                richTextBox1.Text += "不存在 Key:" + cname + "\n";
             }
         }
 
@@ -346,38 +288,37 @@ namespace vcs_Dictionary
             richTextBox1.Text += "Dictionary字典用法5\n";
 
             /*
-            從一組鍵（Key）到一組值（Value）的對映，每一個新增項都是由一個值及其相關連的鍵組成  
-            任何鍵都必須是唯一的  
-            鍵不能為空引用null（VB中的Nothing），若值為引用型別，則可以為空值  
+            從一組鍵（Key）到一組值（Value）的對映，每一個新增項都是由一個值及其相關連的鍵組成
+            任何鍵都必須是唯一的
+            鍵不能為空引用null，若值為引用型別，則可以為空值
             Key和Value可以是任何型別（string，int，custom class 等）
             */
 
             richTextBox1.Text += "建立Dictionary<K,V>，然後新增元素\n";
-            Dictionary<string, string> film = new Dictionary<string, string>();
-            film.Add("韋小寶", "鹿鼎記");
-            film.Add("陸小鳳", "陸小鳳傳奇");
-            film.Add("張無忌", "倚天屠龍記");
-            film.Add("楊過", "神鵰俠侶");
-            film.Add("令狐沖", "笑傲江湖");
-            richTextBox1.Text += "集合現在的元素個數為 " + film.Count.ToString() + "\n";
+            Dictionary<string, string> AnimalData = new Dictionary<string, string>();
+            AnimalData.Add("鼠", "mouse");
+            AnimalData.Add("牛", "ox");
+            AnimalData.Add("虎", "tiger");
+            AnimalData.Add("兔", "rabbit");
+            AnimalData.Add("龍", "dragon");
+            richTextBox1.Text += "集合現在的元素個數為 " + AnimalData.Count.ToString() + "\n";
 
             richTextBox1.Text += "移除一個\n";
-            film.Remove("楊過");
-            richTextBox1.Text += "集合現在的元素個數為 " + film.Count.ToString() + "\n";
+            AnimalData.Remove("兔");
+            richTextBox1.Text += "集合現在的元素個數為 " + AnimalData.Count.ToString() + "\n";
 
-            richTextBox1.Text += "遍歷集合\n";
-            richTextBox1.Text += "所有武俠電影的主角及電影名\n";
-            richTextBox1.Text += "\t主角\t電影\n";
-            foreach (KeyValuePair<string, string> kvp in film)
+            richTextBox1.Text += "遍歷字典\n";
+            richTextBox1.Text += "\t中文名\t英文名\n";
+            foreach (KeyValuePair<string, string> kvp in AnimalData)
             {
                 richTextBox1.Text += "\t" + kvp.Key + "\t" + kvp.Value + "\n";
             }
 
-            richTextBox1.Text += "檢查元素是否存在，如不存在，新增\n";
-            if (!film.ContainsKey("段譽"))
+            richTextBox1.Text += "檢查元素是否存在，如不存在，則新增之\n";
+            if (!AnimalData.ContainsKey("蛇"))
             {
-                richTextBox1.Text += "該元素不存在，新增\n";
-                film.Add("段譽", "天龍八部");
+                richTextBox1.Text += "該元素不存在，新增之\n";
+                AnimalData.Add("蛇", "snake");
             }
             else
             {
@@ -385,77 +326,63 @@ namespace vcs_Dictionary
             }
 
             richTextBox1.Text += "獲取鍵的集合\n";
-            Dictionary<string, string>.KeyCollection keys = film.Keys;
+            Dictionary<string, string>.KeyCollection keys = AnimalData.Keys;
 
-            richTextBox1.Text += "遍歷鍵的集合\n";
-            richTextBox1.Text += "受歡迎的武俠片中主角名\n";
+            richTextBox1.Text += "遍歷 key\n";
+            richTextBox1.Text += "中文名\n";
             foreach (string str in keys)
             {
                 richTextBox1.Text += str + "\n";
             }
 
-            Dictionary<string, string>.ValueCollection values = film.Values;
-            richTextBox1.Text += "遍歷值的集合\n";
-            richTextBox1.Text += "最受歡迎的武俠片\n";
-            foreach (string strfilm in values)
+            Dictionary<string, string>.ValueCollection values = AnimalData.Values;
+            richTextBox1.Text += "遍歷 value\n";
+            richTextBox1.Text += "英文名\n";
+            foreach (string name in values)
             {
-                richTextBox1.Text += strfilm + "\n";
+                richTextBox1.Text += name + "\n";
             }
 
             richTextBox1.Text += "遍歷元素的另一種方法\n";
             richTextBox1.Text += "和雜湊表相同的遍歷元素方法\n";
-            foreach (string strname in film.Values)
+            foreach (string strname in AnimalData.Values)
             {
                 richTextBox1.Text += strname + "\n";
             }
 
             richTextBox1.Text += "獲取鍵對應的值\n";
-            string myfilm = film["令狐沖"];
-            richTextBox1.Text += "主角為令狐沖的電影名 : " + myfilm + "\n";
+            string ename = AnimalData["龍"];
+            richTextBox1.Text += "龍 : " + ename + "\n";
 
             richTextBox1.Text += "獲取鍵對應值的TryGetValue方法\n";
-            string objfilm = string.Empty;
-            if (film.TryGetValue("段譽", out objfilm))
+            string ename2 = string.Empty;
+            if (AnimalData.TryGetValue("蛇", out ename2))
             {
-                richTextBox1.Text += "主角為段譽的電影是 : " + objfilm + "\n";
+                richTextBox1.Text += "蛇 : " + ename2 + "\n";
             }
             else
             {
-                richTextBox1.Text += "沒有主角為段譽的電影\n";
+                richTextBox1.Text += "沒有 蛇\n";
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法6\n";
+        }
 
-            Dictionary<string, string> ImageTypes = new Dictionary<string, string>()
-            {
-            { "FFD8", ".jpg" },
-            { "424D", ".bmp" },
-            { "474946", ".gif" },
-            { "89504E470D0A1A0A", ".png" }
-            };
+        private void button7_Click(object sender, EventArgs e)
+        {
 
-            richTextBox1.Text += "len = " + ImageTypes.Count.ToString() + "\n";
+        }
 
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        private void button8_Click(object sender, EventArgs e)
+        {
 
-            string builtHex = string.Empty;
-            string ext = string.Empty;
-            using (Stream S = File.OpenRead(filename))
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    builtHex += S.ReadByte().ToString("X2");
-                    if (ImageTypes.ContainsKey(builtHex))
-                    {
-                        ext = ImageTypes[builtHex];
-                        break;
-                    }
-                }
-            }
-            richTextBox1.Text += "取得真實副檔名 : " + ext + "\n";
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

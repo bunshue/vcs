@@ -26,9 +26,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_29.py
-
-# ch10_29.py
 # 供應商 A 和 B 的產品列表
 supplier_a_products = {"apple", "banana", "cherry", "date", "elderberry"}
 supplier_b_products = {"banana", "cherry", "fig", "grape"}
@@ -49,13 +46,8 @@ print(f"供應商 B 的獨特產品 : {unique_to_b}")
 all_products = supplier_a_products.union(supplier_b_products)
 print(f"所有產品 : {all_products}")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_3.py
-
-# ch10_3.py 
 math = {'Kevin', 'Peter', 'Eric'}       # 設定參加數學夏令營成員
 physics = {'Peter', 'Nelson', 'Tom'}    # 設定參加物理夏令營成員
 both1 = math & physics
@@ -63,13 +55,8 @@ print("同時參加數學與物理夏令營的成員 ",both1)
 both2 = math.intersection(physics)
 print("同時參加數學與物理夏令營的成員 ",both2)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_30.py
-
-# ch10_30.py
 # 定義飛行路線
 routes = {
     frozenset({"Los Angeles", "New York"}): {"距離": 2451, "時間": "5h 15m"},
@@ -93,62 +80,8 @@ get_route_info("Los Angeles", "New York")
 get_route_info("New York", "Chicago")
 get_route_info("San Francisco", "New York")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_4.py
-
-# ch10_4.py 
-math = {'Kevin', 'Peter', 'Eric'}       # 設定參加數學夏令營成員
-physics = {'Peter', 'Nelson', 'Tom'}    # 設定參加物理夏令營成員
-allmember1 = math | physics
-print("參加數學或物理夏令營的成員 ",allmember1)
-allmember2 = math.union(physics)
-print("參加數學或物理夏令營的成員 ",allmember2)
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_5.py
-
-# ch10_5.py 
-math = {'Kevin', 'Peter', 'Eric'}       # 設定參加數學夏令營成員
-physics = {'Peter', 'Nelson', 'Tom'}    # 設定參加物理夏令營成員
-math_only1 = math - physics
-print("參加數學夏令營同時沒有參加物理夏令營的成員 ",math_only1)
-math_only2 = math.difference(physics)
-print("參加數學夏令營同時沒有參加物理夏令營的成員 ",math_only2)
-physics_only1 = physics - math
-print("參加物理夏令營同時沒有參加數學夏令營的成員 ",physics_only1)
-physics_only2 = physics.difference(math)
-print("參加物理夏令營同時沒有參加數學夏令營的成員 ",physics_only2)
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_6.py
-
-# ch10_6.py 
-math = {'Kevin', 'Peter', 'Eric'}       # 設定參加數學夏令營成員
-physics = {'Peter', 'Nelson', 'Tom'}    # 設定參加物理夏令營成員
-math_sydi_physics1 = math ^ physics
-print("沒有同時參加數學和物理夏令營的成員 ",math_sydi_physics1)
-math_sydi_physics2 = math.symmetric_difference(physics)
-print("沒有同時參加數學和物理夏令營的成員 ",math_sydi_physics2)
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_7.py
-
-# ch10_7.py
 A = {1, 2, 3, 4, 5}                     # 定義集合A
 B = {3, 4, 5, 6, 7}                     # 定義集合B
 C = {1, 2, 3, 4, 5}                     # 定義集合C
@@ -156,30 +89,9 @@ C = {1, 2, 3, 4, 5}                     # 定義集合C
 print("A與B集合相等", A == B)
 # 列出A與C集合是否相等                             
 print("A與C集合相等", A == C)
-          
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_8.py
-
-# ch10_8.py
-A = {1, 2, 3, 4, 5}                     # 定義集合A
-B = {3, 4, 5, 6, 7}                     # 定義集合B
-C = {1, 2, 3, 4, 5}                     # 定義集合C
-# 列出A與B集合是否相等                             
-print("A與B集合不相等", A != B)
-# 列出A與C集合是否不相等                              
-print("A與C集合不相等", A != C)          
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_9.py
-
-# ch10_9.py
 # 方法1
 fruits = set("orange")
 print("字元a是屬於fruits集合?", 'a' in fruits)
@@ -191,18 +103,8 @@ print("Ford in cars", boolean)
 boolean = "Audi" in cars
 print("Audi in cars", boolean)
 
-
-          
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_1.py
-
-# ch11_1.py
 def greeting():
     """我的第一個Python函數設計"""
     print("Python歡迎你")
@@ -214,12 +116,8 @@ greeting()
 greeting()
 greeting()
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_10.py
-
-# ch11_10.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi, ", name, " Good Morning!")
@@ -227,9 +125,6 @@ def greeting(name):
 ret_value = greeting('Nelson')
 print(f"greeting()傳回值 = {ret_value}")
 print(f"{ret_value} 的 type  = {type(ret_value)}")
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -248,9 +143,6 @@ print(info2)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_15.py
-
-# ch11_15.py
 def guest_info(firstname, lastname, gender, middlename = ''):
     """ 整合客戶名字資料 """
     if gender == "M":
@@ -264,14 +156,8 @@ info2 = guest_info('雨', '洪', 'F', '冰')
 print(info1)
 print(info2)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_16.py
-
-# ch11_16.py
 def build_vip(id, name):
     """ 建立VIP資訊 """
     vip_dict = {'VIP_ID':id, 'Name':name}
@@ -280,12 +166,8 @@ def build_vip(id, name):
 member = build_vip('101', 'Nelson')
 print(member)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_17.py
-
-# ch11_17.py
 def build_vip(id, name, tel = ''):
     """ 建立VIP資訊 """
     vip_dict = {'VIP_ID':id, 'Name':name}
@@ -297,7 +179,6 @@ member1 = build_vip('101', 'Nelson')
 member2 = build_vip('102', 'Henry', '0952222333')
 print(member1)
 print(member2)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -324,19 +205,8 @@ print("主程式 id(x) = : ", id(x), "\t", x)
 mydata(x)
 print("主程式 id(x) = : ", id(x), "\t", x)
 
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_19_2.py
-
-# ch11_19_2.py
 def mydata(n):
     print(f"函  數 id(n) = :  {id(n)} \t {n}")
     n[0] = 5
@@ -347,37 +217,8 @@ print("主程式 id(x) = : ", id(x), "\t", x)
 mydata(x)
 print("主程式 id(x) = : ", id(x), "\t", x)
 
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_2.py
-
-# ch11_2.py
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-print("Python歡迎你")
-print("祝福學習順利")
-print("謝謝")
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_20.py
-
-# ch11_20.py
 def kitchen(unserved, served):
     """ 將未服務的餐點轉為已經服務 """
     print("\n廚房處理顧客所點的餐點")
@@ -416,12 +257,8 @@ kitchen(unserved, served)                 # 餐廳處理過程
 show_unserved_meal(unserved)              # 列出未服務餐點
 show_served_meal(served)                  # 列出已服務餐點
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_21.py
-
-# ch11_21.py
 def kitchen(unserved, served):
     """ 將未服務的餐點轉為已經服務 """
     print("\n廚房處理顧客所點的餐點")
@@ -460,12 +297,8 @@ kitchen(order_list, served_list)           # 餐廳處理過程
 show_unserved_meal(order_list)             # 列出未服務餐點
 show_served_meal(served_list)              # 列出已服務餐點
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_22.py
-
-# ch11_22.py
 def kitchen(unserved, served):
     """ 將未服務的餐點轉為已經服務 """
     print("\n廚房處理顧客所點的餐點")
@@ -504,66 +337,26 @@ kitchen(order_list[:], served_list)        # 餐廳處理過程
 show_order_meal(order_list)                # 列出所點的餐點
 show_served_meal(served_list)              # 列出已服務餐點
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_23.py
+def function_with_args(*args):
+    """ 不定長度參數的函數 """
+    #print(type(args))
+    #print(args)
+    print("使用的參數如下 : ", end = "")
+    for arg in args:
+        print(arg, end = " ")
+    print()
 
-# ch11_23.py
-def make_icecream(*toppings):
-    """ 列出製作冰淇淋的配料 """
-    print("這個冰淇淋所加配料如下")
-    for topping in toppings:
-        print("--- ", topping)
-
-make_icecream('草莓醬')
-make_icecream('草莓醬', '葡萄乾', '巧克力碎片')
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_23_1.py
-
-# ch11_23_1.py
-def make_icecream(*toppings):
-    """ 列出製作冰淇淋的配料 """
-    print("這個冰淇淋所加配料如下")
-    for topping in toppings:
-        print("--- ", topping)
-    print(type(toppings))
-    print(toppings)
-
-make_icecream('草莓醬')
-make_icecream('草莓醬', '葡萄乾', '巧克力碎片')
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_23_2.py
-
-# ch11_23_2.py
-def make_icecream(*toppings):
-    """ 列出製作冰淇淋的配料 """
-    print("這個冰淇淋所加配料如下")
-    for topping in toppings:
-        print("--- ", topping)
-
-make_icecream()
-
-print("------------------------------------------------------------")  # 60個
-
-def make_icecream(icecream_type, *toppings):
-    """ 列出製作冰淇淋的配料 """
-    print("這個 ", icecream_type, " 冰淇淋所加配料如下")
-    for topping in toppings:
-        print("--- ", topping)
-
-make_icecream('香草', '草莓醬')
-make_icecream('芒果', '草莓醬', '葡萄乾', '巧克力碎片')
-
+help(function_with_args)
+function_with_args()
+function_with_args('AAA')
+function_with_args('AAA', 'BBB')
+function_with_args('AAA', 'BBB', 'CCC')
+function_with_args('AAA', 'BBB', 'CCC', 'DDD')
+function_with_args('AAA', 'BBB', 'CCC', 'DDD', 'EEE')
+function_with_args('AAA', 'BBB', 'CCC', 'DDD', 'EEE', 'FFF')
+function_with_args('AAA', 'BBB', 'CCC', 'DDD', 'EEE', 'FFF', 'GGG')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -729,12 +522,8 @@ lazy_sum = lazy_evaluation('1 + 2 + 3 + 4')     # 這裡不會立即計算總和
 result = lazy_sum()                             # 這裡將計算並返回總和
 print(result)                               
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_5f.py
-
-# ch11_25_5f.py
 def counter(start=0):
     count = [start]
     def increment():
@@ -746,13 +535,8 @@ count_from_5 = counter(5)
 print(count_from_5())       # 輸出: 6
 print(count_from_5())       # 輸出: 7
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_25_5g.py
-
-# ch11_25_5g.py
 def event_handler(event):
     def register_handler(handler_function):
         print(f"Handling {event} with {handler_function.__name__}")
@@ -812,23 +596,15 @@ def greeting(name):
     print("Hi,", name, "Good Morning!")
 greeting('Nelson')
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_3_1.py
-
-# ch11_3_1.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi, " + name + " Good Morning!")
 greeting('Nelson')
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_30.py
-
-# ch11_30.py
 def printlocal():
     lang = "Java"
     print(f"語言 : {lang}")
@@ -838,21 +614,8 @@ printlocal()
 print(f"語言 : {msg}")
 print(f"全域變數 : {globals()}")
 
-
-
-
-
-
-
-
-   
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_31.py
-
-# ch11_31.py
 # 使用一般函數
 def square(x):
     value = x ** 2
@@ -861,58 +624,32 @@ def square(x):
 # 輸出平方值
 print(square(10))
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_32.py
-
-# ch11_32.py
 # 定義lambda函數
 square = lambda x: x ** 2
 
 # 輸出平方值
 print(square(10))
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_33.py
-
-# ch11_33.py
 # 定義lambda函數
 product = lambda x, y: x * y
 
 # 輸出相乘結果
 print(product(5, 10))
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_33_1.py
-
-# ch11_33_1.py
 def func(b):
     return lambda x : 2 * x + b 
 
 linear  = func(5)       # 5將傳給lambda的 b
 print(linear(10))       # 10是lambda的 x
 
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_33_2.py
-
-# ch11_33_2.py
 def func(b):
     return lambda x : 2 * x + b 
 
@@ -922,23 +659,8 @@ print(linear(10))       # 10是lambda的 x
 linear2 = func(3)
 print(linear2(10))
 
-
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_33_3.py
-
-# ch11_33_3.py
 def mycar(cars,func):
     for car in cars:
         print(func(car))
@@ -948,12 +670,8 @@ def wdcar(carbrand):
 dreamcars = ['porsche','rolls royce','maserati']
 mycar(dreamcars, wdcar)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_33_4.py
-
-# ch11_33_4.py
 def mycar(cars,func):
     for car in cars:
         print(func(car))
@@ -961,12 +679,8 @@ def mycar(cars,func):
 dreamcars = ['porsche','rolls royce','maserati']
 mycar(dreamcars, lambda carbrand:"My dream car is " + carbrand.title())
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_34.py
-
-# ch11_34.py
 def oddfn(x):
     return x if (x % 2 == 1) else None
 
@@ -976,15 +690,8 @@ filter_object = filter(oddfn, mylist)     # 傳回filter object
 # 輸出奇數串列
 print("奇數串列: ",[item for item in filter_object])
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_35.py
-
-# ch11_35.py
 def oddfn(x):
     return x if (x % 2 == 1) else None
 
@@ -994,15 +701,8 @@ oddlist = [item for item in filter_object]
 # 輸出奇數串列
 print("奇數串列: ",oddlist)
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_36.py
-
-# ch11_36.py
 mylist = [5, 10, 15, 20, 25, 30]
 
 oddlist = list(filter(lambda x: (x % 2 == 1), mylist))
@@ -1010,12 +710,8 @@ oddlist = list(filter(lambda x: (x % 2 == 1), mylist))
 # 輸出奇數串列
 print("奇數串列: ",oddlist)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37.py
-
-# ch11_37.py
 mylist = [5, 10, 15, 20, 25, 30]
 
 squarelist = list(map(lambda x: x ** 2, mylist))
@@ -1023,12 +719,8 @@ squarelist = list(map(lambda x: x ** 2, mylist))
 # 輸出串列元素的平方值
 print("串列的平方值: ",squarelist)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_1.py
-
-# ch11_37_1.py
 from functools import reduce
 def strToInt(s):
     def func(x, y):
@@ -1045,13 +737,8 @@ string = '5487'
 x = strToInt(string) + 10
 print("x = ", x)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_10.py
-
-# ch11_37_10.py
 things = {'iWatch手錶':(15000, 0.1),    # 定義商品
           'Asus  筆電':(35000, 0.7),
           'iPhone手機':(38000, 0.3),
@@ -1066,15 +753,8 @@ print('商品', '        商品價格 ',  ' 商品重量')
 for i in range(len(th)):
     print(f"{th[i][0]:8s}{th[i][1][0]:10d}{th[i][1][1]:10.2f}")
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_2.py
-
-# ch11_37_2.py
 from functools import reduce
 def strToInt(s):
     def func(x, y):
@@ -1090,13 +770,8 @@ string = '5487'
 x = strToInt(string) + 10
 print("x = ", x)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_3.py
-
-# ch11_37_3.py
 from functools import reduce
 def strToInt(s):
     def func(x, y):
@@ -1109,13 +784,8 @@ string = '5487'
 x = strToInt(string) + 10
 print("x = ", x)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_4.py
-
-# ch11_37_4.py
 from functools import reduce
 def strToInt(s):
     def charToNum(s):
@@ -1126,57 +796,33 @@ string = '5487'
 x = strToInt(string) + 10
 print("x = ", x)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_5.py
-
-# ch11_37_5.py
 str_len = lambda x:len(x)
 strs = ['abc', 'ab', 'abcde']
 strs.sort(key = str_len)
 print(strs)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_6.py
-
-# ch11_37_6.py
 strs = ['abc', 'ab', 'abcde']
 strs.sort(key = lambda x:len(x))
 print(strs)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_7.py
-
-# ch11_37_7.py
 sc = [['John', 80],['Tom', 90], ['Kevin', 77]]
 sc.sort(key = lambda x:x[1])
 print(sc)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_8.py
-
-# ch11_37_8.py
 sc = [['John', 80],['Tom', 90], ['Kevin', 77]]
 newsc = sorted(sc, key = lambda x:x[1])
 print(newsc)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_37_9.py
-
-# ch11_37_9.py
 sc = {'John':80, 'Tom':90, 'Kevin':77}
 newsc1 = sorted(sc.items(), key = lambda x:x[0])  # 依照key排序
 print("依照人名排序")
@@ -1186,23 +832,8 @@ newsc2 = sorted(sc.items(), key = lambda x:x[1])  # 依照value排序
 print("依照分數排序")
 print(newsc2)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_38.py
-
-# ch11_38.py
-def fun(arg):
-    pass
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39.py
-
-# ch11_39.py
 def fun(arg):
     pass
 
@@ -1210,13 +841,8 @@ print("列出fun的type類型   :      ", type(fun))
 print("列出lambda的type類型:      ", type(lambda x:x))
 print("列出內建函數abs的type類型: ", type(abs))
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1.py
-
-# ch11_39_1.py
 def myRange(start=0, stop=100, step=1):
     n = start
     while n < stop:
@@ -1227,12 +853,8 @@ print(type(myRange))
 for x in myRange(0,5):
     print(x)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1a.py
-
-# ch11_39_1a.py
 # 創建一個簡單的串列
 my_list = [1, 3, 5]
 
@@ -1244,26 +866,8 @@ print(next(my_iterator))
 print(next(my_iterator))  
 print(next(my_iterator))  
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1b.py
-
-# ch11_39_1b.py
-my_list = [1, 3, 5]
-
-for item in my_list:
-    print(item)
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1c.py
-
-# ch11_39_1c.py
 def iter_data():
     x = 10
     yield x
@@ -1277,16 +881,8 @@ print(next(myiter))
 print(next(myiter))
 print(next(myiter))
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1d.py
-
-# ch11_39_1d.py
 def iter_data():
     x = 10
     yield x
@@ -1299,16 +895,8 @@ myiter = iter_data()    # 建立迭代器
 for data in myiter:
     print(data)
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1e.py
-
-# ch11_39_1e.py
 def list_square(n):
     mylist = []
     for data in range(1, n+1):
@@ -1317,18 +905,8 @@ def list_square(n):
 
 print(list_square(5))
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1f.py
-
-# ch11_39_1f.py
 def iter_square(n):
     for data in range(1, n+1):
         yield data ** 2
@@ -1337,49 +915,19 @@ myiter = iter_square(5)     # 建立迭代器
 for data in myiter:
     print(data)
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1g.py
-
-# ch11_39_1g.py
 list_square = [n ** 2 for n in range(1, 6)]
 print(list_square)
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1h.py
-
-# ch11_39_1h.py
 list_square = (n ** 2 for n in range(1, 6))
 for data in list_square:
     print(data)
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1i.py
-
-# ch11_39_1i.py
 def myRange(start=0, stop=100, step=1):
     n = start
     while n < stop:
@@ -1390,12 +938,8 @@ print(type(myRange))
 for x in myRange(0,5):
     print(x)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_1j.py
-
-# ch11_39_1j.py
 def fibonacci(n):
     a, b = 0, 1
     count = 0
@@ -1411,13 +955,8 @@ fib = fibonacci(10)
 for num in fib:
     print(num, end='  ')
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_2.py
-
-# ch11_39_2.py
 def upper(func):                # 裝飾器
     def newFunc(args):
         oldresult = func(args)
@@ -1433,18 +972,8 @@ def greeting(string):           # 問候函數
 mygreeting = upper(greeting)    # 手動裝飾器
 print(mygreeting('Hello! iPhone'))
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_3.py
-
-# ch11_39_3.py
 def upper(func):                # 裝飾器
     def newFunc(args):
         oldresult = func(args)
@@ -1459,18 +988,8 @@ def greeting(string):           # 問候函數
 
 print(greeting('Hello! iPhone'))
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_4.py
-
-# ch11_39_4.py
 def errcheck(func):             # 裝飾器
     def newFunc(*args):
         if args[1] != 0:
@@ -1489,16 +1008,8 @@ def mydiv(x, y):                # 函數
 print(mydiv(6,2))
 print(mydiv(6,0))
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_5.py
-
-# ch11_39_5.py
 def upper(func):                # 大寫裝飾器
     def newFunc(args):
         oldresult = func(args)
@@ -1517,18 +1028,8 @@ def greeting(string):           # 問候函數
 
 print(greeting('Hello! iPhone'))
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_39_6.py
-
-# ch11_39_6.py
 def upper(func):                # 裝飾器
     def newFunc(args):
         oldresult = func(args)
@@ -1547,29 +1048,14 @@ def greeting(string):           # 問候函數
 
 print(greeting('Hello! iPhone'))
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_4.py
-
-# ch11_4.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi, " + name + " Good Morning!")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_40.py
-
-# ch11_40.py
 def modifySong(songStr):            # 將歌曲的標點符號用空字元取代       
     for ch in songStr:
         if ch in ".,?":
@@ -1620,9 +1106,6 @@ print("最大公約數是 : ", gcd(n1,n2))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_43.py
-
-# ch11_43.py
 def gcd(a, b):
     if a < b:
         a, b = b, a
@@ -1635,11 +1118,6 @@ def gcd(a, b):
 a, b = 1233,2477
 print("最大公約數是 : ", gcd(a, b))
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 def gcd(a, b):
@@ -1648,16 +1126,7 @@ def gcd(a, b):
 a, b = 1233,2477
 print("最大公約數是 : ", gcd(a, b))
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_45.py
-
-# ch11_45.py
 
 def gcd(a, b):
     return a if b == 0 else gcd(b, a % b)
@@ -1669,15 +1138,8 @@ a, b = 1233,2477
 print("最大公約數是 : ", gcd(a, b))
 print("最小公倍數是 : ", lcm(a, b))
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_46.py
-
-# ch11_46.py
 def create_multiplier(multiplier):
     def multiplier_function(number):
         return number * multiplier
@@ -1698,13 +1160,8 @@ triple_function = create_multiplier(3)
 result = triple_function(5)             # 返回值是 15
 print(result)                           # 輸出: 15
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_47.py
-
-# ch11_47.py
 def event_handler(event):
     def register_handler(handler_function):
         print(f"處理(Handling) {event} with {handler_function.__name__}")
@@ -1725,13 +1182,8 @@ hover_handler = event_handler("懸停留事件")
 click_handler(on_click)
 hover_handler(on_hover)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_48.py
-
-# ch11_48.py
 import time
 
 def timing_decorator(func):
@@ -1751,8 +1203,6 @@ def slow_function(duration):
 # 調用裝飾器函數
 slow_function(3)            # 輸出 slow_function 執行需 : 3.000xxxx 秒
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 def interest(interest_type, subject):
@@ -1764,16 +1214,8 @@ def interest(interest_type, subject):
 interest('旅遊', '敦煌')
 interest('程式設計', 'Python')
 
-
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_7.py
-
-# ch11_7.py
 def interest(interest_type, subject):
     """ 顯示興趣和主題 """
     print(f"我的興趣是 {interest_type}")
@@ -1783,16 +1225,8 @@ def interest(interest_type, subject):
 interest(interest_type='旅遊', subject='敦煌')  # 位置正確
 interest(subject='敦煌', interest_type='旅遊')  # 位置更動
 
-
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_8.py
-
-# ch11_8.py
 def interest(interest_type, subject = '敦煌'):
     """ 顯示興趣和主題 """
     print(f"我的興趣是 {interest_type}")
@@ -1806,16 +1240,8 @@ interest(interest_type='旅遊', subject='張家界') # 傳遞二個參數
 interest(subject='張家界', interest_type='旅遊') # 傳遞二個參數
 interest('閱讀', '旅遊類')            # 傳遞二個參數,不同的主題
 
-
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch11\ch11_9.py
-
-# ch11_9.py
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi, ", name, " Good Morning!")
@@ -1892,14 +1318,9 @@ mycat.run()
 mydog = Dogs('lily', 6)         # 建立Dogs物件以及測試
 print(mydog.name.title(), ' is ', mydog.age, " years old.")
 mydog.run()
-        
-        
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_14_1.py
-
-# ch12_14_1.py
 class Animals():
     """Animals類別, 這是基底類別 """
     def __init__(self, animal_name, animal_age ):
@@ -1925,15 +1346,8 @@ print(mydog.name.title(), ' is ', mydog.age, " years old.")
 mydog.run()
 mydog.sleeping()
 
-
-        
-        
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_15.py
-
-# ch12_15
 class Grandfather():
     """ 定義祖父的資產 """
     def __init__(self):
@@ -1967,12 +1381,8 @@ ivan.get_info2()                # 流程 Ivan -> Father
 ivan.get_info1()                # 流程 Ivan -> Father -> Grandtather
 ivan.get_money()                # 取得資產明細
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_16.py
-
-# ch12_16.py
 class Father():
     """ 定義父親的資產 """
     def __init__(self):
@@ -1997,12 +1407,8 @@ class Ivan(Father):                                 # 父類別是Father
 ivan = Ivan()
 ivan.get_money()                                    # 取得資產明細
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_16_1.py
-
-# ch12_16_1.py
 class Person():
     def interest(self):
         print("Smiling is my interest")
@@ -2010,17 +1416,8 @@ class Person():
 hung = Person()
 hung.interest()
 
-
-
-
-        
-        
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_17.py
-
-# ch12_17.py
 class Animals():
     """Animals類別, 這是基底類別 """
     def __init__(self, animal_name):
@@ -2056,13 +1453,8 @@ doing(my_dog)
 my_monkey = Monkeys('taylor')           # Monkeys物件
 doing(my_monkey)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_18.py
-
-# ch12_18.py
 class Grandfather():
     """ 定義祖父類別 """
     def action1(self):
@@ -2088,14 +1480,8 @@ ivan.action3()              # 順序 Ivan
 ivan.action2()              # 順序 Ivan -> Father
 ivan.action1()              # 順序 Ivan -> Father -> Grandfather
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_19.py
-
-# ch12_19.py
 class Grandfather():
     """ 定義祖父類別 """
     def action1(self):
@@ -2122,14 +1508,8 @@ ivan.action3()              # 順序 Ivan -> Father
 ivan.action2()              # 順序 Ivan -> Father -> Uncle
 ivan.action1()              # 順序 Ivan -> Father -> Uncle -> Grandfather
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_19_1.py
-
-# ch12_19_1.py
 class A():
     def __init__(self):
         print('class A')
@@ -2145,12 +1525,8 @@ class C(A,B):
 
 x = C()
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_19_2.py
-
-# ch12_19_2.py
 class A():
     def __init__(self):
         super().__init__()
@@ -2191,12 +1567,8 @@ print("father物件類型     : ", type(father))
 print("ivan物件類型       : ", type(ivan))
 print("ivan物件fn方法類型 : ", type(ivan.fn))
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_21.py
-
-# ch12_21.py
 class Grandfather():
     """ 定義祖父類別 """
     pass
@@ -2223,13 +1595,8 @@ print("grandfa屬於Ivan類別: ", isinstance(grandfa, Ivan))
 print("grandfa屬於Father類別: ", isinstance(grandfa, Father))
 print("grandfa屬於Grandfather類別: ", isinstance(grandfa, Grandfather))
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_22.py
-
-# ch12_22.py
 def getMax(x, y):
     """文件字串實例
 建議x, y是整數
@@ -2242,12 +1609,8 @@ def getMax(x, y):
 print(getMax(2, 3))         # 列印較大值
 print(getMax.__doc__)       # 列印文件字串docstring
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_23.py
-
-# ch12_23.py
 class Myclass:
     """文件字串實例
 Myclass類別的應用"""
@@ -2263,26 +1626,16 @@ data.printMe()
 print(data.__doc__)             # 列印Myclass文件字串docstring
 print(data.printMe.__doc__)     # 列印printMe文件字串docstring
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_24.py
-
-# ch12_24.py
 print('ch12_24.py module name = ', __name__)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_25.py
-
-# ch12_25.py
 def myFun():
     print("__name__ == __main__")
-if __name__ == '__main__':
-    myFun()
+
+myFun()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2316,13 +1669,8 @@ class Name:
 a = Name('Hung')
 print(a)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_31.py
-
-# ch12_31.py
 class Fib():                                        
     def __init__(self, max):                      
         self.max = max
@@ -2341,12 +1689,8 @@ class Fib():
 for i in Fib(100):
     print(i)
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_32.py
-
-# ch12_32.py
 class City():
     def __init__(self, name):
         self.name = name
@@ -2359,15 +1703,8 @@ three = City("myhome")
 print(one.equals(two))
 print(one.equals(three))
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_33.py
-
-# ch12_33.py
 class City():
     def __init__(self, name):
         self.name = name
@@ -2380,15 +1717,8 @@ three = City("myhome")
 print(one == two)
 print(one == three)
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_34.py
-
-# ch12_34.py
 class Geometric():
     def __init__(self):
         self.color = "Green"
@@ -2419,33 +1749,8 @@ print("圓形的面積 : ", A.getArea())
 A.setRadius(10)
 print("圓形的直徑 : ", A.getDiameter())
 
-
-
-
-
-                       
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_35.py
-
-# ch12_35.py
 # 定義 Inventory 類別來管理商品庫存
 class Inventory:
     # 初始化方法，建立一個空的商品字典
@@ -2473,15 +1778,8 @@ inventory.remove_item('apple', 3)       # 從庫存中移除3個蘋果
 # 查看庫存的目前狀態
 print(inventory.items)                  # 輸出：{'apple': 7}
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_36.py
-
-# ch12_36.py
 # 定義 Vehicle 類別來表示車輛
 class Vehicle:
     # 初始化方法，設置車輛的製造商、型號和生產年份
@@ -2500,14 +1798,8 @@ car = Vehicle('Lexus', 'ES 300h', 2025)     # 建立一個 Vehicle 對象
 info = car.get_info()                       # get_info方法獲取車輛資料
 print(info)                                 # 輸出：'2025 ES 300h'
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_37.py
-
-# ch12_37.py
 # 定義 StudentManager 類別來管理學生資料
 class StudentManager:
     # 初始化方法, 建立一個空的學生字典
@@ -2559,18 +1851,8 @@ print(stu.getscore())
 stu.setscore(80)            
 print(stu.getscore())
 
-
-
-
-
-        
-        
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_9_3.py
-
-# ch12_9_3.py
 class Score():
     def __init__(self, score):
         self.__score = score
@@ -2587,20 +1869,8 @@ print(stu.sc)
 stu.sc = 80
 print(stu.sc)
 
-
-
-
-
-
-
-        
-        
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_9_4.py
-
-# ch12_9_4.py
 class Score():
     def __init__(self, score):
         self.__score = score
@@ -2618,20 +1888,8 @@ print(stu.sc)
 stu.sc = 80
 print(stu.sc)
 
-
-
-
-
-
-
-        
-        
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_9_5.py
-
-# ch12_9_5.py
 class Square():
     def __init__(self, sideLen):
         self.__sideLen = sideLen
@@ -2642,22 +1900,8 @@ class Square():
 obj = Square(10)
 print(obj.area)
 
-
-
-
-
-
-
-
-
-        
-        
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_9_6.py
-
-# ch12_9_6.py
 class Counter():
     counter = 0                             # 類別屬性,可由類別本身調用
     def __init__(self):
@@ -2672,66 +1916,6 @@ one = Counter()
 two = Counter()
 three = Counter()
 Counter.show_counter()
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_9_7.py
-
-# ch12_9_7.py
-class Pizza():
-    @staticmethod
-    def demo():
-        print("I like Pizza")
-
-Pizza.demo()
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch12\ch12_9_8.py
-
-# ch12_9_8.py
-class Father():
-    def hometown(self):
-        print('我住在台北')
-
-class Son(Father):
-    pass
-
-hung = Father()
-ivan = Son()
-hung.hometown()
-ivan.hometown()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2750,14 +1934,8 @@ files = ['data1.txt', 'data2.txt', 'data3.txt']       # 檔案串列
 for file in files:
     wordsNum(file)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_11.py
-
-# ch15_11.py
 def division(x, y):
     try:                        # try - except指令
         return x / y
@@ -2771,16 +1949,8 @@ print(division(5, 0))           # 列出5/0
 print(division('a', 'b'))       # 列出'a' / 'b'
 print(division(6, 3))           # 列出6/3
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_12.py
-
-# ch15_12.py
 def division(x, y):
     try:                        # try - except指令
         return x / y
@@ -2792,16 +1962,8 @@ print(division(5, 0))           # 列出5/0
 print(division('a', 'b'))       # 列出'a' / 'b'
 print(division(6, 3))           # 列出6/3
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_13.py
-
-# ch15_13.py
 def division(x, y):
     try:                        # try - except指令
         return x / y
@@ -2813,16 +1975,8 @@ print(division(5, 0))           # 列出5/0
 print(division('a', 'b'))       # 列出'a' / 'b'
 print(division(6, 3))           # 列出6/3
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_14.py
-
-# ch15_14.py
 def division(x, y):
     try:                        # try - except指令
         return x / y
@@ -2834,16 +1988,8 @@ print(division(5, 0))           # 列出5/0
 print(division('a', 'b'))       # 列出'a' / 'b'
 print(division(6, 3))           # 列出6/3
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_15.py
-
-# ch15_15.py
 def passWord(pwd):
     """檢查密碼長度必須是5到8個字元"""
     pwdlen = len(pwd)                       # 密碼長度
@@ -2933,8 +2079,6 @@ except requests.exceptions.Timeout as e:
     # 處理請求超時錯誤
     print(f"Timeout Error: {e}")
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 fn = 'data15_4.txt'             # 設定欲開啟的檔案
@@ -2949,10 +2093,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_5.py
-
-# ch15_5.py
-
 fn = 'data15_5.txt'             # 設定欲開啟的檔案
 try:
     with open(fn) as file_Obj:  # 用預設mode=r開啟檔案
@@ -2962,19 +2102,7 @@ except FileNotFoundError:
 else:
     print(data)                 # 輸出變數data
 
-
-
-
-
-
-
-    
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_6.py
-
-# ch15_6.py
 
 fn = 'data15_6.txt'             # 設定欲開啟的檔案
 try:
@@ -2986,16 +2114,8 @@ else:
     wordList = data.split()     # 將文章轉成串列
     print(f"{fn} 文章的字數是 {len(wordList)}")    # 列印文章字數
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_7.py
-
-# ch15_7.py
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
     try:
@@ -3010,14 +2130,8 @@ def wordsNum(fn):
 file = 'data15_6.txt'               # 設定欲開啟的檔案
 wordsNum(file)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_8.py
-
-# ch15_8.py
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
     try:
@@ -3033,14 +2147,8 @@ files = ['data1.txt', 'data2.txt', 'data3.txt']       # 檔案串列
 for file in files:
     wordsNum(file)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch15\ch15_9.py
-
-# ch15_9.py
 def division(x, y):
     try:                        # try - except指令
         return x / y
@@ -3052,18 +2160,8 @@ print(division(5, 0))           # 列出5/0
 print(division('a', 'b'))       # 列出'a' / 'b'
 print(division(6, 3))           # 列出6/3
 
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch16\ch16_1.py
-
-# ch16_1.py
 def taiwanPhoneNum(string):
     """檢查是否有含手機聯絡資訊的台灣手機號碼格式"""
     if len(string) != 12:       # 如果長度不是12

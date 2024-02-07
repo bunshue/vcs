@@ -1,6 +1,8 @@
 import pygame, sys, random
 from pygame.locals import *
 
+filename = 'C:/_git/vcs/_4.python/_data/picture2.jpg'
+
 #顏色值
 White = (255, 255, 255)
 Gray = (128, 128, 128)
@@ -17,7 +19,7 @@ def main():
    mainClock = pygame.time.Clock()
 
    # 載入圖片並以get_rect()方法取得圖片大小
-   gameImage = pygame.image.load('Source\\bg03.png')
+   gameImage = pygame.image.load(filename)
    gameRect = gameImage.get_rect()
       
    # 產生視窗
@@ -180,3 +182,4 @@ def finishGame():
 
 if __name__ == '__main__':
    main()#呼叫main()函式
+

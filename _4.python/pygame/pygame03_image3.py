@@ -3,7 +3,7 @@ import pygame, sys # 滙入PyGame套件, 系統模組
 pygame.init() #將PyGame初始化
 
 #設定使用參數
-size = width, height = 150, 120
+size = width, height = 600, 600
 White = (255, 255, 255)
 
 
@@ -12,7 +12,10 @@ screen = pygame.display.set_mode((size), 0, 32)
 pygame.display.set_caption('載入圖片')
 screen.fill(White)
 #方法load()載入圖片，convert()能提高圖片的處理速度
-img = pygame.image.load('Source\\car.png')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+img = pygame.image.load(filename)
 img.convert()
 screen.blit(img, (20, 20))
 

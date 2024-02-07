@@ -1,5 +1,5 @@
 """
-pygame 測試大全 02
+pygame 測試大全
 
 """
 
@@ -31,39 +31,45 @@ blue = pygame.color.Color('#0000FF')
 black = pygame.color.Color('#000000')
 white = pygame.color.Color('#FFFFFF')
 
+print("取得screen參數")
+print(screen.get_size())
+
 #利用screen物件來作為畫布，以fill()方法填上顏色
 screen.fill(Gray)
 
-
-#繪製文字
-#ft = pygame.font.SysFont('Malgun Gothic', 36)
-ft = pygame.font.SysFont('Arial', 36)
-wd1 = ft.render('Encyclopedia', False, blue,Aqua)
-screen.blit(wd1, (10, 20))
-wd2 = ft.render('百科全書', True, red,Aqua)
-screen.blit(wd2, (10, 80))
-wd1 = ft.render('lockdown', False, blue,Aqua)
-screen.blit(wd1, (10, 140))
-wd2 = ft.render('世界大同', True, red,Aqua)
-screen.blit(wd2, (10, 200))
-wd1 = ft.render('binge-watch', False, blue,Aqua)
-screen.blit(wd1, (10, 260))
-wd2 = ft.render('追劇', True, red,Aqua)
-screen.blit(wd2, (10, 320))
+print('------------------------------------------------------------')	#60個
 
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+done = False
 
-#方法load()載入圖片，convert()能提高圖片的處理速度
-img = pygame.image.load(filename)
-img.convert()
-screen.blit(img, (400, 300))
+while not done:
+    screen.fill(white)
+
+    #反鋸齒直線
+    pygame.draw.aaline(screen, black, [10, 10], [30+600, 25+600])
+    pygame.draw.aaline(screen, black, [40, 10], [60+600, 25+600])
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    pygame.display.flip()
+
+pygame.quit()
+
+import sys
+sys.exit()
 
 
+
+
+print('------------------------------------------------------------')	#60個
 
 # 更新屏幕
 pygame.display.update()
+
+# pygame 存圖命令
+# pygame.image.save(screen, "tmp_save_pic.png")
 
 # 保持屏幕打開，直到用戶退出
 #偵測視窗是否被關閉

@@ -1,10 +1,11 @@
 """
 pygame 測試大全
 
+#背景漸層色
+
 """
 
 import sys
-import time
 import pygame
 
 W, H = 800, 800
@@ -32,15 +33,39 @@ blue = pygame.color.Color('#0000FF')
 black = pygame.color.Color('#000000')
 white = pygame.color.Color('#FFFFFF')
 
+print("取得screen參數")
+print(screen.get_size())
+
 #利用screen物件來作為畫布，以fill()方法填上顏色
 screen.fill(Gray)
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
 
+width = 800
+height = 800
 
+color = pygame.color.Color('#F54455')
+#[100, 100, 0]
+print(color)
 
+row = 0
+done = False
+while not done:
+    increment = 255 / 100
+    while row <= height:
+        pygame.draw.rect(screen, color, (0, row, width, row + increment))
+        pygame.display.flip()
+        if color[2] + increment < 255:
+            color[2] = color[2] + int(increment)
+        row += increment
 
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
 
+pygame.quit()
+
+"""
 print('------------------------------------------------------------')	#60個
 
 # 更新屏幕
@@ -55,5 +80,4 @@ while True:
             pygame.quit() #quit()方法結束Pygame程序
             sys.exit()
     pygame.display.update()
-
-
+"""
