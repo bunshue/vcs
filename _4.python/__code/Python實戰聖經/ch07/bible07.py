@@ -298,9 +298,8 @@ for prediction_id, annotation in enumerate(annotations):
     vis_image = cv2.putText(vis_image, text, (x_min, y_min - 10), cv2.FONT_HERSHEY_SIMPLEX,  0.4, color, 2, cv2.LINE_AA) 
 plt.imshow(vis_image)
 
-'''
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('Deepface：人臉特徵分析工具')
 
 """
@@ -350,10 +349,23 @@ https://github.com/serengil/deepface_models/releases/download/v1.0/vgg_face_weig
 放在
 C:/Users/070601/.deepface/weights/vgg_face_weights.h5
 
-下載 88MB
+下載 90MB
 https://github.com/serengil/deepface_models/releases/download/v1.0/facenet_weights.h5
 放在
 C:/Users/070601/.deepface/weights/facenet_weights.h5
+
+下載 15MB
+From: https://github.com/serengil/deepface_models/releases/download/v1.0/openface_weights.h5
+放在
+C:/Users/070601/.deepface/weights/openface_weights.h5
+
+
+From: http://dlib.net/files/dlib_face_recognition_resnet_model_v1.dat.bz2
+To: C:/Users/070601/.deepface/weights/dlib_face_recognition_resnet_model_v1.dat.bz2
+
+下載 131 MB
+From: https://github.com/serengil/deepface_models/releases/download/v1.0/arcface_weights.h5
+To: C:/Users/070601/.deepface/weights/arcface_weights.h5
 
 
 """
@@ -374,8 +386,15 @@ import numpy as np
 #尋找單一相同人臉
 face1 = 'bear2.jpg'
 df = DeepFace.find(img_path = face1, db_path = 'member', enforce_detection=False)
-#print(df)
+
+print(df)
+
+""" fail
+print(df['VGG-Face_cosine'])
+print(type(df['VGG-Face_cosine']))
+
 count = np.sum((df['VGG-Face_cosine']<=0.25)!=0) #計算符合的人臉數量
+
 if count > 0:
   split1 = df['identity'][0].split('/')
   print(split1[-1])
@@ -392,9 +411,11 @@ if count > 0:
     print(split1[-1])
 else:
   print('沒有符合的人臉！')
+"""
 
 print("------------------------------------------------------------")  # 60個
 
+''' 安裝 google.colab 失敗
 print('範例：攝影機拍攝登入系統')
 
 from IPython.display import display, Javascript
@@ -449,9 +470,15 @@ if count > 0:
   print('歡迎登入系統！')
 else:
   print('抱歉！你不是會員！')
-
+'''
   
 print('人臉屬性分析')
+
+"""
+514MB
+From: https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5
+To: C:/Users/070601/.deepface/weights/age_model_weights.h5
+"""
 
 face1 = 'bear1.jpg'
 img = cv2.imread(face1)
@@ -465,6 +492,7 @@ print('情緒：{}'.format(obj['dominant_emotion']))
 
 print("------------------------------------------------------------")  # 60個
 
+''' 安裝 google.colab 失敗
 print('範例：攝影機拍攝人臉屬性分析')
 
 from IPython.display import display, Javascript
@@ -515,6 +543,7 @@ label = {'angry':'生氣', 'disgust':'厭惡', 'fear':'恐懼', 'happy':'開心'
           'Man':'男', 'Woman':'女',
           'asian':'亞洲', 'black':'黑', 'indian':'印第安', 'latino hispanic':'拉丁美洲', 'middle eastern':'中東', 'white':'白'}
 print('\n你是{}歲的{}性{}人，目前情緒似乎是{}'.format(obj['age'], label[obj['gender']], label[obj['dominant_race']], label[obj['dominant_emotion']]))
+'''
 
 print("------------------------------------------------------------")  # 60個
 
