@@ -14,6 +14,10 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
+#plt.axis("equal")  # 調整比例，確認顯示為圓形
+#plt.axis('equal') # 設置餅圖爲正圓形
+
+
 # 派圖 集合
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
@@ -74,8 +78,6 @@ plt.pie(
 plt.legend(loc="right")  # 設定 legnd 的位置
 # plt.legend()
 
-plt.axis("equal")  # 調整比例，確認顯示為圓形
-
 # 第二張圖
 plt.subplot(232)
 
@@ -98,36 +100,33 @@ plt.pie(
 # 第三張圖
 plt.subplot(233)
 
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
-plt.rcParams["font.size"] = 12
-
-x = [89, 58, 63, 50]
-labels = "高雄", "台中", "宜蘭", "花蓮"
-explode = (0.1, 0, 0, 0)
-plt.pie(x, labels=labels, explode=explode, autopct="%.1f%%", shadow=True)
+values = [1,1,1,1,1,1,1,1,1,1,1,1]
+names = '鼠','牛','虎','兔','龍','蛇', '馬','羊','猴','雞','狗','豬'
+explode = (0, 0.1, 0, 0.2, 0, 0.3, 0, 0.4, 0, 0.5, 0, 0.6)
+plt.pie(values,labels=names, explode=explode, autopct='%.1f%%',
+        shadow=True)
 
 # 第四張圖
 plt.subplot(234)
 
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-plt.rcParams['font.size']=12
+values = [3, 48, 33, 8, 38]
+labels = ["鼠", "牛", "虎", "兔", "龍"]      #list格式
+labels = "鼠", "牛", "虎", "兔", "龍"   #tuple格式
+print(type(labels))
 
-count = [1,1,1,1,1,1,1,1,1,1,1,1]
-names = '鼠','牛','虎','兔','龍','蛇', '馬','羊','猴','雞','狗','豬'
-explode = (0, 0.1, 0, 0.2, 0, 0.3, 0, 0.4, 0, 0.5, 0, 0.6)
-plt.pie(count,labels=names, explode=explode, autopct='%.1f%%',
-        shadow=True)
+explode = (0.2, 0, 0, 0, 0) # 將圓餅圖的特定區塊向外推
+
+plt.pie(values, labels = labels, explode = explode,
+        autopct="%1.2f%%", shadow=True)      # 繪製圓餅圖, 自動計算百分比, 加入立體陰影
 
 # 第五張圖
 plt.subplot(235)
 
-plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
-plt.rcParams['font.size']=12
+data = {'鼠': 3, '牛': 48, '虎': 33, '兔': 8, '龍': 38}
+explode = (0, 0, 0, 0.2, 0)  # 向外擴展顯示的區域
 
-x = [89,58,63,50]
-labels = '高雄','台中','宜蘭','花蓮'
-explode = (0.1, 0, 0, 0)
-plt.pie(x,labels=labels, explode=explode, autopct='%.1f%%', shadow=True)
+plt.pie(data.values(), explode=explode, labels=data.keys(), autopct='%1.1f%%',
+        shadow=True, startangle=90)
 
 # 第六張圖
 plt.subplot(236)
@@ -162,6 +161,8 @@ plt.pie(
 
 plt.show()
 
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
@@ -178,114 +179,46 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-# 給圓餅圖各區域設定標籤並顯示百分比
-
-data = [60, 20, 10, 5, 3, 2]
-labels = ["Apple", "Orange", "Banana", "Pineapple", "Kiwifruit", "Strawberry"]
-plt.pie(data, labels=labels, autopct="%.2f%%")
-plt.tight_layout()
 
 # 第二張圖
 plt.subplot(232)
 
-# 將圓餅圖的特定區塊向外推
-
-data = [60, 20, 10, 5, 3, 2]
-labels = ["Apple", "Orange", "Banana", "Pineapple", "Kiwifruit", "Strawberry"]
-explode = [0, 0, 0.1, 0.2, 0, 0]
-plt.pie(data, labels=labels, explode=explode, autopct="%.2f%%")
-plt.tight_layout()
 
 # 第三張圖
 plt.subplot(233)
 
-# 給圓餅圖加入立體陰影
 
-data = [60, 20, 10, 5, 3, 2]
-labels = ["Apple", "Orange", "Banana", "Pineapple", "Kiwifruit", "Strawberry"]
-explode = [0, 0, 0.2, 0, 0, 0]
-plt.pie(data, labels=labels, explode=explode, shadow=True)
 
 # 第四張圖
 plt.subplot(234)
 
+
+# 第五張圖
+plt.subplot(235)
+
+
+
+# 第六張圖
+plt.subplot(236)
+
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
+plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
+plt.rcParams['font.sans-serif'] ='Microsoft JhengHei'
 plt.rcParams['font.size']=12
+plt.rcParams['font.size']=12
+plt.rcParams['font.size']=12
+plt.rcParams["font.size"] = 12
 
-x = [26,12,21,25,35]
-labels = '高雄','花蓮','台中','澎湖','宜蘭'   #tuple格式
-print(type(labels))
-explode = (0.2, 0, 0, 0, 0)
-plt.pie(x,labels=labels, explode=explode, autopct='%.1f%%', shadow=True)
+plt.tight_layout()
 
-# 第五張圖
-plt.subplot(235)
-
-data = {'apples': 10, 'oranges': 15, 'lemons': 5, 'limes': 20}
-explode = (0, 0.1, 0, 0)  # 向外擴展顯示的區域
-plt.pie(data.values(), explode=explode, labels=data.keys(), autopct='%1.1f%%',
-        shadow=True, startangle=90)
-plt.axis('equal') # 設置餅圖爲正圓形
-
-# 第六張圖
-plt.subplot(236)
-
-#sorts = ["Travel","Entertainment","Education","Transporation","Food"]
-sorts = [u"交通",u"娛樂",u"教育",u"交通",u"餐費"]
-
-fee = [8000,2000,3000,5000,6000]
-          
-plt.pie(fee,labels=sorts,explode=(0,0.2,0,0,0),
-        autopct="%1.2f%%")      # 繪製圓餅圖
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="派圖 集合 3",
-    figsize=(20, 15),
-    dpi=84,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-n = 20
-Z = np.ones(n)
-Z[-1] *= 2
-
-plt.pie(Z, explode=Z*.05, colors = ['%f' % (i/float(n)) for i in range(n)])
-plt.axis('equal')
-plt.xticks(())
-plt.yticks()
-
-# 第二張圖
-plt.subplot(232)
+"""
 
 
-# 第三張圖
-plt.subplot(233)
-
-
-# 第四張圖
-plt.subplot(234)
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個

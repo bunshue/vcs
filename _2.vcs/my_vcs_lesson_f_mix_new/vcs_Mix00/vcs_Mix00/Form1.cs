@@ -46,7 +46,7 @@ namespace vcs_Mix00
             //網頁protocol	解決  要求已經中止: 無法建立 SSL/TLS 的安全通道。
             // Allow TLS 1.1 and TLS 1.2 protocols for file download.
             //for Sugar     3840 Romeo也可用
-            ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
+            //ServicePointManager.SecurityProtocol = Protocols.protocol_Tls11 | Protocols.protocol_Tls12;
             //richTextBox1.Text += "SecurityProtocol = " + ((int)(ServicePointManager.SecurityProtocol)).ToString() + "\n";
 
             //C# 跨 Thread 存取 UI
@@ -809,18 +809,151 @@ namespace vcs_Mix00
 
         }
 
+
+        
+
+        public class MyTest
+        {
+            public string filename;
+            public int page;
+            public MyTest(string n, int p)
+            {
+                this.filename = n;
+                this.page = p;
+            }
+        }
+
+        void show_all_data(List<MyTest> tttt)
+        {
+            richTextBox1.Text += "找到 " + tttt.Count.ToString() + " 筆資料a\n";
+
+            /*
+            //排序 由小到大
+            //tttt.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+
+            //排序 由大到小  在return的地方多個負號
+            tttt.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+            */
+
+            for (int i = 0; i < tttt.Count; i++)
+            {
+                string name = tttt[i].filename;
+                int page = tttt[i].page;
+                richTextBox1.Text += name + "\t" + page.ToString() + "\n";
+            }
+        }
+
+        void remove_item(List<MyTest> tttt, string pattern)
+        {
+            int len = tttt.Count;
+            int index = 0;
+            for (index = 0; index < len; index++)
+            {
+                string name = tttt[index].filename;
+                if (name == pattern)
+                {
+                    break;
+                }
+            }
+
+            if (index < len)
+                tttt.RemoveAt(index);
+            //richTextBox1.Text += index.ToString() + "\n";
+
+
+        }
+
         private void button17_Click(object sender, EventArgs e)
         {
+            List<MyTest> tttt = new List<MyTest>();
 
+
+            //test1
+            tttt.Clear();
+            tttt.Add(new MyTest("AAA", 111));
+            tttt.Add(new MyTest("BBB", 222));
+            tttt.Add(new MyTest("CCC", 333));
+
+            show_all_data(tttt);
+
+            tttt.RemoveAt(1);
+
+            show_all_data(tttt);
+
+            tttt.Add(new MyTest("DDD", 444));
+            tttt.Add(new MyTest("EEE", 555));
+            tttt.Add(new MyTest("FFF", 666));
+
+            show_all_data(tttt);
+
+
+            richTextBox1.Text += "刪除 EEE 這項\n";
+            string pattern = "EEE";
+            remove_item(tttt, pattern);
+
+
+            show_all_data(tttt);
+
+
+
+
+            int i;
+            String filename = "ccccc2a.txt";
+
+            richTextBox1.Text += "寫入檔案\n";
+            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("big5"));   //指名編碼格式
+
+            int len = tttt.Count;
+
+            for (i = 0; i < len; i++)
+            {
+                sw.WriteLine(tttt[i].filename + "," + tttt[i].page.ToString());
+            }
+            sw.Close();
+
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
+            List<MyTest> pdf_filename_data = new List<MyTest>();
+
+            //test2
+            int i;
+            String filename = "ccccc2.txt";
+
+            richTextBox1.Text += "讀取檔案\n";
+            using (TextReader reader = new StreamReader(filename, Encoding.Default))
+            {
+                i = 0;
+                string line;
+                line = reader.ReadLine();
+                while (line != null)
+                {
+                    i++;
+                    richTextBox1.Text += "i = " + i.ToString() + "\t" + line + "\n";
+
+                    string[] strArray = line.Split(',');
+
+                    string pdf_filename = strArray[0];
+                    int page = int.Parse(strArray[1]);
+
+                    pdf_filename_data.Add(new MyTest(pdf_filename, page));
+
+
+                    line = reader.ReadLine();
+                }
+            }
+
+            richTextBox1.Text += "show data\n";
+            show_all_data(pdf_filename_data);
 
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
+            //test3
         }
 
         private void button20_Click(object sender, EventArgs e)
