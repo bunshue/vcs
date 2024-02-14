@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Collections;   //for ArrayList
 using System.Drawing.Drawing2D; //for SmoothingMode
 using System.Runtime.InteropServices;   //for DllImport
 using System.Text.RegularExpressions;
@@ -19,11 +18,13 @@ namespace vcs_MyPdfReader
     {
         private const int PDF_ZOOM_FACTOR = 130;
 
-        ArrayList pdf_filename_ArrayListData = new ArrayList();
-
         string pdf_filename = string.Empty;
         string pdf_filename_short = string.Empty;
         string current_directory_pdf = Directory.GetCurrentDirectory();
+
+        string pdf_reader_filename = "vcs_MyPdfReader.txt";
+        List<PdfFilenames> pdf_filename_data = new List<PdfFilenames>();
+
         bool flag_already_use_webbrowser = false;
 
         int W = Screen.PrimaryScreen.WorkingArea.Width;
@@ -52,6 +53,56 @@ namespace vcs_MyPdfReader
         //在控件上加ToolTip
         ToolTip tooltip = new ToolTip();
 
+        public class PdfFilenames
+        {
+            public string filename;
+            public int page;
+            public PdfFilenames(string n, int p)
+            {
+                this.filename = n;
+                this.page = p;
+            }
+        }
+
+        void show_all_data(List<PdfFilenames> tttt)
+        {
+            richTextBox1.Text += "找到 " + tttt.Count.ToString() + " 筆資料a\n";
+
+            /*
+            //排序 由小到大
+            //tttt.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
+
+            //排序 由大到小  在return的地方多個負號
+            tttt.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
+            */
+
+            for (int i = 0; i < tttt.Count; i++)
+            {
+                string name = tttt[i].filename;
+                int page = tttt[i].page;
+                richTextBox1.Text += name + "\t" + page.ToString() + "\n";
+            }
+        }
+
+        void remove_item(List<PdfFilenames> tttt, string pattern)
+        {
+            int len = tttt.Count;
+            int index = 0;
+            for (index = 0; index < len; index++)
+            {
+                string name = tttt[index].filename;
+                if (name == pattern)
+                {
+                    break;
+                }
+            }
+
+            if (index < len)
+                tttt.RemoveAt(index);
+            //richTextBox1.Text += index.ToString() + "\n";
+
+
+        }
 
         private string form_list_data;
         public string SetupForm1Data
@@ -287,7 +338,7 @@ namespace vcs_MyPdfReader
             if (result == DialogResult.Ignore)
             {
                 show_main_message1(form_list_data, S_OK, 100);
-                //richTextBox1.Text += "你選擇了 " + form_list_data + "\n";
+                richTextBox1.Text += "取得資料 " + form_list_data + "\n";
 
                 string full_filename = form_list_data;
 
@@ -300,25 +351,41 @@ namespace vcs_MyPdfReader
                 }
                 else
                 {
+                    //檔案存在 找出要顯示的頁面
+                    pdf_page = find_pdf_page_by_filename(full_filename);
+                    richTextBox1.Text += "pdf_page = " + pdf_page.ToString() + "\n";
+
                     show_item_location();
                     pdf_filename = full_filename;
                     pdf_filename_short = Path.GetFileName(pdf_filename);
                     current_directory_pdf = Path.GetDirectoryName(pdf_filename);
-                    webBrowser1.Navigate(pdf_filename);
+
+                    //要加參數
+                    //預設
+                    //webBrowser1.Navigate(pdf_filename);
+
+                    //指名頁數
+                    if (pdf_page > 0)
+                    {
+                        webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0&page=" + pdf_page.ToString());
+                    }
+                    else
+                    {
+                        webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0");
+                    }
+
                     pdf_total_page = GetPDFofPageCount(pdf_filename);
                     richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
                     richTextBox1.Text += "頁數 : " + pdf_total_page.ToString() + "\n";
                     show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
-                    pdf_page = 0;
                     tb_pdf_page.Text = pdf_page.ToString();
                     lb_pdf_total_page.Text = pdf_total_page.ToString();
 
-                    //檢查ArrayList
-                    update_pdf_filename_ArrayListData(pdf_filename);
+                    //檢查pdf_filename_data
+                    update_pdf_filename_data(pdf_filename);
 
-                    richTextBox1.Text += "加入一筆資料至ArrayList\n";
-                    pdf_filename_ArrayListData.Insert(0, pdf_filename); //插入一個元素
-                    richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+                    richTextBox1.Text += "加入一筆資料至pdf_filename_data b\n";
+                    pdf_filename_data.Add(new PdfFilenames(pdf_filename, pdf_page));     //插入一個元素
 
                     //this.Focus();
                     this.KeyPreview = true;
@@ -340,7 +407,69 @@ namespace vcs_MyPdfReader
             richTextBox1.Text += "頁數 : " + pages.ToString() + "\n";
             */
 
-            show_pdf_filename_ArrayListData();
+            richTextBox1.Text += "測試寫入檔案\n";
+            //pdf_reader_filename
+
+            /*
+            int i;
+            String filename = pdf_reader_filename;
+
+            richTextBox1.Text += "寫入檔案\n";
+            FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("big5"));   //指名編碼格式
+
+            string file = string.Empty;
+            string page = string.Empty;
+            page = "1";
+
+            file = @"C:\__backup\_語言雜誌壓縮檔\_常春藤\202103常春藤解析英語\常春藤解析英語_202103.pdf";
+            sw.WriteLine(file + "," + page);
+            file = @"C:\__david\_doc_katfile\___文史\清代史\清代史.pdf";
+            sw.WriteLine(file + "," + page);
+            file = @"C:\Users\User\Desktop\口試\在fb跟Sherry Wang用150購買口試逐字稿\教甄口試逐字稿1.pdf";
+            sw.WriteLine(file + "," + page);
+            file = @"C:\Users\User\Desktop\口試\在fb跟Sherry Wang用150購買口試逐字稿\教甄口試逐字稿2.pdf";
+            sw.WriteLine(file + "," + page);
+
+            sw.Close();
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+            */
+
+            /*
+            //測試資料操作
+
+            List<PdfFilenames> tttt = new List<PdfFilenames>();
+
+            //test1
+            tttt.Clear();
+            tttt.Add(new PdfFilenames("AAA", 111));
+            tttt.Add(new PdfFilenames("BBB", 222));
+            tttt.Add(new PdfFilenames("CCC", 333));
+
+            show_all_data(tttt);
+
+            tttt.RemoveAt(1);
+
+            show_all_data(tttt);
+
+            tttt.Add(new PdfFilenames("DDD", 444));
+            tttt.Add(new PdfFilenames("EEE", 555));
+            tttt.Add(new PdfFilenames("FFF", 666));
+
+            show_all_data(tttt);
+
+
+            richTextBox1.Text += "刪除 EEE 這項\n";
+            string pattern = "EEE";
+            remove_item(tttt, pattern);
+
+
+            show_all_data(tttt);
+            */
+
+            show_pdf_filename_data();
+
+
 
         }
 
@@ -380,38 +509,84 @@ namespace vcs_MyPdfReader
             {
                 this.richTextBox1.Focus();
                 e.Handled = true;
+
+                int len = pdf_filename_data.Count;
+                richTextBox1.Text += "len = " + len.ToString() + "\n";
+                for (int i = 0; i < len; i++)
+                {
+                    richTextBox1.Text += "i = " + i.ToString() + "\t" + pdf_filename_data[i].filename + "\n";
+                }
+                pdf_filename_data[len - 1].page = int.Parse(tb_pdf_page.Text);
+
             }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //先讀進系統參數之資料
-            //取得系統參數資料
-            richTextBox1.Text += "讀出系統變數至ArrayList\n";
-            ArrayList tmp_array_list = Properties.Settings.Default.pdf_filenames;
-            if (tmp_array_list == null)
+            int i = 0;
+            if (File.Exists(pdf_reader_filename) == false)   //確認檔案是否存在
             {
-                pdf_filename_ArrayListData = new ArrayList();
+                richTextBox1.Text += "記錄檔不存在\n";
             }
             else
             {
-                pdf_filename_ArrayListData = tmp_array_list;
+                richTextBox1.Text += "開啟記錄檔\n";
+
+                pdf_filename_data = new List<PdfFilenames>();
+
+                String filename = "vcs_MyPdfReader.txt";
+
+                richTextBox1.Text += "讀取檔案\n";
+                using (TextReader reader = new StreamReader(filename, Encoding.Default))
+                {
+                    i = 0;
+                    string line;
+                    line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        i++;
+                        richTextBox1.Text += "i = " + i.ToString() + "\t" + line + "\n";
+
+                        string[] strArray = line.Split(',');
+
+                        string name = strArray[0];
+                        int page = int.Parse(strArray[1]);
+
+                        pdf_filename_data.Add(new PdfFilenames(name, page));
+
+                        line = reader.ReadLine();
+                    }
+                }
+
+                richTextBox1.Text += "show data\n";
+                show_all_data(pdf_filename_data);
             }
 
-            pdf_filename = Properties.Settings.Default.pdf_filename;
-            pdf_page = Properties.Settings.Default.pdf_page;
-
-            if (pdf_page == -1)
+            int len = pdf_filename_data.Count;
+            if (len == 0)
             {
-                pdf_page = 0;
+                richTextBox1.Text += "無資料\n";
             }
-            tb_pdf_page.Text = pdf_page.ToString();
+            else
+            {
+                richTextBox1.Text += "找到 " + pdf_filename_data.Count.ToString() + " 筆資料a\n";
+
+                richTextBox1.Text += "使用最後一筆資料\n";
+
+                pdf_filename = pdf_filename_data[len - 1].filename;
+                pdf_page = pdf_filename_data[len - 1].page;
+
+                richTextBox1.Text += "name : " + pdf_filename + "\n";
+                richTextBox1.Text += "page : " + pdf_page + "\n";
+                tb_pdf_page.Text = pdf_page.ToString();
+
+            }
 
             message_panel_height = H - 50;
 
             Init_Controls();
 
-            int i = 0;
+            i = 0;
             foreach (string arg in Environment.GetCommandLineArgs())
             {
                 //lb_main_mesg1.Text += "第 " + i.ToString() + " 項 : " + arg + "\n";
@@ -445,7 +620,6 @@ namespace vcs_MyPdfReader
                 this.BringToFront();
                 return;
             }
-
 
             if (File.Exists(pdf_filename) == true)
             {
@@ -563,26 +737,52 @@ namespace vcs_MyPdfReader
 
         void do_open_pdf0(string pdf_filename)	//開啟pdf檔案
         {
-            //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
-            string pdf_filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_7_free\vcs_MyPdfReader\vcs_MyPdfReader\bin\Debug\Python簡介.pdf";
-
             show_item_location();
-            webBrowser1.Navigate(pdf_filename);
+
+            richTextBox1.Text += "檢查是否曾經最近開啟過 若有 要找出頁數\n";
+
+            int i = 0;
+            int len = pdf_filename_data.Count;
+
+            pdf_page = 0;
+
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += pdf_filename_data[i].filename + "\n";
+
+                if (pdf_filename == pdf_filename_data[i].filename)
+                {
+                    pdf_page = pdf_filename_data[i].page;
+                }
+            }
+
+            //要加參數
+            //預設
+            //webBrowser1.Navigate(pdf_filename);
+
+            //指名頁數
+            if (pdf_page > 0)
+            {
+                webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0&page=" + pdf_page.ToString());
+            }
+            else
+            {
+                webBrowser1.Navigate(pdf_filename + "?#initZoom=fitToPage&view=fit&navpanes=0&toolbar=0");
+            }
+
             pdf_total_page = GetPDFofPageCount(pdf_filename);
             richTextBox1.Text += "檔案 : " + pdf_filename + "\n";
             richTextBox1.Text += "頁數 : " + pdf_total_page.ToString() + "\n";
-            pdf_page = 0;
             tb_pdf_page.Text = pdf_page.ToString();
             lb_pdf_total_page.Text = pdf_total_page.ToString();
 
             show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
 
-            //檢查ArrayList
-            update_pdf_filename_ArrayListData(pdf_filename);
+            //檢查pdf_filename_data
+            update_pdf_filename_data(pdf_filename);
 
-            richTextBox1.Text += "加入一筆資料至ArrayList\n";
-            pdf_filename_ArrayListData.Insert(0, pdf_filename); //插入一個元素
-            richTextBox1.Text += "目前ArrayList內共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+            richTextBox1.Text += "加入一筆資料至pdf_filename_data a\n";
+            pdf_filename_data.Add(new PdfFilenames(pdf_filename, pdf_page));     //插入一個元素
 
             this.webBrowser1.Focus();
         }
@@ -645,43 +845,68 @@ namespace vcs_MyPdfReader
                 richTextBox1.Text += "int.TryParse 失敗\n";
             }
 
-            Properties.Settings.Default.pdf_filename = pdf_filename;
-            Properties.Settings.Default.pdf_page = pdf_page;
+            //寫入檔案
+            int len = pdf_filename_data.Count;
+            richTextBox1.Text += "共有 " + len.ToString() + " 個項目\n";
 
-            //richTextBox1.Text += "將ArrayList寫入系統變數\n";
-            //Properties.Settings.Default.pdf_filenames = pdf_filename_ArrayListData;
+            if (len == 0)
+            {
+                if (File.Exists(pdf_reader_filename) == true)
+                {
+                    File.Delete(pdf_reader_filename);
+                }
+            }
+            else
+            {
+                int i = 0;
+                for (i = 0; i < len; i++)
+                {
 
-            Properties.Settings.Default.Save();
+                    richTextBox1.Text += (i + 1).ToString() + " : " + pdf_filename_data[i].filename + "\t" + pdf_filename_data[i].page.ToString() + "\n";
+                }
 
+                String filename = pdf_reader_filename;
+
+                richTextBox1.Text += "寫入檔案\n";
+                FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding("big5"));   //指名編碼格式
+
+                string file = string.Empty;
+                string page = string.Empty;
+
+                for (i = 0; i < len; i++)
+                {
+
+                    richTextBox1.Text += (i + 1).ToString() + " : " + pdf_filename_data[i].filename + "\t" + pdf_filename_data[i].page.ToString() + "\n";
+                    file = pdf_filename_data[i].filename;
+                    page = pdf_filename_data[i].page.ToString();
+                    sw.WriteLine(file + "," + page);
+                }
+                sw.Close();
+                richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+            }
             Application.Exit();
         }
 
-        void show_pdf_filename_ArrayListData()
+        void show_pdf_filename_data()
         {
-            richTextBox1.Text += "顯示ArrayList資料\n";
-            richTextBox1.Text += "共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+            richTextBox1.Text += "顯示pdf_filename_data資料\n";
+            richTextBox1.Text += "共有 " + pdf_filename_data.Count.ToString() + " 個項目\n";
 
             int i = 0;
-            /*
-            for (i = 0; i < pdf_filename_ArrayListData.Count; i++)
+            for (i = 0; i < pdf_filename_data.Count; i++)
             {
-                richTextBox1.Text += (i+1).ToString() + " : " + pdf_filename_ArrayListData[i] + "\n";
-            }
-            */
-            i = 0;
-            foreach (string str_name in pdf_filename_ArrayListData)
-            {
-                i++;
-                richTextBox1.Text += i.ToString() + " : " + str_name + "\n";
+                richTextBox1.Text += (i + 1).ToString() + " : " + pdf_filename_data[i].filename + "\t" + pdf_filename_data[i].page.ToString() + "\n";
             }
         }
 
-        void update_pdf_filename_ArrayListData(string new_data)
+        void update_pdf_filename_data(string new_data)
         {
             bool flag_file_exists = false;
-            foreach (string str_name in pdf_filename_ArrayListData)
+
+            for (int i = 0; i < pdf_filename_data.Count; i++)
             {
-                if (new_data == str_name)
+                if (new_data == pdf_filename_data[i].filename)
                 {
                     flag_file_exists = true;
                 }
@@ -689,13 +914,29 @@ namespace vcs_MyPdfReader
 
             if (flag_file_exists == true)
             {
-                richTextBox1.Text += "找到一樣的項目\n";
-                richTextBox1.Text += "將此項目刪除\n";
+                richTextBox1.Text += "找到一樣的項目, 將此項目刪除\n";
 
-                pdf_filename_ArrayListData.Remove(new_data);
+                remove_item(pdf_filename_data, new_data);
 
-                //pdf_filename_ArrayListData.Insert(0, new_data); //插入一個元素
             }
+        }
+
+        int find_pdf_page_by_filename(string filename)
+        {
+            richTextBox1.Text += filename + "\n";
+            int i = 0;
+            int page = 0;
+            for (i = 0; i < pdf_filename_data.Count; i++)
+            {
+                richTextBox1.Text += (i + 1).ToString() + " : " + pdf_filename_data[i].filename + "\t" + pdf_filename_data[i].page.ToString() + "\n";
+                if (pdf_filename_data[i].filename == filename)
+                {
+                    page = pdf_filename_data[i].page;
+                }
+            }
+
+            return page;
         }
     }
 }
+

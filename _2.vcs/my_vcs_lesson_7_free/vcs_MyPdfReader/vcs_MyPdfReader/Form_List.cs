@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Collections;   //for ArrayList
 using System.Drawing.Drawing2D; //for SmoothingMode
 using System.Runtime.InteropServices;   //for DllImport
 using System.Text.RegularExpressions;
@@ -21,7 +20,8 @@ namespace vcs_MyPdfReader
         ListView listView1 = new ListView();
         RichTextBox richTextBox1 = new RichTextBox();
 
-        ArrayList pdf_filename_ArrayListData = new ArrayList();
+        string pdf_reader_filename = "vcs_MyPdfReader.txt";
+        List<PdfFilenames> pdf_filename_data = new List<PdfFilenames>();
 
         string pdf_filename = string.Empty;
         string pdf_filename_short = string.Empty;
@@ -37,6 +37,35 @@ namespace vcs_MyPdfReader
         int pdf_page = 0;
         int pdf_total_page = 0;
 
+        public class PdfFilenames
+        {
+            public string filename;
+            public int page;
+            public PdfFilenames(string n, int p)
+            {
+                this.filename = n;
+                this.page = p;
+            }
+        }
+
+        void remove_item(List<PdfFilenames> tttt, string pattern)
+        {
+            int len = tttt.Count;
+            int index = 0;
+            for (index = 0; index < len; index++)
+            {
+                string name = tttt[index].filename;
+                if (name == pattern)
+                {
+                    break;
+                }
+            }
+
+            if (index < len)
+                tttt.RemoveAt(index);
+            //richTextBox1.Text += index.ToString() + "\n";
+        }
+
         public Form_List()
         {
             InitializeComponent();
@@ -50,10 +79,10 @@ namespace vcs_MyPdfReader
 
         void show_item_location()
         {
-            this.Size = new Size(1200, 800);
+            this.Size = new Size(1600, 800);
             this.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
 
-            listView1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            listView1.Font = new System.Drawing.Font("新細明體", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             listView1.Location = new System.Drawing.Point(0, 0);
             listView1.Name = "listView1";
             listView1.Size = new System.Drawing.Size(this.Size.Width - 100, 600 - 38);
@@ -67,6 +96,8 @@ namespace vcs_MyPdfReader
 
             //設置欄名稱
             listView1.Columns.Add("檔名", 400, HorizontalAlignment.Left);
+            listView1.Columns.Add("頁數", 50, HorizontalAlignment.Center);
+            listView1.Columns.Add("總頁數", 50, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 100, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
 
@@ -192,6 +223,31 @@ namespace vcs_MyPdfReader
             richTextBox1.Clear();
         }
 
+        //[操作pdf文檔]之C#判斷pdf文檔的頁數：
+        /// <summary>
+        /// 擷取pdf文檔的頁數
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>-1表示檔案不存在</returns>
+        public static int GetPDFofPageCount(string filePath)
+        {
+            int count = -1;//-1表示檔案不存在
+            if (File.Exists(filePath))
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    StreamReader reader = new StreamReader(fs);
+                    //從流的目前位置到末尾讀取流
+                    string pdfText = reader.ReadToEnd();
+                    //richTextBox1.Text += pdfText + "\n";
+                    Regex rgx = new Regex(@"/Type\s*/Page[^s]");
+                    MatchCollection matches = rgx.Matches(pdfText);
+                    count = matches.Count;
+                }
+            }
+            return count;
+        }
+
         private void bt_recent0_Click(object sender, EventArgs e)
         {
             open_listview_pdf_file();
@@ -268,13 +324,10 @@ namespace vcs_MyPdfReader
                     richTextBox1.Text += "刪除之\n";
 
 
-                    pdf_filename_ArrayListData.Remove(full_filename);
+                    remove_item(pdf_filename_data, full_filename);
 
                     //richTextBox1.Text += "顯示結果\n";
-                    //show_pdf_filename_ArrayListData();
-
-
-
+                    //show_pdf_filename_data();
 
                 }
             }
@@ -288,12 +341,18 @@ namespace vcs_MyPdfReader
         private void bt_recent4_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "你按了 bt_recent4 清除全部\n";
-            pdf_filename_ArrayListData = new ArrayList();
-            Properties.Settings.Default.pdf_filenames = pdf_filename_ArrayListData;
 
-            Properties.Settings.Default.Save();
+            pdf_filename_data = new List<PdfFilenames>();
 
             show_recent_pdf_files();
+
+            listView1.Clear();
+
+            //存檔 移除檔案紀錄
+            if (File.Exists(pdf_reader_filename) == true)
+            {
+                File.Delete(pdf_reader_filename);
+            }
         }
 
         void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -368,64 +427,89 @@ namespace vcs_MyPdfReader
                 return size.ToString() + " Byte";//顯示Byte值
         }
 
-        void show_pdf_filename_ArrayListData()
+        void show_pdf_filename_data()
         {
-            richTextBox1.Text += "顯示ArrayList資料\n";
-            richTextBox1.Text += "共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+            richTextBox1.Text += "顯示pdf_filename_data資料\n";
+            int len = pdf_filename_data.Count;
+            richTextBox1.Text += "共有 " + len.ToString() + " 個項目\n";
 
             int i = 0;
-            /*
-            for (i = 0; i < pdf_filename_ArrayListData.Count; i++)
+            for (i = 0; i < len; i++)
             {
-                richTextBox1.Text += (i+1).ToString() + " : " + pdf_filename_ArrayListData[i] + "\n";
-            }
-            */
-            i = 0;
-            foreach (string str_name in pdf_filename_ArrayListData)
-            {
-                i++;
-                richTextBox1.Text += i.ToString() + " : " + str_name + "\n";
+                richTextBox1.Text += (i + 1).ToString() + " : " + pdf_filename_data[i].filename + "\t" + pdf_filename_data[i].page.ToString() + "\n";
             }
         }
 
         void show_recent_pdf_files()
         {
-            richTextBox1.Text += "讀出系統變數至ArrayList\n";
-            ArrayList tmp_array_list = Properties.Settings.Default.pdf_filenames;
-            if (tmp_array_list == null)
+            //從檔案讀出資料
+            int i = 0;
+            if (File.Exists(pdf_reader_filename) == false)   //確認檔案是否存在
             {
-                richTextBox1.Text += "XXXXXXXXXXXXXX";
-                pdf_filename_ArrayListData = new ArrayList();
+                richTextBox1.Text += "記錄檔不存在\n";
             }
             else
             {
-                pdf_filename_ArrayListData = tmp_array_list;
+                richTextBox1.Text += "讀取檔案\n";
+
+                pdf_filename_data = new List<PdfFilenames>();
+
+                using (TextReader reader = new StreamReader(pdf_reader_filename, Encoding.Default))
+                {
+                    i = 0;
+                    string line;
+                    line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        i++;
+                        richTextBox1.Text += "i = " + i.ToString() + "\t" + line + "\n";
+
+                        string[] strArray = line.Split(',');
+
+                        string name = strArray[0];
+                        int page = int.Parse(strArray[1]);
+
+                        pdf_filename_data.Add(new PdfFilenames(name, page));
+
+                        line = reader.ReadLine();
+                    }
+                }
             }
 
-            //show_pdf_filename_ArrayListData();
+            int len = pdf_filename_data.Count;
+            if (len == 0)
+            {
+                richTextBox1.Text += "無資料\n";
+            }
+            else
+            {
+                richTextBox1.Text += "找到 " + len.ToString() + " 筆資料a\n";
+            }
+            pdf_filename_data.Reverse();
+
             listView1.Clear();
             //設置欄名稱
             listView1.Columns.Add("檔名", 400, HorizontalAlignment.Left);
+            listView1.Columns.Add("頁數", 80, HorizontalAlignment.Center);
+            listView1.Columns.Add("總頁數", 80, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 100, HorizontalAlignment.Left);
             listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
 
-            richTextBox1.Text += "顯示ArrayList資料\n";
-            richTextBox1.Text += "共有 " + pdf_filename_ArrayListData.Count.ToString() + " 個項目\n";
+            richTextBox1.Text += "共有 " + len.ToString() + " 個項目\n";
 
-            int len = pdf_filename_ArrayListData.Count;
-
-            for (int i = 0; i < len; i++)
+            for (i = 0; i < len; i++)
             {
-                richTextBox1.Text += pdf_filename_ArrayListData[i] + "\n";
+                richTextBox1.Text += pdf_filename_data[i].filename + "\n";
 
-                string filename = pdf_filename_ArrayListData[i].ToString();
+                string filename = pdf_filename_data[i].filename;
+                int page = pdf_filename_data[i].page;
                 richTextBox1.Text += filename + "\n";
 
-                AddItemsToListView(filename);
+                AddItemsToListView(filename, page);
             }
         }
 
-        void AddItemsToListView(string filename)
+        void AddItemsToListView(string filename, int page)
         {
             string short_filename = "";
             string long_foldername = "";
@@ -457,15 +541,27 @@ namespace vcs_MyPdfReader
 
             ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
             ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+            ListViewItem.ListViewSubItem sub_i1c = new ListViewItem.ListViewSubItem();
+            ListViewItem.ListViewSubItem sub_i1d = new ListViewItem.ListViewSubItem();
 
-            sub_i1a.Text = file_size;
+            int total_page = GetPDFofPageCount(filename);
+            sub_i1a.Text = page.ToString();
             i1.SubItems.Add(sub_i1a);
-            sub_i1b.Text = long_foldername;
+            sub_i1b.Text = total_page.ToString();
             i1.SubItems.Add(sub_i1b);
+            sub_i1c.Text = file_size;
+            i1.SubItems.Add(sub_i1c);
+            sub_i1d.Text = long_foldername;
+            i1.SubItems.Add(sub_i1d);
+
             sub_i1a.ForeColor = System.Drawing.Color.Blue;
             sub_i1b.ForeColor = System.Drawing.Color.Blue;
-            sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
-            sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+            sub_i1c.ForeColor = System.Drawing.Color.Blue;
+            sub_i1d.ForeColor = System.Drawing.Color.Blue;
+            sub_i1a.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Bold);
+            sub_i1b.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Bold);
+            sub_i1c.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Bold);
+            sub_i1d.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Bold);
 
             listView1.Items.Add(i1);
             //設置ListView最後一行可見
@@ -473,5 +569,7 @@ namespace vcs_MyPdfReader
         }
     }
 }
+
+
 
 

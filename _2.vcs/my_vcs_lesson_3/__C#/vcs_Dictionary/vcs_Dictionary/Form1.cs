@@ -238,12 +238,7 @@ namespace vcs_Dictionary
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法2\n";
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "Dictionary字典用法3, 用Class\n";
+            richTextBox1.Text += "Dictionary字典用法2, 用Class\n";
 
             DictionaryWithDefault<string, string> AnimalData = new DictionaryWithDefault<string, string>("<Missing>");
 
@@ -260,15 +255,16 @@ namespace vcs_Dictionary
             richTextBox1.Text += "龍" + "\t" + AnimalData["龍"] + "\n";
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法4\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法5\n";
-
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -16,7 +16,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="新進測試 01",
@@ -133,7 +133,6 @@ y = radius * np.sin(np.radians(degrees))
 
 plt.plot(x, y)
 plt.axis("equal")
-plt.grid()
 
 # 第五張圖
 plt.subplot(235)
@@ -148,7 +147,6 @@ plt.plot(x2, y2, label="基底 = 0.5")
 
 plt.axis([0, 10, -5, 5])
 plt.legend(loc="best")  # 建立圖例
-plt.grid()
 
 # 第六張圖
 plt.subplot(236)
@@ -385,6 +383,7 @@ print("matplotlib 06 -----------------------------------------------------------
 # 時序圖
 import matplotlib.dates as mdates
 
+#     2017/0808/2100    2017/0808/2101    2017/0808/2102    2017/0808/2103
 x = ['20170808210000' ,'20170808210100' ,'20170808210200' ,'20170808210300'
      ,'20170808210400' ,'20170808210500' ,'20170808210600' ,'20170808210700'
      ,'20170808210800' ,'20170808210900']
@@ -399,6 +398,7 @@ plt.gcf().autofmt_xdate() # 自動旋轉角度，以避免重疊
 plt.show()
 
 print("matplotlib 07 ------------------------------------------------------------")  # 60個
+
 #fail
 
 # 三維散點圖
@@ -456,30 +456,7 @@ ax.contourf(X,Y,Z,zdir='z',offset=-2) # 把等高線向z軸投射
 ax.set_zlim(-2,2) # 設置z軸範圍
 fig.colorbar(surf, shrink=0.5, aspect=5)
 plt.show()
-
-print("matplotlib 10 ------------------------------------------------------------")  # 60個
-
-#plt.plot(x, y, lw=8, ls='-.')
-#plt.plot(x, y, marker='*')
-#plt.plot(x, y, marker='D',ms=10, mfc='y', mec='r')
-#plt.plot(x, y, color='y')
-#plt.plot(x, y, color=(1,1,0))  #RGB
-#plt.plot(x, y, color='# FFFF00')  #HEX
-#plt.plot(x, y, color='yellow')  #英文全名
-#plt.plot(x, y, color='0.5')
-
-
-"""
-plt.xticks(range(0,5500,500))
-plt.tick_params(axis = 'both', labelsize = 10, color = 'red')
-
-plt.bar(listx, listy, width = 0.5, color = 'r')
-
-plt.barh(listy, listx, height = 0.5, color = 'r')
-
-"""
-
-
+'''
 print("matplotlib 11 ------------------------------------------------------------")  # 60個
 
 """
@@ -487,31 +464,27 @@ print("matplotlib 11 -----------------------------------------------------------
 餘弦函數 c=cos(x)
 """
 
-x = np.linspace(-2*np.pi, 2*np.pi, 100)
-s, c=np.sin(x), np.cos(x)
-plt.plot(x, s)
-plt.plot(x, c)
-plt.xticks([-2*np.pi,-np.pi,0, np.pi, 2*np.pi],['-$2\pi$', '-$\pi$','0', '$\pi$', '$2\pi$'])
-
-plt.legend(['sin','cos'])
-plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
-
-plt.show()
-
-print("matplotlib 12 ------------------------------------------------------------")  # 60個
-
-x = np.linspace(0, 2 * np.pi)
-y = np.sin(x)
-
-plt.grid(True)
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100) #共100個點
+x = np.linspace(-2 * np.pi, 2 * np.pi)   #預設為50個點
+print(len(x))
+s, c = np.sin(x), np.cos(x)
 
 #自訂座標軸的刻度及標籤–xticks()、yticks()
 #x座標
-ticks = [0, np.pi * 0.5, np.pi, np.pi * 1.5, np.pi * 2]
+ticks = [-2*np.pi, -1.5*np.pi, -1*np.pi, -0.5*np.pi, 0, np.pi * 0.5, np.pi, np.pi * 1.5, np.pi * 2]
 #要在x座標寫上的標籤
-labels = ['0°', '90°', '180°', '270°', '360°']
+labels = ['-360°', '-270°', '-180°', '-90°', '0°', '90°', '180°', '270°', '360°']
 plt.xticks(ticks, labels)
-plt.plot(x, y)
+
+#x軸刻度 5個點 分別用pi表示
+#plt.xticks([-2*np.pi, -np.pi, 0, np.pi, 2*np.pi],['-$2\pi$', '-$\pi$','0', '$\pi$', '$2\pi$'])
+
+plt.plot(x, s)
+plt.plot(x, c)
+plt.grid()
+
+plt.legend(['sin','cos'])
+plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
 
 plt.show()
 
@@ -559,24 +532,22 @@ line, = axes.plot(x,y) # 這裡回傳的line就是畫在圖上的資料
 # 當發現畫錯想修改，可以對line修改：
 line.set_ydata(np.cos(x))
 
-#存圖
-#fig2.savefig('./picture.png')
-
 plt.show()
 
 print("matplotlib 15 ------------------------------------------------------------")  # 60個
 
 from matplotlib import pyplot as plt
 
-X = np.linspace(-np.pi, np.pi, 200, endpoint=True)
-C, S = np.cos(X), np.sin(X)
+x = np.linspace(-np.pi, np.pi, 200, endpoint=True)
+s, c = np.sin(x), np.cos(x)
 
 plt.figure(figsize=(20, 6), dpi=80)
 plt.subplot(1, 2, 1)
-# 使用默认设置画出余弦曲线
-plt.plot(X, C)
+
 # 使用默认设置画出正弦曲线
-plt.plot(X, S)
+plt.plot(x, s)
+# 使用默认设置画出余弦曲线
+plt.plot(x, c)
 
 plt.subplot(1, 2, 2)
 # 移动坐标轴边线
@@ -596,19 +567,18 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
     label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.65))
     
 # 设置坐标轴的长度
-plt.xlim(X.min() * 1.1, X.max() * 1.1)
-plt.ylim(C.min() * 1.1, C.max() * 1.1)
+plt.xlim(x.min() * 1.1, x.max() * 1.1)
+plt.ylim(c.min() * 1.1, c.max() * 1.1)
 
 # 设置坐标轴的刻度和标签
 plt.xticks((-np.pi, -np.pi/2, np.pi/2, np.pi),
           label=(r'$-\pi$', r'$-\pi/2$', r'$+\pi/2$', r'$+\pi$'))
 plt.yticks([-1, -0.5, 0, 0.5, 1])
 
-
-# 画出余弦曲线，并设置线条颜色，宽度，样式
-plt.plot(X, C, color="blue", linewidth=2.0, linestyle="-")
 # 画出正弦曲线，并设置线条颜色，宽度，样式
-plt.plot(X, S, color="red", linewidth=2.0, linestyle="-")
+plt.plot(x, s, color="red", linewidth=2.0, linestyle="-")
+# 画出余弦曲线，并设置线条颜色，宽度，样式
+plt.plot(x, c, color="blue", linewidth=2.0, linestyle="-")
 
 # 在左上角添加铭牌
 plt.legend(loc='upper left')
@@ -766,7 +736,6 @@ def plt_polar():
     ax.set_yticklabels([])
     
 plt.figure(figsize=(16, 6))
-plt_grid()
 plt_polar()
 plt.tight_layout()
 plt.show()
@@ -919,8 +888,6 @@ y = a*x**2 + b*x
 plt.plot(x, y, color='b')
 plt.fill_between(x, y1=y, y2=0, where=(x>=-2)&(x<=5),
                  facecolor='lightgreen')
-
-plt.grid()
 
 plt.show()
 
@@ -1109,7 +1076,6 @@ plt.plot(x, y2, color='g')      # 綠色是 g(x)
 plt.fill_between(x, y1=y1, y2=y2, where=(x>=-1)&(x<=2),
                  facecolor='yellow')
 
-plt.grid()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1435,12 +1401,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.title(r'$\frac{7}{9}+\sqrt{7}+\alpha\beta$',fontsize=20)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 x = np.linspace(0, 2*np.pi, 100)
 y = np.sin(x)
 plt.plot(1,0,'bo')                  # 輸出藍點
@@ -1649,6 +1609,19 @@ plt.show()
 
 plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
 
+#plt.plot(x, y, lw=8, ls='-.')
+#plt.plot(x, y, marker='*')
+#plt.plot(x, y, marker='D',ms=10, mfc='y', mec='r')
+#plt.plot(x, y, color='y')
+#plt.plot(x, y, color=(1,1,0))  #RGB
+#plt.plot(x, y, color='# FFFF00')  #HEX
+#plt.plot(x, y, color='yellow')  #英文全名
+#plt.plot(x, y, color='0.5')
+
+plt.xticks(range(0,5500,500))
+plt.tick_params(axis = 'both', labelsize = 10, color = 'red')
+plt.bar(listx, listy, width = 0.5, color = 'r')
+plt.barh(listy, listx, height = 0.5, color = 'r')
 
 
 製作數據
@@ -1675,6 +1648,19 @@ print(type(x3), x3)
 
 """ 共同抽出
 plt.savefig('tmp_pic.jpg')
+
+#存圖
+#fig2.savefig('./picture.png')
+
+plt.grid()
+plt.grid()
+
+plt.grid()
+
+plt.grid()
+plt_grid()
+
+plt.grid(True)
 
 
 

@@ -22,40 +22,5 @@ namespace vcs_MyPdfReader.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string pdf_filename {
-            get {
-                return ((string)(this["pdf_filename"]));
-            }
-            set {
-                this["pdf_filename"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public int pdf_page {
-            get {
-                return ((int)(this["pdf_page"]));
-            }
-            set {
-                this["pdf_page"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.ArrayList pdf_filenames {
-            get {
-                return ((global::System.Collections.ArrayList)(this["pdf_filenames"]));
-            }
-            set {
-                this["pdf_filenames"] = value;
-            }
-        }
     }
 }
