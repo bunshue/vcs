@@ -6,10 +6,7 @@ savefile = "tmp_savePNG1.png"
 img = Image.open(infile)      #載入圖片檔
 img.save(savefile, format="PNG")    #PNG轉存檔案
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\高效率Python自動化工作術\chap9\test9_2.py
+print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 
@@ -21,8 +18,6 @@ img = img.resize((100, 100), Image.LANCZOS)     #調整大小
 img.save(savefile, format="PNG")
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\高效率Python自動化工作術\chap9\test9_3.py
 
 from PIL import Image
 
@@ -39,8 +34,6 @@ img.save(savefile, format="PNG")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\高效率Python自動化工作術\chap9\test9_4.py
-
 from PIL import Image
 from PIL import ImageDraw
 
@@ -52,10 +45,7 @@ draw = ImageDraw.Draw(img)  #在圖片畫線的準備
 draw.line((0, 0, img.width, img.height), fill="RED", width=8) #畫線
 img.save(savefile, format="PNG")
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\高效率Python自動化工作術\chap9\test9_5.py
 
 from PIL import Image
 

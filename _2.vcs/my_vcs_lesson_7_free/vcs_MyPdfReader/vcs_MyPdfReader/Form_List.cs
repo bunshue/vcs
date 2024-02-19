@@ -34,7 +34,7 @@ namespace vcs_MyPdfReader
         int message_panel_width = 128;
         int message_panel_height = 0;
 
-        int pdf_page = 0;
+        int pdf_page = 1;
         int pdf_total_page = 0;
 
         public class PdfFilenames
@@ -82,10 +82,10 @@ namespace vcs_MyPdfReader
             this.Size = new Size(1600, 800);
             this.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
 
-            listView1.Font = new System.Drawing.Font("新細明體", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            listView1.Location = new System.Drawing.Point(0, 0);
+            listView1.Font = new Font("新細明體", 14F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(136)));
+            listView1.Location = new Point(0, 0);
             listView1.Name = "listView1";
-            listView1.Size = new System.Drawing.Size(this.Size.Width - 100, 600 - 38);
+            listView1.Size = new Size(this.Size.Width - 100, 600 - 38);
             listView1.View = System.Windows.Forms.View.Details;
             listView1.KeyDown += new KeyEventHandler(listView1_KeyDown);
             listView1.MouseClick += new MouseEventHandler(listView1_MouseClick);
@@ -267,11 +267,16 @@ namespace vcs_MyPdfReader
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
 
-            richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            /*
+            richTextBox1.Text += "1你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+            richTextBox1.Text += "2你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "3你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "4你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            richTextBox1.Text += "5你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[4].Text + "\n";
+            */
 
-            //richTextBox1.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-            foldername = listView1.Items[selNdx].SubItems[2].Text;
-            richTextBox1.Text += foldername + "\n";
+            foldername = listView1.Items[selNdx].SubItems[4].Text;
+            richTextBox1.Text += "資料夾:\t" + foldername + "\n";
 
             if (Directory.Exists(foldername) == false)     //確認資料夾是否存在
             {
@@ -307,11 +312,14 @@ namespace vcs_MyPdfReader
                 listView1.Items[selNdx].Selected = true;    //選到的項目
 
                 /*
-                richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
-                richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-                richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                richTextBox1.Text += "1你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                richTextBox1.Text += "2你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+                richTextBox1.Text += "3你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+                richTextBox1.Text += "4你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+                richTextBox1.Text += "5你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[4].Text + "\n";
                 */
-                full_filename = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+
+                full_filename = listView1.Items[selNdx].SubItems[4].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
                 richTextBox1.Text += full_filename + "\n";
 
                 if (File.Exists(full_filename) == false)   //確認檔案是否存在
@@ -385,11 +393,14 @@ namespace vcs_MyPdfReader
             listView1.Items[selNdx].Selected = true;    //選到的項目
 
             /*
-            richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
-            richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
-            richTextBox1.Text += "你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "1你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+            richTextBox1.Text += "2你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox1.Text += "3你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox1.Text += "4你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            richTextBox1.Text += "5你選擇了檔名 :\t" + listView1.Items[selNdx].SubItems[4].Text + "\n";
             */
-            full_filename = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+
+            full_filename = listView1.Items[selNdx].SubItems[4].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
             richTextBox1.Text += full_filename + "\n";
 
             if (File.Exists(full_filename) == false)   //確認檔案是否存在
@@ -504,8 +515,14 @@ namespace vcs_MyPdfReader
                 string filename = pdf_filename_data[i].filename;
                 int page = pdf_filename_data[i].page;
                 richTextBox1.Text += filename + "\n";
-
-                AddItemsToListView(filename, page);
+                try
+                {
+                    AddItemsToListView(filename, page);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e04 : " + ex.Message + "\n";
+                }
             }
         }
 
@@ -554,14 +571,14 @@ namespace vcs_MyPdfReader
             sub_i1d.Text = long_foldername;
             i1.SubItems.Add(sub_i1d);
 
-            sub_i1a.ForeColor = System.Drawing.Color.Blue;
-            sub_i1b.ForeColor = System.Drawing.Color.Blue;
-            sub_i1c.ForeColor = System.Drawing.Color.Blue;
-            sub_i1d.ForeColor = System.Drawing.Color.Blue;
-            sub_i1a.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Bold);
-            sub_i1b.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Bold);
-            sub_i1c.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Bold);
-            sub_i1d.Font = new System.Drawing.Font("Times New Roman", 12, System.Drawing.FontStyle.Bold);
+            sub_i1a.ForeColor = Color.Blue;
+            sub_i1b.ForeColor = Color.Blue;
+            sub_i1c.ForeColor = Color.Blue;
+            sub_i1d.ForeColor = Color.Blue;
+            sub_i1a.Font = new Font("Times New Roman", 12, FontStyle.Bold);
+            sub_i1b.Font = new Font("Times New Roman", 12, FontStyle.Bold);
+            sub_i1c.Font = new Font("Times New Roman", 12, FontStyle.Bold);
+            sub_i1d.Font = new Font("Times New Roman", 12, FontStyle.Bold);
 
             listView1.Items.Add(i1);
             //設置ListView最後一行可見
@@ -569,7 +586,3 @@ namespace vcs_MyPdfReader
         }
     }
 }
-
-
-
-

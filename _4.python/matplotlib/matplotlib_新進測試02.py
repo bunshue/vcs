@@ -192,9 +192,7 @@ plt.subplot(236)
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("matplotlib 01 ------------------------------------------------------------")  # 60個
 
@@ -368,18 +366,6 @@ plt.show()
 
 print("matplotlib 04 ------------------------------------------------------------")  # 60個
 
-th = np.arange(0,360,10)
-#print(th)
-
-x = np.cos(np.radians(th))
-y = np.sin(np.radians(th))
-
-plt.plot(x,y)
-
-plt.show()
-
-print("matplotlib 06 ------------------------------------------------------------")  # 60個
-
 # 時序圖
 import matplotlib.dates as mdates
 
@@ -397,66 +383,6 @@ plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %H:%M')) # 設�
 plt.gcf().autofmt_xdate() # 自動旋轉角度，以避免重疊
 plt.show()
 
-print("matplotlib 07 ------------------------------------------------------------")  # 60個
-
-#fail
-
-# 三維散點圖
-from mpl_toolkits.mplot3d import Axes3D
-
-data = np.random.rand(50, 3) # 生成三維數據，每維50個
-fig = plt.figure()
-ax = Axes3D(fig)
-ax.scatter(data[:, 0], data[:, 1], data[:, 2])
-ax.set_zlabel('Z')
-ax.set_ylabel('Y')
-ax.set_xlabel('X')
-plt.show()
-
-print("matplotlib 08 ------------------------------------------------------------")  # 60個
-
-#fail
-
-# 三維柱圖
-
-from mpl_toolkits.mplot3d import Axes3D
-
-fig = plt.figure()
-ax = Axes3D(fig)
-_x = np.arange(4)
-_y = np.arange(5)
-_xx, _yy = np.meshgrid(_x, _y) # 生成網格點座標矩陣
-x, y = _xx.ravel(), _yy.ravel() # 展開爲一維數組
-
-top = x + y
-bottom = np.zeros_like(top) # 與top數組形狀一樣，內容全部爲0
-width = depth = 1
-
-ax.bar3d(x, y, bottom, width, depth, top, shade=True)
-plt.show()
-
-print("matplotlib 09 ------------------------------------------------------------")  # 60個
-
-#fail
-
-# 三維曲面圖和等高線圖
-
-from matplotlib import cm
-from mpl_toolkits.mplot3d import Axes3D
-
-fig = plt.figure()
-ax = Axes3D(fig)
-X = np.arange(-5, 5, 0.25)
-Y = np.arange(-5, 5, 0.25)
-X, Y = np.meshgrid(X, Y)
-R = np.sqrt(X**2 + Y**2)
-Z = np.sin(R)
-surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
-ax.contourf(X,Y,Z,zdir='z',offset=-2) # 把等高線向z軸投射
-ax.set_zlim(-2,2) # 設置z軸範圍
-fig.colorbar(surf, shrink=0.5, aspect=5)
-plt.show()
-'''
 print("matplotlib 11 ------------------------------------------------------------")  # 60個
 
 """
@@ -740,11 +666,7 @@ plt_polar()
 plt.tight_layout()
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 19 ------------------------------------------------------------")  # 60個
 
 #1. 善用 enumerate
 
@@ -796,9 +718,7 @@ plt.plot(x, x**2)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-
+print("matplotlib 20 ------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -819,7 +739,7 @@ plt.tight_layout()                      # 緊縮佈局
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 21 ------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -841,14 +761,13 @@ ax[0].plot_surface(X, Y, f1(X,Y), cmap='hsv')   # 繪製 3D 圖
 ax[1].plot_surface(X, Y, f2(X,Y), cmap='hsv')   # 繪製 3D 圖
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+'''
+print("matplotlib 22 ------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-left = -2 * np.pi
-right = 2 * np.pi
-x = np.linspace(left, right, 50)
+x = np.linspace(-2 * np.pi, 2 * np.pi, 50)
 
 f1 = 3 * np.sin(x)                  # y陣列的變化
 f2 = np.sin(x)
@@ -860,65 +779,7 @@ plt.plot(x, f3)
 plt.plot(x, f1, 'go')
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-left = -np.pi
-right = np.pi
-x = np.linspace(left, right, 100)
-y = np.sin(2*x)                  # y陣列的變化
-
-plt.plot(x, y) 
-plt.fill_between(x, 1, y, alpha=0.1)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-# 函數的係數
-a = -1
-b = 2
-# 繪製區間圖形
-x = np.linspace(-2, 4, 1000)
-y = a*x**2 + b*x
-plt.plot(x, y, color='b')
-plt.fill_between(x, y1=y, y2=0, where=(x>=-2)&(x<=5),
-                 facecolor='lightgreen')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-
-data1 = [1, 2, 3, 4, 5, 6, 7, 8]                # data1線條
-data2 = [1, 4, 9, 16, 25, 36, 49, 64]           # data2線條
-data3 = [1, 3, 6, 10, 15, 21, 28, 36]           # data3線條
-data4 = [1, 7, 15, 26, 40, 57, 77, 100]         # data4線條
-
-seq = [1, 2, 3, 4, 5, 6, 7, 8]
-
-plt.subplot(2, 2, 1)
-plt.plot(seq, data1, '-*')
-
-plt.subplot(2, 2, 2)
-plt.plot(seq, data2, '-o')
-
-plt.subplot(2, 2, 3)
-plt.plot(seq, data3, '-^')
-
-plt.subplot(2, 2, 4)
-plt.plot(seq, data4, '-s')
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
+print("matplotlib 23 ------------------------------------------------------------")  # 60個
 
 import csv
 import matplotlib.pyplot as plt
@@ -943,7 +804,7 @@ plt.xlabel("", fontsize=14)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 24 ------------------------------------------------------------")  # 60個
 
 import csv
 import matplotlib.pyplot as plt
@@ -999,21 +860,7 @@ plt.title("2023年10月安勤公司日線圖", fontsize=24)
 plt.ylabel('價格', fontsize=14)
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#產生兩個串列
-x = [x for x in range(9)]       # 產生0, 1, ... 8串列
-y = [0, 1, 4, 9, 16, 25, 36, 49, 64]
-
-plt.plot(x, y, lw = 2)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 25 ------------------------------------------------------------")  # 60個
          
 data1 = [1, 2, 3, 4, 5, 6, 7, 8]                # data1線條
 data2 = [1, 4, 9, 16, 25, 36, 49, 64]           # data2線條
@@ -1026,369 +873,7 @@ plt.plot(seq,data1,'-*',seq,data2,'-o',seq,data3,'-^',seq,data4,'-s')
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-left = -2 * np.pi
-right = 2 * np.pi
-x = np.linspace(left, right, 100)
-f1 = 2 * np.sin(x)              # 波形 1
-f2 = np.sin(2*x)                # 波形 2
-f3 = 0.5 * np.sin(x)            # 波形 3
-plt.plot(x, f1) 
-plt.plot(x, f2)
-plt.plot(x, f3)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-left = -np.pi
-right = np.pi
-x = np.linspace(left, right, 100)
-y = np.sin(3*x)                  # y陣列的變化
-
-plt.plot(x, y) 
-plt.fill_between(x, 0, y, color='green', alpha=0.1)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 函數f(x)的係數
-a1 = 1
-c1 = -2
-x = np.linspace(-2, 3, 1000)
-y1 = a1*x**2 + c1
-plt.plot(x, y1, color='b')      # 藍色是 f(x)
-
-# 函數g(x)的係數
-a2 = -1
-b2 = 2
-c2 = 2
-x = np.linspace(-2, 3, 1000)
-y2 = a2*x**2 + b2*x + c2
-plt.plot(x, y2, color='g')      # 綠色是 g(x)
-
-# 繪製區間
-plt.fill_between(x, y1=y1, y2=y2, where=(x>=-1)&(x<=2),
-                 facecolor='yellow')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-# 建立衰減數列.
-x1 = np.linspace(0.0, 5.0, 50)
-y1 = np.cos(3 * np.pi * x1) * np.exp(-x1)
-# 建立非衰減數列
-x2 = np.linspace(0.0, 2.0, 50)
-y2 = np.cos(3 * np.pi * x2)
-
-plt.subplot(2,1,1)
-plt.title('衰減數列')
-plt.plot(x1, y1, 'go-')
-plt.ylabel('衰減值')
-
-plt.subplot(2,1,2)
-plt.plot(x2, y2, 'm.-')
-plt.xlabel('時間(秒)')
-plt.ylabel('非衰減值')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-data1 = [1, 2, 3, 4, 5, 6, 7, 8]        # data1線條
-data2 = [1, 4, 9, 16, 25, 36, 49, 64]   # data2線條
-seq = [1, 2, 3, 4, 5, 6, 7, 8]
-plt.subplot(1, 2, 1)                    # 子圖1
-plt.plot(seq, data1, '-*')
-plt.subplot(1, 2, 2)                    # 子圖2
-plt.plot(seq, data2, 'm-o')                      
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-def f(t):
-    return np.exp(-t) * np.sin(2*np.pi*t)
-
-x = np.linspace(0.0, np.pi, 100)
-plt.subplot(2,2,1)          # 子圖 1
-plt.plot(x, f(x))
-plt.title('子圖 1')
-plt.subplot(2,2,2)          # 子圖 2
-plt.plot(x, f(x))
-plt.title('子圖 2')
-plt.subplot(2,2,3)          # 子圖 3
-plt.plot(x, f(x))
-plt.title('子圖 3')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-def f(t):
-    return np.exp(-t) * np.sin(2*np.pi*t)
-
-x = np.linspace(0.0, np.pi, 100)
-plt.subplot(221)          # 子圖 1
-plt.plot(x, f(x))
-plt.title('子圖 1')
-plt.subplot(222)          # 子圖 2
-plt.plot(x, f(x))
-plt.title('子圖 2')
-plt.subplot(223)          # 子圖 3
-plt.plot(x, f(x))
-plt.title('子圖 3')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-def f(t):
-    return np.exp(-t) * np.sin(2*np.pi*t)
-
-x = np.linspace(0.0, np.pi, 100)
-plt.subplot(2,2,1)          # 子圖 1
-plt.plot(x, f(x))
-plt.title('子圖 1')
-plt.subplot(2,2,2)          # 子圖 2
-plt.plot(x, f(x))
-plt.title('子圖 2')
-plt.subplot(2,1,2)          # 子圖 3
-plt.plot(x, f(x))
-plt.title('子圖 3')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-plt.subplot(1,2,1)      # 建立子圖表 1,2,1
-plt.text(0.15,0.5,'subplot(1,2,1)',fontsize='16',c='b')
-plt.subplot(2,2,2)      # 建立子圖表 2,2,2
-plt.text(0.15,0.5,'subplot(2,2,2)',fontsize='16',c='m')
-plt.subplot(2,2,4)      # 建立子圖表 2,2,4
-plt.text(0.15,0.5,'subplot(2,2,4)',fontsize='16',c='m')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-N = 50                                      # 色彩數列的點數
-colorused = ['b','c','g','k','m','r','y']   # 定義顏色
-colors = []                                 # 建立色彩數列
-for i in range(N):                          # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-x = np.linspace(0.0, 2*np.pi, N)            # 建立 50 個點
-y = np.sin(x)
-fig = plt.figure()                          # 建立畫布物件
-ax = fig.add_subplot()                      # 建立子圖(或稱軸物件)ax
-ax.scatter(x, y, c=colors, marker='*')      # 繪製 sin
-ax.set_title("建立畫布與軸物件,使用OO API繪圖", fontsize=16)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-fig, ax = plt.subplots(2, 2)            # 建立4個子圖
-x = np.linspace(0, 2*np.pi, 300)
-y = np.sin(x**2)
-ax[0, 0].plot(x, y,'b')                 # 子圖索引 0,0
-ax[0, 0].set_title('子圖[0, 0]')
-ax[0, 1].plot(x, y,'g')                 # 子圖索引 0,1
-ax[0, 1].set_title('子圖[0, 1]')
-ax[1, 0].plot(x, y,'m')                 # 子圖索引 1,0
-ax[1, 0].set_title('子圖[1, 0]')
-ax[1, 1].plot(x, y,'r')                 # 子圖索引 1,1
-ax[1, 1].set_title('子圖[1, 1]') 
-fig.suptitle("4個子圖的實作",fontsize=16) # 圖表主標題
-plt.tight_layout()                      # 緊縮佈局
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 繪製半徑 5 的圓
-angle = np.linspace(0, 2*np.pi, 100)
-fig, ax = plt.subplots(2, 2)    # 建立 2 x 2 子圖
-
-ax[0, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[0, 0].set_title('繪圓形, 看起來像橢圓')
-ax[0, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[0, 1].axis('equal')
-ax[0, 1].set_title('寬高比相同, 是圓形')
-ax[1, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[1, 0].axis('equal')
-ax[1, 0].set(xlim=(-5, 5), ylim=(-5, 5))
-ax[1, 0].set_title('設定寬和高相同區間')
-ax[1, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[1, 1].set_aspect('equal', 'box')
-ax[1, 1].set_title('設定寬高比相同')
-fig.tight_layout()
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# 繪製半徑 5 的圓
-angle = np.linspace(0, 2*np.pi, 100)
-fig, ax = plt.subplots(2, 2)    # 建立 2 x 2 子圖
-
-ax[0, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[0, 0].set_title('繪圓形, 看起來像橢圓')
-ax[0, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[0, 1].axis('equal')
-ax[0, 1].set_title('寬高比相同, 是圓形')
-ax[1, 0].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[1, 0].axis('equal')
-ax[1, 0].set(xlim=(-5, 5), ylim=(-5, 5))
-ax[1, 0].set_title('設定寬和高相同區間')
-ax[1, 1].plot(5 * np.cos(angle), 5 * np.sin(angle))
-ax[1, 1].set_aspect(2)
-ax[1, 1].set_title('設定寬高比是2')
-fig.tight_layout()
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-from matplotlib.animation import FuncAnimation  
-
-# 建立最初化的 line 資料 (x, y)  
-def init():  
-    line.set_data([], [])  
-    return line,
-# 繪製 sin 波形, 這個函數將被重複調用
-def animate(i):        
-    x = np.linspace(0, 2*np.pi, 500)        # 建立 sin 的 x 值 
-    y = np.sin(2 * np.pi * (x - 0.01 * i))  # 建立 sin 的 y 值  
-    line.set_data(x, y)                     # 更新波形的資料
-    return line,
-
-# 建立動畫需要的 Figure 物件
-fig = plt.figure()   
-# 建立軸物件與設定大小
-ax = plt.axes(xlim=(0, 2*np.pi), ylim=(-2, 2))    
-# 最初化線條 line, 變數, 須留意變數 line 右邊的逗號','是必須的  
-line, = ax.plot([], [], lw=3, color='g')  
-# interval = 20, 相當於每隔 20 毫秒執行 animate()動畫  
-ani = FuncAnimation(fig, animate,
-                    frames = 200,          
-                    init_func = init,                        
-                    interval = 20)          # interval是控制速度
-ani.save('tmp_sin.gif', writer='pillow')        # 儲存 tmp_sin.gif 檔案
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from matplotlib.animation import FuncAnimation  
-
-# 建立最初化的 line 資料 (x, y)  
-def init():  
-    line.set_data([], [])  
-    return line,
-# 繪製 sin 波形, 這個函數將被重複調用
-def animate(i):        
-    x = np.linspace(0, 2*np.pi, 10)         # 建立 sin 的 x 值 
-    y = np.sin(2 * np.pi * (x - 0.01 * i))  # 建立 sin 的 y 值  
-    line.set_data(x, y)                     # 更新波形的資料
-    return line,
-
-# 建立動畫需要的 Figure 物件
-fig = plt.figure()   
-# 建立軸物件與設定大小
-ax = plt.axes(xlim=(0, 2*np.pi), ylim=(-2, 2))    
-# 最初化線條 line, 變數, 須留意變數 line 右邊的逗號','是必須的  
-line, = ax.plot([], [], lw=3, color='g')  
-# interval = 20, 相當於每隔 20 毫秒執行 animate()動畫  
-ani = FuncAnimation(fig, animate,
-                    frames = 200,          
-                    init_func = init,                        
-                    interval = 20)          # interval是控制速度
-ani.save('tmp_sin2.gif', writer='pillow')       # 儲存 tmp_sin2.gif 檔案
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from matplotlib.animation import FuncAnimation
-
-# 建立最初化點的位置 
-def init():
-    dot.set_data(x[0], y[0])        # 更新紅色點的資料
-    return dot,
-# 繪製 sin 波形, 這個函數將被重複調用
-def animate(i):    
-    dot.set_data(x[i], y[i])        # 更新紅色點的資料
-    return dot,
-
-# 建立動畫需要的 Figure 物件
-fig = plt.figure()
-N = 200
-# 建立軸物件與設定大小
-ax = plt.axes(xlim=(0, 2*np.pi), ylim=(-1.5, 1.5))
-# 建立和繪製 sin 波形
-x = np.linspace(0, 2*np.pi, N)
-y = np.sin(x)
-line, = ax.plot(x, y, color='g',linestyle='-',linewidth=3)
-# 建立和繪製紅點
-dot, = ax.plot([],[],color='red',marker='o',
-               markersize=15,linestyle='')
-# interval = 20, 相當於每隔 20 毫秒執行 animate()動畫
-ani = FuncAnimation(fig=fig, func=animate,
-                    frames=N,
-                    init_func=init,
-                    interval=20,
-                    blit=True,
-                    repeat=True)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from matplotlib.animation import FuncAnimation
-
-# 建立最初化點的位置 
-def init():
-    dot.set_data(x[0], y[0])        # 更新紅色點的資料
-    return dot,
-# 繪製 sin 波形, 這個函數將被重複調用
-def animate(i):    
-    dot.set_data(x[i], y[i])        # 更新紅色點的資料
-    return dot,
-
-# 建立動畫需要的 Figure 物件
-fig = plt.figure()
-N = 200
-# 建立軸物件與設定大小
-ax = plt.axes(xlim=(0, 2*np.pi), ylim=(-1.5, 1.5))
-# 建立和繪製 sin 波形
-x = np.linspace(0, 2*np.pi, N)
-y = np.sin(x)
-#line, = ax.plot(x, y, color='g',linestyle='-',linewidth=3)
-# 建立和繪製紅點
-dot, = ax.plot([],[],color='red',marker='o',
-               markersize=15,linestyle='')
-# interval = 20, 相當於每隔 20 毫秒執行 animate()動畫
-ani = FuncAnimation(fig=fig, func=animate,
-                    frames=N,
-                    init_func=init,
-                    interval=20,
-                    blit=True,
-                    repeat=True)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 26 ------------------------------------------------------------")  # 60個
 
 # 建立衰減數列.
 x = np.linspace(0.0, 5.0, 50)
@@ -1399,160 +884,6 @@ plt.plot(x, y, 'go-')
 plt.ylabel('衰減值')
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(0, 2*np.pi, 100)
-y = np.sin(x)
-plt.plot(1,0,'bo')                  # 輸出藍點
-plt.text(1,0,'sin(x)',fontsize=20)  # 輸出公式
-plt.plot(x,y)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.linspace(0.0, np.pi, 500)
-y = np.cos(2 * np.pi * x)
-plt.plot(x, y, 'm', lw=2)
-plt.annotate('局部極大值',
-            xy=(2, 1),
-            xytext=(2.5, 1.2),           
-            arrowprops=dict(arrowstyle='->',
-                            facecolor='black'))
-plt.annotate('局部極小值',
-            xy=(1.5, -1),
-            xytext=(2.0, -1.25),           
-            arrowprops=dict(arrowstyle='-'))
-plt.text(0.8,1.2,'Annotate的應用',fontsize=20,color='b')
-plt.ylim(-1.5, 1.5)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-ax = plt.subplot(projection='polar')
-r = np.arange(0, 1, 0.001)
-theta = 2 * 2*np.pi * r
-ax.plot(theta, r, 'm', lw=3)
-plt.title("極座標圖表",fontsize=16)
-plt.tight_layout()      # 圖表標題可以緊縮佈局
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-def f(x, y):
-    return (1.2-x**2+y**5)*np.exp(-x**2-y**2)
-
-x = np.linspace(-3.0, 3.0, 100)
-y = np.linspace(-3.0, 3.0, 100)
-X, Y = np.meshgrid(x, y)
-Z = f(X, Y)
-# 建立 2 個子圖
-fig, ax = plt.subplots(1,2, figsize=(8,4))
-# 繪製左圖 level 是預設
-con = ax[0].contourf(X,Y,Z,cmap='Greens') # 填充輪廓圖
-plt.colorbar(con,ax=ax[0])
-oval = ax[0].contour(X,Y,Z,colors='b')    # 輪廓圖
-ax[0].clabel(oval,colors='b')             # 增加高度標記
-ax[0].set_title('指數函數等高圖level是預設',fontsize=16,color='b')
-# 繪製右圖 level=12
-ax[1].contourf(X,Y,Z,12,cmap='Greens')    # 填充輪廓圖
-oval = ax[1].contour(X,Y,Z,12,colors='b') # 輪廓圖
-ax[1].clabel(oval,colors='b')             # 增加高度標記
-ax[1].set_title('指數函數等高圖level=12',fontsize=16,color='b')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from mpl_toolkits.mplot3d import axes3d
-
-# 取得測試資料
-X, Y, Z = axes3d.get_test_data(0.05)
-# 建立 2 個子圖
-fig,ax = plt.subplots(1,2,figsize=(8,4),subplot_kw={'projection':'3d'})
-# 繪製曲線表面圖
-ax[0].plot_surface(X, Y, Z, cmap="bwr")
-ax[0].set_title('繪製曲線表面圖',fontsize=16,color='b')
-
-# 繪製曲線框面圖
-#ax = fig.add_subplot(111, projection='3d')
-ax[1].plot_wireframe(X, Y, Z, color='g')
-ax[1].set_title('繪製曲線框線圖',fontsize=16,color='b')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-z = np.linspace(0,1,300)        # z 軸值
-x = z * np.sin(30*z)            # x 軸值
-y = z * np.cos(30*z)            # y 軸值
-colors = x + y                  # 色彩是沿 x + y 累增
-
-# 建立 2 個子圖
-fig,ax = plt.subplots(1,2,figsize=(8,4),subplot_kw={'projection':'3d'})
-ax[0].scatter(x, y, z, c = colors)                  # 繪製左子圖
-ax[1].scatter(x, y, z, c = colors, cmap='hsv')      # 繪製右子圖
-ax[1].set_axis_off()            # 關閉軸
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-def f1(x, y):                                # 左邊曲面函數
-    return np.exp(-(0.5*X**2+0.5*Y**2))
-def f2(x, y):                                # 右邊曲面函數
-    return np.exp(-(0.1*X**2+0.1*Y**2))
-
-N = 50
-x = np.linspace(-5, 5, N)
-y = np.linspace(-5, 5, N)
-X, Y = np.meshgrid(x, y)            # 建立 X 和 Y 資料
-np.random.seed(10)
-c = np.random.rand(N, N)            # 取隨機色彩值
-# 建立子圖
-fig,ax = plt.subplots(1,3,figsize=(8,4),subplot_kw={'projection':'3d'})
-# 左邊子圖乎叫 f1
-sc = ax[0].scatter(X, Y, f1(X,Y), c=c, marker='o', cmap='hsv')
-# 中間子圖乎叫 f2
-sc = ax[1].scatter(X, Y, f2(X,Y), c=c, marker='o', cmap='hsv')
-ax[1].set_axis_off()
-# 右邊子圖乎叫 f2, 但是用不同的仰角和方位角
-sc = ax[2].scatter(X, Y, f2(X,Y), c=c, marker='o', cmap='hsv')
-ax[2].set_axis_off()
-ax[2].view_init(60,-30)
-ax[2].set_title(f"仰角={ax[2].elev},方位角={ax[2].azim}",color='b')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from matplotlib.animation import FuncAnimation
-
-def f(x, y):                                # 左邊曲面函數
-    return (4 - x**2 - y**2)
-def animate(i):
-    ax.view_init(60,i)
-
-X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
-Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
-X, Y = np.meshgrid(X, Y)                    # 建立 XY 座標
-# 建立子圖
-fig,ax = plt.subplots(subplot_kw={'projection':'3d'})
-ax.plot_surface(X, Y, f(X,Y), cmap='hsv')   # 繪製 3D 圖
-ax.set_axis_off()
-
-ani = FuncAnimation(fig,func=animate,frames=np.arange(0,360,3),
-                    interval=60)
-plt.show()
-
-
-      
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1565,9 +896,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 
@@ -1665,5 +993,7 @@ plt.grid(True)
 
 
 """
+
+
 
 

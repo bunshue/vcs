@@ -157,22 +157,6 @@ print("/%10.3s/" % string)
 
 print("------------------------------------------------------------")  # 60個
 
-r = 5
-PI = 3.14159
-area = PI * r ** 2
-print("/半徑{0:3d}圓面積是{1:10.2f}/".format(r,area))
-print("/半徑{0:>3d}圓面積是{1:>10.2f}/".format(r,area))
-print("/半徑{0:<3d}圓面積是{1:<10.2f}/".format(r,area))
-print("/半徑{0:^3d}圓面積是{1:^10.2f}/".format(r,area))
-
-print("------------------------------------------------------------")  # 60個
-
-title = "南極旅遊講座"
-print("/{0:*^20s}/".format(title))
-
-
-print("------------------------------------------------------------")  # 60個
-
 """ 不可用 會讓後面出現 TypeError: 'str' object is not callable
 url = "https://maps.apis.com/json?city="
 city = "taipei"
@@ -181,17 +165,6 @@ type = "school"
 print(url + city + '&radius=' + str(r) + '&type=' + type)
 print(url + "{}&radius={}&type={}".format(city, r, type))
 """
-
-print("------------------------------------------------------------")  # 60個
-
-r = 5
-PI = 3.14159
-area = PI * r ** 2
-print(f"/半徑{r:3d}圓面積是{area:10.2f}/")
-print(f"/半徑{r:>3d}圓面積是{area:>10.2f}/")
-print(f"/半徑{r:<3d}圓面積是{area:<10.2f}/")
-print(f"/半徑{r:^3d}圓面積是{area:^10.2f}/")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -208,14 +181,6 @@ my_url = url + f"{city}&radius={r}&type={type}"
 print(my_url)
 
 """
-
-print("------------------------------------------------------------")  # 60個
-
-name = '洪錦魁'
-score = 90.5
-print(f"{name = }")
-print(f"物理考試 {score = }")
-print(f"物理考試 {score = :5.2f}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -250,16 +215,6 @@ fobj2.close( )
 
 print("------------------------------------------------------------")  # 60個
 
-score = 90
-name = "洪錦魁"
-count = 1
-formatstr = "%s你的第 %d 次物理考試成績是 %d"
-print(formatstr % (name, count, score))
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 """
 loan = eval(input("請輸入貸款金額："))
 year = eval(input("請輸入年限："))
@@ -281,13 +236,6 @@ print("------------------------------------------------------------")  # 60個
 
 x = 100
 print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
-
-print("------------------------------------------------------------")  # 60個
-
-x = 10
-print("整數%d \n浮點數%f \n字串%s" % (x, x, x))
-y = 9.9
-print("整數%d \n浮點數%f \n字串%s" % (y, y, y))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -329,8 +277,6 @@ print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
 print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
 print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
 print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1282,37 +1228,6 @@ for count, drink in enumerate(drinks, 10):
 
 print("------------------------------------------------------------")  # 60個
 
-fields = ['Name', 'Age', 'Hometown']
-info = ['Peter', '30', 'Chicago']
-zipData = zip(fields, info)         # 執行zip
-#print(type(zipData))                # 列印zip資料類型
-player = list(zipData)              # 將zip資料轉成串列
-print(player)                       # 列印串列
-
-print("------------------------------------------------------------")  # 60個
-
-fields = ['Name', 'Age', 'Hometown']
-info = ['Peter', '30']
-zipData = zip(fields, info)         # 執行zip
-#print(type(zipData))                # 列印zip資料類型
-player = list(zipData)              # 將zip資料轉成串列
-print(player)                       # 列印串列
-
-print("------------------------------------------------------------")  # 60個
-
-fields = ['Name', 'Age', 'Hometown']
-info = ['Peter', '30', 'Chicago']
-zipData = zip(fields, info)         # 執行zip
-#print(type(zipData))                # 列印zip資料類型
-player = list(zipData)              # 將zip資料轉成串列
-print(player)                       # 列印串列
-
-f, i = zip(*player)                 # 執行unzip
-print("fields = ", f)
-print("info   = ", i)
-
-print("------------------------------------------------------------")  # 60個
-
 numbers1 = (1, 2, 3, 4, 5)      # 定義元組元素是整數
 fruits = ('apple', 'orange')    # 定義元組元素是字串
 val_tuple = (10,)               # 只有一個元素的元祖
@@ -1324,15 +1239,6 @@ x, y = ('apple', 'orange')
 print(x,y)
 x, y = fruits
 print(x,y)
-
-print("------------------------------------------------------------")  # 60個
-
-fields = ['台北', '台中', '高雄']
-info = [80000, 50000, 60000]
-zipData = zip(fields, info)             # 執行zip
-sold_info = tuple(zipData)              # 將zip資料轉成元組
-for city, sales in sold_info:
-    print(f'{city} 銷售金額是 {sales}')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3016,23 +2922,6 @@ print(zeroes_to_the_end([2, 3, 0, 1, 0, 5]))
 
 print('------------------------------------------------------------')	#60個
 
-#附錄 A-7
-
-def find_common_prefix(strs):
-    prefix = []
-    for c in zip(*strs):
-        if len(set(c)) == 1:
-            prefix.append(c[0])
-        else:
-             break
-    return ''.join(prefix)
-
-print(find_common_prefix(['expensive', 'export', 'experience']))
-
-print('------------------------------------------------------------')	#60個
-
-#附錄 A-8
-
 def reverse_num_digits(x):
     answer = int(str(abs(x))[::-1]) * (1 if x >= 0 else -1)
     return answer
@@ -3041,8 +2930,6 @@ print(reverse_num_digits(-123))
 
 print('------------------------------------------------------------')	#60個
 
-#附錄 A-9
-
 def reverse_binary(n):
     binary = f'{n:08b}'
     return int(binary[::-1], 2)
@@ -3050,8 +2937,6 @@ def reverse_binary(n):
 print(reverse_binary(121))
 
 print('------------------------------------------------------------')	#60個
-
-#附錄 A-10
 
 def roman_num_to_int(s):
     roman = {

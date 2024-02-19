@@ -249,8 +249,6 @@ ax.set_zlabel("z")
 
 plt.show()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 from math import floor
@@ -317,6 +315,67 @@ ax.set_box_aspect((1, 1, 25 / width))
 plt.title("Perlin noise")
 
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# fail
+
+# 三維散點圖
+from mpl_toolkits.mplot3d import Axes3D
+
+data = np.random.rand(50, 3) # 生成三維數據，每維50個
+fig = plt.figure()
+ax = Axes3D(fig)
+ax.scatter(data[:, 0], data[:, 1], data[:, 2])
+ax.set_zlabel('Z')
+ax.set_ylabel('Y')
+ax.set_xlabel('X')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#fail
+# 三維柱圖
+
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure()
+ax = Axes3D(fig)
+_x = np.arange(4)
+_y = np.arange(5)
+_xx, _yy = np.meshgrid(_x, _y) # 生成網格點座標矩陣
+x, y = _xx.ravel(), _yy.ravel() # 展開爲一維數組
+
+top = x + y
+bottom = np.zeros_like(top) # 與top數組形狀一樣，內容全部爲0
+width = depth = 1
+
+ax.bar3d(x, y, bottom, width, depth, top, shade=True)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+#fail
+
+#fail
+
+# 三維曲面圖和等高線圖
+
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure()
+ax = Axes3D(fig)
+X = np.arange(-5, 5, 0.25)
+Y = np.arange(-5, 5, 0.25)
+X, Y = np.meshgrid(X, Y)
+R = np.sqrt(X**2 + Y**2)
+Z = np.sin(R)
+surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
+ax.contourf(X,Y,Z,zdir='z',offset=-2) # 把等高線向z軸投射
+ax.set_zlim(-2,2) # 設置z軸範圍
+fig.colorbar(surf, shrink=0.5, aspect=5)
+plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

@@ -254,3 +254,82 @@ plt.fill(x, y, "g", x2, y2, "b")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(-np.pi, np.pi, 100)
+y = np.sin(2*x)                  # y陣列的變化
+
+plt.plot(x, y) 
+plt.fill_between(x, 1, y, alpha=0.1)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 函數的係數
+a = -1
+b = 2
+# 繪製區間圖形
+x = np.linspace(-2, 4, 1000)
+y = a*x**2 + b*x
+plt.plot(x, y, color='b')
+plt.fill_between(x, y1=y, y2=0, where=(x>=-2)&(x<=5),
+                 facecolor='lightgreen')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+x = np.linspace(-np.pi, np.pi, 100)
+y = np.sin(3*x)                  # y陣列的變化
+
+plt.plot(x, y) 
+plt.fill_between(x, 0, y, color='green', alpha=0.1)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 函數f(x)的係數
+a1 = 1
+c1 = -2
+x = np.linspace(-2, 3, 1000)
+y1 = a1*x**2 + c1
+plt.plot(x, y1, color='b')      # 藍色是 f(x)
+
+# 函數g(x)的係數
+a2 = -1
+b2 = 2
+c2 = 2
+x = np.linspace(-2, 3, 1000)
+y2 = a2*x**2 + b2*x + c2
+plt.plot(x, y2, color='g')      # 綠色是 g(x)
+
+# 繪製區間
+plt.fill_between(x, y1=y1, y2=y2, where=(x>=-1)&(x<=2),
+                 facecolor='yellow')
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+

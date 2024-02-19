@@ -9,7 +9,7 @@ df = pd.DataFrame({"a":[1,3], "b":[2,4]}, index=['line1', 'line2'])
 print(df.index) # 顯示行索引
 print(df.columns) # 顯示列索引
 
-
+print('------------------------------------------------------------')	#60個
 
 # 多重索引
 df = pd.read_excel('data/test.xlsx', header=[0,1]) # 指定前兩行爲列索引
@@ -19,13 +19,9 @@ print(df.columns.values) # 查看列索引內容
 df.columns = ['_'.join(col).strip() for col in df.columns.values] # 重置字段名
 print(df)
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
-
-# 3.4.1 Python日期時間處理
+# Python日期時間處理
 # 時間點
 from datetime import datetime
 d1 = datetime.now() # 獲取當前時間
@@ -33,7 +29,6 @@ print(d1)
 print(d1.year, d1.month, d1.day, d1.hour, d1.minute, d1.second)
 d2 = datetime(2019, 3, 27) # 通過指定日期構造datetime
 print(d2)
-
 
 # 時間段
 from datetime import timedelta
@@ -67,7 +62,9 @@ print(str(d))
 
 print(d.strftime("%Y/%m/%d %H:%M:%S"))
 
-#3.4.2 Pandas日期時間處理
+print('------------------------------------------------------------')	#60個
+
+# Pandas日期時間處理
 # 時間點TimeStamp
 
 t = pd.to_datetime('2019-03-01 00:00:00') # 從字符串轉換
@@ -95,7 +92,9 @@ df = pd.DataFrame({'d':arr})
 df['d'] = pd.to_datetime(df['d'])
 print(df)
 
-# 3.4.3 時間序列操作
+print('------------------------------------------------------------')	#60個
+
+# 時間序列操作
 # 時間日期類型索引
 df.index = pd.to_datetime(df['d']) # 本例中使用了上例中構造的df[‘d’]
 print(df.index)
@@ -120,6 +119,7 @@ df_dt = df_period.to_timestamp()
 print(df_dt.head(3))
 print(type(df_dt.index))
 
+print('------------------------------------------------------------')	#60個
 
 # 篩選和切分
 print(df['2019'])  # 篩選2019全年數據
@@ -158,6 +158,9 @@ df['emw_3'] = df['val'].ewm(span=3).mean()
 df['emw_7'] = df['val'].ewm(span=7).mean()
 df['rolling'] = df['val'].rolling(7).mean()
 
+
+print('------------------------------------------------------------')	#60個
+
 # 時區轉換
 
 import pytz
@@ -186,7 +189,9 @@ df.index = df.index.tz_convert('Asia/Shanghai')
 print(df.index.values)
 print(df.index)
 
-# 3.4.4 數據重排
+print('------------------------------------------------------------')	#60個
+
+# 數據重排
 # 數據錶轉置
 df = pd.DataFrame({"a":[1,2],"b":[3,4]}, index=['l1','l2'])
 print(df)
@@ -215,26 +220,7 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
+print('作業完成')
 print('------------------------------------------------------------')	#60個
 
 

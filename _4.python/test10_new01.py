@@ -3566,91 +3566,9 @@ print("共需花費: %d 元" % x)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 phrase = ["三陽開泰", "事事如意", "五福臨門"]
 for index, x in enumerate(phrase):
     print("{0}--{1}".format(index, x))
-
-print("------------------------------------------------------------")  # 60個
-
-
-X = [1, 2, 3, 4, 5]
-Y = [1, 4, 9, 16, 25]
-Z = list(zip(X, Y))  # zip : 兩串或更多串資料，同編號放一起的動作
-print(Z)
-
-
-X, Y = zip(*Z)  # Z裡面的點一個一個拿出來
-print(X)
-print(Y)
-
-print("------------------------------------------------------------")  # 60個
-
-a = [1, 2, 3]
-b = ["a", "b", "c"]
-c = zip(a, b)
-print(list(c))  # 输出 [(1, 'a'), (2, 'b'), (3, 'c')]
-
-
-loc = ([1, 2, 3, 4], [11, 12, 13, 14])
-for i in zip(*loc):
-    print(i)
-
-
-x = [1, 2, 3]
-y = [4, 5, 6]
-z = [7, 8, 9]
-t = (x, y, z)
-print(t)
-for i in zip(*t):
-    print(i)
-
-
-# 4-3-3 在 list 生成式用 zip() 同時走訪多個容器
-
-a = [1, -2, 3, -4, 5]
-b = [9, 8, -7, -6, -5]
-
-print([[x, y] for x, y in zip(a, b)])
-print([x + y for x, y in zip(a, b)])
-
-print("------------------------------------------------------------")  # 60個
-
-a = [1, -2, 3, -4, 5]
-
-b = [9, 8, -7, -6, -5]
-
-print([x + y for x, y in zip(a, b) if x + y >= 0])
-
-
-# 4-3-4 以巢狀 list 生成式產生複合 list
-
-a = [1, 2, 3]
-
-b = ["A", "B"]
-
-print([[x, y] for x in a for y in b])
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-num1 = [1, 3, 5]
-num2 = [2, 4, 6]
-num3 = num1 + num2  # 字串為主的串列相加
-print(num3)
-
-print("------------------------------------------------------------")  # 60個
-
-strN = "DeepStone"
-strU = strN.upper()  # 改成大寫
-strL = strN.lower()  # 改成小寫
-strT = strN.title()  # 改成第一個字母大寫其他小寫
-print("大寫輸出:", strU, "\n小寫輸出:", strL, "\n第一字母大寫:", strT)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5442,53 +5360,6 @@ for drink in enumerate(drinks, 10):  # 數值初始是10
     print(drink)
 for count, drink in enumerate(drinks, 10):
     print(count, drink)
-
-print("------------------------------------------------------------")  # 60個
-
-fields = ["Name", "Age", "Hometown"]
-info = ["Peter", "30", "Chicago"]
-zipData = zip(fields, info)  # 執行zip
-print(type(zipData))  # 列印zip資料類型
-player = list(zipData)  # 將zip資料轉成串列
-print(player)  # 列印串列
-
-print("------------------------------------------------------------")  # 60個
-
-fields = ["Name", "Age", "Hometown"]
-info = ["Peter", "30"]
-zipData = zip(fields, info)  # 執行zip
-print(type(zipData))  # 列印zip資料類型
-player = list(zipData)  # 將zip資料轉成串列
-print(player)  # 列印串列
-
-print("------------------------------------------------------------")  # 60個
-
-fields = ["Name", "Age", "Hometown"]
-info = ["Peter", "30", "Chicago"]
-zipData = zip(fields, info)  # 執行zip
-print(type(zipData))  # 列印zip資料類型
-player = list(zipData)  # 將zip資料轉成串列
-print(player)  # 列印串列
-
-f, i = zip(*player)  # 執行unzip
-print("fields = ", f)
-print("info   = ", i)
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25}
-print("舊fruits字典內容:", fruits)
-del fruits["西瓜"]
-print("新fruits字典內容:", fruits)
-
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25}
-print("舊fruits字典內容:", fruits)
-fruits.clear()
-print("新fruits字典內容:", fruits)
-
 
 print("------------------------------------------------------------")  # 60個
 

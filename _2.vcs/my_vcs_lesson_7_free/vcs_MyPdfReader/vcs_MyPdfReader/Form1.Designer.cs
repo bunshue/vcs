@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
+            this.lb_main_mesg2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lb_main_mesg1
@@ -44,11 +45,24 @@
             this.lb_main_mesg1.TabIndex = 135;
             this.lb_main_mesg1.Text = "mesg1";
             // 
+            // lb_main_mesg2
+            // 
+            this.lb_main_mesg2.AutoSize = true;
+            this.lb_main_mesg2.BackColor = System.Drawing.Color.Black;
+            this.lb_main_mesg2.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg2.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg2.Location = new System.Drawing.Point(699, 51);
+            this.lb_main_mesg2.Name = "lb_main_mesg2";
+            this.lb_main_mesg2.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg2.TabIndex = 136;
+            this.lb_main_mesg2.Text = "mesg2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 111);
+            this.Controls.Add(this.lb_main_mesg2);
             this.Controls.Add(this.lb_main_mesg1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -64,6 +78,7 @@
         #endregion
 
         private System.Windows.Forms.Label lb_main_mesg1;
+        private System.Windows.Forms.Label lb_main_mesg2;
     }
 }
 
