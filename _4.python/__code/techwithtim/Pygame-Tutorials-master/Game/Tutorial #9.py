@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 
 win = pygame.display.set_mode((500,480))
@@ -12,8 +13,8 @@ char = pygame.image.load('standing.png')
 
 clock = pygame.time.Clock()
 
-bulletSound = pygame.mixer.Sound('bullet.wav')
-hitSound = pygame.mixer.Sound('hit.wav')
+bulletSound = pygame.mixer.Sound('bullet.mp3')
+hitSound = pygame.mixer.Sound('hit.mp3')
 
 music = pygame.mixer.music.load('music.mp3')
 pygame.mixer.music.play(-1)
@@ -241,5 +242,3 @@ while run:
     redrawGameWindow()
 
 pygame.quit()
-
-

@@ -16,7 +16,6 @@ namespace vcs_ListViewEx2
 		private System.Windows.Forms.ColumnHeader columnHeader1;
 		private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ImageList imageList1;
         private RichTextBox richTextBox1;
 		private System.ComponentModel.IContainer components;
 
@@ -50,7 +49,6 @@ namespace vcs_ListViewEx2
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Item1");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Item2");
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Item3");
@@ -59,19 +57,12 @@ namespace vcs_ListViewEx2
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Item6");
             System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Item7");
             System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Item8");
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.listView1 = new vcs_ListViewEx2.ListViewEx();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // richTextBox1
             // 
@@ -132,7 +123,6 @@ namespace vcs_ListViewEx2
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listView1);
             this.Name = "Form1";
-            this.Text = "";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
@@ -153,15 +143,7 @@ namespace vcs_ListViewEx2
         {
             // Create some controls and embed them in our ListView
 
-            // First, a button:
-            Button btn = new Button();
-            btn.Text = "ClickMe";
-            btn.BackColor = SystemColors.Control;
-            btn.Font = this.Font;
-            btn.Click += new EventHandler(btn_Click);
-            // Put it in the first column of the fourth row
-            listView1.AddEmbeddedControl(btn, 0, 3);
-
+            /*
             // Second, a RichTextBox (slightly modified to make it non-selectable)
             ReadOnlyRichTextBox rtb = new ReadOnlyRichTextBox();
             rtb.ScrollBars = RichTextBoxScrollBars.None;
@@ -172,15 +154,65 @@ namespace vcs_ListViewEx2
             rtb.Rtf = @"{\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fnil\fcharset0 Arial;}}{\colortbl ;\red255\green0\blue0;}\viewkind4\uc1\pard\fs14 Sample\cf1\b\fs20 Entry\cf0\par}";
             // Embed it
             listView1.AddEmbeddedControl(rtb, 2, 5);
+            */
 
-            // Third, a number of ProcessBars that will be updated by a timer
-            Random r = new Random();
             foreach (ListViewItem i in listView1.Items)
             {
-                int cnt = r.Next(100);
+                int cnt = 123;
                 i.SubItems.Add(cnt.ToString());
-
+                //cnt = 234;
+                //i.SubItems.Add(cnt.ToString());
             }
+
+            Button btn0 = new Button();
+            btn0.Text = "ClickMe0";
+            btn0.BackColor = SystemColors.Control;
+            btn0.Font = this.Font;
+            btn0.Click += new EventHandler(btn_Click);
+            listView1.AddEmbeddedControl(btn0, 2, 0);
+
+            Button btn1 = new Button();
+            btn1.Text = "ClickMe1";
+            btn1.BackColor = SystemColors.Control;
+            btn1.Font = this.Font;
+            btn1.Click += new EventHandler(btn_Click);
+            listView1.AddEmbeddedControl(btn1, 2, 1);
+
+
+            Button btn2 = new Button();
+            btn2.Text = "ClickMe2";
+            btn2.BackColor = SystemColors.Control;
+            btn2.Font = this.Font;
+            btn2.Click += new EventHandler(btn_Click);
+            listView1.AddEmbeddedControl(btn2, 2, 2);
+
+
+            Button btn3 = new Button();
+            btn3.Text = "ClickMe3";
+            btn3.BackColor = SystemColors.Control;
+            btn3.Font = this.Font;
+            btn3.Click += new EventHandler(btn_Click);
+            listView1.AddEmbeddedControl(btn3, 2, 3);
+
+
+            Button btn4 = new Button();
+            btn4.Text = "ClickMe4";
+            btn4.BackColor = SystemColors.Control;
+            btn4.Font = this.Font;
+            btn4.Click += new EventHandler(btn_Click);
+            listView1.AddEmbeddedControl(btn4, 2, 4);
+
+
+            Button btn5 = new Button();
+            btn5.Text = "ClickMe5";
+            btn5.BackColor = SystemColors.Control;
+            btn5.Font = this.Font;
+            btn5.Click += new EventHandler(btn_Click);
+            listView1.AddEmbeddedControl(btn5, 2, 5);
+
+
+
+
 
         }
 

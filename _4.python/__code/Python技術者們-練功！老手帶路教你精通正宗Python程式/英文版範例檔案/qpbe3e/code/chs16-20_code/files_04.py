@@ -8,6 +8,7 @@ ARCHIVE_WEEKDAY = 1
 if __name__ == '__main__':
     
     cur_path = pathlib.Path(".")
+    print(cur_path)
     zip_file_path = cur_path.joinpath(ARCHIVE)
 
     paths = zip_file_path.glob(FILE_PATTERN)

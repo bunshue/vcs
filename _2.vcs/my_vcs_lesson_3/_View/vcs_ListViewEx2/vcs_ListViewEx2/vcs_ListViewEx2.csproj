@@ -94,9 +94,6 @@
     <Compile Include="ListViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ReadOnlyRichTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

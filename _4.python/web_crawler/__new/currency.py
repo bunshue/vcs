@@ -16,16 +16,12 @@ def convert_currency(base):
         print("Invalid currency.")
         return None
 
-while True:
-    base = input("Enter the base currency (q for quit): ").upper()
+print('轉換匯率')
 
-    if base == "Q":
-        break
+base = "USD"
 
-    data = convert_currency(base)
-    if not data:
-        continue
+data = convert_currency(base)
 
-    del data[base]
-    for ticker, value in data.items():
-        print(f"{ticker}: {value}")
+del data[base]
+for ticker, value in data.items():
+    print(f"{ticker}: {value}")
