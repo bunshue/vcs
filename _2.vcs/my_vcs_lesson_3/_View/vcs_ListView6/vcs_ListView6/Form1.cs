@@ -20,33 +20,33 @@ namespace vcs_ListView6
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            apply_listView();
+        }
+
+        void apply_listView()
+        {
             listView1.View = View.Details;  //把 listView1 的 View 屬性設成 Details
             listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true;
+
+            //設置標題
+            //設置列名稱、大小與對齊
+            listView1.Columns.Add("座號", 60, HorizontalAlignment.Center);
+            listView1.Columns.Add("姓名", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("國文", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("英文", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("數學", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("總分", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("平均", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("名次", 100, HorizontalAlignment.Center);
+
+            richTextBox1.Text += "目前共有 : " + listView1.Columns.Count.ToString() + " 欄\n";
+
+            add_data_to_listView();
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (listView1.Columns.Count == 0)
-            {
-                //設置列名稱、大小與對齊
-                listView1.Columns.Add("座號", 60, HorizontalAlignment.Center);
-                listView1.Columns.Add("姓名", 100, HorizontalAlignment.Center);
-                listView1.Columns.Add("國文", 100, HorizontalAlignment.Center);
-                listView1.Columns.Add("英文", 100, HorizontalAlignment.Center);
-                listView1.Columns.Add("數學", 100, HorizontalAlignment.Center);
-                listView1.Columns.Add("總分", 100, HorizontalAlignment.Center);
-                listView1.Columns.Add("平均", 100, HorizontalAlignment.Center);
-                listView1.Columns.Add("名次", 100, HorizontalAlignment.Center);
-
-                listView1.GridLines = true;
-            }
-            else
-            {
-                richTextBox1.Text += "已有標題\n";
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        void add_data_to_listView()
         {
             Random Rnd = new Random(); //加入Random，產生的數字不會重覆
             string name_string;
@@ -131,6 +131,14 @@ namespace vcs_ListView6
 
             //設置ListView最後一行可見
             listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
 
         }
 
@@ -212,7 +220,6 @@ namespace vcs_ListView6
             richTextBox1.Text += str1 + "\t" + str2 + "\t" + str3 + "\t" + str4 + "\n";
              
              */
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -450,4 +457,3 @@ namespace vcs_ListView6
         }
     }
 }
-

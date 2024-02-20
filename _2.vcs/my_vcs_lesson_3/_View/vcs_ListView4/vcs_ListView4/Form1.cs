@@ -13,12 +13,13 @@ namespace vcs_ListView4
 {
     public partial class Form1 : Form
     {
+        public static bool flag = false;//定義一個全局變量標識
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        public static bool flag = false;//定義一個全局變量標識
         private void Form1_Load(object sender, EventArgs e)
         {
             listView1.GridLines = true;//設置是否在listView1控件中顯示網格線
@@ -26,6 +27,7 @@ namespace vcs_ListView4
             listView1.Columns.Add("文件名稱", 120, HorizontalAlignment.Left);//在listView1中添加「文件名稱」列
             listView1.Columns.Add("文件屬性", 210, HorizontalAlignment.Left);//在listView1中添加「文件屬性」列
             listView1.Columns.Add("創建時間", 200, HorizontalAlignment.Left);//在listView1中添加「創建時間」列
+
             foreach (String fileName in Directory.GetFiles("C:\\"))//循環遍歷C盤目錄空間
             {
                 FileInfo file = new FileInfo(fileName);//聲明一個操作文件的實例

@@ -21,7 +21,7 @@ print("------------------------------------------------------------")  # 60個
 filenames = glob.glob("*.txt")
 for filename in filenames:
     print("檔案 :", filename)
-    text = open(filename, "rb").read()
+	text = open(filename, "rb").read()  #要用 rb
     codetype = chardet.detect(text)
     # print(type(codetype))
     # print(codetype['encoding'])

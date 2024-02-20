@@ -38,14 +38,20 @@ namespace vcs_ListView3
             ColumnHeader colHead;
             colHead = new ColumnHeader();
             colHead.Text = "Filename";
+            colHead.Width = 200;
+            colHead.TextAlign = HorizontalAlignment.Left;
             listView1.Columns.Add(colHead);
 
             colHead = new ColumnHeader();
             colHead.Text = "Size";
+            colHead.Width = 100;
+            colHead.TextAlign = HorizontalAlignment.Left;
             listView1.Columns.Add(colHead);
 
             colHead = new ColumnHeader();
             colHead.Text = "Last Accessed";
+            colHead.Width = 200;
+            colHead.TextAlign = HorizontalAlignment.Left;
             listView1.Columns.Add(colHead);
         }
 
@@ -65,7 +71,6 @@ namespace vcs_ListView3
                 //顯示本機文件夾及文件
 
                 listView1.Items.Clear();
-
 
                 //labPathName.Text = root;
                 listView1.BeginUpdate();
@@ -112,6 +117,7 @@ namespace vcs_ListView3
 
         void listView1_ItemActivate(object sender, EventArgs e)
         {
+            richTextBox1.Text += "aaaaaaaaaaaaaaaaa\n";
             ListView lw = (ListView)sender; //將觸發此事件的對象轉換為該ListView對象
 
             string filename = lw.SelectedItems[0].Tag.ToString();

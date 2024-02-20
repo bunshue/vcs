@@ -499,6 +499,7 @@ namespace vcs_MyPdfReader
             pdf_filename_data.Reverse();
 
             listView1.Clear();
+
             //設置欄名稱
             listView1.Columns.Add("檔名", 400, HorizontalAlignment.Left);
             listView1.Columns.Add("頁數", 80, HorizontalAlignment.Center);
