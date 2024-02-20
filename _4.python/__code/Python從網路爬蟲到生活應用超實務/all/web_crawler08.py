@@ -5,10 +5,11 @@ print('------------------------------------------------------------')	#60個
 import csv
 import requests
 from bs4 import BeautifulSoup
-'''
-print('------------------------------------------------------------')	#60個
+
+print('開眼電影網 台北週末票房排行榜------------------------------------------------------------')	#60個
 
 url = "http://app2.atmovies.com.tw/boxoffice/"
+
 r = requests.get(url)
 r.encoding = "utf8"
 soup = BeautifulSoup(r.text, "lxml")
@@ -26,6 +27,7 @@ print(items)
 
 print('------------------------------------------------------------')	#60個
 
+"""
 url = "https://movies.yahoo.com.tw/chart.html"
 csvfile = "yahoomovies.csv"
 r = requests.get(url)
@@ -55,8 +57,9 @@ with open(csvfile, 'w+', newline='') as fp:
     writer.writerow(colname)
     for item in items:
         writer.writerow(item)
+"""
 
-print('------------------------------------------------------------')	#60個
+print('愛食記------------------------------------------------------------')	#60個
 
 url = "https://ifoodie.tw/explore/台北市/list?sortby=rating"
 r = requests.get(url)
@@ -76,8 +79,7 @@ for index in range(5):
     if message: print(message.text)
     print("-------------------")
 
-
-print('------------------------------------------------------------')	#60個
+print('博客來 全站熱銷榜------------------------------------------------------------')	#60個
 
 from fake_useragent import UserAgent
 
@@ -109,11 +111,8 @@ with open(csvfile, 'w+', newline='') as fp:
     writer.writerow(["排名","名稱","網址","圖片","價格"])
     for item in items:
         writer.writerow(item)
-'''
-print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
+print('Google趨勢------------------------------------------------------------')	#60個
 
 import re
 import json

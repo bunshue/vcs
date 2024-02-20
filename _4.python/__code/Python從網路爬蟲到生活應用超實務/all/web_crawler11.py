@@ -1,7 +1,12 @@
+import os
 import requests
+from bs4 import BeautifulSoup
+
+print('------------------------------------------------------------')	#60個
 
 url = "https://fchart.github.io/img/Butterfly.png"
 path = "Butterfly.png"
+
 response = requests.get(url, stream=True)
 if response.status_code == 200:
     with open(path, 'wb') as fp:
@@ -11,14 +16,7 @@ if response.status_code == 200:
 else:
     print("錯誤! HTTP請求失敗...")
 
-
 print('------------------------------------------------------------')	#60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch11\ch11-1-2.py
-
-import requests, os 
-from bs4 import BeautifulSoup
 
 url = "https://fchart.github.io/"
 os.makedirs("fchart", exist_ok=True)
@@ -41,11 +39,6 @@ for img in soup.find_all("img"):
 print("結束網頁圖檔下載...")
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch11\ch11-2-1.py
-
-import requests, os 
-from bs4 import BeautifulSoup
 
 keyword = "dog"
 pathdir = "imgur"
@@ -73,12 +66,8 @@ print("結束 Imgur 網頁圖檔下載...")
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch11\ch11-2-2.py
-
-import requests, os 
-from selenium import webdriver
 import time
-from bs4 import BeautifulSoup
+from selenium import webdriver
 
 keyword = "dog"
 pathdir = "imgur2"
@@ -114,10 +103,8 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch11\ch11-3-1.py
-
-import time, requests, json
-from bs4 import BeautifulSoup
+import time
+import json
 
 URL = "https://www.ptt.cc" 
 url = URL + "/bbs/NBA/index.html"
@@ -192,10 +179,8 @@ with open("ptt_NBA.json", "w", encoding="utf-8") as fp:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch11\ch11-3-2.py
-
-import time, csv, requests
-from bs4 import BeautifulSoup
+import time
+import csv
 
 URL = "https://www.ptt.cc" 
 url = URL + "/bbs/beauty/index.html"
@@ -276,19 +261,15 @@ with open("ptt_beauty.csv", "w+", newline="", encoding="big5") as fp:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch11\ch11-4.py
-
 from image_downloader.image_downloader import download_csv_file_images
 
 download_csv_file_images("ptt_beauty.csv")
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch11\ch11-4a.py
-
-import time, csv
+import time
+import csv
 from selenium import webdriver
-from bs4 import BeautifulSoup
 
 keyword = "dog"
 url = "http://imgur.com/search?q=" + keyword
@@ -315,8 +296,6 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch11\ch11-4b.py
-
 from image_downloader.image_downloader import download_csv_file_images
 import pandas as pd
 
@@ -327,5 +306,10 @@ df.to_csv("imgur_dog2.csv",index=False)
 
 download_csv_file_images("imgur_dog2.csv")
 
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
 print('------------------------------------------------------------')	#60個
 

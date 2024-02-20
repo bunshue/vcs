@@ -1,6 +1,4 @@
 from pytube import YouTube
-import tkinter as tk
-from tkinter import filedialog
 
 def download_video(url, save_path):
     try:
@@ -19,15 +17,14 @@ def open_file_dialog():
 
     return folder
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.withdraw()
 
-    video_url = input("Please enter a YouTube url: ")
-    save_dir = open_file_dialog()
+video_url = "https://www.youtube.com/watch?v=IrwxueGgRYs"
+save_dir = "C:/_git/vcs/_4.python/__code/techwithtim/Python-Beginner-Automation-Projects-main"
 
-    if save_dir:
-        print("Started download...")
-        download_video(video_url, save_dir)
-    else:
-        print("Invalid save location.")
+print("Started download...")
+download_video(video_url, save_dir)
+
+print("Started download... OK")
+
+
+    

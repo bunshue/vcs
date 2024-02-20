@@ -2,21 +2,22 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 
+print('------------------------------------------------------------')	#60個
+
 url = "https://www.msn.com/zh-tw/weather/today/台北,台灣/we-city?iso=TW"
+url = 'https://www.msn.com/zh-tw/weather/forecast?iso=TW'
+
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
 span = soup.find('span', class_="current")
 print(span.text)
 print(span.get("aria-label"))
 
-
 sys.exit()
+
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-1-2.py
-
 from selenium import webdriver
-from bs4 import BeautifulSoup
 
 url = "https://www.cwb.gov.tw/V8/C/W/County/County.html?CID=65"
 driver = webdriver.Chrome("./chromedriver")
@@ -28,11 +29,6 @@ print(span.text)
 driver.quit()
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-2-1.py
-
-import requests
-from bs4 import BeautifulSoup
 
 url = "https://movies.yahoo.com.tw/movieinfo_main/復仇者聯盟-終局之戰-avengers-endgame-9728"
 response = requests.get(url)
@@ -54,11 +50,6 @@ print(company.text)
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-2-2.py
-
-import requests
-from bs4 import BeautifulSoup
-
 url = "https://zh.wikipedia.org/wiki/漫威漫畫"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "lxml")
@@ -71,11 +62,6 @@ for tr in tag_trs:
     print(th.text,":",td.text.strip())
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-3-1.py
-
-from bs4 import BeautifulSoup
-import requests
 
 url = "https://www.railway.gov.tw/tra-tip-web/tip/tip004/tip421/restCode?RestNo=A110"
 r = requests.get(url)
@@ -90,13 +76,8 @@ for item in items:
     print("便當價格:", price.text)
     print("-------------------------------")        
 
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-3-2.py
-
-from bs4 import BeautifulSoup
 from selenium import webdriver
 
 url = "https://rent.housefun.com.tw/region/�x�_��/?cid=0000"
@@ -120,10 +101,6 @@ driver.quit()
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-4-1.py
-
-import requests
-from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import csv, re, time
 
@@ -176,10 +153,6 @@ with open("movies.csv", "w+",newline="",encoding="utf-8") as fp:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-4-1a.py
-
-import requests
-from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import csv, re, time
 
@@ -236,9 +209,6 @@ with open("movies2.csv", "w+",newline="",encoding="utf-8") as fp:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-4-2.py
-
-from bs4 import BeautifulSoup
 from selenium import webdriver
 import time, json
 
@@ -279,10 +249,6 @@ with open("momo_items.json", "w", encoding="utf-8") as fp:
 
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python從網路爬蟲到生活應用超實務\ch07\ch7-5.py
-
-from bs4 import BeautifulSoup
-import requests
 import csv
 
 csvfile = "TaiwanRailway.csv"
@@ -315,4 +281,10 @@ with open(csvfile, 'w+', newline='', encoding="utf-8") as fp:
         writer.writerow(lst)
 
 print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
+
 

@@ -20,7 +20,6 @@ import matplotlib.pyplot as plt
 sns.set(style='darkgrid',color_codes=True) # 帶灰色網格的背景風格
 tips=sns.load_dataset('tips')  # 示例中的基本數據
 
-'''
 # 4.2.2 連續變量相關圖
 # Relplot關係類型圖表
 sns.relplot(x="total_bill", y="tip", hue="day",col="time", row="sex", data=tips)
@@ -182,7 +181,6 @@ with sns.cubehelix_palette(start=2.7, rot=0, dark=.5, light=.8,
 
 plt.show()
 """
-'''
 
 print('------------------------------------------------------------')	#60個
 

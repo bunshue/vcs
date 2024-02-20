@@ -24,6 +24,7 @@ print('------------------------------------------------------------')	#60個
 # Python日期時間處理
 # 時間點
 from datetime import datetime
+
 d1 = datetime.now() # 獲取當前時間
 print(d1)
 print(d1.year, d1.month, d1.day, d1.hour, d1.minute, d1.second)
@@ -158,13 +159,13 @@ df['emw_3'] = df['val'].ewm(span=3).mean()
 df['emw_7'] = df['val'].ewm(span=7).mean()
 df['rolling'] = df['val'].rolling(7).mean()
 
-
 print('------------------------------------------------------------')	#60個
 
 # 時區轉換
 
 import pytz
-print(pytz.common_timezones[:3])
+print('時區個數 :', len(pytz.common_timezones))
+print('前3個 :', pytz.common_timezones[:3])
 
 import datetime
 t = datetime.datetime.now()
@@ -210,10 +211,6 @@ df = pd.DataFrame({"時間":['期中','期末','期中','期末'],
                    "分數":[89,75,90,95]})
 df1 = df.pivot(index='時間', columns='學科', values='分數')
 print(df, df1)
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
