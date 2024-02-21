@@ -345,6 +345,48 @@ print(msg)
 
 print('------------------------------------------------------------')	#60個
 
+all_files = sorted(os.listdir('system'))
+
+print(pathlib.Path.cwd())
+
+path1 = pathlib.Path.cwd() / 'system'
+print(path1)
+
+for i, _ in enumerate(all_files[:-1]):  #跳過最後一個
+    print(i, _)
+
+print("------------------------------------------------------------")  # 60個
+
+HERE = pathlib.Path(__file__).resolve().parent
+
+print(HERE)
+
+cc = pathlib.Path
+print(cc)
+
+cc = pathlib.Path.home() / ".pydicom"
+
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+cur_path = pathlib.Path(".")
+FILE_PATTERN = "*.txt"
+path_list = cur_path.glob(FILE_PATTERN)
+print(list(path_list))
+# [PosixPath('item_attributes.txt'), PosixPath('related_items.txt'), PosixPath('item_info.txt')]
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "test10_new07.py"
+filename = "C:/_git/vcs/_4.python/_data/蘇軾_念奴嬌_赤壁懷古.txt"
+
+try:
+    p = pathlib.Path(filename)  # 文字檔案的
+    text = p.read_text(encoding="UTF-16")  # 載入文字
+    print(text)  # 顯示
+except:
+    print("程式執行失敗。")  # 出現錯誤時
 
 print('------------------------------------------------------------')	#60個
 

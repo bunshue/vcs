@@ -13,11 +13,14 @@ using System.Runtime.InteropServices;   //for DllImport
 using System.Text.RegularExpressions;
 using System.Diagnostics;       //for Process
 
+//方案總管/右鍵/加入/現有項目, 選擇ListViewEx.cs
+//編譯後, 工具箱出現ListViewEx控件
+
 namespace vcs_MyPdfReader
 {
     public partial class Form_List : Form
     {
-        ListView listView1 = new ListView();
+        ListViewEx listView1 = new ListViewEx();
         RichTextBox richTextBox1 = new RichTextBox();
 
         string pdf_reader_filename = "vcs_MyPdfReader.txt";
@@ -99,7 +102,8 @@ namespace vcs_MyPdfReader
             listView1.Columns.Add("頁數", 50, HorizontalAlignment.Center);
             listView1.Columns.Add("總頁數", 50, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 790, HorizontalAlignment.Left);
+            listView1.Columns.Add("", 40, HorizontalAlignment.Center);
 
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
@@ -505,7 +509,8 @@ namespace vcs_MyPdfReader
             listView1.Columns.Add("頁數", 80, HorizontalAlignment.Center);
             listView1.Columns.Add("總頁數", 80, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 900, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 790, HorizontalAlignment.Left);
+            listView1.Columns.Add("", 40, HorizontalAlignment.Center);
 
             richTextBox1.Text += "共有 " + len.ToString() + " 個項目\n";
 

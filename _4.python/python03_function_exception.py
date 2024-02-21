@@ -453,6 +453,160 @@ print('try-except-else-finally SP-----------------------------------------------
 
 print('------------------------------------------------------------')	#60個
 
+fields = ["Name", "Age", "Hometown"]
+info = ["Peter", "30", "Chicago"]
+zipData = zip(fields, info)  # 執行zip
+# print(type(zipData))                # 列印zip資料類型
+player = list(zipData)  # 將zip資料轉成串列
+print(player)  # 列印串列
+
+print("------------------------------------------------------------")  # 60個
+
+fields = ["Name", "Age", "Hometown"]
+info = ["Peter", "30"]
+zipData = zip(fields, info)  # 執行zip
+# print(type(zipData))                # 列印zip資料類型
+player = list(zipData)  # 將zip資料轉成串列
+print(player)  # 列印串列
+
+print("------------------------------------------------------------")  # 60個
+
+fields = ["Name", "Age", "Hometown"]
+info = ["Peter", "30", "Chicago"]
+zipData = zip(fields, info)  # 執行zip
+# print(type(zipData))                # 列印zip資料類型
+player = list(zipData)  # 將zip資料轉成串列
+print(player)  # 列印串列
+
+f, i = zip(*player)  # 執行unzip
+print("fields = ", f)
+print("info   = ", i)
+
+print("------------------------------------------------------------")  # 60個
+
+fields = ["台北", "台中", "高雄"]
+info = [80000, 50000, 60000]
+zipData = zip(fields, info)  # 執行zip
+sold_info = tuple(zipData)  # 將zip資料轉成元組
+for city, sales in sold_info:
+    print(f"{city} 銷售金額是 {sales}")
+
+print("------------------------------------------------------------")  # 60個
+
+
+def find_common_prefix(strs):
+    prefix = []
+    for c in zip(*strs):
+        if len(set(c)) == 1:
+            prefix.append(c[0])
+        else:
+            break
+    return "".join(prefix)
+
+
+print(find_common_prefix(["expensive", "export", "experience"]))
+
+print("------------------------------------------------------------")  # 60個
+
+X = [1, 2, 3, 4, 5]
+Y = [1, 4, 9, 16, 25]
+Z = list(zip(X, Y))  # zip : 兩串或更多串資料，同編號放一起的動作
+print(Z)
+
+
+X, Y = zip(*Z)  # Z裡面的點一個一個拿出來
+print(X)
+print(Y)
+
+print("------------------------------------------------------------")  # 60個
+
+a = [1, 2, 3]
+b = ["a", "b", "c"]
+c = zip(a, b)
+print(list(c))  # 输出 [(1, 'a'), (2, 'b'), (3, 'c')]
+
+
+loc = ([1, 2, 3, 4], [11, 12, 13, 14])
+for i in zip(*loc):
+    print(i)
+
+
+x = [1, 2, 3]
+y = [4, 5, 6]
+z = [7, 8, 9]
+t = (x, y, z)
+print(t)
+for i in zip(*t):
+    print(i)
+
+
+# 4-3-3 在 list 生成式用 zip() 同時走訪多個容器
+
+a = [1, -2, 3, -4, 5]
+b = [9, 8, -7, -6, -5]
+
+print([[x, y] for x, y in zip(a, b)])
+print([x + y for x, y in zip(a, b)])
+
+print("------------------------------------------------------------")  # 60個
+
+a = [1, -2, 3, -4, 5]
+
+b = [9, 8, -7, -6, -5]
+
+print([x + y for x, y in zip(a, b) if x + y >= 0])
+
+
+# 4-3-4 以巢狀 list 生成式產生複合 list
+
+a = [1, 2, 3]
+
+b = ["A", "B"]
+
+print([[x, y] for x in a for y in b])
+
+
+print("------------------------------------------------------------")  # 60個
+
+fields = ["Name", "Age", "Hometown"]
+info = ["Peter", "30", "Chicago"]
+zipData = zip(fields, info)  # 執行zip
+print(type(zipData))  # 列印zip資料類型
+player = list(zipData)  # 將zip資料轉成串列
+print(player)  # 列印串列
+
+print("------------------------------------------------------------")  # 60個
+
+fields = ["Name", "Age", "Hometown"]
+info = ["Peter", "30"]
+zipData = zip(fields, info)  # 執行zip
+print(type(zipData))  # 列印zip資料類型
+player = list(zipData)  # 將zip資料轉成串列
+print(player)  # 列印串列
+
+print("------------------------------------------------------------")  # 60個
+
+fields = ["Name", "Age", "Hometown"]
+info = ["Peter", "30", "Chicago"]
+zipData = zip(fields, info)  # 執行zip
+print(type(zipData))  # 列印zip資料類型
+player = list(zipData)  # 將zip資料轉成串列
+print(player)  # 列印串列
+
+f, i = zip(*player)  # 執行unzip
+print("fields = ", f)
+print("info   = ", i)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

@@ -10,7 +10,6 @@ using System.Windows.Forms;
 //方案總管/右鍵/加入/現有項目, 選擇ListViewEx.cs
 //編譯後, 工具箱出現ListViewEx控件
 
-
 namespace vcs_ListViewEx2
 {
     public partial class Form1 : Form
@@ -176,6 +175,21 @@ namespace vcs_ListViewEx2
         private void btn_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += ((Button)sender).Name + "\n";
+
+            int cnt = listViewEx1.SelectedItems.Count;
+            richTextBox1.Text += cnt.ToString() + "\n";
+            if (cnt > 0)
+            {
+                int selNdx = listViewEx1.SelectedIndices[0];
+                listViewEx1.Items[selNdx].Selected = true;    //選到的項目
+                richTextBox1.Text += "你選了 " + selNdx.ToString() + "\n";
+
+
+            }
+
+
+
+            //richTextBox1.Text += listViewEx1.SelectedIndices[0].ToString() + "\n";
         }
 
 

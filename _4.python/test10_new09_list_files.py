@@ -19,10 +19,8 @@ print('ls 測試 glob.glob')
 
 import os
 import sys
-
-print("------------------------------------------------------------")  # 60個
-
 import glob
+import stat
 
 print("------------------------------------------------------------")  # 60個
 
@@ -32,13 +30,6 @@ for filename in filenames:
     print("檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
-
-
-import os
-import glob
-
-import sys
-import stat
 
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 
@@ -228,7 +219,6 @@ def list_files1(foldername, callback):
 
 def visitfile(file):
     print("visiting", file)
-
 
 list_files1(foldername, visitfile)
 
@@ -665,14 +655,9 @@ print('ls 測試 glob.glob') SP
 
 """
 
-
-import os
-
-
 print("------------------------------------------------------------")  # 60個
 
 stats = {}
-
 
 def addstats(ext, key, n):
     d = stats.setdefault(ext, {})

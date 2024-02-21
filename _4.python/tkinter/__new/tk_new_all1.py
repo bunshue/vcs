@@ -1,3 +1,5 @@
+import sys
+
 import tkinter as tk
 
 window = tk.Tk()
@@ -16,6 +18,8 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 # 設定主視窗標題
 title = "這是主視窗"
 window.title(title)
+
+print('------------------------------------------------------------')	#60個
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 

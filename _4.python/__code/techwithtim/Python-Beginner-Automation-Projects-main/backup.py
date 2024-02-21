@@ -1,11 +1,17 @@
+"""
+自動備份檔案程式
+
+
+"""
+
 import os
 import shutil
 import datetime
 import schedule
 import time
 
-source_dir = "C:/Users/Tim/Pictures/Screenshots"
-destination_dir = "C:/Users/Tim/Desktop/Backups"
+source_dir = "C:/dddddddddd111"
+destination_dir = "C:/dddddddddd222"
 
 def copy_folder_to_directory(source, dest):
     today = datetime.date.today()
@@ -18,7 +24,7 @@ def copy_folder_to_directory(source, dest):
         print(f"Folder already exists in: {dest}")
 
 
-schedule.every().day.at("18:57").do(lambda: copy_folder_to_directory(source_dir, destination_dir))
+schedule.every().day.at("17:13").do(lambda: copy_folder_to_directory(source_dir, destination_dir))
 
 while True:
     schedule.run_pending()
