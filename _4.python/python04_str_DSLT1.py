@@ -350,25 +350,26 @@ print(mydict)  # 列印字典
 
 print("------------------------------------------------------------")  # 60個
 
-abc = "abcdefghijklmnopqrstuvwxyz"
-encry_dict = {}
-front3 = abc[:3]
-end23 = abc[3:]
-subText = end23 + front3
-encry_dict = dict(zip(abc, subText))  # 建立字典
-print("列印編碼字典\n", encry_dict)  # 列印字典
+cname = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
+ename = ["mouse", "ox", "tiger", "rabbit",
+         "dragon", "snake", "horse", "goat",
+         "monkey", "chicken", "dog", "pig"]
 
-# msgTest = input("請輸入原始字串 : ")
-msgTest = "catdogelephant"
+#將兩個串列編在一起組成字典
+name_dict = dict(zip(cname, ename))  # 建立字典
+
+print("列印編碼字典\n", name_dict)  # 列印字典
+
+msgTest = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
 
 cipher = []  # 串列
 for i in msgTest:  # 執行每個字元加密
-    v = encry_dict[i]  # 加密
+    v = name_dict[i]  # 加密
     cipher.append(v)  # 加密結果
 ciphertext = "".join(cipher)  # 將串列轉成字串
 
-print("原始字串 ", msgTest)
-print("加密字串 ", ciphertext)
+print("原始字串 :", msgTest)
+print("編碼字串 :", ciphertext)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -425,16 +426,21 @@ print(type(animals))
 print(animals)
 
 print(animals["鼠"])
+
+print("加入一項 兔")
 animals["兔"] = 6
 print(animals)
 
+print("修改一項 鼠")
 animals["鼠"] = 5
 print(animals)
 
-animals["兔"] = 8
+print("修改一項 牛")
+animals["牛"] = 45
 print(animals)
 
-animals.pop("兔")
+print("刪除某一項 虎")
+animals.pop("虎")
 print(animals)
 
 print(animals.keys())
@@ -599,48 +605,31 @@ for aaa in _size_factors:
 
 print("------------------------------------------------------------")  # 60個
 
-import os
-import string
-
 print("字典的用法 encoding")
+print('字典裡面的values是tuple')
 codecs = {
     "cn": ("gb2312", "gbk", "gb18030", "hz"),
     "tw": ("big5", "cp950"),
-    "hk": ("big5hkscs",),
-    "jp": (
-        "cp932",
-        "shift_jis",
-        "euc_jp",
-        "euc_jisx0213",
-        "shift_jisx0213",
-        "euc_jis_2004",
-        "shift_jis_2004",
-    ),
-    "kr": ("cp949", "euc_kr", "johab"),
-    "iso2022": (
-        "iso2022_jp",
-        "iso2022_jp_1",
-        "iso2022_jp_2",
-        "iso2022_jp_2004",
-        "iso2022_jp_3",
-        "iso2022_jp_ext",
-        "iso2022_kr",
-    ),
-}
+    "hk": ("big5hkscs"),
+    "jp": ("cp932","shift_jis","euc_jp"),
+    "kr": ("cp949", "euc_kr", "johab")
+    }
 
 print(type(codecs))
 print(codecs)
 
+print(type(codecs["kr"]))
+print(codecs["kr"])
+
 for loc, encodings in codecs.items():
+    print()
     for enc in encodings:
         print(enc)
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("字典的排序, 使用lambda")
 
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
 animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
 print(type(animals))
 print(animals.items())
@@ -1964,6 +1953,7 @@ animals = [
 ]
 print(type(animals))
 print(animals)
+
 
 
 

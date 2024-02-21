@@ -1,4 +1,4 @@
-#.format
+# .format
 
 import os
 import sys
@@ -283,6 +283,7 @@ import platform
 from types import ModuleType
 from typing import Optional, Tuple, List, cast
 
+
 def print_table(version_rows: List[Tuple[str, str]]) -> None:
     row_format = "{:12} | {}"
     print(row_format.format("module", "version"))
@@ -425,6 +426,7 @@ print("------------------------------------------------------------")  # 60個
 
 import string
 
+
 def encrypt(text, encryDict):  # 加密文件
     cipher = []
     for i in text:  # 執行每個字元加密
@@ -448,6 +450,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("顯示資料夾內的特定格式的檔案")
 
+
 def is_image(filename):
     f = filename.lower()
     return (
@@ -460,6 +463,7 @@ def is_image(filename):
         or f.endswith(".svg")
     )
 
+
 def find_similar_images(foldername):
     image_filenames = []
     image_filenames += [
@@ -469,6 +473,7 @@ def find_similar_images(foldername):
     ]
     for img in sorted(image_filenames):
         print(img)
+
 
 foldername = "C:/_git/vcs/_1.data/______test_files2"
 find_similar_images(foldername)
@@ -491,6 +496,7 @@ def decimalToHex(decimalValue):
 
     return hex
 
+
 # Convert an integer to a single hex digit in a character
 def toHexChar(hexValue):
     if 0 <= hexValue <= 9:
@@ -508,6 +514,7 @@ hexValue = decimalToHex(decimalValue)
 print("decimal : %d\thex : %s" % (decimalValue, hexValue))
 
 print("------------------------------------------------------------")  # 60個
+
 
 # 檢查有無包含中文
 def is_contains_chinese():
@@ -528,6 +535,7 @@ is_contains_chinese()
 
 print("------------------------------------------------------------")  # 60個
 
+
 def gcd(a, b):
     """Calculate the Greatest Common Divisor of a and b.
     Unless b==0, the result will have the same sign as b (so that when
@@ -537,12 +545,14 @@ def gcd(a, b):
         a, b = b, a % b
     return a
 
+
 a = 28
 b = 49
 c = gcd(a, b)
 print(c)
 
 print("------------------------------------------------------------")  # 60個
+
 
 def gcd(a, b):
     if a < b:
@@ -553,15 +563,19 @@ def gcd(a, b):
         b = tmp
     return a
 
+
 a, b = 24, 36
 print("最大公約數是 : ", gcd(a, b))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def test():
     for x in "abcde":
         for y in "12345":
             print(y, x, end=" ")
+
+
 test()
 
 print("------------------------------------------------------------")  # 60個
@@ -687,6 +701,7 @@ for y in range(0, H, h):
 
 print("------------------------------------------------------------")  # 60個
 
+
 def hexToDecimal(hex):
     decimalValue = 0
     for i in range(len(hex)):
@@ -698,11 +713,13 @@ def hexToDecimal(hex):
 
     return decimalValue
 
+
 def hexCharToDecimal(ch):
     if "A" <= ch <= "F":
         return 10 + ord(ch) - ord("A")
     else:
         return ord(ch) - ord("0")
+
 
 hex = "aa"
 decimal = hexToDecimal(hex.upper())
@@ -714,7 +731,7 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-print('字串 轉 串列')
+print("字串 轉 串列")
 b = "ABCDEFGHIJK"
 c = list(b)  # list
 print(type(c))
@@ -722,7 +739,7 @@ print(c)
 
 print("反相")
 for d in reversed(c):
-    print(d, end = " ")
+    print(d, end=" ")
 print()
 
 print("------------------------------------------------------------")  # 60個
@@ -811,7 +828,7 @@ print("串列元素由小到大排序: ", sorted(list1))
 
 print("------------------------------------------------------------")  # 60個
 
-print('y = x ^ 2')
+print("y = x ^ 2")
 x = [x for x in range(21)]
 y = [(y * y) for y in x]
 
@@ -879,14 +896,18 @@ print(result(3))  # 輸出數值8
 
 print("------------------------------------------------------------")  # 60個
 
+
 def formula(x, y):  # 自訂函數
     return 3 * x + 2 * y
+
 
 result = lambda x: 3 * x - 1  # lambda()函數
 print(result(3))  # 輸出數值8
 
+
 def formula(x, y):  # 自訂函數
     return 3 * x + 2 * y
+
 
 formula = lambda x, y: 3 * x + 2 * y  # 表示lambda有二個參數
 print(formula(5, 10))  # 傳入兩個數值讓lambda()函數做運算，輸出數值35
@@ -985,12 +1006,14 @@ def num2words(num_string):
             if not (hundreds == tens == ones == "0"):
                 word_string = _handle1to999(hundreds, tens, ones) + name + word_string
 
+
 # 處理1~999的函式
 def _handle1to999(hundreds, tens, ones):
     if hundreds == "0":
         return _handle1to99(tens, ones)
     else:
         return _1to9dict[hundreds] + " hundred " + _handle1to99(tens, ones)
+
 
 # 處理1~99的函式
 def _handle1to99(tens, ones):
@@ -1000,6 +1023,7 @@ def _handle1to99(tens, ones):
         return _10to19dict[ones]
     else:
         return _20to90dict[tens] + " " + _1to9dict[ones]
+
 
 num = "12345678"
 # 將第一個命令列參數值轉為英文，其餘命令列參數不處理
@@ -1122,7 +1146,7 @@ print([x for x in str_list if len(x) >= 3])
 
 print("------------------------------------------------------------")  # 60個
 
-print('3個字典 組成 一個串列')
+print("3個字典 組成 一個串列")
 person1 = {"name": "Amy", "phone": "049-1234567", "age": 20}
 person2 = {"name": "Jack", "phone": "02-4455666", "age": 25}
 person3 = {"name": "Nacy", "phone": "04-9876543", "age": 17}
@@ -1230,6 +1254,7 @@ print("------------------------------------------------------------")  # 60個
 from abc import ABCMeta, abstractmethod
 from math import pi
 
+
 class Shape(object, metaclass=ABCMeta):
     @abstractmethod
     def perimeter(self):
@@ -1238,6 +1263,7 @@ class Shape(object, metaclass=ABCMeta):
     @abstractmethod
     def area(self):
         pass
+
 
 class Circle(Shape):
     def __init__(self, radius):
@@ -1279,8 +1305,10 @@ print("------------------------------------------------------------")  # 60個
 
 import datetime
 
+
 def is_leap(year):
     return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
+
 
 now = datetime.datetime.now()
 date = now.date
@@ -1347,6 +1375,7 @@ def get_suffix(filename, has_dot=False):
     else:
         return ""
 
+
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 print(get_suffix(filename))
@@ -1387,6 +1416,7 @@ def which_day(year, month, date):
     for index in range(month - 1):
         total += days_of_month[index]
     return total + date
+
 
 print(which_day(1980, 11, 28))
 print(which_day(1981, 12, 31))
@@ -1714,6 +1744,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("用字典建立個人資料")
 
+
 def build_profile(first, last, **user_info):
     """Build a dictionary containing everything we know about a user."""
     user_info["first_name"] = first
@@ -1741,9 +1772,11 @@ make_pizza(12, "mushrooms", "green peppers", "extra cheese")
 
 print("------------------------------------------------------------")  # 60個
 
+
 def printmsg():
     # 函數本身沒有定義變數, 只有執行列印全域變數功能
     print("函數列印: ", msg)  # 列印全域變數
+
 
 msg = "Global Variable"  # 設定全域變數
 print("主程式列印: ", msg)  # 列印全域變數
@@ -1751,10 +1784,12 @@ printmsg()  # 呼叫函數
 
 print("------------------------------------------------------------")  # 60個
 
+
 def printmsg():
     # 函數本身有定義變數, 將執行列印區域變數功能
     msg = "Local Variable"  # 設定區域變數
     print("函數列印: ", msg)  # 列印區域變數
+
 
 msg = "Global Variable"  # 這是全域變數
 print("主程式列印: ", msg)  # 列印全域變數
@@ -1762,10 +1797,12 @@ printmsg()  # 呼叫函數
 
 print("------------------------------------------------------------")  # 60個
 
+
 def printmsg():
     global msg
     msg = "Java"  # 更改全域變數
     print("更改後: ", msg)
+
 
 msg = "Python"
 print("更改前: ", msg)
@@ -1964,25 +2001,31 @@ for name, c_name, memo in product:
 
 print("------------------------------------------------------------")  # 60個
 
+
 def func(a, b, c):
     x = a + b + c
     return x
 
+
 print(func(1, 2, 3))
 
 print("------------------------------------------------------------")  # 60個
+
 
 def func(a, b, c):
     x = a + b + c
     print(x)
 
+
 print(func(1, 2, 3))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def equation(x, y, z):
     ans = x * y + z * x + y * z
     return ans
+
 
 print(equation(z=1, y=2, x=3))
 print(equation(3, 2, 1))
@@ -2003,11 +2046,13 @@ print("本學期考最好的分數為", max(score))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def square_sum(*arg):
     ans = 0
     for n in arg:
         ans += n * n
     return ans
+
 
 ans1 = square_sum(1)
 print("1*1=", ans1)
@@ -2018,12 +2063,15 @@ print("1*1+2*2+3*3=", ans3)
 ans4 = square_sum(1, 3, 5, 7)
 print("1*1+3*3+5*5+7*7=", ans4)
 
+
 def progname(**arg):
     return arg
+
 
 print(progname(d1="python", d2="java", d3="visual basic"))
 
 print("------------------------------------------------------------")  # 60個
+
 
 def dinner(mainmeal, *sideorder):
     # 列出所點餐點的主餐及點心副餐
@@ -2031,16 +2079,19 @@ def dinner(mainmeal, *sideorder):
     for snack in sideorder:
         print(snack)
 
+
 dinner("鐵板豬", "烤玉米")
 dinner("泰式火鍋", "德式香腸", "香焦牛奶", "幸運餅")
 
 print("------------------------------------------------------------")  # 60個
+
 
 def Pow(x, y):
     p = 1
     for i in range(y + 1):
         p *= x
     return p
+
 
 print("請輸入兩數x及y的值函數：")
 x = 3
@@ -2049,10 +2100,12 @@ print("次方運算結果：%d" % Pow(x, y))
 
 print("------------------------------------------------------------")  # 60個
 
+
 def swap_test(x, y):
     print("函數內交換前：x=%d, y=%d" % (x, y))
     x, y = y, x  # 交換過程
     print("函數內交換前：x=%d, y=%d" % (x, y))
+
 
 a = 10
 b = 20  # 設定a,b的初值
@@ -2183,6 +2236,7 @@ print("str3.replace('is', 'was') = ", s)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def clean_string(s):
     """
     刪除字符串中的 '\n', '\r' 和前後的空白
@@ -2195,6 +2249,7 @@ def clean_string(s):
     # 刪除前後空白
     s = s.strip()
     return s
+
 
 animals = "  Python is a \nprogramming language.\n\r   "
 cleaned_str = clean_string(animals)
@@ -2313,6 +2368,7 @@ print("lst1.reverse() = ", lst1)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def find_max_and_index(lst1):
     """
     找出串列lst1中的最大值和最大值的索引
@@ -2330,6 +2386,7 @@ def find_max_and_index(lst1):
 
     return max_val, max_idx
 
+
 # 測試程式
 my_lst = [34, 12, 45, 23, 78, 56, 98, 101, 22]
 result = find_max_and_index(my_lst)
@@ -2337,6 +2394,7 @@ print("最大值：", result[0])
 print("最大值索引：", result[1])
 
 print("------------------------------------------------------------")  # 60個
+
 
 def concatenate_strings(lst1):
     """
@@ -2350,6 +2408,7 @@ def concatenate_strings(lst1):
 
     str_lst = [item for item in lst1 if isinstance(item, str)]
     return "".join(str_lst)
+
 
 my_list = ["Hello", 42, "World", True, "Python"]
 result = concatenate_strings(my_list)
@@ -2411,7 +2470,7 @@ print("t6 = " + str(t6))
 
 print("------------------------------------------------------------")  # 60個
 
-#tuple
+# tuple
 t1 = (1, 2, 3, 4, 5, 6)
 print(t1[0])
 print(t1[1])
@@ -2420,14 +2479,14 @@ print(t1[-2])
 
 print("------------------------------------------------------------")  # 60個
 
-#tuple
+# tuple
 t1 = (1, 2, 3, 4, 5, 6)
 for e in t1:
     print(e, end=" ")
 
 print("------------------------------------------------------------")  # 60個
 
-#tuple
+# tuple
 t1 = (4, 2, 8, 9, 1)
 print("t1 = ", t1)
 s = len(t1)
@@ -2449,7 +2508,7 @@ print("t3 = sorted(t1) = ", t3)
 
 print("------------------------------------------------------------")  # 60個
 
-#tuple
+# tuple
 t1 = (4, 2, 8, 9, 1, 8)
 print("t1 = ", t1)
 s = t1.count(8)
@@ -2461,7 +2520,7 @@ print("t1.index(1) = ", s)
 
 print("------------------------------------------------------------")  # 60個
 
-#字典
+# 字典
 d1 = {}
 d2 = {1: "apple", 2: "ball"}
 d3 = {"name": "joe", 1: [2, 4, 6]}
@@ -2471,7 +2530,7 @@ print(d3)
 
 print("------------------------------------------------------------")  # 60個
 
-#字典
+# 字典
 d4 = dict()
 d5 = dict([(1, "tom"), (2, "mary"), (3, "john")])
 print("d4 = " + str(d4))
@@ -2479,7 +2538,7 @@ print("d5 = " + str(d5))
 
 print("------------------------------------------------------------")  # 60個
 
-#字典
+# 字典
 d1 = {"chicken": 2, "dog": 4, "cat": 3}
 print(d1["cat"])
 print(d1["dog"])
@@ -2487,21 +2546,21 @@ print(d1["chicken"])
 
 print("------------------------------------------------------------")  # 60個
 
-#字典
+# 字典
 d1 = {"chicken": 2, "dog": 4, "cat": 3}
 d1["cat"] = 4
 print(d1)
 
 print("------------------------------------------------------------")  # 60個
 
-#字典
+# 字典
 d1 = {"chicken": 2, "dog": 4, "cat": 3}
 d1["spider"] = 8
 print(d1)
 
 print("------------------------------------------------------------")  # 60個
 
-#字典
+# 字典
 d1 = {"chicken": 2, "dog": 4, "cat": 3}
 for animal in d1:
     legs = d1[animal]
@@ -2573,6 +2632,7 @@ for i in lst1:
 
 print("------------------------------------------------------------")  # 60個
 
+
 def sum_dict_values(d):
     """
     將字典d中的所有值加總並返回總和。
@@ -2614,6 +2674,7 @@ def find_max_value(d):
             max_value = value  # 將最大值更新為目前值
     return max_value  # 回傳最大值
 
+
 # 定義一個字典
 my_dict = {"apple": 5, "banana": 2, "orange": 8}
 
@@ -2624,6 +2685,7 @@ max_value = find_max_value(my_dict)
 print("最大值為：", max_value)
 
 print("------------------------------------------------------------")  # 60個
+
 
 def create_dict(keys, values):
     """
@@ -3006,9 +3068,11 @@ print("5*4*3=", ans3)
 ans4 = factorial(5, 4, 3, 2)
 print("5*4*3*2=", ans4)
 
-#不定長度參數之函數
+
+# 不定長度參數之函數
 def myfruit(**arg):
     return arg
+
 
 print(myfruit(d1="apple", d2="mango", d3="grape"))
 
@@ -3254,7 +3318,7 @@ for item in items:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "python05_simple_viewer.py";
+filename = "python05_simple_viewer.py"
 
 fullpath = os.path.abspath(filename)
 print(fullpath)
@@ -3279,6 +3343,7 @@ import test
 packagedir = os.path.dirname(test.__file__)
 """
 print("------------------------------------------------------------")  # 60個
+
 
 def getuser():
     for name in ("LOGNAME", "USER", "LNAME", "USERNAME"):
@@ -4063,6 +4128,7 @@ for count, drink in enumerate(drinks, 10):
 
 print("------------------------------------------------------------")  # 60個
 
+
 def greeting():
     """我的第一個Python函數設計"""
     print("Python歡迎你")
@@ -4079,13 +4145,16 @@ greeting()
 
 print("------------------------------------------------------------")  # 60個
 
+
 def greeting(name):
     """Python函數需傳遞名字name"""
     print("Hi,", name, "Good Morning!")
 
+
 greeting("Nelson")
 
 print("------------------------------------------------------------")  # 60個
+
 
 def greeting(name):
     """Python函數需傳遞名字name"""
@@ -4095,6 +4164,7 @@ def greeting(name):
 greeting("Nelson")
 
 print("------------------------------------------------------------")  # 60個
+
 
 def greeting(name):
     """Python函數需傳遞名字name"""
@@ -4207,6 +4277,7 @@ print(info2)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def guest_info(firstname, lastname, gender, middlename=""):
     """整合客戶名字資料"""
     if gender == "M":
@@ -4223,6 +4294,7 @@ print(info2)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def build_vip(id, name):
     """建立VIP資訊"""
     vip_dict = {"VIP_ID": id, "Name": name}
@@ -4233,6 +4305,7 @@ member = build_vip("101", "Nelson")
 print(member)
 
 print("------------------------------------------------------------")  # 60個
+
 
 def build_vip(id, name, tel=""):
     """建立VIP資訊"""
@@ -4312,6 +4385,7 @@ show_served_meal(served)  # 列出已服務餐點
 
 print("------------------------------------------------------------")  # 60個
 
+
 def kitchen(unserved, served):
     """將未服務的餐點轉為已經服務"""
     print("廚房處理顧客所點的餐點")
@@ -4357,6 +4431,7 @@ show_unserved_meal(order_list)  # 列出未服務餐點
 show_served_meal(served_list)  # 列出已服務餐點
 
 print("------------------------------------------------------------")  # 60個
+
 
 def kitchen(unserved, served):
     """將所點的餐點轉為已經服務"""
@@ -4416,6 +4491,7 @@ make_icecream("草莓醬")
 make_icecream("草莓醬", "葡萄乾", "巧克力碎片")
 
 print("------------------------------------------------------------")  # 60個
+
 
 def make_icecream(icecream_type, *toppings):
     # 列出製作冰淇淋的配料
@@ -4536,10 +4612,12 @@ print(square(10))
 
 print("------------------------------------------------------------")  # 60個
 
+
 # 使用一般函數
 def square(x):
     value = x**2
     return value
+
 
 # 輸出平方值
 print(square(10))
@@ -4567,8 +4645,10 @@ print("奇數串列: ", [item for item in filter_object])
 
 print("------------------------------------------------------------")  # 60個
 
+
 def oddfn(x):
     return x if (x % 2 == 1) else None
+
 
 mylist = [5, 10, 15, 20, 25, 30]
 filter_object = filter(oddfn, mylist)  # 傳回filter object
@@ -5023,7 +5103,7 @@ print("------------------------------------------------------------")  # 60個
 
 # id的用法
 
-#動物字典
+# 動物字典
 fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
 print(type(fruits))
 cfruits = fruits.copy()
@@ -5050,7 +5130,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 
 """ wait long
@@ -5817,8 +5896,6 @@ else:
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 cars = ["Honda", "Toyota", "Ford"]
 print("目前串列內容 = ", cars)
 print("在索引1位置插入Nissan")
@@ -6015,11 +6092,9 @@ print("我喜歡的最新運動     = ", mysports)
 print("我朋友喜歡的最新運動 = ", friendsports)
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 
 msg = """
@@ -6042,6 +6117,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("計算字數")
+
 
 def count_words(filename):
     """Count the approximate number of words in a file."""
@@ -6222,12 +6298,10 @@ min(300, 30, 3000)
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 # 數位時鐘
+
 
 class Clock(object):
     def __init__(self, hour=0, minute=0, second=0):
@@ -6256,6 +6330,7 @@ class Clock(object):
         # 显示时间
         return "%02d:%02d:%02d" % (self._hour, self._minute, self._second)
 
+
 """
 clock = Clock.now()
 while True:
@@ -6281,7 +6356,6 @@ mydate = time.strptime("2018-1-1", "%Y-%m-%d")
 print(mydate)
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -6415,4 +6489,3 @@ print([_ for _ in dir(datetime) if "date" in _.lower()])
 # help(datetime)
 
 print("------------------------------------------------------------")  # 60個
-

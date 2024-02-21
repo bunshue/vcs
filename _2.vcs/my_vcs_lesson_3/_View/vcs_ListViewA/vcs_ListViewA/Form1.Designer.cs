@@ -81,7 +81,7 @@
             // txtColumn
             // 
             this.txtColumn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtColumn.Location = new System.Drawing.Point(433, 291);
+            this.txtColumn.Location = new System.Drawing.Point(140, 354);
             this.txtColumn.Name = "txtColumn";
             this.txtColumn.Size = new System.Drawing.Size(32, 22);
             this.txtColumn.TabIndex = 18;
@@ -91,7 +91,7 @@
             // 
             this.Label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Label2.AutoSize = true;
-            this.Label2.Location = new System.Drawing.Point(385, 294);
+            this.Label2.Location = new System.Drawing.Point(92, 357);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(46, 12);
             this.Label2.TabIndex = 17;
@@ -100,7 +100,7 @@
             // txtRow
             // 
             this.txtRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtRow.Location = new System.Drawing.Point(337, 291);
+            this.txtRow.Location = new System.Drawing.Point(44, 354);
             this.txtRow.Name = "txtRow";
             this.txtRow.Size = new System.Drawing.Size(32, 22);
             this.txtRow.TabIndex = 16;
@@ -110,7 +110,7 @@
             // 
             this.Label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Label1.AutoSize = true;
-            this.Label1.Location = new System.Drawing.Point(305, 294);
+            this.Label1.Location = new System.Drawing.Point(12, 357);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(30, 12);
             this.Label1.TabIndex = 15;
@@ -120,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 334);
+            this.ClientSize = new System.Drawing.Size(1088, 486);
             this.Controls.Add(this.txtColumn);
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.txtRow);

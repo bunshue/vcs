@@ -40,6 +40,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvwBooks
@@ -84,7 +86,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(862, 8);
+            this.button1.Location = new System.Drawing.Point(25, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(127, 47);
             this.button1.TabIndex = 2;
@@ -94,7 +96,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(862, 61);
+            this.button2.Location = new System.Drawing.Point(25, 74);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(127, 47);
             this.button2.TabIndex = 3;
@@ -104,7 +106,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(862, 114);
+            this.button3.Location = new System.Drawing.Point(25, 127);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(127, 47);
             this.button3.TabIndex = 4;
@@ -114,7 +116,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(862, 167);
+            this.button4.Location = new System.Drawing.Point(25, 180);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(127, 47);
             this.button4.TabIndex = 5;
@@ -124,7 +126,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(862, 220);
+            this.button5.Location = new System.Drawing.Point(25, 233);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(127, 47);
             this.button5.TabIndex = 6;
@@ -134,27 +136,38 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(863, 273);
+            this.richTextBox1.Location = new System.Drawing.Point(862, 307);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(126, 248);
+            this.richTextBox1.Size = new System.Drawing.Size(173, 209);
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button5);
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Location = new System.Drawing.Point(862, 8);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(173, 293);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "顯示模式";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1001, 533);
+            this.ClientSize = new System.Drawing.Size(1049, 528);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.lvwBooks);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -173,6 +186,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

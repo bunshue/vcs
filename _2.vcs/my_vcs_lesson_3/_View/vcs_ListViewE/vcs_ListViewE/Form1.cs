@@ -42,36 +42,38 @@ namespace vcs_ListViewE
             // Sort the items in the list in ascending order.
             listView1.Sorting = SortOrder.Ascending;
 
-            // Create three items and three sets of subitems for each item.
-            ListViewItem item1 = new ListViewItem("item1", 0);
-            // Place a check mark next to the item.
-            item1.Checked = true;
-            item1.SubItems.Add("1");
-            item1.SubItems.Add("2");
-            item1.SubItems.Add("3");
-            ListViewItem item2 = new ListViewItem("item2", 1);
-            item2.SubItems.Add("4");
-            item2.SubItems.Add("5");
-            item2.SubItems.Add("6");
-            ListViewItem item3 = new ListViewItem("item3", 0);
-            // Place a check mark next to the item.
-            item3.Checked = true;
-            item3.SubItems.Add("777777777777777777777777777777777777777");
-            item3.SubItems.Add("8");
-            item3.SubItems.Add("9");
-            ListViewItem item4 = new ListViewItem("item4", 0);
-            // Place a check mark next to the item.
-            item4.Checked = true;
-            item4.SubItems.Add("7");
-            item4.SubItems.Add("8");
-            item4.SubItems.Add("9");
-
+            //加入欄資料 標題
             // Create columns for the items and subitems.
             // Width of -2 indicates auto-size.
-            listView1.Columns.Add("第一欄", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("第二欄", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("第三欄", 60, HorizontalAlignment.Left);
-            listView1.Columns.Add("第四欄", 120, HorizontalAlignment.Center);
+            listView1.Columns.Add("中文名", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("英文名", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
+            listView1.Columns.Add("代表", 120, HorizontalAlignment.Center);
+
+            //加入列資料
+            // Create three items and three sets of subitems for each item.
+            ListViewItem item1 = new ListViewItem("鼠", 0);
+            // Place a check mark next to the item.
+            item1.Checked = true;
+            item1.SubItems.Add("mouse");
+            item1.SubItems.Add("3");
+            item1.SubItems.Add("米老鼠");
+            ListViewItem item2 = new ListViewItem("牛", 1);
+            item2.SubItems.Add("ox");
+            item2.SubItems.Add("48");
+            item2.SubItems.Add("班尼牛");
+            ListViewItem item3 = new ListViewItem("虎", 0);
+            // Place a check mark next to the item.
+            item3.Checked = true;
+            item3.SubItems.Add("tiger");
+            item3.SubItems.Add("33");
+            item3.SubItems.Add("跳跳虎");
+            ListViewItem item4 = new ListViewItem("兔", 0);
+            // Place a check mark next to the item.
+            item4.Checked = true;
+            item4.SubItems.Add("rabbit");
+            item4.SubItems.Add("8");
+            item4.SubItems.Add("彼得兔");
 
             //Add the items to the ListView.
             listView1.Items.AddRange(new ListViewItem[] { item1, item2, item3, item4 });

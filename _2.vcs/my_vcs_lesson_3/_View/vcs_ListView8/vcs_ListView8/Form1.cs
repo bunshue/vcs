@@ -22,32 +22,25 @@ namespace vcs_ListView8
             // Remove any existing items.
             listView1.Items.Clear();
 
-            // Add data rows.
-            listView1.AddRow(new string[] { "C# 5.0 Programmer's Reference", "http://www.wrox.com/WileyCDA/WroxTitle/C-5-0-Programmer-s-Reference.productCd-1118847288.html", "978-1-118-84728-2", "960", "2014" });
-            listView1.AddRow(new string[] { "MCSD Certification Toolkit (Exam 70-483): Programming in C#", "http://www.wrox.com/WileyCDA/WroxTitle/C-5-0-Programmer-s-Reference.productCd-1118847288.html", "978-1-118-61209-5", "648", "2013" });
-            listView1.AddRow(new string[] { "Visual Basic 2012 Programmer's Reference", "http://www.wrox.com/WileyCDA/WroxTitle/Visual-Basic-2012-Programmer-s-Reference.productCd-1118314077.html", "978-1-118-31407-4", "840", "2012" });
-            listView1.AddRow("Essential Algorithms: A Practical Approach to Computer Algorithms", "http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118612108.html", "978-1-118-61210-1", "624", "2013");
-            listView1.AddRow("Beginning Database Design Solutions", "http://www.vb-helper.com/db_design.htm", "978-0-470-38549-4", "552", "2008");
-            listView1.AddRow("Start Here! Fundamentals of Microsoft .NET Programming", "http://www.amazon.com/Start-Here-Fundamentals-Microsoft-Programming/dp/0735661685", "978-0-735-66168-4", "264", "2011");
+            // 加入列資料
+            listView1.AddRow(new string[] { "鼠", "mouse", "3", "米老鼠", "2014" });
+            listView1.AddRow(new string[] { "牛", "ox", "48", "班尼牛", "2013" });
+            listView1.AddRow(new string[] { "虎", "tiger", "33", "跳跳虎", "2012" });
+            listView1.AddRow("兔", "rabbit", "8", "彼得兔", "2013");
+            listView1.AddRow("龍", "dragon", "38", "逗逗龍", "2008");
+            listView1.AddRow("蛇", "snake", "16", "貪吃蛇", "2011");
 
             // Make the ListView column headers.
             listView1.MakeColumnHeaders(
-                "Title", HorizontalAlignment.Left,
-                "URL", HorizontalAlignment.Left,
-                "ISBN", HorizontalAlignment.Left,
-                "Pages", HorizontalAlignment.Right,
+                "中文名", HorizontalAlignment.Left,
+                "英文名", HorizontalAlignment.Left,
+                "體重", HorizontalAlignment.Left,
+                "代表", HorizontalAlignment.Right,
                 "Year", HorizontalAlignment.Right
             );
 
             // Size the columns.
             listView1.SizeColumns(-2);
-
-            // Make the form big enough to show the ListView.
-            Rectangle item_rect =
-                listView1.GetItemRect(listView1.Items.Count - 1);
-            this.ClientSize = new Size(
-                item_rect.Left + item_rect.Width + 25,
-                item_rect.Top + item_rect.Height + 25);
         }
 
         // The column we are currently using for sorting.
@@ -112,6 +105,7 @@ namespace vcs_ListView8
         //listView接受鍵盤的Delete鍵
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
+            richTextBox1.Text += "你在listView按了 : " + e.KeyCode + "\n";
             if (e.KeyCode == Keys.Delete)
             {
                 if (listView1.SelectedItems.Count > 0)

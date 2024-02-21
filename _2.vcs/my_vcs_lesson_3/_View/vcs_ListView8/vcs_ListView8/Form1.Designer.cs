@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.listView1 = new System.Windows.Forms.ListView();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // listView1
@@ -38,7 +39,7 @@
             this.listView1.LabelEdit = true;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1164, 541);
+            this.listView1.Size = new System.Drawing.Size(1164, 233);
             this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -46,11 +47,20 @@
             this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
             this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(0, 239);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(1164, 302);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1206, 553);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listView1);
             this.Name = "Form1";
             this.Text = "vcs_ListView8";
@@ -62,6 +72,7 @@
         #endregion
 
         internal System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

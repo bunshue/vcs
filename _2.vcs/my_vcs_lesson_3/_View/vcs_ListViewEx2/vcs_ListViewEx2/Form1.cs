@@ -84,7 +84,7 @@ namespace vcs_ListViewEx2
             listView1.Items.Add(i1);
 
             Button btn0 = new Button();
-            btn0.Text = "ClickMe0";
+            btn0.Text = "";
             btn0.BackColor = SystemColors.Control;
             btn0.Font = this.Font;
             btn0.Click += new EventHandler(btn_Click);
@@ -132,28 +132,41 @@ namespace vcs_ListViewEx2
 
             //製作lsitview內的按鈕
             Button btn1 = new Button();
-            btn1.Text = "ClickMe1";
+            btn1.Name = "btn1";
+            btn1.Text = "";
+            btn1.BackgroundImage = vcs_ListViewEx2.Properties.Resources.x;
+            btn1.BackgroundImageLayout = ImageLayout.Zoom;
             btn1.BackColor = SystemColors.Control;
+            //btn1.Size = new Size(30, 30); 目前設定大小還不行
             btn1.Font = this.Font;
             btn1.Click += new EventHandler(btn_Click);
             listViewEx1.AddEmbeddedControl(btn1, 3, 0);
 
             Button btn2 = new Button();
-            btn2.Text = "ClickMe2";
+            btn2.Name = "btn2";
+            btn2.Text = "";
+            btn2.BackgroundImage = vcs_ListViewEx2.Properties.Resources.x;
+            btn2.BackgroundImageLayout = ImageLayout.Zoom;
             btn2.BackColor = SystemColors.Control;
             btn2.Font = this.Font;
             btn2.Click += new EventHandler(btn_Click);
             listViewEx1.AddEmbeddedControl(btn2, 3, 1);
 
             Button btn3 = new Button();
-            btn3.Text = "ClickMe3";
+            btn3.Name = "btn3";
+            btn3.Text = "";
+            btn3.BackgroundImage = vcs_ListViewEx2.Properties.Resources.x;
+            btn3.BackgroundImageLayout = ImageLayout.Zoom;
             btn3.BackColor = SystemColors.Control;
             btn3.Font = this.Font;
             btn3.Click += new EventHandler(btn_Click);
             listViewEx1.AddEmbeddedControl(btn3, 3, 2);
 
             Button btn4 = new Button();
-            btn4.Text = "ClickMe4";
+            btn4.Name = "btn4";
+            btn4.Text = "";
+            btn4.BackgroundImage = vcs_ListViewEx2.Properties.Resources.x;
+            btn4.BackgroundImageLayout = ImageLayout.Zoom;
             btn4.BackColor = SystemColors.Control;
             btn4.Font = this.Font;
             btn4.Click += new EventHandler(btn_Click);
@@ -162,7 +175,7 @@ namespace vcs_ListViewEx2
 
         private void btn_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "ccccccc\n";
+            richTextBox1.Text += ((Button)sender).Name + "\n";
         }
 
 
