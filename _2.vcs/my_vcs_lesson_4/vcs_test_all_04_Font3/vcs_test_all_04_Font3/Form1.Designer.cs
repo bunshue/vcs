@@ -1,4 +1,4 @@
-﻿namespace vcs_ListViewG_ShowFont
+﻿namespace vcs_test_all_04_Font3
 {
     partial class Form1
     {

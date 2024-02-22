@@ -133,60 +133,6 @@ namespace vcs_ListView6
             listView1.Items[listView1.Items.Count - 1].EnsureVisible();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        void print_listView_data(ListView lv)
-        {
-            richTextBox1.Text += "共有 : " + lv.Columns.Count.ToString() + " 個欄目\n";
-            richTextBox1.Text += "共有 : " + lv.Items.Count.ToString() + " 個項目\n";
-
-            if (lv.Items.Count <= 0)
-            {
-                richTextBox1.Text += "listView無內容\n";
-                return;
-            }
-
-            richTextBox1.Text += "共有" + lv.Items.Count.ToString() + "個項目，分別是：\n";
-            for (int i = 0; i < lv.Items.Count; i++)
-            {
-                //ListViewItem t = lv.Items[i];  //相同寫法
-                //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                richTextBox1.Text += lv.Items[i].SubItems[0].Text + "\t" + lv.Items[i].SubItems[1].Text + "\t" + lv.Items[i].SubItems[2].Text + "\t" + lv.Items[i].SubItems[3].Text + "\n";
-            }
-
-            if (lv.SelectedItems.Count <= 0)
-            {
-                //richTextBox1.Text += "未選擇listView項目\n";
-                return;
-            }
-            richTextBox1.Text += "選擇" + lv.SelectedItems.Count.ToString() + "個項目，分別是：\n";
-            for (int i = 0; i < lv.SelectedItems.Count; i++)
-            {
-                //ListViewItem t = lv.SelectedItems[i];  //相同寫法
-                //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                richTextBox1.Text += lv.SelectedItems[i].SubItems[0].Text + "\t" + lv.SelectedItems[i].SubItems[1].Text + "\t" + lv.SelectedItems[i].SubItems[2].Text + lv.SelectedItems[i].SubItems[3].Text + "\n";
-            }
-
-            richTextBox1.Text += "選擇" + lv.SelectedIndices.Count.ToString() + "個項目，Index分別是：\n";
-            for (int i = 0; i < lv.SelectedIndices.Count; i++)
-            {
-                richTextBox1.Text += lv.SelectedIndices[i].ToString() + " ";
-            }
-            richTextBox1.Text += "\n";
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            print_listView_data(listView1);
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             listView1.Clear();
@@ -403,57 +349,6 @@ namespace vcs_ListView6
             }
 
             flag_check_score_done = 1;
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            //添加一個ListView控件
-            add_listview();
-        }
-
-        void add_listview()
-        {
-            // 初始化ListView
-            ListView lv = new ListView();
-
-            lv.Left = 12;
-            lv.Top = 350;
-            lv.Width = 700;
-            lv.Height = 250;
-            lv.GridLines = true;    //顯示各個記錄的分隔線
-            lv.FullRowSelect = true;    //要選擇就是一行
-            lv.View = View.Details; //定義列表顯示的方式
-            lv.Scrollable = true;   //需要時候顯示滾動條
-            lv.MultiSelect = false; // 不可以多行選擇
-            lv.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-
-            // 針對數據庫的字段名稱，建立與之適應顯示表頭
-            lv.Columns.Add("姓名", 60, HorizontalAlignment.Right);
-            lv.Columns.Add("住宅電話", 100, HorizontalAlignment.Left);
-            lv.Columns.Add("辦公電話", 100, HorizontalAlignment.Left);
-            lv.Columns.Add("移動電話", 100, HorizontalAlignment.Left);
-            lv.Columns.Add("居住地點", 100, HorizontalAlignment.Left);
-            lv.Columns.Add("工作單位", 100, HorizontalAlignment.Left);
-            lv.Columns.Add("電子郵件", 100, HorizontalAlignment.Left);
-            lv.Visible = true;
-
-            //添加資料
-            int i;
-            for (i = 0; i < 10; i++)
-            {
-                ListViewItem li = new ListViewItem();
-                li.SubItems.Clear();
-                li.SubItems[0].Text = "Name";
-                li.SubItems.Add("HomePhone");
-                li.SubItems.Add("WorkPhone");
-                li.SubItems.Add("MobilePhone");
-                li.SubItems.Add("City");
-                li.SubItems.Add("Address");
-                li.SubItems.Add("Email");
-                lv.Items.Add(li);
-            }
-            // 在Form中添加此列表
-            this.Controls.Add(lv);
         }
     }
 }

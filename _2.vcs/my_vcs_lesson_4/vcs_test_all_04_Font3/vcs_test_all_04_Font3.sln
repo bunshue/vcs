@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ListViewG_ShowFont", "vcs_ListViewG_ShowFont\vcs_ListViewG_ShowFont.csproj", "{758A072A-8F84-428A-89ED-F9A150E7447E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_test_all_04_Font3", "vcs_test_all_04_Font3\vcs_test_all_04_Font3.csproj", "{758A072A-8F84-428A-89ED-F9A150E7447E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

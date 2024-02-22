@@ -16,8 +16,12 @@ namespace vcs_ListView8
             InitializeComponent();
         }
 
-        // Make some data.
         private void Form1_Load(object sender, EventArgs e)
+        {
+            apply_listView0();
+        }
+
+        void apply_listView0()
         {
             // Remove any existing items.
             listView1.Items.Clear();

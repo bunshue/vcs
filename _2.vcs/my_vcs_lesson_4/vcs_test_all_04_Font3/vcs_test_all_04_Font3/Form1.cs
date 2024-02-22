@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing.Text;  //for font
 
-namespace vcs_ListViewG_ShowFont
+using System.Drawing.Text;  //for Font
+
+namespace vcs_test_all_04_Font3
 {
     public partial class Form1 : Form
     {

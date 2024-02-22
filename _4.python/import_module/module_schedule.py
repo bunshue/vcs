@@ -12,13 +12,50 @@ import schedule
 import time
 
 def job():
-    print('AAAAAAAAAAAAA')
+    print('執行工作, 時間 :', time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()))
 
-print('每3分鐘執行一次函數')          
-schedule.every(3).minutes.do(job)
+def job_that_executes_once():
+    print("此處編寫的任務只會執行一次... 後面有return CancelJob")
+    return schedule.CancelJob
+
+def say_hello(name):
+    print("Hello", name)
+
+print('設定每3分鐘執行一次函數')          
+schedule.every(1).minutes.do(job)
+
+#只會執行一次的
+#schedule.every().day.at("11:45").do(job_that_executes_once)
+schedule.every(5).minutes.do(job_that_executes_once)
+
+# do() 將額外的參數傳遞給job函數
+#每幾秒呼叫一次 Alice
+schedule.every(15).seconds.do(say_hello, name="Alice")
+
+#每幾秒呼叫一次 Bob
+schedule.every(20).seconds.do(say_hello, name="Bob")
+
+
+
+print('獲取目前所有的作業')
+all_jobs = schedule.get_jobs()
+print(all_jobs)
 
 while True:
-    schedule.run_pending()
+    schedule.run_pending()  # 檢測是否執行函數
     time.sleep(1)
 
-
+"""
+# 每十分鐘執行任務
+schedule.every(10).minutes.do(job)
+# 每個小時執行任務
+schedule.every().hour.do(job)
+# 每天的10:30執行任務
+schedule.every().day.at("10:30").do(job)
+# 每個月執行任務
+schedule.every().monday.do(job)
+# 每個星期三的13:15分執行任務
+schedule.every().wednesday.at("13:15").do(job)
+# 每分鐘的第17秒執行任務
+schedule.every().minute.at(":17").do(job)
+"""

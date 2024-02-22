@@ -3,7 +3,7 @@
 using System.Windows.Forms;
 using System.Collections;
 
-namespace vcs_ListView7
+namespace vcs_ListView1
 {
     // Compares two ListView items using all of their columns.
     public class ListViewAllColumnComparer : IComparer
