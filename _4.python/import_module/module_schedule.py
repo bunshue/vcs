@@ -59,3 +59,79 @@ schedule.every().wednesday.at("13:15").do(job)
 # 每分鐘的第17秒執行任務
 schedule.every().minute.at(":17").do(job)
 """
+
+
+
+
+"""
+print('schedule：定時執行任務')
+
+import schedule
+
+
+schedule.clear()
+
+cnt = 0
+
+def job():
+    global cnt
+    print('工作示範, ', cnt)
+    cnt += 1
+    if cnt == 10:
+        print('結束工作')#尚有問題
+        schedule.clear()
+        #schedule.cancel_job()
+
+
+schedule.every(3).seconds.do(job)
+# schedule.every(3).minutes.do(job)
+# schedule.every(3).hours.do(job)
+# schedule.every(3).days.do(job)
+# schedule.every(3).weeks.do(job)
+
+# schedule.every().minute.at(":43").do(job)
+# schedule.every().hour.at(":53").do(job)
+# schedule.every().day.at("10:30").do(job)
+# schedule.every().wednesday.at("13:15").do(job)
+
+# schedule.every(5).to(10).seconds.do(job)  #每隔5至10秒執行一次,亂數決定
+
+while True:
+    schedule.run_pending()
+
+
+print('kkkkkk')
+"""
+
+
+
+
+"""
+#自動備份檔案程式
+
+import os
+import shutil
+import datetime
+import schedule
+import time
+
+source_dir = "C:/dddddddddd111"
+destination_dir = "C:/dddddddddd222"
+
+def copy_folder_to_directory(source, dest):
+    today = datetime.date.today()
+    dest_dir = os.path.join(dest, str(today))
+    
+    try:
+        shutil.copytree(source, dest_dir)
+        print(f"Folder copied to: {dest_dir}")
+    except FileExistsError:
+        print(f"Folder already exists in: {dest}")
+
+
+schedule.every().day.at("17:13").do(lambda: copy_folder_to_directory(source_dir, destination_dir))
+
+while True:
+    schedule.run_pending()
+    time.sleep(60)
+"""

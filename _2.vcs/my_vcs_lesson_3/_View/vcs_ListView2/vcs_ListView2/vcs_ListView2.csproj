@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{66AD9AC9-6A0B-490E-80FA-E2583E4004D8}</ProjectGuid>
+    <ProjectGuid>{42B365B7-2BB3-4239-BAFA-0FDC1BC06B84}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ListViewJ</RootNamespace>
-    <AssemblyName>vcs_ListViewJ</AssemblyName>
+    <RootNamespace>vcs_ListView2</RootNamespace>
+    <AssemblyName>vcs_ListView2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

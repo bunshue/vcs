@@ -14,6 +14,8 @@ print('------------------------------------------------------------')	#60個
 
 from PIL import Image
 
+print('------------------------------------------------------------')	#60個
+
 plt.figure('影像處理1', figsize = (10, 6))
 
 pil_im = Image.open('house.jpg')
@@ -33,30 +35,12 @@ plt.imshow(pil_im)
 
 plt.show()
 
-
-
 print('------------------------------------------------------------')	#60個
 
+print("PIL_hist")
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_hist.py
-
-from PIL import Image
 from pylab import *
 
-#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-import matplotlib.pyplot as plt
 # 打开图像，并转成灰度图像
 im = array(Image.open('house2.jpg').convert('L'))
 
@@ -86,20 +70,13 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_histeq.py
+print("PIL_histeq")
 
-from PIL import Image
 from pylab import *
 from PCV.tools import imtools
 
 # 添加中文字体支持
 from matplotlib.font_manager import FontProperties
-#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 im = array(Image.open('house2.jpg').convert('L'))
 # 打开图像，并转成灰度图像
@@ -125,26 +102,12 @@ hist(im2.flatten(), 128, density=True)
 
 show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_im.py
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+print("PIL_im")
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image
 #from numpy import *
 from pylab import *
 
@@ -182,19 +145,9 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_line.py
+print("PIL_line")
 
-from PIL import Image
 from pylab import *
-# 添加中文字体支持
-import matplotlib.pyplot as plt
-
-#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 # 读取图像到数组中
 im = array(Image.open('house2.jpg'))
@@ -225,11 +178,10 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_mean.py
+print("PIL_mean")
 
-from PIL import Image
 from PIL import ImageStat
-import numpy as np
+
 def darkchannel(input_img,h,w):
     dark_img=Image.new("L",(h,w),0)
     for x in range(0,h-1):
@@ -324,20 +276,12 @@ if __name__== '__main__':
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_opening.py
+print("PIL_opening")
 
-from PIL import Image
 from numpy import *
 #measurements模块实现二值图像的计数和度量功能，morphology模块实现形态学操作
 from scipy.ndimage import measurements, morphology  
 from pylab import *
-
-#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 # 加载图像和阈值，以确保它是二进制的
 figure()
@@ -371,17 +315,10 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_operation.py
+print("PIL_operation")
 
-from PIL import Image
 from pylab import *
 
-#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 figure()
 # 显示原图
@@ -441,20 +378,12 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_PCA.py
+print("PIL_PCA")
 
-from PIL import Image
 from numpy import *
 #measurements模块实现二值图像的计数和度量功能，morphology模块实现形态学操作
 from scipy.ndimage import measurements, morphology  
 from pylab import *
-
-#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 # 加载图像和阈值，以确保它是二进制的
 figure()
@@ -488,22 +417,14 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_realROF.py
+print("PIL_realROF")
 
-from PIL import Image
 from pylab import *
 from numpy import *
 from numpy import random
 from scipy.ndimage import filters
 from scipy.misc import imsave
 from PCV.tools import rof
-
-#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 im = array(Image.open('gril.jpg').convert('L'))
 U,T = rof.denoise(im,im)
@@ -530,7 +451,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_ROF.py
+print("PIL_ROF")
 
 from pylab import *
 from numpy import *
@@ -538,13 +459,6 @@ from numpy import random
 from scipy.ndimage import filters
 from scipy.misc import imsave
 from PCV.tools import rof
-
-#plt.rcParams['font.sans-serif'] =['SimHei']  #显示中文标签
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 # 创建合成图像与噪声
 im = zeros((500,500))
@@ -578,10 +492,7 @@ show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\PIL\new1\PIL_save.py
-
-from PIL import Image
-
+print("PIL_save")
 
 def IsValidImage(img_path):
     """
@@ -632,6 +543,233 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+print("de_noise")
+
+import random
+import cv2
+import scipy.misc
+import scipy.signal
+import scipy.ndimage
+
+"""中值滤波函数"""
+def medium_filter(im, x, y, step):
+    sum_s=[]
+    for k in range(-int(step/2),int(step/2)+1):
+        for m in range(-int(step/2),int(step/2)+1):
+            sum_s.append(im[x+k][y+m])
+    sum_s.sort()
+    return sum_s[(int(step*step/2)+1)]
+"""均值滤波函数"""
+def mean_filter(im, x, y, step):
+    sum_s = 0
+    for k in range(-int(step/2),int(step/2)+1):
+        for m in range(-int(step/2),int(step/2)+1):
+            sum_s += im[x+k][y+m] / (step*step)
+    return sum_s
+
+def convert_2d(r):
+    n = 3
+    # 3*3滤波器，每个系数都是1/9
+    window = np.ones((n, n)) / n**2
+    #使用滤波器卷积图像
+    # mode = same 表示输出尺寸等于输入尺寸
+    # boundary 表示采用对称边界条件处理图像边缘
+    s = scipy.signal.convolve2d(r, window, mode='same', boundary='symm')
+    return s.astype(np.uint8)
+"""添加噪声"""
+def add_salt_noise(img):
+    rows, cols, dims = img.shape 
+    R = np.mat(img[:, :, 0])
+    G = np.mat(img[:, :, 1])
+    B = np.mat(img[:, :, 2])
+    Grey_sp = R * 0.299 + G * 0.587 + B * 0.114
+    Grey_gs = R * 0.299 + G * 0.587 + B * 0.114
+    snr = 0.9
+    mu = 0
+    sigma = 0.12    
+    noise_num = int((1 - snr) * rows * cols)
+
+    for i in range(noise_num):
+        rand_x = random.randint(0, rows - 1)
+        rand_y = random.randint(0, cols - 1)
+        if random.randint(0, 1) == 0:
+            Grey_sp[rand_x, rand_y] = 0
+        else:
+            Grey_sp[rand_x, rand_y] = 255    
+    Grey_gs = Grey_gs + np.random.normal(0, 48, Grey_gs.shape)
+    Grey_gs = Grey_gs - np.full(Grey_gs.shape, np.min(Grey_gs))
+    Grey_gs = Grey_gs * 255 / np.max(Grey_gs)
+    Grey_gs = Grey_gs.astype(np.uint8)
+    # 中值滤波
+    Grey_sp_mf = scipy.ndimage.median_filter(Grey_sp, (8, 8))
+    Grey_gs_mf = scipy.ndimage.median_filter(Grey_gs, (8, 8))
+    # 均值滤波
+    n = 3
+    window = np.ones((n, n)) / n ** 2
+    Grey_sp_me = convert_2d(Grey_sp)
+    Grey_gs_me = convert_2d(Grey_gs)
+    plt.subplot(231)
+    plt.title('椒盐噪声')
+    plt.imshow(Grey_sp, cmap='gray')
+    plt.subplot(232)
+    plt.title('高斯噪声')
+    plt.imshow(Grey_gs, cmap='gray')
+    plt.subplot(233)
+    plt.title('椒盐噪声的中值滤波')
+    plt.imshow(Grey_sp_mf, cmap='gray')
+    plt.subplot(234)
+    plt.title('高斯噪声的中值滤波')
+    plt.imshow(Grey_gs_mf, cmap='gray')
+    plt.subplot(235)
+    plt.title('椒盐噪声的均值滤波')
+    plt.imshow(Grey_sp_me, cmap='gray')
+    plt.subplot(236)
+    plt.title('高斯噪声的均值滤波')
+    plt.imshow(Grey_gs_me, cmap='gray')
+    plt.show()
+
+def main():
+    img = np.array(Image.open('LenaRGB.bmp'))  #导入图片
+    add_salt_noise(img)
+
+if __name__ == '__main__':
+    main()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_derivative")
+
+from pylab import *
+from scipy.ndimage import  filters
+import numpy
+
+im=array(Image.open('house2.jpg').convert('L'))
+gray()
+subplot(141)
+axis('off')
+title(u'(a)原图')
+imshow(im)
+# sobel算子
+imx=zeros(im.shape)
+filters.sobel(im,1,imx)
+subplot(142)
+axis('off')
+title(u'(b)x方向差分')
+imshow(imx)
+imy=zeros(im.shape)
+filters.sobel(im,0,imy)
+subplot(143)
+axis('off')
+title(u'(c)y方向差分')
+imshow(imy)
+mag=255-numpy.sqrt(imx**2+imy**2)
+subplot(144)
+title(u'(d)梯度幅值')
+axis('off')
+imshow(mag)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_fuzzy")
+
+from numpy import *
+from pylab import *
+from scipy.ndimage import filters
+from matplotlib.font_manager import FontProperties
+
+im=array(Image.open('house2.jpg').convert('L'))
+figure()
+gray()
+axis('off')
+subplot(141)
+axis('off')
+title(u'原图')
+imshow(im)
+for bi,blur in enumerate([2,4,8]):
+    im2=zeros(im.shape)
+    im2=filters.gaussian_filter(im,blur)
+    im2=np.uint8(im2)
+    imNum=str(blur)
+    subplot(1,4,2+bi)
+    axis('off')
+    title(u'标准差为'+imNum)
+    imshow(im2)
+
+#如果是彩色图像，则分别对三个通道进行模糊
+#for bi, blur in enumerate([2,4,8]):
+#  im2 = zeros(im.shape)
+#  for i in range(3):
+#    im2[:, :, i] = filters.gaussian_filter(im[:, :, i], blur)
+#  im2 = np.uint8(im2)
+#  subplot(1, 4,  2 + bi)
+#  axis('off')
+#  imshow(im2)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_gaussian")
+
+from pylab import *
+from scipy.ndimage import filters
+import numpy
+
+def imx(im, sigma):
+    imgx = zeros(im.shape)
+    filters.gaussian_filter(im, sigma, (0, 1), imgx)
+    return imgx
+def imy(im, sigma):
+    imgy = zeros(im.shape)
+    filters.gaussian_filter(im, sigma, (1, 0), imgy)
+    return imgy
+def mag(im, sigma):
+    # 还有gaussian_gradient_magnitude()
+    imgmag = 255 - numpy.sqrt(imgx ** 2 + imgy ** 2)
+    return imgmag
+
+im = array(Image.open('castle3.jpg').convert('L'))
+figure()
+gray()
+sigma = [2, 5, 10]
+for i in  sigma:
+    subplot(3, 4, 4*(sigma.index(i))+1)
+    axis('off')
+    imshow(im)
+    imgx=imx(im, i)
+    subplot(3, 4, 4*(sigma.index(i))+2)
+    axis('off')
+    imshow(imgx)
+    imgy=imy(im, i)
+    subplot(3, 4, 4*(sigma.index(i))+3)
+    axis('off')
+    imshow(imgy)
+    imgmag=mag(im, i)
+    subplot(3, 4, 4*(sigma.index(i))+4)
+    axis('off')
+    imshow(imgmag)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_ginput")
+
+from pylab import *
+
+im = array(Image.open('house2.jpg'))
+imshow(im)
+
+print('请点击3个点')
+x = ginput(3)
+print('你已点击:', x)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print('------------------------------------------------------------')	#60個
+
 

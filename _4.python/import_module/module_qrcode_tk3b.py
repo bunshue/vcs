@@ -3,8 +3,8 @@ import qrcode as qr
 import tkinter as tk
 import tkinter.filedialog as fd
 
-
 from PIL import ImageTk
+
 base = tk.Tk()
 base.title('QRcode Generator')
 input_area = tk.Frame(base, relief=tk.RAISED, bd=2)

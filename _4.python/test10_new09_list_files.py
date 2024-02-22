@@ -7,7 +7,7 @@ print('ls 測試 glob.glob')
 #os.walk 是一個以遞迴方式列出特定路徑下，所有子目錄與檔案的函數
 
 #os.listdir 取得檔案列表
-#os.listdir 可以取得指定目錄中所有的檔案與子目錄名稱，以下是一個簡單的範例：
+#os.listdir 可以取得指定目錄中所有的檔案與子目錄名稱
 
 各種方法的 ls dir
 
@@ -22,20 +22,11 @@ import sys
 import glob
 import stat
 
-print("------------------------------------------------------------")  # 60個
-
-print("目前目錄下撈出一層 指名 *.py")
-filenames = glob.glob("*.py")
-for filename in filenames:
-    print("檔案 :", filename)
-
-print("------------------------------------------------------------")  # 60個
-
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 
 print("------------------------------------------------------------")  # 60個
-print("ls 測試 os.walk")
-print("------------------------------------------------------------")  # 60個
+'''
+print("ls 測試 os.walk ST------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 多層1")
 print("搜尋路徑：", foldername)
@@ -61,7 +52,6 @@ for foldername, subdir, files in filenames:
         filesize = os.stat(long_filename).st_size
 
         allfiles.append(long_filename)  # 絕對路徑
-
 
 print(len(allfiles))
 
@@ -105,21 +95,13 @@ if file.endswith('.jpg') or file.endswith('.png'):
 
 """
 
-print("------------------------------------------------------------")  # 60個
+print("ls 測試 os.walk SP------------------------------------------------------------")  # 60個
+'''
 
-
-print("------------------------------------------------------------")  # 60個
-print("ls 測試 os.listdir")
-print("------------------------------------------------------------")  # 60個
+print("ls 測試 os.listdir ST------------------------------------------------------------")  # 60個
 
 print("當前目錄下之ls (單層)")
-filenames = os.listdir()
-print(type(filenames))
-print(filenames)
-
-print("------------------------------------------------------------")  # 60個
-
-print("當前目錄下之ls (單層)")
+#filenames = os.listdir()   #same
 filenames = os.listdir(".")
 print(type(filenames))
 print(filenames)
@@ -133,12 +115,12 @@ print(filenames)
 
 print("------------------------------------------------------------")  # 60個
 
-
-filename = os.listdir(foldername)
-for sub in filename:
-    sub, ext = os.path.splitext(sub)
-    fullname = "aaaa" + "." + sub
-    print(fullname)
+print("指定目錄下之ls (單層)")
+filenames = os.listdir(foldername)
+for filename in filenames:
+    print(filename)
+    sub, ext = os.path.splitext(filename)
+    print("前檔名", sub, "後檔名", ext)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -201,7 +183,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 多層3")
 
-
 def list_files1(foldername, callback):
     for filename in os.listdir(foldername):  # 單層
         long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
@@ -216,14 +197,12 @@ def list_files1(foldername, callback):
             # Unknown file type, print a message
             print("Skipping %s" % long_filename)
 
-
 def visitfile(file):
     print("visiting", file)
 
 list_files1(foldername, visitfile)
 
 print("------------------------------------------------------------")  # 60個
-
 
 def _listFiles(files, foldername):
     for filename in os.listdir(foldername):
@@ -232,7 +211,6 @@ def _listFiles(files, foldername):
             _listFiles(files, long_filename)
         else:
             files.append(long_filename)
-
 
 def read_files(foldername, showProgress=False, readPixelData=False, force=False):
     print(foldername)
@@ -249,19 +227,15 @@ def read_files(foldername, showProgress=False, readPixelData=False, force=False)
     _listFiles(filelist, basedir)
     print(filelist)
 
-
 print("撈出資料夾下所有檔案, 多層4")
 
-"""
-find_files(foldername)
-"""
+#find_files(foldername)
 
 all_series = read_files(foldername, True, False, False)
 
 print("------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 單層")
-
 
 def list_files3(foldername):
     for filename in os.listdir(foldername):
@@ -280,7 +254,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 多層5")
 
-
 def list_files4(foldername):
     filenames = os.listdir(foldername)
     for filename in filenames:
@@ -291,11 +264,9 @@ def list_files4(foldername):
         else:  # 檔案
             print("f", long_filename, os.stat(long_filename).st_size)
 
-
 list_files4(foldername)
 
 print("------------------------------------------------------------")  # 60個
-
 
 def list_files5(foldername):
     try:
@@ -315,12 +286,9 @@ def list_files5(foldername):
             elif os.path.isdir(long_filename):
                 testdir(long_filename)
 
-
-foldername = "C:/_git/vcs/_1.data/______test_files5"
 list_files5(foldername)
 
 print("------------------------------------------------------------")  # 60個
-
 
 def getFolderSize(foldername):
     size = 0  # Store the total size of all files
@@ -333,18 +301,177 @@ def getFolderSize(foldername):
         size += os.path.getsize(foldername)  # Accumulate file size
     return size
 
-
-foldername = "C:/_git/vcs/_1.data/______test_files5"
 folder_size = getFolderSize(foldername)
 
 print("資料夾大小 : ", folder_size, "拜")
 
 print("------------------------------------------------------------")  # 60個
 
+def process(filename, listnames):
+    print("process : ", filename)
+    if os.path.isdir(filename):
+        return processdir(filename, listnames)
+    try:
+        print(filename)
+    except IOError as msg:
+        sys.stderr.write("Can't open: %s\n" % msg)
+        return 1
+
+def processdir(dir, listnames):
+    print("processdir : ", dir)
+    try:
+        names = os.listdir(dir)
+    except OSError as msg:
+        sys.stderr.write("Can't list directory: %s\n" % dir)
+        return 1
+    filenames = []
+    for name in names:
+        print(name)
+        long_filename = os.path.join(dir, name)  # 取得檔案的絕對路徑
+        print(long_filename)
+        if os.path.normcase(long_filename).endswith(".py") or os.path.isdir(
+            long_filename
+        ):
+            filenames.append(long_filename)
+    filenames.sort(key=os.path.normcase)
+    exit = None
+    for filename in filenames:
+        x = process(filename, listnames)
+        exit = exit or x
+    return exit
+
+listnames = 1  # or 1
+x = process(foldername, listnames)
+print(x)
 
 print("------------------------------------------------------------")  # 60個
-print("ls 測試 glob.glob")
+
+stats = {}
+
+def addstats(ext, key, n):
+    d = stats.setdefault(ext, {})
+    d[key] = d.get(key, 0) + n
+
+def statdir(dir):
+    try:
+        names = os.listdir(dir)
+    except OSError as err:
+        sys.stderr.write("Can't list %s: %s\n" % (dir, err))
+        return
+    for name in sorted(names):
+        if name.startswith(".#"):
+            continue  # Skip CVS temp files
+        if name.endswith("~"):
+            continue  # Skip Emacs backup files
+        full = os.path.join(dir, name)
+        if os.path.islink(full):
+            addstats("<lnk>", "links", 1)
+        elif os.path.isdir(full):
+            statdir(full)
+        else:
+            statfile(full)
+
+def statfile(filename):
+    head, ext = os.path.splitext(filename)
+    head, base = os.path.split(filename)
+    if ext == base:
+        ext = ""  # E.g. .cvsignore is deemed not to have an extension
+    ext = os.path.normcase(ext)
+    if not ext:
+        ext = "<none>"
+    addstats(ext, "files", 1)
+    try:
+        with open(filename, "rb") as f:
+            data = f.read()
+    except IOError as err:
+        sys.stderr.write("Can't open %s: %s\n" % (filename, err))
+        addstats(ext, "unopenable", 1)
+        return
+    addstats(ext, "bytes", len(data))
+    if b"\0" in data:
+        addstats(ext, "binary", 1)
+        return
+    if not data:
+        addstats(ext, "empty", 1)
+    # addstats(ext, "chars", len(data))
+    lines = str(data, "latin-1").splitlines()
+    addstats(ext, "lines", len(lines))
+    del lines
+    words = data.split()
+    addstats(ext, "words", len(words))
+
+def report():
+    exts = sorted(stats)
+    # Get the column keys
+    columns = {}
+    for ext in exts:
+        columns.update(stats[ext])
+    cols = sorted(columns)
+    colwidth = {}
+    colwidth["ext"] = max([len(ext) for ext in exts])
+    minwidth = 6
+    stats["TOTAL"] = {}
+    for col in cols:
+        total = 0
+        cw = max(minwidth, len(col))
+        for ext in exts:
+            value = stats[ext].get(col)
+            if value is None:
+                w = 0
+            else:
+                w = len("%d" % value)
+                total += value
+            cw = max(cw, w)
+        cw = max(cw, len(str(total)))
+        colwidth[col] = cw
+        stats["TOTAL"][col] = total
+    exts.append("TOTAL")
+    for ext in exts:
+        stats[ext]["ext"] = ext
+    cols.insert(0, "ext")
+
+    def printheader():
+        for col in cols:
+            print("%*s" % (colwidth[col], col), end=" ")
+        print()
+
+    printheader()
+    for ext in exts:
+        for col in cols:
+            value = stats[ext].get(col, "")
+            print("%*s" % (colwidth[col], value), end=" ")
+        print()
+    printheader()  # Another header at the bottom
+
+# Show file statistics by extension.
+
+# filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files3/"
+
+if os.path.isdir(filename):
+    print("目錄")
+    statdir(filename)
+elif os.path.isfile(filename):
+    statfile(filename)
+    print("檔案")
+elif os.path.islink(filename):
+    print("連結")
+    linkto = os.readlink(filename)
+    print(linkto)
+else:
+    print("不詳")
+
+print(type(stats))
+print(stats)
+
+report()
+
 print("------------------------------------------------------------")  # 60個
+
+print("ls 測試 os.listdir SP------------------------------------------------------------")  # 60個
+
+print("ls 測試 glob.glob ST------------------------------------------------------------")  # 60個
+
 print("撈出資料夾下所有檔案, 單層")
 print("資料夾: " + foldername)
 print("資料夾: {}".format(foldername))
@@ -355,16 +482,14 @@ print(filenames)
 for target_image in filenames:
     pathname, filename = os.path.split(target_image)
     print(filename)
-    """
-    im = Image.open(target_image)
-    w, h = im.size
-    """
-print("完成")
+    
+    #im = Image.open(target_image)
+    #w, h = im.size
 
 print("------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 單層")
-foldername = "C:/_git/vcs/_1.data/______test_files5/"
+
 filenames = glob.glob(foldername)
 
 for filename in filenames:
@@ -382,6 +507,13 @@ filenames = glob.glob("glob.py") + glob.glob("os*.py") + glob.glob("*.txt")
 
 for filename in filenames:
     print(filenames)
+
+print("------------------------------------------------------------")  # 60個
+
+print("目前目錄下撈出一層 指名 *.py")
+filenames = glob.glob("*.py")
+for filename in filenames:
+    print("檔案 :", filename)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -440,7 +572,6 @@ for filename in filenames:
 print("------------------------------------------------------------")  # 60個
 
 print("指名pattern的搜尋")
-foldername = "C:/_git/vcs/_1.data/______test_files5"
 
 pattern = "*"
 
@@ -470,61 +601,14 @@ for filename in filenames:
 
 print("總容量 : " + str(allfilesize) + " 拜")
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def process(filename, listnames):
-    print("process : ", filename)
-    if os.path.isdir(filename):
-        return processdir(filename, listnames)
-    try:
-        print(filename)
-    except IOError as msg:
-        sys.stderr.write("Can't open: %s\n" % msg)
-        return 1
-
-
-def processdir(dir, listnames):
-    print("processdir : ", dir)
-    try:
-        names = os.listdir(dir)
-    except OSError as msg:
-        sys.stderr.write("Can't list directory: %s\n" % dir)
-        return 1
-    filenames = []
-    for name in names:
-        print(name)
-        long_filename = os.path.join(dir, name)  # 取得檔案的絕對路徑
-        print(long_filename)
-        if os.path.normcase(long_filename).endswith(".py") or os.path.isdir(
-            long_filename
-        ):
-            filenames.append(long_filename)
-    filenames.sort(key=os.path.normcase)
-    exit = None
-    for filename in filenames:
-        x = process(filename, listnames)
-        exit = exit or x
-    return exit
-
-
-foldername = "C:/_git/vcs/_1.data/______test_files5"
-listnames = 1  # or 1
-x = process(foldername, listnames)
-print(x)
+print("ls 測試 glob.glob SP------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
+print("------------------------------------------------------------")  # 60個
 print("---- 新進未整理 --------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
 
 print("-------")
 print(os.curdir)
@@ -532,12 +616,30 @@ print("-------")
 print(os.pardir)
 print("-------")
 
+
 print("------------------------------------------------------------")  # 60個
 
 
-"""
-# 新進未整理
+print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+"""
+     
+檔案操作
+
+os.readlink(long_filename))
+os.path.islink(long_filename)
+os.path.isdir(file)
+os.path.isdir(foldername):
+os.path.exists(name):
 
 mkdir多一層保護
         try:
@@ -545,74 +647,17 @@ mkdir多一層保護
             print("Created output directory", odir)
         except OSError as msg:
             usage('%s: mkdir failed (%s)' % (odir, str(msg)))
-     
-print('ls 測試 os.listdir') SP
-print('ls 測試 os.walk') ST
-print('ls 測試 glob.glob') ST
-
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
-filenames
-
-----------------------------------------------------------------
-
-檔案操作
-
-
-os.readlink(long_filename))
-
-os.path.islink(long_filename)
-
-os.path.isdir(file)
-
-os.path.isdir(foldername):
-os.path.exists(name):
-
-
-
-
-
 
 if filename.lower().endswith(".py"):
 if filename.endswith('.jpg'):
 
-
 if os.path.normcase(filename[-3:]) == ".py":
-
 
 if filename.lower().endswith(".py"):
 
 if filename.endswith('.c'):
 
-
 ----------------------------------------------------------------
-print('ls 測試 os.listdir') ST
-
-
-
-----------------------------------------------------------------
-
-
-        
-print('ls 測試 os.listdir') SP
-
-----------------------------------------------------------------
-print('ls 測試 os.walk') ST
-
-
-----------------------------------------------------------------
-
-
-
-print('ls 測試 os.walk') SP
-
-----------------------------------------------------------------
-
-
-print('ls 測試 glob.glob') ST
-
-
-----------------------------------------------------------------
-
     def glob(self, pattern, exclude = None):
         #Add a list of files to the current component as specified in the
         #glob pattern. Individual files can be excluded in the exclude list.
@@ -628,169 +673,58 @@ print('ls 測試 glob.glob') ST
                 filename_list.extend(getFilesForName(filename))
             return filename_list
 
+print("------------------------------------------------------------")  # 60個
+import stat
 
-----------------------------------------------------------------
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
+st = os.lstat(filename)
 
-
-----------------------------------------------------------------
-
-
-
-----------------------------------------------------------------
-
-
-
-----------------------------------------------------------------
+anytime = st[stat.ST_MTIME]
+size = st[stat.ST_SIZE]
+print("檔案大小 :", size, "拜")
 
 
-
-print('ls 測試 glob.glob') SP
-
-----------------------------------------------------------------
+print("------------------------------------------------------------")  # 60個
 
 
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 
+short_filename = os.path.basename(filename)
+
+print(short_filename)
+
+cache_dir = os.path.dirname(filename)
+print(cache_dir)
+
+head, tail = short_filename[:-3], short_filename[-3:]
+print(head)
+print(tail)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+canonic = os.path.abspath(filename)
+print(canonic)
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+canonic = os.path.normcase(filename)
+print(canonic)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+head, ext = os.path.splitext(filename)
+head, base = os.path.split(filename)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 """
 
-print("------------------------------------------------------------")  # 60個
 
-stats = {}
-
-def addstats(ext, key, n):
-    d = stats.setdefault(ext, {})
-    d[key] = d.get(key, 0) + n
-
-
-def statdir(dir):
-    try:
-        names = os.listdir(dir)
-    except OSError as err:
-        sys.stderr.write("Can't list %s: %s\n" % (dir, err))
-        return
-    for name in sorted(names):
-        if name.startswith(".#"):
-            continue  # Skip CVS temp files
-        if name.endswith("~"):
-            continue  # Skip Emacs backup files
-        full = os.path.join(dir, name)
-        if os.path.islink(full):
-            addstats("<lnk>", "links", 1)
-        elif os.path.isdir(full):
-            statdir(full)
-        else:
-            statfile(full)
-
-
-def statfile(filename):
-    head, ext = os.path.splitext(filename)
-    head, base = os.path.split(filename)
-    if ext == base:
-        ext = ""  # E.g. .cvsignore is deemed not to have an extension
-    ext = os.path.normcase(ext)
-    if not ext:
-        ext = "<none>"
-    addstats(ext, "files", 1)
-    try:
-        with open(filename, "rb") as f:
-            data = f.read()
-    except IOError as err:
-        sys.stderr.write("Can't open %s: %s\n" % (filename, err))
-        addstats(ext, "unopenable", 1)
-        return
-    addstats(ext, "bytes", len(data))
-    if b"\0" in data:
-        addstats(ext, "binary", 1)
-        return
-    if not data:
-        addstats(ext, "empty", 1)
-    # addstats(ext, "chars", len(data))
-    lines = str(data, "latin-1").splitlines()
-    addstats(ext, "lines", len(lines))
-    del lines
-    words = data.split()
-    addstats(ext, "words", len(words))
-
-
-def report():
-    exts = sorted(stats)
-    # Get the column keys
-    columns = {}
-    for ext in exts:
-        columns.update(stats[ext])
-    cols = sorted(columns)
-    colwidth = {}
-    colwidth["ext"] = max([len(ext) for ext in exts])
-    minwidth = 6
-    stats["TOTAL"] = {}
-    for col in cols:
-        total = 0
-        cw = max(minwidth, len(col))
-        for ext in exts:
-            value = stats[ext].get(col)
-            if value is None:
-                w = 0
-            else:
-                w = len("%d" % value)
-                total += value
-            cw = max(cw, w)
-        cw = max(cw, len(str(total)))
-        colwidth[col] = cw
-        stats["TOTAL"][col] = total
-    exts.append("TOTAL")
-    for ext in exts:
-        stats[ext]["ext"] = ext
-    cols.insert(0, "ext")
-
-    def printheader():
-        for col in cols:
-            print("%*s" % (colwidth[col], col), end=" ")
-        print()
-
-    printheader()
-    for ext in exts:
-        for col in cols:
-            value = stats[ext].get(col, "")
-            print("%*s" % (colwidth[col], value), end=" ")
-        print()
-    printheader()  # Another header at the bottom
-
-
-# Show file statistics by extension.
-
-# filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = "C:/_git/vcs/_1.data/______test_files3/"
-
-if os.path.isdir(filename):
-    print("目錄")
-    statdir(filename)
-elif os.path.isfile(filename):
-    statfile(filename)
-    print("檔案")
-elif os.path.islink(filename):
-    print("連結")
-    linkto = os.readlink(filename)
-    print(linkto)
-else:
-    print("不詳")
-
-print(type(stats))
-print(stats)
-
-report()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個

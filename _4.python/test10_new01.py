@@ -283,7 +283,6 @@ import platform
 from types import ModuleType
 from typing import Optional, Tuple, List, cast
 
-
 def print_table(version_rows: List[Tuple[str, str]]) -> None:
     row_format = "{:12} | {}"
     print(row_format.format("module", "version"))
@@ -292,13 +291,11 @@ def print_table(version_rows: List[Tuple[str, str]]) -> None:
         # Some version strings have multiple lines and need to be squashed
         print(row_format.format(module, version.replace("\n", " ")))
 
-
 def extract_version(module: ModuleType) -> Optional[str]:
     if module.__name__ == "gdcm":
         return cast(Optional[str], getattr(module, "GDCM_VERSION", None))
 
     return cast(Optional[str], getattr(module, "__version__", None))
-
 
 modules = (
     "os",
@@ -425,7 +422,6 @@ print()
 print("------------------------------------------------------------")  # 60個
 
 import string
-
 
 def encrypt(text, encryDict):  # 加密文件
     cipher = []
@@ -1039,26 +1035,23 @@ for number in range(100):
 
 print("------------------------------------------------------------")  # 60個
 
-# 4-1-1 lambda 函式簡介
+# lambda 函式簡介
 
 power = lambda x: x**2
-
 print(power(10))
 
-
 add = lambda a, b: a + b
-
 print(add(5, 3))
 
 print("------------------------------------------------------------")  # 60個
 
-# 4-1-2 在 lambda 內使用一行 if 條件判斷式
+# 在 lambda 內使用一行 if 條件判斷式
 
 absolute = lambda x: x if x >= 0 else -x
 
 func = lambda x: (x**2 - 40 * x + 350) if 10 <= x < 30 else 50
 
-# 4-2-1 str.split()：分割字串為 list 元素
+# str.split()：分割字串為 list 元素
 
 sentence = "This is a test sentence"
 
@@ -1066,7 +1059,7 @@ print(sentence.split(" "))
 
 ["This", "is", "a", "test", "sentence"]
 
-# 4-2-2 用字串正規化分割字串為 list
+# 用字串正規化分割字串為 list
 
 import re
 
@@ -1094,7 +1087,7 @@ print(list(map(str.upper, str_list)))
 
 print("------------------------------------------------------------")  # 60個
 
-# 4-2-4 用 flter() 篩選容器元素
+# 用 flter() 篩選容器元素
 
 str_list = ["This", "is", "a", "test", "sentence"]
 
@@ -1102,7 +1095,7 @@ print(list(filter(lambda x: len(x) >= 3, str_list)))
 
 ["This", "test", "sentence"]
 
-# 4-2-5 再探 sorted()：自訂目標容器的排序方式
+# 再探 sorted()：自訂目標容器的排序方式
 
 str_list = ["This", "is", "a", "test", "sentence"]
 
@@ -1118,7 +1111,7 @@ print(sorted(nest_list, key=lambda x: x[1], reverse=True))
 
 print("------------------------------------------------------------")  # 60個
 
-# 4-3-1 介紹 list 生成式
+# 介紹 list 生成式
 
 a = [1, -2, 3, -4, 5]
 
@@ -1134,7 +1127,7 @@ str_list = ["This", "is", "a", "test", "sentence"]
 
 print([s.upper() for s in str_list])
 
-# 4-3-2 在 list 生成式使用 if 過濾元素
+# 在 list 生成式使用 if 過濾元素
 
 a = [1, -2, 3, -4, 5]
 
@@ -1254,7 +1247,6 @@ print("------------------------------------------------------------")  # 60個
 from abc import ABCMeta, abstractmethod
 from math import pi
 
-
 class Shape(object, metaclass=ABCMeta):
     @abstractmethod
     def perimeter(self):
@@ -1263,7 +1255,6 @@ class Shape(object, metaclass=ABCMeta):
     @abstractmethod
     def area(self):
         pass
-
 
 class Circle(Shape):
     def __init__(self, radius):
@@ -1305,10 +1296,8 @@ print("------------------------------------------------------------")  # 60個
 
 import datetime
 
-
 def is_leap(year):
     return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
-
 
 now = datetime.datetime.now()
 date = now.date
@@ -3338,13 +3327,6 @@ print("os.path.splitext:", os.path.splitext(fullpath))
 
 print("---- os --------------------------------------------------------")  # 60個
 
-"""
-import test
-packagedir = os.path.dirname(test.__file__)
-"""
-print("------------------------------------------------------------")  # 60個
-
-
 def getuser():
     for name in ("LOGNAME", "USER", "LNAME", "USERNAME"):
         print(name)
@@ -3366,78 +3348,6 @@ for envname in "TMPDIR", "TEMP", "TMP":
     dirname = os.getenv(envname)
     print("cccccc", dirname)
     # print(dirname)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-import shutil
-
-fullpath = os.path.abspath('myprime.py')
-path, filename = os.path.split(fullpath)
-filename, extname = os.path.splitext(filename)
-if not os.path.exists("test-dir"):
-    os.mkdir("test-dir")
-targetfullpath = os.path.join(path, os.path.join("test-dir", "00"+extname))
-#shutil.copy(fullpath, targetfullpath)
-
-try:
-    print("實際上預期可能會有例外的程式碼寫在這裡！")
-    #10 / 0
-    shutil.copy(fullpath, targetfullpath)
-    print("在可能發生例外的指令之下的程式碼放在這邊！")
-except Exception as e:
-    print("發生錯誤了，錯誤訊息如下：")
-    print(e)
-else:
-    print("沒有發生任何錯誤。")
-finally:
-    print("不管如何，都要執行這裡")
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-import stat
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-st = os.lstat(filename)
-
-anytime = st[stat.ST_MTIME]
-size = st[stat.ST_SIZE]
-print("檔案大小 :", size, "拜")
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-
-short_filename = os.path.basename(filename)
-
-print(short_filename)
-
-cache_dir = os.path.dirname(filename)
-print(cache_dir)
-
-head, tail = short_filename[:-3], short_filename[-3:]
-print(head)
-print(tail)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-canonic = os.path.abspath(filename)
-print(canonic)
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-canonic = os.path.normcase(filename)
-print(canonic)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-head, ext = os.path.splitext(filename)
-head, base = os.path.split(filename)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3531,25 +3441,6 @@ files.extractall()
 
 files.close()
 """
-
-print("------------------------------------------------------------")  # 60個
-
-# pip install wikipedia
-
-
-import wikipedia
-
-wikipedia.set_lang("zh")
-wikipedia.summary("柔道")
-
-# python wiki_sample.py
-
-# python try_sys.py 想查詢的關鍵字
-
-# python wiki_sample_final.py 柔道
-
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -6239,58 +6130,13 @@ print("{}\n「do」出現{}次,「o」出現{}次".format(str1, s1, s2))
 
 print("------------------------------------------------------------")  # 60個
 
-# 找出序列中出現次數最多的元素
-
-from collections import Counter
-
-words = [
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "not",
-    "around",
-    "the",
-    "eyes",
-    "don't",
-    "look",
-    "around",
-    "the",
-    "eyes",
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "you're",
-    "under",
-]
-counter = Counter(words)
-print(counter.most_common(3))
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 word = "maintenance"
 word.count("n")
 
 len("thunderbolt")
 
-
 animal = ["cat", "dog", "duck"]
 len(animal)
-
 
 max(100, 10, 50)
 min(300, 30, 3000)
@@ -6301,7 +6147,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 數位時鐘
-
 
 class Clock(object):
     def __init__(self, hour=0, minute=0, second=0):
@@ -6360,7 +6205,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 import datetime as dt
 
 x = dt.datetime(2020, 10, 22)
@@ -6374,7 +6218,7 @@ print(y)
 
 print("------------------------------------------------------------")  # 60個
 
-# 3-4-2 timedelta 物件
+# timedelta 物件
 
 x = dt.timedelta(hours=1, minutes=30)  # 1 小時又 30 分
 
@@ -6382,7 +6226,7 @@ print(x)
 y = dt.timedelta(days=1, seconds=30)  # 1 天又 30 秒
 print(y)
 
-# 3-4-3 用 timedelta 來增減 datetime 或 timedelta 的時間
+# 用 timedelta 來增減 datetime 或 timedelta 的時間
 
 import datetime as dt
 
@@ -6403,7 +6247,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 """ fail
-# 3-4-4 將 datetime 時間以格式化方式輸出
+# 將 datetime 時間以格式化方式輸出
 
 import datetime as dt
 
@@ -6418,7 +6262,7 @@ print(s2)
 
 print("------------------------------------------------------------")  # 60個
 
-# 3-4-5 用字串來建立 datetime 物件
+# 用字串來建立 datetime 物件
 
 import datetime as dt
 

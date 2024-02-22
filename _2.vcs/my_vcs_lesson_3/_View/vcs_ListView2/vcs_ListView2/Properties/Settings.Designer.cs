@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_ListView6_DragDrop.Properties
+namespace vcs_ListView2.Properties
 {
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ListView6_DragDrop
+namespace vcs_ListView2
 {
     static class Program
     {

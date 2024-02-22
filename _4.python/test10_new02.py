@@ -25,7 +25,7 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-# 2-5-1 Python 舊式字串格式化
+# Python 舊式字串格式化
 
 errno = 50159747054
 name = "鮑勃"
@@ -34,7 +34,7 @@ print("嘿, %s, 有錯誤 0x%x 發生了!" % (name, errno))
 
 print("嘿, %(name)s, 有錯誤 0x%(errno)x 發生了!" % {"name": name, "errno": errno})
 
-# 2-5-2 Python 新式字串格式化
+# Python 新式字串格式化
 
 errno = 50159747054
 name = "鮑勃"
@@ -44,7 +44,7 @@ print("嘿, {}, 有錯誤 0x{:x} 發生了!".format(name, errno))
 print("嘿, {name:s}, 有錯誤 0x{errno:x} 發生了!".format(name=name, errno=errno))
 
 
-# 2-5-3 f-string 字串格式化 (Python 3.6+)
+# f-string 字串格式化 (Python 3.6+)
 
 errno = 50159747054
 name = "鮑勃"
@@ -56,8 +56,7 @@ b = 10
 
 print(f"5 加 10 等於 {a + b} 而非 {2 * (a + b)}")
 
-
-# 2-5-4 樣板字串格式化
+# 樣板字串格式化
 
 from string import Template
 
@@ -250,7 +249,6 @@ print("------------------------------------------------------------")  # 60個
 # 5-6-3 multiprocessing.Queue - 給多核運算用的佇列
 
 import multiprocessing, time
-
 
 def worker(queue):
     print("process 開始")
@@ -534,7 +532,6 @@ print("------------------------------------------------------------")  # 60個
 import threading
 import time
 
-
 def worker():
     print(threading.current_thread().name, "Starting")
     time.sleep(2)
@@ -639,67 +636,6 @@ for thread in threads:
 print('漫畫圖片下載完成')
 
 """
-
-print("------------------------------------------------------------")  # 60個
-
-import subprocess
-
-calcPro = subprocess.Popen("calc.exe")  # 傳回值是子行程
-notePro = subprocess.Popen("notepad.exe")  # 傳回值是子行程
-writePro = subprocess.Popen("write.exe")  # 傳回值是子行程
-print(f"資料型態     = {type(calcPro)}")
-print(f"列印calcPro  = {calcPro}")
-print(f"列印notePro  = {notePro}")
-print(f"列印writePro = {writePro}")
-
-print("------------------------------------------------------------")  # 60個
-
-import subprocess
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-paintPro = subprocess.Popen(["mspaint.exe", filename])
-print(paintPro)
-
-print("------------------------------------------------------------")  # 60個
-
-import subprocess
-
-path = r"C:\Users\User\AppData\Local\Programs\Python\Python311\python.exe"
-pyPro = subprocess.Popen([path, "ch30_12.py"])
-print(pyPro)
-
-print("------------------------------------------------------------")  # 60個
-
-import subprocess
-
-filename1 = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/poetry.txt"
-filename2 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-textPro = subprocess.Popen(["start", filename1], shell=True)
-pictPro = subprocess.Popen(["start", filename2], shell=True)
-print("文字檔案子行程 = ", textPro)
-print("圖片檔案子行程 = ", pictPro)
-
-print("------------------------------------------------------------")  # 60個
-
-import subprocess
-
-calcPro = subprocess.run("calc.exe")
-print(f"資料型態     = {type(calcPro)}")
-print(f"列印calcPro  = {calcPro}")
-
-print("------------------------------------------------------------")  # 60個
-
-import subprocess
-
-ret = subprocess.run("echo %time%", shell=True, stdout=subprocess.PIPE)
-print(f"資料型態       = {type(ret)}")
-print(f"列印ret        = {ret}")
-print(f"列印ret.stdout = {ret.stdout}")
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1289,7 +1225,6 @@ covtp = tuple(covlt)
 print("Tuple排序後：")
 print(covtp)
 
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -1530,12 +1465,6 @@ def numRand2(x, y):
         result.append(number)
         cout += 1
     return result
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3754,7 +3683,6 @@ print("------------------------------------------------------------")  # 60個
 
 import operator
 
-
 def sorted_grades(grades):
     grades.sort(key=operator.itemgetter(2), reverse=True)
     output = []
@@ -3778,7 +3706,6 @@ print("------------------------------------------------------------")  # 60個
 # 練習 13 尋找單字中重複最多次的字母
 
 import operator
-
 
 def most_repeated_letter(word):
     letters = list(set(word))
@@ -3870,7 +3797,6 @@ print("------------------------------------------------------------")  # 60個
 
 import operator
 
-
 def prefix_cal(to_solve):
     operation = {
         "+": operator.add,
@@ -3889,7 +3815,6 @@ print("------------------------------------------------------------")  # 60個
 # 練習 27 自訂密碼產生器
 
 import random
-
 
 def set_password_source(source):
     def password_gen(length):
@@ -4378,7 +4303,6 @@ print("------------------------------------------------------------")  # 60個
 import time
 import random
 
-
 def elapsed_time_gen():
     last_time = time.perf_counter()
     while True:
@@ -4420,7 +4344,6 @@ def find_majority_num(data):
     import statistics
     return statistics.mode(data)
     """
-
 
 print(find_majority_num([1, 2, 2, 3, 2, 3, 1]))
 
@@ -4701,7 +4624,6 @@ print("夏令時間 ", xtime[8])
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("列出所有python關鍵字")
 import keyword
 print(keyword.kwlist)
@@ -4724,8 +4646,6 @@ help(greeting)
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 n = 100
 number = list(range(n + 1))
@@ -4758,7 +4678,6 @@ print("從1到%d的總和是 = " % n, total)
 
 '''
 print("------------------------------------------------------------")  # 60個
-
 
 import numpy as np
 import math
@@ -4940,16 +4859,6 @@ print(text)
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-print('全形 轉 半形')
-import unicodedata
-
-text = "「全形１２．３」「全形Ａｂｃ！（＠）」「半形片假名」「圈圈數字①②③」「符號㏊」"
-
-print("全形 :", text)
-text = unicodedata.normalize("NFKC", text)
-print("半形 :", text)
 
 
 print("------------------------------------------------------------")  # 60個

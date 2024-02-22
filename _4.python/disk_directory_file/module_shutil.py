@@ -147,6 +147,31 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
+
+import shutil
+
+fullpath = os.path.abspath('myprime.py')
+path, filename = os.path.split(fullpath)
+filename, extname = os.path.splitext(filename)
+if not os.path.exists("test-dir"):
+    os.mkdir("test-dir")
+targetfullpath = os.path.join(path, os.path.join("test-dir", "00"+extname))
+#shutil.copy(fullpath, targetfullpath)
+
+try:
+    print("實際上預期可能會有例外的程式碼寫在這裡！")
+    #10 / 0
+    shutil.copy(fullpath, targetfullpath)
+    print("在可能發生例外的指令之下的程式碼放在這邊！")
+except Exception as e:
+    print("發生錯誤了，錯誤訊息如下：")
+    print(e)
+else:
+    print("沒有發生任何錯誤。")
+finally:
+    print("不管如何，都要執行這裡")
+
+
 print('------------------------------------------------------------')	#60個
 
 

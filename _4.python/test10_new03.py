@@ -14,8 +14,6 @@ def
 import traceback
 
 
-
-
 """
 
 import sys
@@ -827,7 +825,6 @@ print("------------------------------------------------------------")  # 60個
 
 from functools import reduce
 
-
 def strToInt(s):
     def func(x, y):
         return 10 * x + y
@@ -878,7 +875,6 @@ print("------------------------------------------------------------")  # 60個
 
 from functools import reduce
 
-
 def strToInt(s):
     def func(x, y):
         return 10 * x + y
@@ -911,7 +907,6 @@ print("------------------------------------------------------------")  # 60個
 
 from functools import reduce
 
-
 def strToInt(s):
     def func(x, y):
         return 10 * x + y
@@ -940,7 +935,6 @@ print("x = ", x)
 print("------------------------------------------------------------")  # 60個
 
 from functools import reduce
-
 
 def strToInt(s):
     def charToNum(s):
@@ -1411,7 +1405,6 @@ hover_handler(on_hover)
 print("------------------------------------------------------------")  # 60個
 
 import time
-
 
 def timing_decorator(func):
     def wrapper(*args, **kwargs):
@@ -2429,7 +2422,6 @@ print("------------------------------------------------------------")  # 60個
 
 import traceback  # 導入taceback
 
-
 def passWord(pwd):
     """檢查密碼長度必須是5到8個字元"""
     pwdlen = len(pwd)  # 密碼長度
@@ -2453,7 +2445,6 @@ for pwd in ("aaabbbccc", "aaa", "aaabbb"):  # 測試系列密碼值
 print("------------------------------------------------------------")  # 60個
 
 import traceback
-
 
 def division(x, y):
     try:  # try - except指令
@@ -2624,10 +2615,6 @@ print("0932-999-199:    是台灣手機號碼", taiwanPhoneNum("0932-999-199"))
 
 print("------------------------------------------------------------")  # 60個
 
-import sys
-
-print("------------------------------------------------------------")  # 60個
-
 x1 = 1
 x2 = 11
 x3 = 111
@@ -2738,7 +2725,6 @@ print("------------------------------------------------------------")  # 60個
 
 import sys
 
-
 def wordsNum(filename):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
     try:
@@ -2825,13 +2811,6 @@ pattern = r"""(
 eMail = re.findall(pattern, msg, re.VERBOSE)  # 傳回搜尋結果
 for mail in eMail:
     print(mail[0])
-
-print("------------------------------------------------------------")  # 60個
-
-import webbrowser
-
-address = "花蓮市中正路"
-webbrowser.open("http://www.google.com.tw/maps/place/" + address)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3730,7 +3709,6 @@ for i1 in range(0, 10):                                 # 第一位數
 print("------------------------------------------------------------")  # 60個
 
 import threading, time
-
 
 def wakeUp(mytime, note, job):
     print(job, " 開始")

@@ -2401,7 +2401,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 
-'''
+"""
 #opencv
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
@@ -2414,7 +2414,7 @@ image = cv2.imread(filename)	#讀取本機圖片
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))#先轉換成RGB再顯示
 
 plt.show()
-'''
+"""
 print('------------------------------------------------------------')	#60個
 
 #用 OpenCV 讀取並顯示圖片
@@ -2818,7 +2818,7 @@ print('------------------------------------------------------------')	#60個
 
 
 
-'''
+"""
 #輸出邊緣和結構信息
 
 image = cv2.imread('data/contours.bmp')
@@ -2968,7 +2968,7 @@ for i in range(n):
     plt.imshow(cv2.cvtColor(contoursImg[i], cv2.COLOR_BGR2RGB))
 
 plt.show()
-'''
+"""
 print('------------------------------------------------------------')	#60個
 
 #篩選出大于特定大小的輪廓
@@ -4105,8 +4105,6 @@ img2 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 blended = cv2.addWeighted(img1, 1, img2, 1, 0)
 
 cv2.imshow('Surveyed', blended)
-
-
 
 
 

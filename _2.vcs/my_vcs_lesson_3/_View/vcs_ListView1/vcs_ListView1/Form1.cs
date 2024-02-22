@@ -19,6 +19,8 @@ namespace vcs_ListView1
 {
     public partial class Form1 : Form
     {
+        int flag_check_score_done = 0;
+
         ListView listView1 = new ListView();
         RichTextBox richTextBox1 = new RichTextBox();
 
@@ -42,16 +44,10 @@ namespace vcs_ListView1
 
             this.Size = new Size(1270, 700);
 
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            //button
-            x_st = 10;
-            y_st = 10;
-            dx = 150 + 5;
-            dy = 60 + 5;
+            int x_st = 10;
+            int y_st = 10;
+            int dx = 150 + 5;
+            int dy = 60 + 5;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -82,8 +78,9 @@ namespace vcs_ListView1
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
+            listView1.Clear();
             richTextBox1.Clear();
-
+            flag_check_score_done = 0;
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -162,33 +159,123 @@ namespace vcs_ListView1
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //具有多選核取框的ListView控件
+
             //建立listView 9
-            
+            richTextBox1.Text += "建立listView 9 包含checkbox\n";
+            listView1.Clear();
+            apply_listView9();
         }
 
         void apply_listView1()
         {
-            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.View = View.Details;  //把 listView1 的 View 屬性設成 Details
             listView1.FullRowSelect = true; //整行一起選取
-            listView1.Clear();
-
             listView1.GridLines = true;
 
-            listView1.Columns.Add("影片1", 200, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
-            listView1.Columns.Add("檔名1", 400, HorizontalAlignment.Left);
+            //設置標題
+            //設置列名稱、大小與對齊
+            listView1.Columns.Add("座號", 60, HorizontalAlignment.Center);
+            listView1.Columns.Add("姓名", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("國文", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("英文", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("數學", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("總分", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("平均", 100, HorizontalAlignment.Center);
+            listView1.Columns.Add("名次", 100, HorizontalAlignment.Center);
 
+            richTextBox1.Text += "目前共有 : " + listView1.Columns.Count.ToString() + " 欄\n";
 
-            listView1.Items.Add("aaaaaaaa1");
-            listView1.Items.Add("aaaaaaaa2");
-            listView1.Items.Add("aaaaaaaa3");
-            listView1.Items.Add("aaaaaaaa4");
-            listView1.Items.Add("aaaaaaaa5");
-
-
+            add_data_to_listView();
 
         }
 
+        void add_data_to_listView()
+        {
+            Random Rnd = new Random(); //加入Random，產生的數字不會重覆
+            string name_string;
+            int score_chi;
+            int score_eng;
+            int score_math;
+
+            for (int i = 0; i < 10; i++)
+            {
+                var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                //var next = new Random();
+                //Random Rnd = new Random(); //加入Random，產生的數字不會重覆
+                var builder = new StringBuilder();
+                int length = 8;
+                int j;
+
+                builder.Append("A");
+                builder.Append(((listView1.Items.Count + 1) / 100).ToString());
+                builder.Append(((listView1.Items.Count + 1) / 10).ToString());
+                builder.Append(((listView1.Items.Count + 1) % 10).ToString());
+                builder.Append("_");
+
+                for (j = 5; j < length; j++)
+                {
+                    builder.Append(str[Rnd.Next(0, str.Length)]);
+                }
+                name_string = builder.ToString();
+
+                score_chi = Rnd.Next(55, 90) + 1;
+                score_eng = Rnd.Next(50, 80) + 1;
+                score_math = Rnd.Next(40, 70) + 1;
+
+                /* debug
+                name_string = "david";
+
+                score_chi = 80;
+                score_eng = 90;
+                score_math = 100;
+                */
+
+                //建立一行資料的檔頭與第0筆資料(座號)
+                ListViewItem item = new ListViewItem((i + 1).ToString());
+
+                //建立這一筆資料的第1個子項目(姓名)
+                ListViewItem.ListViewSubItem sub_item_1 = new ListViewItem.ListViewSubItem();
+                sub_item_1.Text = name_string;
+                item.SubItems.Add(sub_item_1);
+
+                //建立這一筆資料的第2個子項目(國文)
+                ListViewItem.ListViewSubItem sub_item_2 = new ListViewItem.ListViewSubItem();
+                sub_item_2.Text = score_chi.ToString();
+                item.SubItems.Add(sub_item_2);
+
+                //建立這一筆資料的第3個子項目(英文)
+                ListViewItem.ListViewSubItem sub_item_3 = new ListViewItem.ListViewSubItem();
+                sub_item_3.Text = score_eng.ToString();
+                item.SubItems.Add(sub_item_3);
+
+                /*  這項改成直接加入
+                //建立這一筆資料的第4個子項目(數學)
+                ListViewItem.ListViewSubItem sub_item_4 = new ListViewItem.ListViewSubItem();
+                sub_item_4.Text = score_math.ToString();
+                item.SubItems.Add(sub_item_4);
+                */
+                //直接加入
+                item.SubItems.Add(score_math.ToString());
+
+                //整行資料一次加入到listView1
+                listView1.Items.Add(item);
+
+                /*
+                //添加item另法 AddRange
+                ListViewItem item = new ListViewItem((i + 1).ToString());
+                item.SubItems.Add(name_string);
+                item.SubItems.Add(score_chi.ToString());
+                item.SubItems.Add(score_eng.ToString());
+                item.SubItems.Add(score_math.ToString());
+                listView1.Items.AddRange(new ListViewItem[] { item });
+                */
+
+            }
+
+            //設置ListView最後一行可見
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+        }
 
         void apply_listView2()
         {
@@ -196,9 +283,9 @@ namespace vcs_ListView1
             //listView1.Top = 350;
             //listView1.Width = 700;
             //listView1.Height = 250;
-            listView1.GridLines = true;    //顯示各個記錄的分隔線
-            listView1.FullRowSelect = true;    //要選擇就是一行
-            listView1.View = View.Details; //定義列表顯示的方式
+            listView1.GridLines = true; //顯示格線
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.View = View.Details;  //定義列表顯示的方式
             listView1.Scrollable = true;   //需要時候顯示滾動條
             listView1.MultiSelect = false; // 不可以多行選擇
             listView1.HeaderStyle = ColumnHeaderStyle.Nonclickable;
@@ -232,7 +319,7 @@ namespace vcs_ListView1
 
         void apply_listView3()
         {
-            listView1.View = View.Details;
+            listView1.View = View.Details;  //定義列表顯示的方式
 
             ColumnHeader ch1 = new ColumnHeader();
             ch1.Text = "Disk Name";
@@ -298,7 +385,7 @@ namespace vcs_ListView1
 
         void apply_listView4()
         {
-            listView1.View = View.Details;
+            listView1.View = View.Details;  //定義列表顯示的方式
 
             createHeadersAndFillListView();
 
@@ -423,7 +510,7 @@ namespace vcs_ListView1
 
         void apply_listView6()
         {
-            listView1.View = View.Details;
+            listView1.View = View.Details;  //定義列表顯示的方式
 
             // Make some data.
             // Remove any existing items.
@@ -498,7 +585,7 @@ namespace vcs_ListView1
 
         void apply_listView7()
         {
-            listView1.View = View.Details;
+            listView1.View = View.Details;  //定義列表顯示的方式
 
             listView1.Columns.Add("舊檔名", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("新檔名", 150, HorizontalAlignment.Left);
@@ -563,8 +650,7 @@ namespace vcs_ListView1
             //ListView listView1 = new ListView();
             //listView1.Bounds = new Rectangle(new Point(10, 10), new Size(600, 400));
 
-            // Set the view to show details.
-            listView1.View = View.Details;
+            listView1.View = View.Details;  //定義列表顯示的方式
 
             // Allow the user to edit item text.
             listView1.LabelEdit = true;
@@ -573,9 +659,8 @@ namespace vcs_ListView1
             // Display check boxes.
             listView1.CheckBoxes = true;
             // Select the item and subitems when selection is made.
-            listView1.FullRowSelect = true;
-            // Display grid lines.
-            listView1.GridLines = true;
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true; //顯示格線
             // Sort the items in the list in ascending order.
             listView1.Sorting = SortOrder.Ascending;
 
@@ -633,6 +718,25 @@ namespace vcs_ListView1
             //this.Controls.Add(listView1);
         }
 
+        void apply_listView9()
+        {
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.CheckBoxes = true;//設置listView1的復選框屬性為真
+            listView1.GridLines = true; //顯示格線
+            listView1.Columns.Add("文件名稱", 150, HorizontalAlignment.Left);//向listView1中添加「文件名稱」列
+            listView1.Columns.Add("創建時間", 200, HorizontalAlignment.Left);//向listView1中添加「創建時間」列
+
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird";
+
+            foreach (String fileName in Directory.GetFiles(foldername)) //循環遍歷指定資料夾的內容
+            {
+                FileInfo file = new FileInfo(fileName);//定義一個操作文件的實例
+                ListViewItem OptionItem = new ListViewItem(file.Name);//定義一個listView選擇項的實例
+                OptionItem.SubItems.Add(file.CreationTime.ToString());//向listView控件中添加文件創建時間列
+                listView1.Items.Add(OptionItem);//執行添加操作
+                richTextBox1.Text += "加入listView : " + file.Name + "\t" + file.CreationTime.ToString() + "\n";
+            }
+        }
 
         //--------------------------------------------------------------------------------------------------------------------
 
@@ -699,17 +803,203 @@ namespace vcs_ListView1
 
         private void button13_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "測試listView 9\n";
+
+
+            richTextBox1.Text += "全選\n";
+
+            foreach (ListViewItem tempItem in listView1.Items)//循環遍歷listView控件中的每一項
+            {
+                if (tempItem.Checked == false)//如果當前項處於未選中狀態
+                {
+                    tempItem.Checked = true;//設置當前項為選中狀態
+                }
+            }
+
+            /*
+            richTextBox1.Text += "清空\n";
+
+            foreach (ListViewItem tempItem in listView1.Items)//循環遍歷listView控件中的每一項
+            {
+                if (tempItem.Checked == true)//如果當前項處於選中狀態
+                {
+                    tempItem.Checked = false;//設置當前項為未選中狀態
+                }
+            }
+
+            richTextBox1.Text += "Info\n";
+
+            int len = listView1.Items.Count;
+            richTextBox1.Text += "共有 " + len.ToString() + " 項\n";
+            foreach (ListViewItem tempItem in listView1.Items)//循環遍歷listView控件中的每一項
+            {
+                richTextBox1.Text += "項目 : " + tempItem.Text + "\t" + tempItem.SubItems[1].Text + "\t";
+
+                if (tempItem.Checked == true)//如果當前項處於選中狀態
+                {
+                    richTextBox1.Text += "已選取\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "未選取\n";
+                }
+            }
+            */
 
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //刪除資料
+            int selNdx;
+            int selCount;
 
+            selCount = listView1.SelectedIndices.Count;
+            if (selCount <= 0)  //總共選擇的個數
+            {
+                richTextBox1.Text += "未選擇要刪除的項目\n";
+                return;
+            }
+            richTextBox1.Text += "共選擇 " + selCount.ToString() + " 個項目, 分別是\n";
+            for (int i = (selCount - 1); i >= 0; i--)
+            {
+                selNdx = listView1.SelectedItems[i].Index;
+                richTextBox1.Text += "item : " + listView1.SelectedItems[i].Text + " index = " + selNdx.ToString() + "\n";
+                listView1.Items.RemoveAt(selNdx);
+            }
+            return;
+
+        }
+
+        class StudentData
+        {
+            public int number { get; set; }
+            public string name { get; set; }
+            public int score_chi { get; set; }
+            public int score_eng { get; set; }
+            public int score_math { get; set; }
+            public int total { get; set; }
+            public float average { get; set; }
+            public int rank { get; set; }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //測試listView 1 製作成績
+            if (flag_check_score_done == 1)
+            {
+                richTextBox1.Text += "已做過成績\n";
+                return;
+            }
 
+            if (listView1.Items.Count < 1)
+            {
+                richTextBox1.Text += "無資料\n";
+                return;
+            }
+
+            int i;
+            int j;
+            StudentData[] StudentDataArray = new StudentData[listView1.Items.Count];
+            int[] scores = new int[listView1.Items.Count];
+            int total;
+            float average;
+            for (i = 0; i < listView1.Items.Count; i++)
+            {
+                ListViewItem item = listView1.Items[i];
+                item.UseItemStyleForSubItems = false;
+                if (int.Parse(item.SubItems[2].Text) < 60)  //這一筆資料的第2個子項目(國文)
+                {
+                    item.SubItems[2].ForeColor = Color.Red;
+                }
+                if (int.Parse(item.SubItems[3].Text) < 60)  //這一筆資料的第3個子項目(英文)
+                {
+                    item.SubItems[3].ForeColor = Color.Red;
+                }
+                if (int.Parse(item.SubItems[4].Text) < 60)  //這一筆資料的第4個子項目(數學)
+                {
+                    item.SubItems[4].ForeColor = Color.Red;
+                }
+                total = int.Parse(item.SubItems[2].Text) + int.Parse(item.SubItems[3].Text) + int.Parse(item.SubItems[4].Text);
+                average = (float)total / 3;
+                item.SubItems.Add(total.ToString());
+                item.SubItems.Add(average.ToString("#0.00"));
+
+                richTextBox1.Text += listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\t" + listView1.Items[i].SubItems[2].Text + "\t" + listView1.Items[i].SubItems[3].Text + "\t" + listView1.Items[i].SubItems[4].Text + "\n";
+
+                StudentDataArray[i] = new StudentData { };
+                StudentDataArray[i].number = i;
+                StudentDataArray[i].name = item.SubItems[1].Text;
+                StudentDataArray[i].score_chi = int.Parse(item.SubItems[2].Text);
+                StudentDataArray[i].score_eng = int.Parse(item.SubItems[3].Text);
+                StudentDataArray[i].score_math = int.Parse(item.SubItems[4].Text);
+                StudentDataArray[i].total = total;
+                StudentDataArray[i].average = average;
+                scores[i] = total;
+            }
+
+            /*  不是成績單用的排序
+            richTextBox1.Text += "排序前：\nName_C\tName_E\tName_N\tAge\tWeight\tBirthday\n";
+            foreach (StudentData str in StudentDataArray)
+            {
+                richTextBox1.Text += str.name + "\t" + str.score_chi.ToString() + "\t" + str.score_eng.ToString() + "\t" + str.score_math.ToString() + "\t" + str.total.ToString() + "\t" + str.average.ToString("#0.00") + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "依Name_C排序, ";
+            Array.Sort(StudentDataArray, delegate(StudentData s1, StudentData s2)
+            {
+                return s1.total.CompareTo(s2.total);
+            });
+            richTextBox1.Text += "排序後：\nName_C\tName_E\tName_N\tAge\tWeight\tBirthday\n";
+            foreach (StudentData str in StudentDataArray)
+            {
+                richTextBox1.Text += str.name + "\t" + str.score_chi.ToString() + "\t" + str.score_eng.ToString() + "\t" + str.score_math.ToString() + "\t" + str.total.ToString() + "\t" + str.average.ToString("#0.00") + "\n";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            //排名次
+            int[] scores_new = new int[listView1.Items.Count];
+            int[] rank = new int[listView1.Items.Count];
+
+            Array.Copy(scores, scores_new, scores.Length);
+            Array.Sort(scores_new);
+            Array.Reverse(scores_new);
+
+            int score_last = -1;
+            for (i = 0; i < scores_new.Length; i++)
+            {
+                if (scores_new[i] == score_last)
+                    continue;
+                else
+                    score_last = scores_new[i];
+
+                //richTextBox1.Text += i.ToString() + "\t" + names[i] + "\t" + scores_new[i] + "\n";
+                for (j = 0; j < scores_new.Length; j++)
+                {
+                    if (scores[j] == scores_new[i])
+                    {
+                        rank[j] = i;
+                    }
+                }
+
+            }
+            richTextBox1.Text += "排名次：\n";
+            for (i = 0; i < scores.Length; i++)
+            {
+                //richTextBox1.Text += (i + 1).ToString() + "\t" + names[i] + "\t" + scores[i] + "\t" + (rank[i] + 1).ToString() + "\n";
+                richTextBox1.Text += (i + 1).ToString() + "\t" + scores[i] + "\t" + (rank[i] + 1).ToString() + "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            for (i = 0; i < listView1.Items.Count; i++)
+            {
+                ListViewItem t = listView1.Items[i];
+                t.SubItems.Add((rank[i] + 1).ToString());
+            }
+
+            flag_check_score_done = 1;
         }
 
         private void button16_Click(object sender, EventArgs e)

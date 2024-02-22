@@ -3,7 +3,6 @@ import random
 
 print('------------------------------------------------------------')	#60個
 
-'''
 import linecache
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt'
@@ -345,47 +344,6 @@ ean.save('ean13_barcode')
 
 
 print('------------------------------------------------------------')	#60個
-
-"""
-print('schedule：定時執行任務')
-
-import schedule
-
-
-schedule.clear()
-
-cnt = 0
-
-def job():
-    global cnt
-    print('工作示範, ', cnt)
-    cnt += 1
-    if cnt == 10:
-        print('結束工作')#尚有問題
-        schedule.clear()
-        #schedule.cancel_job()
-
-
-schedule.every(3).seconds.do(job)
-# schedule.every(3).minutes.do(job)
-# schedule.every(3).hours.do(job)
-# schedule.every(3).days.do(job)
-# schedule.every(3).weeks.do(job)
-
-# schedule.every().minute.at(":43").do(job)
-# schedule.every().hour.at(":53").do(job)
-# schedule.every().day.at("10:30").do(job)
-# schedule.every().wednesday.at("13:15").do(job)
-
-# schedule.every(5).to(10).seconds.do(job)  #每隔5至10秒執行一次,亂數決定
-
-while True:
-    schedule.run_pending()
-
-
-print('kkkkkk')
-"""
-
 print('------------------------------------------------------------')	#60個
 
 """
@@ -427,7 +385,6 @@ print(dist.compute(x1, y1, x2, y2))
 
 print('------------------------------------------------------------')	#60個
 
-
 print('verifyid：驗證身分證字號')
 
 from verifyid import verifyid
@@ -445,7 +402,6 @@ city = verify.get_city("A189229579")
 print('A189229579 城市：{}'.format(city))
 city = verify.get_city("P123456789".upper())
 print('P123456789 城市：{}'.format(city))
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -466,7 +422,6 @@ except:
 print(cnlunardate.fromsolardate(date(1974, 9, 24))) 
 print(cnlunardate.fromsolardate(date(2006, 3, 11))) 
 print(cnlunardate.fromsolardate(date(2023, 9, 20)))
-
 
 print(cnlunardate(2017, 9, 1).tosolardate())
 print(cnlunardate(2017, 6, 10, True).tosolardate())
@@ -553,6 +508,21 @@ wikipedia.set_lang('zh')
 search_pattern = '獅子'
 summary = wikipedia.summary(search_pattern, sentences=1)
 print(summary)
+
+print('------------------------------------------------------------')	#60個
+
+# pip install wikipedia
+
+import wikipedia
+
+wikipedia.set_lang("zh")
+wikipedia.summary("柔道")
+
+# python wiki_sample.py
+
+# python try_sys.py 想查詢的關鍵字
+
+# python wiki_sample_final.py 柔道
 
 print('------------------------------------------------------------')	#60個
 
@@ -677,7 +647,6 @@ print("日文:", translation_ja)
 translation_ko = GoogleTranslator(source='auto', target='ko').translate(text)
 print("韓文:", translation_ko)
 
-
 print("------------------------------------------------------------")  # 60個
 
 import keyword
@@ -705,10 +674,70 @@ worldMap.add('North America',{'us':282162848,
                      'mx':99959895,
                      'ca':30770661})                    # 標記人口資訊
 worldMap.render_to_file('tmp_world_map.svg')            # 儲存地圖檔案
-'''
 
 print("------------------------------------------------------------")  # 60個
 
 
+print('全形 轉 半形')
+import unicodedata
+
+text = "「全形１２．３」「全形Ａｂｃ！（＠）」「半形片假名」「圈圈數字①②③」「符號㏊」"
+
+print("全形 :", text)
+text = unicodedata.normalize("NFKC", text)
+print("半形 :", text)
+
+print("------------------------------------------------------------")  # 60個
+
+# 找出序列中出現次數最多的元素
+
+from collections import Counter
+
+words = [
+    "look",
+    "into",
+    "my",
+    "eyes",
+    "look",
+    "into",
+    "my",
+    "eyes",
+    "the",
+    "eyes",
+    "the",
+    "eyes",
+    "the",
+    "eyes",
+    "not",
+    "around",
+    "the",
+    "eyes",
+    "don't",
+    "look",
+    "around",
+    "the",
+    "eyes",
+    "look",
+    "into",
+    "my",
+    "eyes",
+    "you're",
+    "under",
+]
+counter = Counter(words)
+print(counter.most_common(3))
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
