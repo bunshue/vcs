@@ -265,6 +265,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(140, 60);
             this.button18.TabIndex = 126;
+            this.button18.Text = "Info";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 

@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 using System.IO;//聲明與文件的輸入輸出流有關的命名空間
 
+//ListView 搭配 contextMenuStrip 右鍵選單
+
 namespace vcs_ListView4
 {
     public partial class Form1 : Form
@@ -22,14 +24,19 @@ namespace vcs_ListView4
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //使ListView控制元件中的選擇項目以高亮度方式顯示
+
             listView1.GridLines = true;//設置是否在listView1控件中顯示網格線
-            listView1.Dock = DockStyle.Fill;//設置listView1控件在其父容器中的停靠方式
+            //listView1.Dock = DockStyle.Fill;//設置listView1控件在其父容器中的停靠方式
             listView1.Columns.Add("文件名稱", 120, HorizontalAlignment.Left);//在listView1中添加「文件名稱」列
             listView1.Columns.Add("文件屬性", 210, HorizontalAlignment.Left);//在listView1中添加「文件屬性」列
             listView1.Columns.Add("創建時間", 200, HorizontalAlignment.Left);//在listView1中添加「創建時間」列
 
-            foreach (String fileName in Directory.GetFiles("C:\\"))//循環遍歷C盤目錄空間
+            //撈出一層
+            string foldername = @"C:\_git\vcs\_1.data\______test_files3\DrAP_test";
+            foreach (String fileName in Directory.GetFiles(foldername))
             {
+                richTextBox1.Text += fileName + "\n";
                 FileInfo file = new FileInfo(fileName);//聲明一個操作文件的實例
                 ListViewItem OptionItem = new ListViewItem(file.Name);//實例化一個listView控件中選擇項的實例
                 OptionItem.SubItems.Add(file.Attributes.ToString());//在listView控件中添加文件屬性列
@@ -41,11 +48,13 @@ namespace vcs_ListView4
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
+            richTextBox1.Text += "aaaa\n";
             listView1.SelectedItems[0].ForeColor = Color.Red;//設置當前選擇項為紅色
         }
 
         private void 取消選擇ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "bbbb\n";
             if (listView1.SelectedItems.Count != 0)//當listView1控件中的選擇項不為0時
             {
                 for (int i = 0; i < listView1.SelectedItems.Count; i++)//循環遍歷控件中的每一個選擇項

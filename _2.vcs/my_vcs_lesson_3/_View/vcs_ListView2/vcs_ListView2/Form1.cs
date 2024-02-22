@@ -10,11 +10,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.Text.RegularExpressions;
 
-//各種listView的方法
-
-
-//從外部拖曳檔案進listView
-
 namespace vcs_ListView2
 {
     public partial class Form1 : Form
@@ -60,7 +55,7 @@ namespace vcs_ListView2
             listView1.Size = new Size(600, 600);
             this.Controls.Add(listView1);
 
-            richTextBox1.Size = new Size(300 + 200, 600);
+            richTextBox1.Size = new Size(300 + 200, 450);
             this.Controls.Add(richTextBox1);
 
             this.Size = new Size(1170, 700);
@@ -68,12 +63,24 @@ namespace vcs_ListView2
             int x_st = 10;
             int y_st = 10;
             int dx = 150 + 5;
-            int dy = 60 + 5;
+            int dy = 30;
+
+            lb_main_mesg0.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            lb_main_mesg1.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            lb_main_mesg2.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            lb_main_mesg3.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            lb_main_mesg4.Location = new Point(x_st + dx * 4, y_st + dy * 4);
 
             listView1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 5);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            lb_main_mesg0.Text = "各種 listView 之 方法";
+            lb_main_mesg1.Text = "從外部拖曳檔案進listView DragEnter + DragDrop";
+            lb_main_mesg2.Text = "DoubleClick      ColumnClick";
+            lb_main_mesg3.Text = "ItemActivate";
+            lb_main_mesg4.Text = "";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -92,13 +99,34 @@ namespace vcs_ListView2
             listView1.DragDrop += Files_DragDrop;//拖拽操作完成事件
             listView1.DoubleClick += new EventHandler(listView1_DoubleClick);
             listView1.ColumnClick += new ColumnClickEventHandler(listView1_ColumnClick);
-
-            listView1.Columns.Add("檔名", 120, HorizontalAlignment.Center);
-            listView1.Columns.Add("完整檔名", 400, HorizontalAlignment.Center);
-            listView1.Columns.Add("ext", 80, HorizontalAlignment.Center);
-            listView1.Columns.Add("大小", 100, HorizontalAlignment.Center);
+            listView1.ItemActivate += new EventHandler(listView1_ItemActivate);
 
 
+            listView1.Columns.Add("簡檔名", 120, HorizontalAlignment.Left);
+            listView1.Columns.Add("全檔名", 300, HorizontalAlignment.Left);
+            listView1.Columns.Add("副檔名", 80, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 80, HorizontalAlignment.Left);
+
+            //加入3筆資料
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            add_item_to_listview(filename1);
+            add_item_to_listview(filename2);
+            add_item_to_listview(filename3);
+        }
+
+        void add_item_to_listview(string filename)
+        {
+            FileInfo fi = new FileInfo(filename);
+
+            richTextBox1.Text += "fullname = " + filename + ",  name = " + fi.Name + ",  ext = " + fi.Extension + ",  size = " + ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) + "\n";
+
+            ListViewItem lvi = new ListViewItem();
+            lvi.Text = fi.Name;
+            lvi.SubItems.AddRange(new string[] { filename, fi.Extension, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)) });
+
+            listView1.Items.Add(lvi);
         }
 
         private void listView1_DoubleClick(object sender, EventArgs e)
@@ -131,34 +159,34 @@ namespace vcs_ListView2
 
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            richTextBox1.Text += "你按了 " + e.Column.ToString() + " Column\t";
+            richTextBox1.Text += "你按了第 " + e.Column.ToString() + " 欄, 依此欄排序\n";
 
-            switch (e.Column)
+        }
+
+        void listView1_ItemActivate(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "listView1_ItemActivate\n";
+            ListView lw = (ListView)sender; //將觸發此事件的對象轉換為該ListView對象
+
+            /*
+            string filename = lw.SelectedItems[0].Tag.ToString();
+            if (lw.SelectedItems[0].ImageIndex != 0)
             {
-                case 0:
-                    richTextBox1.Text += "依姓名排序\n";
-                    break;
-                case 1:
-                    richTextBox1.Text += "依國文成績排序\n";
-                    break;
-                case 2:
-                    richTextBox1.Text += "依英文成績排序\n";
-                    break;
-                case 3:
-                    richTextBox1.Text += "依數學成績排序\n";
-                    break;
-                case 4:
-                    richTextBox1.Text += "依總分排序\n";
-                    break;
-                case 5:
-                    richTextBox1.Text += "依平均分數排序\n";
-                    break;
-                default:
-                    richTextBox1.Text += "\n";
-                    break;
+                try
+                {
+                    //Process.Start(filename);
+                }
+                catch
+                {
+                    return;
+                }
             }
-
-
+            else
+            {
+                //ShowListView(filename);
+                //foldCol.Add(filename);
+            }
+            */
         }
 
 

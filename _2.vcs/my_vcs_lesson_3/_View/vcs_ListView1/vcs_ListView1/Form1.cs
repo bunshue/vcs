@@ -9,7 +9,8 @@ using System.Windows.Forms;
 
 using System.IO;
 
-//各種 listView 之加入資料
+//各種 listView 之 加入資料
+
 //簡單的加入資料  不含各種方法
 
 //ListView加入欄標題
@@ -86,9 +87,9 @@ namespace vcs_ListView1
         private void button0_Click(object sender, EventArgs e)
         {
             //建立listView 0
-            richTextBox1.Text += "建立listView 0\n";
+            richTextBox1.Text += "建立listView 0 基本款\n";
             listView1.Clear();
-            //apply_listView0();
+            apply_listView0();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -165,6 +166,12 @@ namespace vcs_ListView1
             richTextBox1.Text += "建立listView 9 包含checkbox\n";
             listView1.Clear();
             apply_listView9();
+        }
+
+        void apply_listView0()
+        {
+
+
         }
 
         void apply_listView1()
@@ -759,7 +766,6 @@ namespace vcs_ListView1
                 richTextBox1.Text += item_rect.Width.ToString() + "\t";
                 richTextBox1.Text += item_rect.Left.ToString() + "\n";
             }
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -805,7 +811,6 @@ namespace vcs_ListView1
         {
             richTextBox1.Text += "測試listView 9\n";
 
-
             richTextBox1.Text += "全選\n";
 
             foreach (ListViewItem tempItem in listView1.Items)//循環遍歷listView控件中的每一項
@@ -845,7 +850,6 @@ namespace vcs_ListView1
                 }
             }
             */
-
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -868,7 +872,6 @@ namespace vcs_ListView1
                 listView1.Items.RemoveAt(selNdx);
             }
             return;
-
         }
 
         class StudentData
@@ -1014,6 +1017,13 @@ namespace vcs_ListView1
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //Info
+            richTextBox1.Text += "目前排列方向 : " + listView1.Sorting.ToString() + "\n";
+            listView1.Sorting = SortOrder.Descending;
+            richTextBox1.Text += "目前排列方向 : " + listView1.Sorting.ToString() + "\n";
+            listView1.Sorting = SortOrder.Ascending;
+            richTextBox1.Text += "目前排列方向 : " + listView1.Sorting.ToString() + "\n";
+
 
         }
 
@@ -1061,7 +1071,33 @@ namespace vcs_ListView1
             }
             richTextBox1.Text += "\n";
         }
-
-
     }
 }
+
+/*
+
+ListView 之 排序
+// Sort.
+listView1.Sorting = SortOrder.Ascending;
+listView1.FullRowSelect = true;
+
+
+
+listview auto resize columns
+lvwValues.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+
+//listView 捲到最下一行
+            // Scroll to the last entry.
+            listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+
+//listView 自動欄寬
+            listView1.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listView1.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+			
+            lvMemory.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            lvMemory.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+*/
+
