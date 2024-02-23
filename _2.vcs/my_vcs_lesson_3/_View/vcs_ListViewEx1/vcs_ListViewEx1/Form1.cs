@@ -175,16 +175,6 @@ namespace vcs_ListViewEx1
 			// Put it in the first column of the fourth row
 			listView1.AddEmbeddedControl(b, 0, 3);
 
-			// Second, a RichTextBox (slightly modified to make it non-selectable)
-			ReadOnlyRichTextBox rtb = new ReadOnlyRichTextBox();
-			rtb.ScrollBars = RichTextBoxScrollBars.None;
-			rtb.BorderStyle = BorderStyle.None;
-			rtb.WordWrap = false;
-			rtb.BackColor = Color.White;
-			rtb.Cursor = Cursors.Default;
-			rtb.Rtf = @"{\rtf1\ansi\ansicpg1252\deff0\deflang1031{\fonttbl{\f0\fnil\fcharset0 Arial;}}{\colortbl ;\red255\green0\blue0;}\viewkind4\uc1\pard\fs14 Sample\cf1\b\fs20 Entry\cf0\par}";
-			// Embed it
-			listView1.AddEmbeddedControl(rtb, 2, 5);
 
 			// Third, a number of ProcessBars that will be updated by a timer
 			Random r = new Random();

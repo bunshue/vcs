@@ -43,7 +43,7 @@ namespace vcs_ListView1
             richTextBox1.Size = new Size(300, 600);
             this.Controls.Add(richTextBox1);
 
-            this.Size = new Size(1270, 700);
+            this.Size = new Size(1430, 700);
 
             int x_st = 10;
             int y_st = 10;
@@ -70,9 +70,19 @@ namespace vcs_ListView1
             button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            listView1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            listView1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -89,7 +99,7 @@ namespace vcs_ListView1
             //建立listView 0
             richTextBox1.Text += "建立listView 0 基本款\n";
             listView1.Clear();
-            apply_listView0();
+            apply_listView00();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -97,7 +107,7 @@ namespace vcs_ListView1
             //建立listView 1
             richTextBox1.Text += "建立listView 1\n";
             listView1.Clear();
-            apply_listView1();
+            apply_listView01();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -105,7 +115,7 @@ namespace vcs_ListView1
             //建立listView 2
             richTextBox1.Text += "建立listView 2\n";
             listView1.Clear();
-            apply_listView2();
+            apply_listView02();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -113,7 +123,7 @@ namespace vcs_ListView1
             //建立listView 3
             richTextBox1.Text += "羅列出磁盤信息 在 listView 上\n";
             listView1.Clear();
-            apply_listView3();
+            apply_listView03();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -121,7 +131,7 @@ namespace vcs_ListView1
             //建立listView 4
             richTextBox1.Text += "顯示本機文件夾及文件在ListView上\n";
             listView1.Clear();
-            apply_listView4();
+            apply_listView04();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -129,7 +139,7 @@ namespace vcs_ListView1
             //建立listView 5
             richTextBox1.Text += "在ListView加入圖片\n";
             listView1.Clear();
-            apply_listView5();
+            apply_listView05();
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -137,7 +147,7 @@ namespace vcs_ListView1
             //建立listView 6
             richTextBox1.Text += "建立listView 6\n";
             listView1.Clear();
-            apply_listView6();
+            apply_listView06();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -145,7 +155,7 @@ namespace vcs_ListView1
             //建立listView 7
             richTextBox1.Text += "建立listView 7\n";
             listView1.Clear();
-            apply_listView7();
+            apply_listView07();
 
             rename_filename();
         }
@@ -155,7 +165,7 @@ namespace vcs_ListView1
             //建立listView 8
             richTextBox1.Text += "建立listView 8\n";
             listView1.Clear();
-            apply_listView8();
+            apply_listView08();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -165,16 +175,52 @@ namespace vcs_ListView1
             //建立listView 9
             richTextBox1.Text += "建立listView 9 包含checkbox\n";
             listView1.Clear();
-            apply_listView9();
+            apply_listView09();
         }
 
-        void apply_listView0()
+        void apply_listView00()
         {
+            //基本設定
+            listView1.View = View.Details;  //把 listView1 的 View 屬性設成 Details
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.GridLines = true;
+            //listView1.AllowColumnReorder = true;
+            listView1.Font = new Font("Microsoft Sans Serif", 12.75F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
 
+            //設定欄位
+            listView1.Columns.Add("中文名", 80, HorizontalAlignment.Left);
+            listView1.Columns.Add("英文名", 80, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
+            listView1.Columns.Add("取消", 60, HorizontalAlignment.Left);
 
+            //加入項目
+            ListViewItem listViewItem1 = new ListViewItem("鼠");
+            listViewItem1.SubItems.Add("mouse");
+            listViewItem1.SubItems.Add("3");
+            listView1.Items.Add(listViewItem1);
+
+            ListViewItem listViewItem2 = new ListViewItem("牛");
+            listViewItem2.SubItems.Add("ox");
+            listViewItem2.SubItems.Add("48");
+            listView1.Items.Add(listViewItem2);
+
+            ListViewItem listViewItem3 = new ListViewItem("虎");
+            listViewItem3.SubItems.Add("tiger");
+            listViewItem3.SubItems.Add("33");
+            listView1.Items.Add(listViewItem3);
+
+            ListViewItem listViewItem4 = new ListViewItem("兔");
+            listViewItem4.SubItems.Add("rabbit");
+            listViewItem4.SubItems.Add("8");
+            listView1.Items.Add(listViewItem4);
+
+            ListViewItem listViewItem5 = new ListViewItem("龍");
+            listViewItem5.SubItems.Add("dragon");
+            listViewItem5.SubItems.Add("38");
+            listView1.Items.Add(listViewItem5);
         }
 
-        void apply_listView1()
+        void apply_listView01()
         {
             listView1.View = View.Details;  //把 listView1 的 View 屬性設成 Details
             listView1.FullRowSelect = true; //整行一起選取
@@ -277,14 +323,13 @@ namespace vcs_ListView1
                 item.SubItems.Add(score_math.ToString());
                 listView1.Items.AddRange(new ListViewItem[] { item });
                 */
-
             }
 
             //設置ListView最後一行可見
             listView1.Items[listView1.Items.Count - 1].EnsureVisible();
         }
 
-        void apply_listView2()
+        void apply_listView02()
         {
             //listView1.Left = 12;
             //listView1.Top = 350;
@@ -324,7 +369,7 @@ namespace vcs_ListView1
             }
         }
 
-        void apply_listView3()
+        void apply_listView03()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
 
@@ -390,7 +435,7 @@ namespace vcs_ListView1
             }
         }
 
-        void apply_listView4()
+        void apply_listView04()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
 
@@ -438,8 +483,6 @@ namespace vcs_ListView1
 
                 //顯示本機文件夾及文件
 
-                listView1.Items.Clear();
-
                 //labPathName.Text = root;
                 listView1.BeginUpdate();
 
@@ -483,7 +526,7 @@ namespace vcs_ListView1
             }
         }
 
-        void apply_listView5()
+        void apply_listView05()
         {
             listView1.View = View.LargeIcon;
 
@@ -515,15 +558,11 @@ namespace vcs_ListView1
             }
         }
 
-        void apply_listView6()
+        void apply_listView06()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
 
-            // Make some data.
-            // Remove any existing items.
-            listView1.Items.Clear();
-
-            // Add data rows.
+            // 製作列資料
             ListViewMakeRow(listView1, "B", new string[] { "B", "B", "1000" });
             ListViewMakeRow(listView1, "B", new string[] { "B", "B", "1000", "4/1/2014", "F" });
             ListViewMakeRow(listView1, "A", new string[] { "A", "C" });
@@ -590,7 +629,7 @@ namespace vcs_ListView1
             }
         }
 
-        void apply_listView7()
+        void apply_listView07()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
 
@@ -599,8 +638,6 @@ namespace vcs_ListView1
 
             int start_index = 8;
             string base_name = "ims_file";
-
-            listView1.Items.Clear();
 
             string dirname = @"C:\_git\vcs\_1.data\______test_files1\_case1";
 
@@ -651,7 +688,7 @@ namespace vcs_ListView1
             richTextBox1.Text += "(偽執行)總共改名" + num_files.ToString() + "個檔案\n";
         }
 
-        private void apply_listView8()
+        private void apply_listView08()
         {
             // Create a new ListView control.
             //ListView listView1 = new ListView();
@@ -725,7 +762,7 @@ namespace vcs_ListView1
             //this.Controls.Add(listView1);
         }
 
-        void apply_listView9()
+        void apply_listView09()
         {
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.CheckBoxes = true;//設置listView1的復選框屬性為真
@@ -745,9 +782,197 @@ namespace vcs_ListView1
             }
         }
 
+        void apply_listView10()
+        {
+            listView1.View = View.Details;  //定義列表顯示的方式
+
+            listView1.FullRowSelect = true;
+
+            listView1.Columns.Add("中文名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("英文名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("體重", 60, HorizontalAlignment.Left);
+            listView1.Columns.Add("代表", 120, HorizontalAlignment.Center);
+            listView1.Columns.Add("出生年", 120, HorizontalAlignment.Center);
+
+            // Add some groups to the ListView.
+            ListViewGroup group1 = new ListViewGroup("Group 1");
+            ListViewGroup group2 = new ListViewGroup("Group 2");
+            listView1.Groups.Add(group1);
+            listView1.Groups.Add(group2);
+
+            ListViewItem new_item;
+            // Group 1
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "鼠",
+                    "mouse", 
+                    "3", 
+                    "米老鼠", "2014"},
+                group1));
+            new_item.Tag = "1111";
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "牛",
+                    "ox", 
+                    "48", 
+                    "班尼牛", "2013"},
+                group1));
+            new_item.Tag = "2222";
+
+            // Group 2
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "龍",
+                    "dragon", 
+                    "38", 
+                    "逗逗龍", "2012"},
+                group2));
+            new_item.Tag = "5555";
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "蛇",
+                    "snake", 
+                    "16", 
+                    "貪吃蛇", "2008"},
+                group2));
+            new_item.Tag = "6666";
+
+            // Misc.
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "猴",
+                    "monkey", 
+                    "22", 
+                    "山道猴", "2013"}));
+            new_item.Tag = "9999";
+            new_item = listView1.Items.Add(new ListViewItem(new string[]
+                {   "雞", 
+                    "chicken", 
+                    "6", 
+                    "肯德雞", "2011"}));
+            new_item.Tag = "aaaa";
+        }
+
+        void apply_listView11()
+        {
+            listView1.View = View.Details;  //定義列表顯示的方式
+
+            listView1.FullRowSelect = true;
+
+            // 加入列資料
+            listView1.AddRow(new string[] { "鼠", "mouse", "3", "米老鼠", "2014" });
+            listView1.AddRow(new string[] { "牛", "ox", "48", "班尼牛", "2013" });
+            listView1.AddRow(new string[] { "虎", "tiger", "33", "跳跳虎", "2012" });
+            listView1.AddRow("兔", "rabbit", "8", "彼得兔", "2013");
+            listView1.AddRow("龍", "dragon", "38", "逗逗龍", "2008");
+            listView1.AddRow("蛇", "snake", "16", "貪吃蛇", "2011");
+
+            // Make the ListView column headers.
+            listView1.MakeColumnHeaders(
+                "中文名", HorizontalAlignment.Left,
+                "英文名", HorizontalAlignment.Left,
+                "體重", HorizontalAlignment.Left,
+                "代表", HorizontalAlignment.Right,
+                "Year", HorizontalAlignment.Right
+            );
+
+            // Size the columns to fit the data and colummn headers.
+            listView1.SizeColumns(-2);
+        }
+
         //--------------------------------------------------------------------------------------------------------------------
 
         private void button10_Click(object sender, EventArgs e)
+        {
+            //建立listView 10
+            richTextBox1.Text += "建立listView 10 用 group 分群\n";
+            listView1.Clear();
+            apply_listView10();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //建立listView 11
+            richTextBox1.Text += "建立listView 11\n";
+            listView1.Clear();
+            apply_listView11();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+        }
+
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+        }
+
+        //--------------------------------------------------------------------------------------------------------------------
+
+        void print_listView_data(ListView lv)
+        {
+            richTextBox1.Text += "共有 : " + lv.Columns.Count.ToString() + " 個欄目(欄)\n";
+            richTextBox1.Text += "共有 : " + lv.Items.Count.ToString() + " 個項目(列)\n";
+
+            if (lv.Items.Count <= 0)
+            {
+                richTextBox1.Text += "listView無內容\n";
+                return;
+            }
+
+            richTextBox1.Text += "共有" + lv.Items.Count.ToString() + "個項目(列)，分別是：\n";
+            for (int i = 0; i < lv.Items.Count; i++)
+            {
+                //ListViewItem t = lv.Items[i];  //相同寫法
+                //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
+                richTextBox1.Text += lv.Items[i].SubItems[0].Text + "\t" + lv.Items[i].SubItems[1].Text + "\t" + lv.Items[i].SubItems[2].Text + "\t" + lv.Items[i].SubItems[3].Text + "\n";
+            }
+
+            if (lv.SelectedItems.Count <= 0)
+            {
+                //richTextBox1.Text += "未選擇listView項目\n";
+                return;
+            }
+            richTextBox1.Text += "選擇" + lv.SelectedItems.Count.ToString() + "個項目(列)，分別是：\n";
+            for (int i = 0; i < lv.SelectedItems.Count; i++)
+            {
+                //ListViewItem t = lv.SelectedItems[i];  //相同寫法
+                //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
+                richTextBox1.Text += lv.SelectedItems[i].SubItems[0].Text + "\t" + lv.SelectedItems[i].SubItems[1].Text + "\t" + lv.SelectedItems[i].SubItems[2].Text + lv.SelectedItems[i].SubItems[3].Text + "\n";
+            }
+
+            richTextBox1.Text += "選擇" + lv.SelectedIndices.Count.ToString() + "個項目(列)，Index分別是：\n";
+            for (int i = 0; i < lv.SelectedIndices.Count; i++)
+            {
+                richTextBox1.Text += lv.SelectedIndices[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        private void button20_Click(object sender, EventArgs e)
         {
             //讀取資料
             richTextBox1.Text += "讀取資料\n";
@@ -768,7 +993,7 @@ namespace vcs_ListView1
             }
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void button21_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "依第一欄排列\n";
             richTextBox1.Text += "遞增\n";
@@ -788,15 +1013,20 @@ namespace vcs_ListView1
             */
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button22_Click(object sender, EventArgs e)
         {
-            int len = listView1.Items.Count;
             //show
+
+            int len = listView1.Items.Count;
             if (len > 0)
             {
                 for (int i = 0; i < len; i++)
                 {
                     richTextBox1.Text += listView1.Items[i].ToString() + "\n";
+                    if (listView1.Items[i].Tag != null)
+                    {
+                        richTextBox1.Text += "取得Tag : " + listView1.Items[i].Tag.ToString() + "\n";
+                    }
                 }
 
             }
@@ -804,10 +1034,9 @@ namespace vcs_ListView1
             {
                 richTextBox1.Text += "無項目\n";
             }
-
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void button23_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "測試listView 9\n";
 
@@ -852,7 +1081,7 @@ namespace vcs_ListView1
             */
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        private void button24_Click(object sender, EventArgs e)
         {
             //刪除資料
             int selNdx;
@@ -886,7 +1115,7 @@ namespace vcs_ListView1
             public int rank { get; set; }
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void button25_Click(object sender, EventArgs e)
         {
             //測試listView 1 製作成績
             if (flag_check_score_done == 1)
@@ -1005,17 +1234,27 @@ namespace vcs_ListView1
             flag_check_score_done = 1;
         }
 
-        private void button16_Click(object sender, EventArgs e)
+        private void button26_Click(object sender, EventArgs e)
+        {
+            //各種View
+            listView1.View = View.Details;
+
+            listView1.View = View.LargeIcon;
+
+            listView1.View = View.List;
+
+            listView1.View = View.SmallIcon;
+
+            listView1.View = View.Tile;
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button18_Click(object sender, EventArgs e)
+        private void button28_Click(object sender, EventArgs e)
         {
             //Info
             richTextBox1.Text += "目前排列方向 : " + listView1.Sorting.ToString() + "\n";
@@ -1024,52 +1263,12 @@ namespace vcs_ListView1
             listView1.Sorting = SortOrder.Ascending;
             richTextBox1.Text += "目前排列方向 : " + listView1.Sorting.ToString() + "\n";
 
-
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void button29_Click(object sender, EventArgs e)
         {
             listView1.Clear();
-        }
 
-        void print_listView_data(ListView lv)
-        {
-            richTextBox1.Text += "共有 : " + lv.Columns.Count.ToString() + " 個欄目(欄)\n";
-            richTextBox1.Text += "共有 : " + lv.Items.Count.ToString() + " 個項目(列)\n";
-
-            if (lv.Items.Count <= 0)
-            {
-                richTextBox1.Text += "listView無內容\n";
-                return;
-            }
-
-            richTextBox1.Text += "共有" + lv.Items.Count.ToString() + "個項目(列)，分別是：\n";
-            for (int i = 0; i < lv.Items.Count; i++)
-            {
-                //ListViewItem t = lv.Items[i];  //相同寫法
-                //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                richTextBox1.Text += lv.Items[i].SubItems[0].Text + "\t" + lv.Items[i].SubItems[1].Text + "\t" + lv.Items[i].SubItems[2].Text + "\t" + lv.Items[i].SubItems[3].Text + "\n";
-            }
-
-            if (lv.SelectedItems.Count <= 0)
-            {
-                //richTextBox1.Text += "未選擇listView項目\n";
-                return;
-            }
-            richTextBox1.Text += "選擇" + lv.SelectedItems.Count.ToString() + "個項目(列)，分別是：\n";
-            for (int i = 0; i < lv.SelectedItems.Count; i++)
-            {
-                //ListViewItem t = lv.SelectedItems[i];  //相同寫法
-                //richTextBox1.Text += "i=" + i.ToString() + " ：" + t.SubItems[0].Text + " " + t.SubItems[1].Text + "\t" + t.SubItems[2].Text + "\n";
-                richTextBox1.Text += lv.SelectedItems[i].SubItems[0].Text + "\t" + lv.SelectedItems[i].SubItems[1].Text + "\t" + lv.SelectedItems[i].SubItems[2].Text + lv.SelectedItems[i].SubItems[3].Text + "\n";
-            }
-
-            richTextBox1.Text += "選擇" + lv.SelectedIndices.Count.ToString() + "個項目(列)，Index分別是：\n";
-            for (int i = 0; i < lv.SelectedIndices.Count; i++)
-            {
-                richTextBox1.Text += lv.SelectedIndices[i].ToString() + " ";
-            }
-            richTextBox1.Text += "\n";
         }
     }
 }

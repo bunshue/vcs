@@ -26,7 +26,7 @@ namespace vcs_ListViewEx2
         {
             show_item_location();
 
-            apply_listViewEx();
+            apply_listView0();
         }
 
         void show_item_location()
@@ -42,7 +42,7 @@ namespace vcs_ListViewEx2
             this.Size = new Size(900, 700);
         }
 
-        void apply_listViewEx()
+        void apply_listView0()
         {
             /*
             richTextBox1.Text += "目前listView1共有 " + listView1.Items.Count.ToString() + " 個項目\n";
@@ -102,6 +102,7 @@ namespace vcs_ListViewEx2
             listViewEx1.Columns.Add("英文名", 80, HorizontalAlignment.Left);
             listViewEx1.Columns.Add("體重", 60, HorizontalAlignment.Left);
             listViewEx1.Columns.Add("取消", 60, HorizontalAlignment.Left);
+            listViewEx1.Columns.Add("代表人物", 100, HorizontalAlignment.Left);
 
             //加入項目
             ListViewItem listViewItem1 = new ListViewItem("鼠");
@@ -130,6 +131,17 @@ namespace vcs_ListViewEx2
             listViewEx1.Items.Add(listViewItem5);
 
             //製作lsitview內的按鈕
+            Button btn0 = new Button();
+            btn0.Name = "btn0";
+            btn0.Text = "";
+            btn0.BackgroundImage = vcs_ListViewEx2.Properties.Resources.x;
+            btn0.BackgroundImageLayout = ImageLayout.Zoom;
+            btn0.BackColor = SystemColors.Control;
+            //btn0.Size = new Size(30, 30); 目前設定大小還不行
+            btn0.Font = this.Font;
+            btn0.Click += new EventHandler(btn_Click);
+            listViewEx1.AddEmbeddedControl(btn0, 3, 0);
+
             Button btn1 = new Button();
             btn1.Name = "btn1";
             btn1.Text = "";
@@ -139,7 +151,7 @@ namespace vcs_ListViewEx2
             //btn1.Size = new Size(30, 30); 目前設定大小還不行
             btn1.Font = this.Font;
             btn1.Click += new EventHandler(btn_Click);
-            listViewEx1.AddEmbeddedControl(btn1, 3, 0);
+            listViewEx1.AddEmbeddedControl(btn1, 3, 1);
 
             Button btn2 = new Button();
             btn2.Name = "btn2";
@@ -149,7 +161,7 @@ namespace vcs_ListViewEx2
             btn2.BackColor = SystemColors.Control;
             btn2.Font = this.Font;
             btn2.Click += new EventHandler(btn_Click);
-            listViewEx1.AddEmbeddedControl(btn2, 3, 1);
+            listViewEx1.AddEmbeddedControl(btn2, 3, 2);
 
             Button btn3 = new Button();
             btn3.Name = "btn3";
@@ -159,17 +171,44 @@ namespace vcs_ListViewEx2
             btn3.BackColor = SystemColors.Control;
             btn3.Font = this.Font;
             btn3.Click += new EventHandler(btn_Click);
-            listViewEx1.AddEmbeddedControl(btn3, 3, 2);
+            listViewEx1.AddEmbeddedControl(btn3, 3, 3);
 
-            Button btn4 = new Button();
-            btn4.Name = "btn4";
-            btn4.Text = "";
-            btn4.BackgroundImage = vcs_ListViewEx2.Properties.Resources.x;
-            btn4.BackgroundImageLayout = ImageLayout.Zoom;
-            btn4.BackColor = SystemColors.Control;
-            btn4.Font = this.Font;
-            btn4.Click += new EventHandler(btn_Click);
-            listViewEx1.AddEmbeddedControl(btn4, 3, 3);
+            RichTextBox rtb0 = new RichTextBox();
+            rtb0.ScrollBars = RichTextBoxScrollBars.None;
+            rtb0.BorderStyle = BorderStyle.None;
+            rtb0.WordWrap = false;
+            rtb0.BackColor = Color.White;
+            rtb0.Cursor = Cursors.Default;
+            rtb0.Text = "米老鼠";
+            listViewEx1.AddEmbeddedControl(rtb0, 4, 0);
+
+            RichTextBox rtb1 = new RichTextBox();
+            rtb1.ScrollBars = RichTextBoxScrollBars.None;
+            rtb1.BorderStyle = BorderStyle.None;
+            rtb1.WordWrap = false;
+            rtb1.BackColor = Color.White;
+            rtb1.Cursor = Cursors.Default;
+            rtb1.Text = "班尼牛";
+            listViewEx1.AddEmbeddedControl(rtb1, 4, 1);
+
+            RichTextBox rtb2 = new RichTextBox();
+            rtb2.ScrollBars = RichTextBoxScrollBars.None;
+            rtb2.BorderStyle = BorderStyle.None;
+            rtb2.WordWrap = false;
+            rtb2.BackColor = Color.White;
+            rtb2.Cursor = Cursors.Default;
+            rtb2.Text = "跳跳虎";
+            listViewEx1.AddEmbeddedControl(rtb2, 4, 2);
+
+            //加入唯讀之RTB
+            ReadOnlyRichTextBox rtb = new ReadOnlyRichTextBox();
+            rtb.ScrollBars = RichTextBoxScrollBars.None;
+            rtb.BorderStyle = BorderStyle.None;
+            rtb.WordWrap = false;
+            rtb.BackColor = Color.White;
+            rtb.Cursor = Cursors.Default;
+            rtb.Text = "逗逗龍(唯讀)";
+            listViewEx1.AddEmbeddedControl(rtb, 4, 4);
         }
 
         private void btn_Click(object sender, EventArgs e)
@@ -191,7 +230,5 @@ namespace vcs_ListViewEx2
 
             //richTextBox1.Text += listViewEx1.SelectedIndices[0].ToString() + "\n";
         }
-
-
     }
 }

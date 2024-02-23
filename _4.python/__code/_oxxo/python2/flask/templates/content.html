@@ -1,0 +1,12 @@
+{% extends "test.html" %}
+
+{% block title %}
+okok~
+{% endblock title %}
+
+{% block content %}
+{{ super() }} <!-- 這段可以表示原本 test.html 的內容 -->
+<div>
+    你是 {{name}} 呦！
+</div>
+{% endblock content %}
