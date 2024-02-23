@@ -8,7 +8,7 @@ app = Flask(__name__)
 def login():
     if request.method == 'GET':
         name = request.values['name']
-        con = sqlite3.connect('sqlite/sq01.db')
+        con = sqlite3.connect('sq01.db')
         print("Opened database successfully")
         cur = con.cursor()
         sql = 'SELECT * FROM test WHERE name="%s";' % (name)

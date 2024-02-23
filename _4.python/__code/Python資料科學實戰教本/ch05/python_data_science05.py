@@ -4,12 +4,7 @@ str2 = str1.replace("\n", "").replace("\r", "")
 print("'" + str2 + "'")
 print("'" + str2.strip() + "'")
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-1-1b.py
 
 import string
 
@@ -21,8 +16,6 @@ for item in list1:
     print(item.strip(string.punctuation))
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-1-1c.py
 
 baseUrl = "http://example.com"
 list1 = ["http://www.example.com/test", "http://example.com/word",
@@ -48,8 +41,6 @@ for item in list1:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-1-2.py
-
 import re
 
 str1 = "  Python, is   a, \nprogramming, \n\nlanguage.\n\r   "
@@ -63,8 +54,6 @@ for item in list1:
     
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-1-2a.py
 
 import re
 
@@ -86,10 +75,7 @@ for item in list1:
     item = getPath(item)
     print(item)
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-1-2b.py
 
 import re
 
@@ -102,8 +88,6 @@ print(num)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-1-2c.py
-
 import re
 
 str1 = "上映日期: 2021-04-21"
@@ -113,11 +97,7 @@ if match:
 else:
     print("沒有找到符合的字串!")
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-1-2d.py
 
 import re
 
@@ -129,11 +109,7 @@ if match:
 else:
     print("沒有找到符合的字串!")
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-1-2e.py
 
 import re
 
@@ -144,15 +120,11 @@ if match:
 else:
     print("沒有找到符合的字串!")
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-1.py
 
 import csv
 
-csvfile = "Example.csv"
+csvfile = "data/Example.csv"
 with open(csvfile, 'r') as fp:
     reader = csv.reader(fp)
     for row in reader:
@@ -160,11 +132,9 @@ with open(csvfile, 'r') as fp:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-1a.py
-
 import csv
 
-csvfile = "Example2.csv"
+csvfile = "data/Example2.csv"
 list1 = [[10,33,45], [5, 25, 56]]
 with open(csvfile, 'w+', newline='') as fp:
     writer = csv.writer(fp)
@@ -174,14 +144,12 @@ with open(csvfile, 'w+', newline='') as fp:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-1b.py
-
 import requests
 from bs4 import BeautifulSoup
 import csv
 
 url = "https://fchart.github.io/ML/table.html"
-csvfile = "CompanySales.csv"
+csvfile = "tmp_CompanySales.csv"
 r = requests.get(url)
 r.encoding = "utf8"
 soup = BeautifulSoup(r.text, "lxml")
@@ -196,11 +164,7 @@ with open(csvfile, 'w+', newline='', encoding="utf-8") as fp:
             rowList.append(cell.get_text().replace("\n", "").replace("\r", ""))
         writer.writerow(rowList)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-2.py
 
 import json
 
@@ -217,8 +181,6 @@ print(data2)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-2a.py
-
 import json
 
 data = {
@@ -227,17 +189,15 @@ data = {
    "tel": "0933123456"        
 }
 
-jsonfile = "Example.json"
+jsonfile = "data/tmp_Example.json"
 with open(jsonfile, 'w') as fp:
     json.dump(data, fp)    
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-2b.py
-
 import json
 
-jsonfile = "Example.json"
+jsonfile = "data/tmp_Example.json"
 with open(jsonfile, 'r') as fp:
     data = json.load(fp)
 json_str = json.dumps(data)    
@@ -245,29 +205,23 @@ print(json_str)
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-2c.py
-
 import json
 import requests
 
 url = "https://fchart.github.io/json/GoogleBooks.json"
-jsonfile = "Books.json"
+jsonfile = "tmp_Books.json"
 r = requests.get(url)
 r.encoding = "utf8"
 json_data = json.loads(r.text)
 with open(jsonfile, 'w') as fp:
     json.dump(json_data, fp)    
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-3.py
 
 import requests
 
 url = "https://fchart.github.io/img/fchart03.png"
-path = "fchart03.png"
+path = "tmp_fchart03.png"
 response = requests.get(url, stream=True)
 if response.status_code == 200:
     with open(path, 'wb') as fp:
@@ -280,13 +234,11 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-3a.py
-
 import urllib.request
 
 url = "https://fchart.github.io/img/fchart03.png"
 response = urllib.request.urlopen(url)
-fp = open("fchart04.png", "wb")
+fp = open("tmp_fchart04.png", "wb")
 size = 0
 while True:
     info = response.read(10000)
@@ -299,8 +251,6 @@ fp.close()
 response.close()
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-2-3b.py
 
 import re
 import requests
@@ -325,17 +275,12 @@ if response.status_code == 200:
 else:
     print("錯誤! HTTP請求失敗...")
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-3-3.py
 
 import sqlite3
 
 # 建立資料庫連接
-conn = sqlite3.connect("Books.sqlite")
+conn = sqlite3.connect("data/Books.sqlite")
 # 執行SQL指令SELECT
 cursor = conn.execute("SELECT * FROM Books")
 # 取出查詢結果的每一筆記錄
@@ -353,7 +298,7 @@ book = "D0002,MySQL資料庫系統,600"
 f = book.split(",")
 
 # 建立資料庫連接
-conn = sqlite3.connect("Books.sqlite")
+conn = sqlite3.connect("data/Books.sqlite")
 # 建立SQL指令INSERT字串
 sql = "INSERT INTO Books (id, title, price) VALUES ('{0}','{1}',{2})"
 sql = sql.format(f[0], f[1], f[2])
@@ -377,7 +322,7 @@ d = {
 }
 
 # 建立資料庫連接
-conn = sqlite3.connect("Books.sqlite")
+conn = sqlite3.connect("data/Books.sqlite")
 # 建立SQL指令INSERT字串
 sql = "INSERT INTO Books (id, title, price) VALUES ('{0}','{1}',{2})"
 sql = sql.format(d['id'], d['title'], d['price'])
@@ -395,7 +340,7 @@ print("------------------------------------------------------------")  # 60個
 import sqlite3
 
 # 建立資料庫連接
-conn = sqlite3.connect("Books.sqlite")
+conn = sqlite3.connect("data/Books.sqlite")
 cursor = conn.cursor()
 sql = """UPDATE Books SET price=650 
          WHERE id='D0002' """
@@ -418,7 +363,7 @@ print("------------------------------------------------------------")  # 60個
 import sqlite3
 
 # 建立資料庫連接
-conn = sqlite3.connect("Books.sqlite")
+conn = sqlite3.connect("data/Books.sqlite")
 cursor = conn.cursor()
 sql = "DELETE FROM Books WHERE id='D0002'"
 sql2 = "DELETE FROM Books WHERE id='D0003'"

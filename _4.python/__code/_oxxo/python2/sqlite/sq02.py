@@ -1,6 +1,6 @@
 import sqlite3
 
-con = sqlite3.connect('sqlite/sq01.db')
+con = sqlite3.connect('sq01.db')
 print("Opened database successfully")
 cur = con.cursor()
 name = 'oxxo'
