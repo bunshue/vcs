@@ -2,6 +2,8 @@
 EXIF
 '''
 
+import sys
+
 print('------------------------------------------------------------')	#60個
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg'
@@ -110,12 +112,64 @@ filename2 = 'cccc.jpg'
 plt.imshow(image_rotated)
 plt.show()
 
+print('------------------------------------------------------------')	#60個
+
+
+
+#修改 Exif 資料
+
+import piexif
+from PIL import Image
+
+#https://pypi.org/project/piexif/
+#https://bit.ly/2RwbD2y
+
+im = Image.open("data/test.JPG")
+exif_dict = piexif.load(im.info["exif"])
+# process im and exif_dict...
+print("EXIF")
+print(exif_dict["0th"])
+exif_dict["0th"][270] = b''              # 影像描述
+exif_dict["0th"][271] = b'OXXO.STUDIO'   # 製作
+exif_dict["0th"][272] = b'GoPro Max'     # 機型
+exif_dict["0th"][305] = b'Python'        # 軟體
+print('')
+
+print("EXIF")
+print(exif_dict["Exif"])
+exif_dict["Exif"][36867] = b'2020:01:20 09:52:51'  # 製作日期
+exif_dict["Exif"][36868] = b'2020:01:20 09:52:51'  # 數位製作日期
+
+print("EXIF")
+print(exif_dict["Exif"])
+print('')
+
+print("GPS")
+print(exif_dict["GPS"])
+print('')
+
+print("lst")
+print(exif_dict["1st"])
+exif_new = piexif.dump(exif_dict)
+
+#print(exif_new)
+im.save("tmp_out.jpg", "JPEG", exif = exif_new )
+
 
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
 
 
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 

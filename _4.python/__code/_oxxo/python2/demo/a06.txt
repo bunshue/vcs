@@ -1,1 +1,0 @@
-{"tag": "tag-web", "title": "簡單理解 JavaScript Async 和 Await", "site": "/articles/201908/js-async-await.html", "date": "AUG 21, 2019"}
