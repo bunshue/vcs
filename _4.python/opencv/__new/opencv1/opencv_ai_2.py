@@ -1,0 +1,2781 @@
+"""
+一本精通：OpenCV 與 AI 影像辨識
+
+"""
+
+import os
+import sys
+import time
+import math
+import random
+
+print("------------------------------------------------------------")  # 60個
+
+import cv2
+import numpy as np
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread(filename)
+
+def show_xy(event,x,y,flags,userdata):
+    print(event,x,y,flags)
+    # 印出相關參數的數值，userdata 可透過 setMouseCallback 第三個參數垂遞給函式
+
+cv2.imshow('oxxostudio', img)
+cv2.setMouseCallback('oxxostudio', show_xy)  # 設定偵測事件的函式與視窗
+
+cv2.waitKey(0)     # 按下任意鍵停止
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread(filename)
+
+def show_xy(event,x,y,flags,param):
+    if event == 0:
+        img2 = img.copy()                         # 當滑鼠移動時，複製原本的圖片
+        cv2.circle(img2, (x,y), 10, (0,0,0), 1)   # 繪製黑色空心圓
+        cv2.imshow('oxxostudio', img2)            # 顯示繪製後的影像
+    if event == 1:
+        color = img[y,x]                          # 當滑鼠點擊時
+        print(color)                              # 印出顏色
+
+cv2.imshow('oxxostudio', img)
+cv2.setMouseCallback('oxxostudio', show_xy)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread(filename)
+
+dots = []   # 記錄座標的空串列
+def show_xy(event,x,y,flags,param):
+    if event == 1:
+        dots.append([x, y])                          # 記錄座標
+        cv2.circle(img, (x, y), 10, (0,0,255), -1)   # 在點擊的位置，繪製圓形
+        num = len(dots)                              # 目前有幾個座標
+        if num > 1:                                  # 如果有兩個點以上
+            x1 = dots[num-2][0]
+            y1 = dots[num-2][1]
+            x2 = dots[num-1][0]
+            y2 = dots[num-1][1]
+            cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)  # 取得最後的兩個座標，繪製直線
+        cv2.imshow('oxxostudio', img)
+
+cv2.imshow('oxxostudio', img)
+cv2.setMouseCallback('oxxostudio', show_xy)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('mona.jpg')
+
+dot1 = []                          # 記錄第一個座標
+dot2 = []                          # 記錄第二個座標
+
+# 滑鼠事件發生時要執行的函式
+def show_xy(event,x,y,flags,param):
+    global dot1, dot2, img         # 在函式內使用全域變數
+    # 滑鼠拖曳發生時
+    if flags == 1:
+        if event == 1:
+            dot1 = [x, y]          # 按下滑鼠時記錄第一個座標
+        if event == 0:
+            img2 = img.copy()      # 拖曳時不斷複製 img
+            dot2 = [x, y]          # 拖曳時不斷更新第二個座標
+            # 根據兩個座標繪製四邊形
+            cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
+            # 不斷顯示新圖片 ( 如果不這麼做，會出現一堆四邊形殘影 )
+            cv2.imshow('oxxostudio', img2)
+
+cv2.imshow('oxxostudio', img)
+cv2.setMouseCallback('oxxostudio', show_xy)
+
+cv2.waitKey(0)   # 按下任意鍵結束
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('mona.jpg')
+
+dot1 = []
+dot2 = []
+def show_xy(event,x,y,flags,param):
+    global dot1, dot2, img, img2    # 因為要讓 img = img2，所以也要宣告 img2 為全域變數
+    if flags == 1:
+        if event == 1:
+            dot1 = [x, y]
+        if event == 0:
+            img2 = img.copy()
+            dot2 = [x, y]
+            cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
+            cv2.imshow('oxxostudio', img2)
+        if event == 4:
+            img = img2   # 滑鼠放開時 ( event == 4 )，將 img 更新為 img2
+
+cv2.imshow('oxxostudio', img)
+cv2.setMouseCallback('oxxostudio', show_xy)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('mona.jpg')
+
+dot1 = []
+dot2 = []
+def show_xy(event,x,y,flags,param):
+    global dot1, dot2, img, img2
+    if flags == 1:
+        if event == 1:
+            dot1 = [x, y]
+        if event == 0:
+            img2 = img.copy()
+            dot2 = [x, y]
+            cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
+            cv2.imshow('oxxostudio', img2)
+        if event == 4:
+            level = 8                                         # 縮小比例 ( 可當作馬賽克的等級 )
+            h = int((dot2[0] - dot1[0]) / level)              # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
+            w = int((dot2[1] - dot1[1]) / level)              # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
+            mosaic = img[dot1[1]:dot2[1], dot1[0]:dot2[0]]    # 取得馬賽克區域
+            mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_LINEAR)   # 根據縮小尺寸縮小
+            mosaic = cv2.resize(mosaic, (dot2[0] - dot1[0], dot2[1] - dot1[1]), interpolation=cv2.INTER_NEAREST) # 放大到原本的大小
+            img[dot1[1]:dot2[1], dot1[0]:dot2[0]] = mosaic   # 置換成馬賽克的影像
+            cv2.imshow('oxxostudio', img)
+
+cv2.imshow('oxxostudio', img)
+cv2.setMouseCallback('oxxostudio', show_xy)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+dots = []   # 建立空串列記錄座標
+w = 420
+h = 240
+draw = np.zeros((h,w,4), dtype='uint8')   # 建立 420x240 的 RGBA 黑色畫布
+
+def show_xy(event,x,y,flags,param):
+    global dots, draw                     # 定義全域變數
+    if flags == 1:
+        if event == 1:
+            dots.append([x,y])            # 如果拖曳滑鼠剛開始，記錄第一點座標
+        if event == 4:
+            dots = []                     # 如果放開滑鼠，清空串列內容
+        if event == 0 or event == 4:
+            dots.append([x,y])            # 拖曳滑鼠時，不斷記錄座標
+            x1 = dots[len(dots)-2][0]     # 取得倒數第二個點的 x 座標
+            y1 = dots[len(dots)-2][1]     # 取得倒數第二個點的 y 座標
+            x2 = dots[len(dots)-1][0]     # 取得倒數第一個點的 x 座標
+            y2 = dots[len(dots)-1][1]     # 取得倒數第一個點的 y 座標
+            cv2.line(draw,(x1,y1),(x2,y2),(0,0,255,255),2)  # 畫直線
+        cv2.imshow('oxxostudio', draw)
+
+cv2.imshow('oxxostudio', draw)
+cv2.setMouseCallback('oxxostudio', show_xy)
+
+while True:
+    keyboard = cv2.waitKey(5)                    # 每 5 毫秒偵測一次鍵盤事件
+    if keyboard == ord('q'):
+        break                                    # 如果按下 q 就跳出
+    if keyboard == ord('r'):
+        draw = np.zeros((h,w,4), dtype='uint8')  # 如果按下 r 就變成原本全黑的畫布
+        cv2.imshow('oxxostudio', draw)
+
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+""" webcam
+cap = cv2.VideoCapture(0)                 # 讀取攝影鏡頭
+w = 420
+h = 240
+draw = np.zeros((h,w,4), dtype='uint8')
+fourcc = cv2.VideoWriter_fourcc(*'MJPG')  # 設定輸出影片的格式為 MJPG
+out = cv2.VideoWriter('output.mov', fourcc, 20.0, (w, h))  # 產生空的影片
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+
+def show_xy(event,x,y,flags,param):
+    global dots, draw
+    if flags == 1:
+        if event == 1:
+            dots.append([x,y])
+        if event == 4:
+            dots = []
+        if event == 0 or event == 4:
+            dots.append([x,y])
+            x1 = dots[len(dots)-2][0]
+            y1 = dots[len(dots)-2][1]
+            x2 = dots[len(dots)-1][0]
+            y2 = dots[len(dots)-1][1]
+            cv2.line(draw,(x1,y1),(x2,y2),(0,0,255,255),2)
+
+cv2.imshow('oxxostudio', draw)
+cv2.setMouseCallback('oxxostudio', show_xy)
+
+while True:
+    ret, img = cap.read()               # 讀取影片的每一個影格
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(img,(w,h))         # 縮小尺寸，加快運算速度
+    # 透過 for 迴圈合成影像
+    for i in range(w):
+        img[:,i,0] = img[:,i,0]*(1-draw[:,i,3]/255) + draw[:,i,0]*(draw[:,i,3]/255)
+        img[:,i,1] = img[:,i,1]*(1-draw[:,i,3]/255) + draw[:,i,1]*(draw[:,i,3]/255)
+        img[:,i,2] = img[:,i,2]*(1-draw[:,i,3]/255) + draw[:,i,2]*(draw[:,i,3]/255)
+    keyboard = cv2.waitKey(5)
+    if keyboard == ord('q'):
+        break
+    if keyboard == ord('r'):
+        draw = np.zeros((h,w,4), dtype='uint8')
+    cv2.imshow('oxxostudio', img)
+    out.write(img)  # 儲存影片
+
+out.release()       # 釋放資源
+cap.release()       # 釋放資源
+cv2.destroyAllWindows()
+"""
+print("------------------------------------------------------------")  # 60個
+
+cv2.namedWindow('oxxostudio')  # 建立一個名為 oxxostudio 的視窗
+
+while True:
+    keycode = cv2.waitKey(0)   # 持續等待，直到按下鍵盤按鍵才會繼續
+    c = chr(keycode)           # 將 ASCII 代碼轉換成真實字元
+    print(c, keycode)          # 印出結果
+    if keycode == 27:
+        break                  # 如果代碼等於 27，結束迴圈 ( 27 表示按鍵 ESC )
+
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('mona.jpg')
+
+# 定義調整亮度對比的函式
+def adjust(i, c, b):
+    output = i * (c/100 + 1) - c + b    # 轉換公式
+    output = np.clip(output, 0, 255)
+    output = np.uint8(output)
+    return output
+
+contrast = 0    # 初始化要調整對比度的數值
+brightness = 0  # 初始化要調整亮度的數值
+cv2.imshow('oxxostudio', img)
+
+while True:
+    keycode = cv2.waitKey(0)
+    if keycode == 0:
+        brightness = brightness + 5    # 按下鍵盤的「上」，增加亮度
+    if keycode == 1:
+        brightness = brightness - 5    # 按下鍵盤的「下」，減少亮度
+    if keycode == 2:
+        contrast = contrast - 5        # 按下鍵盤的「右」，增加對比度
+    if keycode == 3:
+        contrast = contrast + 5        # 按下鍵盤的「左」，減少對比度
+    if keycode == 113:
+        contrast, brightness = 0, 0    # 按下鍵盤的「q」，恢復預設值
+    if keycode == 27:
+        break
+    show = img.copy()                  # 複製原始圖片
+    show = adjust(show, contrast, brightness)  # 根據亮度和對比度的調整值，輸出新的圖片
+    cv2.imshow('oxxostudio', show)
+
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('mona.jpg')
+cv2.imshow('oxxostudio', img)
+
+def test(val):
+    print(val)
+
+cv2.createTrackbar('test', 'oxxostudio', 0, 255, test)
+cv2.setTrackbarPos('test', 'oxxostudio', 50)
+
+keycode = cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('mona.jpg')
+cv2.imshow('oxxostudio', img)
+
+contrast = 0    # 初始化要調整對比度的數值
+brightness = 0  # 初始化要調整亮度的數值
+cv2.imshow('oxxostudio', img)
+
+# 定義調整亮度對比的函式
+def adjust(i, c, b):
+    output = i * (c/100 + 1) - c + b    # 轉換公式
+    output = np.clip(output, 0, 255)
+    output = np.uint8(output)
+    cv2.imshow('oxxostudio', output)
+
+# 定義調整亮度函式
+def brightness_fn(val):
+    global img, contrast, brightness
+    brightness = val - 100
+    adjust(img, contrast, brightness)
+
+# 定義調整對比度函式
+def contrast_fn(val):
+    global img, contrast, brightness
+    contrast = val - 100
+    adjust(img, contrast, brightness)
+
+cv2.createTrackbar('brightness', 'oxxostudio', 0, 200, brightness_fn)  # 加入亮度調整滑桿
+cv2.setTrackbarPos('brightness', 'oxxostudio', 100)
+cv2.createTrackbar('contrast', 'oxxostudio', 0, 200, contrast_fn)      # 加入對比度調整滑桿
+cv2.setTrackbarPos('contrast', 'oxxostudio', 100)
+
+keycode = cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('mona.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)   # 將圖片轉成灰階
+
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")   # 載入人臉模型
+faces = face_cascade.detectMultiScale(gray)    # 偵測人臉
+
+for (x, y, w, h) in faces:
+    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)    # 利用 for 迴圈，抓取每個人臉屬性，繪製方框
+
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0) # 按下任意鍵停止
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+""" webcam
+cap = cv2.VideoCapture(0)
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+faces = face_cascade.detectMultiScale(gray)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    frame = cv2.resize(frame,(540,320))              # 縮小尺寸，避免尺寸過大導致效能不好
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)   # 將鏡頭影像轉換成灰階
+    faces = face_cascade.detectMultiScale(gray)      # 偵測人臉
+    for (x, y, w, h) in faces:
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 標記人臉
+    cv2.imshow('oxxostudio', frame)
+    if cv2.waitKey(1) == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('mona.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 影像轉換成灰階
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml") # 載入人臉偵測模型
+faces = face_cascade.detectMultiScale(gray,1.2,3)  # 開始辨識影像中的人臉
+
+for (x, y, w, h) in faces:
+    mosaic = img[y:y+h, x:x+w]   # 馬賽克區域
+    level = 15                   # 馬賽克程度
+    mh = int(h/level)            # 根據馬賽克程度縮小的高度
+    mw = int(w/level)            # 根據馬賽克程度縮小的寬度
+    mosaic = cv2.resize(mosaic, (mw,mh), interpolation=cv2.INTER_LINEAR) # 先縮小
+    mosaic = cv2.resize(mosaic, (w,h), interpolation=cv2.INTER_NEAREST)  # 然後放大
+    img[y:y+h, x:x+w] = mosaic   # 將指定區域換成馬賽克區域
+
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0)   # 按下任意鍵停止
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+""" webcam
+cap = cv2.VideoCapture(0)
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    frame = cv2.resize(frame,(480,300))              # 縮小尺寸，避免尺寸過大導致效能不好
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)   # 影像轉轉灰階
+    faces = face_cascade.detectMultiScale(gray)      # 偵測人臉
+    for (x, y, w, h) in faces:
+        mosaic = frame[y:y+h, x:x+w]
+        level = 15
+        mh = int(h/level)
+        mw = int(w/level)
+        mosaic = cv2.resize(mosaic, (mw,mh), interpolation=cv2.INTER_LINEAR)
+        mosaic = cv2.resize(mosaic, (w,h), interpolation=cv2.INTER_NEAREST)
+        frame[y:y+h, x:x+w] = mosaic
+    cv2.imshow('oxxostudio', frame)
+    if cv2.waitKey(1) == ord('q'):
+        break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+"""
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('girl.jpg')
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)   # 圖片轉灰階
+#gray = cv2.medianBlur(gray, 5)                # 如果一直偵測到雜訊，可使用模糊的方式去除雜訊
+
+eye_cascade = cv2.CascadeClassifier("haarcascade_eye.xml")  # 使用眼睛模型
+eyes = eye_cascade.detectMultiScale(gray)                       # 偵測眼睛
+for (x, y, w, h) in eyes:
+    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)      # 標記綠色方框
+
+mouth_cascade = cv2.CascadeClassifier("haarcascade_mcs_mouth.xml")  # 使用嘴巴模型
+mouths = mouth_cascade.detectMultiScale(gray)                           # 偵測嘴巴
+for (x, y, w, h) in mouths:
+    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), 2)              # 標記紅色方框
+
+nose_cascade = cv2.CascadeClassifier("haarcascade_mcs_nose.xml")    # 使用鼻子模型
+noses = nose_cascade.detectMultiScale(gray)                             # 偵測鼻子
+for (x, y, w, h) in noses:
+    cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)              # 標記藍色方框
+
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0)   # 按下任意鍵停止
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+""" webcam
+cap = cv2.VideoCapture(0)
+eye_cascade = cv2.CascadeClassifier("haarcascade_eye.xml")          # 使用眼睛模型
+mouth_cascade = cv2.CascadeClassifier("haarcascade_mcs_mouth.xml")  # 使用嘴巴模型
+nose_cascade = cv2.CascadeClassifier("haarcascade_mcs_nose.xml")    # 使用鼻子模型
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(frame,(540,320))
+    gray = cv2.medianBlur(img, 1)
+    gray = cv2.cvtColor(gray, cv2.COLOR_BGR2GRAY)
+    gray = cv2.medianBlur(gray, 5)
+
+    eyes = eye_cascade.detectMultiScale(gray)      # 偵測眼睛
+    for (x, y, w, h) in eyes:
+        cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+    mouths = mouth_cascade.detectMultiScale(gray)  # 偵測嘴巴
+    for (x, y, w, h) in mouths:
+        cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), 2)
+
+    noses = nose_cascade.detectMultiScale(gray)    # 偵測鼻子
+    for (x, y, w, h) in noses:
+        cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(1) == ord('q'):
+        break     # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+"""
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('cars.jpg')                    # 讀取街道影像
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    # 轉換成黑白影像
+
+car = cv2.CascadeClassifier("cars.xml")    # 讀取汽車模型
+gray = cv2.medianBlur(gray, 5)                  # 模糊化去除雜訊
+cars = car.detectMultiScale(gray, 1.1, 3)       # 偵測汽車
+for (x, y, w, h) in cars:
+    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 繪製外框
+
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0) # 按下任意鍵停止
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+img = cv2.imread('cars.jpg')                    # 讀取街道影像
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    # 轉換成黑白影像
+
+car = cv2.CascadeClassifier("haarcascade_fullbody.xml")    # 讀取人體模型
+gray = cv2.medianBlur(gray, 5)                  # 模糊化去除雜訊
+cars = car.detectMultiScale(gray, 1.1, 3)       # 偵測行人
+for (x, y, w, h) in cars:
+    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 繪製外框
+
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0)     # 按下任意鍵停止
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+detector = cv2.CascadeClassifier('xml/haarcascade_frontalface_default.xml')  # 載入人臉追蹤模型
+recog = cv2.face.LBPHFaceRecognizer_create()      # 啟用訓練人臉模型方法
+faces = []   # 儲存人臉位置大小的串列
+ids = []     # 記錄該人臉 id 的串列
+
+for i in range(1,31):
+    img = cv2.imread(f'face01/{i}.jpg')           # 依序開啟每一張蔡英文的照片
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 色彩轉換成黑白
+    img_np = np.array(gray,'uint8')               # 轉換成指定編碼的 numpy 陣列
+    face = detector.detectMultiScale(gray)        # 擷取人臉區域
+    for(x,y,w,h) in face:
+        faces.append(img_np[y:y+h,x:x+w])         # 記錄蔡英文人臉的位置和大小內像素的數值
+        ids.append(1)                             # 記錄蔡英文人臉對應的 id，只能是整數，都是 1 表示蔡英文的 id 為 1
+
+for i in range(1,16):
+    img = cv2.imread(f'face02/{i}.jpg')           # 依序開啟每一張川普的照片
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 色彩轉換成黑白
+    img_np = np.array(gray,'uint8')               # 轉換成指定編碼的 numpy 陣列
+    face = detector.detectMultiScale(gray)        # 擷取人臉區域
+    for(x,y,w,h) in face:
+        faces.append(img_np[y:y+h,x:x+w])         # 記錄川普人臉的位置和大小內像素的數值
+        ids.append(2)                             # 記錄川普人臉對應的 id，只能是整數，都是 2 表示川普的 id 為 2
+
+print('training...')                              # 提示開始訓練
+recog.train(faces,np.array(ids))                  # 開始訓練
+recog.save('face.yml')                            # 訓練完成儲存為 face.yml
+print('ok!')
+
+print("------------------------------------------------------------")  # 60個
+
+""" webcam
+recognizer = cv2.face.LBPHFaceRecognizer_create()         # 啟用訓練人臉模型方法
+recognizer.read('face.yml')                               # 讀取人臉模型檔
+cascade_path = "xml/haarcascade_frontalface_default.xml"  # 載入人臉追蹤模型
+face_cascade = cv2.CascadeClassifier(cascade_path)        # 啟用人臉追蹤
+
+cap = cv2.VideoCapture(0)                                 # 開啟攝影機
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(img,(540,300))              # 縮小尺寸，加快辨識效率
+    gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  # 轉換成黑白
+    faces = face_cascade.detectMultiScale(gray)  # 追蹤人臉 ( 目的在於標記出外框 )
+
+    # 建立姓名和 id 的對照表
+    name = {
+        '1':'Tsai',
+        '2':'Trump',
+        '3':'oxxostudio'
+    }
+
+    # 依序判斷每張臉屬於哪個 id
+    for(x,y,w,h) in faces:
+        cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)            # 標記人臉外框
+        idnum,confidence = recognizer.predict(gray[y:y+h,x:x+w])  # 取出 id 號碼以及信心指數 confidence
+        if confidence < 60:
+            text = name[str(idnum)]                               # 如果信心指數小於 60，取得對應的名字
+        else:
+            text = '???'                                          # 不然名字就是 ???
+        # 在人臉外框旁加上名字
+        cv2.putText(img, text, (x,y-5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
+
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(5) == ord('q'):
+        break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    keyName = cv2.waitKey(1)
+    # 按下 q 結束
+    if keyName == ord('q'):
+        break
+    # 按下 a 開始選取
+    if keyName == ord('a'):
+        # 選取區域
+        area = cv2.selectROI('oxxostudio', frame, showCrosshair=False, fromCenter=False)
+        print(area)
+
+    cv2.imshow('oxxostudio', frame)
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+tracker = cv2.TrackerCSRT_create()  # 創建追蹤器
+tracking = False                    # 設定 False 表示尚未開始追蹤
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    frame = cv2.resize(frame,(540,300))  # 縮小尺寸，加快速度
+    keyName = cv2.waitKey(1)
+
+    if keyName == ord('q'):
+        break
+    if keyName == ord('a'):
+        area = cv2.selectROI('oxxostudio', frame, showCrosshair=False, fromCenter=False)
+        tracker.init(frame, area)    # 初始化追蹤器
+        tracking = True              # 設定可以開始追蹤
+    if tracking:
+        success, point = tracker.update(frame)   # 追蹤成功後，不斷回傳左上和右下的座標
+        if success:
+            p1 = [int(point[0]), int(point[1])]
+            p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
+            cv2.rectangle(frame, p1, p2, (0,0,255), 3)   # 根據座標，繪製四邊形，框住要追蹤的物件
+
+    cv2.imshow('oxxostudio', frame)
+
+cap.release()
+cv2.destroyAllWindows()
+"""
+print("------------------------------------------------------------")  # 60個
+
+tracker_list = []
+for i in range(3):
+    tracker = cv2.TrackerCSRT_create()        # 創建三組追蹤器
+    tracker_list.append(tracker)
+colors = [(0,0,255),(0,255,255),(255,255,0)]  # 設定三個外框顏色
+tracking = False                              # 設定 False 表示尚未開始追蹤
+
+cap = cv2.VideoCapture('test.mov')            # 讀取某個影片
+a = 0                                         # 刪減影片影格使用
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    frame = cv2.resize(frame,(400,230))       # 縮小尺寸，加快速度
+    keyName = cv2.waitKey(1)
+    # 為了避免影片影格太多，所以採用 10 格取一格，加快處理速度
+    if a%10 == 0:
+        if keyName == ord('q'):
+            break
+        if tracking == False:
+            # 如果尚未開始追蹤，就開始標記追蹤物件的外框
+            for i in tracker_list:
+                area = cv2.selectROI('oxxostudio', frame, showCrosshair=False, fromCenter=False)
+                i.init(frame, area)    # 初始化追蹤器
+            tracking = True            # 設定可以開始追蹤
+        if tracking:
+            for i in range(len(tracker_list)):
+                success, point = tracker_list[i].update(frame)   # 追蹤成功後，不斷回傳左上和右下的座標
+                if success:
+                    p1 = [int(point[0]), int(point[1])]
+                    p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
+                    cv2.rectangle(frame, p1, p2, colors[i], 3)   # 根據座標，繪製四邊形，框住要追蹤的物件
+
+        cv2.imshow('oxxostudio', frame)
+    a = a + 1
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+""" webcam
+multiTracker = cv2.legacy.MultiTracker_create()  # 建立多物件追蹤器
+tracking = False                                 # 設定追蹤尚未開始
+colors = [(0,0,255),(0,255,255)]                 # 建立外框色彩清單
+
+cap = cv2.VideoCapture(0)                        # 讀取攝影鏡頭
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    frame = cv2.resize(frame,(400,230))         # 縮小尺寸加快速度
+    keyName = cv2.waitKey(50)
+
+    if keyName == ord('q'):
+        break
+    # 按下 a 的時候開始標記物件外框
+    if keyName == ord('a'):
+        for i in range(2):
+            area = cv2.selectROI('oxxostudio', frame, showCrosshair=False, fromCenter=False)
+            # 標記外框後設定該物件的追蹤演算法
+            tracker = cv2.legacy.TrackerCSRT_create()
+            # 將該物件加入 multiTracker
+            multiTracker.add(tracker, frame, area)
+        # 設定 True 開始追蹤
+        tracking = True
+    if tracking:
+        # 更新 multiTracker
+        success, points = multiTracker.update(frame)
+        a = 0
+        if success:
+            for i in  points:
+                p1 = (int(i[0]), int(i[1]))
+                p2 = (int(i[0] + i[2]), int(i[1] + i[3]))
+                # 標記物件外框
+                cv2.rectangle(frame, p1, p2, colors[a], 3)
+                a = a + 1
+    cv2.imshow('oxxostudio', frame)
+
+cap.release()
+cv2.destroyAllWindows()
+"""
+print("------------------------------------------------------------")  # 60個
+
+lower = np.array([30,40,200])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
+upper = np.array([90,100,255]) # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
+img = cv2.imread('oxxo.jpg')
+mask = cv2.inRange(img, lower, upper)             # 使用 inRange
+output = cv2.bitwise_and(img, img, mask = mask )  # 套用影像遮罩
+cv2.imwrite('output.jpg', output)
+cv2.waitKey(0)                                    # 按下任意鍵停止
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+lower = np.array([30,40,200])   # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
+upper = np.array([90,100,255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    mask = cv2.inRange(frame, lower, upper)               # 使用 inRange
+    output = cv2.bitwise_and(frame, frame, mask = mask )  # 套用影像遮罩
+    cv2.imshow('oxxostudio', output)
+    if cv2.waitKey(1) == ord('q'):
+        break       # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+lower = np.array([30,40,200])   # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
+upper = np.array([90,100,255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(img,(640,360))           # 縮小尺寸，加快處理速度
+    output = cv2.inRange(img, lower, upper)   # 取得顏色範圍的顏色
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))  # 設定膨脹與侵蝕的參數
+    output = cv2.dilate(output, kernel)       # 膨脹影像，消除雜訊
+    output = cv2.erode(output, kernel)        # 縮小影像，還原大小
+
+    cv2.imshow('oxxostudio', output)
+    if cv2.waitKey(1) == ord('q'):
+        break       # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+lower = np.array([30,40,200])
+upper = np.array([90,100,255])
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(img,(640,360))
+    output = cv2.inRange(img, lower, upper)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
+    output = cv2.dilate(output, kernel)
+    output = cv2.erode(output, kernel)
+
+    # cv2.findContours 抓取顏色範圍的輪廓座標
+    # cv2.RETR_EXTERNAL 表示取得範圍的外輪廓座標串列，cv2.CHAIN_APPROX_SIMPLE 為取值的演算法
+    contours, hierarchy = cv2.findContours(output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    # 使用 for 迴圈印出座標長相
+    for contour in contours:
+        print(contour)
+
+    cv2.imshow('oxxostudio', output)
+    if cv2.waitKey(1) == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+lower = np.array([30,40,200])
+upper = np.array([90,100,255])
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(img,(640,360))
+    output = cv2.inRange(img, lower, upper)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
+    output = cv2.dilate(output, kernel)
+    output = cv2.erode(output, kernel)
+
+    contours, hierarchy = cv2.findContours(output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for contour in contours:
+        area = cv2.contourArea(contour)    # 取得範圍內的面積
+        color = (0,0,255)                  # 設定外框顏色
+        # 如果面積大於 300 再標記，避免標記到背景中太小的東西
+        if(area > 300):
+            for i in range(len(contour)):
+                if i>0 and i<len(contour)-1:
+                    # 從第二個點開始畫線
+                    img = cv2.line(img, (contour[i-1][0][0], contour[i-1][0][1]), (contour[i][0][0], contour[i][0][1]), color, 3)
+                elif i == len(contour)-1:
+                    # 如果是最後一個點，與第一個點連成一線
+                    img = cv2.line(img, (contour[i][0][0], contour[i][0][1]), (contour[0][0][0], contour[0][0][1]), color, 3)
+
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(1) == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+lower = np.array([30,40,200])   # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
+upper = np.array([90,100,255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(img,(640,360))
+    output = cv2.inRange(img, lower, upper)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
+    output = cv2.dilate(output, kernel)
+    output = cv2.erode(output, kernel)
+    contours, hierarchy = cv2.findContours(output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    for contour in contours:
+        area = cv2.contourArea(contour)
+        color = (0,0,255)
+        if(area > 300):
+            x, y, w, h = cv2.boundingRect(contour)                      # 取得座標與長寬尺寸
+            img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)  # 繪製四邊形
+
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(1) == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+lower = np.array([30,40,200])
+upper = np.array([90,100,255])
+
+blue_lower = np.array([90,100,0])     # 設定藍色最低值範圍
+blue_upper = np.array([200,160,100])  # 設定藍色最高值範圍
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(img,(640,360))
+    output = cv2.inRange(img, lower, upper)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
+    output = cv2.dilate(output, kernel)
+    output = cv2.erode(output, kernel)
+    contours, hierarchy = cv2.findContours(output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) 
+
+    for contour in contours:
+        area = cv2.contourArea(contour)
+        color = (0,0,255)
+        if(area > 300):
+            x, y, w, h = cv2.boundingRect(contour)
+            img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)
+
+    # 設定選取藍色的程式
+    blue_output = cv2.inRange(img, blue_lower, blue_upper)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
+    blue_output = cv2.dilate(blue_output, kernel)
+    blue_output = cv2.erode(blue_output, kernel)
+    contours, hierarchy = cv2.findContours(blue_output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    for contour in contours:
+        area = cv2.contourArea(contour)
+        color = (255,255,0)
+        if(area > 300):
+            x, y, w, h = cv2.boundingRect(contour)
+            img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)
+
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(1) == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+cap = cv2.VideoCapture(0)
+mp_face_detection = mp.solutions.face_detection
+mp_drawing = mp.solutions.drawing_utils
+
+with mp_face_detection.FaceDetection(
+    model_selection=0, min_detection_confidence=0.5) as face_detection:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+
+        img.flags.writeable = False
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        results = face_detection.process(img)
+
+        img.flags.writeable = True
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        if results.detections:
+            print(len(results.detections))
+            for detection in results.detections:
+                mp_drawing.draw_detection(img, detection)
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(1) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp     # 載入 mediapipe 函式庫
+
+cap = cv2.VideoCapture(0)
+mp_face_detection = mp.solutions.face_detection   # 建立偵測方法
+mp_drawing = mp.solutions.drawing_utils           # 建立繪圖方法
+
+with mp_face_detection.FaceDetection(             # 開始偵測人臉
+    model_selection=0, min_detection_confidence=0.5) as face_detection:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 顏色轉換成 RGB
+        results = face_detection.process(img2)        # 偵測人臉
+
+        if results.detections:
+            for detection in results.detections:
+                mp_drawing.draw_detection(img, detection)  # 標記人臉
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+cap = cv2.VideoCapture(0)
+mp_face_detection = mp.solutions.face_detection
+mp_drawing = mp.solutions.drawing_utils
+
+with mp_face_detection.FaceDetection(
+    model_selection=0, min_detection_confidence=0.5) as face_detection:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        size = img.shape   # 取得攝影機影像尺寸
+        w = size[1]        # 取得畫面寬度
+        h = size[0]        # 取得畫面高度
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        results = face_detection.process(img2)
+
+        if results.detections:
+            for detection in results.detections:
+                mp_drawing.draw_detection(img, detection)
+                s = detection.location_data.relative_bounding_box     # 取得人臉尺寸
+                eye = int(s.width*w*0.1)                              # 計算眼睛大小 ( 人臉尺寸*0.1 )
+                a = detection.location_data.relative_keypoints[0]     # 取得左眼座標
+                b = detection.location_data.relative_keypoints[1]     # 取得右眼座標
+                ax, ay = int(a.x*w), int(a.y*h)                       # 計算左眼真正的座標
+                bx, by = int(b.x*w), int(b.y*h)                       # 計算右眼真正的座標
+                cv2.circle(img,(ax,ay),(eye+10),(255,255,255),-1)     # 畫左眼白色大圓 ( 白眼球 )
+                cv2.circle(img,(bx,by),(eye+10),(255,255,255),-1)     # 畫右眼白色大圓 ( 白眼球 )
+                cv2.circle(img,(ax,ay),eye,(0,0,0),-1)                # 畫左眼黑色大圓 ( 黑眼球 )
+                cv2.circle(img,(bx,by),eye,(0,0,0),-1)                # 畫右眼黑色大圓 ( 黑眼球 )
+                cv2.circle(img,(ax-8,ay-8),(eye-15),(255,255,255),-1) # 畫左眼白色小圓 ( 反光 )
+                cv2.circle(img,(bx-8,by-8),(eye-15),(255,255,255),-1) # 畫右眼白色小圓 ( 反光 )
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils             # mediapipe 繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles     # mediapipe 繪圖樣式
+mp_face_mesh = mp.solutions.face_mesh               # mediapipe 人臉網格方法
+drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)  # 繪圖參數設定
+
+cap = cv2.VideoCapture(0)
+
+# 啟用人臉網格偵測，設定相關參數
+with mp_face_mesh.FaceMesh(
+    max_num_faces=1,       # 一次偵測最多幾個人臉
+    refine_landmarks=True,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as face_mesh:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 顏色 BGR 轉換為 RGB
+        results = face_mesh.process(img2)             # 取得人臉網格資訊
+        if results.multi_face_landmarks:
+            for face_landmarks in results.multi_face_landmarks:
+                # 繪製網格
+                mp_drawing.draw_landmarks(
+                    image=img,
+                    landmark_list=face_landmarks,
+                    connections=mp_face_mesh.FACEMESH_TESSELATION,
+                    landmark_drawing_spec=None,
+                    connection_drawing_spec=mp_drawing_styles
+                    .get_default_face_mesh_tesselation_style())
+                # 繪製輪廓
+                mp_drawing.draw_landmarks(
+                    image=img,
+                    landmark_list=face_landmarks,
+                    connections=mp_face_mesh.FACEMESH_CONTOURS,
+                    landmark_drawing_spec=None,
+                    connection_drawing_spec=mp_drawing_styles
+                    .get_default_face_mesh_contours_style())
+                # 繪製眼睛
+                mp_drawing.draw_landmarks(
+                    image=img,
+                    landmark_list=face_landmarks,
+                    connections=mp_face_mesh.FACEMESH_IRISES,
+                    landmark_drawing_spec=None,
+                    connection_drawing_spec=mp_drawing_styles
+                    .get_default_face_mesh_iris_connections_style())
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils
+mp_drawing_styles = mp.solutions.drawing_styles
+mp_face_mesh = mp.solutions.face_mesh
+drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
+
+cap = cv2.VideoCapture(0)
+
+with mp_face_mesh.FaceMesh(
+    max_num_faces=1,
+    refine_landmarks=True,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as face_mesh:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img = cv2.resize(img,(480,320))                 # 調整影像尺寸為 480x320
+        output = np.zeros((320,480,3), dtype='uint8')   # 繪製 480x320 的黑色畫布
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        results = face_mesh.process(img2)
+        if results.multi_face_landmarks:
+            for face_landmarks in results.multi_face_landmarks:
+                # 繪製網格
+                mp_drawing.draw_landmarks(
+                    image=output,     # 繪製到 output
+                    landmark_list=face_landmarks,
+                    connections=mp_face_mesh.FACEMESH_TESSELATION,
+                    landmark_drawing_spec=None,
+                    connection_drawing_spec=mp_drawing_styles
+                    .get_default_face_mesh_tesselation_style())
+                # 繪製輪廓
+                mp_drawing.draw_landmarks(
+                    image=output,     # 繪製到 output
+                    landmark_list=face_landmarks,
+                    connections=mp_face_mesh.FACEMESH_CONTOURS,
+                    landmark_drawing_spec=None,
+                    connection_drawing_spec=mp_drawing_styles
+                    .get_default_face_mesh_contours_style())
+                # 繪製眼睛
+                mp_drawing.draw_landmarks(
+                    image=output,     # 繪製到 output
+                    landmark_list=face_landmarks,
+                    connections=mp_face_mesh.FACEMESH_IRISES,
+                    landmark_drawing_spec=None,
+                    connection_drawing_spec=mp_drawing_styles
+                    .get_default_face_mesh_iris_connections_style())
+
+        cv2.imshow('oxxostudio', output)     # 顯示 output
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils          # mediapipe 繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
+mp_hands = mp.solutions.hands                    # mediapipe 偵測手掌方法
+
+cap = cv2.VideoCapture(0)
+
+# mediapipe 啟用偵測手掌
+with mp_hands.Hands(
+    model_complexity=0,
+    # max_num_hands=1,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as hands:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
+        results = hands.process(img2)                 # 偵測手掌
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                # 將節點和骨架繪製到影像中
+                mp_drawing.draw_landmarks(
+                    img,
+                    hand_landmarks,
+                    mp_hands.HAND_CONNECTIONS,
+                    mp_drawing_styles.get_default_hand_landmarks_style(),
+                    mp_drawing_styles.get_default_hand_connections_style())
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils          # mediapipe 繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
+mp_hands = mp.solutions.hands                    # mediapipe 偵測手掌方法
+
+cap = cv2.VideoCapture(0)
+
+# mediapipe 啟用偵測手掌
+with mp_hands.Hands(
+    model_complexity=0,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as hands:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+
+    run = True         # 設定是否更動觸碰區位置
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img = cv2.resize(img,(540,320))  # 調整畫面尺寸
+        size = img.shape   # 取得攝影機影像尺寸
+        w = size[1]        # 取得畫面寬度
+        h = size[0]        # 取得畫面高度
+        if run:
+            run = False    # 如果沒有碰到，就一直是 False ( 不會更換位置 )
+            rx = random.randint(50,w-50)    # 隨機 x 座標
+            ry = random.randint(50,h-100)   # 隨機 y 座標
+            print(rx, ry)
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
+        results = hands.process(img2)                 # 偵測手掌
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                x = hand_landmarks.landmark[7].x * w   # 取得食指末端 x 座標
+                y = hand_landmarks.landmark[7].y * h   # 取得食指末端 y 座標
+                print(x,y)
+                if x>rx and x<(rx+80) and y>ry and y<(ry+80):
+                    run = True
+                # 將節點和骨架繪製到影像中
+                mp_drawing.draw_landmarks(
+                    img,
+                    hand_landmarks,
+                    mp_hands.HAND_CONNECTIONS,
+                    mp_drawing_styles.get_default_hand_landmarks_style(),
+                    mp_drawing_styles.get_default_hand_connections_style())
+
+        cv2.rectangle(img,(rx,ry),(rx+80,ry+80),(0,0,255),5)   # 畫出觸碰區
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils          # mediapipe 繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles  # mediapipe 繪圖樣式
+mp_pose = mp.solutions.pose                      # mediapipe 姿勢偵測
+
+cap = cv2.VideoCapture(0)
+
+# 啟用姿勢偵測
+with mp_pose.Pose(
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as pose:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img = cv2.resize(img,(520,300))               # 縮小尺寸，加快演算速度
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
+        results = pose.process(img2)                  # 取得姿勢偵測結果
+        # 根據姿勢偵測結果，標記身體節點和骨架
+        mp_drawing.draw_landmarks(
+            img,
+            results.pose_landmarks,
+            mp_pose.POSE_CONNECTIONS,
+            landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break     # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils
+mp_drawing_styles = mp.solutions.drawing_styles
+mp_pose = mp.solutions.pose
+
+cap = cv2.VideoCapture(0)
+bg = cv2.imread('windows-bg.jpg')   # 載入 windows 經典背景
+
+with mp_pose.Pose(
+    min_detection_confidence=0.5,
+    enable_segmentation=True,       # 額外設定 enable_segmentation 參數
+    min_tracking_confidence=0.5) as pose:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img = cv2.resize(img,(520,300))
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        results = pose.process(img2)
+        try:
+            # 使用 try 避免抓不到姿勢時發生錯誤
+            condition = np.stack((results.segmentation_mask,) * 3, axis=-1) > 0.1
+            # 如果滿足模型判斷條件 ( 表示要換成背景 )，回傳 True
+            img = np.where(condition, img, bg)
+            # 將主體與背景合成，如果滿足背景條件，就更換為 bg 的像素，不然維持原本的 img 的像素
+        except:
+            pass
+        mp_drawing.draw_landmarks(
+            img,
+            results.pose_landmarks,
+            mp_pose.POSE_CONNECTIONS,
+            landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break     # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils         # mediapipe 繪圖方法
+mp_drawing_styles = mp.solutions.drawing_styles # mediapipe 繪圖樣式
+mp_holistic = mp.solutions.holistic             # mediapipe 全身偵測方法
+
+cap = cv2.VideoCapture(0)
+
+# mediapipe 啟用偵測全身
+with mp_holistic.Holistic(
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as holistic:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img = cv2.resize(img,(520,300))
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
+        results = holistic.process(img2)              # 開始偵測全身
+        # 面部偵測，繪製臉部網格
+        mp_drawing.draw_landmarks(
+            img,
+            results.face_landmarks,
+            mp_holistic.FACEMESH_CONTOURS,
+            landmark_drawing_spec=None,
+            connection_drawing_spec=mp_drawing_styles
+            .get_default_face_mesh_contours_style())
+        # 身體偵測，繪製身體骨架
+        mp_drawing.draw_landmarks(
+            img,
+            results.pose_landmarks,
+            mp_holistic.POSE_CONNECTIONS,
+            landmark_drawing_spec=mp_drawing_styles
+            .get_default_pose_landmarks_style())
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
+mp_objectron = mp.solutions.objectron    # mediapipe 物體偵測
+
+cap = cv2.VideoCapture(0)
+
+# 啟用物體偵測，偵測鞋子 Shoe
+with mp_objectron.Objectron(static_image_mode=False,
+                            max_num_objects=5,
+                            min_detection_confidence=0.5,
+                            min_tracking_confidence=0.99,
+                            model_name='Shoe') as objectron:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img = cv2.resize(img,(520,300))               # 縮小尺寸，加快演算速度
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
+        results = objectron.process(img2)             # 取得物體偵測結果
+        # 標記所偵測到的物體
+        if results.detected_objects:
+            for detected_object in results.detected_objects:
+                mp_drawing.draw_landmarks(
+                  img, detected_object.landmarks_2d, mp_objectron.BOX_CONNECTIONS)
+                mp_drawing.draw_axis(img, detected_object.rotation,
+                                    detected_object.translation)
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils                    # mediapipe 繪圖功能
+mp_selfie_segmentation = mp.solutions.selfie_segmentation  # mediapipe 自拍分割方法
+
+cap = cv2.VideoCapture(0)
+bg = cv2.imread('windows-bg.jpg')   # 載入 windows 經典背景
+
+# mediapipe 啟用自拍分割
+with mp_selfie_segmentation.SelfieSegmentation(
+    model_selection=1) as selfie_segmentation:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img = cv2.resize(img,(520,300))               # 縮小尺寸，加快演算速度
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
+        results = selfie_segmentation.process(img2)   # 取得自拍分割結果
+        condition = np.stack((results.segmentation_mask,) * 3, axis=-1) > 0.1 # 如果滿足模型判斷條件 ( 表示要換成背景 )，回傳 True
+        output_image = np.where(condition, img, bg)
+        # 將主體與背景合成，如果滿足背景條件，就更換為 bg 的像素，不然維持原本的 img 的像素
+
+        cv2.imshow('oxxostudio', output_image)
+        if cv2.waitKey(5) == ord('q'):
+            break     # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils
+mp_drawing_styles = mp.solutions.drawing_styles
+mp_hands = mp.solutions.hands
+
+# 根據兩點的座標，計算角度
+def vector_2d_angle(v1, v2):
+    v1_x = v1[0]
+    v1_y = v1[1]
+    v2_x = v2[0]
+    v2_y = v2[1]
+    try:
+        angle_= math.degrees(math.acos((v1_x*v2_x+v1_y*v2_y)/(((v1_x**2+v1_y**2)**0.5)*((v2_x**2+v2_y**2)**0.5))))
+    except:
+        angle_ = 180
+    return angle_
+
+# 根據傳入的 21 個節點座標，得到該手指的角度
+def hand_angle(hand_):
+    angle_list = []
+    # thumb 大拇指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])- int(hand_[2][0])),(int(hand_[0][1])-int(hand_[2][1]))),
+        ((int(hand_[3][0])- int(hand_[4][0])),(int(hand_[3][1])- int(hand_[4][1])))
+        )
+    angle_list.append(angle_)
+    # index 食指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])-int(hand_[6][0])),(int(hand_[0][1])- int(hand_[6][1]))),
+        ((int(hand_[7][0])- int(hand_[8][0])),(int(hand_[7][1])- int(hand_[8][1])))
+        )
+    angle_list.append(angle_)
+    # middle 中指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])- int(hand_[10][0])),(int(hand_[0][1])- int(hand_[10][1]))),
+        ((int(hand_[11][0])- int(hand_[12][0])),(int(hand_[11][1])- int(hand_[12][1])))
+        )
+    angle_list.append(angle_)
+    # ring 無名指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])- int(hand_[14][0])),(int(hand_[0][1])- int(hand_[14][1]))),
+        ((int(hand_[15][0])- int(hand_[16][0])),(int(hand_[15][1])- int(hand_[16][1])))
+        )
+    angle_list.append(angle_)
+    # pink 小拇指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])- int(hand_[18][0])),(int(hand_[0][1])- int(hand_[18][1]))),
+        ((int(hand_[19][0])- int(hand_[20][0])),(int(hand_[19][1])- int(hand_[20][1])))
+        )
+    angle_list.append(angle_)
+    return angle_list
+
+# 根據手指角度的串列內容，返回對應的手勢名稱
+def hand_pos(finger_angle):
+    f1 = finger_angle[0]   # 大拇指角度
+    f2 = finger_angle[1]   # 食指角度
+    f3 = finger_angle[2]   # 中指角度
+    f4 = finger_angle[3]   # 無名指角度
+    f5 = finger_angle[4]   # 小拇指角度
+
+    # 小於 50 表示手指伸直，大於等於 50 表示手指捲縮
+    if f1<50 and f2>=50 and f3>=50 and f4>=50 and f5>=50:
+        return 'good'
+    elif f1>=50 and f2>=50 and f3<50 and f4>=50 and f5>=50:
+        return 'no!!!'
+    elif f1<50 and f2<50 and f3>=50 and f4>=50 and f5<50:
+        return 'ROCK!'
+    elif f1>=50 and f2>=50 and f3>=50 and f4>=50 and f5>=50:
+        return '0'
+    elif f1>=50 and f2>=50 and f3>=50 and f4>=50 and f5<50:
+        return 'pink'
+    elif f1>=50 and f2<50 and f3>=50 and f4>=50 and f5>=50:
+        return '1'
+    elif f1>=50 and f2<50 and f3<50 and f4>=50 and f5>=50:
+        return '2'
+    elif f1>=50 and f2>=50 and f3<50 and f4<50 and f5<50:
+        return 'ok'
+    elif f1<50 and f2>=50 and f3<50 and f4<50 and f5<50:
+        return 'ok'
+    elif f1>=50 and f2<50 and f3<50 and f4<50 and f5>50:
+        return '3'
+    elif f1>=50 and f2<50 and f3<50 and f4<50 and f5<50:
+        return '4'
+    elif f1<50 and f2<50 and f3<50 and f4<50 and f5<50:
+        return '5'
+    elif f1<50 and f2>=50 and f3>=50 and f4>=50 and f5<50:
+        return '6'
+    elif f1<50 and f2<50 and f3>=50 and f4>=50 and f5>=50:
+        return '7'
+    elif f1<50 and f2<50 and f3<50 and f4>=50 and f5>=50:
+        return '8'
+    elif f1<50 and f2<50 and f3<50 and f4<50 and f5>=50:
+        return '9'
+    else:
+        return ''
+
+cap = cv2.VideoCapture(0)            # 讀取攝影機
+fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 印出文字的字型
+lineType = cv2.LINE_AA               # 印出文字的邊框
+
+# mediapipe 啟用偵測手掌
+with mp_hands.Hands(
+    model_complexity=0,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as hands:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    w, h = 540, 310                                  # 影像尺寸
+    while True:
+        ret, img = cap.read()
+        img = cv2.resize(img, (w,h))                 # 縮小尺寸，加快處理效率
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換成 RGB 色彩
+        results = hands.process(img2)                # 偵測手勢
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                finger_points = []                   # 記錄手指節點座標的串列
+                for i in hand_landmarks.landmark:
+                    # 將 21 個節點換算成座標，記錄到 finger_points
+                    x = i.x*w
+                    y = i.y*h
+                    finger_points.append((x,y))
+                if finger_points:
+                    finger_angle = hand_angle(finger_points) # 計算手指角度，回傳長度為 5 的串列
+                    #print(finger_angle)                     # 印出角度 ( 有需要就開啟註解 )
+                    text = hand_pos(finger_angle)            # 取得手勢所回傳的內容
+                    cv2.putText(img, text, (30,120), fontFace, 5, (255,255,255), 10, lineType) # 印出文字
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils
+mp_drawing_styles = mp.solutions.drawing_styles
+mp_hands = mp.solutions.hands
+
+# 根據兩點的座標，計算角度
+def vector_2d_angle(v1, v2):
+    v1_x = v1[0]
+    v1_y = v1[1]
+    v2_x = v2[0]
+    v2_y = v2[1]
+    try:
+        angle_= math.degrees(math.acos((v1_x*v2_x+v1_y*v2_y)/(((v1_x**2+v1_y**2)**0.5)*((v2_x**2+v2_y**2)**0.5))))
+    except:
+        angle_ = 180
+    return angle_
+
+# 根據傳入的 21 個節點座標，得到該手指的角度
+def hand_angle(hand_):
+    angle_list = []
+    # thumb 大拇指角度
+    angle_ = vector_2d_angle(
+            ((int(hand_[0][0])- int(hand_[2][0])),(int(hand_[0][1])-int(hand_[2][1]))),
+            ((int(hand_[3][0])- int(hand_[4][0])),(int(hand_[3][1])- int(hand_[4][1])))
+        )
+    angle_list.append(angle_)
+    # index 食指角度
+    angle_ = vector_2d_angle(
+            ((int(hand_[0][0])-int(hand_[6][0])),(int(hand_[0][1])- int(hand_[6][1]))),
+            ((int(hand_[7][0])- int(hand_[8][0])),(int(hand_[7][1])- int(hand_[8][1])))
+        )
+    angle_list.append(angle_)
+    # middle 中指角度
+    angle_ = vector_2d_angle(
+            ((int(hand_[0][0])- int(hand_[10][0])),(int(hand_[0][1])- int(hand_[10][1]))),
+            ((int(hand_[11][0])- int(hand_[12][0])),(int(hand_[11][1])- int(hand_[12][1])))
+        )
+    angle_list.append(angle_)
+    # ring 無名指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])- int(hand_[14][0])),(int(hand_[0][1])- int(hand_[14][1]))),
+        ((int(hand_[15][0])- int(hand_[16][0])),(int(hand_[15][1])- int(hand_[16][1])))
+        )
+    angle_list.append(angle_)
+    # pink 小拇指角度
+    angle_ = vector_2d_angle(
+            ((int(hand_[0][0])- int(hand_[18][0])),(int(hand_[0][1])- int(hand_[18][1]))),
+            ((int(hand_[19][0])- int(hand_[20][0])),(int(hand_[19][1])- int(hand_[20][1])))
+        )
+    angle_list.append(angle_)
+    return angle_list
+
+# 根據手指角度的串列內容，返回對應的手勢名稱
+def hand_pos(finger_angle):
+    f1 = finger_angle[0]   # 大拇指角度
+    f2 = finger_angle[1]   # 食指角度
+    f3 = finger_angle[2]   # 中指角度
+    f4 = finger_angle[3]   # 無名指角度
+    f5 = finger_angle[4]   # 小拇指角度
+
+    # 小於 50 表示手指伸直，大於等於 50 表示手指捲縮
+    if f1<50 and f2>=50 and f3>=50 and f4>=50 and f5>=50:
+        return 'good'
+    elif f1>=50 and f2>=50 and f3<50 and f4>=50 and f5>=50:
+        return 'no!!!'
+    elif f1<50 and f2<50 and f3>=50 and f4>=50 and f5<50:
+        return 'ROCK!'
+    elif f1>=50 and f2>=50 and f3>=50 and f4>=50 and f5>=50:
+        return '0'
+    elif f1>=50 and f2>=50 and f3>=50 and f4>=50 and f5<50:
+        return 'pink'
+    elif f1>=50 and f2<50 and f3>=50 and f4>=50 and f5>=50:
+        return '1'
+    elif f1>=50 and f2<50 and f3<50 and f4>=50 and f5>=50:
+        return '2'
+    elif f1>=50 and f2>=50 and f3<50 and f4<50 and f5<50:
+        return 'ok'
+    elif f1<50 and f2>=50 and f3<50 and f4<50 and f5<50:
+        return 'ok'
+    elif f1>=50 and f2<50 and f3<50 and f4<50 and f5>50:
+        return '3'
+    elif f1>=50 and f2<50 and f3<50 and f4<50 and f5<50:
+        return '4'
+    elif f1<50 and f2<50 and f3<50 and f4<50 and f5<50:
+        return '5'
+    elif f1<50 and f2>=50 and f3>=50 and f4>=50 and f5<50:
+        return '6'
+    elif f1<50 and f2<50 and f3>=50 and f4>=50 and f5>=50:
+        return '7'
+    elif f1<50 and f2<50 and f3<50 and f4>=50 and f5>=50:
+        return '8'
+    elif f1<50 and f2<50 and f3<50 and f4<50 and f5>=50:
+        return '9'
+    else:
+        return ''
+
+cap = cv2.VideoCapture(0)            # 讀取攝影機
+fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 印出文字的字型
+lineType = cv2.LINE_AA               # 印出文字的邊框
+
+# mediapipe 啟用偵測手掌
+with mp_hands.Hands(
+    model_complexity=0,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as hands:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    w, h = 540, 310                                  # 影像尺寸
+    while True:
+        ret, img = cap.read()
+        img = cv2.resize(img, (w,h))                 # 縮小尺寸，加快處理效率
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換成 RGB 色彩
+        results = hands.process(img2)
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                finger_points = []                   # 記錄手指節點座標的串列
+                fx = []                              # 記錄所有 x 座標的串列
+                fy = []                              # 記錄所有 y 座標的串列
+                for i in hand_landmarks.landmark:
+                    # 將 21 個節點換算成座標，記錄到 finger_points
+                    x = i.x*w                        # 計算 x 座標
+                    y = i.y*h                        # 計算 y 座標
+                    finger_points.append((x,y))
+                    fx.append(int(x))                # 記錄 x 座標
+                    fy.append(int(y))                # 記錄 y 座標
+                if finger_points:
+                    finger_angle = hand_angle(finger_points) # 計算手指角度，回傳長度為 5 的串列
+                    #print(finger_angle)             # 印出角度 ( 有需要就開啟註解 )
+                    text = hand_pos(finger_angle)    # 取得手勢所回傳的內容
+                    if text == 'no!!!':
+                        x_max = max(fx)              # 如果是比中指，取出 x 座標最大值
+                        y_max = max(fy)              # 如果是比中指，取出 y 座標最大值
+                        x_min = min(fx) - 10         # 如果是比中指，取出 x 座標最小值
+                        y_min = min(fy) - 10         # 如果是比中指，取出 y 座標最小值
+                        if x_max > w: x_max = w      # 如果最大值超過邊界，將最大值等於邊界
+                        if y_max > h: y_max = h      # 如果最大值超過邊界，將最大值等於邊界
+                        if x_min < 0: x_min = 0      # 如果最小值超過邊界，將最小值等於邊界
+                        if y_min < 0: y_min = 0      # 如果最小值超過邊界，將最小值等於邊界
+                        mosaic_w = x_max - x_min     # 計算四邊形的寬
+                        mosaic_h = y_max - y_min     # 計算四邊形的高
+                        mosaic = img[y_min:y_max, x_min:x_max]     # 取出四邊形區域
+                        mosaic = cv2.resize(mosaic, (8,8), interpolation=cv2.INTER_LINEAR)  # 根據縮小尺寸縮小
+                        mosaic = cv2.resize(mosaic, (mosaic_w,mosaic_h), interpolation=cv2.INTER_NEAREST) # 放大到原本的大小
+                        img[y_min:y_max, x_min:x_max] = mosaic    # 馬賽克區域
+                    else:
+                        cv2.putText(img, text, (30,120), fontFace, 5, (255,255,255), 10, lineType) # 印出文字
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils
+mp_drawing_styles = mp.solutions.drawing_styles
+mp_hands = mp.solutions.hands
+
+# 根據兩點的座標，計算角度
+def vector_2d_angle(v1, v2):
+    v1_x = v1[0]
+    v1_y = v1[1]
+    v2_x = v2[0]
+    v2_y = v2[1]
+    try:
+        angle_= math.degrees(math.acos((v1_x*v2_x+v1_y*v2_y)/(((v1_x**2+v1_y**2)**0.5)*((v2_x**2+v2_y**2)**0.5))))
+    except:
+        angle_ = 180
+    return angle_
+
+# 根據傳入的 21 個節點座標，得到該手指的角度
+def hand_angle(hand_):
+    angle_list = []
+    # thumb 大拇指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])- int(hand_[2][0])),(int(hand_[0][1])-int(hand_[2][1]))),
+        ((int(hand_[3][0])- int(hand_[4][0])),(int(hand_[3][1])- int(hand_[4][1])))
+        )
+    angle_list.append(angle_)
+    # index 食指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])-int(hand_[6][0])),(int(hand_[0][1])- int(hand_[6][1]))),
+        ((int(hand_[7][0])- int(hand_[8][0])),(int(hand_[7][1])- int(hand_[8][1])))
+        )
+    angle_list.append(angle_)
+    # middle 中指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])- int(hand_[10][0])),(int(hand_[0][1])- int(hand_[10][1]))),
+        ((int(hand_[11][0])- int(hand_[12][0])),(int(hand_[11][1])- int(hand_[12][1])))
+        )
+    angle_list.append(angle_)
+    # ring 無名指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])- int(hand_[14][0])),(int(hand_[0][1])- int(hand_[14][1]))),
+        ((int(hand_[15][0])- int(hand_[16][0])),(int(hand_[15][1])- int(hand_[16][1])))
+        )
+    angle_list.append(angle_)
+    # pink 小拇指角度
+    angle_ = vector_2d_angle(
+        ((int(hand_[0][0])- int(hand_[18][0])),(int(hand_[0][1])- int(hand_[18][1]))),
+        ((int(hand_[19][0])- int(hand_[20][0])),(int(hand_[19][1])- int(hand_[20][1])))
+        )
+    angle_list.append(angle_)
+    return angle_list
+
+# 根據手指角度的串列內容，返回對應的手勢名稱
+def hand_pos(finger_angle):
+    f1 = finger_angle[0]   # 大拇指角度
+    f2 = finger_angle[1]   # 食指角度
+    f3 = finger_angle[2]   # 中指角度
+    f4 = finger_angle[3]   # 無名指角度
+    f5 = finger_angle[4]   # 小拇指角度
+
+    # 小於 50 表示手指伸直，大於等於 50 表示手指捲縮
+    if f1>=50 and f2<50 and f3>=50 and f4>=50 and f5>=50:
+        return '1'
+    else:
+        return ''
+
+cap = cv2.VideoCapture(0)            # 讀取攝影機
+fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 印出文字的字型
+lineType = cv2.LINE_AA               # 印出文字的邊框
+
+# mediapipe 啟用偵測手掌
+with mp_hands.Hands(
+    model_complexity=0,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as hands:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    w, h = 540, 310                                        # 影像尺寸
+    draw = np.zeros((h,w,4), dtype='uint8')                # 繪製全黑背景，尺寸和影像相同
+    dots = []                                              # 使用 dots 空串列記錄繪圖座標點
+    cv2.rectangle(draw,(20,20),(60,60),(0,0,255,255),-1)   # 在畫面上方放入紅色正方形
+    cv2.rectangle(draw,(80,20),(120,60),(0,255,0,255),-1)  # 在畫面上方放入綠色正方形
+    cv2.rectangle(draw,(140,20),(180,60),(255,0,0,255),-1) # 在畫面上方放入藍色正方形
+    color = (0,0,255,255)                                  # 設定預設顏色為紅色
+    while True:
+        ret, img = cap.read()
+        img = cv2.resize(img, (w,h))                       # 縮小尺寸，加快處理效率
+        img = cv2.flip(img, 1)
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)        # 偵測手勢的影像轉換成 RGB 色彩
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)        # 畫圖的影像轉換成 BGRA 色彩
+        results = hands.process(img2)                      # 偵測手勢
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                finger_points = []                         # 記錄手指節點座標的串列
+                for i in hand_landmarks.landmark:
+                    # 將 21 個節點換算成座標，記錄到 finger_points
+                    x = i.x*w
+                    y = i.y*h
+                    finger_points.append((x,y))
+                if finger_points:
+                    finger_angle = hand_angle(finger_points) # 計算手指角度，回傳長度為 5 的串列
+                    text = hand_pos(finger_angle)            # 取得手勢所回傳的內容
+                    if text == '1':
+                        fx = int(finger_points[8][0])        # 如果手勢為 1，記錄食指末端的座標
+                        fy = int(finger_points[8][1])
+                        if fy>=20 and fy<=60 and fx>=20 and fx<=60:
+                            color = (0,0,255,255)            # 如果食指末端碰到紅色，顏色改成紅色
+                        elif fy>=20 and fy<=60 and fx>=80 and fx<=120:
+                            color = (0,255,0,255)            # 如果食指末端碰到綠色，顏色改成綠色
+                        elif fy>=20 and fy<=60 and fx>=140 and fx<=180:
+                            color = (255,0,0,255)            # 如果食指末端碰到藍色，顏色改成藍色
+                        else:
+                            dots.append([fx,fy])             # 記錄食指座標
+                            dl = len(dots)
+                            if dl>1:
+                                dx1 = dots[dl-2][0]
+                                dy1 = dots[dl-2][1]
+                                dx2 = dots[dl-1][0]
+                                dy2 = dots[dl-1][1]
+                                cv2.line(draw,(dx1,dy1),(dx2,dy2),color,5)  # 在黑色畫布上畫圖
+                    else:
+                        dots = [] # 如果換成別的手勢，清空 dots
+
+        # 將影像和黑色畫布合成
+        for j in range(w):
+            img[:,j,0] = img[:,j,0]*(1-draw[:,j,3]/255) + draw[:,j,0]*(draw[:,j,3]/255)
+            img[:,j,1] = img[:,j,1]*(1-draw[:,j,3]/255) + draw[:,j,1]*(draw[:,j,3]/255)
+            img[:,j,2] = img[:,j,2]*(1-draw[:,j,3]/255) + draw[:,j,2]*(draw[:,j,3]/255)
+
+        cv2.imshow('oxxostudio', img)
+        keyboard = cv2.waitKey(5)
+        if keyboard == ord('q'):
+            break
+        # 按下 r 重置畫面
+        if keyboard == ord('r'):
+            draw = np.zeros((h,w,4), dtype='uint8')
+            cv2.rectangle(draw,(20,20),(60,60),(0,0,255,255),-1)   # 在畫面上方放入紅色正方形
+            cv2.rectangle(draw,(80,20),(120,60),(0,255,0,255),-1)  # 在畫面上方放入綠色正方形
+            cv2.rectangle(draw,(140,20),(180,60),(255,0,0,255),-1) # 在畫面上方放入藍色正方形
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+w = 640    # 定義影片寬度
+h = 360    # 定義影像高度
+dots = []  # 記錄座標
+mask_b = np.zeros((h,w,3), dtype='uint8')   # 產生黑色遮罩 -> 套用清楚影像
+mask_b[:, :] = 255                          # 設定黑色遮罩底色為白色
+mask_b[80:280, 220:420] = 0                 # 設定黑色遮罩哪個區域是黑色
+
+mask_w = np.zeros((h,w,3), dtype='uint8')   # 產生白色遮罩 -> 套用模糊影像
+mask_w[80:280, 220:420] = 255               # 設定白色遮罩哪個區域是白色
+
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+
+    img = cv2.resize(img,(w,h))                      # 縮小尺寸，加快速度
+    img = cv2.flip(img, 1)                           # 翻轉影像
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)      # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
+    img2 = img.copy()                                # 複製影像
+    img2 = cv2.blur(img, (55, 55))                   # 套用模糊
+
+    mask1 = cv2.cvtColor(mask_b, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
+    img = cv2.bitwise_and(img, img, mask=mask1)      # 清楚影像套用黑遮罩
+
+    mask2 = cv2.cvtColor(mask_w, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
+    img2 = cv2.bitwise_and(img2, img2, mask=mask2)   # 模糊影像套用白遮罩
+
+    output = cv2.add(img, img2)                      # 合併影像
+
+    cv2.imshow('oxxostudio', output)
+    if cv2.waitKey(50) == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+w = 640    # 定義影片寬度
+h = 360    # 定義影像高度
+dots = []  # 記錄座標
+mask_b = np.zeros((h,w,3), dtype='uint8')   # 產生黑色遮罩 -> 套用清楚影像
+mask_w = np.zeros((h,w,3), dtype='uint8')   # 產生白色遮罩 -> 套用模糊影像
+mask_w[0:h, 0:w] = 255                      # 白色遮罩背景為白色
+
+# 滑鼠繪圖函式
+def show_xy(event,x,y,flags,param):
+    global dots, mask
+    if flags == 1:
+        if event == 1:
+            dots.append([x,y])
+        if event == 4:
+            dots = []
+        if event == 0 or event == 4:
+            dots.append([x,y])
+            x1 = dots[len(dots)-2][0]
+            y1 = dots[len(dots)-2][1]
+            x2 = dots[len(dots)-1][0]
+            y2 = dots[len(dots)-1][1]
+            cv2.line(mask_w, (x1,y1), (x2,y2), (0,0,0), 50)        # 在白色遮罩上畫出黑色線條
+            cv2.line(mask_b, (x1,y1), (x2,y2), (255,255,255), 50)  # 在黑色遮罩上畫出白色線條
+
+cv2.imshow('oxxostudio', mask)                 # 啟用視窗
+cv2.setMouseCallback('oxxostudio', show_xy)    # 偵測滑鼠行為
+
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+
+    img = cv2.resize(img,(w,h))                      # 縮小尺寸，加快速度
+    img = cv2.flip(img, 1)                           # 翻轉影像
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)      # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
+    img2 = img.copy()                                # 複製影像
+    img2 = cv2.blur(img, (55, 55))                   # 套用模糊
+
+    mask1 = cv2.cvtColor(mask_b, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
+    img = cv2.bitwise_and(img, img, mask=mask1)      # 清楚影像套用黑遮罩
+    mask2 = cv2.cvtColor(mask_w, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
+    img2 = cv2.bitwise_and(img2, img2, mask=mask2)   # 模糊影像套用白遮罩
+
+    output = cv2.add(img, img2)                      # 合併影像
+
+    cv2.imshow('oxxostudio', output)
+    if cv2.waitKey(50) == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+mp_drawing = mp.solutions.drawing_utils
+mp_drawing_styles = mp.solutions.drawing_styles
+mp_hands = mp.solutions.hands
+
+cap = cv2.VideoCapture(0)            # 讀取攝影機
+
+# mediapipe 啟用偵測手掌
+with mp_hands.Hands(
+    model_complexity=0,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5) as hands:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+
+    w = 640    # 定義影片寬度
+    h = 360    # 定義影像高度
+    dots = []  # 記錄座標
+    mask_b = np.zeros((h,w,3), dtype='uint8')            # 產生黑色遮罩 -> 套用清楚影像
+    mask_w = np.zeros((h,w,3), dtype='uint8')            # 產生白色遮罩 -> 套用模糊影像
+    mask_w[0:h, 0:w] = 255                               # 白色遮罩背景為白色
+
+    while True:
+        ret, img = cap.read()
+        img = cv2.resize(img, (w,h))                     # 縮小尺寸，加快處理效率
+        img = cv2.flip(img, 1)                           # 翻轉影像
+        img_hand = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 偵測手勢使用
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)      # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
+        img2 = img.copy()                                # 複製影像
+        img2 = cv2.blur(img, (55, 55))                   # 套用模糊
+
+        if not ret:
+            print("Cannot receive frame")
+            break
+        results = hands.process(img_hand)                # 偵測手勢
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                finger_points = []                       # 記錄手指節點位置的串列
+                for i in hand_landmarks.landmark:
+                    x = i.x
+                    y = i.y
+                    finger_points.append((x,y))          # 記錄手指節點位置
+                if finger_points:
+                    fx1 = finger_points[8][0]
+                    fy1 = finger_points[8][1]
+                    fx2 = finger_points[12][0]
+                    fy2 = finger_points[12][1]
+                    d = ((fx1-fx2)*(fx1-fx2)+(fy1-fy2)*(fy1-fy2))**0.5  # 計算食指和中指分開的距離
+                    if d<0.15:
+                        dots.append([fx1,fy1])
+                        dl = len(dots)
+                        if dl>1:
+                            x1 = int(dots[dl-2][0]*w)   # 計算出真正的座標
+                            y1 = int(dots[dl-2][1]*h)
+                            x2 = int(dots[dl-1][0]*w)
+                            y2 = int(dots[dl-1][1]*h)
+                            cv2.line(mask_w, (x1,y1), (x2,y2), (0,0,0), 50)        # 在白色遮罩上畫出黑色線條
+                            cv2.line(mask_b, (x1,y1), (x2,y2), (255,255,255), 50)  # 在黑色遮罩上畫出白色線條
+                    else:
+                        dots = []
+
+        mask1 = cv2.cvtColor(mask_b, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
+        img = cv2.bitwise_and(img, img, mask=mask1)      # 清楚影像套用黑遮罩
+        mask2 = cv2.cvtColor(mask_w, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
+        img2 = cv2.bitwise_and(img2, img2, mask=mask2)   # 模糊影像套用白遮罩
+
+        output = cv2.add(img, img2)                      # 合併影像
+
+        cv2.imshow('oxxostudio', output)
+        keyboard = cv2.waitKey(5)
+        if keyboard == ord('q'):
+            break
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import mediapipe as mp
+
+cap = cv2.VideoCapture(0)                          # 讀取攝影鏡頭
+mp_face_detection = mp.solutions.face_detection    # 使用人臉偵測方法
+
+h, w = 360, 640                                    # 輸出時的影像長寬
+mask = np.zeros((h, w, 3), dtype='uint8')          # 建立遮罩
+cv2.ellipse(mask, (260,100),(55,35),0,0,360,(255,255,255),-1)   # 繪製左眼的橢圓形遮罩
+cv2.ellipse(mask, (380,100),(55,35),0,0,360,(255,255,255),-1)   # 繪製右眼的橢圓形遮罩
+cv2.ellipse(mask, (320,212),(115,66),0,0,360,(255,255,255),-1)  # 繪製嘴巴的橢圓形遮罩
+mask = cv2.GaussianBlur(mask,(35,35),0)            # 將遮罩進行高斯模糊
+mask = mask/255                                    # 轉換成比例
+
+orange = cv2.imread('orange.jpg')                  # 讀取橘子圖片背景
+
+# 人臉偵測模組啟用成功後，執行相關內容
+with mp_face_detection.FaceDetection(
+    model_selection=0, min_detection_confidence=0.5) as face_detection:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()                        # 讀取攝影機畫面
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img = cv2.resize(img, (w, h))                # 縮小尺寸加快速度
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換成 RGB 才能夠在 mediapipe 中使用
+        results = face_detection.process(img2)       # 讀取人臉偵測資訊
+
+        if results.detections:
+            for detection in results.detections:
+                s = detection.location_data.relative_bounding_box      # 取得人臉尺寸
+                eye_w = int(s.width*w*0.24/2)                          # 計算眼睛寬度 ( 除以 2 計算座標使用 )
+                eye_h = int(s.width*w*0.16/2)                          # 計算眼睛高度 ( 除以 2 計算座標使用 )
+                mouth_w = int(s.width*w*0.5/2)                         # 計算嘴巴寬度 ( 除以 2 計算座標使用 )
+                mouth_h = int(s.width*w*0.3/2)                         # 計算嘴巴高度 ( 除以 2 計算座標使用 )
+
+                eye_r = detection.location_data.relative_keypoints[0]  # 左眼中心點座標
+                eye_l = detection.location_data.relative_keypoints[1]  # 右眼中心點座標
+                mouth = detection.location_data.relative_keypoints[3]  # 嘴巴中心點座標
+
+                rcx, rcy = int(eye_r.x*w), int(eye_r.y*h)              # 計算左眼真正的座標
+                lcx, lcy = int(eye_l.x*w), int(eye_l.y*h)              # 計算右眼真正的座標
+                mx, my = int(mouth.x*w), int(mouth.y*h)                # 計算嘴巴真正的座標
+
+                eye_r_img = img[rcy-eye_h:rcy+eye_h, rcx-eye_w:rcx+eye_w]      # 取出右眼的區域
+                eye_r_img = cv2.resize(eye_r_img, (120,80))                    # 改變尺寸為 180x120
+                eye_l_img = img[lcy-eye_h:lcy+eye_h, lcx-eye_w:lcx+eye_w]      # 取出左眼的區域
+                eye_l_img = cv2.resize(eye_l_img, (120,80))                    # 改變尺寸為 180x120
+                mouth_img = img[my-mouth_h:my+mouth_h, mx-mouth_w:mx+mouth_w]  # 取出嘴巴的區域
+                mouth_img = cv2.resize(mouth_img, (240,144))                   # 改變尺寸為 360x216
+
+                face = np.zeros((h, w, 3), dtype='uint8')  # 建立空白全黑畫布
+                bg = orange.copy()                         # 複製 orange 圖片當作背景
+                face[60:140, 200:320] =  eye_l_img         # 貼上左眼
+                face[60:140, 320:440] =  eye_r_img         # 貼上右眼
+                face[140:284, 200:440] =  mouth_img        # 貼上嘴巴
+                face = face + 30                           # 增加亮度
+                face = face/255                            # 轉換成比例
+                bg = bg/255                                # 轉換成比例
+                out  = bg * (1 - mask) + face * mask       # 根據比例混合
+                out = (out * 255).astype('uint8')          # 轉換成數字
+
+        cv2.imshow('oxxostudio', out)
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import tensorflow as tf
+
+model = tf.keras.models.load_model('keras_model.h5', compile=False)   # 載入 model
+data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)           # 設定資料陣列
+
+cap = cv2.VideoCapture(0)         # 設定攝影機鏡頭
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()       # 讀取攝影機影像
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(frame , (398, 224))   # 改變尺寸
+    img = img[0:224, 80:304]               # 裁切為正方形，符合 model 大小
+    image_array = np.asarray(img)          # 去除換行符號和結尾空白，產生文字陣列
+    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1  # 轉換成預測陣列
+    data[0] = normalized_image_array
+    prediction = model.predict(data)       # 預測結果
+    a,b= prediction[0]                     # 取得預測結果
+    if a>0.9:
+        print('oxxo')
+    if b>0.9:
+        print('維他命')
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(500) == ord('q'):
+        break     # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import tensorflow as tf
+
+model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
+data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
+
+def text(text):      # 建立顯示文字的函式
+    global img       # 設定 img 為全域變數
+    org = (0,50)     # 文字位置
+    fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 文字字型
+    fontScale = 2.5                      # 文字尺寸
+    color = (255,255,255)                # 顏色
+    thickness = 5                        # 文字外框線條粗細
+    lineType = cv2.LINE_AA               # 外框線條樣式
+    cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType) # 放入文字
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(frame , (398, 224))
+    img = img[0:224, 80:304]
+    image_array = np.asarray(img)
+    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
+    data[0] = normalized_image_array
+    prediction = model.predict(data)
+    a,b,c,bg= prediction[0]
+    if a>0.9:
+        text('a')  # 使用 text() 函式，顯示文字
+    if b>0.9:
+        text('b')
+    if c>0.9:
+        text('c')
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(1) == ord('q'):
+        break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import tensorflow as tf
+
+from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
+
+fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
+
+model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
+data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
+
+def text(text):   # 建立顯示文字的函式
+    global img    # 設定 img 為全域變數
+    font = ImageFont.truetype(fontpath, 50)  # 設定字型與文字大小
+    imgPil = Image.fromarray(img)            # 將 img 轉換成 PIL 影像
+    draw = ImageDraw.Draw(imgPil)            # 準備開始畫畫
+    draw.text((0, 0), text, fill=(255, 255, 255), font=font)  # 寫入文字
+    img = np.array(imgPil)                   # 將 PIL 影像轉換成 numpy 陣列
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(frame , (398, 224))
+    img = img[0:224, 80:304]
+    image_array = np.asarray(img)
+    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
+    data[0] = normalized_image_array
+    prediction = model.predict(data)
+    a,b,c,bg= prediction[0]
+    if a>0.9:
+        text('剪刀')  # 使用 text() 函式，顯示文字
+    if b>0.9:
+        text('石頭')
+    if c>0.9:
+        text('布')
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(1) == ord('q'):
+        break     # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import tensorflow as tf
+
+model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
+data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
+
+def text(text):      # 建立顯示文字的函式
+    global img       # 設定 img 為全域變數
+    org = (0,50)     # 文字位置
+    fontFace = cv2.FONT_HERSHEY_SIMPLEX  # 文字字型
+    fontScale = 1                        # 文字尺寸
+    color = (255,255,255)                # 顏色
+    thickness = 2                        # 文字外框線條粗細
+    lineType = cv2.LINE_AA               # 外框線條樣式
+    cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType) # 放入文字
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(frame , (398, 224))
+    img = img[0:224, 80:304]
+    image_array = np.asarray(img)
+    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
+    data[0] = normalized_image_array
+    prediction = model.predict(data)
+    a,b,bg= prediction[0]    # 印出每個項目的數值資訊
+    print(a,b,bg)
+    if a>0.999:              # 判斷有戴口罩
+        text('ok~')
+    if b>0.001:              # 判斷沒戴口罩
+        text('no mask!!')
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(1) == ord('q'):
+        break  # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+import tensorflow as tf
+
+from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
+
+fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
+
+model = tf.keras.models.load_model('keras_model_3.h5', compile=False)  # 載入模型
+data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)          # 設定資料陣列
+
+def text(text):   # 建立顯示文字的函式
+    global img    # 設定 img 為全域變數
+    font = ImageFont.truetype(fontpath, 30)  # 設定字型與文字大小
+    imgPil = Image.fromarray(img)            # 將 img 轉換成 PIL 影像
+    draw = ImageDraw.Draw(imgPil)            # 準備開始畫畫
+    draw.text((0, 0), text, fill=(255, 255, 255), font=font)  # 寫入文字
+    img = np.array(imgPil)                   # 將 PIL 影像轉換成 numpy 陣列
+
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(frame , (398, 224))
+    img = img[0:224, 80:304]
+    image_array = np.asarray(img)
+    normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
+    data[0] = normalized_image_array
+    prediction = model.predict(data)
+    a,b,bg= prediction[0]
+    print(a,b,bg)
+    if a>0.999:
+        text('很乖')
+    if b>0.001:
+        text('沒戴口罩!!')
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(1) == ord('q'):
+        break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+from keras.datasets import mnist
+from keras import utils
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()  # 載入訓練集
+
+# 訓練集資料
+x_train = x_train.reshape(x_train.shape[0],-1)  # 轉換資料形狀
+x_train = x_train.astype('float32')/255         # 轉換資料型別
+y_train = y_train.astype(np.float32)
+
+# 測試集資料
+x_test = x_test.reshape(x_test.shape[0],-1)     # 轉換資料形狀
+x_test = x_test.astype('float32')/255           # 轉換資料型別
+y_test = y_test.astype(np.float32)
+
+knn=cv2.ml.KNearest_create()                    # 建立 KNN 訓練方法
+knn.setDefaultK(5)                              # 參數設定
+knn.setIsClassifier(True)
+
+print('training...')
+knn.train(x_train, cv2.ml.ROW_SAMPLE, y_train)  # 開始訓練
+knn.save('mnist_knn.xml')                       # 儲存訓練模型
+print('ok')
+
+print('testing...')
+test_pre = knn.predict(x_test)                  # 讀取測試集並進行辨識
+test_ret = test_pre[1]
+test_ret = test_ret.reshape(-1,)
+test_sum = (test_ret == y_test)
+acc = test_sum.mean()                           # 得到準確率
+print(acc)
+
+print("------------------------------------------------------------")  # 60個
+
+cap = cv2.VideoCapture(0)                     # 啟用攝影鏡頭
+print('loading...')
+knn = cv2.ml.KNearest_load('mnist_knn.xml')   # 載入模型
+print('start...')
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(img,(540,300))          # 改變影像尺寸，加快處理效率
+    x, y, w, h = 400, 200, 60, 60            # 定義擷取數字的區域位置和大小
+    img_num = img.copy()                     # 複製一個影像作為辨識使用
+    img_num = img_num[y:y+h, x:x+w]          # 擷取辨識的區域
+
+    img_num = cv2.cvtColor(img_num, cv2.COLOR_BGR2GRAY)    # 顏色轉成灰階
+    # 針對白色文字，做二值化黑白轉換，轉成黑底白字
+    ret, img_num = cv2.threshold(img_num, 127, 255, cv2.THRESH_BINARY_INV)
+    output = cv2.cvtColor(img_num, cv2.COLOR_GRAY2BGR)     # 顏色轉成彩色
+    img[0:60, 480:540] = output                            # 將轉換後的影像顯示在畫面右上角
+
+    img_num = cv2.resize(img_num,(28,28))   # 縮小成 28x28，和訓練模型對照
+    img_num = img_num.astype(np.float32)    # 轉換格式
+    img_num = img_num.reshape(-1,)          # 打散成一維陣列資料，轉換成辨識使用的格式
+    img_num = img_num.reshape(1,-1)
+    img_num = img_num/255
+    img_pre = knn.predict(img_num)          # 進行辨識
+    num = str(int(img_pre[1][0][0]))        # 取得辨識結果
+
+    text = num                              # 印出的文字內容
+    org = (x,y-20)                          # 印出的文字位置
+    fontFace = cv2.FONT_HERSHEY_SIMPLEX     # 印出的文字字體
+    fontScale = 2                           # 印出的文字大小
+    color = (0,0,255)                       # 印出的文字顏色
+    thickness = 2                           # 印出的文字邊框粗細
+    lineType = cv2.LINE_AA                  # 印出的文字邊框樣式
+    cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType) # 印出文字
+
+    cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),3)  # 標記辨識的區域
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(50) == ord('q'):
+        break     # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+from deepface import DeepFace
+
+img = cv2.imread('test.jpg')     # 讀取圖片
+try:
+    analyze = DeepFace.analyze(img)  # 辨識圖片人臉資訊
+    print(analyze)
+except:
+    pass
+
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+from deepface import DeepFace
+
+img = cv2.imread('test.jpg')     # 讀取圖片
+try:
+    analyze = DeepFace.analyze(img, actions=['emotion'] )  # 辨識圖片人臉資訊，取出情緒資訊
+    print(analyze)
+except:
+    pass
+
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+from deepface import DeepFace
+
+img = cv2.imread('mona.jpg')
+try:
+    emotion = DeepFace.analyze(img, actions=['emotion'])  # 情緒
+    age = DeepFace.analyze(img, actions=['age'])          # 年齡
+    race = DeepFace.analyze(img, actions=['race'])        # 人種
+    gender = DeepFace.analyze(img, actions=['gender'])    # 性別
+
+    print(emotion['dominant_emotion'])
+    print(age['age'])
+    print(race['dominant_race'])
+    print(gender['gender'])
+except:
+    pass
+
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+print("------------------------------------------------------------")  # 60個
+
+from deepface import DeepFace
+from PIL import ImageFont, ImageDraw, Image
+
+# 定義該情緒的中文字
+text_obj={
+    'angry': '生氣',
+    'disgust': '噁心',
+    'fear': '害怕',
+    'happy': '開心',
+    'sad': '難過',
+    'surprise': '驚訝',
+    'neutral': '正常'
+}
+
+# 定義加入文字函式
+def putText(x,y,text,size=70,color=(255,255,255)):
+    global img
+    fontpath = 'NotoSansTC-Regular.otf'            # 字型
+    font = ImageFont.truetype(fontpath, size)      # 定義字型與文字大小
+    imgPil = Image.fromarray(img)                  # 轉換成 PIL 影像物件
+    draw = ImageDraw.Draw(imgPil)                  # 定義繪圖物件
+    draw.text((x, y), text, fill=color, font=font) # 加入文字
+    img = np.array(imgPil)                         # 轉換成 np.array
+
+img = cv2.imread('emotion.jpg')                    # 載入圖片
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)       # 將圖片轉成灰階
+
+face_cascade = cv2.CascadeClassifier("xml/haarcascade_frontalface_default.xml")   # 載入人臉模型
+faces = face_cascade.detectMultiScale(gray)        # 偵測人臉
+
+for (x, y, w, h) in faces:
+    # 擴大偵測範圍，避免無法辨識情緒
+    x1 = x-60
+    x2 = x+w+60
+    y1 = y-20
+    y2 = y+h+60
+    face = img[x1:x2, y1:y2]  # 取出人臉範圍
+    try:
+        emotion = DeepFace.analyze(face, actions=['emotion'])  # 辨識情緒
+        putText(x,y,text_obj[emotion['dominant_emotion']])     # 放入文字
+    except:
+        pass
+    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 5)    # 利用 for 迴圈，抓取每個人臉屬性，繪製方框
+
+cv2.imshow('oxxostudio', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+from deepface import DeepFace
+from PIL import ImageFont, ImageDraw, Image
+
+# 定義該情緒的中文字
+text_obj={
+    'angry': '生氣',
+    'disgust': '噁心',
+    'fear': '害怕',
+    'happy': '開心',
+    'sad': '難過',
+    'surprise': '驚訝',
+    'neutral': '正常'
+}
+
+# 定義加入文字函式
+def putText(x,y,text,size=50,color=(255,255,255)):
+    global img
+    fontpath = 'NotoSansTC-Regular.otf'            # 字型
+    font = ImageFont.truetype(fontpath, size)      # 定義字型與文字大小
+    imgPil = Image.fromarray(img)                  # 轉換成 PIL 影像物件
+    draw = ImageDraw.Draw(imgPil)                  # 定義繪圖物件
+    draw.text((x, y), text_obj[text], fill=color, font=font) # 加入文字
+    img = np.array(imgPil)                         # 轉換成 np.array
+
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+    img = cv2.resize(frame,(384,240))
+    try:
+        analyze = DeepFace.analyze(img, actions=['emotion'])
+        emotion = analyze['dominant_emotion']  # 取得情緒文字
+        putText(0,40,emotion)                  # 放入文字
+    except:
+        pass
+    cv2.imshow('oxxostudio', img)
+    if cv2.waitKey(5) == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+from deepface import DeepFace    # 載入 deepface
+
+cap = cv2.VideoCapture(0)        # 讀取攝影鏡頭
+
+# 定義在畫面中放入文字的函式
+def putText(source, x, y, text, scale=2.5, color=(255,255,255)):
+    org = (x,y)
+    fontFace = cv2.FONT_HERSHEY_SIMPLEX
+    fontScale = scale
+    thickness = 5
+    lineType = cv2.LINE_AA
+    cv2.putText(source, text, org, fontFace, fontScale, color, thickness, lineType)
+
+
+a = 0        # 白色圖片透明度
+n = 0        # 檔名編號
+happy = 0    # 是否有 happy 的變數
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()               # 讀取影片的每一幀
+    if not ret:
+        print("Cannot receive frame")   # 如果讀取錯誤，印出訊息
+        break
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)   # 轉換成 BGRA，目的為了和白色圖片組合
+    w = int(img.shape[1]*0.5)           # 取得圖片寬度的 1/2
+    h = int(img.shape[0]*0.5)           # 取得圖片高度的 1/2
+    img = cv2.resize(img,(w,h))         # 縮小圖片尺寸 ( 加快處理速度 )
+    white = 255 - np.zeros((h,w,4), dtype='uint8')   # 產生全白圖片
+
+    key = cv2.waitKey(1)                # 每隔一毫秒取得鍵盤輸入資訊
+
+    try:
+        emotion = DeepFace.analyze(img, actions=['emotion'])               # 情緒偵測
+        print(emotion['emotion']['happy'], emotion['emotion']['neutral'])  # 印出數值
+        if emotion['emotion']['happy'] >0.5:
+            happy = happy + 1       # 如果具有一點點 happy 的數值，就認定正在微笑，將 happy 增加 1
+        else:
+            happy = 0               # 如果沒有 happy，將 happy 歸零
+    except:
+        pass
+
+    if happy == 1:
+        a = 1                # 如果 happy 等於 1，將 a 變成 1 ，觸發拍照程式
+        sec = 4              # 倒數秒數從 4 開始
+
+    if key == 32:            # 按下空白將 a 等於 1 ( 按下空白也可以拍照 )
+        a = 1
+        sec = 4
+    elif key == ord('q'):    # 按下 q 結束
+        break
+
+    if a == 0:
+        output = img.copy()  # 如果 a 為 0，設定 output 和 photo 變數
+    else:
+        if happy >= 1:
+            output = img.copy()
+            photo = img.copy()
+            sec = sec - 0.5       # 根據個人電腦效能，設定到接近倒數三秒
+            putText(output, 10, 70, str(int(sec)))
+            if sec < 1:
+                output = cv2.addWeighted(white, a, photo, 1-a, 0)  # 計算權重，產生白色慢慢消失效果
+                a = a - 0.5
+                print('a', a)
+                if a<=0:
+                    a = 0
+                    n = n + 1
+                    cv2.imwrite(f'photo-{n}.jpg', photo)   # 存檔
+                    print('save ok')
+        else:
+            a = 0
+            pass
+    cv2.imshow('oxxostudio', output)               # 顯示圖片
+
+cap.release()                           # 所有作業都完成後，釋放資源
+cv2.destroyAllWindows()                 # 結束所有視窗
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
