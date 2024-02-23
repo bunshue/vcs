@@ -4,7 +4,7 @@ import requests
 print("------------------------------------------------------------")  # 60個
 
 url = "https://www.googleapis.com/books/v1/volumes?maxResults=5&q=Python&projection=lite"
-jsonfile = "GoogleBooks.json"
+jsonfile = "tmp_GoogleBooks.json"
 r = requests.get(url)
 r.encoding = "utf8"
 json_data = json.loads(r.text)
@@ -13,6 +13,7 @@ with open(jsonfile, 'w') as fp:
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 import requests
 
 URL = "https://www.momoshop.com.tw/search/"
@@ -23,11 +24,9 @@ if r.status_code == requests.codes.ok:
     print(r.text)        
 else:
     print("HTTP請求錯誤..." + URL)
- 
+""" 
 
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch06\ch6-2a.py
 
 import requests
 
@@ -45,6 +44,7 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
+""" webdriver
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -62,9 +62,10 @@ fp.write(html)
 print("寫入檔案NBA.html...")
 fp.close()
 driver.quit()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
+""" wait long
 import time
 import requests
 
@@ -74,8 +75,9 @@ for i in range(1, 10):
     url = URL.format(i) 
     r = requests.get(url)
     print(r.status_code)
-    print("等待5秒鐘...")
+    print("等待5秒鐘... i = ", i)
     time.sleep(5) 
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -167,7 +169,8 @@ def get_attrib(tag, attrib):
         return tag[attrib].strip()
     else:
         return "N/A"
-    
+
+""" fail    
 movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
 r = requests.get(URL, headers=headers)
 if r.status_code == requests.codes.ok:
@@ -188,13 +191,14 @@ if r.status_code == requests.codes.ok:
 else:
    print("HTTP請求錯誤...")
 
-with open("movies.csv", "w+",newline="",encoding="utf-8") as fp:
+with open("tmp_movies.csv", "w+",newline="",encoding="utf-8") as fp:
     writer = csv.writer(fp)
     for item in movies:
         writer.writerow(item)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
+""" webdriver
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -225,10 +229,11 @@ for item in items:
         "price": price
     })
 driver.quit()
-with open("products.json", "w", encoding="utf-8") as fp: # 寫入JSON檔案
+with open("tmp_products.json", "w", encoding="utf-8") as fp: # 寫入JSON檔案
     json.dump(products,fp,indent=2,
               sort_keys=True,
               ensure_ascii=False)
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -237,7 +242,7 @@ from bs4 import BeautifulSoup
 import csv
 
 url = "https://rate.bot.com.tw/xrt?Lang=zh-TW"
-csvfile = "xrt.csv"
+csvfile = "tmp_xrt.csv"
 r = requests.get(url)
 r.encoding = "utf8"
 soup = BeautifulSoup(r.text, "lxml")
@@ -284,7 +289,7 @@ def get_attrib(tag, attrib):
         return tag[attrib].strip()
     else:
         return "N/A"   
- 
+""" fail
 all_movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
 for page in range(1, 11):
     url = URL.format(page)
@@ -318,6 +323,7 @@ with open("all_movies.csv", "w+",newline="",encoding="utf-8") as fp:
     writer = csv.writer(fp)
     for item in all_movies:
         writer.writerow(item)
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -350,7 +356,8 @@ def get_attrib(tag, attrib):
         return tag[attrib].strip()
     else:
         return "N/A"  
- 
+
+""" fail
 all_movies = [["中文片名","英文片名","期待度","海報圖片","上映日"]]
 page = 1
 while True:
@@ -386,13 +393,14 @@ while True:
     else:
         print("HTTP請求錯誤...")
 
-with open("all_movies2.csv", "w+",newline="",encoding="utf-8") as fp:
+with open("tmp_all_movies2.csv", "w+",newline="",encoding="utf-8") as fp:
     writer = csv.writer(fp)
     for item in all_movies:
         writer.writerow(item)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
+""" webdriver
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
@@ -433,7 +441,17 @@ while pages_remaining:
     except Exception:
         pages_remaining = False        
 driver.close()
+"""
 
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 

@@ -257,7 +257,7 @@ import requests
 from bs4 import BeautifulSoup
 
 url = "http://www.google.com.tw"
-path = "logo.png"
+path = "tmp_logo.png"
 r = requests.get(url)
 r.encoding = "utf8"
 soup = BeautifulSoup(r.text, "lxml")
@@ -332,10 +332,7 @@ print(cursor.rowcount)
 conn.commit() # 確認交易
 conn.close()  # 關閉資料庫連接
 
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-3-3c.py
 
 import sqlite3
 
@@ -358,8 +355,6 @@ conn.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-3-3d.py
-
 import sqlite3
 
 # 建立資料庫連接
@@ -380,7 +375,7 @@ conn.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-4-2.py
+""" 無 pymysql
 
 import pymysql 
 
@@ -394,12 +389,10 @@ data = cursor.fetchall()
 for row in data:
     print(row[0], row[1])
 db.close()
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch05\ch5-4-2a.py
-
+'''
 import pymysql
 
 book = "P0004,Node.js程式設計,陳會安,550,程式設計,2020-01-01"
@@ -560,7 +553,7 @@ std2 = {
 }
 result = collection.insert_many([std1, std2])
 print("新增2筆: {0}".format(result.inserted_ids))
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 

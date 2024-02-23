@@ -250,6 +250,7 @@ print("------------------------------------------------------------")  # 60個
 
 import multiprocessing, time
 
+
 def worker(queue):
     print("process 開始")
     while True:
@@ -531,6 +532,7 @@ print("------------------------------------------------------------")  # 60個
 
 import threading
 import time
+
 
 def worker():
     print(threading.current_thread().name, "Starting")
@@ -1465,6 +1467,7 @@ def numRand2(x, y):
         result.append(number)
         cout += 1
     return result
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3683,6 +3686,7 @@ print("------------------------------------------------------------")  # 60個
 
 import operator
 
+
 def sorted_grades(grades):
     grades.sort(key=operator.itemgetter(2), reverse=True)
     output = []
@@ -3706,6 +3710,7 @@ print("------------------------------------------------------------")  # 60個
 # 練習 13 尋找單字中重複最多次的字母
 
 import operator
+
 
 def most_repeated_letter(word):
     letters = list(set(word))
@@ -3797,6 +3802,7 @@ print("------------------------------------------------------------")  # 60個
 
 import operator
 
+
 def prefix_cal(to_solve):
     operation = {
         "+": operator.add,
@@ -3815,6 +3821,7 @@ print("------------------------------------------------------------")  # 60個
 # 練習 27 自訂密碼產生器
 
 import random
+
 
 def set_password_source(source):
     def password_gen(length):
@@ -4303,6 +4310,7 @@ print("------------------------------------------------------------")  # 60個
 import time
 import random
 
+
 def elapsed_time_gen():
     last_time = time.perf_counter()
     while True:
@@ -4344,6 +4352,7 @@ def find_majority_num(data):
     import statistics
     return statistics.mode(data)
     """
+
 
 print(find_majority_num([1, 2, 2, 3, 2, 3, 1]))
 
@@ -4840,9 +4849,9 @@ assert len(PLACE_FIRST_LETTERS.keys()) == len(PLACES)
 
 print("------------------------------------------------------------")  # 60個
 
-text = '王之渙涼州詞黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。'
-word1 = '春風'
-word2 = '白雲'
+text = "王之渙涼州詞黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
+word1 = "春風"
+word2 = "白雲"
 
 count1 = text.count(word1)
 print(word1, ":", count1, "個")
@@ -4852,7 +4861,7 @@ print(word2, ":", count2, "個")
 
 print(text)
 
-print('將', word1 ,'改成', word2)
+print("將", word1, "改成", word2)
 text = text.replace(word1, word2)
 
 print(text)

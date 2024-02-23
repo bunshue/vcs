@@ -1,3 +1,18 @@
+"""
+Python資料科學實戰教本
+
+
+
+"""
+
+
+import os
+import sys
+import time
+import random
+
+print("------------------------------------------------------------")  # 60個
+
 from bs4 import BeautifulSoup 
 
 html_str = "<p>Hello World!</p>"
@@ -5,10 +20,7 @@ soup = BeautifulSoup(html_str, "lxml")
 print(soup)
 
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-2-1a.py
+print("------------------------------------------------------------")  # 60個
 
 import requests
 from bs4 import BeautifulSoup
@@ -27,21 +39,15 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
     print(soup)
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-2-2.py
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 
 tags = soup("a")
@@ -62,7 +68,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 
 tags = soup("img")
@@ -79,7 +85,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -100,16 +106,11 @@ tag_div = soup.select_one("#q2") # 找到第2題的<div>標籤
 print(tag_div.find_previous_sibling().p.a.text)
 print(tag_div.find_next_sibling().p.a.text)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-3-1.py
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 
 #import requests
@@ -134,7 +135,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -154,7 +155,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -176,7 +177,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -195,7 +196,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -218,7 +219,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -240,7 +241,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -260,7 +261,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -283,7 +284,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -303,7 +304,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -323,7 +324,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -343,7 +344,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -365,7 +366,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -390,7 +391,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -413,7 +414,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -438,7 +439,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -468,7 +469,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -497,7 +498,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -520,7 +521,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -546,7 +547,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -573,7 +574,7 @@ print("------------------------------------------------------------")  # 60個
 
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -591,7 +592,7 @@ print("------------------------------------------------------------")  # 60個
 import re
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -616,7 +617,7 @@ print("------------------------------------------------------------")  # 60個
 import re
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -638,7 +639,7 @@ print("------------------------------------------------------------")  # 60個
 import re
 from bs4 import BeautifulSoup
 
-with open("Surveys.html", "r", encoding="utf8") as fp:
+with open("data/Surveys.html", "r", encoding="utf8") as fp:
     soup = BeautifulSoup(fp, "lxml")
 #import requests
 #r = requests.get("https://fchart.github.io/ML/Surveys.html")
@@ -656,6 +657,7 @@ for tag in tag_list:
 
 print("------------------------------------------------------------")  # 60個
 
+"""webdriver skip
 #檔案 : C:\_git\vcs\_4.python\__code\Python資料科學實戰教本\ch04\ch4-6-1.py
 
 from selenium import webdriver
@@ -810,9 +812,25 @@ tags_li = soup.find_all("li", class_="line")
 for tag in tags_li:
     print(tag.text)
 driver.quit()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
 

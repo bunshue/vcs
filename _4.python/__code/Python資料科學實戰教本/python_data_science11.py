@@ -1,3 +1,20 @@
+"""
+Python資料科學實戰教本
+
+
+
+"""
+
+
+import os
+import sys
+import time
+import random
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -50,7 +67,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.read_csv("titanic.csv")
+df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
 print(df["Age"].mode())
@@ -62,7 +79,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.read_csv("titanic.csv")
+df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
 print(df["Age"].median())
@@ -74,7 +91,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.read_csv("titanic.csv")
+df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
 print(df["Age"].quantile(q=0.25))
@@ -90,7 +107,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.read_csv("titanic.csv")
+df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
 print(df["Age"].mean())
@@ -102,7 +119,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.read_csv("titanic.csv")
+df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
 print(df["Age"].max() - df["Age"].min())
@@ -114,7 +131,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.read_csv("titanic.csv")
+df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
 print(df["Age"].quantile(0.75) - df["Age"].quantile(0.25))
@@ -126,7 +143,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.read_csv("titanic.csv")
+df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
 print(df["Age"].var())
@@ -138,7 +155,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.read_csv("titanic.csv")
+df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
 print(df["Age"].std())
@@ -150,7 +167,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pandas as pd
 
-df = pd.read_csv("titanic.csv")
+df = pd.read_csv("data/titanic.csv")
 s =  pd.Series([30,1,5,10,30,50,30,15,40,45,30])
 
 print(df["Age"].describe())
@@ -309,4 +326,16 @@ plt.title("常態分配PDF的機率")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
 

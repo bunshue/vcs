@@ -283,6 +283,7 @@ import platform
 from types import ModuleType
 from typing import Optional, Tuple, List, cast
 
+
 def print_table(version_rows: List[Tuple[str, str]]) -> None:
     row_format = "{:12} | {}"
     print(row_format.format("module", "version"))
@@ -291,11 +292,13 @@ def print_table(version_rows: List[Tuple[str, str]]) -> None:
         # Some version strings have multiple lines and need to be squashed
         print(row_format.format(module, version.replace("\n", " ")))
 
+
 def extract_version(module: ModuleType) -> Optional[str]:
     if module.__name__ == "gdcm":
         return cast(Optional[str], getattr(module, "GDCM_VERSION", None))
 
     return cast(Optional[str], getattr(module, "__version__", None))
+
 
 modules = (
     "os",
@@ -422,6 +425,7 @@ print()
 print("------------------------------------------------------------")  # 60個
 
 import string
+
 
 def encrypt(text, encryDict):  # 加密文件
     cipher = []
@@ -1247,6 +1251,7 @@ print("------------------------------------------------------------")  # 60個
 from abc import ABCMeta, abstractmethod
 from math import pi
 
+
 class Shape(object, metaclass=ABCMeta):
     @abstractmethod
     def perimeter(self):
@@ -1255,6 +1260,7 @@ class Shape(object, metaclass=ABCMeta):
     @abstractmethod
     def area(self):
         pass
+
 
 class Circle(Shape):
     def __init__(self, radius):
@@ -1296,8 +1302,10 @@ print("------------------------------------------------------------")  # 60個
 
 import datetime
 
+
 def is_leap(year):
     return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
+
 
 now = datetime.datetime.now()
 date = now.date
@@ -3326,6 +3334,7 @@ print("os.path.splitdrive:", os.path.splitdrive(fullpath))
 print("os.path.splitext:", os.path.splitext(fullpath))
 
 print("---- os --------------------------------------------------------")  # 60個
+
 
 def getuser():
     for name in ("LOGNAME", "USER", "LNAME", "USERNAME"):
@@ -6147,6 +6156,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 # 數位時鐘
+
 
 class Clock(object):
     def __init__(self, hour=0, minute=0, second=0):
