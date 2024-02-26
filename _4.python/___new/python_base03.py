@@ -133,9 +133,11 @@ for link in Img:
     #使用split()方法解析網址
     src=link.get('src') 
     ImgUrl=src.split('=')[1].split('&')[0]
-    print('圖片網址:',ImgUrl)
+    #網址用'/'分隔取最後一筆資料 => *.jpg
     ImgName=ImgUrl.split('/')[-1]
-    print('圖片名稱:',ImgName)
+    print('圖片網址:', ImgUrl)
+    print('圖片檔名:', ImgName)
+
     try:  #下載圖片
         Rpimg=requests.get(ImgUrl) #建立下載圖片的Response物件Rpimg
         f=open((ImgName),'wb')    #開啟圖片檔案                    
@@ -224,7 +226,6 @@ fnShowResult()  # 印出查詢的健保特約機構口罩剩餘數量明細資�
 
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 ''' many
@@ -245,36 +246,66 @@ rp.encoding="utf_8_sig"
 # 使用json套件的loads()方法將擷取到的資料集轉成all_list串列
 all_list=json.loads(rp.text)
 
-folder = 'tmp_images'
-pagename = 'tmp_countryfood.html'
-if os.path.exists(pagename):  
-    os.remove(pagename)     # 若有 tmp_countryfood.html 網頁即刪除
-if os.path.exists(folder): 
-    shutil.rmtree(folder)    # 若有images目錄即刪除
+print(type(all_list))
+
+print(len(all_list))
+
+print(all_list)
+
+print("------------------------------------------------------------")  # 60個
+for i in range(5):
+    #print(all_list[i])
+    
+    #print('ID :',all_list[i]['ID'])
+    print('Name :',all_list[i]['Name'])
+    print('Address :',all_list[i]['Address'])
+    print('Tel :',all_list[i]['Tel'])
+    #print('HostWords :',all_list[i]['HostWords'])
+    print('City :',all_list[i]['City'])
+    print('Town :',all_list[i]['Town'])
+    print('PicURL :',all_list[i]['PicURL'])
+    print('Latitude :',all_list[i]['Latitude'])
+    print('Longitude :',all_list[i]['Longitude'])
+    print("------------------------------------------------------------")  # 60個
+    
+image_foldername = 'tmp_images'
+html_filename = 'tmp_countryfood2222.html'
+if os.path.exists(html_filename):  
+    os.remove(html_filename)     # 若有 tmp_countryfood.html 網頁即刪除
+if os.path.exists(image_foldername): 
+    shutil.rmtree(image_foldername)    # 若有images目錄即刪除
 else:
-    os.mkdir(folder)        # 若無images目錄即刪除
+    os.mkdir(image_foldername)        # 若無images目錄即刪除
 
 #下載圖片
+cnt = 0
 for col in all_list:  
     imgUrl=col['PicURL']
-    imgName=imgUrl.split('/')[-1] #擷取圖片名稱
-    print('圖片網址：',imgUrl)
-    print('='*70)#分隔線
+    print(cnt)
+    #網址用'/'分隔取最後一筆資料 => *.jpg
+    imgName = imgUrl.split('/')[-1] #擷取圖片名稱
+    print('圖片網址：', imgUrl)
+    print('圖片檔名：', imgName)
+    
+    print("------------------------------------------------------------")  # 60個
+    cnt += 1
     try:
         #建立取得圖片的Rpimg物件
         Rpimg=requests.get(imgUrl) 
-        f=open((folder+'/'+imgName),'wb')    #開啟圖片檔案                    
+        f=open((image_foldername+'/'+imgName),'wb')    #開啟圖片檔案                    
         f.write(Rpimg.content)     #下載圖片
         print(imgName,'下載完畢')
-        print('='*70)#分隔線
-        f.close() 
+        print("------------------------------------------------------------")  # 60個
+        f.close()
+        if cnt >= 10:
+            break
     except:
         print('下載失敗')
-        print('='*70)#分隔線
+        print("------------------------------------------------------------")  # 60個
         sys.exit(1)
 
-     
-fw=open(pagename,'w',encoding='UTF-8')  
+print('製作html檔案')
+fw=open(html_filename,'w',encoding='UTF-8')
 fw.write('<!DOCTYPE html>\n')
 fw.write('<html>\n')
 fw.write('<head><meta charset="utf-8" />\n')
@@ -307,24 +338,38 @@ img {
 </style>       
 """
 fw.write('\n'+style+'\n')
+
 #HTML標籤與開放資料整合成網頁內容
+cnt = 0
 for row in all_list:
+    print("cnt = ", cnt)
+    #網址用'/'分隔取最後一筆資料 => *.jpg
     picName=row['PicURL'].split('/')[-1]
+    print('圖片網址：', row['PicURL'])
+    print('圖片檔名：', picName)
+    
     fw.write('<div class="card">\n') #設定外層div以及屬性
     # 設置圖片的相對路徑，路徑為 'images/檔名'
-    fw.write('  <img src="'+ folder +'/'+ picName + '">\n') 
+    fw.write('  <img src="'+ image_foldername +'/'+ picName + '">\n') 
     fw.write('  <div class="txt">\n') #設定文字div以及屬性
     fw.write('     <h4><b>'+row['Name']+'</b></h4>\n') #寫入店家名稱
     fw.write('     <p>'+row['Address']+'</p>\n') #寫入店家地址
     fw.write('  </div>\n') 
-    fw.write('</div>\n')
+    fw.write('</div>\n\n')
+    cnt += 1
+    if cnt >= 10:
+        break
+
 fw.write('</body>\n') 
 fw.write('</html>\n') 
 fw.close()
-#os.system(pagename)  # 開啟網頁
-print("%s網頁建置完成" %(pagename))
-'''
 
+#os.system(html_filename)  # 開啟網頁
+print("%s 網頁建置完成" % (html_filename))
+
+sys.exit()
+
+'''
 print("------------------------------------------------------------")  # 60個
 
 # 引用相關套件
@@ -344,13 +389,13 @@ Inquire="雲林"
 
 #當輸入的字元有 '台' 字時，將該字轉換成 '臺' 字
 Inquire=Inquire.replace('台','臺')  
-print('='*60) #分隔線
+print("------------------------------------------------------------")  # 60個
 
 list_result=[]   # 建立list_result串列用來存放符合的農業休閒區項目
 for col in all_list:
     if Inquire in col['City']: # 判斷查詢的縣市使否存在
         print('名稱：',col['Name'],'電話：',col['Tel'],'\n地址：',col['Address'])
-        print('='*60) #分隔線
+        print("------------------------------------------------------------")  # 60個
         list_result+=[col['City']] # 將符合的農業休閒區項目放入list_result串列
 
 # 使用len()函式取得list_result串列的數量並放入變數count

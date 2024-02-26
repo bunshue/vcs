@@ -240,42 +240,63 @@ namespace vcs_DrAP
             bt_delete_file.Location = new Point(x_st, y_st + dy * 0);
 
 
-            x_st = 1060;
+            x_st = 1000;
             y_st = 15;
 
             textBox4.Location = new Point(x_st, y_st);
             label3.Location = new Point(x_st + 50, y_st + 8);
-            bt_find_small_folders.Location = new Point(x_st, y_st + 50);
-            bt_find_empty_folders.Location = new Point(x_st + 120, y_st);
-            bt_find_same_files2.Location = new Point(x_st + 120, y_st + 50);
-            textBox3.Location = new Point(x_st + 100 + 140, y_st);
-            checkBox7.Location = new Point(x_st + 100 + 140, y_st + 50 + 6);
-            bt_test1.Location = new Point(x_st + 100 + 140 + 65, y_st + 50);
-            bt_test2.Location = new Point(x_st + 100 + 140 + 65 + 40, y_st + 50);
 
-            x_st = 1460;
+            bt_find_empty_folders.Location = new Point(x_st + 80, y_st);
+            bt_find_small_folders.Location = new Point(x_st+80, y_st + 30);
+            bt_find_same_files2.Location = new Point(x_st + 80, y_st + 60);
+
+            textBox3.Location = new Point(x_st + 100 + 100, y_st);
+            checkBox7.Location = new Point(x_st + 100 + 100, y_st + 50 + 6-20);
+            bt_test1.Location = new Point(x_st + 100 + 100, y_st + 50+10);
+            bt_test2.Location = new Point(x_st + 100 + 100 + 40, y_st + 50+10);
+            dx = 85;
+            dy = 35;
+            cb_option1.Location = new Point(x_st + 100 + 100 + dx * 1, y_st + dy);
+            cb_option2.Location = new Point(x_st + 100 + 100 + dx * 1, y_st + dy + 17);
+            cb_option3.Location = new Point(x_st + 100 + 100 + dx * 1, y_st + dy + 34);
+
+            x_st = 1370;
             y_st = 6;
             dx = 55;
             dy = 55;
 
             bt_search_pattern_vcs.Location = new Point(x_st, y_st);
             bt_search_pattern_matlab.Location = new Point(x_st + dx, y_st);
-            bt_search_pattern_python.Location = new Point(x_st, y_st + dy);
-            bt_search_pattern_cuda.Location = new Point(x_st + dx, y_st + dy);
-            bt_search_pattern_opengl.Location = new Point(x_st + dx * 2, y_st + dy);
-            bt_edit_python_files.Location = new Point(x_st + dx * 3, y_st + dy);
-            cb_option1.Location = new Point(x_st + dx * 4, y_st + dy);
-            cb_option2.Location = new Point(x_st + dx * 4, y_st + dy + 17);
-            cb_option3.Location = new Point(x_st + dx * 4, y_st + dy + 34);
+            bt_search_pattern_cuda.Location = new Point(x_st, y_st + dy);
+            bt_search_pattern_opengl.Location = new Point(x_st + dx * 1, y_st + dy);
 
             bt_open_dir2.Location = new Point(x_st + dx * 2, y_st);
-            bt_save_file_data.Location = new Point(x_st + dx * 3, y_st);
+            bt_save_file_data.Location = new Point(x_st + dx * 2, y_st+dy);
 
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_copy_rtb_data.Location = new Point(bt_clear2.Location.X, bt_copy_rtb_data.Location.Y);
 
             bt_setup.Location = new Point(this.ClientSize.Width - bt_setup.Width, 55);
             bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
+
+            x_st = 1540;
+            y_st = 4;
+            groupbox_python.Location = new Point(x_st, y_st);
+            groupbox_python.Size = new Size(160, 106);
+
+            x_st = 10;
+            y_st = 15;
+            dx = 100;
+            dy = 22;
+            rb_python_search0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            rb_python_search1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            rb_python_search2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            rb_python_search3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            bt_search_pattern_python.Size = new Size(45, 45);
+            bt_search_pattern_python.Location = new Point(x_st + dx * 1, y_st + dy * 0-5);
+            bt_edit_python_files.Size = new Size(45, 45);
+            bt_edit_python_files.Location = new Point(x_st + dx * 1, y_st + dy * 2-2);
 
 
             /*

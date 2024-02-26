@@ -31,9 +31,6 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
-
 # 正常顯示
 x1 = np.linspace(-1.5, 1.5, 31)
 y1 = np.cos(x1) ** 2
@@ -211,13 +208,12 @@ matplotlib.finance獨立出來成爲mpl_finance，而mpl_finance中的candlestic
 可以看出date2num函數計算之後，4個時間的整數部分都是736954，導致在X軸上這4個時間段都重疊在一起，無法區分了。要達到的效果是每一個分鐘也能成爲一個整數，這樣就可以顯示出來了。那麼一天是24小時，每小時60分鐘，那麼一天就是1440分鐘，將date2num計算的浮點數乘以1440就可以將每一分鐘轉爲整數，那麼就可以在x軸上。
 
 最後還需要對x軸格式化，因爲自己對x軸進行了處理（乘以1440），採用默認的格式化是亂碼。需要自定義x軸的格式化函數。
-"""
 
-
-"""
 pip install mpl_finance
 pip install --upgrade mplfinance
+
 """
+
 from pandas import DataFrame
 import matplotlib.dates as dates
 import mplfinance as mpf
@@ -281,9 +277,6 @@ import matplotlib as mpl
 import matplotlib.dates as mdates
 #from mplfinance import candlestick_ohlc
 from mplfinance.original_flavor import candlestick_ohlc
-
-#mpl.rcParams['font.sans-serif'] = ['SimHei'] # 指定默認字體
-#mpl.rcParams['axes.unicode_minus'] = False  # 解決保存圖像是負號'-'顯示為方塊的問題
 
 data_price = [1 ,2, 3, 4, 5]
 
@@ -392,8 +385,8 @@ print("matplotlib 11 -----------------------------------------------------------
 
 x = np.linspace(-2 * np.pi, 2 * np.pi, 100) #共100個點
 x = np.linspace(-2 * np.pi, 2 * np.pi)   #預設為50個點
-print(len(x))
-s, c = np.sin(x), np.cos(x)
+print("預設點數 :", len(x))
+s, c = np.sin(x), np.cos(x) #一次做兩個運算
 
 #自訂座標軸的刻度及標籤–xticks()、yticks()
 #x座標
@@ -416,22 +409,7 @@ plt.show()
 
 print("matplotlib 13 ------------------------------------------------------------")  # 60個
 
-print('載入字型範例')
-
-"""
-翰字鑄造 台北黑體 regular 版本
-
-TaipeiSansTCBeta-Regular.ttf 
-
-https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-
-TaipeiSansTCBeta-Regular.ttf'
-
-"""
-
-print("matplotlib 14 ------------------------------------------------------------")  # 60個
-
-# 一個完全乾淨、空白的figure:
+# 建立一個新的 figure
 fig1 = plt.figure()
 
 # 增新一個axes（座標軸），以供繪圖和放置資訊:
@@ -666,65 +644,13 @@ plt_polar()
 plt.tight_layout()
 plt.show()
 
+'''
+
 print("matplotlib 19 ------------------------------------------------------------")  # 60個
-
-#1. 善用 enumerate
-
-L = ['a', 'b', 'c']
-
-for i in L:
-    print(i)
-
-#加上編號。
-
-for i in range(3):
-    print(i+1, L[i])
-
-#試試 enumerate 會做什麼。
-
-print(list(enumerate(L)))
-
-#用 for 迴圈一一顯示出來。
-
-for i in enumerate(L):
-    print(i)
-
-#用 unpacking 取出內容, 再修正編號從 1 開始。
-
-for i, s in enumerate(L):
-    print(i + 1, s)
-
-#2. 畫多個圖
-
-x = np.linspace(-10, 10, 200)
-plt.plot(x, np.sin(x))
-plt.plot(x, np.cos(x))
-plt.show()
-
-
-#用 2×2的排列方式畫圖。
-
-plt.subplot(2, 2, 1)
-plt.plot(x, np.sin(x))
-
-plt.subplot(2, 2, 2)
-plt.plot(x, np.cos(x))
-
-plt.subplot(2, 2, 3)
-plt.plot(x, x)
-
-plt.subplot(2, 2, 4)
-plt.plot(x, x**2)
-
-plt.show()
-
-print("matplotlib 20 ------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-plt.rcParams["axes.unicode_minus"] = False
 x = np.linspace(0, 2*np.pi, 300)
 y = np.sin(x)
 fig = plt.figure()
@@ -740,28 +666,6 @@ plt.tight_layout()                      # 緊縮佈局
 plt.show()
 
 print("matplotlib 21 ------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-def f1(x, y):                                # 左邊曲面函數
-    return (np.power(x,2) + np.power(y, 2))
-def f2(x, y):                                # 右邊曲面函數
-    r = np.sqrt(np.power(x,2) + np.power(y, 2))
-    return (np.sin(r))
-
-X = np.arange(-3, 3, 0.1)                   # 曲面 X 區間
-Y = np.arange(-3, 3, 0.1)                   # 曲面 Y 區間
-X, Y = np.meshgrid(X, Y)                    # 建立 XY 座標
-# 建立子圖
-fig,ax = plt.subplots(1,2,figsize=(8,4),subplot_kw={'projection':'3d'})
-# 左邊子圖乎叫 f1
-ax[0].plot_surface(X, Y, f1(X,Y), cmap='hsv')   # 繪製 3D 圖
-# 左邊子圖乎叫 f2
-ax[1].plot_surface(X, Y, f2(X,Y), cmap='hsv')   # 繪製 3D 圖
-plt.show()
-
-print("matplotlib 22 ------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -782,8 +686,6 @@ print("matplotlib 23 -----------------------------------------------------------
 
 import csv
 import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
 filename = '_data/TaipeiWeatherJan.csv'
 with open(filename) as csvFile:
@@ -817,7 +719,6 @@ def convert_tw_date_to_ad(tw_date):
     # 重組日期並返回
     return f"{year}-{month:02d}-{day:02d}"
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 filename = '_data/ST43_3479_202310.csv'
 with open(filename) as csvFile:
     csvReader = csv.reader(csvFile)
@@ -872,7 +773,7 @@ plt.plot(seq,data1,'-*',seq,data2,'-o',seq,data3,'-^',seq,data4,'-s')
 
 plt.show()
 
-'''
+
 print("matplotlib 26 ------------------------------------------------------------")  # 60個
 
 # 建立衰減數列.
@@ -889,7 +790,7 @@ print("------------------------------------------------------------")  # 60個
 
 offset = 10
 
-'''
+
 x = np.linspace(-1, 6, 10)
 y00 = x ** 2
 y01 = y00 + offset * 1
@@ -898,16 +799,16 @@ plt.plot(x, y01, "r-o")
 
 plt.plot([-2, 10, 3, 13, 5])
 
-'''
+
 
 #plt.plot([-2, 1, 2.7, 3.3], [3, -5, 6, 0])
 
-'''
+
 x = np.linspace(0, 10, 100)
 
 plt.plot(x, np.sin(x) + x)
 plt.plot(x, np.cos(3*x))
-'''
+
 
 x = np.linspace(-5, 5, 200)
 y = np.sinc(x)
@@ -916,11 +817,11 @@ plt.plot(x, y)
 plt.plot(x[y>0], y[y>0], 'o')
 
 
-'''
+
 plt.xlabel('x label', fontsize = "10") # 設定 x 軸標題內容及大小
 plt.ylabel('y label', fontsize = "10") # 設定 y 軸標題內容及大小
 plt.title('Plot title', fontsize = "18") # 設定圖表標題內容及大小
-'''
+
 
 #plt.title(label = '231')
 #plt.axis('equal')       #軸比例
@@ -1092,18 +993,8 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+""" 新進資料
 
-
-
-"""
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-
-
-
-"""
-
-
-"""
 seq = [2021, 2022, 2023]                # 年度
 plt.xticks(seq)                         # 設定x軸刻度
 
@@ -1157,11 +1048,8 @@ x3 = np.arange(11)                  # 簡化語法產生陣列
 print(type(x3), x3)
 
 
-"""
 
-
-
-""" 共同抽出
+共同抽出
 plt.savefig('tmp_pic.jpg')
 
 #存圖
@@ -1176,6 +1064,15 @@ plt.grid()
 plt_grid()
 
 plt.grid(True)
+
+print('載入字型範例')
+
+
+
+翰字鑄造 台北黑體 regular 版本
+TaipeiSansTCBeta-Regular.ttf 
+https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
+TaipeiSansTCBeta-Regular.ttf'
 
 
 
