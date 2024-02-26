@@ -1,6 +1,6 @@
 import sys
 import itertools
-
+'''
 print('------------------------------------------------------------')	#60個
 
 n = {1, 2, 3, 4}
@@ -143,14 +143,11 @@ print(_newname())
 
 print('------------------------------------------------------------')	#60個
 
-
-# 6-8-12 itertools 模組:
+# itertools 模組:
 # product() 笛卡兒積
 # permutations() 排列
 # combinations() 組合
 # combinations_with_replacement() 同元素可重複的組合
-
-import itertools
 
 data1 = ['A', 'B', 'C']
 data2 = [1, 2, 3]
@@ -175,9 +172,7 @@ print(list(itertools.combinations_with_replacement(data1, 3)))
 
 print('------------------------------------------------------------')	#60個
 
-# 6-8-10 itertools 模組: tee() 同單一來源建立多個走訪器
-
-import itertools
+# itertools 模組: tee() 同單一來源建立多個走訪器
 
 data = [1, 2, 3, 4, 5]
 
@@ -187,9 +182,7 @@ for g in generators:
     print(list(g))
 print('------------------------------------------------------------')	#60個
 
-# 6-8-11 itertools 模組: compress() 過濾元素
-
-import itertools
+# itertools 模組: compress() 過濾元素
 
 data = 'ABCDEFG'
 selector = [1, 0, 1, 1, 0, 1, 0]
@@ -249,8 +242,6 @@ print('------------------------------------------------------------')	#60個
 
 print('itertools 模組: islice() 切片')
 
-import itertools
-
 n = [0, 1, 2, 3, 4]
 
 print(list(itertools.islice(n, 3)))
@@ -262,8 +253,6 @@ print(list(itertools.islice(n, 0, 5, 2)))
 print('------------------------------------------------------------')	#60個
 
 print('itertools 模組: accumulate() 累加')
-
-import itertools
 
 n = [0, 1, 2, 3, 4]
 print(list(itertools.accumulate(n)))
@@ -281,8 +270,6 @@ print('------------------------------------------------------------')	#60個
 
 print('itertools 模組: starmap() 解包外層容器')
 
-import itertools
-
 n = [(1, 2), (2, 3), (3, 5), (5, 7), (7, 11)]
 
 print(list(itertools.starmap(lambda x, y: x * y, n)))
@@ -292,8 +279,6 @@ print(list(map(lambda t: t[0] * t[1], n)))
 print('------------------------------------------------------------')	#60個
 
 print('itertools 模組: groupby() 給連續資料分組')
-
-import itertools
 
 data = ['a', 'a', 'a', 'b', 'b', 'b', 'a', 'a', 'c', 'c', 'd']
 
@@ -330,8 +315,6 @@ print('------------------------------------------------------------')	#60個
 
 # 迭代工具 - 排列 / 組合 / 笛卡爾積
 
-import itertools
-
 cc = itertools.permutations("ABCD")
 print(type(cc))
 print(cc)
@@ -343,12 +326,39 @@ print(cc)
 cc = itertools.product("ABCD", "123")
 print(type(cc))
 print(cc)
+'''
+print('------------------------------------------------------------')	#60個
 
+x = ["1", "2", "3"]
+perm = itertools.permutations(x)
+for i in perm:
+    print(i)
 
 
 print('------------------------------------------------------------')	#60個
 
+import itertools
 
-print('------------------------------------------------------------')	#60個
+x = ["北京", "天津", "上海", "廣州", "武漢"]
+perm = itertools.permutations(x)
+n = 0
+for i in perm:
+    n += 1
+    print(i)
+print("總共有 %d 拜訪方式" % n)
 
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 

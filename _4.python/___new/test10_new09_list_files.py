@@ -1,4 +1,5 @@
 """
+
 print('ls 測試 os.walk')
 print('ls 測試 os.listdir')
 print('ls 測試 glob.glob')
@@ -23,9 +24,10 @@ import glob
 import stat
 
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test/_good1/_good4/_good5"
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("ls 測試 os.walk ST------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 多層1")
@@ -74,66 +76,47 @@ if len(allfiles) > 0:
     # long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
     # print(long_filename)
 
+print("------------------------------------------------------------")  # 60個
 
-"""
-分析
+#分析
+if len(allfiles) > 0:
+    for filename in allfiles:
+        # print(filename)
+        if filename.endswith('.jpg') or filename.endswith('.png'):
+            print('取得圖檔 :', filename)
 
-if file.endswith('.jpg') or file.endswith('.png'):
-
-    for file in files:  # 取得所有 .png .jpg 檔，存入 allfiles 串列中
-        ext = file.split('.')[-1]
+    for filename in allfiles:
+        ext = filename.split('.')[-1]
+        print('副檔名 :', ext)
         if ext == "png" or ext == "jpg":
-            allfiles.append(foldername +'/'+file)
+            print('取得全檔名 :', filename)
 
-
-      for file in allfiles:  
-         filename = file.split('.')[0] #主檔名         
-
-
-   if basename == target_foldername:  # 輸出資料夾不再重複處理
-      continue
-
-"""
 
 print("ls 測試 os.walk SP------------------------------------------------------------")  # 60個
-'''
+
 
 print(
     "ls 測試 os.listdir ST------------------------------------------------------------"
 )  # 60個
 
-print("當前目錄下之ls (單層)")
-# filenames = os.listdir()   #same
-filenames = os.listdir(".")
-print(type(filenames))
-print(filenames)
-
-print("------------------------------------------------------------")  # 60個
-
-print("根目錄下之ls (單層)")
-filenames = os.listdir("/")
-print(type(filenames))
-print(filenames)
-
-print("------------------------------------------------------------")  # 60個
-
 print("指定目錄下之ls (單層)")
-filenames = os.listdir(foldername)
-for filename in filenames:
-    print(filename)
-    sub, ext = os.path.splitext(filename)
-    print("前檔名", sub, "後檔名", ext)
 
-print("------------------------------------------------------------")  # 60個
+# filenames = os.listdir()   #無參數, 當前目錄
 
-print("指定目錄下之ls (單層)")
-filenames = os.listdir(foldername)  # 單層
+folder = "." #當前目錄
+folder = "/" #根目錄
+folder = foldername #指定目錄
+
+filenames = os.listdir(folder)# 單層
 print(type(filenames))
 print(filenames)
+
 for filename in filenames:
     print(filename)
     long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
     print(long_filename)
+    sub, ext = os.path.splitext(filename)
+    print("前檔名", sub, "後檔名", ext)
 
 print("排序印出")
 for filename in sorted(filenames):
@@ -185,7 +168,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 多層3")
 
-
 def list_files1(foldername, callback):
     for filename in os.listdir(foldername):  # 單層
         long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
@@ -200,15 +182,12 @@ def list_files1(foldername, callback):
             # Unknown file type, print a message
             print("Skipping %s" % long_filename)
 
-
 def visitfile(file):
     print("visiting", file)
-
 
 list_files1(foldername, visitfile)
 
 print("------------------------------------------------------------")  # 60個
-
 
 def _listFiles(files, foldername):
     for filename in os.listdir(foldername):
@@ -217,7 +196,6 @@ def _listFiles(files, foldername):
             _listFiles(files, long_filename)
         else:
             files.append(long_filename)
-
 
 def read_files(foldername, showProgress=False, readPixelData=False, force=False):
     print(foldername)
@@ -234,7 +212,6 @@ def read_files(foldername, showProgress=False, readPixelData=False, force=False)
     _listFiles(filelist, basedir)
     print(filelist)
 
-
 print("撈出資料夾下所有檔案, 多層4")
 
 # find_files(foldername)
@@ -244,7 +221,6 @@ all_series = read_files(foldername, True, False, False)
 print("------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 單層")
-
 
 def list_files3(foldername):
     for filename in os.listdir(foldername):
@@ -256,13 +232,11 @@ def list_files3(foldername):
         else:
             print("x")
 
-
 list_files3(foldername)
 
 print("------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 多層5")
-
 
 def list_files4(foldername):
     filenames = os.listdir(foldername)
@@ -274,11 +248,9 @@ def list_files4(foldername):
         else:  # 檔案
             print("f", long_filename, os.stat(long_filename).st_size)
 
-
 list_files4(foldername)
 
 print("------------------------------------------------------------")  # 60個
-
 
 def list_files5(foldername):
     try:
@@ -298,11 +270,9 @@ def list_files5(foldername):
             elif os.path.isdir(long_filename):
                 testdir(long_filename)
 
-
 list_files5(foldername)
 
 print("------------------------------------------------------------")  # 60個
-
 
 def getFolderSize(foldername):
     size = 0  # Store the total size of all files
@@ -315,13 +285,11 @@ def getFolderSize(foldername):
         size += os.path.getsize(foldername)  # Accumulate file size
     return size
 
-
 folder_size = getFolderSize(foldername)
 
 print("資料夾大小 : ", folder_size, "拜")
 
 print("------------------------------------------------------------")  # 60個
-
 
 def process(filename, listnames):
     print("process : ", filename)
@@ -332,7 +300,6 @@ def process(filename, listnames):
     except IOError as msg:
         sys.stderr.write("Can't open: %s\n" % msg)
         return 1
-
 
 def processdir(dir, listnames):
     print("processdir : ", dir)
@@ -357,20 +324,18 @@ def processdir(dir, listnames):
         exit = exit or x
     return exit
 
-
 listnames = 1  # or 1
 x = process(foldername, listnames)
 print(x)
 
 print("------------------------------------------------------------")  # 60個
 
-stats = {}
-
+stats = {}  #字典
+print(type(stats))
 
 def addstats(ext, key, n):
     d = stats.setdefault(ext, {})
     d[key] = d.get(key, 0) + n
-
 
 def statdir(dir):
     try:
@@ -390,7 +355,6 @@ def statdir(dir):
             statdir(full)
         else:
             statfile(full)
-
 
 def statfile(filename):
     head, ext = os.path.splitext(filename)
@@ -420,7 +384,6 @@ def statfile(filename):
     del lines
     words = data.split()
     addstats(ext, "words", len(words))
-
 
 def report():
     exts = sorted(stats)
@@ -464,7 +427,6 @@ def report():
             print("%*s" % (colwidth[col], value), end=" ")
         print()
     printheader()  # Another header at the bottom
-
 
 # Show file statistics by extension.
 
@@ -632,19 +594,16 @@ print(
     "ls 測試 glob.glob SP------------------------------------------------------------"
 )  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("---- 新進未整理 --------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-
 
 print("-------")
 print(os.curdir)
 print("-------")
 print(os.pardir)
 print("-------")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -747,6 +706,8 @@ head, base = os.path.split(filename)
 
 
 print("------------------------------------------------------------")  # 60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個

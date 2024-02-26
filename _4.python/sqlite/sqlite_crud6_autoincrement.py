@@ -26,7 +26,7 @@ print('------------------------------------------------------------')	#60個
 
 print('測試 序號自動遞增')
 
-db_filename = 'cccc' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.a.qlite'
+db_filename = 'cccc' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite'
 
 print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線

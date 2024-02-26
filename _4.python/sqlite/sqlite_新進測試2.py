@@ -37,7 +37,7 @@ print('------------------------------------------------------------')	#60個
 
 print('新進測試')
 
-db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.a.qlite';
+db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
 
 mem_conn = sqlite3.connect(':memory:')	# 建立資料庫連線, 記憶體
 disk_conn = sqlite3.connect('example.db') # 建立資料庫連線, 磁碟

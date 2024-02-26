@@ -1,27 +1,31 @@
 """
+Flask是一個使用Python編寫的輕量級Web應用框架。
 
-做一個檔案/資料夾的瀏覽公版程式 GUI介面
-
-tk
-pysimplegui
-
-選取檔案/資料夾後 關閉此GUI介面 後續進行處理
-ex: 圖片處理 圖片裁切縮放 檔案處理 播放......
 
 
 """
+
 
 import os
 import sys
 import time
 import random
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+if __name__ == "__main__":
+    app.run()
 
 print("------------------------------------------------------------")  # 60個
 

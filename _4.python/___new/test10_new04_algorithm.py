@@ -11,67 +11,11 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-
-import itertools
-
-x = ["1", "2", "3"]
-perm = itertools.permutations(x)
-for i in perm:
-    print(i)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch01\ch1_4.py
-
-# ch1_4.py
-import matplotlib.pyplot as plt
-import numpy as np
-
-xpt = np.linspace(1, 10, 10)  # 建立含10個元素的陣列
-ypt1 = xpt / xpt  # 時間複雜度是 O(1)
-ypt2 = np.log2(xpt)  # 時間複雜度是 O(logn)
-ypt3 = xpt  # 時間複雜度是 O(n)
-plt.plot(xpt, ypt1, "-o", label="O(1)")
-plt.plot(xpt, ypt2, "-o", label="O(logn)")
-plt.plot(xpt, ypt3, "-o", label="O(n)")
-plt.legend(loc="best")  # 建立圖例
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch01\ch1_5.py
-
-# ch1_5.py
-import matplotlib.pyplot as plt
-import numpy as np
-
-xpt = np.linspace(1, 10, 10)  # 建立含10個元素的陣列
-ypt1 = xpt / xpt  # 時間複雜度是 O(1)
-ypt2 = np.log2(xpt)  # 時間複雜度是 O(logn)
-ypt3 = xpt  # 時間複雜度是 O(n)
-ypt4 = xpt * np.log2(xpt)  # 時間複雜度是 O(nlogn)
-ypt5 = xpt * xpt  # 時間複雜度是 O(n*n)
-plt.plot(xpt, ypt1, "-o", label="O(1)")
-plt.plot(xpt, ypt2, "-o", label="O(logn)")
-plt.plot(xpt, ypt3, "-o", label="O(n)")
-plt.plot(xpt, ypt4, "-o", label="O(nlogn)")
-plt.plot(xpt, ypt5, "-o", label="O(n*n)")
-plt.legend(loc="best")  # 建立圖例
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
 btree = [0] * 16
 print(type(btree))
 print(btree)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 import heapq
 
@@ -2178,188 +2122,6 @@ for i in range(k):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch18\ch18_3.py
-
-# ch18_3.py
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-def kmeans(x, y, cx, cy):
-    """目前功能只是繪群集元素點"""
-    plt.scatter(x, y, color="b")  # 繪製元素點
-    plt.scatter(cx, cy, color="r")  # 用紅色繪群集中心
-    plt.show()
-
-
-# 群集中心, 元素的數量, 數據最大範圍
-cluster_number = 3  # 群集中心數量
-seeds = 50  # 元素數量
-limits = 100  # 值在(100, 100)內
-# 使用隨機數建立seeds數量的種子元素
-x = np.random.randint(0, limits, seeds)
-y = np.random.randint(0, limits, seeds)
-# 使用隨機數建立cluster_number數量的群集中心
-cluster_x = np.random.randint(0, limits, cluster_number)
-cluster_y = np.random.randint(0, limits, cluster_number)
-
-kmeans(x, y, cluster_x, cluster_y)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch18\ch18_4.py
-
-# ch18_4.py
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-def length(x1, y1, x2, y2):
-    """計算2點之間的距離"""
-    return int(((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5)
-
-
-def clustering(x, y, cx, cy):
-    """對元素執行分群"""
-    clusters = []
-    for i in range(cluster_number):  # 建立群集
-        clusters.append([])
-    for i in range(seeds):  # 為每個點找群集
-        distance = INF  # 設定最初距離
-        for j in range(cluster_number):  # 計算每個點與群集中心的距離
-            dist = length(x[i], y[i], cx[j], cy[j])
-            if dist < distance:
-                distance = dist
-                cluster_index = j  # 分群的索引
-        clusters[cluster_index].append([x[i], y[i]])  # 此點加入此索引的群集
-    return clusters
-
-
-def kmeans(x, y, cx, cy):
-    """建立群集和繪製各群集點和線條"""
-    clusters = clustering(x, y, cx, cy)
-    plt.scatter(x, y, color="b")  # 繪製元素點
-    plt.scatter(cx, cy, color="r")  # 用紅色繪群集中心
-
-    c = ["r", "g", "y"]  # 群集的線條顏色
-    for index, node in enumerate(clusters):  # 為每個群集中心建立線條
-        linex = []  # 線條的 x 座標
-        liney = []  # 線條的 y 座標
-        for n in node:
-            linex.append([n[0], cx[index]])  # 建立線條x座標串列
-            liney.append([n[1], cy[index]])  # 建立線條y座標串列
-        color_c = c[index]  # 選擇顏色
-        for i in range(len(linex)):
-            plt.plot(linex[i], liney[i], color=color_c)  # 為第i群集繪線條
-    plt.show()
-
-
-# 群集中心, 元素的數量, 數據最大範圍
-INF = 999  # 假設最大距離
-cluster_number = 3  # 群集中心數量
-seeds = 50  # 元素數量
-limits = 100  # 值在(100, 100)內
-# 使用隨機數建立seeds數量的種子元素
-x = np.random.randint(0, limits, seeds)
-y = np.random.randint(0, limits, seeds)
-# 使用隨機數建立cluster_number數量的群集中心
-cluster_x = np.random.randint(0, limits, cluster_number)
-cluster_y = np.random.randint(0, limits, cluster_number)
-
-kmeans(x, y, cluster_x, cluster_y)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch18\ch18_5.py
-
-# ch18_5.py
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-def length(x1, y1, x2, y2):
-    """計算2點之間的距離"""
-    return int(((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5)
-
-
-def clustering(x, y, cx, cy):
-    """對元素執行分群"""
-    clusters = []
-    for i in range(cluster_number):  # 建立群集
-        clusters.append([])
-    for i in range(seeds):  # 為每個點找群集
-        distance = INF  # 設定最初距離
-        for j in range(cluster_number):  # 計算每個點與群集中心的距離
-            dist = length(x[i], y[i], cx[j], cy[j])
-            if dist < distance:
-                distance = dist
-                cluster_index = j  # 分群的索引
-        clusters[cluster_index].append([x[i], y[i]])  # 此點加入此索引的群集
-    return clusters
-
-
-def kmeans(x, y, cx, cy):
-    """建立群集和繪製各群集點和線條"""
-    clusters = clustering(x, y, cx, cy)
-    plt.scatter(x, y, color="b")  # 繪製元素點
-    plt.scatter(cx, cy, color="r")  # 用紅色繪群集中心
-
-    c = ["r", "g", "y"]  # 群集的線條顏色
-    for index, node in enumerate(clusters):  # 為每個群集中心建立線條
-        linex = []  # 線條的 x 座標
-        liney = []  # 線條的 y 座標
-        for n in node:
-            linex.append([n[0], cx[index]])  # 建立線條x座標串列
-            liney.append([n[1], cy[index]])  # 建立線條y座標串列
-        color_c = c[index]  # 選擇顏色
-        for i in range(len(linex)):
-            plt.plot(linex[i], liney[i], color=color_c)  # 為第i群集繪線條
-    plt.show()
-    return clusters
-
-
-def get_new_cluster(clusters):
-    """計算各群集中心的點"""
-    new_x = []  # 新群集中心 x 座標
-    new_y = []  # 新群集中心 y 座標
-    for index, node in enumerate(clusters):  # 逐步計算各群集
-        nx, ny = 0, 0
-        for n in node:
-            nx += n[0]
-            ny += n[1]
-        new_x.append([])
-        new_x[index] = int(nx / len(node))  # 計算群集中心 x 座標
-        new_y.append([])
-        new_y[index] = int(ny / len(node))  # 計算群集中心 y 座標
-    return new_x, new_y
-
-
-# 群集中心, 元素的數量, 數據最大範圍
-INF = 999  # 假設最大距離
-cluster_number = 3  # 群集中心數量
-seeds = 50  # 元素數量
-limits = 100  # 值在(100, 100)內
-# 使用隨機數建立seeds數量的種子元素
-x = np.random.randint(0, limits, seeds)
-y = np.random.randint(0, limits, seeds)
-# 使用隨機數建立cluster_number數量的群集中心
-cluster_x = np.random.randint(0, limits, cluster_number)
-cluster_y = np.random.randint(0, limits, cluster_number)
-
-clusters = kmeans(x, y, cluster_x, cluster_y)
-
-while True:  # 收斂迴圈
-    new_x, new_y = get_new_cluster(clusters)
-    x_list = list(cluster_x)  # 將np.array轉成串列
-    y_list = list(cluster_y)  # 將np.array轉成串列
-    if new_x == x_list and new_y == y_list:  # 如果相同代表收斂完成
-        break
-    else:
-        cluster_x = new_x  # 否則重新收斂
-        cluster_y = new_y
-        clusters = kmeans(x, y, cluster_x, cluster_y)
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2625,26 +2387,10 @@ print("排列組合需要 %d 秒" % times)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex1_4.py
-
-# ex1_4.py
-import itertools
-
-x = ["北京", "天津", "上海", "廣州", "武漢"]
-perm = itertools.permutations(x)
-n = 0
-for i in perm:
-    n += 1
-    print(i)
-print("總共有 %d 拜訪方式" % n)
 
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex10_2.py
-
-
-# ex10_2.py
 def sequentialSearch(nLst):
     for i in range(len(nLst)):
         if nLst[i] == key:  # 找到了
@@ -3204,104 +2950,8 @@ print("加密字串 ", ciphertext)
 decryMsg = decrypt(ciphertext, decry_dict)
 print("解密字串 ", decryMsg)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex18_2.py
-
-# ex18_2.py
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-def length(x1, y1, x2, y2):
-    """計算2點之間的距離"""
-    return int(((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5)
-
-
-def clustering(x, y, cx, cy):
-    """對元素執行分群"""
-    clusters = []
-    for i in range(cluster_number):  # 建立群集
-        clusters.append([])
-    for i in range(seeds):  # 為每個點找群集
-        distance = INF  # 設定最初距離
-        for j in range(cluster_number):  # 計算每個點與群集中心的距離
-            dist = length(x[i], y[i], cx[j], cy[j])
-            if dist < distance:
-                distance = dist
-                cluster_index = j  # 分群的索引
-        clusters[cluster_index].append([x[i], y[i]])  # 此點加入此索引的群集
-    return clusters
-
-
-def kmeans(x, y, cx, cy):
-    """建立群集和繪製各群集點和線條"""
-    clusters = clustering(x, y, cx, cy)
-    plt.scatter(x, y, color="b")  # 繪製元素點
-    plt.scatter(cx, cy, color="r")  # 用紅色繪群集中心
-
-    c = ["r", "g", "y"]  # 群集的線條顏色
-    for index, node in enumerate(clusters):  # 為每個群集中心建立線條
-        linex = []  # 線條的 x 座標
-        liney = []  # 線條的 y 座標
-        for n in node:
-            linex.append([n[0], cx[index]])  # 建立線條x座標串列
-            liney.append([n[1], cy[index]])  # 建立線條y座標串列
-        color_c = c[index]  # 選擇顏色
-        for i in range(len(linex)):
-            plt.plot(linex[i], liney[i], color=color_c)  # 為第i群集繪線條
-    plt.show()
-    return clusters
-
-
-def get_new_cluster(clusters):
-    """計算各群集中心的點"""
-    new_x = []  # 新群集中心 x 座標
-    new_y = []  # 新群集中心 y 座標
-    for index, node in enumerate(clusters):  # 逐步計算各群集
-        nx, ny = 0, 0
-        for n in node:
-            nx += n[0]
-            ny += n[1]
-        new_x.append([])
-        new_x[index] = int(nx / len(node))  # 計算群集中心 x 座標
-        new_y.append([])
-        new_y[index] = int(ny / len(node))  # 計算群集中心 y 座標
-    return new_x, new_y
-
-
-# 群集中心, 元素的數量, 數據最大範圍
-INF = 999  # 假設最大距離
-cluster_number = 3  # 群集中心數量
-seeds = 100  # 元素數量
-limits = 500  # 值在(300, 300)內
-# 使用隨機數建立seeds數量的種子元素
-x = np.random.randint(0, limits, seeds)
-y = np.random.randint(0, limits, seeds)
-# 使用隨機數建立cluster_number數量的群集中心
-cluster_x = np.random.randint(0, limits, cluster_number)
-cluster_y = np.random.randint(0, limits, cluster_number)
-
-clusters = kmeans(x, y, cluster_x, cluster_y)
-
-while True:  # 收斂迴圈
-    new_x, new_y = get_new_cluster(clusters)
-    x_list = list(cluster_x)  # 將np.array轉成串列
-    y_list = list(cluster_y)  # 將np.array轉成串列
-    if new_x == x_list and new_y == y_list:  # 如果相同代表收斂完成
-        break
-    else:
-        cluster_x = new_x  # 否則重新收斂
-        cluster_y = new_y
-        clusters = kmeans(x, y, cluster_x, cluster_y)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex19_2.py
-
-# ch19_2.py
 from collections import deque
 
 

@@ -1730,9 +1730,75 @@ namespace vcs_DrAP
                     {
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
                         //richTextBox2.Text += subdirectory + "\n";
-                        if ((search_mode == SEARCH_MODE_PYTHON) && (cb_option3.Checked == true))
+
+                        //rb_python_search0
+                        if (search_mode == SEARCH_MODE_PYTHON)
                         {
-                            string search_folder = @"C:\_git\vcs\_4.python\__code";
+                            bool flag_do_search = false;
+                            string search_folder1 = @"C:\_git\vcs\_4.python\___new";    //新進檔案
+                            string search_folder2 = @"C:\_git\vcs\_4.python\__code";    //書附光碟
+
+                            if (rb_python_search0.Checked == true)
+                            {
+                                //僅搜尋 新進檔案
+                                if (subdirectory.Contains(search_folder1))
+                                {
+                                    ProcessDirectoryS(subdirectory);
+                                }
+                                else
+                                {
+                                    //richTextBox2.Text += "跳過 " + subdirectory + "\n";
+                                    continue;
+                                }
+                            }
+                            else if (rb_python_search1.Checked == true)
+                            {
+                                //python only 不包含新進檔案 與 書附光碟
+                                if (subdirectory.Contains(search_folder1))
+                                {
+                                    //跳過 新進檔案
+                                    richTextBox2.Text += "跳過 " + subdirectory + "\n";
+                                    continue;
+                                }
+                                else if (subdirectory.Contains(search_folder2))
+                                {
+                                    //跳過 書附光碟
+                                    richTextBox2.Text += "跳過 " + subdirectory + "\n";
+                                    continue;
+                                }
+                                else
+                                {
+                                    ProcessDirectoryS(subdirectory);
+                                }
+                            }
+                            else if (rb_python_search2.Checked == true)
+                            {
+                                //僅搜尋 書附光碟
+                                if (subdirectory.Contains(search_folder2))
+                                {
+                                    ProcessDirectoryS(subdirectory);
+                                }
+                                else
+                                {
+                                    //richTextBox2.Text += "跳過 " + subdirectory + "\n";
+                                    continue;
+                                }
+                            }
+                            else if (rb_python_search3.Checked == true)
+                            {
+                                //全部
+                                ProcessDirectoryS(subdirectory);
+                            }
+                            else
+                            {
+                                //impossible
+                                richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n";
+                                //python only 不包含新進檔案 與 書附光碟
+                            }
+                        }
+                        else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == true))
+                        {
+                            string search_folder = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
                             if (subdirectory.Contains(search_folder))
                             {
                                 ProcessDirectoryS(subdirectory);
@@ -1743,9 +1809,9 @@ namespace vcs_DrAP
                                 continue;
                             }
                         }
-                        else if ((search_mode == SEARCH_MODE_PYTHON) && (cb_option3.Checked == false))
+                        else if ((search_mode == SEARCH_MODE_VCS) && (cb_option3.Checked == false))
                         {
-                            string skip_folder = @"C:\_git\vcs\_4.python\__code";
+                            string skip_folder = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_c_example";
                             if (subdirectory.Contains(skip_folder))
                             {
                                 richTextBox2.Text += "跳過 " + subdirectory + "\n";
@@ -1758,6 +1824,7 @@ namespace vcs_DrAP
                         }
                         else
                         {
+                            //除了python 與 vcs, 全部搜尋
                             ProcessDirectoryS(subdirectory);
                         }
                     }

@@ -158,8 +158,8 @@ print(weather_data[:10])
 
 
 import time
-#db_filename = 'C:/_git/vcs/_1.data/______test_files2/weather_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.qlite';
-db_filename = 'weather_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.qlite';
+#db_filename = 'C:/_git/vcs/_1.data/______test_files2/weather_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+db_filename = 'weather_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
 
 import sqlite3
 
