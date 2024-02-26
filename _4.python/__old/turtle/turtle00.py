@@ -6,6 +6,7 @@
 
 import turtle
 
+"""
 def moveTurtle(x, y):
     turtle.penup()
     turtle.goto(x, y)
@@ -81,6 +82,110 @@ turtle.goto(200, 0)
 turtle.penup()
 
 turtle.done()       #最後用
+"""
+
+turtle.Turtle()
+W = 640
+H = 480
+x_st = 200
+y_st = 200
+turtle.setup(W,H,x_st,y_st) #指定畫布的大小與位置
+turtle.bgcolor('Skyblue')   #設定背景色
+
+turtle.shape('turtle')  #設定畫筆形狀, 預設為箭頭
+"""
+6種
+arrow, turtle, circle, square, triangle, classic(預設)
+
+"""
+
+"""
+w = W / 3
+h = H / 3
+turtle.goto(w, 0)
+turtle.goto(w, h)
+turtle.goto(-w, h)
+turtle.goto(-w, -h)
+turtle.goto(w, -h)
+turtle.home()   #畫筆回到原點
+"""
+
+'''
+turtle.forward(50)#前進=fd  vs backward後退
+turtle.left(90)#左轉
+turtle.forward(50)
+turtle.right(90)#右轉
+turtle.forward(50)
+turtle.right(90)
+turtle.forward(50)
+turtle.left(90)
+turtle.forward(50)
+
+turtle.penup()#舉起畫筆 不畫 = pu
+turtle.pendown()#放下畫筆 畫 = pd
+
+turtle.pensize(width = 5)#設定畫筆大小
+turtle.width(width =5)#同上
+
+"""
+turtle.speed()  #設定畫筆移動速度
+fastest  0  最快
+fast     10 快
+normal   6 正常
+slow     3 慢
+slowest  1 最慢
+
+"""
+
+"""
+#畫筆上色
+#turtle.color(colorstring)
+turtle.color((r,g,b))   #浮點數
+turtle.color(r,g,b)     #16進制表示
+turtle.color('#FF0000') #紅色
+"""
+
+#塗上顏色
+turtle.begin_fill()    #開始塗色
+turtle.end_fill()    #結束塗色
+turtle.fillcolor()#指定塗滿的色彩
+turtle.color('Blue', 'Gold')#畫筆為Blue, 塗滿為Gold
+
+turtle.penup()
+turtle.home()   #畫筆回到原點
+
+turtle.begin_fill()    #開始塗色
+turtle.pendown()
+turtle.forward(100)
+turtle.right(90)
+turtle.forward(100)
+turtle.right(90)
+turtle.forward(100)
+turtle.right(90)
+turtle.forward(100)
+
+turtle.end_fill()    #結束塗色
+'''
+
+print('畫點')
+turtle.dot(50, 'Ivory')
+
+
+print('畫圓, 圓心在turtle的左邊 ??')
+r = 100
+turtle.circle(r) # r 正值, 逆時針畫圓
+
+r = -100
+turtle.circle(r)# r 負值, 順時針畫圓
+
+r = 75
+turtle.circle(r, 235) # 畫圓弧 235度
+
+r = 50
+N = 5
+turtle.circle(r, 360, N) # 正N邊形
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -105,7 +210,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 t.hideturtle()	隱藏海歸以免遮蔽
-t.home() 回原點
+
 t.left(65) 試左轉65度
 
 互補的指令

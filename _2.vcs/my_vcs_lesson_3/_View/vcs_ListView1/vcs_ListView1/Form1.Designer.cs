@@ -327,7 +327,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(140, 60);
             this.button23.TabIndex = 131;
-            this.button23.Text = "測試listView 9";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -349,7 +348,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(140, 60);
             this.button25.TabIndex = 133;
-            this.button25.Text = "測試listView 1";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 

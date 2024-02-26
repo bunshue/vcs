@@ -1405,30 +1405,6 @@ person("Tomas", *income)
 
 print("------------------------------------------------------------")  # 60個
 
-# List 含有 Tuple
-student = [
-    ("Eugene", 1989, "Taipei"),
-    ("Davie", 1993, "Kaohsiung"),
-    ("Michelle", 1999, "Yilan"),
-    ("Peter", 1988, "Hsinchu"),
-    ("Connie", 1997, "Pingtung"),
-]
-
-# 定義sort()方法參數key
-na = lambda item: item[0]
-student.sort(key=na)
-print("依名字排序：")
-for name in student:
-    print("{:6s},{}, {:10s}".format(*name))
-
-# 直接在sort()方法帶入lamdba()函式
-student.sort(key=lambda item: item[2], reverse=True)
-print("依出生地遞減排序：")
-for name in student:
-    print("{:6s},{}, {:10s}".format(*name))
-
-print("------------------------------------------------------------")  # 60個
-
 fruit = "Apple"
 
 
@@ -3872,7 +3848,7 @@ print(flatten([[1, 2], [3, 4]]))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 32 顛倒一個 dict 的鍵與值
+# 顛倒一個 dict 的鍵與值
 
 
 def flipped_dict(my_dict):
@@ -3883,131 +3859,7 @@ print(flipped_dict({"a": 1, "b": 2, "c": 3}))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 38 冰淇淋球
-
-
-class Scoop:
-    def __init__(self, flavor):
-        self.flavor = flavor
-
-
-class Scoop_Maker:
-    def create(self, flavors):
-        return [Scoop(flavor) for flavor in flavors]
-
-
-scoop_maker = Scoop_Maker()
-scoops = scoop_maker.create(["巧克力", "香草", "薄荷"])
-
-for scoop in scoops:
-    print(scoop, scoop.flavor)
-
-print("------------------------------------------------------------")  # 60個
-
-# 練習 39 冰淇淋碗
-
-
-class Scoop:
-    def __init__(self, flavor):
-        self.flavor = flavor
-
-
-class Bowl:
-    def __init__(self):
-        self.scoops = []
-
-    def add_scoop(self, *new_scoops):
-        for new_scoop in new_scoops:
-            self.scoops.append(new_scoop)
-
-    def flavors(self):
-        return "/".join(scoop.flavor for scoop in self.scoops)
-
-
-bowl = Bowl()
-bowl.add_scoop(Scoop("巧克力"))
-bowl.add_scoop(Scoop("香草"), Scoop("薄荷"))
-
-print(bowl.flavors())
-
-print("------------------------------------------------------------")  # 60個
-
-# 練習 40 類別屬性：冰淇淋碗上限
-
-
-class Scoop:
-    def __init__(self, flavor):
-        self.flavor = flavor
-
-    def __repr__(self):
-        return f"Scoop({self.flavor})"
-
-
-class Bowl:
-    max_scoops = 3
-
-    def __init__(self):
-        self.scoops = []
-
-    def add_scoop(self, *new_scoops):
-        for new_scoop in new_scoops:
-            if len(self.scoops) < self.max_scoops:
-                self.scoops.append(new_scoop)
-
-    def __repr__(self):
-        return f"Bowl(scoops={self.scoops}"
-
-
-bowl = Bowl()
-bowl.add_scoop(Scoop("巧克力"))
-bowl.add_scoop(Scoop("香草"), Scoop("薄荷"))
-bowl.add_scoop(Scoop("焦糖"), Scoop("抹茶"))
-
-print(bowl)
-
-print("------------------------------------------------------------")  # 60個
-
-# 練習 41 特大碗冰淇淋
-
-
-class Scoop:
-    def __init__(self, flavor):
-        self.flavor = flavor
-
-    def __repr__(self):
-        return f"Scoop({self.flavor})"
-
-
-class Bowl:
-    max_scoops = 3
-
-    def __init__(self):
-        self.scoops = []
-
-    def add_scoop(self, *new_scoops):
-        for new_scoop in new_scoops:
-            if len(self.scoops) < self.max_scoops:
-                self.scoops.append(new_scoop)
-
-    def __repr__(self):
-        return f"Bowl(scoops={self.scoops}"
-
-
-class ExtraBowl(Bowl):
-    max_scoops = 5
-
-
-bowl = ExtraBowl()
-bowl.add_scoop(Scoop("巧克力"))
-bowl.add_scoop(Scoop("香草"), Scoop("薄荷"))
-bowl.add_scoop(Scoop("焦糖"), Scoop("抹茶"))
-
-print(bowl)
-
-print("------------------------------------------------------------")  # 60個
-
-# 練習 42 以字串為鍵的自訂 dict
-
+# 以字串為鍵的自訂 dict
 
 class StrDict(dict):
     def __setitem__(self, key, value):
@@ -4017,7 +3869,6 @@ class StrDict(dict):
         if not str(key) in self:
             self[key] = None
         return dict.__getitem__(self, str(key))
-
 
 sd = StrDict()
 sd[1] = 1

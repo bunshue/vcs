@@ -492,9 +492,24 @@ print('方法exp(4) =', math.exp(4))
 
 print("------------------------------------------------------------")  # 60個
 
-
+import decimal  # decimal可以獲得比浮點數更精確的數值
+ff = 20/3
+print("浮點數  :", ff)
+dd = decimal.Decimal(20/3)
+print("Decimal :", dd)
 
 print('------------------------------------------------------------')	#60個
+
+import fractions
+
+cc = fractions.Fraction(12, 18)
+print(cc)
+
+cc = fractions.Fraction(1.348)
+print(cc)
+
+cc = fractions.Fraction(fractions.Fraction(2, 5), fractions.Fraction(7, 13))
+print(cc)
 
 
 print('------------------------------------------------------------')	#60個

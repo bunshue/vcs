@@ -3,6 +3,13 @@ print('------------------------------------------------------------')	#60個
 
 # 宣告類別
 class Motor:
+    def __init__(self):
+        self.name = "CCCCCC"
+        self.color = "XXXXXX"
+
+    #打印物件訊息
+    def __repr__(self):
+        return f"Motor({self.name, self.color})"
     
     #定義方法一：取得名稱和顏色
     def setupCar(self, name, color):
@@ -16,12 +23,18 @@ class Motor:
 
 # 產生物件
 car1 = Motor()#物件1
+car1.showMessage() #呼叫方法
 car1.setupCar('Vios', '極光藍')
 car1.showMessage() #呼叫方法
 
 car2 = Motor()#物件2
+car2.showMessage()
 car2.setupCar('Altiss', '炫魅紅')
 car2.showMessage()
+
+print('打印物件訊息, 使用__repr__')
+print(car1)
+print(car2)
 
 print('------------------------------------------------------------')	#60個
 
@@ -95,6 +108,8 @@ Joe.walking()
 
 
 print('------------------------------------------------------------')	#60個
+
+
 
 
 
