@@ -8,8 +8,8 @@
     <ProjectGuid>{275E4FC0-B776-46E1-A652-A913AF66160D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ShowPicture3</RootNamespace>
-    <AssemblyName>vcs_ShowPicture3</AssemblyName>
+    <RootNamespace>vcs_ShowPicture</RootNamespace>
+    <AssemblyName>vcs_ShowPicture</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -65,7 +65,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -15,7 +15,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 01 ------------------------------------------------------------")  # 60個
 
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
@@ -34,7 +34,7 @@ plt.ylim(-1.5, 1.5)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 02 ------------------------------------------------------------")  # 60個
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False 
@@ -49,7 +49,7 @@ plt.ylim(-1.5, 1.5)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 03 ------------------------------------------------------------")  # 60個
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False 
@@ -64,7 +64,7 @@ plt.ylim(-1.5, 1.5)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 04 ------------------------------------------------------------")  # 60個
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False 
@@ -79,7 +79,7 @@ plt.ylim(-1.5, 1.5)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 05 ------------------------------------------------------------")  # 60個
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 plt.rcParams["axes.unicode_minus"] = False 
@@ -94,7 +94,7 @@ plt.annotate('局部極大值',
 plt.ylim(-1.5, 1.5)
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 06 ------------------------------------------------------------")  # 60個
 
 fig, ax = plt.subplots(figsize=(4,4))
 ax.annotate("Annotate",
@@ -105,7 +105,7 @@ ax.annotate("Annotate",
             )
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 07 ------------------------------------------------------------")  # 60個
 
 fig, ax = plt.subplots(figsize=(4,4))
 ax.annotate("Annotate",
@@ -116,7 +116,7 @@ ax.annotate("Annotate",
             )
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 08 ------------------------------------------------------------")  # 60個
 
 def demo(ax, connectionstyle):
     # 繪製子圖與箭頭樣式說明
@@ -157,7 +157,7 @@ plt.tight_layout()          # 緊縮佈局
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 09 ------------------------------------------------------------")  # 60個
 
 plt.subplots(figsize=(4,4))
 plt.annotate("Simple",
@@ -171,7 +171,7 @@ plt.annotate("Simple",
              )
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 10 ------------------------------------------------------------")  # 60個
 
 plt.subplots(figsize=(4,4))
 plt.annotate("fancy",
@@ -186,7 +186,7 @@ plt.annotate("fancy",
              )
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 11 ------------------------------------------------------------")  # 60個
 
 plt.subplots(figsize=(4,4))
 plt.annotate("wedge",
@@ -211,7 +211,7 @@ plt.annotate("wedge",
              )
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 12 ------------------------------------------------------------")  # 60個
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 fig = plt.figure()
@@ -235,21 +235,7 @@ ax.annotate('極座標文字註解',
             )
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-#文字顯示問題
-
-from os import path
-from matplotlib.font_manager import fontManager
-
-"""
-print('顯示所有字型')
-for i in fontManager.ttflist:
-    print(i.fname, i.name)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
+print("matplotlib 13 ------------------------------------------------------------")  # 60個
 
 plt.figure(figsize=(18, 4))
 plt.subplot(2, 2, 1)
@@ -280,9 +266,7 @@ plt.text(0.5, 0.5, 'subplot(2,2,4)', ha='center', va='center',
 plt.tight_layout()
 plt.show()
 
-
-print("------------------------------------------------------------")  # 60個
-
+print("matplotlib 14 ------------------------------------------------------------")  # 60個
 
 import matplotlib.gridspec as gridspec
 
@@ -317,9 +301,7 @@ plt.text(0.5, 0.5, 'Axes 5', ha='center', va='center', size=24, alpha=.5)
 plt.tight_layout()
 plt.show()
 
-
-print("------------------------------------------------------------")  # 60個
-
+print("matplotlib 15 ------------------------------------------------------------")  # 60個
 
 plt.figure(figsize=(18, 4))
 
@@ -337,12 +319,7 @@ plt.text(.5, .5, 'axes([.5, .5, .3, .3])', ha='center', va='center',
 
 plt.show()
 
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
+print("matplotlib 16 ------------------------------------------------------------")  # 60個
 
 # 箱線圖
 
@@ -351,7 +328,7 @@ plt.boxplot(data)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 17 ------------------------------------------------------------")  # 60個
 
 # 小提琴圖
 data = np.random.rand(20, 5)
@@ -359,7 +336,7 @@ plt.violinplot(data,showmeans=False,showmedians=True)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 18 ------------------------------------------------------------")  # 60個
 
 # Matplotlib技巧
 
@@ -388,13 +365,7 @@ plt.show()
 
 print(matplotlib.artist.getp(fig.patch))  # 顯示繪製對象的各個屬性值
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("箱圖")
+print("matplotlib 19 箱圖------------------------------------------------------------")  # 60個
 
 # Creating dataset
 np.random.seed(10)
@@ -414,13 +385,7 @@ ax.set_title("Box plot")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-# 導出圖表
+print("matplotlib 20 導出圖表 ------------------------------------------------------------")  # 60個
 
 from io import BytesIO
 from lxml import etree
@@ -454,13 +419,40 @@ tree = etree.ElementTree(html)
 tree.write('導出圖表.html')
 #使用默認瀏覽器打開 html 文件
 webbrowser.open('導出圖表.html',new = 1)
-"""
-print("------------------------------------------------------------")  # 60個
 
+print("matplotlib 21 ------------------------------------------------------------")  # 60個
+
+
+
+print("matplotlib 22 ------------------------------------------------------------")  # 60個
+
+
+print("matplotlib 23 ------------------------------------------------------------")  # 60個
 
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+'''
+
+#文字顯示問題
+
+from os import path
+from matplotlib.font_manager import fontManager
+
+"""
+print('顯示所有字型')
+for i in fontManager.ttflist:
+    print(i.fname, i.name)
+"""
+
+print("matplotlib 14 ------------------------------------------------------------")  # 60個
+
+
+
+'''
 

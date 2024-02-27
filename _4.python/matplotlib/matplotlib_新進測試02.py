@@ -16,7 +16,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="新進測試 01",
@@ -147,45 +147,6 @@ plt.legend(loc="best")  # 建立圖例
 
 # 第六張圖
 plt.subplot(236)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="新進測試 03",
-    figsize=(20, 15),
-    dpi=84,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-
-# 第二張圖
-plt.subplot(232)
-
-
-# 第三張圖
-plt.subplot(233)
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
 
 plt.show()
 
@@ -376,41 +337,10 @@ plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %H:%M')) # 設�
 plt.gcf().autofmt_xdate() # 自動旋轉角度，以避免重疊
 plt.show()
 
-print("matplotlib 11 ------------------------------------------------------------")  # 60個
-
-"""
-正弦函數 s=sin(x) 
-餘弦函數 c=cos(x)
-"""
-
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100) #共100個點
-x = np.linspace(-2 * np.pi, 2 * np.pi)   #預設為50個點
-print("預設點數 :", len(x))
-s, c = np.sin(x), np.cos(x) #一次做兩個運算
-
-#自訂座標軸的刻度及標籤–xticks()、yticks()
-#x座標
-ticks = [-2*np.pi, -1.5*np.pi, -1*np.pi, -0.5*np.pi, 0, np.pi * 0.5, np.pi, np.pi * 1.5, np.pi * 2]
-#要在x座標寫上的標籤
-labels = ['-360°', '-270°', '-180°', '-90°', '0°', '90°', '180°', '270°', '360°']
-plt.xticks(ticks, labels)
-
-#x軸刻度 5個點 分別用pi表示
-#plt.xticks([-2*np.pi, -np.pi, 0, np.pi, 2*np.pi],['-$2\pi$', '-$\pi$','0', '$\pi$', '$2\pi$'])
-
-plt.plot(x, s)
-plt.plot(x, c)
-plt.grid()
-
-plt.legend(['sin','cos'])
-plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
-
-plt.show()
-
-print("matplotlib 13 ------------------------------------------------------------")  # 60個
+print("matplotlib 05 ------------------------------------------------------------")  # 60個
 
 # 建立一個新的 figure
-fig1 = plt.figure()
+#fig1 = plt.figure()
 
 # 增新一個axes（座標軸），以供繪圖和放置資訊:
 #axs = fig1.add_subplot(1,1,1) # 1x1的座標軸
@@ -438,7 +368,7 @@ line.set_ydata(np.cos(x))
 
 plt.show()
 
-print("matplotlib 15 ------------------------------------------------------------")  # 60個
+print("matplotlib 06 ------------------------------------------------------------")  # 60個
 
 from matplotlib import pyplot as plt
 
@@ -511,7 +441,7 @@ plt.annotate(r'$sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
 # 把结果显示在屏幕上
 plt.show()
 
-print("matplotlib 16 ------------------------------------------------------------")  # 60個
+print("matplotlib 07 ------------------------------------------------------------")  # 60個
 
 def tickline():
     plt.xlim(0, 10), plt.ylim(-1, 1), plt.yticks([])
@@ -557,7 +487,7 @@ for i, locator in enumerate(locators):
 plt.subplots_adjust(bottom=.01, top=.99, left=.01, right=.99)
 plt.show()
 
-print("matplotlib 17 ------------------------------------------------------------")  # 60個
+print("matplotlib 08 ------------------------------------------------------------")  # 60個
 
 def plt_bar():
     n = 12
@@ -605,7 +535,7 @@ plt.tight_layout()
 
 plt.show()
 
-print("matplotlib 18 ------------------------------------------------------------")  # 60個
+print("matplotlib 09 ------------------------------------------------------------")  # 60個
 
 def plt_grid():
     ax = plt.subplot(1, 2, 1)
@@ -644,9 +574,7 @@ plt_polar()
 plt.tight_layout()
 plt.show()
 
-'''
-
-print("matplotlib 19 ------------------------------------------------------------")  # 60個
+print("matplotlib 10 ------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -665,24 +593,7 @@ plt.tight_layout()                      # 緊縮佈局
 
 plt.show()
 
-print("matplotlib 21 ------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(-2 * np.pi, 2 * np.pi, 50)
-
-f1 = 3 * np.sin(x)                  # y陣列的變化
-f2 = np.sin(x)
-f3 = 0.2 * np.sin(x)
-
-plt.plot(x, f1) 
-plt.plot(x, f2, '-x')
-plt.plot(x, f3)
-plt.plot(x, f1, 'go')
-plt.show()
-
-print("matplotlib 23 ------------------------------------------------------------")  # 60個
+print("matplotlib 11 ------------------------------------------------------------")  # 60個
 
 import csv
 import matplotlib.pyplot as plt
@@ -705,7 +616,7 @@ plt.xlabel("", fontsize=14)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 plt.show()
 
-print("matplotlib 24 ------------------------------------------------------------")  # 60個
+print("matplotlib 12 ------------------------------------------------------------")  # 60個
 
 import csv
 import matplotlib.pyplot as plt
@@ -760,70 +671,14 @@ plt.title("2023年10月安勤公司日線圖", fontsize=24)
 plt.ylabel('價格', fontsize=14)
 plt.show()
 
-print("matplotlib 25 ------------------------------------------------------------")  # 60個
+print("matplotlib 13 ------------------------------------------------------------")  # 60個
          
-data1 = [1, 2, 3, 4, 5, 6, 7, 8]                # data1線條
-data2 = [1, 4, 9, 16, 25, 36, 49, 64]           # data2線條
-data3 = [1, 3, 6, 10, 15, 21, 28, 36]           # data3線條
-data4 = [1, 7, 15, 26, 40, 57, 77, 100]         # data4線條
-
-seq = [1, 2, 3, 4, 5, 6, 7, 8]
-plt.plot(seq,data1,'g--',seq,data2,'r-.',seq,data3,'y:',seq,data4,'k.')   
-plt.plot(seq,data1,'-*',seq,data2,'-o',seq,data3,'-^',seq,data4,'-s')   
-
-plt.show()
-
-
-print("matplotlib 26 ------------------------------------------------------------")  # 60個
-
-# 建立衰減數列.
-x = np.linspace(0.0, 5.0, 50)
-y = np.cos(3 * np.pi * x) * np.exp(-x)
-
-plt.title(r'衰減數列 cos($3\pi x * e^{x})$',fontsize=20)
-plt.plot(x, y, 'go-')
-plt.ylabel('衰減值')
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-offset = 10
-
-
-x = np.linspace(-1, 6, 10)
-y00 = x ** 2
-y01 = y00 + offset * 1
-
-plt.plot(x, y01, "r-o")
-
-plt.plot([-2, 10, 3, 13, 5])
-
-
-
-#plt.plot([-2, 1, 2.7, 3.3], [3, -5, 6, 0])
-
-
-x = np.linspace(0, 10, 100)
-
-plt.plot(x, np.sin(x) + x)
-plt.plot(x, np.cos(3*x))
-
-
 x = np.linspace(-5, 5, 200)
 y = np.sinc(x)
 
 plt.plot(x, y)
 plt.plot(x[y>0], y[y>0], 'o')
 
-
-
-plt.xlabel('x label', fontsize = "10") # 設定 x 軸標題內容及大小
-plt.ylabel('y label', fontsize = "10") # 設定 y 軸標題內容及大小
-plt.title('Plot title', fontsize = "18") # 設定圖表標題內容及大小
-
-
-#plt.title(label = '231')
 #plt.axis('equal')       #軸比例
 #xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
 #plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
@@ -843,54 +698,7 @@ plt.grid(color='0.8')   #顯示格線
 
 plt.show()
 
-
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-from matplotlib import pyplot as plt
-from matplotlib.font_manager import FontProperties as font
-
-# 連結中文字體
-zhfont1 = font(fname = font_filename)
-
-x = np.arange(1, 10, dtype=int)
-y = x * 0.2
-a = np.arange(1, 10, 0.1)
-b = np.sin(a)
-plt.title("連結中文字體", fontproperties=zhfont1)
-plt.xlabel("x")
-plt.ylabel("y")
-plt.plot(x, y, 'or')  # 第三個為參數，o 表示原點，r 表示紅色
-plt.plot(a, b, ':b')  # 第三個為參數，o 表示原點，r 表示紅色
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-from matplotlib import pyplot as plt
-
-ax = np.linspace(1,100,20)
-bx = np.linspace(1,20,200)
-
-ay = ax
-by = np.sin(bx)
-
-# 產生子圖表，第一個數值為縱軸要有幾張圖，第二個數值為橫軸，第三個數值為排在哪裡
-plt.subplot(2,  1,  1) 
-plt.plot(ax, ay) 
-plt.title('a') 
-plt.xlabel("ax")
-plt.ylabel("ay") 
-
-plt.subplot(2,  1,  2) 
-plt.plot(bx, by) 
-plt.title('b') 
-plt.xlabel("bx")
-plt.ylabel("by") 
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 14 ------------------------------------------------------------")  # 60個
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -904,11 +712,8 @@ by = np.sin(ax)
 #  '-', '--', '-.', ':', 'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
 plt.plot(ax, ay, color='red', linewidth=8.0, linestyle='dotted', label='x0.5')
 plt.plot(ax, by, color='blue', linewidth=2.0, linestyle='-', label='sin')
-plt.title('demo')
 # 設定圖例標籤位置 ( best, upper, lower, right,left,center )
 plt.legend(loc='lower center')
-plt.xlabel("ax")
-plt.ylabel("ay")
 plt.ylim((-5, 10))  # y 軸上下最大和最小區間
 plt.xlim((0, 20))  # y 軸上下最大和最小區間
 plt.yticks([-5, 0, 10], ['min(-5)', '0', 'max(10)'])  # 可以設置座標軸上特定文字
@@ -920,7 +725,7 @@ xx.spines['bottom'].set_position(('data', 0))  # 設置邊框位置
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 15 ------------------------------------------------------------")  # 60個
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -960,12 +765,12 @@ xx.spines['left'].set_position(('data', 0))
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 16 ------------------------------------------------------------")  # 60個
 
 import numpy as np
 from matplotlib import pyplot as plt
 
-n = 100
+n = 300
 ax = np.random.normal(0,1,n)
 ay = np.random.normal(0,1,n)
 bx = np.random.normal(0,1,n)
@@ -978,14 +783,12 @@ plt.ylim = (0 , 1)
 
 plt.show()
 
+print("matplotlib 17 ------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 18 ------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 19 ------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -1074,6 +877,36 @@ TaipeiSansTCBeta-Regular.ttf
 https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
 TaipeiSansTCBeta-Regular.ttf'
 
+
+plt.title(r'衰減數列 cos($3\pi x * e^{x})$',fontsize=20)
+
+
+from matplotlib.font_manager import FontProperties as font
+
+# 連結中文字體
+zhfont1 = font(fname = font_filename)
+plt.title("連結中文字體", fontproperties=zhfont1)
+plt.title("連結中文字體2222")
+
+
+
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100) #共100個點
+x = np.linspace(-2 * np.pi, 2 * np.pi)   #預設為50個點
+
+s, c = np.sin(x), np.cos(x) #一次做兩個運算
+
+#自訂座標軸的刻度及標籤–xticks()、yticks()
+#x座標
+ticks = [-2*np.pi, -1.5*np.pi, -1*np.pi, -0.5*np.pi, 0, np.pi * 0.5, np.pi, np.pi * 1.5, np.pi * 2]
+#要在x座標寫上的標籤
+labels = ['-360°', '-270°', '-180°', '-90°', '0°', '90°', '180°', '270°', '360°']
+plt.xticks(ticks, labels)
+
+#x軸刻度 5個點 分別用pi表示
+#plt.xticks([-2*np.pi, -np.pi, 0, np.pi, 2*np.pi],['-$2\pi$', '-$\pi$','0', '$\pi$', '$2\pi$'])
+
+plt.legend(['sin','cos'])
+plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
 
 
 """

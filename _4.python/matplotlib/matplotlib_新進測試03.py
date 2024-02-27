@@ -1,4 +1,4 @@
-# 新進測試04
+# 新進測試04 一大堆kmeans
 
 import os
 import sys
@@ -15,46 +15,9 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 01 ------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-import numpy as np
-
-xpt = np.linspace(1, 10, 10)  # 建立含10個元素的陣列
-ypt1 = xpt / xpt  # 時間複雜度是 O(1)
-ypt2 = np.log2(xpt)  # 時間複雜度是 O(logn)
-ypt3 = xpt  # 時間複雜度是 O(n)
-plt.plot(xpt, ypt1, "-o", label="O(1)")
-plt.plot(xpt, ypt2, "-o", label="O(logn)")
-plt.plot(xpt, ypt3, "-o", label="O(n)")
-plt.legend(loc="best")  # 建立圖例
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-import numpy as np
-
-xpt = np.linspace(1, 10, 10)  # 建立含10個元素的陣列
-ypt1 = xpt / xpt  # 時間複雜度是 O(1)
-ypt2 = np.log2(xpt)  # 時間複雜度是 O(logn)
-ypt3 = xpt  # 時間複雜度是 O(n)
-ypt4 = xpt * np.log2(xpt)  # 時間複雜度是 O(nlogn)
-ypt5 = xpt * xpt  # 時間複雜度是 O(n*n)
-plt.plot(xpt, ypt1, "-o", label="O(1)")
-plt.plot(xpt, ypt2, "-o", label="O(logn)")
-plt.plot(xpt, ypt3, "-o", label="O(n)")
-plt.plot(xpt, ypt4, "-o", label="O(nlogn)")
-plt.plot(xpt, ypt5, "-o", label="O(n*n)")
-plt.legend(loc="best")  # 建立圖例
-plt.show()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -80,7 +43,7 @@ cluster_y = np.random.randint(0, limits, cluster_number)
 kmeans(x, y, cluster_x, cluster_y)
 
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 02 ------------------------------------------------------------")  # 60個
 
 
 import numpy as np
@@ -142,7 +105,7 @@ cluster_y = np.random.randint(0, limits, cluster_number)
 kmeans(x, y, cluster_x, cluster_y)
 
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 03 ------------------------------------------------------------")  # 60個
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -231,7 +194,7 @@ while True:  # 收斂迴圈
         clusters = kmeans(x, y, cluster_x, cluster_y)
 
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 04 ------------------------------------------------------------")  # 60個
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -319,18 +282,15 @@ while True:  # 收斂迴圈
         cluster_y = new_y
         clusters = kmeans(x, y, cluster_x, cluster_y)
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
+'''
+print("matplotlib 05 ------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 from PIL import Image, ImageEnhance
 
-img = Image.open("oxxostudio.jpg")
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+img = Image.open(filename)
 brightness = ImageEnhance.Brightness(img)  # 調整亮度
 contrast = ImageEnhance.Contrast(img)  # 調整對比
 color = ImageEnhance.Color(img)  # 調整飽和度
@@ -376,7 +336,7 @@ plt.show()
 
 
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 06 ------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -399,24 +359,20 @@ def visualize(path):
     plt.show()
 
 
-visualize("oxxostudio.wav")  # 讀取聲音
+wave_filename = 'C:/_git/vcs/_1.data/______test_files1/_wav/hello.wav'
+visualize(wave_filename)  # 讀取聲音
 
+print("matplotlib 07 ------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
-
+""" fail
 import matplotlib.pyplot as plt
 import numpy as np
 import wave
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
-song = AudioSegment.from_mp3("oxxostudio.mp3")  # 讀取 mp3 檔案
-song.export("oxxostudio.wav", format="wav")  # 轉換並儲存為 wav
+mp3_filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3'
+song = AudioSegment.from_mp3(mp3_filename)  # 讀取 mp3 檔案
+song.export("aaaa.wav", format="wav")  # 轉換並儲存為 wav
 
 fig, ax = plt.subplots()
 
@@ -434,12 +390,12 @@ def visualize(path):
     plt.show()
 
 
-visualize("oxxostudio.wav")
+visualize("aaaa.wav")
+"""
 
+print("matplotlib 08 ------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-
+""" fail
 import pyaudio
 import wave
 from concurrent.futures import ThreadPoolExecutor
@@ -516,18 +472,19 @@ executor = ThreadPoolExecutor()  # 平行任務處理
 e2 = executor.submit(keyin)
 e1 = executor.submit(record)
 executor.shutdown()
+"""
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 09 ------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+
+print("matplotlib 10 ------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+print("matplotlib 11 ------------------------------------------------------------")  # 60個
+
+
+print("matplotlib 12 ------------------------------------------------------------")  # 60個
 
 
 

@@ -1,4 +1,4 @@
-﻿namespace vcs_ShowPicture3
+﻿namespace vcs_ShowPicture
 {
     partial class Form1
     {
