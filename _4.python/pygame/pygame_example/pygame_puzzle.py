@@ -46,16 +46,17 @@ def main():
          if event.type == KEYUP:          
          
             #按鍵盤的Esc鍵就會離開程式
-            if event.key == K_ESCAPE: finishGame()
-            if finish: continue
+            if event.key == K_ESCAPE:
+               finishGame()
+            if finish:
+               continue
 
          #配合左手，按下鍵盤的W、A、S、D來產生和方向鍵向上(W)、左(A)、下(S)、右(D)相同的效果
          if event.type == pygame.KEYDOWN:
             if event.key == K_LEFT or event.key == K_a:
                waitMoveSqr = moveLeft(picSlice, waitMoveSqr)
             if event.key == K_RIGHT or event.key == K_d:
-               waitMoveSqr = moveRight(picSlice,
-                                       waitMoveSqr)
+               waitMoveSqr = moveRight(picSlice, waitMoveSqr)
             if event.key == K_UP or event.key == K_w:
                waitMoveSqr = moveUp(picSlice, waitMoveSqr)
             if event.key == K_DOWN or event.key == K_s:
@@ -71,9 +72,8 @@ def main():
             posY = int(y / gridHeight)
             index = posX + posY * Squares
 
-            if(index == waitMoveSqr - 1 or \
-                  index == waitMoveSqr+1 or \
-                  index == waitMoveSqr-Squares or \
+            if(index == waitMoveSqr - 1 or index == waitMoveSqr+1 \
+               or index == waitMoveSqr-Squares or \
                   index == waitMoveSqr+Squares):
                picSlice[waitMoveSqr], picSlice[index] = \
                   picSlice[index], picSlice[waitMoveSqr]
@@ -93,7 +93,8 @@ def main():
          rectDst = pygame.Rect(colDst * gridWidth, 
             rowDst*gridHeight, gridWidth, gridHeight)
   
-         if picSlice[k] == -1: continue
+         if picSlice[k] == -1:
+            continue
   
          rowArea = int(picSlice[k] / Squares)
          colArea = int(picSlice[k] % Squares)

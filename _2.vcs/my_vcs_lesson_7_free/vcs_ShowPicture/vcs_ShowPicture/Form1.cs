@@ -17,7 +17,9 @@ namespace vcs_ShowPicture
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\";
+        //string pic_foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\";
+        string pic_foldername = string.Empty;
+
         string filename = string.Empty;
 
         int flag_operation_mode = MODE_0;
@@ -44,6 +46,34 @@ namespace vcs_ShowPicture
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            pic_foldername = Properties.Settings.Default.picture_foldername;
+
+            if (Directory.Exists(pic_foldername) == false)     //確認資料夾是否存在
+            {
+                //richTextBox1.Text += "資料夾: " + pic_foldername + " 不存在，需要選擇\n";
+
+                Form_Setup form_setup = new Form_Setup();    //實體化 Form_Setup 視窗物件
+                form_setup.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+                form_setup.ShowDialog();   //顯示 frm 視窗
+
+                //確認資料夾
+                pic_foldername = Properties.Settings.Default.picture_foldername;
+
+                if (Directory.Exists(pic_foldername) == false)     //確認資料夾是否存在
+                {
+                    //richTextBox1.Text += "資料夾: " + pic_foldername + " 不存在，離開\n";
+
+                    MessageBox.Show("圖片資料夾不存在, 離開", "ShowPicture", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    Application.Exit();
+                }
+            }
+            else
+            {
+                //richTextBox1.Text += "資料夾: " + pic_foldername + " 已存在，開啟之\n";
+            }
+
+
             //全屏空白表單
             this.BackColor = Color.Black;
             //this.Size = new Size(800, 600);
@@ -86,6 +116,18 @@ namespace vcs_ShowPicture
                 timer1.Enabled = false;
                 this.Close();
             }
+            else if (e.KeyData == Keys.F2)
+            {
+                timer1.Enabled = false;
+                TopMost = false;
+
+                Form_Setup form_setup = new Form_Setup();    //實體化 Form_Setup 視窗物件
+                form_setup.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+                form_setup.ShowDialog();   //顯示 frm 視窗
+
+                timer1.Enabled = true;
+                TopMost = true;
+            }
         }
 
         private Bitmap GetNoCursor()    //複製目前桌面當背景
@@ -103,7 +145,7 @@ namespace vcs_ShowPicture
             //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //任選一張圖
-            DirectoryInfo DInfo = new DirectoryInfo(foldername);
+            DirectoryInfo DInfo = new DirectoryInfo(pic_foldername);
             FileInfo[] FInfo = DInfo.GetFiles();
 
             total_picture_count = FInfo.Length;
@@ -120,7 +162,7 @@ namespace vcs_ShowPicture
                     sel_picture = 0;
             }
 
-            filename = foldername + FInfo[sel_picture].Name;
+            filename = pic_foldername + "\\" + FInfo[sel_picture].Name;
 
             rtb.Text += "sel_picture = " + sel_picture.ToString() + "filename : " + filename + "\n";
 

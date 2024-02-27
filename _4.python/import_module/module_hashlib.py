@@ -222,8 +222,6 @@ h = hashlib.md5(string).hexdigest()
 
 print('------------------------------------------------------------')	#60個
 
-
-
 import hashlib
 
 text = 'this is a lion-mouse'
@@ -240,7 +238,167 @@ hashnum = hashlib.sha1(bytes(text, "utf-8")).digest()
 print(hashnum)
 print(hashnum[:16])
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+import hashlib
+
+data = hashlib.md5()  # 建立data物件
+data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
+
+print("Hash Value         = ", data.digest())
+print("Hash Value(16進位) = ", data.hexdigest())
+print(type(data))  # 列出data資料型態
+print(type(data.hexdigest()))  # 列出哈希值資料型態
 
 
+print("------------------------------------------------------------")  # 60個
+
+import hashlib
+
+data = hashlib.md5()  # 建立data物件
+school = "明志科技大學"  # 中文字串
+data.update(school.encode("utf-8"))  # 更新data物件內容
+
+print("Hash Value         = ", data.digest())
+print("Hash Value(16進位) = ", data.hexdigest())
+print(type(data))  # 列出data資料型態
+print(type(data.hexdigest()))  # 列出哈希值資料型態
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+print('用 hash 加密檔案資料')
+
+import hashlib
+
+data = hashlib.md5()                                # 建立data物件
+filename = "data8_6.txt"
+
+with open(filename, "rb") as fn:                    # 以二進位方式讀取檔案
+    btxt = fn.read()
+    data.update(btxt)
+
+print('Hash Value         = ', data.digest())
+print('Hash Value(16進位) = ', data.hexdigest())
+print(type(data))                                   # 列出data資料型態
+print(type(data.hexdigest()))                       # 列出哈希值資料型態
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import hashlib
+
+data = hashlib.sha1()  # 建立data物件
+data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
+
+print("Hash Value         = ", data.digest())
+print("Hash Value(16進位) = ", data.hexdigest())
+print(type(data))  # 列出data資料型態
+print(type(data.hexdigest()))  # 列出哈希值資料型態
+
+
+print("------------------------------------------------------------")  # 60個
+
+import hashlib
+
+print(hashlib.algorithms_available)  # 列出此平台可使用的哈希演算法
+
+
+print("------------------------------------------------------------")  # 60個
+
+import hashlib
+
+print(hashlib.algorithms_guaranteed)  # 列出跨平台可使用的哈希演算法
+
+print("------------------------------------------------------------")  # 60個
+
+import hashlib
+
+data = hashlib.sha256()  # 建立data物件
+data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
+
+print("Hash Value = ", data.hexdigest())
+print(type(data))  # 列出data資料型態
+print(type(data.hexdigest()))  # 列出雜湊碼資料型態
+
+
+print("------------------------------------------------------------")  # 60個
+
+import hashlib
+
+data = hashlib.sha3_384()  # 建立data物件
+data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
+
+print("Hash Value = ", data.hexdigest())
+print(type(data))  # 列出data資料型態
+print(type(data.hexdigest()))  # 列出雜湊碼資料型態
+
+
+print("------------------------------------------------------------")  # 60個
+
+import hashlib
+
+data1 = hashlib.sha256()  # 建立data物件
+data1.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
+print("Hash Value = ", data1.hexdigest())
+
+data2 = hashlib.sha256()  # 建立data物件
+data2.update(b"ming-Chi Institute of Technology")  # 更新data物件內容
+print("Hash Value = ", data2.hexdigest())
+
+
+print("------------------------------------------------------------")  # 60個
+
+import hashlib
+
+def create_password(pwd):
+    data = hashlib.sha256()  # 建立data物件
+    data.update(pwd.encode("utf-8"))  # 更新data物件內容
+    return data.hexdigest()
+
+
+acc = input("請建立帳號 : ")
+pwd = input("請輸入密碼 : ")
+account = {}
+account[acc] = create_password(pwd)
+
+print("歡迎進入系統")
+userid = input("請輸入帳號 : ")
+password = input("請輸入密碼 : ")
+if userid in account:
+    if account[userid] == create_password(password):
+        print("歡迎進入系統")
+    else:
+        print("密碼錯誤")
+else:
+    print("帳號錯誤")
+
+
+print("------------------------------------------------------------")  # 60個
+
+import hashlib
+
+school = input("請輸入學校名稱 : ")
+data = hashlib.md5()  # 建立data物件
+data.update(school.encode("utf-8"))  # 更新data物件內容
+print("Hash Value(16進位) = ", data.hexdigest())
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

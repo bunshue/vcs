@@ -17,126 +17,6 @@ print(btree)
 
 print("------------------------------------------------------------")  # 60個
 
-import heapq
-
-h = [10, 21, 5, 9, 13, 28, 3]
-print("執行前 h = ", h)
-heapq.heapify(h)
-print("執行後 h = ", h)
-
-
-print("------------------------------------------------------------")  # 60個
-
-import heapq
-
-h = [10, 21, 5, 9, 13, 28, 3]
-heapq.heapify(h)
-print("插入前 h = ", h)
-heapq.heappush(h, 11)
-print("第一次插入後 h = ", h)
-heapq.heappush(h, 2)
-print("第二次插入後 h = ", h)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch07\ch7_3.py
-
-# ch7_3.py
-import heapq
-
-h = [10, 21, 5, 9, 13, 28, 3]
-heapq.heapify(h)
-print("取出前 h = ", h)
-val = heapq.heappop(h)
-print("取出元素 = ", val)
-print("取出後 h = ", h)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch07\ch7_4.py
-
-# ch7_4.py
-import heapq
-
-h = [10, 21, 5, 9, 13, 28, 3]
-heapq.heapify(h)
-print("堆入和取出前 h = ", h)
-val = heapq.heappushpop(h, 11)
-print("取出元素 = ", val)
-print("堆入和取出後 h = ", h)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch07\ch7_5.py
-
-# ch7_5.py
-import heapq
-
-h = [10, 21, 5, 9, 13, 28, 3]
-print("最大 3 個  : ", heapq.nlargest(3, h))
-print("最小 3 個  : ", heapq.nsmallest(3, h))
-print("原先資料集 : ", h)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch07\ch7_6.py
-
-# ch7_6.py
-import heapq
-
-h = [10, 21, 5, 9, 13, 28, 3]
-heapq.heapify(h)
-print("執行前 h = ", h)
-x = heapq.heapreplace(h, 7)
-print("取出值   = ", x)
-print("執行後 h = ", h)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch07\ch7_7.py
-
-# ch7_7.py
-import heapq
-
-h = []
-heapq.heappush(h, (100, "牛肉麵"))
-heapq.heappush(h, (60, "陽春麵"))
-heapq.heappush(h, (80, "肉絲麵"))
-heapq.heappush(h, (90, "大滷麵"))
-heapq.heappush(h, (70, "家常麵"))
-print(h)
-print(heapq.heappop(h))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch07\ch7_8.py
-
-# ch7_8.py
-import heapq
-
-
-def heapsort(iterable):
-    h = []
-    for data in iterable:
-        heapq.heappush(h, data)
-    return [heapq.heappop(h) for i in range(len(h))]
-
-
-h = [10, 21, 5, 9, 13, 28, 3]
-print("排序前 ", h)
-print("排序後 ", heapsort(h))
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 def bubble_sort(nLst):
     length = len(nLst)
@@ -527,95 +407,6 @@ if name in voted:
     check_name(name)
 else:
     print("你不是選民")
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch08\ch8_4.py
-
-# ch8_4.py
-import hashlib
-
-data = hashlib.md5()  # 建立data物件
-data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
-
-print("Hash Value         = ", data.digest())
-print("Hash Value(16進位) = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出哈希值資料型態
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch08\ch8_5.py
-
-# ch8_5.py
-import hashlib
-
-data = hashlib.md5()  # 建立data物件
-school = "明志科技大學"  # 中文字串
-data.update(school.encode("utf-8"))  # 更新data物件內容
-
-print("Hash Value         = ", data.digest())
-print("Hash Value(16進位) = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出哈希值資料型態
-
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-print('用 hash 加密檔案資料')
-
-import hashlib
-
-data = hashlib.md5()                                # 建立data物件
-filename = "data8_6.txt"
-
-with open(filename, "rb") as fn:                    # 以二進位方式讀取檔案
-    btxt = fn.read()
-    data.update(btxt)
-
-print('Hash Value         = ', data.digest())
-print('Hash Value(16進位) = ', data.hexdigest())
-print(type(data))                                   # 列出data資料型態
-print(type(data.hexdigest()))                       # 列出哈希值資料型態
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch08\ch8_7.py
-
-# ch8_7.py
-import hashlib
-
-data = hashlib.sha1()  # 建立data物件
-data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
-
-print("Hash Value         = ", data.digest())
-print("Hash Value(16進位) = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出哈希值資料型態
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch08\ch8_8.py
-
-# ch8_8.py
-import hashlib
-
-print(hashlib.algorithms_available)  # 列出此平台可使用的哈希演算法
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch08\ch8_9.py
-
-# ch8_9.py
-import hashlib
-
-print(hashlib.algorithms_guaranteed)  # 列出跨平台可使用的哈希演算法
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1946,83 +1737,6 @@ print("加密字串 ", ciphertext)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch17\ch17_5.py
-
-# ch17_5.py
-import hashlib
-
-data = hashlib.sha256()  # 建立data物件
-data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
-
-print("Hash Value = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出雜湊碼資料型態
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch17\ch17_6.py
-
-# ch17_6.py
-import hashlib
-
-data = hashlib.sha3_384()  # 建立data物件
-data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
-
-print("Hash Value = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出雜湊碼資料型態
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch17\ch17_7.py
-
-# ch17_7.py
-import hashlib
-
-data1 = hashlib.sha256()  # 建立data物件
-data1.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
-print("Hash Value = ", data1.hexdigest())
-
-data2 = hashlib.sha256()  # 建立data物件
-data2.update(b"ming-Chi Institute of Technology")  # 更新data物件內容
-print("Hash Value = ", data2.hexdigest())
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch17\ch17_8.py
-
-# ch17_8.py
-import hashlib
-
-
-def create_password(pwd):
-    data = hashlib.sha256()  # 建立data物件
-    data.update(pwd.encode("utf-8"))  # 更新data物件內容
-    return data.hexdigest()
-
-
-acc = input("請建立帳號 : ")
-pwd = input("請輸入密碼 : ")
-account = {}
-account[acc] = create_password(pwd)
-
-print("歡迎進入系統")
-userid = input("請輸入帳號 : ")
-password = input("請輸入密碼 : ")
-if userid in account:
-    if account[userid] == create_password(password):
-        print("歡迎進入系統")
-    else:
-        print("密碼錯誤")
-else:
-    print("帳號錯誤")
-
-
-print("------------------------------------------------------------")  # 60個
-
 # 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch18\ch18_1.py
 
 # ch18_1.py
@@ -2121,7 +1835,6 @@ for i in range(k):
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2388,8 +2101,8 @@ print("排列組合需要 %d 秒" % times)
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
+
 
 def sequentialSearch(nLst):
     for i in range(len(nLst)):
@@ -3248,19 +2961,6 @@ voted = {}  # 建立選民名單
 
 name = input("請輸入名字 : ")
 check_name(name)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex8_4.py
-
-# ex8_4.py
-import hashlib
-
-school = input("請輸入學校名稱 : ")
-data = hashlib.md5()  # 建立data物件
-data.update(school.encode("utf-8"))  # 更新data物件內容
-print("Hash Value(16進位) = ", data.hexdigest())
-
 
 print("------------------------------------------------------------")  # 60個
 
