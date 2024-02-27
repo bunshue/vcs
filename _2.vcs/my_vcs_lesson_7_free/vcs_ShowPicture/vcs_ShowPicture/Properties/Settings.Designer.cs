@@ -37,7 +37,7 @@ namespace vcs_ShowPicture.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public int size_width {
             get {
                 return ((int)(this["size_width"]));
@@ -49,7 +49,7 @@ namespace vcs_ShowPicture.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public int size_height {
             get {
                 return ((int)(this["size_height"]));
@@ -62,12 +62,24 @@ namespace vcs_ShowPicture.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public int display_speed {
+        public int play_interval {
             get {
-                return ((int)(this["display_speed"]));
+                return ((int)(this["play_interval"]));
             }
             set {
-                this["display_speed"] = value;
+                this["play_interval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int operation_mode {
+            get {
+                return ((int)(this["operation_mode"]));
+            }
+            set {
+                this["operation_mode"] = value;
             }
         }
     }

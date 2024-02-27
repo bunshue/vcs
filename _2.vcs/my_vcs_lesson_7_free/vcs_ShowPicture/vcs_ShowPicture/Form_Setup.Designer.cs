@@ -38,9 +38,12 @@
             this.rb_mode1 = new System.Windows.Forms.RadioButton();
             this.rb_mode0 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.tb_play_interval = new System.Windows.Forms.TextBox();
+            this.lb_play_interval = new System.Windows.Forms.Label();
+            this.tb_ratio_height = new System.Windows.Forms.TextBox();
+            this.tb_ratio_width = new System.Windows.Forms.TextBox();
+            this.lb_height = new System.Windows.Forms.Label();
+            this.lb_width = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -49,7 +52,7 @@
             // bt_cancel
             // 
             this.bt_cancel.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_cancel.Location = new System.Drawing.Point(47, 462);
+            this.bt_cancel.Location = new System.Drawing.Point(120, 400);
             this.bt_cancel.Name = "bt_cancel";
             this.bt_cancel.Size = new System.Drawing.Size(67, 46);
             this.bt_cancel.TabIndex = 13;
@@ -71,7 +74,7 @@
             // tb_picture_folder_name
             // 
             this.tb_picture_folder_name.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_picture_folder_name.Location = new System.Drawing.Point(47, 106);
+            this.tb_picture_folder_name.Location = new System.Drawing.Point(34, 82);
             this.tb_picture_folder_name.Name = "tb_picture_folder_name";
             this.tb_picture_folder_name.Size = new System.Drawing.Size(641, 36);
             this.tb_picture_folder_name.TabIndex = 11;
@@ -80,7 +83,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(43, 50);
+            this.label1.Location = new System.Drawing.Point(30, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(178, 24);
             this.label1.TabIndex = 10;
@@ -89,7 +92,7 @@
             // bt_open_picture
             // 
             this.bt_open_picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_picture.Location = new System.Drawing.Point(704, 94);
+            this.bt_open_picture.Location = new System.Drawing.Point(697, 70);
             this.bt_open_picture.Name = "bt_open_picture";
             this.bt_open_picture.Size = new System.Drawing.Size(60, 60);
             this.bt_open_picture.TabIndex = 249;
@@ -144,55 +147,82 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radioButton1);
-            this.groupBox2.Controls.Add(this.radioButton2);
-            this.groupBox2.Controls.Add(this.radioButton3);
+            this.groupBox2.Controls.Add(this.tb_play_interval);
+            this.groupBox2.Controls.Add(this.lb_play_interval);
+            this.groupBox2.Controls.Add(this.tb_ratio_height);
+            this.groupBox2.Controls.Add(this.tb_ratio_width);
+            this.groupBox2.Controls.Add(this.lb_height);
+            this.groupBox2.Controls.Add(this.lb_width);
             this.groupBox2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.groupBox2.Location = new System.Drawing.Point(274, 194);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(182, 200);
+            this.groupBox2.Size = new System.Drawing.Size(356, 200);
             this.groupBox2.TabIndex = 251;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "圖片大小";
+            this.groupBox2.Text = "播放設定";
             // 
-            // radioButton1
+            // tb_play_interval
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(16, 156);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(145, 28);
-            this.radioButton1.TabIndex = 2;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton3";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.tb_play_interval.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_play_interval.Location = new System.Drawing.Point(80, 151);
+            this.tb_play_interval.Name = "tb_play_interval";
+            this.tb_play_interval.Size = new System.Drawing.Size(100, 36);
+            this.tb_play_interval.TabIndex = 256;
+            this.tb_play_interval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // radioButton2
+            // lb_play_interval
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(16, 93);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(145, 28);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "radioButton2";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.lb_play_interval.AutoSize = true;
+            this.lb_play_interval.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_play_interval.Location = new System.Drawing.Point(21, 156);
+            this.lb_play_interval.Name = "lb_play_interval";
+            this.lb_play_interval.Size = new System.Drawing.Size(232, 24);
+            this.lb_play_interval.TabIndex = 255;
+            this.lb_play_interval.Text = "速度                     毫秒";
             // 
-            // radioButton3
+            // tb_ratio_height
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(16, 45);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(145, 28);
-            this.radioButton3.TabIndex = 0;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "radioButton1";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.tb_ratio_height.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_ratio_height.Location = new System.Drawing.Point(80, 92);
+            this.tb_ratio_height.Name = "tb_ratio_height";
+            this.tb_ratio_height.Size = new System.Drawing.Size(100, 36);
+            this.tb_ratio_height.TabIndex = 254;
+            this.tb_ratio_height.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_ratio_width
+            // 
+            this.tb_ratio_width.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_ratio_width.Location = new System.Drawing.Point(80, 45);
+            this.tb_ratio_width.Name = "tb_ratio_width";
+            this.tb_ratio_width.Size = new System.Drawing.Size(100, 36);
+            this.tb_ratio_width.TabIndex = 252;
+            this.tb_ratio_width.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lb_height
+            // 
+            this.lb_height.AutoSize = true;
+            this.lb_height.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_height.Location = new System.Drawing.Point(21, 97);
+            this.lb_height.Name = "lb_height";
+            this.lb_height.Size = new System.Drawing.Size(203, 24);
+            this.lb_height.TabIndex = 253;
+            this.lb_height.Text = "佔高                     %";
+            // 
+            // lb_width
+            // 
+            this.lb_width.AutoSize = true;
+            this.lb_width.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_width.Location = new System.Drawing.Point(21, 45);
+            this.lb_width.Name = "lb_width";
+            this.lb_width.Size = new System.Drawing.Size(203, 24);
+            this.lb_width.TabIndex = 252;
+            this.lb_width.Text = "佔寬                     %";
             // 
             // Form_Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 550);
+            this.ClientSize = new System.Drawing.Size(784, 521);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bt_open_picture);
@@ -224,9 +254,12 @@
         private System.Windows.Forms.RadioButton rb_mode1;
         private System.Windows.Forms.RadioButton rb_mode0;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.TextBox tb_play_interval;
+        private System.Windows.Forms.Label lb_play_interval;
+        private System.Windows.Forms.TextBox tb_ratio_height;
+        private System.Windows.Forms.TextBox tb_ratio_width;
+        private System.Windows.Forms.Label lb_height;
+        private System.Windows.Forms.Label lb_width;
     }
 }

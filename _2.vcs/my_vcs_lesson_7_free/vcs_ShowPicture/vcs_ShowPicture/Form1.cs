@@ -23,6 +23,7 @@ namespace vcs_ShowPicture
         string filename = string.Empty;
 
         int flag_operation_mode = MODE_0;
+
         private const int MODE_0 = 0x00;   //全屏隨機位置 顯示 圖片
         private const int MODE_1 = 0x01;   //全屏單圖 置中 滿屏 顯示圖片
         private const int MODE_2 = 0x02;   //全屏單圖 靠右 顯示圖片
@@ -39,6 +40,9 @@ namespace vcs_ShowPicture
         int sel_picture = -1;
         bool random_sel_picture = true;
 
+        int show_picture_ratio_width = 30;
+        int show_picture_ratio_height = 30;
+
         public Form1()
         {
             InitializeComponent();
@@ -46,6 +50,41 @@ namespace vcs_ShowPicture
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Visible = false;
+
+            int operation_mode = Properties.Settings.Default.operation_mode;
+
+            if ((operation_mode == 0) || (operation_mode == 2))
+                flag_operation_mode = operation_mode;
+
+            string picture_folder = Properties.Settings.Default.picture_foldername;
+
+            //tb_picture_folder_name.Text = picture_folder;
+            //tb_ratio_width.Text = ratio_width.ToString();
+            //tb_ratio_height.Text = ratio_height.ToString();
+            //tb_play_interval.Text = play_interval.ToString();
+
+
+            int ratio_width = Properties.Settings.Default.size_width;
+            int ratio_height = Properties.Settings.Default.size_height;
+
+            if ((ratio_width > 0) && (ratio_width <= 100))
+            {
+                show_picture_ratio_width = ratio_width;
+            }
+
+            if ((ratio_height > 0) && (ratio_height <= 100))
+            {
+                show_picture_ratio_height = ratio_height;
+            }
+
+            int play_interval = Properties.Settings.Default.play_interval;
+
+            if ((play_interval > 100) && (play_interval <= 5000))
+            {
+                timer1.Interval = play_interval;
+            }
+
             pic_foldername = Properties.Settings.Default.picture_foldername;
 
             if (Directory.Exists(pic_foldername) == false)     //確認資料夾是否存在
@@ -73,7 +112,6 @@ namespace vcs_ShowPicture
                 //richTextBox1.Text += "資料夾: " + pic_foldername + " 已存在，開啟之\n";
             }
 
-
             //全屏空白表單
             this.BackColor = Color.Black;
             //this.Size = new Size(800, 600);
@@ -84,7 +122,10 @@ namespace vcs_ShowPicture
             ShowInTaskbar = false;
             FormBorderStyle = FormBorderStyle.None;
             StartPosition = FormStartPosition.CenterScreen;
-            WindowState = FormWindowState.Maximized;
+            if (flag_operation_mode == MODE_0)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
             TopMost = true;
             KeyPreview = true;
 
@@ -105,8 +146,9 @@ namespace vcs_ShowPicture
             }
             else
             {
-                this.WindowState = FormWindowState.Maximized;
+                //this.WindowState = FormWindowState.Maximized;
             }
+            timer1.Enabled = true;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -185,7 +227,7 @@ namespace vcs_ShowPicture
 
             //rtb.Text += "a1(" + W.ToString() + ", " + H.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
 
-            while (W < (w * 3))
+            while (W * show_picture_ratio_width / 100 < w)
             {
                 //rtb.Text += "X";
                 w = w * 4 / 5;
@@ -194,7 +236,7 @@ namespace vcs_ShowPicture
 
             //rtb.Text += "a2(" + W.ToString() + ", " + H.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
 
-            while (H < (h * 3))
+            while (H * show_picture_ratio_height / 100 < h)
             {
                 //rtb.Text += "Q";
                 w = w * 4 / 5;
@@ -218,7 +260,6 @@ namespace vcs_ShowPicture
                 timer1.Enabled = false;
             }
 
-
             if (flag_operation_mode == MODE_0)
             {
                 int x_st = r.Next(0, W - w);
@@ -233,7 +274,24 @@ namespace vcs_ShowPicture
 
                 g.DrawRectangle(new Pen(Color.White, 10), x_st, y_st, w, h);
             }
+            else if (flag_operation_mode == MODE_2)
+            {
+                int x_st = 0;
+                int y_st = 0;
+                //Point ulCorner = new Point(x_st, y_st);
+                //g.DrawImageUnscaled(image, ulCorner);
 
+                //原圖貼上
+                //    DrawImage   貼上位置x   貼上位置y   貼上大小W   貼上大小H
+                g.DrawImage(image, x_st, y_st, w, h);
+                //rtb.Text += "c(" + x_st.ToString() + ", " + y_st.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
+
+                g.DrawRectangle(new Pen(Color.White, 10), x_st, y_st, w, h);
+
+                this.Size = new Size(w, h);
+                this.Location = new Point(W - w, (H - h) / 2);
+            }
+            this.Visible = true;
             image.Dispose();
         }
 
@@ -243,4 +301,3 @@ namespace vcs_ShowPicture
         }
     }
 }
-
