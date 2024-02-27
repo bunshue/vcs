@@ -11,12 +11,6 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code01.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 使用，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 
 from flask import Flask, request
@@ -55,11 +49,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code02.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 使用，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 
 from flask import Flask, request
@@ -141,10 +130,6 @@ def reply_image(msg, rk, token):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code03.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import requests
 
 url = "你取得的地震資訊 JSON 網址"
@@ -159,13 +144,6 @@ for i in eq:
     print(f"地震發生於{loc}，芮氏規模 {val} 級，深度 {dep} 公里，發生時間 {eq_time}")
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code04.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 使用，本機環境請刪除
-from flask_ngrok import run_with_ngrok
 
 from flask import Flask, request
 from linebot import LineBotApi, WebhookHandler
@@ -292,10 +270,6 @@ def reply_image(msg, rk, token):
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code05.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 # Colab 使用，本機環境請刪除
 from flask_ngrok import run_with_ngrok
@@ -430,10 +404,6 @@ def reply_image(msg, rk, token):
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code06.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 # Colab 使用，本機環境請刪除
 from flask_ngrok import run_with_ngrok
@@ -650,10 +620,6 @@ def current_weather(address):
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code07.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 # Colab 使用，本機環境請刪除
 from flask_ngrok import run_with_ngrok
@@ -945,9 +911,6 @@ def forecast(address):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code08.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 # Colab 使用，本機環境請刪除
 from flask_ngrok import run_with_ngrok
@@ -1251,9 +1214,6 @@ def aqi(address):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code09.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests
 import json
@@ -1298,26 +1258,16 @@ print(req.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code10.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from linebot import LineBotApi, WebhookHandler
 
 line_bot_api = LineBotApi("你的 access token")
-
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
 # 開啟對應的圖片
 with open("line-bot-weather-demo.jpg", "rb") as f:
     line_bot_api.set_rich_menu_image("你的圖文選單 ID", "image/jpeg", f)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code11.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests
 
@@ -1334,9 +1284,6 @@ print(req.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch7\code12.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.models import (

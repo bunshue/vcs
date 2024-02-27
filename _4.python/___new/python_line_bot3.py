@@ -11,11 +11,6 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code01.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from flask import Flask, request
 
 app = Flask(__name__)
@@ -37,14 +32,9 @@ def webhook():
     # 在回覆的文字後方加上 ( webhook ) 識別
     return {"fulfillmentText": f"{reText} ( webhook )", "source": "webhookdata"}
 
-
 app.run()
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code02.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from flask import Flask, request
 from flask_ngrok import run_with_ngrok
@@ -74,10 +64,6 @@ app.run()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code03.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 
 def webhook(request):
     try:
@@ -90,11 +76,6 @@ def webhook(request):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code04.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
 import google.cloud.dialogflow_v2 as dialogflow
 from flask import Flask, request
 
@@ -146,11 +127,6 @@ app.run()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code05.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
 import google.cloud.dialogflow_v2 as dialogflow
 
 # 金鑰 json
@@ -193,11 +169,6 @@ def webhook(request):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code06.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 使用，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 
 from flask import Flask, request
@@ -218,18 +189,11 @@ def webhook():
     print(reText)
     return {"fulfillmentText": f"{reText} ( webhook )", "source": "webhookdata"}
 
-
-# Colab 使用，本機環境請刪除
 run_with_ngrok(app)
-
 
 app.run()
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code07.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from flask import Flask, request
 import requests, json, time
@@ -287,9 +251,6 @@ app.run()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code08.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from flask import Flask, request
 import requests, json, time
@@ -349,10 +310,6 @@ app.run()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code09.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import requests, json, time
 
 
@@ -391,11 +348,6 @@ def webhook(request):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code10.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
 import google.cloud.dialogflow_v2 as dialogflow
 from flask import Flask, request
 
@@ -479,11 +431,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch8\code11.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
 import google.cloud.dialogflow_v2 as dialogflow
 
 import json
@@ -560,11 +507,6 @@ def webhook(request):
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch9\code01.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import requests
 
 url = "https://notify-api.line.me/api/notify"
@@ -576,10 +518,6 @@ data = requests.post(url, headers=headers, data=data)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch9\code02.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import requests
 
 url = "https://notify-api.line.me/api/notify"
@@ -589,10 +527,6 @@ data = {"message": "測試一下！", "stickerPackageId": "446", "stickerId": "1
 data = requests.post(url, headers=headers, data=data)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch9\code03.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests
 
@@ -607,10 +541,6 @@ data = {
 data = requests.post(url, headers=headers, data=data)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch9\code04.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests
 
@@ -629,11 +559,7 @@ data = requests.post(url, headers=headers, data=data)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch9\code05.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import requests, time
+import requests
 
 url = "https://notify-api.line.me/api/notify"
 token = "你的 LINE Notify 權杖"
@@ -648,12 +574,6 @@ data = {
 data = requests.post(url, headers=headers, data=data)
 
 print("------------------------------------------------------------")  # 60個
-
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch10\code01.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 
 def hello_world(request):
     request_json = request.get_json()
@@ -670,11 +590,6 @@ def hello_world(request):
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch10\code02.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 
 def hello_world(request):
     request_json = request.get_json()

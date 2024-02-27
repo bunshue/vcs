@@ -215,19 +215,8 @@ namespace vcs_ListView1
             listViewItem3.SubItems.Add("33");
             listView1.Items.Add(listViewItem3);
 
-            ListViewItem listViewItem4 = new ListViewItem("兔");
-            listViewItem4.SubItems.Add("rabbit");
-            listViewItem4.SubItems.Add("8");
-            listView1.Items.Add(listViewItem4);
-
-            ListViewItem listViewItem5 = new ListViewItem("龍");
-            listViewItem5.SubItems.Add("dragon");
-            listViewItem5.SubItems.Add("38");
-            listView1.Items.Add(listViewItem5);
-
             //加入項目
-            int i;
-            for (i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 ListViewItem li = new ListViewItem();
                 li.SubItems.Clear();
@@ -258,11 +247,8 @@ namespace vcs_ListView1
 
             richTextBox1.Text += "目前共有 : " + listView1.Columns.Count.ToString() + " 欄\n";
 
-            add_data_to_listView();
-        }
+            richTextBox1.Text += "加入列資料\n";
 
-        void add_data_to_listView()
-        {
             Random Rnd = new Random(); //加入Random，產生的數字不會重覆
             string name_string;
             int score_chi;

@@ -13,53 +13,6 @@ print("------------------------------------------------------------")  # 60個
 print("Python 常用標準函式庫")
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch09\code001.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import time
-
-
-def aa():
-    i = 0
-    while i < 5:
-        i = i + 1
-        time.sleep(0.5)
-        print("A:", i)
-
-
-def bb():
-    i = 0
-    while i < 50:
-        i = i + 10
-        time.sleep(0.5)
-        print("B:", i)
-
-
-aa()  # 先執行 aa()
-bb()  # aa() 結束後才會執行 bb()
-
-"""
-A: 1
-A: 2
-A: 3
-A: 4
-A: 5
-B: 10
-B: 20
-B: 30
-B: 40
-B: 50
-"""
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch09\code002.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import threading
 import time
 
@@ -162,10 +115,6 @@ C: 500
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch09\code004.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import time
 
 
@@ -228,10 +177,6 @@ B: 100
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch09\code005.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import threading
 import time
 
@@ -279,9 +224,6 @@ B: 50
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch09\code006.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import threading
 import time
@@ -326,9 +268,6 @@ A: 5
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch09\code007.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import threading
 import time
@@ -380,9 +319,6 @@ b.start()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch09\code008.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -420,10 +356,6 @@ print("Python 基礎範例")
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code001.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 while True:
     try:
         num = float(input("請輸入用電度數："))
@@ -441,9 +373,6 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code002.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 c = int(input("輸入 1 ( 攝氏 ) 或 2 ( 華氏 )："))  # 使用變數 c 記錄攝氏還是華氏
 t = int(input("輸入溫度數值："))  # 使用變數 t 記錄要轉換的數值
@@ -455,10 +384,6 @@ else:
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code003.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 c = int(input("輸入 1 ( 公分 ) 或 2 ( 英吋 )："))  # 使用變數 c 記錄公分還是英吋
 length = int(input("輸入長度數值："))  # 使用變數 length 記錄數值
@@ -473,9 +398,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code004.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 c = int(input("輸入 1 ( 公分 ) 或 2 ( 英吋 )："))
 length = int(input("輸入長度數值："))
@@ -501,9 +423,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code005.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 year = int(input(">"))  # 使用變數 year 紀錄使用者輸入的年份
 if year % 4 == 0:  # 如果除以 4 能整除
@@ -520,9 +439,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code006.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 year = int(input(">"))
 text = "平年"  # 新增變數 text 預設平年
@@ -537,9 +453,6 @@ print(f"{year} 是{text}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code007.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 text = input("請輸入一串英文或數字：")  # 新增 text 變數，記錄輸入的字串
 repeat = []  # 新增 repeat 變數為空串列
@@ -557,9 +470,6 @@ print(not_repeat)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code008.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import math  # import math 標準函式模組
 
@@ -574,9 +484,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code009.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import re
 
@@ -608,9 +515,6 @@ print(text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code010.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import re
 
@@ -637,9 +541,6 @@ print(text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code011.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import random
 
@@ -653,9 +554,6 @@ print(a)  # [34, 18, 31, 11, 47, 46]
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code012.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import random
 
@@ -668,9 +566,6 @@ print(a)  # {34, 41, 48, 49, 19, 30}
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code013.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import random
 
@@ -680,39 +575,6 @@ print(a)  # [9, 39, 10, 8, 25, 43]
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code014.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import time
-
-n = 10
-for i in range(n + 1):
-    print(f"\r倒數 {n-i} 秒", end="")
-    time.sleep(1)
-print("\r時間到", end="")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code015.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import time
-
-n = 20  # 設定進度條總長
-for i in range(n + 1):
-    print(f'\r[{"█"*i}{" "*(n-i)}] {i*100/n}%', end="")  # 輸出不換行的內容
-    time.sleep(0.5)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code016.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import time
 
@@ -725,10 +587,6 @@ for i in range(n + 1):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code017.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 a = 15  # 新增變數 a，設定金字塔有幾層
 b = a * 2 + 1  # 新增變數 b，計算底部有幾個星星
 for i in range(1, b, 2):  # 使用 for 迴圈，從 1～b，每隔 2 個一數
@@ -738,10 +596,6 @@ for i in range(1, b, 2):  # 使用 for 迴圈，從 1～b，每隔 2 個一數
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code018.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 a = 15
 b = a * 2 + 1
@@ -753,10 +607,6 @@ for i in range(1, b, 4):  # 改成 4 個一數，金字塔每一層就會增加 
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code019.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 a = 15  # 新增變數 a，設定金字塔有幾層
 for i in range(1, a + 1):  # 使用 for 迴圈，重複指定的層數
     print(" " * (a - i) + "*" * (2 * i - 1))
@@ -765,10 +615,6 @@ for i in range(1, a + 1):  # 使用 for 迴圈，重複指定的層數
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code020.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 a = 10  # 要產生的金字塔層數
 for i in range(1, a + 1):  # 使用 for 迴圈，重複 1～10 ( a+1 ) 的數字
@@ -784,10 +630,6 @@ for i in range(1, a + 1):  # 使用 for 迴圈，重複 1～10 ( a+1 ) 的數字
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code021.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 a = 10
 for i in range(1, a + 1):
@@ -806,9 +648,6 @@ for i in range(1, a + 1):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code022.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 a = 10  # 要產生的金字塔層數
 b = 1  # 提供 while 迴圈停止的依據
@@ -830,9 +669,6 @@ while b <= a:  # 如果 b <= a 就讓 while 迴圈繼續
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code023.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import random
 
@@ -847,30 +683,6 @@ print("答對囉！")  # 如果 b=a 會停止 while 迴圈，顯示正確答案
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code024.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import random
-
-a = random.randint(1, 99)
-b = int(input("輸入 1～99 的數字："))
-while True:
-    if b < a:
-        b = int(input("數字太小囉！再試一次吧："))
-    elif b > a:
-        b = int(input("數字太大囉！再試一次吧："))
-    else:
-        print("答對囉！")
-        break
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code025.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import random
 
@@ -923,10 +735,6 @@ print(f"答對了！總共猜了 {num} 次，用了 {t} 秒")  # 印出對應的
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code027.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import datetime
 
 now = datetime.datetime.now().strftime("%H:%M:%S")
@@ -934,10 +742,6 @@ print(now)  # 14:30:23
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code028.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import datetime
 import time
@@ -950,9 +754,6 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code029.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import datetime
 import time
@@ -978,44 +779,6 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code030.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-h = float(input("請輸入身高(cm)：")) / 100
-# 使用 float 轉換成浮點數後除以 100 ( 因為身高可能會有小數點 )
-
-w = float(input("請輸入體重(kg)："))
-# 使用 float 轉換成浮點數 ( 因為體重可能會有小數點 )
-
-bmi = w / (h * h)  # 套用公式計算
-print(f"你的 BMI 數值為：{bmi}")  # 你的 BMI 數值為：23.044982698961938
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code031.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-h = float(input("請輸入身高(cm)：")) / 100
-w = float(input("請輸入體重(kg)："))
-bmi = round(w / (h * h), 3)  # 使用 round 四捨五入到小數點三位
-if bmi < 18.5:  # 使用邏輯判斷
-    note = "你太輕囉！"
-elif bmi >= 18.5 and bmi <= 25:
-    note = "你的體重正常！"
-else:
-    note = "你有點太重囉～"
-print(f"你的 BMI 數值為：{bmi}，{note}")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code032.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import datetime  # import datetime 標準函式
 
 today = datetime.date.today()  # 使用 datetime.date 取得今天的日期
@@ -1040,9 +803,6 @@ print(f"{year} 歲 {month} 個月 {day} 天")  # 印出現在幾歲幾個月又�
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code033.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import datetime
 import calendar  # import calendar 模組
@@ -1071,9 +831,6 @@ print(f"{year} 歲 {month} 個月 {day} 天")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code034.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import random
 
@@ -1131,9 +888,6 @@ for j in range(20):  # 使用 20 次的 for 迴圈
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code035.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 local_table = {
     "A": 10,
@@ -1193,9 +947,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code036.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 local_table = {
     "A": 10,
@@ -1259,10 +1010,6 @@ while True:  # 新增 while 迴圈，就可以重複輸入
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code037.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 num = input("輸入你的發票號碼：")
 ns = "05701942"  # 特別獎
 n1 = "97718570"  # 特獎
@@ -1295,9 +1042,6 @@ for i in n2:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code038.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 table = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}  # 轉換對照表
 roman = [i for i in input()]  # 將輸入的羅馬數字變成串列
@@ -1314,9 +1058,7 @@ print(output)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch10\code039.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 num_table = [
     [1000, "M"],
@@ -1351,9 +1093,7 @@ print("Python 數學範例")
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code001.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 a = input("請輸入兩個數字 ( 格式 a,b )：")  # 新增變數 a，內容是使用者輸入的兩個數字，數字以逗號分隔
 b = a.split(",")  # 新增變數 b，內容使用 split 根據逗號將數字拆開為串列
@@ -1367,9 +1107,7 @@ print(f"{b1} / {b2} = {b1/b2}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code002.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 a = input("請輸入兩個數字 ( 格式 a,b )：")
 b = a.split(",")
@@ -1387,9 +1125,7 @@ print(f"{b2} / {b1} = {round(b2/b1,3)}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code003.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 a = input("請輸入數字 ( 格式 a,b,c... )：")  # 新增變數 a，內容是使用者輸入的多個數字，數字以逗號分隔
 b = a.split(",")  # 新增變數 b，內容使用 split 根據逗號將數字拆開為串列
@@ -1402,9 +1138,7 @@ print(f"數字總和為：{output}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code004.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 while output != 0:  # 使用 while 迴圈，如果 output 等於 0 才會停止
     a = input("請輸入數字 ( 格式 a,b,c... )：")
@@ -1417,9 +1151,7 @@ while output != 0:  # 使用 while 迴圈，如果 output 等於 0 才會停止
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code005.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 nums = [int(i) for i in input().split(",")]  # 使用串列生成式，將輸入的數字轉換成串列
 result = sum(nums)  # 將串列內的數字加總
@@ -1428,9 +1160,6 @@ print(result)  # 印出結果
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code006.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 
 def fib(n):  # 建立函式 fib，帶有參數 n
@@ -1447,9 +1176,7 @@ for i in range(20):  # 產生 20 個數字
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code007.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 n = int(input())  # 輸入要產生的數字數量
 arr = []  # 建立一個空串列，記錄數字
@@ -1468,9 +1195,7 @@ for i in range(n):  # 使用 for 迴圈，重複指定的數字
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code008.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 for a in range(1, 10):  # 讓 a 從 1 執行到 9
     for b in range(1, 10):  # 讓 b 從 1 執行到 9
@@ -1493,9 +1218,7 @@ for a in range(1, 10):  # 讓 a 從 1 執行到 9
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code009.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 for a in range(1, 10):
     for b in range(1, 10):
@@ -1510,9 +1233,7 @@ for a in range(1, 10):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code010.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 for a in range(1, 10):
     for b in range(1, 10):
@@ -1537,9 +1258,7 @@ for a in range(1, 10):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code011.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 a = b = int(input("請輸入一個正整數："))  # 新增 a 和 b 變數，等於使用者輸入的數字
 output = ""  # 新增 output 變數，作為輸出的文字
@@ -1565,9 +1284,7 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code012.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 a = range(2, 100)  # 產生 2～100 的串列
 print(*a)
@@ -1589,9 +1306,7 @@ print(*d)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code013.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 a = range(2, 100)  # 產生 2～100 的串列
 p = 0  # 設定 p 從 0 開始 ( 從 a[p] 也就是第一個項目開始 )
@@ -1615,9 +1330,7 @@ print(*a)  # 印出 a ( 使用 * 將串列打散印出 )
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code014.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 
 def gg(max):  # 定義一個 gg 函式
@@ -1637,9 +1350,7 @@ print(*gg(100))  # 印出結果
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code015.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 input_str = input("輸入數字 ( 逗號分隔 )：")  # 讓使用者輸入數字，數字間用逗號分隔
 nums = input_str.split(",")  # 將輸入的文字，用逗號拆分成串列
@@ -1662,9 +1373,7 @@ print(result)  # while 迴圈結束後，印出最小公倍數
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch11\code016.py
 
-# Copyright © https://steam.oxxostudio.tw
 
 input_str = input("輸入數字 ( 逗號分隔 )：")  # 讓使用者輸入數字，數字間用逗號分隔
 nums_arr = input_str.split(",")  # 將輸入的文字，用逗號拆分成串列
@@ -1699,120 +1408,8 @@ print("Python 實際應用")
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code001.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import pyautogui
-
-myScreenshot = pyautogui.screenshot()
-myScreenshot.save("圖片路徑\圖片名稱.png")
-
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code002.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import pyautogui
-
-myScreenshot = pyautogui.screenshot(region=(x1, y1, x2, y2))
-myScreenshot.save("圖片路徑\圖片名稱.png")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code003.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import pyautogui
-from time import sleep
-
-for i in range(5):
-    myScreenshot = pyautogui.screenshot()
-    myScreenshot.save(f"./test{i}.png")
-    sleep(2)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code004.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import pyautogui
-import requests
-
-myScreenshot = pyautogui.screenshot()  # 截圖
-myScreenshot.save("./test.png")  # 儲存為 test.png
-
-url = "https://notify-api.line.me/api/notify"
-token = "你的權杖"
-headers = {"Authorization": "Bearer " + token}  # 設定 LINE Notify 權杖
-data = {"message": "測試一下！"}  # 設定 LINE Notify message ( 不可少 )
-image = open("./test.png", "rb")  # 以二進位方式開啟圖片
-imageFile = {"imageFile": image}  # 設定圖片資訊
-data = requests.post(url, headers=headers, data=data, files=imageFile)  # 發送 LINE Notify
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code005.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import pyautogui
-import requests
-import time
-
-
-# 定義截圖的函式
-def screenshot():
-    myScreenshot = pyautogui.screenshot()
-    myScreenshot.save("./test.png")
-
-    t = time.time()  # 取得到目前為止的秒數
-    t1 = time.localtime(t)  # 將秒數轉換為 struct_time 格式的時間
-    now = time.strftime("%Y/%m/%d %H:%M:%S", t1)  # 輸出為特定格式的文字
-    sendLineNotify(now)  # 執行發送 LINE Notify 的函式，發送的訊息為時間
-
-
-# 定義發送 LINE Notify 的函式
-def sendLineNotify(msg):
-    url = "https://notify-api.line.me/api/notify"
-    token = "你的權杖"
-    headers = {"Authorization": "Bearer " + token}
-    data = {"message": msg}
-    image = open("./test.png", "rb")
-    imageFile = {"imageFile": image}
-    data = requests.post(url, headers=headers, data=data, files=imageFile)
-
-
-# 使用for 迴圈，每隔五秒截圖發送一次
-for i in range(5):
-    screenshot()
-    time.sleep(5)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code006.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import glob
-
-images = glob.glob("./demo/*")
-print(images)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code007.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import glob
 import os
@@ -1828,343 +1425,11 @@ for i in images:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code008.py
 
-# Copyright © https://steam.oxxostudio.tw
 
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import pdfplumber
-
-pdf = pdfplumber.open("oxxostudio.pdf")  # 開啟 pdf
-print(pdf.pages)  # [<Page:1>, <Page:2>, <Page:3>]，共有三頁
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code009.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import pdfplumber
-
-pdf = pdfplumber.open("oxxostudio.pdf")
-page = pdf.pages[0]  # 讀取第一頁
-text = page.extract_text()  # 取出文字
-print(text)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code010.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import pdfplumber
-
-pdf = pdfplumber.open("oxxostudio.pdf")
-page = pdf.pages[1]  # 讀取第二頁
-table = page.extract_table()  # 取出表格
-print(table)
-pdf.close()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code011.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import pdfplumber
-
-pdf = pdfplumber.open("test.pdf", password="12345678")  # 輸入密碼
-page = pdf.pages[0]
-text = page.extract_text()
-print(table)
-pdf.close()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code012.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import pdfplumber
-
-pdf = pdfplumber.open("oxxostudio.pdf")
-page = pdf.pages[0]
-text = page.extract_text()
-print(text)
-pdf.close()
-
-f = open("test.txt", "w+")  # 使用 w+ 模式開啟 test.txt
-f.write(text)  # 寫入內容
-f.close()  # 關閉 test.txt
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code013.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import pdfplumber
-
-pdf = pdfplumber.open("oxxostudio.pdf")
-page = pdf.pages[1]
-table = page.extract_table()
-print(table)
-pdf.close()
-
-import csv
-
-csvfile = open("test-csv.csv", "w+")  # 建立 CSV 檔案
-write = csv.writer(csvfile)  # 建立寫入物件
-for i in table:
-    write.writerow(i)  # 讀取表格每一列寫入 CSV
-print("ok")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code014.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf = Pdf.open("oxxostudio.pdf", password="1234")  # 開啟 pdf
-pdf_pwd = Pdf.open("oxxostudio-pwd.pdf", password="1234")  # 開啟需要密碼的 pdf
-print(pdf)
-print(pdf_pwd)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code015.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf, Permissions, Encryption
-
-pdf = Pdf.open("oxxostudio-pwd.pdf", password="1234")  # 開啟密碼為 1234 的 pdf
-no_extracting = Permissions(extract=False)
-# 儲存為密碼是 qqqq 的 pdf
-pdf.save(
-    "new.pdf", encryption=Encryption(user="qqqq", owner="qqqq", allow=no_extracting)
-)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code016.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf = Pdf.open("oxxostudio.pdf")  # 開啟 pdf
-pages = pdf.pages  # 將每一頁的內容變成串列
-output = Pdf.new()  # 建立新的 pdf 物件
-output.pages.append(pages[0])  # 添加頁面內容
-output.save("new.pdf")  # 儲存為新的 pdf
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code017.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf = Pdf.open("oxxostudio.pdf")
-pages = pdf.pages
-n = 1
-for i in pages:
-    output = Pdf.new()
-    output.pages.append(i)
-    output.save(f"new_{n}.pdf")  # 格式化檔案名稱
-    n = n + 1  # 編號加 1
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code018.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf = Pdf.open("test.pdf")
-pages = pdf.pages
-output = Pdf.new()
-output.pages.extend(pages[1:3])  # 改用 extend，放入特定範圍的頁面
-output.save("new.pdf")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code019.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf1 = Pdf.open("oxxo_1.pdf")  # 讀取第一份 pdf
-pdf2 = Pdf.open("oxxo_2.pdf")  # 讀取第二份 pdf
-pdf3 = Pdf.open("oxxo_3.pdf")  # 讀取第三份 pdf
-
-output = Pdf.new()  # 建立新的 pdf 物件
-output.pages.append(pdf1.pages[0])  # 添加第一頁到第一份
-output.pages.append(pdf2.pages[0])  # 添加第一頁到第二份
-output.pages.append(pdf3.pages[0])  # 添加第一頁到第三份
-output.save("output.pdf")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code020.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf1 = Pdf.open("oxxo_more_1.pdf")  # 讀取第一份多頁面 pdf
-pdf2 = Pdf.open("oxxo_more_2.pdf")  # 讀取第一份多頁面 pdf
-pdf3 = Pdf.open("oxxo_more_1.pdf")  # 讀取第一份多頁面 pdf
-
-output = Pdf.new()
-output.pages.extend(pdf1.pages)  # 添加所有頁面到第一份
-output.pages.extend(pdf2.pages)  # 添加所有頁面到第二份
-output.pages.extend(pdf3.pages)  # 添加所有頁面到第三份
-output.save("output.pdf")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code021.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf1 = Pdf.open("oxxostudio.pdf")  # 開啟第一份 pdf
-pdf2 = Pdf.open("new.pdf")  # 開啟第二份 pdf
-pdf1.pages.insert(1, pdf2.pages[0])  # 在第一份的第一頁後方，插入第二份的第一頁
-pdf1.save("output.pdf")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code022.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf = Pdf.open("oxxosudio.pdf")  # 開啟 pdf
-del pdf.pages[1:2]  # 刪除第二頁
-pdf.save("output.pdf")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code023.py_
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf1 = Pdf.open("oxxosudio.pdf")  # 開啟第一份 pdf
-pdf2 = Pdf.open("new.pdf")  # 開啟第二份 pdf
-pdf1.pages[2] = pdf2.pages[0]  # 將第一份的第三頁，換成第一份的第一頁
-pdf1.save("output.pdf")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code024.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from pikepdf import Pdf
-
-pdf = Pdf.open("output.pdf")
-pdf.pages.reverse()  # 反轉 pdf
-pdf.save("output2.pdf")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code025.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
 
 import openpyxl
 
@@ -2182,14 +1447,6 @@ print(s2.title, s2.max_row, s2.max_column)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code026.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
 import openpyxl
 
 wb = openpyxl.load_workbook("test.xlsx", data_only=True)  # 設定 data_only=True 只讀取計算後的數值
@@ -2204,14 +1461,6 @@ print(s2.cell(2, 2).value)  # 等同取出 B2 的內容
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code027.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
 
 import openpyxl
 
@@ -2242,14 +1491,6 @@ print(get_values(s2))  # 印出工作表 2 所有內容
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code028.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
 import openpyxl
 
 wb = openpyxl.load_workbook("test.xlsx", data_only=True)
@@ -2270,10 +1511,6 @@ for i in v:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code029.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import openpyxl
 from openpyxl.utils import get_column_letter, column_index_from_string
 
@@ -2286,14 +1523,6 @@ print(get_column_letter(100))  # CV
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code030.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
 import openpyxl
 
 wb = openpyxl.Workbook()  # 建立空白的 Excel 活頁簿物件
@@ -2302,14 +1531,6 @@ wb.save("empty.xlsx")  # 儲存檔案
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code031.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
 import openpyxl
 
 wb = openpyxl.load_workbook("oxxo.xlsx")  # 開啟現有的 Excel 活頁簿物件
@@ -2317,14 +1538,6 @@ wb.save("new.xlsx")  # 儲存檔案
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code032.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
 
 import openpyxl
 
@@ -2344,14 +1557,6 @@ print(s1.sheet_properties)  # 印出工作表屬性
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code033.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
 
 import openpyxl
 
@@ -2376,14 +1581,6 @@ wb.save("test2.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code034.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
 import openpyxl
 
 wb = openpyxl.load_workbook("oxxo.xlsx", data_only=True)
@@ -2401,14 +1598,6 @@ wb.save("test2.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code035.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
 import openpyxl
 
 wb = openpyxl.load_workbook("oxxo.xlsx", data_only=True)
@@ -2422,14 +1611,6 @@ wb.save("test2.xlsx")
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code036.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
 
 import openpyxl
 
@@ -2448,14 +1629,6 @@ wb.save("test2.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code037.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
 import openpyxl
 
 wb = openpyxl.load_workbook("oxxo.xlsx", data_only=True)
@@ -2472,14 +1645,6 @@ wb.save("test2.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code038.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
 import openpyxl
 from openpyxl.styles import Font, PatternFill  # 載入 Font 和 PatternFill 模組
 
@@ -2493,14 +1658,6 @@ wb.save("test2.xlsx")
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code039.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
 
 import csv
 
@@ -2519,10 +1676,6 @@ print(data)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code040.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import csv
 import openpyxl
 
@@ -2540,260 +1693,6 @@ wb.save("test2.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code041.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import qrcode
-
-img = qrcode.make("https://steam.oxxostudio.tw")  # 要轉換成 QRCode 的文字
-img.show()  # 顯示圖片 ( Colab 不適用 )
-img.save("qrcode.png")  # 儲存圖片
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code042.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import qrcode
-
-qr = qrcode.QRCode(
-    version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4
-)
-qr.add_data("https://steam.oxxostudio.tw")  # 要轉換成 QRCode 的文字
-qr.make(fit=True)  # 根據參數製作為 QRCode 物件
-
-img = qr.make_image()  # 產生 QRCode 圖片
-img.show()  # 顯示圖片 ( Colab 不適用 )
-img.save("qrcode.png")  # 儲存圖片
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code043.py
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import qrcode
-import qrcode.image.svg
-
-img = qrcode.make(
-    "https://steam.oxxostudio.tw", image_factory=qrcode.image.svg.SvgPathImage
-)  # 要轉換成 QRCode 的文字
-# img.show()                # SVG 無法使用
-img.save("qrcode.svg")  # 儲存圖片，注意副檔名為 SVG
-
-"""
-下方的程式使用「進階設定」的方式產生 QRcode，額外載入 qrcode.image.svg，在 qrcode.QRCode 裡新增 image_factory=qrcode.image.svg.SvgPathImage 參數，就能產生 SVG 格式的 QRCode 圖片 ( 如果是 SVG 格式圖片無法改變顏色 )。
-"""
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import qrcode
-import qrcode.image.svg
-
-qr = qrcode.QRCode(
-    version=1,
-    error_correction=qrcode.constants.ERROR_CORRECT_L,
-    box_size=10,
-    border=4,
-    image_factory=qrcode.image.svg.SvgPathImage,
-)
-qr.add_data("https://steam.oxxostudio.tw")
-qr.make(fit=True)
-
-img = qr.make_image()
-# img.show()               # SVG 無法使用
-img.save("qrcode.svg")  # 儲存圖片，注意副檔名為 SVG
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code044.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import qrcode
-from qrcode.image.styledpil import StyledPilImage
-from qrcode.image.styles.moduledrawers import (
-    VerticalBarsDrawer,
-    RoundedModuleDrawer,
-    HorizontalBarsDrawer,
-    SquareModuleDrawer,
-    GappedSquareModuleDrawer,
-    CircleModuleDrawer,
-)
-
-qr = qrcode.QRCode(
-    version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4
-)
-qr.add_data("https://steam.oxxostudio.tw")
-qr.make(fit=True)
-
-img1 = qr.make_image(image_factory=StyledPilImage, module_drawer=SquareModuleDrawer())
-img2 = qr.make_image(
-    image_factory=StyledPilImage, module_drawer=GappedSquareModuleDrawer()
-)
-img3 = qr.make_image(image_factory=StyledPilImage, module_drawer=CircleModuleDrawer())
-img4 = qr.make_image(image_factory=StyledPilImage, module_drawer=RoundedModuleDrawer())
-img5 = qr.make_image(image_factory=StyledPilImage, module_drawer=VerticalBarsDrawer())
-img6 = qr.make_image(image_factory=StyledPilImage, module_drawer=HorizontalBarsDrawer())
-img1.save("qrcode1.png")
-img2.save("qrcode2.png")
-img3.save("qrcode3.png")
-img4.save("qrcode4.png")
-img5.save("qrcode5.png")
-img6.save("qrcode6.png")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code045.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import qrcode
-from qrcode.image.styledpil import StyledPilImage
-from qrcode.image.styles.moduledrawers import RoundedModuleDrawer
-from qrcode.image.styles.colormasks import (
-    ImageColorMask,
-    SolidFillColorMask,
-    RadialGradiantColorMask,
-    SquareGradiantColorMask,
-    VerticalGradiantColorMask,
-    HorizontalGradiantColorMask,
-)
-
-qr = qrcode.QRCode(
-    version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4
-)
-qr.add_data("https://steam.oxxostudio.tw")
-qr.make(fit=True)
-
-img1 = qr.make_image(
-    image_factory=StyledPilImage,
-    color_mask=SolidFillColorMask((255, 255, 255), (255, 0, 0)),
-    module_drawer=RoundedModuleDrawer(),
-)
-img2 = qr.make_image(
-    image_factory=StyledPilImage,
-    color_mask=RadialGradiantColorMask((255, 255, 255), (255, 0, 0), (0, 0, 255)),
-    module_drawer=RoundedModuleDrawer(),
-)
-img3 = qr.make_image(
-    image_factory=StyledPilImage,
-    color_mask=SquareGradiantColorMask((255, 255, 255), (255, 0, 0), (0, 0, 255)),
-    module_drawer=RoundedModuleDrawer(),
-)
-img4 = qr.make_image(
-    image_factory=StyledPilImage,
-    color_mask=VerticalGradiantColorMask((255, 255, 255), (255, 0, 0), (0, 0, 255)),
-    module_drawer=RoundedModuleDrawer(),
-)
-img5 = qr.make_image(
-    image_factory=StyledPilImage,
-    color_mask=HorizontalGradiantColorMask((255, 255, 255), (255, 0, 0), (0, 0, 255)),
-    module_drawer=RoundedModuleDrawer(),
-)
-img6 = qr.make_image(
-    image_factory=StyledPilImage,
-    color_mask=ImageColorMask((255, 255, 255), "mona.jpg"),
-    module_drawer=RoundedModuleDrawer(),
-)
-
-img1.save("qrcode1.png")
-img2.save("qrcode2.png")
-img3.save("qrcode3.png")
-img4.save("qrcode4.png")
-img5.save("qrcode5.png")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code046.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-import qrcode
-from qrcode.image.styledpil import StyledPilImage
-
-qr = qrcode.QRCode(
-    version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4
-)
-qr.add_data("https://steam.oxxostudio.tw")
-qr.make(fit=True)
-
-img = qr.make_image(image_factory=StyledPilImage, embeded_image_path="mona.jpg")
-img.save("qrcode.png")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code047.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from barcode import EAN13
-
-number = "12345678987654321"  # 要轉換的數字
-my_code = EAN13(number)  # 轉換成 barcode
-my_code.save("oxxo")  # 儲存為 SVG
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code048.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可刪除
-
-from barcode import EAN13
-from barcode.writer import ImageWriter  # 載入 barcode.writer 的 ImageWriter
-
-number = "12345678987654321"
-my_code = EAN13(number, writer=ImageWriter())  # 添加 writer=ImageWriter()
-my_code.save("oxxo")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code049.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import psutil
 
 print(psutil.cpu_count())  # CPU 邏輯數量
@@ -2806,20 +1705,12 @@ print(psutil.cpu_freq())  # CPU 使用頻率
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code050.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import psutil
 
 print(psutil.virtual_memory())  # 記憶體資訊
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code051.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import psutil
 
@@ -2828,10 +1719,6 @@ print(psutil.disk_usage("硬碟 device 名稱"))  # 指定硬碟資訊
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code052.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import psutil
 
@@ -2842,10 +1729,6 @@ print(psutil.net_connections())  # 目前機器的網路連線
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code053.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import psutil
 
 print(psutil.users())  # 登陸的使用者資訊
@@ -2854,10 +1737,6 @@ print(datetime.datetime.fromtimestamp(psutil.boot_time()))  # 轉換成標準時
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code054.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import psutil
 
@@ -2876,21 +1755,9 @@ print(p.memory_info())  # 應用程式的 RAM 使用資訊
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code055.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import pyautogui
-
-width, hwight = pyautogui.size()
-print(width, hwight)
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code056.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import tkinter as tk
 
@@ -2917,10 +1784,6 @@ print(width, height)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code058.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 socket.socket(family, type, proto)
 # family：IPv4 本機、IPv4 網路、IPv6 網路。
 # type：使用 TCP 或 UDP 方式。
@@ -2928,10 +1791,6 @@ socket.socket(family, type, proto)
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code059.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import socket
 
@@ -2944,10 +1803,6 @@ s.close()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code060.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import requests
 
 ip = requests.get("https://api.ipify.org").text
@@ -2957,10 +1812,6 @@ print(ip)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code061.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import socket
 
 hostname = "google.com"
@@ -2968,10 +1819,6 @@ print(socket.gethostbyname(hostname))
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch12\code062.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import os
 
@@ -3000,3 +1847,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+

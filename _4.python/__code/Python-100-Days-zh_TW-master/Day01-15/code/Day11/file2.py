@@ -1,9 +1,6 @@
-"""
-读取圆周率文件判断其中是否包含自己的生日
+print('读取圆周率文件判断其中是否包含自己的生日')
 
-"""
-
-birth = input('请输入你的生日: ')
+birth = "0311"
 with open('pi_million_digits.txt') as f:
     lines = f.readlines()
     pi_string = ''

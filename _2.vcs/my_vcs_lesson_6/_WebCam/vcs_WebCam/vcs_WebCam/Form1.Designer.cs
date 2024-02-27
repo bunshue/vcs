@@ -42,6 +42,7 @@
             this.lb_fps = new System.Windows.Forms.Label();
             this.lb_main_mesg = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cb_corner = new System.Windows.Forms.CheckBox();
             this.cb_rgb = new System.Windows.Forms.CheckBox();
             this.bt_open_folder = new System.Windows.Forms.Button();
             this.bt_motion_detection = new System.Windows.Forms.Button();
@@ -86,7 +87,7 @@
             this.timer_auto_save = new System.Windows.Forms.Timer(this.components);
             this.timer_qr_code = new System.Windows.Forms.Timer(this.components);
             this.timer_rgb = new System.Windows.Forms.Timer(this.components);
-            this.cb_corner = new System.Windows.Forms.CheckBox();
+            this.bt_flip = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -221,6 +222,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.bt_flip);
             this.groupBox4.Controls.Add(this.cb_corner);
             this.groupBox4.Controls.Add(this.cb_rgb);
             this.groupBox4.Controls.Add(this.bt_open_folder);
@@ -251,6 +253,18 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operation";
+            // 
+            // cb_corner
+            // 
+            this.cb_corner.AutoSize = true;
+            this.cb_corner.Checked = true;
+            this.cb_corner.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_corner.Location = new System.Drawing.Point(103, 193);
+            this.cb_corner.Name = "cb_corner";
+            this.cb_corner.Size = new System.Drawing.Size(48, 16);
+            this.cb_corner.TabIndex = 61;
+            this.cb_corner.Text = "截角";
+            this.cb_corner.UseVisualStyleBackColor = true;
             // 
             // cb_rgb
             // 
@@ -378,7 +392,7 @@
             // bt_help
             // 
             this.bt_help.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_help.Location = new System.Drawing.Point(188, 122);
+            this.bt_help.Location = new System.Drawing.Point(246, 114);
             this.bt_help.Name = "bt_help";
             this.bt_help.Size = new System.Drawing.Size(75, 30);
             this.bt_help.TabIndex = 16;
@@ -410,7 +424,7 @@
             // bt_fullscreen
             // 
             this.bt_fullscreen.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_fullscreen.Location = new System.Drawing.Point(103, 122);
+            this.bt_fullscreen.Location = new System.Drawing.Point(161, 114);
             this.bt_fullscreen.Name = "bt_fullscreen";
             this.bt_fullscreen.Size = new System.Drawing.Size(75, 30);
             this.bt_fullscreen.TabIndex = 13;
@@ -444,7 +458,7 @@
             // bt_info
             // 
             this.bt_info.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_info.Location = new System.Drawing.Point(18, 122);
+            this.bt_info.Location = new System.Drawing.Point(76, 114);
             this.bt_info.Name = "bt_info";
             this.bt_info.Size = new System.Drawing.Size(75, 30);
             this.bt_info.TabIndex = 12;
@@ -722,17 +736,16 @@
             this.timer_rgb.Enabled = true;
             this.timer_rgb.Tick += new System.EventHandler(this.timer_rgb_Tick);
             // 
-            // cb_corner
+            // bt_flip
             // 
-            this.cb_corner.AutoSize = true;
-            this.cb_corner.Checked = true;
-            this.cb_corner.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_corner.Location = new System.Drawing.Point(103, 193);
-            this.cb_corner.Name = "cb_corner";
-            this.cb_corner.Size = new System.Drawing.Size(48, 16);
-            this.cb_corner.TabIndex = 61;
-            this.cb_corner.Text = "截角";
-            this.cb_corner.UseVisualStyleBackColor = true;
+            this.bt_flip.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_flip.Location = new System.Drawing.Point(18, 116);
+            this.bt_flip.Name = "bt_flip";
+            this.bt_flip.Size = new System.Drawing.Size(75, 30);
+            this.bt_flip.TabIndex = 62;
+            this.bt_flip.Text = "上下左右";
+            this.bt_flip.UseVisualStyleBackColor = true;
+            this.bt_flip.Click += new System.EventHandler(this.bt_flip_Click);
             // 
             // Form1
             // 
@@ -821,6 +834,7 @@
         private System.Windows.Forms.Label lb_yuv_v;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox cb_corner;
+        private System.Windows.Forms.Button bt_flip;
     }
 }
 

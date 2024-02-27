@@ -16,7 +16,6 @@ random.其他
 
 """
 
-'''
 print('---- random.seed() ST --------------------------------------------------------')	#60個
 
 #不固定亂數種子
@@ -652,11 +651,6 @@ random.shuffle(data)
 
 print('------------------------------------------------------------')	#60個
 
-try:
-    import pyperclip  # pyperclip copies text to the clipboard.
-except ImportError:
-    pass  # If pyperclip is not installed, do nothing. It's no big deal.
-
 # Every possible symbol that can be encrypted/decrypted:
 LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 lettersList = list(LETTERS) #字串 轉 串列
@@ -678,8 +672,6 @@ print('------------------------------------------------------------')	#60個
 
 
 print('--- random.shuffle(list) SP ---------------------------------------------------------')	#60個
-
-
 
 
 
@@ -742,7 +734,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-'''
+
 
 
 

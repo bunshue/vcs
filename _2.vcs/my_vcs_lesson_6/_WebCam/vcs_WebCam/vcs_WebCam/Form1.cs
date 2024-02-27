@@ -294,10 +294,11 @@ namespace vcs_WebCam
             bt_snapshot.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             bt_motion_detection.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             bt_exit.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            bt_info.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_fullscreen.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            bt_help.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            bt_open_folder.Location = new Point(x_st + dx * 4 - 20, y_st + dy * 2 + 20);
+            bt_flip.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_info.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_fullscreen.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_help.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            bt_open_folder.Location = new Point(x_st + dx * 4 - 5 - 1, y_st + dy * 2 + 29 - 1);
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
 
             cb_show_time.Location = new Point(x_st + dx * 0, y_st + dy * 3);
@@ -1367,7 +1368,7 @@ namespace vcs_WebCam
 
             richTextBox1.Text += "W = " + W.ToString() + "\n";
             richTextBox1.Text += "H = " + H.ToString() + "\n";
-            
+
             for (j = 0; j < H; j++)
             {
                 for (i = 0; i < W; i++)
@@ -1683,14 +1684,10 @@ namespace vcs_WebCam
         int total_RGB_G_old = -1;
         int total_RGB_B_old = -1;
 
-
-
         private void timer_rgb_Tick(object sender, EventArgs e)
         {
             if (cb_rgb.Checked == false)
                 return;
-
-            richTextBox1.Text += "x";
 
             Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
             Color cl = GetColor(pt);
@@ -1731,6 +1728,13 @@ namespace vcs_WebCam
                 lb_yuv_v.Visible = false;
                 panel1.Visible = false;
             }
+        }
+
+        private void bt_flip_Click(object sender, EventArgs e)
+        {
+            //180°旋轉 + 水平鏡射
+            //選了RotateNoneFlipY
+            rotate_flip_type = RotateFlipType.Rotate180FlipX;
         }
     }
 }

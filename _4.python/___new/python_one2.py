@@ -13,39 +13,12 @@ print("------------------------------------------------------------")  # 60個
 print("Python 影像處理")
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code001.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import glob
-
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-jpg = glob.glob("./demo/*.[jJ][pP][gG]")  # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
-print(images)
-"""
-['./demo/pic-001.jpg', './demo/pic-002.jpg', './demo/pic-003.jpg',
-'./demo/pic-004.jpg', './demo/pic-005.jpg', './demo/pic-006.jpg',
-'./demo/pic-007.jpg', './demo/pic-008.jpg', './demo/pic-009.jpg',
-'./demo/pic-010.jpg']
-"""
-
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code002.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 import glob
 from PIL import Image
 
-jpg = glob.glob("./demo/*.[jJ][pP][gG]")
+jpg = glob.glob("./demo/*.[jJ][pP][gG]")  # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
 print(jpg)
 for i in jpg:
     print(i)
@@ -57,18 +30,10 @@ for i in jpg:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code003.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 import glob
 from PIL import Image
 
-jpg = glob.glob("./demo/*.[jJ][pP][gG]")
+jpg = glob.glob("./demo/*.[jJ][pP][gG]")  # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
 print(jpg)
 for i in jpg:
     print(i)
@@ -78,29 +43,6 @@ for i in jpg:
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code004.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
-from PIL import Image
-
-img = Image.open("oxxostudio.jpg")  # 開啟圖片
-print(img.size)  # (1280,720) 印出長寬尺寸
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code005.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 import glob
 from PIL import Image
@@ -114,14 +56,6 @@ for i in imgs:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code006.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 from PIL import Image
 
 img = Image.open("oxxostudio.jpg")  # 開啟圖片
@@ -130,14 +64,6 @@ img2.save("test.jpg")  # 調整後存檔到 resize 資料夾
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code007.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 import glob
 from PIL import Image
@@ -153,14 +79,6 @@ for i in imgs:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code008.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 from PIL import Image, ImageEnhance
 
 img = Image.open("oxxostudio.png")  # 開啟影像
@@ -170,10 +88,6 @@ output = brightness.enhance(factor)  # 調整亮度，factor 為一個浮點數�
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code009.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from PIL import Image, ImageEnhance
 
@@ -188,10 +102,6 @@ output.save("oxxostudio_b05.jpg")  # 存檔
 
 print("------------------------------------------------------------")  # 60個
 
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 from PIL import Image
 
 img = Image.open("./oxxostudio.jpg")  # 開啟圖片
@@ -201,14 +111,6 @@ img_crop.save("./test.jpg")  # 存檔
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code012.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 
@@ -220,14 +122,6 @@ img_r2.save("./test2.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code013.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 from PIL import Image
 
 bg = Image.new("RGB", (400, 300), "#ff0000")  # 產生 RGB 色域，400x300 背景紅色的圖片
@@ -237,13 +131,6 @@ bg.save("oxxostudio.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code014.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 
@@ -252,14 +139,6 @@ bg.save("oxxostudio.png")
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code015.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 
@@ -276,13 +155,6 @@ bg.save("oxxostudio.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code016.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image, ImageOps
 
@@ -300,13 +172,6 @@ bg.save("oxxostudio.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code017.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 
@@ -319,13 +184,6 @@ img.save("./ok.jpg")  # 存檔為 ok.jpg
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code018.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 
@@ -343,13 +201,6 @@ img.save("./ok.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code019.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 import glob
 from PIL import Image
@@ -365,13 +216,6 @@ for i in imgs:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code020.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 
@@ -392,13 +236,6 @@ img2.save("./ok.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code021.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image, ImageFont, ImageDraw
 
@@ -412,13 +249,6 @@ img.save("./ok.jpg")  # 儲存圖片
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code022.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image, ImageFont, ImageDraw
 
@@ -434,14 +264,6 @@ img.save("./ok.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code023.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 from PIL import Image, ImageFont, ImageDraw
 
 img = Image.open("./photo.jpg")
@@ -456,14 +278,6 @@ img.save("./ok.jpg")
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code024.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image, ImageFont, ImageDraw
 
@@ -484,17 +298,10 @@ img2.putalpha(100)  # 調整透明度，範圍 0～255，0 為全透明
 img.paste(img2, (0, 0), img2)  # 將 img2 貼上 img
 img.save("./ok.jpg")
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code025.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from PIL import Image, ImageFont, ImageDraw
 
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 imgs = glob.glob("./demo/*.jpg")  # 讀取 demo 資料夾裡所有的圖片
 
 for i in imgs:
@@ -516,14 +323,6 @@ for i in imgs:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code026.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 from PIL import Image
 
 img = Image.open("oxxostudio.jpg")  # 開啟圖片
@@ -533,16 +332,7 @@ img2 = img.resize((int(w / level), int(h / level)))  # 縮小圖片
 img2 = img2.resize((w, h), resample=Image.NEAREST)  # 放大圖片為原始大小
 img2.save("test.jpg")  # 存檔
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code027.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 
@@ -561,14 +351,6 @@ img.save("test.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code028.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 from PIL import Image, ImageFilter
 
 img = Image.open("oxxostudio.jpg")  # 開啟圖片
@@ -579,13 +361,6 @@ output.save("output.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code029.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image, ImageFilter
 
@@ -596,30 +371,13 @@ output.save("output.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code030.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 from PIL import Image, ImageFilter
 
 img = Image.open("oxxostudio.jpg")
 output = img.filter(ImageFilter.GaussianBlur(5))  # 套用 GaussianBlur，設定模糊半徑為 5
 output.save("output.jpg")
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code031.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image, ImageFilter
 
@@ -632,13 +390,6 @@ output.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code032.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image, ImageFilter
 
@@ -650,14 +401,6 @@ output.save("output.jpg")  # 存檔
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code033.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
-
 from PIL import Image, ImageFilter
 
 img = Image.open("oxxostudio.jpg")
@@ -668,13 +411,6 @@ img.save("output.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code034.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image, ImageFilter
 
@@ -687,13 +423,6 @@ output.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code035.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 import piexif
@@ -705,13 +434,7 @@ print(exif)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code036.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 import piexif
@@ -747,13 +470,7 @@ for i in info:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code037.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 import piexif
@@ -771,13 +488,7 @@ img.save("./iphone-edit.jpg", exif=exif_new)  # 另存新檔並加入 Exif
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code038.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 import pytesseract
@@ -789,13 +500,7 @@ print(text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch13\code039.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用，本機或 Jupyter 環境可以刪除
 
 from PIL import Image
 import pytesseract
@@ -811,15 +516,6 @@ print("------------------------------------------------------------")  # 60個
 print("Python 聲音處理")
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code001.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
-
 from pydub import AudioSegment
 
 song = AudioSegment.from_mp3("oxxostudio.mp3")  # 讀取 mp3 檔案
@@ -827,14 +523,6 @@ print(song)  # <pydub.audio_segment.AudioSegment object at 0x7faaa545a7f0>
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code002.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -845,14 +533,6 @@ print("ok")  # 輸出後印出 ok
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code003.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
-
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
 song = AudioSegment.from_mp3("oxxostudio.mp3")  # 讀取 mp3 檔案
@@ -862,13 +542,6 @@ print("ok")  # 輸出後印出 ok
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code004.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -880,13 +553,6 @@ print(channels, duration)  # 印出資訊
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code005.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -897,13 +563,6 @@ print("ok")  # 輸出後印出 ok
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code006.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 
 from pydub import AudioSegment
 
@@ -916,13 +575,6 @@ print("ok")  # 輸出後印出 ok
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code007.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 
 from pydub import AudioSegment
 
@@ -934,14 +586,8 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code008.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from pydub import AudioSegment
-import os
 
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 song = AudioSegment.from_mp3("oxxostudio.mp3")  # 讀取 mp3
 output1 = song[:] + 10  # 將所有陣列中的資料增加 10 ( 變大聲 )
 output2 = song[:] - 10  # 將所有陣列中的資料減少 10 ( 變小聲 )
@@ -952,14 +598,9 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code009.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from pydub import AudioSegment
-import os
 
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 song = AudioSegment.from_mp3("oxxostudio.mp3")
 output1 = song.apply_gain(10)  # 將音量增加 10 ( 變大聲 )
 output2 = song.apply_gain(-10)  # 將音量減少 10 ( 變小聲 )
@@ -970,14 +611,8 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code010.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from pydub import AudioSegment
-import os
 
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 song = AudioSegment.from_mp3("oxxostudio.mp3")
 output1 = song.fade_in(3000)  # 開頭三秒 ( 3000ms ) 淡入
 output2 = song.fade_out(3000)  # 結尾三秒 ( 3000ms ) 淡出
@@ -988,14 +623,8 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code011.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from pydub import AudioSegment
-import os
 
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 song = AudioSegment.from_mp3("oxxostudio.mp3")
 
 output1 = song.fade(to_gain=15, start=1000, duration=2000)
@@ -1011,13 +640,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code012.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -1029,13 +652,6 @@ output.export("output.mp3")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code013.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -1046,13 +662,7 @@ output.export("output.mp3")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code014.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # Colab 換路徑使用
 
 from pydub import AudioSegment
 
@@ -1076,13 +686,6 @@ song_fast.export("song_fast.mp3")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code015.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 from pydub.playback import play  # 載入 pydub.playback 的 play 模組
@@ -1094,13 +697,6 @@ play(output)  # 播放聲音
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code016.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from IPython.display import Audio  # 載入 IPython.display 的 Audio模組
 
@@ -1109,9 +705,6 @@ Audio("output.mp3")  # 播放聲音
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code017.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import pyaudio
 import wave
@@ -1159,10 +752,6 @@ wf.close()
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code018.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import pyaudio
 import wave
@@ -1259,10 +848,6 @@ write("twinkle-twinkle.wav", samplerate, data.astype(np.int16))  # 寫入檔案
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch14\code023.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 {
     A0: {frequency: "27.50", wavelength: "1254.55"},
@@ -1429,14 +1014,6 @@ print("Python 影片處理")
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code001.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
-
 from moviepy.editor import *
 
 video = VideoFileClip("oxxostudio.mp4")  # 讀取影片
@@ -1458,13 +1035,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code002.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1487,13 +1057,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code003.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
@@ -1504,13 +1067,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code004.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from pydub import AudioSegment
 
@@ -1523,13 +1079,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code005.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1541,13 +1090,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code006.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1568,13 +1110,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code007.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1593,13 +1128,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code008.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1618,13 +1146,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code009.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1646,13 +1167,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code010.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1673,13 +1187,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code011.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1705,13 +1212,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code012.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1731,13 +1231,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code013.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -1759,13 +1252,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code014.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1789,14 +1275,6 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code015.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
-
 from moviepy.editor import *
 
 video = VideoFileClip("oxxostudio.mp4")  # 讀取影片
@@ -1813,14 +1291,6 @@ print("ok")
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code016.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1839,13 +1309,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code017.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -1870,13 +1334,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code018.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -1895,13 +1353,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code019.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -1932,13 +1384,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code020.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -1975,13 +1421,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code021.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -2010,13 +1450,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code022.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -2061,13 +1495,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code023.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from moviepy.video.fx.all import *
@@ -2112,13 +1540,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code024.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -2131,13 +1553,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code025.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -2153,13 +1569,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code026.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from PIL import Image, ImageFont, ImageDraw
 
@@ -2189,13 +1599,6 @@ img.save("ok.png")  # 儲存為 png
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code027.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from PIL import Image, ImageFont, ImageDraw
@@ -2240,13 +1643,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code028.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from PIL import Image, ImageFont, ImageDraw
@@ -2302,13 +1699,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code029.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 
 # 定義轉換為總秒數的函式
@@ -2362,13 +1753,7 @@ print(text_list)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code030.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 from PIL import Image, ImageFont, ImageDraw
@@ -2472,13 +1857,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code031.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -2491,13 +1870,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code032.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -2515,14 +1888,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code032-1.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -2548,13 +1914,7 @@ print("ok")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python\ch15\code033.py
 
-# Copyright © https://steam.oxxostudio.tw
-
-import os
-
-os.chdir("/content/drive/MyDrive/Colab Notebooks")  # 使用 Colab 要換路徑使用，本機環境可以刪除
 
 from moviepy.editor import *
 
@@ -2589,3 +1949,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
