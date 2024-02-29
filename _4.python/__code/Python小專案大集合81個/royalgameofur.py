@@ -1,11 +1,3 @@
-"""The Royal Game of Ur, by Al Sweigart al@inventwithpython.com
-A 5,000 year old board game from Mesopotamia. Two players knock each
-other back as they race for the goal.
-More info https://en.wikipedia.org/wiki/Royal_Game_of_Ur
-This code is available at https://nostarch.com/big-book-small-python-programming
-Tags: large, board game, game, two-player
-"""
-
 import random, sys
 
 X_PLAYER = 'X'
@@ -49,36 +41,6 @@ BOARD_TEMPLATE = """
 
 
 def main():
-    print('''The Royal Game of Ur, by Al Sweigart
-
-This is a 5,000 year old game. Two players must move their tokens
-from their home to their goal. On your turn you flip four coins and can
-move one token a number of spaces equal to the heads you got.
-
-Ur is a racing game; the first player to move all seven of their tokens
-to their goal wins. To do this, tokens must travel from their home to
-their goal:
-
-            X Home      X Goal
-              v           ^
-+---+---+---+-v-+       +-^-+---+
-|v<<<<<<<<<<<<< |       | ^<|<< |
-|v  |   |   |   |       |   | ^ |
-+v--+---+---+---+---+---+---+-^-+
-|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>^ |
-|>>>>>>>>>>>>>>>>>>>>>>>>>>>>>v |
-+^--+---+---+---+---+---+---+-v-+
-|^  |   |   |   |       |   | v |
-|^<<<<<<<<<<<<< |       | v<<<< |
-+---+---+---+-^-+       +-v-+---+
-              ^           v
-            O Home      O Goal
-
-If you land on an opponent's token in the middle track, it gets sent
-back home. The **flower** spaces let you take another turn. Tokens in
-the middle flower space are safe and cannot be landed on.''')
-    input('Press Enter to begin...')
-
     gameBoard = getNewBoard()
     turn = O_PLAYER
     while True:  # Main game loop.

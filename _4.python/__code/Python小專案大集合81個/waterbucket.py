@@ -1,11 +1,4 @@
-"""Water Bucket Puzzle, by Al Sweigart al@inventwithpython.com
-A water pouring puzzle.
-More info: https://en.wikipedia.org/wiki/Water_pouring_puzzle
-This code is available at https://nostarch.com/big-book-small-python-programming
-Tags: large, game, math, puzzle"""
-
 import sys
-
 
 print('Water Bucket Puzzle, by Al Sweigart al@inventwithpython.com')
 
