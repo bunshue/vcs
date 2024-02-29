@@ -137,14 +137,25 @@ namespace _vcs_MakePicture
             button58.Location = new Point(x_st + dx * 8, y_st + dy * 5);
             button59.Location = new Point(x_st + dx * 9, y_st + dy * 5);
 
+            button60.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button61.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button62.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button63.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button64.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            button65.Location = new Point(x_st + dx * 5, y_st + dy * 6);
+            button66.Location = new Point(x_st + dx * 6, y_st + dy * 6);
+            button67.Location = new Point(x_st + dx * 7, y_st + dy * 6);
+            button68.Location = new Point(x_st + dx * 8, y_st + dy * 6);
+            button69.Location = new Point(x_st + dx * 9, y_st + dy * 6);
+
             button9.Text = word;
 
             pictureBox1.Location = new Point(10, 10);
 
             this.Size = new Size(1570, this.Size.Height);
 
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            richTextBox1.Size = new Size(this.Width - richTextBox1.Location.X - 50, this.Height - richTextBox1.Location.Y - 50);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            richTextBox1.Size = new Size(this.Width - richTextBox1.Location.X - 50, this.Height - richTextBox1.Location.Y - 50 - 50);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -292,8 +303,6 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -495,7 +504,6 @@ namespace _vcs_MakePicture
             p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             g.DrawArc(p, 20, 20, 90, 90, 25, 335);
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -651,7 +659,6 @@ namespace _vcs_MakePicture
 
             g.FillRectangle(sb, new Rectangle(width / 2 + width / 8, height * 2 / 8, width / 8, height / 2));
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -687,7 +694,6 @@ namespace _vcs_MakePicture
 
             g.FillRectangle(sb, new Rectangle(width / 8 + width / 8, height * 2 / 8, width / 8, height / 2));
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -754,7 +760,6 @@ namespace _vcs_MakePicture
             g.FillRectangle(sb, new Rectangle(width / 8, height * 7 / 16, width * 6 / 8, height * 2 / 16));
             g.FillRectangle(sb, new Rectangle(width * 7 / 16, height / 8, width * 2 / 16, height * 6 / 8));
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -784,7 +789,6 @@ namespace _vcs_MakePicture
             //minus
             g.FillRectangle(sb, new Rectangle(width / 8, height * 7 / 16, width * 6 / 8, height * 2 / 16));
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -819,7 +823,6 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -858,7 +861,6 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -881,7 +883,6 @@ namespace _vcs_MakePicture
             sb = new SolidBrush(foreground_color);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -944,12 +945,7 @@ namespace _vcs_MakePicture
                     }
                 }
             }
-
-
-
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button28_Click(object sender, EventArgs e)
@@ -984,7 +980,6 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1023,7 +1018,6 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -1058,8 +1052,6 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -1094,7 +1086,6 @@ namespace _vcs_MakePicture
             g.FillPolygon(sb, points);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -1145,7 +1136,6 @@ namespace _vcs_MakePicture
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -1197,11 +1187,7 @@ namespace _vcs_MakePicture
             pointb = new Point(width * 7 / 8, height * 5 / 8);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
-
-
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -1242,8 +1228,6 @@ namespace _vcs_MakePicture
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -1316,7 +1300,6 @@ namespace _vcs_MakePicture
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button35_Click(object sender, EventArgs e)
@@ -1389,8 +1372,6 @@ namespace _vcs_MakePicture
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button36_Click(object sender, EventArgs e)
@@ -1435,10 +1416,7 @@ namespace _vcs_MakePicture
             pointb = new Point(width * 11 / 16, height * 8 / 16);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
-
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -1528,9 +1506,7 @@ namespace _vcs_MakePicture
             pointb = new Point(width * 11 / 16, height * 8 / 16);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button39_Click(object sender, EventArgs e)
@@ -1575,10 +1551,7 @@ namespace _vcs_MakePicture
             pointb = new Point(width * 5 / 16, height * 8 / 16);
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
-
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -1620,7 +1593,6 @@ namespace _vcs_MakePicture
             g.DrawLine(p, pointa, pointb);     // Draw line to screen.
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button41_Click(object sender, EventArgs e)
@@ -1654,9 +1626,7 @@ namespace _vcs_MakePicture
 
             g.DrawString("C#", f, sb, new PointF(0, 20));
 
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button42_Click(object sender, EventArgs e)
@@ -1692,9 +1662,7 @@ namespace _vcs_MakePicture
 
             g.DrawRectangle(p, new Rectangle(width / 8, height / 8, width * 6 / 8, height * 6 / 8));
 
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button43_Click(object sender, EventArgs e)
@@ -1738,10 +1706,7 @@ namespace _vcs_MakePicture
             p = new Pen(Color.White, 2);
             g.DrawRectangle(p, new Rectangle(width * 6 / 16, height * 9 / 16, width * 4 / 16, height * 7 / 16));
 
-
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button44_Click(object sender, EventArgs e)
@@ -1777,9 +1742,7 @@ namespace _vcs_MakePicture
 
             g.DrawRectangle(p, new Rectangle(width / 8, height / 8, width * 6 / 8, height * 6 / 8));
 
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button45_Click(object sender, EventArgs e)
@@ -1819,9 +1782,7 @@ namespace _vcs_MakePicture
 
             g.DrawRectangle(p, new Rectangle(width / 16, height / 16, width * 14 / 16, height * 14 / 16));
 
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button46_Click(object sender, EventArgs e)
@@ -1855,9 +1816,7 @@ namespace _vcs_MakePicture
 
             g.DrawString("Python", f, sb, new PointF(0, 42));
 
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button47_Click(object sender, EventArgs e)
@@ -1917,9 +1876,7 @@ namespace _vcs_MakePicture
 
             g.DrawRectangle(p, new Rectangle(0, 0, width - 1, height - 1));
 
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private const int ON = 0x00;
@@ -2058,7 +2015,6 @@ namespace _vcs_MakePicture
             g = Graphics.FromImage(bitmap1);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button53_Click(object sender, EventArgs e)
@@ -2135,9 +2091,7 @@ namespace _vcs_MakePicture
 
             g.DrawString("群曜醫電", f, sb, new PointF(0, 50));
 
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button55_Click(object sender, EventArgs e)
@@ -2170,12 +2124,7 @@ namespace _vcs_MakePicture
 
             }
 
-
-
-
-
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button56_Click(object sender, EventArgs e)
@@ -2272,7 +2221,7 @@ namespace _vcs_MakePicture
                     //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
                     //bitmap1.SetPixel(xx, yy, background_color);
                     if (yy < 100)
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (xx%256), 0x00, 0x00));
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (xx % 256), 0x00, 0x00));
                     else if (yy < 200)
                         bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x00, (xx % 256), 0x00));
                     else
@@ -2334,9 +2283,6 @@ namespace _vcs_MakePicture
 
             bitmap1 = GetPart(filename, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
             pictureBox1.Image = bitmap1;
-
-
-
         }
 
         private void button59_Click(object sender, EventArgs e)
@@ -2374,10 +2320,76 @@ namespace _vcs_MakePicture
             g.FillRectangle(sb, new Rectangle(100, 300, 500, 100));
             g.FillRectangle(sb, new Rectangle(300, 100, 100, 500));
 
-            
+            pictureBox1.Image = bitmap1;
+        }
+
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            int dd = 2;
+            p = new Pen(Color.Red, dd);
+            g.DrawRectangle(p, new Rectangle(0 + dd / 2, 0 + dd / 2, W - dd, H - dd));
+
             pictureBox1.Image = bitmap1;
 
+            filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            String filename1 = filename + ".jpg";
 
+            bitmap1.Save(@filename1, ImageFormat.Jpeg);
+
+            richTextBox1.Text += "存檔成功\n";
+            richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+        }
+
+        private void button61_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button62_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button63_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button64_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
 
         }
 

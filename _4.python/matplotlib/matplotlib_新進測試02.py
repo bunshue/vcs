@@ -17,6 +17,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
+'''
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="新進測試 01",
@@ -375,15 +376,6 @@ from matplotlib import pyplot as plt
 x = np.linspace(-np.pi, np.pi, 200, endpoint=True)
 s, c = np.sin(x), np.cos(x)
 
-plt.figure(figsize=(20, 6), dpi=80)
-plt.subplot(1, 2, 1)
-
-# 使用默认设置画出正弦曲线
-plt.plot(x, s)
-# 使用默认设置画出余弦曲线
-plt.plot(x, c)
-
-plt.subplot(1, 2, 2)
 # 移动坐标轴边线
 # 坐标轴总共有四个连线，我们通过设置透明色隐藏上方和右方的边线
 # 通过 set_position() 移动左侧和下侧的边线
@@ -415,7 +407,7 @@ plt.plot(x, s, color="red", linewidth=2.0, linestyle="-")
 plt.plot(x, c, color="blue", linewidth=2.0, linestyle="-")
 
 # 在左上角添加铭牌
-plt.legend(loc='upper left')
+# plt.legend(loc='upper left')
 
 # 在坐标轴上标示相应的点
 t = 2 * np.pi / 3
@@ -522,7 +514,7 @@ def plt_contour():
     plt.subplot(1, 2, 2)
 
     plt.contourf(X, Y, f(X, Y), 8, alpha=.75, cmap=plt.cm.hot)
-    C = plt.contour(X, Y, f(X, Y), 8, colors='black', linewidth=.5)
+    C = plt.contour(X, Y, f(X, Y), 8, colors='black')
     plt.clabel(C, inline=1, fontsize=10)
 
     plt.xticks(())
@@ -570,6 +562,7 @@ def plt_polar():
     ax.set_yticklabels([])
     
 plt.figure(figsize=(16, 6))
+plt_grid()
 plt_polar()
 plt.tight_layout()
 plt.show()
@@ -698,13 +691,14 @@ plt.grid(color='0.8')   #顯示格線
 
 plt.show()
 
+'''
 print("matplotlib 14 ------------------------------------------------------------")  # 60個
 
 import numpy as np
 from matplotlib import pyplot as plt
 
 ax = np.linspace(0, 20, 100)
-ay = ax*0.5
+ay = ax*0.15
 by = np.sin(ax)
 
 # 產生子圖表，第一個數值為縱軸要有幾張圖，第二個數值為橫軸，第三個數值為排在哪裡
@@ -714,9 +708,9 @@ plt.plot(ax, ay, color='red', linewidth=8.0, linestyle='dotted', label='x0.5')
 plt.plot(ax, by, color='blue', linewidth=2.0, linestyle='-', label='sin')
 # 設定圖例標籤位置 ( best, upper, lower, right,left,center )
 plt.legend(loc='lower center')
-plt.ylim((-5, 10))  # y 軸上下最大和最小區間
+plt.ylim((-3, 3))  # y 軸上下最大和最小區間
 plt.xlim((0, 20))  # y 軸上下最大和最小區間
-plt.yticks([-5, 0, 10], ['min(-5)', '0', 'max(10)'])  # 可以設置座標軸上特定文字
+plt.yticks([-3, 0, 3], ['min(-3)', '0', 'max(3)'])  # 可以設置座標軸上特定文字
 
 xx = plt.gca()
 xx.spines['right'].set_color('none')  # 設置邊框樣式

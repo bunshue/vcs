@@ -103,6 +103,16 @@
             this.button57 = new System.Windows.Forms.Button();
             this.button58 = new System.Windows.Forms.Button();
             this.button59 = new System.Windows.Forms.Button();
+            this.button60 = new System.Windows.Forms.Button();
+            this.button61 = new System.Windows.Forms.Button();
+            this.button62 = new System.Windows.Forms.Button();
+            this.button63 = new System.Windows.Forms.Button();
+            this.button64 = new System.Windows.Forms.Button();
+            this.button65 = new System.Windows.Forms.Button();
+            this.button66 = new System.Windows.Forms.Button();
+            this.button67 = new System.Windows.Forms.Button();
+            this.button68 = new System.Windows.Forms.Button();
+            this.button69 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -708,7 +718,7 @@
             // bt7
             // 
             this.bt7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt7.Location = new System.Drawing.Point(448, 18);
+            this.bt7.Location = new System.Drawing.Point(436, 21);
             this.bt7.Name = "bt7";
             this.bt7.Size = new System.Drawing.Size(60, 60);
             this.bt7.TabIndex = 58;
@@ -717,7 +727,7 @@
             // 
             // bt5
             // 
-            this.bt5.Location = new System.Drawing.Point(336, 18);
+            this.bt5.Location = new System.Drawing.Point(313, 21);
             this.bt5.Name = "bt5";
             this.bt5.Size = new System.Drawing.Size(60, 60);
             this.bt5.TabIndex = 57;
@@ -728,7 +738,7 @@
             // bt6
             // 
             this.bt6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt6.Location = new System.Drawing.Point(382, 18);
+            this.bt6.Location = new System.Drawing.Point(374, 21);
             this.bt6.Name = "bt6";
             this.bt6.Size = new System.Drawing.Size(60, 60);
             this.bt6.TabIndex = 56;
@@ -739,7 +749,7 @@
             // bt4
             // 
             this.bt4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt4.Location = new System.Drawing.Point(270, 18);
+            this.bt4.Location = new System.Drawing.Point(253, 21);
             this.bt4.Name = "bt4";
             this.bt4.Size = new System.Drawing.Size(60, 60);
             this.bt4.TabIndex = 55;
@@ -749,7 +759,7 @@
             // 
             // bt2
             // 
-            this.bt2.Location = new System.Drawing.Point(138, 21);
+            this.bt2.Location = new System.Drawing.Point(129, 21);
             this.bt2.Name = "bt2";
             this.bt2.Size = new System.Drawing.Size(60, 60);
             this.bt2.TabIndex = 54;
@@ -760,7 +770,7 @@
             // bt3
             // 
             this.bt3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt3.Location = new System.Drawing.Point(204, 21);
+            this.bt3.Location = new System.Drawing.Point(193, 21);
             this.bt3.Name = "bt3";
             this.bt3.Size = new System.Drawing.Size(60, 60);
             this.bt3.TabIndex = 54;
@@ -772,7 +782,7 @@
             // 
             this.bt1.BackgroundImage = global::_vcs_MakePicture.Properties.Resources.save;
             this.bt1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt1.Location = new System.Drawing.Point(72, 21);
+            this.bt1.Location = new System.Drawing.Point(67, 21);
             this.bt1.Name = "bt1";
             this.bt1.Size = new System.Drawing.Size(60, 60);
             this.bt1.TabIndex = 54;
@@ -898,11 +908,122 @@
             this.button59.UseVisualStyleBackColor = true;
             this.button59.Click += new System.EventHandler(this.button59_Click);
             // 
+            // button60
+            // 
+            this.button60.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button60.Location = new System.Drawing.Point(555, 518);
+            this.button60.Name = "button60";
+            this.button60.Size = new System.Drawing.Size(60, 60);
+            this.button60.TabIndex = 64;
+            this.button60.Text = "加邊框";
+            this.button60.UseVisualStyleBackColor = true;
+            this.button60.Click += new System.EventHandler(this.button60_Click);
+            // 
+            // button61
+            // 
+            this.button61.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button61.Location = new System.Drawing.Point(621, 518);
+            this.button61.Name = "button61";
+            this.button61.Size = new System.Drawing.Size(60, 60);
+            this.button61.TabIndex = 65;
+            this.button61.UseVisualStyleBackColor = true;
+            this.button61.Click += new System.EventHandler(this.button61_Click);
+            // 
+            // button62
+            // 
+            this.button62.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button62.Location = new System.Drawing.Point(688, 518);
+            this.button62.Name = "button62";
+            this.button62.Size = new System.Drawing.Size(60, 60);
+            this.button62.TabIndex = 66;
+            this.button62.UseVisualStyleBackColor = true;
+            this.button62.Click += new System.EventHandler(this.button62_Click);
+            // 
+            // button63
+            // 
+            this.button63.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button63.Location = new System.Drawing.Point(754, 518);
+            this.button63.Name = "button63";
+            this.button63.Size = new System.Drawing.Size(60, 60);
+            this.button63.TabIndex = 67;
+            this.button63.UseVisualStyleBackColor = true;
+            this.button63.Click += new System.EventHandler(this.button63_Click);
+            // 
+            // button64
+            // 
+            this.button64.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button64.Location = new System.Drawing.Point(820, 518);
+            this.button64.Name = "button64";
+            this.button64.Size = new System.Drawing.Size(60, 60);
+            this.button64.TabIndex = 68;
+            this.button64.UseVisualStyleBackColor = true;
+            this.button64.Click += new System.EventHandler(this.button64_Click);
+            // 
+            // button65
+            // 
+            this.button65.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button65.Location = new System.Drawing.Point(887, 518);
+            this.button65.Name = "button65";
+            this.button65.Size = new System.Drawing.Size(60, 60);
+            this.button65.TabIndex = 69;
+            this.button65.UseVisualStyleBackColor = true;
+            this.button65.Click += new System.EventHandler(this.button65_Click);
+            // 
+            // button66
+            // 
+            this.button66.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button66.Location = new System.Drawing.Point(953, 518);
+            this.button66.Name = "button66";
+            this.button66.Size = new System.Drawing.Size(60, 60);
+            this.button66.TabIndex = 70;
+            this.button66.UseVisualStyleBackColor = true;
+            this.button66.Click += new System.EventHandler(this.button66_Click);
+            // 
+            // button67
+            // 
+            this.button67.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button67.Location = new System.Drawing.Point(1019, 518);
+            this.button67.Name = "button67";
+            this.button67.Size = new System.Drawing.Size(60, 60);
+            this.button67.TabIndex = 71;
+            this.button67.UseVisualStyleBackColor = true;
+            this.button67.Click += new System.EventHandler(this.button67_Click);
+            // 
+            // button68
+            // 
+            this.button68.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button68.Location = new System.Drawing.Point(1085, 518);
+            this.button68.Name = "button68";
+            this.button68.Size = new System.Drawing.Size(60, 60);
+            this.button68.TabIndex = 72;
+            this.button68.UseVisualStyleBackColor = true;
+            this.button68.Click += new System.EventHandler(this.button68_Click);
+            // 
+            // button69
+            // 
+            this.button69.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button69.Location = new System.Drawing.Point(1151, 518);
+            this.button69.Name = "button69";
+            this.button69.Size = new System.Drawing.Size(60, 60);
+            this.button69.TabIndex = 73;
+            this.button69.UseVisualStyleBackColor = true;
+            this.button69.Click += new System.EventHandler(this.button69_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1485, 848);
+            this.Controls.Add(this.button69);
+            this.Controls.Add(this.button68);
+            this.Controls.Add(this.button67);
+            this.Controls.Add(this.button66);
+            this.Controls.Add(this.button65);
+            this.Controls.Add(this.button64);
+            this.Controls.Add(this.button63);
+            this.Controls.Add(this.button62);
+            this.Controls.Add(this.button61);
+            this.Controls.Add(this.button60);
             this.Controls.Add(this.button59);
             this.Controls.Add(this.button58);
             this.Controls.Add(this.button57);
@@ -1052,6 +1173,16 @@
         private System.Windows.Forms.Button button57;
         private System.Windows.Forms.Button button58;
         private System.Windows.Forms.Button button59;
+        private System.Windows.Forms.Button button60;
+        private System.Windows.Forms.Button button61;
+        private System.Windows.Forms.Button button62;
+        private System.Windows.Forms.Button button63;
+        private System.Windows.Forms.Button button64;
+        private System.Windows.Forms.Button button65;
+        private System.Windows.Forms.Button button66;
+        private System.Windows.Forms.Button button67;
+        private System.Windows.Forms.Button button68;
+        private System.Windows.Forms.Button button69;
     }
 }
 

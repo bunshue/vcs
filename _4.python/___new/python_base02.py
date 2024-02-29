@@ -4,7 +4,7 @@ import time
 import random
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 show = "不存在，可能檔案或路徑有誤"
@@ -750,12 +750,9 @@ fnShowResult()  # 印出查詢的健保特約機構口罩剩餘數量明細資�
 
 print("------------------------------------------------------------")  # 60個
 
-''' many
-"""
 
-下載很多圖檔  OK many
-
-"""
+""" OK many
+#下載很多圖檔  OK many
 
 import requests, json, os, shutil, sys  # 引用相關套件
 
@@ -889,9 +886,8 @@ fw.close()
 #os.system(html_filename)  # 開啟網頁
 print("%s 網頁建置完成" % (html_filename))
 
-sys.exit()
+"""
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 # 引用相關套件
@@ -930,11 +926,11 @@ else:
     # 其餘狀況則顯示錯誤或無農業休閒區
     print("輸出錯誤或是此地沒有旅遊區")
 
+'''
 
 print("------------------------------------------------------------")  # 60個
 
-import requests, json, os  # 引用相關套件
-import matplotlib.pyplot as plt  # 圖表使用套件
+import requests, json
 
 # 指定url變數為全國休閒農業區旅遊資訊所提供的json檔資料網址
 url = "https://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvAttractions.aspx"
@@ -955,22 +951,15 @@ for city in set(listAllCity):  # 使用set()移除listAllCity串列中重複的�
     print(city, "地區有", listAllCity.count(city), "個農業區")
     listCity += [city]
     listCount += [listAllCity.count(city)]
-# 繪製柱狀圖
-font = {"family": "DFKai-SB"}  # 設定柱狀圖可以顯示中文
-plt.rc("font", **font)
-plt.barh(listCity, listCount, label="農業區")  # 橫向柱狀圖串列數據設定
-plt.title("各縣市農場數量")  # 柱狀圖名稱
-plt.xlim(0, 60)  # X軸範圍0~60
-plt.xlabel("數量")  # X軸名稱
-plt.ylabel("縣市")  # Y軸名稱
-for y, x in enumerate(listCount):  # 使用迴圈讓柱狀末端顯示各縣市農業區總數
-    plt.text(x, y, "%s" % x, ha="center")
-plt.legend()  # 圖例(柱狀圖)說明
-plt.grid(True)  # 顯示格線
-plt.show()  # 顯示繪圖結果
+
+print('縣市 :', listCity)
+print()
+print('數量 :', listCount)
+print()
 
 print("------------------------------------------------------------")  # 60個
 
+sys.exit()
 
 # 注意，本範例會隨著網站更新而導致無法爬文，若有問題可來信討論
 

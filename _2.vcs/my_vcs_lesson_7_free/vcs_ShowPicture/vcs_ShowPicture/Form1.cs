@@ -50,8 +50,6 @@ namespace vcs_ShowPicture
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Visible = false;
-
             int operation_mode = Properties.Settings.Default.operation_mode;
 
             if ((operation_mode == 0) || (operation_mode == 2))
@@ -126,6 +124,12 @@ namespace vcs_ShowPicture
             {
                 WindowState = FormWindowState.Maximized;
             }
+            else if (flag_operation_mode == MODE_2)
+            {
+                this.Size = new Size(640, 480);
+                WindowState = FormWindowState.Normal;
+
+            }
             TopMost = true;
             KeyPreview = true;
 
@@ -146,7 +150,14 @@ namespace vcs_ShowPicture
             }
             else
             {
-                //this.WindowState = FormWindowState.Maximized;
+                if (flag_operation_mode == MODE_0)
+                {
+                    this.WindowState = FormWindowState.Maximized;
+                }
+                else if (flag_operation_mode == MODE_0)
+                {
+                    WindowState = FormWindowState.Normal;
+                }
             }
             timer1.Enabled = true;
         }
@@ -245,9 +256,6 @@ namespace vcs_ShowPicture
 
             rtb.Text += "b(" + W.ToString() + ", " + H.ToString() + ")-(" + w.ToString() + ", " + h.ToString() + ")\n";
 
-            Graphics g = this.CreateGraphics();
-            Random r = new Random();
-
             rtb.Text += "c(" + (W - w).ToString() + ", " + (H - h).ToString() + "\n";
 
             if (w > W)
@@ -262,6 +270,8 @@ namespace vcs_ShowPicture
 
             if (flag_operation_mode == MODE_0)
             {
+                Graphics g = this.CreateGraphics();
+                Random r = new Random();
                 int x_st = r.Next(0, W - w);
                 int y_st = r.Next(0, H - h);
                 //Point ulCorner = new Point(x_st, y_st);
@@ -276,6 +286,9 @@ namespace vcs_ShowPicture
             }
             else if (flag_operation_mode == MODE_2)
             {
+                this.Size = new Size(w, h);
+                Graphics g = this.CreateGraphics();
+                //g.Clear(Color.Pink);
                 int x_st = 0;
                 int y_st = 0;
                 //Point ulCorner = new Point(x_st, y_st);
@@ -291,7 +304,6 @@ namespace vcs_ShowPicture
                 this.Size = new Size(w, h);
                 this.Location = new Point(W - w, (H - h) / 2);
             }
-            this.Visible = true;
             image.Dispose();
         }
 

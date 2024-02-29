@@ -33,9 +33,11 @@ image = np.zeros((H, W, 3), dtype = np.uint8)
 
 image[:] = (128, 128, 128)  #將所有點著色
 
+"""
 #有底圖作畫
 filename = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
 image = cv2.imread(filename)	#讀取本機圖片
+"""
 
 #-----------------------------------------------------------------------------
 #cv2.namedWindow("plot")
