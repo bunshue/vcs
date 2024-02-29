@@ -352,8 +352,9 @@ print('------------------------------------------------------------')	#60個
 
 print("------------------------------------------------------------")  # 60個
 
-infname = 'data/RnJ.txt'
-infile = open(infname, 'r')
+filename = 'C:/_git/vcs/_4.python/_data/Romeo&Juliet.txt'
+
+infile = open(filename, 'r')
 
 count = 0
 for line in infile:
@@ -395,9 +396,9 @@ doOutput(outfname, list1)
 print("------------------------------------------------------------")  # 60個
 
 """
-infname = 'myfile.txt'
-inf = open(infname, 'r')
-outfname = infname[:-4]+'2.txt'
+filename = 'myfile.txt'
+inf = open(filename, 'r')
+outfname = filename[:-4]+'2.txt'
 outf = open(outfname, 'w')
 
 for line in inf:           # 讀進來的line字串是有包含檔案內的換行字元哦！
@@ -410,8 +411,8 @@ outf.close()
 
 print("------------------------------------------------------------")  # 60個
 
-infname = 'data/en-us2.log'
-infile = open(infname, 'r')
+filename = 'data/en-us2.log'
+infile = open(filename, 'r')
 
 # 前50行
 count = 0
@@ -427,8 +428,9 @@ infile.close()
 print("------------------------------------------------------------")  # 60個
 
 """ many
-infname = 'data/RnJ.txt'
-infile = open(infname, 'r')
+
+filename = 'C:/_git/vcs/_4.python/_data/Romeo&Juliet.txt'
+infile = open(filename, 'r')
 
 count = 0
 str1 = infile.readline()
@@ -469,8 +471,8 @@ def b4_2_int(bytes1):
 def b2_2_int(bytes1):
     return (bytes1[0] | bytes1[1]<<8)
 
-infname = 'data/Medrust3.bmp'
-infile = open(infname, 'rb')
+filename = 'data/Medrust3.bmp'
+infile = open(filename, 'rb')
 
 # 'B' 'M'
 b2 = infile.read(2)
@@ -845,8 +847,9 @@ def processString(str1):
     slist2 = [s for s in slist if len(s)>1 or s=='a' or s=='i']
     return slist2
 
-infname = 'data/RnJ2.txt'
-infile = open(infname, 'rt', encoding='utf-8')
+filename = 'C:/_git/vcs/_4.python/_data/Romeo&Juliet.txt'
+
+infile = open(filename, 'rt', encoding='utf-8')
 
 freq = {}
 for line in infile:
@@ -890,8 +893,8 @@ def b2_2_int(b2):
     ii = b2[0] | b2[1]<<8
     return ii
 
-infname = 'data/Lenna.bmp'       # 786554 bytes, 512x512
-infile = open(infname, 'rb')
+filename = 'data/Lenna.bmp'       # 786554 bytes, 512x512
+infile = open(filename, 'rb')
 
 # 標頭識別碼：'B'和'M'
 b2 = infile.read(2)
@@ -925,10 +928,10 @@ infile.close()
 
 print("------------------------------------------------------------")  # 60個
 
-infname = 'data/DatingTestSet.txt'
+filename = 'data/DatingTestSet.txt'
 stat = {}
 tags = ['largeDoses', 'smallDoses', 'didntLike']
-with open(infname, 'rt', encoding='utf-8') as inf:
+with open(filename, 'rt', encoding='utf-8') as inf:
     for line in inf:
         slist = line.strip().split('\t')
         try:
