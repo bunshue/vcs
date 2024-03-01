@@ -4542,7 +4542,646 @@ print(e)
 print("------------------------------------------------------------")  # 60個
 
 
+
+
+b1 = 1
+b2 = 3
+print(f"{b1} / {b2} = {round(b1/b2,3)}")  # 使用 round 四捨五入到小數點三位
+print(f"{b2} / {b1} = {round(b2/b1,3)}")
+
 print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+#cc = np.random.randint(3, 5)
+
+print('亂數分佈二維陣列')
+cc = np.random.rand(3, 5)
+print(cc)
+
+print('常態分佈二維陣列')
+cc = np.random.randn(3, 5)
+print(cc)
+
+
+print("------------------------------------------------------------")  # 60個
+
+import random, time
+
+numberOfDice = 10
+
+print('一次丟 ', numberOfDice, '個骰子, 丟100萬次')
+
+# Set up a dictionary to store the results of each dice roll:
+results = {}
+for i in range(numberOfDice, (numberOfDice * 6) + 1):
+    results[i] = 0
+
+# Simulate dice rolls:
+print('Simulating 1,000,000 rolls of {} dice...'.format(numberOfDice))
+lastPrintTime = time.time()
+for i in range(1000000):
+    if time.time() > lastPrintTime + 1:
+        print('{}% done...'.format(round(i / 10000, 1)))
+        lastPrintTime = time.time()
+
+    total = 0
+    for j in range(numberOfDice):
+        total = total + random.randint(1, 6)
+    results[total] = results[total] + 1
+
+# Display results:
+print('TOTAL - ROLLS - PERCENTAGE')
+for i in range(numberOfDice, (numberOfDice * 6) + 1):
+    roll = results[i]
+    percentage = round(results[i] / 10000, 1)
+    print('  {} - {} rolls - {}%'.format(i, roll, percentage))
+
+print('------------------------------------------------------------')	#60個
+
+v4 = int("11", 16) # 17, base 16
+print(v4)
+v8 = float("2.7E-2") # 0.027
+print(v8)
+
+print('------------------------------------------------------------')	#60個
+
+a=4
+b=2.2
+
+print("a="+str(a))
+print("a=%d" % a)
+print("a="+str(a)+" b="+str(b))
+print("a=%d b=%f" % (a,b))
+print("a=%d b=%.1f" % (a,b))
+
+print('------------------------------------------------------------')	#60個
+
+try:            #python 3.x
+   name= "豬八戒"
+   print(" 你好! " + name)
+except:         #python 2.x
+   name= raw_input("名字:").decode("utf-8")
+   nameutf8 = unicode(name).encode('utf-8')
+   print(" 你好! " + nameutf8)
+
+print('------------------------------------------------------------')	#60個
+
+list1 = [1,2,3,4]
+list1=[x*2 for x in list1 if x % 2==0]
+print(list1)
+
+list1 = [1,2,3,4]
+list1=[x for x in list1 if x>=3]
+print(list1)
+
+list1 = [59,60,70,80]
+list1=[x**2 for x in list1 if x<60]
+print(list1)
+
+list1 = [20,30,50,80]
+list1=[x for x in list1 if (x>=30 and x<=50)]
+print(list1)   # 30,50
+
+print('------------------------------------------------------------')	#60個
+
+import collections
+
+list1 = [10, 30, 10, 50, 40, 20, 30, 20, 40, 20, 10, 50, 10]
+freqDict = collections.Counter(list1)
+print(freqDict)
+
+print("------------------------------------------------------------")  # 60個
+
+import string
+
+# 北美獨立宣言
+str1 = 'Resolved: That these United Colonies are, and of right ought to be, '+ \
+        'free and independent States, that they are absolved from all allegiance '+ \
+        'to the British Crown, and that all political connection between them and '+ \
+        'the State of Great Britain is, and ought to be, totally dissolved.'
+# 先一律轉小寫
+str2 = str1.lower()
+
+charSet = set(string.ascii_lowercase)
+freqDict = {}
+for ch in str2:
+    # 判斷如果不在ASCII小寫字母集，則略過
+    if not ch in charSet:
+        continue
+    freqDict[ch] = freqDict.get(ch, 0)+1
+
+print(freqDict)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+#可以拿來作統計常態分佈用
+
+scores = [90, 59, 78, 71, 39, 0, 19, 85, 77, 84, 91, 98, 38, 66, 65, 88, 63, 85, 18, 0]
+freq = [0]*5
+for score in scores:
+    if score<20:
+        freq[0] += 1
+    elif score<40:
+        freq[1] += 1
+    elif score<60:
+        freq[2] += 1
+    elif score<80:
+        freq[3] += 1
+    else:
+        freq[4] += 1
+print('人數分佈頻率:', freq)
+
+
+print("------------------------------------------------------------")  # 60個
+
+def wait_for_user_interrupt():
+    while True:
+        time.sleep(1)
+        print('無限迴圈, 按 Ctrl + C 離開')
+
+try:
+    wait_for_user_interrupt()
+except KeyboardInterrupt:
+    sys.exit()  # When Ctrl-C is pressed, end the program.
+
+print("------------------------------------------------------------")  # 60個
+
+import bext
+
+bext.fg('yellow')
+bext.clear()
+
+# Draw the quit message:
+bext.goto(0, 0)
+print('Ctrl-C to quit.', end='')
+
+print("------------------------------------------------------------")  # 60個
+
+
+import sys
+import time
+
+SAND = chr(9617)
+WALL = chr(9608)
+
+print(WALL, end='')
+print(' ', end='')  # Clear the old position.
+print(SAND, end='')
+print(' ', end='')  # Clear the old position.
+
+print(WALL, end='')
+print(' ', end='')  # Clear the old position.
+print(SAND, end='')
+print(' ', end='')  # Clear the old position.
+
+print(WALL, end='')
+print(' ', end='')  # Clear the old position.
+print(SAND, end='')
+print(' ', end='')  # Clear the old position.
+
+print(WALL, end='')
+print(' ', end='')  # Clear the old position.
+print(SAND, end='')
+print(' ', end='')  # Clear the old position.
+
+
+print('enumerate的用法')
+allSand = list('ABCD')
+
+for i, sand in enumerate(allSand):
+    print(i, sand)
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+today = datetime.date.today()
+print('今天的日期 :', today)
+
+print("------------------------------------------------------------")  # 60個
+
+print("enumerate() 一個串列")
+
+animals = ['鼠', '牛', '虎', '兔']
+
+print('用 for')
+for _ in enumerate(animals):
+    print(_)
+
+print('用 list')
+print(list(enumerate(animals)))
+
+print('用 unpacking 取出內容')
+
+for index, ani in enumerate(animals):
+    print(index, ani)
+
+print("------------------------------------------------------------")  # 60個
+
+print('字元相關的兩個內建函式')
+
+print('字元轉數值')
+cc = ord('豬')
+print(cc)
+
+print('數值轉字元')
+nn = 35948 + 5
+cc = chr(nn)
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+#lambda匿名函數
+
+# List 含有 Tuple
+student = [
+    ("Eugene", 1989, "Taipei"),
+    ("Davie", 1993, "Kaohsiung"),
+    ("Michelle", 1999, "Yilan"),
+    ("Peter", 1988, "Hsinchu"),
+    ("Connie", 1997, "Pingtung"),
+]
+
+# 定義sort()方法參數key
+na = lambda item: item[0]
+student.sort(key=na)
+print("依名字排序：")
+for name in student:
+    print("{:6s},{}, {:10s}".format(*name))
+
+# 直接在sort()方法帶入lamdba()函式
+student.sort(key=lambda item: item[2], reverse=True)
+print("依出生地遞減排序：")
+for name in student:
+    print("{:6s},{}, {:10s}".format(*name))
+
+print("------------------------------------------------------------")  # 60個
+
+print('內建函式dir()檢視目前的名稱空間')
+print(dir())
+
+print()
+
+import qrcode
+print(dir())
+
+print()
+
+#看單一模組的函式
+import math
+print(dir(math))
+print()
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+print(sys.path) #查詢模組路徑
+
+print('加入路徑')
+
+foldername = 'C:/_git/vcs/_1.data/______test_files5'
+
+sys.path.append(foldername)
+
+print(sys.path) #查詢模組路徑
+
+print("------------------------------------------------------------")  # 60個
+
+print('使用自定義模組')
+import sys
+
+foldername = 'C:/_git/vcs/_4.python/import_module'
+sys.path.append(foldername)
+
+import module_my  #引用後, 出現 __pycache__
+
+cc = module_my.numRand2(14, 52)
+print(cc)
+
+print(module_my.__name__)
+
+print(__name__)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+size = 25
+
+for i in range(size):
+    for j in range(size):
+        if i % 2 == 1 or j % 2 == 1:
+            print('■', end='')
+        else:
+            print('□', end='')
+    print()
+ 
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+list1 = [1, 2, 3, 4, 5, 6, 7]
+# 找最小、最大元素
+print(min(list1), max(list1))
+# 串列長度、串列加總
+print(len(list1), sum(list1))
+
+s0 = slice(0, 2)                 # 切片物件：定義切片範圍
+s1 = slice(1, -1, 2)
+print(list1[s0], list1[s1])      # list1直接帶入切片範圍
+# 結果：([1, 2], [2, 4, 6])
+
+print("------------------------------------------------------------")  # 60個
+
+fset = frozenset(['a', 'b', 'c'])
+print(fset)           # frozenset({'a', 'b', 'c'})
+
+#fset.remove('a')      # 不能修改，AttributeError
+# frozenset根本沒有remove()可用！
+
+print("------------------------------------------------------------")  # 60個
+
+keys = ('name', 'age', 'job')
+values = ('Amy', 25, 'writer')
+dic1 = dict(zip(keys, values))      # zip真好用！
+print(dic1)
+# {'name': 'Amy', 'age': 25, 'job': 'writer'}
+
+
+print("------------------------------------------------------------")  # 60個
+
+names = ['Amy', 'Bob', 'Cathy']
+scores = [70, 92, 85]
+list1 = list(enumerate(zip(names, scores)))
+# [(0, ('Amy', 70)), (1, ('Bob', 92)), (2, ('Cathy', 85))]
+for item in list1:
+    print(item[0], item[1][0], item[1][1])
+
+
+print(list(zip(('a', 'b', 'c'), (30, 41, 52))))
+# [('a', 30), ('b', 41), ('c', 52)]
+
+
+print(list(enumerate(['a', 'b', 'c'])))  
+# [(0, 'a'), (1, 'b'), (2, 'c')]
+    
+print("------------------------------------------------------------")  # 60個
+
+list1 = [30, 45, 1024, 2500, 699, 126]
+
+# 過濾出小於1000元的消費
+list2 = [num for num in list1 if num<1000]
+sum1 = sum(list2)        # 用sum做消費加總
+avg1 = sum1/len(list2)   # 用len取消費筆數
+
+print(sum1)
+print(avg1)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+system
+print(sys.builtin_module_names)
+
+
+for fullname in sys.modules:
+    module = sys.modules[fullname]
+    print(fullname, module)
+
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+import glob
+
+jpg = glob.glob("./demo/*.[jJ][pP][gG]")  # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
+print(jpg)
+"""
+['./demo/pic-001.jpg', './demo/pic-002.jpg', './demo/pic-003.jpg',
+'./demo/pic-004.jpg', './demo/pic-005.jpg', './demo/pic-006.jpg',
+'./demo/pic-007.jpg', './demo/pic-008.jpg', './demo/pic-009.jpg',
+'./demo/pic-010.jpg']
+"""
+
+
+
+
+
+import glob
+
+images = glob.glob("./demo/*")
+print(images)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+import time
+
+n = 20  # 設定進度條總長
+for i in range(n + 1):
+    print(f'\r[{"█"*i}{" "*(n-i)}] {i*100/n}%', end="")  # 輸出不換行的內容
+    time.sleep(0.5)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+h = float(input("請輸入身高(cm)：")) / 100
+w = float(input("請輸入體重(kg)："))
+bmi = round(w / (h * h), 3)  # 使用 round 四捨五入到小數點三位
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print('分割字串')
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+ss = filename.split("/")
+print(filename)
+print(len(ss))
+for _ in ss:
+    print(_)
+
+
+
+players = ["X", "O"]
+current_player = players[0]
+current_player = players[(players.index(current_player) + 1) % 2]
+print(current_player)
+current_player = players[(players.index(current_player) + 1) % 2]
+print(current_player)
+current_player = players[(players.index(current_player) + 1) % 2]
+print(current_player)
+current_player = players[(players.index(current_player) + 1) % 2]
+print(current_player)
+current_player = players[(players.index(current_player) + 1) % 2]
+print(current_player)
+
+print("------------------------------------------------------------")  # 60個
+
+print('亂數不重複 範圍 個數')
+num = random.sample(range(1, 20), 10)
+
+print(type(num))
+print(num)
+print('排序')
+
+num.sort()
+print(num)
+
+print("------------------------------------------------------------")  # 60個
+
+print('測試不定引數的函式')
+
+#定義函式
+def funtionTest(*number):
+    print('你傳入了', len(number), '個引數')
+    outcome = 1
+    for item in number:
+        outcome *= item
+    return outcome
+
+#呼叫函式
+print('呼叫函式並傳入 1 個引數 :', funtionTest(7))
+print('呼叫函式並傳入 2 個引數 :', funtionTest(12, 3))
+print('呼叫函式並傳入 4 個引數 :', funtionTest(3, 5, 9, 14))
+
+print("------------------------------------------------------------")  # 60個
+
+print('print語法')
+
+for x in range(1, 10):
+    for y in range(1, 10):
+        print("{0}*{1}={2: ^2}".format(y, x, x * y), end=" ")
+    print()
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+验证输入用户名和QQ号是否有效并给出对应的提示信息
+
+要求：
+用户名必须由字母、数字或下划线构成且长度在6~20个字符之间
+QQ号是5~12的数字且首位不能为0
+"""
+
+import re
+
+
+#username = input('请输入用户名: ')
+username = "lion_mouse"
+m1 = re.match(r'^[0-9a-zA-Z_]{6,20}$', username)
+if not m1:
+    print('请输入有效的用户名.')
+
+#qq = input('请输入QQ号: ')
+qq = "12345678"
+m2 = re.match(r'^[1-9]\d{4,11}$', qq)
+if not m2:
+    print('请输入有效的QQ号.')
+if m1 and m2:
+    print('你输入的信息是有效的!')
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 北美獨立宣言
+str1 = 'Resolved: That these United Colonies are, and of right ought to be, '+ \
+        'free and independent States, that they are absolved from all allegiance '+ \
+        'to the British Crown, and that all political connection between them and '+ \
+        'the State of Great Britain is, and ought to be, totally dissolved.'
+
+seplist = [':', ',', '.']
+for i in range(len(seplist)-1):
+    str1 = str1.replace(seplist[i], seplist[-1])
+
+slist = str1.split(seplist[-1])
+
+with open('tmp_resolution.txt', 'wt') as outf:
+    for s in slist:
+        outf.write(s.strip()+'\n')
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+import os
+
+# 我們指定本機的/tmp暫存資料夾來試試
+path = '/tmp/'
+stat = {}
+for item in os.walk(path):
+    # item[0]是路徑名稱，item[2]是檔案清單
+    for fname in item[2]:
+        # 取出檔名完整路徑
+        ffname = os.path.join(item[0], fname)
+        # 取出檔案大小
+        size = os.path.getsize(ffname)
+        # 取出檔案副檔名，統一轉小寫並去除開頭的'.'字元
+        ext = os.path.splitext(ffname)[-1].lower().replace('.', '')
+        # 如果副檔名是空的，跳過
+        if ext.strip()=='':
+            continue
+        # 進行累計
+        stat[ext] = stat.get(ext, 0)+size
+
+for k, v in stat.items():
+    print(k, v)
+"""
+print("------------------------------------------------------------")  # 60個
+
+# 九九乘法表就應該是2..9而不是1..9哦！
+set99 = set()
+outf = open('tmp_99.txt', 'wt')
+for i in range(2, 9+1):
+    for j in range(1, 9+1):
+        prod = i*j
+        # 判斷乘積數字是否出現過
+        if prod not in set99:
+            outf.write(str(prod)+' ')
+            # 沒出現過，加入set99
+            set99.add(prod)
+    outf.write('\n')
+outf.close()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

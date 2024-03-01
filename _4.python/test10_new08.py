@@ -5,64 +5,6 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-# 北美獨立宣言
-str1 = 'Resolved: That these United Colonies are, and of right ought to be, '+ \
-        'free and independent States, that they are absolved from all allegiance '+ \
-        'to the British Crown, and that all political connection between them and '+ \
-        'the State of Great Britain is, and ought to be, totally dissolved.'
-
-seplist = [':', ',', '.']
-for i in range(len(seplist)-1):
-    str1 = str1.replace(seplist[i], seplist[-1])
-
-slist = str1.split(seplist[-1])
-
-with open('tmp_resolution.txt', 'wt') as outf:
-    for s in slist:
-        outf.write(s.strip()+'\n')
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-import os
-
-# 我們指定本機的/tmp暫存資料夾來試試
-path = '/tmp/'
-stat = {}
-for item in os.walk(path):
-    # item[0]是路徑名稱，item[2]是檔案清單
-    for fname in item[2]:
-        # 取出檔名完整路徑
-        ffname = os.path.join(item[0], fname)
-        # 取出檔案大小
-        size = os.path.getsize(ffname)
-        # 取出檔案副檔名，統一轉小寫並去除開頭的'.'字元
-        ext = os.path.splitext(ffname)[-1].lower().replace('.', '')
-        # 如果副檔名是空的，跳過
-        if ext.strip()=='':
-            continue
-        # 進行累計
-        stat[ext] = stat.get(ext, 0)+size
-
-for k, v in stat.items():
-    print(k, v)
-"""
-print("------------------------------------------------------------")  # 60個
-
-# 九九乘法表就應該是2..9而不是1..9哦！
-set99 = set()
-outf = open('tmp_99.txt', 'wt')
-for i in range(2, 9+1):
-    for j in range(1, 9+1):
-        prod = i*j
-        # 判斷乘積數字是否出現過
-        if prod not in set99:
-            outf.write(str(prod)+' ')
-            # 沒出現過，加入set99
-            set99.add(prod)
-    outf.write('\n')
-outf.close()
-
 print("------------------------------------------------------------")  # 60個
 
 class Car:
