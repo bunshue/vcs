@@ -287,3 +287,30 @@ my_code.save("tmp_qrcode14")
 
 
 
+
+print("------------------------------------------------------------")  # 60個
+
+print('barcode產生器')
+
+#pip install python-barcode
+
+import barcode
+from barcode.writer import ImageWriter
+
+print(barcode.PROVIDED_BARCODES)
+
+EAN = barcode.get_barcode_class('ean13')
+
+text = '123456789012'   #EAN僅能用數字, 必為12碼
+#存svg檔
+ean = EAN(text)
+ean.save('ean13_barcode') 
+#存png檔
+ean = EAN(text, writer=ImageWriter())
+ean.save('ean13_barcode')
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

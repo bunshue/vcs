@@ -130,17 +130,11 @@ print('------------------------------------------------------------')	#60個
 import keyword
 print(keyword.kwlist)
 
-import keyword
-
 keywordLists = ['as', 'while', 'break', 'sse', 'Python']
 for x in keywordLists:
     print(f"{x:>8s} {keyword.iskeyword(x)}")
 
-print('------------------------------------------------------------')	#60個
 
-import keyword
-
-print(keyword.kwlist)
 
 """ 檢測按鍵
 import keyboard
@@ -319,31 +313,6 @@ print('鍵種類 =', len(inventory))
 
 print('值總和 =', sum(inventory.values()))
 
-import sys
-
-print('------------------------------------------------------------')	#60個
-
-print('barcode產生器')
-
-#pip install python-barcode
-
-import barcode
-from barcode.writer import ImageWriter
-
-print(barcode.PROVIDED_BARCODES)
-
-EAN = barcode.get_barcode_class('ean13')
-
-text = '123456789012'   #EAN僅能用數字, 必為12碼
-#存svg檔
-ean = EAN(text)
-ean.save('ean13_barcode') 
-#存png檔
-ean = EAN(text, writer=ImageWriter())
-ean.save('ean13_barcode')
-
-
-print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 """
@@ -509,36 +478,12 @@ search_pattern = '獅子'
 summary = wikipedia.summary(search_pattern, sentences=1)
 print(summary)
 
-print('------------------------------------------------------------')	#60個
-
-# pip install wikipedia
-
-import wikipedia
-
 wikipedia.set_lang("zh")
 wikipedia.summary("柔道")
 
 # python wiki_sample.py
-
 # python try_sys.py 想查詢的關鍵字
-
 # python wiki_sample_final.py 柔道
-
-print('------------------------------------------------------------')	#60個
-
-import shelve
-
-book = shelve.open("addresses")
-
-book['167'] = ('邱大熊', '0912-345678', '台北市忠孝路1號')
-book['928'] = ('陳小天', '0987-654321', '新竹市中山路2號')
-book.close()
-
-import shelve
-book = shelve.open("addresses")
-
-print(book['167'] )
-book.close()
 
 print('------------------------------------------------------------')	#60個
 
@@ -606,29 +551,6 @@ send2trash.send2trash(filename)
 
 print('------------------------------------------------------------')	#60個
 
-import shelve
-
-with shelve.open('phonebook') as phone:
-    phone['Tom'] = ('Tom', '0912-112112', '台北市')
-    phone['John'] = ('John', '0928-888888', '台中市')
-
-print("------------------------------------------------------------")  # 60個
-
-import shelve
-
-with shelve.open('phonebook') as phone:
-    print(phone['Tom'])
-    print(phone['John'])
-
-print("------------------------------------------------------------")  # 60個
-
-import shelve
-with shelve.open('phonebook') as phone:
-    for name in phone:
-        print(phone[name])
-
-print("------------------------------------------------------------")  # 60個
-
 from deep_translator import GoogleTranslator
 
 # 要翻譯的文本
@@ -646,14 +568,6 @@ print("日文:", translation_ja)
 # 翻譯成韓文
 translation_ko = GoogleTranslator(source='auto', target='ko').translate(text)
 print("韓文:", translation_ko)
-
-print("------------------------------------------------------------")  # 60個
-
-import keyword
-
-keywordLists = ['as', 'while', 'break', 'sse', 'Python']
-for x in keywordLists:
-    print(f"{x:>8s} {keyword.iskeyword(x)}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -739,5 +653,47 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+import shelve
+
+book = shelve.open("addresses")
+
+book['167'] = ('邱大熊', '0912-345678', '台北市忠孝路1號')
+book['928'] = ('陳小天', '0987-654321', '新竹市中山路2號')
+book.close()
+
+print('------------------------------------------------------------')	#60個
+
+import shelve
+book = shelve.open("addresses")
+
+print(book['167'] )
+book.close()
+
+print('------------------------------------------------------------')	#60個
+
+import shelve
+
+with shelve.open('phonebook') as phone:
+    phone['Tom'] = ('Tom', '0912-112112', '台北市')
+    phone['John'] = ('John', '0928-888888', '台中市')
+
+print("------------------------------------------------------------")  # 60個
+
+import shelve
+
+with shelve.open('phonebook') as phone:
+    print(phone['Tom'])
+    print(phone['John'])
+
+print("------------------------------------------------------------")  # 60個
+
+import shelve
+with shelve.open('phonebook') as phone:
+    for name in phone:
+        print(phone[name])
+
 print("------------------------------------------------------------")  # 60個
 
