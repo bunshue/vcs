@@ -18,8 +18,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 import glob
@@ -67,7 +65,7 @@ from PIL import Image
 
 img = Image.open("oxxostudio.jpg")  # 開啟圖片
 img2 = img.resize((200, 200))  # 調整圖片尺寸為 200x200
-img2.save("test.jpg")  # 調整後存檔到 resize 資料夾
+img2.save("tmp_pic01.jpg")  # 調整後存檔到 resize 資料夾
 
 
 print("------------------------------------------------------------")  # 60個
@@ -101,10 +99,10 @@ from PIL import Image, ImageEnhance
 img = Image.open("oxxostudio.jpg")  # 開啟影像
 brightness = ImageEnhance.Brightness(img)  # 設定 img 要加強亮度
 output = brightness.enhance(1.5)  # 提高亮度
-output.save("oxxostudio_b15.jpg")  # 存檔
+output.save("tmp_oxxostudio_b15.jpg")  # 存檔
 
 output = brightness.enhance(0.5)  # 降低亮度
-output.save("oxxostudio_b05.jpg")  # 存檔
+output.save("tmp_oxxostudio_b05.jpg")  # 存檔
 
 
 print("------------------------------------------------------------")  # 60個
@@ -113,7 +111,7 @@ from PIL import Image
 
 img = Image.open("./oxxostudio.jpg")  # 開啟圖片
 img_crop = img.crop((0, 0, 200, 100))  # 裁切圖片
-img_crop.save("./test.jpg")  # 存檔
+img_crop.save("./tmp_pic05.jpg")  # 存檔
 # img_crop.show()  # Colab 不支援直接顯示，如果使用本機環境會開啟圖片檢視器
 
 
@@ -124,7 +122,7 @@ from PIL import Image
 img = Image.open("./oxxostudio.jpg")
 img_r1 = img.rotate(30)  # 旋轉 30 度
 img_r2 = img.rotate(30, expand=1)  # 旋轉 30 度，expand 設定 1
-img_r1.save("./test1.jpg")
+img_r1.save("./tmp_pic06.jpg")
 img_r2.save("./test2.jpg")
 
 print("------------------------------------------------------------")  # 60個
@@ -334,7 +332,7 @@ w, h = img.size  # 讀取圖片長寬
 level = 50  # 設定縮小程度
 img2 = img.resize((int(w / level), int(h / level)))  # 縮小圖片
 img2 = img2.resize((w, h), resample=Image.NEAREST)  # 放大圖片為原始大小
-img2.save("test.jpg")  # 存檔
+img2.save("tmp_pic01.jpg")  # 存檔
 
 print("------------------------------------------------------------")  # 60個
 
@@ -350,7 +348,7 @@ x1, y1 = 60, 60  # 定義選取區域的左上角座標
 x2, y2 = 250, 250  # 定義選取區域的右上角座標
 area = img2.crop((x1, y1, x2, y2))  # 裁切區域
 img.paste(area, (x1, y1))  # 在原本的圖片裡貼上馬賽克區域
-img.save("test.jpg")
+img.save("tmp_pic02.jpg")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -359,7 +357,7 @@ from PIL import Image, ImageFilter
 
 img = Image.open("oxxostudio.jpg")  # 開啟圖片
 output = img.filter(ImageFilter.BLUR)  # 套用基本模糊化
-output.save("output.jpg")
+output.save("tmp_output.jpg")
 # output.show()  # Colab 不支援直接顯示，如果使用本機環境會開啟圖片檢視器
 
 
@@ -370,7 +368,7 @@ from PIL import Image, ImageFilter
 
 img = Image.open("oxxostudio.jpg")
 output = img.filter(ImageFilter.BoxBlur(5))  # 套用 BoxBlur，設定模糊半徑為 5
-output.save("output.jpg")
+output.save("tmp_output.jpg")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -379,7 +377,7 @@ from PIL import Image, ImageFilter
 
 img = Image.open("oxxostudio.jpg")
 output = img.filter(ImageFilter.GaussianBlur(5))  # 套用 GaussianBlur，設定模糊半徑為 5
-output.save("output.jpg")
+output.save("tmp_output.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -399,7 +397,7 @@ from PIL import Image, ImageFilter
 
 img = Image.open("oxxostudio.jpg")  # 開啟圖片
 output = img.filter(ImageFilter.SHARPEN)  # 套用圖片銳利化
-output.save("output.jpg")  # 存檔
+output.save("tmp_output.jpg")  # 存檔
 # output.show()  # Colab 不支援直接顯示，如果使用本機環境會開啟圖片檢視器
 
 
@@ -410,11 +408,9 @@ from PIL import Image, ImageFilter
 img = Image.open("oxxostudio.jpg")
 for i in range(3):
     img = img.filter(ImageFilter.SHARPEN)
-img.save("output.jpg")
-
+img.save("tmp_output.jpg")
 
 print("------------------------------------------------------------")  # 60個
-
 
 from PIL import Image, ImageFilter
 
@@ -429,78 +425,13 @@ print("------------------------------------------------------------")  # 60個
 
 
 from PIL import Image
-import piexif
-
-img = Image.open("./oxxostudio.jpg")  # 使用 PIL Image 開啟圖片
-exif = piexif.load(img.info["exif"])  # 使用 piexif 讀取圖片 Exif 資訊
-print(exif)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-from PIL import Image
-import piexif
-
-img = Image.open("./oxxostudio.jpg")
-exif = piexif.load(img.info["exif"])
-# 建立字典對照表
-info = {
-    "0th": [271, 272, 282, 283, 305, 306, 316],
-    "Exif": [
-        33434,
-        33437,
-        34855,
-        36867,
-        36868,
-        36880,
-        36881,
-        36882,
-        40962,
-        40963,
-        42035,
-        42036,
-    ],
-    "1st": [282, 283],
-    "GPS": [2, 4, 5, 17, 24, 31],
-}
-# 根據對照表，印出照片 exif 裡的資訊 ( 有就印出，沒有就略過 )
-for i in info:
-    for j in info[i]:
-        if j in exif[i]:
-            print(j, ":", exif[i][j])
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-from PIL import Image
-import piexif
-
-img = Image.open("./oxxostudio.jpg")
-exif = piexif.load(img.info["exif"])
-
-exif["0th"][305] = b"OXXO.STUDIO"  # 修改編輯軟體
-exif["0th"][306] = b"2020:01:01 00:00:00"  # 修改編輯時間
-exif["Exif"][36867] = b"2020:01:01 00:00:00"  # 加入檔案建立時間
-exif["Exif"][36868] = b"2020:01:01 00:00:00"  # 加入檔案建立時間
-exif_new = piexif.dump(exif)  # 更新 Exif
-img.save("./iphone-edit.jpg", exif=exif_new)  # 另存新檔並加入 Exif
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-from PIL import Image
 import pytesseract
 
 img = Image.open("english.jpg")
 text = pytesseract.image_to_string(img, lang="eng")
 print(text)
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 from PIL import Image
 import pytesseract
@@ -510,9 +441,6 @@ text = pytesseract.image_to_string(img, lang="chi_tra")
 print(text)
 
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -525,6 +453,7 @@ print('------------------------------------------------------------')	#60個
 
 
 
-print('完成')
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
