@@ -22,10 +22,41 @@ def main():
     path2 = Path.cwd() / 'night_2'
     path3 = Path.cwd() / 'night_1_2_transients'
      
-    for i, _ in enumerate(night1_files[:-1]):  # 用切片語法取出影像，會略過最後一張，也就是負片影像   
-        img1 = cv.imread(str(path1 / night1_files[i]),
-                         cv.IMREAD_GRAYSCALE)
-        img2 = cv.imread(str(path2 / night2_files[i]), cv.IMREAD_GRAYSCALE)
+    for i, _ in enumerate(night1_files[:-1]):  # 用切片語法取出影像，會略過最後一張，也就是負片影像
+        print('aaaaaaaaaa')
+        filename1 = str(path1 / night1_files[i])
+        filename2 = str(path2 / night2_files[i])
+        print(filename1)
+        print(filename2)
+
+        if os.path.exists(filename1) == True:
+            print(filename1, '存在')
+        else:
+            print(filename1, '不存在')
+
+        if os.path.exists(filename2) == True:
+            print(filename2, '存在')
+        else:
+            print(filename2, '不存在')
+        
+        img1 = cv.imread(filename1, cv.IMREAD_GRAYSCALE)
+        img2 = cv.imread(filename2, cv.IMREAD_GRAYSCALE)
+
+        #cv.imshow('Peony', img1)  #顯示圖片
+
+        #filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+        filename = 'C:/_git/vcs/1_bright_transient_left_registered.png'
+        
+        img1 = cv.imread(filename, cv.IMREAD_GRAYSCALE)
+        img2 = cv.imread(filename, cv.IMREAD_GRAYSCALE)
+
+        cv.imshow('Peony', img1)  #顯示圖片
+
+        print(img1.shape)
+        print(img2.shape)
+
+        continue
+
 
         # 比較並顯示差異影像
         diff_imgs1_2 = cv.absdiff(img1, img2)
