@@ -46,9 +46,6 @@ a = random.sample(range(1, 50), 6)
 print(a)  # [9, 39, 10, 8, 25, 43]
 
 
-
-
-
 import random
 
 a = random.randint(1, 99)  # 產生 1～99 的隨機整數
@@ -165,7 +162,6 @@ for j in range(20):  # 使用 20 次的 for 迴圈
 
     id_number = str(local) + str(sex) + nums_str + str(check_num)
     print(id_number)
-
 
 
 print("------------------------------------------------------------")  # 60個

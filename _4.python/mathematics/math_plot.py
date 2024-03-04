@@ -17,7 +17,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'math 集合 1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -145,24 +145,6 @@ plt.scatter(x, y, s = 50, color = (0, 1, 0))    #s是大小 # 綠色
 #第六張圖
 plt.subplot(236)
 
-from random import randint
-
-def dice_generator(times, sides):
-    #處理隨機數
-    for i in range(times):              
-        ranNum = randint(1, sides)              # 產生1-6隨機數
-        dice.append(ranNum)
-          
-times = 10000                                   # 擲骰子次數
-sides = 6                                       # 骰子有幾面
-dice = []                                       # 建立擲骰子的串列
-dice_generator(times, sides)                    # 產生擲骰子的串列
-
-h = plt.hist(dice, sides)                       # 繪製hist圖
-print("bins的y軸 ", h[0])
-print("bins的x軸 ", h[1])
-plt.ylabel('頻率')
-plt.title('測試 10000 次')
 
 plt.show()
 
@@ -171,7 +153,6 @@ print('------------------------------------------------------------')	#60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(num = 'math 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
 
 #第一張圖
 plt.subplot(231)
@@ -239,44 +220,16 @@ plt.title('常態分佈')
 #第四張圖
 plt.subplot(234)
 
-mu = 0                                                  # 平均值
-sigma = 1                                               # 標準差
-s = np.random.randn(10000)                              # 隨機數
-print(s)
-
-count, bins, ignored = plt.hist(s, 30, density=True)    # 直方圖
-# 繪製曲線圖
-plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
-               np.exp( - (bins - mu)**2 / (2 * sigma**2) ),
-         linewidth=2, color='r')
 
 #第五張圖
 plt.subplot(235)
 
-mu = 0                                                  # 均值
-sigma = 1                                               # 標準差
-s = np.random.normal(mu, sigma, 10000)                  # 隨機數
-
-count, bins, ignored = plt.hist(s, 30, density=True)    # 直方圖
-# 繪製曲線圖
-plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
-               np.exp( - (bins - mu)**2 / (2 * sigma**2) ),
-         linewidth=2, color='r')
 
 
 
 #第六張圖
 plt.subplot(236)
 
-import seaborn as sns #海生, 自動把圖畫得比較好看
-
-mu = 0                                                  # 均值
-sigma = 1                                               # 標準差
-s = np.random.normal(mu, sigma, 10000)                  # 隨機數
-
-count, bins, ignored = plt.hist(s, 30, density=True)    # 直方圖
-# 繪製曲線圖
-sns.kdeplot(s)
 
 plt.show()
 
@@ -288,21 +241,10 @@ plt.figure(num = 'math 集合 3', figsize = (20, 15), dpi = 84, facecolor = "whi
 #第一張圖
 plt.subplot(231)
 
-s = np.random.uniform(0.0,5.0,size=250)     # 隨機數
-plt.hist(s, 5)                              # 直方圖
-
 
 #第二張圖
 plt.subplot(232)
 
-import seaborn as sns #海生, 自動把圖畫得比較好看
-
-s = np.random.uniform(size=10000)           # 隨機數
-
-plt.hist(s, 30, density=True)               # 直方圖
-
-# 繪製曲線圖
-sns.kdeplot(s)
 
 
 #第三張圖
@@ -376,7 +318,7 @@ plt.grid()                              # 加格線
 
 plt.show()
 
-'''
+
 print('------------------------------------------------------------')	#60個
 
 import random
@@ -416,6 +358,19 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
 

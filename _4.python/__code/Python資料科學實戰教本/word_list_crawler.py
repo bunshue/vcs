@@ -47,8 +47,9 @@ def web_scraping_bot(urls):
     eng_words = []
     
     for url in urls:
+        print("抓取: " + url + " 網路資料中...")
         file = url.split("/")[-1]
-        print("抓取: " + file + " 網路資料中...")
+        #print("抓取: " + file + " 網路資料中...")
         r = get_resource(url)
         if r.status_code == requests.codes.ok:
             soup = parse_html(r.text)
@@ -61,11 +62,12 @@ def web_scraping_bot(urls):
 
     return eng_words
 
-if __name__ == "__main__":
-    urls = generate_urls(URL, 1, 9)
-    # print(urls)
-    eng_words = web_scraping_bot(urls)
-    for item in eng_words:
-        print(item)
-    save_to_csv(eng_words, "words.csv")
+urls = generate_urls(URL, 1, 5)
+# print(urls)
+eng_words = web_scraping_bot(urls)
+"""
+for item in eng_words:
+    print(item)
+"""
+save_to_csv(eng_words, "tmp_words.csv")
     

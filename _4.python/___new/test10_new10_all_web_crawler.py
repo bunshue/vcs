@@ -177,7 +177,6 @@ for i, game in enumerate(games, 1):
 print("------------------------------------------------------------")  # 60個
 
 
-
 """ many
 import requests
 import os
@@ -673,9 +672,9 @@ for city in set(listAllCity):  # 使用set()移除listAllCity串列中重複的�
     listCity += [city]
     listCount += [listAllCity.count(city)]
 
-print('縣市 :', listCity)
+print("縣市 :", listCity)
 print()
-print('數量 :', listCount)
+print("數量 :", listCount)
 print()
 
 print("------------------------------------------------------------")  # 60個

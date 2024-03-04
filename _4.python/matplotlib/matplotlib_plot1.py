@@ -137,6 +137,31 @@ plt.figure(
 plt.subplot(231)
 
 
+x = np.linspace(-5, 5, 200)
+y = np.sinc(x)
+
+plt.plot(x, y)
+plt.plot(x[y>0], y[y>0], 'o')
+
+#plt.axis('equal')       #軸比例
+#xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
+#plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
+#plt.axis([0.5, 6.5, 15, 35])
+#plt.axes([0.2, 0.2, 0.4, 0.4]) #設定各軸顯示範圍
+
+#設定 x, y 軸座標範圍
+#plt.xlim(0, 30) # 設定 x 軸座標範圍
+#plt.ylim(0, 50) # 設定 y 軸座標範圍
+
+#plt.legend()
+
+print(plt.axis())
+
+#plt.grid(True)  #顯示格線
+plt.grid(color='0.8')   #顯示格線
+
+
+
 
 # 第二張圖
 plt.subplot(232)

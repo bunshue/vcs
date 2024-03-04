@@ -6,7 +6,7 @@ print("------------------------------------------------------------")  # 60個
 
 import csv
 
-fn = 'csvReport.csv'
+fn = 'data/csvReport.csv'
 with open(fn,encoding='utf-8') as csvFile:  # 開啟csv檔案
     csvReader = csv.reader(csvFile)     # 建立Reader物件
     listReport = list(csvReader)        # 將資料轉成串列    
@@ -17,7 +17,7 @@ print("------------------------------------------------------------")  # 60個
 
 import csv
 
-fn = 'csvReport.csv'
+fn = 'data/csvReport.csv'
 with open(fn,encoding='utf-8') as csvFile:  # 開啟csv檔案
     csvReader = csv.reader(csvFile)     # 建立Reader物件
     listReport = list(csvReader)        # 將資料轉成串列    
@@ -30,7 +30,7 @@ print("------------------------------------------------------------")  # 60個
 
 import csv
 
-fn = 'csvPeople.csv'
+fn = 'data/csvPeople.csv'
 with open(fn) as csvFile:                   # 開啟csv檔案
     csvDictReader = csv.DictReader(csvFile) # 讀檔案建立DictReader物件   
     for row in csvDictReader:               # 列出DictReader各列內容
@@ -40,7 +40,7 @@ print("------------------------------------------------------------")  # 60個
 
 import csv
 
-fn = 'csvPeople.csv'
+fn = 'data/csvPeople.csv'
 with open(fn) as csvFile:                   # 開啟csv檔案
     csvDictReader = csv.DictReader(csvFile) # 讀檔案建立DictReader物件   
     for row in csvDictReader:               # 列出DictReader各列內容
@@ -61,7 +61,7 @@ print("------------------------------------------------------------")  # 60個
 
 import csv
 
-infn = 'csvReport.csv'                          # 來源檔案
+infn = 'data/csvReport.csv'                          # 來源檔案
 outfn = 'tmp_02.csv'                           # 目的檔案
 with open(infn,encoding='utf-8') as csvRFile:   # 開啟csv檔案供讀取
     csvReader = csv.reader(csvRFile)            # 讀檔案建立Reader物件
@@ -116,7 +116,7 @@ print("------------------------------------------------------------")  # 60個
 
 import csv
 
-fn = 'TaipeiWeatherJan.csv'
+fn = 'data/TaipeiWeatherJan.csv'
 with open(fn) as csvFile:
     csvReader = csv.reader(csvFile)
     headerRow = next(csvReader)     # 讀取文件下一列
@@ -129,7 +129,7 @@ print("------------------------------------------------------------")  # 60個
 
 import csv
 
-fn = 'TaipeiWeatherJan.csv'
+fn = 'data/TaipeiWeatherJan.csv'
 with open(fn) as csvFile:
     csvReader = csv.reader(csvFile)
     headerRow = next(csvReader)         # 讀取文件下一列
@@ -148,7 +148,7 @@ import csv
 import matplotlib.pyplot as plt
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-fn = 'TaipeiWeatherJan.csv'
+fn = 'data/TaipeiWeatherJan.csv'
 with open(fn) as csvFile:
     csvReader = csv.reader(csvFile)
     headerRow = next(csvReader)             # 讀取文件下一列
@@ -168,7 +168,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-fn = 'TaipeiWeatherJan.csv'
+fn = 'data/TaipeiWeatherJan.csv'
 with open(fn) as csvFile:
     csvReader = csv.reader(csvFile)
     headerRow = next(csvReader)             # 讀取文件下一列
@@ -191,7 +191,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-fn = 'TaipeiWeatherJan.csv'
+fn = 'data/TaipeiWeatherJan.csv'
 with open(fn) as csvFile:
     csvReader = csv.reader(csvFile)
     headerRow = next(csvReader)             # 讀取文件下一列
@@ -215,7 +215,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-fn = 'TaipeiWeatherJan.csv'
+fn = 'data/TaipeiWeatherJan.csv'
 with open(fn) as csvFile:
     csvReader = csv.reader(csvFile)
     headerRow = next(csvReader)             # 讀取文件下一列
@@ -239,7 +239,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-fn = 'TaipeiWeatherJan.csv'
+fn = 'data/TaipeiWeatherJan.csv'
 with open(fn) as csvFile:
     csvReader = csv.reader(csvFile)
     headerRow = next(csvReader)             # 讀取文件下一列
@@ -280,7 +280,7 @@ def convert_tw_date_to_ad(tw_date):
     return f"{year}-{month:02d}-{day:02d}"
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-fn = 'ST43_3479_202310.csv'
+fn = 'data/ST43_3479_202310.csv'
 with open(fn) as csvFile:
     csvReader = csv.reader(csvFile)
     for _ in range(5):                              # 跳過前 5 列
@@ -333,7 +333,7 @@ def convert_tw_date_to_ad(tw_date):
     return f"{year}-{month:02d}-{day:02d}"
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-fn = 'ST43_3479_202310.csv'
+fn = 'data/ST43_3479_202310.csv'
 with open(fn) as csvFile:
     csvReader = csv.reader(csvFile)
     all_rows = list(csvReader)

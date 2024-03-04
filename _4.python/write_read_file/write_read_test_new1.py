@@ -1,22 +1,13 @@
 #各種檔案寫讀範例 新進暫存
 
+import sys
+
 print('------------------------------------------------------------')	#60個
 
-import sys, ast
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores.csv'
-
-scores = dict()
-with open(filename,'r') as fp:
-    filedata = fp.read()
-    #scores = ast.literal_eval(filedata)
-print("以下是{}成績檔的字典型態資料:".format(filename))
 
 print('------------------------------------------------------------')	#60個
 
 """
-import sys
-
 std_data = dict()
 with open(filename, encoding='utf-8') as fp:
     alldata = fp.readlines()
@@ -167,19 +158,6 @@ print("------------------------------------------------------------")  # 60個
 
 print('------------------------------------------------------------')	#60個
 
-#練習 19 擷取登入帳號資訊
-
-def passwd_to_dict(filename):
-    users = {}
-    with open(filename) as f:
-        for line in f:
-            user_info = line.split(':')
-            users.update({user_info[0]: user_info[2]})
-    return users
-
-print(passwd_to_dict(r'.\data\passwd.cfg'))
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -227,23 +205,6 @@ print(find_longest_word(r'.\data\text2.txt'))
 
 print('------------------------------------------------------------')	#60個
 
-#練習 22 讀寫 CSV 檔
-
-import csv
-
-def passwd_to_csv(passwd_filename, csv_filename):
-    with open(passwd_filename, 'r') as f_read, \
-            open(csv_filename, 'w', newline='') as f_write:
-        csv_reader = csv.reader(f_read, delimiter=':')
-        csv_writer = csv.writer(f_write, delimiter='\t', lineterminator='\n')
-        for line in csv_reader:
-            csv_writer.writerow([line[0], line[2]])
-
-passwd_to_csv(r'.\data\passwd.cfg', r'tmp_passwd.csv')
-
-print('------------------------------------------------------------')	#60個
-
-
 #練習 31 豬拉丁文 --- 檔案翻譯機
 
 def pl_word(word):
@@ -261,17 +222,6 @@ print(pl_file(r'.\data\text2.txt'))
 
 print('------------------------------------------------------------')	#60個
 
-
-#練習 33 擷取登入帳號資訊（生成版）
-
-def passwd_to_dict_2(filename):
-    with open(filename) as f:
-        d = {words[0]: words[2]
-             for words
-             in [line.split(':') for line in f]}
-    return d
-
-print(passwd_to_dict_2(r'.\data\passwd.cfg'))
 
 print('------------------------------------------------------------')	#60個
 
@@ -581,25 +531,6 @@ print(data.decode('utf-8'))
 print("------------------------------------------------------------")  # 60個
 
 
-
-import csv
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/animals.csv'
-
-try:
-    with open(filename, encoding = 'utf-8') as f:
-        reader = csv.reader(f)
-        data = list(reader)
-except FileNotFoundError:
-    print('无法打开文件:', filename)
-else:
-    for item in data:
-        print('%-30s%-20s%-10s' % (item[0], item[1], item[2]))
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 """
 从文本文件中读取数据
 
@@ -675,7 +606,6 @@ print("------------------------------------------------------------")  # 60個
 """
 
 import json
-import csv
 
 json_str = '{"name": "骆昊", "age": 38, "title": "叫兽"}'
 result = json.loads(json_str)

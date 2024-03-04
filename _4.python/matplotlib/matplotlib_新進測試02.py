@@ -17,7 +17,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
-'''
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="新進測試 01",
@@ -590,29 +589,6 @@ print("matplotlib 11 -----------------------------------------------------------
 
 import csv
 import matplotlib.pyplot as plt
-
-filename = '_data/TaipeiWeatherJan.csv'
-with open(filename) as csvFile:
-    csvReader = csv.reader(csvFile)
-    headerRow = next(csvReader)          # 讀取文件下一列
-    highTemps, meanTemps, lowTemps = [], [], []                       
-    for row in csvReader:
-        highTemps.append(int(row[1]))    # 儲存最高溫
-        meanTemps.append(int(row[2]))    # 儲存均溫
-        lowTemps.append(int(row[3]))     # 儲存最低溫
-
-seq = range(1,32)
-plt.plot(seq,highTemps,seq,meanTemps,seq,lowTemps)
-
-plt.title("2025年1月台北天氣報告", fontsize=24)
-plt.xlabel("", fontsize=14)
-plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
-plt.show()
-
-print("matplotlib 12 ------------------------------------------------------------")  # 60個
-
-import csv
-import matplotlib.pyplot as plt
 from datetime import datetime
 
 def convert_tw_date_to_ad(tw_date):
@@ -665,34 +641,6 @@ plt.ylabel('價格', fontsize=14)
 plt.show()
 
 print("matplotlib 13 ------------------------------------------------------------")  # 60個
-         
-x = np.linspace(-5, 5, 200)
-y = np.sinc(x)
-
-plt.plot(x, y)
-plt.plot(x[y>0], y[y>0], 'o')
-
-#plt.axis('equal')       #軸比例
-#xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
-#plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
-#plt.axis([0.5, 6.5, 15, 35])
-#plt.axes([0.2, 0.2, 0.4, 0.4]) #設定各軸顯示範圍
-
-#設定 x, y 軸座標範圍
-#plt.xlim(0, 30) # 設定 x 軸座標範圍
-#plt.ylim(0, 50) # 設定 y 軸座標範圍
-
-#plt.legend()
-
-print(plt.axis())
-
-#plt.grid(True)  #顯示格線
-plt.grid(color='0.8')   #顯示格線
-
-plt.show()
-
-'''
-print("matplotlib 14 ------------------------------------------------------------")  # 60個
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -745,7 +693,6 @@ plt.annotate('test', xy=(cx+0.5, cy-0.2), xycoords='data', xytext=(+36, -36),
              textcoords='offset points', fontsize=12,
              arrowprops=dict(arrowstyle='->', connectionstyle="arc3,rad=.2"))
 
-
 plt.legend(loc='best')
 
 plt.ylim((-10, 10))  # 設定 x 和 y 的邊界值
@@ -761,21 +708,7 @@ plt.show()
 
 print("matplotlib 16 ------------------------------------------------------------")  # 60個
 
-import numpy as np
-from matplotlib import pyplot as plt
 
-n = 300
-ax = np.random.normal(0,1,n)
-ay = np.random.normal(0,1,n)
-bx = np.random.normal(0,1,n)
-by = np.random.normal(0,1,n)
-
-plt.scatter(ax, ay, alpha=0.5, s=100, color='red')
-plt.scatter(bx, by, alpha=0.5, s=100, color='blue')
-plt.xlim = (0 , 1)
-plt.ylim = (0 , 1)
-
-plt.show()
 
 print("matplotlib 17 ------------------------------------------------------------")  # 60個
 
@@ -790,7 +723,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-""" 新進資料
+""" 新進資料 都是抽出資料
 
 seq = [2021, 2022, 2023]                # 年度
 plt.xticks(seq)                         # 設定x軸刻度
@@ -901,6 +834,9 @@ plt.xticks(ticks, labels)
 
 plt.legend(['sin','cos'])
 plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
+
+
+plt.ylabel(r'溫度 $C^{o}$')
 
 
 """

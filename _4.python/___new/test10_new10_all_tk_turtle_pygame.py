@@ -85,13 +85,12 @@ Button(frame, text="顯示 htree", command=show).pack(side=LEFT)
 tk.mainloop()
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 from tkinter import *
 import math
+
 
 def koch(order, p1, p2):
     """繪製科赫雪花碎形(Fractal)"""
@@ -154,6 +153,7 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
 import math
+
 
 def paintTree(depth, x1, y1, length, angle):
     if depth >= 0:

@@ -122,28 +122,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-import csv
-
-csvfile = "data/Example.csv"
-with open(csvfile, 'r') as fp:
-    reader = csv.reader(fp)
-    for row in reader:
-        print(','.join(row))
-
-print("------------------------------------------------------------")  # 60個
-
-import csv
-
-csvfile = "data/Example2.csv"
-list1 = [[10,33,45], [5, 25, 56]]
-with open(csvfile, 'w+', newline='') as fp:
-    writer = csv.writer(fp)
-    writer.writerow(["Data1","Data2","Data3"])
-    for row in list1:
-        writer.writerow(row)
-
-print("------------------------------------------------------------")  # 60個
-
 import requests
 from bs4 import BeautifulSoup
 import csv
@@ -189,7 +167,7 @@ data = {
    "tel": "0933123456"        
 }
 
-jsonfile = "data/tmp_Example.json"
+jsonfile = "tmp_Example.json"
 with open(jsonfile, 'w') as fp:
     json.dump(data, fp)    
 
@@ -197,7 +175,7 @@ print("------------------------------------------------------------")  # 60個
 
 import json
 
-jsonfile = "data/tmp_Example.json"
+jsonfile = "tmp_Example.json"
 with open(jsonfile, 'r') as fp:
     data = json.load(fp)
 json_str = json.dumps(data)    
