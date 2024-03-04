@@ -16,9 +16,9 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-
-print('------------------------------------------------------------')	#60個
 '''
+print('測試 01------------------------------------------------------------')	#60個
+
 #影像對比與亮度調整
 import matplotlib.image as img
 
@@ -44,7 +44,7 @@ plt.title('影像對比與亮度調整')
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('測試 02------------------------------------------------------------')	#60個
 
 plt.figure(num = '影像分析工具 影像直方圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -61,7 +61,7 @@ plt.subplot(222)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title('影像直方圖')
 
-print('------------------------------------------------------------')	#60個
+print('測試 03------------------------------------------------------------')	#60個
 
 #直方圖影像操作
 #直方圖均值化
@@ -84,8 +84,7 @@ plt.title('均衡化後的灰度直方圖分布')
 
 plt.show()
 
-'''
-print('------------------------------------------------------------')	#60個
+print('測試 04------------------------------------------------------------')	#60個
 
 plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -153,7 +152,7 @@ plt.title('再設定第0通道為0')
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('測試 05------------------------------------------------------------')	#60個
 
 plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -190,32 +189,29 @@ plt.title('B分量')
 
 plt.show()
 
-sys.exit()
+print('測試 06------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-print('測試 2')
-
-img = cv2.imread('images/girl.bmp')
-imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+image = cv2.imread('images/girl.bmp')
+imageRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 plt.figure(num = '顯示結果', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 plt.subplot(121)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title('原圖BGR OK')
 
 plt.subplot(122)
-plt.imshow(cv2.cvtColor(imgRGB, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(imageRGB, cv2.COLOR_BGR2RGB))
 plt.title('原圖RGB NG')
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('測試 07------------------------------------------------------------')	#60個
 
 plt.figure(num = '灰度圖像顯示演示', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-o = cv2.imread('images/8.bmp')
-g = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
+image = cv2.imread('images/8.bmp')
+g = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 plt.subplot(221)
 plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB), cmap = plt.cm.gray)
@@ -231,19 +227,19 @@ plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB), cmap = 'gray_r')
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('測試 08------------------------------------------------------------')	#60個
 
 plt.figure(num = '灰度圖像顯示演示', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-o = cv2.imread('images/girl.bmp')
-g = cv2.cvtColor(o, cv2.COLOR_BGR2GRAY)
+image = cv2.imread('images/girl.bmp')
+g = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 plt.figure("灰度圖像顯示演示")
 plt.subplot(221)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(222)
-plt.imshow(cv2.cvtColor(o, cv2.COLOR_BGR2RGB), cmap = plt.cm.gray)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), cmap = plt.cm.gray)
 
 plt.subplot(223)
 plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB))
@@ -252,129 +248,56 @@ plt.subplot(224)
 plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB), cmap = plt.cm.gray)
 
 plt.show()
+'''
+print('測試 09------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
-print('測試 5')
-
-o = cv2.imread("images/boat.bmp")
-plt.hist(o.ravel(), 16)
+image = cv2.imread(filename)
+plt.hist(image.ravel(), 64)
+print(image.ravel().shape)
+print(image.ravel().size)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('測試 10------------------------------------------------------------')	#60個
 
-print('測試 6')
-o = cv2.imread("images/boat.jpg")
-cv2.imshow("original", o)    #有cv2.imshow的, 要對應destroyAllWindows()
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-plt.hist(o.ravel(), 256)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('測試 7')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img = cv2.imread(filename)
-hist = cv2.calcHist([img], [0], None, [256], [0, 255])
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+image = cv2.imread(filename)
+hist_b = cv2.calcHist([image], [0], None, [256], [0, 255])
+hist_g = cv2.calcHist([image], [1], None, [256], [0, 255])
+hist_r = cv2.calcHist([image], [2], None, [256], [0, 255])
+"""
 print(type(hist))
 print(hist.shape)
 print(hist.size)
 print(hist)
-plt.plot(hist)
+"""
+plt.plot(hist_r, 'r')
+plt.plot(hist_g, 'g')
+plt.plot(hist_b, 'b')
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('測試 14------------------------------------------------------------')	#60個
 
-print('測試 8')
+filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+image = cv2.imread(filename)
 
-#-----------讀取原始圖像---------------
-img = cv2.imread('images/equ.bmp',cv2.IMREAD_GRAYSCALE)
-#-----------直方圖均衡化處理---------------
-equ = cv2.equalizeHist(img)
-#-----------顯示均衡化前后的直方圖---------------
-cv2.imshow("original", img)  #有cv2.imshow的, 要對應destroyAllWindows()
-cv2.waitKey()
-cv2.destroyAllWindows()
-cv2.imshow("result", equ)    #有cv2.imshow的, 要對應destroyAllWindows()
-cv2.waitKey()
-cv2.destroyAllWindows()
-#-----------顯示均衡化前后的直方圖---------------
-plt.figure("原始圖像直方圖")  #構建窗口
-plt.hist(img.ravel(), 256)
-plt.figure("均衡化結果直方圖")  #構建新窗口
-plt.hist(equ.ravel(), 256)
+histb = cv2.calcHist([image], [0], None, [256], [0, 255])
+histg = cv2.calcHist([image], [1], None, [256], [0, 255])
+histr = cv2.calcHist([image], [2], None, [256], [0, 255])
 
-plt.show()
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-print('測試 9')
-
-image = cv2.imread("images/girl.bmp", cv2.IMREAD_GRAYSCALE)
-mask = np.zeros(image.shape, np.uint8)
-mask[200 : 400, 200 : 400] = 255
-histImage = cv2.calcHist([image], [0], None, [256], [0, 255])
-histMI = cv2.calcHist([image], [0], mask, [256],[0, 255])
-plt.plot(histImage)
-plt.plot(histMI)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-print('測試 10')
-
-o = cv2.imread("images/boatGray.bmp")
-histb = cv2.calcHist([o], [0], None, [256], [0, 255])
-plt.plot(histb, color = 'b')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-print('測試 11')
-
-o = cv2.imread("images/girl.bmp")
-histb = cv2.calcHist([o], [0], None, [256], [0, 255])
-histg = cv2.calcHist([o], [1], None, [256], [0, 255])
-histr = cv2.calcHist([o], [2], None, [256], [0, 255])
 plt.plot(histb, color = 'b')
 plt.plot(histg, color = 'g')
 plt.plot(histr, color = 'r')
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
 
-plt.figure(num = 'subplot示例', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-img = cv2.imread('images/equ.bmp', cv2.IMREAD_GRAYSCALE)
-equ = cv2.equalizeHist(img)
 
-plt.subplot(121)
-plt.hist(img.ravel(), 256)
-
-plt.subplot(122)
-plt.hist(equ.ravel(), 256)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-"""
-https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
-https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
-"""
-
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-
-print('------------------------------------------------------------')	#60個
+print('測試 17------------------------------------------------------------')	#60個
 
 image = cv2.imread(filename)	#讀取本機圖片
 
@@ -396,7 +319,7 @@ plt.plot(hist)
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('測試 18----------------------------------------------------------')	#60個
 
 #對於彩色的圖片，
 #可以用 OpenCV 的 calcHist 函數分別計算統計值，
@@ -412,7 +335,84 @@ for i, col in enumerate(color):
   plt.xlim([0, 256])
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('測試 12------------------------------------------------------------')	#60個
+
+plt.figure(num = '影像分析工具 影像直方圖 均衡化效果比較', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+#-----------讀取原始圖像---------------
+image = cv2.imread('images/equ.bmp',cv2.IMREAD_GRAYSCALE)
+#-----------直方圖均衡化處理---------------
+equ = cv2.equalizeHist(image)
+#-----------顯示均衡化前后的直方圖---------------
+plt.subplot(221)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('原圖')
+
+plt.subplot(222)
+plt.imshow(cv2.cvtColor(equ, cv2.COLOR_BGR2RGB))
+plt.title('均衡化之圖')
+
+#-----------顯示均衡化前后的直方圖---------------
+
+plt.subplot(223)
+plt.hist(image.ravel(), 64)
+plt.xlim(0, 256) # 設定 x 軸座標範圍
+plt.title("原圖之直方圖")
+
+plt.subplot(224)
+plt.hist(equ.ravel(), 64)
+plt.xlim(0, 256) # 設定 x 軸座標範圍
+plt.title("均衡化之圖的直方圖")
+
+plt.show()
+
+print('測試 13------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+mask = np.zeros(image.shape, np.uint8)
+mask[200 : 400, 200 : 400] = 255
+
+#全圖
+hist1 = cv2.calcHist([image], [0], None, [256], [0, 255])
+
+#部分圖
+hist2 = cv2.calcHist([image], [0], mask, [256], [0, 255])
+
+plt.plot(hist1, 'r', label="全圖")
+plt.plot(hist2, 'g', label="部分圖")
+
+plt.legend(loc="best")
+
+plt.show()
+
+print('測試 15------------------------------------------------------------')	#60個
+
+plt.figure(num = 'subplot示例', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
+image = cv2.imread('images/equ.bmp', cv2.IMREAD_GRAYSCALE)
+equ = cv2.equalizeHist(image)
+
+plt.subplot(121)
+plt.hist(image.ravel(), 256)
+
+plt.subplot(122)
+plt.hist(equ.ravel(), 256)
+
+plt.show()
+
+print('測試 16------------------------------------------------------------')	#60個
+
+"""
+https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
+https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
+"""
+
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+print('測試 19----------------------------------------------------------')	#60個
 
 plt.figure(num = '配合圖形遮罩計算直方圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -460,6 +460,16 @@ plt.xlim([0,256])
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print('測試 20----------------------------------------------------------')	#60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
 
 

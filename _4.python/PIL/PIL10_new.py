@@ -22,7 +22,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print('顯示原圖')
 
 image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
@@ -267,7 +267,7 @@ img[-2,:] (or im[-2]) # 倒数第二行
 
 """
 
-
+'''
 
 
 print('------------------------------------------------------------')	#60個
@@ -347,32 +347,28 @@ img=np.array(Image.open(filename).convert('L'))
 
 plt.figure('Peony')
 arr=img.flatten()
-n, bins, patches = plt.hist(arr, bins=256, density = True, facecolor='green', alpha=0.75)
+n, bins, patches = plt.hist(arr, bins=256, density = True, facecolor='green', alpha=0.5)
 
 plt.show()
 
 """
-
 二、彩色图片直方图
-
 实际上是和灰度直方图一样的，只是分别画出三通道的直方图，然后叠加在一起。
 """
 
 src=Image.open(filename)
-r,g,b=src.split()
+r, g, b=src.split()
 
 plt.figure('Peony')
-ar=np.array(r).flatten()
-plt.hist(ar, bins=256, density = True,facecolor='r',edgecolor='r',stacked=1)
-ag=np.array(g).flatten()
-plt.hist(ag, bins=256, density = True, facecolor='g',edgecolor='g',stacked=1)
-ab=np.array(b).flatten()
-plt.hist(ab, bins=256, density = True, facecolor='b',edgecolor='b')
+array_r = np.array(r).flatten()
+plt.hist(array_r, bins=256, alpha=0.5, density = True,facecolor='r',edgecolor='r',stacked=1)
+array_g = np.array(g).flatten()
+plt.hist(array_g, bins=256, alpha=0.5, density = True, facecolor='g',edgecolor='g',stacked=1)
+array_b = np.array(b).flatten()
+plt.hist(array_b, bins=256, alpha=0.5, density = True, facecolor='b',edgecolor='b')
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-
 
 
 """

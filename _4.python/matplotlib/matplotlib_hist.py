@@ -117,7 +117,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 15  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="hist 集合 1",
@@ -445,42 +445,20 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-'''
 
 
 print("------------------------------------------------------------")  # 60個
 
-from random import randint
+mu = 100 # 平均值
+sigma = 15 # 標準差
+mu, sigma = 100, 15
+x = mu + sigma * np.random.randn(N)                     # 隨機數
 
-def dice_generator(times, sides):
-    #處理隨機數
-    for i in range(times):              
-        ranNum = randint(1, sides)              # 產生1-6隨機數
-        dice.append(ranNum)
-          
-times = 10000                                   # 擲骰子次數
-sides = 6                                       # 骰子有幾面
-dice = []                                       # 建立擲骰子的串列
-dice_generator(times, sides)                    # 產生擲骰子的串列
+count, bins, ignored = plt.hist(x, num_bins, density=True, rwidth = 0.5)    # 直方圖
 
-h = plt.hist(dice, sides)                       # 繪製hist圖
-print("bins的y軸 ", h[0])
-print("bins的x軸 ", h[1])
-plt.ylabel('頻率')
-plt.title('測試 10000 次')
+print('bins = ', bins)
+print('len bins = ', len(bins))
 
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-mu = 0                                                  # 平均值
-sigma = 1                                               # 標準差
-s = np.random.randn(10000)                              # 隨機數
-print(s)
-
-count, bins, ignored = plt.hist(s, 30, density=True)    # 直方圖
 # 繪製曲線圖
 plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
                np.exp( - (bins - mu)**2 / (2 * sigma**2) ),
@@ -490,12 +468,13 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+mu = 100 # 平均值
+sigma = 15 # 標準差
+mu, sigma = 100, 15
+x = np.random.normal(mu, sigma, N)                  # 隨機數
 
-mu = 0                                                  # 均值
-sigma = 1                                               # 標準差
-s = np.random.normal(mu, sigma, 10000)                  # 隨機數
+count, bins, ignored = plt.hist(x, num_bins, density=True, rwidth = 0.5)    # 直方圖
 
-count, bins, ignored = plt.hist(s, 30, density=True)    # 直方圖
 # 繪製曲線圖
 plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
                np.exp( - (bins - mu)**2 / (2 * sigma**2) ),
@@ -505,39 +484,36 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 import seaborn as sns #海生, 自動把圖畫得比較好看
 
-mu = 0                                                  # 均值
-sigma = 1                                               # 標準差
-s = np.random.normal(mu, sigma, 10000)                  # 隨機數
+mu = 100 # 平均值
+sigma = 15 # 標準差
+mu, sigma = 100, 15
+x = np.random.normal(mu, sigma, N)                  # 隨機數
 
-count, bins, ignored = plt.hist(s, 30, density=True)    # 直方圖
+count, bins, ignored = plt.hist(x, num_bins, density=True, rwidth = 0.5)    # 直方圖
 # 繪製曲線圖
-sns.kdeplot(s)
+sns.kdeplot(x)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 import seaborn as sns #海生, 自動把圖畫得比較好看
 
-s = np.random.uniform(size=10000)           # 隨機數
+x = np.random.uniform(size=N)           # 隨機數
 
-plt.hist(s, 30, density=True)               # 直方圖
+plt.hist(x, num_bins, density=True, rwidth = 0.5)               # 直方圖
 
 # 繪製曲線圖
-sns.kdeplot(s)
+sns.kdeplot(x)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-s = np.random.uniform(0.0,5.0,size=250)     # 隨機數
-plt.hist(s, 5)                              # 直方圖
+x = np.random.uniform(0.0,5.0,size=N)     # 隨機數
+plt.hist(x, num_bins, rwidth = 0.5)                              # 直方圖
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -550,7 +526,7 @@ print(f'平均成績 = {np.mean(sc)}')
 print(f'中位成績 = {np.median(sc)}')
 print(f'眾數成績 = {statistics.mode(sc)}')
 
-plt.hist(sc, 9)
+plt.hist(sc, 9, rwidth = 0.5)
 
 plt.ylabel('學生人數')
 plt.xlabel('分數')
@@ -579,9 +555,71 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+x = [21,42,23,4,5,26,77,88,9,10,31,32,33,34,35,36,37,18,49,50,100]
+num_bins = 10
+n, bins, patches = plt.hist(x, num_bins, rwidth = 0.5)
+
+plt.show()
+
+print('ccccc')
+print(str(n) + "\n" + str(bins))
+
+print("------------------------------------------------------------")  # 60個
+
+N = 500  # 資料個數
+num_bins = 50  # 直方圖顯示時的束數
+
+x = np.random.randn(N)
+plt.hist(x, num_bins, rwidth = 0.5)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+N = 500  # 資料個數
+num_bins = 50  # 直方圖顯示時的束數
+
+x = np.random.randn(N)
+plt.hist(x, rwidth = 0.5)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+sides = 6
+# 建立 N 個 1-6(含) 的整數隨機數
+dice = np.random.randint(1,sides+1,size=N)  # 建立隨機數
+    
+h = plt.hist(dice, sides, rwidth = 0.5)                       # 繪製hist圖
+print("bins的y軸 ",h[0])
+print("bins的x軸 ",h[1])
+plt.ylabel('Frequency')
+plt.title('Test N times')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+mu, sigma = 100, 15
+x = mu + sigma * np.random.randn(N)
+
+plt.hist(x, bins=num_bins, rwidth = 0.5)
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 

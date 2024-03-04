@@ -101,20 +101,6 @@ print(z)
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-
-print('畫出 常態分布 一維 N = 1000')
-N = 1000
-plt.hist(np.random.randn(N))
-plt.show()
-
-print('畫出 常態分布 二維 20 X 20')
-N = 20
-plt.imshow(np.random.randn(N, N))
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 print('常態分布 N = 1000')
 
 N = 1000
@@ -221,20 +207,6 @@ print(a)
 print(np.unique(a))  # unique統計陣列中所有不同的值
 
 print(np.bincount(a))  # bincount統計整數陣列中每個元素出現的次數
-
-print('------------------------------------------------------------')	#60個
-
-sides = 6
-# 建立 10000 個 1-6(含) 的整數隨機數
-dice = np.random.randint(1,sides+1,size=10000)  # 建立隨機數
-    
-h = plt.hist(dice, sides)                       # 繪製hist圖
-print("bins的y軸 ",h[0])
-print("bins的x軸 ",h[1])
-plt.ylabel('Frequency')
-plt.title('Test 10000 times')
-
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 

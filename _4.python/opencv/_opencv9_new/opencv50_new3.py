@@ -19,8 +19,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-'''
-
 plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
@@ -139,7 +137,6 @@ plt.title('藍  第0通道')
 
 #plt.show()
 
-'''
 
 print('------------------------------------------------------------')	#60個
 

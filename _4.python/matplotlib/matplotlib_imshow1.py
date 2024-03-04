@@ -581,6 +581,11 @@ plt.imshow(image)
 plt.subplot(232)
 
 
+print('畫出 常態分布 二維 20 X 20')
+N = 20
+plt.imshow(np.random.randn(N, N))
+
+
 # 第三張圖
 plt.subplot(233)
 

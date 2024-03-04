@@ -125,17 +125,6 @@ plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
-## setting the seed for the random generation
-np.random.seed(1)
-
-## generating univariate data
-data = 10 * np.random.randn(1000) + 100
-
-## plotting the data
-
-plt.hist(data, bins=100)
-plt.show()
-
 
 
 print("------------------------------------------------------------")  # 60個
