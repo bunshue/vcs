@@ -155,7 +155,7 @@ print(tt)
 
 print('------------------------------------------------------------')	#60個
 
-#有多少个系数为0
+#有多少個系數為0
 
 coef_matrix_ridge.apply(lambda x: sum(x.values==0),axis=1)
 
@@ -349,7 +349,7 @@ def format_plot(ax,x_label,y_label, title):
     ax.set_title(title)
     
 
-#PCA降维
+#PCA降維
 from sklearn import decomposition,manifold
 X_pca = decomposition.TruncatedSVD(n_components=2).fit_transform(X)
 
@@ -486,7 +486,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#另一种查看是否服从正态分布的可视化方法
+#另一種查看是否服從正態分布的可視化方法
 
 plt.figure()
 res = st.probplot(train['SalePrice'], plot=plt)
@@ -519,7 +519,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#另一种查看是否服从正态分布的可视化方法
+#另一種查看是否服從正態分布的可視化方法
 
 plt.figure()
 sns.distplot(train['SalePrice'], fit=st.norm)
@@ -532,7 +532,7 @@ plt.show()
 """
 print('------------------------------------------------------------')	#60個
 
-#把房价做对数变换后再看
+#把房價做對數變換后再看
 SalePrice_log = np.log(train['SalePrice'])
  
 #transformed histogram and normal probability plot
@@ -541,7 +541,7 @@ sns.distplot(SalePrice_log, fit=st.norm);
 plt.show()
 
 
-#另一种查看是否服从正态分布的可视化方法
+#另一種查看是否服從正態分布的可視化方法
 res = st.probplot(SalePrice_log, plot=plt)
 print(res)
 
@@ -628,6 +628,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 

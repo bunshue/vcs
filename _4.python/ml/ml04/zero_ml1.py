@@ -148,7 +148,7 @@ train_X = np.random.uniform(low=0, high=1.2, size=train_size)
 test_X = np.random.uniform(low=0.1, high=1.3, size=test_size)
 train_y = np.sin(train_X * 2 * np.pi) + np.random.normal(0, 0.2, train_size)
 test_y = np.sin(test_X * 2 * np.pi) + np.random.normal(0, 0.2, test_size)
-poly = PolynomialFeatures(6) # 次数は6
+poly = PolynomialFeatures(6) # 次數は6
 train_poly_X = poly.fit_transform(train_X.reshape(train_size, 1))
 test_poly_X = poly.fit_transform(test_X.reshape(test_size, 1))
 model = Ridge(alpha=1.0)
@@ -180,7 +180,7 @@ centers = [(-1, -0.125), (0.5, 0.5)]
 X, y = make_blobs(n_samples=50, n_features=2, centers=centers, cluster_std=0.3)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 model = LinearSVC() 
-model.fit(X_train, y_train) # 学習
+model.fit(X_train, y_train) # 學習
 y_pred = model.predict(X_test) 
 print(accuracy_score(y_pred, y_test)) # 評価
 
@@ -212,7 +212,7 @@ X_train = [[1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1]]
 y_train = [1, 1, 1, 0, 0, 0]
 model = MultinomialNB()
-model.fit(X_train, y_train) # 学習
+model.fit(X_train, y_train) # 學習
 print(model.predict([[0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0]])) # 評価
 
 print('------------------------------------------------------------')	#60個
@@ -226,7 +226,7 @@ from sklearn.metrics import accuracy_score
 data = load_wine()
 X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.3)
 model = RandomForestClassifier() 
-model.fit(X_train, y_train) # 学習
+model.fit(X_train, y_train) # 學習
 y_pred = model.predict(X_test) 
 print(accuracy_score(y_pred, y_test)) # 評価
 
@@ -244,7 +244,7 @@ y = data.target
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 model = model = MLPClassifier(hidden_layer_sizes=(16, )) 
-model.fit(X_train, y_train) # 学習
+model.fit(X_train, y_train) # 學習
 y_pred = model.predict(X_test) 
 print(accuracy_score(y_pred, y_test)) # 評価
 
@@ -259,13 +259,22 @@ from sklearn.metrics import accuracy_score
 X, y = make_moons(noise=0.3)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 model = KNeighborsClassifier()
-model.fit(X_train, y_train) # 学習
+model.fit(X_train, y_train) # 學習
 y_pred = model.predict(X_test)
 print(accuracy_score(y_pred, y_test)) # 評価
 
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
 
 
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 

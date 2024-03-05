@@ -501,8 +501,119 @@ print_dir_scores(r'.\data\scores')
 print('------------------------------------------------------------')	#60個
 
 
+"""
+json
+
+filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
+with open(filename, "w", encoding = 'utf-8') as fp:
+    print(filename + " is dumping...")
+    json.dump(titles, fp)
+"""
+
+
+
 print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day01-15\code\Day11\json1.py
+
+"""
+读取JSON数据
+
+"""
+
+import json
+
+json_str = '{"name": "骆昊", "age": 38, "title": "叫兽"}'
+result = json.loads(json_str)
+print(result)
+print(type(result))
+print(result['name'])
+print(result['age'])
+
+# 请思考如何将下面JSON格式的天气数据转换成对象并获取我们需要的信息
+# 稍后我们会讲解如何通过网络API获取我们需要的JSON格式的数据
+"""
+    {
+        "wendu": "29",
+        "ganmao": "各项气象条件适宜，发生感冒机率较低。但请避免长期处于空调房间中，以防感冒。",
+        "forecast": [
+            {
+                "fengxiang": "南风",
+                "fengli": "3-4级",
+                "high": "高温 32℃",
+                "type": "多云",
+                "low": "低温 17℃",
+                "date": "16日星期二"
+            },
+            {
+                "fengxiang": "南风",
+                "fengli": "微风级",
+                "high": "高温 34℃",
+                "type": "晴",
+                "low": "低温 19℃",
+                "date": "17日星期三"
+            },
+            {
+                "fengxiang": "南风",
+                "fengli": "微风级",
+                "high": "高温 35℃",
+                "type": "晴",
+                "low": "低温 22℃",
+                "date": "18日星期四"
+            },
+            {
+                "fengxiang": "南风",
+                "fengli": "微风级",
+                "high": "高温 35℃",
+                "type": "多云",
+                "low": "低温 22℃",
+                "date": "19日星期五"
+            },
+            {
+                "fengxiang": "南风",
+                "fengli": "3-4级",
+                "high": "高温 34℃",
+                "type": "晴",
+                "low": "低温 21℃",
+                "date": "20日星期六"
+            }
+        ],
+        "yesterday": {
+            "fl": "微风",
+            "fx": "南风",
+            "high": "高温 28℃",
+            "type": "晴",
+            "low": "低温 15℃",
+            "date": "15日星期一"
+        },
+        "aqi": "72",
+        "city": "北京"
+    }
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+#檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day01-15\code\Day11\json2.py
+
+"""
+写入JSON文件
+"""
+
+import json
+
+teacher_dict = {'name': '白元芳', 'age': 25, 'title': '讲师'}
+json_str = json.dumps(teacher_dict)
+print(json_str)
+print(type(json_str))
+fruits_list = ['apple', 'orange', 'strawberry', 'banana', 'pitaya']
+json_str = json.dumps(fruits_list)
+print(json_str)
+print(type(json_str))
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+

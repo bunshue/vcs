@@ -175,17 +175,6 @@ plt.hist(x3, **kwargs)
 # 第四張圖
 plt.subplot(234)
 
-mu, sigma = 100, 15
-x = mu + sigma * np.random.randn(N)
-
-n, bins, patches = plt.hist(x, num_bins, density=True, color="green", alpha = 0.5)
-
-y = (1 / (np.sqrt(2 * np.pi) * sigma)) * np.exp(-0.5 * (1 / sigma * (bins - mu)) ** 2)
-plt.plot(bins, y, "--", color="red")
-
-plt.ylabel("機率")
-plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
-
 
 # 第五張圖
 plt.subplot(235)
@@ -305,16 +294,26 @@ plt.title('產生共3組，每組 N 個隨機數')
 # 第五張圖
 plt.subplot(235)
 
-# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
-x = np.random.uniform(size=N)
-plt.hist(x, bins=num_bins)
-
-plt.title("np.random.uniform")
-
+sides = 6
+# 建立 N 個 1-6(含) 的整數隨機數
+dice = np.random.randint(1,sides+1,size=N)  # 建立隨機數
+    
+h = plt.hist(dice, sides, rwidth = 0.5)                       # 繪製hist圖
+print("bins的y軸 ",h[0])
+print("bins的x軸 ",h[1])
+plt.ylabel('Frequency')
+plt.title('Test N times')
 
 # 第六張圖
 plt.subplot(236)
 
+# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+x = np.random.uniform(size = N)
+#x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
+
+plt.hist(x, bins = num_bins, rwidth=0.8)
+
+plt.title("np.random.uniform")
 
 plt.show()
 
@@ -323,13 +322,14 @@ print("------------------------------------------------------------")  # 60個
 
 print("Hist圖 3種比較")
 
+N = 50000
 fig, ax = plt.subplots(1, 3, figsize=(20, 15))
 
-# 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-x1 = np.random.normal(size=100000)
-# 生成 100000 組介於 0 與 1 之間均勻分配隨機變數
-x2 = np.random.uniform(size=100000)
-exp_samples = np.random.exponential(scale=2, size=100000)
+# 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+x1 = np.random.normal(size=N)
+# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+x2 = np.random.uniform(size=N)
+exp_samples = np.random.exponential(scale=2, size=N)
 
 ax[0].hist(x=x1, bins=1000, label="Normal distribution")
 ax[1].hist(x=x2, bins=1000, label="Uniform distribution")
@@ -430,93 +430,21 @@ plt.ylabel('人數統計')
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="hist 集合 4",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-mu = 100 # 平均值
-sigma = 15 # 標準差
-mu, sigma = 100, 15
-x = mu + sigma * np.random.randn(N)                     # 隨機數
-
-count, bins, ignored = plt.hist(x, num_bins, density=True, rwidth = 0.5)    # 直方圖
-
-print('bins = ', bins)
-print('len bins = ', len(bins))
-
-# 繪製曲線圖
-plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
-               np.exp( - (bins - mu)**2 / (2 * sigma**2) ),
-         linewidth=2, color='r')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-mu = 100 # 平均值
-sigma = 15 # 標準差
-mu, sigma = 100, 15
-x = np.random.normal(mu, sigma, N)                  # 隨機數
-
-count, bins, ignored = plt.hist(x, num_bins, density=True, rwidth = 0.5)    # 直方圖
-
-# 繪製曲線圖
-plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
-               np.exp( - (bins - mu)**2 / (2 * sigma**2) ),
-         linewidth=2, color='r')
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import seaborn as sns #海生, 自動把圖畫得比較好看
-
-mu = 100 # 平均值
-sigma = 15 # 標準差
-mu, sigma = 100, 15
-x = np.random.normal(mu, sigma, N)                  # 隨機數
-
-count, bins, ignored = plt.hist(x, num_bins, density=True, rwidth = 0.5)    # 直方圖
-# 繪製曲線圖
-sns.kdeplot(x)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import seaborn as sns #海生, 自動把圖畫得比較好看
-
-x = np.random.uniform(size=N)           # 隨機數
-
-plt.hist(x, num_bins, density=True, rwidth = 0.5)               # 直方圖
-
-# 繪製曲線圖
-sns.kdeplot(x)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-x = np.random.uniform(0.0,5.0,size=N)     # 隨機數
-plt.hist(x, num_bins, rwidth = 0.5)                              # 直方圖
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+# 第一張圖
+plt.subplot(231)
 
 import statistics
 
@@ -532,9 +460,9 @@ plt.ylabel('學生人數')
 plt.xlabel('分數')
 plt.title('成績表')
 
-plt.show()
 
-print('------------------------------------------------------------')	#60個
+# 第二張圖
+plt.subplot(232)
 
 import statistics
 
@@ -550,68 +478,152 @@ plt.ylabel('學生人數')
 plt.xlabel('分數')
 plt.title('成績表')
 
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
+# 第三張圖
+plt.subplot(233)
 
 x = [21,42,23,4,5,26,77,88,9,10,31,32,33,34,35,36,37,18,49,50,100]
 num_bins = 10
 n, bins, patches = plt.hist(x, num_bins, rwidth = 0.5)
 
-plt.show()
-
 print('ccccc')
 print(str(n) + "\n" + str(bins))
 
+
+
+# 第四張圖
+plt.subplot(234)
+
+
+
+# 第五張圖
+plt.subplot(235)
+
+
+
+# 第六張圖
+plt.subplot(236)
+
+
+
+plt.show()
+
+
 print("------------------------------------------------------------")  # 60個
+
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="hist 集合 5",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+N = 10000  # 資料個數
+num_bins = 50  # 直方圖顯示時的束數
+
+mu = 100 # 平均值
+sigma = 15 # 標準差
+mu, sigma = 100, 15
+x = mu + sigma * np.random.randn(N)                     # 隨機數
+#x = np.random.normal(mu, sigma, N)                  # 隨機數   另外做法
+
+count, bins, ignored = plt.hist(x, bins=num_bins, density=True, color="green", rwidth = 0.5, alpha = 0.5)    # 直方圖
+
+#print('bins = ', bins)
+#print('len bins = ', len(bins))
+
+# 繪製曲線圖
+x = bins
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp( - (bins - mu) ** 2 / (2 * sigma ** 2))
+plt.plot(x, y, "--", color = 'r', linewidth = 2)
+
+plt.ylabel("機率")
+
+#plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
+plt.title(r'$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $',fontsize=20)
+
+
+
+# 第二張圖
+plt.subplot(232)
+
+mu, sigma = 100, 15
+x = np.linspace(mu - 50, mu + 50, 3000)  # 從N1到N2, 分成N個, 包含頭尾
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp( - (x - mu) ** 2 / (2 * sigma ** 2))
+plt.plot(x, y, "--", color = 'r', linewidth = 2)
+
+
+# 第三張圖
+plt.subplot(233)
+
+print('另外用海生畫出來')
+
+import seaborn as sns #海生, 自動把圖畫得比較好看
+
+mu = 100 # 平均值
+sigma = 15 # 標準差
+mu, sigma = 100, 15
+x = np.random.normal(mu, sigma, N)                  # 隨機數
+
+count, bins, ignored = plt.hist(x, bins = num_bins, density = True, color = "green", rwidth = 0.5, alpha = 0.5)    # 直方圖
+
+# 繪製曲線圖
+sns.kdeplot(x)
+
+
+
+# 第四張圖
+plt.subplot(234)
+
+
+import seaborn as sns #海生, 自動把圖畫得比較好看
+
+x = np.random.uniform(size=N)           # 隨機數
+
+count, bins, ignored = plt.hist(x, bins=num_bins, density=True, color="green", rwidth = 0.5, alpha = 0.5)    # 直方圖
+
+# 繪製曲線圖
+sns.kdeplot(x)
+
+
+# 第五張圖
+plt.subplot(235)
 
 N = 500  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
 x = np.random.randn(N)
 plt.hist(x, num_bins, rwidth = 0.5)
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
+
+
+# 第六張圖
+plt.subplot(236)
 
 N = 500  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
 x = np.random.randn(N)
 plt.hist(x, rwidth = 0.5)
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
 
-sides = 6
-# 建立 N 個 1-6(含) 的整數隨機數
-dice = np.random.randint(1,sides+1,size=N)  # 建立隨機數
-    
-h = plt.hist(dice, sides, rwidth = 0.5)                       # 繪製hist圖
-print("bins的y軸 ",h[0])
-print("bins的x軸 ",h[1])
-plt.ylabel('Frequency')
-plt.title('Test N times')
 
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-mu, sigma = 100, 15
-x = mu + sigma * np.random.randn(N)
-
-plt.hist(x, bins=num_bins, rwidth = 0.5)
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
 
 
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

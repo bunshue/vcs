@@ -32,9 +32,9 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 """
-使用python进行数字图片处理，还得安装Pillow包。
-虽然python里面自带一个PIL（python images library), 但这个库现在已经停止更新了，
-所以使用Pillow, 它是由PIL发展而来的。
+使用python進行數字圖片處理，還得安裝Pillow包。
+雖然python里面自帶一個PIL（python images library), 但這個庫現在已經停止更新了，
+所以使用Pillow, 它是由PIL發展而來的。
 
 pip install Pillow
 """
@@ -42,11 +42,11 @@ pip install Pillow
 print('------------------------------------------------------------')	#60個
 
 """
-图像通道\几何变换\裁剪
+圖像通道\幾何變換\裁剪
 
-一、图像通道
+一、圖像通道
 
-1、彩色图像转灰度图
+1、彩色圖像轉灰度圖
 """
 
 img=Image.open(filename)
@@ -57,7 +57,7 @@ plt.axis('off')
 plt.show()
 
 """
-使用函数convert()来进行转换，它是图像实例对象的一个方法，接受一个 mode 参数，用以指定一种色彩模式，mode 的取值可以是如下几种：
+使用函數convert()來進行轉換，它是圖像實例對象的一個方法，接受一個 mode 參數，用以指定一種色彩模式，mode 的取值可以是如下幾種：
 · 1 (1-bit pixels, black and white, stored with one pixel per byte)
 · L (8-bit pixels, black and white)
 · P (8-bit pixels, mapped to any other mode using a colour palette)
@@ -68,12 +68,12 @@ plt.show()
 · I (32-bit signed integer pixels)
 · F (32-bit floating point pixels)
 
-2、通道分离与合并
+2、通道分離與合并
 """
 
-img=Image.open(filename)  #打开图像
-gray=img.convert('L')   #转换成灰度
-r,g,b=img.split()   #分离三通道
+img=Image.open(filename)  #打開圖像
+gray=img.convert('L')   #轉換成灰度
+r,g,b=img.split()   #分離三通道
 pic=Image.merge('RGB',(r,g,b)) #合并三通道
 plt.figure('Peony')
 plt.subplot(2,3,1), plt.title('origin')
@@ -92,12 +92,12 @@ plt.show()
 
 """
 
-二、裁剪图片
+二、裁剪圖片
 
-从原图片中裁剪感兴趣区域（roi),裁剪区域由4-tuple决定，该tuple中信息为(left, upper, right, lower)。 Pillow左边系统的原点（0，0）为图片的左上角。坐标中的数字单位为像素点。
+從原圖片中裁剪感興趣區域（roi),裁剪區域由4-tuple決定，該tuple中信息為(left, upper, right, lower)。 Pillow左邊系統的原點（0，0）為圖片的左上角。坐標中的數字單位為像素點。
 """
 
-img=Image.open(filename)  #打开图像
+img=Image.open(filename)  #打開圖像
 plt.figure('Peony')
 plt.subplot(1,2,1)
 plt.title('origin')
@@ -114,26 +114,26 @@ plt.show()
 
 """
 
-用plot绘制显示出图片后，将鼠标移动到图片上，会在右下角出现当前点的坐标，以及像素值。
+用plot繪制顯示出圖片后，將鼠標移動到圖片上，會在右下角出現當前點的坐標，以及像素值。
 
-三、几何变换 
+三、幾何變換 
 
-Image类有resize()、rotate()和transpose()方法进行几何变换。
+Image類有resize()、rotate()和transpose()方法進行幾何變換。
 
-　1、图像的缩放和旋转
+　1、圖像的縮放和旋轉
 
 dst = img.resize((128, 128))
-dst = img.rotate(45) # 顺时针角度表示
+dst = img.rotate(45) # 順時針角度表示
 
-2、转换图像
+2、轉換圖像
 
-dst = im.transpose(Image.FLIP_LEFT_RIGHT) #左右互换
-dst = im.transpose(Image.FLIP_TOP_BOTTOM) #上下互换
-dst = im.transpose(Image.ROTATE_90)  #顺时针旋转
+dst = im.transpose(Image.FLIP_LEFT_RIGHT) #左右互換
+dst = im.transpose(Image.FLIP_TOP_BOTTOM) #上下互換
+dst = im.transpose(Image.ROTATE_90)  #順時針旋轉
 dst = im.transpose(Image.ROTATE_180)
 dst = im.transpose(Image.ROTATE_270)
 
-transpose()和rotate()没有性能差别。
+transpose()和rotate()沒有性能差別。
 """
 
 
@@ -155,7 +155,7 @@ plt.show()
 
 
 """
-#二、添加小图片水印
+#二、添加小圖片水印
 
 im = Image.open(filename)
 mark=Image.open("logo_small.gif")
@@ -171,18 +171,18 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 """
-图像中的像素访问
+圖像中的像素訪問
 
-前面的一些例子中，我们都是利用Image.open（）来打开一幅图像，然后直接对这个PIL对象进行操作。如果只是简单的操作还可以，但是如果操作稍微复杂一些，就比较吃力了。因此，通常我们加载完图片后，都是把图片转换成矩阵来进行更加复杂的操作。
+前面的一些例子中，我們都是利用Image.open（）來打開一幅圖像，然后直接對這個PIL對象進行操作。如果只是簡單的操作還可以，但是如果操作稍微復雜一些，就比較吃力了。因此，通常我們加載完圖片后，都是把圖片轉換成矩陣來進行更加復雜的操作。
 
-python中利用numpy库和scipy库来进行各种数据操作和科学计算。我们可以通过pip来直接安装这两个库
+python中利用numpy庫和scipy庫來進行各種數據操作和科學計算。我們可以通過pip來直接安裝這兩個庫
 
 pip install numpy
 pip install scipy
 
 """
 
-img=np.array(Image.open(filename))  #打开图像并转化为数字矩阵
+img=np.array(Image.open(filename))  #打開圖像并轉化為數字矩陣
 plt.figure('Peony')
 plt.imshow(img)
 plt.axis('off')
@@ -190,27 +190,27 @@ plt.show()
 
 """
 
-调用numpy中的array（）函数就可以将PIL对象转换为数组对象。
+調用numpy中的array（）函數就可以將PIL對象轉換為數組對象。
 
-查看图片信息，可用如下的方法：
+查看圖片信息，可用如下的方法：
 
 print img.shape  
 print img.dtype 
 print img.size 
 print type(img)
 
-如果是RGB图片，那么转换为array之后，就变成了一个rows*cols*channels的三维矩阵,因此，我们可以使用
+如果是RGB圖片，那么轉換為array之后，就變成了一個rows*cols*channels的三維矩陣,因此，我們可以使用
 
 img[i,j,k]
 
-来访问像素值。
+來訪問像素值。
 
-例1：打开图片，并随机添加一些椒盐噪声
+例1：打開圖片，并隨機添加一些椒鹽噪聲
 """
 
 img=np.array(Image.open(filename))
 
-#随机生成5000个椒盐
+#隨機生成5000個椒鹽
 rows,cols,dims=img.shape
 for i in range(5000):
     x=np.random.randint(0,rows)
@@ -226,7 +226,7 @@ plt.show()
 
  
 
-例2：将lena图像二值化，像素值大于128的变为1，否则变为0
+例2：將lena圖像二值化，像素值大于128的變為1，否則變為0
 """
 
 img=np.array(Image.open(filename).convert('L'))
@@ -248,22 +248,22 @@ plt.show()
 
  
 
-如果要对多个像素点进行操作，可以使用数组切片方式访问。切片方式返回的是以指定间隔下标访问 该数组的像素值。下面是有关灰度图像的一些例子：
-复制代码
+如果要對多個像素點進行操作，可以使用數組切片方式訪問。切片方式返回的是以指定間隔下標訪問 該數組的像素值。下面是有關灰度圖像的一些例子：
+復制代碼
 
-img[i,:] = im[j,:] # 将第 j 行的数值赋值给第 i 行
+img[i,:] = im[j,:] # 將第 j 行的數值賦值給第 i 行
 
-img[:,i] = 100 # 将第 i 列的所有数值设为 100
+img[:,i] = 100 # 將第 i 列的所有數值設為 100
 
-img[:100,:50].sum() # 计算前 100 行、前 50 列所有数值的和
+img[:100,:50].sum() # 計算前 100 行、前 50 列所有數值的和
 
 img[50:100,50:100] # 50~100 行，50~100 列（不包括第 100 行和第 100 列）
 
-img[i].mean() # 第 i 行所有数值的平均值
+img[i].mean() # 第 i 行所有數值的平均值
 
 img[:,-1] # 最后一列
 
-img[-2,:] (or im[-2]) # 倒数第二行
+img[-2,:] (or im[-2]) # 倒數第二行
 
 """
 
@@ -274,73 +274,73 @@ print('------------------------------------------------------------')	#60個
 
 
 """
-图像直方图
+圖像直方圖
 
-我们先来看两个函数reshape和flatten:
+我們先來看兩個函數reshape和flatten:
 
-假设我们先生成一个一维数组：
+假設我們先生成一個一維數組：
 
 vec=np.arange(15)
 print vec
 
-显示为：
+顯示為：
 
 [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
 
-如果我们要把这个一维数组，变成一个3*5二维矩阵，我们可以使用reshape来实现
+如果我們要把這個一維數組，變成一個3*5二維矩陣，我們可以使用reshape來實現
 
 mat= vec.reshape(3,5)
 print mat
 
-显示为
+顯示為
 
 [[ 0  1  2  3  4]
  [ 5  6  7  8  9]
  [10 11 12 13 14]]
 
-现在如果我们返过来，知道一个二维矩阵，要变成一个一维数组，就不能用reshape了，只能用flatten. 我们来看两者的区别
+現在如果我們返過來，知道一個二維矩陣，要變成一個一維數組，就不能用reshape了，只能用flatten. 我們來看兩者的區別
 
-a1=mat.reshape(1,-1)  #-1表示为任意，让系统自动计算
+a1=mat.reshape(1,-1)  #-1表示為任意，讓系統自動計算
 print a1
 a2=mat.flatten()
 print a2
 
-显示为：
+顯示為：
 
 a1:  [[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]]
 a2:  [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
 
-可以看出，用reshape进行变换，实际上变换后还是二维数组，两个方括号，因此只能用flatten.
+可以看出，用reshape進行變換，實際上變換后還是二維數組，兩個方括號，因此只能用flatten.
 
-我们要对图像求直方图，就需要先把图像矩阵进行flatten操作，使之变为一维数组，然后再进行统计。
+我們要對圖像求直方圖，就需要先把圖像矩陣進行flatten操作，使之變為一維數組，然后再進行統計。
 
-一、画灰度图直方图
+一、畫灰度圖直方圖
 
-绘图都可以调用matplotlib.pyplot库来进行，其中的hist函数可以直接绘制直方图。
+繪圖都可以調用matplotlib.pyplot庫來進行，其中的hist函數可以直接繪制直方圖。
 
-调用方式：
+調用方式：
 
 n, bins, patches = plt.hist(arr, bins=50, density = True, facecolor='green', alpha=0.75)
 
-hist的参数非常多，但常用的就这五个，只有第一个是必须的，后面四个可选
+hist的參數非常多，但常用的就這五個，只有第一個是必須的，后面四個可選
 
-arr: 需要计算直方图的一维数组
+arr: 需要計算直方圖的一維數組
 
-bins: 直方图的柱数，可选项，默认为10
+bins: 直方圖的柱數，可選項，默認為10
 
-density: 是否将得到的直方图向量归一化。默认为False
+density: 是否將得到的直方圖向量歸一化。默認為False
 
-facecolor: 直方图颜色
+facecolor: 直方圖顏色
 
 alpha: 透明度
 
 返回值 ：
 
-n: 直方图向量，是否归一化由参数设定
+n: 直方圖向量，是否歸一化由參數設定
 
-bins: 返回各个bin的区间范围
+bins: 返回各個bin的區間范圍
 
-patches: 返回每个bin里面包含的数据，是一个list
+patches: 返回每個bin里面包含的數據，是一個list
 """
 
 img=np.array(Image.open(filename).convert('L'))
@@ -352,8 +352,8 @@ n, bins, patches = plt.hist(arr, bins=256, density = True, facecolor='green', al
 plt.show()
 
 """
-二、彩色图片直方图
-实际上是和灰度直方图一样的，只是分别画出三通道的直方图，然后叠加在一起。
+二、彩色圖片直方圖
+實際上是和灰度直方圖一樣的，只是分別畫出三通道的直方圖，然后疊加在一起。
 """
 
 src=Image.open(filename)
@@ -542,6 +542,17 @@ print('------------------------------------------------------------')	#60個
 
 
 
-print('完成')
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 

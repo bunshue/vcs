@@ -3,6 +3,7 @@
 import openpyxl
 
 print('------------------------------------------------------------')	#60個
+
 print('excel讀寫測試 1')
 
 print("寫讀 xlsx")
@@ -101,5 +102,126 @@ for sheet in wb:
 
 print('------------------------------------------------------------')	#60個
 
-print('完成')
+import os
+import time
+import openpyxl
+
+# User info
+firstname = 'David'
+lastname = 'Wang'
+        
+title = 'kkkkkkkk'
+age = 22
+nationality = 'Taiwan'
+            
+# Course info
+registration_status = 'aaa'
+numcourses = 'cccc'
+numsemesters = 'ddddd'
+            
+print("First name: ", firstname, "Last name: ", lastname)
+print("Title: ", title, "Age: ", age, "Nationality: ", nationality)
+print("# Courses: ", numcourses, "# Semesters: ", numsemesters)
+print("Registration status", registration_status)
+print("------------------------------------------")
+
+filepath = 'tmp_excel_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.xlsx'
+            
+if not os.path.exists(filepath):
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+    heading = ["First Name", "Last Name", "Title", "Age", "Nationality",
+               "# Courses", "# Semesters", "Registration status"]
+    sheet.append(heading)
+    workbook.save(filepath)
+workbook = openpyxl.load_workbook(filepath)
+sheet = workbook.active
+sheet.append([firstname, lastname, title, age, nationality, numcourses,
+              numsemesters, registration_status])
+workbook.save(filepath)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+import openpyxl
+from openpyxl.chart import RadarChart, Reference
+
+print('在excel檔案內加入雷達圖')
+
+wb = openpyxl.load_workbook(r"data/radar_chart.xlsx")
+sh = wb.active
+
+data = Reference(sh, min_col=2, max_col=4, min_row=1, max_row=sh.max_row)
+labels = Reference(sh, min_col=1, min_row=2, max_row=sh.max_row)
+
+chart = RadarChart()
+#預設為standard
+#filled為填色
+#chart.type = "filled"
+chart.title = "各部門業績"
+chart.add_data(data, titles_from_data=True)
+chart.set_categories(labels)
+
+sh.add_chart(chart, "F2")
+wb.save(r"tmp_add_radar_chart.xlsx")
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+"""
+創建Excel文件
+
+"""
+
+from openpyxl import Workbook
+from openpyxl.worksheet.table import Table, TableStyleInfo
+
+workbook = Workbook()
+sheet = workbook.active
+data = [
+    ['1001', '白元芳', '男', '13123456789'],
+    ['1002', '白潔', '女', '13233445566']
+]
+sheet.append(['學號', '姓名', '性別', '電話'])
+for row in data:
+    sheet.append(row)
+tab = Table(displayName="Table1", ref="A1:E5")
+tab.tableStyleInfo = TableStyleInfo(
+    name="TableStyleMedium9", showFirstColumn=False,
+    showLastColumn=False, showRowStripes=True, showColumnStripes=True)
+sheet.add_table(tab)
+workbook.save('./tmp_全班學生數據.xlsx')
+
+
+print('------------------------------------------------------------')	#60個
+
+"""
+讀取Excel文件
+
+"""
+from openpyxl import load_workbook
+from openpyxl import Workbook
+
+workbook = load_workbook('./data/學生明細表.xlsx')
+print(workbook.sheetnames)
+sheet = workbook[workbook.sheetnames[0]]
+print(sheet.title)
+for row in range(2, 7):
+    for col in range(65, 70):
+        cell_index = chr(col) + str(row)
+        print(sheet[cell_index].value, end='\t')
+    print()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
+
 
