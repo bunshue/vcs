@@ -427,5 +427,166 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print('完成')
+
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image
+
+bg = Image.new("RGB", (1200, 800), "#000000")  # 產生一張 1200x800 的全黑圖片
+for i in range(1, 9):
+    img = Image.open(f"d{i}.jpg")  # 開啟圖片
+    img = img.resize((300, 400))  # 縮小尺寸為 300x400
+    x = (i - 1) % 4  # 根據開啟的順序，決定 x 座標
+    y = (i - 1) // 4  # 根據開啟的順序，決定 y 座標 ( // 為快速取整數 )
+    bg.paste(img, (x * 300, y * 400))  # 貼上圖片
+
+bg.save("oxxostudio.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageOps
+
+bg = Image.new("RGB", (1240, 840), "#000000")  # 因為擴張，所以將尺寸改成 1240x840
+for i in range(1, 9):
+    img = Image.open(f"d{i}.jpg")
+    img = img.resize((300, 400))
+    img = ImageOps.expand(img, 20, "#ffffff")  # 擴張邊緣，產生邊框
+    x = (i - 1) % 4
+    y = (i - 1) // 4
+    bg.paste(img, (x * 300, y * 400))
+
+bg.save("oxxostudio.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+
+from PIL import Image
+
+img = Image.open("./watermark-photo.jpg")  # 開啟風景圖
+icon = Image.open("./oxxostudio-icon.png")  # 開啟浮水印 icon
+img.paste(icon, (0, 0), icon)  # 將風景圖貼上 icon
+
+print("------------------------------------------------------------")  # 60個
+
+
+from PIL import Image
+
+img = Image.open("./watermark-photo.jpg")
+icon = Image.open("./oxxostudio-icon.png")
+
+img_w, img_h = img.size  # 取得風景圖尺寸
+icon_w, icon_h = icon.size  # 取得 icon 尺寸
+x = int((img_w - icon_w) / 2)  # 計算置中時 icon 左上角的 x 座標
+y = int((img_h - icon_h) / 2)  # 計算置中時 icon 左上角的 y 座標
+
+img.paste(icon, (x, y), icon)  # 設定 icon 左上角座標
+
+print("------------------------------------------------------------")  # 60個
+
+import glob
+from PIL import Image
+
+imgs = glob.glob("./demo/*.jpg")  # 讀取 demo 資料夾裡所有的圖片
+icon = Image.open("./oxxostudio-icon.png")
+for i in imgs:
+    name = i.split("/")[::-1][0]  # 取得圖片名稱
+    img = Image.open(i)  # 開啟圖片
+    img.paste(icon, (0, 0), icon)  # 加入浮水印
+    img.save(f"./demo/watermark/{name}")  # 以原本的名稱存檔
+
+print("------------------------------------------------------------")  # 60個
+
+
+from PIL import Image
+
+img = Image.open("./watermark-photo.jpg")  # 準備合成浮水印的圖
+img2 = Image.open("./watermark-photo.jpg")  # 底圖
+icon = Image.open("./oxxostudio-icon.png")
+
+img_w, img_h = img.size
+icon_w, icon_h = icon.size
+x = int((img_w - icon_w) / 2)
+y = int((img_h - icon_h) / 2)
+img.paste(icon, (x, y), icon)  # 合成浮水印
+img.convert("RGBA")  # 圖片轉換為 RGBA 模式 ( 才能調整 alpha 色版 )
+img.putalpha(100)  # 調整透明度，範圍 0～255，0 為全透明
+img2.paste(img, (0, 0), img)  # 合成底圖
+img2.save("./ok.jpg")
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+from PIL import Image, ImageFont, ImageDraw
+
+imgs = glob.glob("./demo/*.jpg")  # 讀取 demo 資料夾裡所有的圖片
+
+for i in imgs:
+    name = i.split("/")[::-1][0]  # 取得圖片名稱
+    img = Image.open(i)  # 開啟圖片
+    w, h = img.size
+    font = ImageFont.truetype("Teko-Regular.ttf", 100)
+    text = Image.new(mode="RGBA", size=(400, 100), color=(0, 0, 0, 0))
+    draw = ImageDraw.Draw(text)
+    draw.text((0, 0), "OXXO.STUDIO", fill=(255, 255, 255), font=font)
+    text = text.rotate(30, expand=1)
+    img2 = Image.open(i)
+    img2.paste(text, (50, 0), text)
+    img2.convert("RGBA")
+    img2.putalpha(150)
+    img.paste(img2, (0, 0), img2)
+    img.save(f"./test/{name}")
+
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image
+
+img = Image.open("oxxostudio.jpg")  # 開啟圖片
+w, h = img.size  # 讀取圖片長寬
+level = 50  # 設定縮小程度
+img2 = img.resize((int(w / level), int(h / level)))  # 縮小圖片
+img2 = img2.resize((w, h), resample=Image.NEAREST)  # 放大圖片為原始大小
+img2.save("tmp_pic01.jpg")  # 存檔
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image
+
+img = Image.open("oxxostudio.jpg")
+w, h = img.size
+level = 20
+img2 = img.resize((int(w / level), int(h / level)))
+img2 = img2.resize((w, h), resample=Image.NEAREST)
+
+x1, y1 = 60, 60  # 定義選取區域的左上角座標
+x2, y2 = 250, 250  # 定義選取區域的右上角座標
+area = img2.crop((x1, y1, x2, y2))  # 裁切區域
+img.paste(area, (x1, y1))  # 在原本的圖片裡貼上馬賽克區域
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
 

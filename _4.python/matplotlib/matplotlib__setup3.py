@@ -82,8 +82,8 @@ y16 = y00 + offset * 16
 
 
 num = 6
-styles = ['r-.', 'g-*', 'b-o', 'y-x', 'c-^', 'm-+', 'k-d']
-legends = ['对数', '线性', '线性对数', '平方', '立方', '几何级数', '阶乘']
+styles = ["r-.", "g-*", "b-o", "y-x", "c-^", "m-+", "k-d"]
+legends = ["对数", "线性", "线性对数", "平方", "立方", "几何级数", "阶乘"]
 y_datas = [y00, y01, y02, y03, y04, y05, y06]
 for index, y_data in enumerate(y_datas):
     pyplot.plot(x, y_data, styles[index])
@@ -91,5 +91,3 @@ pyplot.legend(legends)
 # pyplot.xticks(numpy.arange(1, 7, step=1))
 # pyplot.yticks(numpy.arange(0, 751, step=50))
 pyplot.show()
-
-

@@ -18,7 +18,9 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 print("------------------------------------------------------------")  # 60個
 
 
-print("matplotlib 27 標準常態分配 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 27 標準常態分配 ------------------------------------------------------------"
+)  # 60個
 
 """
 #Standard Normal Distribution
@@ -44,19 +46,19 @@ return (1 - x / 2 + x**5 + y**3) * np.exp(-x**2 -y**2)
 """
 
 
-import numpy as np 
-import matplotlib.pyplot as plt 
-from scipy.stats import norm 
-import statistics 
-  
-# Plot between -10 and 10 with .001 steps. 
-x_axis = np.arange(-20, 20, 0.01) 
-  
-# Calculating mean and standard deviation 
-mean = statistics.mean(x_axis) 
-sd = statistics.stdev(x_axis) 
-  
-plt.plot(x_axis, norm.pdf(x_axis, mean, sd)) 
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import norm
+import statistics
+
+# Plot between -10 and 10 with .001 steps.
+x_axis = np.arange(-20, 20, 0.01)
+
+# Calculating mean and standard deviation
+mean = statistics.mean(x_axis)
+sd = statistics.stdev(x_axis)
+
+plt.plot(x_axis, norm.pdf(x_axis, mean, sd))
 plt.show()
 
 
@@ -70,7 +72,7 @@ import math
 mu = 0
 variance = 1
 sigma = math.sqrt(variance)
-x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
+x = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 100)
 plt.plot(x, stats.norm.pdf(x, mu, sigma))
 plt.show()
 
@@ -83,7 +85,7 @@ from scipy.stats import norm
 # Plot between -10 and 10 with .001 steps.
 x_axis = np.arange(-10, 10, 0.001)
 # Mean = 0, SD = 2.
-plt.plot(x_axis, norm.pdf(x_axis,0,2))
+plt.plot(x_axis, norm.pdf(x_axis, 0, 2))
 plt.show()
 
 
@@ -92,15 +94,15 @@ print("------------------------------------------------------------")  # 60個
 import numpy as np
 import matplotlib.pyplot as plt
 
-mean = 0;
-std = 1;
+mean = 0
+std = 1
 variance = np.square(std)
 
-x = np.arange(-5,5,.01)
-f = np.exp(-np.square(x-mean)/2*variance)/(np.sqrt(2*np.pi*variance))
+x = np.arange(-5, 5, 0.01)
+f = np.exp(-np.square(x - mean) / 2 * variance) / (np.sqrt(2 * np.pi * variance))
 
-plt.plot(x,f)
-plt.ylabel('gaussian distribution')
+plt.plot(x, f)
+plt.ylabel("gaussian distribution")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -126,40 +128,24 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-

@@ -14,8 +14,8 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
-#plt.axis("equal")  # 調整比例，確認顯示為圓形
-#plt.axis('equal') # 設置餅圖爲正圓形
+# plt.axis("equal")  # 調整比例，確認顯示為圓形
+# plt.axis('equal') # 設置餅圖爲正圓形
 
 
 # 派圖 集合
@@ -100,33 +100,39 @@ plt.pie(
 # 第三張圖
 plt.subplot(233)
 
-values = [1,1,1,1,1,1,1,1,1,1,1,1]
-names = '鼠','牛','虎','兔','龍','蛇', '馬','羊','猴','雞','狗','豬'
+values = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+names = "鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"
 explode = (0, 0.1, 0, 0.2, 0, 0.3, 0, 0.4, 0, 0.5, 0, 0.6)
-plt.pie(values,labels=names, explode=explode, autopct='%.1f%%',
-        shadow=True)
+plt.pie(values, labels=names, explode=explode, autopct="%.1f%%", shadow=True)
 
 # 第四張圖
 plt.subplot(234)
 
 values = [3, 48, 33, 8, 38]
-labels = ["鼠", "牛", "虎", "兔", "龍"]      #list格式
-labels = "鼠", "牛", "虎", "兔", "龍"   #tuple格式
+labels = ["鼠", "牛", "虎", "兔", "龍"]  # list格式
+labels = "鼠", "牛", "虎", "兔", "龍"  # tuple格式
 print(type(labels))
 
-explode = (0.2, 0, 0, 0, 0) # 將圓餅圖的特定區塊向外推
+explode = (0.2, 0, 0, 0, 0)  # 將圓餅圖的特定區塊向外推
 
-plt.pie(values, labels = labels, explode = explode,
-        autopct="%1.2f%%", shadow=True)      # 繪製圓餅圖, 自動計算百分比, 加入立體陰影
+plt.pie(
+    values, labels=labels, explode=explode, autopct="%1.2f%%", shadow=True
+)  # 繪製圓餅圖, 自動計算百分比, 加入立體陰影
 
 # 第五張圖
 plt.subplot(235)
 
-data = {'鼠': 3, '牛': 48, '虎': 33, '兔': 8, '龍': 38}
+data = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
 explode = (0, 0, 0, 0.2, 0)  # 向外擴展顯示的區域
 
-plt.pie(data.values(), explode=explode, labels=data.keys(), autopct='%1.1f%%',
-        shadow=True, startangle=90)
+plt.pie(
+    data.values(),
+    explode=explode,
+    labels=data.keys(),
+    autopct="%1.1f%%",
+    shadow=True,
+    startangle=90,
+)
 
 # 第六張圖
 plt.subplot(236)
@@ -188,14 +194,12 @@ plt.subplot(232)
 plt.subplot(233)
 
 
-
 # 第四張圖
 plt.subplot(234)
 
 
 # 第五張圖
 plt.subplot(235)
-
 
 
 # 第六張圖
@@ -220,5 +224,3 @@ plt.rcParams["font.size"] = 12
 plt.tight_layout()
 
 """
-
-

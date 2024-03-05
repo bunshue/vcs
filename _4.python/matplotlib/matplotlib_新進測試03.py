@@ -16,17 +16,14 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 
-
-
-
-
-
-print("matplotlib 05 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 05 ------------------------------------------------------------"
+)  # 60個
 
 import matplotlib.pyplot as plt
 from PIL import Image, ImageEnhance
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 img = Image.open(filename)
 brightness = ImageEnhance.Brightness(img)  # 調整亮度
@@ -72,9 +69,9 @@ plt.title("sharpness:0")
 plt.show()
 
 
-
-
-print("matplotlib 06 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 06 ------------------------------------------------------------"
+)  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -97,10 +94,12 @@ def visualize(path):
     plt.show()
 
 
-wave_filename = 'C:/_git/vcs/_1.data/______test_files1/_wav/hello.wav'
+wave_filename = "C:/_git/vcs/_1.data/______test_files1/_wav/hello.wav"
 visualize(wave_filename)  # 讀取聲音
 
-print("matplotlib 07 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 07 ------------------------------------------------------------"
+)  # 60個
 
 """ fail
 import matplotlib.pyplot as plt
@@ -131,7 +130,9 @@ def visualize(path):
 visualize("aaaa.wav")
 """
 
-print("matplotlib 08 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 08 ------------------------------------------------------------"
+)  # 60個
 
 """ fail
 import pyaudio
@@ -212,23 +213,26 @@ e1 = executor.submit(record)
 executor.shutdown()
 """
 
-print("matplotlib 09 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 09 ------------------------------------------------------------"
+)  # 60個
 
 
-
-print("matplotlib 10 ------------------------------------------------------------")  # 60個
-
-
-print("matplotlib 11 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 10 ------------------------------------------------------------"
+)  # 60個
 
 
-print("matplotlib 12 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 11 ------------------------------------------------------------"
+)  # 60個
 
+
+print(
+    "matplotlib 12 ------------------------------------------------------------"
+)  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-

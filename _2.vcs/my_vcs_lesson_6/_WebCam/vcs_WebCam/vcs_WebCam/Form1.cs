@@ -1088,8 +1088,8 @@ namespace vcs_WebCam
 
         private void bt_snapshot_Click(object sender, EventArgs e)
         {
-            //save_image_to_drive();
-            save_image_to_drive30();
+            save_image_to_drive();
+            //save_image_to_drive30();  30張平均
         }
 
         private void bt_motion_detection_Click(object sender, EventArgs e)

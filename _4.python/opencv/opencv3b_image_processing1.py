@@ -16,9 +16,9 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-'''
-print('測試 01------------------------------------------------------------')	#60個
 
+print('測試 01------------------------------------------------------------')	#60個
+'''
 #影像對比與亮度調整
 import matplotlib.image as img
 
@@ -83,14 +83,13 @@ plt.imshow(cv2.cvtColor(equa, cv2.COLOR_BGR2RGB))
 plt.title('均衡化後的灰度直方圖分布')
 
 plt.show()
-
+'''
 print('測試 04------------------------------------------------------------')	#60個
 
 plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
-
 image = cv2.imread(filename)
 
 plt.subplot(331)
@@ -156,6 +155,50 @@ print('測試 05------------------------------------------------------------')	#
 
 plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
+filename = 'data/pic_brightness1.bmp'
+
+image = cv2.imread(filename)
+
+
+cut = 50
+num_bins = 50  # 直方圖顯示時的束數
+
+b, g, r = cv2.split(image)
+
+bb = b[cut:(480-cut*2), cut:(640-cut*2)]
+#plt.imshow(cv2.cvtColor(bb, cv2.COLOR_BGR2RGB))
+#plt.show()
+
+bbb = bb.reshape(bb.shape[0]*bb.shape[1], 1)
+#print(bbb.shape)
+plt.hist(bbb, num_bins, color="b", alpha = 0.5)  #alpha調整透明度 給多個直方圖畫在一起用
+
+gg = g[cut:(480-cut*2), cut:(640-cut*2)]
+#plt.imshow(cv2.cvtColor(gg, cv2.COLOR_BGR2RGB))
+#plt.show()
+
+ggg = gg.reshape(gg.shape[0]*gg.shape[1], 1)
+#print(ggg.shape)
+plt.hist(ggg, num_bins, color="g", alpha = 0.5)  #alpha調整透明度 給多個直方圖畫在一起用
+
+rr = r[cut:(480-cut*2), cut:(640-cut*2)]
+#plt.imshow(cv2.cvtColor(rr, cv2.COLOR_BGR2RGB))
+#plt.show()
+
+rrr = rr.reshape(rr.shape[0]*rr.shape[1], 1)
+#print(rrr.shape)
+rrr = rrr[0:len(rrr):5]
+plt.hist(rrr, num_bins, color="r", alpha = 0.5)  #alpha調整透明度 給多個直方圖畫在一起用
+
+plt.show()
+
+
+print('測試 05------------------------------------------------------------')	#60個
+
+plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
@@ -191,7 +234,8 @@ plt.show()
 
 print('測試 06------------------------------------------------------------')	#60個
 
-image = cv2.imread('images/girl.bmp')
+filename = 'images/girl.bmp'
+image = cv2.imread(filename)
 imageRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 plt.figure(num = '顯示結果', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
@@ -231,7 +275,8 @@ print('測試 08------------------------------------------------------------')	#
 
 plt.figure(num = '灰度圖像顯示演示', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-image = cv2.imread('images/girl.bmp')
+filename = 'images/girl.bmp'
+image = cv2.imread(filename)
 g = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 plt.figure("灰度圖像顯示演示")
@@ -248,94 +293,30 @@ plt.subplot(224)
 plt.imshow(cv2.cvtColor(g, cv2.COLOR_BGR2RGB), cmap = plt.cm.gray)
 
 plt.show()
-'''
+
 print('測試 09------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+filename = 'pic.bmp'
 
 image = cv2.imread(filename)
-plt.hist(image.ravel(), 64)
-print(image.ravel().shape)
-print(image.ravel().size)
+
+print('形狀1 :', image.shape)
+print('大小1 :', image.size)
+
+print('拉成一維')
+image2 = image.ravel()
+
+print('形狀2 :', image2.shape)
+print('大小2 :', image2.size)
+
+num_bins = 64  # 直方圖顯示時的束數
+plt.hist(image2, bins = num_bins, color="lime", alpha = 0.3, density=False)
+#density=True   #以密度表示
 
 plt.show()
 
 print('測試 10------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-image = cv2.imread(filename)
-hist_b = cv2.calcHist([image], [0], None, [256], [0, 255])
-hist_g = cv2.calcHist([image], [1], None, [256], [0, 255])
-hist_r = cv2.calcHist([image], [2], None, [256], [0, 255])
-"""
-print(type(hist))
-print(hist.shape)
-print(hist.size)
-print(hist)
-"""
-plt.plot(hist_r, 'r')
-plt.plot(hist_g, 'g')
-plt.plot(hist_b, 'b')
-
-plt.show()
-
-print('測試 14------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-image = cv2.imread(filename)
-
-histb = cv2.calcHist([image], [0], None, [256], [0, 255])
-histg = cv2.calcHist([image], [1], None, [256], [0, 255])
-histr = cv2.calcHist([image], [2], None, [256], [0, 255])
-
-plt.plot(histb, color = 'b')
-plt.plot(histg, color = 'g')
-plt.plot(histr, color = 'r')
-
-plt.show()
-
-
-
-
-print('測試 17------------------------------------------------------------')	#60個
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-# 轉為灰階圖片
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-# 計算直方圖每個 bin 的數值
-hist = cv2.calcHist([gray], [0], None, [256], [0, 256])
-
-# 畫出直方圖
-#plt.bar(range(1, 255), hist)
-
-# 畫出分佈圖
-plt.plot(hist)
-
-# 使用 ravel 將所有的像素資料轉為一維的陣列，以下是一個簡單的範例：
-# 畫出直方圖
-#plt.hist(gray.ravel(), 256, [0, 256])
-
-plt.show()
-
-print('測試 18----------------------------------------------------------')	#60個
-
-#對於彩色的圖片，
-#可以用 OpenCV 的 calcHist 函數分別計算統計值，
-#並畫出 RGB 三種顏色的分佈圖：
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-# 畫出 RGB 三種顏色的分佈圖
-color = ('b', 'g', 'r')
-for i, col in enumerate(color):
-  histr = cv2.calcHist([image], [i], None, [256], [0, 256])
-  plt.plot(histr, color = col)
-  plt.xlim([0, 256])
-plt.show()
-
-print('測試 12------------------------------------------------------------')	#60個
 
 plt.figure(num = '影像分析工具 影像直方圖 均衡化效果比較', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -366,29 +347,7 @@ plt.title("均衡化之圖的直方圖")
 
 plt.show()
 
-print('測試 13------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-mask = np.zeros(image.shape, np.uint8)
-mask[200 : 400, 200 : 400] = 255
-
-#全圖
-hist1 = cv2.calcHist([image], [0], None, [256], [0, 255])
-
-#部分圖
-hist2 = cv2.calcHist([image], [0], mask, [256], [0, 255])
-
-plt.plot(hist1, 'r', label="全圖")
-plt.plot(hist2, 'g', label="部分圖")
-
-plt.legend(loc="best")
-
-plt.show()
-
-print('測試 15------------------------------------------------------------')	#60個
+print('測試 11------------------------------------------------------------')	#60個
 
 plt.figure(num = 'subplot示例', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -403,64 +362,8 @@ plt.hist(equ.ravel(), 256)
 
 plt.show()
 
-print('測試 16------------------------------------------------------------')	#60個
 
-"""
-https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
-https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
-"""
-
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-print('測試 19----------------------------------------------------------')	#60個
-
-plt.figure(num = '配合圖形遮罩計算直方圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-# 轉為灰階圖片
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-# 建立圖形遮罩
-mask = np.zeros(gray.shape, np.uint8)
-#mask[300:780, 300:1620] = 255
-W = 640
-H = 480
-x_st = int(W / 4)
-y_st = int(H / 4)
-w = int(W / 2)
-h = int(H / 2)
-
-mask[y_st : y_st + h, x_st : x_st + w] = 255    #先h 後 w
-#mask[0:240, 0:320] = 255
-
-# 計算套用遮罩後的圖形
-masked_gray = cv2.bitwise_and(gray, gray, mask = mask)
-
-# 以原圖計算直方圖
-hist_full = cv2.calcHist([image], [0], None, [256], [0, 256])
-
-# 以套用遮罩後的圖計算直方圖
-hist_mask = cv2.calcHist([image], [0], mask, [256], [0, 256])
-
-# 繪製結果
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB), 'gray')
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(mask, cv2.COLOR_BGR2RGB), 'gray')
-
-plt.subplot(223)
-plt.imshow(cv2.cvtColor(masked_gray, cv2.COLOR_BGR2RGB), 'gray')
-
-plt.subplot(224)
-plt.plot(hist_full)
-plt.plot(hist_mask)
-plt.xlim([0,256])
-
-plt.show()
-
-print('測試 20----------------------------------------------------------')	#60個
+print('測試 12----------------------------------------------------------')	#60個
 
 
 
@@ -471,5 +374,11 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
+
+
+"""
+https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
+https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
+"""
 
 

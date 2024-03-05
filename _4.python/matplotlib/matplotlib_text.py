@@ -291,13 +291,14 @@ plt.subplot(235)
 
 print("從windows字型中找出可以顯示的中文字型")
 import matplotlib as mpl
-zhfont = mpl.font_manager.FontProperties(fname='C:/Windows/Fonts/mingliu.ttc')
-plt.text(0, 0, u'測試一下 ', fontsize=20, fontproperties=zhfont)
+
+zhfont = mpl.font_manager.FontProperties(fname="C:/Windows/Fonts/mingliu.ttc")
+plt.text(0, 0, "測試一下 ", fontsize=20, fontproperties=zhfont)
 
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-plt.rcParams['axes.unicode_minus'] = False
+plt.rcParams["axes.unicode_minus"] = False
 
-plt.text(0.5, 0.5, u'測試一下')
+plt.text(0.5, 0.5, "測試一下")
 
 # 第六張圖
 plt.subplot(236)
@@ -309,17 +310,17 @@ print("------------------------------------------------------------")  # 60個
 
 x = np.linspace(0.0, np.pi, 500)
 y = np.cos(2 * np.pi * x)
-plt.plot(x, y, 'm', lw=2)
-plt.annotate('局部極大值',
-            xy=(2, 1),
-            xytext=(2.5, 1.2),           
-            arrowprops=dict(arrowstyle='->',
-                            facecolor='black'))
-plt.annotate('局部極小值',
-            xy=(1.5, -1),
-            xytext=(2.0, -1.25),           
-            arrowprops=dict(arrowstyle='-'))
-plt.text(0.8,1.2,'Annotate的應用',fontsize=20,color='b')
+plt.plot(x, y, "m", lw=2)
+plt.annotate(
+    "局部極大值",
+    xy=(2, 1),
+    xytext=(2.5, 1.2),
+    arrowprops=dict(arrowstyle="->", facecolor="black"),
+)
+plt.annotate(
+    "局部極小值", xy=(1.5, -1), xytext=(2.0, -1.25), arrowprops=dict(arrowstyle="-")
+)
+plt.text(0.8, 1.2, "Annotate的應用", fontsize=20, color="b")
 plt.ylim(-1.5, 1.5)
 
 plt.show()
@@ -329,6 +330,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-

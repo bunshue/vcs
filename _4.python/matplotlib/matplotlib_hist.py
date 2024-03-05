@@ -132,7 +132,7 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-x = np.random.normal(size=N)  
+x = np.random.normal(size=N)
 cc = plt.hist(x, bins=num_bins)
 print(type(cc))
 print(cc)
@@ -185,13 +185,13 @@ print("alpha調整透明度 給多個直方圖畫在一起用")
 # 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
 
 x = np.random.randn(N)  # 常態分佈數字
-plt.hist(x, bins=num_bins, color="r", alpha = 0.3)
+plt.hist(x, bins=num_bins, color="r", alpha=0.3)
 
 x = np.random.randn(N)  # 常態分佈數字
-plt.hist(x, bins=num_bins, color="g", alpha = 0.3)
+plt.hist(x, bins=num_bins, color="g", alpha=0.3)
 
 x = np.random.randn(N)  # 常態分佈數字
-plt.hist(x, bins=num_bins, color="b", alpha = 0.3)
+plt.hist(x, bins=num_bins, color="b", alpha=0.3)
 
 plt.title("np.random.randn")
 
@@ -225,43 +225,43 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-N = 10000                                   # 擲骰子次數
-sides = 6                                       # 骰子有幾面
-dice = []                                       # 建立擲骰子的串列
+N = 10000  # 擲骰子次數
+sides = 6  # 骰子有幾面
+dice = []  # 建立擲骰子的串列
 
 # 產生擲骰子的串列
 for i in range(N):
-    ranNum = random.randint(1, sides)      # 產生1-6隨機數
+    ranNum = random.randint(1, sides)  # 產生1-6隨機數
     dice.append(ranNum)
 
-h = plt.hist(dice, bins=6, rwidth=0.5) # 繪製hist圖
+h = plt.hist(dice, bins=6, rwidth=0.5)  # 繪製hist圖
 
-print("bins的y軸 ",h[0])
-print("bins的x軸 ",h[1])
-plt.ylabel('次數')
-plt.title('測試 10000 次')
+print("bins的y軸 ", h[0])
+print("bins的x軸 ", h[1])
+plt.ylabel("次數")
+plt.title("測試 10000 次")
 
 
 # 第二張圖
 plt.subplot(232)
 
-print('比上面多了 累積統計')
+print("比上面多了 累積統計")
 
-N = 10000                                   # 擲骰子次數
-sides = 6                                       # 骰子有幾面
-dice = []                                       # 建立擲骰子的串列
+N = 10000  # 擲骰子次數
+sides = 6  # 骰子有幾面
+dice = []  # 建立擲骰子的串列
 
 # 產生擲骰子的串列
 for i in range(N):
-    ranNum = random.randint(1, sides)      # 產生1-6隨機數
+    ranNum = random.randint(1, sides)  # 產生1-6隨機數
     dice.append(ranNum)
 
-h = plt.hist(dice, bins=6, rwidth=0.5, cumulative=True) # 繪製hist圖
+h = plt.hist(dice, bins=6, rwidth=0.5, cumulative=True)  # 繪製hist圖
 
-print("bins的y軸 ",h[0])
-print("bins的x軸 ",h[1])
-plt.ylabel('次數')
-plt.title('測試 10000 次, 累積統計')
+print("bins的y軸 ", h[0])
+print("bins的x軸 ", h[1])
+plt.ylabel("次數")
+plt.title("測試 10000 次, 累積統計")
 
 
 # 第三張圖
@@ -270,16 +270,16 @@ plt.subplot(233)
 N = 500  # 資料個數
 N = 1000  # 資料個數
 
-d1 = np.random.randint(1, 6 + 1, N)#不含尾
+d1 = np.random.randint(1, 6 + 1, N)  # 不含尾
 d2 = np.random.randint(1, 6 + 1, N)
 
 dsums = d1 + d2
 
-#count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5, density=True)   #以密度表示
-count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5)  #以總數表示
+# count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5, density=True)   #以密度表示
+count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5)  # 以總數表示
 
 plt.xlabel("兩個骰子和")
-#plt.ylabel("密度")   #density = True
+# plt.ylabel("密度")   #density = True
 plt.ylabel("次數")
 plt.title("擲兩個骰子多次 看其分布")
 
@@ -287,31 +287,31 @@ plt.title("擲兩個骰子多次 看其分布")
 # 第四張圖
 plt.subplot(234)
 
-x = np.random.rand(N, 3) # 產生共3組，每組 N 個隨機數
-plt.hist(x, bins=num_bins//10)
-plt.title('產生共3組，每組 N 個隨機數')
+x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
+plt.hist(x, bins=num_bins // 10)
+plt.title("產生共3組，每組 N 個隨機數")
 
 # 第五張圖
 plt.subplot(235)
 
 sides = 6
 # 建立 N 個 1-6(含) 的整數隨機數
-dice = np.random.randint(1,sides+1,size=N)  # 建立隨機數
-    
-h = plt.hist(dice, sides, rwidth = 0.5)                       # 繪製hist圖
-print("bins的y軸 ",h[0])
-print("bins的x軸 ",h[1])
-plt.ylabel('Frequency')
-plt.title('Test N times')
+dice = np.random.randint(1, sides + 1, size=N)  # 建立隨機數
+
+h = plt.hist(dice, sides, rwidth=0.5)  # 繪製hist圖
+print("bins的y軸 ", h[0])
+print("bins的x軸 ", h[1])
+plt.ylabel("Frequency")
+plt.title("Test N times")
 
 # 第六張圖
 plt.subplot(236)
 
 # 生成 N 組介於 0 與 1 之間均勻分配隨機變數
-x = np.random.uniform(size = N)
-#x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
+x = np.random.uniform(size=N)
+# x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
 
-plt.hist(x, bins = num_bins, rwidth=0.8)
+plt.hist(x, bins=num_bins, rwidth=0.8)
 
 plt.title("np.random.uniform")
 
@@ -356,76 +356,239 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-grade = [90,72,45,18,13,81,65,68,73,84,75,79,58,78,96,100,98,64,43,2,63,71,27,35,45,65]
+grade = [
+    90,
+    72,
+    45,
+    18,
+    13,
+    81,
+    65,
+    68,
+    73,
+    84,
+    75,
+    79,
+    58,
+    78,
+    96,
+    100,
+    98,
+    64,
+    43,
+    2,
+    63,
+    71,
+    27,
+    35,
+    45,
+    65,
+]
 
-n, b, p=plt.hist(grade, bins = [0,10,20,30,40,50,60,70,80,90,100], rwidth=0.5)
+n, b, p = plt.hist(grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], rwidth=0.5)
 
 for i in range(len(n)):
-    plt.text(b[i]+10, n[i], int(n[i]), ha='center', va='bottom', fontsize=12)
-  
-plt.title('全班成績直方圖分布圖')
-plt.xlabel('考試分數')
-plt.ylabel('人數統計')
+    plt.text(b[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=12)
+
+plt.title("全班成績直方圖分布圖")
+plt.xlabel("考試分數")
+plt.ylabel("人數統計")
 
 # 第二張圖
 plt.subplot(232)
 
-score = [800,750,450,680,802,630,710,450,250,320,610,670,815,\
-         870,900,650,450,730,840,675,795,585,870,960,190]
+score = [
+    800,
+    750,
+    450,
+    680,
+    802,
+    630,
+    710,
+    450,
+    250,
+    320,
+    610,
+    670,
+    815,
+    870,
+    900,
+    650,
+    450,
+    730,
+    840,
+    675,
+    795,
+    585,
+    870,
+    960,
+    190,
+]
 
-plt.hist(score, bins = [10,255,405,605,785,905,990], rwidth=0.5)
-plt.title('多益成績分布直方圖')
-plt.xlabel('成績')
-plt.ylabel('人數')
+plt.hist(score, bins=[10, 255, 405, 605, 785, 905, 990], rwidth=0.5)
+plt.title("多益成績分布直方圖")
+plt.xlabel("成績")
+plt.ylabel("人數")
 
 # 第三張圖
 plt.subplot(233)
 
-score = [800,750,450,680,802,630,710,450,250,320,610,670,815,870,900,650,450,730,840,675,795,585,870,960,190]
-n, b, p=plt.hist(score, bins = [10,255,405,605,785,905,990], rwidth=0.5)
+score = [
+    800,
+    750,
+    450,
+    680,
+    802,
+    630,
+    710,
+    450,
+    250,
+    320,
+    610,
+    670,
+    815,
+    870,
+    900,
+    650,
+    450,
+    730,
+    840,
+    675,
+    795,
+    585,
+    870,
+    960,
+    190,
+]
+n, b, p = plt.hist(score, bins=[10, 255, 405, 605, 785, 905, 990], rwidth=0.5)
 
 for i in range(len(n)):
-    plt.text(b[i]+10, n[i], int(n[i]), ha='center', va='bottom', fontsize=10)
-plt.title('多益成績分布直方圖')
-plt.xlabel('成績')
-plt.ylabel('人數')
+    plt.text(b[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=10)
+plt.title("多益成績分布直方圖")
+plt.xlabel("成績")
+plt.ylabel("人數")
 
 
 # 第四張圖
 plt.subplot(234)
 
-grade = [90,72,45,18,13,81,65,68,73,84,75,79,58,78,96,100,98,64,43,2,63,71,27,35,45,65]
+grade = [
+    90,
+    72,
+    45,
+    18,
+    13,
+    81,
+    65,
+    68,
+    73,
+    84,
+    75,
+    79,
+    58,
+    78,
+    96,
+    100,
+    98,
+    64,
+    43,
+    2,
+    63,
+    71,
+    27,
+    35,
+    45,
+    65,
+]
 
-plt.hist(grade, bins = [0,10,20,30,40,50,60,70,80,90,100], rwidth=0.5)
-plt.title('全班成績直方圖分布圖')
-plt.xlabel('考試分數')
-plt.ylabel('人數統計')
+plt.hist(grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], rwidth=0.5)
+plt.title("全班成績直方圖分布圖")
+plt.xlabel("考試分數")
+plt.ylabel("人數統計")
 
 
 # 第五張圖
 plt.subplot(235)
 
-grade = [90,72,45,18,13,81,65,68,73,84,75,79,58,78,96,100,98,64,43,2,63,71,27,35,45,65]
+grade = [
+    90,
+    72,
+    45,
+    18,
+    13,
+    81,
+    65,
+    68,
+    73,
+    84,
+    75,
+    79,
+    58,
+    78,
+    96,
+    100,
+    98,
+    64,
+    43,
+    2,
+    63,
+    71,
+    27,
+    35,
+    45,
+    65,
+]
 
-plt.hist(grade, bins = [0,10,20,30,40,50,60,70,80,90,100],edgecolor = 'b', rwidth=0.5) 
-plt.title('全班成績直方圖分布圖')
-plt.xlabel('考試分數')
-plt.ylabel('人數統計')
+plt.hist(
+    grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], edgecolor="b", rwidth=0.5
+)
+plt.title("全班成績直方圖分布圖")
+plt.xlabel("考試分數")
+plt.ylabel("人數統計")
 
 
 # 第六張圖
 plt.subplot(236)
 
-grade = [90,72,45,18,13,81,65,68,73,84,75,79,58,78,96,100,98,64,43,2,63,71,27,35,45,65]
+grade = [
+    90,
+    72,
+    45,
+    18,
+    13,
+    81,
+    65,
+    68,
+    73,
+    84,
+    75,
+    79,
+    58,
+    78,
+    96,
+    100,
+    98,
+    64,
+    43,
+    2,
+    63,
+    71,
+    27,
+    35,
+    45,
+    65,
+]
 
-n, b, p = plt.hist(grade, bins = [0,10,20,30,40,50,60,70,80,90,100], edgecolor = 'r', rwidth=0.5) 
+n, b, p = plt.hist(
+    grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], edgecolor="r", rwidth=0.5
+)
 
 for i in range(len(n)):
-    plt.text(b[i]+10, n[i], int(n[i]), ha='center', va='bottom', fontsize=12)
-  
-plt.title('全班成績直方圖分布圖')
-plt.xlabel('考試分數')
-plt.ylabel('人數統計')
+    plt.text(b[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=12)
+
+plt.title("全班成績直方圖分布圖")
+plt.xlabel("考試分數")
+plt.ylabel("人數統計")
 
 
 plt.show()
@@ -448,17 +611,57 @@ plt.subplot(231)
 
 import statistics
 
-sc = [60,10,40,80,80,30,80,60,70,90,50,50,50,70,60,80,80,50,60,70,
-      70,40,30,70,60,80,20,80,70,50,90,80,40,40,70,60,80,30,20,70]
-print(f'平均成績 = {np.mean(sc)}')
-print(f'中位成績 = {np.median(sc)}')
-print(f'眾數成績 = {statistics.mode(sc)}')
+sc = [
+    60,
+    10,
+    40,
+    80,
+    80,
+    30,
+    80,
+    60,
+    70,
+    90,
+    50,
+    50,
+    50,
+    70,
+    60,
+    80,
+    80,
+    50,
+    60,
+    70,
+    70,
+    40,
+    30,
+    70,
+    60,
+    80,
+    20,
+    80,
+    70,
+    50,
+    90,
+    80,
+    40,
+    40,
+    70,
+    60,
+    80,
+    30,
+    20,
+    70,
+]
+print(f"平均成績 = {np.mean(sc)}")
+print(f"中位成績 = {np.median(sc)}")
+print(f"眾數成績 = {statistics.mode(sc)}")
 
-plt.hist(sc, 9, rwidth = 0.5)
+plt.hist(sc, 9, rwidth=0.5)
 
-plt.ylabel('學生人數')
-plt.xlabel('分數')
-plt.title('成績表')
+plt.ylabel("學生人數")
+plt.xlabel("分數")
+plt.title("成績表")
 
 
 # 第二張圖
@@ -466,43 +669,119 @@ plt.subplot(232)
 
 import statistics
 
-sc1 = [60,10,40,80,80,30,80,60,70,90,50,50,50,70,60,80,80,50,60,70,
-      70,40,30,70,60,80,20,80,70,50,90,80,40,40,70,60,80,30,20,70]
+sc1 = [
+    60,
+    10,
+    40,
+    80,
+    80,
+    30,
+    80,
+    60,
+    70,
+    90,
+    50,
+    50,
+    50,
+    70,
+    60,
+    80,
+    80,
+    50,
+    60,
+    70,
+    70,
+    40,
+    30,
+    70,
+    60,
+    80,
+    20,
+    80,
+    70,
+    50,
+    90,
+    80,
+    40,
+    40,
+    70,
+    60,
+    80,
+    30,
+    20,
+    70,
+]
 
-sc2 = [50,10,60,80,70,30,80,60,30,90,50,50,90,70,60,50,80,50,60,70,
-      60,50,30,70,70,80,10,80,70,50,90,80,40,50,70,60,80,40,20,70]
+sc2 = [
+    50,
+    10,
+    60,
+    80,
+    70,
+    30,
+    80,
+    60,
+    30,
+    90,
+    50,
+    50,
+    90,
+    70,
+    60,
+    50,
+    80,
+    50,
+    60,
+    70,
+    60,
+    50,
+    30,
+    70,
+    70,
+    80,
+    10,
+    80,
+    70,
+    50,
+    90,
+    80,
+    40,
+    50,
+    70,
+    60,
+    80,
+    40,
+    20,
+    70,
+]
 
-plt.hist([sc1,sc2],9)
+plt.hist([sc1, sc2], 9)
 
-plt.ylabel('學生人數')
-plt.xlabel('分數')
-plt.title('成績表')
+plt.ylabel("學生人數")
+plt.xlabel("分數")
+plt.title("成績表")
 
 # 第三張圖
 plt.subplot(233)
 
-x = [21,42,23,4,5,26,77,88,9,10,31,32,33,34,35,36,37,18,49,50,100]
+x = [21, 42, 23, 4, 5, 26, 77, 88, 9, 10, 31, 32, 33, 34, 35, 36, 37, 18, 49, 50, 100]
 num_bins = 10
-n, bins, patches = plt.hist(x, num_bins, rwidth = 0.5)
+n, bins, patches = plt.hist(x, num_bins, rwidth=0.5)
 
-print('ccccc')
+print("ccccc")
 print(str(n) + "\n" + str(bins))
-
 
 
 # 第四張圖
 plt.subplot(234)
 
 
-
 # 第五張圖
 plt.subplot(235)
 
 
-
 # 第六張圖
 plt.subplot(236)
-
 
 
 plt.show()
@@ -527,27 +806,31 @@ plt.subplot(231)
 N = 10000  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
-mu = 100 # 平均值
-sigma = 15 # 標準差
+mu = 100  # 平均值
+sigma = 15  # 標準差
 mu, sigma = 100, 15
-x = mu + sigma * np.random.randn(N)                     # 隨機數
-#x = np.random.normal(mu, sigma, N)                  # 隨機數   另外做法
+x = mu + sigma * np.random.randn(N)  # 隨機數
+# x = np.random.normal(mu, sigma, N)                  # 隨機數   另外做法
 
-count, bins, ignored = plt.hist(x, bins=num_bins, density=True, color="green", rwidth = 0.5, alpha = 0.5)    # 直方圖
+count, bins, ignored = plt.hist(
+    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
+)  # 直方圖
 
-#print('bins = ', bins)
-#print('len bins = ', len(bins))
+# print('bins = ', bins)
+# print('len bins = ', len(bins))
 
 # 繪製曲線圖
 x = bins
-y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp( - (bins - mu) ** 2 / (2 * sigma ** 2))
-plt.plot(x, y, "--", color = 'r', linewidth = 2)
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2))
+plt.plot(x, y, "--", color="r", linewidth=2)
 
 plt.ylabel("機率")
 
-#plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
-plt.title(r'$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $',fontsize=20)
-
+# plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
+plt.title(
+    r"$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $",
+    fontsize=20,
+)
 
 
 # 第二張圖
@@ -555,38 +838,41 @@ plt.subplot(232)
 
 mu, sigma = 100, 15
 x = np.linspace(mu - 50, mu + 50, 3000)  # 從N1到N2, 分成N個, 包含頭尾
-y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp( - (x - mu) ** 2 / (2 * sigma ** 2))
-plt.plot(x, y, "--", color = 'r', linewidth = 2)
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+plt.plot(x, y, "--", color="r", linewidth=2)
 
 
 # 第三張圖
 plt.subplot(233)
 
-print('另外用海生畫出來')
+print("另外用海生畫出來")
 
-import seaborn as sns #海生, 自動把圖畫得比較好看
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-mu = 100 # 平均值
-sigma = 15 # 標準差
+mu = 100  # 平均值
+sigma = 15  # 標準差
 mu, sigma = 100, 15
-x = np.random.normal(mu, sigma, N)                  # 隨機數
+x = np.random.normal(mu, sigma, N)  # 隨機數
 
-count, bins, ignored = plt.hist(x, bins = num_bins, density = True, color = "green", rwidth = 0.5, alpha = 0.5)    # 直方圖
+count, bins, ignored = plt.hist(
+    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
+)  # 直方圖
 
 # 繪製曲線圖
 sns.kdeplot(x)
-
 
 
 # 第四張圖
 plt.subplot(234)
 
 
-import seaborn as sns #海生, 自動把圖畫得比較好看
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
 
-x = np.random.uniform(size=N)           # 隨機數
+x = np.random.uniform(size=N)  # 隨機數
 
-count, bins, ignored = plt.hist(x, bins=num_bins, density=True, color="green", rwidth = 0.5, alpha = 0.5)    # 直方圖
+count, bins, ignored = plt.hist(
+    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
+)  # 直方圖
 
 # 繪製曲線圖
 sns.kdeplot(x)
@@ -599,8 +885,7 @@ N = 500  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
 x = np.random.randn(N)
-plt.hist(x, num_bins, rwidth = 0.5)
-
+plt.hist(x, num_bins, rwidth=0.5)
 
 
 # 第六張圖
@@ -610,12 +895,10 @@ N = 500  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
 x = np.random.randn(N)
-plt.hist(x, rwidth = 0.5)
-
+plt.hist(x, rwidth=0.5)
 
 
 plt.show()
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -629,10 +912,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 """  新進資料
@@ -753,9 +1033,6 @@ plt.ylabel("人數")
 """
 
 
-
-
-
 """
 二維頻次直方圖
 
@@ -795,4 +1072,3 @@ for i in range(len(n)):
 
 
 """
-

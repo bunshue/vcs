@@ -152,7 +152,9 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("matplotlib 01 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 01 ------------------------------------------------------------"
+)  # 60個
 
 """
 python用mpl_finance中的candlestick_ohlc畫分時圖
@@ -181,105 +183,116 @@ import mplfinance as mpf
 from matplotlib.ticker import Formatter
 from mplfinance.original_flavor import candlestick_ohlc
 
-dfcvs = DataFrame([
-    #    時間            開盤, 最高 ,最低, 收盤
-    ["2018/09/17-21:34", 3646, 3650, 3644, 3650],
-    ["2018/09/17-21:35", 3650, 3650, 3648, 3648],
-    ["2018/09/17-21:36", 3650, 3650, 3648, 3650],
-    ["2018/09/17-21:37", 3652, 3654, 3648, 3652]
-])
+dfcvs = DataFrame(
+    [
+        #    時間            開盤, 最高 ,最低, 收盤
+        ["2018/09/17-21:34", 3646, 3650, 3644, 3650],
+        ["2018/09/17-21:35", 3650, 3650, 3648, 3648],
+        ["2018/09/17-21:36", 3650, 3650, 3648, 3650],
+        ["2018/09/17-21:37", 3652, 3654, 3648, 3652],
+    ]
+)
 
-dfcvs.columns = ['時間','開盤','最高','最低','收盤']
-dfcvs['時間'] = pd.to_datetime(dfcvs['時間'],format = "%Y/%m/%d-%H:%M")
+dfcvs.columns = ["時間", "開盤", "最高", "最低", "收盤"]
+dfcvs["時間"] = pd.to_datetime(dfcvs["時間"], format="%Y/%m/%d-%H:%M")
 
-#matplotlib的date2num將日期轉換爲浮點數，整數部分區分日期，小數區分小時和分鐘
-#因爲小數太小了，需要將小時和分鐘變成整數，需要乘以24（小時）×60（分鐘）= 1440，這樣小時和分鐘也能成爲整數
-#這樣就可以一分鐘就佔一個位置
+# matplotlib的date2num將日期轉換爲浮點數，整數部分區分日期，小數區分小時和分鐘
+# 因爲小數太小了，需要將小時和分鐘變成整數，需要乘以24（小時）×60（分鐘）= 1440，這樣小時和分鐘也能成爲整數
+# 這樣就可以一分鐘就佔一個位置
 
-dfcvs['時間'] = dfcvs['時間'].apply(lambda x:dates.date2num(x) * 1440)
+dfcvs["時間"] = dfcvs["時間"].apply(lambda x: dates.date2num(x) * 1440)
 data_mat = dfcvs.values
-    
-fig,ax = plt.subplots(figsize = (10, 6))
- 
-fig.subplots_adjust(bottom = 0.1)   
-candlestick_ohlc(ax, data_mat, colordown = '#53c156', colorup = '#ff1717', width = 0.2, alpha = 1)
 
-#將x軸的浮點數格式化成日期小時分鐘
-#默認的x軸格式化是日期被dates.date2num之後的浮點數，因爲在上面乘以了1440，所以默認是錯誤的
-#只能自己將浮點數格式化爲日期時間分鐘
-#參考https://matplotlib.org/examples/pylab_examples/date_index_formatter.html
+fig, ax = plt.subplots(figsize=(10, 6))
+
+fig.subplots_adjust(bottom=0.1)
+candlestick_ohlc(
+    ax, data_mat, colordown="#53c156", colorup="#ff1717", width=0.2, alpha=1
+)
+
+
+# 將x軸的浮點數格式化成日期小時分鐘
+# 默認的x軸格式化是日期被dates.date2num之後的浮點數，因爲在上面乘以了1440，所以默認是錯誤的
+# 只能自己將浮點數格式化爲日期時間分鐘
+# 參考https://matplotlib.org/examples/pylab_examples/date_index_formatter.html
 class MyFormatter(Formatter):
-            def __init__(self, dates, fmt = '%Y%m%d %H:%M'):
-                self.dates = dates
-                self.fmt = fmt
-    
-            def __call__(self, x, pos = 0):
-                'Return the label for time x at position pos'
-                ind = int(np.round(x))
-                #ind就是x軸的刻度數值，不是日期的下標
+    def __init__(self, dates, fmt="%Y%m%d %H:%M"):
+        self.dates = dates
+        self.fmt = fmt
 
-                return dates.num2date( ind/1440).strftime(self.fmt)
-        
-formatter = MyFormatter(data_mat[:,0])
+    def __call__(self, x, pos=0):
+        "Return the label for time x at position pos"
+        ind = int(np.round(x))
+        # ind就是x軸的刻度數值，不是日期的下標
+
+        return dates.num2date(ind / 1440).strftime(self.fmt)
+
+
+formatter = MyFormatter(data_mat[:, 0])
 ax.xaxis.set_major_formatter(formatter)
 
 for label in ax.get_xticklabels():
-            label.set_rotation(90)
-            label.set_horizontalalignment('right')
-           
+    label.set_rotation(90)
+    label.set_horizontalalignment("right")
+
 plt.show()
 
-print("matplotlib 02 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 02 ------------------------------------------------------------"
+)  # 60個
 
 # 加載取數與繪圖所需的函數包
 import datetime
-from hs_udata import set_token,stock_quote_daily
+from hs_udata import set_token, stock_quote_daily
 import matplotlib as mpl
 import matplotlib.dates as mdates
-#from mplfinance import candlestick_ohlc
+
+# from mplfinance import candlestick_ohlc
 from mplfinance.original_flavor import candlestick_ohlc
 
-data_price = [1 ,2, 3, 4, 5]
+data_price = [1, 2, 3, 4, 5]
 
-#4、繪制圖片
-fig = plt.figure(figsize = (12, 10))
-grid = plt.GridSpec(12, 10, wspace = 0.5, hspace = 0.5)
+# 4、繪制圖片
+fig = plt.figure(figsize=(12, 10))
+grid = plt.GridSpec(12, 10, wspace=0.5, hspace=0.5)
 
-ax1 = fig.add_subplot(grid[0 : 8, 0 : 12])   # 設置K線圖的尺寸
+ax1 = fig.add_subplot(grid[0:8, 0:12])  # 設置K線圖的尺寸
 
-#candlestick_ohlc(ax1, ohlc.values.tolist(), width = 0.7, colorup = 'red', colordown = 'green')
+# candlestick_ohlc(ax1, ohlc.values.tolist(), width = 0.7, colorup = 'red', colordown = 'green')
 
 # （2）繪制均線
-#ax1.plot(range(len(data_price)), data_price, color = 'red', lw = 2, label = 'MA (5)')
+# ax1.plot(range(len(data_price)), data_price, color = 'red', lw = 2, label = 'MA (5)')
 
 # 設置標注
-plt.title('test', fontsize = 14)       # 設置圖片標題
-plt.ylabel('價 格（元）', fontsize = 14)   # 設置縱軸標題
-#plt.legend(loc = 'best')                    # 繪制圖例
-ax1.set_xticks([])                        # 日期標注在成交量中，故清空此處x軸刻度
-ax1.set_xticklabels([])                   # 日期標注在成交量中，故清空此處x軸
+plt.title("test", fontsize=14)  # 設置圖片標題
+plt.ylabel("價 格（元）", fontsize=14)  # 設置縱軸標題
+# plt.legend(loc = 'best')                    # 繪制圖例
+ax1.set_xticks([])  # 日期標注在成交量中，故清空此處x軸刻度
+ax1.set_xticklabels([])  # 日期標注在成交量中，故清空此處x軸
 
-#（3）繪制成交量
+# （3）繪制成交量
 # 成交量數據
 
 data_volume = [3, 2, 1, 4, 6]
 # 繪制成交量
-ax2 = fig.add_subplot(grid[8 : 10, 0 : 12])  # 設置成交量圖形尺寸
-#ax2.bar(data_volume, color = 'r')                    # 繪制紅色柱狀圖
-#ax2.bar(data_volume, color = 'g')                    # 繪制綠色柱狀圖
-plt.xticks(rotation = 30) 
-plt.xlabel('日 期', fontsize = 14)                               # 設置橫軸標題
+ax2 = fig.add_subplot(grid[8:10, 0:12])  # 設置成交量圖形尺寸
+# ax2.bar(data_volume, color = 'r')                    # 繪制紅色柱狀圖
+# ax2.bar(data_volume, color = 'g')                    # 繪制綠色柱狀圖
+plt.xticks(rotation=30)
+plt.xlabel("日 期", fontsize=14)  # 設置橫軸標題
 # 修改橫軸日期標注
-date_list = [1, 2, 3, 4, 5]#ohlc.index.tolist()           # 獲取日期列表
-xticks_len = round(len(date_list) / (len(ax2.get_xticks()) - 1))      # 獲取默認橫軸標注的間隔
-xticks_num = range(0, len(date_list), xticks_len)                   # 生成橫軸標注位置列表
-xticks_str = list(map(lambda x:date_list[int(x)], xticks_num))     # 生成正在標注日期列表
-ax2.set_xticks(xticks_num)                                        # 設置橫軸標注位置
-ax2.set_xticklabels(xticks_str)                                   # 設置橫軸標注日期
+date_list = [1, 2, 3, 4, 5]  # ohlc.index.tolist()           # 獲取日期列表
+xticks_len = round(len(date_list) / (len(ax2.get_xticks()) - 1))  # 獲取默認橫軸標注的間隔
+xticks_num = range(0, len(date_list), xticks_len)  # 生成橫軸標注位置列表
+xticks_str = list(map(lambda x: date_list[int(x)], xticks_num))  # 生成正在標注日期列表
+ax2.set_xticks(xticks_num)  # 設置橫軸標注位置
+ax2.set_xticklabels(xticks_str)  # 設置橫軸標注日期
 
 plt.show()
 
-print("matplotlib 03 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 03 ------------------------------------------------------------"
+)  # 60個
 
 # foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 foldername = "C:/_git/vcs/_1.data/______test_files1"
@@ -318,37 +331,49 @@ plt.show()
 
 """
 
-print("matplotlib 04 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 04 ------------------------------------------------------------"
+)  # 60個
 
 # 時序圖
 import matplotlib.dates as mdates
 
 #     2017/0808/2100    2017/0808/2101    2017/0808/2102    2017/0808/2103
-x = ['20170808210000' ,'20170808210100' ,'20170808210200' ,'20170808210300'
-     ,'20170808210400' ,'20170808210500' ,'20170808210600' ,'20170808210700'
-     ,'20170808210800' ,'20170808210900']
+x = [
+    "20170808210000",
+    "20170808210100",
+    "20170808210200",
+    "20170808210300",
+    "20170808210400",
+    "20170808210500",
+    "20170808210600",
+    "20170808210700",
+    "20170808210800",
+    "20170808210900",
+]
 
 x = pd.to_datetime(x)
-y = [3900.0,  3903.0,  3891.0,  3888.0,  3893.0,
-     3899.0,  3906.0,  3914.0,  3911.0,  3912.0]
+y = [3900.0, 3903.0, 3891.0, 3888.0, 3893.0, 3899.0, 3906.0, 3914.0, 3911.0, 3912.0]
 
 plt.plot(x, y)
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m-%d %H:%M')) # 設置時間顯示格式
-plt.gcf().autofmt_xdate() # 自動旋轉角度，以避免重疊
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))  # 設置時間顯示格式
+plt.gcf().autofmt_xdate()  # 自動旋轉角度，以避免重疊
 plt.show()
 
-print("matplotlib 05 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 05 ------------------------------------------------------------"
+)  # 60個
 
 # 建立一個新的 figure
-#fig1 = plt.figure()
+# fig1 = plt.figure()
 
 # 增新一個axes（座標軸），以供繪圖和放置資訊:
-#axs = fig1.add_subplot(1,1,1) # 1x1的座標軸
+# axs = fig1.add_subplot(1,1,1) # 1x1的座標軸
 
 # 增新很多個axes，以供繪圖和放置資訊:
-#fig1.delaxes( fig1.gca() ) # 順便示範，把剛剛1x1的座標軸刪掉
+# fig1.delaxes( fig1.gca() ) # 順便示範，把剛剛1x1的座標軸刪掉
 
-#fig1 = plt.figure()  # 等價於fig1 = plt.figure(1)
+# fig1 = plt.figure()  # 等價於fig1 = plt.figure(1)
 fig2 = plt.figure()  # 等價於fig2 = plt.figure(2)
 
 # 一般的情況下，axes是"hold on"的, 也就是資料不會被覆蓋掉。
@@ -358,17 +383,19 @@ fig2 = plt.figure()  # 等價於fig2 = plt.figure(2)
 x = np.linspace(0, 6.28, 100)
 y = np.sin(x)
 
-axes = fig2.add_subplot(1,1,1)
-axes.set_title('y = sin(x)')
+axes = fig2.add_subplot(1, 1, 1)
+axes.set_title("y = sin(x)")
 
-line, = axes.plot(x,y) # 這裡回傳的line就是畫在圖上的資料
+(line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
 
 # 當發現畫錯想修改，可以對line修改：
 line.set_ydata(np.cos(x))
 
 plt.show()
 
-print("matplotlib 06 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 06 ------------------------------------------------------------"
+)  # 60個
 
 from matplotlib import pyplot as plt
 
@@ -380,24 +407,26 @@ s, c = np.sin(x), np.cos(x)
 # 通过 set_position() 移动左侧和下侧的边线
 # 通过 set_ticks_position() 设置坐标轴的刻度线的显示位置
 ax = plt.gca()  # gca 代表当前坐标轴，即 'get current axis'
-ax.spines['right'].set_color('none')
-ax.spines['top'].set_color('none')
-ax.xaxis.set_ticks_position('bottom')
-ax.spines['bottom'].set_position(('data',0))
-ax.yaxis.set_ticks_position('left')
-ax.spines['left'].set_position(('data',0))
+ax.spines["right"].set_color("none")
+ax.spines["top"].set_color("none")
+ax.xaxis.set_ticks_position("bottom")
+ax.spines["bottom"].set_position(("data", 0))
+ax.yaxis.set_ticks_position("left")
+ax.spines["left"].set_position(("data", 0))
 # 设置坐标刻度的字体大小，增加半透明背景
 for label in ax.get_xticklabels() + ax.get_yticklabels():
     label.set_fontsize(16)
-    label.set_bbox(dict(facecolor='white', edgecolor='None', alpha=0.65))
-    
+    label.set_bbox(dict(facecolor="white", edgecolor="None", alpha=0.65))
+
 # 设置坐标轴的长度
 plt.xlim(x.min() * 1.1, x.max() * 1.1)
 plt.ylim(c.min() * 1.1, c.max() * 1.1)
 
 # 设置坐标轴的刻度和标签
-plt.xticks((-np.pi, -np.pi/2, np.pi/2, np.pi),
-          label=(r'$-\pi$', r'$-\pi/2$', r'$+\pi/2$', r'$+\pi$'))
+plt.xticks(
+    (-np.pi, -np.pi / 2, np.pi / 2, np.pi),
+    label=(r"$-\pi$", r"$-\pi/2$", r"$+\pi/2$", r"$+\pi$"),
+)
 plt.yticks([-1, -0.5, 0, 0.5, 1])
 
 # 画出正弦曲线，并设置线条颜色，宽度，样式
@@ -411,54 +440,86 @@ plt.plot(x, c, color="blue", linewidth=2.0, linestyle="-")
 # 在坐标轴上标示相应的点
 t = 2 * np.pi / 3
 # 画出 cos(t) 所在的点在 X 轴上的位置，即画出 (t, 0) -> (t, cos(t)) 线段，使用虚线
-plt.plot([t, t], [0, np.cos(t)], color='blue', linewidth=1.5, linestyle="--")
+plt.plot([t, t], [0, np.cos(t)], color="blue", linewidth=1.5, linestyle="--")
 # 画出标示的坐标点，即在 (t, cos(t)) 处画一个大小为 50 的蓝色点
-plt.scatter([t, ], [np.cos(t), ], 50, color='blue')
+plt.scatter(
+    [
+        t,
+    ],
+    [
+        np.cos(t),
+    ],
+    50,
+    color="blue",
+)
 # 画出标示点的值，即 cos(t) 的值
-plt.annotate(r'$cos(\frac{2\pi}{3})=-\frac{1}{2}$',
-             xy=(t, np.cos(t)), xycoords='data',
-             xytext=(-90, -50), textcoords='offset points', fontsize=16,
-             arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
+plt.annotate(
+    r"$cos(\frac{2\pi}{3})=-\frac{1}{2}$",
+    xy=(t, np.cos(t)),
+    xycoords="data",
+    xytext=(-90, -50),
+    textcoords="offset points",
+    fontsize=16,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
 # 画出 sin(t) 所在的点在 X 轴上的位置，即画出 (t, 0) -> (t, sin(t)) 线段，使用虚线
-plt.plot([t, t],[0, np.sin(t)], color='red', linewidth=1.5, linestyle="--")
+plt.plot([t, t], [0, np.sin(t)], color="red", linewidth=1.5, linestyle="--")
 # 画出标示的坐标点，即在 (t, sin(t)) 处画一个大小为 50 的红色点
-plt.scatter([t, ],[np.sin(t), ], 50, color='red')
+plt.scatter(
+    [
+        t,
+    ],
+    [
+        np.sin(t),
+    ],
+    50,
+    color="red",
+)
 # 画出标示点的值，即 sin(t) 的值
-plt.annotate(r'$sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$',
-             xy=(t, np.sin(t)), xycoords='data',
-             xytext=(+10, +30), textcoords='offset points', fontsize=16,
-             arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
+plt.annotate(
+    r"$sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$",
+    xy=(t, np.sin(t)),
+    xycoords="data",
+    xytext=(+10, +30),
+    textcoords="offset points",
+    fontsize=16,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
 
 # 把结果显示在屏幕上
 plt.show()
 
-print("matplotlib 07 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 07 ------------------------------------------------------------"
+)  # 60個
+
 
 def tickline():
     plt.xlim(0, 10), plt.ylim(-1, 1), plt.yticks([])
     ax = plt.gca()
-    ax.spines['right'].set_color('none')
-    ax.spines['left'].set_color('none')
-    ax.spines['top'].set_color('none')
-    ax.xaxis.set_ticks_position('bottom')
-    ax.spines['bottom'].set_position(('data',0))
-    ax.yaxis.set_ticks_position('none')
+    ax.spines["right"].set_color("none")
+    ax.spines["left"].set_color("none")
+    ax.spines["top"].set_color("none")
+    ax.xaxis.set_ticks_position("bottom")
+    ax.spines["bottom"].set_position(("data", 0))
+    ax.yaxis.set_ticks_position("none")
     ax.xaxis.set_minor_locator(plt.MultipleLocator(0.1))
     for label in ax.get_xticklabels() + ax.get_yticklabels():
         label.set_fontsize(16)
     ax.plot(np.arange(11), np.zeros(11))
     return ax
 
+
 locators = [
-                'plt.NullLocator()',
-                'plt.MultipleLocator(base=1.0)',
-                'plt.FixedLocator(locs=[0, 2, 8, 9, 10])',
-                'plt.IndexLocator(base=3, offset=1)',
-                'plt.LinearLocator(numticks=5)',
-                'plt.LogLocator(base=2, subs=[1.0])',
-                'plt.MaxNLocator(nbins=3, steps=[1, 3, 5, 7, 9, 10])',
-                'plt.AutoLocator()',
-            ]
+    "plt.NullLocator()",
+    "plt.MultipleLocator(base=1.0)",
+    "plt.FixedLocator(locs=[0, 2, 8, 9, 10])",
+    "plt.IndexLocator(base=3, offset=1)",
+    "plt.LinearLocator(numticks=5)",
+    "plt.LogLocator(base=2, subs=[1.0])",
+    "plt.MaxNLocator(nbins=3, steps=[1, 3, 5, 7, 9, 10])",
+    "plt.AutoLocator()",
+]
 
 n_locators = len(locators)
 
@@ -473,12 +534,15 @@ for i, locator in enumerate(locators):
     plt.subplot(n_locators, 1, i + 1)
     ax = tickline()
     ax.xaxis.set_major_locator(eval(locator))
-    plt.text(5, 0.3, locator[3:], ha='center', size=16)
+    plt.text(5, 0.3, locator[3:], ha="center", size=16)
 
-plt.subplots_adjust(bottom=.01, top=.99, left=.01, right=.99)
+plt.subplots_adjust(bottom=0.01, top=0.99, left=0.01, right=0.99)
 plt.show()
 
-print("matplotlib 08 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 08 ------------------------------------------------------------"
+)  # 60個
+
 
 def plt_bar():
     n = 12
@@ -487,38 +551,40 @@ def plt_bar():
     Y2 = (1 - X / float(n)) * np.random.uniform(0.5, 1.0, n)
 
     plt.subplot(1, 2, 1)
-    plt.bar(X, +Y1, facecolor='#9999ff', edgecolor='white')
-    plt.bar(X, -Y2, facecolor='#ff9999', edgecolor='white')
+    plt.bar(X, +Y1, facecolor="#9999ff", edgecolor="white")
+    plt.bar(X, -Y2, facecolor="#ff9999", edgecolor="white")
 
     for x, y in zip(X, Y1):
-        plt.text(x + 0.4, y + 0.05, '%.2f' % y, ha='center', va= 'bottom')
+        plt.text(x + 0.4, y + 0.05, "%.2f" % y, ha="center", va="bottom")
 
     for x, y in zip(X, Y2):
-        plt.text(x + 0.4, -y - 0.05, '%.2f' % y, ha='center', va= 'top')
+        plt.text(x + 0.4, -y - 0.05, "%.2f" % y, ha="center", va="top")
 
-    plt.xlim(-.5, n)
+    plt.xlim(-0.5, n)
     plt.xticks(())
     plt.ylim(-1.25, 1.25)
     plt.yticks(())
 
+
 def plt_contour():
-    def f(x,y):
-        return (1 - x / 2 + x**5 + y**3) * np.exp(-x**2 -y**2)
+    def f(x, y):
+        return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2) - y**2)
 
     n = 256
     x = np.linspace(-3, 3, n)
     y = np.linspace(-3, 3, n)
-    X,Y = np.meshgrid(x, y)
+    X, Y = np.meshgrid(x, y)
 
     plt.subplot(1, 2, 2)
 
-    plt.contourf(X, Y, f(X, Y), 8, alpha=.75, cmap=plt.cm.hot)
-    C = plt.contour(X, Y, f(X, Y), 8, colors='black')
+    plt.contourf(X, Y, f(X, Y), 8, alpha=0.75, cmap=plt.cm.hot)
+    C = plt.contour(X, Y, f(X, Y), 8, colors="black")
     plt.clabel(C, inline=1, fontsize=10)
 
     plt.xticks(())
     plt.yticks(())
-    
+
+
 plt.figure(figsize=(16, 6))
 plt_bar()
 plt_contour()
@@ -526,201 +592,242 @@ plt.tight_layout()
 
 plt.show()
 
-print("matplotlib 09 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 09 ------------------------------------------------------------"
+)  # 60個
+
 
 def plt_grid():
     ax = plt.subplot(1, 2, 1)
-    
-    ax.set_xlim(0,4)
-    ax.set_ylim(0,3)
+
+    ax.set_xlim(0, 4)
+    ax.set_ylim(0, 3)
     ax.xaxis.set_major_locator(plt.MultipleLocator(1.0))
     ax.xaxis.set_minor_locator(plt.MultipleLocator(0.1))
     ax.yaxis.set_major_locator(plt.MultipleLocator(1.0))
     ax.yaxis.set_minor_locator(plt.MultipleLocator(0.1))
-    ax.grid(which='major', axis='x', linewidth=0.75, linestyle='-', color='0.75')
-    ax.grid(which='minor', axis='x', linewidth=0.25, linestyle='-', color='0.75')
-    ax.grid(which='major', axis='y', linewidth=0.75, linestyle='-', color='0.75')
-    ax.grid(which='minor', axis='y', linewidth=0.25, linestyle='-', color='0.75')
+    ax.grid(which="major", axis="x", linewidth=0.75, linestyle="-", color="0.75")
+    ax.grid(which="minor", axis="x", linewidth=0.25, linestyle="-", color="0.75")
+    ax.grid(which="major", axis="y", linewidth=0.75, linestyle="-", color="0.75")
+    ax.grid(which="minor", axis="y", linewidth=0.25, linestyle="-", color="0.75")
     ax.set_xticklabels([])
     ax.set_yticklabels([])
-    
+
+
 def plt_polar():
     ax = plt.subplot(1, 2, 2, polar=True)
-    
+
     N = 20
     theta = np.arange(0.0, 2 * np.pi, 2 * np.pi / N)
     radii = 10 * np.random.rand(N)
     width = np.pi / 4 * np.random.rand(N)
     bars = plt.bar(theta, radii, width=width, bottom=0.0)
 
-    for r,bar in zip(radii, bars):
-        bar.set_facecolor(plt.cm.jet(r/10.))
+    for r, bar in zip(radii, bars):
+        bar.set_facecolor(plt.cm.jet(r / 10.0))
         bar.set_alpha(0.5)
 
     ax.set_xticklabels([])
     ax.set_yticklabels([])
-    
+
+
 plt.figure(figsize=(16, 6))
 plt_grid()
 plt_polar()
 plt.tight_layout()
 plt.show()
 
-print("matplotlib 10 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 10 ------------------------------------------------------------"
+)  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-x = np.linspace(0, 2*np.pi, 300)
+x = np.linspace(0, 2 * np.pi, 300)
 y = np.sin(x)
 fig = plt.figure()
-ax1 = fig.add_subplot(121,projection='polar')
+ax1 = fig.add_subplot(121, projection="polar")
 ax1.plot(x, y)
-ax1.set_title("極座標 Sin 圖",fontsize=12)
+ax1.set_title("極座標 Sin 圖", fontsize=12)
 ax2 = fig.add_subplot(122)
 ax2.plot(x, y)
-ax2.set_title('一般座標 Sin 圖',fontsize=12)
+ax2.set_title("一般座標 Sin 圖", fontsize=12)
 ax2.set_aspect(2)
-plt.tight_layout()                      # 緊縮佈局
+plt.tight_layout()  # 緊縮佈局
 
 plt.show()
 
-print("matplotlib 11 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 11 ------------------------------------------------------------"
+)  # 60個
 
 import csv
 import matplotlib.pyplot as plt
 from datetime import datetime
 
+
 def convert_tw_date_to_ad(tw_date):
     # 分割日期為年、月、日
-    year, month, day = map(int, tw_date.split('/'))
+    year, month, day = map(int, tw_date.split("/"))
     # 將民國年轉換為西元年
     year += 1911
     # 重組日期並返回
     return f"{year}-{month:02d}-{day:02d}"
 
-filename = '_data/ST43_3479_202310.csv'
+
+filename = "_data/ST43_3479_202310.csv"
 with open(filename) as csvFile:
     csvReader = csv.reader(csvFile)
-    for _ in range(5):                              # 跳過前5列
+    for _ in range(5):  # 跳過前5列
         next(csvReader)
     all_rows = list(csvReader)
-    data_without_last_row = all_rows[:-1]           # 跳過最後一列
-    
-    mydates, openPrices, highPrices, lowPrices, closePrices = [], [], [], [], []   
-    
+    data_without_last_row = all_rows[:-1]  # 跳過最後一列
+
+    mydates, openPrices, highPrices, lowPrices, closePrices = [], [], [], [], []
+
     for row in data_without_last_row:
         try:
             # 將日期轉換為西元年格式
             converted_date = convert_tw_date_to_ad(row[0])
             # 使用 strptime 解析轉換後的日期字串
             parseDate = datetime.strptime(converted_date, "%Y-%m-%d")
-            currentDate = parseDate.strftime("%Y-%m-%d") # 轉換後日期
+            currentDate = parseDate.strftime("%Y-%m-%d")  # 轉換後日期
             openPrice = eval(row[3])
-            highPrice = eval(row[4])                # 設定最高價
-            lowPrice = eval(row[5])                 # 設定最低價
-            closePrice = eval(row[6])               # 設定收盤價
+            highPrice = eval(row[4])  # 設定最高價
+            lowPrice = eval(row[5])  # 設定最低價
+            closePrice = eval(row[6])  # 設定收盤價
         except Exception:
-            print(f'有缺值 {row}')
+            print(f"有缺值 {row}")
         else:
-            openPrices.append(openPrice)            # 儲存開盤價
-            highPrices.append(highPrice)            # 儲存最高價
-            lowPrices.append(lowPrice)              # 儲存最低價
-            closePrices.append(closePrice)          # 儲存收盤價
-            mydates.append(currentDate)             # 儲存日期
+            openPrices.append(openPrice)  # 儲存開盤價
+            highPrices.append(highPrice)  # 儲存最高價
+            lowPrices.append(lowPrice)  # 儲存最低價
+            closePrices.append(closePrice)  # 儲存收盤價
+            mydates.append(currentDate)  # 儲存日期
 
-fig = plt.figure(figsize=(12, 8))                   # 設定繪圖區大小
-plt.plot(mydates, openPrices, '-p', label='開盤價')    # 繪製開盤價
-plt.plot(mydates, highPrices, '-*', label='最高價')    # 繪製最高價
-plt.plot(mydates, lowPrices, '-o', label='最低價')     # 繪製最低價
-plt.plot(mydates, closePrices, '-^', label='收盤價')   # 繪製收盤價
+fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
+plt.plot(mydates, openPrices, "-p", label="開盤價")  # 繪製開盤價
+plt.plot(mydates, highPrices, "-*", label="最高價")  # 繪製最高價
+plt.plot(mydates, lowPrices, "-o", label="最低價")  # 繪製最低價
+plt.plot(mydates, closePrices, "-^", label="收盤價")  # 繪製收盤價
 plt.legend()
-fig.autofmt_xdate()                                 # 日期旋轉
+fig.autofmt_xdate()  # 日期旋轉
 plt.title("2023年10月安勤公司日線圖", fontsize=24)
-plt.ylabel('價格', fontsize=14)
+plt.ylabel("價格", fontsize=14)
 plt.show()
 
-print("matplotlib 13 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 13 ------------------------------------------------------------"
+)  # 60個
 
 import numpy as np
 from matplotlib import pyplot as plt
 
 ax = np.linspace(0, 20, 100)
-ay = ax*0.15
+ay = ax * 0.15
 by = np.sin(ax)
 
 # 產生子圖表，第一個數值為縱軸要有幾張圖，第二個數值為橫軸，第三個數值為排在哪裡
 # label 可以設定圖例標籤
 #  '-', '--', '-.', ':', 'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
-plt.plot(ax, ay, color='red', linewidth=8.0, linestyle='dotted', label='x0.5')
-plt.plot(ax, by, color='blue', linewidth=2.0, linestyle='-', label='sin')
+plt.plot(ax, ay, color="red", linewidth=8.0, linestyle="dotted", label="x0.5")
+plt.plot(ax, by, color="blue", linewidth=2.0, linestyle="-", label="sin")
 # 設定圖例標籤位置 ( best, upper, lower, right,left,center )
-plt.legend(loc='lower center')
+plt.legend(loc="lower center")
 plt.ylim((-3, 3))  # y 軸上下最大和最小區間
 plt.xlim((0, 20))  # y 軸上下最大和最小區間
-plt.yticks([-3, 0, 3], ['min(-3)', '0', 'max(3)'])  # 可以設置座標軸上特定文字
+plt.yticks([-3, 0, 3], ["min(-3)", "0", "max(3)"])  # 可以設置座標軸上特定文字
 
 xx = plt.gca()
-xx.spines['right'].set_color('none')  # 設置邊框樣式
-xx.spines['top'].set_color('none')
-xx.spines['bottom'].set_position(('data', 0))  # 設置邊框位置
+xx.spines["right"].set_color("none")  # 設置邊框樣式
+xx.spines["top"].set_color("none")
+xx.spines["bottom"].set_position(("data", 0))  # 設置邊框位置
 
 plt.show()
 
-print("matplotlib 15 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 15 ------------------------------------------------------------"
+)  # 60個
 
 import numpy as np
 from matplotlib import pyplot as plt
 
 ax = np.linspace(-20, 20, 100)
-ay = ax*0.5
+ay = ax * 0.5
 by = np.sin(ax)
 cx = 10
-cy = cx*0.5
+cy = cx * 0.5
 
-plt.plot(ax, ay, color='red', linewidth=3.0, linestyle='dashed', label='x0.5', zorder=2)
-plt.plot(ax, by, color='blue', linewidth=2.0, linestyle='solid', label='sin', zorder=2)
+plt.plot(ax, ay, color="red", linewidth=3.0, linestyle="dashed", label="x0.5", zorder=2)
+plt.plot(ax, by, color="blue", linewidth=2.0, linestyle="solid", label="sin", zorder=2)
 # 繪製垂直虛線
-plt.plot([cx, cx,],[cy, 0,], color='black', linewidth=1.0, linestyle='dashed', zorder=1, alpha=0.5)
+plt.plot(
+    [
+        cx,
+        cx,
+    ],
+    [
+        cy,
+        0,
+    ],
+    color="black",
+    linewidth=1.0,
+    linestyle="dashed",
+    zorder=1,
+    alpha=0.5,
+)
 
 # 加上單一圓點
 # https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.scatter.html
-plt.scatter(cx, cy, s=100, color='red', zorder=2)
+plt.scatter(cx, cy, s=100, color="red", zorder=2)
 
 # 繪製 annotate
 # https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.annotate.html
-plt.annotate('test', xy=(cx+0.5, cy-0.2), xycoords='data', xytext=(+36, -36),
-             textcoords='offset points', fontsize=12,
-             arrowprops=dict(arrowstyle='->', connectionstyle="arc3,rad=.2"))
+plt.annotate(
+    "test",
+    xy=(cx + 0.5, cy - 0.2),
+    xycoords="data",
+    xytext=(+36, -36),
+    textcoords="offset points",
+    fontsize=12,
+    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
+)
 
-plt.legend(loc='best')
+plt.legend(loc="best")
 
 plt.ylim((-10, 10))  # 設定 x 和 y 的邊界值
 plt.xlim((-20, 20))
 
 xx = plt.gca()  # 設定座標軸位置
-xx.spines['right'].set_color('none')
-xx.spines['top'].set_color('none')
-xx.spines['bottom'].set_position(('data', 0))
-xx.spines['left'].set_position(('data', 0))
+xx.spines["right"].set_color("none")
+xx.spines["top"].set_color("none")
+xx.spines["bottom"].set_position(("data", 0))
+xx.spines["left"].set_position(("data", 0))
 
 plt.show()
 
-print("matplotlib 16 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 16 ------------------------------------------------------------"
+)  # 60個
 
 
+print(
+    "matplotlib 17 ------------------------------------------------------------"
+)  # 60個
 
-print("matplotlib 17 ------------------------------------------------------------")  # 60個
 
+print(
+    "matplotlib 18 ------------------------------------------------------------"
+)  # 60個
 
-print("matplotlib 18 ------------------------------------------------------------")  # 60個
-
-print("matplotlib 19 ------------------------------------------------------------")  # 60個
+print(
+    "matplotlib 19 ------------------------------------------------------------"
+)  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 
 """ 新進資料 都是抽出資料
@@ -840,7 +947,3 @@ plt.ylabel(r'溫度 $C^{o}$')
 
 
 """
-
-
-
-

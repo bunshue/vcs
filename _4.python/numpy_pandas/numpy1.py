@@ -7,7 +7,7 @@ numpy: 數值計算的標準套件
 import sys
 import numpy as np
 import pandas as pd
-
+'''
 print('------------------------------------------------------------')	#60個
 
 print('建立 numpy 陣列 一維')
@@ -166,14 +166,6 @@ print('4.加總、乘積及平均值：\n', np.sum(a), np.prod(a), np.mean(a))
 print('5.每一直行加總、乘積與平均值：\n', np.sum(a, axis = 0), np.prod(a, axis = 0), np.mean(a, axis = 0))
 print('6.每一橫列加總、乘積與平均值：\n', np.sum(a, axis = 1), np.prod(a, axis = 1), np.mean(a, axis = 1))
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 print('串列 轉 numpy陣列')
@@ -309,16 +301,6 @@ print(c)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 """
 np.gradient(f) 計算數組f中元素的梯度，當f為多維時，返回每個維度梯度
 梯度：連續值之間的變化率，即斜率
@@ -329,7 +311,6 @@ print(na)
 print(np.gradient(na))
 
 print('------------------------------------------------------------')	#60個
-
 
 """
 50個常用的Numpy函數解釋，參數和使用示例
@@ -1029,33 +1010,52 @@ print(type(arr)) # <class 'numpy.ndarray'>
 np.savetxt('output_data1.csv', arr, delimiter = ',')
 np.savetxt('output_data2.csv', arr, delimiter = ',', fmt = '%d')
 np.savetxt('output_data3.csv', arr, delimiter = ',', fmt = '%.2f')
+'''
+print('------------------------------------------------------------')	#60個
+
+print('numpy 之 array 之 形狀轉換')
+
+animal_list = [
+    [1, '鼠', 'mouse', 3],
+    [2, '牛', 'ox', 48],
+    [3, '虎', 'tiger', 33],
+    [4, '兔', 'rabbit', 8],
+    [5, '龍', 'dragon', 38],
+    [6, "蛇", "snake", 16],
+    ]
+
+na_animal1 = np.array(animal_list)
+#print(na_animal1)
+print('維度 :', na_animal1.ndim)
+print('形狀 :', na_animal1.shape)
+print('數量 :', na_animal1.size)
+
+print('numpy 之 array 之 reshape 用法, 轉成 3 X 8')
+na_animal2 = na_animal1.reshape(3, 8) #ravel()方法將數組維度拉成一維數組
+print(na_animal2)
+print('維度 :', na_animal2.ndim)
+print('形狀 :', na_animal2.shape)
+print('數量 :', na_animal2.size)
+
+print('numpy 之 array 之 ravel 用法, 轉成 一維陣列')
+na_animal3 = na_animal1.ravel() #ravel()方法將數組維度拉成一維數組
+#print(na_animal3)
+print('維度 :', na_animal3.ndim)
+print('形狀 :', na_animal3.shape)
+print('數量 :', na_animal3.size)
 
 print('------------------------------------------------------------')	#60個
 
+print('numpy 之 mgrid()方法生成等差數列')
 
-x = np.array( [[40, 70, 25], [75, 80, 65], [80, 90, 100]])
+print('一維等差數列')
+a = np.mgrid[0:5:1] #用mgrid()方法生成等差數列a
+print(a)
 
-print(x.shape)
-print(x)
-
-y = x.reshape(1, 9)
-print(y.shape)
-print(y)
-
-y = x.ravel()
-print(y.shape)
-print(y)
-
-x = [1, 2, 3, 4, 5, 6]
-print(x)
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
+print('二維等差數列')
+a, b = np.mgrid[0:5:1, 0:5:1] #用mgrid()方法生成等差數列a,b
+print(a)
+print(b)
 
 print('------------------------------------------------------------')	#60個
 
@@ -1109,5 +1109,4 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
-
 
