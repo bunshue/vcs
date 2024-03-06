@@ -109,30 +109,6 @@ plt.imshow(roi),plt.axis('off')
 plt.show()
 
 
-"""
-
-用plot繪制顯示出圖片后，將鼠標移動到圖片上，會在右下角出現當前點的坐標，以及像素值。
-
-三、幾何變換 
-
-Image類有resize()、rotate()和transpose()方法進行幾何變換。
-
-　1、圖像的縮放和旋轉
-
-dst = img.resize((128, 128))
-dst = img.rotate(45) # 順時針角度表示
-
-2、轉換圖像
-
-dst = im.transpose(Image.FLIP_LEFT_RIGHT) #左右互換
-dst = im.transpose(Image.FLIP_TOP_BOTTOM) #上下互換
-dst = im.transpose(Image.ROTATE_90)  #順時針旋轉
-dst = im.transpose(Image.ROTATE_180)
-dst = im.transpose(Image.ROTATE_270)
-
-transpose()和rotate()沒有性能差別。
-"""
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -265,105 +241,6 @@ img[-2,:] (or im[-2]) # 倒數第二行
 
 """
 
-
-print('------------------------------------------------------------')	#60個
-
-
-"""
-圖像直方圖
-
-我們先來看兩個函數reshape和flatten:
-
-假設我們先生成一個一維數組：
-
-vec=np.arange(15)
-print vec
-
-顯示為：
-
-[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
-
-如果我們要把這個一維數組，變成一個3*5二維矩陣，我們可以使用reshape來實現
-
-mat= vec.reshape(3,5)
-print mat
-
-顯示為
-
-[[ 0  1  2  3  4]
- [ 5  6  7  8  9]
- [10 11 12 13 14]]
-
-現在如果我們返過來，知道一個二維矩陣，要變成一個一維數組，就不能用reshape了，只能用flatten. 我們來看兩者的區別
-
-a1=mat.reshape(1,-1)  #-1表示為任意，讓系統自動計算
-print a1
-a2=mat.flatten()
-print a2
-
-顯示為：
-
-a1:  [[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]]
-a2:  [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
-
-可以看出，用reshape進行變換，實際上變換后還是二維數組，兩個方括號，因此只能用flatten.
-
-我們要對圖像求直方圖，就需要先把圖像矩陣進行flatten操作，使之變為一維數組，然后再進行統計。
-
-一、畫灰度圖直方圖
-
-繪圖都可以調用matplotlib.pyplot庫來進行，其中的hist函數可以直接繪制直方圖。
-
-調用方式：
-
-n, bins, patches = plt.hist(arr, bins=50, density = True, facecolor='green', alpha=0.75)
-
-hist的參數非常多，但常用的就這五個，只有第一個是必須的，后面四個可選
-
-arr: 需要計算直方圖的一維數組
-
-bins: 直方圖的柱數，可選項，默認為10
-
-density: 是否將得到的直方圖向量歸一化。默認為False
-
-facecolor: 直方圖顏色
-
-alpha: 透明度
-
-返回值 ：
-
-n: 直方圖向量，是否歸一化由參數設定
-
-bins: 返回各個bin的區間范圍
-
-patches: 返回每個bin里面包含的數據，是一個list
-"""
-
-img=np.array(Image.open(filename).convert('L'))
-
-plt.figure('Peony')
-arr=img.flatten()
-n, bins, patches = plt.hist(arr, bins=256, density = True, facecolor='green', alpha=0.5)
-
-plt.show()
-
-"""
-二、彩色圖片直方圖
-實際上是和灰度直方圖一樣的，只是分別畫出三通道的直方圖，然后疊加在一起。
-"""
-
-src=Image.open(filename)
-r, g, b=src.split()
-
-plt.figure('Peony')
-array_r = np.array(r).flatten()
-plt.hist(array_r, bins=256, alpha=0.5, density = True,facecolor='r',edgecolor='r',stacked=1)
-array_g = np.array(g).flatten()
-plt.hist(array_g, bins=256, alpha=0.5, density = True, facecolor='g',edgecolor='g',stacked=1)
-array_b = np.array(b).flatten()
-plt.hist(array_b, bins=256, alpha=0.5, density = True, facecolor='b',edgecolor='b')
-plt.show()
-
 print('------------------------------------------------------------')	#60個
 
 import torchvision.transforms as transforms
@@ -375,30 +252,6 @@ print('------------------------------------------------------------')	#60個
 """
 from PIL import Image,ImageDraw
 image = Image.open("captcha.png").convert("L")	#轉換成灰階圖像
-"""
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-#PIL之基本設定
-
-
-""" not ready
-from PIL import Image, ImageDraw, ImageFont
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-im = Image.open(filename1)
-
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/picture1_partial.jpg'
-image3 = image1.resize((100, 500), Image.ANTIALIAS)
-image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-
 """
 
 print('------------------------------------------------------------')	#60個
@@ -500,33 +353,6 @@ print(rgb_of_pixel(filename, 131, 81))
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image, ImageFont, ImageDraw
-
-img = Image.new("RGBA", (360, 180))  # 建立色彩模式為 RGBA，尺寸 360x180 的空白圖片
-font = ImageFont.truetype("NotoSansTC-Regular.otf", 40)  # 設定字型與尺寸
-draw = ImageDraw.Draw(img)  # 準備在圖片上繪圖
-# 將文字畫入圖片
-draw.text(
-    (10, 120),
-    "OXXO.STUDIO",
-    fill=(255, 255, 255),
-    font=font,
-    stroke_width=2,
-    stroke_fill="red",
-)
-draw.text(
-    xy=(50, 0),
-    text="大家好\n哈哈",
-    align="center",
-    fill=(255, 255, 255),
-    font=font,
-    stroke_width=2,
-    stroke_fill="blue",
-)
-img.save("ok.png")  # 儲存為 png
-
-print("------------------------------------------------------------")  # 60個
-
 import glob
 from PIL import Image
 
@@ -579,22 +405,6 @@ for i in imgs:
     im2 = im.resize((200, 200))  # 調整圖片尺寸為 200x200
     im2.save(f"./oxxo/resize/{name}")  # 調整後存檔到 resize 資料夾
 
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image
-
-bg = Image.new("RGB", (400, 300), "#ff0000")  # 產生 RGB 色域，400x300 背景紅色的圖片
-bg.save("oxxostudio.jpg")
-# bg.show()  # Colab 不支援直接顯示，如果使用本機環境會開啟圖片檢視器
-
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image
-
-bg = Image.new("RGB", (400, 300), "#ff000055")  # 產生 RGBA 色域，400x300 背景半透明紅色的圖片
-bg.save("oxxostudio.png")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -684,93 +494,6 @@ print(image.size)
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.new("RGB", (300, 180), "aqua")  # 建立aqua顏色影像
-plt.imshow(image)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.new("RGBA", (300, 180))     # 建立完全透明影像
-plt.imshow(image)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-newImage = Image.new('RGBA', (300, 100), "Yellow")
-print(newImage.getpixel((150, 50)))      # 列印中心點的色彩
-newImage.save("tmp_pic13.png")
-
-print("------------------------------------------------------------")  # 60個
-
-newImage = Image.new('RGBA', (300, 300), "Yellow")
-for x in range(50, 251):                                # x軸區間在50-250
-    for y in range(50, 151):                            # y軸區間在50-150
-        newImage.putpixel((x, y), (0, 255, 255, 255))   # 填青色
-
-newImage.save("tmp_pic14.png")                         # 第一階段存檔
-
-for x in range(50, 251):                                # x軸區間在50-250            
-    for y in range(151, 251):                           # y軸區間在151-250
-        newImage.putpixel((x, y), ImageColor.getcolor("Blue", "RGBA"))
-
-newImage.save("tmp_pic15.png")                         # 第一階段存檔
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)           # 建立Pillow物件
-width, height = image.size
-
-newPict1 = image.resize((width*2, height))   # 寬度是2倍
-plt.imshow(newPict1)
-plt.show()
-
-newPict2 = image.resize((width, height*2))   # 高度是2倍
-plt.imshow(newPict2)
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)           # 建立Pillow物件
-image090=image.rotate(90)  # 旋轉90度
-image180=image.rotate(180)  # 旋轉180度
-image270=image.rotate(270)  # 旋轉270度
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)                       # 建立Pillow物件
-image45a=image.rotate(45)  # 旋轉45度
-image45b=image.rotate(45, expand=True)  # 旋轉45度圖像擴充
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)                     # 建立Pillow物件
-image_flip1 = image.transpose(Image.FLIP_LEFT_RIGHT)  # 左右
-image_flip2 = image.transpose(Image.FLIP_TOP_BOTTOM)  # 上下
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)           # 建立Pillow物件
-cropPict = image.crop((80, 30, 150, 100))   # 裁切區間
-cropPict.save("tmp_pic16.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)           # 建立Pillow物件
-copyPict = image.copy()                      # 複製
-copyPict.save("tmp_pic17.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)               # 建立Pillow物件
-copyPict = image.copy()                          # 複製
-cropPict = copyPict.crop((80, 30, 150, 100))    # 裁切區間
-copyPict.paste(cropPict, (20, 20))              # 第一次合成
-copyPict.paste(cropPict, (20, 100))             # 第二次合成
-copyPict.save("tmp_pic18.jpg")                   # 儲存
-
-print("------------------------------------------------------------")  # 60個
-
 image = Image.open(filename)               # 建立Pillow物件
 copyPict = image.copy()                          # 複製
 cropPict = copyPict.crop((80, 30, 150, 100))    # 裁切區間
@@ -785,118 +508,6 @@ for x in range(20, width-20, cropWidth):         # 雙層迴圈合成
 newImage.save("tmp_pic19.jpg")                   # 儲存
 
 print("------------------------------------------------------------")  # 60個
-
-from PIL import ImageFilter
-
-image = Image.open(filename)       # 建立Pillow物件
-filterPict = image.filter(ImageFilter.BLUR)
-filterPict.save("tmp_pic20_BLUR.jpg")
-
-filterPict = image.filter(ImageFilter.CONTOUR)
-filterPict.save("tmp_pic21_CONTOUR.jpg")
-
-filterPict = image.filter(ImageFilter.EMBOSS)
-filterPict.save("tmp_pic22_EMBOSS.jpg")
-
-filterPict = image.filter(ImageFilter.FIND_EDGES)
-filterPict.save("tmp_pic23_FIND_EDGES.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image, ImageDraw
-
-newImage = Image.new('RGBA', (300, 300), "Yellow")  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(newImage)
-
-# 繪製點
-for x in range(100, 200, 3):
-    for y in range(100, 200, 3):
-        drawObj.point([(x,y)], fill='Green')
-
-# 繪製線條, 繪外框線
-drawObj.line([(0,0), (299,0), (299,299), (0,299), (0,0)], fill="Black")
-# 繪製右上角美工線
-for x in range(150, 300, 10):
-    drawObj.line([(x,0), (300,x-150)], fill="Blue")
-# 繪製左下角美工線
-for y in range(150, 300, 10):
-    drawObj.line([(0,y), (y-150,300)], fill="Blue")    
-newImage.save("tmp_pic24.png")
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image, ImageDraw, ImageFont
-
-newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(newImage)
-
-strText = 'Welcome to the United States'        # 設定欲列印英文字串
-drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
-
-# 使用古老英文字型, 字型大小是36
-# fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36) 找不到字形
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-fontInfo = ImageFont.truetype(font_filename, 36)
-
-drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
-# 處理中文字體
-strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
-
-#fontInfo = ImageFont.truetype('C:\Windows\Fonts\ebas927.ttf', 48)
-#drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
-
-#fontInfo = ImageFont.truetype('C:\Windows\Fonts\DFZongYiStd-W9.otf', 48)
-#drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
-
-newImage.save("tmp_pic26.png")
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image, ImageDraw, ImageFont
-
-newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
-drawObj = ImageDraw.Draw(newImage)
-
-strText = 'Welcome to the United States'        # 設定欲列印英文字串
-drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
-
-# 使用古老英文字型, 字型大小是36
-#fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-fontInfo = ImageFont.truetype(font_filename, 36)
-
-drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
-# 使用Microsoft所提供的新細明體中文字型處理中文字體
-strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
-fontInfo = ImageFont.truetype('C:\Windows\Fonts\mingliu.ttc', 48)
-drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
-newImage.save("tmp_pic27.png")
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image, ImageFilter
-
-image = Image.open(filename)
-width, height = image.size
-
-"""
-image.show()
-image.transpose(Image.FLIP_LEFT_RIGHT).show()
-image.filter(ImageFilter.GaussianBlur(4)).show()
-image.filter(ImageFilter.EMBOSS).show()
-image.thumbnail((width // 4, height // 4))
-image.show()
-"""
-
-print('------------------------------------------------------------')	#60個
-
-#filter
-from PIL import Image,ImageFilter
-image=Image.open(filename)
-image2=image.filter(ImageFilter.EDGE_ENHANCE)
-#image2.show()
-
-print('------------------------------------------------------------')	#60個
 
 #crop
 with Image.open(filename) as image:
@@ -965,24 +576,6 @@ with Image.open(filename) as image:
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image, ImageDraw
-
-image = Image.new("RGB", (400,300), '#00FF00')
-draw=ImageDraw.Draw(image)
-draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
-#image.show()
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image, ImageDraw
-
-image = Image.new("RGB", (400,300))
-draw=ImageDraw.Draw(image)
-draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
-#image.show()
-
-print("------------------------------------------------------------")  # 60個
-
 image = Image.open(filename)
 pic=image.convert("1")
 #pic.show()
@@ -1006,14 +599,6 @@ from PIL import Image,ImageEnhance
 with Image.open(filename) as image:
     image_new = ImageEnhance.Brightness(image).enhance(2.5)
     image_new.save("tmp_pic_brightness.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image,ImageFilter
-
-image = Image.open(filename)
-image_new = image.filter(ImageFilter.EDGE_ENHANCE)
-#image_new.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1066,16 +651,6 @@ image.close()
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image,ImageDraw,ImageFont
-
-image=Image.open(filename)
-imfont=ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf",120)
-draw=ImageDraw.Draw(image)
-draw.text((50,50),"牡丹亭",font=imfont,fill=(0,255,255,255))
-#image.show()
-
-print("------------------------------------------------------------")  # 60個
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 from PIL import Image
@@ -1101,153 +676,6 @@ plt.imshow(image2)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-#Pillow：基本繪圖
-
-from PIL import Image, ImageDraw
-
-#繪直線
-
-image = Image.new("RGB", (400,300), "lightgray")
-
-draw_image = ImageDraw.Draw(image)
-
-draw_image.line([40,50,360,280], fill="blue", width=3)
-
-plt.imshow(image)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-#繪矩形
-
-image = Image.new("RGB", (400,300), "lightgray")
-
-draw_image = ImageDraw.Draw(image)
-
-draw_image.rectangle((100,80,300,240), fill="yellow", outline="black")
-
-plt.imshow(image)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#繪點
-
-image = Image.new("RGB", (400,300), "lightgray")
-
-draw_image = ImageDraw.Draw(image)
-
-draw_image.point([(100,100), (100,101), (100,102)], fill='red')
-
-plt.imshow(image)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#繪圓或橢圓
-
-image = Image.new("RGB", (400,300), "lightgray")
-
-draw_image = ImageDraw.Draw(image)
-
-draw_image.ellipse((50,50,350,250), fill="purple", outline="green")
-
-plt.imshow(image)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#繪多邊形
-
-image = Image.new("RGB", (400,300), "lightgray")
-
-draw_image = ImageDraw.Draw(image)
-
-draw_image.polygon([(200,40),(60,250),(320,250)], fill="brown", outline="red")
-
-plt.imshow(image)
-
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-#繪文字
-
-from PIL import ImageFont
-
-image = Image.new("RGB", (400,300), "lightgray")
-
-draw_image = ImageDraw.Draw(image)
-
-draw_image.text((150,80), "font demo", fill="red")  #繪英文文字
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-myfont = ImageFont.truetype(font_filename, 24)
-
-draw_image.text((120,150),"雅黑字體示範", fill="blue", font=myfont)  #繪中文 
-
-plt.imshow(image)
-
-plt.show()
-
-#繪文字
-
-from PIL import Image, ImageDraw, ImageFont
-
-image = Image.new("RGB", (400,300), "lightgray")
-
-draw_image = ImageDraw.Draw(image)
-
-draw_image.text((120,80), "English Demo", fill="red")  #繪製英文文字
-
-myfont = ImageFont.truetype(font_filename, 24)
-
-draw_image.text((120,150), "中文字型示範", fill="blue", font=myfont) #繪製中文文字
-
-plt.imshow(image)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#Pillow：繪圖範例
-
-from PIL import Image, ImageDraw, ImageFont
-
-image = Image.new("RGB", (300,400), "lightgray")
-
-draw_image = ImageDraw.Draw(image)
-
-#繪圓
-draw_image.ellipse((50,50,250,250), width=3, outline="gold")# 臉
-
-#繪多邊形
-draw_image.polygon([(100,90), (120,130), (80,130)], fill="brown", outline="red") #左眼精
-draw_image.polygon([(200,90), (220,130), (180,130)],   fill="brown", outline="red")#右眼精
-
-#繪矩形
-draw_image.rectangle((140,140,160,180),    fill="blue", outline="black") #鼻子
-
-#繪橢圓
-draw_image.ellipse((100,200,200,220), fill="red") #嘴巴   
-
-#繪文字
-draw_image.text((130,280), "ABCDEFG", fill="orange")  #英文字
-
-myfont = ImageFont.truetype(font_filename, 16)
-
-draw_image.text((110,320), "測試使用中文字", fill="red", font=myfont) #中文字 
-
-plt.imshow(image)
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1412,23 +840,6 @@ blue_to_red2(filename)
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image, ImageDraw
-
-image = Image.new("RGB", (400, 300))
-draw = ImageDraw.Draw(image)
-draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageDraw
-
-image = Image.new("RGB", (400, 300), '#00FF00')
-draw = ImageDraw.Draw(image)
-draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
-plt.imshow(image)
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -1449,20 +860,6 @@ from PIL import Image, ImageEnhance
 with Image.open(filename) as image:
    image_new = ImageEnhance.Brightness(image).enhance(2.5)
    image_new.save('tmp_pic_brightness.jpg')
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageFilter
-
-image = Image.open(filename)
-plt.imshow(image)
-plt.title('原圖')
-plt.show()
-
-new = image.filter(ImageFilter.EDGE_ENHANCE)
-plt.imshow(new)
-plt.title('after filter')
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -1512,17 +909,6 @@ print('------------------------------------------------------------')	#60個
 image = Image.open(filename)
 image.save('tmp_pic_high.jpg', quality = 95)
 image.close()
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageDraw, ImageFont
-
-image = Image.open(filename)
-imfont = ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf", 40)
-draw = ImageDraw.Draw(image)
-draw.text((100, 100), 'Peony', font = imfont, fill = (0, 255, 255, 255))
-plt.imshow(image)
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -1599,13 +985,6 @@ with Image.open(filename) as image:
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image,ImageFilter
-
-image=Image.open(filename)
-image_new=image.filter(ImageFilter.EDGE_ENHANCE)
-#image_new.show()
-
-print("------------------------------------------------------------")  # 60個
 """
 print("車牌")
 import pytesseract
@@ -1780,34 +1159,6 @@ with open('tmp_17_10.txt', 'w', encoding='utf-8') as fn:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-from PIL import Image
-from PIL import ImageFilter
-rushMore = Image.open(filename)       # 建立Pillow物件
-filterPict = rushMore.filter(ImageFilter.BLUR)
-filterPict.save("tmp_pic_4_BLUR.png")
-filterPict = rushMore.filter(ImageFilter.CONTOUR)
-filterPict.save("tmp_pic_4_CONTOUR.png")
-filterPict = rushMore.filter(ImageFilter.DETAIL)
-filterPict.save("tmp_pic_4_DETAIL.png")
-filterPict = rushMore.filter(ImageFilter.EDGE_ENHANCE)
-filterPict.save("tmp_pic_4_EDGE_ENHANCE.png")
-filterPict = rushMore.filter(ImageFilter.EDGE_ENHANCE_MORE)
-filterPict.save("tmp_pic_4_EDGE_ENHANCE_MORE.png")
-filterPict = rushMore.filter(ImageFilter.EMBOSS)
-filterPict.save("tmp_pic_4_EMBOSS.png")
-filterPict = rushMore.filter(ImageFilter.FIND_EDGES)
-filterPict.save("tmp_pic_4_FIND_EDGES.png")
-filterPict = rushMore.filter(ImageFilter.SMOOTH)
-filterPict.save("tmp_pic_4_SMOOTH.png")
-filterPict = rushMore.filter(ImageFilter.SMOOTH_MORE)
-filterPict.save("tmp_pic_4_SMOOTH_MORE.png")
-filterPict = rushMore.filter(ImageFilter.SHARPEN)
-filterPict.save("tmp_pic_4_SHARPEN.png")
-
-print("------------------------------------------------------------")  # 60個
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 from PIL import Image, ImageDraw, ImageFont
@@ -1898,14 +1249,6 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-print("濾鏡效果")
-
-from PIL import Image, ImageFilter
-
-image = Image.open(filename)
-image.filter(ImageFilter.CONTOUR).show()
-
-
 
 
 
@@ -1939,6 +1282,11 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個

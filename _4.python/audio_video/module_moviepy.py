@@ -609,9 +609,7 @@ output_list = []  # 記錄最後要組合的影片片段
 def text_clip(xy, text, name):
     img = img_empty.copy()  # 複製空圖片
     draw = ImageDraw.Draw(img)  # 建立繪圖物件，並寫入文字
-    draw.text(
-        xy, text, fill=(255, 255, 255), font=font, stroke_width=2, stroke_fill="black"
-    )
+    draw.text(xy, text, fill=(255, 255, 255), font=font, stroke_width=2, stroke_fill="black")
     img.save(name)  # 儲存
 
 

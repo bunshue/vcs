@@ -367,6 +367,426 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 
+import sys
+from PIL import Image, ImageDraw, ImageFont
+
+import matplotlib.pyplot as plt
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'    #無中文
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageFont, ImageDraw
+
+img = Image.open(filename)  # 開啟圖片
+font = ImageFont.truetype(font_filename, 50)  # 設定字型
+draw = ImageDraw.Draw(img)  # 準備在圖片上繪圖
+draw.text((0, 0), "牡丹亭", fill=(0, 0, 255), font=font)  # 將文字畫入圖片
+
+img.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+from PIL import Image, ImageFont, ImageDraw
+
+img = Image.open(filename)
+w, h = img.size  # 取得圖片尺寸
+font = ImageFont.truetype(font_filename, 100)
+draw = ImageDraw.Draw(img)
+draw.text(
+    (0, h - 100), "牡丹亭", fill=(255, 255, 255), font=font
+)  # 使用 h-100 定位到下方
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageFont, ImageDraw
+
+img = Image.open(filename)
+font = ImageFont.truetype(font_filename, 150)
+# 設定一張空白圖片，背景 (0,0,0,0) 表示透明背景
+text = Image.new(mode="RGBA", size=(600, 150), color=(0, 0, 0, 0))
+draw = ImageDraw.Draw(text)
+draw.text((0, 0), "牡丹亭", fill=(255, 255, 255), font=font)  # 畫入文字
+text = text.rotate(30, expand=1)  # 旋轉這張圖片，expand 設定 1 表示展開旋轉，不要裁切
+img.paste(text, (50, 0), text)  # 將文字的圖片貼上原本的圖
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageFont, ImageDraw
+
+img = Image.open(filename)
+w, h = img.size
+
+font = ImageFont.truetype(font_filename, 150)
+text = Image.new(mode="RGBA", size=(600, 150), color=(0, 0, 0, 0))
+draw = ImageDraw.Draw(text)
+draw.text((0, 0), "牡丹亭", fill=(255, 255, 255), font=font)
+text = text.rotate(30, expand=1)
+
+img2 = Image.open(filename)  # 再次開啟原本的圖為 img2
+img2.paste(text, (50, 0), text)  # 將文字貼上 img2
+img2.convert("RGBA")  # 圖片轉換為 RGBA 模式 ( 才能調整 alpha 色版 )
+img2.putalpha(100)  # 調整透明度，範圍 0～255，0 為全透明
+img.paste(img2, (0, 0), img2)  # 將 img2 貼上 img
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+from PIL import Image, ImageFont, ImageDraw
+
+imgs = glob.glob("./demo/*.jpg")  # 讀取 demo 資料夾裡所有的圖片
+
+for i in imgs:
+    name = i.split("/")[::-1][0]  # 取得圖片名稱
+    img = Image.open(i)  # 開啟圖片
+    w, h = img.size
+    font = ImageFont.truetype("Teko-Regular.ttf", 100)
+    text = Image.new(mode="RGBA", size=(400, 100), color=(0, 0, 0, 0))
+    draw = ImageDraw.Draw(text)
+    draw.text((0, 0), "OXXO.STUDIO", fill=(255, 255, 255), font=font)
+    text = text.rotate(30, expand=1)
+    img2 = Image.open(i)
+    img2.paste(text, (50, 0), text)
+    img2.convert("RGBA")
+    img2.putalpha(150)
+    img.paste(img2, (0, 0), img2)
+    img.save(f"./test/{name}")
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+from PIL import Image, ImageFont, ImageDraw
+
+img = Image.new("RGBA", (360, 180))  # 建立色彩模式為 RGBA，尺寸 360x180 的空白圖片
+font = ImageFont.truetype("NotoSansTC-Regular.otf", 40)  # 設定字型與尺寸
+draw = ImageDraw.Draw(img)  # 準備在圖片上繪圖
+# 將文字畫入圖片
+draw.text(
+    (10, 120),
+    "OXXO.STUDIO",
+    fill=(255, 255, 255),
+    font=font,
+    stroke_width=2,
+    stroke_fill="red",
+)
+draw.text(
+    xy=(50, 0),
+    text="大家好\n哈哈",
+    align="center",
+    fill=(255, 255, 255),
+    font=font,
+    stroke_width=2,
+    stroke_fill="blue",
+)
+img.save("ok.png")  # 儲存為 png
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageDraw
+
+newImage = Image.new('RGBA', (300, 300), "Yellow")  # 建立300*300黃色底的影像
+drawObj = ImageDraw.Draw(newImage)
+
+# 繪製點
+for x in range(100, 200, 3):
+    for y in range(100, 200, 3):
+        drawObj.point([(x,y)], fill='Green')
+
+# 繪製線條, 繪外框線
+drawObj.line([(0,0), (299,0), (299,299), (0,299), (0,0)], fill="Black")
+# 繪製右上角美工線
+for x in range(150, 300, 10):
+    drawObj.line([(x,0), (300,x-150)], fill="Blue")
+# 繪製左下角美工線
+for y in range(150, 300, 10):
+    drawObj.line([(0,y), (y-150,300)], fill="Blue")    
+newImage.save("tmp_pic24.png")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageDraw, ImageFont
+
+newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
+drawObj = ImageDraw.Draw(newImage)
+
+strText = 'Welcome to the United States'        # 設定欲列印英文字串
+drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
+
+# 使用古老英文字型, 字型大小是36
+# fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36) 找不到字形
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+fontInfo = ImageFont.truetype(font_filename, 36)
+
+drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
+# 處理中文字體
+strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
+
+#fontInfo = ImageFont.truetype('C:\Windows\Fonts\ebas927.ttf', 48)
+#drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
+
+#fontInfo = ImageFont.truetype('C:\Windows\Fonts\DFZongYiStd-W9.otf', 48)
+#drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
+
+newImage.save("tmp_pic26.png")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageDraw, ImageFont
+
+newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
+drawObj = ImageDraw.Draw(newImage)
+
+strText = 'Welcome to the United States'        # 設定欲列印英文字串
+drawObj.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
+
+# 使用古老英文字型, 字型大小是36
+#fontInfo = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+fontInfo = ImageFont.truetype(font_filename, 36)
+
+drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
+# 使用Microsoft所提供的新細明體中文字型處理中文字體
+strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
+fontInfo = ImageFont.truetype('C:\Windows\Fonts\mingliu.ttc', 48)
+drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
+newImage.save("tmp_pic27.png")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageDraw
+
+image = Image.new("RGB", (400,300), '#00FF00')
+draw=ImageDraw.Draw(image)
+draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
+#image.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageDraw
+
+image = Image.new("RGB", (400,300))
+draw=ImageDraw.Draw(image)
+draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
+#image.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image,ImageDraw,ImageFont
+
+image=Image.open(filename)
+imfont=ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf",120)
+draw=ImageDraw.Draw(image)
+draw.text((50,50),"牡丹亭",font=imfont,fill=(0,255,255,255))
+#image.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#Pillow：基本繪圖
+
+from PIL import Image, ImageDraw
+
+#繪直線
+
+image = Image.new("RGB", (400,300), "lightgray")
+
+draw_image = ImageDraw.Draw(image)
+
+draw_image.line([40,50,360,280], fill="blue", width=3)
+
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+#繪矩形
+
+image = Image.new("RGB", (400,300), "lightgray")
+
+draw_image = ImageDraw.Draw(image)
+
+draw_image.rectangle((100,80,300,240), fill="yellow", outline="black")
+
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#繪點
+
+image = Image.new("RGB", (400,300), "lightgray")
+
+draw_image = ImageDraw.Draw(image)
+
+draw_image.point([(100,100), (100,101), (100,102)], fill='red')
+
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#繪圓或橢圓
+
+image = Image.new("RGB", (400,300), "lightgray")
+
+draw_image = ImageDraw.Draw(image)
+
+draw_image.ellipse((50,50,350,250), fill="purple", outline="green")
+
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#繪多邊形
+
+image = Image.new("RGB", (400,300), "lightgray")
+
+draw_image = ImageDraw.Draw(image)
+
+draw_image.polygon([(200,40),(60,250),(320,250)], fill="brown", outline="red")
+
+plt.imshow(image)
+
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+#繪文字
+
+from PIL import ImageFont
+
+image = Image.new("RGB", (400,300), "lightgray")
+
+draw_image = ImageDraw.Draw(image)
+
+draw_image.text((150,80), "font demo", fill="red")  #繪英文文字
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+myfont = ImageFont.truetype(font_filename, 24)
+
+draw_image.text((120,150),"雅黑字體示範", fill="blue", font=myfont)  #繪中文 
+
+plt.imshow(image)
+
+plt.show()
+
+#繪文字
+
+from PIL import Image, ImageDraw, ImageFont
+
+image = Image.new("RGB", (400,300), "lightgray")
+
+draw_image = ImageDraw.Draw(image)
+
+draw_image.text((120,80), "English Demo", fill="red")  #繪製英文文字
+
+myfont = ImageFont.truetype(font_filename, 24)
+
+draw_image.text((120,150), "中文字型示範", fill="blue", font=myfont) #繪製中文文字
+
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#Pillow：繪圖範例
+
+from PIL import Image, ImageDraw, ImageFont
+
+image = Image.new("RGB", (300,400), "lightgray")
+
+draw_image = ImageDraw.Draw(image)
+
+#繪圓
+draw_image.ellipse((50,50,250,250), width=3, outline="gold")# 臉
+
+#繪多邊形
+draw_image.polygon([(100,90), (120,130), (80,130)], fill="brown", outline="red") #左眼精
+draw_image.polygon([(200,90), (220,130), (180,130)],   fill="brown", outline="red")#右眼精
+
+#繪矩形
+draw_image.rectangle((140,140,160,180),    fill="blue", outline="black") #鼻子
+
+#繪橢圓
+draw_image.ellipse((100,200,200,220), fill="red") #嘴巴   
+
+#繪文字
+draw_image.text((130,280), "ABCDEFG", fill="orange")  #英文字
+
+myfont = ImageFont.truetype(font_filename, 16)
+
+draw_image.text((110,320), "測試使用中文字", fill="red", font=myfont) #中文字 
+
+plt.imshow(image)
+
+plt.show()
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageDraw
+
+image = Image.new("RGB", (400, 300))
+draw = ImageDraw.Draw(image)
+draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
+plt.imshow(image)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageDraw
+
+image = Image.new("RGB", (400, 300), '#00FF00')
+draw = ImageDraw.Draw(image)
+draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
+plt.imshow(image)
+plt.show()
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageDraw, ImageFont
+
+image = Image.open(filename)
+imfont = ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf", 40)
+draw = ImageDraw.Draw(image)
+draw.text((100, 100), 'Peony', font = imfont, fill = (0, 255, 255, 255))
+plt.imshow(image)
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 
 
 print('------------------------------------------------------------')	#60個

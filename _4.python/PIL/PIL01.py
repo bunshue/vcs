@@ -1,18 +1,21 @@
-'''
+"""
 
 PIL 圖片相關的處理
 
 無 影像處理
 
-縮放
-裁剪
-複製
+縮放 .resize
+裁剪 .crop
+複製 .copy
 合成
-旋轉
-鏡射
+旋轉 .rotate(
+鏡射 .transpose(
+
+拆分 .split() r, g, b = image1.split()   #r, g, b為三個通道的list
+合併 .merge
 
 
-'''
+"""
 
 import sys
 import numpy as np
@@ -42,7 +45,7 @@ print('原圖大小 W =', W, ', H =', H)
 print('寬度變2倍, 高度變一半')
 W2, H2 = W * 2, H // 2
 print('把原圖轉成', W2, 'X', H2, '大小')
-image2 = image1.resize((W2, H2), Image.LANCZOS)#ANTIALIAS
+image2 = image1.resize((W2, H2), Image.LANCZOS)
 
 plt.imshow(image2)
 plt.show()
@@ -55,12 +58,13 @@ image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
 W, H = image1.size
 print('原圖大小 W =', W, ', H =', H)
 
-x_st = 100
-y_st = 200
-w = 200
-h = 200
+x_st = 20
+y_st = 20
+w = W - x_st * 2
+h = H - y_st * 2
+
 #                     x_st  y_st    x_sp     y_sp
-image2 = image1.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間
+image2 = image1.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上點到右下點
 
 print('顯示一塊')
 plt.imshow(image2)
@@ -121,43 +125,131 @@ print('測試 旋轉 rotate')
 image = Image.open(filename)     # 建立Pillow物件
 
 print('旋轉90度')
-plt.imshow(image.rotate(90))
-plt.show()
+image90 = image.rotate(90)
 
 print('旋轉180度')
-plt.imshow(image.rotate(180))
-plt.show()
+image180 = image.rotate(180)
 
 print('旋轉270度')
-plt.imshow(image.rotate(270))
-plt.show()
-
-print('旋轉90度')
-rotate_image = image.transpose(Image.ROTATE_90)
-plt.imshow(rotate_image)
-plt.show()
+image270 = image.rotate(270)
 
 print('旋轉45度')
-plt.imshow(image.rotate(45))
-plt.show()
+image45a = image.rotate(45)
 
 print('旋轉45度 + 圖像擴充')
-plt.imshow(image.rotate(45, expand = True))
-plt.show()
+image45a = image.rotate(45, expand = True)
+
 
 print('------------------------------------------------------------')	#60個
 
 image = Image.open(filename)     # 建立Pillow物件
 
 print('左右相反')
-plt.imshow(image.transpose(Image.FLIP_LEFT_RIGHT))   # 左右
-plt.show()
+image1 = image.transpose(Image.FLIP_LEFT_RIGHT)   # 左右
 
 print('上下顛倒')
-plt.imshow(image.transpose(Image.FLIP_TOP_BOTTOM))   # 上下
+image2 = image.transpose(Image.FLIP_TOP_BOTTOM)   # 上下
+
+print('旋轉90度')
+rotate90 = image.transpose(Image.ROTATE_90)
+
+'''
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+image = Image.open(filename)
+
+r, g, b = image.split()
+
+plt.imshow(image)
+plt.show()
+"""
+plt.imshow(r)
+plt.show()
+
+plt.imshow(g)
+plt.show()
+
+plt.imshow(b)
+plt.show()
+"""
+
+print('RGB相反排列')
+convert_image = Image.merge('RGB', (b, g, r))
+
+plt.imshow(convert_image)
+plt.show()
+
+
+
+"""  ???
+image = Image.open(filename)    #PIL讀取本機圖片
+r, g, b = image.split()
+convert_image = image.merge('RGB', (b, g, r))
+convert_image.save('image_bgr.png')
+"""
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageFilter
+
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/bear_filter.jpg'
+
+image = Image.open(filename1)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
+plt.imshow(image)
+plt.show()
+
+#對圖形套用過濾器
+im_sharp = image.filter(ImageFilter.SHARPEN)
+
+plt.imshow(im_sharp)
+plt.show()
+
+#分解圖形顏色 例如RGB的紅綠藍
+#看不出效果
+r,g,b = im_sharp.split()
+
+plt.imshow(r)
+plt.show()
+
+plt.imshow(g)
+plt.show()
+
+plt.imshow(b)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+
+image = Image.open(filename)
+
+gray_iamge = image.convert('L')
+
+plt.imshow(gray_iamge)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+image = Image.open(filename)
+
+black_and_white = image.convert('1')
+
+plt.imshow(black_and_white)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
 
 #調整資料夾內所有圖片檔影像寬度, 加logo
       
@@ -202,7 +294,7 @@ for target_image in allfiles:
 
 print("完成")
 print('輸出圖片資料夾 : ', target_dir)
-'''
+
 print('------------------------------------------------------------')	#60個
 
 image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
@@ -262,35 +354,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.open(filename)
-
-r, g, b = image.split()
-
-convert_image = Image.merge('RGB', (b, g, r))
-
-plt.imshow(convert_image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)
-
-black_and_white = image.convert('1')
-
-plt.imshow(black_and_white)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)
-
-gray_iamge = image.convert('L')
-
-plt.imshow(gray_iamge)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
@@ -344,7 +407,7 @@ plt.imshow(image_1)
 plt.show()
 
 
-'''
+"""
 #L
 #轉為灰度圖像，每個像素用8個bit表示，0表示黑，255表示白，其他數字表示不同的灰度。
 #轉換公式：L = R * 299/1000 + G * 587/1000+ B * 114/1000。
@@ -387,49 +450,7 @@ image_F = image.convert('F')
 plt.imshow(image_F)
 plt.show()
 
-'''
-
-'''  ???
-image = Image.open(filename)    #PIL讀取本機圖片
-r, g, b = image.split()
-convert_image = image.merge('RGB', (b, g, r))
-convert_image.save('image_bgr.png')
-'''
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageFilter
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/bear_filter.jpg'
-
-image = Image.open(filename1)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-plt.imshow(image)
-plt.show()
-
-#對圖形套用過濾器
-im_sharp = image.filter(ImageFilter.SHARPEN)
-
-plt.imshow(im_sharp)
-plt.show()
-
-#分解圖形顏色 例如RGB的紅綠藍
-#看不出效果
-r,g,b = im_sharp.split()
-
-plt.imshow(r)
-plt.show()
-
-plt.imshow(g)
-plt.show()
-
-plt.imshow(b)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
@@ -522,30 +543,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-from PIL import Image, ImageFont, ImageDraw
-
-imgs = glob.glob("./demo/*.jpg")  # 讀取 demo 資料夾裡所有的圖片
-
-for i in imgs:
-    name = i.split("/")[::-1][0]  # 取得圖片名稱
-    img = Image.open(i)  # 開啟圖片
-    w, h = img.size
-    font = ImageFont.truetype("Teko-Regular.ttf", 100)
-    text = Image.new(mode="RGBA", size=(400, 100), color=(0, 0, 0, 0))
-    draw = ImageDraw.Draw(text)
-    draw.text((0, 0), "OXXO.STUDIO", fill=(255, 255, 255), font=font)
-    text = text.rotate(30, expand=1)
-    img2 = Image.open(i)
-    img2.paste(text, (50, 0), text)
-    img2.convert("RGBA")
-    img2.putalpha(150)
-    img.paste(img2, (0, 0), img2)
-    img.save(f"./test/{name}")
-
-
-print("------------------------------------------------------------")  # 60個
-
 from PIL import Image
 
 img = Image.open("oxxostudio.jpg")  # 開啟圖片
@@ -589,5 +586,124 @@ print('------------------------------------------------------------')	#60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+image = Image.open(filename)           # 建立Pillow物件
+width, height = image.size
+
+newPict1 = image.resize((width*2, height))   # 寬度是2倍
+plt.imshow(newPict1)
+plt.show()
+
+newPict2 = image.resize((width, height*2))   # 高度是2倍
+plt.imshow(newPict2)
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+
+用plot繪制顯示出圖片后，將鼠標移動到圖片上，會在右下角出現當前點的坐標，以及像素值。
+
+三、幾何變換 
+
+Image類有resize()、rotate()和transpose()方法進行幾何變換。
+
+　1、圖像的縮放和旋轉
+
+dst = img.resize((128, 128))
+dst = img.rotate(45) # 順時針角度表示
+
+2、轉換圖像
+
+dst = im.transpose(Image.FLIP_LEFT_RIGHT) #左右互換
+dst = im.transpose(Image.FLIP_TOP_BOTTOM) #上下互換
+dst = im.transpose(Image.ROTATE_90)  #順時針旋轉
+dst = im.transpose(Image.ROTATE_180)
+dst = im.transpose(Image.ROTATE_270)
+
+transpose()和rotate()沒有性能差別。
+"""
+
+
+image = Image.open(filename)           # 建立Pillow物件
+image090=image.rotate(90)  # 旋轉90度
+image180=image.rotate(180)  # 旋轉180度
+image270=image.rotate(270)  # 旋轉270度
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)                       # 建立Pillow物件
+image45a=image.rotate(45)  # 旋轉45度
+image45b=image.rotate(45, expand=True)  # 旋轉45度圖像擴充
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)                     # 建立Pillow物件
+image_flip1 = image.transpose(Image.FLIP_LEFT_RIGHT)  # 左右
+image_flip2 = image.transpose(Image.FLIP_TOP_BOTTOM)  # 上下
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)           # 建立Pillow物件
+cropPict = image.crop((80, 30, 150, 100))   # 裁切區間
+cropPict.save("tmp_pic16.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)           # 建立Pillow物件
+copyPict = image.copy()                      # 複製
+copyPict.save("tmp_pic17.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)               # 建立Pillow物件
+copyPict = image.copy()                          # 複製
+cropPict = copyPict.crop((80, 30, 150, 100))    # 裁切區間
+copyPict.paste(cropPict, (20, 20))              # 第一次合成
+copyPict.paste(cropPict, (20, 100))             # 第二次合成
+copyPict.save("tmp_pic18.jpg")                   # 儲存
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+#PIL之基本設定
+
+
+""" not ready
+from PIL import Image, ImageDraw, ImageFont
+
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+im = Image.open(filename1)
+
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/picture1_partial.jpg'
+image3 = image1.resize((100, 500), Image.ANTIALIAS)
+image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
+
+"""
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 

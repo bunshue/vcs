@@ -181,7 +181,7 @@ print("PIL_mean")
 from PIL import ImageStat
 
 def darkchannel(input_img,h,w):
-    dark_img=Image.new("L",(h,w),0)
+    dark_img = Image.new("L",(h,w),0)
     for x in range(0,h-1):
         for y in range(0,w-1):
             dark_img.putpixel((x,y),min(input_img.getpixel((x,y))))
@@ -252,7 +252,7 @@ def transmssion(air,dark_img,h,w,OMIGA):
     return trans_map
                    
 def defog(img,t_map,air,h,w):
-    dehaze_img=Image.new("RGB",(h,w),0)
+    dehaze_img = Image.new("RGB",(h,w),0)
     for i in range(0,h-1):
         for j in range(0,w-1):
             R,G,B=img.getpixel((i,j))
