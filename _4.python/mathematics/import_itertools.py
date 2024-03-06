@@ -1,10 +1,34 @@
+"""
+# itertools 迭代工具
+
+itertools.permutations 排列
+
+itertools.combinations 組合
+# combinations() 組合
+# combinations_with_replacement() 同元素可重複的組合
+
+itertools.product() 笛卡兒積
+
+
+
+
+"""
+
 import sys
 import itertools
-'''
+
+print('permutations 排列 ST------------------------------------------------------------')	#60個
+
+print('P(4, 2)')
+
+print(list(itertools.permutations('鼠牛虎兔', 2)))
+
 print('------------------------------------------------------------')	#60個
 
+print('P(4, 2)')
+
 n = {1, 2, 3, 4}
-r = 3
+r = 2
 A = set(itertools.permutations(n, 3))
 print('元素數量 = {}'.format(len(A)))
 for a in A:
@@ -14,31 +38,70 @@ print('------------------------------------------------------------')	#60個
 
 #animals = ['鼠', '牛', '虎', '兔', '龍', '蛇']
 
-n = {'鼠', '牛', '虎', '兔', '龍'}
+animals = {'鼠', '牛', '虎', '兔', '龍'}
 r = 2
-A = set(itertools.permutations(n, 2))
+A = set(itertools.permutations(animals, 2))
 print('基因配對組合數量 = {}'.format(len(A)))
 for a in A:
     print(a)
 
 print('------------------------------------------------------------')	#60個
 
-n = {'鼠', '牛', '虎', '兔', '龍'}
-r = 5
-A = set(itertools.permutations(n, 5))
-print('業務員路徑數 = {}'.format(len(A)))
-for a in A:
-    print(a)
+x = ["北京", "天津", "上海", "廣州", "武漢"]
+perm = itertools.permutations(x)
+n = 0
+for i in perm:
+    n += 1
+    print(i)
+print("總共有 %d 拜訪方式" % n)
 
 print('------------------------------------------------------------')	#60個
 
-n = {1, 2, 3, 4, 5}
-A = set(itertools.product(n, n, n))
-print('排列組合 = {}'.format(len(A)))
-for a in A:
-    print(a)
+x = ["鼠", "牛", "虎"]
+perm = itertools.permutations(x)
+for i in perm:
+    print(i)
+
 
 print('------------------------------------------------------------')	#60個
+
+cc = itertools.permutations("ABCD")
+print(type(cc))
+print(cc)
+
+print('------------------------------------------------------------')	#60個
+
+animals = ['鼠', '牛', '虎', '兔']
+# 全排列
+for p in itertools.permutations(animals):
+    print(p)
+
+animals = ['鼠', '牛', '虎', '兔']
+
+# 指定长度
+for p in itertools.permutations(animals, 2):
+    print(p)
+
+
+
+data1 = ['A', 'B', 'C']
+print(list(itertools.permutations(data1, 2)))
+print(list(itertools.permutations(data1, 3)))
+
+
+
+
+
+print('permutations 排列 SP------------------------------------------------------------')	#60個
+
+
+print('combinations 組合 ST------------------------------------------------------------')	#60個
+
+
+cc = itertools.combinations("ABCDE", 3)
+print(type(cc))
+print(cc)
+
 
 n = {1, 2, 3, 4, 5}
 A = set(itertools.combinations(n, 3))
@@ -54,16 +117,66 @@ print('組合 = {}'.format(len(A)))
 for a in A:
     print(a)
 
+
+
+print('鼠牛虎兔 四選二')
+strings = '鼠牛虎兔'
+for text1, text2 in itertools.combinations(strings, 2):
+    print(text1, text2)
+
+
+print(list(itertools.combinations('鼠牛虎兔', 2)))
+
+print(list(itertools.combinations_with_replacement('鼠牛虎兔', 2)))
+
+
+animals = ['鼠', '牛', '虎', '兔']
+# 组合
+for c in itertools.combinations(animals, 3):
+    print(c)
+
+
+
+animals = ['鼠', '牛', '虎', '兔']
+# 可重复组合
+for c in itertools.combinations_with_replacement(animals, 3):
+    print(c)
+
+data1 = ['A', 'B', 'C']
+print(list(itertools.combinations(data1, 2)))
+print(list(itertools.combinations(data1, 3)))
+print(list(itertools.combinations_with_replacement(data1, 2)))
+print(list(itertools.combinations_with_replacement(data1, 3)))
+
+
+print('combinations 組合 SP------------------------------------------------------------')	#60個
+
+
+
+print('product 笛卡兒積 ST------------------------------------------------------------')	#60個
+
 print('------------------------------------------------------------')	#60個
 
-color_next = itertools.cycle(['r','g','b','y','m','c','k']) # 定義顏色
+n = {1, 2, 3, 4, 5}
+A = set(itertools.product(n, n, n))
+print('排列組合 = {}'.format(len(A)))
+for a in A:
+    print(a)
 
-for _ in range(10):
-    print('下一個顏色 :', next(color_next))
+print('------------------------------------------------------------')	#60個
 
-cy = itertools.cycle('abc')
-for _ in range(10):
-    print(next(cy))
+
+data1 = ['A', 'B', 'C']
+data2 = [1, 2, 3]
+
+print(list(itertools.product(data1, data2)))
+
+print(list(itertools.product(data1, data2, repeat=2)))
+
+print(list(itertools.product(data1, repeat=2)))
+
+print('------------------------------------------------------------')	#60個
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -80,56 +193,46 @@ for x, y in itertools.product(list('ABC'), list('123')):
 
 print('------------------------------------------------------------')	#60個
 
-print('鼠牛虎兔 四選二')
-strings = '鼠牛虎兔'
-for text1, text2 in itertools.combinations(strings, 2):
-    print(text1, text2)
-
-
-print(list(itertools.combinations('鼠牛虎兔', 2)))
-print(list(itertools.combinations_with_replacement('鼠牛虎兔', 2)))
-print(list(itertools.permutations('鼠牛虎兔', 2)))
-
-
-print('------------------------------------------------------------')	#60個
-
 #TBD
 ccc = itertools.product('鼠牛虎兔', repeat=2)
 print(ccc)
 
-print('------------------------------------------------------------')	#60個
-
-from itertools import permutations
-from itertools import combinations
-from itertools import combinations_with_replacement
-
-print('排列組合')
-
-#animals = ['鼠', '牛', '虎', '兔', '龍', '蛇']
-animals = ['鼠', '牛', '虎', '兔']
-
-# 全排列
-for p in permutations(animals):
-    print(p)
-
-# 指定长度
-for p in permutations(animals, 2):
-    print(p)
-
-# 组合
-for c in combinations(animals, 3):
-    print(c)
-
-# 可重复组合
-for c in combinations_with_replacement(animals, 3):
-    print(c)
 
 print('------------------------------------------------------------')	#60個
 
-from itertools import islice as _islice, count as _count
+#笛卡爾積
+
+cc = itertools.product("ABCD", "123")
+print(type(cc))
+print(cc)
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('product 笛卡兒積 SP------------------------------------------------------------')	#60個
+
+
+
+print('其他 ST------------------------------------------------------------')	#60個
+
+color_next = itertools.cycle(['r','g','b','y','m','c','k']) # 定義顏色
+
+for _ in range(10):
+    print('下一個顏色 :', next(color_next))
+
+cy = itertools.cycle('abc')
+for _ in range(10):
+    print(next(cy))
+
+print('------------------------------------------------------------')	#60個
 
 # Helper to generate new thread names
-_counter = _count().__next__
+_counter = itertools.count().__next__
 _counter() # Consume 0 so first non-main thread has id 1.
 def _newname(template="Thread-%d"):
     return template % _counter()
@@ -140,35 +243,6 @@ print(_newname())
 print(_newname())
 print(_newname())
 print(_newname())
-
-print('------------------------------------------------------------')	#60個
-
-# itertools 模組:
-# product() 笛卡兒積
-# permutations() 排列
-# combinations() 組合
-# combinations_with_replacement() 同元素可重複的組合
-
-data1 = ['A', 'B', 'C']
-data2 = [1, 2, 3]
-
-print(list(itertools.product(data1, data2)))
-
-print(list(itertools.product(data1, data2, repeat=2)))
-
-print(list(itertools.product(data1, repeat=2)))
-
-print(list(itertools.permutations(data1, 2)))
-
-print(list(itertools.permutations(data1, 3)))
-
-print(list(itertools.combinations(data1, 2)))
-
-print(list(itertools.combinations(data1, 3)))
-
-print(list(itertools.combinations_with_replacement(data1, 2)))
-
-print(list(itertools.combinations_with_replacement(data1, 3)))
 
 print('------------------------------------------------------------')	#60個
 
@@ -311,45 +385,6 @@ for key, item in itertools.groupby(data, first_letter):
 print('------------------------------------------------------------')	#60個
 
 
-print('------------------------------------------------------------')	#60個
-
-# 迭代工具 - 排列 / 組合 / 笛卡爾積
-
-cc = itertools.permutations("ABCD")
-print(type(cc))
-print(cc)
-
-cc = itertools.combinations("ABCDE", 3)
-print(type(cc))
-print(cc)
-
-cc = itertools.product("ABCD", "123")
-print(type(cc))
-print(cc)
-'''
-print('------------------------------------------------------------')	#60個
-
-x = ["1", "2", "3"]
-perm = itertools.permutations(x)
-for i in perm:
-    print(i)
-
-
-print('------------------------------------------------------------')	#60個
-
-import itertools
-
-x = ["北京", "天津", "上海", "廣州", "武漢"]
-perm = itertools.permutations(x)
-n = 0
-for i in perm:
-    n += 1
-    print(i)
-print("總共有 %d 拜訪方式" % n)
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -361,4 +396,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
 

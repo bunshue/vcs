@@ -104,18 +104,6 @@ plt.scatter(x, y)       #畫出每個x-y對應點
 #第四張圖
 plt.subplot(234)
 
-x = np.linspace(0, 2 * np.pi, 500)    # 建立含500個元素的陣列
-y1 = np.sin(x)                      # sin函數
-y2 = np.cos(x)                      # cos函數
-
-plt.plot(x, y1, label = 'Sin')                    
-plt.plot(x, y2, label = 'Cos')
-plt.legend()
-
-plt.grid(c = 'y', linestyle = '--', lw = 1) # 顯示虛線格線
-
-#第五張圖
-plt.subplot(235)
 
 N = 500
 
@@ -142,20 +130,23 @@ print('std :', x.std())
 plt.scatter(x, y, s = 50, color = 'g')          #s是大小
 plt.scatter(x, y, s = 50, color = (0, 1, 0))    #s是大小 # 綠色
 
+
+#第五張圖
+plt.subplot(235)
+
+x = np.linspace(0, 2 * np.pi, 500)    # 建立含500個元素的陣列
+y1 = np.sin(x)                      # sin函數
+y2 = np.cos(x)                      # cos函數
+
+plt.plot(x, y1, label = 'Sin')                    
+plt.plot(x, y2, label = 'Cos')
+plt.legend()
+
+plt.grid(c = 'y', linestyle = '--', lw = 1) # 顯示虛線格線
+
+
 #第六張圖
 plt.subplot(236)
-
-
-plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'math 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#第一張圖
-plt.subplot(231)
 
 #衰減函數
 def f1(t):
@@ -169,18 +160,16 @@ plt.plot(x, f1(x), 'go')
 plt.ylabel('衰減值')
 plt.title('畫 f(x), 衰減數列')
 
-#第二張圖
-plt.subplot(232)
-
-x = np.linspace(0, 10, 1000)
-y1 = np.sin(x)
-y2 = np.cos(x**2)
+plt.show()
 
 
+print('------------------------------------------------------------')	#60個
 
-#第三張圖
-plt.subplot(233)
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'math 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
+#第一張圖
+plt.subplot(231)
 
 N = 1000000
 #plt.plot(np.random.randn(N))
@@ -217,38 +206,20 @@ plt.plot(normal_array)
 plt.title('常態分佈')
 
 
-#第四張圖
-plt.subplot(234)
-
-
-#第五張圖
-plt.subplot(235)
-
-
-
-
-#第六張圖
-plt.subplot(236)
-
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'math 集合 3', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#第一張圖
-plt.subplot(231)
-
-
 #第二張圖
 plt.subplot(232)
 
+x = np.linspace(0, 10, 1000)
+y1 = np.sin(x)
+y2 = np.cos(x**2)
 
+plt.plot(x, y1)
+plt.plot(x, y2)
 
 #第三張圖
 plt.subplot(233)
+
+
 
 
 #第四張圖

@@ -40,9 +40,7 @@ print('------------------------------------------------------------')	#60個
 
 """
 圖像通道\幾何變換\裁剪
-
 一、圖像通道
-
 1、彩色圖像轉灰度圖
 """
 
@@ -54,16 +52,6 @@ plt.axis('off')
 plt.show()
 
 """
-使用函數convert()來進行轉換，它是圖像實例對象的一個方法，接受一個 mode 參數，用以指定一種色彩模式，mode 的取值可以是如下幾種：
-· 1 (1-bit pixels, black and white, stored with one pixel per byte)
-· L (8-bit pixels, black and white)
-· P (8-bit pixels, mapped to any other mode using a colour palette)
-· RGB (3x8-bit pixels, true colour)
-· RGBA (4x8-bit pixels, true colour with transparency mask)
-· CMYK (4x8-bit pixels, colour separation)
-· YCbCr (3x8-bit pixels, colour video format)
-· I (32-bit signed integer pixels)
-· F (32-bit floating point pixels)
 
 2、通道分離與合并
 """
@@ -196,12 +184,7 @@ plt.imshow(img)
 plt.axis('off')
 plt.show()
 
-"""
-
- 
-
-例2：將lena圖像二值化，像素值大于128的變為1，否則變為0
-"""
+#例2：將lena圖像二值化，像素值大于128的變為1，否則變為0
 
 img=np.array(Image.open(filename).convert('L'))
 
@@ -219,9 +202,6 @@ plt.axis('off')
 plt.show()
 
 """
-
- 
-
 如果要對多個像素點進行操作，可以使用數組切片方式訪問。切片方式返回的是以指定間隔下標訪問 該數組的像素值。下面是有關灰度圖像的一些例子：
 復制代碼
 
@@ -246,13 +226,6 @@ print('------------------------------------------------------------')	#60個
 import torchvision.transforms as transforms
 
 from PIL import Image
-
-print('------------------------------------------------------------')	#60個
-
-"""
-from PIL import Image,ImageDraw
-image = Image.open("captcha.png").convert("L")	#轉換成灰階圖像
-"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -515,12 +488,6 @@ with Image.open(filename) as image:
     image2.save( "tmp_pic33h.jpg")
 
 print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)
-pic=image.convert("1")
-#pic.show()
-
-print("------------------------------------------------------------")  # 60個
 
 with Image.open(filename) as image:
     print(image.size)
@@ -800,14 +767,6 @@ from PIL import Image, ImageEnhance
 with Image.open(filename) as image:
    image_new = ImageEnhance.Brightness(image).enhance(2.5)
    image_new.save('tmp_pic_brightness.jpg')
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)
-pic = image.convert("1")
-plt.imshow(pic)
-plt.title('convert L')
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 

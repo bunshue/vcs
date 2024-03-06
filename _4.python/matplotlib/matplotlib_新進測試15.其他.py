@@ -6,6 +6,7 @@ import random
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import math
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
@@ -386,8 +387,6 @@ print(
     "matplotlib 18 ------------------------------------------------------------"
 )  # 60個
 
-# Matplotlib技巧
-
 import matplotlib
 
 fig = plt.figure(figsize=(6, 4), dpi=120)  # 設置繪製對象大小
@@ -416,7 +415,9 @@ plt.xlim(-0.5, 7)  # 設置x軸範圍
 plt.ylim(-5, 50)  # 設置y軸範圍
 plt.show()
 
-print(matplotlib.artist.getp(fig.patch))  # 顯示繪製對象的各個屬性值
+# many
+# 顯示繪製對象的各個屬性值
+# print(matplotlib.artist.getp(fig.patch))
 
 print(
     "matplotlib 19 箱圖------------------------------------------------------------"

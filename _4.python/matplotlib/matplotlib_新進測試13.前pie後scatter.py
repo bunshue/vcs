@@ -23,29 +23,29 @@ print("------------------------------------------------------------")  # 60個
 
 # OK 但搬遷有問題
 
-# 构造数据
+# 構造數據
 edu = [0.2515, 0.3724, 0.3336, 0.0368, 0.0057]
-labels = ["中专", "大专", "本科", "硕士", "其他"]
+labels = ["中專", "大專", "本科", "碩士", "其他"]
 
-# 添加修饰的饼图
-explode = [0, 0.1, 0, 0, 0]  # 生成数据，用于突出显示大专学历人群
-colors = ["#9999ff", "#ff9999", "#7777aa", "#2442aa", "#dd5555"]  # 自定义颜色
+# 添加修飾的餅圖
+explode = [0, 0.1, 0, 0, 0]  # 生成數據，用于突出顯示大專學歷人群
+colors = ["#9999ff", "#ff9999", "#7777aa", "#2442aa", "#dd5555"]  # 自定義顏色
 
-# 绘制饼图
+# 繪制餅圖
 
 plt.pie(
-    x=edu,  # 绘图数据
-    explode=explode,  # 突出显示大专人群
-    labels=labels,  # 添加教育水平标签
-    colors=colors,  # 设置饼图的自定义填充色
-    autopct="%.1f%%",  # 设置百分比的格式，这里保留一位小数
-    pctdistance=0.8,  # 设置百分比标签与圆心的距离
-    labeldistance=1.1,  # 设置教育水平标签与圆心的距离
-    startangle=180,  # 设置饼图的初始角度
-    radius=1.2,  # 设置饼图的半径
-    counterclock=False,  # 是否逆时针，这里设置为顺时针方向
-    wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 设置饼图内外边界的属性值
-    textprops={"fontsize": 10, "color": "black"},  # 设置文本标签的属性值
+    x=edu,  # 繪圖數據
+    explode=explode,  # 突出顯示大專人群
+    labels=labels,  # 添加教育水平標簽
+    colors=colors,  # 設置餅圖的自定義填充色
+    autopct="%.1f%%",  # 設置百分比的格式，這里保留一位小數
+    pctdistance=0.8,  # 設置百分比標簽與圓心的距離
+    labeldistance=1.1,  # 設置教育水平標簽與圓心的距離
+    startangle=180,  # 設置餅圖的初始角度
+    radius=1.2,  # 設置餅圖的半徑
+    counterclock=False,  # 是否逆時針，這里設置為順時針方向
+    wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 設置餅圖內外邊界的屬性值
+    textprops={"fontsize": 10, "color": "black"},  # 設置文本標簽的屬性值
 )
 
 plt.show()
@@ -53,24 +53,24 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 构建序列
+# 構建序列
 data1 = pd.Series(
-    {"中专": 0.2515, "大专": 0.3724, "本科": 0.3336, "硕士": 0.0368, "其他": 0.0057}
+    {"中專": 0.2515, "大專": 0.3724, "本科": 0.3336, "碩士": 0.0368, "其他": 0.0057}
 )
 print(data1)
 data1.name = ""
-# 控制饼图为正圆
+# 控制餅圖為正圓
 plt.axes(aspect="equal")
-# plot方法对序列进行绘图
+# plot方法對序列進行繪圖
 data1.plot(
-    kind="pie",  # 选择图形类型
-    autopct="%.1f%%",  # 饼图中添加数值标签
-    radius=1,  # 设置饼图的半径
-    startangle=180,  # 设置饼图的初始角度
-    counterclock=False,  # 将饼图的顺序设置为顺时针方向
-    title="失信用户的受教育水平分布",  # 为饼图添加标题
-    wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 设置饼图内外边界的属性值
-    textprops={"fontsize": 10, "color": "black"},  # 设置文本标签的属性值
+    kind="pie",  # 選擇圖形類型
+    autopct="%.1f%%",  # 餅圖中添加數值標簽
+    radius=1,  # 設置餅圖的半徑
+    startangle=180,  # 設置餅圖的初始角度
+    counterclock=False,  # 將餅圖的順序設置為順時針方向
+    title="失信用戶的受教育水平分布",  # 為餅圖添加標題
+    wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 設置餅圖內外邊界的屬性值
+    textprops={"fontsize": 10, "color": "black"},  # 設置文本標簽的屬性值
 )
 
 plt.show()
@@ -219,12 +219,12 @@ print("------------------------------------------------------------")  # 60個
 """
 
 edu = [0.2515,0.3724,0.3336,0.0368,0.0057]
-plt.pie(x = edu, # 绘图数据
-labels = labels, # 添加教育水平标签
-autopct = '%.1f%%' # 设置百分比的格式，这里保留一位小数
+plt.pie(x = edu, # 繪圖數據
+labels = labels, # 添加教育水平標簽
+autopct = '%.1f%%' # 設置百分比的格式，這里保留一位小數
 
 
-# 将横、纵坐标轴标准化处理，确保饼图是一个正圆，否则为椭圆
+# 將橫、縱坐標軸標準化處理，確保餅圖是一個正圓，否則為橢圓
 plt.axes(aspect = 'equal')
 
 """

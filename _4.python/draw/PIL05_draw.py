@@ -1,3 +1,10 @@
+"""
+
+PIL 畫圖
+
+
+"""
+import os
 import sys
 from PIL import Image, ImageDraw, ImageFont
 
@@ -6,11 +13,40 @@ import matplotlib.pyplot as plt
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'    #無中文
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
 
+print('draw01------------------------------------------------------------')	#60個
+
+# 在圖上作畫
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+im = Image.open(filename)
+
+w, h = im.size
+print("W = " + str(w)+", H = " + str(h))
+
+print("在圖上作畫1")
+
+dw = ImageDraw.Draw(im)
+
+#畫一個外框
+dw.rectangle((0,0,w,h), fill=None, outline=(255,0,0), width=10)
+#畫線
+dw.line((0,0,w,h),width=20, fill=(255,0,0))
+dw.line((w,0,0,h),width=20, fill=(255,0,0))
+#畫圓
+dw.ellipse((0,0,w,h),outline=(255,255,0))
+#寫字
+mesg = 'This is a lion-mouse'
+dw.text((100,100), mesg)
+
+plt.imshow(im)
+
+plt.show()
+
 print('------------------------------------------------------------')	#60個
-'''
+
 print("在圖上寫字")
 
-from PIL import Image, ImageDraw, ImageFont
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -58,8 +94,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image, ImageDraw, ImageFont
-
 mesg = 'lion-mouse'
 
 font_size = 30; #文字大小
@@ -90,11 +124,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#在圖上寫字
-
-import os, sys
-from PIL import Image, ImageDraw, ImageFont
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 #要做浮水印的文字
@@ -124,41 +153,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# 在圖上作畫
-
-from PIL import Image, ImageDraw
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-
-im = Image.open(filename)
-
-w, h = im.size
-print("W = " + str(w)+", H = " + str(h))
-
-print("在圖上作畫")
-
-dw = ImageDraw.Draw(im)
-
-#畫一個外框
-dw.rectangle((0,0,w,h), fill=None, outline=(255,0,0), width=10)
-#畫線
-dw.line((0,0,w,h),width=20, fill=(255,0,0))
-dw.line((w,0,0,h),width=20, fill=(255,0,0))
-#畫圓
-dw.ellipse((0,0,w,h),outline=(255,255,0))
-#寫字
-mesg = 'This is a lion-mouse'
-dw.text((100,100), mesg)
-
-plt.imshow(im)
-
-plt.show()
-'''
-print('------------------------------------------------------------')	#60個
-
 from PIL import Image
 from matplotlib import patches
-import matplotlib.pyplot as plt
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -305,8 +301,6 @@ print('------------------------------------------------------------')	#60個
 
 print('無影像之PIL畫圖5 same?')
 
-from PIL import Image, ImageDraw, ImageFont
-
 W, H = 600, 300
 image = Image.new('RGBA', (W, H), 'Yellow')  # 建立600*300黃色底的影像
 
@@ -327,14 +321,7 @@ drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
 plt.imshow(image)
 plt.show()
 
-
 print('------------------------------------------------------------')	#60個
-
-
-import sys
-from PIL import Image, ImageDraw, ImageFont
-
-import matplotlib.pyplot as plt
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'    #無中文
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
@@ -431,8 +418,6 @@ draw.text(
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image, ImageDraw
-
 newImage = Image.new('RGBA', (300, 300), "Yellow")  # 建立300*300黃色底的影像
 drawObj = ImageDraw.Draw(newImage)
 
@@ -451,8 +436,6 @@ for y in range(150, 300, 10):
     drawObj.line([(0,y), (y-150,300)], fill="Blue")    
 
 print("------------------------------------------------------------")  # 60個
-
-from PIL import Image, ImageDraw, ImageFont
 
 newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
 drawObj = ImageDraw.Draw(newImage)
@@ -477,8 +460,6 @@ strCtext = '歡迎來到美國'                           # 設定欲列印中�
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image, ImageDraw, ImageFont
-
 newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
 drawObj = ImageDraw.Draw(newImage)
 
@@ -498,16 +479,12 @@ drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image, ImageDraw
-
 image = Image.new("RGB", (400,300), '#00FF00')
 draw=ImageDraw.Draw(image)
 draw.ellipse([(100,100),(320,200)], fill=(255,255,0,255))
 #image.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from PIL import Image, ImageDraw
 
 image = Image.new("RGB", (400,300))
 draw=ImageDraw.Draw(image)
@@ -528,8 +505,6 @@ draw.text((50,50),"牡丹亭",font=imfont,fill=(0,255,255,255))
 print("------------------------------------------------------------")  # 60個
 
 #Pillow：基本繪圖
-
-from PIL import Image, ImageDraw
 
 #繪直線
 
@@ -624,8 +599,6 @@ plt.show()
 
 #繪文字
 
-from PIL import Image, ImageDraw, ImageFont
-
 image = Image.new("RGB", (400,300), "lightgray")
 
 draw_image = ImageDraw.Draw(image)
@@ -643,8 +616,6 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 #Pillow：繪圖範例
-
-from PIL import Image, ImageDraw, ImageFont
 
 image = Image.new("RGB", (300,400), "lightgray")
 
@@ -674,12 +645,7 @@ plt.imshow(image)
 
 plt.show()
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageDraw
 
 image = Image.new("RGB", (400, 300))
 draw = ImageDraw.Draw(image)
@@ -689,8 +655,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image, ImageDraw
-
 image = Image.new("RGB", (400, 300), '#00FF00')
 draw = ImageDraw.Draw(image)
 draw.ellipse([(100, 100), (320, 200)], fill = (255, 255, 0, 255))
@@ -698,13 +662,7 @@ plt.imshow(image)
 plt.show()
 
 
-
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageDraw, ImageFont
 
 image = Image.open(filename)
 imfont = ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf", 40)
@@ -719,8 +677,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("新進")
-
-from PIL import Image, ImageDraw
 
 newImage = Image.new('RGBA', (300, 300), 'Yellow')  # 建立300*300黃色底的影像
 drawObj = ImageDraw.Draw(newImage)

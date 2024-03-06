@@ -733,8 +733,6 @@ by = np.sin(ax)
 #  '-', '--', '-.', ':', 'None', ' ', '', 'solid', 'dashed', 'dashdot', 'dotted'
 plt.plot(ax, ay, color="red", linewidth=8.0, linestyle="dotted", label="x0.5")
 plt.plot(ax, by, color="blue", linewidth=2.0, linestyle="-", label="sin")
-# 設定圖例標籤位置 ( best, upper, lower, right,left,center )
-plt.legend(loc="lower center")
 plt.ylim((-3, 3))  # y 軸上下最大和最小區間
 plt.xlim((0, 20))  # y 軸上下最大和最小區間
 plt.yticks([-3, 0, 3], ["min(-3)", "0", "max(3)"])  # 可以設置座標軸上特定文字
@@ -793,8 +791,6 @@ plt.annotate(
     fontsize=12,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
-
-plt.legend(loc="best")
 
 plt.ylim((-10, 10))  # 設定 x 和 y 的邊界值
 plt.xlim((-20, 20))
@@ -944,6 +940,11 @@ plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
 
 
 plt.ylabel(r'溫度 $C^{o}$')
+
+
+# 設定圖例標籤位置 ( best, upper, lower, right,left,center )
+plt.legend(loc="best")
+plt.legend(loc="lower center")
 
 
 """
