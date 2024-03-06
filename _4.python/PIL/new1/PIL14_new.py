@@ -19,18 +19,16 @@ print('------------------------------------------------------------')	#60個
 plt.figure('影像處理1', figsize = (10, 6))
 
 pil_im = Image.open('house.jpg')
-plt.gray()
+plt.gray()  #這是什麼語法?
 
 plt.subplot(121)
 plt.title(u'原图')
-plt.axis('off')
 plt.imshow(pil_im)
 
 pil_im = Image.open('house.jpg').convert('L')
 
 plt.subplot(122)
 plt.title(u'灰度图')
-plt.axis('off')
 plt.imshow(pil_im)
 
 plt.show()

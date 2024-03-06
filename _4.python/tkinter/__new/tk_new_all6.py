@@ -31,7 +31,7 @@ import tkinter as tk
 
 from PIL import ImageTk, Image
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 win = tk.Tk()
 
@@ -43,8 +43,9 @@ coord = 10, 10, 100, 100
 arc = c1.create_arc(coord, start=0, extent=350, fill="red")
 
 img =  ImageTk.PhotoImage(file = filename)
+
 #c1.create_image(300,100,image = img)
-c1.create_image(120+305//2, 10+400//2,image = img)
+c1.create_image(120+300//2, 10+400//2,image = img)
 
 c1.create_line(500,100,600,10, fill="red", width=3)
 

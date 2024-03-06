@@ -31,17 +31,14 @@ class Enhance(Frame):
         self.value = float(value)
         self.tkim.paste(self.enhancer.enhance(self.value))
 
-#
-# main
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 window = Tk()
 #window = tk.Tk()
 
 im = Image.open(filename)
 
-im.thumbnail((305, 400))
+im.thumbnail((300, 400))
 
 Enhance(window, im, "Color", ImageEnhance.Color, 0.0, 4.0).pack()
 Enhance(Toplevel(), im, "Sharpness", ImageEnhance.Sharpness, -2.0, 2.0).pack()

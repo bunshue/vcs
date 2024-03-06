@@ -29,10 +29,10 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print('測試 縮放 resize')
 
 image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
@@ -77,7 +77,7 @@ image_copied = image.copy() #複製圖片
 
 x_st = 0
 y_st = 0
-w = 305 / 4
+w = 300 / 4
 h = 400 / 4
 #                             x_st  y_st    x_sp     y_sp
 cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間
@@ -98,7 +98,7 @@ image_copied = image.copy() #複製圖片
 
 x_st = 0
 y_st = 0
-w = 305 / 4
+w = 300 / 4
 h = 400 / 4
 #                             x_st  y_st    x_sp     y_sp
 cropPict = image_copied.crop((x_st, y_st, x_st + w, y_st + h))    # 裁切區間
@@ -202,7 +202,7 @@ for target_image in allfiles:
 
 print("完成")
 print('輸出圖片資料夾 : ', target_dir)
-
+'''
 print('------------------------------------------------------------')	#60個
 
 image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
@@ -230,7 +230,7 @@ image2_hist = image2.histogram()
 
 W2, H2 = 400, 200
 print('把原圖轉成', W2, 'X', H2, '大小')
-image3 = image1.resize((W2, H2), Image.ANTIALIAS)
+image3 = image1.resize((W2, H2), Image.LANCZOS)
 
 plt.imshow(image3)
 plt.show()
@@ -246,6 +246,7 @@ r_hist = r.histogram()
 g_hist = g.histogram()
 b_hist = b.histogram()
 
+print('len = ', len(image2_hist))
 ind = np.arange(0, len(image2_hist))
 
 plt.plot(ind, image2_hist, color = 'cyan', label = 'cropped')
@@ -253,7 +254,7 @@ plt.plot(ind, hist, color = 'black', lw = 2, label = 'original')
 plt.plot(ind, r_hist, color = 'red', label = 'Red Plane')
 plt.plot(ind, g_hist, color = 'green', label = 'Green Plane')
 plt.plot(ind, g_hist, color = 'blue', label = 'Blue Plane')
-plt.xlim(0, 255)
+plt.xlim(0-10, 256+10)
 plt.ylim(0, 8000)
 plt.legend()
 

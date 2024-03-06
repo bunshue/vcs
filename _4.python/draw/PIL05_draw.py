@@ -12,7 +12,8 @@ print("在圖上寫字")
 
 from PIL import Image, ImageDraw, ImageFont
 
-filename = r'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
 image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
 
 w, h = image1.size
@@ -179,7 +180,7 @@ from matplotlib import patches
 import matplotlib.pyplot as plt
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 '''
 image1 = Image.open(filename)
@@ -199,7 +200,7 @@ print('------------------------------------------------------------')	#60個
 
 im=Image.open(filename)
 
-image=im.resize((305*1, 400//2))  #修改圖像大小
+image=im.resize((300*1, 400//2))  #修改圖像大小
 
 pic = plt.imshow(image)
 
@@ -207,7 +208,7 @@ pic = plt.imshow(image)
 
 #pic = plt.imshow(image, alpha = 0.5)
 origin = (0, 0)
-w = 305*75/100
+w = 300*75/100
 h = 400/2*75/100
 #畫出矩形
 patch  = patches.Rectangle(origin, w, h, fill=False, linewidth=2, color='r')

@@ -48,7 +48,34 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
+import os
+import sys
 
+def usage(msg):
+    sys.stdout = sys.stderr
+    print("Error:", msg)
+    print("Use ``%s -h'' for help" % sys.argv[0])
+
+prefix = 'aaaa'
+exec_prefix = 'bbbb'
+binlib = 'kkkk'
+incldir = 'qqqq'
+
+check_dirs = [prefix, exec_prefix, binlib, incldir]
+for dir in check_dirs:
+    if not os.path.exists(dir):
+        usage('needed directory %s not found' % dir)
+    if not os.path.isdir(dir):
+        usage('%s: not a directory' % dir)
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+    
+base = os.path.basename(filename)
+base, ext = os.path.splitext(base)
+
+dirname = os.path.dirname(filename)
+print(dirname)
+    
 
 print("------------------------------------------------------------")  # 60個
 

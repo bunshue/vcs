@@ -156,7 +156,6 @@ plt.hist(data3, bins=30, alpha=0.5, label="Data 3")
 # 設置圖表屬性
 plt.xlabel("Value")
 plt.ylabel("Frequency")
-
 plt.title("np.random.normal, 3組數據")
 
 # 第三張圖
@@ -170,10 +169,16 @@ kwargs = dict(histtype="stepfilled", alpha=0.3, density=True, bins=40)
 plt.hist(x1, **kwargs)
 plt.hist(x2, **kwargs)
 plt.hist(x3, **kwargs)
+plt.title("np.random.normal")
 
 
 # 第四張圖
 plt.subplot(234)
+
+# 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+x1 = np.random.normal(size=N)
+plt.hist(x=x1, bins=num_bins, label="Normal distribution")
+plt.title("np.random.normal")
 
 
 # 第五張圖
@@ -310,33 +315,8 @@ plt.subplot(236)
 # 生成 N 組介於 0 與 1 之間均勻分配隨機變數
 x = np.random.uniform(size=N)
 # x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
-
 plt.hist(x, bins=num_bins, rwidth=0.8)
-
 plt.title("np.random.uniform")
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("Hist圖 3種比較")
-
-N = 50000
-fig, ax = plt.subplots(1, 3, figsize=(20, 15))
-
-# 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-x1 = np.random.normal(size=N)
-# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
-x2 = np.random.uniform(size=N)
-exp_samples = np.random.exponential(scale=2, size=N)
-
-ax[0].hist(x=x1, bins=1000, label="Normal distribution")
-ax[1].hist(x=x2, bins=1000, label="Uniform distribution")
-ax[2].hist(x=exp_samples, bins=1000, label="Exponential distribution")
-ax[0].legend()
-ax[1].legend()
-ax[2].legend()
 
 plt.show()
 
@@ -783,6 +763,10 @@ plt.subplot(235)
 # 第六張圖
 plt.subplot(236)
 
+N = 50000
+exp_samples = np.random.exponential(scale=2, size=N)
+plt.hist(x=exp_samples, bins=1000, label="Exponential distribution")
+
 
 plt.show()
 
@@ -881,12 +865,6 @@ sns.kdeplot(x)
 # 第五張圖
 plt.subplot(235)
 
-N = 500  # 資料個數
-num_bins = 50  # 直方圖顯示時的束數
-
-x = np.random.randn(N)
-plt.hist(x, num_bins, rwidth=0.5)
-
 
 # 第六張圖
 plt.subplot(236)
@@ -895,7 +873,7 @@ N = 500  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
 x = np.random.randn(N)
-plt.hist(x, rwidth=0.5)
+plt.hist(x, num_bins, rwidth=0.5)
 
 
 plt.show()
@@ -907,6 +885,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個
