@@ -63,32 +63,23 @@ from PIL import Image, ImageDraw, ImageFont
 mesg = 'lion-mouse'
 
 font_size = 30; #文字大小
-font_r = 255;   #紅色值
-font_g = 0;     #綠色值
-font_b = 0;     #藍色值
-
-fill = (font_r, font_g, font_b)
+fill = (255, 0, 0)    #字的顏色RGB
 
 im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
 font = ImageFont.truetype(font_filename, font_size)
+
+print('取得文字框')
 xx, yy, text_width, text_height = dw0.textbbox((0, 0), mesg, font=font, spacing=0, align='left')
-print(text_width)
-print(text_height)
+print('xx =', xx)
+print('yy =', yy)
+print('W =', text_width)
+print('H =', text_height)
 
-aaa = dw0.textlength(mesg, font=font)
-print(aaa)
+print('取得文字長')
+length = dw0.textlength(mesg, font=font)
+print('L =', length)
 
-
-"""
-hello = draw.textlength("Hello", font)
-world = draw.textlength("World", font)
-hello_world = hello + world  # not adjusted for kerning
-assert hello_world == draw.textlength("HelloWorld", font)  # may fail
-"""
-
-print(text_width)
-print(text_height)
 print('製作一個 W = ' + str(text_width) + ', H = ' + str(text_height) + ' 的圖片')
 im = Image.new('RGBA', (text_width, text_height), (255,255,255,0))
 dw = ImageDraw.Draw(im)
@@ -162,31 +153,14 @@ dw.text((100,100), mesg)
 plt.imshow(im)
 
 plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
 from PIL import Image
 from matplotlib import patches
 import matplotlib.pyplot as plt
 
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-"""
-image1 = Image.open(filename)
-  
-image = Image.open(filename)
-image_1 = image.convert('1')	#轉換成二值化圖像
-
-plt.subplot(121)
-plt.imshow(image)
-plt.subplot(122)
-plt.imshow(image_1)
-
-plt.show()
-"""
-
-print('------------------------------------------------------------')	#60個
 
 im=Image.open(filename)
 
@@ -425,7 +399,7 @@ img2.paste(text, (50, 0), text)  # 將文字貼上 img2
 img2.convert("RGBA")  # 圖片轉換為 RGBA 模式 ( 才能調整 alpha 色版 )
 img2.putalpha(100)  # 調整透明度，範圍 0～255，0 為全透明
 img.paste(img2, (0, 0), img2)  # 將 img2 貼上 img
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image, ImageFont, ImageDraw
@@ -454,7 +428,6 @@ draw.text(
     stroke_width=2,
     stroke_fill="blue",
 )
-img.save("ok.png")  # 儲存為 png
 
 print("------------------------------------------------------------")  # 60個
 
@@ -476,7 +449,6 @@ for x in range(150, 300, 10):
 # 繪製左下角美工線
 for y in range(150, 300, 10):
     drawObj.line([(0,y), (y-150,300)], fill="Blue")    
-newImage.save("tmp_pic24.png")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -503,8 +475,6 @@ strCtext = '歡迎來到美國'                           # 設定欲列印中�
 #fontInfo = ImageFont.truetype('C:\Windows\Fonts\DFZongYiStd-W9.otf', 48)
 #drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
 
-newImage.save("tmp_pic26.png")
-
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image, ImageDraw, ImageFont
@@ -525,7 +495,6 @@ drawObj.text((50,100), strText, fill='Blue', font=fontInfo)
 strCtext = '歡迎來到美國'                           # 設定欲列印中文字串
 fontInfo = ImageFont.truetype('C:\Windows\Fonts\mingliu.ttc', 48)
 drawObj.text((50,180), strCtext, fill='Blue', font=fontInfo)
-newImage.save("tmp_pic27.png")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -763,5 +732,17 @@ drawObj.ellipse((170,60,270,100),outline='Black')   # 右眼外框
 drawObj.ellipse((205,65,235,95),fill='Blue')        # 右眼
 drawObj.polygon([(150,120),(180,180),(120,180),(150,120)],fill='Aqua') # 鼻子
 drawObj.rectangle((100,210,200,240), fill='Red')    # 嘴   
+
+
+"""
+newImage.save("tmp_pic24.png")
+img.save("tmp_pic20.png")  # 儲存為 png
+newImage.save("tmp_pic26.png")
+
+newImage.save("tmp_pic27.png")
+
 newImage.save("tmp_pic25.png")
 
+
+
+"""

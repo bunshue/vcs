@@ -16,8 +16,8 @@ print('------------------------------------------------------------')	#60個
 
 PAD = 5  # 設定要忽略鄰近影像邊緣多少距離的像素數
 
-filename1 ="file1.png"
-filename2 ="file2.png"
+filename1 ="data/file1.png"
+filename2 ="data/file2.png"
 
 def find_transient(image, diff_image, pad): 
     """尋找並標出星空中移動的瞬變""" 
@@ -61,7 +61,7 @@ if transient1 or transient2:
     cv2.waitKey()
     cv2.destroyAllWindows()
 
-    out_filename = 'tmp_DECTECTED.png'
+    out_filename = 'tmp_DECTECTED2.png'
     cv2.imwrite(out_filename, blended)  # 會覆寫既有檔案！
 else:
     print('\nNo transient detected between {} and {}\n'.format(filename1, filename2))

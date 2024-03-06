@@ -26,8 +26,8 @@ def find_transient(image, diff_image, pad):
         transient = True
     return transient, maxLoc
 
-filename1 ="file1.png"
-filename2 ="file2.png"
+filename1 ="data/file1.png"
+filename2 ="data/file2.png"
 
 img1 = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
 img2 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
@@ -59,7 +59,7 @@ if transient1 or transient2:
     cv2.imshow('Surveyed', blended)
     cv2.waitKey(2500)
 
-    out_filename = '{}_DECTECTEDtttt.png'.format(filename1)
+    out_filename = 'tmp_DECTECTED1.png'
     cv2.imwrite(out_filename, blended)  # 會覆寫既有檔案！
 
 else:

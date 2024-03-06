@@ -1,7 +1,6 @@
 """
 PIL 新進
 
-
 """
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
@@ -19,13 +18,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 from PIL import Image
 
@@ -66,24 +58,6 @@ img3=img.transpose(Image.FLIP_TOP_BOTTOM)#上下翻轉
 
 print("------------------------------------------------------------")  # 60個
 
-img = Image.open("data/img01.jpg")
-imggray = img.convert('L') #轉換為灰階
-
-print("------------------------------------------------------------")  # 60個
-
-img = Image.open("data/img01.jpg")
-w,h=img.size #320 240
-img = img.convert('L')  #先轉換為灰階
-
-for i in range(w):  #i為每一列
-    for j in range(h):  #j為每一行
-        if img.getpixel((i,j)) <100:  
-            img.putpixel((i,j),(0))   #設為黑色
-        else:
-            img.putpixel((i,j),(255)) #設為白色
-
-print("------------------------------------------------------------")  # 60個
-
 img = Image.open("data/img01.jpg") # w,h=img.size #320 240
 
 img1=img.crop((0,0,160,120))
@@ -120,20 +94,6 @@ print(ImageColor.getcolor("#0000ff","RGB"))      #(0, 0, 255)
 print(ImageColor.getcolor("rgb(0,0,255)","RGB")) #(0, 0, 255)
 print(ImageColor.getcolor("rgb(0,0,255)","RGBA"))#(0, 0, 255, 255)
 print(ImageColor.getcolor("Blue","RGBA"))        #(0, 0, 255, 255)
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image,ImageFilter
-
-img = Image.open("data/panda.jpg")
-
-imgFilter=img.filter(ImageFilter.BLUR)   #模擬
-
-imgFilter=img.filter(ImageFilter.CONTOUR)#輪廓
-
-imgFilter=img.filter(ImageFilter.EMBOSS) #浮雕
-
-imgFilter=img.filter(ImageFilter.SHARPEN)#銳化
 
 print("------------------------------------------------------------")  # 60個
 

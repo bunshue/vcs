@@ -35,7 +35,7 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 print('------------------------------------------------------------')	#60個
-'''
+
 print('測試 縮放 resize')
 
 image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
@@ -153,7 +153,6 @@ image2 = image.transpose(Image.FLIP_TOP_BOTTOM)   # 上下
 print('旋轉90度')
 rotate90 = image.transpose(Image.ROTATE_90)
 
-'''
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'

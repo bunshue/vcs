@@ -56,12 +56,12 @@ def blink(image_1, image_2, window_name, num_loops):
     """用 2 個影像模擬閃爍比較儀的動作"""
     for _ in range(num_loops):
         cv2.imshow(window_name, image_1)
-        cv2.waitKey(330)
+        cv2.waitKey(200)
         cv2.imshow(window_name, image_2)
-        cv2.waitKey(330)
+        cv2.waitKey(200)
         
-filename1 ="file1.png"
-filename2 ="file2.png"
+filename1 ="data/file1.png"
+filename2 ="data/file2.png"
 
 """做影像對齊和閃爍顯示""" 
 img1 = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE) 
@@ -76,8 +76,9 @@ QC_best_matches(img_match) # 確認過執行結果滿意，即可標示為註解
 img1_registered = register_image(img1, img2, kp1, kp2, best_matches) 
 
 blink(img1, img1_registered, 'Check Registration', num_loops=5) 
-out_filename = '{}_registered_ttttt.png'.format(filename1) 
+out_filename = 'tmp_file1_registered.png'
 cv2.imwrite(out_filename, img1_registered) # 會覆寫既有檔案！
+
 cv2.destroyAllWindows() 
 blink(img1_registered, img2, 'Blink Comparator', num_loops=15)
 cv2.destroyAllWindows() 

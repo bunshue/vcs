@@ -64,8 +64,8 @@ if len(best_matches) >= MIN_NUM_KEYPOINT_MATCHES:
     img1_warped = cv2.warpPerspective(img1, M, (width, height))
 
     # 覆寫，存檔
-    cv2.imwrite('montage_left_registered.JPG', img1_warped)
-    cv2.imwrite('montage_right_gray.JPG', img2)
+    cv2.imwrite('tmp_montage_left_registered.JPG', img1_warped)
+    cv2.imwrite('tmp_montage_right_gray.JPG', img2)
 
 else:
     print("\n{}\n".format('WARNING: Number of keypoint matches < 10!'))

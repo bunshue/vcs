@@ -140,6 +140,21 @@ filterPict.save("tmp_pic_4_SHARPEN.png")
 
 print("------------------------------------------------------------")  # 60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+from PIL import Image,ImageFilter
+
+img = Image.open(filename)
+
+imgFilter=img.filter(ImageFilter.BLUR)   #模擬
+
+imgFilter=img.filter(ImageFilter.CONTOUR)#輪廓
+
+imgFilter=img.filter(ImageFilter.EMBOSS) #浮雕
+
+imgFilter=img.filter(ImageFilter.SHARPEN)#銳化
+
+print("------------------------------------------------------------")  # 60個
 
 
 

@@ -18,7 +18,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 print('測試 01------------------------------------------------------------')	#60個
-'''
+
 #影像對比與亮度調整
 import matplotlib.image as img
 
@@ -45,46 +45,6 @@ plt.title('影像對比與亮度調整')
 plt.show()
 
 print('測試 02------------------------------------------------------------')	#60個
-
-plt.figure(num = '影像分析工具 影像直方圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#影像分析工具
-#影像直方圖
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
-
-plt.subplot(221)
-plt.hist(image.ravel(), 256, [0,256])
-plt.title('原圖轉灰階')
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title('影像直方圖')
-
-print('測試 03------------------------------------------------------------')	#60個
-
-#直方圖影像操作
-#直方圖均值化
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
-equa = cv2.equalizeHist(image)
-
-plt.subplot(223)
-plt.hist(equa.ravel(), 256, [0,256])
-plt.title('原圖轉灰階')
-
-#均值化的影像
-#均衡化後的灰度直方圖分布
-plt.subplot(224)
-plt.imshow(cv2.cvtColor(equa, cv2.COLOR_BGR2RGB))
-plt.title('均衡化後的灰度直方圖分布')
-
-plt.show()
-'''
-print('測試 04------------------------------------------------------------')	#60個
 
 plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
@@ -150,50 +110,6 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title('再設定第0通道為0')
 
 plt.show()
-
-print('測試 05------------------------------------------------------------')	#60個
-
-plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
-filename = 'data/pic_brightness1.bmp'
-
-image = cv2.imread(filename)
-
-
-cut = 50
-num_bins = 50  # 直方圖顯示時的束數
-
-b, g, r = cv2.split(image)
-
-bb = b[cut:(480-cut*2), cut:(640-cut*2)]
-#plt.imshow(cv2.cvtColor(bb, cv2.COLOR_BGR2RGB))
-#plt.show()
-
-bbb = bb.reshape(bb.shape[0]*bb.shape[1], 1)
-#print(bbb.shape)
-plt.hist(bbb, num_bins, color="b", alpha = 0.5)  #alpha調整透明度 給多個直方圖畫在一起用
-
-gg = g[cut:(480-cut*2), cut:(640-cut*2)]
-#plt.imshow(cv2.cvtColor(gg, cv2.COLOR_BGR2RGB))
-#plt.show()
-
-ggg = gg.reshape(gg.shape[0]*gg.shape[1], 1)
-#print(ggg.shape)
-plt.hist(ggg, num_bins, color="g", alpha = 0.5)  #alpha調整透明度 給多個直方圖畫在一起用
-
-rr = r[cut:(480-cut*2), cut:(640-cut*2)]
-#plt.imshow(cv2.cvtColor(rr, cv2.COLOR_BGR2RGB))
-#plt.show()
-
-rrr = rr.reshape(rr.shape[0]*rr.shape[1], 1)
-#print(rrr.shape)
-rrr = rrr[0:len(rrr):5]
-plt.hist(rrr, num_bins, color="r", alpha = 0.5)  #alpha調整透明度 給多個直方圖畫在一起用
-
-plt.show()
-
 
 print('測試 05------------------------------------------------------------')	#60個
 
@@ -296,76 +212,6 @@ plt.show()
 
 print('測試 09------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-filename = 'pic.bmp'
-
-image = cv2.imread(filename)
-
-print('形狀1 :', image.shape)
-print('大小1 :', image.size)
-
-print('拉成一維')
-image2 = image.ravel()
-
-print('形狀2 :', image2.shape)
-print('大小2 :', image2.size)
-
-num_bins = 64  # 直方圖顯示時的束數
-plt.hist(image2, bins = num_bins, color="lime", alpha = 0.3, density=False)
-#density=True   #以密度表示
-
-plt.show()
-
-print('測試 10------------------------------------------------------------')	#60個
-
-plt.figure(num = '影像分析工具 影像直方圖 均衡化效果比較', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-#-----------讀取原始圖像---------------
-image = cv2.imread('images/equ.bmp',cv2.IMREAD_GRAYSCALE)
-#-----------直方圖均衡化處理---------------
-equ = cv2.equalizeHist(image)
-#-----------顯示均衡化前后的直方圖---------------
-plt.subplot(221)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title('原圖')
-
-plt.subplot(222)
-plt.imshow(cv2.cvtColor(equ, cv2.COLOR_BGR2RGB))
-plt.title('均衡化之圖')
-
-#-----------顯示均衡化前后的直方圖---------------
-
-plt.subplot(223)
-plt.hist(image.ravel(), 64)
-plt.xlim(0, 256) # 設定 x 軸座標範圍
-plt.title("原圖之直方圖")
-
-plt.subplot(224)
-plt.hist(equ.ravel(), 64)
-plt.xlim(0, 256) # 設定 x 軸座標範圍
-plt.title("均衡化之圖的直方圖")
-
-plt.show()
-
-print('測試 11------------------------------------------------------------')	#60個
-
-plt.figure(num = 'subplot示例', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
-
-image = cv2.imread('images/equ.bmp', cv2.IMREAD_GRAYSCALE)
-equ = cv2.equalizeHist(image)
-
-plt.subplot(121)
-plt.hist(image.ravel(), 256)
-
-plt.subplot(122)
-plt.hist(equ.ravel(), 256)
-
-plt.show()
-
-
-print('測試 12----------------------------------------------------------')	#60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -374,11 +220,5 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-
-"""
-https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
-https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
-"""
 
 
