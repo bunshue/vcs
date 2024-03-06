@@ -58,8 +58,11 @@ print('建立影像 RGB 300 X 100')
 W, H = 300, 100
 color = "aqua"
 image = Image.new('RGB', (W, H), color)
+
 plt.imshow(image)
 plt.show()
+
+print(image.getpixel((W//2, H//2)))      # 列印中心點的色彩
 
 print('------------------------------------------------------------')	#60個
 
@@ -69,48 +72,19 @@ image = Image.new('RGBA', (W, H))
 plt.imshow(image)
 plt.show()
 
-image = Image.new("RGB", (300, 180), "aqua")  # 建立aqua顏色影像
-plt.imshow(image)
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
-image = Image.new("RGBA", (300, 180))     # 建立完全透明影像
-plt.imshow(image)
-plt.show()
+print('建立影像 RGBA, 在上面畫圖')
+W, H = 400, 300
+color = "Yellow"
+image = Image.new('RGBA', (W, H), color)
 
-print("------------------------------------------------------------")  # 60個
-
-image = Image.new('RGBA', (300, 100), "Yellow")
-print(image.getpixel((150, 50)))      # 列印中心點的色彩
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.new('RGBA', (300, 300), "Yellow")
 for x in range(50, 251):                                # x軸區間在50-250
     for y in range(50, 151):                            # y軸區間在50-150
         image.putpixel((x, y), (0, 255, 255, 255))   # 填青色
 
 for x in range(50, 251):                                # x軸區間在50-250            
     for y in range(151, 251):                           # y軸區間在151-250
-        image.putpixel((x, y), ImageColor.getcolor("Blue", "RGBA"))
-
-print('------------------------------------------------------------')	#60個
-
-print('建立影像 RGBA, 在上面畫圖')
-W, H = 300, 100
-color = "Yellow"
-image = Image.new('RGBA', (W, H), color)
-
-print('列印中心點的色彩')
-print(image.getpixel((150, 50)))
-
-for x in range(50, 251):                            # x軸區間在50-250
-    for y in range(20, 51):                        # y軸區間在20-50
-        image.putpixel((x, y), (255, 0, 0, 255))   # 填紅色
-
-for x in range(50, 251):                            # x軸區間在50-250            
-    for y in range(51, 81):                       # y軸區間在51-80
         image.putpixel((x, y), ImageColor.getcolor("Blue", "RGBA")) # 填藍色
 
 plt.imshow(image)
@@ -121,27 +95,14 @@ print('------------------------------------------------------------')	#60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
-
 
 print('------------------------------------------------------------')	#60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 
 print('------------------------------------------------------------')	#60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 

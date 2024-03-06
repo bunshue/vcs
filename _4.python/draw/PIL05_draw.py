@@ -7,7 +7,7 @@ font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'    #無
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print("在圖上寫字")
 
 from PIL import Image, ImageDraw, ImageFont
@@ -23,10 +23,10 @@ dw = ImageDraw.Draw(image1)
 
 mesg = '牡丹亭'
 font = ImageFont.truetype(font_filename, 60)
-fn_w, fn_h = dw.textsize(mesg, font = font)
+xx, yy, text_width, text_height = dw.textbbox((0, 0), mesg, font=font, spacing=0, align='left')
 
-x_st = w / 2 - fn_w / 2
-y_st = h / 2 - fn_h / 2 + 100
+x_st = w / 2 - text_width / 2
+y_st = h / 2 - text_height / 2 + 100
 dw.text((x_st + 5, y_st + 5), mesg, font=font, fill=(25,25,25))
 dw.text((x_st, y_st), mesg, font=font, fill=(128,255,255))
 
@@ -42,13 +42,8 @@ font_size = 30
 mesg = 'this is a lion mouse'
 
 font = ImageFont.truetype(font_filename, font_size)
-font_size = font.getsize(mesg)
-print(font_size)
 
-width = font_size[0]
-height = font_size[1]
-print(width)
-print(height)
+xx, yy, width, height = font.getbbox(mesg)
 
 print('製作一個 W = ' + str(width) + ', H = ' + str(height) + ' 的圖片')
 img = Image.new('RGBA', (width, height), (255, 255, 255, 0))
@@ -65,7 +60,7 @@ print('------------------------------------------------------------')	#60個
 
 from PIL import Image, ImageDraw, ImageFont
 
-msg = 'lion-mouse'
+mesg = 'lion-mouse'
 
 font_size = 30; #文字大小
 font_r = 255;   #紅色值
@@ -77,33 +72,27 @@ fill = (font_r, font_g, font_b)
 im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
 font = ImageFont.truetype(font_filename, font_size)
-fn_w, fn_h = dw0.textsize(msg, font = font)
+xx, yy, text_width, text_height = dw0.textbbox((0, 0), mesg, font=font, spacing=0, align='left')
+print(text_width)
+print(text_height)
 
-print(fn_w)
-print(fn_h)
-
-aaa = dw0.textlength(msg, font=font)
+aaa = dw0.textlength(mesg, font=font)
 print(aaa)
 
-'''
-bbb = dw0.textbbox(msg, font=font)
-print(bbb)
-'''
 
-
-'''
+"""
 hello = draw.textlength("Hello", font)
 world = draw.textlength("World", font)
 hello_world = hello + world  # not adjusted for kerning
 assert hello_world == draw.textlength("HelloWorld", font)  # may fail
-'''
+"""
 
-print(fn_w)
-print(fn_h)
-print('製作一個 W = ' + str(fn_w) + ', H = ' + str(fn_h) + ' 的圖片')
-im = Image.new('RGBA', (fn_w, fn_h), (255,255,255,0))
+print(text_width)
+print(text_height)
+print('製作一個 W = ' + str(text_width) + ', H = ' + str(text_height) + ' 的圖片')
+im = Image.new('RGBA', (text_width, text_height), (255,255,255,0))
 dw = ImageDraw.Draw(im)
-dw.text((0,0), msg, font=font, fill=fill)
+dw.text((0,0), mesg, font=font, fill=fill)
 
 plt.imshow(im)
 plt.show()
@@ -118,7 +107,7 @@ from PIL import Image, ImageDraw, ImageFont
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 #要做浮水印的文字
-msg = "lion-mouse"
+mesg = "lion-mouse"
 #文字大小
 font_size = 10
 fill = (255,255,255,100)
@@ -129,12 +118,13 @@ im_w, im_h = im.size
 im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
 font = ImageFont.truetype(font_filename, font_size)
-fn_w, fn_h = dw0.textsize(msg, font=font)
-im = Image.new('RGBA', (fn_w, fn_h), (255,0,0,0))
+xx, yy, text_width, text_height = dw0.textbbox((0, 0), mesg, font=font, spacing=0, align='left')
+
+im = Image.new('RGBA', (text_width, text_height), (255,0,0,0))
 dw = ImageDraw.Draw(im)
-x = int(im_w/2 - fn_w/2)
-y = int(im_h/2 - fn_h/2)
-dw.text((0, 0), msg, font=font, fill=fill)
+x = int(im_w/2 - text_width/2)
+y = int(im_h/2 - text_height/2)
+dw.text((0, 0), mesg, font=font, fill=fill)
 im.paste(im, (x, y), im)
 
 plt.imshow(im)
@@ -182,7 +172,7 @@ import matplotlib.pyplot as plt
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-'''
+"""
 image1 = Image.open(filename)
   
 image = Image.open(filename)
@@ -194,7 +184,7 @@ plt.subplot(122)
 plt.imshow(image_1)
 
 plt.show()
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -435,42 +425,16 @@ img2.paste(text, (50, 0), text)  # 將文字貼上 img2
 img2.convert("RGBA")  # 圖片轉換為 RGBA 模式 ( 才能調整 alpha 色版 )
 img2.putalpha(100)  # 調整透明度，範圍 0～255，0 為全透明
 img.paste(img2, (0, 0), img2)  # 將 img2 貼上 img
-
+'''
 print("------------------------------------------------------------")  # 60個
-
-
-
-from PIL import Image, ImageFont, ImageDraw
-
-imgs = glob.glob("./demo/*.jpg")  # 讀取 demo 資料夾裡所有的圖片
-
-for i in imgs:
-    name = i.split("/")[::-1][0]  # 取得圖片名稱
-    img = Image.open(i)  # 開啟圖片
-    w, h = img.size
-    font = ImageFont.truetype("Teko-Regular.ttf", 100)
-    text = Image.new(mode="RGBA", size=(400, 100), color=(0, 0, 0, 0))
-    draw = ImageDraw.Draw(text)
-    draw.text((0, 0), "OXXO.STUDIO", fill=(255, 255, 255), font=font)
-    text = text.rotate(30, expand=1)
-    img2 = Image.open(i)
-    img2.paste(text, (50, 0), text)
-    img2.convert("RGBA")
-    img2.putalpha(150)
-    img.paste(img2, (0, 0), img2)
-    img.save(f"./test/{name}")
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 from PIL import Image, ImageFont, ImageDraw
 
 img = Image.new("RGBA", (360, 180))  # 建立色彩模式為 RGBA，尺寸 360x180 的空白圖片
-font = ImageFont.truetype("NotoSansTC-Regular.otf", 40)  # 設定字型與尺寸
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+font = ImageFont.truetype(font_filename, 40)  # 設定字型與尺寸
+
 draw = ImageDraw.Draw(img)  # 準備在圖片上繪圖
 # 將文字畫入圖片
 draw.text(
@@ -585,6 +549,7 @@ print("------------------------------------------------------------")  # 60個
 
 from PIL import Image,ImageDraw,ImageFont
 
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 image=Image.open(filename)
 imfont=ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf",120)
 draw=ImageDraw.Draw(image)
@@ -784,24 +749,6 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print("作業完成")
-
-print('------------------------------------------------------------')	#60個
-
 print("新進")
 
 from PIL import Image, ImageDraw
@@ -817,6 +764,4 @@ drawObj.ellipse((205,65,235,95),fill='Blue')        # 右眼
 drawObj.polygon([(150,120),(180,180),(120,180),(150,120)],fill='Aqua') # 鼻子
 drawObj.rectangle((100,210,200,240), fill='Red')    # 嘴   
 newImage.save("tmp_pic25.png")
-
-
 

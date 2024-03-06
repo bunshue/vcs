@@ -19,11 +19,12 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/boat.bmp'
-image1 = cv2.imread(filename)
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-image2 = cv2.imread(filename)
+filename1 = 'C:/_git/vcs/_4.python/_data/picture_mix1.bmp'
+filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
+
+image1 = cv2.imread(filename1)
+image2 = cv2.imread(filename2)
 
 print('兩圖直接相加')
 result1 = image1 + image2
@@ -31,35 +32,41 @@ result1 = image1 + image2
 print('兩圖用cv相加')
 result2 = cv2.add(image1, image2)
 
-plt.figure('相加', figsize = (16, 12))
-plt.subplot(231)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(232)
-plt.title('兩圖直接相加')
-plt.imshow(cv2.cvtColor(result1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(233)
-plt.title('兩圖用cv相加')
-plt.imshow(cv2.cvtColor(result2, cv2.COLOR_BGR2RGB))
-
 print('兩圖做alpha疊加')
-result = cv2.addWeighted(image1, 0.6, image2, 0.4, 0)
+result3 = cv2.addWeighted(image1, 0.7, image2, 0.3, 0)
 
-plt.subplot(234)
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="相加",
+    figsize=(20, 15),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.subplot(231)
 plt.title('原圖1')
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 
-plt.subplot(235)
+plt.subplot(232)
 plt.title('原圖2')
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 
+plt.subplot(234)
+plt.title('兩圖直接相加')
+plt.imshow(cv2.cvtColor(result1, cv2.COLOR_BGR2RGB))
+
+plt.subplot(235)
+plt.title('兩圖用cv相加')
+plt.imshow(cv2.cvtColor(result2, cv2.COLOR_BGR2RGB))
+
 plt.subplot(236)
 plt.title('兩圖做alpha疊加')
-plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(result3, cv2.COLOR_BGR2RGB))
 
-#plt.tight_layout()
+plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個

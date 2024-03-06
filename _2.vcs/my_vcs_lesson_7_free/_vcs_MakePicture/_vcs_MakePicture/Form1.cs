@@ -2350,12 +2350,71 @@ namespace _vcs_MakePicture
 
         private void button61_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "draw image在圖片的不同地方 做opencv疊合用";
 
+            int W = 640;
+            int H = 480;
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            g = Graphics.FromImage(bitmap1);
+
+            int dd = 10;
+            p = new Pen(Color.FromArgb(255, 128, 0, 0), 20);
+            g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
+
+            dd = 20;
+            p = new Pen(Color.FromArgb(255, 255, 0, 0), 20);
+            g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.bmp";
+            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            g.DrawImage(bitmap2, 20+100, (H - 400) / 2, bitmap2.Width, bitmap2.Height);
+            //              貼上的位置      貼上的大小 放大縮小用
+
+            Font f;
+            f = new Font("標楷體", 80);
+            sb = new SolidBrush(Color.FromArgb(255, 255, 0, 0));
+            g.DrawString("左", f, sb, new PointF(80, 350));
+
+            filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(@filename, ImageFormat.Bmp);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button62_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "draw image在圖片的不同地方 做opencv疊合用";
 
+            int W = 640;
+            int H = 480;
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            g = Graphics.FromImage(bitmap1);
+
+            int dd = 10;
+            p = new Pen(Color.FromArgb(255, 128, 0, 0), 20);
+            g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
+
+            dd = 20;
+            p = new Pen(Color.FromArgb(255, 0, 255, 0), 20);
+            g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
+
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture2.jpg";
+            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            richTextBox1.Text += "W = " + bitmap2.Width.ToString() + ", H = " + bitmap2.Height.ToString() + "\n";
+            g.DrawImage(bitmap2, W-20-bitmap2.Width-100, (H - 400) / 2, bitmap2.Width, bitmap2.Height);
+            //              貼上的位置      貼上的大小 放大縮小用
+
+            Font f;
+            f = new Font("標楷體", 80);
+            sb = new SolidBrush(Color.FromArgb(255, 0, 255, 0));
+            g.DrawString("右", f, sb, new PointF(80+320, 350));
+
+            filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(@filename, ImageFormat.Bmp);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button63_Click(object sender, EventArgs e)

@@ -791,6 +791,63 @@ for entry in os.scandir(foldername):
         
 print("------------------------------------------------------------")  # 60個
 
+print('對一個資料夾內的所有圖檔做處理')
+import glob
+from PIL import Image
+
+#filenames = glob.glob("./data/*.jpg")  # 取得 data 資料夾內所有的圖片
+filenames = glob.glob("./data/*.[jJ][pP][gG]")  # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
+for i in filenames:
+    print('取得檔案 :', i)
+    im = Image.open(i)  # 開啟圖片檔案
+    size = im.size  # 取得圖片尺寸
+    print(size)
+    name = i.split("/")[::-1][0]  # 取出檔名
+
+    #轉存檔案格式
+    name = i.lower().split("/")[::-1][0]  # 將檔名換成小寫 ( 避免 JPG 與 jpg 干擾 )
+    png = name.replace("jpg", "png")  # 取出圖片檔名，將 jpg 換成 png
+    #im.save(f"./data/png/{png}", "png")  # 轉換成 png 並存檔
+
+    #改變檔案品質
+    #im.save(f"./data/jpg/{name}", quality=65, subsampling=0)  # 設定參數並存檔
+
+    #改變圖片大小
+    im2 = im.resize((200, 200))  # 調整圖片尺寸為 200x200
+    #im2.save(f"./data/resize/{name}")  # 調整後存檔到 resize 資料夾
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+from PIL import Image, ImageFont, ImageDraw
+
+imgs = glob.glob("./demo/*.jpg")  # 讀取 demo 資料夾裡所有的圖片
+
+for i in imgs:
+    name = i.split("/")[::-1][0]  # 取得圖片名稱
+    img = Image.open(i)  # 開啟圖片
+    w, h = img.size
+    font = ImageFont.truetype("Teko-Regular.ttf", 100)
+    text = Image.new(mode="RGBA", size=(400, 100), color=(0, 0, 0, 0))
+    draw = ImageDraw.Draw(text)
+    draw.text((0, 0), "OXXO.STUDIO", fill=(255, 255, 255), font=font)
+    text = text.rotate(30, expand=1)
+    img2 = Image.open(i)
+    img2.paste(text, (50, 0), text)
+    img2.convert("RGBA")
+    img2.putalpha(150)
+    img.paste(img2, (0, 0), img2)
+    img.save(f"./test/{name}")
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 
 print("------------------------------------------------------------")  # 60個

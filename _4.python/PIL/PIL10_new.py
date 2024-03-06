@@ -289,12 +289,7 @@ plt.show()
 
 #上述代碼中，我們使用get_cmap方法獲取了一個名為’jet’的顏色映射表。然后，將灰度圖像轉換為NumPy數組，再將數組應用于顏色映射表，得到彩色圖像。
 
-
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
@@ -350,61 +345,6 @@ def rgb_of_pixel(img_path, x, y):
     return a
 
 print(rgb_of_pixel(filename, 131, 81))
-
-print("------------------------------------------------------------")  # 60個
-
-import glob
-from PIL import Image
-
-jpg = glob.glob("./demo/*.[jJ][pP][gG]")  # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
-print(jpg)
-for i in jpg:
-    print(i)
-    im = Image.open(i)  # 開啟圖片檔案
-    name = i.lower().split("/")[::-1][0]  # 將檔名換成小寫 ( 避免 JPG 與 jpg 干擾 )
-    png = name.replace("jpg", "png")  # 取出圖片檔名，將 jpg 換成 png
-    im.save(f"./demo/png/{png}", "png")  # 轉換成 png 並存檔
-
-
-print("------------------------------------------------------------")  # 60個
-
-import glob
-from PIL import Image
-
-jpg = glob.glob("./demo/*.[jJ][pP][gG]")  # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
-print(jpg)
-for i in jpg:
-    print(i)
-    im = Image.open(i)  # 開啟圖片檔案
-    name = i.split("/")[::-1][0]  # 取出檔名
-    im.save(f"./demo/jpg/{name}", quality=65, subsampling=0)  # 設定參數並存檔
-
-
-print("------------------------------------------------------------")  # 60個
-
-import glob
-from PIL import Image
-
-imgs = glob.glob("./oxxo/*.jpg")  # 取得 demo 資料夾內所有的圖片
-for i in imgs:
-    im = Image.open(i)  # 依序開啟每一張圖片
-    size = im.size  # 取得圖片尺寸
-    print(size)
-
-
-print("------------------------------------------------------------")  # 60個
-
-import glob
-from PIL import Image
-
-imgs = glob.glob("./oxxo/*.jpg")
-for i in imgs:
-    im = Image.open(i)
-    size = im.size
-    name = i.split("/")[::-1][0]  # 取得圖片的名稱
-    im2 = im.resize((200, 200))  # 調整圖片尺寸為 200x200
-    im2.save(f"./oxxo/resize/{name}")  # 調整後存檔到 resize 資料夾
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1270,8 +1210,6 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
 
 
 

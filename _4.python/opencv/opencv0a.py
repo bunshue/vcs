@@ -84,24 +84,17 @@ print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
 plt.figure('xxxxx', figsize = (16, 12))
 
-plt.subplot(221)
+plt.subplot(131)
 plt.title('顯示圖片')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-
-#實例化8位圖
-image_empty = np.zeros(image.shape, dtype = np.uint8)   #依照原圖大小建立一個圖像的二維陣列
-plt.subplot(222)
-plt.title('空圖, 全黑')
-plt.imshow(cv2.cvtColor(image_empty, cv2.COLOR_BGR2RGB))    #顯示圖片   #空圖, 全黑
-
 image_copy = image.copy()
-plt.subplot(223)
+plt.subplot(132)
 plt.title('顯示圖片copy')
 plt.imshow(cv2.cvtColor(image_copy, cv2.COLOR_BGR2RGB))     #顯示圖片   #原圖拷貝
 
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)    #圖片轉為灰階
-plt.subplot(224)
+plt.subplot(133)
 plt.title('顯示圖片gray')
 plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))     #顯示圖片   #原圖轉黑白
 
@@ -114,23 +107,11 @@ print('使用 cv2 顯示圖片')
 image = cv2.imread(filename)	#讀取本機圖片
 
 cv2.imshow('Peony', image)  #顯示圖片
+#cv2.imshow('視窗標題 不支持中文', image) #顯示圖片
 
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-"""
-cv2.imshow('視窗標題 不支持中文', image) #顯示圖片
-
-cv2.waitKey(0)  #待user輸入內容
-cv2.destroyAllWindows() #關閉視窗
-
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
-cv2.waitKey()
-cv2.destroyAllWindows()
-"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -143,7 +124,6 @@ plt.show()
 image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), cmap = 'gray', interpolation = 'bicubic')
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
