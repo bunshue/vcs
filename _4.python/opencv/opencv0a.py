@@ -9,6 +9,8 @@ vs
 
 使用 matplotlib 顯示圖片
 
+讀取圖片 存圖
+
 """
 
 import cv2
@@ -54,6 +56,7 @@ print("圖像gray屬性：")
 print("gray.shape=",gray.shape)
 print("gray.size=",gray.size)
 print("gray.dtype=",gray.dtype)
+
 print("圖像color屬性：")
 print("color.shape=",color.shape)
 print("color.size=",color.size)
@@ -328,4 +331,38 @@ print('------------------------------------------------------------')	#60個
 
 
 #cv2.imwrite('aaaaaaa.pgm', image) #無效????
+
+
+
+print('------------------------------------------------------------')	#60個
+#簡易播放一檔
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+from matplotlib import pyplot as plt
+img = cv2.imread(filename)
+plt.imshow(img)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+import cv2
+from matplotlib import pyplot as plt
+
+
+img_bgr = cv2.imread(filename)	#讀取本機圖片
+img_rgb = img_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
+
+# 或是這樣亦可
+# img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+
+# 使用 Matplotlib 顯示圖片
+plt.imshow(img_rgb)
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
 

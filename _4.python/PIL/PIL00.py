@@ -89,3 +89,13 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+im = Image.open(filename)
+print("%s:" % filename, im.format, "%dx%d" % im.size, im.mode)
+print(im.info, im.tile)
+
+
+

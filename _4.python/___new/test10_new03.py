@@ -1409,6 +1409,7 @@ hover_handler(on_hover)
 
 print("------------------------------------------------------------")  # 60個
 
+
 def timing_decorator(func):
     def wrapper(*args, **kwargs):
         start_time = time.perf_counter()  # 獲取函數開始執行的時間
@@ -2660,6 +2661,7 @@ print("------------------------------------------------------------")  # 60個
 
 import string
 
+
 def encrypt(text, encryDict):  # 加密文件
     cipher = []
     for i in text:  # 執行每個字元加密
@@ -2680,6 +2682,7 @@ print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
 
 print("------------------------------------------------------------")  # 60個
+
 
 def wordsNum(filename):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
@@ -4738,36 +4741,36 @@ outf.close()
 print("------------------------------------------------------------")  # 60個
 
 
-str1 = 'welcome to python' 
+str1 = "welcome to python"
 
 print("str1 = " + str1)
-b = str1.endswith('thon')
+b = str1.endswith("thon")
 print("str1.endswith('thon') = " + str(b))
-b = str1.startswith('hello')
+b = str1.startswith("hello")
 print("str1.startswith('hello') = " + str(b))
-b = str1.count('o')
+b = str1.count("o")
 print("str1.count('o') = " + str(b))
-b = str1.find('come')
+b = str1.find("come")
 print("str1.find('come') = " + str(b))
-b = str1.find('become')
+b = str1.find("become")
 print("str1.find('become') = " + str(b))
-b = str1.find('o')
+b = str1.find("o")
 print("str1.find('o') = " + str(b))
-b = str1.find('e')
+b = str1.find("e")
 print("str1.find('e') = " + str(b))
-b = str1.rfind('o')
+b = str1.rfind("o")
 print("str1.rfind('o') = " + str(b))
-b = str1.rfind('e')
+b = str1.rfind("e")
 print("str1.rfind('e') = " + str(b))
 
 print("------------------------------------------------------------")  # 60個
 
-str1 = 'welcome to python' 
+str1 = "welcome to python"
 
 print("str1 = " + str1)
-str2 = 'Welcome to Python'
+str2 = "Welcome to Python"
 print("str2 = " + str2)
-str3 = 'This is a test.'
+str3 = "This is a test."
 print("str3 = " + str3)
 s = str1.capitalize()
 print("str1.capitalize() = " + s)
@@ -4779,12 +4782,12 @@ s = str1.title()
 print("str1.title() = " + s)
 s = str2.swapcase()
 print("str2.swapcase() = " + s)
-s = str3.replace('is', 'was')
+s = str3.replace("is", "was")
 print("str3.replace('is', 'was') = " + s)
 
 print("------------------------------------------------------------")  # 60個
 
-str1 = "This is a book." 
+str1 = "This is a book."
 list1 = str1.split()
 print(list1)
 str2 = "Tom,Bob,Mary,Joe"
@@ -4799,7 +4802,7 @@ print(list4)
 print("------------------------------------------------------------")  # 60個
 
 str1 = "-"
-list1 = ['This', 'is', 'a', 'book.'] 
+list1 = ["This", "is", "a", "book."]
 print(str1.join(list1))
 
 
@@ -4827,5 +4830,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-

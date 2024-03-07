@@ -150,34 +150,6 @@ while True:
 
 print('------------------------------------------------------------')	#60個
 
-import locale
-
-print(locale.getpreferredencoding())
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-"""
-排序字典
-"""
-from collections import OrderedDict
-
-d = OrderedDict()
-d['foo'] = 1
-d['bar'] = 2
-d['spam'] = 3
-d['grok'] = 4
-# Outputs "foo 1", "bar 2", "spam 3", "grok 4"
-for key in d:
-    print(key, d[key])
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 def bin_octal():
     x = 65535
     print(type(bin(x)))
@@ -195,29 +167,6 @@ bin_octal()
 
 print('------------------------------------------------------------')	#60個
 
-import operator
-
-print('統計字數')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/engnews.txt'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/琵琶行.txt'
-with open(filename, "r", encoding="utf-8") as f:
-#with open(filename, "r", encoding="big5") as f:    
-    data = f.read()
-data = data.translate({ord(c):None for c in list("(),.“”")})
-data = data.split()
-word_freq = dict()
-for word in data:
-    if word not in word_freq:
-        word_freq[word] = 1
-    else:
-        word_freq[word] += 1
-ordered_freq = sorted(word_freq.items(), key = operator.itemgetter(1), reverse = True)
-for w, c in ordered_freq:
-    print(w, c)
-
-print('------------------------------------------------------------')	#60個
-
 import transformers
 classifier = transformers.pipeline("sentiment-analysis", model="Raychanan/bert-base-chinese-FineTuned-Binary-Best")
 
@@ -228,43 +177,6 @@ if result:
     print("感謝您的評論, 歡迎下次再來!")
 else:
     print("不好意思, 造成您不好的感受, 我們一定會改善的。")
-
-print('------------------------------------------------------------')	#60個
-
-print('查找出現次數最多的元素')
-
-words = [
-    'look', 'into', 'my', 'eyes', 'look', 'into', 'my', 'eyes',
-    'the', 'eyes', 'the', 'eyes', 'the', 'eyes', 'not', 'around', 'the',
-    'eyes', "don't", 'look', 'around', 'the', 'eyes', 'look', 'into',
-    'my', 'eyes', "you're", 'under'
-]
-
-import collections
-word_counts = collections.Counter(words)
-# 出现频率最高的3个单词
-top_three = word_counts.most_common(3)
-print(top_three)
-# Outputs [('eyes', 8), ('the', 5), ('look', 4)]
-
-print('------------------------------------------------------------')	#60個
-
-print('字典串列排序')
-rows = [
-    {'ename': 'mouse', 'cname': '鼠', 'weight': 3},
-    {'ename': 'ox', 'cname': '牛', 'weight': 48},
-    {'ename': 'tiger', 'cname': '虎', 'weight': 33},
-    {'ename': 'rabbit', 'cname': '兔', 'weight': 8}
-]
-
-import operator
-rows_by_ename = sorted(rows, key = operator.itemgetter('ename'))
-rows_by_weight = sorted(rows, key = operator.itemgetter('weight'))
-print(rows_by_ename)
-print(rows_by_weight)
-
-rows_by_cename = sorted(rows, key = operator.itemgetter('cname','ename'))
-print(rows_by_cename)
 
 print('------------------------------------------------------------')	#60個
 
@@ -283,35 +195,6 @@ def string_io():
     print(s.read())
 
 string_io()
-
-print('------------------------------------------------------------')	#60個
-
-
-#算體重總和
-# 5-4-3 Counter - 多重集合 (計數器)
-
-from collections import Counter
-
-inventory = Counter()
-
-loot = {'寶劍':1, '麵包':3}
-inventory.update(loot)
-
-print(inventory)
-
-more_loot = {'寶劍', '金幣'}
-inventory.update(more_loot)
-
-print(inventory)
-
-yet_more_loot = ['麵包', '麵包', '藥草']
-inventory.update(yet_more_loot)
-
-print(inventory)
-
-print('鍵種類 =', len(inventory))
-
-print('值總和 =', sum(inventory.values()))
 
 print('------------------------------------------------------------')	#60個
 
@@ -420,32 +303,6 @@ for f in files:
 
 print('------------------------------------------------------------')	#60個
 
-import nt
-import collections
-
-_ntuple_diskusage = collections.namedtuple('usage', 'total used free')
-
-def disk_usage(path):
-    total, free = nt._getdiskusage(path)
-    used = total - free
-    return _ntuple_diskusage(total, used, free)
-
-foldername = 'C:/_git/vcs/'
-du = disk_usage(foldername)
-print(du)
-print('容量 :', du.total, '個位元組\t', du.total//1024//1024//1024, 'GB')
-print('已使用空間 :', du.used, '個位元組\t', du.used//1024//1024//1024, 'GB')
-print('可用空間 :', du.free, '個位元組\t', du.free//1024//1024//1024, 'GB')
-
-foldername = 'D:/'
-du = disk_usage(foldername)
-print(du)
-print('容量 :', du.total, '個位元組\t', du.total//1024//1024//1024, 'GB')
-print('已使用空間 :', du.used, '個位元組\t', du.used//1024//1024//1024, 'GB')
-print('可用空間 :', du.free, '個位元組\t', du.free//1024//1024//1024, 'GB')
-
-print('------------------------------------------------------------')	#60個
-
 import time
 import threading
 import subprocess
@@ -487,58 +344,7 @@ wikipedia.summary("柔道")
 
 print('------------------------------------------------------------')	#60個
 
-print('defaultdict 容器')
-from collections import defaultdict
-
-lst = ['foo', 'bar', 'pop', 'foo', 'bar', 'foo']
-
-d = defaultdict(int)
-
-for item in lst:
-    d[item] += 1
-
-print(d)
-
-from collections import defaultdict
-
-prices = [
-  ['apple', 50],
-  ['banana', 120],
-  ['grape', 500],
-  ['apple', 70],
-  ['banana', 150],
-  ['banana', 700]
-]
-
-fruits = defaultdict(list)
-
-for name, price in prices:
-    fruits[name].append(price)
-
-for name, prices in fruits.items():
-    print(name, prices)
-
-print('------------------------------------------------------------')	#60個
-
-# Counter 容器
-
-from collections import Counter
-
-lst = ['foo', 'bar', 'pop', 'foo', 'bar', 'foo']
-
-c = Counter(lst)
-
-print(c)
-
-for item, counter in c.items():
-    print(item, '出現', counter, '次')
-
-print('出現最多次的項目:', c.most_common(1))
-
-print('------------------------------------------------------------')	#60個
-
 import locale
-
 print(locale.getpreferredencoding())
 
 print('------------------------------------------------------------')	#60個
@@ -603,47 +409,6 @@ print("半形 :", text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 找出序列中出現次數最多的元素
-
-from collections import Counter
-
-words = [
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "the",
-    "eyes",
-    "not",
-    "around",
-    "the",
-    "eyes",
-    "don't",
-    "look",
-    "around",
-    "the",
-    "eyes",
-    "look",
-    "into",
-    "my",
-    "eyes",
-    "you're",
-    "under",
-]
-counter = Counter(words)
-print(counter.most_common(3))
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -656,85 +421,10 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-import shelve
-
-book = shelve.open("addresses")
-
-book['167'] = ('邱大熊', '0912-345678', '台北市忠孝路1號')
-book['928'] = ('陳小天', '0987-654321', '新竹市中山路2號')
-book.close()
-
-print('------------------------------------------------------------')	#60個
-
-import shelve
-book = shelve.open("addresses")
-
-print(book['167'] )
-book.close()
-
-print('------------------------------------------------------------')	#60個
-
-import shelve
-
-with shelve.open('phonebook') as phone:
-    phone['Tom'] = ('Tom', '0912-112112', '台北市')
-    phone['John'] = ('John', '0928-888888', '台中市')
-
-print("------------------------------------------------------------")  # 60個
-
-import shelve
-
-with shelve.open('phonebook') as phone:
-    print(phone['Tom'])
-    print(phone['John'])
-
-print("------------------------------------------------------------")  # 60個
-
-import shelve
-with shelve.open('phonebook') as phone:
-    for name in phone:
-        print(phone[name])
-
-print("------------------------------------------------------------")  # 60個
-
-import collections
-
-list1 = [10, 30, 10, 50, 40, 20, 30, 20, 40, 20, 10, 50, 10]
-freqDict = collections.Counter(list1)
-print(freqDict)
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 

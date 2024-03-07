@@ -38,32 +38,32 @@ plt.figure(
     frameon=True,
 )
 
-print("在圖表的指定地方畫圖, 不用subplot")
+plt.suptitle("在圖表的指定地方畫圖, 不用subplot")
 
-listx = [1, 2, 3, 4, 5]
-listy = [15, 50, 80, 40, 70]
+x = np.linspace(0, 2 * np.pi, num=100, endpoint=True)
+y = np.sin(x)
 
 print("1左下開始(0.1, 0.1), w = 0.3, h = 0.3, 左下圖")
 plt.axes([0.1, 0.1, 0.3, 0.3])
-plt.plot(listx, listy, "r-s")
+plt.plot(x, y, "r-s")
 
 print("2左下開始(0.6, 0.1), w = 0.3, h = 0.3, 右下圖")
 plt.axes([0.6, 0.1, 0.3, 0.3])
-plt.plot(listx, listy, "g--o")
+plt.plot(x, y, "g--o")
 
 print("3左下開始(0.1, 0.6), w = 0.3, h = 0.3, 左上圖")
 plt.axes([0.1, 0.6, 0.3, 0.3])
-plt.plot(listx, listy, "b-s")
+plt.plot(x, y, "b-s")
 
 print("4左下開始(0.6, 0.6), w = 0.3, h = 0.3, 右上圖")
 plt.axes([0.6, 0.6, 0.3, 0.3])
-plt.plot(listx, listy, "y--o")
+plt.plot(x, y, "y--o")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# subplot 搭配 gridspec
+plt.suptitle("subplot 搭配 gridspec")
 
 import matplotlib.gridspec as gridspec
 
@@ -202,43 +202,6 @@ show_images_labels_predictions(test_feature, test_label, 0, len(test_feature))
 
 print("------------------------------------------------------------")  # 60個
 
-
-def plot_function_name(name, x=0, y=0):
-    plt.text(x, y, name, alpha=0.3, size=25, ha="center", va="center")
-
-
-x = np.arange(-3, 3.01, 0.01)  # 3.01
-
-plt.subplot(231)
-plot_function_name("1: sin")
-plt.plot(x, np.sin(x))
-
-plt.subplot(232)
-plot_function_name("2: cos")
-plt.plot(x, np.cos(x))
-
-plt.subplot(233)
-plot_function_name("3: tan")
-plt.plot(x, np.tan(x))
-plt.ylim(-1, 1)  # y軸が無限まで行ってしまうので制限
-
-plt.subplot(234)
-plot_function_name("4: sinh")
-plt.plot(x, np.sinh(x))
-
-plt.subplot(235)
-plot_function_name("5: cosh", x=0, y=6)
-plt.plot(x, np.cosh(x))
-
-plt.subplot(236)
-plot_function_name("6: tanh")
-plt.plot(x, np.tanh(x))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
 plt.rcParams["font.size"] = 12
 
@@ -272,6 +235,7 @@ s = [89, 58, 63, 50]
 
 # 設定子圖
 plt.figure(1, figsize=(8, 8), clear=True)
+
 plt.subplots_adjust(left=0.1, right=0.95)
 
 plt.subplot(221)
@@ -309,6 +273,7 @@ plt.plot([0, 1], [0, 5])
 plt.subplot(2, 2, 4)
 plt.plot([0, 1], [0, 6])
 
+plt.suptitle("均勻做圖")
 plt.show()
 
 # 1.2 不均勻做圖(大小不同)
@@ -327,6 +292,7 @@ plt.subplot(3, 4, 6)
 plt.subplot(3, 4, (7, 8))
 plt.tight_layout()
 
+plt.suptitle("不均勻做圖")
 plt.show()
 
 # 2. plt.subplot2grid()
@@ -403,3 +369,40 @@ plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("3圖比較")
+
+x = np.linspace(-2 * np.pi, 2 * np.pi, 51)
+y0 = np.sin(x)
+y1 = np.cos(x)
+y2 = np.tan(x)
+
+fig, ax = plt.subplots(1, 3, figsize=(20, 15))
+
+ax[0].plot(x,y0, label="sin")
+ax[1].plot(x,y1, label="cos")
+ax[2].plot(x,y2, label="tan")
+ax[0].legend()
+ax[1].legend()
+ax[2].legend()
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+def plot_function_name(text, x=0, y=0):
+    #半透明畫字
+    print(x, y)
+    plt.text(x, y, text, alpha=0.3, size=25, ha="center", va="center")
+

@@ -15,6 +15,29 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 print("------------------------------------------------------------")  # 60個
 
 
+print("兩Y軸不同刻度, plot + plot")
+
+x = np.linspace(0, 10, 50)
+sinus = np.sin(x)
+sinhs = np.sinh(x)
+
+fig, ax = plt.subplots()
+
+ax.plot(x, sinus, "r-o", label="Sin(x)")
+ax.set_xlabel("弧度", color="green")
+ax.set_ylabel("Sin(x)", color="red")
+ax.legend(loc="best")
+
+ax2 = ax.twinx()
+
+ax2.plot(x, sinhs, "g--", label="Sinh(x)")
+ax2.set_ylabel("Sinh(x)", color="blue")
+ax2.legend(loc="best")
+
+ax.set_title("兩Y軸不同刻度 plot + plot", size=20)
+
+plt.show()
+
 print("------------------------------------------------------------")  # 60個
 
 

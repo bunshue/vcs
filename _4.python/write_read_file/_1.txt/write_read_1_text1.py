@@ -1778,6 +1778,41 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+print('------------------------------------------------------------')	#60個
+filename = 'C:/_git/vcs/_1.data/______test_files1/poetry.txt'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/quotes.txt'
+
+fp = open(filename, 'r', encoding = 'UTF-8')
+try:
+    while 1:
+        line = fp.readline()
+        if not line:
+            break
+        print(line, end = '')
+finally:
+    fp.close()
+
+print('------------------------------------------------------------')	#60個
+with open(filename, 'r', encoding = 'UTF-8') as file:
+    line = file.readlines()
+#print(line)
+    
+for l in line:
+    #print(l, end ="")
+    print(l[:3])    #每行的前三字
+    print(l[3:])    #每行的第三字開始到最後
+    
+print('------------------------------------------------------------')	#60個
+'''
+fp = open(filename, 'r', encoding = 'UTF-8')
+line = fp.readlines()
+fp.close()
+
+print(line)
+'''
+
+print('------------------------------------------------------------')	#60個
+
 
 
 

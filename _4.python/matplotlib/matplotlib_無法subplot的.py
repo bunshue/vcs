@@ -20,7 +20,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print("------------------------------------------------------------")  # 60個
+print("plot01------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
@@ -60,7 +60,7 @@ set_plot(amp, function)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("plot02------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 
@@ -91,9 +91,7 @@ plt.title("Picture Title", size=30, x=0.0, y=0.0)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
+print("plot03------------------------------------------------------------")  # 60個
 
 # 散點圖
 
@@ -119,10 +117,7 @@ c = ax.scatter(theta, r, c=colors, s=area, cmap="hsv", alpha=0.75)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
+print("plot04------------------------------------------------------------")  # 60個
 
 x = np.linspace(-2 * np.pi, 2 * np.pi, 200)
 y = np.sin(x)
@@ -149,9 +144,7 @@ plt.plot(x, y, lw=5, c="white")
 # 使用自定義的中文字型
 import matplotlib.font_manager as fm
 
-font_filename = (
-    "C:/_git/vcs/_2.vcs/my_vcs_lesson_6/__MY/vcs_DrawPoem/vcs_DrawPoem/font/康楷體w5.TTC"
-)
+font_filename = ("C:/_git/vcs/_2.vcs/my_vcs_lesson_7_free/vcs_DrawPoem/vcs_DrawPoem/font/康楷體w5.TTC")
 # font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 # myfont = fm.FontProperties(fname="/Users/mac/Library/Fonts/NotoSansHant-Medium.otf")
@@ -161,31 +154,7 @@ plt.title("使用自定義的中文字型", fontproperties=myfont, size=24)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-#完完全全改過來
-#用 matplotlib 的參數設定, rcParams, 把字型完完全全用某個中文字型
-
-#plt.rcParams['font.sans-serif'] = ['SimHei'] # 選個普通的黑體字
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-plt.rcParams['axes.unicode_minus']=False # 負號不出問題
-plt.title("使用自定義的中文字型", size=15) # 不用再設字型!
-
-
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
+print("plot05------------------------------------------------------------")  # 60個
 
 π = np.pi
 
@@ -203,7 +172,7 @@ plt.plot(x, y)
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("plot07------------------------------------------------------------")  # 60個
 
 r = 1 - np.sin(θ)
 
@@ -217,7 +186,7 @@ plt.plot(x, y, "r")
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("plot08------------------------------------------------------------")  # 60個
 
 # 建立 x，從 -pi 到 pi，共 100 點，且需包含終點 pi
 x = np.linspace(-np.pi, np.pi, num=100, endpoint=True)
@@ -278,7 +247,7 @@ ax.spines["left"].set_position(("axes", 0.5))
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("plot09------------------------------------------------------------")  # 60個
 
 x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
 plt.ylim((-1.2, 1.2))
@@ -298,7 +267,7 @@ ax.spines["bottom"].set_position(("data", 0))
 plt.show()
 
 
-print("------------------------------------------------------------")  # 60個
+print("plot10------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -318,7 +287,39 @@ ax.set_title("建立畫布與軸物件,使用OO API繪圖", fontsize=16)
 plt.show()
 
 
-print("------------------------------------------------------------")  # 60個
+print("plot11------------------------------------------------------------")  # 60個
+
+
+
+
 
 
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+"""
+#完完全全改過來
+#用 matplotlib 的參數設定, rcParams, 把字型完完全全用某個中文字型
+
+#plt.rcParams['font.sans-serif'] = ['SimHei'] # 選個普通的黑體字
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+plt.rcParams['axes.unicode_minus']=False # 負號不出問題
+plt.title("使用自定義的中文字型", size=15) # 不用再設字型!
+
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+
+"""
+

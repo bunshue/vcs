@@ -117,7 +117,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 15  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="hist 集合 1",
@@ -877,7 +877,7 @@ plt.hist(x, num_bins, rwidth=0.5)
 
 
 plt.show()
-
+'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1052,3 +1052,40 @@ for i in range(len(n)):
 
 
 """
+
+plt.figure(
+    num="hist 集合 1",
+    figsize=(15, 6),
+    dpi=84,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+N = 10000  # 資料個數
+num_bins = 50  # 直方圖顯示時的束數
+
+# 平均 200，標準差為 25 的分佈
+mu = 200
+sigma = 25
+x = np.random.normal(mu, sigma, size=N)
+
+# 第一張圖
+plt.subplot(121)
+
+#縱軸不做正規化處理為數量，直條的間距填滿
+plt.hist(x, bins=num_bins, histtype="stepfilled", facecolor="g", alpha=0.75)
+plt.title("stepfilled\n" + r"$\mu = 200, \sigma=25$")
+
+
+# 第二張圖
+plt.subplot(122)
+
+#縱軸執行正規化處理表示為機率，直條的寬度大小為 80%
+bins = [100, 150, 180, 195, 205, 220, 250, 300]
+plt.hist(x, bins, histtype="bar", rwidth=0.8)
+plt.title("unequal bins\n" + r"$\mu = 200, \sigma=25$")
+
+
+plt.show()

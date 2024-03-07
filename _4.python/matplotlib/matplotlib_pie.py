@@ -167,8 +167,6 @@ plt.pie(
 
 plt.show()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
@@ -184,6 +182,14 @@ plt.figure(
 
 # 第一張圖
 plt.subplot(231)
+
+area = ['大陸','東南亞','東北亞','美國','歐洲','澳紐']
+people = [10000,12600,9600,7500,5100,4800]
+exp = [0.0,0.0,0.1,0.0,0.0,0.1]
+colors = ['aqua','g','pink','yellow','m','salmon']
+plt.pie(people,labels=area,explode=exp,autopct="%1.2f%%",
+        colors=colors)
+plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
 
 
 # 第二張圖
@@ -226,18 +232,4 @@ plt.tight_layout()
 """
 
 
-
-
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-area = ['大陸','東南亞','東北亞','美國','歐洲','澳紐']
-people = [10000,12600,9600,7500,5100,4800]
-exp = [0.0,0.0,0.1,0.0,0.0,0.1]
-colors = ['aqua','g','pink','yellow','m','salmon']
-plt.pie(people,labels=area,explode=exp,autopct="%1.2f%%",
-        colors=colors)
-plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
-plt.show()
-     
 
