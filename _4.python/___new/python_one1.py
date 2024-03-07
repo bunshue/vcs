@@ -13,9 +13,6 @@ print("------------------------------------------------------------")  # 60個
 print("Python 常用標準函式庫")
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-
 import time
 from concurrent.futures import ThreadPoolExecutor
 
@@ -379,12 +376,7 @@ for i in images:
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 from PyQt5 import QtWidgets
-import sys
 
 app = QtWidgets.QApplication(sys.argv)
 screen = QtWidgets.QApplication.desktop()
@@ -439,10 +431,6 @@ print(response)
 
 response = os.popen(f"ping -c 3 -i 1 {hostname}").read()
 print(response)
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 

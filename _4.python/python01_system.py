@@ -766,6 +766,163 @@ print('------------------------------------------------------------')	#60個
 
 
 
+print("目前Python版本是: ", sys.version)
+
+print("------------------------------------------------------------")  # 60個
+
+f = [x for x in range(1, 10)]
+
+print(f)
+
+print(sys.getsizeof(f))  # 查看對象佔用內存的字節數
+
+
+
+""" input
+import sys
+print("請輸入字串, 輸入完按Enter = ", end = "")
+msg = sys.stdin.readline()
+print(msg)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+print("請輸入字串, 輸入完按Enter = ", end = "")
+msg = sys.stdin.readline(8)         # 讀8個字
+print(msg)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+sys.stdout.write("I like Python")
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+for dirpath in sys.path:
+    print(dirpath)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+print("命令列參數 : ", sys.argv)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+from pprint import pprint
+
+print("使用print")
+print(sys.path)
+print("使用pprint")
+pprint(sys.path)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+print("目前Python版本是:     ", sys.version)
+print("目前Python版本是:     ", sys.version_info)
+print("目前Python平台是:     ", sys.platform)
+print("目前Python視窗版本是: ", sys.getwindowsversion())
+print("目前Python可執行檔路徑", sys.executable)
+
+print("------------------------------------------------------------")  # 60個
+
+
+import sys
+
+print(sys.path)  # 查詢模組路徑
+
+print("加入路徑")
+
+foldername = "C:/_git/vcs/_1.data/______test_files5"
+
+sys.path.append(foldername)
+
+print(sys.path)  # 查詢模組路徑
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用自定義模組")
+import sys
+
+foldername = "C:/_git/vcs/_4.python/import_module"
+sys.path.append(foldername)
+
+import module_my  # 引用後, 出現 __pycache__
+
+cc = module_my.numRand2(14, 52)
+print(cc)
+
+print(module_my.__name__)
+
+print(__name__)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+system
+print(sys.builtin_module_names)
+
+
+for fullname in sys.modules:
+    module = sys.modules[fullname]
+    print(fullname, module)
+
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("內建函式dir()檢視目前的名稱空間")
+print(dir())
+
+print()
+
+import qrcode
+
+print(dir())
+
+print()
+
+# 看單一模組的函式
+import math
+
+print(dir(math))
+print()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+# 以 dir() 與 help() 探索 Python 模組與物件
+
+import datetime
+
+print(dir(datetime))
+
+print("")
+
+print([_ for _ in dir(datetime) if "date" in _.lower()])
+
+# help(datetime)
+
+print("------------------------------------------------------------")  # 60個
+
 print('------------------------------------------------------------')	#60個
 
 

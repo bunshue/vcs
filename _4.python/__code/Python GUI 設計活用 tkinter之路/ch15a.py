@@ -4,7 +4,6 @@ from tkinter import *
 
 print('------------------------------------------------------------')	#60個
 
-
 from tkinter import *
 from tkinter.ttk import *
 
@@ -26,14 +25,8 @@ pb2["value"] = 50
 
 root.mainloop()
 
+print('------------------------------------------------------------')	#60個
 
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch15\ch15_2.py
-
-# ch15_2.py
 from tkinter import *
 from tkinter.ttk import *
 import time
@@ -57,23 +50,8 @@ btn.pack(pady=10)
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch15\ch15_3.py
-
-# ch15_3.py
 from tkinter import *
 from tkinter.ttk import *
  
@@ -103,22 +81,8 @@ btn.pack(pady=10)
 root.mainloop()
 
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch15\ch15_4.py
-
-# ch15_4.py
 from tkinter import *
 from tkinter.ttk import *
 import time
@@ -144,22 +108,8 @@ btn.pack(pady=10)
 root.mainloop()
 
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch15\ch15_5.py
-
-# ch15_5.py
 from tkinter import *
 from tkinter.ttk import *
  
@@ -185,22 +135,8 @@ btnStop.pack(side=LEFT,padx=5,pady=10)
 root.mainloop()
 
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch15\ch15_6.py
-
-# ch15_6.py
 from tkinter import *
 from tkinter.ttk import *
  
@@ -210,7 +146,7 @@ def stop():                                     # 中止Progressbar動畫
     pb.stop()                                   # 中止pb物件動畫
  
 root = Tk()
-root.title("ch15_6")
+root.title("aaaa")
 
 pb = Progressbar(root,length=200,mode="indeterminate",orient=HORIZONTAL)
 pb.pack(padx=5,pady=10)
@@ -225,25 +161,5 @@ btnStop.pack(side=LEFT,padx=5,pady=10)
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
-
 

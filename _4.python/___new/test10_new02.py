@@ -4373,14 +4373,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
-
-import os
-import sys
-import time
-import random
-
 print("------------------------------------------------------------")  # 60個
-
 
 # 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch01\first.py
 
@@ -5289,7 +5282,7 @@ print("函式外 全域變數n 位址=%d, 值=%d" % (id(n), n))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch08\dict01.py
+# dict01.py
 
 dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
 print(dictBook)
@@ -5301,7 +5294,7 @@ print("書號A003：", dictBook["A003"])  # 印出dictBook字典鍵A003的值 ['
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch08\dict02.py
+# dict02.py
 
 tupleBookId = ("A001", "A002", "A003")
 dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
@@ -5317,7 +5310,7 @@ for key in list(tupleBookId):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch08\dict03.py
+# dict03.py
 
 dictBook = {"A001": ["木偶奇遇記", 199]}
 print("編輯前字典內容：", dictBook)
@@ -5338,7 +5331,7 @@ print("是否有書號A001的書籍：", "A001" in dictBook)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch08\dictGame.py
+# dictGame.py
 
 import random
 
@@ -5376,8 +5369,7 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch08\ProductSys.py
-
+# ProductSys.py
 
 # 新增
 def fnCreate():
@@ -5454,7 +5446,7 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch08\tuple01.py
+# tuple01.py
 
 tupleFruit = ("apple", "banana", "cherry")  # 建立tupleFruit元組用來存放水果英文名稱
 tupleNum = (1, 2, 3, 4, 5)  # 建立tupleNum元組用來存放1~5整數
@@ -5467,7 +5459,7 @@ print(tupleProduct)  # 顯示 ('P01', '五香豆干', 45)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch08\tuple02.py
+# tuple02.py
 
 tupleScore = (89, 87, 36, 55, 94)
 tupleName = ("小明", "小華", "小強", "小保", "小呆")

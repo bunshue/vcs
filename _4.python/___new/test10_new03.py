@@ -16,10 +16,11 @@ import traceback
 
 """
 
+import os
 import sys
-
-print("------------------------------------------------------------")  # 60個
-
+import time
+import random
+import math
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1408,9 +1409,6 @@ hover_handler(on_hover)
 
 print("------------------------------------------------------------")  # 60個
 
-import time
-
-
 def timing_decorator(func):
     def wrapper(*args, **kwargs):
         start_time = time.perf_counter()  # 獲取函數開始執行的時間
@@ -2660,54 +2658,7 @@ message = client.messages.create (
 """
 print("------------------------------------------------------------")  # 60個
 
-""" input
-import sys
-print("請輸入字串, 輸入完按Enter = ", end = "")
-msg = sys.stdin.readline()
-print(msg)
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-print("請輸入字串, 輸入完按Enter = ", end = "")
-msg = sys.stdin.readline(8)         # 讀8個字
-print(msg)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-
-sys.stdout.write("I like Python")
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-
-for dirpath in sys.path:
-    print(dirpath)
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-
-print("命令列參數 : ", sys.argv)
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-
-from pprint import pprint
-
-print("使用print")
-print(sys.path)
-print("使用pprint")
-pprint(sys.path)
-
-print("------------------------------------------------------------")  # 60個
-
 import string
-
 
 def encrypt(text, encryDict):  # 加密文件
     cipher = []
@@ -2729,9 +2680,6 @@ print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
 
 print("------------------------------------------------------------")  # 60個
-
-import sys
-
 
 def wordsNum(filename):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
@@ -2822,7 +2770,8 @@ for mail in eMail:
 
 print("------------------------------------------------------------")  # 60個
 
-import bs4, requests
+import bs4
+import requests
 
 """
 url = 'http://www.taiwanlottery.com.tw'
@@ -2849,7 +2798,6 @@ print("\n特別號   :", redball[0].text)
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
-import time
 
 driverPath = 'D:\geckodriver\geckodriver.exe'
 browser = webdriver.Firefox(executable_path=driverPath)
@@ -3682,16 +3630,6 @@ ivan.action1()  # 順序 Ivan -> Father -> Grandfather
 
 print("------------------------------------------------------------")  # 60個
 
-import sys
-
-print("目前Python版本是:     ", sys.version)
-print("目前Python版本是:     ", sys.version_info)
-print("目前Python平台是:     ", sys.platform)
-print("目前Python視窗版本是: ", sys.getwindowsversion())
-print("目前Python可執行檔路徑", sys.executable)
-
-print("------------------------------------------------------------")  # 60個
-
 """ 很多
 secretcode = '112299'                                   # 設定密碼
 codeNotFound = True                                     # 尚未找到密碼為True
@@ -3716,43 +3654,9 @@ for i1 in range(0, 10):                                 # 第一位數
 """
 print("------------------------------------------------------------")  # 60個
 
-import threading, time
 
-
-def wakeUp(mytime, note, job):
-    print(job, " 開始")
-    starttime = int(time.time())
-    while int(time.time()) - starttime < mytime:
-        pass
-    print(note)
-    print(job, " 結束")
-
-
-print("程式階段1")
-threadObj1 = threading.Thread(target=wakeUp, args=[30, "買機票去北京", "threadJob1"])
-threadObj1.start()  # threadObj1執行緒開始工作
-time.sleep(1)  # 主執行緒休息1秒
-
-threadObj2 = threading.Thread(target=wakeUp, args=[60, "送花給女友", "threadJob2"])
-threadObj2.start()  # threadObj1執行緒開始工作
-time.sleep(1)  # 主執行緒休息1秒
-
-print("程式階段2,正常工作")
-
-print("------------------------------------------------------------")  # 60個
-
-
-import os
-import sys
-import time
-import random
-
-
-print("------------------------------------------------------------")  # 60個
 '''
 # 猜數字：幾 A 幾 B
-
-import random
 
 """ 
 arr = []
@@ -3840,8 +3744,6 @@ with open("tmp_a06.txt", "a+") as f:
 
 print("------------------------------------------------------------")  # 60個
 
-import random
-
 """ 
 arr = []
 for i in range(1, 50):
@@ -3885,8 +3787,6 @@ while(True):
 
 print("------------------------------------------------------------")  # 60個
 
-import time
-
 # a = input('請輸入倒數的秒數：')
 a = "3"
 
@@ -3902,45 +3802,9 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-import time
-import math
-import threading
-
-a = input('按下任意鍵開始')
-b = True
-t = 0
-
-
-def loop_a():
-    global t  # 設定全域變數
-    global b
-    while (b == True):
-        t = t + 0.01
-        time.sleep(0.01)
-
-
-def loop_b():
-    global b
-    global t
-    b = input('按下任意鍵停止')
-    t = round(t * 100)/100
-    print(t)
-
-
-# 跑多線程
-thread1 = threading.Thread(target=loop_a)
-thread1.start()
-thread2 = threading.Thread(target=loop_b)
-thread2.start()
-
-"""
-print("------------------------------------------------------------")  # 60個
-
 # 參考：http://violin-tao.blogspot.com/2017/05/python3_26.html
 
 import multiprocessing as p
-import time
 
 loc = p.Lock()  # 定義 Lock
 
@@ -3975,22 +3839,7 @@ p2.start()
 
 print("------------------------------------------------------------")  # 60個
 
-from datetime import datetime
-
-# a = input('請輸入你的出生年月日 ( yyyy/mm/dd )：')
-a = "2006/03/11"
-now = datetime.now()
-ad = datetime.strptime(a, "%Y/%m/%d")
-y = now.year - ad.year
-m = now.month - ad.month
-d = now.day - ad.day
-
-print(f"你的生日是：{y} 歲 {m} 個月又 {d} 天")  # 使用 python3 語法
-
-print("------------------------------------------------------------")  # 60個
-
 import asyncio
-import time
 
 c = True
 
@@ -4145,7 +3994,6 @@ print("------------------------------------------------------------")  # 60個
 """ 跳過 webdriver
 
 from selenium import webdriver
-import time
 import requests
 
 # pip3 install selenium
@@ -4171,7 +4019,6 @@ driver.close()
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
-import time
 import re
 
 options = webdriver.ChromeOptions()
@@ -4227,7 +4074,6 @@ driver.close()
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
-import time
 import requests
 
 driver = webdriver.Chrome(
@@ -4305,143 +4151,9 @@ print(aa)
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\numpy\np00.py
-
-# encoding:UTF-8
-# pip3 install numpy
-
-import numpy as np
-
-a = np.array([1, 2, 3])
-b = np.array([4, 5, 6])
-print(a[0], b[1])
-
-a = np.append(a, b)
-print(a)
-
-d = a[1]
-print(d)
-
-a2 = np.delete(a, 1)
-print(a2)
-a3 = np.insert(a, 1, d)
-print(a3)
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\numpy\np01.py
-
-import numpy as np
-
-# 一維
-a = np.array([1, 2, 3])
-print(a)
-
-# 二維
-b = np.array([[1, 2, 3], [5, 6, 7]])
-print(b)
-
-# 二維，使用 dtype 定義數據類型
-bb = np.array([[1, 2, 3], [5, 6, 7]], dtype=float)
-print(bb)
-
-# 最小維度
-c = np.array([1, 2, 3], ndmin=3)
-print(c)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\numpy\np02.py
-
-import numpy as np
-
-a = np.array([[[1, 2, 3], [5, 6, 7]]])
-
-# 取得陣列維度的深度
-print(np.ndim(a))
-
-# 依序取得每個維度的數量
-print(np.shape(a))
-
-# 修改維度 1,2,3 -> 1,3,2
-a.shape = (1, 3, 2)
-print(a)
-
-# 也可以使用 reshape，不過不知道為什麼用了之後執行沒問題，但編輯器會報錯
-# b = a.reshape(1,2,3)
-# print(b)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\numpy\np03.py
-
-import numpy as np
-
-# 複製數據
-a = [1, 2, 3]
-b = np.asarray(a)
-c = a
-a = [4, 5, 6]
-d = np.asarray(a, dtype=float)
-print(a)  # [4, 5, 6]
-print(b)  # [1 2 3]
-print(c)  # [1, 2, 3]
-print(d)  # [4. 5. 6.]
-
-# 產生數據
-x = np.arange(5, dtype=float)
-print(x)  # [0. 1. 2. 3. 4.]
-x2 = np.arange(0, 10, 2)
-print(x2)  # [0 2 4 6 8]
-
-# 使用 linspace 產生數據
-y = np.linspace(1, 10, 10, dtype=int)
-print(y)  # [ 1  2  3  4  5  6  7  8  9 10]
-y2 = np.linspace(1, 2, 10)
-print(y2)
-# [1. 1.11111111 1.22222222 1.33333333 1.44444444 1.55555556 1.66666667 1.77777778 1.88888889 2.]
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\numpy\np04.py
-
-import numpy as np
-
-# 產生一個 0~1 的隨機數
-r1 = np.random.random_sample()
-print(r1)
-r2 = np.random.random_sample((2, 2))
-print(r2)
-
-# 產生一個多維陣列 0 ~ 1 的隨機數 ( 不包含 1 )
-# 一樣有 seed 概念，seed 相同產生的隨機數就相同
-a = np.random.rand(4, 3)
-print(a)
-b = np.random.rand(4, 3, 2)
-print(b)
-
-# 如果只是想返回一個隨機數，可使用 randn()
-# randn 的用法和 rand 類似，也可從標準正態分佈中產生多維陣列隨機數
-# https://wiki.mbalib.com/zh-tw/%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83
-c = np.random.randn()
-print(c)
-
-# 產生隨機整數，也可用 size 產生多維陣列隨機數
-d = np.random.randint(1, 100, 10)
-print(d)
-e = np.random.randint(1, 100, size=(2, 2, 3))
-print(e)
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 # 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\random\r01-seed.py
-
-import random
 
 # random.seed
 # random.seed 隨機數的「種子」，數值一樣則產生的隨機數相同，若不設定則使用系統提供隨機源
@@ -4460,8 +4172,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\random\r02-randrange.py
 
-import random
-
 # random.randrange 和 random.randint 都可產生隨機整數
 
 a = random.randrange(2, 500, 2)  # randrange 可指定隨機數階層，一定偶數
@@ -4474,8 +4184,6 @@ print(c)
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\random\r03-choice.py
-
-import random
 
 # random.choices
 
@@ -4505,8 +4213,6 @@ print(f)
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\random\r04-random.py
-
-import random
 
 # random.random() 並不是真正的隨機數，如果 seed 相同則結果相同
 a = random.random()
@@ -4548,23 +4254,6 @@ print(f"{b1} / {b2} = {round(b1/b2,3)}")  # 使用 round 四捨五入到小數�
 print(f"{b2} / {b1} = {round(b2/b1,3)}")
 
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-
-# cc = np.random.randint(3, 5)
-
-print("亂數分佈二維陣列")
-cc = np.random.rand(3, 5)
-print(cc)
-
-print("常態分佈二維陣列")
-cc = np.random.randn(3, 5)
-print(cc)
-
-
-print("------------------------------------------------------------")  # 60個
-
-import random, time
 
 numberOfDice = 10
 
@@ -4643,14 +4332,6 @@ print(list1)  # 30,50
 
 print("------------------------------------------------------------")  # 60個
 
-import collections
-
-list1 = [10, 30, 10, 50, 40, 20, 30, 20, 40, 20, 10, 50, 10]
-freqDict = collections.Counter(list1)
-print(freqDict)
-
-print("------------------------------------------------------------")  # 60個
-
 import string
 
 # 北美獨立宣言
@@ -4722,9 +4403,6 @@ print("Ctrl-C to quit.", end="")
 print("------------------------------------------------------------")  # 60個
 
 
-import sys
-import time
-
 SAND = chr(9617)
 WALL = chr(9608)
 
@@ -4754,13 +4432,6 @@ allSand = list("ABCD")
 
 for i, sand in enumerate(allSand):
     print(i, sand)
-
-print("------------------------------------------------------------")  # 60個
-
-import datetime
-
-today = datetime.date.today()
-print("今天的日期 :", today)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4820,58 +4491,6 @@ for name in student:
     print("{:6s},{}, {:10s}".format(*name))
 
 print("------------------------------------------------------------")  # 60個
-
-print("內建函式dir()檢視目前的名稱空間")
-print(dir())
-
-print()
-
-import qrcode
-
-print(dir())
-
-print()
-
-# 看單一模組的函式
-import math
-
-print(dir(math))
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-import sys
-
-print(sys.path)  # 查詢模組路徑
-
-print("加入路徑")
-
-foldername = "C:/_git/vcs/_1.data/______test_files5"
-
-sys.path.append(foldername)
-
-print(sys.path)  # 查詢模組路徑
-
-print("------------------------------------------------------------")  # 60個
-
-print("使用自定義模組")
-import sys
-
-foldername = "C:/_git/vcs/_4.python/import_module"
-sys.path.append(foldername)
-
-import module_my  # 引用後, 出現 __pycache__
-
-cc = module_my.numRand2(14, 52)
-print(cc)
-
-print(module_my.__name__)
-
-print(__name__)
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 size = 25
 
@@ -4943,51 +4562,7 @@ avg1 = sum1 / len(list2)  # 用len取消費筆數
 print(sum1)
 print(avg1)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-"""
-
-system
-print(sys.builtin_module_names)
-
-
-for fullname in sys.modules:
-    module = sys.modules[fullname]
-    print(fullname, module)
-
-"""
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import glob
-
-jpg = glob.glob("./demo/*.[jJ][pP][gG]")  # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
-print(jpg)
-"""
-['./demo/pic-001.jpg', './demo/pic-002.jpg', './demo/pic-003.jpg',
-'./demo/pic-004.jpg', './demo/pic-005.jpg', './demo/pic-006.jpg',
-'./demo/pic-007.jpg', './demo/pic-008.jpg', './demo/pic-009.jpg',
-'./demo/pic-010.jpg']
-"""
-
-
-import glob
-
-images = glob.glob("./demo/*")
-print(images)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import time
 
 n = 20  # 設定進度條總長
 for i in range(n + 1):
@@ -5252,3 +4827,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+

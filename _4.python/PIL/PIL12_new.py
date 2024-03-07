@@ -23,7 +23,9 @@ from PIL import Image
 
 print("------------------------------------------------------------")  # 60個
 
-img = Image.open("data/img01.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+img = Image.open(filename)
 #img.show()
 w,h=img.size
 print(w,h) #320 240
@@ -33,7 +35,8 @@ print(filename)
 
 print("------------------------------------------------------------")  # 60個
 
-img = Image.open("data/img01.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename)
 w,h=img.size #320 240
 
 img1=img.resize((w*2,h))
@@ -42,7 +45,8 @@ img2=img.resize((w,h*2))
 
 print("------------------------------------------------------------")  # 60個
 
-img = Image.open("data/img01.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename)
 
 img1=img.rotate(45)#旋轉45度
 img2=img.rotate(90) #旋轉90度
@@ -50,14 +54,16 @@ img3=img.rotate(180)#旋轉180度
 
 print("------------------------------------------------------------")  # 60個
 
-img = Image.open("data/img01.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename)
 
 img2=img.transpose(Image.FLIP_LEFT_RIGHT)#左右翻轉
 img3=img.transpose(Image.FLIP_TOP_BOTTOM)#上下翻轉
 
 print("------------------------------------------------------------")  # 60個
 
-img = Image.open("data/img01.jpg") # w,h=img.size #320 240
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename) # w,h=img.size #320 240
 
 img1=img.crop((0,0,160,120))
 img2=img.crop((161,0,320,120))
@@ -68,12 +74,14 @@ img.close()
 
 print("------------------------------------------------------------")  # 60個
 
-img = Image.open("data/img01.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename)
 imgcopy=img.copy()
 
 print("------------------------------------------------------------")  # 60個
 
-img = Image.open("data/panda.jpg")
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+img = Image.open(filename)
 imgcopy=img.copy() #複製
 #切割貓熊並改變尺寸
 img1=imgcopy.crop((190,184,415,350)).resize((160,140))
@@ -93,7 +101,7 @@ import glob
 import shutil, os
 from time import sleep
 
-image_dir="pic"
+image_dir="data"
 target_dir = 'tmp_bmp_photo'
 target_dir2 = 'tmp_gray_photo'
 emptydir(target_dir)

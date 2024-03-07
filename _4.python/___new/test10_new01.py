@@ -1291,66 +1291,11 @@ class Rect(Shape):
         return "我是一个矩形"
 
 
-if __name__ == "__main__":
-    shapes = [Circle(5), Circle(3.2), Rect(3.2, 6.3)]
-    for shape in shapes:
-        print(shape)
-        print("周长:", shape.perimeter())
-        print("面积:", shape.area())
-
-print("------------------------------------------------------------")  # 60個
-
-import datetime
-
-
-def is_leap(year):
-    return year % 4 == 0 and year % 100 != 0 or year % 400 == 0
-
-
-now = datetime.datetime.now()
-date = now.date
-month = now.month
-year = now.year
-
-m, y = (month, year) if month >= 3 else (month + 12, year - 1)
-c, y = y // 100, y % 100
-w = (y + y // 4 + c // 4 - 2 * c + 26 * (m + 1) // 10) % 7
-month_words = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-]
-print(f"{month_words[month - 1]} {year}".center(20))
-print("Su Mo Tu We Th Fr Sa")
-print(" " * 3 * w, end="")
-days = [
-    [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-    [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-][is_leap(year)][month - 1]
-for day in range(1, days + 1):
-    print(str(day).rjust(2), end=" ")
-    w += 1
-    if w == 7:
-        print()
-        w = 0
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-f = [x for x in range(1, 10)]
-
-print(f)
-
-print(sys.getsizeof(f))  # 查看對象佔用內存的字節數
+shapes = [Circle(5), Circle(3.2), Rect(3.2, 6.3)]
+for shape in shapes:
+    print(shape)
+    print("周长:", shape.perimeter())
+    print("面积:", shape.area())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4594,12 +4539,6 @@ print("列出內建函數abs的type類型: ", type(abs))
 
 print("------------------------------------------------------------")  # 60個
 
-print("目前Python版本是: ", sys.version)
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 print(bool(0))
 print(bool(""))
 print(bool(" "))
@@ -6152,198 +6091,6 @@ min(300, 30, 3000)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-# 數位時鐘
-
-
-class Clock(object):
-    def __init__(self, hour=0, minute=0, second=0):
-        self._hour = hour
-        self._minute = minute
-        self._second = second
-
-    @classmethod
-    def now(cls):
-        ctime = time.localtime(time.time())
-        return cls(ctime.tm_hour, ctime.tm_min, ctime.tm_sec)
-
-    def run(self):
-        # 走字
-        self._second += 1
-        if self._second == 60:
-            self._second = 0
-            self._minute += 1
-            if self._minute == 60:
-                self._minute = 0
-                self._hour += 1
-                if self._hour == 24:
-                    self._hour = 0
-
-    def show(self):
-        # 显示时间
-        return "%02d:%02d:%02d" % (self._hour, self._minute, self._second)
-
-
-"""
-clock = Clock.now()
-while True:
-    print(clock.show())
-    time.sleep(1)
-    clock.run()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-seconds = time.time()
-print(seconds)
-localtime = time.localtime(seconds)
-print(localtime)
-print(localtime.tm_year)
-print(localtime.tm_mon)
-print(localtime.tm_mday)
-asctime = time.asctime(localtime)
-print(asctime)
-strtime = time.strftime("%Y-%m-%d %H:%M:%S", localtime)
-print(strtime)
-mydate = time.strptime("2018-1-1", "%Y-%m-%d")
-print(mydate)
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-import datetime as dt
-
-x = dt.datetime(2020, 10, 22)
-print(x)
-
-x = dt.datetime(year=2020, month=10, day=22)
-print(x)
-
-y = dt.datetime(2020, 10, 22, 10, 30, 45)  # 設定日期與時間
-print(y)
-
-print("------------------------------------------------------------")  # 60個
-
-# timedelta 物件
-
-x = dt.timedelta(hours=1, minutes=30)  # 1 小時又 30 分
-
-print(x)
-y = dt.timedelta(days=1, seconds=30)  # 1 天又 30 秒
-print(y)
-
-# 用 timedelta 來增減 datetime 或 timedelta 的時間
-
-import datetime as dt
-
-x = dt.datetime(2020, 10, 22, 10, 30, 45)  # 原始時間
-
-y = dt.timedelta(days=1, hours=2, minutes=5)
-
-print(x)
-
-print(x + y)  # 用 timedelta 來增減 datetime 的時間
-
-print(x - y)
-
-print(x + y * 2)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-""" fail
-# 將 datetime 時間以格式化方式輸出
-
-import datetime as dt
-
-x = dt.datetime(2020, 10, 22, 10, 30, 45)
-
-s1 = x.strftime("%Y/%m/%d %H-%M-%S")
-print(s1)
-
-s2 = x.strftime("%Y 年 %m 月 %d 日 %H : %M : %S")
-print(s2)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-# 用字串來建立 datetime 物件
-
-import datetime as dt
-
-s = "2020/10/22 10-30-45"  # 含有特定格式之日期時間字串
-
-x = dt.datetime.strptime(s, "%Y/%m/%d %H-%M-%S")
-
-
-print(x)
-
-print(type(x))
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("開始計時")
-starttime = int(time.time())  # 起始秒數
-
-print("------------------------------------------------------------")  # 60個
-
-print("計算1970年1月1日00:00:00至今的秒數 = ", int(time.time()))
-
-print("------------------------------------------------------------")  # 60個
-
-print(time.asctime())  # 列出目前系統時間
-
-print("------------------------------------------------------------")  # 60個
-
-xtime = time.localtime()
-print(xtime)  # 列出目前系統時間
-print("年 ", xtime[0])
-print("月 ", xtime[1])
-print("日 ", xtime[2])
-print("時 ", xtime[3])
-print("分 ", xtime[4])
-print("秒 ", xtime[5])
-print("星期幾   ", xtime[6])
-print("第幾天   ", xtime[7])
-print("夏令時間 ", xtime[8])
-
-print("------------------------------------------------------------")  # 60個
-
-endtime = int(time.time())  # 結束秒數
-print("所花時間: ", endtime - starttime, " 秒")
-
-print("------------------------------------------------------------")  # 60個
-
-
-t = time.time()
-tLocal = time.localtime(t)
-
-print("轉換時間形式(年/月/日)：", time.strftime("%Y/%m/%d", tLocal))
-print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime(tLocal))
-
-print("------------------------------------------------------------")  # 60個
-
-# 以 dir() 與 help() 探索 Python 模組與物件
-
-import datetime
-
-print(dir(datetime))
-
-print("")
-
-print([_ for _ in dir(datetime) if "date" in _.lower()])
-
-# help(datetime)
-
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -6355,7 +6102,6 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
+

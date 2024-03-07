@@ -108,6 +108,64 @@ thr2.start()
 
 print("------------------------------------------------------------")  # 60個
 
+import threading
+
+def wakeUp(mytime, note, job):
+    print(job, " 開始")
+    starttime = int(time.time())
+    while int(time.time()) - starttime < mytime:
+        pass
+    print(note)
+    print(job, " 結束")
+
+
+print("程式階段1")
+threadObj1 = threading.Thread(target=wakeUp, args=[30, "買機票去北京", "threadJob1"])
+threadObj1.start()  # threadObj1執行緒開始工作
+time.sleep(1)  # 主執行緒休息1秒
+
+threadObj2 = threading.Thread(target=wakeUp, args=[60, "送花給女友", "threadJob2"])
+threadObj2.start()  # threadObj1執行緒開始工作
+time.sleep(1)  # 主執行緒休息1秒
+
+print("程式階段2,正常工作")
+
+print("------------------------------------------------------------")  # 60個
+
+import threading
+
+a = input('按下任意鍵開始')
+b = True
+t = 0
+
+
+def loop_a():
+    global t  # 設定全域變數
+    global b
+    while (b == True):
+        t = t + 0.01
+        time.sleep(0.01)
+
+
+def loop_b():
+    global b
+    global t
+    b = input('按下任意鍵停止')
+    t = round(t * 100)/100
+    print(t)
+
+
+# 跑多線程
+thread1 = threading.Thread(target=loop_a)
+thread1.start()
+thread2 = threading.Thread(target=loop_b)
+thread2.start()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 

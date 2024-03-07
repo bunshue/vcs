@@ -4,7 +4,7 @@ import time
 import random
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("檔案或資料夾存在 = ", os.path.exists('ch14'))
 print("檔案或資料夾存在 = ", os.path.exists('D:\\Python\\ch14'))
 print("檔案或資料夾存在 = ", os.path.exists('ch14_4.py'))
@@ -45,7 +45,6 @@ print("列出返回工作資料夾 ", currentdir)
 
 print("------------------------------------------------------------")  # 60個
 
-"""
 files = ['ch14_1.py', 'ch14_2.py', 'ch14_3.py']
 for file in files:
     print(os.path.join('D:\\Python\\ch14', file))   
@@ -86,7 +85,7 @@ for file in glob.glob('ch14_1*.py'):
 print("方法3:列出目前工作目錄的特定檔案")
 for file in glob.glob('ch14_2*.*'):
     print(file)
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 for dirName, sub_dirNames, fileNames in os.walk('oswalk'):
@@ -105,7 +104,7 @@ with open(fn) as file_Obj:      # 傳回檔案物件file_Obj
     print(new_data.rstrip())    # 輸出檔案
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 fn = 'sse.txt'              # 設定欲開啟的檔案
 with open(fn) as file_Obj:  # 用預設mode=r開啟檔案,傳回檔案物件file_Obj
     obj_list = file_Obj.readlines()  # 每次讀一行
@@ -119,9 +118,9 @@ if findstr in str_Obj:      # 搜尋檔案是否有欲尋找字串
     print("搜尋 %s 字串存在 %s 檔案中" % (findstr, fn))
 else:
     print("搜尋 %s 字串不存在 %s 檔案中" % (findstr, fn))
-"""
+
 print("------------------------------------------------------------")  # 60個
-"""
+
 fn = 'sse.txt'              # 設定欲開啟的檔案
 
 with open(fn) as file_Obj:  # 用預設mode=r開啟檔案,傳回檔案物件file_Obj
@@ -138,17 +137,17 @@ if  index >= 0:             # 搜尋檔案是否有欲尋找字串
     print("在索引 %s 位置出現" % index)
 else:
     print("搜尋 %s 字串不存在 %s 檔案中" % (findstr, fn))
-"""
+
 print("------------------------------------------------------------")  # 60個
 
-msg = '''CIA Mark told CIA Linda that the secret USB
-had given to CIA Peter'''
+msg = """CIA Mark told CIA Linda that the secret USB
+had given to CIA Peter"""
 print("CIA最後出現位置: ", msg.rfind("CIA",0,len(msg)))
 
 print("------------------------------------------------------------")  # 60個
 
-msg = '''CIA Mark told CIA Linda that the secret USB
-had given to CIA Peter'''
+msg = """CIA Mark told CIA Linda that the secret USB
+had given to CIA Peter"""
 print("CIA最後出現位置: ", msg.rfind("CIA"))
 
 print("------------------------------------------------------------")  # 60個
@@ -160,13 +159,13 @@ with open(fn, 'w') as file_Obj:
     file_Obj.write(string)
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 fn = 'out14_27.txt'
 x = 100
 
 with open(fn, 'w') as file_Obj:
     file_Obj.write(x)               # 直接輸出數值x產生錯誤
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 fn = 'out14_28.txt'
@@ -206,7 +205,7 @@ with open(fn, 'a') as file_Obj:
     file_Obj.write(str2 + '\n')
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 fn = 'ansi14_44.txt'                    # 設定欲開啟的檔案
 file_Obj =  open(fn, encoding='cp950')  # 用預設encoding='cp950'開啟檔案
 data = file_Obj.read()                  # 讀取檔案到變數data
@@ -220,7 +219,7 @@ file_Obj =  open(fn, encoding='cp950')  # 用預設encoding='cp950'開啟檔案
 data = file_Obj.read()                  # 讀取檔案到變數data
 file_Obj.close()                        # 關閉檔案物件
 print(data)                             # 輸出變數data相當於輸出檔案
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 fn = 'utf14_45.txt'                     # 設定欲開啟的檔案
@@ -269,69 +268,22 @@ print(song)
 wordCount(song)                     # 執行歌曲單字計數
 print("以下是最後執行結果")
 print(dict)                         # 列印字典
-
-print("------------------------------------------------------------")  # 60個
-
-fn = 'ch15_6.txt'               # 設定欲開啟的檔案
-
-try:
-    with open(fn) as file_Obj:  # 用預設mode=r開啟檔案,傳回檔案物件file_Obj
-        data = file_Obj.read()  # 讀取檔案到變數data
-except FileNotFoundError:
-    print("找不到 %s 檔案" % fn)
-else:
-    wordList = data.split()     # 將文章轉成串列
-    print(fn, " 文章的字數是 ", len(wordList))    # 列印文章字數
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 def wordsNum(fn):
     """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
     try:
-        with open(fn) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
+        with open(fn) as file_Obj:  # 用預設mode=r開啟檔案,傳回檔案物件file_Obj
             data = file_Obj.read()  # 讀取檔案到變數data
     except FileNotFoundError:
         print("找不到 %s 檔案" % fn)
     else:
         wordList = data.split()     # 將文章轉成串列
-        print(fn, " 文章的字數是 ", len(wordList))    # 列印文章字數
+        print("檔案 :", fn, "\n字數計算, 單字 :", len(wordList))    # 列印文章字數
 
-file = 'ch15_6.txt'                 # 設定欲開啟的檔案
-wordsNum(file)
-
-print("------------------------------------------------------------")  # 60個
-
-def wordsNum(fn):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(fn) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except FileNotFoundError:
-        print("找不到 %s 檔案" % fn)
-    else:
-        wordList = data.split()     # 將文章轉成串列
-        print(fn, " 文章的字數是 ", len(wordList))    # 列印文章字數
-
-files = ['data1.txt', 'data2.txt', 'data3.txt']       # 檔案串列
-for file in files:
-    wordsNum(file)
-
-print("------------------------------------------------------------")  # 60個
-
-def wordsNum(fn):
-    """適用英文文件, 輸入文章的檔案名稱,可以計算此文章的字數"""
-    try:
-        with open(fn) as file_Obj:  # 用預設"r"傳回檔案物件file_Obj
-            data = file_Obj.read()  # 讀取檔案到變數data
-    except Exception:
-        print("Exception找不到 %s 檔案" % fn)
-    else:
-        wordList = data.split()     # 將文章轉成串列
-        print(fn, " 文章的字數是 ", len(wordList))    # 列印文章字數
-
-files = ['data1.txt', 'data2.txt', 'data3.txt']       # 檔案串列
-for file in files:
-    wordsNum(file)
+filename = 'C:/_git/vcs/_4.python/_data/song1.txt'
+wordsNum(filename)
 
 print("------------------------------------------------------------")  # 60個
 
