@@ -14,7 +14,7 @@ font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'    #無
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
 
 print('draw01------------------------------------------------------------')	#60個
-
+'''
 # 在圖上作畫
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
@@ -702,3 +702,199 @@ newImage.save("tmp_pic25.png")
 
 
 """
+'''
+
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import ImageColor
+
+print('建立影像 RGBA, 在上面畫圖')
+W, H = 400, 300
+color = "Yellow"
+image = Image.new('RGBA', (W, H), color)
+
+for x in range(50, 251):                                # x軸區間在50-250
+    for y in range(50, 151):                            # y軸區間在50-150
+        image.putpixel((x, y), (0, 255, 255, 255))   # 填青色
+
+for x in range(50, 251):                                # x軸區間在50-250            
+    for y in range(151, 251):                           # y軸區間在151-250
+        image.putpixel((x, y), ImageColor.getcolor("Blue", "RGBA")) # 填藍色
+
+plt.imshow(image)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#添加水印
+#一、添加文字水印
+
+from PIL import Image, ImageDraw, ImageFont
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+im = Image.open(filename).convert('RGBA')
+txt=Image.new('RGBA', im.size, (0,0,0,0))
+fnt=ImageFont.truetype("c:/Windows/fonts/Tahoma.ttf", 20)
+d=ImageDraw.Draw(txt)
+d.text((txt.size[0]-80,txt.size[1]-30), 'Peony', font=fnt, fill=(255,0,255,255))
+out=Image.alpha_composite(im, txt)
+#out.show()
+plt.imshow(out)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+"""
+#二、添加小圖片水印
+
+im = Image.open(filename)
+mark=Image.open("logo_small.gif")
+layer=Image.new('RGBA', im.size, (0,0,0,0))
+layer.paste(mark, (im.size[0]-150,im.size[1]-60))
+out=Image.composite(layer,im,layer)
+#out.show()
+plt.imshow(out)
+plt.show()
+
+"""
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+"""
+from PIL import Image, ImageDraw, ImageFont
+
+def generate_product_image(product_image_path, background_image_path, promo_text):
+    # 加載產品和背景影像
+    product_image = Image.open(product_image_path).resize((200, 200))
+    background_image = Image.open(background_image_path)
+    # 在背景影像上放置產品影像
+    background_image.paste(product_image, (50, 50), product_image)
+    # 在影像上添加促銷文字
+    draw = ImageDraw.Draw(background_image)
+    font = ImageFont.truetype("arial.ttf", size=45)
+    draw.text((50, 260), promo_text, font=font, fill="white")
+    # 保存或返回影像
+    background_image.save('output_promo_image.jpg')
+
+generate_product_image('product.png', 'background.jpg', '特價促銷!')
+"""
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image
+from PIL import ImageDraw
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+infile = filename
+savefile = "tmp_redline.png"
+
+img = Image.open(infile)
+draw = ImageDraw.Draw(img)  #在圖片畫線的準備
+draw.line((0, 0, img.width, img.height), fill="RED", width=8) #畫線
+img.save(savefile, format="PNG")
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+from PIL import Image, ImageDraw, ImageFont
+
+hungPic = Image.open(filename)        # 建立Pillow物件
+newPic = hungPic.resize((350,500))
+
+nwidth, nheight = 450, 700
+newImage = Image.new('RGB', (nwidth, nheight), "Yellow")
+
+newImage.paste(newPic, (50,50))
+
+drawObj = ImageDraw.Draw(newImage)
+name = "牡丹亭"
+fontInfo = ImageFont.truetype('C:\Windows\Fonts\mingliu.ttc', 60)
+drawObj.text((140,600), name, fill='Blue', font=fontInfo)
+
+newImage.save("tmp_pic_6.jpg")
+
+print('------------------------------------------------------------')	#60個
+
+
+
+from PIL import Image,ImageDraw
+from PIL import ImageFont
+
+img = Image.new("RGB",(400,300),"lightgray") #淡灰色
+drawimg=ImageDraw.Draw(img)
+
+#繪多邊形
+drawimg.polygon([(200,100),(350,150),(50,150)],fill="blue",outline="red")#屋頂
+#繪矩形
+drawimg.rectangle((100,150,300,250),fill="green",outline="black") #房間
+#繪圓
+drawimg.ellipse((300,40,350,90),fill="red")#太陽 
+#繪橢圓
+drawimg.ellipse((60,80,100,100),fill="white") #白雲一   
+drawimg.ellipse((100,60,130,80),fill="white") #白雲二 
+#繪文字
+drawimg.text((120,170),"e-happy",fill="orange")
+font_filename = 'C:/Windows/Fonts/mingliu.ttc'
+myfont=ImageFont.truetype(font_filename, 16)#文字一
+drawimg.text((120,200),"文淵閣工作室",fill="red",font=myfont) #文字二 
+img.show()
+img.save("tmp_house.png")
+
+
+print('------------------------------------------------------------')	#60個
+
+
+from PIL import Image,ImageDraw
+img = Image.new("RGB",(400,300),"lightgray") #淡灰色
+drawimg=ImageDraw.Draw(img)
+  
+#繪點
+for i in range(0,400,10):
+    for j in range(0,300,10):    
+        drawimg.point([(i,j)],fill="red")  
+#繪直線
+for i in range(0,400,10):
+    drawimg.line([(i,300),(200,150)],width=2,fill="blue") 
+img.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+print("PIL_line")
+
+from pylab import *
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 读取图像到数组中
+im = array(Image.open(filename))
+figure()
+imshow(im)
+x = [100, 100, 200, 200]
+y = [200, 400, 200, 400]
+# 使用红色星状标记绘制点
+plot(x, y, 'r*')
+# 绘制连接两个点的线（默认为蓝色）
+plot(x[:2], y[:2])
+title('畫圖')
+
+# show()命令首先打开图形用户界面（GUI），然后新建一个窗口，该图形用户界面会循环阻断脚本，然后暂停，
+# 直到最后一个图像窗口关闭。每个脚本里，只能调用一次show()命令，通常相似脚本的结尾调用。
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+

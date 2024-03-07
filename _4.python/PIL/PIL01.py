@@ -674,6 +674,369 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
+from PIL import Image
+
+image = Image.open(filename)
+
+plt.imshow(image)
+
+plt.show()
+
+w,h = image.size
+
+image1 = image.resize((w*2,h), Image.LANCZOS)
+
+plt.imshow(image1)
+
+plt.show()
+
+image2 = image.convert('1')
+
+plt.imshow(image2)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+from PIL import Image
+
+hungPic = Image.open(filename)        # 建立Pillow物件
+newPic = hungPic.resize((350,500))
+
+nwidth, nheight = 450, 600
+newImage = Image.new('RGB', (nwidth, nheight), "Yellow")
+
+newImage.paste(newPic, (50,50))
+newImage.save("tmp_pic_2.jpg")
+
+print('------------------------------------------------------------')	#60個
+
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+infile = filename#"earth.png"
+savefile = "tmp_resize2.png"
+
+img = Image.open(infile)
+img = img.resize((100, 100), Image.LANCZOS)     #調整大小
+img.save(savefile, format="PNG")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+infile = filename#"earthH.png"
+savefile = "tmp_resize1.png"
+
+max_size = 100
+img = Image.open(infile)
+ratio = max_size / max(img.size)    #根據長寬較長的一邊決定縮放比率
+w = int(img.width * ratio)
+h = int(img.height * ratio)
+img = img.resize((w, h), Image.LANCZOS)     #調整大小
+img.save(savefile, format="PNG")
+
+#調整圖片大小的範例
+
+mini_im = im.resize((int(im.size[0] * 0.2), int(im.size[1] * 0.2)))
+display(mini_im)
+print(mini_im.size)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename)
+w,h=img.size #320 240
+
+img1=img.resize((w*2,h))
+
+img2=img.resize((w,h*2))
+
+print('------------------------------------------------------------')	#60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+img = Image.open(filename)
+imgcopy=img.copy() #複製
+#切割貓熊並改變尺寸
+img1=imgcopy.crop((190,184,415,350)).resize((160,140))
+imgcopy.paste(img1,(40,30)) #貼上
+img2=img1.transpose(Image.FLIP_LEFT_RIGHT)#左右翻轉
+imgcopy.paste(img2,(220,40))#貼上
+
+print("------------------------------------------------------------")  # 60個
+
+
+def emptydir(dirname):
+    if os.path.isdir(dirname):
+        shutil.rmtree(dirname)
+        sleep(1)  #需延遲,否則會出錯
+    os.mkdir(dirname)
+
+import glob
+import shutil, os
+from time import sleep
+
+image_dir="data"
+target_dir = 'tmp_bmp_photo'
+target_dir2 = 'tmp_gray_photo'
+emptydir(target_dir)
+emptydir(target_dir2)
+files=glob.glob(image_dir+"\*.jpg") + glob.glob(image_dir+"\*.png")
+for i, f in enumerate(files):
+    img = Image.open(f)
+    img_new = img.resize((800, 600), Image.LANCZOS)
+    path,filename = f.split("\\") #路徑、檔名   
+    name,ext = filename.split(".") #主檔名、副檔名
+    #以bmp格式存檔
+    img_new.save(target_dir+'/' + name + 'aaa.bmp')
+    
+    #轉換為灰階
+    img_gray = img_new.convert('L')  
+    # gray001.jpg、gray002.jpg...
+    outname = str("gray") + str('{:0>3d}').format(i+1) + 'aaa.jpg'
+    img_gray.save(target_dir2+'/'+outname)
+    print("{} 複製完成!".format(f))
+    img.close()   
+
+print('轉換尺寸及灰階處理結束！')
+
+print("------------------------------------------------------------")  # 60個
+
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    print(image.size)
+    x = 50
+    y = 50
+    w = 200
+    h = 200
+    image_new = image.crop((x, y, w, h))
+    print(image_new.size)
+    image_new.save('tmp_pic_crop.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    print(image.size)
+    w = 200
+    r = w/image.size[0]
+    h = int(image.size[1]*r) #依縮放比例計算高度
+    image_new = image.resize((w, h))
+    print(image_new.size)
+    image_new.save('tmp_pic_resize.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    print('原圖片的尺寸大小:',image.size)
+    x = 50
+    y = 50
+    x1 = 150
+    y1 = 200
+    image_new = image.crop((x, y, x1, y1))
+    print('圖片經裁切後的尺寸大小:', image_new.size)
+    image_new.save("tmp_pic_crop.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+with Image.open(filename) as image:
+    print('原圖片的尺寸大小:',image.size)
+    w=100
+    r = w/image.size[0]
+    h = int(image.size[1]*r)
+    image_new = image.resize((w, h))
+    print('圖片經縮放後的尺寸大小:',image_new.size)
+    image_new.save("tmp_pic_resize.jpg" )
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("縮放和黏貼圖像")
+
+filename2 = "C:/_git/vcs/_1.data/______test_files1/bear.jpg"
+
+image1 = Image.open(filename2)
+image2 = Image.open(filename)
+rect = 80, 20, 310, 360
+guido_head = image2.crop(rect)
+width, height = guido_head.size
+image1.paste(guido_head.resize((int(width / 1.5), int(height / 1.5))), (172, 40))
+
+image1.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("剪裁圖像")
+
+image = Image.open(filename)
+rect = 80, 20, 310, 360
+image.crop(rect).show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("生成縮略圖")
+
+image = Image.open(filename)
+size = 128, 128
+image.thumbnail(size)
+image.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+#crop
+with Image.open(filename) as image:
+    print('原圖片的尺寸大小:',image.size)
+    x = 50
+    y = 50
+    x1 = 250
+    y1 = 300
+    image2 = image.crop((x, y, x1, y1))
+    print('圖片經裁切後的尺寸大小:', image2.size)
+    image2.save("tmp_pic29.jpg")
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
+with Image.open(filename) as image:
+    image_new = image.rotate(180)
+    image_new.save('tmp_pic_rotate.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    image_new = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
+    image_new.save('tmp_pic_rotate30.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+with Image.open(filename) as image:
+    image_new = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
+    image_new.save('tmp_pic_rotate30_zero.jpg')
+
+print('------------------------------------------------------------')	#60個
+
+print('保持圖片原始大小之旋轉')
+with Image.open(filename) as image:
+  image_new = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
+  image_new.save("tmp_pic_rotate60a.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+print('保持圖片內容大小之旋轉')
+with Image.open(filename) as image:
+  image_new = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
+  image_new.save("tmp_pic_rotate60b.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename)
+
+img1=img.rotate(45)#旋轉45度
+img2=img.rotate(90) #旋轉90度
+img3=img.rotate(180)#旋轉180度
+
+print("------------------------------------------------------------")  # 60個
+
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename)
+
+img2=img.transpose(Image.FLIP_LEFT_RIGHT)#左右翻轉
+img3=img.transpose(Image.FLIP_TOP_BOTTOM)#上下翻轉
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename) # w,h=img.size #320 240
+
+img1=img.crop((0,0,160,120))
+img2=img.crop((161,0,320,120))
+img3=img.crop((0,121,160,240))
+img4=img.crop((161,121,320,240))
+
+img.close()
+
+print("------------------------------------------------------------")  # 60個
+
+#裁剪圖片
+#從原圖片中裁剪感興趣區域（roi),裁剪區域由4-tuple決定，該tuple中信息為(left, upper, right, lower)。 Pillow左邊系統的原點（0，0）為圖片的左上角。坐標中的數字單位為像素點。
+
+
+img=Image.open(filename)  #打開圖像
+plt.figure('Peony')
+plt.subplot(1,2,1)
+plt.title('origin')
+plt.imshow(img),plt.axis('off')
+
+box=(80,100,260,300)
+roi=img.crop(box)
+plt.subplot(1,2,2)
+plt.title('roi')
+plt.imshow(roi),plt.axis('off')
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+image = Image.open(filename)               # 建立Pillow物件
+copyPict = image.copy()                          # 複製
+cropPict = copyPict.crop((80, 30, 150, 100))    # 裁切區間
+cropWidth, cropHeight = cropPict.size           # 獲得裁切區間的寬與高
+
+width, height = 600, 320                        # 新影像寬與高
+newImage = Image.new('RGB', (width, height), "Yellow")  # 建立新影像
+for x in range(20, width-20, cropWidth):         # 雙層迴圈合成
+    for y in range(20, height-20, cropHeight):
+        newImage.paste(cropPict, (x, y))        # 合成
+
+newImage.save("tmp_pic19.jpg")                   # 儲存
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+
+image = Image.open(filename)
+print(image.format, image.size, image.mode)
+
+#image.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print('------------------------------------------------------------')	#60個
+
+"""
+
+
+print("------------------------------------------------------------")  # 60個
 
 

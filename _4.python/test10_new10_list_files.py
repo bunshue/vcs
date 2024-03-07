@@ -22,12 +22,13 @@ import os
 import sys
 import glob
 import stat
+import datetime
 
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test/_good1/_good4/_good5"
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("ls 測試 os.walk ST------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 多層1")
@@ -488,9 +489,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 單層")
 os.chdir(foldername)
-curdir = os.getcwd()
-
-print("當前目錄", curdir)
 
 filenames = glob.glob("glob.py") + glob.glob("os*.py") + glob.glob("*.txt")
 
@@ -616,6 +614,14 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+'''
+
+
+
+
+
+
+
 """
      
 檔案操作
@@ -657,8 +663,10 @@ if filename.endswith('.c'):
             for filename in filenames:
                 filename_list.extend(getFilesForName(filename))
             return filename_list
+"""
 
 print("------------------------------------------------------------")  # 60個
+
 import stat
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
@@ -672,85 +680,90 @@ print("檔案大小 :", size, "拜")
 
 print("------------------------------------------------------------")  # 60個
 
-
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 
 short_filename = os.path.basename(filename)
 
-print(short_filename)
+print("長檔名 :", filename)
+print("短檔名 :", short_filename)
 
 cache_dir = os.path.dirname(filename)
-print(cache_dir)
+print("長資料夾名 :", cache_dir)
 
 head, tail = short_filename[:-3], short_filename[-3:]
-print(head)
-print(tail)
+print("主檔名 :", head)
+print("副檔名 :", tail)
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 canonic = os.path.abspath(filename)
-print(canonic)
+print("長檔名 :", canonic, '\t大寫磁碟機名')
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 canonic = os.path.normcase(filename)
-print(canonic)
+print("長檔名 :", canonic, '\t小寫磁碟機名')
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 head, ext = os.path.splitext(filename)
+print("前檔名 :", head)
+print("副檔名 :", ext)
 head, base = os.path.split(filename)
-
+print("長資料夾名 :", head)
+print("短檔名 :", base)
 
 print("------------------------------------------------------------")  # 60個
 
+#撈出一層 至 list
 
+cc = os.listdir()   #沒有參數就是當前目錄
+print(type(cc))
+#print(cc)
 
-#撈出一層
-import os
+print('當前目錄下共有 :', len(cc), '個項目(資料夾+檔案)')
 
-print('Current dir:', os.getcwd())
-
-count = 0
-for item in os.listdir():
-    count += 1
-    print(count, item)
-print('Total', count, 'items in', os.getcwd())
 print("------------------------------------------------------------")  # 60個
 
-import os
+#foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
-
+total_folders = 0
+total_files = 0
 for item in os.walk(foldername):
-    print('dir name:', item[0])
-    print('sub-dir list:', item[1])
-    print('file list:', item[2])
-    print('='*80)
-    
+    total_folders += 1
+    #print(item)
+    print('資料夾 :', item[0])
+    print('子資料夾:', item[1])
+    print('檔案:', item[2])
+    total_files += len(item[2])
+    print("------------------------------------------------------------")  # 60個
+
+print('共有 :', total_folders - 1, '個資料夾')
+print('共有 :', total_files, '個檔案')
+
 print("------------------------------------------------------------")  # 60個
 
-import os
-from datetime import datetime
-
 foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
 for entry in os.scandir(foldername):
     info = entry.stat()
     # epoch timestamp轉換成日期字串
-    da = datetime.utcfromtimestamp(info.st_mtime)
-    dstr = da.strftime('%Y/%m/%d')
+    da = datetime.datetime.utcfromtimestamp(info.st_mtime)
+    dstr = da.strftime('%Y年%m月%d日, %H:%M:%S')
+
     if entry.is_dir():
         print('資料夾：', entry.name, '最後存取時間：', dstr)
     elif entry.is_file():
         print('檔案：', entry.name, '最後存取時間：', dstr)
-        
-print("------------------------------------------------------------")  # 60個
 
-import os
+print('時間差了8小時')
+
+print("------------------------------------------------------------")  # 60個
 
 def dirTree(path, level=0):
     if level>1:
@@ -767,20 +780,18 @@ def dirTree(path, level=0):
                 pass
 
 foldername = 'C:/_git/vcs/_1.data/______test_files5'
+foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
 dirTree(foldername)
 
 print("------------------------------------------------------------")  # 60個
 
-import os
-from datetime import datetime
-
-#foldername = os.getcwd()
 foldername = 'C:/_git/vcs/_1.data/______test_files5'
+#foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
 for entry in os.scandir(foldername):
     info = entry.stat()
-    da = datetime.utcfromtimestamp(info.st_mtime)
+    da = datetime.datetime.utcfromtimestamp(info.st_mtime)
     dstr = da.strftime('%d/%m/%Y')
     if entry.is_file():
         size = int(os.path.getsize(entry.name)/1024)
@@ -788,11 +799,10 @@ for entry in os.scandir(foldername):
         print(entry.name, '\t'+str(size)+'KB\t', str(ext[-1].replace('.', ''))+'\t', dstr)
     elif entry.is_dir():
         print(entry.name, '\t\t\t<DIR>\t', dstr)
-        
+
 print("------------------------------------------------------------")  # 60個
 
 print('對一個資料夾內的所有圖檔做處理')
-import glob
 from PIL import Image
 
 #filenames = glob.glob("./data/*.jpg")  # 取得 data 資料夾內所有的圖片
@@ -818,8 +828,6 @@ for i in filenames:
 
 print("------------------------------------------------------------")  # 60個
 
-
-
 from PIL import Image, ImageFont, ImageDraw
 
 imgs = glob.glob("./demo/*.jpg")  # 讀取 demo 資料夾裡所有的圖片
@@ -840,15 +848,7 @@ for i in imgs:
     img.paste(img2, (0, 0), img2)
     img.save(f"./test/{name}")
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-
-import glob
 
 jpg = glob.glob("./demo/*.[jJ][pP][gG]")  # 使用 [jJ][pP][gG] 萬用字元，抓出副檔名不論大小寫的 jpg 檔案
 print(jpg)
@@ -859,16 +859,28 @@ print(jpg)
 './demo/pic-010.jpg']
 """
 
-
-import glob
-
 images = glob.glob("./demo/*")
 print(images)
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
+
+
 """
+image_foldername = 'tmp_images'
+html_filename = 'tmp_countryfood2222.html'
+if os.path.exists(html_filename):  
+    os.remove(html_filename)     # 若有 tmp_countryfood.html 網頁即刪除
+if os.path.exists(image_foldername): 
+    shutil.rmtree(image_foldername)    # 若有images目錄即刪除
+else:
+    os.mkdir(image_foldername)        # 若無images目錄即刪除
+"""
+
+
+
+
+
+curdir = os.getcwd()
+print("當前目錄", curdir)
+

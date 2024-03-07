@@ -317,10 +317,7 @@ for _ in range(50):
     a = np.random.uniform()
     print(a)
 
-sys.exit()
 print("------------------------------------------------------------")  # 60個
-
-
 
 print('---- np.random.uniform() SP --------------------------------------------------------')	#60個
 
@@ -533,6 +530,73 @@ print(np.unique(a))
 print(np.bincount(a)) 
 print(np.histogram(a,bins=5))
 
+print("------------------------------------------------------------")  # 60個
+
+a = np.mat(np.random.random((2,2)))
+print(a)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print('常態分布 二維 轉 df')
+df3 = pd.DataFrame(np.random.randn(3,3), columns=list("ABC"))
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+e = np.random.random((2,2)) # Create an array (lled with random values
+print(e) # Might print "[[ 0.91940167 0.08143941]
+# [ 0.68744134 0.87236687]]"
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 產生一個 0~1 的隨機數
+r1 = np.random.random_sample()
+print(r1)
+r2 = np.random.random_sample((2, 2))
+print(r2)
+
+# 產生一個多維陣列 0 ~ 1 的隨機數 ( 不包含 1 )
+# 一樣有 seed 概念，seed 相同產生的隨機數就相同
+a = np.random.rand(4, 3)
+print(a)
+b = np.random.rand(4, 3, 2)
+print(b)
+
+# 如果只是想返回一個隨機數，可使用 randn()
+# randn 的用法和 rand 類似，也可從標準正態分佈中產生多維陣列隨機數
+# https://wiki.mbalib.com/zh-tw/%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83
+c = np.random.randn()
+print(c)
+
+# 產生隨機整數，也可用 size 產生多維陣列隨機數
+d = np.random.randint(1, 100, 10)
+print(d)
+e = np.random.randint(1, 100, size=(2, 2, 3))
+print(e)
+
+print("------------------------------------------------------------")  # 60個
+
+# cc = np.random.randint(3, 5)
+
+print("亂數分佈二維陣列")
+cc = np.random.rand(3, 5)
+print(cc)
+
+print("常態分佈二維陣列")
+cc = np.random.randn(3, 5)
+print(cc)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 

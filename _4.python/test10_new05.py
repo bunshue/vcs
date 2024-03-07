@@ -79,6 +79,37 @@ print(dirname)
 
 print("------------------------------------------------------------")  # 60個
 
+# 如果檔案在目前工作目錄下可以省略路徑
+print(os.path.getsize("ch14_1.py"))
+print(os.path.getsize("D:\\Python\\ch14\\ch14_1.py"))
+
+print("------------------------------------------------------------")  # 60個
+
+
+print(os.listdir("D:\\Python\\ch14"))
+print(os.listdir("."))                  # 這代表目前工作目錄
+
+print("------------------------------------------------------------")  # 60個
+
+totalsizes = 0
+print("列出D:\\Python\\ch14工作目錄的所有檔案")
+for file in os.listdir('D:\\Python\\ch14'):
+    print(file)
+    totalsizes += os.path.getsize(os.path.join('D:\\Python\\ch14', file))
+
+print("全部檔案大小是 = ", totalsizes)
+
+print("------------------------------------------------------------")  # 60個
+
+
+import datetime
+now = datetime.datetime.now() # current date and time
+
+date_time = now.strftime('%Y年%m月%d日, %H:%M:%S')
+print("現在時間 :", date_time)
+
+sys.exit()
+
 
 
 print("------------------------------------------------------------")  # 60個

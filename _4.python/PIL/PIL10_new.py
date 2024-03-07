@@ -75,62 +75,7 @@ plt.subplot(2,3,6), plt.title('b')
 plt.imshow(b,cmap='gray'),plt.axis('off')
 plt.show()
 
-"""
 
-二、裁剪圖片
-
-從原圖片中裁剪感興趣區域（roi),裁剪區域由4-tuple決定，該tuple中信息為(left, upper, right, lower)。 Pillow左邊系統的原點（0，0）為圖片的左上角。坐標中的數字單位為像素點。
-"""
-
-img=Image.open(filename)  #打開圖像
-plt.figure('Peony')
-plt.subplot(1,2,1)
-plt.title('origin')
-plt.imshow(img),plt.axis('off')
-
-box=(80,100,260,300)
-roi=img.crop(box)
-plt.subplot(1,2,2)
-plt.title('roi')
-plt.imshow(roi),plt.axis('off')
-
-plt.show()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#添加水印
-#一、添加文字水印
-
-from PIL import Image, ImageDraw,ImageFont
-
-im = Image.open(filename).convert('RGBA')
-txt=Image.new('RGBA', im.size, (0,0,0,0))
-fnt=ImageFont.truetype("c:/Windows/fonts/Tahoma.ttf", 20)
-d=ImageDraw.Draw(txt)
-d.text((txt.size[0]-80,txt.size[1]-30), 'Peony', font=fnt, fill=(255,0,255,255))
-out=Image.alpha_composite(im, txt)
-#out.show()
-plt.imshow(out)
-plt.show()
-
-
-"""
-#二、添加小圖片水印
-
-im = Image.open(filename)
-mark=Image.open("logo_small.gif")
-layer=Image.new('RGBA', im.size, (0,0,0,0))
-layer.paste(mark, (im.size[0]-150,im.size[1]-60))
-out=Image.composite(layer,im,layer)
-#out.show()
-plt.imshow(out)
-plt.show()
-
-"""
-
-print('------------------------------------------------------------')	#60個
 
 """
 圖像中的像素訪問
@@ -372,34 +317,6 @@ print('圖片的高度，單位像素(pixels): ', image.height)
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.open(filename)               # 建立Pillow物件
-copyPict = image.copy()                          # 複製
-cropPict = copyPict.crop((80, 30, 150, 100))    # 裁切區間
-cropWidth, cropHeight = cropPict.size           # 獲得裁切區間的寬與高
-
-width, height = 600, 320                        # 新影像寬與高
-newImage = Image.new('RGB', (width, height), "Yellow")  # 建立新影像
-for x in range(20, width-20, cropWidth):         # 雙層迴圈合成
-    for y in range(20, height-20, cropHeight):
-        newImage.paste(cropPict, (x, y))        # 合成
-
-newImage.save("tmp_pic19.jpg")                   # 儲存
-
-print("------------------------------------------------------------")  # 60個
-
-#crop
-with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',image.size)
-    x = 50
-    y = 50
-    x1 = 250
-    y1 = 300
-    image2 = image.crop((x, y, x1, y1))
-    print('圖片經裁切後的尺寸大小:', image2.size)
-    image2.save("tmp_pic29.jpg")
-
-print('------------------------------------------------------------')	#60個
-
 image = Image.open(filename)
 image.save("tmp_pic_quality95.jpg", quality=95 )
 image.close()
@@ -409,34 +326,6 @@ print("------------------------------------------------------------")  # 60個
 image = Image.open(filename)
 image.save("tmp_pic_quality_default.jpg")
 image.close()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-from PIL import Image
-
-image = Image.open(filename)
-
-plt.imshow(image)
-
-plt.show()
-
-w,h = image.size
-
-image1 = image.resize((w*2,h), Image.LANCZOS)
-
-plt.imshow(image1)
-
-plt.show()
-
-image2 = image.convert('1')
-
-plt.imshow(image2)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -601,50 +490,6 @@ blue_to_red2(filename)
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-with Image.open(filename) as image:
-    print(image.size)
-    x = 50
-    y = 50
-    w = 200
-    h = 200
-    image_new = image.crop((x, y, w, h))
-    print(image_new.size)
-    image_new.save('tmp_pic_crop.jpg')
-
-print('------------------------------------------------------------')	#60個
-
-with Image.open(filename) as image:
-    print(image.size)
-    w = 200
-    r = w/image.size[0]
-    h = int(image.size[1]*r) #依縮放比例計算高度
-    image_new = image.resize((w, h))
-    print(image_new.size)
-    image_new.save('tmp_pic_resize.jpg')
-
-print('------------------------------------------------------------')	#60個
-
-with Image.open(filename) as image:
-    image_new = image.rotate(180)
-    image_new.save('tmp_pic_rotate.jpg')
-
-print('------------------------------------------------------------')	#60個
-
-with Image.open(filename) as image:
-    image_new = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
-    image_new.save('tmp_pic_rotate30.jpg')
-
-print('------------------------------------------------------------')	#60個
-
-with Image.open(filename) as image:
-    image_new = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
-    image_new.save('tmp_pic_rotate30_zero.jpg')
-
-print('------------------------------------------------------------')	#60個
-
 image = Image.open(filename)
 image.save('tmp_pic_normal.jpg')
 image.close()
@@ -656,43 +501,6 @@ image.save('tmp_pic_high.jpg', quality = 95)
 image.close()
 
 print('------------------------------------------------------------')	#60個
-
-print('保持圖片原始大小之旋轉')
-with Image.open(filename) as image:
-  image_new = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
-  image_new.save("tmp_pic_rotate60a.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-print('保持圖片內容大小之旋轉')
-with Image.open(filename) as image:
-  image_new = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
-  image_new.save("tmp_pic_rotate60b.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',image.size)
-    x = 50
-    y = 50
-    x1 = 150
-    y1 = 200
-    image_new = image.crop((x, y, x1, y1))
-    print('圖片經裁切後的尺寸大小:', image_new.size)
-    image_new.save("tmp_pic_crop.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',image.size)
-    w=100
-    r = w/image.size[0]
-    h = int(image.size[1]*r)
-    image_new = image.resize((w, h))
-    print('圖片經縮放後的尺寸大小:',image_new.size)
-    image_new.save("tmp_pic_resize.jpg" )
-
-print("------------------------------------------------------------")  # 60個
 
 """
 print("車牌")
@@ -815,44 +623,6 @@ def batch_convert_images(directory, target_format='.jpg'):
 # 呼叫批次更改函數
 batch_convert_images('images_directory')
 """
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-from PIL import Image, ImageDraw, ImageFont
-
-def generate_product_image(product_image_path, background_image_path, promo_text):
-    # 加載產品和背景影像
-    product_image = Image.open(product_image_path).resize((200, 200))
-    background_image = Image.open(background_image_path)
-    # 在背景影像上放置產品影像
-    background_image.paste(product_image, (50, 50), product_image)
-    # 在影像上添加促銷文字
-    draw = ImageDraw.Draw(background_image)
-    font = ImageFont.truetype("arial.ttf", size=45)
-    draw.text((50, 260), promo_text, font=font, fill="white")
-    # 保存或返回影像
-    background_image.save('output_promo_image.jpg')
-
-generate_product_image('product.png', 'background.jpg', '特價促銷!')
-"""
-print("------------------------------------------------------------")  # 60個
-
-
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-from PIL import Image
-
-hungPic = Image.open(filename)        # 建立Pillow物件
-newPic = hungPic.resize((350,500))
-
-nwidth, nheight = 450, 600
-newImage = Image.new('RGB', (nwidth, nheight), "Yellow")
-
-newImage.paste(newPic, (50,50))
-newImage.save("tmp_pic_2.jpg")
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -868,77 +638,13 @@ with open('tmp_17_10.txt', 'w', encoding='utf-8') as fn:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-from PIL import Image, ImageDraw, ImageFont
-
-hungPic = Image.open(filename)        # 建立Pillow物件
-newPic = hungPic.resize((350,500))
-
-nwidth, nheight = 450, 700
-newImage = Image.new('RGB', (nwidth, nheight), "Yellow")
-
-newImage.paste(newPic, (50,50))
-
-drawObj = ImageDraw.Draw(newImage)
-name = "牡丹亭"
-fontInfo = ImageFont.truetype('C:\Windows\Fonts\mingliu.ttc', 60)
-drawObj.text((140,600), name, fill='Blue', font=fontInfo)
-
-newImage.save("tmp_pic_6.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 from PIL import Image
 
 filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-
-image = Image.open(filename)
-print(image.format, image.size, image.mode)
-
-#image.show()
-
 print("------------------------------------------------------------")  # 60個
-
-print("剪裁圖像")
-
-image = Image.open(filename)
-rect = 80, 20, 310, 360
-image.crop(rect).show()
-
-print('------------------------------------------------------------')	#60個
-
-print("生成縮略圖")
-
-image = Image.open(filename)
-size = 128, 128
-image.thumbnail(size)
-image.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-print("縮放和黏貼圖像")
-
-filename2 = "C:/_git/vcs/_1.data/______test_files1/bear.jpg"
-
-image1 = Image.open(filename2)
-image2 = Image.open(filename)
-rect = 80, 20, 310, 360
-guido_head = image2.crop(rect)
-width, height = guido_head.size
-image1.paste(guido_head.resize((int(width / 1.5), int(height / 1.5))), (172, 40))
-
-image1.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("操作像素")
 
@@ -952,19 +658,969 @@ image.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-"""
-
-#另存新檔
-image.save("tmp_pic_01.png")
-#image.show()
+print('------------------------------------------------------------')	#60個
 
 
 
+print('------------------------------------------------------------')	#60個
+'''
+from PIL import Image, ImageOps
+from IPython.display import display
+
+#利用圖片大小強調數量多寡
+#載入圖片與顯示圖片的範例
+
+im = Image.open(filename)
+display(im)
+
+print('------------------------------------------------------------')	#60個
 
 
-"""
+from pathlib import Path
+from PIL import Image
+
+infolder = "testfolder"
+value1 = "outputfolder4"
+extlist = ["*.jpg","*.png"]
+
+#【函數: 轉存為jpg檔案】
+def savepng(readfile, savefolder):
+    try:
+        img = Image.open(readfile)              #載入圖片檔
+        savedir = Path(savefolder)
+        savedir.mkdir(exist_ok=True)            #建立轉存資料夾
+        #-----------------------------------
+        filename = Path(readfile).stem+".jpg"   #建立檔案名稱
+        savepath = savedir.joinpath(filename)
+        if img.format == "PNG":
+            newimg = Image.new("RGB", img.size, "white")
+            newimg.paste(img, mask=img.split()[3])  #在白底背景繪製圖片
+            newimg.save(savepath, format="JPEG", quality=95)    #轉存為JPG圖檔
+        elif img.format == "JPEG":
+            img.save(savepath, format="JPEG", quality=95)   #轉存為JPG圖檔
+        #-----------------------------------
+        msg = "在"+savefolder + "轉存" + filename + "了喲。\n"
+        return msg
+    except:
+        return readfile + "：程式執行失敗。"
+#【函數: 處理資料夾之內的圖片檔】
+def savefiles(infolder, savefolder):
+    msg = ""
+    for ext in extlist:                     #以多個副檔名調查
+        filelist = []
+        for p in Path(infolder).glob(ext):  #將這個資料夾的檔案
+            filelist.append(str(p))         #新增至列表
+        for filename in sorted(filelist):   #再替每個檔案排序
+            msg += savepng(filename, savefolder)
+    return msg
+
+#【執行函數】
+msg = savefiles(infolder, value1)
+print(msg)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+infile = filename#"earth.png"
+savefile = "tmp_saveJPG2.jpg"
+
+img = Image.open(infile)
+if img.format == "PNG":
+    newimg = Image.new("RGB", img.size, "WHITE")
+    newimg.paste(img, mask=img)             # 將PNG檔壓在白底圖片上
+    newimg.save(savefile, format="JPEG")    # JPG轉存檔案
+elif img.format == "JPEG":
+    img.save(savefile, format="JPEG")       # JPG轉存檔案
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+import seaborn as sns #海生, 自動把圖畫得比較好看
+import plotly.offline
+import plotly.express as px
+import plotly.graph_objects as go
+import plotly.subplots
+import squarify
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image
+
+img1 = Image.new("RGB",(300,200),"rgb(0,0,255)") #藍色
+img1.save("tmp_blue.jpg")
+
+img2 = Image.new("RGBA",(300,200),"rgba(0,0,255,0)") #透明
+img2.save("tmp_alpha.png")
+
+print('------------------------------------------------------------')	#60個
+
+#利用圖片的個數強調數量
+
+#以人形圖示的個數強調數量的範例
+
+
+# 要排列的圖示個數
+num = 10
+
+# 圖片之間的邊界
+margin = 5
+
+# 載入圖片
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+im = Image.open(filename)#"human.png"
+im_width, im_height = im.size
+
+# 將圖片入作為畫布使用的Image
+canvas = Image.new("RGBA", ((im_width + margin) * num, im_height))
+for i in range(num):
+    canvas.paste(im, ((im_width + margin) * i, 0))
+
+canvas
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+# 1 open save show
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+infile = filename#"earth.png"
+savefile = "tmp_savePNG1.png"
+
+img = Image.open(infile)      #載入圖片檔
+img.save(savefile, format="PNG")    #PNG轉存檔案
+
+print('------------------------------------------------------------')	#60個
+
+
+'''
+
+from PIL import Image
+plt.figure('影像處理1', figsize = (10, 6))
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+image = Image.open(filename)
+plt.gray()  #這是什麼語法?
+
+plt.subplot(121)
+plt.title(u'原图')
+plt.imshow(image)
+
+image = Image.open(filename).convert('L')
+
+plt.subplot(122)
+plt.title(u'灰度图')
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+print("PIL_hist")
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+from pylab import *
+
+# 打开图像，并转成灰度图像
+im = array(Image.open(filename).convert('L'))
+
+# 新建一个图像
+figure()
+subplot(121)
+# 不使用颜色信息
+gray()
+# 在原点的左上角显示轮廓图像
+contour(im, origin='image')
+axis('equal')
+axis('off')
+title(u'图像轮廓图')
+
+subplot(122)
+# 利用hist来绘制直方图
+# 第一个参数为一个一维数组
+# 因为hist只接受一维数组作为输入，所以要用flatten()方法将任意数组按照行优先准则转化成一个一维数组
+# 第二个参数指定bin的个数
+hist(im.flatten(), 128)
+title(u'图像直方图')
+#刻度
+plt.xlim([0-10,255+10])
+plt.ylim([0,8000])
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_histeq")
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+from pylab import *
+#from PCV.tools import imtools
+
+# 添加中文字体支持
+from matplotlib.font_manager import FontProperties
+
+im = array(Image.open(filename).convert('L'))
+# 打开图像，并转成灰度图像
+#im2, cdf = imtools.histeq(im)
+figure()
+subplot(2, 2, 1)
+axis('off')
+gray()
+title(u'原始图像')
+imshow(im)
+subplot(2, 2, 2)
+axis('off')
+title(u'直方图均衡化后的图像')
+#imshow(im2)
+subplot(2, 2, 3)
+axis('off')
+title(u'原始直方图')
+hist(im.flatten(), 128, density=True)
+subplot(2, 2, 4)
+axis('off')
+title(u'均衡化后的直方图')
+#hist(im2.flatten(), 128, density=True)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+#from numpy import *
+from pylab import *
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+im=array(Image.open(filename).convert('L'))
+print(int(im.min()),int(im.max()))
+
+im2=255-im               #对图像进行反向处理
+print('对图像进行反向处理:\n',int(im2.min()),int(im2.max())) #查看最大/最小元素
+
+im3=(100.0/255)*im+100   #将图像像素值变换到100...200区间
+print('将图像像素值变换到100...200区间:\n',int(im3.min()),int(im3.max()))
+
+im4=255.0*(im/255.0)**2  #对像素值求平方后得到的图像
+print('对像素值求平方后得到的图像:\n',int(im4.min()),int(im4.max()))
+
+plt.figure('影像處理2', figsize = (10, 6))
+gray()
+
+subplot(131)
+imshow(im2)
+axis('off')
+title(r'$f(x)=255-x$')
+
+subplot(132)
+imshow(im3)
+axis('off')
+title(r'$f(x)=\frac{100}{255}x+100$')
+
+subplot(133)
+imshow(im4)
+axis('off')
+title(r'$f(x)=255(\frac{x}{255})^2$')
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_mean")
+
+from PIL import ImageStat
+
+def darkchannel(input_img,h,w):
+    dark_img = Image.new("L",(h,w),0)
+    for x in range(0,h-1):
+        for y in range(0,w-1):
+            dark_img.putpixel((x,y),min(input_img.getpixel((x,y))))
+    return dark_img
+  
+def airlight(input_img,h,w):
+    nMinDistance=65536    
+    w=int(round(w/2))
+    h=int(round(h/2))
+    if h*w>200:
+        lu_box = (0, 0, w, h) 
+        ru_box = (w, 0, 2*w, h) 
+        lb_box = (0, h, w, 2*h) 
+        rb_box = (w, h, 2*h,2*w)  
+               
+        lu = input_img.crop(lu_box);
+        ru = input_img.crop(ru_box);
+        lb = input_img.crop(lb_box);
+        rb = input_img.crop(rb_box);
+        lu_m=ImageStat.Stat(lu)
+        ru_m=ImageStat.Stat(ru)
+        lb_m=ImageStat.Stat(lb)
+        rb_m=ImageStat.Stat(rb)
+        lu_mean = lu_m.mean
+        ru_mean = ru_m.mean
+        lb_mean = lb_m.mean
+        rb_mean = rb_m.mean
+        lu_stddev = lu_m.stddev
+        ru_stddev = ru_m.stddev
+        lb_stddev = lb_m.stddev
+        rb_stddev = rb_m.stddev 
+        score0 = lu_mean[0]+lu_mean[1]+lu_mean[2] - lu_stddev[0]-lu_stddev[1]-lu_stddev[2]
+        score1 = ru_mean[0]+ru_mean[1]+lu_mean[2] - ru_stddev[0]-ru_stddev[1]-ru_stddev[2]  
+        score2 = lb_mean[0]+lb_mean[1]+lb_mean[2] - lb_stddev[0]-lb_stddev[1]-lb_stddev[2]
+        score3 = rb_mean[0]+rb_mean[1]+rb_mean[2] - rb_stddev[0]-rb_stddev[1]-rb_stddev[2]
+        x =max(score0,score1,score2,score3)       
+        if x == score0:
+             air =airlight(lu,h,w)
+        if x == score1:
+             air =airlight(ru,h,w)
+        if x == score2:
+             air =airlight(lb,h,w)
+        if x == score3:
+             air =airlight(rb,h,w)
+    else:
+        for i in range(0,h-1):
+            for j in range(0,w-1):
+                temp=input_img.getpixel((i,j))            
+                distance = ((255 - temp[0])**2 +  (255 - temp[1])**2 + (255 - temp[2])**2)**0.5
+                if nMinDistance > distance:
+                    nMinDistance = distance;
+                    air = temp
+    return air
+
+def transmssion(air,dark_img,h,w,OMIGA):
+    trans_map=np.zeros((h,w))
+    A=max(air)
+    for i in range(0,h-1):
+        for j in range(0,w-1):
+            temp=1-OMIGA*dark_img.getpixel((i,j))/A
+            trans_map[i,j]=max(0.1,temp)  
+    for i in range(1,h-1):
+        for j in range(1,w-1):
+                tempup=(trans_map[i-1][j-1]+2*trans_map[i][j-1]+trans_map[i+1][j-1])
+                tempmid=2*(trans_map[i-1][j]+2*trans_map[i][j]+trans_map[i+1][j])
+                tempdown=(trans_map[i-1][j+1]+2*trans_map[i][j+1]+trans_map[i+1][j+1])
+                trans_map[i,j]=(tempup+tempmid+tempdown)/16
+    return trans_map
+                   
+def defog(img,t_map,air,h,w):
+    dehaze_img = Image.new("RGB",(h,w),0)
+    for i in range(0,h-1):
+        for j in range(0,w-1):
+            R,G,B=img.getpixel((i,j))
+            R=int((R-air[0])/t_map[i,j]+air[0])
+            G=int((G-air[1])/t_map[i,j]+air[1])
+            B=int((B-air[2])/t_map[i,j]+air[2])
+            dehaze_img.putpixel((i,j),(R,G,B)) 
+    return dehaze_img                       
+                    
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img=Image.open(filename)
+[h,w]=img.size
+OMIGA =0.8  
+dark_image=darkchannel(img,h,w)
+air=airlight(img,h,w)
+T_map=transmssion(air,dark_image,h,w,OMIGA)
+fogfree_img=defog(img,T_map,air,h,w)
+fogfree_img.show()  
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_operation")
+
+from pylab import *
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+figure()
+# 显示原图
+image = Image.open(filename)
+print(image.mode, image.size, image.format)
+subplot(231)
+title(u'原图')
+axis('off')
+imshow(image)
+
+# 显示灰度图
+image = Image.open(filename).convert('L')
+gray()
+subplot(232)
+title(u'灰度图')
+axis('off')
+imshow(image)
+# 复制并粘贴区域
+image = Image.open(filename)
+box = (100, 100, 200, 200)
+region = image.crop(box)
+region = region.transpose(Image.ROTATE_180)
+image.paste(region, box)
+subplot(233)
+title(u'复制粘贴区域')
+axis('off')
+imshow(image)
+
+# 缩略图
+image = Image.open(filename)
+size = 128, 128
+image.thumbnail(size)
+print(image.size)
+subplot(234)
+title(u'缩略图')
+axis('off')
+imshow(image)
+#image.save('tmp_pic1.jpg')# 保存缩略图
+
+#调整图像尺寸
+image=Image.open(filename)
+image=image.resize(size)
+print(image.size)
+subplot(235)
+title(u'调整尺寸后的图像')
+axis('off')
+imshow(image)
+
+#旋转图像45°
+image=Image.open(filename)
+image=image.rotate(45)
+subplot(236)
+title(u'旋转45°后的图像')
+axis('off')
+imshow(image)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("de_noise")
+
+import random
+import cv2
+import scipy.misc
+import scipy.signal
+import scipy.ndimage
+
+"""中值滤波函数"""
+def medium_filter(im, x, y, step):
+    sum_s=[]
+    for k in range(-int(step/2),int(step/2)+1):
+        for m in range(-int(step/2),int(step/2)+1):
+            sum_s.append(im[x+k][y+m])
+    sum_s.sort()
+    return sum_s[(int(step*step/2)+1)]
+"""均值滤波函数"""
+def mean_filter(im, x, y, step):
+    sum_s = 0
+    for k in range(-int(step/2),int(step/2)+1):
+        for m in range(-int(step/2),int(step/2)+1):
+            sum_s += im[x+k][y+m] / (step*step)
+    return sum_s
+
+def convert_2d(r):
+    n = 3
+    # 3*3滤波器，每个系数都是1/9
+    window = np.ones((n, n)) / n**2
+    #使用滤波器卷积图像
+    # mode = same 表示输出尺寸等于输入尺寸
+    # boundary 表示采用对称边界条件处理图像边缘
+    s = scipy.signal.convolve2d(r, window, mode='same', boundary='symm')
+    return s.astype(np.uint8)
+"""添加噪声"""
+def add_salt_noise(img):
+    rows, cols, dims = img.shape 
+    R = np.mat(img[:, :, 0])
+    G = np.mat(img[:, :, 1])
+    B = np.mat(img[:, :, 2])
+    Grey_sp = R * 0.299 + G * 0.587 + B * 0.114
+    Grey_gs = R * 0.299 + G * 0.587 + B * 0.114
+    snr = 0.9
+    mu = 0
+    sigma = 0.12    
+    noise_num = int((1 - snr) * rows * cols)
+
+    for i in range(noise_num):
+        rand_x = random.randint(0, rows - 1)
+        rand_y = random.randint(0, cols - 1)
+        if random.randint(0, 1) == 0:
+            Grey_sp[rand_x, rand_y] = 0
+        else:
+            Grey_sp[rand_x, rand_y] = 255    
+    Grey_gs = Grey_gs + np.random.normal(0, 48, Grey_gs.shape)
+    Grey_gs = Grey_gs - np.full(Grey_gs.shape, np.min(Grey_gs))
+    Grey_gs = Grey_gs * 255 / np.max(Grey_gs)
+    Grey_gs = Grey_gs.astype(np.uint8)
+    # 中值滤波
+    Grey_sp_mf = scipy.ndimage.median_filter(Grey_sp, (8, 8))
+    Grey_gs_mf = scipy.ndimage.median_filter(Grey_gs, (8, 8))
+    # 均值滤波
+    n = 3
+    window = np.ones((n, n)) / n ** 2
+    Grey_sp_me = convert_2d(Grey_sp)
+    Grey_gs_me = convert_2d(Grey_gs)
+    plt.subplot(231)
+    plt.title('椒盐噪声')
+    plt.imshow(Grey_sp, cmap='gray')
+    plt.subplot(232)
+    plt.title('高斯噪声')
+    plt.imshow(Grey_gs, cmap='gray')
+    plt.subplot(233)
+    plt.title('椒盐噪声的中值滤波')
+    plt.imshow(Grey_sp_mf, cmap='gray')
+    plt.subplot(234)
+    plt.title('高斯噪声的中值滤波')
+    plt.imshow(Grey_gs_mf, cmap='gray')
+    plt.subplot(235)
+    plt.title('椒盐噪声的均值滤波')
+    plt.imshow(Grey_sp_me, cmap='gray')
+    plt.subplot(236)
+    plt.title('高斯噪声的均值滤波')
+    plt.imshow(Grey_gs_me, cmap='gray')
+    plt.show()
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+
+img = np.array(Image.open(filename))  #导入图片
+add_salt_noise(img)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("PIL_derivative")
+
+from pylab import *
+from scipy.ndimage import  filters
+import numpy
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+im=array(Image.open(filename).convert('L'))
+gray()
+subplot(141)
+axis('off')
+title(u'(a)原图')
+imshow(im)
+# sobel算子
+imx=zeros(im.shape)
+filters.sobel(im,1,imx)
+subplot(142)
+axis('off')
+title(u'(b)x方向差分')
+imshow(imx)
+imy=zeros(im.shape)
+filters.sobel(im,0,imy)
+subplot(143)
+axis('off')
+title(u'(c)y方向差分')
+imshow(imy)
+mag=255-numpy.sqrt(imx**2+imy**2)
+subplot(144)
+title(u'(d)梯度幅值')
+axis('off')
+imshow(mag)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_fuzzy")
+
+from numpy import *
+from pylab import *
+from scipy.ndimage import filters
+from matplotlib.font_manager import FontProperties
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+im=array(Image.open(filename).convert('L'))
+figure()
+gray()
+axis('off')
+subplot(141)
+axis('off')
+title(u'原图')
+imshow(im)
+for bi,blur in enumerate([2,4,8]):
+    im2=zeros(im.shape)
+    im2=filters.gaussian_filter(im,blur)
+    im2=np.uint8(im2)
+    imNum=str(blur)
+    subplot(1,4,2+bi)
+    axis('off')
+    title(u'标准差为'+imNum)
+    imshow(im2)
+
+#如果是彩色图像，则分别对三个通道进行模糊
+#for bi, blur in enumerate([2,4,8]):
+#  im2 = zeros(im.shape)
+#  for i in range(3):
+#    im2[:, :, i] = filters.gaussian_filter(im[:, :, i], blur)
+#  im2 = np.uint8(im2)
+#  subplot(1, 4,  2 + bi)
+#  axis('off')
+#  imshow(im2)
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_gaussian")
+
+from pylab import *
+from scipy.ndimage import filters
+import numpy
+
+def imx(im, sigma):
+    imgx = zeros(im.shape)
+    filters.gaussian_filter(im, sigma, (0, 1), imgx)
+    return imgx
+def imy(im, sigma):
+    imgy = zeros(im.shape)
+    filters.gaussian_filter(im, sigma, (1, 0), imgy)
+    return imgy
+def mag(im, sigma):
+    # 还有gaussian_gradient_magnitude()
+    imgmag = 255 - numpy.sqrt(imgx ** 2 + imgy ** 2)
+    return imgmag
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+im = array(Image.open(filename).convert('L'))
+figure()
+gray()
+sigma = [2, 5, 10]
+for i in  sigma:
+    subplot(3, 4, 4*(sigma.index(i))+1)
+    axis('off')
+    imshow(im)
+    imgx=imx(im, i)
+    subplot(3, 4, 4*(sigma.index(i))+2)
+    axis('off')
+    imshow(imgx)
+    imgy=imy(im, i)
+    subplot(3, 4, 4*(sigma.index(i))+3)
+    axis('off')
+    imshow(imgy)
+    imgmag=mag(im, i)
+    subplot(3, 4, 4*(sigma.index(i))+4)
+    axis('off')
+    imshow(imgmag)
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_ginput")
+
+from pylab import *
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+im = array(Image.open(filename))
+imshow(im)
+
+print('请点击3个点')
+x = ginput(3)
+print('你已点击:', x)
+show()
+
+print('------------------------------------------------------------')	#60個
+
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+img = Image.open(filename)
+#img.show()
+w,h=img.size
+print(w,h) #320 240
+
+filename=img.filename
+print(filename)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename)
+imgcopy=img.copy()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_opening")
+
+from numpy import *
+#measurements模块实现二值图像的计数和度量功能，morphology模块实现形态学操作
+from scipy.ndimage import measurements, morphology  
+from pylab import *
+
+# 加载图像和阈值，以确保它是二进制的
+figure()
+gray()
+im = array(Image.open('data/castle.jpg').convert('L'))
+subplot(221)
+imshow(im)
+axis('off')
+title(u'原图')
+im = (im < 128)
+labels, nbr_objects = measurements.label(im) #图像的灰度值表示对象的标签
+print ("Number of objects:", nbr_objects)
+subplot(222)
+imshow(labels)
+axis('off')
+title(u'标记后的图')
+#形态学——使物体分离更好
+im_open = morphology.binary_opening(im, ones((9, 5)), iterations=4) #开操作，第二个参数为结构元素，iterations觉定执行该操作的次数
+subplot(223)
+imshow(im_open)
+axis('off')
+title(u'开运算后的图像')
+labels_open, nbr_objects_open = measurements.label(im_open)
+print ("Number of objects:", nbr_objects_open)
+subplot(224)
+imshow(labels_open)
+axis('off')
+title(u'开运算后进行标记后的图像')
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_PCA")
+
+from numpy import *
+#measurements模块实现二值图像的计数和度量功能，morphology模块实现形态学操作
+from scipy.ndimage import measurements, morphology  
+from pylab import *
+
+# 加载图像和阈值，以确保它是二进制的
+figure()
+gray()
+im = array(Image.open('data/castle.jpg').convert('L'))
+subplot(221)
+imshow(im)
+axis('off')
+title(u'原图')
+im = (im < 128)
+labels, nbr_objects = measurements.label(im) #图像的灰度值表示对象的标签
+print ("Number of objects:", nbr_objects)
+subplot(222)
+imshow(labels)
+axis('off')
+title(u'标记后的图')
+#形态学——使物体分离更好
+im_open = morphology.binary_opening(im, ones((9, 5)), iterations=4) #开操作，第二个参数为结构元素，iterations觉定执行该操作的次数
+subplot(223)
+imshow(im_open)
+axis('off')
+title(u'开运算后的图像')
+labels_open, nbr_objects_open = measurements.label(im_open)
+print ("Number of objects:", nbr_objects_open)
+subplot(224)
+imshow(labels_open)
+axis('off')
+title(u'开运算后进行标记后的图像')
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_realROF")
+
+from pylab import *
+from numpy import *
+from numpy import random
+from scipy.ndimage import filters
+#from scipy.misc import imsave
+#from PCV.tools import rof
+
+im = array(Image.open('data/gril.jpg').convert('L'))
+#U,T = rof.denoise(im,im)
+G = filters.gaussian_filter(im,10)
+figure()
+gray()
+subplot(1,3,1)
+imshow(im)
+#axis('equal')
+axis('off')
+title(u'原噪声图像')
+subplot(1,3,2)
+imshow(G)
+#axis('equal')
+axis('off')
+title(u'高斯模糊后的图像')
+subplot(1,3,3)
+#imshow(U)
+#axis('equal')
+axis('off')
+title(u'ROF降噪后的图像')
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_ROF")
+
+from pylab import *
+from numpy import *
+from numpy import random
+from scipy.ndimage import filters
+#from scipy.misc import imsave
+#from PCV.tools import rof
+
+# 创建合成图像与噪声
+im = zeros((500,500))
+im[100:400,100:400] = 128
+im[200:300,200:300] = 255
+im = im + 30*random.standard_normal((500,500))
+#roll()函数：循环滚动数组中的元素，计算领域元素的差异。linalg.norm()函数可以衡量两个数组见得差异
+#U,T = rof.denoise(im,im)  
+G = filters.gaussian_filter(im,10)
+figure()
+gray()
+subplot(1,3,1)
+imshow(im)
+#axis('equal')
+axis('off')
+title(u'原噪声图像')
+
+subplot(1,3,2)
+imshow(G)
+#axis('equal')
+axis('off')
+title(u'高斯模糊后的图像')
+
+subplot(1,3,3)
+#imshow(U)
+#axis('equal')
+axis('off')
+title(u'ROF降噪后的图像')
+
+show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_save")
+
+def IsValidImage(img_path):
+    """
+    判断文件是否为有效（完整）的图片
+    :param img_path:图片路径
+    :return:True：有效 False：无效
+    """
+    bValid = True
+    try:
+        Image.open(img_path).verify()
+    except:
+        bValid = False
+    return bValid
+
+
+def transimg(img_path):
+    """
+    转换图片格式
+    :param img_path:图片路径
+    :return: True：成功 False：失败
+    """
+    if IsValidImage(img_path):
+        try:
+            str = img_path.rsplit(".", 1)
+            output_img_path = "tmp_" + str[0] + ".jpg"
+            print(output_img_path)
+            im = Image.open(img_path)
+            im.save(output_img_path)
+            return True
+        except:
+            return False
+    else:
+        return False
+
+
+img_path = 'lena.png'
+print(transimg(img_path))
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print('萃取圖片的輪廓')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
+#print('顯示原圖')
+#plt.imshow(image1)
+#plt.show()
+
+#全彩轉灰階
+image1 = image1.convert("L")
+plt.imshow(image1)
+plt.show()
+
+W, H = image1.size
+print('原圖大小 W =', W, ', H =', H)
+
+# 輸出用, 製作一個與原圖大小相同的空白影像
+image2 = Image.new('RGB', (W, H))
+
+# 萃取輪廓
+for y in range(0, H - 1):
+    for x in range(0, W - 1):
+        # 計算亮度差
+        diff_x = image1.getpixel((x + 1, y)) - image1.getpixel((x, y))
+        diff_y = image1.getpixel((x, y + 1)) - image1.getpixel((x, y))
+        diff = diff_x + diff_y
+        
+        # 輸出
+        if diff >= 20:
+            image2.putpixel((x, y), (255, 0, 0))   #亮度差較大 著紅色
+        else:
+            image2.putpixel((x, y), (0, 0, 0))     #亮度差較小 著黑色
+
+plt.imshow(image2)
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -986,5 +1642,24 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+"""
+
+#另存新檔
+image.save("tmp_pic_01.png")
+#image.show()
+
+
+img1.save("aaa.jpg")
+
+
+
+"""
 
 
