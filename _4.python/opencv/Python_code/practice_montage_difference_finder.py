@@ -14,8 +14,8 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-filename1 = 'montage_left.JPG'
-filename2 = 'montage_right_gray.JPG'
+filename1 = 'data/montage_left.JPG'
+filename2 = 'data/montage_right_gray.JPG'
 
 img1 = cv2.imread(filename1, cv2.IMREAD_GRAYSCALE)
 img2 = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)

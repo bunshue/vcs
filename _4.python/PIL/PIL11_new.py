@@ -20,8 +20,14 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
+from PIL import Image, ImageOps
+from IPython.display import display
 
+#利用圖片大小強調數量多寡
+#載入圖片與顯示圖片的範例
 
+im = Image.open(filename)
+display(im)
 
 print('------------------------------------------------------------')	#60個
 
@@ -68,48 +74,14 @@ def savefiles(infolder, savefolder):
 msg = savefiles(infolder, value1)
 print(msg)
 
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image
-
-infile = "earth.png"
-savefile = "tmp_savePNG1.png"
-
-img = Image.open(infile)      #載入圖片檔
-img.save(savefile, format="PNG")    #PNG轉存檔案
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image
-
-infile = "earth.png"
-savefile = "tmp_resize2.png"
-
-img = Image.open(infile)
-img = img.resize((100, 100), Image.LANCZOS)     #調整大小
-img.save(savefile, format="PNG")
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image
-
-infile = "earthH.png"
-savefile = "tmp_resize1.png"
-
-max_size = 100
-img = Image.open(infile)
-ratio = max_size / max(img.size)    #根據長寬較長的一邊決定縮放比率
-w = int(img.width * ratio)
-h = int(img.height * ratio)
-img = img.resize((w, h), Image.LANCZOS)     #調整大小
-img.save(savefile, format="PNG")
-
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 from PIL import ImageDraw
 
-infile = "earth.png"
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+infile = filename
 savefile = "tmp_redline.png"
 
 img = Image.open(infile)
@@ -121,7 +93,9 @@ print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 
-infile = "earth.png"
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+infile = filename#"earth.png"
 savefile = "tmp_saveJPG2.jpg"
 
 img = Image.open(infile)
@@ -162,49 +136,12 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 from PIL import Image
+
 img1 = Image.new("RGB",(300,200),"rgb(0,0,255)") #藍色
-img1.save("blue.jpg")
+img1.save("tmp_blue.jpg")
 
 img2 = Image.new("RGBA",(300,200),"rgba(0,0,255,0)") #透明
-img2.save("alpha.png")
-
-
-
-print('------------------------------------------------------------')	#60個
-
-'''
-Chapter8：資訊圖表的視覺化手法
-何謂資訊圖表
-象形圖
-排列圖片的方法
-資訊圖表使用的函式庫
-'''
-
-
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageOps
-from IPython.display import display
-
-
-#利用圖片大小強調數量多寡
-#載入圖片與顯示圖片的範例
-
-
-im = Image.open("fruit_momo.png")
-display(im)
-
-
-print('------------------------------------------------------------')	#60個
-
-
-#調整圖片大小的範例
-
-mini_im = im.resize((int(im.size[0] * 0.2), int(im.size[1] * 0.2)))
-display(mini_im)
-print(mini_im.size)
-
+img2.save("tmp_alpha.png")
 
 print('------------------------------------------------------------')	#60個
 
@@ -220,7 +157,9 @@ num = 10
 margin = 5
 
 # 載入圖片
-im = Image.open("human.png")
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+im = Image.open(filename)#"human.png"
 im_width, im_height = im.size
 
 # 將圖片入作為畫布使用的Image
@@ -229,16 +168,6 @@ for i in range(num):
     canvas.paste(im, ((im_width + margin) * i, 0))
 
 canvas
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -263,10 +192,7 @@ font_filename = 'C:/Windows/Fonts/mingliu.ttc'
 myfont=ImageFont.truetype(font_filename, 16)#文字一
 drawimg.text((120,200),"文淵閣工作室",fill="red",font=myfont) #文字二 
 img.show()
-img.save("house.png")
-
-
-
+img.save("tmp_house.png")
 
 
 print('------------------------------------------------------------')	#60個
@@ -298,6 +224,70 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+
+
+# 1 open save show
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+infile = filename#"earth.png"
+savefile = "tmp_savePNG1.png"
+
+img = Image.open(infile)      #載入圖片檔
+img.save(savefile, format="PNG")    #PNG轉存檔案
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+# 2 resize
+
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+infile = filename#"earth.png"
+savefile = "tmp_resize2.png"
+
+img = Image.open(infile)
+img = img.resize((100, 100), Image.LANCZOS)     #調整大小
+img.save(savefile, format="PNG")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+infile = filename#"earthH.png"
+savefile = "tmp_resize1.png"
+
+max_size = 100
+img = Image.open(infile)
+ratio = max_size / max(img.size)    #根據長寬較長的一邊決定縮放比率
+w = int(img.width * ratio)
+h = int(img.height * ratio)
+img = img.resize((w, h), Image.LANCZOS)     #調整大小
+img.save(savefile, format="PNG")
+
+#調整圖片大小的範例
+
+mini_im = im.resize((int(im.size[0] * 0.2), int(im.size[1] * 0.2)))
+display(mini_im)
+print(mini_im.size)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+# 3 crop 無
+# 4 
 
 
 

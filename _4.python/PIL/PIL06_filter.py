@@ -22,6 +22,134 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print('測試 濾鏡 filter')
+
+from PIL import ImageFilter
+
+image = Image.open(filename)     # 建立Pillow物件
+
+print('ImageFilter.BLUR')
+filterPict = image.filter(ImageFilter.BLUR)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.CONTOUR')
+filterPict = image.filter(ImageFilter.CONTOUR)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.DETAIL')
+filterPict = image.filter(ImageFilter.DETAIL)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.EDGE_ENHANCE')
+filterPict = image.filter(ImageFilter.EDGE_ENHANCE)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.EDGE_ENHANCE_MORE')
+filterPict = image.filter(ImageFilter.EDGE_ENHANCE_MORE)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.EMBOSS')
+filterPict = image.filter(ImageFilter.EMBOSS)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.FIND_EDGES')
+filterPict = image.filter(ImageFilter.FIND_EDGES)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.SMOOTH')
+filterPict = image.filter(ImageFilter.SMOOTH)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.SMOOTH_MORE')
+filterPict = image.filter(ImageFilter.SMOOTH_MORE)
+plt.imshow(filterPict)
+plt.show()
+
+print('ImageFilter.SHARPEN')
+filterPict = image.filter(ImageFilter.SHARPEN)
+plt.imshow(filterPict)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+from PIL import Image, ImageFilter
+
+img = Image.open("oxxostudio.jpg")  # 開啟圖片
+output = img.filter(ImageFilter.BLUR)  # 套用基本模糊化
+output.save("tmp_output.jpg")
+# output.show()  # Colab 不支援直接顯示，如果使用本機環境會開啟圖片檢視器
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image, ImageFilter
+
+img = Image.open("oxxostudio.jpg")
+output = img.filter(ImageFilter.BoxBlur(5))  # 套用 BoxBlur，設定模糊半徑為 5
+output.save("tmp_output.jpg")
+
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageFilter
+
+img = Image.open("oxxostudio.jpg")
+output = img.filter(ImageFilter.GaussianBlur(5))  # 套用 GaussianBlur，設定模糊半徑為 5
+output.save("tmp_output.jpg")
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageFilter
+
+img = Image.open("oxxostudio.jpg")
+output = img.filter(
+    ImageFilter.UnsharpMask(radius=5, percent=-100, threshold=3)
+)  # 套用 UnsharpMask
+output.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+from PIL import Image, ImageFilter
+
+img = Image.open("oxxostudio.jpg")  # 開啟圖片
+output = img.filter(ImageFilter.SHARPEN)  # 套用圖片銳利化
+output.save("tmp_output.jpg")  # 存檔
+# output.show()  # Colab 不支援直接顯示，如果使用本機環境會開啟圖片檢視器
+
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageFilter
+
+img = Image.open("oxxostudio.jpg")
+for i in range(3):
+    img = img.filter(ImageFilter.SHARPEN)
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image, ImageFilter
+
+img = Image.open("oxxostudio.jpg")
+output = img.filter(
+    ImageFilter.UnsharpMask(radius=5, percent=100, threshold=10)
+)  # 套用 UnsharpMask
+output.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
 print('------------------------------------------------------------')	#60個

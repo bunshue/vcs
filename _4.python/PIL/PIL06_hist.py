@@ -23,14 +23,9 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 from PIL import Image
-from PIL import ImageColor
 from PIL import ImageDraw
 
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 """
 圖像直方圖

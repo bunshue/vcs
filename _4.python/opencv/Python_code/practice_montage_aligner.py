@@ -17,8 +17,8 @@ print('------------------------------------------------------------')	#60個
 MIN_NUM_KEYPOINT_MATCHES = 150
 
 # 讀取影像
-img1 = cv2.imread('montage_left.JPG', cv2.IMREAD_COLOR)
-img2 = cv2.imread('montage_right.JPG', cv2.IMREAD_COLOR)
+img1 = cv2.imread('data/montage_left.JPG', cv2.IMREAD_COLOR)
+img2 = cv2.imread('data/montage_right.JPG', cv2.IMREAD_COLOR)
 
 img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
 img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)

@@ -64,5 +64,5 @@ if transient1 or transient2:
 
 else:
     print('\nNo transient detected between {} and {}\n'.format(filename1, filename2))
-cv2.destroyAllWindows()
 
+cv2.destroyAllWindows()

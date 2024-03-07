@@ -114,7 +114,6 @@ import cv2
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 
 import matplotlib.image as img
-from PIL import Image, ImageEnhance
 
 plt.gcf().set_size_inches(12, 14)  # 設定圖框大小
 
@@ -170,7 +169,6 @@ foldername = "C:/_git/vcs/_1.data/______test_files1/__pic/imagedata/"
 
 import cv2
 import glob
-
 
 def show_images_labels_predictions(images, labels, start_id, num=10):
     plt.gcf().set_size_inches(12, 14)

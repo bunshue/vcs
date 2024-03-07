@@ -4,7 +4,6 @@ PIL 圖片相關的處理
 
 有 影像處理
 
-濾鏡
 
 
 
@@ -65,82 +64,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-print('測試 濾鏡 filter')
 
-from PIL import ImageFilter
-
-image = Image.open(filename)     # 建立Pillow物件
-
-print('ImageFilter.BLUR')
-filterPict = image.filter(ImageFilter.BLUR)
-plt.imshow(filterPict)
-plt.show()
-
-print('ImageFilter.CONTOUR')
-filterPict = image.filter(ImageFilter.CONTOUR)
-plt.imshow(filterPict)
-plt.show()
-
-print('ImageFilter.DETAIL')
-filterPict = image.filter(ImageFilter.DETAIL)
-plt.imshow(filterPict)
-plt.show()
-
-print('ImageFilter.EDGE_ENHANCE')
-filterPict = image.filter(ImageFilter.EDGE_ENHANCE)
-plt.imshow(filterPict)
-plt.show()
-
-print('ImageFilter.EDGE_ENHANCE_MORE')
-filterPict = image.filter(ImageFilter.EDGE_ENHANCE_MORE)
-plt.imshow(filterPict)
-plt.show()
-
-print('ImageFilter.EMBOSS')
-filterPict = image.filter(ImageFilter.EMBOSS)
-plt.imshow(filterPict)
-plt.show()
-
-print('ImageFilter.FIND_EDGES')
-filterPict = image.filter(ImageFilter.FIND_EDGES)
-plt.imshow(filterPict)
-plt.show()
-
-print('ImageFilter.SMOOTH')
-filterPict = image.filter(ImageFilter.SMOOTH)
-plt.imshow(filterPict)
-plt.show()
-
-print('ImageFilter.SMOOTH_MORE')
-filterPict = image.filter(ImageFilter.SMOOTH_MORE)
-plt.imshow(filterPict)
-plt.show()
-
-print('ImageFilter.SHARPEN')
-filterPict = image.filter(ImageFilter.SHARPEN)
-plt.imshow(filterPict)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
 
 
 

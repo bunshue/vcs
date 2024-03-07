@@ -342,27 +342,9 @@ print(text)
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
-from PIL import ImageColor
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
-
-print('------------------------------------------------------------')	#60個
-
-print(ImageColor.getrgb("#0000ff"))
-print(ImageColor.getrgb("rgb(0, 0, 255)"))
-print(ImageColor.getrgb("rgb(0%, 0%, 100%)"))
-print(ImageColor.getrgb("Blue"))
-print(ImageColor.getrgb("blue"))
-
-print('------------------------------------------------------------')	#60個
-
-print(ImageColor.getcolor("#0000ff", "RGB"))
-print(ImageColor.getcolor("rgb(0, 0, 255)", "RGB"))
-print(ImageColor.getcolor("Blue", "RGB"))
-print(ImageColor.getcolor("#0000ff", "RGBA"))
-print(ImageColor.getcolor("rgb(0, 0, 255)", "RGBA"))
-print(ImageColor.getcolor("Blue", "RGBA"))
 
 print('------------------------------------------------------------')	#60個
 
@@ -381,29 +363,12 @@ print("高度 = ", height)
 plt.imshow(image)
 plt.show()
 
-
-image = Image.open(filename)
-print('圖檔格式: ', image.format)
-print('圖檔的色彩模式: ', image.mode)
-print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ',image.size)
-print('圖片的寬度，單位像素(pixels): ',image.width)
-print('圖片的高度，單位像素(pixels): ',image.height)
-
 image = Image.open(filename)
 print('圖檔格式: ', image.format)
 print('圖檔的色彩模式: ', image.mode)
 print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
 print('圖片的寬度，單位像素(pixels): ', image.width)
 print('圖片的高度，單位像素(pixels): ', image.height)
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)
-print(image.format)
-print(image.mode)
-print(image.width)
-print(image.height)
-print(image.size)
 
 print('------------------------------------------------------------')	#60個
 
@@ -434,117 +399,6 @@ with Image.open(filename) as image:
     image2.save("tmp_pic29.jpg")
 
 print('------------------------------------------------------------')	#60個
-
-#rotate0
-with Image.open(filename) as image:
-  image2 = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
-  image2.save("tmp_pic30.jpg")
-
-print('------------------------------------------------------------')	#60個
-
-# rotate1
-with Image.open(filename) as image:
-  image2 = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
-  image2.save( "tmp_pic31_rotate.jpg")
-
-print('------------------------------------------------------------')	#60個
-
-# resize
-with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',image.size)
-    w=100
-    r = w/image.size[0]
-    h = int(image.size[1]*r)
-    image2 = image.resize((w, h))
-    print('圖片經縮放後的尺寸大小:',image2.size)
-    image2.save("tmp_pic31_resize.jpg" )
-
-print('------------------------------------------------------------')	#60個
-
-#sharpness
-from PIL import Image,ImageEnhance
-with Image.open(filename) as image:
-    image2 = ImageEnhance.Contrast(image).enhance(0.3)
-    image2.save("tmp_pic32_contrast.jpg") 
-
-print('------------------------------------------------------------')	#60個
-
-# transpose
-from PIL import Image,ImageEnhance
-with Image.open(filename) as image:
-    image2 = image.transpose(Image.FLIP_LEFT_RIGHT)
-    image2.save( "tmp_pic33b.jpg")
-    image2 = image.transpose(Image.FLIP_TOP_BOTTOM)
-    image2.save( "tmp_pic33c.jpg")
-    image2 = image.transpose(Image.ROTATE_90)
-    image2.save( "tmp_pic33d.jpg")
-    image2 = image.transpose(Image.ROTATE_180)
-    image2.save( "tmp_pic33e.jpg")
-    image2 = image.transpose(Image.ROTATE_270)
-    image2.save( "tmp_pic33f.jpg")
-    image2 = image.transpose(Image.TRANSPOSE)
-    image2.save( "tmp_pic33g.jpg")
-    image2 = image.transpose(Image.TRANSVERSE)
-    image2.save( "tmp_pic33h.jpg")
-
-print('------------------------------------------------------------')	#60個
-
-with Image.open(filename) as image:
-    print(image.size)
-    x = 50
-    y = 50
-    x1 = 250
-    y1 = 350
-    image_new = image.crop((x, y, x1, y1))
-    print(image_new.size)
-    image_new.save("tmp_pic_crop.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image,ImageEnhance
-
-with Image.open(filename) as image:
-    image_new = ImageEnhance.Brightness(image).enhance(2.5)
-    image_new.save("tmp_pic_brightness.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-with Image.open(filename) as image:
-    print(image.size)
-    w=100
-    r = w/image.size[0]
-    h = int(image.size[1]*r) #依縮放比例計算高度
-    image_new = image.resize((w, h))
-    print(image_new.size)
-    image_new.save("tmp_pic_view_resize.jpg" )
-
-print("------------------------------------------------------------")  # 60個
-
-with Image.open(filename) as image:
-    image_new = image.rotate(180)
-    image_new.save("tmp_pic_rotate180.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-with Image.open(filename) as image:
-    image_new = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
-    image_new.save("tmp_pic_rotate111.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-with Image.open(filename) as image:
-    image_new = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
-    image_new.save("tmp_pic_rotate000.jpg")
-
-print("------------------------------------------------------------")  # 60個
-
-with Image.open(filename) as image:
-    image_new = image.transpose(Image.ROTATE_90)
-    image_new.save("tmp_pic_transpose90.jpg")
-    image_new = image.transpose(Image.FLIP_LEFT_RIGHT)
-    image_new.save("tmp_pic_transposeLR.jpg")
-
-print("------------------------------------------------------------")  # 60個
 
 image = Image.open(filename)
 image.save("tmp_pic_quality95.jpg", quality=95 )
@@ -762,14 +616,6 @@ with Image.open(filename) as image:
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image, ImageEnhance
-
-with Image.open(filename) as image:
-   image_new = ImageEnhance.Brightness(image).enhance(2.5)
-   image_new.save('tmp_pic_brightness.jpg')
-
-print('------------------------------------------------------------')	#60個
-
 with Image.open(filename) as image:
     print(image.size)
     w = 200
@@ -811,14 +657,6 @@ image.close()
 
 print('------------------------------------------------------------')	#60個
 
-with Image.open(filename) as image:
-    image_new = image.transpose(Image.ROTATE_90)
-    image_new.save('tmp_pic_rotate_90.jpg')
-    image_new = image.transpose(Image.FLIP_LEFT_RIGHT)
-    image_new.save('tmp_pic_flip.jpg')
-
-print('------------------------------------------------------------')	#60個
-
 print('保持圖片原始大小之旋轉')
 with Image.open(filename) as image:
   image_new = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
@@ -853,34 +691,6 @@ with Image.open(filename) as image:
     image_new = image.resize((w, h))
     print('圖片經縮放後的尺寸大小:',image_new.size)
     image_new.save("tmp_pic_resize.jpg" )
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image,ImageEnhance
-
-with Image.open(filename) as image:
-    image_new = ImageEnhance.Contrast(image).enhance(0.3)
-    image_new.save("tmp_pic_contrast.jpg") 
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image,ImageEnhance
-
-with Image.open(filename) as image:
-    image_new = image.transpose(Image.FLIP_LEFT_RIGHT)
-    image_new.save("tmp_pic_transpose1.jpg")
-    image_new = image.transpose(Image.FLIP_TOP_BOTTOM)
-    image_new.save("tmp_pic_transpose2.jpg")
-    image_new = image.transpose(Image.ROTATE_90)
-    image_new.save("tmp_pic_transpose3.jpg")
-    image_new = image.transpose(Image.ROTATE_180)
-    image_new.save("tmp_pic_transpose4.jpg")
-    image_new = image.transpose(Image.ROTATE_270)
-    image_new.save("tmp_pic_transpose5.jpg")
-    image_new = image.transpose(Image.TRANSPOSE)
-    image_new.save("tmp_pic_transpose6.jpg")
-    image_new = image.transpose(Image.TRANSVERSE)
-    image_new.save("tmp_pic_transpose7.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1126,15 +936,9 @@ image1.paste(guido_head.resize((int(width / 1.5), int(height / 1.5))), (172, 40)
 
 image1.show()
 
-"""
-print("旋轉和翻轉")
 
-image = Image.open(filename)
-image.rotate(180).show()
-image.transpose(Image.FLIP_LEFT_RIGHT).show()
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-"""
 
 print("操作像素")
 
@@ -1144,7 +948,6 @@ for x in range(100, 200):
         image.putpixel((x, y), (128, 128, 128))
 image.show()
 
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

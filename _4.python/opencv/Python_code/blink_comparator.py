@@ -79,7 +79,8 @@ blink(img1, img1_registered, 'Check Registration', num_loops=5)
 out_filename = 'tmp_file1_registered.png'
 cv2.imwrite(out_filename, img1_registered) # 會覆寫既有檔案！
 
-cv2.destroyAllWindows() 
-blink(img1_registered, img2, 'Blink Comparator', num_loops=15)
-cv2.destroyAllWindows() 
+cv2.destroyAllWindows()
 
+blink(img1_registered, img2, 'Blink Comparator', num_loops=15)
+
+cv2.destroyAllWindows() 

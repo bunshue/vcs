@@ -38,7 +38,6 @@ w,h=img.size #320 240
 
 img1=img.resize((w*2,h))
 
-
 img2=img.resize((w,h*2))
 
 print("------------------------------------------------------------")  # 60個
@@ -81,19 +80,6 @@ img1=imgcopy.crop((190,184,415,350)).resize((160,140))
 imgcopy.paste(img1,(40,30)) #貼上
 img2=img1.transpose(Image.FLIP_LEFT_RIGHT)#左右翻轉
 imgcopy.paste(img2,(220,40))#貼上
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import ImageColor
-print(ImageColor.getrgb("#0000ff"))         #(0, 0, 255)
-print(ImageColor.getrgb("rgb(0,0,255)"))    #(0, 0, 255)
-print(ImageColor.getrgb("rgb(0%,0%,100%)")) #(0, 0, 255)
-print(ImageColor.getrgb("Blue"))            #(0, 0, 255)
-
-print(ImageColor.getcolor("#0000ff","RGB"))      #(0, 0, 255)
-print(ImageColor.getcolor("rgb(0,0,255)","RGB")) #(0, 0, 255)
-print(ImageColor.getcolor("rgb(0,0,255)","RGBA"))#(0, 0, 255, 255)
-print(ImageColor.getcolor("Blue","RGBA"))        #(0, 0, 255, 255)
 
 print("------------------------------------------------------------")  # 60個
 

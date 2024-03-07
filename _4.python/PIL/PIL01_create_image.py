@@ -34,20 +34,20 @@ print('PIL 無圖處理')
 
 print('------------------------------------------------------------')	#60個
 
-print(ImageColor.getrgb("#0000ff"))
-print(ImageColor.getrgb("rgb(0, 0, 255)"))
-print(ImageColor.getrgb("rgb(0%, 0%, 100%)"))
-print(ImageColor.getrgb("Blue"))
+print(ImageColor.getrgb("#0000ff"))         #(0, 0, 255)
+print(ImageColor.getrgb("rgb(0,0,255)"))    #(0, 0, 255)
+print(ImageColor.getrgb("rgb(0%,0%,100%)")) #(0, 0, 255)
+print(ImageColor.getrgb("Blue"))            #(0, 0, 255)
 print(ImageColor.getrgb("red"))
 
 print('------------------------------------------------------------')	#60個
 
-print(ImageColor.getcolor("#0000ff", "RGB"))
-print(ImageColor.getcolor("rgb(0, 0, 255)", "RGB"))
+print(ImageColor.getcolor("rgb(0, 0, 255)", "RGB")) #(0, 0, 255)
+print(ImageColor.getcolor("rgb(0, 0, 255)", "RGBA"))#(0, 0, 255, 255)
 print(ImageColor.getcolor("Blue", "RGB"))
+print(ImageColor.getcolor("Blue", "RGBA"))        #(0, 0, 255, 255)
+print(ImageColor.getcolor("#0000ff", "RGB"))      #(0, 0, 255)
 print(ImageColor.getcolor("#0000ff", "RGBA"))
-print(ImageColor.getcolor("rgb(0, 0, 255)", "RGBA"))
-print(ImageColor.getcolor("Blue", "RGBA"))
 
 print('------------------------------------------------------------')	#60個
 
