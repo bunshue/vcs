@@ -117,7 +117,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 15  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="hist 集合 1",
@@ -239,6 +239,9 @@ for i in range(N):
     ranNum = random.randint(1, sides)  # 產生1-6隨機數
     dice.append(ranNum)
 
+# 建立 N 個 1-6(含) 的整數隨機數 same
+#dice = np.random.randint(1, sides + 1, size=N)  # 建立隨機數
+
 h = plt.hist(dice, bins=6, rwidth=0.5)  # 繪製hist圖
 
 print("bins的y軸 ", h[0])
@@ -299,15 +302,6 @@ plt.title("產生共3組，每組 N 個隨機數")
 # 第五張圖
 plt.subplot(235)
 
-sides = 6
-# 建立 N 個 1-6(含) 的整數隨機數
-dice = np.random.randint(1, sides + 1, size=N)  # 建立隨機數
-
-h = plt.hist(dice, sides, rwidth=0.5)  # 繪製hist圖
-print("bins的y軸 ", h[0])
-print("bins的x軸 ", h[1])
-plt.ylabel("Frequency")
-plt.title("Test N times")
 
 # 第六張圖
 plt.subplot(236)
@@ -335,6 +329,10 @@ plt.figure(
 
 # 第一張圖
 plt.subplot(231)
+
+
+# 第二張圖
+plt.subplot(232)
 
 grade = [
     90,
@@ -365,7 +363,9 @@ grade = [
     65,
 ]
 
-n, b, p = plt.hist(grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], rwidth=0.5)
+n, b, p = plt.hist(
+    grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], edgecolor="r", rwidth=0.5
+)
 
 for i in range(len(n)):
     plt.text(b[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=12)
@@ -374,41 +374,7 @@ plt.title("全班成績直方圖分布圖")
 plt.xlabel("考試分數")
 plt.ylabel("人數統計")
 
-# 第二張圖
-plt.subplot(232)
 
-score = [
-    800,
-    750,
-    450,
-    680,
-    802,
-    630,
-    710,
-    450,
-    250,
-    320,
-    610,
-    670,
-    815,
-    870,
-    900,
-    650,
-    450,
-    730,
-    840,
-    675,
-    795,
-    585,
-    870,
-    960,
-    190,
-]
-
-plt.hist(score, bins=[10, 255, 405, 605, 785, 905, 990], rwidth=0.5)
-plt.title("多益成績分布直方圖")
-plt.xlabel("成績")
-plt.ylabel("人數")
 
 # 第三張圖
 plt.subplot(233)
@@ -452,124 +418,14 @@ plt.ylabel("人數")
 # 第四張圖
 plt.subplot(234)
 
-grade = [
-    90,
-    72,
-    45,
-    18,
-    13,
-    81,
-    65,
-    68,
-    73,
-    84,
-    75,
-    79,
-    58,
-    78,
-    96,
-    100,
-    98,
-    64,
-    43,
-    2,
-    63,
-    71,
-    27,
-    35,
-    45,
-    65,
-]
-
-plt.hist(grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], rwidth=0.5)
-plt.title("全班成績直方圖分布圖")
-plt.xlabel("考試分數")
-plt.ylabel("人數統計")
-
 
 # 第五張圖
 plt.subplot(235)
 
-grade = [
-    90,
-    72,
-    45,
-    18,
-    13,
-    81,
-    65,
-    68,
-    73,
-    84,
-    75,
-    79,
-    58,
-    78,
-    96,
-    100,
-    98,
-    64,
-    43,
-    2,
-    63,
-    71,
-    27,
-    35,
-    45,
-    65,
-]
-
-plt.hist(
-    grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], edgecolor="b", rwidth=0.5
-)
-plt.title("全班成績直方圖分布圖")
-plt.xlabel("考試分數")
-plt.ylabel("人數統計")
 
 
 # 第六張圖
 plt.subplot(236)
-
-grade = [
-    90,
-    72,
-    45,
-    18,
-    13,
-    81,
-    65,
-    68,
-    73,
-    84,
-    75,
-    79,
-    58,
-    78,
-    96,
-    100,
-    98,
-    64,
-    43,
-    2,
-    63,
-    71,
-    27,
-    35,
-    45,
-    65,
-]
-
-n, b, p = plt.hist(
-    grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], edgecolor="r", rwidth=0.5
-)
-
-for i in range(len(n)):
-    plt.text(b[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=12)
-
-plt.title("全班成績直方圖分布圖")
-plt.xlabel("考試分數")
-plt.ylabel("人數統計")
-
 
 plt.show()
 
@@ -877,7 +733,7 @@ plt.hist(x, num_bins, rwidth=0.5)
 
 
 plt.show()
-'''
+
 
 print("------------------------------------------------------------")  # 60個
 
