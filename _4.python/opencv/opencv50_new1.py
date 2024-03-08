@@ -66,7 +66,6 @@ plt.subplot(236)
 plt.title('兩圖做alpha疊加')
 plt.imshow(cv2.cvtColor(result3, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -122,7 +121,6 @@ plt.subplot(236)
 plt.title('顯示原圖與mask作用後的圖')
 plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
 
-#plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -178,7 +176,6 @@ plt.subplot(236)
 plt.title('顯示原圖與mask作用後的圖')
 plt.imshow(cv2.cvtColor(c, cv2.COLOR_BGR2RGB))
 
-#plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -209,7 +206,6 @@ plt.subplot(224)
 plt.title('decryption')
 plt.imshow(cv2.cvtColor(decryption, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -265,7 +261,6 @@ plt.subplot(224)
 plt.title('wm')
 plt.imshow(cv2.cvtColor(wm, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -324,7 +319,6 @@ plt.subplot(236)
 plt.title('encryptFace')
 plt.imshow(cv2.cvtColor(encryptFace, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 plt.figure('', figsize = (16, 12))
@@ -353,7 +347,6 @@ plt.subplot(236)
 plt.title('extractLena')
 plt.imshow(cv2.cvtColor(extractLena, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -429,7 +422,6 @@ plt.imshow(orgb)
 plt.subplot(122)
 plt.imshow(ogc)
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -459,7 +451,6 @@ plt.imshow(m2rgb)
 plt.subplot(122)
 plt.imshow(ogc)
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -484,11 +475,7 @@ plt.imshow(orgb)
 plt.subplot(122)
 plt.imshow(ogc)
 
-plt.tight_layout()
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -516,7 +503,6 @@ plt.subplot(122)
 plt.imshow(img,cmap = 'gray')
 plt.title('Detected Point')
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -544,7 +530,6 @@ plt.subplot(122)
 plt.imshow(img,cmap = 'gray')
 plt.title('Detected Point')
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -559,7 +544,6 @@ for pt in zip(*loc[::-1]):
     cv2.rectangle(img, pt, (pt[0] + w, pt[1] + h), 255, 1)
 plt.imshow(img,cmap = 'gray')
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -588,7 +572,6 @@ plt.subplot(122)
 plt.title('move')
 plt.imshow(cv2.cvtColor(move, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -617,7 +600,6 @@ plt.subplot(122)
 plt.title('result')
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -646,75 +628,6 @@ plt.subplot(122)
 plt.title('result')
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('用np建立一個隨機影像陣列')
-image = np.random.randint(0, 256, size = [4, 5], dtype = np.uint8)
-
-H, W = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-
-mapx = np.zeros(image.shape,np.float32)
-mapy = np.zeros(image.shape,np.float32)
-for i in range(H):
-    for j in range(W):
-        mapx.itemset((i, j), j)
-        mapy.itemset((i, j), i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-print("image = \n", image)
-print("mapx = \n",mapx)
-print("mapy = \n",mapy)
-print("rst = \n",rst)
-
-plt.figure('xxxxxx3', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('result')
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('用np建立一個隨機影像陣列')
-image = np.random.randint(0, 256, size = [4, 5], dtype = np.uint8)
-
-H, W = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-
-mapx = np.zeros(image.shape, np.float32)
-mapy = np.zeros(image.shape, np.float32)
-for i in range(H):
-    for j in range(W):
-        mapx.itemset((i, j), j)
-        mapy.itemset((i, j), i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-print("image = \n", image)
-print("mapx = \n", mapx)
-print("mapy = \n", mapy)
-print("rst = \n", rst)
-
-plt.figure('xxxxxx4', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('result')
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -746,30 +659,7 @@ plt.subplot(122)
 plt.title('result')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('用np建立一個隨機影像陣列')
-image = np.random.randint(0, 256, size = [4, 5], dtype = np.uint8)
-
-H, W = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-
-mapx = np.zeros(image.shape, np.float32)
-mapy = np.zeros(image.shape, np.float32)
-for i in range(H):
-    for j in range(W):
-        mapx.itemset((i, j), j)
-        mapy.itemset((i, j), H - 1 - i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-print("image = \n", image)
-print("mapx = \n", mapx)
-print("mapy = \n", mapy)
-print("rst = \n", rst)
 
 print('------------------------------------------------------------')	#60個
 
@@ -800,41 +690,6 @@ plt.subplot(122)
 plt.title('result')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('用np建立一個隨機影像陣列')
-image = np.random.randint(0, 256, size = [4, 5], dtype = np.uint8)
-
-H, W = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-
-mapx = np.zeros(image.shape, np.float32)
-mapy = np.zeros(image.shape, np.float32)
-for i in range(H):
-    for j in range(W):
-            mapx.itemset((i, j), W - 1 - j)
-            mapy.itemset((i, j), i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-print("image = \n", image)
-print("mapx = \n", mapx)
-print("mapy = \n", mapy)
-print("rst = \n", rst)
-
-plt.figure('xxxxxx7', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('result')
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -866,41 +721,6 @@ plt.subplot(122)
 plt.title('result')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('用np建立一個隨機影像陣列')
-image = np.random.randint(0, 256, size = [4, 5], dtype = np.uint8)
-
-H, W = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-
-mapx = np.zeros(image.shape, np.float32)
-mapy = np.zeros(image.shape, np.float32)
-for i in range(H):
-    for j in range(W):
-            mapx.itemset((i, j), W - 1 - j)
-            mapy.itemset((i, j), H - 1 - i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-print("image = \n", image)
-print("mapx = \n", mapx)
-print("mapy = \n", mapy)
-print("rst = \n", rst)
-
-plt.figure('xxxxxx9', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('result')
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -932,41 +752,6 @@ plt.subplot(122)
 plt.title('result')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('用np建立一個隨機影像陣列')
-image = np.random.randint(0, 256, size = [4, 6], dtype = np.uint8)
-
-H, W = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-
-mapx = np.zeros(image.shape, np.float32)
-mapy = np.zeros(image.shape, np.float32)
-for i in range(H):
-    for j in range(W):
-            mapx.itemset((i, j), i)
-            mapy.itemset((i, j), j)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-print("image = \n", image)
-print("mapx = \n", mapx)
-print("mapy = \n", mapy)
-print("rst = \n", rst)
-
-plt.figure('xxxxxxb', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('result')
-plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -998,7 +783,6 @@ plt.subplot(122)
 plt.title('上下顛倒')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1034,12 +818,7 @@ plt.subplot(122)
 plt.title('縮小圖')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1058,7 +837,6 @@ plt.subplot(122)
 plt.title('blur 效果 1')
 plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1083,7 +861,6 @@ plt.subplot(133)
 plt.title('blur 效果 2')
 plt.imshow(cv2.cvtColor(image_blur_30, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1104,7 +881,6 @@ plt.subplot(122)
 plt.title('boxFilter 效果 1')
 plt.imshow(cv2.cvtColor(image_boxFilter, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1125,7 +901,6 @@ plt.subplot(122)
 plt.title('boxFilter 效果 2')
 plt.imshow(cv2.cvtColor(image_boxFilter, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1146,7 +921,6 @@ plt.subplot(122)
 plt.title('boxFilter 效果 3')
 plt.imshow(cv2.cvtColor(image_boxFilter, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1167,7 +941,6 @@ plt.subplot(122)
 plt.title('medianBlur 效果 1')
 plt.imshow(cv2.cvtColor(image_medianBlur, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1188,7 +961,6 @@ plt.subplot(122)
 plt.title('bilateralFilter 效果 1')
 plt.imshow(cv2.cvtColor(image_bilateralFilter, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1209,7 +981,6 @@ plt.subplot(122)
 plt.title('bilateralFilter 效果 2')
 plt.imshow(cv2.cvtColor(image_bilateralFilter, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1233,7 +1004,6 @@ plt.subplot(122)
 plt.title('filter2D 效果')
 plt.imshow(cv2.cvtColor(image_filter2D, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1268,7 +1038,6 @@ plt.title('Prewitt_vertical')
 #直放的書本的邊緣有被強調出來
 plt.imshow(cv2.cvtColor(absY, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1312,9 +1081,7 @@ plt.subplot(122)
 plt.title('saltpepper 效果')
 plt.imshow(cv2.cvtColor(saltImage, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1339,7 +1106,6 @@ plt.subplot(122)
 plt.title('二值化圖, 閥值 127, 小於變全黑, 大於變全白')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1368,7 +1134,6 @@ plt.subplot(224)
 plt.title('athdGAUS')
 plt.imshow(cv2.cvtColor(athdGAUS, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1392,12 +1157,7 @@ plt.subplot(133)
 plt.title('otsu')
 plt.imshow(cv2.cvtColor(otsu, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1428,7 +1188,6 @@ plt.subplot(133)
 plt.title('BGR3通道')
 plt.imshow(cv2.cvtColor(rgb, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1449,7 +1208,6 @@ plt.subplot(122)
 plt.title('原圖 BGR 轉 RGB NG')
 plt.imshow(cv2.cvtColor(rgb, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1509,7 +1267,6 @@ plt.subplot(236)
 plt.title('B')
 plt.imshow(cv2.cvtColor(blue, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1557,7 +1314,6 @@ plt.subplot(224)
 plt.title('art')
 plt.imshow(cv2.cvtColor(art, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1589,16 +1345,7 @@ plt.subplot(224)
 plt.title('bgra0')
 plt.imshow(cv2.cvtColor(bgra0, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
-
-#偽寫入
-#cv2.imwrite("tmp_bgra.png", bgra)
-#cv2.imwrite("tmp_bgra125.png", bgra125)
-#cv2.imwrite("tmp_bgra0.png", bgra0)
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -1680,7 +1427,6 @@ plt.subplot(224)
 plt.title('修改後的圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1739,58 +1485,7 @@ plt.subplot(236)
 plt.title('顯示修改後的圖')
 plt.imshow(cv2.cvtColor(peony, cv2.COLOR_BGR2RGB))
 
-plt.tight_layout()
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#opencv
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-#plt.imshow(image)#直接顯示 影像錯誤 因為opencv的imread讀出來是BGR排列
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))#先轉換成RGB再顯示
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#用 OpenCV 讀取並顯示圖片
-
-#等同於 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)) #BGR轉RGB再交由matplotlib顯示之
-def aidemy_imshow(name, img):
-    b, g, r = cv2.split(img)
-    img = cv2.merge([r, g, b])
-    plt.title(name)
-    plt.imshow(img)
-    plt.show()
-
-cv2.imshow = aidemy_imshow
-
-img = cv2.imread(r'images/sample.jpg')
-
-print(type(img))
-
-print(img.shape)
-
-cv2.imshow('Sample pic', img)
-
-print('------------------------------------------------------------')	#60個
-
-print('OpenCV建立檔案 256X256之紅圖')
-img_size = 256
-img = np.array([[(0, 0, 255) for x in range(img_size)] for x in range(img_size)])
-cv2.imshow('Sample pic 2', img)
-#cv2.imwrite(r'sample_222.jpg', img)
-
-print('------------------------------------------------------------')	#60個
-
-print('OpenCV建立檔案')
-img_size = 256
-img = np.array( [[(x, int((x + y) / 2), y) for x in range(img_size)] for y in range(img_size)])
-cv2.imshow('Sample pic 3', img)
-#cv2.imwrite(r'sample_333.jpg', img)
 
 print('------------------------------------------------------------')	#60個
 
@@ -2425,4 +2120,12 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+#偽寫入
+#cv2.imwrite("tmp_bgra.png", bgra)
+#cv2.imwrite("tmp_bgra125.png", bgra125)
+#cv2.imwrite("tmp_bgra0.png", bgra0)
+
+print('------------------------------------------------------------')	#60個
+
 

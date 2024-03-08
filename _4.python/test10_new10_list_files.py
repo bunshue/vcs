@@ -28,7 +28,7 @@ foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test/_good1/_good4/_good5"
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("ls 測試 os.walk ST------------------------------------------------------------")  # 60個
 
 print("撈出資料夾下所有檔案, 多層1")
@@ -607,14 +607,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-'''
+print("新進------------------------------------------------------------")  # 60個
 
 
 
@@ -728,11 +721,14 @@ print('當前目錄下共有 :', len(cc), '個項目(資料夾+檔案)')
 
 print("------------------------------------------------------------")  # 60個
 
+print('轉出多層')
 #foldername = 'C:/_git/vcs/_1.data/______test_files5'
 foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
 total_folders = 0
 total_files = 0
+total_size = 0
+all_files = list()
 for item in os.walk(foldername):
     total_folders += 1
     #print(item)
@@ -740,10 +736,24 @@ for item in os.walk(foldername):
     print('子資料夾:', item[1])
     print('檔案:', item[2])
     total_files += len(item[2])
+    for _ in item[2]:
+        file = item[0]+'/'+ _
+        filesize = os.stat(file).st_size
+        #print(filesize)
+        total_size += filesize
+        all_files.append(file)
     print("------------------------------------------------------------")  # 60個
 
-print('共有 :', total_folders - 1, '個資料夾')
-print('共有 :', total_files, '個檔案')
+if total_folders>0:
+    total_folders -= 1
+
+print('位置 :', foldername)
+print('容量 :', total_size, '位元組')
+print('包含 :', total_files, '個檔案,', total_folders, '個資料夾')
+
+print()
+for _ in all_files:
+    print(_)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -864,6 +874,16 @@ print(images)
 
 print("------------------------------------------------------------")  # 60個
 
+curdir = os.getcwd()
+print("當前目錄", curdir)
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 """
@@ -878,9 +898,4 @@ else:
 """
 
 
-
-
-
-curdir = os.getcwd()
-print("當前目錄", curdir)
 

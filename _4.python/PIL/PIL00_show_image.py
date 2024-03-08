@@ -1,11 +1,11 @@
-'''
+"""
 PIL 基本使用
 
 顯示圖片
 
 顯示圖片訊息
 
-'''
+"""
 
 import sys
 import matplotlib.pyplot as plt
