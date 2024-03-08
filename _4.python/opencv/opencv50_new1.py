@@ -19,7 +19,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 filename1 = 'C:/_git/vcs/_4.python/_data/picture_mix1.bmp'
 filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
 
@@ -182,30 +182,35 @@ print('------------------------------------------------------------')	#60個
 
 #異或加密解密
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-lena = cv2.imread(filename, 0)
+#filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-r, c = lena.shape
-key = np.random.randint(0,256,size=[r,c],dtype=np.uint8)
+lena = cv2.imread(filename, 0)  # 以下程式只能處理灰階 因為xor操作維度錯誤
+
+cc = lena.shape
+print(cc)
+
+key = np.random.randint(0,256,size=[cc[0],cc[1]],dtype=np.uint8)
 encryption = cv2.bitwise_xor(lena,key)
 decryption = cv2.bitwise_xor(encryption,key)
 
-plt.figure('g', figsize = (16, 12))
-plt.subplot(221)
+plt.figure('new01', figsize = (16, 12))
+plt.subplot(141)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
 
-plt.subplot(222)
+plt.subplot(142)
 plt.title('key')
 plt.imshow(cv2.cvtColor(key, cv2.COLOR_BGR2RGB))
 
-plt.subplot(223)
+plt.subplot(143)
 plt.title('encryption')
 plt.imshow(cv2.cvtColor(encryption, cv2.COLOR_BGR2RGB))
 
-plt.subplot(224)
+plt.subplot(144)
 plt.title('decryption')
 plt.imshow(cv2.cvtColor(decryption, cv2.COLOR_BGR2RGB))
 
+plt.suptitle('XOR 加密解密')
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -243,7 +248,7 @@ print(wm)
 w=wm[:,:]>0
 wm[w]=255
 
-plt.figure('h', figsize = (16, 12))
+plt.figure('new02', figsize = (16, 12))
 plt.subplot(221)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
@@ -294,7 +299,7 @@ noFace2=cv2.bitwise_and(maskFace,(1-mask)*255)
 #得到解碼的lena圖像
 extractLena=noFace2+extractFace
 
-plt.figure('', figsize = (16, 12))
+plt.figure('new03', figsize = (16, 12))
 plt.subplot(231)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
@@ -321,7 +326,7 @@ plt.imshow(cv2.cvtColor(encryptFace, cv2.COLOR_BGR2RGB))
 
 plt.show()
 
-plt.figure('', figsize = (16, 12))
+plt.figure('new04', figsize = (16, 12))
 
 plt.subplot(231)
 plt.title('noFace1')
@@ -349,27 +354,38 @@ plt.imshow(cv2.cvtColor(extractLena, cv2.COLOR_BGR2RGB))
 
 plt.show()
 
+'''
 print('------------------------------------------------------------')	#60個
 
 #圖層提取
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 lena = cv2.imread(filename, 0)
+
 print('顯示原圖')
-cv2.imshow("lena",lena)
+
+plt.figure('new05', figsize = (16, 12))
+plt.subplot(331)
+plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
+plt.title('原圖')
 
 r, c = lena.shape
 x = np.zeros((r, c, 8), dtype = np.uint8)
+
 for i in range(8):
     x[:,:,i]=2**i
+
 r=np.zeros((r,c,8),dtype=np.uint8)
+
 for i in range(8):
+    print(i)
     r[:,:,i]=cv2.bitwise_and(lena,x[:,:,i])
     mask=r[:,:,i]>0
     r[mask]=255
-    cv2.imshow(str(i),r[:,:,i])
+    plt.subplot(3, 3, i + 2)
+    plt.imshow(cv2.cvtColor(r[:,:,i], cv2.COLOR_BGR2RGB))
+    plt.title(str(i))
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -415,7 +431,7 @@ mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
 ogc = o*mask2[:,:,np.newaxis]
 ogc = cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
 
-plt.figure('', figsize = (16, 8))
+plt.figure('new06', figsize = (16, 8))
 plt.subplot(121)
 plt.imshow(orgb)
 
@@ -444,7 +460,7 @@ mask = np.where((mask==2)|(mask==0),0,1).astype('uint8')
 ogc = o*mask[:,:,np.newaxis]
 ogc = cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
 
-plt.figure('', figsize = (16, 8))
+plt.figure('new07', figsize = (16, 8))
 plt.subplot(121)
 plt.imshow(m2rgb)
 
@@ -468,7 +484,7 @@ mask2 = np.where((mask2==2)|(mask2==0),0,1).astype('uint8')
 ogc = o*mask2[:,:,np.newaxis]
 ogc = cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
 
-plt.figure('', figsize = (16, 8))
+plt.figure('new08', figsize = (16, 8))
 plt.subplot(121)
 plt.imshow(orgb)
 
@@ -563,7 +579,7 @@ y = 100
 M = np.float32([[1, 0, x], [0, 1, y]])
 move = cv2.warpAffine(image, M, (W, H))
 
-plt.figure('影像處理 move', figsize = (16, 12))
+plt.figure('new09 影像處理 move', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -591,7 +607,7 @@ p2 = np.float32([[0, H * 0.33], [W * 0.85, H * 0.25], [W * 0.15, H * 0.7]])
 M = cv2.getAffineTransform(p1, p2)
 dst = cv2.warpAffine(image, M, (W, H))
 
-plt.figure('xxxxxx1', figsize = (16, 12))
+plt.figure('new10', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -619,7 +635,7 @@ pts2 = np.float32([[50, 50], [H - 50, 50], [50, W - 50], [H - 50, W - 50]])
 M = cv2.getPerspectiveTransform(pts1, pts2)
 dst = cv2.warpPerspective(image, M, (W, H))
 
-plt.figure('xxxxxx2', figsize = (16, 12))
+plt.figure('new11', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -650,7 +666,7 @@ for i in range(H):
         mapy.itemset((i, j), i)
 rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
 
-plt.figure('xxxxxx5', figsize = (16, 12))
+plt.figure('new12', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -681,7 +697,7 @@ for i in range(H):
         mapy.itemset((i, j), H - 1 - i)
 rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
 
-plt.figure('xxxxxx6', figsize = (16, 12))
+plt.figure('new13', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -712,7 +728,7 @@ for i in range(H):
             mapy.itemset((i, j), i)
 rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
 
-plt.figure('xxxxxx8', figsize = (16, 12))
+plt.figure('new14', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -743,7 +759,7 @@ for i in range(H):
             mapy.itemset((i, j), H - 1 - i)
 rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
 
-plt.figure('xxxxxxa', figsize = (16, 12))
+plt.figure('new15', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -774,7 +790,7 @@ for i in range(H):
             mapy.itemset((i, j), H - 1 - i)
 rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
 
-plt.figure('xxxxxxc', figsize = (16, 12))
+plt.figure('new16', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -809,7 +825,7 @@ for i in range(H):
                 mapy.itemset((i, j), 0)
 rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
 
-plt.figure('xxxxxxd', figsize = (16, 12))
+plt.figure('new17', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -828,7 +844,7 @@ image = cv2.imread(filename)
 print('blur 效果 1')
 r = cv2.blur(image, (5, 5))
 
-plt.figure('blur 效果', figsize = (16, 12))
+plt.figure('new18 blur 效果', figsize = (16, 12))
 plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -848,7 +864,7 @@ print('blur 效果 2')
 image_blur_05 = cv2.blur(image, (5, 5))      
 image_blur_30 = cv2.blur(image, (30, 30))      
 
-plt.figure('blur 效果', figsize = (16, 12))
+plt.figure('new19 blur 效果', figsize = (16, 12))
 plt.subplot(131)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -871,7 +887,7 @@ image = cv2.imread(filename)
 print('boxFilter 效果 1')
 image_boxFilter = cv2.boxFilter(image, -1, (5, 5)) 
 
-plt.figure('boxFilter 效果 1', figsize = (16, 12))
+plt.figure('new20 boxFilter 效果 1', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
@@ -891,7 +907,7 @@ image = cv2.imread(filename)
 print('boxFilter 效果 2')
 image_boxFilter = cv2.boxFilter(image, -1, (5, 5), normalize = 0)
 
-plt.figure('boxFilter 效果 2', figsize = (16, 12))
+plt.figure('new21 boxFilter 效果 2', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
@@ -911,7 +927,7 @@ image = cv2.imread(filename)
 print('boxFilter 效果 3')
 image_boxFilter = cv2.boxFilter(image, -1, (2, 2), normalize = 0)
 
-plt.figure('boxFilter 效果 3', figsize = (16, 12))
+plt.figure('new22 boxFilter 效果 3', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
@@ -931,7 +947,7 @@ image = cv2.imread(filename)
 print('medianBlur 效果 1')
 image_medianBlur = cv2.medianBlur(image, 3)
 
-plt.figure('medianBlur 效果 1', figsize = (16, 12))
+plt.figure('new23 medianBlur 效果 1', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
@@ -951,7 +967,7 @@ image = cv2.imread(filename)
 print('bilateralFilter 效果 1')
 image_bilateralFilter = cv2.bilateralFilter(image, 25, 100, 100)
 
-plt.figure('bilateralFilter 效果 1', figsize = (16, 12))
+plt.figure('new24 bilateralFilter 效果 1', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
@@ -971,7 +987,7 @@ image = cv2.imread(filename)
 print('bilateralFilter 效果 2')
 image_bilateralFilter = cv2.bilateralFilter(image, 55, 100, 100)
 
-plt.figure('bilateralFilter 效果 2', figsize = (16, 12))
+plt.figure('new25 bilateralFilter 效果 2', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
@@ -994,7 +1010,7 @@ print('filter2D 效果')
 kernel = np.ones((9, 9), np.float32) / 81
 image_filter2D = cv2.filter2D(image, -1, kernel)
 
-plt.figure('filter2D 效果', figsize = (16, 12))
+plt.figure('new26 filter2D 效果', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
@@ -1023,7 +1039,7 @@ y = cv2.filter2D(image, cv2.CV_16S, kernel_y)
 absX = cv2.convertScaleAbs(x)
 absY = cv2.convertScaleAbs(y)
 
-plt.figure('', figsize = (16, 12))
+plt.figure('new27', figsize = (16, 12))
 plt.subplot(131)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1071,7 +1087,7 @@ image = cv2.imread(filename)
 print('saltpepper 效果')
 saltImage = saltpepper(image, 0.02)
 
-plt.figure('saltpepper 效果', figsize = (16, 12))
+plt.figure('new28 saltpepper 效果', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
@@ -1096,7 +1112,7 @@ t, rst = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 #t, rst = cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
 #t, rst = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
 
-plt.figure('二值化', figsize = (16, 12))
+plt.figure('new29 二值化', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
@@ -1117,7 +1133,7 @@ t1,thd = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 athdMEAN = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 3, 5)
 athdGAUS = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 3, 5)
 
-plt.figure('', figsize = (16, 12))
+plt.figure('new30', figsize = (16, 12))
 plt.subplot(221)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
@@ -1144,7 +1160,7 @@ img = cv2.imread(filename, 0)
 t1,thd=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
 t2,otsu=cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
-plt.figure('', figsize = (16, 12))
+plt.figure('new31', figsize = (16, 12))
 plt.subplot(131)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
@@ -1175,7 +1191,7 @@ print('灰階 轉 BGR3通道')
 rgb = cv2.cvtColor(gray,cv2.COLOR_GRAY2BGR)
 print("rgb.shape=",rgb.shape)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('new32 影像處理', figsize = (16, 12))
 plt.subplot(131)
 plt.title('原圖 彩色')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1198,7 +1214,7 @@ image = cv2.imread(filename)
 print('原圖 BGR 轉 RGB')
 rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('new33 影像處理', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖 B-G-R OK')
@@ -1243,7 +1259,7 @@ mask = cv2.inRange(hsv, minRed, maxRed)
 #通過掩碼控制的按位與，鎖定紅色區域
 red= cv2.bitwise_and(image, image, mask = mask)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('new34 影像處理', figsize = (16, 12))
 plt.subplot(231)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1285,7 +1301,7 @@ satMask = cv2.inRange(s, minSat, maxSat)
 mask = hueMask & satMask
 roi = cv2.bitwise_and(img, img, mask = mask)
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('new35 影像處理', figsize = (16, 12))
 
 plt.subplot(221)
 plt.title('原圖')
@@ -1328,7 +1344,7 @@ bgra125=cv2.merge([b,g,r,a])
 a[:,:]=0
 bgra0=cv2.merge([b,g,r,a])
 
-plt.figure('影像處理', figsize = (16, 12))
+plt.figure('new36 影像處理', figsize = (16, 12))
 plt.subplot(221)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
@@ -1352,7 +1368,7 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 image = cv2.imread(filename, 0)
 
-plt.figure('修改一部份資料', figsize = (16, 12))
+plt.figure('new37 修改一部份資料', figsize = (16, 12))
 plt.subplot(221)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1434,7 +1450,7 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 a = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
-plt.figure('擷取一塊處理', figsize = (16, 12))
+plt.figure('new38 擷取一塊處理', figsize = (16, 12))
 plt.subplot(231)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
@@ -1625,7 +1641,7 @@ def my_laplace_result_add_abs(image, model):
 # 調用自定義函數
 result = my_laplace_sharpen(original_image_test1, my_type='big')
 # 繪制結果
-fig = plt.figure()
+fig = plt.figure('new39')
 fig.add_subplot(121)
 plt.title('原始圖像')
 plt.imshow(original_image_test1)
@@ -1777,7 +1793,7 @@ def my_show_edge(model):
 #調用自定義函數
 result = my_laplace_sharpen(original_image_test1, my_type='big')
 #繪制結果
-fig = plt.figure()
+fig = plt.figure('new40')
 fig.add_subplot(131)
 plt.title('原始圖像')
 plt.imshow(original_image_test1)
@@ -1956,7 +1972,7 @@ if __name__ == '__main__':
     my_image_blur_median = my_median_blur_RGB(image_test1, 5)
     #調用庫函數
     computer_image_blur_median = cv2.medianBlur(image_test1, 5)
-    fig = plt.figure()
+    fig = plt.figure('new41')
     fig.add_subplot(131)
     plt.title('原圖')
     plt.imshow(image_test1)

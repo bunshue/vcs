@@ -43,20 +43,27 @@ plt.suptitle("在圖表的指定地方畫圖, 不用subplot")
 x = np.linspace(0, 2 * np.pi, num=100, endpoint=True)
 y = np.sin(x)
 
-print("1左下開始(0.1, 0.1), w = 0.3, h = 0.3, 左下圖")
-plt.axes([0.1, 0.1, 0.3, 0.3])
+x_st = 0.1
+y_st = 0.1
+w = 0.2
+h = 0.2
+dx = 0.2
+dy = 0.2
+
+print("第0圖")
+plt.axes([x_st+dx*0, y_st+dy*0, w, h])
 plt.plot(x, y, "r-s")
 
-print("2左下開始(0.6, 0.1), w = 0.3, h = 0.3, 右下圖")
-plt.axes([0.6, 0.1, 0.3, 0.3])
+print("第1圖")
+plt.axes([x_st+dx*1, y_st+dy*1, w, h])
 plt.plot(x, y, "g--o")
 
-print("3左下開始(0.1, 0.6), w = 0.3, h = 0.3, 左上圖")
-plt.axes([0.1, 0.6, 0.3, 0.3])
+print("第2圖")
+plt.axes([x_st+dx*2, y_st+dy*2, w, h])
 plt.plot(x, y, "b-s")
 
-print("4左下開始(0.6, 0.6), w = 0.3, h = 0.3, 右上圖")
-plt.axes([0.6, 0.6, 0.3, 0.3])
+print("第3圖")
+plt.axes([x_st+dx*3, y_st+dy*3, w, h])
 plt.plot(x, y, "y--o")
 
 plt.show()
