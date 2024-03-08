@@ -19,7 +19,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 filename1 = 'C:/_git/vcs/_4.python/_data/picture_mix1.bmp'
 filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
 
@@ -354,7 +354,6 @@ plt.imshow(cv2.cvtColor(extractLena, cv2.COLOR_BGR2RGB))
 
 plt.show()
 
-'''
 print('------------------------------------------------------------')	#60個
 
 #圖層提取
@@ -403,19 +402,6 @@ coordinate = rgb[131, 81] #輸入要取得顏色的指定座標
 print(coordinate)
 
 #print(array([255, 219,  79], dtype=uint8))
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-image = cv2.imread(filename)
-
-image[0,0]=[0,0,255]
-image[70:120, 200:250]=[0,255,0]
-
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -643,359 +629,6 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.subplot(122)
 plt.title('result')
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-print('讀取圖檔 :', filename)
-image = cv2.imread(filename)
-
-H, W, D = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-print('D = ', D)
-
-mapx = np.zeros(image.shape[:2], np.float32)
-mapy = np.zeros(image.shape[:2], np.float32)
-for i in range(H):
-    for j in range(W):
-        mapx.itemset((i, j), j)
-        mapy.itemset((i, j), i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-
-plt.figure('new12', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('result')
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-print('讀取圖檔 :', filename)
-image = cv2.imread(filename)
-
-H, W, D = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-print('D = ', D)
-
-mapx = np.zeros(image.shape[:2], np.float32)
-mapy = np.zeros(image.shape[:2], np.float32)
-for i in range(H):
-    for j in range(W):
-        mapx.itemset((i, j), j)
-        mapy.itemset((i, j), H - 1 - i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-
-plt.figure('new13', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('result')
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-print('讀取圖檔 :', filename)
-image = cv2.imread(filename)
-
-H, W, D = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-print('D = ', D)
-
-mapx = np.zeros(image.shape[:2], np.float32)
-mapy = np.zeros(image.shape[:2], np.float32)
-for i in range(H):
-    for j in range(W):
-            mapx.itemset((i, j), W - 1 - j)
-            mapy.itemset((i, j), i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-
-plt.figure('new14', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('result')
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-print('讀取圖檔 :', filename)
-image = cv2.imread(filename)
-
-H, W, D = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-print('D = ', D)
-
-mapx = np.zeros(image.shape[:2], np.float32)
-mapy = np.zeros(image.shape[:2], np.float32)
-for i in range(H):
-    for j in range(W):
-            mapx.itemset((i, j), W - 1 - j)
-            mapy.itemset((i, j), H - 1 - i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-
-plt.figure('new15', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('result')
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-print('讀取圖檔 :', filename)
-image = cv2.imread(filename)
-
-H, W, D = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-print('D = ', D)
-
-mapx = np.zeros(image.shape[:2], np.float32)
-mapy = np.zeros(image.shape[:2], np.float32)
-for i in range(H):
-    for j in range(W):
-            mapx.itemset((i, j), W - 1 - j)
-            mapy.itemset((i, j), H - 1 - i)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-
-plt.figure('new16', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('上下顛倒')
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-print('讀取圖檔 :', filename)
-image = cv2.imread(filename)
-
-H, W, D = image.shape
-print(image.shape)
-print('W = ', W)
-print('H = ', H)
-print('D = ', D)
-
-mapx = np.zeros(image.shape[:2], np.float32)
-mapy = np.zeros(image.shape[:2], np.float32)
-for i in range(H):
-    for j in range(W):
-        if 0.25 * W < i < 0.75 * W and 0.25 * H < j < 0.75 * H:
-                mapx.itemset((i, j), 2 * (j - W * 0.25 ) + 0.5)
-                mapy.itemset((i, j), 2 * (i - H * 0.25 ) + 0.5)
-        else:     
-                mapx.itemset((i, j), 0)
-                mapy.itemset((i, j), 0)
-rst = cv2.remap(image, mapx, mapy, cv2.INTER_LINEAR)
-
-plt.figure('new17', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('縮小圖')
-plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-image = cv2.imread(filename)
-
-print('blur 效果 1')
-r = cv2.blur(image, (5, 5))
-
-plt.figure('new18 blur 效果', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('blur 效果 1')
-plt.imshow(cv2.cvtColor(r, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-image = cv2.imread(filename)
-
-print('blur 效果 2')
-image_blur_05 = cv2.blur(image, (5, 5))      
-image_blur_30 = cv2.blur(image, (30, 30))      
-
-plt.figure('new19 blur 效果', figsize = (16, 12))
-plt.subplot(131)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(132)
-plt.title('blur 效果 2')
-plt.imshow(cv2.cvtColor(image_blur_05, cv2.COLOR_BGR2RGB))
-
-plt.subplot(133)
-plt.title('blur 效果 2')
-plt.imshow(cv2.cvtColor(image_blur_30, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-image = cv2.imread(filename)
-
-print('boxFilter 效果 1')
-image_boxFilter = cv2.boxFilter(image, -1, (5, 5)) 
-
-plt.figure('new20 boxFilter 效果 1', figsize = (16, 12))
-
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('boxFilter 效果 1')
-plt.imshow(cv2.cvtColor(image_boxFilter, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-image = cv2.imread(filename)
-
-print('boxFilter 效果 2')
-image_boxFilter = cv2.boxFilter(image, -1, (5, 5), normalize = 0)
-
-plt.figure('new21 boxFilter 效果 2', figsize = (16, 12))
-
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('boxFilter 效果 2')
-plt.imshow(cv2.cvtColor(image_boxFilter, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-image = cv2.imread(filename)
-
-print('boxFilter 效果 3')
-image_boxFilter = cv2.boxFilter(image, -1, (2, 2), normalize = 0)
-
-plt.figure('new22 boxFilter 效果 3', figsize = (16, 12))
-
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('boxFilter 效果 3')
-plt.imshow(cv2.cvtColor(image_boxFilter, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-image = cv2.imread(filename)
-
-print('medianBlur 效果 1')
-image_medianBlur = cv2.medianBlur(image, 3)
-
-plt.figure('new23 medianBlur 效果 1', figsize = (16, 12))
-
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('medianBlur 效果 1')
-plt.imshow(cv2.cvtColor(image_medianBlur, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png'
-image = cv2.imread(filename)
-
-print('bilateralFilter 效果 1')
-image_bilateralFilter = cv2.bilateralFilter(image, 25, 100, 100)
-
-plt.figure('new24 bilateralFilter 效果 1', figsize = (16, 12))
-
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('bilateralFilter 效果 1')
-plt.imshow(cv2.cvtColor(image_bilateralFilter, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/bilTest.bmp'
-image = cv2.imread(filename)
-
-print('bilateralFilter 效果 2')
-image_bilateralFilter = cv2.bilateralFilter(image, 55, 100, 100)
-
-plt.figure('new25 bilateralFilter 效果 2', figsize = (16, 12))
-
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('bilateralFilter 效果 2')
-plt.imshow(cv2.cvtColor(image_bilateralFilter, cv2.COLOR_BGR2RGB))
 
 plt.show()
 
@@ -1486,7 +1119,7 @@ plt.title('原圖')
 plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
 
 #B圖
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename2 = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 peony = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
 plt.subplot(235)
@@ -1596,7 +1229,7 @@ cv2.imshow('Sample pic', img2_denoised)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 print("absolute")
 
@@ -1930,62 +1563,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("median 跑一陣子")
-
-def get_median(data):
-    data.sort()
-    half = len(data) // 2
-    return data[half]
-
-#計算灰度圖像的中值濾波
-def my_median_blur_gray(image, size):
-    data = []
-    sizepart = int(size/2)
-    for i in range(image.shape[0]):
-        for j in range(image.shape[1]):
-            for ii in range(size):
-                for jj in range(size):
-                    #首先判斷所以是否超出范圍，也可以事先對圖像進行零填充
-                    if (i+ii-sizepart)<0 or (i+ii-sizepart)>=image.shape[0]:
-                        pass
-                    elif (j+jj-sizepart)<0 or (j+jj-sizepart)>=image.shape[1]:
-                        pass
-                    else:
-                        data.append(image[i+ii-sizepart][j+jj-sizepart])
-            #取每個區域內的中位數
-            image[i][j] = int(get_median(data))
-            data=[]
-    return image
-
-#計算彩色圖像的中值濾波
-def my_median_blur_RGB(image, size):
-    (b ,r, g) = cv2.split(image)
-    blur_b = my_median_blur_gray(b, size)
-    blur_r = my_median_blur_gray(r, size)
-    blur_g = my_median_blur_gray(g, size)
-    result = cv2.merge((blur_b, blur_r, blur_g))
-    return result
-
-if __name__ == '__main__':
-    image_test1 = cv2.imread('data/worm.jpg')
-    #調用自定義函數
-    my_image_blur_median = my_median_blur_RGB(image_test1, 5)
-    #調用庫函數
-    computer_image_blur_median = cv2.medianBlur(image_test1, 5)
-    fig = plt.figure('new41')
-    fig.add_subplot(131)
-    plt.title('原圖')
-    plt.imshow(image_test1)
-    fig.add_subplot(132)
-    plt.title('自定義函數濾波')
-    plt.imshow(my_image_blur_median)
-    fig.add_subplot(133)
-    plt.title('庫函數濾波')
-    plt.imshow(computer_image_blur_median)
-    plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 print("optimize")
 
 def ComputeMinLevel(hist, pnum):
@@ -2129,7 +1706,121 @@ cv2.destroyAllWindows()
 
 
 
+"""
+print("gaussion")
 
+print('跑很久 skip')
+
+#高斯濾波函數
+def my_function_gaussion(x, y, sigma):
+    return math.exp(-(x**2 + y**2) / (2*sigma**2)) / (2*math.pi*sigma**2)
+
+#產生高斯濾波矩陣
+def my_get_gaussion_blur_retric(size, sigma):
+    n = size // 2
+    blur_retric = np.zeros([size, size])
+    #根據尺寸和sigma值計算高斯矩陣
+    for i in range(size):
+        for j in range(size):
+            blur_retric[i][j] = my_function_gaussion(i-n, j-n, sigma)
+    #將高斯矩陣歸一化
+    blur_retric = blur_retric / blur_retric[0][0]
+    #將高斯矩陣轉換為整數
+    blur_retric = blur_retric.astype(np.uint32)
+    #返回高斯矩陣
+    return blur_retric
+
+#計算灰度圖像的高斯濾波
+def my_gaussion_blur_gray(image, size, sigma):
+    blur_retric = my_get_gaussion_blur_retric(size, sigma)
+    n = blur_retric.sum()
+    sizepart = size // 2
+    data = 0
+    #計算每個像素點在經過高斯模板變換后的值
+    for i in range(image.shape[0]):
+        for j in range(image.shape[1]):
+            for ii in range(size):
+                for jj in range(size):
+                    #條件語句為判斷模板對應的值是否超出邊界
+                    if (i+ii-sizepart)<0 or (i+ii-sizepart)>=image.shape[0]:
+                        pass
+                    elif (j+jj-sizepart)<0 or (j+jj-sizepart)>=image.shape[1]:
+                        pass
+                    else:
+                        data += image[i+ii-sizepart][j+jj-sizepart] * blur_retric[ii][jj]
+            image[i][j] = data / n
+            data = 0
+    #返回變換后的圖像矩陣
+    return image
+
+#計算彩色圖像的高斯濾波
+def my_gaussion_blur_RGB(image, size, sigma):
+    (b ,r, g) = cv2.split(image)
+    blur_b = my_gaussion_blur_gray(b, size, sigma)
+    blur_r = my_gaussion_blur_gray(r, size, sigma)
+    blur_g = my_gaussion_blur_gray(g, size, sigma)
+    result = cv2.merge((blur_b, blur_r, blur_g))
+    return result
+
+image_test1 = cv2.imread('data/lena.png')
+#進行高斯濾波器比較
+my_image_blur_gaussion = my_gaussion_blur_RGB(image_test1, 5, 0.75)
+computer_image_blur_gaussion = cv2.GaussianBlur(image_test1, (5, 5), 0.75)  #執行高斯模糊化
+
+fig = plt.figure(figsize = (20, 15))
+
+fig.add_subplot(131)
+plt.title('原始圖像')
+plt.imshow(image_test1)
+
+fig.add_subplot(132)
+plt.title('自定義高斯濾波器')
+plt.imshow(my_image_blur_gaussion)
+
+fig.add_subplot(133)
+plt.title('庫高斯濾波器')
+plt.imshow(computer_image_blur_gaussion)
+
+plt.show()
+"""
+
+print('------------------------------------------------------------')	#60個
+
+"""
+print("image_dft2")
+
+print('跑不出來 skip')
+
+PI = 3.141591265
+
+img = plt.imread('data/castle3.jpg')
+#根據公式轉成灰度圖
+img = 0.2126 * img[:,:,0] + 0.7152 * img[:,:,1] + 0.0722 * img[:,:,2]
+
+#顯示原圖
+plt.subplot(131),plt.imshow(img,'gray'),plt.title('original')
+
+#進行傅立葉變換，并顯示結果
+fft2 = np.fft.fft2(img)
+log_fft2 = np.log(1 + np.abs(fft2))
+plt.subplot(132),plt.imshow(log_fft2,'gray'),plt.title('log_fft2')
+
+h , w = img.shape
+#生成一個同樣大小的復數矩陣
+F = np.zeros([h,w],'complex128')
+for u in range(h):
+    for v in range(w):
+        res = 0
+        for x in range(h):
+            for y in range(w):
+                res += img[x,y] * np.exp(-1.j * 2 * PI * (u * x / h + v * y / w))
+        F[u,v] = res
+
+log_F = np.log(1 + np.abs(F))
+plt.subplot(133)
+plt.imshow(log_F,'gray')
+plt.title('log_F')
+"""
 
 
 print('------------------------------------------------------------')	#60個
@@ -2143,5 +1834,29 @@ print('------------------------------------------------------------')	#60個
 #cv2.imwrite("tmp_bgra0.png", bgra0)
 
 print('------------------------------------------------------------')	#60個
+
+
+
+
+#直接改寫image的內容
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+image = cv2.imread(filename)
+
+for i in range(20, 80):
+    image[i, 180]=[0,0,255] #紅色一點
+
+#     H          x
+image[10:100, 200:290]=[0,0,255] #紅色 一塊 90X90
+
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
+sys.exit()
+
+print('------------------------------------------------------------')	#60個
+
+
 
 
