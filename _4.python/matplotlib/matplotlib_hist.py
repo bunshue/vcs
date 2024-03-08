@@ -146,19 +146,19 @@ plt.subplot(231)
 cc = plt.hist(x, bins=num_bins, histtype="bar", facecolor="r", edgecolor="g", alpha=0.75, rwidth=0.8, label="Normal distribution")
 #print(type(cc))
 #print(cc)
-plt.title("bar")
+plt.title("histtype 1 : bar")
 
 # 第二張圖
 plt.subplot(232)
 
 cc = plt.hist(x, bins=num_bins, histtype="barstacked", facecolor="g", edgecolor="b", alpha=0.75, rwidth=0.8, label="Normal distribution")
-plt.title("barstacked")
+plt.title("histtype 2 : barstacked")
 
 # 第三張圖
 plt.subplot(233)
 
 cc = plt.hist(x, bins=num_bins, histtype="step", facecolor="c", edgecolor="r", alpha=0.75, rwidth=0.8, label="Normal distribution")
-plt.title("step + 多筆資料")
+plt.title("histtype 3 : step + 多筆資料")
 
 mu, sigma = 80, 10
 x2 = np.random.normal(mu, sigma, size=N*10)  # 隨機數
@@ -175,7 +175,7 @@ cc = plt.hist(x3, bins=num_bins, histtype="step", facecolor="y", edgecolor="b", 
 plt.subplot(234)
 #縱軸不做正規化處理為數量，直條的間距填滿
 cc = plt.hist(x, bins=num_bins, histtype="stepfilled", facecolor="c", edgecolor="m", alpha=0.75, rwidth=0.8, label="Normal distribution")
-plt.title("stepfilled")
+plt.title("histtype 4 : stepfilled")
 
 # 第五張圖
 plt.subplot(235)
@@ -209,10 +209,12 @@ plt.figure(
     frameon=True,
 )
 
+#資料個數
+N = 10000
+
 # 第一張圖
 plt.subplot(231)
 
-N = 10000  # 擲骰子次數
 sides = 6  # 骰子有幾面
 dice = []  # 建立擲骰子的串列
 
@@ -247,9 +249,6 @@ plt.title("測試 10000 次, 累積統計")
 # 第三張圖
 plt.subplot(233)
 
-N = 500  # 資料個數
-N = 1000  # 資料個數
-
 d1 = np.random.randint(1, 6 + 1, N)  # 不含尾
 d2 = np.random.randint(1, 6 + 1, N)
 
@@ -261,28 +260,30 @@ count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5)  # 以總數表示
 plt.xlabel("兩個骰子和")
 # plt.ylabel("密度")   #density = True
 plt.ylabel("次數")
-plt.title("擲兩個骰子多次 看其分布")
-
+plt.title("擲兩個骰子 10000 次 看其分布")
 
 # 第四張圖
 plt.subplot(234)
 
 x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
 plt.hist(x, bins=num_bins // 10)
-plt.title("產生共3組，每組 N 個隨機數")
+plt.title("產生共3組，每組 10000 個隨機數")
 
 # 第五張圖
 plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
 
 # 生成 N 組介於 0 與 1 之間均勻分配隨機變數
 x = np.random.uniform(size=N)
 # x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
 plt.hist(x, bins=num_bins, rwidth=0.8)
 plt.title("np.random.uniform")
+
+# 第六張圖
+plt.subplot(236)
+
+x = np.random.exponential(scale=2, size=N)
+plt.hist(x, bins=num_bins, label="Exponential distribution")
+plt.title("np.random.exponential")
 
 plt.show()
 
@@ -347,16 +348,6 @@ plt.ylabel("人數統計")
 
 # 第二張圖
 plt.subplot(232)
-
-
-
-# 第三張圖
-plt.subplot(233)
-
-
-
-# 第四張圖
-plt.subplot(234)
 
 import statistics
 
@@ -427,8 +418,8 @@ plt.title("成績表")
 
 
 
-# 第五張圖
-plt.subplot(235)
+# 第三張圖
+plt.subplot(233)
 
 x = [21, 42, 23, 4, 5, 26, 77, 88, 9, 10, 31, 32, 33, 34, 35, 36, 37, 18, 49, 50, 100]
 num_bins = 10
@@ -438,13 +429,18 @@ print("ccccc")
 print(str(n) + "\n" + str(bins))
 
 
+
+# 第四張圖
+plt.subplot(234)
+
+
+
+# 第五張圖
+plt.subplot(235)
+
+
 # 第六張圖
 plt.subplot(236)
-
-N = 50000
-exp_samples = np.random.exponential(scale=2, size=N)
-plt.hist(x=exp_samples, bins=1000, label="Exponential distribution")
-
 
 plt.show()
 
@@ -453,7 +449,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="hist 集合 5",
+    num="hist 集合 4",
     figsize=(20, 15),
     dpi=84,
     facecolor="whitesmoke",

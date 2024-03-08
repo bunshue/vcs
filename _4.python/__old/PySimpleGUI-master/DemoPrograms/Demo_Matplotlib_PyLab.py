@@ -1,24 +1,23 @@
-#!/usr/bin/env python
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import PySimpleGUI as sg
 import matplotlib
 import pylab
+
 matplotlib.use('TkAgg')
 
 """
 Demonstrates one way of embedding PyLab figures into a PySimpleGUI window.
 """
 
-
 # ------------------------------- PASTE YOUR PYLAB CODE HERE -------------------------------
-from numpy import sin
-from numpy import cos
+
+import numpy as np
 
 x = pylab.linspace(-3, 3, 30)
 y = x**2
-pylab.plot(x, sin(x))
-pylab.plot(x, cos(x), 'r-')
-pylab.plot(x, -sin(x), 'g--')
+pylab.plot(x, np.sin(x))
+pylab.plot(x, np.cos(x), 'r-')
+pylab.plot(x, -np.sin(x), 'g--')
 
 fig = pylab.gcf()
 figure_x, figure_y, figure_w, figure_h = fig.bbox.bounds
