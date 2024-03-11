@@ -5,6 +5,10 @@
 
 """
 
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
+print('------------------------------------------------------------')	#60個
+
 import os
 import sys
 import time
@@ -129,6 +133,77 @@ print('------------------------------------------------------------')	#60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+
+print("PIL_hist")
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 打開圖像，并轉成灰度圖像
+im = np.array(Image.open(filename).convert('L'))
+
+# 新建一個圖像
+plt.figure()
+
+plt.subplot(121)
+
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+
+# 在原點的左上角顯示輪廓圖像
+plt.contour(im, origin='image')
+plt.axis('equal')
+plt.title(u'圖像輪廓圖')
+
+plt.subplot(122)
+# 利用hist來繪制直方圖
+# 第一個參數為一個一維數組
+# 因為hist只接受一維數組作為輸入，所以要用flatten()方法將任意數組按照行優先準則轉化成一個一維數組
+# 第二個參數指定bin的個數
+plt.hist(im.flatten(), bins=128)
+plt.title(u'圖像直方圖')
+#刻度
+plt.xlim([0-10,255+10])
+plt.ylim([0,8000])
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("PIL_histeq")
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+#from PCV.tools import imtools
+
+# 添加中文字體支持
+from matplotlib.font_manager import FontProperties
+
+im = np.array(Image.open(filename).convert('L'))
+# 打開圖像，并轉成灰度圖像
+#im2, cdf = imtools.histeq(im)
+
+plt.figure()
+
+plt.subplot(2, 2, 1)
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.title(u'原始圖像')
+plt.imshow(im)
+
+plt.subplot(2, 2, 2)
+plt.title(u'直方圖均衡化後的圖像')
+#plt.imshow(im2)
+
+plt.subplot(2, 2, 3)
+plt.title(u'原始直方圖')
+plt.hist(im.flatten(), bins=128, density=True)
+
+plt.subplot(2, 2, 4)
+plt.title(u'均衡化後的直方圖')
+#plt.hist(im2.flatten(), bins=128, density=True)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 
 

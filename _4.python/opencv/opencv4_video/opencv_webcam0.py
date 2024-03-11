@@ -11,9 +11,14 @@ ESC = 27
 import cv2
 import time
 
+print('------------------------------------------------------------')	#60個
+
+print('按Q離開')
+print('按S存圖')
+
 #cv2.namedWindow('frame', cv2.WINDOW_NORMAL)
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)   # 建立攝影機物件
 
 # 取得影像的尺寸大小
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
@@ -21,7 +26,7 @@ h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 print("Image Size: %d x %d" % (w, h))
 
 if not cap.isOpened():
-    print('Could not open video device')
+    print('開啟攝影機失敗')
     sys.exit()
 else:
     print('Video device opened')
@@ -68,17 +73,27 @@ while True:
     #print('{:.1f}'.format(fps))
     time_old = time_new
 
-    k = cv2.waitKey(1)
+    k = cv2.waitKey(1) # 等待按鍵輸入
     if k == ESC:     #ESC
         break
-    elif k == ord('q'): # 若按下 q 鍵則離開迴圈
+    elif k == ord('Q') or k == ord('q'):  # 按下 Q(q) 結束迴圈
         break
-    elif k == ord('s'): # 若按下 s 鍵則存圖
-        image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+    elif k == ord('S') or k == ord('s'):  # 按下 S(s), 存圖
+        image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg'
         cv2.imwrite(image_filename, frame)
-        print('已存圖')
+        print('已存圖, 檔案 :', image_filename)
 
 # 釋放所有資源
 cap.release()   # 釋放攝影機
 cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
+
+print('------------------------------------------------------------')	#60個
+
+print('錄影')
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
 

@@ -16,10 +16,13 @@ while cap.isOpened():
                                            cv2.RETR_EXTERNAL,
                                            cv2.CHAIN_APPROX_SIMPLE)
             if contours:    # 如果有偵測到輪廓
-                cv2.drawContours(img, contours, -1, (255, 255, 255), 2)
+                #print(type(contours))
+                print(contours)
+                cv2.drawContours(img, contours, -1, (0, 0, 255), 2)
                 print('偵測到移動')
             else:
-                print('靜止畫面')
+                print('靜止畫面', end = ' ')
+                pass
 
         cv2.imshow('frame', img)
         img_pre = img_now.copy()

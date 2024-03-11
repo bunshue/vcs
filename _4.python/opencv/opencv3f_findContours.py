@@ -21,7 +21,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 filename = 'images/coin.jpg'
 
 cap = cv2.VideoCapture(filename)    #用VideoCapture讀取本機圖片
@@ -159,8 +159,76 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()
 plt.show()
+'''
+print('------------------------------------------------------------')	#60個
+
+print('OpenCV 畫圖 drawContours')
+
+filename = 'C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png'
+
+image1=cv2.imread(filename)
+image1_gray=cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
+
+ret,thresh=cv2.threshold(image1_gray,127,255,0)
+
+contours,hierarchy=cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+print(type(contours))
+print(len(contours))
+print(contours)
+
+image2 = image1.copy()
+
+linewidth = 10 #線寬
+#linewidth = -1 #填充模式
+
+color = [(0, 0, 255),#B G R
+         (0, 255, 0),
+         (255, 0, 0),
+         (255, 255, 0),#Cyan
+         (255, 0, 255), #Magenta
+         (0, 255, 255), #Yellow
+         (0, 128, 128),#Olive
+         (128, 0, 0),#Navy
+         (128, 0, 128),#Purple
+         ]
+
+#一起畫
+#index = -1 # 指名要繪製的輪廓, -1代表全部
+#image2=cv2.drawContours(image2,contours,index,(0,0,255),linewidth)  # image2為三通道才能顯示輪廓
+
+#分開畫
+length = len(contours)
+for index in range(length):
+    image2=cv2.drawContours(image2,contours,index,color[index],linewidth)  # image2為三通道才能顯示輪廓
+
+plt.figure('drawContours', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('尋找 Contours')
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
 
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+

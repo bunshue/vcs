@@ -14,19 +14,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-cap = cv2.VideoCapture(0)
-while(cap.isOpened()):
-    ret, frame = cap.read()
-    cv2.imshow('frame',frame)
-    c = cv2.waitKey(1)
-    if c==27:   #ESC键
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
 cap = cv2.VideoCapture(video_filename)

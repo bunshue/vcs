@@ -86,6 +86,37 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+image = Image.open(filename)       # 建立Pillow物件
+print("列出物件檔名 : ", image.filename)
+print("列出物件副檔名 : ", image.format)
+print("列出物件描述   : ", image.format_description)
+print("列出物件型態 : ", type(image))
+width, height = image.size               # 獲得影像寬度和高度
+print("寬度 = ", width)
+print("高度 = ", height)
+
+#print(image.mode)
+#print(image.size)
+
+plt.imshow(image)
+plt.show()
+
+image = Image.open(filename)
+print('圖檔格式: ', image.format)
+print('圖檔的色彩模式: ', image.mode)
+print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
+print('圖片的寬度，單位像素(pixels): ', image.width)
+print('圖片的高度，單位像素(pixels): ', image.height)
+
+print('------------------------------------------------------------')	#60個
+
+"""
+#查看圖片信息，可用如下的方法：
+print(img.shape)
+print(img.dtype)
+print(img.size)
+print(type(img))
+"""
 
 
 

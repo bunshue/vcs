@@ -639,6 +639,11 @@ image = Image.open(filename)           # 建立Pillow物件
 image_copy = image.copy()                      # 複製
 image_copy.save("tmp_pic17.jpg")
 
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = Image.open(filename)
+imgcopy=img.copy()
+
 print("------------------------------------------------------------")  # 60個
 
 image = Image.open(filename)               # 建立Pillow物件
@@ -1018,14 +1023,69 @@ image4.save("tmp_pic19.jpg")                   # 儲存
 
 print("------------------------------------------------------------")  # 60個
 
+print("PIL_operation")
 
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+plt.figure()
+# 顯示原圖
+image = Image.open(filename)
+print(image.mode, image.size, image.format)
+
+plt.subplot(231)
+plt.title(u'原圖')
+plt.imshow(image)
+
+# 顯示灰度圖
+image = Image.open(filename).convert('L')
+
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+
+plt.subplot(232)
+plt.title(u'灰度圖')
+plt.imshow(image)
+# 復制并粘貼區域
+image = Image.open(filename)
+box = (100, 100, 200, 200)
+region = image.crop(box)
+region = region.transpose(Image.ROTATE_180)
+image.paste(region, box)
+
+plt.subplot(233)
+plt.title(u'復制粘貼區域')
+plt.imshow(image)
+
+# 縮略圖
+image = Image.open(filename)
+size = 128, 128
+image.thumbnail(size)
+print(image.size)
+
+plt.subplot(234)
+plt.title(u'縮略圖')
+plt.imshow(image)
+#image.save('tmp_pic1.jpg')# 保存縮略圖
+
+#調整圖像尺寸
+image=Image.open(filename)
+image=image.resize(size)
+print(image.size)
+
+plt.subplot(235)
+plt.title(u'調整尺寸後的圖像')
+plt.imshow(image)
+
+#旋轉圖像45°
+image=Image.open(filename)
+image=image.rotate(45)
+
+plt.subplot(236)
+plt.title(u'旋轉45°後的圖像')
+plt.imshow(image)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個

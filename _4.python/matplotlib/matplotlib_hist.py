@@ -349,8 +349,6 @@ plt.ylabel("人數統計")
 # 第二張圖
 plt.subplot(232)
 
-import statistics
-
 sc1 = [
     90,
     72,

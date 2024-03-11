@@ -6,6 +6,8 @@ PIL 新進
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
+print('------------------------------------------------------------')	#60個
+
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -19,7 +21,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 print('顯示原圖')
 
 image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
@@ -59,25 +61,33 @@ img=Image.open(filename)  #打開圖像
 gray=img.convert('L')   #轉換成灰度
 r,g,b=img.split()   #分離三通道
 pic=Image.merge('RGB',(r,g,b)) #合并三通道
+
 plt.figure('Peony')
+
 plt.subplot(2,3,1)
 plt.title('origin')
 plt.imshow(img)
+
 plt.subplot(2,3,2)
 plt.title('gray')
 plt.imshow(gray,cmap='gray')
+
 plt.subplot(2,3,3)
 plt.title('merge')
 plt.imshow(pic)
+
 plt.subplot(2,3,4)
 plt.title('r')
 plt.imshow(r,cmap='gray')
+
 plt.subplot(2,3,5)
 plt.title('g')
 plt.imshow(g,cmap='gray')
+
 plt.subplot(2,3,6)
 plt.title('b')
 plt.imshow(b,cmap='gray')
+
 plt.show()
 
 """
@@ -100,13 +110,6 @@ plt.show()
 """
 
 調用numpy中的array（）函數就可以將PIL對象轉換為數組對象。
-
-查看圖片信息，可用如下的方法：
-
-print img.shape  
-print img.dtype 
-print img.size 
-print type(img)
 
 如果是RGB圖片，那么轉換為array之後，就變成了一個rows*cols*channels的三維矩陣,因此，我們可以使用
 
@@ -202,6 +205,7 @@ color_image = cmap(np.array(gray_image))
 
 # 顯示彩色圖像
 plt.imshow(color_image)
+
 plt.show()
 
 #上述代碼中，我們使用get_cmap方法獲取了一個名為’jet’的顏色映射表。然後，將灰度圖像轉換為NumPy數組，再將數組應用于顏色映射表，得到彩色圖像。
@@ -264,7 +268,7 @@ def rgb_of_pixel(img_path, x, y):
 print(rgb_of_pixel(filename, 131, 81))
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 # Pytesseract 辨識圖片中的文字
 
 from PIL import Image
@@ -282,7 +286,7 @@ import pytesseract
 img = Image.open("chinese.jpg")
 text = pytesseract.image_to_string(img, lang="chi_tra")
 print(text)
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
@@ -291,42 +295,6 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
 
 print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)       # 建立Pillow物件
-print("列出物件檔名 : ", image.filename)
-print("列出物件副檔名 : ", image.format)
-print("列出物件描述   : ", image.format_description)
-print("列出物件型態 : ", type(image))
-width, height = image.size               # 獲得影像寬度和高度
-print("寬度 = ", width)
-print("高度 = ", height)
-
-#print(image.mode)
-#print(image.size)
-
-plt.imshow(image)
-plt.show()
-
-image = Image.open(filename)
-print('圖檔格式: ', image.format)
-print('圖檔的色彩模式: ', image.mode)
-print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
-print('圖片的寬度，單位像素(pixels): ', image.width)
-print('圖片的高度，單位像素(pixels): ', image.height)
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)
-image.save("tmp_pic_quality95.jpg", quality=95 )
-image.close()
-
-print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)
-image.save("tmp_pic_quality_default.jpg")
-image.close()
-
-print("------------------------------------------------------------")  # 60個
 
 """
 source = input("請輸入來源資料夾：")
@@ -341,7 +309,7 @@ if os.path.exists(source):
             targetfile = filename + ext
             image = Image.open(os.path.join(source, file))
             thumbnail = image.resize((320,200))
-            thumbnail.save(os.path.join(target, targetfile))
+            #thumbnail.save(os.path.join(target, targetfile))
             image.close()
             thumbnail.close()
             print("{}-->{}".format(file, targetfile))
@@ -383,7 +351,7 @@ if os.path.exists(source):
             targetfile = filename + ext
             image = Image.open(os.path.join(source, file))
             thumbnail = image.resize((320,200))
-            thumbnail.save(os.path.join(target, targetfile))
+            #thumbnail.save(os.path.join(target, targetfile))
             image.close()
             thumbnail.close()
             print("{}-->{}".format(file, targetfile))
@@ -436,7 +404,7 @@ if os.path.exists(source):
             targetfile = filename + ext
             image = Image.open(os.path.join(source, file))
             thumbnail = image.resize((320,200))
-            thumbnail.save(os.path.join(target, targetfile))
+            #thumbnail.save(os.path.join(target, targetfile))
             image.close()
             thumbnail.close()
             print("{}-->{}".format(file, targetfile))
@@ -489,18 +457,6 @@ blue_to_red2(filename)
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.open(filename)
-image.save('tmp_pic_normal.jpg')
-image.close()
-
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)
-image.save('tmp_pic_high.jpg', quality = 95)
-image.close()
-
-print('------------------------------------------------------------')	#60個
-
 """
 print("車牌")
 import pytesseract
@@ -531,8 +487,6 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
 from PIL import Image
 import pytesseract
 import time
@@ -561,7 +515,7 @@ while True:
         print("車輛入場時間 : ", keyText, ":", entryTime)
         entrySecond = time.time()
         carDict[keyText] = entrySecond
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 import pytesseract
@@ -577,10 +531,9 @@ import pytesseract
 text  = pytesseract.image_to_string(Image.open('data/data17_27.jpg'),
                                                lang='chi_sim')
 print(text)
-"""
+
 print("------------------------------------------------------------")  # 60個
 
-"""
 import os
 
 def batch_resize_images(input_folder, output_folder, size=(300, 300)):
@@ -596,7 +549,7 @@ def batch_resize_images(input_folder, output_folder, size=(300, 300)):
             # 調整影像尺寸
             image = image.resize(size, Image.ANTIALIAS)
             # 保存調整尺寸後的影像到輸出資料夾
-            image.save(os.path.join(output_folder, filename))
+            #image.save(os.path.join(output_folder, filename))
 
 # 假設有一個包含原始圖片的資料夾 'input_images' 和
 # 一個用於存放調整後圖片的資料夾 'output_images'
@@ -617,7 +570,7 @@ def batch_convert_images(directory, target_format='.jpg'):
             path = os.path.join(directory, filename)
             image = Image.open(path)
             image_rgb = image.convert('RGB')  # 轉換為RGB模式以便保存為JPEG
-            image_rgb.save(path.replace('.png', target_format), quality=95)
+            #image_rgb.save(path.replace('.png', target_format), quality=95)
 
 # 呼叫批次更改函數
 batch_convert_images('images_directory')
@@ -640,19 +593,6 @@ print("------------------------------------------------------------")  # 60個
 from PIL import Image
 
 filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-print("操作像素")
-
-image = Image.open(filename)
-for x in range(100, 200):
-    for y in range(250, 350):
-        image.putpixel((x, y), (128, 128, 128))
-image.show()
-
 print('------------------------------------------------------------')	#60個
 
 from PIL import Image, ImageOps
@@ -686,9 +626,10 @@ def savepng(readfile, savefolder):
         if img.format == "PNG":
             newimg = Image.new("RGB", img.size, "white")
             newimg.paste(img, mask=img.split()[3])  #在白底背景繪製圖片
-            newimg.save(savepath, format="JPEG", quality=95)    #轉存為JPG圖檔
+            #newimg.save(savepath, format="JPEG", quality=95)    #轉存為JPG圖檔
         elif img.format == "JPEG":
-            img.save(savepath, format="JPEG", quality=95)   #轉存為JPG圖檔
+            #img.save(savepath, format="JPEG", quality=95)   #轉存為JPG圖檔
+            pass
         #-----------------------------------
         msg = "在"+savefolder + "轉存" + filename + "了喲。\n"
         return msg
@@ -712,30 +653,6 @@ print(msg)
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-infile = filename#"earth.png"
-savefile = "tmp_saveJPG2.jpg"
-
-img = Image.open(infile)
-if img.format == "PNG":
-    newimg = Image.new("RGB", img.size, "WHITE")
-    newimg.paste(img, mask=img)             # 將PNG檔壓在白底圖片上
-    newimg.save(savefile, format="JPEG")    # JPG轉存檔案
-elif img.format == "JPEG":
-    img.save(savefile, format="JPEG")       # JPG轉存檔案
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 import numpy as np
@@ -757,70 +674,38 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
-from PIL import Image
-
-img1 = Image.new("RGB",(300,200),"rgb(0,0,255)") #藍色
-img1.save("tmp_blue.jpg")
-
-img2 = Image.new("RGBA",(300,200),"rgba(0,0,255,0)") #透明
-img2.save("tmp_alpha.png")
-
 print('------------------------------------------------------------')	#60個
 
 #利用圖片的個數強調數量
 
 #以人形圖示的個數強調數量的範例
 
-
 # 要排列的圖示個數
-num = 10
+M = 5
+N = 8
 
 # 圖片之間的邊界
 margin = 5
 
 # 載入圖片
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
-im = Image.open(filename)#"human.png"
-im_width, im_height = im.size
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg'
 
-# 將圖片入作為畫布使用的Image
-canvas = Image.new("RGBA", ((im_width + margin) * num, im_height))
-for i in range(num):
-    canvas.paste(im, ((im_width + margin) * i, 0))
+im = Image.open(filename)
+print(im.size)
 
-canvas
+W, H = im.size
 
-print('------------------------------------------------------------')	#60個
+# 建立圖片 W*N X H*M
+canvas = Image.new("RGBA", ((W + margin) * N, (H + margin) * M))
 
+for j in range(M):
+    for i in range(N):
+        canvas.paste(im, ((W + margin) * i, (H + margin) * j))
 
+plt.imshow(canvas)
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-# 1 open save show
-
-from PIL import Image
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-infile = filename#"earth.png"
-savefile = "tmp_savePNG1.png"
-
-img = Image.open(infile)      #載入圖片檔
-img.save(savefile, format="PNG")    #PNG轉存檔案
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -846,73 +731,6 @@ plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-print("PIL_hist")
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 打開圖像，并轉成灰度圖像
-im = np.array(Image.open(filename).convert('L'))
-
-# 新建一個圖像
-plt.figure()
-plt.subplot(121)
-
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-
-# 在原點的左上角顯示輪廓圖像
-plt.contour(im, origin='image')
-plt.axis('equal')
-plt.title(u'圖像輪廓圖')
-
-plt.subplot(122)
-# 利用hist來繪制直方圖
-# 第一個參數為一個一維數組
-# 因為hist只接受一維數組作為輸入，所以要用flatten()方法將任意數組按照行優先準則轉化成一個一維數組
-# 第二個參數指定bin的個數
-plt.hist(im.flatten(), 128)
-plt.title(u'圖像直方圖')
-#刻度
-plt.xlim([0-10,255+10])
-plt.ylim([0,8000])
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("PIL_histeq")
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-#from PCV.tools import imtools
-
-# 添加中文字體支持
-from matplotlib.font_manager import FontProperties
-
-im = np.array(Image.open(filename).convert('L'))
-# 打開圖像，并轉成灰度圖像
-#im2, cdf = imtools.histeq(im)
-
-plt.figure()
-
-plt.subplot(2, 2, 1)
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-plt.title(u'原始圖像')
-plt.imshow(im)
-
-plt.subplot(2, 2, 2)
-plt.title(u'直方圖均衡化後的圖像')
-#plt.imshow(im2)
-plt.subplot(2, 2, 3)
-plt.title(u'原始直方圖')
-plt.hist(im.flatten(), 128, density=True)
-plt.subplot(2, 2, 4)
-plt.title(u'均衡化後的直方圖')
-#plt.hist(im2.flatten(), 128, density=True)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -1049,64 +867,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("PIL_operation")
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-plt.figure()
-# 顯示原圖
-image = Image.open(filename)
-print(image.mode, image.size, image.format)
-plt.subplot(231)
-plt.title(u'原圖')
-plt.imshow(image)
-
-# 顯示灰度圖
-image = Image.open(filename).convert('L')
-
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-plt.subplot(232)
-plt.title(u'灰度圖')
-plt.imshow(image)
-# 復制并粘貼區域
-image = Image.open(filename)
-box = (100, 100, 200, 200)
-region = image.crop(box)
-region = region.transpose(Image.ROTATE_180)
-image.paste(region, box)
-plt.subplot(233)
-plt.title(u'復制粘貼區域')
-plt.imshow(image)
-
-# 縮略圖
-image = Image.open(filename)
-size = 128, 128
-image.thumbnail(size)
-print(image.size)
-plt.subplot(234)
-plt.title(u'縮略圖')
-plt.imshow(image)
-#image.save('tmp_pic1.jpg')# 保存縮略圖
-
-#調整圖像尺寸
-image=Image.open(filename)
-image=image.resize(size)
-print(image.size)
-plt.subplot(235)
-plt.title(u'調整尺寸後的圖像')
-plt.imshow(image)
-
-#旋轉圖像45°
-image=Image.open(filename)
-image=image.rotate(45)
-plt.subplot(236)
-plt.title(u'旋轉45°後的圖像')
-plt.imshow(image)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 print("de_noise")
 
 import random
@@ -1172,24 +932,31 @@ def add_salt_noise(img):
     window = np.ones((n, n)) / n ** 2
     Grey_sp_me = convert_2d(Grey_sp)
     Grey_gs_me = convert_2d(Grey_gs)
+
     plt.subplot(231)
     plt.title('椒鹽噪聲')
     plt.imshow(Grey_sp, cmap='gray')
+
     plt.subplot(232)
     plt.title('高斯噪聲')
     plt.imshow(Grey_gs, cmap='gray')
+
     plt.subplot(233)
     plt.title('椒鹽噪聲的中值濾波')
     plt.imshow(Grey_sp_mf, cmap='gray')
+
     plt.subplot(234)
     plt.title('高斯噪聲的中值濾波')
     plt.imshow(Grey_gs_mf, cmap='gray')
+
     plt.subplot(235)
     plt.title('椒鹽噪聲的均值濾波')
     plt.imshow(Grey_sp_me, cmap='gray')
+
     plt.subplot(236)
     plt.title('高斯噪聲的均值濾波')
     plt.imshow(Grey_gs_me, cmap='gray')
+
     plt.show()
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
@@ -1201,7 +968,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_derivative")
 
-#from pylab import *
 from scipy.ndimage import  filters
 import numpy
 
@@ -1209,21 +975,25 @@ filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 im=np.array(Image.open(filename).convert('L'))
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+
 plt.subplot(141)
 plt.title(u'(a)原圖')
 plt.imshow(im)
 # sobel算子
 imx=np.zeros(im.shape)
 filters.sobel(im,1,imx)
+
 plt.subplot(142)
 plt.title(u'(b)x方向差分')
 plt.imshow(imx)
 imy=np.zeros(im.shape)
 filters.sobel(im,0,imy)
+
 plt.subplot(143)
 plt.title(u'(c)y方向差分')
 plt.imshow(imy)
 mag=255-np.sqrt(imx**2+imy**2)
+
 plt.subplot(144)
 plt.title(u'(d)梯度幅值')
 plt.imshow(mag)
@@ -1241,9 +1011,11 @@ filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 im=np.array(Image.open(filename).convert('L'))
 plt.figure()
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+
 plt.subplot(141)
 plt.title(u'原圖')
 plt.imshow(im)
+
 for bi,blur in enumerate([2,4,8]):
     im2=np.zeros(im.shape)
     im2=filters.gaussian_filter(im,blur)
@@ -1255,7 +1027,7 @@ for bi,blur in enumerate([2,4,8]):
 
 #如果是彩色圖像，則分別對三個通道進行模糊
 #for bi, blur in enumerate([2,4,8]):
-#  im2 = zeros(im.shape)
+#  im2 = np.zeros(im.shape)
 #  for i in range(3):
 #    im2[:, :, i] = filters.gaussian_filter(im[:, :, i], blur)
 #  im2 = np.uint8(im2)
@@ -1305,26 +1077,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("PIL_ginput")
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-im = np.array(Image.open(filename))
-plt.imshow(im)
-
-print('請點擊3個點')
-x = plt.ginput(3)
-print('你已點擊:', x)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-img = Image.open(filename)
-imgcopy=img.copy()
-
-print('------------------------------------------------------------')	#60個
-
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 print("------------------------------------------------------------")  # 60個
@@ -1336,60 +1088,66 @@ from scipy.ndimage import measurements, morphology
 
 # 加載圖像和閾值，以確保它是二進制的
 plt.figure()
+
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 im = np.array(Image.open('data/castle.jpg').convert('L'))
+
 plt.subplot(221)
 plt.imshow(im)
 plt.title(u'原圖')
 im = (im < 128)
 labels, nbr_objects = measurements.label(im) #圖像的灰度值表示對象的標簽
 print ("Number of objects:", nbr_objects)
+
 plt.subplot(222)
 plt.imshow(labels)
 plt.title(u'標記後的圖')
 #形態學——使物體分離更好
 im_open = morphology.binary_opening(im, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+
 plt.subplot(223)
 plt.imshow(im_open)
 plt.title(u'開運算後的圖像')
 labels_open, nbr_objects_open = measurements.label(im_open)
 print ("Number of objects:", nbr_objects_open)
+
 plt.subplot(224)
 plt.imshow(labels_open)
 plt.title(u'開運算後進行標記後的圖像')
 
 plt.show()
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_PCA")
 
-from numpy import *
 #measurements模塊實現二值圖像的計數和度量功能，morphology模塊實現形態學操作
 from scipy.ndimage import measurements, morphology  
-#from pylab import *
 
 # 加載圖像和閾值，以確保它是二進制的
 plt.figure()
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 im = np.array(Image.open('data/castle.jpg').convert('L'))
+
 plt.subplot(221)
 plt.imshow(im)
 plt.title(u'原圖')
 im = (im < 128)
 labels, nbr_objects = measurements.label(im) #圖像的灰度值表示對象的標簽
 print ("Number of objects:", nbr_objects)
+
 plt.subplot(222)
 plt.imshow(labels)
 plt.title(u'標記後的圖')
 #形態學——使物體分離更好
 im_open = morphology.binary_opening(im, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+
 plt.subplot(223)
 plt.imshow(im_open)
 plt.title(u'開運算後的圖像')
 labels_open, nbr_objects_open = measurements.label(im_open)
 print ("Number of objects:", nbr_objects_open)
+
 plt.subplot(224)
 plt.imshow(labels_open)
 plt.title(u'開運算後進行標記後的圖像')
@@ -1407,16 +1165,20 @@ from scipy.ndimage import filters
 im = np.array(Image.open('data/gril.jpg').convert('L'))
 #U,T = rof.denoise(im,im)
 G = filters.gaussian_filter(im,10)
+
 plt.figure()
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+
 plt.subplot(1,3,1)
 plt.imshow(im)
 #plt.axis('equal')
 plt.title(u'原噪聲圖像')
+
 plt.subplot(1,3,2)
 plt.imshow(G)
 #plt.axis('equal')
 plt.title(u'高斯模糊後的圖像')
+
 plt.subplot(1,3,3)
 #plt.imshow(U)
 #plt.axis('equal')
@@ -1433,33 +1195,34 @@ from scipy.ndimage import filters
 #from PCV.tools import rof
 
 # 創建合成圖像與噪聲
-im = zeros((500,500))
+im = np.zeros((500,500))
 im[100:400,100:400] = 128
 im[200:300,200:300] = 255
-im = im + 30*random.standard_normal((500,500))
+im = im + 30*np.random.standard_normal((500,500))
 #roll()函數：循環滾動數組中的元素，計算領域元素的差異。linalg.norm()函數可以衡量兩個數組見得差異
 #U,T = rof.denoise(im,im)  
 G = filters.gaussian_filter(im,10)
-figure()
+
+plt.figure()
+
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-subplot(1,3,1)
-imshow(im)
-#axis('equal')
-title(u'原噪聲圖像')
 
-subplot(1,3,2)
-imshow(G)
-#axis('equal')
-title(u'高斯模糊後的圖像')
+plt.subplot(1,3,1)
+plt.imshow(im)
+#plt.axis('equal')
+plt.title(u'原噪聲圖像')
 
-subplot(1,3,3)
-#imshow(U)
-#axis('equal')
-title(u'ROF降噪後的圖像')
+plt.subplot(1,3,2)
+plt.imshow(G)
+#plt.axis('equal')
+plt.title(u'高斯模糊後的圖像')
 
-show()
+plt.subplot(1,3,3)
+#plt.imshow(U)
+#plt.axis('equal')
+plt.title(u'ROF降噪後的圖像')
 
-sys.exit()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1491,7 +1254,7 @@ def transimg(img_path):
             output_img_path = "tmp_" + str[0] + ".jpg"
             print(output_img_path)
             im = Image.open(img_path)
-            im.save(output_img_path)
+            #im.save(output_img_path)
             return True
         except:
             return False
@@ -1501,8 +1264,6 @@ def transimg(img_path):
 
 img_path = 'lena.png'
 print(transimg(img_path))
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1570,6 +1331,91 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+img = Image.open(filename)
+#img.show()
+w,h=img.size
+print(w,h) #320 240
+
+filename=img.filename
+print(filename)
+
+print("------------------------------------------------------------")  # 60個
+
+print("操作像素")
+
+image = Image.open(filename)
+for x in range(100, 200):
+    for y in range(250, 350):
+        image.putpixel((x, y), (128, 128, 128))
+image.show()
+
+
+
+print('------------------------------------------------------------')	#60個
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+infile = filename#"earth.png"
+savefile = "tmp_savePNG1.png"
+
+img = Image.open(infile)      #載入圖片檔
+img.save(savefile, format="PNG")    #PNG轉存檔案
+
+
+
+image = Image.open(filename)
+image.save("tmp_pic_quality95.jpg", quality=95 )
+image.close()
+
+image = Image.open(filename)
+image.save('tmp_pic_normal.jpg')
+image.close()
+
+print('------------------------------------------------------------')	#60個
+
+image = Image.open(filename)
+image.save('tmp_pic_high.jpg', quality = 95)
+image.close()
+
+print('------------------------------------------------------------')	#60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+image = Image.open(filename)
+image.save("tmp_pic_quality_default.jpg")
+image.close()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+infile = filename#"earth.png"
+savefile = "tmp_saveJPG2.jpg"
+
+img = Image.open(infile)
+if img.format == "PNG":
+    newimg = Image.new("RGB", img.size, "WHITE")
+    newimg.paste(img, mask=img)             # 將PNG檔壓在白底圖片上
+    newimg.save(savefile, format="JPEG")    # JPG轉存檔案
+elif img.format == "JPEG":
+    img.save(savefile, format="JPEG")       # JPG轉存檔案
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 """
 
@@ -1586,16 +1432,51 @@ img1.save("aaa.jpg")
 
 
 
+print("PIL_ginput")
+
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+im = np.array(Image.open(filename))
+plt.imshow(im)
+
+print('請點擊3個點')
+x = plt.ginput(3)
+print('你已點擊:', x)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+"""
+使用pillow操作图像
+"""
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+
+from PIL import Image
+
 img = Image.open(filename)
-#img.show()
-w,h=img.size
-print(w,h) #320 240
+print(img.size)
+print(img.format)
+print(img.format_description)
+#img.save('xxxxx.png')
 
-filename=img.filename
-print(filename)
+img2 = Image.open(filename)
 
-print("------------------------------------------------------------")  # 60個
+#img3 = img2.crop((335, 435, 430, 615))
+img3 = img2.crop((100, 100, 150, 150))
+for x in range(4):
+    for y in range(5):
+        img2.paste(img3, (95 * y , 180 * x))
 
+img2.resize((img.size[0] // 2, img.size[1] // 2))
+img2.rotate(90)
+
+#img2.save('xxxxx.png')
+
+
+
+print('------------------------------------------------------------')	#60個
 
