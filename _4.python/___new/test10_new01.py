@@ -446,44 +446,10 @@ ciphertext = encrypt(msg, encry_dict)
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
 
-print("------------------------------------------------------------")  # 60個
-
-print("顯示資料夾內的特定格式的檔案")
-
-
-def is_image(filename):
-    f = filename.lower()
-    return (
-        f.endswith(".png")
-        or f.endswith(".jpg")
-        or f.endswith(".jpeg")
-        or f.endswith(".bmp")
-        or f.endswith(".gif")
-        or ".jpg" in f
-        or f.endswith(".svg")
-    )
-
-
-def find_similar_images(foldername):
-    image_filenames = []
-    image_filenames += [
-        os.path.join(foldername, path)
-        for path in os.listdir(foldername)
-        if is_image(path)
-    ]
-    for img in sorted(image_filenames):
-        print(img)
-
-
-foldername = "C:/_git/vcs/_1.data/______test_files2"
-find_similar_images(foldername)
 
 print("------------------------------------------------------------")  # 60個
-
-# 以下為OK可以搬出的
 
 print("十進位 轉 十六進位")
-
 
 # Convert a decimal to a hex as a string
 def decimalToHex(decimalValue):
@@ -3066,26 +3032,6 @@ def payment():
 
 print("------------------------------------------------------------")  # 60個
 
-""" os 模組
-directory = os.getcwd()
-
-os.mkdir(directory+"/example")  #建立資料夾
-os.mkdir(directory+"/doc")  #建立資料夾
-directory_listdir=os.listdir( directory )
-print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
-
-os.rename(directory+"/example",directory+"/sample") #更名
-directory_listdir=os.listdir( directory )
-print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
-
-os.rmdir(directory+"/doc")
-directory_listdir=os.listdir( directory )
-print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
 def fib(n):  # 定義函數fib()
     if n == 0:
         return 0  # 如果n=0 則傳回 0
@@ -3244,64 +3190,10 @@ print(s1)
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
 print("字串的 title 用法, 首字大寫")
 s = "this is a lion mouse"
 
 print(s.title())
-
-print("------------------------------------------------------------")  # 60個
-
-items = os.listdir()
-print(os.path.exists("myprime.py"))
-for item in items:
-    print(os.path.abspath(item))
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "python05_simple_viewer.py"
-
-fullpath = os.path.abspath(filename)
-print(fullpath)
-
-print("os.path.basename:", os.path.basename(fullpath))
-print("os.path.dirname:", os.path.dirname(fullpath))
-print("os.path.getatime:", os.path.getatime(fullpath))
-print("os.path.getmtime:", os.path.getmtime(fullpath))
-print("os.path.getctime:", os.path.getctime(fullpath))
-print("os.path.getsize:", os.path.getsize(fullpath))
-print("os.path.isabs:", os.path.isabs(fullpath))
-print("os.path.isfile:", os.path.isfile(fullpath))
-print("os.path.isdir:", os.path.isdir(fullpath))
-print("os.path.split:", os.path.split(fullpath))
-print("os.path.splitdrive:", os.path.splitdrive(fullpath))
-print("os.path.splitext:", os.path.splitext(fullpath))
-
-print("---- os --------------------------------------------------------")  # 60個
-
-
-def getuser():
-    for name in ("LOGNAME", "USER", "LNAME", "USERNAME"):
-        print(name)
-        user = os.environ.get(name)
-        if user:
-            print(user)
-            return user
-
-
-print("get user name")
-ccc = getuser()
-print(ccc)
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-for envname in "TMPDIR", "TEMP", "TMP":
-    dirname = os.getenv(envname)
-    print("cccccc", dirname)
-    # print(dirname)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3346,40 +3238,6 @@ print("rmdir(): ", os.listdir(new_path))
 os.remove("aa.txt")
 print("remove(): ", os.listdir(new_path))
 """
-
-print("------------------------------------------------------------")  # 60個
-
-import os.path as path
-
-fname = path.realpath("ch11-2-2.py")
-print(fname)
-r = path.split(fname)
-print("os.path.split() =", r)
-r = path.splitext(fname)
-print("os.path.splitext() =", r)
-
-print("------------------------------------------------------------")  # 60個
-
-import os.path as path
-
-fname = path.realpath("ch11-2-2.py")
-print(fname)
-p = path.dirname(fname)
-print("p = os.path.dirname() =", p)
-f = path.basename(fname)
-print("f = os.path.basename() =", f)
-
-print("------------------------------------------------------------")  # 60個
-
-import os.path as path
-
-p = "D:\PythonChatGPT\ch11"
-f = "ch11-2-2.py"
-print(p, f)
-r = path.join(p, f)
-print("os.path.join(p,f) =", r)
-
-
 print("------------------------------------------------------------")  # 60個
 
 """ no file
@@ -3418,17 +3276,6 @@ print("Val的十六進位數=%x" % Val)  # 以%x格式化字元輸出
 
 print("------------------------------------------------------------")  # 60個
 
-weight = 123
-print("您在月球上體重為：%.5f 公斤" % (weight * 0.17))
-
-print("------------------------------------------------------------")  # 60個
-
-company = "藍海科技股份有限公司"
-year = 27
-print("{}已成立公司 {} 年".format(company, year))
-
-print("------------------------------------------------------------")  # 60個
-
 print("{0:10}收入：{1:_^12}".format("Axel", 52000))
 print("{0:10}收入：{1:>12}".format("Michael", 87000))
 print("{0:10}收入：{1:*<12}".format("May", 36000))
@@ -3458,21 +3305,6 @@ a = b = 12
 print(a, b)
 name, salary, weight = "陳大富", 60000, 85.7
 print(name, salary, weight)
-
-print("------------------------------------------------------------")  # 60個
-
-x = 15
-y = 10
-print(x & y)
-print(x ^ y)
-print(x | y)
-print(~x)
-
-print("------------------------------------------------------------")  # 60個
-
-
-x = 1234
-print("共需花費: %d 元" % x)
 
 print("------------------------------------------------------------")  # 60個
 

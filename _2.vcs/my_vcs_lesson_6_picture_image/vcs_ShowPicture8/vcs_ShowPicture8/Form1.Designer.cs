@@ -38,7 +38,7 @@
             // 
             this.pictureBox_FadeInFadeOut.Location = new System.Drawing.Point(30, 30);
             this.pictureBox_FadeInFadeOut.Name = "pictureBox_FadeInFadeOut";
-            this.pictureBox_FadeInFadeOut.Size = new System.Drawing.Size(249, 254);
+            this.pictureBox_FadeInFadeOut.Size = new System.Drawing.Size(200, 200);
             this.pictureBox_FadeInFadeOut.TabIndex = 0;
             this.pictureBox_FadeInFadeOut.TabStop = false;
             this.pictureBox_FadeInFadeOut.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_FadeInFadeOut_Paint);
@@ -52,7 +52,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1019, 709);
+            this.ClientSize = new System.Drawing.Size(396, 317);
             this.Controls.Add(this.pictureBox_FadeInFadeOut);
             this.Name = "Form1";
             this.Text = "Form1";

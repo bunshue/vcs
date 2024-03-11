@@ -897,5 +897,163 @@ else:
     os.mkdir(image_foldername)        # 若無images目錄即刪除
 """
 
+print("------------------------------------------------------------")  # 60個
 
+print("顯示資料夾內的特定格式的檔案")
+
+
+def is_image(filename):
+    f = filename.lower()
+    return (
+        f.endswith(".png")
+        or f.endswith(".jpg")
+        or f.endswith(".jpeg")
+        or f.endswith(".bmp")
+        or f.endswith(".gif")
+        or ".jpg" in f
+        or f.endswith(".svg")
+    )
+
+
+def find_similar_images(foldername):
+    image_filenames = []
+    image_filenames += [
+        os.path.join(foldername, path)
+        for path in os.listdir(foldername)
+        if is_image(path)
+    ]
+    for img in sorted(image_filenames):
+        print(img)
+
+
+foldername = "C:/_git/vcs/_1.data/______test_files2"
+find_similar_images(foldername)
+
+print("------------------------------------------------------------")  # 60個
+
+""" os 模組
+directory = os.getcwd()
+
+os.mkdir(directory+"/example")  #建立資料夾
+os.mkdir(directory+"/doc")  #建立資料夾
+directory_listdir=os.listdir( directory )
+print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
+
+os.rename(directory+"/example",directory+"/sample") #更名
+directory_listdir=os.listdir( directory )
+print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
+
+os.rmdir(directory+"/doc")
+directory_listdir=os.listdir( directory )
+print("資料夾裡的文件與資料夾:{}".format(directory_listdir))
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+items = os.listdir()
+print(os.path.exists("myprime.py"))
+for item in items:
+    print(os.path.abspath(item))
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "python05_simple_viewer.py"
+
+fullpath = os.path.abspath(filename)
+print(fullpath)
+
+print("os.path.basename:", os.path.basename(fullpath))
+print("os.path.dirname:", os.path.dirname(fullpath))
+print("os.path.getatime:", os.path.getatime(fullpath))
+print("os.path.getmtime:", os.path.getmtime(fullpath))
+print("os.path.getctime:", os.path.getctime(fullpath))
+print("os.path.getsize:", os.path.getsize(fullpath))
+print("os.path.isabs:", os.path.isabs(fullpath))
+print("os.path.isfile:", os.path.isfile(fullpath))
+print("os.path.isdir:", os.path.isdir(fullpath))
+print("os.path.split:", os.path.split(fullpath))
+print("os.path.splitdrive:", os.path.splitdrive(fullpath))
+print("os.path.splitext:", os.path.splitext(fullpath))
+
+print("------------------------------------------------------------")  # 60個
+
+def getuser():
+    for name in ("LOGNAME", "USER", "LNAME", "USERNAME"):
+        print(name)
+        user = os.environ.get(name)
+        if user:
+            print(user)
+            return user
+
+
+print("get user name")
+ccc = getuser()
+print(ccc)
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+for envname in "TMPDIR", "TEMP", "TMP":
+    dirname = os.getenv(envname)
+    print("cccccc", dirname)
+    # print(dirname)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+
+fname = path.realpath("ch11-2-2.py")
+print(fname)
+r = path.split(fname)
+print("os.path.split() =", r)
+r = path.splitext(fname)
+print("os.path.splitext() =", r)
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+
+fname = path.realpath("ch11-2-2.py")
+print(fname)
+p = path.dirname(fname)
+print("p = os.path.dirname() =", p)
+f = path.basename(fname)
+print("f = os.path.basename() =", f)
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+
+p = "D:\PythonChatGPT\ch11"
+f = "ch11-2-2.py"
+print(p, f)
+r = path.join(p, f)
+print("os.path.join(p,f) =", r)
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 

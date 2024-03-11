@@ -19,7 +19,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print('顯示原圖')
 
 image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
@@ -48,7 +48,6 @@ img=Image.open(filename)
 gray=img.convert('L')
 plt.figure('Peony')
 plt.imshow(gray,cmap='gray')
-plt.axis('off')
 plt.show()
 
 """
@@ -61,26 +60,30 @@ gray=img.convert('L')   #轉換成灰度
 r,g,b=img.split()   #分離三通道
 pic=Image.merge('RGB',(r,g,b)) #合并三通道
 plt.figure('Peony')
-plt.subplot(2,3,1), plt.title('origin')
-plt.imshow(img),plt.axis('off')
-plt.subplot(2,3,2), plt.title('gray')
-plt.imshow(gray,cmap='gray'),plt.axis('off')
-plt.subplot(2,3,3), plt.title('merge')
-plt.imshow(pic),plt.axis('off')
-plt.subplot(2,3,4), plt.title('r')
-plt.imshow(r,cmap='gray'),plt.axis('off')
-plt.subplot(2,3,5), plt.title('g')
-plt.imshow(g,cmap='gray'),plt.axis('off')
-plt.subplot(2,3,6), plt.title('b')
-plt.imshow(b,cmap='gray'),plt.axis('off')
+plt.subplot(2,3,1)
+plt.title('origin')
+plt.imshow(img)
+plt.subplot(2,3,2)
+plt.title('gray')
+plt.imshow(gray,cmap='gray')
+plt.subplot(2,3,3)
+plt.title('merge')
+plt.imshow(pic)
+plt.subplot(2,3,4)
+plt.title('r')
+plt.imshow(r,cmap='gray')
+plt.subplot(2,3,5)
+plt.title('g')
+plt.imshow(g,cmap='gray')
+plt.subplot(2,3,6)
+plt.title('b')
+plt.imshow(b,cmap='gray')
 plt.show()
-
-
 
 """
 圖像中的像素訪問
 
-前面的一些例子中，我們都是利用Image.open（）來打開一幅圖像，然后直接對這個PIL對象進行操作。如果只是簡單的操作還可以，但是如果操作稍微復雜一些，就比較吃力了。因此，通常我們加載完圖片后，都是把圖片轉換成矩陣來進行更加復雜的操作。
+前面的一些例子中，我們都是利用Image.open（）來打開一幅圖像，然後直接對這個PIL對象進行操作。如果只是簡單的操作還可以，但是如果操作稍微復雜一些，就比較吃力了。因此，通常我們加載完圖片後，都是把圖片轉換成矩陣來進行更加復雜的操作。
 
 python中利用numpy庫和scipy庫來進行各種數據操作和科學計算。我們可以通過pip來直接安裝這兩個庫
 
@@ -92,7 +95,6 @@ pip install scipy
 img=np.array(Image.open(filename))  #打開圖像并轉化為數字矩陣
 plt.figure('Peony')
 plt.imshow(img)
-plt.axis('off')
 plt.show()
 
 """
@@ -106,7 +108,7 @@ print img.dtype
 print img.size 
 print type(img)
 
-如果是RGB圖片，那么轉換為array之后，就變成了一個rows*cols*channels的三維矩陣,因此，我們可以使用
+如果是RGB圖片，那么轉換為array之後，就變成了一個rows*cols*channels的三維矩陣,因此，我們可以使用
 
 img[i,j,k]
 
@@ -126,7 +128,6 @@ for i in range(5000):
     
 plt.figure('Peony')
 plt.imshow(img)
-plt.axis('off')
 plt.show()
 
 #例2：將lena圖像二值化，像素值大于128的變為1，否則變為0
@@ -143,7 +144,6 @@ for i in range(rows):
             
 plt.figure('Peony')
 plt.imshow(img,cmap='gray')
-plt.axis('off')
 plt.show()
 
 """
@@ -160,7 +160,7 @@ img[50:100,50:100] # 50~100 行，50~100 列（不包括第 100 行和第 100 �
 
 img[i].mean() # 第 i 行所有數值的平均值
 
-img[:,-1] # 最后一列
+img[:,-1] # 最後一列
 
 img[-2,:] (or im[-2]) # 倒數第二行
 
@@ -202,10 +202,9 @@ color_image = cmap(np.array(gray_image))
 
 # 顯示彩色圖像
 plt.imshow(color_image)
-plt.axis('off')
 plt.show()
 
-#上述代碼中，我們使用get_cmap方法獲取了一個名為’jet’的顏色映射表。然后，將灰度圖像轉換為NumPy數組，再將數組應用于顏色映射表，得到彩色圖像。
+#上述代碼中，我們使用get_cmap方法獲取了一個名為’jet’的顏色映射表。然後，將灰度圖像轉換為NumPy數組，再將數組應用于顏色映射表，得到彩色圖像。
 
 print('------------------------------------------------------------')	#60個
 
@@ -654,16 +653,8 @@ for x in range(100, 200):
         image.putpixel((x, y), (128, 128, 128))
 image.show()
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 print('------------------------------------------------------------')	#60個
 
-
-
-print('------------------------------------------------------------')	#60個
-'''
 from PIL import Image, ImageOps
 from IPython.display import display
 
@@ -833,25 +824,23 @@ img.save(savefile, format="PNG")    #PNG轉存檔案
 
 print('------------------------------------------------------------')	#60個
 
-
-'''
-
 from PIL import Image
+
 plt.figure('影像處理1', figsize = (10, 6))
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 image = Image.open(filename)
-plt.gray()  #這是什麼語法?
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(121)
-plt.title(u'原图')
+plt.title(u'原圖')
 plt.imshow(image)
 
 image = Image.open(filename).convert('L')
 
 plt.subplot(122)
-plt.title(u'灰度图')
+plt.title(u'灰度圖')
 plt.imshow(image)
 
 plt.show()
@@ -862,34 +851,32 @@ print("PIL_hist")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-from pylab import *
+# 打開圖像，并轉成灰度圖像
+im = np.array(Image.open(filename).convert('L'))
 
-# 打开图像，并转成灰度图像
-im = array(Image.open(filename).convert('L'))
+# 新建一個圖像
+plt.figure()
+plt.subplot(121)
 
-# 新建一个图像
-figure()
-subplot(121)
-# 不使用颜色信息
-gray()
-# 在原点的左上角显示轮廓图像
-contour(im, origin='image')
-axis('equal')
-axis('off')
-title(u'图像轮廓图')
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
-subplot(122)
-# 利用hist来绘制直方图
-# 第一个参数为一个一维数组
-# 因为hist只接受一维数组作为输入，所以要用flatten()方法将任意数组按照行优先准则转化成一个一维数组
-# 第二个参数指定bin的个数
-hist(im.flatten(), 128)
-title(u'图像直方图')
+# 在原點的左上角顯示輪廓圖像
+plt.contour(im, origin='image')
+plt.axis('equal')
+plt.title(u'圖像輪廓圖')
+
+plt.subplot(122)
+# 利用hist來繪制直方圖
+# 第一個參數為一個一維數組
+# 因為hist只接受一維數組作為輸入，所以要用flatten()方法將任意數組按照行優先準則轉化成一個一維數組
+# 第二個參數指定bin的個數
+plt.hist(im.flatten(), 128)
+plt.title(u'圖像直方圖')
 #刻度
 plt.xlim([0-10,255+10])
 plt.ylim([0,8000])
 
-show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -897,74 +884,66 @@ print("PIL_histeq")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-from pylab import *
 #from PCV.tools import imtools
 
-# 添加中文字体支持
+# 添加中文字體支持
 from matplotlib.font_manager import FontProperties
 
-im = array(Image.open(filename).convert('L'))
-# 打开图像，并转成灰度图像
+im = np.array(Image.open(filename).convert('L'))
+# 打開圖像，并轉成灰度圖像
 #im2, cdf = imtools.histeq(im)
-figure()
-subplot(2, 2, 1)
-axis('off')
-gray()
-title(u'原始图像')
-imshow(im)
-subplot(2, 2, 2)
-axis('off')
-title(u'直方图均衡化后的图像')
-#imshow(im2)
-subplot(2, 2, 3)
-axis('off')
-title(u'原始直方图')
-hist(im.flatten(), 128, density=True)
-subplot(2, 2, 4)
-axis('off')
-title(u'均衡化后的直方图')
-#hist(im2.flatten(), 128, density=True)
 
-show()
+plt.figure()
+
+plt.subplot(2, 2, 1)
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.title(u'原始圖像')
+plt.imshow(im)
+
+plt.subplot(2, 2, 2)
+plt.title(u'直方圖均衡化後的圖像')
+#plt.imshow(im2)
+plt.subplot(2, 2, 3)
+plt.title(u'原始直方圖')
+plt.hist(im.flatten(), 128, density=True)
+plt.subplot(2, 2, 4)
+plt.title(u'均衡化後的直方圖')
+#plt.hist(im2.flatten(), 128, density=True)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#from numpy import *
-from pylab import *
-
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-im=array(Image.open(filename).convert('L'))
+im=np.array(Image.open(filename).convert('L'))
 print(int(im.min()),int(im.max()))
 
-im2=255-im               #对图像进行反向处理
-print('对图像进行反向处理:\n',int(im2.min()),int(im2.max())) #查看最大/最小元素
+im2=255-im               #對圖像進行反向處理
+print('對圖像進行反向處理:\n',int(im2.min()),int(im2.max())) #查看最大/最小元素
 
-im3=(100.0/255)*im+100   #将图像像素值变换到100...200区间
-print('将图像像素值变换到100...200区间:\n',int(im3.min()),int(im3.max()))
+im3=(100.0/255)*im+100   #將圖像像素值變換到100...200區間
+print('將圖像像素值變換到100...200區間:\n',int(im3.min()),int(im3.max()))
 
-im4=255.0*(im/255.0)**2  #对像素值求平方后得到的图像
-print('对像素值求平方后得到的图像:\n',int(im4.min()),int(im4.max()))
+im4=255.0*(im/255.0)**2  #對像素值求平方後得到的圖像
+print('對像素值求平方後得到的圖像:\n',int(im4.min()),int(im4.max()))
 
 plt.figure('影像處理2', figsize = (10, 6))
-gray()
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
-subplot(131)
-imshow(im2)
-axis('off')
-title(r'$f(x)=255-x$')
+plt.subplot(131)
+plt.imshow(im2)
+plt.title(r'$f(x)=255-x$')
 
-subplot(132)
-imshow(im3)
-axis('off')
-title(r'$f(x)=\frac{100}{255}x+100$')
+plt.subplot(132)
+plt.imshow(im3)
+plt.title(r'$f(x)=\frac{100}{255}x+100$')
 
-subplot(133)
-imshow(im4)
-axis('off')
-title(r'$f(x)=255(\frac{x}{255})^2$')
+plt.subplot(133)
+plt.imshow(im4)
+plt.title(r'$f(x)=255(\frac{x}{255})^2$')
 
-show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1062,75 +1041,71 @@ dark_image=darkchannel(img,h,w)
 air=airlight(img,h,w)
 T_map=transmssion(air,dark_image,h,w,OMIGA)
 fogfree_img=defog(img,T_map,air,h,w)
-fogfree_img.show()  
+
+#把結果顯示出來
+plt.imshow(fogfree_img)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_operation")
 
-from pylab import *
-
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-figure()
-# 显示原图
+plt.figure()
+# 顯示原圖
 image = Image.open(filename)
 print(image.mode, image.size, image.format)
-subplot(231)
-title(u'原图')
-axis('off')
-imshow(image)
+plt.subplot(231)
+plt.title(u'原圖')
+plt.imshow(image)
 
-# 显示灰度图
+# 顯示灰度圖
 image = Image.open(filename).convert('L')
-gray()
-subplot(232)
-title(u'灰度图')
-axis('off')
-imshow(image)
-# 复制并粘贴区域
+
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.subplot(232)
+plt.title(u'灰度圖')
+plt.imshow(image)
+# 復制并粘貼區域
 image = Image.open(filename)
 box = (100, 100, 200, 200)
 region = image.crop(box)
 region = region.transpose(Image.ROTATE_180)
 image.paste(region, box)
-subplot(233)
-title(u'复制粘贴区域')
-axis('off')
-imshow(image)
+plt.subplot(233)
+plt.title(u'復制粘貼區域')
+plt.imshow(image)
 
-# 缩略图
+# 縮略圖
 image = Image.open(filename)
 size = 128, 128
 image.thumbnail(size)
 print(image.size)
-subplot(234)
-title(u'缩略图')
-axis('off')
-imshow(image)
-#image.save('tmp_pic1.jpg')# 保存缩略图
+plt.subplot(234)
+plt.title(u'縮略圖')
+plt.imshow(image)
+#image.save('tmp_pic1.jpg')# 保存縮略圖
 
-#调整图像尺寸
+#調整圖像尺寸
 image=Image.open(filename)
 image=image.resize(size)
 print(image.size)
-subplot(235)
-title(u'调整尺寸后的图像')
-axis('off')
-imshow(image)
+plt.subplot(235)
+plt.title(u'調整尺寸後的圖像')
+plt.imshow(image)
 
-#旋转图像45°
+#旋轉圖像45°
 image=Image.open(filename)
 image=image.rotate(45)
-subplot(236)
-title(u'旋转45°后的图像')
-axis('off')
-imshow(image)
+plt.subplot(236)
+plt.title(u'旋轉45°後的圖像')
+plt.imshow(image)
 
-show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("de_noise")
 
@@ -1140,7 +1115,7 @@ import scipy.misc
 import scipy.signal
 import scipy.ndimage
 
-"""中值滤波函数"""
+"""中值濾波函數"""
 def medium_filter(im, x, y, step):
     sum_s=[]
     for k in range(-int(step/2),int(step/2)+1):
@@ -1148,7 +1123,7 @@ def medium_filter(im, x, y, step):
             sum_s.append(im[x+k][y+m])
     sum_s.sort()
     return sum_s[(int(step*step/2)+1)]
-"""均值滤波函数"""
+"""均值濾波函數"""
 def mean_filter(im, x, y, step):
     sum_s = 0
     for k in range(-int(step/2),int(step/2)+1):
@@ -1158,14 +1133,14 @@ def mean_filter(im, x, y, step):
 
 def convert_2d(r):
     n = 3
-    # 3*3滤波器，每个系数都是1/9
+    # 3*3濾波器，每個系數都是1/9
     window = np.ones((n, n)) / n**2
-    #使用滤波器卷积图像
-    # mode = same 表示输出尺寸等于输入尺寸
-    # boundary 表示采用对称边界条件处理图像边缘
+    #使用濾波器卷積圖像
+    # mode = same 表示輸出尺寸等于輸入尺寸
+    # boundary 表示采用對稱邊界條件處理圖像邊緣
     s = scipy.signal.convolve2d(r, window, mode='same', boundary='symm')
     return s.astype(np.uint8)
-"""添加噪声"""
+"""添加噪聲"""
 def add_salt_noise(img):
     rows, cols, dims = img.shape 
     R = np.mat(img[:, :, 0])
@@ -1189,194 +1164,160 @@ def add_salt_noise(img):
     Grey_gs = Grey_gs - np.full(Grey_gs.shape, np.min(Grey_gs))
     Grey_gs = Grey_gs * 255 / np.max(Grey_gs)
     Grey_gs = Grey_gs.astype(np.uint8)
-    # 中值滤波
+    # 中值濾波
     Grey_sp_mf = scipy.ndimage.median_filter(Grey_sp, (8, 8))
     Grey_gs_mf = scipy.ndimage.median_filter(Grey_gs, (8, 8))
-    # 均值滤波
+    # 均值濾波
     n = 3
     window = np.ones((n, n)) / n ** 2
     Grey_sp_me = convert_2d(Grey_sp)
     Grey_gs_me = convert_2d(Grey_gs)
     plt.subplot(231)
-    plt.title('椒盐噪声')
+    plt.title('椒鹽噪聲')
     plt.imshow(Grey_sp, cmap='gray')
     plt.subplot(232)
-    plt.title('高斯噪声')
+    plt.title('高斯噪聲')
     plt.imshow(Grey_gs, cmap='gray')
     plt.subplot(233)
-    plt.title('椒盐噪声的中值滤波')
+    plt.title('椒鹽噪聲的中值濾波')
     plt.imshow(Grey_sp_mf, cmap='gray')
     plt.subplot(234)
-    plt.title('高斯噪声的中值滤波')
+    plt.title('高斯噪聲的中值濾波')
     plt.imshow(Grey_gs_mf, cmap='gray')
     plt.subplot(235)
-    plt.title('椒盐噪声的均值滤波')
+    plt.title('椒鹽噪聲的均值濾波')
     plt.imshow(Grey_sp_me, cmap='gray')
     plt.subplot(236)
-    plt.title('高斯噪声的均值滤波')
+    plt.title('高斯噪聲的均值濾波')
     plt.imshow(Grey_gs_me, cmap='gray')
     plt.show()
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 
-img = np.array(Image.open(filename))  #导入图片
+img = np.array(Image.open(filename))  #導入圖片
 add_salt_noise(img)
-
-
 
 print("------------------------------------------------------------")  # 60個
 
-
-
 print("PIL_derivative")
 
-from pylab import *
+#from pylab import *
 from scipy.ndimage import  filters
 import numpy
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-im=array(Image.open(filename).convert('L'))
-gray()
-subplot(141)
-axis('off')
-title(u'(a)原图')
-imshow(im)
+im=np.array(Image.open(filename).convert('L'))
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.subplot(141)
+plt.title(u'(a)原圖')
+plt.imshow(im)
 # sobel算子
-imx=zeros(im.shape)
+imx=np.zeros(im.shape)
 filters.sobel(im,1,imx)
-subplot(142)
-axis('off')
-title(u'(b)x方向差分')
-imshow(imx)
-imy=zeros(im.shape)
+plt.subplot(142)
+plt.title(u'(b)x方向差分')
+plt.imshow(imx)
+imy=np.zeros(im.shape)
 filters.sobel(im,0,imy)
-subplot(143)
-axis('off')
-title(u'(c)y方向差分')
-imshow(imy)
-mag=255-numpy.sqrt(imx**2+imy**2)
-subplot(144)
-title(u'(d)梯度幅值')
-axis('off')
-imshow(mag)
+plt.subplot(143)
+plt.title(u'(c)y方向差分')
+plt.imshow(imy)
+mag=255-np.sqrt(imx**2+imy**2)
+plt.subplot(144)
+plt.title(u'(d)梯度幅值')
+plt.imshow(mag)
 
-show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_fuzzy")
 
-from numpy import *
-from pylab import *
 from scipy.ndimage import filters
 from matplotlib.font_manager import FontProperties
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-im=array(Image.open(filename).convert('L'))
-figure()
-gray()
-axis('off')
-subplot(141)
-axis('off')
-title(u'原图')
-imshow(im)
+im=np.array(Image.open(filename).convert('L'))
+plt.figure()
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.subplot(141)
+plt.title(u'原圖')
+plt.imshow(im)
 for bi,blur in enumerate([2,4,8]):
-    im2=zeros(im.shape)
+    im2=np.zeros(im.shape)
     im2=filters.gaussian_filter(im,blur)
     im2=np.uint8(im2)
     imNum=str(blur)
-    subplot(1,4,2+bi)
-    axis('off')
-    title(u'标准差为'+imNum)
-    imshow(im2)
+    plt.subplot(1,4,2+bi)
+    plt.title(u'標準差為'+imNum)
+    plt.imshow(im2)
 
-#如果是彩色图像，则分别对三个通道进行模糊
+#如果是彩色圖像，則分別對三個通道進行模糊
 #for bi, blur in enumerate([2,4,8]):
 #  im2 = zeros(im.shape)
 #  for i in range(3):
 #    im2[:, :, i] = filters.gaussian_filter(im[:, :, i], blur)
 #  im2 = np.uint8(im2)
-#  subplot(1, 4,  2 + bi)
-#  axis('off')
-#  imshow(im2)
+#  plt.subplot(1, 4,  2 + bi)
+#  plt.imshow(im2)
 
-show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_gaussian")
 
-from pylab import *
 from scipy.ndimage import filters
-import numpy
 
 def imx(im, sigma):
-    imgx = zeros(im.shape)
+    imgx = np.zeros(im.shape)
     filters.gaussian_filter(im, sigma, (0, 1), imgx)
     return imgx
 def imy(im, sigma):
-    imgy = zeros(im.shape)
+    imgy = np.zeros(im.shape)
     filters.gaussian_filter(im, sigma, (1, 0), imgy)
     return imgy
 def mag(im, sigma):
-    # 还有gaussian_gradient_magnitude()
+    # 還有gaussian_gradient_magnitude()
     imgmag = 255 - numpy.sqrt(imgx ** 2 + imgy ** 2)
     return imgmag
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-im = array(Image.open(filename).convert('L'))
-figure()
-gray()
+im = np.array(Image.open(filename).convert('L'))
+plt.figure()
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 sigma = [2, 5, 10]
 for i in  sigma:
-    subplot(3, 4, 4*(sigma.index(i))+1)
-    axis('off')
-    imshow(im)
+    plt.subplot(3, 4, 4*(sigma.index(i))+1)
+    plt.imshow(im)
     imgx=imx(im, i)
-    subplot(3, 4, 4*(sigma.index(i))+2)
-    axis('off')
-    imshow(imgx)
+    plt.subplot(3, 4, 4*(sigma.index(i))+2)
+    plt.imshow(imgx)
     imgy=imy(im, i)
-    subplot(3, 4, 4*(sigma.index(i))+3)
-    axis('off')
-    imshow(imgy)
+    plt.subplot(3, 4, 4*(sigma.index(i))+3)
+    plt.imshow(imgy)
     imgmag=mag(im, i)
-    subplot(3, 4, 4*(sigma.index(i))+4)
-    axis('off')
-    imshow(imgmag)
-show()
+    plt.subplot(3, 4, 4*(sigma.index(i))+4)
+    plt.imshow(imgmag)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_ginput")
 
-from pylab import *
-
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-im = array(Image.open(filename))
-imshow(im)
+im = np.array(Image.open(filename))
+plt.imshow(im)
 
-print('请点击3个点')
-x = ginput(3)
-print('你已点击:', x)
-show()
+print('請點擊3個點')
+x = plt.ginput(3)
+print('你已點擊:', x)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-img = Image.open(filename)
-#img.show()
-w,h=img.size
-print(w,h) #320 240
-
-filename=img.filename
-print(filename)
-
-print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 img = Image.open(filename)
@@ -1390,154 +1331,135 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_opening")
 
-from numpy import *
-#measurements模块实现二值图像的计数和度量功能，morphology模块实现形态学操作
+#measurements模塊實現二值圖像的計數和度量功能，morphology模塊實現形態學操作
 from scipy.ndimage import measurements, morphology  
-from pylab import *
 
-# 加载图像和阈值，以确保它是二进制的
-figure()
-gray()
-im = array(Image.open('data/castle.jpg').convert('L'))
-subplot(221)
-imshow(im)
-axis('off')
-title(u'原图')
+# 加載圖像和閾值，以確保它是二進制的
+plt.figure()
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+im = np.array(Image.open('data/castle.jpg').convert('L'))
+plt.subplot(221)
+plt.imshow(im)
+plt.title(u'原圖')
 im = (im < 128)
-labels, nbr_objects = measurements.label(im) #图像的灰度值表示对象的标签
+labels, nbr_objects = measurements.label(im) #圖像的灰度值表示對象的標簽
 print ("Number of objects:", nbr_objects)
-subplot(222)
-imshow(labels)
-axis('off')
-title(u'标记后的图')
-#形态学——使物体分离更好
-im_open = morphology.binary_opening(im, ones((9, 5)), iterations=4) #开操作，第二个参数为结构元素，iterations觉定执行该操作的次数
-subplot(223)
-imshow(im_open)
-axis('off')
-title(u'开运算后的图像')
+plt.subplot(222)
+plt.imshow(labels)
+plt.title(u'標記後的圖')
+#形態學——使物體分離更好
+im_open = morphology.binary_opening(im, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+plt.subplot(223)
+plt.imshow(im_open)
+plt.title(u'開運算後的圖像')
 labels_open, nbr_objects_open = measurements.label(im_open)
 print ("Number of objects:", nbr_objects_open)
-subplot(224)
-imshow(labels_open)
-axis('off')
-title(u'开运算后进行标记后的图像')
+plt.subplot(224)
+plt.imshow(labels_open)
+plt.title(u'開運算後進行標記後的圖像')
 
-show()
+plt.show()
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_PCA")
 
 from numpy import *
-#measurements模块实现二值图像的计数和度量功能，morphology模块实现形态学操作
+#measurements模塊實現二值圖像的計數和度量功能，morphology模塊實現形態學操作
 from scipy.ndimage import measurements, morphology  
-from pylab import *
+#from pylab import *
 
-# 加载图像和阈值，以确保它是二进制的
-figure()
-gray()
-im = array(Image.open('data/castle.jpg').convert('L'))
-subplot(221)
-imshow(im)
-axis('off')
-title(u'原图')
+# 加載圖像和閾值，以確保它是二進制的
+plt.figure()
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+im = np.array(Image.open('data/castle.jpg').convert('L'))
+plt.subplot(221)
+plt.imshow(im)
+plt.title(u'原圖')
 im = (im < 128)
-labels, nbr_objects = measurements.label(im) #图像的灰度值表示对象的标签
+labels, nbr_objects = measurements.label(im) #圖像的灰度值表示對象的標簽
 print ("Number of objects:", nbr_objects)
-subplot(222)
-imshow(labels)
-axis('off')
-title(u'标记后的图')
-#形态学——使物体分离更好
-im_open = morphology.binary_opening(im, ones((9, 5)), iterations=4) #开操作，第二个参数为结构元素，iterations觉定执行该操作的次数
-subplot(223)
-imshow(im_open)
-axis('off')
-title(u'开运算后的图像')
+plt.subplot(222)
+plt.imshow(labels)
+plt.title(u'標記後的圖')
+#形態學——使物體分離更好
+im_open = morphology.binary_opening(im, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+plt.subplot(223)
+plt.imshow(im_open)
+plt.title(u'開運算後的圖像')
 labels_open, nbr_objects_open = measurements.label(im_open)
 print ("Number of objects:", nbr_objects_open)
-subplot(224)
-imshow(labels_open)
-axis('off')
-title(u'开运算后进行标记后的图像')
+plt.subplot(224)
+plt.imshow(labels_open)
+plt.title(u'開運算後進行標記後的圖像')
 
-show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_realROF")
 
-from pylab import *
-from numpy import *
-from numpy import random
 from scipy.ndimage import filters
 #from scipy.misc import imsave
 #from PCV.tools import rof
 
-im = array(Image.open('data/gril.jpg').convert('L'))
+im = np.array(Image.open('data/gril.jpg').convert('L'))
 #U,T = rof.denoise(im,im)
 G = filters.gaussian_filter(im,10)
-figure()
-gray()
-subplot(1,3,1)
-imshow(im)
-#axis('equal')
-axis('off')
-title(u'原噪声图像')
-subplot(1,3,2)
-imshow(G)
-#axis('equal')
-axis('off')
-title(u'高斯模糊后的图像')
-subplot(1,3,3)
-#imshow(U)
-#axis('equal')
-axis('off')
-title(u'ROF降噪后的图像')
+plt.figure()
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.subplot(1,3,1)
+plt.imshow(im)
+#plt.axis('equal')
+plt.title(u'原噪聲圖像')
+plt.subplot(1,3,2)
+plt.imshow(G)
+#plt.axis('equal')
+plt.title(u'高斯模糊後的圖像')
+plt.subplot(1,3,3)
+#plt.imshow(U)
+#plt.axis('equal')
+plt.title(u'ROF降噪後的圖像')
 
-show()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("PIL_ROF")
 
-from pylab import *
-from numpy import *
-from numpy import random
 from scipy.ndimage import filters
 #from scipy.misc import imsave
 #from PCV.tools import rof
 
-# 创建合成图像与噪声
+# 創建合成圖像與噪聲
 im = zeros((500,500))
 im[100:400,100:400] = 128
 im[200:300,200:300] = 255
 im = im + 30*random.standard_normal((500,500))
-#roll()函数：循环滚动数组中的元素，计算领域元素的差异。linalg.norm()函数可以衡量两个数组见得差异
+#roll()函數：循環滾動數組中的元素，計算領域元素的差異。linalg.norm()函數可以衡量兩個數組見得差異
 #U,T = rof.denoise(im,im)  
 G = filters.gaussian_filter(im,10)
 figure()
-gray()
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 subplot(1,3,1)
 imshow(im)
 #axis('equal')
-axis('off')
-title(u'原噪声图像')
+title(u'原噪聲圖像')
 
 subplot(1,3,2)
 imshow(G)
 #axis('equal')
-axis('off')
-title(u'高斯模糊后的图像')
+title(u'高斯模糊後的圖像')
 
 subplot(1,3,3)
 #imshow(U)
 #axis('equal')
-axis('off')
-title(u'ROF降噪后的图像')
+title(u'ROF降噪後的圖像')
 
 show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1545,9 +1467,9 @@ print("PIL_save")
 
 def IsValidImage(img_path):
     """
-    判断文件是否为有效（完整）的图片
-    :param img_path:图片路径
-    :return:True：有效 False：无效
+    判斷文件是否為有效（完整）的圖片
+    :param img_path:圖片路徑
+    :return:True：有效 False：無效
     """
     bValid = True
     try:
@@ -1559,9 +1481,9 @@ def IsValidImage(img_path):
 
 def transimg(img_path):
     """
-    转换图片格式
-    :param img_path:图片路径
-    :return: True：成功 False：失败
+    轉換圖片格式
+    :param img_path:圖片路徑
+    :return: True：成功 False：失敗
     """
     if IsValidImage(img_path):
         try:
@@ -1661,5 +1583,19 @@ img1.save("aaa.jpg")
 
 
 """
+
+
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+img = Image.open(filename)
+#img.show()
+w,h=img.size
+print(w,h) #320 240
+
+filename=img.filename
+print(filename)
+
+print("------------------------------------------------------------")  # 60個
 
 

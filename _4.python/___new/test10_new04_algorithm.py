@@ -453,7 +453,7 @@ def maze_solve(x, y, goal_x, goal_y):
             maze[cur[0]][cur[1]] = 3  # 標記死路
             stack.pop()  # 回溯
     else:
-        print("没有路徑")
+        print("沒有路徑")
         return False
 
 
@@ -509,7 +509,7 @@ def maze_solve(x, y, goal_x, goal_y):
             maze[cur[0]][cur[1]] = 3  # 標記死路
             stack.pop()  # 回溯
     else:
-        print("没有路徑")
+        print("沒有路徑")
         return False
 
 
@@ -1842,11 +1842,11 @@ print("------------------------------------------------------------")  # 60個
 def numWays(n, k):
     if n == 0:
         return 0
-    if n == 1:  # 1根篱笆的刷法
+    if n == 1:  # 1根籬笆的刷法
         return k
-    same = k  # 2根相同颜色刷法
-    diff = k * (k - 1)  # 2根不相同颜色刷法
-    for i in range(3, n + 1):  # 3根篱笆以上的刷法
+    same = k  # 2根相同顏色刷法
+    diff = k * (k - 1)  # 2根不相同顏色刷法
+    for i in range(3, n + 1):  # 3根籬笆以上的刷法
         same, diff = diff, (same + diff) * (k - 1)
     return same + diff  # 回傳總計
 
@@ -2116,7 +2116,7 @@ def maze_solve(x, y, goal_x, goal_y):
             maze[cur[0]][cur[1]] = 3  # 標記死路
             stack.pop()  # 回溯
     else:
-        print("没有路徑")
+        print("沒有路徑")
         return False
 
 
