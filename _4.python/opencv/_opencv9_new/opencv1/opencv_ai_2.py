@@ -24,8 +24,8 @@ def show_xy(event,x,y,flags,userdata):
     print(event,x,y,flags)
     # 印出相關參數的數值，userdata 可透過 setMouseCallback 第三個參數垂遞給函式
 
-cv2.imshow('oxxostudio', img)
-cv2.setMouseCallback('oxxostudio', show_xy)  # 設定偵測事件的函式與視窗
+cv2.imshow('ImageShow', img)
+cv2.setMouseCallback('ImageShow', show_xy)  # 設定偵測事件的函式與視窗
 
 cv2.waitKey(0)     # 按下任意鍵停止
 cv2.destroyAllWindows()
@@ -38,13 +38,13 @@ def show_xy(event,x,y,flags,param):
     if event == 0:
         img2 = img.copy()                         # 當滑鼠移動時，複製原本的圖片
         cv2.circle(img2, (x,y), 10, (0,0,0), 1)   # 繪製黑色空心圓
-        cv2.imshow('oxxostudio', img2)            # 顯示繪製後的影像
+        cv2.imshow('ImageShow', img2)            # 顯示繪製後的影像
     if event == 1:
         color = img[y,x]                          # 當滑鼠點擊時
         print(color)                              # 印出顏色
 
-cv2.imshow('oxxostudio', img)
-cv2.setMouseCallback('oxxostudio', show_xy)
+cv2.imshow('ImageShow', img)
+cv2.setMouseCallback('ImageShow', show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -65,10 +65,10 @@ def show_xy(event,x,y,flags,param):
             x2 = dots[num-1][0]
             y2 = dots[num-1][1]
             cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)  # 取得最後的兩個座標，繪製直線
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
 
-cv2.imshow('oxxostudio', img)
-cv2.setMouseCallback('oxxostudio', show_xy)
+cv2.imshow('ImageShow', img)
+cv2.setMouseCallback('ImageShow', show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -93,10 +93,10 @@ def show_xy(event,x,y,flags,param):
             # 根據兩個座標繪製四邊形
             cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
             # 不斷顯示新圖片 ( 如果不這麼做，會出現一堆四邊形殘影 )
-            cv2.imshow('oxxostudio', img2)
+            cv2.imshow('ImageShow', img2)
 
-cv2.imshow('oxxostudio', img)
-cv2.setMouseCallback('oxxostudio', show_xy)
+cv2.imshow('ImageShow', img)
+cv2.setMouseCallback('ImageShow', show_xy)
 
 cv2.waitKey(0)   # 按下任意鍵結束
 cv2.destroyAllWindows()
@@ -116,12 +116,12 @@ def show_xy(event,x,y,flags,param):
             img2 = img.copy()
             dot2 = [x, y]
             cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            cv2.imshow('oxxostudio', img2)
+            cv2.imshow('ImageShow', img2)
         if event == 4:
             img = img2   # 滑鼠放開時 ( event == 4 )，將 img 更新為 img2
 
-cv2.imshow('oxxostudio', img)
-cv2.setMouseCallback('oxxostudio', show_xy)
+cv2.imshow('ImageShow', img)
+cv2.setMouseCallback('ImageShow', show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -141,7 +141,7 @@ def show_xy(event,x,y,flags,param):
             img2 = img.copy()
             dot2 = [x, y]
             cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            cv2.imshow('oxxostudio', img2)
+            cv2.imshow('ImageShow', img2)
         if event == 4:
             level = 8                                         # 縮小比例 ( 可當作馬賽克的等級 )
             h = int((dot2[0] - dot1[0]) / level)              # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
@@ -150,10 +150,10 @@ def show_xy(event,x,y,flags,param):
             mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_LINEAR)   # 根據縮小尺寸縮小
             mosaic = cv2.resize(mosaic, (dot2[0] - dot1[0], dot2[1] - dot1[1]), interpolation=cv2.INTER_NEAREST) # 放大到原本的大小
             img[dot1[1]:dot2[1], dot1[0]:dot2[0]] = mosaic   # 置換成馬賽克的影像
-            cv2.imshow('oxxostudio', img)
+            cv2.imshow('ImageShow', img)
 
-cv2.imshow('oxxostudio', img)
-cv2.setMouseCallback('oxxostudio', show_xy)
+cv2.imshow('ImageShow', img)
+cv2.setMouseCallback('ImageShow', show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -179,10 +179,10 @@ def show_xy(event,x,y,flags,param):
             x2 = dots[len(dots)-1][0]     # 取得倒數第一個點的 x 座標
             y2 = dots[len(dots)-1][1]     # 取得倒數第一個點的 y 座標
             cv2.line(draw,(x1,y1),(x2,y2),(0,0,255,255),2)  # 畫直線
-        cv2.imshow('oxxostudio', draw)
+        cv2.imshow('ImageShow', draw)
 
-cv2.imshow('oxxostudio', draw)
-cv2.setMouseCallback('oxxostudio', show_xy)
+cv2.imshow('ImageShow', draw)
+cv2.setMouseCallback('ImageShow', show_xy)
 
 while True:
     keyboard = cv2.waitKey(5)                    # 每 5 毫秒偵測一次鍵盤事件
@@ -190,7 +190,7 @@ while True:
         break                                    # 如果按下 q 就跳出
     if keyboard == ord('r'):
         draw = np.zeros((h,w,4), dtype='uint8')  # 如果按下 r 就變成原本全黑的畫布
-        cv2.imshow('oxxostudio', draw)
+        cv2.imshow('ImageShow', draw)
 
 cv2.destroyAllWindows()
 
@@ -223,8 +223,8 @@ def show_xy(event,x,y,flags,param):
             y2 = dots[len(dots)-1][1]
             cv2.line(draw,(x1,y1),(x2,y2),(0,0,255,255),2)
 
-cv2.imshow('oxxostudio', draw)
-cv2.setMouseCallback('oxxostudio', show_xy)
+cv2.imshow('ImageShow', draw)
+cv2.setMouseCallback('ImageShow', show_xy)
 
 while True:
     ret, img = cap.read()               # 讀取影片的每一個影格
@@ -242,7 +242,7 @@ while True:
         break
     if keyboard == ord('r'):
         draw = np.zeros((h,w,4), dtype='uint8')
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     out.write(img)  # 儲存影片
 
 out.release()       # 釋放資源
@@ -251,7 +251,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-cv2.namedWindow('oxxostudio')  # 建立一個名為 oxxostudio 的視窗
+cv2.namedWindow('ImageShow')  # 建立一個名為 ImageShow 的視窗
 
 while True:
     keycode = cv2.waitKey(0)   # 持續等待，直到按下鍵盤按鍵才會繼續
@@ -275,7 +275,7 @@ def adjust(i, c, b):
 
 contrast = 0    # 初始化要調整對比度的數值
 brightness = 0  # 初始化要調整亮度的數值
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 
 while True:
     keycode = cv2.waitKey(0)
@@ -293,20 +293,20 @@ while True:
         break
     show = img.copy()                  # 複製原始圖片
     show = adjust(show, contrast, brightness)  # 根據亮度和對比度的調整值，輸出新的圖片
-    cv2.imshow('oxxostudio', show)
+    cv2.imshow('ImageShow', show)
 
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread('mona.jpg')
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 
 def test(val):
     print(val)
 
-cv2.createTrackbar('test', 'oxxostudio', 0, 255, test)
-cv2.setTrackbarPos('test', 'oxxostudio', 50)
+cv2.createTrackbar('test', 'ImageShow', 0, 255, test)
+cv2.setTrackbarPos('test', 'ImageShow', 50)
 
 keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -314,18 +314,18 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread('mona.jpg')
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 
 contrast = 0    # 初始化要調整對比度的數值
 brightness = 0  # 初始化要調整亮度的數值
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 
 # 定義調整亮度對比的函式
 def adjust(i, c, b):
     output = i * (c/100 + 1) - c + b    # 轉換公式
     output = np.clip(output, 0, 255)
     output = np.uint8(output)
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('ImageShow', output)
 
 # 定義調整亮度函式
 def brightness_fn(val):
@@ -339,10 +339,10 @@ def contrast_fn(val):
     contrast = val - 100
     adjust(img, contrast, brightness)
 
-cv2.createTrackbar('brightness', 'oxxostudio', 0, 200, brightness_fn)  # 加入亮度調整滑桿
-cv2.setTrackbarPos('brightness', 'oxxostudio', 100)
-cv2.createTrackbar('contrast', 'oxxostudio', 0, 200, contrast_fn)      # 加入對比度調整滑桿
-cv2.setTrackbarPos('contrast', 'oxxostudio', 100)
+cv2.createTrackbar('brightness', 'ImageShow', 0, 200, brightness_fn)  # 加入亮度調整滑桿
+cv2.setTrackbarPos('brightness', 'ImageShow', 100)
+cv2.createTrackbar('contrast', 'ImageShow', 0, 200, contrast_fn)      # 加入對比度調整滑桿
+cv2.setTrackbarPos('contrast', 'ImageShow', 100)
 
 keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -358,7 +358,7 @@ faces = face_cascade.detectMultiScale(gray)    # 偵測人臉
 for (x, y, w, h) in faces:
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)    # 利用 for 迴圈，抓取每個人臉屬性，繪製方框
 
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 cv2.waitKey(0) # 按下任意鍵停止
 cv2.destroyAllWindows()
 
@@ -381,7 +381,7 @@ while True:
     faces = face_cascade.detectMultiScale(gray)      # 偵測人臉
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 標記人臉
-    cv2.imshow('oxxostudio', frame)
+    cv2.imshow('ImageShow', frame)
     if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
@@ -404,7 +404,7 @@ for (x, y, w, h) in faces:
     mosaic = cv2.resize(mosaic, (w,h), interpolation=cv2.INTER_NEAREST)  # 然後放大
     img[y:y+h, x:x+w] = mosaic   # 將指定區域換成馬賽克區域
 
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 cv2.waitKey(0)   # 按下任意鍵停止
 cv2.destroyAllWindows()
 
@@ -432,7 +432,7 @@ while True:
         mosaic = cv2.resize(mosaic, (mw,mh), interpolation=cv2.INTER_LINEAR)
         mosaic = cv2.resize(mosaic, (w,h), interpolation=cv2.INTER_NEAREST)
         frame[y:y+h, x:x+w] = mosaic
-    cv2.imshow('oxxostudio', frame)
+    cv2.imshow('ImageShow', frame)
     if cv2.waitKey(1) == ord('q'):
         break    # 按下 q 鍵停止
 cap.release()
@@ -459,7 +459,7 @@ noses = nose_cascade.detectMultiScale(gray)                             # 偵測
 for (x, y, w, h) in noses:
     cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)              # 標記藍色方框
 
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 cv2.waitKey(0)   # 按下任意鍵停止
 cv2.destroyAllWindows()
 
@@ -495,7 +495,7 @@ while True:
     for (x, y, w, h) in noses:
         cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(1) == ord('q'):
         break     # 按下 q 鍵停止
 cap.release()
@@ -512,7 +512,7 @@ cars = car.detectMultiScale(gray, 1.1, 3)       # 偵測汽車
 for (x, y, w, h) in cars:
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 繪製外框
 
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 cv2.waitKey(0) # 按下任意鍵停止
 cv2.destroyAllWindows()
 
@@ -527,7 +527,7 @@ cars = car.detectMultiScale(gray, 1.1, 3)       # 偵測行人
 for (x, y, w, h) in cars:
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 繪製外框
 
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 cv2.waitKey(0)     # 按下任意鍵停止
 cv2.destroyAllWindows()
 
@@ -584,9 +584,9 @@ while True:
 
     # 建立姓名和 id 的對照表
     name = {
-        '1':'Tsai',
-        '2':'Trump',
-        '3':'oxxostudio'
+        '1':'David',
+        '2':'John',
+        '3':'Chris'
     }
 
     # 依序判斷每張臉屬於哪個 id
@@ -600,7 +600,7 @@ while True:
         # 在人臉外框旁加上名字
         cv2.putText(img, text, (x,y-5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
 
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(5) == ord('q'):
         break    # 按下 q 鍵停止
 cap.release()
@@ -624,10 +624,10 @@ while True:
     # 按下 a 開始選取
     if keyName == ord('a'):
         # 選取區域
-        area = cv2.selectROI('oxxostudio', frame, showCrosshair=False, fromCenter=False)
+        area = cv2.selectROI('ImageShow', frame, showCrosshair=False, fromCenter=False)
         print(area)
 
-    cv2.imshow('oxxostudio', frame)
+    cv2.imshow('ImageShow', frame)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -653,7 +653,7 @@ while True:
     if keyName == ord('q'):
         break
     if keyName == ord('a'):
-        area = cv2.selectROI('oxxostudio', frame, showCrosshair=False, fromCenter=False)
+        area = cv2.selectROI('ImageShow', frame, showCrosshair=False, fromCenter=False)
         tracker.init(frame, area)    # 初始化追蹤器
         tracking = True              # 設定可以開始追蹤
     if tracking:
@@ -663,7 +663,7 @@ while True:
             p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
             cv2.rectangle(frame, p1, p2, (0,0,255), 3)   # 根據座標，繪製四邊形，框住要追蹤的物件
 
-    cv2.imshow('oxxostudio', frame)
+    cv2.imshow('ImageShow', frame)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -697,7 +697,7 @@ while True:
         if tracking == False:
             # 如果尚未開始追蹤，就開始標記追蹤物件的外框
             for i in tracker_list:
-                area = cv2.selectROI('oxxostudio', frame, showCrosshair=False, fromCenter=False)
+                area = cv2.selectROI('ImageShow', frame, showCrosshair=False, fromCenter=False)
                 i.init(frame, area)    # 初始化追蹤器
             tracking = True            # 設定可以開始追蹤
         if tracking:
@@ -708,7 +708,7 @@ while True:
                     p2 = [int(point[0] + point[2]), int(point[1] + point[3])]
                     cv2.rectangle(frame, p1, p2, colors[i], 3)   # 根據座標，繪製四邊形，框住要追蹤的物件
 
-        cv2.imshow('oxxostudio', frame)
+        cv2.imshow('ImageShow', frame)
     a = a + 1
 
 cap.release()
@@ -739,7 +739,7 @@ while True:
     # 按下 a 的時候開始標記物件外框
     if keyName == ord('a'):
         for i in range(2):
-            area = cv2.selectROI('oxxostudio', frame, showCrosshair=False, fromCenter=False)
+            area = cv2.selectROI('ImageShow', frame, showCrosshair=False, fromCenter=False)
             # 標記外框後設定該物件的追蹤演算法
             tracker = cv2.legacy.TrackerCSRT_create()
             # 將該物件加入 multiTracker
@@ -757,7 +757,7 @@ while True:
                 # 標記物件外框
                 cv2.rectangle(frame, p1, p2, colors[a], 3)
                 a = a + 1
-    cv2.imshow('oxxostudio', frame)
+    cv2.imshow('ImageShow', frame)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -788,7 +788,7 @@ while True:
         break
     mask = cv2.inRange(frame, lower, upper)               # 使用 inRange
     output = cv2.bitwise_and(frame, frame, mask = mask )  # 套用影像遮罩
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('ImageShow', output)
     if cv2.waitKey(1) == ord('q'):
         break       # 按下 q 鍵停止
 cap.release()
@@ -813,7 +813,7 @@ while True:
     output = cv2.dilate(output, kernel)       # 膨脹影像，消除雜訊
     output = cv2.erode(output, kernel)        # 縮小影像，還原大小
 
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('ImageShow', output)
     if cv2.waitKey(1) == ord('q'):
         break       # 按下 q 鍵停止
 cap.release()
@@ -846,7 +846,7 @@ while True:
     for contour in contours:
         print(contour)
 
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('ImageShow', output)
     if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
@@ -885,7 +885,7 @@ while True:
                     # 如果是最後一個點，與第一個點連成一線
                     img = cv2.line(img, (contour[i][0][0], contour[i][0][1]), (contour[0][0][0], contour[0][0][1]), color, 3)
 
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
@@ -918,7 +918,7 @@ while True:
             x, y, w, h = cv2.boundingRect(contour)                      # 取得座標與長寬尺寸
             img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)  # 繪製四邊形
 
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
@@ -969,7 +969,7 @@ while True:
             x, y, w, h = cv2.boundingRect(contour)
             img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)
 
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
@@ -1006,7 +1006,7 @@ with mp_face_detection.FaceDetection(
             for detection in results.detections:
                 mp_drawing.draw_detection(img, detection)
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(1) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -1038,7 +1038,7 @@ with mp_face_detection.FaceDetection(             # 開始偵測人臉
             for detection in results.detections:
                 mp_drawing.draw_detection(img, detection)  # 標記人臉
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -1085,7 +1085,7 @@ with mp_face_detection.FaceDetection(
                 cv2.circle(img,(ax-8,ay-8),(eye-15),(255,255,255),-1) # 畫左眼白色小圓 ( 反光 )
                 cv2.circle(img,(bx-8,by-8),(eye-15),(255,255,255),-1) # 畫右眼白色小圓 ( 反光 )
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -1146,7 +1146,7 @@ with mp_face_mesh.FaceMesh(
                     connection_drawing_spec=mp_drawing_styles
                     .get_default_face_mesh_iris_connections_style())
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -1208,7 +1208,7 @@ with mp_face_mesh.FaceMesh(
                     connection_drawing_spec=mp_drawing_styles
                     .get_default_face_mesh_iris_connections_style())
 
-        cv2.imshow('oxxostudio', output)     # 顯示 output
+        cv2.imshow('ImageShow', output)     # 顯示 output
         if cv2.waitKey(5) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -1251,7 +1251,7 @@ with mp_hands.Hands(
                     mp_drawing_styles.get_default_hand_landmarks_style(),
                     mp_drawing_styles.get_default_hand_connections_style())
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -1310,7 +1310,7 @@ with mp_hands.Hands(
                     mp_drawing_styles.get_default_hand_connections_style())
 
         cv2.rectangle(img,(rx,ry),(rx+80,ry+80),(0,0,255),5)   # 畫出觸碰區
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -1349,7 +1349,7 @@ with mp_pose.Pose(
             mp_pose.POSE_CONNECTIONS,
             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break     # 按下 q 鍵停止
 cap.release()
@@ -1396,7 +1396,7 @@ with mp_pose.Pose(
             mp_pose.POSE_CONNECTIONS,
             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break     # 按下 q 鍵停止
 cap.release()
@@ -1444,7 +1444,7 @@ with mp_holistic.Holistic(
             landmark_drawing_spec=mp_drawing_styles
             .get_default_pose_landmarks_style())
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -1485,7 +1485,7 @@ with mp_objectron.Objectron(static_image_mode=False,
                 mp_drawing.draw_axis(img, detected_object.rotation,
                                     detected_object.translation)
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -1520,7 +1520,7 @@ with mp_selfie_segmentation.SelfieSegmentation(
         output_image = np.where(condition, img, bg)
         # 將主體與背景合成，如果滿足背景條件，就更換為 bg 的像素，不然維持原本的 img 的像素
 
-        cv2.imshow('oxxostudio', output_image)
+        cv2.imshow('ImageShow', output_image)
         if cv2.waitKey(5) == ord('q'):
             break     # 按下 q 鍵停止
 cap.release()
@@ -1661,7 +1661,7 @@ with mp_hands.Hands(
                     text = hand_pos(finger_angle)            # 取得手勢所回傳的內容
                     cv2.putText(img, text, (30,120), fontFace, 5, (255,255,255), 10, lineType) # 印出文字
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break
 cap.release()
@@ -1822,7 +1822,7 @@ with mp_hands.Hands(
                     else:
                         cv2.putText(img, text, (30,120), fontFace, 5, (255,255,255), 10, lineType) # 印出文字
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         if cv2.waitKey(5) == ord('q'):
             break
 cap.release()
@@ -1965,7 +1965,7 @@ with mp_hands.Hands(
             img[:,j,1] = img[:,j,1]*(1-draw[:,j,3]/255) + draw[:,j,1]*(draw[:,j,3]/255)
             img[:,j,2] = img[:,j,2]*(1-draw[:,j,3]/255) + draw[:,j,2]*(draw[:,j,3]/255)
 
-        cv2.imshow('oxxostudio', img)
+        cv2.imshow('ImageShow', img)
         keyboard = cv2.waitKey(5)
         if keyboard == ord('q'):
             break
@@ -2015,7 +2015,7 @@ while True:
 
     output = cv2.add(img, img2)                      # 合併影像
 
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('ImageShow', output)
     if cv2.waitKey(50) == ord('q'):
         break
 
@@ -2048,8 +2048,8 @@ def show_xy(event,x,y,flags,param):
             cv2.line(mask_w, (x1,y1), (x2,y2), (0,0,0), 50)        # 在白色遮罩上畫出黑色線條
             cv2.line(mask_b, (x1,y1), (x2,y2), (255,255,255), 50)  # 在黑色遮罩上畫出白色線條
 
-cv2.imshow('oxxostudio', mask)                 # 啟用視窗
-cv2.setMouseCallback('oxxostudio', show_xy)    # 偵測滑鼠行為
+cv2.imshow('ImageShow', mask)                 # 啟用視窗
+cv2.setMouseCallback('ImageShow', show_xy)    # 偵測滑鼠行為
 
 cap = cv2.VideoCapture(0)
 
@@ -2075,7 +2075,7 @@ while True:
 
     output = cv2.add(img, img2)                      # 合併影像
 
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('ImageShow', output)
     if cv2.waitKey(50) == ord('q'):
         break
 
@@ -2155,7 +2155,7 @@ with mp_hands.Hands(
 
         output = cv2.add(img, img2)                      # 合併影像
 
-        cv2.imshow('oxxostudio', output)
+        cv2.imshow('ImageShow', output)
         keyboard = cv2.waitKey(5)
         if keyboard == ord('q'):
             break
@@ -2229,7 +2229,7 @@ with mp_face_detection.FaceDetection(
                 out  = bg * (1 - mask) + face * mask       # 根據比例混合
                 out = (out * 255).astype('uint8')          # 轉換成數字
 
-        cv2.imshow('oxxostudio', out)
+        cv2.imshow('ImageShow', out)
         if cv2.waitKey(5) == ord('q'):
             break    # 按下 q 鍵停止
 cap.release()
@@ -2262,7 +2262,7 @@ while True:
         print('oxxo')
     if b>0.9:
         print('維他命')
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(500) == ord('q'):
         break     # 按下 q 鍵停止
 cap.release()
@@ -2307,7 +2307,7 @@ while True:
         text('b')
     if c>0.9:
         text('c')
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(1) == ord('q'):
         break    # 按下 q 鍵停止
 cap.release()
@@ -2354,7 +2354,7 @@ while True:
         text('石頭')
     if c>0.9:
         text('布')
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(1) == ord('q'):
         break     # 按下 q 鍵停止
 cap.release()
@@ -2398,7 +2398,7 @@ while True:
         text('ok~')
     if b>0.001:              # 判斷沒戴口罩
         text('no mask!!')
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(1) == ord('q'):
         break  # 按下 q 鍵停止
 cap.release()
@@ -2444,7 +2444,7 @@ while True:
         text('很乖')
     if b>0.001:
         text('沒戴口罩!!')
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(1) == ord('q'):
         break    # 按下 q 鍵停止
 cap.release()
@@ -2527,7 +2527,7 @@ while True:
     cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType) # 印出文字
 
     cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),3)  # 標記辨識的區域
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(50) == ord('q'):
         break     # 按下 q 鍵停止
 cap.release()
@@ -2544,7 +2544,7 @@ try:
 except:
     pass
 
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -2559,7 +2559,7 @@ try:
 except:
     pass
 
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -2581,7 +2581,7 @@ try:
 except:
     pass
 
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -2632,7 +2632,7 @@ for (x, y, w, h) in faces:
         pass
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 5)    # 利用 for 迴圈，抓取每個人臉屬性，繪製方框
 
-cv2.imshow('oxxostudio', img)
+cv2.imshow('ImageShow', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -2679,7 +2679,7 @@ while True:
         putText(0,40,emotion)                  # 放入文字
     except:
         pass
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('ImageShow', img)
     if cv2.waitKey(5) == ord('q'):
         break
 cap.release()
@@ -2761,7 +2761,7 @@ while True:
         else:
             a = 0
             pass
-    cv2.imshow('oxxostudio', output)               # 顯示圖片
+    cv2.imshow('ImageShow', output)               # 顯示圖片
 
 cap.release()                           # 所有作業都完成後，釋放資源
 cv2.destroyAllWindows()                 # 結束所有視窗

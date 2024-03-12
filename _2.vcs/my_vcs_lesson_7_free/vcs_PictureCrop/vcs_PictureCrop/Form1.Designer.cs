@@ -32,6 +32,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox_selection = new System.Windows.Forms.GroupBox();
+            this.cb_overwrite = new System.Windows.Forms.CheckBox();
             this.rb_filetype2 = new System.Windows.Forms.RadioButton();
             this.bt_open_folder = new System.Windows.Forms.Button();
             this.rb_filetype1 = new System.Windows.Forms.RadioButton();
@@ -77,6 +78,7 @@
             // 
             // groupBox_selection
             // 
+            this.groupBox_selection.Controls.Add(this.cb_overwrite);
             this.groupBox_selection.Controls.Add(this.rb_filetype2);
             this.groupBox_selection.Controls.Add(this.bt_open_folder);
             this.groupBox_selection.Controls.Add(this.rb_filetype1);
@@ -97,11 +99,21 @@
             this.groupBox_selection.TabStop = false;
             this.groupBox_selection.Text = "選取區域";
             // 
+            // cb_overwrite
+            // 
+            this.cb_overwrite.AutoSize = true;
+            this.cb_overwrite.Location = new System.Drawing.Point(180, 180);
+            this.cb_overwrite.Name = "cb_overwrite";
+            this.cb_overwrite.Size = new System.Drawing.Size(72, 16);
+            this.cb_overwrite.TabIndex = 22;
+            this.cb_overwrite.Text = "覆蓋原檔";
+            this.cb_overwrite.UseVisualStyleBackColor = true;
+            // 
             // rb_filetype2
             // 
             this.rb_filetype2.AutoSize = true;
             this.rb_filetype2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_filetype2.Location = new System.Drawing.Point(183, 159);
+            this.rb_filetype2.Location = new System.Drawing.Point(180, 155);
             this.rb_filetype2.Name = "rb_filetype2";
             this.rb_filetype2.Size = new System.Drawing.Size(54, 20);
             this.rb_filetype2.TabIndex = 21;
@@ -110,7 +122,7 @@
             // 
             // bt_open_folder
             // 
-            this.bt_open_folder.Location = new System.Drawing.Point(240, 137);
+            this.bt_open_folder.Location = new System.Drawing.Point(235, 126);
             this.bt_open_folder.Name = "bt_open_folder";
             this.bt_open_folder.Size = new System.Drawing.Size(40, 40);
             this.bt_open_folder.TabIndex = 20;
@@ -122,7 +134,7 @@
             this.rb_filetype1.AutoSize = true;
             this.rb_filetype1.Checked = true;
             this.rb_filetype1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_filetype1.Location = new System.Drawing.Point(183, 137);
+            this.rb_filetype1.Location = new System.Drawing.Point(180, 130);
             this.rb_filetype1.Name = "rb_filetype1";
             this.rb_filetype1.Size = new System.Drawing.Size(46, 20);
             this.rb_filetype1.TabIndex = 20;
@@ -336,6 +348,7 @@
         private System.Windows.Forms.RadioButton rb_filetype1;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox cb_overwrite;
     }
 }
 

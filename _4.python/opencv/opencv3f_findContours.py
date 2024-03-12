@@ -4,6 +4,16 @@ cv2.findContours
 cv2.drawContours
 
 
+圖片邊緣檢測
+
+圖片轉換成灰階Grayscale的部分，
+利用Canny邊緣檢測使用多階段算法來檢測圖像中的各種邊緣。
+
+OpenCV具有findContour()幫助從圖像中提取輪廓的功能。
+
+再來就把所有輪廓繪製起來，最後show出圖片 利用imshow語法。
+
+
 """
 
 import cv2
@@ -22,51 +32,76 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 '''
-filename = 'images/coin.jpg'
-
-cap = cv2.VideoCapture(filename)    #用VideoCapture讀取本機圖片
-
-ret, frame = cap.read()
-
-plt.figure('影像處理', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-
-gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-gray = cv2.GaussianBlur(gray, (13, 13), 0)  #執行高斯模糊化
-edged = cv2.Canny(gray, 50, 150)
-
-contours, hierarchy = cv2.findContours(
-    edged.copy(), 
-    cv2.RETR_EXTERNAL, 
-    cv2.CHAIN_APPROX_SIMPLE)
-
-out = frame.copy()
-cv2.drawContours(out, contours, -1, (0, 0, 255), 3) #用紅框標示出來
-
-frame = cv2.hconcat([frame, out])
-
-plt.subplot(122)
-plt.title('結果')
-plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
+color = [(0, 0, 255),#B G R
+         (0, 255, 0),
+         (255, 0, 0),
+         (255, 255, 0),#Cyan
+         (255, 0, 255), #Magenta
+         (0, 255, 255), #Yellow
+         (0, 128, 128),#Olive
+         (128, 0, 0),#Navy
+         (128, 0, 128),#Purple
+         ]
 
 print('------------------------------------------------------------')	#60個
 
+#coin.jpg用圖片先處理方法一
+filename = 'images/coin.jpg'
+
+#opencv05_dilate_erode1.png用圖片先處理方法二
+#filename = 'C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png'
+
+#讀圖片的方法一
+cap = cv2.VideoCapture(filename)    #用VideoCapture讀取本機圖片
+ret, image1 = cap.read()
+
+#讀圖片的方法二
+image1=cv2.imread(filename)
+
+#轉灰階 
+image1_gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
+
+
+#圖片先處理方法一
+image1_gray = cv2.GaussianBlur(image1_gray, (13, 13), 0)  #執行高斯模糊化
+edged = cv2.Canny(image1_gray, 50, 150)
+contours, hierarchy = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
 """
-圖片邊緣檢測
-
-圖片轉換成灰階Grayscale的部分，
-利用Canny邊緣檢測使用多階段算法來檢測圖像中的各種邊緣。
-
-OpenCV具有findContour()幫助從圖像中提取輪廓的功能。
-
-再來就把所有輪廓繪製起來，最後show出圖片 利用imshow語法。
+#圖片先處理方法二
+ret,thresh = cv2.threshold(image1_gray,127,255,0)
+contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 """
+
+print(type(contours))
+print(len(contours))
+#print(contours)
+
+image2 = image1.copy()
+
+linewidth = 10 #線寬
+#linewidth = -1 #填充模式
+
+#一起畫
+#index = -1 # 指名要繪製的輪廓, -1代表全部
+#image2=cv2.drawContours(image2,contours,index,(0,0,255),linewidth)  # image2為三通道才能顯示輪廓, 用紅框標示出來
+
+#分開畫
+length = len(contours)
+for index in range(length):
+    image2=cv2.drawContours(image2,contours,index,color[index%9],linewidth)  # image2為三通道才能顯示輪廓
+
+plt.figure('drawContours', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('尋找 Contours')
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -159,68 +194,54 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()
 plt.show()
+
 '''
+
 print('------------------------------------------------------------')	#60個
 
-print('OpenCV 畫圖 drawContours')
+#多邊形凹凸點計算
 
-filename = 'C:/_git/vcs/_4.python/_data/opencv05_dilate_erode1.png'
+import cv2
 
-image1=cv2.imread(filename)
-image1_gray=cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
+filename = 'data/star.png'
 
-ret,thresh=cv2.threshold(image1_gray,127,255,0)
+print('顯示圖片')
+image = cv2.imread(filename)	#讀取本機圖片
 
-contours,hierarchy=cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-print(type(contours))
-print(len(contours))
-print(contours)
+shape = image.shape
+h = shape[0]    #高
+w = shape[1]    #寬
+h, w, d = image.shape   #d為dimension d = 3 全彩 d = 1 灰階
+print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
-image2 = image1.copy()
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-linewidth = 10 #線寬
-#linewidth = -1 #填充模式
+edged = cv2.Canny(gray, 50, 150)
+edged = cv2.dilate(edged, None, iterations = 1)
+contours, hierarchy = cv2.findContours(
+    edged, 
+    cv2.RETR_EXTERNAL, 
+    cv2.CHAIN_APPROX_SIMPLE)
 
-color = [(0, 0, 255),#B G R
-         (0, 255, 0),
-         (255, 0, 0),
-         (255, 255, 0),#Cyan
-         (255, 0, 255), #Magenta
-         (0, 255, 255), #Yellow
-         (0, 128, 128),#Olive
-         (128, 0, 0),#Navy
-         (128, 0, 128),#Purple
-         ]
+cnt = contours[0]
+cnt = cv2.approxPolyDP(cnt, 30, True)
+hull = cv2.convexHull(cnt, returnPoints = False)
+defects = cv2.convexityDefects(cnt, hull)
+print('凸點數量：{}'.format(len(hull)))
+print('凹點數量：{}'.format(len(defects)))
 
-#一起畫
-#index = -1 # 指名要繪製的輪廓, -1代表全部
-#image2=cv2.drawContours(image2,contours,index,(0,0,255),linewidth)  # image2為三通道才能顯示輪廓
+for i in range(defects.shape[0]):
+    s, e, f, d = defects[i, 0]
+    start = tuple(cnt[s][0])
+    end = tuple(cnt[e][0])
+    far = tuple(cnt[f][0])
+    cv2.line(image, start, end, (0, 255, 0), 2)
+    cv2.circle(image, far, 5, (0, 0, 255), -1)
 
-#分開畫
-length = len(contours)
-for index in range(length):
-    image2=cv2.drawContours(image2,contours,index,color[index],linewidth)  # image2為三通道才能顯示輪廓
-
-plt.figure('drawContours', figsize = (16, 12))
-plt.subplot(121)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title('尋找 Contours')
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()
 plt.show()
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 print('------------------------------------------------------------')	#60個
 

@@ -1,5 +1,5 @@
 import cv2
-import monitor_module as m
+import monitor_module
 
 #----------↓↓E-mail資料設定↓↓------------#
 gmail_addr = '你的 Gmail 信箱'
@@ -10,9 +10,11 @@ sid = '你的 ACCOUNT SID'
 token = '你的 AUTH TOKEN'
 us_phone = '你的美國手機號碼'
 tw_phone = '你的台灣手機號碼'
+
 #--------------↓↓開啟攝影機開始運作↓↓------------------#
 cap = cv2.VideoCapture(0)
 skip = 1   # 設定不比對的次數, 由於前影像是空的, 略過一次比對
+
 while cap.isOpened():
     success, img = cap.read()
     if success:
@@ -22,23 +24,28 @@ while cap.isOpened():
             skip -= 1  # 將 skip 次數減 1
         else:  # ←如果 skip==0 就和前影像比對
             diff = cv2.absdiff(img_now, img_pre)   # 此影格與前影格的差異值
-            ret, thresh = cv2.threshold(diff, 25, 255,  # 門檻值
-                                        cv2.THRESH_BINARY)
-            contours, _ = cv2.findContours(thresh,    # 找到輪廓
-                                           cv2.RETR_EXTERNAL,
-                                           cv2.CHAIN_APPROX_SIMPLE)
-            if contours:    # 如果有偵測到輪廓
-                cv2.drawContours(img, contours, -1, (255, 255, 255), 2)
-                msg = m.get_mime_img('小偷入侵', '鷹眼防盜監視器', '警察局', img)
-                m.send_gmail(gmail_addr, gmail_pwd,
+
+            #設定門檻值
+            ret, thresh = cv2.threshold(diff, 25, 255,cv2.THRESH_BINARY)
+            #找輪廓
+            contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+            # 如果有偵測到輪廓
+            if contours:
+                cv2.drawContours(img, contours, -1, (0, 0, 255), 2)
+                """
+                msg = monitor_module.get_mime_img('小偷入侵', '鷹眼防盜監視器', '警察局', img)
+                monitor_module.send_gmail(gmail_addr, gmail_pwd,
                              to_addrs, msg)  # 以 gmail 寄出
-                m.send_sms('小偷來了', sid, token, us_phone, tw_phone)
+                monitor_module.send_sms('小偷來了', sid, token, us_phone, tw_phone)
+                """
                 print('偵測到移動')
-                skip = 200  # ←略過 200 次不比對
+                skip = 10  # ←略過 N 次不比對
             else:
                 print('靜止畫面')
         cv2.imshow('frame', img)
         img_pre = img_now.copy()
+
     k = cv2.waitKey(50)  # ←暫停 50 毫秒 (0.05 秒), 並檢查是否有按鍵輸入
     if k == ord('q'):
         cv2.destroyAllWindows()

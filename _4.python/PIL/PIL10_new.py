@@ -173,15 +173,9 @@ print('------------------------------------------------------------')	#60個
 
 import torchvision.transforms as transforms
 
-from PIL import Image
-
 print('------------------------------------------------------------')	#60個
 
 #PIL 偽彩色圖像處理
-
-from PIL import Image
-
-print('------------------------------------------------------------')	#60個
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/pic_256X100.png'
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -238,8 +232,6 @@ hashmethod == 'crop-resistant':
 crop-resistant: Crop-resistant hash
 imagehash.crop_resistant_hash
 """
-
-from PIL import Image
 import imagehash
 
 hash1 = imagehash.average_hash(Image.open(filename1))
@@ -253,8 +245,6 @@ else:
     print('兩圖不同')
 
 print('------------------------------------------------------------')	#60個
-
-from PIL import Image   # Importing Image class from PIL module
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
 
@@ -271,7 +261,6 @@ print("------------------------------------------------------------")  # 60個
 """
 # Pytesseract 辨識圖片中的文字
 
-from PIL import Image
 import pytesseract
 
 img = Image.open("english.jpg")
@@ -280,7 +269,6 @@ print(text)
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image
 import pytesseract
 
 img = Image.open("chinese.jpg")
@@ -288,8 +276,6 @@ text = pytesseract.image_to_string(img, lang="chi_tra")
 print(text)
 """
 print("------------------------------------------------------------")  # 60個
-
-from PIL import Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
@@ -487,7 +473,6 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image
 import pytesseract
 import time
 
@@ -578,7 +563,6 @@ batch_convert_images('images_directory')
 print("------------------------------------------------------------")  # 60個
 
 """
-from PIL import Image
 import pytesseract
 
 text  = pytesseract.image_to_string(Image.open('data/data17_10.jpg'),
@@ -590,8 +574,6 @@ with open('tmp_17_10.txt', 'w', encoding='utf-8') as fn:
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image
-
 filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
 print('------------------------------------------------------------')	#60個
 
@@ -601,14 +583,13 @@ from IPython.display import display
 #利用圖片大小強調數量多寡
 #載入圖片與顯示圖片的範例
 
-im = Image.open(filename)
-display(im)
+image = Image.open(filename)
+display(image)
 
 print('------------------------------------------------------------')	#60個
 
 
 from pathlib import Path
-from PIL import Image
 
 infolder = "testfolder"
 value1 = "outputfolder4"
@@ -650,14 +631,7 @@ def savefiles(infolder, savefolder):
 msg = savefiles(infolder, value1)
 print(msg)
 
-print("------------------------------------------------------------")  # 60個
-
-
 print('------------------------------------------------------------')	#60個
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 
 import seaborn as sns #海生, 自動把圖畫得比較好看
 import plotly.offline
@@ -666,14 +640,6 @@ import plotly.graph_objects as go
 import plotly.subplots
 import squarify
 
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 #利用圖片的個數強調數量
@@ -691,25 +657,23 @@ margin = 5
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg'
 
-im = Image.open(filename)
-print(im.size)
+image = Image.open(filename)
+print(image.size)
 
-W, H = im.size
+W, H = image.size
 
 # 建立圖片 W*N X H*M
 canvas = Image.new("RGBA", ((W + margin) * N, (H + margin) * M))
 
 for j in range(M):
     for i in range(N):
-        canvas.paste(im, ((W + margin) * i, (H + margin) * j))
+        canvas.paste(image, ((W + margin) * i, (H + margin) * j))
 
 plt.imshow(canvas)
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-from PIL import Image
 
 plt.figure('影像處理1', figsize = (10, 6))
 
@@ -734,31 +698,31 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-im=np.array(Image.open(filename).convert('L'))
-print(int(im.min()),int(im.max()))
+image=np.array(Image.open(filename).convert('L'))
+print(int(image.min()),int(image.max()))
 
-im2=255-im               #對圖像進行反向處理
-print('對圖像進行反向處理:\n',int(im2.min()),int(im2.max())) #查看最大/最小元素
+image2=255-image               #對圖像進行反向處理
+print('對圖像進行反向處理:\n',int(image2.min()),int(image2.max())) #查看最大/最小元素
 
-im3=(100.0/255)*im+100   #將圖像像素值變換到100...200區間
-print('將圖像像素值變換到100...200區間:\n',int(im3.min()),int(im3.max()))
+image3=(100.0/255)*image+100   #將圖像像素值變換到100...200區間
+print('將圖像像素值變換到100...200區間:\n',int(image3.min()),int(image3.max()))
 
-im4=255.0*(im/255.0)**2  #對像素值求平方後得到的圖像
-print('對像素值求平方後得到的圖像:\n',int(im4.min()),int(im4.max()))
+image4=255.0*(image/255.0)**2  #對像素值求平方後得到的圖像
+print('對像素值求平方後得到的圖像:\n',int(image4.min()),int(image4.max()))
 
 plt.figure('影像處理2', figsize = (10, 6))
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(131)
-plt.imshow(im2)
+plt.imshow(image2)
 plt.title(r'$f(x)=255-x$')
 
 plt.subplot(132)
-plt.imshow(im3)
+plt.imshow(image3)
 plt.title(r'$f(x)=\frac{100}{255}x+100$')
 
 plt.subplot(133)
-plt.imshow(im4)
+plt.imshow(image4)
 plt.title(r'$f(x)=255(\frac{x}{255})^2$')
 
 plt.show()
@@ -969,30 +933,29 @@ print("------------------------------------------------------------")  # 60個
 print("PIL_derivative")
 
 from scipy.ndimage import  filters
-import numpy
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-im=np.array(Image.open(filename).convert('L'))
+image=np.array(Image.open(filename).convert('L'))
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(141)
 plt.title(u'(a)原圖')
-plt.imshow(im)
+plt.imshow(image)
 # sobel算子
-imx=np.zeros(im.shape)
-filters.sobel(im,1,imx)
+imagex=np.zeros(image.shape)
+filters.sobel(image,1,imagex)
 
 plt.subplot(142)
 plt.title(u'(b)x方向差分')
-plt.imshow(imx)
-imy=np.zeros(im.shape)
-filters.sobel(im,0,imy)
+plt.imshow(imagex)
+imagey=np.zeros(image.shape)
+filters.sobel(image,0,imagey)
 
 plt.subplot(143)
 plt.title(u'(c)y方向差分')
-plt.imshow(imy)
-mag=255-np.sqrt(imx**2+imy**2)
+plt.imshow(imagey)
+mag=255-np.sqrt(imagex**2+imagey**2)
 
 plt.subplot(144)
 plt.title(u'(d)梯度幅值')
@@ -1008,31 +971,31 @@ from scipy.ndimage import filters
 from matplotlib.font_manager import FontProperties
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-im=np.array(Image.open(filename).convert('L'))
+image=np.array(Image.open(filename).convert('L'))
 plt.figure()
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(141)
 plt.title(u'原圖')
-plt.imshow(im)
+plt.imshow(image)
 
 for bi,blur in enumerate([2,4,8]):
-    im2=np.zeros(im.shape)
-    im2=filters.gaussian_filter(im,blur)
-    im2=np.uint8(im2)
-    imNum=str(blur)
+    image2=np.zeros(image.shape)
+    image2=filters.gaussian_filter(image,blur)
+    image2=np.uint8(image2)
+    imageNum=str(blur)
     plt.subplot(1,4,2+bi)
-    plt.title(u'標準差為'+imNum)
-    plt.imshow(im2)
+    plt.title(u'標準差為'+imageNum)
+    plt.imshow(image2)
 
 #如果是彩色圖像，則分別對三個通道進行模糊
 #for bi, blur in enumerate([2,4,8]):
-#  im2 = np.zeros(im.shape)
+#  image2 = np.zeros(image.shape)
 #  for i in range(3):
-#    im2[:, :, i] = filters.gaussian_filter(im[:, :, i], blur)
-#  im2 = np.uint8(im2)
+#    image2[:, :, i] = filters.gaussian_filter(image[:, :, i], blur)
+#  image2 = np.uint8(image2)
 #  plt.subplot(1, 4,  2 + bi)
-#  plt.imshow(im2)
+#  plt.imshow(image2)
 
 plt.show()
 
@@ -1042,34 +1005,34 @@ print("PIL_gaussian")
 
 from scipy.ndimage import filters
 
-def imx(im, sigma):
-    imgx = np.zeros(im.shape)
-    filters.gaussian_filter(im, sigma, (0, 1), imgx)
+def imx(image, sigma):
+    imgx = np.zeros(image.shape)
+    filters.gaussian_filter(image, sigma, (0, 1), imgx)
     return imgx
-def imy(im, sigma):
-    imgy = np.zeros(im.shape)
-    filters.gaussian_filter(im, sigma, (1, 0), imgy)
+def imy(image, sigma):
+    imgy = np.zeros(image.shape)
+    filters.gaussian_filter(image, sigma, (1, 0), imgy)
     return imgy
-def mag(im, sigma):
+def mag(image, sigma):
     # 還有gaussian_gradient_magnitude()
     imgmag = 255 - numpy.sqrt(imgx ** 2 + imgy ** 2)
     return imgmag
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-im = np.array(Image.open(filename).convert('L'))
+image = np.array(Image.open(filename).convert('L'))
 plt.figure()
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 sigma = [2, 5, 10]
 for i in  sigma:
     plt.subplot(3, 4, 4*(sigma.index(i))+1)
-    plt.imshow(im)
-    imgx=imx(im, i)
+    plt.imshow(image)
+    imgx=imx(image, i)
     plt.subplot(3, 4, 4*(sigma.index(i))+2)
     plt.imshow(imgx)
-    imgy=imy(im, i)
+    imgy=imy(image, i)
     plt.subplot(3, 4, 4*(sigma.index(i))+3)
     plt.imshow(imgy)
-    imgmag=mag(im, i)
+    imgmag=mag(image, i)
     plt.subplot(3, 4, 4*(sigma.index(i))+4)
     plt.imshow(imgmag)
 
@@ -1090,25 +1053,25 @@ from scipy.ndimage import measurements, morphology
 plt.figure()
 
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-im = np.array(Image.open('data/castle.jpg').convert('L'))
+image = np.array(Image.open('data/castle.jpg').convert('L'))
 
 plt.subplot(221)
-plt.imshow(im)
+plt.imshow(image)
 plt.title(u'原圖')
-im = (im < 128)
-labels, nbr_objects = measurements.label(im) #圖像的灰度值表示對象的標簽
+image = (image < 128)
+labels, nbr_objects = measurements.label(image) #圖像的灰度值表示對象的標簽
 print ("Number of objects:", nbr_objects)
 
 plt.subplot(222)
 plt.imshow(labels)
 plt.title(u'標記後的圖')
 #形態學——使物體分離更好
-im_open = morphology.binary_opening(im, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+image_open = morphology.binary_opening(image, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
 
 plt.subplot(223)
-plt.imshow(im_open)
+plt.imshow(image_open)
 plt.title(u'開運算後的圖像')
-labels_open, nbr_objects_open = measurements.label(im_open)
+labels_open, nbr_objects_open = measurements.label(image_open)
 print ("Number of objects:", nbr_objects_open)
 
 plt.subplot(224)
@@ -1127,25 +1090,25 @@ from scipy.ndimage import measurements, morphology
 # 加載圖像和閾值，以確保它是二進制的
 plt.figure()
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-im = np.array(Image.open('data/castle.jpg').convert('L'))
+image = np.array(Image.open('data/castle.jpg').convert('L'))
 
 plt.subplot(221)
-plt.imshow(im)
+plt.imshow(image)
 plt.title(u'原圖')
-im = (im < 128)
-labels, nbr_objects = measurements.label(im) #圖像的灰度值表示對象的標簽
+image = (image < 128)
+labels, nbr_objects = measurements.label(image) #圖像的灰度值表示對象的標簽
 print ("Number of objects:", nbr_objects)
 
 plt.subplot(222)
 plt.imshow(labels)
 plt.title(u'標記後的圖')
 #形態學——使物體分離更好
-im_open = morphology.binary_opening(im, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+image_open = morphology.binary_opening(image, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
 
 plt.subplot(223)
-plt.imshow(im_open)
+plt.imshow(image_open)
 plt.title(u'開運算後的圖像')
-labels_open, nbr_objects_open = measurements.label(im_open)
+labels_open, nbr_objects_open = measurements.label(image_open)
 print ("Number of objects:", nbr_objects_open)
 
 plt.subplot(224)
@@ -1162,15 +1125,15 @@ from scipy.ndimage import filters
 #from scipy.misc import imsave
 #from PCV.tools import rof
 
-im = np.array(Image.open('data/gril.jpg').convert('L'))
-#U,T = rof.denoise(im,im)
-G = filters.gaussian_filter(im,10)
+image = np.array(Image.open('data/gril.jpg').convert('L'))
+#U,T = rof.denoise(image,image)
+G = filters.gaussian_filter(image,10)
 
 plt.figure()
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(1,3,1)
-plt.imshow(im)
+plt.imshow(image)
 #plt.axis('equal')
 plt.title(u'原噪聲圖像')
 
@@ -1195,20 +1158,20 @@ from scipy.ndimage import filters
 #from PCV.tools import rof
 
 # 創建合成圖像與噪聲
-im = np.zeros((500,500))
-im[100:400,100:400] = 128
-im[200:300,200:300] = 255
-im = im + 30*np.random.standard_normal((500,500))
+image = np.zeros((500,500))
+image[100:400,100:400] = 128
+image[200:300,200:300] = 255
+image = image + 30*np.random.standard_normal((500,500))
 #roll()函數：循環滾動數組中的元素，計算領域元素的差異。linalg.norm()函數可以衡量兩個數組見得差異
-#U,T = rof.denoise(im,im)  
-G = filters.gaussian_filter(im,10)
+#U,T = rof.denoise(image,image)  
+G = filters.gaussian_filter(image,10)
 
 plt.figure()
 
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(1,3,1)
-plt.imshow(im)
+plt.imshow(image)
 #plt.axis('equal')
 plt.title(u'原噪聲圖像')
 
@@ -1354,11 +1317,7 @@ for x in range(100, 200):
         image.putpixel((x, y), (128, 128, 128))
 image.show()
 
-
-
 print('------------------------------------------------------------')	#60個
-
-from PIL import Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 infile = filename#"earth.png"
@@ -1383,9 +1342,6 @@ image = Image.open(filename)
 image.save('tmp_pic_high.jpg', quality = 95)
 image.close()
 
-print('------------------------------------------------------------')	#60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 image = Image.open(filename)
@@ -1393,12 +1349,6 @@ image.save("tmp_pic_quality_default.jpg")
 image.close()
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
@@ -1454,13 +1404,11 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-
-from PIL import Image
-
 img = Image.open(filename)
 print(img.size)
 print(img.format)
 print(img.format_description)
+
 #img.save('xxxxx.png')
 
 img2 = Image.open(filename)
@@ -1475,6 +1423,9 @@ img2.resize((img.size[0] // 2, img.size[1] // 2))
 img2.rotate(90)
 
 #img2.save('xxxxx.png')
+
+plt.imshow(img2)
+plt.show()
 
 
 

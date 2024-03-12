@@ -401,9 +401,16 @@ cv2.imshow('Sample pic', img)
 
 print('------------------------------------------------------------')	#60個
 
+print('並列一圖')
 
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+image1=cv2.imread(filename)
 
+image2 = cv2.hconcat([image1, image1, image1, image1, image1, image1])
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

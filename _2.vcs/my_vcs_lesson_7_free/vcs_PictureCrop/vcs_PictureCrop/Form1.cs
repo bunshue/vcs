@@ -22,7 +22,8 @@ namespace vcs_PictureCrop
     {
         int flag_operation_mode = 1;    //0 : 空白模式, 1 : 圖片模式
 
-        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string pic_filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        string open_folder_directory = Application.StartupPath;
 
         private int intStartX = 0;
         private int intStartY = 0;
@@ -161,7 +162,7 @@ namespace vcs_PictureCrop
                 richTextBox1.Text += "Directory: " + f.Directory + "\n";
                 richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
 
-                filename = openFileDialog1.FileName;
+                pic_filename = openFileDialog1.FileName;
 
                 reset_picture();
             }
@@ -240,7 +241,7 @@ namespace vcs_PictureCrop
             }
             else if (flag_operation_mode == 1)
             {
-                bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+                bitmap1 = (Bitmap)Image.FromFile(pic_filename);	//Image.FromFile出來的是Image格式
                 pictureBox1.Image = bitmap1;
                 W = bitmap1.Width;
                 H = bitmap1.Height;
@@ -419,14 +420,43 @@ namespace vcs_PictureCrop
 
 
             string filename = string.Empty;
-            if (rb_filetype1.Checked == true)
+
+            if (cb_overwrite.Checked == false)
             {
-                filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                if (rb_filetype1.Checked == true)
+                {
+                    filename = open_folder_directory + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                }
+                else
+                {
+                    filename = open_folder_directory + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                }
             }
             else
             {
-                filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                //覆蓋原檔
+                FileInfo fi;
+                fi = new FileInfo(pic_filename);
+                open_folder_directory = fi.DirectoryName;
+
+                //richTextBox1.Text += fi.Directory.ToString() + "\n";
+                //richTextBox1.Text += fi.DirectoryName.ToString() + "\n";
+                string fore_filename = Path.GetFileNameWithoutExtension(pic_filename);
+                richTextBox1.Text += "前檔名 : " + fore_filename + "\n";
+
+                if (rb_filetype1.Checked == true)
+                {
+                    filename = open_folder_directory + "\\" + fore_filename + "_crop.jpg";
+                }
+                else
+                {
+                    filename = open_folder_directory + "\\" + fore_filename + "_crop.bmp";
+                }
+
+
             }
+
+
 
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
             Bitmap bitmap2 = bitmap1.Clone(SelectionRectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
@@ -548,7 +578,7 @@ namespace vcs_PictureCrop
                 }
                 else //test
                 {
-                    Image tmp = Image.FromFile(filename);
+                    Image tmp = Image.FromFile(pic_filename);
                     Graphics g = this.pictureBox1.CreateGraphics();
                     g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
                     Brush brush = new SolidBrush(Color.Red);
@@ -568,9 +598,8 @@ namespace vcs_PictureCrop
 
         private void bt_open_folder_Click(object sender, EventArgs e)
         {
-            string foldername = Application.StartupPath;
             //開啟檔案總管
-            Process.Start(foldername);
+            Process.Start(open_folder_directory);
         }
 
         //不同的SizeMode, 滑鼠座標對應的點會不一樣(AutoSize和Nomal一樣)
