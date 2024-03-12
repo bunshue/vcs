@@ -21,7 +21,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print('顯示原圖')
 
 image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
@@ -281,30 +281,6 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
 
 print('------------------------------------------------------------')	#60個
-
-"""
-source = input("請輸入來源資料夾：")
-if os.path.exists(source):
-    target = input("請輸入目標資料夾：")
-    if not os.path.exists(target):
-        os.mkdir(target)
-        allfiles = os.listdir(source)
-        for file in allfiles:
-            filename, ext = os.path.splitext(file)
-            filename = filename + "_s"
-            targetfile = filename + ext
-            image = Image.open(os.path.join(source, file))
-            thumbnail = image.resize((320,200))
-            #thumbnail.save(os.path.join(target, targetfile))
-            image.close()
-            thumbnail.close()
-            print("{}-->{}".format(file, targetfile))
-    else:
-        print("目標資料夾已存在，無法進行。")
-else:    
-    print("找不到來源資料夾。")
-"""
-print("------------------------------------------------------------")  # 60個
 
 import os
 
@@ -1430,4 +1406,25 @@ plt.show()
 
 
 print('------------------------------------------------------------')	#60個
+'''
+
+import os
+foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
+
+allfiles = os.listdir(foldername)
+print(allfiles)
+for file in allfiles:
+    print(file)
+    filename, ext = os.path.splitext(file)
+    filename = filename + "_s"
+    targetfile = filename + ext
+    #print(foldername, file)
+    image = Image.open(os.path.join(foldername, file))
+    thumbnail = image.resize((320,200))
+    #thumbnail.save(os.path.join(target, targetfile))
+    image.close()
+    thumbnail.close()
+    print("{}-->{}".format(file, targetfile))
+
+print("------------------------------------------------------------")  # 60個
 

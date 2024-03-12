@@ -210,6 +210,63 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+#PIL 之標準秀圖
+
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
+plt.imshow(image1)
+plt.show()
+
+PIL 之標準轉灰階 像是有點問題
+
+image1g = image1.convert('L')	#轉換成灰階圖像
+plt.imshow(image1g)      #灰階圖
+plt.show()
+
+
+image1g = image3.convert('L')	#轉換成灰階圖像
+hist = image1g.histogram()
+
+
+
+filename = 'pic.bmp'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
+#plt.imshow(image1)
+#plt.show()
+
+
+
+
+image1_hist = image1.histogram()
+
+#image2_hist = image2.histogram()
+
+r, g, b = image1.split()   #r, g, b為三個通道的list
+r_hist = r.histogram()
+g_hist = g.histogram()
+b_hist = b.histogram()
+
+ind = np.arange(0, len(image1_hist))
+
+plt.plot(ind, image1_hist, color = 'cyan', label = 'cropped')
+plt.plot(ind, r_hist, color = 'black', lw = 2, label = 'original')
+#plt.plot(ind, r_hist, color = 'red', label = 'Red Plane')
+#plt.plot(ind, g_hist, color = 'green', label = 'Green Plane')
+#plt.plot(ind, g_hist, color = 'blue', label = 'Blue Plane')
+plt.xlim(0, 255)
+plt.ylim(0, 8000)
+plt.legend()
+
+plt.show()
+
+sys.exit()
+
+
+
 
 
 print("------------------------------------------------------------")  # 60個

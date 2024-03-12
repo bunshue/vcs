@@ -48,6 +48,7 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 import os
 import sys
 
@@ -75,10 +76,11 @@ base, ext = os.path.splitext(base)
 
 dirname = os.path.dirname(filename)
 print(dirname)
-    
+"""
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 # 如果檔案在目前工作目錄下可以省略路徑
 print(os.path.getsize("ch14_1.py"))
 print(os.path.getsize("D:\\Python\\ch14\\ch14_1.py"))
@@ -98,6 +100,7 @@ for file in os.listdir('D:\\Python\\ch14'):
     totalsizes += os.path.getsize(os.path.join('D:\\Python\\ch14', file))
 
 print("全部檔案大小是 = ", totalsizes)
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -108,7 +111,42 @@ now = datetime.datetime.now() # current date and time
 date_time = now.strftime('%Y年%m月%d日, %H:%M:%S')
 print("現在時間 :", date_time)
 
-sys.exit()
+print("------------------------------------------------------------")  # 60個
+
+
+
+import random
+
+NUM_DIGITS = 10
+
+def getSecretNum():
+    """Returns a string made up of NUM_DIGITS unique random digits."""
+    numbers = list('0123456789')  # Create a list of digits 0 to 9.
+    random.shuffle(numbers)  # Shuffle them into random order.
+
+    # Get the first NUM_DIGITS digits in the list for the secret number:
+    secretNum = ''
+    for i in range(NUM_DIGITS):
+        secretNum += str(numbers[i])
+    return secretNum
+
+
+secretNum = getSecretNum()
+print(secretNum)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 
