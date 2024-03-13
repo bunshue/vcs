@@ -252,6 +252,28 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp'
+
+#原圖
+image = cv2.imread(filename, 0) #讀成黑白, 一維
+print(image.shape)
+image = cv2.imread(filename)  #讀成彩色, 三維
+print(image.shape)
+
+# 高斯模糊，Canny边缘检测需要的
+image_blur = cv2.GaussianBlur(image, (5, 5), 0)    #執行高斯模糊化
+
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title('GaussianBlur')
+plt.imshow(cv2.cvtColor(image_blur, cv2.COLOR_BGR2RGB))
+
+plt.show()
 
 
 
@@ -282,5 +304,87 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
+
+
+
+
+
+"""
+print("gaussion blur")
+
+print('跑很久 skip')
+
+#高斯濾波函數
+def my_function_gaussion(x, y, sigma):
+    return math.exp(-(x**2 + y**2) / (2*sigma**2)) / (2*math.pi*sigma**2)
+
+#產生高斯濾波矩陣
+def my_get_gaussion_blur_retric(size, sigma):
+    n = size // 2
+    blur_retric = np.zeros([size, size])
+    #根據尺寸和sigma值計算高斯矩陣
+    for i in range(size):
+        for j in range(size):
+            blur_retric[i][j] = my_function_gaussion(i-n, j-n, sigma)
+    #將高斯矩陣歸一化
+    blur_retric = blur_retric / blur_retric[0][0]
+    #將高斯矩陣轉換為整數
+    blur_retric = blur_retric.astype(np.uint32)
+    #返回高斯矩陣
+    return blur_retric
+
+#計算灰度圖像的高斯濾波
+def my_gaussion_blur_gray(image, size, sigma):
+    blur_retric = my_get_gaussion_blur_retric(size, sigma)
+    n = blur_retric.sum()
+    sizepart = size // 2
+    data = 0
+    #計算每個像素點在經過高斯模板變換后的值
+    for i in range(image.shape[0]):
+        for j in range(image.shape[1]):
+            for ii in range(size):
+                for jj in range(size):
+                    #條件語句為判斷模板對應的值是否超出邊界
+                    if (i+ii-sizepart)<0 or (i+ii-sizepart)>=image.shape[0]:
+                        pass
+                    elif (j+jj-sizepart)<0 or (j+jj-sizepart)>=image.shape[1]:
+                        pass
+                    else:
+                        data += image[i+ii-sizepart][j+jj-sizepart] * blur_retric[ii][jj]
+            image[i][j] = data / n
+            data = 0
+    #返回變換后的圖像矩陣
+    return image
+
+#計算彩色圖像的高斯濾波
+def my_gaussion_blur_RGB(image, size, sigma):
+    (b ,r, g) = cv2.split(image)
+    blur_b = my_gaussion_blur_gray(b, size, sigma)
+    blur_r = my_gaussion_blur_gray(r, size, sigma)
+    blur_g = my_gaussion_blur_gray(g, size, sigma)
+    result = cv2.merge((blur_b, blur_r, blur_g))
+    return result
+
+image_test1 = cv2.imread('data/lena.png')
+#進行高斯濾波器比較
+my_image_blur_gaussion = my_gaussion_blur_RGB(image_test1, 5, 0.75)
+computer_image_blur_gaussion = cv2.GaussianBlur(image_test1, (5, 5), 0.75)  #執行高斯模糊化
+
+fig = plt.figure(figsize = (20, 15))
+
+fig.add_subplot(131)
+plt.title('原始圖像')
+plt.imshow(image_test1)
+
+fig.add_subplot(132)
+plt.title('自定義高斯濾波器')
+plt.imshow(my_image_blur_gaussion)
+
+fig.add_subplot(133)
+plt.title('庫高斯濾波器')
+plt.imshow(computer_image_blur_gaussion)
+
+plt.show()
+"""
 
 

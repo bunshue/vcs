@@ -8,16 +8,16 @@ multiprocessing.Queue
 在系统停机的时候不保留的进程 - 不会因为进程还没有执行结束而阻碍系统停止
 """
 from threading import Thread
-from time import sleep
-
+import time
 
 def do_something(content):
     while True:
         print(content, end='')
+        time.sleep(0.1)
 
 
 Thread(target=do_something, args=('O', ), daemon=True).start()
 Thread(target=do_something, args=('X', ), daemon=True).start()
-sleep(5)
+time.sleep(5)
 print('bye!')
 

@@ -18,7 +18,7 @@ async def fetch(session, url):
         return await resp.text()
 
 
-async def main():
+async def main_task():
     pattern = re.compile(r'\<title\>(?P<title>.*)\<\/title\>')
     urls = ('https://www.python.org/',
             'https://git-scm.com/',
@@ -27,11 +27,13 @@ async def main():
             'https://www.douban.com/')
     async with aiohttp.ClientSession() as session:
         for url in urls:
+            print('url xxxx ', url)
             html = await fetch(session, url)
-            print(pattern.search(html).group('title'))
+            print('取得 :', pattern.search(html).group('title'))
+
+print('異步訪問')
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main_task())
+loop.close()
 
 
-if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
-    loop.close()

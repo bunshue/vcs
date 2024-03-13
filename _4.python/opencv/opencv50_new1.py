@@ -102,6 +102,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.p
 image1 = cv2.imread(filename)
 image2 = cv2.cvtColor(image1,cv2.COLOR_BGR2RGB)
 
+print(image1.shape)
+print(image2.shape)
+
 #建立mask
 mask = np.zeros(image1.shape[:2],np.uint8)
 bgdModel = np.zeros((1,65),np.float64)
@@ -111,16 +114,24 @@ rect = (50,50,400,400)
 cv2.grabCut(image1,mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)
 mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
 
-ogc = image1*mask2[:,:,np.newaxis]
-ogc = cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
+image3 = image1*mask2[:,:,np.newaxis]
+image4 = cv2.cvtColor(image3,cv2.COLOR_BGR2RGB)
 
 plt.figure('new06', figsize = (16, 8))
-plt.subplot(121)
+
+plt.subplot(221)
 plt.imshow(image2)
 
-plt.subplot(122)
-plt.imshow(ogc)
+plt.subplot(222)
+plt.imshow(mask)
 
+plt.subplot(223)
+plt.imshow(mask2)
+
+plt.subplot(224)
+plt.imshow(image4)
+
+plt.tight_layout()# 緊密排列，並填滿原圖大小
 plt.show()
 
 print('------------------------------------------------------------')	#60個
@@ -1218,6 +1229,76 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
+"""
+
+彩色影像轉HSV(RGB to HSV 或 BGR to HSV)
+
+HSV簡單介紹分別為：
+色相(H)：色彩的顏色名稱，如紅色、黃色等。
+飽和度(S)：色彩的純度，越高色彩越純，低則逐漸變灰，數值為0-100%。
+明度(V)：亮度，數值為0-100%。
+
+
+使用 cv2.cvtColor 轉換顏色空間時，第二個參數與HSV相關的有：
+cv2.COLOR_BGR2HSV
+cv2.COLOR_HSV2BGR
+cv2.COLOR_RGB2HSV
+cv2.COLOR_HSV2RGB
+
+opencv 預設的排列方式為BGR，而不是RGB
+
+所以這邊使用的是 cv2.COLOR_BGR2HSV
+
+當然實際上使用時不會只是單純RGB轉換成HSV就結束了，
+通常會去針對HSV顏色區間去作後續的處理
+
+範例. 物件偵測 - 找出綠色的物體
+
+彩色轉HSV常見的應用可能有物件偵測，去背處理(排除綠色的背景)，
+以下就來示範如何找出圖片中綠色的水果，類似的應用可能有找出草地的背景，
+
+"""
+
+import cv2
+import numpy as np
+
+image = cv2.imread('data/fruit.jpg')
+hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('原圖')
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(hsv, cv2.COLOR_BGR2RGB))
+plt.title('轉HSV')
+
+lower_green = np.array([35, 43, 46])#綠色下限
+upper_green = np.array([77, 255, 255])#綠色上限
+mask = cv2.inRange(hsv, lower_green, upper_green)
+res = cv2.bitwise_and(image, image, mask=mask)
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
+plt.title('抓出綠色的部分')
+
+plt.show()
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
 
@@ -1287,85 +1368,6 @@ while(1):
 cv2.destroyAllWindows()
 """
 
-
-
-"""
-print("gaussion")
-
-print('跑很久 skip')
-
-#高斯濾波函數
-def my_function_gaussion(x, y, sigma):
-    return math.exp(-(x**2 + y**2) / (2*sigma**2)) / (2*math.pi*sigma**2)
-
-#產生高斯濾波矩陣
-def my_get_gaussion_blur_retric(size, sigma):
-    n = size // 2
-    blur_retric = np.zeros([size, size])
-    #根據尺寸和sigma值計算高斯矩陣
-    for i in range(size):
-        for j in range(size):
-            blur_retric[i][j] = my_function_gaussion(i-n, j-n, sigma)
-    #將高斯矩陣歸一化
-    blur_retric = blur_retric / blur_retric[0][0]
-    #將高斯矩陣轉換為整數
-    blur_retric = blur_retric.astype(np.uint32)
-    #返回高斯矩陣
-    return blur_retric
-
-#計算灰度圖像的高斯濾波
-def my_gaussion_blur_gray(image, size, sigma):
-    blur_retric = my_get_gaussion_blur_retric(size, sigma)
-    n = blur_retric.sum()
-    sizepart = size // 2
-    data = 0
-    #計算每個像素點在經過高斯模板變換后的值
-    for i in range(image.shape[0]):
-        for j in range(image.shape[1]):
-            for ii in range(size):
-                for jj in range(size):
-                    #條件語句為判斷模板對應的值是否超出邊界
-                    if (i+ii-sizepart)<0 or (i+ii-sizepart)>=image.shape[0]:
-                        pass
-                    elif (j+jj-sizepart)<0 or (j+jj-sizepart)>=image.shape[1]:
-                        pass
-                    else:
-                        data += image[i+ii-sizepart][j+jj-sizepart] * blur_retric[ii][jj]
-            image[i][j] = data / n
-            data = 0
-    #返回變換后的圖像矩陣
-    return image
-
-#計算彩色圖像的高斯濾波
-def my_gaussion_blur_RGB(image, size, sigma):
-    (b ,r, g) = cv2.split(image)
-    blur_b = my_gaussion_blur_gray(b, size, sigma)
-    blur_r = my_gaussion_blur_gray(r, size, sigma)
-    blur_g = my_gaussion_blur_gray(g, size, sigma)
-    result = cv2.merge((blur_b, blur_r, blur_g))
-    return result
-
-image_test1 = cv2.imread('data/lena.png')
-#進行高斯濾波器比較
-my_image_blur_gaussion = my_gaussion_blur_RGB(image_test1, 5, 0.75)
-computer_image_blur_gaussion = cv2.GaussianBlur(image_test1, (5, 5), 0.75)  #執行高斯模糊化
-
-fig = plt.figure(figsize = (20, 15))
-
-fig.add_subplot(131)
-plt.title('原始圖像')
-plt.imshow(image_test1)
-
-fig.add_subplot(132)
-plt.title('自定義高斯濾波器')
-plt.imshow(my_image_blur_gaussion)
-
-fig.add_subplot(133)
-plt.title('庫高斯濾波器')
-plt.imshow(computer_image_blur_gaussion)
-
-plt.show()
-"""
 
 print('------------------------------------------------------------')	#60個
 

@@ -8,6 +8,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
 print('------------------------------------------------------------')	#60個
 
+import os
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -258,31 +259,11 @@ def rgb_of_pixel(img_path, x, y):
 print(rgb_of_pixel(filename, 131, 81))
 
 print("------------------------------------------------------------")  # 60個
-"""
-# Pytesseract 辨識圖片中的文字
-
-import pytesseract
-
-img = Image.open("english.jpg")
-text = pytesseract.image_to_string(img, lang="eng")
-print(text)
-
-print("------------------------------------------------------------")  # 60個
-
-import pytesseract
-
-img = Image.open("chinese.jpg")
-text = pytesseract.image_to_string(img, lang="chi_tra")
-print(text)
-"""
-print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
 
 print('------------------------------------------------------------')	#60個
-
-import os
 
 pre_html = """
 <!DOCTYPE html>
@@ -331,8 +312,6 @@ with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
     f.write(html)
 """
 print("------------------------------------------------------------")  # 60個
-
-import os
 
 pre_html = """
 <!DOCTYPE html>
@@ -419,84 +398,6 @@ blue_to_red2(filename)
 
 print('------------------------------------------------------------')	#60個
 
-"""
-print("車牌")
-import pytesseract
-text = pytesseract.image_to_string(Image.open('data/atq9305.jpg'))
-print(type(text), "   ", text)
-
-print("------------------------------------------------------------")  # 60個
-
-import pytesseract
-import time
-
-carDict = {}
-myPath = "C:\\_git\\vcs\\_4.python\\PIL\\new1\\"
-while True:
-    carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
-    if carPlate == 'Q' or carPlate == 'q':
-        break
-    carPlate = myPath + carPlate
-    keyText = pytesseract.image_to_string(Image.open(carPlate))    
-    if keyText in carDict:
-        exitTime = time.asctime()
-        print("車輛出場時間 : ", keyText, ":", exitTime)
-        del carDict[keyText]
-    else:
-        entryTime = time.asctime()
-        print("車輛入場時間 : ", keyText, ":", entryTime)
-        carDict[keyText] = entryTime
-
-print("------------------------------------------------------------")  # 60個
-
-import pytesseract
-import time
-
-carDict = {}
-myPath = "foldername"
-while True:
-    carPlate = input("請掃描或輸入車牌(Q/q代表結束) : ")
-    if carPlate == 'Q' or carPlate == 'q':
-        break
-    carPlate = myPath + carPlate
-    keyText = pytesseract.image_to_string(Image.open(carPlate))    
-    if keyText in carDict:
-        exitTime = time.asctime()
-        print("車輛出場時間 : ", keyText, ":", exitTime)
-        exitSecond = time.time()
-        dxSecond = exitSecond - carDict[keyText]
-        hour = dxSecond % 3600          # 由餘數判斷是否進位
-        hours = dxSecond // 3600        # 計算小時數
-        if hour != 0:
-            hours += 1
-        print("停車費用 : ", hours * 60, " 元 ")
-        del carDict[keyText]
-    else:
-        entryTime = time.asctime()
-        print("車輛入場時間 : ", keyText, ":", entryTime)
-        entrySecond = time.time()
-        carDict[keyText] = entrySecond
-
-print("------------------------------------------------------------")  # 60個
-
-import pytesseract
-
-text  = pytesseract.image_to_string(Image.open('data/data17_26.jpg'),
-                                    lang='chi_tra')
-print(text)
-
-print("------------------------------------------------------------")  # 60個
-
-import pytesseract
-
-text  = pytesseract.image_to_string(Image.open('data/data17_27.jpg'),
-                                               lang='chi_sim')
-print(text)
-
-print("------------------------------------------------------------")  # 60個
-
-import os
-
 def batch_resize_images(input_folder, output_folder, size=(300, 300)):
     # 確保輸出資料夾存在
     if not os.path.exists(output_folder):
@@ -519,11 +420,8 @@ output_folder = 'output_images'
 
 # 呼叫函數，將所有圖片調整為300x300大小
 batch_resize_images(input_folder, output_folder)
-"""
-print("------------------------------------------------------------")  # 60個
 
-"""
-import os
+print("------------------------------------------------------------")  # 60個
 
 def batch_convert_images(directory, target_format='.jpg'):
     for filename in os.listdir(directory):
@@ -535,18 +433,6 @@ def batch_convert_images(directory, target_format='.jpg'):
 
 # 呼叫批次更改函數
 batch_convert_images('images_directory')
-"""
-print("------------------------------------------------------------")  # 60個
-
-"""
-import pytesseract
-
-text  = pytesseract.image_to_string(Image.open('data/data17_10.jpg'),
-                                               lang='chi_sim')
-print(text)
-with open('tmp_17_10.txt', 'w', encoding='utf-8') as fn:
-    fn.write(text)
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1390,7 +1276,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-import os
 foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
 allfiles = os.listdir(foldername)
@@ -1409,4 +1294,18 @@ for file in allfiles:
     print("{}-->{}".format(file, targetfile))
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
 

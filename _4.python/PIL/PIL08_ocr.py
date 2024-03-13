@@ -16,42 +16,66 @@ C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe
 
 print('------------------------------------------------------------')	#60個
 
+import os
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image   # Importing Image class from PIL module
+
+font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+print('------------------------------------------------------------')	#60個
+
 from PIL import Image
 import pytesseract
 
-#filename = 'C:/_git/vcs/_1.data/______test_files1/ocr01.png'
-filename = 'C:/_git/vcs/_1.data/______test_files1/ocr02.jpg'
+#filename = 'data/ocr01.png'
+filename = 'data/ocr02.jpg'
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
 image = Image.open(filename)
-#image.show()
+
+plt.imshow(image)
+plt.show()
+
 result = pytesseract.image_to_string(image, lang="eng")
 print(result)
 
-'''
+"""
 OCR 辨識繁體中文
 
 其實和辨識英文一樣，只是我們要下載繁體中文的訓練資料，
 到這邊 https://github.com/tesseract-ocr/tessdata_best/blob/master/chi_tra.traineddata
 下載並將檔案放到 C:\Program Files\Tesseract-OCR\tessdata 中，修改 lang 參數變成 chi_tra 就可以啦
-'''
+"""
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/ocr03.jpg'
+filename = 'data/ocr03.jpg'
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
 #pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 img = Image.open(filename)
-#img.show()
+
+plt.imshow(img)
+plt.show()
+#正中OCR
 print(pytesseract.image_to_string(img, lang="chi_tra"))
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/ocr04.jpg'
+filename = 'data/ocr04.jpg'
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
 #pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 img = Image.open(filename)
-#img.show()
+
+plt.imshow(img)
+plt.show()
+#正中OCR + 英文
 print(pytesseract.image_to_string(img, lang="chi_tra+eng"))    #中英混和
     
     
@@ -140,11 +164,11 @@ class CaptchaBroker():
         #Very important, tesseract-ocr path here
         pytesseract.pytesseract.tesseract_cmd = user_tesseract_cmd
         
-        '''
+        """
         code = pytesseract.image_to_string(im2, lang="eng")
         print(code)
         return code
-        '''
+        """
 
         image = Image.open(image_path)
         
@@ -161,11 +185,72 @@ result = ccc.decode(filename)
 print('結果')
 print(result)
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
+
+# Pytesseract 辨識圖片中的文字
+
+import pytesseract
+
+filename = 'data/ocr02.jpg'
+
+img = Image.open(filename)
+text = pytesseract.image_to_string(img, lang="eng")
+print(text)
+
+print("------------------------------------------------------------")  # 60個
+
+import pytesseract
+
+filename = 'data/ocr03.jpg'
+
+img = Image.open(filename)
+#正中OCR
+text = pytesseract.image_to_string(img, lang="chi_tra")
+print(text)
+
+print("------------------------------------------------------------")  # 60個
+
+print("車牌")
+import pytesseract
+text = pytesseract.image_to_string(Image.open('data/atq9305.jpg'))
+print(type(text), "   ", text)
+
+print("------------------------------------------------------------")  # 60個
+
+import pytesseract
+
+filename = 'data/atq9305.jpg'
+
+keyText = pytesseract.image_to_string(Image.open(filename))
+
+print(keyText)
+
+print("------------------------------------------------------------")  # 60個
+
+import pytesseract
+#正中OCR
+text  = pytesseract.image_to_string(Image.open('data/data17_26.jpg'),
+                                    lang='chi_tra')
+print(text)
+
+print("------------------------------------------------------------")  # 60個
+"""
+import pytesseract
+
+text  = pytesseract.image_to_string(Image.open('data/data17_27.jpg'),
+                                               lang='chi_sim')
+print(text)
+"""
+print("------------------------------------------------------------")  # 60個
+
+import pytesseract
+#正中OCR
+image = Image.open('data/data17_10.jpg')
+print('ccc')
+text  = pytesseract.image_to_string(image, lang='chi_tra')
+print(text)
+
+
 
 print('------------------------------------------------------------')	#60個
 
