@@ -414,6 +414,23 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
+
+img = cv2.imread(filename) #cv2讀取圖片, 自動轉成array
+
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  #轉換為HSV
+rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  #轉換為RGB
+
+plt.imshow(rgb)
+plt.show()
+
+coordinate = rgb[131, 81] #輸入要取得顏色的指定座標
+print(coordinate)
+
+#print(array([255, 219,  79], dtype=uint8))
+
+print('------------------------------------------------------------')	#60個
+
 
 
 

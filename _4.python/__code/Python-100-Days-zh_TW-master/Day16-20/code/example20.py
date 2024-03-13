@@ -11,17 +11,13 @@ from threading import Thread
 from time import sleep
 
 
-def output(content):
+def do_something(content):
     while True:
         print(content, end='')
 
 
-def main():
-    Thread(target=output, args=('Ping', ), daemon=True).start()
-    Thread(target=output, args=('Pong', ), daemon=True).start()
-    sleep(5)
-    print('bye!')
+Thread(target=do_something, args=('O', ), daemon=True).start()
+Thread(target=do_something, args=('X', ), daemon=True).start()
+sleep(5)
+print('bye!')
 
-
-if __name__ == '__main__':
-    main()

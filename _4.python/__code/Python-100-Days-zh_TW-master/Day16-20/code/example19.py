@@ -2,6 +2,8 @@ import glob
 import os
 import time
 
+print("多線程建立縮圖")
+
 from concurrent.futures import ThreadPoolExecutor
 from threading import Thread
 
@@ -20,7 +22,9 @@ def main():
     pool = ThreadPoolExecutor(max_workers=30)
     futures = []
     start = time.time()
+    print('aaaa')
     for infile in glob.glob('images/*'):
+        print(infile)
         # submit方法是非阻塞式的方法 
         # 即便工作线程数已经用完，submit方法也会接受提交的任务 
         future = pool.submit(gen_thumbnail, infile)
@@ -34,7 +38,6 @@ def main():
     # shutdown也是非阻塞式的方法 但是如果已经提交的任务还没有执行完
     # 线程池是不会停止工作的 shutdown之后再提交任务就不会执行而且会产生异常
     pool.shutdown()
-
 
 if __name__ == '__main__':
     main()

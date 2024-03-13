@@ -31,16 +31,24 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
-color = [(0, 0, 255),#B G R
-         (0, 255, 0),
-         (255, 0, 0),
-         (255, 255, 0),#Cyan
-         (255, 0, 255), #Magenta
-         (0, 255, 255), #Yellow
-         (0, 128, 128),#Olive
-         (128, 0, 0),#Navy
-         (128, 0, 128),#Purple
+
+#BGR
+color = [(0, 0, 255),#紅色, Red
+         (0, 255, 0),#草綠色, Lime
+         (255, 0, 0),#藍色, Blue
+         (0, 255, 255),#黃色, Yellow
+         (255, 0, 255),#品紅色, Fuchsia Magenta
+         (255, 255, 0),#青色或水色, Cyan / Aqua
+         (0, 0, 0),#黑色, Black
+         (255, 255, 255),#白色, White
+         (0, 0, 128),#栗色, Maroon
+         (0, 128, 128),#橄欖綠, Olive
+         (0, 128, 0),#綠色, Green
+         (128, 128, 0),#藍綠色, Teal
+         (128, 0, 0),#藏青色, Navy
+         (128, 0, 128),#紫色, Purple
+         (192, 192, 192),#銀色, Silver
+         (128, 128, 128),#灰色, Gray
          ]
 
 print('------------------------------------------------------------')	#60個
@@ -66,6 +74,7 @@ image1_gray = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
 image1_gray = cv2.GaussianBlur(image1_gray, (13, 13), 0)  #執行高斯模糊化
 edged = cv2.Canny(image1_gray, 50, 150)
 contours, hierarchy = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
 
 """
 #圖片先處理方法二
@@ -194,8 +203,6 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()
 plt.show()
-
-'''
 
 print('------------------------------------------------------------')	#60個
 

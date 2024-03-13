@@ -95,42 +95,28 @@ plt.subplot(133)
 plt.title('兩圖擷取某塊做alpha疊加, 再貼回原圖')
 plt.imshow(cv2.cvtColor(dollar, cv2.COLOR_BGR2RGB))
 
-print('------------------------------------------------------------')	#60個
-
 '''
-print('------------------------------------------------------------')	#60個
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
-
-img = cv2.imread(filename) #cv2讀取圖片, 自動轉成array
-
-hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  #轉換為HSV
-rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  #轉換為RGB
-
-plt.imshow(rgb)
-plt.show()
-
-coordinate = rgb[131, 81] #輸入要取得顏色的指定座標
-print(coordinate)
-
-#print(array([255, 219,  79], dtype=uint8))
-
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-o = cv2.imread(filename)
-orgb=cv2.cvtColor(o,cv2.COLOR_BGR2RGB)
-mask = np.zeros(o.shape[:2],np.uint8)
+image1 = cv2.imread(filename)
+image2 = cv2.cvtColor(image1,cv2.COLOR_BGR2RGB)
+
+#建立mask
+mask = np.zeros(image1.shape[:2],np.uint8)
 bgdModel = np.zeros((1,65),np.float64)
 fgdModel = np.zeros((1,65),np.float64)
+
 rect = (50,50,400,400)
-cv2.grabCut(o,mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)
+cv2.grabCut(image1,mask,rect,bgdModel,fgdModel,5,cv2.GC_INIT_WITH_RECT)
 mask2 = np.where((mask==2)|(mask==0),0,1).astype('uint8')
-ogc = o*mask2[:,:,np.newaxis]
+
+ogc = image1*mask2[:,:,np.newaxis]
 ogc = cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
 
 plt.figure('new06', figsize = (16, 8))
 plt.subplot(121)
-plt.imshow(orgb)
+plt.imshow(image2)
 
 plt.subplot(122)
 plt.imshow(ogc)
@@ -141,7 +127,7 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 o= cv2.imread(filename)
-orgb=cv2.cvtColor(o,cv2.COLOR_BGR2RGB)
+image2=cv2.cvtColor(o,cv2.COLOR_BGR2RGB)
 mask = np.zeros(o.shape[:2],np.uint8)
 bgd = np.zeros((1,65),np.float64)
 fgd = np.zeros((1,65),np.float64)
@@ -170,9 +156,10 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 o= cv2.imread(filename)
-orgb=cv2.cvtColor(o,cv2.COLOR_BGR2RGB)
+image2=cv2.cvtColor(o,cv2.COLOR_BGR2RGB)
 bgd = np.zeros((1,65),np.float64)
 fgd = np.zeros((1,65),np.float64)
+
 mask2 = np.zeros(o.shape[:2],np.uint8)
 mask2[30:512,50:400]=3
 mask2[50:300,150:200]=1
@@ -183,7 +170,7 @@ ogc = cv2.cvtColor(ogc,cv2.COLOR_BGR2RGB)
 
 plt.figure('new08', figsize = (16, 8))
 plt.subplot(121)
-plt.imshow(orgb)
+plt.imshow(image2)
 
 plt.subplot(122)
 plt.imshow(ogc)

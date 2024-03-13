@@ -39,12 +39,23 @@ print('------------------------------------------------------------')	#60個
 
 import re
 
-sentence = '你丫是傻叉吗? 我操你大爷的. Fuck you.'
-purified = re.sub('[操肏艹]|fuck|shit|傻[比屄逼叉缺吊屌]|煞笔',
-                  'X', sentence, flags=re.IGNORECASE)
+forbidden_string = ""
+check_string = ""
+
+check_string = '習近平，又稱習禁評，中國共產黨之總加速師兼慶豐帝，正國級領導人，籍貫習特勒，祖籍習武帝，生於習維尼修斯。2012年11月至今任習包子及小習。'
+forbidden_string = '習特勒|習武帝|習包子|習維尼|習維尼修斯|習噗噗|習禁評|總加速師|慶豐帝|總爛尾師|小習'
+
+sentence = check_string
+purified = re.sub(forbidden_string, 'X', sentence, flags=re.IGNORECASE)
 print(sentence)
 print(purified)
 
+check_string = '你丫是傻叉吗? 我操你大爷的. Fuck you.'
+forbidden_string = '[操肏艹]|fuck|shit|傻[比屄逼叉缺吊屌]|煞笔'
+sentence = check_string
+purified = re.sub(forbidden_string, 'X', sentence, flags=re.IGNORECASE)
+print(sentence)
+print(purified)
 
 print('------------------------------------------------------------')	#60個
 

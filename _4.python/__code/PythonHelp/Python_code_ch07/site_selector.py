@@ -68,10 +68,9 @@ class Search():
         """在影像上畫出重疊的矩形以供檢查"""
         img_copy = IMG_GRAY.copy()
         rects_sorted = sorted(self.rect_coords.items(), key=lambda x: x[0])
-        print("\nRect Number and Corner Coordinates (ul_x, ul_y, lr_x,\
-        lr_y):")
+        #print("\nRect Number and Corner Coordinates (ul_x, ul_y, lr_x, lr_y):")
         for k, v in rects_sorted:
-            print("rect: {}, coords: {}".format(k, v))
+            #print("rect: {}, coords: {}".format(k, v))
             cv.rectangle(img_copy,
                          (self.rect_coords[k][0], self.rect_coords[k][1]),
                          (self.rect_coords[k][2], self.rect_coords[k][3]),

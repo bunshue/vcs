@@ -1202,7 +1202,7 @@ namespace vcs_DrAP
                 if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
                     //搜尋字串模式
-                    richTextBox2.Text += "aaaa b你選擇了檔名1:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                    richTextBox2.Text += "aaaa b1你選擇了檔名1:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
                     richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
                     fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
                 }
@@ -1264,7 +1264,7 @@ namespace vcs_DrAP
                 /* old
                 //開啟檔案總管
                 if (Directory.GetParent(fullname) == null)
-                    Process.Start(fullname);             //若是跟目錄 不要擷取其父目錄的路徑
+                    Process.Start(fullname);             //若是根目錄 不要擷取其父目錄的路徑
                 else
                     Process.Start(Directory.GetParent(fullname).ToString()); //GetParent 擷取其父目錄的路徑
                 */
@@ -1297,7 +1297,7 @@ namespace vcs_DrAP
                 if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
                     //搜尋字串模式
-                    richTextBox2.Text += "aaaa b你選擇了檔名2:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                    richTextBox2.Text += "aaaa b2你選擇了檔名2:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
                     richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
                     fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
                 }
@@ -3426,7 +3426,7 @@ namespace vcs_DrAP
             {
                 int selNdx = listView1.SelectedIndices[0];
 
-                richTextBox2.Text += "aaaa b你選擇了檔名3:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                richTextBox2.Text += "aaaa b3你選擇了檔名3:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
 
                 string foldername = listView1.Items[selNdx].SubItems[1].Text;
                 richTextBox2.Text += "資料夾:\t" + foldername + "\n";
@@ -3434,10 +3434,14 @@ namespace vcs_DrAP
                 string fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
                 richTextBox2.Text += "全檔名:\t" + fullname + "\n";
 
+                /*
                 //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
                 string file = @"C:\Windows\explorer.exe";
                 string argument = @"/select, " + foldername;
                 Process.Start(file, argument);
+                */
+                Process.Start(foldername);
+
             }
         }
 

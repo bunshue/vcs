@@ -21,7 +21,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 print('顯示原圖')
 
 image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
@@ -549,21 +549,6 @@ with open('tmp_17_10.txt', 'w', encoding='utf-8') as fn:
 """
 
 print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/elephant.jpg"
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageOps
-from IPython.display import display
-
-#利用圖片大小強調數量多寡
-#載入圖片與顯示圖片的範例
-
-image = Image.open(filename)
-display(image)
-
-print('------------------------------------------------------------')	#60個
-
 
 from pathlib import Path
 
@@ -1403,10 +1388,7 @@ img2.rotate(90)
 plt.imshow(img2)
 plt.show()
 
-
-
 print('------------------------------------------------------------')	#60個
-'''
 
 import os
 foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
