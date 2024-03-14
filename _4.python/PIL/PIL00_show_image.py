@@ -129,4 +129,23 @@ print("%s:" % filename, im.format, "%dx%d" % im.size, im.mode)
 print(im.info, im.tile)
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
+
+#純圖片指定座標取得顏色方法
+def rgb_of_pixel(img_path, x, y):
+    im = Image.open(img_path).convert('RGB')
+    r, g, b = im.getpixel((x, y))
+    a = (r, g, b)
+    return a
+
+print(rgb_of_pixel(filename, 131, 81))
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 

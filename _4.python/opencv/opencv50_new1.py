@@ -19,7 +19,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 filename1 = 'C:/_git/vcs/_4.python/_data/picture_mix1.bmp'
 filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
 
@@ -95,7 +95,6 @@ plt.subplot(133)
 plt.title('兩圖擷取某塊做alpha疊加, 再貼回原圖')
 plt.imshow(cv2.cvtColor(dollar, cv2.COLOR_BGR2RGB))
 
-'''
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
@@ -1368,7 +1367,6 @@ while(1):
 cv2.destroyAllWindows()
 """
 
-
 print('------------------------------------------------------------')	#60個
 
 """
@@ -1420,9 +1418,6 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
 #直接改寫image的內容
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -1437,8 +1432,6 @@ image[10:100, 200:290]=[0,0,255] #紅色 一塊 90X90
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.show()
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

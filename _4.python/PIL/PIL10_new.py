@@ -2,7 +2,15 @@
 PIL 新進
 
 
+使用python進行數字圖片處理，還得安裝Pillow包。
+雖然python里面自帶一個PIL（python images library), 但這個庫現在已經停止更新了，
+所以使用Pillow, 它是由PIL發展而來的。
+
+pip install Pillow
 """
+
+print('------------------------------------------------------------')	#60個
+
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
@@ -32,16 +40,6 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 """
-使用python進行數字圖片處理，還得安裝Pillow包。
-雖然python里面自帶一個PIL（python images library), 但這個庫現在已經停止更新了，
-所以使用Pillow, 它是由PIL發展而來的。
-
-pip install Pillow
-"""
-
-print('------------------------------------------------------------')	#60個
-
-"""
 圖像通道\幾何變換\裁剪
 一、圖像通道
 1、彩色圖像轉灰度圖
@@ -49,7 +47,7 @@ print('------------------------------------------------------------')	#60個
 
 img=Image.open(filename)
 gray=img.convert('L')
-plt.figure('Peony')
+plt.figure('picture')
 plt.imshow(gray,cmap='gray')
 plt.show()
 
@@ -58,35 +56,41 @@ plt.show()
 2、通道分離與合并
 """
 
-img=Image.open(filename)  #打開圖像
-gray=img.convert('L')   #轉換成灰度
-r,g,b=img.split()   #分離三通道
-pic=Image.merge('RGB',(r,g,b)) #合并三通道
+img=Image.open(filename)  #打開圖像, 彩色
+print(img.size)
 
-plt.figure('Peony')
+gray=img.convert('L')   #轉換成灰度
+print(gray.size)
+r,g,b=img.split()   #分離三通道
+print(r.size)
+
+pic=Image.merge('RGB',(r,g,b)) #合併三通道
+print(pic.size)
+
+plt.figure('picture')
 
 plt.subplot(2,3,1)
-plt.title('origin')
+plt.title('原圖')
 plt.imshow(img)
 
 plt.subplot(2,3,2)
-plt.title('gray')
+plt.title('灰階')
 plt.imshow(gray,cmap='gray')
 
 plt.subplot(2,3,3)
-plt.title('merge')
+plt.title('合併三通道')
 plt.imshow(pic)
 
 plt.subplot(2,3,4)
-plt.title('r')
+plt.title('R通道')
 plt.imshow(r,cmap='gray')
 
 plt.subplot(2,3,5)
-plt.title('g')
+plt.title('G通道')
 plt.imshow(g,cmap='gray')
 
 plt.subplot(2,3,6)
-plt.title('b')
+plt.title('B通道')
 plt.imshow(b,cmap='gray')
 
 plt.show()
@@ -130,24 +134,28 @@ for i in range(5000):
     y=np.random.randint(0,cols)
     img[x,y,:]=255
     
-plt.figure('Peony')
+plt.figure('picture')
 plt.imshow(img)
+plt.title('椒鹽效果')
 plt.show()
 
-#例2：將lena圖像二值化，像素值大于128的變為1，否則變為0
+#例2：將lena圖像二值化，像素值大于 threshold 的變為1，否則變為0
 
 img=np.array(Image.open(filename).convert('L'))
+
+threshold=128
 
 rows,cols=img.shape
 for i in range(rows):
     for j in range(cols):
-        if (img[i,j]<=128):
+        if (img[i,j]<=threshold):
             img[i,j]=0
         else:
             img[i,j]=1
             
-plt.figure('Peony')
+plt.figure('picture')
 plt.imshow(img,cmap='gray')
+plt.title('二值化, threshold ='+ str(threshold))
 plt.show()
 
 """
@@ -200,6 +208,7 @@ color_image = cmap(np.array(gray_image))
 
 # 顯示彩色圖像
 plt.imshow(color_image)
+plt.title('偽彩色')
 
 plt.show()
 
@@ -235,10 +244,13 @@ imagehash.crop_resistant_hash
 """
 import imagehash
 
-hash1 = imagehash.average_hash(Image.open(filename1))
-print(hash1)
-hash2 = imagehash.average_hash(Image.open(filename2))
-print(hash2)
+image1 = Image.open(filename1)
+image2 = Image.open(filename2)
+hash1 = imagehash.average_hash(image1)
+hash2 = imagehash.average_hash(image2)
+
+print('圖一的hash :', hash1)
+print('圖二的hash :', hash2)
 
 if hash1 == hash2:
     print('兩圖相同')
@@ -246,19 +258,6 @@ else:
     print('兩圖不同')
 
 print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
-
-#純圖片指定座標取得顏色方法
-def rgb_of_pixel(img_path, x, y):
-    im = Image.open(img_path).convert('RGB')
-    r, g, b = im.getpixel((x, y))
-    a = (r, g, b)
-    return a
-
-print(rgb_of_pixel(filename, 131, 81))
-
-print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
@@ -366,17 +365,6 @@ with open(os.path.join(target, "index.html"), "w", encoding="utf-8") as f:
 """
 print("------------------------------------------------------------")  # 60個
 
-def blue_to_red(image_path):
-    image = Image.open(image_path)
-    r, g, b = image.split() # 分離三個通道
-    image = Image.merge("RGB",(b,g,r))# 將藍色通道和通道互換
-    image.show()
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-#blue_to_red(filename)
-
-print('------------------------------------------------------------')	#60個
-
 """
 def blue_to_red2(image_path):
     image = Image.open(image_path)
@@ -397,44 +385,6 @@ blue_to_red2(filename)
 """    
 
 print('------------------------------------------------------------')	#60個
-
-def batch_resize_images(input_folder, output_folder, size=(300, 300)):
-    # 確保輸出資料夾存在
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-    
-    # 遍歷輸入資料夾中的所有影像檔案
-    for filename in os.listdir(input_folder):
-        if filename.endswith(('.jpg', '.png')):
-            # 打開影像
-            image = Image.open(os.path.join(input_folder, filename))
-            # 調整影像尺寸
-            image = image.resize(size, Image.ANTIALIAS)
-            # 保存調整尺寸後的影像到輸出資料夾
-            #image.save(os.path.join(output_folder, filename))
-
-# 假設有一個包含原始圖片的資料夾 'input_images' 和
-# 一個用於存放調整後圖片的資料夾 'output_images'
-input_folder = 'input_images'
-output_folder = 'output_images'
-
-# 呼叫函數，將所有圖片調整為300x300大小
-batch_resize_images(input_folder, output_folder)
-
-print("------------------------------------------------------------")  # 60個
-
-def batch_convert_images(directory, target_format='.jpg'):
-    for filename in os.listdir(directory):
-        if filename.endswith('.png'):
-            path = os.path.join(directory, filename)
-            image = Image.open(path)
-            image_rgb = image.convert('RGB')  # 轉換為RGB模式以便保存為JPEG
-            #image_rgb.save(path.replace('.png', target_format), quality=95)
-
-# 呼叫批次更改函數
-batch_convert_images('images_directory')
-
-print("------------------------------------------------------------")  # 60個
 
 from pathlib import Path
 
@@ -489,9 +439,7 @@ import squarify
 
 print('------------------------------------------------------------')	#60個
 
-#利用圖片的個數強調數量
-
-#以人形圖示的個數強調數量的範例
+#把同樣的圖片排列成 M X N
 
 # 要排列的圖示個數
 M = 5
@@ -501,9 +449,7 @@ N = 8
 margin = 5
 
 # 載入圖片
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg'
-
 image = Image.open(filename)
 print(image.size)
 
@@ -862,7 +808,7 @@ def imy(image, sigma):
     return imgy
 def mag(image, sigma):
     # 還有gaussian_gradient_magnitude()
-    imgmag = 255 - numpy.sqrt(imgx ** 2 + imgy ** 2)
+    imgmag = 255 - np.sqrt(imgx ** 2 + imgy ** 2)
     return imgmag
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
@@ -1134,12 +1080,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1156,15 +1096,19 @@ print(filename)
 
 print("------------------------------------------------------------")  # 60個
 
-print("操作像素")
+print("操作像素, 使用 putpixel 修改一塊")
 
 image = Image.open(filename)
 for x in range(100, 200):
     for y in range(250, 350):
-        image.putpixel((x, y), (128, 128, 128))
-image.show()
+        image.putpixel((x, y), (255, 0, 0))
+
+plt.imshow(image)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+print('PIL之另存新檔')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 infile = filename#"earth.png"
@@ -1172,8 +1116,6 @@ savefile = "tmp_savePNG1.png"
 
 img = Image.open(infile)      #載入圖片檔
 img.save(savefile, format="PNG")    #PNG轉存檔案
-
-
 
 image = Image.open(filename)
 image.save("tmp_pic_quality95.jpg", quality=95 )
@@ -1295,17 +1237,5 @@ for file in allfiles:
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
 
 

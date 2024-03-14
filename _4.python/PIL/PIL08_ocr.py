@@ -1,18 +1,39 @@
 """
 
-OCR，光學字元辨識(Optical Character Recognition) 意思是可以把照片中的文字轉化成文字檔
+OCR，光學字元辨識(Optical Character Recognition) 意思是 可以把照片中的文字轉化成文字檔
 
-先 import pytesseract
 
-到下面的網址下載並安裝 tesseract OCR
+1. pip install pytesseract
+
+2. 到下面的網址下載並安裝 tesseract OCR
 https://github.com/UB-Mannheim/tesseract/wiki
 
 安裝 tesseract-ocr-w64-setup-5.3.1.20230401.exe
 
-安裝好後找到 pytesseract.exe 的位置，並複製其絕對路徑，通常會在 C:\Program Files\Tesseract-OCR\tesseract.exe。
-或是
+安裝好後找到 pytesseract.exe 的位置，並複製其絕對路徑，通常會在
+
+C:\Program Files\Tesseract-OCR\tesseract.exe
+或
 C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe
+
+3. OCR 辨識繁體中文
+其實和辨識英文一樣，只是我們要下載繁體中文的訓練資料，
+到這邊 https://github.com/tesseract-ocr/tessdata_best/blob/master/chi_tra.traineddata
+下載並將檔案放到 C:\Program Files\Tesseract-OCR\tessdata 中，修改 lang 參數變成 chi_tra 就可以啦
+
+正中
+https://github.com/tesseract-ocr/tessdata_best/tree/main/chi_tra.traineddata
+簡中
+https://github.com/tesseract-ocr/tessdata_best/tree/main/chi_sim.traineddata
+日文
+https://github.com/tesseract-ocr/tessdata_best/tree/main/jpn.traineddata
+
 """
+
+print('------------------------------------------------------------')	#60個
+
+#ocr_program = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+ocr_program = r"C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe"
 
 print('------------------------------------------------------------')	#60個
 
@@ -37,7 +58,7 @@ import pytesseract
 #filename = 'data/ocr01.png'
 filename = 'data/ocr02.jpg'
 
-pytesseract.pytesseract.tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = ocr_program
 image = Image.open(filename)
 
 plt.imshow(image)
@@ -46,18 +67,12 @@ plt.show()
 result = pytesseract.image_to_string(image, lang="eng")
 print(result)
 
-"""
-OCR 辨識繁體中文
-
-其實和辨識英文一樣，只是我們要下載繁體中文的訓練資料，
-到這邊 https://github.com/tesseract-ocr/tessdata_best/blob/master/chi_tra.traineddata
-下載並將檔案放到 C:\Program Files\Tesseract-OCR\tessdata 中，修改 lang 參數變成 chi_tra 就可以啦
-"""
+print('------------------------------------------------------------')	#60個
 
 filename = 'data/ocr03.jpg'
 
-pytesseract.pytesseract.tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
-#pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = ocr_program
+#pytesseract.pytesseract.tesseract_cmd = 
 img = Image.open(filename)
 
 plt.imshow(img)
@@ -69,8 +84,7 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'data/ocr04.jpg'
 
-pytesseract.pytesseract.tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
-#pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = ocr_program
 img = Image.open(filename)
 
 plt.imshow(img)
@@ -89,7 +103,7 @@ from PIL import ImageEnhance
 from PIL import Image
 
 # Important variables
-user_tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
+user_tesseract_cmd = ocr_program
 show_image = False
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/captcha/captcha01.jpg'
@@ -234,13 +248,13 @@ text  = pytesseract.image_to_string(Image.open('data/data17_26.jpg'),
 print(text)
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 import pytesseract
 
 text  = pytesseract.image_to_string(Image.open('data/data17_27.jpg'),
                                                lang='chi_sim')
 print(text)
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 import pytesseract
