@@ -136,6 +136,16 @@ print(secretNum)
 
 print("------------------------------------------------------------")  # 60個
 
+import time
+currentTime = time.asctime()
+
+print("時間 :", currentTime)
+
+
+entrySecond = time.time()
+print("時間 :", entrySecond)
+
+
 
 print("------------------------------------------------------------")  # 60個
 

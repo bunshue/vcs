@@ -1,8 +1,107 @@
-
 import sys
+
+import os
+import time
+import random
+
+import requests
+import re
+import bs4
+
+print("------------------------------------------------------------")  # 60個
+
+import webbrowser
+webbrowser.open('http://www.mcut.edu.tw')
+
+print("------------------------------------------------------------")  # 60個
+
+#address = input("請輸入地址 : ")
+address = "新竹市東區榮光里中華路二段445號"
+webbrowser.open('http://www.google.com.tw/maps/place/' + address)
 
 print('------------------------------------------------------------')	#60個
 
+url = 'http://www.mcut.edu.tw'
+htmlfile = requests.get(url)
+print(type(htmlfile))
+if htmlfile.status_code == requests.codes.ok:
+    print("取得網頁內容成功")
+    print("網頁內容大小 = ", len(htmlfile.text))
+else:
+    print("取得網頁內容失敗")
+
+print("------------------------------------------------------------")  # 60個
+
+url = 'http://www.mcut.edu.tw'
+htmlfile = requests.get(url)
+if htmlfile.status_code == requests.codes.ok:
+    print("取得網頁內容成功")
+    print(htmlfile.text)            # 列印網頁內容
+else:
+    print("取得網頁內容失敗")
+
+print('------------------------------------------------------------')	#60個
+
+url = 'http://www.mcut.edu.tw'
+htmlfile = requests.get(url)
+if htmlfile.status_code == requests.codes.ok:
+    pattern = input("請輸入欲搜尋的字串 : ")    # 讀取字串
+# 使用方法1
+    if pattern in htmlfile.text:              # 方法1
+        print(f"搜尋 {pattern} 成功")
+    else:
+        print(f"搜尋 {pattern} 失敗")
+    # 使用方法2, 如果找到放在串列name內
+    name = re.findall(pattern, htmlfile.text)  # 方法2
+    if name:
+        print(f"{pattern} 出現 {len(name)} 次")
+    else:
+        print(f"{pattern} 出現 0 次")
+else:
+    print("網頁下載失敗")
+
+print('------------------------------------------------------------')	#60個
+
+url = 'http://mcut.edu.tw/file_not_existed' # 不存在的內容
+try:
+    htmlfile = requests.get(url)
+    htmlfile.raise_for_status()             # 異常處理
+    print("下載成功")
+except Exception as err:                    # err是系統內建的錯誤訊息
+    print(f"網頁下載失敗: {err}")
+print("程式繼續執行 ... ")
+
+print('------------------------------------------------------------')	#60個
+
+url = 'https://www.kingstone.com.tw/' 
+htmlfile = requests.get(url)
+htmlfile.raise_for_status()
+
+print('------------------------------------------------------------')	#60個
+
+headers = { 'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64)\
+            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101\
+            Safari/537.36', }
+url = 'https://www.kingstone.com.tw/'
+htmlfile = requests.get(url, headers=headers)
+htmlfile.raise_for_status()
+print("偽裝瀏覽器擷取網路資料成功")
+
+print('------------------------------------------------------------')	#60個
+
+url = 'http://www.tenlong.com.tw'                    # 天瓏書局網址
+try:
+    htmlfile = requests.get(url)
+    print("下載成功")
+except Exception as err:                                
+    print("網頁下載失敗: %s" % err)
+# 儲存網頁內容
+fn = 'tmp_html_text1.txt'
+with open(fn, 'wb') as file_Obj:                     # 以二進位儲存
+    for diskStorage in htmlfile.iter_content(10240): # Response物件處理
+        size = file_Obj.write(diskStorage)           # Response物件寫入
+        print(size)                                  # 列出每次寫入大小
+    print("以 %s 儲存網頁HTML檔案成功" % fn)
 
 print('------------------------------------------------------------')	#60個
 
@@ -12,10 +111,7 @@ r = requests.get('http://tw.yahoo.com')
 
 print(r.text)
 
-
-
 print('------------------------------------------------------------')	#60個
-
 
 import requests
 
@@ -27,7 +123,6 @@ pprint.pprint(r.text)
 
 
 print('------------------------------------------------------------')	#60個
-
 
 import requests
 
@@ -69,75 +164,7 @@ pprint.pprint(wiki_data)
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-import sys
-
-print('------------------------------------------------------------')	#60個
-
-from bs4 import BeautifulSoup
-
-soup = BeautifulSoup("<html> Lollipop </html>", "html.parser")
-
-print('------------------------------------------------------------')	#60個
-
 import requests
-
-from bs4 import BeautifulSoup
-
-html_data = requests.get('http://tw.yahoo.com')
-
-soup = BeautifulSoup(html_data.text, "html.parser")
-
-print(soup.title)
-
-print('------------------------------------------------------------')	#60個
-
-import requests
-
-from bs4 import BeautifulSoup
-
-yahoo_news_xml = requests.get('https://tw.news.yahoo.com/rss/technology')
-
-soup = BeautifulSoup(yahoo_news_xml.text, "html.parser")
-
-type(soup)
-
-soup.findAll('item')
-
-print('------------------------------------------------------------')	#60個
-
-for news in soup.findAll('item'):
-
-	print(news.title)
-	
-print('------------------------------------------------------------')	#60個
-
-import requests
-
-from bs4 import BeautifulSoup
-
-game_raking_html = requests.get('https://acg.gamer.com.tw/billboard.php?t=2&p=Android')
-
-game_raking_html.encoding = 'UTF-8'
-
-soup = BeautifulSoup(game_raking_html.text, "html.parser")
-
-soup.find(class_='ACG-mainbox1').find(class_='ACG-maintitle').find('a').string
-
-print('------------------------------------------------------------')	#60個
-
-for game in soup.findAll(class_='ACG-mainbox1'):
-	print(game.find(class_='ACG-mainumber').string + ' ' + game.find(class_='ACG-maintitle').find('a').string)
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-import requests #滙入requests套件
 
 addr = 'https://www.edu.tw/'    #教育部
 addr = 'https://www.books.com.tw/'
@@ -166,15 +193,20 @@ print(base64.b64encode(resp.content))
 
 
 
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
 
 
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')
-print('------------------------------------------------------------')	#60個
-
-
-
 print('------------------------------------------------------------')	#60個
 
 
