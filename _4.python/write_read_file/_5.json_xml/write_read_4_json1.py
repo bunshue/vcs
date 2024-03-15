@@ -517,73 +517,73 @@ print("------------------------------------------------------------")  # 60個
 #檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day01-15\code\Day11\json1.py
 
 """
-读取JSON数据
+讀取JSON數據
 
 """
 
 import json
 
-json_str = '{"name": "骆昊", "age": 38, "title": "叫兽"}'
+json_str = '{"name": "駱昊", "age": 38, "title": "叫獸"}'
 result = json.loads(json_str)
 print(result)
 print(type(result))
 print(result['name'])
 print(result['age'])
 
-# 请思考如何将下面JSON格式的天气数据转换成对象并获取我们需要的信息
-# 稍后我们会讲解如何通过网络API获取我们需要的JSON格式的数据
+# 請思考如何將下面JSON格式的天氣數據轉換成對象并獲取我們需要的信息
+# 稍后我們會講解如何通過網絡API獲取我們需要的JSON格式的數據
 """
     {
         "wendu": "29",
-        "ganmao": "各项气象条件适宜，发生感冒机率较低。但请避免长期处于空调房间中，以防感冒。",
+        "ganmao": "各項氣象條件適宜，發生感冒機率較低。但請避免長期處于空調房間中，以防感冒。",
         "forecast": [
             {
-                "fengxiang": "南风",
-                "fengli": "3-4级",
-                "high": "高温 32℃",
+                "fengxiang": "南風",
+                "fengli": "3-4級",
+                "high": "高溫 32℃",
                 "type": "多云",
-                "low": "低温 17℃",
+                "low": "低溫 17℃",
                 "date": "16日星期二"
             },
             {
-                "fengxiang": "南风",
-                "fengli": "微风级",
-                "high": "高温 34℃",
+                "fengxiang": "南風",
+                "fengli": "微風級",
+                "high": "高溫 34℃",
                 "type": "晴",
-                "low": "低温 19℃",
+                "low": "低溫 19℃",
                 "date": "17日星期三"
             },
             {
-                "fengxiang": "南风",
-                "fengli": "微风级",
-                "high": "高温 35℃",
+                "fengxiang": "南風",
+                "fengli": "微風級",
+                "high": "高溫 35℃",
                 "type": "晴",
-                "low": "低温 22℃",
+                "low": "低溫 22℃",
                 "date": "18日星期四"
             },
             {
-                "fengxiang": "南风",
-                "fengli": "微风级",
-                "high": "高温 35℃",
+                "fengxiang": "南風",
+                "fengli": "微風級",
+                "high": "高溫 35℃",
                 "type": "多云",
-                "low": "低温 22℃",
+                "low": "低溫 22℃",
                 "date": "19日星期五"
             },
             {
-                "fengxiang": "南风",
-                "fengli": "3-4级",
-                "high": "高温 34℃",
+                "fengxiang": "南風",
+                "fengli": "3-4級",
+                "high": "高溫 34℃",
                 "type": "晴",
-                "low": "低温 21℃",
+                "low": "低溫 21℃",
                 "date": "20日星期六"
             }
         ],
         "yesterday": {
-            "fl": "微风",
-            "fx": "南风",
-            "high": "高温 28℃",
+            "fl": "微風",
+            "fx": "南風",
+            "high": "高溫 28℃",
             "type": "晴",
-            "low": "低温 15℃",
+            "low": "低溫 15℃",
             "date": "15日星期一"
         },
         "aqi": "72",
@@ -596,12 +596,12 @@ print("------------------------------------------------------------")  # 60個
 #檔案 : C:\_git\vcs\_4.python\__code\Python-100-Days-zh_TW-master\Day01-15\code\Day11\json2.py
 
 """
-写入JSON文件
+寫入JSON文件
 """
 
 import json
 
-teacher_dict = {'name': '白元芳', 'age': 25, 'title': '讲师'}
+teacher_dict = {'name': '白元芳', 'age': 25, 'title': '講師'}
 json_str = json.dumps(teacher_dict)
 print(json_str)
 print(type(json_str))
@@ -612,8 +612,34 @@ print(type(json_str))
 
 print("------------------------------------------------------------")  # 60個
 
+print('讀取一個JSON字典')
+
+import json
+
+from difflib import get_close_matches
+
+file = open("data/WORD_DICTIONARY.json","r")
+data = json.load(file)
+
+w = "MoisTxure".lower()
+if w in data:
+    for i in range(len(data[w])):
+        axe=str(data[w][i])
+        print(axe)
+        #text1.insert(END,w+" : "+axe+"\n")
+        #speak(axe)
+elif len(get_close_matches(w,data.keys())) > 0:
+    print("最接近的字 %s "% get_close_matches(w,data.keys())[0])
+    for i in range(len(data[get_close_matches(w,data.keys())[0]])):
+        print(str(get_close_matches(w,data.keys())[0])+" : "+str(data[get_close_matches(w,data.keys())[0]][i])+"\n")
+else:
+    print('xxxxxx')
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

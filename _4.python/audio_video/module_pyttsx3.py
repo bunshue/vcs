@@ -1,8 +1,10 @@
-'''
+"""
 文字轉語音
+語音引擎 pyttsx3
 
-'''
+"""
 
+import sys
 import pyttsx3
 
 print('------------------------------------------------------------')	#60個
@@ -45,5 +47,53 @@ engine.stop()
 print('存成mp3檔')
 engine.save_to_file('Hello World', 'test.mp3')
 engine.runAndWait()
+
+print("------------------------------------------------------------")  # 60個
+
+import time
+
+# 設定語音引擎
+engine = pyttsx3.init()
+engine = pyttsx3.init('sapi5')
+
+engine.setProperty('rate', 145)  # 設定語速
+engine.setProperty('volume', 1.0)  # 設定音量 (1.0 為最大值)
+
+engine.say("壬戌之秋，七月既望，蘇子與客泛舟遊於赤壁之下。")
+engine.runAndWait()
+time.sleep(3)
+
+engine.stop()  # 停止 pyttsx3 引擎
+
+print("------------------------------------------------------------")  # 60個
+
+import pyttsx3
+
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[0].id)
+
+
+def speak(s):
+    engine.say(s)
+    engine.runAndWait()
+
+text = "語言技術：Python 資料科學"
+speak(text)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 

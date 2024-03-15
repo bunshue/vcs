@@ -10,7 +10,7 @@ import time
 import random
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 btree = [0] * 16
 print(type(btree))
 print(btree)
@@ -36,40 +36,6 @@ print("排序結果 : ", bubble_sort(data))
 
 print("------------------------------------------------------------")  # 60個
 
-
-import random
-
-
-def quick_sort(nLst):
-    """快速排序法"""
-    if len(nLst) <= 1:
-        return nLst
-
-    left = []  # 左邊串列
-    right = []  # 右邊串列
-    piv = []  # 基準串列
-    pivot = random.choice(nLst)  # 隨機設定基準
-    for val in nLst:  # 分類
-        if val == pivot:
-            piv.append(val)  # 加入基準串列
-        elif val < pivot:  # 如果小於基準
-            left.append(val)  # 加入左邊串列
-        else:
-            right.append(val)  # 加入右邊串列
-    return quick_sort(left) + piv + quick_sort(right)
-
-
-data = [6, 1, 5, 7, 3, 9, 4, 2, 8]
-print("原始串列 : ", data)
-print("排序結果 : ", quick_sort(data))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch09\ch9_12.py
-
-
-# ch9_12.py
 def merge(left, right):
     """兩數列合併"""
     output = []
@@ -1644,44 +1610,11 @@ ciphertext = encrypt(msg, encry_dict)
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
 
+'''
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch17\ch17_4.py
-
-# ch17_4.py
-import string
-import random
-
-
-def encrypt(text, encryDict):  # 加密文件
-    cipher = []
-    for i in text:  # 執行每個字元加密
-        v = encryDict[i]  # 加密
-        cipher.append(v)  # 加密結果
-    return "".join(cipher)  # 將串列轉成字串
-
-
-abc = string.printable[:-5]  # 取消不可列印字元
-newAbc = abc[:]  # 產生新字串拷貝
-abclist = list(newAbc)  # 轉成串列
-random.shuffle(abclist)  # 打亂串列順序
-subText = "".join(abclist)  # 轉成字串
-encry_dict = dict(zip(subText, abc))  # 建立字典
-print("列印編碼字典\n", encry_dict)  # 列印字典
-
-msg = "If the implementation is easy to explain, it may be a good idea."
-ciphertext = encrypt(msg, encry_dict)
-
-print("原始字串 ", msg)
-print("加密字串 ", ciphertext)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch18\ch18_1.py
-
-# ch18_1.py
 import math
 
 film = [5, 7, 8, 10, 2]  # 玩命關頭特徵值
@@ -2420,47 +2353,6 @@ ciphertext = "".join(cipher)  # 將串列轉成字串
 print("原始字串 ", msgTest)
 print("加密字串 ", ciphertext)
 
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex17_4.py
-
-# ex17_4.py
-import string
-import random
-
-
-def encrypt(text, encryDict):  # 加密文件
-    cipher = []
-    for i in text:  # 執行每個字元加密
-        v = encryDict[i]  # 加密
-        cipher.append(v)  # 加密結果
-    return "".join(cipher)  # 將串列轉成字串
-
-
-def decrypt(cipher, decryDict):  # 解密文件
-    text = []
-    for i in cipher:  # 執行每個字元解密
-        v = decryDict[i]  # 加密
-        text.append(v)  # 解密結果
-    return "".join(text)  # 將串列轉成字串
-
-
-abc = string.printable[:-5]  # 取消不可列印字元
-newAbc = abc[:]  # 產生新字串拷貝
-abclist = list(newAbc)  # 轉成串列
-random.shuffle(abclist)  # 打亂串列順序
-subText = "".join(abclist)  # 轉成字串
-encry_dict = dict(zip(subText, abc))  # 建立加密字典
-decry_dict = dict(zip(abc, subText))  # 建立解密字典
-print("列印解碼字典\n", decry_dict)  # 列印解碼字典
-
-msg = "If the implementation is easy to explain, it may be a good idea."
-ciphertext = encrypt(msg, encry_dict)
-print("原始字串 ", msg)
-print("加密字串 ", ciphertext)
-decryMsg = decrypt(ciphertext, decry_dict)
-print("解密字串 ", decryMsg)
 
 print("------------------------------------------------------------")  # 60個
 

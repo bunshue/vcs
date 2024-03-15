@@ -3,7 +3,7 @@ import random
 import itertools
 import numpy as np
 
-import cv2 as cv
+import cv2
 
 map_filename = 'cape_python.png'
 
@@ -17,7 +17,7 @@ class Search():
 
     def __init__(self, name):
         self.name = name
-        self.img = cv.imread(map_filename, cv.IMREAD_COLOR)
+        self.img = cv2.imread(map_filename, cv2.IMREAD_COLOR)
         if self.img is None:
             print('Could not load map file {}'.format(map_filename),
                   file=sys.stderr)
@@ -50,40 +50,40 @@ class Search():
     def draw_map(self, last_known):
 
         print(self.img.shape)
-        cv.rectangle(self.img, (2, 2),
+        cv2.rectangle(self.img, (2, 2),
                      (self.img.shape[1]-4, self.img.shape[0]-4), (0, 0, 255), 4)
         
         """顯示底層的地圖，以及比例尺、目前已知的最後 xy 位置、搜尋區域"""
 
         # 畫出並標示出搜索區域
-        cv.rectangle(self.img, (SA1_CORNERS[0], SA1_CORNERS[1]),
+        cv2.rectangle(self.img, (SA1_CORNERS[0], SA1_CORNERS[1]),
                      (SA1_CORNERS[2], SA1_CORNERS[3]), (0, 0, 255), 1)
-        cv.putText(self.img, '1 R',
+        cv2.putText(self.img, '1 R',
                    (SA1_CORNERS[0] + 3, SA1_CORNERS[1] + 15),
-                   cv.FONT_HERSHEY_PLAIN, 1, 0)
+                   cv2.FONT_HERSHEY_PLAIN, 1, 0)
 
-        cv.rectangle(self.img, (SA2_CORNERS[0], SA2_CORNERS[1]),
+        cv2.rectangle(self.img, (SA2_CORNERS[0], SA2_CORNERS[1]),
                      (SA2_CORNERS[2], SA2_CORNERS[3]), (0, 255, 0), 1)
-        cv.putText(self.img, '2 G',
+        cv2.putText(self.img, '2 G',
                    (SA2_CORNERS[0] + 3, SA2_CORNERS[1] + 15),
-                   cv.FONT_HERSHEY_PLAIN, 1, 0)
+                   cv2.FONT_HERSHEY_PLAIN, 1, 0)
 
-        cv.rectangle(self.img, (SA3_CORNERS[0], SA3_CORNERS[1]),
+        cv2.rectangle(self.img, (SA3_CORNERS[0], SA3_CORNERS[1]),
                      (SA3_CORNERS[2], SA3_CORNERS[3]), (255, 0, 0), 1)
-        cv.putText(self.img, '3 B',
+        cv2.putText(self.img, '3 B',
                    (SA3_CORNERS[0] + 3, SA3_CORNERS[1] + 15),
-                   cv.FONT_HERSHEY_PLAIN, 1, 0)
+                   cv2.FONT_HERSHEY_PLAIN, 1, 0)
 
         # 顯示視窗
-        cv.imshow('Search Area', self.img)
+        cv2.imshow('Search Area', self.img)
 
         print('移動視窗位置')
-        #cv.moveWindow('Search Area', 750, 10)
-        cv.moveWindow('Search Area', 0, 0)
+        #cv2.moveWindow('Search Area', 750, 10)
+        cv2.moveWindow('Search Area', 0, 0)
 
         print('5秒鐘後 關閉視窗')
-        cv.waitKey(50000)
-        cv.destroyAllWindows()
+        cv2.waitKey(5000)
+        cv2.destroyAllWindows()
 
  
     
@@ -93,7 +93,6 @@ app.draw_map(last_known=(160, 290))
 #app.draw_map(last_known=(200, 200))
 
 print("P1 = {:.3f}, P2 = {:.3f}, P3 = {:.3f}".format(app.p1, app.p2, app.p3))
-
 print("P1 = {:.3f}, P2 = {:.3f}, P3 = {:.3f}".format(app.sep1, app.sep2, app.sep3))
 
 
@@ -118,8 +117,8 @@ print(coords)
 """
 
 """
-cv.circle(app.img, (sailor_x, sailor_y), 3, (255, 0, 0), -1)
-cv.imshow('Search Area', app.img)
-cv.waitKey(5000)
+cv2.circle(app.img, (sailor_x, sailor_y), 3, (255, 0, 0), -1)
+cv2.imshow('Search Area', app.img)
+cv2.waitKey(5000)
 
 """

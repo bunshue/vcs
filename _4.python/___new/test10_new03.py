@@ -3659,48 +3659,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 '''
-# 猜數字：幾 A 幾 B
-
-""" 
-arr = []
-for i in range(9):
-    arr.append(i+1)
-
-answer = []
-for i in range(4):
-    arrLength = int(len(arr)) - 1
-    answer.append(arr.pop(random.randint(0, arrLength)))
-
-
- """
-answer = random.sample(range(1,10), k=4)  # 使用 random.sample
-print(answer)
-
-n = 0
-
-while True:
-    user = str(input('請輸入四個數字：'))
-    a = 0
-    b = 0
-    n += 1
-    result = [0, 0, 0, 0]
-    for i in range(4):
-        result[i] = int(user[i])
-    for i in range(4):
-        if (result[i] in answer):
-            if(answer[i] == result[i]):
-                a += 1
-            else:
-                b += 1
-
-    print('第 ' + str(n) + ' 次：' + user + \
-          ' ( ' + str(a) + ' A ' + str(b) + ' B )')
-    if a == 4:
-        print('猜中囉')
-        break
-
-print("------------------------------------------------------------")  # 60個
-
 def inn():
     a = input('輸入文字並轉換為 ASCII：')
     print('{} 的 ASCII：{}'.format(a, ord(a)))
@@ -3744,24 +3702,6 @@ print(jj)
 
 with open("tmp_a06.txt", "a+") as f:
     f.write(jj)
-
-print("------------------------------------------------------------")  # 60個
-
-""" 
-arr = []
-for i in range(1, 50):
-    arr.append(i)
-
-lto = []
-for i in range(6):
-    arrLength = int(len(arr)) - 1
-    lto.append(arr.pop(random.randint(0, arrLength))) 
-"""
-
-# 使用 random.sample 一行搞定
-lto = random.sample(range(1, 50), k=6)
-lto.sort()
-print(lto)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4153,139 +4093,10 @@ print(aa)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\random\r01-seed.py
-
-# random.seed
-# random.seed 隨機數的「種子」，數值一樣則產生的隨機數相同，若不設定則使用系統提供隨機源
-# random.random() 並不是真正的隨機數
-
-random.seed(5)
-a = random.random()
-random.seed(5)
-b = random.random()
-c = random.random()  # 重複 print 出來的結果是相同的
-d = random.random()
-print(f"{a}\n{b}\n{c}\n{d}")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\random\r02-randrange.py
-
-# random.randrange 和 random.randint 都可產生隨機整數
-
-a = random.randrange(2, 500, 2)  # randrange 可指定隨機數階層，一定偶數
-print(a)
-b = random.randrange(0, 1)  # randrange 不包含設定的最後一個數值，一定出現 0
-print(b)
-c = random.randint(0, 1)  # randint 包含設定的最後一個數值，0 和 1 隨機挑選
-print(c)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\random\r03-choice.py
-
-# random.choices
-
-a = random.choice([1, 2, 3, 4, 5])  # choice 從 list 中選擇一個隨機元素
-print(a)
-
-# choices 從 list 中選擇指定數量的隨機元素 ( 可能會重複 )
-b = random.choices([1, 2, 3, 4, 5, 6, 7, 8], k=5)
-print(b)
-
-# choices 可透過 weight 定義權重，有相對和累績兩種選一種的設定
-# weights 為相對，cum_weights 為累積，下面的例子出現 8 的機率是 1 的八倍
-c = random.choices([1, 2, 3, 4, 5, 6, 7, 8], weights=[1, 2, 3, 4, 5, 6, 7, 8], k=5)
-print(c)
-
-# shuffle 可以把清單打散為隨機位置
-d = [1, 2, 3, 4, 5, 6, 7, 8]
-random.shuffle(d)
-print(d)
-
-# sample 可以從清單中隨機取出不重複的值
-e = random.sample([1, 2, 3, 4, 5, 6, 7, 8], k=4)
-print(e)
-f = random.sample(range(1, 50), k=6)  # 大樂透一行搞定？
-print(f)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\python2\random\r04-random.py
-
-# random.random() 並不是真正的隨機數，如果 seed 相同則結果相同
-a = random.random()
-print(a)
-
-# uniform 返回兩個值中間的隨機浮點數
-b = random.uniform(3, 8)
-print(b)
-
-# triangular 返回兩個值中間的隨機浮點數
-c = random.triangular(3, 8)
-print(c)
-
-# beta 分佈，兩個值需都大於 0，返回 0~1 之間隨機浮點數
-d = random.betavariate(3, 8)
-print(d)
-
-# 指數分佈，不可為 0，若為負，則是小於零的福點數
-e = random.expovariate(-5)
-print(e)
-
-# 其他還有
-# random.gammavariate(alpha, beta)
-# random.gauss(mu, sigma)
-# random.lognormvariate(mu, sigma)
-# random.normalvariate(mu, sigma)
-# random.vonmisesvariate(mu, kappa)
-# random.paretovariate(alpha)
-# random.weibullvariate(alpha, beta)
-
-# 參考：https://docs.python.org/zh-cn/3/library/random.html#random.random
-
-print("------------------------------------------------------------")  # 60個
-
-
 b1 = 1
 b2 = 3
 print(f"{b1} / {b2} = {round(b1/b2,3)}")  # 使用 round 四捨五入到小數點三位
 print(f"{b2} / {b1} = {round(b2/b1,3)}")
-
-print("------------------------------------------------------------")  # 60個
-
-numberOfDice = 10
-
-print("一次丟 ", numberOfDice, "個骰子, 丟100萬次")
-
-# Set up a dictionary to store the results of each dice roll:
-results = {}
-for i in range(numberOfDice, (numberOfDice * 6) + 1):
-    results[i] = 0
-
-# Simulate dice rolls:
-print("Simulating 1,000,000 rolls of {} dice...".format(numberOfDice))
-lastPrintTime = time.time()
-for i in range(1000000):
-    if time.time() > lastPrintTime + 1:
-        print("{}% done...".format(round(i / 10000, 1)))
-        lastPrintTime = time.time()
-
-    total = 0
-    for j in range(numberOfDice):
-        total = total + random.randint(1, 6)
-    results[total] = results[total] + 1
-
-# Display results:
-print("TOTAL - ROLLS - PERCENTAGE")
-for i in range(numberOfDice, (numberOfDice * 6) + 1):
-    roll = results[i]
-    percentage = round(results[i] / 10000, 1)
-    print("  {} - {} rolls - {}%".format(i, roll, percentage))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4605,18 +4416,6 @@ current_player = players[(players.index(current_player) + 1) % 2]
 print(current_player)
 current_player = players[(players.index(current_player) + 1) % 2]
 print(current_player)
-
-print("------------------------------------------------------------")  # 60個
-
-print("亂數不重複 範圍 個數")
-num = random.sample(range(1, 20), 10)
-
-print(type(num))
-print(num)
-print("排序")
-
-num.sort()
-print(num)
 
 print("------------------------------------------------------------")  # 60個
 

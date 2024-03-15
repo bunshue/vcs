@@ -20,7 +20,7 @@ import time
 import random
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # OK 但搬遷有問題
 
 # 構造數據
@@ -146,18 +146,13 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-num = 100
-while True:
-    x = np.random.random(100)  # 建立x軸100個隨機數字
-    y = np.random.random(100)  # 建立y軸100個隨機數字
-    plt.scatter(x, y, s=100, c=x, cmap="brg")  # 繪製散點圖
-    plt.show()
-    yORn = input("是否繼續 ?(y/n) ")  # 詢問是否繼續
-    if yORn == "n" or yORn == "N":  # 輸入n或N則程式結束
-        break
-
+N = 100
+x = np.random.random(N)  # 建立x軸100個隨機數字
+y = np.random.random(N)  # 建立y軸100個隨機數字
+plt.scatter(x, y, s=N, c=x, cmap="brg")  # 繪製散點圖
+plt.show()
+'''
 print("------------------------------------------------------------")  # 60個
-
 
 def loc(index):
     # 處理座標的移動
@@ -172,21 +167,13 @@ def loc(index):
 num = 10000  # 設定隨機點的數量
 x = [0]  # 設定第一次執行x座標
 y = [0]  # 設定第一次執行y座標
-while True:
-    for i in range(1, num):  # 建立點的座標
-        loc(i)
-    t = x  # 色彩隨x軸變化
-    plt.scatter(x, y, s=2, c=t, cmap="brg")
-    plt.axis("off")  # 隱藏座標
-    plt.show()
-    yORn = input("是否繼續 ?(y/n) ")  # 詢問是否繼續
-    if yORn == "n" or yORn == "N":  # 輸入n或N則程式結束
-        break
-    else:
-        x[0] = x[num - 1]  # 上次結束x座標成新的起點x座標
-        y[0] = y[num - 1]  # 上次結束y座標成新的起點y座標
-        del x[1:]  # 刪除舊串列x座標元素
-        del y[1:]  # 刪除舊串列y座標元素
+
+for i in range(1, num):  # 建立點的座標
+    loc(i)
+t = x  # 色彩隨x軸變化
+plt.scatter(x, y, s=2, c=t, cmap="brg")
+plt.axis("off")  # 隱藏座標
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

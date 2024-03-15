@@ -14,6 +14,7 @@ images, labels = [], []
 
 # 讀取灰階影像，並顯示使用者 ID、影像的名稱、影像的畫面號碼
 for image in image_paths:
+    print(image)
     train_image = cv.imread(image, cv.IMREAD_GRAYSCALE)
     label = int(os.path.split(image)[-1].split('.')[1])
     name = os.path.split(image)[-1].split('.')[0]

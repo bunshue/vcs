@@ -550,8 +550,8 @@ scatter(ix, iy, c="g", marker="o", lw=ll, label="Iron-clad Frigates")
 scatter(lx, ly, c="cyan", marker="o", lw=ll, label="Later Iron-clads")
 
 legend(loc="upper left")
-ylim(0, 7000)
-xlim(1630, 1875)
+#ylim(0, 7000)
+#xlim(1630, 1875)
 xticks(range(1630, 1930, 50))
 xlabel("Year launched")
 ylabel("Tonnage (BOM)")
@@ -722,8 +722,8 @@ listy = [68, 20, 61, 32, 45, 56, 10, 18, 70, 64, 43, 66, 19, 77, 21]
 
 scale = [x**3 for x in [5, 4, 2, 6, 7, 1, 8, 9, 2, 3, 2, 4, 5, 7, 2]]
 
-plt.xlim(0, 50)
-plt.ylim(0, 80)
+#plt.xlim(0, 50)
+#plt.ylim(0, 80)
 
 plt.scatter(listx, listy, c="r", s=scale, marker="o", alpha=0.5)
 
@@ -796,12 +796,10 @@ x = [radius * math.cos(math.radians(d)) for d in degrees]
 y = [radius * math.sin(math.radians(d)) for d in degrees]
 
 plt.scatter(x, y)
-plt.xlim(-12, 12)
-plt.ylim(-12, 12)
+#plt.xlim(-12, 12)
+#plt.ylim(-12, 12)
 # plt.axis('equal')
 plt.show()
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
