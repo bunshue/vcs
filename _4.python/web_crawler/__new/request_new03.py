@@ -500,8 +500,371 @@ for title in titles:
 
 print('------------------------------------------------------------')	#60個
 
+import json
+import requests
+
+api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
+res = requests.get(api_url).text
+
+data = json.loads(res)
+for post in data:
+    print(post["title"])
 
 print('------------------------------------------------------------')	#60個
+
+import urllib.request
+import time
+import os
+data = json.loads(res)
+for post in data:
+    if len(post["media"])>0:
+        for image in post["media"]:
+            imgurl = image["url"]
+            print(imgurl)
+            if ".jpg" in imgurl or ".png" in imgurl:
+                urllib.request.urlretrieve(imgurl, os.path.basename(imgurl))
+            time.sleep(3)
+
+print(res)
+
+print('------------------------------------------------------------')	#60個
+
+import json
+import requests
+
+api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
+res = requests.get(api_url).text
+
+data = json.loads(res)
+for post in data:
+    print(post["title"])
+
+print(res)
+
+print('------------------------------------------------------------')	#60個
+
+import json
+import urllib.parse
+import requests
+
+url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+
+html = requests.get(url).text
+data = json.loads(html)
+
+titles = data['lists']
+for title in titles:
+    print(title['title'])
+    print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
+
+print('------------------------------------------------------------')	#60個
+
+import requests
+url = "https://ck101.com/forum-3590-1.html?ref=nav"
+res = requests.get(url)
+print(res)
+print(res.text)
+
+print('------------------------------------------------------------')	#60個
+
+import requests
+url = "https://ck101.com/forum-3590-1.html?ref=nav"
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+res = requests.get(url, headers=headers)
+print(res)
+print(res.text)
+
+print('------------------------------------------------------------')	#60個
+
+import requests
+url = "https://www.mobile01.com/topiclist.php?f=751"
+res = requests.get(url)
+print(res)
+
+print('------------------------------------------------------------')	#60個
+
+import requests
+url = "https://www.mobile01.com/topiclist.php?f=751"
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+html = requests.get(url, headers=headers).text
+
+print('------------------------------------------------------------')	#60個
+
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(html, "html.parser")
+pages = soup.find_all("a", class_="c-pagination")
+print(pages[-1].text)
+
+print('------------------------------------------------------------')	#60個
+
+titles = soup.find_all("div", class_="c-listTableTd__title")
+print(len(titles))
+for title in titles:
+    print(title)
+    print(title.a.text)
+    print(title.a['href'])
+
+print('------------------------------------------------------------')	#60個
+
+import requests
+url = "https://www.lexuscpo.com.tw/Home/CarStock"
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+form_data = {
+    "CarType":"", 
+    "Series": "",
+    "Price": "", 
+    "Year": "", 
+    "Mileage":"", 
+    "StoreID":"", 
+    "Page": "",
+    "Limit": "20"
+}
+res = requests.post(url, data=form_data, headers=headers)
+data = res.text
+
+print('------------------------------------------------------------')	#60個
+
+import json
+cars = json.loads(data)
+cars = cars['rows']
+message = "{:<10}({}年式)，{:>10,}KM，售價：{:>10,}元"
+for car in cars:
+    print(message.format(
+        car['Model'], 
+        car['Year'],
+        car['Mileage'],
+        car['SellPrice']))
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+import requests
+
+url = "https://ck101.com/forum-3590-1.html?ref=nav"
+
+res = requests.get(url)
+
+print(res)
+print(res.text)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import time
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://www.mobile01.com/topiclist.php?f=751"
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+
+html_data = requests.get(url, headers=headers)
+
+soup = BeautifulSoup(html_data.text, "html.parser")
+pages = soup.find_all("a", class_="c-pagination")
+last_page = int(pages[-1].text)
+url_pattern = "https://www.mobile01.com/topiclist.php?f=751&p={}"
+for page in range(1, last_page+1):
+    current_url = url_pattern.format(page)
+    html_data = requests.get(current_url, headers=headers)
+    soup = BeautifulSoup(html_data.text, "html.parser")
+    titles = soup.find_all("div", class_="c-listTableTd__title")
+    for title in titles:
+        print(title.a.text)
+        print(title.a['href'])
+    time.sleep(3)    
+
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
+
+import requests
+from bs4 import BeautifulSoup
+
+url = 'https://www.mobile01.com/topiclist.php?f=751'
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+html_data = requests.get(url, headers=headers)
+
+soup = BeautifulSoup(html_data.text, "html.parser")
+print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+pages = soup.find_all("a", class_="c-pagination")
+
+print("本討論區的最後一頁是：", end="")
+print(pages[-1].text)
+
+print('------------------------------------------------------------')	#60個
+
+
+import requests
+
+url = "https://www.lexuscpo.com.tw/Home/CarStock"
+
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+
+form_data = {
+    "CarType":"", 
+    "Series": "IS",
+    "Price": "", 
+    "Year": "", 
+    "Mileage":"", 
+    "StoreID":"", 
+    "Page": "",
+    "Limit": "20"
+}
+
+data = requests.post(url, data=form_data, headers=headers).text
+print(data)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import requests
+
+url = "https://ck101.com/forum-3590-1.html?ref=nav"
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+
+res = requests.get(url, headers=headers)
+
+print(res)
+print(res.text)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import json
+import requests
+
+url = "https://www.lexuscpo.com.tw/Home/CarStock"
+
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+
+form_data = {
+    "CarType":"", 
+    "Series": "",
+    "Price": "", 
+    "Year": "", 
+    "Mileage":"", 
+    "StoreID":"", 
+    "Page": "",
+    "Limit": "500"
+}
+
+data = requests.post(url, data=form_data, headers=headers).text
+cars = json.loads(data)
+cars = cars['rows']
+message = "{:<10}({}年式)，{:>10,}KM，{:>10,}元"
+for car in cars:
+    print(message.format(
+        car['Model'], 
+        car['Year'],
+        car['Mileage'],
+        car['SellPrice']))
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+import json, time, os, requests
+import urllib.request
+
+api_url = "https://www.dcard.tw/_api/forums/funny/posts?limit=100"
+res = requests.get(api_url).text
+
+data = json.loads(res)
+for post in data:
+    if len(post["media"])>0:
+        for image in post["media"]:
+            imgurl = image["url"]
+            print(imgurl)
+            if ".jpg" in imgurl or ".png" in imgurl:
+                urllib.request.urlretrieve(imgurl, os.path.join("mypics", os.path.basename(imgurl)))
+            time.sleep(3)
+
+
+
+import requests
+
+url = "https://www.mobile01.com/topiclist.php?f=751"
+
+print('無參數抓網頁')
+
+res = requests.get(url)
+
+print(res)
+
+
+print('有參數抓網頁')
+
+headers = {
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+}
+res = requests.get(url, headers=headers)
+print(res)
+
+print('------------------------------------------------------------')	#60個
+
+import requests
+
+# 郵遞區號
+zipcode = "1000001"
+
+# API 端點
+api_endpoint = f"https://zipcloud.ibsnet.co.jp/api/search?zipcode={zipcode}"
+
+# https://zipcloud.ibsnet.co.jp/api/search?zipcode=1000001
+
+# 進行查詢
+response = requests.get(api_endpoint)
+
+# 檢查回應狀態
+if response.status_code == 200:
+    # 解析回應內容
+    data = response.json()
+
+    # 驗證 API 回應狀態
+    if data['status'] == 200:
+        print('印出完整資訊')
+        print(type(data))
+        print(data)
+        
+        # 取出第一筆地址資訊
+        address_info = data['results'][0]
+
+        # 印出完整郵遞區域
+        print(f"{address_info['address1']} {address_info['address2']} {address_info['address3']}")
+        
+    else:
+        print("API 回應錯誤，訊息：", data['message'])
+else:
+    print("API 查詢失敗，狀態碼：", response.status_code)
 
 
 print('------------------------------------------------------------')	#60個

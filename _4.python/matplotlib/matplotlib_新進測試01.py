@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei "  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
@@ -383,11 +383,21 @@ fig2 = plt.figure()  # 等價於fig2 = plt.figure(2)
 x = np.linspace(0, 6.28, 100)
 y = np.sin(x)
 
-axes = fig2.add_subplot(1, 1, 1)
+axes = fig2.add_subplot(1, 3, 1)
 axes.set_title("y = sin(x)")
-
 (line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
+# 當發現畫錯想修改，可以對line修改：
+line.set_ydata(np.cos(x))
 
+axes = fig2.add_subplot(1, 3, 2)
+axes.set_title("y = sin(x)")
+(line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
+# 當發現畫錯想修改，可以對line修改：
+line.set_ydata(np.cos(x))
+
+axes = fig2.add_subplot(1, 3, 3)
+axes.set_title("y = sin(x)")
+(line,) = axes.plot(x, y)  # 這裡回傳的line就是畫在圖上的資料
 # 當發現畫錯想修改，可以對line修改：
 line.set_ydata(np.cos(x))
 
@@ -402,46 +412,46 @@ from matplotlib import pyplot as plt
 x = np.linspace(-np.pi, np.pi, 200, endpoint=True)
 s, c = np.sin(x), np.cos(x)
 
-# 移动坐标轴边线
-# 坐标轴总共有四个连线，我们通过设置透明色隐藏上方和右方的边线
-# 通过 set_position() 移动左侧和下侧的边线
-# 通过 set_ticks_position() 设置坐标轴的刻度线的显示位置
-ax = plt.gca()  # gca 代表当前坐标轴，即 'get current axis'
+# 移動坐標軸邊線
+# 坐標軸總共有四個連線，我們通過設置透明色隱藏上方和右方的邊線
+# 通過 set_position() 移動左側和下側的邊線
+# 通過 set_ticks_position() 設置坐標軸的刻度線的顯示位置
+ax = plt.gca()  # gca 代表當前坐標軸，即 'get current axis'
 ax.spines["right"].set_color("none")
 ax.spines["top"].set_color("none")
 ax.xaxis.set_ticks_position("bottom")
 ax.spines["bottom"].set_position(("data", 0))
 ax.yaxis.set_ticks_position("left")
 ax.spines["left"].set_position(("data", 0))
-# 设置坐标刻度的字体大小，增加半透明背景
+# 設置坐標刻度的字體大小，增加半透明背景
 for label in ax.get_xticklabels() + ax.get_yticklabels():
     label.set_fontsize(16)
     label.set_bbox(dict(facecolor="white", edgecolor="None", alpha=0.65))
 
-# 设置坐标轴的长度
+# 設置坐標軸的長度
 plt.xlim(x.min() * 1.1, x.max() * 1.1)
 plt.ylim(c.min() * 1.1, c.max() * 1.1)
 
-# 设置坐标轴的刻度和标签
+# 設置坐標軸的刻度和標簽
 plt.xticks(
     (-np.pi, -np.pi / 2, np.pi / 2, np.pi),
     label=(r"$-\pi$", r"$-\pi/2$", r"$+\pi/2$", r"$+\pi$"),
 )
 plt.yticks([-1, -0.5, 0, 0.5, 1])
 
-# 画出正弦曲线，并设置线条颜色，宽度，样式
+# 畫出正弦曲線，并設置線條顏色，寬度，樣式
 plt.plot(x, s, color="red", linewidth=2.0, linestyle="-")
-# 画出余弦曲线，并设置线条颜色，宽度，样式
+# 畫出余弦曲線，并設置線條顏色，寬度，樣式
 plt.plot(x, c, color="blue", linewidth=2.0, linestyle="-")
 
-# 在左上角添加铭牌
+# 在左上角添加銘牌
 # plt.legend(loc='upper left')
 
-# 在坐标轴上标示相应的点
+# 在坐標軸上標示相應的點
 t = 2 * np.pi / 3
-# 画出 cos(t) 所在的点在 X 轴上的位置，即画出 (t, 0) -> (t, cos(t)) 线段，使用虚线
+# 畫出 cos(t) 所在的點在 X 軸上的位置，即畫出 (t, 0) -> (t, cos(t)) 線段，使用虛線
 plt.plot([t, t], [0, np.cos(t)], color="blue", linewidth=1.5, linestyle="--")
-# 画出标示的坐标点，即在 (t, cos(t)) 处画一个大小为 50 的蓝色点
+# 畫出標示的坐標點，即在 (t, cos(t)) 處畫一個大小為 50 的藍色點
 plt.scatter(
     [
         t,
@@ -452,7 +462,7 @@ plt.scatter(
     50,
     color="blue",
 )
-# 画出标示点的值，即 cos(t) 的值
+# 畫出標示點的值，即 cos(t) 的值
 plt.annotate(
     r"$cos(\frac{2\pi}{3})=-\frac{1}{2}$",
     xy=(t, np.cos(t)),
@@ -462,9 +472,9 @@ plt.annotate(
     fontsize=16,
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
-# 画出 sin(t) 所在的点在 X 轴上的位置，即画出 (t, 0) -> (t, sin(t)) 线段，使用虚线
+# 畫出 sin(t) 所在的點在 X 軸上的位置，即畫出 (t, 0) -> (t, sin(t)) 線段，使用虛線
 plt.plot([t, t], [0, np.sin(t)], color="red", linewidth=1.5, linestyle="--")
-# 画出标示的坐标点，即在 (t, sin(t)) 处画一个大小为 50 的红色点
+# 畫出標示的坐標點，即在 (t, sin(t)) 處畫一個大小為 50 的紅色點
 plt.scatter(
     [
         t,
@@ -475,7 +485,7 @@ plt.scatter(
     50,
     color="red",
 )
-# 画出标示点的值，即 sin(t) 的值
+# 畫出標示點的值，即 sin(t) 的值
 plt.annotate(
     r"$sin(\frac{2\pi}{3})=\frac{\sqrt{3}}{2}$",
     xy=(t, np.sin(t)),
@@ -486,7 +496,7 @@ plt.annotate(
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
 
-# 把结果显示在屏幕上
+# 把結果顯示在屏幕上
 plt.show()
 
 print(
@@ -902,7 +912,7 @@ print('載入字型範例')
 
 
 
-翰字鑄造 台北黑體 regular 版本
+翰字鑄造 臺北黑體 regular 版本
 TaipeiSansTCBeta-Regular.ttf 
 https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
 TaipeiSansTCBeta-Regular.ttf'

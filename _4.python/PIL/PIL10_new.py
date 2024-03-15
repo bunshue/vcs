@@ -30,7 +30,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print('顯示原圖')
 
 image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
@@ -39,61 +39,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-"""
-圖像通道\幾何變換\裁剪
-一、圖像通道
-1、彩色圖像轉灰度圖
-"""
 
-img=Image.open(filename)
-gray=img.convert('L')
-plt.figure('picture')
-plt.imshow(gray,cmap='gray')
-plt.show()
-
-"""
-
-2、通道分離與合并
-"""
-
-img=Image.open(filename)  #打開圖像, 彩色
-print(img.size)
-
-gray=img.convert('L')   #轉換成灰度
-print(gray.size)
-r,g,b=img.split()   #分離三通道
-print(r.size)
-
-pic=Image.merge('RGB',(r,g,b)) #合併三通道
-print(pic.size)
-
-plt.figure('picture')
-
-plt.subplot(2,3,1)
-plt.title('原圖')
-plt.imshow(img)
-
-plt.subplot(2,3,2)
-plt.title('灰階')
-plt.imshow(gray,cmap='gray')
-
-plt.subplot(2,3,3)
-plt.title('合併三通道')
-plt.imshow(pic)
-
-plt.subplot(2,3,4)
-plt.title('R通道')
-plt.imshow(r,cmap='gray')
-
-plt.subplot(2,3,5)
-plt.title('G通道')
-plt.imshow(g,cmap='gray')
-
-plt.subplot(2,3,6)
-plt.title('B通道')
-plt.imshow(b,cmap='gray')
-
-plt.show()
 
 """
 圖像中的像素訪問
@@ -177,17 +123,17 @@ img[:,-1] # 最後一列
 img[-2,:] (or im[-2]) # 倒數第二行
 
 """
-
 print('------------------------------------------------------------')	#60個
 
 import torchvision.transforms as transforms
 
 print('------------------------------------------------------------')	#60個
 
-#PIL 偽彩色圖像處理
+#PIL 偽色彩圖像處理
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/pic_256X100.png'
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 
 image = Image.open(filename)
 
@@ -195,9 +141,9 @@ image = Image.open(filename)
 # 轉換為灰度圖像
 gray_image = image.convert('L')
 
-#3. 偽彩色處理
+#3. 偽色彩處理
 
-#偽彩色處理可以通過將灰度值映射到彩色值來實現。通常，我們使用一個顏色映射表（Color Map）來定義灰度和彩色之間的映射關系。
+#偽色彩處理可以通過將灰度值映射到彩色值來實現。通常，我們使用一個顏色映射表（Color Map）來定義灰度和彩色之間的映射關系。
 #在Python中，可以使用matplotlib庫來生成顏色映射表并將灰度圖像轉換為彩色圖像。
 
 # 定義顏色映射表
@@ -208,7 +154,7 @@ color_image = cmap(np.array(gray_image))
 
 # 顯示彩色圖像
 plt.imshow(color_image)
-plt.title('偽彩色')
+plt.title('偽色彩')
 
 plt.show()
 
@@ -383,51 +329,6 @@ def blue_to_red2(image_path):
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 blue_to_red2(filename)
 """    
-
-print('------------------------------------------------------------')	#60個
-
-from pathlib import Path
-
-infolder = "testfolder"
-value1 = "outputfolder4"
-extlist = ["*.jpg","*.png"]
-
-#【函數: 轉存為jpg檔案】
-def savepng(readfile, savefolder):
-    try:
-        img = Image.open(readfile)              #載入圖片檔
-        savedir = Path(savefolder)
-        savedir.mkdir(exist_ok=True)            #建立轉存資料夾
-        #-----------------------------------
-        filename = Path(readfile).stem+".jpg"   #建立檔案名稱
-        savepath = savedir.joinpath(filename)
-        if img.format == "PNG":
-            newimg = Image.new("RGB", img.size, "white")
-            newimg.paste(img, mask=img.split()[3])  #在白底背景繪製圖片
-            #newimg.save(savepath, format="JPEG", quality=95)    #轉存為JPG圖檔
-        elif img.format == "JPEG":
-            #img.save(savepath, format="JPEG", quality=95)   #轉存為JPG圖檔
-            pass
-        #-----------------------------------
-        msg = "在"+savefolder + "轉存" + filename + "了喲。\n"
-        return msg
-    except:
-        return readfile + "：程式執行失敗。"
-#【函數: 處理資料夾之內的圖片檔】
-def savefiles(infolder, savefolder):
-    msg = ""
-    for ext in extlist:                     #以多個副檔名調查
-        filelist = []
-        for p in Path(infolder).glob(ext):  #將這個資料夾的檔案
-            filelist.append(str(p))         #新增至列表
-        for filename in sorted(filelist):   #再替每個檔案排序
-            msg += savepng(filename, savefolder)
-    return msg
-
-#【執行函數】
-msg = savefiles(infolder, value1)
-print(msg)
-
 print('------------------------------------------------------------')	#60個
 
 import seaborn as sns #海生, 自動把圖畫得比較好看
@@ -436,35 +337,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots
 import squarify
-
-print('------------------------------------------------------------')	#60個
-
-#把同樣的圖片排列成 M X N
-
-# 要排列的圖示個數
-M = 5
-N = 8
-
-# 圖片之間的邊界
-margin = 5
-
-# 載入圖片
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg'
-image = Image.open(filename)
-print(image.size)
-
-W, H = image.size
-
-# 建立圖片 W*N X H*M
-canvas = Image.new("RGBA", ((W + margin) * N, (H + margin) * M))
-
-for j in range(M):
-    for i in range(N):
-        canvas.paste(image, ((W + margin) * i, (H + margin) * j))
-
-plt.imshow(canvas)
-
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -486,37 +358,43 @@ plt.title(u'灰度圖')
 plt.imshow(image)
 
 plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
-image=np.array(Image.open(filename).convert('L'))
-print(int(image.min()),int(image.max()))
+image0 = Image.open(filename)
+image0 = image0.convert('L')
+image1 = np.array(image0)
+print('原圖 灰階最小值 :', int(image1.min()),', 灰階最大值 :', int(image1.max()))
 
-image2=255-image               #對圖像進行反向處理
-print('對圖像進行反向處理:\n',int(image2.min()),int(image2.max())) #查看最大/最小元素
+image2=255-image1               #對圖像進行反向處理
+print('反相 灰階最小值 :', int(image2.min()),', 灰階最大值 :', int(image2.max()))
 
-image3=(100.0/255)*image+100   #將圖像像素值變換到100...200區間
-print('將圖像像素值變換到100...200區間:\n',int(image3.min()),int(image3.max()))
+image3=(100.0/255)*image1+100   #將圖像像素值變換到100...200區間
+print('壓縮到100~200 灰階最小值 :', int(image3.min()),', 灰階最大值 :', int(image3.max()))
 
-image4=255.0*(image/255.0)**2  #對像素值求平方後得到的圖像
-print('對像素值求平方後得到的圖像:\n',int(image4.min()),int(image4.max()))
+image4=255.0*(image1/255.0)**2  #對像素值求平方後得到的圖像
+print('相素值平方 灰階最小值 :', int(image4.min()),', 灰階最大值 :', int(image4.max()))
 
-plt.figure('影像處理2', figsize = (10, 6))
+plt.figure('影像處理2', figsize = (8, 10))
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
-plt.subplot(131)
+plt.subplot(221)
+plt.imshow(image0)
+plt.title('原圖轉灰階')
+
+plt.subplot(222)
 plt.imshow(image2)
-plt.title(r'$f(x)=255-x$')
+plt.title(r'反相 $f(x)=255-x$')
 
-plt.subplot(132)
+plt.subplot(223)
 plt.imshow(image3)
-plt.title(r'$f(x)=\frac{100}{255}x+100$')
+plt.title(r'壓縮到100~200 $f(x)=\frac{100}{255}x+100$')
 
-plt.subplot(133)
+plt.subplot(224)
 plt.imshow(image4)
-plt.title(r'$f(x)=255(\frac{x}{255})^2$')
+plt.title(r'相素值平方 $f(x)=255(\frac{x}{255})^2$')
 
 plt.show()
 
@@ -1028,14 +906,9 @@ print('萃取圖片的輪廓')
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-#print('顯示原圖')
-#plt.imshow(image1)
-#plt.show()
 
 #全彩轉灰階
 image1 = image1.convert("L")
-plt.imshow(image1)
-plt.show()
 
 W, H = image1.size
 print('原圖大小 W =', W, ', H =', H)
@@ -1057,7 +930,13 @@ for y in range(0, H - 1):
         else:
             image2.putpixel((x, y), (0, 0, 0))     #亮度差較小 著黑色
 
+plt.subplot(121)
+plt.imshow(image1)
+plt.title('原圖')
+
+plt.subplot(122)
 plt.imshow(image2)
+plt.title('萃取圖片的輪廓')
 
 plt.show()
 
@@ -1083,18 +962,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-img = Image.open(filename)
-#img.show()
-w,h=img.size
-print(w,h) #320 240
-
-filename=img.filename
-print(filename)
-
-print("------------------------------------------------------------")  # 60個
 
 print("操作像素, 使用 putpixel 修改一塊")
 
@@ -1111,7 +979,7 @@ print('------------------------------------------------------------')	#60個
 print('PIL之另存新檔')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-infile = filename#"earth.png"
+infile = filename
 savefile = "tmp_savePNG1.png"
 
 img = Image.open(infile)      #載入圖片檔
@@ -1125,47 +993,14 @@ image = Image.open(filename)
 image.save('tmp_pic_normal.jpg')
 image.close()
 
-print('------------------------------------------------------------')	#60個
-
-image = Image.open(filename)
-image.save('tmp_pic_high.jpg', quality = 95)
-image.close()
-
 print("------------------------------------------------------------")  # 60個
-
-image = Image.open(filename)
-image.save("tmp_pic_quality_default.jpg")
-image.close()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-infile = filename#"earth.png"
-savefile = "tmp_saveJPG2.jpg"
-
-img = Image.open(infile)
-if img.format == "PNG":
-    newimg = Image.new("RGB", img.size, "WHITE")
-    newimg.paste(img, mask=img)             # 將PNG檔壓在白底圖片上
-    newimg.save(savefile, format="JPEG")    # JPG轉存檔案
-elif img.format == "JPEG":
-    img.save(savefile, format="JPEG")       # JPG轉存檔案
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 """
 
 #另存新檔
 image.save("tmp_pic_01.png")
 #image.show()
-
-
 img1.save("aaa.jpg")
-
-
 
 """
 
@@ -1184,58 +1019,6 @@ print('你已點擊:', x)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-
-"""
-使用pillow操作图像
-"""
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-img = Image.open(filename)
-print(img.size)
-print(img.format)
-print(img.format_description)
-
-#img.save('xxxxx.png')
-
-img2 = Image.open(filename)
-
-#img3 = img2.crop((335, 435, 430, 615))
-img3 = img2.crop((100, 100, 150, 150))
-for x in range(4):
-    for y in range(5):
-        img2.paste(img3, (95 * y , 180 * x))
-
-img2.resize((img.size[0] // 2, img.size[1] // 2))
-img2.rotate(90)
-
-#img2.save('xxxxx.png')
-
-plt.imshow(img2)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
-
-allfiles = os.listdir(foldername)
-print(allfiles)
-for file in allfiles:
-    print(file)
-    filename, ext = os.path.splitext(file)
-    filename = filename + "_s"
-    targetfile = filename + ext
-    #print(foldername, file)
-    image = Image.open(os.path.join(foldername, file))
-    thumbnail = image.resize((320,200))
-    #thumbnail.save(os.path.join(target, targetfile))
-    image.close()
-    thumbnail.close()
-    print("{}-->{}".format(file, targetfile))
-
-print("------------------------------------------------------------")  # 60個
 
 
 

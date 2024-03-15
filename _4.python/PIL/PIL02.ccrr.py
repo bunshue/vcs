@@ -39,6 +39,7 @@ transpose()和rotate()沒有性能差別。
 
 
 """
+
 import os
 import sys
 import numpy as np
@@ -1095,3 +1096,144 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+#使用pillow操作图像
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+img = Image.open(filename)
+
+
+img2 = Image.open(filename)
+
+#img3 = img2.crop((335, 435, 430, 615))
+img3 = img2.crop((100, 100, 150, 150))
+for x in range(4):
+    for y in range(5):
+        img2.paste(img3, (95 * y , 180 * x))
+
+img2.resize((img.size[0] // 2, img.size[1] // 2))
+img2.rotate(90)
+
+plt.imshow(img2)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
+
+allfiles = os.listdir(foldername)
+print(allfiles)
+for file in allfiles:
+    print(file)
+    filename, ext = os.path.splitext(file)
+    filename = filename + "_s"
+    targetfile = filename + ext
+    #print(foldername, file)
+    image = Image.open(os.path.join(foldername, file))
+    thumbnail = image.resize((320,200))
+    #thumbnail.save(os.path.join(target, targetfile))
+    image.close()
+    thumbnail.close()
+    print("{}-->{}".format(file, targetfile))
+
+print("------------------------------------------------------------")  # 60個
+
+#paste
+
+#把同樣的圖片排列成 M X N
+
+# 要排列的圖示個數
+M = 5
+N = 8
+
+# 圖片之間的邊界
+margin = 5
+
+# 載入圖片
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg'
+image = Image.open(filename)
+print(image.size)
+
+W, H = image.size
+
+# 建立圖片 W*N X H*M
+image_MXN = Image.new("RGBA", ((W + margin) * N, (H + margin) * M))
+
+for j in range(M):
+    for i in range(N):
+        image_MXN.paste(image, ((W + margin) * i, (H + margin) * j))
+
+plt.imshow(image_MXN)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+infile = filename#"earth.png"
+savefile = "tmp_saveJPG2.jpg"
+
+img = Image.open(infile)
+if img.format == "PNG":
+    newimg = Image.new("RGB", img.size, "WHITE")
+    newimg.paste(img, mask=img)             # 將PNG檔壓在白底圖片上
+    newimg.save(savefile, format="JPEG")    # JPG轉存檔案
+elif img.format == "JPEG":
+    img.save(savefile, format="JPEG")       # JPG轉存檔案
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+from pathlib import Path
+
+infolder = "testfolder"
+value1 = "outputfolder4"
+extlist = ["*.jpg","*.png"]
+
+#【函數: 轉存為jpg檔案】
+def savepng(readfile, savefolder):
+    try:
+        img = Image.open(readfile)              #載入圖片檔
+        savedir = Path(savefolder)
+        savedir.mkdir(exist_ok=True)            #建立轉存資料夾
+        #-----------------------------------
+        filename = Path(readfile).stem+".jpg"   #建立檔案名稱
+        savepath = savedir.joinpath(filename)
+        if img.format == "PNG":
+            newimg = Image.new("RGB", img.size, "white")
+            newimg.paste(img, mask=img.split()[3])  #在白底背景繪製圖片
+            #newimg.save(savepath, format="JPEG", quality=95)    #轉存為JPG圖檔
+        elif img.format == "JPEG":
+            #img.save(savepath, format="JPEG", quality=95)   #轉存為JPG圖檔
+            pass
+        #-----------------------------------
+        msg = "在"+savefolder + "轉存" + filename + "了喲。\n"
+        return msg
+    except:
+        return readfile + "：程式執行失敗。"
+#【函數: 處理資料夾之內的圖片檔】
+def savefiles(infolder, savefolder):
+    msg = ""
+    for ext in extlist:                     #以多個副檔名調查
+        filelist = []
+        for p in Path(infolder).glob(ext):  #將這個資料夾的檔案
+            filelist.append(str(p))         #新增至列表
+        for filename in sorted(filelist):   #再替每個檔案排序
+            msg += savepng(filename, savefolder)
+    return msg
+
+#【執行函數】
+msg = savefiles(infolder, value1)
+print(msg)
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個

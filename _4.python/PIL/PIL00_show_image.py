@@ -25,7 +25,7 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print('------------------------------------------------------------')	#60個
-
+'''
 import PIL
 print('查詢 PIL 版本')
 print(PIL.__version__)
@@ -112,10 +112,10 @@ print('------------------------------------------------------------')	#60個
 
 """
 #查看圖片信息，可用如下的方法：
-print(img.shape)
-print(img.dtype)
-print(img.size)
-print(type(img))
+print(image.shape)
+print(image.dtype)
+print(image.size)
+print(type(image))
 """
 
 
@@ -136,8 +136,8 @@ print("------------------------------------------------------------")  # 60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
 
 #純圖片指定座標取得顏色方法
-def rgb_of_pixel(img_path, x, y):
-    im = Image.open(img_path).convert('RGB')
+def rgb_of_pixel(image_path, x, y):
+    im = Image.open(image_path).convert('RGB')
     r, g, b = im.getpixel((x, y))
     a = (r, g, b)
     return a
@@ -148,4 +148,82 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+#image1.save('xxxxx.png')
+'''
+print("------------------------------------------------------------")  # 60個
+
+#split
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+#通道分離與合并
+
+image=Image.open(filename)  #打開圖像, 彩色
+print(image.size)
+
+gray_image=image.convert('L')   #轉換成灰度
+print(gray_image.size)
+r,g,b=image.split()   #分離三通道
+print(r.size)
+
+pic=Image.merge('RGB',(r,g,b)) #合併三通道
+print(pic.size)
+
+plt.figure('picture')
+
+plt.subplot(2,3,1)
+plt.title('原圖')
+plt.imshow(image)
+
+plt.subplot(2,3,2)
+plt.title('灰階')
+plt.imshow(gray_image,cmap='gray')
+
+plt.subplot(2,3,3)
+plt.title('合併三通道')
+plt.imshow(pic)
+
+plt.subplot(2,3,4)
+plt.title('R通道')
+plt.imshow(r,cmap='gray')
+
+plt.subplot(2,3,5)
+plt.title('G通道')
+plt.imshow(g,cmap='gray')
+
+plt.subplot(2,3,6)
+plt.title('B通道')
+plt.imshow(b,cmap='gray')
+
+plt.show()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+#convert
+print('彩色轉灰階')
+
+image=Image.open(filename)
+gray_image=image.convert('L')
+
+plt.figure('picture')
+plt.subplot(121)
+plt.imshow(image)
+plt.title('彩色')
+
+plt.subplot(122)
+plt.imshow(gray_image,cmap='gray')
+plt.title('灰階')
+
+plt.show()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 

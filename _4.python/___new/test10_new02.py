@@ -448,92 +448,6 @@ for file in files:
 
 print("------------------------------------------------------------")  # 60個
 
-print("串列 裡面都是字典")
-animal0 = {
-    "cname": "鼠",
-    "ename": "mouse",
-    "weight": 3,
-}
-
-animal1 = {
-    "cname": "牛",
-    "ename": "ox",
-    "weight": 48,
-}
-animal2 = {
-    "cname": "虎",
-    "ename": "tiger",
-    "weight": 33,
-}
-
-animal = [animal0, animal1, animal2]
-print(type(animal0))
-print(type(animal1))
-print(type(animal2))
-print(type(animal))
-
-for ani in animal:
-    for key, value in ani.items():
-        print(f"Key: {key}", end="\t")
-        print(f"Value: {value}")
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("字典 裡面都是字典")
-
-animal = {
-    "mouse": {
-        "cname": "鼠",
-        "ename": "mouse",
-        "weight": 3,
-    },
-    "ox": {
-        "cname": "牛",
-        "ename": "ox",
-        "weight": 48,
-    },
-}
-
-print(animal)
-print(type(animal))
-
-for animal_name, animal_info in animal.items():
-    print(f"\nAnimalName: {animal_name}")
-    name = f"{animal_info['cname']} {animal_info['ename']}"
-    weight = animal_info["weight"]
-    print(f"\tName: {name}")
-    print(f"\tweight: {weight}")
-
-print("------------------------------------------------------------")  # 60個
-
-# 建立空白串列
-animals = []
-
-# 建立30隻動物
-for alien_number in range(30):
-    new_alien = {"color": "green", "points": 5, "speed": "slow"}
-    animals.append(new_alien)
-
-# 顯示前5隻動物
-for alien in animals[:5]:
-    print(alien)
-print("...")
-
-# 前3隻改資料
-for alien in animals[:3]:
-    if alien["color"] == "green":
-        alien["color"] = "yellow"
-        alien["speed"] = "medium"
-        alien["points"] = 10
-
-# 顯示前5隻動物
-for alien in animals[:5]:
-    print(alien)
-print("...")
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1027,32 +941,6 @@ def Favorite():
 
 # 呼叫函式
 Favorite()
-
-print("------------------------------------------------------------")  # 60個
-
-from random import randint, randrange
-
-
-# 產生某個區間的整數亂數
-def numRand(x, y):
-    cout = 1  # 計數器
-    while cout <= 10:
-        number = randint(x, y)
-        print(number, end=" ")
-        cout += 1
-    print()
-
-
-# 將產生以append()方法加至List
-def numRand2(x, y):
-    cout = 1
-    result = []  # 存放亂數
-    while cout <= 10:
-        number = randint(x, y)
-        result.append(number)
-        cout += 1
-    return result
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3124,7 +3012,7 @@ for name, formulas in cocktail.items():
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 02 加總一系列數字
+# 加總一系列數字
 
 
 def my_sum(*numbers):
@@ -3140,7 +3028,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 04 將 16 進位數轉為 10 進位
+# 將 16 進位數轉為 10 進位
 
 
 def hex_to_dec():
@@ -3161,7 +3049,7 @@ hex_to_dec()
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 05 豬拉丁文
+# 豬拉丁文
 
 
 def pig_latin(word):
@@ -3175,7 +3063,7 @@ print(pig_latin("python"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 06 豬拉丁文 --- 句子翻譯機
+# 豬拉丁文 --- 句子翻譯機
 
 
 def pl_sentence(sentence):
@@ -3193,7 +3081,7 @@ print(pl_sentence("this is a test"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 07 ROT13 加密法
+# ROT13 加密法
 
 
 def rot13(word):
@@ -3210,7 +3098,7 @@ print(rot13("apple"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 08 字元排序
+# 字元排序
 
 
 def strsort(s):
@@ -3221,7 +3109,7 @@ print(strsort("python"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 09 擷取和合併多種容器的頭尾元素
+# 擷取和合併多種容器的頭尾元素
 
 
 def first_last(seq):
@@ -3233,7 +3121,7 @@ print(first_last([1, 2, 3, 4, 5]))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 10 萬用加總函式
+# 萬用加總函式
 
 
 def mysum(*items):
@@ -3252,7 +3140,7 @@ print(mysum([10, 20, 30], [40, 50], [60]))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 11 依姓名排序聯絡資料
+# 依姓名排序聯絡資料
 
 people = [
     ("Joe", "Biden", "president@usa.gov"),
@@ -3267,7 +3155,7 @@ for person in sorted(people, key=lambda d: (d[1], d[0])):
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 12 用排版格式輸出容器資料
+# 用排版格式輸出容器資料
 
 import operator
 
@@ -3292,7 +3180,7 @@ print(sorted_grades(grades))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 13 尋找單字中重複最多次的字母
+# 尋找單字中重複最多次的字母
 
 import operator
 
@@ -3310,16 +3198,7 @@ most_repeated_letter("independence")
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 14 餐廳點餐機
-
-menu = {"三明治": 50, "咖啡": 40, "沙拉": 30}
-
-price = menu["三明治"]
-print(price)
-
-print("------------------------------------------------------------")  # 60個
-
-# 練習 15 降雨量資料庫
+# 降雨量資料庫
 
 rainfall = {}
 city_name = "AAA"
@@ -3337,7 +3216,7 @@ for city, rain in rainfall.items():
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 16 有幾個不重複的數字?
+# 有幾個不重複的數字?
 
 
 def unique_num_len(numbers):
@@ -3349,26 +3228,7 @@ print(unique_num_len(numbers))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 17 比較兩個 dict 的差異
-
-
-def dict_diff(first, second):
-    output = {}
-    all_keys = sorted(first.keys() | second.keys())
-
-    for key in all_keys:
-        if first.get(key) != second.get(key):
-            output[key] = [first.get(key), second.get(key)]
-    return output
-
-
-d1 = {"a": 1, "b": 2, "c": 3, "d": 5}
-d2 = {"a": 1, "b": 2, "d": 4, "e": 6}
-print(dict_diff(d1, d2))
-
-print("------------------------------------------------------------")  # 60個
-
-# 練習 25 XML 產生器
+# XML 產生器
 
 
 def myxml(tag, content="", **kwargs):
@@ -3383,7 +3243,7 @@ print(myxml("foo", "bar", a=1, b=2, c=3))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 26 簡易前序式計算機
+# 簡易前序式計算機
 
 import operator
 
@@ -3403,27 +3263,7 @@ print(prefix_cal("+ 2 3"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 27 自訂密碼產生器
-
-import random
-
-
-def set_password_source(source):
-    def password_gen(length):
-        output = []
-        for i in range(length):
-            output.append(random.choice(source))
-        return "".join(output)
-
-    return password_gen
-
-
-my_password_gen = set_password_source("0123456789abcdefghij")
-print(my_password_gen(10))
-
-print("------------------------------------------------------------")  # 60個
-
-# 練習 28 輸出一組數字的絕對值
+# 輸出一組數字的絕對值
 
 
 def abs_numbers(numbers):
@@ -3435,7 +3275,7 @@ print(abs_numbers([1, -2, 3, -4, 5]))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 29 只加總資料中的數字
+# 只加總資料中的數字
 
 
 def sum_numbers(data):
@@ -3446,7 +3286,7 @@ print(sum_numbers("10 abc 20 de44 30 55fg 40"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 30 用巢狀生成式『壓平』二維 list
+# 用巢狀生成式『壓平』二維 list
 
 
 def flatten(data):
@@ -3494,7 +3334,7 @@ print(sd)
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 43 動物類別
+# 動物類別
 
 
 class Animal:
@@ -3539,7 +3379,7 @@ print(parrot)
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 44 動物展示區類別
+# 動物展示區類別
 
 
 class Animal:
@@ -3599,7 +3439,7 @@ print(ex2)
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 45 動物園類別
+# 動物園類別
 
 
 class Animal:
@@ -3696,7 +3536,7 @@ print("腿的總數:", zoo.animal_total_leg_num())
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 46 自訂列舉容器
+# 自訂列舉容器
 
 
 class MyEnumerate:
@@ -3721,7 +3561,7 @@ for index, letter in myEnum:
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 47 循環取值器
+# 循環取值器
 
 
 class CycleIterator:
@@ -3753,7 +3593,7 @@ for c in clist:
 
 print("------------------------------------------------------------")  # 60個
 
-# 練習 49 產生器運算式
+# 產生器運算式
 
 
 def num_generator(num):
@@ -3766,29 +3606,6 @@ for num in numbers:
     print(num)
 
 print("------------------------------------------------------------")  # 60個
-
-# 練習 50 能計算時間長度的產生器
-
-import time
-import random
-
-
-def elapsed_time_gen():
-    last_time = time.perf_counter()
-    while True:
-        now = time.perf_counter()
-        yield now - last_time
-        last_time = now
-
-
-elapsed_time = elapsed_time_gen()
-
-for _ in range(5):
-    time.sleep(random.randint(1, 10) / 10)
-    print(next(elapsed_time))
-
-print("------------------------------------------------------------")  # 60個
-
 
 def sum_of_two(data, k):
     for a_index, a_value in enumerate(data):
@@ -4173,39 +3990,6 @@ print(th)
 
 print("------------------------------------------------------------")  # 60­э
 
-rand = []
-for i in range(10):
-    rand.append(random.randint(0, 100))
-print(rand)
-
-print("------------------------------------------------------------")  # 60­э
-
-# The card suit characters:
-HEARTS = chr(9829)  # Character 9829 is '♥'
-DIAMONDS = chr(9830)  # Character 9830 is '♦'
-SPADES = chr(9824)  # Character 9824 is '♠'
-CLUBS = chr(9827)  # Character 9827 is '♣'
-# A list of chr() codes is at https://inventwithpython.com/chr
-
-
-for _ in range(20):
-    suit = random.choice([HEARTS, DIAMONDS, SPADES, CLUBS])
-    print(suit, end=" ")
-print()
-
-
-def getRandomCard():
-    rank = random.choice(list("23456789JQKA") + ["10"])
-    suit = random.choice([HEARTS, DIAMONDS, SPADES, CLUBS])
-    return (rank, suit)
-
-
-cc = getRandomCard()
-print(cc)
-
-
-print("------------------------------------------------------------")  # 60個
-
 # 宣告迷宮陣列
 MAZE = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -4342,46 +4126,6 @@ print("置換後 :", text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 使用 json.dumps() 美觀列印 dict
-
-import json
-
-animals = {
-    "鼠": 3,
-    "牛": 48,
-    "虎": 33,
-    "兔": 8,
-    "龍": 38,
-    "蛇": 16,
-}
-
-print(type(animals))
-
-print(json.dumps(animals, indent=4, sort_keys=True))
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-跟著阿才學Python從基礎到網路爬蟲應用
-
-
-"""
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch01\first.py
-
-# -*- 第一個 Python 範例 -*-
-"""
-撰寫日期：2019-12-18
-開發人員: 蔡文龍
-程式版本：v1.0
-"""
-print("歡迎光臨 Python 的世界")
-
-print("------------------------------------------------------------")  # 60個
-
 # 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch02\in.py
 
 print("1" in "123")  # 字串搜尋：判斷 "1" 是否在 "123" 內，成立顯示True
@@ -4510,16 +4254,6 @@ print("HOW", "ARE", "YOU", end="?")  # 顯示"HOW ARE YOU?"
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch03\print02.py
-
-print("早起的鳥兒'有蟲吃'\n")
-print('晚起的鳥兒"被蟲吃"')
-print("火影忍者\t博人傳")
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch03\print03.py
-
 print("%07d" % 12345)  # 空格補零		ð 0012345
 print("%-7d" % 12345)  # 靠左對齊		ð 12345ΔΔ
 print("%#o" % 12345)  # 顯示八進制符號	ð 0x30071
@@ -4569,131 +4303,6 @@ print("%3s%8d%4s%4s" % ("李小王", 10, "新手", "無"))
 print("%3s%8d%4s%4s" % ("林老大", 100, "團長", "斬殺"))
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch04\if01.py
-
-score = 89
-show = "不及格"  # 預設show字串變數是"不及格"
-if score > 60:
-    show = "Pass"
-print("成績", show)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch04\if02.py
-
-score = 59
-if score >= 60:
-    show = "Pass"  # score大於等於60，show指定為 "Pass"
-else:
-    show = "不及格"  # score小於60，show指定為 "不及格"
-print("成績", show)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch04\if03.py
-
-uid = input("請輸入帳號：")
-pw = input("請輸入密碼：")
-if uid == "dtc" and pw == "168":
-    show = "帳密正確，歡迎進入系統"
-else:
-    show = "帳密錯誤，無法使用系統"
-print(show)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch04\if04.py
-
-score = int(input("請輸入成績："))  # 輸入成績再轉成整數並指定給score
-if score >= 0 and score <= 100:  # 判斷score是否介於0~100之間
-    if score >= 60:
-        show = "Pass"  # score大於等於60 指定show為 "Pass"
-    else:
-        show = "不及格"  # score小於60 指定show為 "不及格"
-else:
-    show = "應介於0~100之間"  # score沒有介於0~100之間 ， show指定為 "應介於0~100之間
-print("成績", show)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch04\if05.py
-
-score = int(input("請輸入成績："))  # 輸入成績再轉成整數並指定給score
-if score >= 0 and score <= 100:  # 判斷score是否介於0~100之間
-    if score >= 90:
-        show = "優等"  # score介於100~90時，show指定 "優等"
-    elif score >= 80:
-        show = "甲等"  # score介於89~80時，show指定 "甲等"
-    elif score >= 70:
-        show = "乙等"  # score介於79~70時，show指定 "乙等"
-    elif score >= 60:
-        show = "丙等"  # score介於69~60時，show指定 "丙等"
-    else:
-        show = "不及格"  # score介於59~0時，show指定 "不及格"
-else:
-    show = "應介於0~100之間"
-print("成績", show)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch04\if06.py
-
-print("==動物英文單字查詢==")
-print("1. 獅子")
-print("2. 老虎")
-print("3. 大象")
-print("4. 免子")
-num = int(input("請輸入選項編號："))  # 輸入數字轉成整數並指定給num
-
-if num >= 1 and num <= 4:  # 判斷num是否介於1~4之間
-    if num == 1:
-        show = "獅子：lion"  # num等於1，show指定 "獅子：lion"
-    elif num == 2:
-        show = "老虎：tiger"  # num等於2，show指定 "老虎：tiger""
-    elif num == 3:
-        show = "大象：elephant"  # num等於3，show指定 "大象：elephant"
-    elif num == 4:
-        show = "免子：rabbit"  # num等於4，show指定 "免子：rabbit"
-else:
-    show = "選項應介於1~4之間"
-
-print(show)  # 顯示show的結果
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\list01.py
-
-name = ["小明", "小華", "小強", "小莉"]
-score = [67, 56, 12, 99]
-print(name)  # 印出 ['小明', '小華', '小強', '小莉']
-print(score)  # 印出 [67, 56, 12, 99]
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\list02.py
-
-name = ["小明", "小華", "小強", "小莉"]
-score = [67, 56, 12, 99]
-print("{}的成績 {}".format(name[0], score[0]))
-print("{}的成績 {}".format(name[1], score[1]))
-print("{}的成績 {}".format(name[2], score[2]))
-print("{}的成績 {}".format(name[3], score[3]))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\list03.py
-
-name = ["小明", "小華", "小強", "小莉"]
-score = [67, 56, 12, 99]
-for i in range(4):
-    print("{}的成績 {}".format(name[i], score[i]))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\list04.py
 
 listSport = ["爬山", "游泳", "跑步"]
 print(listSport[0])  # 顯示"爬山"
@@ -4947,34 +4556,6 @@ print("遞減排序：", listScore)  # 印出listScore由大到小排序的結�
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\forelse01.py
-
-# 執行三次
-for i in range(3):
-    print("第 %d 次帳密驗證：" % (i + 1), end="")
-    uid = input(" 帳號：")  # 將帳號指定給uid
-    pw = input(" 密碼：")  # 將密碼指定給pw
-    if uid == "dtc" and pw == "168":
-        print("帳密正確，歡迎進入系統")
-        break
-else:
-    print()
-    print("3 次帳密錯誤，無法使用系統")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\nestLoop01.py
-
-for i in range(1, 10):
-    for j in range(1, 10):
-        print("%d*%d=%2d" % (i, j, (i * j)), end=";  ")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\nestLoop02.py
-
 name = ["小明", "小華", "小莉", "小呆"]  # 姓名
 score = [[77, 66, 88], [83, 92, 56], [90, 98, 79], [89, 81, 70]]  # 成績
 print("姓名   國文   英文   數學   總分")
@@ -5027,28 +4608,6 @@ print("遞減排序：", listScore)  # 印出listScore由大到小排序的結�
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\whileelse01.py
-
-i = 1  # i起始值為1
-# 執行三次
-while i <= 3:
-    print("第 %d 次帳密驗證：" % i, end="")
-    uid = input(" 帳號：")  # 將帳號指定給uid
-    pw = input(" 密碼：")  # 將密碼指定給pw
-    if uid == "dtc" and pw == "168":
-        print("帳密正確，歡迎進入系統")
-        break
-    i += 1
-else:
-    print()
-    print("3 次帳密錯誤，無法使用系統")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\callReference.py
-
-
 def CallReference(x):
     for i in range(len(x)):
         x[i] += 10
@@ -5076,36 +4635,6 @@ CallValue(a)
 print("函式呼叫後：a位址=%d, a=%d" % (id(a), a))
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\func01.py
-
-
-# 定義Hello()函式
-def Hello():
-    print("Hello!大家好")
-
-
-Hello()  # 呼叫Hello()函式，結果顯示 “Hello!大家好”
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\func02.py
-
-
-# 定義HelloByName()函式，可接收name參數
-def HelloByName(name):
-    print("Hello!大家好, 我是", name)
-
-
-HelloByName("王小明")  # 呼叫Hello()函式並傳入 "王小明" 參數
-HelloByName("李小華")  # 呼叫Hello()函式並傳入 "李小華" 參數
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\func03.py
-
 
 # 定義HelloByName()函式，可接收name和gender參數
 def HelloByName(name, gender):
@@ -5210,37 +4739,6 @@ for i in range(len(listName)):
 print()
 n = GetMax(listPrice)
 print("最貴產品：%s, 單價：%d" % (listName[n], listPrice[n]))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\random01.py
-
-import random
-
-for i in range(5):
-    print("第 %d 個亂數：%d" % (i + 1, random.randint(1, 10)))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\random02.py
-
-import random  # 引用random亂數套件
-
-#  將 1~49 的整數放入num串列中
-num = []
-for i in range(49):
-    num.append(i + 1)
-# 使用 random套件的sample函式由num中隨機取得不重複的7個元素
-lot = random.sample(num, 7)
-
-print("大樂透  號碼：", end="")
-# 印出 lot[0]~lot[5]
-for i in range(6):
-    print(lot[i], end=", ")
-
-print()
-print("大樂透特別號：%2d" % (lot[6]))  # 印出 lot[6]
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5455,24 +4953,6 @@ print(tupleProduct)  # 顯示 ('P01', '五香豆干', 45)
 
 print("------------------------------------------------------------")  # 60個
 
-# tuple02.py
-
-tupleScore = (89, 87, 36, 55, 94)
-tupleName = ("小明", "小華", "小強", "小保", "小呆")
-print("****DTC大學-學生績表****")
-print("姓名\t分數")
-print("=======================")
-for i in range(len(tupleScore)):
-    print("%s\t%d" % (tupleName[i], tupleScore[i]))
-print("=======================")
-print("  最高分：%d" % max(tupleScore))
-print("  最低分：%d" % min(tupleScore))
-print("平均分數：%.2f" % (sum(tupleScore) / len(tupleScore)))
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5492,3 +4972,132 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+from random import randint, randrange
+
+
+# 產生某個區間的整數亂數
+def numRand(x, y):
+    cout = 1  # 計數器
+    while cout <= 10:
+        number = randint(x, y)
+        print(number, end=" ")
+        cout += 1
+    print()
+
+
+# 將產生以append()方法加至List
+def numRand2(x, y):
+    cout = 1
+    result = []  # 存放亂數
+    while cout <= 10:
+        number = randint(x, y)
+        result.append(number)
+        cout += 1
+    return result
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 能計算時間長度的產生器
+
+import time
+import random
+
+
+def elapsed_time_gen():
+    last_time = time.perf_counter()
+    while True:
+        now = time.perf_counter()
+        yield now - last_time
+        last_time = now
+
+
+elapsed_time = elapsed_time_gen()
+
+for _ in range(5):
+    time.sleep(random.randint(1, 10) / 10)
+    print(next(elapsed_time))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+rand = []
+for i in range(10):
+    rand.append(random.randint(0, 100))
+print(rand)
+
+print("------------------------------------------------------------")  # 60­э
+
+# The card suit characters:
+HEARTS = chr(9829)  # Character 9829 is '♥'
+DIAMONDS = chr(9830)  # Character 9830 is '♦'
+SPADES = chr(9824)  # Character 9824 is '♠'
+CLUBS = chr(9827)  # Character 9827 is '♣'
+# A list of chr() codes is at https://inventwithpython.com/chr
+
+
+for _ in range(20):
+    suit = random.choice([HEARTS, DIAMONDS, SPADES, CLUBS])
+    print(suit, end=" ")
+print()
+
+
+def getRandomCard():
+    rank = random.choice(list("23456789JQKA") + ["10"])
+    suit = random.choice([HEARTS, DIAMONDS, SPADES, CLUBS])
+    return (rank, suit)
+
+
+cc = getRandomCard()
+print(cc)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+import random  # 引用random亂數套件
+
+#  將 1~49 的整數放入num串列中
+num = []
+for i in range(49):
+    num.append(i + 1)
+# 使用 random套件的sample函式由num中隨機取得不重複的7個元素
+lot = random.sample(num, 7)
+
+print("大樂透  號碼：", end="")
+# 印出 lot[0]~lot[5]
+for i in range(6):
+    print(lot[i], end=", ")
+
+print()
+print("大樂透特別號：%2d" % (lot[6]))  # 印出 lot[6]
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 自訂密碼產生器
+
+import random
+
+
+def set_password_source(source):
+    def password_gen(length):
+        output = []
+        for i in range(length):
+            output.append(random.choice(source))
+        return "".join(output)
+
+    return password_gen
+
+
+my_password_gen = set_password_source("0123456789abcdefghij")
+print(my_password_gen(10))
+
+print("------------------------------------------------------------")  # 60個
+
