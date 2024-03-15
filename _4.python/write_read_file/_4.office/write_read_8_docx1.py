@@ -1,4 +1,10 @@
+"""
 #各種檔案寫讀範例 docx 1
+
+
+pip install python-docx
+
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -10,18 +16,9 @@ doc = docx.Document(filename)
 for p in doc.paragraphs:
     print(p.text)
 
-'''
-pip install python-docx
-
-'''
-
-
-
 print('------------------------------------------------------------')	#60個
 
-'''
-讀取excel檔, 製作word檔
-'''
+#讀取excel檔, 製作word檔
 
 import openpyxl
 from docxtpl import DocxTemplate
@@ -54,11 +51,10 @@ for value_tuple in list_values[1:]:
 
 print('------------------------------------------------------------')	#60個
 
-'''
+"""
 讀取word檔, 製作word檔
-
 invoice : 發票，發貨單
-'''
+"""
 
 import datetime
 from docxtpl import DocxTemplate
@@ -71,14 +67,14 @@ invoice_list = [[2, "pen", 0.5, 1],
                 [1, "paper pack", 5, 5],
                 [2, "notebook", 2, 4]]
 
-'''
+"""
 doc.render({"name":"john", 
             "phone":"555-55555",
             "invoice_list": invoice_list,
             "subtotal":10,
             "salestax":"10%",
             "total":9})
-'''
+"""
 name = 'David Wang'
 phone = '0912-345678'
 subtotal = sum(item[3] for item in invoice_list) 
@@ -98,11 +94,7 @@ doc.save(filename2)
 
 print('------------------------------------------------------------')	#60個
 
-
-"""
-讀取Word文件
-
-"""
+#讀取Word文件
 
 from docx import Document
 

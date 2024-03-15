@@ -1,5 +1,13 @@
-
+"""
 #各種檔案寫讀範例 json
+
+json套件常用函式
+
+dumps
+loads
+dump
+load
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -636,6 +644,185 @@ else:
     print('xxxxxx')
 
 print("------------------------------------------------------------")  # 60個
+
+import json
+
+listProduct = [
+    {"編號": "P01", "品名": "五香豆干", "單價": 89},
+    {"編號": "P02", "品名": "龍哥可樂", "單價": 20},
+    {"編號": "P03", "品名": "阿才紅茶", "單價": 15},
+]
+f = open("tmp_product.json", "w", encoding="utf_8")
+json.dump(listProduct, f, ensure_ascii=False, indent=4)
+f.close()
+print("JSON產品資料存檔成功")
+
+print("------------------------------------------------------------")  # 60個
+
+import json
+
+listScore = [89, 100, 23, 78, 89]
+print("listScore串列：", listScore)
+print("listScore型別：", type(listScore))
+
+jsonScore = json.dumps(listScore)
+print("jsonScore字串：", jsonScore)
+print("jsonScore型別：", type(jsonScore))
+
+dictEmp = {"編號": "P01", "品名": "五香豆干", "單價": 89}
+print("dictEmp字典：", dictEmp)
+print("dictEmp型別：", type(dictEmp))
+
+jsonEmp = json.dumps(dictEmp, ensure_ascii=False)
+print("jsonEmp字串：", jsonEmp)
+print("jsonEmp型別：", type(jsonEmp))
+
+print("------------------------------------------------------------")  # 60個
+
+import json
+
+fruit = {"banana": "香蕉", "papaya": "木瓜", "apple": "蘋果"}
+print(json.dumps(fruit, ensure_ascii=False))
+print(json.dumps(fruit, ensure_ascii=False, sort_keys=True))
+print(json.dumps(fruit, ensure_ascii=False, sort_keys=True, indent=4))
+
+print("------------------------------------------------------------")  # 60個
+
+import json
+
+f = open("tmp_product.json", "r", encoding="utf_8")
+pObj = json.load(f)
+f.close()
+print("====== DTC商店 ======")
+for product in pObj:
+    for key in product:
+        print(key, "：", product[key])
+    print("=" * 20)
+
+print("------------------------------------------------------------")  # 60個
+
+import json
+
+jsonStr = """
+{"編號":"E01","姓名": "王小明",
+"性別": true, "電話":["0912345678","0978123321"]}
+"""
+print("jsonStr字串：", jsonStr)
+print("jsonStr型別：", type(jsonStr))
+print()
+pObj = json.loads(jsonStr)
+print("pObj物件：", pObj)
+print("pObj型別：", type(pObj))
+for key in pObj:
+    print(key, ":", pObj[key], " value的型別：", type(pObj[key]))
+
+print("------------------------------------------------------------")  # 60個
+
+import json
+
+
+# 新增員工記錄函式
+def fnCreate():
+    uid = input("編號：")
+    if uid in listUid:
+        print("編號重複，無法在記憶體中新增員工記錄")
+        return
+    name = input("姓名︰")
+    salary = int(input("薪資︰"))
+    newMember = {"編號": uid, "姓名": name, "薪資": salary}
+    listMember.append(newMember)
+    listUid.append(uid)
+    print("記憶體新增編號 %s 的員工記錄" % (uid))
+
+
+# 修改員工記錄函式
+def fnUpdate():
+    uid = input("編號：")
+    for member in listMember:
+        if member["編號"] == uid:
+            name = input("姓名︰")
+            salary = int(input("薪資︰"))
+            newMember = {"編號": uid, "姓名": name, "薪資": salary}
+            cIndex = listMember.index(member)
+            listMember[cIndex] = newMember
+            print("記憶體修改編號 %s 的員工記錄" % (uid))
+            break
+    else:
+        print("查無編號，無法修改記憶體中的員工記錄")
+
+
+# 刪除員工記錄函式
+def fnDelete():
+    uid = input("編號：")
+    for member in listMember:
+        if member["編號"] == uid:
+            listMember.remove(member)
+            listUid.remove(uid)
+            print("記憶體刪除編號 %s 的員工記錄" % (uid))
+            break
+    else:
+        print("查無編號，無法刪除記憶體中的員工記錄")
+
+
+# 顯示員工記錄函式
+def fnPrintMember():
+    if len(listMember) == 0:
+        print("記憶體中目前無員工記錄")
+        return
+    for member in listMember:
+        for key in member:
+            print(member[key], end="\t")
+        print()
+
+
+# 員工記錄儲存至MemberInfo.json的函式
+def fnSaveJSONFile():
+    f = open(jsonfile, "w", encoding="utf_8")
+    json.dump(listMember, f, ensure_ascii=False, indent=4)
+    f.close()
+    print("記憶體中的員工記錄成功儲存至 %s 檔案" % (jsonfile))
+
+
+jsonfile = "MemberInfo.json"
+listMember = []
+listUid = []
+if os.path.exists(jsonfile):
+    f = open("MemberInfo.json", "r", encoding="utf_8")
+    listMember = json.load(f)
+    listUid = []
+    for member in listMember:
+        listUid.append(member["編號"])
+    f.close()
+
+"""
+# 主程式
+print("======= DTC員工管理系統 =======")
+while True:
+   option=int(input('系統功能->1.新增 2.修改 3.刪除 4.查詢 5.儲存JSON檔案 其他.離開：'))
+   if option==1:
+       fnCreate()
+   elif option==2:
+       fnUpdate()
+   elif option==3:
+       fnDelete()
+   elif option==4:
+       fnPrintMember()
+   elif option==5:
+       fnSaveJSONFile()
+   else:
+       print("離開系統")
+       break;
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 

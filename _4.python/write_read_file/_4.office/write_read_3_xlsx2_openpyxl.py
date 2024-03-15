@@ -1,5 +1,6 @@
 #各種檔案寫讀範例 xlsx 1
 
+import sys
 import openpyxl
 
 print('------------------------------------------------------------')	#60個
@@ -10,14 +11,16 @@ print("寫讀 xlsx")
 
 print("建立 xlsx")
 
-filename = 'tmp_test1.xlsx'
 
 workbook=openpyxl.Workbook()    # 建立一個工作簿
+
 # 取得第 1 個工作表
 sheet = workbook.worksheets[0]
+
 # 以儲存格位置寫入資料
 sheet['A1'] = 'Hello'
 sheet['B1'] = 'World'
+
 # 以串列寫入資料
 listtitle=["姓名","電話"]
 sheet.append(listtitle)  
@@ -25,12 +28,48 @@ listdata=["David","0999-1234567"]
 sheet.append(listdata)
 
 # 儲存檔案
+filename = 'tmp_test1.xlsx'
 workbook.save(filename)
 
 print("建立 xlsx OK, 檔案 : " + filename)
 
 print('------------------------------------------------------------')	#60個
+
+import csv
+import openpyxl
+
 print('excel讀寫測試 2')
+
+csvfile = open("../_3.csv/data/animals.csv")  # 開啟 CSV 檔案
+raw_data = csv.reader(csvfile)  # 讀取 CSV 檔案
+data = list(raw_data)  # 轉換成二維串列
+print(data)
+
+workbook = openpyxl.Workbook()  # 建立空白的 Excel 活頁簿物件
+sheet = workbook.create_sheet("animal")  # 建立新工作表 名為animal
+
+"""
+# 以儲存格位置寫入資料
+sheet['A1'] = '中文名'
+sheet['B1'] = '英文名'
+sheet['C1'] = '體重'
+sheet['D1'] = '全名'
+"""
+
+for i in data:
+    print(i)
+    sheet.append(i)  # 逐筆添加到最後一列
+
+# 儲存檔案
+filename = "tmp_test2_fail.xlsx"
+workbook.save(filename)
+
+print("建立 xlsx OK, 檔案 : " + filename)
+
+
+print('------------------------------------------------------------')	#60個
+
+print('excel讀寫測試 3')
 
 filename = 'data/python_ReadWrite_EXCEL3.xlsx'
 
@@ -58,7 +97,7 @@ workbook.save(filename2)
 print("另存新檔 OK, 檔案 : " + filename2)
 
 print('------------------------------------------------------------')	#60個
-print('excel讀寫測試 3')
+print('excel讀寫測試 4')
 
 #各種檔案寫讀範例 xlsx 2
 
@@ -91,8 +130,8 @@ import openpyxl
 
 filename = 'data/sample.xlsx'
 
-wb = openpyxl.load_workbook(filename)
-for sheet in wb:
+workbook = openpyxl.load_workbook(filename)
+for sheet in workbook:
     print('sheet')
     for row in sheet:
         #print('row')
@@ -149,8 +188,8 @@ from openpyxl.chart import RadarChart, Reference
 
 print('在excel檔案內加入雷達圖')
 
-wb = openpyxl.load_workbook(r"data/radar_chart.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook(r"data/radar_chart.xlsx")
+sh = workbook.active
 
 data = Reference(sh, min_col=2, max_col=4, min_row=1, max_row=sh.max_row)
 labels = Reference(sh, min_col=1, min_row=2, max_row=sh.max_row)
@@ -164,17 +203,13 @@ chart.add_data(data, titles_from_data=True)
 chart.set_categories(labels)
 
 sh.add_chart(chart, "F2")
-wb.save(r"tmp_add_radar_chart.xlsx")
+workbook.save(r"tmp_add_radar_chart.xlsx")
 
 
 print('------------------------------------------------------------')	#60個
 
+#創建Excel文件
 
-
-"""
-創建Excel文件
-
-"""
 
 from openpyxl import Workbook
 from openpyxl.worksheet.table import Table, TableStyleInfo
@@ -198,10 +233,8 @@ workbook.save('./tmp_全班學生數據.xlsx')
 
 print('------------------------------------------------------------')	#60個
 
-"""
-讀取Excel文件
+#讀取Excel文件
 
-"""
 from openpyxl import load_workbook
 from openpyxl import Workbook
 
@@ -215,6 +248,9 @@ for row in range(2, 7):
         print(sheet[cell_index].value, end='\t')
     print()
 
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 

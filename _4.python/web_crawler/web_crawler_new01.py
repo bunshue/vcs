@@ -12,7 +12,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("查詢台銀牌告匯率")
 
-
 from bs4 import BeautifulSoup #解析網頁
 import csv #處理CSV檔案
 from time import localtime, strftime #處理時間
@@ -52,11 +51,13 @@ print(r.status_code)
 
 print('------------------------------------------------------------')	#60個
 
+"""
 # 要上傳的檔案
 my_files = {'my_filename': open('bankRate.csv', 'rb')}
 # 將檔案加入POST 請求中
 r = requests.post('http://httpbin.org/post', files = my_files)
 print(r.status_code)
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -390,17 +391,6 @@ else:
     print('網頁無法開啟, status_code= ',res.status_code)
 
 
-import base64
-from io import BytesIO
-from PIL import Image
-
-url = 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg'
-resp = requests.get(url)
-img3 = Image.open(BytesIO(resp.content))
-img3.save('tmp_Uranus2.jpg')
-
-#print(base64.b64encode(resp.content))
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -645,9 +635,7 @@ for thread in threads:
 print('漫畫圖片下載完成')
 
 """
-
 print("------------------------------------------------------------")  # 60個
-
 
 import requests
 
@@ -659,15 +647,17 @@ print("網址：", response.url)
 print("表頭資訊：", response.headers)
 print("連線狀態：", response.status_code)
 print("網頁編碼模式：", response.encoding)
+#print("網頁程式碼：", response.text)
 
 print("------------------------------------------------------------")  # 60個
 
+print('擷取網頁圖片')
 import requests
 
 # 指定圖片網址
-img_url = "http://www.gotop.com.tw/Waweb2004/WawebImages/BookXL/AEL022200.jpg"
+img_url = "https://upload.wikimedia.org/wikipedia/commons/8/8b/%E8%A5%BF%E8%9E%BA%E5%A4%A7%E6%A9%8B_%28cropped%29.jpg"
 response = requests.get(img_url)
-f = open("tmp_bootstrap.jpg", "wb")  # 指定開啟檔案路徑
+f = open("tmp_hsilo_bridge.jpg", "wb")  # 指定開啟檔案路徑
 # 將response.content二進位內容寫入檔案
 f.write(response.content)
 print("下載完畢")
@@ -675,17 +665,34 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-"""
+print('擷取網頁圖片')
+
+import base64
+from io import BytesIO
+from PIL import Image
+
+url = 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg'
+resp = requests.get(url)
+img3 = Image.open(BytesIO(resp.content))
+
+ImgName="tmp_"+url.split('/')[-1]
+print('圖片檔名:', ImgName)
+
+img3.save(ImgName)
+
+#print(base64.b64encode(resp.content))
+
+print("------------------------------------------------------------")  # 60個
+
 import requests
 from bs4 import BeautifulSoup
-url='http://www.dtc-tech.com.tw' #大才全資訊科技股有限公司首頁
+url='https://www.books.com.tw/' #博客來
 response=requests.get(url)
 bs=BeautifulSoup(response.text,'lxml')  	#傳回bs物件可解析網頁
 print(bs.find('title'))                 	#傳回網頁含<title>~</title>
 print(bs.find('title').text)            	#傳回網頁<title>標籤內的資料
 print(bs.find('h1'))                    	#傳回第一個符合<h1>資料
-					                          #若傳回None表示該網頁沒有<h1>標籤
-"""
+					        #若傳回None表示該網頁沒有<h1>標籤
 
 print("------------------------------------------------------------")  # 60個
 
@@ -724,9 +731,7 @@ listPrice = bs.select("li.set2")  # 取得套用set2類別的<li>標籤，並指
 for i in range(0, len(listName)):  # 使用迴圈逐一印出書名與書價
     print("%s  %s" % (listName[i].text, listPrice[i].text))
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 # html to csv
 
@@ -757,10 +762,10 @@ for i in range(0, len(listName)):
     print(listName[i].text, listPress[i].text, Price)
 f.close()
 
-
 print("------------------------------------------------------------")  # 60個
 
-""" OK many
+''' OK many
+print('下載網站圖片')
 #抓 博客來電子寵物書 圖片 OK
 
 # 引用相關套件
@@ -881,7 +886,7 @@ fnShowResult()  # 印出查詢的健保特約機構口罩剩餘數量明細資�
 
 print("------------------------------------------------------------")  # 60個
 
-''' OKmany
+""" OKmany
 
 #下載很多圖檔  OK many
 
@@ -1087,8 +1092,6 @@ print("數量 :", listCount)
 print()
 
 print("------------------------------------------------------------")  # 60個
-
-sys.exit()
 
 # 注意，本範例會隨著網站更新而導致無法爬文，若有問題可來信討論
 

@@ -3,7 +3,7 @@ import xlrd
 print('------------------------------------------------------------')	#60個
 
 filename = 'data/python_ReadWrite_EXCEL1.xlsx'
-'''
+
 print('------------------------------------------------------------')	#60個
 """
 data = xlrd.open_workbook(filename)
@@ -169,7 +169,7 @@ for i in range(0,sheet.nrows):
 
 print('寫入xls檔, 檔案 :', filename_w)
 write.save(filename_w)
-'''
+
 print('------------------------------------------------------------')	#60個
 
 import xlwt

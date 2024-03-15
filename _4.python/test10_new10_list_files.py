@@ -958,7 +958,7 @@ for item in items:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "python05_simple_viewer.py"
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 fullpath = os.path.abspath(filename)
 print(fullpath)
@@ -975,6 +975,7 @@ print("os.path.isdir:", os.path.isdir(fullpath))
 print("os.path.split:", os.path.split(fullpath))
 print("os.path.splitdrive:", os.path.splitdrive(fullpath))
 print("os.path.splitext:", os.path.splitext(fullpath))
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1037,7 +1038,23 @@ print("os.path.join(p,f) =", r)
 
 
 
+
 print("------------------------------------------------------------")  # 60個
+
+"""
+print('檔案或目錄操作')
+os.mkdir("目錄路徑")
+os.rmdir("目錄路徑")
+os.revmoe("檔案路徑")
+
+
+shutil.copytree
+shutil.rmtree
+shutil.copyfile
+shutil.move
+
+
+"""
 
 
 print("------------------------------------------------------------")  # 60個
