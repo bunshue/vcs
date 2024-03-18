@@ -10,69 +10,93 @@ import sys
 import time
 import random
 
+print("------------------------------------------------------------")  # 60個
+
 import cv2
+from deepface import DeepFace
+from PIL import ImageFont, ImageDraw, Image
+
+filename = 'sc01a.jpg'
 
 print("------------------------------------------------------------")  # 60個
 
-from deepface import DeepFace
+print("DeepFace.analyze 1")
 
-filename = 'aaaa.jpg'
 img = cv2.imread(filename)     # 讀取圖片
 try:
     analyze = DeepFace.analyze(img)  # 辨識圖片人臉資訊
-    print(analyze)
+    #print(analyze)
+    print(type(analyze))
+    length = len(analyze)
+    print(length)
+    #print(analyze[emotion])
+    for _ in analyze:
+        print(_)
 except:
+    print('找不到資料')
     pass
 
+"""
 cv2.imshow('ImageShow', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+"""
 
-sys.exit()
-
-'''
 print("------------------------------------------------------------")  # 60個
 
-from deepface import DeepFace
+print("DeepFace.analyze 2")
 
-img = cv2.imread('test.jpg')     # 讀取圖片
+img = cv2.imread(filename)
 try:
     analyze = DeepFace.analyze(img, actions=['emotion'] )  # 辨識圖片人臉資訊，取出情緒資訊
-    print(analyze)
+    print("emotion :", analyze)
 except:
     pass
 
+"""
 cv2.imshow('ImageShow', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-from deepface import DeepFace
+print("DeepFace.analyze 3")
 
-img = cv2.imread('mona.jpg')
+img = cv2.imread(filename)
 try:
+    print('a')
     emotion = DeepFace.analyze(img, actions=['emotion'])  # 情緒
+    print(emotion)
+    print('b')
     age = DeepFace.analyze(img, actions=['age'])          # 年齡
+    print(age)
+    print('c')
     race = DeepFace.analyze(img, actions=['race'])        # 人種
+    print(race)
+    print('d')
     gender = DeepFace.analyze(img, actions=['gender'])    # 性別
-
+    print(gender)
+    print('e')
+    """ fail
     print(emotion['dominant_emotion'])
     print(age['age'])
     print(race['dominant_race'])
     print(gender['gender'])
+    """
 except:
+    print('錯誤')
     pass
 
+"""
 cv2.imshow('ImageShow', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-from deepface import DeepFace
-from PIL import ImageFont, ImageDraw, Image
+print("DeepFace.analyze 4")
 
 # 定義該情緒的中文字
 text_obj={
@@ -95,11 +119,17 @@ def putText(x,y,text,size=70,color=(255,255,255)):
     draw.text((x, y), text, fill=color, font=font) # 加入文字
     img = np.array(imgPil)                         # 轉換成 np.array
 
-img = cv2.imread('emotion.jpg')                    # 載入圖片
+
+filename = "sc01a.jpg"
+img = cv2.imread(filename)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)       # 將圖片轉成灰階
 
-face_cascade = cv2.CascadeClassifier("xml/haarcascade_frontalface_default.xml")   # 載入人臉模型
+xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+face_cascade = cv2.CascadeClassifier(xml_filename)   # 載入人臉模型
+
 faces = face_cascade.detectMultiScale(gray)        # 偵測人臉
+length = len(faces)
+print("共找到 :", length, "張臉")
 
 for (x, y, w, h) in faces:
     # 擴大偵測範圍，避免無法辨識情緒
@@ -107,22 +137,30 @@ for (x, y, w, h) in faces:
     x2 = x+w+60
     y1 = y-20
     y2 = y+h+60
+    x1 = x
+    x2 = x+w
+    y1 = y
+    y2 = y+h
     face = img[x1:x2, y1:y2]  # 取出人臉範圍
     try:
         emotion = DeepFace.analyze(face, actions=['emotion'])  # 辨識情緒
-        putText(x,y,text_obj[emotion['dominant_emotion']])     # 放入文字
+        #print(emotion) ok
+        #print(emotion['dominant_emotion']) fail
+        #putText(x,y,text_obj[emotion['dominant_emotion']])     # 放入文字
     except:
+        print('XXXXXXX')
         pass
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 5)    # 利用 for 迴圈，抓取每個人臉屬性，繪製方框
 
+"""
 cv2.imshow('ImageShow', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-'''
+"""
+
 print("------------------------------------------------------------")  # 60個
 
-from deepface import DeepFace
-from PIL import ImageFont, ImageDraw, Image
+print("DeepFace.analyze 5")
 
 # 定義該情緒的中文字
 text_obj={
@@ -145,27 +183,22 @@ def putText(x,y,text,size=50,color=(255,255,255)):
     draw.text((x, y), text_obj[text], fill=color, font=font) # 加入文字
     img = np.array(imgPil)                         # 轉換成 np.array
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/Image_20220722_012342.jpg'
-filename = 'd.jpg'
-
 img = cv2.imread(filename)
 
 #img = cv2.resize(img,(384,240))
 try:
     analyze = DeepFace.analyze(img, actions=['emotion'])
+    print(analyze)
     emotion = analyze['dominant_emotion']  # 取得情緒文字
     print("emotion = ", emotion)
     putText(0,40,emotion)                  # 放入文字
 except:
     print('fail')
     pass
-cv2.imshow('ImageShow', img)
 
-sys.exit()
+#cv2.imshow('ImageShow', img)
 
-
-
-
+""" 使用webcam
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
@@ -189,11 +222,12 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-sys.exit()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-from deepface import DeepFace    # 載入 deepface
+""" 使用webcam
+print("DeepFace.analyze 6")
 
 cap = cv2.VideoCapture(0)        # 讀取攝影鏡頭
 
@@ -271,11 +305,7 @@ while True:
 
 cap.release()                           # 所有作業都完成後，釋放資源
 cv2.destroyAllWindows()                 # 結束所有視窗
-
-print("------------------------------------------------------------")  # 60個
-
-
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 

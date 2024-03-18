@@ -1623,6 +1623,10 @@ print(f"x[-1]       = {x[-1]}")  # 這是取單一元素
 
 print("------------------------------------------------------------")  # 60個
 
+print('字串的處理')
+
+print('字串的處理 split')
+
 str1 = "Silicon Stone Education"
 str2 = "D:\Python\ch6"
 
@@ -1634,6 +1638,8 @@ print(f"{str2} 串列內容是 {sList2}")  # 列印串列
 print(f"{str2} 串列字數是 {len(sList2)}")  # 列印字數
 
 print("------------------------------------------------------------")  # 60個
+
+print('字串的處理 join')
 
 path = ["D:", "ch6", "ch6_41.py"]
 connect = "\\"  # 路徑分隔字元
@@ -1722,46 +1728,6 @@ print("轉成串列輸出, 初始索引值是10 = ", list(enumerate_drinks))
 
 print("------------------------------------------------------------")  # 60個
 
-warriors = ["Curry", "Durant", "Iquodala", "Bell", "Thompson"]
-first3 = warriors[:3]
-print("前3名球員", first3)
-n_to_last = warriors[1:]
-print("球員索引1到最後", n_to_last)
-last3 = warriors[-3:]
-print("後3名球員", last3)
-
-print("------------------------------------------------------------")  # 60個
-james = [23, 19, 22, 31, 18]  # 定義james的得分
-print(f"James比賽場次 = {len(james)}")
-print(f"最高得分 = {max(james)}")
-print(f"最低得分 = {min(james)}")
-print(f"得分總計 = {sum(james)}")
-
-print("------------------------------------------------------------")  # 60個
-
-James = ["Lebron James", 23, 19, 22, 31, 18]  # 比賽得分
-print(f"James比賽場次 = {len(James[1:])}")
-print(f"最高得分 = {max(James[1:])}")
-print(f"最低得分 = {min(James[1:])}")
-print(f"得分總計 = {sum(James[1:])}")
-
-print("------------------------------------------------------------")  # 60個
-
-cars = ["Toyota", "Nissan", "Honda"]
-print("舊汽車銷售品牌", cars)
-cars[1] = "Ford"  # 更改第二筆元素內容
-print("新汽車銷售品牌", cars)
-
-print("------------------------------------------------------------")  # 60個
-
-cars1 = ["Toyota", "Nissan", "Honda"]
-print("舊汽車銷售品牌", cars1)
-cars2 = ["Audi", "BMW"]
-cars1 += cars2
-print("新汽車銷售品牌", cars1)
-
-print("------------------------------------------------------------")  # 60個
-
 celsius = [21, 25, 29]
 fahrenheit = [(x * 9 / 5 + 32) for x in celsius]
 print(fahrenheit)
@@ -1786,26 +1752,8 @@ print(result)
 
 print("------------------------------------------------------------")  # 60個
 
-colors = ["Red", "Green", "Blue"]
-shapes = ["Circle", "Square"]
-result = [[color, shape] for color in colors for shape in shapes]
-for color, shape in result:
-    print(color, shape)
-
-print("------------------------------------------------------------")  # 60個
-
 for x in range(0x2160, 0x216A):
     print(chr(x), end=" ")
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = ["蘋果", "香蕉", "西瓜"]
-print("目前fruits串列 : ", fruits)
-
-for fruit in fruits[:]:
-    fruits.remove(fruit)
-    print(f"刪除 {fruit}")
-    print("目前fruits串列 : ", fruits)
 
 print("------------------------------------------------------------")  # 60個
 

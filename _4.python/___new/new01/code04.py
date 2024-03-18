@@ -16,24 +16,26 @@ for i in range(10):
 plt.plot(x, y)  # 繪圖
 
 plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
-#畫直線 y = 3*x + 2
+#畫直線 y = x * 9 / 5 + 32     F = C*9/5 + 32
 
 import math
 import matplotlib.pyplot as plt
 
 x=[]
 y=[]
-for i in range(-10, 10):
+for i in range(0, 100):
     print(i)
     x.append(i)
-    y.append(3*i + 2)  #y = 3*x + 2
+    y.append(i * 9 / 5 + 32)  #y = x * 9 / 5 + 32
 
 plt.plot(x, y)  # 繪圖
 
 plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -56,7 +58,6 @@ plt.plot(x, y)  # 繪圖
 
 plt.show()
 
-'''
 print('------------------------------------------------------------')	#60個
 
 #等差數列 等差級數 等比數列 等比級數

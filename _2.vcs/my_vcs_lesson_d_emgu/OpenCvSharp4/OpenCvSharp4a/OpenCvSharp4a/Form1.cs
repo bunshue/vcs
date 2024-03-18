@@ -1,10 +1,21 @@
 ﻿using OpenCvSharp;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+/*
+工具/NuGet套件管理員/管理方案的NuGet套件/
+瀏覽安裝
+OpenCvSharp4
+
+OpenCvSharp4
+OpenCvSharp4.Extensions
+OpenCvSharp4.runtime.win
+OpenCvSharp4.windows
+*/
 
 namespace OpenCvSharp4a
 {
     public partial class Form1 : Form
     {
-        //工具/NuGet套件管理員/管理方案的NuGet套件/
         public Form1()
         {
             InitializeComponent();

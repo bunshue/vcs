@@ -68,7 +68,27 @@ print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
 
 print('------------------------------------------------------------')	#60個
 
-print("寫入CSV檔 3 二維串列資料 一次寫入")
+print("寫入CSV檔 3a 一維串列資料 一次寫入")
+
+filename = 'tmp_score1000.csv'
+
+# 建立csv一維串列資料 TBD
+csvtable = [
+        ["豬","pig",42,"佩佩豬"],
+]
+
+# 開啟輸出的 csv 檔案
+#with open(filename, 'w', encoding='utf-8', newline='') as csvfile:
+with open(filename, 'w', newline = '') as csvfile:
+    # 建立 csv 檔寫入物件
+    writer = csv.writer(csvfile)
+
+    # 寫入二維串列資料
+    writer.writerows(csvtable)
+
+print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
+
+print("寫入CSV檔 3b 二維串列資料 一次寫入")
 
 filename = 'tmp_animals3a.csv'
 
@@ -100,7 +120,7 @@ with open(filename, 'w', newline = '') as csvfile:
 
 print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
 
-print("寫入CSV檔 3 二維串列資料 一次寫一行(row)")
+print("寫入CSV檔 3c 二維串列資料 一次寫一行(row)")
 
 filename = 'tmp_animals3b.csv'
 
