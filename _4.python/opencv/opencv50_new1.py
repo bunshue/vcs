@@ -19,7 +19,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-
+'''
 filename1 = 'C:/_git/vcs/_4.python/_data/picture_mix1.bmp'
 filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
 
@@ -191,26 +191,26 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 
-img = cv2.imread(filename, 0)
-img2 = img.copy()
+image = cv2.imread(filename, 0)
+image2 = image.copy()
 template = cv2.imread('images/temp.bmp',0)
 th, tw = template.shape[::]
-img = img2.copy()
-rv = cv2.matchTemplate(img,template,cv2.TM_SQDIFF)
+image = image2.copy()
+rv = cv2.matchTemplate(image,template,cv2.TM_SQDIFF)
 minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(rv)
 
 #矩形之左上點
 topLeft = minLoc
 #矩形之右下點
 bottomRight = (topLeft[0] + tw, topLeft[1] + th)
-cv2.rectangle(img,topLeft, bottomRight, 255, 2)
+cv2.rectangle(image,topLeft, bottomRight, 255, 2)
 
 plt.subplot(121)
 plt.imshow(rv,cmap = 'gray')
 plt.title('Matching Result')
 
 plt.subplot(122)
-plt.imshow(img,cmap = 'gray')
+plt.imshow(image,cmap = 'gray')
 plt.title('Detected Point')
 
 plt.show()
@@ -218,41 +218,41 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img = cv2.imread(filename, 0)
-img2 = img.copy()
+image = cv2.imread(filename, 0)
+image2 = image.copy()
 template = cv2.imread('images/temp.bmp',0)
 tw, th = template.shape[::-1]
-img = img2.copy()
-rv = cv2.matchTemplate(img,template,cv2.TM_CCOEFF)
+image = image2.copy()
+rv = cv2.matchTemplate(image,template,cv2.TM_CCOEFF)
 minVal, maxVal, minLoc, maxLoc = cv2.minMaxLoc(rv)
 
 #矩形之左上點
 topLeft = maxLoc
 #矩形之右下點
 bottomRight = (topLeft[0] + tw, topLeft[1] + th)
-cv2.rectangle(img,topLeft, bottomRight, 255, 2)
+cv2.rectangle(image,topLeft, bottomRight, 255, 2)
 
 plt.subplot(121)
 plt.imshow(rv,cmap = 'gray')
 plt.title('Matching Result')
 
 plt.subplot(122)
-plt.imshow(img,cmap = 'gray')
+plt.imshow(image,cmap = 'gray')
 plt.title('Detected Point')
 
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-img = cv2.imread('images/lena4.bmp',0)
+image = cv2.imread('images/lena4.bmp',0)
 template = cv2.imread('images/lena4Temp.bmp',0)
 w, h = template.shape[::-1]
-res = cv2.matchTemplate(img,template,cv2.TM_CCOEFF_NORMED)
+res = cv2.matchTemplate(image,template,cv2.TM_CCOEFF_NORMED)
 threshold = 0.9
 loc = np.where( res >= threshold)
 for pt in zip(*loc[::-1]):
-    cv2.rectangle(img, pt, (pt[0] + w, pt[1] + h), 255, 1)
-plt.imshow(img,cmap = 'gray')
+    cv2.rectangle(image, pt, (pt[0] + w, pt[1] + h), 255, 1)
+plt.imshow(image,cmap = 'gray')
 
 plt.show()
 
@@ -307,7 +307,7 @@ plt.title('原圖')
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.title('result')
+plt.title('AffineTransform')
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 
 plt.show()
@@ -423,6 +423,7 @@ def saltpepper(image, n):
 
 #上面就是椒盐噪声函数，下面是使用方法，大家可以愉快的玩耍了
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
+image0 = cv2.imread(filename)
 image = cv2.imread(filename)
 
 print('saltpepper 效果')
@@ -432,7 +433,7 @@ plt.figure('new28 saltpepper 效果', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
 plt.title('saltpepper 效果')
@@ -443,24 +444,25 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-img = cv2.imread(filename)
+image = cv2.imread(filename)
 
+threshold = 127
 print('二值化')
-#        cv2.threshold(img, 閥值, 最大灰度值, 使用的二值化方法)
-t, rst = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
-#t, rst = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
-#t, rst = cv2.threshold(img,127,255,cv2.THRESH_TRUNC)
-#t, rst = cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
-#t, rst = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
+#        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
+t, rst = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY)
+#t, rst = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY_INV)
+#t, rst = cv2.threshold(image, threshold, 255, cv2.THRESH_TRUNC)
+#t, rst = cv2.threshold(image, threshold, 255, cv2.THRESH_TOZERO_INV)
+#t, rst = cv2.threshold(image, threshold, 255, cv2.THRESH_TOZERO)
 
 plt.figure('new29 二值化', figsize = (16, 12))
 
 plt.subplot(121)
 plt.title('原圖')
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(122)
-plt.title('二值化圖, 閥值 127, 小於變全黑, 大於變全白')
+plt.title('二值化圖, 閥值 = '+str(threshold)+ ', 小於變全黑, 大於變全白')
 plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 
 plt.show()
@@ -468,16 +470,16 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/computer.jpg'
-img = cv2.imread(filename, 0)
+image = cv2.imread(filename, 0)
 
-t1,thd = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
-athdMEAN = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 3, 5)
-athdGAUS = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 3, 5)
+t1,thd = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+athdMEAN = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 3, 5)
+athdGAUS = cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 3, 5)
 
 plt.figure('new30', figsize = (16, 12))
 plt.subplot(221)
 plt.title('原圖')
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(222)
 plt.title('thd')
@@ -496,15 +498,15 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/tiffany.bmp'
-img = cv2.imread(filename, 0)
+image = cv2.imread(filename, 0)
 
-t1,thd=cv2.threshold(img,127,255,cv2.THRESH_BINARY)
-t2,otsu=cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+t1,thd=cv2.threshold(image,127,255,cv2.THRESH_BINARY)
+t2,otsu=cv2.threshold(image,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
 plt.figure('new31', figsize = (16, 12))
 plt.subplot(131)
 plt.title('原圖')
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(132)
 plt.title('thd')
@@ -517,7 +519,7 @@ plt.imshow(cv2.cvtColor(otsu, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
+'''
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 
 print('原圖 彩色')
@@ -570,19 +572,21 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp'
-img = cv2.imread(filename)
+image = cv2.imread(filename)
 
-hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 h,s,v = cv2.split(hsv)
 v[:,:]=255
 newHSV=cv2.merge([h,s,v])
 art = cv2.cvtColor(newHSV, cv2.COLOR_HSV2BGR)
 
-plt.subplot(223)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.figure('new35 影像處理', figsize = (16, 12))
 
-plt.subplot(224)
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
 plt.title('art')
 plt.imshow(cv2.cvtColor(art, cv2.COLOR_BGR2RGB))
 
@@ -591,9 +595,9 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-img = cv2.imread(filename)
+image = cv2.imread(filename)
 
-bgra = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
+bgra = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
 b,g,r,a=cv2.split(bgra)
 a[:,:]=125
 bgra125=cv2.merge([b,g,r,a])
@@ -603,7 +607,7 @@ bgra0=cv2.merge([b,g,r,a])
 plt.figure('new36 影像處理', figsize = (16, 12))
 plt.subplot(221)
 plt.title('原圖')
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.subplot(222)
 plt.title('bgra')
@@ -763,62 +767,62 @@ print('------------------------------------------------------------')	#60個
 
 print('裁剪圖片a')
 
-img = cv2.imread(r'images/sample.jpg')
+image = cv2.imread(r'images/sample.jpg')
 
-H = img.shape[0]
-W = img.shape[1]
-print('H * W =', img.shape)
+H = image.shape[0]
+W = image.shape[1]
+print('H * W =', image.shape)
 print('H =', H)
 print('W =', W)
 
 print('裁剪圖片b')
-#img_cut = img[0:(H * 2 // 3), 0:(W * 2 // 3)]
-img_cut = img[0:(H * 1 // 2), 0:(W * 1 // 2)]
-print(img_cut.shape)
-cv2.imshow('Sample pic', img_cut)
+#image_cut = image[0:(H * 2 // 3), 0:(W * 2 // 3)]
+image_cut = image[0:(H * 1 // 2), 0:(W * 1 // 2)]
+print(image_cut.shape)
+cv2.imshow('Sample pic', image_cut)
 
 print('------------------------------------------------------------')	#60個
 
 print('圖片翻轉 原圖')
 
-img = cv2.imread(r'images/sample.jpg') 
-cv2.imshow('Sample pic', img)
+image = cv2.imread(r'images/sample.jpg') 
+cv2.imshow('Sample pic', image)
 
 print('圖片翻轉 效果')
-img_flip = cv2.flip(img, -999)
-img_flip2 = cv2.flip(img, -88)
+image_flip = cv2.flip(image, -999)
+image_flip2 = cv2.flip(image, -88)
 
-cv2.imshow('Sample pic', img_flip)
+cv2.imshow('Sample pic', image_flip)
 
 print('------------------------------------------------------------')	#60個
 
 print('圖片色彩空間的轉換')
-img = cv2.imread(r'images/sample.jpg')
-img_convert = cv2.cvtColor(img, cv2.COLOR_BGR2Lab)
-cv2.imshow('Sample pic', img_convert)
+image = cv2.imread(r'images/sample.jpg')
+image_convert = cv2.cvtColor(image, cv2.COLOR_BGR2Lab)
+cv2.imshow('Sample pic', image_convert)
 
 print('------------------------------------------------------------')	#60個
 
 #OpenCV 進階圖片處理功能
 
 print('圖片的二值化處理')
-img = cv2.imread(r'images/sample.jpg')
-thr, img_binary = cv2.threshold(img, 192, 255, cv2.THRESH_TOZERO)
-cv2.imshow('Sample pic', img_binary)
+image = cv2.imread(r'images/sample.jpg')
+thr, image_binary = cv2.threshold(image, 192, 255, cv2.THRESH_TOZERO)
+cv2.imshow('Sample pic', image_binary)
 
 print('------------------------------------------------------------')	#60個
 
 print('去除圖片的雜訊 原圖')
 
-img2 = cv2.imread(r'images/sample2.jpg')
+image2 = cv2.imread(r'images/sample2.jpg')
 
-cv2.imshow('Sample pic', img2)
+cv2.imshow('Sample pic', image2)
 
 print('去除圖片的雜訊 效果')
 
-img2_denoised = cv2.fastNlMeansDenoisingColored(img2, h = 5)
+image2_denoised = cv2.fastNlMeansDenoisingColored(image2, h = 5)
 
-cv2.imshow('Sample pic', img2_denoised)
+cv2.imshow('Sample pic', image2_denoised)
 
 print('------------------------------------------------------------')	#60個
 
@@ -880,11 +884,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("createCLAHE_image")
 
-img = cv2.imread('data/building.png',0)
+image = cv2.imread('data/building.png',0)
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
-cl1 = clahe.apply(img)
+cl1 = clahe.apply(image)
 
-cv2.imshow('img',img)
+cv2.imshow('image',image)
 cv2.imshow('cl1',cl1)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -893,9 +897,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("equalizeHist_image")
 
-img = cv2.imread('data/wu_2.png',0)
-equ = cv2.equalizeHist(img) #只能傳入灰度圖
-res = np.hstack((img,equ))  #圖像列拼接（用于顯示）
+image = cv2.imread('data/wu_2.png',0)
+equ = cv2.equalizeHist(image) #只能傳入灰度圖
+res = np.hstack((image,equ))  #圖像列拼接（用于顯示）
 
 cv2.imshow('res',res)
 cv2.waitKey(0)
@@ -1103,17 +1107,17 @@ print("------------------------------------------------------------")  # 60個
 
 print("image_ftt2")
 
-img = plt.imread('data/castle3.jpg')
+image = plt.imread('data/castle3.jpg')
 
 #根據公式轉成灰度圖
-img = 0.2126 * img[:,:,0] + 0.7152 * img[:,:,1] + 0.0722 * img[:,:,2]
+image = 0.2126 * image[:,:,0] + 0.7152 * image[:,:,1] + 0.0722 * image[:,:,2]
 
 #顯示原圖
 plt.subplot(231)
-plt.imshow(img,'gray')
+plt.imshow(image,'gray')
 plt.title('原始圖像')
 #進行傅立葉變換，并顯示結果
-fft2 = np.fft.fft2(img)
+fft2 = np.fft.fft2(image)
 plt.subplot(232)
 plt.imshow(np.abs(fft2),'gray')
 plt.title('二維傅里葉變換')
@@ -1139,11 +1143,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("magnitude_spectrum")
 
-img = cv2.imread('data/lena.png',0)  
-dft = cv2.dft(np.float32(img),flags = cv2.DFT_COMPLEX_OUTPUT)
+image = cv2.imread('data/lena.png',0)  
+dft = cv2.dft(np.float32(image),flags = cv2.DFT_COMPLEX_OUTPUT)
 dft_shift = np.fft.fftshift(dft) 
 magnitude_spectrum = 20*np.log(cv2.magnitude(dft_shift[:,:,0],dft_shift[:,:,1])) 
-plt.subplot(121),plt.imshow(img, cmap = 'gray')
+plt.subplot(121),plt.imshow(image, cmap = 'gray')
 plt.title('原始圖像')
 plt.xticks([])
 plt.yticks([])
@@ -1180,24 +1184,24 @@ def LinearMap(minlevel, maxlevel):
                 screenNum[i] = (i - minlevel) / (maxlevel - minlevel) * 255
         return screenNum
 
-def CreateNewImg(img):
-    h, w, d = img.shape
-    newimg = np.zeros([h, w, d])
+def CreateNewImg(image):
+    h, w, d = image.shape
+    newimage = np.zeros([h, w, d])
     for i in range(d):
-        imghist = np.bincount(img[:, :, i].reshape(1, -1)[0])
-        minlevel = ComputeMinLevel(imghist,  h * w)
-        maxlevel = ComputeMaxLevel(imghist, h * w)
+        imagehist = np.bincount(image[:, :, i].reshape(1, -1)[0])
+        minlevel = ComputeMinLevel(imagehist,  h * w)
+        maxlevel = ComputeMaxLevel(imagehist, h * w)
         screenNum = LinearMap(minlevel, maxlevel)
         if (screenNum.size == 0):
             continue
         for j in range(h):
-            newimg[j, :, i] = screenNum[img[j, :, i]]
-    return newimg
+            newimage[j, :, i] = screenNum[image[j, :, i]]
+    return newimage
 
-img = cv2.imread('data/building.png')
-newimg = CreateNewImg(img)
-cv2.imshow('原始圖像', img)
-cv2.imshow('去霧后圖像', newimg / 255)
+image = cv2.imread('data/building.png')
+newimage = CreateNewImg(image)
+cv2.imshow('原始圖像', image)
+cv2.imshow('去霧后圖像', newimage / 255)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -1376,19 +1380,19 @@ print('跑不出來 skip')
 
 PI = 3.141591265
 
-img = plt.imread('data/castle3.jpg')
+image = plt.imread('data/castle3.jpg')
 #根據公式轉成灰度圖
-img = 0.2126 * img[:,:,0] + 0.7152 * img[:,:,1] + 0.0722 * img[:,:,2]
+image = 0.2126 * image[:,:,0] + 0.7152 * image[:,:,1] + 0.0722 * image[:,:,2]
 
 #顯示原圖
-plt.subplot(131),plt.imshow(img,'gray'),plt.title('original')
+plt.subplot(131),plt.imshow(image,'gray'),plt.title('original')
 
 #進行傅立葉變換，并顯示結果
-fft2 = np.fft.fft2(img)
+fft2 = np.fft.fft2(image)
 log_fft2 = np.log(1 + np.abs(fft2))
 plt.subplot(132),plt.imshow(log_fft2,'gray'),plt.title('log_fft2')
 
-h , w = img.shape
+h , w = image.shape
 #生成一個同樣大小的復數矩陣
 F = np.zeros([h,w],'complex128')
 for u in range(h):
@@ -1396,7 +1400,7 @@ for u in range(h):
         res = 0
         for x in range(h):
             for y in range(w):
-                res += img[x,y] * np.exp(-1.j * 2 * PI * (u * x / h + v * y / w))
+                res += image[x,y] * np.exp(-1.j * 2 * PI * (u * x / h + v * y / w))
         F[u,v] = res
 
 log_F = np.log(1 + np.abs(F))

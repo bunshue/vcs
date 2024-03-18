@@ -381,13 +381,15 @@ roi = cv2.bitwise_and(img, img, mask = mask)
 
 plt.figure('new35 影像處理', figsize = (16, 12))
 
-plt.subplot(221)
+plt.subplot(121)
 plt.title('原圖')
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
-plt.subplot(222)
+plt.subplot(122)
 plt.title('ROI')
 plt.imshow(cv2.cvtColor(roi, cv2.COLOR_BGR2RGB))
+
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 

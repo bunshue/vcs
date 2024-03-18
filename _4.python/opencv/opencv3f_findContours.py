@@ -114,46 +114,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-
-image = cv2.imread(filename)
-
-plt.figure('影像處理', figsize = (16, 12))
-plt.subplot(231)
-plt.title('原圖')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-
-plt.subplot(232)
-plt.title('gray')
-plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
-
-edged = cv2.Canny(gray, 30, 200)
-
-plt.subplot(233)
-plt.title('Canny Edges')
-plt.imshow(cv2.cvtColor(edged, cv2.COLOR_BGR2RGB))
-
-contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-
-plt.subplot(234)
-plt.title('Canny Edges After Contouring')
-plt.imshow(cv2.cvtColor(edged, cv2.COLOR_BGR2RGB))
-
-print("Number of Contours found = " + str(len(contours)))
-
-cv2.drawContours(image, contours, -1, (255, 0, 0), 2)
-
-plt.subplot(235)
-plt.title('Contours')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.tight_layout()
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 filename = 'images/poly.png'
 
 print('顯示圖片')
@@ -252,6 +212,45 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+
+image = cv2.imread(filename)
+
+plt.figure('影像處理', figsize = (16, 12))
+plt.subplot(231)
+plt.title('原圖')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+
+plt.subplot(232)
+plt.title('gray')
+plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
+
+edged = cv2.Canny(gray, 30, 200)
+
+plt.subplot(233)
+plt.title('Canny Edges')
+plt.imshow(cv2.cvtColor(edged, cv2.COLOR_BGR2RGB))
+
+contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+plt.subplot(234)
+plt.title('Canny Edges After Contouring')
+plt.imshow(cv2.cvtColor(edged, cv2.COLOR_BGR2RGB))
+
+print("Number of Contours found = " + str(len(contours)))
+
+cv2.drawContours(image, contours, -1, (255, 0, 0), 2)
+
+plt.subplot(235)
+plt.title('Contours')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()
+plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')

@@ -30,7 +30,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 print('顯示原圖')
 
 image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
@@ -358,7 +358,7 @@ plt.title(u'灰度圖')
 plt.imshow(image)
 
 plt.show()
-'''
+
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
@@ -377,7 +377,7 @@ print('壓縮到100~200 灰階最小值 :', int(image3.min()),', 灰階最大值
 image4=255.0*(image1/255.0)**2  #對像素值求平方後得到的圖像
 print('相素值平方 灰階最小值 :', int(image4.min()),', 灰階最大值 :', int(image4.max()))
 
-plt.figure('影像處理2', figsize = (8, 10))
+plt.figure('影像處理2', figsize = (14, 10))
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(221)
@@ -901,51 +901,24 @@ print(transimg(img_path))
 
 print("------------------------------------------------------------")  # 60個
 
-print('萃取圖片的輪廓')
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
-image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
+from PIL import Image, ImageFilter
 
-#全彩轉灰階
-image1 = image1.convert("L")
+print('PIL模糊處理 GaussianBlur')
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
-W, H = image1.size
-print('原圖大小 W =', W, ', H =', H)
-
-# 輸出用, 製作一個與原圖大小相同的空白影像
-image2 = Image.new('RGB', (W, H))
-
-# 萃取輪廓
-for y in range(0, H - 1):
-    for x in range(0, W - 1):
-        # 計算亮度差
-        diff_x = image1.getpixel((x + 1, y)) - image1.getpixel((x, y))
-        diff_y = image1.getpixel((x, y + 1)) - image1.getpixel((x, y))
-        diff = diff_x + diff_y
-        
-        # 輸出
-        if diff >= 20:
-            image2.putpixel((x, y), (255, 0, 0))   #亮度差較大 著紅色
-        else:
-            image2.putpixel((x, y), (0, 0, 0))     #亮度差較小 著黑色
-
-plt.subplot(121)
-plt.imshow(image1)
-plt.title('原圖')
-
-plt.subplot(122)
-plt.imshow(image2)
-plt.title('萃取圖片的輪廓')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
+guido_img = Image.open(open(filename, 'rb'))
+guido2_img = guido_img.filter(ImageFilter.GaussianBlur)
+guido2_img.save(open('tmp_elephant_blur.jpg', 'wb'))
 
 
+print('二值化')
+img1 = Image.open(open(filename, 'rb'))
+img2 = img1.point(lambda x: 0 if x < 128 else 255)
 
-
-print('------------------------------------------------------------')	#60個
+img2.save(open('tmp_elephant_binary.png', 'wb'))
 
 
 
@@ -962,18 +935,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-print("操作像素, 使用 putpixel 修改一塊")
-
-image = Image.open(filename)
-for x in range(100, 200):
-    for y in range(250, 350):
-        image.putpixel((x, y), (255, 0, 0))
-
-plt.imshow(image)
-plt.show()
-
+'''
 print('------------------------------------------------------------')	#60個
 
 print('PIL之另存新檔')
@@ -1019,6 +982,8 @@ print('你已點擊:', x)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+'''
 
 
 
