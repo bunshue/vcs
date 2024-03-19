@@ -20,8 +20,9 @@ np.random.其他
 
 print('---- 用 numpy 做的 random --------------------------------------------------------')	#60個
 
-import pandas as pd
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 '''
 print('---- np.random.seed() ST --------------------------------------------------------')	#60個
@@ -58,8 +59,6 @@ print('平均值 : ', np.mean(y))
 print('中間值 : ', np.median(y))
 
 print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt
 
 N = 50
 
@@ -116,9 +115,6 @@ print("平均 : ", y.mean())
 print("標準差 : ", y.std())
 
 print('------------------------------------------------------------')	#60個
-
-
-import matplotlib.pyplot as plt
 
 N = 30
 plt.plot(np.random.randn(N))
@@ -310,7 +306,7 @@ print('---- np.random.randrange() ST -------------------------------------------
 
 print('---- np.random.randrange() SP --------------------------------------------------------')	#60個
 
-'''
+
 print('---- np.random.uniform() ST --------------------------------------------------------')	#60個
 
 for _ in range(50):
@@ -434,10 +430,6 @@ k = np.random.randint(1,101)
 
 print('------------------------------------------------------------')	#60個
 
-import matplotlib.pyplot as plt
-
-print('------------------------------------------------------------')	#60個
-
 min = 1
 max = 6
 for _ in range(10):
@@ -446,7 +438,6 @@ print()
 
 print('------------------------------------------------------------')	#60個
 
-x = np.random.normal(1,4,(3,5))
 x = np.random.normal(1,4,(3,5))
 y = np.argmax(x,axis=1)
 print(x)
@@ -610,14 +601,7 @@ import sys
 import time
 import random
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
 print('------------------------------------------------------------')	#60個
-
-
-
 
 #mu + sigma * np.random.standard_normal(size=...)
 #np.random.normal(mu, sigma, size=...)
@@ -662,8 +646,6 @@ abs(sigma - np.std(s, ddof=1))
 0.1  # may vary
 
 """
-import matplotlib.pyplot as plt
-
 count, bins, ignored = plt.hist(s, 30, density=True)
 
 plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
@@ -694,8 +676,6 @@ s = np.random.uniform(-1,0,10)
 print(s)
 
 
-import matplotlib.pyplot as plt
-
 count, bins, ignored = plt.hist(s, 15, density=True)
 
 plt.plot(bins, np.ones_like(bins), linewidth=2, color='r')
@@ -713,6 +693,34 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+'''
+
+print('將產生出來的常態分布做數字分析')
+print('normal 常態分布 N = 1000')
+
+mu, sigma = 100, 15
+N = 100000
+x = np.random.normal(mu, sigma, size=N)  # 隨機數
+
+print("型態 : ", type(x))
+print("長度 : ", len(x))
+print("最大 : ", x.max())
+print("最小 : ", x.min())
+print("最大 : ", max(x))
+print("最小 : ", min(x))
+print("平均 : ", x.mean())
+print("標準差 : ", x.std())
+
+import statistics
+
+print(f"Numpy模組母體變異數  : {np.var(x):6.2f}")
+print(f"Numpy模組樣本變異數  : {np.var(x,ddof=1):6.2f}")
+print(f"Statistics母體變異數 : {statistics.pvariance(x):6.2f}")
+print(f"Statistics樣本變異數 : {statistics.variance(x):6.2f}")
+print(f"Numpy模組母體標準差  : {np.std(x):6.2f}")
+print(f"Numpy模組樣本標準差  : {np.std(x,ddof=1):6.2f}")
+print(f"Statistics母體標準差 : {statistics.pstdev(x):6.2f}")
+print(f"Statistics樣本標準差 : {statistics.stdev(x):6.2f}")
 
 
 

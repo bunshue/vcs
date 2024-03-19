@@ -34,41 +34,33 @@ import matplotlib.pyplot as plt
 img = cv2.imread(filename)   #img.shape返回(576, 720, 3)
 img_gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
-#---------使用hist()函數繪圖---注意：用這個函數畫圖像直方圖時一定要用灰度圖像，如果非用彩圖，那得按通道畫，不然沒有什么意義----------------
+#使用hist()函數繪圖---
+#注意：用這個函數畫圖像直方圖時一定要用灰度圖像，如果非用彩圖，那得按通道畫，不然沒有什么意義
 plt.figure(figsize=(16,8))
 
-plt.subplot(231)
+plt.subplot(131)
 plt.imshow(img[:,:,::-1])   #原圖
 plt.title('原圖')
 
-plt.subplot(232)
-plt.hist(img_gray.ravel(), 256)  #將灰度級劃分為256個等級
-plt.xlim(0, 256) # 設定 x 軸座標範圍
+plt.subplot(132)
+num_bins = 64  # 直方圖顯示時的束數
+plt.hist(img_gray.ravel(), num_bins)  #將灰度級劃分為 num_bins 個等級
+plt.xlim(0-10, 256+10) # 設定 x 軸座標範圍
+plt.title('原圖轉灰階後的灰度直方圖')
 
-plt.subplot(233)
-plt.hist(img_gray.ravel(), 16, color='red')   #將灰度級劃分為16個等級
-plt.xlim(0, 256) # 設定 x 軸座標範圍
+#---------使用cv2.calcHist()函數繪圖----這個函數可以傳入彩圖，因為它還有一個channel參數，就把通道分開了
+hist_b = cv2.calcHist([img], [0], None, [256], [0, 256])  #彩圖 之 第0通道, 256束
+hist_g = cv2.calcHist([img], [1], None, [256], [0, 256])  #彩圖 之 第1通道, 256束
+hist_r = cv2.calcHist([img], [2], None, [256], [0, 256])  #彩圖 之 第2通道, 256束
+hist_gray = cv2.calcHist([img_gray], [0], None, [256], [0, 256])  #灰階圖 之 第0通道, 256束
 
-#---------使用cv2.calcHist()函數繪圖----這個函數可以傳入彩圖，因為它還有一個channel參數，就把通道分開了---------------------
-hist_b = cv2.calcHist([img], [0], None, [256], [0, 256])  
-hist_g = cv2.calcHist([img], [1], None, [256], [0, 256])  
-hist_r = cv2.calcHist([img], [2], None, [256], [0, 256])  
-hist_gray1 = cv2.calcHist([img_gray], [0], None, [256], [0, 256])  
-hist_gray2 = cv2.calcHist([img_gray], [0], None, [16], [0, 256])  
-
-plt.subplot(234)
+plt.subplot(133)
 plt.plot(hist_b, color='b')
 plt.plot(hist_g, color='g')
 plt.plot(hist_r, color='r')
-plt.xlim(0, 256) # 設定 x 軸座標範圍
-
-plt.subplot(235)
-plt.plot(hist_gray1, color='gray')
-plt.xlim(0, 256) # 設定 x 軸座標範圍
-
-plt.subplot(236)
-plt.plot(hist_gray2, color='gray')
-plt.xlim(0, 256) # 設定 x 軸座標範圍
+plt.plot(hist_gray, color='gray')
+plt.xlim(0-10, 256+10) # 設定 x 軸座標範圍
+plt.title('原圖各分量與灰階的直方圖')
 
 plt.show()
 
@@ -83,19 +75,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 img = cv2.imread(filename)
+print(img.shape)
 
-# 做一個一樣大小的mask
+# 做一個一樣大小的mask 黑色
 mask = np.zeros(img.shape, np.uint8)
-
 #修改mask
-mask[200:400, 200:400]=255
+offset = 50
+mask[offset:480-offset, offset:640-offset]=255  # 白色 前y 後 x
 img_mask = cv2.bitwise_and(img, mask)
 
+#原圖之統計數據
 hist_img = cv2.calcHist([img], [0], None, [256], [0,256])
-hist_img_mask = cv2.calcHist([img], [0], mask[:,:,0], [256], [0,256])
-hist_mask = cv2.calcHist([img_mask[200:400, 200:400]], [0], None, [256], [0,256])
 
-#可視化
+#原圖+mask後之統計數據
+hist_img_mask = cv2.calcHist([img], [0], mask[:,:,0], [256], [0,256])
+
+#應該等同於上面數據
+offset = 50
+hist_mask = cv2.calcHist([img_mask[offset:480-offset, offset:640-offset]], [0], None, [256], [0,256])
+
 plt.figure(figsize=(16,8))
 
 plt.subplot(231)
@@ -103,26 +101,32 @@ plt.imshow(img[:,:,::-1])
 plt.title('原圖')
 
 plt.subplot(232)
+plt.imshow(mask)
+plt.title('mask')
+
+plt.subplot(233)
 plt.imshow(img_mask[:,:,::-1])
 plt.title('原圖mask後')
 
 plt.subplot(234)
-plt.plot(hist_img)
-plt.plot(hist_img_mask) #無掩膜和有掩膜的直方圖畫到一起
-plt.xlim(0, 256) # 設定 x 軸座標範圍
+plt.plot(hist_img, 'r')
+plt.plot(hist_img_mask, 'g') #無掩膜和有掩膜的直方圖畫到一起
+plt.xlim(0-10, 256+10) # 設定 x 軸座標範圍
 plt.title('')
 
 plt.subplot(235)
 plt.plot(hist_img_mask)   #單獨劃出有掩膜的直方圖
-plt.xlim(0, 256) # 設定 x 軸座標範圍
+plt.xlim(0-10, 256+10) # 設定 x 軸座標範圍
 plt.title('')
 
 plt.subplot(236)
 plt.plot(hist_mask)     #單獨把mask部分圖像的直方圖畫出來，和上面的一模一樣
-plt.xlim(0, 256) # 設定 x 軸座標範圍
+plt.xlim(0-10, 256+10) # 設定 x 軸座標範圍
 plt.title('')
 
 plt.show()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

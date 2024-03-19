@@ -498,16 +498,3 @@ print("------------------------------------------------------------")  # 60個
 '''
 
 
-import numpy as np
-
-N = 10000
-mu, sigma = 70, 15
-x = np.random.normal(mu, sigma, size=N*10)  # 隨機數
-
-print('原資料最大 :', max(x))
-print('原資料最小 :', min(x))
-print('原資料長度 :', len(x))
-
-#由這些資料反算平均值與標準差
-
-

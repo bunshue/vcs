@@ -1,6 +1,12 @@
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 import sys
 
 import csv
+import numpy as np
 
 #csv檔 逗號分隔值(comma-seperated values)
 
@@ -10,7 +16,7 @@ import csv
 #先寫後讀
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print("寫入CSV檔 1 writer")
 
 filename = 'tmp_animals1.csv'
@@ -65,7 +71,7 @@ with open(filename, 'w', newline = '') as csvfile:
     writer.writerow({'中文名': "豬", '英文名': "pig", '體重': 42, '全名': "佩佩豬"})
 
 print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
-
+'''
 print('------------------------------------------------------------')	#60個
 
 print("寫入CSV檔 3a 一維串列資料 一次寫入")
@@ -73,9 +79,11 @@ print("寫入CSV檔 3a 一維串列資料 一次寫入")
 filename = 'tmp_score1000.csv'
 
 # 建立csv一維串列資料 TBD
-csvtable = [
-        ["豬","pig",42,"佩佩豬"],
-]
+
+mu, sigma = 100, 15
+N = 100
+csvtable = np.random.normal(mu, sigma, size=N)  # 隨機數
+
 
 # 開啟輸出的 csv 檔案
 #with open(filename, 'w', encoding='utf-8', newline='') as csvfile:
@@ -83,10 +91,12 @@ with open(filename, 'w', newline = '') as csvfile:
     # 建立 csv 檔寫入物件
     writer = csv.writer(csvfile)
 
-    # 寫入二維串列資料
-    writer.writerows(csvtable)
+    # 寫入一維串列資料
+    writer.writerows(np.array(csvtable))
 
 print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
+
+sys.exit()
 
 print("寫入CSV檔 3b 二維串列資料 一次寫入")
 
@@ -947,17 +957,263 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+import pandas as pd
+
+data = {'種類': ["Bike","Bus","Car","Truck"],
+        '數量': [3,4,6,2],
+        '輪數': ["2","4","4","6"] } 
+df = pd.DataFrame(data, index=["A","B","C","D"]) 
+
+df.to_csv("vehicles.csv",index=False,encoding="big5")
+
+df.to_json("vehicles1.json")
+df.to_json("vehicles2.json", force_ascii = False)
+
+"""
+#匯出DataFrame
+df.to_csv(filename)
+df.to_json(filename)
+df.to_html(filename)
+df.to_excel(filename)
+df.to_sql(table, con = engine)
+
+#匯入DataFrame
+df.read_csv(filename)
+df.read_json(filename)
+df.read_html(filename)
+df.read_excel(filename)
+df.read_sql(query, engine)
+"""
+import pandas as pd
+
+df1 = pd.read_csv("vehicles.csv", encoding="big5")
+df2 = pd.read_json("vehicles.json")
+print(df1)
+print(df2)
+
 
 print("------------------------------------------------------------")  # 60個
 
 
 
 print("------------------------------------------------------------")  # 60個
+
+import sys
+import numpy as np
+import pandas as pd
+
+print('------------------------------------------------------------')	#60個
+
+# pip install xlsxwriter
+
+#data = pd.read_csv('data/ExpensesRecord.csv')
+df = pd.read_excel('data/ExpensesRecord.xls', 'sheet')
+#data = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html')
+print(df.head(5) )
+
+from pandas import ExcelWriter
+
+writer = ExcelWriter('test.xlsx', engine='xlsxwriter')
+df.to_excel(writer, sheet_name='sheet2')
+writer.save()
+
+print('------------------------------------------------------------')	#60個
+
+df = pd.read_csv('data/ExpensesRecord.csv')
+print(df.head(5) )
+df.to_csv("test.csv")
+
+print('------------------------------------------------------------')	#60個
+
+"""
+df = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html')
+print(df[0].head(5) )
+
+#df = pd.read_html('http://news.baidu.com/tech')
+#print(df[0].head(5) )
+"""
+
+print('------------------------------------------------------------')	#60個
+
+DataFrame = pd.read_csv('data/ExpensesRecord.csv')
+print(DataFrame["說明"])
+print(DataFrame[["說明","支出金額"]] )
+
+df = pd.DataFrame({'Math': [90, 91,92, 93, 94],'English': np.arange(80,85,1) })
+print(df[["Math","English"]])
+
+print('------------------------------------------------------------')	#60個
+
+DataFrame = pd.read_csv('data/ExpensesRecord.csv')
+DataFrame["單價"]=DataFrame["支出金額"]/DataFrame["數量"]
+print(DataFrame[["數量","支出金額","單價"]] )
+
+print('------------------------------------------------------------')	#60個
+
+df = pd.read_excel('AAPL.xlsx', 'AAPL')
+print(df.head())
+print(type(df))
+
+# 2
+print(df.shape)
+print(df.columns)
+print(df.index)
+print(df.info())
+print(df.describe())
+
+print('------------------------------------------------------------')	#60個
+
+df = pd.read_excel('AAPL.xlsx', 'AAPL')
+print(df.head())
+print(type(df))
+
+# 2 data info
+print(df.shape)
+print(df.columns)
+print(df.index)
+print(df.info())
+print(df.describe())
+
+# 3 filter'
+
+print("--------------------")
+print(df['Date'] == '2018-01-05')
+print(df[df['Date'] == '2018-01-05'])
+print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
+print(df[df['Open'] > 194.2])
+print(df[['Date','Open']])
+print(df[['Date','Open']][:5])
+print(df.sort_values(by=['Volume'])[:5])
+print(df.sort_values(by=['Volume'], ascending=False)[:5])
+print(df['Open'][:30].rolling(7).mean())
+
+print('------------------------------------------------------------')	#60個
+
+df = pd.read_excel('AAPL.xlsx', 'AAPL')
+print(df.head())
+print(type(df))
+
+# 2 data info
+print(df.shape)
+print(df.columns)
+print(df.index)
+print(df.info())
+print(df.describe())
+
+# 3 filter'
+
+print("--------------------")
+print(df[df['Date'] == '2018-01-05'])
+print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
+print(df[df['Open'] > 194.2])
+print(df[['Date','Open']][:5])
+print(df.sort_values(by=['Volume'])[:5])
+print(df.sort_values(by=['Volume'], ascending=False)[:5])
+print(df['Open'][:30].rolling(7).mean())
+
+# 4 Calculation
+print("--------------------")
+df['diff'] = df['Close']-df['Open']
+df['year'] = pd.DatetimeIndex(df['Date']).year
+df['month'] = pd.DatetimeIndex(df['Date']).month
+print(df.head())
+print("April Volume sum=%.2f" % df[df['month'] == 4][['Volume']].sum())
+print("April Open mean=%.2d" % df[df['month'] == 4][['Open']].mean())
+
+print('------------------------------------------------------------')	#60個
+
+df = pd.read_excel('AAPL.xlsx', 'AAPL')
+print(df.head())
+print(type(df))
+
+# 2 data info
+print(df.shape)
+print(df.columns)
+print(df.index)
+print(df.info())
+print(df.describe())
+
+
+# 3 filter'
+print("--------------------")
+print(df[df['Date'] == '2018-01-05'])
+print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
+print(df[df['Open'] > 194.2])
+print(df[['Date','Open']][:5])
+print(df.sort_values(by=['Volume'])[:5])
+print(df.sort_values(by=['Volume'], ascending=False)[:5])
+print(df['Open'][:30].rolling(7).mean())
+
+# 4 Calculation
+print("--------------------")
+df['diff'] = df['Close']-df['Open']
+df['year'] = pd.DatetimeIndex(df['Date']).year
+df['month'] = pd.DatetimeIndex(df['Date']).month
+df['day'] = pd.DatetimeIndex(df['Date']).day
+print(df.head())
+print("April Volume sum=%.2f" % df[df['month'] == 4][['Volume']].sum())
+print("April Open mean=%.2d" % df[df['month'] == 4][['Open']].mean())
+
+#  5 matplotlib
+import matplotlib.pyplot as plt
+df.plot(x='Date', y='Open',grid=True, color='blue')
+plt.show()
+
+import matplotlib.pyplot as plt
+df.plot( y='diff',grid=True, color='red',kind='hist')
+plt.show()
+
+fig, ax = plt.subplots()
+for name, group in df.groupby('month'):
+    group.plot(x='day', y='Open', ax=ax, label=name)
+plt.show()
+
+fileds=['Open','Close','High']
+fig, ax = plt.subplots()
+for name in fileds:
+    df.plot(x='Date', y=name, ax=ax, label=name)
+plt.show()
+
+dfMonths = df.loc[df['month'].isin([1,2,3,4,5,6,7])]
+print(dfMonths)
+dfMonthsPivot = dfMonths.pivot_table(values = 'High', columns = 'month', index = 'day')
+dfMonthsPivot.plot(kind = 'box',title = 'Months High')
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
