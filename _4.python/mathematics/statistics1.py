@@ -4,8 +4,7 @@
 """
 
 print('------------------------------------------------------------')	#60個
-
-
+'''
 import numpy as np
 
 a = 580
@@ -32,38 +31,86 @@ print(average + 2 * np.std(arr, ddof = 0))
 #ddof=0，回傳 population standard deviation 母體標準差，分母(n)，有偏估計
 #ddof=1，回傳 sample standard deviation 樣本標準差，分母(n-1)，無偏估計
 
-
-
 print(np.std(arr, ddof = 1))#this
 
-print('------------------------------------------------------------')	#60個
 
-import statistics
-
-arr = [580, 600, 680, 620]
-#arr = [5, 6, 8, 9]
-a = statistics.stdev(arr)
-print(a)   # 2.7386127875258306
 
 print('------------------------------------------------------------')	#60個
 
-import statistics
+x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
+mean = sum(x) / len(x)
 
-arr = [1, 2, 3, 4, 5, 6, 7, 8]
-a = statistics.mean(arr)    # 計算平均值
-print(a)                    # 4.5
+# 計算變異數
+myvar = 0
+for v in x:
+    myvar += ((v - mean)**2)
+myvar = myvar / len(x)
+print(f"變異數 : {myvar}")
 
 print('------------------------------------------------------------')	#60個
+
+x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
+mean = sum(x) / len(x)
+
+# 計算變異數
+var = 0
+for v in x:
+    var += ((v - mean) ** 2)
+sd = (var / len(x)) ** 0.5
+print(f"標準差 : {sd:6.2f}")
+
+print('------------------------------------------------------------')	#60個
+
+
+N = 10000
+
+random_numbers = []
+for _ in range(N):
+    random_numbers.append(np.random.randn())
+
+"""
+random_numbers = np.random.randn(N) #same
+print(random_numbers.shape)
+"""
+
+max_temp = max(random_numbers)
+min_temp = min(random_numbers)
+mean_temp = sum(random_numbers) / len(random_numbers)
+
+# 排序後取得中位數
+random_numbers.sort()
+median_temp = random_numbers[len(random_numbers) // 2]
+
+print("max = {}".format(max_temp))
+print("min = {}".format(min_temp))
+print("mean = {}".format(mean_temp))
+print("median = {}".format(median_temp))
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+print('使用 statistics 模組')
 
 import statistics
 
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 a = statistics.pstdev(arr)
 b = statistics.pvariance(arr)
-print(a)   # 2.581988897471611
-print(b)   # 6.666666666666667
-
-
+c = statistics.mean(arr)    # 計算平均值
+d = statistics.stdev(arr)
+print(a)   # 2.7386127875258306
+print(b)   # 2.581988897471611
+print(c)   # 6.666666666666667
+print(d)
 
 print('------------------------------------------------------------')	#60個
 
@@ -122,18 +169,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
-mean = sum(x) / len(x)
-
-# 計算變異數
-myvar = 0
-for v in x:
-    myvar += ((v - mean)**2)
-myvar = myvar / len(x)
-print(f"變異數 : {myvar}")
-
-print('------------------------------------------------------------')	#60個
-
 import statistics
 
 x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
@@ -142,54 +177,10 @@ print(f"Numpy模組母體變異數  : {np.var(x):6.2f}")
 print(f"Numpy模組樣本變異數  : {np.var(x,ddof=1):6.2f}")
 print(f"Statistics母體變異數 : {statistics.pvariance(x):6.2f}")
 print(f"Statistics樣本變異數 : {statistics.variance(x):6.2f}")
-
-print('------------------------------------------------------------')	#60個
-
-x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
-mean = sum(x) / len(x)
-
-# 計算變異數
-var = 0
-for v in x:
-    var += ((v - mean) ** 2)
-sd = (var / len(x)) ** 0.5
-print(f"標準差 : {sd:6.2f}")
-
-print('------------------------------------------------------------')	#60個
-
-import statistics
-
-x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
 print(f"Numpy模組母體標準差  : {np.std(x):6.2f}")
 print(f"Numpy模組樣本標準差  : {np.std(x,ddof=1):6.2f}")
 print(f"Statistics母體標準差 : {statistics.pstdev(x):6.2f}")
 print(f"Statistics樣本標準差 : {statistics.stdev(x):6.2f}")
-
-print('------------------------------------------------------------')	#60個
-
-N = 10000
-
-random_numbers = []
-for _ in range(N):
-    random_numbers.append(np.random.randn())
-
-"""
-random_numbers = np.random.randn(N) #same
-print(random_numbers.shape)
-"""
-
-max_temp = max(random_numbers)
-min_temp = min(random_numbers)
-mean_temp = sum(random_numbers) / len(random_numbers)
-
-# 排序後取得中位數
-random_numbers.sort()
-median_temp = random_numbers[len(random_numbers) // 2]
-
-print("max = {}".format(max_temp))
-print("min = {}".format(min_temp))
-print("mean = {}".format(mean_temp))
-print("median = {}".format(median_temp))
 
 print('------------------------------------------------------------')	#60個
 
@@ -252,48 +243,31 @@ print('------------------------------------------------------------')	#60個
 
 
 """
-
 statistics --- 數學統計函式
 
 #平均值與中央位置量數
 mean()資料的算術平均數（平均值）。
-
 fmean()快速浮點數算數平均數，可調整權重。
-
 geometric_mean()資料的幾何平均數。
-
 harmonic_mean()資料的調和平均數。
-
 median()資料的中位數（中間值）。 「中間兩數取平均」
-
 median_low()資料中較小的中位數。 低中位數
-
 median_high()資料中較大的中位數。 高中位數
-
 median_grouped()分組資料的中位數或 50% 處。
-
 mode()離散 (discrete) 或名目 (nomial) 資料中的眾數（出現次數最多次的值），只回傳一個。 眾數
-
 multimode()離散或名目資料中的眾數（出現次數最多次的值）組成的 list。
-
 quantiles()將資料分成數個具有相等機率的區間，即分位數 (quantile)。
 
 #離度 (spread) 的測量
 pstdev()資料的母體標準差。
-
 pvariance()資料的母體變異數。
-
 stdev()資料的樣本標準差。
-
 variance()資料的樣本變異數。
 
 #兩個輸入之間的關係統計
 covariance()兩變數的樣本共變異數。
-
 correlation()Pearson 與 Spearman 相關係數 (correlation coefficient)。
-
 linear_regression()簡單線性迴歸的斜率和截距。
-
 
 ==================  ==================================================
 Function            Description
@@ -314,11 +288,8 @@ quantiles           Divide data into intervals with equal probability.
 >>> mean([-1.0, 2.5, 3.25, 5.75])
 2.625
 
-
 >>> median([2, 3, 4, 5])
 3.5
-
-
 
 >>> stdev([2.5, 3.25, 5.5, 11.25, 11.75])  #doctest: +ELLIPSIS
 4.38961843444...
@@ -388,7 +359,6 @@ s = statistics.pvariance(data, mu)
 print(s)
 #1.25
 
-
 #回傳樣本標準差（即樣本變異數的平方根）
 
 s = statistics.stdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])
@@ -436,18 +406,13 @@ y = [1, 2, 3, 1, 2, 3, 1, 2, 3]
 s = statistics.covariance(x, y)
 print(s)
 
-
 z = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 
 s = statistics.covariance(x, z)
 print(s)
 
-
 s = statistics.covariance(z, x)
 print(s)
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -482,7 +447,6 @@ dist_cubed = [d * d * d for d in dist_from_sun]
 
 s = round(statistics.correlation(period_squared, dist_cubed), 4)
 print(s)
-
     
 print('------------------------------------------------------------')	#60個
 
@@ -526,13 +490,24 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+'''
 
+
+import numpy as np
+
+N = 10000
+mu, sigma = 70, 15
+x = np.random.normal(mu, sigma, size=N*10)  # 隨機數
+
+print('原資料最大 :', max(x))
+print('原資料最小 :', min(x))
+print('原資料長度 :', len(x))
+
+#由這些資料反算平均值與標準差
 
 

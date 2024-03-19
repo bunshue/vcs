@@ -5,22 +5,14 @@ import numpy as np
 
 print('------------------------------------------------------------')	#60個
 
-'''
-# 顯示數學常數
-print("math.e = ", math.e)
-print("math.pi = ", math.pi)
-
-
 print('數學常數')
 print("圓周率 : ", math.pi)
-print("圓周率 : " + str(math.pi))
 print("e : ", math.e)
 
 print('------------------------------------------------------------')	#60個
 
 print('數學函數')
 
-# Test algebraic functions
 print("exp(1.0) =", math.exp(1))
 print("log(3.78) =", math.log(math.e))
 print("log10(10, 10) =", math.log(10, 10))
@@ -48,7 +40,6 @@ math.sin(math.pi * angle / 2)
 
 print('------------------------------------------------------------')	#60個
 
-
 # 數學函數
 no = -19.536
 print("測試值no = ", no)
@@ -72,12 +63,12 @@ print("math.tan(rad) = ", math.tan(rad))
 
 print("------------------------------------------------------------")  # 60個
 
-import math as m #以別名取代
+import math
 
-print("sqrt(16)= ",m.sqrt(16)) #平方根
-print("fabs(-8)= ",m.fabs(-8)) #取絕對值
-print("fmod(16,5)= ",m.fmod(16,5)) # 16%5
-print("floor(3.14)= ",m.floor(3.14)) # 3
+print("sqrt(16)= ", math.sqrt(16)) #平方根
+print("fabs(-8)= ", math.fabs(-8)) #取絕對值
+print("fmod(16,5)= ", math.fmod(16,5)) # 16%5
+print("floor(3.14)= ", math.floor(3.14)) # 3
 
 """
 import math
@@ -94,9 +85,6 @@ if math.isnan(h) == False:
 
 print("------------------------------------------------------------")  # 60個
 
-# 顯示數學常數
-print("math.e = ", math.e)
-print("math.pi = ", math.pi)
 # 數學函數
 no = -19.536
 print("測試值no = ", no)
@@ -119,7 +107,6 @@ print("math.cos(rad) = ", math.cos(rad))
 print("math.tan(rad) = ", math.tan(rad))
 
 print('------------------------------------------------------------')	#60個
-
 
 nums = [1,2,3,4,5,6,7,8,9,10]
 result = math.fsum(nums)
@@ -278,16 +265,10 @@ d = 6371 * math.acos(math.sin(math.radians(x1)) * math.sin(math.radians(x2)) +
 
 print("distance = ", d)
 
-
-
 print('------------------------------------------------------------')	#60個
 
+#分数运算
 
-
-"""
-分数运算
-
-"""
 from fractions import Fraction
 
 def frac():
@@ -303,7 +284,6 @@ def frac():
 
 frac()
 
-
 print('------------------------------------------------------------')	#60個
 
 from fractions import Fraction
@@ -316,6 +296,7 @@ print('分數的使用 : {}'.format(float(p)))
 print('------------------------------------------------------------')	#60個
 
 print('算圓周率')
+
 sigma=0
 k = 20
 
@@ -325,8 +306,6 @@ for n in range(0,k,1):
     else: #如果n是偶數
         sigma += float(1/(2*n+1))
 print("PI = %f" %(sigma*4))
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -360,7 +339,6 @@ for i in range(1, x + 1):
 
 print('------------------------------------------------------------')	#60個
 
-
 """
 找出100~999之间的所有水仙花数
 水仙花数是各位立方和等于这个数本身的数
@@ -373,9 +351,6 @@ for num in range(100, 1000):
     high = num // 100
     if num == low**3 + mid**3 + high**3:
         print(num)
-
-
-
 
 
 print('------------------------------------------------------------')	#60個
@@ -438,14 +413,12 @@ d = r*math.acos(math.sin(math.radians(x1))*math.sin(math.radians(x2))+
 
 print(f"distance = {d:6.1f}")
 
-'''
-
 
 print('------------------------------------------------------------')	#60個
 
 #認識正、負無限大
 
-import math #匯入math模組
+import math
 a = 1E309
 print('a = 1E309, 輸出', a)
 
@@ -510,7 +483,6 @@ print(cc)
 
 cc = fractions.Fraction(fractions.Fraction(2, 5), fractions.Fraction(7, 13))
 print(cc)
-
 
 print('------------------------------------------------------------')	#60個
 

@@ -189,10 +189,12 @@ plt.title("以字典傳送參數")
 plt.subplot(236)
 
 #縱軸執行正規化處理表示為機率，直條的寬度大小為 80%
+#指定bins
 bins = [50, 70, 85, 95, 100, 105, 115, 130, 150]
+#bins = range(0, 151, 10)
 plt.hist(x, bins, histtype="bar", rwidth=0.8)
-plt.title("unequal bins")
 
+plt.title("unequal bins")
 
 plt.show()
 
