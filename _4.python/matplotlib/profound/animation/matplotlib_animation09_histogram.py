@@ -15,7 +15,7 @@ import numpy as np
 import matplotlib.animation as animation
 
 # Setting up a random number generator with a fixed state for reproducibility.
-rng = np.random.default_rng(seed=19680801)
+rng = np.random.default_rng(seed=123456789)
 # Fixing bin edges.
 HIST_BINS = np.linspace(-4, 4, 100)
 

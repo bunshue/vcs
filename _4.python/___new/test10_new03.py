@@ -1,9 +1,5 @@
 """
 準備清除
-#檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch8\ch8_9.py
-
-# ch8_9.py
-
 
 準備撈出
 
@@ -21,6 +17,30 @@ import sys
 import time
 import random
 import math
+
+
+
+# 方法1
+animals = set("鼠牛虎兔龍")
+print("兔 是屬於animals集合?", "兔" in animals)
+print("豬 是屬於animals集合?", "豬" in animals)
+# 方法2
+animals = {"鼠", "牛", "虎", "兔", "龍"}
+boolean = "兔" in animals
+print("兔 in animals :", boolean)
+boolean = "豬" in animals
+print("豬 in animals :", boolean)
+
+print("------------------------------------------------------------")  # 60個
+
+animals1 = ["鼠", "牛", "虎", "兔", "龍"]
+animals2 = ["牛", "豬", "虎"]
+print("目前animals2串列 : ", animals2)
+for animal in animals2[:]:
+    if animal in animals1:
+        animals2.remove(animal)
+        print(f"刪除 {animal}")
+print("最後animals2串列 : ", animals2)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -45,199 +65,6 @@ all_products = supplier_a_products.union(supplier_b_products)
 print(f"所有產品 : {all_products}")
 
 print("------------------------------------------------------------")  # 60個
-
-math = {"Kevin", "Peter", "Eric"}  # 設定參加數學夏令營成員
-physics = {"Peter", "Nelson", "Tom"}  # 設定參加物理夏令營成員
-both1 = math & physics
-print("同時參加數學與物理夏令營的成員 ", both1)
-both2 = math.intersection(physics)
-print("同時參加數學與物理夏令營的成員 ", both2)
-
-print("------------------------------------------------------------")  # 60個
-
-# 定義飛行路線
-routes = {
-    frozenset({"Los Angeles", "New York"}): {"距離": 2451, "時間": "5h 15m"},
-    frozenset({"New York", "Chicago"}): {"距離": 713, "時間": "2h 5m"},
-    frozenset({"Chicago", "Los Angeles"}): {"距離": 1744, "時間": "4h 5m"},
-    frozenset({"New York", "San Francisco"}): {"距離": 2572, "時間": "5h 30m"},
-}
-
-
-def get_route_info(city1, city2):
-    # 使用 frozenset 確保無論城市的順序如何，都可以正確查詢路線
-    route = frozenset({city1, city2})
-    if route in routes:
-        info = routes[route]
-        print(f"距離 : {info['距離']:5d} miles, 時間 : {info['時間']}")
-    else:
-        print(f"No route found between {city1} and {city2}")
-
-
-# 查詢路線資訊
-get_route_info("New York", "Los Angeles")
-get_route_info("Los Angeles", "New York")
-get_route_info("New York", "Chicago")
-get_route_info("San Francisco", "New York")
-
-print("------------------------------------------------------------")  # 60個
-
-A = {1, 2, 3, 4, 5}  # 定義集合A
-B = {3, 4, 5, 6, 7}  # 定義集合B
-C = {1, 2, 3, 4, 5}  # 定義集合C
-# 列出A與B集合是否相等
-print("A與B集合相等", A == B)
-# 列出A與C集合是否相等
-print("A與C集合相等", A == C)
-
-print("------------------------------------------------------------")  # 60個
-
-# 方法1
-fruits = set("orange")
-print("字元a是屬於fruits集合?", "a" in fruits)
-print("字元d是屬於fruits集合?", "d" in fruits)
-# 方法2
-cars = {"Nissan", "Toyota", "Ford"}
-boolean = "Ford" in cars
-print("Ford in cars", boolean)
-boolean = "Audi" in cars
-print("Audi in cars", boolean)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def greeting():
-    """我的第一個Python函數設計"""
-    print("Python歡迎你")
-    print("祝福學習順利")
-    print("謝謝")
-
-
-# 以下的程式碼也可稱主程式
-greeting()
-greeting()
-greeting()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def greeting(name):
-    """Python函數需傳遞名字name"""
-    print("Hi, ", name, " Good Morning!")
-    return  # Python自動回傳 None
-
-
-ret_value = greeting("Nelson")
-print(f"greeting()傳回值 = {ret_value}")
-print(f"{ret_value} 的 type  = {type(ret_value)}")
-
-print("------------------------------------------------------------")  # 60個
-
-
-def guest_info(firstname, middlename, lastname, gender):
-    """整合客戶名字資料"""
-    if gender == "M":
-        welcome = lastname + middlename + firstname + "先生歡迎你"
-    else:
-        welcome = lastname + middlename + firstname + "小姐歡迎妳"
-    return welcome
-
-
-info1 = guest_info("宇", "星", "洪", "M")
-info2 = guest_info("雨", "冰", "洪", "F")
-print(info1)
-print(info2)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def guest_info(firstname, lastname, gender, middlename=""):
-    """整合客戶名字資料"""
-    if gender == "M":
-        welcome = f"{lastname}{middlename}{firstname}先生歡迎你"
-    else:
-        welcome = f"{lastname}{middlename}{firstname}小姐歡迎妳"
-    return welcome
-
-
-info1 = guest_info("濤", "劉", "M")
-info2 = guest_info("雨", "洪", "F", "冰")
-print(info1)
-print(info2)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def build_vip(id, name):
-    """建立VIP資訊"""
-    vip_dict = {"VIP_ID": id, "Name": name}
-    return vip_dict
-
-
-member = build_vip("101", "Nelson")
-print(member)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def build_vip(id, name, tel=""):
-    """建立VIP資訊"""
-    vip_dict = {"VIP_ID": id, "Name": name}
-    if tel:
-        vip_dict["Tel"] = tel
-    return vip_dict
-
-
-member1 = build_vip("101", "Nelson")
-member2 = build_vip("102", "Henry", "0952222333")
-print(member1)
-print(member2)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def product_msg(customers):
-    str1 = "親愛的: "
-    str2 = "本公司將在2023年12月20日夏威夷舉行產品發表會"
-    str3 = "總經理:深智公司敬上"
-    for customer in customers:
-        msg = str1 + customer + "\n" + str2 + "\n" + str3
-        print(msg, "\n")
-
-
-members = ["Damon", "Peter", "Mary"]
-product_msg(members)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def mydata(n):
-    print("副程式 id(n) = : ", id(n), "\t", n)
-    n = 5
-    print("副程式 id(n) = : ", id(n), "\t", n)
-
-
-x = 1
-print("主程式 id(x) = : ", id(x), "\t", x)
-mydata(x)
-print("主程式 id(x) = : ", id(x), "\t", x)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def mydata(n):
-    print(f"函  數 id(n) = :  {id(n)} \t {n}")
-    n[0] = 5
-    print(f"函  數 id(n) = :  {id(n)} \t {n}")
-
-
-x = [1, 2]
-print("主程式 id(x) = : ", id(x), "\t", x)
-mydata(x)
-print("主程式 id(x) = : ", id(x), "\t", x)
-
-print("------------------------------------------------------------")  # 60個
-
 
 def kitchen(unserved, served):
     """將未服務的餐點轉為已經服務"""
@@ -368,6 +195,9 @@ kitchen(order_list[:], served_list)  # 餐廳處理過程
 show_order_meal(order_list)  # 列出所點的餐點
 show_served_meal(served_list)  # 列出已服務餐點
 
+'''
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -410,7 +240,6 @@ print(player_dict)  # 列印所建字典
 
 print("------------------------------------------------------------")  # 60個
 
-
 def total(data):
     return sum(data)
 
@@ -420,21 +249,9 @@ myList = [min, max, sum, total]
 for f in myList:
     print(f)
 
-print("------------------------------------------------------------")  # 60個
+print(myList)
 
-
-def factorial(n):
-    """計算n的階乘, n 必須是正整數"""
-    fact = 1
-    for i in range(1, n + 1):
-        fact *= i
-    return fact
-
-
-value = 3
-print(f"{value} 的階乘結果是 = {factorial(value)}")
-value = 5
-print(f"{value} 的階乘結果是 = {factorial(value)}")
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2974,17 +2791,6 @@ for i in range(1, n):
 
 print("------------------------------------------------------------")  # 60個
 
-fruits1 = ["蘋果", "香蕉", "西瓜", "水蜜桃", "百香果"]
-fruits2 = ["香蕉", "芭樂", "西瓜"]
-print("目前fruits2串列 : ", fruits2)
-for fruit in fruits2[:]:
-    if fruit in fruits1:
-        fruits2.remove(fruit)
-        print(f"刪除 {fruit}")
-print("最後fruits2串列 : ", fruits2)
-
-print("------------------------------------------------------------")  # 60個
-
 title = "9 * 9 Multiplication Table"
 print("%s" % title.center(40))
 for i in range(1, 10):
@@ -3213,26 +3019,6 @@ print("------------------------------------------------------------")  # 60個
 A = []
 for i in range(1, 100, 2):
     A.append(i)
-B = []
-for i in range(0, 101, 5):
-    B.append(i)
-aSet = set(A)  # 將串列A轉成集合aSet
-bSet = set(B)  # 將串列B轉成集合bSet
-
-unionAB = aSet | bSet
-print("聯集 : ", unionAB)
-interAB = aSet & bSet
-print("交集 : ", interAB)
-A_B = aSet - bSet
-print("A-B差集 : ", A_B)
-B_A = bSet - aSet
-print("B-A差集 : ", B_A)
-
-print("------------------------------------------------------------")  # 60個
-
-A = []
-for i in range(1, 100, 2):
-    A.append(i)
 
 num = 2
 B = []
@@ -3266,20 +3052,6 @@ print("AB對稱差集 : ", AsdB)
 
 print("------------------------------------------------------------")  # 60個
 
-aSet = {i for i in range(1, 100, 2)}
-bSet = {i for i in range(0, 101, 5)}
-
-unionAB = aSet | bSet
-print("聯集 : ", unionAB)
-interAB = aSet & bSet
-print("交集 : ", interAB)
-A_B = aSet - bSet
-print("A-B差集 : ", A_B)
-B_A = bSet - aSet
-print("B-A差集 : ", B_A)
-
-print("------------------------------------------------------------")  # 60個
-
 
 def mysum(nLst):
     if nLst == []:
@@ -3289,20 +3061,6 @@ def mysum(nLst):
 
 data = [5, 7, 9, 15, 21, 6]
 print(f"mysum = {mysum(data)}")
-
-print("------------------------------------------------------------")  # 60個
-
-
-def fun(n):
-    if n == 1:
-        return 1.0 / 2
-    else:
-        return fun(n - 1) + (n * 1.0) / (n + 1)
-
-
-n = 100
-for i in range(1, n + 1):
-    print(f"{i} = {fun(i):5.3f}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3370,24 +3128,6 @@ print(f"城市個數 {N}, 路徑組合數 = {combinations}")
 print(f"需要 {years} 年才可以獲得結果")
 
 print("------------------------------------------------------------")  # 60個
-
-
-def guest_info(firstname, middlename, lastname, gender):
-    """整合客戶名字資料"""
-    if gender == "M":
-        welcome = "Mr. " + firstname + middlename + lastname + "Welcome"
-    else:
-        welcome = "Miss " + firstname + middlename + lastname + "Welcome"
-    return welcome
-
-
-info1 = guest_info("Ivan ", "Carl ", "Hung ", "M")
-info2 = guest_info("Mary ", "Ice ", "Hung ", "F")
-print(info1)
-print(info2)
-
-print("------------------------------------------------------------")  # 60個
-
 
 def pi(n):
     p = 0
@@ -3658,14 +3398,14 @@ for i1 in range(0, 10):                                 # 第一位數
 print("------------------------------------------------------------")  # 60個
 
 
-'''
+"""
 def inn():
     a = input('輸入文字並轉換為 ASCII：')
     print('{} 的 ASCII：{}'.format(a, ord(a)))
     inn()
 
 inn()
-'''
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4093,20 +3833,6 @@ print(aa)
 
 print("------------------------------------------------------------")  # 60個
 
-b1 = 1
-b2 = 3
-print(f"{b1} / {b2} = {round(b1/b2,3)}")  # 使用 round 四捨五入到小數點三位
-print(f"{b2} / {b1} = {round(b2/b1,3)}")
-
-print("------------------------------------------------------------")  # 60個
-
-v4 = int("11", 16)  # 17, base 16
-print(v4)
-v8 = float("2.7E-2")  # 0.027
-print(v8)
-
-print("------------------------------------------------------------")  # 60個
-
 a = 4
 b = 2.2
 
@@ -4143,31 +3869,6 @@ print(list1)
 list1 = [20, 30, 50, 80]
 list1 = [x for x in list1 if (x >= 30 and x <= 50)]
 print(list1)  # 30,50
-
-print("------------------------------------------------------------")  # 60個
-
-import string
-
-# 北美獨立宣言
-str1 = (
-    "Resolved: That these United Colonies are, and of right ought to be, "
-    + "free and independent States, that they are absolved from all allegiance "
-    + "to the British Crown, and that all political connection between them and "
-    + "the State of Great Britain is, and ought to be, totally dissolved."
-)
-# 先一律轉小寫
-str2 = str1.lower()
-
-charSet = set(string.ascii_lowercase)
-freqDict = {}
-for ch in str2:
-    # 判斷如果不在ASCII小寫字母集，則略過
-    if not ch in charSet:
-        continue
-    freqDict[ch] = freqDict.get(ch, 0) + 1
-
-print(freqDict)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4340,11 +4041,13 @@ print(fset)  # frozenset({'a', 'b', 'c'})
 
 print("------------------------------------------------------------")  # 60個
 
-keys = ("name", "age", "job")
-values = ("Amy", 25, "writer")
-dic1 = dict(zip(keys, values))  # zip真好用！
+'''
+
+print('用zip組合資料成字典')
+keys = ("cname", "ename", "weight")
+values = ("鼠", "mouse", 3)
+dic1 = dict(zip(keys, values))
 print(dic1)
-# {'name': 'Amy', 'age': 25, 'job': 'writer'}
 
 
 print("------------------------------------------------------------")  # 60個
@@ -4356,43 +4059,41 @@ list1 = list(enumerate(zip(names, scores)))
 for item in list1:
     print(item[0], item[1][0], item[1][1])
 
-
 print(list(zip(("a", "b", "c"), (30, 41, 52))))
 # [('a', 30), ('b', 41), ('c', 52)]
-
 
 print(list(enumerate(["a", "b", "c"])))
 # [(0, 'a'), (1, 'b'), (2, 'c')]
 
 print("------------------------------------------------------------")  # 60個
 
+print('從list中過濾資料')
 list1 = [30, 45, 1024, 2500, 699, 126]
 
 # 過濾出小於1000元的消費
 list2 = [num for num in list1 if num < 1000]
-sum1 = sum(list2)  # 用sum做消費加總
-avg1 = sum1 / len(list2)  # 用len取消費筆數
+
+sum1 = sum(list1)  # 用sum做消費加總
+avg1 = sum1 / len(list1)  # 用len取消費筆數
+sum2 = sum(list2)  # 用sum做消費加總
+avg2 = sum2 / len(list2)  # 用len取消費筆數
 
 print(sum1)
 print(avg1)
+print(sum2)
+print(avg2)
 
 print("------------------------------------------------------------")  # 60個
 
-n = 20  # 設定進度條總長
+n = 10  # 設定進度條總長
 for i in range(n + 1):
     print(f'\r[{"█"*i}{" "*(n-i)}] {i*100/n}%', end="")  # 輸出不換行的內容
-    time.sleep(0.5)
+    time.sleep(0.05)
 
 
 print("------------------------------------------------------------")  # 60個
 
-h = float(input("請輸入身高(cm)：")) / 100
-w = float(input("請輸入體重(kg)："))
-bmi = round(w / (h * h), 3)  # 使用 round 四捨五入到小數點三位
-
-
-print("------------------------------------------------------------")  # 60個
-
+print('字串的處理')
 
 print("分割字串")
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
@@ -4403,24 +4104,9 @@ print(len(ss))
 for _ in ss:
     print(_)
 
-
-players = ["X", "O"]
-current_player = players[0]
-current_player = players[(players.index(current_player) + 1) % 2]
-print(current_player)
-current_player = players[(players.index(current_player) + 1) % 2]
-print(current_player)
-current_player = players[(players.index(current_player) + 1) % 2]
-print(current_player)
-current_player = players[(players.index(current_player) + 1) % 2]
-print(current_player)
-current_player = players[(players.index(current_player) + 1) % 2]
-print(current_player)
-
 print("------------------------------------------------------------")  # 60個
 
 print("測試不定引數的函式")
-
 
 # 定義函式
 def funtionTest(*number):
@@ -4429,7 +4115,6 @@ def funtionTest(*number):
     for item in number:
         outcome *= item
     return outcome
-
 
 # 呼叫函式
 print("呼叫函式並傳入 1 個引數 :", funtionTest(7))
@@ -4476,23 +4161,54 @@ if m1 and m2:
 
 print("------------------------------------------------------------")  # 60個
 
+import string
 
 # 北美獨立宣言
-str1 = (
+text = (
+    "Resolved: That these United Colonies are, and of right ought to be, "
+    + "free and independent States, that they are absolved from all allegiance "
+    + "to the British Crown, and that all political connection between them and "
+    + "the State of Great Britain is, and ought to be, totally dissolved."
+)
+# 先一律轉小寫
+str2 = text.lower()
+
+charSet = set(string.ascii_lowercase)
+freqDict = {}
+for ch in str2:
+    # 判斷如果不在ASCII小寫字母集，則略過
+    if not ch in charSet:
+        continue
+    freqDict[ch] = freqDict.get(ch, 0) + 1
+
+print(freqDict)
+
+print("------------------------------------------------------------")  # 60個
+
+print('字串的處理')
+
+# 北美獨立宣言
+text = (
     "Resolved: That these United Colonies are, and of right ought to be, "
     + "free and independent States, that they are absolved from all allegiance "
     + "to the British Crown, and that all political connection between them and "
     + "the State of Great Britain is, and ought to be, totally dissolved."
 )
 
+print(text)
+
+print('依以下符號split字串')
+
 seplist = [":", ",", "."]
 for i in range(len(seplist) - 1):
-    str1 = str1.replace(seplist[i], seplist[-1])
+    text = text.replace(seplist[i], seplist[-1])
 
-slist = str1.split(seplist[-1])
+slist = text.split(seplist[-1])
+print(slist)
 
 with open("tmp_resolution.txt", "wt") as outf:
     for s in slist:
+        outf.write("-------------------------\n")
         outf.write(s.strip() + "\n")
 
 print("------------------------------------------------------------")  # 60個
@@ -4539,46 +4255,47 @@ outf.close()
 
 print("------------------------------------------------------------")  # 60個
 
+print('字串的處理')
 
-str1 = "welcome to python"
+text = "welcome to python"
 
-print("str1 = " + str1)
-b = str1.endswith("thon")
-print("str1.endswith('thon') = " + str(b))
-b = str1.startswith("hello")
-print("str1.startswith('hello') = " + str(b))
-b = str1.count("o")
-print("str1.count('o') = " + str(b))
-b = str1.find("come")
-print("str1.find('come') = " + str(b))
-b = str1.find("become")
-print("str1.find('become') = " + str(b))
-b = str1.find("o")
-print("str1.find('o') = " + str(b))
-b = str1.find("e")
-print("str1.find('e') = " + str(b))
-b = str1.rfind("o")
-print("str1.rfind('o') = " + str(b))
-b = str1.rfind("e")
-print("str1.rfind('e') = " + str(b))
+print("text = " + text)
+b = text.endswith("thon")
+print("text.endswith('thon') = " + str(b))
+b = text.startswith("hello")
+print("text.startswith('hello') = " + str(b))
+b = text.count("o")
+print("text.count('o') = " + str(b))
+b = text.find("come")
+print("text.find('come') = " + str(b))
+b = text.find("become")
+print("text.find('become') = " + str(b))
+b = text.find("o")
+print("text.find('o') = " + str(b))
+b = text.find("e")
+print("text.find('e') = " + str(b))
+b = text.rfind("o")
+print("text.rfind('o') = " + str(b))
+b = text.rfind("e")
+print("text.rfind('e') = " + str(b))
 
 print("------------------------------------------------------------")  # 60個
 
-str1 = "welcome to python"
+text = "welcome to python"
 
-print("str1 = " + str1)
+print("text = " + text)
 str2 = "Welcome to Python"
 print("str2 = " + str2)
 str3 = "This is a test."
 print("str3 = " + str3)
-s = str1.capitalize()
-print("str1.capitalize() = " + s)
+s = text.capitalize()
+print("text.capitalize() = " + s)
 s = str2.lower()
 print("str2.lower() = " + s)
-s = str1.upper()
-print("str1.upper() = " + s)
-s = str1.title()
-print("str1.title() = " + s)
+s = text.upper()
+print("text.upper() = " + s)
+s = text.title()
+print("text.title() = " + s)
 s = str2.swapcase()
 print("str2.swapcase() = " + s)
 s = str3.replace("is", "was")
@@ -4586,8 +4303,8 @@ print("str3.replace('is', 'was') = " + s)
 
 print("------------------------------------------------------------")  # 60個
 
-str1 = "This is a book."
-list1 = str1.split()
+text = "This is a book."
+list1 = text.split()
 print(list1)
 str2 = "Tom,Bob,Mary,Joe"
 list2 = str2.split(",")
@@ -4598,14 +4315,38 @@ print(list3)
 str4 = "23\n12\n45\n56"
 list4 = str4.split("\n")
 print(list4)
+
 print("------------------------------------------------------------")  # 60個
 
-str1 = "-"
+text = "-"
 list1 = ["This", "is", "a", "book."]
-print(str1.join(list1))
+print(text.join(list1))
 
 
 print("------------------------------------------------------------")  # 60個
+
+print('使用 round 四捨五入到小數點三位')
+cc = 1234.56789
+print('原數字 :', cc)
+cc = round(cc, 3)
+print('處理後 :', cc)
+
+print("------------------------------------------------------------")  # 60個
+
+b1 = 1
+b2 = 3
+print(f"{b1} / {b2} = {round(b1/b2,3)}")  # 使用 round 四捨五入到小數點三位
+print(f"{b2} / {b1} = {round(b2/b1,3)}")
+
+print("------------------------------------------------------------")  # 60個
+
+v4 = int("11", 16)  # 17, base 16
+print(v4)
+v8 = float("2.7E-2")  # 0.027
+print(v8)
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -4629,3 +4370,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+

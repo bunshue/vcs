@@ -172,9 +172,6 @@ plt.axis("equal")  # 軸比例
 # 第三張圖
 plt.subplot(233)
 
-# Fixing random state for reproducibility
-np.random.seed(19680801)
-
 N = 50
 x = np.random.rand(N)
 y = np.random.rand(N)

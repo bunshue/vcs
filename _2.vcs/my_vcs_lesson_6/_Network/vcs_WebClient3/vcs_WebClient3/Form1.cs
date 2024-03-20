@@ -411,6 +411,10 @@ namespace vcs_WebClient3
 
         private void button13_Click(object sender, EventArgs e)
         {
+            WebClient webClient = new WebClient();
+            string publicIp = webClient.DownloadString("https://api.ipify.org");
+            richTextBox1.Text += "My public IP Address is: " + publicIp + "\n";
+            Console.WriteLine("My public IP Address is: {0}", publicIp);
 
         }
 

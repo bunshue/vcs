@@ -33,13 +33,24 @@ print('------------------------------------------------------------')	#60個
 
 print('顯示原圖')
 
-image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
-plt.imshow(image1)
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+#建立Pillow物件 PIL讀取本機圖片, RGB模式, 存成PIL影像格式
+img = Image.open(filename)
+#img = img.convert('L')  #fail
+print(type(img))
+plt.figure('Image')
+plt.imshow(img)
+plt.show()
+
+#PIL影像格式轉化為numpy陣列
+img=np.array(img)
+print(type(img))
+plt.figure('Image')
+plt.imshow(img)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-
 
 """
 圖像中的像素訪問
@@ -53,10 +64,6 @@ pip install scipy
 
 """
 
-img=np.array(Image.open(filename))  #打開圖像并轉化為數字矩陣
-plt.figure('Peony')
-plt.imshow(img)
-plt.show()
 
 """
 
@@ -68,7 +75,7 @@ img[i,j,k]
 
 來訪問像素值。
 
-例1：打開圖片，并隨機添加一些椒鹽噪聲
+例1：打開圖片，並隨機添加一些椒鹽噪聲
 """
 
 img=np.array(Image.open(filename))
@@ -85,10 +92,18 @@ plt.imshow(img)
 plt.title('椒鹽效果')
 plt.show()
 
-#例2：將lena圖像二值化，像素值大于 threshold 的變為1，否則變為0
+print('將圖像二值化，像素值大于 threshold 的變為1，否則變為0')
 
 img=np.array(Image.open(filename).convert('L'))
 
+""" QQQ
+plt.imshow(img)
+plt.title('LLLL')
+plt.show()
+"""
+
+print('圖像二值化, 要灰階圖像')
+      
 threshold=128
 
 rows,cols=img.shape
@@ -144,7 +159,7 @@ gray_image = image.convert('L')
 #3. 偽色彩處理
 
 #偽色彩處理可以通過將灰度值映射到彩色值來實現。通常，我們使用一個顏色映射表（Color Map）來定義灰度和彩色之間的映射關系。
-#在Python中，可以使用matplotlib庫來生成顏色映射表并將灰度圖像轉換為彩色圖像。
+#在Python中，可以使用matplotlib庫來生成顏色映射表並將灰度圖像轉換為彩色圖像。
 
 # 定義顏色映射表
 cmap = plt.get_cmap('jet')
@@ -982,8 +997,6 @@ print('你已點擊:', x)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-'''
 
 
 

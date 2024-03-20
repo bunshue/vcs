@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from numpy import *
 import sys,os
 from pca import *

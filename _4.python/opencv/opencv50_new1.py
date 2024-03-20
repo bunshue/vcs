@@ -19,7 +19,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
-'''
+
 filename1 = 'C:/_git/vcs/_4.python/_data/picture_mix1.bmp'
 filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
 
@@ -519,7 +519,7 @@ plt.imshow(cv2.cvtColor(otsu, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-'''
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 
 print('原圖 彩色')
@@ -1263,10 +1263,6 @@ opencv 預設的排列方式為BGR，而不是RGB
 以下就來示範如何找出圖片中綠色的水果，類似的應用可能有找出草地的背景，
 
 """
-
-import cv2
-import numpy as np
-
 image = cv2.imread('data/fruit.jpg')
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
@@ -1289,11 +1285,39 @@ plt.title('抓出綠色的部分')
 
 plt.show()
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
+def salt_pepper_noise(image, fraction, salt_vs_pepper):
+    img = np.copy(image)
+    size = img.size
+    num_salt = np.ceil(fraction * size * salt_vs_pepper).astype('int')
+    num_pepper = np.ceil(fraction * size * (1 - salt_vs_pepper)).astype('int')
+    row, column = img.shape
+
+    # 隨機的座標點
+    x = np.random.randint(0, column - 1, num_pepper)
+    y = np.random.randint(0, row - 1, num_pepper)
+    img[y, x] = 0   # 撒上胡椒
+
+    # 隨機的座標點
+    x = np.random.randint(0, column - 1, num_salt)
+    y = np.random.randint(0, row - 1, num_salt)
+    img[y, x] = 255 # 撒上鹽
+    return img
+
+fraction = 0.1        # 雜訊佔圖的比例
+salt_vs_pepper = 0.5  # 鹽與胡椒的比例
+
+filename = 'C:/_git/vcs/_4.python/_data/tiger.jpg'
+img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+noisy = salt_pepper_noise(img, fraction, salt_vs_pepper)
+
+plt.imshow(cv2.cvtColor(noisy, cv2.COLOR_BGR2RGB))
+plt.title('胡椒(黑)鹽(白)效果')
+
+plt.show()
+
+#黑點就好比胡椒，白點就像是鹽，這種加上雜訊的方式，就稱為椒鹽雜訊（Salt & Pepper Noise）
 
 print('------------------------------------------------------------')	#60個
 

@@ -157,7 +157,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-#通道分離與合并
+#通道分離與合併
 
 image=Image.open(filename)  #打開圖像, 彩色
 print(image.size)
@@ -179,7 +179,13 @@ plt.imshow(image)
 plt.subplot(2,3,2)
 plt.title('灰階')
 plt.imshow(gray_image,cmap='gray')
+print(gray_image.size)
 
+"""
+r,g,b=gray_image.split()   #分離三通道
+gray_image = Image.merge('RGB',(r,g,b)) #合併三通道
+plt.imshow(gray_image)
+"""
 plt.subplot(2,3,3)
 plt.title('合併三通道')
 plt.imshow(pic)
@@ -197,6 +203,9 @@ plt.title('B通道')
 plt.imshow(b,cmap='gray')
 
 plt.show()
+
+
+sys.exit()
 
 
 

@@ -29,8 +29,6 @@ import io
 
 
 def your_matplotlib_code():
-    # Fixing random state for reproducibility
-    np.random.seed(19680801)
 
     dt = 0.0005
     t = np.arange(0.0, 20.0, dt)

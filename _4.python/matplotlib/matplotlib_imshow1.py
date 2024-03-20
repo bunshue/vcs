@@ -270,9 +270,6 @@ plt.imshow(pict)
 
 # Subplots spacings and margins
 
-# Fixing random state for reproducibility
-np.random.seed(19680801)
-
 # 第四張圖
 plt.subplot(234)
 plt.imshow(np.random.random((100, 100)))

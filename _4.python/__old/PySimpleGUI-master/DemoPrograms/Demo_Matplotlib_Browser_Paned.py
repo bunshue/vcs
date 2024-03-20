@@ -275,7 +275,7 @@ def PyplotLinePolyCollection():
     spiral = np.column_stack([xx, yy])
 
     # Fixing random state for reproducibility
-    rs = np.random.RandomState(19680801)
+    rs = np.random.RandomState(1234546789)
 
     # Make some offsets
     xyo = rs.randn(npts, 2)
@@ -369,9 +369,6 @@ def PyplotGGPlotSytleSheet():
 
     plt.style.use('ggplot')
 
-    # Fixing random state for reproducibility
-    np.random.seed(19680801)
-
     fig, axes = plt.subplots(ncols=2, nrows=2)
     ax1, ax2, ax3, ax4 = axes.ravel()
 
@@ -411,9 +408,6 @@ def PyplotGGPlotSytleSheet():
 def PyplotBoxPlot():
     import numpy as np
     import matplotlib.pyplot as plt
-
-    # Fixing random state for reproducibility
-    np.random.seed(19680801)
 
     # fake up some data
     spread = np.random.rand(50) * 100
@@ -693,9 +687,6 @@ def UnicodeMinus():
     import matplotlib
     import matplotlib.pyplot as plt
 
-    # Fixing random state for reproducibility
-    np.random.seed(19680801)
-
     matplotlib.rcParams['axes.unicode_minus'] = False
     fig, ax = plt.subplots()
     ax.plot(10 * np.random.randn(100), 10 * np.random.randn(100), 'o')
@@ -739,9 +730,6 @@ def PyplotScales():
     import matplotlib.pyplot as plt
 
     from matplotlib.ticker import NullFormatter  # useful for `logit` scale
-
-    # Fixing random state for reproducibility
-    np.random.seed(19680801)
 
     # make up some data in the interval ]0, 1[
     y = np.random.normal(loc=0.5, scale=0.4, size=1000)

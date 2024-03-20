@@ -204,6 +204,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(130, 50);
             this.button13.TabIndex = 22;
+            this.button13.Text = "ipify";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
