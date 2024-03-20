@@ -3,6 +3,9 @@ import time
 from datetime import datetime
 
 
+xml_filename = r'C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml'
+
+
 def face_add(img):
     print('稍後在此加入新增人員功能')
 #-----------------------------------#
@@ -15,8 +18,7 @@ def face_who(img):
 
 def face_shot(function):
     isCnt = False       # 用來判斷是否正在進行倒數計時中
-    face_detector = cv2.CascadeClassifier(
-        'haarcascade_frontalface_default.xml')  # 建立臉部辨識物件
+    face_detector = cv2.CascadeClassifier(xml_filename)  # 建立臉部辨識物件
     capture = cv2.VideoCapture(0)                   # 開啟編號 0 的攝影機
     while capture.isOpened():                      # 判斷攝影機是否開啟成功
         sucess, img = capture.read()            # 讀取攝影機影像

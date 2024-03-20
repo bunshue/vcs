@@ -3,9 +3,9 @@ import numpy as np
 import cv2 as cv
 
 # 設定 Haar 分類器檔案路徑
-cascade_path = "C:/Users/Admin/AppData/Local/Programs/Python/Python310/Lib/site-packages/cv2/data/"
-face_detector = cv.CascadeClassifier(cascade_path +
-                                    'haarcascade_frontalface_default.xml')
+xml_filename = r'C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml'
+
+face_detector = cv.CascadeClassifier(xml_filename)
 
 #train_path = './trainer' # 若使用的是你的臉，請取消註解
 train_path = './demming_trainer' # 使用提供的 Demming 臉部影像

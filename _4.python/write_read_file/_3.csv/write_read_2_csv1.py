@@ -16,7 +16,7 @@ import numpy as np
 #先寫後讀
 
 print('------------------------------------------------------------')	#60個
-'''
+
 print("寫入CSV檔 1 writer")
 
 filename = 'tmp_animals1.csv'
@@ -71,19 +71,18 @@ with open(filename, 'w', newline = '') as csvfile:
     writer.writerow({'中文名': "豬", '英文名': "pig", '體重': 42, '全名': "佩佩豬"})
 
 print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
-'''
+
 print('------------------------------------------------------------')	#60個
 
+import random
 print("寫入CSV檔 3a 一維串列資料 一次寫入")
 
-filename = 'tmp_score1000.csv'
+filename = 'tmp_1d_array.csv'
 
-# 建立csv一維串列資料 TBD
+# 建立csv一維串列資料
 
-mu, sigma = 100, 15
-N = 100
-csvtable = np.random.normal(mu, sigma, size=N)  # 隨機數
-
+print("一維 串列")
+animals = ["鼠", "牛", "虎", "兔", "龍"]  # 串列
 
 # 開啟輸出的 csv 檔案
 #with open(filename, 'w', encoding='utf-8', newline='') as csvfile:
@@ -92,11 +91,9 @@ with open(filename, 'w', newline = '') as csvfile:
     writer = csv.writer(csvfile)
 
     # 寫入一維串列資料
-    writer.writerows(np.array(csvtable))
+    writer.writerows(np.array(animals))
 
 print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
-
-sys.exit()
 
 print("寫入CSV檔 3b 二維串列資料 一次寫入")
 

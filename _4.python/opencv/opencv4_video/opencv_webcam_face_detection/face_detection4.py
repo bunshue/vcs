@@ -1,8 +1,15 @@
+"""
+
+webcam臉部偵測
+
+"""
+
+xml_filename = r'C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml'
+
 import cv2
 
 # 建立臉部辨識物件
-face_detector = cv2.CascadeClassifier(
-    'haarcascade_frontalface_default.xml')
+face_detector = cv2.CascadeClassifier(xml_filename)
 capture = cv2.VideoCapture(0)                   # 開啟標號 0 的攝影機
 while capture.isOpened():
     sucess, img = capture.read()            # 讀取攝影機影像
@@ -23,3 +30,4 @@ while capture.isOpened():
         break
 else:
     print('開啟攝影機失敗')
+

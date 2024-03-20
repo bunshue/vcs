@@ -3,6 +3,8 @@ import pyttsx3
 import cv2 as cv
 from playsound import playsound
 
+xml_filename = r'C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml'
+
 # 設定音訊
 engine = pyttsx3.init()
 engine.setProperty('rate', 145) # 設定語速
@@ -13,9 +15,7 @@ root_dir = os.path.abspath('.')
 tone_path = os.path.join(root_dir, 'tone.wav')
 
 # 設定 Haar 分類器檔案路徑
-path = "C:/Users/Admin/AppData/Local/Programs/Python/Python310/Lib/site-packages/cv2/data/"
-face_detector = cv.CascadeClassifier(path +
-                                     'haarcascade_frontalface_default.xml')
+face_detector = cv.CascadeClassifier(xml_filename)
 
 # 打開視訊鏡頭
 cap = cv.VideoCapture(0)
