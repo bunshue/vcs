@@ -20,18 +20,12 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
 #實例化8位圖
 image_empty = np.zeros((480, 640), dtype = np.uint8)   #依照原圖大小建立一個圖像的二維陣列
 plt.title('空圖, 全黑')
 plt.imshow(cv2.cvtColor(image_empty, cv2.COLOR_BGR2RGB))    #顯示圖片   #空圖, 全黑
 
 plt.show()
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -94,20 +88,17 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+print('建立一個random圖像')
 
-print('OpenCV建立檔案 256X256之紅圖')
-img_size = 256
-img = np.array([[(0, 0, 255) for x in range(img_size)] for x in range(img_size)])
-cv2.imshow('Sample pic 2', img)
-#cv2.imwrite(r'sample_222.jpg', img)
+W = 30
+H = 20
 
-print('------------------------------------------------------------')	#60個
+image = np.random.choice([0, 50,100,150,200,255], size = W * H).reshape(H, W).astype(np.uint8)
 
-print('OpenCV建立檔案')
-img_size = 256
-img = np.array( [[(x, int((x + y) / 2), y) for x in range(img_size)] for y in range(img_size)])
-cv2.imshow('Sample pic 3', img)
-#cv2.imwrite(r'sample_333.jpg', img)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
 
 print('------------------------------------------------------------')	#60個
 

@@ -228,8 +228,7 @@ for i in range(N):
 # 建立 N 個 1-6(含) 的整數隨機數 same
 #dice = np.random.randint(1, sides + 1, size=N)  # 建立隨機數
 
-cc = plt.hist(dice, bins=6, rwidth=0.5, cumulative=False)  # 繪製hist圖
-
+cc = plt.hist(dice, bins=6, rwidth=0.5, cumulative=False, alpha=0.3)  # 繪製hist圖
 print("bins的y軸 ", cc[0])
 print("bins的x軸 ", cc[1])
 plt.ylabel("次數")
@@ -238,12 +237,11 @@ plt.title("測試 10000 次 不累積統計")
 # 第二張圖
 plt.subplot(232)
 
-print("改了 累積統計")
+print("資料同上, 改了 累積統計")
 
-h = plt.hist(dice, bins=6, rwidth=0.5, cumulative=True)  # 繪製hist圖
-
-print("bins的y軸 ", h[0])
-print("bins的x軸 ", h[1])
+cc = plt.hist(dice, bins=6, rwidth=0.5, cumulative=True, alpha=0.3)  # 繪製hist圖
+print("bins的y軸 ", cc[0])
+print("bins的x軸 ", cc[1])
 plt.ylabel("次數")
 plt.title("測試 10000 次, 累積統計")
 
@@ -256,8 +254,11 @@ d2 = np.random.randint(1, 6 + 1, N)
 
 dsums = d1 + d2
 
-# count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5, density=True)   #以密度表示
-count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5)  # 以總數表示
+#以密度表示
+# count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5, density=True)
+
+#以總數表示
+count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5)
 
 plt.xlabel("兩個骰子和")
 # plt.ylabel("密度")   #density = True

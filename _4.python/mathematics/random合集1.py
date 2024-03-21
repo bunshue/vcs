@@ -108,8 +108,6 @@ print('取出 1 ~ 6 之間的整數')
 num = random.randint(1, 6)
 print("你擲的骰子點數為：" + str(num))
 
-
-
 print('------------------------------------------------------------')	#60個
 
 for i in range(5):
@@ -214,9 +212,6 @@ datacount = random.randint(16, 64) * 1024 + random.randint(1, 1024)
 
 ddd = random.random() * random.randint(-1000, 1000)
 print(ddd)
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -515,7 +510,6 @@ animals = ['鼠', '牛', '虎', '兔', '龍']
 print(random.sample(animals, 3))
 print(random.sample(animals, 3))
 
-
 list1 = random.sample(range(1,50), 7)
 special = list1.pop()
 list1.sort()
@@ -578,11 +572,6 @@ print("本期大樂透中獎號碼為：", lottery_numbers)
 
 print("------------------------------------------------------------")  # 60個
 
-name = ["小明", "小黃", "小紅", "小綠", "小白"]
-print("抽取三個元素：", random.sample(name, 3))
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print('--- random.sample SP ---------------------------------------------------------')	#60個
@@ -598,13 +587,8 @@ print(d)
 
 print('------------------------------------------------------------')	#60個
 
-listPcCard = [["青眼白龍", 20], ["紅髮女妖", 11], ["白骷髏王", 9], ["碧眼狐怪", 12]]
-random.shuffle(listPcCard)
-
-print('------------------------------------------------------------')	#60個
-
-ANIMALS = '鼠牛虎兔龍蛇馬'
-animalList = list(ANIMALS) #字串 轉 串列
+animals = '鼠牛虎兔龍蛇馬'
+animalList = list(animals) #字串 轉 串列
 print(type(animalList))
 print(animalList)
 
@@ -614,8 +598,8 @@ for i in range(5):
 
 print('------------------------------------------------------------')	#60個
 
-ANIMALS = '鼠牛虎兔龍蛇馬'
-animalList = list(ANIMALS) #字串 轉 串列
+animals = '鼠牛虎兔龍蛇馬'
+animalList = list(animals) #字串 轉 串列
 print('原串列')
 print(animalList)
 print('次序打散')
@@ -662,44 +646,20 @@ print(items)#將洗牌後的序列輸出
 
 print('------------------------------------------------------------')	#60個
 
-name = ["小明", "小黃", "小紅", "小綠", "小白"]
-print("抽取三個元素：", random.shuffle(name))
+# shuffle 將list內的元素次序打亂重新排列
 
-print('------------------------------------------------------------')	#60個
+animals = ['鼠', '牛', '虎', '兔', '龍']
+print("原串列：", animals)
 
-items = ['a','b','c','d']
-random.shuffle(items) #將items序列打亂
-print( items )
+random.shuffle(animals)
+print("新串列：", animals)
 
 print("------------------------------------------------------------")  # 60個
 
-#給定items數列的初始值
-word = ['apple','bird','tiger','happy','quick']
-random.shuffle(word)  #使用shuffle函數打亂字的順序
-print(word)#將打亂後字依序輸出
+name = ["小明", "小黃", "小紅", "小綠", "小白"]
 
-print('------------------------------------------------------------')	#60個
-
-porker = ['2', '3', '4', '5', '6', '7', '8',
-          '9', '10', 'J', 'Q', 'K', 'A']
-for i in range(3):
-    random.shuffle(porker)          # 將次序打亂重新排列
-    print(porker)
-
-print('------------------------------------------------------------')	#60個
-
-
-fruits = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
-#data = [F(1, 7), F(2, 7), F(3, 7), F(4, 7), F(5, 7), F(6, 7)]
-#assert len(fruits)%2 == 0
-print(fruits)
-random.shuffle(fruits)
-print(fruits)
-
-print('------------------------------------------------------------')	#60個
-
-data = [0, 1, 2, 3, 3, 3, 4, 5, 5, 6, 7, 7, 7, 7, 8, 9]
-random.shuffle(data)
+print("抽取一個元素：", random.choice(name))
+print("抽取三個元素：", random.sample(name, 3))
 
 print('------------------------------------------------------------')	#60個
 
@@ -768,10 +728,6 @@ print(e)
 # random.weibullvariate(alpha, beta)
 
 # 參考：https://docs.python.org/zh-cn/3/library/random.html#random.random
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1048,8 +1004,6 @@ for _ in range(n):
 
 print("------------------------------------------------------------")  # 60個
 
-import random           # 導入模組random
-
 n = 3
 for i in range(n):
     print("1-100     : ", random.randint(1, 100))
@@ -1062,43 +1016,15 @@ for i in range(n):
 
 print("------------------------------------------------------------")  # 60個
 
-import random                       # 導入模組random
-
-min, max = 1, 100                   # 隨機數最小與最大值設定
-num = random.randint(min, max)  # 產生是否讓玩家答對的隨機數
-print(num)
+animals = ['鼠', '牛', '虎', '兔', '龍']
+print(random.choice(animals))
 
 print("------------------------------------------------------------")  # 60個
 
-import random                       # 導入模組random
-
-fruits = ['蘋果', '香蕉', '西瓜', '水蜜桃', '百香果']
-print(random.choice(fruits))
-
-print("------------------------------------------------------------")  # 60個
-
-import random                       # 導入模組random
-
-porker = ['2', '3', '4', '5', '6', '7', '8',
-          '9', '10', 'J', 'Q', 'K', 'A']
-random.shuffle(porker)              # 將次序打亂重新排列
-print(porker)
-
-print("------------------------------------------------------------")  # 60個
-
-import random                       # 導入模組random
-
-min, max = 1, 10
-ans = random.randint(min, max)      # 隨機數產生答案
-print(ans)
-
-print("------------------------------------------------------------")  # 60個
-
+"""
 for _ in range(10):
     aa = random.randint(1,10)
     print(aa)
-
-import random
 
 val=0
 data=[0]*80
@@ -1118,33 +1044,15 @@ for i in range(10):
     for j in range(8):
         print('%2d[%3d]  ' %(i*8+j+1,data[i*8+j]),end='')
     print('')
-
+"""
 print("------------------------------------------------------------")  # 60個
-
-import random
-name = ["小明", "小黃", "小紅", "小綠", "小白"]
-
-print("抽取一個元素：", random.choice(name))
-
-print("抽取三個元素：", random.sample(name, 3))
-
-print("抽取三個元素：", random.shuffle(name))
-
-print("------------------------------------------------------------")  # 60個
-
-import random
 
 print("任一整數", random.randrange(100))
-
 print("任一整數", random.randrange(52, 100))
-
 print("奇數", random.randrange(1, 100, 2))
-
 print("偶數", random.randrange(0, 100, 2))
 
 print("------------------------------------------------------------")  # 60個
-
-import random
 
 for i in range(5):
     a = random.randint(1,10) #隨機取得整數
@@ -1154,8 +1062,6 @@ print()
 word = ['apple','bird','tiger','happy','quick']
 random.shuffle(word)  #使用shuffle函數打亂字的順序
 print(word)#將打亂後字依序輸出
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1248,12 +1154,9 @@ for i in range(numberOfDice, (numberOfDice * 6) + 1):
 
 print("------------------------------------------------------------")  # 60個
 
-
 # 能計算時間長度的產生器
 
 import time
-import random
-
 
 def elapsed_time_gen():
     last_time = time.perf_counter()
@@ -1301,9 +1204,6 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
-
-import random  # 引用random亂數套件
-
 #  將 1~49 的整數放入num串列中
 num = []
 for i in range(49):
@@ -1324,8 +1224,6 @@ print("------------------------------------------------------------")  # 60個
 
 # 自訂密碼產生器
 
-import random
-
 def set_password_source(source):
     def password_gen(length):
         output = []
@@ -1340,35 +1238,19 @@ print(my_password_gen(10))
 
 print("------------------------------------------------------------")  # 60個
 
-
-import random
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import random
-
 a = set()  # 建立空集合
 while len(a) < 6:  # 使用 while 迴圈，直到集合的長度等於 6 就停止
     b = random.randint(1, 49)  # 取出 1～49 得隨機整數
     a.add(b)  # 將隨機數加入集合
 print(a)  # {34, 41, 48, 49, 19, 30}
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-import random
 
 a = random.sample(range(1, 50), 6)
 # 從包含 1～49 數字的串列中，取出六個不重複的數字變成串列
 print(a)  # [9, 39, 10, 8, 25, 43]
 
 """
-import random
-
 a = random.randint(1, 99)  # 產生 1～99 的隨機整數
 b = int(input("輸入 1～99 的數字："))  # 讓使用者輸入數字，使用 int 轉換成數字
 while a != b:  # 使用 while 迴圈，如果 a 不等於 b，就不斷繼續
@@ -1381,8 +1263,6 @@ print("答對囉！")  # 如果 b=a 會停止 while 迴圈，顯示正確答案
 
 print("------------------------------------------------------------")  # 60個
 """
-import random
-
 answer = random.sample(range(1, 10), 4)
 print(answer)
 a = b = n = 0  # 設定 a、b、n 三個變數，預設值 0
@@ -1404,9 +1284,6 @@ print("答對了！")
 print("------------------------------------------------------------")  # 60個
 
 """
-import random
-import time  # import time 模組
-
 answer = random.sample(range(1, 10), 4)
 print(answer)
 a = b = n = 0
@@ -1430,8 +1307,6 @@ print(f"答對了！總共猜了 {num} 次，用了 {t} 秒")  # 印出對應的
 """
 
 print("------------------------------------------------------------")  # 60個
-
-import random
 
 local_table = {
     "A": 10,

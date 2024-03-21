@@ -11,16 +11,10 @@ pip install Pillow
 
 print('------------------------------------------------------------')	#60個
 
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-print('------------------------------------------------------------')	#60個
-
 import os
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from PIL import Image   # Importing Image class from PIL module
 
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 #設定中文字型及負號正確顯示
@@ -31,9 +25,13 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
-print('顯示原圖')
+from PIL import Image   # Importing Image class from PIL module
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+print('------------------------------------------------------------')	#60個
+
+print('顯示原圖')
 
 #建立Pillow物件 PIL讀取本機圖片, RGB模式, 存成PIL影像格式
 img = Image.open(filename)
@@ -916,7 +914,6 @@ print(transimg(img_path))
 
 print("------------------------------------------------------------")  # 60個
 
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
 from PIL import Image, ImageFilter
@@ -936,8 +933,6 @@ img2 = img1.point(lambda x: 0 if x < 128 else 255)
 img2.save(open('tmp_elephant_binary.png', 'wb'))
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -948,42 +943,13 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-print("------------------------------------------------------------")  # 60個
-
-
-'''
 print('------------------------------------------------------------')	#60個
 
-print('PIL之另存新檔')
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-infile = filename
-savefile = "tmp_savePNG1.png"
-
-img = Image.open(infile)      #載入圖片檔
-img.save(savefile, format="PNG")    #PNG轉存檔案
-
-image = Image.open(filename)
-image.save("tmp_pic_quality95.jpg", quality=95 )
-image.close()
-
-image = Image.open(filename)
-image.save('tmp_pic_normal.jpg')
-image.close()
 
 print("------------------------------------------------------------")  # 60個
 
 """
-
-#另存新檔
-image.save("tmp_pic_01.png")
-#image.show()
-img1.save("aaa.jpg")
-
-"""
-
-
-
 print("PIL_ginput")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
@@ -995,6 +961,7 @@ print('請點擊3個點')
 x = plt.ginput(3)
 print('你已點擊:', x)
 plt.show()
+"""
 
 print('------------------------------------------------------------')	#60個
 

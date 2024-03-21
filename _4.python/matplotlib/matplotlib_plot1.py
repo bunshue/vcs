@@ -16,7 +16,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="plot 集合 1 函數曲線",
+    num="plot 集合 1",
     figsize=(20, 15),
     dpi=84,
     facecolor="whitesmoke",
@@ -48,14 +48,14 @@ for cnt in range(3):
 # 第二張圖
 plt.subplot(232)
 
-x = np.linspace(0, 6.4, 200)  # x是numpy.ndarray格式
+x = np.linspace(0, 6.4, 100)  # x是numpy.ndarray格式
 
 A = 0.8  # 雜訊的振幅
-y = np.cos(x) + np.random.rand(1, len(x)) * A - A / 2  # 加入雜訊的點集    # y是numpy.ndarray格式
+y = np.sin(x) + np.random.rand(1, len(x)) * A - A / 2  # 加入雜訊的點集    # y是numpy.ndarray格式
 
 y = y.tolist()[0]  # y 由 numpy.ndarray格式 轉成list格式, 畫圖要用list格式
 
-plt.plot(x, np.cos(x))
+plt.plot(x, np.sin(x))
 plt.plot(x, y)
 
 plt.title("畫雜訊範例")
@@ -63,8 +63,27 @@ plt.title("畫雜訊範例")
 # 第三張圖
 plt.subplot(233)
 
-plt.plot(np.random.randn(100))
-plt.title("畫雜訊範例")
+print("繪製移動平均圖")
+
+import pandas as pd
+
+filename = "_data/python_ReadWrite_CSV6_temperature.csv"
+
+# 讀入氣溫資料
+dat = pd.read_csv(filename, encoding="UTF-8")
+
+n = len(dat)  # 資料筆數
+x = range(1, n + 1)  #  x軸的值（1～資料筆數）
+
+# 氣溫
+y = dat["平均氣溫"]  # y軸的值（平均氣溫）
+plt.plot(x, y)  # 繪圖
+
+# 區間大小:9 的移動平均
+v = np.ones(9) / 9.0
+y2 = np.convolve(y, v, mode="same")  # 計算移動平均
+plt.plot(x[4 : n - 4], y2[4 : n - 4])  # 繪圖
+
 
 # 第四張圖
 plt.subplot(234)
@@ -96,74 +115,6 @@ plt.axis("equal")  # 軸比例
 # 第六張圖
 plt.subplot(236)
 
-print("繪製移動平均圖")
-
-import pandas as pd
-
-filename = "_data/python_ReadWrite_CSV6_temperature.csv"
-
-# 讀入氣溫資料
-dat = pd.read_csv(filename, encoding="UTF-8")
-
-n = len(dat)  # 資料筆數
-x = range(1, n + 1)  #  x軸的值（1～資料筆數）
-
-# 氣溫
-y = dat["平均氣溫"]  # y軸的值（平均氣溫）
-plt.plot(x, y)  # 繪圖
-
-# 區間大小:9 的移動平均
-v = np.ones(9) / 9.0
-y2 = np.convolve(y, v, mode="same")  # 計算移動平均
-plt.plot(x[4 : n - 4], y2[4 : n - 4])  # 繪圖
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="plot 集合 2 函數曲線",
-    figsize=(20, 15),
-    dpi=84,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-
-# 第一張圖
-plt.subplot(231)
-
-
-x = np.linspace(-5, 5, 200)
-y = np.sinc(x)
-
-plt.plot(x, y)
-plt.plot(x[y > 0], y[y > 0], "o")
-
-# plt.axis('equal')       #軸比例
-# xmin, xmax, ymin, ymax = 0.5, 6.5, 15, 32.5
-# plt.axis([xmin, xmax, ymin, ymax])  #設定各軸顯示範圍
-# plt.axis([0.5, 6.5, 15, 35])
-# plt.axes([0.2, 0.2, 0.4, 0.4]) #設定各軸顯示範圍
-
-# 設定 x, y 軸座標範圍
-# plt.xlim(0, 30) # 設定 x 軸座標範圍
-# plt.ylim(0, 50) # 設定 y 軸座標範圍
-
-# plt.legend()
-
-print(plt.axis())
-
-# plt.grid(True)  #顯示格線
-plt.grid(color="0.8")  # 顯示格線
-
-
-# 第二張圖
-plt.subplot(232)
-
 # 畫個函數, 標出正的部份!
 # 把這個函數大於 0 的地方標示出來。
 
@@ -172,35 +123,18 @@ y = np.sinc(x)
 
 plt.plot(x, y)
 plt.plot(x[y > 0], y[y > 0], "o")
-# plt.scatter(x[y>0], y[y>0], c='r')
+#plt.scatter(x[y>0], y[y>0], c='r')
 
-# 第三張圖
-plt.subplot(233)
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
+print(plt.axis())
 
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-# plot 集合
-
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="plot 集合",
+    num="plot 集合 2",
     figsize=(20, 15),
     dpi=84,
     facecolor="whitesmoke",
@@ -289,11 +223,9 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# plot 集合
-
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="plot 集合",
+    num="plot 集合 3",
     figsize=(20, 15),
     dpi=84,
     facecolor="whitesmoke",
@@ -397,7 +329,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="plot 集合 1 函數曲線",
+    num="plot 集合 4",
     figsize=(20, 15),
     dpi=84,
     facecolor="whitesmoke",
@@ -428,7 +360,6 @@ y2 = a * x + b  # 切線的式子
 # 繪圖
 plt.plot(x, y)  # 原來的函數
 plt.plot(x, y2)  # 切線
-plt.grid(color="0.8")
 
 
 # 第二張圖
@@ -447,12 +378,10 @@ print(y)
 
 # 資料
 x = np.arange(-1.0, 1.01, 0.01)
-
 y = x**2
 
 # 繪圖
 plt.plot(x, y)  # 描繪折線
-plt.grid(color="0.8")  # 顯示格線
 
 
 # 第三張圖
@@ -469,7 +398,6 @@ x = np.arange(-10, 10, 0.1)
 # 原來的函數 f(x) = x**3 + 3x**2 + 3x + 1
 y = x**3 + 3 * x**2 + 3 * x + 1
 plt.plot(x, y)
-plt.grid(color="0.8")
 
 # 第四張圖
 plt.subplot(234)
@@ -477,7 +405,6 @@ plt.subplot(234)
 # 導函數 f'(x) = 3x**2 + 6x + 3
 y2 = 3 * x**2 + 6 * x + 3
 plt.plot(x, y2)
-plt.grid(color="0.8")
 
 # 第五張圖
 plt.subplot(235)
@@ -497,7 +424,6 @@ y = dat["年收入"]
 
 # 繪圖
 plt.plot(x, y)
-plt.grid(color="0.8")
 
 # 第六張圖
 plt.subplot(236)
@@ -514,7 +440,6 @@ for i in range(0, cnt - 1):
 
 # 繪圖
 plt.plot(x[1:], diff_y)
-plt.grid(color="0.8")
 
 
 plt.show()
@@ -523,7 +448,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="plot 集合 2 函數曲線",
+    num="plot 集合 5",
     figsize=(20, 15),
     dpi=84,
     facecolor="whitesmoke",

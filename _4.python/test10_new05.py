@@ -149,6 +149,79 @@ print("時間 :", entrySecond)
 
 print("------------------------------------------------------------")  # 60個
 
+print("檔案或資料夾存在 = ", os.path.exists('ch14'))
+print("檔案或資料夾存在 = ", os.path.exists('C:\\_git\\vcs\\_1.data\\______test_files3'))
+print("檔案或資料夾存在 = ", os.path.exists('ch14_4.py'))
+print(" --- ")
+
+print("是絕對路徑 = ", os.path.isabs('ch14_4.py'))
+print("是絕對路徑 = ", os.path.isabs('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
+print(" --- ")
+
+print("是資料夾 = ", os.path.isdir('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
+print("是資料夾 = ", os.path.isdir('C:\\_git\\vcs\\_1.data\\______test_files3'))
+print(" --- ")
+
+print("是檔案 = ", os.path.isfile('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
+print("是檔案 = ", os.path.isfile('C:\\_git\\vcs\\_1.data\\______test_files3'))
+
+print("------------------------------------------------------------")  # 60個
+
+newdir = 'C:\\_git\\vcs\\_1.data\\______test_files3'
+
+currentdir = os.getcwd()
+print("列出目前工作資料夾 ", currentdir)
+
+# 如果newdir不存在就建立此資料夾
+if os.path.exists(newdir):
+    print("已經存在 %s " % newdir)
+else:
+    os.mkdir(newdir)
+    print("建立 %s 資料夾成功" % newdir)
+
+# 將目前工作資料夾改至newdir
+os.chdir(newdir)
+print("列出最新工作資料夾 ", os.getcwd())
+
+# 將目前工作資料夾返回
+os.chdir(currentdir)
+print("列出返回工作資料夾 ", currentdir)
+
+print("------------------------------------------------------------")  # 60個
+
+files = ['ch14_1.py', 'ch14_2.py', 'ch14_3.py']
+for file in files:
+    print(os.path.join('C:\\_git\\vcs\\_1.data\\______test_files3', file))   
+
+print("------------------------------------------------------------")  # 60個
+
+import glob
+
+print("方法1:列出指定目錄的所有檔案")
+for file in glob.glob('C:\\_git\\vcs\\_1.data\\______test_files3\*.*'):
+    print(file)
+    
+print("方法2:列出目前工作目錄的特定檔案")
+for file in glob.glob('ch14_1*.py'):
+    print(file)
+    
+print("方法3:列出目前工作目錄的特定檔案")
+for file in glob.glob('ch14_2*.*'):
+    print(file)
+
+print("------------------------------------------------------------")  # 60個
+
+for dirName, sub_dirNames, fileNames in os.walk('oswalk'):
+    print("目前工作目錄名稱:   ", dirName)
+    print("目前子目錄名稱串列: ", sub_dirNames)
+    print("目前檔案名稱串列:   ", fileNames, "\n")
+
+print("------------------------------------------------------------")  # 60個
+
+msg = "CIA Mark told CIA Linda that the secret USB had given to CIA Peter"
+print("CIA最後出現位置: ", msg.rfind("CIA",0,len(msg)))
+print("CIA最後出現位置: ", msg.rfind("CIA"))
+
 
 print("------------------------------------------------------------")  # 60個
 
