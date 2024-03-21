@@ -17,8 +17,8 @@ print("------------------------------------------------------------")  # 60個
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 1",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(16, 9),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -135,8 +135,8 @@ print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 2",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(16, 9),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -226,8 +226,8 @@ print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 3",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(16, 9),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -330,8 +330,8 @@ print("------------------------------------------------------------")  # 60個
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 4",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(16, 9),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -449,8 +449,8 @@ print("------------------------------------------------------------")  # 60個
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 5",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(16, 9),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,

@@ -2,7 +2,7 @@ import os
 import sys
 import time
 import random
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print('enumerate 的用法')
@@ -221,10 +221,54 @@ print("------------------------------------------------------------")  # 60個
 msg = "CIA Mark told CIA Linda that the secret USB had given to CIA Peter"
 print("CIA最後出現位置: ", msg.rfind("CIA",0,len(msg)))
 print("CIA最後出現位置: ", msg.rfind("CIA"))
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+'''
+import re
+import requests
+import bs4
+
+# 馬丁路德 I have a dream
+url = 'http://www.analytictech.com/mb021/mlk.htm'
+page = requests.get(url)
+page.raise_for_status()
+soup = bs4.BeautifulSoup(page.text, 'html.parser')
+p_elems = [element.text for element in soup.find_all('p')]
+
+speech = ' '.join(p_elems)  # 將段落內容串在一起
+
+# 修正錯字、刪除多餘的空格、移除非字母內容
+speech = speech.replace(')mowing', 'knowing')
+speech = re.sub('\s+', ' ', speech) 
+speech_edit = re.sub('[^a-zA-Z]', ' ', speech)
+speech_edit = re.sub('\s+', ' ', speech_edit)
+
+print(speech_edit)
+'''
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 

@@ -785,6 +785,9 @@ namespace vcs_MyPdfReader
             openFileDialog1.InitialDirectory = current_directory_pdf;
             //openFileDialog1.InitialDirectory = @"D:\______C_data1\_______doc\doc1";
             openFileDialog1.Multiselect = false;    //單選
+            //openFileDialog1.Multiselect = true;     //多選
+            openFileDialog1.CheckFileExists = true;
+            openFileDialog1.ValidateNames = true;   //只接收有效的文件名
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
