@@ -137,53 +137,109 @@ plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 200, \sigma=25$")
 mu = 100  # 平均值
 sigma = 15  # 標準差
 mu, sigma = 100, 15
-x = np.random.normal(mu, sigma, size=N*10)  # 隨機數
+x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 # 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-#x = np.random.normal(size=N*10)
-#x = np.random.normal(size=N)
+# x = np.random.normal(size=N*10)
+# x = np.random.normal(size=N)
 
 
 # 第一張圖
 plt.subplot(231)
 
-cc = plt.hist(x, bins=num_bins, histtype="bar", facecolor="r", edgecolor="g", alpha=0.75, rwidth=0.8, label="Normal distribution")
-#print(type(cc))
-#print(cc)
+cc = plt.hist(
+    x,
+    bins=num_bins,
+    histtype="bar",
+    facecolor="r",
+    edgecolor="g",
+    alpha=0.75,
+    rwidth=0.8,
+    label="Normal distribution",
+)
+# print(type(cc))
+# print(cc)
 plt.title("histtype 1 : bar")
 
 # 第二張圖
 plt.subplot(232)
 
-cc = plt.hist(x, bins=num_bins, histtype="barstacked", facecolor="g", edgecolor="b", alpha=0.75, rwidth=0.8, label="Normal distribution")
+cc = plt.hist(
+    x,
+    bins=num_bins,
+    histtype="barstacked",
+    facecolor="g",
+    edgecolor="b",
+    alpha=0.75,
+    rwidth=0.8,
+    label="Normal distribution",
+)
 plt.title("histtype 2 : barstacked")
 
 # 第三張圖
 plt.subplot(233)
 
-cc = plt.hist(x, bins=num_bins, histtype="step", facecolor="c", edgecolor="r", alpha=0.75, rwidth=0.8, label="Normal distribution")
+cc = plt.hist(
+    x,
+    bins=num_bins,
+    histtype="step",
+    facecolor="c",
+    edgecolor="r",
+    alpha=0.75,
+    rwidth=0.8,
+    label="Normal distribution",
+)
 plt.title("histtype 3 : step + 多筆資料")
 
 mu, sigma = 80, 10
-x2 = np.random.normal(mu, sigma, size=N*10)  # 隨機數
+x2 = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 mu, sigma = 120, 10
-x3 = np.random.normal(mu, sigma, size=N*10)  # 隨機數
+x3 = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 
-cc = plt.hist(x2, bins=num_bins, histtype="step", facecolor="m", edgecolor="g", alpha=0.75, rwidth=0.8, label="Normal distribution")
-cc = plt.hist(x3, bins=num_bins, histtype="step", facecolor="y", edgecolor="b", alpha=0.75, rwidth=0.8, label="Normal distribution")
-#合寫, 但效果不對
-#cc = plt.hist([x2, x3], bins=num_bins, histtype="step", facecolor="y", edgecolor="b", alpha=0.75, rwidth=0.8, label="Normal distribution")
+cc = plt.hist(
+    x2,
+    bins=num_bins,
+    histtype="step",
+    facecolor="m",
+    edgecolor="g",
+    alpha=0.75,
+    rwidth=0.8,
+    label="Normal distribution",
+)
+cc = plt.hist(
+    x3,
+    bins=num_bins,
+    histtype="step",
+    facecolor="y",
+    edgecolor="b",
+    alpha=0.75,
+    rwidth=0.8,
+    label="Normal distribution",
+)
+# 合寫, 但效果不對
+# cc = plt.hist([x2, x3], bins=num_bins, histtype="step", facecolor="y", edgecolor="b", alpha=0.75, rwidth=0.8, label="Normal distribution")
 
 
 # 第四張圖
 plt.subplot(234)
-#縱軸不做正規化處理為數量，直條的間距填滿
-cc = plt.hist(x, bins=num_bins, histtype="stepfilled", facecolor="c", edgecolor="m", alpha=0.75, rwidth=0.8, label="Normal distribution")
+# 縱軸不做正規化處理為數量，直條的間距填滿
+cc = plt.hist(
+    x,
+    bins=num_bins,
+    histtype="stepfilled",
+    facecolor="c",
+    edgecolor="m",
+    alpha=0.75,
+    rwidth=0.8,
+    label="Normal distribution",
+)
 plt.title("histtype 4 : stepfilled")
 
 # 第五張圖
 plt.subplot(235)
 
-kwargs = dict(histtype="stepfilled", alpha=0.3, density=False, bins=num_bins//2, rwidth=0.8)
+kwargs = dict(
+    histtype="stepfilled", alpha=0.3, density=False, bins=num_bins // 2, rwidth=0.8
+)
 plt.hist(x, **kwargs)
 plt.title("以字典傳送參數")
 
@@ -191,10 +247,10 @@ plt.title("以字典傳送參數")
 # 第六張圖
 plt.subplot(236)
 
-#縱軸執行正規化處理表示為機率，直條的寬度大小為 80%
-#指定bins
+# 縱軸執行正規化處理表示為機率，直條的寬度大小為 80%
+# 指定bins
 bins = [50, 70, 85, 95, 100, 105, 115, 130, 150]
-#bins = range(0, 151, 10)
+# bins = range(0, 151, 10)
 plt.hist(x, bins, histtype="bar", rwidth=0.8)
 
 plt.title("unequal bins")
@@ -213,7 +269,7 @@ plt.figure(
     frameon=True,
 )
 
-#資料個數
+# 資料個數
 N = 10000
 
 # 第一張圖
@@ -228,7 +284,7 @@ for i in range(N):
     dice.append(ranNum)
 
 # 建立 N 個 1-6(含) 的整數隨機數 same
-#dice = np.random.randint(1, sides + 1, size=N)  # 建立隨機數
+# dice = np.random.randint(1, sides + 1, size=N)  # 建立隨機數
 
 cc = plt.hist(dice, bins=6, rwidth=0.5, cumulative=False, alpha=0.3)  # 繪製hist圖
 print("bins的y軸 ", cc[0])
@@ -256,10 +312,10 @@ d2 = np.random.randint(1, 6 + 1, N)
 
 dsums = d1 + d2
 
-#以密度表示
+# 以密度表示
 # count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5, density=True)
 
-#以總數表示
+# 以總數表示
 count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5)
 
 plt.xlabel("兩個骰子和")
@@ -336,11 +392,13 @@ grade = [
     65,
 ]
 
-#僅指定束數
+# 僅指定束數
 # n, b, p = plt.hist(grade, bins=10, edgecolor="r", rwidth=0.5)
 
-#指定束範圍
-n, b, p = plt.hist(grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], edgecolor="r", rwidth=0.5)
+# 指定束範圍
+n, b, p = plt.hist(
+    grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], edgecolor="r", rwidth=0.5
+)
 
 for i in range(len(n)):
     plt.text(b[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=12)
@@ -411,13 +469,17 @@ sc2 = [
     65,
 ]
 
-#plt.hist([sc1, sc2], 9)
-n, b, p = plt.hist([sc1, sc2], bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], edgecolor="r", rwidth=0.5)
+# plt.hist([sc1, sc2], 9)
+n, b, p = plt.hist(
+    [sc1, sc2],
+    bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+    edgecolor="r",
+    rwidth=0.5,
+)
 
 plt.ylabel("學生人數")
 plt.xlabel("分數")
 plt.title("成績表")
-
 
 
 # 第三張圖
@@ -431,10 +493,8 @@ print("ccccc")
 print(str(n) + "\n" + str(bins))
 
 
-
 # 第四張圖
 plt.subplot(234)
-
 
 
 # 第五張圖
@@ -558,8 +618,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -725,4 +783,3 @@ for i in range(len(n)):
 
 
 """
-

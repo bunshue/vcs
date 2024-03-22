@@ -56,10 +56,9 @@ import pytesseract
 pytesseract.pytesseract.tesseract_cmd = ocr_program #設定OCR程式位置
 
 print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
 
 print("英文OCR")
-filename = 'data/ocr/english03.jpg'
+filename = 'data/ocr/english02.jpg'
 image = Image.open(filename)
 text = pytesseract.image_to_string(image, lang="eng")
 print(text)
@@ -67,25 +66,25 @@ print(text)
 print('------------------------------------------------------------')	#60個
 
 print("中文OCR轉正中")
-filename = 'data/ocr/chinese01.jpg'
+filename = 'data/ocr/red06.jpg'
 image = Image.open(filename)
 text = pytesseract.image_to_string(image, lang="chi_tra")
 print(text)
 
 print("------------------------------------------------------------")  # 60個
 
-print("中文OCR轉正中 + 英文")
-filename = 'data/ocr/chinese02.jpg'
+print("中文OCR轉簡中")
+filename = 'data/ocr/red06.jpg'
 image = Image.open(filename)
-text = pytesseract.image_to_string(image, lang="chi_tra+eng")
+text = pytesseract.image_to_string(image, lang='chi_sim')
 print(text)
 
 print("------------------------------------------------------------")  # 60個
 
-print("中文OCR轉簡中")
-filename = 'data/ocr/chinese03.jpg'
+print("中文OCR轉正中 + 英文")
+filename = 'data/ocr/red06.jpg'
 image = Image.open(filename)
-text = pytesseract.image_to_string(image, lang='chi_sim')
+text = pytesseract.image_to_string(image, lang="chi_tra+eng")
 print(text)
 
 print('------------------------------------------------------------')	#60個
@@ -100,7 +99,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("車牌")
 print("無指定OCR => 英文")
-filename = 'data/ocr/carPlate07.jpg'
+filename = 'data/ocr/carPlate01.jpg'
 image = Image.open(filename)
 text = pytesseract.image_to_string(image)
 print(text)

@@ -60,9 +60,8 @@ filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 image = Image.open(filename)
 print(image.format, image.size, image.mode)
 
-#image.show()
-
-
+plt.imshow(image)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -382,7 +381,7 @@ from PIL import Image, ImageDraw
 import shutil
 
 source_dir = 'C:/_git/vcs/_1.data/______test_files1/__pic/_book'
-target_dir = 'C:/_git/vcs/_1.data/______test_files2/resized_pic'
+target_dir = 'C:/_git/vcs/_1.data/______test_files2/tmp_resized_pic'
 #logo_filename = 'C:/_git/vcs/_1.data/______test_files1/burn.bmp'        #fail, bad transparency mask
 logo_filename = 'C:/_git/vcs/_1.data/______test_files1/logo.png'
 
@@ -404,7 +403,9 @@ allfiles = glob.glob(source_dir + '/*.jpg') + glob.glob(source_dir + '/*.png')
 
 logo = Image.open(logo_filename)    #PIL讀取本機圖片
 logo = logo.resize((150, 150))   #調整圖像大小
-#logo.show()
+
+plt.imshow(logo)
+plt.show()
 
 for target_image in allfiles:
 	pathname, filename = os.path.split(target_image)
@@ -517,7 +518,8 @@ image = Image.open(filename)  # 開啟風景圖
 icon = Image.open(logo_filename)  # 開啟浮水印 icon
 image.paste(icon, (0, 0), icon)  # 將風景圖貼上 icon
 
-#image.show()
+plt.imshow(image)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -534,7 +536,8 @@ y = int((image_h - icon_h) / 2)  # 計算置中時 icon 左上角的 y 座標
 
 image.paste(icon, (x, y), icon)  # 設定 icon 左上角座標
 
-#image.show()
+plt.imshow(image)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -606,7 +609,8 @@ x2, y2 = 250, 250  # 定義選取區域的右上角座標
 area = image2.crop((x1, y1, x2, y2))  # 裁切區域
 image.paste(area, (x1, y1))  # 在原本的圖片裡貼上馬賽克區域
 
-#image.show()
+plt.imshow(image)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -665,19 +669,7 @@ image1 = Image.open(filename1)    #PIL讀取本機圖片, 讀取的是RGB格式�
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/picture1_partial.jpg'
 image3 = image1.resize((100, 500), Image.LANCZOS)
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
@@ -748,12 +740,12 @@ h = int(image.height * ratio)
 image = image.resize((w, h), Image.LANCZOS)     #調整大小
 image.save(savefile, format="PNG")
 
+"""
 #調整圖片大小的範例
-
 mini_im = im.resize((int(im.size[0] * 0.2), int(im.size[1] * 0.2)))
 display(mini_im)
 print(mini_im.size)
-
+"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -819,9 +811,6 @@ for i, f in enumerate(files):
 
 print('轉換尺寸及灰階處理結束！')
 
-print("------------------------------------------------------------")  # 60個
-
-
 print('------------------------------------------------------------')	#60個
 
 with Image.open(filename) as image:
@@ -882,7 +871,8 @@ guido_head = image2.crop(rect)
 width, height = guido_head.size
 image1.paste(guido_head.resize((int(width / 1.5), int(height / 1.5))), (172, 40))
 
-image1.show()
+plt.imshow(image1)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -890,18 +880,21 @@ print("剪裁圖像")
 
 image = Image.open(filename)
 rect = 80, 20, 310, 360
-image.crop(rect).show()
+image.crop(rect)
 
+plt.imshow(image)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("生成縮略圖")
 
 image = Image.open(filename)
 size = 128, 128
 image.thumbnail(size)
-image.show()
+
+plt.imshow(image)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
@@ -1088,21 +1081,12 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
 #使用pillow操作图像
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 img = Image.open(filename)
-
 
 img2 = Image.open(filename)
 
@@ -1120,6 +1104,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+""" 處理資料夾有問題
 foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
 
 allfiles = os.listdir(foldername)
@@ -1136,7 +1121,7 @@ for file in allfiles:
     image.close()
     thumbnail.close()
     print("{}-->{}".format(file, targetfile))
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 #paste
@@ -1184,8 +1169,6 @@ elif img.format == "JPEG":
     img.save(savefile, format="JPEG")       # JPG轉存檔案
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 from pathlib import Path
 
@@ -1236,4 +1219,15 @@ print('------------------------------------------------------------')	#60個
 
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
 print('------------------------------------------------------------')	#60個
+

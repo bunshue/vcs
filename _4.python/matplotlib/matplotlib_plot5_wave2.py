@@ -23,11 +23,12 @@ print("------------------------------------------------------------")  # 60個
 
 import wave
 
+
 # 定義繪製圖表函式
 def visualize(path):
     print("畫圖...")
     fig, ax = plt.subplots()  # 建立單一圖表
-    
+
     raw = wave.open(path)  # 開啟聲音
     signal = raw.readframes(-1)  # 讀取全部聲音採樣
     signal = np.frombuffer(signal, dtype="int16")  # 將聲音採樣轉換成 int16 的格式所組成的 np 陣列
@@ -39,11 +40,11 @@ def visualize(path):
     plt.xlabel("Time")  # 橫軸標題
     plt.show()
 
-filename = '_data/notify1.wav'
+
+filename = "_data/notify1.wav"
 visualize(filename)  # 執行畫圖函式
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

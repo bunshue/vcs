@@ -20,20 +20,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+# filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+# filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 '''
 print('取得 OpenCV 版本')
 
@@ -362,26 +362,26 @@ plt.imshow(img_rgb)
 plt.show()
 '''
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-#opencv
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+# opencv
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-image = cv2.imread(filename)	#讀取本機圖片
+image = cv2.imread(filename)  # 讀取本機圖片
 
-#plt.imshow(image)#直接顯示 影像錯誤 因為opencv的imread讀出來是BGR排列
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))#先轉換成RGB再顯示
+# plt.imshow(image)#直接顯示 影像錯誤 因為opencv的imread讀出來是BGR排列
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 
 plt.show()
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+# 用 OpenCV 讀取並顯示圖片
 
-#用 OpenCV 讀取並顯示圖片
 
-#等同於 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)) #BGR轉RGB再交由matplotlib顯示之
+# 等同於 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)) #BGR轉RGB再交由matplotlib顯示之
 def aidemy_imshow(name, img):
     b, g, r = cv2.split(img)
     img = cv2.merge([r, g, b])
@@ -389,64 +389,59 @@ def aidemy_imshow(name, img):
     plt.imshow(img)
     plt.show()
 
+
 cv2.imshow = aidemy_imshow
 
-img = cv2.imread(r'images/sample.jpg')
+img = cv2.imread(r"images/sample.jpg")
 
 print(type(img))
 
 print(img.shape)
 
-cv2.imshow('Sample pic', img)
+cv2.imshow("Sample pic", img)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('並列一圖')
+print("並列一圖")
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
-image1=cv2.imread(filename)
+image1 = cv2.imread(filename)
 
 image2 = cv2.hconcat([image1, image1, image1, image1, image1, image1])
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
 
-img = cv2.imread(filename) #cv2讀取圖片, 自動轉成array
+img = cv2.imread(filename)  # cv2讀取圖片, 自動轉成array
 
-hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  #轉換為HSV
-rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  #轉換為RGB
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  # 轉換為HSV
+rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換為RGB
 
 plt.imshow(rgb)
 plt.show()
 
-coordinate = rgb[131, 81] #輸入要取得顏色的指定座標
+coordinate = rgb[131, 81]  # 輸入要取得顏色的指定座標
 print(coordinate)
 
-#print(array([255, 219,  79], dtype=uint8))
+# print(array([255, 219,  79], dtype=uint8))
 
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個

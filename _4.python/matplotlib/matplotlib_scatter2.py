@@ -221,7 +221,7 @@ def plt_fill_between():
     plt.yticks(())
 
 
-plt.figure(figsize=(16, 6))
+plt.figure(figsize=(12, 8))
 plt_scatter()
 plt_fill_between()
 plt.tight_layout()

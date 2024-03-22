@@ -293,7 +293,7 @@ plt.colorbar(cax=cax)
 # 第六張圖
 plt.subplot(236)
 
-print('二維 sinc 函數')
+print("二維 sinc 函數")
 
 N = 100
 
@@ -310,7 +310,7 @@ sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
 # print(sinc2d)
 
 plt.imshow(sinc2d)
-plt.title('二維 sinc 函數')
+plt.title("二維 sinc 函數")
 
 plt.show()
 
@@ -516,11 +516,11 @@ plt.subplot(235)
 
 x = np.linspace(start=-10, stop=10, num=101)
 
-#plt.plot(x, np.absolute(x))
+# plt.plot(x, np.absolute(x))
 
 xx = x + 1j * x[:, np.newaxis]
 
-plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap='gray')
+plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
 
 
 # 第六張圖
@@ -528,15 +528,16 @@ plt.subplot(236)
 
 
 def f(x, y):
-    return (1 - x / 2 + x ** 5 + y ** 3) * np.exp(-x ** 2 - y ** 2)
+    return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2) - y**2)
+
 
 n = 10
 x = np.linspace(-3, 3, 4 * n)
 y = np.linspace(-3, 3, 3 * n)
 X, Y = np.meshgrid(x, y)
-#plt.imshow(f(X, Y), cmap='hot', origin='low')
-plt.imshow(f(X, Y), cmap='hot')
-plt.colorbar(shrink=.83)
+# plt.imshow(f(X, Y), cmap='hot', origin='low')
+plt.imshow(f(X, Y), cmap="hot")
+plt.colorbar(shrink=0.83)
 
 plt.xticks(())
 plt.yticks(())

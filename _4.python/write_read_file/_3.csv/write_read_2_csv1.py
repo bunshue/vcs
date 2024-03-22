@@ -577,7 +577,7 @@ passwd_to_csv(r'.\data\passwd.cfg', r'tmp_passwd.csv')
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/animals.csv'
+filename = 'C:/_git/vcs/_4.python/_data/animals.csv'
 
 try:
     with open(filename, encoding = 'utf-8') as f:

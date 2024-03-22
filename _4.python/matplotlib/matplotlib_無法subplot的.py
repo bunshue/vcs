@@ -33,6 +33,7 @@ print("plot01------------------------------------------------------------")  # 6
 
 import matplotlib.ticker as ticker
 
+
 def set_plot(amp, function):
     global figure_w, figure_h, fig
     fig = plt.figure()
@@ -68,16 +69,9 @@ plt.show()
 
 print("plot02------------------------------------------------------------")  # 60個
 
-# 新增圖表
-# plt.figure()
-plt.figure(figsize=(8, 8))  # 設定圖片視窗大小
-
-plt.plot([1, 2, 3])
-plt.grid(axis="y")  # 加上y格線
-
 # 新增圖表 並 設定屬性
 plt.figure(
-    figsize=[8, 4],
+    figsize=[12, 8],
     dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
@@ -145,7 +139,9 @@ plt.plot(x, y, lw=5, c="white")
 # 使用自定義的中文字型
 import matplotlib.font_manager as fm
 
-font_filename = ("C:/_git/vcs/_2.vcs/my_vcs_lesson_7_free/vcs_DrawPoem/vcs_DrawPoem/font/康楷體w5.TTC")
+font_filename = (
+    "C:/_git/vcs/_2.vcs/my_vcs_lesson_7_free/vcs_DrawPoem/vcs_DrawPoem/font/康楷體w5.TTC"
+)
 # font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 # myfont = fm.FontProperties(fname="/Users/mac/Library/Fonts/NotoSansHant-Medium.otf")
@@ -288,18 +284,11 @@ plt.show()
 print("plot11------------------------------------------------------------")  # 60個
 
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 """
@@ -320,4 +309,3 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 
 """
-

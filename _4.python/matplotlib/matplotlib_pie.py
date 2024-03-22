@@ -184,13 +184,12 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-area = ['大陸','東南亞','東北亞','美國','歐洲','澳紐']
-people = [10000,12600,9600,7500,5100,4800]
-exp = [0.0,0.0,0.1,0.0,0.0,0.1]
-colors = ['aqua','g','pink','yellow','m','salmon']
-plt.pie(people,labels=area,explode=exp,autopct="%1.2f%%",
-        colors=colors)
-plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
+area = ["大陸", "東南亞", "東北亞", "美國", "歐洲", "澳紐"]
+people = [10000, 12600, 9600, 7500, 5100, 4800]
+exp = [0.0, 0.0, 0.1, 0.0, 0.0, 0.1]
+colors = ["aqua", "g", "pink", "yellow", "m", "salmon"]
+plt.pie(people, labels=area, explode=exp, autopct="%1.2f%%", colors=colors)
+plt.title("五月份國外旅遊調查表", fontsize=16, color="b")
 
 
 # 第二張圖
@@ -224,4 +223,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

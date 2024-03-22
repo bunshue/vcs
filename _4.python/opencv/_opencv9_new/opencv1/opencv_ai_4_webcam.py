@@ -14,58 +14,51 @@ print("------------------------------------------------------------")  # 60個
 import cv2
 import numpy as np
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
 print("------------------------------------------------------------")  # 60個
 
 cap = cv2.VideoCapture(0)
+
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
 
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
 while True:
     ret, frame = cap.read()             # 讀取影片的每一幀
     if not ret:
         print("Cannot receive frame")   # 如果讀取錯誤，印出訊息
         break
-    cv2.imshow('oxxostudio', frame)     # 如果讀取成功，顯示該幀的畫面
+    cv2.imshow('image1', frame)     # 如果讀取成功，顯示該幀的畫面
+
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
+    # gray = cv2.cvtColor(frame, 6)  # 也可以用數字對照 6 表示轉換成灰階
+    cv2.imshow('image2', gray)
+
+    # 套用自適應二值化黑白影像
+    img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY);
+    img_gray = cv2.medianBlur(img_gray, 5)
+    output = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+    cv2.imshow('image3', output)
+
+    # 套用 medianBlur() 中值模糊
+    image4 = cv2.medianBlur(frame, 25)
+    cv2.imshow('image4', image4)
+    
     if cv2.waitKey(1) == ord('q'):      # 每一毫秒更新一次，直到按下 q 結束
         break
+
 cap.release()                           # 所有作業都完成後，釋放資源
 cv2.destroyAllWindows()                 # 結束所有視窗
 
 print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
-    # gray = cv2.cvtColor(frame, 6)  # 也可以用數字對照 6 表示轉換成灰階
-    cv2.imshow('oxxostudio', gray)
-    if cv2.waitKey(1) == ord('q'):
-        break
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
+"""
+#錄影1
 
 cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')          # 設定影片的格式為 MJPG
-out = cv2.VideoWriter('output.mp4', fourcc, 20.0, (width,  height))  # 產生空的影片
+out = cv2.VideoWriter('tmp_output.mp4', fourcc, 20.0, (width,  height))  # 產生空的影片
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -75,7 +68,7 @@ while True:
         print("Cannot receive frame")
         break
     out.write(frame)       # 將取得的每一幀圖像寫入空的影片
-    cv2.imshow('oxxostudio', frame)
+    cv2.imshow('image', frame)
     if cv2.waitKey(1) == ord('q'):
         break             # 按下 q 鍵停止
 cap.release()
@@ -84,13 +77,15 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+#錄影2
+
 cap = cv2.VideoCapture(0)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-out = cv2.VideoWriter('output.mov', fourcc, 20.0, (width,  height))
+out = cv2.VideoWriter('tmp_output.mov', fourcc, 20.0, (width,  height))
 # 如果轉換成黑白影片後如果無法開啟，請加上 isColor=False 參數設定
-# out = cv2.VideoWriter('output.mov', fourcc, 20.0, (width,  height), isColor=False)
+# out = cv2.VideoWriter('tmp_output.mov', fourcc, 20.0, (width,  height), isColor=False)
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -101,82 +96,19 @@ while True:
         break
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
     out.write(gray)
-    cv2.imshow('oxxostudio', gray)
+    cv2.imshow('image', gray)
     if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
 out.release()
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階影像
-    cv2.imshow('oxxostudio', gray)
-    if cv2.waitKey(1) == ord('q'):
-        break      # 按下 q 鍵停止
-cap.release()
-cv2.destroyAllWindows()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    # 套用自適應二值化黑白影像
-    img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY);
-    img_gray = cv2.medianBlur(img_gray, 5)
-    output = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
-    cv2.imshow('oxxostudio', output)
-    if cv2.waitKey(1) == ord('q'):
-        break       # 按下 q 鍵停止
-cap.release()
-cv2.destroyAllWindows()
-
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-logo = cv2.imread('opencv-logo.jpg')
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img_1 = cv2.resize(frame,(480, 360))    # 改變影像尺寸，符合疊加的圖片
-    output = cv2.addWeighted(img_1, 0.5, logo, 0.3, 50)  # 疊加圖片
-    cv2.imshow('oxxostudio', output)
-    if cv2.waitKey(1) == ord('q'):
-        break      # 按下 q 鍵停止
-cap.release()
-cv2.destroyAllWindows()
-
-
-print("------------------------------------------------------------")  # 60個
-
+#錄影
 cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')          # 設定影片的格式為 MJPG
-out = cv2.VideoWriter('output_1.mp4', fourcc, 20.0, (640,  360))  # 產生空的影片，尺寸為 640x360
+out = cv2.VideoWriter('tmp_output_1.mp4', fourcc, 20.0, (640,  360))  # 產生空的影片，尺寸為 640x360
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -188,7 +120,7 @@ while True:
     img_1 = cv2.resize(frame,(640, 360))   # 改變圖片尺寸
     img_2 = cv2.flip(img_1, 0)             # 上下翻轉
     out.write(img_2)                       # 將取得的每一幀圖像寫入空的影片
-    cv2.imshow('oxxostudio', frame)
+    cv2.imshow('image', frame)
     if cv2.waitKey(1) == ord('q'):
         break                              # 按下 q 鍵停止
 cap.release()
@@ -197,26 +129,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    # 套用 medianBlur() 中值模糊
-    img = cv2.medianBlur(frame, 25)
-    cv2.imshow('oxxostudio', img)
-    if cv2.waitKey(1) == ord('q'):
-        break     # 按下 q 鍵停止
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-
+#兩個camera
 cap1 = cv2.VideoCapture(0)           # 讀取第一個影片來源
 cap2 = cv2.VideoCapture(1)           # 讀取第二個影片來源
 
@@ -231,8 +144,8 @@ while True:
     ret1, img1 = cap1.read()         # 讀取第一個來源影片的每一幀
     ret2, img2 = cap2.read()         # 讀取第一個來源影片的每一幀
 
-    cv2.imshow('oxxostudio1', img1)  # 如果讀取成功，顯示該幀的畫面
-    cv2.imshow('oxxostudio2', img2)  # 如果讀取成功，顯示該幀的畫面
+    cv2.imshow('image1', img1)  # 如果讀取成功，顯示該幀的畫面
+    cv2.imshow('image2', img2)  # 如果讀取成功，顯示該幀的畫面
     if cv2.waitKey(1) == ord('q'):
         break
 cap1.release()
@@ -241,6 +154,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+#兩個camera
 cap1 = cv2.VideoCapture(0)
 cap2 = cv2.VideoCapture(1)
 
@@ -260,12 +174,14 @@ while True:
 
     cv2.rectangle(img2, (330,160), (530,310), (255,255,255), 5)  # 繪製子影片的外框
 
-    cv2.imshow('oxxostudio', img2)
+    cv2.imshow('image', img2)
     if cv2.waitKey(1) == ord('q'):
         break
 cap1.release()
 cap2.release()
 cv2.destroyAllWindows()
+
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -284,7 +200,7 @@ while True:
     output[:, :320] = img               # 將 output 左邊內容換成 img
     output[:, 320:640] = img2           # 將 output 右邊內容換成 img2
 
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('image', output)
     if cv2.waitKey(50) == ord('q'):
         break
 
@@ -313,7 +229,7 @@ while True:
     output[320:640, :320] = img3      # 左下
     output[320:640, 320:640] = img4   # 右下
 
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('image', output)
     if cv2.waitKey(50) == ord('q'):
         break
 
@@ -337,7 +253,7 @@ while True:
     ret, img = cap.read()              # 讀取影像
     img = cv2.resize(img,(w, h))       # 縮小尺寸
     output[0:h, 0:w] = img             # 將 output 的特定區域置換為 img
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('image', output)
     if cv2.waitKey(50) == ord('q'):
         break
 
@@ -367,7 +283,7 @@ while True:
         y = i//n     # 根據串列計算影像的 y 座標 ( 取整數 )
         output[h*y:h*y+h, w*x:w*x+w] = img_list[i]  # 更新畫面
 
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('image', output)
     if cv2.waitKey(50) == ord('q'):
         break
 
@@ -392,7 +308,7 @@ while True:
     img = cv2.flip(img, 1)                        # 翻轉影像，使其如同鏡子
     img = img[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
     cv2.line(img,(x,0),(x,h),(0,0,255),5)         # 畫線
-    cv2.imshow('oxxostudio',img)                  # 正常狀況下，一直顯示即時影像
+    cv2.imshow('image',img)                  # 正常狀況下，一直顯示即時影像
     x = x + 2
     if x > h:
         x = 0
@@ -435,14 +351,14 @@ while True:
         cv2.line(img,(x+5,0),(x+5,h),(0,0,255),5) # 畫線 ( 因為線條寬度 5，所以位移 5 )
         x = x + 2                                 # 改變 x 位置
         img[0:h,0:x] = output[0:h,0:x]            # 設定即時影像 img 的某區域為 output
-        cv2.imshow('oxxostudio',img)              # 顯示即時影像
+        cv2.imshow('image',img)              # 顯示即時影像
         if x > h:
             keyCode = cv2.waitKey() == ord('s')   # 如果寬度抵達正方形邊緣，等待鍵盤事件按下 s
             cv2.imwrite(f'tmp_oxxo-{a}.jpg',img)      # 存檔
             a = a + 1                             # 檔名編號增加 1
             run = 0                               # 停止合成
     else:
-        cv2.imshow('oxxostudio',img)              # 正常狀況下，一直顯示即時影像
+        cv2.imshow('image',img)              # 正常狀況下，一直顯示即時影像
 
 cap.release()
 cv2.destroyAllWindows()
@@ -479,14 +395,14 @@ while True:
         cv2.line(img,(0,y+5),(h,y+5),(0,0,255),5) # 畫線
         y = y + 2                                 # 改變 x 位置
         img[0:y,0:h] = output[0:y,0:h]            # 設定即時影像 img 的某區域為 output
-        cv2.imshow('oxxostudio',img)              # 顯示即時影像
+        cv2.imshow('image',img)              # 顯示即時影像
         if y > h:
             keyCode = cv2.waitKey() == ord('s')   # 如果寬度抵達正方形邊緣，等待鍵盤事件按下 s
             cv2.imwrite(f'tmp_oxxo-{a}.jpg',img)      # 存檔
             a = a + 1                             # 檔名編號增加 1
             run = 0                               # 停止合成
     else:
-        cv2.imshow('oxxostudio',img)              # 正常狀況下，一直顯示即時影像
+        cv2.imshow('image',img)              # 正常狀況下，一直顯示即時影像
 
 cap.release()
 cv2.destroyAllWindows()
@@ -523,7 +439,7 @@ while True:
     cw, ch = int(w/2), int(h/2)            # 取得中心點
     img = cv2.resize(img,(w, h))           # 調整尺寸，加快速度
     img = convex(img, (w, h, 3), (cw, ch, 100))
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('image', img)
     if cv2.waitKey(100) == ord('q'):
         break
 cap.release()
@@ -555,7 +471,7 @@ while True:
         a = a - 0.01        # a 不斷減少 0.01
         if a<0: a = 0       # 如果 a 小於 0 就讓 a 等於 0
 
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('image', output)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -598,7 +514,7 @@ while True:
             n = n + 1
             cv2.imwrite(f'tmp_photo-{n}.jpg', photo)   # 存檔
 
-    cv2.imshow('oxxostudio', output)               # 顯示圖片
+    cv2.imshow('image', output)               # 顯示圖片
 
 cap.release()                           # 所有作業都完成後，釋放資源
 cv2.destroyAllWindows()                 # 結束所有視窗
@@ -654,7 +570,7 @@ while True:
                 a = 0
                 n = n + 1
                 cv2.imwrite(f'tmp_photo-{n}.jpg', photo)
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('image', output)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -673,7 +589,7 @@ while True:
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉成灰階
     img = cv2.medianBlur(img, 7)                   # 模糊化，去除雜訊
     img = cv2.Canny(img, 36, 36)                   # 偵測邊緣
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('image', img)
     if cv2.waitKey(1) == ord('q'):
         break                                      # 按下 q 鍵停止
 cap.release()
@@ -706,7 +622,7 @@ while True:
     frame = cv2.resize(frame,(600, 360))   # 調整圖片尺寸
     bg = cv2.bitwise_and(frame, frame, mask = mask2 )
     output = cv2.add(bg, logo)
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('image', output)
     if cv2.waitKey(1) == ord('q'):
         break      # 按下 q 鍵停止
 cap.release()
@@ -734,7 +650,7 @@ while True:
     frame = cv2.resize(frame,(600, 360))
     output = cv2.bitwise_not(frame, mask = mask1 )      # 套用 not 和遮罩
     output = cv2.bitwise_not(output, mask = mask1 )     # 再次套用 not 和遮罩，將色彩轉成原來的顏色
-    cv2.imshow('oxxostudio', output)
+    cv2.imshow('image', output)
     if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
@@ -775,7 +691,7 @@ while True:
     gif = gif.convert('RGB')                      # 轉換顏色
     output.append(gif)                            # 添加到 output
 
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('image', img)
     if cv2.waitKey(250) == ord('q'):
         break
 cap.release()
@@ -877,7 +793,7 @@ while True:
             box = boxSize(bbox[i])    # QRCode 座標
             cv2.rectangle(img,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)  # 繪製外框
             putText(box[0],box[3],text,color=(0,0,255))                     # 顯示文字
-    cv2.imshow('oxxostudio', img)
+    cv2.imshow('image', img)
     if cv2.waitKey(1) == ord('q'):
         break
 
@@ -935,7 +851,7 @@ while True:
                 img = 255-img
                 putText(0,0,'負片效果',100,(0,0,0))
 
-    cv2.imshow('oxxostudio', img)     # 預覽影像
+    cv2.imshow('image', img)     # 預覽影像
     if cv2.waitKey(1) == ord('q'):
         break
 

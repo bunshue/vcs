@@ -11,7 +11,6 @@ print("寫讀 xlsx")
 
 print("建立 xlsx")
 
-
 workbook=openpyxl.Workbook()    # 建立一個工作簿
 
 # 取得第 1 個工作表
@@ -40,7 +39,8 @@ import openpyxl
 
 print('excel讀寫測試 2')
 
-csvfile = open("../_3.csv/data/animals.csv")  # 開啟 CSV 檔案
+filename = 'C:/_git/vcs/_4.python/_data/animals2.csv'
+csvfile = open(filename)  # 開啟 CSV 檔案
 raw_data = csv.reader(csvfile)  # 讀取 CSV 檔案
 data = list(raw_data)  # 轉換成二維串列
 print(data)
@@ -66,6 +66,7 @@ workbook.save(filename)
 
 print("建立 xlsx OK, 檔案 : " + filename)
 
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 

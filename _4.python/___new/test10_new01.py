@@ -451,6 +451,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("十進位 轉 十六進位")
 
+
 # Convert a decimal to a hex as a string
 def decimalToHex(decimalValue):
     hex = ""
@@ -3026,6 +3027,7 @@ def payment():
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 def fib(n):  # 定義函數fib()
     if n == 0:

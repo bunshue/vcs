@@ -38,7 +38,7 @@ print("------------------------------------------------------------")  # 60個
 import psutil
 
 print(psutil.disk_partitions())  # 所有硬碟資訊
-print(psutil.disk_usage("硬碟 device 名稱"))  # 指定硬碟資訊
+# print(psutil.disk_usage("硬碟 device 名稱"))  # 指定硬碟資訊 這一行有問題 black過不了
 
 
 print("------------------------------------------------------------")  # 60個

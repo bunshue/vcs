@@ -249,6 +249,20 @@ print(speech_edit)
 '''
 print("------------------------------------------------------------")  # 60個
 
+name = '荀彧'
+money = 120
+
+print('%s: %.2f元' % (name, money))
+
+print('------------------------------------------------------------')	#60個
+
+str1 = "Welcome to the United States and have a nice day"
+
+list1 = str1.split()
+print(list1)
+
+str2 = "-".join(list1)
+print(str2) 
 
 
 
