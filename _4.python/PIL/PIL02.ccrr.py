@@ -381,7 +381,7 @@ import sys, os, glob
 from PIL import Image, ImageDraw
 import shutil
 
-source_dir = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
+source_dir = 'C:/_git/vcs/_1.data/______test_files1/__pic/_book'
 target_dir = 'C:/_git/vcs/_1.data/______test_files2/resized_pic'
 #logo_filename = 'C:/_git/vcs/_1.data/______test_files1/burn.bmp'        #fail, bad transparency mask
 logo_filename = 'C:/_git/vcs/_1.data/______test_files1/logo.png'

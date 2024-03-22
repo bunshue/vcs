@@ -1,16 +1,23 @@
 import cv2
 
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
+print("------------------------------------------------------------")  # 60個
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
@@ -31,7 +38,7 @@ def modify_contrast_and_brightness(image, alpha=1.0, beta = 0.0):
     image = np.clip(image, 0, 255)
     return image
 
-plt.figure(num = '影像對比與亮度調整', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '影像對比與亮度調整', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 image = cv2.imread(filename)	#讀取本機圖片
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -46,7 +53,7 @@ plt.show()
 
 print('測試 02------------------------------------------------------------')	#60個
 
-plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
@@ -113,7 +120,7 @@ plt.show()
 
 print('測試 05------------------------------------------------------------')	#60個
 
-plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
@@ -154,7 +161,7 @@ filename = 'images/girl.bmp'
 image = cv2.imread(filename)
 imageRGB = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-plt.figure(num = '顯示結果', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '顯示結果', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -168,7 +175,7 @@ plt.show()
 
 print('測試 07------------------------------------------------------------')	#60個
 
-plt.figure(num = '灰度圖像顯示演示', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '灰度圖像顯示演示', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 image = cv2.imread('images/8.bmp')
 g = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -189,7 +196,7 @@ plt.show()
 
 print('測試 08------------------------------------------------------------')	#60個
 
-plt.figure(num = '灰度圖像顯示演示', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '灰度圖像顯示演示', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 filename = 'images/girl.bmp'
 image = cv2.imread(filename)

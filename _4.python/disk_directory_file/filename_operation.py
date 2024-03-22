@@ -38,8 +38,8 @@ shutil.copyfile('test10_new12_file2.py', destfile)  # 檔案複製
 
 #目錄拷貝
 import shutil
-source_dir = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
-dest_dir = 'C:/_git/vcs/_1.data/______test_files2/source_pic'
+source_dir = 'C:/_git/vcs/_1.data/______test_files1/__pic/_book'
+dest_dir = 'C:/_git/vcs/_1.data/______test_files2/_book'
 print('cp -r ' + source_dir + ' ' + dest_dir)
 #shutil.copytree(source_dir, dest_dir)  # 目錄複製
 

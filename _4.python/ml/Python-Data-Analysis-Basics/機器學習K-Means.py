@@ -5,20 +5,28 @@ K-Means 自動分類
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
+import math
+import random
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-plt.figure(num = 'K-Means', figsize = (20, 8), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = 'K-Means', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #K-Means 會自動分類!
 #我們介紹一個很好用的 unsupervised learning, 叫 K-Means。
@@ -83,7 +91,7 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-plt.figure(num = 'Means Shift', figsize = (20, 12), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = 'Means Shift', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #Mean Shift
 #Mean Shift 也會自動分類
@@ -225,5 +233,13 @@ plt.scatter(x[:, 0], x[:, 1], s = 70, c = clf.labels_)
 plt.contourf(x1, y1, Z, alpha = 0.3)
 plt.show()
 
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
 print('作業完成')
+print('------------------------------------------------------------')	#60個
+
 

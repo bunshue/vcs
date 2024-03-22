@@ -1,23 +1,27 @@
-import os
-import sys
 import time
-import random
-
-import matplotlib.pyplot as plt
-import numpy as np
-import math
 import matplotlib
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
-import numpy as np
 from sklearn.linear_model import LogisticRegression
 
 print('------------------------------------------------------------')	#60個
@@ -52,7 +56,7 @@ print(predicted_output)
 print('------------------------------------------------------------')	#60個
 
 #          編號              圖像大小[英吋]      解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = '預測曲線', figsize = (16, 8), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '預測曲線', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #左圖
 plt.subplot(121)
@@ -135,7 +139,7 @@ print('------------------------------------------------------------')	#60個
 
 ax = conversions_by_contacts[:10].plot(
     grid=True,
-    figsize=(10, 7),
+    figsize=(12, 8),
     xticks=conversions_by_contacts.index[:10],
     title='Conversion Rates by Number of Contacts'
 )
@@ -169,7 +173,7 @@ conversions_by_age = df.groupby(
 print(pd.DataFrame(conversions_by_age))
 
 
-ax = conversions_by_age.plot(grid = True, figsize = (10, 7), title = 'Conversion Rates by Age')
+ax = conversions_by_age.plot(grid = True, figsize = (12, 8), title = 'Conversion Rates by Age')
 
 ax.set_xlabel('age')
 ax.set_ylabel('conversion rate (%)')
@@ -211,7 +215,7 @@ ax = conversions_by_age_group.loc[
     kind='bar',
     color='skyblue',
     grid=True,
-    figsize=(10, 7),
+    figsize=(12, 8),
     title='Conversion Rates by Age Groups'
 )
 
@@ -236,7 +240,7 @@ print(conversions_by_marital_status_df)
 
 conversions_by_marital_status_df.plot(
     kind='pie',
-    figsize=(15, 7),
+    figsize=(12, 8),
     startangle=90,
     subplots=True,
     autopct=lambda x: '%0.1f%%' % x
@@ -258,7 +262,7 @@ print(conversions_by_education_df)
 
 conversions_by_education_df.plot(
     kind='pie',
-    figsize=(15, 7),
+    figsize=(12, 8),
     startangle=90,
     subplots=True,
     autopct=lambda x: '%0.1f%%' % x,
@@ -294,7 +298,7 @@ print(duration_df)
 ax = duration_df.plot(
     kind='box',
     grid=True,
-    figsize=(10, 10),
+    figsize=(12, 8),
 )
 
 ax.set_ylabel('last contact duration (hours)')
@@ -324,7 +328,7 @@ ax = age_marital_df.loc[
 ].plot(
     kind='bar', 
     grid=True,
-    figsize=(10,7)
+    figsize=(12, 8)
 )
 
 ax.set_title('Conversion rates by Age & Marital Status')
@@ -342,7 +346,7 @@ ax = age_marital_df.loc[
     kind='bar', 
     stacked=True,
     grid=True,
-    figsize=(10,7)
+    figsize=(12, 8)
 )
 
 ax.set_title('Conversion rates by Age & Marital Status')
@@ -353,6 +357,8 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+
+print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個

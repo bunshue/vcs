@@ -101,28 +101,31 @@ rwidth
 N = 500  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+print("------------------------------------------------------------")  # 60個
 
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
+import math
+import random
 import numpy as np
 import pandas as pd
-import random
+import matplotlib.pyplot as plt
 
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 15  # 設定字型大小
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="hist 集合 1",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -199,12 +202,11 @@ plt.title("unequal bins")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="hist 集合 2",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -291,12 +293,11 @@ plt.title("np.random.exponential")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="hist 集合 3",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -445,14 +446,12 @@ plt.subplot(236)
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="hist 集合 4",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,

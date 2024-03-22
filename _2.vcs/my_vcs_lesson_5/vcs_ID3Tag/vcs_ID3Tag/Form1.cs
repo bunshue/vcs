@@ -911,7 +911,7 @@ namespace vcs_ID3Tag
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_id3\aaaa.mp3";       //一定要有@
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             encoding = "big5";
             get_ID3Tag(filename, encoding);
         }
@@ -1527,7 +1527,7 @@ namespace vcs_ID3Tag
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_id3\aaaa.mp3";       //一定要有@
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".no.id3v1." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "移除 MP3 ID3 v1\n";
@@ -1572,7 +1572,7 @@ namespace vcs_ID3Tag
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_id3\aaaa.mp3";       //一定要有@
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".add.id3v1." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "新增 MP3 ID3 v1\n";
@@ -1603,7 +1603,7 @@ namespace vcs_ID3Tag
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_id3\aaaa.mp3";       //一定要有@
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".modify.id3v1." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "修改 MP3 ID3 v1\n";
@@ -1793,7 +1793,7 @@ namespace vcs_ID3Tag
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_id3\aaaa.mp3";       //一定要有@
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".no.id3v2." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "移除 MP3 ID3 v2\n";
@@ -1851,7 +1851,7 @@ namespace vcs_ID3Tag
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\_git\vcs\_1.data\______test_files1\_id3\aaaa.mp3";       //一定要有@
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";       //一定要有@
             string filename2 = filename + ".no.id3v1v2." + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
 
             richTextBox1.Text += "移除 MP3 ID3 v1 v2\n";

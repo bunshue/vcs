@@ -1,5 +1,8 @@
 # 新進測試02
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
 import math
@@ -11,17 +14,18 @@ import matplotlib.pyplot as plt
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
 # 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei "  # 將字體換成 Microsoft JhengHei
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="新進測試 01",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -294,7 +298,6 @@ print(
     "matplotlib 03 ------------------------------------------------------------"
 )  # 60個
 
-# foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 foldername = "C:/_git/vcs/_1.data/______test_files1"
 
 """
@@ -835,126 +838,3 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-""" 新進資料 都是抽出資料
-
-seq = [2021, 2022, 2023]                # 年度
-plt.xticks(seq)                         # 設定x軸刻度
-
-plt.plot(seq, Benz, '-*', label='Benz')
-plt.plot(seq, BMW, '-o', label='BMW')
-plt.plot(seq, Lexus, '-^', label='Lexus')
-plt.legend()
-plt.legend(loc='best')
-plt.legend(loc=0)
-plt.legend(loc='upper right')
-plt.legend(loc=6)
-plt.legend(loc='best')
-plt.title("Sales Report", fontsize=24)
-plt.xlabel("Year", fontsize=14)
-plt.ylabel("Number of Sales", fontsize=14)
-plt.show()
-
-
-plt.title('五月份國外旅遊調查表',fontsize=16,color='b')
-
-#plt.plot(x, y, lw=8, ls='-.')
-#plt.plot(x, y, marker='*')
-#plt.plot(x, y, marker='D',ms=10, mfc='y', mec='r')
-#plt.plot(x, y, color='y')
-#plt.plot(x, y, color=(1,1,0))  #RGB
-#plt.plot(x, y, color='# FFFF00')  #HEX
-#plt.plot(x, y, color='yellow')  #英文全名
-#plt.plot(x, y, color='0.5')
-
-plt.xticks(range(0,5500,500))
-plt.tick_params(axis = 'both', labelsize = 10, color = 'red')
-plt.bar(listx, listy, width = 0.5, color = 'r')
-plt.barh(listy, listx, height = 0.5, color = 'r')
-
-
-製作數據
-xpt = list(range(1,101))    # 建立1-100序列x座標點
-ypt = [x**2 for x in xpt]   # 以x平方方式建立y座標點
-ypt = [math.sin(x/10) for x in xpt]   # 以x平方方式建立y座標點
-
-xpt = np.linspace(0, 10, 500)   # 建立含500個元素的陣列
-ypt1 = np.sin(xpt)              # y陣列的變化
-ypt2 = np.cos(xpt)
-
-
-x1 = np.linspace(0, 10, num=11)     # 使用linspace()產生陣列
-print(type(x1), x1)
-x2 = np.arange(0,11,1)              # 使用arange()產生陣列
-print(type(x2), x2)
-x3 = np.arange(11)                  # 簡化語法產生陣列
-print(type(x3), x3)
-
-
-
-共同抽出
-plt.savefig('tmp_pic.jpg')
-
-#存圖
-#fig2.savefig('./picture.png')
-
-plt.grid()
-plt.grid()
-
-plt.grid()
-
-plt.grid()
-plt_grid()
-
-plt.grid(True)
-
-print('載入字型範例')
-
-
-
-翰字鑄造 臺北黑體 regular 版本
-TaipeiSansTCBeta-Regular.ttf 
-https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
-TaipeiSansTCBeta-Regular.ttf'
-
-
-plt.title(r'衰減數列 cos($3\pi x * e^{x})$',fontsize=20)
-
-
-from matplotlib.font_manager import FontProperties as font
-
-# 連結中文字體
-zhfont1 = font(fname = font_filename)
-plt.title("連結中文字體", fontproperties=zhfont1)
-plt.title("連結中文字體2222")
-
-
-
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100) #共100個點
-x = np.linspace(-2 * np.pi, 2 * np.pi)   #預設為50個點
-
-s, c = np.sin(x), np.cos(x) #一次做兩個運算
-
-#自訂座標軸的刻度及標籤–xticks()、yticks()
-#x座標
-ticks = [-2*np.pi, -1.5*np.pi, -1*np.pi, -0.5*np.pi, 0, np.pi * 0.5, np.pi, np.pi * 1.5, np.pi * 2]
-#要在x座標寫上的標籤
-labels = ['-360°', '-270°', '-180°', '-90°', '0°', '90°', '180°', '270°', '360°']
-plt.xticks(ticks, labels)
-
-#x軸刻度 5個點 分別用pi表示
-#plt.xticks([-2*np.pi, -np.pi, 0, np.pi, 2*np.pi],['-$2\pi$', '-$\pi$','0', '$\pi$', '$2\pi$'])
-
-plt.legend(['sin','cos'])
-plt.legend(['sin','cos'],loc=3,fontsize='xx-large',edgecolor='y',facecolor='r')
-
-
-plt.ylabel(r'溫度 $C^{o}$')
-
-
-# 設定圖例標籤位置 ( best, upper, lower, right,left,center )
-plt.legend(loc="best")
-plt.legend(loc="lower center")
-
-
-"""

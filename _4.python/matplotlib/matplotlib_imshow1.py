@@ -5,13 +5,21 @@ imshow
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 
-import sys
-import matplotlib.pyplot as plt
 import matplotlib.image as img
-import numpy as np
 import matplotlib.cm as cm
 import pylab
 from PIL import Image, ImageEnhance
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -19,14 +27,15 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="imshow 集合 1",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -56,7 +65,6 @@ filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 # 裁剪圖片 plt
 
-import matplotlib.pyplot as plt
 import matplotlib.image as img
 
 print("使用 matplotlib 顯示一圖")
@@ -83,8 +91,8 @@ filename = "C:/_git/vcs/_1.data/______test_files1/bug.bmp"
 #          編號                  圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="imshow 集合 2",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -183,8 +191,8 @@ print("------------------------------------------------------------")  # 60個
 #          編號                   圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="imshow 集合 3",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -311,8 +319,8 @@ print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="imshow 集合 4",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -444,8 +452,8 @@ print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="imshow 集合 5",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -540,8 +548,8 @@ print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="imshow 集合 6",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,

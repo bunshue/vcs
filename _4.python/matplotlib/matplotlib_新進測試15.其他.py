@@ -1,13 +1,17 @@
 # matplotlib_新進測試14_其他
 
-import os
 import time
-import random
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
+import math
+import random
 import numpy as np
 import pandas as pd
-import math
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -15,6 +19,9 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 
 print(
     "matplotlib 01 ------------------------------------------------------------"
@@ -389,7 +396,7 @@ print(
 
 import matplotlib
 
-fig = plt.figure(figsize=(6, 4), dpi=120)  # 設置繪製對象大小
+fig = plt.figure(figsize=(6, 4), dpi=100)  # 設置繪製對象大小
 plt.style.use("ggplot")  # 設置顯示風格
 
 plt.plot([12, 13, 45, 15, 16], label="label1")  # 繪圖及設置圖例文字
@@ -459,9 +466,6 @@ data = pd.DataFrame(
 )
 plt.plot(data["math"])  # matplotlib做圖
 plt.plot(data["english"])
-
-# 保存圖片（與網頁顯示無關）
-plt.savefig("導出圖表.jpg", dpi=300)
 
 # 保存網頁
 buffer = BytesIO()

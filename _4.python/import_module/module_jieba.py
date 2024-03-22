@@ -157,6 +157,8 @@ print('|'.join(cut_text))
 
 print('------------------------------------------------------------')	#60個
 
+stopWord_filename = 'C:/_git/vcs/_1.data/______test_files1/_jieba/stopWord_test.txt'  #設定自訂詞庫
+
 jieba.set_dictionary('data/dict.txt.big.txt')
 jieba.load_userdict('data/user_dict_test.txt')
 with open('data/stopWord_test.txt', 'r', encoding='utf-8-sig') as f:

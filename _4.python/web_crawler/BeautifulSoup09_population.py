@@ -57,7 +57,7 @@ for i in range(0, length):
     year2.append(house_data[i][0])
     house.append(house_data[i][1])
 
-'''
+"""
 print('person_data')
 print(person_data)
 print('house_data')
@@ -74,18 +74,35 @@ print('year2')
 print(year2)
 print('house')
 print(house)
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
+
 # 開始畫圖
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
+print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
+# 共同
+import os
+import sys
+import math
+import random
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(num = 'plot 集合 1 函數曲線', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = 'plot 集合 1 函數曲線', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #設定中文字型及負號正確顯示
 #設定中文字型檔
@@ -113,10 +130,18 @@ plt.ylabel("戶數")
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
 
-'''
+
+
+
+"""
 url = 'https://siluo.household.yunlin.gov.tw/popul05/List.aspx?Parser=99,5,47,,,,,,,,,,,,,,,,,,,,,4'
 content = requests.get(url).text
 soup = BeautifulSoup(content, "html.parser")
@@ -132,9 +157,9 @@ for link in links:
     print()
 
 
-'''
+"""
 
-'''
+"""
 
 #人口統計
 person_data = list()    #人口統計資料
@@ -167,7 +192,7 @@ for i in range(0, length):
     person1.append(person_data[i][1])
     person2.append(person_data[i][2])
     person3.append(person_data[i][3])
-'''
+"""
 
 
 

@@ -1,9 +1,17 @@
-# plot 集合 1
+"""
+plot 集合 1
+"""
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -11,13 +19,14 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 1",
-    figsize=(16, 9),
+    figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
@@ -123,10 +132,9 @@ y = np.sinc(x)
 
 plt.plot(x, y)
 plt.plot(x[y > 0], y[y > 0], "o")
-#plt.scatter(x[y>0], y[y>0], c='r')
+# plt.scatter(x[y>0], y[y>0], c='r')
 
 print(plt.axis())
-
 
 plt.show()
 
@@ -135,7 +143,7 @@ print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 2",
-    figsize=(16, 9),
+    figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
@@ -222,11 +230,10 @@ plt.subplot(236)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 3",
-    figsize=(16, 9),
+    figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
@@ -326,11 +333,10 @@ plt.subplot(236)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 4",
-    figsize=(16, 9),
+    figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
@@ -415,7 +421,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # 讀入csv檔
-filename = ("_data/python_ReadWrite_CSV7_salary.csv")
+filename = "_data/python_ReadWrite_CSV7_salary.csv"
 dat = pd.read_csv(filename, encoding="UTF-8")
 
 # 設定資料
@@ -449,7 +455,7 @@ print("------------------------------------------------------------")  # 60個
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="plot 集合 5",
-    figsize=(16, 9),
+    figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
@@ -487,7 +493,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -497,4 +502,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

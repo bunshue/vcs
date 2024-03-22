@@ -6,19 +6,26 @@ opencv 集合
 
 import cv2
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 filename1 = 'C:/_git/vcs/_4.python/_data/picture_mix1.bmp'
 filename2 = 'C:/_git/vcs/_4.python/_data/picture_mix2.bmp'
@@ -38,8 +45,8 @@ result3 = cv2.addWeighted(image1, 0.7, image2, 0.3, 0)
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="相加",
-    figsize=(20, 15),
-    dpi=84,
+    figsize=(12, 8),
+    dpi=100,
     facecolor="whitesmoke",
     edgecolor="r",
     linewidth=1,
@@ -1463,6 +1470,13 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+print('------------------------------------------------------------')	#60個
 
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 

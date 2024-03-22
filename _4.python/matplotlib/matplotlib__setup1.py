@@ -3,6 +3,9 @@ plt之基本設定
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
 import math
@@ -17,6 +20,7 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
@@ -672,8 +676,6 @@ plt.bar(range(10), np.random.randint(1, 30, 10), fc = '#e55934')
 
 plt.plot(x, y, marker='o')
 plt.plot(x, y, c='#6b8fb4', lw=5, marker='o', mfc='#fffa7c', mec="#084c61", mew=3, ms=20)
-
-plt.figure(figsize = (6, 6))
 
 
 """

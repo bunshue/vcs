@@ -21,9 +21,9 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 '''
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/penguin3.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/penguin4.jpg'
-output_filename = 'penguin_all.jpg'
+filename1 = 'C:/_git/vcs/_4.python/_data/penguin3.jpg'
+filename2 = 'C:/_git/vcs/_4.python/_data/penguin4.jpg'
+output_filename = 'tmp_penguin_all.jpg'
 filenames = [filename1, filename2]
 '''
 
@@ -35,7 +35,7 @@ filename5 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/SF5.jpg'
 filename6 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/SF6.jpg'
 filename7 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/SF7.jpg'
 filename8 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/SF8.jpg'
-output_filename = 'SF_all.jpg'
+output_filename = 'tmp_SF_all.jpg'
 filenames = [filename1, filename2, filename3, filename4, filename5, filename6, filename7, filename8]
 
 img_arr = []

@@ -22,7 +22,7 @@ namespace vcs_PictureResize3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = @"C:\_git\vcs\_1.data\______test_files1\_pic_resize";
+            textBox1.Text = @"C:\_git\vcs\_1.data\______test_files1\__pic\_scenery";
         }
 
         // Process the files in the selected directory.
@@ -31,9 +31,7 @@ namespace vcs_PictureResize3
             float scale = float.Parse(textBox2.Text);
             if (scale == 0)
             {
-                MessageBox.Show("Scale must not be zero.",
-                    "Invalid Scale", MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                MessageBox.Show("Scale must not be zero.", "Invalid Scale", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             this.Refresh();
@@ -108,11 +106,8 @@ namespace vcs_PictureResize3
                     image.Save(filename, ImageFormat.Tiff);
                     break;
                 default:
-                    throw new NotSupportedException(
-                        "Unknown file extension " + extension);
+                    throw new NotSupportedException(                        "Unknown file extension " + extension);
             }
         }
-
-
     }
 }

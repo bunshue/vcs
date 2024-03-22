@@ -440,15 +440,17 @@ infile = open(filename, "r")
 print("\n(4) Using readlines(): ")
 print(infile.readlines())
 infile.close() # Close the input file
+
 print('------------------------------------------------------------')	#60個
 
 print('指定編碼讀取檔案')
-filename = 'C:/_git/vcs/_1.data/______test_files1/stopWord_test.txt'
-with open(filename, 'r', encoding='utf-8-sig') as f:  #設定停用詞
+
+stopWord_filename = 'C:/_git/vcs/_1.data/______test_files1/_jieba/stopWord_test.txt'  #設定自訂詞庫
+
+with open(stopWord_filename, 'r', encoding='utf-8-sig') as f:  #設定停用詞
     stops = f.read().split('\n')   
 
 print(stops)
-
 
 print('------------------------------------------------------------')	#60個
 

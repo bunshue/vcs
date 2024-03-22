@@ -17,22 +17,26 @@ https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import random
-import time
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import cv2
 
@@ -159,7 +163,7 @@ plt.show()
 
 print('測試 04----------------------------------------------------------')	#60個
 
-plt.figure(num = '配合圖形遮罩計算直方圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '配合圖形遮罩計算直方圖', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 image = cv2.imread(filename)	#讀取本機圖片
 
@@ -211,7 +215,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 
-plt.figure(num = '影像分析工具 影像直方圖', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '影像分析工具 影像直方圖', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #影像分析工具
 #影像直方圖
@@ -275,7 +279,7 @@ plt.show()
 
 print('測試 08------------------------------------------------------------')	#60個
 
-plt.figure(num = '影像分析工具 影像直方圖 均衡化效果比較', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '影像分析工具 影像直方圖 均衡化效果比較', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #-----------讀取原始圖像---------------
 image = cv2.imread('images/equ.bmp',cv2.IMREAD_GRAYSCALE)
@@ -306,7 +310,7 @@ plt.show()
 
 print('測試 09------------------------------------------------------------')	#60個
 
-plt.figure(num = 'subplot示例', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = 'subplot示例', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 image = cv2.imread('images/equ.bmp', cv2.IMREAD_GRAYSCALE)
 equ = cv2.equalizeHist(image)
@@ -321,7 +325,7 @@ plt.show()
 
 print('測試 10------------------------------------------------------------')	#60個
 
-plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+plt.figure(num = '將一圖分解成 藍 綠 紅 三通道', figsize = (12, 8), dpi = 100, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
