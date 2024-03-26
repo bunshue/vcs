@@ -72,6 +72,7 @@ plt.subplot(236)
 plt.title("兩圖做alpha疊加")
 plt.imshow(cv2.cvtColor(result3, cv2.COLOR_BGR2RGB))
 
+plt.tight_layout()  # 緊密排列，並填滿原圖大小
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -109,6 +110,9 @@ dollar[160:340, 200:300] = add
 plt.subplot(133)
 plt.title("兩圖擷取某塊做alpha疊加, 再貼回原圖")
 plt.imshow(cv2.cvtColor(dollar, cv2.COLOR_BGR2RGB))
+
+plt.tight_layout()  # 緊密排列，並填滿原圖大小
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -246,6 +250,16 @@ topLeft = minLoc
 bottomRight = (topLeft[0] + tw, topLeft[1] + th)
 cv2.rectangle(image, topLeft, bottomRight, 255, 2)
 
+plt.figure(
+    num="Matching Result 1",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.subplot(121)
 plt.imshow(rv, cmap="gray")
 plt.title("Matching Result")
@@ -273,6 +287,16 @@ topLeft = maxLoc
 bottomRight = (topLeft[0] + tw, topLeft[1] + th)
 cv2.rectangle(image, topLeft, bottomRight, 255, 2)
 
+plt.figure(
+    num="Matching Result 2",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.subplot(121)
 plt.imshow(rv, cmap="gray")
 plt.title("Matching Result")
@@ -293,6 +317,17 @@ threshold = 0.9
 loc = np.where(res >= threshold)
 for pt in zip(*loc[::-1]):
     cv2.rectangle(image, pt, (pt[0] + w, pt[1] + h), 255, 1)
+
+plt.figure(
+    num="Image",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.imshow(image, cmap="gray")
 
 plt.show()
@@ -820,7 +855,7 @@ plt.subplot(222)
 plt.title("修改後的圖")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 image = cv2.imread(filename)
@@ -911,7 +946,7 @@ plt.subplot(233)
 plt.title("將其中一塊亂碼化")
 plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
 
-print("------------------------------------------------------------")  # 60個
+print("------------------------------")  # 30個
 
 # A圖
 filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp"
@@ -953,30 +988,38 @@ print("H =", H)
 print("W =", W)
 
 print("裁剪圖片b")
+
 # image_cut = image[0:(H * 2 // 3), 0:(W * 2 // 3)]
 image_cut = image[0 : (H * 1 // 2), 0 : (W * 1 // 2)]
 print(image_cut.shape)
-cv2.imshow("Sample pic", image_cut)
+
+plt.imshow(cv2.cvtColor(image_cut, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("圖片翻轉 原圖")
 
 image = cv2.imread(r"images/sample.jpg")
-cv2.imshow("Sample pic", image)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("圖片翻轉 效果")
+
 image_flip = cv2.flip(image, -999)
 image_flip2 = cv2.flip(image, -88)
 
-cv2.imshow("Sample pic", image_flip)
+plt.imshow(cv2.cvtColor(image_flip, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("圖片色彩空間的轉換")
+
 image = cv2.imread(r"images/sample.jpg")
 image_convert = cv2.cvtColor(image, cv2.COLOR_BGR2Lab)
-cv2.imshow("Sample pic", image_convert)
+plt.imshow(cv2.cvtColor(image_convert, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -985,7 +1028,9 @@ print("------------------------------------------------------------")  # 60個
 print("圖片的二值化處理")
 image = cv2.imread(r"images/sample.jpg")
 thr, image_binary = cv2.threshold(image, 192, 255, cv2.THRESH_TOZERO)
-cv2.imshow("Sample pic", image_binary)
+
+plt.imshow(cv2.cvtColor(image_binary, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -993,20 +1038,21 @@ print("去除圖片的雜訊 原圖")
 
 image2 = cv2.imread(r"images/sample2.jpg")
 
-cv2.imshow("Sample pic", image2)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("去除圖片的雜訊 效果")
 
 image2_denoised = cv2.fastNlMeansDenoisingColored(image2, h=5)
 
-cv2.imshow("Sample pic", image2_denoised)
+plt.imshow(cv2.cvtColor(image2_denoised, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("absolute")
-
 
 def my_laplace_sharpen(image, my_type="small"):
     result = np.zeros(image.shape, dtype=np.int64)
@@ -1080,10 +1126,11 @@ image = cv2.imread("data/building.png", 0)
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
 cl1 = clahe.apply(image)
 
-cv2.imshow("image", image)
-cv2.imshow("cl1", cl1)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.show()
+
+plt.imshow(cv2.cvtColor(cl1, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1093,14 +1140,23 @@ image = cv2.imread("data/wu_2.png", 0)
 equ = cv2.equalizeHist(image)  # 只能傳入灰度圖
 res = np.hstack((image, equ))  # 圖像列拼接（用于顯示）
 
-cv2.imshow("res", res)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# 繪製結果
+fig = plt.figure(
+    num="equalizeHist_image",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("gradient")
-
 
 # 輸入圖像，輸出提取的邊緣信息
 def my_sobel_sharpen(image):
@@ -1153,7 +1209,17 @@ edge_image_lena = my_sobel_sharpen(original_image_lena)
 # 獲得銳化圖像
 sharpen_image_lena = my_result_add(original_image_lena, edge_image_lena, -0.5)
 
-# 顯示結果
+# 繪製結果
+fig = plt.figure(
+    num="gradient",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.subplot(131)
 plt.title("原始圖像")
 plt.imshow(original_image_lena)
@@ -1166,13 +1232,11 @@ plt.imshow(sharpen_image_lena)
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("imaeg_laplace")
 
 original_image_test1 = cv2.imread("data/lena.png", 0)
-
 
 # 用原始圖像減去拉普拉斯模板直接計算得到的邊緣信息
 def my_laplace_result_add(image, model):
@@ -1224,7 +1288,7 @@ def my_show_edge(model):
 # 調用自定義函數
 result = my_laplace_sharpen(original_image_test1, my_type="big")
 
-# 繪制結果
+# 繪製結果
 fig = plt.figure(
     num="new40",
     figsize=(12, 8),
@@ -1291,6 +1355,18 @@ abs_y = np.abs(fft_y)  # 取復數的絕對值，即復數的模(雙邊頻譜)
 angle_y = 180 * np.angle(fft_y) / np.pi  # 取復數的弧度,并換算成角度
 gui_y = abs_y / N  # 歸一化處理（雙邊頻譜）
 gui_half_y = gui_y[range(int(N / 2))]  # 由于對稱性，只取一半區間（單邊頻譜）
+
+# 繪製結果
+fig = plt.figure(
+    num="image_fft",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 # 畫出原始波形的前50個點
 plt.subplot(231)
 plt.plot(frq[0:50], y[0:50])
@@ -1327,27 +1403,42 @@ image = plt.imread("data/castle3.jpg")
 # 根據公式轉成灰度圖
 image = 0.2126 * image[:, :, 0] + 0.7152 * image[:, :, 1] + 0.0722 * image[:, :, 2]
 
+# 繪製結果
+fig = plt.figure(
+    num="image_fft2",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 # 顯示原圖
 plt.subplot(231)
 plt.imshow(image, "gray")
 plt.title("原始圖像")
 # 進行傅立葉變換，并顯示結果
 fft2 = np.fft.fft2(image)
+
 plt.subplot(232)
 plt.imshow(np.abs(fft2), "gray")
 plt.title("二維傅里葉變換")
 # 將圖像變換的原點移動到頻域矩形的中心，并顯示效果
 shift2center = np.fft.fftshift(fft2)
+
 plt.subplot(233)
 plt.imshow(np.abs(shift2center), "gray")
 plt.title("頻域矩形的中心")
 # 對傅立葉變換的結果進行對數變換，并顯示效果
 log_fft2 = np.log(1 + np.abs(fft2))
+
 plt.subplot(235)
 plt.imshow(log_fft2, "gray")
 plt.title("傅立葉變換對數變換")
 # 對中心化后的結果進行對數變換，并顯示結果
 log_shift2center = np.log(1 + np.abs(shift2center))
+
 plt.subplot(236)
 plt.imshow(log_shift2center, "gray")
 plt.title("中心化的對數變化")
@@ -1362,14 +1453,24 @@ image = cv2.imread("data/lena.png", 0)
 dft = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
 dft_shift = np.fft.fftshift(dft)
 magnitude_spectrum = 20 * np.log(cv2.magnitude(dft_shift[:, :, 0], dft_shift[:, :, 1]))
+
+# 繪製結果
+fig = plt.figure(
+    num="magnitude_spectrum",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.subplot(121), plt.imshow(image, cmap="gray")
 plt.title("原始圖像")
-plt.xticks([])
-plt.yticks([])
+
 plt.subplot(122)
 plt.imshow(magnitude_spectrum, cmap="gray")
 plt.title("級頻譜")
-plt.xticks([]), plt.yticks([])
 
 plt.show()
 
@@ -1421,14 +1522,18 @@ def CreateNewImg(image):
 image = cv2.imread("data/building.png")
 newimage = CreateNewImg(image)
 cv2.imshow("原始圖像", image)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.show()
+
 cv2.imshow("去霧后圖像", newimage / 255)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
+""" 不能用
+plt.imshow(cv2.cvtColor(newimage / 255, cv2.COLOR_BGR2RGB))
+plt.show()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
+print("兩圖相減")
 
 filename = "p1.bmp"
 image1 = cv2.imread(filename)
@@ -1450,10 +1555,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 """
 
 彩色影像轉HSV(RGB to HSV 或 BGR to HSV)
@@ -1462,7 +1563,6 @@ HSV簡單介紹分別為：
 色相(H)：色彩的顏色名稱，如紅色、黃色等。
 飽和度(S)：色彩的純度，越高色彩越純，低則逐漸變灰，數值為0-100%。
 明度(V)：亮度，數值為0-100%。
-
 
 使用 cv2.cvtColor 轉換顏色空間時，第二個參數與HSV相關的有：
 cv2.COLOR_BGR2HSV
@@ -1485,6 +1585,16 @@ opencv 預設的排列方式為BGR，而不是RGB
 """
 image = cv2.imread("data/fruit.jpg")
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+fig = plt.figure(
+    num="彩色影像轉HSV",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1573,7 +1683,7 @@ image = np.ones((d, d, 3), dtype = "uint8") * 255
 cv2.namedWindow('Demo19.10')
 cv2.setMouseCallback('Demo19.10', draw)
 while(1):
-    cv2.imshow('Demo19.10', image)
+    cv2.imshow('Image', image)
     if cv2.waitKey(20) == 27:
         break
 
@@ -1603,7 +1713,7 @@ cv2.namedWindow('image')
 cv2.setMouseCallback('image', draw)
 cv2.createTrackbar('R', 'image', 0, 1, fill)
 while(1):
-    cv2.imshow('image', image)
+    cv2.imshow('Image', image)
     k = cv2.waitKey(1) & 0xFF
     g = cv2.getTrackbarPos('R', 'image')
     if g == 0:
@@ -1679,7 +1789,6 @@ for i in range(20, 80):
 image[10:100, 200:290] = [0, 0, 255]  # 紅色 一塊 90X90
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1690,3 +1799,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+

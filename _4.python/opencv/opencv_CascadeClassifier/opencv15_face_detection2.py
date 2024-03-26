@@ -19,11 +19,10 @@ print("------------------------------------------------------------")  # 60個
 print("框出照片中的人臉")
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-filename = "C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg"
-# filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/YaltaSummit1945.jpg'
-# filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/SolvayConference1927.jpg'
-# filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/ming_emperor3.jpg'
-filename = "C:/_git/vcs/_1.data/______test_files1/_opencv/dface3.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/_face/face01.jpg"
+# filename = 'C:/_git/vcs/_4.python/opencv/data/_face/YaltaSummit1945.jpg'
+# filename = 'C:/_git/vcs/_4.python/opencv/data/_face/SolvayConference1927.jpg'
+# filename = 'C:/_git/vcs/_4.python/opencv/data/_face/ming_emperor3.jpg'
 
 # OpenCV 人臉識別分類器
 # xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'

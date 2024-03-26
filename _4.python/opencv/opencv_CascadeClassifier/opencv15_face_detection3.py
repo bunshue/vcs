@@ -18,12 +18,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("框出照片中的人臉")
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 # 人臉辨識
-filename = "C:/_git/vcs/_4.python/_data/face01.jpg"
+filename = "C:/_git/vcs/_4.python/opencv/data/_face/face01.jpg"
 
 xml_filename = r"C:\_git\vcs\_4.python\_data\haarcascade_frontalface_default.xml"
 
@@ -178,7 +177,7 @@ while cap.isOpened():  # 如果攝影機有開啟就執行迴圈
     if ret == True:  # 讀取影像如果成功
         key = cv2.waitKey(200)  # 0.2秒檢查一次
         if key == ord("a") or key == ord("A"):  # 如果按A或a
-            cv2.imwrite("tmp_photo.jpg", img)  # 將影像寫入tmp_photo.jpg
+            cv2.imwrite("tmp_photo.jpg", img)  # 存圖
             break
 cap.release()  # 關閉攝影機
 
@@ -209,7 +208,7 @@ for x, y, w, h in faces:
     myimg = Image.open("tmp_photo.jpg")  # PIL模組開啟
     imgCrop = myimg.crop((x, y, x + w, y + h))  # 裁切
     imgResize = imgCrop.resize((150, 150), Image.Resampling.LANCZOS)
-    imgResize.save("tmp_faceout.jpg")  # 儲存檔案
+    imgResize.save("tmp_faceout.jpg")  # 存圖
 
 cv2.namedWindow("FaceRecognition", cv2.WINDOW_NORMAL)
 cv2.imshow("FaceRecognition", img)
@@ -265,7 +264,7 @@ while cap.isOpened():  # 如果攝影機有開啟就執行迴圈
     if ret == True:  # 讀取影像如果成功
         key = cv2.waitKey(200)  # 0.2秒檢查一次
         if key == ord("a") or key == ord("A"):  # 如果按A或a
-            cv2.imwrite("tmp_photo.jpg", img)  # 將影像寫入tmp_photo.jpg
+            cv2.imwrite("tmp_photo.jpg", img)  # 存圖
             break
 cap.release()  # 關閉攝影機
 
@@ -331,7 +330,7 @@ while cap.isOpened():  # 如果攝影機有開啟就執行迴圈
     if ret == True:  # 讀取影像如果成功
         key = cv2.waitKey(200)  # 0.2秒檢查一次
         if key == ord("a") or key == ord("A"):  # 如果按A或a
-            cv2.imwrite("tmp_photo.jpg", img)  # 將影像寫入tmp_photo.jpg
+            cv2.imwrite("tmp_photo.jpg", img)  # 存圖
             break
 cap.release()  # 關閉攝影機
 
