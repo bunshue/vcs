@@ -4,30 +4,41 @@ Pytesseract 辨識圖片中的文字
 OCR，光學字元辨識(Optical Character Recognition) 意思是 可以把照片中的文字轉化成文字檔
 
 1. pip install pytesseract
-
 2. 到下面的網址下載並安裝 tesseract OCR
+
 https://github.com/UB-Mannheim/tesseract/wiki
 
-安裝 tesseract-ocr-w64-setup-5.3.1.20230401.exe
+安裝 OCR 程式
 
+64位元最新
+tesseract-ocr-w64-setup-5.3.3.20231005.exe
+32位元最新
+tesseract-ocr-w32-setup-5.3.0.20221222.exe
 安裝好後找到 pytesseract.exe 的位置，並複製其絕對路徑，通常會在
 
-C:\Program Files\Tesseract-OCR\tesseract.exe
+C:/Program Files/Tesseract-OCR/tesseract.exe
 或
 C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe
 
 3. OCR 辨識繁體中文
 其實和辨識英文一樣，只是我們要下載繁體中文的訓練資料，
 到這邊 https://github.com/tesseract-ocr/tessdata_best/blob/master/chi_tra.traineddata
-下載並將檔案放到 C:\Program Files\Tesseract-OCR\tessdata 中，修改 lang 參數變成 chi_tra 就可以啦
+下載並將檔案放到
+C:/Program Files/Tesseract-OCR/tessdata
+或
+C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tessdata
+中
+修改 lang 參數變成 chi_tra / chi_sim / jpn / eng 就可以了
 
+按 RAW 才會下載
 正中
 https://github.com/tesseract-ocr/tessdata_best/tree/main/chi_tra.traineddata
 簡中
 https://github.com/tesseract-ocr/tessdata_best/tree/main/chi_sim.traineddata
 日文
 https://github.com/tesseract-ocr/tessdata_best/tree/main/jpn.traineddata
-
+英文
+https://github.com/tesseract-ocr/tessdata_best/blob/main/eng.traineddata
 """
 
 print('------------------------------------------------------------')	#60個

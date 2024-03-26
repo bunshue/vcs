@@ -54,27 +54,27 @@ for cnt in range(3):
     traj = random_walk()
     plt.plot(traj[:, 0], traj[:, 1], label="Traj. {c}".format(c=cnt))
 
+plt.title("Random Walk")
+
 # 第二張圖
 plt.subplot(232)
 
-x = np.linspace(0, 6.4, 100)  # x是numpy.ndarray格式
+N = 20
+x = np.linspace(0, 6.4, N)  # x是numpy.ndarray格式
 
 A = 0.8  # 雜訊的振幅
 y = np.sin(x) + np.random.rand(1, len(x)) * A - A / 2  # 加入雜訊的點集    # y是numpy.ndarray格式
 
 y = y.tolist()[0]  # y 由 numpy.ndarray格式 轉成list格式, 畫圖要用list格式
 
-plt.plot(x, np.sin(x))
-plt.plot(x, y)
+plt.plot(x, np.sin(x), 'black')#無雜訊
+plt.plot(x, y, 'r')#有雜訊
+plt.grid()
 
-plt.title("畫雜訊範例")
+plt.title("畫雜訊範例 " + str(N) + "點")
 
 # 第三張圖
 plt.subplot(233)
-
-print("繪製移動平均圖")
-
-import pandas as pd
 
 filename = "_data/python_ReadWrite_CSV6_temperature.csv"
 
@@ -92,7 +92,7 @@ plt.plot(x, y)  # 繪圖
 v = np.ones(9) / 9.0
 y2 = np.convolve(y, v, mode="same")  # 計算移動平均
 plt.plot(x[4 : n - 4], y2[4 : n - 4])  # 繪圖
-
+plt.title("繪製移動平均圖")
 
 # 第四張圖
 plt.subplot(234)
@@ -127,16 +127,21 @@ plt.subplot(236)
 # 畫個函數, 標出正的部份!
 # 把這個函數大於 0 的地方標示出來。
 
-x = np.linspace(-5, 5, 200)
+N = 30 + 1
+x = np.linspace(-5, 5, N) # 含頭尾 分成N個
 y = np.sinc(x)
 
-plt.plot(x, y)
-plt.plot(x[y > 0], y[y > 0], "o")
-# plt.scatter(x[y>0], y[y>0], c='r')
+#print(x)
+#print(y)
 
-print(plt.axis())
+plt.plot(x, y, 'black')
+plt.plot(x[y > 0], y[y > 0], "ro")
+# plt.scatter(x[y>0], y[y>0], c='r')
+#print(plt.axis())
+plt.title("只標出正的部分")
 
 plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -160,7 +165,7 @@ def f2(x):
     return float(float(school[x]) / float(bp[x]))
 
 
-filename = "C:/_git/vcs/_1.data/______test_files1/school.txt"
+filename = "_data/school.txt"
 with open(filename, "r") as fp:
     schools = fp.readlines()
 
@@ -170,7 +175,7 @@ for s in schools:
 
 # 共取得??筆資料 list的用法
 
-filename = "C:/_git/vcs/_1.data/______test_files1/yrborn.txt"
+filename = "_data/yrborn.txt"
 with open(filename, "r") as fp:
     populations = fp.readlines()
 
@@ -242,7 +247,7 @@ plt.figure(
 )
 
 # 第1~2張圖
-filename = "C:/_git/vcs/_1.data/______test_files1/yrborn.txt"
+filename = "_data/yrborn.txt"
 
 with open(filename, "r") as fp:
     populations = fp.readlines()
@@ -283,7 +288,7 @@ plt.title("1986 - 2015 (Boy:Girl)")
 
 # 第3~4張圖
 
-filename = "C:/_git/vcs/_1.data/______test_files1/yrborn.txt"
+filename = "_data/yrborn.txt"
 
 with open(filename, "r") as fp:
     populations = fp.readlines()
@@ -349,9 +354,6 @@ plt.subplot(231)
 
 print("描繪切線")
 
-import matplotlib.pyplot as plt
-import numpy as np
-
 # x的值
 x = np.arange(-1, 1, 0.1)
 
@@ -395,9 +397,6 @@ plt.subplot(233)
 
 print("畫出函數與導函數的圖")
 
-import matplotlib.pyplot as plt
-import numpy as np
-
 # x的值
 x = np.arange(-10, 10, 0.1)
 
@@ -416,9 +415,6 @@ plt.plot(x, y2)
 plt.subplot(235)
 
 print("畫出年收入圖")
-
-import matplotlib.pyplot as plt
-import pandas as pd
 
 # 讀入csv檔
 filename = "_data/python_ReadWrite_CSV7_salary.csv"

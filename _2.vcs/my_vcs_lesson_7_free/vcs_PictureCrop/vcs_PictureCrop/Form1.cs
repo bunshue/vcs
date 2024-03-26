@@ -149,7 +149,7 @@ namespace vcs_PictureCrop
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
-            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\__pic\_ntuh";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\__pic";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -446,11 +446,11 @@ namespace vcs_PictureCrop
 
                 if (rb_filetype1.Checked == true)
                 {
-                    filename = open_folder_directory + "\\" + fore_filename + "_crop.jpg";
+                    filename = open_folder_directory + "\\" + fore_filename + ".jpg";
                 }
                 else
                 {
-                    filename = open_folder_directory + "\\" + fore_filename + "_crop.bmp";
+                    filename = open_folder_directory + "\\" + fore_filename + ".bmp";
                 }
 
 
@@ -460,6 +460,7 @@ namespace vcs_PictureCrop
 
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
             Bitmap bitmap2 = bitmap1.Clone(SelectionRectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
+            //bitmap1.Dispose();
 
             if (rb_filetype1.Checked == true)
             {
@@ -469,6 +470,7 @@ namespace vcs_PictureCrop
             {
                 bitmap2.Save(filename, ImageFormat.Bmp);
             }
+            pictureBox1.Image = bitmap2;
 
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
 

@@ -20,6 +20,7 @@ if cap.isOpened() == False:
 else:
     print('開啟攝影機 OK')
 
+cnt = 0
 while True:
     ret, frame = cap.read()   # 從攝影機擷取一張影像
 
@@ -31,9 +32,11 @@ while True:
     elif k == ord('Q') or k == ord('q'):  # 按下 Q(q) 結束迴圈
         break
     elif k == ord('S') or k == ord('s'):  # 按下 S(s), 存圖
-        filename = 'Image_webcam.jpg'
+        #filename = 'Image_webcam.jpg'
+        filename = 'Image_webcam'+str(cnt)+'.jpg'
         cv2.imwrite(filename, frame)
         print('已存圖, 檔案 :', filename)
+        cnt += 1
 
 # 釋放所有資源
 cap.release()   # 釋放攝影機

@@ -1,9 +1,9 @@
-## Bing
-## 當然可以！以下是一個簡單的 Python 猜數字遊戲，讓你猜一個介於 0 到 100 之間的數字。請享受遊戲吧！🎮
+# Bing
+# 當然可以！以下是一個簡單的 Python 猜數字遊戲，讓你猜一個介於 0 到 100 之間的數字。請享受遊戲吧！?
 
 import random
 
-secret_number = random.randint(0, 100)  # 含頭尾
+secret_number = random.randint(0, 100)  # 含頭尾之整數
 attempts = 1
 
 print("歡迎來到猜數字遊戲！")

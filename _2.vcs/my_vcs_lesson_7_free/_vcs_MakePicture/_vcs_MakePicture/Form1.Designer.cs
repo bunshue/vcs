@@ -926,6 +926,7 @@
             this.button61.Name = "button61";
             this.button61.Size = new System.Drawing.Size(60, 60);
             this.button61.TabIndex = 65;
+            this.button61.Text = "cv1";
             this.button61.UseVisualStyleBackColor = true;
             this.button61.Click += new System.EventHandler(this.button61_Click);
             // 
@@ -936,6 +937,7 @@
             this.button62.Name = "button62";
             this.button62.Size = new System.Drawing.Size(60, 60);
             this.button62.TabIndex = 66;
+            this.button62.Text = "cv2";
             this.button62.UseVisualStyleBackColor = true;
             this.button62.Click += new System.EventHandler(this.button62_Click);
             // 
@@ -946,6 +948,7 @@
             this.button63.Name = "button63";
             this.button63.Size = new System.Drawing.Size(60, 60);
             this.button63.TabIndex = 67;
+            this.button63.Text = "color checker";
             this.button63.UseVisualStyleBackColor = true;
             this.button63.Click += new System.EventHandler(this.button63_Click);
             // 

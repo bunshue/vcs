@@ -2419,6 +2419,74 @@ namespace _vcs_MakePicture
 
         private void button63_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "draw image在圖片的不同地方 做opencv疊合用";
+
+            int W = 430;
+            int H = 304;
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            g = Graphics.FromImage(bitmap1);
+
+            int dd = 10;
+            p = new Pen(Color.FromArgb(255, 128, 0, 0), 20);
+            g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
+
+            dd = 20;
+            p = new Pen(Color.FromArgb(255, 0, 255, 0), 20);
+            g.DrawRectangle(p, new Rectangle(dd, dd, W - dd * 2, H - dd * 2));
+
+            string filename = @"Spyder.bmp";
+            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            richTextBox1.Text += "W = " + bitmap2.Width.ToString() + ", H = " + bitmap2.Height.ToString() + "\n";
+            g.DrawImage(bitmap2, 0, 0, bitmap2.Width, bitmap2.Height);
+            //              貼上的位置      貼上的大小 放大縮小用
+
+
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 68;
+            int dy = 70;
+            int w = 50;
+            int h = 45;
+
+            //Cyan 0 255 255
+            sb = new SolidBrush(Color.FromArgb(255, 0x00, 0xff, 0xff));
+            g.FillRectangle(sb, new Rectangle(x_st + dx * 0, y_st + dy * 2, w, h));
+            
+            //Magenta 255 0 255
+            sb = new SolidBrush(Color.FromArgb(255, 0xff, 0x0, 0xff));
+            g.FillRectangle(sb, new Rectangle(x_st + dx * 1, y_st + dy * 2, w, h));
+
+            //Yellow 255 255 0
+            sb = new SolidBrush(Color.FromArgb(255, 0xff, 0xff, 0x00));
+            g.FillRectangle(sb, new Rectangle(x_st + dx * 2, y_st + dy * 2, w, h));
+
+            //R
+            sb = new SolidBrush(Color.FromArgb(255, 0xff, 0x00, 0x00));
+            g.FillRectangle(sb, new Rectangle(x_st + dx * 3, y_st + dy * 2, w, h));
+
+            //G
+            sb = new SolidBrush(Color.FromArgb(255, 0x00, 0xff, 0x00));
+            g.FillRectangle(sb, new Rectangle(x_st + dx * 4, y_st + dy * 2, w, h));
+
+            //B
+            sb = new SolidBrush(Color.FromArgb(255, 0x00, 0x00, 0xff));
+            g.FillRectangle(sb, new Rectangle(x_st + dx * 5, y_st + dy * 2, w, h));
+
+            //White
+            sb = new SolidBrush(Color.FromArgb(255, 0xff, 0xff, 0xff));
+            g.FillRectangle(sb, new Rectangle(x_st + dx * 0, y_st + dy * 3, w, h));
+
+            //Black
+            sb = new SolidBrush(Color.FromArgb(255, 0x00, 0x00, 0x00));
+            g.FillRectangle(sb, new Rectangle(x_st + dx * 5, y_st + dy * 3, w, h));
+
+
+
+            filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(@filename, ImageFormat.Bmp);
+
+            pictureBox1.Image = bitmap1;
 
         }
 

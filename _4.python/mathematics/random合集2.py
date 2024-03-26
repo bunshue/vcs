@@ -2,7 +2,7 @@ import sys
 
 import random
 
-#只使用numpy
+# 只使用numpy
 
 """
 np.random.seed()
@@ -18,7 +18,9 @@ np.random.其他
 
 """
 
-print('---- 用 numpy 做的 random --------------------------------------------------------')	#60個
+print(
+    "---- 用 numpy 做的 random --------------------------------------------------------"
+)  # 60個
 
 import numpy as np
 import pandas as pd
@@ -695,8 +697,8 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 '''
 
-print('將產生出來的常態分布做數字分析')
-print('normal 常態分布 N = 1000')
+print("將產生出來的常態分布做數字分析")
+print("normal 常態分布 N = 1000")
 
 mu, sigma = 100, 15
 N = 100000
@@ -721,6 +723,3 @@ print(f"Numpy模組母體標準差  : {np.std(x):6.2f}")
 print(f"Numpy模組樣本標準差  : {np.std(x,ddof=1):6.2f}")
 print(f"Statistics母體標準差 : {statistics.pstdev(x):6.2f}")
 print(f"Statistics樣本標準差 : {statistics.stdev(x):6.2f}")
-
-
-

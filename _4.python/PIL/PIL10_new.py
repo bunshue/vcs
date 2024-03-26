@@ -1,7 +1,6 @@
 """
 PIL 新進
 
-
 使用python進行數字圖片處理，還得安裝Pillow包。
 雖然python里面自帶一個PIL（python images library), 但這個庫現在已經停止更新了，
 所以使用Pillow, 它是由PIL發展而來的。
@@ -9,19 +8,29 @@ PIL 新進
 pip install Pillow
 """
 
-print('------------------------------------------------------------')	#60個
 
+"""
+plot 集合 1
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
+import math
+import random
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
@@ -35,18 +44,17 @@ print('顯示原圖')
 
 #建立Pillow物件 PIL讀取本機圖片, RGB模式, 存成PIL影像格式
 img = Image.open(filename)
+
 #img = img.convert('L')  #fail
 print(type(img))
-plt.figure('Image')
 plt.imshow(img)
 plt.show()
 
 #PIL影像格式轉化為numpy陣列
 img=np.array(img)
 print(type(img))
-plt.figure('Image')
-plt.imshow(img)
-plt.show()
+
+#顯示方法相同
 
 print('------------------------------------------------------------')	#60個
 
@@ -64,16 +72,11 @@ pip install scipy
 
 
 """
-
 調用numpy中的array（）函數就可以將PIL對象轉換為數組對象。
-
 如果是RGB圖片，那么轉換為array之後，就變成了一個rows*cols*channels的三維矩陣,因此，我們可以使用
-
 img[i,j,k]
-
 來訪問像素值。
-
-例1：打開圖片，並隨機添加一些椒鹽噪聲
+例：打開圖片，並隨機添加一些椒鹽噪聲
 """
 
 img=np.array(Image.open(filename))
@@ -85,16 +88,16 @@ for i in range(5000):
     y=np.random.randint(0,cols)
     img[x,y,:]=255
     
-plt.figure('picture')
 plt.imshow(img)
 plt.title('椒鹽效果')
 plt.show()
 
-print('將圖像二值化，像素值大于 threshold 的變為1，否則變為0')
+print('------------------------------------------------------------')	#60個
 
+print('將圖像二值化，像素值大于 threshold 的變為1，否則變為0')
 img=np.array(Image.open(filename).convert('L'))
 
-""" QQQ
+"""
 plt.imshow(img)
 plt.title('LLLL')
 plt.show()
@@ -112,37 +115,24 @@ for i in range(rows):
         else:
             img[i,j]=1
             
-plt.figure('picture')
 plt.imshow(img,cmap='gray')
 plt.title('二值化, threshold ='+ str(threshold))
 plt.show()
 
 """
 如果要對多個像素點進行操作，可以使用數組切片方式訪問。切片方式返回的是以指定間隔下標訪問 該數組的像素值。下面是有關灰度圖像的一些例子：
-復制代碼
 
 img[i,:] = im[j,:] # 將第 j 行的數值賦值給第 i 行
-
 img[:,i] = 100 # 將第 i 列的所有數值設為 100
-
 img[:100,:50].sum() # 計算前 100 行、前 50 列所有數值的和
-
 img[50:100,50:100] # 50~100 行，50~100 列（不包括第 100 行和第 100 列）
-
 img[i].mean() # 第 i 行所有數值的平均值
-
 img[:,-1] # 最後一列
-
 img[-2,:] (or im[-2]) # 倒數第二行
-
 """
 print('------------------------------------------------------------')	#60個
 
-import torchvision.transforms as transforms
-
-print('------------------------------------------------------------')	#60個
-
-#PIL 偽色彩圖像處理
+print("偽色彩圖像處理")
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/pic_256X100.png'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -353,7 +343,15 @@ import squarify
 
 print('------------------------------------------------------------')	#60個
 
-plt.figure('影像處理1', figsize = (10, 6))
+plt.figure(
+    num="影像處理1",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -390,7 +388,16 @@ print('壓縮到100~200 灰階最小值 :', int(image3.min()),', 灰階最大值
 image4=255.0*(image1/255.0)**2  #對像素值求平方後得到的圖像
 print('相素值平方 灰階最小值 :', int(image4.min()),', 灰階最大值 :', int(image4.max()))
 
-plt.figure('影像處理2', figsize = (14, 10))
+plt.figure(
+    num="影像處理2",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(221)
@@ -515,15 +522,13 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("de_noise")
+print("de-noise")
 
-import random
-import cv2
 import scipy.misc
 import scipy.signal
 import scipy.ndimage
 
-"""中值濾波函數"""
+#中值濾波函數
 def medium_filter(im, x, y, step):
     sum_s=[]
     for k in range(-int(step/2),int(step/2)+1):
@@ -531,7 +536,7 @@ def medium_filter(im, x, y, step):
             sum_s.append(im[x+k][y+m])
     sum_s.sort()
     return sum_s[(int(step*step/2)+1)]
-"""均值濾波函數"""
+#均值濾波函數
 def mean_filter(im, x, y, step):
     sum_s = 0
     for k in range(-int(step/2),int(step/2)+1):
@@ -548,7 +553,7 @@ def convert_2d(r):
     # boundary 表示采用對稱邊界條件處理圖像邊緣
     s = scipy.signal.convolve2d(r, window, mode='same', boundary='symm')
     return s.astype(np.uint8)
-"""添加噪聲"""
+#添加噪聲
 def add_salt_noise(img):
     rows, cols, dims = img.shape 
     R = np.mat(img[:, :, 0])
@@ -609,6 +614,16 @@ def add_salt_noise(img):
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
 
+plt.figure(
+    num="影像處理",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 img = np.array(Image.open(filename))  #導入圖片
 add_salt_noise(img)
 
@@ -616,11 +631,22 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_derivative")
 
-from scipy.ndimage import  filters
+from scipy.ndimage import filters
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 image=np.array(Image.open(filename).convert('L'))
+
+plt.figure(
+    num="PIL_derivative",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(141)
@@ -656,7 +682,17 @@ from matplotlib.font_manager import FontProperties
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 image=np.array(Image.open(filename).convert('L'))
-plt.figure()
+
+plt.figure(
+    num="PIL_fuzzy",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(141)
@@ -704,7 +740,17 @@ def mag(image, sigma):
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 image = np.array(Image.open(filename).convert('L'))
-plt.figure()
+
+plt.figure(
+    num="PIL_gaussian",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 sigma = [2, 5, 10]
 for i in  sigma:
@@ -734,7 +780,16 @@ print("PIL_opening")
 from scipy.ndimage import measurements, morphology  
 
 # 加載圖像和閾值，以確保它是二進制的
-plt.figure()
+
+plt.figure(
+    num="PIL_opening",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 image = np.array(Image.open('data/castle.jpg').convert('L'))
@@ -772,9 +827,19 @@ print("PIL_PCA")
 from scipy.ndimage import measurements, morphology  
 
 # 加載圖像和閾值，以確保它是二進制的
-plt.figure()
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 image = np.array(Image.open('data/castle.jpg').convert('L'))
+
+plt.figure(
+    num="PIL_PCA",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(221)
 plt.imshow(image)
@@ -813,7 +878,16 @@ image = np.array(Image.open('data/gril.jpg').convert('L'))
 #U,T = rof.denoise(image,image)
 G = filters.gaussian_filter(image,10)
 
-plt.figure()
+plt.figure(
+    num="PIL_realROF",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(1,3,1)
@@ -850,7 +924,15 @@ image = image + 30*np.random.standard_normal((500,500))
 #U,T = rof.denoise(image,image)  
 G = filters.gaussian_filter(image,10)
 
-plt.figure()
+plt.figure(
+    num="PIL_ROF",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
@@ -931,7 +1013,6 @@ img1 = Image.open(open(filename, 'rb'))
 img2 = img1.point(lambda x: 0 if x < 128 else 255)
 
 img2.save(open('tmp_elephant_binary.png', 'wb'))
-
 
 print("------------------------------------------------------------")  # 60個
 
