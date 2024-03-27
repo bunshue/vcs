@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{29287E19-BB4C-4342-82CE-E5D192449534}</ProjectGuid>
+    <ProjectGuid>{64705A64-54C9-4C4F-A7D1-41CEF18C7F9B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_ColorPicker3</RootNamespace>
-    <AssemblyName>vcs_ColorPicker3</AssemblyName>
+    <RootNamespace>vcs_HotKey1</RootNamespace>
+    <AssemblyName>vcs_HotKey1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

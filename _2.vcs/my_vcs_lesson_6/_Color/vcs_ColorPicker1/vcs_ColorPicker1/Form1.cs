@@ -64,7 +64,6 @@ namespace vcs_ColorPicker1
             {
                 this.TopMost = false;
             }
-
         }
 
         [DllImport("gdi32.dll")]
@@ -73,6 +72,7 @@ namespace vcs_ColorPicker1
         static public extern IntPtr CreateDC(string driverName, string deviceName, string output, IntPtr lpinitData);
         [DllImport("gdi32.dll")]
         static public extern bool DeleteDC(IntPtr DC);
+
         static public byte GetRValue(uint color)
         {
             return (byte)color;
@@ -88,19 +88,16 @@ namespace vcs_ColorPicker1
             return ((byte)((color) >> 16));
         }
 
-        static public byte GetAValue(uint color)
+        public Color GetColor(Point pt)
         {
-            return ((byte)((color) >> 24));
-        }
+            IntPtr hdc = CreateDC("DISPLAY", null, null, IntPtr.Zero);
+            uint pixel = GetPixel(hdc, pt.X, pt.Y);
+            DeleteDC(hdc);
 
-        public Color GetColor(Point screenPoint)
-        {
-            IntPtr displayDC = CreateDC("DISPLAY", null, null, IntPtr.Zero);
-            uint colorref = GetPixel(displayDC, screenPoint.X, screenPoint.Y);
-            DeleteDC(displayDC);
-            byte Red = GetRValue(colorref);
-            byte Green = GetGValue(colorref);
-            byte Blue = GetBValue(colorref);
+            byte Red = (byte)(pixel & 0x000000FF);
+            byte Green = (byte)((pixel & 0x0000FF00) >> 8);
+            byte Blue = (byte)((pixel & 0x00FF0000) >> 16);
+
             return Color.FromArgb(Red, Green, Blue);
         }
 
@@ -204,7 +201,7 @@ namespace vcs_ColorPicker1
                     g.Clear(BackColor);
 
                     g.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0));
-                    g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Green), new PointF(5 + 75, 0));
+                    g.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Lime), new PointF(5 + 75, 0));
                     g.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0));
 
                     cl_old = cl;
@@ -234,11 +231,11 @@ namespace vcs_ColorPicker1
             }
             else
             {
-                txtPoint.Text = Control.MousePosition.X.ToString() + "," + Control.MousePosition.Y.ToString();
+                txtPoint.Text = Control.MousePosition.X.ToString() + ", " + Control.MousePosition.Y.ToString();
                 Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
                 Color cl = GetColor(pt);
                 panel1.BackColor = cl;
-                txtRGB.Text = cl.R + "," + cl.G + "," + cl.B;
+                txtRGB.Text = cl.R.ToString() + ", " + cl.G.ToString() + ", " + cl.B.ToString();
                 txtColor.Text = ColorTranslator.ToHtml(cl).ToString();
             }
         }
