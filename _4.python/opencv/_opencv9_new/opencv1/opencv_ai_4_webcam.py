@@ -16,41 +16,6 @@ import numpy as np
 
 print("------------------------------------------------------------")  # 60個
 
-cap = cv2.VideoCapture(0)
-
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-while True:
-    ret, frame = cap.read()             # 讀取影片的每一幀
-    if not ret:
-        print("Cannot receive frame")   # 如果讀取錯誤，印出訊息
-        break
-    cv2.imshow('image1', frame)     # 如果讀取成功，顯示該幀的畫面
-
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
-    # gray = cv2.cvtColor(frame, 6)  # 也可以用數字對照 6 表示轉換成灰階
-    cv2.imshow('image2', gray)
-
-    # 套用自適應二值化黑白影像
-    img_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY);
-    img_gray = cv2.medianBlur(img_gray, 5)
-    output = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
-    cv2.imshow('image3', output)
-
-    # 套用 medianBlur() 中值模糊
-    image4 = cv2.medianBlur(frame, 25)
-    cv2.imshow('image4', image4)
-    
-    if cv2.waitKey(1) == ord('q'):      # 每一毫秒更新一次，直到按下 q 結束
-        break
-
-cap.release()                           # 所有作業都完成後，釋放資源
-cv2.destroyAllWindows()                 # 結束所有視窗
-
-print("------------------------------------------------------------")  # 60個
-"""
 #錄影1
 
 cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
@@ -117,7 +82,7 @@ while True:
     if not ret:
         print("Cannot receive frame")
         break
-    img_1 = cv2.resize(frame,(640, 360))   # 改變圖片尺寸
+    img_1 = frame
     img_2 = cv2.flip(img_1, 0)             # 上下翻轉
     out.write(img_2)                       # 將取得的每一幀圖像寫入空的影片
     cv2.imshow('image', frame)
@@ -155,6 +120,17 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 #兩個camera
+
+ratio = 3
+border = 30
+W = 640
+H = 480
+
+w = W//ratio
+h = H//ratio
+x_st = W - w - border
+y_st = H - h - border
+
 cap1 = cv2.VideoCapture(0)
 cap2 = cv2.VideoCapture(1)
 
@@ -168,74 +144,20 @@ if not cap2.isOpened():
 while True:
     ret1, img1 = cap1.read()
     ret2, img2 = cap2.read()
-    img1 = cv2.resize(img1,(200,150))  # 縮小尺寸
-    img2 = cv2.resize(img2,(540,320))  # 縮小尺寸
-    img2[160:310,330:530] = img1       # 將 img2 的特定區域換成 img1
+    img1 = cv2.resize(img1,(w, h))  # 縮小尺寸 小圖
+    #img2 = cv2.resize(img2,(W, H))  # 縮小尺寸 大圖
 
-    cv2.rectangle(img2, (330,160), (530,310), (255,255,255), 5)  # 繪製子影片的外框
+    img2[y_st:y_st+h,x_st:x_st+w] = img1       # 將 img2 的特定區域換成 img1
+
+    cv2.rectangle(img2, (x_st, y_st), (x_st+w,y_st+h), (255,255,255), 5)  # 繪製子影片的外框
 
     cv2.imshow('image', img2)
     if cv2.waitKey(1) == ord('q'):
         break
+
 cap1.release()
 cap2.release()
 cv2.destroyAllWindows()
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-output = np.zeros((360,640,3), dtype='uint8')   # 產生 640x360 的黑色背景
-
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-while True:
-    ret, img = cap.read()
-    img = cv2.resize(img, (640, 360))   # 改變影像尺寸為 640x360
-    img = img[:360, :320]               # 取出 320x360 的影像
-    img2 = cv2.flip(img, 1)             # 左右翻轉影像
-    output[:, :320] = img               # 將 output 左邊內容換成 img
-    output[:, 320:640] = img2           # 將 output 右邊內容換成 img2
-
-    cv2.imshow('image', output)
-    if cv2.waitKey(50) == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-output = np.zeros((640,640,3), dtype='uint8')
-
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-while True:
-    ret, img = cap.read()
-    img = cv2.resize(img,(640, 360))
-    img = img[:320, :320]             # 取出 320x320 的區域
-    img2 = cv2.flip(img, 1)           # 左右翻轉
-    img3 = cv2.flip(img, 0)           # 上下翻轉
-    img4 = cv2.flip(img, -1)          # 上下左右翻轉
-    output[:320, :320] = img          # 左上
-    output[:320, 320:640] = img2      # 右上
-    output[320:640, :320] = img3      # 左下
-    output[320:640, 320:640] = img4   # 右下
-
-    cv2.imshow('image', output)
-    if cv2.waitKey(50) == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -246,7 +168,7 @@ if not cap.isOpened():
     print("Cannot open camera")
     exit()
 
-n = 5                                  # 設定要分成幾格
+n = 2                                  # 設定要分成幾格
 w = 640//n                             # 計算分格之後的影像寬度 ( // 取整數 )
 h = 360//n                             # 計算分格之後的影像高度 ( // 取整數 )
 while True:
@@ -260,22 +182,25 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
-cap = cv2.VideoCapture(0)
-output = np.zeros((360,640,3), dtype='uint8')
+cap = cv2.VideoCapture(0)                      # 讀取攝影鏡頭
+output = np.zeros((360,640,3), dtype='uint8')  # 產生 640x360 的黑色背景
 
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
 
-n = 5
-w = 640//n
-h = 360//n
+n = 2                                  # 設定要分成幾格
+w = 640//n                             # 計算分格之後的影像寬度 ( // 取整數 )
+h = 360//n                             # 計算分格之後的影像高度 ( // 取整數 )
 img_list = []        # 設定空串列，記錄每一格的影像
 while True:
-    ret, img = cap.read()
-    img = cv2.resize(img,(w, h))
+    ret, img = cap.read()              # 讀取影像
+    img = cv2.resize(img,(w, h))       # 縮小尺寸
+    #output[0:h, 0:w] = img             # 將 output 的特定區域置換為 img 只更新一塊
     img_list.append(img)                    # 每次擷取影像時，將影像存入串列
     if len(img_list)>n*n: del img_list[0]   # 如果串列長度超過可容納的影像數量，移除第一個項目
     for i in range(len(img_list)):
@@ -309,6 +234,7 @@ while True:
     img = img[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
     cv2.line(img,(x,0),(x,h),(0,0,255),5)         # 畫線
     cv2.imshow('image',img)                  # 正常狀況下，一直顯示即時影像
+    
     x = x + 2
     if x > h:
         x = 0
@@ -327,7 +253,6 @@ if not cap.isOpened():
     exit()
 
 w, h = 640, 360                                   # 定義長寬
-a = 1                                             # 存檔的檔名編號從 1 開始
 run = 0                                           # 是否開始，0 表示尚未開始，1 表示開始
 output = np.zeros((h,h,3), dtype='uint8')         # 設定合成的影像為一張全黑的畫布 ( 長寬使用正方形 )
 while True:
@@ -354,8 +279,9 @@ while True:
         cv2.imshow('image',img)              # 顯示即時影像
         if x > h:
             keyCode = cv2.waitKey() == ord('s')   # 如果寬度抵達正方形邊緣，等待鍵盤事件按下 s
-            cv2.imwrite(f'tmp_oxxo-{a}.jpg',img)      # 存檔
-            a = a + 1                             # 檔名編號增加 1
+            image_filename = 'tmp1_Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+            cv2.imwrite(image_filename, img)
+            print('已存圖, 檔案 :', image_filename)
             run = 0                               # 停止合成
     else:
         cv2.imshow('image',img)              # 正常狀況下，一直顯示即時影像
@@ -371,7 +297,6 @@ if not cap.isOpened():
     exit()
 
 w, h = 640, 360                                   # 定義長寬
-a = 1                                             # 存檔的檔名編號從 1 開始
 run = 0                                           # 是否開始，0 表示尚未開始，1 表示開始
 output = np.zeros((h,h,3), dtype='uint8')         # 設定合成的影像為一張全黑的畫布
 while True:
@@ -398,8 +323,9 @@ while True:
         cv2.imshow('image',img)              # 顯示即時影像
         if y > h:
             keyCode = cv2.waitKey() == ord('s')   # 如果寬度抵達正方形邊緣，等待鍵盤事件按下 s
-            cv2.imwrite(f'tmp_oxxo-{a}.jpg',img)      # 存檔
-            a = a + 1                             # 檔名編號增加 1
+            image_filename = 'tmp2_Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+            cv2.imwrite(image_filename, img)
+            print('已存圖, 檔案 :', image_filename)
             run = 0                               # 停止合成
     else:
         cv2.imshow('image',img)              # 正常狀況下，一直顯示即時影像
@@ -445,16 +371,18 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-cap = cv2.VideoCapture(0)
+print('慢慢顯示出一圖的效果')
 
-img = cv2.imread('mona.jpg')
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+img = cv2.imread(filename)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
 w = img.shape[1]
 h = img.shape[0]
 white = 255 - np.zeros((h,w,4), dtype='uint8')
+
 a = 0                       # 開始時 a 等於 0
 while True:
 
@@ -467,21 +395,20 @@ while True:
     if a == 0:
         output = img.copy() # 如果 a 等於 0，複製來源圖片為 output
     else:
+        #111
         output = cv2.addWeighted(white, a, img, 1-a, 0)  # 如果 a 等於 1，根據 a 套用權重
         a = a - 0.01        # a 不斷減少 0.01
         if a<0: a = 0       # 如果 a 小於 0 就讓 a 等於 0
 
-    cv2.imshow('image', output)
+    cv2.imshow('image', output)               # 顯示圖片
 
-cap.release()
-cv2.destroyAllWindows()
+cv2.destroyAllWindows()                 # 結束所有視窗
 
 print("------------------------------------------------------------")  # 60個
 
 cap = cv2.VideoCapture(0)
 
 a = 0    # 白色圖片透明度
-n = 0    # 檔名編號
 
 if not cap.isOpened():
     print("Cannot open camera")
@@ -492,8 +419,8 @@ while True:
         print("Cannot receive frame")   # 如果讀取錯誤，印出訊息
         break
     img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)  # 轉換顏色為 BGRA
-    w = int(img.shape[1]*0.5)           # 縮小寬度為一半
-    h = int(img.shape[0]*0.5)           # 縮小高度為一半
+    w = img.shape[1]
+    h = img.shape[0]
     img = cv2.resize(img,(w,h))         # 縮放尺寸
     white = 255 - np.zeros((h,w,4), dtype='uint8')   # 產生全白圖片
 
@@ -507,12 +434,14 @@ while True:
         output = img.copy()  # 如果 a 為 0，設定 output 變數為來源圖片的拷貝
     else:
         photo = img.copy()   # 如果 a 不為 0，設定 photo 變數為來源圖片的拷貝
+        #222
         output = cv2.addWeighted(white, a, photo, 1-a, 0)  # 計算權重，產生白色慢慢消失效果
         a = a - 0.1
         if a<0:
             a = 0
-            n = n + 1
-            cv2.imwrite(f'tmp_photo-{n}.jpg', photo)   # 存檔
+            image_filename = 'tmp3_Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+            cv2.imwrite(image_filename, photo)
+            print('已存圖, 檔案 :', image_filename)
 
     cv2.imshow('image', output)               # 顯示圖片
 
@@ -533,7 +462,6 @@ def putText(source, x, y, text, scale=2.5, color=(255,255,255)):
     cv2.putText(source, text, org, fontFace, fontScale, color, thickness, lineType)
 
 a = 0
-n = 0
 
 if not cap.isOpened():
     print("Cannot open camera")
@@ -544,8 +472,8 @@ while True:
         print("Cannot receive frame")
         break
     img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
-    w = int(img.shape[1]*0.5)
-    h = int(img.shape[0]*0.5)
+    w = img.shape[1]
+    h = img.shape[0]
     img = cv2.resize(img,(w,h))
     white = 255 - np.zeros((h,w,4), dtype='uint8')
 
@@ -568,36 +496,16 @@ while True:
             a = a - 0.1
             if a<0:
                 a = 0
-                n = n + 1
-                cv2.imwrite(f'tmp_photo-{n}.jpg', photo)
+                image_filename = 'tmp4_Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+                cv2.imwrite(image_filename, photo)
+                print('已存圖, 檔案 :', image_filename)
+
     cv2.imshow('image', output)
 
 cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉成灰階
-    img = cv2.medianBlur(img, 7)                   # 模糊化，去除雜訊
-    img = cv2.Canny(img, 36, 36)                   # 偵測邊緣
-    cv2.imshow('image', img)
-    if cv2.waitKey(1) == ord('q'):
-        break                                      # 按下 q 鍵停止
-cap.release()
-cv2.destroyAllWindows()
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 logo = cv2.imread('logo.jpg')
@@ -658,6 +566,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("Webcam影像轉成gif")
 from PIL import Image,ImageSequence
 
 output = []                       # 建立輸出的空串列
@@ -677,7 +586,7 @@ while True:
     cv2.rectangle(img,(10,10),(200,42),(0,0,0),-1)
 
     # 加上文字
-    text = 'oxxo.studio'
+    text = 'English Only'
     org = (15,35)
     fontFace = cv2.FONT_HERSHEY_SIMPLEX
     fontScale = 1
@@ -696,14 +605,16 @@ while True:
         break
 cap.release()
 # 儲存為 gif 動畫
-output[0].save("test2.gif", save_all=True, append_images=output[1:], duration=250, loop=0, disposal=2)
+output[0].save("tmp_webcam_image.gif", save_all=True, append_images=output[1:], duration=250, loop=0, disposal=2)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
 from PIL import Image,ImageSequence
 
-cap = cv2.VideoCapture('video.mov')   # 開啟影片
+cap = cv2.VideoCapture(video_filename)   # 開啟影片
 source = []                           # 建立 source 空串列，記錄影格內容
 frame = 0                             # frame 從 0 開始
 
@@ -739,17 +650,17 @@ print('export single frame to gif...')
 n = 0
 for i in source:
     img = Image.fromarray(i)
-    img.save(f'temp/gif{n}.gif')
+    img.save(f'tmp_gif{n}.gif')
     n = n + 1
 
 print('loading gifs...')
 output = []
 for i in range(n):
-    img = Image.open(f'temp/gif{i}.gif')
+    img = Image.open(f'tmp_gif{i}.gif')
     img = img.convert("RGBA")
     output.append(img)
 
-output[0].save("test2.gif", save_all=True, append_images=output[1:], duration=100, loop=0, disposal=2)
+output[0].save("tmp_test2.gif", save_all=True, append_images=output[1:], duration=100, loop=0, disposal=2)
 print('ok...')
 
 cv2.destroyAllWindows()
@@ -762,8 +673,9 @@ cap = cv2.VideoCapture(0)
 
 def putText(x,y,text,color=(0,0,0)):
     global img
-    fontpath = 'NotoSansTC-Regular.otf'
-    font = ImageFont.truetype(fontpath, 20)
+    font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
+    font_size = 20
+    font = ImageFont.truetype(font_filename, font_size)
     imgPil = Image.fromarray(img)
     draw = ImageDraw.Draw(imgPil)
     draw.text((x, y), text, fill=color, font=font)
@@ -809,8 +721,9 @@ cap = cv2.VideoCapture(0)     # 讀取攝影鏡頭
 # 定義加入文字函式
 def putText(x,y,text,size=20,color=(0,0,0)):
     global img
-    fontpath = 'NotoSansTC-Regular.otf'            # 字型
-    font = ImageFont.truetype(fontpath, size)      # 定義字型與文字大小
+    font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
+    font_size = 20
+    font = ImageFont.truetype(font_filename, font_size)
     imgPil = Image.fromarray(img)                  # 轉換成 PIL 影像物件
     draw = ImageDraw.Draw(imgPil)                  # 定義繪圖物件
     draw.text((x, y), text, fill=color, font=font) # 加入文字
@@ -861,12 +774,71 @@ cv2.destroyAllWindows()
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
 print("------------------------------------------------------------")  # 60個
 
+print('讀取 QR code 圖檔')
+
+from PIL import ImageFont, ImageDraw, Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_qrcode/QR1.png'
+
+image = cv2.imread(filename)
+
+# 定義加入文字函式
+def putText(x,y,text,color=(0,0,0)):
+    global image
+    font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'      #有中文
+    font_size = 20
+    font = ImageFont.truetype(font_filename, font_size)
+    imagePil = Image.fromarray(image)
+    draw = ImageDraw.Draw(imagePil)
+    draw.text((x, y), text, fill=color, font=font)
+    image = np.array(imagePil)
+
+def boxSize(arr):
+    global data
+    box_roll = np.rollaxis(arr,1,0)
+    xmax = int(np.amax(box_roll[0]))
+    xmin = int(np.amin(box_roll[0]))
+    ymax = int(np.amax(box_roll[1]))
+    ymin = int(np.amin(box_roll[1]))
+    return (xmin,ymin,xmax,ymax)
+
+qrcode = cv2.QRCodeDetector()             # QRCode 偵測器
+
+status, data, bbox, rectified = qrcode.detectAndDecodeMulti(image)  # 辨識 QRCode
+print('OK', status)
+print('len', len(data))
+print('data', data)
+print('bbox', bbox)
+print('rectified', rectified)
+
+if status == True:
+    for i in range(len(data)):
+        text = data[i]            # QRCode 內容
+        
+        box = boxSize(bbox[i])    # QRCode 座標
+        cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]),(0,0,255),2)  # 繪製外框
+        print(box)
+        print(text)
+        #putText(10,10,"aaa",color=(0,0,255))                     # 顯示文字
+        putText(box[0],box[3],text,color=(0,0,255))                     # 顯示文字
+
+cv2.imshow('image', image)
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+

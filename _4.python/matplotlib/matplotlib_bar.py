@@ -18,7 +18,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 #          編號              圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
@@ -489,11 +489,11 @@ plt.xticks(indexes, labels)
 
 
 """
-
+'''
 
 print("------------------------------------------------------------")  # 60個
 
-# 柱圖
+print('將字典直接輸出給bar圖')
 
 data = {"apples": 10, "oranges": 15, "lemons": 5, "limes": 20}
 plt.bar(list(data.keys()), list(data.values()))
@@ -501,7 +501,8 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# 條形圖
+print('將字典直接輸出給barh圖, 加error')
+
 data = {"apples": 10, "oranges": 15, "lemons": 5, "limes": 20}
 error = [3, 4, 2, 7]
 plt.barh(
@@ -527,8 +528,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
-
 x = ["理工學院", "外語學院", "管理學院", "文學院"]
 s1 = [540, 2800, 1864, 1285]
 s2 = [489, 2968, 1908, 1300]
@@ -541,9 +540,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.rcParams["font.sans-serif"] = "DFKai-SB"
-plt.rcParams["font.size"] = 15  # 預設值10.0
-
 x = ["理工學院", "外語學院", "管理學院", "文學院"]
 s1 = [540, 2800, 1864, 1285]
 s2 = [489, 2968, 1908, 1300]
@@ -554,8 +550,6 @@ plt.title("卓越綜合大學通過英檢中高級人數")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
 
 x = ["理工學院", "外語學院", "管理學院", "文學院"]
 s1 = [540, 2800, 1864, 1285]
@@ -752,10 +746,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
-
 x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
 s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
 plt.barh(x, s)
@@ -764,11 +754,7 @@ plt.title("大學四年各學期的平均分數")
 
 plt.show()
 
-
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
-plt.rcParams["axes.unicode_minus"] = False
+print("------------------------------------------------------------")  # 60個
 
 x = ["第一季", "第二季", "第三季", "第四季"]
 s = [20000, 15000, 17000, -8000]
@@ -779,10 +765,7 @@ plt.title("今年度營業獲利的概況")
 
 plt.show()
 
-
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
+print("------------------------------------------------------------")  # 60個
 
 x = ["第1學期", "第2學期", "第3學期", "第4學期", "第5學期", "第6學期", "第7學期", "第8學期"]
 s = [95.3, 94.2, 91.4, 96.2, 92.3, 93.6, 89.4, 91.2]
@@ -791,15 +774,7 @@ plt.ylabel("平均分數")
 plt.title("大學四年各學期的平均分數")
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
 
 name = ["鼠", "牛", "虎", "兔", "龍"]
 weight = [3, 48, 33, 8, 38]
@@ -812,11 +787,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.sans-serif"] = "DFKai-SB"
-plt.rcParams["font.size"] = 15  # 預設值10.0
-
 name = ["鼠", "牛", "虎", "兔", "龍"]
 weight = [3, 48, 33, 8, 38]
 
@@ -829,10 +799,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
-
 name = ["鼠", "牛", "虎", "兔", "龍"]
 weight = [3, 48, 33, 8, 38]
 
@@ -843,9 +809,7 @@ plt.title("動物體重 使用中文")
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 votes = [135, 412, 397]  # 得票數
 N = len(votes)  # 計算長度
@@ -902,3 +866,5 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+

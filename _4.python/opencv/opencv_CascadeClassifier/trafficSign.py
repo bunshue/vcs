@@ -1,5 +1,9 @@
 import cv2
 
+print("------------------------------------------------------------")  # 60個
+
+print('偵測右轉指示牌')
+
 img = cv2.imread("pic_turnR.jpg")
 detector = cv2.CascadeClassifier("haar_turnR.xml")
 signs = detector.detectMultiScale(
@@ -15,3 +19,10 @@ cv2.imshow("Frame", img)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+

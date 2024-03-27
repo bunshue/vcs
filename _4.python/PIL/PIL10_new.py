@@ -6,11 +6,7 @@ PIL 新進
 所以使用Pillow, 它是由PIL發展而來的。
 
 pip install Pillow
-"""
 
-
-"""
-plot 集合 1
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -43,16 +39,18 @@ print('------------------------------------------------------------')	#60個
 print('顯示原圖')
 
 #建立Pillow物件 PIL讀取本機圖片, RGB模式, 存成PIL影像格式
-img = Image.open(filename)
 
-#img = img.convert('L')  #fail
-print(type(img))
-plt.imshow(img)
+# 檔案 => PIL影像
+image = Image.open(filename)
+
+#image = image.convert('L')  #fail
+print(type(image))
+plt.imshow(image)
 plt.show()
 
-#PIL影像格式轉化為numpy陣列
-img=np.array(img)
-print(type(img))
+# PIL影像 => numpy陣列
+image=np.array(image)
+print(type(image))
 
 #顯示方法相同
 
@@ -61,9 +59,13 @@ print('------------------------------------------------------------')	#60個
 """
 圖像中的像素訪問
 
-前面的一些例子中，我們都是利用Image.open（）來打開一幅圖像，然後直接對這個PIL對象進行操作。如果只是簡單的操作還可以，但是如果操作稍微復雜一些，就比較吃力了。因此，通常我們加載完圖片後，都是把圖片轉換成矩陣來進行更加復雜的操作。
+前面的一些例子中，我們都是利用Image.open（）來打開一幅圖像，
+然後直接對這個PIL對象進行操作。
+如果只是簡單的操作還可以，但是如果操作稍微復雜一些，就比較吃力了。
+因此，通常我們加載完圖片後，都是把圖片轉換成矩陣來進行更加復雜的操作。
 
-python中利用numpy庫和scipy庫來進行各種數據操作和科學計算。我們可以通過pip來直接安裝這兩個庫
+python中利用numpy庫和scipy庫來進行各種數據操作和科學計算。
+我們可以通過pip來直接安裝這兩個庫
 
 pip install numpy
 pip install scipy
@@ -74,31 +76,34 @@ pip install scipy
 """
 調用numpy中的array（）函數就可以將PIL對象轉換為數組對象。
 如果是RGB圖片，那么轉換為array之後，就變成了一個rows*cols*channels的三維矩陣,因此，我們可以使用
-img[i,j,k]
+image[i,j,k]
 來訪問像素值。
 例：打開圖片，並隨機添加一些椒鹽噪聲
 """
 
-img=np.array(Image.open(filename))
+# 檔案 => PIL影像 => numpy陣列
+image=np.array(Image.open(filename))
 
 #隨機生成5000個椒鹽
-rows,cols,dims=img.shape
+rows,cols,dims=image.shape
 for i in range(5000):
     x=np.random.randint(0,rows)
     y=np.random.randint(0,cols)
-    img[x,y,:]=255
+    image[x,y,:]=255
     
-plt.imshow(img)
+plt.imshow(image)
 plt.title('椒鹽效果')
 plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 print('將圖像二值化，像素值大于 threshold 的變為1，否則變為0')
-img=np.array(Image.open(filename).convert('L'))
+
+# 檔案 => PIL影像 => 灰階 => numpy陣列
+image=np.array(Image.open(filename).convert('L'))
 
 """
-plt.imshow(img)
+plt.imshow(image)
 plt.title('LLLL')
 plt.show()
 """
@@ -107,28 +112,28 @@ print('圖像二值化, 要灰階圖像')
       
 threshold=128
 
-rows,cols=img.shape
+rows,cols=image.shape
 for i in range(rows):
     for j in range(cols):
-        if (img[i,j]<=threshold):
-            img[i,j]=0
+        if (image[i,j]<=threshold):
+            image[i,j]=0
         else:
-            img[i,j]=1
+            image[i,j]=1
             
-plt.imshow(img,cmap='gray')
+plt.imshow(image,cmap='gray')
 plt.title('二值化, threshold ='+ str(threshold))
 plt.show()
 
 """
 如果要對多個像素點進行操作，可以使用數組切片方式訪問。切片方式返回的是以指定間隔下標訪問 該數組的像素值。下面是有關灰度圖像的一些例子：
 
-img[i,:] = im[j,:] # 將第 j 行的數值賦值給第 i 行
-img[:,i] = 100 # 將第 i 列的所有數值設為 100
-img[:100,:50].sum() # 計算前 100 行、前 50 列所有數值的和
-img[50:100,50:100] # 50~100 行，50~100 列（不包括第 100 行和第 100 列）
-img[i].mean() # 第 i 行所有數值的平均值
-img[:,-1] # 最後一列
-img[-2,:] (or im[-2]) # 倒數第二行
+image[i,:] = im[j,:] # 將第 j 行的數值賦值給第 i 行
+image[:,i] = 100 # 將第 i 列的所有數值設為 100
+image[:100,:50].sum() # 計算前 100 行、前 50 列所有數值的和
+image[50:100,50:100] # 50~100 行，50~100 列（不包括第 100 行和第 100 列）
+image[i].mean() # 第 i 行所有數值的平均值
+image[:,-1] # 最後一列
+image[-2,:] (or im[-2]) # 倒數第二行
 """
 print('------------------------------------------------------------')	#60個
 
@@ -138,10 +143,12 @@ print("偽色彩圖像處理")
 #filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
 
+# 檔案 => PIL影像
 image = Image.open(filename)
 
 #彩色轉黑白
 # 轉換為灰度圖像
+# PIL影像 => 灰階
 gray_image = image.convert('L')
 
 #3. 偽色彩處理
@@ -153,6 +160,7 @@ gray_image = image.convert('L')
 cmap = plt.get_cmap('jet')
 
 # 將灰度圖像轉換為彩色圖像
+# 灰階 => numpy陣列 => cmap
 color_image = cmap(np.array(gray_image))
 
 # 顯示彩色圖像
@@ -185,7 +193,7 @@ hashfunc = imagehash.dhash
 whash-haar:     Haar wavelet hash
 hashfunc = imagehash.whash
 whash-db4:      Daubechies wavelet hash
-imagehash.whash(img, mode='db4')
+imagehash.whash(image, mode='db4')
 colorhash:      HSV color hash
 hashmethod == 'crop-resistant':
 crop-resistant: Crop-resistant hash
@@ -193,8 +201,12 @@ imagehash.crop_resistant_hash
 """
 import imagehash
 
+# 檔案 => PIL影像
 image1 = Image.open(filename1)
+
+# 檔案 => PIL影像
 image2 = Image.open(filename2)
+
 hash1 = imagehash.average_hash(image1)
 hash2 = imagehash.average_hash(image2)
 
@@ -355,13 +367,16 @@ plt.figure(
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => PIL影像
 image = Image.open(filename)
+
 plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(121)
 plt.title(u'原圖')
 plt.imshow(image)
 
+# 檔案 => PIL影像 => 灰階
 image = Image.open(filename).convert('L')
 
 plt.subplot(122)
@@ -374,9 +389,15 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
+# 檔案 => PIL影像
 image0 = Image.open(filename)
+
+# PIL影像 => 灰階
 image0 = image0.convert('L')
+
+# 灰階 => numpy陣列
 image1 = np.array(image0)
+
 print('原圖 灰階最小值 :', int(image1.min()),', 灰階最大值 :', int(image1.max()))
 
 image2=255-image1               #對圖像進行反向處理
@@ -424,14 +445,14 @@ print("PIL_mean")
 
 from PIL import ImageStat
 
-def darkchannel(input_img,h,w):
-    dark_img = Image.new("L",(h,w),0)
+def darkchannel(input_image,h,w):
+    dark_image = Image.new("L",(h,w),0)
     for x in range(0,h-1):
         for y in range(0,w-1):
-            dark_img.putpixel((x,y),min(input_img.getpixel((x,y))))
-    return dark_img
+            dark_image.putpixel((x,y),min(input_image.getpixel((x,y))))
+    return dark_image
   
-def airlight(input_img,h,w):
+def airlight(input_image,h,w):
     nMinDistance=65536    
     w=int(round(w/2))
     h=int(round(h/2))
@@ -441,10 +462,10 @@ def airlight(input_img,h,w):
         lb_box = (0, h, w, 2*h) 
         rb_box = (w, h, 2*h,2*w)  
                
-        lu = input_img.crop(lu_box);
-        ru = input_img.crop(ru_box);
-        lb = input_img.crop(lb_box);
-        rb = input_img.crop(rb_box);
+        lu = input_image.crop(lu_box);
+        ru = input_image.crop(ru_box);
+        lb = input_image.crop(lb_box);
+        rb = input_image.crop(rb_box);
         lu_m=ImageStat.Stat(lu)
         ru_m=ImageStat.Stat(ru)
         lb_m=ImageStat.Stat(lb)
@@ -473,19 +494,19 @@ def airlight(input_img,h,w):
     else:
         for i in range(0,h-1):
             for j in range(0,w-1):
-                temp=input_img.getpixel((i,j))            
+                temp=input_image.getpixel((i,j))            
                 distance = ((255 - temp[0])**2 +  (255 - temp[1])**2 + (255 - temp[2])**2)**0.5
                 if nMinDistance > distance:
                     nMinDistance = distance;
                     air = temp
     return air
 
-def transmssion(air,dark_img,h,w,OMIGA):
+def transmssion(air,dark_image,h,w,OMIGA):
     trans_map=np.zeros((h,w))
     A=max(air)
     for i in range(0,h-1):
         for j in range(0,w-1):
-            temp=1-OMIGA*dark_img.getpixel((i,j))/A
+            temp=1-OMIGA*dark_image.getpixel((i,j))/A
             trans_map[i,j]=max(0.1,temp)  
     for i in range(1,h-1):
         for j in range(1,w-1):
@@ -495,28 +516,31 @@ def transmssion(air,dark_img,h,w,OMIGA):
                 trans_map[i,j]=(tempup+tempmid+tempdown)/16
     return trans_map
                    
-def defog(img,t_map,air,h,w):
-    dehaze_img = Image.new("RGB",(h,w),0)
+def defog(image,t_map,air,h,w):
+    dehaze_image = Image.new("RGB",(h,w),0)
     for i in range(0,h-1):
         for j in range(0,w-1):
-            R,G,B=img.getpixel((i,j))
+            R,G,B=image.getpixel((i,j))
             R=int((R-air[0])/t_map[i,j]+air[0])
             G=int((G-air[1])/t_map[i,j]+air[1])
             B=int((B-air[2])/t_map[i,j]+air[2])
-            dehaze_img.putpixel((i,j),(R,G,B)) 
-    return dehaze_img                       
+            dehaze_image.putpixel((i,j),(R,G,B)) 
+    return dehaze_image                       
                     
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-img=Image.open(filename)
-[h,w]=img.size
+
+# 檔案 => PIL影像
+image=Image.open(filename)
+
+[h,w]=image.size
 OMIGA =0.8  
-dark_image=darkchannel(img,h,w)
-air=airlight(img,h,w)
+dark_image=darkchannel(image,h,w)
+air=airlight(image,h,w)
 T_map=transmssion(air,dark_image,h,w,OMIGA)
-fogfree_img=defog(img,T_map,air,h,w)
+fogfree_image=defog(image,T_map,air,h,w)
 
 #把結果顯示出來
-plt.imshow(fogfree_img)
+plt.imshow(fogfree_image)
 
 plt.show()
 
@@ -554,11 +578,11 @@ def convert_2d(r):
     s = scipy.signal.convolve2d(r, window, mode='same', boundary='symm')
     return s.astype(np.uint8)
 #添加噪聲
-def add_salt_noise(img):
-    rows, cols, dims = img.shape 
-    R = np.mat(img[:, :, 0])
-    G = np.mat(img[:, :, 1])
-    B = np.mat(img[:, :, 2])
+def add_salt_noise(image):
+    rows, cols, dims = image.shape 
+    R = np.mat(image[:, :, 0])
+    G = np.mat(image[:, :, 1])
+    B = np.mat(image[:, :, 2])
     Grey_sp = R * 0.299 + G * 0.587 + B * 0.114
     Grey_gs = R * 0.299 + G * 0.587 + B * 0.114
     snr = 0.9
@@ -577,9 +601,11 @@ def add_salt_noise(img):
     Grey_gs = Grey_gs - np.full(Grey_gs.shape, np.min(Grey_gs))
     Grey_gs = Grey_gs * 255 / np.max(Grey_gs)
     Grey_gs = Grey_gs.astype(np.uint8)
+    
     # 中值濾波
     Grey_sp_mf = scipy.ndimage.median_filter(Grey_sp, (8, 8))
     Grey_gs_mf = scipy.ndimage.median_filter(Grey_gs, (8, 8))
+    
     # 均值濾波
     n = 3
     window = np.ones((n, n)) / n ** 2
@@ -624,8 +650,9 @@ plt.figure(
     frameon=True,
 )
 
-img = np.array(Image.open(filename))  #導入圖片
-add_salt_noise(img)
+# 檔案 => PIL影像 => numpy陣列
+image = np.array(Image.open(filename))
+add_salt_noise(image)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -635,6 +662,7 @@ from scipy.ndimage import filters
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => PIL影像 => 灰階 => numpy陣列
 image=np.array(Image.open(filename).convert('L'))
 
 plt.figure(
@@ -681,6 +709,8 @@ from scipy.ndimage import filters
 from matplotlib.font_manager import FontProperties
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 檔案 => PIL影像 => 灰階 => numpy陣列
 image=np.array(Image.open(filename).convert('L'))
 
 plt.figure(
@@ -726,19 +756,21 @@ print("PIL_gaussian")
 from scipy.ndimage import filters
 
 def imx(image, sigma):
-    imgx = np.zeros(image.shape)
-    filters.gaussian_filter(image, sigma, (0, 1), imgx)
-    return imgx
+    imagex = np.zeros(image.shape)
+    filters.gaussian_filter(image, sigma, (0, 1), imagex)
+    return imagex
 def imy(image, sigma):
-    imgy = np.zeros(image.shape)
-    filters.gaussian_filter(image, sigma, (1, 0), imgy)
-    return imgy
+    imagey = np.zeros(image.shape)
+    filters.gaussian_filter(image, sigma, (1, 0), imagey)
+    return imagey
 def mag(image, sigma):
     # 還有gaussian_gradient_magnitude()
-    imgmag = 255 - np.sqrt(imgx ** 2 + imgy ** 2)
-    return imgmag
+    imagemag = 255 - np.sqrt(imagex ** 2 + imagey ** 2)
+    return imagemag
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 檔案 => PIL影像 => 灰階 => numpy陣列
 image = np.array(Image.open(filename).convert('L'))
 
 plt.figure(
@@ -756,15 +788,15 @@ sigma = [2, 5, 10]
 for i in  sigma:
     plt.subplot(3, 4, 4*(sigma.index(i))+1)
     plt.imshow(image)
-    imgx=imx(image, i)
+    imagex=imx(image, i)
     plt.subplot(3, 4, 4*(sigma.index(i))+2)
-    plt.imshow(imgx)
-    imgy=imy(image, i)
+    plt.imshow(imagex)
+    imagey=imy(image, i)
     plt.subplot(3, 4, 4*(sigma.index(i))+3)
-    plt.imshow(imgy)
-    imgmag=mag(image, i)
+    plt.imshow(imagey)
+    imagemag=mag(image, i)
     plt.subplot(3, 4, 4*(sigma.index(i))+4)
-    plt.imshow(imgmag)
+    plt.imshow(imagemag)
 
 plt.show()
 
@@ -791,8 +823,10 @@ plt.figure(
     frameon=True,
 )
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+# 檔案 => PIL影像 => 灰階 => numpy陣列
 image = np.array(Image.open('data/castle.jpg').convert('L'))
+
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
 plt.subplot(221)
 plt.imshow(image)
@@ -827,6 +861,7 @@ print("PIL_PCA")
 from scipy.ndimage import measurements, morphology  
 
 # 加載圖像和閾值，以確保它是二進制的
+# 檔案 => PIL影像 => 灰階 => numpy陣列
 image = np.array(Image.open('data/castle.jpg').convert('L'))
 
 plt.figure(
@@ -874,7 +909,9 @@ from scipy.ndimage import filters
 #from scipy.misc import imsave
 #from PCV.tools import rof
 
+# 檔案 => PIL影像 => 灰階 => numpy陣列
 image = np.array(Image.open('data/gril.jpg').convert('L'))
+
 #U,T = rof.denoise(image,image)
 G = filters.gaussian_filter(image,10)
 
@@ -957,33 +994,33 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_save")
 
-def IsValidImage(img_path):
+def IsValidImage(image_path):
     """
     判斷文件是否為有效（完整）的圖片
-    :param img_path:圖片路徑
+    :param image_path:圖片路徑
     :return:True：有效 False：無效
     """
     bValid = True
     try:
-        Image.open(img_path).verify()
+        Image.open(image_path).verify()
     except:
         bValid = False
     return bValid
 
 
-def transimg(img_path):
+def transimage(image_path):
     """
     轉換圖片格式
-    :param img_path:圖片路徑
+    :param image_path:圖片路徑
     :return: True：成功 False：失敗
     """
-    if IsValidImage(img_path):
+    if IsValidImage(image_path):
         try:
-            str = img_path.rsplit(".", 1)
-            output_img_path = "tmp_" + str[0] + ".jpg"
-            print(output_img_path)
-            im = Image.open(img_path)
-            #im.save(output_img_path)
+            str = image_path.rsplit(".", 1)
+            output_image_path = "tmp_" + str[0] + ".jpg"
+            print(output_image_path)
+            im = Image.open(image_path)
+            #im.save(output_image_path)
             return True
         except:
             return False
@@ -991,8 +1028,8 @@ def transimg(img_path):
         return False
 
 
-img_path = 'lena.png'
-print(transimg(img_path))
+image_path = 'lena.png'
+print(transimage(image_path))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1003,16 +1040,16 @@ from PIL import Image, ImageFilter
 print('PIL模糊處理 GaussianBlur')
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
-guido_img = Image.open(open(filename, 'rb'))
-guido2_img = guido_img.filter(ImageFilter.GaussianBlur)
-guido2_img.save(open('tmp_elephant_blur.jpg', 'wb'))
+guido_image = Image.open(open(filename, 'rb'))
+guido2_image = guido_image.filter(ImageFilter.GaussianBlur)
+guido2_image.save(open('tmp_elephant_blur.jpg', 'wb'))
 
 
 print('二值化')
-img1 = Image.open(open(filename, 'rb'))
-img2 = img1.point(lambda x: 0 if x < 128 else 255)
+image1 = Image.open(open(filename, 'rb'))
+image2 = image1.point(lambda x: 0 if x < 128 else 255)
 
-img2.save(open('tmp_elephant_binary.png', 'wb'))
+image2.save(open('tmp_elephant_binary.png', 'wb'))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1035,6 +1072,7 @@ print("PIL_ginput")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => PIL影像 => numpy陣列
 im = np.array(Image.open(filename))
 plt.imshow(im)
 

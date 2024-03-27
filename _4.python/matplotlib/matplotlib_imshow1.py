@@ -1,12 +1,15 @@
 """
 imshow
 
+matplotlib直接對圖片處理 不經過opencv PIL
+
+opencv與PIL有自己的圖片處理, 只是使用matplotlib輸出
 """
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 
-import matplotlib.image as img
 import matplotlib.cm as cm
+import matplotlib.image as img
 import pylab
 from PIL import Image, ImageEnhance
 
@@ -33,7 +36,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="imshow 集合 1",
+    num="imshow 集合 1 顯示圖片 簡單圖片處理",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -45,17 +48,54 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+# 裁剪圖片 plt
+
+print("使用 matplotlib 顯示一圖")
+image = img.imread(filename)
+
+plt.imshow(image)
+
 
 # 第二張圖
 plt.subplot(232)
+
+x_l, x_r = 150, 350  # 保留的部分，由左而右
+y_u, y_d = 150, 400  # 保留的部分，由上而下
+cut_img = image[y_u:y_d, x_l:x_r]
+
+plt.imshow(cut_img)
 
 
 # 第三張圖
 plt.subplot(233)
 
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+pict = img.imread(filename)
+plt.axis("off")
+plt.title("牡丹亭", fontsize=24)
+plt.imshow(pict)
+
 
 # 第四張圖
 plt.subplot(234)
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+
+pict = img.imread(filename)
+h, w, c = pict.shape
+print(f"圖檔高度   = {h}")
+print(f"圖檔寬度   = {w}")
+print(f"圖檔通道數 = {c}")
+plt.axis("off")
+plt.title("牡丹亭", fontsize=24)
+plt.imshow(pict)
+
 
 
 # 第五張圖
@@ -63,23 +103,12 @@ plt.subplot(235)
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-# 裁剪圖片 plt
-
-import matplotlib.image as img
-
-print("使用 matplotlib 顯示一圖")
 image = img.imread(filename)
-
 plt.imshow(image)
 
 # 第六張圖
 plt.subplot(236)
 
-x_l, x_r = 150, 350  # 保留的部分，由左而右
-y_u, y_d = 150, 400  # 保留的部分，由上而下
-cut_img = image[y_u:y_d, x_l:x_r]
-
-plt.imshow(cut_img)
 
 
 plt.show()
@@ -99,20 +128,20 @@ plt.figure(
     frameon=True,
 )
 
-img = np.asarray(Image.open(filename))
-# print(repr(img))
+image = np.asarray(Image.open(filename))
+# print(repr(image))
 
 # 第一張圖
 plt.subplot(231)
 
 # 原圖(灰階)
-imgplot = plt.imshow(img)
+imgplot = plt.imshow(image)
 
 # 第二張圖
 plt.subplot(232)
 
 # 1 偽色彩
-lum_img = img[:, :, 0]
+lum_img = image[:, :, 0]
 plt.imshow(lum_img)
 
 # 第三張圖
@@ -142,16 +171,6 @@ plt.colorbar()
 # 第六張圖
 plt.subplot(236)
 
-import matplotlib.image as img
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-pict = img.imread(filename)
-plt.axis("off")
-plt.title("牡丹亭", fontsize=24)
-plt.imshow(pict)
-
 
 plt.show()
 
@@ -160,7 +179,7 @@ print("------------------------------------------------------------")  # 60個
 """
 
 #5
-#plt.hist(img.ravel(), bins=range(256), fc='k', ec='k')
+#plt.hist(image.ravel(), bins=range(256), fc='k', ec='k')
 
 
 #6
@@ -173,16 +192,15 @@ imgplot.set_clim(0, 175)
 
 # Array Interpolation schemes
 #8
-img = Image.open(filename)
-img.thumbnail((64, 64))  # resizes image in-place
-imgplot = plt.imshow(img)
+image = Image.open(filename)
+image.thumbnail((64, 64))  # resizes image in-place
+imgplot = plt.imshow(image)
 
 #9
-imgplot = plt.imshow(img, interpolation="bilinear")
+imgplot = plt.imshow(image, interpolation="bilinear")
 
 #10
-imgplot = plt.imshow(img, interpolation="bicubic")
-
+imgplot = plt.imshow(image, interpolation="bicubic")
 
 """
 
@@ -257,21 +275,6 @@ im2 = plt.imshow(
 
 # 第三張圖
 plt.subplot(233)
-
-import matplotlib.image as img
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-
-pict = img.imread(filename)
-h, w, c = pict.shape
-print(f"圖檔高度   = {h}")
-print(f"圖檔寬度   = {w}")
-print(f"圖檔通道數 = {c}")
-plt.axis("off")
-plt.title("牡丹亭", fontsize=24)
-plt.imshow(pict)
 
 
 # 第四~五張圖
@@ -505,9 +508,9 @@ plt.tight_layout()
 plt.subplot(234)
 
 
-img = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]])
+image = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]])
 
-plt.imshow(img, cmap="Blues")
+plt.imshow(image, cmap="Blues")
 plt.colorbar()
 
 
@@ -560,21 +563,12 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-import matplotlib.image as img
-
-image = img.imread(filename)
-plt.imshow(image)
-
-
-# 第二張圖
-plt.subplot(232)
-
-
 print("畫出 常態分布 二維 20 X 20")
 N = 20
 plt.imshow(np.random.randn(N, N))
+
+# 第二張圖
+plt.subplot(232)
 
 
 # 第三張圖

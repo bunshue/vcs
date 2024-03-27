@@ -1,7 +1,6 @@
 """
 opencv 集合
 
-
 """
 
 import cv2
@@ -1535,22 +1534,37 @@ print("------------------------------------------------------------")  # 60個
 
 print("兩圖相減")
 
-filename = "p1.bmp"
-image1 = cv2.imread(filename)
-plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
-plt.show()
+filename1 = "data/_compare/compare1.jpg"
+filename2 = "data/_compare/compare2.jpg"
 
-
-filename = "p2.bmp"
-image2 = cv2.imread(filename)
-plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.show()
-
+image1 = cv2.imread(filename1)
+image2 = cv2.imread(filename2)
 
 # image3 = math.fabs(image1-image2)
 image3 = image1 - image2
 
+fig = plt.figure(
+    num="兩圖相減",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.title("原圖1")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title("原圖2")
+
+plt.subplot(133)
 plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
+plt.title("兩圖相減")
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1650,6 +1664,10 @@ plt.title("胡椒(黑)鹽(白)效果")
 plt.show()
 
 # 黑點就好比胡椒，白點就像是鹽，這種加上雜訊的方式，就稱為椒鹽雜訊（Salt & Pepper Noise）
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 

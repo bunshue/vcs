@@ -1,4 +1,4 @@
-# 新進測試02
+# 新進測試01
 
 print("------------------------------------------------------------")  # 60個
 
@@ -21,7 +21,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -256,8 +255,17 @@ from mplfinance.original_flavor import candlestick_ohlc
 
 data_price = [1, 2, 3, 4, 5]
 
-# 4、繪制圖片
-fig = plt.figure(figsize=(12, 10))
+# 繪製圖片
+fig = plt.figure(
+    num="matplotlib 02",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 grid = plt.GridSpec(12, 10, wspace=0.5, hspace=0.5)
 
 ax1 = fig.add_subplot(grid[0:8, 0:12])  # 設置K線圖的尺寸
@@ -361,6 +369,7 @@ y = [3900.0, 3903.0, 3891.0, 3888.0, 3893.0, 3899.0, 3906.0, 3914.0, 3911.0, 391
 plt.plot(x, y)
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))  # 設置時間顯示格式
 plt.gcf().autofmt_xdate()  # 自動旋轉角度，以避免重疊
+
 plt.show()
 
 print(
@@ -376,8 +385,15 @@ print(
 # 增新很多個axes，以供繪圖和放置資訊:
 # fig1.delaxes( fig1.gca() ) # 順便示範，把剛剛1x1的座標軸刪掉
 
-# fig1 = plt.figure()  # 等價於fig1 = plt.figure(1)
-fig2 = plt.figure()  # 等價於fig2 = plt.figure(2)
+fig2 = plt.figure(
+    num="matplotlib 05",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 # 一般的情況下，axes是"hold on"的, 也就是資料不會被覆蓋掉。
 # hold on: 好處是一次要輸出一堆函數，可以把圖疊加上去。
@@ -499,7 +515,6 @@ plt.annotate(
     arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"),
 )
 
-# 把結果顯示在屏幕上
 plt.show()
 
 print(
@@ -537,9 +552,20 @@ locators = [
 n_locators = len(locators)
 
 size = 1024, 60 * n_locators
-dpi = 72.0
+dpi = 100.0
+
 figsize = size[0] / float(dpi), size[1] / float(dpi)
-fig = plt.figure(figsize=figsize, dpi=dpi)
+
+fig = plt.figure(
+    num="matplotlib 07",
+    figsize=figsize,
+    dpi=dpi,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 fig.patch.set_alpha(0)
 
 
@@ -598,7 +624,16 @@ def plt_contour():
     plt.yticks(())
 
 
-plt.figure(figsize=(16, 6))
+plt.figure(
+    num="matplotlib 08",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt_bar()
 plt_contour()
 plt.tight_layout()
@@ -644,9 +679,19 @@ def plt_polar():
     ax.set_yticklabels([])
 
 
-plt.figure(figsize=(16, 6))
+plt.figure(
+    num="matplotlib 09",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt_grid()
 plt_polar()
+
 plt.tight_layout()
 plt.show()
 
@@ -659,16 +704,27 @@ import numpy as np
 
 x = np.linspace(0, 2 * np.pi, 300)
 y = np.sin(x)
-fig = plt.figure()
+
+fig = plt.figure(
+    num="matplotlib 10",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 ax1 = fig.add_subplot(121, projection="polar")
 ax1.plot(x, y)
 ax1.set_title("極座標 Sin 圖", fontsize=12)
+
 ax2 = fig.add_subplot(122)
 ax2.plot(x, y)
 ax2.set_title("一般座標 Sin 圖", fontsize=12)
 ax2.set_aspect(2)
-plt.tight_layout()  # 緊縮佈局
 
+plt.tight_layout()  # 緊縮佈局
 plt.show()
 
 print(
@@ -719,7 +775,16 @@ with open(filename) as csvFile:
             closePrices.append(closePrice)  # 儲存收盤價
             mydates.append(currentDate)  # 儲存日期
 
-fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
+fig = plt.figure(
+    num="matplotlib 11",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
 plt.plot(mydates, openPrices, "-p", label="開盤價")  # 繪製開盤價
 plt.plot(mydates, highPrices, "-*", label="最高價")  # 繪製最高價
 plt.plot(mydates, lowPrices, "-o", label="最低價")  # 繪製最低價

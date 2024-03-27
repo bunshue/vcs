@@ -67,7 +67,7 @@ import pytesseract
 pytesseract.pytesseract.tesseract_cmd = ocr_program #設定OCR程式位置
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print("英文OCR")
 filename = 'data/ocr/english02.jpg'
 image = Image.open(filename)
@@ -222,4 +222,83 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+'''
+
+
+# 派圖 集合
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+def getOCR_Data(filename, ocr_type):
+
+    if ocr_type == "eng":
+        print("英文OCR")
+    elif ocr_type == "jpn":
+        print("日文OCR")
+    
+    image = Image.open(filename)
+    text = pytesseract.image_to_string(image, lang=ocr_type)
+    return text
+
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="派圖 集合 1",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.subplot(231)
+
+filename = 'data/ocr/english02.jpg'
+ocr_type = "eng"
+
+text = getOCR_Data(filename, ocr_type)  
+print(text)
+
+image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
+plt.imshow(image1)
+plt.title(text)
+
+
+plt.subplot(232)
+
+filename = 'data/ocr/japanese01.jpg'
+ocr_type = "jpn"
+
+text = getOCR_Data(filename, ocr_type)  
+print(text)
+
+image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
+plt.imshow(image1)
+plt.title(text)
+
+
+plt.show()
+
 

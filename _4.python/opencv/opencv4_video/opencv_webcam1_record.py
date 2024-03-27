@@ -7,10 +7,20 @@ WebCam 使用
 '''
 
 ESC = 27
+SPACE = 32
+
+import os
+import sys
+import time
+import math
+import random
+
+print("------------------------------------------------------------")  # 60個
 
 import cv2
-import time
-import sys
+import numpy as np
+
+print("------------------------------------------------------------")  # 60個
 
 cap = cv2.VideoCapture(0)
 
@@ -94,7 +104,7 @@ while True:
     elif k == ord('s'): # 若按下 s 鍵則存圖
         image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
         cv2.imwrite(image_filename, frame)
-        print('已存圖')
+        print('已存圖, 檔案 :', image_filename)
 
 # 釋放所有資源
 out.release()
@@ -103,3 +113,19 @@ cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
 
 #print('已存檔 ' + filename1)
 print('已存檔 ' + filename2)
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+

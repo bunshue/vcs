@@ -6,5 +6,5 @@
 4. random產生一數 重複多N次 決定去哪裡
 5. 做成函數
 
-
+做一個webcam解qrcode
 

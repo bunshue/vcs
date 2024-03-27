@@ -1,24 +1,12 @@
 """
-
-cut
-
-rotate
+C : cut
+C : copy
+R : resize
+R : rotate
 
 """
 
 import cv2
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
@@ -26,6 +14,24 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
 
 print("------------------------------------------------------------")  # 60個
 
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 
 # 裁剪圖片
 
@@ -53,12 +59,8 @@ image_empty = np.zeros(image.shape, dtype=np.uint8)  # 依照原圖大小建立�
 image_empty[y_st : y_st + h, x_st : x_st + w] = crop_image
 cv2.imshow("cropped+new", image_empty)  # 顯示圖片
 
-# 寫入圖檔, 偽執行
-# cv2.imwrite('crop.jpg', crop_image)
-
 cv2.waitKey()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -73,10 +75,6 @@ x = 100
 y = 100
 w = 100
 h = 100
-
-# 寫入圖檔, 偽執行
-# cv2.imwrite(filename2, image[y:y + h, x:x + w])
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -140,29 +138,12 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
-
 """
 
 resize
 
 
 """
-
-import cv2
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
@@ -209,9 +190,6 @@ plt.show()
 image_resized = cv2.cvtColor(image_resized, cv2.COLOR_BGR2RGB)
 plt.imshow(image_resized)
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -303,24 +281,29 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename, 1)
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-print("改變圖片大小")
-img = cv2.resize(img, (0, 0), fx=0.5, fy=0.5)
+image0 = cv2.imread(filename, 1)
+print('原圖大小 :', image0.shape)
+w = image0.shape[1]
+h = image0.shape[0]
 
-print("旋轉")
-img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+print('cv2.resize 之方法 1')
 
-# cv2.imwrite("tmp_pic01.jpg", img)     # 將檔案寫入 tmp_pic01.jpg
+print("改變圖片大小 指定大小 改成 640 X 480")
 
-cv2.imshow("Image", img)
+image1 = cv2.resize(image0,(640, 480))   # 改變圖片尺寸
+
+cv2.imshow("Image", image1)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
+print("改變圖片大小 依比例 寬變兩倍 高變一半")
+image2 = cv2.resize(image0, (0, 0), fx=2.0, fy=0.5)
 
-
-print("------------------------------------------------------------")  # 60個
+cv2.imshow("Image", image2)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -330,28 +313,16 @@ rotate
 
 
 """
-
-import cv2
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
+img = cv2.imread(filename, 1)
 
+print("旋轉")
+img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
 
-print("------------------------------------------------------------")  # 60個
-
+cv2.imshow("Image", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -421,3 +392,4 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
