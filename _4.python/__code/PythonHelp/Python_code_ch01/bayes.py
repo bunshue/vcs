@@ -1,6 +1,5 @@
 import sys
 import random
-import itertools
 import numpy as np
 
 import cv2
@@ -85,7 +84,6 @@ class Search():
         cv2.waitKey(5000)
         cv2.destroyAllWindows()
 
- 
     
        
 app = Search('Cape_Python')
@@ -95,30 +93,3 @@ app.draw_map(last_known=(160, 290))
 print("P1 = {:.3f}, P2 = {:.3f}, P3 = {:.3f}".format(app.p1, app.p2, app.p3))
 print("P1 = {:.3f}, P2 = {:.3f}, P3 = {:.3f}".format(app.sep1, app.sep2, app.sep3))
 
-
-"""
-print('test random.triangular')
-
-for _ in range(10):
-    print(random.triangular(1, 5))
-
-print('test random.uniform')
-for _ in range(10):
-    print(random.uniform(0.2, 0.9))
-
-
-print('test itertools')
-local_y_range = range(10)
-local_x_range = range(10)
-coords = list(itertools.product(local_x_range, local_y_range))
-random.shuffle(coords)
-print(coords)
-
-"""
-
-"""
-cv2.circle(app.img, (sailor_x, sailor_y), 3, (255, 0, 0), -1)
-cv2.imshow('Search Area', app.img)
-cv2.waitKey(5000)
-
-"""

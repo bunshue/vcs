@@ -1,7 +1,5 @@
 import sys
 
-
-
 print('------------------------------------------------------------')	#60個
 
 print('應用：車牌辨識')
@@ -21,6 +19,7 @@ imgfiles = [
     'ABP0023.jpg',
     # '0655VN.jpg',
 ]
+
 for imgfile in imgfiles:
     print('加入辨識圖片 :', imgfile)
     images.append(keras_ocr.tools.read(imgfile))

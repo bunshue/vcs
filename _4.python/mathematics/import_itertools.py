@@ -9,18 +9,16 @@ itertools.combinations 組合
 
 itertools.product() 笛卡兒積
 
-
 """
 
 import sys
 import itertools
 
+print("------------------------------------------------------------")  # 60個
+
 print(
     "permutations 排列 ST------------------------------------------------------------"
 )  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 # 全排列
 cc = itertools.permutations("鼠牛虎兔")
@@ -64,7 +62,7 @@ cc = itertools.permutations(animals)
 for p in cc:
     print(p)
 
-# 指定长度
+# 指定長度
 animals = ["鼠", "牛", "虎", "兔"]
 cc = itertools.permutations(animals, 2)
 for p in cc:
@@ -115,7 +113,6 @@ strings = "鼠牛虎兔"
 for text1, text2 in itertools.combinations(strings, 2):
     print(text1, text2)
 
-
 print(list(itertools.combinations("鼠牛虎兔", 2)))
 
 print(list(itertools.combinations_with_replacement("鼠牛虎兔", 2)))
@@ -123,14 +120,14 @@ print(list(itertools.combinations_with_replacement("鼠牛虎兔", 2)))
 print("------------------------------------------------------------")  # 60個
 
 animals = ["鼠", "牛", "虎", "兔"]
-# 组合
+# 組合
 for c in itertools.combinations(animals, 3):
     print(c)
 
 print("------------------------------------------------------------")  # 60個
 
 animals = ["鼠", "牛", "虎", "兔"]
-# 可重复组合
+# 可重復組合
 for c in itertools.combinations_with_replacement(animals, 3):
     print(c)
 
@@ -139,7 +136,6 @@ print(list(itertools.combinations(animals, 2)))
 print(list(itertools.combinations(animals, 3)))
 print(list(itertools.combinations_with_replacement(animals, 2)))
 print(list(itertools.combinations_with_replacement(animals, 3)))
-
 
 print(
     "combinations 組合 SP------------------------------------------------------------"
@@ -197,12 +193,7 @@ cc = itertools.product("鼠牛虎兔", "123")
 print(type(cc))
 print(cc)
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print(
     "product 笛卡兒積 SP------------------------------------------------------------"

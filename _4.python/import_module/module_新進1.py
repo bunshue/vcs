@@ -352,6 +352,7 @@ print('------------------------------------------------------------')	#60個
 print("將檔案移到資源回收筒")
 
 import send2trash
+
 filename = "picture1cccc.jpg"
 send2trash.send2trash(filename)  
 
@@ -396,7 +397,6 @@ worldMap.add('North America',{'us':282162848,
 worldMap.render_to_file('tmp_world_map.svg')            # 儲存地圖檔案
 
 print("------------------------------------------------------------")  # 60個
-
 
 print('全形 轉 半形')
 import unicodedata

@@ -1,24 +1,41 @@
-'''
+
+"""
 OpenCV 畫圖
 
-'''
+OpenCV 畫圖, 寫字集合
+
+
+cv2.line()
+cv2.circle()
+cv2.rectangle()
+cv2.ellipse()
+cv2.putText()
+cv2.polylines
+
+
+"""
+
 import cv2
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
-
 import time
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
@@ -124,6 +141,7 @@ pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6
 cv2.polylines(image, [pts], True, (255, 255, 0), 2)   #True表示封口
 #True: 頭尾相連, False: 頭尾不相連
 #-----------------------------------------------------------------------------
+
 '''
 pts = np.array([[300, 300], [300, 340], [350,320]], np.int32)
 cv2.polylines(image, [pts], True, (0, 255, 255), 2)
@@ -183,8 +201,6 @@ cv2.waitKey(0)
 print('收到按鍵')
 cv2.destroyAllWindows() #銷毀建立的物件
 #-----------------------------------------------------------------------------
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -258,35 +274,6 @@ while(1):
 cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-"""
-OpenCV 畫圖
-
-OpenCV 畫圖, 寫字集合
-
-"""
-
-import cv2
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
-
-import time
 
 W = 512 + 200
 H = 512
@@ -407,41 +394,6 @@ cv2.destroyAllWindows()
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-'''
-OpenCV 畫圖
-
-
-
-cv2.line()
-cv2.circle()
-cv2.rectangle()
-cv2.ellipse()
-cv2.putText()
-cv2.polylines
-
-
-'''
-import cv2
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
-
 print('OpenCV 畫圖')
 
 #有底圖作畫
@@ -456,7 +408,6 @@ width = image.shape[1]    #寬
 d = image.shape[2]    #深
 h, w, d = image.shape   #d為dimension d=3 全彩, d=1 灰階
 print("寬 = ", w, ", 高 = ", h, ", D = ", d)
-
 
 image = cv2.line(image, (0, 0), (width, height), (255, 0, 0), 5)
 image = cv2.line(image, (0, height), (width, 0), (0, 255, 0), 5)
@@ -550,12 +501,10 @@ cv2.imshow('image', image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-
 print('------------------------------------------------------------')	#60個
 
 print('建立空白圖片')
 
-import numpy as np
 image = np.zeros((512,512,3), np.uint8)
 
 # Draw a diagonal blue line with thickness of 5 px
@@ -576,10 +525,6 @@ print('作業完成')
 print('------------------------------------------------------------')	#60個
 
 
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-
 """
 
 # 寫字
@@ -596,16 +541,5 @@ print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
 """
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
 
 

@@ -17,12 +17,44 @@ scipy.stats.norm
 """
 
 import scipy
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 
 print(
     "---- scipy.integrate 積分 --------------------------------------------------------"
 )  # 60個
 
+
+print("積分")
+def my_funciton1(x):
+    #return math.sin(x)
+    #return (1 - x**2) ** 0.5    #上半圓
+    return x**2 + 2 * x + 5 # f(x) = x**2 + 2x + 5
+
+area, err = scipy.integrate.quad(my_funciton1, -3, 3)
+print("積分結果 :", area)
+print("誤差 :", err)
+
+print("------------------------------------------------------------")  # 60個
 
 # 計算半徑為r的圓的圓周
 def calc_area(r):
@@ -33,56 +65,15 @@ def calc_area(r):
 s = scipy.integrate.quad(calc_area, 2, 5)
 print(s)
 
-# 廁所衛生紙長度
+# 廁所衛生紙長度 若厚度為0.011
 x = s[0] / 0.011
 print(x)
 
 print("------------------------------------------------------------")  # 60個
 
-# SciPy.integrate.quad()函式
-
-
-# f(x) = x**2 + 2x + 5
-def func(x):
-    return x**2 + 2 * x + 5
-
-
-print(scipy.integrate.quad(func, -3, 3))
-
-# (47.99999999999999, 5.32907051820075e-13)
-
-print("------------------------------------------------------------")  # 60個
-
-print("積分")
-
-
-def func(x):
-    return scipy.special.exp10(x)
-
-
-area, err = scipy.integrate.quad(func, 0, 1)
-print(area)
-
-
-def half_circle(x):
-    return (1 - x**2) ** 0.5
-
-
-area, err = scipy.integrate.quad(half_circle, -1, 1)
-print(area)
-
-print("------------------------------------------------------------")  # 60個
-
-
 print(
     "---- scipy.special --------------------------------------------------------"
 )  # 60個
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-import scipy
-
 
 a = scipy.special.exp10(3)
 print("10^3 =", a)
@@ -96,65 +87,38 @@ print("sind(90) =", c)
 d = scipy.special.cosdg(45)
 print("cosd(45) =", d)
 
-print("畫出10^x, x=0~1.0")
-x = np.linspace(0, 1, 100)
-y = scipy.special.exp10(x)
-
-plt.plot(x, y)
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 print(
     "---- scipy.interpolate --------------------------------------------------------"
 )  # 60個
 
-import numpy as np
-import matplotlib.pyplot as plt
-
-# from scipy import interpolate
-import scipy
+print("內插法")
 
 x = np.arange(5, 20)
 y = scipy.special.exp2(x / 3.0)
 plt.plot(x, y, "o")
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
+#plt.show()
 
 f = scipy.interpolate.interp1d(x, y)
 x1 = np.arange(5, 20)
 y1 = f(x1)
 plt.plot(x, y, "o", x1, y1, "--")
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 
 print(
     "---- scipy.optimize --------------------------------------------------------"
 )  # 60個
 
-import numpy as np
-import matplotlib.pyplot as plt
-
-import scipy
-
-
 def f(x):
     return x**2 + 15 * np.sin(x)
-
 
 x = np.arange(-10, 10, 0.1)
 plt.plot(x, f(x))
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -164,20 +128,9 @@ print(result.x)
 plt.plot(x, f(x))
 plt.plot(result.x, f(result.x), "o")
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-import scipy
-import math
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-import scipy.optimize
-import numpy as np
-
 
 def fmax(x):
     """計算最大值"""
@@ -219,7 +172,7 @@ y = -3 * x**2 + 12 * x - 9
 plt.plot(x, y, color="b")
 plt.grid()
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -258,7 +211,7 @@ x = np.linspace(0, 4, 50)
 y = 3 * x**2 - 12 * x + 10
 plt.plot(x, y, color="b")
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -299,18 +252,9 @@ plt.plot(r.x, f(r.x), "-o")  # 標記
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 print(
     "---- scipy.stats --------------------------------------------------------"
 )  # 60個
-
-import numpy as np
-import matplotlib.pyplot as plt
-import scipy
-
 
 def normal_pdf(x, mu, sigma):
     pi = 3.1415926
@@ -325,7 +269,7 @@ ax = np.linspace(-5, 5, 100)
 ay = [normal_pdf(x, 0, 1) for x in ax]
 plt.plot(ax, ay)
 
-plt.show()
+#plt.show()
 
 x = [x / 10.0 for x in range(-50, 60)]
 plt.plot(x, scipy.stats.norm.pdf(x, 0, 1), "r-", lw=1, alpha=0.6, label="mu=0,sigma=1")
@@ -334,7 +278,7 @@ plt.plot(x, scipy.stats.norm.pdf(x, 2, 1), "g-.", lw=1, alpha=0.6, label="mu=2,s
 plt.legend()
 plt.title("Various Normal PDF")
 
-plt.show()
+#plt.show()
 
 samples = [9, 3, 27]
 
@@ -350,17 +294,9 @@ print(desc)
 desc = scipy.stats.describe(samples2, axis=1)
 print(desc)
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 print(
     "---- scipy.signal --------------------------------------------------------"
 )  # 60個
-
-import numpy as np
-import matplotlib.pyplot as plt
-import scipy
 
 t = np.linspace(6, 10, 500)
 w = scipy.signal.chirp(t, f0=4, f1=2, t1=5, method="linear")
@@ -368,7 +304,7 @@ plt.plot(t, w)
 plt.title("Linear Chirp")
 plt.xlabel("time in sec)")
 
-plt.show()
+#plt.show()
 
 img = np.load("scipy_data/digit8.npy")
 
@@ -376,7 +312,7 @@ plt.figure()
 plt.imshow(img, cmap="gray")
 plt.axis("off")
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -392,7 +328,7 @@ plt.imshow(c_digit, cmap="gray")
 plt.axis("off")
 plt.title("edge-detection image")
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -408,7 +344,7 @@ plt.imshow(c_digit, cmap="gray")
 plt.axis("off")
 plt.title("sharpen image")
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -433,18 +369,9 @@ for i in range(2, 6):
     plt.axis("off")
     plt.title("filter" + str(i - 1))
 
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-import scipy
 
 A = np.array([[2, 3], [5, 7]])
 B = scipy.linalg.inv(A)
@@ -460,17 +387,11 @@ b = np.array([2, 4, -1])
 x = scipy.linalg.solve(a, b)
 print(x)
 
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-# 傑卡德相似係數 Jaccard Similarity Coefficient
-
-import sys
-import numpy as np
-import scipy.spatial.distance as dist
+print("傑卡德相似係數 Jaccard Similarity Coefficient")
 
 mat1 = [1, 1, 0, 1, 0, 1, 0, 0, 1]
 mat2 = [0, 1, 1, 0, 0, 0, 1, 1, 1]
@@ -480,8 +401,8 @@ mat4 = [0, 0, 1, 0, 1, 0, 1, 1, 0]  # invert of mat1
 matV = np.mat([mat1, mat4])
 print(type(matV))
 print(matV)
-print("dist.jaccard : ")
-print(dist.pdist(matV, "jaccard"))
+print("傑卡德相似係數 : ")
+print(scipy.spatial.distance.pdist(matV, "jaccard"))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -489,11 +410,6 @@ print("------------------------------------------------------------")  # 60個
 print(
     "---- scipy.stats.norm --------------------------------------------------------"
 )  # 60個
-
-import numpy as np
-
-# from scipy.stats import norm
-import scipy
 
 # MH采样
 
@@ -548,3 +464,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
