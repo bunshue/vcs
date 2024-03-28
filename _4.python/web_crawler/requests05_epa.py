@@ -15,7 +15,6 @@ AQI綜合指標（Air Quality Index 空氣品質指標）
 
 import requests
 import urllib.request   #用來建立請求
-import zipfile
 import csv
 
 import os

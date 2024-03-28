@@ -16,7 +16,7 @@ import numpy as np
 
 print("------------------------------------------------------------")  # 60個
 
-#錄影1
+print("OpenCV VideoCapture 01 錄影")
 
 cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
@@ -42,7 +42,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#錄影2
+print("OpenCV VideoCapture 02 錄影")
 
 cap = cv2.VideoCapture(0)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -70,7 +70,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#錄影
+print("OpenCV VideoCapture 03 錄影")
+
 cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')          # 設定影片的格式為 MJPG
 out = cv2.VideoWriter('tmp_output_1.mp4', fourcc, 20.0, (640,  360))  # 產生空的影片，尺寸為 640x360
@@ -94,32 +95,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#兩個camera
-cap1 = cv2.VideoCapture(0)           # 讀取第一個影片來源
-cap2 = cv2.VideoCapture(1)           # 讀取第二個影片來源
-
-if not cap1.isOpened():
-    print("Cannot open camera1")
-    exit()
-if not cap2.isOpened():
-    print("Cannot open camera2")
-    exit()
-
-while True:
-    ret1, img1 = cap1.read()         # 讀取第一個來源影片的每一幀
-    ret2, img2 = cap2.read()         # 讀取第一個來源影片的每一幀
-
-    cv2.imshow('image1', img1)  # 如果讀取成功，顯示該幀的畫面
-    cv2.imshow('image2', img2)  # 如果讀取成功，顯示該幀的畫面
-    if cv2.waitKey(1) == ord('q'):
-        break
-cap1.release()
-cap2.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-#兩個camera
+print("OpenCV VideoCapture 04 兩個camera")
 
 ratio = 3
 border = 30
@@ -161,6 +137,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("OpenCV VideoCapture 05")
+
 cap = cv2.VideoCapture(0)                      # 讀取攝影鏡頭
 output = np.zeros((360,640,3), dtype='uint8')  # 產生 640x360 的黑色背景
 
@@ -182,9 +160,9 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
+
+print("OpenCV VideoCapture 06")
 
 cap = cv2.VideoCapture(0)                      # 讀取攝影鏡頭
 output = np.zeros((360,640,3), dtype='uint8')  # 產生 640x360 的黑色背景
@@ -217,6 +195,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("OpenCV VideoCapture 07")
+
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Cannot open camera")
@@ -246,6 +226,8 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+print("OpenCV VideoCapture 08")
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
@@ -291,6 +273,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("OpenCV VideoCapture 09")
+
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Cannot open camera")
@@ -333,8 +317,9 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
+
+print("OpenCV VideoCapture 10")
 
 def convex(src_img, raw, effect):
     col, row, channel = raw[:]
@@ -373,7 +358,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print('慢慢顯示出一圖的效果')
+print("OpenCV VideoCapture 11 慢慢顯示出一圖的效果")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
@@ -405,6 +390,8 @@ while True:
 cv2.destroyAllWindows()                 # 結束所有視窗
 
 print("------------------------------------------------------------")  # 60個
+
+print("OpenCV VideoCapture 12")
 
 cap = cv2.VideoCapture(0)
 
@@ -449,6 +436,8 @@ cap.release()                           # 所有作業都完成後，釋放資�
 cv2.destroyAllWindows()                 # 結束所有視窗
 
 print("------------------------------------------------------------")  # 60個
+
+print("OpenCV VideoCapture 13")
 
 cap = cv2.VideoCapture(0)
 
@@ -507,6 +496,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("OpenCV VideoCapture 14")
 
 logo = cv2.imread('logo.jpg')
 size = logo.shape
@@ -538,6 +528,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("OpenCV VideoCapture 15")
+
 logo = cv2.imread('logo.jpg')
 size = logo.shape
 img = np.zeros((360,600,3), dtype='uint8')
@@ -566,7 +558,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("Webcam影像轉成gif")
+print("OpenCV VideoCapture 16 Webcam影像轉成gif")
+
 from PIL import Image,ImageSequence
 
 output = []                       # 建立輸出的空串列
@@ -609,6 +602,8 @@ output[0].save("tmp_webcam_image.gif", save_all=True, append_images=output[1:], 
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+print("OpenCV VideoCapture 17")
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
@@ -667,6 +662,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("OpenCV VideoCapture 18")
+
 from PIL import ImageFont, ImageDraw, Image
 
 cap = cv2.VideoCapture(0)
@@ -713,6 +710,8 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+print("OpenCV VideoCapture 19")
 
 from PIL import ImageFont, ImageDraw, Image
 
@@ -771,12 +770,10 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
-print('讀取 QR code 圖檔')
+print("OpenCV VideoCapture 20 讀取 QR code 圖檔")
 
 from PIL import ImageFont, ImageDraw, Image
 

@@ -125,9 +125,6 @@ info = zipfp.getinfo('b.txt')
 print(info)
 
 print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
 
 print('各種壓縮方法 壓縮同樣的檔案 比較壓縮率')
 
@@ -338,6 +335,45 @@ fileZip.close()
 print("------------------------------------------------------------")  # 60個
 
 
+"""
+import zipfile
+import glob, os
+zipdir = input("請輸入欲壓縮的目錄 : ")
+zipdir = zipdir + '/*'
+zipfilename = input("請輸入保存壓縮檔案的名稱 : ")
+
+fileZip = zipfile.ZipFile(zipfilename, 'w')
+for name in glob.glob(zipdir):        # 遍歷zipdir目錄
+    fileZip.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
+    
+fileZip.close()
+"""
+
+
+print('------------------------------------------------------------')	#60個
+
+# ref. https://docs.python.org/3/library/zipfile.html
+import zipfile
+
+if __name__ == "__main__":
+    with zipfile.ZipFile('spam.zip', 'w') as myzip:
+        myzip.write('test.txt')
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+# Pseudocode:
+# 
+# ```
+# create path for zip file
+# create empty zipfile
+# for each file
+#     write into zipfile
+#     remove original file
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -359,6 +395,22 @@ tmptmp
 
 
 
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
 

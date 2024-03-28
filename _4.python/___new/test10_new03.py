@@ -18,6 +18,7 @@ import time
 import random
 import math
 
+print("------------------------------------------------------------")  # 60個
 
 # 方法1
 animals = set("鼠牛虎兔龍")
@@ -194,9 +195,6 @@ kitchen(order_list[:], served_list)  # 餐廳處理過程
 # 列出餐廳處理後的點餐內容
 show_order_meal(order_list)  # 列出所點的餐點
 show_served_meal(served_list)  # 列出已服務餐點
-
-'''
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3418,33 +3416,6 @@ for i in range(1, 10):
 
 print("------------------------------------------------------------")  # 60個
 
-import requests
-import json
-
-url = "https://www.oxxostudio.tw/json/pageList.json"
-r = requests.get(url)
-j = json.loads(r.text)  # 轉換成 json 格式
-print(j)
-
-print("------------------------------------------------------------")  # 60個
-
-import requests
-import json
-
-url = "https://www.oxxostudio.tw/json/pageList.json"
-r = requests.get(url)
-j = json.loads(r.text)  # 轉成 json 格式
-print(j[0])
-
-# 轉換成文字寫入，因為中文會變成編碼，所以後方要加上 ensure_ascii=False
-jj = json.dumps(j[0], ensure_ascii=False)
-print(jj)
-
-with open("tmp_a06.txt", "a+") as f:
-    f.write(jj)
-
-print("------------------------------------------------------------")  # 60個
-
 """
 while(True):
     a = input('請輸入簡單的數學式：')
@@ -3593,6 +3564,29 @@ print(c.name, c.age)  # qq 18
 
 print("------------------------------------------------------------")  # 60個
 
+import requests
+import json
+
+print("讀取網頁的json資料")
+
+url = "https://www.oxxostudio.tw/json/pageList.json"
+r = requests.get(url)
+j = json.loads(r.text)  # 轉成 json 格式
+#print(j)#全部
+print("第0筆")
+print(j[0])
+print("第1筆")
+print(j[1])
+
+# 轉換成文字寫入，因為中文會變成編碼，所以後方要加上 ensure_ascii=False
+jj = json.dumps(j[0], ensure_ascii=False)
+print(jj)
+
+with open("tmp_json_data1.txt", "a+") as f:
+    f.write(jj)
+
+print("------------------------------------------------------------")  # 60個
+
 import csv
 import requests
 import json
@@ -3605,13 +3599,12 @@ j = json.loads(r.text)  # 轉成 json 格式
 # 此處不使用，因為發現出來變成純文字格式，非 json
 jj = json.dumps(j[0], ensure_ascii=False)
 
-with open("tmp_a15.csv", "w") as csvfile:
+with open("tmp_json_data2.csv", "w") as csvfile:
     writer = csv.writer(csvfile)
     for i in j:
         writer.writerow([i["tag"], i["title"], i["site"], i["date"]])
         # writer.writerows([[0, 1, 3], [1, 2, 3], [2, 3, 4]])
     print("寫入完成！")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4041,8 +4034,6 @@ print(fset)  # frozenset({'a', 'b', 'c'})
 
 print("------------------------------------------------------------")  # 60個
 
-'''
-
 print("用zip組合資料成字典")
 keys = ("cname", "ename", "weight")
 values = ("鼠", "mouse", 3)
@@ -4134,7 +4125,6 @@ for x in range(1, 10):
 
 print("------------------------------------------------------------")  # 60個
 
-
 """
 驗證輸入用戶名和QQ號是否有效并給出對應的提示信息
 
@@ -4144,7 +4134,6 @@ QQ號是5~12的數字且首位不能為0
 """
 
 import re
-
 
 # username = input('請輸入用戶名: ')
 username = "lion_mouse"
@@ -4261,69 +4250,105 @@ print("字串的處理")
 
 text = "welcome to python"
 
-print("text = " + text)
-b = text.endswith("thon")
-print("text.endswith('thon') = " + str(b))
-b = text.startswith("hello")
-print("text.startswith('hello') = " + str(b))
-b = text.count("o")
-print("text.count('o') = " + str(b))
-b = text.find("come")
-print("text.find('come') = " + str(b))
-b = text.find("become")
-print("text.find('become') = " + str(b))
-b = text.find("o")
-print("text.find('o') = " + str(b))
-b = text.find("e")
-print("text.find('e') = " + str(b))
-b = text.rfind("o")
-print("text.rfind('o') = " + str(b))
-b = text.rfind("e")
-print("text.rfind('e') = " + str(b))
+print("endswith 是否以xxx為結尾")
+cc = text.endswith("thon")
+print(cc)
+
+print("startswith 是否以xxx為開頭")
+cc = text.startswith("hello")
+print(cc)
+
+print("count 計數出現的次數")
+cc = text.count("o")
+print(cc)
+
+print("find 找到字串的位置")
+cc = text.find("come")
+print(cc)
+
+print("find 找到字串的位置")
+cc = text.find("become")
+print(cc)
+
+print("find 找到字串的位置")
+cc = text.find("o")
+print(cc)
+
+print("find 找到字串的位置")
+cc = text.find("e")
+print(cc)
+
+print("rfind 找到字串的位置")
+cc = text.rfind("o")
+print(cc)
+
+print("rfind 找到字串的位置")
+cc = text.rfind("e")
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 text = "welcome to python"
 
 print("text = " + text)
+
 str2 = "Welcome to Python"
 print("str2 = " + str2)
+
 str3 = "This is a test."
 print("str3 = " + str3)
-s = text.capitalize()
-print("text.capitalize() = " + s)
-s = str2.lower()
-print("str2.lower() = " + s)
-s = text.upper()
-print("text.upper() = " + s)
-s = text.title()
-print("text.title() = " + s)
-s = str2.swapcase()
-print("str2.swapcase() = " + s)
-s = str3.replace("is", "was")
-print("str3.replace('is', 'was') = " + s)
+
+print("轉成capitalize")
+cc = text.capitalize()
+print(cc)
+
+print("轉成小寫")
+cc = str2.lower()
+print(cc)
+
+print("轉成大寫")
+cc = text.upper()
+print(cc)
+
+print("轉成title")
+cc = text.title()
+print(cc)
+
+print("轉成swapcase")
+cc = str2.swapcase()
+print(cc)
+
+print("replace")
+cc = str3.replace("is", "was")
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 text = "This is a book."
-list1 = text.split()
-print(list1)
+print("split")
+cc = text.split()
+print(cc)
+
 str2 = "Tom,Bob,Mary,Joe"
-list2 = str2.split(",")
-print(list2)
+print("split ,")
+cc = str2.split(",")
+print(cc)
+
 str3 = "23\n12\n45\n56"
-list3 = str3.splitlines()
-print(list3)
+print("splitlines")
+cc = str3.splitlines()
+print(cc)
+
 str4 = "23\n12\n45\n56"
-list4 = str4.split("\n")
-print(list4)
+print("split xx")
+cc = str4.split("\n")
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 text = "-"
 list1 = ["This", "is", "a", "book."]
 print(text.join(list1))
-
 
 print("------------------------------------------------------------")  # 60個
 

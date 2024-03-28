@@ -47,23 +47,6 @@ with open(dstfilename, 'w') as dst_Obj:   # 開啟檔案mode=w
 """
 
 print("------------------------------------------------------------")  # 60個
-"""
-import zipfile
-import glob, os
-zipdir = input("請輸入欲壓縮的目錄 : ")
-zipdir = zipdir + '/*'
-zipfilename = input("請輸入保存壓縮檔案的名稱 : ")
-
-fileZip = zipfile.ZipFile(zipfilename, 'w')
-for name in glob.glob(zipdir):        # 遍歷zipdir目錄
-    fileZip.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
-    
-fileZip.close()
-"""
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 """
 

@@ -18,8 +18,7 @@ while True:
     elif user_guess > secret_number:
         print("太大了，試試小一點的數字。")
     else:
-        print("恭喜你猜對了！答案是 :", secret_number,"。你總共猜了", attempts, " 次。")
+        print("恭喜你猜對了！答案是 :", secret_number, "。你總共猜了", attempts, " 次。")
         break
 
     attempts += 1
-

@@ -99,9 +99,13 @@
             this.rb_python_search2 = new System.Windows.Forms.RadioButton();
             this.rb_python_search1 = new System.Windows.Forms.RadioButton();
             this.rb_python_search0 = new System.Windows.Forms.RadioButton();
+            this.groupbox_result = new System.Windows.Forms.GroupBox();
+            this.lb_search_result1 = new System.Windows.Forms.Label();
+            this.lb_search_result2 = new System.Windows.Forms.Label();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.groupbox_python.SuspendLayout();
+            this.groupbox_result.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -902,11 +906,45 @@
             this.rb_python_search0.Text = "___new";
             this.rb_python_search0.UseVisualStyleBackColor = true;
             // 
-            // rb_search0
+            // groupbox_result
+            // 
+            this.groupbox_result.Controls.Add(this.lb_search_result2);
+            this.groupbox_result.Controls.Add(this.lb_search_result1);
+            this.groupbox_result.Location = new System.Drawing.Point(439, 115);
+            this.groupbox_result.Name = "groupbox_result";
+            this.groupbox_result.Size = new System.Drawing.Size(173, 132);
+            this.groupbox_result.TabIndex = 65;
+            this.groupbox_result.TabStop = false;
+            this.groupbox_result.Text = "搜尋結果";
+            // 
+            // lb_search_result1
+            // 
+            this.lb_search_result1.AutoSize = true;
+            this.lb_search_result1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_search_result1.ForeColor = System.Drawing.Color.Red;
+            this.lb_search_result1.Location = new System.Drawing.Point(18, 29);
+            this.lb_search_result1.Name = "lb_search_result1";
+            this.lb_search_result1.Size = new System.Drawing.Size(78, 24);
+            this.lb_search_result1.TabIndex = 66;
+            this.lb_search_result1.Text = "result1";
+            // 
+            // lb_search_result2
+            // 
+            this.lb_search_result2.AutoSize = true;
+            this.lb_search_result2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_search_result2.ForeColor = System.Drawing.Color.Red;
+            this.lb_search_result2.Location = new System.Drawing.Point(18, 65);
+            this.lb_search_result2.Name = "lb_search_result2";
+            this.lb_search_result2.Size = new System.Drawing.Size(78, 24);
+            this.lb_search_result2.TabIndex = 67;
+            this.lb_search_result2.Text = "result2";
+            // 
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.groupbox_result);
             this.Controls.Add(this.groupbox_python);
             this.Controls.Add(this.cb_option3);
             this.Controls.Add(this.cb_option2);
@@ -971,6 +1009,8 @@
             this.groupBox_file.PerformLayout();
             this.groupbox_python.ResumeLayout(false);
             this.groupbox_python.PerformLayout();
+            this.groupbox_result.ResumeLayout(false);
+            this.groupbox_result.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1048,6 +1088,9 @@
         private System.Windows.Forms.RadioButton rb_python_search2;
         private System.Windows.Forms.RadioButton rb_python_search1;
         private System.Windows.Forms.RadioButton rb_python_search0;
+        private System.Windows.Forms.GroupBox groupbox_result;
+        private System.Windows.Forms.Label lb_search_result2;
+        private System.Windows.Forms.Label lb_search_result1;
     }
 }
 

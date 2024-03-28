@@ -1273,20 +1273,6 @@ if __name__ == '__main__':
 # ### TRY THIS: ARCHIVING TO ZIP FILES PSEUDOCODE
 # Take a moment to write the pseudocode for a solution that would store data files in zip files as shown above. What modules and functions or methods do you intend to use? Try coding your solution to make sure it works.
 # 
-# Pseudocode:
-# 
-# ```
-# create path for zip file
-# create empty zipfile
-# for each file
-#     write into zipfile
-#     remove original file
-# ```
-# 
-# (see following text)
-
-# In[ ]:
-
 
 import datetime
 import pathlib

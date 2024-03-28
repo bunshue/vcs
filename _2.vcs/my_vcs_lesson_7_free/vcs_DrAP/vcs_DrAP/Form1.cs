@@ -283,6 +283,12 @@ namespace vcs_DrAP
             y_st = 4;
             groupbox_python.Location = new Point(x_st, y_st);
             groupbox_python.Size = new Size(160, 106);
+            groupbox_result.Location = new Point(x_st + 165, y_st);
+            groupbox_result.Size = new Size(110, 106);
+            lb_search_result1.Location = new Point(10, 25);
+            lb_search_result2.Location = new Point(10, 60);
+            lb_search_result1.Text = "";
+            lb_search_result2.Text = "";
 
             x_st = 10;
             y_st = 15;
@@ -729,9 +735,15 @@ namespace vcs_DrAP
             }
 
             if (fileinfos.Count == 0)
+            {
                 richTextBox2.Text += "找不到資料a\n";
+                lb_search_result1.Text = "0";
+            }
             else
+            {
                 richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+                lb_search_result1.Text = fileinfos.Count.ToString();
+            }
 
             for (int i = 0; i < fileinfos.Count; i++)
             {
@@ -910,9 +922,15 @@ namespace vcs_DrAP
             }
 
             if (fileinfos.Count == 0)
+            {
                 richTextBox2.Text += "找不到資料b\n";
+                lb_search_result1.Text = "0";
+            }
             else
+            {
                 richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料b\n";
+                lb_search_result1.Text = fileinfos.Count.ToString();
+            }
 
             for (int i = 0; i < fileinfos.Count; i++)
             {
@@ -963,9 +981,15 @@ namespace vcs_DrAP
             listView1.Visible = true;
 
             if (fileinfos.Count == 0)
+            {
                 richTextBox2.Text += "找不到資料c\n";
+                lb_search_result1.Text = "0";
+            }
             else
+            {
                 richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料c\n";
+                lb_search_result1.Text = fileinfos.Count.ToString();
+            }
 
             for (int i = 0; i < fileinfos.Count; i++)
             {
@@ -2038,9 +2062,15 @@ namespace vcs_DrAP
             listView1.Visible = true;
 
             if (fileinfos.Count == 0)
+            {
                 richTextBox2.Text += "找不到資料d\n";
+                lb_search_result1.Text = "0";
+            }
             else
+            {
                 richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料d\n";
+                lb_search_result1.Text = fileinfos.Count.ToString();
+            }
 
             for (int i = 0; i < (fileinfos.Count - 1); i++)
             {
@@ -2437,9 +2467,15 @@ namespace vcs_DrAP
             listView1.Visible = true;
 
             if (fileinfos.Count == 0)
+            {
                 richTextBox2.Text += "找不到資料e\n";
+                lb_search_result1.Text = "0";
+            }
             else
+            {
                 richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料e\n";
+                lb_search_result1.Text = fileinfos.Count.ToString();
+            }
 
             for (int i = 0; i < (fileinfos.Count - 1); i++)
             {
@@ -3070,6 +3106,7 @@ namespace vcs_DrAP
 
             richTextBox1.Text += "搜尋開始\t";
             richTextBox2.Text += "搜尋開始\t";
+            lb_search_result1.Text = "";
 
             if (mode == SEARCH_MODE_VCS)
             {
@@ -3391,10 +3428,12 @@ namespace vcs_DrAP
             if (fileinfos.Count == 0)
             {
                 richTextBox2.Text += "找不到資料a\n";
+                lb_search_result1.Text = "0";
             }
             else
             {
                 richTextBox2.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+                lb_search_result1.Text = fileinfos.Count.ToString();
             }
 
             //排序 由小到大

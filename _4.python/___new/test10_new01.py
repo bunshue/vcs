@@ -3237,22 +3237,6 @@ print("remove(): ", os.listdir(new_path))
 """
 print("------------------------------------------------------------")  # 60個
 
-""" no file
-import zipfile
-
-files = zipfile.ZipFile("C:/workplace/test.zip")
-
-files.namelist()
-
-files.extract("d/c.txt")
-
-files.extractall()
-
-files.close()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
 str = "{1} * {0} = {2}"
 a = 3
 b = "5"

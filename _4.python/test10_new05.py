@@ -268,6 +268,29 @@ print(str2)
 
 print("------------------------------------------------------------")  # 60個
 
+"""
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip'
+
+import zipfile
+
+files = zipfile.ZipFile(filename)
+
+cc = files.namelist()
+print(cc)
+
+for _ in cc:
+    print(_)
+    files.extract(_)
+
+files.extractall()
+
+files.close()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 
 print("------------------------------------------------------------")  # 60個
