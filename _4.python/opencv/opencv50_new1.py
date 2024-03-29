@@ -26,6 +26,68 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+print('練習組合成一張大圖 picasa效果')
+
+filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+filename2 = "C:/_git/vcs/_4.python/_data/bear.jpg"
+filename3 = "C:/_git/vcs/_4.python/_data/panda.jpg"
+
+ratio = 3
+
+image1 = cv2.imread(filename1)
+image2 = cv2.imread(filename2)
+image3 = cv2.imread(filename3)
+print(image1.shape)
+
+image1 = cv2.resize(image1, (image1.shape[1]//ratio, image1.shape[0]//ratio))
+image2 = cv2.resize(image2, (image2.shape[1]//ratio, image2.shape[0]//ratio))
+image3 = cv2.resize(image3, (image3.shape[1]//ratio, image3.shape[0]//ratio))
+print(image1.shape)
+
+output = np.zeros((768, 1024, 3), dtype='uint8')         # 設定合成的影像為一張全黑的畫布
+
+x_st = 50
+y_st = 50
+w, h = image1.shape[1], image1.shape[0]
+output[y_st:y_st+h, x_st:x_st+w] = image1[0:h, 0:w]      # 設定 output 的某個區域為即時影像 img 的某區域
+
+
+x_st = 300
+y_st = 200
+w, h = image2.shape[1], image2.shape[0]
+output[y_st:y_st+h, x_st:x_st+w] = image2[0:h, 0:w]      # 設定 output 的某個區域為即時影像 img 的某區域
+
+
+x_st = 150
+y_st = 300
+w, h = image3.shape[1], image3.shape[0]
+output[y_st:y_st+h, x_st:x_st+w] = image3[0:h, 0:w]      # 設定 output 的某個區域為即時影像 img 的某區域
+
+
+plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
+plt.show()
+
+
+
+"""
+
+    img = cv2.flip(img, 1)                        # 翻轉影像，使其如同鏡子
+    img = img[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
+
+
+
+
+
+
+"""
+
+
+sys.exit()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 filename1 = "C:/_git/vcs/_4.python/_data/picture_mix1.bmp"
 filename2 = "C:/_git/vcs/_4.python/_data/picture_mix2.bmp"
 

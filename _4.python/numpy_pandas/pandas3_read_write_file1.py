@@ -8,15 +8,29 @@
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
+# 共同
+import os
 import sys
+import math
+import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
 print('---- 1111 csv --------------------------------------------------------')	#60個
-'''
+
 print('pandas DataFrame資料輸出到csv檔')
 
 scores = {'國文':{'王小明':65,'李小美':90,'陳大同':81,'林小玉':79},
@@ -85,7 +99,6 @@ print('------------------------------------------------------------')	#60個
 df = pd.read_csv("http://bit.ly/gradescsv")
 
 print(df.head())
-'''
 
 print('------------------------------------------------------------')	#60個
 
@@ -211,8 +224,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-
-'''
 print('---- 2222 json --------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/score444.json'
@@ -318,7 +329,6 @@ table.index = range(len(table.index))
 print(table)
 """
 print('------------------------------------------------------------')	#60個
-'''
 
 #由網址讀取資料檔
 
@@ -566,14 +576,33 @@ print('價格 :', df["價格"])
 class_map = {"其他":0,"經濟型":1,"舒適型":2,"高檔型":3,"豪華型":4}
 df["酒店等級"]=df["酒店等級"].map(class_map)
 
-
 print('------------------------------------------------------------')	#60個
 
+print('用pandas讀取csv檔, 並分析之')
+# 讀入csv檔
+filename = "data/python_ReadWrite_CSV7_onigiri.csv"
+dat = pd.read_csv(filename, encoding="UTF-8")
 
+print(type(dat))
+print(dat)
+
+bins=range(0, 200, 10)
+for b in bins:
+    print(b)
+
+print("計算平均數、變異數、標準差")
+
+print("店長---------")
+print("平均:", np.mean(dat["店長"]))
+print("變異數:", np.var(dat["店長"]))
+print("標準差:", np.std(dat["店長"]))
+
+print("太郎---------")
+print("平均:", np.mean(dat["太郎"]))
+print("變異數:", np.var(dat["太郎"]))
+print("標準差:", np.std(dat["太郎"]))
 
 print('------------------------------------------------------------')	#60個
-
-
 
 
 print('------------------------------------------------------------')	#60個
