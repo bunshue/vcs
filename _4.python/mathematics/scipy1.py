@@ -91,20 +91,42 @@ print(
     "---- scipy.interpolate --------------------------------------------------------"
 )  # 60個
 
-print("內插法")
+print("內插法1")
 
 x = np.arange(5, 20)
 y = scipy.special.exp2(x / 3.0)
 plt.plot(x, y, "o")
 
-#plt.show()
+plt.show()
 
 f = scipy.interpolate.interp1d(x, y)
 x1 = np.arange(5, 20)
 y1 = f(x1)
 plt.plot(x, y, "o", x1, y1, "--")
 
-#plt.show()
+plt.show()
+
+print("內插法2")
+
+x = [1, 2, 3, 4, 5]
+y = [5, 8, 7, 4, 3]
+plt.plot(x, y, "o")
+
+plt.show()
+
+f = scipy.interpolate.interp1d(x, y)
+x1 = [1, 2, 3, 4, 5]
+y1 = f(x1)
+plt.plot(x, y, "o", x1, y1, "--")
+
+xx = 1.5
+yy = f(xx)
+print("xx =", xx)
+print("yy =", yy)
+
+plt.grid()
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

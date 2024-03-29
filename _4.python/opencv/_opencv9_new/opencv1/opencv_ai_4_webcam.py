@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("OpenCV VideoCapture 01 錄影")
 
 cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
@@ -33,7 +33,7 @@ while True:
         print("Cannot receive frame")
         break
     out.write(frame)       # 將取得的每一幀圖像寫入空的影片
-    cv2.imshow('image', frame)
+    cv2.imshow("OpenCV 01", frame)
     if cv2.waitKey(1) == ord('q'):
         break             # 按下 q 鍵停止
 cap.release()
@@ -61,7 +61,7 @@ while True:
         break
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
     out.write(gray)
-    cv2.imshow('image', gray)
+    cv2.imshow("OpenCV 02", gray)
     if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
@@ -86,15 +86,15 @@ while True:
     img_1 = frame
     img_2 = cv2.flip(img_1, 0)             # 上下翻轉
     out.write(img_2)                       # 將取得的每一幀圖像寫入空的影片
-    cv2.imshow('image', frame)
+    cv2.imshow("OpenCV 03", frame)
     if cv2.waitKey(1) == ord('q'):
         break                              # 按下 q 鍵停止
 cap.release()
 out.release()      # 釋放資源
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
-
+"""
 print("OpenCV VideoCapture 04 兩個camera")
 
 ratio = 3
@@ -127,100 +127,54 @@ while True:
 
     cv2.rectangle(img2, (x_st, y_st), (x_st+w,y_st+h), (255,255,255), 5)  # 繪製子影片的外框
 
-    cv2.imshow('image', img2)
+    cv2.imshow("OpenCV 04", img2)
     if cv2.waitKey(1) == ord('q'):
         break
 
 cap1.release()
 cap2.release()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 05")
+print("OpenCV VideoCapture 05 N X N")
 
+N = 2 # 設定要分成幾格, N X N
+W = 640*2
+H = 480*2
 cap = cv2.VideoCapture(0)                      # 讀取攝影鏡頭
-output = np.zeros((360,640,3), dtype='uint8')  # 產生 640x360 的黑色背景
+output = np.zeros((H, W, 3), dtype='uint8')  # 產生 WxH 的黑色背景
 
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
 
-n = 2                                  # 設定要分成幾格
-w = 640//n                             # 計算分格之後的影像寬度 ( // 取整數 )
-h = 360//n                             # 計算分格之後的影像高度 ( // 取整數 )
-while True:
-    ret, img = cap.read()              # 讀取影像
-    img = cv2.resize(img,(w, h))       # 縮小尺寸
-    output[0:h, 0:w] = img             # 將 output 的特定區域置換為 img
-    cv2.imshow('image', output)
-    if cv2.waitKey(50) == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV VideoCapture 06")
-
-cap = cv2.VideoCapture(0)                      # 讀取攝影鏡頭
-output = np.zeros((360,640,3), dtype='uint8')  # 產生 640x360 的黑色背景
-
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-n = 2                                  # 設定要分成幾格
-w = 640//n                             # 計算分格之後的影像寬度 ( // 取整數 )
-h = 360//n                             # 計算分格之後的影像高度 ( // 取整數 )
+w = W // N                             # 計算分格之後的影像寬度
+h = H // N                             # 計算分格之後的影像高度
 img_list = []        # 設定空串列，記錄每一格的影像
 while True:
     ret, img = cap.read()              # 讀取影像
     img = cv2.resize(img,(w, h))       # 縮小尺寸
-    #output[0:h, 0:w] = img             # 將 output 的特定區域置換為 img 只更新一塊
+    """ 2X2的寫法
+    output[0:h, 0:w] = img             # 將 output 的特定區域置換為 img, 左上
+    output[0:h, w:w*2] = img             # 將 output 的特定區域置換為 img, 右上
+    output[h:h*2, 0:w] = img             # 將 output 的特定區域置換為 img, 左下
+    output[h:h*2, w:w*2] = img             # 將 output 的特定區域置換為 img, 右下
+
+    #左右相反
+    img = cv2.flip(img, 1)
+
+    """
     img_list.append(img)                    # 每次擷取影像時，將影像存入串列
-    if len(img_list)>n*n: del img_list[0]   # 如果串列長度超過可容納的影像數量，移除第一個項目
+    if len(img_list) > N*N: del img_list[0]   # 如果串列長度超過可容納的影像數量，移除第一個項目
     for i in range(len(img_list)):
-        x = i%n      # 根據串列計算影像的 x 座標 ( 取餘數 )
-        y = i//n     # 根據串列計算影像的 y 座標 ( 取整數 )
+        x = i % N      # 根據串列計算影像的 x 座標
+        y = i // N     # 根據串列計算影像的 y 座標
         output[h*y:h*y+h, w*x:w*x+w] = img_list[i]  # 更新畫面
 
-    cv2.imshow('image', output)
+    cv2.imshow("OpenCV 05", output)
     if cv2.waitKey(50) == ord('q'):
         break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV VideoCapture 07")
-
-cap = cv2.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-
-w, h = 640, 360                                   # 定義長寬
-x = 0                                             # 定義 x 從 0 開始
-while True:
-    ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img = cv2.resize(img,(w,h))                   # 縮小尺寸加快速度
-    img = cv2.flip(img, 1)                        # 翻轉影像，使其如同鏡子
-    img = img[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
-    cv2.line(img,(x,0),(x,h),(0,0,255),5)         # 畫線
-    cv2.imshow('image',img)                  # 正常狀況下，一直顯示即時影像
-    
-    x = x + 2
-    if x > h:
-        x = 0
-    keyCode = cv2.waitKey(10)                     # 等待鍵盤事件
-    if keyCode == ord('q'):
-        break                                     # 按下 q 就全部結束
 
 cap.release()
 cv2.destroyAllWindows()
@@ -234,9 +188,9 @@ if not cap.isOpened():
     print("Cannot open camera")
     exit()
 
-w, h = 640, 360                                   # 定義長寬
+w, h = 640, 480                                   # 定義長寬
 run = 0                                           # 是否開始，0 表示尚未開始，1 表示開始
-output = np.zeros((h,h,3), dtype='uint8')         # 設定合成的影像為一張全黑的畫布 ( 長寬使用正方形 )
+output = np.zeros((h, h, 3), dtype='uint8')         # 設定合成的影像為一張全黑的畫布 ( 長寬使用正方形 )
 while True:
     ret, img = cap.read()
     if not ret:
@@ -258,7 +212,7 @@ while True:
         cv2.line(img,(x+5,0),(x+5,h),(0,0,255),5) # 畫線 ( 因為線條寬度 5，所以位移 5 )
         x = x + 2                                 # 改變 x 位置
         img[0:h,0:x] = output[0:h,0:x]            # 設定即時影像 img 的某區域為 output
-        cv2.imshow('image',img)              # 顯示即時影像
+        cv2.imshow("OpenCV 08", img)              # 顯示即時影像
         if x > h:
             keyCode = cv2.waitKey() == ord('s')   # 如果寬度抵達正方形邊緣，等待鍵盤事件按下 s
             image_filename = 'tmp1_Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
@@ -266,7 +220,7 @@ while True:
             print('已存圖, 檔案 :', image_filename)
             run = 0                               # 停止合成
     else:
-        cv2.imshow('image',img)              # 正常狀況下，一直顯示即時影像
+        cv2.imshow("OpenCV 08", img)              # 正常狀況下，一直顯示即時影像
 
 cap.release()
 cv2.destroyAllWindows()
@@ -280,7 +234,7 @@ if not cap.isOpened():
     print("Cannot open camera")
     exit()
 
-w, h = 640, 360                                   # 定義長寬
+w, h = 640, 480                                   # 定義長寬
 run = 0                                           # 是否開始，0 表示尚未開始，1 表示開始
 output = np.zeros((h,h,3), dtype='uint8')         # 設定合成的影像為一張全黑的畫布
 while True:
@@ -304,7 +258,7 @@ while True:
         cv2.line(img,(0,y+5),(h,y+5),(0,0,255),5) # 畫線
         y = y + 2                                 # 改變 x 位置
         img[0:y,0:h] = output[0:y,0:h]            # 設定即時影像 img 的某區域為 output
-        cv2.imshow('image',img)              # 顯示即時影像
+        cv2.imshow("OpenCV 09", img)              # 顯示即時影像
         if y > h:
             keyCode = cv2.waitKey() == ord('s')   # 如果寬度抵達正方形邊緣，等待鍵盤事件按下 s
             image_filename = 'tmp2_Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
@@ -312,7 +266,7 @@ while True:
             print('已存圖, 檔案 :', image_filename)
             run = 0                               # 停止合成
     else:
-        cv2.imshow('image',img)              # 正常狀況下，一直顯示即時影像
+        cv2.imshow("OpenCV 09", img)              # 正常狀況下，一直顯示即時影像
 
 cap.release()
 cv2.destroyAllWindows()
@@ -350,7 +304,7 @@ while True:
     cw, ch = int(w/2), int(h/2)            # 取得中心點
     img = cv2.resize(img,(w, h))           # 調整尺寸，加快速度
     img = convex(img, (w, h, 3), (cw, ch, 100))
-    cv2.imshow('image', img)
+    cv2.imshow("OpenCV 10", img)
     if cv2.waitKey(100) == ord('q'):
         break
 cap.release()
@@ -385,7 +339,7 @@ while True:
         a = a - 0.01        # a 不斷減少 0.01
         if a<0: a = 0       # 如果 a 小於 0 就讓 a 等於 0
 
-    cv2.imshow('image', output)               # 顯示圖片
+    cv2.imshow("OpenCV 11", output)               # 顯示圖片
 
 cv2.destroyAllWindows()                 # 結束所有視窗
 
@@ -430,7 +384,7 @@ while True:
             cv2.imwrite(image_filename, photo)
             print('已存圖, 檔案 :', image_filename)
 
-    cv2.imshow('image', output)               # 顯示圖片
+    cv2.imshow("OpenCV 12", output)               # 顯示圖片
 
 cap.release()                           # 所有作業都完成後，釋放資源
 cv2.destroyAllWindows()                 # 結束所有視窗
@@ -489,7 +443,7 @@ while True:
                 cv2.imwrite(image_filename, photo)
                 print('已存圖, 檔案 :', image_filename)
 
-    cv2.imshow('image', output)
+    cv2.imshow("OpenCV 13", output)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -520,7 +474,7 @@ while True:
     frame = cv2.resize(frame,(600, 360))   # 調整圖片尺寸
     bg = cv2.bitwise_and(frame, frame, mask = mask2 )
     output = cv2.add(bg, logo)
-    cv2.imshow('image', output)
+    cv2.imshow("OpenCV 14", output)
     if cv2.waitKey(1) == ord('q'):
         break      # 按下 q 鍵停止
 cap.release()
@@ -550,7 +504,7 @@ while True:
     frame = cv2.resize(frame,(600, 360))
     output = cv2.bitwise_not(frame, mask = mask1 )      # 套用 not 和遮罩
     output = cv2.bitwise_not(output, mask = mask1 )     # 再次套用 not 和遮罩，將色彩轉成原來的顏色
-    cv2.imshow('image', output)
+    cv2.imshow("OpenCV 15", output)
     if cv2.waitKey(1) == ord('q'):
         break
 cap.release()
@@ -593,7 +547,7 @@ while True:
     gif = gif.convert('RGB')                      # 轉換顏色
     output.append(gif)                            # 添加到 output
 
-    cv2.imshow('image', img)
+    cv2.imshow("OpenCV 16", img)
     if cv2.waitKey(250) == ord('q'):
         break
 cap.release()
@@ -702,7 +656,7 @@ while True:
             box = boxSize(bbox[i])    # QRCode 座標
             cv2.rectangle(img,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)  # 繪製外框
             putText(box[0],box[3],text,color=(0,0,255))                     # 顯示文字
-    cv2.imshow('image', img)
+    cv2.imshow("OpenCV 18", img)
     if cv2.waitKey(1) == ord('q'):
         break
 
@@ -763,14 +717,13 @@ while True:
                 img = 255-img
                 putText(0,0,'負片效果',100,(0,0,0))
 
-    cv2.imshow('image', img)     # 預覽影像
+    cv2.imshow("OpenCV 19", img)     # 預覽影像
     if cv2.waitKey(1) == ord('q'):
         break
 
 cap.release()
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 20 讀取 QR code 圖檔")
@@ -821,7 +774,7 @@ if status == True:
         #putText(10,10,"aaa",color=(0,0,255))                     # 顯示文字
         putText(box[0],box[3],text,color=(0,0,255))                     # 顯示文字
 
-cv2.imshow('image', image)
+cv2.imshow("OpenCV 20", image)
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

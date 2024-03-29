@@ -1,4 +1,5 @@
 """
+# hist 集合
 
 np.random.normal
 np.random.randn
@@ -12,66 +13,6 @@ Matplotlib是Python中的一個庫，它是數字的-NumPy庫的數學擴展。
 Pyplot是Matplotlib模塊的基于狀態的接口，該模塊提供了MATLAB-like接口。
 matplotlib.pyplot.hist()函數
 
-matplotlib庫的pyplot模塊中的hist()函數用于繪制直方圖。
-
-用法： matplotlib.pyplot.hist(x, bins=None, range=None, density=False, weights=None, cumulative=False, bottom=None, histtype=’bar’, align=’mid’, orientation=’vertical’, rwidth=None, log=False, color=None, label=None, stacked=False, \*, data=None, \*\*kwargs)
-
-參數：此方法接受以下描述的參數：
-
-    x:此參數是數據序列。
-    bins:此參數是可選參數，它包含整數，序列或字符串。
-    range:此參數是可選參數，它是箱子的上下限。
-    density:此參數是可選參數，它包含布爾值。
-    weights:此參數是可選參數，并且是一個權重數組，與x的形狀相同。
-    bottom:此參數是每個容器底部基線的位置。
-    histtype:此參數是可選參數，用于繪制直方圖的類型。 {‘bar’，‘barstacked’，‘step’，‘stepfilled’}
-    align:此參數是可選參數，它控制如何繪制直方圖。 {‘left’，‘mid’，‘right’}
-    rwidth:此參數是可選參數，它是條形圖的相對寬度，是箱寬度的一部分
-    log:此參數是可選參數，用于將直方圖軸設置為對數刻度
-    color:此參數是一個可選參數，它是一個顏色規格或一系列顏色規格，每個數據集一個。
-    label:此參數是可選參數，它是一個字符串或匹配多個數據集的字符串序列。
-
-返回值：這將返回以下內容：
-
-    n:這將返回直方圖箱的值。
-    垃圾桶：這將返回箱子的邊。
-    補丁：這將返回用于創建直方圖的單個補丁的列表。
-
-"""
-
-"""
-Matplotlib（直方图） - hist()参数解释
-
-plt.hist(x, bins=None, range=None, density=None, weights=None, cumulative=False, bottom=None, histtype='bar', align='mid', orientation='vertical', rwidth=None, log=False, color=None, label=None, stacked=False, normed=None, *, data=None, **kwargs)
-
-x: 作直方图所要用的数据，必须是一维数组；多维数组可以先进行扁平化再作图；必选参数；
-bins: 直方图的柱数，即要分的组数，默认为10；
-range：元组(tuple)或None；剔除较大和较小的离群值，给出全局范围；如果为None，则默认为(x.min(), x.max())；即x轴的范围；
-density：布尔值。如果为true，则返回的元组的第一个参数n将为频率而非默认的频数；
-weights：与x形状相同的权重数组；将x中的每个元素乘以对应权重值再计数；如果normed或density取值为True，则会对权重进行归一化处理。这个参数可用于绘制已合并的数据的直方图；
-cumulative：布尔值；如果为True，则计算累计频数；如果normed或density取值为True，则计算累计频率；
-bottom：数组，标量值或None；每个柱子底部相对于y=0的位置。如果是标量值，则每个柱子相对于y=0向上/向下的偏移量相同。如果是数组，则根据数组元素取值移动对应的柱子；即直方图上下便宜距离；
-align：{‘left’, ‘mid’, ‘right’}；‘left’：柱子的中心位于bins的左边缘；‘mid’：柱子位于bins左右边缘之间；‘right’：柱子的中心位于bins的右边缘；
-histtype：{‘bar’, ‘barstacked’, ‘step’, ‘stepfilled’}；'bar’是传统的条形直方图；'barstacked’是堆叠的条形直方图；'step’是未填充的条形直方图，只有外边框；‘stepfilled’是有填充的直方图；当histtype取值为’step’或’stepfilled’，rwidth设置失效，即不能指定柱子之间的间隔，默认连接在一起；
-stacked：布尔值。如果取值为True，则输出的图为多个数据集堆叠累计的结果；如果取值为False且histtype=‘bar’或’step’，则多个数据集的柱子并排排列；
-orientation：{‘horizontal’, ‘vertical’}：如果取值为horizontal，则条形图将以y轴为基线，水平排列；简单理解为类似bar()转换成barh()，旋转90°；
-rwidth：标量值或None。柱子的宽度占bins宽的比例；
-log：布尔值。如果取值为True，则坐标轴的刻度为对数刻度；如果log为True且x是一维数组，则计数为0的取值将被剔除，仅返回非空的(frequency, bins, patches）；
-color：具体颜色，数组（元素为颜色）或None。
-label：字符串（序列）或None；有多个数据集时，用label参数做标注区分；
-edgecolor: 直方图边框颜色；
-alpha: 透明度；
-
-返回值（用参数接收返回值，便于设置数据标签）：
-n：直方图向量，即每个分组下的统计值，是否归一化由参数normed设定。当normed取默认值时，n即为直方图各组内元素的数量（各组频数）；
-bins: 返回各个bin的区间范围；
-patches：返回每个bin里面包含的数据，是一个list。
-其他参数与plt.bar()类似。
-
-
-"""
-
-"""
 以上實例中我們生成了三組不同的隨機數據，并使用 hist() 函數繪制了它們的直方圖。通過設置不同的均值和標準差，我們可以生成具有不同分布特征的隨機數據。
 
 我們設置了 bins 參數為 30，這意味著將數據范圍分成 30 個等寬的區間，然后統計每個區間內數據的頻數。
@@ -81,22 +22,8 @@ patches：返回每个bin里面包含的数据，是一个list。
 
 然后使用 legend() 函數顯示圖例。最后，我們使用 title()、xlabel() 和 ylabel() 函數設置了圖表的標題和坐標軸標簽。
 """
-"""
-plt.hist()參數設置
 
-arr: 需要計算直方圖的一維數組；
-bins: 直方圖的柱數，可選項，默認為10；
-density: : 是否將得到的直方圖向量歸一化。默認為0；
-color：顏色序列，默認為None；
-facecolor: 直方圖顏色；
-edgecolor: 直方圖邊框顏色；
-alpha: 透明度；
-histtype: 直方圖類型，『bar』, 『barstacked』, 『step』, 『stepfilled』；
-rwidth
-
-"""
-
-# hist 集合
+print("------------------------------------------------------------")  # 60個
 
 N = 500  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
@@ -119,7 +46,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
@@ -146,7 +73,7 @@ x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 # 第一張圖
 plt.subplot(231)
 
-cc = plt.hist(
+plt.hist(
     x,
     bins=num_bins,
     histtype="bar",
@@ -156,14 +83,12 @@ cc = plt.hist(
     rwidth=0.8,
     label="Normal distribution",
 )
-# print(type(cc))
-# print(cc)
 plt.title("histtype 1 : bar")
 
 # 第二張圖
 plt.subplot(232)
 
-cc = plt.hist(
+plt.hist(
     x,
     bins=num_bins,
     histtype="barstacked",
@@ -178,7 +103,7 @@ plt.title("histtype 2 : barstacked")
 # 第三張圖
 plt.subplot(233)
 
-cc = plt.hist(
+plt.hist(
     x,
     bins=num_bins,
     histtype="step",
@@ -195,7 +120,7 @@ x2 = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 mu, sigma = 120, 10
 x3 = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 
-cc = plt.hist(
+plt.hist(
     x2,
     bins=num_bins,
     histtype="step",
@@ -205,7 +130,8 @@ cc = plt.hist(
     rwidth=0.8,
     label="Normal distribution",
 )
-cc = plt.hist(
+
+plt.hist(
     x3,
     bins=num_bins,
     histtype="step",
@@ -215,14 +141,15 @@ cc = plt.hist(
     rwidth=0.8,
     label="Normal distribution",
 )
+
 # 合寫, 但效果不對
-# cc = plt.hist([x2, x3], bins=num_bins, histtype="step", facecolor="y", edgecolor="b", alpha=0.75, rwidth=0.8, label="Normal distribution")
+# plt.hist([x2, x3], bins=num_bins, histtype="step", facecolor="y", edgecolor="b", alpha=0.75, rwidth=0.8, label="Normal distribution")
 
 
 # 第四張圖
 plt.subplot(234)
 # 縱軸不做正規化處理為數量，直條的間距填滿
-cc = plt.hist(
+plt.hist(
     x,
     bins=num_bins,
     histtype="stepfilled",
@@ -247,11 +174,11 @@ plt.title("以字典傳送參數")
 # 第六張圖
 plt.subplot(236)
 
-# 縱軸執行正規化處理表示為機率，直條的寬度大小為 80%
+# 縱軸執行正規化處理表示為機率
 # 指定bins
 bins = [50, 70, 85, 95, 100, 105, 115, 130, 150]
 # bins = range(0, 151, 10)
-plt.hist(x, bins, histtype="bar", rwidth=0.8)
+plt.hist(x, bins, rwidth=0.8)
 
 plt.title("unequal bins")
 
@@ -286,9 +213,7 @@ for i in range(N):
 # 建立 N 個 1-6(含) 的整數隨機數 same
 # dice = np.random.randint(1, sides + 1, size=N)  # 建立隨機數
 
-cc = plt.hist(dice, bins=6, rwidth=0.5, cumulative=False, alpha=0.3)  # 繪製hist圖
-print("bins的y軸 ", cc[0])
-print("bins的x軸 ", cc[1])
+plt.hist(dice, bins=6, rwidth=0.5, cumulative=False, alpha=0.3)  # 繪製hist圖
 plt.ylabel("次數")
 plt.title("測試 10000 次 不累積統計")
 
@@ -297,12 +222,11 @@ plt.subplot(232)
 
 print("資料同上, 改了 累積統計")
 
-cc = plt.hist(dice, bins=6, rwidth=0.5, cumulative=True, alpha=0.3)  # 繪製hist圖
-print("bins的y軸 ", cc[0])
-print("bins的x軸 ", cc[1])
+#plt.hist(dice, bins=6, rwidth=0.5, cumulative=True, alpha=0.3)  # 繪製hist圖
+plt.hist(dice, bins=6, rwidth=0.5, cumulative=True, alpha=0.3)  # 繪製hist圖
+
 plt.ylabel("次數")
 plt.title("測試 10000 次, 累積統計")
-
 
 # 第三張圖
 plt.subplot(233)
@@ -312,14 +236,9 @@ d2 = np.random.randint(1, 6 + 1, N)
 
 dsums = d1 + d2
 
-# 以密度表示
-# count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5, density=True)
-
-# 以總數表示
-count, bins, ignored = plt.hist(dsums, bins=11, rwidth=0.5)
+plt.hist(dsums, bins=11, rwidth=0.5)
 
 plt.xlabel("兩個骰子和")
-# plt.ylabel("密度")   #density = True
 plt.ylabel("次數")
 plt.title("擲兩個骰子 10000 次 看其分布")
 
@@ -347,7 +266,7 @@ plt.hist(x, bins=num_bins, label="Exponential distribution")
 plt.title("np.random.exponential")
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
@@ -363,53 +282,81 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-grade = [
-    90,
-    72,
-    45,
-    18,
-    13,
-    81,
-    65,
-    68,
-    73,
-    84,
-    75,
-    79,
-    58,
-    78,
-    96,
-    100,
-    98,
-    64,
-    43,
-    2,
-    63,
-    71,
-    27,
-    35,
-    45,
-    65,
-]
+N = 10000  # 資料個數
+num_bins = 50  # 直方圖顯示時的束數
 
-# 僅指定束數
-# n, b, p = plt.hist(grade, bins=10, edgecolor="r", rwidth=0.5)
+mu = 100  # 平均值
+sigma = 15  # 標準差
+mu, sigma = 100, 15
+x = mu + sigma * np.random.randn(N)  # 隨機數
 
-# 指定束範圍
-n, b, p = plt.hist(
-    grade, bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100], edgecolor="r", rwidth=0.5
+n, bins, patches = plt.hist(
+    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
 )
 
-for i in range(len(n)):
-    plt.text(b[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=12)
+# 繪製曲線圖
+x = bins
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2))
+plt.plot(x, y, "--", color="r", linewidth=2)
 
-plt.title("全班成績直方圖分布圖")
-plt.xlabel("考試分數")
-plt.ylabel("人數統計")
+plt.ylabel("機率")
 
+# plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
+plt.title(
+    r"$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $",
+    fontsize=20,
+)
 
 # 第二張圖
 plt.subplot(232)
+
+mu, sigma = 100, 15
+x = np.linspace(mu - 50, mu + 50, 3000)  # 從N1到N2, 分成N個, 包含頭尾
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+plt.plot(x, y, "--", color="r", linewidth=2)
+
+# 第三張圖
+plt.subplot(233)
+
+print("另外用海生畫出來")
+
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+mu = 100  # 平均值
+sigma = 15  # 標準差
+mu, sigma = 100, 15
+x = np.random.normal(mu, sigma, N)  # 隨機數
+
+n, bins, patches = plt.hist(
+    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
+)  # 直方圖
+
+# 繪製曲線圖
+sns.kdeplot(x)
+
+
+# 第四張圖
+plt.subplot(234)
+
+
+import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+x = np.random.uniform(size=N)  # 隨機數
+
+n, bins, patches = plt.hist(
+    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
+)  # 直方圖
+
+# 繪製曲線圖
+sns.kdeplot(x)
+
+
+# 第五張圖
+plt.subplot(235)
+
+
+# 第六張圖
+plt.subplot(236)
 
 sc1 = [
     90,
@@ -469,8 +416,9 @@ sc2 = [
     65,
 ]
 
+# 指定束範圍
 # plt.hist([sc1, sc2], 9)
-n, b, p = plt.hist(
+plt.hist(
     [sc1, sc2],
     bins=[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     edgecolor="r",
@@ -480,133 +428,6 @@ n, b, p = plt.hist(
 plt.ylabel("學生人數")
 plt.xlabel("分數")
 plt.title("成績表")
-
-
-# 第三張圖
-plt.subplot(233)
-
-x = [21, 42, 23, 4, 5, 26, 77, 88, 9, 10, 31, 32, 33, 34, 35, 36, 37, 18, 49, 50, 100]
-num_bins = 10
-n, bins, patches = plt.hist(x, num_bins, rwidth=0.5)
-
-print("ccccc")
-print(str(n) + "\n" + str(bins))
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="hist 集合 4",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-N = 10000  # 資料個數
-num_bins = 50  # 直方圖顯示時的束數
-
-mu = 100  # 平均值
-sigma = 15  # 標準差
-mu, sigma = 100, 15
-x = mu + sigma * np.random.randn(N)  # 隨機數
-
-count, bins, ignored = plt.hist(
-    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
-)  # 直方圖
-
-# print('bins = ', bins)
-# print('len bins = ', len(bins))
-
-# 繪製曲線圖
-x = bins
-y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2))
-plt.plot(x, y, "--", color="r", linewidth=2)
-
-plt.ylabel("機率")
-
-# plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
-plt.title(
-    r"$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $",
-    fontsize=20,
-)
-
-
-# 第二張圖
-plt.subplot(232)
-
-mu, sigma = 100, 15
-x = np.linspace(mu - 50, mu + 50, 3000)  # 從N1到N2, 分成N個, 包含頭尾
-y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
-plt.plot(x, y, "--", color="r", linewidth=2)
-
-
-# 第三張圖
-plt.subplot(233)
-
-print("另外用海生畫出來")
-
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-mu = 100  # 平均值
-sigma = 15  # 標準差
-mu, sigma = 100, 15
-x = np.random.normal(mu, sigma, N)  # 隨機數
-
-count, bins, ignored = plt.hist(
-    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
-)  # 直方圖
-
-# 繪製曲線圖
-sns.kdeplot(x)
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-x = np.random.uniform(size=N)  # 隨機數
-
-count, bins, ignored = plt.hist(
-    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
-)  # 直方圖
-
-# 繪製曲線圖
-sns.kdeplot(x)
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
-N = 500  # 資料個數
-num_bins = 50  # 直方圖顯示時的束數
-
-x = np.random.randn(N)
-plt.hist(x, num_bins, rwidth=0.5)
 
 
 plt.show()
@@ -625,48 +446,137 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+print('hist參數大合集')
 
-"""  新進資料
+plt.figure(figsize=(12, 8))
 
-plt.hist 參數
+mu = 100  # 平均值
+sigma = 15  # 標準差
+mu, sigma = 100, 15
+x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 
-facecolor="yellow"
-edgecolor="red"
+print("x : 需要製作直方圖的一維數組")
+print("bins : 直方圖的柱數，即要分的組數，默認為10")
+print("histtype : 直方圖類型，『bar』, 『barstacked』, 『step』, 『stepfilled』")
+print("histtype : bar 傳統的條形直方圖")
+print("histtype : barstacked 堆疊的條形直方圖")
+print("histtype : step 未填充的條形直方圖，只有外邊框")
+print("histtype : stepfilled 有填充的直方圖")
+print("color：顏色串列， color=['r','g','b','c','m'], 若有多組數據 依序顯示顏色")
+print("facecolor : 直方圖顏色")
+print("edgecolor : 直方圖邊框顏色")
+print("alpha : 透明度")
+print("rwidth : 柱子的寬度占bins寬的比例 0~1")
+print("orientation : 直方圖方向 'vertical'(垂直, 預設), 'horizontal'(水平)")
 
-facecolor: 直方圖顏色；   = color
-edgecolor: 直方圖邊框顏色；
+""" TBD 測試中
+density: : 是否將得到的直方圖向量歸一化。默認為0；
+density：布爾值。如果為true，則返回的元組的第一個參數n將為頻率而非默認的頻數；
+"""
 
-# 亂數種子
-np.random.seed(1234567)
-np.random.seed(0)
-np.random.seed(10**7)
+"""
+用法
+
+plt.hist(
+range=None, weights=None,
+cumulative=False,
+bottom=None,
+align='mid',
+log=False,
+stacked=False,
+normed=None, *,
+data=None, **kwargs)
+
+range：元組(tuple)或None；剔除較大和較小的離群值，給出全局范圍；如果為None，則默認為(x.min(), x.max())；即x軸的范圍；
+weights：與x形狀相同的權重數組；將x中的每個元素乘以對應權重值再計數；如果normed或density取值為True，則會對權重進行歸一化處理。這個參數可用于繪制已合并的數據的直方圖；
+cumulative：布爾值；如果為True，則計算累計頻數；如果normed或density取值為True，則計算累計頻率；
+
+bottom：數組，標量值或None；每個柱子底部相對于y=0的位置。如果是標量值，則每個柱子相對于y=0向上/向下的偏移量相同。如果是數組，則根據數組元素取值移動對應的柱子；即直方圖上下便宜距離；
+align：{‘left’, ‘mid’, ‘right’}；‘left’：柱子的中心位于bins的左邊緣；‘mid’：柱子位于bins左右邊緣之間；‘right’：柱子的中心位于bins的右邊緣；
+
+stacked：布爾值。如果取值為True，則輸出的圖為多個數據集堆疊累計的結果；如果取值為False且histtype=‘bar’或’step’，則多個數據集的柱子并排排列；
+
+log：布爾值。如果取值為True，則坐標軸的刻度為對數刻度；如果log為True且x是一維數組，則計數為0的取值將被剔除，僅返回非空的(frequency, bins, patches）；
 
 
 plt.hist(
-    density=True,
-    histtype="stepfilled",
-    color="steelblue",
-    edgecolor="none",
-    rwidth=0.5,
+range=None,
+weights=None, cumulative=False, bottom=None,
+align=’mid’,
+log=False, label=None, stacked=False, \*, data=None, \*\*kwargs)
+
+    range:此參數是可選參數，它是箱子的上下限。
+    weights:此參數是可選參數，并且是一個權重數組，與x的形狀相同。
+    bottom:此參數是每個容器底部基線的位置。
+    align:此參數是可選參數，它控制如何繪制直方圖。 {‘left’，‘mid’，‘right’}
+    log:此參數是可選參數，用于將直方圖軸設置為對數刻度
+
+
+返回值（用參數接收返回值，便于設置數據標簽）：
+n：直方圖向量，即每個分組下的統計值，是否歸一化由參數normed設定。
+當normed取默認值時，n即為直方圖各組內元素的數量（各組頻數）；
+bins: 返回各個bin的區間范圍；
+patches：返回每個bin里面包含的數據，是一個list。
+
+
+"""
+
+n, bins, patches = plt.hist(
+    x,
+    bins=5,
+    histtype="bar",
+    #color=['red','green','blue','cyan','magenta'], 若有多組數據 依序顯示顏色
+    #facecolor="red",
+    #edgecolor="green",
+    alpha=0.75,
+    rwidth=0.9,
+    orientation='vertical',
+    density=False,
+    label="常態分佈",
 )
 
+print('標示高度')
+for i in range(len(n)):
+    print("x = ", bins[i]+10, ", y = ",n[i], ", text =", int(n[i]))
+    plt.text(bins[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=12)
 
+"""
+print("返回值")
+print("每一柱的高度(y軸) : ", n)
+print("每一柱的起訖(x軸) : ", bins)
+print(patches)
+for p in patches:
+    print(type(p))
+    print(p)
+"""
+
+xx =[]
+for i in range(len(bins)-1):
+    xx.append((bins[i]+bins[i+1])/2)
+
+yy = n
+plt.plot(xx, yy, "--", color="r", linewidth=2)
+
+plt.title("hist參數大合集")
+plt.xlabel("")
+plt.ylabel("個數統計")
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+"""  新進資料
 
 #plt.hist(x, bins = 'auto')
 #plt.hist(x, bins = 'auto', density = True)   #y軸改成密度
 
-#plt.hist(x, bins=range(-5, 5, 1), alpha=0.5)  #設定bin的範圍
-
-
-
-
-#plt.style.use("seaborn-white")
-
-plt.text(60, 0.025, r"$\mu=100,\ \sigma=15$")
-
-
-
-
+#plt.hist(x, bins=range(-5, 5, 1))  #設定bin的範圍
 
 ----------------------
 
@@ -701,50 +611,8 @@ print("平均:", np.mean(dat["太郎"]))
 print("變異數:", np.var(dat["太郎"]))
 print("標準差:", np.std(dat["太郎"]))
 
-
 --------------------------------
 
-
-score = [
-    800,
-    750,
-    450,
-    680,
-    802,
-    630,
-    710,
-    450,
-    250,
-    320,
-    610,
-    670,
-    815,
-    870,
-    900,
-    650,
-    450,
-    730,
-    840,
-    675,
-    795,
-    585,
-    870,
-    960,
-    190,
-]
-n, b, p = plt.hist(score, bins=[10, 255, 405, 605, 785, 905, 990], rwidth=0.5)
-
-for i in range(len(n)):
-    plt.text(b[i] + 10, n[i], int(n[i]), ha="center", va="bottom", fontsize=10)
-
-plt.title("多益成績分布直方圖")
-plt.xlabel("成績")
-plt.ylabel("人數")
-
-"""
-
-
-"""
 二維頻次直方圖
 
 就像將一維數組分為區間創建一維頻次直方圖一樣，我們也可以將二維數組按照二維區 間進行切分，來創建二維頻次直方圖。
@@ -752,34 +620,26 @@ plt.ylabel("人數")
 1.plt.hist2d:二維頻次直方圖
 
 繪製二維頻次直方圖最簡單的方法，就是使用Matplotlib的plt.hist2d函數。
-"""
 
-"""NG
+
+# NG
 plt.hist2d(x, y, bins=30, cmap='Blues')
 cb = plt.colorbar()
 cb.set_label('counts in bin')
 
 plt.show()
-"""
 
-"""
 2.plt.hexbin:六邊形區間劃分
 
-二維頻次直方圖是由與坐標軸正交的方塊分割而成的，還有一種常用的方式是用正六邊形分割。Matplotlib 提供了 plt.hexbin 滿足此類需求，將二維數據集分割成蜂窩狀。
-"""
+二維頻次直方圖是由與坐標軸正交的方塊分割而成的，
+還有一種常用的方式是用正六邊形分割。
+Matplotlib 提供了 plt.hexbin 滿足此類需求，將二維數據集分割成蜂窩狀。
 
-"""NG
+
+
+# NG
 plt.hexbin(x, y, gridsize=30, cmap='Blues')
-cb = plt.colorbar(label='count in bin')
+cb = plt.colorbar(label='xxxxx')
 plt.show()
-
-"""
-
-
-"""
-for i in range(len(n)):
-    print("x = ", b[i]+10, ", y = ",n[i], ", text =", int(n[i]))
-    plt.text(b[i]+10, n[i], int(n[i]), ha='center', va='bottom', fontsize=10)
-
 
 """

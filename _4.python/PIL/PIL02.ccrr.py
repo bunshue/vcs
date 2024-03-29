@@ -41,19 +41,34 @@ transpose()和rotate()沒有性能差別。
 
 
 """
+from PIL import Image
+from PIL import ImageDraw
+from PIL import ImageOps
+from PIL import ImageFont
+from PIL import ImageFilter
 
+import glob
+import shutil
+from time import sleep
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
+import math
+import random
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
-from PIL import Image   # Importing Image class from PIL module
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
@@ -63,6 +78,7 @@ filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 image = Image.open(filename)
 print(image.format, image.size, image.mode)
 
+print("顯示PIL影像")
 plt.imshow(image)
 plt.show()
 
@@ -78,18 +94,15 @@ print('原圖大小 W =', W, ', H =', H)
 print('寬度變2倍, 高度變一半')
 image2 = image1.resize((W*2, H//2), Image.LANCZOS)
 
-plt.imshow(image2)
-plt.show()
-
+print('寬度變2倍, 高度不變')
 image3 = image1.resize((W*2, H))   # 寬度是2倍
-plt.imshow(image3)
-plt.show()
 
+print('寬度不變, 高度變2倍')
 image4 = image1.resize((W, H*2))   # 高度是2倍
-plt.imshow(image4)
-plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+print('依比例縮放圖片')
 
 # 檔案 => PIL影像
 with Image.open(filename) as image:
@@ -102,7 +115,6 @@ with Image.open(filename) as image:
 
 print("------------------------------------------------------------")  # 60個
 
-
 print('測試 裁剪 crop')
 
 # 檔案 => PIL影像
@@ -110,31 +122,17 @@ image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
 W, H = image1.size
 print('原圖大小 W =', W, ', H =', H)
 
-x_st = 20
-y_st = 20
+x_st = 50
+y_st = 50
 w = W - x_st * 2
 h = H - y_st * 2
 
 #                     x_st  y_st    x_sp     y_sp
 image2 = image1.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上點到右下點
 
-print('顯示一塊')
-plt.imshow(image2)
-plt.show()
+print('裁剪一塊 (x_sy, y_st, x_sp, y_sp)')
 
 print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    print(image.size)
-    x = 50
-    y = 50
-    x1 = 250
-    y1 = 350
-    image2 = image.crop((x, y, x1, y1))
-    print(image2.size)
-
-print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -208,37 +206,11 @@ image45a = image.rotate(45)
 print('旋轉45度 + 圖像擴充')
 image45a = image.rotate(45, expand = True)
 
-print('------------------------------------------------------------')	#60個
+print('旋轉60度 + xxx1')
+image60a = image.rotate(60, Image.BILINEAR,0,None,None,'#BBCC55')
 
-#rotate0
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-  image2 = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
-
-print('------------------------------------------------------------')	#60個
-
-# rotate1
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-  image2 = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.rotate(180)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
+print('旋轉60度 + xxx2')
+image60b = image.rotate(60, Image.BILINEAR, 1, None, None, '#BBCC55')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -254,43 +226,13 @@ image2 = image.transpose(Image.FLIP_TOP_BOTTOM)   # 上下
 print('旋轉90度')
 rotate90 = image.transpose(Image.ROTATE_90)
 
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.transpose(Image.FLIP_LEFT_RIGHT)
-    image2 = image.transpose(Image.FLIP_TOP_BOTTOM)
-    image2 = image.transpose(Image.ROTATE_90)
-    image2 = image.transpose(Image.ROTATE_180)
-    image2 = image.transpose(Image.ROTATE_270)
-    image2 = image.transpose(Image.TRANSPOSE)
-    image2 = image.transpose(Image.TRANSVERSE)
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.transpose(Image.FLIP_LEFT_RIGHT)
-    image2 = image.transpose(Image.FLIP_TOP_BOTTOM)
-    image2 = image.transpose(Image.ROTATE_90)
-    image2 = image.transpose(Image.ROTATE_180)
-    image2 = image.transpose(Image.ROTATE_270)
-    image2 = image.transpose(Image.TRANSPOSE)
-    image2 = image.transpose(Image.TRANSVERSE)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.transpose(Image.ROTATE_90)
-    image2 = image.transpose(Image.FLIP_LEFT_RIGHT)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.transpose(Image.ROTATE_90)
-    image2 = image.transpose(Image.FLIP_LEFT_RIGHT)
+image2 = image.transpose(Image.FLIP_LEFT_RIGHT)
+image2 = image.transpose(Image.FLIP_TOP_BOTTOM)
+image2 = image.transpose(Image.ROTATE_90)
+image2 = image.transpose(Image.ROTATE_180)
+image2 = image.transpose(Image.ROTATE_270)
+image2 = image.transpose(Image.TRANSPOSE)
+image2 = image.transpose(Image.TRANSVERSE)
 
 print('------------------------------------------------------------')	#60個
 
@@ -317,7 +259,6 @@ plt.imshow(b)
 plt.title('b')
 plt.show()
 
-
 print('RGB相反排列')
 convert_image = Image.merge('RGB', (b, g, r))
 
@@ -336,8 +277,6 @@ convert_image = Image.merge('RGB', (r, g, b))
 #OK image
 
 print('------------------------------------------------------------')	#60個
-
-from PIL import Image, ImageFilter
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/bear_filter.jpg'
@@ -370,10 +309,6 @@ print('------------------------------------------------------------')	#60個
 
 #調整資料夾內所有圖片檔影像寬度, 加logo
       
-import sys, os, glob
-from PIL import Image, ImageDraw
-import shutil
-
 source_dir = 'C:/_git/vcs/_1.data/______test_files1/__pic/_book'
 target_dir = 'C:/_git/vcs/_1.data/______test_files2/tmp_resized_pic'
 #logo_filename = 'C:/_git/vcs/_1.data/______test_files1/burn.bmp'        #fail, bad transparency mask
@@ -494,8 +429,6 @@ bg.save("tmp_compound2X4a.jpg")
 print("------------------------------------------------------------")  # 60個
 
 print('合併圖 2 X 4 b')
-from PIL import Image, ImageOps
-
 bg = Image.new("RGB", (1240, 840), "#000000")  # 因為擴張，所以將尺寸改成 1240x840
 for i in range(1, 9):
     image = Image.open(f"C:/_git/vcs/_1.data/______test_files1/__pic/_MU/poster_0{i}.jpg")  # 開啟圖片
@@ -553,7 +486,6 @@ foldername = 'tmp_watermark'
 if not os.path.exists(foldername):
     os.mkdir(foldername)
 
-import glob
 logo_filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.png'
 
 images = glob.glob("./data/*.jpg")  # 讀取 demo 資料夾裡所有的圖片, 撈出一層
@@ -633,28 +565,14 @@ print('------------------------------------------------------------')	#60個
 
 # 檔案 => PIL影像
 image = Image.open(filename)           # 建立Pillow物件
+
 image090=image.rotate(90)  # 旋轉90度
 image180=image.rotate(180)  # 旋轉180度
 image270=image.rotate(270)  # 旋轉270度
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-image = Image.open(filename)                       # 建立Pillow物件
 image45a=image.rotate(45)  # 旋轉45度
 image45b=image.rotate(45, expand=True)  # 旋轉45度圖像擴充
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-image = Image.open(filename)                     # 建立Pillow物件
 image_flip1 = image.transpose(Image.FLIP_LEFT_RIGHT)  # 左右
 image_flip2 = image.transpose(Image.FLIP_TOP_BOTTOM)  # 上下
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-image = Image.open(filename)           # 建立Pillow物件
 image_crop = image.crop((80, 30, 150, 100))   # 裁切區間
 
 print("------------------------------------------------------------")  # 60個
@@ -664,6 +582,7 @@ image = Image.open(filename)           # 建立Pillow物件
 image_copy = image.copy()                      # 複製
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
 # 檔案 => PIL影像
 img = Image.open(filename)
 imgcopy=img.copy()
@@ -679,8 +598,6 @@ image_copy.paste(image_crop, (20, 100))             # 第二次合成
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image, ImageDraw, ImageFont
-
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 # 檔案 => PIL影像
@@ -692,8 +609,6 @@ image3 = image1.resize((100, 500), Image.LANCZOS)
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-from PIL import Image
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -720,8 +635,6 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-from PIL import Image
-
 # 檔案 => PIL影像
 image1 = Image.open(filename)        # 建立Pillow物件
 image2 = image1.resize((350,500))
@@ -733,9 +646,6 @@ image3.paste(image2, (50,50))
 
 print('------------------------------------------------------------')	#60個
 
-
-from PIL import Image
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
 infile = filename#"earth.png"
@@ -746,8 +656,6 @@ image = Image.open(infile)
 image = image.resize((100, 100), Image.LANCZOS)     #調整大小
 
 print("------------------------------------------------------------")  # 60個
-
-from PIL import Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 infile = filename#"earthH.png"
@@ -806,10 +714,6 @@ def emptydir(dirname):
         shutil.rmtree(dirname)
         sleep(1)  #需延遲,否則會出錯
     os.mkdir(dirname)
-
-import glob
-import shutil, os
-from time import sleep
 
 image_dir="data"
 target_dir = 'tmp_bmp_photo'

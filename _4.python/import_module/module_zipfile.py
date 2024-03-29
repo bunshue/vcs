@@ -1,12 +1,43 @@
 """
-壓縮 / 解壓縮 一個zip檔
-"""
+解壓縮 / 壓縮 一個zip檔
 
-import zipfile
+
+info
+解壓縮
+壓縮
+
+"""
 
 print('------------------------------------------------------------')	#60個
 
-print('解壓縮一個zip檔')
+import os
+import glob
+import zipfile
+
+zip_filename = 'C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip'
+
+print('------------------------------------------------------------')	#60個
+
+print('判斷是否為一個壓縮檔')
+
+zip_filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip'
+#zip_filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+if zipfile.is_zipfile(zip_filename):
+    print('是壓縮檔')
+else:
+    print('不是壓縮檔')
+
+print('------------------------------------------------------------')	#60個
+
+with zipfile.ZipFile(zip_filename, 'r') as zipfp:   #開啟壓縮檔
+    zinfo = zipfp.getinfo('PIL/PIL02.py')
+    print('--------------')
+    print(zinfo)
+
+print('------------------------------------------------------------')	#60個
+
+print('解壓縮')
 
 zip_filename = 'C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip'
 #zip_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_ntuh.zip'
@@ -20,24 +51,53 @@ with zipfile.ZipFile(zip_filename, 'r') as zipfp:   #開啟壓縮檔
 
 print('------------------------------------------------------------')	#60個
 
-print('判斷是否為一個壓縮檔')
-#zip_filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+print('解壓縮')
 
-if zipfile.is_zipfile(zip_filename):
-    print('是壓縮檔')
-else:
-    print('不是壓縮檔')
+def _ensure_directory(path):
+    """Ensure that the parent directory of `path` exists"""
+    dirname = os.path.dirname(path)
+    if not os.path.isdir(dirname):
+        os.makedirs(dirname)
+
+extract_dir = './'
+
+zip = zipfile.ZipFile(zip_filename)
+try:
+    for info in zip.infolist():
+        name = info.filename
+
+        # don't extract absolute paths or ones with .. in them
+        if name.startswith('/') or '..' in name:
+            continue
+
+        target = os.path.join(extract_dir, *name.split('/'))
+        if not target:
+            continue
+
+        _ensure_directory(target)
+        if not name.endswith('/'):
+            # file
+            data = zip.read(info.filename)
+            f = open(target, 'wb')
+            try:
+                f.write(data)
+            finally:
+                f.close()
+                del data
+finally:
+    zip.close()
 
 print('------------------------------------------------------------')	#60個
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
+print('壓縮')
+
+filename1 = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename2 = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename3 = 'C:/_git/vcs/_4.python/_data/bear.jpg'
 
 filenames = [filename1, filename2, filename3]
 
 zip_filename = 'zipfilename.zip'
-
 
 with zipfile.ZipFile(zip_filename, 'w') as zipfp:   #開啟壓縮檔
     for filename in filenames:
@@ -76,13 +136,6 @@ with zipfile.ZipFile(zip_filename, 'r') as zipfp:   #開啟壓縮檔
 
     #info2 = zipfp.getinfo('PIL/PIL00.py')
     #print(info2)
-
-print('------------------------------------------------------------')	#60個
-
-with zipfile.ZipFile(zip_filename, 'r') as zipfp:   #開啟壓縮檔
-    zinfo = zipfp.getinfo('PIL/PIL02.py')
-    print('--------------')
-    print(zinfo)
 
 print('------------------------------------------------------------')	#60個
 
@@ -166,17 +219,11 @@ make_test_archive(zip_filename, compression)
 
 print('------------------------------------------------------------')	#60個
 
+print('壓縮')
 
-
-import os
-
-print('------------------------------------------------------------')	#60個
-
-print('製作一個zip檔')
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
+filename1 = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename2 = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename3 = 'C:/_git/vcs/_4.python/_data/bear.jpg'
 
 filenames = [filename1, filename2, filename3]
 
@@ -195,53 +242,11 @@ print(status)
 
 print('------------------------------------------------------------')	#60個
 
-print('解壓縮一個zip檔')
-
-def _ensure_directory(path):
-    """Ensure that the parent directory of `path` exists"""
-    dirname = os.path.dirname(path)
-    if not os.path.isdir(dirname):
-        os.makedirs(dirname)
-
-extract_dir = './'
-
-zip = zipfile.ZipFile(zip_filename)
-try:
-    for info in zip.infolist():
-        name = info.filename
-
-        # don't extract absolute paths or ones with .. in them
-        if name.startswith('/') or '..' in name:
-            continue
-
-        target = os.path.join(extract_dir, *name.split('/'))
-        if not target:
-            continue
-
-        _ensure_directory(target)
-        if not name.endswith('/'):
-            # file
-            data = zip.read(info.filename)
-            f = open(target, 'wb')
-            try:
-                f.write(data)
-            finally:
-                f.close()
-                del data
-finally:
-    zip.close()
-
-print('------------------------------------------------------------')	#60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
 
-import zipfile
-import glob, os
-
-print("將一個資料夾下檔檔案壓縮起來")
+print("壓縮, 一個資料夾下所有檔案")
 
 zip_filename = "tmp_zipfile1.zip"
 
@@ -252,13 +257,13 @@ for name in glob.glob('C:/_git/vcs/_1.data/______test_files1/__pic/_animals/*'):
 fileZip.close()
 
 
-print("將幾個檔案壓縮起來")
+print("壓縮, 幾個檔案")
 
 zip_filename = "tmp_zipfile2.zip"
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
+filename1 = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename2 = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename3 = 'C:/_git/vcs/_4.python/_data/bear.jpg'
 
 fileZip = zipfile.ZipFile(zip_filename, 'w')
 
@@ -272,8 +277,6 @@ print("------------------------------------------------------------")  # 60個
 
 print('列出壓縮檔內的檔案資料')
 
-import zipfile
-
 zip_filename = "tmp_zipfile2.zip"
 
 listZipInfo = zipfile.ZipFile(zip_filename, 'r')
@@ -284,9 +287,7 @@ for info in listZipInfo.infolist():
 
 print("------------------------------------------------------------")  # 60個
 
-print('解壓縮檔案')
-
-import zipfile
+print('解壓縮')
 
 zip_filename = "tmp_zipfile1.zip"
 extract_folder = "tmp_folder"
@@ -297,21 +298,15 @@ fileUnZip.close()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print('解壓縮一個zip檔')
+print('解壓縮')
 
 zip_filename = 'C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip'
-
-import zipfile
 
 fileUnZip = zipfile.ZipFile(zip_filename)
 fileUnZip.extractall('_tmp_unzip')
 fileUnZip.close()
 
 print("------------------------------------------------------------")  # 60個
-
-import zipfile
 
 zip_filename = 'C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip'
 
@@ -323,9 +318,6 @@ for info in listZipInfo.infolist():
 
 print("------------------------------------------------------------")  # 60個
 
-import zipfile
-import glob, os
-
 fileZip = zipfile.ZipFile('_tmp_zzzz.zip', 'w')
 for name in glob.glob('zip_folder/*'):        # 遍歷 zip_folder 目錄
     fileZip.write(name, os.path.basename(name), zipfile.ZIP_DEFLATED)
@@ -336,8 +328,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
-import zipfile
-import glob, os
 zipdir = input("請輸入欲壓縮的目錄 : ")
 zipdir = zipdir + '/*'
 zipfilename = input("請輸入保存壓縮檔案的名稱 : ")
@@ -353,13 +343,10 @@ fileZip.close()
 print('------------------------------------------------------------')	#60個
 
 # ref. https://docs.python.org/3/library/zipfile.html
-import zipfile
 
 if __name__ == "__main__":
     with zipfile.ZipFile('spam.zip', 'w') as myzip:
         myzip.write('test.txt')
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -402,6 +389,23 @@ tmptmp
 
 
 print("------------------------------------------------------------")  # 60個
+
+"""
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_zip/PIL.zip'
+
+files = zipfile.ZipFile(filename)
+
+cc = files.namelist()
+print(cc)
+
+for _ in cc:
+    print(_)
+    files.extract(_)
+
+files.extractall()
+
+files.close()
+"""
 
 
 print("------------------------------------------------------------")  # 60個

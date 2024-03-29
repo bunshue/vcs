@@ -351,11 +351,22 @@ print(mydict)  # 列印字典
 print("------------------------------------------------------------")  # 60個
 
 cname = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
-ename = ["mouse", "ox", "tiger", "rabbit",
-         "dragon", "snake", "horse", "goat",
-         "monkey", "chicken", "dog", "pig"]
+ename = [
+    "mouse",
+    "ox",
+    "tiger",
+    "rabbit",
+    "dragon",
+    "snake",
+    "horse",
+    "goat",
+    "monkey",
+    "chicken",
+    "dog",
+    "pig",
+]
 
-#將兩個串列編在一起組成字典
+# 將兩個串列編在一起組成字典
 name_dict = dict(zip(cname, ename))  # 建立字典
 
 print("列印編碼字典\n", name_dict)  # 列印字典
@@ -392,13 +403,13 @@ animal_dict = {
 
 print(type(animal_dict))
 
-print('字串轉串列')
+print("字串轉串列")
 animal_string = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
 animal_list = list(animal_string)
 
 print(type(animal_list))
 
-print('從字典的key找到value')
+print("從字典的key找到value")
 for animal in animal_list:
     print("key = ", animal)
     print("value = ", animal_dict[animal])
@@ -606,14 +617,14 @@ for aaa in _size_factors:
 print("------------------------------------------------------------")  # 60個
 
 print("字典的用法 encoding")
-print('字典裡面的values是tuple')
+print("字典裡面的values是tuple")
 codecs = {
     "cn": ("gb2312", "gbk", "gb18030", "hz"),
     "tw": ("big5", "cp950"),
     "hk": ("big5hkscs"),
-    "jp": ("cp932","shift_jis","euc_jp"),
-    "kr": ("cp949", "euc_kr", "johab")
-    }
+    "jp": ("cp932", "shift_jis", "euc_jp"),
+    "kr": ("cp949", "euc_kr", "johab"),
+}
 
 print(type(codecs))
 print(codecs)
@@ -895,8 +906,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("依英文名字數長短排序")
 
+
 def compare_num_of_chars(string1):
     return len(string1)
+
 
 animals = [
     "mouse",
@@ -976,38 +989,38 @@ print("------------------------------------------------------------")  # 60個
 print("二維 串列, 裡面都是list")
 
 animal_list = [
-    [1, '鼠', 'mouse', 3],
-    [2, '牛', 'ox', 48],
-    [3, '虎', 'tiger', 33],
-    [4, '兔', 'rabbit', 8],
-    [5, '龍', 'dragon', 38],
-    [6, '蛇', 'snake', 16],
-    [7, '馬', 'horse', 36],
-    [8, '羊', 'goat', 29],
-    [9, '猴', 'monkey', 22],
-    [10, '雞', 'chicken', 6],
-    [11, '狗', 'dog', 12],
-    [12, '豬', 'pig', 42],
-    ]
+    [1, "鼠", "mouse", 3],
+    [2, "牛", "ox", 48],
+    [3, "虎", "tiger", 33],
+    [4, "兔", "rabbit", 8],
+    [5, "龍", "dragon", 38],
+    [6, "蛇", "snake", 16],
+    [7, "馬", "horse", 36],
+    [8, "羊", "goat", 29],
+    [9, "猴", "monkey", 22],
+    [10, "雞", "chicken", 6],
+    [11, "狗", "dog", 12],
+    [12, "豬", "pig", 42],
+]
 
 print("二維 串列, 裡面都是tuple")
 
 animal_list = [
-    (1, '鼠', 'mouse', 3),
-    (2, '牛', 'ox', 48),
-    (3, '虎', 'tiger', 33),
-    (4, '兔', 'rabbit', 8),
-    (5, '龍', 'dragon', 38),
-    (6, '蛇', 'snake', 16),
-    (7, '馬', 'horse', 36),
-    (8, '羊', 'goat', 29),
-    (9, '猴', 'monkey', 22),
-    (10, '雞', 'chicken', 7),
-    (11, '狗', 'dog', 12),
-    (12, '豬', 'pig', 42),
-    ]
+    (1, "鼠", "mouse", 3),
+    (2, "牛", "ox", 48),
+    (3, "虎", "tiger", 33),
+    (4, "兔", "rabbit", 8),
+    (5, "龍", "dragon", 38),
+    (6, "蛇", "snake", 16),
+    (7, "馬", "horse", 36),
+    (8, "羊", "goat", 29),
+    (9, "猴", "monkey", 22),
+    (10, "雞", "chicken", 7),
+    (11, "狗", "dog", 12),
+    (12, "豬", "pig", 42),
+]
 
-print('串列反相排列')
+print("串列反相排列")
 animal_list.reverse()  # 顛倒排序串列
 print(type(animal_list))
 print(animal_list)
@@ -1216,7 +1229,7 @@ print("元組 tttt SP-----------------------------------------------------------
 
 print("集合 ssss ST------------------------------------------------------------")  # 60個
 
-print('集合的運算')
+print("集合的運算")
 
 # 大動物 : [牛虎龍馬豬][羊猴][象] 8
 # 小動物 : [鼠兔蛇雞狗][羊猴][龜] 8
@@ -1319,15 +1332,27 @@ print("------------------------------------------------------------")  # 60個
 
 print("字典子集")
 
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38,
-           '蛇':16, '馬':36, '羊':29, '猴':22, '雞':6, '狗':12,'豬':42}
+animals = {
+    "鼠": 3,
+    "牛": 48,
+    "虎": 33,
+    "兔": 8,
+    "龍": 38,
+    "蛇": 16,
+    "馬": 36,
+    "羊": 29,
+    "猴": 22,
+    "雞": 6,
+    "狗": 12,
+    "豬": 42,
+}
 
 animals1 = {key: value for key, value in animals.items() if value > 30}
-print('大於30公斤的動物 :', animals1)
+print("大於30公斤的動物 :", animals1)
 
 protected_names = {"虎", "龍", "馬", "猴"}
 animals2 = {key: value for key, value in animals.items() if key in protected_names}
-print('保育類動物動物 :', animals2)
+print("保育類動物動物 :", animals2)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1470,7 +1495,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("將英文字串的每一個字母(含空白標點)拆成每個字一個集合, 大小寫不同")
 
-print('字串 轉 集合')
+print("字串 轉 集合")
 
 animal_string = "Mouse Ox Tiger Rabbit"
 animal_set = set(animal_string)
@@ -1510,8 +1535,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
 def draw_bar(n):
     return "*" * n
+
 
 s = [2, 5, 4, 7, 5, 4]
 for bar in map(draw_bar, s):
@@ -1552,7 +1579,6 @@ print(years)
 """
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1623,7 +1649,7 @@ list1.append(444)
 list1.append(888)
 list1.append(999)
 list1.pop()
-#原本加入9個 取出最後一個 所以剩8個
+# 原本加入9個 取出最後一個 所以剩8個
 print("串列內共有 %d 個數" % len(list1))
 print("最大：%d" % max(list1))
 print("最小：%d" % min(list1))
@@ -1685,7 +1711,7 @@ for name, weight in animal_list:
 
 print("------------------------------------------------------------")  # 60個
 
-print('字串轉串列')
+print("字串轉串列")
 b = list("子丑寅卯辰巳午未申酉戌亥")  # list
 c = list("鼠牛虎兔龍蛇馬羊猴雞狗豬")  # list
 
@@ -1700,9 +1726,9 @@ print([item for item in zip(b, c)])
 
 print("------------------------------------------------------------")  # 60個
 
-print('(字串*6)轉串列')
+print("(字串*6)轉串列")
 a = list("甲乙丙丁戊己庚辛壬癸" * 6)
-print('(字串*5)轉串列')
+print("(字串*5)轉串列")
 b = list("子丑寅卯辰巳午未申酉戌亥" * 5)
 years = list(zip(a, b))
 print(type(years))
@@ -1751,9 +1777,11 @@ print("---- map --------------------------------------------------------")  # 60
 
 print("map 的用法")
 
+
 def pick(x):
     fruits = ["Apple", "Banana", "Orange", "Tomato", "Pine Apple", "Berry"]
     return fruits[x]
+
 
 alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
 choices = map(pick, alist)
@@ -1853,7 +1881,7 @@ for i, item in enumerate(my_items):
 
 print("------------------------------------------------------------")  # 60個
 
-print('建立tuple資料 動物體重')
+print("建立tuple資料 動物體重")
 weight_tuple = (3, 48, 33, 8, 38, 16, 36, 29, 22, 6, 12, 42)
 print("原有資料：")
 print(type(weight_tuple))
@@ -1955,10 +1983,6 @@ print(type(animals))
 print(animals)
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
