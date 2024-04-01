@@ -37,7 +37,7 @@ print("排序結果 : ", bubble_sort(data))
 print("------------------------------------------------------------")  # 60個
 
 def merge(left, right):
-    """兩數列合併"""
+    #兩數列合併
     output = []
     while left and right:
         if left[0] <= right[0]:
@@ -52,7 +52,7 @@ def merge(left, right):
 
 
 def merge_sort(nLst):
-    """合併排序"""
+    #合併排序
     if len(nLst) <= 1:  # 剩下一個或0個元素直接返回
         return nLst
     mid = len(nLst) // 2  # 取中間索引
@@ -73,9 +73,6 @@ print("排序結果 : ", merge_sort(data))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch09\ch9_2.py
-
-# ch9_2.py
 cars = ["honda", "bmw", "toyota", "ford"]
 print("目前串列內容 = ", cars)
 print("使用sort( )由小排到大")
@@ -87,12 +84,8 @@ print("使用sort( )由小排到大")
 nums.sort()
 print("排序串列結果 = ", nums)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch09\ch9_3.py
-
-# ch9_3.py
 cars = ["honda", "bmw", "toyota", "ford"]
 print("目前串列內容 = ", cars)
 print("使用sort( )由大排到小")
@@ -104,15 +97,10 @@ print("使用sort( )由大排到小")
 nums.sort(reverse=True)
 print("排序串列結果 = ", nums)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch09\ch9_4.py
-
-
-# ch9_4.py
 def cocktail_sort(nLst):
-    """雞尾酒排序"""
+    #雞尾酒排序
     n = len(nLst)
     is_sorted = True
     start = 0  # 前端索引
@@ -141,13 +129,9 @@ data = [6, 1, 5, 7, 3]
 print("原始串列 : ", data)
 print("排序結果 : ", cocktail_sort(data))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch09\ch9_5.py
 
-
-# ch9_5.py
 def selection_sort(nLst):
     for i in range(len(nLst) - 1):
         index = i  # 最小值的索引
@@ -166,15 +150,10 @@ data = [6, 1, 5, 7, 3]
 print("原始串列 : ", data)
 print("排序結果 : ", selection_sort(data))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch09\ch9_6.py
-
-
-# ch9_6.py
 def selection_sort(nLst):
-    """選擇排序"""
+    #選擇排序
     for i in range(len(nLst) - 1):
         index = i  # 最小值的索引
         for j in range(i + 1, len(nLst)):  # 找最小值的索引
@@ -196,12 +175,9 @@ print("排序串列結果 = ", cars)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch09\ch9_7.py
 
-
-# ch9_7.py
 def selection_sort(nLst):
-    """選擇排序"""
+    #選擇排序
     for i in range(len(nLst) - 1):
         index = i  # 最小值的索引
         for j in range(i + 1, len(nLst)):  # 找最小值的索引
@@ -226,15 +202,11 @@ selection_sort(music)
 for i in range(len(music)):
     print("{}:{}{} -- 點播次數 {}".format(i + 1, music[i][0], music[i][1], music[i][2]))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch09\ch9_8.py
 
-
-# ch9_8.py
 def insertion_sort(nLst):
-    """插入排序"""
+    #插入排序
     n = len(nLst)
     if n == 1:  # 只有1筆資料
         print("第 %d 次迴圈排序" % n, nLst)
@@ -266,6 +238,7 @@ def sequential_search(nLst):
 
 data = [6, 1, 5, 7, 3, 9, 4, 2, 8]
 
+print("請輸入搜尋值 : ")
 # key = eval(input("請輸入搜尋值 : "))
 key = 5
 index = sequential_search(data)
@@ -311,21 +284,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch10\ch10_3.py
-
-# ch10_3.py
-data = [10, 30, 90, 77, 65]
-max = data[0]
-for num in data:
-    if num > max:
-        max = num
-print("最大值 : ", max)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-# ch8_1.py
 product_list = {}  # 產品列表的字典
 product_list["Refrigerator"] = 8000
 product_list["Television"] = 12000
@@ -337,7 +295,6 @@ print("列印 Television   : ", product_list["Television"])
 print("列印 Printer      : ", product_list["Printer"])
 
 print("------------------------------------------------------------")  # 60個
-
 
 phone_book = {}  # 通訊簿的字典
 phone_book["Trump"] = "0912111111"
@@ -352,10 +309,7 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch08\ch8_3.py
 
-
-# ch8_3.py
 def check_name(name):
     if voted[name]:
         print("你已經投過票了")
@@ -376,10 +330,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch11\ch11_1.py
-
-# ch11_1.py
 from pprint import pprint
 
 maze = [  # 迷宮地圖
@@ -399,7 +349,7 @@ directions = [  # 使用串列設計走迷宮方向
 
 
 def maze_solve(x, y, goal_x, goal_y):
-    """解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口"""
+    #解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口
     maze[x][y] = 2
     stack = []  # 建立路徑堆疊
     stack.append((x, y))  # 將路徑push入堆疊
@@ -426,12 +376,9 @@ def maze_solve(x, y, goal_x, goal_y):
 maze_solve(1, 1, 4, 4)
 pprint(maze)  # 跳行顯示元素
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch11\ch11_2.py
 
-# ch11_2.py
 from pprint import pprint
 
 maze = [  # 迷宮地圖
@@ -455,7 +402,7 @@ directions = [  # 使用串列設計走迷宮方向
 
 
 def maze_solve(x, y, goal_x, goal_y):
-    """解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口"""
+    #解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口
     maze[x][y] = 2
     stack = []  # 建立路徑堆疊
     stack.append((x, y))  # 將路徑push入堆疊
@@ -482,13 +429,9 @@ def maze_solve(x, y, goal_x, goal_y):
 maze_solve(1, 1, 8, 2)
 pprint(maze)  # 跳行顯示元素
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch12\ch12_1.py
 
-
-# ch12_1.py
 def mysum(nLst):
     if nLst == []:
         return 0
@@ -501,13 +444,8 @@ print("mysum = ", mysum(data))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch12\ch12_2.py
-
-# ch12_2.py
-
-
 def fib(i):
-    """計算 Fibonacci number"""
+    #計算 Fibonacci number
     if i == 0:  # 定義 0
         return 0
     elif i == 1:  # 定義 1
@@ -515,35 +453,17 @@ def fib(i):
     else:  # 執行遞迴計算
         return fib(i - 1) + fib(i - 2)
 
+print("Fibonacci number : 10")
 
-n = eval(input("請輸入 Fibonacci number: "))
+n = 10
 for i in range(n + 1):
     print("n = {},   Fib({}) = {}".format(i, i, fib(i)))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch12\ch12_3.py
-
-# ch12_3.py
-
-day_secs = 60 * 60 * 24  # 一天秒數
-year_secs = 365 * day_secs  # 一年秒數
-
-value = (2**64) - 1
-years = value // year_secs
-print("需要約 %d 年才可以獲得結果" % years)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch12\ch12_4.py
-
-
-# ch12_4.py
 def hanoi(n, src, aux, dst):
     global step
-    """ 河內塔 """
+    # 河內塔
     if n == 1:  # 河內塔終止條件
         step += 1  # 紀錄步驟
         print("{0:2d} : 移動圓盤 {1} 從 {2} 到 {3}".format(step, n, src, dst))
@@ -555,18 +475,15 @@ def hanoi(n, src, aux, dst):
 
 
 step = 0
-n = eval(input("請輸入圓盤數量 : "))
+print("河內塔 圓盤數量 = 7")
+n = 7
 hanoi(n, "A", "B", "C")
 
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch12\ch12_5.py
-
-
-# ch12_5.py
 def hanoi(n, src, aux, dst):
-    """河內塔"""
+    # 河內塔
     if n == 1:  # 河內塔終止條件
         print("移動圓盤 {} 從 {} 到 {}".format(n, src, dst))
     else:
@@ -575,18 +492,14 @@ def hanoi(n, src, aux, dst):
         hanoi(n - 1, aux, src, dst)
 
 
-n = eval(input("請輸入圓盤數量 : "))
+print("河內塔 圓盤數量 = 7")
+n = 7
 hanoi(n, "A", "B", "C")
-
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch12\ch12_6.py
-
-
-# ch12_6.py
 def is_OK(row, col):
-    """檢查是否可以放在此row, col位置"""
+    # 檢查是否可以放在此row, col位置
     for i in range(1, row + 1):  # 迴圈往前檢查是否衝突
         if (
             queens[row - i] == col  # 檢查欄
@@ -598,7 +511,7 @@ def is_OK(row, col):
 
 
 def location(row):
-    """搜尋特定row的col欄位"""
+    # 搜尋特定row的col欄位
     start = queens[row] + 1  # 也許是回溯,所以start不一定是0
     for col in range(start, SIZE):
         if is_OK(row, col):
@@ -607,7 +520,7 @@ def location(row):
 
 
 def solve():
-    """從特定row列開始找尋皇后的位置"""
+    # 從特定row列開始找尋皇后的位置
     row = 0
     while row >= 0 and row <= 7:
         col = location(row)
@@ -637,10 +550,6 @@ for i in range(SIZE):  # 繪製結果圖
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch12\ch12_7.py
-
-
-# ch12_7.py
 class Queens:
     def __init__(self):
         self.queens = size * [-1]  # 預設皇后位置
@@ -654,7 +563,7 @@ class Queens:
             print()
 
     def is_OK(self, row, col):
-        """檢查是否可以放在此row, col位置"""
+        # 檢查是否可以放在此row, col位置
         for i in range(1, row + 1):  # 迴圈往前檢查是否衝突
             if (
                 self.queens[row - i] == col  # 檢查欄
@@ -665,7 +574,7 @@ class Queens:
         return True  # 傳回可以使用
 
     def solve(self, row):
-        """從第 row 列開始找尋皇后的位置"""
+        # 從第 row 列開始找尋皇后的位置
         if row == size:  # 終止搜尋條件
             return True
         for col in range(size):
@@ -694,12 +603,8 @@ for name in range(len(people)):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch13\ch13_10.py
-
-
-# ch13_10.py
 def dfs(graph, node, path=[]):
-    """深度優先搜尋法"""
+    # 深度優先搜尋法
     path += [node]  # 路徑
     for n in graph[node]:  # 將相鄰節點放入佇列
         if n not in path:
@@ -724,9 +629,6 @@ print(dfs(graph, "A"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch13\ch13_2.py
-
-# ch13_2.py
 from collections import deque
 
 graph = {}  # 建立空字典
@@ -741,9 +643,6 @@ for name in range(len(people)):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch13\ch13_3.py
-
-# ch13_3.py
 from collections import deque
 
 people = deque()  # 建立queue
@@ -755,23 +654,19 @@ print("列出名單 : ", people)
 people.appendleft("Ice Rain")  # 右邊加入
 print("列出名單 : ", people)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch13\ch13_4.py
-
-# ch13_4.py
 from collections import deque
 
 
 def banana_dealer(name):
-    """回應是不是賣香蕉的經銷商"""
+    # 回應是不是賣香蕉的經銷商
     if name == "Banana":
         return True
 
 
 def search(name):
-    """搜尋賣香蕉的朋友"""
+    # 搜尋賣香蕉的朋友
     global not_dealer  # 儲存已搜尋的名單
     dealer = deque()
     dealer += graph[name]  # 搜尋串列先儲存Tom的朋友
@@ -800,21 +695,16 @@ graph["Mary"] = []  # 沒有其他朋友用空集合
 search("Tom")
 print("列出已搜尋名單 : ", not_dealer)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch13\ch13_5.py
-
-
-# ch13_5.py
 def banana_dealer(name):
-    """回應是不是賣香蕉的經銷商"""
+    # 回應是不是賣香蕉的經銷商
     if name == "Banana":
         return True
 
 
 def search(name):
-    """搜尋賣香蕉的朋友"""
+    # 搜尋賣香蕉的朋友
     global not_dealer  # 儲存已搜尋的名單
     dealer = []
     dealer += graph[name]  # 搜尋串列先儲存Tom的朋友
@@ -847,12 +737,8 @@ print("列出已搜尋名單 : ", not_dealer)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch13\ch13_6.py
-
-
-# ch13_6.py
 def bfs(graph, start):
-    """寬度優先搜尋法"""
+    # 寬度優先搜尋法
     visited = []  # 拜訪過的頂點
     queue = [start]  # 模擬佇列
     while queue:
@@ -881,12 +767,9 @@ print(bfs(graph, "A"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch13\ch13_7.py
 
-
-# ch13_7.py
 def bfs(graph, start):
-    """寬度優先搜尋法"""
+    # 寬度優先搜尋法
     visited = []  # 拜訪過的頂點
     queue = [start]  # 模擬佇列
     while queue:
@@ -916,18 +799,14 @@ print(bfs(graph, "A"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch13\ch13_8.py
-
-
-# ch13_8.py
 def is_exit(node):
-    """回應是否出口"""
+    # 回應是否出口
     if node == "K":
         return True
 
 
 def bfs(graph, start):
-    """寬度優先搜尋法"""
+    # 寬度優先搜尋法
     global visited  # 拜訪過的頂點
     queue = [start]  # 模擬佇列
     while queue:
@@ -962,12 +841,8 @@ print(bfs(graph, "A"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch13\ch13_9.py
-
-
-# ch13_9.py
 def dfs(graph, start, goal):
-    """深度優先搜尋法"""
+    # 深度優先搜尋法
     path = []  # 拜訪過的節點
     stack = [start]  # 模擬堆疊
     while stack:
@@ -995,13 +870,8 @@ graph = {
 }
 print(dfs(graph, "A", "G"))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch14\ch14_1.py
-
-
-# ch14_1.py
 def dijkstra(graph, start):
     visited = []
     index = start
@@ -1040,12 +910,8 @@ print(rtn)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch14\ch14_2.py
-
-
-# ch14_2.py
 def get_edges(graph):
-    """建立邊線資訊"""
+    # 建立邊線資訊
     n1 = []  # 線段的節點1
     n2 = []  # 線段的節點2
     weight = []  # 定義線段權重串列
@@ -1095,15 +961,10 @@ graph = {
 rtn = bellman_ford(graph, "A")
 print(rtn)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch14\ch14_3.py
-
-
-# ch14_3.py
 def get_edges(graph):
-    """建立邊線資訊"""
+    # 建立邊線資訊
     n1 = []  # 線段的節點1
     n2 = []  # 線段的節點2
     weight = []  # 定義線段權重串列
@@ -1156,12 +1017,8 @@ print(rtn)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch14\ch14_4.py
-
-
-# ch14_4.py
 def get_edges(graph):
-    """建立邊線資訊"""
+    # 建立邊線資訊
     n1 = []  # 線段的節點1
     n2 = []  # 線段的節點2
     weight = []  # 定義線段權重串列
@@ -1211,15 +1068,10 @@ graph = {
 rtn = bellman_ford(graph, "A")
 print(rtn)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch15\ch15_1.py
-
-
-# ch15_1.py
 def greedy(course):
-    """課程的貪婪演算法"""
+    # 課程的貪婪演算法
     length = len(course)  # 課程數量
     course_list = []  # 儲存結果
     course_list.append(course[0])  # 第一節課
@@ -1254,12 +1106,8 @@ for i in range(len(s)):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch15\ch15_2.py
-
-
-# ch15_2.py
 def greedy(things):
-    """商品貪婪演算法"""
+    # 商品貪婪演算法
     length = len(things)  # 商品數量
     things_list = []  # 儲存結果
     things_list.append(things[length - 1])  # 第一個商品
@@ -1292,15 +1140,11 @@ print("商品", "        商品價格 ", " 商品重量")
 for i in range(len(t)):
     print("{0:8s}{1:10d}{2:10.2f}".format(t[i][0], t[i][1][0], t[i][1][1]))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch15\ch15_3.py
 
-
-# ch15_3.py
 def greedy(radios, cities):
-    """貪婪演算法"""
+    # 貪婪演算法
     greedy_radios = set()  # 最終電台的選擇
     while cities:  # 還有城市沒有覆蓋迴圈繼續
         greedy_choose = None  # 最初化選擇
@@ -1326,15 +1170,10 @@ radios["電台 5"] = set(["台南", "高雄"])
 
 print(greedy(radios, cities))  # 電台, 城市
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch15\ch15_4.py
-
-
-# ch15_4.py
 def greedy(graph, cities, start):
-    """貪婪演算法計算業務員旅行"""
+    # 貪婪演算法計算業務員旅行
     visited = []  # 儲存已拜訪城市
     visited.append(start)  # 儲存起點城市
     start_i = cities.index(start)  # 獲得起點城市的索引
@@ -1351,6 +1190,7 @@ def greedy(graph, cities, start):
         start_i = end_i  # 將下一個城市改為新的起點
     return distance, visited
 
+print('貪婪演算法計算業務員旅行1, 從新竹出發')
 
 INF = 9999  # 距離極大值
 cities = ["新竹", "竹南", "竹北", "關西", "竹東"]
@@ -1361,36 +1201,11 @@ graph = [
     [28, 35, 21, 0, 12],
     [16, 19, 11, 12, 0],
 ]
-
 dist, visited = greedy(graph, cities, "新竹")
 print("拜訪順序 : ", visited)
 print("拜訪距離 : ", dist)
 
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch15\ch15_4_1.py
-
-
-# ch15_4_1.py
-def greedy(graph, cities, start):
-    """貪婪演算法計算業務員旅行"""
-    visited = []  # 儲存已拜訪城市
-    visited.append(start)  # 儲存起點城市
-    start_i = cities.index(start)  # 獲得起點城市的索引
-    distance = 0  # 旅行距離
-    for outer in range(len(cities) - 1):  # 尋找最近城市
-        graph[start_i][start_i] = INF  # 將自己城市距離設為極大值
-        min_dist = min(graph[start_i])  # 找出最短路徑
-        distance += min_dist  # 更新總路程距離
-        end_i = graph[start_i].index(min_dist)  # 最短距離城市的索引
-        visited.append(cities[end_i])  # 將最短距離城市列入已拜訪
-        for inner in range(len(graph)):  # 將已拜訪城市距離改為極大值
-            graph[start_i][inner] = INF
-            graph[inner][start_i] = INF
-        start_i = end_i  # 將下一個城市改為新的起點
-    return distance, visited
-
+print('貪婪演算法計算業務員旅行1, 從關西出發')
 
 INF = 9999  # 距離極大值
 cities = ["新竹", "竹南", "竹北", "關西", "竹東"]
@@ -1401,20 +1216,15 @@ graph = [
     [28, 35, 21, 0, 12],
     [16, 19, 11, 12, 0],
 ]
-
 dist, visited = greedy(graph, cities, "關西")
 print("拜訪順序 : ", visited)
 print("拜訪距離 : ", dist)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch16\ch16_1.py
 
-
-# ch16_1.py
 def subset_generator(data):
-    """子集合生成函數, data須是可迭代物件"""
+    # 子集合生成函數, data須是可迭代物件
     final_subset = [[]]  # 空集合也算是子集合
     for item in data:
         final_subset.extend([subset + [item] for subset in final_subset])
@@ -1426,13 +1236,8 @@ subset = subset_generator(data)
 for s in subset:
     print(s)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch16\ch16_2.py
-
-
-# ch16_2.py
 def subset_generator(data):
     final_subset = [[]]  # 空集合也算是子集合
     for item in data:
@@ -1460,15 +1265,10 @@ for bag in bags:  # 處理組合商品
 
 print("商品組合 = {},\n商品價值 = {}".format(product, max_value))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch16\ch16_3.py
-
-
-# ch16_3.py
 def knapsack(W, wt, val):
-    """動態規劃演算法"""
+    # 動態規劃演算法
     n = len(val)
     table = [[0 for x in range(W + 1)] for x in range(n + 1)]  # 最初化表格
     for r in range(n + 1):  # 填入表格row
@@ -1492,12 +1292,8 @@ print("商品價值 : ", knapsack(bag_weight, weight, value))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch16\ch16_4.py
-
-
-# ch16_4.py
 def traveling(W, wt, val):
-    """動態規劃演算法"""
+    # 動態規劃演算法
     n = len(val)
     table = [[0 for x in range(W + 1)] for x in range(n + 1)]  # 最初化表格
     for r in range(n + 1):  # 填入表格row
@@ -1518,12 +1314,8 @@ weight = [1, 1, 2, 4, 1]  # 單項景點所需天數
 travel_weight = 4  # 總旅遊天數
 print("旅遊點評總分 = ", traveling(travel_weight, weight, value))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch17\ch17_1.py
-
-# ch17_1.py
 morse_code = {
     "A": ".-",
     "B": "-...",
@@ -1553,16 +1345,13 @@ morse_code = {
     "Z": "--..",
 }
 
-wd = input("請輸入大寫英文字: ")
+print("摩斯密碼 請輸入大寫英文字")
+wd = "TAIWAN"
 for c in wd:
     print(morse_code[c])
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch17\ch17_2.py
-
-# ch17_2.py
 abc = "abcdefghijklmnopqrstuvwxyz"
 encry_dict = {}
 front3 = abc[:3]
@@ -1571,7 +1360,9 @@ subText = end23 + front3
 encry_dict = dict(zip(abc, subText))  # 建立字典
 print("列印編碼字典\n", encry_dict)  # 列印字典
 
-msgTest = input("請輸入原始字串 : ")
+#msgTest = input("請輸入原始字串 : ")
+print("請輸入原始字串 : ")
+msgTest = "america"
 
 cipher = []
 for i in msgTest:  # 執行每個字元加密
@@ -1585,11 +1376,7 @@ print("加密字串 ", ciphertext)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch17\ch17_3.py
-
-# ch17_3.py
 import string
-
 
 def encrypt(text, encryDict):  # 加密文件
     cipher = []
@@ -1611,8 +1398,6 @@ print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
 
 '''
-print("------------------------------------------------------------")  # 60個
-
 print("------------------------------------------------------------")  # 60個
 
 import math
@@ -1646,17 +1431,13 @@ print("相似度值 : ", dist[min_index])
 for i in range(len(dist)):
     print("影片 : %s, 相似度 : %6.2f" % (film_titles[i], dist[i]))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch18\ch18_2.py
-
-# ch18_2.py
 import math
 
-
+""" fail
 def knn(record, target, k):
-    """計算k組近鄰值, 以list回傳數量和距離"""
+    # 計算k組近鄰值, 以list回傳數量和距離
     distances = []  # 儲存紀錄與目標的距離
     record_number = []  # 儲存紀錄的烤香腸數量
 
@@ -1681,7 +1462,7 @@ def knn(record, target, k):
 
 
 def regression(knn_num):
-    """計算迴歸值"""
+    # 計算迴歸值
     return int(sum(knn_num) / len(knn_num))
 
 
@@ -1707,26 +1488,20 @@ k_nn = knn(record, target, k)
 print("需準備 %d 條烤香腸" % regression(k_nn[0]))
 for i in range(k):
     print("k組近鄰的距離 %6.4f, 銷售數量 %d" % (k_nn[1][i], k_nn[0][i]))
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_1.py
-
-
-# ch19_1.py
 def isPrime(num):
-    """測試num是否質數"""
+    # 測試num是否質數
     for n in range(2, num):
         if num % n == 0:
             return False
     return True
 
 
-num = int(input("請輸入大於1的整數做質數測試 = "))
+print("請輸入大於1的整數做質數測試 = 12347")
+
+num = 12347
 if isPrime(num):
     print("%d是質數" % num)
 else:
@@ -1735,10 +1510,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_10.py
-
-
-# ch19_10.py
 def rob(nums):
     prev = cur = 0
     for money in nums:
@@ -1749,13 +1520,9 @@ def rob(nums):
 print(rob([1, 2, 3, 1]))
 print(rob([2, 7, 9, 3, 1]))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_11.py
-
-
-# ch19_11.py
+""" fail
 def minCost(costs):
     red, blue, green = 0, 0, 0
     for r, b, g in costs:
@@ -1764,14 +1531,10 @@ def minCost(costs):
 
 
 print(minCost([[17, 2, 14], [15, 16, 5], [14, 3, 18]]))
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_12.py
-
-
-# ch19_12.py
 def numWays(n, k):
     if n == 0:
         return 0
@@ -1789,12 +1552,8 @@ print(numWays(2, 2))
 print(numWays(3, 2))
 print(numWays(4, 2))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_2.py
-
-# ch19_2.py
 from collections import deque
 
 
@@ -1814,76 +1573,6 @@ print("python 是回文 : ", palindrome("python"))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_3.py
-
-
-# ch19_3.py
-def gcd(n1, n2):
-    g = 1  # 最初化最大公約數
-    n = 2  # 從2開始檢測
-    while n <= n1 and n <= n2:
-        if n1 % n == 0 and n2 % n == 0:
-            g = n  # 新最大公約數
-        n += 1
-    return g
-
-
-n1, n2 = eval(input("請輸入2個整數值 : "))
-print("最大公約數是 : ", gcd(n1, n2))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_4.py
-
-
-# ch19_4.py
-def gcd(a, b):
-    "輾轉相除法求最大公約數"
-    if a < b:
-        a, b = b, a
-    while b != 0:
-        tmp = a % b
-        a = b
-        b = tmp
-    return a
-
-
-a, b = eval(input("請輸入2個整數值 : "))
-print("最大公約數是 : ", gcd(a, b))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_5.py
-
-
-# ch19_5.py
-def gcd(a, b):
-    "輾轉相除法求最大公約數"
-    if a < b:
-        a, b = b, a
-    while b != 0:
-        tmp = a % b
-        a = b
-        b = tmp
-    return a
-
-
-def lcm(a, b):
-    return a * b // gcd(a, b)
-
-
-a, b = eval(input("請輸入2個整數值 : "))
-print("最大公約數是 : ", gcd(a, b))
-print("最小公倍數是 : ", lcm(a, b))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_6.py
-
-# ch19_6.py
 chicken = 0
 while True:
     rabbit = 35 - chicken  # 頭的總數
@@ -1895,10 +1584,6 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_7.py
-
-# ch19_7.py
-
 h = eval(input("請輸入頭的數量 : "))
 f = eval(input("請輸入腳的數量 : "))
 chicken = f / 2 - h
@@ -1908,12 +1593,8 @@ print("雞有 {} 隻, 兔有 {} 隻".format(int(chicken), int(rabbit)))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_8.py
-
-
-# ch19_8.py
 def gold(W, wt, val):
-    """動態規劃演算法"""
+    # 動態規劃演算法
     n = len(val)
     table = [[0 for x in range(W + 1)] for x in range(n + 1)]  # 最初化表格
     for r in range(n + 1):  # 填入表格row
@@ -1937,10 +1618,6 @@ print("最大產值 = {} 公斤".format(gold(gold_weight, weight, value)))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\ch19\ch19_9.py
-
-
-# ch19_9.py
 def climbStairs(n):
     prev, cur = 1, 1
     for i in range(1, n):
@@ -1956,12 +1633,8 @@ print(climbStairs(4))
 print("------------------------------------------------------------")  # 60個
 
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex1_2.py
-
-
-# ex1_2.py
 def factorial(n):
-    """計算n的階乘, n 必須是正整數"""
+    # 計算n的階乘, n 必須是正整數
     if n == 1:
         return 1
     else:
@@ -2003,9 +1676,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex11_2.py
-
-# ex11_2.py
 from pprint import pprint
 
 maze = [  # 迷宮地圖
@@ -2029,7 +1699,7 @@ directions = [  # 使用串列設計走迷宮方向
 
 
 def maze_solve(x, y, goal_x, goal_y):
-    """解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口"""
+    # 解迷宮程式 x, y是迷宮入口, goal_x, goal_y是迷宮出口
     maze[x][y] = 2
     stack = []  # 建立路徑堆疊
     stack.append((x, y))  # 將路徑push入堆疊
@@ -2063,10 +1733,6 @@ pprint(maze)  # 跳行顯示元素
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex12_2.py
-
-
-# ex12_2.py
 def mymax(nLst):
     if len(nLst) == 2:
         return nLst[0] if nLst[0] > nLst[1] else nLst[1]
@@ -2083,7 +1749,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 def dfs(graph, start, goal):
-    """深度優先搜尋法"""
+    # 深度優先搜尋法
     path = []  # 拜訪過的節點
     stack = [start]  # 模擬堆疊
     while stack:
@@ -2113,13 +1779,8 @@ graph = {
 }
 print(dfs(graph, "F", "G"))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex14_2.py
-
-
-# ex14_2.py
 def dijkstra(graph, start):
     visited = []
     index = start
@@ -2156,15 +1817,10 @@ node = input("請輸入起點 : ")
 rtn = dijkstra(graph, node)
 print(rtn)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex15_2.py
-
-
-# ex15_2.py
 def greedy(things):
-    """商品貪婪演算法"""
+    # 商品貪婪演算法
     length = len(things)  # 商品數量
     things_list = []  # 儲存結果
     things_list.append(things[length - 1])  # 第一個商品
@@ -2199,15 +1855,10 @@ print("商品", "        商品價格 ", " 商品重量")
 for i in range(len(t)):
     print("{0:8s}{1:10d}{2:10.2f}".format(t[i][0], t[i][1][0], t[i][1][1]))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex15_4.py
-
-
-# ex15_4.py
 def greedy(graph, cities, start):
-    """貪婪演算法計算業務員旅行"""
+    # 貪婪演算法計算業務員旅行
     visited = []  # 儲存已拜訪城市
     visited.append(start)  # 儲存起點城市
     start_i = cities.index(start)  # 獲得起點城市的索引
@@ -2239,15 +1890,10 @@ dist, visited = greedy(graph, cities, start)
 print("拜訪順序 : ", visited)
 print("拜訪距離 : ", dist)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex16_2.py
-
-
-# ex16_2.py
 def fruits_bag(W, wt, val):
-    """動態規劃演算法"""
+    # 動態規劃演算法
     n = len(val)
     table = [[0 for x in range(W + 1)] for x in range(n + 1)]  # 最初化表格
     items = [[[] for x in range(W + 1)] for x in range(n + 1)]  # 最初化表格
@@ -2283,15 +1929,10 @@ items, total_value = fruits_bag(bag_weight, weight, value)
 print("最高價值 : ", total_value)
 print("商品組合 : ", items[len(item)][bag_weight])
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex16_4.py
-
-
-# ex16_4.py
 def traveling(W, wt, val):
-    """動態規劃演算法"""
+    # 動態規劃演算法
     n = len(val)
     table = [[0 for x in range(W + 1)] for x in range(n + 1)]  # 最初化表格
     items = [[[] for x in range(W + 1)] for x in range(n + 1)]  # 最初化表格
@@ -2327,12 +1968,7 @@ items, total_value = traveling(travel_weight, weight, value)
 print("旅遊點評總分 : ", total_value)
 print("旅遊景點組合 : ", items[len(item)][travel_weight])
 
-
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex17_2.py
-
-# ex17_2.py
 
 abc = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 encry_dict = {}
@@ -2366,13 +2002,8 @@ def palindrome(word):
 wd = input("請輸入字串 : ")
 print("{} 是回文 : {}".format(wd, palindrome(wd)))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex19_4.py
-
-
-# ex19_4.py
 def cr(head, foot):
     chicken = 0
     while True:
@@ -2393,12 +2024,8 @@ if flag:
 else:
     print(chicken, rabbit)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex2_2.py
-
-# ex2_2.py
 from array import *
 
 x = array("l", [1, 11, 22, 33, 44, 55])
@@ -2413,15 +2040,10 @@ else:
     for data in x:
         print(data)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex3_2.py
-
-
-# ex3_2.py
 class Node:
-    """節點"""
+    # 節點
 
     def __init__(self, data=None):
         self.data = data  # 資料
@@ -2429,13 +2051,13 @@ class Node:
 
 
 class Linked_list:
-    """鏈結串列"""
+    # 鏈結串列
 
     def __init__(self):
         self.head = None  # 鏈結串列第 1 個節點
 
     def print_list(self):
-        """列印鏈結串列"""
+        # 列印鏈結串列
         ptr = self.head  # 指標指向鏈結串列第 1 個節點
         while ptr:
             print(ptr.data)  # 列印節點
@@ -2464,12 +2086,8 @@ print("5  出現 %d 次" % link.search(5))
 print("15 出現 %d 次" % link.search(15))
 print("20 出現 %d 次" % link.search(20))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex4_2.py
-
-# ex4_2.py
 from queue import Queue
 
 food = ["漢堡", "薯條", "可樂"]
@@ -2482,13 +2100,8 @@ print("佇列輸出")
 while not q.empty():
     print(q.get())
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex5_2.py
-
-
-# ex5_2.py
 class Stack:
     def __init__(self):
         self.my_stack = []
@@ -2520,22 +2133,18 @@ while not stack.isEmpty():
     print(stack.my_pop())
 print("程式結束")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex6_2.py
 
-
-# ex6_2.py
 class Node:
     def __init__(self, data=None):
-        """建立二元樹的節點"""
+        # 建立二元樹的節點
         self.data = data
         self.left = None
         self.right = None
 
     def insert(self, data):
-        """建立二元樹"""
+        # 建立二元樹
         if self.data:  # 如果根節點存在
             if data < self.data:  # 插入值小於目前節點值
                 if self.left:
@@ -2551,7 +2160,7 @@ class Node:
             self.data = data  # 建立根節點
 
     def postorder(self):
-        """後序列印"""
+        # 後序列印
         if self.left:  # 如果左子節點存在
             self.left.postorder()  # 遞迴呼叫下一層
         if self.right:  # 如果右子節點存在
@@ -2576,20 +2185,16 @@ print("所建的二元樹後序列印如下 : ")
 tree.postorder()  # 後序列印
 print("二元樹的深度 = ", tree.depth())
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex7_2.py
 
-
-# ex7_2.py
 class Heaptree:
     def __init__(self):
         self.heap = []  # 堆積樹串列
         self.size = 0  # 堆積樹串列元素個數
 
     def data_down(self, i):
-        """如果節點值大於子節點值則資料與較小的子節點值對調"""
+        # 如果節點值大於子節點值則資料與較小的子節點值對調
         while (i * 2 + 2) <= self.size:  # 如果有子節點則繼續
             mi = self.get_min_index(i)  # 取得較小值得子節點
             if self.heap[i] > self.heap[mi]:  # 如果目前節點大於子節點
@@ -2597,7 +2202,7 @@ class Heaptree:
             i = mi
 
     def get_min_index(self, i):
-        """傳回較小值的子節點索引"""
+        # 傳回較小值的子節點索引
         if i * 2 + 2 >= self.size:  # 只有一個左子節點
             return i * 2 + 1  # 傳回左子節點索引
         else:
@@ -2607,7 +2212,7 @@ class Heaptree:
                 return i * 2 + 2  # False傳回右子節點索引
 
     def build_heap(self, mylist):
-        """建立堆積樹"""
+        # 建立堆積樹
         i = (len(mylist) // 2) - 1  # 從有子節點的節點開始處理
         self.size = len(mylist)  # 得到串列元素個數
         self.heap = mylist  # 初步建立堆積樹串列
@@ -2633,13 +2238,9 @@ min = obj.get_min()
 print("所獲得的最小值   = ", min)
 print("執行後堆積樹串列 = ", obj.heap)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex8_2.py
 
-
-# ex8_2.py
 def check_name(name):
     if voted.get(name):
         print("你已經投過票了")
@@ -2655,12 +2256,9 @@ check_name(name)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex9_2.py
 
-
-# ex9_2.py
 def selection_sort(nLst):
-    """選擇排序"""
+    # 選擇排序
     for i in range(len(nLst) - 1):
         index = i  # 最小值的索引
         for j in range(i + 1, len(nLst)):  # 找最小值的索引
@@ -2687,13 +2285,10 @@ selection_sort(program)
 for i in range(len(program)):
     print("{0}:{1:7s} -- 使用次數 {2}".format(i + 1, program[i][0], program[i][1]))
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\演算法_最強彩色圖鑑\偶數題習題解答\ex9_4.py
 
 
-# ex9_4.py
 def bubble_sort(nLst):
     length = len(nLst)
     for i in range(length - 1):
@@ -2726,3 +2321,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+

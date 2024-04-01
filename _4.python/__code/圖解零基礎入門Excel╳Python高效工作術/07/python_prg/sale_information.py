@@ -3,13 +3,17 @@ from reportlab.lib.pagesizes import A4, portrait
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.lib.units import cm
-import openpyxl 
+
+import os
+import shutil
 import pathlib  
 import datetime
+import openpyxl 
+
 from PIL import Image
 
 def load_informatiom():
-    wb = openpyxl.load_workbook("..\data\特銷說明會導覽.xlsx")
+    wb = openpyxl.load_workbook("特銷說明會導覽.xlsx")
     sh = wb.active
     sale_dict = {} 
     for row in range(1, sh.max_row + 1):
@@ -23,9 +27,17 @@ def load_informatiom():
     return sale_dict
 
 
+target_dir = 'tmp_pdf'
+#準備輸出資料夾 若已存在, 則先刪除再建立 若不存在, 則建立
+if os.path.exists(target_dir):
+        #os.remove(target_dir)  #存取被拒 不可用
+        shutil.rmtree(target_dir)
+if not os.path.exists(target_dir):
+        os.mkdir(target_dir)
+
 sale_dict = load_informatiom()
-path = pathlib.Path("..\data\sales\pdf")
-wb = openpyxl.load_workbook("..\data\客戶聯絡資料.xlsx")
+path = pathlib.Path(target_dir)
+wb = openpyxl.load_workbook("客戶聯絡資料.xlsx")
 sh = wb["收件人資料"]
 for row in range(1, sh.max_row + 1):
     file_name = (sh.cell(row,2).value) + "先生／小姐特銷會說明.pdf"
@@ -38,7 +50,7 @@ for row in range(1, sh.max_row + 1):
         + sh.cell(row,3).value + " 先生／小姐")
     cv.line(1.8*cm, 26.8*cm,10.8*cm,26.8*cm) #在客戶名稱套用底線
     cv.setFont("HeiseiKakuGo-W5", 14)
-    cv.drawCentredString(10*cm, 24*cm, sale_dict["主題"])
+    #cv.drawCentredString(10*cm, 24*cm, sale_dict["主題"])
     cv.setFont("HeiseiKakuGo-W5", 12)
     cv.drawString(2*cm, 22*cm, "舉辦時間：" + sale_dict["舉辦時間"])
     cv.drawString(2*cm, 21*cm, "舉辦地點：" + sale_dict["舉辦地點"])
@@ -53,7 +65,21 @@ for row in range(1, sh.max_row + 1):
     cv.drawText(textobject)
     now = datetime.datetime.now()
     cv.drawString(14.4*cm, 14.8*cm, now.strftime("%Y/%m/%d"))
-    image =Image.open("..\data\logo.png")
+    #logo_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_logo/matlab.png'
+    #image =Image.open(logo_filename)
+    image =Image.open("logo.png")
     cv.drawInlineImage(image,13*cm,13*cm)
     cv.showPage()
     cv.save()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+print('------------------------------------------------------------')	#60個
+

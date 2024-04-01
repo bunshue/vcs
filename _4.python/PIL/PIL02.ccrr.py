@@ -310,9 +310,8 @@ print('------------------------------------------------------------')	#60個
 #調整資料夾內所有圖片檔影像寬度, 加logo
       
 source_dir = 'C:/_git/vcs/_1.data/______test_files1/__pic/_book'
-target_dir = 'C:/_git/vcs/_1.data/______test_files2/tmp_resized_pic'
-#logo_filename = 'C:/_git/vcs/_1.data/______test_files1/burn.bmp'        #fail, bad transparency mask
-logo_filename = 'C:/_git/vcs/_1.data/______test_files1/logo.png'
+target_dir = 'tmp_resized_pic'
+logo_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_logo/matlab.png'
 
 #準備輸出資料夾 若已存在, 則先刪除再建立 若不存在, 則建立
 if os.path.exists(target_dir):

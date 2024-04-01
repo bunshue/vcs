@@ -1,3 +1,4 @@
+import sys
 import requests
 
 print('------------------------------------------------------------')	#60個
@@ -41,7 +42,7 @@ page = """
   <head><title>旗標科技</title></head>
   <body>
     <div class="section" id="main">
-      <img alt="旗標圖示" src="http://flag.tw/logo.png">
+      <img alt="旗標圖示" src="https://zh.wikipedia.org/static/images/icons/wikdddipedia.png">
       <p>產品類別</p>
       <button id="books"><h4 class="bk">圖書</h4></button>
       <button id="maker"><h4 class="pk">創客</h4></button>
@@ -151,7 +152,6 @@ e2 = e1.find_element_by_tag_name('title')  # 在 head 元素中尋找 title 標�
 print(e2.tag_name)  # 輸出 tite 確認已找到
 browser.quit()     # 關閉視窗結束驅動
 
-
 print('------------------------------------------------------------')	#60個
 
 from selenium import webdriver  # 匯入 selenium 的 webdriver
@@ -165,7 +165,6 @@ browser.get('http://www.facebook.com')  # ←開啟 Chrome 並連到 fb 網站
 browser.find_element_by_id('email').send_keys('您的帳號')  # }
 browser.find_element_by_id('pass').send_keys('您的密碼')  # }輸入帳密並按登入鈕
 browser.find_element_by_name('login').click()  # }
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -187,8 +186,6 @@ browser.find_element_by_id('identifierNext').click()   #←按繼續鈕
 sleep(3)       #←暫停 3 秒等待進入下一頁
 browser.find_element_by_name('password').send_keys('您的密碼')  #←輸入帳密
 browser.find_element_by_id('passwordNext').click()   #←按繼續鈕
-
-
 
 print('------------------------------------------------------------')	#60個
 

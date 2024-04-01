@@ -360,10 +360,8 @@ img_rgb = img_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
 # 使用 Matplotlib 顯示圖片
 plt.imshow(img_rgb)
 plt.show()
-'''
 
 print("------------------------------------------------------------")  # 60個
-
 
 # opencv
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
@@ -431,9 +429,57 @@ print(coordinate)
 # print(array([255, 219,  79], dtype=uint8))
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+image = cv2.imread(filename)	#讀取本機圖片
+
+""" 全螢幕顯示一圖
+out_win = "output_style_full_screen"
+cv2.namedWindow(out_win, cv2.WINDOW_NORMAL)
+cv2.setWindowProperty(out_win, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
+cv2.imshow(out_win, image)
+"""
+
+
+
+#設定視窗大小並依視窗縮放影像
+
+cv2.namedWindow("resized",0);
+cv2.resizeWindow("resized", 640, 480);
+cv2.imshow("resized",image)
+
+#設定視窗位置
+x_st = 300
+y_st = 100
+cv2.moveWindow("resized", x_st, y_st)
+
+cv2.waitKey(0)
+
+sys.exit()
+
+
+#設定視窗參數, 若不設定, 即是 圖片滿框、不可調整大小
+#預設 flags == WINDOW_AUTOSIZE | WINDOW_KEEPRATIO |WINDOW_GUI_EXPANDED
+
+#可調整大小
+#cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+
+#WINDOW_FREERATIO 不 保持比例
+#WINDOW_KEEPRATIO    保持比例
+
+#可調整大小 並 保持比例
+#cv2.namedWindow('image', cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
+
+
+cv2.imshow("image", image)  # 顯示圖片
+
 
 
 print("------------------------------------------------------------")  # 60個

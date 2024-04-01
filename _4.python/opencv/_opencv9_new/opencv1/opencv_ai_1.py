@@ -1,6 +1,8 @@
 """
 一本精通：OpenCV 與 AI 影像辨識
 
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -215,9 +217,11 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+
 """ addWeighted
 img = cv2.imread(filename)
-logo = cv2.imread('opencv-logo.jpg')
+logo = cv2.imread(logo_filename)
 output = cv2.addWeighted(img, 0.5, logo, 0.3, 50)
 
 cv2.imshow('image', output)
@@ -279,8 +283,11 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+
 """
-img = cv2.imread('logo.jpg', cv2.IMREAD_UNCHANGED)  # 開啟圖片
+img = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)  # 開啟圖片
 img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)         # 因為是 jpg，要轉換顏色為 BGRA
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)        # 新增 gray 變數為轉換成灰階的圖片
 
@@ -300,7 +307,9 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread('logo.jpg', cv2.IMREAD_UNCHANGED)
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+
+img = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -668,7 +677,9 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-logo = cv2.imread('logo.jpg')                    # 讀取 OpenCV 的 logo
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+
+logo = cv2.imread(logo_filename)                    # 讀取 OpenCV 的 logo
 size = logo.shape                                # 讀取 logo 的長寬尺寸
 
 img = np.zeros((360,480,3), dtype='uint8')       # 產生一張 480x360 背景全黑的圖
@@ -739,8 +750,10 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+
 mona = cv2.imread(filename)
-logo = cv2.imread('logo.png', cv2.IMREAD_UNCHANGED)  # 使用 cv2.IMREAD_UNCHANGED 讀取 png，保留 alpha 色版
+logo = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)  # 使用 cv2.IMREAD_UNCHANGED 讀取 png，保留 alpha 色版
 mona_w = mona.shape[1]  # 蒙娜麗莎寬度
 mona_h = mona.shape[0]  # 蒙娜麗莎高度
 logo_w = logo.shape[1]  # logo 寬度
