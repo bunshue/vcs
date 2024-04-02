@@ -32,7 +32,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-"""
+
 img = cv2.imread(filename)   # 預設為彩色 1號
 img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階 2號
 img = cv2.imread(filename, 2) # 也可使用數字代表模式
@@ -45,7 +45,7 @@ cv2.waitKey(0)                 # 按下任意鍵停止
 #cv2.waitKey(2000)       # 等待兩秒 ( 2000 毫秒 ) 後關閉圖片視窗
 cv2.destroyAllWindows()        # 結束所有圖片視窗
 
-
+"""
 img1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 img2 = cv2.imread('test.png', cv2.IMREAD_UNCHANGED)
 print(img1.shape)    # (400, 300, 3)  JPG 只有三個色版 BGR
@@ -54,20 +54,7 @@ print(img2.shape)    # (400, 300, 4)  PNG 四個色版 GRA
 img = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA 色彩模式
 print(img.shape)                             # (400, 300, 4)  第三個數值變成 4
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 """
-print("------------------------------------------------------------")  # 60個
-
-print("建立影像圖片矩陣 500X500 黑圖 中間一塊改成紅色")
-
-img = np.zeros((500,500,3), dtype='uint8')   # 快速產生 500x500，每個項目為 [0,0,0] 的三維陣列
-img[100:400, 100:400] = [0,0,255]  # 將中間 200x200 的每個項目內容，改為 [0,0,255]
-
-cv2.imshow('image', img)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -184,19 +171,6 @@ cv2.imshow('image', img)
 cv2.imshow('image1', output1)
 cv2.imshow('image2', output2)
 cv2.imshow('image3', output3)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY);
-output1 = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
-img_gray2 = cv2.medianBlur(img_gray, 5)   # 模糊化
-output2 = cv2.adaptiveThreshold(img_gray2, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
-
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -382,150 +356,6 @@ cv2.imshow('image', output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')   # 繪製 300x300 的黑色畫布
-cv2.line(img,(50,50),(250,250),(0,0,255),5)  # 繪製線條
-cv2.imshow('image', img)
-cv2.waitKey(0)                               # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')
-cv2.arrowedLine(img,(50,50),(250,250),(0,0,255),5)  # 繪製箭頭線條
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')
-cv2.rectangle(img,(50,50),(250,250),(0,0,255),5)  # 繪製正方形
-
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')
-cv2.rectangle(img,(50,50),(250,250),(0,0,255),-1)  # 設定 -1
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')
-img[50:250, 50:250] = [0,0,255] # 將中間 200x200 的陣列內容改成 [0,0,255]
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')
-cv2.circle(img,(150,150),100,(0,0,255),5)  # 繪製圓形
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')
-cv2.circle(img,(150,150),100,(0,0,255),-1)  # 設定 -1
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')
-cv2.ellipse(img,(150,150),(100,50),45,0,360,(0,0,255),5)
-cv2.ellipse(img,(150,150),(30,100),90,0,360,(255,150,0),5)
-cv2.ellipse(img,(150,150),(20,120),30,0,360,(0,255,255),5)
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')
-pts = np.array([[150,50],[250,100],[150,250],[50,100]])   # 產生座標陣列
-cv2.polylines(img,[pts],True,(0,0,255),5)   # 繪製多邊形
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((300,300,3), dtype='uint8')
-pts = np.array([[150,50],[250,100],[150,250],[50,100]])
-cv2.fillPoly(img,[pts],(0,0,255))
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = np.zeros((150,300,3), dtype='uint8')   # 建立 300x150 的黑色畫布
-text = 'Hello'
-org = (20,90)
-fontFace = cv2.FONT_HERSHEY_SIMPLEX
-fontScale = 2.5
-color = (0,0,255)
-thickness = 5
-lineType = cv2.LINE_AA
-cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType)
-cv2.imshow('image', img)
-cv2.waitKey(0)      # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-from PIL import ImageFont, ImageDraw, Image    # 載入 PIL 相關函式庫
-
-img = np.zeros((150,300,3), dtype='uint8')   # 繪製黑色畫布
-fontpath = 'NotoSansTC-Regular.otf'          # 設定字型路徑
-font = ImageFont.truetype(fontpath, 50)      # 設定字型與文字大小
-imgPil = Image.fromarray(img)                # 將 img 轉換成 PIL 影像
-draw = ImageDraw.Draw(imgPil)                # 準備開始畫畫
-draw.text((0, 0), '大家好～\n嘿嘿嘿～', fill=(255, 255, 255), font=font)  # 畫入文字，\n 表示換行
-img = np.array(imgPil)                       # 將 PIL 影像轉換成 numpy 陣列
-cv2.imshow('image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-output1 = cv2.blur(img, (5, 5))     # 指定區域單位為 (5, 5)
-output2 = cv2.blur(img, (25, 25))   # 指定區域單位為 (25, 25)
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
-cv2.waitKey(0)                      # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-output1 = cv2.GaussianBlur(img, (5, 5), 0)   # 指定區域單位為 (5, 5)
-output2 = cv2.GaussianBlur(img, (25, 25), 0) # 指定區域單位為 (25, 25)
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-output1 = cv2.medianBlur(img, 5)   # 模糊程度為 5
-output2 = cv2.medianBlur(img, 25)  # 模糊程度為 25
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -558,9 +388,9 @@ def convex(src_img, raw, effect):
 
 img = cv2.imread(filename)
 img = convex(img, (300, 400, 3), (150, 130, 100))      # 提交參數數值，進行凸透鏡效果
+
 cv2.imshow('image', img)
 cv2.waitKey(0)
-cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -578,7 +408,7 @@ while True:
     cv2.imshow('image', output)                 # 顯示圖片
     if cv2.waitKey(1) == ord('q'):
         break
-cap.release()                           # 所有作業都完成後，釋放資源
+
 cv2.destroyAllWindows()                 # 結束所有視窗
 
 print("------------------------------------------------------------")  # 60個
@@ -631,52 +461,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread('test1.png')
-img2 = cv2.imread('test2.png')
-output = cv2.bitwise_and(img1, img2)  # 使用 bitwise_and
-cv2.imshow('image', output)
-cv2.waitKey(0)                        # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img1 = cv2.imread('test1.png')
-img2 = cv2.imread('test2.png')
-output = cv2.bitwise_or(img1, img2)  # 使用 bitwise_or
-cv2.imshow('image', output)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img1 = cv2.imread('test1.png')
-img2 = cv2.imread('test2.png')
-output = cv2.bitwise_xor(img1, img2)  # 使用 bitwise_xor
-cv2.imshow('image', output)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img1 = cv2.imread('test1.png')
-output = cv2.bitwise_not(img1)  # 使用 bitwise_not
-cv2.imshow('image', output)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img1 = cv2.imread('test1.png')
-img2 = cv2.imread('test2.png')
-mask = cv2.imread('mask.png')                    # 遮罩圖片
-mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)    # 轉換成灰階模式
-output = cv2.bitwise_xor(img1, img2, mask=mask)  # 加入 mask 參數
-cv2.imshow('image', output)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
+"""fail
 logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
 
 logo = cv2.imread(logo_filename)                    # 讀取 OpenCV 的 logo
@@ -697,7 +482,7 @@ output = cv2.add(bg, logo)                       # 使用 add 方法將底圖和
 cv2.imshow('image', output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 mask = np.zeros((300,300,3), dtype='uint8')      # 建立 300x300 的黑色畫布
@@ -710,6 +495,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+"""fail
 mask = np.zeros((300,300,3), dtype='uint8')
 cv2.circle(mask,(150,150),100,(255,255,255),-1)
 mask = cv2.GaussianBlur(mask, (35, 35), 0)
@@ -727,11 +513,15 @@ out = (out * 255).astype('uint8')          # 乘以 255 之後轉換成整數
 cv2.imshow('image',out)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread(filename)
-img2 = cv2.imread('girl.jpg')
+filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+
+img1 = cv2.imread(filename1)
+img2 = cv2.imread(filename2)
 w = img1.shape[1]   # 讀取圖片寬度
 h = img1.shape[0]   # 讀取圖片高度
 
@@ -740,10 +530,10 @@ for i in range(w):
     img1[:,i,1] = img1[:,i,1]*((300-i)/300) + img2[:,i,1]*(i/300)  # 紅色按照比例混合
     img1[:,i,2] = img1[:,i,2]*((300-i)/300) + img2[:,i,2]*(i/300)  # 綠色按照比例混合
 
-cv2.imwrite('tmp_image.png', save)
+#cv2.imwrite('tmp_image.png', img1)
 
 show = img1.astype('float32')/255    # 如果要使用 imshow 必須要轉換類型
-cv2.imshow('image.png', show)
+#cv2.imshow('tmp_image.png', show)
 
 cv2.waitKey(0)       # 按下任意鍵停止
 cv2.destroyAllWindows()
@@ -767,7 +557,7 @@ for i in range(logo_w):
     mona[dh:h,i,1] = mona[dh:h,i,1]*(1-logo[:,i,3]/255) + logo[:,i,1]*(logo[:,i,3]/255)
     mona[dh:h,i,2] = mona[dh:h,i,2]*(1-logo[:,i,3]/255) + logo[:,i,2]*(logo[:,i,3]/255)
 
-cv2.imwrite('tmp_image.png', mona)
+#cv2.imwrite('tmp_image.png', mona)
 
 mona = mona.astype('float32')/255    # 如果要使用 imshow 必須要轉換類型
 cv2.imshow('image', mona)
@@ -777,14 +567,17 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+gif_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
+
+print("gif轉jpg")
 from PIL import Image,ImageSequence
 
-gif = Image.open('dot.gif')                # 讀取動畫圖檔
+gif = Image.open(gif_filename)                # 讀取動畫圖檔
 
 i = 0                                      # 設定編號變數
 for frame in ImageSequence.Iterator(gif):
     frame = frame.convert('RGB')           # 取出每一格轉換成 RGB
-    frame.save(f'frame{i}.jpg', quality=65, subsampling=0)  # 儲存為 jpg
+    #frame.save(f'tmp_frame{i}.jpg', quality=65, subsampling=0)  # 儲存為 jpg
     i = i + 1                              # 編號增加 1
 
 print("------------------------------------------------------------")  # 60個
@@ -852,7 +645,7 @@ for i in img_list:
     img = img.convert('RGB')      # 轉換成 RGB ( 如果是 RGBA 會自動將黑色白色變成透明色 )
     output.append(img)            # 加入 output
 # 儲存為 gif 動畫圖檔
-output[0].save("image.gif", save_all=True, append_images=output[1:], duration=200, loop=0, disposal=0)
+output[0].save("tmp_image.gif", save_all=True, append_images=output[1:], duration=200, loop=0, disposal=0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -864,27 +657,30 @@ for i in range(4):
     img = Image.open(f'frame{i}.jpg')  # 開啟圖片
     gif.append(img)                    # 加入串列
 # 儲存為 gif
-gif[0].save("image.gif", save_all=True, append_images=gif[1:], duration=200, loop=0, disposal=0)
+gif[0].save("tmp_image.gif", save_all=True, append_images=gif[1:], duration=200, loop=0, disposal=0)
 
 print("------------------------------------------------------------")  # 60個
 
 n = 0
 for i in source:                  # source 為要轉存的所有圖片陣列 ( opencv 格式，色彩為 RGBA )
     img = Image.fromarray(i)      # 轉換成 PIL 格式
-    img.save(f'temp/gif{n}.gif')  # 儲存為 gif
+    img.save(f'tmp_gif{n}.gif')  # 儲存為 gif
     n = n + 1                     # 改變儲存的檔名編號
 
 output = []                       # 建立空串列
 for i in range(n):
-    img = Image.open(f'temp/gif{i}.gif')  # 依序開啟每張 gif
+    img = Image.open(f'tmp_gif{i}.gif')  # 依序開啟每張 gif
     img = img.convert("RGBA")             # 轉換為 RGBA
     output.append(img)                    # 記錄每張圖片內容
 
 # 轉存為 gif 動畫，設定 disposal=2
-output[0].save("image.gif", save_all=True, append_images=output[1:], duration=100, loop=0, disposal=2)
+output[0].save("tmp_image.gif", save_all=True, append_images=output[1:], duration=100, loop=0, disposal=2)
 
 print("------------------------------------------------------------")  # 60個
-img = cv2.imread("qrcode.jpg")                       # 開啟圖片
+
+filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+
+img = cv2.imread(filename)                       # 開啟圖片
 
 qrcode = cv2.QRCodeDetector()                        # 建立 QRCode 偵測器
 data, bbox, rectified = qrcode.detectAndDecode(img)  # 偵測圖片中的 QRCode
@@ -900,7 +696,9 @@ cv2.destroyAllWindows()        # 結束所有圖片視窗
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread("qrcode.jpg")
+filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+
+img = cv2.imread(filename)
 
 qrcode = cv2.QRCodeDetector()
 data, bbox, rectified = qrcode.detectAndDecode(img)
@@ -930,7 +728,9 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 from PIL import ImageFont, ImageDraw, Image          # 載入 PIL ( 為了放中文字 )
-img = cv2.imread("qrcode.jpg")
+
+filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+img = cv2.imread(filename)
 
 qrcode = cv2.QRCodeDetector()
 data, bbox, rectified = qrcode.detectAndDecode(img)
@@ -938,8 +738,8 @@ data, bbox, rectified = qrcode.detectAndDecode(img)
 # 建立放入文字的函式
 def putText(x,y,text,color=(0,0,0)):
     global img
-    fontpath = 'NotoSansTC-Regular.otf'      # 字體 ( 從 Google Font 下載 )
-    font = ImageFont.truetype(fontpath, 20)  # 設定字型與大小
+    #font_filename = 'NotoSansTC-Regular.otf'      # 字體 ( 從 Google Font 下載 )
+    font = ImageFont.truetype(font_filename, 20)  # 設定字型與大小
     imgPil = Image.fromarray(img)            # 將 img 轉換成 PIL 圖片物件
     draw = ImageDraw.Draw(imgPil)            # 建立繪圖物件
     draw.text((x, y), text, fill=color, font=font)  # 寫入文字
@@ -967,13 +767,15 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+""" many-qr-code
 from PIL import ImageFont, ImageDraw, Image
+
 img = cv2.imread("many-qrcode.jpg")
 
 def putText(x,y,text,color=(0,0,0)):
     global img
-    fontpath = 'NotoSansTC-Regular.otf'
-    font = ImageFont.truetype(fontpath, 20)
+    #font_filename = 'NotoSansTC-Regular.otf'
+    font = ImageFont.truetype(font_filename, 20)
     imgPil = Image.fromarray(img)
     draw = ImageDraw.Draw(imgPil)
     draw.text((x, y), text, fill=color, font=font)
@@ -1004,16 +806,19 @@ if ok:
 cv2.imshow('image', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
+""" barcode
 from PIL import ImageFont, ImageDraw, Image
+
 img = cv2.imread("barcode.jpg")
 
 def putText(x,y,text,color=(0,0,0)):
     global img
-    fontpath = 'NotoSansTC-Regular.otf'
-    font = ImageFont.truetype(fontpath, 20)
+    #font_filename = 'NotoSansTC-Regular.otf'
+    font = ImageFont.truetype(font_filename, 20)
     imgPil = Image.fromarray(img)
     draw = ImageDraw.Draw(imgPil)
     draw.text((x, y), text, fill=color, font=font)
@@ -1042,7 +847,7 @@ if ok:
 cv2.imshow('image', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1064,8 +869,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-cv2.imwrite('tmp_image_2.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])  # 存成 jpg
-cv2.imwrite('tmp_image_3.png', img)  # 存成 png
+#cv2.imwrite('tmp_image_2.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])  # 存成 jpg
+#cv2.imwrite('tmp_image_3.png', img)  # 存成 png
 
 
 
@@ -1094,7 +899,6 @@ crop_img = img[y:y+h, x:x+w]
 
 output = np.zeros((360,480,3), dtype='uint8') # 產生黑色畫布
 output[x:x+w, y:y+h]=crop_img
-
 
 
 img = cv2.imread(filename)
@@ -1134,7 +938,6 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
 
 #flip
 

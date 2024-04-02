@@ -3,10 +3,26 @@ Python 地圖視覺化 - 使用 Folium
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
+import math
+import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print('------------------------------------------------------------')	#60個
 
 import seaborn as sns #海生, 自動把圖畫得比較好看
 
@@ -15,13 +31,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots
 import squarify
-
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
@@ -38,10 +47,8 @@ pip install folium
 import plotly.express as px
 import folium
 import json
-import pandas as pd
 from branca.colormap import linear
 from folium.plugins import HeatMap
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -120,9 +127,6 @@ map = folium.Map(location=[35.702083, 139.745023], zoom_start=13)
 # 標記符號
 folium.Marker(location= [35.685175,139.7528]).add_to(map)
 map
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -236,7 +240,6 @@ map = folium.Map(location=[35.681382, 139.766083],
 map.add_child(HeatMap(stations_df[["lat", "lon"]], radius=70))
 map
 
-
 #指定在地圖顯示的符號種類
 
 # 設定符號的圖片檔
@@ -267,10 +270,6 @@ for index, row in df.iterrows():
                                                 bounds=bounds)) 
 map
 
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 #以線條串起兩個地點
@@ -288,7 +287,6 @@ folium.PolyLine(
 
 # 顯示地圖
 map
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -322,19 +320,8 @@ for line in lines:
 # 顯示地圖
 map
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
-print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
@@ -349,17 +336,16 @@ print('------------------------------------------------------------')	#60個
 
 
 
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+
+
 

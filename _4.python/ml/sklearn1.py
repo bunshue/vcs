@@ -9,7 +9,6 @@ print('------------------------------------------------------------')	#60個
 import sklearn as skl
 print(skl.__version__)
 
-
 from sklearn import datasets, svm, metrics
 print(dir(datasets))
 
@@ -47,7 +46,8 @@ if result > 0.2:
 else:
     print('Sorry, 無法接受訂餐')
 
-#---------------------------------------------------------------------------------------
+
+print('------------------------------------------------------------')	#60個
 
 import seaborn as sns #海生, 自動把圖畫得比較好看
 
@@ -59,6 +59,8 @@ sns.pairplot(iris, hue='species', height=3);
 
 print(iris)
 print('cccc')
+
+print('------------------------------------------------------------')	#60個
 
 # seaborn
 
@@ -72,13 +74,22 @@ import plotly.offline
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots
-#import squarify
 
 plt.rcParams["font.sans-serif"]='Microsoft JhengHei'
-
 
 tips = sns.load_dataset("tips")
 print(tips)
 
 
-print('作業完成')
+print('------------------------------------------------------------')	#60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+print('------------------------------------------------------------')	#60個
+

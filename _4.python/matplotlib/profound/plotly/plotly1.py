@@ -1,19 +1,27 @@
 # plotly 集合 1
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
+import math
+import random
 import numpy as np
 import pandas as pd
-import math
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print('------------------------------------------------------------')	#60個
 
 import seaborn as sns #海生, 自動把圖畫得比較好看
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
@@ -110,9 +118,7 @@ fig.update_layout(title="我的帳戶餘額增減趨勢",
 
 fig.show()  # 繪製圖表
 
-
 print('------------------------------------------------------------')	#60個
-
 
 #矩形樹狀圖
 # 調整大小
@@ -230,11 +236,16 @@ fig = px.line_polar(df, r="value", theta="label", color="姓名", line_close=Tru
 
 fig.show()  # 繪製圖表
 
-print('------------------------------------------------------------')	#60個
 
-print('作業完成')
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 

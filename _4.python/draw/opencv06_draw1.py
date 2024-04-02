@@ -142,10 +142,10 @@ cv2.polylines(image, [pts], True, (255, 255, 0), 2)   #True表示封口
 #True: 頭尾相連, False: 頭尾不相連
 #-----------------------------------------------------------------------------
 
-'''
+"""
 pts = np.array([[300, 300], [300, 340], [350,320]], np.int32)
 cv2.polylines(image, [pts], True, (0, 255, 255), 2)
-'''
+"""
 
 #設定頂點座標
 pts = np.array(((10, 5), (100, 100), (170, 120), (200, 50)))
@@ -520,6 +520,87 @@ cv2.destroyAllWindows()
 print('------------------------------------------------------------')	#60個
 
 
+# 建立黑色畫布
+img = np.zeros((480, 640,3), dtype='uint8')
+
+#畫線 起 終 色 寬
+x1, y1 = 50, 50
+x2, y2 = 250, 50
+cv2.line(img,(x1, y1),(x2, y2),(0,0,255),5)
+
+
+#畫箭頭 起 終 色 寬
+x1, y1 = 50, 100
+x2, y2 = 250, 100
+cv2.arrowedLine(img,(x1, y1),(x2, y2),(0,0,255),5)
+
+#畫矩形 左上 右下 色 寬
+x_st = 50
+y_st = 150
+w = 200
+h = 100
+cv2.rectangle(img,(x_st,y_st),(x_st+w,y_st+h),(0,0,255),5)
+
+#畫矩形 左上 右下 色 寬(-1, 填滿)
+x_st = 50
+y_st = 270
+w = 200
+h = 100
+cv2.rectangle(img,(x_st,y_st),(x_st+w,y_st+h),(0,0,255),-1)
+
+#畫圓形
+cx, cy = 300, 100
+r = 50
+cv2.circle(img,(cx, cy),r,(0,0,255),5)  # 繪製圓形
+
+#畫圓形
+cx, cy = 300, 200
+r = 50
+cv2.circle(img,(cx, cy),r,(0,0,255),-1)  # 設定 -1
+
+
+#畫橢圓形
+cx, cy = 200, 100  # 橢心
+AA, BB = 200, 100  # 長軸 短軸
+angle = 0  # 順時鐘旋轉角度
+cv2.ellipse(img,(cx,cy),(AA,BB), angle, 0,360,(0,0,255),5)
+
+
+pts = np.array([[150,50],[250,100],[150,250],[50,100]])   # 產生座標陣列
+#畫多邊形 空心
+#cv2.polylines(img,[pts],True,(0,0,255),5)   # 繪製多邊形
+
+#畫多邊形 實心
+#cv2.fillPoly(img,[pts],(0,0,255))
+
+# 改一塊顏色
+img[400:450, 50:100] = [0,0,255]
+
+#寫字
+text = 'Hello'
+org = (300,400)
+fontFace = cv2.FONT_HERSHEY_SIMPLEX
+fontScale = 2.5
+color = (0,0,255)
+thickness = 5
+lineType = cv2.LINE_AA
+cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType)
+
+cv2.imshow('image', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("建立影像圖片矩陣 500X500 黑圖 中間一塊改成紅色")
+
+img = np.zeros((500,500,3), dtype='uint8')   # 快速產生 500x500，每個項目為 [0,0,0] 的三維陣列
+img[100:400, 100:400] = [0,0,255]  # 將中間 200x200 的每個項目內容，改為 [0,0,255]
+
+cv2.imshow('image', img)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
@@ -542,4 +623,21 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 """
 
+
+print("------------------------------------------------------------")  # 60個
+
+from PIL import ImageFont, ImageDraw, Image    # 載入 PIL 相關函式庫
+
+img = np.zeros((150,300,3), dtype='uint8')   # 繪製黑色畫布
+#font_filename = 'NotoSansTC-Regular.otf'          # 設定字型路徑
+font = ImageFont.truetype(font_filename, 50)      # 設定字型與文字大小
+imgPil = Image.fromarray(img)                # 將 img 轉換成 PIL 影像
+draw = ImageDraw.Draw(imgPil)                # 準備開始畫畫
+draw.text((0, 0), '大家好～\n嘿嘿嘿～', fill=(255, 255, 255), font=font)  # 畫入文字，\n 表示換行
+img = np.array(imgPil)                       # 將 PIL 影像轉換成 numpy 陣列
+cv2.imshow('image', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 

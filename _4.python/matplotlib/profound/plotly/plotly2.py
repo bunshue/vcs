@@ -1,19 +1,27 @@
 # plotly 集合 2
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
+import math
+import random
 import numpy as np
 import pandas as pd
-import math
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print('------------------------------------------------------------')	#60個
 
 import seaborn as sns #海生, 自動把圖畫得比較好看
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 print('------------------------------------------------------------')	#60個
 
@@ -22,7 +30,6 @@ import plotly.offline
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.subplots
-import squarify
 
 """
 
@@ -43,7 +50,6 @@ print('------------------------------------------------------------')	#60個
 print('繪製散佈圖')
 import plotly
 import plotly.graph_objs as go
-import pandas as pd
  
 df = pd.read_csv("data/NBA_players_salary_stats_2018.csv")
 x = df["PTS"]
@@ -94,7 +100,6 @@ print('------------------------------------------------------------')	#60個
 
 print('繪製箱型圖')
 import plotly
-import pandas as pd
 
 df = pd.read_csv("data/NBA_salary_rankings_2018.csv")
 df = df.sort_values("pos")
@@ -123,7 +128,6 @@ print('------------------------------------------------------------')	#60個
 print('繪製金融圖表(時間序列圖)')
 import plotly
 import plotly.graph_objs as go
-import pandas as pd
 
 df = pd.read_csv("data/AAPL.csv")
 data = [go.Scatter(
@@ -136,7 +140,6 @@ print('------------------------------------------------------------')	#60個
 print('繪製金融圖表(OHLC圖)')
 import plotly
 import plotly.graph_objs as go
-import pandas as pd
 
 df = pd.read_csv("data/AAPL.csv").head(10)
 trace = go.Ohlc(x=df.Date,
@@ -151,7 +154,6 @@ print('------------------------------------------------------------')	#60個
 
 print('讀取資料存入資料庫')
 
-import pandas as pd
 import twstock
 import sqlite3
 
@@ -170,7 +172,6 @@ print('------------------------------------------------------------')	#60個
 print('繪製金融圖表(OHLC圖) 台積電')
 import plotly
 import plotly.graph_objs as go
-import pandas as pd
 import sqlite3
 
 tsmc = "2330"
@@ -193,7 +194,6 @@ print('繪製金融圖表(時間序列圖) 台積電')
 
 import plotly
 import plotly.graph_objs as go
-import pandas as pd
 import sqlite3
 
 tsmc = "2330"
@@ -210,11 +210,17 @@ plotly.offline.plot({
 print('------------------------------------------------------------')	#60個
 
 
-
-print('作業完成')
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
 

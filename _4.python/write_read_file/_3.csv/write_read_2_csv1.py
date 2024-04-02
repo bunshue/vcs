@@ -1,19 +1,18 @@
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-import sys
-
-import csv
-import numpy as np
-
 #csv檔 逗號分隔值(comma-seperated values)
 
 #預設使用','分隔, 也可以使用其他分隔符號
 #csvWriter = csv.writer(csvFile, delimiter='\t') # 建立Writer物件, 使用TAB區分項目 不使用逗號
 
 #先寫後讀
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+import csv
+import random
+import numpy as np
+import pandas as pd
 
 print('------------------------------------------------------------')	#60個
 
@@ -74,7 +73,6 @@ print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
 
 print('------------------------------------------------------------')	#60個
 
-import random
 print("寫入CSV檔 3a 一維串列資料 一次寫入")
 
 filename = 'tmp_1d_array.csv'
@@ -252,7 +250,9 @@ print('------------------------------------------------------------')	#60個
 print("python讀寫CSV檔 11 讀取")
 
 filename = 'data/python_ReadWrite_CSV1.csv'
+
 import pprint as pp
+
 data = list()
 with open(filename, 'rt') as csvfile:
     columns = csvfile.readline().split(",")
@@ -264,9 +264,8 @@ with open(filename, 'rt') as csvfile:
 pp.pprint(data)
 
 print('------------------------------------------------------------')	#60個
-print("python讀寫CSV檔 12 讀取 pandas")
 
-import pandas as pd
+print("python讀寫CSV檔 12 讀取 pandas")
 
 filename = 'data/twstock_all.csv'
 
@@ -284,7 +283,7 @@ print(dfprice)
 print('------------------------------------------------------------')	#60個
 
 print('讀取 csv 檔案')
-filename = 'csvReport.csv'
+filename = './data/csvReport.csv'
 with open(filename, encoding='utf-8') as csvFile: # 開啟csv檔案
     csvReader = csv.reader(csvFile)         # 讀檔案建立Reader物件
     listReport = list(csvReader)            # 將資料轉成串列  
@@ -297,10 +296,8 @@ print(listReport[2][3], listReport[2][6])
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
-
 print('讀取 csv 檔案')
-infilename = 'csvReport.csv'                  # 來源檔案
+infilename = './data/csvReport.csv'                  # 來源檔案
 outfilename = 'out19_6.csv'                   # 目的檔案
 with open(infilename, encoding='utf-8') as csvRFile: # 開啟csv檔案供讀取
     csvReader = csv.reader(csvRFile)    # 讀檔案建立Reader物件
@@ -315,7 +312,7 @@ with open(outfilename,'w',newline='') as csvOFile:
 """
 print('------------------------------------------------------------')	#60個
 
-filename = 'csvReport2.csv'
+filename = './data/csvReport2.csv'
 with open(filename) as csvFile:               # 開啟csv檔案
     csvReader = csv.reader(csvFile)     # 讀檔案建立Reader物件
     listReport = list(csvReader)        # 將資料轉成串列
@@ -458,13 +455,6 @@ with open(filename, newline='', encoding='utf-8') as csvfile:
         #print(row['姓名'], end = "\t")   #不能用
         print(row['電子郵件'], end = "\t")
         print(row['體重'])
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -741,7 +731,7 @@ plt.figure(figsize=(12, 8))                 # 設定繪圖區大小
 plt.plot(highTemps)
 plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -763,7 +753,7 @@ plt.figure(figsize=(12, 8))                 # 設定繪圖區大小
 plt.plot(dates, highTemps)                  # 圖標增加日期刻度
 plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -786,7 +776,7 @@ plt.plot(dates, highTemps)                  # 圖標增加日期刻度
 fig.autofmt_xdate()                         # 預設最佳化角度旋轉
 plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -809,7 +799,7 @@ plt.plot(dates, highTemps)                  # 圖標增加日期刻度
 fig.autofmt_xdate(rotation=60)              # 日期旋轉60度
 plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -841,10 +831,10 @@ plt.fill_between(dates,highTemps,lowTemps,color='y',alpha=0.2) # 填滿
 fig.autofmt_xdate()                         # 日期旋轉
 plt.title("2025年1月台北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
+print('aaa1')
 import matplotlib.pyplot as plt
 from datetime import datetime
 
@@ -893,10 +883,10 @@ plt.legend()
 fig.autofmt_xdate()                                 # 日期旋轉
 plt.title("2023年10月安勤公司日線圖", fontsize=24)
 plt.ylabel('價格', fontsize=14)
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
+print('aaa2')
 import matplotlib.pyplot as plt
 from datetime import datetime
 
@@ -943,85 +933,49 @@ plt.legend()
 fig.autofmt_xdate()                                 # 日期旋轉
 plt.title("2023年10月安勤公司日線圖", fontsize=24)
 plt.ylabel('價格', fontsize=14)
-plt.show()
+#plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import pandas as pd
 
 data = {'種類': ["Bike","Bus","Car","Truck"],
         '數量': [3,4,6,2],
         '輪數': ["2","4","4","6"] } 
 df = pd.DataFrame(data, index=["A","B","C","D"]) 
 
-df.to_csv("vehicles.csv",index=False,encoding="big5")
+df.to_csv("tmp_vehicles.csv",index=False,encoding="big5")
+df.to_json("tmp_vehicles1.json")
+df.to_json("tmp_vehicles2.json", force_ascii = False)
 
-df.to_json("vehicles1.json")
-df.to_json("vehicles2.json", force_ascii = False)
-
-"""
-#匯出DataFrame
-df.to_csv(filename)
-df.to_json(filename)
-df.to_html(filename)
-df.to_excel(filename)
-df.to_sql(table, con = engine)
-
-#匯入DataFrame
-df.read_csv(filename)
-df.read_json(filename)
-df.read_html(filename)
-df.read_excel(filename)
-df.read_sql(query, engine)
-"""
-import pandas as pd
-
-df1 = pd.read_csv("vehicles.csv", encoding="big5")
-df2 = pd.read_json("vehicles.json")
+df1 = pd.read_csv("tmp_vehicles.csv", encoding="big5")
+df2a = pd.read_json("tmp_vehicles1.json")
+df2b = pd.read_json("tmp_vehicles2.json")
 print(df1)
-print(df2)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
+print(df2a)
+print(df2b)
 
 print("------------------------------------------------------------")  # 60個
-
-import sys
-import numpy as np
-import pandas as pd
-
-print('------------------------------------------------------------')	#60個
 
 # pip install xlsxwriter
 
-#data = pd.read_csv('data/ExpensesRecord.csv')
-df = pd.read_excel('data/ExpensesRecord.xls', 'sheet')
+filename = 'C:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.xls'
+
+df = pd.read_excel(filename, 'sheet')
 #data = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html')
 print(df.head(5) )
 
 from pandas import ExcelWriter
 
-writer = ExcelWriter('test.xlsx', engine='xlsxwriter')
+writer = ExcelWriter('tmp_test.xlsx', engine='xlsxwriter')
 df.to_excel(writer, sheet_name='sheet2')
 writer.save()
 
 print('------------------------------------------------------------')	#60個
 
-df = pd.read_csv('data/ExpensesRecord.csv')
+filename = 'C:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.csv'
+
+df = pd.read_csv(filename)
 print(df.head(5) )
-df.to_csv("test.csv")
+df.to_csv("tmp_test.csv")
 
 print('------------------------------------------------------------')	#60個
 
@@ -1035,7 +989,8 @@ print(df[0].head(5) )
 
 print('------------------------------------------------------------')	#60個
 
-DataFrame = pd.read_csv('data/ExpensesRecord.csv')
+filename = 'C:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.csv'
+DataFrame = pd.read_csv(filename)
 print(DataFrame["說明"])
 print(DataFrame[["說明","支出金額"]] )
 
@@ -1044,12 +999,14 @@ print(df[["Math","English"]])
 
 print('------------------------------------------------------------')	#60個
 
-DataFrame = pd.read_csv('data/ExpensesRecord.csv')
+filename = 'C:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.csv'
+DataFrame = pd.read_csv(filename)
 DataFrame["單價"]=DataFrame["支出金額"]/DataFrame["數量"]
 print(DataFrame[["數量","支出金額","單價"]] )
 
 print('------------------------------------------------------------')	#60個
 
+""" no file
 df = pd.read_excel('AAPL.xlsx', 'AAPL')
 print(df.head())
 print(type(df))
@@ -1157,52 +1114,40 @@ print("April Open mean=%.2d" % df[df['month'] == 4][['Open']].mean())
 #  5 matplotlib
 import matplotlib.pyplot as plt
 df.plot(x='Date', y='Open',grid=True, color='blue')
-plt.show()
+#plt.show()
 
 import matplotlib.pyplot as plt
 df.plot( y='diff',grid=True, color='red',kind='hist')
-plt.show()
+#plt.show()
 
 fig, ax = plt.subplots()
 for name, group in df.groupby('month'):
     group.plot(x='day', y='Open', ax=ax, label=name)
-plt.show()
+#plt.show()
 
 fileds=['Open','Close','High']
 fig, ax = plt.subplots()
 for name in fileds:
     df.plot(x='Date', y=name, ax=ax, label=name)
-plt.show()
+#plt.show()
 
 dfMonths = df.loc[df['month'].isin([1,2,3,4,5,6,7])]
 print(dfMonths)
 dfMonthsPivot = dfMonths.pivot_table(values = 'High', columns = 'month', index = 'day')
 dfMonthsPivot.plot(kind = 'box',title = 'Months High')
-plt.show()
+#plt.show()
+"""
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
-
-
 
 
 
