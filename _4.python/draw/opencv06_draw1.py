@@ -17,6 +17,8 @@ cv之繪圖之順序
 多邊形	.polylines
 文字	.putText
 
+未指明line_width就是1點
+
 """
 
 import cv2
@@ -82,18 +84,6 @@ def draw_line(image):
 
     for i in range(W//100 + 1):
         cv2.line(image, (100*i, 0), (100*i, H), (0, 100, 0), 2, lineType=cv2.LINE_AA) #畫線 垂直線 G
-
-    #矩形之左上點
-    p1x, p1y = 10, 10
-    #矩形之右下點
-    p2x, p2y = W-10, H-10
-    cv2.rectangle(image,(p1x,p1y),(p2x,p2y),(100, 0, 0), 5)
-
-    #矩形之左上點
-    p1x, p1y = 10, 10
-    #矩形之右下點
-    p2x, p2y = W-10, H-10
-    cv2.rectangle(image,(p1x,p1y),(p2x,p2y),(100, 0, 0), 5)
 """
 bboxs = []
 box = {}
@@ -174,88 +164,49 @@ image = np.zeros((H, W,3), dtype='uint8')
 print('畫直線')
 color = (0, 0, 255) #B G R
 line_width = 10
-
 x1, y1 = 50, 50
 x2, y2 = 400, 50
-
-#畫線 起 終 色 寬
+#畫直線 起 終 色 寬
 cv2.line(image, (x1, y1), (x2, y2), color, line_width)
 cv2.line(image, (x1, y1), (x2, y2), 30)  #無color, 黑色線 1 點
 cv2.line(image, (x1, y1+30), (x2, y2+30), (0, 255, 0), 15, lineType=cv2.LINE_AA)
 
-cv2.line(image, (10, 10), (10+50, 10), (255, 0, 0), 5)
-cv2.line(image, (10, 20), (10+50, 20), (0, 255, 0), 5)
-
+print('畫箭頭')
 #畫箭頭 起 終 色 寬
 cv2.arrowedLine(image,(x1, y1+60),(x2, y2+60),(0,0,255),5)
 
+print('畫矩形 空心')
+color = (0, 0, 255) #B G R
+line_width = 5
 #畫矩形 左上 右下 色 寬
-x_st = 50
-y_st = 150
-w = 200
-h = 100
-cv2.rectangle(image,(x_st,y_st),(x_st+w,y_st+h),(0,0,255),5)
+w, h = 150, 100
+#矩形之左上點
+x1, y1 = 50, 150
+#矩形之右下點
+x2, y2 = x1+w, y1+h
+cv2.rectangle(image,(x1,y1),(x2,y2),color, line_width)
 
-#畫矩形 左上 右下 色 寬(-1, 填滿)
-x_st = 50
-y_st = 270
-w = 200
-h = 100
-cv2.rectangle(image,(x_st,y_st),(x_st+w,y_st+h),(0,0,255),-1)
-
-n = 300
-cv2.rectangle(image,(50+400,50),(n-100+400,n-50),(0,255,255),-1)
-
-cv2.rectangle(image, (100, 100), (200, 200), (128, 128, 128), 5)
-cv2.rectangle(image, (0, 0), (50, 50), (128, 128, 128), 5)
-
-
-
-
-print('畫矩形')
-x1, y1 = 100, 100
-x2, y2 = 300, 200
-
+print('畫矩形 實心')
 color = (0, 255, 0) #B G R
-line_width = 2
-#畫矩形, 空心 2
-cv2.rectangle(image, (x1, y1), (x2, y2), color, line_width)
+line_width = -1
+#畫矩形 左上 右下 色 寬(-1, 填滿)
+w, h = 150, 100
+#矩形之左上點
+x1, y1 = 50, 270
+#矩形之右下點
+x2, y2 = x1+w, y1+h
+cv2.rectangle(image,(x1,y1),(x2,y2),color, line_width)#線條寬度為負數 代表實心
 
-dy = 120
-x1, y1 = x1, y1 + dy
-x2, y2 = x2, y2 + dy
-#畫矩形, 實心 -1
-cv2.rectangle(image, (x1, y1), (x2, y2), (234, 151, 102), -1)#線條寬度為負數 代表實心
-
-
-#畫圓形
+print('畫圓形 空心')
 cx, cy = 300, 200#圓心
 radius = 50#半徑
 color = (0, 255, 255) #顏色
 linewidth = 2 #線寬
 cv2.circle(image, (cx, cy),radius,color,linewidth)  # 繪製圓形
-cv2.circle(image, (100, 100), 100, (0, 0, 255))
-cv2.circle(image, (300, 300), 60, (0, 0, 255), -1)
 
-#畫圓形
-cx, cy = 300, 300
-radius = 50#半徑
+print('畫圓形 實心')
 linewidth = -1 #線寬 負值代表實心
-cv2.circle(image,(cx, cy),radius,(0,255,0),linewidth)  # 設定 -1
-
-print('畫圓')
-cx = int(W / 2)
-cy = int(H / 2)
-r = 100
-color = (255, 255, 0)  #B G R
-line_width = 2
-
-#畫圓形, 空心 2
-cv2.circle(image, (cx, cy), r, color, line_width)
-
-#畫圓形, 實心 -1
-color = (255, 255, 0)  #B G R
-cv2.circle(image, (cx, cy), r // 3, color, -1)
+cv2.circle(image,(cx, cy),radius//2,color,linewidth)  # 設定 -1
 
 #畫橢圓形
 cx, cy = 200, 100  # 橢心
@@ -265,11 +216,10 @@ color = (0, 0, 255)
 linewidth = 5 #線條寬度, 負數代表實心
 
 #畫橢圓              中心  長軸 短軸 旋轉  開始 結束角度 顏色 線寬
-cv2.ellipse(image,(cx,cy),(AA,BB), angle, 0,360,(0,0,255),5)
+cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0,360,(0,0,255),5)
 cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0, 360, color, linewidth) #空心
 cv2.ellipse(image, (cx, cy), (AA//2, BB//2), angle, 0, 360, color, -1)  #實心
 cv2.ellipse(image, (256, 256), (100, 50),0,0,180,255,-1)
-
 
 # 改一塊顏色
 image[400:450, 50:100] = [0,0,255]
