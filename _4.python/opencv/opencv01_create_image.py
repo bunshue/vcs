@@ -6,10 +6,16 @@ OpenCV 基本使用
 
 import cv2
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -17,6 +23,7 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
@@ -85,27 +92,6 @@ plt.title("用np建立一個隨機影像陣列")
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("建立一個random圖像")
-
-W = 30
-H = 20
-
-image = (
-    np.random.choice([0, 50, 100, 150, 200, 255], size=W * H)
-    .reshape(H, W)
-    .astype(np.uint8)
-)
-
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 

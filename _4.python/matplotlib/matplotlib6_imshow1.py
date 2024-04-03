@@ -6,8 +6,6 @@ matplotlib直接對圖片處理 不經過opencv PIL
 opencv與PIL有自己的圖片處理, 只是使用matplotlib輸出
 """
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
-
 import matplotlib.cm as cm
 import matplotlib.image as img
 import pylab
@@ -45,69 +43,75 @@ plt.figure(
     frameon=True,
 )
 
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+image = img.imread(filename)
+
+#plt之讀取檔案 取得圖片資訊
+h, w, c = image.shape
+print(f"圖檔高度   = {h}")
+print(f"圖檔寬度   = {w}")
+print(f"圖檔通道數 = {c}")
+
 # 第一張圖
 plt.subplot(231)
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-# 裁剪圖片 plt
-
-print("使用 matplotlib 顯示一圖")
-image = img.imread(filename)
-
 plt.imshow(image)
-
+plt.title("顯示圖片")
 
 # 第二張圖
 plt.subplot(232)
 
+# 裁剪圖片 plt
 x_l, x_r = 150, 350  # 保留的部分，由左而右
 y_u, y_d = 150, 400  # 保留的部分，由上而下
 cut_img = image[y_u:y_d, x_l:x_r]
 
 plt.imshow(cut_img)
-
+plt.title("顯示裁剪圖片")
 
 # 第三張圖
 plt.subplot(233)
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-pict = img.imread(filename)
-plt.axis("off")
-plt.title("牡丹亭", fontsize=24)
-plt.imshow(pict)
 
 
 # 第四張圖
 plt.subplot(234)
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+print("二維 sinc 函數")
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+N = 100
 
-pict = img.imread(filename)
-h, w, c = pict.shape
-print(f"圖檔高度   = {h}")
-print(f"圖檔寬度   = {w}")
-print(f"圖檔通道數 = {c}")
-plt.axis("off")
-plt.title("牡丹亭", fontsize=24)
-plt.imshow(pict)
+sinc2d = np.zeros((N, N))
+for x, x1 in enumerate(np.linspace(-10, 10, N)):
+    for y, x2 in enumerate(np.linspace(-10, 10, N)):
+        sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)
+# print(sinc2d)
+
+# same
+x1 = np.linspace(-10, 10, N)
+x2 = np.linspace(-10, 10, N)
+sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
+# print(sinc2d)
+
+plt.imshow(sinc2d)
+plt.title("二維 sinc 函數")
 
 
+# 第五~六張圖
+
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+xx, yy = np.meshgrid(x, x)
+zz = np.sinc(np.sqrt((xx - 1) ** 2 + (yy - 1) ** 2))
 
 # 第五張圖
 plt.subplot(235)
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-image = img.imread(filename)
-plt.imshow(image)
+plt.imshow(zz)
+plt.title("default margins")
 
 # 第六張圖
 plt.subplot(236)
+plt.imshow(zz)
+plt.margins(0.2)
+plt.title("margins(0.2)")
 
 
 
@@ -240,8 +244,16 @@ print('已存圖' + filename)
 # 第二張圖
 plt.subplot(232)
 
-# Layer Images
+image = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]])
 
+plt.imshow(image, cmap="Blues")
+plt.colorbar()
+
+
+# 第三張圖
+plt.subplot(233)
+
+# Layer Images
 
 def func3(x, y):
     return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2 + y**2))
@@ -273,10 +285,6 @@ im2 = plt.imshow(
 )
 
 
-# 第三張圖
-plt.subplot(233)
-
-
 # 第四~五張圖
 
 # Subplots spacings and margins
@@ -292,28 +300,12 @@ plt.subplots_adjust(bottom=0.1, right=0.8, top=0.9)
 cax = plt.axes([0.85, 0.1, 0.075, 0.8])  # 設定位置
 plt.colorbar(cax=cax)
 
-
 # 第六張圖
 plt.subplot(236)
 
-print("二維 sinc 函數")
-
-N = 100
-
-sinc2d = np.zeros((N, N))
-for x, x1 in enumerate(np.linspace(-10, 10, N)):
-    for y, x2 in enumerate(np.linspace(-10, 10, N)):
-        sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)
-# print(sinc2d)
-
-# same
-x1 = np.linspace(-10, 10, N)
-x2 = np.linspace(-10, 10, N)
-sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
-# print(sinc2d)
-
-plt.imshow(sinc2d)
-plt.title("二維 sinc 函數")
+print("畫出 常態分布 二維 20 X 20")
+N = 20
+plt.imshow(np.random.randn(N, N))
 
 plt.show()
 
@@ -425,28 +417,41 @@ plt.title(r"建立$\sqrt{x^2 + y^2}$網格影像")
 # 第四張圖
 plt.subplot(234)
 
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-y = np.sinc(x)
-plt.plot(x, y)
-plt.margins(0.2, 0.2)
-plt.title("多了margins設定 ")
+print("imshow 顯示 numpy 資料")
+plt.rcParams["savefig.facecolor"] = "0.8"
 
-# 第五~六張圖
+arr = np.arange(256).reshape((16, 16))
 
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-xx, yy = np.meshgrid(x, x)
-zz = np.sinc(np.sqrt((xx - 1) ** 2 + (yy - 1) ** 2))
+plt.imshow(arr, interpolation="none")
+
+plt.tight_layout()
 
 # 第五張圖
 plt.subplot(235)
-plt.imshow(zz)
-plt.title("default margins")
+
+print("imshow 顯示 numpy 資料")
+
+arr = np.arange(256).reshape((16, 16))
+
+im = plt.imshow(arr, interpolation="none")
+
+plt.colorbar(im)
+
+plt.tight_layout()
 
 # 第六張圖
 plt.subplot(236)
-plt.imshow(zz)
-plt.margins(0.2)
-plt.title("margins(0.2)")
+
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+arr = np.arange(256).reshape((16, 16))
+im = plt.imshow(arr, interpolation="none")
+
+divider = make_axes_locatable(plt.gca())
+cax = divider.append_axes("right", "5%", pad="3%")
+plt.colorbar(im, cax=cax)
+
+plt.tight_layout()
 
 plt.show()
 
@@ -466,57 +471,6 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-print("imshow 顯示 numpy 資料")
-plt.rcParams["savefig.facecolor"] = "0.8"
-
-arr = np.arange(256).reshape((16, 16))
-
-plt.imshow(arr, interpolation="none")
-
-plt.tight_layout()
-
-
-# 第二張圖
-plt.subplot(232)
-
-print("imshow 顯示 numpy 資料")
-
-arr = np.arange(256).reshape((16, 16))
-
-im = plt.imshow(arr, interpolation="none")
-
-plt.colorbar(im)
-
-plt.tight_layout()
-
-# 第三張圖
-plt.subplot(233)
-
-from mpl_toolkits.axes_grid1 import make_axes_locatable
-
-arr = np.arange(256).reshape((16, 16))
-im = plt.imshow(arr, interpolation="none")
-
-divider = make_axes_locatable(plt.gca())
-cax = divider.append_axes("right", "5%", pad="3%")
-plt.colorbar(im, cax=cax)
-
-plt.tight_layout()
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-image = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]])
-
-plt.imshow(image, cmap="Blues")
-plt.colorbar()
-
-
-# 第五張圖
-plt.subplot(235)
-
 x = np.linspace(start=-10, stop=10, num=101)
 
 # plt.plot(x, np.absolute(x))
@@ -526,9 +480,8 @@ xx = x + 1j * x[:, np.newaxis]
 plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
 
 
-# 第六張圖
-plt.subplot(236)
-
+# 第二張圖
+plt.subplot(232)
 
 def f(x, y):
     return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2) - y**2)
@@ -545,35 +498,22 @@ plt.colorbar(shrink=0.83)
 plt.xticks(())
 plt.yticks(())
 
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="imshow 集合 6",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-print("畫出 常態分布 二維 20 X 20")
-N = 20
-plt.imshow(np.random.randn(N, N))
-
-# 第二張圖
-plt.subplot(232)
-
 
 # 第三張圖
 plt.subplot(233)
 
+print("建立一個random圖像")
+
+W = 30
+H = 20
+
+image = (
+    np.random.choice([0, 50, 100, 150, 200, 255], size=W * H)
+    .reshape(H, W)
+    .astype(np.uint8)
+)
+
+plt.imshow(image)
 
 # 第四張圖
 plt.subplot(234)
@@ -583,12 +523,13 @@ plt.subplot(234)
 plt.subplot(235)
 
 
+
 # 第六張圖
 plt.subplot(236)
 
 
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

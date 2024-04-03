@@ -105,7 +105,7 @@ th = np.arange(0, 360)
 x = np.cos(np.radians(th))
 y = np.sin(np.radians(th))
 
-plt.plot(x, y)
+plt.plot(x, y, 'steelblue')
 plt.axis("equal")  # 軸比例
 
 # 第五張圖
@@ -463,10 +463,20 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+y = np.sinc(x)
+plt.plot(x, y)
+#plt.margins(0.2, 0.2)
+plt.title("無 margins設定 ")
 
 # 第二張圖
 plt.subplot(232)
 
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+y = np.sinc(x)
+plt.plot(x, y)
+plt.margins(0.2, 0.2)
+plt.title("有 margins設定 ")
 
 # 第三張圖
 plt.subplot(233)

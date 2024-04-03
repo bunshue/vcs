@@ -70,6 +70,7 @@ plt.hist(
     label="Normal distribution",
 )
 plt.title("histtype 1 : bar")
+plt.text(50, 250, r"$\mu=100,\ \sigma=15$")
 
 # 第二張圖
 plt.subplot(232)

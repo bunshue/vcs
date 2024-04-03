@@ -1,5 +1,5 @@
 """
-plt之基本設定
+plt之基本設定 座標軸設定
 
 """
 
@@ -170,13 +170,25 @@ plt.xticks(
     ],
 )
 
-# plt.legend()
-plt.legend(loc="best")
+"""
+# 圖例設定
+# 設定圖例標籤位置 ( best, upper, lower, right,left,center )
+plt.legend(loc=0)
+plt.legend(loc='upper right')
+plt.legend(loc="upper right")
+plt.legend(loc="lower center")
+plt.legend(loc=6)
+plt.legend(loc='best')
+"""
 plt.legend()
 
-plt.legend(loc="upper right")
-
-# plt.grid(True)  #顯示格線
+"""
+# 格線設定
+plt_grid()
+plt.grid(True)  #顯示格線
+plt.grid(True, linestyle='-.') # 設置背景網格
+plt.grid(axis="y")  # 加上y格線
+"""
 plt.grid(color="0.8")  # 顯示格線
 
 
