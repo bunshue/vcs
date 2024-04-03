@@ -52,7 +52,7 @@ def codeocr(offset):
         except IndexError:
             pass
     
-    cv2.imwrite("temp.png", grayimg)  #存檔             
+    cv2.imwrite("tmp_temp.png", grayimg)  #存檔             
     _, inv = cv2.threshold(grayimg, 150, 255, cv2.THRESH_BINARY_INV)  #轉為反相黑白
     for i in range(len(inv)):  #i為每一列
         for j in range(len(inv[i])):  #j為每一行
@@ -69,7 +69,7 @@ def codeocr(offset):
                     inv[i][j] = 0  #將白點去除    
             
     dilation = cv2.dilate(inv, (8, 8), iterations = 1)  #圖形加粗
-    cv2.imwrite("final.png", dilation)
+    cv2.imwrite("tmp_final.png", dilation)
 
 # 主程式  
 offset = 1

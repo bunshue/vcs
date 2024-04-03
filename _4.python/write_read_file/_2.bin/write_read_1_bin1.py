@@ -5,9 +5,11 @@ import sys
 import time
 import random
 
+filename = 'tmp_write_read_bin01.csv'
+
 print('------------------------------------------------------------')	#60個
 
-filename = 'tmp_binary256.bin'
+filename = 'tmp_write_read_bin01_binary256.bin'
 
 print('建立一個0~255的binary檔案')
 binary_data = bytes(range(0,256))
@@ -16,7 +18,7 @@ with open(filename, 'wb') as f:
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'tmp_binary256.bin'
+filename = 'tmp_write_read_bin01_binary256.bin'
 
 print('測試移動檔案指標, 讀取一個0~255的binary檔案')
 
@@ -36,7 +38,7 @@ print('------------------------------------------------------------')	#60個
 print('複製binary檔案')
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'tmp_picture1_copied.jpg'
+filename2 = 'tmp_write_read_bin02_picture1_copied.jpg'
 
 tmp = ''
 
@@ -99,7 +101,7 @@ int1 = 65
 float1 = 3.14
 int2s = [1, 2, 3]
 
-outfname = 'tmp_test.bin'
+outfname = 'tmp_write_read_bin03.bin'
 outfile = open(outfname, 'wb')
 
 outfile.write(bytestr1)
@@ -126,7 +128,9 @@ with open('../data/mm.jpg', 'rb') as f:
     # 将图片处理成BASE-64编码
     print(base64.b64encode(data))
 
-with open('tmp_girl.jpg', 'wb') as f:
+filename = 'tmp_write_read_bin04_girl.jpg'
+
+with open(filename, 'wb') as f:
     f.write(data)
 print('写入完成!')
 

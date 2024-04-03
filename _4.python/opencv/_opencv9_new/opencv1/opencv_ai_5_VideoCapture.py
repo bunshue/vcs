@@ -14,187 +14,9 @@ print("------------------------------------------------------------")  # 60個
 import cv2
 import numpy as np
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread(filename)
-
-def show_xy(event,x,y,flags,userdata):
-    print(event,x,y,flags)
-    # 印出相關參數的數值，userdata 可透過 setMouseCallback 第三個參數垂遞給函式
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)  # 設定偵測事件的函式與視窗
-
-cv2.waitKey(0)     # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-
-def show_xy(event,x,y,flags,param):
-    if event == 0:
-        img2 = img.copy()                         # 當滑鼠移動時，複製原本的圖片
-        cv2.circle(img2, (x,y), 10, (0,0,0), 1)   # 繪製黑色空心圓
-        cv2.imshow('ImageShow', img2)            # 顯示繪製後的影像
-    if event == 1:
-        color = img[y,x]                          # 當滑鼠點擊時
-        print(color)                              # 印出顏色
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-
-dots = []   # 記錄座標的空串列
-def show_xy(event,x,y,flags,param):
-    if event == 1:
-        dots.append([x, y])                          # 記錄座標
-        cv2.circle(img, (x, y), 10, (0,0,255), -1)   # 在點擊的位置，繪製圓形
-        num = len(dots)                              # 目前有幾個座標
-        if num > 1:                                  # 如果有兩個點以上
-            x1 = dots[num-2][0]
-            y1 = dots[num-2][1]
-            x2 = dots[num-1][0]
-            y2 = dots[num-1][1]
-            cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)  # 取得最後的兩個座標，繪製直線
-        cv2.imshow('ImageShow', img)
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread('mona.jpg')
-
-dot1 = []                          # 記錄第一個座標
-dot2 = []                          # 記錄第二個座標
-
-# 滑鼠事件發生時要執行的函式
-def show_xy(event,x,y,flags,param):
-    global dot1, dot2, img         # 在函式內使用全域變數
-    # 滑鼠拖曳發生時
-    if flags == 1:
-        if event == 1:
-            dot1 = [x, y]          # 按下滑鼠時記錄第一個座標
-        if event == 0:
-            img2 = img.copy()      # 拖曳時不斷複製 img
-            dot2 = [x, y]          # 拖曳時不斷更新第二個座標
-            # 根據兩個座標繪製四邊形
-            cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            # 不斷顯示新圖片 ( 如果不這麼做，會出現一堆四邊形殘影 )
-            cv2.imshow('ImageShow', img2)
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)   # 按下任意鍵結束
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread('mona.jpg')
-
-dot1 = []
-dot2 = []
-def show_xy(event,x,y,flags,param):
-    global dot1, dot2, img, img2    # 因為要讓 img = img2，所以也要宣告 img2 為全域變數
-    if flags == 1:
-        if event == 1:
-            dot1 = [x, y]
-        if event == 0:
-            img2 = img.copy()
-            dot2 = [x, y]
-            cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            cv2.imshow('ImageShow', img2)
-        if event == 4:
-            img = img2   # 滑鼠放開時 ( event == 4 )，將 img 更新為 img2
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread('mona.jpg')
-
-dot1 = []
-dot2 = []
-def show_xy(event,x,y,flags,param):
-    global dot1, dot2, img, img2
-    if flags == 1:
-        if event == 1:
-            dot1 = [x, y]
-        if event == 0:
-            img2 = img.copy()
-            dot2 = [x, y]
-            cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            cv2.imshow('ImageShow', img2)
-        if event == 4:
-            level = 8                                         # 縮小比例 ( 可當作馬賽克的等級 )
-            h = int((dot2[0] - dot1[0]) / level)              # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
-            w = int((dot2[1] - dot1[1]) / level)              # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
-            mosaic = img[dot1[1]:dot2[1], dot1[0]:dot2[0]]    # 取得馬賽克區域
-            mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_LINEAR)   # 根據縮小尺寸縮小
-            mosaic = cv2.resize(mosaic, (dot2[0] - dot1[0], dot2[1] - dot1[1]), interpolation=cv2.INTER_NEAREST) # 放大到原本的大小
-            img[dot1[1]:dot2[1], dot1[0]:dot2[0]] = mosaic   # 置換成馬賽克的影像
-            cv2.imshow('ImageShow', img)
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-dots = []   # 建立空串列記錄座標
-w = 420
-h = 240
-draw = np.zeros((h,w,4), dtype='uint8')   # 建立 420x240 的 RGBA 黑色畫布
-
-def show_xy(event,x,y,flags,param):
-    global dots, draw                     # 定義全域變數
-    if flags == 1:
-        if event == 1:
-            dots.append([x,y])            # 如果拖曳滑鼠剛開始，記錄第一點座標
-        if event == 4:
-            dots = []                     # 如果放開滑鼠，清空串列內容
-        if event == 0 or event == 4:
-            dots.append([x,y])            # 拖曳滑鼠時，不斷記錄座標
-            x1 = dots[len(dots)-2][0]     # 取得倒數第二個點的 x 座標
-            y1 = dots[len(dots)-2][1]     # 取得倒數第二個點的 y 座標
-            x2 = dots[len(dots)-1][0]     # 取得倒數第一個點的 x 座標
-            y2 = dots[len(dots)-1][1]     # 取得倒數第一個點的 y 座標
-            cv2.line(draw,(x1,y1),(x2,y2),(0,0,255,255),2)  # 畫直線
-        cv2.imshow('ImageShow', draw)
-
-cv2.imshow('ImageShow', draw)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-while True:
-    keyboard = cv2.waitKey(5)                    # 每 5 毫秒偵測一次鍵盤事件
-    if keyboard == ord('q'):
-        break                                    # 如果按下 q 就跳出
-    if keyboard == ord('r'):
-        draw = np.zeros((h,w,4), dtype='uint8')  # 如果按下 r 就變成原本全黑的畫布
-        cv2.imshow('ImageShow', draw)
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_57")
 
 """ webcam
 cap = cv2.VideoCapture(0)                 # 讀取攝影鏡頭
@@ -251,123 +73,13 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-cv2.namedWindow('ImageShow')  # 建立一個名為 ImageShow 的視窗
-
-while True:
-    keycode = cv2.waitKey(0)   # 持續等待，直到按下鍵盤按鍵才會繼續
-    c = chr(keycode)           # 將 ASCII 代碼轉換成真實字元
-    print(c, keycode)          # 印出結果
-    if keycode == 27:
-        break                  # 如果代碼等於 27，結束迴圈 ( 27 表示按鍵 ESC )
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread('mona.jpg')
-
-# 定義調整亮度對比的函式
-def adjust(i, c, b):
-    output = i * (c/100 + 1) - c + b    # 轉換公式
-    output = np.clip(output, 0, 255)
-    output = np.uint8(output)
-    return output
-
-contrast = 0    # 初始化要調整對比度的數值
-brightness = 0  # 初始化要調整亮度的數值
-cv2.imshow('ImageShow', img)
-
-while True:
-    keycode = cv2.waitKey(0)
-    if keycode == 0:
-        brightness = brightness + 5    # 按下鍵盤的「上」，增加亮度
-    if keycode == 1:
-        brightness = brightness - 5    # 按下鍵盤的「下」，減少亮度
-    if keycode == 2:
-        contrast = contrast - 5        # 按下鍵盤的「右」，增加對比度
-    if keycode == 3:
-        contrast = contrast + 5        # 按下鍵盤的「左」，減少對比度
-    if keycode == 113:
-        contrast, brightness = 0, 0    # 按下鍵盤的「q」，恢復預設值
-    if keycode == 27:
-        break
-    show = img.copy()                  # 複製原始圖片
-    show = adjust(show, contrast, brightness)  # 根據亮度和對比度的調整值，輸出新的圖片
-    cv2.imshow('ImageShow', show)
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread('mona.jpg')
-cv2.imshow('ImageShow', img)
-
-def test(val):
-    print(val)
-
-cv2.createTrackbar('test', 'ImageShow', 0, 255, test)
-cv2.setTrackbarPos('test', 'ImageShow', 50)
-
-keycode = cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread('mona.jpg')
-cv2.imshow('ImageShow', img)
-
-contrast = 0    # 初始化要調整對比度的數值
-brightness = 0  # 初始化要調整亮度的數值
-cv2.imshow('ImageShow', img)
-
-# 定義調整亮度對比的函式
-def adjust(i, c, b):
-    output = i * (c/100 + 1) - c + b    # 轉換公式
-    output = np.clip(output, 0, 255)
-    output = np.uint8(output)
-    cv2.imshow('ImageShow', output)
-
-# 定義調整亮度函式
-def brightness_fn(val):
-    global img, contrast, brightness
-    brightness = val - 100
-    adjust(img, contrast, brightness)
-
-# 定義調整對比度函式
-def contrast_fn(val):
-    global img, contrast, brightness
-    contrast = val - 100
-    adjust(img, contrast, brightness)
-
-cv2.createTrackbar('brightness', 'ImageShow', 0, 200, brightness_fn)  # 加入亮度調整滑桿
-cv2.setTrackbarPos('brightness', 'ImageShow', 100)
-cv2.createTrackbar('contrast', 'ImageShow', 0, 200, contrast_fn)      # 加入對比度調整滑桿
-cv2.setTrackbarPos('contrast', 'ImageShow', 100)
-
-keycode = cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread('mona.jpg')
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)   # 將圖片轉成灰階
-
-face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")   # 載入人臉模型
-faces = face_cascade.detectMultiScale(gray)    # 偵測人臉
-
-for (x, y, w, h) in faces:
-    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)    # 利用 for 迴圈，抓取每個人臉屬性，繪製方框
-
-cv2.imshow('ImageShow', img)
-cv2.waitKey(0) # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_63")
 
 """ webcam
 cap = cv2.VideoCapture(0)
-face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-faces = face_cascade.detectMultiScale(gray)
+xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
+faces = face_cascade_classifier.detectMultiScale(gray)
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -378,7 +90,7 @@ while True:
         break
     frame = cv2.resize(frame,(540,320))              # 縮小尺寸，避免尺寸過大導致效能不好
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)   # 將鏡頭影像轉換成灰階
-    faces = face_cascade.detectMultiScale(gray)      # 偵測人臉
+    faces = face_cascade_classifier.detectMultiScale(gray)      # 偵測人臉
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 標記人臉
     cv2.imshow('ImageShow', frame)
@@ -390,29 +102,13 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread('mona.jpg')
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 影像轉換成灰階
-face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml") # 載入人臉偵測模型
-faces = face_cascade.detectMultiScale(gray,1.2,3)  # 開始辨識影像中的人臉
 
-for (x, y, w, h) in faces:
-    mosaic = img[y:y+h, x:x+w]   # 馬賽克區域
-    level = 15                   # 馬賽克程度
-    mh = int(h/level)            # 根據馬賽克程度縮小的高度
-    mw = int(w/level)            # 根據馬賽克程度縮小的寬度
-    mosaic = cv2.resize(mosaic, (mw,mh), interpolation=cv2.INTER_LINEAR) # 先縮小
-    mosaic = cv2.resize(mosaic, (w,h), interpolation=cv2.INTER_NEAREST)  # 然後放大
-    img[y:y+h, x:x+w] = mosaic   # 將指定區域換成馬賽克區域
-
-cv2.imshow('ImageShow', img)
-cv2.waitKey(0)   # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_65")
 
 """ webcam
 cap = cv2.VideoCapture(0)
-face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -423,7 +119,7 @@ while True:
         break
     frame = cv2.resize(frame,(480,300))              # 縮小尺寸，避免尺寸過大導致效能不好
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)   # 影像轉轉灰階
-    faces = face_cascade.detectMultiScale(gray)      # 偵測人臉
+    faces = face_cascade_classifier.detectMultiScale(gray)      # 偵測人臉
     for (x, y, w, h) in faces:
         mosaic = frame[y:y+h, x:x+w]
         level = 15
@@ -438,32 +134,11 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread('girl.jpg')
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)   # 圖片轉灰階
-#gray = cv2.medianBlur(gray, 5)                # 如果一直偵測到雜訊，可使用模糊的方式去除雜訊
-
-eye_cascade = cv2.CascadeClassifier("haarcascade_eye.xml")  # 使用眼睛模型
-eyes = eye_cascade.detectMultiScale(gray)                       # 偵測眼睛
-for (x, y, w, h) in eyes:
-    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)      # 標記綠色方框
-
-mouth_cascade = cv2.CascadeClassifier("haarcascade_mcs_mouth.xml")  # 使用嘴巴模型
-mouths = mouth_cascade.detectMultiScale(gray)                           # 偵測嘴巴
-for (x, y, w, h) in mouths:
-    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 255), 2)              # 標記紅色方框
-
-nose_cascade = cv2.CascadeClassifier("haarcascade_mcs_nose.xml")    # 使用鼻子模型
-noses = nose_cascade.detectMultiScale(gray)                             # 偵測鼻子
-for (x, y, w, h) in noses:
-    cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)              # 標記藍色方框
-
-cv2.imshow('ImageShow', img)
-cv2.waitKey(0)   # 按下任意鍵停止
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+print("OpenCV_ai_67")
 
 """ webcam
 cap = cv2.VideoCapture(0)
@@ -501,73 +176,16 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread('cars.jpg')                    # 讀取街道影像
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    # 轉換成黑白影像
-
-car = cv2.CascadeClassifier("cars.xml")    # 讀取汽車模型
-gray = cv2.medianBlur(gray, 5)                  # 模糊化去除雜訊
-cars = car.detectMultiScale(gray, 1.1, 3)       # 偵測汽車
-for (x, y, w, h) in cars:
-    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 繪製外框
-
-cv2.imshow('ImageShow', img)
-cv2.waitKey(0) # 按下任意鍵停止
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-img = cv2.imread('cars.jpg')                    # 讀取街道影像
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    # 轉換成黑白影像
-
-car = cv2.CascadeClassifier("haarcascade_fullbody.xml")    # 讀取人體模型
-gray = cv2.medianBlur(gray, 5)                  # 模糊化去除雜訊
-cars = car.detectMultiScale(gray, 1.1, 3)       # 偵測行人
-for (x, y, w, h) in cars:
-    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 繪製外框
-
-cv2.imshow('ImageShow', img)
-cv2.waitKey(0)     # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-detector = cv2.CascadeClassifier('xml/haarcascade_frontalface_default.xml')  # 載入人臉追蹤模型
-recog = cv2.face.LBPHFaceRecognizer_create()      # 啟用訓練人臉模型方法
-faces = []   # 儲存人臉位置大小的串列
-ids = []     # 記錄該人臉 id 的串列
-
-for i in range(1,31):
-    img = cv2.imread(f'face01/{i}.jpg')           # 依序開啟每一張蔡英文的照片
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 色彩轉換成黑白
-    img_np = np.array(gray,'uint8')               # 轉換成指定編碼的 numpy 陣列
-    face = detector.detectMultiScale(gray)        # 擷取人臉區域
-    for(x,y,w,h) in face:
-        faces.append(img_np[y:y+h,x:x+w])         # 記錄蔡英文人臉的位置和大小內像素的數值
-        ids.append(1)                             # 記錄蔡英文人臉對應的 id，只能是整數，都是 1 表示蔡英文的 id 為 1
-
-for i in range(1,16):
-    img = cv2.imread(f'face02/{i}.jpg')           # 依序開啟每一張川普的照片
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 色彩轉換成黑白
-    img_np = np.array(gray,'uint8')               # 轉換成指定編碼的 numpy 陣列
-    face = detector.detectMultiScale(gray)        # 擷取人臉區域
-    for(x,y,w,h) in face:
-        faces.append(img_np[y:y+h,x:x+w])         # 記錄川普人臉的位置和大小內像素的數值
-        ids.append(2)                             # 記錄川普人臉對應的 id，只能是整數，都是 2 表示川普的 id 為 2
-
-print('training...')                              # 提示開始訓練
-recog.train(faces,np.array(ids))                  # 開始訓練
-recog.save('face.yml')                            # 訓練完成儲存為 face.yml
-print('ok!')
-
-print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_71")
 
 """ webcam
 recognizer = cv2.face.LBPHFaceRecognizer_create()         # 啟用訓練人臉模型方法
 recognizer.read('face.yml')                               # 讀取人臉模型檔
-cascade_path = "xml/haarcascade_frontalface_default.xml"  # 載入人臉追蹤模型
-face_cascade = cv2.CascadeClassifier(cascade_path)        # 啟用人臉追蹤
+xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)        # 啟用人臉追蹤
 
 cap = cv2.VideoCapture(0)                                 # 開啟攝影機
 if not cap.isOpened():
@@ -580,7 +198,7 @@ while True:
         break
     img = cv2.resize(img,(540,300))              # 縮小尺寸，加快辨識效率
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  # 轉換成黑白
-    faces = face_cascade.detectMultiScale(gray)  # 追蹤人臉 ( 目的在於標記出外框 )
+    faces = face_cascade_classifier.detectMultiScale(gray)  # 追蹤人臉 ( 目的在於標記出外框 )
 
     # 建立姓名和 id 的對照表
     name = {
@@ -607,6 +225,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_72")
 
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
@@ -633,6 +252,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_73")
 
 tracker = cv2.TrackerCSRT_create()  # 創建追蹤器
 tracking = False                    # 設定 False 表示尚未開始追蹤
@@ -669,6 +289,9 @@ cap.release()
 cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_74")
+"""
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
 tracker_list = []
 for i in range(3):
@@ -677,7 +300,7 @@ for i in range(3):
 colors = [(0,0,255),(0,255,255),(255,255,0)]  # 設定三個外框顏色
 tracking = False                              # 設定 False 表示尚未開始追蹤
 
-cap = cv2.VideoCapture('test.mov')            # 讀取某個影片
+cap = cv2.VideoCapture(video_filename)            # 讀取某個影片
 a = 0                                         # 刪減影片影格使用
 if not cap.isOpened():
     print("Cannot open camera")
@@ -713,8 +336,9 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_75")
 
 """ webcam
 multiTracker = cv2.legacy.MultiTracker_create()  # 建立多物件追蹤器
@@ -762,18 +386,10 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
-
-lower = np.array([30,40,200])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
-upper = np.array([90,100,255]) # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
-img = cv2.imread('oxxo.jpg')
-mask = cv2.inRange(img, lower, upper)             # 使用 inRange
-output = cv2.bitwise_and(img, img, mask = mask )  # 套用影像遮罩
-cv2.imwrite('output.jpg', output)
-cv2.waitKey(0)                                    # 按下任意鍵停止
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+print("OpenCV_ai_77")
 
 lower = np.array([30,40,200])   # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
 upper = np.array([90,100,255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
@@ -795,6 +411,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_78")
 
 lower = np.array([30,40,200])   # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
 upper = np.array([90,100,255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
@@ -820,6 +437,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_79")
 
 lower = np.array([30,40,200])
 upper = np.array([90,100,255])
@@ -853,6 +471,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_80")
 
 lower = np.array([30,40,200])
 upper = np.array([90,100,255])
@@ -892,6 +511,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_81")
 
 lower = np.array([30,40,200])   # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
 upper = np.array([90,100,255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
@@ -925,6 +545,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_82")
 
 lower = np.array([30,40,200])
 upper = np.array([90,100,255])
@@ -976,6 +597,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_83")
 
 import mediapipe as mp
 
@@ -1013,6 +635,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_84")
 
 import mediapipe as mp     # 載入 mediapipe 函式庫
 
@@ -1045,6 +668,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_85")
 
 import mediapipe as mp
 
@@ -1092,6 +716,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_86")
 
 import mediapipe as mp
 
@@ -1153,6 +778,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_87")
 
 import mediapipe as mp
 
@@ -1215,6 +841,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_88")
 
 import mediapipe as mp
 
@@ -1258,6 +885,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_89")
 
 import mediapipe as mp
 
@@ -1317,6 +945,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_90")
 
 import mediapipe as mp
 
@@ -1356,6 +985,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_91")
 
 import mediapipe as mp
 
@@ -1403,6 +1033,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_92")
 
 import mediapipe as mp
 
@@ -1451,6 +1082,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_93")
 
 import mediapipe as mp
 
@@ -1492,6 +1124,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_94")
 
 import mediapipe as mp
 
@@ -1527,6 +1160,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_95")
 
 import mediapipe as mp
 
@@ -1668,6 +1302,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_96")
 
 import mediapipe as mp
 
@@ -1829,6 +1464,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_97")
 
 import mediapipe as mp
 
@@ -1979,6 +1615,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_98")
 
 w = 640    # 定義影片寬度
 h = 360    # 定義影像高度
@@ -2023,6 +1660,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+print("OpenCV_ai_99")
 
 w = 640    # 定義影片寬度
 h = 360    # 定義影像高度
@@ -2533,16 +2171,30 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
