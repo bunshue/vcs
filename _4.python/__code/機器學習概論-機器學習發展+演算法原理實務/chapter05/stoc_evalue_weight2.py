@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import sys
 import numpy as np 
@@ -24,9 +23,9 @@ weightlist =[]
 # 2.对抽取之后的行向量应用动态步长
 # 3.进行梯度计算
 # 4.求得行向量的权值，合并为矩阵的权值
-for j in xrange(steps):
+for j in range(steps):
 	dataIndex = range(m) # 以导入数据的行数m为个数产生索引向量:0~99
-	for i in xrange(m):
+	for i in range(m):
 		alpha = 2/(1.0+j+i)+0.0001  #动态修改alpha步长从4->0.016
 		randIndex = int(random.uniform(0,len(dataIndex)))	#生成0~m之间随机索引
 		vectSum = sum(dataMat[randIndex]*weights.T) # 计算dataMat随机索引与权重的点积和
@@ -51,5 +50,6 @@ axes2.plot(X1,weightmat[:,1]); #
 axes2.set_ylabel('weight[1]')
 axes3.plot(X1,weightmat[:,2]); #
 axes3.set_ylabel('weight[2]') 
+
 plt.show()
 

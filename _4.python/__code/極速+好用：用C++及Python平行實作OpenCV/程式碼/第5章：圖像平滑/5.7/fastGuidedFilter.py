@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 import sys
 import cv2
 import numpy as np
 from fastMeanBlur import fastMeanBlur#导入快速均值平滑
+
 #快速导向滤波，输入的图像数据类型为归一到[0,1]的浮点型
 #s属于(0,1] ,
 #建议 r>=4, 1/r=<s<=4/r 
@@ -37,13 +37,15 @@ def fastGuidedFilter(I,p,r,eps,s):
     mean_b = cv2.resize(mean_small_b,dsize=(cols,rows),interpolation=cv2.INTER_LINEAR)
     q = mean_a*I + mean_b
     return q
+
 #彩色快速导向滤波（平滑）
 def fGFColorSmooth(I,r,eps,s):
     q_color = np.zeros(I.shape,np.float64)
     #对每一个通道进行导向滤波
-    for c in xrange(3):
+    for c in range(3):
         q_color[:,:,c] = fastGuidedFilter(I[:,:,c],I[:,:,c],r,eps,s)
     return q_color
+
 #细节增强
 def fGFEnchance(I,r,eps,s):
     #导向平滑处理
@@ -51,7 +53,7 @@ def fGFEnchance(I,r,eps,s):
     #细节增强处理
     enchanced = (I - qColor)*5 + qColor
     '''
-    for c in xrange(3):
+    for c in range(3):
         enchanced[:,:,c] = cv2.normalize(enchanced[:,:,c],alpha = 1,beta = 0,norm_type = cv2.NORM_MINMAX)
     '''
     enchanced = cv2.normalize(enchanced,alpha = 1,beta = 0,norm_type = cv2.NORM_MINMAX)
@@ -61,7 +63,7 @@ if __name__ =="__main__":
     if len(sys.argv) > 1: 
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_COLOR)
     else:
-        print "Usge:python fastGuidedFilter.py imageFile"
+        print("Usge:python fastGuidedFilter.py imageFile")
     #显示原图
     cv2.imshow("image",image)
     #快速导向滤波（彩色图像平滑）

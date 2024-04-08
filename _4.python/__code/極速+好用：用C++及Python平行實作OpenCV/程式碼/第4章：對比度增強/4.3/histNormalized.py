@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+
 #直方图正规化
 #1、若输入是 8 位图 ，一般设置 O_min = 0，O_max = 255
 #2、若输入的是归一化的图像，一般设置 O_min = 0，O_max = 1
@@ -17,16 +17,17 @@ def histNormalized(InputImage,O_min = 0,O_max = 255):
     OutputImage = np.zeros(InputImage.shape,np.float32)
     #输出图像的映射
     cofficient = float(O_max - O_min)/float(I_max - I_min)
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             OutputImage[r][c] = cofficient*( InputImage[r][c] - I_min) + O_min
     return OutputImage
+
 #主函数
 if __name__ =="__main__":
     if len(sys.argv) > 1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python histNormalized.py imageFile"
+        print("Usge:python histNormalized.py imageFile")
     #显示原图
     cv2.imshow("image",image)
     #直方图正规化

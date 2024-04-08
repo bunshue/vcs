@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Filename : testRecomm01.py
-
 from numpy import *
 import numpy as np 
 import operator
@@ -14,6 +11,7 @@ A = mat([[0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5],[0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 3],
          [0, 0, 0, 2, 0, 2, 5, 0, 0, 1, 2],[0, 0, 0, 0, 5, 0, 0, 0, 0, 4, 0],])
 new = mat([[1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0]])
 indx,resultarray= recommand(A,new,r=2,rank=2,distCalc=cosSim)
-print indx
-print resultarray
+print(indx)
+print(resultarray)
+
 

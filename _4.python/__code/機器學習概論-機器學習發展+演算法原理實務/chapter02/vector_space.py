@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import sys  
 import os 
 #引入Bunch类
@@ -9,10 +7,6 @@ import cPickle as pickle
 from sklearn import feature_extraction  
 from sklearn.feature_extraction.text import TfidfTransformer  
 from sklearn.feature_extraction.text import TfidfVectorizer  
-
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 # 读取文件
 def readfile(path):
@@ -57,4 +51,4 @@ tfidfspace.vocabulary = vectorizer.vocabulary_
 space_path = "train_word_bag/tfdifspace.dat"        # 词向量空间保存路径
 writebunchobj(space_path,tfidfspace)
 
-print "if-idf词向量空间创建成功！！！"
+print("if-idf词向量空间创建成功！！！")

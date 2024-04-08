@@ -1,16 +1,17 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 from scipy import signal
 import cv2
 import math
 from gaussBlur import gaussBlur#高斯平滑
+
 '''
     laplacian 边缘检测算法:
     laplacian(image,_boundary='fill',_fillvalue=0)
     其中：边缘处理的方式_boundary包括：'symm','wrap','fill',
     且当__boundary='fill'时，填充值默认为零_fillvalue=0
 '''
+
 def laplacian(image,_boundary='fill',_fillvalue=0):
     #拉普拉斯卷积核
     #laplacianKernel = np.array([[0,-1,0],[-1,4,-1],[0,-1,0]],np.float32)
@@ -23,7 +24,7 @@ if __name__ =="__main__":
     if len(sys.argv)>1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python laplacian.py imageFile"
+        print("Usge:python laplacian.py imageFile")
     #显示原图
     cv2.imshow("image.jpg",image)
     cv2.imwrite("image.jpg",image)
@@ -65,8 +66,8 @@ if __name__ =="__main__":
     #图像抽象化
     rows,cols = imageBlur_conv_lap.shape
     imageAbstraction = np.copy(imageBlur_conv_lap)
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             if imageAbstraction[r][c] > 0:
                 imageAbstraction[r][c] = 1
             else:

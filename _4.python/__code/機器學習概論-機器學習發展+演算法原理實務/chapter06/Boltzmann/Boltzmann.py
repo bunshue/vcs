@@ -1,7 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-# Filename : Boltzmann.py
-
-import operator
+﻿import operator
 import Untils
 from numpy import *
 import copy
@@ -12,8 +9,8 @@ def distM(matA,matB):
 	ma,na = shape(matA);
 	mb,nb = shape(matB);
 	rtnmat= zeros((ma,nb))
-	for i in xrange(ma):
-		for j in xrange(nb):
+	for i in range(ma):
+		for j in range(nb):
 			rtnmat[i,j] = sqrt(sum(power(matA[i,:] - matB[:,j].T,2)))
 	return 	rtnmat
 	
@@ -22,7 +19,7 @@ def pathLen(dist,path):
 	# 长度为N的向量，包含从1-N的整数
 	N = len(path)
 	plen = 0;
-	for i in xrange(0,N-1):
+	for i in range(0,N-1):
 		plen += dist[path[i], path[i+1]]
 	plen +=  dist[path[0], path[N-1]]
 	return plen
@@ -102,7 +99,7 @@ def boltzmann(cityPosition,MAX_ITER = 2000,T0 = 1000,Lambda = 0.97):
   bestd = min(di) 
   indx = argmin(di)
   bestx = xx[indx]
-  print "循环迭代",k,"次"
-  print "最优解:",bestd
-  print "最佳路线:",bestx	
-  return bestx,di	
+  print("循环迭代",k,"次")
+  print("最优解:",bestd)
+  print("最佳路线:",bestx)
+  return bestx,di

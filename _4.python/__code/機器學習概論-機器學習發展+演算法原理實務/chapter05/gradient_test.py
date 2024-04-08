@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import sys
 import numpy as np 
@@ -17,19 +16,19 @@ drawScatterbyLabel(plt,Input)
 
 # 构建x+b 系数矩阵：b这里默认为1
 dataMat = buildMat(Input)
-print dataMat 
+print(dataMat)
 alpha = 0.001 # 步长
 steps = 500  # 迭代次数
 
 weights = ones((n,1))# 初始化权重向量
 # 主程序
-for k in xrange(steps):
+for k in range(steps):
 	gradient = dataMat*mat(weights) # 梯度
 	output = hardlim(gradient)  # 硬限幅函数
 	errors = target-output # 计算误差
 	weights = weights + alpha*dataMat.T*errors  
 
-print weights	# 输出权重
+print(weights)	# 输出权重
 
 X = np.linspace(-5,5,100)
 #y=w*x+b: b:weights[0]/weights[2]; w:weights[1]/weights[2]

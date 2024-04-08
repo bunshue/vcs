@@ -1,13 +1,14 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
+
 #截止频率
 radius = 50
 MAX_RADIUS = 100
 #低通滤波类型
 lpType = 0
 MAX_LPTYPE = 2
+
 #快速傅里叶变换
 def fft2Image(src):
     #得到行、列
@@ -22,13 +23,14 @@ def fft2Image(src):
     cv2.dft(fft2,fft2,cv2.DFT_COMPLEX_OUTPUT)
     return fft2
 
- #傅里叶幅度谱
+#傅里叶幅度谱
 def amplitudeSpectrum(fft2):
     #求幅度
     real2 = np.power(fft2[:,:,0],2.0)
     Imag2 = np.power(fft2[:,:,1],2.0)
     amplitude = np.sqrt(real2+Imag2)
     return amplitude
+
 #幅度谱的灰度级显示
 def graySpectrum(amplitude):
     #对比度拉伸
@@ -38,6 +40,7 @@ def graySpectrum(amplitude):
     spectrum = np.zeros(amplitude.shape,np.float32)
     cv2.normalize(amplitude,spectrum,0,1,cv2.NORM_MINMAX)
     return spectrum
+
 #构建低通滤波器    
 def createLPFilter(shape,center,radius,lpType=0,n=2):
     #滤波器的高和宽
@@ -59,19 +62,20 @@ def createLPFilter(shape,center,radius,lpType=0,n=2):
     elif(lpType == 2): #高斯低通滤波
         lpFilter = np.exp(-d/(2.0*pow(radius,2.0)))
     return lpFilter
+
 #主函数
 if __name__ =="__main__":
     if len(sys.argv) > 1:
     #第一步：读入图像
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python LPFilter.py imageFile"
+        print("Usge:python LPFilter.py imageFile")
     #显示原图
     cv2.imshow("image",image)
     #第二步：每一元素乘以 (-1)^(r+c)
     fimage = np.zeros(image.shape,np.float32)
-    for r in xrange(image.shape[0]):
-        for c in xrange(image.shape[1]):
+    for r in range(image.shape[0]):
+        for c in range(image.shape[1]):
             if (r+c)%2:
                 fimage[r][c] = -1*image[r][c]
             else:
@@ -104,7 +108,7 @@ if __name__ =="__main__":
         #第六步：低通滤波器和快速傅里叶变换对应位置相乘（点乘）
         rows,cols = spectrum.shape[:2]
         fImagefft2_lpFilter = np.zeros(fImagefft2.shape,fImagefft2.dtype)
-        for i in xrange(2):
+        for i in range(2):
             fImagefft2_lpFilter[:rows,:cols,i] = fImagefft2[:rows,:cols,i]*lpFilter
         #低通傅里叶变换的傅里叶谱
         lp_amplitude = amplitudeSpectrum(fImagefft2_lpFilter)
@@ -114,13 +118,13 @@ if __name__ =="__main__":
         #第七和八步：对低通傅里叶变换执行傅里叶逆变换,并只取实部
         cv2.dft(fImagefft2_lpFilter,result,cv2.DFT_REAL_OUTPUT+cv2.DFT_INVERSE+cv2.DFT_SCALE)
         #第九步：乘以(-1)^(r+c)
-        for r in xrange(rows):
-            for c in xrange(cols):
+        for r in range(rows):
+            for c in range(cols):
                 if (r+c)%2:
                     result[r][c]*=-1
         #第十步：数据类型转换,并进行灰度级显示，截取左上角，大小和输入图像相等
-        for r in xrange(rows):
-            for c in xrange(cols):
+        for r in range(rows):
+            for c in range(cols):
                 if result[r][c] < 0:
                     result[r][c] = 0
                 elif result[r][c] > 255:

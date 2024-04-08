@@ -1,6 +1,3 @@
-#  Copyright (c) 2007, Enthought, Inc.
-#  License: BSD Style.
-
 """
 This example shows how to define a read-only, auto-edit table column using a
 custom pop-up view.
@@ -152,7 +149,7 @@ class Factors ( HasTraits ):
 
     @property_depends_on( 'max_n' )
     def _get_factors ( self ):
-        return [ Factor( n = i + 1 ) for i in xrange( self.max_n ) ]
+        return [ Factor( n = i + 1 ) for i in range( self.max_n ) ]
 
 #-- Create and run the demo ----------------------------------------------------
 

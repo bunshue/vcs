@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
+
 #中值滤波 
 def medianBlur(image,winSize):
     #图像的宽高
@@ -12,8 +12,8 @@ def medianBlur(image,winSize):
     halfWinW = (winW-1)/2
     #中值滤波后的输出图像
     medianBlurImage = np.zeros(image.shape,image.dtype)
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             #判断边界
             rTop = 0 if r-halfWinH < 0 else r-halfWinH
             rBottom = rows-1 if r+halfWinH > rows-1 else r+halfWinH
@@ -24,12 +24,13 @@ def medianBlur(image,winSize):
             #求中值
             medianBlurImage[r][c] = np.median(region)
     return medianBlurImage
+
 #主函数
 if __name__ =="__main__":
     if len(sys.argv)>1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python medianBlur.py imageFile"
+        print("Usge:python medianBlur.py imageFile")
     #显示原图
     cv2.imshow("image",image)
     #中值滤波

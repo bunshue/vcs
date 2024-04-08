@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Filename : 02kMeans1.py
-
 from numpy import *
 import numpy as np
 from Recommand_Lib import *
@@ -9,7 +6,6 @@ import matplotlib.pyplot as plt
 # 从文件构建的数据集    
 dataMat = file2matrix("testData/4k2_far.txt","\t")  
 dataSet = mat(dataMat[:,1:]) # 转换为矩阵形式
- 
 
 k = 4 # 分类数
 m = shape(dataSet)[0]
@@ -26,7 +22,7 @@ while (len(centList) < k):
     lowestSSE = inf # 初始化最小误差平方和。核心参数，这个值越小就说明聚类的效果越好。
     # 遍历cenList的每个向量
     #----1. 使用ClustDist计算lowestSSE，以此确定:bestCentToSplit、bestNewCents、bestClustAss----#
-    for i in xrange(len(centList)):
+    for i in range(len(centList)):
         ptsInCurrCluster = dataSet[nonzero(ClustDist[:,0].A==i)[0],:]
         # 应用标准kMeans算法(k=2),将ptsInCurrCluster划分出两个聚类中心,以及对应的聚类距离表	
         centroidMat,splitClustAss = kMeans(ptsInCurrCluster, 2)
@@ -58,8 +54,8 @@ while (len(centList) < k):
     ClustDist[nonzero(ClustDist[:,0].A == bestCentToSplit)[0],:]= bestClustAss 
     # 以上为计算centList
 color_cluster(ClustDist[:,0:1],dataSet,plt)
-print "cenList:",mat(centList)
-# print "ClustDist:", ClustDist
+print("cenList:",mat(centList))
+# print("ClustDist:", ClustDist)
 # 绘制聚类中心图形
 drawScatter(plt,mat(centList),size=60,color='red',mrkr='D')
 

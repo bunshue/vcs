@@ -104,7 +104,7 @@ if __name__ == '__main__':
     fig = pl.figure(figsize=(10, 6))
     fig.patch.set_facecolor("w")
 
-    for i in xrange(6):
+    for i in range(6):
         ax = fig.add_subplot(231+i)
         draw(ax, rules[i])
 

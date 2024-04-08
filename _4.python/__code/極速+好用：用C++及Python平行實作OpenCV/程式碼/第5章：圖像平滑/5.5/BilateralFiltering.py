@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
 import math
+
 #基于空间距离的权重模板 ( 和计算高斯算子的过程是一样的 )
 def getClosenessWeight(sigma_g,H,W):
     r,c = np.mgrid[0:H:1, 0:W:1]
@@ -10,6 +10,7 @@ def getClosenessWeight(sigma_g,H,W):
     c -= (W-1)/2
     closeWeight = np.exp(-0.5*(np.power(r,2)+np.power(c,2))/math.pow(sigma_g,2))
     return closeWeight
+
 # BilateralFiltering 双边滤波，返回的数据类型为浮点型
 def bfltGray(I,H,W,sigma_g,sigma_d):
     #构建空间距离的权重模板
@@ -21,8 +22,8 @@ def bfltGray(I,H,W,sigma_g,sigma_d):
     rows,cols = I.shape
     #双边滤波后的结果
     bfltGrayImage = np.zeros(I.shape,np.float32)
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             pixel = I[r][c]
             #判断边界
             rTop = 0 if r-cH < 0 else r-cH
@@ -39,12 +40,13 @@ def bfltGray(I,H,W,sigma_g,sigma_d):
             weightTemp = weightTemp/np.sum(weightTemp)
             bfltGrayImage[r][c] = np.sum(region*weightTemp)
     return bfltGrayImage
+
 #主函数
 if __name__ =="__main__":
     if len(sys.argv)>1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python BFilter.py imageFile"
+        print("Usge:python BFilter.py imageFile")
     #显示原图
     cv2.imshow("image",image)
     cv2.imwrite("image.png",image)

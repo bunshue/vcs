@@ -14,7 +14,7 @@ def findfile(readfile, findword):
         text = p.read_text(encoding="UTF-8") #載入文字
         cnt = len(re.findall(ptn, text))    #搜尋字串
         if cnt > 0:                         #找到的話
-            msg = readfile+"："+"找到" + str(cnt)+"個喲。\n"
+            msg = readfile+"："+"找到" + str(cnt)+"個\n"
         return msg
     except:
         return readfile + "：程式執行失敗。"

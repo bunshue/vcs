@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import sys
 import numpy as np 
@@ -21,14 +20,14 @@ steps = 500  # 迭代次数
 weights = ones((n,1))# 初始化权重向量
 weightlist = []
 # 5. 主程序
-for k in xrange(steps):
+for k in range(steps):
 	gradient = dataMat*mat(weights) # 梯度
 	output = logistic(gradient)  # logistic函数
 	errors = target-output # 计算误差
 	weights = weights + alpha*dataMat.T*errors 
 	weightlist.append(weights) 
 
-print weights	# 输出训练后的权重
+print(weights)	# 输出训练后的权重
 fig = plt.figure()
 axes1 = plt.subplot(211)
 axes2 = plt.subplot(212)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from numpy import *
 import numpy as np
 import sys,os
@@ -48,7 +47,7 @@ class Eigenfaces(object):
 			XTX = np.dot(self.Mat,self.Mat.T)
 			[ self.eig_v , self.eig_vect ] = linalg.eigh (XTX)
 		self.eig_vect = np.dot(self.Mat.T, self.eig_vect)
-		for i in xrange(n):
+		for i in range(n):
 			self.eig_vect[:,i] = self.eig_vect[:,i]/linalg.norm(self.eig_vect[:,i])
 		idx = np.argsort(-self.eig_v)
 		self.eig_v = self.eig_v[idx]
@@ -75,7 +74,7 @@ class Eigenfaces(object):
 		minDist = np.finfo('float').max
 		minClass = -1
 		Q = self.project(XI.reshape(1,-1))
-		for i in xrange(len(self.projections)):
+		for i in range(len(self.projections)):
 			dist = self.dist_metric(self.projections[i], Q)
 			if dist < minDist:
 				minDist = dist
@@ -85,7 +84,7 @@ class Eigenfaces(object):
 	def subplot(self,title, images):
 		fig = plt.figure()
 		fig.text(.5, .95, title, horizontalalignment='center') 
-		for i in xrange(len(images)):
+		for i in range(len(images)):
 			ax0 = fig.add_subplot(4,4,(i+1))
 			plt.imshow(asarray(images[i]), cmap="gray")
 			plt.xticks([]), plt. yticks([]) # 隐藏 X Y 坐标

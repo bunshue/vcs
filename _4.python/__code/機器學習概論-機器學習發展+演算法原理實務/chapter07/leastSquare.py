@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Filename : 02regression01.py
-
 from numpy import *
 import numpy as np 
 import operator
@@ -31,7 +28,7 @@ dX = Xmat-meanX  # 各元素与均值的差
 dY = Ymat-meanY
 # 手工计算：
 #sumXY = 0; SqX = 0
-#for i in xrange(len(dX)):
+#for i in range(len(dX)):
 #	sumXY += double(dX[i])*double(dY[i])
 #	SqX += double(dX[i])**2
 sumXY = vdot(dX,dY)    # 返回两个向量的点乘 multiply
@@ -40,6 +37,6 @@ SqX = sum(power(dX,2)) # 向量的平方：(X-meanX)^2
 # 计算斜率和截距
 a = sumXY/SqX
 b = meanY - a*meanX
-print a,b
+print(a,b)
 # 绘制图形
 plotscatter(Xmat,Ymat,a,b,plt)	

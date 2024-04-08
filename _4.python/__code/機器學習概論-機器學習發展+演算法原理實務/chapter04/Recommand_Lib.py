@@ -1,7 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-# Filename : Recommand_lib.py
-
-from numpy import *
+﻿from numpy import *
 import numpy as np 
 import operator
 import scipy.spatial.distance as dist
@@ -23,7 +20,7 @@ def file2matrix(path,delimiter):
 def randCenters(dataSet, k):
     n = shape(dataSet)[1]
     clustercents = mat(zeros((k,n)))# 初始化聚类中心矩阵:k*n 
-    for col in xrange(n):
+    for col in range(n):
         mincol = min(dataSet[:,col]); maxcol = max(dataSet[:,col])
         # random.rand(k,1): 产生一个0~1之间的随机数向量：k,1表示产生k行1列的随机数
         clustercents[:,col] = mat(mincol + float(maxcol - mincol) * random.rand(k,1))
@@ -50,7 +47,7 @@ def drawScatter(plt,mydata,size=20,color='blue',mrkr='o'):
 def color_cluster(dataindx,dataSet,plt,k=4):
 	index = 0
 	datalen = len(dataindx)
-	for indx in xrange(datalen):
+	for indx in range(datalen):
 		if int(dataindx[indx]) ==0:
 			plt.scatter(dataSet[index,0],dataSet[index,1],c='blue',marker='o')
 		elif int(dataindx[indx]) ==1:
@@ -94,7 +91,7 @@ def biKmeans(dataSet, k, distMeas=distEclud):
             centroidMat, splitClustAss = kMeans(ptsInCurrCluster, 2, distMeas)
             sseSplit = sum(splitClustAss[:,1])#compare the SSE to the currrent minimum
             sseNotSplit = sum(clusterAssment[nonzero(clusterAssment[:,0].A!=i)[0],1])
-            print "sseSplit, and notSplit: ",sseSplit,sseNotSplit
+            print("sseSplit, and notSplit: ",sseSplit,sseNotSplit)
             if (sseSplit + sseNotSplit) < lowestSSE:
                 bestCentToSplit = i
                 bestNewCents = centroidMat
@@ -102,8 +99,8 @@ def biKmeans(dataSet, k, distMeas=distEclud):
                 lowestSSE = sseSplit + sseNotSplit
         bestClustAss[nonzero(bestClustAss[:,0].A == 1)[0],0] = len(centList) #change 1 to 3,4, or whatever
         bestClustAss[nonzero(bestClustAss[:,0].A == 0)[0],0] = bestCentToSplit
-        print 'the bestCentToSplit is: ',bestCentToSplit
-        print 'the len of bestClustAss is: ', len(bestClustAss)
+        print('the bestCentToSplit is: ',bestCentToSplit)
+        print('the len of bestClustAss is: ', len(bestClustAss))
         centList[bestCentToSplit] = bestNewCents[0,:].tolist()[0]#replace a centroid with two best centroids 
         centList.append(bestNewCents[1,:].tolist()[0])
         clusterAssment[nonzero(clusterAssment[:,0].A == bestCentToSplit)[0],:]= bestClustAss #reassign new clusters, and SSE
@@ -132,7 +129,7 @@ def recommand(dataSet,testVect,r=3,rank=1,distCalc=cosSim):
 def kNN(testdata, trainSet, listClasses, k):
     dataSetSize = trainSet.shape[0]    
     distances = array(zeros(dataSetSize))
-    for indx in xrange(dataSetSize):
+    for indx in range(dataSetSize):
     	distances[indx] = cosSim(testdata,trainSet[indx])
     sortedDistIndicies = argsort(-distances)  
     classCount={}            
@@ -140,4 +137,5 @@ def kNN(testdata, trainSet, listClasses, k):
         voteIlabel = listClasses[sortedDistIndicies[i]]
         classCount[voteIlabel] = classCount.get(voteIlabel,0) + 1
     sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
-    return sortedClassCount[0][0]	
+    return sortedClassCount[0][0]
+

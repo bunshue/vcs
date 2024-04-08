@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-import sys  
 import os 
 import time
 from numpy import *
@@ -8,10 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import operator
 
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
-# 
 def createDataSet():
     group = array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
     labels = ['A','A','B','B']
@@ -41,7 +34,7 @@ def classify(testdata, dataSet, labels, k):
     sqDistances = sqDiffMat.sum(axis=1)
     # 4.生成标准化欧氏距离
     distances = sqDistances**0.5
-    print distances
+    print(distances)
     # 5.根据生成的欧氏距离大小排序,结果为索引号
     sortedDistIndicies = distances.argsort()        
     classCount={}     
@@ -82,4 +75,4 @@ ax.scatter(testdata[0],testdata[1],c='green',marker='s',linewidths=0, s=300)
 plt.annotate("("+str(testdata[0])+", "+str(testdata[1])+")",xy = (testdata[0],testdata[1]))		
 
 plt.show()
-print classify(testdata, dataSet, labels, k)
+print(classify(testdata, dataSet, labels, k))

@@ -1,12 +1,5 @@
-# -*- coding: utf-8 -*-
-
-import sys  
 import os 
 import jieba
-
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 # 保存至文件
 def savefile(savepath,content):
@@ -40,4 +33,5 @@ for mydir in catelist:
 		content_seg = jieba.cut(content.strip())		# 为文件内容分词
 		savefile(seg_dir+file_path," ".join(content_seg))  # 将处理后的文件保存到分词后语料目录
 
-print "中文语料分词结束！！！"
+print("中文语料分词结束！！！")
+

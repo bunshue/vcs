@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
 import math
 from scipy import signal
+
 #构建 LoG 算子
 def createLoGKernel(sigma,kSize):
     # LoG 算子的宽高，且两者均为奇数
@@ -14,8 +14,8 @@ def createLoGKernel(sigma,kSize):
     # LoG 算子的中心
     centerH = (winH-1)/2
     centerW = (winW-1)/2
-    for r in xrange(winH):
-        for c in xrange(winW):
+    for r in range(winH):
+        for c in range(winW):
             norm2 = pow(r-centerH,2.0) + pow(c-centerW,2.0)
             logKernel[r][c] = 1.0/sigmaSquare*(norm2/sigmaSquare - 2)*math.exp(-norm2/(2*sigmaSquare))
     return logKernel
@@ -77,14 +77,14 @@ def Marr_Hildreth(image,loGSize,sigma,crossType="ZERO_CROSS_DEFAULT"):
     elif  crossType == "ZERO_CROSS_MEAN":
         zero_cross = zero_cross_mean(img_conv_log)
     else:
-        print "no crossType"
+        print("no crossType")
     return zero_cross
 #主函数
 if __name__ =="__main__":
     if len(sys.argv)>1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python Marr_Hilreth.py imageFile"
+        print("Usge:python Marr_Hilreth.py imageFile")
     #显示原图
     cv2.imshow("image",image)
     # Marr-Hilreth 边缘检测算法

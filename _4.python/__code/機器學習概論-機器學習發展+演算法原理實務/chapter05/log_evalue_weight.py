@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import sys
 import numpy as np 
@@ -24,19 +23,19 @@ steps = 500  # 迭代次数
 weights = ones((n,1))# 初始化权重向量
 weightlist = []
 # 5. 主程序
-for k in xrange(steps):
+for k in range(steps):
 	gradient = dataMat*mat(weights) # 梯度
 	output = logistic(gradient)  # logistic函数
 	errors = target-output # 计算误差
 	weights = weights + alpha*dataMat.T*errors 
 	weightlist.append(weights) 
 
-print weights	# 输出训练后的权重
+print(weights)	# 输出训练后的权重
 # 6. 绘制训练后超平面
 X = np.linspace(-5,5,100)
 Ylist=[]
 lenw = len(weightlist)
-for indx in xrange(lenw):	
+for indx in range(lenw):	
 	if indx%20 == 0:   # 每20次输出一次分类超平面
 		weight = weightlist[indx]
 		Y=-(double(weight[0])+X*(double(weight[1])))/double(weight[2])

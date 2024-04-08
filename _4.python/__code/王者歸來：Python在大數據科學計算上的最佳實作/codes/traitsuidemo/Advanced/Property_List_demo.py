@@ -1,6 +1,3 @@
-#  Copyright (c) 2007, Enthought, Inc.
-#  License: BSD Style.
-
 """
 This demo shows the proper way to create a <b>Property</b> whose value is a
 list, especially when the value of the <b>Property</b> will be used in a user
@@ -111,7 +108,7 @@ class PropertyListDemo ( HasPrivateTraits ):
                 choice( [ 'Thomas', 'Jones', 'Smith', 'Adams', 'Johnson' ] ) ),
             age    = randint( 21, 75 ),
             gender = choice( [ 'Male', 'Female' ] ) )
-            for i in xrange( randint( 10, 20 ) )
+            for i in range( randint( 10, 20 ) )
         ]
 
     #-- Default Value Implementations ------------------------------------------

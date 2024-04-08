@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Filename : 02kMeans1.py
-
 from numpy import *
 import numpy as np 
 import operator
@@ -33,7 +30,7 @@ while flag:
     
     #---- 1. 构建ClustDist： 遍历DataSet数据集,计算DataSet每行与聚类的最小欧式距离 ----#
     #     将此结果赋值ClustDist=[minIndex,minDist]
-    for i in xrange(m): 
+    for i in range(m): 
        
         # 遍历k个聚类中心,获取最短距离
         distlist =[ distEclud(clustercents[j,:],dataSet[i,:]) for j in range(k) ]
@@ -51,7 +48,7 @@ while flag:
     # 1.用聚类中心cent切分为ClustDist，返回dataSet的行索引
     # 并以此从dataSet中提取对应的行向量构成新的ptsInClust
     # 计算分隔后ptsInClust各列的均值，以此更新聚类中心clustercents的各项值
-    for cent in xrange(k): 
+    for cent in range(k): 
     	 # 从ClustDist的第一列中筛选出等于cent值的行下标
        dInx = nonzero(ClustDist[:,0].A==cent)[0]
        # 从dataSet中提取行下标==dInx构成一个新数据集
@@ -60,7 +57,7 @@ while flag:
        clustercents[cent,:] = mean(ptsInClust, axis=0)
 
 # 返回计算完成的聚类中心
-print "clustercents:\n" , clustercents
+print("clustercents:\n" , clustercents)
 
 # 输出生成的ClustDist：对应的聚类中心(列1),到聚类中心的距离(列2),行与dataSet一一对应
 # print ClustDist[:,0:1]

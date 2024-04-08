@@ -1,6 +1,3 @@
-#encoding=utf-8
-
-
 def install_magics():
     import sys
     from os import path
@@ -131,8 +128,8 @@ def install_magics():
             result = pretty(sh.ev(code)).split("\n")
             max_width = max(len(line) for line in result) + 3
             result = [line.ljust(max_width) for line in result]
-            result = "\n".join(["".join(result[i:i+n]) for i in xrange(0, len(result), n)])
-            print result
+            result = "\n".join(["".join(result[i:i+n]) for i in range(0, len(result), n)])
+            print(result)
 
         @line_magic
         def omit(self, line):
@@ -172,8 +169,8 @@ def install_magics():
                 stdout_lines = "\n".join(stdout)
                 sys.stdout.write(stdout_lines)
             if result:
-                print "\n".join(sh.display_formatter.formatters["text/plain"](result).split("\n")[:count])
-                print "..."
+                print("\n".join(sh.display_formatter.formatters["text/plain"](result).split("\n")[:count]))
+                print("...")
 
         @line_magic("C")
         def _C(self, line):
@@ -254,7 +251,7 @@ def install_magics():
         @cell_magic
         def nopage(self, line, cell):
             def print_page(s):
-                print s
+                print(s)
             from IPython.core import page
             old_page = page.page
             page.page = print_page
@@ -334,7 +331,7 @@ def install_magics():
             env = ip.user_global_ns
 
             def f():
-                exec cell in env
+                exec(cell in env)
 
             thread = threading.Thread(target=f, name="__magic_thread__" + line)
             thread.start()

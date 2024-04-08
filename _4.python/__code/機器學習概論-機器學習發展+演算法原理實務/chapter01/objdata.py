@@ -1,13 +1,8 @@
-# -*- coding: utf-8 -*-
-
-import sys  
 import os
 import time
 from numpy import *
-import cPickle as pickle
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#import cPickle as pickle
+import pickle
 
 #数据文件转矩阵
 # path: 数据文件路径
@@ -35,7 +30,7 @@ file_obj.close()
 
 read_obj = open(root+"/recordmat.dat", "rb")
 readmat = pickle.load(read_obj)
-print shape(readmat)
+print(shape(readmat))
 
 
 

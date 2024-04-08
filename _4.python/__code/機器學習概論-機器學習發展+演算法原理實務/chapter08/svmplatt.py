@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from numpy import *
 import operator
 from time import sleep
@@ -32,7 +30,7 @@ class PlattSVM(object):
 		if self.kValue.keys()[0]=='linear': 
 			K = dataMat * A.T   #linear kernel
 		elif self.kValue.keys()[0]=='Gaussian':   # 高斯核
-			for j in xrange(m):
+			for j in range(m):
 				deltaRow = dataMat[j,:] - A
 				K[j] = deltaRow*deltaRow.T
 			K = exp(K/(-1*self.kValue['Gaussian']**2)) 
@@ -45,7 +43,7 @@ class PlattSVM(object):
 		self.lambdas = mat(zeros((self.m,1))) # 拉格朗日乘子		
 		self.eCache = mat(zeros((self.m,2)))  # 误差缓存
 		self.K = mat(zeros((self.m,self.m)))  # 存储用于核函数计算的向量 
-		for i in xrange(self.m):
+		for i in range(self.m):
 			self.K[:,i] = self.kernels(self.X,self.X[i,:]) # kValue
 	# 随机选择一个不等于i的j
 	def randJ(self,i):
@@ -122,7 +120,7 @@ class PlattSVM(object):
 		while (step < self.maxIter) and ((lambdaPairsChanged > 0) or (entireflag)):
 			lambdaPairsChanged = 0
 			if entireflag: # 遍历整个数据集
-				for i in xrange(self.m):
+				for i in range(self.m):
 					lambdaPairsChanged += self.innerLoop(i) # 进入内循环
 				step += 1
 			else: # 遍历非边界的lambdas
@@ -139,14 +137,14 @@ class PlattSVM(object):
 	def calcWs(self):
 		m,n = shape(self.X)
 		w = zeros((n,1))
-		for i in xrange(m):
+		for i in range(m):
 				w += multiply(self.lambdas[i]*self.labelMat[i],self.X[i,:].T)
 		return w
 	# 绘制散点图
 	def scatterplot(self,plt):
 		fig = plt.figure()
 		ax = fig.add_subplot(111) 
-		for i in xrange(shape(self.X)[0]):
+		for i in range(shape(self.X)[0]):
 			if self.lambdas[i] != 0: # KKT条件
 				ax.scatter(self.X[i,0],self.X[i,1],c='green',marker='s',s=50)		
 			elif self.labelMat[i] == 1:
@@ -158,7 +156,7 @@ class PlattSVM(object):
 		errorCount = 0
 		testMat = mat(testSet)
 		m,n = shape(testMat)
-		for i in xrange(m): # 用核函数划分测试集
+		for i in range(m): # 用核函数划分测试集
 			kernelEval = self.kernels(self.sptVects,testMat[i,:])
 			predict= kernelEval.T * multiply(self.SVlabel,self.lambdas[self.svIndx]) + self.b
 			if sign(predict)!=sign(testLabel[i]):  errorCount += 1

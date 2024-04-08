@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import sys
 import numpy as np 
@@ -12,4 +11,4 @@ m,n = shape(testdata)
 testmat = zeros((m,n+1))
 testmat[:,0] = 1 
 testmat[:,1:] = testdata
-print classifier(testmat,weights)
+print(classifier(testmat,weights))

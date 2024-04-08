@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from mayavi import mlab
 from tvtk.api import tvtk
 import numpy as np
@@ -8,7 +7,7 @@ def plot_cell(cell):
     p.points = cell.points
     poly = []
     ids = list(cell.point_ids)
-    for i in xrange(cell.number_of_faces):
+    for i in range(cell.number_of_faces):
         poly.append([ids.index(x) for x in cell.get_face(i).point_ids])
     p.polys = poly
     mlab.pipeline.surface(p, opacity = 0.3)
@@ -51,3 +50,4 @@ if __name__ == "__main__":
     plot_cell(s2.get_cell(3))
     mlab.text(0.01, 0.9, "get_cell(3)", width=0.25)
     mlab.show()
+    

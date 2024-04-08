@@ -4,7 +4,7 @@ from numpy import *
 import matplotlib.pyplot as plt
 
 base = mat([[1,3],[3,1]])
-print base[0]+base[1]
+print(base[0]+base[1])
 
 # 绘图
 fig = plt.figure()

@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Filename : 07store_grab.py
-
 from numpy import *
 from math import log
 from ID3DTree import * 
@@ -14,4 +11,5 @@ dtree.train()
 
 dtree.storeTree(dtree.tree,"data.tree")
 mytree = dtree.grabTree("data.tree")
-print mytree
+print(mytree)
+

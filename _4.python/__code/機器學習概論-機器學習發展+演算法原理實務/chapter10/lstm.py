@@ -2,7 +2,7 @@
 Build a tweet sentiment analyzer
 '''
 from collections import OrderedDict
-import cPickle as pkl
+import pickle
 import sys
 import time
 
@@ -360,7 +360,7 @@ def pred_probs(f_pred_prob, prepare_data, data, iterator, verbose=False):
 
         n_done += len(valid_index)
         if verbose:
-            print '%d/%d samples classified' % (n_done, n_samples)
+            print('%d/%d samples classified' % (n_done, n_samples))
 
     return probs
 
@@ -412,11 +412,11 @@ def train_lstm(
 
     # Model options
     model_options = locals().copy()
-    print "model options", model_options
+    print("model options", model_options)
 
     load_data, prepare_data = get_dataset(dataset)
 
-    print 'Loading data'
+    print('Loading data')
     train, valid, test = load_data(n_words=n_words, valid_portion=0.05,
                                    maxlen=maxlen)
     if test_size > 0:
@@ -432,7 +432,7 @@ def train_lstm(
 
     model_options['ydim'] = ydim
 
-    print 'Building model'
+    print('Building model')
     # This create the initial parameters as numpy ndarrays.
     # Dict name (string) -> numpy ndarray
     params = init_params(model_options)
@@ -465,14 +465,14 @@ def train_lstm(
     f_grad_shared, f_update = optimizer(lr, tparams, grads,
                                         x, mask, y, cost)
 
-    print 'Optimization'
+    print('Optimization')
 
     kf_valid = get_minibatches_idx(len(valid[0]), valid_batch_size)
     kf_test = get_minibatches_idx(len(test[0]), valid_batch_size)
 
-    print "%d train examples" % len(train[0])
-    print "%d valid examples" % len(valid[0])
-    print "%d test examples" % len(test[0])
+    print("%d train examples" % len(train[0]))
+    print("%d valid examples" % len(valid[0]))
+    print("%d test examples" % len(test[0]))
 
     history_errs = []
     best_p = None
@@ -487,7 +487,7 @@ def train_lstm(
     estop = False  # early stop
     start_time = time.clock()
     try:
-        for eidx in xrange(max_epochs):
+        for eidx in range(max_epochs):
             n_samples = 0
 
             # Get new shuffled index for the training set.
@@ -511,22 +511,22 @@ def train_lstm(
                 f_update(lrate)
 
                 if numpy.isnan(cost) or numpy.isinf(cost):
-                    print 'NaN detected'
+                    print('NaN detected')
                     return 1., 1., 1.
 
                 if numpy.mod(uidx, dispFreq) == 0:
-                    print 'Epoch ', eidx, 'Update ', uidx, 'Cost ', cost
+                    print('Epoch ', eidx, 'Update ', uidx, 'Cost ', cost)
 
                 if saveto and numpy.mod(uidx, saveFreq) == 0:
-                    print 'Saving...',
+                    print('Saving...',)
 
                     if best_p is not None:
                         params = best_p
                     else:
                         params = unzip(tparams)
                     numpy.savez(saveto, history_errs=history_errs, **params)
-                    pkl.dump(model_options, open('%s.pkl' % saveto, 'wb'), -1)
-                    print 'Done'
+                    pickle.dump(model_options, open('%s.pickle' % saveto, 'wb'), -1)
+                    print('Done')
 
                 if numpy.mod(uidx, validFreq) == 0:
                     use_noise.set_value(0.)
@@ -552,17 +552,17 @@ def train_lstm(
                                                                0].min()):
                         bad_counter += 1
                         if bad_counter > patience:
-                            print 'Early Stop!'
+                            print('Early Stop!')
                             estop = True
                             break
 
-            print 'Seen %d samples' % n_samples
+            print('Seen %d samples' % n_samples)
 
             if estop:
                 break
 
     except KeyboardInterrupt:
-        print "Training interupted"
+        print("Training interupted")
 
     end_time = time.clock()
     if best_p is not None:
@@ -576,13 +576,13 @@ def train_lstm(
     valid_err = pred_error(f_pred, prepare_data, valid, kf_valid)
     test_err = pred_error(f_pred, prepare_data, test, kf_test)
 
-    print 'Train ', train_err, 'Valid ', valid_err, 'Test ', test_err
+    print('Train ', train_err, 'Valid ', valid_err, 'Test ', test_err)
     if saveto:
         numpy.savez(saveto, train_err=train_err,
                     valid_err=valid_err, test_err=test_err,
                     history_errs=history_errs, **best_p)
-    print 'The code run for %d epochs, with %f sec/epochs' % (
-        (eidx + 1), (end_time - start_time) / (1. * (eidx + 1)))
+    print('The code run for %d epochs, with %f sec/epochs' % (
+        (eidx + 1), (end_time - start_time) / (1. * (eidx + 1))))
     print >> sys.stderr, ('Training took %.1fs' %
                           (end_time - start_time))
     return train_err, valid_err, test_err

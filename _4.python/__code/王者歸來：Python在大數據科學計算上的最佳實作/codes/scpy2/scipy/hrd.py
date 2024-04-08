@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 from os import path
 from collections import defaultdict
 from itertools import product
-import cPickle
+import pickle
 import time
 
 FOLDER = path.dirname(__file__)
@@ -135,7 +134,7 @@ def get_moves(node, blocks):
             possible_pos.add((r + dr, c + dc))
             possible_pos.add((r + dr * 2, c + dc * 2))
 
-    for i in xrange(len(positions)):
+    for i in range(len(positions)):
         pos = positions[i]
         if pos not in possible_pos:
             continue
@@ -191,16 +190,16 @@ def dump_graph(blocks):
 
     fn = path.join(FOLDER, "%s.pickle" % blocks)
     with file(fn, "wb") as f:
-        cPickle.dump({"nodes": compressed_nodes, "edges": edges}, f)
+        pickle.dump({"nodes": compressed_nodes, "edges": edges}, f)
 
-    print fn, "saved"
+    print(fn, "saved")
 
 
 def load_graph(blocks):
     full_path = path.join(FOLDER, "%s.pickle" % blocks)
     if path.exists(full_path):
         with file(full_path, "rb") as f:
-            return cPickle.load(f)
+            return pickle.load(f)
     else:
         raise IOError("graph %s not found" % blocks)
 

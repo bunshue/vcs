@@ -1,9 +1,7 @@
-# -*- coding: utf-8  -*-
-# Filename : 04ridgeTest.py
-
 from numpy import *
 import sys
 import matplotlib.pyplot as plt 
+
 # 岭回归函数
 # 加载数据集
 def loadDataSet(fileName):
@@ -32,7 +30,7 @@ def scatterplot(wMat,logk):# 绘制图形
 	ax = fig.add_subplot(111) 
 	wMatT = wMat.T
 	m,n=shape(wMatT)
-	for i in xrange(m):
+	for i in range(m):
 		ax.plot(logk,wMatT[i,:])
 		ax.annotate("feature["+str(i)+"]",xy =(i,wMatT[i,0]),color='black')	
 	plt.show()	
@@ -46,17 +44,17 @@ Knum = 100 # 确定lam的范围exp(-10~20)
 # 初始化30行,8列的全0矩阵
 wMat = zeros((Knum,shape(xMat)[1]))
 klist = zeros((Knum,1))
-for i in xrange(Knum):
+for i in range(Knum):
 	k = i/1000.0   # 算法的目的是确定k的取值
 	klist[i]=k
 	xTx = xMat.T*xMat
 	denom = xTx + eye(shape(xMat)[1])*k
 	if linalg.det(denom) == 0.0:
-		print "This matrix is singular, cannot do inverse"
+		print("This matrix is singular, cannot do inverse")
 		sys.exit(0) 
 	ws = denom.I * (xMat.T*yMat)
 	wMat[i,:]=ws.T
-print klist
+print(klist)
 scatterplot(klist,klist) # k值的变化
 scatterplot(wMat,klist)  # 岭回归
 

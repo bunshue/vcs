@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Filename : svdRec2.py
-
 '''
 Created on Mar 8, 2011
 
@@ -137,9 +134,9 @@ def printMat(inMat, thresh=0.8):
     for i in range(32):
         for k in range(32):
             if float(inMat[i,k]) > thresh:
-                print 1,
-            else: print 0,
-        print ''
+                print(1,)
+            else: print(0,)
+        print('')
 
 # 图片压缩
 def imgCompress(numSV=3, thresh=0.8,flag=True):
@@ -150,16 +147,17 @@ def imgCompress(numSV=3, thresh=0.8,flag=True):
             newRow.append(int(line[i]))
         myl.append(newRow)
     myMat = mat(myl)
-    print "****original matrix******"
+    print("****original matrix******")
     printMat(myMat, thresh)
     U,Sigma,VT = la.svd(myMat)
-    print "U 行列数:",shape(U)[0],",",shape(U)[1]
-    print "Sigma:",Sigma
-    print "VT 行列数:",shape(VT)[0],",",shape(VT)[1]
+    print("U 行列数:",shape(U)[0],",",shape(U)[1])
+    print("Sigma:",Sigma)
+    print("VT 行列数:",shape(VT)[0],",",shape(VT)[1])
     if flag:
     	SigRecon = mat(zeros((numSV, numSV)))
     	for k in range(numSV):#construct diagonal matrix from vector
     		SigRecon[k,k] = Sigma[k]
     	reconMat = U[:,:numSV]*SigRecon*VT[:numSV,:]
-    	print "****reconstructed matrix using %d singular values******" % numSV
+    	print("****reconstructed matrix using %d singular values******" % numSV)
     	printMat(reconMat, thresh)
+    	

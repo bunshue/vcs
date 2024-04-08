@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 
 base = mat([[3,1],[1,3]])
 v1 = mat([1,2])
-print linalg.norm(v1)
-print (base[0]*base[1].T)/(linalg.norm(base[1])*linalg.norm(base[0]))
+print(linalg.norm(v1))
+print((base[0]*base[1].T)/(linalg.norm(base[1])*linalg.norm(base[0])))
 v2 = v1*base
-print v2
-print linalg.norm(v2)
+print(v2)
+print(linalg.norm(v2))
 
 # 绘图
 fig = plt.figure()
@@ -49,6 +49,6 @@ ax.plot(x6,y6,"b",linestyle='--')
 plt.xlim(0, 8)
 plt.ylim(0, 8)
 plt.grid(True)
-plt.show()
 
+plt.show()
 

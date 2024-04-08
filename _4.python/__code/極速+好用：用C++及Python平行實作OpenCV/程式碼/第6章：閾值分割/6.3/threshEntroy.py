@@ -1,17 +1,16 @@
-# -*- coding: utf-8 -*-
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
 import math
+
 #计算图像灰度直方图
 def calcGrayHist(image):
     #灰度图像矩阵的宽高
     rows,cols = image.shape
     #存储灰度直方图
     grayHist = np.zeros([256],np.uint32)
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             grayHist[image[r][c]] +=1
     return grayHist
 #熵阈值法
@@ -23,14 +22,14 @@ def threshEntroy(image):
     normGrayHist = grayHist/float(rows*cols)
     #计算累加直方图，也称零阶累加矩
     zeroCumuMoment = np.zeros([256],np.float32)
-    for k in xrange(256):
+    for k in range(256):
         if k==0:
             zeroCumuMoment[k] = normGrayHist[k]
         else:
             zeroCumuMoment[k] = zeroCumuMoment[k-1] + normGrayHist[k]
     #计算各个灰度级的熵
     entropy = np.zeros([256],np.float32)
-    for k in xrange(256):
+    for k in range(256):
         if k==0:
             if normGrayHist[k] ==0:
                 entropy[k] = 0
@@ -45,7 +44,7 @@ def threshEntroy(image):
     fT = np.zeros([256],np.float32)
     ft1,ft2 = 0.0,0.0
     totalEntroy = entropy[255]
-    for k in xrange(255):
+    for k in range(255):
         #找最大值
         maxFront = np.max(normGrayHist[0:k+1])
         maxBack = np.max(normGrayHist[k+1:256])
@@ -74,12 +73,12 @@ if __name__ =="__main__":
     if len(sys.argv) > 1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python threshEntroy.py imageFile"
+        print("Usge:python threshEntroy.py imageFile")
     #阈值处理
     threshold,thresh = threshEntroy(image);
     #显示阈值后的二值化图像
     cv2.imshow("threshEntroy",threshold)
-    print thresh
+    print(thresh)
     cv2.imwrite("entroy.jpg",threshold)
     cv2.waitKey(0)
     cv2.destroyAllWindows()

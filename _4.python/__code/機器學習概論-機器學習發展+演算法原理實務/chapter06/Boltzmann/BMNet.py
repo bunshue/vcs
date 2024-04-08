@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Filename : Boltzmann.py
-
 import operator
 from numpy import *
 import copy
@@ -33,15 +30,15 @@ class BoltzmannNet(object):
 	def distEclud(self,matA,matB): # 计算矩阵各向量之间的距离--欧氏距离	
 		ma,na = shape(matA);	mb,nb = shape(matB);
 		rtnmat= zeros((ma,nb))
-		for i in xrange(ma):
-			for j in xrange(nb):
+		for i in range(ma):
+			for j in range(nb):
 	 			rtnmat[i,j] = linalg.norm(matA[i,:]-matB[:,j].T) 
 		return 	rtnmat
 	# 计算路径长度	
 	def pathLen(self,dist,path):		
 		N = len(path)  
 		plen = 0;
-		for i in xrange(0,N-1):  # 长度为N的向量，包含从1-N的整数
+		for i in range(0,N-1):  # 长度为N的向量，包含从1-N的整数
 			plen += dist[path[i], path[i+1]]
 		plen +=  dist[path[0], path[N-1]]
 		return plen

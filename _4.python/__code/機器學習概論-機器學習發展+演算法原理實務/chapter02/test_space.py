@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-import sys  
 import os 
 #引入Bunch类
 from sklearn.datasets.base import Bunch
@@ -9,10 +6,6 @@ import cPickle as pickle
 from sklearn import feature_extraction  
 from sklearn.feature_extraction.text import TfidfTransformer  
 from sklearn.feature_extraction.text import TfidfVectorizer  
-
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 # 读取文件
 def readfile(path):
@@ -58,4 +51,4 @@ testspace.vocabulary = trainbunch.vocabulary
 space_path = "test_word_bag/testspace.dat"        # 词向量空间保存路径
 writebunchobj(space_path,testspace)
 
-print "test词向量空间创建成功！！！"
+print("test词向量空间创建成功！！！")

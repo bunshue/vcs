@@ -1489,34 +1489,34 @@ class Test_dict(FixerTestCase):
         a = "sorted(d.keys())"
         self.check(b, a)
 
-class Test_xrange(FixerTestCase):
-    fixer = "xrange"
+class Test_range(FixerTestCase):
+    fixer = "range"
 
     def test_prefix_preservation(self):
-        b = """x =    xrange(  10  )"""
+        b = """x =    range(  10  )"""
         a = """x =    range(  10  )"""
         self.check(b, a)
 
-        b = """x = xrange(  1  ,  10   )"""
+        b = """x = range(  1  ,  10   )"""
         a = """x = range(  1  ,  10   )"""
         self.check(b, a)
 
-        b = """x = xrange(  0  ,  10 ,  2 )"""
+        b = """x = range(  0  ,  10 ,  2 )"""
         a = """x = range(  0  ,  10 ,  2 )"""
         self.check(b, a)
 
     def test_single_arg(self):
-        b = """x = xrange(10)"""
+        b = """x = range(10)"""
         a = """x = range(10)"""
         self.check(b, a)
 
     def test_two_args(self):
-        b = """x = xrange(1, 10)"""
+        b = """x = range(1, 10)"""
         a = """x = range(1, 10)"""
         self.check(b, a)
 
     def test_three_args(self):
-        b = """x = xrange(0, 10, 2)"""
+        b = """x = range(0, 10, 2)"""
         a = """x = range(0, 10, 2)"""
         self.check(b, a)
 
@@ -1541,12 +1541,12 @@ class Test_xrange(FixerTestCase):
         a = """x = list(range(10))  [3]"""
         self.check(b, a)
 
-    def test_xrange_in_for(self):
-        b = """for i in xrange(10):\n    j=i"""
+    def test_range_in_for(self):
+        b = """for i in range(10):\n    j=i"""
         a = """for i in range(10):\n    j=i"""
         self.check(b, a)
 
-        b = """[i for i in xrange(10)]"""
+        b = """[i for i in range(10)]"""
         a = """[i for i in range(10)]"""
         self.check(b, a)
 
@@ -1561,13 +1561,13 @@ class Test_xrange(FixerTestCase):
         for call in fixer_util.consuming_calls:
             self.unchanged("a = %s(range(10))" % call)
 
-class Test_xrange_with_reduce(FixerTestCase):
+class Test_range_with_reduce(FixerTestCase):
 
     def setUp(self):
-        super(Test_xrange_with_reduce, self).setUp(["xrange", "reduce"])
+        super(Test_range_with_reduce, self).setUp(["range", "reduce"])
 
     def test_double_transform(self):
-        b = """reduce(x, xrange(5))"""
+        b = """reduce(x, range(5))"""
         a = """from functools import reduce
 reduce(x, range(5))"""
         self.check(b, a)

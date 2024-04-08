@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-显示所选中的编码的FOURCC
-"""
+#显示所选中的编码的FOURCC
+
 import ctypes
 from ctypes import Structure, POINTER, c_int, c_void_p, c_char, pointer
 from ctypes.wintypes import LPCSTR, WORD, DWORD, LONG, LPVOID, HWND, UINT
@@ -13,7 +11,7 @@ def fourcc(s):
     return sum(256**i*ord(c) for i, c in enumerate(s))
     
 def unfourcc(v):
-    return "".join(chr(v>>(i*8)&0xff) for i in xrange(4))
+    return "".join(chr(v>>(i*8)&0xff) for i in range(4))
 
 class RECT(Structure):
     _fields_ = zip(["left","top","right","bottom"], [LONG]*4)
@@ -87,7 +85,7 @@ if __name__ == "__main__":
     popt = ctypes.pointer(opt)
     opt.fccType = fourcc("vids")
     avi.AVISaveOptions(0, 0, 1, pointer(stream), pointer(ctypes.pointer(opt)))
-    print unfourcc(opt.fccHandler)
+    print(unfourcc(opt.fccHandler))
     
     avi.AVIStreamRelease(stream)
     avi.AVIFileRelease(avifile)
@@ -98,3 +96,4 @@ if __name__ == "__main__":
     
     import time
     time.sleep(2.0)
+    

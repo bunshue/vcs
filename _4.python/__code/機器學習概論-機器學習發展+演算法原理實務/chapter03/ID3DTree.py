@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-
 from numpy import *
 import math
 import copy
-import cPickle as pickle
+import pickle
 
 class ID3DTree(object):
 	def __init__(self):
@@ -60,7 +58,7 @@ class ID3DTree(object):
 		bestFeature = -1                                # 初始化最优的特征轴  		
 		# 外循环：遍历数据集各列,计算最优特征轴
 		# i 为数据集列索引：取值范围 0~(numFeatures-1)
-		for i in xrange(numFeatures):		# 抽取第i列的列向量 			 	
+		for i in range(numFeatures):		# 抽取第i列的列向量 			 	
 			uniqueVals = set([data[i] for data in dataSet])	# 去重：该列的唯一值集	    
 			newEntropy = 0.0                 # 初始化该列的香农熵		    
 			for value in uniqueVals:         # 内循环：按列和唯一值计算香农熵				

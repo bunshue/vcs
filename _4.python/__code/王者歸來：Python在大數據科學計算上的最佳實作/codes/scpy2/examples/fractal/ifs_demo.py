@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from os import path
 import numpy as np
 
@@ -130,7 +129,7 @@ class IFSTriangles(HasTraits):
         重新绘制所有的三角形
         """
         del self.ax.lines[:]
-        for i in xrange(0, len(self.points), 3):
+        for i in range(0, len(self.points), 3):
             color = self.colors[i / 3 % len(self.colors)]
             x0, x1, x2 = self.points[i:i + 3, 0]
             y0, y1, y2 = self.points[i:i + 3, 1]

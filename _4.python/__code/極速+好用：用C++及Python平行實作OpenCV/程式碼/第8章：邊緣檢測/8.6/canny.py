@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 import sys
 import math
 import cv2
 import sobel #注意sobel边缘检测
+
 #边缘检测
 #非极大值抑制
 def non_maximum_suppression_default(dx,dy):
@@ -116,7 +116,7 @@ if __name__ =="__main__":
     if len(sys.argv)>1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python canny.py imageFile"
+        print("Usge:python canny.py imageFile")
     # ------- canny 边缘检测 -----------
     #第一步： 基于 sobel 核的卷积
     image_sobel_x,image_sobel_y = sobel.sobel(image,3)
@@ -147,8 +147,8 @@ if __name__ =="__main__":
     POSSIBLE_EDGE = 128
     tempEdge = np.copy(edgeMag_nonMaxSup)
     rows,cols = tempEdge.shape
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             if tempEdge[r][c]>=upperThresh:
                 tempEdge[r][c] = EDGE
             elif tempEdge[r][c]<lowerThresh:

@@ -1,5 +1,3 @@
-# -*- coding:utf-8 -*-
-# Filename: viterbi.py
 from numpy import *
 
 def viterbi(obs, states, start_p, trans_p, emit_p):
@@ -14,7 +12,7 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
 	V = [{}]  # 路径概率表 V[时间][隐状态] = 概率
 	for y in states: # 初始化初始状态 (t == 0)
 		V[0][y] = start_p[y] * emit_p[y][obs[0]]	
-	for t in xrange(1, len(obs)):  # 对 t > 0 跑一遍维特比算法
+	for t in range(1, len(obs)):  # 对 t > 0 跑一遍维特比算法
 		V.append({})
 		for y in states: 
 			# 概率 隐状态 =    前状态是y0的概率 * y0转移到y的概率 * y表现为当前状态的概率 
@@ -43,5 +41,4 @@ emit_p = {
     'Rainy' : {'dry':0.05,'dryish':0.10,'soggy':0.50},
 }
 result = viterbi(obs,states, start_p, trans_p, emit_p)
-print result
-
+print(result)

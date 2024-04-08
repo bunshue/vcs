@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+
 #分段线性变换
 def piecewiseLinear(image,point1,point2):
     #确保 point1 在 point2的左下角
@@ -14,7 +14,7 @@ def piecewiseLinear(image,point1,point2):
     # point1.x - point2.x
     a2 = float(y2-y1)/float(x2-x1)
     b2 = y1 - a2*x1
-    print a2
+    print(a2)
     #point2.x - 255
     a3 = float(255 - y2)/(255-x2)
     b3 = 255 - a3*255
@@ -22,8 +22,8 @@ def piecewiseLinear(image,point1,point2):
     outPutImage = np.zeros(image.shape,np.uint8)
     #图像的宽高
     rows,cols = image.shape
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             pixel = image[r][c]
             if pixel <= x1:
                 outPixel = a1*pixel + b1
@@ -34,12 +34,13 @@ def piecewiseLinear(image,point1,point2):
             outPixel = round(outPixel)
             outPutImage[r][c] = outPixel
     return outPutImage
+
 #主函数
 if __name__ =="__main__":
     if len(sys.argv) > 1:
         image = cv2.imread(sys.argv[1],cv2.IMREAD_GRAYSCALE)
     else:
-        print "Usge:python piecewiseLinear.py imageFile"
+        print("Usge:python piecewiseLinear.py imageFile")
     cv2.imshow("image",image)
     #分段线性变换
     outPutImage = piecewiseLinear(image,(100,50),(150,230))
@@ -58,9 +59,9 @@ if __name__ =="__main__":
     plt.ylabel(u"number of pixels")
     #设置坐标轴的范围
     y_maxValue = np.max(histogram)
-    print y_maxValue
+    print(y_maxValue)
     plt.axis([0,255,0,y_maxValue])
     plt.show()
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-        
+

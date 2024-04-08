@@ -1,5 +1,3 @@
-# -*- coding: utf-8  -*-
-
 from numpy import *
 import sys
 import matplotlib.pyplot as plt 
@@ -15,7 +13,7 @@ def logistic_map(k,init):
 	maxIter=100 # 最大迭代数
 	x = range(maxIter)
 	x[0]=init
-	for i in xrange(maxIter-1):  
+	for i in range(maxIter-1):  
 		x[i+1] = k*x[i]*(1.0-x[i])
 	return x	
 	

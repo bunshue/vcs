@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-import sys  
 import os 
 import time
 from numpy import *
@@ -8,10 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import operator
 from Nbayes_lib import *
-
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 # 夹角余弦距离公式
 def cosdist(vector1,vector2):
@@ -27,7 +20,7 @@ def classify(testdata, trainSet, listClasses, k):
     dataSetSize = trainSet.shape[0]    
     # 计算测试集与训练集之间的距离：夹角余弦
     distances = array(zeros(dataSetSize))
-    for indx in xrange(dataSetSize):
+    for indx in range(dataSetSize):
     	distances[indx] = cosdist(testdata,trainSet[indx])
     # 5.根据生成的夹角余弦按从大到小排序,结果为索引号
     sortedDistIndicies = argsort(-distances)  
@@ -55,4 +48,4 @@ k=3
 dataSet,listClasses = loadDataSet()
 nb = NBayes()
 nb.train_set(dataSet,listClasses)
-print classify(nb.tf[3], nb.tf, listClasses, k)
+print(classify(nb.tf[3], nb.tf, listClasses, k))

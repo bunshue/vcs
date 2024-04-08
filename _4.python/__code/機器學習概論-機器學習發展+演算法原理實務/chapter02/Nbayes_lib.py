@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import sys  
 import os 
 import numpy as np
@@ -24,9 +22,9 @@ def readfile(path):
 '''		
 #计算分类精度：
 def metrics_result(actual,predict):
-	print '精度:{0:.3f}'.format(metrics.precision_score(actual,predict))  
-	print '召回:{0:0.3f}'.format(metrics.recall_score(actual,predict))  
-	print 'f1-score:{0:.3f}'.format(metrics.f1_score(actual,predict))  
+	print('精度:{0:.3f}'.format(metrics.precision_score(actual,predict)))
+	print('召回:{0:0.3f}'.format(metrics.recall_score(actual,predict)))
+	print('f1-score:{0:.3f}'.format(metrics.f1_score(actual,predict)))
 '''
 
 #读取bunch对象
@@ -69,7 +67,7 @@ class NBayes(object):
 	def calc_tfidf(self,trainset):
 		self.idf = np.zeros([1,self.vocablen])
 		self.tf = np.zeros([self.doclength,self.vocablen])
-		for indx in xrange(self.doclength):
+		for indx in range(self.doclength):
 			for word in trainset[indx]:
 				self.tf[indx,self.vocabulary.index(word)] +=1
 			# 消除不同句长导致的偏差
@@ -83,7 +81,7 @@ class NBayes(object):
 	def calc_wordfreq(self,trainset):
 		self.idf = np.zeros([1,self.vocablen]) # 1*词典数
 		self.tf = np.zeros([self.doclength,self.vocablen]) # 训练集文件数*词典数
-		for indx in xrange(self.doclength):    # 遍历所有的文本
+		for indx in range(self.doclength):    # 遍历所有的文本
 			for word in trainset[indx]:          # 遍历文本中的每个词
 				self.tf[indx,self.vocabulary.index(word)] +=1  # 找到文本的词在字典中的位置+1
 			for signleword in set(trainset[indx]):              
@@ -101,7 +99,7 @@ class NBayes(object):
 	def build_tdm(self):
 		self.tdm = np.zeros([len(self.Pcates),self.vocablen]) #类别行*词典列
 		sumlist = np.zeros([len(self.Pcates),1])  # 统计每个分类的总值
-		for indx in xrange(self.doclength):
+		for indx in range(self.doclength):
 				self.tdm[self.labels[indx]] += self.tf[indx]  # 将同一类别的词向量空间值加总
 				sumlist[self.labels[indx]]= np.sum(self.tdm[self.labels[indx]])  # 统计每个分类的总值--是个标量
 		self.tdm = self.tdm/sumlist	  # P(x|yi)
@@ -115,7 +113,7 @@ class NBayes(object):
 	# 输出分类类别		
 	def predict(self,testset):
 		if np.shape(testset)[1] != self.vocablen:
-			print "输入错误"
+			print("输入错误")
 			exit(0)
 		predvalue = 0
 		predclass = ""

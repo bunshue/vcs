@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-
 import sys  
 import os
 from numpy import *
-# 设置utf-8 unicode环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 def splitDataSet(dataSet, axis, value):		
 		retDataSet = []     
@@ -21,11 +16,11 @@ def splitDataSet(dataSet, axis, value):
 P1=257.0/384.0
 P2=127.0/384.0
 Ip1p2=-P1*log2(P1)-P2*log2(P2)
-print Ip1p2
+print(Ip1p2)
 
 mylist = [1,0,1,0,1,0,0]
 items = dict([(mylist.count(i), i) for i in mylist])
-print items[max(items.keys())]
+print(items[max(items.keys())])
 dataset = [[1,0],[0,1],[1,0]]
 numEntries = len(dataset) # 得到数据集行数  
 labelCounts = {}          # 初始化类别标签	for featVec in dataset: # 这段代码计算了数据集中各个特征向量的和
@@ -33,15 +28,15 @@ for featVec in dataset :
     currentLabel = featVec[-1]
     if currentLabel not in labelCounts.keys(): labelCounts[currentLabel] = 0
     labelCounts[currentLabel] += 1
-print labelCounts 
+print(labelCounts)
 cateList = [data[-1] for data in dataset] # 从数据集中得到类别标签
 items = dict([(cateList.count(i), i) for i in cateList]) # 得到类别为key，出现次数value的字典          
-print items
+print(items)
 
-print splitDataSet(dataset, 0, 0)	  
+print(splitDataSet(dataset, 0, 0))
 
 P1=640.0/1024.0
 P2=384.0/1024.0
 Ip1p2=-P1*log2(P1)-P2*log2(P2)
-print Ip1p2
-print 0.9544-0.6877 
+print(Ip1p2)
+print(0.9544-0.6877)

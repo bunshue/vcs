@@ -213,6 +213,46 @@ print(cv.get_feature_names_out())
 
 print('------------------------------------------------------------')	#60個
 
+import jieba
+
+seg_list = jieba.cut("来到北京清华大学", cut_all=False)
+print("Default Mode:", "/ ".join(seg_list))  # 默认模式
+
+seg_list = jieba.cut("他来到网易杭研大厦")
+print(" ".join(seg_list))
+
+print('------------------------------------------------------------')	#60個
+
+import jieba
+
+seg_list = jieba.cut("小明终于在1995年从北京清华大学毕业了。")
+print("  ".join(seg_list))
+
+seg_list = jieba.cut("小明1995年毕业于北京清华大学", cut_all=False)
+print("Default Mode:", " ".join(seg_list))  # 默认模式
+
+seg_list = jieba.cut("小明1995年毕业于北京清华大学")
+print("  ".join(seg_list))
+
+seg_list = jieba.cut("小明1995年毕业于北京清华大学", cut_all=True)
+print("Full Mode:", "/ ".join(seg_list))  # 全模式
+
+seg_list = jieba.cut_for_search("小明硕士毕业于中国科学院计算所，后在日本京都大学深造")  # 搜索引擎模式
+print("/  ".join(seg_list))
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
 
 print('------------------------------------------------------------')	#60個
 

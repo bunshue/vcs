@@ -39,7 +39,7 @@ for i in range(n):
     #多边形顶点个数
     k = approxCurve.shape[0]
     #顶点连接，绘制多边形
-    for i in xrange(k-1):
+    for i in range(k-1):
         cv2.line(img,(approxCurve[i,0,0],approxCurve[i,0,1]),(approxCurve[i+1,0,0],approxCurve[i+1,0,1]),0,5)
     #首尾相接
     cv2.line(img,(approxCurve[k-1,0,0],approxCurve[k-1,0,1]),(approxCurve[0,0,0],approxCurve[0,0,1]),0,5)

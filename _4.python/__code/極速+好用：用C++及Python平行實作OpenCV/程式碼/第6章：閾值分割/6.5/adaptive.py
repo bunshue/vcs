@@ -1,27 +1,28 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
+
 #图像积分
 def integral(image):
     rows,cols = image.shape
     #行积分运算
     inteImageC = np.zeros(image.shape,np.float32)
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             if c == 0:
                 inteImageC[r][c] = image[r][c]
             else:
                 inteImageC[r][c] = inteImageC[r][c-1] + image[r][c]
     #列积分运算
     inteImage = np.zeros(image.shape,np.float32)
-    for c in xrange(cols):
-        for r in xrange(rows):
+    for c in range(cols):
+        for r in range(rows):
             if r == 0:
                 inteImage[r][c] = inteImageC[r][c]
             else:
                 inteImage[r][c] = inteImage[r-1][c] + inteImageC[r][c]
     return inteImage
+
 #阈值处理
 def threshAdaptive(image,winSize,ratio):
     #图像的宽高
@@ -34,8 +35,8 @@ def threshAdaptive(image,winSize,ratio):
     threshImage = np.zeros(image.shape,np.uint8)
     #图像的积分
     inteImage = integral(image)
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             # top left 
             tl_r = (r-h) if r-h > 0 else 0
             tl_c = (c-w) if c-w > 0 else 0
@@ -50,12 +51,13 @@ def threshAdaptive(image,winSize,ratio):
             else:
                 threshImage[r][c] = 255
     return threshImage
+
 #主函数
 if __name__ =="__main__":
     if len(sys.argv) > 1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python threshPun.py imageFile"
+        print("Usge:python threshPun.py imageFile")
     threshImage = threshAdaptive(image,(41,41),0.15)
     #显示自适应阈值后二值化图像
     cv2.imshow("threshImage",threshImage)

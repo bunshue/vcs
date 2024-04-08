@@ -20,17 +20,15 @@ hV = hVT.T
 # print "hU:",hU
 # print "hV:",hV		
 sigma = 	sqrt(lamda)         # 特征值
-print "sigma:",sigma
-
-
+print("sigma:",sigma)
 
 
 Sigma = np.zeros([shape(A)[0], shape(A)[1]])
 U,S,VT = linalg.svd(A)
 # Sigma[:shape(A)[0], :shape(A)[0]] = np.diag(S)
-# print U
-print S
-# print VT
+# print(U)
+print(S)
+# print(VT)
 
-# print U*Sigma*VT
+# print(U*Sigma*VT)
 

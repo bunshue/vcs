@@ -1,14 +1,7 @@
-# -*- coding: utf-8 -*-
-
-import sys  
 import os 
 import jieba
-import cPickle as pickle
+import pickle
 from sklearn.datasets.base import Bunch
-
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 # 保存至文件
 def savefile(savepath,content):
@@ -50,4 +43,5 @@ file_obj = open(wordbag_path, "wb")
 pickle.dump(bunch,file_obj)                      
 file_obj.close()
 
-print "构建文本对象结束！！！"
+print("构建文本对象结束！！！")
+

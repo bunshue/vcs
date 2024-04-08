@@ -1,14 +1,15 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 from scipy import signal
 import cv2
+
 '''
     Krisch边缘检测算法:
     krisch(image,_boundary='fill',_fillvalue=0)
     其中:边缘处理的方式_boundary包括：'symm','wrap','fill',
     且当__boundary='fill'时,填充值默认为零_fillvalue=0
 '''
+
 def krisch(image,_boundary='fill',_fillvalue=0):
     '''
     第一步:8个krisch边缘卷积算子分别和图像矩阵进行卷积,然后分别取绝对值得到边缘强度
@@ -51,7 +52,7 @@ def krisch(image,_boundary='fill',_fillvalue=0):
     第二步：对上述8个方向的边缘强度,对应位置取最大值，作为图像最后的边缘强度
     '''
     edge = list_edge[0]
-    for i in xrange(len(list_edge)):
+    for i in range(len(list_edge)):
         edge = edge*(edge>=list_edge[i]) + list_edge[i]*(edge < list_edge[i])
     return edge
 
@@ -60,12 +61,12 @@ if __name__ =="__main__":
     if len(sys.argv)>1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python krisch.py imageFile"
+        print("Usge:python krisch.py imageFile")
     edge = krisch(image,_boundary='symm')
     #边缘强度的灰度级显示
     rows,cols = edge.shape
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             if edge[r][c] >255:
                 edge[r][c] = 255
     edge = edge.astype(np.uint8)

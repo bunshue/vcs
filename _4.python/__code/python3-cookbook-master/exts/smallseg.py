@@ -1,13 +1,7 @@
-# -*- coding: utf-8 -*-
 from __future__ import print_function
 import re
 import os
 import sys
-
-try:
-    xrange          # Python 2
-except NameError:
-    xrange = range  # Python 3
 
 class SEG(object):
     def __init__(self):
@@ -32,7 +26,7 @@ class SEG(object):
                 continue
             p = self.d
             ln = len(word)
-            for i in xrange(ln-1,-1,-1):
+            for i in range(ln-1,-1,-1):
                 char = word[i].lower()
                 if p=='':
                     q[k] = {}
@@ -48,7 +42,7 @@ class SEG(object):
         if ln==1:
             return [s]
         R = []
-        for i in xrange(ln,1,-1):
+        for i in range(ln,1,-1):
             tmp = s[i-2:i]
             R.append(tmp)
         return R
@@ -58,9 +52,9 @@ class SEG(object):
         R = []
         tmp = re.sub(u"。|，|,|！|…|!|《|》|<|>|\"|'|:|：|？|\?|、|\||“|”|‘|’|；|—|（|）|·|\(|\)|　"," ",piece).split()
         ln1 = len(tmp)
-        for i in xrange(len(tmp)-1,-1,-1):
+        for i in range(len(tmp)-1,-1,-1):
             mc = re.split(r"([0-9A-Za-z\-\+#@_\.]+)",tmp[i])
-            for j in xrange(len(mc)-1,-1,-1):
+            for j in range(len(mc)-1,-1,-1):
                 r = mc[j]
                 if re.search(r"([0-9A-Za-z\-\+#@_\.]+)",r)!=None:
                     R.append(r)

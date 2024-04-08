@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
 import math
+
 #快速傅里叶变换
 def fft2Image(src):
     #得到行、列
@@ -16,13 +16,15 @@ def fft2Image(src):
     #快速傅里叶变换
     cv2.dft(fft2,fft2,cv2.DFT_COMPLEX_OUTPUT)
     return fft2
- #傅里叶幅度谱
+
+#傅里叶幅度谱
 def amplitudeSpectrum(fft2):
     #求幅度
     real2 = np.power(fft2[:,:,0],2.0)
     Imag2 = np.power(fft2[:,:,1],2.0)
     amplitude = np.sqrt(real2+Imag2)
     return amplitude
+
 #幅度谱的灰度级显示
 def graySpectrum(amplitude):
     #对比度拉伸
@@ -32,6 +34,7 @@ def graySpectrum(amplitude):
     spectrum = np.zeros(amplitude.shape,np.float32)
     cv2.normalize(amplitude,spectrum,0,1,cv2.NORM_MINMAX)
     return spectrum
+
 #相位谱
 def phaseSpectrum(fft2):
     #得到行数、列数
@@ -41,13 +44,14 @@ def phaseSpectrum(fft2):
     #相位角转换为 [ -180 , 180]
     spectrum = phase/math.pi*180
     return spectrum
+
 #主函数
 if __name__ =="__main__":
     if len(sys.argv) > 1:
     #第一步：读入图像
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python spectrum.py imageFile"
+        print("Usge:python spectrum.py imageFile")
     #显示原图
     cv2.imshow("image",image)
     #cv2.imwrite("img1.jpg",image)
@@ -77,8 +81,8 @@ if __name__ =="__main__":
     rows,cols = image.shape
     fimg = np.copy(image)
     fimg = fimg.astype(np.float32)
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             if (r+c)%2:
                 fimg[r][c] =-1*image[r][c]
             else:

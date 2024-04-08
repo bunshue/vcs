@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from numpy import *
 
 def loadDataSet(fileName):      #general function to parse tab -delimited floats
@@ -48,7 +46,7 @@ def chooseBestSplit(dataSet, leafType=regLeaf, errType=regErr, ops=(1,4)):
     bestS = inf; bestIndex = 0; bestValue = 0
     # 按列遍历数据集前n-1列
     # featIndex: 第0~n-1列
-    for featIndex in xrange(n-1):
+    for featIndex in range(n-1):
         # 遍历每列去重后的各个类型
         # splitVal:各列的每个类型
         for splitVal in set(dataSet[:,featIndex]):

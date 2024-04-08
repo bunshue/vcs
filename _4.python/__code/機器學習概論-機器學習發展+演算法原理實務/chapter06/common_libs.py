@@ -1,7 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-# Filename : Recommand_lib.py
-
-from numpy import *
+﻿from numpy import *
 import numpy as np 
 import operator
 import scipy.spatial.distance as dist
@@ -51,7 +48,7 @@ def drawScatter(plt,mydata,size=20,color='blue',mrkr='o'):
 def drawScatterbyLabel(plt,Input):
 	m,n=shape(Input)
 	target = Input[:,-1] 
-	for i in xrange(m):
+	for i in range(m):
 		if target[i]==1:
 			plt.scatter(Input[i,0],Input[i,1],c='blue',marker='o')
 		else:
@@ -91,7 +88,7 @@ def standRegres(xArr,yArr):
 	yMat[:,0:] = (mat(yArr).T)[:,0:]
 	xTx = xMat.T*xMat
 	if linalg.det(xTx) == 0.0:
-		print "This matrix is singular, cannot do inverse"
+		print("This matrix is singular, cannot do inverse")
 		return
 	ws = xTx.I * (xMat.T*yMat)
 	return ws

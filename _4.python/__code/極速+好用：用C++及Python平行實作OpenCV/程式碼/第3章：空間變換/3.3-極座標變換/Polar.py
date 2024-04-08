@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 import cv2
 import numpy as np
 import sys
+
 #极坐标变换
 def polar(I,center,r,theta=(0,360),rstep=1.0,thetastep=360.0/(180*8)):
     #得到距离的最小最大范围 
@@ -20,8 +20,8 @@ def polar(I,center,r,theta=(0,360),rstep=1.0,thetastep=360.0/(180*8)):
     theta = np.tile(theta,(H,1))
     x,y=cv2.polarToCart(r,theta,angleInDegrees=True)
     #最近邻插值
-    for i in xrange(H):
-        for j in xrange(W):
+    for i in range(H):
+        for j in range(W):
             px = int(round(x[i][j])+cx)
             py = int(round(y[i][j])+cy)
             if(px>w-1 or py >h-1):
@@ -35,13 +35,13 @@ if __name__ == "__main__":
     if len(sys.argv)>1:
         I = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usage: python polar.py image"
+        print("Usage: python polar.py image")
     #图像的宽高
     h,w = I.shape[:2]
-    print w,h
+    print(w,h)
     #极左标变换的中心
     cx,cy = w/2.0,h/2.0+10
-    print cx,cy
+    print(cx,cy)
     cv2.circle(I,(int(cx),int(cy)),10,(255.0,0,0),3)
     #距离的最小最大半径 #200 550 270,340
     O = polar(I,(cx,cy),(270,340))

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import sys
 import pyaudio
 import numpy as np
@@ -78,7 +77,7 @@ class Demo(HasTraits):
         self.frequency = np.linspace(0., y2, num=NUM_SAMPLES/2)
         self.time = np.linspace(0., float(NUM_SAMPLES)/SAMPLING_RATE, 
                                 num=NUM_SAMPLES, endpoint=False)
-        for i in xrange(NUM_LINES):
+        for i in range(NUM_LINES):
             self.ax2.plot(self.frequency, np.zeros_like(self.frequency), 
                           color=cm.Blues(float(i+1)/(NUM_LINES+1)))
             
@@ -126,3 +125,4 @@ class Demo(HasTraits):
 if __name__ == "__main__":
     demo = Demo()
     demo.configure_traits()
+    

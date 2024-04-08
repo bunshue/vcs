@@ -1,22 +1,22 @@
-# -*- coding: utf-8 -*-
 import cv2
 import numpy as np
 import sys
+
 #图像积分
 def integral(image):
     rows,cols = image.shape
     #行积分运算
     inteImageC = np.zeros((rows,cols),np.float32)
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             if c == 0:
                 inteImageC[r][c] = image[r][c]
             else:
                 inteImageC[r][c] = inteImageC[r][c-1] + image[r][c]
     #列积分运算
     inteImage = np.zeros(image.shape,np.float32)
-    for c in xrange(cols):
-        for r in xrange(rows):
+    for c in range(cols):
+        for r in range(rows):
             if r == 0:
                 inteImage[r][c] = inteImageC[r][c]
             else:
@@ -26,6 +26,7 @@ def integral(image):
     inteImage_0 = np.zeros((rows+1,cols+1),np.float32)
     inteImage_0[1:rows+1,1:cols+1] = inteImage
     return inteImage_0
+
 #快速均值平滑：返回数组的数据类型是浮点型，winSize = ( 高，宽 )
 def fastMeanBlur(image,winSize,borderType = cv2.BORDER_DEFAULT):
     halfH = (winSize[0]-1)/2
@@ -48,12 +49,13 @@ def fastMeanBlur(image,winSize,borderType = cv2.BORDER_DEFAULT):
         r+=1
         c=0
     return meanBlurImage
+
 #主函数
 if __name__ =="__main__":
     if len(sys.argv) > 1:
         image = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python fastMeanBlur.py imageFile"
+        print("Usge:python fastMeanBlur.py imageFile")
     #快速均值平滑
     meanBlurImage = fastMeanBlur(image,(15,15),cv2.BORDER_DEFAULT)
     #数据类型转换

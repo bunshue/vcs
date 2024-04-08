@@ -1,22 +1,14 @@
-# -*- coding: utf-8 -*-
-
-import sys  
 import os 
 #引入Bunch类
-from sklearn.datasets.base import Bunch
+from sklearn.datasets._base import Bunch
 #引入持久化类
-import cPickle as pickle
+import pickle
 from sklearn import feature_extraction  
 from sklearn.feature_extraction.text import TfidfTransformer  
 from sklearn.feature_extraction.text import TfidfVectorizer  
 from sklearn.naive_bayes import MultinomialNB #导入多项式贝叶斯算法
 import numpy as np
 from sklearn import metrics
-
-
-# 配置utf-8输出环境
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 # 读取文件
 def readfile(path):
@@ -27,9 +19,9 @@ def readfile(path):
 		
 #计算分类精度：
 def metrics_result(actual,predict):
-	print '精度:{0:.3f}'.format(metrics.precision_score(actual,predict))  
-	print '召回:{0:0.3f}'.format(metrics.recall_score(actual,predict))  
-	print 'f1-score:{0:.3f}'.format(metrics.f1_score(actual,predict))  
+	print('精度:{0:.3f}'.format(metrics.precision_score(actual,predict)))
+	print('召回:{0:0.3f}'.format(metrics.recall_score(actual,predict)))
+	print('f1-score:{0:.3f}'.format(metrics.f1_score(actual,predict)))
 
 #读取bunch对象
 def readbunchobj(path):
@@ -61,10 +53,10 @@ total = len(predicted);rate = 0
 for flabel,file_name,expct_cate in zip(test_set.label,test_set.filenames,predicted):
 	if flabel != expct_cate:
 		rate += 1
-		print file_name,": 实际类别:",flabel," -->预测类别:",expct_cate		
+		print(file_name,": 实际类别:",flabel," -->预测类别:",expct_cate)
 # 精度
-print "error rate:",float(rate)*100/float(total),"%"
-print "预测完毕!!!"
+print("error rate:",float(rate)*100/float(total),"%")
+print("预测完毕!!!")
 
 metrics_result(test_set.label,predicted)
 

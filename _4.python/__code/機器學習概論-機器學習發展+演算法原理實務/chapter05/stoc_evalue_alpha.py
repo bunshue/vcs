@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import sys
 import numpy as np 
@@ -6,7 +5,6 @@ import operator
 from numpy import *
 from common_libs import *
 import matplotlib.pyplot as plt 
-
 
 Input = file2matrix("testSet.txt","\t")
 target = Input[:,-1] #获取分类标签列表
@@ -25,9 +23,9 @@ alphahlist =[]
 # 2.对抽取之后的行向量应用动态步长
 # 3.进行梯度计算
 # 4.求得行向量的权值，合并为矩阵的权值
-for j in xrange(steps):
+for j in range(steps):
 	dataIndex = range(m) # 以导入数据的行数m为个数产生索引向量:0~99
-	for i in xrange(m):
+	for i in range(m):
 		alpha = 2/(1.0+j+i)+0.0001  #动态修改alpha步长从4->0.016
 		if j==0: alphalist.append(alpha)
 		if i==0: alphahlist.append(alpha)

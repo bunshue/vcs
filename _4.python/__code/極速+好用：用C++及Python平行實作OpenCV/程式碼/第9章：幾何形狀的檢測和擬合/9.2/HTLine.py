@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
 import math
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+
 #霍夫极坐标变换：直线检测
 def HTLine (image,stepTheta=1,stepRho=1):
     #宽、高
@@ -17,14 +17,14 @@ def HTLine (image,stepTheta=1,stepRho=1):
     accumulator = np.zeros((numRho,numtheta),np.int32)
     #建立字典
     accuDict={}
-    for k1 in xrange(numRho):
-        for k2 in xrange(numtheta):
+    for k1 in range(numRho):
+        for k2 in range(numtheta):
             accuDict[(k1,k2)]=[]
     #投票计数
-    for y in xrange(rows):
-        for x  in xrange(cols):
+    for y in range(rows):
+        for x  in range(cols):
             if(image[y][x] == 255):#只对边缘点做霍夫变换
-                for m in xrange(numtheta):
+                for m in range(numtheta):
                     #对每一个角度，计算对应的 rho 值
                     rho = x*math.cos(stepTheta*m/180.0*math.pi)+y*math.sin(stepTheta*m/180.0*math.pi)
                     #计算投票哪一个区域
@@ -40,7 +40,7 @@ if __name__ == "__main__":
         #输入图像
         I = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usage: python HTPLine.py image"
+        print("Usage: python HTPLine.py image")
     #canny 边缘检测
     edge = cv2.Canny(I,50,200)
     #显示二值化边缘
@@ -63,8 +63,8 @@ if __name__ == "__main__":
     grayAccu = grayAccu.astype(np.uint8)
     #只画出投票数大于 60 直线
     voteThresh = 60
-    for r in xrange(rows):
-        for c in xrange(cols):
+    for r in range(rows):
+        for c in range(cols):
             if accumulator[r][c] > voteThresh:
                 points = accuDict[(r,c)]
                 cv2.line(I,points[0],points[len(points)-1],(255),2)

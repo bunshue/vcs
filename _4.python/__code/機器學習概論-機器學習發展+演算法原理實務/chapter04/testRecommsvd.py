@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Filename : testRecomm01.py
-
 from numpy import *
 import numpy as np 
 import operator
@@ -26,7 +23,7 @@ Sr = Sigma[:r,:r]
 Vr = V[:,:r]
 # 计算new的坐标值	
 newresult = new*Ur*linalg.inv(Sr)
-print newresult
+print(newresult)
 
 maxv = 0 # 最大的余弦值
 maxi = 0 # 最大值的下标
@@ -38,5 +35,6 @@ for vi in Vr:
 	 	maxv = temp
 	 	maxi = indx
 	indx +=1
-print maxv,maxi 	
+print(maxv,maxi)
+
 

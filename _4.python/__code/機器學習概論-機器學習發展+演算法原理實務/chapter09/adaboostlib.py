@@ -1,11 +1,5 @@
-# -*- encoding: utf-8 -*-
-# Filename : adaboost2.py
+#Adaboost is short for Adaptive Boosting
 
-'''
-Created on Nov 28, 2010
-Adaboost is short for Adaptive Boosting
-@author: Peter
-'''
 from numpy import *
 import matplotlib.pyplot as plt 
 import copy 
@@ -44,11 +38,11 @@ def decisionTree(dataSet,labellist,D):
     bestFeat = {}; # 最优项列 
     bestClass = mat(zeros((m,1))) # 最优预测分类
     minError = inf # 初始化最小误差为无穷大
-    for i in xrange(n): # 按列迭代
+    for i in range(n): # 按列迭代
         rangeMin = dataMat[:,i].min(); # 最小值
         rangeMax = dataMat[:,i].max(); # 最大值
         stepSize = (rangeMax-rangeMin)/numSteps # 步长 = (最大值-最小值)/步长数
-        for j in xrange(-1,int(numSteps)+1):# 对每个步长数迭代: -1~(numSteps)            
+        for j in range(-1,int(numSteps)+1):# 对每个步长数迭代: -1~(numSteps)            
             threshVal = (rangeMin + float(j) * stepSize) # 计算域值:(最小值+迭代步数*步长数)
             for operator in ['lt', 'gt']: # operator 操作符，取值为两个: lt小于,gt大于--分类分隔符
                 # 调用 splitDataSet方法,小于,大于
@@ -73,7 +67,7 @@ def adaBoostTrain(dataSet,labellist,numIt=40):
     m = shape(dataSet)[0]
     D = mat(ones((m,1))/m)   #初始化D为平均权重
     aggClassSet = mat(zeros((m,1)))
-    for i in xrange(numIt):
+    for i in range(numIt):
         bestFeat,error,EstClass = decisionTree(dataSet,labellist,D)  
         alpha = float(0.5*log((1.0-error)/max(error,1e-16))) # alpha计算公式，1e-16避免除0
         bestFeat['alpha'] = alpha  
@@ -125,4 +119,4 @@ def plotROC(predStrengths, labellist):
     plt.title('ROC curve for AdaBoost horse colic detection system')
     ax.axis([0,1,0,1])
     plt.show()
-    print "the Area Under the Curve is: ",ySum*xStep
+    print("the Area Under the Curve is: ",ySum*xStep)

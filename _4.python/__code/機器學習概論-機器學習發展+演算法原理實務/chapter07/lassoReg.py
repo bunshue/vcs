@@ -1,6 +1,3 @@
-# -*- coding: utf-8  -*-
-# Filename : 05stepWise.py
-
 from numpy import *
 import sys
 import matplotlib.pyplot as plt 
@@ -31,7 +28,7 @@ def scatterplot(wMat,k):# 绘制图形
 	ax = fig.add_subplot(111) 
 	wMatT = wMat.T
 	m,n=shape(wMatT)
-	for i in xrange(m):
+	for i in range(m):
 		ax.plot(k,wMatT[i,:])
 		ax.annotate("feature["+str(i)+"]",xy =(0,wMatT[i,0]),color='black')	
 	plt.show()	
@@ -47,9 +44,9 @@ numIt = 1000 # 迭代次数
 returnMat = zeros((numIt,n)) #返回矩阵
 ws = zeros((n,1)) # 初始化ws为全零向量
 wsTest = ws.copy(); wsMax = ws.copy()
-for i in xrange(numIt):
+for i in range(numIt):
     lowestError = inf; # 初始化lowestError为无穷大
-    for j in xrange(n): # n 为特征向量的维度
+    for j in range(n): # n 为特征向量的维度
         for sign in [-1,1]: # sign:信号量 取值为-1和1
             wsTest = ws.copy()
             wsTest[j] += eps*sign # 信号量乘以步进值 
@@ -60,7 +57,7 @@ for i in xrange(numIt):
                 wsMax = wsTest # 更新wsMax
     ws = wsMax.copy()
     returnMat[i,:] = ws.T
-print returnMat
+print(returnMat)
 
 # 绘制图形
 # lasso

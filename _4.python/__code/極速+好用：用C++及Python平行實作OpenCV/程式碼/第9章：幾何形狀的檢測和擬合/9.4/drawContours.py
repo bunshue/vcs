@@ -8,7 +8,7 @@ if __name__ =="__main__":
     if len(sys.argv)>1:
         img = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usage draw.py image"
+        print("Usage draw.py image")
     #第二步：边缘检测 或者 阈值处理 生成一张二值图
     img = cv2.GaussianBlur(img, (3, 3), 0.5)#高斯平滑处理    #執行高斯模糊化
     binaryImg = cv2.Canny(img,50,200)
@@ -19,7 +19,7 @@ if __name__ =="__main__":
     n =  len(contours)
     contoursImg = []
     #画出找到的轮廓
-    for i in xrange(n):
+    for i in range(n):
         #创建一个黑色画布
         temp = np.zeros(binaryImg.shape,np.uint8)
         contoursImg.append(temp)

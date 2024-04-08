@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import cv2
+
 #快速傅里叶变换
 def fft2Image(src):
     #得到行、列
@@ -15,20 +15,22 @@ def fft2Image(src):
     #快速傅里叶变换
     cv2.dft(fft2,fft2,cv2.DFT_COMPLEX_OUTPUT)
     return fft2
- #傅里叶幅度谱
+
+#傅里叶幅度谱
 def amplitudeSpectrum(fft2):
     #求幅度
     real2 = np.power(fft2[:,:,0],2.0)
     Imag2 = np.power(fft2[:,:,1],2.0)
     amplitude = np.sqrt(real2+Imag2)
     return amplitude
+
 #主函数
 if __name__ =="__main__":
     if len(sys.argv) > 1:
     #第一步：读入图像
         I = cv2.imread(sys.argv[1],cv2.CV_LOAD_IMAGE_GRAYSCALE)
     else:
-        print "Usge:python homomorphicFilter.py imageFile"
+        print("Usge:python homomorphicFilter.py imageFile")
     cv2.imshow("I",I)
     cv2.imwrite("I.jpg",I)
     #第二步：取对数
@@ -36,8 +38,8 @@ if __name__ =="__main__":
     lI = lI.astype(np.float32)
     #第三步：每一元素乘以 (-1)^(r+c)
     fI = np.copy(lI)
-    for r in xrange(I.shape[0]):
-        for c in xrange(I.shape[1]):
+    for r in range(I.shape[0]):
+        for c in range(I.shape[1]):
             if (r+c)%2:
                 fI[r][c] = -1*fI[r][c]
     #第四、五步：补零和快速傅里叶变换
@@ -56,15 +58,15 @@ if __name__ =="__main__":
     heFilter =(high-low)*(1-np.exp(-k*d/(2.0*pow(radius,2.0))))+low
     #第七步：快速傅里叶变换与高频增强滤波器的点乘
     fft2Filter = np.zeros(fft2.shape,fft2.dtype)
-    for i in xrange(2):
+    for i in range(2):
         fft2Filter[:rows,:cols,i] = fft2[:rows,:cols,i]*heFilter
     #第八、九步：高频增强傅里叶变换执行傅里叶逆变换,并只取实部
     ifft2 = cv2.dft(fft2Filter,flags=cv2.DFT_REAL_OUTPUT+cv2.DFT_INVERSE+cv2.DFT_SCALE)
     #第十步：裁剪，和输入图像的尺寸一样
     ifI = np.copy(ifft2[:I.shape[0],:I.shape[1]])
     #第十一步：每一元素乘以 (-1)^(r+c)
-    for i in xrange(ifI.shape[0]):
-        for j in xrange(ifI.shape[1]):
+    for i in range(ifI.shape[0]):
+        for j in range(ifI.shape[1]):
             if (i+j)%2:
                 ifI[i][j] = -1*ifI[i][j]
     #第十二步：取指数

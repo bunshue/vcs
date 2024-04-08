@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-
 from numpy import *
 import math
 import copy
-import cPickle as pickle
+import pickle
 
 class C45DTree(object):
 	def __init__(self):
@@ -53,7 +51,7 @@ class C45DTree(object):
 		ConditionEntropy = [] # 初始化条件熵
 		slpitInfo = []  # for C4.5, calculate gain ratio
 		allFeatVList=[]
-		for f in xrange(Num_Feats):
+		for f in range(Num_Feats):
 			featList = [example[f] for example in dataSet]
 			[splitI,featureValueList] = self.computeSplitInfo(featList)
 			allFeatVList.append(featureValueList)         

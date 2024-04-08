@@ -1,5 +1,3 @@
-# -*- coding: utf-8  -*-
-
 from numpy import *
 import sys
 import os
@@ -11,7 +9,7 @@ def loadDataSet(fileName):
     fr = open(fileName)
     for line in fr.readlines():
         curLine = line.strip().split('\t')          
-        X.append([float(curLine[i]) for i in xrange(numFeat) ])
+        X.append([float(curLine[i]) for i in range(numFeat) ])
         Y.append(float(curLine[-1]))
     return X,Y
 #绘制图形
@@ -35,9 +33,9 @@ xMat = mat(xArr); yMat = mat(yArr).T
 testArr = xArr # 测试数组
 m,n = shape(xArr) # xArr的行数
 yHat = zeros(m) # yHat是y的预测值,yHat的数据是y的回归线矩阵
-for i in xrange(m):
+for i in range(m):
     weights = mat(eye(m))
-    for j in xrange(m):                          
+    for j in range(m):                          
         diffMat = testArr[i] - xMat[j,:] 
         # 利用高斯核函数计算权重矩阵,计算后的权重是一个对角阵	
         weights[j,j] = exp(diffMat*diffMat.T/(-miu*k**2)) 
@@ -46,11 +44,11 @@ for i in xrange(m):
        ws = xTx.I * (xMat.T * (weights * yMat))
        yHat[i] = testArr[i] * ws # 计算回归线坐标矩阵
     else: 
-       print "This matrix is singular, cannot do inverse"
+       print("This matrix is singular, cannot do inverse")
        sys.exit(0)  # 退出程序
 
 plotscatter(xMat[:,1],yMat,yHat,plt) # 绘制图形
 
 # 计算相关系数:
-print corrcoef(yHat,yMat.T)
+print(corrcoef(yHat,yMat.T))
 
