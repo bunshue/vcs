@@ -1,7 +1,7 @@
-import requests
-from bs4 import BeautifulSoup
 import os
+import requests
 import threading
+from bs4 import BeautifulSoup
 from selenium import webdriver  # selenium 的用法可參見 5-7 節
 from selenium.webdriver.common.keys import Keys
 

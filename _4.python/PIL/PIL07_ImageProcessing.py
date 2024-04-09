@@ -452,7 +452,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_derivative")
 
-from scipy.ndimage import filters
+#from scipy.ndimage import filters
+import scipy.ndimage
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -476,13 +477,13 @@ plt.title(u'(a)原圖')
 plt.imshow(image)
 # sobel算子
 imagex=np.zeros(image.shape)
-filters.sobel(image,1,imagex)
+scipy.ndimage.sobel(image,1,imagex)
 
 plt.subplot(142)
 plt.title(u'(b)x方向差分')
 plt.imshow(imagex)
 imagey=np.zeros(image.shape)
-filters.sobel(image,0,imagey)
+scipy.ndimage.sobel(image,0,imagey)
 
 plt.subplot(143)
 plt.title(u'(c)y方向差分')
@@ -499,7 +500,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_fuzzy")
 
-from scipy.ndimage import filters
+import scipy.ndimage
 from matplotlib.font_manager import FontProperties
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
@@ -525,7 +526,7 @@ plt.imshow(image)
 
 for bi,blur in enumerate([2,4,8]):
     image2=np.zeros(image.shape)
-    image2=filters.gaussian_filter(image,blur)
+    image2=scipy.ndimage.gaussian_filter(image,blur)
     image2=np.uint8(image2)
     imageNum=str(blur)
     plt.subplot(1,4,2+bi)
@@ -547,15 +548,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_gaussian")
 
-from scipy.ndimage import filters
+import scipy.ndimage
 
 def imx(image, sigma):
     imagex = np.zeros(image.shape)
-    filters.gaussian_filter(image, sigma, (0, 1), imagex)
+    scipy.ndimage.gaussian_filter(image, sigma, (0, 1), imagex)
     return imagex
 def imy(image, sigma):
     imagey = np.zeros(image.shape)
-    filters.gaussian_filter(image, sigma, (1, 0), imagey)
+    scipy.ndimage.gaussian_filter(image, sigma, (1, 0), imagey)
     return imagey
 def mag(image, sigma):
     # 還有gaussian_gradient_magnitude()
@@ -603,7 +604,7 @@ print("------------------------------------------------------------")  # 60個
 print("PIL_opening")
 
 #measurements模塊實現二值圖像的計數和度量功能，morphology模塊實現形態學操作
-from scipy.ndimage import measurements, morphology  
+import scipy.ndimage
 
 # 加載圖像和閾值，以確保它是二進制的
 
@@ -626,19 +627,19 @@ plt.subplot(221)
 plt.imshow(image)
 plt.title(u'原圖')
 image = (image < 128)
-labels, nbr_objects = measurements.label(image) #圖像的灰度值表示對象的標簽
+labels, nbr_objects = scipy.ndimage.label(image) #圖像的灰度值表示對象的標簽
 print ("Number of objects:", nbr_objects)
 
 plt.subplot(222)
 plt.imshow(labels)
 plt.title(u'標記後的圖')
 #形態學——使物體分離更好
-image_open = morphology.binary_opening(image, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+image_open = scipy.ndimage.binary_opening(image, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
 
 plt.subplot(223)
 plt.imshow(image_open)
 plt.title(u'開運算後的圖像')
-labels_open, nbr_objects_open = measurements.label(image_open)
+labels_open, nbr_objects_open = scipy.ndimage.label(image_open)
 print ("Number of objects:", nbr_objects_open)
 
 plt.subplot(224)
@@ -652,7 +653,7 @@ print("------------------------------------------------------------")  # 60個
 print("PIL_PCA")
 
 #measurements模塊實現二值圖像的計數和度量功能，morphology模塊實現形態學操作
-from scipy.ndimage import measurements, morphology  
+import scipy.ndimage
 
 # 加載圖像和閾值，以確保它是二進制的
 # 檔案 => PIL影像 => 灰階 => numpy陣列
@@ -674,19 +675,19 @@ plt.subplot(221)
 plt.imshow(image)
 plt.title(u'原圖')
 image = (image < 128)
-labels, nbr_objects = measurements.label(image) #圖像的灰度值表示對象的標簽
+labels, nbr_objects = scipy.ndimage.label(image) #圖像的灰度值表示對象的標簽
 print ("Number of objects:", nbr_objects)
 
 plt.subplot(222)
 plt.imshow(labels)
 plt.title(u'標記後的圖')
 #形態學——使物體分離更好
-image_open = morphology.binary_opening(image, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
+image_open = scipy.ndimage.binary_opening(image, np.ones((9, 5)), iterations=4) #開操作，第二個參數為結構元素，iterations覺定執行該操作的次數
 
 plt.subplot(223)
 plt.imshow(image_open)
 plt.title(u'開運算後的圖像')
-labels_open, nbr_objects_open = measurements.label(image_open)
+labels_open, nbr_objects_open = scipy.ndimage.label(image_open)
 print ("Number of objects:", nbr_objects_open)
 
 plt.subplot(224)
@@ -699,7 +700,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_realROF")
 
-from scipy.ndimage import filters
+import scipy.ndimage
 #from scipy.misc import imsave
 #from PCV.tools import rof
 
@@ -707,7 +708,7 @@ from scipy.ndimage import filters
 image = np.array(Image.open('data/gril.jpg').convert('L'))
 
 #U,T = rof.denoise(image,image)
-G = filters.gaussian_filter(image,10)
+G = scipy.ndimage.gaussian_filter(image,10)
 
 plt.figure(
     num="PIL_realROF",
@@ -742,7 +743,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_ROF")
 
-from scipy.ndimage import filters
+import scipy.ndimage
 #from scipy.misc import imsave
 #from PCV.tools import rof
 
@@ -753,7 +754,7 @@ image[200:300,200:300] = 255
 image = image + 30*np.random.standard_normal((500,500))
 #roll()函數：循環滾動數組中的元素，計算領域元素的差異。linalg.norm()函數可以衡量兩個數組見得差異
 #U,T = rof.denoise(image,image)  
-G = filters.gaussian_filter(image,10)
+G = scipy.ndimage.gaussian_filter(image,10)
 
 plt.figure(
     num="PIL_ROF",
@@ -848,6 +849,31 @@ image2.save(open('tmp_elephant_binary.png', 'wb'))
 print("------------------------------------------------------------")  # 60個
 
 
+print('高斯模糊')
+from PIL import Image
+from scipy.ndimage import gaussian_filter
+
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
+im = np.array(Image.open(filename).convert('L'))
+plt.gray()
+plt.subplot(2,2,1)
+plt.axis('off')
+plt.title('Original Image')
+plt.imshow(im)
+
+for bi, blur in enumerate([2, 5, 10]):
+    print("bi = ", bi)
+    im2 = np.zeros(im.shape)
+    im2 = gaussian_filter(im, blur)
+    im2 = np.uint8(im2)
+    imNum = str(blur)
+    plt.subplot(2, 2, 2 + bi)
+    plt.axis('off')
+    plt.title('GaussVar = ' + imNum)
+    plt.imshow(im2)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

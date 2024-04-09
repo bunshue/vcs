@@ -100,6 +100,13 @@ image.thumbnail(size, filter=None)
 
 print("------------------------------------------------------------")  # 60個
 
+import PIL
+from PIL import Image
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+print("------------------------------------------------------------")  # 60個
+
 # 共同
 import os
 import sys
@@ -119,38 +126,12 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import Image   # Importing Image class from PIL module
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-print('------------------------------------------------------------')	#60個
-
-print('顯示原圖')
-
-#建立Pillow物件 PIL讀取本機圖片, RGB模式, 存成PIL影像格式
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-
-#image = image.convert('L')  #fail
-print(type(image))
-plt.imshow(image)
-plt.show()
-
-# PIL影像 => numpy陣列
-image=np.array(image)
-print(type(image))
-
-#顯示方法相同
-
-print('------------------------------------------------------------')	#60個
-
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/red_300X300.bmp'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.bmp'
-
+'''
 """
 平均雜湊（aHash）
 ahash:          Average hash
@@ -316,78 +297,25 @@ def blue_to_red2(image_path):
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 blue_to_red2(filename)
 """    
+
+'''
 print('------------------------------------------------------------')	#60個
 
-""" 像是沒用到
-import seaborn as sns #海生, 自動把圖畫得比較好看
-import plotly.offline
-import plotly.express as px
-import plotly.graph_objects as go
-import plotly.subplots
-import squarify
-"""
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
-print('------------------------------------------------------------')	#60個
+# 打開圖像，并轉成灰度圖像
+# 檔案 => PIL影像 => 灰階 => np陣列
+image = np.array(Image.open(filename).convert('L'))#L為8位像素黑白圖
 
-from PIL import Image   # Importing Image class from PIL module
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+plt.contour(image, origin='image')
+plt.axis('equal')
+plt.title(u'圖像輪廓圖')
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-print('顯示原圖')
-
-#建立Pillow物件 PIL讀取本機圖片, RGB模式, 存成PIL影像格式
-img = Image.open(filename)
-#img = img.convert('L')  #fail
-print(type(img))
-
-print('取得通道與名稱')
-cc = img.getbands()
-print(cc)
-print('共有 :', len(cc), '個通道')
-for i in range(len(cc)):
-    print("通道", cc[i])
-
-print('模式')
-print(img.mode)
-
-print('尺寸')
-print(img.size)
-
-print('信息')
-print(img.info)
-
-
-"""
-plt.figure('Image')
-plt.imshow(img)
-plt.show()
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-image = Image.open(filename)
-
-plt.imshow(image)
-plt.show()
-
-r, g, b = image.split() # 分離三個通道
-image = Image.merge("RGB",(b,g,r))# 將藍色通道和通道互換
-
-plt.imshow(image)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

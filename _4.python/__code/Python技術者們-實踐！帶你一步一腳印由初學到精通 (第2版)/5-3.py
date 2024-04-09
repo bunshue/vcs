@@ -110,10 +110,9 @@ print(m.start())    # 輸出 1
 print(m.end())    # 輸出 5 注意！pple 的位置是 1~4
 print(m.span())    # 輸出 (1, 5)
 
-
 print('------------------------------------------------------------')	#60個
 
-
+print('1111 fail')
 from selenium import webdriver    # 匯入 selenium 的 webdriver 子套件
 from time import sleep         # 匯入內建 time 模組的 sleep() 函式 (計時用)
 browser = webdriver.Chrome()   # 建立 Chrome 瀏覽器物件
@@ -122,6 +121,8 @@ sleep(5)                       # 暫停 5 秒
 browser.close()                # 關閉網頁(目前分頁)A
 
 print('------------------------------------------------------------')	#60個
+
+print('2222')
 
 from selenium import webdriver # 匯入 selenium 的 webdriver
 from time import sleep         # 匯入內建 time 模組的 sleep() 函式
@@ -141,6 +142,8 @@ sleep(3)
 browser.quit() # 關閉視窗結束驅動
 
 print('------------------------------------------------------------')	#60個
+
+print('333')
 
 from selenium import webdriver # 匯入 selenium 的 webdriver
 

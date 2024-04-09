@@ -1,8 +1,3 @@
-"""Periodic Table of Elements, by Al Sweigart al@inventwithpython.com
-Displays atomic information for all the elements.
-This code is available at https://nostarch.com/big-book-small-python-programming
-Tags: short, science"""
-
 # Data from https://en.wikipedia.org/wiki/List_of_chemical_elements
 # Highlight the table, copy it, then paste it into a spreadsheet program
 # like Excel or Google Sheets like in https://invpy.com/elements

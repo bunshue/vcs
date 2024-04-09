@@ -46,4 +46,6 @@ url = 'https://www.coingecko.com/price_charts/1/twd/90_days.json'
 bitcoin =  m.get_price(url)
 total = strategy(bitcoin, 1000000, 200, 1000)
 #期初資金為100萬, 均線為200, 停利點為1000
+
+print('顯示出淨值 : ')
 print(total)  #顯示出淨值

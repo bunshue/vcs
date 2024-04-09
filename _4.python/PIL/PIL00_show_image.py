@@ -13,8 +13,6 @@ from PIL import Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-
 print('------------------------------------------------------------')	#60個
 
 # 共同
@@ -43,41 +41,30 @@ print("------------------------------------------------------------")  # 60個
 
 print('顯示原圖')
 
-image1 = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
-plt.imshow(image1)
+# 檔案 => PIL影像
+image = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
+plt.imshow(image)
 
 plt.show()
 
 print('顯示圖片訊息')
-print("列出物件檔名 : ", image1.filename)
-print("列出物件型態 : ", type(image1))
-print("列出物件副檔名 : ", image1.format)
-print("列出物件描述   : ", image1.format_description)
-print("列出物件模式   : ", image1.mode)
+print("列出物件檔名 : ", image.filename)
+print("列出物件型態 : ", type(image))
+print("列出物件副檔名 : ", image.format)
+print("列出物件描述   : ", image.format_description)
+print("列出物件模式   : ", image.mode)
 
-W, H = image1.size
+W, H = image.size
 print('原圖大小 W =', W, ', H =', H)
 
 print('圖片維度 圖片資訊')
-print('Size : ', image1.size, 'Mode : ', image1.mode, 'Format : ', image1.format)
+print('Size : ', image.size, 'Mode : ', image.mode, 'Format : ', image.format)
 
-image1.close()
+image.close()
 
 print('------------------------------------------------------------')	#60個
 
-"""
-#PIL 存圖
-print('圖片另存新檔')
-image1.save('tmp_image1.jpg')
-image1.save('tmp_image2.jpg', 'JPEG')
-image1.save('tmp_image3.png')
-image1.save('tmp_image4.png', 'PNG')
-image1.save('tmp_image5.bmp') 
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
+# 檔案 => PIL影像
 image = Image.open(filename)       # 建立Pillow物件
 print("列出物件檔名 : ", image.filename)
 print("列出物件副檔名 : ", image.format)
@@ -93,6 +80,7 @@ print("高度 = ", height)
 plt.imshow(image)
 plt.show()
 
+# 檔案 => PIL影像
 image = Image.open(filename)
 print('圖檔格式: ', image.format)
 print('圖檔的色彩模式: ', image.mode)
@@ -112,21 +100,20 @@ print(type(image))
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-im = Image.open(filename)
-print("%s:" % filename, im.format, "%dx%d" % im.size, im.mode)
-print(im.info, im.tile)
-
+# 檔案 => PIL影像
+image = Image.open(filename)
+print("%s:" % filename, image.format, "%dx%d" % image.size, image.mode)
+print(image.info, image.tile)
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
 
 #純圖片指定座標取得顏色方法
 def rgb_of_pixel(image_path, x, y):
-    im = Image.open(image_path).convert('RGB')
-    r, g, b = im.getpixel((x, y))
+    # 檔案 => PIL影像 => RGB影像
+    image = Image.open(image_path).convert('RGB')
+    r, g, b = image.getpixel((x, y))
     a = (r, g, b)
     return a
 
@@ -137,28 +124,27 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-#image1.save('xxxxx.png')
-
-print("------------------------------------------------------------")  # 60個
-
 #split
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 #通道分離與合併
 
+# 檔案 => PIL影像
 image=Image.open(filename)  #打開圖像, 彩色
 print(image.size)
 
+# PIL影像 => 灰階
 gray_image=image.convert('L')   #轉換成灰度
 print(gray_image.size)
-r,g,b=image.split()   #分離三通道
+
+# 分離三通道
+r,g,b=image.split()
 print(r.size)
 
-pic=Image.merge('RGB',(r,g,b)) #合併三通道
+#合併三通道
+pic=Image.merge('RGB',(r,g,b))
 print(pic.size)
-
-plt.figure('picture')
 
 plt.subplot(2,3,1)
 plt.title('原圖')
@@ -192,11 +178,6 @@ plt.imshow(b,cmap='gray')
 
 plt.show()
 
-
-sys.exit()
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -204,7 +185,10 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 #convert
 print('彩色轉灰階')
 
+# 檔案 => PIL影像
 image=Image.open(filename)
+
+# PIL影像 => 灰階
 gray_image=image.convert('L')
 
 plt.figure('picture')
@@ -218,21 +202,90 @@ plt.title('灰階')
 
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+print('顯示原圖 顯示PIL影像 與 顯示numpy陣列')
+
+#建立Pillow物件 PIL讀取本機圖片, RGB模式, 存成PIL影像格式
+
+# 檔案 => PIL影像
+image = Image.open(filename)
+#image = image.convert('L')  #fail
+print(type(image))
+#顯示PIL影像
+#plt.imshow(image)
+#plt.show()
+
+print('取得通道與名稱')
+cc = image.getbands()
+print(cc)
+print('共有 :', len(cc), '個通道')
+for i in range(len(cc)):
+    print("通道", cc[i])
+
+print('模式')
+print(image.mode)
+
+print('尺寸')
+print(image.size)
+
+print('信息')
+print(image.info)
+
+# PIL影像 => numpy陣列
+image=np.array(image)
+print(type(image))
+#顯示numpy陣列
+#plt.imshow(image)
+#plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 檔案 => PIL影像
+image = Image.open(filename)
+
+plt.subplot(121)
+plt.title('原圖')
+plt.imshow(image)
+
+r, g, b = image.split() # 分離三個通道
+image = Image.merge("RGB",(b,g,r))# 將藍色通道和紅通道互換
+
+plt.subplot(122)
+plt.title('兩通道互換')
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
 
 
-
-
-
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+"""
+#PIL 存圖
+print('圖片另存新檔')
+image.save('tmp_image1.jpg')
+image.save('tmp_image2.jpg', 'JPEG')
+image.save('tmp_image3.png')
+image.save('tmp_image4.png', 'PNG')
+image.save('tmp_image5.bmp') 
+
+#image.save('xxxxx.png')
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
 

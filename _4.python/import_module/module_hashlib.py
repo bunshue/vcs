@@ -2,6 +2,32 @@
 
 使用 Python 的 hashlib 模組計算資料的 MD5 與 SHA 雜湊值
 
+
+md5(): 建立md5()方法的物件
+update(): 更新數據文件內容
+digest():    將數據文件轉成雜湊值
+hexdigest(): 將數據文件轉成16進位的雜湊值
+
+演算法 輸出雜湊值長度
+
+MD5     128
+SHA-0   160
+SHA-1   160
+SHA-2
+    SHA-224 224
+    SHA-256 256
+    SHA-384 384
+    SHA-512 512
+    SHA-512/224 224
+    SHA-512/256 256
+SHA-3
+    SHA3-224 224
+    SHA3-256 256
+    SHA3-384 384
+    SHA3-512 512
+    SHAKE128
+    SHAKE256
+
 """
 
 
@@ -260,6 +286,7 @@ print("------------------------------------------------------------")  # 60個
 
 import hashlib
 
+#使用中文字串 需要先encode
 data = hashlib.md5()  # 建立data物件
 clear_text = "歡迎來到美國"  # 中文字串
 data.update(clear_text.encode("utf-8"))  # 更新data物件內容

@@ -82,38 +82,7 @@ print("顯示PIL影像")
 plt.imshow(image)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
-print('測試 縮放 resize')
-
-# 檔案 => PIL影像
-image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
-W, H = image1.size
-print('原圖大小 W =', W, ', H =', H)
-
-print('寬度變2倍, 高度變一半')
-image2 = image1.resize((W*2, H//2), Image.LANCZOS)
-
-print('寬度變2倍, 高度不變')
-image3 = image1.resize((W*2, H))   # 寬度是2倍
-
-print('寬度不變, 高度變2倍')
-image4 = image1.resize((W, H*2))   # 高度是2倍
-
-print('------------------------------------------------------------')	#60個
-
-print('依比例縮放圖片')
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',image.size)
-    w=100
-    r = w/image.size[0]
-    h = int(image.size[1]*r) #依縮放比例計算高度
-    image2 = image.resize((w, h))
-    print('圖片經縮放後的尺寸大小:',image2.size)
-
-print("------------------------------------------------------------")  # 60個
+print('裁剪 .crop ST------------------------------------------------------------')	#60個
 
 print('測試 裁剪 crop')
 
@@ -133,6 +102,47 @@ image2 = image1.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上�
 print('裁剪一塊 (x_sy, y_st, x_sp, y_sp)')
 
 print('------------------------------------------------------------')	#60個
+
+# 檔案 => PIL影像
+with Image.open(filename) as image:
+    print(image.size)
+    x = 50
+    y = 50
+    w = 200
+    h = 200
+    image2 = image.crop((x, y, w, h))
+    print(image2.size)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('裁剪 .crop SP------------------------------------------------------------')	#60個
+
+
+
+print('複製 .copy ST------------------------------------------------------------')	#60個
+
+# 檔案 => PIL影像
+image = Image.open(filename)           # 建立Pillow物件
+image_copy = image.copy()                      # 複製
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 檔案 => PIL影像
+img = Image.open(filename)
+imgcopy=img.copy()
+
+print("------------------------------------------------------------")  # 60個
+
+# 檔案 => PIL影像
+image = Image.open(filename)               # 建立Pillow物件
+image_copy = image.copy()                          # 複製
+image_crop = image_copy.crop((80, 30, 150, 100))    # 裁切區間
+image_copy.paste(image_crop, (20, 20))              # 第一次合成
+image_copy.paste(image_crop, (20, 100))             # 第二次合成
+
+print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -186,6 +196,53 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+
+
+print('複製 .copy SP------------------------------------------------------------')	#60個
+
+
+
+print('縮放 .resize ST------------------------------------------------------------')	#60個
+
+print('測試 縮放 resize')
+
+# 檔案 => PIL影像
+image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
+W, H = image1.size
+print('原圖大小 W =', W, ', H =', H)
+
+print('寬度變2倍, 高度變一半')
+image2 = image1.resize((W*2, H//2), Image.LANCZOS)
+
+print('寬度變2倍, 高度不變')
+image3 = image1.resize((W*2, H))   # 寬度是2倍
+
+print('寬度不變, 高度變2倍')
+image4 = image1.resize((W, H*2))   # 高度是2倍
+
+print('------------------------------------------------------------')	#60個
+
+print('依比例縮放圖片')
+
+# 檔案 => PIL影像
+with Image.open(filename) as image:
+    print('原圖片的尺寸大小:',image.size)
+    w=100
+    r = w/image.size[0]
+    h = int(image.size[1]*r) #依縮放比例計算高度
+    image2 = image.resize((w, h))
+    print('圖片經縮放後的尺寸大小:',image2.size)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print('縮放 .resize SP------------------------------------------------------------')	#60個
+
+
+
+print('旋轉 .rotate ST------------------------------------------------------------')	#60個
+
 print('測試 旋轉 rotate')
 
 # 檔案 => PIL影像
@@ -213,6 +270,17 @@ print('旋轉60度 + xxx2')
 image60b = image.rotate(60, Image.BILINEAR, 1, None, None, '#BBCC55')
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+print('旋轉 .rotate SP------------------------------------------------------------')	#60個
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
 
 # 檔案 => PIL影像
 image = Image.open(filename)     # 建立Pillow物件
@@ -576,27 +644,6 @@ image_crop = image.crop((80, 30, 150, 100))   # 裁切區間
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 => PIL影像
-image = Image.open(filename)           # 建立Pillow物件
-image_copy = image.copy()                      # 複製
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-img = Image.open(filename)
-imgcopy=img.copy()
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-image = Image.open(filename)               # 建立Pillow物件
-image_copy = image.copy()                          # 複製
-image_crop = image_copy.crop((80, 30, 150, 100))    # 裁切區間
-image_copy.paste(image_crop, (20, 20))              # 第一次合成
-image_copy.paste(image_crop, (20, 100))             # 第二次合成
-
-print("------------------------------------------------------------")  # 60個
-
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 
 # 檔案 => PIL影像
@@ -690,9 +737,6 @@ image1=image.resize((w*2,h))
 
 image2=image.resize((w,h*2))
 
-print('------------------------------------------------------------')	#60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
@@ -738,18 +782,6 @@ for i, f in enumerate(files):
     image.close()   
 
 print('轉換尺寸及灰階處理結束！')
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    print(image.size)
-    x = 50
-    y = 50
-    w = 200
-    h = 200
-    image2 = image.crop((x, y, w, h))
-    print(image2.size)
 
 print('------------------------------------------------------------')	#60個
 

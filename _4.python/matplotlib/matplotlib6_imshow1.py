@@ -400,19 +400,6 @@ plt.ylabel("Im(c)")
 # 第三張圖
 plt.subplot(233)
 
-pts = np.arange(-2, 2, 0.01)
-x, y = np.meshgrid(pts, pts)
-z = np.sqrt(x**2 + y**2)
-
-ticks = np.arange(0, 500, 100)
-seq = np.arange(-2, 3)
-
-plt.imshow(z, cmap="rainbow")
-plt.xticks(ticks, seq)
-plt.yticks(ticks, seq)
-
-plt.colorbar()
-plt.title(r"建立$\sqrt{x^2 + y^2}$網格影像")
 
 # 第四張圖
 plt.subplot(234)

@@ -222,7 +222,6 @@ print("------------------------------------------------------------")  # 60個
 msg = "CIA Mark told CIA Linda that the secret USB had given to CIA Peter"
 print("CIA最後出現位置: ", msg.rfind("CIA",0,len(msg)))
 print("CIA最後出現位置: ", msg.rfind("CIA"))
-'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -376,6 +375,293 @@ print(data.decode('utf-8'))
 
 print("------------------------------------------------------------")  # 60個
 
+import time
+
+print('range(5)', range(5))
+print('list(range(5))', list(range(5)))
+
+# range
+tStart = time.time()
+for i in range(10000000):
+    pass
+tEnd = time.time()
+print('range time:', tEnd - tStart)
+
+print("------------------------------------------------------------")  # 60個
+
+
+def getSevSegStr(number, minWidth=0):
+    """Return a seven-segment display string of number. The returned
+    string will be padded with zeros if it is smaller than minWidth."""
+
+    # Convert number to string in case it's an int or float:
+    number = str(number).zfill(minWidth)
+
+    rows = ['', '', '']
+    for i, numeral in enumerate(number):
+        if numeral == '.':  # Render the decimal point.
+            rows[0] += ' '
+            rows[1] += ' '
+            rows[2] += '.'
+            continue  # Skip the space in between digits.
+        elif numeral == '-':  # Render the negative sign:
+            rows[0] += '    '
+            rows[1] += ' __ '
+            rows[2] += '    '
+        elif numeral == '0':  # Render the 0.
+            rows[0] += ' __ '
+            rows[1] += '|  |'
+            rows[2] += '|__|'
+        elif numeral == '1':  # Render the 1.
+            rows[0] += '    '
+            rows[1] += '   |'
+            rows[2] += '   |'
+        elif numeral == '2':  # Render the 2.
+            rows[0] += ' __ '
+            rows[1] += ' __|'
+            rows[2] += '|__ '
+        elif numeral == '3':  # Render the 3.
+            rows[0] += ' __ '
+            rows[1] += ' __|'
+            rows[2] += ' __|'
+        elif numeral == '4':  # Render the 4.
+            rows[0] += '    '
+            rows[1] += '|__|'
+            rows[2] += '   |'
+        elif numeral == '5':  # Render the 5.
+            rows[0] += ' __ '
+            rows[1] += '|__ '
+            rows[2] += ' __|'
+        elif numeral == '6':  # Render the 6.
+            rows[0] += ' __ '
+            rows[1] += '|__ '
+            rows[2] += '|__|'
+        elif numeral == '7':  # Render the 7.
+            rows[0] += ' __ '
+            rows[1] += '   |'
+            rows[2] += '   |'
+        elif numeral == '8':  # Render the 8.
+            rows[0] += ' __ '
+            rows[1] += '|__|'
+            rows[2] += '|__|'
+        elif numeral == '9':  # Render the 9.
+            rows[0] += ' __ '
+            rows[1] += '|__|'
+            rows[2] += ' __|'
+
+        # Add a space (for the space in between numerals) if this
+        # isn't the last numeral and the decimal point isn't next:
+        if i != len(number) - 1 and number[i + 1] != '.':
+            rows[0] += ' '
+            rows[1] += ' '
+            rows[2] += ' '
+
+    return '\n'.join(rows)
+
+print('七段顯示器')
+
+for i in range(0, 1000, 167):
+    ccc = getSevSegStr(i, 5)
+    print(ccc)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+st = 10
+sp = 20
+
+for number in range(st, sp):  # Main program loop.
+    # Convert to hexadecimal/binary and remove the prefix:
+    hexNumber = hex(number)[2:].upper()
+    binNumber = bin(number)[2:]
+
+    print('DEC:', number, '   HEX:', hexNumber, '   BIN:', binNumber)
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 函數文件字串 docstring 註明此函數的功能與用法
+def greeting(name):
+    """Python函數需傳遞名字name"""
+    print("Hi,", name, "Good Morning!")
+greeting('Nelson')
+
+
+#用help(函數名稱)列出此函數的文件字串
+
+help(greeting)
+
+print("------------------------------------------------------------")  # 60個
+
+# dict01.py
+
+dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
+print(dictBook)
+# 印出 dictBook所有元素
+print("書號A001：", dictBook["A001"])  # 印出dictBook字典鍵A001的值 ['木偶奇遇記', 199]
+print("書號A002：", dictBook["A002"])  # 印出dictBook字典鍵A002的值 ['三隻小豬', 120]
+print("書號A003：", dictBook["A003"])  # 印出dictBook字典鍵A003的值 ['白雪公主', 99]
+
+
+print("------------------------------------------------------------")  # 60個
+
+# dict02.py
+
+tupleBookId = ("A001", "A002", "A003")
+dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
+print("書號\t書名\t單價")
+print("========================")
+
+for key in list(tupleBookId):
+    print(key, end="\t")
+    for col in dictBook[key]:
+        print(col, end="\t")
+    print()
+
+
+print("------------------------------------------------------------")  # 60個
+
+# dict03.py
+
+dictBook = {"A001": ["木偶奇遇記", 199]}
+print("編輯前字典內容：", dictBook)
+
+dictBook["A002"] = ["三隻小豬", 120]
+print("新增後字典內容：", dictBook)
+
+dictBook["A002"] = ["白雪公主", 120]
+print("修改後字典內容：", dictBook)
+
+print("是否有書號A001的書籍：", "A001" in dictBook)
+
+del dictBook["A001"]
+print("刪除後字典內容：", dictBook)
+
+print("是否有書號A001的書籍：", "A001" in dictBook)
+
+
+print("------------------------------------------------------------")  # 60個
+
+#一次改變一個數列
+celsius = [21, 25, 29]
+fahrenheit = [(x * 9 / 5 + 32) for x in celsius]
+print(fahrenheit)
+
+print("------------------------------------------------------------")  # 60個
+
+print("列出所有python關鍵字")
+import keyword
+print(keyword.kwlist)
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+files = os.listdir("_data")
+txtList = []
+# 測試1
+pattern = '(.*).txt'
+print("列印*.txt")
+for filename in files:
+    #print(filename)
+    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
+    if fnresult != None:
+        txtList.append(filename)
+print(txtList)
+
+pyList = []  
+# 測試2
+print("列印ch14_10.py - ch14_19.py")
+pattern = '(ch14_1(\d).py)'
+for filename in files:
+    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
+    if fnresult != None:
+        pyList.append(filename)
+print(pyList)
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+text = "這個是、那個是、那個是、哪個是"
+word1 = "這.是"
+word2 = ".個是"
+
+pattern = re.compile(word1)
+count = len(re.findall(pattern, text))
+print(word1, ":", count, "個")
+
+pattern = re.compile(word2)
+count = len(re.findall(pattern, text))
+print(word2, ":", count, "個")
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+text = "這個是測試資料。"
+word1 = ".個是"
+word2 = "那個是"
+
+print("置換前 :", text)
+pattern = re.compile(word1)
+text = re.sub(pattern, word2, text)
+print("置換後 :", text)
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+
+files = ["c1.py", "c2.py", "c3.py"]
+for file in files:
+    print(os.path.join("D:\\test", file))
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+localtime()返回元組的日期與時間資料結構 用索引方式獲得個別內容
+索引	名稱	說明
+0	tm_year	年 	2020
+1	tm_mon	月 	1-12
+2	tm_mday 日	1-31
+3	tm_hour	時	0-23
+4	tm_min	分	0-59
+5	tm_sec	秒	0-59
+6	tm_wday	星期	0:一, 1:二...
+7	tm_yday	年第幾天
+8	tm_isdst 夏令時間 0:不是, 1:是
+"""
+
+import time                         # 導入模組time
+
+xtime = time.localtime()            #使用localtime()方法列出目前時間的結構
+print(xtime)                        # 列出目前系統時間
+print("年 ", xtime[0])
+print("年 ", xtime.tm_year)         # 物件設定方式顯示
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+print('撈出一層jg檔')
+def get_imlist(path):
+    """ 返回目錄中所有JPG圖像的文件名列表 """
+    return [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.jpg')]
+
+foldername = 'C:/_git/vcs/_1.data/______test_files1'
+
+cc = get_imlist(foldername)
+
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -383,16 +669,9 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

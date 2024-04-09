@@ -1270,7 +1270,7 @@ with open(filename, encoding='utf-8-sig') as file_Obj:  # 開啟utf-8檔案
 
 
 
-file = open("data/temp.txt", "w+")
+file = open("tmp_text_file.txt", "w+")
 
 file.write("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
@@ -1287,7 +1287,7 @@ file.truncate(26)
 print('讀出來')
 print(file.read())
 
-file1=open("data/temp.txt","r")
+file1=open("tmp_text_file.txt","r")
 text=file1.read(1) #以read()方法讀取檔案
 print(text)
 text=file1.read(3) #以read()方法讀取檔案

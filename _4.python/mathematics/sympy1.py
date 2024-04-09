@@ -20,7 +20,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("解二元一次方程式")
 
 # 定義公式中使用的變數
@@ -409,6 +409,31 @@ eq2 = 17.5 - 2.5 * x - y                # 方程式 2
 
 
 """
+'''
+
+print('繪製座標圖')
+print('y = 2 * x - 5')
+from sympy.plotting import plot
+x = sympy.Symbol("x")
+
+#預設
+#plot(2*x-5)
+
+#設定 x軸區間
+#plot((2*x-5), (x, -5, 5))
+
+#設定 x軸 標籤 與標題
+#plot((2*x-5), (x, -5, 5), title ='Sympy', xlabel = 'x', ylabel = '2x-5')
+
+#多函數圖形
+#plot(2*x-5, '3*x+2')
+
+
+#設定線的顏色 + 圖例
+line = plot(2*x-5, '3*x+2', legend = True, show=False)
+line[0].line_color = 'r'    #第0條線
+line[1].line_color = 'g'    #第1條線
+line.show()
 
 
 print("------------------------------------------------------------")  # 60個

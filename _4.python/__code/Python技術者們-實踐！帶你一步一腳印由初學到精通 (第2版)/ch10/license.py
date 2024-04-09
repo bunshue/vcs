@@ -2,6 +2,7 @@ import cv2
 import license_module as m     # 匯入自訂模組
 
 capture = cv2.VideoCapture(0)   # 建立攝影機物件
+
 if capture.isOpened():
     while True:
         sucess, img = capture.read()        # 讀取影像

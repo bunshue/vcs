@@ -1,15 +1,15 @@
 import matplotlib.pyplot as plt
 import crawler_module as m
-from time import sleep
 import pandas as pd
 import mpl_finance as mpf
 import talib
+import time
 
 all_list = []
 stock_symbol, dates = m.get_data()
 
 for date in dates:
-    sleep(5)
+    time.sleep(5)
     try:
         crawler_data = m.crawl_data(date, stock_symbol)
         all_list.append(crawler_data[0])

@@ -24,7 +24,7 @@ import time
 import random
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # Python 舊式字串格式化
 
 errno = 50159747054
@@ -326,8 +326,8 @@ for t in threads:
 print("主程式結束")
 
 print("------------------------------------------------------------")  # 60個
-import threading, time
 
+import threading, time
 
 def wakeUp():
     print("threadObj執行緒開始")
@@ -410,8 +410,6 @@ w2.start()
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
 """
 def modifySong(songStr):            # 將歌曲的標點符號用空字元取代       
     for ch in songStr:
@@ -437,17 +435,6 @@ dictList = sorted(mydict.items(), key=lambda item:item[1], reverse=True)
 for key, val in dictList:
     print(key,':',val)
 """
-
-print("------------------------------------------------------------")  # 60個
-
-import os
-
-files = ["c1.py", "c2.py", "c3.py"]
-for file in files:
-    print(os.path.join("D:\\test", file))
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -480,20 +467,6 @@ print("相加", num1 + num2 + num3)
 print("相減", num1 - num2 - num3)
 print("相乘", num1 * num2 * num3)
 print("相除", num1 / num2)
-
-print("------------------------------------------------------------")  # 60個
-
-# 將代數轉為算術運算式
-x = 23
-y = 7
-# 指定變數x、y的值
-"""
-   1. 先算出(x-5)/(y+9)
-   2. 再加上 12/x 之值
-   3. 最後乘 數值9 再給變數z儲存
-"""
-z = 9 * (12 / x + (x - 5) / (y + 9))
-print("z = ", z)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -789,7 +762,6 @@ for item in range(10, 65):
         num.append(item)  # 整除的數放入List中
 print("10~65被13整除之數：", num)
 
-
 print("------------------------------------------------------------")  # 60個
 
 # List生成式(2)
@@ -815,24 +787,6 @@ print("*----------------*")
 print("\n".join(["%10s:%2d" % (item, len(item)) for item in fruit]))
 
 print("------------------------------------------------------------")  # 60個
-
-# 自訂函式 情形一：無參數，無回傳值
-
-
-# step 1. 定義函式
-def message():
-    zen = """
-        Beautiful is better than ugly.
-        Explicit is better than implicit.
-    """
-    print(zen)
-
-
-# step 2. 呼叫函式
-message()
-
-print("------------------------------------------------------------")  # 60個
-
 
 # 定義函式
 def funcTest(name, score):
@@ -1077,18 +1031,15 @@ print("/%10.3s/" % string)
 
 print("------------------------------------------------------------")  # 60個
 
-""" 不可用 會讓後面出現 TypeError: 'str' object is not callable
 url = "https://maps.apis.com/json?city="
 city = "taipei"
 r = 1000
-type = "school"
-print(url + city + '&radius=' + str(r) + '&type=' + type)
-print(url + "{}&radius={}&type={}".format(city, r, type))
-"""
+type_ = "school"
+print(url + city + '&radius=' + str(r) + '&type=' + type_)
+print(url + "{}&radius={}&type={}".format(city, r, type_))
 
 print("------------------------------------------------------------")  # 60個
 
-""" 不可用 會讓後面出現 TypeError: 'str' object is not callable
 name = '洪錦魁'
 message = f"我是{name}"
 print(message)
@@ -1096,11 +1047,10 @@ print(message)
 url = "https://maps.apis.com/json?city="
 city = "taipei"
 r = 1000
-type = "school"
-my_url = url + f"{city}&radius={r}&type={type}"
+type_ = "school"
+my_url = url + f"{city}&radius={r}&type={type_}"
 print(my_url)
 
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1224,37 +1174,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-james = [23, 19, 22, 31, 18]  # 定義james串列
-print("列印james串列", james)
-James = ["Lebron James", 23, 19, 22, 31, 18]  # 定義James串列
-print("列印James串列", James)
-fruits = ["apple", "banana", "orange"]  # 定義fruits串列
-print("列印fruits串列", fruits)
-cfruits = ["蘋果", "香蕉", "橘子"]  # 定義cfruits串列
-print("列印cfruits串列", cfruits)
-ielts = [5.5, 6.0, 6.5]  # 定義IELTS成績串列
-print("列印IELTS成績", ielts)
-# 列出串列資料型態
-# print("串列james資料型態是: ",type(james))    fail
-
-print("------------------------------------------------------------")  # 60個
-
-cars = ["Benz", "BMW", "Honda"]
-nums = [1, 3, 5]
-carslist = cars * 3  # 串列乘以數字
-print(carslist)
-numslist = nums * 5  # 串列乘以數字
-print(numslist)
-
-print("------------------------------------------------------------")  # 60個
-
-warriors = ["Curry", "Durant", "Iquodala", "Bell", "Thompson"]
-print("2025年初NBA勇士隊主將陣容", warriors)
-del warriors[3]  # 不明原因離隊
-print("2025年末NBA勇士隊主將陣容", warriors)
-
-print("------------------------------------------------------------")  # 60個
-
 nums1 = [1, 3, 5]
 print(f"刪除nums1串列索引1元素前   = {nums1}")
 del nums1[1]
@@ -1293,17 +1212,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_15.py
-
-# ch6_15.py
-cars = ["bmw", "benz", "audi"]
-carF = "我開的第一部車是 " + cars[1].title()
-carN = "我現在開的車子是 " + cars[0].upper()
-print(carF)
-print(carN)
-
-print("------------------------------------------------------------")  # 60個
-
 strN = " DeepWisdom       "
 strL = strN.lstrip()  # 刪除字串左邊多餘空白
 strR = strN.rstrip()  # 刪除字串右邊多餘空白
@@ -1323,15 +1231,6 @@ print(f"/{dt.ljust(50)}/")
 site = "JK Hung"
 print(f"/{site.rjust(50)}/")
 print(f"/{title.zfill(50)}/")
-
-print("------------------------------------------------------------")  # 60個
-
-james = [23, 19, 22, 31, 18]  # 定義james串列
-print("列印james第1場得分", james[0])
-print("列印james第2場得分", james[1])
-print("列印james第3場得分", james[2])
-print("列印james第4場得分", james[3])
-print("列印james第5場得分", james[4])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1728,12 +1627,6 @@ print("轉成串列輸出, 初始索引值是10 = ", list(enumerate_drinks))
 
 print("------------------------------------------------------------")  # 60個
 
-celsius = [21, 25, 29]
-fahrenheit = [(x * 9 / 5 + 32) for x in celsius]
-print(fahrenheit)
-
-print("------------------------------------------------------------")  # 60個
-
 x = [
     [a, b, c]
     for a in range(1, 20)
@@ -2062,13 +1955,11 @@ print("tup最小值是", min(tup))
 
 print("------------------------------------------------------------")  # 60個
 
-"""
 drinks = ["coffee", "tea", "wine"]
 enumerate_drinks = enumerate(drinks)                # 數值初始是0
 lst = list(enumerate_drinks)
 print("轉成串列輸出, 初始索引值是 0 = ", lst)
 print(type(lst[0]))
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2196,48 +2087,6 @@ fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
 cfruits = fruits.copy()
 print("位址 = ", id(fruits), "  fruits元素 = ", fruits)
 print("位址 = ", id(cfruits), "  fruits元素 = ", cfruits)
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
-noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60}
-empty_dict = {}
-print("fruits字典元素數量     = ", len(fruits))
-print("noodles字典元素數量    = ", len(noodles))
-print("empty_dict字典元素數量 = ", len(empty_dict))
-
-print("------------------------------------------------------------")  # 60個
-
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-    "James Harden": "Houston Rockets",
-    "Paul Gasol": "San Antonio Spurs",
-}
-print(f"Stephen Curry是 {players['Stephen Curry']} 的球員")
-print(f"Kevin Durant是 {players['Kevin Durant']} 的球員")
-print(f"Paul Gasol是 {players['Paul Gasol']} 的球員")
-
-print("------------------------------------------------------------")  # 60個
-
-dealerA = {1: "Nissan", 2: "Toyota", 3: "Lexus"}
-dealerB = {11: "BMW", 12: "Benz"}
-dealerA.update(dealerB)
-print(dealerA)
-
-print("------------------------------------------------------------")  # 60個
-
-dealerA = {1: "Nissan", 2: "Toyota", 3: "Lexus"}
-dealerB = {3: "BMW", 4: "Benz"}
-dealerA.update(dealerB)
-print(dealerA)
-
-print("------------------------------------------------------------")  # 60個
-
-nation = [["日本", "東京"], ["泰國", "曼谷"], ["英國", "倫敦"]]
-nationDict = dict(nation)
-print(nationDict)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2598,12 +2447,8 @@ print("商品", "        商品價格 ", " 商品重量")
 for i in range(len(th)):
     print(f"{th[i][0]:8s}{th[i][1][0]:10d}{th[i][1][1]:10.2f}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_32.py
-
-# ch9_32.py
 song = """Are you sleeping, are you sleeping, Brother John, Brother John?
 Morning bells are ringing, morning bells are ringing.
 Ding ding dong, Ding ding dong."""
@@ -2648,12 +2493,8 @@ word = "deepmind"
 alphabetCount = {alphabet: word.count(alphabet) for alphabet in word}
 print(alphabetCount)
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_34.py
-
-# ch9_34.py
 song = """Are you sleeping, are you sleeping, Brother John, Brother John?
 Morning bells are ringing, morning bells are ringing.
 Ding ding dong, Ding ding dong."""
@@ -2779,7 +2620,7 @@ del fruits
 
 print("------------------------------------------------------------")  # 60個
 
-""" test locals()
+# test locals()
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
 var_dict = input("請輸入要刪除的變數 : ")
 if var_dict in locals():    # 檢查變數是否存在
@@ -2805,20 +2646,6 @@ if var in locals():
 else:
     print(f"{var} 變數不存在")
 
-"""
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_9.py
-
-# ch9_9.py
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25}
-print("舊fruits字典內容:", fruits)
-objKey = "西瓜"
-value = fruits.pop(objKey)
-print("新fruits字典內容:", fruits)
-print("刪除內容:", objKey + ":" + str(value))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2959,7 +2786,7 @@ for name, formulas in cocktail.items():
         print(name)
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 加總一系列數字
 
 
@@ -2974,10 +2801,7 @@ print(my_sum(10, 20, 30, 40, 50))
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
 # 將 16 進位數轉為 10 進位
-
 
 def hex_to_dec():
     hexnum = "ff"
@@ -3012,7 +2836,6 @@ print(pig_latin("python"))
 print("------------------------------------------------------------")  # 60個
 
 # 豬拉丁文 --- 句子翻譯機
-
 
 def pl_sentence(sentence):
     output = []
@@ -3701,11 +3524,6 @@ print(roman_num_to_int("MMCDXIX"))
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-'''
 names = ["A太","B介","C子","D郎"]
 for i, name in enumerate(names):
     if name == "C子":
@@ -3725,8 +3543,6 @@ print(name, n, "號")
 n, name = search("A子")
 print(name, n, "號")
 
-
-print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 def human_size(size):
@@ -3744,7 +3560,6 @@ print(human_size(123456789012))
 
 print("------------------------------------------------------------")  # 60個
 
-
 text = "abcde.txt"
 word1 = "abc"
 word2 = "xyz"
@@ -3757,7 +3572,7 @@ print(word2, ":", count2, "個")
 print("------------------------------------------------------------")  # 60個
 
 def compareString(string):
-    """檢查是否是搜尋的字串"""
+    #檢查是否是搜尋的字串
     if string == searchStr:
         return True
     else:
@@ -3785,125 +3600,8 @@ print("所搜尋字串 %s 共出現 %d 次" % (searchStr, num))
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-import re
-
-files = os.listdir("_data")
-txtList = []
-# 測試1
-pattern = '(.*).txt'
-print("列印*.txt")
-for filename in files:
-    #print(filename)
-    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
-    if fnresult != None:
-        txtList.append(filename)
-print(txtList)
-
-pyList = []  
-# 測試2
-print("列印ch14_10.py - ch14_19.py")
-pattern = '(ch14_1(\d).py)'
-for filename in files:
-    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
-    if fnresult != None:
-        pyList.append(filename)
-print(pyList)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-localtime()返回元組的日期與時間資料結構 用索引方式獲得個別內容
-索引	名稱	說明
-0	tm_year	年 	2020
-1	tm_mon	月 	1-12
-2	tm_mday 日	1-31
-3	tm_hour	時	0-23
-4	tm_min	分	0-59
-5	tm_sec	秒	0-59
-6	tm_wday	星期	0:一, 1:二...
-7	tm_yday	年第幾天
-8	tm_isdst 夏令時間 0:不是, 1:是
-"""
-
-import time                         # 導入模組time
-
-xtime = time.localtime()            #使用localtime()方法列出目前時間的結構
-print(xtime)                        # 列出目前系統時間
-print("年 ", xtime[0])
-print("年 ", xtime.tm_year)         # 物件設定方式顯示
-print("月 ", xtime[1])
-print("日 ", xtime[2])
-print("時 ", xtime[3])
-print("分 ", xtime[4])
-print("秒 ", xtime[5])
-print("星期幾   ", xtime[6])
-print("第幾天   ", xtime[7])
-print("夏令時間 ", xtime[8])
-
-print("------------------------------------------------------------")  # 60個
-
-print("列出所有python關鍵字")
-import keyword
-print(keyword.kwlist)
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 函數文件字串 docstring 註明此函數的功能與用法
-def greeting(name):
-    """Python函數需傳遞名字name"""
-    print("Hi,", name, "Good Morning!")
-greeting('Nelson')
-
-
-#用help(函數名稱)列出此函數的文件字串
-
-help(greeting)
-
-
-print("------------------------------------------------------------")  # 60個
-
-n = 100
-number = list(range(n + 1))
-total = sum(number)
-print("從1到%d的總和是 = " % n, total)
-
-print("------------------------------------------------------------")  # 60個
-
-n = 100
-number = list(range(n + 1))
-total = sum(number)
-print("從1到%d的總和是 = " % n, total)
-
-print("------------------------------------------------------------")  # 60個
-
-n = 100
-number = list(range(n + 1))  # 建立串列
-total = 0  # 總計
-for i in number:
-    total += i
-print("從1到%d的總和是 = " % n, total)
-
-print("------------------------------------------------------------")  # 60個
-
-n = 100
-total = 0  # 總計
-for i in range(1, n + 1):
-    total += i
-print("從1到%d的總和是 = " % n, total)
-
-'''
-print("------------------------------------------------------------")  # 60個
-
 import numpy as np
 import math
-
-print("------------------------------------------------------------")  # 60­э
 
 num = 3.2
 print("數值{0:2.1f} 取log10 {1:4.3f}".format(num, np.log10(num)))
@@ -3961,7 +3659,6 @@ for i in range(10):
     print()
 
 print("------------------------------------------------------------")  # 60個
-
 
 move = "   aaa     , bbb   , ccc   ,   ddd    "
 n1, n2, n3, n4 = move.split(",")
@@ -4045,39 +3742,9 @@ text = text.replace(word1, word2)
 
 print(text)
 
-
 print("------------------------------------------------------------")  # 60個
 
-import re
-
-text = "這個是、那個是、那個是、哪個是"
-word1 = "這.是"
-word2 = ".個是"
-
-pattern = re.compile(word1)
-count = len(re.findall(pattern, text))
-print(word1, ":", count, "個")
-
-pattern = re.compile(word2)
-count = len(re.findall(pattern, text))
-print(word2, ":", count, "個")
-
-
-import re
-
-text = "這個是測試資料。"
-word1 = ".個是"
-word2 = "那個是"
-
-print("置換前 :", text)
-pattern = re.compile(word1)
-text = re.sub(pattern, word2, text)
-print("置換後 :", text)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch02\in.py
-
+print('in, not in 的用法')
 print("1" in "123")  # 字串搜尋：判斷 "1" 是否在 "123" 內，成立顯示True
 print("13" in "123")  # 字串搜尋：判斷 "13" 是否在 "123" 內，不成立顯示False
 print("M" in "ASP.NET MVC")  # 字串搜尋：判斷 "M" 是否在 "ASP.NET MVC" 內，成立顯示True
@@ -4086,7 +3753,7 @@ print(1 not in [1, 2, 3])  # 串列搜尋：判斷 1 是否不在串列內，不
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch02\type01.py
+print('不同進制表示數字')
 
 num = 15  # 以十進制表示15
 num0b = 0b1111  # 以二進制表示15
@@ -4339,54 +4006,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\tlist01.py
-
-member = [
-    ["E01", "王小明", "男", 25000],
-    ["E02", "曾美麗", "女", 18000],
-    ["E03", "莊聰明", "男", 20000],
-]
-print("會員表共 %d 筆記錄" % len(member))
-print("會員表共 %d 個欄位" % len(member[0]))
-print(member[0])  # 印出第1筆會員記錄
-print(member[1])  # 印出第2筆會員記錄
-print(member[2])  # 印出第3筆會員記錄
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\tlist02.py
-
-member = [None, None, None]  # 建立member二維串列，串列中的三個元素為None
-member[0] = ["E01", "王小明", "男", 25000]
-member[1] = ["E02", "曾美麗", "女", 18000]
-member[2] = ["E03", "莊聰明", "男", 20000]
-print("會員表共 %d 筆記錄" % len(member))
-print("會員表共 %d 個欄位" % len(member[0]))
-print(member[0])
-print(member[1])
-print(member[2])
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\tlist03.py
-
-member = [
-    ["E01", "王小明", "男", 25000],
-    ["E02", "曾美麗", "女", 18000],
-    ["E03", "莊聰明", "男", 20000],
-]
-print("會員表共 %d 筆記錄" % len(member))
-print("會員表共 %d 個欄位" % len(member[0]))
-print(member[0][0], member[0][1], member[0][2], member[0][3])
-print(member[1][0], member[1][1], member[1][2], member[1][3])
-print(member[2][0], member[2][1], member[2][2], member[2][3])
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\break01.py
-
 # pid串列存放產品編號
 pid = ["A01", "A02", "A03"]
 # name串列存放產品名稱
@@ -4413,19 +4032,6 @@ else:
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\continue01.py
-
-i = 0
-while i < 10:
-    i += 1
-    if i % 3 == 0:
-        continue
-    print("%d不是3的倍數" % (i))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\createProduct.py
 
 product = []
 count = int(input("請輸入產品建檔數量："))
@@ -4502,7 +4108,6 @@ listScore.sort()  # 呼叫sort()方法將listScore中的元素進行由小到大
 print("遞增排序：", listScore)  # 印出listScore由小到大排序的結果
 listScore.reverse()  # 呼叫reverse()方法將listScore中的元素進行反轉
 print("遞減排序：", listScore)  # 印出listScore由大到小排序的結果
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4724,60 +4329,9 @@ print("函式外 全域變數n 位址=%d, 值=%d" % (id(n), n))
 func()
 print("函式外 全域變數n 位址=%d, 值=%d" % (id(n), n))
 
-
-print("------------------------------------------------------------")  # 60個
-
-# dict01.py
-
-dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
-print(dictBook)
-# 印出 dictBook所有元素
-print("書號A001：", dictBook["A001"])  # 印出dictBook字典鍵A001的值 ['木偶奇遇記', 199]
-print("書號A002：", dictBook["A002"])  # 印出dictBook字典鍵A002的值 ['三隻小豬', 120]
-print("書號A003：", dictBook["A003"])  # 印出dictBook字典鍵A003的值 ['白雪公主', 99]
-
-
-print("------------------------------------------------------------")  # 60個
-
-# dict02.py
-
-tupleBookId = ("A001", "A002", "A003")
-dictBook = {"A001": ["木偶奇遇記", 199], "A002": ["三隻小豬", 120], "A003": ["白雪公主", 99]}
-print("書號\t書名\t單價")
-print("========================")
-
-for key in list(tupleBookId):
-    print(key, end="\t")
-    for col in dictBook[key]:
-        print(col, end="\t")
-    print()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# dict03.py
-
-dictBook = {"A001": ["木偶奇遇記", 199]}
-print("編輯前字典內容：", dictBook)
-
-dictBook["A002"] = ["三隻小豬", 120]
-print("新增後字典內容：", dictBook)
-
-dictBook["A002"] = ["白雪公主", 120]
-print("修改後字典內容：", dictBook)
-
-print("是否有書號A001的書籍：", "A001" in dictBook)
-
-del dictBook["A001"]
-print("刪除後字典內容：", dictBook)
-
-print("是否有書號A001的書籍：", "A001" in dictBook)
-
-
 print("------------------------------------------------------------")  # 60個
 
 # ProductSys.py
-
 
 # 新增
 def fnCreate():
@@ -4885,3 +4439,4 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+

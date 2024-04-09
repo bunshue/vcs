@@ -1,8 +1,7 @@
 import requests
-from io import StringIO
 import pandas as pd
 import datetime
-
+from io import StringIO
 
 def get_setting():  # ←將「讀取設定檔」寫成函式, 可讓程式易讀易用
     res = []  # ←準備一個空串列來存放讀取及解析的結果
@@ -43,3 +42,4 @@ def crawl_data(date, symbol):
     filter_df.insert(0, "日期", date)
     df_columns = filter_df.columns
     return list(filter_df.iloc[0]), filter_df.columns
+

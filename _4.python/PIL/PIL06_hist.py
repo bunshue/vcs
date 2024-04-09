@@ -5,29 +5,31 @@
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+from PIL import Image
+from PIL import ImageDraw
+
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
 print('------------------------------------------------------------')	#60個
 
+# 共同
 import os
 import sys
-import time
-import random
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
-
-from PIL import Image
-from PIL import ImageDraw
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
@@ -93,181 +95,99 @@ facecolor: 直方圖顏色
 alpha: 透明度
 
 返回值 ：
-
 n: 直方圖向量，是否歸一化由參數設定
-
 bins: 返回各個bin的區間范圍
-
 patches: 返回每個bin里面包含的數據，是一個list
 """
 
-img=np.array(Image.open(filename).convert('L'))
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
-plt.figure('Peony')
-arr=img.flatten()
-n, bins, patches = plt.hist(arr, bins=256, density = True, facecolor='green', alpha=0.5)
+# 檔案 => PIL影像 => 灰階 => np陣列
+image = np.array(Image.open(filename).convert('L'))
+
+# 利用hist來繪制直方圖
+# 第一個參數為一個一維數組
+# 因為hist只接受一維數組作為輸入，所以要用flatten()方法將任意數組按照行優先準則轉化成一個一維數組
+# 第二個參數指定bin的個數
+n, bins, patches = plt.hist(image.flatten(), bins=256, density = True, facecolor='green', alpha=0.5)
+
+plt.title('影像直方圖 密度')
+
+#設定軸範圍
+plt.xlim([0-10, 255+10])
+plt.ylim([0, 0.01])
 
 plt.show()
+
+print("------------------------------")  # 30個
+
+plt.hist(image.flatten(), 256, cumulative=True)
+plt.title('影像直方圖 累計')
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
+# 檔案 => PIL影像 => 灰階 => np陣列
+image = np.array(Image.open(filename).convert('L'))
+
+plt.subplot(1, 2, 1)
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.title(u'原始圖像')
+plt.imshow(image)
+
+plt.subplot(1, 2, 2)
+plt.title(u'原始直方圖')
+plt.hist(image.flatten(), bins=128, density=True)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 """
 二、彩色圖片直方圖
 實際上是和灰度直方圖一樣的，只是分別畫出三通道的直方圖，然后疊加在一起。
 """
 
-src=Image.open(filename)
-r, g, b=src.split()
+# 檔案 => PIL影像
+image=Image.open(filename)
+r, g, b=image.split()
 
-plt.figure('Peony')
 array_r = np.array(r).flatten()
-plt.hist(array_r, bins=256, alpha=0.5, density = True,facecolor='r',edgecolor='r',stacked=1)
+plt.hist(array_r, bins=256, alpha=0.3, density = True, facecolor='r', edgecolor='r', stacked=1)
+
 array_g = np.array(g).flatten()
-plt.hist(array_g, bins=256, alpha=0.5, density = True, facecolor='g',edgecolor='g',stacked=1)
+plt.hist(array_g, bins=256, alpha=0.3, density = True, facecolor='g', edgecolor='g', stacked=1)
+
 array_b = np.array(b).flatten()
-plt.hist(array_b, bins=256, alpha=0.5, density = True, facecolor='b',edgecolor='b')
-plt.show()
+plt.hist(array_b, bins=256, alpha=0.3, density = True, facecolor='b', edgecolor='b')
 
-
-print('------------------------------------------------------------')	#60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("PIL_hist")
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 打開圖像，并轉成灰度圖像
-im = np.array(Image.open(filename).convert('L'))
-
-# 新建一個圖像
-plt.figure()
-
-plt.subplot(121)
-
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-
-# 在原點的左上角顯示輪廓圖像
-plt.contour(im, origin='image')
-plt.axis('equal')
-plt.title(u'圖像輪廓圖')
-
-plt.subplot(122)
-# 利用hist來繪制直方圖
-# 第一個參數為一個一維數組
-# 因為hist只接受一維數組作為輸入，所以要用flatten()方法將任意數組按照行優先準則轉化成一個一維數組
-# 第二個參數指定bin的個數
-plt.hist(im.flatten(), bins=128)
-plt.title(u'圖像直方圖')
-#刻度
-plt.xlim([0-10,255+10])
-plt.ylim([0,8000])
-
+plt.title('影像直方圖 密度 三色分離')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("PIL_histeq")
+print('用plot畫出三色分布')
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
-#from PCV.tools import imtools
-
-# 添加中文字體支持
-from matplotlib.font_manager import FontProperties
-
-im = np.array(Image.open(filename).convert('L'))
-# 打開圖像，并轉成灰度圖像
-#im2, cdf = imtools.histeq(im)
-
-plt.figure()
-
-plt.subplot(2, 2, 1)
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-plt.title(u'原始圖像')
-plt.imshow(im)
-
-plt.subplot(2, 2, 2)
-plt.title(u'直方圖均衡化後的圖像')
-#plt.imshow(im2)
-
-plt.subplot(2, 2, 3)
-plt.title(u'原始直方圖')
-plt.hist(im.flatten(), bins=128, density=True)
-
-plt.subplot(2, 2, 4)
-plt.title(u'均衡化後的直方圖')
-#plt.hist(im2.flatten(), bins=128, density=True)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-#PIL 之標準秀圖
-
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
+# 檔案 => PIL影像
 image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-plt.imshow(image1)
-plt.show()
-
-PIL 之標準轉灰階 像是有點問題
-
-image1g = image1.convert('L')	#轉換成灰階圖像
-plt.imshow(image1g)      #灰階圖
-plt.show()
-
-
-image1g = image3.convert('L')	#轉換成灰階圖像
-hist = image1g.histogram()
-
-
-
-filename = 'pic.bmp'
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-#plt.imshow(image1)
-#plt.show()
-
-
-
-
-image1_hist = image1.histogram()
-
-#image2_hist = image2.histogram()
 
 r, g, b = image1.split()   #r, g, b為三個通道的list
 r_hist = r.histogram()
 g_hist = g.histogram()
 b_hist = b.histogram()
 
-ind = np.arange(0, len(image1_hist))
+ind0 = np.arange(0, len(r_hist))
 
-plt.plot(ind, image1_hist, color = 'cyan', label = 'cropped')
-plt.plot(ind, r_hist, color = 'black', lw = 2, label = 'original')
-#plt.plot(ind, r_hist, color = 'red', label = 'Red Plane')
-#plt.plot(ind, g_hist, color = 'green', label = 'Green Plane')
-#plt.plot(ind, g_hist, color = 'blue', label = 'Blue Plane')
-plt.xlim(0, 255)
-plt.ylim(0, 8000)
+plt.plot(ind0, r_hist, color = 'red', label = 'Red Plane')
+plt.plot(ind0, g_hist, color = 'green', label = 'Green Plane')
+plt.plot(ind0, b_hist, color = 'blue', label = 'Blue Plane')
 plt.legend()
 
 plt.show()
-
-sys.exit()
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -276,5 +196,8 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 
