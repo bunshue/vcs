@@ -21,6 +21,25 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+import math
+
+degrees  = [x*15 for x in range(0, 25)]
+x =[math.cos(math.radians(d)) for d in degrees]
+y =[math.sin(math.radians(d)) for d in degrees]
+
+plt.scatter(x,y)
+plt.show()
+
+
+degrees  = np.arange(0, 360)
+x = np.cos(np.radians(degrees))
+y = np.sin(np.radians(degrees))
+
+plt.plot(x,y)
+plt.show()
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 

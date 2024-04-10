@@ -43,7 +43,7 @@ import cv2
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("測試 01----------------------------------------------------------")  # 60個
-'''
+
 #對於彩色的圖片，
 #可以用 OpenCV 的 calcHist 函數分別計算統計值，
 #並畫出 RGB 三種顏色的分佈圖：
@@ -419,7 +419,7 @@ plt.plot(np.arange(0, 256), np.log(hist.ravel()))  # 數值取log
 #plt.bar(np.arange(0, 256), hist.ravel())  # 數值直接顯示
 
 plt.show()
-'''
+
 print("測試 13----------------------------------------------------------")  # 60個
 
 # 用hist()和cv2.calcHist()函數繪制直方圖

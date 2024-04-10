@@ -181,7 +181,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 10")
+print("OpenCV VideoCapture 10 Covex效果")
 
 def convex(src_img, raw, effect):
     col, row, channel = raw[:]
@@ -219,7 +219,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 11 慢慢顯示出一圖的效果")
+print("OpenCV VideoCapture 11 按鍵 慢慢顯示出一圖的效果")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
@@ -357,15 +357,12 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-# 以上OK
-# 以下缺圖, TBD
-
 print("OpenCV VideoCapture 14")
-
-logo = cv2.imread('logo.jpg')
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+logo = cv2.imread(logo_filename)
 size = logo.shape
-img = np.zeros((360,600,3), dtype='uint8')
-img[0:360, 0:600] = '255'
+img = np.zeros((480,640,3), dtype='uint8')
+img[0:480, 0:640] = '255'
 img[0:size[0], 0:size[1]] = logo
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, mask1  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
@@ -381,7 +378,7 @@ while True:
     if not ret:
         print("Cannot receive frame")
         break
-    frame = cv2.resize(frame,(600, 360))   # 調整圖片尺寸
+    frame = cv2.resize(frame,(640, 480))   # 調整圖片尺寸
     bg = cv2.bitwise_and(frame, frame, mask = mask2 )
     output = cv2.add(bg, logo)
     cv2.imshow("OpenCV 14", output)
@@ -394,10 +391,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 15")
 
-logo = cv2.imread('logo.jpg')
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+logo = cv2.imread(logo_filename)
 size = logo.shape
-img = np.zeros((360,600,3), dtype='uint8')
-img[0:360, 0:600] = '255'
+img = np.zeros((480,640,3), dtype='uint8')
+img[0:480, 0:640] = '255'
 img[30:30+size[0], 155:155+size[1]] = logo         # 將 logo 置中
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, mask1  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
@@ -411,7 +409,7 @@ while True:
     if not ret:
         print("Cannot receive frame")
         break
-    frame = cv2.resize(frame,(600, 360))
+    frame = cv2.resize(frame,(640, 480))
     output = cv2.bitwise_not(frame, mask = mask1 )      # 套用 not 和遮罩
     output = cv2.bitwise_not(output, mask = mask1 )     # 再次套用 not 和遮罩，將色彩轉成原來的顏色
     cv2.imshow("OpenCV 15", output)
@@ -437,7 +435,7 @@ while True:
     if not ret:
         print("Cannot receive frame")
         break
-    img = cv2.resize(img, (450,240))    # 調整影片大小
+    img = cv2.resize(img, (640,480))    # 調整影片大小
 
     # 加上黑色區塊
     cv2.rectangle(img,(10,10),(200,42),(0,0,0),-1)
@@ -467,7 +465,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 17")
+print("OpenCV VideoCapture 17 處理影片")
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
@@ -526,7 +524,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 18")
+print("OpenCV VideoCapture 18 QRCode 偵測器")
 
 from PIL import ImageFont, ImageDraw, Image
 
@@ -558,7 +556,7 @@ while True:
     if not ret:
         print("Cannot receive frame")
         break
-    img = cv2.resize(frame,(720,420))     # 縮小尺寸，加快速度
+    img = cv2.resize(frame,(640,480))
     ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(img)  # 辨識 QRCode
     if ok:
         for i in range(len(data)):
@@ -575,7 +573,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 19")
+print("OpenCV VideoCapture 19 QRCode 偵測器")
 
 from PIL import ImageFont, ImageDraw, Image
 
@@ -608,7 +606,7 @@ while True:
     if not ret:
         print("Cannot receive frame")
         break
-    img = cv2.resize(frame,(720,420))   # 縮小尺寸加快速度
+    img = cv2.resize(frame,(640,480))
     ok, data, bbox, rectified = qrcode.detectAndDecodeMulti(img)  # 偵測並辨識 QRCode
     # 如果偵測到 QRCode
     if ok:
@@ -685,6 +683,7 @@ if status == True:
         putText(box[0],box[3],text,color=(0,0,255))                     # 顯示文字
 
 cv2.imshow("OpenCV 20", image)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

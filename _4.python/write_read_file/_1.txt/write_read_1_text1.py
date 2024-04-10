@@ -1,4 +1,10 @@
-#各種檔案寫讀範例 txt 1
+"""
+各種檔案寫讀範例 txt 1
+
+
+先寫後讀 寫新檔 讀舊檔
+
+"""
 
 import os
 import sys
@@ -16,6 +22,135 @@ f.write('KLMNO')
 f.write('PQRST')
 f.close()
 
+""" 改用 with as 
+with open(filename_rw1, 'w') as f:
+    f.write('XXXXX')
+"""
+
+print("附加檔案 : " + filename_rw1)
+f = open(filename_rw1, 'a') 
+f.write('UVWXYZ')
+f.close()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("附加模式寫檔案")
+filename_w = 'tmp_write_read_text05.txt'
+f = open(filename_w, "a")
+data = "123456789\n"
+f.write(data)
+f.close()
+
+print("------------------------------------------------------------")  # 60個
+
+print("寫入檔案範例")
+filename_w = 'tmp_write_read_text06.txt'
+
+#寫資料到檔案中
+f = open(filename_w, "w")
+
+#寫資料
+num = f.write("黃河遠上白雲間\n一片孤城萬仞山\n羌笛何須怨楊柳\n春風不度玉門關\n")
+print("總共寫了 ", num, " 拜")
+
+#關閉文件
+f.close()
+
+print("讀取一檔並將資料寫到另檔的範例")
+
+#python讀和寫文件
+
+filename_r = 'C:/_git/vcs/_1.data/______test_files1/poetry.txt'
+filename_w = 'tmp_write_read_text07.txt'
+
+with open(filename_r, 'rt', encoding = 'utf8') as f:
+    data = f.read()
+    
+print("data :\n", data)
+
+f.close()
+
+with open(filename_w, 'wt') as f:
+    f.write(data)
+    
+f.close()
+
+print('------------------------------------------------------------')	#60個
+
+"""
+模式有
+r - 讀取(檔案需存在)
+w - 新建檔案寫入(檔案可不存在，若存在則清空)
+a - 資料附加到舊檔案後面(游標指在EOF)
+"""
+filename = 'tmp_write_read_text13.txt'
+f = open(filename, 'a', encoding = 'UTF-8')   # 也可使用指定路徑等方式，如： C:\A.txt
+f.write('黃河遠上白雲間\n')
+f.write('一片孤城萬仞山\n')
+f.write('羌笛何須怨楊柳\n')
+f.write('春風不度玉門關\n')
+f.close()
+
+filename = 'tmp_write_read_text13.txt'
+with open(filename, "w") as f:
+    f.write("This Text is going to out file\nLook at it and see!")
+
+print("------------------------------------------------------------")  # 60個
+
+filename_rw3 = 'tmp_write_read_text03.bin'
+
+print("建立一個檔案 binary, 檔名 : " + filename_rw3)
+
+content="""黃河遠上白雲間
+一片孤城萬仞山
+羌笛何須怨楊柳
+春風不度玉門關
+"""
+content=content.encode("utf-8") #轉成 bytes
+with open(filename_rw3,'wb') as f:
+    f.write(content)
+
+print("------------------------------------------------------------")  # 60個
+
+filename1 = 'tmp_write_read_text04.txt'
+
+print("建立一個檔案")
+
+content="""黃河遠上白雲間
+一片孤城萬仞山
+羌笛何須怨楊柳
+春風不度玉門關
+"""
+
+f = open(filename1,'w')
+f.write(content)
+f.close()
+
+filename_rw2 = 'tmp_write_read_text08.txt'
+
+content="""黃河遠上白雲間
+一片孤城萬仞山
+羌笛何須怨楊柳
+春風不度玉門關
+"""
+
+f=open(filename_rw2, 'w')
+f.write(content)
+f.close()
+
+
+content="""黃河遠上白雲間
+一片孤城萬仞山
+羌笛何須怨楊柳
+春風不度玉門關
+"""
+
+f=open(filename_rw2, 'w',encoding='UTF-8')
+f.write(content)
+f.close()
+
 print("------------------------------------------------------------")  # 60個
 
 print("讀取檔案 : " + filename_rw1)
@@ -26,22 +161,10 @@ print('檔案內容: ', read_data)
 
 print("------------------------------------------------------------")  # 60個
 
-print("附加檔案 : " + filename_rw1)
-f = open(filename_rw1, 'a') 
-f.write('UVWXYZ')
-f.close()
-
-print("------------------------------------------------------------")  # 60個
-
 print("讀取檔案 : " + filename_rw1)
 f = open(filename_rw1, 'r+')
 read_data = f.read()
 print('檔案內容: ', read_data)
-
-"""
-with open(filename_rw1, 'w') as f:
-	f.write('using with!')
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -67,21 +190,13 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-filename_rw2 = 'tmp_write_read_text02.txt'
-
-print("寫入檔案 : " + filename_rw2)
-f = open(filename_rw2, "w")
-f.write("abcdefghijklmnopqrstuvwxyz");
-f.close()
-
-print("------------------------------------------------------------")  # 60個
-
-print("開啟檔案 : " + filename_rw2)
-f = open(filename_rw2, "r+")
+print("測試fseek ftell")
+print("開啟檔案 : " + filename_rw1)
+f = open(filename_rw1, "r+")
 string = f.read(10);
 print("read 10 string is : ", string)
 
-print("讀取檔案 : " + filename_rw2)
+print("讀取檔案 : " + filename_rw1)
 position = f.tell();
 print("目前檔案位置 : ", position)
 
@@ -97,37 +212,13 @@ string = f.read(10);
 print("讀取10拜 : ", string)
 f.close()
 
+
 filename_rw3 = 'tmp_write_read_text03.bin'
-
-print("建立一個檔案 binary, 檔名 : " + filename_rw3)
-content="""Hello Python
-中文字測試
-Welcome
-"""
-
-content=content.encode("utf-8") #轉成 bytes
-with open(filename_rw3,'wb') as f:
-    f.write(content)
 
 print("讀取一個檔案 binary, 檔名 : " + filename_rw3)
 with open(filename_rw3,'rb') as f:
     content=f.read().decode("utf-8") 
     print(content) 
-
-print("------------------------------------------------------------")  # 60個
-
-filename1 = 'tmp_write_read_text04.txt'
-
-print("建立一個檔案")
-
-content="""Hello Python
-中文字測試
-Welcome
-"""
-
-f = open(filename1,'w')
-f.write(content)
-f.close()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -211,51 +302,6 @@ print('111111111111111111')
 f=open(filename_utf8, 'r',encoding ='UTF-8-sig')
 print(f.readline())  # 123中文字\n
 print(f.readline(3)) # abc
-f.close()
-
-print('------------------------------------------------------------')	#60個
-
-print("附加模式寫檔案")
-filename_w = 'tmp_write_read_text05.txt'
-f = open(filename_w, "a")
-data = "123456789\n"
-f.write(data)
-f.close()
-
-print("------------------------------------------------------------")  # 60個
-
-print("寫入檔案範例")
-filename_w = 'tmp_write_read_text06.txt'
-
-#寫資料到檔案中
-#打開一個文件
-f = open(filename_w, "w")
-
-#寫資料
-num = f.write("python讀和寫文件python讀和寫文件\npython讀和寫文件python讀和寫文件\n")
-
-print("總共寫了 ", num, " 拜")
-
-#關閉文件
-f.close()
-
-print("讀取一檔並將資料寫到另檔的範例")
-
-#python讀和寫文件
-
-filename_r = 'C:/_git/vcs/_1.data/______test_files1/poetry.txt'
-filename_w = 'tmp_write_read_text07.txt'
-
-with open(filename_r, 'rt', encoding = 'utf8') as f:
-    data = f.read()
-    
-print("data :\n", data)
-
-f.close()
-
-with open(filename_w, 'wt') as f:
-    f.write(data)
-    
 f.close()
 
 print('------------------------------------------------------------')	#60個
@@ -463,27 +509,9 @@ print('取得溫度資料 :\n', temperatures)
 
 print('------------------------------------------------------------')	#60個
 
+
+
 filename_rw2 = 'tmp_write_read_text08.txt'
-
-content="""Hello Python
-中文字測試
-Welcome
-"""
-
-f=open(filename_rw2, 'w')
-f.write(content)
-f.close()
-
-
-content="""Hello Python
-中文字測試
-Welcome
-"""
-
-f=open(filename_rw2, 'w',encoding='UTF-8')
-f.write(content)
-f.close()
-
 
 
 f=open(filename_rw2, 'r',encoding='UTF-8')
@@ -791,20 +819,8 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-模式有
-r - 讀取(檔案需存在)
-w - 新建檔案寫入(檔案可不存在，若存在則清空)
-a - 資料附加到舊檔案後面(游標指在EOF)
-"""
-
 filename = 'tmp_write_read_text13.txt'
 
-f = open(filename, 'a', encoding = 'UTF-8')   # 也可使用指定路徑等方式，如： C:\A.txt
-f.write('你好1\n')
-f.write('你好2\n')
-f.write('你好3\n')
-f.close()
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/python_file3.txt'
 
@@ -824,8 +840,6 @@ with open(filename) as f:
         print(line.strip())          
 
 filename = 'tmp_write_read_text14.txt'
-with open(filename, "w") as out_file:
-    out_file.write("This Text is going to out file\nLook at it and see!")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/python_file4.txt'
 text = open(filename).read().strip()

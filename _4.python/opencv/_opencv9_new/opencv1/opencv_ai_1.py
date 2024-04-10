@@ -30,7 +30,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_01")
 
@@ -614,124 +614,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_34")
-
-gif_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
-
-print("gif轉jpg")
-from PIL import Image,ImageSequence
-
-gif = Image.open(gif_filename)                # 讀取動畫圖檔
-
-i = 0                                      # 設定編號變數
-for frame in ImageSequence.Iterator(gif):
-    frame = frame.convert('RGB')           # 取出每一格轉換成 RGB
-    #frame.save(f'tmp_frame{i}.jpg', quality=65, subsampling=0)  # 儲存為 jpg
-    i = i + 1                              # 編號增加 1
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_35")
-
-from PIL import Image,ImageSequence
-
-gif = Image.open('dot.gif')
-
-img_list = []                                      # 建立儲存影格的空串列
-for frame in ImageSequence.Iterator(gif):
-    frame = frame.convert('RGBA')                  # 轉換成 RGBA
-    opencv_img = np.array(frame, dtype=np.uint8)   # 轉換成 numpy 陣列
-    opencv_img = cv2.cvtColor(opencv_img, cv2.COLOR_RGBA2BGRA)  # 顏色從 RGBA 轉換為 BGRA
-    img_list.append(opencv_img)                    # 利用串列儲存該圖片資訊
-
-loop = True                                        # 設定 loop 為 True
-while loop:
-    for i in img_list:
-        cv2.imshow('image', i)                # 不斷讀取並顯示串列中的圖片內容
-        if cv2.waitKey(200) == ord('q'):
-            loop = False                           # 停止時同時也將 while 迴圈停止
-            break
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_36")
-
-from PIL import Image,ImageSequence
-
-gif = Image.open('dot.gif')
-
-img_list = []
-for frame in ImageSequence.Iterator(gif):
-    frame = frame.convert('RGBA')
-    opencv_img = np.array(frame, dtype=np.uint8)
-    opencv_img = cv2.cvtColor(opencv_img, cv2.COLOR_RGBA2BGRA)
-
-    # 在圖形中間繪製黑色方塊
-    cv2.rectangle(opencv_img,(100,120),(300,180),(0,0,0),-1)
-
-    # 在黑色方塊上方加入文字
-    text = 'oxxo.studio'
-    org = (110,160)
-    fontFace = cv2.FONT_HERSHEY_SIMPLEX
-    fontScale = 1
-    color = (255,255,255)
-    thickness = 2
-    lineType = cv2.LINE_AA
-    cv2.putText(opencv_img, text, org, fontFace, fontScale, color, thickness, lineType)
-
-    img_list.append(opencv_img)
-
-loop = True
-while loop:
-    for i in img_list:
-        cv2.imshow('image', i)
-        if cv2.waitKey(200) == ord('q'):
-            loop = False
-            break
-# 建立要輸出的影格串列
-output = []
-for i in img_list:
-    img = i
-    img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)  # 因為 OpenCV 為 BGRA，要轉換成 RGBA
-    img = Image.fromarray(img)    # 轉換成 PIL 格式
-    img = img.convert('RGB')      # 轉換成 RGB ( 如果是 RGBA 會自動將黑色白色變成透明色 )
-    output.append(img)            # 加入 output
-# 儲存為 gif 動畫圖檔
-output[0].save("tmp_image.gif", save_all=True, append_images=output[1:], duration=200, loop=0, disposal=0)
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_37")
-
-from PIL import Image,ImageSequence
-
-gif = []
-for i in range(4):
-    img = Image.open(f'frame{i}.jpg')  # 開啟圖片
-    gif.append(img)                    # 加入串列
-# 儲存為 gif
-gif[0].save("tmp_image.gif", save_all=True, append_images=gif[1:], duration=200, loop=0, disposal=0)
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_38")
-
-n = 0
-for i in source:                  # source 為要轉存的所有圖片陣列 ( opencv 格式，色彩為 RGBA )
-    img = Image.fromarray(i)      # 轉換成 PIL 格式
-    img.save(f'tmp_gif{n}.gif')  # 儲存為 gif
-    n = n + 1                     # 改變儲存的檔名編號
-
-output = []                       # 建立空串列
-for i in range(n):
-    img = Image.open(f'tmp_gif{i}.gif')  # 依序開啟每張 gif
-    img = img.convert("RGBA")             # 轉換為 RGBA
-    output.append(img)                    # 記錄每張圖片內容
-
-# 轉存為 gif 動畫，設定 disposal=2
-output[0].save("tmp_image.gif", save_all=True, append_images=output[1:], duration=100, loop=0, disposal=2)
-
-print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_39")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
@@ -923,7 +805,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-
+'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -939,137 +821,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-x = 100
-y = 100
-w = 200
-h = 200
-crop_img = img[y:y+h, x:x+w]        # 取出陣列的範圍
-
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-x = 100
-y = 100
-w = 200
-h = 200
-crop_img = img[y:y+h, x:x+w]
-
-output = np.zeros((360,480,3), dtype='uint8') # 產生黑色畫布
-output[x:x+w, y:y+h]=crop_img
-
-
-img = cv2.imread(filename)
-output_1 = cv2.resize(img, (200, 200))   # 產生 200x200 的圖
-output_2 = cv2.resize(img, (100, 300))   # 產生 100x300 的圖
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-size = img.shape         # 取得原始圖片的資訊
-level = 15               # 縮小比例 ( 可當作馬賽克的等級 )
-h = int(size[0]/level)   # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
-w = int(size[1]/level)   # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
-mosaic = cv2.resize(img, (w,h), interpolation=cv2.INTER_LINEAR)   # 根據縮小尺寸縮小
-mosaic = cv2.resize(mosaic, (size[1],size[0]), interpolation=cv2.INTER_NEAREST) # 放大到原本的大小
-
-cv2.imshow('image', mosaic)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-
-x = 135   # 剪裁區域左上 x 座標
-y = 90    # 剪裁區域左上 y 座標
-cw = 100  # 剪裁區域寬度
-ch = 120  # 剪裁區域高度
-mosaic = img[y:y+ch, x:x+cw]   # 取得剪裁區域
-level = 15         # 馬賽克程度
-h = int(ch/level)  # 縮小的高度 ( 使用 int 去除小數點 )
-w = int(cw/level)  # 縮小的寬度 ( 使用 int 去除小數點 )
-mosaic = cv2.resize(mosaic, (w,h), interpolation=cv2.INTER_LINEAR)
-mosaic = cv2.resize(mosaic, (cw,ch), interpolation=cv2.INTER_NEAREST)
-img[y:y+ch, x:x+cw] = mosaic   # 將圖片的剪裁區域，換成馬賽克的圖
-
-cv2.imshow('image', img)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-#flip
-
-img = cv2.imread(filename)   # 開啟圖片
-output_0 = cv2.flip(img, 0)    # 上下翻轉
-output_1 = cv2.flip(img, 1)    # 左右翻轉
-output_2 = cv2.flip(img, -1)   # 上下左右翻轉
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-output = cv2.transpose(img)    # 逆時針旋轉 90 度。
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-output_ROTATE_90_CLOCKWISE = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-output_ROTATE_90_COUNTERCLOCKWISE = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
-output_ROTATE_180 = cv2.rotate(img, cv2.ROTATE_180)
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-M = np.float32([[1, 0, 100], [0, 1, 100]]) # 2x3 矩陣，x 軸平移 100，y 軸平移 100
-output = cv2.warpAffine(img, M, (480, 360))
-
-cv2.imshow('image', output)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-M = cv2.getRotationMatrix2D((240, 180), 45, 1)    # 中心點 (240, 180)，旋轉 45 度，尺寸 1
-output = cv2.warpAffine(img, M, (480, 360))
-
-cv2.imshow('image', output)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-img = cv2.imread(filename)
-p1 = np.float32([[100,100],[480,0],[0,360]])
-p2 = np.float32([[0,0],[480,0],[0,360]])
-M = cv2.getAffineTransform(p1, p2)
-output = cv2.warpAffine(img, M, (480, 360))
-
-cv2.imshow('image', output)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-p1 = np.float32([[100,100],[480,0],[0,360],[480,360]])
-p2 = np.float32([[0,0],[480,0],[0,360],[480,360]])
-m = cv2.getPerspectiveTransform(p1,p2)
-
-img = cv2.imread(filename)
-output = cv2.warpPerspective(img, m, (480, 360))
-
-cv2.imshow('image', output)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1078,192 +829,6 @@ import cv2
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_50")
-
-img = cv2.imread(filename)
-
-def show_xy(event,x,y,flags,userdata):
-    print(event,x,y,flags)
-    # 印出相關參數的數值，userdata 可透過 setMouseCallback 第三個參數垂遞給函式
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)  # 設定偵測事件的函式與視窗
-
-cv2.waitKey(0)     # 按下任意鍵停止
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_51")
-
-img = cv2.imread(filename)
-
-def show_xy(event,x,y,flags,param):
-    if event == 0:
-        img2 = img.copy()                         # 當滑鼠移動時，複製原本的圖片
-        cv2.circle(img2, (x,y), 10, (0,0,0), 1)   # 繪製黑色空心圓
-        cv2.imshow('ImageShow', img2)            # 顯示繪製後的影像
-    if event == 1:
-        color = img[y,x]                          # 當滑鼠點擊時
-        print(color)                              # 印出顏色
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_52")
-
-img = cv2.imread(filename)
-
-dots = []   # 記錄座標的空串列
-def show_xy(event,x,y,flags,param):
-    if event == 1:
-        dots.append([x, y])                          # 記錄座標
-        cv2.circle(img, (x, y), 10, (0,0,255), -1)   # 在點擊的位置，繪製圓形
-        num = len(dots)                              # 目前有幾個座標
-        if num > 1:                                  # 如果有兩個點以上
-            x1 = dots[num-2][0]
-            y1 = dots[num-2][1]
-            x2 = dots[num-1][0]
-            y2 = dots[num-1][1]
-            cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)  # 取得最後的兩個座標，繪製直線
-        cv2.imshow('ImageShow', img)
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_53")
-
-img = cv2.imread('mona.jpg')
-
-dot1 = []                          # 記錄第一個座標
-dot2 = []                          # 記錄第二個座標
-
-# 滑鼠事件發生時要執行的函式
-def show_xy(event,x,y,flags,param):
-    global dot1, dot2, img         # 在函式內使用全域變數
-    # 滑鼠拖曳發生時
-    if flags == 1:
-        if event == 1:
-            dot1 = [x, y]          # 按下滑鼠時記錄第一個座標
-        if event == 0:
-            img2 = img.copy()      # 拖曳時不斷複製 img
-            dot2 = [x, y]          # 拖曳時不斷更新第二個座標
-            # 根據兩個座標繪製四邊形
-            cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            # 不斷顯示新圖片 ( 如果不這麼做，會出現一堆四邊形殘影 )
-            cv2.imshow('ImageShow', img2)
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)   # 按下任意鍵結束
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_54")
-
-img = cv2.imread('mona.jpg')
-
-dot1 = []
-dot2 = []
-def show_xy(event,x,y,flags,param):
-    global dot1, dot2, img, img2    # 因為要讓 img = img2，所以也要宣告 img2 為全域變數
-    if flags == 1:
-        if event == 1:
-            dot1 = [x, y]
-        if event == 0:
-            img2 = img.copy()
-            dot2 = [x, y]
-            cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            cv2.imshow('ImageShow', img2)
-        if event == 4:
-            img = img2   # 滑鼠放開時 ( event == 4 )，將 img 更新為 img2
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_55")
-
-img = cv2.imread('mona.jpg')
-
-dot1 = []
-dot2 = []
-def show_xy(event,x,y,flags,param):
-    global dot1, dot2, img, img2
-    if flags == 1:
-        if event == 1:
-            dot1 = [x, y]
-        if event == 0:
-            img2 = img.copy()
-            dot2 = [x, y]
-            cv2.rectangle(img2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            cv2.imshow('ImageShow', img2)
-        if event == 4:
-            level = 8                                         # 縮小比例 ( 可當作馬賽克的等級 )
-            h = int((dot2[0] - dot1[0]) / level)              # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
-            w = int((dot2[1] - dot1[1]) / level)              # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
-            mosaic = img[dot1[1]:dot2[1], dot1[0]:dot2[0]]    # 取得馬賽克區域
-            mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_LINEAR)   # 根據縮小尺寸縮小
-            mosaic = cv2.resize(mosaic, (dot2[0] - dot1[0], dot2[1] - dot1[1]), interpolation=cv2.INTER_NEAREST) # 放大到原本的大小
-            img[dot1[1]:dot2[1], dot1[0]:dot2[0]] = mosaic   # 置換成馬賽克的影像
-            cv2.imshow('ImageShow', img)
-
-cv2.imshow('ImageShow', img)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_56")
-
-dots = []   # 建立空串列記錄座標
-w = 420
-h = 240
-draw = np.zeros((h,w,4), dtype='uint8')   # 建立 420x240 的 RGBA 黑色畫布
-
-def show_xy(event,x,y,flags,param):
-    global dots, draw                     # 定義全域變數
-    if flags == 1:
-        if event == 1:
-            dots.append([x,y])            # 如果拖曳滑鼠剛開始，記錄第一點座標
-        if event == 4:
-            dots = []                     # 如果放開滑鼠，清空串列內容
-        if event == 0 or event == 4:
-            dots.append([x,y])            # 拖曳滑鼠時，不斷記錄座標
-            x1 = dots[len(dots)-2][0]     # 取得倒數第二個點的 x 座標
-            y1 = dots[len(dots)-2][1]     # 取得倒數第二個點的 y 座標
-            x2 = dots[len(dots)-1][0]     # 取得倒數第一個點的 x 座標
-            y2 = dots[len(dots)-1][1]     # 取得倒數第一個點的 y 座標
-            cv2.line(draw,(x1,y1),(x2,y2),(0,0,255,255),2)  # 畫直線
-        cv2.imshow('ImageShow', draw)
-
-cv2.imshow('ImageShow', draw)
-cv2.setMouseCallback('ImageShow', show_xy)
-
-while True:
-    keyboard = cv2.waitKey(5)                    # 每 5 毫秒偵測一次鍵盤事件
-    if keyboard == ord('q'):
-        break                                    # 如果按下 q 就跳出
-    if keyboard == ord('r'):
-        draw = np.zeros((h,w,4), dtype='uint8')  # 如果按下 r 就變成原本全黑的畫布
-        cv2.imshow('ImageShow', draw)
-
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 print("OpenCV_ai_58")
 
 cv2.namedWindow('ImageShow')  # 建立一個名為 ImageShow 的視窗
@@ -1518,6 +1083,8 @@ cv2.waitKey(0)                                    # 按下任意鍵停止
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1531,5 +1098,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
 
 

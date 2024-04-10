@@ -32,7 +32,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
-
+'''
 """
 圖像直方圖
 
@@ -188,8 +188,69 @@ plt.plot(ind0, b_hist, color = 'blue', label = 'Blue Plane')
 plt.legend()
 
 plt.show()
+'''
+print("------------------------------------------------------------")  # 60個
+
+import pylab
+
+def imresize(im, sz):
+    """ 使用PIL对象重新定义图像数组的大小 """
+    pil_im = Image.fromarray(uint8(im))
+    return array(pil_im.resize(sz))
+
+def histeq(im, nbr_bins=256):
+    """ 对一幅灰度图像进行直方图均衡化 """
+    # 计算图像的直方图
+    imhist, bins = pylab.histogram(im.flatten(), nbr_bins, normed=True)
+    cdf = imhist.cumsum()   # 累积分布函数
+    cdf = 255 * cdf / cdf[-1]   # 归一化
+    # 使用累积分布函数的线性插值，计算新的像素值
+    im2 = pylab.interp(im.flatten(), bins[:-1], cdf)
+    return im2.reshape(im.shape), cdf
+
+def compute_average(imlist):
+    """ 计算图像列表的平均图像 """
+    # 打开第一幅图像，将其存储在浮点型数组中
+    average = array(Image.open(imlist[0]), 'f')
+    for imnae in imlist[1:]:
+        try:
+            average += array(Image.open(imname))
+        except:
+            print(imname + '...skipped')
+        averageim /= len(imlist)
+
+    # 返回uint8类型的平均图像
+    return array(averageim, 'uint8')
+
+# 直方图均衡化
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
+im = np.array(Image.open(filename).convert('L'))
+im2, cdf = histeq(im)
+
+plt.gray()
+plt.subplot(221)
+plt.title(r'before')
+plt.imshow(im)
+
+plt.subplot(222)
+plt.title(r'after')
+plt.imshow(im2)
+
+plt.subplot(223)
+plt.hist(im.flatten(), 128)
+
+plt.subplot(224)
+plt.hist(im2.flatten(), 128)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
 
 print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

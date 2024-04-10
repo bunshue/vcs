@@ -41,17 +41,6 @@ N = 500
 
 
 """
-#一般random
-x = np.random.rand(N) #N個0~1之間的亂數
-y = np.random.rand(N)
-plt.scatter(x, y)
-plt.scatter(x, y, c=y, cmap = 'hsv')  # 色彩依 y 軸值變化
-plt.scatter(x, y, s=100, c='r', marker='*',alpha=0.65)
-plt.colorbar()
-
-"""
-
-"""
 #常態分佈
 #常態random
 
@@ -206,6 +195,13 @@ plt.ylim = (0, 1)
 
 # 第五張圖
 plt.subplot(235)
+
+#使用隨機陣列產生圖像
+#一般random
+x = np.random.rand(10000) #N個0~1之間的亂數
+y = np.random.rand(10000)
+plt.scatter(x, y, c=y, cmap = 'hsv')  # 色彩依 y 軸值變化
+plt.colorbar()
 
 
 # 第六張圖

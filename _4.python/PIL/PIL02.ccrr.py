@@ -73,7 +73,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
+'''
 # 檔案 => PIL影像
 image = Image.open(filename)
 print(image.format, image.size, image.mode)
@@ -343,7 +343,7 @@ convert_image = Image.merge('RGB', (b, g, r))
 
 convert_image = Image.merge('RGB', (r, g, b))
 #OK image
-
+'''
 print('------------------------------------------------------------')	#60個
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
@@ -354,15 +354,9 @@ image = Image.open(filename1)    #PIL讀取本機圖片, 讀取的是RGB格式�
 plt.imshow(image)
 plt.show()
 
-#對圖形套用過濾器
-im_sharp = image.filter(ImageFilter.SHARPEN)
-
-plt.imshow(im_sharp)
-plt.show()
-
 #分解圖形顏色 例如RGB的紅綠藍
 #看不出效果
-r,g,b = im_sharp.split()
+r,g,b = image.split()
 
 plt.imshow(r)
 plt.show()
@@ -372,6 +366,8 @@ plt.show()
 
 plt.imshow(b)
 plt.show()
+
+sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
