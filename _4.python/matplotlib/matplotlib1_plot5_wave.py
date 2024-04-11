@@ -2,6 +2,9 @@
 
 import matplotlib
 
+import wave
+from scipy.io import wavfile
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -23,8 +26,6 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-from scipy.io import wavfile
-
 mywav = "_data/notify1.wav"
 # 讀取.wav文件
 sample_rate, data = wavfile.read(mywav)
@@ -38,8 +39,6 @@ plt.xlabel("Sample")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-from scipy.io import wavfile
 
 mywav = "_data/notify1.wav"
 # 讀取.wav文件
@@ -58,8 +57,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from scipy.io import wavfile
-
 mywav = "_data/notify1.wav"
 # 讀取.wav文件
 sample_rate, data = wavfile.read(mywav)
@@ -75,29 +72,25 @@ plt.xlabel("Sample")
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-import wave
-
-fig, ax = plt.subplots()  # 建立單一圖表
-
 
 # 建立繪製聲波的函式
 def visualize(path):
+    print("畫圖...")
     raw = wave.open(path)  # 開啟聲音
     signal = raw.readframes(-1)  # 讀取全部聲音採樣
     signal = np.frombuffer(signal, dtype="int16")  # 將聲音採樣轉換成 int16 的格式所組成的 np 陣列
     f_rate = raw.getframerate()  # 取得 framerate
     time = np.linspace(0, len(signal) / f_rate, num=len(signal))  # 根據聲音採樣產生成對應的時間
 
-    ax.plot(time, signal)  # 畫線，橫軸時間，縱軸陣列值
+    plt.plot(time, signal)  # 畫線，橫軸時間，縱軸陣列值
     plt.title("Sound Wave")  # 圖表標題
     plt.xlabel("Time")  # 橫軸標題
     plt.show()
 
 
 wave_filename = "C:/_git/vcs/_1.data/______test_files1/_wav/hello.wav"
+wave_filename = "_data/notify1.wav"
 visualize(wave_filename)  # 讀取聲音
 
 print(
@@ -105,7 +98,6 @@ print(
 )  # 60個
 
 """ fail
-import wave
 from pydub import AudioSegment  # 載入 pydub 的 AudioSegment 模組
 
 mp3_filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3'

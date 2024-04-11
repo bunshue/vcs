@@ -3,6 +3,7 @@
 
 logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
 
+
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -30,7 +31,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_01")
 
@@ -614,7 +615,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_39")
+print("OpenCV_ai_34")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
 
@@ -633,7 +634,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_40")
+print("OpenCV_ai_35")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
 
@@ -665,7 +666,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_41")
+print("OpenCV_ai_36")
 
 from PIL import ImageFont, ImageDraw, Image          # 載入 PIL ( 為了放中文字 )
 
@@ -706,7 +707,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_42")
+print("OpenCV_ai_37")
 
 """ many-qr-code
 from PIL import ImageFont, ImageDraw, Image
@@ -750,7 +751,7 @@ cv2.destroyAllWindows()
 """
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_43")
+print("OpenCV_ai_38")
 
 """ barcode
 from PIL import ImageFont, ImageDraw, Image
@@ -790,46 +791,9 @@ cv2.imshow('image', img)
 cv2.waitKey()
 cv2.destroyAllWindows()
 """
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_44")
-
 
 print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-
-'''
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-#cv2.imwrite('tmp_image_2.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 80])  # 存成 jpg
-#cv2.imwrite('tmp_image_3.png', img)  # 存成 png
-
-
-
-#CCRR
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-import cv2
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_58")
+print("OpenCV_ai_39")
 
 cv2.namedWindow('ImageShow')  # 建立一個名為 ImageShow 的視窗
 
@@ -843,7 +807,7 @@ while True:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_59")
+print("OpenCV_ai_40")
 
 img = cv2.imread('mona.jpg')
 
@@ -879,7 +843,7 @@ while True:
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_60")
+print("OpenCV_ai_41")
 
 img = cv2.imread('mona.jpg')
 cv2.imshow('ImageShow', img)
@@ -894,7 +858,7 @@ keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_61")
+print("OpenCV_ai_42")
 
 img = cv2.imread('mona.jpg')
 cv2.imshow('ImageShow', img)
@@ -931,7 +895,7 @@ keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_62")
+print("OpenCV_ai_43")
 
 img = cv2.imread('mona.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)   # 將圖片轉成灰階
@@ -951,7 +915,7 @@ cv2.waitKey(0) # 按下任意鍵停止
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_64")
+print("OpenCV_ai_44")
 
 img = cv2.imread('mona.jpg')
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 影像轉換成灰階
@@ -974,7 +938,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV_ai_66")
+print("OpenCV_ai_45")
 
 """ 缺  xml
 img = cv2.imread('mona.jpg')
@@ -1002,7 +966,7 @@ cv2.destroyAllWindows()
 """
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_68")
+print("OpenCV_ai_46")
 
 """ lack xml
 img = cv2.imread('cars.jpg')                    # 讀取街道影像
@@ -1019,7 +983,7 @@ cv2.waitKey(0) # 按下任意鍵停止
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_69")
+print("OpenCV_ai_47")
 
 img = cv2.imread('cars.jpg')                    # 讀取街道影像
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    # 轉換成黑白影像
@@ -1036,7 +1000,7 @@ cv2.destroyAllWindows()
 """
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_70")
+print("OpenCV_ai_48")
 """ lack test file
 xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
 detector = cv2.CascadeClassifier(xml_filename)  # 載入人臉追蹤模型
@@ -1069,7 +1033,7 @@ print('ok!')
 """
 
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_76")
+print("OpenCV_ai_49")
 
 lower = np.array([30,40,200])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
 upper = np.array([90,100,255]) # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
@@ -1086,8 +1050,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

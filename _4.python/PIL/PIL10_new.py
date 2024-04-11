@@ -8,14 +8,14 @@ PIL 新進
 pip install Pillow
 
 
-PIL中所涉及的基本概念有如下几个：
+PIL中所涉及的基本概念有如下幾個：
 通道（bands）
 模式（mode）
 尺寸（size）
-坐标系统（coordinate system）
-调色板（palette）
+坐標系統（coordinate system）
+調色板（palette）
 信息（info）
-滤波器（filters）
+濾波器（filters）
 
 1、  通道
 彩色圖片 RGB 3通道
@@ -23,51 +23,51 @@ PIL中所涉及的基本概念有如下几个：
 
 2、  模式
 
-图像的模式定义了图像的类型和像素的位宽。当前支持如下模式：
+圖像的模式定義了圖像的類型和像素的位寬。當前支持如下模式：
 
-1：1位像素，表示黑和白，但是存储的时候每个像素存储为8bit。
+1：1位像素，表示黑和白，但是存儲的時候每個像素存儲為8bit。
 L：8位像素，表示黑和白。
-P：8位像素，使用调色板映射到其他模式。
-RGB：3x8位像素，为真彩色。
+P：8位像素，使用調色板映射到其他模式。
+RGB：3x8位像素，為真彩色。
 RGBA：4x8位像素，有透明通道的真彩色。
-CMYK：4x8位像素，颜色分离。
-YCbCr：3x8位像素，彩色视频格式。
+CMYK：4x8位像素，顏色分離。
+YCbCr：3x8位像素，彩色視頻格式。
 I：32位整型像素。
-F：32位浮点型像素。
+F：32位浮點型像素。
 
 3、  尺寸
-4、  坐标系统
+4、  坐標系統
 
-PIL使用笛卡尔像素坐标系统，坐标(0，0)位于左上角。
-注意：坐标值表示像素的角；位于坐标（0，0）处的像素的中心实际上位于（0.5，0.5）。
-坐标经常用于二元组（x，y）。
-长方形则表示为四元组，前面是左上角坐标。
-例如，一个覆盖800x600的像素图像的长方形表示为（0，0，800，600）。
+PIL使用笛卡爾像素坐標系統，坐標(0，0)位于左上角。
+注意：坐標值表示像素的角；位于坐標（0，0）處的像素的中心實際上位于（0.5，0.5）。
+坐標經常用于二元組（x，y）。
+長方形則表示為四元組，前面是左上角坐標。
+例如，一個覆蓋800x600的像素圖像的長方形表示為（0，0，800，600）。
 
-5、  调色板
+5、  調色板
 
-调色板模式 ("P")使用一个颜色调色板为每个像素定义具体的颜色值
+調色板模式 ("P")使用一個顏色調色板為每個像素定義具體的顏色值
 
 6、  信息
 
-使用info属性可以为一张图片添加一些辅助信息。这个是字典对象。
-加载和保存图像文件时，多少信息需要处理取决于文件格式。
+使用info屬性可以為一張圖片添加一些輔助信息。這個是字典對象。
+加載和保存圖像文件時，多少信息需要處理取決于文件格式。
 
-7、  滤波器
+7、  濾波器
 
-对于将多个输入像素映射为一个输出像素的几何操作，PIL提供了4个不同的采样滤波器：
+對于將多個輸入像素映射為一個輸出像素的幾何操作，PIL提供了4個不同的采樣濾波器：
 
-NEAREST：最近滤波。从输入图像中选取最近的像素作为输出像素。它忽略了所有其他的像素。
-BILINEAR：双线性滤波。在输入图像的2x2矩阵上进行线性插值。注意：PIL的当前版本，做下采样时该滤波器使用了固定输入模板。
-BICUBIC：双立方滤波。在输入图像的4x4矩阵上进行立方插值。注意：PIL的当前版本，做下采样时该滤波器使用了固定输入模板。
-ANTIALIAS：平滑滤波。这是PIL 1.1.3版本中新的滤波器。
-对所有可以影响输出像素的输入像素进行高质量的重采样滤波，以计算输出像素值。
-在当前的PIL版本中，这个滤波器只用于改变尺寸和缩略图方法。
+NEAREST：最近濾波。從輸入圖像中選取最近的像素作為輸出像素。它忽略了所有其他的像素。
+BILINEAR：雙線性濾波。在輸入圖像的2x2矩陣上進行線性插值。注意：PIL的當前版本，做下采樣時該濾波器使用了固定輸入模板。
+BICUBIC：雙立方濾波。在輸入圖像的4x4矩陣上進行立方插值。注意：PIL的當前版本，做下采樣時該濾波器使用了固定輸入模板。
+ANTIALIAS：平滑濾波。這是PIL 1.1.3版本中新的濾波器。
+對所有可以影響輸出像素的輸入像素進行高質量的重采樣濾波，以計算輸出像素值。
+在當前的PIL版本中，這個濾波器只用于改變尺寸和縮略圖方法。
 
-注意：在当前的PIL版本中，ANTIALIAS滤波器是下采样（例如，将一个大的图像转换为小图）时唯一正确的滤波器。
-BILIEAR和BICUBIC滤波器使用固定的输入模板，用于固定比例的几何变换和上采样是最好的。
+注意：在當前的PIL版本中，ANTIALIAS濾波器是下采樣（例如，將一個大的圖像轉換為小圖）時唯一正確的濾波器。
+BILIEAR和BICUBIC濾波器使用固定的輸入模板，用于固定比例的幾何變換和上采樣是最好的。
 
-Image模块中的方法resize()和thumbnail()用到了滤波器。
+Image模塊中的方法resize()和thumbnail()用到了濾波器。
 
 PIL 之 resize()
 
@@ -75,7 +75,7 @@ image.resize(size, filter=None)
 
 >>>im_resize = im.resize((256,256))
 
-对参数filter不赋值的话，方法resize()默认使用NEAREST滤波器。
+對參數filter不賦值的話，方法resize()默認使用NEAREST濾波器。
 
 >>>im_resize0 = im.resize((256,256), Image.BILINEAR)
 >>>im_resize1 = im.resize((256,256), Image.BICUBIC)
@@ -87,8 +87,8 @@ image.thumbnail(size, filter=None)
 
 >>>im.thumbnail((200,200))
 
-这里需要说明的是，方法thumbnail()需要保持宽高比，对于size=(200,200)的输入参数，其最终的缩略图尺寸为(200, 112)。
-对参数filter不赋值的话，方法thumbnail()默认使用NEAREST滤波器。如果要使用其他滤波器可以通过下面的方法来实现：
+這里需要說明的是，方法thumbnail()需要保持寬高比，對于size=(200,200)的輸入參數，其最終的縮略圖尺寸為(200, 112)。
+對參數filter不賦值的話，方法thumbnail()默認使用NEAREST濾波器。如果要使用其他濾波器可以通過下面的方法來實現：
 
 >>> im.thumbnail((200,200),Image.BILINEAR)
 >>> im.thumbnail((200,200), Image.BICUBIC)
@@ -303,7 +303,7 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
-# 打開圖像，并轉成灰度圖像
+# 打開圖像，並轉成灰度圖像
 # 檔案 => PIL影像 => 灰階 => np陣列
 image = np.array(Image.open(filename).convert('L'))#L為8位像素黑白圖
 
@@ -320,7 +320,7 @@ print("------------------------------------------------------------")  # 60個
 gif_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
 
 print("gif轉jpg")
-from PIL import Image,ImageSequence
+from PIL import ImageSequence
 
 gif = Image.open(gif_filename)                # 讀取動畫圖檔
 
@@ -335,7 +335,8 @@ print("用cv視窗播放gif檔案")
 
 gif_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
 
-from PIL import Image,ImageSequence
+import cv2
+from PIL import ImageSequence
 
 gif = Image.open(gif_filename)
 
@@ -358,7 +359,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-from PIL import Image,ImageSequence
+from PIL import ImageSequence
 
 gif_filename = "C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cat.gif"
 
@@ -409,7 +410,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("多個jpg組成一個gif檔")
 
-from PIL import Image,ImageSequence
+from PIL import ImageSequence
 
 gif = []
 for i in range(1, 6):
@@ -474,6 +475,5 @@ plt.show()
 """
 
 print('------------------------------------------------------------')	#60個
-
 
 

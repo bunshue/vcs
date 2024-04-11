@@ -25,7 +25,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('練習組合成一張大圖 picasa效果')
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -74,19 +74,9 @@ plt.show()
     img = cv2.flip(img, 1)                        # 翻轉影像，使其如同鏡子
     img = img[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
 
-
-
-
-
-
 """
 
-
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 filename1 = "C:/_git/vcs/_4.python/_data/picture_mix1.bmp"
 filename2 = "C:/_git/vcs/_4.python/_data/picture_mix2.bmp"
@@ -225,14 +215,17 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 o = cv2.imread(filename)
+
 image2 = cv2.cvtColor(o, cv2.COLOR_BGR2RGB)
 mask = np.zeros(o.shape[:2], np.uint8)
 bgd = np.zeros((1, 65), np.float64)
 fgd = np.zeros((1, 65), np.float64)
 rect = (50, 50, 400, 500)
 cv2.grabCut(o, mask, rect, bgd, fgd, 5, cv2.GC_INIT_WITH_RECT)
+
 mask2 = cv2.imread("images/mask.png", 0)
 mask2Show = cv2.imread("images/mask.png", -1)
+
 m2rgb = cv2.cvtColor(mask2Show, cv2.COLOR_BGR2RGB)
 mask[mask2 == 0] = 0
 mask[mask2 == 255] = 1
@@ -263,6 +256,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 o = cv2.imread(filename)
+
 image2 = cv2.cvtColor(o, cv2.COLOR_BGR2RGB)
 bgd = np.zeros((1, 65), np.float64)
 fgd = np.zeros((1, 65), np.float64)
@@ -296,8 +290,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-
 image = cv2.imread(filename, 0)
+
 image2 = image.copy()
 template = cv2.imread("images/temp.bmp", 0)
 th, tw = template.shape[::]
@@ -335,8 +329,10 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 image = cv2.imread(filename, 0)
+
 image2 = image.copy()
 template = cv2.imread("images/temp.bmp", 0)
+
 tw, th = template.shape[::-1]
 image = image2.copy()
 rv = cv2.matchTemplate(image, template, cv2.TM_CCOEFF)
@@ -372,6 +368,7 @@ print("------------------------------------------------------------")  # 60個
 
 image = cv2.imread("images/lena4.bmp", 0)
 template = cv2.imread("images/lena4Temp.bmp", 0)
+
 w, h = template.shape[::-1]
 res = cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED)
 threshold = 0.9
@@ -392,33 +389,18 @@ plt.figure(
 plt.imshow(image, cmap="gray")
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-print("讀取圖檔 :", filename)
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 image = cv2.imread(filename)
 
 H, W, D = image.shape
-print(image.shape)
-print("W = ", W)
-print("H = ", H)
-print("D = ", D)
 
-x = 100
-y = 100
+x = 50
+y = 50
 M = np.float32([[1, 0, x], [0, 1, y]])
 move = cv2.warpAffine(image, M, (W, H))
-
-plt.figure(
-    num="new09 影像處理 move",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
 
 plt.subplot(121)
 plt.title("原圖")
@@ -428,34 +410,20 @@ plt.subplot(122)
 plt.title("move")
 plt.imshow(cv2.cvtColor(move, cv2.COLOR_BGR2RGB))
 
+plt.suptitle('影像移動')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-print("讀取圖檔 :", filename)
 image = cv2.imread(filename)
 
 H, W, D = image.shape
-print(image.shape)
-print("W = ", W)
-print("H = ", H)
-print("D = ", D)
 
 p1 = np.float32([[0, 0], [W - 1, 0], [0, H - 1]])
 p2 = np.float32([[0, H * 0.33], [W * 0.85, H * 0.25], [W * 0.15, H * 0.7]])
 M = cv2.getAffineTransform(p1, p2)
 dst = cv2.warpAffine(image, M, (W, H))
-
-plt.figure(
-    num="new10",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
 
 plt.subplot(121)
 plt.title("原圖")
@@ -465,19 +433,15 @@ plt.subplot(122)
 plt.title("AffineTransform")
 plt.imshow(cv2.cvtColor(dst, cv2.COLOR_BGR2RGB))
 
+plt.suptitle("AffineTransform")
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/demo.bmp"
-print("讀取圖檔 :", filename)
 image = cv2.imread(filename)
 
 H, W, D = image.shape
-print(image.shape)
-print("W = ", W)
-print("H = ", H)
-print("D = ", D)
 
 pts1 = np.float32([[150, 50], [400, 50], [60, 450], [310, 450]])
 pts2 = np.float32([[50, 50], [H - 50, 50], [50, W - 50], [H - 50, W - 50]])
@@ -538,7 +502,6 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
-
 image = cv2.imread(filename, cv2.COLOR_BGR2GRAY)
 
 kernel_x = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]], dtype=int)  # 水平值一樣, 偵測水平的邊緣
@@ -639,6 +602,7 @@ image = cv2.imread(filename)
 
 threshold = 127
 print("二值化")
+
 #        cv2.threshold(image, 閥值, 最大灰度值, 使用的二值化方法)
 t, rst = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY)
 # t, rst = cv2.threshold(image, threshold, 255, cv2.THRESH_BINARY_INV)
@@ -745,7 +709,6 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.p
 
 print("原圖 彩色")
 image = cv2.imread(filename)
-print("image.shape=", image.shape)
 
 print("原圖 彩色 轉 灰階1通道")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -1741,70 +1704,6 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-特殊
-
-d = 400
-def draw(event, x, y, flags, param):
-    if event == cv2.EVENT_LBUTTONDBLCLK:
-        #矩形之左上點
-        p1x = x
-        p1y = y
-        #矩形之右下點
-        p2x = np.random.randint(1, d - 50)  #np.random之randint不含尾
-        p2y = np.random.randint(1, d - 50)  #np.random之randint不含尾
-        color = np.random.randint(0, high = 256, size = (3,)).tolist()  #np.random之randint不含尾
-        cv2.rectangle(image,(p1x, p1y),(p2x, p2y), color, 2)
-image = np.ones((d, d, 3), dtype = "uint8") * 255
-cv2.namedWindow('Demo19.10')
-cv2.setMouseCallback('Demo19.10', draw)
-while(1):
-    cv2.imshow('Image', image)
-    if cv2.waitKey(20) == 27:
-        break
-
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-#fail
-d = 400
-global thickness
-thickness = -1
-def fill(x):
-    pass
-def draw(event,x,y,flags,param):
-    if event == cv2.EVENT_LBUTTONDBLCLK:
-        #矩形之左上點
-        p1x = x
-        p1y = y
-        #矩形之右下點
-        p2x = np.random.randint(1, d - 50)  #np.random之randint不含尾
-        p2y = np.random.randint(1, d - 50)  #np.random之randint不含尾
-        color = np.random.randint(0, high = 256, size = (3,)).tolist()  #np.random之randint不含尾
-        cv2.rectangle(image,(p1x,p1y),(p2x,p2y),color,thickness)
-
-image = np.ones((d, d, 3), np.uint8) * 255
-cv2.namedWindow('image')
-cv2.setMouseCallback('image', draw)
-cv2.createTrackbar('R', 'image', 0, 1, fill)
-while(1):
-    cv2.imshow('Image', image)
-    k = cv2.waitKey(1) & 0xFF
-    g = cv2.getTrackbarPos('R', 'image')
-    if g == 0:
-        thickness = -1
-    else:
-        thickness = 2        
-    if k == 27:
-        break   
-
-cv2.destroyAllWindows()
-"""
 
 print("------------------------------------------------------------")  # 60個
 

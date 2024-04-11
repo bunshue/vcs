@@ -47,9 +47,9 @@ from PIL import ImageOps
 from PIL import ImageFont
 from PIL import ImageFilter
 
+import time
 import glob
 import shutil
-from time import sleep
 
 print("------------------------------------------------------------")  # 60個
 
@@ -73,7 +73,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-'''
+
 # 檔案 => PIL影像
 image = Image.open(filename)
 print(image.format, image.size, image.mode)
@@ -124,7 +124,7 @@ print('裁剪 .crop SP----------------------------------------------------------
 print('複製 .copy ST------------------------------------------------------------')	#60個
 
 # 檔案 => PIL影像
-image = Image.open(filename)           # 建立Pillow物件
+image = Image.open(filename)
 image_copy = image.copy()                      # 複製
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
@@ -136,7 +136,7 @@ imgcopy=img.copy()
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 => PIL影像
-image = Image.open(filename)               # 建立Pillow物件
+image = Image.open(filename)
 image_copy = image.copy()                          # 複製
 image_crop = image_copy.crop((80, 30, 150, 100))    # 裁切區間
 image_copy.paste(image_crop, (20, 20))              # 第一次合成
@@ -147,7 +147,7 @@ print("------------------------------------------------------------")  # 60個
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => PIL影像
-image = Image.open(filename)     # 建立Pillow物件
+image = Image.open(filename)
 
 print('複製圖片')
 image_copied = image.copy() #複製圖片
@@ -171,7 +171,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 # 檔案 => PIL影像
-image = Image.open(filename)     # 建立Pillow物件
+image = Image.open(filename)
 
 print('複製圖片')
 image_copied = image.copy() #複製圖片
@@ -212,7 +212,7 @@ W, H = image1.size
 print('原圖大小 W =', W, ', H =', H)
 
 print('寬度變2倍, 高度變一半')
-image2 = image1.resize((W*2, H//2), Image.LANCZOS)
+image2 = image1.resize((W*2, H//2), Image.LANCZOS) # 使用 LANCZOS 調整影像大小
 
 print('寬度變2倍, 高度不變')
 image3 = image1.resize((W*2, H))   # 寬度是2倍
@@ -246,7 +246,7 @@ print('旋轉 .rotate ST--------------------------------------------------------
 print('測試 旋轉 rotate')
 
 # 檔案 => PIL影像
-image = Image.open(filename)     # 建立Pillow物件
+image = Image.open(filename)
 
 print('旋轉90度')
 image90 = image.rotate(90)
@@ -283,7 +283,7 @@ print('旋轉 .rotate SP--------------------------------------------------------
 print('------------------------------------------------------------')	#60個
 
 # 檔案 => PIL影像
-image = Image.open(filename)     # 建立Pillow物件
+image = Image.open(filename)
 
 print('左右相反')
 image1 = image.transpose(Image.FLIP_LEFT_RIGHT)   # 左右
@@ -343,7 +343,7 @@ convert_image = Image.merge('RGB', (b, g, r))
 
 convert_image = Image.merge('RGB', (r, g, b))
 #OK image
-'''
+
 print('------------------------------------------------------------')	#60個
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
@@ -366,8 +366,6 @@ plt.show()
 
 plt.imshow(b)
 plt.show()
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -445,7 +443,7 @@ image2_hist = image2.histogram()
 
 W2, H2 = 400, 200
 print('把原圖轉成', W2, 'X', H2, '大小')
-image3 = image1.resize((W2, H2), Image.LANCZOS)
+image3 = image1.resize((W2, H2), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
 
 plt.imshow(image3)
 plt.show()
@@ -509,28 +507,12 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 logo_filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.png'
 
 # 檔案 => PIL影像
-image = Image.open(filename)  # 開啟風景圖
-
-# 檔案 => PIL影像
-icon = Image.open(logo_filename)  # 開啟浮水印 icon
-
-image.paste(icon, (0, 0), icon)  # 將風景圖貼上 icon
-
-plt.imshow(image)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-logo_filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.png'
-
-# 檔案 => PIL影像
 image = Image.open(filename)
 
 # 檔案 => PIL影像
 icon = Image.open(logo_filename)
 
-image_w, image_h = image.size  # 取得風景圖尺寸
+image_w, image_h = image.size  # 取得圖片尺寸
 icon_w, icon_h = icon.size  # 取得 icon 尺寸
 x = int((image_w - icon_w) / 2)  # 計算置中時 icon 左上角的 x 座標
 y = int((image_h - icon_h) / 2)  # 計算置中時 icon 左上角的 y 座標
@@ -627,7 +609,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 # 檔案 => PIL影像
-image = Image.open(filename)           # 建立Pillow物件
+image = Image.open(filename)
 
 image090=image.rotate(90)  # 旋轉90度
 image180=image.rotate(180)  # 旋轉180度
@@ -640,34 +622,29 @@ image_crop = image.crop((80, 30, 150, 100))   # 裁切區間
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+print('圖片貼上logo')
 
-# 檔案 => PIL影像
-image1 = Image.open(filename1)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/picture1_partial.jpg'
-image3 = image1.resize((100, 500), Image.LANCZOS)
-
-print("------------------------------------------------------------")  # 60個
-
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-# 檔案 => PIL影像
-image = Image.open(filename)
+print('讀檔 => resize => paste')
 
-plt.imshow(image)
+# 檔案 => PIL影像(logo)
+image1 = Image.open(logo_filename)
 
-plt.show()
+# resize
+image1 = image1.resize((image1.size[0]//2, image1.size[1]//2))
 
-w,h = image.size
+# 檔案 => PIL影像(大圖)
+image2 = Image.open(filename)
 
-image1 = image.resize((w*2,h), Image.LANCZOS)
-
-plt.imshow(image1)
-
-plt.show()
-
-image2 = image.convert('1')
+#貼上位置, 將image1貼在image2之上
+x_st = 250
+y_st = 20
+#貼法一
+image2.paste(image1, (x_st, y_st), image1)
+#貼法二
+#image2.paste(image1, (x_st, y_st))
 
 plt.imshow(image2)
 
@@ -675,63 +652,16 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-# 檔案 => PIL影像
-image1 = Image.open(filename)        # 建立Pillow物件
-image2 = image1.resize((350,500))
-
-W, H = 450, 600
-image3 = Image.new('RGB', (W, H), "Yellow")
-
-image3.paste(image2, (50,50))
-
-print('------------------------------------------------------------')	#60個
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-infile = filename#"earth.png"
-savefile = "tmp_resize2.png"
-
-# 檔案 => PIL影像
-image = Image.open(infile)
-image = image.resize((100, 100), Image.LANCZOS)     #調整大小
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-infile = filename#"earthH.png"
-savefile = "tmp_resize1.png"
 
 max_size = 100
 
 # 檔案 => PIL影像
-image = Image.open(infile)
+image = Image.open(filename)
 ratio = max_size / max(image.size)    #根據長寬較長的一邊決定縮放比率
 w = int(image.width * ratio)
 h = int(image.height * ratio)
-image = image.resize((w, h), Image.LANCZOS)     #調整大小
-
-"""
-#調整圖片大小的範例
-mini_im = im.resize((int(im.size[0] * 0.2), int(im.size[1] * 0.2)))
-display(mini_im)
-print(mini_im.size)
-"""
-
-print('------------------------------------------------------------')	#60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-# 檔案 => PIL影像
-image = Image.open(filename)
-w,h=image.size #320 240
-
-image1=image.resize((w*2,h))
-
-image2=image.resize((w,h*2))
+image = image.resize((w, h), Image.LANCZOS)     # 使用 LANCZOS 調整影像大小
 
 print("------------------------------------------------------------")  # 60個
 
@@ -751,7 +681,7 @@ print("------------------------------------------------------------")  # 60個
 def emptydir(dirname):
     if os.path.isdir(dirname):
         shutil.rmtree(dirname)
-        sleep(1)  #需延遲,否則會出錯
+        time.sleep(1)  #需延遲,否則會出錯
     os.mkdir(dirname)
 
 image_dir="data"
@@ -763,7 +693,7 @@ files=glob.glob(image_dir+"\*.jpg") + glob.glob(image_dir+"\*.png")
 for i, f in enumerate(files):
     # 檔案 => PIL影像
     image = Image.open(f)
-    image_new = image.resize((800, 600), Image.LANCZOS)
+    image_new = image.resize((800, 600), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
     path,filename = f.split("\\") #路徑、檔名   
     name,ext = filename.split(".") #主檔名、副檔名
     #以bmp格式存檔
@@ -815,27 +745,28 @@ with Image.open(filename) as image:
 
 print("------------------------------------------------------------")  # 60個
 
-print("縮放和黏貼圖像")
+print("縮放和黏貼圖像 CROP + PASTE")
 
-filename2 = "C:/_git/vcs/_1.data/______test_files1/bear.jpg"
-
-# 檔案 => PIL影像
-image1 = Image.open(filename2)
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
 
 # 檔案 => PIL影像
-image2 = Image.open(filename)
+image1 = Image.open(filename1)
+
+# 檔案 => PIL影像
+image2 = Image.open(filename2)
 
 rect = 80, 20, 310, 360
-guido_head = image2.crop(rect)
-width, height = guido_head.size
-image1.paste(guido_head.resize((int(width / 1.5), int(height / 1.5))), (172, 40))
+image1 = image1.crop(rect)
+width, height = image1.size
+image2.paste(image1.resize((int(width / 1.5), int(height / 1.5))), (172, 40))
 
-plt.imshow(image1)
+plt.imshow(image2)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("剪裁圖像")
+print("剪裁圖像 CROP")
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -848,7 +779,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("生成縮略圖")
+print("生成縮略圖 thumbnail")
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -962,7 +893,7 @@ plt.show()
 print('------------------------------------------------------------')	#60個
 
 # 檔案 => PIL影像
-image1 = Image.open(filename)               # 建立Pillow物件
+image1 = Image.open(filename)
 image2 = image1.copy()                          # 複製
 image3 = image2.crop((80, 30, 150, 100))    # 裁切區間
 cropW, cropH = image3.size           # 獲得裁切區間的寬與高
@@ -1129,11 +1060,10 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
-infile = filename#"earth.png"
 savefile = "tmp_saveJPG2.jpg"
 
 # 檔案 => PIL影像
-img = Image.open(infile)
+img = Image.open(filename)
 if img.format == "PNG":
     newimg = Image.new("RGB", img.size, "WHITE")
     newimg.paste(img, mask=img)             # 將PNG檔壓在白底圖片上
@@ -1187,8 +1117,6 @@ msg = savefiles(infolder, value1)
 print(msg)
 
 
-
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -1210,4 +1138,29 @@ print('------------------------------------------------------------')	#60個
 # 檔案 => PIL影像 => 檔案
 image2.save("tmp_pic31_resize.jpg" )
 image2.save(savefile, format="PNG")
+
+
+"""
+
+
+
+"""
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+
+# 檔案 => PIL影像
+image = Image.open(filename)
+plt.imshow(image)
+plt.show()
+
+image2 = image.convert('1') #影像轉灰階
+plt.imshow(image2)
+plt.show()
+"""
+
+
+"""
+image3 = image1.resize((100, 500), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
+image1 = image.resize((w*2,h), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
+image = image.resize((image.size[0]*2, image.size[1]*2), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
+
 """
