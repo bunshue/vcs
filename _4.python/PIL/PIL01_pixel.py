@@ -1,6 +1,9 @@
 """
 PIL 基本使用 pixel處理
 
+PIL影像.getpixel 取得該點之像素值
+PIL影像.putpixel 設定該點之像素值
+
 
 """
 
@@ -40,6 +43,20 @@ plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
+
+#純圖片指定座標取得顏色方法
+def rgb_of_pixel(image_path, x, y):
+    # 檔案 => PIL影像 => RGB影像
+    image = Image.open(image_path).convert('RGB')
+    r, g, b = image.getpixel((x, y))
+    a = (r, g, b)
+    return a
+
+print(rgb_of_pixel(filename, 131, 81))
+
+print("------------------------------------------------------------")  # 60個
 
 
 print('------------------------------------------------------------')	#60個
@@ -91,9 +108,38 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => PIL影像
+image = Image.open(filename)
+w,h=image.size #320 240
+
+# PIL影像 => 灰階
+image = image.convert('L')  #先轉換為灰階
+
+for i in range(w):  #i為每一列
+    for j in range(h):  #j為每一行
+        if image.getpixel((i,j)) <100:  
+            image.putpixel((i,j),(0))   #設為黑色
+        else:
+            image.putpixel((i,j),(255)) #設為白色
+
+plt.imshow(image)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+#print(image.getpixel((W//2, H//2)))      # 列印中心點的色彩
 

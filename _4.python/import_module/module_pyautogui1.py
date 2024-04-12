@@ -82,7 +82,7 @@ print("------------------------------------------------------------")  # 60個
 
 screenImage = pyautogui.screenshot()
 x, y = 200, 200
-print(screenImage.getpixel((x,y)))
+print(screenImage.getpixel((x,y)))#取得該點之像素值
 
 print("------------------------------------------------------------")  # 60個
 

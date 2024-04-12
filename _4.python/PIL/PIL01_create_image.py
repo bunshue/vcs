@@ -77,8 +77,6 @@ image = Image.new('RGB', (W, H), color)
 plt.imshow(image)
 plt.show()
 
-print(image.getpixel((W//2, H//2)))      # 列印中心點的色彩
-
 print("------------------------------------------------------------")  # 60個
 
 

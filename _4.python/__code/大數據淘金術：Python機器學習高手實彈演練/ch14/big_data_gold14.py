@@ -86,7 +86,7 @@ class FruitDataset(utils.Dataset):
         for index in range(num_obj):
             for i in range(info['width']):
                 for j in range(info['height']):
-                    at_pixel = image.getpixel((i, j))
+                    at_pixel = image.getpixel((i, j)) #取得該點之像素值
                     if at_pixel == index + 1:
                         mask[j, i, index] = 1
         return mask

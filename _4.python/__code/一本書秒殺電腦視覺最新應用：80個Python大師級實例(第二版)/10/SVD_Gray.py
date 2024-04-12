@@ -1,7 +1,8 @@
-#-*- coding: utf-8 -*
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
+
+
 def svd_restore(sigma, u, v, K):
     K = min(len(sigma)-1, K)     #当K超过sigma的长度时会造成越界
     print('现在用%d等级恢复图像' % K)
@@ -27,7 +28,7 @@ if __name__ == '__main__':
     #逐像素点复制，由于直接对im.getdata()进行数据类型转换会有偏差
     for i in range(w):            
         for j in range(h):
-            dt[i][j] = im.getpixel((i, j))
+            dt[i][j] = im.getpixel((i, j))  # 取得該點之像素值
     #复制过来的图像是原图的翻转，因此将其再次翻转到正常角度
     dt = dt.transpose()            
     u, sigma, v = np.linalg.svd(dt)#调用numpy库进行SVM

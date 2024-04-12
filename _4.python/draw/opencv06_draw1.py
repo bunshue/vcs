@@ -5,8 +5,9 @@ cv2.line()
 cv2.circle()
 cv2.rectangle()
 cv2.ellipse()
-cv2.putText()
 cv2.polylines
+
+cv2.putText()
 
 cv之繪圖之順序
 建立畫布
@@ -22,7 +23,6 @@ cv之繪圖之順序
 """
 
 import cv2
-import time
 
 print("------------------------------------------------------------")  # 60個
 
@@ -42,67 +42,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print('------------------------------------------------------------')	#60個
-
-print('建立畫布(黑色)')
-
-W, H = 800, 600
-
-#image = np.zeros((H, W, 3))
-image = np.zeros((H, W, 3), dtype = np.uint8)
-image[:] = (200, 200, 200)  #將所有點著色
-
-print('畫標示頁箋')
-
-#用 putText 繪製物件偵測的標籤
-def drawBoundingBox(image, bboxs):
-    for box in bboxs:
-        x1, y1, x2, y2 = (box['x1'], box['y1'], box['x2'], box['y2'])
-        label = box['label']
-        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 6)
-        fontFace = cv2.FONT_HERSHEY_COMPLEX
-        fontScale = 0.5
-        thickness = 1
-        labelSize = cv2.getTextSize(label, fontFace, fontScale, thickness)
-        _x1 = x1 # bottomleft x of text
-        _y1 = y1 # bottomleft y of text
-        _x2 = x1 + labelSize[0][0] # topright x of text
-        _y2 = y1 - labelSize[0][1] # topright y of text
-        cv2.rectangle(image, (_x1, _y1), (_x2, _y2), (0, 255, 0), cv2.FILLED) # text background
-        cv2.putText(image, label, (x1, y1), fontFace, fontScale, (0, 0, 0), thickness)
-    return image
-
-def draw_line(image):
-    H = image.shape[0]
-    W = image.shape[1]
-    print(image.shape)
-    print(H//100)
-    print(W//100)
-    for i in range(H//100 + 1):
-        cv2.line(image, (0, 100*i), (W, 100*i), (0, 0, 100), 2) #畫線 水平線 R
-
-    for i in range(W//100 + 1):
-        cv2.line(image, (100*i, 0), (100*i, H), (0, 100, 0), 2, lineType=cv2.LINE_AA) #畫線 垂直線 G
-"""
-bboxs = []
-box = {}
-box['label'] = 'object 1'
-box['x1'] = 40
-box['y1'] = 40
-box['x2'] = 180
-box['y2'] = 180
-bboxs.append(box)
-box2 = {'label' : 'object 2', 'x1' : 300, 'y1' : 200, 'x2' : 600, 'y2' : 440}
-bboxs.append(box2)
-drawBoundingBox(image, bboxs)
-
-draw_line(image)
-
-cv2.imshow('OpenCV Draw 1', image)
-cv2.waitKey(0)
-cv2.destroyAllWindows() #銷毀建立的物件
-"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -208,6 +147,18 @@ cv2.polylines(image,[pts],True,(0,0,255),5)   # 繪製多邊形
 cv2.fillPoly(image,[pts],(0,0,255))
 """
 
+cv2.imshow('OpenCV Draw 1', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print('建立畫布(黑色)')
+W = 640
+H = 480
+# 快速產生 WxH，每個項目為 [0,0,0] 的三維陣列
+image = np.zeros((H, W,3), dtype='uint8')
+
 #寫字1
 text = 'Hello'
 x_st, y_st = 450, 400
@@ -234,31 +185,29 @@ x_st, y_st = 450, 200
 font = ImageFont.truetype(font_filename, 50)      # 設定字型與文字大小
 imagePil = Image.fromarray(image)                # 將 image 轉換成 PIL 影像
 draw = ImageDraw.Draw(imagePil)                # 準備開始畫畫
-draw.text((x_st, y_st), '大家好～\n嘿嘿嘿～', fill=(255, 255, 255), font=font)  # 畫入文字，\n 表示換行
+draw.text((x_st, y_st), '大家好～\n嘿嘿嘿～', fill=(255, 255, 0), font=font)  # 畫入文字，\n 表示換行
 image = np.array(imagePil)                       # 將 PIL 影像轉換成 numpy 陣列
+
+
+
+
+
+
+
+
+
+
+
 
 cv2.imshow('OpenCV Draw 2', image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 
 print('------------------------------------------------------------')	#60個
 
-print('畫字')
-
+print('建立畫布(白色)')
 W, H = 1200, 800
 image = np.ones((H,W,3),dtype="uint8")*255  # 白色背景
 
@@ -323,9 +272,7 @@ cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_
 
 print('------------------------------------------------------------')	#60個
 
-#繪製顯示系統當前時間
-localtime = time.localtime()
-text = time.strftime("%Y-%m-%d %I:%M:%S %p", localtime)
+text = "ABCDEFGHIJK"
 x_st = 20
 y_st = 40
 font_size = 1 #文字縮放比例
@@ -385,6 +332,74 @@ cv2.destroyAllWindows() #銷毀建立的物件
 
 print('------------------------------------------------------------')	#60個
 
+print('建立畫布(黑色)')
+
+W, H = 800, 600
+#image = np.zeros((H, W, 3))
+image = np.zeros((H, W, 3), dtype = np.uint8)
+image[:] = (200, 200, 200)  #將所有點著色
+
+print('畫標示頁箋')
+
+#用 putText 繪製物件偵測的標籤
+def drawBoundingBox(image, bboxs):
+    for box in bboxs:
+        x1, y1, x2, y2 = (box['x1'], box['y1'], box['x2'], box['y2'])
+        label = box['label']
+        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 6)
+        fontFace = cv2.FONT_HERSHEY_COMPLEX
+        fontScale = 0.5
+        thickness = 1
+        labelSize = cv2.getTextSize(label, fontFace, fontScale, thickness)
+        _x1 = x1 # bottomleft x of text
+        _y1 = y1 # bottomleft y of text
+        _x2 = x1 + labelSize[0][0] # topright x of text
+        _y2 = y1 - labelSize[0][1] # topright y of text
+        cv2.rectangle(image, (_x1, _y1), (_x2, _y2), (0, 255, 0), cv2.FILLED) # text background
+        cv2.putText(image, label, (x1, y1), fontFace, fontScale, (0, 0, 0), thickness)
+    return image
+
+def draw_line(image):
+    H = image.shape[0]
+    W = image.shape[1]
+    print(image.shape)
+    print(H//100)
+    print(W//100)
+    for i in range(H//100 + 1):
+        cv2.line(image, (0, 100*i), (W, 100*i), (0, 0, 100), 2) #畫線 水平線 R
+
+    for i in range(W//100 + 1):
+        cv2.line(image, (100*i, 0), (100*i, H), (0, 100, 0), 2, lineType=cv2.LINE_AA) #畫線 垂直線 G
+"""
+bboxs = []
+box = {}
+box['label'] = 'object 1'
+box['x1'] = 40
+box['y1'] = 40
+box['x2'] = 180
+box['y2'] = 180
+bboxs.append(box)
+box2 = {'label' : 'object 2', 'x1' : 300, 'y1' : 200, 'x2' : 600, 'y2' : 440}
+bboxs.append(box2)
+drawBoundingBox(image, bboxs)
+
+draw_line(image)
+
+cv2.imshow('OpenCV Draw 1', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows() #銷毀建立的物件
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
 """
 #有底圖作畫
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
@@ -393,11 +408,12 @@ image = cv2.imread(filename)	#讀取本機圖片
 
 #cv2.namedWindow("plot")
 
-print('存圖')
-filename = 'C:/_git/vcs/_1.data/______test_files2/image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.bmp'
-cv2.imwrite(filename, image)
 
 
 
 
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 

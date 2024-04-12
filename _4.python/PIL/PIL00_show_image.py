@@ -89,20 +89,6 @@ image.close()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
-
-#純圖片指定座標取得顏色方法
-def rgb_of_pixel(image_path, x, y):
-    # 檔案 => PIL影像 => RGB影像
-    image = Image.open(image_path).convert('RGB')
-    r, g, b = image.getpixel((x, y))
-    a = (r, g, b)
-    return a
-
-print(rgb_of_pixel(filename, 131, 81))
-
-print("------------------------------------------------------------")  # 60個
-
 #split
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'

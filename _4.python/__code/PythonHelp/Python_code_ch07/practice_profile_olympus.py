@@ -8,7 +8,7 @@ y_coord = 202
 im = Image.open('mola_1024x512_200mp.jpg').convert('L')
 width, height = im.size
 x_vals = [x for x in range(width)]
-z_vals = [im.getpixel((x, y_coord)) for x in x_vals]
+z_vals = [im.getpixel((x, y_coord)) for x in x_vals] #  取得該點之像素值
 
 # 在 MOLA 影像上繪製剖面線
 draw = ImageDraw.Draw(im)
@@ -33,4 +33,5 @@ plt.text(0, 310, 'WEST', fontsize=10)
 plt.text(980, 310, 'EAST', fontsize=10)
 plt.text(100, 280, 'Olympus Mons', fontsize=8)
 #ax.grid()
+
 plt.show()

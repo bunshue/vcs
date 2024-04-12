@@ -122,26 +122,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# 檔案 => PIL影像
-image = Image.open(filename)
-w,h=image.size #320 240
-
-# PIL影像 => 灰階
-image = image.convert('L')  #先轉換為灰階
-
-for i in range(w):  #i為每一列
-    for j in range(h):  #j為每一行
-        if image.getpixel((i,j)) <100:  
-            image.putpixel((i,j),(0))   #設為黑色
-        else:
-            image.putpixel((i,j),(255)) #設為白色
-
-plt.imshow(image)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 import torchvision.transforms as transforms
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample.jpg'

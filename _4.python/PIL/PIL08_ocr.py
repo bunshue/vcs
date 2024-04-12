@@ -127,7 +127,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/captcha/captcha01.jpg'
 #Code from https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/
 
 def getPixel(image,x,y,G,N):
-    L = image.getpixel((x,y))
+    L = image.getpixel((x,y))  # 取得該點之像素值
     if L > G:
         L = True
     else:

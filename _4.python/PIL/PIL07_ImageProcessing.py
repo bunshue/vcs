@@ -214,6 +214,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("PIL_mean")
 
+#PIL影像.getpixel 取得該點之像素值
+#PIL影像.putpixel 設定該點之像素值
+
 from PIL import ImageStat
 
 def darkchannel(input_image,h,w):
