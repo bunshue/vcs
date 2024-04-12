@@ -41,23 +41,6 @@ https://github.com/tesseract-ocr/tessdata_best/tree/main/jpn.traineddata
 https://github.com/tesseract-ocr/tessdata_best/blob/main/eng.traineddata
 """
 
-print('------------------------------------------------------------')	#60個
-
-import os
-import sys
-import numpy as np
-import matplotlib.pyplot as plt
-from PIL import Image   # Importing Image class from PIL module
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
-
 # pytesseract共同設定
 
 #ocr_program = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -67,7 +50,30 @@ import pytesseract
 pytesseract.pytesseract.tesseract_cmd = ocr_program #設定OCR程式位置
 
 print('------------------------------------------------------------')	#60個
-'''
+
+from PIL import Image
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
 print("英文OCR")
 filename = 'data/ocr/english02.jpg'
 image = Image.open(filename)
@@ -218,31 +224,6 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-
-'''
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 共同
-import os
-import sys
-import math
-import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-plt.rcParams["font.size"] = 12  # 設定字型大小
-
-print("------------------------------------------------------------")  # 60個
 
 def getOCR_Data(filename, ocr_type):
 
