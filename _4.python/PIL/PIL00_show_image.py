@@ -39,13 +39,16 @@ print(PIL.__version__)
 
 print("------------------------------------------------------------")  # 60個
 
-print('顯示原圖')
+print('顯示圖片與顯示圖片資訊')
 
 # 檔案 => PIL影像
-image = Image.open(filename)    #建立Pillow物件 PIL讀取本機圖片, RGB模式
-plt.imshow(image)
+image = Image.open(filename)
 
-plt.show()
+print('圖檔格式: ', image.format)
+print('圖檔的色彩模式: ', image.mode)
+print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
+print('圖片的寬度，單位像素(pixels): ', image.width)
+print('圖片的高度，單位像素(pixels): ', image.height)
 
 print('顯示圖片訊息')
 print("列出物件檔名 : ", image.filename)
@@ -54,22 +57,6 @@ print("列出物件副檔名 : ", image.format)
 print("列出物件描述   : ", image.format_description)
 print("列出物件模式   : ", image.mode)
 
-W, H = image.size
-print('原圖大小 W =', W, ', H =', H)
-
-print('圖片維度 圖片資訊')
-print('Size : ', image.size, 'Mode : ', image.mode, 'Format : ', image.format)
-
-image.close()
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-image = Image.open(filename)       # 建立Pillow物件
-print("列出物件檔名 : ", image.filename)
-print("列出物件副檔名 : ", image.format)
-print("列出物件描述   : ", image.format_description)
-print("列出物件型態 : ", type(image))
 width, height = image.size               # 獲得影像寬度和高度
 print("寬度 = ", width)
 print("高度 = ", height)
@@ -77,18 +64,11 @@ print("高度 = ", height)
 #print(image.mode)
 #print(image.size)
 
-plt.imshow(image)
-plt.show()
+W, H = image.size
+print('原圖大小 W =', W, ', H =', H)
 
-# 檔案 => PIL影像
-image = Image.open(filename)
-print('圖檔格式: ', image.format)
-print('圖檔的色彩模式: ', image.mode)
-print('圖檔大小尺寸，寬度跟高度值，格式是元組(tuple): ', image.size)
-print('圖片的寬度，單位像素(pixels): ', image.width)
-print('圖片的高度，單位像素(pixels): ', image.height)
-
-print('------------------------------------------------------------')	#60個
+print('圖片維度 圖片資訊')
+print('Size : ', image.size, 'Mode : ', image.mode, 'Format : ', image.format)
 
 """
 #查看圖片信息，可用如下的方法：
@@ -98,12 +78,14 @@ print(image.size)
 print(type(image))
 """
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
 # 檔案 => PIL影像
-image = Image.open(filename)
 print("%s:" % filename, image.format, "%dx%d" % image.size, image.mode)
 print(image.info, image.tile)
+
+plt.imshow(image)
+plt.show()
+
+image.close()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -121,9 +103,6 @@ print(rgb_of_pixel(filename, 131, 81))
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 #split
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -131,7 +110,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 #通道分離與合併
 
 # 檔案 => PIL影像
-image=Image.open(filename)  #打開圖像, 彩色
+image=Image.open(filename)
 print(image.size)
 
 # PIL影像 => 灰階
@@ -269,19 +248,6 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-#PIL 存圖
-print('圖片另存新檔')
-image.save('tmp_image1.jpg')
-image.save('tmp_image2.jpg', 'JPEG')
-image.save('tmp_image3.png')
-image.save('tmp_image4.png', 'PNG')
-image.save('tmp_image5.bmp') 
-
-#image.save('xxxxx.png')
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 

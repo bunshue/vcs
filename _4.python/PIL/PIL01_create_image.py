@@ -6,31 +6,30 @@ PIL 無圖處理
 
 """
 
-import os
-import sys
-import time
-import random
-
-import matplotlib.pyplot as plt
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
 
 from PIL import Image
 from PIL import ImageColor
 from PIL import ImageDraw
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('PIL 無圖處理')
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
@@ -51,12 +50,28 @@ print(ImageColor.getcolor("#0000ff", "RGBA"))
 
 print('------------------------------------------------------------')	#60個
 
-image = Image.new("RGB", (400, 300), "#ff0000")  # 產生 RGB 色域，400x300 背景紅色的圖片
-image = Image.new("RGB", (400, 300), "#ff000055")  # 產生 RGBA 色域，400x300 背景半透明紅色的圖片
+print('建立影像 RGB')
+W = 640
+H = 320
 
-print('建立影像 RGB 300 X 100')
-W, H = 300, 100
+print('建立影像 RGB 全紅')
+image = Image.new("RGB", (W, H), "#ff0000")  # 產生 RGB 色域，W x H 背景紅色的圖片
+
+print('建立影像 RGB 半透明')
+image = Image.new("RGB", (W, H), "#ff000055")  # 產生 RGBA 色域，W x H 背景半透明紅色的圖片
+
+print('建立影像 RGBA 透明')
+image = Image.new('RGBA', (W, H))
+
+print('建立影像 RGBA 透明')
+image = Image.new("RGBA",(W, H),"rgba(0,0,255,0)") #透明
+
+print('建立影像 RGB 指定顏色')
+image = Image.new("RGB",(W, H),"rgb(0,0,255)") #藍色
+
+print('建立影像 RGB 指定顏色')
 color = "aqua"
+color = "yellow"
 image = Image.new('RGB', (W, H), color)
 
 plt.imshow(image)
@@ -64,29 +79,8 @@ plt.show()
 
 print(image.getpixel((W//2, H//2)))      # 列印中心點的色彩
 
-print('------------------------------------------------------------')	#60個
-
-print('建立影像(透明) RGBA 300 X 100')
-W, H = 300, 100
-image = Image.new('RGBA', (W, H))
-plt.imshow(image)
-plt.show()
-
 print("------------------------------------------------------------")  # 60個
 
-
-from PIL import Image
-
-img1 = Image.new("RGB",(300,200),"rgb(0,0,255)") #藍色
-#img1.save("tmp_blue.jpg")
-#print(img1.shape)
-
-img2 = Image.new("RGBA",(300,200),"rgba(0,0,255,0)") #透明
-#img2.save("tmp_alpha.png")
-#print(img2.shape)
-
-
-print('------------------------------------------------------------')	#60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -106,6 +100,12 @@ print("------------------------------------------------------------")  # 60個
 #存圖
 #image.save("xxxx.jpg")
 #image.save("xxxx.png")
+
+#img1.save("tmp_blue.jpg")
+#print(img1.shape)
+
+#img2.save("tmp_alpha.png")
+#print(img2.shape)
 
 
 

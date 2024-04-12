@@ -131,7 +131,7 @@ filename2 = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X3
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.bmp'
-'''
+
 """
 平均雜湊（aHash）
 ahash:          Average hash
@@ -298,7 +298,6 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 blue_to_red2(filename)
 """    
 
-'''
 print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'

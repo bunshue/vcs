@@ -217,10 +217,6 @@ show_images_labels_predictions(test_feature, test_label, 0, len(test_feature))
 
 print("------------------------------------------------------------")  # 60個
 
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"
-plt.rcParams["font.size"] = 12
-
-
 # 橫條圖
 def diagram_1(s, x):
     plt.barh(x, s)
@@ -334,7 +330,6 @@ plt.tight_layout()
 plt.show()
 
 # 3. plt.subplots()
-import pandas as pd
 
 """
     使用plt.subplot2s()做圖
@@ -363,8 +358,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-
 t1 = [1, 2, 3, 4]
 t2 = [2, 4, 6, 8]
 
@@ -382,10 +375,7 @@ plt.plot(t2, t2, "b|")
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 print("3圖比較")
 

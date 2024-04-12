@@ -195,13 +195,145 @@ plt.title("五月份國外旅遊調查表", fontsize=16, color="b")
 # 第二張圖
 plt.subplot(232)
 
+import matplotlib.pyplot as plt
+
+sizes = [25, 30, 15, 10]
+labels = ["北部", "西部", "南部", "東部"]
+colors = ["red", "green", "blue", "yellow"]
+explode = (0, 0, 0.2, 0)
+plt.pie(sizes, 
+	explode = explode, 
+	labels = labels, 
+	colors = colors,
+	labeldistance = 1.1, 
+	autopct = "%2.1f%%", 
+	pctdistance = 0.6,
+	shadow = True,
+	startangle = 90)
+
 
 # 第三張圖
 plt.subplot(233)
 
+sizes = [25, 30, 15, 10]
+labels = ["北部", "西部", "南部", "東部"]
+colors = ["red", "green", "blue", "yellow"]
+explode = (0, 0, 0.2, 0)
+plt.pie(sizes, 
+	explode = explode, 
+	labels = labels, 
+	colors = colors,
+	labeldistance = 1.1, 
+	autopct = "%2.1f%%", 
+	pctdistance = 0.6,
+	shadow = True,
+	startangle = 90)
+
 
 # 第四張圖
 plt.subplot(234)
+
+import matplotlib.pyplot as plt
+from pylab import mpl
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+
+country = ["美國", "澳洲", "日本", "歐洲", "英國"]
+pou = [10543, 2105, 1190, 3346, 980]
+
+plt.pie(pou, labels=country, explode=(0, 0, 0.2, 0, 0), autopct="%1.2f%%")  # 繪製圓餅圖
+
+
+
+# 第五張圖
+plt.subplot(235)
+
+
+# 第六張圖
+plt.subplot(236)
+
+# 構造數據
+edu = [0.2515, 0.3724, 0.3336, 0.0368, 0.0057]
+labels = ["中專", "大專", "本科", "碩士", "其他"]
+
+# 添加修飾的餅圖
+explode = [0, 0.1, 0, 0, 0]  # 生成數據，用于突出顯示大專學歷人群
+colors = ["#9999ff", "#ff9999", "#7777aa", "#2442aa", "#dd5555"]  # 自定義顏色
+
+# 繪制餅圖
+
+plt.pie(
+    x=edu,  # 繪圖數據
+    explode=explode,  # 突出顯示大專人群
+    labels=labels,  # 添加教育水平標簽
+    colors=colors,  # 設置餅圖的自定義填充色
+    autopct="%.1f%%",  # 設置百分比的格式，這里保留一位小數
+    pctdistance=0.8,  # 設置百分比標簽與圓心的距離
+    labeldistance=1.1,  # 設置教育水平標簽與圓心的距離
+    startangle=180,  # 設置餅圖的初始角度
+    radius=1.2,  # 設置餅圖的半徑
+    counterclock=False,  # 是否逆時針，這里設置為順時針方向
+    wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 設置餅圖內外邊界的屬性值
+    textprops={"fontsize": 10, "color": "black"},  # 設置文本標簽的屬性值
+)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="派圖 集合 3",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+labels = ["Python", "C++", "Java", "JS", "C", "C#"]
+ratings = [5, 6, 15, 3, 12, 4]
+ 
+plt.pie(ratings, labels=labels)
+plt.title("程式語言的使用率")  
+plt.axis("equal")
+
+
+# 第二張圖
+plt.subplot(232)
+
+labels = ["Python", "C++", "Java", "JS", "C", "C#"]
+ratings = [5, 6, 15, 3, 12, 4]
+explode = (0, 0, 0, 0.2, 0, 0.2)
+ 
+plt.pie(ratings, 
+        labels=labels,
+        explode=explode)
+plt.title("程式語言的使用率")
+plt.axis("equal")
+
+# 第三張圖
+plt.subplot(233)
+
+labels = ["Python", "C++", "Java", "JS", "C", "C#"]
+ratings = [5, 6, 15, 3, 12, 4]
+explode = (0, 0, 0, 0.2, 0, 0.2)
+ 
+patches, texts = plt.pie(ratings, 
+                         labels=labels,
+                         explode=explode)
+plt.legend(patches, labels, loc="best")
+plt.title("程式語言的使用率") 
+plt.axis("equal")
+
+
+# 第四張圖
+plt.subplot(234)
+
 
 
 # 第五張圖
@@ -212,10 +344,11 @@ plt.subplot(235)
 plt.subplot(236)
 
 
+
+
 plt.show()
 
 
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -223,3 +356,21 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+"""
+
+edu = [0.2515,0.3724,0.3336,0.0368,0.0057]
+plt.pie(x = edu, # 繪圖數據
+labels = labels, # 添加教育水平標簽
+autopct = '%.1f%%' # 設置百分比的格式，這里保留一位小數
+
+
+# 將橫、縱坐標軸標準化處理，確保餅圖是一個正圓，否則為橢圓
+plt.axes(aspect = 'equal')
+
+"""
+
+

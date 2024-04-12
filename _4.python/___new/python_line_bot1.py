@@ -12,17 +12,12 @@
 - [Chapter 10 - 使用 Google Clud Functions](ch10)
 
 
-
 """
-
 
 import os
 import sys
 import time
 import random
-
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -52,10 +47,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\code01.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from flask import Flask
 
 app = Flask(__name__)
@@ -69,10 +60,6 @@ def home(name):
 app.run()
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\code02.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from flask import Flask, request
 
@@ -131,10 +118,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\code03.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from flask import Flask
 from flask_ngrok import run_with_ngrok
 
@@ -150,10 +133,6 @@ def home(name):
 app.run()
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\code04.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from flask_ngrok import run_with_ngrok
 from flask import Flask, request
@@ -208,10 +187,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\code05.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import json
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
@@ -239,11 +214,6 @@ def linebot(request):
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch4\code01.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 # 如果是本機環境不用 flask_ngrok
 from flask_ngrok import run_with_ngrok
 
@@ -270,11 +240,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code01.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 才需要，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 from flask import Flask, request
 from linebot import LineBotApi, WebhookHandler
@@ -316,11 +281,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code02.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 才需要，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 from flask import Flask, request
 from linebot import LineBotApi, WebhookHandler
@@ -364,11 +324,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code03.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 才需要，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 from flask import Flask, request
 from linebot import LineBotApi, WebhookHandler
@@ -429,11 +384,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code04.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 才需要，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 from flask import Flask, request
 from linebot import LineBotApi, WebhookHandler
@@ -507,10 +457,6 @@ if __name__ == "__main__":
     app.run()
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code05.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import json
 from linebot import LineBotApi, WebhookHandler
@@ -623,11 +569,6 @@ def reply_msg(text):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code06.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 才需要，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 from flask import Flask, request
 from linebot import LineBotApi, WebhookHandler
@@ -659,11 +600,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code07.py
-
-# Copyright © https://steam.oxxostudio.tw
-
-# Colab 才需要，本機環境請刪除
 from flask_ngrok import run_with_ngrok
 from flask import Flask, request
 from linebot import LineBotApi, WebhookHandler
@@ -724,10 +660,6 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code08.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from linebot import LineBotApi, WebhookHandler
 from linebot.models import (
     TextSendMessage,
@@ -772,10 +704,6 @@ def pushmsg(request):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code09.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import requests, json
 
 # 設定 request 的 headers，注意前方要有 Bearer
@@ -798,10 +726,6 @@ print(req.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch5\code10.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import requests, json
 
 # 設定 request 的 headers，注意前方要有 Bearer
@@ -823,10 +747,6 @@ req = requests.request(
 print(req.text)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code01.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from linebot import LineBotApi, WebhookHandler
 
@@ -859,10 +779,6 @@ line_bot_api.push_message(
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code02.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from linebot import LineBotApi, WebhookHandler
 
 # 需要額外載入對應的函示庫
@@ -884,10 +800,6 @@ line_bot_api.push_message(
 )
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code03.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from linebot import LineBotApi, WebhookHandler
 
@@ -935,10 +847,6 @@ line_bot_api.push_message(
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code04.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from linebot import LineBotApi, WebhookHandler
 
 # 需要額外載入對應的函示庫
@@ -971,9 +879,6 @@ line_bot_api.push_message(
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code05.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 from linebot import LineBotApi, WebhookHandler
 
@@ -1140,10 +1045,6 @@ line_bot_api.push_message(
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code06.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import requests
 import json
 
@@ -1202,26 +1103,15 @@ print(req.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code07.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from linebot import LineBotApi, WebhookHandler
 
 line_bot_api = LineBotApi("你的 Access Token")
-
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
 # 開啟對應的圖片
 with open("demo.jpg", "rb") as f:
     line_bot_api.set_rich_menu_image("你的圖文選單 ID", "image/jpeg", f)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code08.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests
 
@@ -1234,10 +1124,6 @@ req = requests.request(
 print(req.text)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code09.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests, json
 
@@ -1284,26 +1170,15 @@ print(req.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code10.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from linebot import LineBotApi, WebhookHandler
 
 line_bot_api = LineBotApi("你的 Access Token")
-
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
 # 開啟對應的圖片
 with open("line-rich-menu-switch-demo-a.jpg", "rb") as f:
     line_bot_api.set_rich_menu_image("你的圖文選單 ID", "image/jpeg", f)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code11.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests
 import json
@@ -1323,10 +1198,6 @@ print(req.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code12.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 import requests
 
 headers = {
@@ -1339,10 +1210,6 @@ req = requests.request(
 print(req.text)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code13.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests, json
 
@@ -1389,26 +1256,15 @@ print(req.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code14.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from linebot import LineBotApi, WebhookHandler
 
 line_bot_api = LineBotApi("你的 Access Token")
-
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
 # 開啟對應的圖片
 with open("line-rich-menu-switch-demo-b.jpg", "rb") as f:
     line_bot_api.set_rich_menu_image("你的圖文選單 ID", "image/jpeg", f)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code15.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests
 import json
@@ -1427,10 +1283,6 @@ req = requests.request(
 print(req.text)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code16.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests, json
 
@@ -1477,26 +1329,15 @@ print(req.text)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code17.py
-
-# Copyright © https://steam.oxxostudio.tw
-
 from linebot import LineBotApi, WebhookHandler
 
 line_bot_api = LineBotApi("你的 Access Token")
-
-# import os
-# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
 
 # 開啟對應的圖片
 with open("line-rich-menu-switch-demo-c.jpg", "rb") as f:
     line_bot_api.set_rich_menu_image("你的圖文選單 ID", "image/jpeg", f)
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code18.py
-
-# Copyright © https://steam.oxxostudio.tw
 
 import requests
 import json
@@ -1526,3 +1367,26 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+# import os
+# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
+
+
+# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch6\code11.py
+
+
+
+
+# 檔案 : C:\_git\vcs\_4.python\__code\_oxxo\linebot\ch3\code01.py
+
+
+# Colab 才需要，本機環境請刪除
+
+# import os
+# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
+
+# import os
+# os.chdir('/content/drive/MyDrive/Colab Notebooks')  # Colab 換路徑使用
+

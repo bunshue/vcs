@@ -36,7 +36,7 @@ flist0 = os.listdir(folder)
 fnames = [f for f in flist0 if os.path.isfile(
     os.path.join(folder, f)) and f.lower().endswith(img_types)]
 
-num_files = len(fnames)                # number of iamges found
+num_files = len(fnames)                # number of images found
 if num_files == 0:
     sg.popup('No files in folder')
     raise SystemExit()

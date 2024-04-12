@@ -8,11 +8,9 @@ import sys
 import time
 import random
 
-
 print("------------------------------------------------------------")  # 60個
 
 from flask_ngrok import run_with_ngrok
-
 from flask import Flask, request
 
 # 載入 LINE Message API 相關函式庫

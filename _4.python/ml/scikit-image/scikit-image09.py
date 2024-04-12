@@ -277,7 +277,7 @@ edges =feature.canny(image, sigma=3, low_threshold=10, high_threshold=50) #檢�
 fig, (ax0,ax1) = plt.subplots(1,2, figsize=(8, 5))
 
 ax0.imshow(edges, cmap=plt.cm.gray)  #顯示canny邊緣
-ax0.set_title('original iamge')
+ax0.set_title('original image')
 
 hough_radii = np.arange(15, 30, 2)  #半徑范圍
 hough_res =transform.hough_circle(edges, hough_radii)  #圓變換 
