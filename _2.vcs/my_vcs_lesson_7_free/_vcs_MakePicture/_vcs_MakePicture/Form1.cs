@@ -2492,11 +2492,89 @@ namespace _vcs_MakePicture
 
         private void button64_Click(object sender, EventArgs e)
         {
+            //RGB 圓形
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 400;
+            height = 400;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    bitmap1.SetPixel(xx, yy, Color.Black);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            sb = new SolidBrush(Color.Blue);
+
+            g.FillEllipse(sb, 100+70, 50+120, 200, 200);
+
+            pictureBox1.Image = bitmap1;
 
         }
 
         private void button65_Click(object sender, EventArgs e)
         {
+            //製作logo
+
+            //寫字畫框
+
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 400;
+            height = 400;
+            bitmap1 = new Bitmap(width, height);
+
+            background_color = Color.White;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+
+            int linewidth = 40;
+            p = new Pen(Color.Black, linewidth);
+            int dd = linewidth / 2;
+
+            g.DrawRectangle(p, new Rectangle(dd, dd, width - linewidth * 1, height - linewidth * 1));
+
+            p = new Pen(Color.Blue, 40);
+            dd += linewidth;
+            g.DrawRectangle(p, new Rectangle(dd, dd, width - linewidth * 3, height - linewidth * 3));
+
+            p = new Pen(Color.Lime, 40);
+            dd += linewidth;
+            g.DrawRectangle(p, new Rectangle(dd, dd, width - linewidth * 5, height - linewidth * 5));
+
+
+            Font f;
+            f = new Font("標楷體", 300);
+            sb = new SolidBrush(Color.Red);
+            g.DrawString("群", f, sb, new PointF(-65,-10));
+
+            pictureBox1.Image = bitmap1;
+
 
         }
 

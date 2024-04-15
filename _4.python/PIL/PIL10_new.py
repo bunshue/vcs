@@ -300,19 +300,7 @@ blue_to_red2(filename)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
-# 打開圖像，並轉成灰度圖像
-# 檔案 => PIL影像 => 灰階 => np陣列
-image = np.array(Image.open(filename).convert('L'))#L為8位像素黑白圖
-
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-
-plt.contour(image, origin='image')
-plt.axis('equal')
-plt.title(u'圖像輪廓圖')
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

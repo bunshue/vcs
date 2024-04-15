@@ -39,7 +39,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
-
+'''
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => PIL影像
@@ -122,9 +122,55 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+from PIL import ImageChops
+
+def compare_images(filename1, filename2, threshold=0.8):
+    #比較兩張圖像的相似度，返回相似度值（0~1之間的浮點數）
+    # 檔案 => PIL影像 => RGBA
+    image1 = Image.open(filename1).convert('RGBA')
+    # 檔案 => PIL影像 => RGBA
+    image2 = Image.open(filename2).convert('RGBA')
+    diff = ImageChops.difference(image1, image2)
+    histogram = diff.histogram()
+    pixels = sum(histogram)
+    similarity = 1 - (pixels / float(image1.size[0] * image1.size[1] * 3))
+    print(similarity)
+    return similarity >= threshold
+
+# 測試比較相似度
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.bmp'
+is_similar = compare_images(filename1, filename2)
+print('相似度:', is_similar)
+
+print("------------------------------------------------------------")  # 60個
+'''
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 檔案 => PIL影像
+image = Image.open(filename)
+
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+
+plt.subplot(121)
+plt.title(u'原圖')
+plt.imshow(image)
+
+# 檔案 => PIL影像 => 灰階
+image = Image.open(filename).convert('L')
+
+plt.subplot(122)
+plt.title(u'灰度圖')
+plt.imshow(image)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 import torchvision.transforms as transforms
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/sample.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => PIL影像
 image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
@@ -154,31 +200,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import ImageChops
-
-def compare_images(filename1, filename2, threshold=0.8):
-    #比較兩張圖像的相似度，返回相似度值（0~1之間的浮點數）
-    # 檔案 => PIL影像 => RGBA
-    image1 = Image.open(filename1).convert('RGBA')
-    # 檔案 => PIL影像 => RGBA
-    image2 = Image.open(filename2).convert('RGBA')
-    diff = ImageChops.difference(image1, image2)
-    histogram = diff.histogram()
-    pixels = sum(histogram)
-    similarity = 1 - (pixels / float(image1.size[0] * image1.size[1] * 3))
-    print(similarity)
-    return similarity >= threshold
-
-# 測試比較相似度
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.bmp'
-is_similar = compare_images(filename1, filename2)
-print('相似度:', is_similar)
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

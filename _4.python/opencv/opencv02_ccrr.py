@@ -32,7 +32,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 裁剪圖片
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
@@ -100,11 +100,8 @@ rotate_image = cv2.warpAffine(image, P, (w, h))
 
 rotate_image = cv2.cvtColor(rotate_image, cv2.COLOR_BGR2RGB)
 plt.imshow(rotate_image)
+
 plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -137,7 +134,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
 """
 
 resize
@@ -149,16 +145,17 @@ print("------------------------------------------------------------")  # 60個
 
 print("縮放圖片")
 
-img = cv2.imread(r"images/sample.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+img = cv2.imread(filename)
 print(img.shape)
 
 H = img.shape[0]
 W = img.shape[1]
-img_resize = cv2.resize(img, (W * 3, H * 2))
+img_resize = cv2.resize(img, (W * 2, H // 2))
 print(img_resize.shape)
 
-# cv2.imshow('Sample pic', img_resize)
-plt.title("原圖")
+plt.title("縮放 W兩倍 H一半")
 plt.imshow(cv2.cvtColor(img_resize, cv2.COLOR_BGR2RGB))
 
 plt.show()
@@ -351,25 +348,31 @@ plt.imshow(cv2.cvtColor(rotate, cv2.COLOR_BGR2RGB))
 plt.tight_layout()
 plt.show()
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("圖片旋轉")
 
-img = cv2.imread(r"images/sample.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+img = cv2.imread(filename)
 
 H = img.shape[0]
 W = img.shape[1]
 aff_matrix = cv2.getRotationMatrix2D((W / 2, H / 2), 30, 0.8)
 img_rotate = cv2.warpAffine(img, aff_matrix, (W, H))
-cv2.imshow("Sample pic", img_rotate)
+
+cv2.imshow("image", img_rotate)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 print("圖片旋轉")
 img_rotate = cv2.rotate(img, 1)
-cv2.imshow("Sample pic", img_rotate)
 
+cv2.imshow("image", img_rotate)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 

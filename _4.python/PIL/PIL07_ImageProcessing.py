@@ -126,38 +126,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-plt.figure(
-    num="影像處理1",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
-
-plt.subplot(121)
-plt.title(u'原圖')
-plt.imshow(image)
-
-# 檔案 => PIL影像 => 灰階
-image = Image.open(filename).convert('L')
-
-plt.subplot(122)
-plt.title(u'灰度圖')
-plt.imshow(image)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
 # 檔案 => PIL影像

@@ -389,7 +389,7 @@ plt.figure(
 plt.imshow(image, cmap="gray")
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
@@ -998,23 +998,15 @@ plt.title("顯示修改後的圖")
 plt.imshow(cv2.cvtColor(peony, cv2.COLOR_BGR2RGB))
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-print("裁剪圖片a")
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+image = cv2.imread(filename)
 
-image = cv2.imread(r"images/sample.jpg")
+x_st, y_st, w, h = 200, 50, 150, 200
+image_cut = image[y_st : y_st+h, x_st : x_st+w]
 
-H = image.shape[0]
-W = image.shape[1]
-print("H * W =", image.shape)
-print("H =", H)
-print("W =", W)
-
-print("裁剪圖片b")
-
-# image_cut = image[0:(H * 2 // 3), 0:(W * 2 // 3)]
-image_cut = image[0 : (H * 1 // 2), 0 : (W * 1 // 2)]
 print(image_cut.shape)
 
 plt.imshow(cv2.cvtColor(image_cut, cv2.COLOR_BGR2RGB))
@@ -1024,33 +1016,41 @@ print("------------------------------------------------------------")  # 60個
 
 print("圖片翻轉 原圖")
 
-image = cv2.imread(r"images/sample.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+image = cv2.imread(filename)
+
+plt.subplot(121)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.show()
+plt.title("原圖")
 
-print("圖片翻轉 效果")
-
+plt.subplot(122)
 image_flip = cv2.flip(image, -999)
 image_flip2 = cv2.flip(image, -88)
 
 plt.imshow(cv2.cvtColor(image_flip, cv2.COLOR_BGR2RGB))
+plt.title("圖片翻轉")
+
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("圖片色彩空間的轉換")
 
-image = cv2.imread(r"images/sample.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+image = cv2.imread(filename)
+
 image_convert = cv2.cvtColor(image, cv2.COLOR_BGR2Lab)
 plt.imshow(cv2.cvtColor(image_convert, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# OpenCV 進階圖片處理功能
-
 print("圖片的二值化處理")
-image = cv2.imread(r"images/sample.jpg")
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+image = cv2.imread(filename)
+
 thr, image_binary = cv2.threshold(image, 192, 255, cv2.THRESH_TOZERO)
 
 plt.imshow(cv2.cvtColor(image_binary, cv2.COLOR_BGR2RGB))
@@ -1060,21 +1060,26 @@ print("------------------------------------------------------------")  # 60個
 
 print("去除圖片的雜訊 原圖")
 
-image2 = cv2.imread(r"images/sample2.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+image2 = cv2.imread(filename)
 
+plt.subplot(121)
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
-plt.show()
+plt.title("原圖")
 
 print("去除圖片的雜訊 效果")
 
+plt.subplot(122)
 image2_denoised = cv2.fastNlMeansDenoisingColored(image2, h=5)
 
 plt.imshow(cv2.cvtColor(image2_denoised, cv2.COLOR_BGR2RGB))
+plt.title("去除圖片的雜訊")
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 print("absolute")
 
@@ -1100,7 +1105,7 @@ def my_laplace_sharpen(image, my_type="small"):
     return result
 
 
-original_image_test1 = cv2.imread("data/lena.png", 0)
+original_image_test1 = cv2.imread(filename, 0)
 
 
 def my_laplace_result_add_abs(image, model):

@@ -153,6 +153,8 @@ print('------------------------------------------------------------')	#60個
 """
 image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
 cv2.imshow(window_name, image)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.title('xxxx')
@@ -373,11 +375,10 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 
 plt.show()
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 # 用 OpenCV 讀取並顯示圖片
-
 
 # 等同於 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)) #BGR轉RGB再交由matplotlib顯示之
 def aidemy_imshow(name, img):
@@ -389,14 +390,19 @@ def aidemy_imshow(name, img):
 
 
 cv2.imshow = aidemy_imshow
+cv2.waitKey()
+cv2.destroyAllWindows()
 
-img = cv2.imread(r"images/sample.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+img = cv2.imread(filename)
 
 print(type(img))
 
 print(img.shape)
 
-cv2.imshow("Sample pic", img)
+cv2.imshow("image", img)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -429,10 +435,9 @@ print(coordinate)
 # print(array([255, 219,  79], dtype=uint8))
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
@@ -445,6 +450,9 @@ cv2.namedWindow(out_win, cv2.WINDOW_NORMAL)
 cv2.setWindowProperty(out_win, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 cv2.imshow(out_win, image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
 """
 
 
@@ -453,7 +461,10 @@ cv2.imshow(out_win, image)
 
 cv2.namedWindow("resized",0);
 cv2.resizeWindow("resized", 640, 480);
+
 cv2.imshow("resized",image)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 #設定視窗位置
 x_st = 300
@@ -461,8 +472,6 @@ y_st = 100
 cv2.moveWindow("resized", x_st, y_st)
 
 cv2.waitKey(0)
-
-sys.exit()
 
 
 #設定視窗參數, 若不設定, 即是 圖片滿框、不可調整大小
@@ -479,7 +488,8 @@ sys.exit()
 
 
 cv2.imshow("image", image)  # 顯示圖片
-
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 
 print("------------------------------------------------------------")  # 60個

@@ -505,6 +505,16 @@ plt.imshow(image)
 # 第四張圖
 plt.subplot(234)
 
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+# 打開圖像，並轉成灰度圖像
+# 檔案 => PIL影像 => 灰階 => np陣列
+image = np.array(Image.open(filename).convert('L'))#L為8位像素黑白圖
+
+plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+
+plt.contour(image, origin='image')
+plt.axis('equal')
+plt.title(u'圖像輪廓圖')
 
 # 第五張圖
 plt.subplot(235)

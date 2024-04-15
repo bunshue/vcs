@@ -394,43 +394,57 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 print("將圖片顏色反轉 (負片效果) 原圖")
-img = cv2.imread(r"images/sample.jpg")
-cv2.imshow("Sample pic", img)
+
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
+img = cv2.imread(filename)
+
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
 print("將圖片顏色反轉 (負片效果) 效果")
 img_invert = cv2.bitwise_not(img)
-cv2.imshow("Sample pic", img_invert)
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(img_invert, cv2.COLOR_BGR2RGB))
+plt.title("負片效果")
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("遮罩")
 
-img = cv2.imread(r"images/sample.jpg")
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+img = cv2.imread(filename)
 H = img.shape[0]
 W = img.shape[1]
 mask = cv2.imread(r"images/mask.jpg", cv2.IMREAD_GRAYSCALE)
+#調整mask大小
 mask = cv2.resize(mask, (W, H))
 img_masked = cv2.bitwise_and(img, img, mask=mask)
 
-cv2.imshow("Sample pic", img_masked)
-
-print("------------------------------------------------------------")  # 60個
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(img_masked, cv2.COLOR_BGR2RGB))
+plt.title("遮罩效果")
 
 print("遮罩")
+
 mask = cv2.bitwise_not(mask)
 img_masked = cv2.bitwise_and(img, img, mask=mask)
-cv2.imshow("Sample pic", img_masked)
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(img_masked, cv2.COLOR_BGR2RGB))
+plt.title("遮罩效果")
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -441,8 +455,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread('test1.png')
-img2 = cv2.imread('test2.png')
+filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
+filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+img1 = cv2.imread(filename1)
+img2 = cv2.imread(filename2)
+
 output = cv2.bitwise_and(img1, img2)  # 使用 bitwise_and
 
 cv2.imshow('image', output)
@@ -451,8 +468,11 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread('test1.png')
-img2 = cv2.imread('test2.png')
+filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
+filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+img1 = cv2.imread(filename1)
+img2 = cv2.imread(filename2)
+
 output = cv2.bitwise_or(img1, img2)  # 使用 bitwise_or
 
 cv2.imshow('image', output)
@@ -461,8 +481,11 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread('test1.png')
-img2 = cv2.imread('test2.png')
+filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
+filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+img1 = cv2.imread(filename1)
+img2 = cv2.imread(filename2)
+
 output = cv2.bitwise_xor(img1, img2)  # 使用 bitwise_xor
 
 cv2.imshow('image', output)
@@ -471,7 +494,9 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread('test1.png')
+filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
+img1 = cv2.imread(filename1)
+
 output = cv2.bitwise_not(img1)  # 使用 bitwise_not
 
 cv2.imshow('image', output)
@@ -480,16 +505,24 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-img1 = cv2.imread('test1.png')
-img2 = cv2.imread('test2.png')
+""" TBD
+filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
+filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+img1 = cv2.imread(filename1)
+img2 = cv2.imread(filename2)
+
+H = img1.shape[0]
+W = img1.shape[1]
+
 mask = cv2.imread('mask.png')                    # 遮罩圖片
+
 mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)    # 轉換成灰階模式
 output = cv2.bitwise_xor(img1, img2, mask=mask)  # 加入 mask 參數
 
 cv2.imshow('image', output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 

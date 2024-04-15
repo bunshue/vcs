@@ -959,11 +959,13 @@
             this.button64.Name = "button64";
             this.button64.Size = new System.Drawing.Size(60, 60);
             this.button64.TabIndex = 68;
+            this.button64.Text = "RGB ball";
             this.button64.UseVisualStyleBackColor = true;
             this.button64.Click += new System.EventHandler(this.button64_Click);
             // 
             // button65
             // 
+            this.button65.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button65.BackgroundImage")));
             this.button65.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button65.Location = new System.Drawing.Point(887, 518);
             this.button65.Name = "button65";
