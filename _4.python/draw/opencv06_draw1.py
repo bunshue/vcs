@@ -410,6 +410,20 @@ image = cv2.imread(filename)	#讀取本機圖片
 
 
 
+# 直接改寫image的內容
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+image = cv2.imread(filename)
+
+for i in range(20, 80):
+    image[i, 180] = [0, 0, 255]  # 紅色一點
+
+#     H          x
+image[10:100, 200:290] = [0, 0, 255]  # 紅色 一塊 90X90
+
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.show()
+
 
 
 print("------------------------------------------------------------")  # 60個

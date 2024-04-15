@@ -16,40 +16,25 @@ CCRR
 合成
 鏡射 .transpose(
 
-拆分 .split() r, g, b = image1.split()   #r, g, b為三個通道的list
-合併 .merge
-
-
-幾何變換 
-
-Image類有resize()、rotate()和transpose()方法進行幾何變換。
-
-1、圖像的縮放和旋轉
-
-dst = image.resize((128, 128))
-dst = image.rotate(45) # 順時針角度表示
-
-2、轉換圖像
-
-dst = im.transpose(Image.FLIP_LEFT_RIGHT) #左右互換
-dst = im.transpose(Image.FLIP_TOP_BOTTOM) #上下互換
-dst = im.transpose(Image.ROTATE_90)  #順時針旋轉
-dst = im.transpose(Image.ROTATE_180)
-dst = im.transpose(Image.ROTATE_270)
-
-transpose()和rotate()沒有性能差別。
+幾何變換 (1)
+1. resize() 縮放
+2. rotate() 旋轉
+3. transpose()
 
 
 """
+
+import time
+import glob
+import shutil
+
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageOps
 from PIL import ImageFont
 from PIL import ImageFilter
 
-import time
-import glob
-import shutil
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 print("------------------------------------------------------------")  # 60個
 
@@ -71,50 +56,25 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-print(image.format, image.size, image.mode)
-
-print("顯示PIL影像")
-plt.imshow(image)
-plt.show()
-
+'''
 print('裁剪 .crop ST------------------------------------------------------------')	#60個
 
-print('測試 裁剪 crop')
+print('測試 裁剪 crop x, y, w, h')
 
 # 檔案 => PIL影像
 image1 = Image.open(filename)    #PIL讀取本機圖片, RGB模式
-W, H = image1.size
-print('原圖大小 W =', W, ', H =', H)
 
-x_st = 50
-y_st = 50
-w = W - x_st * 2
-h = H - y_st * 2
-
+x_st, y_st, w, h = 140, 120, 70, 70
 #                     x_st  y_st    x_sp     y_sp
 image2 = image1.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上點到右下點
 
-print('裁剪一塊 (x_sy, y_st, x_sp, y_sp)')
+print('裁剪一塊 (x_sy, y_st, w, h), 大小 :', image2.size)
+plt.imshow(image2)
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    print(image.size)
-    x = 50
-    y = 50
-    w = 200
-    h = 200
-    image2 = image.crop((x, y, w, h))
-    print(image2.size)
-
 print('------------------------------------------------------------')	#60個
-
 
 
 print('裁剪 .crop SP------------------------------------------------------------')	#60個
@@ -123,76 +83,67 @@ print('裁剪 .crop SP----------------------------------------------------------
 
 print('複製 .copy ST------------------------------------------------------------')	#60個
 
-# 檔案 => PIL影像
-image = Image.open(filename)
-image_copy = image.copy()                      # 複製
-
+print('複製範例一')
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-img = Image.open(filename)
-imgcopy=img.copy()
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-image_copy = image.copy()                          # 複製
-image_crop = image_copy.crop((80, 30, 150, 100))    # 裁切區間
-image_copy.paste(image_crop, (20, 20))              # 第一次合成
-image_copy.paste(image_crop, (20, 100))             # 第二次合成
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
 # 檔案 => PIL影像
 image = Image.open(filename)
 
-print('複製圖片')
-image_copied = image.copy() #複製圖片
-#plt.imshow(image_copied)
-#plt.show()
+#複製圖片
+image_copy = image.copy()
 
-x_st = 0
-y_st = 0
-w = 300 / 4
-h = 400 / 4
+#裁剪一塊 x, y ,w, h
+x_st, y_st, w, h = 140, 120, 70, 70
 #                             x_st  y_st    x_sp     y_sp
-image_crop = image_copied.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間
-image_copied.paste(image_crop, (20, 20))          # 第一次合成
-image_copied.paste(image_crop, (20, 20 + 120))    # 第二次合成
-image_copied.paste(image_crop, (20, 20 + 240))    # 第三次合成
+image_crop = image_copy.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上點到右下點
+image_crop = image_copy.crop((140, 120, 210, 190))
 
-print('合成圖片')
-plt.imshow(image_copied)
+#貼上1
+image_copy.paste(image_crop, (220, 5))
+#貼上2
+image_copy.paste(image_crop, (220, 80))
+
+plt.imshow(image_copy)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
+print('複製範例二')
 # 檔案 => PIL影像
 image = Image.open(filename)
 
-print('複製圖片')
 image_copied = image.copy() #複製圖片
 
-x_st = 0
-y_st = 0
-w = 300 / 4
-h = 400 / 4
-#                             x_st  y_st    x_sp     y_sp
+x_st, y_st, w, h = 140, 120, 70, 70
+#                               x_st  y_st    x_sp     y_sp
 image_crop = image_copied.crop((x_st, y_st, x_st + w, y_st + h))    # 裁切區間
 cropW, cropH = image_crop.size           # 獲得裁切區間的寬與高
 
-W, H = 600, 320                        # 新影像寬與高
+W, H = cropW * 8 + 10*9, cropH * 4 + 10*5                        # 新影像寬與高
 image = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
-for x in range(20, W - 20, cropW):         # 雙層迴圈合成
-    for y in range(20, H - 20, cropH):
+for x in range(10, W - 50, cropW + 10):         # 雙層迴圈合成
+    for y in range(10, H - 50, cropH + 10):
         image.paste(image_crop, (x, y))        # 合成
 
-print('合成圖片')
 plt.imshow(image)
 plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+#x_st, y_st, w, h = 140, 120, 70, 70
+#roi = image.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上點到右下點
+
+# 檔案 => PIL影像
+image1 = Image.open(filename)
+image2 = image1.copy()                      # 複製
+image3 = image2.crop((80, 30, 150, 100))    # 裁切區間
+cropW, cropH = image3.size           # 獲得裁切區間的寬與高
+
+W, H = 600, 320                        # 新影像寬與高
+image4 = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
+for x in range(20, W-20, cropW):         # 雙層迴圈合成
+    for y in range(20, H-20, cropH):
+        image4.paste(image3, (x, y))        # 合成
 
 print('------------------------------------------------------------')	#60個
 
@@ -220,18 +171,21 @@ image3 = image1.resize((W*2, H))   # 寬度是2倍
 print('寬度不變, 高度變2倍')
 image4 = image1.resize((W, H*2))   # 高度是2倍
 
+
+""" resize new
+
+image = image.resize((w, h), Image.LANCZOS)     # 使用 LANCZOS 調整影像大小
+image = image.resize((100, 500), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
+image = image.resize((w*2,h), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
+image = image.resize((image.size[0]*2, image.size[1]*2), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
+image = image.resize((int(w / level), int(h / level)))  # 縮小圖片
+image = image.resize((w, h), resample=Image.NEAREST)  # 放大圖片為原始大小
+
+
+"""
+
 print('------------------------------------------------------------')	#60個
 
-print('依比例縮放圖片')
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',image.size)
-    w=100
-    r = w/image.size[0]
-    h = int(image.size[1]*r) #依縮放比例計算高度
-    image2 = image.resize((w, h))
-    print('圖片經縮放後的尺寸大小:',image2.size)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -261,13 +215,22 @@ print('旋轉45度')
 image45a = image.rotate(45)
 
 print('旋轉45度 + 圖像擴充')
-image45a = image.rotate(45, expand = True)
+image45b = image.rotate(45, expand = True)
 
 print('旋轉60度 + xxx1')
 image60a = image.rotate(60, Image.BILINEAR,0,None,None,'#BBCC55')
 
 print('旋轉60度 + xxx2')
 image60b = image.rotate(60, Image.BILINEAR, 1, None, None, '#BBCC55')
+
+image2 = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
+image2 = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
+
+print('保持圖片原始大小之旋轉')
+image2 = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
+
+print('保持圖片內容大小之旋轉')
+image2 = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -291,81 +254,15 @@ image1 = image.transpose(Image.FLIP_LEFT_RIGHT)   # 左右
 print('上下顛倒')
 image2 = image.transpose(Image.FLIP_TOP_BOTTOM)   # 上下
 
-print('旋轉90度')
+print('順時針旋轉90度')
 rotate90 = image.transpose(Image.ROTATE_90)
+rotate180 = image.transpose(Image.ROTATE_180)
+rotate270 = image.transpose(Image.ROTATE_270)
 
-image2 = image.transpose(Image.FLIP_LEFT_RIGHT)
-image2 = image.transpose(Image.FLIP_TOP_BOTTOM)
-image2 = image.transpose(Image.ROTATE_90)
-image2 = image.transpose(Image.ROTATE_180)
-image2 = image.transpose(Image.ROTATE_270)
-image2 = image.transpose(Image.TRANSPOSE)
-image2 = image.transpose(Image.TRANSVERSE)
+transpose1 = image.transpose(Image.TRANSPOSE)
+transpose2 = image.transpose(Image.TRANSVERSE)
 
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-
-r, g, b = image.split()
-
-plt.imshow(image)
-plt.title('image')
-plt.show()
-
-plt.imshow(r)
-plt.title('r')
-plt.show()
-
-plt.imshow(g)
-plt.title('g')
-plt.show()
-
-plt.imshow(b)
-plt.title('b')
-plt.show()
-
-print('RGB相反排列')
-convert_image = Image.merge('RGB', (b, g, r))
-
-plt.imshow(convert_image)
-plt.title('bgr')
-plt.show()
-
-# 檔案 => PIL影像
-image = Image.open(filename)    #PIL讀取本機圖片
-r, g, b = image.split()
-
-convert_image = Image.merge('RGB', (b, g, r))
-#NG image
-
-convert_image = Image.merge('RGB', (r, g, b))
-#OK image
-
-print('------------------------------------------------------------')	#60個
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/bear_filter.jpg'
-
-# 檔案 => PIL影像
-image = Image.open(filename1)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-plt.imshow(image)
-plt.show()
-
-#分解圖形顏色 例如RGB的紅綠藍
-#看不出效果
-r,g,b = image.split()
-
-plt.imshow(r)
-plt.show()
-
-plt.imshow(g)
-plt.show()
-
-plt.imshow(b)
-plt.show()
+#transpose()和rotate()沒有性能差別。
 
 print('------------------------------------------------------------')	#60個
 
@@ -504,20 +401,19 @@ bg.save("tmp_compound2X4b.jpg")
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-logo_filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.png'
+logo_filename = 'C:/_git/vcs/_4.python/_data/logo1.png'
 
 # 檔案 => PIL影像
 image = Image.open(filename)
+image_w, image_h = image.size  # 取得圖片尺寸
 
 # 檔案 => PIL影像
 icon = Image.open(logo_filename)
+# 縮放至適當大小
+icon = icon.resize((128, 128), Image.LANCZOS) # 使用 LANCZOS 調整影像大小
 
-image_w, image_h = image.size  # 取得圖片尺寸
-icon_w, icon_h = icon.size  # 取得 icon 尺寸
-x = int((image_w - icon_w) / 2)  # 計算置中時 icon 左上角的 x 座標
-y = int((image_h - icon_h) / 2)  # 計算置中時 icon 左上角的 y 座標
-
-image.paste(icon, (x, y), icon)  # 設定 icon 左上角座標
+x_st, y_st = image_w-128-20, 20
+image.paste(icon, (x_st, y_st), icon)  # 設定 icon 左上角座標
 
 plt.imshow(image)
 plt.show()
@@ -579,18 +475,6 @@ print("------------------------------------------------------------")  # 60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
 # 檔案 => PIL影像
-image = Image.open(filename)  # 開啟圖片
-
-w, h = image.size  # 讀取圖片長寬
-level = 5  # 設定縮小程度
-image2 = image.resize((int(w / level), int(h / level)))  # 縮小圖片
-image2 = image2.resize((w, h), resample=Image.NEAREST)  # 放大圖片為原始大小
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-# 檔案 => PIL影像
 image = Image.open(filename)
 
 w, h = image.size
@@ -607,20 +491,6 @@ plt.imshow(image)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-
-image090=image.rotate(90)  # 旋轉90度
-image180=image.rotate(180)  # 旋轉180度
-image270=image.rotate(270)  # 旋轉270度
-image45a=image.rotate(45)  # 旋轉45度
-image45b=image.rotate(45, expand=True)  # 旋轉45度圖像擴充
-image_flip1 = image.transpose(Image.FLIP_LEFT_RIGHT)  # 左右
-image_flip2 = image.transpose(Image.FLIP_TOP_BOTTOM)  # 上下
-image_crop = image.crop((80, 30, 150, 100))   # 裁切區間
-
-print("------------------------------------------------------------")  # 60個
 
 print('圖片貼上logo')
 
@@ -652,32 +522,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-max_size = 100
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-ratio = max_size / max(image.size)    #根據長寬較長的一邊決定縮放比率
-w = int(image.width * ratio)
-h = int(image.height * ratio)
-image = image.resize((w, h), Image.LANCZOS)     # 使用 LANCZOS 調整影像大小
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-# 檔案 => PIL影像
-image = Image.open(filename)
-imagecopy=image.copy() #複製
-#切割貓熊並改變尺寸
-image1=imagecopy.crop((190,184,415,350)).resize((160,140))
-imagecopy.paste(image1,(40,30)) #貼上
-image2=image1.transpose(Image.FLIP_LEFT_RIGHT)#左右翻轉
-imagecopy.paste(image2,(220,40))#貼上
-
-print("------------------------------------------------------------")  # 60個
-
-
 def emptydir(dirname):
     if os.path.isdir(dirname):
         shutil.rmtree(dirname)
@@ -708,76 +552,8 @@ for i, f in enumerate(files):
     image.close()   
 
 print('轉換尺寸及灰階處理結束！')
-
+'''
 print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    print(image.size)
-    w = 200
-    r = w/image.size[0]
-    h = int(image.size[1]*r) #依縮放比例計算高度
-    image2 = image.resize((w, h))
-    print(image2.size)
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',image.size)
-    x = 50
-    y = 50
-    x1 = 150
-    y1 = 200
-    image2 = image.crop((x, y, x1, y1))
-    print('圖片經裁切後的尺寸大小:', image2.size)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',image.size)
-    w=100
-    r = w/image.size[0]
-    h = int(image.size[1]*r)
-    image2 = image.resize((w, h))
-    print('圖片經縮放後的尺寸大小:',image2.size)
-
-print("------------------------------------------------------------")  # 60個
-
-print("縮放和黏貼圖像 CROP + PASTE")
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
-
-# 檔案 => PIL影像
-image1 = Image.open(filename1)
-
-# 檔案 => PIL影像
-image2 = Image.open(filename2)
-
-rect = 80, 20, 310, 360
-image1 = image1.crop(rect)
-width, height = image1.size
-image2.paste(image1.resize((int(width / 1.5), int(height / 1.5))), (172, 40))
-
-plt.imshow(image2)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("剪裁圖像 CROP")
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-
-rect = 80, 20, 310, 360
-image.crop(rect)
-
-plt.imshow(image)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
 
 print("生成縮略圖 thumbnail")
 
@@ -789,120 +565,6 @@ image.thumbnail(size)
 
 plt.imshow(image)
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#crop
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    print('原圖片的尺寸大小:',image.size)
-    x = 50
-    y = 50
-    x1 = 250
-    y1 = 300
-    image2 = image.crop((x, y, x1, y1))
-    print('圖片經裁切後的尺寸大小:', image2.size)
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.rotate(180)
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.rotate(30, Image.BILINEAR, 1, None, None, '#ffff66')
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-    image2 = image.rotate(30, Image.BILINEAR, 0, None, None, '#ffff66')
-
-print('------------------------------------------------------------')	#60個
-
-print('保持圖片原始大小之旋轉')
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-  image2 = image.rotate(60,Image.BILINEAR,0,None,None,'#BBCC55')
-
-print("------------------------------------------------------------")  # 60個
-
-print('保持圖片內容大小之旋轉')
-# 檔案 => PIL影像
-with Image.open(filename) as image:
-  image2 = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-# 檔案 => PIL影像
-image = Image.open(filename)
-
-image1=image.rotate(45)#旋轉45度
-image2=image.rotate(90) #旋轉90度
-image3=image.rotate(180)#旋轉180度
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-
-image2=image.transpose(Image.FLIP_LEFT_RIGHT)#左右翻轉
-image3=image.transpose(Image.FLIP_TOP_BOTTOM)#上下翻轉
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-image = Image.open(filename) # w,h=image.size #320 240
-
-image1=image.crop((0,0,160,120))
-image2=image.crop((161,0,320,120))
-image3=image.crop((0,121,160,240))
-image4=image.crop((161,121,320,240))
-
-image.close()
-
-print("------------------------------------------------------------")  # 60個
-
-#裁剪圖片
-#從原圖片中裁剪感興趣區域（roi),裁剪區域由4-tuple決定，該tuple中信息為(left, upper, right, lower)。 Pillow左邊系統的原點（0，0）為圖片的左上角。坐標中的數字單位為像素點。
-
-# 檔案 => PIL影像
-image=Image.open(filename)  #打開圖像
-plt.figure('Peony')
-plt.subplot(1,2,1)
-plt.title('origin')
-plt.imshow(image),plt.axis('off')
-
-box=(80,100,260,300)
-roi=image.crop(box)
-plt.subplot(1,2,2)
-plt.title('roi')
-plt.imshow(roi),plt.axis('off')
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-image1 = Image.open(filename)
-image2 = image1.copy()                          # 複製
-image3 = image2.crop((80, 30, 150, 100))    # 裁切區間
-cropW, cropH = image3.size           # 獲得裁切區間的寬與高
-
-W, H = 600, 320                        # 新影像寬與高
-image4 = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
-for x in range(20, W-20, cropW):         # 雙層迴圈合成
-    for y in range(20, H-20, cropH):
-        image4.paste(image3, (x, y))        # 合成
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1159,8 +821,25 @@ plt.show()
 
 
 """
-image3 = image1.resize((100, 500), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
-image1 = image.resize((w*2,h), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
-image = image.resize((image.size[0]*2, image.size[1]*2), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
 
 """
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+# 檔案 => PIL影像
+image = Image.open(filename)
+imagecopy=image.copy() #複製
+#切割貓熊並改變尺寸
+image1=imagecopy.crop((190,184,415,350)).resize((160,140))
+imagecopy.paste(image1,(40,30)) #貼上
+image2=image1.transpose(Image.FLIP_LEFT_RIGHT)#左右翻轉
+imagecopy.paste(image2,(220,40))#貼上
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+

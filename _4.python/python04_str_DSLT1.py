@@ -84,6 +84,23 @@ print(animal.keys())
 print(animal.values())
 print(animal.items())
 
+print('排序')
+print(sorted(animal))
+
+for ani in animal:
+    print(ani)
+    print(animal[ani])
+
+print('xxx')
+
+for ani in set(animal.values()):
+    print(ani)
+
+
+print('xxx')
+
+sys.exit()
+
 print("字典裡內容一一列出")
 for key in animal:
     print(key + ": " + animal[key])

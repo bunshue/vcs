@@ -51,10 +51,9 @@ mu = 100  # 平均值
 sigma = 15  # 標準差
 mu, sigma = 100, 15
 x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
-# 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-# x = np.random.normal(size=N*10)
-# x = np.random.normal(size=N)
 
+# 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+# x = np.random.normal(size=N)
 
 # 第一張圖
 plt.subplot(231)
@@ -321,6 +320,7 @@ n, bins, patches = plt.hist(
 
 # 繪製曲線圖
 sns.kdeplot(x)
+plt.title('用海生畫常態分佈')
 
 
 # 第四張圖
@@ -337,7 +337,7 @@ n, bins, patches = plt.hist(
 
 # 繪製曲線圖
 sns.kdeplot(x)
-
+plt.title('用海生畫均勻分佈')
 
 # 第五張圖
 plt.subplot(235)

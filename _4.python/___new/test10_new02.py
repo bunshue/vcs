@@ -1911,50 +1911,6 @@ print(py)
 
 print("------------------------------------------------------------")  # 60個
 
-money = 50000
-rate = 0.015
-n = 5
-for i in range(n):
-    money *= 1 + rate
-    print(f"第 {i+1} 年本金和 : {int(money)}")
-
-print("------------------------------------------------------------")  # 60個
-
-numbers1 = (1, 2, 3, 4, 5)  # 定義元組元素是整數
-fruits = ("apple", "orange")  # 定義元組元素是字串
-mixed = ("James", 50)  # 定義元組元素是不同型態資料
-val_tuple = (10,)  # 只有一個元素的元祖
-print(numbers1)
-print(fruits)
-print(mixed)
-print(val_tuple)
-# 列出元組資料型態
-# print("元組mixed資料型態是: ",type(mixed)) fail
-
-print("------------------------------------------------------------")  # 60個
-
-keys = ("magic", "xaab", 9099)  # 定義元組元素是字串與數字
-list_keys = list(keys)  # 將元組改為串列
-list_keys.append("secret")  # 增加元素
-print("列印元組", keys)
-print("列印串列", list_keys)
-
-print("------------------------------------------------------------")  # 60個
-
-keys = ["magic", "xaab", 9099]  # 定義串列元素是字串與數字
-tuple_keys = tuple(keys)  # 將串列改為元組
-print("列印串列", keys)
-print("列印元組", tuple_keys)
-# tuple_keys.append('secret')         # 增加元素 --- 錯誤錯誤
-
-print("------------------------------------------------------------")  # 60個
-
-tup = (1, 3, 5, 7, 9)
-print("tup最大值是", max(tup))
-print("tup最小值是", min(tup))
-
-print("------------------------------------------------------------")  # 60個
-
 drinks = ["coffee", "tea", "wine"]
 enumerate_drinks = enumerate(drinks)                # 數值初始是0
 lst = list(enumerate_drinks)
@@ -1987,54 +1943,6 @@ for count, drink in enumerate(drinks, 10):
 
 print("------------------------------------------------------------")  # 60個
 
-numbers1 = (1, 2, 3, 4, 5)  # 定義元組元素是整數
-fruits = ("apple", "orange")  # 定義元組元素是字串
-val_tuple = (10,)  # 只有一個元素的元祖
-print(numbers1[0])  # 以中括號索引值讀取元素內容
-print(numbers1[4])
-print(fruits[0], fruits[1])
-print(val_tuple[0])
-x, y = ("apple", "orange")
-print(x, y)
-x, y = fruits
-print(x, y)
-
-print("------------------------------------------------------------")  # 60個
-
-keys = ("magic", "xaab", 9099)  # 定義元組元素是字串與數字
-for key in keys:
-    print(key)
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = ("apple", "orange")  # 定義元組元素是字串
-print(fruits[0])  # 列印元組fruits[0]
-# fruits[0] = 'watermelon'            # 將元素內容改為watermelon  fail
-print(fruits[0])  # 列印元組fruits[0]
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = ("apple", "orange")  # 定義元組元素是水果
-print("原始fruits元組元素")
-for fruit in fruits:
-    print(fruit)
-
-fruits = ("watermelon", "grape")  # 定義新的元組元素
-print("\n新的fruits元組元素")
-for fruit in fruits:
-    print(fruit)
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = ("apple", "orange", "banana", "watermelon", "grape")
-print(fruits[1:3])
-print(fruits[:2])
-print(fruits[1:])
-print(fruits[-2:])
-print(fruits[0:5:2])
-
-print("------------------------------------------------------------")  # 60個
-
 fruits = ("apple", "banana", "cherry", "date", "cherry")
 print(f"fruits 元組長度是 {len(fruits)}")  # 輸出 5
 
@@ -2043,28 +1951,6 @@ print(f"cherry 索引位置是 {index}")  # 輸出 2
 
 cherry_count = fruits.count("cherry")
 print(f"cherry 出現次數是 {cherry_count}")  # 輸出 2
-
-print("------------------------------------------------------------")  # 60個
-
-keys = ("magic", "xaab", 9099)  # 定義元組元素是字串與數字
-print(keys)
-# print(type(keys))
-# key = keys.pop( )                   # 錯誤 無此方法
-
-print("------------------------------------------------------------")  # 60個
-
-keys = ("magic", "xaab", 9099)  # 定義元組元素是字串與數字
-# keys.append('secret')               # 錯誤 無此方法
-
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25}
-noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60}
-print(fruits)
-print(noodles)
-# 列出字典資料型態
-print("字典fruits資料型態是: ", type(fruits))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2101,124 +1987,19 @@ players = {
     "Kevin Durant": "Golden State Warriors",
     "Lebron James": "Cleveland Cavaliers",
 }
-for name, team in players.items():
-    print(f"姓名:{name}")
-    print(f"隊名:{team}")
-
-
-print("------------------------------------------------------------")  # 60個
-
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-}
 for name in players.keys():
     print(name)
     print(f"Hi! {name} 我喜歡看你在 {players[name]} 的表現")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_19.py
-
-# ch9_19.py
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-}
-for name in players:
-    print(name)
-    print(f"Hi! {name} 我喜歡看你在 {players[name]} 的表現")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_19_1.py
-
-# ch9_19_1.py
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-}
-keys_list = [key for key in players]
-print(keys_list)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_2.py
-
-# ch9_2.py
 fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25}
 noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60}
 print("水蜜桃一斤 = ", fruits["水蜜桃"], "元")
 print("牛肉麵一碗 = ", noodles["牛肉麵"], "元")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_20.py
-
-# ch9_20.py
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-}
-for name in sorted(players):
-    print(name)
-    print(f"Hi! {name} 我喜歡看你在 {players[name]} 的表現")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_21.py
-
-# ch9_21.py
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-}
-for team in players.values():
-    print(team)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_21_1.py
-
-# ch9_21_1.py
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-}
-for team in players:
-    print(players[team])
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_21_2.py
-
-# ch9_21_2.py
-players = {
-    "Stephen Curry": "Golden State Warriors",
-    "Kevin Durant": "Golden State Warriors",
-    "Lebron James": "Cleveland Cavaliers",
-}
-for team in set(players.values()):
-    print(team)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_21_3.py
-
-# ch9_21_3.py
 noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60, "大滷麵": 90, "麻醬麵": 70}
 print(noodles)
 noodlesLst = sorted(noodles.items(), key=lambda item: item[1])
@@ -2230,9 +2011,6 @@ for i in range(len(noodlesLst)):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_21_4.py
-
-# ch9_21_4.py
 noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60, "大滷麵": 90, "麻醬麵": 70}
 print(noodles)
 noodlesLst = sorted(noodles.items(), key=lambda item: item[1])
@@ -2244,9 +2022,7 @@ for i in range(len(noodlesLst)):
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_22.py
 
-# ch9_22.py
 soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
 soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
 soldier2 = {"tag": "green", "score": 10, "speed": "fast"}
@@ -2274,9 +2050,6 @@ print(f"小兵數量 = {len(armys)}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_24.py
-
-# ch9_24.py
 armys = []  # 建立小兵空串列
 # 建立50個小兵
 for soldier_number in range(50):
@@ -2300,9 +2073,6 @@ for soldier in armys[34:40]:
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_25.py
-
-# ch9_25.py
 # 建立內含字串的字典
 sports = {"Curry": ["籃球", "美式足球"], "Durant": ["棒球"], "James": ["美式足球", "棒球", "籃球"]}
 # 列印key名字 + 字串'喜歡的運動'
@@ -2315,9 +2085,6 @@ for name, favorite_sport in sports.items():
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_26.py
-
-# ch9_26.py
 # 建立內含字典的字典
 wechat_account = {
     "cshung": {"last_name": "洪", "first_name": "錦魁", "city": "台北"},
@@ -2333,9 +2100,6 @@ for account, account_info in wechat_account.items():
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_27.py
-
-# ch9_27.py
 # 建立內含字典的字典
 wechat = {
     "cshung": {"last_name": "洪", "first_name": "錦魁", "city": "台北"},
@@ -2349,9 +2113,6 @@ print(f"wechat['kevin']元素個數  {len(wechat['kevin'])}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_28.py
-
-# ch9_28.py
 # 將串列轉成字典
 seq1 = ["name", "city"]  # 定義串列
 list_dict1 = dict.fromkeys(seq1)
@@ -2368,9 +2129,6 @@ print(f"字典4 {tup_dict2}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_29.py
-
-# ch9_29.py
 fruits = {"Apple": 20, "Orange": 25}
 ret_value1 = fruits.get("Orange")
 print(f"Value = {ret_value1}")
@@ -2382,9 +2140,6 @@ print(f"Value = {ret_value3}")
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_3.py
-
-# ch9_3.py
 fruits = {0: "西瓜", 1: "香蕉", 2: "水蜜桃"}
 print(fruits[0], fruits[1], fruits[2])
 
@@ -2411,9 +2166,6 @@ print(my_dict)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_31.py
-
-# ch9_31.py
 person = {"name": "John"}
 print("原先字典內容", person)
 
@@ -2486,9 +2238,6 @@ print(mydict)  # 列印字典
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_33.py
-
-# ch9_33.py
 word = "deepmind"
 alphabetCount = {alphabet: word.count(alphabet) for alphabet in word}
 print(alphabetCount)
@@ -2527,9 +2276,6 @@ print(mydict)  # 列印字典
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_35.py
-
-# ch9_35.py
 season = {
     "水瓶座": "1月20日 - 2月18日, 需警惕小人",
     "雙魚座": "2月19日 - 3月20日, 凌亂中找立足",
@@ -2587,39 +2333,10 @@ wd = "ABCDEFG"
 for c in wd:
     print(morse_code[c])
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_4.py
-
-# ch9_4.py
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25}
-fruits["橘子"] = 18
-print(fruits)
-print("橘子一斤 = ", fruits["橘子"], "元")
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_5.py
-
-# ch9_5.py
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25}
-print("舊價格香蕉一斤 = ", fruits["香蕉"], "元")
-fruits["香蕉"] = 12
-print("新價格香蕉一斤 = ", fruits["香蕉"], "元")
-
-
-print("------------------------------------------------------------")  # 60個
-
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25}
-print("舊fruits字典內容:", fruits)
-del fruits
-# print("新fruits字典內容:", fruits)       # 錯誤! 錯誤!
-
-
-print("------------------------------------------------------------")  # 60個
-
+"""
 # test locals()
 fruits = {'西瓜':15, '香蕉':20, '水蜜桃':25}
 var_dict = input("請輸入要刪除的變數 : ")
@@ -2629,7 +2346,6 @@ if var_dict in locals():    # 檢查變數是否存在
     print(f"刪除 {var_dict} 變數成功")
 else:
     print(f"{var_dict} 變數不存在")
-  
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2645,7 +2361,7 @@ if var in locals():
         print(f"字典變數不存在")
 else:
     print(f"{var} 變數不存在")
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2673,12 +2389,6 @@ x = set(fruits1)                # 將串列轉成集合
 fruits2 = list(x)               # 將集合轉成串列
 print("原先串列資料fruits1 = ", fruits1)
 print("新的串列資料fruits2 = ", fruits2)
-
-
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2715,27 +2425,6 @@ print("交集A = ", A)
 """
 print("------------------------------------------------------------")  # 60個
 
-students = {
-    "Peter",
-    "Norton",
-    "Kevin",
-    "Mary",
-    "John",
-    "Ford",
-    "Nelson",
-    "Damon",
-    "Ivan",
-    "Tom",
-}
-
-Math = {"Peter", "Kevin", "Damon"}  # 數學夏令營參加人員
-Physics = {"Nelson", "Damon", "Tom"}  # 物理夏令營參加人員
-
-MorP = Math | Physics
-print("有 %d 人參加數學或物理夏令營名單  : " % len(MorP), MorP)
-unAttend = students - MorP
-print("沒有參加任何夏令營有 %d 人名單是 : " % len(unAttend), unAttend)
-
 A = {n for n in range(1, 100, 2)}
 print(type(A))
 print(A)
@@ -2755,9 +2444,6 @@ print(alphabetCount)
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch10\ch10_28.py
-
-# ch10_28.py
 cocktail = {
     "Blue Hawaiian": {"Rum", "Sweet Wine", "Cream", "Pineapple Juice", "Lemon Juice"},
     "Ginger Mojito": {"Rum", "Ginger", "Mint Leaves", "Lime Juice", "Ginger Soda"},
@@ -2786,7 +2472,7 @@ for name, formulas in cocktail.items():
         print(name)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 加總一系列數字
 
 

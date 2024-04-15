@@ -1,5 +1,5 @@
 """
-opencv 集合
+opencv 集合 新進
 
 """
 
@@ -25,7 +25,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print('練習組合成一張大圖 picasa效果')
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -66,15 +66,6 @@ output[y_st:y_st+h, x_st:x_st+w] = image3[0:h, 0:w]      # 設定 output 的某�
 
 plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
 plt.show()
-
-
-
-"""
-
-    img = cv2.flip(img, 1)                        # 翻轉影像，使其如同鏡子
-    img = img[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -998,7 +989,7 @@ plt.title("顯示修改後的圖")
 plt.imshow(cv2.cvtColor(peony, cv2.COLOR_BGR2RGB))
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
@@ -1165,9 +1156,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("equalizeHist_image")
 
-image = cv2.imread("data/wu_2.png", 0)
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
+image = cv2.imread(filename, 0)
 equ = cv2.equalizeHist(image)  # 只能傳入灰度圖
-res = np.hstack((image, equ))  # 圖像列拼接（用于顯示）
 
 # 繪製結果
 fig = plt.figure(
@@ -1180,12 +1172,20 @@ fig = plt.figure(
     frameon=True,
 )
 
-plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title('原圖')
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(equ, cv2.COLOR_BGR2RGB))
+plt.title('equalizeHist')
+
 plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
-print("gradient")
+print("gradient 邊緣檢測 梯度處理")
 
 # 輸入圖像，輸出提取的邊緣信息
 def my_sobel_sharpen(image):
@@ -1252,9 +1252,11 @@ fig = plt.figure(
 plt.subplot(131)
 plt.title("原始圖像")
 plt.imshow(original_image_lena)
+
 plt.subplot(132)
 plt.title("邊緣檢測")
 plt.imshow(edge_image_lena)
+
 plt.subplot(133)
 plt.title("梯度處理")
 plt.imshow(sharpen_image_lena)
@@ -1263,7 +1265,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("imaeg_laplace")
+print("imaeg_laplace 邊緣檢測 銳化處理")
 
 original_image_test1 = cv2.imread("data/lena.png", 0)
 
@@ -1331,12 +1333,15 @@ fig = plt.figure(
 fig.add_subplot(131)
 plt.title("原始圖像")
 plt.imshow(original_image_test1)
+
 fig.add_subplot(132)
 plt.title("邊緣檢測")
 plt.imshow(my_show_edge(result))
+
 fig.add_subplot(133)
 plt.title("銳化處理")
 plt.imshow(my_laplace_result_add(original_image_test1, result))
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1599,68 +1604,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-
-彩色影像轉HSV(RGB to HSV 或 BGR to HSV)
-
-HSV簡單介紹分別為：
-色相(H)：色彩的顏色名稱，如紅色、黃色等。
-飽和度(S)：色彩的純度，越高色彩越純，低則逐漸變灰，數值為0-100%。
-明度(V)：亮度，數值為0-100%。
-
-使用 cv2.cvtColor 轉換顏色空間時，第二個參數與HSV相關的有：
-cv2.COLOR_BGR2HSV
-cv2.COLOR_HSV2BGR
-cv2.COLOR_RGB2HSV
-cv2.COLOR_HSV2RGB
-
-opencv 預設的排列方式為BGR，而不是RGB
-
-所以這邊使用的是 cv2.COLOR_BGR2HSV
-
-當然實際上使用時不會只是單純RGB轉換成HSV就結束了，
-通常會去針對HSV顏色區間去作後續的處理
-
-範例. 物件偵測 - 找出綠色的物體
-
-彩色轉HSV常見的應用可能有物件偵測，去背處理(排除綠色的背景)，
-以下就來示範如何找出圖片中綠色的水果，類似的應用可能有找出草地的背景，
-
-"""
-image = cv2.imread("data/fruit.jpg")
-hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-fig = plt.figure(
-    num="彩色影像轉HSV",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(131)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(132)
-plt.imshow(cv2.cvtColor(hsv, cv2.COLOR_BGR2RGB))
-plt.title("轉HSV")
-
-lower_green = np.array([35, 43, 46])  # 綠色下限
-upper_green = np.array([77, 255, 255])  # 綠色上限
-mask = cv2.inRange(hsv, lower_green, upper_green)
-res = cv2.bitwise_and(image, image, mask=mask)
-
-plt.subplot(133)
-plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
-plt.title("抓出綠色的部分")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 
 def salt_pepper_noise(image, fraction, salt_vs_pepper):
     img = np.copy(image)
@@ -1694,21 +1637,6 @@ plt.title("胡椒(黑)鹽(白)效果")
 plt.show()
 
 # 黑點就好比胡椒，白點就像是鹽，這種加上雜訊的方式，就稱為椒鹽雜訊（Salt & Pepper Noise）
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1748,34 +1676,112 @@ plt.imshow(log_F,'gray')
 plt.title('log_F')
 """
 
-
 print("------------------------------------------------------------")  # 60個
 
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
-print("------------------------------------------------------------")  # 60個
+image1 = cv2.imread(filename)
+image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 
-# 偽寫入
-# cv2.imwrite("tmp_bgra.png", bgra)
-# cv2.imwrite("tmp_bgra125.png", bgra125)
-# cv2.imwrite("tmp_bgra0.png", bgra0)
+# image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
+# 套用 medianBlur() 中值模糊
+image3 = cv2.medianBlur(image2, 7)                   # 模糊化，去除雜訊 7, 25 彩色黑白皆可
+image4 = cv2.Canny(image3, 36, 36)                   # 偵測邊緣
 
-print("------------------------------------------------------------")  # 60個
+# 套用自適應二值化黑白影像
+image5 = cv2.adaptiveThreshold(image3, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
-# 直接改寫image的內容
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+plt.figure(
+    num="相加",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
-image = cv2.imread(filename)
+plt.subplot(231)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 
-for i in range(20, 80):
-    image[i, 180] = [0, 0, 255]  # 紅色一點
+plt.subplot(232)
+plt.title("轉成灰階")
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 
-#     H          x
-image[10:100, 200:290] = [0, 0, 255]  # 紅色 一塊 90X90
+plt.subplot(233)
+plt.title("模糊化，去除雜訊")
+plt.imshow(cv2.cvtColor(image3, cv2.COLOR_BGR2RGB))
 
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.subplot(234)
+plt.title("偵測邊緣")
+plt.imshow(cv2.cvtColor(image4, cv2.COLOR_BGR2RGB))
+
+plt.subplot(235)
+plt.title("自適應二值化黑白影像")
+plt.imshow(cv2.cvtColor(image5, cv2.COLOR_BGR2RGB))
+
+plt.subplot(236)
+plt.title("")
+
+plt.tight_layout()  # 緊密排列，並填滿原圖大小
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+print('Y對稱一張圖片')
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+image1 = cv2.imread(filename)
+
+w = image1.shape[1]
+h = image1.shape[0]
+
+D = 20
+output = np.zeros((h+D*2,w*2+D*2,3), dtype='uint8')   # 產生 2W x H 的黑色背景
+
+image1 = image1[:h, :w]               # 取出 WxH 的影像 全部 也可只取部分
+
+print("左右翻轉影像")
+image12 = cv2.flip(image1, 1)
+
+#左半
+output[D:h+D, D:w+D] = image1               # 將 output 左邊內容換成 image1
+#右半
+output[D:h+D, w+D:w*2+D] = image12           # 將 output 右邊內容換成 img2
+
+plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print('XY對稱一張圖片')
+
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+image1 = cv2.imread(filename)
+
+w = image1.shape[1]
+h = image1.shape[0]
+
+output = np.zeros((h*2,w*2,3), dtype='uint8')   # 產生 2W x 2H 的黑色背景
+
+img = image1[:h, :w]               # 取出 WxH 的影像 全部 也可只取部分
+img2 = cv2.flip(img, 1)           # 左右翻轉
+img3 = cv2.flip(img, 0)           # 上下翻轉
+img4 = cv2.flip(img, -1)          # 上下左右翻轉
+
+# 左上
+output[:h, :w] = img
+# 右上
+output[:h, w:w*2] = img2
+# 左下
+output[h:h*2, :w] = img3
+# 右下
+output[h:h*2, w:w*2] = img4
+
+plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
+plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1785,7 +1791,26 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 新進 與 測試
+
+"""
+
+    img = cv2.flip(img, 1)                        # 翻轉影像，使其如同鏡子
+    img = img[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
+
+"""
 

@@ -442,19 +442,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
 filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
 filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
 img1 = cv2.imread(filename1)
@@ -523,6 +510,138 @@ cv2.imshow('image', output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
+
+print("------------------------------------------------------------")  # 60個
+
+print("OpenCV_ai_29")
+
+""" TBD
+logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+
+logo = cv2.imread(logo_filename)                    # 讀取 OpenCV 的 logo
+size = logo.shape                                # 讀取 logo 的長寬尺寸
+
+img = np.zeros((360,480,3), dtype='uint8')       # 產生一張 480x360 背景全黑的圖
+img[0:360, 0:480] = '255'                        # 將圖片變成白色 ( 配合 logo 是白色底 )
+img[0:size[0], 0:size[1]] = logo                 # 將圖片的指定區域，換成 logo 的圖案
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 產生一張灰階的圖片作為遮罩使用
+ret, mask1  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)  # 使用二值化的方法，產生黑白遮罩圖片
+logo = cv2.bitwise_and(img, img, mask = mask1 )  # logo 套用遮罩
+
+bg = cv2.imread(filename)                      # 讀取底圖
+ret, mask2  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY)      # 使用二值化的方法，產生黑白遮罩圖片
+bg = cv2.bitwise_and(bg, bg, mask = mask2 )      # 底圖套用遮罩
+
+output = cv2.add(bg, logo)                       # 使用 add 方法將底圖和 logo 合併
+
+cv2.imshow('image', output)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print("OpenCV_ai_49")
+
+lower = np.array([30,40,200])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
+upper = np.array([90,100,255]) # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
+
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+img = cv2.imread(filename)
+
+mask = cv2.inRange(img, lower, upper)             # 使用 inRange
+output = cv2.bitwise_and(img, img, mask = mask )  # 套用影像遮罩
+cv2.imwrite('tmp_output.jpg', output)
+
+cv2.imshow('Image', output)
+cv2.waitKey(0)                                    # 按下任意鍵停止
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+彩色影像轉HSV(RGB to HSV 或 BGR to HSV)
+
+HSV簡單介紹分別為：
+色相(H)：色彩的顏色名稱，如紅色、黃色等。
+飽和度(S)：色彩的純度，越高色彩越純，低則逐漸變灰，數值為0-100%。
+明度(V)：亮度，數值為0-100%。
+
+使用 cv2.cvtColor 轉換顏色空間時，第二個參數與HSV相關的有：
+cv2.COLOR_BGR2HSV
+cv2.COLOR_HSV2BGR
+cv2.COLOR_RGB2HSV
+cv2.COLOR_HSV2RGB
+
+opencv 預設的排列方式為BGR，而不是RGB
+
+所以這邊使用的是 cv2.COLOR_BGR2HSV
+
+當然實際上使用時不會只是單純RGB轉換成HSV就結束了，
+通常會去針對HSV顏色區間去作後續的處理
+
+範例. 物件偵測 - 找出綠色的物體
+
+彩色轉HSV常見的應用可能有物件偵測，去背處理(排除綠色的背景)，
+以下就來示範如何找出圖片中綠色的水果，類似的應用可能有找出草地的背景，
+
+"""
+image = cv2.imread("data/fruit.jpg")
+hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+fig = plt.figure(
+    num="彩色影像轉HSV",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(hsv, cv2.COLOR_BGR2RGB))
+plt.title("轉HSV")
+
+lower_green = np.array([35, 43, 46])  # 綠色下限
+upper_green = np.array([77, 255, 255])  # 綠色上限
+mask = cv2.inRange(hsv, lower_green, upper_green)
+res = cv2.bitwise_and(image, image, mask=mask)
+
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
+plt.title("抓出綠色的部分")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 

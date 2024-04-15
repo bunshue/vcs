@@ -1079,6 +1079,56 @@ print(square(10))
 
 print("------------------------------------------------------------")  # 60個
 
+# 使用一般函數
+def square(x):
+    value = x**2
+    return value
+
+
+# 輸出平方值
+print(square(10))
+
+print("------------------------------------------------------------")  # 60個
+
+# 定義lambda函數
+square = lambda x: x**2
+
+# 輸出平方值
+print(square(10))
+
+print("------------------------------------------------------------")  # 60個
+
+# 定義lambda函數
+product = lambda x, y: x * y
+
+# 輸出相乘結果
+print(product(5, 10))
+
+print("------------------------------------------------------------")  # 60個
+
+
+def func(b):
+    return lambda x: 2 * x + b
+
+
+linear = func(5)  # 5將傳給lambda的 b
+print(linear(10))  # 10是lambda的 x
+
+print("------------------------------------------------------------")  # 60個
+
+
+def func(b):
+    return lambda x: 2 * x + b
+
+
+linear = func(5)  # 5將傳給lambda的 b
+print(linear(10))  # 10是lambda的 x
+
+linear2 = func(3)
+print(linear2(10))
+
+print("------------------------------------------------------------")  # 60個
+
 
 # 使用一般函數
 def square(x):
@@ -1128,13 +1178,191 @@ print("奇數串列: ", oddlist)
 print("------------------------------------------------------------")  # 60個
 
 
+def function_with_args(*args):
+    """不定長度參數的函數"""
+    # print(type(args))
+    # print(args)
+    print("使用的參數如下 : ", end="")
+    for arg in args:
+        print(arg, end=" ")
+    print()
+
+
+help(function_with_args)
+function_with_args()
+function_with_args("AAA")
+function_with_args("AAA", "BBB")
+function_with_args("AAA", "BBB", "CCC")
+function_with_args("AAA", "BBB", "CCC", "DDD")
+function_with_args("AAA", "BBB", "CCC", "DDD", "EEE")
+function_with_args("AAA", "BBB", "CCC", "DDD", "EEE", "FFF")
+function_with_args("AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG")
+
+
+print("------------------------------------------------------------")  # 60個
+
+def add(x, y):
+    return x + y
+
+
+def mul(x, y):
+    return x * y
+
+
+def running(func, arg1, arg2):
+    return func(arg1, arg2)
+
+
+result1 = running(add, 5, 10)  # add函數當作參數
+print(result1)
+result2 = running(mul, 5, 10)  # mul函數當作參數
+print(result2)
 
 print("------------------------------------------------------------")  # 60個
 
 
+def mysum(*args):
+    return sum(args)
+
+
+def run_with_multiple_args(func, *args):
+    return func(*args)
+
+
+print(run_with_multiple_args(mysum, 1, 2, 3, 4, 5))
+print(run_with_multiple_args(mysum, 6, 7, 8, 9))
+
+
+print("------------------------------------------------------------")  # 60個
+
+def printmsg():
+    """函數本身沒有定義變數, 只有執行列印全域變數功能"""
+    print("函數列印: ", msg)  # 列印全域變數
+
+
+msg = "Global Variable"  # 設定全域變數
+print("主程式列印: ", msg)  # 列印全域變數
+printmsg()  # 呼叫函數
+
 print("------------------------------------------------------------")  # 60個
 
 
+def printmsg():
+    """函數本身有定義變數, 將執行列印區域變數功能"""
+    msg = "Local Variable"  # 設定區域變數
+    print("函數列印: ", msg)  # 列印區域變數
+
+
+msg = "Global Variable"  # 這是全域變數
+print("主程式列印: ", msg)  # 列印全域變數
+printmsg()  # 呼叫函數
+
+print("------------------------------------------------------------")  # 60個
+
+
+def printmsg():
+    global msg
+    msg = "Java"  # 更改全域變數
+    print(f"函數列印  :更改後: {msg}")
+
+
+msg = "Python"
+print(f"主程式列印:更改前: {msg}")
+printmsg()
+print(f"主程式列印:更改後: {msg}")
+
+print("------------------------------------------------------------")  # 60個
+
+
+def greeting(name):
+    """Python函數需傳遞名字name"""
+    print("Hi,", name, "Good Morning!")
+
+
+greeting("Nelson")
+
+print("------------------------------------------------------------")  # 60個
+
+
+def greeting(name):
+    """Python函數需傳遞名字name"""
+    print("Hi, " + name + " Good Morning!")
+
+
+greeting("Nelson")
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+def mycar(cars, func):
+    for car in cars:
+        print(func(car))
+
+
+def wdcar(carbrand):
+    return "My dream car is " + carbrand.title()
+
+
+dreamcars = ["porsche", "rolls royce", "maserati"]
+mycar(dreamcars, wdcar)
+
+print("------------------------------------------------------------")  # 60個
+
+
+def mycar(cars, func):
+    for car in cars:
+        print(func(car))
+
+
+dreamcars = ["porsche", "rolls royce", "maserati"]
+mycar(dreamcars, lambda carbrand: "My dream car is " + carbrand.title())
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+def oddfn(x):
+    return x if (x % 2 == 1) else None
+
+
+mylist = [5, 10, 15, 20, 25, 30]
+filter_object = filter(oddfn, mylist)  # 傳回filter object
+
+# 輸出奇數串列
+print("奇數串列: ", [item for item in filter_object])
+
+print("------------------------------------------------------------")  # 60個
+
+
+def oddfn(x):
+    return x if (x % 2 == 1) else None
+
+
+mylist = [5, 10, 15, 20, 25, 30]
+filter_object = filter(oddfn, mylist)  # 傳回filter object
+oddlist = [item for item in filter_object]
+# 輸出奇數串列
+print("奇數串列: ", oddlist)
+
+print("------------------------------------------------------------")  # 60個
+
+mylist = [5, 10, 15, 20, 25, 30]
+
+oddlist = list(filter(lambda x: (x % 2 == 1), mylist))
+
+# 輸出奇數串列
+print("奇數串列: ", oddlist)
+
+print("------------------------------------------------------------")  # 60個
+
+mylist = [5, 10, 15, 20, 25, 30]
+
+squarelist = list(map(lambda x: x**2, mylist))
+
+# 輸出串列元素的平方值
+print("串列的平方值: ", squarelist)
 
 print("------------------------------------------------------------")  # 60個
 

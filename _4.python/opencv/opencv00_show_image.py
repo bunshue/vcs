@@ -375,7 +375,6 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
 
 plt.show()
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 # 用 OpenCV 讀取並顯示圖片
@@ -501,3 +500,82 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+image = cv2.imread(filename)
+b, g, r = cv2.split(image)
+#print(b)
+#print(g)
+#print(r)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("OpenCV_ai_03")
+
+image_blue = cv2.imread(filename)
+image_green = cv2.imread(filename)
+image_red = cv2.imread(filename)
+image_blue[:,:,1] = 0    # 將綠色設為 0
+image_blue[:,:,2] = 0    # 將紅色設為 0
+image_green[:,:,0] = 0   # 將藍色設為 0
+image_green[:,:,2] = 0   # 將紅色設為 0
+image_red[:,:,0] = 0     # 將藍色設為 0
+image_red[:,:,1] = 0     # 將綠色設為 0
+
+cv2.imshow('image blue', image_blue)
+cv2.imshow('image green', image_green)
+cv2.imshow('image red', image_red)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+image = cv2.imread(filename)
+print('原圖為彩色')
+cv2.imshow('image1', image)
+print('彩色轉灰階')
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉換成灰階影像
+
+cv2.imshow('image', image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+image = cv2.imread(filename)  #讀取本機圖片
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
+
+#三個影像橫向拼接 np.hstack
+image_hstack = np.hstack((image, image, image))
+
+#二個影像縱向拼接 np.vstack
+image_vstack = np.vstack((image_hstack, image_hstack))
+
+plt.imshow(cv2.cvtColor(image_vstack, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
