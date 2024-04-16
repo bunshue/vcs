@@ -1,7 +1,3 @@
-"""
-一本精通：OpenCV 與 AI 影像辨識
-
-"""
 
 import os
 import sys
@@ -15,7 +11,7 @@ import cv2
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
-"""
+''' OK
 print("OpenCV VideoCapture 01 錄影")
 
 cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
@@ -42,7 +38,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 02 錄影")
+print("OpenCV VideoCapture 02 錄影 灰階")
 
 cap = cv2.VideoCapture(0)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -92,9 +88,9 @@ while True:
 cap.release()
 out.release()      # 釋放資源
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
-"""
+
 print("OpenCV VideoCapture 04 兩個camera")
 
 ratio = 3
@@ -134,7 +130,7 @@ while True:
 cap1.release()
 cap2.release()
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 05 N X N")
@@ -354,16 +350,20 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-
+'''
 print("------------------------------------------------------------")  # 60個
+print("OpenCV VideoCapture 14 加 logo")
 
-print("OpenCV VideoCapture 14")
-logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+logo_filename = 'C:/_git/vcs/_4.python/_data/logo1.png'
+
 logo = cv2.imread(logo_filename)
+logo = cv2.resize(logo, (128,128))
+
 size = logo.shape
 img = np.zeros((480,640,3), dtype='uint8')
 img[0:480, 0:640] = '255'
 img[0:size[0], 0:size[1]] = logo
+
 img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, mask1  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
 logo = cv2.bitwise_and(img, img, mask = mask1 )
@@ -388,7 +388,6 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
 print("OpenCV VideoCapture 15")
 
 logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
@@ -419,7 +418,6 @@ cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
 print("OpenCV VideoCapture 16 Webcam影像轉成gif")
 
 from PIL import Image,ImageSequence

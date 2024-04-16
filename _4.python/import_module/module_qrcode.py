@@ -3,10 +3,19 @@ QR code
 
 """
 
+import qrcode
+import qrcode.image.svg
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -14,37 +23,37 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
 print('qrcode：qrcode產生器')
 
-import qrcode
-import qrcode.image.svg
-
 encode_text = 'https://www.google.com.tw/'
 
-print('qrcode.make 01------------------------------------------------------------')	#60個
+print('使用 qrcode.make ------------------------------------------------------------')	#60個
 
 qrcode_image = qrcode.make(encode_text)
 print("檔案格式", type(qrcode_image))
 
+plt.gray()
 plt.imshow(qrcode_image)
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-qrcode_image = qrcode.make(encode_text)  # 要轉換成 QRCode 的文字
-qrcode_image.show()  # 顯示圖片
-qrcode_image.save("tmp_qrcode08.png")  # 儲存圖片
 
 print("------------------------------------------------------------")  # 60個
 
 qrcode_image = qrcode.make(encode_text, image_factory = qrcode.image.svg.SvgPathImage)  # 要轉換成 QRCode 的文字
-# qrcode_image.show()                # SVG 無法使用
-qrcode_image.save("tmp_qrcode10.svg")  # 儲存圖片，注意副檔名為 SVG
+
+""" 無法直接顯示SVG檔
+qrcode_image.show()                # SVG 無法使用
+plt.gray()
+plt.imshow(qrcode_image)
+plt.show()
+"""
 
 print("------------------------------------------------------------")  # 60個
+
+#QR code 存圖
 
 #QR code 存 jpg 檔
 qrcode_image = qrcode.make(encode_text)                 # 建立QR code 物件
@@ -57,14 +66,11 @@ qrcode_image.save('tmp_qrcode02.png')
 qrcode_image = qrcode.make(encode_text, image_factory=qrcode.image.svg.SvgPathImage)
 qrcode_image.save('tmp_qrcode03.svg')
 
+
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
-print('qrcode.QRCode 01------------------------------------------------------------')	#60個
+print('使用 qrcode.QRCode ------------------------------------------------------------')	#60個
 
 print('紅色碼、藍色背景')
 qr = qrcode.QRCode(
@@ -76,7 +82,6 @@ qr.add_data(encode_text)
 qr.make(fit=True)
 qrcode_image = qr.make_image(fill_color="red", back_color="blue")
 
-qrcode_image.save('tmp_qrcode04.png')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -87,7 +92,7 @@ qr = qrcode.QRCode(version=1,
                    border=4)
 qr.add_data(encode_text)
 qrcode_image = qr.make_image(fill_color='blue', back_color='yellow')
-qrcode_image.save("tmp_qrcode05.jpg")
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -105,7 +110,7 @@ width, height = qrcode_image.size            # QR code的寬與高
 with Image.open(filename) as obj:
     obj_width, obj_height = obj.size
     qrcode_image.paste(obj, ((width-obj_width)//2, (height-obj_height)//2))
-qrcode_image.save("tmp_qrcode06.jpg")
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -114,11 +119,15 @@ qr.add_data(encode_text)  # 要轉換成 QRCode 的文字
 qr.make(fit=True)  # 根據參數製作為 QRCode 物件
 
 qrcode_image = qr.make_image()  # 產生 QRCode 圖片
-qrcode_image.show()  # 顯示圖片
-qrcode_image.save("tmp_qrcode09.png")  # 儲存圖片
+
+#qrcode_image.show()  # 顯示圖片
+plt.gray()
+plt.imshow(qrcode_image)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+#產生SVG的方法比較特別
 """
 下方的程式使用「進階設定」的方式產生 QRcode，額外載入 qrcode.image.svg，
 在 qrcode.QRCode 裡新增 image_factory=qrcode.image.svg.SvgPathImage 參數，
@@ -136,7 +145,9 @@ qr.add_data(encode_text)
 qr.make(fit=True)
 
 qrcode_image = qr.make_image()
-# qrcode_image.show()               # SVG 無法使用
+
+#qrcode_image.show()               # SVG 無法使用
+
 qrcode_image.save("tmp_qrcode11.svg")  # 儲存圖片，注意副檔名為 SVG
 
 print("------------------------------------------------------------")  # 60個
@@ -239,7 +250,6 @@ qrcode_image = qr.make_image(image_factory=StyledPilImage, embeded_image_path=fi
 qrcode_image.save("tmp_qrcode12.png")
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 
 print("barcode------------------------------------------------------------")  # 60個
 
@@ -279,7 +289,6 @@ ean.save('ean13_barcode')
 ean = EAN(text, writer=ImageWriter())
 ean.save('ean13_barcode')
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -287,12 +296,14 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+print("------------------------------------------------------------")  # 60個
 
-"""
-qrcode_image.show()
-qrcode_image.save('tmp_qrcode07.jpg')
-
-"""
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
 

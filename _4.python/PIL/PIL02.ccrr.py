@@ -56,7 +56,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
-'''
+
 print('裁剪 .crop ST------------------------------------------------------------')	#60個
 
 print('測試 裁剪 crop x, y, w, h')
@@ -147,6 +147,31 @@ for x in range(20, W-20, cropW):         # 雙層迴圈合成
 
 print('------------------------------------------------------------')	#60個
 
+#使用pillow操作图像
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 檔案 => PIL影像
+img = Image.open(filename)
+
+# 檔案 => PIL影像
+img2 = Image.open(filename)
+
+#img3 = img2.crop((335, 435, 430, 615))
+img3 = img2.crop((100, 100, 150, 150))
+for x in range(4):
+    for y in range(5):
+        img2.paste(img3, (95 * y , 180 * x))
+
+img2.resize((img.size[0] // 2, img.size[1] // 2))
+img2.rotate(90)
+
+plt.imshow(img2)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
 
 
 print('複製 .copy SP------------------------------------------------------------')	#60個
@@ -199,9 +224,6 @@ print('旋轉 .rotate ST--------------------------------------------------------
 
 print('測試 旋轉 rotate')
 
-# 檔案 => PIL影像
-image = Image.open(filename)
-
 print('旋轉90度')
 image90 = image.rotate(90)
 
@@ -234,19 +256,7 @@ image2 = image.rotate(60,Image.BILINEAR,1,None,None,'#BBCC55')
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-print('旋轉 .rotate SP------------------------------------------------------------')	#60個
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-# 檔案 => PIL影像
-image = Image.open(filename)
+print('測試 旋轉 transpose')
 
 print('左右相反')
 image1 = image.transpose(Image.FLIP_LEFT_RIGHT)   # 左右
@@ -263,6 +273,8 @@ transpose1 = image.transpose(Image.TRANSPOSE)
 transpose2 = image.transpose(Image.TRANSVERSE)
 
 #transpose()和rotate()沒有性能差別。
+
+print('旋轉 .rotate SP------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
@@ -311,67 +323,6 @@ print('輸出圖片資料夾 : ', target_dir)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-image1 = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
-#print('顯示原圖')
-#plt.imshow(image1)
-#plt.show()
-
-# PIL影像 => 灰階
-image1g = image1.convert('L')	#轉換成灰階圖像
-plt.imshow(image1g)      #灰階圖
-plt.show()
-
-W, H = image1g.size
-print('原圖大小 W =', W, ', H =', H)
-
-x_st = 100
-y_st = 200
-w = 200
-h = 200
-image2 = image1g.crop((x_st, y_st, x_st + w, y_st + h))
-
-plt.imshow(image2)
-plt.show()
-
-image2_hist = image2.histogram()
-
-W2, H2 = 400, 200
-print('把原圖轉成', W2, 'X', H2, '大小')
-image3 = image1.resize((W2, H2), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
-
-plt.imshow(image3)
-plt.show()
-
-image1g = image3.convert('L')	#轉換成灰階圖像
-hist = image1g.histogram()
-
-r, g, b = image3.split()   #r, g, b為三個通道的list
-print('r', r)
-print('g', g)
-print('b', b)
-r_hist = r.histogram()
-g_hist = g.histogram()
-b_hist = b.histogram()
-
-print('len = ', len(image2_hist))
-ind = np.arange(0, len(image2_hist))
-
-plt.plot(ind, image2_hist, color = 'cyan', label = 'cropped')
-plt.plot(ind, hist, color = 'black', lw = 2, label = 'original')
-plt.plot(ind, r_hist, color = 'red', label = 'Red Plane')
-plt.plot(ind, g_hist, color = 'green', label = 'Green Plane')
-plt.plot(ind, g_hist, color = 'blue', label = 'Blue Plane')
-plt.xlim(0-10, 256+10)
-plt.ylim(0, 8000)
-plt.legend()
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 print('合併圖 2 X 4 a')
 
 bg = Image.new("RGB", (1200, 800), "#000000")  # 產生一張 1200x800 的全黑圖片
@@ -400,54 +351,21 @@ bg.save("tmp_compound2X4b.jpg")
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-logo_filename = 'C:/_git/vcs/_4.python/_data/logo1.png'
+print('撈出一個資料夾內的所有圖片')
 
-# 檔案 => PIL影像
-image = Image.open(filename)
-image_w, image_h = image.size  # 取得圖片尺寸
+images = glob.glob("./data/*.jpg")  # 讀取資料夾裡所有的圖片, 撈出一層
 
-# 檔案 => PIL影像
-icon = Image.open(logo_filename)
-# 縮放至適當大小
-icon = icon.resize((128, 128), Image.LANCZOS) # 使用 LANCZOS 調整影像大小
-
-x_st, y_st = image_w-128-20, 20
-image.paste(icon, (x_st, y_st), icon)  # 設定 icon 左上角座標
-
-plt.imshow(image)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print('將一個資料夾內的所有圖片加上logo')
-
-foldername = 'tmp_watermark'
-
-if not os.path.exists(foldername):
-    os.mkdir(foldername)
-
-logo_filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.png'
-
-images = glob.glob("./data/*.jpg")  # 讀取 demo 資料夾裡所有的圖片, 撈出一層
-
-# 檔案 => PIL影像
-icon = Image.open(logo_filename)
 for i in images:
     #print(i)
     name = i.split("/")[::-1][0]  # 取得圖片名稱
     #print(name)
-    # 檔案 => PIL影像
-    image = Image.open(i)  # 開啟圖片
-    
-    image.paste(icon, (0, 0), icon)  # 加入浮水印
 
     short_filename = os.path.basename(i)
-    #print("短檔名 :", short_filename)
-    image.save(f"./{foldername}/{short_filename}")  # 以原本的名稱存檔
+    print("短檔名 :", short_filename)
 
 print("------------------------------------------------------------")  # 60個
 
+#半透明貼上浮水印圖片
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 logo_filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.png'
 
@@ -468,9 +386,11 @@ image.paste(icon, (x, y), icon)  # 合成浮水印
 image.convert("RGBA")  # 圖片轉換為 RGBA 模式 ( 才能調整 alpha 色版 )
 image.putalpha(100)  # 調整透明度，範圍 0～255，0 為全透明
 image2.paste(image, (0, 0), image)  # 合成底圖
-#image2.save("./tmp_elephant_add_watermark.jpg")
+image2.save("./tmp_elephant_add_watermark.jpg")
 
 print("------------------------------------------------------------")  # 60個
+
+#製作馬賽克效果
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
 
@@ -552,7 +472,7 @@ for i, f in enumerate(files):
     image.close()   
 
 print('轉換尺寸及灰階處理結束！')
-'''
+
 print('------------------------------------------------------------')	#60個
 
 print("生成縮略圖 thumbnail")
@@ -571,9 +491,6 @@ print("------------------------------------------------------------")  # 60個
 print("PIL_operation")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-plt.figure()
-# 顯示原圖
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -616,7 +533,6 @@ print(image.size)
 plt.subplot(234)
 plt.title(u'縮略圖')
 plt.imshow(image)
-#image.save('tmp_pic1.jpg')# 保存縮略圖
 
 #調整圖像尺寸
 # 檔案 => PIL影像
@@ -629,44 +545,11 @@ plt.subplot(235)
 plt.title(u'調整尺寸後的圖像')
 plt.imshow(image)
 
-#旋轉圖像45°
-# 檔案 => PIL影像
-image=Image.open(filename)
-
-image=image.rotate(45)
-
 plt.subplot(236)
-plt.title(u'旋轉45°後的圖像')
-plt.imshow(image)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-#使用pillow操作图像
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-img = Image.open(filename)
-
-# 檔案 => PIL影像
-img2 = Image.open(filename)
-
-#img3 = img2.crop((335, 435, 430, 615))
-img3 = img2.crop((100, 100, 150, 150))
-for x in range(4):
-    for y in range(5):
-        img2.paste(img3, (95 * y , 180 * x))
-
-img2.resize((img.size[0] // 2, img.size[1] // 2))
-img2.rotate(90)
-
-plt.imshow(img2)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
 
 """ 處理資料夾有問題
 foldername = 'C:/_git/vcs/_1.data/______test_files3/DrAP_test'
@@ -719,21 +602,6 @@ plt.imshow(image_MXN)
 plt.show()
 
 print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-savefile = "tmp_saveJPG2.jpg"
-
-# 檔案 => PIL影像
-img = Image.open(filename)
-if img.format == "PNG":
-    newimg = Image.new("RGB", img.size, "WHITE")
-    newimg.paste(img, mask=img)             # 將PNG檔壓在白底圖片上
-    newimg.save(savefile, format="JPEG")    # JPG轉存檔案
-elif img.format == "JPEG":
-    img.save(savefile, format="JPEG")       # JPG轉存檔案
-
-print("------------------------------------------------------------")  # 60個
 
 from pathlib import Path
 
@@ -798,33 +666,12 @@ print('------------------------------------------------------------')	#60個
 """
 # 存檔
 # 檔案 => PIL影像 => 檔案
-image2.save("tmp_pic31_resize.jpg" )
-image2.save(savefile, format="PNG")
-
-
-"""
-
-
+image.save("tmp_pic31_resize.jpg" )
+image.save(savefile, format="PNG")
+image.save('tmp_pic1.jpg')# 保存縮略圖
+image.save(savefile, format="JPEG")       # JPG轉存檔案
 
 """
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-
-# 檔案 => PIL影像
-image = Image.open(filename)
-plt.imshow(image)
-plt.show()
-
-image2 = image.convert('1') #影像轉灰階
-plt.imshow(image2)
-plt.show()
-"""
-
-
-"""
-
-"""
-
-
 
 print("------------------------------------------------------------")  # 60個
 

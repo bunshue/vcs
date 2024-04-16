@@ -76,8 +76,8 @@ plt.pie(
 )
 
 # 設定 legnd 的位置，將圖表顯示出來，並顯示圖例名稱
-plt.legend(loc="right")  # 設定 legnd 的位置
-# plt.legend()
+plt.legend(loc="right")  # 設定 legend 的位置
+plt.title('指定顏色 使用圖例')
 
 # 第二張圖
 plt.subplot(232)
@@ -97,6 +97,7 @@ plt.pie(
     shadow=True,
     startangle=90,
 )
+plt.title('指定顏色')
 
 # 第三張圖
 plt.subplot(233)
@@ -215,19 +216,16 @@ plt.pie(sizes,
 # 第三張圖
 plt.subplot(233)
 
-sizes = [25, 30, 15, 10]
-labels = ["北部", "西部", "南部", "東部"]
-colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.2, 0)
-plt.pie(sizes, 
-	explode = explode, 
-	labels = labels, 
-	colors = colors,
-	labeldistance = 1.1, 
-	autopct = "%2.1f%%", 
-	pctdistance = 0.6,
-	shadow = True,
-	startangle = 90)
+labels = ["Python", "C++", "Java", "JS", "C", "C#"]
+ratings = [5, 6, 15, 3, 12, 4]
+explode = (0, 0, 0, 0.2, 0, 0.2)
+ 
+patches, texts = plt.pie(ratings, 
+                         labels=labels,
+                         explode=explode)
+plt.legend(patches, labels, loc="best")
+plt.title("使用回傳值") 
+plt.axis("equal")
 
 
 # 第四張圖
@@ -280,73 +278,6 @@ plt.pie(
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="派圖 集合 3",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-labels = ["Python", "C++", "Java", "JS", "C", "C#"]
-ratings = [5, 6, 15, 3, 12, 4]
- 
-plt.pie(ratings, labels=labels)
-plt.title("程式語言的使用率")  
-plt.axis("equal")
-
-
-# 第二張圖
-plt.subplot(232)
-
-labels = ["Python", "C++", "Java", "JS", "C", "C#"]
-ratings = [5, 6, 15, 3, 12, 4]
-explode = (0, 0, 0, 0.2, 0, 0.2)
- 
-plt.pie(ratings, 
-        labels=labels,
-        explode=explode)
-plt.title("程式語言的使用率")
-plt.axis("equal")
-
-# 第三張圖
-plt.subplot(233)
-
-labels = ["Python", "C++", "Java", "JS", "C", "C#"]
-ratings = [5, 6, 15, 3, 12, 4]
-explode = (0, 0, 0, 0.2, 0, 0.2)
- 
-patches, texts = plt.pie(ratings, 
-                         labels=labels,
-                         explode=explode)
-plt.legend(patches, labels, loc="best")
-plt.title("程式語言的使用率") 
-plt.axis("equal")
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
-
-
-
-plt.show()
 
 
 

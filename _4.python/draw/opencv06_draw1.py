@@ -60,12 +60,12 @@ x1, y1 = 50, 50
 x2, y2 = 250, 50
 #畫直線 起 終 色 寬
 cv2.line(image, (x1, y1), (x2, y2), color, line_width)
-cv2.line(image, (x1, y1), (x2, y2), 30)  #無color, 黑色線 1 點
+cv2.line(image, (x1, y1), (x2, y2), 30)  #無color, 即 黑色線 1 點
 cv2.line(image, (x1, y1+30), (x2, y2+30), (0, 255, 0), 15, lineType=cv2.LINE_AA)
 
 print('畫箭頭')
 #畫箭頭 起 終 色 寬
-cv2.arrowedLine(image,(x1, y1+60),(x2, y2+60),(0,0,255),5)
+cv2.arrowedLine(image,(x1, y1+60),(x2, y2+60),(255,0,0),5)
 
 print('畫矩形 空心')
 color = (0, 0, 255) #B G R
@@ -82,15 +82,15 @@ print('畫矩形 實心')
 color = (0, 255, 0) #B G R
 line_width = -1
 #畫矩形 左上 右下 色 寬(-1, 填滿)
-w, h = 150, 100
+w, h = 150-50, 100-50
 #矩形之左上點
-x1, y1 = 50, 270
+x1, y1 = 50+25, 150+25
 #矩形之右下點
 x2, y2 = x1+w, y1+h
 cv2.rectangle(image,(x1,y1),(x2,y2),color, line_width)#線條寬度為負數 代表實心
 
 print('畫圓形 空心')
-cx, cy = 360, 60  # 圓心
+cx, cy = 60, 320  # 圓心
 radius = 50  # 半徑
 color = (0, 255, 255) # 顏色
 linewidth = 2 # 線寬
@@ -101,7 +101,7 @@ linewidth = -1 #線寬 負值代表實心
 cv2.circle(image,(cx, cy), radius // 2, color, linewidth)  # 設定 -1
 
 print('畫橢圓形')
-cx, cy = 530, 60  # 橢心
+cx, cy = 220, 320  # 橢心
 AA, BB = 100, 50  # 長軸 短軸
 angle = 0  # 順時鐘旋轉角度
 color = (0, 0, 255)
@@ -110,15 +110,16 @@ linewidth = 5 #線條寬度, 負數代表實心
 #畫橢圓              中心  長軸 短軸 旋轉  開始 結束角度 顏色 線寬
 cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0, 360, color, linewidth) #空心
 cv2.ellipse(image, (cx, cy), (AA//2, BB//2), angle, 0, 360, color, -1)  #實心
-cv2.ellipse(image, (530, 120), (100, 50),0,0,180,255,-1)#藍色半橢圓
 
-print('# 改一塊顏色')
-image[400:450, 50:100] = [0,0,255]
+cv2.ellipse(image, (cx, cy+70), (100, 50),0,0,180,255,-1)#藍色半橢圓
+
+print('改一塊顏色')
+image[170:250, 220:300] = [255,0,0]
 
 print('畫多邊形')
 
 #設定頂點座標
-x_st, y_st = 350, 200
+x_st, y_st = 320, 20
 dd = 50
 px1, py1 = x_st, y_st
 px2, py2 = x_st-dd, y_st+dd
@@ -130,22 +131,30 @@ px6, py6 = x_st+dd, y_st+dd
 pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6]])
 #pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6]], np.int32)
 
-cv2.polylines(image, [pts], True, (255, 0, 0), 2)   #True表示封口
+cv2.polylines(image, [pts], True, (0, 0, 255), 2)   #True表示封口
 #True: 頭尾相連, False: 頭尾不相連
 
-print('畫多邊形')
-pts = np.array([[10,5],[20,30],[70,20],[50,10]], np.int32)
-pts = pts.reshape((-1,1,2))
-cv2.polylines(image,[pts],True,(0,255,255))
+x_st, y_st = 320, 20+20
+dd = 40
+px1, py1 = x_st, y_st
+px2, py2 = x_st-dd, y_st+dd
+px3, py3 = x_st-dd, y_st+dd*2
+px4, py4 = x_st, y_st+dd*3
+px5, py5 = x_st+dd, y_st+dd*2
+px6, py6 = x_st+dd, y_st+dd
 
-"""
-pts = np.array([[150,50],[250,100],[150,250],[50,100]])   # 產生座標陣列
+pts = np.array([[px1, py1],[px2, py2],[px3, py3],[px4, py4],[px5, py5],[px6, py6]])   # 產生座標陣列
+
 #畫多邊形 空心
-cv2.polylines(image,[pts],True,(0,0,255),5)   # 繪製多邊形
+#cv2.polylines(image,[pts],True,(0,255,0),5)   # 繪製多邊形
 
 #畫多邊形 實心
-cv2.fillPoly(image,[pts],(0,0,255))
-"""
+cv2.fillPoly(image,[pts],(0,255,0))
+
+print('畫多邊形 保留測試reshape')
+pts = np.array([[10,5],[20,30],[70,20],[50,10]], np.int32)
+pts = pts.reshape((-1,1,2))
+cv2.polylines(image,[pts],True,(255,0,0))
 
 cv2.imshow('OpenCV Draw 1', image)
 cv2.waitKey(0)
@@ -159,37 +168,67 @@ H = 480
 # 快速產生 WxH，每個項目為 [0,0,0] 的三維陣列
 image = np.zeros((H, W,3), dtype='uint8')
 
-#寫字1
-text = 'Hello'
-x_st, y_st = 450, 400
+
+font = cv2.FONT_HERSHEY_SIMPLEX
+line_type = cv2.LINE_AA #文字線條樣式
+
+#畫字時, 起點是左下角
+
+x_st, y_st = 20, 40
+font_size = 1 #文字縮放比例
+color = (0, 255, 0) #B G R
+line_width = 1
+cv2.putText(image, "Welcome 1111", (x_st, y_st), font, font_size, color, line_width, line_type)
+
+
+x_st, y_st = 20, 80
+font_size = 1 #文字縮放比例
+color = (0, 0, 255) #B G R
+line_width = 1
+cv2.putText(image, "Welcome 2222", (x_st, y_st), font, font_size, color, line_width)
+#加文字線條樣式
+#cv2.putText(image, "Welcome 3333", (x_st, y_st), font, font_size, color, line_width, line_type)
+
+text = 'Welcome 3333'
+x_st, y_st = 20, 150
+font = cv2.FONT_HERSHEY_COMPLEX
+font_size = 2 #文字縮放比例
+color = (255, 0, 0) #B G R
+line_width = 2
+text_size = cv2.getTextSize(text, font, font_size, line_width)
+print('字體大小 : ', text_size)
+w = text_size[0][0]
+h = text_size[0][1]
+
+cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)  #預設, False
+#cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, False)    #False: 從左上畫起
+#cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, True)     #True:  從左下畫起
+cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), (0, 0, 255), 2)
+
+
+x_st, y_st = 20, 220
 fontFace = cv2.FONT_HERSHEY_SIMPLEX
 fontScale = 2.5
 color = (0,0,255)
 thickness = 5
 lineType = cv2.LINE_AA
-cv2.putText(image, text, (x_st, y_st), fontFace, fontScale, color, thickness, lineType)
+cv2.putText(image, "Welcome 4444", (x_st, y_st), fontFace, fontScale, color, thickness, lineType)
 
-# 寫字2
-text = 'Hello'
-x_st, y_st = 450, 400+50
+x_st, y_st = 20, 260
 font = cv2.FONT_HERSHEY_COMPLEX_SMALL
 color = (0,0,255)
 thickness = 1
 lineType = cv2.LINE_AA
-cv2.putText(image, text, (x_st, y_st), font, 1, color, thickness, lineType)
+cv2.putText(image, "Welcome 5555", (x_st, y_st), font, 1, color, thickness, lineType)
 
-#寫字3
 from PIL import ImageFont, ImageDraw, Image    # 載入 PIL 相關函式庫
-x_st, y_st = 450, 200
+x_st, y_st = 20, 280
 #font_filename = 'NotoSansTC-Regular.otf'          # 設定字型路徑
 font = ImageFont.truetype(font_filename, 50)      # 設定字型與文字大小
 imagePil = Image.fromarray(image)                # 將 image 轉換成 PIL 影像
 draw = ImageDraw.Draw(imagePil)                # 準備開始畫畫
-draw.text((x_st, y_st), '大家好～\n嘿嘿嘿～', fill=(255, 255, 0), font=font)  # 畫入文字，\n 表示換行
+draw.text((x_st, y_st), "歡迎來到美國", fill=(255, 255, 0), font=font)  # 畫入文字，\n 表示換行
 image = np.array(imagePil)                       # 將 PIL 影像轉換成 numpy 陣列
-
-
-
 
 
 
@@ -252,56 +291,6 @@ image.fill(255) #將這個矩陣全部填入255 => 白色
 # Fill image with gray color(set each pixel to gray)
 #image[:] = (128, 128, 128)
 
-print('------------------------------------------------------------')	#60個
-
-font = cv2.FONT_HERSHEY_SIMPLEX
-line_type = cv2.LINE_AA #文字線條樣式
-
-#畫字時, 起點是左下角
-
-print('畫字')
-text = 'Hello, World!'
-x_st = 20
-y_st = 80
-font_size = 1 #文字縮放比例
-color = (0, 0, 255) #B G R
-line_width = 1
-cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width)
-y_st += 30
-cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)
-
-print('------------------------------------------------------------')	#60個
-
-text = "ABCDEFGHIJK"
-x_st = 20
-y_st = 40
-font_size = 1 #文字縮放比例
-color = (0, 255, 0) #B G R
-line_width = 1
-cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)
-
-print('------------------------------------------------------------')	#60個
-
-print('寫在正中央, 先量測字體大小')
-text = 'Hello, World!'
-x_st = 20
-y_st = 200
-font = cv2.FONT_HERSHEY_COMPLEX
-font_size = 2 #文字縮放比例
-color = (255, 0, 0) #B G R
-line_width = 2
-text_size = cv2.getTextSize(text, font, font_size, line_width)
-print('字體大小 : ', text_size)
-w = text_size[0][0]
-h = text_size[0][1]
-x_st = W // 2 - w // 2
-y_st = H // 2 + h // 2
-print(x_st, y_st)
-
-cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)  #預設, False
-#cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, False)    #False: 從左上畫起
-#cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, True)     #True:  從左下畫起
-cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), (0, 0, 255), 2)
 
 print('------------------------------------------------------------')	#60個
 
@@ -317,8 +306,7 @@ fonts = [
 ]
 
 text = 'OpenCV'
-x_st = 450
-y_st = 50
+x_st, y_st = 400, 50
 font_size = 2 #文字縮放比例
 color = (0, 0, 0)   #B G R
 line_width = 1

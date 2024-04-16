@@ -2580,6 +2580,33 @@ namespace _vcs_MakePicture
 
         private void button66_Click(object sender, EventArgs e)
         {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 600;
+            height = 400;
+            bitmap1 = new Bitmap(width, height);
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    bitmap1.SetPixel(xx, yy, Color.Black);
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            sb = new SolidBrush(Color.Lime);
+
+            g.FillRectangle(sb, 0, 0, 400, 400);
+
+            pictureBox1.Image = bitmap1;
+
 
         }
 

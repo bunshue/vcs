@@ -269,6 +269,78 @@ plt.show()
 
 print("測試 09------------------------------------------------------------")  # 60個
 
+img = cv2.imread(filename)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+img = cv2.medianBlur(img, 7)                 # 模糊化，去除雜訊
+output = cv2.Laplacian(img, -1, 1, 5)        # 偵測邊緣
+
+cv2.imshow('image', output)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+print("測試 09------------------------------------------------------------")  # 60個
+
+img = cv2.imread(filename)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+img = cv2.medianBlur(img, 7)                 # 模糊化，去除雜訊
+output = cv2.Sobel(img, -1, 1, 1, 1, 7)      # 偵測邊緣
+
+cv2.imshow('image', output)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+print("測試 09------------------------------------------------------------")  # 60個
+
+img = cv2.imread(filename)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉成灰階
+img = cv2.medianBlur(img, 7)                 # 模糊化，去除雜訊
+output = cv2.Canny(img, 36, 36)              # 偵測邊緣
+print(output)
+
+cv2.imshow('image', output)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+
+print("測試 09------------------------------------------------------------")  # 60個
+
+
+mask = np.zeros((300,300,3), dtype='uint8')      # 建立 300x300 的黑色畫布
+cv2.circle(mask,(150,150),100,(255,255,255),-1)  # 在畫布上中心點加入一個半徑 100 的白色圓形
+mask = cv2.GaussianBlur(mask, (35, 35), 0)       # 進行高斯模糊
+
+cv2.imshow('image', mask)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print("測試 09------------------------------------------------------------")  # 60個
+
+""" TBD
+mask = np.zeros((300,300,3), dtype='uint8')
+cv2.circle(mask,(150,150),100,(255,255,255),-1)
+mask = cv2.GaussianBlur(mask, (35, 35), 0)
+mask = mask / 255                          # 除以 255，計算每個像素的黑白色彩在 255 中所佔的比例
+
+img = cv2.imread(filename)               # 開啟圖片
+bg = np.zeros((300,300,3), dtype='uint8')  # 產生一張黑色背景
+bg = 255 - bg                              # 轉換成白色背景
+img = img / 255                            # 除以 255，計算每個像素的色彩在 255 中所佔的比例
+bg = bg / 255                              # 除以 255，計算每個像素的色彩在 255 中所佔的比例
+
+out  = bg * (1 - mask) + img * mask        # 根據比例混合
+out = (out * 255).astype('uint8')          # 乘以 255 之後轉換成整數
+
+cv2.imshow('image',out)
+cv2.waitKey()
+cv2.destroyAllWindows()
+"""
+
+
+print("測試 09------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

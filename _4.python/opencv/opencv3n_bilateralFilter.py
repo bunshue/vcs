@@ -63,6 +63,17 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+img = cv2.imread(filename)
+output1 = cv2.bilateralFilter(img, 50, 0, 0)
+output2 = cv2.bilateralFilter(img, 50, 50, 100)
+output3 = cv2.bilateralFilter(img, 50, 100, 1000)
+
+cv2.imshow('image1', output1)
+cv2.imshow('image2', output2)
+cv2.imshow('image3', output3)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
 
 print("------------------------------------------------------------")  # 60個
 
