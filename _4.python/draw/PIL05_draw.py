@@ -74,6 +74,7 @@ W, H = 640, 480
 image = Image.new('RGBA', (W, H), "Yellow")  # 指定背景顏色
 image = Image.new("RGB", (W, H), '#00FF00')  # 指定背景顏色
 image = Image.new("RGB", (W, H))  # 無背景顏色, 黑色
+image = Image.new("RGBA", (W, H), (0,0,0,0))  # 指定背景顏色
 image = Image.new("RGB", (W, H), "lightgray")  # 指定背景顏色
 
 #建立繪圖物件
@@ -81,7 +82,7 @@ dw = ImageDraw.Draw(image)
 
 #畫點
 dw.point([(100,100), (100,101), (100,102)], fill='red')
-"""
+
 #畫直線
 x1, y1 = 20, 20
 x2, y2 = 150, 20
@@ -89,7 +90,11 @@ dw.line((x1, y1, x2, y2), fill=(255,0,0), width=3)
 
 x1, y1 = 20, 50
 x2, y2 = 150, 50
-dw.line((x1, y1, x2, y2), fill="blue", width=4)
+dw.line((x1, y1, x2, y2), fill="lime", width=4)
+
+# 畫直線連線
+dw.line([(100, 0), (50,80), (150,80), (100, 0)], fill="blue")
+
 
 #畫矩形
 w, h = 150, 100
@@ -138,84 +143,60 @@ dw.polygon([(x1, y1), (x2, y2), (x3, y3),(x4, y4)],fill='Aqua') # 鼻子
 
 
 dy = 40
-#畫字1, 未設定字型
 x_st, y_st = 300, 40
-mesg = 'Welcome to the United States'
-dw.text((x_st, y_st), mesg)
 
-#畫字2, 有設定字型
-mesg = '歡迎來到美國'
-y_st += dy
-dw.text((x_st + 5, y_st + 5), mesg, font=font, fill=(25,25,25)) #畫陰影
-dw.text((x_st, y_st), mesg, font=font, fill=(128,255,255)) #畫文字
-
-y_st += dy
-strText = 'Welcome to the United States'
-dw.text((x_st, y_st), strText, fill='Blue')         # 使用預設字型與字型大小
-
-
-# 使用古老英文字型, 字型大小是36
-font = ImageFont.truetype('OLDENGL.TTF', 36)
-font = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
-y_st += dy
-dw.text((x_st, y_st), strText, fill='Blue', font=font)
-
-#新細明體中文字型
-font_filename = 'C:/Windows/Fonts/mingliu.ttc'
-
+# 使用古老英文字型
 font_size = 30
-font = ImageFont.truetype(font_filename, font_size)
+font = ImageFont.truetype('OLDENGL.TTF', font_size)
+font = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', font_size)
+dw.text((x_st, y_st), "Welcome 1111", fill='Blue', font=font)# 藍字
+
+font = ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf", font_size)
 y_st += dy
-dw.text((x_st, y_st), "歡迎來到美國", fill = 'Blue', font = font)
+dw.text((x_st, y_st), 'Welcome 2222', font = font, fill = (0, 255, 255, 255))
 
-font_filename = 'C:/Windows/Fonts/mingliu.ttc'
+font=ImageFont.truetype("C:/Windows/fonts/Tahoma.ttf", font_size)
+y_st += dy
+dw.text((x_st, y_st), 'Welcome 3333', font=font, fill=(255,0,255,255))
 
+
+#msch
 font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-font_size = 30
 font = ImageFont.truetype(font_filename, font_size)
 y_st += dy
-dw.text((x_st, y_st), "歡迎來到美國", fill="blue", font=font)
+dw.text((x_st + 5, y_st + 5), "歡迎來到美國111 msch", font=font, fill=(25,25,25)) #畫陰影
+dw.text((x_st, y_st), "歡迎來到美國111 msch", font=font, fill=(128,255,255)) #畫文字
 
-font_size = 30
+# 使用M$的新細明體中文字型
+font_filename = 'C:/Windows/Fonts/mingliu.ttc'
 font = ImageFont.truetype(font_filename, font_size)
-font = ImageFont.truetype('C:\Windows\Fonts\mingliu.ttc', font_size)
 y_st += dy
-dw.text((x_st, y_st), "歡迎來到美國", fill = 'Blue', font = font)
-
-font = ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf",120)
-y_st += dy
-dw.text((x_st, y_st),"歡迎來到美國",font=font,fill=(0,255,255,255))
-
-font = ImageFont.truetype("C:\\Windows\\Fonts\\Arial\\arial.ttf", 40)
-y_st += dy
-dw.text((x_st, y_st), 'Peony', font = font, fill = (0, 255, 255, 255))
-"""
+dw.text((x_st, y_st), "歡迎來到美國222 mingliu", fill="blue", font=font)
 
 
-strText = 'Welcome to the United States'        # 設定欲列印英文字串
-dw.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
-
-# 使用古老英文字型, 字型大小是36
-font = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
-
-dw.text((50,100), strText, fill='Blue', font=font)
-
-font_size = 30
-font = ImageFont.truetype(font_filename, font_size)
-
-dw.text((50,180), "歡迎來到美國", fill='Blue', font=font)
-
-font_size = 30
-font = ImageFont.truetype(font_filename, font_size)
-
-dw.text((50,180), "歡迎來到美國", fill='Blue', font=font)
+plt.imshow(image)
+plt.show()
 
 
+# another
+
+W, H = 640, 480
+image = Image.new("RGB", (W, H), "lightgray")  # 指定背景顏色
+
+#建立繪圖物件
+dw = ImageDraw.Draw(image)
+
+x_st, y_st = 400, 20
+# 繪製點
+for x in range(x_st, x_st+200, 4):
+    for y in range(y_st, y_st+100, 4):
+        dw.point([(x,y)], fill='Green')
 
 # 繪製點
-for x in range(100, 200, 3):
-    for y in range(100, 200, 3):
-        dw.point([(x,y)], fill='Green')
+x_st, y_st = 400, 160
+for i in range(x_st,x_st + 200,10):
+    for j in range(y_st, y_st+100,10):    
+        dw.point([(i,j)],fill="red")  
 
 # 繪製線條, 繪外框線
 dw.line([(0,0), (299,0), (299,299), (0,299), (0,0)], fill="Black")
@@ -228,25 +209,12 @@ for x in range(150, 300, 10):
 for y in range(150, 300, 10):
     dw.line([(0,y), (y-150,300)], fill="Blue")    
 
-
-
-
-
-"""
-#繪點
-for i in range(0,400,10):
-    for j in range(0,300,10):    
-        dw.point([(i,j)],fill="red")  
 #繪直線
-for i in range(0,400,10):
-    dw.line([(i,300),(200,150)],width=2,fill="blue") 
-"""
+for i in range(0,640,10):
+    dw.line([(i,480),(320,320)],width=2,fill="blue") 
 
 plt.imshow(image)
 plt.show()
-
-
-sys.exit()
 
 print('------------------------------------------------------------')	#60個
 
@@ -297,50 +265,6 @@ plt.show()
 """
 
 print('------------------------------------------------------------')	#60個
-
-from matplotlib import patches
-
-#在圖上作畫
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-im=Image.open(filename)
-im_w, im_h = im.size
-W = im_w
-H = im_h
-
-pic = plt.imshow(im, alpha = 0.8)    #alpha顯示
-
-x_st = 20
-y_st = 20
-w = W - 40
-h = H - 40
-
-#畫出矩形
-patch  = patches.Rectangle((x_st, y_st), w, h, fill=False, linewidth=2, color='r')
-pic.axes.add_patch(patch)
-
-#畫多邊形
-vertices = []
-vertices.append((0, 0))
-vertices.append((100, 0))
-vertices.append((100, 100))
-vertices.append((50, 150))
-vertices.append((0, 100))
-vertices.append((0, 0))
-patch = patches.Polygon(vertices, closed=True, fill=False, linewidth=2, color='g')
-pic.axes.add_patch(patch)
-
-text = "AAAAA"
-plt.text(100, 10, text, fontsize=20, weight="bold", va="bottom", color='b')  
-
-text = "BBBBB"
-plt.text(100, 50, text, fontsize=20, va="top", color='b')  #列印文字
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
 
 # 檔案 => PIL影像
 image = Image.open(filename)
@@ -428,23 +352,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-newImage = Image.new('RGBA', (600, 300), 'Yellow')  # 建立300*300黃色底的影像
-dw = ImageDraw.Draw(newImage)
-
-strText = 'Welcome to the United States'        # 設定欲列印英文字串
-dw.text((50,50), strText, fill='Blue')         # 使用預設字型與字型大小
-
-# 使用古老英文字型, 字型大小是36
-font = ImageFont.truetype('C:\Windows\Fonts\OLDENGL.TTF', 36)
-
-dw.text((50,100), strText, fill='Blue', font=font)
-# 使用Microsoft所提供的新細明體中文字型處理中文字體
-
-font = ImageFont.truetype('C:\Windows\Fonts\mingliu.ttc', 48)
-dw.text((50,180), "歡迎來到美國", fill='Blue', font=font)
-
-plt.imshow(newImage)
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -471,43 +378,6 @@ for x in range(50, 251):                                # x軸區間在50-250
 
 plt.imshow(image)
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-#添加水印
-#一、添加文字水印
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像 => RGBA
-im = Image.open(filename).convert('RGBA')
-txt=Image.new('RGBA', im.size, (0,0,0,0))
-font=ImageFont.truetype("c:/Windows/fonts/Tahoma.ttf", 20)
-dw=ImageDraw.Draw(txt)
-dw.text((txt.size[0]-80,txt.size[1]-30), 'Peony', font=font, fill=(255,0,255,255))
-out=Image.alpha_composite(im, txt)
-plt.imshow(out)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-"""
-#二、添加小圖片水印
-
-# 檔案 => PIL影像
-im = Image.open(filename)
-
-# 檔案 => PIL影像
-mark=Image.open("logo_small.gif")
-
-layer=Image.new('RGBA', im.size, (0,0,0,0))
-layer.paste(mark, (im.size[0]-150,im.size[1]-60))
-out=Image.composite(layer,im,layer)
-#out.show()
-plt.imshow(out)
-plt.show()
-
-"""
 
 print('------------------------------------------------------------')	#60個
 

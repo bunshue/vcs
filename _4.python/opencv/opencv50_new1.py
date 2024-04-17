@@ -26,6 +26,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+'''
 print('練習組合成一張大圖 picasa效果')
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -81,8 +82,8 @@ result1 = image1 + image2
 print("兩圖用cv相加")
 result2 = cv2.add(image1, image2)
 
-print("兩圖做比例疊加 左0.8 右0.2")
-result3 = cv2.addWeighted(image1, 0.8, image2, 0.2, 0)
+print("兩圖做比例疊加 左1.0 右1.0")
+result3 = cv2.addWeighted(image1, 1.0, image2, 1.0, 0) # 0 為墊高值
 
 plt.figure(
     num="相加",
@@ -111,11 +112,12 @@ plt.title("兩圖用cv相加")
 plt.imshow(cv2.cvtColor(result2, cv2.COLOR_BGR2RGB))
 
 plt.subplot(236)
-plt.title("兩圖做比例疊加 左0.8 右0.2")
+plt.title("兩圖做比例疊加 左1.0 右1.0")
 plt.imshow(cv2.cvtColor(result3, cv2.COLOR_BGR2RGB))
 
 plt.tight_layout()  # 緊密排列，並填滿原圖大小
 plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -461,79 +463,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-# Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-image = cv2.imread(filename)
-
-print("filter2D 效果")
-kernel = np.ones((9, 9), np.float32) / 81
-image_filter2D = cv2.filter2D(image, -1, kernel)
-
-plt.figure(
-    num="new26 filter2D 效果",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(121)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title("filter2D 效果")
-plt.imshow(cv2.cvtColor(image_filter2D, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
-image = cv2.imread(filename, cv2.COLOR_BGR2GRAY)
-
-kernel_x = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]], dtype=int)  # 水平值一樣, 偵測水平的邊緣
-kernel_y = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]], dtype=int)  # 垂直值一樣, 偵測垂直的邊緣
-
-print("filter2D 效果")
-
-x = cv2.filter2D(image, cv2.CV_16S, kernel_x)
-y = cv2.filter2D(image, cv2.CV_16S, kernel_y)
-
-absX = cv2.convertScaleAbs(x)
-absY = cv2.convertScaleAbs(y)
-
-plt.figure(
-    num="new27",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(131)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(132)
-plt.title("Prewitt_horizon")
-# 躺平的書本的邊緣有被強調出來
-plt.imshow(cv2.cvtColor(absX, cv2.COLOR_BGR2RGB))
-
-plt.subplot(133)
-plt.title("Prewitt_vertical")
-# 直放的書本的邊緣有被強調出來
-plt.imshow(cv2.cvtColor(absY, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 
 def saltpepper(image, n):
     m = int((image.shape[0] * image.shape[1]) * n)
@@ -696,73 +625,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-
-print("原圖 彩色")
-image = cv2.imread(filename)
-
-print("原圖 彩色 轉 灰階1通道")
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-print("gray.shape=", gray.shape)
-
-print("灰階 轉 BGR3通道")
-rgb = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
-print("rgb.shape=", rgb.shape)
-
-plt.figure(
-    num="new32 影像處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(131)
-plt.title("原圖 彩色")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(132)
-plt.title("灰階1通道")
-plt.imshow(cv2.cvtColor(gray, cv2.COLOR_BGR2RGB))
-
-plt.subplot(133)
-plt.title("BGR3通道")
-plt.imshow(cv2.cvtColor(rgb, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-image = cv2.imread(filename)
-
-print("原圖 BGR 轉 RGB")
-rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
-plt.figure(
-    num="new33 影像處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(121)
-plt.title("原圖 B-G-R OK")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(122)
-plt.title("原圖 BGR 轉 RGB NG")
-plt.imshow(cv2.cvtColor(rgb, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
 image = cv2.imread(filename)
 
@@ -793,239 +655,7 @@ plt.imshow(cv2.cvtColor(art, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-image = cv2.imread(filename)
-
-bgra = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
-b, g, r, a = cv2.split(bgra)
-a[:, :] = 125
-bgra125 = cv2.merge([b, g, r, a])
-a[:, :] = 0
-bgra0 = cv2.merge([b, g, r, a])
-
-plt.figure(
-    num="new36 影像處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(221)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.subplot(222)
-plt.title("bgra")
-plt.imshow(cv2.cvtColor(bgra, cv2.COLOR_BGR2RGB))
-
-plt.subplot(223)
-plt.title("bgra125")
-plt.imshow(cv2.cvtColor(bgra125, cv2.COLOR_BGR2RGB))
-
-plt.subplot(224)
-plt.title("bgra0")
-plt.imshow(cv2.cvtColor(bgra0, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-image = cv2.imread(filename, 0)
-
-plt.figure(
-    num="new37 修改一部份資料",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(221)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-print("修改一部份資料 1")
-for i in range(20, 60):  # y
-    for j in range(20, 100):  # x
-        image[i, j] = 255
-
-print("修改一部份資料 2")
-# 測試讀取、修改單個像素值
-print("讀取像素點image.item(3,2)=", image.item(3, 2))
-image.itemset((3, 2), 255)
-print("修改後像素點image.item(3,2)=", image.item(3, 2))
-# 測試修改一個區域的像素值
-for i in range(100, 200):  # y
-    for j in range(20, 60):  # x
-        image.itemset((i, j), 220)
-
-plt.subplot(222)
-plt.title("修改後的圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-print("------------------------------")  # 30個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-image = cv2.imread(filename)
-
-plt.subplot(223)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-print("讀取image[0,0]=", image[0, 0])
-print("讀取image[0,0,0]=", image[0, 0, 0])
-print("讀取image[0,0,1]=", image[0, 0, 1])
-print("讀取image[0,0,2]=", image[0, 0, 2])
-print("讀取image[50,0]=", image[50, 0])
-print("讀取image[100,0]=", image[100, 0])
-# 區域1
-for i in range(0, 50):
-    for j in range(0, 100):
-        for k in range(0, 3):
-            image[i, j, k] = 255  # 白色
-# 區域2
-for i in range(50, 100):
-    for j in range(0, 100):
-        image[i, j] = [128, 128, 128]  # 灰色
-# 區域3
-for i in range(100, 150):
-    for j in range(0, 100):
-        image[i, j] = 0  # 黑色
-# 區域4
-print("讀取image.item(0, 0, 0) = ", image.item(0, 0, 0))
-print("讀取image.item(0, 0, 1) = ", image.item(0, 0, 1))
-print("讀取image.item(0, 0, 2) = ", image.item(0, 0, 2))
-for i in range(200, 250):
-    for j in range(0, 100):
-        for k in range(0, 3):
-            image.itemset((i, j, k), 255)  # 白色
-
-print("修改後image.item(0, 0, 0) = ", image.item(0, 0, 0))
-print("修改後image.item(0, 0, 1) = ", image.item(0, 0, 1))
-print("修改後image.item(0, 0, 2) = ", image.item(0, 0, 2))
-print("修改後image[0, 0] = ", image[0, 0])
-print("修改後image[0, 0, 0] = ", image[0, 0, 0])
-print("修改後image[0, 0, 1] = ", image[0, 0, 1])
-print("修改後image[0, 0, 2] = ", image[0, 0, 2])
-print("修改後image[50, 0] = ", image[50, 0])
-print("修改後image[100, 0] = ", image[100, 0])
-
-plt.subplot(224)
-plt.title("修改後的圖")
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-a = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
-
-plt.figure(
-    num="new38 擷取一塊處理",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(231)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
-
-print("擷取一塊出來, 並顯示之")
-face = a[200:400, 200:380]  # h, w
-
-plt.subplot(232)
-plt.title("擷取一塊出來")
-plt.imshow(cv2.cvtColor(face, cv2.COLOR_BGR2RGB))
-
-print("將其中一塊亂碼化, 並顯示之")
-x_st = 50
-y_st = 50
-w = 100
-h = 180
-face = np.random.randint(0, 256, (h, w, 3))
-a[y_st : y_st + h, x_st : x_st + w] = face
-
-plt.subplot(233)
-plt.title("將其中一塊亂碼化")
-plt.imshow(cv2.cvtColor(a, cv2.COLOR_BGR2RGB))
-
-print("------------------------------")  # 30個
-
-# A圖
-filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp"
-lena = cv2.imread(filename1, cv2.IMREAD_UNCHANGED)
-
-# A圖抓一塊貼到B圖上
-plt.subplot(234)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
-
-# B圖
-filename2 = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-peony = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
-
-plt.subplot(235)
-plt.title("原圖")
-plt.imshow(cv2.cvtColor(peony, cv2.COLOR_BGR2RGB))
-
-print("A圖抓一塊貼到B圖上")
-face = lena[220:400, 250:350]
-peony[160:340, 200:300] = face
-
-plt.subplot(236)
-plt.title("顯示修改後的圖")
-plt.imshow(cv2.cvtColor(peony, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
-image = cv2.imread(filename)
-
-x_st, y_st, w, h = 200, 50, 150, 200
-image_cut = image[y_st : y_st+h, x_st : x_st+w]
-
-print(image_cut.shape)
-
-plt.imshow(cv2.cvtColor(image_cut, cv2.COLOR_BGR2RGB))
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("圖片翻轉 原圖")
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-image = cv2.imread(filename)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title("原圖")
-
-plt.subplot(122)
-image_flip = cv2.flip(image, -999)
-image_flip2 = cv2.flip(image, -88)
-
-plt.imshow(cv2.cvtColor(image_flip, cv2.COLOR_BGR2RGB))
-plt.title("圖片翻轉")
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
+'''
 print("圖片色彩空間的轉換")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
@@ -1043,13 +673,12 @@ filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 image = cv2.imread(filename)
 
 thr, image_binary = cv2.threshold(image, 192, 255, cv2.THRESH_TOZERO)
-
 plt.imshow(cv2.cvtColor(image_binary, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print("去除圖片的雜訊 原圖")
+print("去除圖片的雜訊")
 
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 image2 = cv2.imread(filename)
@@ -1058,11 +687,9 @@ plt.subplot(121)
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-print("去除圖片的雜訊 效果")
-
-plt.subplot(122)
 image2_denoised = cv2.fastNlMeansDenoisingColored(image2, h=5)
 
+plt.subplot(122)
 plt.imshow(cv2.cvtColor(image2_denoised, cv2.COLOR_BGR2RGB))
 plt.title("去除圖片的雜訊")
 
@@ -1133,9 +760,11 @@ fig = plt.figure(
 fig.add_subplot(121)
 plt.title("原始圖像")
 plt.imshow(original_image_test1)
+
 fig.add_subplot(122)
 plt.title("銳化濾波")
 plt.imshow(my_laplace_result_add_abs(original_image_test1, result))
+
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -1151,37 +780,6 @@ plt.show()
 
 plt.imshow(cv2.cvtColor(cl1, cv2.COLOR_BGR2RGB))
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print("equalizeHist_image")
-
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
-
-image = cv2.imread(filename, 0)
-equ = cv2.equalizeHist(image)  # 只能傳入灰度圖
-
-# 繪製結果
-fig = plt.figure(
-    num="equalizeHist_image",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.subplot(121)
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title('原圖')
-
-plt.subplot(122)
-plt.imshow(cv2.cvtColor(equ, cv2.COLOR_BGR2RGB))
-plt.title('equalizeHist')
-
-plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 

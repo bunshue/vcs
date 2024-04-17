@@ -24,7 +24,7 @@ import time
 import random
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # Python 舊式字串格式化
 
 errno = 50159747054
@@ -438,50 +438,6 @@ for key, val in dictList:
 
 print("------------------------------------------------------------")  # 60個
 
-# 利用 表2-2所列的內建函數將輸入數值做轉換
-
-# int()函式將number轉為整數型別
-number = 1234
-print("型別：", type(number))
-print("二進位：", bin(number))
-print("八進位", oct(number))
-print("十六進位", hex(number))
-print("10進位：", number)
-
-# 配合format函式去除前綴字元
-print("二進位：", format(number, "b"))
-print("八進位：", format(number, "o"))
-print("十六進位：", format(number, "x"))
-
-print("------------------------------------------------------------")  # 60個
-
-# 將兩個數值以decimal型別來處理
-
-# 匯入decimal模組的Decimal()方法
-from decimal import Decimal
-
-num1 = Decimal("0.5534")
-num2 = Decimal("0.427")
-num3 = Decimal("0.37")
-print("相加", num1 + num2 + num3)
-print("相減", num1 - num2 - num3)
-print("相乘", num1 * num2 * num3)
-print("相除", num1 / num2)
-
-print("------------------------------------------------------------")  # 60個
-
-# for/in廻圈配合range()函式做數值累加
-
-total = 0  # 儲存加總結果
-count = 0  # 計數器
-for count in range(1, 11):  # 數值1~10
-    total += count  # 將數值累加
-    print("累加值", total)  # 觀看累加結果
-else:
-    print("數值累加完畢...")
-
-print("------------------------------------------------------------")  # 60個
-
 # 雙層for建立九九乘法表
 
 # 建立表頭
@@ -513,91 +469,6 @@ while result < number:
     result *= b
     print(result)  # 輸出後換行
     # print(result, end =', ') #輸出後不換行
-
-print("------------------------------------------------------------")  # 60個
-
-# 兩個數值的區間累加
-
-total = 0
-
-string = "3, 5"
-
-# 輸人兩個數值做區間累加
-
-count, number = eval(string)
-# print('數值', count, end = '')
-
-while count <= number:
-    total += count  # 儲存累加值
-    print(count, total)
-    count += 1  # 計數器
-
-else:
-    # print(' ~', number, '累計: ', total)
-    # print('結束廻圈...')
-    pass
-
-print("------------------------------------------------------------")  # 60個
-
-# while廻圈做分數加總
-
-# total儲存總分，score儲存分數設，初值為0.0
-total = score = 0.0
-count = 0  # 計數器
-# score = float(input('輸入分數，按-1結束-> '))
-
-score = 60
-total = total + score
-count = count + 1
-
-score = 70
-total = total + score
-count = count + 1
-
-score = 90
-total = total + score
-count = count + 1
-
-score = 70
-total = total + score
-count = count + 1
-
-score = 60
-total = total + score
-count = count + 1
-
-average = total / count  # 計算平均值
-print("共", count, "科，總分:", total, ", 平均:", average)
-
-print("------------------------------------------------------------")  # 60個
-
-# break敘述中斷廻圈的執行
-print("數值：", end="")
-result = 0
-for x in range(1, 11):
-    result = x**2
-    # 如果result的值大於就中斷廻圈的執行
-    if result > 20:
-        break
-    print(result, end=", ")
-
-print("------------------------------------------------------------")  # 60個
-
-word = "Python"
-
-# continue敘述
-print("Continue: ", end=" ")
-for cha in word:
-    if cha == "t":
-        continue  # 只中斷此次的執行
-    print(cha, end="")
-
-# break敘述
-print("\nBreak: ", end=" ")
-for cha in word:
-    if cha == "t":
-        break  # 中斷廻圈的執行
-    print(cha, end="")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -641,16 +512,6 @@ print(f"第2個14{data.index(14, 2):5}")
 
 # 搜尋最後一個要加入邊界值
 print(f"   117{data.index(117, 0, 5):5}")
-
-print("------------------------------------------------------------")  # 60個
-
-item = 0
-name = "Mary", "Joson", "Eric", "Judy"  # Tuple
-
-# while廻圈讀取元素
-while item < len(name):
-    print(item, name[item])
-    item += 1
 
 print("------------------------------------------------------------")  # 60個
 
@@ -750,24 +611,6 @@ score.sort(reverse = True) # score()方法遞減排序
 print('遞減排序：', score)
 print('遞增排序：', sorted(score)) # 使用BIF
 """
-
-print("------------------------------------------------------------")  # 60個
-
-# List生成式 找出10~65之間被7整除的數字
-
-num = []  # 建立空的List
-
-for item in range(10, 65):
-    if item % 13 == 0:
-        num.append(item)  # 整除的數放入List中
-print("10~65被13整除之數：", num)
-
-print("------------------------------------------------------------")  # 60個
-
-# List生成式(2)
-num = []  # 空的List
-num = [item for item in range(10, 65) if (item % 13 == 0)]
-print("10~65被13整除之數：", num)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -916,36 +759,11 @@ for function_name in builtin_functions:
 
 print("------------------------------------------------------------")  # 60個
 
-x1 = "22"
-x2 = "33"
-x3 = x1 + x2
-print("type(x3) = ", type(x3))
-print("x3 = ", x3)  # 列印字串相加
-x4 = int(x1) + int(x2)
-print("type(x4) = ", type(x4))
-print("x4 = ", x4)  # 列印整數相加
-x5 = "1100"
-print("2進位  '1100' = ", int(x5, 2))
-print("8進位  '22'   = ", int(x1, 8))
-print("16進位 '22'   = ", int(x1, 16))
-print("16進位 '5A'   = ", int("5A", 16))
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = "A"
-x2 = x1 * 10
-print(x2)  # 列印字串乘以整數
-x3 = "ABC"
-x4 = x3 * 5
-print(x4)  # 列印字串乘以整數
-
-print("------------------------------------------------------------")  # 60個
-
 str1 = "Hello!\nPython"
 print("不含r字元的輸出")
 print(str1)
 str2 = r"Hello!\nPython"
-print("含r字元的輸出")
+print("含r字元的輸出 忠實保留雙引號內的資料內容")
 print(str2)
 
 print("------------------------------------------------------------")  # 60個
@@ -960,63 +778,35 @@ print(hex(ord(x4)))  # 輸出字元'魁'的Unicode(16進位)碼值
 
 print("------------------------------------------------------------")  # 60個
 
-print("2 進位整數運算")
-x = 0b1101  # 這是2進位整數
-print(x)  # 列出10進位的結果
-y = 13  # 這是10進位整數
-print(bin(y))  # 列出轉換成2進位的結果
-print("8 進位整數運算")
-x = 0o57  # 這是8進位整數
-print(x)  # 列出10進位的結果
-y = 47  # 這是10進位整數
-print(oct(y))  # 列出轉換成8進位的結果
-print("16 進位整數運算")
-x = 0x5D  # 這是16進位整數
-print(x)  # 列出10進位的結果
-y = 93  # 這是10進位整數
-print(hex(y))  # 列出轉換成16進位的結果
-
-
-print("------------------------------------------------------------")  # 60個
-x = -10
-print("以下輸出abs( )函數的應用")
-print("x = ", x)  # 輸出x變數
-print("abs(-10) = ", abs(x))  # 輸出abs(x)
-x = 5
-y = 3
-print("以下輸出pow( )函數的應用")
-print("pow(5,3) = ", pow(x, y))  # 輸出pow(x,y)
 x = 47.5
 print("以下輸出round(x)函數的應用")
 print("x = ", x)  # 輸出x變數
 print("round(47.5) = ", round(x))  # 輸出round(x)
+
 x = 48.5
 print("x = ", x)  # 輸出x變數
 print("round(48.5) = ", round(x))  # 輸出round(x)
+
 x = 49.5
 print("x = ", x)  # 輸出x變數
 print("round(49.5) = ", round(x))  # 輸出round(x)
 print("以下輸出round(x,n)函數的應用")
+
 x = 2.15
 print("x = ", x)  # 輸出x變數
 print("round(2.15,1) = ", round(x, 1))  # 輸出round(x,1)
+
 x = 2.25
 print("x = ", x)  # 輸出x變數
 print("round(2.25,1) = ", round(x, 1))  # 輸出round(x,1)
+
 x = 2.151
 print("x = ", x)  # 輸出x變數
 print("round(2.151,1) = ", round(x, 1))  # 輸出round(x,1)
+
 x = 2.251
 print("x = ", x)  # 輸出x變數
 print("round(2.251,1) = ", round(x, 1))  # 輸出round(x,1)
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "明志科技大學"
-str2 = "明志工專"
-print(str1, str2, sep=" $$$ ")  # 以 $$$ 值位置分隔資料輸出
-
-print(str1, str2, sep="\t")  # 以Tab鍵值位置分隔資料輸出
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1031,6 +821,7 @@ print("/%10.3s/" % string)
 
 print("------------------------------------------------------------")  # 60個
 
+print('置換網址資料')
 url = "https://maps.apis.com/json?city="
 city = "taipei"
 r = 1000
@@ -1040,30 +831,13 @@ print(url + "{}&radius={}&type={}".format(city, r, type_))
 
 print("------------------------------------------------------------")  # 60個
 
-name = '洪錦魁'
-message = f"我是{name}"
-print(message)
-
+print('置換網址資料')
 url = "https://maps.apis.com/json?city="
 city = "taipei"
 r = 1000
 type_ = "school"
 my_url = url + f"{city}&radius={r}&type={type_}"
 print(my_url)
-
-
-print("------------------------------------------------------------")  # 60個
-
-sp = " " * 40
-print("%s   1231 Delta Rd" % sp)
-print("%s   Oxford, Mississippi" % sp)
-print("%s   USA\n\n\n" % sp)
-print("Dear Ivan")
-print("I am pleased to inform you that your application for fall 2025 has")
-print("been favorably reviewed by the Electrical and Computer Engineering")
-print("Office.\n\n")
-print("Best Regards")
-print("Peter Malong")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1082,30 +856,6 @@ fobj1.close()
 fobj2 = open("tmp_out25a.txt", mode="a", encoding="cp950")
 print("測試 mode=a 參數, 預設 ANSI 編碼", file=fobj2)
 fobj2.close()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-loan = eval(input("請輸入貸款金額："))
-year = eval(input("請輸入年限："))
-rate = eval(input("請輸入年利率："))
-monthrate = rate / (12*100)             # 改成百分比的月利率
-
-# 計算每月還款金額
-molecules = loan * monthrate
-denominator = 1 - (1 / (1 + monthrate) ** (year * 12))
-monthlyPay = molecules / denominator    # 每月還款金額
-totalPay = monthlyPay * year * 12       # 總共還款金額
-
-print(f"每月還款金額 {int(monthlyPay)}")
-print(f"總共還款金額 {int(totalPay)}")
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1139,14 +889,6 @@ x = 10
 print("x=/%+8d/" % x)
 y = 10.5
 print("y=/%+8.2f/" % y)
-
-print("------------------------------------------------------------")  # 60個
-
-print(" 姓名    國文    英文    總分")
-print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
-print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
-print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
-print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1187,12 +929,8 @@ print(f"刪除nums3串列索引[0:6:2]前 = {nums3}")
 del nums3[0:6:2]
 print(f"刪除nums3串列索引[0:6:2]後 = {nums3}")
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch6\ch6_14.py
-
-# ch6_14.py
 cars = ["Toyota", "Nissan", "Honda"]
 print(f"cars串列長度是 = {len(cars)}")
 if len(cars) != 0:  # 一般寫法
@@ -1892,25 +1630,6 @@ for i in range(n + 1):
 
 print("------------------------------------------------------------")  # 60個
 
-players = ["Curry", "Jordan", "James", "Durant", "Obama"]
-print("列印前3位球員")
-for player in players[:3]:
-    print(player)
-print("列印後3位球員")
-for player in players[-3:]:
-    print(player)
-
-print("------------------------------------------------------------")  # 60個
-
-files = ["da1.c", "da2.py", "da3.py", "da4.java"]
-py = []
-for file in files:
-    if file.endswith(".py"):  # 以.py為副檔名
-        py.append(file)  # 加入串列
-print(py)
-
-print("------------------------------------------------------------")  # 60個
-
 drinks = ["coffee", "tea", "wine"]
 enumerate_drinks = enumerate(drinks)                # 數值初始是0
 lst = list(enumerate_drinks)
@@ -2022,56 +1741,6 @@ for i in range(len(noodlesLst)):
 
 print("------------------------------------------------------------")  # 60個
 
-
-soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
-soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
-soldier2 = {"tag": "green", "score": 10, "speed": "fast"}
-armys = [soldier0, soldier1, soldier2]  # 小兵組成串列
-for army in armys:  # 列印小兵
-    print(army)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\Python王者歸來v3\ch9\ch9_23.py
-
-# ch9_23.py
-armys = []  # 建立小兵空串列
-# 建立50個小兵
-for soldier_number in range(50):
-    soldier = {"tag": "red", "score": 3, "speed": "slow"}
-    armys.append(soldier)
-# 列印前3個小兵
-for soldier in armys[:3]:
-    print(soldier)
-# 列印小兵數量
-print(f"小兵數量 = {len(armys)}")
-
-
-print("------------------------------------------------------------")  # 60個
-
-armys = []  # 建立小兵空串列
-# 建立50個小兵
-for soldier_number in range(50):
-    soldier = {"tag": "red", "score": 3, "speed": "slow"}
-    armys.append(soldier)
-# 列印前3個小兵
-print("前3名小兵資料")
-for soldier in armys[:3]:
-    print(soldier)
-# 更改編號36到38的小兵
-for soldier in armys[35:38]:
-    if soldier["tag"] == "red":
-        soldier["tag"] = "blue"
-        soldier["score"] = 5
-        soldier["speed"] = "medium"
-# 列印編號35到40的小兵
-print("列印編號35到40小兵資料")
-for soldier in armys[34:40]:
-    print(soldier)
-
-
-print("------------------------------------------------------------")  # 60個
 
 # 建立內含字串的字典
 sports = {"Curry": ["籃球", "美式足球"], "Durant": ["棒球"], "James": ["美式足球", "棒球", "籃球"]}
@@ -2333,7 +2002,7 @@ wd = "ABCDEFG"
 for c in wd:
     print(morse_code[c])
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -2484,26 +2153,6 @@ def my_sum(*numbers):
 
 
 print(my_sum(10, 20, 30, 40, 50))
-
-print("------------------------------------------------------------")  # 60個
-
-# 將 16 進位數轉為 10 進位
-
-def hex_to_dec():
-    hexnum = "ff"
-    decnum = 0
-
-    for power, digit in enumerate(reversed(hexnum)):
-        if digit.isdigit():
-            digit_num = int(digit)
-        else:
-            digit_num = ord(digit.upper()) - ord("A") + 10
-        decnum += digit_num * (16**power)
-
-    print("十進位結果:", decnum)
-
-
-hex_to_dec()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3477,8 +3126,6 @@ print("性別gender變數型別 =", type(gender))
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch03\format01.py
-
 print("{:<5}".format(123))  # 顯示123ΔΔ
 print("{:>5}".format(123))  # 顯示ΔΔ123
 print("{:^6}".format(123))  # 顯示Δ123ΔΔ
@@ -3486,15 +3133,6 @@ print("{:@<6}".format(123))  # 顯示123@@@
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch03\format02.py
-
-print("{:#b}".format(12345))  # 顯示0b11000000111001
-print("{:#o}".format(12345))  # 顯示0o30071
-print("{:#x}".format(12345))  # 顯示0x3039
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch03\format03.py
 
 print("{:d}".format(12345))  # 顯示整數資料12345
 print("{:7d}".format(12345))  # 設寬度為7,寬度有剩時補空格，顯示ΔΔ12345
@@ -3512,15 +3150,6 @@ print("{:10.2e}".format(12345.6))  # 指定總寬度10,小數2位，顯示ΔΔ1.
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch03\input01.py
-
-name = input("輸入姓名：")
-print("Hi!{}您好!".format(name))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch03\input02.py
 
 amount = int(input("請輸入需繳費金額:"))
 money = int(input("請輸入付款金額:"))
@@ -3626,34 +3255,6 @@ print(listSport[1::2])  # [1::2] 表示第2、4、6個串列元素，顯示['游
 
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\listfunc01.py
-
-listScore = [78, 45, 99, 56, 96]
-count = len(listScore)
-avg = sum(listScore) / count
-print("%d 位學生成績：%s" % (count, listScore))
-print("最高成績： %d" % max(listScore))
-print("最低成績： %d" % min(listScore))
-print("加總成績： %d" % sum(listScore))
-print("平均成績： %d" % avg)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\listfunc02.py
-
-listScore = []
-listScore.append(int(input("第 1 位學生成績：")))
-listScore.append(int(input("第 2 位學生成績：")))
-listScore.append(int(input("第 3 位學生成績：")))
-listScore.append(int(input("第 4 位學生成績：")))
-
-print("成績列表：", listScore)
-listScore.sort()
-print("遞增排序：", listScore)
-listScore.reverse()
-print("遞減排序：", listScore)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3670,52 +3271,6 @@ if num >= 1 and num <= 4:
     print("單價：%d" % price[index])
 else:
     print("無第 %d 項產品" % num)
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch05\product02.py
-
-product = [
-    ["E01", "碁峰可樂", 100],
-    ["E02", "阿才肉乾", 690],
-    ["E03", "龍哥豆漿", 25],
-    ["E04", "五香牛肉", 300],
-]
-num = int(input("查詢第幾項產品(1~4)："))
-if num >= 1 and num <= 4:
-    index = num - 1
-    print("編號：%s" % product[index][0])
-    print("品名：%s" % product[index][1])
-    print("單價：%d" % product[index][2])
-else:
-    print("無第 %d 項產品" % num)
-
-print("------------------------------------------------------------")  # 60個
-
-# pid串列存放產品編號
-pid = ["A01", "A02", "A03"]
-# name串列存放產品名稱
-name = ["PS4 特價包", "Switch", "Xbox One"]
-# price串列存放產品單價
-price = [9980, 12999, 11000]
-
-inputId = input("請輸入欲查詢的產品編號：")
-
-index = -1  # index串列索引為-1表示找不到
-count = len(pid)  # len()函式取得name串列個數並指定給count
-# count等於3，因此range(count)會產生[0, 1, 2]串列
-# for迴圈中的i會逐一被指定為0, 1, 2
-for i in range(count):
-    if inputId == pid[i]:
-        index = i  # 若有找到資料將i指定給index
-        break  # 離開迴圈
-# 若index等於-1表示找不到資料
-if index == -1:
-    print("找不到資料")
-else:
-    print("編號\t品名\t單價")
-    print("%s\t%s\t%d" % (pid[index], name[index], price[index]))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3739,48 +3294,6 @@ for row in product:  # 印出每列
     print()
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\for01.py
-
-for i in range(1, 6):
-    print(i, end=",")
-print()
-
-for i in range(5, 0, -1):
-    print(i, end=",")
-print()
-
-sum = 0
-for i in range(1, 100, 2):
-    sum += i
-print("1+3+5+...<100=%d" % sum)
-
-program = ["Python", "Java", "C#", "C++"]
-for s in program:
-    print(s, end=",")
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\for02.py
-
-name = [
-    "PS4 Slim主機 CUH-2117",
-    "任天堂 Nintendo Switch",
-    "Xbox One S 500G同捆組",
-]  # name串列存放產品名稱
-price = [9980, 12999, 11000]  # price串列存放產品單價
-# len()函式取得name串列個數並指定給count
-count = len(name)
-# count等於3，因此range(count)會產生[0, 1, 2]串列
-# for迴圈中的i會逐一被指定為0, 1, 2
-for i in range(count):
-    print("%s \t" % name[i], end="")  # 印出產品
-    print("單價%d元" % price[i])  # 印出單價
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\for03.py
 
 listScore = []  # 建立listScore為空串列
 count = int(input("請輸入學生數："))  # 指定學生數
@@ -3811,157 +3324,6 @@ for i in range(len(name)):
 
 
 print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\while01.py
-
-# name串列存放產品名稱
-name = ["PS4 Slim主機 CUH-2117", "任天堂 Nintendo Switch", "Xbox One S 500G同捆組"]
-# price串列存放產品單價
-price = [9980, 12999, 11000]
-# len()函式取得name串列個數並指定給count
-count = len(name)
-# count等於3，range(count)會產生0, 1, 2串列，for迴圈中的i會逐一被指定為0, 1, 2
-i = 0  # i起始為0
-while i < count:
-    print("%s \t" % name[i], end="")  # 印出產品
-    print("單價%d元" % price[i])  # 印出單價
-    i += 1
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch06\while02.py
-
-listScore = []  # 建立listScore為空串列
-count = int(input("請輸入學生數："))  # 指定學生數
-# 輸入學生成績並逐一放入listScore串列，append()方法可將資料附加到串列中
-i = 0
-while i < count:
-    print("第 %d 位學生：" % (i + 1), end="")
-    listScore.append(int(input("")))
-    i += 1
-
-print("成績列表：", listScore)  # 顯示listScore所有元素
-listScore.sort()  # 呼叫sort()方法將listScore中的元素進行由小到大非序
-print("遞增排序：", listScore)  # 印出listScore由小到大排序的結果
-listScore.reverse()  # 呼叫reverse()方法將listScore中的元素進行反轉
-print("遞減排序：", listScore)  # 印出listScore由大到小排序的結果
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def CallReference(x):
-    for i in range(len(x)):
-        x[i] += 10
-    print("函式呼叫中：x位址={}, x={}".format(id(x), x))
-
-
-a = [1, 2, 3, 4]
-print("函式呼叫前：a位址={}, a={}".format(id(a), a))
-CallReference(a)
-print("函式呼叫後：a位址={}, a={}".format(id(a), a))
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\callValue.py
-
-
-def CallValue(x):
-    x += 10
-    print("函式呼叫中：x位址=%d, x=%d" % (id(x), x))
-
-
-a = 6
-print("函式呼叫前：a位址=%d, a=%d" % (id(a), a))
-CallValue(a)
-print("函式呼叫後：a位址=%d, a=%d" % (id(a), a))
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 定義HelloByName()函式，可接收name和gender參數
-def HelloByName(name, gender):
-    if gender:
-        str = "先生"
-    else:
-        str = "小姐"
-    print("Hello!大家好, 我是", name, str)
-
-
-HelloByName("王小明", True)  # 呼叫Hello()函式並傳入 "王小明" 和 True 參數
-HelloByName("李小華", False)  # 呼叫Hello()函式並傳入 "李小華" 和 False 參數
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\func04.py
-
-
-# 定義GetRoundArea函式，可傳入radius半徑，並傳回圓面積
-def GetRoundArea(radius):
-    # 傳回圓面積，圓面積公式為 半徑 *  半徑 * 3.14
-    return radius * radius * 3.14
-
-
-r = int(input("請輸入半徑："))
-RoundArea = GetRoundArea(r)
-print("圓形半徑 %d，面積為 %d" % (r, RoundArea))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\func05.py
-
-
-# 定義GetMax()函式，可傳回n1和n2兩數的最大數
-def GetMax(n1, n2):
-    if n1 > n2:
-        vMax = n1
-    else:
-        vMax = n2
-    return vMax
-
-
-Max = GetMax(70, 9)
-print("70和 9最大值為", Max)
-print("17和30最大值為", GetMax(17, 30))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\func06.py
-
-
-# 定義Sort()函式，此函式可將傳入的三個數值進行由小到大排序， 並將排序後的結果傳回
-def Sort(x, y, z):
-    # 判斷三個數的大小，並做調整
-    if x > y:
-        t = x
-        x = y
-        y = t
-    if y > z:
-        t = y
-        y = z
-        z = t
-    if x > z:
-        t = x
-        x = z
-        z = t
-    return x, y, z
-
-
-# 將輸入的數值1~數值3依序放到a, b, c三個變數
-a = int(input("數值1："))
-b = int(input("數值2："))
-c = int(input("數值3："))
-# 呼叫Sort()函式傳入a, b, c三個數，最後將由小到大排序的結果依序指定給a, b, c
-a, b, c = Sort(a, b, c)
-print("\n由小到大排序：%d %d %d" % (a, b, c))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 檔案 : C:\_git\vcs\_4.python\__code\跟著阿才學Python從基礎到網路爬蟲應用\ch07\funcAry01.py
 
 
 def GetMax(ary):
@@ -4094,16 +3456,6 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-# tuple01.py
-
-tupleFruit = ("apple", "banana", "cherry")  # 建立tupleFruit元組用來存放水果英文名稱
-tupleNum = (1, 2, 3, 4, 5)  # 建立tupleNum元組用來存放1~5整數
-tupleBool = (True, False)  # 建立tupleBool元組用來存放布林值True|False
-tupleProduct = ("P01", "五香豆干", 45)  # 建立tupleProduct元組用來存放產品資訊
-print(tupleFruit)  # 顯示 ('apple', 'banana', 'cherry')
-print(tupleNum)  # 顯示 (1, 2, 3, 4, 5)
-print(tupleBool)  # 顯示 (True, False)
-print(tupleProduct)  # 顯示 ('P01', '五香豆干', 45)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4123,6 +3475,164 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+
+print('進位轉換')
+
+number = 255
+print("型別：", type(number))
+print("二進位：", bin(number))
+print("八進位", oct(number))
+print("十六進位", hex(number))
+print("10進位：", number)
+
+# 配合format函式去除前綴字元
+print("二進位：", format(number, "b"))
+print("八進位：", format(number, "o"))
+print("十六進位：", format(number, "x"))
+
+print("------------------------------------------------------------")  # 60個
+
+x1 = "22"
+x2 = "33"
+x3 = x1 + x2
+x4 = int(x1) + int(x2)
+x5 = "11111111"
+print("2進位  '11111111' = ", int(x5, 2))
+print("8進位  '22'   = ", int(x1, 8))
+print("16進位 '22'   = ", int(x1, 16))
+print("16進位 'FF'   = ", int("FF", 16))
+
+print("------------------------------------------------------------")  # 60個
+
+print("2 進位整數運算")
+x = 0b1101  # 這是2進位整數
+print(x)  # 列出10進位的結果
+y = 13  # 這是10進位整數
+print(bin(y))  # 列出轉換成2進位的結果
+print("8 進位整數運算")
+x = 0o57  # 這是8進位整數
+print(x)  # 列出10進位的結果
+y = 47  # 這是10進位整數
+print(oct(y))  # 列出轉換成8進位的結果
+print("16 進位整數運算")
+x = 0x5D  # 這是16進位整數
+print(x)  # 列出10進位的結果
+y = 93  # 這是10進位整數
+print(hex(y))  # 列出轉換成16進位的結果
+
+
+print("------------------------------------------------------------")  # 60個
+
+x = 100
+print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
+
+print("------------------------------------------------------------")  # 60個
+
+# 將 16 進位數轉為 10 進位
+
+def hex_to_dec():
+    hexnum = "ff"
+    decnum = 0
+
+    for power, digit in enumerate(reversed(hexnum)):
+        if digit.isdigit():
+            digit_num = int(digit)
+        else:
+            digit_num = ord(digit.upper()) - ord("A") + 10
+        decnum += digit_num * (16**power)
+
+    print("十進位結果:", decnum)
+
+
+hex_to_dec()
+
+print("------------------------------------------------------------")  # 60個
+
+print("{:#b}".format(12345))  # 顯示0b11000000111001
+print("{:#o}".format(12345))  # 顯示0o30071
+print("{:#x}".format(12345))  # 顯示0x3039
+
+print("------------------------------------------------------------")  # 60個
+
+#改成動物資料
+print(" 姓名    國文    英文    總分")
+print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
+print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
+print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
+print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
+
+print("------------------------------------------------------------")  # 60個
+
+#改成動物資料
+listScore = []  # 建立listScore為空串列
+
+listScore.append(int(input("")))
+
+print("成績列表：", listScore)  # 顯示listScore所有元素
+listScore.sort()  # 呼叫sort()方法將listScore中的元素進行由小到大非序
+print("遞增排序：", listScore)  # 印出listScore由小到大排序的結果
+listScore.reverse()  # 呼叫reverse()方法將listScore中的元素進行反轉
+print("遞減排序：", listScore)  # 印出listScore由大到小排序的結果
+
+#改成動物資料
+soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
+soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
+soldier2 = {"tag": "green", "score": 10, "speed": "fast"}
+armys = [soldier0, soldier1, soldier2]  # 小兵組成串列
+for army in armys:  # 列印小兵
+    print(army)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+listScore = [78, 45, 99, 56, 96]
+count = len(listScore)
+avg = sum(listScore) / count
+print("%d 位學生成績：%s" % (count, listScore))
+print("最高成績： %d" % max(listScore))
+print("最低成績： %d" % min(listScore))
+print("加總成績： %d" % sum(listScore))
+print("平均成績： %d" % avg)
+
+
+cname = '米老鼠'
+message = f"中文名{cname}"
+print(message)
+
+print("------------------------------------------------------------")  # 60個
+
+listScore = []
+listScore.append(55)
+listScore.append(88)
+listScore.append(33)
+listScore.append(77)
+
+print("成績列表：", listScore)
+listScore.sort()
+print("遞增排序：", listScore)
+listScore.reverse()
+print("遞減排序：", listScore)
+
+print('二維list')
+product = [
+    ["E01", "碁峰可樂", 100],
+    ["E02", "阿才肉乾", 690],
+    ["E03", "龍哥豆漿", 25],
+    ["E04", "五香牛肉", 300],
+]
+
+index = 2
+print("編號：%s" % product[index][0])
+print("品名：%s" % product[index][1])
+print("單價：%d" % product[index][2])
 
 print("------------------------------------------------------------")  # 60個
 

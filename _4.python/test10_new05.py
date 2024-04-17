@@ -3,7 +3,6 @@ import sys
 import time
 import random
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 print('enumerate 的用法')
@@ -81,40 +80,24 @@ print(dirname)
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-# 如果檔案在目前工作目錄下可以省略路徑
-print(os.path.getsize("ch14_1.py"))
-print(os.path.getsize("D:\\Python\\ch14\\ch14_1.py"))
-
-print("------------------------------------------------------------")  # 60個
-
-
-print(os.listdir("D:\\Python\\ch14"))
-print(os.listdir("."))                  # 這代表目前工作目錄
-
-print("------------------------------------------------------------")  # 60個
-
-totalsizes = 0
-print("列出D:\\Python\\ch14工作目錄的所有檔案")
-for file in os.listdir('D:\\Python\\ch14'):
-    print(file)
-    totalsizes += os.path.getsize(os.path.join('D:\\Python\\ch14', file))
-
-print("全部檔案大小是 = ", totalsizes)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
 import datetime
 now = datetime.datetime.now() # current date and time
 
 date_time = now.strftime('%Y年%m月%d日, %H:%M:%S')
 print("現在時間 :", date_time)
 
+import datetime
+
+dt = datetime.datetime(2006, 3, 11, 9, 15),
+print(dt)
+
+cc = time.strftime("%Y-%m-%d %H:%M")
+print(cc)
+
+cc = time.strftime('%Y-%m-%d %H:%M+%Z')
+print(cc)
+
 print("------------------------------------------------------------")  # 60個
-
-
 
 import random
 
@@ -142,11 +125,8 @@ currentTime = time.asctime()
 
 print("時間 :", currentTime)
 
-
 entrySecond = time.time()
 print("時間 :", entrySecond)
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -193,22 +173,6 @@ print("------------------------------------------------------------")  # 60個
 files = ['ch14_1.py', 'ch14_2.py', 'ch14_3.py']
 for file in files:
     print(os.path.join('C:\\_git\\vcs\\_1.data\\______test_files3', file))   
-
-print("------------------------------------------------------------")  # 60個
-
-import glob
-
-print("方法1:列出指定目錄的所有檔案")
-for file in glob.glob('C:\\_git\\vcs\\_1.data\\______test_files3\*.*'):
-    print(file)
-    
-print("方法2:列出目前工作目錄的特定檔案")
-for file in glob.glob('ch14_1*.py'):
-    print(file)
-    
-print("方法3:列出目前工作目錄的特定檔案")
-for file in glob.glob('ch14_2*.*'):
-    print(file)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -264,7 +228,6 @@ print(list1)
 str2 = "-".join(list1)
 print(str2)
 
-
 print("------------------------------------------------------------")  # 60個
 
 import traceback                            # 導入taceback
@@ -307,8 +270,6 @@ print(division(5, 0))           # 列出5/0
 print(division('a', 'b'))       # 列出'a' / 'b'
 print(division(6, 3))           # 列出6/3
 
-print("------------------------------------------------------------")  # 60個
-
 print('------------------------------------------------------------')	#60個
 
 """
@@ -346,32 +307,6 @@ print(type(ba), type(ba[0]))
 
 ba[3] = 0x70              # 修改資料
 print(ba)                 # 變成 bytearray(b'wxyp')
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = '葉'
-
-print(str1.encode('big5'))     
-# 轉big-5編碼，b'\xb8\xad'
-
-print(str1.encode('gbk'))      
-# 轉bgk編碼，b'\xc8~'
-
-print(str1.encode('utf-8'))    
-# 轉utf-8編碼，b'\xe8\x91\x89'
-
-data = b'\xB8\xAD'
-
-print(data.decode('big5'))
-# 將bytes轉為big5文字，'葉'
-
-print(data.decode('gbk'))
-# 將bytes轉為gbk文字，'腑'
-
-"""
-print(data.decode('utf-8'))
-# 將bytes轉為ytf-8文字，解碼規則無法解碼
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -611,14 +546,6 @@ print("置換後 :", text)
 
 print("------------------------------------------------------------")  # 60個
 
-import os
-
-files = ["c1.py", "c2.py", "c3.py"]
-for file in files:
-    print(os.path.join("D:\\test", file))
-
-print("------------------------------------------------------------")  # 60個
-
 """
 localtime()返回元組的日期與時間資料結構 用索引方式獲得個別內容
 索引	名稱	說明
@@ -676,10 +603,8 @@ plt.plot(x, y3)
 
 #plt.show()
 
-
 print(x)
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 
@@ -691,23 +616,82 @@ print("雞有 {} 隻, 兔有 {} 隻".format(chicken, rabbit))
 
 print("------------------------------------------------------------")  # 60個
 
-import datetime
 
-dt = datetime.datetime(2006, 3, 11, 9, 15),
-print(dt)
+import glob
 
-cc = time.strftime("%Y-%m-%d %H:%M")
+print("方法1:列出指定目錄的所有檔案")
+for file in glob.glob('C:\\_git\\vcs\\_1.data\\______test_files3\*.*'):
+    print(file)
+    
+print("方法2:列出目前工作目錄的特定檔案")
+for file in glob.glob('ch14_1*.py'):
+    print(file)
+    
+print("方法3:列出目前工作目錄的特定檔案")
+for file in glob.glob('ch14_2*.*'):
+    print(file)
+
+print("------------------------------------------------------------")  # 60個
+
+import glob
+
+cc = glob.glob(r'C:/_git/vcs/_1.data/______test_files1/*')
+print(type(cc))
 print(cc)
 
-cc = time.strftime('%Y-%m-%d %H:%M+%Z')
-print(cc)
+files = ["da1.c", "da2.py", "da3.py", "da4.java"]
+py = []
+for file in files:
+    if file.endswith(".py"):  # 以.py為副檔名
+        py.append(file)  # 加入串列
+print(py)
+
+
+import glob
+
+print(glob.glob(r'./test/*'))         # 找出所有檔案
+print(glob.glob(r'./test/*.txt'))     # 找出所有副檔名為 .txt 的檔案，例如 1.txt、hello.txt
+print(glob.glob(r'./test/[0-9].txt')) # 找出所以名稱為一個數字，副檔名為 .txt 的檔案，例如 1.txt、2.txt
+print(glob.glob(r'./test/????.*'))    # 找出所有檔名有四個字元的檔案，例如 test.txt、demo.py
+print(glob.glob(r'./test/t*.*'))      # 找出所有 t 開頭的檔案，例如 test.txt、test.py
+print(glob.glob(r'./test/*e*.*'))     # 找出所有檔名裡有 e 的檔案，例如 test.txt、hello.py
+
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+
+files = ["c1.py", "c2.py", "c3.py"]
+for file in files:
+    print(os.path.join("D:\\test", file))
 
 print("------------------------------------------------------------")  # 60個
 
 
 
+"""
+# 如果檔案在目前工作目錄下可以省略路徑
+print(os.path.getsize("ch14_1.py"))
+print(os.path.getsize("D:\\Python\\ch14\\ch14_1.py"))
+
 print("------------------------------------------------------------")  # 60個
 
+
+print(os.listdir("D:\\Python\\ch14"))
+print(os.listdir("."))                  # 這代表目前工作目錄
+
+print("------------------------------------------------------------")  # 60個
+
+totalsizes = 0
+print("列出D:\\Python\\ch14工作目錄的所有檔案")
+for file in os.listdir('D:\\Python\\ch14'):
+    print(file)
+    totalsizes += os.path.getsize(os.path.join('D:\\Python\\ch14', file))
+
+print("全部檔案大小是 = ", totalsizes)
+"""
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

@@ -409,6 +409,23 @@ print("半形 :", text)
 
 print("------------------------------------------------------------")  # 60個
 
+# 將兩個數值以decimal型別來處理
+
+import decimal
+
+num1 = decimal.Decimal("0.5534")
+num2 = decimal.Decimal("0.427")
+num3 = decimal.Decimal("0.37")
+print("相加", num1 + num2 + num3)
+print("相減", num1 - num2 - num3)
+print("相乘", num1 * num2 * num3)
+print("相除", num1 / num2)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 

@@ -293,14 +293,32 @@ def blue_to_red2(image_path):
                 #將藍色分轉為紅色
                 pixels[x, y] = (b, g, r)
     image.show()
-    
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'    
 blue_to_red2(filename)
 """    
 
 print('------------------------------------------------------------')	#60個
 
+#添加小圖片水印
 
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+logo_filename = 'C:/_git/vcs/_4.python/_data/logo1.png'
+
+# 檔案 => PIL影像
+im = Image.open(filename)
+
+# 檔案 => PIL影像
+mark = Image.open(logo_filename)
+mark = mark.resize((128, 128), Image.LANCZOS) # 使用 LANCZOS 調整影像大小
+
+layer=Image.new('RGBA', im.size, (0,0,0,0))
+layer.paste(mark, (im.size[0]-128-10,im.size[1]-128-10))
+
+out=Image.composite(layer,im,layer)
+
+plt.imshow(out)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

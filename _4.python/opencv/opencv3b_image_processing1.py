@@ -25,7 +25,7 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 # filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 print("測試 01------------------------------------------------------------")  # 60個
-
+'''
 # 影像對比與亮度調整
 import matplotlib.image as img
 
@@ -337,12 +337,99 @@ cv2.imshow('image',out)
 cv2.waitKey()
 cv2.destroyAllWindows()
 """
-
+'''
 
 print("測試 09------------------------------------------------------------")  # 60個
 
 
+# Prewitt horizontal edge-emphasizing filter 邊緣加強的影像處理技術
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+image = cv2.imread(filename)
+
+print("filter2D 效果")
+kernel = np.ones((9, 9), np.float32) / 81
+image_filter2D = cv2.filter2D(image, -1, kernel)
+
+plt.figure(
+    num="new26 filter2D 效果",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.title("filter2D 效果")
+plt.imshow(cv2.cvtColor(image_filter2D, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
 print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+image = cv2.imread(filename, cv2.COLOR_BGR2GRAY)
+
+kernel_x = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]], dtype=int)  # 水平值一樣, 偵測水平的邊緣
+kernel_y = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]], dtype=int)  # 垂直值一樣, 偵測垂直的邊緣
+
+print("filter2D 效果")
+
+x = cv2.filter2D(image, cv2.CV_16S, kernel_x)
+y = cv2.filter2D(image, cv2.CV_16S, kernel_y)
+
+absX = cv2.convertScaleAbs(x)
+absY = cv2.convertScaleAbs(y)
+
+plt.figure(
+    num="new27",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.subplot(131)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(132)
+plt.title("Prewitt_horizon")
+# 躺平的書本的邊緣有被強調出來
+plt.imshow(cv2.cvtColor(absX, cv2.COLOR_BGR2RGB))
+
+plt.subplot(133)
+plt.title("Prewitt_vertical")
+# 直放的書本的邊緣有被強調出來
+plt.imshow(cv2.cvtColor(absY, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

@@ -38,14 +38,13 @@ animals = []
 
 print("建立一個空元組")
 
-
 print("字典 dddd ST------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
 
 print("建立空字典")
 animal = {}
 print("空字典", animal)
+
+print("建立字典")
 
 animal = {
     "mouse": "鼠",
@@ -67,89 +66,134 @@ del animal["snake"]
 # 使用pop(key)移除該key值的資料。
 # animal.pop('snake')
 
-print(type(animal))
-# 打印字典
-print(animal)
 # 語法是dict[key]，利用key來存取數量。dict[key] = value就可以改變數量。
 print(animal["dragon"])
 
-# 取得所有資料
-# 使用keys()取得所有key值，回傳是所有key的List。
-# 取得所有數字
-# 使用values()取得所有value值，回傳是所有value的List。
-# 取得所有資料
-# 使用item()取得所有資料組，回傳是由(key, value)所組成的List。
+print('測試字典的各種方法')
 
-print(animal.keys())
-print(animal.values())
-print(animal.items())
-
-print('排序')
-print(sorted(animal))
-
-for ani in animal:
-    print(ani)
-    print(animal[ani])
-
-print('xxx')
-
-for ani in set(animal.values()):
-    print(ani)
+#完整的動物字典
+animals = {
+    "mouse": "鼠",
+    "ox": "牛",
+    "tiger": "虎",
+    "rabbit": "兔",
+    "dragon": "龍",
+    "snake": "蛇",
+    "horse": "馬",
+    "goat": "羊",
+    "monkey": "猴",
+    "chicken": "雞",
+    "dog": "狗",
+    "pig": "豬",
+    }
 
 
-print('xxx')
+print('直接打印字典內容')
+print(animals)
+print('資料長度 :', len(animals), '筆')
+print("字典裡內容一一列出")
+for ani in animals:
+    print(ani + ": " + animals[ani])
+
+ename = "chicken"
+cname = animals.get(ename)
+if cname == None:
+    print("沒有 " + ename + " 動物")
+else:
+    print("找到動物" + ename + ", 中文為 :" + animals[ename])
+
+""" get 測試
+animals = {"鼠": 3, "牛": 48}
+ret_value1 = animals.get("牛")
+print("Value = ", ret_value1)
+ret_value2 = animals.get("虎")
+print("Value = ", ret_value2)
+ret_value3 = animals.get("虎", 10)
+print("Value = ", ret_value3)
+print("animals字典 :")
+print(animals)
+"""
+
+print("------------------------------------------------------------")  # 60個
 
 sys.exit()
+         
 
-print("字典裡內容一一列出")
-for key in animal:
-    print(key + ": " + animal[key])
+# 取得所有資料
+# 使用keys()取得所有key值，回傳是所有key的List。
+print('取得 keys')
+cc = animals.keys()
+print(cc)
+print('資料長度 :', len(cc), '筆')
+for ename in animals.keys():
+    print(f"{ename},{animals[ename]}")
 
-for ename, cname in animal.items():
+# 取得所有數值
+# 使用values()取得所有value值，回傳是所有value的List。
+print('取得 values')
+cc = animals.values()
+print(cc)
+print('資料長度 :', len(cc), '筆')
+for ani in animals.values():
+    print(ani)
+
+print('keys() values() 使用範例')
+listkey = list(animals.keys())
+listvalue = list(animals.values())
+
+for i in range(len(listkey)):
+    print("英文 : %s, 中文 : %s" % (listkey[i], listvalue[i]))
+   
+# 取得所有資料
+# 使用item()取得所有資料組，回傳是由(key, value)所組成的List。
+print('取得 items')
+cc = animals.items()
+print(cc)
+print('資料長度 :', len(cc), '筆')
+for ename, cname in animals.items():
     print("{:15s}{:15s}".format(ename, cname))
+    #print("英文 : %s, 中文 : %s" % (ename, cname))
 
-for ename in animal.keys():
-    print(f"{ename},{animal[ename]}")
+
+print('排序')
+print(sorted(animals))
 
 print("排序再顯示")
-for ename in sorted(animal.keys()):
-    print(f"{ename},{animal[ename]}")
+for ename in sorted(animals.keys()):
+    print(f"{ename},{animals[ename]}")
 
 print("排序 反相 再顯示")
-for ename in sorted(animal.keys(), reverse=True):
-    print(f"{ename},{animal[ename]}")
+for ename in sorted(animals.keys(), reverse=True):
+    print(f"{ename},{animals[ename]}")
 
-print("顯示values")
-for cname in animal.values():
-    print(cname)
 
 animal_name = "dragon"
-if animal_name in animal:
-    print("有此動物 :", animal_name, "=>", animal[animal_name])
+if animal_name in animals:
+    print("有此動物 :", animal_name, "=>", animals[animal_name])
 else:
     print("查無此動物 :", animal_name)
 
 animal_name = "dinosour"
-if animal_name in animal:
-    print("有此動物 :", animal_name, "=>", animal[animal_name])
+if animal_name in animals:
+    print("有此動物 :", animal_name, "=>", animals[animal_name])
 else:
     print("查無此動物 :", animal_name)
 
-print("目前字典元素數量     = ", len(animal))
+print("目前字典元素數量     = ", len(animals))
 
 print("將 字典 寫入檔案")
 filename = "C:/_git/vcs/_1.data/______test_files2/dict.txt"
 
 with open(filename, "w") as fp:
     # 將字典轉成字串寫入檔案
-    fp.write(str(animal))
+    fp.write(str(animals))
 
 print("寫入檔案 : " + filename)
 
-animal.clear()
+animals.clear()
 
-print("目前字典內容:", animal)
-print("目前字典元素數量     = ", len(animal))
+print("目前字典內容:", animals)
+print("目前字典元素數量     = ", len(animals))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -291,18 +335,6 @@ for i in range(len(ani)):
 
 print("------------------------------------------------------------")  # 60個
 
-animals = {"鼠": 3, "牛": 48}
-ret_value1 = animals.get("牛")
-print("Value = ", ret_value1)
-ret_value2 = animals.get("虎")
-print("Value = ", ret_value2)
-ret_value3 = animals.get("虎", 10)
-print("Value = ", ret_value3)
-print("animals字典 :")
-print(animals)
-
-print("------------------------------------------------------------")  # 60個
-
 # key在字典內
 animals = {"鼠": 3, "牛": 48}
 ret_value = animals.setdefault("牛")
@@ -383,7 +415,7 @@ ename = [
     "pig",
 ]
 
-# 將兩個串列編在一起組成字典
+print('將兩個串列編在一起組成字典')
 name_dict = dict(zip(cname, ename))  # 建立字典
 
 print("列印編碼字典\n", name_dict)  # 列印字典
@@ -433,90 +465,27 @@ for animal in animal_list:
 
 print("------------------------------------------------------------")  # 60個
 
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
-
-print("打印字典的內容1")
-print(type(animals))
-print(animals)
-
-print("打印字典的內容2")
-for key, value in animals.items():
-    if value < 5:
-        print("({},{})".format(key, value))
-
-print("------------------------------------------------------------")  # 60個
-
 print("字典的用法")
 
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
-animals = {"鼠": 3, "牛": 48, "虎": 33}
-print(type(animals))
+#完整的動物字典
+animals = {
+    "mouse": "鼠",
+    "ox": "牛",
+    "tiger": "虎",
+    "rabbit": "兔",
+    "dragon": "龍",
+    "snake": "蛇",
+    "horse": "馬",
+    "goat": "羊",
+    "monkey": "猴",
+    "chicken": "雞",
+    "dog": "狗",
+    "pig": "豬",
+    }
+
+print("刪除某一項 snake")
+animals.pop("snake")
 print(animals)
-
-print(animals["鼠"])
-
-print("加入一項 兔")
-animals["兔"] = 6
-print(animals)
-
-print("修改一項 鼠")
-animals["鼠"] = 5
-print(animals)
-
-print("修改一項 牛")
-animals["牛"] = 45
-print(animals)
-
-print("刪除某一項 虎")
-animals.pop("虎")
-print(animals)
-
-print(animals.keys())
-print(animals.values())
-print(animals.items())
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典測試 1")
-
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
-animals = {"mouse": 3, "ox": 48, "tiger": 33}
-
-ani = "tiger"
-if ani in animals:
-    print(ani + "的體重為 " + str(animals[ani]))
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典測試 2")
-
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
-print("字典 轉 串列")
-item1 = list(animals.items())
-for animal, weight in item1:
-    print("動物 %s 的體重為 %d" % (animal, weight))
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典測試 3")
-
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
-listkey = list(animals.keys())
-listvalue = list(animals.values())
-for i in range(len(listkey)):
-    print("動物 %s 的體重為 %d" % (listkey[i], listvalue[i]))
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典測試 4")
-
-animals = {"鼠": 3, "牛": 48, "虎": 33, "兔": 8, "龍": 38}
-name = "鼠"
-weight = animals.get(name)
-if weight == None:
-    print("沒有 " + name + " 動物")
-else:
-    print("找到動物" + name + ", 體重為 :" + str(animals[name]))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2003,3 +1972,4 @@ print(animals)
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+

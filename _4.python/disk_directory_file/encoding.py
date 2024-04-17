@@ -2,11 +2,12 @@
 各種編碼相關
 
 """
+import sys
+
 
 print('------------------------------------------------------------')	#60個
 
 print('顯示目前的系統編碼')
-import sys
 print(sys.getdefaultencoding())
 
 print('------------------------------------------------------------')	#60個
@@ -39,10 +40,6 @@ string_data2 = encode_data.decode('gb2312')
 print(string_data2)
 
 print('------------------------------------------------------------')	#60個
-
-import sys
-print('打印出目前系統字符編碼')
-print(sys.getdefaultencoding())
 
 print('字元轉unicode')
 
@@ -146,7 +143,7 @@ print(command2)
 
 print('------------------------------------------------------------')	#60個
 
-
+""" many
 import codecs
 import contextlib
 import io
@@ -293,6 +290,46 @@ ALL_CJKENCODINGS = [
 for enc in ALL_CJKENCODINGS:
     code = '# coding: {}\n'.format(enc)
     print(code)
+"""
+print('------------------------------------------------------------')	#60個
+
+print('編碼: 字串轉拜列')
+print('解碼: 拜列轉字串')
+
+str1 = '金詢初海花浪花情真'
+
+print('用 big5 編碼')
+cc = str1.encode('big5')
+print(cc)
+
+print('用 gbk 編碼')
+cc = str1.encode('gbk')
+print(cc)
+
+print('用 utf-8 編碼')
+cc = str1.encode('utf-8')
+print(cc)
+
+data = b'\xB8\xAD'
+
+print('用 big5 解碼')
+cc = data.decode('big5')
+print(cc)
+# 將bytes轉為big5文字，'葉'
+
+print('用 gbk 解碼')
+cc = data.decode('gbk')
+print(cc)
+# 將bytes轉為gbk文字，'腑'
+
+"""
+print('用 utf-8 解碼')
+cc = data.decode('utf-8')
+print(cc)
+# 將bytes轉為ytf-8文字，解碼規則無法解碼
+"""
+
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -306,7 +343,16 @@ print('------------------------------------------------------------')	#60個
 
 
 
-print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
 
 
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 

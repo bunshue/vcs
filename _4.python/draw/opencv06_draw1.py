@@ -46,12 +46,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 print('------------------------------------------------------------')	#60個
 
 print('建立畫布(黑色)')
-W = 640
-H = 480
-# 快速產生 WxH，每個項目為 [0,0,0] 的三維陣列
+W, H = 640, 480
 image = np.zeros((H, W,3), dtype='uint8')
-#image = np.zeros((H, W,3), np.uint8)
-#image = np.ones((H,W,3), np.uint8)*255  # 白色背景
 
 print('畫直線')
 color = (0, 0, 255) #B G R
@@ -93,22 +89,22 @@ print('畫圓形 空心')
 cx, cy = 60, 320  # 圓心
 radius = 50  # 半徑
 color = (0, 255, 255) # 顏色
-linewidth = 2 # 線寬
-cv2.circle(image, (cx, cy), radius, color, linewidth)  # 繪製圓形
+line_width = 2 # 線寬
+cv2.circle(image, (cx, cy), radius, color, line_width)  # 繪製圓形
 
 print('畫圓形 實心')
-linewidth = -1 #線寬 負值代表實心
-cv2.circle(image,(cx, cy), radius // 2, color, linewidth)  # 設定 -1
+line_width = -1 #線寬 負值代表實心
+cv2.circle(image,(cx, cy), radius // 2, color, line_width)  # 設定 -1
 
 print('畫橢圓形')
 cx, cy = 220, 320  # 橢心
 AA, BB = 100, 50  # 長軸 短軸
 angle = 0  # 順時鐘旋轉角度
 color = (0, 0, 255)
-linewidth = 5 #線條寬度, 負數代表實心
+line_width = 5 #線條寬度, 負數代表實心
 
 #畫橢圓              中心  長軸 短軸 旋轉  開始 結束角度 顏色 線寬
-cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0, 360, color, linewidth) #空心
+cv2.ellipse(image, (cx, cy), (AA, BB), angle, 0, 360, color, line_width) #空心
 cv2.ellipse(image, (cx, cy), (AA//2, BB//2), angle, 0, 360, color, -1)  #實心
 
 cv2.ellipse(image, (cx, cy+70), (100, 50),0,0,180,255,-1)#藍色半橢圓
@@ -162,138 +158,67 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print('建立畫布(黑色)')
-W = 640
-H = 480
-# 快速產生 WxH，每個項目為 [0,0,0] 的三維陣列
-image = np.zeros((H, W,3), dtype='uint8')
+print('建立畫布')
+W, H = 1000, 800
 
+image = np.zeros((H, W, 3), np.uint8)
+#灰色背景
+image[:] = (128, 128, 128)
 
+"""
+cv2.putText參數
+cv2.putText(img, text, org, fontFace, fontScale, color[, thickness[, lineType[, bottomLeftOrigin]]])
+圖片影像/繪製的文字/左上角坐標/字體/字體大小/顏色/字體粗細/字體線條種類
+
+img – 要繪製文字的影像
+text – 要繪製的文字
+org – 文字左下角在影像中的座標位置
+fontFace – 文字字體, 
+fontScale – 文字縮放比例
+color – 文字顏色
+thickness – 文字線條粗細度
+lineType – 文字線條樣式
+bottomLeftOrigin – When true, the image data origin is at the bottom-left corner. Otherwise, it is at the top-left corner.
+
+"""
+
+font = cv2.FONT_HERSHEY_COMPLEX_SMALL
+font = cv2.FONT_HERSHEY_COMPLEX
 font = cv2.FONT_HERSHEY_SIMPLEX
+font_size = 2 #字體大小
+font_color = (0, 255, 255) # B G R
+line_width = 2 #字體粗細, 線寬
 line_type = cv2.LINE_AA #文字線條樣式
 
-#畫字時, 起點是左下角
+x_st, y_st = 10, 100
+cv2.putText(image, 'Welcome 1111', (x_st, y_st), font, font_size, font_color, line_width)
 
-x_st, y_st = 20, 40
-font_size = 1 #文字縮放比例
-color = (0, 255, 0) #B G R
-line_width = 1
-cv2.putText(image, "Welcome 1111", (x_st, y_st), font, font_size, color, line_width, line_type)
+y_st += 80
+cv2.putText(image, 'Welcome 2222', (x_st, y_st), font, font_size, font_color, line_width, line_type) #加文字線條樣式
 
+y_st += 80
+cv2.putText(image, 'Welcome 3333', (x_st, y_st), font, font_size, font_color, line_width, cv2.FONT_HERSHEY_SCRIPT_SIMPLEX, True)
 
-x_st, y_st = 20, 80
-font_size = 1 #文字縮放比例
-color = (0, 0, 255) #B G R
-line_width = 1
-cv2.putText(image, "Welcome 2222", (x_st, y_st), font, font_size, color, line_width)
-#加文字線條樣式
-#cv2.putText(image, "Welcome 3333", (x_st, y_st), font, font_size, color, line_width, line_type)
-
-text = 'Welcome 3333'
-x_st, y_st = 20, 150
-font = cv2.FONT_HERSHEY_COMPLEX
-font_size = 2 #文字縮放比例
-color = (255, 0, 0) #B G R
-line_width = 2
-text_size = cv2.getTextSize(text, font, font_size, line_width)
+text_size = cv2.getTextSize("Welcome 4444", font, font_size, line_width)
 print('字體大小 : ', text_size)
 w = text_size[0][0]
 h = text_size[0][1]
-
-cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)  #預設, False
-#cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, False)    #False: 從左上畫起
-#cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type, True)     #True:  從左下畫起
+y_st += 140
+cv2.putText(image, "Welcome 4444", (x_st, y_st), font, font_size, font_color, line_width, line_type)  #預設, False
+#cv2.putText(image, "Welcome 4444", (x_st, y_st), font, font_size, font_color, line_width, line_type, False)    #False: 從左上畫起
+#cv2.putText(image, "Welcome 4444", (x_st, y_st), font, font_size, font_color, line_width, line_type, True)     #True:  從左下畫起
 cv2.rectangle(image, (x_st, y_st), (x_st + w, y_st - h), (0, 0, 255), 2)
 
-
-x_st, y_st = 20, 220
-fontFace = cv2.FONT_HERSHEY_SIMPLEX
-fontScale = 2.5
-color = (0,0,255)
-thickness = 5
-lineType = cv2.LINE_AA
-cv2.putText(image, "Welcome 4444", (x_st, y_st), fontFace, fontScale, color, thickness, lineType)
-
-x_st, y_st = 20, 260
-font = cv2.FONT_HERSHEY_COMPLEX_SMALL
-color = (0,0,255)
-thickness = 1
-lineType = cv2.LINE_AA
-cv2.putText(image, "Welcome 5555", (x_st, y_st), font, 1, color, thickness, lineType)
-
 from PIL import ImageFont, ImageDraw, Image    # 載入 PIL 相關函式庫
-x_st, y_st = 20, 280
+y_st += 40
 #font_filename = 'NotoSansTC-Regular.otf'          # 設定字型路徑
 font = ImageFont.truetype(font_filename, 50)      # 設定字型與文字大小
 imagePil = Image.fromarray(image)                # 將 image 轉換成 PIL 影像
 draw = ImageDraw.Draw(imagePil)                # 準備開始畫畫
-draw.text((x_st, y_st), "歡迎來到美國", fill=(255, 255, 0), font=font)  # 畫入文字，\n 表示換行
+draw.text((x_st, y_st), "歡迎來到美國", fill=(255, 255, 0), font=font)  # 畫入文字
 image = np.array(imagePil)                       # 將 PIL 影像轉換成 numpy 陣列
 
-
-
-
-
-
-
-
-
-cv2.imshow('OpenCV Draw 2', image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print('建立畫布(白色)')
-W, H = 1200, 800
-image = np.ones((H,W,3),dtype="uint8")*255  # 白色背景
-
-font=cv2.FONT_HERSHEY_SIMPLEX
-
-x_st, y_st = 0, 100
-cv2.putText(image,'OpenCV 1',(x_st, y_st),font, 3,(0,0,255),15)
-y_st += 80
-cv2.putText(image,'OpenCV 2',(x_st, y_st),font, 3,(0,255,0),5)
-y_st += 80
-cv2.putText(image,'OpenCV 3',(x_st, y_st),font, 3,(0,0,255),15)
-y_st += 80
-cv2.putText(image,'OpenCV 4',(x_st, y_st),font, 3,(0,255,0),15, cv2.FONT_HERSHEY_SCRIPT_SIMPLEX,True)
-
-font = cv2.FONT_HERSHEY_SIMPLEX
-y_st += 80
-cv2.putText(image,'OpenCV 5',(x_st, y_st), font, 4,(255,0,255),2,cv2.LINE_AA)
-
-font=cv2.FONT_HERSHEY_SIMPLEX
-y_st += 80
-cv2.putText(image,'OpenCV 6',(x_st, y_st), font, 1,(0,255,0),3)
-
-font = cv2.FONT_HERSHEY_SIMPLEX
-y_st += 80
-cv2.putText(image, 'OpenCV 7', (x_st, y_st), font, 6, (255, 255, 0), 10, cv2.LINE_AA)
-
-cv2.imshow("OpenCV Draw 3",image)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-W = 512 + 200
-H = 512
-
-#建立 512x512 的黑色畫布
-image = np.zeros((H, W, 3), dtype = np.uint8)  #H, W
-#用(B, G, R) = (255, 255, 255): 白色填滿畫布
-image.fill(255) #將這個矩陣全部填入255 => 白色
-#image[:] = [48, 213, 254]#將這個矩陣全部填入指定顏色
-# Fill image with gray color(set each pixel to gray)
-#image[:] = (128, 128, 128)
-
-
-print('------------------------------------------------------------')	#60個
-
+print('畫全部內建字型')
 fonts = [
     cv2.FONT_HERSHEY_SIMPLEX,
     cv2.FONT_HERSHEY_PLAIN,
@@ -305,13 +230,10 @@ fonts = [
     cv2.FONT_HERSHEY_SCRIPT_COMPLEX
 ]
 
-text = 'OpenCV'
-x_st, y_st = 400, 50
-font_size = 2 #文字縮放比例
-color = (0, 0, 0)   #B G R
-line_width = 1
+text = 'Welcome'
+x_st, y_st = 500, 100
 for font in fonts:
-    cv2.putText(image, text, (x_st, y_st), font, font_size, color, line_width, line_type)
+    cv2.putText(image, text, (x_st, y_st), font, font_size, font_color, line_width, line_type)
     y_st += 60
     
 cv2.imshow('OpenCV Draw 4', image)
@@ -412,10 +334,28 @@ image[10:100, 200:290] = [0, 0, 255]  # 紅色 一塊 90X90
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+"""
+import cv2
+import numpy as np
+
+fontFace = cv2.FONT_HERSHEY_COMPLEX
+fontScale = 3
+thickness = 2
+text = '7'
+testSize = cv2.getTextSize(text, fontFace, fontScale, thickness)
+print(testSize)
+
+bottomLeftX = 64-int(testSize[0][0]/2)
+bottomLeftY = 64+int(testSize[0][1]/2)
+cv2.putText(image, text, (bottomLeftX, bottomLeftY), fontFace,
+  fontScale, (0, 255, 255), thickness, cv2.LINE_AA)
+
+cv2.imshow('Result', image)
+
+
+
+"""
 
