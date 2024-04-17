@@ -1,0 +1,12 @@
+Python程式語言的主要特色
+Python的官方網站宣稱Python程式語言是功能強大、快速、容易使用並且是開放式的免費軟體，而這也是為何程式設計師要選擇Python為開發應用軟體系統的程式語言，Python主要的特色說明如下。
+1.簡單且易於學習
+Python非常適合初次接觸程式語言的學習者，其語言簡單易學，Python使用優雅的語法，使得編寫的程式碼更容易閱讀。
+2.完全採物件導向
+Python的函式、數字、字串都是物件，完全支援繼承、重載、衍生、與多重繼承，有益於增強原始碼的複用性。
+3.豐富的擴充模組
+Python本身被設計為可擴充的，並非所有的特性和功能都整合到語言核心，Python提供了豐富的API和工具，以便程式設計師能夠輕鬆地使用C、C++來編寫擴充模組，Python編譯器本身也可以被整合到其它需要腳本語言的程式內，第3方的程式庫包括Web and Internet Development、Database Access、Desktop GUIs、Scientific & Numeric、Education、Network Programming、Software & Game Development等。
+4.免費的開發環境
+ Python可以免費下載與使用，或將其包括在個人所開發的應用程式中，Python屬於開放原始碼專案，沒有專利問題，允許被自由地修改與重新發佈。
+5.跨多平台的特性
+Python程式常常不需要修改，即可同時在Linux與Windows等作業系統平台上執行，即使撰寫 GUI 程式也是具有可移植性。

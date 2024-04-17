@@ -92,20 +92,22 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
-print('字元轉unicode')
-
-num = 65
+print('chr(x) 取得整數x的ASCII編碼值')
+num = 0x41
 print(chr(num)) # 輸出數值num的字元
 
-"""
-for i in range(128):
+for i in range(0x30, 120):
     c = chr(i)
     print(c, end = '')
-"""
+print()
+
+print('ord(x) 取得字元x的Unicode編碼值')
 
 original_string = '你'
-print('原始字串 :', original_string)
+cc = ord(original_string)
+print(cc)
 
+original_string = '你'
 print('Unicode編碼後(10進位) :', ord(original_string))
 print('Unicode編碼後(16進位) :', hex(ord(original_string)))
 

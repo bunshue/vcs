@@ -8,7 +8,7 @@ import sys
 
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
 
 for animal in animals:
@@ -928,9 +928,34 @@ mysports.append("football")
 friendsports.append("soccer")
 print("我喜歡的最新運動     = ", mysports)
 print("我朋友喜歡的最新運動 = ", friendsports)
-
+'''
 
 print("------------------------------------------------------------")  # 60個
+
+#join() 連接字串
+
+animals = ["鼠", "牛", "虎", "兔"]
+
+print("---".join(animals))
+
+#split() 分割字串
+animals = "米老鼠 班尼牛 跳跳虎 彼得兔 逗逗龍"
+cc = animals.split()
+print(cc)
+
+#字串排版
+
+#ljust rjust
+text = "米老鼠"
+print("|"+text+"|")
+print("|"+text.ljust(10)+"|")
+print("|"+text.ljust(10, '#')+"|")
+print("|"+text.rjust(10)+"|")
+print("|"+text.rjust(10, '#')+"|")
+#center(n) : 將字串擴充n個字元並置中
+print("|"+text.center(10)+"|")
+
+
 
 
 print("------------------------------------------------------------")  # 60個
