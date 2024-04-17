@@ -1,5 +1,7 @@
 """
-一本精通：OpenCV 與 AI 影像辨識
+
+
+
 
 """
 
@@ -11,6 +13,8 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
+ESC = 27
+
 import cv2
 import numpy as np
 
@@ -18,7 +22,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_57")
 
-""" webcam
 cap = cv2.VideoCapture(0)                 # 讀取攝影鏡頭
 w = 420
 h = 240
@@ -59,27 +62,31 @@ while True:
         img[:,i,0] = img[:,i,0]*(1-draw[:,i,3]/255) + draw[:,i,0]*(draw[:,i,3]/255)
         img[:,i,1] = img[:,i,1]*(1-draw[:,i,3]/255) + draw[:,i,1]*(draw[:,i,3]/255)
         img[:,i,2] = img[:,i,2]*(1-draw[:,i,3]/255) + draw[:,i,2]*(draw[:,i,3]/255)
-    keyboard = cv2.waitKey(5)
-    if keyboard == ord('q'):
+        
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
-    if keyboard == ord('r'):
+    elif k == ord('r'):
         draw = np.zeros((h,w,4), dtype='uint8')
+        
     cv2.imshow('ImageShow', img)
     out.write(img)  # 儲存影片
 
 out.release()       # 釋放資源
 cap.release()       # 釋放資源
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_63")
 
-""" webcam
 cap = cv2.VideoCapture(0)
-xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+
+xml_filename = 'C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml'
+
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
-faces = face_cascade_classifier.detectMultiScale(gray)
+#faces = face_cascade_classifier.detectMultiScale(gray)
+
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -93,21 +100,24 @@ while True:
     faces = face_cascade_classifier.detectMultiScale(gray)      # 偵測人臉
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)   # 標記人臉
+        
     cv2.imshow('ImageShow', frame)
-    if cv2.waitKey(1) == ord('q'):
+    
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
+
 cap.release()
 cv2.destroyAllWindows()
-"""
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("OpenCV_ai_65")
 
-""" webcam
 cap = cv2.VideoCapture(0)
-xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+
+xml_filename = 'C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml'
+
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 if not cap.isOpened():
     print("Cannot open camera")
@@ -128,23 +138,29 @@ while True:
         mosaic = cv2.resize(mosaic, (mw,mh), interpolation=cv2.INTER_LINEAR)
         mosaic = cv2.resize(mosaic, (w,h), interpolation=cv2.INTER_NEAREST)
         frame[y:y+h, x:x+w] = mosaic
+        
     cv2.imshow('ImageShow', frame)
-    if cv2.waitKey(1) == ord('q'):
-        break    # 按下 q 鍵停止
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
-"""
-
 
 print("------------------------------------------------------------")  # 60個
 
+
+eye_xml_filename = 'C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_eye.xml'
+mouth_xml_filename = 'C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_mouth.xml'
+nose_xml_filename = 'C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_mcs_nose.xml'
+
 print("OpenCV_ai_67")
 
-""" webcam
 cap = cv2.VideoCapture(0)
-eye_cascade = cv2.CascadeClassifier("haarcascade_eye.xml")          # 使用眼睛模型
-mouth_cascade = cv2.CascadeClassifier("haarcascade_mcs_mouth.xml")  # 使用嘴巴模型
-nose_cascade = cv2.CascadeClassifier("haarcascade_mcs_nose.xml")    # 使用鼻子模型
+eye_cascade = cv2.CascadeClassifier(eye_xml_filename)          # 使用眼睛模型
+mouth_cascade = cv2.CascadeClassifier(mouth_xml_filename)  # 使用嘴巴模型
+nose_cascade = cv2.CascadeClassifier(nose_xml_filename)    # 使用鼻子模型
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -171,20 +187,24 @@ while True:
         cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(1) == ord('q'):
-        break     # 按下 q 鍵停止
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
-"""
 
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_71")
 
-""" webcam
 recognizer = cv2.face.LBPHFaceRecognizer_create()         # 啟用訓練人臉模型方法
-recognizer.read('face.yml')                               # 讀取人臉模型檔
-xml_filename = "C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml"
+
+#缺檔案
+#recognizer.read('face.yml')                               # 讀取人臉模型檔
+
+xml_filename = 'C:/_git/vcs/_4.python/opencv/data/_xml/haarcascade_frontalface_default.xml'
+
 face_cascade_classifier = cv2.CascadeClassifier(xml_filename)        # 啟用人臉追蹤
 
 cap = cv2.VideoCapture(0)                                 # 開啟攝影機
@@ -219,8 +239,11 @@ while True:
         cv2.putText(img, text, (x,y-5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
 
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(5) == ord('q'):
-        break    # 按下 q 鍵停止
+    
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -236,12 +259,12 @@ while True:
     if not ret:
         print("Cannot receive frame")
         break
-    keyName = cv2.waitKey(1)
-    # 按下 q 結束
-    if keyName == ord('q'):
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
     # 按下 a 開始選取
-    if keyName == ord('a'):
+    if k == ord('a'):
         # 選取區域
         area = cv2.selectROI('ImageShow', frame, showCrosshair=False, fromCenter=False)
         print(area)
@@ -268,11 +291,12 @@ while True:
         print("Cannot receive frame")
         break
     frame = cv2.resize(frame,(540,300))  # 縮小尺寸，加快速度
-    keyName = cv2.waitKey(1)
 
-    if keyName == ord('q'):
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
-    if keyName == ord('a'):
+
+    if k == ord('a'):
         area = cv2.selectROI('ImageShow', frame, showCrosshair=False, fromCenter=False)
         tracker.init(frame, area)    # 初始化追蹤器
         tracking = True              # 設定可以開始追蹤
@@ -287,10 +311,11 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_74")
-"""
+
+print("OpenCV_ai_74 影片")
+
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
 tracker_list = []
@@ -312,11 +337,13 @@ while True:
         print("Cannot receive frame")
         break
     frame = cv2.resize(frame,(400,230))       # 縮小尺寸，加快速度
-    keyName = cv2.waitKey(1)
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+    
     # 為了避免影片影格太多，所以採用 10 格取一格，加快處理速度
     if a%10 == 0:
-        if keyName == ord('q'):
-            break
         if tracking == False:
             # 如果尚未開始追蹤，就開始標記追蹤物件的外框
             for i in tracker_list:
@@ -336,11 +363,11 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-"""
+
 print("------------------------------------------------------------")  # 60個
+
 print("OpenCV_ai_75")
 
-""" webcam
 multiTracker = cv2.legacy.MultiTracker_create()  # 建立多物件追蹤器
 tracking = False                                 # 設定追蹤尚未開始
 colors = [(0,0,255),(0,255,255)]                 # 建立外框色彩清單
@@ -356,12 +383,13 @@ while True:
         print("Cannot receive frame")
         break
     frame = cv2.resize(frame,(400,230))         # 縮小尺寸加快速度
-    keyName = cv2.waitKey(50)
 
-    if keyName == ord('q'):
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
+
     # 按下 a 的時候開始標記物件外框
-    if keyName == ord('a'):
+    if k == ord('a'):
         for i in range(2):
             area = cv2.selectROI('ImageShow', frame, showCrosshair=False, fromCenter=False)
             # 標記外框後設定該物件的追蹤演算法
@@ -385,7 +413,6 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -404,9 +431,13 @@ while True:
         break
     mask = cv2.inRange(frame, lower, upper)               # 使用 inRange
     output = cv2.bitwise_and(frame, frame, mask = mask )  # 套用影像遮罩
+    
     cv2.imshow('ImageShow', output)
-    if cv2.waitKey(1) == ord('q'):
-        break       # 按下 q 鍵停止
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+    
 cap.release()
 cv2.destroyAllWindows()
 
@@ -431,8 +462,10 @@ while True:
     output = cv2.erode(output, kernel)        # 縮小影像，還原大小
 
     cv2.imshow('ImageShow', output)
-    if cv2.waitKey(1) == ord('q'):
-        break       # 按下 q 鍵停止
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -460,13 +493,17 @@ while True:
     # cv2.RETR_EXTERNAL 表示取得範圍的外輪廓座標串列，cv2.CHAIN_APPROX_SIMPLE 為取值的演算法
     contours, hierarchy = cv2.findContours(output, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
+    """
     # 使用 for 迴圈印出座標長相
     for contour in contours:
         print(contour)
+    """
 
     cv2.imshow('ImageShow', output)
-    if cv2.waitKey(1) == ord('q'):
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -505,8 +542,10 @@ while True:
                     img = cv2.line(img, (contour[i][0][0], contour[i][0][1]), (contour[0][0][0], contour[0][0][1]), color, 3)
 
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(1) == ord('q'):
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -539,8 +578,10 @@ while True:
             img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)  # 繪製四邊形
 
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(1) == ord('q'):
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -591,8 +632,10 @@ while True:
             img = cv2.rectangle(img, (x, y), (x + w, y + h), color, 3)
 
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(1) == ord('q'):
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -629,15 +672,17 @@ with mp_face_detection.FaceDetection(
                 mp_drawing.draw_detection(img, detection)
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(1) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_84")
 
-import mediapipe as mp     # 載入 mediapipe 函式庫
+import mediapipe as mp
 
 cap = cv2.VideoCapture(0)
 mp_face_detection = mp.solutions.face_detection   # 建立偵測方法
@@ -662,8 +707,10 @@ with mp_face_detection.FaceDetection(             # 開始偵測人臉
                 mp_drawing.draw_detection(img, detection)  # 標記人臉
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -710,8 +757,10 @@ with mp_face_detection.FaceDetection(
                 cv2.circle(img,(bx-8,by-8),(eye-15),(255,255,255),-1) # 畫右眼白色小圓 ( 反光 )
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -772,8 +821,10 @@ with mp_face_mesh.FaceMesh(
                     .get_default_face_mesh_iris_connections_style())
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -835,8 +886,10 @@ with mp_face_mesh.FaceMesh(
                     .get_default_face_mesh_iris_connections_style())
 
         cv2.imshow('ImageShow', output)     # 顯示 output
-        if cv2.waitKey(5) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+        
 cap.release()
 cv2.destroyAllWindows()
 
@@ -879,8 +932,10 @@ with mp_hands.Hands(
                     mp_drawing_styles.get_default_hand_connections_style())
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -939,8 +994,10 @@ with mp_hands.Hands(
 
         cv2.rectangle(img,(rx,ry),(rx+80,ry+80),(0,0,255),5)   # 畫出觸碰區
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -979,8 +1036,10 @@ with mp_pose.Pose(
             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
-            break     # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -1027,8 +1086,10 @@ with mp_pose.Pose(
             landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
-            break     # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -1076,14 +1137,17 @@ with mp_holistic.Holistic(
             .get_default_pose_landmarks_style())
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_93")
 
+""" fail
 import mediapipe as mp
 
 mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
@@ -1118,14 +1182,18 @@ with mp_objectron.Objectron(static_image_mode=False,
                                     detected_object.translation)
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_94")
 
+""" 缺檔案
 import mediapipe as mp
 
 mp_drawing = mp.solutions.drawing_utils                    # mediapipe 繪圖功能
@@ -1154,10 +1222,13 @@ with mp_selfie_segmentation.SelfieSegmentation(
         # 將主體與背景合成，如果滿足背景條件，就更換為 bg 的像素，不然維持原本的 img 的像素
 
         cv2.imshow('ImageShow', output_image)
-        if cv2.waitKey(5) == ord('q'):
-            break     # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
+"""
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_95")
@@ -1296,8 +1367,10 @@ with mp_hands.Hands(
                     cv2.putText(img, text, (30,120), fontFace, 5, (255,255,255), 10, lineType) # 印出文字
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
             break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -1458,8 +1531,10 @@ with mp_hands.Hands(
                         cv2.putText(img, text, (30,120), fontFace, 5, (255,255,255), 10, lineType) # 印出文字
 
         cv2.imshow('ImageShow', img)
-        if cv2.waitKey(5) == ord('q'):
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
             break
+
 cap.release()
 cv2.destroyAllWindows()
 
@@ -1602,11 +1677,13 @@ with mp_hands.Hands(
             img[:,j,2] = img[:,j,2]*(1-draw[:,j,3]/255) + draw[:,j,2]*(draw[:,j,3]/255)
 
         cv2.imshow('ImageShow', img)
-        keyboard = cv2.waitKey(5)
-        if keyboard == ord('q'):
+
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
             break
+            
         # 按下 r 重置畫面
-        if keyboard == ord('r'):
+        if k == ord('r'):
             draw = np.zeros((h,w,4), dtype='uint8')
             cv2.rectangle(draw,(20,20),(60,60),(0,0,255,255),-1)   # 在畫面上方放入紅色正方形
             cv2.rectangle(draw,(80,20),(120,60),(0,255,0,255),-1)  # 在畫面上方放入綠色正方形
@@ -1653,7 +1730,8 @@ while True:
     output = cv2.add(img, img2)                      # 合併影像
 
     cv2.imshow('ImageShow', output)
-    if cv2.waitKey(50) == ord('q'):
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
 
 cap.release()
@@ -1661,7 +1739,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_99")
-
+""" fail
 w = 640    # 定義影片寬度
 h = 360    # 定義影像高度
 dots = []  # 記錄座標
@@ -1714,12 +1792,13 @@ while True:
     output = cv2.add(img, img2)                      # 合併影像
 
     cv2.imshow('ImageShow', output)
-    if cv2.waitKey(50) == ord('q'):
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
         break
 
 cap.release()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 import mediapipe as mp
@@ -1794,14 +1873,17 @@ with mp_hands.Hands(
         output = cv2.add(img, img2)                      # 合併影像
 
         cv2.imshow('ImageShow', output)
-        keyboard = cv2.waitKey(5)
-        if keyboard == ord('q'):
+        
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
             break
+
 cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+""" 缺檔案
 import mediapipe as mp
 
 cap = cv2.VideoCapture(0)                          # 讀取攝影鏡頭
@@ -1868,13 +1950,19 @@ with mp_face_detection.FaceDetection(
                 out = (out * 255).astype('uint8')          # 轉換成數字
 
         cv2.imshow('ImageShow', out)
-        if cv2.waitKey(5) == ord('q'):
-            break    # 按下 q 鍵停止
+        k = cv2.waitKey(1) # 等待按鍵輸入
+        if k == ESC:
+            break
+
 cap.release()
 cv2.destroyAllWindows()
 
+"""
+
 print("------------------------------------------------------------")  # 60個
 
+
+""" 缺檔案
 import tensorflow as tf
 
 model = tf.keras.models.load_model('keras_model.h5', compile=False)   # 載入 model
@@ -1900,14 +1988,19 @@ while True:
         print('oxxo')
     if b>0.9:
         print('維他命')
+        
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(500) == ord('q'):
-        break     # 按下 q 鍵停止
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
+
+""" 缺檔案
 import tensorflow as tf
 
 model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
@@ -1945,14 +2038,20 @@ while True:
         text('b')
     if c>0.9:
         text('c')
+        
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(1) == ord('q'):
-        break    # 按下 q 鍵停止
+    
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
+""" 缺檔案
 import tensorflow as tf
 
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
@@ -1992,14 +2091,18 @@ while True:
         text('石頭')
     if c>0.9:
         text('布')
+
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(1) == ord('q'):
-        break     # 按下 q 鍵停止
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
+""" 缺檔案
 import tensorflow as tf
 
 model = tf.keras.models.load_model('keras_model.h5', compile=False)  # 載入模型
@@ -2036,14 +2139,19 @@ while True:
         text('ok~')
     if b>0.001:              # 判斷沒戴口罩
         text('no mask!!')
+
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(1) == ord('q'):
-        break  # 按下 q 鍵停止
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
+""" 缺檔案
 import tensorflow as tf
 
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL 相關函式庫
@@ -2082,12 +2190,15 @@ while True:
         text('很乖')
     if b>0.001:
         text('沒戴口罩!!')
+
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(1) == ord('q'):
-        break    # 按下 q 鍵停止
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 from keras.datasets import mnist
@@ -2165,14 +2276,15 @@ while True:
     cv2.putText(img, text, org, fontFace, fontScale, color, thickness, lineType) # 印出文字
 
     cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255),3)  # 標記辨識的區域
+
     cv2.imshow('ImageShow', img)
-    if cv2.waitKey(50) == ord('q'):
-        break     # 按下 q 鍵停止
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
 
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2190,11 +2302,4 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
 

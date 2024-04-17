@@ -22,6 +22,8 @@ import numpy as np
 
 print("------------------------------------------------------------")  # 60個
 
+print('按 ESC 離開')
+
 cap = cv2.VideoCapture(0)
 
 #用XVID格式存avi檔
@@ -98,8 +100,6 @@ while True:
 
     k = cv2.waitKey(1)
     if k == ESC:     #ESC
-        break
-    elif k == ord('q'): # 若按下 q 鍵則離開迴圈
         break
     elif k == ord('s'): # 若按下 s 鍵則存圖
         image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';

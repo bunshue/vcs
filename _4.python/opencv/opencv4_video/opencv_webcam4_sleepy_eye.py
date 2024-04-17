@@ -3,18 +3,12 @@
 import cv2
 
 import sys
-import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
 print('------------------------------------------------------------')	#60個
+
+print('按 ESC 離開')
 
 from functools import wraps
 import time
@@ -77,8 +71,6 @@ while 1:
     k = cv2.waitKey(1)
     if k == 27:     #ESC
         break
-    elif k == ord('q'): # 若按下 q 鍵則離開迴圈
-        break
     elif k == ord('s'): # 若按下 s 鍵則存圖
         image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
         cv2.imwrite(image_filename, frame)
@@ -87,4 +79,13 @@ while 1:
 # 釋放所有資源
 cap.release()   # 釋放攝影機
 cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 

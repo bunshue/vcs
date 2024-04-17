@@ -1,9 +1,15 @@
 """
 各種編碼相關
 
+編碼: 字串轉拜列
+解碼: 拜列轉字串
+
+原始字串  original_string
+編碼拜列  encoded_bytes
+解碼字串  decoded_string
+
 """
 import sys
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -12,97 +18,84 @@ print(sys.getdefaultencoding())
 
 print('------------------------------------------------------------')	#60個
 
-string_data1 = '你好'
+original_string = '金詢初海花浪花情真'
+print('原始字串 :', original_string)
 
-print('原字串 :', string_data1)
-print('用 gb2312 編碼 ')
-encode_data = string_data1.encode('gb2312')
-print(encode_data)
+print('用 big5 編碼')
+encoded_bytes = original_string.encode(encoding='big5') # 有無encoding=皆可
+print(encoded_bytes)
 
-print('再用 big5 解碼出來')
-string_data2 = encode_data.decode('big5')
-print(string_data2)
+print('用 big5 解碼')
+decoded_string = encoded_bytes.decode(encoding='big5')
+print(decoded_string)
 
-print('萬國碼 unicode, 我')
-print('我'.encode('utf8'))
+print('------------------------------')	#30個
+
+print('用 gbk 編碼')
+encoded_bytes = original_string.encode('gbk')
+print(encoded_bytes)
+
+print('用 gbk 解碼')
+decoded_string = encoded_bytes.decode('gbk')
+print(decoded_string)
+
+print('------------------------------')	#30個
+
+print('用 utf-8 編碼')
+encoded_bytes = original_string.encode('utf-8')#有無-皆可, 大小寫皆可
+print(encoded_bytes)
+
+print('用 utf-8 解碼')
+decoded_string = encoded_bytes.decode('UTF-8')
+print(decoded_string)
+
+print('------------------------------')	#30個
+
+original_string = '金詢初海花浪花情真'
+print('原始字串 :', original_string)
+
+encoded_bytes = repr(original_string).encode('utf-8') + b'\0'
+print(type(encoded_bytes))
+print(encoded_bytes)
 
 print('------------------------------------------------------------')	#60個
 
-string_data1 = '扂砑腕善衄壽unicode腔垀衄砆牉訧蹋,掀:unicode 2.0 3.0 4.0 梗摯崋欴晤鎢.gb,big-5,gbk,脹脹.坳蠅眳潔腔梗摯薊炵..秪峈扂猁勤森輛俴惆豢,眕扂植懂羶衄勤晤鎢衄徹旃噶,腕悝.褫岆婓厙奻梑祥善涴笱砆牉腔恅梒..洷咡籵徹蠟夔腕善.郅郅!'
+print('從 你好 變成 斕疑 的原因')
 
-print('原字串 :', string_data1)
-print('用 big5 編碼 ')
-encode_data = string_data1.encode('big5')
-print(encode_data)
+original_string = '你好'
+print('原始字串 :', original_string)
 
-print('再用 gb2312 解碼出來')
-string_data2 = encode_data.decode('gb2312')
-print(string_data2)
+print('用 簡中 編碼 ')
+encoded_bytes = original_string.encode('gb2312')
+print(encoded_bytes)
 
+print('用 正中 解碼')
+decoded_string = encoded_bytes.decode('big5')
+print(decoded_string)
+
+print('------------------------------------------------------------')	#60個
+
+print('把怪怪的字解譯出來')
+
+original_string = '扂砑腕善衄壽unicode腔垀衄砆牉訧蹋,掀:unicode 2.0 3.0 4.0 梗摯崋欴晤鎢.gb,big-5,gbk,脹脹.坳蠅眳潔腔梗摯薊炵..秪峈扂猁勤森輛俴惆豢,眕扂植懂羶衄勤晤鎢衄徹旃噶,腕悝.褫岆婓厙奻梑祥善涴笱砆牉腔恅梒..洷咡籵徹蠟夔腕善.郅郅!'
+print('原始字串 :', original_string)
+
+print('用 正中 編碼 ')
+encoded_bytes = original_string.encode('big5')
+print(encoded_bytes)
+
+print('用 簡中 解碼')
+decoded_string = encoded_bytes.decode('gb2312')
+print(decoded_string)
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 print('字元轉unicode')
 
-text = '你'
-print('原字串 :', text)
-print('Unicode編碼後(10進位) :', ord(text))
-print('Unicode編碼後(16進位) :', hex(ord(text)))
-
-print('--------')
-"""
-#unicode() 不能用
-text = '中文 test'
-print('原字串 :', text)
-print(text, len(text))
-#utfstr = unicode(text, 'utf-8')
-#-------------
-text = 'abcdefg'
-print('字串 轉 unicode')
-ccc = unicode(text, 'utf-8')
-print(ccc)
-#-------------
-print('unicode 轉 字串')
-ddd = str(ccc)
-print(ddd)
-#-------------
-text = "Hello!"
-u = unicode(text, "utf-8")
-print(u)
-#-------------
-
-text = '你好'
-text_to_unicode = text.decode(encoding='utf-8')  # 要告訴decode原本的編碼是哪種
-print(text_to_unicode)
-
-#text = 'Ribeir\xc3\xa3o Preto'
-#print(text.decode('cp1252').encode('utf-8'))
-
-"""
-print('--------')
-
 num = 65
 print(chr(num)) # 輸出數值num的字元
-
-print('--------')
-text = '你好'
-print('原字串 :', text)
-print('字串 轉 UTF-8 => UTF-8 拜列')
-byte_array = text.encode('UTF-8')
-print(type(byte_array))
-print(byte_array)
-print('UTF-8 拜列 轉 字串')
-print(byte_array.decode('UTF-8'))
-print('--------')
-byte_array = b'\xe4\xbd\xa0\xe5\xa5\xbd'
-print(len(byte_array))
-print(byte_array.decode('UTF-8'))
-
-print('--------')
-byte_array = b'\xe4\xbd\xa0\xe5\xa5\xbe'
-print(len(byte_array))
-print(byte_array.decode('UTF-8'))
-
-print('--------')
 
 """
 for i in range(128):
@@ -110,6 +103,11 @@ for i in range(128):
     print(c, end = '')
 """
 
+original_string = '你'
+print('原始字串 :', original_string)
+
+print('Unicode編碼後(10進位) :', ord(original_string))
+print('Unicode編碼後(16進位) :', hex(ord(original_string)))
 
 print('------------------------------------------------------------')	#60個
 
@@ -122,14 +120,6 @@ print()
 
 _b85chars2 = [(a + b) for a in _b85chars for b in _b85chars]
 print(_b85chars2)
-
-print('------------------------------------------------------------')	#60個
-
-print('字串轉拜列')
-text = 'lion'
-byte_array = repr(text).encode('utf-8') + b'\0'
-print(type(byte_array))
-print(byte_array)
 
 print('------------------------------------------------------------')	#60個
 
@@ -292,42 +282,6 @@ for enc in ALL_CJKENCODINGS:
     print(code)
 """
 print('------------------------------------------------------------')	#60個
-
-print('編碼: 字串轉拜列')
-print('解碼: 拜列轉字串')
-
-str1 = '金詢初海花浪花情真'
-
-print('用 big5 編碼')
-cc = str1.encode('big5')
-print(cc)
-
-print('用 gbk 編碼')
-cc = str1.encode('gbk')
-print(cc)
-
-print('用 utf-8 編碼')
-cc = str1.encode('utf-8')
-print(cc)
-
-data = b'\xB8\xAD'
-
-print('用 big5 解碼')
-cc = data.decode('big5')
-print(cc)
-# 將bytes轉為big5文字，'葉'
-
-print('用 gbk 解碼')
-cc = data.decode('gbk')
-print(cc)
-# 將bytes轉為gbk文字，'腑'
-
-"""
-print('用 utf-8 解碼')
-cc = data.decode('utf-8')
-print(cc)
-# 將bytes轉為ytf-8文字，解碼規則無法解碼
-"""
 
 
 

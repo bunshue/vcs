@@ -1,4 +1,3 @@
-
 import os
 import sys
 import time
@@ -7,12 +6,15 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
+ESC = 27
+
 import cv2
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
-''' OK
+
 print("OpenCV VideoCapture 01 錄影")
+print('按 ESC 離開')
 
 cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
@@ -29,9 +31,13 @@ while True:
         print("Cannot receive frame")
         break
     out.write(frame)       # 將取得的每一幀圖像寫入空的影片
+    
     cv2.imshow("OpenCV 01", frame)
-    if cv2.waitKey(1) == ord('q'):
-        break             # 按下 q 鍵停止
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
+        break
+
 cap.release()
 out.release()      # 釋放資源
 cv2.destroyAllWindows()
@@ -39,6 +45,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 02 錄影 灰階")
+print('按 ESC 離開')
 
 cap = cv2.VideoCapture(0)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -57,9 +64,13 @@ while True:
         break
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
     out.write(gray)
+    
     cv2.imshow("OpenCV 02", gray)
-    if cv2.waitKey(1) == ord('q'):
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
+
 cap.release()
 out.release()
 cv2.destroyAllWindows()
@@ -67,6 +78,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 03 錄影")
+print('按 ESC 離開')
 
 cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')          # 設定影片的格式為 MJPG
@@ -82,9 +94,13 @@ while True:
     img_1 = frame
     img_2 = cv2.flip(img_1, 0)             # 上下翻轉
     out.write(img_2)                       # 將取得的每一幀圖像寫入空的影片
+    
     cv2.imshow("OpenCV 03", frame)
-    if cv2.waitKey(1) == ord('q'):
-        break                              # 按下 q 鍵停止
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
+        break
+
 cap.release()
 out.release()      # 釋放資源
 cv2.destroyAllWindows()
@@ -92,6 +108,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 04 兩個camera")
+print('按 ESC 離開')
 
 ratio = 3
 border = 30
@@ -124,7 +141,9 @@ while True:
     cv2.rectangle(img2, (x_st, y_st), (x_st+w,y_st+h), (255,255,255), 5)  # 繪製子影片的外框
 
     cv2.imshow("OpenCV 04", img2)
-    if cv2.waitKey(1) == ord('q'):
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
 
 cap1.release()
@@ -134,6 +153,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 05 N X N")
+print('按 ESC 離開')
 
 N = 2 # 設定要分成幾格, N X N
 W = 640*2
@@ -169,7 +189,9 @@ while True:
         output[h*y:h*y+h, w*x:w*x+w] = img_list[i]  # 更新畫面
 
     cv2.imshow("OpenCV 05", output)
-    if cv2.waitKey(50) == ord('q'):
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
 
 cap.release()
@@ -178,6 +200,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 10 Covex效果")
+print('按 ESC 離開')
 
 def convex(src_img, raw, effect):
     col, row, channel = raw[:]
@@ -207,15 +230,20 @@ while True:
     w, h = 640, 480
     cw, ch = int(w/2), int(h/2)            # 取得中心點
     img = convex(img, (w, h, 3), (cw, ch, 100))
+    
     cv2.imshow("OpenCV 10", img)
-    if cv2.waitKey(100) == ord('q'):
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
+
 cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 11 按鍵 慢慢顯示出一圖的效果")
+print('按 ESC 離開')
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
@@ -227,12 +255,11 @@ white = 255 - np.zeros((h,w,4), dtype='uint8')
 
 a = 0                       # 開始時 a 等於 0
 while True:
-
-    key = cv2.waitKey(1)    # 偵測按鍵
-    if key == 32:
-        a = 1               # 如果按下空白鍵，讓 a 等於 1
-    elif key == ord('q'):
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
+    elif k == 32:
+        a = 1               # 如果按下空白鍵，讓 a 等於 1
 
     if a == 0:
         output = img.copy() # 如果 a 等於 0，複製來源圖片為 output
@@ -249,6 +276,7 @@ cv2.destroyAllWindows()                 # 結束所有視窗
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 12 存圖 製作一個閃光燈拍照的效果")
+print('按 ESC 離開')
 
 cap = cv2.VideoCapture(0)
 
@@ -268,11 +296,11 @@ while True:
     img = cv2.resize(img,(w,h))         # 縮放尺寸
     white = 255 - np.zeros((h,w,4), dtype='uint8')   # 產生全白圖片
 
-    key = cv2.waitKey(1)
-    if key == 32:            # 按下空白將 a 等於 1
-        a = 1
-    elif key == ord('q'):    # 按下 q 結束
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
+    elif k == 32:            # 按下空白將 a 等於 1
+        a = 1
 
     if a == 0:
         output = img.copy()  # 如果 a 為 0，設定 output 變數為來源圖片的拷貝
@@ -295,6 +323,7 @@ cv2.destroyAllWindows()                 # 結束所有視窗
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 13 存圖 製作一個閃光燈拍照的效果 + 倒數三秒")
+print('按 ESC 離開')
 
 cap = cv2.VideoCapture(0)
 
@@ -323,12 +352,13 @@ while True:
     img = cv2.resize(img,(w,h))
     white = 255 - np.zeros((h,w,4), dtype='uint8')
 
-    key = cv2.waitKey(1)
-    if key == 32:
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
+        break
+    elif k == 32:
         a = 1
         sec = 4  # 加入倒數秒數
-    elif key == ord('q'):
-        break
+
     if a == 0:
         output = img.copy()
     else:
@@ -350,9 +380,11 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
+
 print("OpenCV VideoCapture 14 加 logo")
+print('按 ESC 離開')
 
 logo_filename = 'C:/_git/vcs/_4.python/_data/logo1.png'
 
@@ -381,14 +413,20 @@ while True:
     frame = cv2.resize(frame,(640, 480))   # 調整圖片尺寸
     bg = cv2.bitwise_and(frame, frame, mask = mask2 )
     output = cv2.add(bg, logo)
+    
     cv2.imshow("OpenCV 14", output)
-    if cv2.waitKey(1) == ord('q'):
-        break      # 按下 q 鍵停止
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
+        break
+    
 cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
 print("OpenCV VideoCapture 15")
+print('按 ESC 離開')
 
 logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
 logo = cv2.imread(logo_filename)
@@ -400,9 +438,11 @@ img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, mask1  = cv2.threshold(img_gray, 200, 255, cv2.THRESH_BINARY_INV)
 
 cap = cv2.VideoCapture(0)
+
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
+
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -411,14 +451,20 @@ while True:
     frame = cv2.resize(frame,(640, 480))
     output = cv2.bitwise_not(frame, mask = mask1 )      # 套用 not 和遮罩
     output = cv2.bitwise_not(output, mask = mask1 )     # 再次套用 not 和遮罩，將色彩轉成原來的顏色
+    
     cv2.imshow("OpenCV 15", output)
-    if cv2.waitKey(1) == ord('q'):
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
+    
 cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
 print("OpenCV VideoCapture 16 Webcam影像轉成gif")
+print('按 ESC 離開')
 
 from PIL import Image,ImageSequence
 
@@ -454,8 +500,11 @@ while True:
     output.append(gif)                            # 添加到 output
 
     cv2.imshow("OpenCV 16", img)
-    if cv2.waitKey(250) == ord('q'):
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
+
 cap.release()
 # 儲存為 gif 動畫
 output[0].save("tmp_webcam_image.gif", save_all=True, append_images=output[1:], duration=250, loop=0, disposal=2)
@@ -464,6 +513,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 17 處理影片")
+print('按 ESC 離開')
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
@@ -487,8 +537,11 @@ while True:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGBA)  # 修改顏色為 RGBA
         source.append(img)                           # 記錄該圖片
     frame = frame + 1
-    if cv2.waitKey(1) == ord('q'):
-        break                                        # 按下 q 鍵停止
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
+        break
+
 cap.release()
 
 print('start...')
@@ -523,6 +576,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 18 QRCode 偵測器")
+print('按 ESC 離開')
 
 from PIL import ImageFont, ImageDraw, Image
 
@@ -562,8 +616,11 @@ while True:
             box = boxSize(bbox[i])    # QRCode 座標
             cv2.rectangle(img,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)  # 繪製外框
             putText(box[0],box[3],text,color=(0,0,255))                     # 顯示文字
+
     cv2.imshow("OpenCV 18", img)
-    if cv2.waitKey(1) == ord('q'):
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
 
 cap.release()
@@ -572,6 +629,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 19 QRCode 偵測器")
+print('按 ESC 離開')
 
 from PIL import ImageFont, ImageDraw, Image
 
@@ -624,7 +682,9 @@ while True:
                 putText(0,0,'負片效果',100,(0,0,0))
 
     cv2.imshow("OpenCV 19", img)     # 預覽影像
-    if cv2.waitKey(1) == ord('q'):
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
         break
 
 cap.release()
@@ -633,6 +693,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("OpenCV VideoCapture 20 讀取 QR code 圖檔")
+print('按 ESC 離開')
 
 from PIL import ImageFont, ImageDraw, Image
 

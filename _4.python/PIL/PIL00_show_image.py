@@ -55,32 +55,20 @@ print("列出物件檔名 : ", image.filename)
 print("列出物件型態 : ", type(image))
 print("列出物件副檔名 : ", image.format)
 print("列出物件描述   : ", image.format_description)
-print("列出物件模式   : ", image.mode)
 
-width, height = image.size               # 獲得影像寬度和高度
-print("寬度 = ", width)
-print("高度 = ", height)
-
-#print(image.mode)
-#print(image.size)
-
+# 獲得影像寬度和高度
 W, H = image.size
 print('原圖大小 W =', W, ', H =', H)
 
 print('圖片維度 圖片資訊')
 print('Size : ', image.size, 'Mode : ', image.mode, 'Format : ', image.format)
 
-"""
-#查看圖片信息，可用如下的方法：
-print(image.shape)
-print(image.dtype)
-print(image.size)
-print(type(image))
-"""
-
-# 檔案 => PIL影像
 print("%s:" % filename, image.format, "%dx%d" % image.size, image.mode)
 print(image.info, image.tile)
+
+#查看圖片信息，可用如下的方法：
+#print(image.shape)
+#print(image.dtype)
 
 plt.imshow(image)
 plt.show()
@@ -219,7 +207,7 @@ print('顯示原圖 顯示PIL影像 與 顯示numpy陣列')
 # 檔案 => PIL影像
 image = Image.open(filename)
 #image = image.convert('L')  #fail
-print(type(image))
+
 #顯示PIL影像
 #plt.imshow(image)
 #plt.show()
@@ -242,7 +230,7 @@ print(image.info)
 
 # PIL影像 => numpy陣列
 image=np.array(image)
-print(type(image))
+
 #顯示numpy陣列
 #plt.imshow(image)
 #plt.show()

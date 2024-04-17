@@ -9,14 +9,44 @@ WebCam 使用
 ESC = 27
 
 import cv2
+import sys
 import time
 
 print('------------------------------------------------------------')	#60個
 
-print('按Q離開')
-print('按S存圖')
+print('最簡易, 按 ESC 離開')
 
-#cv2.namedWindow('frame', cv2.WINDOW_NORMAL)
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print('開啟攝影機失敗')
+    sys.exit()
+else:
+    print('Video device opened')
+
+while True:
+    ret, frame = cap.read()   # 從攝影機擷取一張影像
+
+    if ret == False:
+      print('無影像, 離開')
+      break
+
+    # 原圖
+    cv2.imshow('WebCam', frame)
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print('------------------------------------------------------------')	#60個
+
+print('按 ESC 離開')
+print('按 S 存圖')
+
+cv2.namedWindow('WebCam', cv2.WINDOW_NORMAL)
 
 cap = cv2.VideoCapture(0)   # 建立攝影機物件
 
@@ -30,6 +60,9 @@ if not cap.isOpened():
     sys.exit()
 else:
     print('Video device opened')
+    ret, frame = cap.read()   # 從攝影機擷取一張影像
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    frame_blur_pre = cv2.GaussianBlur(gray, (13, 13), 15)      # 高斯模糊
 
 '''
 # 取得 Codec 名稱
@@ -65,7 +98,23 @@ while True:
     frame = cv2.flip(frame, 1)
     '''
 
-    cv2.imshow('WebCam', frame)    # 顯示圖片, 原圖
+    # 原圖
+    cv2.imshow('WebCam1', frame)
+
+    # 灰階處理
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    cv2.imshow('WebCam2', gray)
+
+    # 高斯模糊
+    frame_blur = cv2.GaussianBlur(gray, (13, 13), 15)
+    cv2.imshow('WebCam3', frame_blur)
+
+    # 比較影像
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)        # 灰階處理
+    frame_blur_now = cv2.GaussianBlur(gray, (13, 13), 15)       # 高斯模糊
+    diff = cv2.absdiff(frame_blur_now, frame_blur_pre)    # 現在影像與前影像相減
+    cv2.imshow('WebCam4', diff)              # 顯示相減後的影像
+    frame_blur_pre = frame_blur_now.copy()    # 將現在影像設為前影像
 
     time_new = time.time()
 
@@ -75,8 +124,6 @@ while True:
 
     k = cv2.waitKey(1) # 等待按鍵輸入
     if k == ESC:     #ESC
-        break
-    elif k == ord('Q') or k == ord('q'):  # 按下 Q(q) 結束迴圈
         break
     elif k == ord('S') or k == ord('s'):  # 按下 S(s), 存圖
         image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg'
@@ -89,43 +136,11 @@ cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
 
 print('------------------------------------------------------------')	#60個
 
-print('錄影')
-
+print('錄影 TBD')
 
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
-#新進暫存 待檢查
-
-import cv2
-
-cap = cv2.VideoCapture(0)
-
-if cap.isOpened():
-    success, img = cap.read()
-    if success:
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)   # 灰階處理
-        img_pre = cv2.GaussianBlur(gray, (13, 13), 15)      # 高斯模糊
-
-while cap.isOpened():
-    success, img = cap.read()
-    if success:
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)        # 灰階處理
-        img_now = cv2.GaussianBlur(gray, (13, 13), 15)       # 高斯模糊
-        diff = cv2.absdiff(img_now, img_pre)    # 現在影像與前影像相減
-        #cv2.imshow('frame', diff)              # 顯示相減後的影像
-        cv2.imshow('frame', img)              # 顯示相減後的影像
-        img_pre = img_now.copy()    # 將現在影像設為前影像
-
-    k = cv2.waitKey(500)
-    if k == ord('q'):   # 按 「q」 結束程式
-        cv2.destroyAllWindows()
-        cap.release()
-        break
-
 
 
 print("------------------------------------------------------------")  # 60個
