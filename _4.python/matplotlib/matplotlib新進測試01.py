@@ -34,27 +34,21 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-# 正常顯示
-x1 = np.linspace(-1.5, 1.5, 31)
-y1 = np.cos(x1) ** 2
+print("畫點")
+plt.plot(0, 0, "-o")  # 在 (0, 1) 上 畫一點
+plt.plot(1.5, 1.5, "r-o")
+plt.plot(2, -2, "g-o")
+plt.plot(-2, -2, "b-o")
 
-# 移除 y1 > 0.6 的點
-x2 = x1[y1 <= 0.6]
-y2 = y1[y1 <= 0.6]
+radius = 5
+degrees = np.arange(0, 360)
+x = radius * np.cos(np.radians(degrees))
+y = radius * np.sin(np.radians(degrees))
 
-# 遮罩 y1 > 0.7 的點
-y3 = np.ma.masked_where(y1 > 0.7, y1)
+plt.plot(x, y)
+plt.axis("equal")
+plt.title("畫點 畫圓")
 
-# 將 y1 > 0.8 的點設為 NaN
-y4 = y1.copy()
-y4[y4 > 0.8] = np.nan
-
-plt.plot(x1 * 0.1, y1, "o-", label="正常顯示")
-plt.plot(x2 * 0.4, y2, "o-", label="移除點")
-plt.plot(x1 * 0.7, y3, "o-", label="遮罩點")
-plt.plot(x1 * 1.0, y4, "o-", label="將點設為NaN")
-plt.legend()
-plt.title("Cos函數顯示與遮蔽點的應用")
 
 # 第二張圖
 plt.subplot(232)
@@ -72,70 +66,24 @@ d10 = [100 for y in range(1, 9)]  # data10線條之y值
 d11 = [110 for y in range(1, 9)]  # data11線條之y值
 d12 = [120 for y in range(1, 9)]  # data12線條之y值
 
-seq = [1, 2, 3, 4, 5, 6, 7, 8]
-plt.plot(
-    seq,
-    d01,
-    "-1",
-    seq,
-    d02,
-    "-2",
-    seq,
-    d03,
-    "-3",
-    seq,
-    d04,
-    "-4",
-    seq,
-    d05,
-    "-s",
-    seq,
-    d06,
-    "-p",
-    seq,
-    d07,
-    "-*",
-    seq,
-    d08,
-    "-+",
-    seq,
-    d09,
-    "-D",
-    seq,
-    d10,
-    "-d",
-    seq,
-    d11,
-    "-H",
-    seq,
-    d12,
-    "-h",
-)
+x = [1, 2, 3, 4, 5, 6, 7, 8]
+plt.plot(x, d01, "-1")
+plt.plot(x, d02, "-2")
+plt.plot(x, d03, "-3")
+plt.plot(x, d04, "-4")
+plt.plot(x, d05, "-s")
+plt.plot(x, d06, "-p")
+plt.plot(x, d07, "-*")
+plt.plot(x, d08, "-+")
+plt.plot(x, d09, "-D")
+plt.plot(x, d10, "-d")
+plt.plot(x, d11, "-H")
+plt.plot(x, d12, "-h")
+plt.title("標記符號")
+
 
 # 第三張圖
 plt.subplot(233)
-
-print("畫點")
-plt.plot(0, 1, "-o")  # 在 (0, 1) 上 畫一點
-plt.plot(1, 5, "r-o")
-plt.plot(2, 10, "r-o")
-plt.plot(3, 20, "r-o")
-
-plt.title("畫點")
-
-# 第四張圖
-plt.subplot(234)
-
-radius = 5
-degrees = np.arange(0, 360)
-x = radius * np.cos(np.radians(degrees))
-y = radius * np.sin(np.radians(degrees))
-
-plt.plot(x, y)
-plt.axis("equal")
-
-# 第五張圖
-plt.subplot(235)
 
 x1 = np.linspace(0.1, 10, 99)  # 建立含30個元素的陣列
 x2 = np.linspace(0.1, 10, 99)  # 建立含30個元素的陣列
@@ -147,6 +95,15 @@ plt.plot(x2, y2, label="基底 = 0.5")
 
 plt.axis([0, 10, -5, 5])
 plt.legend(loc="best")  # 建立圖例
+
+
+# 第四張圖
+plt.subplot(234)
+
+
+# 第五張圖
+plt.subplot(235)
+
 
 # 第六張圖
 plt.subplot(236)

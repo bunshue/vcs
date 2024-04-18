@@ -150,9 +150,7 @@ plt.title("histtype 4 : stepfilled")
 # 第五張圖
 plt.subplot(235)
 
-kwargs = dict(
-    histtype="stepfilled", alpha=0.3, bins=num_bins // 2, rwidth=0.8
-)
+kwargs = dict(histtype="stepfilled", alpha=0.3, bins=num_bins // 2, rwidth=0.8)
 plt.hist(x, **kwargs)
 plt.title("以字典傳送參數")
 
@@ -209,7 +207,7 @@ plt.subplot(232)
 
 print("資料同上, 改了 累積統計")
 
-#plt.hist(dice, bins=6, rwidth=0.5, cumulative=True, alpha=0.3)  # 繪製hist圖
+# plt.hist(dice, bins=6, rwidth=0.5, cumulative=True, alpha=0.3)  # 繪製hist圖
 plt.hist(dice, bins=6, rwidth=0.5, cumulative=True, alpha=0.3)  # 繪製hist圖
 
 plt.ylabel("次數")
@@ -320,7 +318,7 @@ n, bins, patches = plt.hist(
 
 # 繪製曲線圖
 sns.kdeplot(x)
-plt.title('用海生畫常態分佈')
+plt.title("用海生畫常態分佈")
 
 
 # 第四張圖
@@ -337,7 +335,7 @@ n, bins, patches = plt.hist(
 
 # 繪製曲線圖
 sns.kdeplot(x)
-plt.title('用海生畫均勻分佈')
+plt.title("用海生畫均勻分佈")
 
 # 第五張圖
 plt.subplot(235)
@@ -493,10 +491,10 @@ patches：返回每個bin里面包含的數據，是一個list。
 n, bins, patches = plt.hist(
     x,
     bins=10,
-    #bins = 'auto'
-    #bins = range(10, 101, 10),  # 設定bin的範圍
+    # bins = 'auto'
+    # bins = range(10, 101, 10),  # 設定bin的範圍
     histtype="bar",
-    align='right',
+    align="right",
     # color=['red','green','blue','cyan','magenta'], 若有多組數據 依序顯示顏色
     facecolor="red",
     edgecolor="green",
@@ -505,7 +503,7 @@ n, bins, patches = plt.hist(
     orientation="vertical",
     cumulative=False,
     density=False,
-    label="常態分佈",   #以便在圖例中顯示
+    label="常態分佈",  # 以便在圖例中顯示
 )
 
 print("標示高度")
@@ -573,4 +571,3 @@ cb = plt.colorbar(label='xxxxx')
 plt.show()
 
 """
-

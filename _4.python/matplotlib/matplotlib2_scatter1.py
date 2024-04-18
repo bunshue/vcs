@@ -41,13 +41,13 @@ plt.subplot(231)
 x = np.random.randn(N)
 y = np.random.randn(N)
 plt.scatter(x, y)
-#plt.scatter(x, y, marker="^", color="red") # 指名marker和顏色
-#plt.scatter(x, y, s=30)# 設定資料點的大小
-plt.scatter(x, y, c = 'r', s = 100) # 指定顏色與大小
+# plt.scatter(x, y, marker="^", color="red") # 指名marker和顏色
+# plt.scatter(x, y, s=30)# 設定資料點的大小
+plt.scatter(x, y, c="r", s=100)  # 指定顏色與大小
 
 # 給散佈圖的點套上不同深淺顏色
-#c = np.random.choice(np.arange(100), 100)
-#plt.scatter(x, y, s=c, c=c, cmap="viridis")
+# c = np.random.choice(np.arange(100), 100)
+# plt.scatter(x, y, s=c, c=c, cmap="viridis")
 
 
 # 第二張圖
@@ -188,11 +188,11 @@ plt.title("三群數據")
 # 第四張圖
 plt.subplot(234)
 
-#使用隨機陣列產生圖像
-#一般random
-x = np.random.rand(10000) #N個0~1之間的亂數
+# 使用隨機陣列產生圖像
+# 一般random
+x = np.random.rand(10000)  # N個0~1之間的亂數
 y = np.random.rand(10000)
-plt.scatter(x, y, c=y, cmap = 'hsv')  # 色彩依 y 軸值變化
+plt.scatter(x, y, c=y, cmap="hsv")  # 色彩依 y 軸值變化
 plt.colorbar()
 
 # 第五張圖
@@ -239,8 +239,6 @@ s.set_urls(["https://www.bbc.com/news", "https://www.google.com/", None])
 
 # 第二張圖
 plt.subplot(232)
-
-
 
 
 # 第三張圖
@@ -888,6 +886,7 @@ plt.subplot(231)
 X = np.random.rand(6)
 Y = np.random.rand(6)
 
+
 def myplot(n=1):
     plt.scatter(X, Y, c="r", s=100)
     x = np.linspace(0, 1, 1000)
@@ -979,7 +978,6 @@ size = (30 * np.random.rand(points)) ** 2  # 散點大小數列
 plt.scatter(x, y, s=size, c=colors)
 plt.xticks(np.arange(0, 12, step=1.0))
 plt.yticks(np.arange(0, 12, step=1.0))
-
 
 
 # 第二張圖
@@ -1126,9 +1124,6 @@ np.random.seed(0)
 """
 
 
-
-
-
 """
 matplotlib.pyplot.scatter(x, y, s=None, 
                             c=None, marker=None, 
@@ -1150,8 +1145,6 @@ linewidths：設置散點邊界線的寬度
 verts：如果marker參數為空，則用（x，y）序列來構造marker，中心的點被置為（0，0），其他點被s重新縮放
 edgecolors：設置散點邊界線的顏色
 """
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1207,7 +1200,6 @@ area = np.pi * (15 * np.random.rand(N)) ** 2  # 每個點對應的面積大小�
 plt.scatter(x, y, s=area, c=colors, alpha=0.5)
 
 
-
 # 第四張圖
 plt.subplot(234)
 
@@ -1217,7 +1209,6 @@ y = np.random.rand(N)
 colors = np.random.rand(N)
 area = (30 * np.random.rand(N)) ** 2  # 0 to 15 point radii
 plt.scatter(x, y, s=area, c=colors, alpha=0.5)
-
 
 
 # 第五張圖
@@ -1240,6 +1231,4 @@ plt.yticks(np.arange(0, 12, step=1.0))  # y 軸刻度
 plt.subplot(236)
 
 
-
 plt.show()
-

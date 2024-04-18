@@ -43,7 +43,7 @@ plt.imshow(z, cmap="rainbow")
 plt.xticks(ticks, seq)
 plt.yticks(ticks, seq)
 
-plt.colorbar() #在圖右邊增加color bar
+plt.colorbar()  # 在圖右邊增加color bar
 plt.title(r"建立$\sqrt{x^2 + y^2}$網格影像")
 
 plt.show()

@@ -38,6 +38,7 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 filename = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.bmp' #400X400
+filename = '../opencv/data/pic_calcHist.jpg'
 
 # 檔案 => PIL影像
 image1 = Image.open(filename)

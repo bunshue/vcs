@@ -11,221 +11,9 @@ vs
 
 讀取圖片 存圖
 
-"""
 
-import cv2
-
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
-
-font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
-# 設定中文字型及負號正確顯示
-# 設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
-# 設定負號
-plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-# filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-# filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-
-print("------------------------------------------------------------")  # 60個
-'''
-print('取得 OpenCV 版本')
-
-(major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
-
-print(cv2.__version__)
-print(major_ver)
-print(minor_ver)
-print(subminor_ver)
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp'
-gray = cv2.imread(filename, 0)
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
-color = cv2.imread(filename)
-
-print("圖像gray屬性：")
-print("gray.shape=",gray.shape)
-print("gray.size=",gray.size)
-print("gray.dtype=",gray.dtype)
-
-print("圖像color屬性：")
-print("color.shape=",color.shape)
-print("color.size=",color.size)
-print("color.dtype=",color.dtype)
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-
-image = cv2.imread(filename)	#讀取本機圖片
-#image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)	# -1 讀取本機圖片, 不改變顏色通道
-#image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#  0 讀取本機圖片, 直接變成灰階
-#image = cv2.imread(filename, cv2.IMREAD_COLOR)         #  1 讀取本機圖片, 改為BGR三通道(預設)
-
-print('cv2.IMREAD_UNCHANGED =', cv2.IMREAD_UNCHANGED)   # -1
-print('cv2.IMREAD_GRAYSCALE =', cv2.IMREAD_GRAYSCALE)   #  0
-print('cv2.IMREAD_COLOR =', cv2.IMREAD_COLOR)           #  1(預設)
-
-print('image.shape格式 :', type(image.shape))
-print('image.shape內容 :', image.shape)
-
-h = image.shape[0]    #高
-w = image.shape[1]    #寬
-d = image.shape[2]    #深
-h, w, d = image.shape   #d為dimension d=3 全彩, d=1 灰階
-print("寬 = ", w, ", 高 = ", h, ", D = ", d)
-
-plt.figure('xxxxx', figsize = (16, 12))
-
-plt.subplot(131)
-plt.title('顯示圖片')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-image_copy = image.copy()
-plt.subplot(132)
-plt.title('顯示圖片copy')
-plt.imshow(cv2.cvtColor(image_copy, cv2.COLOR_BGR2RGB))     #顯示圖片   #原圖拷貝
-
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)    #圖片轉為灰階
-plt.subplot(133)
-plt.title('顯示圖片gray')
-plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))     #顯示圖片   #原圖轉黑白
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-print('使用 cv2 顯示圖片')
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-cv2.imshow('Peony', image)  #顯示圖片
-#cv2.imshow('視窗標題 不支持中文', image) #顯示圖片
-
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print('------------------------------------------------------------')	#60個
-
-print('使用 matplotlib 顯示圖片, 需先BGR轉RGB')
-
-plt.title('使用 matplotlib 顯示圖片, 需先BGR轉RGB')
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.show()
-
-image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), cmap = 'gray', interpolation = 'bicubic')
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2a = 'C:/_git/vcs/_1.data/______test_files2/picture1a.jpg'
-filename2b = 'C:/_git/vcs/_1.data/______test_files2/picture1b.jpg'
-
-image1 = cv2.imread(filename1)	#讀取本機圖片
-#image1 = cv2.imread(filename1, 1)
-image2 = cv2.imread(filename1, 0)   #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
-
-image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
-plt.imshow(image1)
-#plt.title('xxxx')
-plt.show()
-
-image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
-plt.imshow(image2)
-#plt.title('xxxx')
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-"""
-image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
-cv2.imshow(window_name, image)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-plt.title('xxxx')
-plt.show()
-"""
-
-print('------------------------------------------------------------')	#60個
-
-"""
-print('------------------------------------------------------------')	#60個
-
-#儲存檔案
-image = cv2.imread(filename)	#讀取本機圖片
-
-#寫入圖片檔案
-#若要將 NumPy 陣列中儲存的圖片寫入檔案，可以使用 OpenCV 的 cv2.imwrite：
-#cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式
-# 寫入不同圖檔格式
-cv2.imwrite('output.jpg', image)
-cv2.imwrite('output.png', image)
-cv2.imwrite('output.tiff', image)
-
-#輸出圖片檔案時，也可以調整圖片的品質或壓縮率：
-
-# 設定 JPEG 圖片品質為 90（可用值為 0 ~ 100）
-cv2.imwrite('output.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
-
-# 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
-cv2.imwrite('output.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
-
-print('------------------------------------------------------------')	#60個
-
-#保存圖片 質量為5 和 100
-print('存圖, 質量為5')
-cv2.imwrite("./1.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 5])
-print('存圖, 質量為100')
-cv2.imwrite("./2.jpg", image, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
-#png壓縮大小
-print('存圖, 壓縮為0')
-cv2.imwrite("./3.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 0])
-print('存圖, 壓縮為9')
-cv2.imwrite("./4.png", image, [int(cv2.IMWRITE_PNG_COMPRESSION), 9])
-
-#cv2.imwrite(filename2a, image1)
-#cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
-
-#保存检测结果
-#cv2.imwrite("re.jpg",image)
-
-print('------------------------------------------------------------')	#60個
-
-
-"""
-
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-
-print('------------------------------------------------------------')	#60個
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
-
-#以 cv2.imread 讀進來的資料，會儲存成一個 NumPy 的陣列
-
-"""
-# 查看資料型態
+以 cv2.imread 讀進來的資料，會儲存成一個 NumPy 的陣列
+查看資料型態
 print(type(image))
 print(type(image_gray))
 
@@ -261,16 +49,139 @@ cv2.IMREAD_GRAYSCALE
     以灰階的格式來讀取圖片。
 cv2.IMREAD_UNCHANGED
     讀取圖片中所有的 channels，包含透明度的 channel。
+
 """
+
+import cv2
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+# filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+# filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+'''
+print('讀取圖片 並顯示')
+image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB), cmap = 'gray', interpolation = 'bicubic')
+plt.show()
 
 print('------------------------------------------------------------')	#60個
 
+""" OK
+print('使用 cv2 顯示圖片')
+
+# 檔案 => cv2影像
+image = cv2.imread(filename)
+
+cv2.imshow('Image', image)  #顯示圖片, 標題不支持中文
+
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
+cv2.destroyAllWindows()
+"""
+print('------------------------------------------------------------')	#60個
+
+print('取得 OpenCV 版本')
+
+(major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
+
+print(cv2.__version__)
+print(major_ver)
+print(minor_ver)
+print(subminor_ver)
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png'
+
+print('開啟檔案成灰階影像')
+# 檔案 => cv2影像 灰階
+image = cv2.imread(filename, 0)
+print("灰階 圖像屬性：")
+print("image.shape=",image.shape)
+print("image.size=",image.size)
+print("image.dtype=",image.dtype)
+
+print('開啟檔案成彩色影像')
+# 檔案 => cv2影像 彩色
+image = cv2.imread(filename)
+#image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)	# -1 讀取本機圖片, 不改變顏色通道
+#image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#  0 讀取本機圖片, 直接變成灰階
+#image = cv2.imread(filename, cv2.IMREAD_COLOR)         #  1 讀取本機圖片, 改為BGR三通道(預設)
+
+#print('cv2.IMREAD_UNCHANGED =', cv2.IMREAD_UNCHANGED)   # -1
+#print('cv2.IMREAD_GRAYSCALE =', cv2.IMREAD_GRAYSCALE)   #  0
+#print('cv2.IMREAD_COLOR =', cv2.IMREAD_COLOR)           #  1(預設)
+
+print("彩色 圖像屬性：")
+print("image.shape=",image.shape)
+print("image.size=",image.size)
+print("image.dtype=",image.dtype)
+
+print('image.shape格式 :', type(image.shape))
+print('image.shape內容 :', image.shape)
+
+h = image.shape[0]    #高
+w = image.shape[1]    #寬
+d = image.shape[2]    #深
+h, w, d = image.shape   #d為dimension d=3 全彩, d=1 灰階
+print("寬 = ", w, ", 高 = ", h, ", D = ", d)
+
+plt.subplot(121)
+plt.title('顯示圖片 要轉RGB')
+
+# plt.imshow(image)#直接顯示 影像錯誤 因為opencv的imread讀出來是BGR排列
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)    #圖片轉為灰階
+plt.subplot(122)
+plt.title('先轉灰階 再轉RGB')
+plt.imshow(cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB))     #顯示圖片   #原圖轉黑白
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+
+print('------------------------------------------------------------')	#60個
+
+# 檔案 => cv2影像
+image = cv2.imread(filename)
+
+# 檔案 => cv2影像
+image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+
+print('------------------------------------------------------------')	#60個
+
+# 檔案 => cv2影像
 image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉為灰階
 
 image_gray = cv2.cvtColor(image_gray, cv2.COLOR_BGR2RGB)
 plt.imshow(image_gray)
 plt.show()
-
 
 """
 這裡 cv2.waitKey 函數是用來等待與讀取使用者按下的按鍵，而其參數是等待時間（單位為毫秒），
@@ -309,7 +220,8 @@ OpenCV 顯示圖片視窗
 
 print('------------------------------------------------------------')	#60個
 
-image_bgr = cv2.imread(filename)  #讀取本機圖片
+# 檔案 => cv2影像
+image_bgr = cv2.imread(filename)
 
 # 將 OpenCV 讀入的 BGR 格式轉為 Matplotlib 用的 RGB 格式，再交給 Matplotlib 顯示
 image_rgb = image_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
@@ -321,6 +233,7 @@ image_rgb = image_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
 plt.imshow(image_rgb)
 plt.show()
 
+# 檔案 => cv2影像
 image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉為灰階
 
 # 使用 Matplotlib 顯示圖片
@@ -332,47 +245,18 @@ print('作業完成')
 print('------------------------------------------------------------')	#60個
 
 
-#cv2.imwrite('aaaaaaa.pgm', image) #無效????
-
-
-
 print('------------------------------------------------------------')	#60個
-#簡易播放一檔
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-from matplotlib import pyplot as plt
-img = cv2.imread(filename)
-plt.imshow(img)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
-
-import cv2
-from matplotlib import pyplot as plt
-
-
-img_bgr = cv2.imread(filename)	#讀取本機圖片
-img_rgb = img_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
+# 檔案 => cv2影像
+image_bgr = cv2.imread(filename)
+image_rgb = image_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
 
 # 或是這樣亦可
-# img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+# image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
 
-# 使用 Matplotlib 顯示圖片
-plt.imshow(img_rgb)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-# opencv
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-image = cv2.imread(filename)  # 讀取本機圖片
-
-# plt.imshow(image)#直接顯示 影像錯誤 因為opencv的imread讀出來是BGR排列
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))  # 先轉換成RGB再顯示
-
+plt.imshow(image_rgb)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
@@ -380,98 +264,120 @@ print("------------------------------------------------------------")  # 60個
 # 用 OpenCV 讀取並顯示圖片
 
 # 等同於 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)) #BGR轉RGB再交由matplotlib顯示之
-def aidemy_imshow(name, img):
-    b, g, r = cv2.split(img)
-    img = cv2.merge([r, g, b])
+def aidemy_imshow(name, image):
+    b, g, r = cv2.split(image)
+    image = cv2.merge([r, g, b])
     plt.title(name)
-    plt.imshow(img)
+    plt.imshow(image)
     plt.show()
 
-
 cv2.imshow = aidemy_imshow
+
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
-img = cv2.imread(filename)
-
-print(type(img))
-
-print(img.shape)
-
-cv2.imshow("image", img)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
+print('-----------------------------')
 
 print("並列一圖")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
+# 檔案 => cv2影像
 image1 = cv2.imread(filename)
-
 image2 = cv2.hconcat([image1, image1, image1, image1, image1, image1])
+
 plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.title('並列一圖')
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+# 檔案 => cv2影像
+image = cv2.imread(filename)
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
+#三個影像橫向拼接 np.hstack
+image_hstack = np.hstack((image, image, image))
+
+#二個影像縱向拼接 np.vstack
+image_vstack = np.vstack((image_hstack, image_hstack))
+
+plt.imshow(cv2.cvtColor(image_vstack, cv2.COLOR_BGR2RGB))
+
+plt.show()
+'''
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp"
 
-img = cv2.imread(filename)  # cv2讀取圖片, 自動轉成array
+# 檔案 => cv2影像
+image = cv2.imread(filename)  # cv2讀取圖片, 自動轉成array
 
-hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)  # 轉換為HSV
-rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # 轉換為RGB
-
+rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # 轉換為RGB
+plt.subplot(121)
 plt.imshow(rgb)
+plt.title('cv影像轉RGB')
+
+hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)  # 轉換為HSV
+plt.subplot(122)
+plt.imshow(hsv)
+plt.title('cv影像轉HSV')
+
 plt.show()
 
+print('coordinate')
 coordinate = rgb[131, 81]  # 輸入要取得顏色的指定座標
 print(coordinate)
 
+# print('取得cv影像陣列中的資料')
 # print(array([255, 219,  79], dtype=uint8))
 
 print("------------------------------------------------------------")  # 60個
 
+print('測試CV視窗 : 全螢幕顯示一圖')
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/bear.jpg'
+
+# 檔案 => cv2影像
+image = cv2.imread(filename)
+
+window_name = "Full-screen"
+cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
+cv2.imshow(window_name, image)
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print('測試CV視窗 : 設定視窗大小並依視窗縮放影像')
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+#filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
-image = cv2.imread(filename)	#讀取本機圖片
+# 檔案 => cv2影像
+image = cv2.imread(filename)
 
-""" 全螢幕顯示一圖
-out_win = "output_style_full_screen"
-cv2.namedWindow(out_win, cv2.WINDOW_NORMAL)
-cv2.setWindowProperty(out_win, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-
-cv2.imshow(out_win, image)
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-"""
-
-
-
-#設定視窗大小並依視窗縮放影像
-
-cv2.namedWindow("resized",0);
-cv2.resizeWindow("resized", 640, 480);
-
-cv2.imshow("resized",image)
-cv2.waitKey()
-cv2.destroyAllWindows()
+window_name = window_name
+cv2.namedWindow(window_name,0);
+cv2.resizeWindow(window_name, 640, 480);
 
 #設定視窗位置
-x_st = 300
-y_st = 100
-cv2.moveWindow("resized", x_st, y_st)
+x_st, y_st = 300, 100
+cv2.moveWindow(window_name, x_st, y_st)
 
-cv2.waitKey(0)
+# 顯示圖片
+cv2.imshow(window_name,image)
 
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 #設定視窗參數, 若不設定, 即是 圖片滿框、不可調整大小
 #預設 flags == WINDOW_AUTOSIZE | WINDOW_KEEPRATIO |WINDOW_GUI_EXPANDED
@@ -485,22 +391,9 @@ cv2.waitKey(0)
 #可調整大小 並 保持比例
 #cv2.namedWindow('image', cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
 
-
-cv2.imshow("image", image)  # 顯示圖片
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 b, g, r = cv2.split(image)
 #print(b)
@@ -509,73 +402,42 @@ b, g, r = cv2.split(image)
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV_ai_03")
+print("OpenCV_03")
 
-image_blue = cv2.imread(filename)
-image_green = cv2.imread(filename)
-image_red = cv2.imread(filename)
-image_blue[:,:,1] = 0    # 將綠色設為 0
-image_blue[:,:,2] = 0    # 將紅色設為 0
-image_green[:,:,0] = 0   # 將藍色設為 0
-image_green[:,:,2] = 0   # 將紅色設為 0
-image_red[:,:,0] = 0     # 將藍色設為 0
-image_red[:,:,1] = 0     # 將綠色設為 0
+# 檔案 => cv2影像
+image_r = cv2.imread(filename)
+image_g = cv2.imread(filename)
+image_b = cv2.imread(filename)
 
-cv2.imshow('image blue', image_blue)
-cv2.imshow('image green', image_green)
-cv2.imshow('image red', image_red)
+image_r[:,:,0] = 0     # 將藍色設為 0
+image_r[:,:,1] = 0     # 將綠色設為 0
 
-cv2.waitKey()
-cv2.destroyAllWindows()
+image_g[:,:,0] = 0   # 將藍色設為 0
+image_g[:,:,2] = 0   # 將紅色設為 0
 
+image_b[:,:,1] = 0    # 將綠色設為 0
+image_b[:,:,2] = 0    # 將紅色設為 0
 
-print("------------------------------------------------------------")  # 60個
+plt.subplot(131)
+plt.imshow(cv2.cvtColor(image_r, cv2.COLOR_BGR2RGB))
 
+plt.subplot(132)
+plt.imshow(cv2.cvtColor(image_g, cv2.COLOR_BGR2RGB))
 
-
-image = cv2.imread(filename)
-print('原圖為彩色')
-cv2.imshow('image1', image)
-print('彩色轉灰階')
-image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉換成灰階影像
-
-cv2.imshow('image', image)
-
-cv2.waitKey()
-cv2.destroyAllWindows()
-'''
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-image = cv2.imread(filename)  #讀取本機圖片
-plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.subplot(133)
+plt.imshow(cv2.cvtColor(image_b, cv2.COLOR_BGR2RGB))
 
 plt.show()
-
-
-#三個影像橫向拼接 np.hstack
-image_hstack = np.hstack((image, image, image))
-
-#二個影像縱向拼接 np.vstack
-image_vstack = np.vstack((image_hstack, image_hstack))
-
-plt.imshow(cv2.cvtColor(image_vstack, cv2.COLOR_BGR2RGB))
-
-plt.show()
-
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 
-print("原圖 彩色")
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 print("原圖 彩色 轉 灰階1通道")
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-print("gray.shape=", gray.shape)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # cv2影像 轉 灰階
 
 print("灰階 轉 BGR3通道")
 rgb = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
@@ -605,11 +467,10 @@ plt.imshow(cv2.cvtColor(rgb, cv2.COLOR_BGR2RGB))
 
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 print("原圖 BGR 轉 RGB")
@@ -638,6 +499,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 bgra = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
@@ -678,6 +540,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+# 檔案 => cv2影像
 image = cv2.imread(filename, 0)
 
 plt.figure(
@@ -715,8 +578,8 @@ plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
 print("------------------------------")  # 30個
 
-
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 plt.subplot(223)
@@ -770,6 +633,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+# 檔案 => cv2影像
 a = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
 plt.figure(
@@ -809,6 +673,7 @@ print("------------------------------------------------------------")  # 60個
 
 # A圖
 filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp"
+# 檔案 => cv2影像
 lena = cv2.imread(filename1, cv2.IMREAD_UNCHANGED)
 
 # A圖抓一塊貼到B圖上
@@ -818,6 +683,7 @@ plt.imshow(cv2.cvtColor(lena, cv2.COLOR_BGR2RGB))
 
 # B圖
 filename2 = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+# 檔案 => cv2影像
 peony = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
 
 plt.subplot(235)
@@ -834,27 +700,27 @@ plt.imshow(cv2.cvtColor(peony, cv2.COLOR_BGR2RGB))
 
 plt.show()
 
-
 print("------------------------------")  # 30個
 
-
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 x_st, y_st, w, h = 200, 50, 150, 200
 image_cut = image[y_st : y_st+h, x_st : x_st+w]
-
 print(image_cut.shape)
 
 plt.imshow(cv2.cvtColor(image_cut, cv2.COLOR_BGR2RGB))
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 print("圖片翻轉 原圖")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 plt.subplot(121)
@@ -868,11 +734,9 @@ image_flip2 = cv2.flip(image, -88)
 plt.imshow(cv2.cvtColor(image_flip, cv2.COLOR_BGR2RGB))
 plt.title("圖片翻轉")
 
-
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 

@@ -43,10 +43,10 @@ plt.figure(
     frameon=True,
 )
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 image = img.imread(filename)
 
-#plt之讀取檔案 取得圖片資訊
+# plt之讀取檔案 取得圖片資訊
 h, w, c = image.shape
 print(f"圖檔高度   = {h}")
 print(f"圖檔寬度   = {w}")
@@ -112,7 +112,6 @@ plt.subplot(236)
 plt.imshow(zz)
 plt.margins(0.2)
 plt.title("margins(0.2)")
-
 
 
 plt.show()
@@ -254,6 +253,7 @@ plt.colorbar()
 plt.subplot(233)
 
 # Layer Images
+
 
 def func3(x, y):
     return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2 + y**2))
@@ -470,6 +470,7 @@ plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
 # 第二張圖
 plt.subplot(232)
 
+
 def f(x, y):
     return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2) - y**2)
 
@@ -505,25 +506,23 @@ plt.imshow(image)
 # 第四張圖
 plt.subplot(234)
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 # 打開圖像，並轉成灰度圖像
 # 檔案 => PIL影像 => 灰階 => np陣列
-image = np.array(Image.open(filename).convert('L'))#L為8位像素黑白圖
+image = np.array(Image.open(filename).convert("L"))  # L為8位像素黑白圖
 
-plt.gray()  #不使用顏色信息, 將圖像以灰階方式顯示
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
 
-plt.contour(image, origin='image')
-plt.axis('equal')
-plt.title(u'圖像輪廓圖')
+plt.contour(image, origin="image")
+plt.axis("equal")
+plt.title("圖像輪廓圖")
 
 # 第五張圖
 plt.subplot(235)
 
 
-
 # 第六張圖
 plt.subplot(236)
-
 
 
 plt.show()

@@ -67,8 +67,8 @@ y = np.sin(x) + np.random.rand(1, len(x)) * A - A / 2  # 加入雜訊的點集  
 
 y = y.tolist()[0]  # y 由 numpy.ndarray格式 轉成list格式, 畫圖要用list格式
 
-plt.plot(x, np.sin(x), 'black')#無雜訊
-plt.plot(x, y, 'r')#有雜訊
+plt.plot(x, np.sin(x), "black")  # 無雜訊
+plt.plot(x, y, "r")  # 有雜訊
 plt.grid()
 
 plt.title("畫雜訊範例 " + str(N) + "點")
@@ -105,7 +105,7 @@ th = np.arange(0, 360)
 x = np.cos(np.radians(th))
 y = np.sin(np.radians(th))
 
-plt.plot(x, y, 'steelblue')
+plt.plot(x, y, "steelblue")
 plt.axis("equal")  # 軸比例
 
 # 第五張圖
@@ -128,16 +128,16 @@ plt.subplot(236)
 # 把這個函數大於 0 的地方標示出來。
 
 N = 30 + 1
-x = np.linspace(-5, 5, N) # 含頭尾 分成N個
+x = np.linspace(-5, 5, N)  # 含頭尾 分成N個
 y = np.sinc(x)
 
-#print(x)
-#print(y)
+# print(x)
+# print(y)
 
-plt.plot(x, y, 'black')
+plt.plot(x, y, "black")
 plt.plot(x[y > 0], y[y > 0], "ro")
 # plt.scatter(x[y>0], y[y>0], c='r')
-#print(plt.axis())
+# print(plt.axis())
 plt.title("只標出正的部分")
 
 plt.show()
@@ -466,7 +466,7 @@ plt.subplot(231)
 x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
 y = np.sinc(x)
 plt.plot(x, y)
-#plt.margins(0.2, 0.2)
+# plt.margins(0.2, 0.2)
 plt.title("無 margins設定 ")
 
 # 第二張圖

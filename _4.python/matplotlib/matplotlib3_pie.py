@@ -77,7 +77,7 @@ plt.pie(
 
 # 設定 legnd 的位置，將圖表顯示出來，並顯示圖例名稱
 plt.legend(loc="right")  # 設定 legend 的位置
-plt.title('指定顏色 使用圖例')
+plt.title("指定顏色 使用圖例")
 
 # 第二張圖
 plt.subplot(232)
@@ -97,7 +97,7 @@ plt.pie(
     shadow=True,
     startangle=90,
 )
-plt.title('指定顏色')
+plt.title("指定顏色")
 
 # 第三張圖
 plt.subplot(233)
@@ -202,15 +202,17 @@ sizes = [25, 30, 15, 10]
 labels = ["北部", "西部", "南部", "東部"]
 colors = ["red", "green", "blue", "yellow"]
 explode = (0, 0, 0.2, 0)
-plt.pie(sizes, 
-	explode = explode, 
-	labels = labels, 
-	colors = colors,
-	labeldistance = 1.1, 
-	autopct = "%2.1f%%", 
-	pctdistance = 0.6,
-	shadow = True,
-	startangle = 90)
+plt.pie(
+    sizes,
+    explode=explode,
+    labels=labels,
+    colors=colors,
+    labeldistance=1.1,
+    autopct="%2.1f%%",
+    pctdistance=0.6,
+    shadow=True,
+    startangle=90,
+)
 
 
 # 第三張圖
@@ -219,12 +221,10 @@ plt.subplot(233)
 labels = ["Python", "C++", "Java", "JS", "C", "C#"]
 ratings = [5, 6, 15, 3, 12, 4]
 explode = (0, 0, 0, 0.2, 0, 0.2)
- 
-patches, texts = plt.pie(ratings, 
-                         labels=labels,
-                         explode=explode)
+
+patches, texts = plt.pie(ratings, labels=labels, explode=explode)
 plt.legend(patches, labels, loc="best")
-plt.title("使用回傳值") 
+plt.title("使用回傳值")
 plt.axis("equal")
 
 
@@ -240,7 +240,6 @@ country = ["美國", "澳洲", "日本", "歐洲", "英國"]
 pou = [10543, 2105, 1190, 3346, 980]
 
 plt.pie(pou, labels=country, explode=(0, 0, 0.2, 0, 0), autopct="%1.2f%%")  # 繪製圓餅圖
-
 
 
 # 第五張圖
@@ -280,15 +279,12 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 """
@@ -303,5 +299,3 @@ autopct = '%.1f%%' # 設置百分比的格式，這里保留一位小數
 plt.axes(aspect = 'equal')
 
 """
-
-

@@ -23,8 +23,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-left = -2*np.pi
-right = 2*np.pi
+left = -2 * np.pi
+right = 2 * np.pi
 
 x = np.linspace(left, right, 100)
 y = np.sin(x)
@@ -43,32 +43,32 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-#使用fill
+# 使用fill
 plt.plot(x, y)
 plt.fill(x, y, color="y", alpha=0.3)  # 黃色填充
-plt.title('使用fill')
+plt.title("使用fill")
 
 # 第二張圖
 plt.subplot(232)
 
-#使用fill_between
+# 使用fill_between
 plt.plot(x, y)
 plt.fill_between(x, 0, y, color="y", alpha=0.3)
-plt.title('與x軸之間填充')
+plt.title("與x軸之間填充")
 
 # 第三張圖
 plt.subplot(233)
 
 plt.plot(x, y)
 plt.fill_between(x, -1, y, color="y", alpha=0.3)
-plt.title('x之下填充到底')
+plt.title("x之下填充到底")
 
 # 第四張圖 和 第五張圖 比較
 plt.subplot(234)
 
 plt.plot(x, y)
 plt.fill_between(x, 1, y, color="y", alpha=0.3)
-plt.title('x之上填充到頂')
+plt.title("x之上填充到頂")
 
 # 第五張圖
 plt.subplot(235)
@@ -175,7 +175,6 @@ x = np.linspace(-2, 4, 1000)
 y = a * x**2 + b * x
 plt.plot(x, y, color="b")
 plt.fill_between(x, y1=y, y2=0, where=(x >= -2) & (x <= 5), facecolor="lightgreen")
-
 
 
 # 第五張圖

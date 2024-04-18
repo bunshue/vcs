@@ -181,15 +181,6 @@ else:
 
 print("目前字典元素數量     = ", len(animals))
 
-print("將 字典 寫入檔案")
-filename = "C:/_git/vcs/_1.data/______test_files2/dict.txt"
-
-with open(filename, "w") as fp:
-    # 將字典轉成字串寫入檔案
-    fp.write(str(animals))
-
-print("寫入檔案 : " + filename)
-
 animals.clear()
 
 print("目前字典內容:", animals)
@@ -1972,4 +1963,87 @@ print(animals)
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+#讀寫檔案大集合
+
+print("將 字典 寫入檔案")
+filename = "C:/_git/vcs/_1.data/______test_files2/dict.txt"
+
+with open(filename, "w") as fp:
+    # 將字典轉成字串寫入檔案
+    fp.write(str(animals))
+
+print("寫入檔案 : " + filename)
+
+
+"""
+
+#標準版DSLT大集合
+
+#D
+字典內是LIST
+
+#S
+#L
+一維LIST
+二維LIST
+#T
+
+"""
+
+#range轉list
+list1=range(1,10)
+print(list(list1))
+
+list2=range(2,11,2)
+print(list(list2))
+
+list3=range(1,10,2)
+print(list(list3))
+
+
+# 讀取串列資料
+list1 = [[1,2,3],[4,5,6],[7,8,9]]
+for i in range(len(list1)):
+    for j in range(len(list1[i])):
+        print(("%4d")%list1[i][j],end=" ")
+    print()    
+
+
+
+list1 = []
+sum = 0
+for i in range(1,7):
+    score=int(input("請輸入第%d位學生成績:"%i))
+    list1.append(score)
+    sum += score
+print("分數總分為:",sum)
+print(list1)
+
+
+print("------------------------------------------------------------")  # 60個
+
+list1 = [50,40,20,40,20,60,20,80,90]
+print("原始串列:",list1)
+list1.sort()
+list1.reverse()
+print("由大到小:",list1)
+
+print("------------------------------------------------------------")  # 60個
+
+list1 = []
+for i in range(1,7):
+    score=int(input("請輸入第%d位學生成績:"%i))
+    list1.append(score)
+list2 = sorted(list1)
+list3 = sorted(list1, reverse=True)
+print("原始成績:",list1)
+print("由小到大:",list2)
+print("由大到小:",list3)
+
+print("------------------------------------------------------------")  # 60個
+
+
 
