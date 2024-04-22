@@ -618,15 +618,76 @@ print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime(tLocal))
 
 print("------------------------------------------------------------")  # 60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
+import time as t
+print(t.time())
 
 print("------------------------------------------------------------")  # 60個
 
+import time as t
+print(t.localtime())
+
+print("------------------------------------------------------------")  # 60個
+
+import time as t
+ptime=t.localtime()
+print("目前時間是西元%d年%d月%d日%d點%d分"%(ptime[0],ptime[1],ptime[2],ptime[3],ptime[4]))
+
+print("------------------------------------------------------------")  # 60個
+
+import time as t
+print(t.ctime())
+print(t.ctime(t.time()))
+
+print("------------------------------------------------------------")  # 60個
+
+import time as t
+print("程式暫停2秒鐘")
+t.sleep(2)
+print("程式繼續執行")
+
+print("------------------------------------------------------------")  # 60個
+
+import time as t
+print("開始執行到目前的時間:"+str(t.perf_counter()))
+t.sleep(2)
+print("程式執行時間經過:"+str(t.perf_counter())+"秒")
+t.sleep(3)
+print("程式執行時間經過:"+str(t.perf_counter())+"秒")
+
+print('------------------------------------------------------------')	#60個
+
+# 模組與套件 clock() python3.8後改為perf_counter()
+import time as t
+#print("開始執行到目前的時間:"+str(t.perf_counter()))
+print("開始執行到目前的時間:"+str(t.perf_counter()))
+t.sleep(2)
+print("程式執行時間經過:"+str(t.perf_counter())+"秒")
+t.sleep(3)
+print("程式執行時間經過:"+str(t.perf_counter())+"秒")
+
+print("------------------------------------------------------------")  # 60個
+
+import time as t
+week = ["一","二","三","四","五","六","日"]
+dst = ["無日光節約時間","有日光節約時間"]
+time1 = t.localtime()
+show = "現在時刻:"+"\n"
+show += "中華民國"+str(int(time1.tm_year)-1911)+"年"
+show += str(time1.tm_mon)+"月"+str(time1.tm_mday)+"日"
+show += str(time1.tm_hour)+"時"+str(time1.tm_min)+"分"
+show += str(time1.tm_sec)+"秒 星期"+week[time1.tm_wday]+"\n"
+show += "今天是今年的第"+str(time1.tm_yday)+"天，此地"+dst[time1.tm_isdst]
+print(show)
+
+print("------------------------------------------------------------")  # 60個
+
+import time as t
+timestart = t.perf_counter()
+for i in range(0,5000):
+    for j in range(0,1000):
+        n=i*j
+timeend = t.perf_counter()
+print("執行五百萬次整數運算的時間:"+str(timeend-timestart)+"秒")        
 
 
 print("------------------------------------------------------------")  # 60個

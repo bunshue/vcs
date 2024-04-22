@@ -3237,6 +3237,206 @@ print(v8)
 print("------------------------------------------------------------")  # 60個
 
 
+
+
+print("------------------------------------------------------------")  # 60個
+
+print('請輸入一串列的整數，數目之間利用空白分隔：')
+ps = "86 75 92 77 84 76 95"
+
+pitems = ps.split()
+pscores = [ eval(x) for x in pitems ]
+pabove = 0
+paverage = sum(pscores)/len(pscores)
+for score in pscores:
+    if score >= paverage:
+        pabove += 1
+print("平均數："+str(paverage))
+print("大於或等於平均數的數目："+str(pabove))
+print("小於平均數的數目："+str(len(pscores)-pabove))
+
+print("------------------------------------------------------------")  # 60個
+
+print("姓  名  提取   推論  詮釋")
+print("%3s %4.2f %4.2f %4.2f"%("陳大同",89.00, 99.00, 88.00))
+print("%3s %4.2f %4.2f %4.2f"%("楊小明",77.50, 89.00, 77.50))
+print("%3s %4.2f %4.2f %4.2f"%("陳時雨",66.75, 99.25, 88.50))
+print("%3s %4.2f %4.2f %4.2f"%("李婉玲",76.75, 84.50, 88.00))
+print("%3s %4.2f %4.2f %4.2f"%("林研時",89.25, 99.50, 89.25))
+
+print("姓  名  提取   推論  詮釋")
+print("%3s %4.2f %4.2f %4.2f"%("陳大同",89.00, 99.00, 88.00))
+print("%3s %4.2f %4.2f %4.2f"%("楊小明",77.50, 89.00, 77.50))
+print("%3s %4.2f %4.2f %4.2f"%("陳時雨",66.75, 99.25, 88.50))
+print("%3s %4.2f %4.2f %4.2f"%("李婉玲",76.75, 84.50, 88.00))
+print("%3s %4.2f %4.2f %4.2f"%("林研時",89.25, 99.50, 89.25))
+
+print("------------------------------------------------------------")  # 60個
+
+list1 = [50,40,20,40,20,60,20,80,90]
+print(" 原始串列:",list1)
+list1.sort()
+list1.reverse()
+print(" 由大到小:",list1)
+
+print("------------------------------------------------------------")  # 60個
+
+print("%4s %4s %8s"%("x","y","x**y"))
+print("%4d %4d %8d"%(1,1,1))
+print("%4d %4d %8d"%(2,2,4))
+print("%4d %4d %8d"%(4,3,64))
+print("%4d %4d %8d"%(8,4,4096))
+
+print("------------------------------------------------------------")  # 60個
+
+i=1
+while (i<=9):
+    j=2
+    while (j<=9):        
+        print("%d*%d=%2d"%(j,i,i*j), end=" ")
+        j=j+1
+    print()
+    i=i+1
+
+print("------------------------------------------------------------")  # 60個
+
+def calarea(height, width=6):
+    result = height*width
+    return result
+getarea = calarea(10)
+print(getarea)
+
+print("------------------------------------------------------------")  # 60個
+
+def calarea(height, width=6):
+    result = height*width
+    return result
+getarea = calarea(10, 7)
+print(getarea)
+
+print("------------------------------------------------------------")  # 60個
+
+def scope():
+    var1 = 1
+    print(var1, var2)
+var1 = 3
+var2 = 4
+print(var1, var2)
+scope()
+print(var1, var2) 
+
+print("------------------------------------------------------------")  # 60個
+
+def scope():
+    global var1
+    var1 = 1
+    print(var1, var2)
+var1 = 3
+var2 = 4
+print(var1, var2)
+scope()
+print(var1, var2)  
+
+print("------------------------------------------------------------")  # 60個
+
+import calendar
+print(calendar.month(2018,2))
+
+print("------------------------------------------------------------")  # 60個
+
+# 模組與套件
+
+import calendar
+print(calendar.__file__)
+
+print("------------------------------------------------------------")  # 60個
+
+print('要轉換的十進位數字 = 255')
+pnum = 255
+presult=""
+while(pnum!=0):
+    pdata=str(pnum%2)
+    presult="".join([pdata,presult])
+    pnum=pnum//2
+print("轉換為二進位數字為:%s"%presult)
+
+print("------------------------------------------------------------")  # 60個
+
+try:   
+    print(varn)
+except NameError:
+    print("變數不存在!")
+finally:
+    print("程式執行結束例外處理區塊")
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+from pytube import YouTube
+yt = YouTube("https://www.youtube.com/watch?v=BRcudpJzy1I")
+stream = yt.streams.filter(file_extension='mp4', res='360p').first()
+stream.download("d:\\music")
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+def phi(n):
+    presult = 0
+    ptemp = 1
+    for i in range(1, n + 1, 1):
+        presult = presult+ptemp/(2 * i - 1) 
+        ptemp = -1*ptemp
+    presult = 4*presult
+    return presult
+
+print(phi(900))
+
+print("------------------------------------------------------------")  # 60個
+
+from random import randint
+import os.path
+
+#pfile = input("請輸入檔名：").strip()
+
+pfile = 'tmp_cccccc.txt'
+if os.path.isfile(pfile):
+    print("此檔案已經存在，程式終止")
+else:
+    poutfile = open(pfile, "w")
+        
+    for i in range(30):
+        print(randint(0, 999), file = poutfile, end = " ")
+       
+    poutfile.close()
+        
+    pinfile = open(pfile, "r")
+    ps = pinfile.read()
+    
+    pnumber = [eval(items) for items in ps.split()]
+    pnumber.sort()
+        
+    for i in range(len(pnumber)):
+        print(pnumber[i], end = " ")
+            
+    pinfile.close()
+
+print("------------------------------------------------------------")  # 60個
+
+try:
+    #pnumber = int(input("請輸入一個整數："))
+    pnumber = 'aaaa'
+    print("所輸入的整數%d"%pnumber)
+except Exception as ex:
+    print("異常例外：", ex) 
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 
