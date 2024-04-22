@@ -2,32 +2,39 @@
 相關抽出
 
 
-arduino serial pyfirmata microbit
+arduino serial pyfirmata
 
 
 """
 
-
-import pyfirmata
-
-print("------------------------------------------------------------")  # 60個
-
+import sys
 import serial
-ser = serial.Serial('COM7')  # open serial port
+
+ser = serial.Serial('COM4', 115200)  # open serial port
+print(ser.name)         # check which port was really used
 print(ser.port)
 print(ser.baudrate)
 print(ser.bytesize)
 print(ser.parity)
 print(ser.timeout)
+
+#ser.write(b'hello')     # write a string
+
+while True:
+    print(ser.readline())
+
 ser.close()             # close port
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-
+#以下是用python寫的給arduino用的程式
 
 import pyfirmata
+
 pin = 13
-port = 'COM7'
+port = 'COM4'
 board=pyfirmata.Arduino(port)
 board.digital[pin].write(1)
 board.digital[pin].write(0)
@@ -37,7 +44,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pyfirmata
 
-board = pyfirmata.Arduino('COM7')
+board = pyfirmata.Arduino('COM4')
 it = pyfirmata.util.Iterator(board)
 it.start()
 
@@ -57,7 +64,7 @@ print("------------------------------------------------------------")  # 60個
 import pyfirmata
 from time import sleep
 
-board = pyfirmata.Arduino('COM7')
+board = pyfirmata.Arduino('COM4')
 it = pyfirmata.util.Iterator(board)
 it.start()
 
@@ -82,7 +89,7 @@ print("------------------------------------------------------------")  # 60個
 
 import pyfirmata
 
-board = pyfirmata.Arduino('COM7')
+board = pyfirmata.Arduino('COM4')
 it = pyfirmata.util.Iterator(board)
 it.start()
 
@@ -104,7 +111,7 @@ import pyfirmata
 pin_led=10
 pin_button=12
 LEDState=False
-port = 'COM7'
+port = 'COM4'
 board=pyfirmata.Arduino(port)
 print(board.digital[pin_button].read())
 button = board.get_pin('d:12:i')
@@ -155,7 +162,7 @@ print("------------------------------------------------------------")  # 60個
 import pyfirmata
 from time import sleep
 
-board = pyfirmata.Arduino('COM7')
+board = pyfirmata.Arduino('COM4')
 it = pyfirmata.util.Iterator(board)
 it.start()
 
@@ -180,7 +187,7 @@ import tkinter
 import pyfirmata
 from time import sleep
 pin=10
-port = 'COM7'
+port = 'COM4'
 board=pyfirmata.Arduino(port)
 sleep(5)
 top=tkinter.Tk()
@@ -199,7 +206,7 @@ board.exit()
 print("------------------------------------------------------------")  # 60個
 
 import serial
-ser = serial.Serial('COM7',115200)  # open serial port
+ser = serial.Serial('COM4',115200)  # open serial port
 print(ser.name)         # check which port was really used
 ser.write(b'hello')     # write a string
 ser.close()             # close port
@@ -211,7 +218,7 @@ ser.close()             # close port
 import pyfirmata
 from time import sleep
 pin=11
-port = 'COM51'
+port = 'COM4'
 board=pyfirmata.Arduino(port)
 while True:
     board.digital[pin].write(1)
@@ -226,7 +233,7 @@ import tkinter
 import pyfirmata
 from time import sleep
 pin=10
-port = 'COM7'
+port = 'COM4'
 board=pyfirmata.Arduino(port)
 sleep(5)
 top=tkinter.Tk()
@@ -248,7 +255,7 @@ print("------------------------------------------------------------")  # 60個
 import pyfirmata
 from time import sleep
 pin=12
-port = 'COM51'
+port = 'COM4'
 board=pyfirmata.Arduino(port)
 for i in range(1,10):
     board.digital[pin].write(1)
@@ -305,7 +312,7 @@ def buzzerPattern(pin, recurrence, pattern):
 
 
 # Setting up the Arduino board
-port = 'COM7'
+port = 'COM4'
 board = Arduino(port)
 # Need to give some time to pyFirmata and Arduino to synchronize
 sleep(5)
@@ -315,42 +322,6 @@ notes = [ 261, 294, 330, 349, 392, 440, 494, 523 ]
 #buzzerPattern(10, 2, 1)
 
 print("------------------------------------------------------------")  # 60個
-
-from microbit import *
-while True:
-	display.show(Image('11111:22222:33333:44444:55555'))
-	sleep(2000)
-
-print("------------------------------------------------------------")  # 60個
-
-from microbit import *
-while True:
-	display.show([Image.HEART, Image.HEART_SMALL])
-	sleep(2000)
-
-print("------------------------------------------------------------")  # 60個
-
-from microbit import *
-compass.calibrate()
-while True:
-	needle = ((15 - compass.heading()) // 30) % 12
-	display.show(Image.ALL_CLOCKS[needle])
-
-print("------------------------------------------------------------")  # 60個
-
-from microbit import *
-while True:
-	display.scroll(str(temperature()))
-	sleep(500)
-
-print("------------------------------------------------------------")  # 60個
-
-from machine import pin
-import dht
-d = dht.DHT11(Pin(2))
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

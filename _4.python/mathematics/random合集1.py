@@ -1398,6 +1398,97 @@ for j in range(20):  # 使用 20 次的 for 迴圈
     id_number = str(local) + str(sex) + nums_str + str(check_num)
     print(id_number)
 
+print("------------------------------------------------------------")  # 60個
+
+import random
+print(random.randint(0,10))
+
+print("------------------------------------------------------------")  # 60個
+
+# 模組與套件
+import random
+for i in range(0,5):
+    print(random.randrange(0,10,2), end=" ")
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+print(random.random())    
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+for i in range(0,3):
+    print(random.uniform(0,10), end=" ")
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+str1 = "abcde"
+for i in range(0,3):
+    print(random.choice(str1), end=" ")
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+list1 = ['a','b','c','d','e']    
+for i in range(0,3):
+    print(random.choice(list1), end=" ")
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+str1 = "abcde"
+print(random.sample(str1, 3))    
+
+print("------------------------------------------------------------")  # 60個
+
+# 模組與套件
+import random
+list1 = ['a','b','c','d','e']    
+print(random.sample(list1, 3))  
+
+
+
+import random
+while True:
+    inkey = input("請按任意鍵後再按Enter鍵擲骰子，若要結束請直接按Enter鍵。")
+    if len(inkey)>0:
+        num=random.randint(1,6)
+        print("亂數產生的骰子點數："+str(num))
+    else:
+        print("擲骰子點數結束。")
+        break
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+list1 = random.sample(range(1,50),7)
+print(list1)
+special = list1.pop()
+print(special)
+list1.sort()
+print("本期大樂透中獎號碼為:", end="")
+for i in range(0,6):
+    if (i==5):
+        print(str(list1[i]))
+    else:
+        print(str(list1[i]), end=",")
+print("本期大樂透特別號為:"+str(special))
+
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+for i in range(0,7):
+    print(random.choice("ABCDEFGHIJKLMN"), end=",")
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1405,7 +1496,13 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
+
+
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個

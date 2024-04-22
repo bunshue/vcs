@@ -353,9 +353,11 @@ def loadmp3():
 def exitmp3():
     mixer.music.stop()
     win.destroy() 
+
 import tkinter as tk
 from pygame import mixer
 import glob
+
 mixer.init()
 win=tk.Tk()
 win.geometry("640x380")
@@ -542,8 +544,7 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計入門與應用\二版範例資料\ch10\ex101\ex10_11.py
-
+""" syntax fail
 from __future__ import unicode_literals
 from pytube import YouTube
 
@@ -615,8 +616,7 @@ label3 = tk.Label(frame1, text="本程式使用時請注意時間，保護眼睛
 label3.grid(row=4, column=1)
 
 win.mainloop()
-
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 def checkp():

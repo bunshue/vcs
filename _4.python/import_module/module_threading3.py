@@ -161,10 +161,273 @@ thread1.start()
 thread2 = threading.Thread(target=loop_b)
 thread2.start()
 
+print("------------------------------------------------------------")  # 60個
 
+# LifoQueue - 可用於多執行緒的堆疊
+
+import threading
+import queue
+
+#要進行的工作
+source = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
+threads_num = 3
+
+q = queue.LifoQueue()
+for item in source:
+    print('加入項目 :', item)
+    q.put(item)
+
+
+def worker():
+    print("執行緒開始 ")
+    while True:
+        item = q.get()
+        if item == "STOP":
+            print("執行緒結束 ")
+            break
+        print("處理資料: ", item)
+        time.sleep(0.01)
+        q.task_done()
+
+
+threads = []
+for _ in range(threads_num):
+    t = threading.Thread(target=worker)
+    t.start()
+    threads.append(t)
+
+q.join()
+
+for _ in range(threads_num):
+    q.put("STOP")
+
+for t in threads:
+    t.join()
+
+print("主程式結束")
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
+# Queue - 可用於多執行緒的佇列
+
+import threading
+import queue
+
+#要進行的工作
+source = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
+threads_num = 3
+
+q = queue.Queue()
+for item in source:
+    print('加入項目 :', item)
+    q.put(item)
+
+
+def worker():
+    print("執行緒開始")
+    while True:
+        item = q.get()
+        if item == "STOP":
+            print("執行緒結束")
+            break
+        print("處理資料:", item)
+        time.sleep(1)
+        q.task_done()
+
+
+threads = []
+for _ in range(threads_num):
+    t = threading.Thread(target=worker)
+    t.start()
+    threads.append(t)
+
+q.join()
+
+for _ in range(threads_num):
+    q.put("STOP")
+
+for t in threads:
+    t.join()
+
+print("主程式結束")
+
+print("------------------------------------------------------------")  # 60個
+
+# multiprocessing.Queue - 給多核運算用的佇列
+
+import multiprocessing
+
+
+def worker(queue):
+    print("process 開始")
+    while True:
+        item = queue.get()
+        if item == "STOP":
+            print("process 結束")
+            break
+        print("處理資料:", item)
+        time.sleep(0.01)
+
+
+#要進行的工作
+source = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
+
+process_num = 3
+
+q = multiprocessing.Queue()
+for item in source:
+    print('加入項目 :', item)
+    q.put(item)
+
+processes = []
+for _ in range(process_num):
+    p = multiprocessing.Process(target=worker, args=(q,))
+    p.start()
+    processes.append(p)
+
+for _ in range(process_num):
+    q.put("STOP")
+
+for p in processes:
+    p.join()
+
+print("主程式結束")
+
+print("------------------------------------------------------------")  # 60個
+
+# PriorityQueue - 可用於多執行緒的 heapq
+
+import threading
+import queue
+
+#要進行的工作
+source = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
+
+source = ["2-吃飯", "1-睡覺", "3-寫程式", "7-散步", "5-聽音樂", "6-打牌", "4-玩電動"]
+threads_num = 3
+
+q = queue.PriorityQueue()
+for item in source:
+    print('加入項目 :', item)
+    q.put(item)
+
+
+def worker():
+    print("執行緒開始")
+    while True:
+        item = q.get()
+        if item == "STOP":
+            print("執行緒結束")
+            break
+        print("處理資料:", item)
+        time.sleep(0.01)
+        q.task_done()
+
+
+threads = []
+for _ in range(threads_num):
+    t = threading.Thread(target=worker)
+    t.start()
+    threads.append(t)
+
+q.join()
+
+for _ in range(threads_num):
+    q.put("STOP")
+
+for t in threads:
+    t.join()
+
+print("主程式結束")
+
+print("------------------------------------------------------------")  # 60個
+
+import threading
+
+def wakeUp():
+    print("threadObj執行緒開始")
+    time.sleep(10)  # threadObj執行緒休息10秒
+    print("女朋友生日")
+    print("threadObj執行緒結束")
+
+
+print("程式階段1")
+threadObj = threading.Thread(target=wakeUp)
+threadObj.start()  # threadObj執行緒開始工作
+time.sleep(1)  # 主執行緒休息1秒
+print("程式階段2")
+
+print("------------------------------------------------------------")  # 60個
+
+import threading
+
+
+def wakeUp(name, blessingWord):
+    print("threadObj執行緒開始")
+    time.sleep(10)  # threadObj執行緒休息10秒
+    print(name, " ", blessingWord)
+    print("threadObj執行緒結束")
+
+
+print("程式階段1")
+threadObj = threading.Thread(target=wakeUp, args=["NaNa", "生日快樂"])
+threadObj.start()  # threadObj執行緒開始工作
+time.sleep(1)  # 主執行緒休息1秒
+print("程式階段2")
+
+print("------------------------------------------------------------")  # 60個
+
+import threading
+import time
+
+
+def worker():
+    print(threading.current_thread().name, "Starting")
+    time.sleep(2)
+    print(threading.current_thread().name, "Exiting")
+
+
+def manager():
+    print(threading.current_thread().name, "Starting")
+    time.sleep(3)
+    print(threading.current_thread().name, "Exiting")
+
+
+m = threading.Thread(target=manager)
+w = threading.Thread(target=worker)
+m.start()
+w.start()
+
+print("------------------------------------------------------------")  # 60個
+
+import threading
+import time
+
+
+def worker():
+    print(threading.current_thread().name, "Starting")
+    time.sleep(2)
+    print(threading.current_thread().name, "Exiting")
+
+
+def manager():
+    print(threading.current_thread().name, "Starting")
+    time.sleep(3)
+    print(threading.current_thread().name, "Exiting")
+
+
+m = threading.Thread(target=manager)
+w = threading.Thread(target=worker)
+w2 = threading.Thread(name="Manager", target=worker)
+m.start()
+w.start()
+w2.start()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

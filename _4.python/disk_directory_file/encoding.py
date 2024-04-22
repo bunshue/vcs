@@ -13,8 +13,12 @@ import sys
 
 print('------------------------------------------------------------')	#60個
 
-print('顯示目前的系統編碼')
+print('顯示目前的Python系統編碼')
 print(sys.getdefaultencoding())
+
+import locale
+print('取得目前Windows作業系統設定的編碼')
+print(locale.getpreferredencoding())
 
 print('------------------------------------------------------------')	#60個
 
@@ -284,6 +288,37 @@ for enc in ALL_CJKENCODINGS:
     print(code)
 """
 print('------------------------------------------------------------')	#60個
+
+
+x1 = 97
+x2 = chr(x1)
+print(x2)  # 輸出數值97的字元
+x3 = ord(x2)
+print(x3)  # 輸出字元x3的Unicode(10進位)碼值
+x4 = "魁"
+print(hex(ord(x4)))  # 輸出字元'魁'的Unicode(16進位)碼值
+
+print("------------------------------------------------------------")  # 60個
+
+for x in range(0x2160, 0x216A):
+    print(chr(x), end=" ")
+
+
+print("------------------------------------------------------------")  # 60個
+
+# ROT13 加密法
+
+def rot13(word):
+    output = []
+    for c in word.lower():
+        new_ord = ord(c) + 13
+        if new_ord > ord("z"):
+            new_ord -= 26
+        output.append(chr(new_ord))
+    return "".join(output)
+
+
+print(rot13("apple"))
 
 
 

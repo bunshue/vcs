@@ -29,11 +29,15 @@ import matplotlib.pyplot as plt
 '''
 print('---- np.random.seed() ST --------------------------------------------------------')	#60個
 
-print('固定random seed')
+print('固定亂數種子 random seed')
 np.random.seed(5)
 
 # Fixing random state for reproducibility
 np.random.seed(20060311)
+
+np.random.seed(1234567)
+np.random.seed(0)
+np.random.seed(10**7)
 
 print('---- np.random.seed() SP --------------------------------------------------------')	#60個
 
@@ -723,3 +727,13 @@ print(f"Numpy模組母體標準差  : {np.std(x):6.2f}")
 print(f"Numpy模組樣本標準差  : {np.std(x,ddof=1):6.2f}")
 print(f"Statistics母體標準差 : {statistics.pstdev(x):6.2f}")
 print(f"Statistics樣本標準差 : {statistics.stdev(x):6.2f}")
+
+
+
+
+""" 新進
+
+#size = np.random.choice(np.arange(100), 100)
+
+
+"""

@@ -344,11 +344,6 @@ wikipedia.summary("柔道")
 
 print('------------------------------------------------------------')	#60個
 
-import locale
-print(locale.getpreferredencoding())
-
-print('------------------------------------------------------------')	#60個
-
 print("將檔案移到資源回收筒")
 
 import send2trash
