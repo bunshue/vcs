@@ -952,3 +952,124 @@ areaNum, localNum = txt.groups()    # 留意是groups()
 print(f"區域號碼是: {areaNum}")          # 顯示區域號碼
 print(f"電話號碼是: {localNum}")         # 顯示電話號碼
 
+
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+msg = """txt@deepwisdom.comyyy.twkkk,
+         ser@deepmind.com.tw,
+         hung@gmail.com
+         aaa@gmail.comcomkk,
+         kkk@gmail.com,
+         abc@aa,
+         service@deepwidsom.com
+         mymail@yahoo.com
+         de1988@kkk
+         abcdefg"""
+pattern = r"""(
+    [a-zA-Z0-9_.]+                  # 使用者帳號
+    @                               # @符號
+    [a-zA-Z0-9-.]+                  # 主機域名domain
+    [\.]                            # .符號
+    [a-zA-Z]{2,4}\b                 # 可能是com或edu或其它
+    ([\.])?                         # .符號, 也可能無特別是美國
+    ([a-zA-Z]{2,4}\b)?              # 國別
+    )"""
+eMail = re.findall(pattern, msg, re.VERBOSE)  # 傳回搜尋結果
+for mail in eMail:
+    print(mail[0])
+
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+# 取出一段文字中的阿拉伯數字
+a = "123 + 456"
+b = re.findall(r"\d+", a.replace(" ", ""))
+print(b)
+
+# 取出一段文字中的「非」阿拉伯數字
+c = "hello 123 !!!"
+d = re.findall(r"\D+", c.replace(" ", ""))
+print(d)
+
+# 取出每個非空白字元
+msg1 = "hello world!!"
+msg1r = re.findall(r"\S", msg1)
+print(msg1r)
+
+
+# 替換指定區間文字
+msg2 = "hello {name}, {age}"
+msg2r = re.findall(r"\{.+?\}", msg2)
+print(msg2r)
+text = {"name": "oxxo", "age": "18"}
+for i in range(0, len(msg2r)):
+    o = re.sub(r"\{|\}", "", msg2r[i])
+    msg2 = re.sub(msg2r[i], text[o], msg2)
+
+print(msg2)
+
+aa = "abc"
+aa = aa + "def"
+print(aa)
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+驗證輸入用戶名和QQ號是否有效并給出對應的提示信息
+要求：
+用戶名必須由字母、數字或下劃線構成且長度在6~20個字符之間
+QQ號是5~12的數字且首位不能為0
+"""
+
+import re
+
+# username = input('請輸入用戶名: ')
+username = "lion_mouse"
+m1 = re.match(r"^[0-9a-zA-Z_]{6,20}$", username)
+if not m1:
+    print("請輸入有效的用戶名.")
+
+# qq = input('請輸入QQ號: ')
+qq = "12345678"
+m2 = re.match(r"^[1-9]\d{4,11}$", qq)
+if not m2:
+    print("請輸入有效的QQ號.")
+if m1 and m2:
+    print("你輸入的信息是有效的!")
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 用字串正規化分割字串為 list
+
+import re
+
+sentence = "This,is a,test.sentence"
+time_data = "2020/05/20_12:30:45"
+
+print(re.split("[,. ]", sentence))  # 用逗點、句點和空格來分割字串
+
+print(re.split("[/_:]", time_data))
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+

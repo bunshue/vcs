@@ -835,24 +835,6 @@ info = [
 for book, author, price in info:
     print("%10s %3s" % (book, author), " 書籍訂價:", price)
 
-str1 = "淡泊以明志，寧靜以致遠"
-print("原字串", str1)
-print("欄寬20，字串置中", str1.center(20))
-print("字串置中，# 填補", str1.center(20, "#"))
-print("欄寬20，字串靠左", str1.ljust(20, "@"))
-print("欄寬20，字串靠右", str1.rjust(20, "!"))
-
-mobilephone = "931828736"
-print("字串左側補0:", mobilephone.zfill(10))
-
-str2 = "Time create hero.,I love my family."
-print("以逗點分割字元", str2.partition(","))
-
-str3 = "忠孝\n仁愛\n信義\n和平"
-print("依\\n分割字串", str3.splitlines(False))
-
-print("------------------------------------------------------------")  # 60個
-
 result = lambda x: 3 * x - 1  # lambda()函數
 print(result(3))  # 輸出數值8
 
@@ -1024,17 +1006,6 @@ sentence = "This is a test sentence"
 print(sentence.split(" "))
 
 ["This", "is", "a", "test", "sentence"]
-
-# 用字串正規化分割字串為 list
-
-import re
-
-sentence = "This,is a,test.sentence"
-time_data = "2020/05/20_12:30:45"
-
-print(re.split("[,. ]", sentence))  # 用逗點、句點和空格來分割字串
-
-print(re.split("[/_:]", time_data))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1358,26 +1329,6 @@ def formula(x, y):  # 自訂函數
 
 formula = lambda x, y: 3 * x + 2 * y  # 表示lambda有二個參數
 print(formula(5, 10))  ##傳入兩個數值讓lambda()函數做運算，輸出數值35
-
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "淡泊以明志，寧靜以致遠"
-print("原字串", str1)
-print("欄寬20，字串置中", str1.center(20))
-print("字串置中，# 填補", str1.center(20, "#"))
-print("欄寬20，字串靠左", str1.ljust(20, "@"))
-print("欄寬20，字串靠右", str1.rjust(20, "!"))
-
-mobilephone = "931828736"
-print("字串左側補0:", mobilephone.zfill(10))
-
-str2 = "Time create hero.,I love my family."
-print("以逗點分割字元", str2.partition(","))
-
-str3 = "忠孝\n仁愛\n信義\n和平"
-print("依\\n分割字串", str3.splitlines(False))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1711,31 +1662,6 @@ def printmsg():
 msg = "Python"
 print("更改前: ", msg)
 printmsg()
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "Python is funny and powerful"
-print("原字串", str1)
-print("欄寬40，字串置中", str1.center(40))
-print("字串置中，* 填補", str1.center(40, "*"))
-print("欄寬10，字串靠左", str1.ljust(40, "="))
-print("欄寬40，字串靠右", str1.rjust(40, "#"))
-
-mobilephone = "931666888"
-print("字串左側補0:", mobilephone.zfill(10))
-
-str2 = "Mayor,President"
-print("以逗點分割字元", str2.partition(","))
-
-str3 = "禮\n義\n廉\n恥"
-print("依\\n分割字串", str3.splitlines(False))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "Happy birthday to my best friend."
-s1 = str1.count("to", 0)  # 從str1字串索引0的位置開始搜尋
-s2 = str1.count("e", 0, 34)  # 搜尋str1從索引值0到索引值34-1的位置
-print("{}\n「to」出現{}次,「e」出現{}次".format(str1, s1, s2))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2095,51 +2021,6 @@ b = "   ".isspace()
 print('"   ".isspace() = ', b)
 
 print("------------------------------------------------------------")  # 60個
-
-animals = "welcome to python"
-print("animals = ", animals)
-b = animals.endswith("thon")
-print("animals.endswith('thon') = ", b)
-b = animals.startswith("hello")
-print("animals.startswith('hello') = ", b)
-b = animals.count("o")
-print("animals.count('o') = ", b)
-b = animals.find("come")
-print("animals.find('come') = ", b)
-b = animals.find("become")
-print("animals.find('become') = ", b)
-b = animals.find("o")
-print("animals.find('o') = ", b)
-b = animals.find("e")
-print("animals.find('e') = ", b)
-b = animals.rfind("o")
-print("animals.rfind('o') = ", b)
-b = animals.rfind("e")
-print("animals.rfind('e') = ", b)
-
-print("------------------------------------------------------------")  # 60個
-
-animals = "welcome to python"
-print("animals = ", animals)
-animals = "Welcome to Python"
-print("animals = ", animals)
-str3 = "This is a test."
-print("str3 = ", str3)
-s = animals.capitalize()
-print("animals.capitalize() = ", s)
-s = animals.lower()
-print("animals.lower() = ", s)
-s = animals.upper()
-print("animals.upper() = ", s)
-s = animals.title()
-print("animals.title() = ", s)
-s = animals.swapcase()
-print("animals.swapcase() = ", s)
-s = str3.replace("is", "was")
-print("str3.replace('is', 'was') = ", s)
-
-print("------------------------------------------------------------")  # 60個
-
 
 def clean_string(s):
     """
@@ -2868,25 +2749,6 @@ not_duplicatd.sort()
 print(not_duplicatd)
 
 print("------------------------------------------------------------")  # 60個
-
-str1 = "淡泊以明志，寧靜以致遠"
-print("原字串", str1)
-print("欄寬20，字串置中", str1.center(20))
-print("字串置中，# 填補", str1.center(20, "#"))
-print("欄寬20，字串靠左", str1.ljust(20, "@"))
-print("欄寬20，字串靠右", str1.rjust(20, "!"))
-
-mobilephone = "931828736"
-print("字串左側補0:", mobilephone.zfill(10))
-
-str2 = "Time create hero.,I love my family."
-print("以逗點分割字元", str2.partition(","))
-
-str3 = "忠孝\n仁愛\n信義\n和平"
-print("依\\n分割字串", str3.splitlines(False))
-
-print("------------------------------------------------------------")  # 60個
-
 
 def fun1(obj, price):
     obj = "Microwave"
@@ -4021,24 +3883,6 @@ x, y = 1, 10
 while x < y:
     print(x, end=" ")
     x += 1
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "Python is funny and powerful"
-print("原字串", str1)
-print("欄寬40，字串置中", str1.center(40))
-print("字串置中，* 填補", str1.center(40, "*"))
-print("欄寬10，字串靠左", str1.ljust(40, "="))
-print("欄寬40，字串靠右", str1.rjust(40, "#"))
-
-mobilephone = "931666888"
-print("字串左側補0:", mobilephone.zfill(10))
-
-str2 = "Mayor,President"
-print("以逗點分割字元", str2.partition(","))
-
-str3 = "禮\n義\n廉\n恥"
-print("依\\n分割字串", str3.splitlines(False))
 
 print("------------------------------------------------------------")  # 60個
 

@@ -1,0 +1,46 @@
+將Python打包成執行檔，使用PyInstaller
+
+安裝PyInstaller		pip install pyinstaller
+執行檔包裝程式 Pyinstaller
+pip install pyinstaller
+
+使用pyinstaller製作執行檔
+
+方法一：onedir
+將製作出的檔案皆放在同一個目錄下
+cmd 輸入 pyinstaller my_python_program.py
+
+會在目錄下產生 <build> <dist> <__pycache__>等3個目錄
+將<dist>下的 my_python_program 子目錄全部拷貝出來 即可在其他電腦上使用
+
+/dist/my_python_program/下即為所有可執行檔(整個資料夾)
+
+方法二：onefile
+加上 -F 參數將製作出的檔案包裝成一個獨立的exe執行檔
+cmd 輸入 pyinstaller -F my_python_program.py
+
+/dist/my_python_program.exe 即為可執行檔(一檔)
+
+會在目錄下產生 <build> <dist> <__pycache__>等3個目錄
+將<dist>下的 my_python_program.exe 拷貝出來 即可在其他電腦上使用
+
+若有附屬檔案(圖片、音效、exe)，也要一併拷貝至相對應的位置。
+
+
+將python程式打包成.exe
+C:\Users\david>pip install pyinstaller
+
+2024/02/15  下午 08:58    <DIR>          .
+2024/02/15  下午 08:58    <DIR>          ..
+2023/12/29  上午 04:02             3,210 tk_ex_英文單字王1.py
+               1 個檔案           3,210 位元組
+               2 個目錄  175,455,870,976 位元組可用
+
+C:\_git\vcs\test_install>pyinstaller tk_ex_英文單字王1.py
+
+完成後看到兩個資料夾 build 和 dist  dist裏就是打包好的程序
+
+
+
+
+

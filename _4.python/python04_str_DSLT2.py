@@ -8,7 +8,6 @@ import sys
 
 print("------------------------------------------------------------")  # 60個
 
-'''
 animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
 
 for animal in animals:
@@ -142,12 +141,11 @@ print(dict_diff(d1, d2))
 
 print("------------------------------------------------------------")  # 60個
 
+animals = ["mouse", "ox", "tiger", "rabbit"]
 
-
-fruit = ["apple", "orange", "watermelon"]
-print("反轉前內容：", fruit)
-fruit.reverse()
-print("反轉後內容：", fruit)
+print("反轉前內容：", animals)
+animals.reverse()
+print("反轉後內容：", animals)
 score = [65, 76, 54, 32, 18]
 print("反轉前內容：", score)
 score.reverse()
@@ -168,22 +166,22 @@ print(letter)
 
 print("------------------------------------------------------------")  # 60個
 
-
-fruits = ["apple", "orange", "apple", "banana", "apple"]
-fruit = "apple"
-print("刪除前的fruits", fruits)
-while fruit in fruits:  # 只要串列內有apple迴圈就繼續
-    fruits.remove(fruit)
-print("刪除後的fruits", fruits)
+animals = ["mouse", "ox", "tiger", "rabbit"]
+animals = ["apple", "orange", "apple", "banana", "apple"]
+animal = "tiger"
+print("刪除前的animals", animals)
+while animal in animals:  # 只要串列內有 tiger 迴圈就繼續
+    animals.remove(animal)
+print("刪除後的animals", animals)
 
 print("------------------------------------------------------------")  # 60個
 
 numbers1 = (1, 2, 3, 4, 5)  # 定義元組元素是整數
-fruits = ("apple", "orange")  # 定義元組元素是字串
+animals = ("mouse", "ox", "tiger", "rabbit") # 定義元組元素是字串
 mixed = ("James", 50)  # 定義元組元素是不同型態資料
 val_tuple = (10,)  # 只有一個元素的元祖
 print(numbers1)
-print(fruits)
+print(animals)
 print(mixed)
 print(val_tuple)
 # 列出元組資料型態
@@ -192,13 +190,13 @@ print("元組mixed資料型態是: ", type(mixed))
 print("------------------------------------------------------------")  # 60個
 
 numbers1 = (1, 2, 3, 4, 5)  # 定義元組元素是整數
-fruits = ("apple", "orange")  # 定義元組元素是字串
+animals = ("mouse", "ox", "tiger", "rabbit") # 定義元組元素是字串
 val_tuple = (10,)  # 只有一個元素的元祖
 print(numbers1[0])  # 以中括號索引值讀取元素內容
 print(numbers1[4])
-print(fruits[0], fruits[1])
+print(animals[0], animals[1])
 print(val_tuple[0])
-x, y = ("apple", "orange")  # 有趣的應用也可以用x,y=fruits
+x, y = ("ox", "tiger")  # 有趣的應用也可以用x,y=animals
 print(x, y)
 
 print("------------------------------------------------------------")  # 60個
@@ -209,24 +207,24 @@ for key in keys:
 
 print("------------------------------------------------------------")  # 60個
 
-fruits = ("apple", "orange")  # 定義元組元素是水果
-print("原始fruits元組元素")
-for fruit in fruits:
-    print(fruit)
+animals = ("mouse", "ox", "tiger", "rabbit") # 定義元組元素是水果
+print("原始animals元組元素")
+for animal in animals:
+    print(animal)
 
-fruits = ("watermelon", "grape")  # 定義新的元組元素
-print("\n新的fruits元組元素")
-for fruit in fruits:
-    print(fruit)
+animals = ("mouse", "ox", "tiger", "rabbit") # 定義新的元組元素
+print("\n新的animals元組元素")
+for animal in animals:
+    print(animal)
 
 print("------------------------------------------------------------")  # 60個
 
-fruits = ("apple", "orange", "banana", "watermelon", "grape")
-print(fruits[1:3])
-print(fruits[:2])
-print(fruits[1:])
-print(fruits[-2:])
-print(fruits[0:5:2])
+animals = ("mouse", "ox", "tiger", "rabbit")
+print(animals[1:3])
+print(animals[:2])
+print(animals[1:])
+print(animals[-2:])
+print(animals[0:5:2])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -288,17 +286,19 @@ print("新小兵字典", soldier0)
 
 print("------------------------------------------------------------")  # 60個
 
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
-cfruits = fruits.copy()
-print("位址 = ", id(fruits), "  fruits元素 = ", fruits)
-print("位址 = ", id(cfruits), "  fruits元素 = ", cfruits)
+animals = {"mouse": 3, "ox": 48, "tiger": 33, "rabbit": 8}
+
+canimals = animals.copy()
+print("位址 = ", id(animals), "  animals元素 = ", animals)
+print("位址 = ", id(canimals), "  animals元素 = ", canimals)
 
 print("------------------------------------------------------------")  # 60個
 
-fruits = {"西瓜": 15, "香蕉": 20, "水蜜桃": 25, "蘋果": 18}
+animals = {"mouse": 3, "ox": 48, "tiger": 33, "rabbit": 8}
+
 noodles = {"牛肉麵": 100, "肉絲麵": 80, "陽春麵": 60}
 empty_dict = {}
-print("fruits字典元素數量     = ", len(fruits))
+print("animals字典元素數量     = ", len(animals))
 print("noodles字典元素數量    = ", len(noodles))
 print("empty_dict字典元素數量 = ", len(empty_dict))
 
@@ -489,12 +489,13 @@ print("字典4 ", tup_dict2)
 
 print("------------------------------------------------------------")  # 60個
 
-fruits = {"Apple": 20, "Orange": 25}
-ret_value1 = fruits.get("Orange")
+#animals = ["mouse", "ox", "tiger", "rabbit"]
+animals = {"Apple": 20, "Orange": 25}
+ret_value1 = animals.get("Orange")
 print("Value = ", ret_value1)
-ret_value2 = fruits.get("Grape")
+ret_value2 = animals.get("Grape")
 print("Value = ", ret_value2)
-ret_value3 = fruits.get("Grape", 10)
+ret_value3 = animals.get("Grape", 10)
 print("Value = ", ret_value3)
 
 print("------------------------------------------------------------")  # 60個
@@ -538,11 +539,11 @@ print(type(x))
 print("------------------------------------------------------------")  # 60個
 
 # 表達方式1
-fruits = ["apple", "orange", "apple", "banana", "orange"]
-x = set(fruits)
+animals = ["mouse", "ox", "tiger", "rabbit"]
+x = set(animals)
 print(x)
 # 表達方式2
-y = set(["apple", "orange", "apple", "banana", "orange"])
+y = set(["mouse", "ox", "tiger", "rabbit"])
 print(y)
 
 print("------------------------------------------------------------")  # 60個
@@ -552,11 +553,11 @@ print(cities)
 
 print("------------------------------------------------------------")  # 60個
 
-fruits1 = ["apple", "orange", "apple", "banana", "orange"]
-x = set(fruits1)  # 將串列轉成集合
-fruits2 = list(x)  # 將集合轉成串列
-print("原先串列資料fruits1 = ", fruits1)
-print("新的串列資料fruits2 = ", fruits2)
+animals1 = ["mouse", "ox", "tiger", "rabbit"]
+x = set(animals1)  # 將串列轉成集合
+animals2 = list(x)  # 將集合轉成串列
+print("原先串列資料animals1 = ", animals1)
+print("新的串列資料animals2 = ", animals2)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -646,9 +647,10 @@ print("A與C集合不相等", A != C)
 print("------------------------------------------------------------")  # 60個
 
 # 方法1
-fruits = set("orange")
-print("字元a是屬於fruits集合?", "a" in fruits)
-print("字元d是屬於fruits集合?", "d" in fruits)
+animals = set("elephant")
+print("字元a是屬於animals集合?", "a" in animals)
+print("字元d是屬於animals集合?", "d" in animals)
+
 # 方法2
 cars = {"Nissan", "Toyota", "Ford"}
 boolean = "Ford" in cars
@@ -659,9 +661,9 @@ print("Audi in cars", boolean)
 print("------------------------------------------------------------")  # 60個
 
 # 方法1
-fruits = set("orange")
-print("字元a是不屬於fruits集合?", "a" not in fruits)
-print("字元d是不屬於fruits集合?", "d" not in fruits)
+animals = set("elephant")
+print("字元a是不屬於animals集合?", "a" not in animals)
+print("字元d是不屬於animals集合?", "d" not in animals)
 # 方法2
 cars = {"Nissan", "Toyota", "Ford"}
 boolean = "Ford" not in cars
@@ -670,7 +672,6 @@ boolean = "Audi" not in cars
 print("Audi not in cars", boolean)
 
 print("------------------------------------------------------------")  # 60個
-
 
 cars = ["toyota", "nissan", "honda"]
 nums = [1, 3, 5]
@@ -681,17 +682,13 @@ print(numslist)
 
 print("------------------------------------------------------------")  # 60個
 
-dslt
 James = ["Lebron James", 23, 19, 22, 31, 18]  # 定義James串列
 Love = ["Kevin Love", 20, 18, 30, 22, 15]  # 定義Love串列
 game3 = James[4] + Love[4]
 LKgame = James[0] + " 和 " + Love[0] + "第四場總得分 = "
 print(LKgame, game3)
 
-
 print("------------------------------------------------------------")  # 60個
-
-dslt
 
 warriors = ["Curry", "Durant", "Iquodala", "Bell", "Thompson"]
 print("2018年初NBA勇士隊主將陣容", warriors)
@@ -732,7 +729,6 @@ else:
     print("nums串列內沒有元素資料")
 
 print("------------------------------------------------------------")  # 60個
-
 
 cars = ["Honda", "Toyota", "Ford"]
 print("目前串列內容 = ", cars)
@@ -928,104 +924,10 @@ mysports.append("football")
 friendsports.append("soccer")
 print("我喜歡的最新運動     = ", mysports)
 print("我朋友喜歡的最新運動 = ", friendsports)
-'''
-
-print("------------------------------------------------------------")  # 60個
-
-#join() 連接字串
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-print("---".join(animals))
-
-#split() 分割字串
-animals = "米老鼠 班尼牛 跳跳虎 彼得兔 逗逗龍"
-cc = animals.split()
-print(cc)
-
-#字串排版
-
-#ljust rjust
-text = "米老鼠"
-print("|"+text+"|")
-print("|"+text.ljust(10)+"|")
-print("|"+text.ljust(10, '#')+"|")
-print("|"+text.rjust(10)+"|")
-print("|"+text.rjust(10, '#')+"|")
-#center(n) : 將字串擴充n個字元並置中
-print("|"+text.center(10)+"|")
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
 
-
-字串的函數
-just center replace find
-
-
-str1 = "dog"
-print(str1.ljust(7))
-print(str1.ljust(7,"#"))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "dog"
-print(str1.rjust(7,"#"))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "dog"
-print(str1.center(7,"#"))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "  This is a dog.  "
-print(str1.lstrip())
-print(str1.rstrip())
-print(str1.strip())
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "I like Python."
-print(str1.find("like"))
-print(str1.find("Pascal"))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "I like Python."
-print(str1.replace("Python","Pascal"))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "dog"
-print(str1.ljust(7))
-print(str1.ljust(7,"#"))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "dog"
-print(str1.rjust(7,"#"))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "dog"
-print(str1.center(7,"#"))
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "  This is a dog.  "
-print(str1.lstrip())
-print(str1.rstrip())
-print(str1.strip())
-
-print("------------------------------------------------------------")  # 60個
-
-str1 = "I like Python."
-print(str1.find("like"))
-print(str1.find("Pascal"))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1046,3 +948,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+

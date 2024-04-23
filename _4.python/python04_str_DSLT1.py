@@ -23,6 +23,7 @@ Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的
 
 """
 
+'''
 print("建立空容器")
 
 print("建立一個空字典")
@@ -1490,10 +1491,10 @@ print(alphabetCount)
 print("------------------------------------------------------------")  # 60個
 
 print("集合 的方法 1")
-fruits = set("orange")
-print(type(fruits))
-print("字元a是屬於fruits集合?", "a" in fruits)
-print("字元d是屬於fruits集合?", "d" in fruits)
+animals = set("orange")
+print(type(animals))
+print("字元a是屬於animals集合?", "a" in animals)
+print("字元d是屬於animals集合?", "d" in animals)
 
 print("集合 的方法 2")
 cars = {"Nissan", "Toyota", "Ford"}
@@ -1756,8 +1757,8 @@ print("map 的用法")
 
 
 def pick(x):
-    fruits = ["Apple", "Banana", "Orange", "Tomato", "Pine Apple", "Berry"]
-    return fruits[x]
+    animals = ["Apple", "Banana", "Orange", "Tomato", "Pine Apple", "Berry"]
+    return animals[x]
 
 
 alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
@@ -1771,7 +1772,7 @@ for choice in choices:
 
 print("------------------------------------------------------------")  # 60個
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -2015,10 +2016,35 @@ for i in range(len(list1)):
 
 list1 = []
 sum = 0
-for i in range(1,7):
-    score=int(input("請輸入第%d位學生成績:"%i))
-    list1.append(score)
-    sum += score
+
+score = 85
+list1.append(score)
+sum += score
+
+score = 72
+list1.append(score)
+sum += score
+
+score = 91
+list1.append(score)
+sum += score
+
+score = 88
+list1.append(score)
+sum += score
+
+score = 86
+list1.append(score)
+sum += score
+
+score = 79
+list1.append(score)
+sum += score
+
+score = 93
+list1.append(score)
+sum += score
+
 print("分數總分為:",sum)
 print(list1)
 
@@ -2034,9 +2060,15 @@ print("由大到小:",list1)
 print("------------------------------------------------------------")  # 60個
 
 list1 = []
-for i in range(1,7):
-    score=int(input("請輸入第%d位學生成績:"%i))
-    list1.append(score)
+
+list1.append(85)
+list1.append(72)
+list1.append(91)
+list1.append(88)
+list1.append(86)
+list1.append(79)
+list1.append(93)
+    
 list2 = sorted(list1)
 list3 = sorted(list1, reverse=True)
 print("原始成績:",list1)
@@ -2046,15 +2078,15 @@ print("由大到小:",list3)
 print("------------------------------------------------------------")  # 60個
 
 # list.sort()做遞增、遞減排序
-name = ["Tom", "Judy", "Anthea", "Charles"]
+name = ["mouse", "ox", "tiger", "rabbit"]
 
 # 省略參數，依字母做遞增
 name.sort()
-print(f"依字母遞增排序：\n{name}")
+print(f"英文名依字母遞增排序：\n{name}")
 
-number = [49, 131, 85, 247]
+number = [3, 48, 33, 8]
 number.sort(reverse=True)  # 遞減排序
-print("遞減排序：", number)
+print("體重遞減排序：", number)
 
 
 

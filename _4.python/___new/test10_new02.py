@@ -555,16 +555,6 @@ print(f"/{strB}/")
 
 print("------------------------------------------------------------")  # 60個
 
-title = "Ming-Chi Institute of Technology"
-print(f"/{title.center(50)}/")
-dt = "Department of ME"
-print(f"/{dt.ljust(50)}/")
-site = "JK Hung"
-print(f"/{site.rjust(50)}/")
-print(f"/{title.zfill(50)}/")
-
-print("------------------------------------------------------------")  # 60個
-
 cars = []
 print(f"目前串列內容 = {cars}")
 cars.append("Honda")
@@ -4533,28 +4523,6 @@ print("0932-999-199:    是台灣手機號碼", taiwanPhoneNum("0932-999-199"))
 
 print("------------------------------------------------------------")  # 60個
 
-x1 = 1
-x2 = 11
-x3 = 111
-x4 = 1111
-print("x= ", str(x1).rjust(4))
-print("x= ", str(x2).rjust(4))
-print("x= ", str(x3).rjust(4))
-print("x= ", str(x4).rjust(4))
-
-print("------------------------------------------------------------")  # 60個
-
-x1 = 1
-x2 = 11
-x3 = 111
-x4 = 1111
-print("x= ", str(x1).rjust(4), end="\r", flush=True)
-print("x= ", str(x2).rjust(4), end="\r", flush=True)
-print("x= ", str(x3).rjust(4), end="\r", flush=True)
-print("x= ", str(x4).rjust(4), end="\r", flush=True)
-
-print("------------------------------------------------------------")  # 60個
-
 """ error
 from twilio.rest import Client
 
@@ -4655,33 +4623,6 @@ for file in (
         lenWord(file)
     except Exception as err:
         print("檔案長度檢查異常發生: ", str(err))
-
-print("------------------------------------------------------------")  # 60個
-
-import re
-
-msg = """txt@deepwisdom.comyyy.twkkk,
-         ser@deepmind.com.tw,
-         hung@gmail.com
-         aaa@gmail.comcomkk,
-         kkk@gmail.com,
-         abc@aa,
-         service@deepwidsom.com
-         mymail@yahoo.com
-         de1988@kkk
-         abcdefg"""
-pattern = r"""(
-    [a-zA-Z0-9_.]+                  # 使用者帳號
-    @                               # @符號
-    [a-zA-Z0-9-.]+                  # 主機域名domain
-    [\.]                            # .符號
-    [a-zA-Z]{2,4}\b                 # 可能是com或edu或其它
-    ([\.])?                         # .符號, 也可能無特別是美國
-    ([a-zA-Z]{2,4}\b)?              # 國別
-    )"""
-eMail = re.findall(pattern, msg, re.VERBOSE)  # 傳回搜尋結果
-for mail in eMail:
-    print(mail[0])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4883,22 +4824,6 @@ for i in range(1, n):
     for j in range(1, n - i + 1):
         print(j, end="")
     print()
-
-print("------------------------------------------------------------")  # 60個
-
-title = "9 * 9 Multiplication Table"
-print("%s" % title.center(40))
-for i in range(1, 10):
-    print(f"{i:4d}", end="")
-print()  # 跳列輸出
-for i in range(40):
-    print("=", end="")  # 列印分隔符號
-print()  # 跳列輸出
-for i in range(1, 10):
-    print(i, "|", end="")
-    for j in range(1, 10):
-        print(f"{i*j:4d}", end="")  # 列印乘法值
-    print()  # 跳列輸出
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5888,41 +5813,6 @@ for i in range(1, 6):
 """
 print("------------------------------------------------------------")  # 60個
 
-import re
-
-# 取出一段文字中的阿拉伯數字
-a = "123 + 456"
-b = re.findall(r"\d+", a.replace(" ", ""))
-print(b)
-
-# 取出一段文字中的「非」阿拉伯數字
-c = "hello 123 !!!"
-d = re.findall(r"\D+", c.replace(" ", ""))
-print(d)
-
-# 取出每個非空白字元
-msg1 = "hello world!!"
-msg1r = re.findall(r"\S", msg1)
-print(msg1r)
-
-
-# 替換指定區間文字
-msg2 = "hello {name}, {age}"
-msg2r = re.findall(r"\{.+?\}", msg2)
-print(msg2r)
-text = {"name": "oxxo", "age": "18"}
-for i in range(0, len(msg2r)):
-    o = re.sub(r"\{|\}", "", msg2r[i])
-    msg2 = re.sub(msg2r[i], text[o], msg2)
-
-print(msg2)
-
-aa = "abc"
-aa = aa + "def"
-print(aa)
-
-print("------------------------------------------------------------")  # 60個
-
 a = 4
 b = 2.2
 
@@ -6221,34 +6111,6 @@ for x in range(1, 10):
     print()
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-驗證輸入用戶名和QQ號是否有效并給出對應的提示信息
-
-要求：
-用戶名必須由字母、數字或下劃線構成且長度在6~20個字符之間
-QQ號是5~12的數字且首位不能為0
-"""
-
-import re
-
-# username = input('請輸入用戶名: ')
-username = "lion_mouse"
-m1 = re.match(r"^[0-9a-zA-Z_]{6,20}$", username)
-if not m1:
-    print("請輸入有效的用戶名.")
-
-# qq = input('請輸入QQ號: ')
-qq = "12345678"
-m2 = re.match(r"^[1-9]\d{4,11}$", qq)
-if not m2:
-    print("請輸入有效的QQ號.")
-if m1 and m2:
-    print("你輸入的信息是有效的!")
-
-
-print("------------------------------------------------------------")  # 60個
-
 import string
 
 # 北美獨立宣言
