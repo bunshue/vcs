@@ -3,7 +3,7 @@ import sys
 import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 import tkinter as tk
 
 window = tk.Tk()
@@ -125,15 +125,6 @@ v.set("New Text!")
 
 win.mainloop()
 
-print('------------------------------------------------------------')	#60個
-
-'''
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("entry")
-
 print("------------------------------------------------------------")  # 60個
 
 print("grid")
@@ -189,104 +180,6 @@ three=tk.Button(win, width=20, text="December")
 three.grid(column=2,row=3)
 
 win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print("menu1")
-
-import tkinter as tk
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-menubar = tk.Menu(win)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print("menu2")
-
-import tkinter as tk
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print("menu3")
-
-import tkinter as tk
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print("messagebox")
-
-from tkinter import *
-from tkinter import messagebox
-wnd = Tk()
-wnd.title('訊息方塊元件(messagebox)')
-wnd.geometry('180x120+20+50')
-
-def first():
-    messagebox.showinfo('顯示類對話方塊',
-            '「顯示」類是以「show」開頭，只會顯示一個「確定」鈕。')
-
-def second():
-    messagebox.askretrycancel('詢問類對話方塊', 
-            '「詢問」類是以「ask」為開頭，伴隨2~3個按鈕來產生互動。')
-
-Button(wnd, text='顯示類對話方塊', command =
-       first).pack(side = 'left', padx = 10)
-Button(wnd, text='詢問類對話方塊', command =
-       second).pack(side = 'left')
-mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -350,41 +243,6 @@ text.pack()
 win.mainloop()
 
 print('------------------------------------------------------------')	#60個
-
-import tkinter as tk
-import tkinter.messagebox as tkmessagebox
-import tkinter.font as tkfont
-def Cal():
-    tkmessagebox.showinfo(title="計算", message="計算資料中的試題難度")
-def View():
-    tkmessagebox.showinfo(title="檢視", message="檢視計算的結果")    
-def About():
-    tkmessagebox.showinfo(title="關於我們", message="程式設計者:屏東大學教育學系陳新豐")
-def Exit():
-    win.destroy() 
-def main():
-    global win
-    win = tk.Tk()
-    win.geometry("800x600")
-    win.title("試題與測驗分析程式")
-    default_font = tkfont.nametofont('TkDefaultFont')
-    default_font.configure(size=15)
-    menubar = tk.Menu(win)
-    win.config(menu=menubar)
-    menu_file = tk.Menu(menubar, tearoff = 0)
-    menu_cal  = tk.Menu(menubar, tearoff = 0)
-    menu_help = tk.Menu(menubar, tearoff = 0)    
-    menubar.add_cascade(label='檔案', menu=menu_file)
-    menubar.add_cascade(label='計算', menu=menu_cal)
-    menubar.add_cascade(label='Help', menu=menu_help)
-    menu_file.add_command(label='結束', command=Exit)
-    menu_cal.add_command(label='計算', command=Cal)
-    menu_cal.add_command(label='檢視', command=View)
-    menu_help.add_command(label='關於', command=About)
-    win.mainloop()
-main()
-
-print("------------------------------------------------------------")  # 60個
 
 
 
@@ -579,109 +437,6 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-import tkinter.messagebox as tkmessagebox
-import tkinter.filedialog as tkfiledialog
-import tkinter.font as tkfont
-def Cal():
-    options = {}
-    options['filetypes'] = [("allfiles","*"),("text","*.txt")]
-    options['initialdir'] = "c:\\"
-    options['multiple'] = False
-    options['title'] = "開啟分析檔案"
-    fs = tkfiledialog.askopenfile(**options)    
-    if fs:
-        f = open(fs.name,'r')
-        fc = f.readlines()
-        f.close()
-        fo = open('output.txt','w')
-        fo.write("試題分析結果\n")
-        pitem = int(fc[0][0:3])
-        fo.write('題數:'+str(pitem)+'\n')
-        pmiss = fc[0][4:5]
-        fo.write('缺失:'+pmiss+'\n')
-        pomit = fc[0][6:7]
-        fo.write('遺漏:'+pomit+'\n')
-        pid   = int(fc[0][8:10])
-        fo.write('ID長度:'+str(pid)+'\n')
-        pans  = fc[1]
-        fo.write('答案:'+pans)
-        pnum  = len(fc)-2
-        fo.write('人數:'+str(pnum)+'\n')        
-        psitem = []
-        for j in range(0, pitem, 1):
-            psitem.append(0)
-        for i in range(0,pnum, 1):            
-            for j in range(0,pitem, 1):                
-                if (fc[2+i][pid+j]==pans[j]):                    
-                    psitem[j] = psitem[j]+1                
-        for j in range(0, pitem):
-            fo.write('第'+str(j+1).rjust(2,'0')+'題，難度值p='+str(round(psitem[j]/pnum,2)).ljust(4,'0')+'\n')
-        fo.close()
-        tkmessagebox.showinfo(title="試題分析", message="分析完成")
-    else:   
-	     print ("沒有選擇檔案")
-def View():
-    options = {}
-    options['filetypes'] = [("allfiles","*")]
-    options['initialdir'] = "c:\\"
-    options['multiple'] = False
-    options['title'] = "開啟分析檔案"
-    fs = tkfiledialog.askopenfile(**options)    
-    if fs:        
-        f = open(fs.name,'r')
-        fc= f.readlines()
-        f.close()
-        ptext = tk.Text(win, width=800, height=600)        
-        for i in range(0, len(fc), 1):
-            ptext.insert(tk.INSERT, fc[i])        
-        ptext.pack()
-        ptext.config(state=tk.DISABLED)       
-    else:   
-	     print ("沒有選擇檔案")
-def About():
-    tkmessagebox.showinfo(title="關於我們", message="程式設計者:屏東大學教育學系陳新豐")
-def Exit():
-    win.destroy() 
-def main():
-    global win    
-    win = tk.Tk()
-    win.geometry("800x600")
-    win.title("試題與測驗分析程式")
-    default_font = tkfont.nametofont('TkDefaultFont')
-    default_font.configure(size=15)
-    menubar = tk.Menu(win)
-    win.config(menu=menubar)
-    menu_file = tk.Menu(menubar, tearoff = 0)
-    menu_cal  = tk.Menu(menubar, tearoff = 0)
-    menu_help = tk.Menu(menubar, tearoff = 0)    
-    menubar.add_cascade(label='檔案', menu=menu_file)
-    menubar.add_cascade(label='計算', menu=menu_cal)
-    menubar.add_cascade(label='Help', menu=menu_help)
-    menu_file.add_command(label='結束', command=Exit)
-    menu_cal.add_command(label='計算', command=Cal)
-    menu_cal.add_command(label='檢視', command=View)    
-    menu_help.add_command(label='關於', command=About)
-    win.mainloop()
-main()
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計入門與應用\二版範例資料\ch09\ex09_91.py
-
-import tkinter as tk
-import tkinter.messagebox as tkmessagebox
-win = tk.Tk()
-win.geometry("400x300")
-win.title("試題與測驗分析程式")
-
-tkmessagebox.askokcancel(title="對話方塊", message="askokcancel")
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 def checknum():
     pmsg.set("Small")
 
@@ -831,60 +586,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-import tkinter as tk
-from tkinter.filedialog import askopenfilename
-from tkinter.filedialog import asksaveasfilename
-
-def openFile(): 
-    filenameforReading = askopenfilename()
-    infile = open(filenameforReading, "r")
-    text.insert("end", infile.read()) # Read all from the file
-    infile.close()  # Close the input file
-    
-def saveFile():
-    filenameforWriting = asksaveasfilename()
-    outfile = open(filenameforWriting, "w")
-    # Write to the file
-    outfile.write(text.get(1.0, "end")) 
-    outfile.close() # Close the output file
-    
-window = tk.Tk()
-window.title("簡易文字編輯器")
-        
-menubar = tk.Menu(window)
-window.config(menu = menubar) # Display the menu bar
-        
-# create a pulldown menu, and add it to the menu bar
-operationMenu = tk.Menu(menubar, tearoff = 0)
-menubar.add_cascade(label = "File", menu = operationMenu)
-operationMenu.add_command(label = "Open", command = openFile)
-operationMenu.add_command(label = "Save", command = saveFile)
-        
-# Add a tool bar frame 
-frame0 = tk.Frame(window) # Create and add a frame to window
-frame0.grid(row = 1, column = 1, sticky = "W")
-        
-# Create images
-opneImage = tk.PhotoImage(file = "open.gif")
-saveImage = tk.PhotoImage(file = "save.gif")
-        
-tk.Button(frame0, image = opneImage, command = openFile).grid(
-                row = 1, column = 1, sticky = "W")
-tk.Button(frame0, image = saveImage, command = saveFile).grid(
-                row = 1, column = 2)
-        
-frame1 = tk.Frame(window) # Hold editor pane
-frame1.grid(row = 2, column = 1)
-        
-scrollbar = tk.Scrollbar(frame1)
-scrollbar.pack(side = "right", fill = "y")
-text = tk.Text(frame1, width = 40, height = 20, wrap = "word",
-               yscrollcommand = scrollbar.set)
-text.pack()
-scrollbar.config(command = text.yview)
-        
-window.mainloop()
-
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
@@ -930,43 +631,6 @@ mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-import tkinter as tk
-import tkinter.messagebox
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-from PIL import Image, ImageTk
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-"""
-img = Image.open(filename)        # 開啟圖片
-tk_img = ImageTk.PhotoImage(img)    # 轉換為 tk 圖片物件
-
-label = tk.Label(window, image=tk_img, width=200, height=200)  # 在 Lable 中放入圖片
-label.pack()
-
-html_gif = ImageTk.PhotoImage(file=filename)
-tk.Label(window,image=html_gif).pack()
-
-"""
 
 print("------------------------------------------------------------")  # 60個
     
@@ -1042,86 +706,6 @@ print("------------------------------------------------------------")  # 60個
 
 print('------------------------------------------------------------')	#60個
 
-print("menu1.py")
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-
-menubar = tk.Menu(win)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print("menu2.py")
-
-import tkinter as tk
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print("menu3.py")
-
-import tkinter as tk
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print("pack.py")
-
 import tkinter as tk
 
 win = tk.Tk()
@@ -1174,8 +758,6 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 # 設定主視窗標題
 title = "這是主視窗"
 window.title(title)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
@@ -1541,100 +1123,6 @@ text.insert(END,str)
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import messagebox
-
-def myMsg():                    # 按Good Morning按鈕時執行
-    messagebox.showinfo("My Message Box","Python tkinter早安")
-    
-tk.Button(window,text="Good Morning",command=myMsg).pack()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import messagebox
-
-def newfile():
-    messagebox.showinfo("開新檔案","可在此撰寫開新檔案程式碼")
-    
-def savefile():
-    messagebox.showinfo("儲存檔案","可在此撰寫儲存檔案程式碼")
-   
-def about():
-    messagebox.showinfo("程式說明","作者:洪錦魁")
-
-menu = Menu(window)                 # 建立功能表物件
-window.config(menu=menu)
-
-filemenu = Menu(menu)               # 建立檔案功能表
-menu.add_cascade(label="檔案",menu=filemenu)
-filemenu.add_command(label="開新檔案",command=newfile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="儲存檔案",command=savefile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="結束",command=window.destroy)
-
-helpmenu = Menu(menu)               # 建立說明功能表
-menu.add_cascade(label="說明",menu=helpmenu)
-helpmenu.add_command(label="程式說明",command=about)
-
-mainloop()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-window.mainloop()
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("tk_new02.py")
-
-import tkinter as tk
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-import tkinter.messagebox as msg
-
-response = msg.askyesno('糟糕了!!!', '還好嗎？')
-
-if (response == True):
-	print('還 OK')
-else:
-	print('有點麻煩')
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
 import tkinter as tk
 
 window=tk.Tk()
@@ -1652,107 +1140,6 @@ label = tk.Label(window, textvariable=string).pack()
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-
-def fileopen():
-	print('進行開啟檔案的處理')
-
-menubar = tk.Menu(window)
-
-filemenu = tk.Menu(menubar)
-
-menubar.add_cascade(label=' 檔案', menu=filemenu)
-
-filemenu.add_command(label='開啟檔案', command=fileopen)
-
-window.config(menu=menubar)
-
-window.mainloop()
-
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter.filedialog as fd
-
-window = tk.Tk()
-
-def open(): 
-	filename = fd.askopenfilename()
-	print('open file => ' + filename)
-
-def exit(): 
-	window.destroy()
-
-def find():
-	print('find ! ')
-
-menubar = tk.Menu(window)
-
-filemenu = tk.Menu(menubar)
-
-menubar.add_cascade(label='File', menu=filemenu)
-
-filemenu.add_command(label='open', command=open)
-
-filemenu.add_separator()
-
-filemenu.add_command(label='exit', command=exit)
-
-editmenu = tk.Menu(menubar)
-
-menubar.add_cascade(label='Edit', menu=editmenu)
-
-editmenu.add_command(label='find', command=find)
-
-window.config(menu=menubar)
-
-
-
-
-
-"""
-請參考以下程式，幫我利用 tkinter 生成選單視窗，需要的檔案結構如下：
-
-檔案：
-	開啟新檔
-	開啟舊檔
-	另存為
-	結束
-編輯：
-	剪下
-	複製
-	貼上
-說明：
-	關於本程式
-
------------ 以下是參考的程式架構 --------
-"""
-""" TBD
-import tkinter as tk
-import tkinter.filedialog as fd
-window = tk.Tk()
-def open():
-	filename = fd.askopenfilename()
-print('open file => ' + filename)
-def exit():
-	window.destroy()
-def find():
-	print('find !')
-menubar = tk.Menu(window)
-filemenu = tk.Menu(menubar)
-menubar.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='open', command=open)
-filemenu.add_separator()
-filemenu.add_command(label='exit', command=exit)
-editmenu = tk.Menu(menubar)
-menubar.add_cascade(label='Edit', menu=editmenu)
-editmenu.add_command(label='find', command=find)
-window.config(menu=menubar)
-window.mainloop()
-
-"""
-print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
 
@@ -2067,58 +1454,6 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 
-"""
-使用tkinter创建GUI
-- 顶层窗口
-- 控件
-- 布局
-- 事件回调
-
-"""
-import tkinter
-import tkinter.messagebox
-
-def main():
-    flag = True
-
-    # 修改标签上的文字
-    def change_label_text():
-        nonlocal flag
-        flag = not flag
-        color, msg = ('red', 'Hello, world!')\
-            if flag else ('blue', 'Goodbye, world!')
-        label.config(text=msg, fg=color)
-
-    # 确认退出
-    def confirm_to_quit():
-        if tkinter.messagebox.askokcancel('温馨提示', '确定要退出吗?'):
-            top.quit()
-
-    # 创建顶层窗口
-    top = tkinter.Tk()
-    # 设置窗口大小
-    top.geometry('240x160')
-    # 设置窗口标题
-    top.title('小游戏')
-    # 创建标签对象
-    label = tkinter.Label(top, text='Hello, world!', font='Arial -32', fg='red')
-    label.pack(expand=1)
-    # 创建一个装按钮的容器
-    panel = tkinter.Frame(top)
-    # 创建按钮对象
-    button1 = tkinter.Button(panel, text='修改', command=change_label_text)
-    button1.pack(side='left')
-    button2 = tkinter.Button(panel, text='退出', command=confirm_to_quit)
-    button2.pack(side='right')
-    panel.pack(side='bottom')
-    # 开启主事件循环
-    tkinter.mainloop()
-
-if __name__ == '__main__':
-    main()
-
-print("------------------------------------------------------------")  # 60個
-
 import tkinter as tk
 
 window = tk.Tk()
@@ -2172,61 +1507,11 @@ tk.Label(window, text='藍', bg='blue', width=20).pack()
 
 print('------------------------------------------------------------')	#60個
 
-import tkinter.messagebox as msg
-window = tk.Tk()
-
-window.withdraw()
-response = msg.askyesno('糟糕!!!', '還好嗎？')
-
-if(response==True):
-	print('沒問題');
-else:
-	print('有問題');
-	
-print('------------------------------------------------------------')	#60個
-
 window = tk.Tk()
 
 string = tk.StringVar()
 entry = tk.Entry(window, textvariable=string).pack()
 label = tk.Label(window, textvariable=string).pack()
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-def supermode():
-	print('super mode!')
-
-menubar = tk.Menu(window)
-filemenu = tk.Menu(menubar)
-filemenu.add_command(label='supermode', command=supermode)
-menubar.add_cascade(label='Operation', menu=filemenu)
-window.config(menu=menubar)
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter.filedialog as fd
-
-window = tk.Tk()
-def open():
-	filename = fd.askopenfilename()
-	print('open file => ' + filename)
-def exit():
-	window.destroy()
-
-def find():
-	print('find ! ')
-
-menubar = tk.Menu(window)
-filemenu = tk.Menu(menubar)
-menubar.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='open', command=open)
-filemenu.add_separator()
-filemenu.add_command(label='exit', command=exit)
-editmenu = tk.Menu(menubar)
-menubar.add_cascade(label='Edit', menu=editmenu)
-editmenu.add_command(label='find', command=find)
-window.config(menu=menubar)
 
 print('------------------------------------------------------------')	#60個
 
@@ -3293,22 +2578,6 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
-from tkinter import messagebox
-
-def myMsg():                    # 按Good Morning按鈕時執行
-    messagebox.showinfo("My Message Box","Python tkinter早安")
-    
-window = Tk()
-window.title("ch18_29")         # 視窗標題
-window.geometry("300x160")      # 視窗寬300高160
-
-Button(window,text="Good Morning",command=myMsg).pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
     
 window = Tk()
 window.title("ch18_30")         # 視窗標題
@@ -3438,42 +2707,6 @@ btn.pack()
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-from tkinter import messagebox
-
-def newfile():
-    messagebox.showinfo("開新檔案","可在此撰寫開新檔案程式碼")
-    
-def savefile():
-    messagebox.showinfo("儲存檔案","可在此撰寫儲存檔案程式碼")
-   
-def about():
-    messagebox.showinfo("程式說明","作者:洪錦魁")
-
-window = Tk()
-window.title("ch18_36")
-window.geometry("300x160")          # 視窗寬300高160
-
-menu = Menu(window)                 # 建立功能表物件
-window.config(menu=menu)
-
-filemenu = Menu(menu)               # 建立檔案功能表
-menu.add_cascade(label="檔案",menu=filemenu)
-filemenu.add_command(label="開新檔案",command=newfile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="儲存檔案",command=savefile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="結束",command=window.destroy)
-
-helpmenu = Menu(menu)               # 建立說明功能表
-menu.add_cascade(label="說明",menu=helpmenu)
-helpmenu.add_command(label="程式說明",command=about)
-
-mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 from tkinter import *
 
 root = Tk()
@@ -3546,33 +2779,6 @@ Button(root,text=".",width=5,
 Button(root,text="=",width=5,bg ="yellow",
        command=lambda:calculate()).grid(row=5,column=3)
 
-root.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
-from tkinter.filedialog import asksaveasfilename    # 導入文件保存對話框函數
- 
-def generate_report():
-    # 生成報告的函數, 從文本框中獲取報告內容
-    report_content = text_report.get("1.0", tk.END)
-    # 打開一個對話框讓使用者選擇保存報告的路徑
-    file_path = asksaveasfilename(
-        defaultextension=".txt",                    # 預設副檔名為.txt
-        filetypes=[("Text documents", ".txt")],     # 文件類型過濾
-    )
-    # 如果使用者選擇了文件路徑, 則將報告內容寫入文件
-    if file_path:
-        with open(file_path, "w") as file:
-            file.write(report_content)
-
-root = tk.Tk()
-root.title("報告生成器")                             # 視窗標題
-text_report = tk.Text(root)                 # 建立文字區域用於編輯報告內容
-text_report.pack()                          # 將文本區域添加到視窗中
-# 建一個按鈕，點擊時會呼叫generate_report()函數
-button_generate = tk.Button(root, text="生成報告", command=generate_report)
-button_generate.pack()                      # 將按鈕添加到視窗中
 root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -3709,179 +2915,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-import tkinter.filedialog as fd
-
-window = tk.Tk()
-
-def open():
-    filename = fd.askopenfilename()
-    print('open file => ' + filename)
-
-def exit():
-    window.destroy()
-
-def find():
-    print('find ! ')
-
-menubar = tk.Menu(window)
-filemenu = tk.Menu(menubar)
-menubar.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='open', command=open)
-filemenu.add_separator()
-filemenu.add_command(label='exit', command=exit)
-editmenu = tk.Menu(menubar)
-menubar.add_cascade(label='Edit', menu=editmenu)
-editmenu.add_command(label='find', command=find)
-window.config(menu=menubar)
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 以Menu元件建置功能表
-from tkinter import *
-from tkinter import messagebox
-
-# 定義回應函式
-def New():
-    messagebox.showinfo('新檔案',
-        '檔案功能表下的開啟新檔指令')
-    
-def Open():
-    messagebox.showinfo('開啟舊檔',
-        '檔案功能表下的開啟舊檔指令')
-
-def Save():
-    messagebox.showinfo('儲存檔案',
-        '檔案功能表下的儲存檔案指令')
-    
-def Copyright():
-    messagebox.showinfo('版權宣告',
-        '我的第一支含視窗功能表程式-使用Python語言撰寫')
-
-
-wnd = Tk()#主視窗物件
-wnd.title('GUI介面-Menu')
-
-# 1.產生功能表物件menuBar
-menuBar = Menu(wnd)
-
-# 2.將功能表物件menuBar佈置到主視窗的頂部
-wnd.config(menu = menuBar)
-
-# 3.加入主功能表項目
-menu_file = Menu(menuBar, tearoff = 0)
-menu_font = Menu(menuBar, tearoff = 0)
-menu_help = Menu(menuBar, tearoff = 0)
-
-# 4. 產生主功能項目實體
-menuBar.add_cascade(label = '檔案', menu = menu_file)
-menuBar.add_cascade(label = '字體大小', menu = menu_font)
-menuBar.add_cascade(label = '版權宣告', menu = menu_help)
-
-# 5-1. 加入'檔案'功能表下拉選單
-menu_file.add_command(label = '新檔案',
-        underline = 1, accelerator = 'Ctrl+N',
-        command = New)
-menu_file.add_command(label = '開啟',
-        underline = 1, accelerator = 'Ctrl+O',
-        command = Open)
-menu_file.add_separator()#加入分隔線
-menu_file.add_command(label = '儲存',
-        underline = 1, accelerator = 'Ctrl+S',
-        command = Save)
-menu_file.add_separator()#加入分隔線
-menu_file.add_command(label = '離開',
-        underline = 1, accelerator = 'Ctrl+Q',
-        command = lambda : wnd.destroy())
-
-# 5-2. 加入'字體大小'功能表下拉選單
-labels = ('大', '中', '小')
-for item in labels:
-    menu_font.add_radiobutton(label = item)
-
-# 5-3. 加入'版權宣告'功能表下拉選單
-menu_help.add_command(label = '原創者聲明', command = Copyright)
-
-mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
-
-class Application(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.master = master
-        self.master.title("My Application")
-        self.create_menu()
-        self.pack()
-
-    def create_menu(self):
-        # 建立主功能表
-        menubar = tk.Menu(self.master)
-
-        # 建立檔案主功能
-        file_menu = tk.Menu(menubar, tearoff=0)
-        file_menu.add_command(label="開啟檔案", command=self.open_file)
-        file_menu.add_command(label="儲存檔案", command=self.save_file)
-        file_menu.add_separator()
-        file_menu.add_command(label="結束", command=self.master.quit)
-        menubar.add_cascade(label="檔案", menu=file_menu)
-
-        # 建立編輯主功能
-        edit_menu = tk.Menu(menubar, tearoff=0)
-        edit_menu.add_command(label="複製", command=self.copy)
-        edit_menu.add_command(label="剪下", command=self.cut)
-        edit_menu.add_command(label="貼上", command=self.paste)
-        menubar.add_cascade(label="編輯", menu=edit_menu)
-
-        # 建立執行主功能
-        run_menu = tk.Menu(menubar, tearoff=0)
-        run_menu.add_command(label="執行程式", command=self.run)
-        menubar.add_cascade(label="執行", menu=run_menu)
-
-        # 建立線上說明主功能
-        help_menu = tk.Menu(menubar, tearoff=0)
-        help_menu.add_command(label="使用說明", command=self.show_help)
-        menubar.add_cascade(label="線上說明", menu=help_menu)
-
-        # 設定主功能表
-        self.master.config(menu=menubar)
-
-    def open_file(self):
-        print("開啟檔案")
-
-    def save_file(self):
-        print("儲存檔案")
-
-    def copy(self):
-        print("複製")
-
-    def cut(self):
-        print("剪下")
-
-    def paste(self):
-        print("貼上")
-
-    def run(self):
-        print("執行程式")
-
-    def show_help(self):
-        print("使用說明")
-
-# 建立主視窗
-root = tk.Tk()
-
-# 建立應用程式
-app = Application(master=root)
-
-# 執行主迴圈
-app.mainloop()
-
 print("------------------------------------------------------------")  # 60個
 
 import tkinter as tk
@@ -3919,137 +2952,6 @@ divide=tk.Button(win, width=20, text="除法範例")
 divide.grid(column=0,row=3)
 
 win.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-from tkinter import messagebox
-
-wnd = Tk()
-wnd.title('訊息方塊元件(messagebox)')
-wnd.geometry('180x120+20+50')
-
-def answer():
-    messagebox.showerror('顯示類訊息框',
-            '這是messagebox.showerror的訊息框')
-
-def callback():
-    messagebox.askyesno('詢問類訊息框', 
-            '這是messagebox.askyesno的訊息框')
-
-Button(wnd, text='顯示詢問訊息框的外觀', command = callback).pack(side = 'left', padx = 10)
-Button(wnd, text='顯示錯誤訊息框的外觀', command = answer).pack(side = 'left')
-
-mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
-from tkinter import filedialog
-
-def open_file_dialog():
-    folder = filedialog.askdirectory()
-    if folder:
-        print(f"Selected folder: {folder}")
-
-    return folder
-
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-
-save_dir = open_file_dialog()
-
-print(save_dir)
-
- 
-
-window.mainloop()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-from tkinter import *
-from tkinter import messagebox
-
-def more():
-    if choice.get()==0:
-        str1="牛是對少部份牛科動物的統稱 \n\
-              包括和人類習習相關的黃牛、水牛和氂牛" 
-        messagebox.showinfo("cattle的簡介",str1)
-    else:
-        str2="鹿有別於牛、羊等的動物。 \n \
-              包括麝科和鹿科動物"
-        messagebox.showinfo("deer的簡介",str2)
-    
-win = Tk()
-lb=Label(win,text="請點選想了解的動物簡介:").pack()
-choice=IntVar()
-choice.set(0)
-pic1=PhotoImage(file="cattle.gif")
-pic2=PhotoImage(file="deer.gif")
-Radiobutton(win,image=pic1,variable=choice,value=0).pack()
-Radiobutton(win,image=pic2,variable=choice,value=1).pack()
-Button(win,text="進一步了解", command=more).pack()
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
-from StillClock import StillClock
-   
-def setNewTime():
-    clock.setHour(hour.get())
-    clock.setMinute(minute.get())
-    clock.setSecond(second.get())
-    
-window = tk.Tk()
-window.title("Change Clock Time")
-
-clock = StillClock(window) # Create a clock
-clock.pack()
-
-frame = tk.Frame(window)
-frame.pack()
-
-tk.Label(frame, text = "Hour: ").pack(side = tk.LEFT)
-hour = tk.IntVar()
-hour.set(clock.getHour())
-tk.Entry(frame, textvariable = hour, width = 2).pack(side = tk.LEFT) 
-
-tk.Label(frame, text = "Minute: ").pack(side = tk.LEFT)
-minute = tk.IntVar()
-minute.set(clock.getMinute())
-tk.Entry(frame, textvariable = minute, width = 2).pack(side = tk.LEFT)
-
-tk.Label(frame, text = "Second: ").pack(side = tk.LEFT)
-second = tk.IntVar()
-second.set(clock.getMinute())
-tk.Entry(frame, textvariable = second, width = 2).pack(side = tk.LEFT)
-
-tk.Button(frame, text = "設定時間", command = setNewTime).pack(side = tk.LEFT)
-
-window.mainloop()
 
 
 print("------------------------------------------------------------")  # 60個
@@ -4158,19 +3060,7 @@ for i in range(3):
     btn = tk.Button(window, text = 'button'+str(i), state = 'disabled')
     btn.pack()
 
-
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
 
 window.mainloop()
 
@@ -4335,14 +3225,425 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+import tkinter as tk
+import tkinter.messagebox
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 900
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+def bless():
+     btnvar.set("心想事成，天天開心")
+
+def changecolor():
+     btn2.config(bg = "blue")  
+
+label = tk.Label(window, bg="#ff00ff", fg="#ffff00", \
+                font =("標楷體", 14, "bold", "italic"), \
+                padx=5, pady=30, text = "生日快樂")
+label.pack()
+
+
+label = tk.Label(window, bg="#ff00ff", fg="#ffff00", \
+                font ="新細明體 14 bold italic", \
+                padx=20, pady=5, text = "生日快樂")
+label.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+"""
+text=tk.Text(win)
+text.insert(tk.INSERT, "從入門到精通\n")
+text.insert(tk.CURRENT, "Illustrator CC\n")
+text.insert(tk.END, "玩轉 Ai 設計風華的16堂課")
+text.pack()
+text.config(state=tk.DISABLED)
+"""
+
+entry = tk.Entry(window, bg="#ffff00", font = "新細明體 16 bold" ,borderwidth = 3)
+entry.insert(0,"天天")
+entry.insert("2","青春永駐")
+entry.insert("end"," 莫忘初心")
+entry.delete(0, 2)  #刪除前面兩個字元
+entry.pack(padx=20, pady=10)
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+   
+btnvar = tk.StringVar() 
+btn1 = tk.Button(window, textvariable=btnvar, command=bless)
+btnvar.set("按下我會有祝賀語")
+btn1.pack(padx=20, pady=10)
+
+btn2 = tk.Button(window, text="按我會改變按鈕背景色", command=changecolor)
+btn2.pack(padx=20, pady=10)
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+def check(): #回應核取方塊變數狀態
+   print('選取的炸物有:', var1.get(), var2.get()
+         ,var3.get())
+
+ft1 =('新細明體', 14)
+ft2 = ('標楷體', 18)
+lb1=tk.Label(window, text = '請勾選要買的品項：', font = ft1)
+#lb1.grid(row = 0, column = 0)
+lb1.pack()
+item1 = '炸雞排'
+var1 = tk.StringVar()
+chk = tk.Checkbutton(window, text = item1, font = ft1,
+                     variable = var1, onvalue = item1, offvalue = '')
+#chk.grid(row = 1, column = 0)
+chk.pack()
+item2 = '高麗菜'
+var2 = tk.StringVar()
+chk2 = tk.Checkbutton(window, text = item2, font = ft1,
+                   variable = var2, onvalue = item2, offvalue = '')
+#chk2.grid(row = 2, column = 0)
+chk2.pack()
+
+item3 = '炸花枝'
+var3 = tk.StringVar()
+chk3 = tk.Checkbutton(window, text = item3, font = ft1,
+                   variable = var3, onvalue = item3, offvalue = '')
+#chk3.grid(row = 3, column = 0)
+chk3.pack()
+
+btnQuit = tk.Button(window, text = '離開', font = ft2,
+                 command = window.destroy)
+#btnQuit.grid(row = 2, column = 1, pady = 4)
+btnQuit.pack()
+
+btnShow = tk.Button(window, text = '購買明細', font = ft2,
+                 command = check)
+#btnShow.grid(row = 2, column = 2, pady = 4)
+btnShow.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter as tk
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
+# Frame測試
+tk.Label(text = 'Frame測試').pack()
+frame1 = tk.Frame(window)
+frame1.pack()
+
+label1 = tk.Label(frame1, text = "標籤一：")
+entry1 = tk.Entry(frame1)
+label1.grid(row = 0, column = 0)
+entry1.grid(row = 0, column = 1)
+
+frame2 = tk.Frame(window)
+frame2.pack()
+
+button1 = tk.Button(frame2, text = "確定")
+button2 = tk.Button(frame2, text = "取消")
+button1.grid(row = 0, column = 0)
+button2.grid(row = 0, column = 1)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+# Message測試
+tk.Label(text = 'Message測試').pack()
+
+#w = tk.Message(window, text = "this is a relatively long message")    #自動換行
+w = tk.Message(window, text = "this is a relatively long message", width = 50)  #限定寬度
+w.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+window.mainloop()
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+import tkinter as tk
+import tkinter.messagebox
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 900
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+def answer():
+    tk.messagebox.showerror('顯示類訊息框',
+            '這是messagebox.showerror的訊息框')
+
+def callback():
+    tk.messagebox.askyesno('詢問類訊息框', 
+            '這是messagebox.askyesno的訊息框')
+
+tk.Button(window, text='顯示詢問訊息框的外觀', command =
+          callback).pack(side = 'left', padx = 10)
+tk.Button(window, text='顯示錯誤訊息框的外觀', command =
+          answer).pack(side = 'left')
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+def select():
+    print('你的選項是 :', var.get())
+
+ft = ('標楷體', 14)
+tk.Label(window, 
+      text = "請選擇喜愛的景點: ", font = ft,
+      justify = tk.LEFT, padx = 20).pack()
+place = [('宜蘭', 1), ('台北', 2),
+          ('高雄', 3)]
+var = tk.IntVar()
+var.set(3)
+for item, val in place:
+    tk.Radiobutton(window, text = item, value = val,
+                   font = ft, variable = var, padx = 20,
+                   command = select).pack(anchor = tk.W)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+def select():
+    print('你的選項是 :', var.get())
+ft = ('標楷體', 14)
+tk.Label(window, 
+      text = "請選擇喜愛的運動: ", font = ft,
+      justify = tk.RIGHT, padx = 20).pack()
+place = [('籃球', 1), ('桌球', 2),
+          ('游泳', 3)]
+var = tk.IntVar()
+var.set(3)
+
+for item, val in place:
+    tk.Radiobutton(window, text = item, value = val,
+        font = ft, variable = var, padx = 20,
+        command = select).pack(anchor = tk.NE)
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+scrollbar = tk.Scrollbar(window)
+scrollbar.pack( side = tk.RIGHT, fill = tk.Y )
+
+wordlist='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+list1 = tk.Listbox(window, yscrollcommand = scrollbar.set )
+
+for line in range(26):
+   list1.insert(tk.END, "字母: " + wordlist[line])
+
+list1.pack( side = tk.LEFT, fill = tk.BOTH )
+scrollbar.config( command = list1.yview )
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+def more():
+    if choice.get()==0:
+        str1="牛是對少部份牛科動物的統稱 \n\
+              包括和人類習習相關的黃牛、水牛和氂牛" 
+        tk.messagebox.showinfo("cattle的簡介",str1)
+    else:
+        str2="鹿有別於牛、羊等的動物。 \n \
+              包括麝科和鹿科動物"
+        tk.messagebox.showinfo("deer的簡介",str2)
+    
+lb=tk.Label(window,text="請點選想了解的動物簡介:").pack()
+choice=tk.IntVar()
+choice.set(0)
+pic1=tk.PhotoImage(file="image/cattle.gif")
+pic2=tk.PhotoImage(file="image/deer.gif")
+tk.Radiobutton(window,image=pic1,variable=choice,value=0).pack()
+tk.Radiobutton(window,image=pic2,variable=choice,value=1).pack()
+tk.Button(window,text="進一步了解", command=more).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+window.mainloop()
 
 
 print("------------------------------------------------------------")  # 60個
 
+import tkinter as tk
+
+window = tk.Tk()
+
+# 設定主視窗大小
+W = 800
+H = 800
+x_st = 100
+y_st = 100
+#size = str(W) + 'x' + str(H)
+#size = str(W) + 'x' + str(H) + '+' + str(x_st) + '+' + str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+# Create PhotoImage objects
+caImage = tk.PhotoImage(file = "image/ca.gif")
+chinaImage = tk.PhotoImage(file = "image/china.gif")
+leftImage = tk.PhotoImage(file = "image/left.gif")
+rightImage = tk.PhotoImage(file = "image/right.gif")
+usImage = tk.PhotoImage(file = "image/usIcon.gif")
+ukImage = tk.PhotoImage(file = "image/ukIcon.gif")
+crossImage = tk.PhotoImage(file = "image/x.gif")
+circleImage = tk.PhotoImage(file = "image/o.gif")
+
+# frame1 to contain label and canvas
+frame1 = tk.Frame(window)
+frame1.pack()
+tk.Label(frame1, image = caImage).pack(side = tk.LEFT)
+canvas = tk.Canvas(frame1)
+canvas.create_image(90, 50, image = chinaImage)
+canvas["width"] = 200
+canvas["height"] = 100
+canvas.pack(side = tk.LEFT)
+
+# frame2 to contain buttons, check buttons, and radio buttons
+frame2 = tk.Frame(window)
+frame2.pack()
+tk.Button(frame2, image = leftImage).pack(side = tk.LEFT)
+tk.Button(frame2, image = rightImage).pack(side = tk.LEFT)
+tk.Checkbutton(frame2, image = usImage).pack(side = tk.LEFT)
+tk.Checkbutton(frame2, image = ukImage).pack(side = tk.LEFT)
+tk.Radiobutton(frame2, image = crossImage).pack(side = tk.LEFT)
+tk.Radiobutton(frame2, image = circleImage).pack(side = tk.LEFT)
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter as tk
+from tkinter import ttk
+
+# window
+window = tk.Tk()
+window.geometry('500x500')
+
+# widgets 
+label1 = ttk.Label(window, text = 'Label 1', background = 'red')
+label2 = ttk.Label(window, text = 'Label 2', background = 'green', width = 10)
+label3 = ttk.Label(window, text = 'Label 3', background = 'blue', width = 10)
+
+# layout 
+# label1.pack()
+# label2.pack()
+
+# grid 
+window.columnconfigure((0,2), weight = 1, uniform = 'a')    #column 為  0 1 2
+window.rowconfigure((0,2), weight = 1, uniform = 'a')       #row 為  0 1 2
+
+'''
+label1.grid(row = 0, column = 0)
+label2.grid(row = 1, column = 0, sticky = 'nsew')
+label3.grid(row = 0, column = 1)
+'''
+label1.grid(row = 0, column = 0)
+label2.grid(row = 0, column = 1)
+label3.grid(row = 0, column = 2)
+
+# run
+window.mainloop()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 

@@ -104,22 +104,312 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+from tkinter import *
+from tkinter import messagebox
+wnd = Tk()
+wnd.title('訊息方塊元件(messagebox)')
+wnd.geometry('180x120+20+50')
+
+def first():
+    messagebox.showinfo('顯示類對話方塊',
+            '「顯示」類是以「show」開頭，只會顯示一個「確定」鈕。')
+
+def second():
+    messagebox.askretrycancel('詢問類對話方塊', 
+            '「詢問」類是以「ask」為開頭，伴隨2~3個按鈕來產生互動。')
+
+Button(wnd, text='顯示類對話方塊', command =
+       first).pack(side = 'left', padx = 10)
+Button(wnd, text='詢問類對話方塊', command =
+       second).pack(side = 'left')
+mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter as tk
+import tkinter.messagebox as tkmessagebox
+win = tk.Tk()
+win.geometry("400x300")
+win.title("試題與測驗分析程式")
+
+tkmessagebox.askokcancel(title="對話方塊", message="askokcancel")
+
+win.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter as tk
+import tkinter.messagebox
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+from PIL import Image, ImageTk
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+"""
+img = Image.open(filename)        # 開啟圖片
+tk_img = ImageTk.PhotoImage(img)    # 轉換為 tk 圖片物件
+
+label = tk.Label(window, image=tk_img, width=200, height=200)  # 在 Lable 中放入圖片
+label.pack()
+
+html_gif = ImageTk.PhotoImage(file=filename)
+tk.Label(window,image=html_gif).pack()
+
+"""
+
+print("------------------------------------------------------------")  # 60個
 
 
+from tkinter import messagebox
 
+def myMsg():                    # 按Good Morning按鈕時執行
+    messagebox.showinfo("My Message Box","Python tkinter早安")
+    
+tk.Button(window,text="Good Morning",command=myMsg).pack()
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import messagebox
+
+def newfile():
+    messagebox.showinfo("開新檔案","可在此撰寫開新檔案程式碼")
+    
+def savefile():
+    messagebox.showinfo("儲存檔案","可在此撰寫儲存檔案程式碼")
+   
+def about():
+    messagebox.showinfo("程式說明","作者:洪錦魁")
+
+menu = Menu(window)                 # 建立功能表物件
+window.config(menu=menu)
+
+filemenu = Menu(menu)               # 建立檔案功能表
+menu.add_cascade(label="檔案",menu=filemenu)
+filemenu.add_command(label="開新檔案",command=newfile)
+filemenu.add_separator()            # 增加分隔線
+filemenu.add_command(label="儲存檔案",command=savefile)
+filemenu.add_separator()            # 增加分隔線
+filemenu.add_command(label="結束",command=window.destroy)
+
+helpmenu = Menu(menu)               # 建立說明功能表
+menu.add_cascade(label="說明",menu=helpmenu)
+helpmenu.add_command(label="程式說明",command=about)
+
+mainloop()
 
 
 
 
 print("------------------------------------------------------------")  # 60個
 
+import tkinter.messagebox as msg
+
+response = msg.askyesno('糟糕了!!!', '還好嗎？')
+
+if (response == True):
+	print('還 OK')
+else:
+	print('有點麻煩')
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter.messagebox as msg
+window = tk.Tk()
+
+window.withdraw()
+response = msg.askyesno('糟糕!!!', '還好嗎？')
+
+if(response==True):
+	print('沒問題');
+else:
+	print('有問題');
+	
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+from tkinter import messagebox
+
+def myMsg():                    # 按Good Morning按鈕時執行
+    messagebox.showinfo("My Message Box","Python tkinter早安")
+    
+window = Tk()
+window.title("ch18_29")         # 視窗標題
+window.geometry("300x160")      # 視窗寬300高160
+
+Button(window,text="Good Morning",command=myMsg).pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
 
 
+from tkinter import *
+from tkinter import messagebox
+
+def newfile():
+    messagebox.showinfo("開新檔案","可在此撰寫開新檔案程式碼")
+    
+def savefile():
+    messagebox.showinfo("儲存檔案","可在此撰寫儲存檔案程式碼")
+   
+def about():
+    messagebox.showinfo("程式說明","作者:洪錦魁")
+
+window = Tk()
+window.title("ch18_36")
+window.geometry("300x160")          # 視窗寬300高160
+
+menu = Menu(window)                 # 建立功能表物件
+window.config(menu=menu)
+
+filemenu = Menu(menu)               # 建立檔案功能表
+menu.add_cascade(label="檔案",menu=filemenu)
+filemenu.add_command(label="開新檔案",command=newfile)
+filemenu.add_separator()            # 增加分隔線
+filemenu.add_command(label="儲存檔案",command=savefile)
+filemenu.add_separator()            # 增加分隔線
+filemenu.add_command(label="結束",command=window.destroy)
+
+helpmenu = Menu(menu)               # 建立說明功能表
+menu.add_cascade(label="說明",menu=helpmenu)
+helpmenu.add_command(label="程式說明",command=about)
+
+mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+使用tkinter创建GUI
+- 顶层窗口
+- 控件
+- 布局
+- 事件回调
+
+"""
+import tkinter
+import tkinter.messagebox
+
+def main():
+    flag = True
+
+    # 修改标签上的文字
+    def change_label_text():
+        nonlocal flag
+        flag = not flag
+        color, msg = ('red', 'Hello, world!')\
+            if flag else ('blue', 'Goodbye, world!')
+        label.config(text=msg, fg=color)
+
+    # 确认退出
+    def confirm_to_quit():
+        if tkinter.messagebox.askokcancel('温馨提示', '确定要退出吗?'):
+            top.quit()
+
+    # 创建顶层窗口
+    top = tkinter.Tk()
+    # 设置窗口大小
+    top.geometry('240x160')
+    # 设置窗口标题
+    top.title('小游戏')
+    # 创建标签对象
+    label = tkinter.Label(top, text='Hello, world!', font='Arial -32', fg='red')
+    label.pack(expand=1)
+    # 创建一个装按钮的容器
+    panel = tkinter.Frame(top)
+    # 创建按钮对象
+    button1 = tkinter.Button(panel, text='修改', command=change_label_text)
+    button1.pack(side='left')
+    button2 = tkinter.Button(panel, text='退出', command=confirm_to_quit)
+    button2.pack(side='right')
+    panel.pack(side='bottom')
+    # 开启主事件循环
+    tkinter.mainloop()
+
+if __name__ == '__main__':
+    main()
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+from tkinter import messagebox
+
+wnd = Tk()
+wnd.title('訊息方塊元件(messagebox)')
+wnd.geometry('180x120+20+50')
+
+def answer():
+    messagebox.showerror('顯示類訊息框',
+            '這是messagebox.showerror的訊息框')
+
+def callback():
+    messagebox.askyesno('詢問類訊息框', 
+            '這是messagebox.askyesno的訊息框')
+
+Button(wnd, text='顯示詢問訊息框的外觀', command = callback).pack(side = 'left', padx = 10)
+Button(wnd, text='顯示錯誤訊息框的外觀', command = answer).pack(side = 'left')
+
+mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+from tkinter import messagebox
+
+def more():
+    if choice.get()==0:
+        str1="牛是對少部份牛科動物的統稱 \n\
+              包括和人類習習相關的黃牛、水牛和氂牛" 
+        messagebox.showinfo("cattle的簡介",str1)
+    else:
+        str2="鹿有別於牛、羊等的動物。 \n \
+              包括麝科和鹿科動物"
+        messagebox.showinfo("deer的簡介",str2)
+    
+win = Tk()
+lb=Label(win,text="請點選想了解的動物簡介:").pack()
+choice=IntVar()
+choice.set(0)
+pic1=PhotoImage(file="cattle.gif")
+pic2=PhotoImage(file="deer.gif")
+Radiobutton(win,image=pic1,variable=choice,value=0).pack()
+Radiobutton(win,image=pic2,variable=choice,value=1).pack()
+Button(win,text="進一步了解", command=more).pack()
+
+win.mainloop()
+
+print("------------------------------------------------------------")  # 60個
 
 
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

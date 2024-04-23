@@ -7,6 +7,17 @@ time 模組
 import sys
 import time
 
+print("------------------------------------------------------------")  # 60個
+
+print('現在時間：')
+print(time.ctime())
+
+print(time.asctime())               # 列出目前系統時間 
+
+print(time.ctime())
+
+print("------------------------------------------------------------")  # 60個
+
 print('---- time.sleep(秒) --------------------------------------------------------')	#60個
 
 print("每0.3456秒打印一字")
@@ -121,10 +132,6 @@ print("Local current time :", localtime)
 
 time5 = time.asctime()
 print('time5 :', time5)
-
-print(time.asctime())               # 列出目前系統時間 
-
-print(time.ctime())
 
 time6 = time.ctime()
 print('time6 :', time6)
@@ -323,56 +330,6 @@ print('第 :', dt.tm_yday, '天')
 
 print('------------------------------------------------------------')	#60個
 
-"""
-print('量測時間 ST') 
-# Start the stopwatch / counter
-t1_start = time.perf_counter()
- 
-time.sleep(0.3456)  #過了一段時間
- 
-# Stop the stopwatch / counter
-t1_stop = time.perf_counter()
-
-print('量測時間 SP')  
-print(t1_stop, t1_start)
-print(t1_stop - t1_start, '秒')
-
-from time import perf_counter_ns
- 
-print('量測時間 ST') 
-# Start the stopwatch / counter
-t1_start = time.perf_counter_ns()
-
-time.sleep(0.3456)  #過了一段時間
- 
-# Stop the stopwatch / counter
-t1_stop = time.perf_counter_ns()
-
-print('量測時間 SP')
-print(t1_stop, 'ns', t1_start, 'ns')
- 
-print(t1_stop - t1_start, 'ns')
-
-start = time.time()
-
-time.sleep(0.3456)  #過了一段時間
-
-stop = time.time()
-
-print(stop - start)
-"""
-
-print('------------------------------------------------------------')	#60個
-
-print('存檔紀念')
-
-fp = open('tmp_log.txt', 'w')
-fp.write("# BUILD INFO\n")
-fp.write("# Date: %s\n" % time.ctime())
-fp.close()
-
-print('------------------------------------------------------------')	#60個
-
 print(time.localtime())
 year, month, day, hour, minute, second, _, _, _ = time.localtime()
 print("{}-{}-{} {}:{}:{}".format(year, month, day, hour, minute, second))
@@ -420,20 +377,7 @@ print('tm_isdst= ',field.tm_isdst)
 for j in range(9):#以元組的索引值取得的資料內容
     print('以元組的索引值取得資料= ',field[j])
             
-print("我有一句話想對你說:")
-time.sleep(1) #程式停1秒
-print("學習Python的過程唯然漫長,但最終的果實是甜美的")
-print("程式執行到目前的時間是"+str(time.process_time()))
-time.sleep(2) #程式停2秒
-print("程式執行到目前的時間是"+str(time.perf_counter()))
-
 print('------------------------------------------------------------')	#60個
-
-print('現在時間：')
-print() #輸出空白行
-print(time.ctime())
-
-print("------------------------------------------------------------")  # 60個
 
 #以秒數儲存epoch值, 以浮點數輸出
 seconds = time.time() 
@@ -618,59 +562,29 @@ print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime(tLocal))
 
 print("------------------------------------------------------------")  # 60個
 
-import time as t
-print(t.time())
+print(time.time())
 
-print("------------------------------------------------------------")  # 60個
+print(time.localtime())
 
-import time as t
-print(t.localtime())
-
-print("------------------------------------------------------------")  # 60個
-
-import time as t
-ptime=t.localtime()
+ptime = time.localtime()
 print("目前時間是西元%d年%d月%d日%d點%d分"%(ptime[0],ptime[1],ptime[2],ptime[3],ptime[4]))
 
 print("------------------------------------------------------------")  # 60個
 
-import time as t
-print(t.ctime())
-print(t.ctime(t.time()))
+print(time.ctime())
+print(time.ctime(time.time()))
 
 print("------------------------------------------------------------")  # 60個
 
-import time as t
 print("程式暫停2秒鐘")
-t.sleep(2)
+time.sleep(2)
 print("程式繼續執行")
 
 print("------------------------------------------------------------")  # 60個
 
-import time as t
-print("開始執行到目前的時間:"+str(t.perf_counter()))
-t.sleep(2)
-print("程式執行時間經過:"+str(t.perf_counter())+"秒")
-t.sleep(3)
-print("程式執行時間經過:"+str(t.perf_counter())+"秒")
-
-print('------------------------------------------------------------')	#60個
-
-# 模組與套件 clock() python3.8後改為perf_counter()
-import time as t
-#print("開始執行到目前的時間:"+str(t.perf_counter()))
-print("開始執行到目前的時間:"+str(t.perf_counter()))
-t.sleep(2)
-print("程式執行時間經過:"+str(t.perf_counter())+"秒")
-t.sleep(3)
-print("程式執行時間經過:"+str(t.perf_counter())+"秒")
-
-print("------------------------------------------------------------")  # 60個
-
-import time as t
 week = ["一","二","三","四","五","六","日"]
 dst = ["無日光節約時間","有日光節約時間"]
-time1 = t.localtime()
+time1 = time.localtime()
 show = "現在時刻:"+"\n"
 show += "中華民國"+str(int(time1.tm_year)-1911)+"年"
 show += str(time1.tm_mon)+"月"+str(time1.tm_mday)+"日"
@@ -681,13 +595,6 @@ print(show)
 
 print("------------------------------------------------------------")  # 60個
 
-import time as t
-timestart = t.perf_counter()
-for i in range(0,5000):
-    for j in range(0,1000):
-        n=i*j
-timeend = t.perf_counter()
-print("執行五百萬次整數運算的時間:"+str(timeend-timestart)+"秒")        
 
 
 print("------------------------------------------------------------")  # 60個
@@ -698,3 +605,83 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+import time
+
+from email.utils import formatdate, parsedate, parsedate_tz
+
+TIME_FMT = "%a, %d %b %Y %H:%M:%S GMT"
+
+freshness_lifetime = max(0, min(5 / 10, 24 * 3600))
+expires = freshness_lifetime
+
+print("expires", time.strftime(TIME_FMT, time.gmtime(expires)))
+
+print('------------------------------------------------------------')	#60個
+
+
+#顯示系統當前時間
+localtime = time.localtime()
+text = time.strftime("%Y-%m-%d %I:%M:%S %p", localtime)
+
+
+import datetime
+
+now = datetime.datetime.now()
+
+print(now.ctime())
+
+
+
+
+"""
+定义和使用时钟类
+
+Version: 0.1
+Author: 骆昊
+Date: 2018-03-08
+"""
+
+import time
+import os
+
+
+class Clock(object):
+
+    # Python中的函数是没有重载的概念的
+    # 因为Python中函数的参数没有类型而且支持缺省参数和可变参数
+    # 用关键字参数让构造器可以传入任意多个参数来实现其他语言中的构造器重载
+    def __init__(self, **kw):
+        if 'hour' in kw and 'minute' in kw and 'second' in kw:
+            self._hour = kw['hour']
+            self._minute = kw['minute']
+            self._second = kw['second']
+        else:
+            tm = time.localtime(time.time())
+            self._hour = tm.tm_hour
+            self._minute = tm.tm_min
+            self._second = tm.tm_sec
+
+    def run(self):
+        self._second += 1
+        if self._second == 60:
+            self._second = 0
+            self._minute += 1
+            if self._minute == 60:
+                self._minute = 0
+                self._hour += 1
+                if self._hour == 24:
+                    self._hour = 0
+
+    def show(self):
+        return '%02d:%02d:%02d' % (self._hour, self._minute, self._second)
+
+
+if __name__ == '__main__':
+    # clock = Clock(hour=10, minute=5, second=58)
+    clock = Clock()
+    while True:
+        os.system('clear')
+        print(clock.show())
+        time.sleep(1)
+        clock.run()

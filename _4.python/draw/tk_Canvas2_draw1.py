@@ -1,3 +1,7 @@
+import sys
+
+print("------------------------------------------------------------")  # 60個
+
 import tkinter as tk
 from tkinter import Tk, Canvas, NW
 from tkinter import ttk
@@ -213,6 +217,8 @@ canvas.create_line(100,125,500,125,width=5)
 canvas.create_line(100,150,500,150,width=10,fill='blue')
 canvas.create_line(100,175,500,175,dash=(10,2,2,2))
 
+mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
@@ -227,6 +233,8 @@ canvas.create_line(30,130,500,130,265,200,30,130,
                    width=20,joinstyle=BEVEL)
 canvas.create_line(30,230,500,230,265,300,30,230,
                    width=20,joinstyle=MITER)
+
+mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -243,6 +251,8 @@ canvas.create_line(30,230,500,230,width=10,capstyle=PROJECTING)
 canvas.create_line(30,20,30,240)
 canvas.create_line(500,20,500,250)
 
+mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
@@ -254,6 +264,8 @@ canvas.pack()
 canvas.create_line(30,30,500,30,width=10,stipple="gray25")
 canvas.create_line(30,130,500,130,width=40,stipple="questhead")
 canvas.create_line(30,230,500,230,width=10,stipple="info")
+
+mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -270,6 +282,8 @@ for i in range(50):                 # 隨機繪50個不同位置與大小的矩�
     if y1 > y2: y1,y2 = y2,y1       # 確保左上角y座標小於右下角y座標
     canvas.create_rectangle(x1, y1, x2, y2)
 
+mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
@@ -281,6 +295,8 @@ canvas.pack()
 canvas.create_rectangle(10, 10, 120, 60, fill='red')
 canvas.create_rectangle(130, 10, 200, 80, fill='yellow', outline='blue')
 canvas.create_rectangle(210, 10, 300, 60, fill='green', outline='grey')
+
+mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -301,6 +317,8 @@ canvas.create_arc(320, 250, 620, 350, extent=180, style=ARC)
 canvas.create_arc(10, 360, 310, 460, extent=270, style=ARC, outline='blue')
 canvas.create_arc(320, 360, 620, 460, extent=359, style=ARC)
 
+mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
@@ -312,6 +330,8 @@ canvas.pack()
 canvas.create_arc(10, 10, 110, 110, extent=180, style=ARC)
 canvas.create_arc(210, 10, 310, 110, extent=180, style=CHORD)
 canvas.create_arc(410, 10, 510, 110, start=30, extent=120, style=PIESLICE)
+
+mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -327,6 +347,8 @@ canvas.create_oval(150, 10, 300, 160, fill='yellow')
 canvas.create_oval(10, 200, 310, 350)
 canvas.create_oval(350, 200, 550, 300, fill='aqua', outline='blue', width=5)
 
+mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
@@ -338,6 +360,8 @@ canvas.create_polygon(10,10, 100,10, 50,80, fill='', outline='black')
 canvas.create_polygon(120,10, 180,30, 250,100, 200,90, 130,80)
 canvas.create_polygon(200,10, 350,30, 420,70, 360,90, fill='aqua')
 canvas.create_polygon(400,10,600,10,450,80,width=5,outline='blue',fill='yellow')
+
+mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -355,6 +379,8 @@ canvas.create_text(300, 160, text='Ming-Chi Institute of Technology', fill='blue
 canvas.create_text(300, 200, text='明志科技大學', fill='blue',
                    font=('華康新綜藝體 Std W7',20))
 
+mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
@@ -362,6 +388,8 @@ from tkinter import *
 tk = Tk()
 canvas = Canvas(tk, width=640, height=240, bg='yellow')
 canvas.pack()
+
+mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -379,6 +407,8 @@ canvas = Canvas(tk, width=img.size[0]+40,
 canvas.create_image(20,15,anchor=NW,image=rushMore)
 canvas.pack(fill=BOTH,expand=True)
 
+mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
@@ -390,6 +420,7 @@ id = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
 ballPos = canvas.coords(id)
 print(ballPos)
 
+mainloop()
 
 print("------------------------------------------------------------")  # 60個
 

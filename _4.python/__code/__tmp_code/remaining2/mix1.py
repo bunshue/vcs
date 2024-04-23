@@ -85,18 +85,8 @@ print('tm_isdst= ',field.tm_isdst)
 
 for j in range(9):#以元組的索引值取得的資料內容
     print('以元組的索引值取得資料= ',field[j])
-            
-print("我有一句話想對你說:")
-t.sleep(0.1) #程式停0.1秒
-print("學習Python的過程唯然漫長,但最終的果實是甜美的")
-print("程式執行到目前的時間是"+str(t.process_time()))
-t.sleep(0.2) #程式停0.2秒
-print("程式執行到目前的時間是"+str(t.perf_counter()))
-
 
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計-初心者超凡入門\exch08\time_fun.py
 
 import datetime
 print(datetime.time.min)
@@ -105,14 +95,6 @@ print(datetime.time(18,25,33).hour)
 print(datetime.time(18,25,33).minute)
 print(datetime.time(18,25,33).second)
 print(datetime.time(18,25,33, 32154).microsecond)
-
-
-
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計-初心者超凡入門\exch08\date.py
 
 import datetime
 print(datetime.date.today())
