@@ -26,29 +26,29 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-print('各種建立畫布的方法')
+print("各種建立畫布的方法")
 
-print('建立畫布(黑色)')
+print("建立畫布(黑色)")
 W, H = 640, 480
 # 快速產生 WxH，每個項目為 [0,0,0] 的三維陣列
-image = np.zeros((H, W,3), dtype='uint8')
-#image = np.zeros((H, W,3), np.uint8)
-#image = np.ones((H,W,3), np.uint8)*255  # 白色背景
+image = np.zeros((H, W, 3), dtype="uint8")
+# image = np.zeros((H, W,3), np.uint8)
+# image = np.ones((H,W,3), np.uint8)*255  # 白色背景
 
 # 白色背景
-image = np.ones((H,W,3),dtype="uint8")*255
+image = np.ones((H, W, 3), dtype="uint8") * 255
 
 # 黑色背景
-image = np.zeros((H, W, 3), dtype = np.uint8)
+image = np.zeros((H, W, 3), dtype=np.uint8)
 
-#灰色背景
+# 灰色背景
 image[:] = (128, 128, 128)
 
 
-#用(B, G, R) = (255, 255, 255): 白色填滿畫布
-image.fill(255) #將這個矩陣全部填入255 => 白色, 128 => 灰色
+# 用(B, G, R) = (255, 255, 255): 白色填滿畫布
+image.fill(255)  # 將這個矩陣全部填入255 => 白色, 128 => 灰色
 
-image[:] = [48, 213, 254]#將這個矩陣全部填入指定顏色
+image[:] = [48, 213, 254]  # 將這個矩陣全部填入指定顏色
 
 
 print("------------------------------------------------------------")  # 60個

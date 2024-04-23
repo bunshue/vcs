@@ -768,24 +768,22 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-cv2.imshow('image1', img)   # 原始影像
+cv2.imshow("image1", img)  # 原始影像
 
 img2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
 
-img = cv2.erode(img, kernel)     # 先侵蝕，將白色小圓點移除
-cv2.imshow('image2', img)   # 侵蝕後的影像
+img = cv2.erode(img, kernel)  # 先侵蝕，將白色小圓點移除
+cv2.imshow("image2", img)  # 侵蝕後的影像
 
-img = cv2.dilate(img, kernel)    # 再膨脹，白色小點消失
-cv2.imshow('image3', img)   # 膨脹後的影像
+img = cv2.dilate(img, kernel)  # 再膨脹，白色小點消失
+cv2.imshow("image3", img)  # 膨脹後的影像
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

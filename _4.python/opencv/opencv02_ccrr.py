@@ -353,7 +353,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("圖片旋轉")
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 img = cv2.imread(filename)
 
 H = img.shape[0]
@@ -399,16 +399,16 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 img = cv2.imread(filename)
 x = 100
 y = 100
 w = 200
 h = 200
-crop_img = img[y:y+h, x:x+w]        # 取出陣列的範圍
+crop_img = img[y : y + h, x : x + w]  # 取出陣列的範圍
 
-cv2.imshow('image', crop_img)
+cv2.imshow("image", crop_img)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -419,64 +419,66 @@ x = 100
 y = 100
 w = 200
 h = 200
-crop_img = img[y:y+h, x:x+w]
+crop_img = img[y : y + h, x : x + w]
 
-output = np.zeros((360,480,3), dtype='uint8') # 產生黑色畫布
-output[x:x+w, y:y+h]=crop_img
+output = np.zeros((360, 480, 3), dtype="uint8")  # 產生黑色畫布
+output[x : x + w, y : y + h] = crop_img
 
 
 img = cv2.imread(filename)
-output_1 = cv2.resize(img, (200, 200))   # 產生 200x200 的圖
-output_2 = cv2.resize(img, (100, 300))   # 產生 100x300 的圖
+output_1 = cv2.resize(img, (200, 200))  # 產生 200x200 的圖
+output_2 = cv2.resize(img, (100, 300))  # 產生 100x300 的圖
 
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-size = img.shape         # 取得原始圖片的資訊
-level = 15               # 縮小比例 ( 可當作馬賽克的等級 )
-h = int(size[0]/level)   # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
-w = int(size[1]/level)   # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
-mosaic = cv2.resize(img, (w,h), interpolation=cv2.INTER_LINEAR)   # 根據縮小尺寸縮小
-mosaic = cv2.resize(mosaic, (size[1],size[0]), interpolation=cv2.INTER_NEAREST) # 放大到原本的大小
+size = img.shape  # 取得原始圖片的資訊
+level = 15  # 縮小比例 ( 可當作馬賽克的等級 )
+h = int(size[0] / level)  # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
+w = int(size[1] / level)  # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
+mosaic = cv2.resize(img, (w, h), interpolation=cv2.INTER_LINEAR)  # 根據縮小尺寸縮小
+mosaic = cv2.resize(
+    mosaic, (size[1], size[0]), interpolation=cv2.INTER_NEAREST
+)  # 放大到原本的大小
 
-cv2.imshow('image', mosaic)
+cv2.imshow("image", mosaic)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print('馬賽克')
+print("馬賽克")
 img = cv2.imread(filename)
 
-x = 135   # 剪裁區域左上 x 座標
-y = 90    # 剪裁區域左上 y 座標
+x = 135  # 剪裁區域左上 x 座標
+y = 90  # 剪裁區域左上 y 座標
 cw = 100  # 剪裁區域寬度
 ch = 120  # 剪裁區域高度
-mosaic = img[y:y+ch, x:x+cw]   # 取得剪裁區域
-level = 15         # 馬賽克程度
-h = int(ch/level)  # 縮小的高度 ( 使用 int 去除小數點 )
-w = int(cw/level)  # 縮小的寬度 ( 使用 int 去除小數點 )
-mosaic = cv2.resize(mosaic, (w,h), interpolation=cv2.INTER_LINEAR)
-mosaic = cv2.resize(mosaic, (cw,ch), interpolation=cv2.INTER_NEAREST)
-img[y:y+ch, x:x+cw] = mosaic   # 將圖片的剪裁區域，換成馬賽克的圖
+mosaic = img[y : y + ch, x : x + cw]  # 取得剪裁區域
+level = 15  # 馬賽克程度
+h = int(ch / level)  # 縮小的高度 ( 使用 int 去除小數點 )
+w = int(cw / level)  # 縮小的寬度 ( 使用 int 去除小數點 )
+mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_LINEAR)
+mosaic = cv2.resize(mosaic, (cw, ch), interpolation=cv2.INTER_NEAREST)
+img[y : y + ch, x : x + cw] = mosaic  # 將圖片的剪裁區域，換成馬賽克的圖
 
-cv2.imshow('image', img)
+cv2.imshow("image", img)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#flip
+# flip
 
-img = cv2.imread(filename)   # 開啟圖片
-output_0 = cv2.flip(img, 0)    # 上下翻轉
-output_1 = cv2.flip(img, 1)    # 左右翻轉
-output_2 = cv2.flip(img, -1)   # 上下左右翻轉
+img = cv2.imread(filename)  # 開啟圖片
+output_0 = cv2.flip(img, 0)  # 上下翻轉
+output_1 = cv2.flip(img, 1)  # 左右翻轉
+output_2 = cv2.flip(img, -1)  # 上下左右翻轉
 
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-output = cv2.transpose(img)    # 逆時針旋轉 90 度。
+output = cv2.transpose(img)  # 逆時針旋轉 90 度。
 
 print("------------------------------------------------------------")  # 60個
 
@@ -488,49 +490,46 @@ output_ROTATE_180 = cv2.rotate(img, cv2.ROTATE_180)
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-M = np.float32([[1, 0, 100], [0, 1, 100]]) # 2x3 矩陣，x 軸平移 100，y 軸平移 100
+M = np.float32([[1, 0, 100], [0, 1, 100]])  # 2x3 矩陣，x 軸平移 100，y 軸平移 100
 output = cv2.warpAffine(img, M, (480, 360))
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-M = cv2.getRotationMatrix2D((240, 180), 45, 1)    # 中心點 (240, 180)，旋轉 45 度，尺寸 1
+M = cv2.getRotationMatrix2D((240, 180), 45, 1)  # 中心點 (240, 180)，旋轉 45 度，尺寸 1
 output = cv2.warpAffine(img, M, (480, 360))
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-p1 = np.float32([[100,100],[480,0],[0,360]])
-p2 = np.float32([[0,0],[480,0],[0,360]])
+p1 = np.float32([[100, 100], [480, 0], [0, 360]])
+p2 = np.float32([[0, 0], [480, 0], [0, 360]])
 M = cv2.getAffineTransform(p1, p2)
 output = cv2.warpAffine(img, M, (480, 360))
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-p1 = np.float32([[100,100],[480,0],[0,360],[480,360]])
-p2 = np.float32([[0,0],[480,0],[0,360],[480,360]])
-m = cv2.getPerspectiveTransform(p1,p2)
+p1 = np.float32([[100, 100], [480, 0], [0, 360], [480, 360]])
+p2 = np.float32([[0, 0], [480, 0], [0, 360], [480, 360]])
+m = cv2.getPerspectiveTransform(p1, p2)
 
 img = cv2.imread(filename)
 output = cv2.warpPerspective(img, m, (480, 360))
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-
-

@@ -1,3 +1,6 @@
+
+print("------------------------------------------------------------")  # 60個
+
 import tkinter as tk
 
 window = tk.Tk()
@@ -63,5 +66,131 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 window.mainloop()
 
 
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+def bgUpdate(source):
+    ''' 更改畫布背景顏色 '''
+    red = rSlider.get()                                 # 讀取red值
+    green = gSlider.get()                               # 讀取green值
+    blue = bSlider.get( )                               # 讀取blue值
+    print("R=%d, G=%d, B=%d" % (red, green, blue))      # 列印色彩數值
+    myColor = "#%02x%02x%02x" % (red, green, blue)      # 將顏色轉成16進位字串
+    canvas.config(bg=myColor)                           # 設定畫布背景顏色
+    
+tk = Tk()
+canvas = Canvas(tk, width=640, height=240)              # 初始化背景
+rSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
+gSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
+bSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
+gSlider.set(125)                                        # 設定green是125
+rSlider.grid(row=0, column=0)                           
+gSlider.grid(row=0, column=1)                           
+bSlider.grid(row=0, column=2)                           
+canvas.grid(row=1, column=0, columnspan=3)              
+mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+def bgUpdate(source):
+    ''' 更改畫布背景顏色 '''
+    red = rSlider.get()                                 # 讀取red值
+    green = gSlider.get()                               # 讀取green值
+    blue = bSlider.get( )                               # 讀取blue值
+    print("R=%d, G=%d, B=%d" % (red, green, blue))      # 列印色彩數值
+    myColor = "#%02x%02x%02x" % (red, green, blue)      # 將顏色轉成16進位字串
+    canvas.config(bg=myColor)                           # 設定畫布背景顏色
+    
+tk = Tk()
+canvas = Canvas(tk, width=640, height=240)              # 初始化背景
+rSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
+gSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
+bSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
+gSlider.set(125)                                        # 設定green是125
+rSlider.grid(row=1, column=1)                           # 第一行第一欄
+gSlider.grid(row=1, column=2)                           # 第一行第二欄
+bSlider.grid(row=1, column=3)                           # 第一行第三欄
+canvas.grid(row=2, column=1, columnspan=3)              # 第二行全部
+mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+slider1 = Scale(window,from_=0,to=10).pack()
+slider2 = Scale(window,from_=0,to=10,
+                length=300,orient=HORIZONTAL).pack()
+
+print("------------------------------------------------------------")  # 60個
+
+def printInfo():
+    print(slider1.get(),slider2.get())
+    
+slider1 = Scale(window,from_=0,to=10)
+slider1.pack()
+slider2 = Scale(window,from_=0,to=10,
+                length=300,orient=HORIZONTAL)
+slider2.set(3)                      # 設定水平捲軸值
+slider2.pack()
+tk.Button(window,text="Print",command=printInfo).pack()
+
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+    
+window = Tk()
+window.title("ch18_34")             # 視窗標題
+
+slider1 = Scale(window,from_=0,to=10).pack()
+slider2 = Scale(window,from_=0,to=10,
+                length=300,orient=HORIZONTAL).pack()
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+
+def printInfo():
+    print(slider1.get(),slider2.get())
+    
+window = Tk()
+window.title("ch18_35")             # 視窗標題
+
+slider1 = Scale(window,from_=0,to=10)
+slider1.pack()
+slider2 = Scale(window,from_=0,to=10,
+                length=300,orient=HORIZONTAL)
+slider2.set(3)                      # 設定水平尺度值
+slider2.pack()
+Button(window,text="Print",command=printInfo).pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 

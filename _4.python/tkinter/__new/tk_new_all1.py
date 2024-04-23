@@ -19,72 +19,7 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
-
-
 window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-from tkinter import *
-def bgUpdate(source):
-    ''' 更改畫布背景顏色 '''
-    red = rSlider.get()                                 # 讀取red值
-    green = gSlider.get()                               # 讀取green值
-    blue = bSlider.get( )                               # 讀取blue值
-    print("R=%d, G=%d, B=%d" % (red, green, blue))      # 列印色彩數值
-    myColor = "#%02x%02x%02x" % (red, green, blue)      # 將顏色轉成16進位字串
-    canvas.config(bg=myColor)                           # 設定畫布背景顏色
-    
-tk = Tk()
-canvas = Canvas(tk, width=640, height=240)              # 初始化背景
-rSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
-gSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
-bSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
-gSlider.set(125)                                        # 設定green是125
-rSlider.grid(row=0, column=0)                           
-gSlider.grid(row=0, column=1)                           
-bSlider.grid(row=0, column=2)                           
-canvas.grid(row=1, column=0, columnspan=3)              
-mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-def callback(event):                        # 事件處理程式
-    print("Clicked at", event.x, event.y)   # 列印座標
-    
-root = Tk()
-root.title("ch40_20_1")
-canvas = Canvas(root,width=300,height=180)
-canvas.bind("<Button-1>",callback)           # 按一下綁定callback
-canvas.pack()
-
-root.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-def mouseMotion(event):             # Mouse移動
-    x = event.x
-    y = event.y
-    textvar = "Mouse location - x:{}, y:{}".format(x,y)
-    var.set(textvar)
-    
-root = Tk()
-root.title("ch40_20_2")             # 視窗標題
-root.geometry("300x180")            # 視窗寬300高180
-
-x, y = 0, 0                         # x,y座標
-var = StringVar()
-text = "Mouse location - x:{}, y:{}".format(x,y)
-var.set(text)
-
-lab = Label(root,textvariable=var)  # 建立標籤
-lab.pack(anchor=S,side=RIGHT,padx=10,pady=10)
-
-root.bind("<Motion>",mouseMotion)   # 增加事件處理程式
-
-root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -326,41 +261,6 @@ win.geometry('300x200')
 button = tk.Button(win, text = "Press", underline=0)
 button.pack()
 win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print("Checkbutton")
-
-from tkinter import *
-wnd = Tk()
-wnd.title('Checkbutton 核取方塊')
-
-def check(): #回應核取方塊變數狀態
-   print('這學期預定選修的科目包括:', var1.get(), var2.get()
-         ,var3.get())
-
-ft1 =('新細明體', 14)
-ft2 = ('標楷體', 18)
-lb1=Label(wnd, text = '選修的科目：', font = ft1).pack()
-item1 = '人工智慧'
-var1 = StringVar()
-chk1 = Checkbutton(wnd, text = item1, font = ft1,
-    variable = var1, onvalue = item1, offvalue = '')
-chk1.pack()
-item2 = '程式語言'
-var2 = StringVar()
-chk2 = Checkbutton(wnd, text = item2, font = ft1,
-    variable = var2, onvalue = item2, offvalue = '')
-chk2.pack()
-item3 = '數位行銷'
-var3 = StringVar()
-chk3 = Checkbutton(wnd, text = item3, font = ft1,
-    variable = var3, onvalue = item3, offvalue = '')
-chk3.pack()
-btnShow = Button(wnd, text = '列出選修結果', font = ft2,
-    command = check)
-btnShow.pack()
-mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -984,15 +884,12 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python程式設計入門與應用\二版範例資料\ch09\ex09_92.py
-
 def checknum():
     pmsg.set("Small")
 
 import tkinter as tk
 import random as r
 
-# create gui interface
 win = tk.Tk()
 win.geometry("400x300")
 win.title("Guess Number")
@@ -1156,7 +1053,6 @@ def saveFile():
 window = tk.Tk()
 window.title("簡易文字編輯器")
         
-# Create a menu bar
 menubar = tk.Menu(window)
 window.config(menu = menubar) # Display the menu bar
         
@@ -1189,11 +1085,9 @@ text = tk.Text(frame1, width = 40, height = 20, wrap = "word",
 text.pack()
 scrollbar.config(command = text.yview)
         
-window.mainloop() # Create an event loop
-
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
 
 from tkinter import *
 
@@ -1904,70 +1798,12 @@ for val, city in cities.items():        # 建立選項紐
 
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window,text="請選擇喜歡的運動",
-      fg="blue",bg="lightyellow",width=30).grid(row=0)
-
-var1 = IntVar()                      
-Checkbutton(window,text="美式足球",
-                  variable=var1).grid(row=1,sticky=W)
-var2 = IntVar()
-Checkbutton(window,text="棒球",
-                  variable=var2).grid(row=2,sticky=W)                
-var3 = IntVar()
-Checkbutton(window,text="籃球",
-                  variable=var3).grid(row=3,sticky=W)   
-
-print("------------------------------------------------------------")  # 60個
-
-def printInfo():
-    selection = ''
-    for i in checkboxes:                    # 檢查此字典
-        if checkboxes[i].get() == True:     # 被選取則執行
-            selection = selection + sports[i] + "\t"
-    print(selection)
-
-tk.Label(window,text="請選擇喜歡的運動",
-      fg="blue",bg="lightyellow",width=30).grid(row=0)
-
-sports = {0:"美式足球",1:"棒球",2:"籃球",3:"網球"}    # 運動字典
-checkboxes = {}                             # 字典存放被選取項目
-for i in range(len(sports)):                # 將運動字典轉成核取方塊
-    checkboxes[i] = BooleanVar()            # 布林變數物件
-    Checkbutton(window,text=sports[i],
-                variable=checkboxes[i]).grid(row=i+1,sticky=W)
-  
-tk.Button(window,text="確定",width=10,command=printInfo).grid(row=i+2)
-
-print("------------------------------------------------------------")  # 60個
-
 from tkinter import messagebox
 
 def myMsg():                    # 按Good Morning按鈕時執行
     messagebox.showinfo("My Message Box","Python tkinter早安")
     
 tk.Button(window,text="Good Morning",command=myMsg).pack()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-    
-slider1 = Scale(window,from_=0,to=10).pack()
-slider2 = Scale(window,from_=0,to=10,
-                length=300,orient=HORIZONTAL).pack()
-
-print("------------------------------------------------------------")  # 60個
-
-def printInfo():
-    print(slider1.get(),slider2.get())
-    
-slider1 = Scale(window,from_=0,to=10)
-slider1.pack()
-slider2 = Scale(window,from_=0,to=10,
-                length=300,orient=HORIZONTAL)
-slider2.set(3)                      # 設定水平捲軸值
-slider2.pack()
-tk.Button(window,text="Print",command=printInfo).pack()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2063,49 +1899,6 @@ tk.Label(window, text='紅', bg='red', width=20).pack()
 tk.Label(window, text='藍', bg='green', width=20).pack()
 tk.Label(window, text='綠', bg='blue', width=20).pack()
 window.mainloop()
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-window = tk.Tk()
-
-topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
-
-check_value={}
-
-for i in range(len(topping)):
-	check_value[i] = tk.BooleanVar()
-	tk.Checkbutton(window, variable=check_value[i],
-
-text = topping[i]).pack(anchor=tk.W)
-
-def buy():
-	for i in check_value:
-		if check_value[i].get() == True:
-			print(topping[i])
-
-tk.Button(window, text='點餐', command=buy).pack()
-
-window.mainloop()
-
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter as tk
-window=tk.Tk()
-topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
-check_value={}
-for i in range(len(topping)):
-	check_value[i] = tk.BooleanVar()
-	tk.Checkbutton(window, variable=check_value[i], text = topping[i]).pack(anchor=tk.W)
-window.mainloop()
-
-"""
-請問迴圈裡面 check_value [i] = tk.BooleanVar() 這一行，能否舉個例子，假設第 0 個按鈕被勾選，check_value 長怎樣；假設第 0、1 個按鈕被勾選，check_value 長怎樣 ... 依此類推
-"""
 
 print('------------------------------------------------------------')	#60個
 
@@ -2334,39 +2127,6 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
-
-def printInfo():
-    selection = ''
-    for i in checkboxes:                    # 檢查此字典
-        if checkboxes[i].get() == True:     # 被選取則執行
-            selection = selection + sports[i] + " "
-    x.set(selection)
-
-window = Tk()
-window.title("ex18_6")                     # 視窗標題
-
-Label(window,text="請選擇喜歡的運動",
-      fg="blue",bg="lightyellow",width=30).grid(row=0)
-
-sports = {0:"美式足球",1:"棒球",2:"籃球",3:"網球",
-          4:"桌球", 5:"排球"}               # 運動字典
-checkboxes = {}                             # 字典存放被選取項目
-for i in range(len(sports)):                # 將運動字典轉成核取方塊
-    checkboxes[i] = BooleanVar()            # 布林變數物件
-    Checkbutton(window,text=sports[i],
-                variable=checkboxes[i]).grid(row=i+1,sticky=W)
-  
-Button(window,text="確定",width=10,command=printInfo).grid(row=i+2)
-
-x = StringVar()
-display = Label(window,textvariable=x, bg="lightgreen",width=30)
-display.grid(row=i+3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
 def displayFan(startingAngle):
     canvas.delete("fan")    
     canvas.create_arc(xWidth / 2 - r, yHeight / 2 - r, xWidth / 2 + r, yHeight / 2 + r,
@@ -2444,36 +2204,6 @@ sizeRatio = 0.6                                 # 設定下一層的長度與前
 tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("tk_new04.py")
 
 from tkinter import Tk, Frame, Button
 from datetime import date #滙入datetime模組的date類別
@@ -2662,194 +2392,7 @@ def main():
 if __name__ == '__main__':
     main()
 
-
-
-print('------------------------------------------------------------')	#60個
-
-"""
-使用tkinter创建GUI
-- 使用画布绘图
-- 处理鼠标事件
-
-"""
-import tkinter
-
-def mouse_evt_handler(evt=None):
-    row = round((evt.y - 20) / 40)
-    col = round((evt.x - 20) / 40)
-    pos_x = 40 * col
-    pos_y = 40 * row
-    canvas.create_oval(pos_x, pos_y, 40 + pos_x, 40 + pos_y, fill='black')
-
-top = tkinter.Tk()
-# 设置窗口尺寸
-top.geometry('620x620')
-# 设置窗口标题
-top.title('五子棋')
-# 设置窗口大小不可改变
-top.resizable(False, False)
-# 设置窗口置顶
-top.wm_attributes('-topmost', 1)
-canvas = tkinter.Canvas(top, width=600, height=600, bd=0, highlightthickness=0)
-canvas.bind('<Button-1>', mouse_evt_handler)
-canvas.create_rectangle(0, 0, 600, 600, fill='yellow', outline='white')
-for index in range(15):
-    canvas.create_line(20, 20 + 40 * index, 580, 20 + 40 * index, fill='black')
-    canvas.create_line(20 + 40 * index, 20, 20 + 40 * index, 580, fill='black')
-canvas.create_rectangle(15, 15, 585, 585, outline='black', width=4)
-canvas.pack()
-tkinter.mainloop()
-
-# 请思考如何用面向对象的编程思想对上面的代码进行封装
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter as tk
-import tkinter.messagebox
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-def select():
-    print('你的選項是 :', var.get())
-
-ft = ('標楷體', 14)
-tk.Label(window, 
-      text = "請問您的最高學歷: ", font = ft,
-      justify = tk.LEFT, padx = 20).pack()
-place = [('博士', 1), ('碩士', 2),('大學', 3),
-          ('高中', 4),('國中', 5),('國小', 6)]
-var = tk.IntVar()
-var.set(2)
-for item, val in place:
-    tk.Radiobutton(window, text = item, value = val,
-        font = ft, variable = var, padx = 20,
-        command = select).pack(anchor = tk.W)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-def first():
-    tk.messagebox.showinfo('顯示類對話方塊',
-            '「顯示」類是以「show」開頭，只會顯示一個「確定」鈕。')
-
-def second():
-    tk.messagebox.askretrycancel('詢問類對話方塊', 
-            '「詢問」類是以「ask」為開頭，伴隨2~3個按鈕來產生互動。')
-
-tk.Button(window, text='顯示類對話方塊', command = first).pack(side = 'left', padx = 10)
-tk.Button(window, text='詢問類對話方塊', command = second).pack(side = 'left')
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-sentences="玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
-
-text = tk.Text(window, width = 30, height = 14, bg = "yellow", wrap=tk.WORD)
-text.insert(tk.END,sentences)
-text.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-print("ScrollBar捲軸")
-
-text = tk.Text(window, width = "30", height = "5")
-#text.grid(row = 0, column = 0)
-text.pack()
-scrollbar = tk.Scrollbar(command = text.yview, orient = tk.VERTICAL)
-#scrollbar.grid(row = 0, column = 1, sticky = "ns")
-scrollbar.pack()
-text.configure(yscrollcommand = scrollbar.set)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-def select():
-    print('你的選項是 :', var.get())
-
-ft = ('標楷體', 14)
-tk.Label(window,
-         text = "請選擇精通的程式語言: ", font = ft,
-         justify = tk.LEFT, padx = 20).pack()
-place = [('Python語言', 1), ('C語言', 2),
-         ('C++語言', 3),('Java語言', 4)]
-var = tk.IntVar()
-var.set(3)
-
-for item, val in place:
-    tk.Radiobutton(window, text = item, value = val,
-                   font = ft, variable = var, padx = 20,
-                   command = select).pack(anchor = tk.NW)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-print("密碼資料")
-
-label = tk.Label(window, text = "請輸入密碼: ")
-label.pack()
-entry = tk.Entry(window,bg='yellow',fg='red',show='*')
-entry.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-def check(): #回應核取方塊變數狀態
-   print('這學期預定選修的科目包括:', var1.get(), var2.get()
-         ,var3.get())
-
-ft1 =('新細明體', 14)
-ft2 = ('標楷體', 18)
-lb1=tk.Label(window, text = '選修的科目：', font = ft1).pack()
-item1 = '人工智慧'
-var1 = tk.StringVar()
-chk1 = tk.Checkbutton(window, text = item1, font = ft1,
-                      variable = var1, onvalue = item1, offvalue = '')
-chk1.pack()
-item2 = '程式語言'
-var2 = tk.StringVar()
-chk2 = tk.Checkbutton(window, text = item2, font = ft1,
-                   variable = var2, onvalue = item2, offvalue = '')
-chk2.pack()
-item3 = '數位行銷'
-var3 = tk.StringVar()
-chk3 = tk.Checkbutton(window, text = item3, font = ft1,
-                      variable = var3, onvalue = item3, offvalue = '')
-chk3.pack()
-btnShow = tk.Button(window, text = '列出選修結果', font = ft2,
-                 command = check)
-btnShow.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-button = tk.Button(window, text = "Press", underline=0)
-button.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-window.mainloop()
-
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 import tkinter as tk
 
@@ -2904,23 +2447,6 @@ tk.Label(window, text='藍', bg='blue', width=20).pack()
 
 print('------------------------------------------------------------')	#60個
 
-topping = {0:'海苔', 1:'水煮蛋', 2:'豆芽菜', 3:'叉燒'}
-
-check_value={}
-
-for i in range(len(topping)):
-	check_value[i] = tk.BooleanVar()
-	tk.Checkbutton(window, variable=check_value[i], text = topping[i]).pack(anchor=tk.W)
-
-def buy():
-	for i in check_value:
-		if check_value[i].get() == True:
-			print(topping[i])
-
-tk.Button(window, text='點菜', command=buy).pack()
-
-print('------------------------------------------------------------')	#60個
-
 radio_value = tk.IntVar()
 radio_value.set(1)
 lunch = {0:'A套餐',1:'B套餐',2:'C套餐'}
@@ -2934,6 +2460,7 @@ def buy():
 	print(lunch[value])
 
 tk.Button(window, text='點菜', command=buy).pack()
+window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
@@ -3286,34 +2813,6 @@ canvas.create_text(300, 160, text='Ming-Chi Institute of Technology', fill='blue
 canvas.create_text(300, 200, text='明志科技大學', fill='blue',
                    font=('華康新綜藝體 Std W7',20))
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new4\ch19_10.py
-
-from tkinter import *
-def bgUpdate(source):
-    ''' 更改畫布背景顏色 '''
-    red = rSlider.get()                                 # 讀取red值
-    green = gSlider.get()                               # 讀取green值
-    blue = bSlider.get( )                               # 讀取blue值
-    print("R=%d, G=%d, B=%d" % (red, green, blue))      # 列印色彩數值
-    myColor = "#%02x%02x%02x" % (red, green, blue)      # 將顏色轉成16進位字串
-    canvas.config(bg=myColor)                           # 設定畫布背景顏色
-    
-tk = Tk()
-canvas = Canvas(tk, width=640, height=240)              # 初始化背景
-rSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
-gSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
-bSlider = Scale(tk, from_=0, to=255, command=bgUpdate)
-gSlider.set(125)                                        # 設定green是125
-rSlider.grid(row=1, column=1)                           # 第一行第一欄
-gSlider.grid(row=1, column=2)                           # 第一行第二欄
-bSlider.grid(row=1, column=3)                           # 第一行第三欄
-canvas.grid(row=2, column=1, columnspan=3)              # 第二行全部
-mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4267,85 +3766,8 @@ for val, city in cities.items():        # 建立選項紐
 
 window.mainloop()
 
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_27.py
-
-# ch18_27.py
-from tkinter import *
-
-window = Tk()
-window.title("ch18_27")                   # 視窗標題
-
-Label(window,text="請選擇喜歡的運動",
-      fg="blue",bg="lightyellow",width=30).grid(row=0)
-
-var1 = IntVar()                      
-Checkbutton(window,text="美式足球",
-                  variable=var1).grid(row=1,sticky=W)
-var2 = IntVar()
-Checkbutton(window,text="棒球",
-                  variable=var2).grid(row=2,sticky=W)                
-var3 = IntVar()
-Checkbutton(window,text="籃球",
-                  variable=var3).grid(row=3,sticky=W)   
-
-window.mainloop()
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_28.py
-
-# ch18_28.py
-from tkinter import *
-
-def printInfo():
-    selection = ''
-    for i in checkboxes:                    # 檢查此字典
-        if checkboxes[i].get() == True:     # 被選取則執行
-            selection = selection + sports[i] + "\t"
-    print(selection)
-
-window = Tk()
-window.title("ch18_28")                     # 視窗標題
-
-Label(window,text="請選擇喜歡的運動",
-      fg="blue",bg="lightyellow",width=30).grid(row=0)
-
-sports = {0:"美式足球",1:"棒球",2:"籃球",3:"網球"}    # 運動字典
-checkboxes = {}                             # 字典存放被選取項目
-for i in range(len(sports)):                # 將運動字典轉成核取方塊
-    checkboxes[i] = BooleanVar()            # 布林變數物件
-    Checkbutton(window,text=sports[i],
-                variable=checkboxes[i]).grid(row=i+1,sticky=W)
-  
-Button(window,text="確定",width=10,command=printInfo).grid(row=i+2)
-
-window.mainloop()
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_29.py
-
-# ch18_29.py
 from tkinter import *
 from tkinter import messagebox
 
@@ -4362,9 +3784,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_30.py
-
-# ch18_30.py
 from tkinter import *
     
 window = Tk()
@@ -4379,9 +3798,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_31.py
-
-# ch18_31.py
 from tkinter import *
     
 window = Tk()
@@ -4405,9 +3821,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_32.py
-
-# ch18_32.py
 from tkinter import *
     
 window = Tk()
@@ -4431,9 +3844,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_33.py
-
-# ch18_33.py
 from tkinter import *
 
 def msgShow():
@@ -4455,17 +3865,8 @@ btn.pack()
 
 window.mainloop()
 
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_33_1.py
-
-#ch18_33_1.py
 from tkinter import *
 
 def msgShow():
@@ -4488,17 +3889,8 @@ btn.pack()
 
 window.mainloop()
 
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_33_2.py
-
-#ch18_33_2.py
 from tkinter import *
 
 def msgShow():
@@ -4523,48 +3915,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
-    
-window = Tk()
-window.title("ch18_34")             # 視窗標題
-
-slider1 = Scale(window,from_=0,to=10).pack()
-slider2 = Scale(window,from_=0,to=10,
-                length=300,orient=HORIZONTAL).pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-def printInfo():
-    print(slider1.get(),slider2.get())
-    
-window = Tk()
-window.title("ch18_35")             # 視窗標題
-
-slider1 = Scale(window,from_=0,to=10)
-slider1.pack()
-slider2 = Scale(window,from_=0,to=10,
-                length=300,orient=HORIZONTAL)
-slider2.set(3)                      # 設定水平尺度值
-slider2.pack()
-Button(window,text="Print",command=printInfo).pack()
-
-window.mainloop()
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_36.py
-
-# ch18_36.py
 from tkinter import *
 from tkinter import messagebox
 
@@ -4598,17 +3948,8 @@ helpmenu.add_command(label="程式說明",command=about)
 
 mainloop()
 
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_36_1.py
-
-# ch18_36_1.py
 from tkinter import *
 
 root = Tk()
@@ -4621,15 +3962,8 @@ label.pack()
 
 root.mainloop()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_37.py
-
-# ch18_37.py
 from tkinter import *
 def calculate():                    # 執行計算並顯示結果
     result = eval(equ.get())
@@ -4690,18 +4024,8 @@ Button(root,text="=",width=5,bg ="yellow",
 
 root.mainloop()
 
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_38.py
-
-# ch18_38.py
 import tkinter as tk
 from tkinter.filedialog import asksaveasfilename    # 導入文件保存對話框函數
  
@@ -4727,15 +4051,8 @@ button_generate = tk.Button(root, text="生成報告", command=generate_report)
 button_generate.pack()                      # 將按鈕添加到視窗中
 root.mainloop()
 
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new5\ch18_39.py
-
-# ch18_39.py
 import tkinter as tk
 import random           
 
@@ -4753,28 +4070,11 @@ label_data.pack()                           # 將標籤添加到視窗中
 update_data()           # 呼叫update_data( )函數以開始數據更新過程
 root.mainloop()
 
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-
-
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -4811,443 +4111,6 @@ canvas 畫圖抓出來 canvas create
 
 
 """
-
-
-from tkinter import *
-import math
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_line(100,100,500,100)
-canvas.create_line(100,125,500,125,width=5)
-canvas.create_line(100,150,500,150,width=10,fill='blue')
-canvas.create_line(100,175,500,175,dash=(10,2,2,2))
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-import math
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_line(30,30,500,30,265,100,30,30,
-                   width=20,joinstyle=ROUND)
-canvas.create_line(30,130,500,130,265,200,30,130,
-                   width=20,joinstyle=BEVEL)
-canvas.create_line(30,230,500,230,265,300,30,230,
-                   width=20,joinstyle=MITER)
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-import math
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_line(30,30,500,30,width=10,capstyle=BUTT)
-canvas.create_line(30,130,500,130,width=10,capstyle=ROUND)
-canvas.create_line(30,230,500,230,width=10,capstyle=PROJECTING)
-# 以下垂直線
-canvas.create_line(30,20,30,240)
-canvas.create_line(500,20,500,250)
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-import math
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_line(30,30,500,30,width=10,stipple="gray25")
-canvas.create_line(30,130,500,130,width=40,stipple="questhead")
-canvas.create_line(30,230,500,230,width=10,stipple="info")
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-from random import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-for i in range(50):                 # 隨機繪50個不同位置與大小的矩形
-    x1, y1 = randint(1, 640), randint(1, 480)
-    x2, y2 = randint(1, 640), randint(1, 480)
-    if x1 > x2: x1,x2 = x2,x1       # 確保左上角x座標小於右下角x座標
-    if y1 > y2: y1,y2 = y2,y1       # 確保左上角y座標小於右下角y座標
-    canvas.create_rectangle(x1, y1, x2, y2)
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-from random import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_rectangle(10, 10, 120, 60, fill='red')
-canvas.create_rectangle(130, 10, 200, 80, fill='yellow', outline='blue')
-canvas.create_rectangle(210, 10, 300, 60, fill='green', outline='grey')
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-# 以下以圓形為基礎
-canvas.create_arc(10, 10, 110, 110, extent=45, style=ARC)
-canvas.create_arc(210, 10, 310, 110, extent=90, style=ARC)
-canvas.create_arc(410, 10, 510, 110, extent=180, fill='yellow')
-canvas.create_arc(10, 110, 110, 210, extent=270, style=ARC)
-canvas.create_arc(210, 110, 310, 210, extent=359, style=ARC, width=5)
-# 以下以橢圓形為基礎
-canvas.create_arc(10, 250, 310, 350, extent=90, style=ARC, start=90)
-canvas.create_arc(320, 250, 620, 350, extent=180, style=ARC)
-canvas.create_arc(10, 360, 310, 460, extent=270, style=ARC, outline='blue')
-canvas.create_arc(320, 360, 620, 460, extent=359, style=ARC)
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-# 以下以圓形為基礎
-canvas.create_arc(10, 10, 110, 110, extent=180, style=ARC)
-canvas.create_arc(210, 10, 310, 110, extent=180, style=CHORD)
-canvas.create_arc(410, 10, 510, 110, start=30, extent=120, style=PIESLICE)
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-# 以下是圓形
-canvas.create_oval(10, 10, 110, 110)
-canvas.create_oval(150, 10, 300, 160, fill='yellow')
-# 以下是橢圓形
-canvas.create_oval(10, 200, 310, 350)
-canvas.create_oval(350, 200, 550, 300, fill='aqua', outline='blue', width=5)
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_polygon(10,10, 100,10, 50,80, fill='', outline='black')
-canvas.create_polygon(120,10, 180,30, 250,100, 200,90, 130,80)
-canvas.create_polygon(200,10, 350,30, 420,70, 360,90, fill='aqua')
-canvas.create_polygon(400,10,600,10,450,80,width=5,outline='blue',fill='yellow')
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_text(200, 50, text='Ming-Chi Institute of Technology')
-canvas.create_text(200, 80, text='Ming-Chi Institute of Technology', fill='blue')
-canvas.create_text(300, 120, text='Ming-Chi Institute of Technology', fill='blue',
-                   font=('Old English Text MT',20))
-canvas.create_text(300, 160, text='Ming-Chi Institute of Technology', fill='blue',
-                   font=('華康新綜藝體 Std W7',20))
-canvas.create_text(300, 200, text='明志科技大學', fill='blue',
-                   font=('華康新綜藝體 Std W7',20))
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=240, bg='yellow')
-canvas.pack()
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-from tkinter import *
-from PIL import Image, ImageTk
-
-tk = Tk()
-img = Image.open(filename)
-rushMore = ImageTk.PhotoImage(img)
-
-canvas = Canvas(tk, width=img.size[0]+40,
-                height=img.size[1]+30)
-canvas.create_image(20,15,anchor=NW,image=rushMore)
-canvas.pack(fill=BOTH,expand=True)
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-from tkinter import *
-
-tk = Tk()
-canvas= Canvas(tk, width=500, height=150)
-canvas.pack()
-id = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
-ballPos = canvas.coords(id)
-print(ballPos)
-
-
-
-
-
-from tkinter import *
-
-def circleIncrease(event):
-    global r
-    canvas.delete("myCircle")
-    if r < 200:
-        r += 5
-    canvas.create_oval(200-r,200-r,200+r,200+r,fill='yellow',tag="myCircle")
-    
-def circleDecrease(event):
-    global r
-    canvas.delete("myCircle")
-    if r > 5:
-        r -= 5
-    canvas.create_oval(200-r,200-r,200+r,200+r,fill='yellow',tag="myCircle")
-    
-tk = Tk()
-canvas= Canvas(tk, width=400, height=400)
-canvas.pack()
-
-r = 100
-canvas.create_oval(200-r,200-r,200+r,200+r,fill='yellow',tag="myCircle")
-canvas.bind('<Button-1>', circleIncrease)
-canvas.bind('<Button-3>', circleDecrease)
-
-mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-# 依據特定階級數繪製Sierpinski三角形
-def sierpinski(order, p1, p2, p3):
-    if order == 0:      # 階級數為0
-        # 將3個點連接繪製成三角形
-        drawLine(p1, p2)
-        drawLine(p2, p3)
-        drawLine(p3, p1)
-    else:
-        # 取得三角形各邊長的中點
-        p12 = midpoint(p1, p2)
-        p23 = midpoint(p2, p3)
-        p31 = midpoint(p3, p1)
-        # 遞迴呼叫處理繪製三角形
-        sierpinski(order - 1, p1, p12, p31)
-        sierpinski(order - 1, p12, p2, p23)
-        sierpinski(order - 1, p31, p23, p3)   
-# 繪製p1和p2之間的線條
-def drawLine(p1,p2):
-    canvas.create_line(p1[0],p1[1],p2[0],p2[1],tags="myline")
-# 傳回2點的中間值
-def midpoint(p1, p2):
-    p = [0,0]                                   # 初值設定
-    p[0] = (p1[0] + p2[0]) / 2
-    p[1] = (p1[1] + p2[1]) / 2
-    return p
-# 顯示
-def show():
-    canvas.delete("myline")
-    p1 = [200, 20]
-    p2 = [20, 380]
-    p3 = [380,380]
-    sierpinski(order.get(), p1, p2, p3)
-    
-# main
-tk = Tk()
-canvas = Canvas(tk, width=400, height=400)      # 建立畫布
-canvas.pack()
-
-frame1 = Frame(tk)                              # 建立框架
-frame1.pack(padx=5, pady=5)
-# 在框架Frame內建立標籤Label, 輸入階乘數Entry, 按鈕Button
-Label(frame1, text="輸入階數 : ").pack(side=LEFT)
-order = IntVar()
-order.set(0)
-entry = Entry(frame1, textvariable=order).pack(side=LEFT,padx=3)
-Button(frame1, text="顯示Sierpinski三角形",
-       command=show).pack(side=LEFT)
-
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-tk = Tk()
-canvas= Canvas(tk, width=500, height=150)
-canvas.pack()
-id = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
-ballPos = canvas.coords(id)
-print(ballPos)
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-# 依據特定階級數繪製Sierpinski三角形
-def sierpinski(order, p1, p2, p3):
-    if order == 0:      # 階級數為0
-        # 將3個點連接繪製成三角形
-        drawLine(p1, p2)
-        drawLine(p2, p3)
-        drawLine(p3, p1)
-    else:
-        # 取得三角形各邊長的中點
-        p12 = midpoint(p1, p2)
-        p23 = midpoint(p2, p3)
-        p31 = midpoint(p3, p1)
-        # 遞迴呼叫處理繪製三角形
-        sierpinski(order - 1, p1, p12, p31)
-        sierpinski(order - 1, p12, p2, p23)
-        sierpinski(order - 1, p31, p23, p3)   
-# 繪製p1和p2之間的線條
-def drawLine(p1,p2):
-    canvas.create_line(p1[0],p1[1],p2[0],p2[1],tags="myline")
-# 傳回2點的中間值
-def midpoint(p1, p2):
-    p = [0,0]                                   # 初值設定
-    p[0] = (p1[0] + p2[0]) / 2
-    p[1] = (p1[1] + p2[1]) / 2
-    return p
-# 顯示
-def show():
-    canvas.delete("myline")
-    p1 = [200, 20]
-    p2 = [20, 380]
-    p3 = [380,380]
-    sierpinski(order.get(), p1, p2, p3)
-    
-# main
-tk = Tk()
-canvas = Canvas(tk, width=400, height=400)      # 建立畫布
-canvas.pack()
-
-frame = Frame(tk)                               # 建立框架
-frame.pack(padx=5, pady=5)
-# 在框架Frame內建立標籤Label, 輸入階乘數Entry, 按鈕Button
-Label(frame, text="輸入階數 : ").pack(side=LEFT)
-order = IntVar()
-order.set(0)
-entry = Entry(frame, textvariable=order).pack(side=LEFT,padx=3)
-Button(frame, text="顯示Sierpinski三角形",
-       command=show).pack(side=LEFT)
-
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-import math
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-x_center, y_center, r = 320, 240, 100
-x, y = [], []
-for i in range(12):         # 建立圓外圍12個點
-    x.append(x_center + r * math.cos(30*i*math.pi/180))
-    y.append(y_center + r * math.sin(30*i*math.pi/180))
-for i in range(12):         # 執行12個點彼此連線
-    for j in range(12):
-        canvas.create_line(x[i],y[i],x[j],y[j])
-
-print('------------------------------------------------------------')	#60個
-
-print("01-TkUI11Canvas")
-
-import tkinter as tk
-
-from PIL import ImageTk, Image
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-win = tk.Tk()
-
-c1 = tk.Canvas(win, 
-           width=1000, 
-           height=410)
-
-coord = 10, 10, 100, 100
-arc = c1.create_arc(coord, start=0, extent=350, fill="red")
-
-img =  ImageTk.PhotoImage(file = filename)
-
-#c1.create_image(300,100,image = img)
-c1.create_image(120+300//2, 10+400//2,image = img)
-
-c1.create_line(500,100,600,10, fill="red", width=3)
-
-c1.create_text(700,50, text="牡丹亭")
-
-c1.create_rectangle(800,50,900,100,fill="blue")
-
-def paint( event ):
-   python_green = "#476042"
-   x1, y1 = ( event.x - 1 ), ( event.y - 1 )
-   x2, y2 = ( event.x + 1 ), ( event.y + 1 )
-   c1.create_oval( x1, y1, x2, y2, fill = python_green )
-
-c1.bind( "<B1-Motion>", paint )
-
-c1.pack()
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-filename = 'C:/_git/vcs/_4.python/_data/lena_color.png'
-
-import tkinter as tk
-import tkinter.font as tkfont
-win = tk.Tk()
-win.geometry("400x300")
-win.title("圖形顯示")
-default_font = tkfont.nametofont('TkDefaultFont')
-default_font.configure(size=15)
-photo = tk.PhotoImage(file=filename)
-gs = tk.Canvas(win)
-gs.create_image(60,120,image=photo)
-gs.pack()
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
-import tkinter.font as tkfont
-win = tk.Tk()
-win.geometry("400x300")
-win.title("幾何圖形")
-default_font = tkfont.nametofont('TkDefaultFont')
-default_font.configure(size=15)
-photo = tk.PhotoImage(file=filename)
-gs = tk.Canvas(win,width=400,height=300)
-gs.pack()
-gs.create_rectangle(50,20,150,80)
-gs.create_rectangle(80,60,200,100,fill='#FF0000')
-gs.create_line(200,200,220,200)
-gs.create_line(200,160,320,160,fill='#FF0000')                     
-win.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

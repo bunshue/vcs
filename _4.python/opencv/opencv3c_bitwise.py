@@ -395,7 +395,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("將圖片顏色反轉 (負片效果) 原圖")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 img = cv2.imread(filename)
 
@@ -416,12 +416,12 @@ print("------------------------------------------------------------")  # 60個
 
 print("遮罩")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 img = cv2.imread(filename)
 H = img.shape[0]
 W = img.shape[1]
 mask = cv2.imread(r"images/mask.jpg", cv2.IMREAD_GRAYSCALE)
-#調整mask大小
+# 調整mask大小
 mask = cv2.resize(mask, (W, H))
 img_masked = cv2.bitwise_and(img, img, mask=mask)
 
@@ -442,51 +442,51 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
-filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 img1 = cv2.imread(filename1)
 img2 = cv2.imread(filename2)
 
 output = cv2.bitwise_and(img1, img2)  # 使用 bitwise_and
 
-cv2.imshow('image', output)
-cv2.waitKey(0)                        # 按下任意鍵停止
+cv2.imshow("image", output)
+cv2.waitKey(0)  # 按下任意鍵停止
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
-filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 img1 = cv2.imread(filename1)
 img2 = cv2.imread(filename2)
 
 output = cv2.bitwise_or(img1, img2)  # 使用 bitwise_or
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
-filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 img1 = cv2.imread(filename1)
 img2 = cv2.imread(filename2)
 
 output = cv2.bitwise_xor(img1, img2)  # 使用 bitwise_xor
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 img1 = cv2.imread(filename1)
 
 output = cv2.bitwise_not(img1)  # 使用 bitwise_not
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -545,18 +545,18 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_ai_49")
 
-lower = np.array([30,40,200])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
-upper = np.array([90,100,255]) # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
+lower = np.array([30, 40, 200])  # 轉換成 NumPy 陣列，範圍稍微變小 ( 55->30, 70->40, 252->200 )
+upper = np.array([90, 100, 255])  # 轉換成 NumPy 陣列，範圍稍微加大 ( 70->90, 80->100, 252->255 )
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 img = cv2.imread(filename)
 
-mask = cv2.inRange(img, lower, upper)             # 使用 inRange
-output = cv2.bitwise_and(img, img, mask = mask )  # 套用影像遮罩
-cv2.imwrite('tmp_output.jpg', output)
+mask = cv2.inRange(img, lower, upper)  # 使用 inRange
+output = cv2.bitwise_and(img, img, mask=mask)  # 套用影像遮罩
+cv2.imwrite("tmp_output.jpg", output)
 
-cv2.imshow('Image', output)
-cv2.waitKey(0)                                    # 按下任意鍵停止
+cv2.imshow("Image", output)
+cv2.waitKey(0)  # 按下任意鍵停止
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
@@ -626,11 +626,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -644,6 +640,3 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-
-

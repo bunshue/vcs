@@ -321,16 +321,16 @@ image = cv2.imread(filename)  # cv2讀取圖片, 自動轉成array
 rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # 轉換為RGB
 plt.subplot(121)
 plt.imshow(rgb)
-plt.title('cv影像轉RGB')
+plt.title("cv影像轉RGB")
 
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)  # 轉換為HSV
 plt.subplot(122)
 plt.imshow(hsv)
-plt.title('cv影像轉HSV')
+plt.title("cv影像轉HSV")
 
 plt.show()
 
-print('coordinate')
+print("coordinate")
 coordinate = rgb[131, 81]  # 輸入要取得顏色的指定座標
 print(coordinate)
 
@@ -339,10 +339,10 @@ print(coordinate)
 
 print("------------------------------------------------------------")  # 60個
 
-print('測試CV視窗 : 全螢幕顯示一圖')
+print("測試CV視窗 : 全螢幕顯示一圖")
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-filename = 'C:/_git/vcs/_4.python/_data/bear.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+filename = "C:/_git/vcs/_4.python/_data/bear.jpg"
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
@@ -357,48 +357,48 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print('測試CV視窗 : 設定視窗大小並依視窗縮放影像')
+print("測試CV視窗 : 設定視窗大小並依視窗縮放影像")
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-#filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+# filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
 
 window_name = window_name
-cv2.namedWindow(window_name,0);
-cv2.resizeWindow(window_name, 640, 480);
+cv2.namedWindow(window_name, 0)
+cv2.resizeWindow(window_name, 640, 480)
 
-#設定視窗位置
+# 設定視窗位置
 x_st, y_st = 300, 100
 cv2.moveWindow(window_name, x_st, y_st)
 
 # 顯示圖片
-cv2.imshow(window_name,image)
+cv2.imshow(window_name, image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-#設定視窗參數, 若不設定, 即是 圖片滿框、不可調整大小
-#預設 flags == WINDOW_AUTOSIZE | WINDOW_KEEPRATIO |WINDOW_GUI_EXPANDED
+# 設定視窗參數, 若不設定, 即是 圖片滿框、不可調整大小
+# 預設 flags == WINDOW_AUTOSIZE | WINDOW_KEEPRATIO |WINDOW_GUI_EXPANDED
 
-#可調整大小
-#cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+# 可調整大小
+# cv2.namedWindow('image', cv2.WINDOW_NORMAL)
 
-#WINDOW_FREERATIO 不 保持比例
-#WINDOW_KEEPRATIO    保持比例
+# WINDOW_FREERATIO 不 保持比例
+# WINDOW_KEEPRATIO    保持比例
 
-#可調整大小 並 保持比例
-#cv2.namedWindow('image', cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
+# 可調整大小 並 保持比例
+# cv2.namedWindow('image', cv2.WINDOW_NORMAL | cv2.WINDOW_KEEPRATIO)
 
 print("------------------------------------------------------------")  # 60個
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
 b, g, r = cv2.split(image)
-#print(b)
-#print(g)
-#print(r)
+# print(b)
+# print(g)
+# print(r)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -409,14 +409,14 @@ image_r = cv2.imread(filename)
 image_g = cv2.imread(filename)
 image_b = cv2.imread(filename)
 
-image_r[:,:,0] = 0     # 將藍色設為 0
-image_r[:,:,1] = 0     # 將綠色設為 0
+image_r[:, :, 0] = 0  # 將藍色設為 0
+image_r[:, :, 1] = 0  # 將綠色設為 0
 
-image_g[:,:,0] = 0   # 將藍色設為 0
-image_g[:,:,2] = 0   # 將紅色設為 0
+image_g[:, :, 0] = 0  # 將藍色設為 0
+image_g[:, :, 2] = 0  # 將紅色設為 0
 
-image_b[:,:,1] = 0    # 將綠色設為 0
-image_b[:,:,2] = 0    # 將紅色設為 0
+image_b[:, :, 1] = 0  # 將綠色設為 0
+image_b[:, :, 2] = 0  # 將紅色設為 0
 
 plt.subplot(131)
 plt.imshow(cv2.cvtColor(image_r, cv2.COLOR_BGR2RGB))
@@ -437,7 +437,7 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.p
 image = cv2.imread(filename)
 
 print("原圖 彩色 轉 灰階1通道")
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # cv2影像 轉 灰階
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # cv2影像 轉 灰階
 
 print("灰階 轉 BGR3通道")
 rgb = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
@@ -702,13 +702,13 @@ plt.show()
 
 print("------------------------------")  # 30個
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 # 檔案 => cv2影像
 image = cv2.imread(filename)
 
 x_st, y_st, w, h = 200, 50, 150, 200
-image_cut = image[y_st : y_st+h, x_st : x_st+w]
+image_cut = image[y_st : y_st + h, x_st : x_st + w]
 print(image_cut.shape)
 
 plt.imshow(cv2.cvtColor(image_cut, cv2.COLOR_BGR2RGB))
@@ -719,7 +719,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("圖片翻轉 原圖")
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 # 檔案 => cv2影像
 image = cv2.imread(filename)
 
@@ -739,14 +739,10 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-

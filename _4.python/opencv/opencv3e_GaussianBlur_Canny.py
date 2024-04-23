@@ -30,7 +30,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp'
+filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
 '''
 #原圖
 image = cv2.imread(filename, 0)
@@ -386,43 +386,47 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY);
-output1 = cv2.adaptiveThreshold(img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
-img_gray2 = cv2.medianBlur(img_gray, 5)   # 模糊化
-output2 = cv2.adaptiveThreshold(img_gray2, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+output1 = cv2.adaptiveThreshold(
+    img_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
+img_gray2 = cv2.medianBlur(img_gray, 5)  # 模糊化
+output2 = cv2.adaptiveThreshold(
+    img_gray2, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
 
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
+cv2.imshow("image1", output1)
+cv2.imshow("image2", output2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-output1 = cv2.blur(img, (5, 5))     # 指定區域單位為 (5, 5)
-output2 = cv2.blur(img, (25, 25))   # 指定區域單位為 (25, 25)
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
-cv2.waitKey(0)                      # 按下任意鍵停止
+output1 = cv2.blur(img, (5, 5))  # 指定區域單位為 (5, 5)
+output2 = cv2.blur(img, (25, 25))  # 指定區域單位為 (25, 25)
+cv2.imshow("image1", output1)
+cv2.imshow("image2", output2)
+cv2.waitKey(0)  # 按下任意鍵停止
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-output1 = cv2.GaussianBlur(img, (5, 5), 0)   # 指定區域單位為 (5, 5)
-output2 = cv2.GaussianBlur(img, (25, 25), 0) # 指定區域單位為 (25, 25)
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
+output1 = cv2.GaussianBlur(img, (5, 5), 0)  # 指定區域單位為 (5, 5)
+output2 = cv2.GaussianBlur(img, (25, 25), 0)  # 指定區域單位為 (25, 25)
+cv2.imshow("image1", output1)
+cv2.imshow("image2", output2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
 img = cv2.imread(filename)
-output1 = cv2.medianBlur(img, 5)   # 模糊程度為 5
+output1 = cv2.medianBlur(img, 5)  # 模糊程度為 5
 output2 = cv2.medianBlur(img, 25)  # 模糊程度為 25
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
+cv2.imshow("image1", output1)
+cv2.imshow("image2", output2)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -430,6 +434,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-

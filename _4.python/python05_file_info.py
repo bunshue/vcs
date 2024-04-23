@@ -1,7 +1,23 @@
-# 用 os.stat 讀出一個檔案的所有資訊
+"""
+各種 python 檔案格式相關資料
+
+
+一般檔案資訊
+PIL 圖片
+openCV 圖片
+openCV 影片
+openCV WebCam
+
+"""
+
 
 import os
 import sys
+import math
+import random
+
+# 用 os.stat 讀出一個檔案的所有資訊
+
 import stat
 import time
 
@@ -98,127 +114,6 @@ print('ctime :', ctime)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-print(filename)
-
-st = os.stat(filename)
-
-print(st)
-
-print('os.stat_result(', end = '')
-print('st_mode =', st.st_mode, end = ', ')
-print('st_ino =', st.st_ino, end = ', ')
-print('st_dev =', st.st_dev, end = ', ')
-print('st_nlink =', st.st_nlink, end = ', ')
-print('st_uid =', st.st_uid, end = ', ')
-print('st_gid =', st.st_gid, end = ', ')
-print('st_size =', st.st_size, end = ', ')
-print('st_atime =', st.st_atime, end = ', ')
-print('st_mtime =', st.st_mtime, end = ', ')
-print('st_ctime =', st.st_ctime, end = ')')    #使用檔案時間
-
-print('\n使用檔案時間')
-ttt = time.strftime('%Y:%m:%d', time.localtime(os.stat(filename).st_ctime))
-print(ttt)
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
-
-"""
-ST_SIZE: 普通文件以字節為單位的大小；包含等待某些特殊文件的數據。
-ST_ATIME: 上次訪問的時間。
-ST_MTIME: 最後一次修改的時間。
-ST_CTIME: 由操作系統報告的"ctime"。在某些系統上（如Unix）是最新的元數據更改的時間，在其它系統上（如Windows）是創建時間（詳細信息參見平臺的文檔）。
-"""
-
-st = os.stat(filename)
-#print(st)
-
-filesize = st[stat.ST_SIZE]
-create_time = st[stat.ST_CTIME]
-modify_time = st[stat.ST_MTIME]
-access_time = st[stat.ST_ATIME]
-
-"""
-print('檔案建立時間\t', create_time)
-print('最後修改時間\t', modify_time)
-print('最後存取時間\t', access_time)
-"""
-
-print('檔案大小:\t', filesize, ' 拜')
-print('檔案大小:\t', ByteConversionTBGBMBKB(filesize))
-print("建立日期:\t", time.ctime(create_time))
-print("修改時間:\t", time.ctime(modify_time))
-print("存取時間:\t", time.ctime(access_time))
-
-"""
-filesize = os.path.getsize(filename)
-print("檔案大小\t" + str(filesize) + " 拜")
-print("建立日期:\t", os.path.getmtime(filename))
-print("建立日期:\t", time.ctime(os.path.getmtime(filename)))
-"""
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filesize = os.stat(filename).st_size
-
-print('檔案大小:\t', filesize, ' 拜')
-print('檔案大小:\t', ByteConversionTBGBMBKB(filesize))
-
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-import stat
-
-st = os.stat(filename)
-
-print(st)
-
-print('ST_MTIME :', st[stat.ST_MTIME])
-print('ST_CTIME :', st[stat.ST_CTIME])
-
-print('------------------------------------------------------------')	#60個
-
-"""
-stat 結構:
-
-st_mode: inode 保護模式
-st_ino: inode 節點號。
-st_dev: inode 駐留的設備。
-st_nlink: inode 的鏈接數。
-st_uid: 所有者的用戶ID。
-st_gid: 所有者的組ID。
-st_size: 普通文件以字節為單位的大小；包含等待某些特殊文件的數據。
-st_atime: 上次訪問的時間。
-st_mtime: 最后一次修改的時間。
-st_ctime: 由操作系統報告的"ctime"。在某些系統上（如Unix）是最新的元數據更改的時間，在其它系統上（如Windows）是創建時間（詳細信息參見平臺的文檔）。
-"""
-
-
-print('stat 結構:')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-st = os.stat(filename)
-print(st)
-
-print('inode 保護模式\t', st[stat.ST_MODE])
-print('inode 節點號\t', st[stat.ST_INO])
-print('inode 駐留的設備\t', st[stat.ST_DEV])
-print('inode 的鏈接數\t', st[stat.ST_NLINK])
-print('所有者的用戶ID\t', st[stat.ST_UID])
-print('所有者的組ID\t', st[stat.ST_GID])
-print('檔案大小\t', st[stat.ST_SIZE])
-print('最後存取時間\t', st[stat.ST_ATIME])
-print('最後修改時間\t', st[stat.ST_MTIME])
-print('檔案建立時間\t', st[stat.ST_CTIME])
-
-print('------------------------------------------------------------')	#60個
-
 """
 st_atime: 上次訪問的時間。
 st_mtime: 最後一次修改的時間。
@@ -245,25 +140,6 @@ except OSError:
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-mtime = None
-atime = None
-
-# First copy the file's mode to the temp file
-
-st = os.stat(filename)
-mtime = st.st_mtime
-atime = st.st_atime
-print(type(mtime))
-print(mtime)
-print(type(atime))
-print(atime)
-print(st[stat.ST_MODE])
-print(st[stat.ST_MODE] & 0o7777)
-
-print('------------------------------------------------------------')	#60個
-
 """    
 try:
     os.rename(filename, filename + '~')
@@ -284,16 +160,6 @@ st = os.stat(filename) # Get the mode
 mode = stat.S_IMODE(st[stat.ST_MODE])
 print(st)
 print(mode)
-
-print('------------------------------------------------------------')	#60個
-
-mode = os.stat(filename).st_mode
-print(mode)
-print(stat.S_IWOTH)
-print(mode & stat.S_IWOTH)
-print(mode)
-print(stat.S_IWGRP)
-print(mode & stat.S_IWGRP)
 
 print('------------------------------------------------------------')	#60個
 
@@ -338,8 +204,8 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-st = os.stat(filename)
-mtime = time.ctime(st.st_mtime)
+cc = os.stat(filename)
+mtime = time.ctime(cc.st_mtime)
 print(mtime)
 
 mtime = int(os.stat(filename).st_mtime)
@@ -348,19 +214,19 @@ print(mtime)
 st = os.stat(filename)
 print(st)
 
-lst = os.lstat(filename)
+lst = os.stat(filename)
 print(lst)
 
 # 获取元组
-lst = os.lstat(filename)
+cc = os.stat(filename)
 
-print('文件信息 :', lst)
+print('文件信息 :', cc)
 
 # 获取文件 uid
-print('文件 UID  : %d' % lst.st_uid)
+print('文件 UID  : %d' % cc.st_uid)
 
 # 获取文件 gid
-print('文件 GID : %d' % lst.st_gid)
+print('文件 GID : %d' % cc.st_gid)
 
 print('------------------------------------------------------------')	#60個
 
@@ -407,10 +273,6 @@ print('------------------------------------------------------------')	#60個
             f.close()
         else:
             err(client, "404", "Not Found")      
-
-
-------------------------------------
-
 
 ------------------------------------
 
@@ -485,20 +347,197 @@ print(string)
     with open(tofile) as tf:
         tolines = tf.readlines()
 
+"""
+
+print("os.stat 和 os.lstat 一樣")
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+print('使用os.stat')
+cc = os.stat(filename)
+
+print(type(cc))
+print(cc)
+
+print('使用macro')
+atime = cc[stat.ST_ATIME]
+mtime = cc[stat.ST_MTIME]
+ctime = cc[stat.ST_CTIME]
+size = cc[stat.ST_SIZE]
+
+print('ST_ATIME :', cc[stat.ST_ATIME])
+print('ST_MTIME :', cc[stat.ST_MTIME])
+print('ST_CTIME :', cc[stat.ST_CTIME])
+print("檔案大小 :", size, "拜")
+
+print('使用結構內的項目')
+size = cc.st_size
+print("檔案大小 :", size, "拜")
+print("mode  :", cc.st_mode)
+print("ino   :", cc.st_ino)
+print("dev   :", cc.st_dev)
+print("nlink :", cc.st_nlink)
+print("uid   :", cc.st_uid)
+print("gid   :", cc.st_gid)
+print("size  :", cc.st_size)
+print("atime :", cc.st_atime)
+print("mtime :", cc.st_mtime)
+print("ctime :", cc.st_ctime) #使用檔案時間
+
+print('inode 保護模式\t', cc[stat.ST_MODE])
+print('inode 節點號\t', cc[stat.ST_INO])
+print('inode 駐留的設備\t', cc[stat.ST_DEV])
+print('inode 的鏈接數\t', cc[stat.ST_NLINK])
+print('所有者的用戶ID\t', cc[stat.ST_UID])
+print('所有者的組ID\t', cc[stat.ST_GID])
+print('檔案大小\t', cc[stat.ST_SIZE])
+print('最後存取時間\t', cc[stat.ST_ATIME])
+print('最後修改時間\t', cc[stat.ST_MTIME])
+print('檔案建立時間\t', cc[stat.ST_CTIME])
+
+
+print('\n使用檔案時間')
+ttt = time.strftime('%Y:%m:%d', time.localtime(os.stat(filename).st_ctime))
+print(ttt)
+
+filesize = os.stat(filename).st_size
+
+print('檔案大小:\t', filesize, ' 拜')
+print('檔案大小:\t', ByteConversionTBGBMBKB(filesize))
+
+print('------------------------------------------------------------')	#60個
+
+print('mode')
+
+#st_mode用以判斷是不是檔案/資料夾/...
+mode = os.stat(filename).st_mode
+print(mode)
+print(stat.S_IWOTH)
+print(mode & stat.S_IWOTH)
+print(mode)
+print(stat.S_IWGRP)
+print(mode & stat.S_IWGRP)
+
+print('------------------------------------------------------------')	#60個
 
 
 
-------------------------------------
-
-
-
-
-
-
-
-
-
+print('------------------------------------------------------------')	#60個
 
 
 
 """
+stat 結構:
+
+st_mode: inode 保護模式
+st_ino: inode 節點號。
+st_dev: inode 駐留的設備。
+st_nlink: inode 的鏈接數。
+st_uid: 所有者的用戶ID。
+st_gid: 所有者的組ID。
+st_size: 普通文件以字節為單位的大小；包含等待某些特殊文件的數據。
+st_atime: 上次訪問的時間。
+st_mtime: 最后一次修改的時間。
+st_ctime: 由操作系統報告的"ctime"。在某些系統上（如Unix）是最新的元數據更改的時間，在其它系統上（如Windows）是創建時間（詳細信息參見平臺的文檔）。
+"""
+
+
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
+"""
+ST_SIZE: 普通文件以字節為單位的大小；包含等待某些特殊文件的數據。
+ST_ATIME: 上次訪問的時間。
+ST_MTIME: 最後一次修改的時間。
+ST_CTIME: 由操作系統報告的"ctime"。在某些系統上（如Unix）是最新的元數據更改的時間，在其它系統上（如Windows）是創建時間（詳細信息參見平臺的文檔）。
+"""
+
+st = os.stat(filename)
+#print(st)
+
+filesize = st[stat.ST_SIZE]
+create_time = st[stat.ST_CTIME]
+modify_time = st[stat.ST_MTIME]
+access_time = st[stat.ST_ATIME]
+
+"""
+print('檔案建立時間\t', create_time)
+print('最後修改時間\t', modify_time)
+print('最後存取時間\t', access_time)
+"""
+
+print('檔案大小:\t', filesize, ' 拜')
+print('檔案大小:\t', ByteConversionTBGBMBKB(filesize))
+print("建立日期:\t", time.ctime(create_time))
+print("修改時間:\t", time.ctime(modify_time))
+print("存取時間:\t", time.ctime(access_time))
+
+"""
+filesize = os.path.getsize(filename)
+print("檔案大小\t" + str(filesize) + " 拜")
+print("建立日期:\t", os.path.getmtime(filename))
+print("建立日期:\t", time.ctime(os.path.getmtime(filename)))
+"""
+
+print('------------------------------------------------------------')	#60個
+
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+mtime = None
+atime = None
+
+# First copy the file's mode to the temp file
+
+cc = os.stat(filename)
+mtime = cc.st_mtime
+atime = cc.st_atime
+print(type(mtime))
+print(mtime)
+print(type(atime))
+print(atime)
+print(st[stat.ST_MODE])
+print(st[stat.ST_MODE] & 0o7777)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("opencv 圖片")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+

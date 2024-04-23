@@ -27,7 +27,7 @@ import datetime
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test/_good1/_good4/_good5"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print(
@@ -911,7 +911,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
+'''
 
 """ os 其他 不是 list file 的
 
@@ -943,6 +943,7 @@ os.rmdir(directory+"/tmp_doc")
 """
 
 print(os.path.exists("myprime.py"))
+
 
 """
 for item in items:
@@ -980,46 +981,28 @@ print("os.path.split:", os.path.split(fullpath))
 print("os.path.splitdrive:", os.path.splitdrive(fullpath))
 print("os.path.splitext:", os.path.splitext(fullpath))
 
-print("-------")
-print(os.curdir)
-print("-------")
-print(os.pardir)
-print("-------")
 
-print("------------------------------------------------------------")  # 60個
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+head, ext = os.path.splitext(filename)
+print("前檔名 :", head)
+print("副檔名 :", ext)
+head, base = os.path.split(filename)
+print("長資料夾名 :", head)
+print("短檔名 :", base)
 
-for envname in "TMPDIR", "TEMP", "TMP":
-    dirname = os.getenv(envname)
-    print("cccccc", dirname)
-    # print(dirname)
 
-print("------------------------------------------------------------")  # 60個
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-fname = os.path.realpath("ch11-2-2.py")
+fname = os.path.realpath(filename)
 print(fname)
 r = os.path.split(fname)
 print("os.path.split() =", r)
 r = os.path.splitext(fname)
 print("os.path.splitext() =", r)
 
-print("------------------------------------------------------------")  # 60個
 
-fname = os.path.realpath("ch11-2-2.py")
-print(fname)
-p = os.path.dirname(fname)
-print("p = os.path.dirname() =", p)
-f = os.path.basename(fname)
-print("f = os.path.basename() =", f)
 
-print("------------------------------------------------------------")  # 60個
 
-p = "D:\PythonChatGPT\ch11"
-f = "ch11-2-2.py"
-print(p, f)
-r = os.path.join(p, f)
-print("os.path.join(p,f) =", r)
-
-print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
@@ -1039,6 +1022,17 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
+fname = os.path.realpath(filename)
+print("長檔名 :", fname)
+p = os.path.dirname(fname)
+print("長資料夾名 :", p)
+f = os.path.basename(fname)
+print("短檔名 : ", f)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
 canonic = os.path.abspath(filename)
 print("長檔名 :", canonic, "\t大寫磁碟機名")
 
@@ -1048,13 +1042,28 @@ print("長檔名 :", canonic, "\t小寫磁碟機名")
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-head, ext = os.path.splitext(filename)
-print("前檔名 :", head)
-print("副檔名 :", ext)
-head, base = os.path.split(filename)
-print("長資料夾名 :", head)
-print("短檔名 :", base)
+print("-------")
+print(os.curdir)
+print("-------")
+print(os.pardir)
+print("-------")
+
+print("------------------------------------------------------------")  # 60個
+
+for envname in "TMPDIR", "TEMP", "TMP":
+    dirname = os.getenv(envname)
+    print("cccccc", dirname)
+    # print(dirname)
+
+print("------------------------------------------------------------")  # 60個
+
+foldername = 'C:/_git/vcs/_1.data/______test_files1'
+filename = 'picture1.jpg'
+
+print(foldername)
+print(filename)
+r = os.path.join(foldername, filename)
+print("os.path.join(foldername, filename) =", r)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1072,15 +1081,4 @@ ccc = getuser()
 print(ccc)
 
 print("------------------------------------------------------------")  # 60個
-
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-st = os.lstat(filename)
-
-anytime = st[stat.ST_MTIME]
-size = st[stat.ST_SIZE]
-print("檔案大小 :", size, "拜")
-
-print("------------------------------------------------------------")  # 60個
-
 

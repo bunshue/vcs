@@ -10,7 +10,7 @@ import numpy as np
 
 W = 640
 H = 480
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 01")
 
@@ -136,91 +136,94 @@ while True:
         cv2.imshow('ImageShow', draw)
 
 cv2.destroyAllWindows()
-'''
+"""
 print("------------------------------------------------------------")  # 60個
 
 print("cv2.setMouseCallback 04 測試所有按鍵")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
-#創建回調函數
-def OnMouseAction(event,x,y,flags,param):
-    
+
+# 創建回調函數
+def OnMouseAction(event, x, y, flags, param):
     # event == cv2.EVENT_MOUSEMOVE:
     # print("滑鼠移動")
-    
+
     if event == cv2.EVENT_LBUTTONDOWN:
-        color = image[y,x]
-        print("左鍵點擊, 座標", x, y, '顏色', color)
-    elif event==cv2.EVENT_RBUTTONDOWN :
+        color = image[y, x]
+        print("左鍵點擊, 座標", x, y, "顏色", color)
+    elif event == cv2.EVENT_RBUTTONDOWN:
         print("右鍵點擊")
-    elif event==cv2.EVENT_MBUTTONDOWN:
+    elif event == cv2.EVENT_MBUTTONDOWN:
         print("中鍵點擊")
-    elif event==cv2.EVENT_LBUTTONUP:
+    elif event == cv2.EVENT_LBUTTONUP:
         print("左鍵放開")
-    elif event==cv2.EVENT_RBUTTONUP:
+    elif event == cv2.EVENT_RBUTTONUP:
         print("右鍵放開")
-    elif event==cv2.EVENT_MBUTTONUP:
+    elif event == cv2.EVENT_MBUTTONUP:
         print("中鍵放開")
-    elif event==cv2.EVENT_LBUTTONDBLCLK:
+    elif event == cv2.EVENT_LBUTTONDBLCLK:
         print("左鍵雙擊")
-    elif event==cv2.EVENT_RBUTTONDBLCLK:
+    elif event == cv2.EVENT_RBUTTONDBLCLK:
         print("右鍵雙擊")
-    elif event==cv2.EVENT_MBUTTONDBLCLK:
+    elif event == cv2.EVENT_MBUTTONDBLCLK:
         print("中鍵雙擊")
-    elif flags==cv2.EVENT_FLAG_LBUTTON:
+    elif flags == cv2.EVENT_FLAG_LBUTTON:
         print("左鍵拖曳")
-    elif flags==cv2.EVENT_FLAG_RBUTTON:
+    elif flags == cv2.EVENT_FLAG_RBUTTON:
         print("右鍵拖曳")
-    elif flags==cv2.EVENT_FLAG_MBUTTON:
+    elif flags == cv2.EVENT_FLAG_MBUTTON:
         print("中鍵拖曳")
-    elif flags==cv2.EVENT_FLAG_CTRLKEY:
+    elif flags == cv2.EVENT_FLAG_CTRLKEY:
         print("(8~15)按Ctrl不放事件")
-    elif flags==cv2.EVENT_FLAG_SHIFTKEY:
+    elif flags == cv2.EVENT_FLAG_SHIFTKEY:
         print("(16~31)按Shift不放事件")
-    elif flags==cv2.EVENT_FLAG_ALTKEY:
+    elif flags == cv2.EVENT_FLAG_ALTKEY:
         print("(32~39)按Alt不放事件")
     elif event == cv2.EVENT_MOUSEWHEEL:
-        print('滑鼠滾輪滾動')
+        print("滑鼠滾輪滾動")
         if flags > 0:
-            print('向上滾動')
+            print("向上滾動")
         else:
-            print('向下滾動')
-    elif event == cv2.EVENT_MOUSEHWHEEL:    # 一般用不到，因為一般鼠標沒有這個滾輪，有的鼠標有這個滾輪
-        print('滾輪左右滾動')
+            print("向下滾動")
+    elif event == cv2.EVENT_MOUSEHWHEEL:  # 一般用不到，因為一般鼠標沒有這個滾輪，有的鼠標有這個滾輪
+        print("滾輪左右滾動")
         if flags > 0:
-            print('向左滾動')
+            print("向左滾動")
         else:
-            print('向右滾動')
+            print("向右滾動")
 
-cv2.imshow('TestMouseEvent', image)
-cv2.setMouseCallback('TestMouseEvent', OnMouseAction)
+
+cv2.imshow("TestMouseEvent", image)
+cv2.setMouseCallback("TestMouseEvent", OnMouseAction)
 
 while True:
-    k = cv2.waitKey(1) & 0xFF # 每 1 毫秒偵測一次鍵盤事件
+    k = cv2.waitKey(1) & 0xFF  # 每 1 毫秒偵測一次鍵盤事件
     if k == 27:
         break
-    if k == ord('r'):
-        print('你按了', k)
+    if k == ord("r"):
+        print("你按了", k)
 
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 05 測試滑鼠移動")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
-# 印出相關參數的數值，param 可透過 setMouseCallback 第三個參數傳遞給函式
-def show_xy(event,x,y,flags,param):
-    if event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
-        image2 = image.copy()                         # 當滑鼠移動時，複製原本的圖片
-        cv2.circle(image2, (x,y), 10, (0,0,0), 1)   # 繪製黑色空心圓
-        cv2.imshow('ImageShow', image2)            # 顯示繪製後的影像
 
-cv2.imshow('ImageShow', image)
-cv2.setMouseCallback('ImageShow', show_xy)
+# 印出相關參數的數值，param 可透過 setMouseCallback 第三個參數傳遞給函式
+def show_xy(event, x, y, flags, param):
+    if event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
+        image2 = image.copy()  # 當滑鼠移動時，複製原本的圖片
+        cv2.circle(image2, (x, y), 10, (0, 0, 0), 1)  # 繪製黑色空心圓
+        cv2.imshow("ImageShow", image2)  # 顯示繪製後的影像
+
+
+cv2.imshow("ImageShow", image)
+cv2.setMouseCallback("ImageShow", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -228,25 +231,28 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 06")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
-dots = []   # 記錄座標的空串列
-def show_xy(event,x,y,flags,param):
-    if event == cv2.EVENT_LBUTTONDOWN: #  滑鼠左鍵
-        dots.append([x, y])                          # 記錄座標
-        cv2.circle(image, (x, y), 10, (0,0,255), -1)   # 在點擊的位置，繪製圓形
-        num = len(dots)                              # 目前有幾個座標
-        if num > 1:                                  # 如果有兩個點以上
-            x1 = dots[num-2][0]
-            y1 = dots[num-2][1]
-            x2 = dots[num-1][0]
-            y2 = dots[num-1][1]
-            cv2.line(image,(x1,y1),(x2,y2),(0,0,255),2)  # 取得最後的兩個座標，繪製直線
-        cv2.imshow('ImageShow', image)
+dots = []  # 記錄座標的空串列
 
-cv2.imshow('ImageShow', image)
-cv2.setMouseCallback('ImageShow', show_xy)
+
+def show_xy(event, x, y, flags, param):
+    if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
+        dots.append([x, y])  # 記錄座標
+        cv2.circle(image, (x, y), 10, (0, 0, 255), -1)  # 在點擊的位置，繪製圓形
+        num = len(dots)  # 目前有幾個座標
+        if num > 1:  # 如果有兩個點以上
+            x1 = dots[num - 2][0]
+            y1 = dots[num - 2][1]
+            x2 = dots[num - 1][0]
+            y2 = dots[num - 1][1]
+            cv2.line(image, (x1, y1), (x2, y2), (0, 0, 255), 2)  # 取得最後的兩個座標，繪製直線
+        cv2.imshow("ImageShow", image)
+
+
+cv2.imshow("ImageShow", image)
+cv2.setMouseCallback("ImageShow", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -254,29 +260,33 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 07 滑鼠圈選圖片")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
-dot1 = []                          # 記錄第一個座標
-dot2 = []                          # 記錄第二個座標
+dot1 = []  # 記錄第一個座標
+dot2 = []  # 記錄第二個座標
+
 
 # 滑鼠事件發生時要執行的函式
-def show_xy(event,x,y,flags,param):
-    global dot1, dot2, image         # 在函式內使用全域變數
+def show_xy(event, x, y, flags, param):
+    global dot1, dot2, image  # 在函式內使用全域變數
     # 滑鼠拖曳發生時
     if flags == 1:
-        if event == cv2.EVENT_LBUTTONDOWN: #  滑鼠左鍵
-            dot1 = [x, y]          # 按下滑鼠時記錄第一個座標
+        if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
+            dot1 = [x, y]  # 按下滑鼠時記錄第一個座標
         if event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
-            image2 = image.copy()      # 拖曳時不斷複製 image
-            dot2 = [x, y]          # 拖曳時不斷更新第二個座標
+            image2 = image.copy()  # 拖曳時不斷複製 image
+            dot2 = [x, y]  # 拖曳時不斷更新第二個座標
             # 根據兩個座標繪製四邊形
-            cv2.rectangle(image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
+            cv2.rectangle(
+                image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0, 0, 255), 2
+            )
             # 不斷顯示新圖片 ( 如果不這麼做，會出現一堆四邊形殘影 )
-            cv2.imshow('ImageShow', image2)
+            cv2.imshow("ImageShow", image2)
 
-cv2.imshow('ImageShow', image)
-cv2.setMouseCallback('ImageShow', show_xy)
+
+cv2.imshow("ImageShow", image)
+cv2.setMouseCallback("ImageShow", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -284,26 +294,31 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 08 滑鼠圈選圖片")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
 dot1 = []
 dot2 = []
-def show_xy(event,x,y,flags,param):
-    global dot1, dot2, image, image2    # 因為要讓 image = image2，所以也要宣告 image2 為全域變數
+
+
+def show_xy(event, x, y, flags, param):
+    global dot1, dot2, image, image2  # 因為要讓 image = image2，所以也要宣告 image2 為全域變數
     if flags == 1:
-        if event == cv2.EVENT_LBUTTONDOWN: #  滑鼠左鍵
+        if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
             dot1 = [x, y]
         if event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
             image2 = image.copy()
             dot2 = [x, y]
-            cv2.rectangle(image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            cv2.imshow('ImageShow', image2)
+            cv2.rectangle(
+                image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0, 0, 255), 2
+            )
+            cv2.imshow("ImageShow", image2)
         if event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
-            image = image2   # 滑鼠放開時 ( event == cv2.EVENT_LBUTTONUP )，將 image 更新為 image2
+            image = image2  # 滑鼠放開時 ( event == cv2.EVENT_LBUTTONUP )，將 image 更新為 image2
 
-cv2.imshow('ImageShow', image)
-cv2.setMouseCallback('ImageShow', show_xy)
+
+cv2.imshow("ImageShow", image)
+cv2.setMouseCallback("ImageShow", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -311,33 +326,44 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 09 滑鼠圈選圖片")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
 dot1 = []
 dot2 = []
-def show_xy(event,x,y,flags,param):
+
+
+def show_xy(event, x, y, flags, param):
     global dot1, dot2, image, image2
     if flags == 1:
-        if event == cv2.EVENT_LBUTTONDOWN: #  滑鼠左鍵
+        if event == cv2.EVENT_LBUTTONDOWN:  #  滑鼠左鍵
             dot1 = [x, y]
         if event == cv2.EVENT_MOUSEMOVE:  # 滑鼠移動
             image2 = image.copy()
             dot2 = [x, y]
-            cv2.rectangle(image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0,0,255), 2)
-            cv2.imshow('ImageShow', image2)
+            cv2.rectangle(
+                image2, (dot1[0], dot1[1]), (dot2[0], dot2[1]), (0, 0, 255), 2
+            )
+            cv2.imshow("ImageShow", image2)
         if event == cv2.EVENT_LBUTTONUP:  # 左鍵放開
-            level = 8                                         # 縮小比例 ( 可當作馬賽克的等級 )
-            h = int((dot2[0] - dot1[0]) / level)              # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
-            w = int((dot2[1] - dot1[1]) / level)              # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
-            mosaic = image[dot1[1]:dot2[1], dot1[0]:dot2[0]]    # 取得馬賽克區域
-            mosaic = cv2.resize(mosaic, (w, h), interpolation=cv2.INTER_LINEAR)   # 根據縮小尺寸縮小
-            mosaic = cv2.resize(mosaic, (dot2[0] - dot1[0], dot2[1] - dot1[1]), interpolation=cv2.INTER_NEAREST) # 放大到原本的大小
-            image[dot1[1]:dot2[1], dot1[0]:dot2[0]] = mosaic   # 置換成馬賽克的影像
-            cv2.imshow('ImageShow', image)
+            level = 8  # 縮小比例 ( 可當作馬賽克的等級 )
+            h = int((dot2[0] - dot1[0]) / level)  # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
+            w = int((dot2[1] - dot1[1]) / level)  # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
+            mosaic = image[dot1[1] : dot2[1], dot1[0] : dot2[0]]  # 取得馬賽克區域
+            mosaic = cv2.resize(
+                mosaic, (w, h), interpolation=cv2.INTER_LINEAR
+            )  # 根據縮小尺寸縮小
+            mosaic = cv2.resize(
+                mosaic,
+                (dot2[0] - dot1[0], dot2[1] - dot1[1]),
+                interpolation=cv2.INTER_NEAREST,
+            )  # 放大到原本的大小
+            image[dot1[1] : dot2[1], dot1[0] : dot2[0]] = mosaic  # 置換成馬賽克的影像
+            cv2.imshow("ImageShow", image)
 
-cv2.imshow('ImageShow', image)
-cv2.setMouseCallback('ImageShow', show_xy)
+
+cv2.imshow("ImageShow", image)
+cv2.setMouseCallback("ImageShow", show_xy)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -459,35 +485,37 @@ print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 13")
 
 mode = 0
-#创建回调函数
-def OnMouseAction(event,x,y,flags,param):
+
+
+# 创建回调函数
+def OnMouseAction(event, x, y, flags, param):
     global x1, y1
-    
+
     if mode == 0 and event == cv2.EVENT_LBUTTONDOWN:
         print("左键点击")
-        cv2.line(img,(0,0),(x,y),(255,255,0),2)
-        
+        cv2.line(img, (0, 0), (x, y), (255, 255, 0), 2)
+
     if mode == 1 and event == cv2.EVENT_LBUTTONDOWN:
         print("左键点击1")
         x1, y1 = x, y
-    elif mode == 1 and event==cv2.EVENT_MOUSEMOVE and flags ==cv2.EVENT_FLAG_LBUTTON:
+    elif mode == 1 and event == cv2.EVENT_MOUSEMOVE and flags == cv2.EVENT_FLAG_LBUTTON:
         print("左鍵拖曳1")
-        cv2.rectangle(img,(x1,y1),(x,y),(0,255,0),-1)
-            
+        cv2.rectangle(img, (x1, y1), (x, y), (0, 255, 0), -1)
 
-#下面把回调函数与OpenCV窗口绑定在一起
 
-img = np.zeros((500,500,3),np.uint8)
-cv2.namedWindow('image')
-cv2.setMouseCallback('image',OnMouseAction)
-while(1):
-    cv2.imshow('image',img)
-    k=cv2.waitKey(1)
-    if k==ord('l'):
+# 下面把回调函数与OpenCV窗口绑定在一起
+
+img = np.zeros((500, 500, 3), np.uint8)
+cv2.namedWindow("image")
+cv2.setMouseCallback("image", OnMouseAction)
+while 1:
+    cv2.imshow("image", img)
+    k = cv2.waitKey(1)
+    if k == ord("l"):
         mode = 0
-    elif k==ord('t'):
+    elif k == ord("t"):
         mode = 1
-    elif k==ord('q'):
+    elif k == ord("q"):
         break
 cv2.destroyAllWindows()
 
@@ -497,19 +525,15 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -545,9 +569,3 @@ EVENT_FLAG_ALTKEY 32       //(32~39)按Alt不放事件
 
 
 """
-
-
-
-
-
-

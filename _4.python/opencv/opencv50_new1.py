@@ -27,7 +27,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-'''
+"""
 print('練習組合成一張大圖 picasa效果')
 
 filename1 = "C:/_git/vcs/_4.python/_data/elephant.jpg"
@@ -548,10 +548,10 @@ plt.imshow(cv2.cvtColor(art, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-'''
+"""
 print("去除圖片的雜訊")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image2 = cv2.imread(filename)
 
 plt.subplot(121)
@@ -571,6 +571,7 @@ print("------------------------------------------------------------")  # 60個
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 print("absolute")
+
 
 def my_laplace_sharpen(image, my_type="small"):
     result = np.zeros(image.shape, dtype=np.int64)
@@ -594,8 +595,9 @@ def my_laplace_sharpen(image, my_type="small"):
     return result
 
 
-#original_image_test1 = cv2.imread(filename, 0)
+# original_image_test1 = cv2.imread(filename, 0)
 original_image_test1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
 
 def my_laplace_result_add_abs(image, model):
     for i in range(model.shape[0]):
@@ -630,7 +632,7 @@ fig = plt.figure(
 
 fig.add_subplot(121)
 plt.title("原始圖像")
-#plt.imshow(original_image_test1)
+# plt.imshow(original_image_test1)
 plt.imshow(cv2.cvtColor(original_image_test1, cv2.COLOR_BGR2RGB))
 
 fig.add_subplot(122)
@@ -656,6 +658,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 print("gradient 邊緣檢測 梯度處理")
+
 
 # 輸入圖像，輸出提取的邊緣信息
 def my_sobel_sharpen(image):
@@ -738,6 +741,7 @@ print("------------------------------------------------------------")  # 60個
 print("imaeg_laplace 邊緣檢測 銳化處理")
 
 original_image_test1 = cv2.imread("data/lena.png", 0)
+
 
 # 用原始圖像減去拉普拉斯模板直接計算得到的邊緣信息
 def my_laplace_result_add(image, model):
@@ -1155,11 +1159,13 @@ image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 
 # image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
 # 套用 medianBlur() 中值模糊
-image3 = cv2.medianBlur(image2, 7)                   # 模糊化，去除雜訊 7, 25 彩色黑白皆可
-image4 = cv2.Canny(image3, 36, 36)                   # 偵測邊緣
+image3 = cv2.medianBlur(image2, 7)  # 模糊化，去除雜訊 7, 25 彩色黑白皆可
+image4 = cv2.Canny(image3, 36, 36)  # 偵測邊緣
 
 # 套用自適應二值化黑白影像
-image5 = cv2.adaptiveThreshold(image3, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+image5 = cv2.adaptiveThreshold(
+    image3, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
 
 plt.figure(
     num="相加",
@@ -1199,7 +1205,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print('Y對稱一張圖片')
+print("Y對稱一張圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 image1 = cv2.imread(filename)
@@ -1208,24 +1214,24 @@ w = image1.shape[1]
 h = image1.shape[0]
 
 D = 20
-output = np.zeros((h+D*2,w*2+D*2,3), dtype='uint8')   # 產生 2W x H 的黑色背景
+output = np.zeros((h + D * 2, w * 2 + D * 2, 3), dtype="uint8")  # 產生 2W x H 的黑色背景
 
-image1 = image1[:h, :w]               # 取出 WxH 的影像 全部 也可只取部分
+image1 = image1[:h, :w]  # 取出 WxH 的影像 全部 也可只取部分
 
 print("左右翻轉影像")
 image12 = cv2.flip(image1, 1)
 
-#左半
-output[D:h+D, D:w+D] = image1               # 將 output 左邊內容換成 image1
-#右半
-output[D:h+D, w+D:w*2+D] = image12           # 將 output 右邊內容換成 image2
+# 左半
+output[D : h + D, D : w + D] = image1  # 將 output 左邊內容換成 image1
+# 右半
+output[D : h + D, w + D : w * 2 + D] = image12  # 將 output 右邊內容換成 image2
 
 plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print('XY對稱一張圖片')
+print("XY對稱一張圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 image1 = cv2.imread(filename)
@@ -1233,21 +1239,21 @@ image1 = cv2.imread(filename)
 w = image1.shape[1]
 h = image1.shape[0]
 
-output = np.zeros((h*2,w*2,3), dtype='uint8')   # 產生 2W x 2H 的黑色背景
+output = np.zeros((h * 2, w * 2, 3), dtype="uint8")  # 產生 2W x 2H 的黑色背景
 
-img = image1[:h, :w]               # 取出 WxH 的影像 全部 也可只取部分
-img2 = cv2.flip(img, 1)           # 左右翻轉
-img3 = cv2.flip(img, 0)           # 上下翻轉
-img4 = cv2.flip(img, -1)          # 上下左右翻轉
+img = image1[:h, :w]  # 取出 WxH 的影像 全部 也可只取部分
+img2 = cv2.flip(img, 1)  # 左右翻轉
+img3 = cv2.flip(img, 0)  # 上下翻轉
+img4 = cv2.flip(img, -1)  # 上下左右翻轉
 
 # 左上
 output[:h, :w] = img
 # 右上
-output[:h, w:w*2] = img2
+output[:h, w : w * 2] = img2
 # 左下
-output[h:h*2, :w] = img3
+output[h : h * 2, :w] = img3
 # 右下
-output[h:h*2, w:w*2] = img4
+output[h : h * 2, w : w * 2] = img4
 
 plt.imshow(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
 plt.show()
@@ -1255,13 +1261,13 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_01")
 
-image = cv2.imread(filename)   # 預設為彩色 1號
+image = cv2.imread(filename)  # 預設為彩色 1號
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階 2號
-image = cv2.imread(filename, 2) # 也可使用數字代表模式
-print(image.shape)            # 得到 shape
-print(image.dtype)            # uint8
+image = cv2.imread(filename, 2)  # 也可使用數字代表模式
+print(image.shape)  # 得到 shape
+print(image.dtype)  # uint8
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1281,16 +1287,16 @@ print("OpenCV_03")
 image_b = cv2.imread(filename)
 image_g = cv2.imread(filename)
 image_r = cv2.imread(filename)
-image_b[:,:,1] = 0    # 將綠色設為 0
-image_b[:,:,2] = 0    # 將紅色設為 0
-image_g[:,:,0] = 0   # 將藍色設為 0
-image_g[:,:,2] = 0   # 將紅色設為 0
-image_r[:,:,0] = 0     # 將藍色設為 0
-image_r[:,:,1] = 0     # 將綠色設為 0
+image_b[:, :, 1] = 0  # 將綠色設為 0
+image_b[:, :, 2] = 0  # 將紅色設為 0
+image_g[:, :, 0] = 0  # 將藍色設為 0
+image_g[:, :, 2] = 0  # 將紅色設為 0
+image_r[:, :, 0] = 0  # 將藍色設為 0
+image_r[:, :, 1] = 0  # 將綠色設為 0
 
-cv2.imshow('image blue', image_b)
-cv2.imshow('image green', image_g)
-cv2.imshow('image red', image_r)
+cv2.imshow("image blue", image_b)
+cv2.imshow("image green", image_g)
+cv2.imshow("image red", image_r)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1299,12 +1305,12 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_04")
 
 image = cv2.imread(filename)
-print('原圖為彩色')
-cv2.imshow('image1', image)
-print('彩色轉灰階')
+print("原圖為彩色")
+cv2.imshow("image1", image)
+print("彩色轉灰階")
 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 轉換成灰階影像
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -1312,36 +1318,36 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_05")
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
-print('像素操作 底片效果 半張負片')
+print("像素操作 底片效果 半張負片")
 
 image = cv2.imread(filename)
-rows = image.shape[0]     # 取得高度的總像素
-cols = image.shape[1]     # 取得寬度的總像素
+rows = image.shape[0]  # 取得高度的總像素
+cols = image.shape[1]  # 取得寬度的總像素
 
-for row in range(int(rows/2)):  # 只取 rows 的一半 ( 使用 int 取整數 )
+for row in range(int(rows / 2)):  # 只取 rows 的一半 ( 使用 int 取整數 )
     for col in range(cols):
-        image[row, col, 0] = 255 - image[row, col, 0]   # 255 - 藍色
-        image[row, col, 1] = 255 - image[row, col, 1]   # 255 - 綠色
-        image[row, col, 2] = 255 - image[row, col, 2]   # 255 - 紅色
+        image[row, col, 0] = 255 - image[row, col, 0]  # 255 - 藍色
+        image[row, col, 1] = 255 - image[row, col, 1]  # 255 - 綠色
+        image[row, col, 2] = 255 - image[row, col, 2]  # 255 - 紅色
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_06")
 
-print('像素操作 全張負片')
+print("像素操作 全張負片")
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 image = cv2.imread(filename)
 
-image = 255-image # 使用 255 減去陣列中所有數值
+image = 255 - image  # 使用 255 減去陣列中所有數值
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1352,7 +1358,7 @@ image = cv2.imread(filename)
 
 contrast = 200
 brightness = 0
-output = image * (contrast/127 + 1) - contrast + brightness # 轉換公式
+output = image * (contrast / 127 + 1) - contrast + brightness  # 轉換公式
 # 轉換公式參考 https://stackoverflow.com/questions/50474302/how-do-i-adjust-brightness-contrast-and-vibrance-with-opencv-python
 
 # 調整後的數值大多為浮點數，且可能會小於 0 或大於 255
@@ -1360,7 +1366,7 @@ output = image * (contrast/127 + 1) - contrast + brightness # 轉換公式
 output = np.clip(output, 0, 255)
 output = np.uint8(output)
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1368,14 +1374,14 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_08")
 
 image = cv2.imread(filename)
-output = image    # 建立 output 變數
+output = image  # 建立 output 變數
 
 alpha = 1
 beta = 10
 
 cv2.convertScaleAbs(image, output, alpha, beta)  # 套用 convertScaleAbs
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1383,46 +1389,46 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_11 三原色疊加")
 
-filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
-filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
-filename3 = 'C:/_git/vcs/_4.python/opencv/data/RGB_B.png'
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
+filename3 = "C:/_git/vcs/_4.python/opencv/data/RGB_B.png"
 
 image_r = cv2.imread(filename1)
 image_g = cv2.imread(filename2)
 image_b = cv2.imread(filename3)
 
 image = cv2.add(image_r, image_g)  # 疊加紅色和綠色
-image = cv2.add(image, image_b)    # 疊加藍色
+image = cv2.add(image, image_b)  # 疊加藍色
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_12 addWeighted 要一樣大的圖")
 
-filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
-filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
 image1 = cv2.imread(filename1)
 image2 = cv2.imread(filename2)
-output = cv2.addWeighted(image1, 1.0, image2, 1.0, 100) #整體墊高100
+output = cv2.addWeighted(image1, 1.0, image2, 1.0, 100)  # 整體墊高100
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_13 subtract 兩圖相減")
 
-filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
-filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
 image1 = cv2.imread(filename1)
 image2 = cv2.imread(filename2)
 output = cv2.subtract(image1, image2)  # 相減
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -1432,13 +1438,13 @@ print("OpenCV_14 漸層色")
 image = cv2.imread(filename)
 
 w, h = 400, 400
-image1 = np.zeros([h,w,3])
+image1 = np.zeros([h, w, 3])
 for i in range(h):
-    image[i,:,1] = int(256*i/400)   # 從上往下填入綠色漸層
+    image[i, :, 1] = int(256 * i / 400)  # 從上往下填入綠色漸層
 
-image = image.astype('float32')/255   # 轉換內容類型
+image = image.astype("float32") / 255  # 轉換內容類型
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1447,15 +1453,15 @@ print("OpenCV_15 漸層色")
 
 w = 400
 h = 400
-image = np.zeros([h,w,3])
+image = np.zeros([h, w, 3])
 for i in range(h):
     for j in range(w):
-        image[i,j,0] = int(256*(j+i)/(w+h))
-        image[i,j,2] = int(256*(j+i)/(w+h))
+        image[i, j, 0] = int(256 * (j + i) / (w + h))
+        image[i, j, 2] = int(256 * (j + i) / (w + h))
 
-image = image.astype('float32')/255
+image = image.astype("float32") / 255
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1464,44 +1470,44 @@ print("OpenCV_16")
 
 w = 400
 h = 400
-image = np.zeros([h,w,4])             # 第三個值為 4
+image = np.zeros([h, w, 4])  # 第三個值為 4
 for i in range(h):
-    image[i,:,3] = int(256*i/400)     # 設定第四個值 ( 透明度 )
+    image[i, :, 3] = int(256 * i / 400)  # 設定第四個值 ( 透明度 )
 
-image = image.astype('float32')/255
+image = image.astype("float32") / 255
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_17 logo處理")
 
-logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
 image = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)  # 開啟圖片
-image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)         # 因為是 jpg，要轉換顏色為 BGRA
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)        # 新增 gray 變數為轉換成灰階的圖片
+image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 因為是 jpg，要轉換顏色為 BGRA
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 新增 gray 變數為轉換成灰階的圖片
 
-h = image.shape[0]     # 取得圖片高度
-w = image.shape[1]     # 取得圖片寬度
+h = image.shape[0]  # 取得圖片高度
+w = image.shape[1]  # 取得圖片寬度
 
 # 依序取出圖片中每個像素
 for x in range(w):
     for y in range(h):
-        if gray[y, x]>200:
+        if gray[y, x] > 200:
             image[y, x, 3] = 255 - gray[y, x]
             # 如果該像素的灰階度大於 200，調整該像素的透明度
             # 使用 255 - gray[y, x] 可以將一些邊緣的像素變成半透明，避免太過鋸齒的邊緣
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_18 logo處理")
 
-logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
 image = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
@@ -1512,38 +1518,38 @@ w = image.shape[1]
 
 for x in range(w):
     for y in range(h):
-        if gray[y, x]>200:
-            image[y, x] = [0,255,255,255]  # 亮色改成黃色
+        if gray[y, x] > 200:
+            image[y, x] = [0, 255, 255, 255]  # 亮色改成黃色
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_19")
 
-filename1 = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.png'
-filename2 = 'C:/_git/vcs/_4.python/opencv/data/RGB_G.png'
+filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
+filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
-bg = cv2.imread(filename1, cv2.IMREAD_UNCHANGED)     # 開啟背景圖
-bg = cv2.cvtColor(bg, cv2.COLOR_BGR2BGRA)           # 轉換成 BGRA
+bg = cv2.imread(filename1, cv2.IMREAD_UNCHANGED)  # 開啟背景圖
+bg = cv2.cvtColor(bg, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA
 
 image = cv2.imread(filename2, cv2.IMREAD_UNCHANGED)  # 開啟悟空公仔圖
-image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)         # 轉換成 BGRA
+image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA
 
-h = image.shape[0]           # 取得圖片高度
-w = image.shape[1]           # 取得圖片寬度
+h = image.shape[0]  # 取得圖片高度
+w = image.shape[1]  # 取得圖片寬度
 
 for x in range(w):
     for y in range(h):
-        r = image[y, x, 2]   # 取得該像素的紅色值
-        g = image[y, x, 1]   # 取得該像素的綠色值
-        b = image[y, x, 0]   # 取得該像素的藍色值
-        if r>20 and r<80 and g<190 and g>110 and b<150 and b>60:
-            image[y, x] = bg[y, x]   # 如果在範圍內的顏色，換成背景圖的像素值
+        r = image[y, x, 2]  # 取得該像素的紅色值
+        g = image[y, x, 1]  # 取得該像素的綠色值
+        b = image[y, x, 0]  # 取得該像素的藍色值
+        if r > 20 and r < 80 and g < 190 and g > 110 and b < 150 and b > 60:
+            image[y, x] = bg[y, x]  # 如果在範圍內的顏色，換成背景圖的像素值
 
-cv2.imshow('image', bg)
-cv2.imshow('image', image)
+cv2.imshow("image", bg)
+cv2.imshow("image", image)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -1553,16 +1559,28 @@ print("OpenCV_20")
 
 image = cv2.imread(filename)
 
-def floodFill(source, mask, seedPoint, newVal, loDiff, upDiff, flags=cv2.FLOODFILL_FIXED_RANGE):
+
+def floodFill(
+    source, mask, seedPoint, newVal, loDiff, upDiff, flags=cv2.FLOODFILL_FIXED_RANGE
+):
     result = source.copy()
-    cv2.floodFill(result, mask=mask, seedPoint=seedPoint, newVal=newVal, loDiff=loDiff, upDiff=upDiff, flags=flags)
+    cv2.floodFill(
+        result,
+        mask=mask,
+        seedPoint=seedPoint,
+        newVal=newVal,
+        loDiff=loDiff,
+        upDiff=upDiff,
+        flags=flags,
+    )
     return result
 
-h, w = image.shape[:2]                     # 取得原始影像的長寬
-mask = np.zeros((h+2,w+2,1), np.uint8)   # 製作 mask，長寬都要加上 2
-output = floodFill(image, mask, (100,10), (0,0,255), (100,100,60), (100,100,100))
 
-cv2.imshow('image', output)
+h, w = image.shape[:2]  # 取得原始影像的長寬
+mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 製作 mask，長寬都要加上 2
+output = floodFill(image, mask, (100, 10), (0, 0, 255), (100, 100, 60), (100, 100, 100))
+
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1571,45 +1589,59 @@ print("OpenCV_21")
 
 image = cv2.imread(filename)
 
-def floodFill(source, mask, seedPoint, newVal, loDiff, upDiff, flags=cv2.FLOODFILL_FIXED_RANGE):
+
+def floodFill(
+    source, mask, seedPoint, newVal, loDiff, upDiff, flags=cv2.FLOODFILL_FIXED_RANGE
+):
     result = source.copy()
-    cv2.floodFill(result, mask=mask, seedPoint=seedPoint, newVal=newVal, loDiff=loDiff, upDiff=upDiff, flags=flags)
+    cv2.floodFill(
+        result,
+        mask=mask,
+        seedPoint=seedPoint,
+        newVal=newVal,
+        loDiff=loDiff,
+        upDiff=upDiff,
+        flags=flags,
+    )
     return result
 
+
 h, w = image.shape[:2]
-mask = np.zeros((h+2,w+2,1), np.uint8)  # 全黑遮罩
-mask = 255 - mask                       # 變成全白遮罩
-mask[0:100,0:200] = 0                   # 將左上角長方形變成黑色
+mask = np.zeros((h + 2, w + 2, 1), np.uint8)  # 全黑遮罩
+mask = 255 - mask  # 變成全白遮罩
+mask[0:100, 0:200] = 0  # 將左上角長方形變成黑色
 
-#只處理mask區域
-output = floodFill(image, mask, (100,10), (0,0,255), (100,100,60), (200,200,200))
+# 只處理mask區域
+output = floodFill(image, mask, (100, 10), (0, 0, 255), (100, 100, 60), (200, 200, 200))
 
-cv2.imshow('image', output)
+cv2.imshow("image", output)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_23")
 
+
 def convex(src_image, raw, effect):
-    col, row, channel = raw[:]      # 取得圖片資訊
-    cx, cy, r = effect[:]           # 取得凸透鏡的範圍
-    output = np.zeros([row, col, channel], dtype = np.uint8)        # 產生空白畫布
+    col, row, channel = raw[:]  # 取得圖片資訊
+    cx, cy, r = effect[:]  # 取得凸透鏡的範圍
+    output = np.zeros([row, col, channel], dtype=np.uint8)  # 產生空白畫布
     for y in range(row):
         for x in range(col):
             d = ((x - cx) * (x - cx) + (y - cy) * (y - cy)) ** 0.5  # 計算每個點與中心點的距離
             if d <= r:
-                nx = int((x - cx) * d / r + cx)        # 根據不同的位置，產生新的 nx，越靠近中心形變越大
-                ny = int((y - cy) * d / r + cy)        # 根據不同的位置，產生新的 ny，越靠近中心形變越大
-                output[y, x, :] = src_image[ny, nx, :]   # 產生新的圖
+                nx = int((x - cx) * d / r + cx)  # 根據不同的位置，產生新的 nx，越靠近中心形變越大
+                ny = int((y - cy) * d / r + cy)  # 根據不同的位置，產生新的 ny，越靠近中心形變越大
+                output[y, x, :] = src_image[ny, nx, :]  # 產生新的圖
             else:
-                output[y, x, :] = src_image[y, x, :]     # 如果在半徑範圍之外，原封不動複製過去
+                output[y, x, :] = src_image[y, x, :]  # 如果在半徑範圍之外，原封不動複製過去
     return output
 
-image = cv2.imread(filename)
-image = convex(image, (300, 400, 3), (150, 130, 100))      # 提交參數數值，進行凸透鏡效果
 
-cv2.imshow('image', image)
+image = cv2.imread(filename)
+image = convex(image, (300, 400, 3), (150, 130, 100))  # 提交參數數值，進行凸透鏡效果
+
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1617,21 +1649,22 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_24")
 print("按Q離開")
 
-image = cv2.imread(filename)                         # 開啟圖片
-image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)          # 轉換成 BGRA ( 因為需要 alpha 色版 )
-w = image.shape[1]                                     # 取得寬度
-h = image.shape[0]                                     # 取得高度
-white = 255 - np.zeros((h,w,4), dtype='uint8')       # 建立白色圖
-a = 1                                                # 一開始 a 為 1
+image = cv2.imread(filename)  # 開啟圖片
+image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA ( 因為需要 alpha 色版 )
+w = image.shape[1]  # 取得寬度
+h = image.shape[0]  # 取得高度
+white = 255 - np.zeros((h, w, 4), dtype="uint8")  # 建立白色圖
+a = 1  # 一開始 a 為 1
 while True:
-    a = a - 0.01                                     # a 不斷減少 0.01
-    if a<0: a = 0                                    # 如果 a 小於 0 就讓 a 等於 0
-    output = cv2.addWeighted(white, a, image, 1-a, 0)  # 根據 a 套用權重
-    cv2.imshow('image', output)                 # 顯示圖片
-    if cv2.waitKey(1) == ord('q'):
+    a = a - 0.01  # a 不斷減少 0.01
+    if a < 0:
+        a = 0  # 如果 a 小於 0 就讓 a 等於 0
+    output = cv2.addWeighted(white, a, image, 1 - a, 0)  # 根據 a 套用權重
+    cv2.imshow("image", output)  # 顯示圖片
+    if cv2.waitKey(1) == ord("q"):
         break
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1643,47 +1676,61 @@ filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.b
 
 image1 = cv2.imread(filename1)
 image2 = cv2.imread(filename2)
-w = image1.shape[1]   # 讀取圖片寬度
-h = image1.shape[0]   # 讀取圖片高度
+w = image1.shape[1]  # 讀取圖片寬度
+h = image1.shape[0]  # 讀取圖片高度
 
 for i in range(w):
-    image1[:,i,0] = image1[:,i,0]*((300-i)/300) + image2[:,i,0]*(i/300)  # 藍色按照比例混合
-    image1[:,i,1] = image1[:,i,1]*((300-i)/300) + image2[:,i,1]*(i/300)  # 紅色按照比例混合
-    image1[:,i,2] = image1[:,i,2]*((300-i)/300) + image2[:,i,2]*(i/300)  # 綠色按照比例混合
+    image1[:, i, 0] = image1[:, i, 0] * ((300 - i) / 300) + image2[:, i, 0] * (
+        i / 300
+    )  # 藍色按照比例混合
+    image1[:, i, 1] = image1[:, i, 1] * ((300 - i) / 300) + image2[:, i, 1] * (
+        i / 300
+    )  # 紅色按照比例混合
+    image1[:, i, 2] = image1[:, i, 2] * ((300 - i) / 300) + image2[:, i, 2] * (
+        i / 300
+    )  # 綠色按照比例混合
 
-#cv2.imwrite('tmp_image.png', image1)
+# cv2.imwrite('tmp_image.png', image1)
 
-show = image1.astype('float32')/255    # 如果要使用 imshow 必須要轉換類型
+show = image1.astype("float32") / 255  # 如果要使用 imshow 必須要轉換類型
 
-cv2.imshow('image', show)
+cv2.imshow("image", show)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_33")
 
-logo_filename = 'C:/_git/vcs/_4.python/opencv/data/opencv_logo.png'
+logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
 mona = cv2.imread(filename)
-logo = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)  # 使用 cv2.IMREAD_UNCHANGED 讀取 png，保留 alpha 色版
+logo = cv2.imread(
+    logo_filename, cv2.IMREAD_UNCHANGED
+)  # 使用 cv2.IMREAD_UNCHANGED 讀取 png，保留 alpha 色版
 mona_w = mona.shape[1]  # 蒙娜麗莎寬度
 mona_h = mona.shape[0]  # 蒙娜麗莎高度
 logo_w = logo.shape[1]  # logo 寬度
 logo_h = logo.shape[0]  # logo 高度
 dh = int((mona_h - logo_h) / 2)  # 如果 logo 要垂直置中，和上方的距離
-h = dh + logo_h         # 計算蒙娜麗莎裡，logo 所在的高度位置
+h = dh + logo_h  # 計算蒙娜麗莎裡，logo 所在的高度位置
 
 # 透過迴圈，根據背景透明度，計算出該像素的顏色
 for i in range(logo_w):
-    mona[dh:h,i,0] = mona[dh:h,i,0]*(1-logo[:,i,3]/255) + logo[:,i,0]*(logo[:,i,3]/255)
-    mona[dh:h,i,1] = mona[dh:h,i,1]*(1-logo[:,i,3]/255) + logo[:,i,1]*(logo[:,i,3]/255)
-    mona[dh:h,i,2] = mona[dh:h,i,2]*(1-logo[:,i,3]/255) + logo[:,i,2]*(logo[:,i,3]/255)
+    mona[dh:h, i, 0] = mona[dh:h, i, 0] * (1 - logo[:, i, 3] / 255) + logo[:, i, 0] * (
+        logo[:, i, 3] / 255
+    )
+    mona[dh:h, i, 1] = mona[dh:h, i, 1] * (1 - logo[:, i, 3] / 255) + logo[:, i, 1] * (
+        logo[:, i, 3] / 255
+    )
+    mona[dh:h, i, 2] = mona[dh:h, i, 2] * (1 - logo[:, i, 3] / 255) + logo[:, i, 2] * (
+        logo[:, i, 3] / 255
+    )
 
-#cv2.imwrite('tmp_image.png', mona)
+# cv2.imwrite('tmp_image.png', mona)
 
-mona = mona.astype('float32')/255    # 如果要使用 imshow 必須要轉換類型
+mona = mona.astype("float32") / 255  # 如果要使用 imshow 必須要轉換類型
 
-cv2.imshow('image', mona)
+cv2.imshow("image", mona)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1692,17 +1739,17 @@ print("OpenCV_34")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
 
-image = cv2.imread(filename)                       # 開啟圖片
+image = cv2.imread(filename)  # 開啟圖片
 
-qrcode = cv2.QRCodeDetector()                        # 建立 QRCode 偵測器
+qrcode = cv2.QRCodeDetector()  # 建立 QRCode 偵測器
 data, bbox, rectified = qrcode.detectAndDecode(image)  # 偵測圖片中的 QRCode
 # 如果 bbox 是 None 表示圖片中沒有 QRCode
 if bbox is not None:
-    print(data)                # QRCode 的內容
-    print(bbox)                # QRCode 的邊界
-    print(rectified)           # 換成垂直 90 度的陣列
+    print(data)  # QRCode 的內容
+    print(bbox)  # QRCode 的邊界
+    print(rectified)  # 換成垂直 90 度的陣列
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1716,15 +1763,17 @@ image = cv2.imread(filename)
 qrcode = cv2.QRCodeDetector()
 data, bbox, rectified = qrcode.detectAndDecode(image)
 
+
 # 取得座標的函式
 def boxSize(arr):
     global data
-    box_roll = np.rollaxis(arr,1,0)   # 轉置矩陣，把 x 放在同一欄，y 放在同一欄
+    box_roll = np.rollaxis(arr, 1, 0)  # 轉置矩陣，把 x 放在同一欄，y 放在同一欄
     xmax = int(np.amax(box_roll[0]))  # 取出 x 最大值
     xmin = int(np.amin(box_roll[0]))  # 取出 x 最小值
     ymax = int(np.amax(box_roll[1]))  # 取出 y 最大值
     ymin = int(np.amin(box_roll[1]))  # 取出 y 最小值
-    return (xmin,ymin,xmax,ymax)
+    return (xmin, ymin, xmax, ymax)
+
 
 # 如果 bbox 是 None 表示圖片中沒有 QRCode
 if bbox is not None:
@@ -1732,16 +1781,16 @@ if bbox is not None:
     print(bbox)
     print(rectified)
     box = boxSize(bbox[0])
-    cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)  # 畫矩形
+    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 5)  # 畫矩形
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_36")
 
-from PIL import ImageFont, ImageDraw, Image          # 載入 PIL ( 為了放中文字 )
+from PIL import ImageFont, ImageDraw, Image  # 載入 PIL ( 為了放中文字 )
 
 filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
 image = cv2.imread(filename)
@@ -1749,33 +1798,36 @@ image = cv2.imread(filename)
 qrcode = cv2.QRCodeDetector()
 data, bbox, rectified = qrcode.detectAndDecode(image)
 
+
 # 建立放入文字的函式
-def putText(x,y,text,color=(0,0,0)):
+def putText(x, y, text, color=(0, 0, 0)):
     global image
-    #font_filename = 'NotoSansTC-Regular.otf'      # 字體 ( 從 Google Font 下載 )
+    # font_filename = 'NotoSansTC-Regular.otf'      # 字體 ( 從 Google Font 下載 )
     font = ImageFont.truetype(font_filename, 20)  # 設定字型與大小
-    imagePil = Image.fromarray(image)            # 將 image 轉換成 PIL 圖片物件
-    draw = ImageDraw.Draw(imagePil)            # 建立繪圖物件
+    imagePil = Image.fromarray(image)  # 將 image 轉換成 PIL 圖片物件
+    draw = ImageDraw.Draw(imagePil)  # 建立繪圖物件
     draw.text((x, y), text, fill=color, font=font)  # 寫入文字
-    image = np.array(imagePil)                   # 轉換回 np array
+    image = np.array(imagePil)  # 轉換回 np array
+
 
 def boxSize(arr):
     global data
-    box_roll = np.rollaxis(arr,1,0)
+    box_roll = np.rollaxis(arr, 1, 0)
     xmax = int(np.amax(box_roll[0]))
     xmin = int(np.amin(box_roll[0]))
     ymax = int(np.amax(box_roll[1]))
     ymin = int(np.amin(box_roll[1]))
-    return (xmin,ymin,xmax,ymax)
+    return (xmin, ymin, xmax, ymax)
+
 
 if bbox is not None:
     print(data)
     print(bbox)
     print(rectified)
     box = boxSize(bbox[0])
-    cv2.rectangle(image,(box[0],box[1]),(box[2],box[3]),(0,0,255),5)
+    cv2.rectangle(image, (box[0], box[1]), (box[2], box[3]), (0, 0, 255), 5)
 
-cv2.imshow('image', image)
+cv2.imshow("image", image)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
@@ -1867,53 +1919,57 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_40 按上下調整亮度 按左右調整對比度 按ESC離開")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
+
 
 # 定義調整亮度對比的函式
 def adjust(i, c, b):
-    output = i * (c/100 + 1) - c + b    # 轉換公式
+    output = i * (c / 100 + 1) - c + b  # 轉換公式
     output = np.clip(output, 0, 255)
     output = np.uint8(output)
     return output
 
-contrast = 0    # 初始化要調整對比度的數值
+
+contrast = 0  # 初始化要調整對比度的數值
 brightness = 0  # 初始化要調整亮度的數值
-cv2.imshow('ImageShow', image)
+cv2.imshow("ImageShow", image)
 
 while True:
     keycode = cv2.waitKey(0)
     if keycode == 0:
-        brightness = brightness + 5    # 按下鍵盤的「上」，增加亮度
+        brightness = brightness + 5  # 按下鍵盤的「上」，增加亮度
     if keycode == 1:
-        brightness = brightness - 5    # 按下鍵盤的「下」，減少亮度
+        brightness = brightness - 5  # 按下鍵盤的「下」，減少亮度
     if keycode == 2:
-        contrast = contrast - 5        # 按下鍵盤的「右」，增加對比度
+        contrast = contrast - 5  # 按下鍵盤的「右」，增加對比度
     if keycode == 3:
-        contrast = contrast + 5        # 按下鍵盤的「左」，減少對比度
+        contrast = contrast + 5  # 按下鍵盤的「左」，減少對比度
     if keycode == 113:
-        contrast, brightness = 0, 0    # 按下鍵盤的「q」，恢復預設值
+        contrast, brightness = 0, 0  # 按下鍵盤的「q」，恢復預設值
     if keycode == 27:
         break
-    show = image.copy()                  # 複製原始圖片
+    show = image.copy()  # 複製原始圖片
     show = adjust(show, contrast, brightness)  # 根據亮度和對比度的調整值，輸出新的圖片
-    cv2.imshow('ImageShow', show)
+    cv2.imshow("ImageShow", show)
 
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_41")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
-cv2.imshow('ImageShow', image)
+cv2.imshow("ImageShow", image)
+
 
 def test(val):
     print(val)
 
-cv2.createTrackbar('test', 'ImageShow', 0, 255, test)
-cv2.setTrackbarPos('test', 'ImageShow', 50)
+
+cv2.createTrackbar("test", "ImageShow", 0, 255, test)
+cv2.setTrackbarPos("test", "ImageShow", 50)
 
 keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -1921,21 +1977,23 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_42")
 
-filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 image = cv2.imread(filename)
 
-cv2.imshow('ImageShow', image)
+cv2.imshow("ImageShow", image)
 
-contrast = 0    # 初始化要調整對比度的數值
+contrast = 0  # 初始化要調整對比度的數值
 brightness = 0  # 初始化要調整亮度的數值
-cv2.imshow('ImageShow', image)
+cv2.imshow("ImageShow", image)
+
 
 # 定義調整亮度對比的函式
 def adjust(i, c, b):
-    output = i * (c/100 + 1) - c + b    # 轉換公式
+    output = i * (c / 100 + 1) - c + b  # 轉換公式
     output = np.clip(output, 0, 255)
     output = np.uint8(output)
-    cv2.imshow('ImageShow', output)
+    cv2.imshow("ImageShow", output)
+
 
 # 定義調整亮度函式
 def brightness_fn(val):
@@ -1943,16 +2001,18 @@ def brightness_fn(val):
     brightness = val - 100
     adjust(image, contrast, brightness)
 
+
 # 定義調整對比度函式
 def contrast_fn(val):
     global image, contrast, brightness
     contrast = val - 100
     adjust(image, contrast, brightness)
 
-cv2.createTrackbar('brightness', 'ImageShow', 0, 200, brightness_fn)  # 加入亮度調整滑桿
-cv2.setTrackbarPos('brightness', 'ImageShow', 100)
-cv2.createTrackbar('contrast', 'ImageShow', 0, 200, contrast_fn)      # 加入對比度調整滑桿
-cv2.setTrackbarPos('contrast', 'ImageShow', 100)
+
+cv2.createTrackbar("brightness", "ImageShow", 0, 200, brightness_fn)  # 加入亮度調整滑桿
+cv2.setTrackbarPos("brightness", "ImageShow", 100)
+cv2.createTrackbar("contrast", "ImageShow", 0, 200, contrast_fn)  # 加入對比度調整滑桿
+cv2.setTrackbarPos("contrast", "ImageShow", 100)
 
 keycode = cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -1973,14 +2033,14 @@ print("------------------------------------------------------------")  # 60個
 
 print("OpenCV_39 按ESC離開")
 
-cv2.namedWindow('ImageShow')  # 建立一個名為 ImageShow 的視窗
+cv2.namedWindow("ImageShow")  # 建立一個名為 ImageShow 的視窗
 
 while True:
-    keycode = cv2.waitKey(0)   # 持續等待，直到按下鍵盤按鍵才會繼續
-    c = chr(keycode)           # 將 ASCII 代碼轉換成真實字元
-    print(c, keycode)          # 印出結果
+    keycode = cv2.waitKey(0)  # 持續等待，直到按下鍵盤按鍵才會繼續
+    c = chr(keycode)  # 將 ASCII 代碼轉換成真實字元
+    print(c, keycode)  # 印出結果
     if keycode == 27:
-        break                  # 如果代碼等於 27，結束迴圈 ( 27 表示按鍵 ESC )
+        break  # 如果代碼等於 27，結束迴圈 ( 27 表示按鍵 ESC )
 
 cv2.destroyAllWindows()
 
@@ -1995,13 +2055,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2014,7 +2071,6 @@ print("------------------------------------------------------------")  # 60個
     image = image[:, int((w-h)/2):int((h+(w-h)/2))]   # 將影像變成正方形
 
 """
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2137,7 +2193,7 @@ print("------------------------------------------------------------")  # 60個
 print("圖片的二值化處理, 要先轉成灰階, 再二值化")
 
 THRESHOLD = 30
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 thr, image_binary = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_TOZERO)
@@ -2153,19 +2209,30 @@ print("OpenCV_09 各種二值化")
 THRESHOLD = 127
 
 image = cv2.imread(filename)
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY); # 轉換前，都先將圖片轉換成灰階色彩
-ret, output1 = cv2.threshold(image_gray, THRESHOLD, 255, cv2.THRESH_BINARY)     # 如果大於 THRESHOLD 就等於 255，反之等於 0。
-ret, output2 = cv2.threshold(image_gray, THRESHOLD, 255, cv2.THRESH_BINARY_INV) # 如果大於 THRESHOLD 就等於 0，反之等於 255。
-ret, output3 = cv2.threshold(image_gray, THRESHOLD, 255, cv2.THRESH_TRUNC)      # 如果大於 THRESHOLD 就等於 THRESHOLD，反之數值不變。
-ret, output4 = cv2.threshold(image_gray, THRESHOLD, 255, cv2.THRESH_TOZERO)     # 如果大於 THRESHOLD 數值不變，反之數值等於 0。
-ret, output5 = cv2.threshold(image_gray, THRESHOLD, 255, cv2.THRESH_TOZERO_INV) # 如果大於 THRESHOLD 等於 0，反之數值不變。
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# 轉換前，都先將圖片轉換成灰階色彩
+ret, output1 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_BINARY
+)  # 如果大於 THRESHOLD 就等於 255，反之等於 0。
+ret, output2 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_BINARY_INV
+)  # 如果大於 THRESHOLD 就等於 0，反之等於 255。
+ret, output3 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_TRUNC
+)  # 如果大於 THRESHOLD 就等於 THRESHOLD，反之數值不變。
+ret, output4 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_TOZERO
+)  # 如果大於 THRESHOLD 數值不變，反之數值等於 0。
+ret, output5 = cv2.threshold(
+    image_gray, THRESHOLD, 255, cv2.THRESH_TOZERO_INV
+)  # 如果大於 THRESHOLD 等於 0，反之數值不變。
 
-cv2.imshow('image', image)
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
-cv2.imshow('image3', output3)
-cv2.imshow('image4', output4)
-cv2.imshow('image5', output5)
+cv2.imshow("image", image)
+cv2.imshow("image1", output1)
+cv2.imshow("image2", output2)
+cv2.imshow("image3", output3)
+cv2.imshow("image4", output4)
+cv2.imshow("image5", output5)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
@@ -2176,18 +2243,21 @@ print("OpenCV_10")
 THRESHOLD = 127
 
 image = cv2.imread(filename)
-image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY); # 轉換前，都先將圖片轉換成灰階色彩
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# 轉換前，都先將圖片轉換成灰階色彩
 ret, output1 = cv2.threshold(image_gray, THRESHOLD, 255, cv2.THRESH_BINARY)
-output2 = cv2.adaptiveThreshold(image_gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
-output3 = cv2.adaptiveThreshold(image_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+output2 = cv2.adaptiveThreshold(
+    image_gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2
+)
+output3 = cv2.adaptiveThreshold(
+    image_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2
+)
 
-cv2.imshow('image', image)
-cv2.imshow('image1', output1)
-cv2.imshow('image2', output2)
-cv2.imshow('image3', output3)
+cv2.imshow("image", image)
+cv2.imshow("image1", output1)
+cv2.imshow("image2", output2)
+cv2.imshow("image3", output3)
 cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-
