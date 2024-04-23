@@ -1,3 +1,7 @@
+import sys
+
+print("------------------------------------------------------------")  # 60個
+
 import tkinter as tk
 import tkinter.messagebox
 import tkinter.simpledialog
@@ -72,3 +76,59 @@ def confirm_exit():
 window.protocol("WM_DELETE_WINDOW", confirm_exit)
 
 window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter as tk
+import tkinter.messagebox as tkMessageBox
+
+win = tk.Tk()
+def hello():
+   tkMessageBox.showinfo('訊息框', "showinfo")
+   tkMessageBox.showwarning('訊息框', "showwarning")
+   tkMessageBox.showerror('訊息框', "showerror")
+   result =tkMessageBox.askquestion('訊息框', "askquestion")
+   print(result)
+   result=tkMessageBox.askokcancel('訊息框', "askokcancel")
+   print(result)
+   result=tkMessageBox.askyesno('訊息框', "showeraskyesnoror")
+   print(result)
+   result=tkMessageBox.askretrycancel('訊息框', "askretrycancel")
+   print(result)
+
+B1 = tk.Button(win, text = "Say Hello", command = hello)
+B1.pack()
+
+win.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+

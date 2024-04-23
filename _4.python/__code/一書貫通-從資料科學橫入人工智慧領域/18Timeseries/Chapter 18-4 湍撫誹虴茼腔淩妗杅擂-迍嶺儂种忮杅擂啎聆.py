@@ -1,12 +1,6 @@
-
-# coding: utf-8
-
 # # 15章 3节 拖拉机销售数据预测
 
 # ## 1 数据整理
-
-# In[1]:
-
 
 import warnings
 import itertools
@@ -22,31 +16,18 @@ import matplotlib.pyplot as plt
 
 import os
 os.chdir(r"D:\Python_book\18Timeseries")
-# In[2]:
-
 
 sales_data = pd.read_csv('tractor_sales.csv')
 sales_data.head(2)
 
 
-# In[3]:
-
-
 # since the complete date was not mentioned, we assume that it was the first of every month
 dates = pd.date_range(start='2003-01-01', freq='MS', periods=len(sales_data))
-
-
-# In[4]:
-
 
 import calendar
 sales_data['Month'] = dates.month
 sales_data['Month'] = sales_data['Month'].apply(lambda x: calendar.month_abbr[x])
 sales_data['Year'] = dates.year
-
-
-# In[5]:
-
 
 sales_data.drop(['Month-Year'], axis=1, inplace=True)
 sales_data.rename(columns={'Number of Tractor Sold':'Tractor-Sales'}, inplace=True)

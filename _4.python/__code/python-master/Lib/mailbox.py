@@ -1652,12 +1652,5 @@ date_time = dt.strftime("%Y/%m/%d %H:%M:%S")
 print("時間 :", date_time)
 
 
-'''
-print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
-print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
-'''
-
-
-
 
 

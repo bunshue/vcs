@@ -31,9 +31,3 @@ c4 = operate_on(a, b, divide)   # 呼叫函數
 print("operate_on(16, 20, divide) = ", c4)
 
 
-import calendar
-
-print(calendar.__file__)
-
-
-

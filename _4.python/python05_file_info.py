@@ -1,23 +1,16 @@
 """
 各種 python 檔案格式相關資料
 
-
 一般檔案資訊
-PIL 圖片
-openCV 圖片
-openCV 影片
-openCV WebCam
+
+用 os.stat 讀出一個檔案的所有資訊
 
 """
-
 
 import os
 import sys
 import math
 import random
-
-# 用 os.stat 讀出一個檔案的所有資訊
-
 import stat
 import time
 
@@ -49,68 +42,6 @@ print('filesize = ', filesize , '\t檔案大小 : ', ByteConversionTBGBMBKB(file
 
 print('------------------------------------------------------------')	#60個
 
-#exists的原型
-def exists(path):
-    """Test whether a path exists.  Returns False for broken symbolic links"""
-    try:
-        os.stat(path)
-    except OSError:
-        return False
-    return True
-
-#isfile的原型
-def isfile(path):
-    try:
-        st = os.stat(path)
-    except OSError:
-        return False
-    return stat.S_ISREG(st.st_mode)
-
-#isdir的原型
-def isdir(s):
-    try:
-        st = os.stat(s)
-    except OSError:
-        return False
-    return stat.S_ISDIR(st.st_mode)
-
-#getsize的原型
-def getsize(filename):
-    """Return the size of a file, reported by os.stat()."""
-    return os.stat(filename).st_size
-
-#getmtime的原型
-def getmtime(filename):
-    """Return the last modification time of a file, reported by os.stat()."""
-    return os.stat(filename).st_mtime
-
-#getatime的原型
-def getatime(filename):
-    """Return the last access time of a file, reported by os.stat()."""
-    return os.stat(filename).st_atime
-
-#getctime的原型
-def getctime(filename):
-    """Return the metadata change time of a file, reported by os.stat()."""
-    return os.stat(filename).st_ctime
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-status = exists(filename)
-print('exists :', status)
-status = isfile(filename)
-print('isfile :', status)
-status = isdir(filename)
-print('isdir :', status)
-
-size = getsize(filename)
-print('size :', size)
-mtime = getmtime(filename)
-print('mtime :', mtime)
-atime = getatime(filename)
-print('atime :', atime)
-ctime = getctime(filename)
-print('ctime :', ctime)
 
 print('------------------------------------------------------------')	#60個
 
@@ -205,36 +136,16 @@ print('------------------------------------------------------------')	#60個
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 cc = os.stat(filename)
+
 mtime = time.ctime(cc.st_mtime)
 print(mtime)
 
 mtime = int(os.stat(filename).st_mtime)
 print(mtime)
 
-st = os.stat(filename)
-print(st)
-
-lst = os.stat(filename)
-print(lst)
-
-# 获取元组
-cc = os.stat(filename)
-
 print('文件信息 :', cc)
-
-# 获取文件 uid
 print('文件 UID  : %d' % cc.st_uid)
-
-# 获取文件 gid
 print('文件 GID : %d' % cc.st_gid)
-
-print('------------------------------------------------------------')	#60個
-
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
-
-st = os.stat(foldername)
-print(type(st))
-print(st)
 
 print('------------------------------------------------------------')	#60個
 
@@ -355,7 +266,6 @@ filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 print('使用os.stat')
 cc = os.stat(filename)
-
 print(type(cc))
 print(cc)
 
@@ -482,8 +392,6 @@ print("建立日期:\t", time.ctime(os.path.getmtime(filename)))
 
 print('------------------------------------------------------------')	#60個
 
-
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 mtime = None
@@ -492,6 +400,7 @@ atime = None
 # First copy the file's mode to the temp file
 
 cc = os.stat(filename)
+
 mtime = cc.st_mtime
 atime = cc.st_atime
 print(type(mtime))
@@ -509,10 +418,6 @@ print('------------------------------------------------------------')	#60個
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("opencv 圖片")
 print("------------------------------------------------------------")  # 60個
 
 
@@ -540,4 +445,25 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+#資料夾
+filename = 'C:/_git/vcs/_1.data/______test_files3'
+
+#檔案
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+cc = os.stat(filename)
+
+print(stat.S_ISREG(cc.st_mode))
+print(stat.S_ISDIR(cc.st_mode))
+
+"""
+if not stat.S_ISREG(st[stat.ST_MODE]):
+    msg(filename + ': not a disk file')
+
+size = os.stat(filename).st_size
+mtime = os.stat(filename).st_mtime
+atime = os.stat(filename).st_atime
+ctime = os.stat(filename).st_ctime
+
+"""
 

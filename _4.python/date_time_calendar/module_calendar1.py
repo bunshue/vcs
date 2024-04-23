@@ -1,5 +1,54 @@
-import sys
 import calendar
+
+print('------------------------------------------------------------')	#60個
+
+import os
+import sys
+import time
+import locale
+import datetime
+
+print(calendar.__file__)
+
+print('印出月的英文名')
+for i in range(1,13):
+    print(calendar.month_name[i])
+
+year = datetime.datetime.now().year
+month = datetime.datetime.now().month
+day = datetime.datetime.now().day
+
+print("日期 :", year, "年", month, "月", day,"日")
+
+print('------------------------------------------------------------')	#60個
+
+#簡單固定的用法
+
+print("年曆")
+cc = calendar.calendar(year)
+print(cc)
+
+"""
+print(calendar.calendar(year, w=2, l=1, c=6, m=3)) #有無參數看不出差異
+"""
+
+print("年曆")
+print('5 TextCalendar')
+print(calendar.TextCalendar().formatyear(year))
+def shrink(cal):
+    return [[[' '.join('{:02d}/{:02d}/{}'.format(
+        d.month, d.day, str(d.year)[-2:]) for d in z)
+              for z in y] for y in x] for x in cal]
+
+print("年曆")
+print(calendar.Calendar().yeardayscalendar(year))
+
+print("月曆")
+cc = calendar.month(year, month)
+print(cc)
+
+print('4 TextCalendar')
+print(calendar.TextCalendar().formatmonth(year, month))
 
 print('------------------------------------------------------------')	#60個
 
@@ -13,60 +62,28 @@ print("2024年是否潤年", calendar.isleap(2024))
 
 print('------------------------------------------------------------')	#60個
 
-print("年曆")
-year = 2024
-cc = calendar.calendar(year)
-print(cc)
-
-print("月曆")
-year = 2024
-month = 2
-cc = calendar.month(year, month)
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-
 """
 date = '%s %02d' % (calendar.month_abbr[0], dd)
 print(date)
 """
 
 
-datetime = calendar.datetime.datetime
-print(datetime)
-print(datetime.now())
-print(datetime.now().year)
-print(datetime.now().month)
-print(datetime.now().day)
-print(datetime.now().hour)
-print(datetime.now().minute)
-print(datetime.now().second)
+dt = calendar.datetime.datetime
+print(dt)
+print(dt.now())
+print(dt.now().year)
+print(dt.now().month)
+print(dt.now().day)
+print(dt.now().hour)
+print(dt.now().minute)
+print(dt.now().second)
 timedelta = calendar.datetime.timedelta
 print(timedelta)
 
 print('------------------------------------------------------------')	#60個
 
-import time
-
-from email.utils import formatdate, parsedate, parsedate_tz
-
-TIME_FMT = "%a, %d %b %Y %H:%M:%S GMT"
-
-freshness_lifetime = max(0, min(5 / 10, 24 * 3600))
-expires = freshness_lifetime
-
-print("expires", time.strftime(TIME_FMT, time.gmtime(expires)))
-
-
-print('------------------------------------------------------------')	#60個
-
-
 print(calendar.firstweekday())
 
-year = 2023
-month = 5
-day = 3
 calendar.weekday(year, month, day)
 
 
@@ -74,26 +91,11 @@ calendar.monthrange(year, month)
 
 print(calendar.monthcalendar(year, month))
 
-print(calendar.calendar(year, w=2, l=1, c=6, m=3))
-
-for i in range(1,13):
-    print(calendar.month_name[i])
-
 weeks = calendar.monthcalendar(year, month)
-print(weeks)
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-import calendar
-
-import time
-import locale
-import sys
-import datetime
-import os
+#print(weeks)
+#每一週的日期
+for _ in weeks:
+    print(_)
 
 print('------------------------------------------------------------')	#60個
 
@@ -120,8 +122,6 @@ locale.setlocale(locale.LC_TIME, oldlocale)
 
 year = datetime.datetime.now().year
 
-year = 2023
-month = 8
 cal = calendar.monthcalendar(year, month)
 print(type(cal))
 print(cal)
@@ -131,36 +131,14 @@ print('firstweekday = ', calendar.firstweekday())
 
 #  list(calendar.Calendar().itermonthdates(datetime.MAXYEAR, 12))
 
-print(calendar.Calendar().yeardatescalendar(2023))
+print("年曆")
+print(calendar.Calendar().yeardatescalendar(year))
 
-
-print(calendar.TextCalendar().formatmonthname(2010, 10, 10))
+print(calendar.TextCalendar().formatmonthname(year, month, day))
 print(calendar.LocaleHTMLCalendar(locale=''))
 #print(cal.formatweekday(1))
-#print(cal.formatmonthname(2010, 10))
-print(calendar.TextCalendar().formatmonthname(2010, 10, 10))
-
-print('------------------------------------------------------------')	#60個
-
-print()
-print()
-print('1')
-print(calendar.Calendar().yeardayscalendar(2004))
-print('2 TextCalendar')
-print(calendar.TextCalendar().formatweekheader(2))
-print('3 TextCalendar')
-print(calendar.TextCalendar().formatweekheader(9))
-print('4 TextCalendar')
-print(calendar.TextCalendar().formatmonth(2004, 1))
-
-print('5 TextCalendar')
-print(calendar.TextCalendar().formatyear(2004))
-def shrink(cal):
-    return [[[' '.join('{:02d}/{:02d}/{}'.format(
-        d.month, d.day, str(d.year)[-2:]) for d in z)
-              for z in y] for y in x] for x in cal]
-print('6')
-print(shrink(calendar.Calendar().yeardatescalendar(2004)))
+#print(cal.formatmonthname(year, month))
+print(calendar.TextCalendar().formatmonthname(year, month, day))
 
 print('------------------------------------------------------------')	#60個
 
@@ -178,27 +156,21 @@ print('------------------------------------------------------------')	#60個
 """
 print('------------------------------------------------------------')	#60個
 
-import calendar
-
-day_start, num_days = calendar.monthrange(2023, 10)
+day_start, num_days = calendar.monthrange(year, month)
     
 print('本月的第一天為星期 :', day_start)
 print('本月的天數 :', num_days)
 
 print('------------------------------------------------------------')	#60個
 
-import calendar
-year = 2022
-month = 12
+print("年曆")
 cal = calendar.Calendar()
 for week in cal.monthdayscalendar(year, month):
     print(week)
 
 print('------------------------------------------------------------')	#60個
 
-import calendar
-year = 2022
-month = 12
+print("年曆")
 print(str(year)+"年"+str(month)+"月")
 dayname = ["日","一","二","三","四","五","六"]
 print(dayname)
@@ -209,9 +181,7 @@ for week in cal.monthdayscalendar(year, month):
 print('------------------------------------------------------------')	#60個
 
 """
-import calendar
-year = 2022
-month = 12
+print("年曆")
 cal = calendar.Calendar(calendar.SUNDAY)
 for (row, week) in enumerate(cal.monthdayscalendar(year, month)):
     for (col, day) in enumerate(week):
@@ -220,10 +190,14 @@ for (row, week) in enumerate(cal.monthdayscalendar(year, month)):
 """
 print('------------------------------------------------------------')	#60個
 
-
-
-
-
+print('2 TextCalendar')
+print(calendar.TextCalendar().formatweekheader(2))
+print('3 TextCalendar')
+print(calendar.TextCalendar().formatweekheader(9))
+""" many
+print('6')
+print(shrink(calendar.Calendar().yeardatescalendar(year)))
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -236,4 +210,72 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+
+        a_weekday = [calendar.day_abbr[i].lower() for i in range(7)]
+        f_weekday = [calendar.day_name[i].lower() for i in range(7)]
+
+
+    if start_date is None:
+        start_date = date.today().replace(day=1)
+    _, days_in_month = calendar.monthrange(start_date.year, start_date.month)
+    end_date = start_date + timedelta(days=days_in_month)
+    return (start_date, end_date)
+"""
+
+print('--------------------')
+
+print("年曆")
+cal = calendar.Calendar(calendar.SUNDAY)
+print(cal)
+
+
+
+"""
+
+#date = '%s %02d' % (calendar.month_abbr[mm], dd)
+
+maybe_date = calendar.datetime.datetime
+cc = calendar.timegm(time.strptime(maybe_date, '%a %b %d %H:%M:%S %Y'))
+"""
+
+
+"""
+dt = calendar.datetime.datetime
+print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
+print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
+
+"""
+
+
+import datetime
+
+today = datetime.date.today()
+#birthday = input("輸入生日 ( YYYY/MM/DD )：")
+birthday = '2006/03/11'
+birthday_list = birthday.split("/")
+year = today.year - int(birthday_list[0])
+month = today.month - int(birthday_list[1])
+if month < 0:
+    year = year - 1
+    month = 12 + month
+day_list = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+if calendar.isleap(today.year):  # 判斷如果是閏年
+    day_list[1] = 29  # 就將二月份的天數改成 29 天
+day = today.day - int(birthday_list[2])
+if day < 0:
+    month = month - 1
+    if month < 0:
+        year = year - 1
+        month = 12 + month
+    day = day_list[month] + day
+
+print(f"{year} 歲 {month} 個月 {day} 天")
+
+
+print("------------------------------------------------------------")  # 60個
+
 

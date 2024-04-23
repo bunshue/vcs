@@ -911,7 +911,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-'''
 
 """ os 其他 不是 list file 的
 
@@ -941,8 +940,6 @@ os.mkdir(directory+"/tmp_doc")  #建立資料夾
 os.rename(directory+"/tmp_example",directory+"/tmp_sample") #更名
 os.rmdir(directory+"/tmp_doc")
 """
-
-print(os.path.exists("myprime.py"))
 
 
 """
@@ -1057,16 +1054,6 @@ for envname in "TMPDIR", "TEMP", "TMP":
 
 print("------------------------------------------------------------")  # 60個
 
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
-filename = 'picture1.jpg'
-
-print(foldername)
-print(filename)
-r = os.path.join(foldername, filename)
-print("os.path.join(foldername, filename) =", r)
-
-print("------------------------------------------------------------")  # 60個
-
 def getuser():
     for name in ("LOGNAME", "USER", "LNAME", "USERNAME"):
         print(name)
@@ -1080,5 +1067,66 @@ print("get user name")
 ccc = getuser()
 print(ccc)
 
+print("------------------------------------------------------------")  # 60個
+
+'''
+foldername = 'C:/_git/vcs/_1.data/______test_files1'
+filename = 'picture1.jpg'
+
+print(foldername)
+print(filename)
+r = os.path.join(foldername, filename)
+print("os.path.join(foldername, filename) =", r)
+
+foldername1 = 'C:/_git/vcs/_1.data/______test_files1'
+foldername2 = 'new_folder'
+filename = 'picture1.jpg'
+
+print(foldername1)
+print(foldername2)
+print(filename)
+r = os.path.join(foldername1, foldername2)
+r = os.path.join(r, filename)
+
+print("os.path.join(foldername, filename) =", r)
+
+
+"""
+#其實 rename 就是 move
+
+filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/picture1.airi.jpg"
+filename3 = filename2.replace("______test_files1", "______test_files5")  # 取出圖片檔名，將 jpg 換成 png
+
+cc = os.rename(filename1, filename2)
+cc = os.rename(filename2, filename3)
+print(cc)
+
+"""
+
+filename = 'aaaaaa.py'
+print('檔案 :', filename, ' 是否存在?')
+print(os.path.exists(filename))
+
+if not os.path.exists(filename):
+    print("檔案不存在")
+else:
+    print("檔案存在")
+
+
+if os.path.isdir(foldername):
+    print("是資料夾")
+else:
+    print("不是資料夾")
+
+"""
+os.path.islink(long_filename)
+
+os.path.isdir(file)
+
+os.readlink(long_filename))
+
+
+"""
 print("------------------------------------------------------------")  # 60個
 
