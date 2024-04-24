@@ -738,86 +738,6 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print("tk_new01.py")
-
-import tkinter as tk
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-#在半徑為100的援外建立12個點 然後將此12點彼此相連
-import math
-
-canvas = tk.Canvas(window, width=640, height=480)
-canvas.pack()
-x_center, y_center, r = 320, 240, 100
-x, y = [], []
-for i in range(12):         # 建立圓外圍12個點
-    x.append(x_center + r * math.cos(30*i*math.pi/180))
-    y.append(y_center + r * math.sin(30*i*math.pi/180))
-for i in range(12):         # 執行12個點彼此連線
-    for j in range(12):
-        canvas.create_line(x[i],y[i],x[j],y[j])
-
-
-
-
-"""
-
-label = tk.Label(window,text="I like tkinter",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-label.pack()                        # 包裝與定位元件
-
-"""
-
-
-lab1 = tk.Label(window,text="明志科技大學",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="長庚大學",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="長庚科技大學",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.grid(row=0,column=0)           # 格狀包裝
-lab2.grid(row=1,column=2)           # 格狀包裝
-lab3.grid(row=2,column=1)           # 格狀包裝
-
-print("------------------------------------------------------------")  # 60個
-
-lab1 = tk.Label(window,text="明志科技大學",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="長庚大學",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="長庚科技大學",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.place(x=0,y=0)                 # 直接定位
-lab2.place(x=30,y=50)               # 直接定位
-lab3.place(x=60,y=100)              # 直接定位
-
-print("------------------------------------------------------------")  # 60個
-
 def msgShow():
     label["text"] = "I love Python"
     label["bg"] = "lightyellow"
@@ -1238,85 +1158,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
-def displayFan(startingAngle):
-    canvas.delete("fan")    
-    canvas.create_arc(xWidth / 2 - r, yHeight / 2 - r, xWidth / 2 + r, yHeight / 2 + r,
-            start = startAngle + 0, extent = 60, fill = "green", tags = "fan")        
-    canvas.create_arc(xWidth / 2 - r, yHeight / 2 - r, xWidth / 2 + r, yHeight / 2 + r,
-            start = startAngle + 120, extent = 60, fill = "green", tags = "fan")        
-    canvas.create_arc(xWidth / 2 - r, yHeight / 2 - r, xWidth / 2 + r, yHeight / 2 + r,
-            start = startAngle + 240, extent = 60, fill = "green", tags = "fan")        
-
-xWidth = 300
-yHeight = 300
-r = 120
-
-window = Tk() 
-window.title("ex19_6.py") 
-        
-canvas = Canvas(window,width=xWidth, height=yHeight)
-canvas.pack()
-
-startAngle = 0
-while True:
-    startAngle += 5
-    displayFan(startAngle)
-    canvas.after(50) 
-    canvas.update()
-            
-window.mainloop() 
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-import math
-
-def paintTree(depth, x1, y1, length, angle):
-    if depth >= 0:
-        depth -= 1
-        x2 = x1 + int(math.cos(angle) * length)
-        y2 = y1 - int(math.sin(angle) * length)
-        # 繪線
-        drawLine(x1, y1, x2, y2)
-        # 繪左邊
-        paintTree(depth,x2, y2, length*sizeRatio, angle+angleValue)
-        # 繪右邊
-        paintTree(depth, x2, y2, length*sizeRatio, angle-angleValue)
-        
-# 繪製p1和p2之間的線條
-def drawLine(x1, y1, x2, y2):
-    canvas.create_line(x1, y1, x2, y2,tags="myline")
-
-# 顯示
-def show():
-    canvas.delete("myline")
-    myDepth = depth.get()
-    paintTree(myDepth, myWidth/2, myHeight, myHeight/3, math.pi/2)
-    
-# main
-tk = Tk()
-myWidth = 400
-myHeight = 400
-canvas = Canvas(tk, width=myWidth, height=myHeight) # 建立畫布
-canvas.pack()
-
-frame = Frame(tk)                               # 建立框架
-frame.pack(padx=5, pady=5)
-# 在框架Frame內建立標籤Label, 輸入depth數Entry, 按鈕Button
-Label(frame, text="輸入depth : ").pack(side=LEFT)
-depth = IntVar()
-depth.set(0)
-entry = Entry(frame, textvariable=depth).pack(side=LEFT,padx=3)
-Button(frame, text="Recursive Tree",
-       command=show).pack(side=LEFT)
-angleValue = math.pi / 4                       # 設定角度
-sizeRatio = 0.6                                 # 設定下一層的長度與前一層的比率是0.6
-
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 from tkinter import Tk, Frame, Button
 from datetime import date #滙入datetime模組的date類別
 
@@ -1514,214 +1355,6 @@ entry = tk.Entry(window, textvariable=string).pack()
 label = tk.Label(window, textvariable=string).pack()
 
 print('------------------------------------------------------------')	#60個
-
-
-import tkinter as tk
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-print('------------------------------------------------------------')	#60個
-
-from tkinter import *
-import math
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-x_center, y_center, r = 320, 240, 100
-x, y = [], []
-for i in range(12):         # 建立圓外圍12個點
-    x.append(x_center + r * math.cos(30*i*math.pi/180))
-    y.append(y_center + r * math.sin(30*i*math.pi/180))
-for i in range(12):         # 執行12個點彼此連線
-    for j in range(12):
-        canvas.create_line(x[i],y[i],x[j],y[j])
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new4\ch19_2.py
-
-from tkinter import *
-import math
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_line(100,100,500,100)
-canvas.create_line(100,125,500,125,width=5)
-canvas.create_line(100,150,500,150,width=10,fill='blue')
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new4\ch19_3.py
-
-from tkinter import *
-from random import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-for i in range(50):                 # 隨機繪50個不同位置與大小的矩形
-    x1, y1 = randint(1, 640), randint(1, 480)
-    x2, y2 = randint(1, 640), randint(1, 480)
-    if x1 > x2: x1,x2 = x2,x1       # 確保左上角x座標小於右下角x座標
-    if y1 > y2: y1,y2 = y2,y1       # 確保左上角y座標小於右下角y座標
-    canvas.create_rectangle(x1, y1, x2, y2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new4\ch19_4.py
-
-from tkinter import *
-from random import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_rectangle(10, 10, 120, 60, fill='red')
-canvas.create_rectangle(130, 10, 200, 80, fill='yellow', outline='blue')
-canvas.create_rectangle(210, 10, 300, 60, fill='green', outline='grey')
-
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new4\ch19_5.py
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-# 以下以圓形為基礎
-canvas.create_arc(10, 10, 110, 110, extent=45, style=ARC)
-canvas.create_arc(210, 10, 310, 110, extent=90, style=ARC)
-canvas.create_arc(410, 10, 510, 110, extent=180, fill='yellow')
-canvas.create_arc(10, 110, 110, 210, extent=270, style=ARC)
-canvas.create_arc(210, 110, 310, 210, extent=359, style=ARC, width=5)
-# 以下以橢圓形為基礎
-canvas.create_arc(10, 250, 310, 350, extent=90, style=ARC, start=90)
-canvas.create_arc(320, 250, 620, 350, extent=180, style=ARC)
-canvas.create_arc(10, 360, 310, 460, extent=270, style=ARC, outline='blue')
-canvas.create_arc(320, 360, 620, 460, extent=359, style=ARC)
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new4\ch19_6.py
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-# 以下是圓形
-canvas.create_oval(10, 10, 110, 110)
-canvas.create_oval(150, 10, 300, 160, fill='yellow')
-# 以下是橢圓形
-canvas.create_oval(10, 200, 310, 350)
-canvas.create_oval(350, 200, 550, 300, fill='aqua', outline='blue', width=5)
-
-
-
-
-
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new4\ch19_7.py
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-canvas.pack()
-canvas.create_polygon(10,10, 100,10, 50,80, fill='', outline='black')
-canvas.create_polygon(120,10, 180,30, 250,100, 200,90, 130,80)
-canvas.create_polygon(200,10, 350,30, 420,70, 360,90, fill='aqua')
-canvas.create_polygon(400,10,600,10,450,80,width=5,outline='blue',fill='yellow')
-
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\tkinter\__new\new4\ch19_8.py
-
-from tkinter import *
-
-tk = Tk()
-canvas = Canvas(tk, width=640, height=480)
-#canvas = Canvas(tk, width=640, height=240, bg='yellow')
-canvas.pack()
-
-canvas.create_text(200, 50, text='Ming-Chi Institute of Technology')
-canvas.create_text(200, 80, text='Ming-Chi Institute of Technology', fill='blue')
-canvas.create_text(300, 120, text='Ming-Chi Institute of Technology', fill='blue',
-                   font=('Old English Text MT',20))
-canvas.create_text(300, 160, text='Ming-Chi Institute of Technology', fill='blue',
-                   font=('華康新綜藝體 Std W7',20))
-canvas.create_text(300, 200, text='明志科技大學', fill='blue',
-                   font=('華康新綜藝體 Std W7',20))
-
-
-print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
 
@@ -3609,23 +3242,17 @@ label3 = ttk.Label(window, text = 'Label 3', background = 'blue', width = 10)
 window.columnconfigure((0,2), weight = 1, uniform = 'a')    #column 為  0 1 2
 window.rowconfigure((0,2), weight = 1, uniform = 'a')       #row 為  0 1 2
 
-'''
+"""
 label1.grid(row = 0, column = 0)
 label2.grid(row = 1, column = 0, sticky = 'nsew')
 label3.grid(row = 0, column = 1)
-'''
+"""
+
 label1.grid(row = 0, column = 0)
 label2.grid(row = 0, column = 1)
 label3.grid(row = 0, column = 2)
 
-# run
 window.mainloop()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -3643,6 +3270,54 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+"""
+
+label = tk.Label(window,text="I like tkinter",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+label.pack()                        # 包裝與定位元件
+
+"""
+
+"""
+
+lab1 = tk.Label(window,text="明志科技大學",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+lab2 = tk.Label(window,text="長庚大學",
+              bg="lightgreen",      # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab3 = tk.Label(window,text="長庚科技大學",
+              bg="lightblue",       # 標籤背景是淺藍色
+              width=15)             # 標籤寬度是15
+lab1.grid(row=0,column=0)           # 格狀包裝
+lab2.grid(row=1,column=2)           # 格狀包裝
+lab3.grid(row=2,column=1)           # 格狀包裝
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+
+lab1 = tk.Label(window,text="明志科技大學",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+lab2 = tk.Label(window,text="長庚大學",
+              bg="lightgreen",      # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab3 = tk.Label(window,text="長庚科技大學",
+              bg="lightblue",       # 標籤背景是淺藍色
+              width=15)             # 標籤寬度是15
+lab1.place(x=0,y=0)                 # 直接定位
+lab2.place(x=30,y=50)               # 直接定位
+lab3.place(x=60,y=100)              # 直接定位
 
 print("------------------------------------------------------------")  # 60個
 

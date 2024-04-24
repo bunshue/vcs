@@ -1,5 +1,4 @@
 """
-
 print('ls 測試 os.walk')
 print('ls 測試 os.listdir')
 print('ls 測試 glob.glob')
@@ -27,14 +26,74 @@ import datetime
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test/_good1/_good4/_good5"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print(
     "ls 測試 os.walk ST------------------------------------------------------------"
 )  # 60個
 
-print("撈出資料夾下所有檔案, 多層1")
+print("轉出多層 os.walk 1 + 僅顯示檔案")
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
+
+all_files = list()
+for item in os.walk(foldername): # 多層
+    # print(item)
+    print("資料夾 :", item[0])
+    print("子資料夾:", item[1])
+    print("檔案:", item[2])
+    for _ in item[2]:
+        file = item[0] + "/" + _
+        #print(file)
+        all_files.append(file)
+        #計算檔案大小
+        #filesize = os.stat(file).st_size
+        #print(filesize)
+    print("------------------------------")  # 30個
+
+print('顯示結果:')
+for _ in all_files:
+    print(_)
+
+print("------------------------------------------------------------")  # 60個
+
+print("轉出多層 os.walk 2 + 處理")
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
+
+total_folders = 0
+total_files = 0
+total_size = 0
+all_files = list()
+for item in os.walk(foldername): # 多層
+    total_folders += 1
+    # print(item)
+    print("資料夾 :", item[0])
+    print("子資料夾:", item[1])
+    print("檔案:", item[2])
+    total_files += len(item[2])
+    for _ in item[2]:
+        file = item[0] + "/" + _
+        all_files.append(file)
+        #計算檔案大小
+        filesize = os.stat(file).st_size
+        # print(filesize)
+        total_size += filesize
+    print("------------------------------")  # 30個
+
+if total_folders > 0:
+    total_folders -= 1
+
+print("位置 :", foldername)
+print("容量 :", total_size, "位元組")
+print("包含 :", total_files, "個檔案,", total_folders, "個資料夾")
+
+print('顯示結果:')
+for _ in all_files:
+    print(_)
+
+print("------------------------------------------------------------")  # 60個
+
+print("轉出多層 os.walk 3")
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 
 filenames = os.walk(foldername)  # 多層
@@ -96,39 +155,6 @@ if len(allfiles) > 0:
 
 print("------------------------------------------------------------")  # 60個
 
-print("轉出多層")
-foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-
-total_folders = 0
-total_files = 0
-total_size = 0
-all_files = list()
-for item in os.walk(foldername): # 多層
-    total_folders += 1
-    # print(item)
-    print("資料夾 :", item[0])
-    print("子資料夾:", item[1])
-    print("檔案:", item[2])
-    total_files += len(item[2])
-    for _ in item[2]:
-        file = item[0] + "/" + _
-        filesize = os.stat(file).st_size
-        # print(filesize)
-        total_size += filesize
-        all_files.append(file)
-    print("------------------------------------------------------------")  # 60個
-
-if total_folders > 0:
-    total_folders -= 1
-
-print("位置 :", foldername)
-print("容量 :", total_size, "位元組")
-print("包含 :", total_files, "個檔案,", total_folders, "個資料夾")
-
-print()
-for _ in all_files:
-    print(_)
-
 print(
     "ls 測試 os.walk SP------------------------------------------------------------"
 )  # 60個
@@ -137,16 +163,37 @@ print(
     "ls 測試 os.listdir ST------------------------------------------------------------"
 )  # 60個
 
-# 撈出一層 至 list
+print("轉出一層 os.listdir 1")
 
-filenames = os.listdir()  # 單層, 沒有參數就是當前目錄
-print(type(filenames))
+#foldername = "."  # 當前目錄
+#foldername = "/"  # 根目錄
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
+
+filenames = os.listdir(foldername)  # 單層, 指定目錄, 若無參數, 就是當前目錄
 # print(filenames)
 
 print("當前目錄下共有 :", len(filenames), "個項目(資料夾+檔案)")
 
-print("------------------------------------------------------------")  # 60個
+filenames = os.listdir(foldername)  # 單層
+print("資料夾裡的文件與資料夾:{}".format(filenames))
 
+filenames = os.listdir(foldername)  # 單層
+print(filenames)
+
+filenames = os.listdir(foldername)  # 單層
+for filename in filenames:
+    print(filename)
+    long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+    print(long_filename)
+    sub, ext = os.path.splitext(filename)
+    print("前檔名", sub, "後檔名", ext)
+
+print("印出 filenames 內特定附檔名之檔案")
+zz = [name for name in filenames if name.endswith((".jpg", ".txt"))]
+print("*.jpg *.txt files:")
+print(zz)
+
+print("------------------------------------------------------------")  # 60個
 
 def dirTree(foldername, level=0):
     if level > 1:
@@ -166,79 +213,12 @@ def dirTree(foldername, level=0):
 foldername = "C:/_git/vcs/_1.data/______test_files5"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 
+print("轉出一層 os.listdir 3 看level")
 dirTree(foldername)
 
 print("------------------------------------------------------------")  # 60個
 
-print("指定目錄下之ls (單層)")
-
-foldername = "."  # 當前目錄
-foldername = "/"  # 根目錄
-
-# 指定目錄
-foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-
-filenames = os.listdir(foldername)  # 單層
-print(type(filenames))
-print(filenames)
-
-for filename in filenames:
-    print(filename)
-    long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
-    print(long_filename)
-    sub, ext = os.path.splitext(filename)
-    print("前檔名", sub, "後檔名", ext)
-
-print("排序印出")
-for filename in sorted(filenames):
-    print(filename)
-
-print("印出 filenames 內特定附檔名之檔案")
-zz = [name for name in filenames if name.endswith((".jpg", ".txt"))]
-print("*.jpg *.txt files:")
-print(zz)
-
-print("------------------------------------------------------------")  # 60個
-
-print("指定目錄下之ls (單層)")
-filenames = os.listdir(foldername)  # 單層
-print(filenames)
-for filename in filenames:
-    print(filename)
-
-filelist = []
-for filename in filenames:
-    long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
-    print(long_filename)
-
-filelist.sort(key=os.path.normcase)
-
-print("------------------------------------------------------------")  # 60個
-
-print("指定目錄下之ls (單層)")
-
-filenames = os.listdir(foldername)  # 單層
-filenames.sort()
-
-for filename in filenames:
-    long_filename = os.path.join(foldername, filename)
-    print(long_filename)
-
-print("------------------------------------------------------------")  # 60個
-
-fix_names = []
-for filename in sorted(os.listdir(foldername)):  # 單層
-    if filename.startswith("fix_") and filename.endswith(".py"):
-        if remove_prefix:
-            filename = filename[4:]
-        fix_names.append(filename[:-3])
-
-print(fix_names)
-
-print("------------------------------------------------------------")  # 60個
-
-print("撈出資料夾下所有檔案, 多層3")
-
+print("轉出多層 os.listdir 7 callback")
 
 def list_files1(foldername, callback):
     for filename in os.listdir(foldername):  # 單層
@@ -265,7 +245,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("顯示資料夾內的特定格式的檔案")
 
-
 def is_image(filename):
     f = filename.lower()
     return (
@@ -289,8 +268,7 @@ def find_similar_images(foldername):
     for img in sorted(image_filenames):
         print(img)
 
-
-foldername = "C:/_git/vcs/_1.data/______test_files2"
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 find_similar_images(foldername)
 
 print("------------------------------------------------------------")  # 60個
@@ -321,30 +299,28 @@ def read_files(foldername, showProgress=False, readPixelData=False, force=False)
     print(filelist)
 
 
-print("撈出資料夾下所有檔案, 多層4")
+print("轉出多層 os.listdir 8")
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 all_series = read_files(foldername, True, False, False)
 
 print("------------------------------------------------------------")  # 60個
 
-print("撈出資料夾下所有檔案, 單層")
+print("轉出一層 os.listdir 9")
 
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 
-def list_files3(foldername):
-    for filename in os.listdir(foldername):  # 單層
+for filename in os.listdir(foldername):  # 單層
+    print(filename)
+    if filename not in (os.curdir, os.pardir):
         print(filename)
-        if filename not in (os.curdir, os.pardir):
-            print(filename)
-            long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
-            print(long_filename)
-        else:
-            print("x")
-
-
-list_files3(foldername)
+        long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+        print(long_filename)
+    else:
+        print("x")
 
 print("------------------------------------------------------------")  # 60個
 
-print("撈出資料夾下所有檔案, 多層5")
+print("轉出多層 os.listdir 10")
 
 
 def list_files4(foldername):
@@ -358,6 +334,7 @@ def list_files4(foldername):
             print("f", long_filename, os.stat(long_filename).st_size)
 
 
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 list_files4(foldername)
 
 print("------------------------------------------------------------")  # 60個
@@ -382,6 +359,7 @@ def list_files5(foldername):
                 testdir(long_filename)
 
 
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 list_files5(foldername)
 
 print("------------------------------------------------------------")  # 60個
@@ -399,6 +377,7 @@ def getFolderSize(foldername):
     return size
 
 
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 folder_size = getFolderSize(foldername)
 print("資料夾大小 : ", folder_size, "拜")
 
@@ -440,6 +419,7 @@ def processdir(dir, listnames):
     return exit
 
 
+foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 listnames = 1  # or 1
 x = process(foldername, listnames)
 print(x)
@@ -884,14 +864,6 @@ print(images)
 
 print("------------------------------------------------------------")  # 60個
 
-foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
-
-listdir = os.listdir(foldername)  # 單層
-print("資料夾裡的文件與資料夾:{}".format(listdir))
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -997,10 +969,6 @@ print("os.path.split() =", r)
 r = os.path.splitext(fname)
 print("os.path.splitext() =", r)
 
-
-
-
-
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 short_filename = os.path.basename(filename)
@@ -1069,7 +1037,6 @@ print(ccc)
 
 print("------------------------------------------------------------")  # 60個
 
-'''
 foldername = 'C:/_git/vcs/_1.data/______test_files1'
 filename = 'picture1.jpg'
 
@@ -1093,15 +1060,12 @@ print("os.path.join(foldername, filename) =", r)
 
 """
 #其實 rename 就是 move
-
 filename1 = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/picture1.airi.jpg"
 filename3 = filename2.replace("______test_files1", "______test_files5")  # 取出圖片檔名，將 jpg 換成 png
-
 cc = os.rename(filename1, filename2)
 cc = os.rename(filename2, filename3)
 print(cc)
-
 """
 
 filename = 'aaaaaa.py'
@@ -1121,12 +1085,21 @@ else:
 
 """
 os.path.islink(long_filename)
-
 os.path.isdir(file)
-
 os.readlink(long_filename))
+"""
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 """
-print("------------------------------------------------------------")  # 60個
 
+檔名處理
+    if filename.startswith("filen") and filename.endswith(".jpg"):
+        #if remove_prefix:
+        #    filename = filename[4:]
+        fix_names.append(filename[:-3])
+
+
+"""

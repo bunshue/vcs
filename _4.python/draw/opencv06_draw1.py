@@ -359,3 +359,96 @@ cv2.imshow('Result', image)
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+W, H, D = 400, 400, 3
+image = np.ones((H, W, 3), dtype="uint8") * 255
+(centerX, centerY) = (round(image.shape[1] / 2), round(image.shape[0] / 2))
+# 將圖像的中心作為圓心,實際值為 d / 2
+red = (0, 0, 255)  # 設置白色變量
+for r in range(5, round(400 / 2), 12):
+    cv2.circle(image, (centerX, centerY), r, red, 3)
+    # circle(載體圖像，圓心，半徑，顏色)
+
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("畫圖 1")
+plt.show()
+
+cv2.imshow("Demo19.3", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+W, H, D = 400, 400, 3
+image = np.ones((H, W, 3), dtype="uint8") * 255
+# 生成白色背景
+for i in range(0, 100):
+    centerX = np.random.randint(0, high=400)  # np.random之randint不含尾
+    # 生成隨機圓心X,確保在畫布image內
+    centerY = np.random.randint(0, high=400)  # np.random之randint不含尾
+    # 生成隨機圓心Y,確保在畫布image內
+    radius = np.random.randint(5, high=400 / 5)  # np.random之randint不含尾
+    # 生成隨機半徑，值范圍：[5, d/5)，最大半徑是 d / 5
+    color = np.random.randint(0, high=256, size=(3,)).tolist()  # np.random之randint不含尾
+    # 生成隨機顏色，3個[0, 256)的隨機數
+    cv2.circle(image, (centerX, centerY), radius, color, -1)
+    # 使用上述隨機數，在畫布image內畫圓
+
+
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("畫圖 2")
+plt.show()
+
+cv2.imshow("demo19.4", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+W, H, D = 400, 400, 3
+image = np.ones((H, W, 3), dtype="uint8") * 255
+# 生成白色背景
+center = (round(400 / 2), round(400 / 2))
+# 注意數值類型，center = (d / 2, d / 2)不可以
+size = (100, 200)
+# 軸的長度
+for i in range(0, 10):
+    angle = np.random.randint(0, 361)  # np.random之randint不含尾
+    # 偏移角度
+    color = np.random.randint(0, high=256, size=(3,)).tolist()  # np.random之randint不含尾
+    # 生成隨機顏色，3個[0, 256)的隨機數
+    thickness = np.random.randint(1, 9)  # np.random之randint不含尾
+    cv2.ellipse(image, center, size, angle, 0, 360, color, thickness)
+
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("畫圖 3")
+plt.show()
+
+cv2.imshow("demo19.5", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+W, H, D = 400, 400, 3
+image = np.ones((H, W, 3), dtype="uint8") * 255
+# 生成白色背景
+pts = np.array([[200, 50], [300, 200], [200, 350], [100, 200]], np.int32)
+# 生成各個頂點,注意數據類型為int32
+pts = pts.reshape((-1, 1, 2))
+# 第1個參數為-1, 表明這一維的長度是根據后面的維度的計算出來的。
+cv2.polylines(image, [pts], True, (0, 255, 0), 8)
+# 調用函數polylines完成多邊形繪圖，注意第3個參數控制多邊形封閉
+# cv2.polylines(image, [pts], False, (0, 255, 0), 8)  #不閉合的的多邊形
+
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.title("畫圖 4")
+plt.show()
+
+cv2.imshow("demo19.6", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+

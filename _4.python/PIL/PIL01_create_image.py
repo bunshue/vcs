@@ -36,8 +36,7 @@ print('------------------------------------------------------------')	#60個
 print(ImageColor.getrgb("#0000ff"))         #(0, 0, 255)
 print(ImageColor.getrgb("rgb(0,0,255)"))    #(0, 0, 255)
 print(ImageColor.getrgb("rgb(0%,0%,100%)")) #(0, 0, 255)
-print(ImageColor.getrgb("Blue"))            #(0, 0, 255)
-print(ImageColor.getrgb("red"))
+print(ImageColor.getrgb("red"))             #(255, 0, 0)
 
 print('------------------------------------------------------------')	#60個
 
@@ -50,9 +49,9 @@ print(ImageColor.getcolor("#0000ff", "RGBA"))
 
 print('------------------------------------------------------------')	#60個
 
+W, H = 640, 480
+
 print('建立影像 RGB')
-W = 640
-H = 320
 
 print('建立影像 RGB 全紅')
 image = Image.new("RGB", (W, H), "#ff0000")  # 產生 RGB 色域，W x H 背景紅色的圖片
@@ -91,25 +90,3 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-共用抽出
-
-#存圖
-#image.save("xxxx.jpg")
-#image.save("xxxx.png")
-
-#img1.save("tmp_blue.jpg")
-#print(img1.shape)
-
-#img2.save("tmp_alpha.png")
-#print(img2.shape)
-
-
-
-#顯示
-#image.show()
-
-
-
-"""

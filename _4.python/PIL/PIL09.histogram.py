@@ -4,10 +4,6 @@ PIL histogram
 
 """
 
-import time
-import glob
-import shutil
-
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageOps
@@ -39,20 +35,31 @@ filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 filename = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.bmp' #400X400
 filename = '../opencv/data/pic_calcHist.jpg'
+filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"
+
+plt.figure(
+    num="配合圖形遮罩計算直方圖",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 # 檔案 => PIL影像
 image1 = Image.open(filename)
 
+plt.subplot(231)
 plt.imshow(image1)
 plt.title('原圖')
-plt.show()
 
 # PIL影像 => 灰階
 image_gray = image1.convert('L')
 
+plt.subplot(232)
 plt.imshow(image_gray)
 plt.title('灰階')
-plt.show()
 
 W, H = image_gray.size
 print('原圖大小 W =', W, ', H =', H)
@@ -63,9 +70,9 @@ w = W - x_st * 2
 h = H - y_st * 2
 image_cropped = image_gray.crop((x_st, y_st, x_st + w, y_st + h))
 
+plt.subplot(233)
 plt.imshow(image_cropped)
 plt.title('灰階 裁一塊')
-plt.show()
 
 image_cropped_hist = image_cropped.histogram()
 
@@ -73,8 +80,8 @@ W2, H2 = 320, 240
 print('把原圖轉成', W2, 'X', H2, '大小')
 image3 = image1.resize((W2, H2), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
 
+plt.subplot(234)
 plt.imshow(image3)
-plt.show()
 
 image_gray = image3.convert('L')	#轉換成灰階圖像
 hist = image_gray.histogram()
@@ -90,6 +97,7 @@ b_hist = b.histogram()
 print('len = ', len(image_cropped_hist))
 ind = np.arange(0, len(image_cropped_hist))
 
+plt.subplot(235)
 plt.plot(ind, image_cropped_hist, color = 'cyan', label = 'cropped')
 plt.plot(ind, hist, color = 'black', label = 'original')
 plt.plot(ind, r_hist, color = 'red', label = 'Red Plane')

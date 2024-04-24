@@ -7,26 +7,29 @@ PIL影像.putpixel 設定該點之像素值
 
 """
 
-import os
-import sys
 import time
-import random
-import matplotlib.pyplot as plt
 from PIL import Image   # Importing Image class from PIL module
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
-print('------------------------------------------------------------')	#60個
-
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
@@ -42,26 +45,34 @@ for x in range(100, 200):
 plt.imshow(image)
 plt.show()
 
-print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/green_300X300.bmp'
-
 #純圖片指定座標取得顏色方法
-def rgb_of_pixel(image_path, x, y):
-    # 檔案 => PIL影像 => RGB影像
-    image = Image.open(image_path).convert('RGB')
-    r, g, b = image.getpixel((x, y))
-    a = (r, g, b)
-    return a
+# 檔案 => PIL影像 => RGB影像
+#image = Image.open(filename).convert('RGB')
+x, y = 150, 300
+r, g, b = image.getpixel((x, y))
 
-print(rgb_of_pixel(filename, 131, 81))
-
-print("------------------------------------------------------------")  # 60個
+print("R :", r, "G :", g, "B :", b)
 
 
 print('------------------------------------------------------------')	#60個
 
-print('------------------------------------------------------------')	#60個
+# 檔案 => PIL影像
+image = Image.open(filename)
+w,h=image.size #320 240
+
+# PIL影像 => 灰階
+image = image.convert('L')  #先轉換為灰階
+
+for i in range(w):  #i為每一列
+    for j in range(h):  #j為每一行
+        if image.getpixel((i,j)) <100:  
+            image.putpixel((i,j),(0))   #設為黑色
+        else:
+            image.putpixel((i,j),(255)) #設為白色
+
+plt.imshow(image)
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -104,35 +115,13 @@ plt.title('萃取圖片的輪廓')
 
 plt.show()
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-# 檔案 => PIL影像
-image = Image.open(filename)
-w,h=image.size #320 240
-
-# PIL影像 => 灰階
-image = image.convert('L')  #先轉換為灰階
-
-for i in range(w):  #i為每一列
-    for j in range(h):  #j為每一行
-        if image.getpixel((i,j)) <100:  
-            image.putpixel((i,j),(0))   #設為黑色
-        else:
-            image.putpixel((i,j),(255)) #設為白色
-
-plt.imshow(image)
-
-plt.show()
 
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -140,6 +129,4 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-#print(image.getpixel((W//2, H//2)))      # 列印中心點的色彩
 
