@@ -63,6 +63,18 @@ print('filesize = ', filesize , '\t檔案大小 : ', ByteConversionTBGBMBKB(file
 
 print('------------------------------------------------------------')	#60個
 
+def get_cma_times(filename):
+    cc = os.stat(filename)
+    ctime = cc[stat.ST_CTIME]
+    mtime = cc[stat.ST_MTIME]
+    atime = cc[stat.ST_ATIME]
+
+    print('建立日期:\t', time.ctime(ctime))
+    print('修改日期:\t', time.ctime(mtime))
+    print('存取日期:\t', time.ctime(atime))
+
+print('------------------------------------------------------------')	#60個
+
 print("使用 os.stat 取得檔案資訊")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
@@ -78,15 +90,9 @@ ctime = cc[stat.ST_CTIME]
 mtime = cc[stat.ST_MTIME]
 atime = cc[stat.ST_ATIME]
 
-print('大小\t', cc[stat.ST_SIZE])
-print('建立日期:\t', cc[stat.ST_CTIME])
-print('修改日期:\t', cc[stat.ST_MTIME])
-print('存取日期:\t', cc[stat.ST_ATIME])
-
-print("大小 :", size, "拜")
-print('建立日期:\t', cc[stat.ST_CTIME])
-print('修改日期:\t', cc[stat.ST_MTIME])
-print('存取日期:\t', cc[stat.ST_ATIME])
+#print('建立日期:\t', ctime)  # 秒
+#print('修改日期:\t', mtime)  # 秒
+#print('存取日期:\t', atime)  # 秒
 
 print('大小:\t', size, ' 拜')
 print('大小:\t', ByteConversionTBGBMBKB(size))
@@ -215,65 +221,68 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-print('修改檔案的 修改日期, 將檔案2的修改日期設定給檔案1')
+print('修改檔案的 修改/存取 日期, 將檔案2的 修改/存取 日期設定給檔案1')
 
-#檔案touch前的時間
 filename1 = 'python03_algorithm.py'
-old_time = os.stat(filename1).st_mtime #修改日期
-print("檔案1的修改日期:(舊)\t", time.ctime(old_time))
+cc = os.stat(filename1)
+mtime1 = cc[stat.ST_MTIME]  # 修改日期
+atime1 = cc[stat.ST_ATIME]  # 存取日期
+get_cma_times(filename1)
+print("檔案1的修改日期:(舊)\t", time.ctime(mtime1))
+print("檔案1的存取日期:(舊)\t", time.ctime(atime1))
 
 filename2 = 'python05_file_info.py'
-new_time = os.stat(filename2).st_mtime #修改日期
-print("檔案2的修改日期:\t", time.ctime(new_time))
+cc = os.stat(filename2)
+mtime2 = cc[stat.ST_MTIME]  # 修改日期
+atime2 = cc[stat.ST_ATIME]  # 存取日期
 
-print("兩個檔案的時間差:\t",new_time - old_time, '秒')
+get_cma_times(filename2)
+print("檔案2的修改日期:\t", time.ctime(mtime2))
+print("檔案2的存取日期:\t", time.ctime(atime2))
 
-print('將檔案2的修改日期設定給檔案1')
-os.utime(filename1, (new_time, new_time))
+print("兩個檔案的修改日期的時間差:\t",mtime2 - mtime1, '秒')
+print("兩個檔案的存取日期的時間差:\t",atime2 - atime1, '秒')
 
-new_modify_time = os.stat(filename1).st_mtime #修改日期
-print("檔案1的修改日期:(新)\t", time.ctime(new_modify_time))
-
-"""
-print('touch 一個檔案')
-now = time.time()
-os.utime(filename1, (now, now))
-"""
-
-"""
-#os.utime的用法
-os.utime(filename, (cc[stat.ST_ATIME], cc[stat.ST_MTIME]))
-
+print('將檔案2的 修改/存取 日期設定給檔案1')
 #修改atime, mtime
 try:
-    os.utime(filename, (atime, mtime))
+    #os.utime(filename1, (atime2, mtime2))
+    os.utime(filename1, times=(atime2, mtime2))
 except OSError as msg:
-    err('%s: reset of timestamp failed (%r)\n' % (filename, msg))
+    err('%s: reset of timestamp failed (%r)\n' % (filename1, msg))
+    sys.stderr.write(filename1 + ': cannot change time\n')
 
-st_atime: 上次訪問的時間。
-st_mtime: 最後一次修改的時間。
-
-print('將檔案1的時間拷貝到檔案2')
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/aaaaaaab.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/country_data_out1.xml'
-
-try:
-    cc = os.stat(filename1)
-    print(cc[stat.ST_ATIME])
-    print(cc[stat.ST_MTIME])
-except OSError:
-    sys.stderr.write(filename1 + ': cannot stat\n')
-    sys.exit(1)
-try:
-    os.utime(filename2, (cc[stat.ST_ATIME], cc[stat.ST_MTIME]))
-except OSError:
-    sys.stderr.write(filename2 + ': cannot change time\n')
-    sys.exit(2)
-
-"""
+get_cma_times(filename1)
+print("檔案1的修改日期:(新)\t", time.ctime(mtime1))
+print("檔案1的存取日期:(新)\t", time.ctime(atime1))
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'python04_str_DSLT1.py'
+
+print('touch 一個檔案')
+
+print('touch 前 :')
+get_cma_times(filename)
+
+os.utime(filename, (time.time(), time.time()))
+
+print('touch 後 :')
+get_cma_times(filename)
+
+
+filename = 'python04_string.py'
+
+print('touch 前 :')
+get_cma_times(filename)
+
+
+os.utime(filename, (0, 0))#將兩時間改成1970-01-01
+#os.utime(filename, None)  # 改成最新時間
+#os.utime(filename)  # 改成最新時間
+
+print('touch 後 :')
+get_cma_times(filename)
 
 
 print('------------------------------------------------------------')	#60個
@@ -290,14 +299,7 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
 
 
 

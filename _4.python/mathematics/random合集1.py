@@ -1,7 +1,7 @@
-import sys
-import random
 
 # 不使用numpy
+
+import time
 
 """
 random.seed()
@@ -16,9 +16,37 @@ random.其他
 
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
 print(
     "---- random.seed() ST --------------------------------------------------------"
 )  # 60個
+
+"""
+random.seed
+random.seed 隨機數的「種子」，數值一樣則產生的隨機數相同，
+若不設定則使用系統提供隨機源，這樣做出來的random資料並不是真正的隨機數
+如果 seed 相同則結果相同
+"""
 
 # 不固定亂數種子
 for _ in range(10):
@@ -33,8 +61,6 @@ for _ in range(10):
 print()
 
 # 打亂亂數種子
-import time
-
 randseed = int(time.time())
 random.seed(randseed)
 for _ in range(10):
@@ -62,6 +88,12 @@ print(random.random())  # 產生隨機浮點數n,0 <= n < 1.0
 
 for i in range(5):
     print(random.random())
+
+a = random.random()
+b = random.random()
+c = random.random()  # 重複 print 出來的結果是相同的
+d = random.random()
+print(f"{a}\n{b}\n{c}\n{d}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -328,6 +360,64 @@ print(generate_code(10))
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+c = random.randint(0, 1)  # randint 包含設定的最後一個數值，0 和 1 隨機挑選
+print(c)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+n = 3
+for i in range(n):
+    print("1-100     : ", random.randint(1, 100))
+
+for i in range(n):
+    print("500-1000  : ", random.randint(500, 1000))
+
+for i in range(n):
+    print("2000-3000 : ", random.randint(2000, 3000))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+for _ in range(10):
+    aa = random.randint(1,10)
+    print(aa)
+
+val=0
+data=[0]*80
+for i in range(80):
+    data[i]=random.randint(1,150)
+while val!=-1:
+    find=0
+    val=int(input('請輸入搜尋鍵值(1-150)，輸入-1離開：'))
+    for i in range(80):
+        if data[i]==val:
+            print('在第 %3d個位置找到鍵值 [%3d]' %(i+1,data[i]))
+            find+=1
+    if find==0 and val !=-1 :
+        print('######沒有找到 [%3d]######' %val)
+print('資料內容：')
+for i in range(10):
+    for j in range(8):
+        print('%2d[%3d]  ' %(i*8+j+1,data[i*8+j]),end='')
+    print('')
+
+"""
+print("------------------------------------------------------------")  # 60個
+
+a = set()  # 建立空集合
+while len(a) < 6:  # 使用 while 迴圈，直到集合的長度等於 6 就停止
+    b = random.randint(1, 49)  # 取出 1～49 得隨機整數
+    a.add(b)  # 將隨機數加入集合
+print(a)  # {34, 41, 48, 49, 19, 30}
+
+print("------------------------------------------------------------")  # 60個
+
 print(
     "---- random.randint(num1, num2) SP --------------------------------------------------------"
 )  # 60個
@@ -390,6 +480,121 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+for i in range(0,7):
+    print(random.choice("ABCDEFGHIJKLMN"), end=",")
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+str1 = "abcde"
+for i in range(0,3):
+    print(random.choice(str1), end=" ")
+
+print("------------------------------------------------------------")  # 60個
+
+list1 = ['a','b','c','d','e']    
+for i in range(0,3):
+    print(random.choice(list1), end=" ")
+
+
+print("------------------------------------------------------------")  # 60個
+
+name = ["小明", "小黃", "小紅", "小綠", "小白"]
+print("抽取一個元素：", random.choice(name))
+
+print("------------------------------------------------------------")  # 60個
+
+
+# 假設有一組伺服器
+servers = ["Server1", "Server2", "Server3", "Server4"]
+
+# 模擬1000次請求, 隨機分配到這些伺服器
+requests = {server: 0 for server in servers}
+for _ in range(1000):
+    selected_server = random.choice(servers)
+    requests[selected_server] += 1
+
+print(requests)  # 顯示每個伺服器獲得的請求數
+
+print("------------------------------------------------------------")  # 60個
+
+
+animals = ["鼠", "牛", "虎", "兔", "龍"]
+print(random.choice(animals))
+
+print("------------------------------------------------------------")  # 60個
+
+
+# random.choices
+
+a = random.choice([1, 2, 3, 4, 5])  # choice 從 list 中選擇一個隨機元素
+print(a)
+
+# choices 從 list 中選擇指定數量的隨機元素 ( 可能會重複 )
+b = random.choices([1, 2, 3, 4, 5, 6, 7, 8], k=5)
+print(b)
+
+# choices 可透過 weight 定義權重，有相對和累績兩種選一種的設定
+# weights 為相對，cum_weights 為累積，下面的例子出現 8 的機率是 1 的八倍
+c = random.choices([1, 2, 3, 4, 5, 6, 7, 8], weights=[1, 2, 3, 4, 5, 6, 7, 8], k=5)
+print(c)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+# The card suit characters:
+HEARTS = chr(9829)  # Character 9829 is '♥'
+DIAMONDS = chr(9830)  # Character 9830 is '♦'
+SPADES = chr(9824)  # Character 9824 is '♠'
+CLUBS = chr(9827)  # Character 9827 is '♣'
+# A list of chr() codes is at https://inventwithpython.com/chr
+
+
+for _ in range(20):
+    suit = random.choice([HEARTS, DIAMONDS, SPADES, CLUBS])
+    print(suit, end=" ")
+print()
+
+
+def getRandomCard():
+    rank = random.choice(list("23456789JQKA") + ["10"])
+    suit = random.choice([HEARTS, DIAMONDS, SPADES, CLUBS])
+    return (rank, suit)
+
+
+cc = getRandomCard()
+print(cc)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+# 自訂密碼產生器
+
+
+def set_password_source(source):
+    def password_gen(length):
+        output = []
+        for i in range(length):
+            output.append(random.choice(source))
+        return "".join(output)
+
+    return password_gen
+
+
+my_password_gen = set_password_source("0123456789abcdefghij")
+print(my_password_gen(10))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print(
@@ -424,8 +629,6 @@ a = random.randrange(2, 500, 2)  # randrange 可指定隨機數階層，一定�
 print(a)
 b = random.randrange(0, 1)  # randrange 不包含設定的最後一個數值，一定出現 0
 print(b)
-c = random.randint(0, 1)  # randint 包含設定的最後一個數值，0 和 1 隨機挑選
-print(c)
 
 print("任一整數", random.randrange(100))
 print("任一整數", random.randrange(52, 100))
@@ -435,6 +638,19 @@ print("偶數", random.randrange(0, 100, 2))
 print(random.randrange(0, 88, 11))  # 從序列中取一個隨機數
 
 print("------------------------------------------------------------")  # 60個
+
+print("任一整數", random.randrange(100))
+print("任一整數", random.randrange(52, 100))
+print("奇數", random.randrange(1, 100, 2))
+print("偶數", random.randrange(0, 100, 2))
+
+print("------------------------------------------------------------")  # 60個
+
+for i in range(0,5):
+    print(random.randrange(0,10,2), end=" ")
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -480,9 +696,6 @@ for i in range(5):
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 for i in range(5):
     print("uniform(1,10) : ", random.uniform(1, 10))
 
@@ -500,6 +713,13 @@ data = [random.uniform(-100, 1000) for _ in range(1000)]
 data = [random.uniform(-3, 8) for _ in range(1000)]
 data = [random.uniform(1, 1000) for _ in range(100)]
 """
+
+print("------------------------------------------------------------")  # 60個
+
+for i in range(0,3):
+    print(random.uniform(0,10), end=" ")
+
+print("------------------------------------------------------------")  # 60個
 
 
 print(
@@ -612,6 +832,153 @@ print("本期大樂透中獎號碼為：", lottery_numbers)
 print("------------------------------------------------------------")  # 60個
 
 
+str1 = "abcde"
+print(random.sample(str1, 3))    
+
+print("------------------------------------------------------------")  # 60個
+
+name = ["小明", "小黃", "小紅", "小綠", "小白"]
+print("抽取三個元素：", random.sample(name, 3))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+# 假設生產線上有一批產品序列號
+product_serials = list(range(1000, 2000))
+
+# 抽檢10個產品進行品質檢查
+samples = random.sample(product_serials, 10)
+
+for serial in samples:
+    # 這裡會有一個品質檢查的函數
+    print(f"檢查序列號 : {serial}")
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+#  將 1~49 的整數放入num串列中
+num = []
+for i in range(49):
+    num.append(i + 1)
+# 使用 random套件的sample函式由num中隨機取得不重複的7個元素
+lot = random.sample(num, 7)
+
+print("大樂透  號碼：", end="")
+# 印出 lot[0]~lot[5]
+for i in range(6):
+    print(lot[i], end=", ")
+
+print()
+print("大樂透特別號：%2d" % (lot[6]))  # 印出 lot[6]
+
+print("------------------------------------------------------------")  # 60個
+
+a = random.sample(range(1, 50), 6)
+# 從包含 1～49 數字的串列中，取出六個不重複的數字變成串列
+print(a)  # [9, 39, 10, 8, 25, 43]
+
+"""
+a = random.randint(1, 99)  # 產生 1～99 的隨機整數
+b = int(input("輸入 1～99 的數字："))  # 讓使用者輸入數字，使用 int 轉換成數字
+while a != b:  # 使用 while 迴圈，如果 a 不等於 b，就不斷繼續
+    if b < a:
+        b = int(input("數字太小囉！再試一次吧："))  # 如果 b<a，提示數字太小
+    elif b > a:
+        b = int(input("數字太大囉！再試一次吧："))  # 如果 b>a，提示數字太大
+print("答對囉！")  # 如果 b=a 會停止 while 迴圈，顯示正確答案
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+answer = random.sample(range(1, 10), 4)
+print(answer)
+a = b = n = 0  # 設定 a、b、n 三個變數，預設值 0
+while a != 4:  # 使用 while 迴圈，直到 a 等於 4 才停止
+    a = b = n = 0  # 每次重複時將 a、b、n 三個變數再次設定為 0
+    user = list(input("輸入四個數字："))  # 讓使用者輸入數字，並透過 list 轉換成串列
+    for i in user:  # 使用 for 迴圈，將使用者輸入的數字一一取出
+        if int(user[n]) == answer[n]:  # 因為使用者輸入的是「字串」，透過 int 轉換成數字，和答案串列互相比較
+            a += 1  # 如果位置和內容都相同，就將 a 增加 1
+        else:
+            if int(i) in answer:  # 如果位置不同，但答案裡有包含使用者輸入的數字
+                b += 1  # 就將 b 增加 1
+        n += 1  # 因為輸入的每個數字都要判斷，將 n 增加 1
+    output = ",".join(user).replace(",", "")  # 四個數字都判斷後，使用 join 將串列合併成字串
+    print(f"{output}: {a}A{b}B")
+print("答對了！")
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+answer = random.sample(range(1, 10), 4)
+print(answer)
+a = b = n = 0
+num = 0  # 新增 num 變數為 0，作為計算次數使用
+t = time.time()  # 新增 t 變數為現在的時間
+while a != 4:
+    num += 1  # 每次重複時將 num 增加 1
+    a = b = n = 0
+    user = list(input("輸入四個數字："))
+    for i in user:
+        if int(user[n]) == answer[n]:
+            a += 1
+        else:
+            if int(i) in answer:
+                b += 1
+        n += 1
+    output = ",".join(user).replace(",", "")
+    print(f"{output}: {a}A{b}B")
+t = round((time.time() - t), 3)  # 當 a 等於 4 時，計算結束和開始的時間差
+print(f"答對了！總共猜了 {num} 次，用了 {t} 秒")  # 印出對應的文字
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+list1 = ['a','b','c','d','e']    
+print(random.sample(list1, 3))  
+
+while True:
+    inkey = input("請按任意鍵後再按Enter鍵擲骰子，若要結束請直接按Enter鍵。")
+    if len(inkey)>0:
+        num=random.randint(1,6)
+        print("亂數產生的骰子點數："+str(num))
+    else:
+        print("擲骰子點數結束。")
+        break
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+list1 = random.sample(range(1,50),7)
+print(list1)
+special = list1.pop()
+print(special)
+list1.sort()
+print("本期大樂透中獎號碼為:", end="")
+for i in range(0,6):
+    if (i==5):
+        print(str(list1[i]))
+    else:
+        print(str(list1[i]), end=",")
+print("本期大樂透特別號為:"+str(special))
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 print(
     "--- random.sample SP ---------------------------------------------------------"
 )  # 60個
@@ -696,13 +1063,6 @@ print("新串列：", animals)
 
 print("------------------------------------------------------------")  # 60個
 
-name = ["小明", "小黃", "小紅", "小綠", "小白"]
-
-print("抽取一個元素：", random.choice(name))
-print("抽取三個元素：", random.sample(name, 3))
-
-print("------------------------------------------------------------")  # 60個
-
 # Every possible symbol that can be encrypted/decrypted:
 LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 lettersList = list(LETTERS)  # 字串 轉 串列
@@ -724,95 +1084,17 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-print(
-    "--- random.shuffle(list) SP ---------------------------------------------------------"
-)  # 60個
-
-
-print(
-    "--- random.其他 ST ---------------------------------------------------------"
-)  # 60個
-
-tttt = hex(random.getrandbits(64))  # 64 bits randomness
-print(tttt)
-
-# 隨機二進制數的整數返回
-print(random.getrandbits(200))
+for i in range(5):
+    a = random.randint(1, 10)  # 隨機取得整數
+    print(a, end=" ")
+print()
+# 給定items數列的初始值
+word = ["apple", "bird", "tiger", "happy", "quick"]
+random.shuffle(word)  # 使用shuffle函數打亂字的順序
+print(word)  # 將打亂後字依序輸出
 
 print("------------------------------------------------------------")  # 60個
 
-print("random 之 dir")
-import random
-
-print(dir(random))
-print("顯示模組的所有名稱dir()")
-print(dir(random))
-
-
-print("------------------------------------------------------------")  # 60個
-
-# triangular 返回兩個值中間的隨機浮點數
-c = random.triangular(3, 8)
-print(c)
-
-# beta 分佈，兩個值需都大於 0，返回 0~1 之間隨機浮點數
-d = random.betavariate(3, 8)
-print(d)
-
-# 指數分佈，不可為 0，若為負，則是小於零的福點數
-e = random.expovariate(-5)
-print(e)
-
-# 其他還有
-# random.gammavariate(alpha, beta)
-# random.gauss(mu, sigma)
-# random.lognormvariate(mu, sigma)
-# random.normalvariate(mu, sigma)
-# random.vonmisesvariate(mu, kappa)
-# random.paretovariate(alpha)
-# random.weibullvariate(alpha, beta)
-
-# 參考：https://docs.python.org/zh-cn/3/library/random.html#random.random
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-
-min = 1
-max = 6  # 骰子有幾面
-times = 10000  # 擲骰子次數
-
-dice = [0] * 7  # 建立擲骰子的串列
-for i in range(times):
-    data = random.randint(min, max)
-    dice[data] += 1
-print(dice)
-del dice[0]  # 刪除索引0資料
-
-for i, c in enumerate(dice, 1):
-    print("{} = {} 次".format(i, c))
-print(dice)
-x = [i for i in range(1, max + 1)]  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-plt.bar(x, dice, width, color="g")  # 繪製長條圖
-plt.ylabel("Frequency")
-plt.title("Test 10000 times")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 import string
 
@@ -838,99 +1120,6 @@ ciphertext = encrypt(msg, encry_dict)
 
 print("原始字串 ", msg)
 print("加密字串 ", ciphertext)
-
-print("------------------------------------------------------------")  # 60個
-
-# 假設一家公司想要測試兩種不同的廣告設計, 以看哪一種效果更好
-ad_designs = ["Design A", "Design B"]
-
-# 公司有一個1000人的郵件列表, 想要隨機選擇一半接收A廣告, 一半接收B廣告
-recipients = {"Design A": [], "Design B": []}
-
-# 隨機分配郵件
-for i in range(1, 1001):
-    chosen_design = random.choice(ad_designs)  # 隨機選擇一種設計
-    recipients[chosen_design].append(f"user_{i}")
-
-# 確保每種設計都有500個用戶
-while len(recipients["Design A"]) != 500:
-    if len(recipients["Design A"]) > 500:
-        user_to_move = recipients["Design A"].pop()
-        recipients["Design B"].append(user_to_move)
-    else:
-        user_to_move = recipients["Design B"].pop()
-        recipients["Design A"].append(user_to_move)
-
-# 假設這裡會發送郵件，然後根據用戶反饋進行分析
-
-# 輸出每種設計的接收者數量，確保它們是平均分配的
-print(f"A 廣告接收者數量 : {len(recipients['Design A'])}")
-print(f"B 廣告接收者數量 : {len(recipients['Design B'])}")
-
-print("------------------------------------------------------------")  # 60個
-
-# 假設有一組伺服器
-servers = ["Server1", "Server2", "Server3", "Server4"]
-
-# 模擬1000次請求, 隨機分配到這些伺服器
-requests = {server: 0 for server in servers}
-for _ in range(1000):
-    selected_server = random.choice(servers)
-    requests[selected_server] += 1
-
-print(requests)  # 顯示每個伺服器獲得的請求數
-
-print("------------------------------------------------------------")  # 60個
-
-# 假設生產線上有一批產品序列號
-product_serials = list(range(1000, 2000))
-
-# 抽檢10個產品進行品質檢查
-samples = random.sample(product_serials, 10)
-
-for serial in samples:
-    # 這裡會有一個品質檢查的函數
-    print(f"檢查序列號 : {serial}")
-
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-import matplotlib.pyplot as plt
-from random import randint
-
-
-def dice_generator(times, sides):
-    """處理隨機數"""
-    for i in range(times):
-        ranNum1 = randint(1, sides)  # 產生1-6隨機數
-        ranNum2 = randint(1, sides)  # 產生1-6隨機數
-        dice.append(ranNum1 + ranNum2)
-
-
-def dice_count(sides):
-    """計算2-11個出現次數"""
-    for i in range(2, 13):
-        frequency = dice.count(i)  # 計算i出現在dice串列的次數
-        frequencies.append(frequency)
-
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-times = 1000  # 擲骰子次數
-sides = 6  # 骰子有幾面
-dice = []  # 建立擲骰子的串列
-frequencies = []  # 儲存每一面骰子出現次數串列
-dice_generator(times, sides)  # 產生擲骰子的串列
-dice_count(sides)  # 將骰子串列轉成次數串列
-N = len(frequencies)
-x = np.arange(N)  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
-plt.ylabel("出現次數")
-plt.title("測試 1000 次", fontsize=16)
-plt.xticks(x, ("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
-plt.yticks(np.arange(0, 150, 15))
-
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -971,6 +1160,146 @@ print("解密字串 ", decryMsg)
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+
+
+print(
+    "--- random.shuffle(list) SP ---------------------------------------------------------"
+)  # 60個
+
+
+print(
+    "--- random.其他 ST ---------------------------------------------------------"
+)  # 60個
+
+tttt = hex(random.getrandbits(64))  # 64 bits randomness
+print(tttt)
+
+# 隨機二進制數的整數返回
+print(random.getrandbits(200))
+
+print("------------------------------------------------------------")  # 60個
+
+print("random 之 dir")
+print(dir(random))
+print("顯示模組的所有名稱dir()")
+print(dir(random))
+
+print("------------------------------------------------------------")  # 60個
+
+# triangular 返回兩個值中間的隨機浮點數
+c = random.triangular(3, 8)
+print(c)
+
+# beta 分佈，兩個值需都大於 0，返回 0~1 之間隨機浮點數
+d = random.betavariate(3, 8)
+print(d)
+
+# 指數分佈，不可為 0，若為負，則是小於零的福點數
+e = random.expovariate(-5)
+print(e)
+
+# 其他還有
+# random.gammavariate(alpha, beta)
+# random.gauss(mu, sigma)
+# random.lognormvariate(mu, sigma)
+# random.normalvariate(mu, sigma)
+# random.vonmisesvariate(mu, kappa)
+# random.paretovariate(alpha)
+# random.weibullvariate(alpha, beta)
+
+# 參考：https://docs.python.org/zh-cn/3/library/random.html#random.random
+
+print("------------------------------------------------------------")  # 60個
+
+min = 1
+max = 6  # 骰子有幾面
+times = 10000  # 擲骰子次數
+
+dice = [0] * 7  # 建立擲骰子的串列
+for i in range(times):
+    data = random.randint(min, max)
+    dice[data] += 1
+print(dice)
+del dice[0]  # 刪除索引0資料
+
+for i, c in enumerate(dice, 1):
+    print("{} = {} 次".format(i, c))
+print(dice)
+x = [i for i in range(1, max + 1)]  # 長條圖x軸座標
+width = 0.35  # 長條圖寬度
+plt.bar(x, dice, width, color="g")  # 繪製長條圖
+plt.ylabel("Frequency")
+plt.title("Test 10000 times")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+# 假設一家公司想要測試兩種不同的廣告設計, 以看哪一種效果更好
+ad_designs = ["Design A", "Design B"]
+
+# 公司有一個1000人的郵件列表, 想要隨機選擇一半接收A廣告, 一半接收B廣告
+recipients = {"Design A": [], "Design B": []}
+
+# 隨機分配郵件
+for i in range(1, 1001):
+    chosen_design = random.choice(ad_designs)  # 隨機選擇一種設計
+    recipients[chosen_design].append(f"user_{i}")
+
+# 確保每種設計都有500個用戶
+while len(recipients["Design A"]) != 500:
+    if len(recipients["Design A"]) > 500:
+        user_to_move = recipients["Design A"].pop()
+        recipients["Design B"].append(user_to_move)
+    else:
+        user_to_move = recipients["Design B"].pop()
+        recipients["Design A"].append(user_to_move)
+
+# 假設這裡會發送郵件，然後根據用戶反饋進行分析
+
+# 輸出每種設計的接收者數量，確保它們是平均分配的
+print(f"A 廣告接收者數量 : {len(recipients['Design A'])}")
+print(f"B 廣告接收者數量 : {len(recipients['Design B'])}")
+
+print("------------------------------------------------------------")  # 60個
+
+def dice_generator(times, sides):
+    """處理隨機數"""
+    for i in range(times):
+        ranNum1 = random.randint(1, sides)  # 產生1-6隨機數
+        ranNum2 = random.randint(1, sides)  # 產生1-6隨機數
+        dice.append(ranNum1 + ranNum2)
+
+
+def dice_count(sides):
+    """計算2-11個出現次數"""
+    for i in range(2, 13):
+        frequency = dice.count(i)  # 計算i出現在dice串列的次數
+        frequencies.append(frequency)
+
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+times = 1000  # 擲骰子次數
+sides = 6  # 骰子有幾面
+dice = []  # 建立擲骰子的串列
+frequencies = []  # 儲存每一面骰子出現次數串列
+dice_generator(times, sides)  # 產生擲骰子的串列
+dice_count(sides)  # 將骰子串列轉成次數串列
+N = len(frequencies)
+x = np.arange(N)  # 長條圖x軸座標
+width = 0.35  # 長條圖寬度
+plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
+plt.ylabel("出現次數")
+plt.title("測試 1000 次", fontsize=16)
+plt.xticks(x, ("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
+plt.yticks(np.arange(0, 150, 15))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 dices = []
 for loop in range(1, 4):
     for i in range(3):
@@ -982,33 +1311,9 @@ for loop in range(1, 4):
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 """
 双色球随机选号程序
 """
-
-from random import randrange, randint, sample
-
 
 def display(balls):
     """
@@ -1028,131 +1333,20 @@ def random_select():
     red_balls = [x for x in range(1, 34)]
     selected_balls = []
     for _ in range(6):
-        index = randrange(len(red_balls))
+        index = random.randrange(len(red_balls))
         selected_balls.append(red_balls[index])
         del red_balls[index]
     # 上面的for循环也可以写成下面这行代码
     # sample函数是random模块下的函数
     # selected_balls = sample(red_balls, 6)
     selected_balls.sort()
-    selected_balls.append(randint(1, 16))
+    selected_balls.append(random.randint(1, 16))
     return selected_balls
 
 
 n = 10
 for _ in range(n):
     display(random_select())
-
-print("------------------------------------------------------------")  # 60個
-
-n = 3
-for i in range(n):
-    print("1-100     : ", random.randint(1, 100))
-
-for i in range(n):
-    print("500-1000  : ", random.randint(500, 1000))
-
-for i in range(n):
-    print("2000-3000 : ", random.randint(2000, 3000))
-
-print("------------------------------------------------------------")  # 60個
-
-animals = ["鼠", "牛", "虎", "兔", "龍"]
-print(random.choice(animals))
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-for _ in range(10):
-    aa = random.randint(1,10)
-    print(aa)
-
-val=0
-data=[0]*80
-for i in range(80):
-    data[i]=random.randint(1,150)
-while val!=-1:
-    find=0
-    val=int(input('請輸入搜尋鍵值(1-150)，輸入-1離開：'))
-    for i in range(80):
-        if data[i]==val:
-            print('在第 %3d個位置找到鍵值 [%3d]' %(i+1,data[i]))
-            find+=1
-    if find==0 and val !=-1 :
-        print('######沒有找到 [%3d]######' %val)
-print('資料內容：')
-for i in range(10):
-    for j in range(8):
-        print('%2d[%3d]  ' %(i*8+j+1,data[i*8+j]),end='')
-    print('')
-"""
-print("------------------------------------------------------------")  # 60個
-
-print("任一整數", random.randrange(100))
-print("任一整數", random.randrange(52, 100))
-print("奇數", random.randrange(1, 100, 2))
-print("偶數", random.randrange(0, 100, 2))
-
-print("------------------------------------------------------------")  # 60個
-
-for i in range(5):
-    a = random.randint(1, 10)  # 隨機取得整數
-    print(a, end=" ")
-print()
-# 給定items數列的初始值
-word = ["apple", "bird", "tiger", "happy", "quick"]
-random.shuffle(word)  # 使用shuffle函數打亂字的順序
-print(word)  # 將打亂後字依序輸出
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-# 新進
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-
-# random.seed
-# random.seed 隨機數的「種子」，數值一樣則產生的隨機數相同，若不設定則使用系統提供隨機源
-# random.random() 並不是真正的隨機數
-
-random.seed(5)
-
-a = random.random()
-b = random.random()
-c = random.random()  # 重複 print 出來的結果是相同的
-d = random.random()
-print(f"{a}\n{b}\n{c}\n{d}")
-
-
-# random.random() 並不是真正的隨機數，如果 seed 相同則結果相同
-a = random.random()
-print(a)
-
-
-print("------------------------------------------------------------")  # 60個
-
-# random.choices
-
-a = random.choice([1, 2, 3, 4, 5])  # choice 從 list 中選擇一個隨機元素
-print(a)
-
-# choices 從 list 中選擇指定數量的隨機元素 ( 可能會重複 )
-b = random.choices([1, 2, 3, 4, 5, 6, 7, 8], k=5)
-print(b)
-
-# choices 可透過 weight 定義權重，有相對和累績兩種選一種的設定
-# weights 為相對，cum_weights 為累積，下面的例子出現 8 的機率是 1 的八倍
-c = random.choices([1, 2, 3, 4, 5, 6, 7, 8], weights=[1, 2, 3, 4, 5, 6, 7, 8], k=5)
-print(c)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1186,144 +1380,6 @@ for i in range(numberOfDice, (numberOfDice * 6) + 1):
     roll = results[i]
     percentage = round(results[i] / 10000, 1)
     print("  {} - {} rolls - {}%".format(i, roll, percentage))
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60­э
-
-# The card suit characters:
-HEARTS = chr(9829)  # Character 9829 is '♥'
-DIAMONDS = chr(9830)  # Character 9830 is '♦'
-SPADES = chr(9824)  # Character 9824 is '♠'
-CLUBS = chr(9827)  # Character 9827 is '♣'
-# A list of chr() codes is at https://inventwithpython.com/chr
-
-
-for _ in range(20):
-    suit = random.choice([HEARTS, DIAMONDS, SPADES, CLUBS])
-    print(suit, end=" ")
-print()
-
-
-def getRandomCard():
-    rank = random.choice(list("23456789JQKA") + ["10"])
-    suit = random.choice([HEARTS, DIAMONDS, SPADES, CLUBS])
-    return (rank, suit)
-
-
-cc = getRandomCard()
-print(cc)
-
-
-print("------------------------------------------------------------")  # 60個
-
-#  將 1~49 的整數放入num串列中
-num = []
-for i in range(49):
-    num.append(i + 1)
-# 使用 random套件的sample函式由num中隨機取得不重複的7個元素
-lot = random.sample(num, 7)
-
-print("大樂透  號碼：", end="")
-# 印出 lot[0]~lot[5]
-for i in range(6):
-    print(lot[i], end=", ")
-
-print()
-print("大樂透特別號：%2d" % (lot[6]))  # 印出 lot[6]
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 自訂密碼產生器
-
-
-def set_password_source(source):
-    def password_gen(length):
-        output = []
-        for i in range(length):
-            output.append(random.choice(source))
-        return "".join(output)
-
-    return password_gen
-
-
-my_password_gen = set_password_source("0123456789abcdefghij")
-print(my_password_gen(10))
-
-print("------------------------------------------------------------")  # 60個
-
-a = set()  # 建立空集合
-while len(a) < 6:  # 使用 while 迴圈，直到集合的長度等於 6 就停止
-    b = random.randint(1, 49)  # 取出 1～49 得隨機整數
-    a.add(b)  # 將隨機數加入集合
-print(a)  # {34, 41, 48, 49, 19, 30}
-
-print("------------------------------------------------------------")  # 60個
-
-a = random.sample(range(1, 50), 6)
-# 從包含 1～49 數字的串列中，取出六個不重複的數字變成串列
-print(a)  # [9, 39, 10, 8, 25, 43]
-
-"""
-a = random.randint(1, 99)  # 產生 1～99 的隨機整數
-b = int(input("輸入 1～99 的數字："))  # 讓使用者輸入數字，使用 int 轉換成數字
-while a != b:  # 使用 while 迴圈，如果 a 不等於 b，就不斷繼續
-    if b < a:
-        b = int(input("數字太小囉！再試一次吧："))  # 如果 b<a，提示數字太小
-    elif b > a:
-        b = int(input("數字太大囉！再試一次吧："))  # 如果 b>a，提示數字太大
-print("答對囉！")  # 如果 b=a 會停止 while 迴圈，顯示正確答案
-"""
-
-print("------------------------------------------------------------")  # 60個
-"""
-answer = random.sample(range(1, 10), 4)
-print(answer)
-a = b = n = 0  # 設定 a、b、n 三個變數，預設值 0
-while a != 4:  # 使用 while 迴圈，直到 a 等於 4 才停止
-    a = b = n = 0  # 每次重複時將 a、b、n 三個變數再次設定為 0
-    user = list(input("輸入四個數字："))  # 讓使用者輸入數字，並透過 list 轉換成串列
-    for i in user:  # 使用 for 迴圈，將使用者輸入的數字一一取出
-        if int(user[n]) == answer[n]:  # 因為使用者輸入的是「字串」，透過 int 轉換成數字，和答案串列互相比較
-            a += 1  # 如果位置和內容都相同，就將 a 增加 1
-        else:
-            if int(i) in answer:  # 如果位置不同，但答案裡有包含使用者輸入的數字
-                b += 1  # 就將 b 增加 1
-        n += 1  # 因為輸入的每個數字都要判斷，將 n 增加 1
-    output = ",".join(user).replace(",", "")  # 四個數字都判斷後，使用 join 將串列合併成字串
-    print(f"{output}: {a}A{b}B")
-print("答對了！")
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-answer = random.sample(range(1, 10), 4)
-print(answer)
-a = b = n = 0
-num = 0  # 新增 num 變數為 0，作為計算次數使用
-t = time.time()  # 新增 t 變數為現在的時間
-while a != 4:
-    num += 1  # 每次重複時將 num 增加 1
-    a = b = n = 0
-    user = list(input("輸入四個數字："))
-    for i in user:
-        if int(user[n]) == answer[n]:
-            a += 1
-        else:
-            if int(i) in answer:
-                b += 1
-        n += 1
-    output = ",".join(user).replace(",", "")
-    print(f"{output}: {a}A{b}B")
-t = round((time.time() - t), 3)  # 當 a 等於 4 時，計算結束和開始的時間差
-print(f"答對了！總共猜了 {num} 次，用了 {t} 秒")  # 印出對應的文字
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -1382,111 +1438,11 @@ for j in range(20):  # 使用 20 次的 for 迴圈
 
 print("------------------------------------------------------------")  # 60個
 
-import random
-print(random.randint(0,10))
-
-print("------------------------------------------------------------")  # 60個
-
-# 模組與套件
-import random
-for i in range(0,5):
-    print(random.randrange(0,10,2), end=" ")
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-print(random.random())    
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-for i in range(0,3):
-    print(random.uniform(0,10), end=" ")
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-str1 = "abcde"
-for i in range(0,3):
-    print(random.choice(str1), end=" ")
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-list1 = ['a','b','c','d','e']    
-for i in range(0,3):
-    print(random.choice(list1), end=" ")
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-str1 = "abcde"
-print(random.sample(str1, 3))    
-
-print("------------------------------------------------------------")  # 60個
-
-# 模組與套件
-import random
-list1 = ['a','b','c','d','e']    
-print(random.sample(list1, 3))  
-
-
-
-import random
-while True:
-    inkey = input("請按任意鍵後再按Enter鍵擲骰子，若要結束請直接按Enter鍵。")
-    if len(inkey)>0:
-        num=random.randint(1,6)
-        print("亂數產生的骰子點數："+str(num))
-    else:
-        print("擲骰子點數結束。")
-        break
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-list1 = random.sample(range(1,50),7)
-print(list1)
-special = list1.pop()
-print(special)
-list1.sort()
-print("本期大樂透中獎號碼為:", end="")
-for i in range(0,6):
-    if (i==5):
-        print(str(list1[i]))
-    else:
-        print(str(list1[i]), end=",")
-print("本期大樂透特別號為:"+str(special))
-
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-for i in range(0,7):
-    print(random.choice("ABCDEFGHIJKLMN"), end=",")
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("新進 作業完成")
+print("作業完成")
 print("------------------------------------------------------------")  # 60個

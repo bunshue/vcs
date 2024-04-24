@@ -23,7 +23,6 @@ Dictionary是無序、沒有索引值且沒有重複的成員的容器，Pair的
 
 """
 
-'''
 print("建立空容器")
 
 print("建立一個空字典")
@@ -116,9 +115,6 @@ print(animals)
 """
 
 print("------------------------------------------------------------")  # 60個
-
-sys.exit()
-         
 
 # 取得所有資料
 # 使用keys()取得所有key值，回傳是所有key的List。
@@ -1351,6 +1347,91 @@ animal_list = list(animal_set)
 print(animal_list)
 
 print("------------------------------------------------------------")  # 60個
+math = {"Kevin", "Peter", "Eric"}  # 設定參加數學夏令營成員
+physics = {"Peter", "Nelson", "Tom"}  # 設定參加物理夏令營成員
+both = math & physics
+print("同時參加數學與物理夏令營的成員 ", both)
+
+print("------------------------------------------------------------")  # 60個
+
+A = {1, 2, 3, 4, 5}  # 定義集合A
+B = {3, 4, 5, 6, 7}  # 定義集合B
+# 將intersection( )應用在A集合
+AB = A.intersection(B)  # A和B的交集
+print("A和B的交集是 ", AB)
+# 將intersection( )應用在B集合
+BA = B.intersection(A)  # B和A的交集
+print("B和A的交集是 ", BA)
+
+print("------------------------------------------------------------")  # 60個
+
+math = {"Kevin", "Peter", "Eric"}  # 設定參加數學夏令營成員
+physics = {"Peter", "Nelson", "Tom"}  # 設定參加物理夏令營成員
+allmember = math | physics
+print("同時參加數學與物理夏令營的成員 ", allmember)
+
+print("------------------------------------------------------------")  # 60個
+
+A = {1, 2, 3, 4, 5}  # 定義集合A
+B = {3, 4, 5, 6, 7}  # 定義集合B
+# 將union( )應用在A集合
+AorB = A.union(B)  # A和B的聯集
+print("A和B的聯集是 ", AorB)
+# 將union( )應用在B集合
+BorA = B.union(A)  # B和A的聯集
+print("B和A的聯集是 ", BorA)
+
+print("------------------------------------------------------------")  # 60個
+
+A = {1, 2, 3, 4, 5}  # 定義集合A
+B = {3, 4, 5, 6, 7}  # 定義集合B
+# 將difference( )應用在A集合
+A_B = A.difference(B)  # A-B的差集
+print("A-B的差集是 ", A_B)
+# 將difference( )應用在B集合
+B_A = B.difference(A)  # B-A的差集
+print("B-A的差集是 ", B_A)
+
+print("------------------------------------------------------------")  # 60個
+
+math = {"Kevin", "Peter", "Eric"}  # 設定參加數學夏令營成員
+physics = {"Peter", "Nelson", "Tom"}  # 設定參加物理夏令營成員
+math_sydi_physics = math ^ physics
+print("沒有同時參加數學和物理夏令營的成員 ", math_sydi_physics)
+
+print("------------------------------------------------------------")  # 60個
+
+A = {1, 2, 3, 4, 5}  # 定義集合A
+B = {3, 4, 5, 6, 7}  # 定義集合B
+# 將symmetric_difference( )應用在A集合
+A_sydi_B = A.symmetric_difference(B)  # A和B的對稱差集
+print("A和B的對稱差集是 ", A_sydi_B)
+# 將symmetric_difference( )應用在B集合
+B_sydi_A = B.symmetric_difference(A)  # B和A的對稱差集
+print("B和A的對稱差集是 ", B_sydi_A)
+
+print("------------------------------------------------------------")  # 60個
+
+A = {1, 2, 3, 4, 5}  # 定義集合A
+B = {3, 4, 5, 6, 7}  # 定義集合B
+C = {1, 2, 3, 4, 5}  # 定義集合C
+# 列出A與B集合是否相等
+print("A與B集合相等", A == B)
+# 列出A與C集合是否相等
+print("A與C集合相等", A == C)
+
+print("------------------------------------------------------------")  # 60個
+
+A = {1, 2, 3, 4, 5}  # 定義集合A
+B = {3, 4, 5, 6, 7}  # 定義集合B
+C = {1, 2, 3, 4, 5}  # 定義集合C
+# 列出A與B集合是否相等
+print("A與B集合不相等", A != B)
+# 列出A與C集合是否不相等
+print("A與C集合不相等", A != C)
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1491,19 +1572,19 @@ print(alphabetCount)
 print("------------------------------------------------------------")  # 60個
 
 print("集合 的方法 1")
-animals = set("orange")
+animals = set("鼠牛虎兔龍")
 print(type(animals))
-print("字元a是屬於animals集合?", "a" in animals)
-print("字元d是屬於animals集合?", "d" in animals)
+print("虎 是屬於animals集合?", "a" in animals)
+print("羊 是屬於animals集合?", "d" in animals)
 
 print("集合 的方法 2")
-cars = {"Nissan", "Toyota", "Ford"}
-print(type(cars))
+animals = {"鼠", "牛", "虎"}
+print(type(animals))
 
-boolean = "Ford" in cars
-print("Ford in cars ?", boolean)
-boolean = "Audi" in cars
-print("Audi in cars ?", boolean)
+boolean = "虎" in animals
+print("虎 in animals ?", boolean)
+boolean = "羊" in animals
+print("羊 in animals ?", boolean)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1757,23 +1838,18 @@ print("map 的用法")
 
 
 def pick(x):
-    animals = ["Apple", "Banana", "Orange", "Tomato", "Pine Apple", "Berry"]
+    animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
     return animals[x]
 
+#第n個
+select_number = [1, 4, 2, 5, 0, 3, 4, 4, 2]
+select_list = map(pick, select_number)
 
-alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
-choices = map(pick, alist)
+print(type(select_number))
+print(type(select_list))
 
-print(type(alist))
-print(type(choices))
-
-for choice in choices:
-    print(choice)
-
-print("------------------------------------------------------------")  # 60個
-
-'''
-print("------------------------------------------------------------")  # 60個
+for select in select_list:
+    print(select)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1785,9 +1861,6 @@ print(x)
 cc = repr(x)
 print(type(cc))
 print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2087,7 +2160,5 @@ print(f"英文名依字母遞增排序：\n{name}")
 number = [3, 48, 33, 8]
 number.sort(reverse=True)  # 遞減排序
 print("體重遞減排序：", number)
-
-
 
 

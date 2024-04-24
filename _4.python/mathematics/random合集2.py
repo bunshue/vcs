@@ -1,7 +1,3 @@
-import sys
-
-import random
-
 # 只使用numpy
 
 """
@@ -18,15 +14,31 @@ np.random.其他
 
 """
 
-print(
-    "---- 用 numpy 做的 random --------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
+# 共同
+import os
+import sys
+import math
+import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-'''
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+print(
+    "---- 用 numpy 做的 random --------------------------------------------------------"
+)  # 60個
+
 print('---- np.random.seed() ST --------------------------------------------------------')	#60個
 
 print('固定亂數種子 random seed')
@@ -588,25 +600,6 @@ print("常態分佈二維陣列")
 cc = np.random.randn(3, 5)
 print(cc)
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-"""
-
-使用numpy裡面的random函數
-
-"""
-import os
-import sys
-import time
-import random
-
 print('------------------------------------------------------------')	#60個
 
 #mu + sigma * np.random.standard_normal(size=...)
@@ -699,7 +692,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-'''
+
 
 print("將產生出來的常態分布做數字分析")
 print("normal 常態分布 N = 1000")
@@ -727,9 +720,6 @@ print(f"Numpy模組母體標準差  : {np.std(x):6.2f}")
 print(f"Numpy模組樣本標準差  : {np.std(x,ddof=1):6.2f}")
 print(f"Statistics母體標準差 : {statistics.pstdev(x):6.2f}")
 print(f"Statistics樣本標準差 : {statistics.stdev(x):6.2f}")
-
-
-
 
 """ 新進
 

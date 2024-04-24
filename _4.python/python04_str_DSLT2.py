@@ -167,7 +167,6 @@ print(letter)
 print("------------------------------------------------------------")  # 60個
 
 animals = ["mouse", "ox", "tiger", "rabbit"]
-animals = ["apple", "orange", "apple", "banana", "apple"]
 animal = "tiger"
 print("刪除前的animals", animals)
 while animal in animals:  # 只要串列內有 tiger 迴圈就繼續
@@ -489,20 +488,20 @@ print("字典4 ", tup_dict2)
 
 print("------------------------------------------------------------")  # 60個
 
-#animals = ["mouse", "ox", "tiger", "rabbit"]
-animals = {"Apple": 20, "Orange": 25}
-ret_value1 = animals.get("Orange")
+animals = {"mouse": 3, "ox": 48}
+ret_value1 = animals.get("ox")
 print("Value = ", ret_value1)
-ret_value2 = animals.get("Grape")
+ret_value2 = animals.get("tiger")
 print("Value = ", ret_value2)
-ret_value3 = animals.get("Grape", 10)
+ret_value3 = animals.get("tiger", 10)
 print("Value = ", ret_value3)
 
 print("------------------------------------------------------------")  # 60個
 
-langs = {"Python", "C", "Java", "Python", "C"}
-print(type(langs))
-print(langs)
+print('集合 的用法')
+animals = {"mouse", "ox", "tiger", "rabbit", "dragon"}
+print(type(animals))
+print(animals)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -548,8 +547,8 @@ print(y)
 
 print("------------------------------------------------------------")  # 60個
 
-cities = set(("Beijing", "Tokyo", "Beijing", "Taipei", "Tokyo"))
-print(cities)
+animals = set(("mouse", "ox", "tiger", "rabbit", "dragon"))
+print(animals)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -561,102 +560,17 @@ print("新的串列資料animals2 = ", animals2)
 
 print("------------------------------------------------------------")  # 60個
 
-math = {"Kevin", "Peter", "Eric"}  # 設定參加數學夏令營成員
-physics = {"Peter", "Nelson", "Tom"}  # 設定參加物理夏令營成員
-both = math & physics
-print("同時參加數學與物理夏令營的成員 ", both)
-
-print("------------------------------------------------------------")  # 60個
-
-A = {1, 2, 3, 4, 5}  # 定義集合A
-B = {3, 4, 5, 6, 7}  # 定義集合B
-# 將intersection( )應用在A集合
-AB = A.intersection(B)  # A和B的交集
-print("A和B的交集是 ", AB)
-# 將intersection( )應用在B集合
-BA = B.intersection(A)  # B和A的交集
-print("B和A的交集是 ", BA)
-
-print("------------------------------------------------------------")  # 60個
-
-math = {"Kevin", "Peter", "Eric"}  # 設定參加數學夏令營成員
-physics = {"Peter", "Nelson", "Tom"}  # 設定參加物理夏令營成員
-allmember = math | physics
-print("同時參加數學與物理夏令營的成員 ", allmember)
-
-print("------------------------------------------------------------")  # 60個
-
-A = {1, 2, 3, 4, 5}  # 定義集合A
-B = {3, 4, 5, 6, 7}  # 定義集合B
-# 將union( )應用在A集合
-AorB = A.union(B)  # A和B的聯集
-print("A和B的聯集是 ", AorB)
-# 將union( )應用在B集合
-BorA = B.union(A)  # B和A的聯集
-print("B和A的聯集是 ", BorA)
-
-print("------------------------------------------------------------")  # 60個
-
-A = {1, 2, 3, 4, 5}  # 定義集合A
-B = {3, 4, 5, 6, 7}  # 定義集合B
-# 將difference( )應用在A集合
-A_B = A.difference(B)  # A-B的差集
-print("A-B的差集是 ", A_B)
-# 將difference( )應用在B集合
-B_A = B.difference(A)  # B-A的差集
-print("B-A的差集是 ", B_A)
-
-print("------------------------------------------------------------")  # 60個
-
-math = {"Kevin", "Peter", "Eric"}  # 設定參加數學夏令營成員
-physics = {"Peter", "Nelson", "Tom"}  # 設定參加物理夏令營成員
-math_sydi_physics = math ^ physics
-print("沒有同時參加數學和物理夏令營的成員 ", math_sydi_physics)
-
-print("------------------------------------------------------------")  # 60個
-
-A = {1, 2, 3, 4, 5}  # 定義集合A
-B = {3, 4, 5, 6, 7}  # 定義集合B
-# 將symmetric_difference( )應用在A集合
-A_sydi_B = A.symmetric_difference(B)  # A和B的對稱差集
-print("A和B的對稱差集是 ", A_sydi_B)
-# 將symmetric_difference( )應用在B集合
-B_sydi_A = B.symmetric_difference(A)  # B和A的對稱差集
-print("B和A的對稱差集是 ", B_sydi_A)
-
-print("------------------------------------------------------------")  # 60個
-
-A = {1, 2, 3, 4, 5}  # 定義集合A
-B = {3, 4, 5, 6, 7}  # 定義集合B
-C = {1, 2, 3, 4, 5}  # 定義集合C
-# 列出A與B集合是否相等
-print("A與B集合相等", A == B)
-# 列出A與C集合是否相等
-print("A與C集合相等", A == C)
-
-print("------------------------------------------------------------")  # 60個
-
-A = {1, 2, 3, 4, 5}  # 定義集合A
-B = {3, 4, 5, 6, 7}  # 定義集合B
-C = {1, 2, 3, 4, 5}  # 定義集合C
-# 列出A與B集合是否相等
-print("A與B集合不相等", A != B)
-# 列出A與C集合是否不相等
-print("A與C集合不相等", A != C)
-
-print("------------------------------------------------------------")  # 60個
-
 # 方法1
 animals = set("elephant")
 print("字元a是屬於animals集合?", "a" in animals)
 print("字元d是屬於animals集合?", "d" in animals)
 
 # 方法2
-cars = {"Nissan", "Toyota", "Ford"}
-boolean = "Ford" in cars
-print("Ford in cars", boolean)
-boolean = "Audi" in cars
-print("Audi in cars", boolean)
+animals = {"mouse", "ox", "tiger"}
+boolean = "tiger" in animals
+print("tiger in animals", boolean)
+boolean = "snake" in animals
+print("snake in animals", boolean)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -665,18 +579,18 @@ animals = set("elephant")
 print("字元a是不屬於animals集合?", "a" not in animals)
 print("字元d是不屬於animals集合?", "d" not in animals)
 # 方法2
-cars = {"Nissan", "Toyota", "Ford"}
-boolean = "Ford" not in cars
-print("Ford not in cars", boolean)
-boolean = "Audi" not in cars
-print("Audi not in cars", boolean)
+animals = {"mouse", "ox", "tiger"}
+boolean = "tiger" not in animals
+print("tiger not in animals", boolean)
+boolean = "snake" not in animals
+print("snake not in animals", boolean)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["toyota", "nissan", "honda"]
+animals = ["ox", "mouse", "dragon"]
 nums = [1, 3, 5]
-carslist = cars * 3  # 串列乘以數字
-print(carslist)
+animalslist = animals * 3  # 串列乘以數字
+print(animalslist)
 numslist = nums * 5  # 串列乘以數字
 print(numslist)
 
@@ -712,14 +626,14 @@ print("刪除nums3串列索引[0:6:2]後 = ", nums3)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["Toyota", "Nissan", "Honda"]
-print("cars串列長度是 = %d" % len(cars))
-if len(cars) != 0:
-    del cars[0]
-    print("刪除cars串列元素成功")
-    print("cars串列長度是 = %d" % len(cars))
+animals = ["ox", "mouse", "dragon"]
+print("animals串列長度是 = %d" % len(animals))
+if len(animals) != 0:
+    del animals[0]
+    print("刪除animals串列元素成功")
+    print("animals串列長度是 = %d" % len(animals))
 else:
-    print("cars串列內沒有元素資料")
+    print("animals串列內沒有元素資料")
 nums = []
 print("nums串列長度是 = %d" % len(nums))
 if len(nums) != 0:
@@ -730,56 +644,56 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["Honda", "Toyota", "Ford"]
-print("目前串列內容 = ", cars)
-print("在索引1位置插入Nissan")
-cars.insert(1, "Nissan")
-print("新的串列內容 = ", cars)
-print("在索引0位置插入BMW")
-cars.insert(0, "BMW")
-print("最新串列內容 = ", cars)
+animals = ["dragon", "ox", "tiger"]
+print("目前串列內容 = ", animals)
+print("在索引1位置插入mouse")
+animals.insert(1, "mouse")
+print("新的串列內容 = ", animals)
+print("在索引0位置插入rabbit")
+animals.insert(0, "rabbit")
+print("最新串列內容 = ", animals)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["Honda", "Toyota", "Ford", "BMW"]
-print("目前串列內容 = ", cars)
+animals = ["dragon", "ox", "tiger", "rabbit"]
+print("目前串列內容 = ", animals)
 print("使用pop( )刪除串列元素")
-popped_car = cars.pop()  # 刪除串列末端值
-print("所刪除的串列內容是 : ", popped_car)
-print("新的串列內容 = ", cars)
+popped_animal = animals.pop()  # 刪除串列末端值
+print("所刪除的串列內容是 : ", popped_animal)
+print("新的串列內容 = ", animals)
 print("使用pop(1)刪除串列元素")
-popped_car = cars.pop(1)  # 刪除串列索引為1的值
-print("所刪除的串列內容是 : ", popped_car)
-print("新的串列內容 = ", cars)
+popped_animal = animals.pop(1)  # 刪除串列索引為1的值
+print("所刪除的串列內容是 : ", popped_animal)
+print("新的串列內容 = ", animals)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["Honda", "bmw", "Toyota", "Ford", "bmw"]
-print("目前串列內容 = ", cars)
+animals = ["dragon", "rabbit", "ox", "tiger", "rabbit"]
+print("目前串列內容 = ", animals)
 print("使用remove( )刪除串列元素")
-expensive = "bmw"
-cars.remove(expensive)  # 刪除第一次出現的元素bmw
+expensive = "rabbit"
+animals.remove(expensive)  # 刪除第一次出現的元素rabbit
 print("所刪除的內容是: " + expensive.upper() + " 因為太貴了")
-print("新的串列內容", cars)
+print("新的串列內容", animals)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["Honda", "bmw", "Toyota", "Ford", "bmw"]
-print("目前串列內容 = ", cars)
-# 直接列印cars[::-1]顛倒排序,不更改串列內容
-print("列印使用[::-1]顛倒排序\n", cars[::-1])
+animals = ["dragon", "rabbit", "ox", "tiger", "rabbit"]
+print("目前串列內容 = ", animals)
+# 直接列印animals[::-1]顛倒排序,不更改串列內容
+print("列印使用[::-1]顛倒排序\n", animals[::-1])
 # 更改串列內容
 print("使用reverse( )顛倒排序串列元素")
-cars.reverse()  # 顛倒排序串列
-print("新的串列內容 = ", cars)
+animals.reverse()  # 顛倒排序串列
+print("新的串列內容 = ", animals)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["honda", "bmw", "toyota", "ford"]
-print("目前串列內容 = ", cars)
+animals = ["dragon", "rabbit", "ox", "tiger"]
+print("目前串列內容 = ", animals)
 print("使用sort( )由小排到大")
-cars.sort()
-print("排序串列結果 = ", cars)
+animals.sort()
+print("排序串列結果 = ", animals)
 nums = [5, 3, 9, 2]
 print("目前串列內容 = ", nums)
 print("使用sort( )由小排到大")
@@ -788,11 +702,11 @@ print("排序串列結果 = ", nums)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["honda", "bmw", "toyota", "ford"]
-print("目前串列內容 = ", cars)
+animals = ["dragon", "rabbit", "ox", "tiger"]
+print("目前串列內容 = ", animals)
 print("使用sort( )由大排到小")
-cars.sort(reverse=True)
-print("排序串列結果 = ", cars)
+animals.sort(reverse=True)
+print("排序串列結果 = ", animals)
 nums = [5, 3, 9, 2]
 print("目前串列內容 = ", nums)
 print("使用sort( )由大排到小")
@@ -801,12 +715,12 @@ print("排序串列結果 = ", nums)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["honda", "bmw", "toyota", "ford"]
-print("目前串列car內容 = ", cars)
+animals = ["dragon", "rabbit", "ox", "tiger"]
+print("目前串列animal內容 = ", animals)
 print("使用sorted( )由小排到大")
-cars_sorted = sorted(cars)
-print("排序串列結果 = ", cars_sorted)
-print("原先串列car內容 = ", cars)
+animals_sorted = sorted(animals)
+print("排序串列結果 = ", animals_sorted)
+print("原先串列animal內容 = ", animals)
 nums = [5, 3, 9, 2]
 print("目前串列num內容 = ", nums)
 print("使用sorted( )由小排到大")
@@ -816,12 +730,12 @@ print("原先串列num內容 = ", nums)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["honda", "bmw", "toyota", "ford"]
-print("目前串列car內容 = ", cars)
+animals = ["dragon", "rabbit", "ox", "tiger"]
+print("目前串列animal內容 = ", animals)
 print("使用sorted( )由大排到小")
-cars_sorted = sorted(cars, reverse=True)
-print("排序串列結果    = ", cars_sorted)
-print("原先串列car內容 = ", cars)
+animals_sorted = sorted(animals, reverse=True)
+print("排序串列結果    = ", animals_sorted)
+print("原先串列animal內容 = ", animals)
 nums = [5, 3, 9, 2]
 print("目前串列num內容 = ", nums)
 print("使用sorted( )由大排到小")
@@ -831,15 +745,14 @@ print("原先串列num內容 = ", nums)
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["toyota", "nissan", "honda"]
-search_str = "nissan"
-i = cars.index(search_str)
+animals = ["ox", "mouse", "dragon"]
+search_str = "mouse"
+i = animals.index(search_str)
 print("所搜尋元素 %s 第一次出現位置索引是 %d" % (search_str, i))
 nums = [7, 12, 30, 12, 30, 9, 8]
 search_val = 30
 j = nums.index(search_val)
 print("所搜尋元素 %s 第一次出現位置索引是 %d" % (search_val, j))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -851,15 +764,14 @@ print(James[0], "在第 %d 場得最高分 %d" % (i, score_Max))
 
 print("------------------------------------------------------------")  # 60個
 
-cars = ["toyota", "nissan", "honda"]
-search_str = "nissan"
-num1 = cars.count(search_str)
+animals = ["ox", "mouse", "dragon"]
+search_str = "mouse"
+num1 = animals.count(search_str)
 print("所搜尋元素 %s 出現 %d 次" % (search_str, num1))
 nums = [7, 12, 30, 12, 30, 9, 8]
 search_val = 30
 num2 = nums.count(search_val)
 print("所搜尋元素 %s 出現 %d 次" % (search_val, num2))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -889,30 +801,23 @@ print("在第 %d 場得最高分 %d" % (i, score_Max))
 
 print("------------------------------------------------------------")  # 60個
 
-cars1 = ["toyota", "nissan", "honda"]
-cars2 = ["ford", "audi"]
-print("原先cars1串列內容 = ", cars1)
-print("原先cars2串列內容 = ", cars2)
-cars1.append(cars2)
-print("執行append( )後串列cars1內容 = ", cars1)
-print("執行append( )後串列cars2內容 = ", cars2)
+animals1 = ["ox", "mouse", "dragon"]
+animals2 = ["tiger", "snake"]
+print("原先animals1串列內容 = ", animals1)
+print("原先animals2串列內容 = ", animals2)
+animals1.append(animals2)
+print("執行append( )後串列animals1內容 = ", animals1)
+print("執行append( )後串列animals2內容 = ", animals2)
 
 print("------------------------------------------------------------")  # 60個
 
-cars1 = ["toyota", "nissan", "honda"]
-cars2 = ["ford", "audi"]
-print("原先cars1串列內容 = ", cars1)
-print("原先cars2串列內容 = ", cars2)
-cars1.extend(cars2)
-print("執行extend( )後串列cars1內容 = ", cars1)
-print("執行extend( )後串列cars2內容 = ", cars2)
-
-print("------------------------------------------------------------")  # 60個
-
-mysports = ["basketball", "baseball"]
-friendsports = mysports
-print("我喜歡的運動     = ", mysports)
-print("我朋友喜歡的運動 = ", friendsports)
+animals1 = ["ox", "mouse", "dragon"]
+animals2 = ["tiger", "snake"]
+print("原先animals1串列內容 = ", animals1)
+print("原先animals2串列內容 = ", animals2)
+animals1.extend(animals2)
+print("執行extend( )後串列animals1內容 = ", animals1)
+print("執行extend( )後串列animals2內容 = ", animals2)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -920,6 +825,7 @@ mysports = ["basketball", "baseball"]
 friendsports = mysports
 print("我喜歡的運動     = ", mysports)
 print("我朋友喜歡的運動 = ", friendsports)
+
 mysports.append("football")
 friendsports.append("soccer")
 print("我喜歡的最新運動     = ", mysports)
