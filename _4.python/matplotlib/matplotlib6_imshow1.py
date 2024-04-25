@@ -207,6 +207,7 @@ imgplot = plt.imshow(image, interpolation="bicubic")
 
 """
 
+
 print("------------------------------------------------------------")  # 60個
 
 #          編號                   圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
@@ -285,29 +286,22 @@ im2 = plt.imshow(
 )
 
 
-# 第四~五張圖
-
-# Subplots spacings and margins
-
 # 第四張圖
 plt.subplot(234)
-plt.imshow(np.random.random((100, 100)))
+
+
 # 第五張圖
 plt.subplot(235)
-plt.imshow(np.random.random((100, 100)))
 
-plt.subplots_adjust(bottom=0.1, right=0.8, top=0.9)
-cax = plt.axes([0.85, 0.1, 0.075, 0.8])  # 設定位置
-plt.colorbar(cax=cax)
 
 # 第六張圖
 plt.subplot(236)
 
-print("畫出 常態分布 二維 20 X 20")
-N = 20
-plt.imshow(np.random.randn(N, N))
+
+
 
 plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -490,18 +484,6 @@ plt.yticks(())
 # 第三張圖
 plt.subplot(233)
 
-print("建立一個random圖像")
-
-W = 30
-H = 20
-
-image = (
-    np.random.choice([0, 50, 100, 150, 200, 255], size=W * H)
-    .reshape(H, W)
-    .astype(np.uint8)
-)
-
-plt.imshow(image)
 
 # 第四張圖
 plt.subplot(234)
@@ -528,6 +510,70 @@ plt.subplot(236)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="imshow 集合 6 random 影像",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+print("建立一個random圖像")
+
+W = 30
+H = 20
+
+image = (
+    np.random.choice([0, 50, 100, 150, 200, 255], size=W * H)
+    .reshape(H, W)
+    .astype(np.uint8)
+)
+
+plt.imshow(image)
+
+
+# 第二張圖
+plt.subplot(232)
+
+
+
+
+# 第三張圖
+plt.subplot(233)
+
+
+# 第四~五張圖
+
+# Subplots spacings and margins
+
+# 第四張圖
+plt.subplot(234)
+plt.imshow(np.random.random((100, 100)))
+
+# 第五張圖
+plt.subplot(235)
+plt.imshow(np.random.random((100, 100)))
+
+plt.subplots_adjust(bottom=0.1, right=0.8, top=0.9)
+cax = plt.axes([0.85, 0.1, 0.075, 0.8])  # 設定位置
+plt.colorbar(cax=cax)
+
+# 第六張圖
+plt.subplot(236)
+
+print("畫出 常態分布 二維 20 X 20")
+N = 20
+plt.imshow(np.random.randn(N, N))
+
+plt.show()
 
 
 print("------------------------------------------------------------")  # 60個

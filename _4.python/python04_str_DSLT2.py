@@ -176,7 +176,7 @@ print("刪除後的animals", animals)
 print("------------------------------------------------------------")  # 60個
 
 numbers1 = (1, 2, 3, 4, 5)  # 定義元組元素是整數
-animals = ("mouse", "ox", "tiger", "rabbit") # 定義元組元素是字串
+animals = ("mouse", "ox", "tiger", "rabbit")  # 定義元組元素是字串
 mixed = ("James", 50)  # 定義元組元素是不同型態資料
 val_tuple = (10,)  # 只有一個元素的元祖
 print(numbers1)
@@ -189,7 +189,7 @@ print("元組mixed資料型態是: ", type(mixed))
 print("------------------------------------------------------------")  # 60個
 
 numbers1 = (1, 2, 3, 4, 5)  # 定義元組元素是整數
-animals = ("mouse", "ox", "tiger", "rabbit") # 定義元組元素是字串
+animals = ("mouse", "ox", "tiger", "rabbit")  # 定義元組元素是字串
 val_tuple = (10,)  # 只有一個元素的元祖
 print(numbers1[0])  # 以中括號索引值讀取元素內容
 print(numbers1[4])
@@ -206,12 +206,12 @@ for key in keys:
 
 print("------------------------------------------------------------")  # 60個
 
-animals = ("mouse", "ox", "tiger", "rabbit") # 定義元組元素是水果
+animals = ("mouse", "ox", "tiger", "rabbit")  # 定義元組元素是水果
 print("原始animals元組元素")
 for animal in animals:
     print(animal)
 
-animals = ("mouse", "ox", "tiger", "rabbit") # 定義新的元組元素
+animals = ("mouse", "ox", "tiger", "rabbit")  # 定義新的元組元素
 print("\n新的animals元組元素")
 for animal in animals:
     print(animal)
@@ -498,7 +498,7 @@ print("Value = ", ret_value3)
 
 print("------------------------------------------------------------")  # 60個
 
-print('集合 的用法')
+print("集合 的用法")
 animals = {"mouse", "ox", "tiger", "rabbit", "dragon"}
 print(type(animals))
 print(animals)
@@ -834,9 +834,7 @@ print("我朋友喜歡的最新運動 = ", friendsports)
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -854,4 +852,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

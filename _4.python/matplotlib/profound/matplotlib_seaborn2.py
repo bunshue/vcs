@@ -3,11 +3,18 @@ import seaborn as sns       #海生, 自動把圖畫得比較好看
 
 """
 
-import sys
-import numpy as np
-import matplotlib.pyplot as plt
-
 import seaborn as sns  # 海生, 自動把圖畫得比較好看
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 # 設定中文字型及負號正確顯示
@@ -15,16 +22,9 @@ font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
-# Python繪圖的方法-使用 seaborn
-
-# 匯入必要模組
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import seaborn as sns
 
 # 匯入data
 fmri = sns.load_dataset("fmri")  # 觀察fmri的資料型態是pandas
@@ -117,11 +117,6 @@ plt.show()
 
 # barplot
 
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import seaborn as sns
-
 fig, axs = plt.subplots(1, 2, figsize=(20, 8))
 data = sns.load_dataset("tips")
 print(data)
@@ -153,11 +148,6 @@ sns.barplot(
 plt.show()
 
 # histplot
-
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import seaborn as sns
 
 data = sns.load_dataset("penguins")
 print(data)
@@ -234,11 +224,6 @@ plt.show()
 
 # scatterplot
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 tips = sns.load_dataset("tips")
 fig, axs = plt.subplots(2, 1, figsize=(10, 20))
 sns.scatterplot(data=tips, x="total_bill", y="tip", hue="day", style="time", ax=axs[0])
@@ -256,10 +241,6 @@ axs[0].legend(loc=1)
 plt.show()
 
 # boxplot
-
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 fig, axs = plt.subplots(2, 1, figsize=(10, 15))
 tips = sns.load_dataset("tips")
@@ -287,10 +268,6 @@ sns.violinplot(x=iris.species, y=iris.sepal_length, ax=axs[1])
 plt.show()
 
 # catplot
-
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 # 分類散點圖
 # stript plot
@@ -397,10 +374,6 @@ plt.show()
 
 # 以上兩種搭配一起用
 
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-
 ## g.map內的plotting function可以是任何matplotlib, sns繪圖方法
 tips = sns.load_dataset("tips")
 
@@ -450,6 +423,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個

@@ -276,7 +276,6 @@ filename = 'python04_string.py'
 print('touch 前 :')
 get_cma_times(filename)
 
-
 os.utime(filename, (0, 0))#將兩時間改成1970-01-01
 #os.utime(filename, None)  # 改成最新時間
 #os.utime(filename)  # 改成最新時間

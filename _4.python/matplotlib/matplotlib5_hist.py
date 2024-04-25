@@ -2,9 +2,29 @@
 # hist 集合
 
 np.random.normal
+    (1)
+    mu, sigma = 100, 15 # 平均值, 標準差
+    x = np.random.normal(mu, sigma, size=N)  # 隨機數
+    (2)
+    若mu, sigma, 則是 平均值為 0，標準差為 1 的常態分配
+    生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+    x = np.random.normal(size=N)
+
 np.random.randn
+    (1)
+    mu, sigma = 100, 15 # 平均值, 標準差
+    x = mu + sigma * np.random.randn(N)  # 隨機數
+
+
 np.random.rand(
+    x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
+
 np.random.uniform(size=N)
+    # 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+    x = np.random.uniform(size=N)
+    # 給定範圍
+    x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
+
 random.randint
 
 """
@@ -47,13 +67,8 @@ plt.figure(
 
 plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 200, \sigma=25$")
 
-mu = 100  # 平均值
-sigma = 15  # 標準差
-mu, sigma = 100, 15
+mu, sigma = 100, 15 # 平均值, 標準差
 x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
-
-# 生成 N 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
-# x = np.random.normal(size=N)
 
 # 第一張圖
 plt.subplot(231)
@@ -231,6 +246,7 @@ plt.title("擲兩個骰子 10000 次 看其分布")
 plt.subplot(234)
 
 x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
+
 plt.hist(x, bins=num_bins // 10)
 plt.title("產生共3組，每組 10000 個隨機數")
 
@@ -240,6 +256,7 @@ plt.subplot(235)
 # 生成 N 組介於 0 與 1 之間均勻分配隨機變數
 x = np.random.uniform(size=N)
 # x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
+
 plt.hist(x, bins=num_bins, rwidth=0.8)
 plt.title("np.random.uniform")
 
@@ -270,9 +287,7 @@ plt.subplot(231)
 N = 10000  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
-mu = 100  # 平均值
-sigma = 15  # 標準差
-mu, sigma = 100, 15
+mu, sigma = 100, 15 # 平均值, 標準差
 x = mu + sigma * np.random.randn(N)  # 隨機數
 
 n, bins, patches = plt.hist(
@@ -303,39 +318,12 @@ plt.plot(x, y, "--", color="r", linewidth=2)
 # 第三張圖
 plt.subplot(233)
 
-print("另外用海生畫出來")
-
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-mu = 100  # 平均值
-sigma = 15  # 標準差
-mu, sigma = 100, 15
-x = np.random.normal(mu, sigma, N)  # 隨機數
-
-n, bins, patches = plt.hist(
-    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
-)  # 直方圖
-
-# 繪製曲線圖
-sns.kdeplot(x)
-plt.title("用海生畫常態分佈")
 
 
 # 第四張圖
 plt.subplot(234)
 
 
-import seaborn as sns  # 海生, 自動把圖畫得比較好看
-
-x = np.random.uniform(size=N)  # 隨機數
-
-n, bins, patches = plt.hist(
-    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
-)  # 直方圖
-
-# 繪製曲線圖
-sns.kdeplot(x)
-plt.title("用海生畫均勻分佈")
 
 # 第五張圖
 plt.subplot(235)
@@ -436,9 +424,7 @@ print("hist參數大合集")
 
 plt.figure(figsize=(12, 8))
 
-mu = 100  # 平均值
-sigma = 15  # 標準差
-mu, sigma = 100, 15
+mu, sigma = 100, 15 # 平均值, 標準差
 x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 
 print("x : 需要製作直方圖的一維數組")

@@ -69,9 +69,9 @@ del animal["snake"]
 # 語法是dict[key]，利用key來存取數量。dict[key] = value就可以改變數量。
 print(animal["dragon"])
 
-print('測試字典的各種方法')
+print("測試字典的各種方法")
 
-#完整的動物字典
+# 完整的動物字典
 animals = {
     "mouse": "鼠",
     "ox": "牛",
@@ -85,12 +85,12 @@ animals = {
     "chicken": "雞",
     "dog": "狗",
     "pig": "豬",
-    }
+}
 
 
-print('直接打印字典內容')
+print("直接打印字典內容")
 print(animals)
-print('資料長度 :', len(animals), '筆')
+print("資料長度 :", len(animals), "筆")
 print("字典裡內容一一列出")
 for ani in animals:
     print(ani + ": " + animals[ani])
@@ -118,41 +118,41 @@ print("------------------------------------------------------------")  # 60個
 
 # 取得所有資料
 # 使用keys()取得所有key值，回傳是所有key的List。
-print('取得 keys')
+print("取得 keys")
 cc = animals.keys()
 print(cc)
-print('資料長度 :', len(cc), '筆')
+print("資料長度 :", len(cc), "筆")
 for ename in animals.keys():
     print(f"{ename},{animals[ename]}")
 
 # 取得所有數值
 # 使用values()取得所有value值，回傳是所有value的List。
-print('取得 values')
+print("取得 values")
 cc = animals.values()
 print(cc)
-print('資料長度 :', len(cc), '筆')
+print("資料長度 :", len(cc), "筆")
 for ani in animals.values():
     print(ani)
 
-print('keys() values() 使用範例')
+print("keys() values() 使用範例")
 listkey = list(animals.keys())
 listvalue = list(animals.values())
 
 for i in range(len(listkey)):
     print("英文 : %s, 中文 : %s" % (listkey[i], listvalue[i]))
-   
+
 # 取得所有資料
 # 使用item()取得所有資料組，回傳是由(key, value)所組成的List。
-print('取得 items')
+print("取得 items")
 cc = animals.items()
 print(cc)
-print('資料長度 :', len(cc), '筆')
+print("資料長度 :", len(cc), "筆")
 for ename, cname in animals.items():
     print("{:15s}{:15s}".format(ename, cname))
-    #print("英文 : %s, 中文 : %s" % (ename, cname))
+    # print("英文 : %s, 中文 : %s" % (ename, cname))
 
 
-print('排序')
+print("排序")
 print(sorted(animals))
 
 print("排序再顯示")
@@ -403,7 +403,7 @@ ename = [
     "pig",
 ]
 
-print('將兩個串列編在一起組成字典')
+print("將兩個串列編在一起組成字典")
 name_dict = dict(zip(cname, ename))  # 建立字典
 
 print("列印編碼字典\n", name_dict)  # 列印字典
@@ -455,7 +455,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("字典的用法")
 
-#完整的動物字典
+# 完整的動物字典
 animals = {
     "mouse": "鼠",
     "ox": "牛",
@@ -469,7 +469,7 @@ animals = {
     "chicken": "雞",
     "dog": "狗",
     "pig": "豬",
-    }
+}
 
 print("刪除某一項 snake")
 animals.pop("snake")
@@ -1433,7 +1433,6 @@ print("A與C集合不相等", A != C)
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1841,7 +1840,8 @@ def pick(x):
     animals = ["鼠", "牛", "虎", "兔", "龍", "蛇"]
     return animals[x]
 
-#第n個
+
+# 第n個
 select_number = [1, 4, 2, 5, 0, 3, 4, 4, 2]
 select_list = map(pick, select_number)
 
@@ -2039,8 +2039,7 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
-#讀寫檔案大集合
+# 讀寫檔案大集合
 
 print("將 字典 寫入檔案")
 filename = "C:/_git/vcs/_1.data/______test_files2/dict.txt"
@@ -2067,24 +2066,23 @@ print("寫入檔案 : " + filename)
 
 """
 
-#range轉list
-list1=range(1,10)
+# range轉list
+list1 = range(1, 10)
 print(list(list1))
 
-list2=range(2,11,2)
+list2 = range(2, 11, 2)
 print(list(list2))
 
-list3=range(1,10,2)
+list3 = range(1, 10, 2)
 print(list(list3))
 
 
 # 讀取串列資料
-list1 = [[1,2,3],[4,5,6],[7,8,9]]
+list1 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 for i in range(len(list1)):
     for j in range(len(list1[i])):
-        print(("%4d")%list1[i][j],end=" ")
-    print()    
-
+        print(("%4d") % list1[i][j], end=" ")
+    print()
 
 
 list1 = []
@@ -2118,17 +2116,17 @@ score = 93
 list1.append(score)
 sum += score
 
-print("分數總分為:",sum)
+print("分數總分為:", sum)
 print(list1)
 
 
 print("------------------------------------------------------------")  # 60個
 
-list1 = [50,40,20,40,20,60,20,80,90]
-print("原始串列:",list1)
+list1 = [50, 40, 20, 40, 20, 60, 20, 80, 90]
+print("原始串列:", list1)
 list1.sort()
 list1.reverse()
-print("由大到小:",list1)
+print("由大到小:", list1)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2141,12 +2139,12 @@ list1.append(88)
 list1.append(86)
 list1.append(79)
 list1.append(93)
-    
+
 list2 = sorted(list1)
 list3 = sorted(list1, reverse=True)
-print("原始成績:",list1)
-print("由小到大:",list2)
-print("由大到小:",list3)
+print("原始成績:", list1)
+print("由小到大:", list2)
+print("由大到小:", list3)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2160,5 +2158,3 @@ print(f"英文名依字母遞增排序：\n{name}")
 number = [3, 48, 33, 8]
 number.sort(reverse=True)  # 遞減排序
 print("體重遞減排序：", number)
-
-
