@@ -1,3 +1,9 @@
+import sys
+import tkinter as tk
+
+print("------------------------------------------------------------")  # 60個
+
+
 def computePayment():
     monthlyPayment = getMonthlyPayment(float(loanAmountVar.get()), float(annualInterestRateVar.get()) / 1200, int(numberOfYearsVar.get()))
     monthlyPaymentVar.set(format(monthlyPayment, '10.2f'))
@@ -7,9 +13,6 @@ def computePayment():
 def getMonthlyPayment(loanAmount, monthlyInterestRate, numberOfYears):
     monthlyPayment = loanAmount * monthlyInterestRate / (1 - 1 / (1 + monthlyInterestRate) ** (numberOfYears * 12))
     return monthlyPayment;
-
-
-import tkinter as tk
 
 window = tk.Tk()
 
@@ -49,3 +52,57 @@ lblTotalPayment = tk.Label(window, textvariable = totalPaymentVar).grid(row = 5,
 btComputePayment = tk.Button(window, text = "Compute Payment", command = computePayment).grid(row = 6, column = 2, sticky = tk.E)
 
 window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+def myfun():
+    monthrate = interest.get() / (12*100)
+    loan = loanmoney.get()
+    molecules = loan * monthrate
+    denominator = 1-(1/(1+monthrate) ** (years.get() * 12))
+    monthpaid = int(molecules / denominator)
+    monthpayment.set(monthpaid)
+    totalpaid = int(monthpaid * 12 * years.get())
+    totalpayment.set(totalpaid)
+        
+window = tk.Tk()
+
+Interest = tk.Label(window, text="利率")
+Years = tk.Label(window, text="貸款年數")
+LoanMoney = tk.Label(window, text="貸款金額")
+MonthPayment = tk.Label(window, text="每月支付金額")
+TotalPayment = tk.Label(window, text="總支付金額")
+
+interest = tk.DoubleVar()
+years = tk.IntVar()
+loanmoney = tk.IntVar()
+monthpayment = tk.IntVar()
+totalpayment = tk.IntVar()
+
+interestE = tk.Entry(window, textvariable=interest)
+yearsE = tk.Entry(window, textvariable=years)
+loanmoneyE = tk.Entry(window, textvariable=loanmoney)
+monthpaymentL = tk.Label(window, textvariable=monthpayment, bg='lightyellow')
+totalpaymentL = tk.Label(window, textvariable=totalpayment, bg='lightyellow')
+
+Interest.grid(row=0, column=0)
+Years.grid(row=1, column=0)
+LoanMoney.grid(row=2, column=0)
+MonthPayment.grid(row=3, column=0)
+TotalPayment.grid(row=4, column=0)
+
+interestE.grid(row=0, column=1, padx=2)
+yearsE.grid(row=1, column=1, padx=2)
+loanmoneyE.grid(row=2, column=1, padx=2)
+monthpaymentL.grid(row=3, column=1, padx=2)
+totalpaymentL.grid(row=4, column=1, padx=2)
+
+btnExec = tk.Button(window, text="計算", command=myfun)
+btnExec.grid(row=5, column=1, pady=2)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+

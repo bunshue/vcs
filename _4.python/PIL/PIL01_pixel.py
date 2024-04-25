@@ -4,7 +4,6 @@ PIL 基本使用 pixel處理
 PIL影像.getpixel 取得該點之像素值
 PIL影像.putpixel 設定該點之像素值
 
-
 """
 
 import time
@@ -116,6 +115,27 @@ plt.title('萃取圖片的輪廓')
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
+#PIL影像.putpixel 設定該點之像素值
+
+print('建立影像 RGBA, 在上面畫圖')
+W, H = 400, 300
+color = "Yellow"
+image = Image.new('RGBA', (W, H), color)
+
+for x in range(50, 251):                                # x軸區間在50-250
+    for y in range(50, 151):                            # y軸區間在50-150
+        image.putpixel((x, y), (0, 255, 255, 255))   # 填青色
+
+for x in range(50, 251):                                # x軸區間在50-250            
+    for y in range(151, 251):                           # y軸區間在151-250
+        image.putpixel((x, y), ImageColor.getcolor("Blue", "RGBA")) # 填藍色
+
+plt.imshow(image)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
 
 
 print('------------------------------------------------------------')	#60個

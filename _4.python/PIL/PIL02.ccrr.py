@@ -79,99 +79,9 @@ print('------------------------------------------------------------')	#60個
 
 print('裁剪 .crop SP------------------------------------------------------------')	#60個
 
-
-
 print('複製 .copy ST------------------------------------------------------------')	#60個
 
-print('複製範例一')
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-# 檔案 => PIL影像
-image = Image.open(filename)
-
-#複製圖片
-image_copy = image.copy()
-
-#裁剪一塊 x, y ,w, h
-x_st, y_st, w, h = 140, 120, 70, 70
-#                             x_st  y_st    x_sp     y_sp
-image_crop = image_copy.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上點到右下點
-image_crop = image_copy.crop((140, 120, 210, 190))
-
-#貼上1
-image_copy.paste(image_crop, (220, 5))
-#貼上2
-image_copy.paste(image_crop, (220, 80))
-
-plt.imshow(image_copy)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-print('複製範例二')
-# 檔案 => PIL影像
-image = Image.open(filename)
-
-image_copied = image.copy() #複製圖片
-
-x_st, y_st, w, h = 140, 120, 70, 70
-#                               x_st  y_st    x_sp     y_sp
-image_crop = image_copied.crop((x_st, y_st, x_st + w, y_st + h))    # 裁切區間
-cropW, cropH = image_crop.size           # 獲得裁切區間的寬與高
-
-W, H = cropW * 8 + 10*9, cropH * 4 + 10*5                        # 新影像寬與高
-image = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
-for x in range(10, W - 50, cropW + 10):         # 雙層迴圈合成
-    for y in range(10, H - 50, cropH + 10):
-        image.paste(image_crop, (x, y))        # 合成
-
-plt.imshow(image)
-plt.show()
-
-
 print('------------------------------------------------------------')	#60個
-
-#x_st, y_st, w, h = 140, 120, 70, 70
-#roi = image.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上點到右下點
-
-# 檔案 => PIL影像
-image1 = Image.open(filename)
-image2 = image1.copy()                      # 複製
-image3 = image2.crop((80, 30, 150, 100))    # 裁切區間
-cropW, cropH = image3.size           # 獲得裁切區間的寬與高
-
-W, H = 600, 320                        # 新影像寬與高
-image4 = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
-for x in range(20, W-20, cropW):         # 雙層迴圈合成
-    for y in range(20, H-20, cropH):
-        image4.paste(image3, (x, y))        # 合成
-
-print('------------------------------------------------------------')	#60個
-
-#使用pillow操作图像
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => PIL影像
-img = Image.open(filename)
-
-# 檔案 => PIL影像
-img2 = Image.open(filename)
-
-#img3 = img2.crop((335, 435, 430, 615))
-img3 = img2.crop((100, 100, 150, 150))
-for x in range(4):
-    for y in range(5):
-        img2.paste(img3, (95 * y , 180 * x))
-
-img2.resize((img.size[0] // 2, img.size[1] // 2))
-img2.rotate(90)
-
-plt.imshow(img2)
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 
 
 print('複製 .copy SP------------------------------------------------------------')	#60個
@@ -223,6 +133,9 @@ print('縮放 .resize SP--------------------------------------------------------
 print('旋轉 .rotate ST------------------------------------------------------------')	#60個
 
 print('測試 旋轉 rotate')
+
+# 檔案 => PIL影像
+image = Image.open(filename)    #PIL讀取本機圖片, RGB模式
 
 print('旋轉90度')
 image90 = image.rotate(90)
@@ -571,38 +484,6 @@ for file in allfiles:
 """
 print("------------------------------------------------------------")  # 60個
 
-#paste
-
-#把同樣的圖片排列成 M X N
-
-# 要排列的圖示個數
-M = 5
-N = 8
-
-# 圖片之間的邊界
-margin = 5
-
-# 載入圖片
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg'
-# 檔案 => PIL影像
-image = Image.open(filename)
-print(image.size)
-
-W, H = image.size
-
-# 建立圖片 W*N X H*M
-image_MXN = Image.new("RGBA", ((W + margin) * N, (H + margin) * M))
-
-for j in range(M):
-    for i in range(N):
-        image_MXN.paste(image, ((W + margin) * i, (H + margin) * j))
-
-plt.imshow(image_MXN)
-
-plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 from pathlib import Path
 
 infolder = "testfolder"
@@ -653,6 +534,159 @@ print('------------------------------------------------------------')	#60個
 
 print("------------------------------------------------------------")  # 60個
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
+# 檔案 => PIL影像
+image = Image.open(filename)
+imagecopy=image.copy() #複製
+#切割貓熊並改變尺寸
+image1=imagecopy.crop((190,184,415,350)).resize((160,140))
+imagecopy.paste(image1,(40,30)) #貼上
+image2=image1.transpose(Image.FLIP_LEFT_RIGHT)#左右翻轉
+imagecopy.paste(image2,(220,40))#貼上
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("綜合CCRR範例")
+print("------------------------------------------------------------")  # 60個
+
+print('複製範例一')
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+# 檔案 => PIL影像
+image = Image.open(filename)
+
+#複製圖片
+image_copy = image.copy()
+
+#裁剪一塊 x, y ,w, h
+x_st, y_st, w, h = 140, 120, 70, 70
+#                             x_st  y_st    x_sp     y_sp
+image_crop = image_copy.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上點到右下點
+image_crop = image_copy.crop((140, 120, 210, 190))
+
+#貼上1
+x_st, y_st = 220, 5
+image_copy.paste(image_crop, (x_st, y_st))
+#貼上2
+x_st, y_st = 220, 80
+image_copy.paste(image_crop, (x_st, y_st))
+
+plt.imshow(image_copy)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print('複製範例二')
+# 檔案 => PIL影像
+image = Image.open(filename)
+
+image_copied = image.copy() #複製圖片
+
+x_st, y_st, w, h = 140, 120, 70, 70
+#                               x_st  y_st    x_sp     y_sp
+image_crop = image_copied.crop((x_st, y_st, x_st + w, y_st + h))    # 裁切區間
+cropW, cropH = image_crop.size           # 獲得裁切區間的寬與高
+
+W, H = cropW * 8 + 10*9, cropH * 4 + 10*5                        # 新影像寬與高
+image = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
+for x in range(10, W - 50, cropW + 10):         # 雙層迴圈合成
+    for y in range(10, H - 50, cropH + 10):
+        image.paste(image_crop, (x, y))        # 合成
+
+plt.imshow(image)
+plt.show()
+
+
+print('------------------------------------------------------------')	#60個
+
+#x_st, y_st, w, h = 140, 120, 70, 70
+#roi = image.crop((x_st, y_st, x_st + w, y_st + h))  # 裁切區間, 左上點到右下點
+
+# 檔案 => PIL影像
+image1 = Image.open(filename)
+image2 = image1.copy()                      # 複製
+image3 = image2.crop((80, 30, 150, 100))    # 裁切區間
+cropW, cropH = image3.size           # 獲得裁切區間的寬與高
+
+W, H = 600, 320                        # 新影像寬與高
+image4 = Image.new('RGB', (W, H), "Yellow")  # 建立新影像
+for x in range(20, W-20, cropW):         # 雙層迴圈合成
+    for y in range(20, H-20, cropH):
+        image4.paste(image3, (x, y))        # 合成
+
+print('------------------------------------------------------------')	#60個
+
+
+#使用pillow操作图像
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 檔案 => PIL影像
+img = Image.open(filename)
+
+# 檔案 => PIL影像
+img2 = Image.open(filename)
+
+#img3 = img2.crop((335, 435, 430, 615))
+img3 = img2.crop((100, 100, 150, 150))
+for x in range(4):
+    for y in range(5):
+        img2.paste(img3, (95 * y , 180 * x))
+
+img2.resize((img.size[0] // 2, img.size[1] // 2))
+img2.rotate(90)
+
+plt.imshow(img2)
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+#把同樣的圖片排列成 M X N
+
+# 要排列的圖示個數
+M = 5
+N = 8
+
+# 圖片之間的邊界
+margin = 5
+
+# 載入圖片
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_angry_bird/AB_red.jpg'
+# 檔案 => PIL影像
+image = Image.open(filename)
+print(image.size)
+
+W, H = image.size
+
+# 建立圖片 W*N X H*M
+image_MXN = Image.new("RGBA", ((W + margin) * N, (H + margin) * M))
+
+for j in range(M):
+    for i in range(N):
+        image_MXN.paste(image, ((W + margin) * i, (H + margin) * j))
+
+plt.imshow(image_MXN)
+
+plt.show()
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -672,21 +706,4 @@ image.save('tmp_pic1.jpg')# 保存縮略圖
 image.save(savefile, format="JPEG")       # JPG轉存檔案
 
 """
-
-print("------------------------------------------------------------")  # 60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/elephant.jpg'
-# 檔案 => PIL影像
-image = Image.open(filename)
-imagecopy=image.copy() #複製
-#切割貓熊並改變尺寸
-image1=imagecopy.crop((190,184,415,350)).resize((160,140))
-imagecopy.paste(image1,(40,30)) #貼上
-image2=image1.transpose(Image.FLIP_LEFT_RIGHT)#左右翻轉
-imagecopy.paste(image2,(220,40))#貼上
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 

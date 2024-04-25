@@ -1,15 +1,19 @@
+import sys
+
+print("------------------------------------------------------------")  # 60個
+'''
 count = 0
 mmm = 'abcd'
 
 def set_data():
-    '''
+    """
     print('set_data')
     #回傳結果
     mesg = text1.get("1.0", "end")
     mesg= mesg + mmm
     print(mesg)
     text1.insert ('end', mesg)
-    '''
+    """
     global count
     count = count + 1
     message = '  次數' + str(count)
@@ -174,8 +178,40 @@ ptext.pack()
 ptext.config(state=tk.DISABLED)
 win.mainloop()
 
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+print("scrollbar")
+
+from tkinter import *
+win = Tk()
+win.title("ScrollBar捲軸")
+win.geometry('300x200')
+text = Text(win, width = "30", height = "5")
+text.grid(row = 0, column = 0)
+scrollbar = Scrollbar(command = text.yview, orient = VERTICAL)
+scrollbar.grid(row = 0, column = 1, sticky = "ns")
+text.configure(yscrollcommand = scrollbar.set)
+win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("text")
+
+from tkinter import *
+sentences="玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
+win = Tk()
+win.title("Text多行文字")
+win.geometry('300x200')
+text = Text(win, width = 30, height = 14, bg = "yellow", wrap=WORD)
+text.insert(END,sentences)
+text.pack()
+win.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
 
 
 

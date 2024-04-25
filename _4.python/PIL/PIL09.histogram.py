@@ -31,11 +31,15 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
+#把一張圖的RGB通道分開顯示出來
+
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
-filename = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.bmp' #400X400
-filename = '../opencv/data/pic_calcHist.jpg'
-filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"
+#filename = 'C:/_git/vcs/_4.python/opencv/data/RGB_R.bmp' #400X400
+#filename = '../opencv/data/pic_calcHist.jpg'
+filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
+#filename = "C:/_git/vcs/_4.python/_data/eq3.bmp"  # 480X360
+#filename = "C:/_git/vcs/_4.python/_data/eq4.bmp"  # 480X360
 
 plt.figure(
     num="配合圖形遮罩計算直方圖",
@@ -47,62 +51,34 @@ plt.figure(
     frameon=True,
 )
 
+plt.subplot(211)
 # 檔案 => PIL影像
 image1 = Image.open(filename)
-
-plt.subplot(231)
 plt.imshow(image1)
-plt.title('原圖')
 
 # PIL影像 => 灰階
-image_gray = image1.convert('L')
+# 灰階才能做histogram處理
+image2 = image1.convert('L')	#轉換成灰階圖像
 
-plt.subplot(232)
-plt.imshow(image_gray)
-plt.title('灰階')
+plt.subplot(212)
 
-W, H = image_gray.size
-print('原圖大小 W =', W, ', H =', H)
+image2_hist = image2.histogram()
+print('len = ', len(image2_hist))
+index = np.arange(0, len(image2_hist))
+plt.plot(index, image2_hist, color = 'yellow', label = '原圖灰階', linewidth = 2)
 
-x_st = 30
-y_st = 30
-w = W - x_st * 2
-h = H - y_st * 2
-image_cropped = image_gray.crop((x_st, y_st, x_st + w, y_st + h))
-
-plt.subplot(233)
-plt.imshow(image_cropped)
-plt.title('灰階 裁一塊')
-
-image_cropped_hist = image_cropped.histogram()
-
-W2, H2 = 320, 240
-print('把原圖轉成', W2, 'X', H2, '大小')
-image3 = image1.resize((W2, H2), Image.LANCZOS)# 使用 LANCZOS 調整影像大小
-
-plt.subplot(234)
-plt.imshow(image3)
-
-image_gray = image3.convert('L')	#轉換成灰階圖像
-hist = image_gray.histogram()
-
-r, g, b = image3.split()   #r, g, b為三個通道的list
-print('r', r)
-print('g', g)
-print('b', b)
+print('RGB影像不可以做histogram, 分離成獨立通道後才可以做histogram')
+r, g, b = image1.split()   #r, g, b為三個通道的list
 r_hist = r.histogram()
 g_hist = g.histogram()
 b_hist = b.histogram()
 
-print('len = ', len(image_cropped_hist))
-ind = np.arange(0, len(image_cropped_hist))
+print('len = ', len(r_hist))
+index = np.arange(0, len(r_hist))
 
-plt.subplot(235)
-plt.plot(ind, image_cropped_hist, color = 'cyan', label = 'cropped')
-plt.plot(ind, hist, color = 'black', label = 'original')
-plt.plot(ind, r_hist, color = 'red', label = 'Red Plane')
-plt.plot(ind, g_hist, color = 'green', label = 'Green Plane')
-plt.plot(ind, g_hist, color = 'blue', label = 'Blue Plane')
+plt.plot(index, r_hist, color = 'red', label = 'R 通道')
+plt.plot(index, g_hist, color = 'green', label = 'G 通道')
+plt.plot(index, b_hist, color = 'blue', label = 'B 通道')
 
 plt.xlim(0-10, 256+10)
 plt.ylim(0, 4500+2000+2000)
@@ -110,12 +86,19 @@ plt.legend()
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print('------------------------------------------------------------')	#60個
+
 
 

@@ -39,7 +39,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
-'''
+
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => PIL影像
@@ -144,7 +144,6 @@ is_similar = compare_images(filename1, filename2)
 print('相似度:', is_similar)
 
 print("------------------------------------------------------------")  # 60個
-'''
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
