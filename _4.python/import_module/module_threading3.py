@@ -255,48 +255,6 @@ print("主程式結束")
 
 print("------------------------------------------------------------")  # 60個
 
-# multiprocessing.Queue - 給多核運算用的佇列
-
-import multiprocessing
-
-
-def worker(queue):
-    print("process 開始")
-    while True:
-        item = queue.get()
-        if item == "STOP":
-            print("process 結束")
-            break
-        print("處理資料:", item)
-        time.sleep(0.01)
-
-
-#要進行的工作
-source = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
-
-process_num = 3
-
-q = multiprocessing.Queue()
-for item in source:
-    print('加入項目 :', item)
-    q.put(item)
-
-processes = []
-for _ in range(process_num):
-    p = multiprocessing.Process(target=worker, args=(q,))
-    p.start()
-    processes.append(p)
-
-for _ in range(process_num):
-    q.put("STOP")
-
-for p in processes:
-    p.join()
-
-print("主程式結束")
-
-print("------------------------------------------------------------")  # 60個
-
 # PriorityQueue - 可用於多執行緒的 heapq
 
 import threading

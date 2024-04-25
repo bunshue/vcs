@@ -270,7 +270,6 @@ os.utime(filename, (time.time(), time.time()))
 print('touch 後 :')
 get_cma_times(filename)
 
-
 filename = 'python04_string.py'
 
 print('touch 前 :')

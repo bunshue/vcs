@@ -204,41 +204,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-from tkinter import Tk, Canvas, NW
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 900
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-width = 750
-height = 460
-canvas1 = tk.Canvas(window, bg = "pink", width = width, height = height)
-canvas1.pack()
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
 from tkinter import *
 from random import *
 
@@ -276,7 +241,6 @@ canvas1.pack(fill=BOTH,expand=True)
 mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
 
 from tkinter import *
 # 依據特定階級數繪製Sierpinski三角形
@@ -382,23 +346,6 @@ tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
-import math
-
-tk = Tk()
-
-canvas1.pack()
-x_center, y_center, r = 320, 240, 100
-x, y = [], []
-for i in range(12):         # 建立圓外圍12個點
-    x.append(x_center + r * math.cos(30*i*math.pi/180))
-    y.append(y_center + r * math.sin(30*i*math.pi/180))
-for i in range(12):         # 執行12個點彼此連線
-    for j in range(12):
-        canvas1.create_line(x[i],y[i],x[j],y[j])
-
-print('------------------------------------------------------------')	#60個
-
 filename = 'C:/_git/vcs/_4.python/_data/lena_color.png'
 
 import tkinter as tk
@@ -432,24 +379,6 @@ win.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
-import math
-
-tk = Tk()
-
-canvas1.pack()
-x_center, y_center, r = 320, 240, 100
-x, y = [], []
-for i in range(12):         # 建立圓外圍12個點
-    x.append(x_center + r * math.cos(30*i*math.pi/180))
-    y.append(y_center + r * math.sin(30*i*math.pi/180))
-for i in range(12):         # 執行12個點彼此連線
-    for j in range(12):
-        canvas1.create_line(x[i],y[i],x[j],y[j])
-
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
 from random import *
 
 for i in range(50):                 # 隨機繪50個不同位置與大小的矩形
@@ -461,19 +390,11 @@ for i in range(50):                 # 隨機繪50個不同位置與大小的矩�
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
 id = canvas1.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
 ballPos = canvas1.coords(id)
 print(ballPos)
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 

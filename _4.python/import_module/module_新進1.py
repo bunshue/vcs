@@ -107,12 +107,6 @@ print('%s.%s.%s.%s' % (path, int(time.time()),
 
 print('------------------------------------------------------------')	#60個
 
-import multiprocessing
-
-print(multiprocessing.current_process().name)
-
-print('------------------------------------------------------------')	#60個
-
 from plyer import notification
 
 print('notification 測試')

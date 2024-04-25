@@ -1,5 +1,19 @@
+"""
+shutil.copytree
+shutil.rmtree
+
+shutil.copy
+shutil.copyfile
+
+shutil.move
+
+"""
+
+import os
 import sys
 import shutil
+
+print("------------------------------------------------------------")  # 60個
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename2 = 'picture1b.jpg'
@@ -21,11 +35,35 @@ print(shutil.get_terminal_size()[1])
 
 print("------------------------------------------------------------")  # 60個
 
-sys.exit()
-
 print("複製 檔案 -> 檔案")
 shutil.copy(filename1, filename2)
 shutil.copy(filename1, filename3)
+
+print("------------------------------------------------------------")  # 60個
+
+# 檔案複製
+srcfilename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+dstfilename = "tmp_pic.jpg"
+
+shutil.copy(srcfilename, dstfilename)
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+cur_path = os.path.dirname(__file__) # 取得目前路徑
+destfile = cur_path + "\\" + "newfile.py"
+print(cur_path)
+print(destfile)
+#shutil.copy("shutil.py", destfile )  # 檔案複製
+"""
+print("------------------------------------------------------------")  # 60個
+
+"""
+print(srcfile, ' -> ', destfile)
+shutil.copy(srcfile,destfile); # 複製檔案
+"""
+
+print("------------------------------------------------------------")  # 60個
 
 print("複製 檔案 -> 資料夾")
 shutil.copy(filename1, foldername1)
@@ -67,14 +105,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 """ 新進
-import os
-import shutil
-cur_path = os.path.dirname(__file__) # 取得目前路徑
-destfile = cur_path + "\\" + "newfile.py"
-print(cur_path)
-print(destfile)
-#shutil.copy("shutil.py", destfile )  # 檔案複製
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -90,21 +120,12 @@ print("backed up", file, "to", bak)
 print("------------------------------------------------------------")  # 60個
 
 #shutil.move() 重命名或移動文件的功能。
-
-import shutil
 shutil.move('/path/to/dir/filename.txt', '/path/to/dir/new_filename.txt')
- 
-
-import shutil
-print(srcfile, ' -> ', destfile)
-shutil.copy(srcfile,destfile); # 複製檔案
 
 print('------------------------------------------------------------')	#60個
 
+print('------------------------------------------------------------')	#60個
 
-import sys
-
-import shutil
 import pathlib
 
 filename1 =  'temp.txt'
@@ -127,7 +148,6 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-import shutil
 import pathlib
 
 file = str(input("請輸入欲要複製的檔名(可含副檔名)："))
@@ -146,9 +166,6 @@ else:
 
 
 print('------------------------------------------------------------')	#60個
-
-
-import shutil
 
 fullpath = os.path.abspath('myprime.py')
 path, filename = os.path.split(fullpath)
@@ -175,8 +192,32 @@ finally:
 print('------------------------------------------------------------')	#60個
 
 
+image_foldername = 'tmp_images'
+html_filename = 'tmp_countryfood2222.html'
+if os.path.exists(html_filename):  
+    os.remove(html_filename)     # 若有 tmp_countryfood.html 網頁即刪除
+if os.path.exists(image_foldername): 
+    shutil.rmtree(image_foldername)    # 若有images目錄即刪除
+else:
+    os.mkdir(image_foldername)        # 若無images目錄即刪除
 
 
 """
 
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
