@@ -278,7 +278,7 @@ Button(frame, text="顯示Sierpinski三角形",
        command=show).pack(side=LEFT)
 
 tk.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 from random import *
@@ -319,10 +319,136 @@ for i in range(50):                 # 隨機繪50個不同位置與大小的矩�
     canvas1.create_rectangle(x1, y1, x2, y2)
 
 mainloop()
+'''
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import * # Import tkinter
+    
+class SierpinskiTriangle:
+    def __init__(self):
+        window = Tk() # Create a window
+        window.title("Sierpinski Triangle") # Set a title
+        
+        self.width = 200
+        self.height = 200
+        self.canvas = Canvas(window, 
+            width = self.width, height = self.height)
+        self.canvas.pack()
+        
+        # Add a label, an entry, and a button to frame1
+        frame1 = Frame(window) # Create and add a frame to window
+        frame1.pack()
+        
+        Label(frame1, 
+            text = "Enter an order: ").pack(side = LEFT)
+        self.order = StringVar()
+        entry = Entry(frame1, textvariable = self.order, 
+                      justify = RIGHT).pack(side = LEFT)
+        Button(frame1, text = "Display Sierpinski Triangle", 
+            command = self.display).pack(side = LEFT)
+        
+        window.mainloop() # Create an event loop
+        
+    def display(self):
+        self.canvas.delete("line")
+        p1 = [self.width / 2, 10]
+        p2 = [10, self.height - 10]
+        p3 = [self.width - 10, self.height - 10]
+        self.displayTriangles(int(self.order.get()), p1, p2, p3)
+    
+    def displayTriangles(self, order, p1, p2, p3):
+        if order == 0: # Base condition
+            # Draw a triangle to connect three points
+            self.drawLine(p1, p2)
+            self.drawLine(p2, p3)
+            self.drawLine(p3, p1)
+        else:    
+            # Get the midpoint of each triangle's edge 
+            p12 = self.midpoint(p1, p2)
+            p23 = self.midpoint(p2, p3)
+            p31 = self.midpoint(p3, p1)
+    
+            # Recursively display three triangles
+            self.displayTriangles(order - 1, p1, p12, p31)
+            self.displayTriangles(order - 1, p12, p2, p23)
+            self.displayTriangles(order - 1, p31, p23, p3)
+    
+    def drawLine(self, p1, p2):
+        self.canvas.create_line(
+            p1[0], p1[1], p2[0], p2[1], tags = "line")
+        
+    # Return the midpoint between two points
+    def midpoint(self, p1, p2):
+        p = 2 * [0]
+        p[0] = (p1[0] + p2[0]) / 2
+        p[1] = (p1[1] + p2[1]) / 2
+        return p
+
+SierpinskiTriangle() # Create GUI
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 
 
+from tkinter import *
+# 依據特定階級數繪製Sierpinski三角形
+def sierpinski(order, p1, p2, p3):
+    if order == 0:      # 階級數為0
+        # 將3個點連接繪製成三角形
+        drawLine(p1, p2)
+        drawLine(p2, p3)
+        drawLine(p3, p1)
+    else:
+        # 取得三角形各邊長的中點
+        p12 = midpoint(p1, p2)
+        p23 = midpoint(p2, p3)
+        p31 = midpoint(p3, p1)
+        # 遞迴呼叫處理繪製三角形
+        sierpinski(order - 1, p1, p12, p31)
+        sierpinski(order - 1, p12, p2, p23)
+        sierpinski(order - 1, p31, p23, p3)   
+# 繪製p1和p2之間的線條
+def drawLine(p1,p2):
+    canvas.create_line(p1[0],p1[1],p2[0],p2[1],tags="myline")
+# 傳回2點的中間值
+def midpoint(p1, p2):
+    p = [0,0]                                   # 初值設定
+    p[0] = (p1[0] + p2[0]) / 2
+    p[1] = (p1[1] + p2[1]) / 2
+    return p
+# 顯示
+def show():
+    canvas.delete("myline")
+    p1 = [200, 20]
+    p2 = [20, 380]
+    p3 = [380,380]
+    sierpinski(order.get(), p1, p2, p3)
+    
+# main
+tk = Tk()
+canvas = Canvas(tk, width=400, height=400)      # 建立畫布
+canvas.pack()
+
+frame = Frame(tk)                               # 建立框架
+frame.pack(padx=5, pady=5)
+# 在框架Frame內建立標籤Label, 輸入階乘數Entry, 按鈕Button
+Label(frame, text="輸入階數 : ").pack(side=LEFT)
+order = IntVar()
+order.set(0)
+entry = Entry(frame, textvariable=order).pack(side=LEFT,padx=3)
+Button(frame, text="顯示Sierpinski三角形",
+       command=show).pack(side=LEFT)
+
+tk.mainloop()
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

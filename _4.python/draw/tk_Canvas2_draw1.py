@@ -1,12 +1,8 @@
 import sys
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
-from tkinter import Tk, Canvas, NW
-from tkinter import ttk
 
 window = tk.Tk()
 
@@ -198,36 +194,35 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 
 window.mainloop()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-from tkinter import *
 from PIL import Image, ImageTk
 
-tk = Tk()
+window = tk.Tk()
+
 img = Image.open(filename)
 image = ImageTk.PhotoImage(img)
 
-canvas1 = Canvas(tk, width=img.size[0]+40, height=img.size[1]+30)
-canvas1.create_image(20,15,anchor=NW,image=image)
-canvas1.pack(fill=BOTH,expand=True)
+canvas1 = tk.Canvas(window, width=img.size[0]+40, height=img.size[1]+30)
+canvas1.create_image(20,15,anchor=tk.NW,image=image)
+canvas1.pack(fill=tk.BOTH,expand=True)
 
-mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_4.python/_data/lena_color.png'
 
-import tkinter as tk
-import tkinter.font as tkfont
+import tkinter.font
 
 win = tk.Tk()
 
-default_font = tkfont.nametofont('TkDefaultFont')
+default_font = tkinter.font.nametofont('TkDefaultFont')
 default_font.configure(size=15)
+#然後沒用到
+
 photo = tk.PhotoImage(file=filename)
 
 gs = tk.Canvas(win,width=400,height=300)

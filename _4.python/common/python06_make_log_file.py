@@ -10,10 +10,21 @@ import time
 
 print("------------------------------------------------------------")  # 60個
 
-with open('tmp_my_logfile.log', 'a') as log_file:
+with open('tmp_my_logfile1.log', 'a') as log_file:
     log_file.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")} - 寫了一筆工作紀錄\n')
 
 print("------------------------------------------------------------")  # 60個
+
+
+#製作log檔的範例
+print('存檔紀念')
+
+fp = open('tmp_my_logfile2.txt', 'w')
+fp.write("# BUILD INFO\n")
+fp.write("# Date: %s\n" % time.ctime())
+fp.close()
+
+print('------------------------------------------------------------')	#60個
 
 
 

@@ -1,53 +1,30 @@
 import sys
 
+from tkinter import Tk
+from tkinter.ttk import Frame, Style
 from tkinter import *
 
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
-root.title("ch8_1")
 
 for fm in ["red","green","blue"]:    # 建立3個不同底色的框架
     Frame(root,bg=fm,height=50,width=250).pack()
 
 root.mainloop()
 
-
-
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_1_1.py
-
-# ch8_1_1.py
-from tkinter import *
+print('------------------------------------------------------------')	#60個
 
 root = Tk()
-root.title("ch8_1")
 
 for fm in ["red","green","blue"]:    # 建立3個不同底色的框架
     Frame(bg=fm,height=50,width=250).pack()
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_2.py
-
-# ch8_2.py
-from tkinter import *
-
 root = Tk()
-root.title("ch8_2")
 
 # 用字典儲存框架顏色與游標外形
 fms = {'red':'cross','green':'boat','blue':'clock'}
@@ -57,23 +34,9 @@ for fmColor in fms:         # 建立3個不同底色的框架與游標外形
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_3.py
-
-# ch8_3.py
-from tkinter import *
-
 root = Tk()
-root.title("ch8_3")
 
 frameUpper = Frame(root,bg="lightyellow")   # 建立上層框架
 frameUpper.pack()
@@ -91,23 +54,9 @@ btnPurple.pack(side=LEFT,padx=5,pady=5)
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_4.py
-
-# ch8_4.py
-from tkinter import *
-
 root = Tk()
-root.title("ch8_4")
 
 fm1 = Frame(width=150,height=80,relief=GROOVE, borderwidth=5)
 fm1.pack(side=LEFT,padx=5,pady=10)
@@ -120,23 +69,9 @@ fm3.pack(side=LEFT,padx=5,pady=10)
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_5.py
-
-# ch8_5.py
-from tkinter import *
-
 root = Tk()
-root.title("ch8_5")
 
 fm = Frame(width=150,height=80,relief=RAISED,borderwidth=5) # 建立框架
 lab = Label(fm,text="請複選常用的程式語言")     # 建立標籤
@@ -151,24 +86,10 @@ fm.pack(padx=10,pady=10)                        # 包裝框架
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_6.py
-
-# ch8_6.py
-from tkinter import Tk
-from tkinter.ttk import Frame, Style
-
 root = Tk()
-root.title("ch8_6")
+
 style = Style()                 # 改用Style
 style.theme_use("alt")          # 改用alt支援Style
 
@@ -192,23 +113,9 @@ fm6.grid(row=1,column=2,padx=5,pady=5)
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_7.py
-
-# ch8_7.py
-from tkinter import *
-
 root = Tk()
-root.title("ch8_7")                         # 視窗標題
 
 msg = "歡迎進入Silicon Stone Educaiton系統"
 sseGif = PhotoImage(file="sse.gif")         # Logo影像檔
@@ -230,18 +137,7 @@ labFrame.pack(padx=10,pady=5,ipadx=5,ipady=5)   # 包裝與定位標籤框架
 
 root.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_8.py
-
-# ch8_8.py
-from tkinter import *
 
 def printInfo():
     selection = ''
@@ -251,7 +147,7 @@ def printInfo():
     print(selection)
 
 root = Tk()
-root.title("ch8_8")                         # 視窗標題
+
 root.geometry("400x220")
 # 以下建立標籤框架與和曲方塊
 labFrame = LabelFrame(root,text="選擇最喜歡的運動")
@@ -268,44 +164,18 @@ btn.pack()
 
 root.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_9.py
-
-# ch8_9.py
-from tkinter import *
-
 root = Tk()
-root.title("ch8_9")
 
 tl = Toplevel()
 Label(tl,text = 'I am a Toplevel').pack()
 
 root.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_10.py
-
-# ch8_10.py
-from tkinter import *
-
 root = Tk()
-root.title("ch8_10")
 
 tl = Toplevel()
 tl.title("Toplevel")
@@ -314,22 +184,11 @@ Label(tl,text = 'I am a Toplevel').pack()
 
 root.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_11.py
-
-# ch8_11.py
-from tkinter import *
 import random
 
 root = Tk()
-root.title("ch8_11")
 
 msgYes, msgNo, msgExit = 1,2,3
 def MessageBox():                   # 建立對話方塊
@@ -350,78 +209,8 @@ btn.pack()
 
 root.mainloop()
 
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_12.py
-
-# ch8_12.py
-from tkinter import *
-# 依據特定階級數繪製Sierpinski三角形
-def sierpinski(order, p1, p2, p3):
-    if order == 0:      # 階級數為0
-        # 將3個點連接繪製成三角形
-        drawLine(p1, p2)
-        drawLine(p2, p3)
-        drawLine(p3, p1)
-    else:
-        # 取得三角形各邊長的中點
-        p12 = midpoint(p1, p2)
-        p23 = midpoint(p2, p3)
-        p31 = midpoint(p3, p1)
-        # 遞迴呼叫處理繪製三角形
-        sierpinski(order - 1, p1, p12, p31)
-        sierpinski(order - 1, p12, p2, p23)
-        sierpinski(order - 1, p31, p23, p3)   
-# 繪製p1和p2之間的線條
-def drawLine(p1,p2):
-    canvas.create_line(p1[0],p1[1],p2[0],p2[1],tags="myline")
-# 傳回2點的中間值
-def midpoint(p1, p2):
-    p = [0,0]                                   # 初值設定
-    p[0] = (p1[0] + p2[0]) / 2
-    p[1] = (p1[1] + p2[1]) / 2
-    return p
-# 顯示
-def show():
-    canvas.delete("myline")
-    p1 = [200, 20]
-    p2 = [20, 380]
-    p3 = [380,380]
-    sierpinski(order.get(), p1, p2, p3)
-    
-# main
-tk = Tk()
-canvas = Canvas(tk, width=400, height=400)      # 建立畫布
-canvas.pack()
-
-frame = Frame(tk)                               # 建立框架
-frame.pack(padx=5, pady=5)
-# 在框架Frame內建立標籤Label, 輸入階乘數Entry, 按鈕Button
-Label(frame, text="輸入階數 : ").pack(side=LEFT)
-order = IntVar()
-order.set(0)
-entry = Entry(frame, textvariable=order).pack(side=LEFT,padx=3)
-Button(frame, text="顯示Sierpinski三角形",
-       command=show).pack(side=LEFT)
-
-tk.mainloop()
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch08\ch8_13.py
-
-# ch8_13.py
-from tkinter import *
 import math
 
 def paintTree(depth, x1, y1, length, angle):
@@ -469,10 +258,12 @@ tk.mainloop()
 
 
 
-
-
 print('------------------------------------------------------------')	#60個
 
 
 
+
+
+
+print('------------------------------------------------------------')	#60個
 

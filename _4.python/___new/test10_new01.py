@@ -13,8 +13,9 @@ def
 
 import traceback
 
+最前面 為 測試區
 
-
+最後面 為 準備搬出區
 
 """
 
@@ -27,6 +28,48 @@ import random
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
+
+
+def printlocal():
+    lang = "Java"
+    print(f"語言 : {lang}")
+    print(f"區域變數 : {locals()}")
+
+
+msg = "Python"
+printlocal()
+print(f"語言 : {msg}")
+print(f"全域變數 : {globals()}")
+
+print("------------------------------------------------------------")  # 60個
+
+def scope():
+    global var1
+    var1 = 1
+    print(var1, var2)
+var1 = 3
+var2 = 4
+print(var1, var2)
+scope()
+print(var1, var2)  
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+set1 = {"a", "b", "c", "d", "e", "f"}
+set2 = set1.copy()
+print(set1)
+print(set2)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+sys.exit()
+
 
 print("---- 字串處理專區 --------------------------------------------------------")  # 60個
 
@@ -647,12 +690,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-globs = {}
-globs = globs.copy()
-print(globs)
-
-print("------------------------------------------------------------")  # 60個
-
 """
 word = word.strip()
 
@@ -1124,36 +1161,6 @@ POSTGRES = {
 string = "postgresql://%(user)s:%(password)s@%(host)s:%(port)s/%(db)s" % POSTGRES
 
 print(string)
-
-print("------------------------------------------------------------")  # 60個
-
-animals = ["cat", "dog", "bat"]
-for index, animal in enumerate(animals):
-    print(index, animal)
-
-animals = ["cat", "dog", "bat"]
-for animal in animals:
-    print(animal)
-
-d = {"chicken": 2, "dog": 4, "cat": 4, "spider": 8}
-for animal, legs in d.items():
-    print("動物: %s 有 %d 隻腳" % (animal, legs))
-
-d = {"chicken": 2, "dog": 4, "cat": 4, "spider": 8}
-for animal in d:
-    legs = d[animal]
-    print(animal, legs)
-
-
-d = {"cat": "white", "dog": "black"}  # 建立字典
-print(d["cat"])  # 使用Key取得項目: 顯示 "white"
-print("cat" in d)  # 是否有Key: 顯示 "True"
-d["pig"] = "pink"  # 新增項目
-print(d["pig"])  # 顯示 "pink"
-print(d.get("monkey", "N/A"))  # 取出項目+預設值: 顯示 "N/A"
-print(d.get("pig", "N/A"))  # 取出項目+預設值: 顯示 "pink"
-del d["pig"]  # 使用Key刪除項目
-print(d.get("pig", "N/A"))  # "pig"不存在: 顯示 "N/A"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1978,68 +1985,9 @@ print("str(543)=", str(543))
 
 print("------------------------------------------------------------")  # 60個
 
-animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
-for animal in animals:
-    print(animal, end=" ")
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
-print(animals[0])
-print(animals[1])
-print(animals[-1])
-print(animals[-2])
-
-print("------------------------------------------------------------")  # 60個
-
 animals = "Python"
 print(animals.islower())
 print("2023".isdigit())
-
-print("------------------------------------------------------------")  # 60個
-
-# 字串函數
-animals = "Hello World!"
-animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
-print("animals = ", animals)
-s = len(animals)
-print("len(animals) = ", str(s))
-s = max(animals)
-print("max(animals) = ", s)
-s = min(animals)
-print("min(animals) = ", s)
-
-animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
-animals = "Python程式設計"
-print("animals = ", animals)
-s = len(animals)
-print("len(animals) = ", str(s))
-s = max(animals)
-print("max(animals) = ", s)
-s = min(animals)
-print("min(animals) = ", s)
-
-print("------------------------------------------------------------")  # 60個
-
-animals = "welcome to python"
-print("animals = ", animals)
-b = animals.isalnum()
-print("animals.isalnum() = ", b)
-b = animals.isalpha()
-print("animals.isalpha() = ", b)
-b = animals.isdigit()
-print("animals.isdigit() = ", b)
-b = "2023".isdigit()
-print('"2023".isdigit() = ', b)
-b = animals.isidentifier()
-print("animals.isidentifier() = ", b)
-b = animals.islower()
-print("animals.islower() = ", b)
-b = animals.isupper()
-print("animals.isupper() = ", b)
-b = "   ".isspace()
-print('"   ".isspace() = ', b)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4058,9 +4006,6 @@ print("list轉換tuple：", listToTuple)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
 #設置底薪(BaseSalary)、結案獎金件數(Case)、職位獎金(OfficeBonus)
 BaseSalary = 25000
 CaseBonus = 1000
@@ -4107,14 +4052,6 @@ print(id(s1))
 print(id(s2))
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
 
 msg = """
 翠蓋龍旗出建章,鶯啼百囀柳初黃,
@@ -4222,21 +4159,6 @@ min(300, 30, 3000)
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 print("計算字數")
 
 
@@ -4329,91 +4251,6 @@ print(cc)
 print('反相')
 cc = animal_list[::-1]
 print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-import os
-import sys
-
-def usage(msg):
-    sys.stdout = sys.stderr
-    print("Error:", msg)
-    print("Use ``%s -h'' for help" % sys.argv[0])
-
-prefix = 'aaaa'
-exec_prefix = 'bbbb'
-binlib = 'kkkk'
-incldir = 'qqqq'
-
-check_dirs = [prefix, exec_prefix, binlib, incldir]
-for dir in check_dirs:
-    if not os.path.exists(dir):
-        usage('needed directory %s not found' % dir)
-    if not os.path.isdir(dir):
-        usage('%s: not a directory' % dir)
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-    
-base = os.path.basename(filename)
-base, ext = os.path.splitext(base)
-
-dirname = os.path.dirname(filename)
-print(dirname)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-print("檔案或資料夾存在 = ", os.path.exists('ch14'))
-print("檔案或資料夾存在 = ", os.path.exists('C:\\_git\\vcs\\_1.data\\______test_files3'))
-print("檔案或資料夾存在 = ", os.path.exists('ch14_4.py'))
-print(" --- ")
-
-print("是絕對路徑 = ", os.path.isabs('ch14_4.py'))
-print("是絕對路徑 = ", os.path.isabs('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
-print(" --- ")
-
-print("是資料夾 = ", os.path.isdir('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
-print("是資料夾 = ", os.path.isdir('C:\\_git\\vcs\\_1.data\\______test_files3'))
-print(" --- ")
-
-print("是檔案 = ", os.path.isfile('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
-print("是檔案 = ", os.path.isfile('C:\\_git\\vcs\\_1.data\\______test_files3'))
-
-print("------------------------------------------------------------")  # 60個
-
-newdir = 'C:\\_git\\vcs\\_1.data\\______test_files3'
-
-currentdir = os.getcwd()
-print("列出目前工作資料夾 ", currentdir)
-
-# 如果newdir不存在就建立此資料夾
-if os.path.exists(newdir):
-    print("已經存在 %s " % newdir)
-else:
-    os.mkdir(newdir)
-    print("建立 %s 資料夾成功" % newdir)
-
-# 將目前工作資料夾改至newdir
-os.chdir(newdir)
-print("列出最新工作資料夾 ", os.getcwd())
-
-# 將目前工作資料夾返回
-os.chdir(currentdir)
-print("列出返回工作資料夾 ", currentdir)
-
-print("------------------------------------------------------------")  # 60個
-
-files = ['ch14_1.py', 'ch14_2.py', 'ch14_3.py']
-for file in files:
-    print(os.path.join('C:\\_git\\vcs\\_1.data\\______test_files3', file))   
-
-print("------------------------------------------------------------")  # 60個
-
-for dirName, sub_dirNames, fileNames in os.walk('oswalk'):
-    print("目前工作目錄名稱:   ", dirName)
-    print("目前子目錄名稱串列: ", sub_dirNames)
-    print("目前檔案名稱串列:   ", fileNames, "\n")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4543,21 +4380,6 @@ ba[3] = 0x70              # 修改資料
 print(ba)                 # 變成 bytearray(b'wxyp')
 
 print("------------------------------------------------------------")  # 60個
-
-import time
-
-print('range(5)', range(5))
-print('list(range(5))', list(range(5)))
-
-# range
-tStart = time.time()
-for i in range(10000000):
-    pass
-tEnd = time.time()
-print('range time:', tEnd - tStart)
-
-print("------------------------------------------------------------")  # 60個
-
 
 def getSevSegStr(number, minWidth=0):
     """Return a seven-segment display string of number. The returned
@@ -4719,12 +4541,6 @@ print(fahrenheit)
 
 print("------------------------------------------------------------")  # 60個
 
-print("列出所有python關鍵字")
-import keyword
-print(keyword.kwlist)
-
-print("------------------------------------------------------------")  # 60個
-
 import re
 
 files = os.listdir("_data")
@@ -4780,154 +4596,10 @@ print("置換後 :", text)
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-localtime()返回元組的日期與時間資料結構 用索引方式獲得個別內容
-索引	名稱	說明
-0	tm_year	年 	2020
-1	tm_mon	月 	1-12
-2	tm_mday 日	1-31
-3	tm_hour	時	0-23
-4	tm_min	分	0-59
-5	tm_sec	秒	0-59
-6	tm_wday	星期	0:一, 1:二...
-7	tm_yday	年第幾天
-8	tm_isdst 夏令時間 0:不是, 1:是
-"""
-
-import time                         # 導入模組time
-
-xtime = time.localtime()            #使用localtime()方法列出目前時間的結構
-print(xtime)                        # 列出目前系統時間
-print("年 ", xtime[0])
-print("年 ", xtime.tm_year)         # 物件設定方式顯示
-print("月 ", xtime[1])
-print("日 ", xtime[2])
-print("時 ", xtime[3])
-print("分 ", xtime[4])
-print("秒 ", xtime[5])
-print("星期幾   ", xtime[6])
-print("第幾天   ", xtime[7])
-print("夏令時間 ", xtime[8])
-
-print("------------------------------------------------------------")  # 60個
-
-print('撈出一層jg檔')
-def get_imlist(path):
-    """ 返回目錄中所有JPG圖像的文件名列表 """
-    return [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.jpg')]
-
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
-
-cc = get_imlist(foldername)
-
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-#相同斜率平行移動
-import matplotlib.pyplot as plt
-
-x = [x for x in range(0, 11)]
-y1 = [2 * y for y in x]
-y2 = [(2 * y - 2) for y in x]
-y3 = [(2 * y + 2) for y in x]
-plt.plot(x, y1)
-plt.plot(x, y2)
-plt.plot(x, y3)
-
-#plt.show()
-
-print(x)
-
-print("------------------------------------------------------------")  # 60個
-
-
 chicken = 20
 rabbit = 15
 print("雞有 {} 隻, 兔有 {} 隻".format(int(chicken), int(rabbit)))
 print("雞有 {} 隻, 兔有 {} 隻".format(chicken, rabbit))
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import glob
-
-print("方法1:列出指定目錄的所有檔案")
-for file in glob.glob('C:\\_git\\vcs\\_1.data\\______test_files3\*.*'):
-    print(file)
-    
-print("方法2:列出目前工作目錄的特定檔案")
-for file in glob.glob('ch14_1*.py'):
-    print(file)
-    
-print("方法3:列出目前工作目錄的特定檔案")
-for file in glob.glob('ch14_2*.*'):
-    print(file)
-
-print("------------------------------------------------------------")  # 60個
-
-import glob
-
-cc = glob.glob(r'C:/_git/vcs/_1.data/______test_files1/*')
-print(type(cc))
-print(cc)
-
-files = ["da1.c", "da2.py", "da3.py", "da4.java"]
-py = []
-for file in files:
-    if file.endswith(".py"):  # 以.py為副檔名
-        py.append(file)  # 加入串列
-print(py)
-
-
-import glob
-
-print(glob.glob(r'./test/*'))         # 找出所有檔案
-print(glob.glob(r'./test/*.txt'))     # 找出所有副檔名為 .txt 的檔案，例如 1.txt、hello.txt
-print(glob.glob(r'./test/[0-9].txt')) # 找出所以名稱為一個數字，副檔名為 .txt 的檔案，例如 1.txt、2.txt
-print(glob.glob(r'./test/????.*'))    # 找出所有檔名有四個字元的檔案，例如 test.txt、demo.py
-print(glob.glob(r'./test/t*.*'))      # 找出所有 t 開頭的檔案，例如 test.txt、test.py
-print(glob.glob(r'./test/*e*.*'))     # 找出所有檔名裡有 e 的檔案，例如 test.txt、hello.py
-
-
-print("------------------------------------------------------------")  # 60個
-
-import os
-
-files = ["c1.py", "c2.py", "c3.py"]
-for file in files:
-    print(os.path.join("D:\\test", file))
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-"""
-# 如果檔案在目前工作目錄下可以省略路徑
-print(os.path.getsize("ch14_1.py"))
-print(os.path.getsize("D:\\Python\\ch14\\ch14_1.py"))
-
-print("------------------------------------------------------------")  # 60個
-
-
-print(os.listdir("D:\\Python\\ch14"))
-print(os.listdir("."))                  # 這代表目前工作目錄
-
-print("------------------------------------------------------------")  # 60個
-
-totalsizes = 0
-print("列出D:\\Python\\ch14工作目錄的所有檔案")
-for file in os.listdir('D:\\Python\\ch14'):
-    print(file)
-    totalsizes += os.path.getsize(os.path.join('D:\\Python\\ch14', file))
-
-print("全部檔案大小是 = ", totalsizes)
-"""
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -5234,22 +4906,6 @@ def person(name, salary, s2, s3):
 income = [28800, 605, 405]
 # 呼叫函式 -- number串列物件，可迭代
 person("Tomas", *income)
-
-print("------------------------------------------------------------")  # 60個
-
-fruit = "Apple"
-
-
-# 定義函式
-def Favorite():
-    global fruit
-    print("Favorite fruit is", fruit)
-    fruit = "Blueberry"
-    print("I like", fruit, "ice cream.")
-
-
-# 呼叫函式
-Favorite()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7302,9 +6958,6 @@ print("所搜尋字串 %s 共出現 %d 次" % (searchStr, num))
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-import math
-
 num = 3.2
 print("數值{0:2.1f} 取log10 {1:4.3f}".format(num, np.log10(num)))
 
@@ -7823,28 +7476,6 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 print('進位轉換')
 
 number = 255
@@ -8048,7 +7679,7 @@ print(Template(templ_string).substitute(name=name, error=hex(errno)))
 
 print("------------------------------------------------------------")  # 60個
 
-# 5-2-2 array.array - C 語言格式數值陣列
+# array.array - C 語言格式數值陣列
 
 import array
 
@@ -8140,12 +7771,6 @@ print(bytes(arr))
 
 # arr[1] = 300
 
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -8492,21 +8117,6 @@ hover_handler = event_handler("Hover Event")
 # 註冊和觸發事件
 click_handler(on_click)
 hover_handler(on_hover)
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-def printlocal():
-    lang = "Java"
-    print(f"語言 : {lang}")
-    print(f"區域變數 : {locals()}")
-
-
-msg = "Python"
-printlocal()
-print(f"語言 : {msg}")
-print(f"全域變數 : {globals()}")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -10037,42 +9647,6 @@ print(greeting("Hello! iPhone"))
 
 print("------------------------------------------------------------")  # 60個
 
-
-def factorial(n):
-    """計算n的階乘, n 必須是正整數"""
-    if n == 1:
-        return 1
-    else:
-        return n * factorial(n - 1)
-
-
-# 輸入城市的個數
-N = 10
-times = 10000000000000  # 電腦每秒可處理數列數目
-day_secs = 60 * 60 * 24  # 一天秒數
-year_secs = 365 * day_secs  # 一年秒數
-combinations = factorial(N)  # 組合方式
-years = combinations / (times * year_secs)
-print(f"城市個數 {N}, 路徑組合數 = {combinations}")
-print(f"需要 {years} 年才可以獲得結果")
-
-print("------------------------------------------------------------")  # 60個
-
-def pi(n):
-    p = 0
-    for i in range(1, n + 1, 1):
-        p += 4 * ((-1) ** (i + 1) / (2 * i - 1))
-    return p
-
-
-print("  i      PI ")
-print("================")
-for i in range(1, 10000, 1000):
-    print("%5d   %7.5f" % (i, pi(i)))
-
-print("------------------------------------------------------------")  # 60個
-
-
 class Myschool:
     def __init__(self, name, score):
         self.name = name
@@ -10369,21 +9943,6 @@ while(True):
             answer = int(p[0]) * int(p[1])
     print(answer)
 """
-
-print("------------------------------------------------------------")  # 60個
-
-# a = input('請輸入倒數的秒數：')
-a = "3"
-
-if a.isdigit():
-    a = int(a)
-    while a > 0:
-        print(a)
-        a = a - 1
-        time.sleep(1)
-    print("時間到！")
-else:
-    print("你輸入的不是數字呦～")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -10853,6 +10412,7 @@ for x in range(1, 10):
     print()
 
 print("------------------------------------------------------------")  # 60個
+
 import string
 
 # 北美獨立宣言
@@ -10903,32 +10463,6 @@ with open("tmp_resolution.txt", "wt") as outf:
         outf.write("-------------------------\n")
         outf.write(s.strip() + "\n")
 
-print("------------------------------------------------------------")  # 60個
-
-"""
-import os
-
-# 我們指定本機的/tmp暫存資料夾來試試
-path = '/tmp/'
-stat = {}
-for item in os.walk(path):
-    # item[0]是路徑名稱，item[2]是檔案清單
-    for fname in item[2]:
-        # 取出檔名完整路徑
-        ffname = os.path.join(item[0], fname)
-        # 取出檔案大小
-        size = os.path.getsize(ffname)
-        # 取出檔案副檔名，統一轉小寫並去除開頭的'.'字元
-        ext = os.path.splitext(ffname)[-1].lower().replace('.', '')
-        # 如果副檔名是空的，跳過
-        if ext.strip()=='':
-            continue
-        # 進行累計
-        stat[ext] = stat.get(ext, 0)+size
-
-for k, v in stat.items():
-    print(k, v)
-"""
 print("------------------------------------------------------------")  # 60個
 
 # 九九乘法表就應該是2..9而不是1..9哦！
@@ -11166,18 +10700,6 @@ print(var1, var2)
 
 print("------------------------------------------------------------")  # 60個
 
-def scope():
-    global var1
-    var1 = 1
-    print(var1, var2)
-var1 = 3
-var2 = 4
-print(var1, var2)
-scope()
-print(var1, var2)  
-
-print("------------------------------------------------------------")  # 60個
-
 print('要轉換的十進位數字 = 255')
 pnum = 255
 presult=""
@@ -11275,48 +10797,495 @@ for i in range(size):
 
 print("------------------------------------------------------------")  # 60個
 
-
-
 n = 10  # 設定進度條總長
 for i in range(n + 1):
     print(f'\r[{"█"*i}{" "*(n-i)}] {i*100/n}%', end="")  # 輸出不換行的內容
     time.sleep(0.05)
 
+print("------------------------------------------------------------")  # 60個
+
+animals = ["cat", "dog", "bat"]
+for index, animal in enumerate(animals):
+    print(index, animal)
+
+animals = ["cat", "dog", "bat"]
+for animal in animals:
+    print(animal)
+
+d = {"chicken": 2, "dog": 4, "cat": 4, "spider": 8}
+for animal, legs in d.items():
+    print("動物: %s 有 %d 隻腳" % (animal, legs))
+
+d = {"chicken": 2, "dog": 4, "cat": 4, "spider": 8}
+for animal in d:
+    legs = d[animal]
+    print(animal, legs)
+
+
+d = {"cat": "white", "dog": "black"}  # 建立字典
+print(d["cat"])  # 使用Key取得項目: 顯示 "white"
+print("cat" in d)  # 是否有Key: 顯示 "True"
+d["pig"] = "pink"  # 新增項目
+print(d["pig"])  # 顯示 "pink"
+print(d.get("monkey", "N/A"))  # 取出項目+預設值: 顯示 "N/A"
+print(d.get("pig", "N/A"))  # 取出項目+預設值: 顯示 "pink"
+del d["pig"]  # 使用Key刪除項目
+print(d.get("pig", "N/A"))  # "pig"不存在: 顯示 "N/A"
 
 print("------------------------------------------------------------")  # 60個
 
 
 
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
+animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
+for animal in animals:
+    print(animal, end=" ")
+print()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
+animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
+print(animals[0])
+print(animals[1])
+print(animals[-1])
+print(animals[-2])
 
 print("------------------------------------------------------------")  # 60個
 
 
+# 字串函數
+animals = "Hello World!"
+animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
+print("animals = ", animals)
+s = len(animals)
+print("len(animals) = ", str(s))
+s = max(animals)
+print("max(animals) = ", s)
+s = min(animals)
+print("min(animals) = ", s)
+
+animals = "鼠牛虎兔龍蛇馬羊猴雞狗豬"
+animals = "Python程式設計"
+print("animals = ", animals)
+s = len(animals)
+print("len(animals) = ", str(s))
+s = max(animals)
+print("max(animals) = ", s)
+s = min(animals)
+print("min(animals) = ", s)
+
+print("------------------------------------------------------------")  # 60個
+
+animals = "welcome to python"
+print("animals = ", animals)
+b = animals.isalnum()
+print("animals.isalnum() = ", b)
+b = animals.isalpha()
+print("animals.isalpha() = ", b)
+b = animals.isdigit()
+print("animals.isdigit() = ", b)
+b = "2023".isdigit()
+print('"2023".isdigit() = ', b)
+b = animals.isidentifier()
+print("animals.isidentifier() = ", b)
+b = animals.islower()
+print("animals.islower() = ", b)
+b = animals.isupper()
+print("animals.isupper() = ", b)
+b = "   ".isspace()
+print('"   ".isspace() = ', b)
+
+print("------------------------------------------------------------")  # 60個
+
+import linecache
+
+filename = 'C:/_git/vcs/_4.python/_data/王之渙_涼州詞.txt'
+filename = 'C:/_git/vcs/_4.python/_data/song1.txt'
+times = 5
+
+getLines = linecache.getlines(filename)
+print(getLines)
+
+#print("取得{}檔案原內容：\n{}".format(filename), getLines)
+
+for i in range(times):
+    random.shuffle(getLines)
+
+print("\n隨機抽取：", random.choice(getLines))
+
+print("------------------------------------------------------------")  # 60個
+
+name = "david"
+age = 18
+
+print(f"Hi, My name is {name}, I'm {age}")
+
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
+print("Python 常用標準函式庫")
+print("------------------------------------------------------------")  # 60個
+
+from concurrent.futures import ThreadPoolExecutor
+
+a = True  # 定義 a 為 True
+
+
+def run():
+    global a  # 定義 a 是全域變數
+    while a:  # 如果 a 為 True
+        print(123)  # 不斷顯示 123
+        time.sleep(1)  # 每隔一秒
+
+
+def keyin():
+    global a  # 定義 a 是全域變數
+    if input() == "a":
+        a = False  # 如果輸入的是 a，就讓 a 為 False，停止 run 函式中的迴圈
+
+
+executor = ThreadPoolExecutor()
+e1 = executor.submit(run)
+e2 = executor.submit(keyin)
+executor.shutdown()
+
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+print("Python 基礎範例")
+print("------------------------------------------------------------")  # 60個
+
+import re
+
+# 要轉換的字串
+text = """請 求 您 幫 我 oxxo.studio 去 除 空 白 ok ？
+但是要保留換行 可以 嗎 ，(        哈哈哈 )( 啊哈)
+統一便利超商 (711) 的括號之間也要有空白喔！
+寫作規    範就是這 麼 100% 的龜毛～
+"""
+
+# 取得中文字和英文單字的正規表達式
+# [a-zA-Z0-9]+ 表示開頭是英文字母後面連接一串字母或數字
+regex = re.compile(r"[\u4E00-\u9FFF\uFF00-\uFFFF\u0021-\u002F\n]|[a-zA-Z0-9]+")
+
+# 根據正規表達式，將每個中文字、標點符號和英文單字變成串列
+arr = re.findall(regex, text)
+
+# 使用空格合併串列
+text = " ".join(arr)
+print(text)
+
+"""
+請 求 您 幫 我 oxxo . studio 去 除 空 白 ok ？
+但 是 要 保 留 換 行 可 以 嗎 ， ( 哈 哈 哈 ) ( 啊 哈 )
+統 一 便 利 超 商 ( 711 ) 的 括 號 之 間 也 要 有 空 白 喔 ！
+寫 作 規 範 就 是 這 麼 100 % 的 龜 毛 ～
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+import re
+
+# 輸入字符串
+text = """請 求 您 幫 我 oxxo.studio 去 除 空 白 ok ？
+但是要保留換行 可以 嗎 ，(        哈哈哈 )( 啊哈)
+統一便利超商 (711) 的括號之間也要有空白喔！
+寫作規    範就是這 麼 100% 的龜毛～
+"""
+
+regex = re.compile(r"[\u4E00-\u9FFF\uFF00-\uFFFF\u0021-\u002F\n]|[a-zA-Z0-9]+")
+arr = re.findall(regex, text)
+text = " ".join(arr)
+
+regex = re.compile(r"(?<=[^a-zA-Z0-9\u0021-\u002E])(\x20)(?=[^a-zA-Z0-9\u0021-\u002E])")
+text = re.sub(regex, "", text)
+
+regex = re.compile(r"(\x20)(?=[\(\%\uFF00-\uFFFF])")
+text = re.sub(regex, "", text)
+
+text = text.replace(" . ", ".")
+print(text)
+
+print("------------------------------------------------------------")  # 60個
+
+n = 100
+icon = "⋮⋰⋯⋱"  # 建立旋轉的符號清單
+for i in range(n + 1):
+    print(f"\r{icon[i%4]} {i*100/n}%", end="")
+    time.sleep(0.1)
+
+print("------------------------------------------------------------")  # 60個
+
+a = 15  # 新增變數 a，設定金字塔有幾層
+b = a * 2 + 1  # 新增變數 b，計算底部有幾個星星
+for i in range(1, b, 2):  # 使用 for 迴圈，從 1～b，每隔 2 個一數
+    move = round((b - i) / 2) - 1  # 計算星星的位移空白 ( 要將星星都置中 )
+    print(f" " * move, end="")  # 印出星星前方的位移空白 ( 不換行 )
+    print("*" * i)  # 加上「幾個星星」( 乘以 i )
+
+
+print("------------------------------------------------------------")  # 60個
+
+a = 15
+b = a * 2 + 1
+for i in range(1, b, 4):  # 改成 4 個一數，金字塔每一層就會增加 2，高度也會減半
+    move = round((b - i) / 2) - 1
+    print(f" " * move, end="")
+    print("*" * i)
+
+
+print("------------------------------------------------------------")  # 60個
+
+a = 15  # 新增變數 a，設定金字塔有幾層
+for i in range(1, a + 1):  # 使用 for 迴圈，重複指定的層數
+    print(" " * (a - i) + "*" * (2 * i - 1))
+    # ' ' * (a-i) 表示星星數越少，前面空白越多
+    # '*' * (2*i-1) 串接後方星星的數量
+
+
+print("------------------------------------------------------------")  # 60個
+
+a = 10  # 要產生的金字塔層數
+for i in range(1, a + 1):  # 使用 for 迴圈，重複 1～10 ( a+1 ) 的數字
+    print(" " * 3 * (a - i), end="")  # 根據不同的層數，讓第一個數字前方增加指定的空白字元 ( 後方不換行 )
+    for j in range(1, i + 1):  # 第二層 for 迴圈，重複不同層內的數字
+        if j == 1:  # 如果是第一個數字
+            print(j, end="")  # 單純印出數字即可 ( 後方不換行 )
+        else:  # 如果是第二個以後的數字
+            print(f"{j:>3d}", end="")  # 格式化數字，使其寬度為 3，並靠右對齊 ( 後方不換行 )
+    for j in range(i - 1, 0, -1):  # 剛剛的 for 迴圈是由小到大，加入另外一個由大到小的迴圈
+        print(f"{j:>3d}", end="")  # 格式化數字，使其寬度為 3，並靠右對齊 ( 後方不換行 )
+    print("")  # 最後執行換行的 print
+
+
+print("------------------------------------------------------------")  # 60個
+
+a = 10
+for i in range(1, a + 1):
+    print(" " * 3 * (a - i), end="")
+    for j in range(0, i):  # ragne 改成從 0 開始，因為 2 的 0 次方等於 1
+        k = 2**j  # 計算 2 的幾次方
+        if k == 1:
+            print(k, end="")
+        else:
+            print(f"{k:>3d}", end="")
+    for j in range(i - 2, -1, -1):  # 修改 range，使其最後一位數為 0
+        k = 2**j  # 計算 2 的幾次方
+        print(f"{k:>3d}", end="")
+    print("")
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+a = 10  # 要產生的金字塔層數
+b = 1  # 提供 while 迴圈停止的依據
+while b <= a:  # 如果 b <= a 就讓 while 迴圈繼續
+    n = 1  # 設定從 1 開始
+    print(" " * 3 * (a - b), end="")  # 根據不同的層數，讓第一個數字前方增加指定的空白字元 ( 後方不換行 )
+    while n <= b:  # 第二層 while 迴圈，如果 n <= b 就讓 while 迴圈繼續
+        if n == 1:  # 如果是第一個數字
+            print(n, end="")  # 單純印出數字即可 ( 後方不換行 )
+        else:  # 如果是第二個以後的數字
+            print(f"{n:>3d}", end="")  # 格式化數字，使其寬度為 3，並靠右對齊 ( 後方不換行 )
+        n = n + 1  # 將 n 增加 1
+    while n > 2:  # 剛剛的 while 迴圈是由小到大，加入另外一個由大到小的迴圈
+        print(f"{n-2:>3d}", end="")  # 格式化數字，使其寬度為 3，並靠右對齊 ( 後方不換行 )
+        n = n - 1  # 將 n 減少 1
+    print("")  # 最後執行換行的 print
+    b = b + 1  # 將 b 增加 1
+
+print("------------------------------------------------------------")  # 60個
+
+local_table = {
+    "A": 10,
+    "B": 11,
+    "C": 12,
+    "D": 13,
+    "E": 14,
+    "F": 15,
+    "G": 16,
+    "H": 17,
+    "I": 34,
+    "J": 18,
+    "K": 19,
+    "L": 20,
+    "M": 21,
+    "N": 22,
+    "O": 35,
+    "P": 23,
+    "Q": 24,
+    "R": 25,
+    "S": 26,
+    "T": 27,
+    "U": 28,
+    "V": 29,
+    "W": 32,
+    "X": 30,
+    "Y": 31,
+    "Z": 33,
+}
+id_number = input("輸入身分證字號：")
+check = False  # 新增 check=False 變數，與 while 迴圈搭配
+while True:  # 使用 while 迴圈
+    id_arr = list(id_number)  # 新增 id_arr 變數，將身分證字號轉換成串列存入
+    if len(id_arr) != 10:
+        break  # 判斷如果 id_arr 長度不等於 10，就跳出 while 迴圈
+    local = str(local_table[id_arr[0]])  # 將對應的二位數字轉換成字串
+    check_arr = list(local)  # 將字串轉換成陣列，例如 '10' 會轉換成 ['1','0']
+    check_arr[0] = int(check_arr[0])  # 將串列中的第一個項目轉換成數字
+    check_arr[1] = int(check_arr[1]) * 9  # 將串列中的第二個項目轉換成數字
+    sex = id_arr[1]  # 取得第二碼數字
+    if sex != "1" and sex != "2":
+        break  # 判斷如果不是 '1' 也不是 '2' 就跳出 while 迴圈
+    check_arr.append(int(sex) * 8)  # 將 sex 內容轉換成數字並乘以 8，存入 check_arr 裡
+    for i in range(7):  # 使用 for 迴圈，重複七次
+        check_arr.append(int(id_arr[i + 2]) * (7 - i))  # 每次重複，按照檢查碼程式，將數字乘以對應的數值
+    check_num = 10 - sum(check_arr) % 10  # 計算使用者輸入的檢查碼
+    if check_num != int(id_arr[9]):
+        break  # 如果檢查碼不相同，跳出 while 迴圈
+    check = True  # 如果迴圈都沒有跳出，讓 check 等於 True。
+    break  # 結束後跳出迴圈
+
+if check == False:  # while 迴圈結束後，如果 check 等於 Fasle，表示身分證字號錯誤
+    print("身分證字號格式錯誤")
+else:
+    print("身分證字號正確")
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+local_table = {
+    "A": 10,
+    "B": 11,
+    "C": 12,
+    "D": 13,
+    "E": 14,
+    "F": 15,
+    "G": 16,
+    "H": 17,
+    "I": 34,
+    "J": 18,
+    "K": 19,
+    "L": 20,
+    "M": 21,
+    "N": 22,
+    "O": 35,
+    "P": 23,
+    "Q": 24,
+    "R": 25,
+    "S": 26,
+    "T": 27,
+    "U": 28,
+    "V": 29,
+    "W": 32,
+    "X": 30,
+    "Y": 31,
+    "Z": 33,
+}
+while True:  # 新增 while 迴圈，就可以重複輸入
+    id_number = input("輸入身分證字號：")
+    check = False
+    while True:
+        try:  # 使用 try
+            id_arr = list(id_number)
+            if len(id_arr) != 10:
+                break
+            local = str(local_table[id_arr[0]])
+            check_arr = list(local)
+            check_arr[0] = int(check_arr[0])
+            check_arr[1] = int(check_arr[1]) * 9
+            sex = id_arr[1]
+            if sex != "1" and sex != "2":
+                break
+            check_arr.append(int(sex) * 8)
+            for i in range(7):
+                check_arr.append(int(id_arr[i + 2]) * (7 - i))
+            check_num = 10 - sum(check_arr) % 10
+            if check_num != int(id_arr[9]):
+                break
+            check = True
+            break
+        except:  # 使用 except，如果發生例外狀況，跳出迴圈
+            break
+
+    if check == False:
+        print("身分證字號格式錯誤")
+    else:
+        print("身分證字號正確")
+
+
+print("------------------------------------------------------------")  # 60個
+
+table = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}  # 轉換對照表
+roman = [i for i in input()]  # 將輸入的羅馬數字變成串列
+r = roman[::-1]  # 反轉串列
+output = table[r[0]]  # 讓 output 先等於第一個數字
+for i in range(1, len(r)):  # 從第二個數字開始依序取到最後一個數字
+    if table[r[i]] < table[r[i - 1]]:  # 如果後面數字比較小
+        output = output - table[r[i]]  # 讓 output 減去後面的數字
+    else:
+        output = output + table[r[i]]  # 如果後面數字比較大，讓 output 加上後面的數字
+print(output)
+
+# 輸入 IVMVIIMVVMVM 就會得到 3994
+
+print("------------------------------------------------------------")  # 60個
+
+
+num_table = [
+    [1000, "M"],
+    [900, "CM"],
+    [500, "D"],
+    [400, "CD"],
+    [100, "C"],
+    [90, "XC"],
+    [50, "L"],
+    [40, "XL"],
+    [10, "X"],
+    [9, "IX"],
+    [5, "V"],
+    [4, "IV"],
+    [1, "I"],
+]  # 建立對照表
+num = int(input())  # 將輸入的文字轉換成數字
+output = ""  # 設定輸出的 output 字串
+for i in num_table:  # 依序判斷對照表中每個數字
+    a = divmod(num, i[0])  # 取得商 ( a[0] ) 和餘數 ( a[1] )
+    if a[0] != 0:  # 如果 a[0] 不為 0
+        num = a[1]  # 取得餘數繼續往下除
+        output = output + i[1] * a[0]  # 組合字串
+print(output)
+
+print("------------------------------------------------------------")  # 60個
+
+from PyQt5 import QtWidgets
+
+app = QtWidgets.QApplication(sys.argv)
+screen = QtWidgets.QApplication.desktop()
+width = screen.width()
+height = screen.height()
+print(width, height)
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -11324,3 +11293,4 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+

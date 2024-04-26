@@ -1174,3 +1174,232 @@ if filename.endswith('.c'):
     #time = os.path.getmtime(filename)
     #print(time)
 
+
+
+
+
+
+
+import glob
+
+print("方法1:列出指定目錄的所有檔案")
+for file in glob.glob('C:\\_git\\vcs\\_1.data\\______test_files3\*.*'):
+    print(file)
+    
+print("方法2:列出目前工作目錄的特定檔案")
+for file in glob.glob('ch14_1*.py'):
+    print(file)
+    
+print("方法3:列出目前工作目錄的特定檔案")
+for file in glob.glob('ch14_2*.*'):
+    print(file)
+
+print("------------------------------------------------------------")  # 60個
+
+import glob
+
+cc = glob.glob(r'C:/_git/vcs/_1.data/______test_files1/*')
+print(type(cc))
+print(cc)
+
+files = ["da1.c", "da2.py", "da3.py", "da4.java"]
+py = []
+for file in files:
+    if file.endswith(".py"):  # 以.py為副檔名
+        py.append(file)  # 加入串列
+print(py)
+
+
+import glob
+
+print(glob.glob(r'./test/*'))         # 找出所有檔案
+print(glob.glob(r'./test/*.txt'))     # 找出所有副檔名為 .txt 的檔案，例如 1.txt、hello.txt
+print(glob.glob(r'./test/[0-9].txt')) # 找出所以名稱為一個數字，副檔名為 .txt 的檔案，例如 1.txt、2.txt
+print(glob.glob(r'./test/????.*'))    # 找出所有檔名有四個字元的檔案，例如 test.txt、demo.py
+print(glob.glob(r'./test/t*.*'))      # 找出所有 t 開頭的檔案，例如 test.txt、test.py
+print(glob.glob(r'./test/*e*.*'))     # 找出所有檔名裡有 e 的檔案，例如 test.txt、hello.py
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+import os
+
+files = ["c1.py", "c2.py", "c3.py"]
+for file in files:
+    print(os.path.join("D:\\test", file))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+# 如果檔案在目前工作目錄下可以省略路徑
+print(os.path.getsize("ch14_1.py"))
+print(os.path.getsize("D:\\Python\\ch14\\ch14_1.py"))
+
+print("------------------------------------------------------------")  # 60個
+
+
+print(os.listdir("D:\\Python\\ch14"))
+print(os.listdir("."))                  # 這代表目前工作目錄
+
+print("------------------------------------------------------------")  # 60個
+
+totalsizes = 0
+print("列出D:\\Python\\ch14工作目錄的所有檔案")
+for file in os.listdir('D:\\Python\\ch14'):
+    print(file)
+    totalsizes += os.path.getsize(os.path.join('D:\\Python\\ch14', file))
+
+print("全部檔案大小是 = ", totalsizes)
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+def usage(msg):
+    sys.stdout = sys.stderr
+    print("Error:", msg)
+    print("Use ``%s -h'' for help" % sys.argv[0])
+
+prefix = 'aaaa'
+exec_prefix = 'bbbb'
+binlib = 'kkkk'
+incldir = 'qqqq'
+
+check_dirs = [prefix, exec_prefix, binlib, incldir]
+for dir in check_dirs:
+    if not os.path.exists(dir):
+        usage('needed directory %s not found' % dir)
+    if not os.path.isdir(dir):
+        usage('%s: not a directory' % dir)
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+    
+base = os.path.basename(filename)
+base, ext = os.path.splitext(base)
+
+dirname = os.path.dirname(filename)
+print(dirname)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print("檔案或資料夾存在 = ", os.path.exists('ch14'))
+print("檔案或資料夾存在 = ", os.path.exists('C:\\_git\\vcs\\_1.data\\______test_files3'))
+print("檔案或資料夾存在 = ", os.path.exists('ch14_4.py'))
+print(" --- ")
+
+print("是絕對路徑 = ", os.path.isabs('ch14_4.py'))
+print("是絕對路徑 = ", os.path.isabs('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
+print(" --- ")
+
+print("是資料夾 = ", os.path.isdir('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
+print("是資料夾 = ", os.path.isdir('C:\\_git\\vcs\\_1.data\\______test_files3'))
+print(" --- ")
+
+print("是檔案 = ", os.path.isfile('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
+print("是檔案 = ", os.path.isfile('C:\\_git\\vcs\\_1.data\\______test_files3'))
+
+print("------------------------------------------------------------")  # 60個
+
+newdir = 'C:\\_git\\vcs\\_1.data\\______test_files3'
+
+currentdir = os.getcwd()
+print("列出目前工作資料夾 ", currentdir)
+
+# 如果newdir不存在就建立此資料夾
+if os.path.exists(newdir):
+    print("已經存在 %s " % newdir)
+else:
+    os.mkdir(newdir)
+    print("建立 %s 資料夾成功" % newdir)
+
+# 將目前工作資料夾改至newdir
+os.chdir(newdir)
+print("列出最新工作資料夾 ", os.getcwd())
+
+# 將目前工作資料夾返回
+os.chdir(currentdir)
+print("列出返回工作資料夾 ", currentdir)
+
+print("------------------------------------------------------------")  # 60個
+
+files = ['ch14_1.py', 'ch14_2.py', 'ch14_3.py']
+for file in files:
+    print(os.path.join('C:\\_git\\vcs\\_1.data\\______test_files3', file))   
+
+print("------------------------------------------------------------")  # 60個
+
+for dirName, sub_dirNames, fileNames in os.walk('oswalk'):
+    print("目前工作目錄名稱:   ", dirName)
+    print("目前子目錄名稱串列: ", sub_dirNames)
+    print("目前檔案名稱串列:   ", fileNames, "\n")
+
+print("------------------------------------------------------------")  # 60個
+
+print('撈出一層jpg檔')
+def get_imlist(path):
+    """ 返回目錄中所有JPG圖像的文件名列表 """
+    return [os.path.join(path, f) for f in os.listdir(path) if f.endswith('.jpg')]
+
+foldername = 'C:/_git/vcs/_1.data/______test_files1'
+
+cc = get_imlist(foldername)
+
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+import glob
+import os
+
+images = glob.glob("./demo/*")
+print(images)
+
+n = 1  # 設定名稱從 1 開始
+for i in images:
+    # 偽執行
+    # os.rename(i, f"./demo/img-{n:03d}.jpg")  # 改名時，使用字串格式化的方式進行三位數補零
+    n = n + 1  # 每次重複時將 n 增加 1
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+"""
+import os
+
+# 我們指定本機的/tmp暫存資料夾來試試
+path = '/tmp/'
+stat = {}
+for item in os.walk(path):
+    # item[0]是路徑名稱，item[2]是檔案清單
+    for fname in item[2]:
+        # 取出檔名完整路徑
+        ffname = os.path.join(item[0], fname)
+        # 取出檔案大小
+        size = os.path.getsize(ffname)
+        # 取出檔案副檔名，統一轉小寫並去除開頭的'.'字元
+        ext = os.path.splitext(ffname)[-1].lower().replace('.', '')
+        # 如果副檔名是空的，跳過
+        if ext.strip()=='':
+            continue
+        # 進行累計
+        stat[ext] = stat.get(ext, 0)+size
+
+for k, v in stat.items():
+    print(k, v)
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+

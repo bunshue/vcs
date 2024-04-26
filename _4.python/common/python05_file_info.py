@@ -372,3 +372,64 @@ print(string)
 """
 
 
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+show = "不存在，可能檔案或路徑有誤"
+if os.path.exists(filename):  # 判斷檔案或路徑是否存在
+    show = "存在"
+print("%s %s" % (filename, show))
+
+print("------------------------------------------------------------")  # 60個
+
+show = "不存在，可能檔案或路徑有誤"
+if os.path.exists(filename):
+    show = "存在"
+    if os.path.isfile(filename):
+        show += "，為檔案路徑"
+    if os.path.isdir(filename):
+        show += "，為目錄路徑"
+print("%s %s" % (filename, show))
+
+print("------------------------------------------------------------")  # 60個
+
+dirPath = "tmp_PythonHw"
+if os.path.exists(dirPath):
+    print("目錄已存在或路徑有誤，無法建立")
+else:
+    os.mkdir(dirPath)
+    pathname = os.path.split(dirPath)[0]  # 取得路徑
+    filename = os.path.split(dirPath)[1]  # 取得目錄名稱
+    print("於 %s 建立 %s 目錄" % (pathname, filename))
+
+print("------------------------------------------------------------")  # 60個
+
+dirPath = "tmp_PythonHw"
+if os.path.exists(dirPath):
+    os.rmdir(dirPath)
+    pathname = os.path.split(dirPath)[0]  # 取得路徑
+    filename = os.path.split(dirPath)[1]  # 取得目錄名稱
+    print("刪除 %s 下的 %s 目錄" % (pathname, filename))
+else:
+    print("目錄不存在或路徑有誤，無法刪除")
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+

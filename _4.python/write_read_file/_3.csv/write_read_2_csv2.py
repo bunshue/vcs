@@ -1,191 +1,13 @@
-"""
-相關抽出
+print("------------------------------------------------------------")  # 60個
 
-各種檔案讀寫
-
-
-"""
-
-import os
 import sys
-import time
+import csv
 import random
+import numpy as np
+import pandas as pd
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
 
-filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-
-show = "不存在，可能檔案或路徑有誤"
-if os.path.exists(filename):  # 判斷檔案或路徑是否存在
-    show = "存在"
-print("%s %s" % (filename, show))
-
-print("------------------------------------------------------------")  # 60個
-
-show = "不存在，可能檔案或路徑有誤"
-if os.path.exists(filename):
-    show = "存在"
-    if os.path.isfile(filename):
-        show += "，為檔案路徑"
-    if os.path.isdir(filename):
-        show += "，為目錄路徑"
-print("%s %s" % (filename, show))
-
-print("------------------------------------------------------------")  # 60個
-
-dirPath = "tmp_PythonHw"
-if os.path.exists(dirPath):
-    print("目錄已存在或路徑有誤，無法建立")
-else:
-    os.mkdir(dirPath)
-    pathname = os.path.split(dirPath)[0]  # 取得路徑
-    filename = os.path.split(dirPath)[1]  # 取得目錄名稱
-    print("於 %s 建立 %s 目錄" % (pathname, filename))
-
-print("------------------------------------------------------------")  # 60個
-
-dirPath = "tmp_PythonHw"
-if os.path.exists(dirPath):
-    os.rmdir(dirPath)
-    pathname = os.path.split(dirPath)[0]  # 取得路徑
-    filename = os.path.split(dirPath)[1]  # 取得目錄名稱
-    print("刪除 %s 下的 %s 目錄" % (pathname, filename))
-else:
-    print("目錄不存在或路徑有誤，無法刪除")
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_product.txt"
-if os.path.exists(filename):
-    f = open(filename, "r")
-    print(f.readline(), end="")
-    print(f.readline(), end="")
-    print(f.readline(), end="")
-    print("檔案讀取完成")
-    f.close()
-else:
-    print("%s 檔案不存在" % (filename))
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_product.txt"
-if os.path.exists(filename):
-    f = open(filename, "r")
-    while True:
-        row = f.readline()
-        if row != "" and row != "\n":
-            print(row.strip())
-        else:
-            print("檔案讀取完成")
-            f.close()
-            break
-else:
-    print("%s 檔案不存在" % (filename))
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_product.txt"
-if os.path.exists(filename):
-    f = open(filename, "r")
-    while True:
-        row = f.readline()
-        if row != "" and row != "\n":
-            data = row.strip()
-            listcol = data.split(",")
-            colNum = 1
-            for col in listcol:
-                print(col, end="\t")
-                colNum += 1
-                if colNum == 4:
-                    print("$%.2f" % (float(col) * 0.9), end="\t")
-            print()
-        else:
-            print("檔案讀取完成")
-            f.close()
-            break
-else:
-    print("%s 檔案不存在" % (filename))
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_product.txt"
-if os.path.exists(filename):
-    f = open(filename, "r")
-    listProduct = f.readlines()
-    for row in listProduct:
-        data = row.strip()
-        listcol = data.split(",")
-        colNum = 1
-        for col in listcol:
-            print(col, end="\t")
-            colNum += 1
-            if colNum == 4:
-                print("$%.2f" % (float(col) * 0.9), end="\t")
-        print()
-    print("檔案讀取完成")
-    f.close()
-else:
-    print("%s 檔案不存在" % (filename))
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "tmp_product.txt"
-print("請輸入產品記錄：")
-f = open(filename, "a")  # 以附加資料模式開啟檔案
-pid = 123
-name = "aaaaaa"
-price = 456
-data = str(pid) + "," + name + "," + str(price) + "\n"
-f.write(data)
-print("產品記錄新增成功")
-f.close()
-
-print("------------------------------------------------------------")  # 60個
-
-
-#   讀檔作業
-def fnRead():
-    if os.path.exists(filename):
-        f = open(filename, "r")
-        listProduct = f.readlines()
-        print("編號\t品名\t單價\t9折折扣")
-        for row in listProduct:
-            data = row.strip()
-            listcol = data.split(",")
-            colNum = 1
-            for col in listcol:
-                print(col, end="\t")
-                colNum += 1
-                if colNum == 4:
-                    print("$%.2f" % (float(col) * 0.9), end="\t")
-            print()
-        print("產品讀取成功")
-        f.close()
-    else:
-        print("%s 檔案不存在，請先使用新增功能建檔" % (filename))
-
-
-# 新增作業
-def fnWrite():
-    f = open(filename, "a")  # 以附加資料模式開啟檔案
-    pid = input("編號：")  # 輸入編號並指定給pid
-    name = input("品名：")  # 輸入品名並指定給name
-    price = int(input("單價："))  # 輸入單價並指定給price
-    data = pid + "," + name + "," + str(price) + "\n"
-    f.write(data)
-    f.close()
-    print("產品新增成功")
-
-
-# 主程式
-filename = "tmp_product.txt"
-
-print("==DTC產品管理系統==")
-
-# fnWrite()
-fnRead()
-
-print("------------------------------------------------------------")  # 60個
 
 import csv
 
@@ -332,28 +154,25 @@ while True:
 """
 print("------------------------------------------------------------")  # 60個
 
-#製作log檔的範例
-print('存檔紀念')
+print("------------------------------------------------------------")  # 60個
 
-fp = open('tmp_log.txt', 'w')
-fp.write("# BUILD INFO\n")
-fp.write("# Date: %s\n" % time.ctime())
-fp.close()
 
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
 print('------------------------------------------------------------')	#60個
 
 
 
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個

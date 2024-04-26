@@ -121,6 +121,8 @@ notification.notify(
 
 print('------------------------------------------------------------')	#60個
 
+
+print("列出所有python關鍵字")
 import keyword
 print(keyword.kwlist)
 

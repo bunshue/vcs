@@ -8,6 +8,7 @@
 
 import os
 import sys
+import time
 import random
 
 print('------------------------------------------------------------')	#60個
@@ -31,8 +32,6 @@ print("附加檔案 : " + filename_rw1)
 f = open(filename_rw1, 'a') 
 f.write('UVWXYZ')
 f.close()
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -329,7 +328,25 @@ line = f.readlines()
 print(line),
 f.close()
 
+
 print("一次讀一行")
+
+filename = "C:/_git/vcs/_4.python/_data/王之渙_涼州詞.big5.txt"
+
+f = open(filename, "r")
+while True:
+    print('讀一行')
+    line = f.readline()
+    if len(line) == 0:  #Zero length indicates EOF
+        break
+    print(line.strip())
+
+f.close()
+
+
+
+print("一次讀一行")
+filename = 'C:/_git/vcs/_1.data/______test_files1/poetry.txt'
 #f = open(filename, 'r')
 f = open(filename, 'r', encoding = 'utf8')
 i = 0
@@ -1043,8 +1060,7 @@ for line in file1:
 file1.close()
 
 """ skip
-import os.path #匯入os.path
-import sys #匯入sys
+import os.path
 
 if os.path.isfile('tmp_phrase_new.txt'): #如果檔案存在則取消複製
     print('此檔案已存在,不要複製')
@@ -1574,7 +1590,6 @@ print("------------------------------------------------------------")  # 60個
 """
 
 """ fail
-import time
 
 def main():
     # 一次性读取整个文件内容
@@ -1609,6 +1624,8 @@ with open('data/pi_million_digits.txt') as f:
         pi_string += line.strip()
     if birth in pi_string:
         print('Bingo!!!')
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1738,18 +1755,13 @@ print('作業完成')
 print('------------------------------------------------------------')	#60個
 
 
+
+print('------------------------------------------------------------')	#60個
+print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
+# 新進
 
-
-
-
-import os
-import sys
-import time
-import random
-
-print("------------------------------------------------------------")  # 60個
 
 filename = 'data2/ch14_20.txt'              # 設定欲開啟的檔案
 with open(filename) as file_Obj:      # 傳回檔案物件file_Obj
@@ -2061,4 +2073,12 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
+
+
+
+filename = "C:/_git/vcs/_4.python/_data/王之渙_涼州詞.big5.txt"
+
+f = open(filename, "r")
+all_lines = f.readlines()
+print(all_lines)
 

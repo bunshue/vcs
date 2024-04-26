@@ -65,7 +65,7 @@ frame1.pack()
 tk.Label(frame1, text = "Enter an order: ").pack(side = tk.LEFT)
 order = tk.StringVar()
 entry = tk.Entry(frame1, textvariable = order, justify = tk.RIGHT).pack(side = tk.LEFT)
-tk.Button(frame1, text = 'Display Sierpinski Triangle', command = display).pack(side = tk.LEFT)
+tk.Button(frame1, text = 'Do something', command = display).pack(side = tk.LEFT)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 

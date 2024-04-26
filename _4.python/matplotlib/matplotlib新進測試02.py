@@ -41,6 +41,22 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+#相同斜率平行移動
+import matplotlib.pyplot as plt
+
+x = [x for x in range(0, 11)]
+y1 = [2 * y for y in x]
+y2 = [(2 * y - 2) for y in x]
+y3 = [(2 * y + 2) for y in x]
+plt.plot(x, y1)
+plt.plot(x, y2)
+plt.plot(x, y3)
+
+#plt.show()
+
+print(x)
+
+
 
 print("------------------------------------------------------------")  # 60個
 
