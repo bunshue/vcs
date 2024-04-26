@@ -4364,56 +4364,6 @@ print(dirname)
 
 print("------------------------------------------------------------")  # 60個
 
-import datetime
-now = datetime.datetime.now() # current date and time
-
-date_time = now.strftime('%Y年%m月%d日, %H:%M:%S')
-print("現在時間 :", date_time)
-
-import datetime
-
-dt = datetime.datetime(2006, 3, 11, 9, 15),
-print(dt)
-
-cc = time.strftime("%Y-%m-%d %H:%M")
-print(cc)
-
-cc = time.strftime('%Y-%m-%d %H:%M+%Z')
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-import random
-
-NUM_DIGITS = 10
-
-def getSecretNum():
-    """Returns a string made up of NUM_DIGITS unique random digits."""
-    numbers = list('0123456789')  # Create a list of digits 0 to 9.
-    random.shuffle(numbers)  # Shuffle them into random order.
-
-    # Get the first NUM_DIGITS digits in the list for the secret number:
-    secretNum = ''
-    for i in range(NUM_DIGITS):
-        secretNum += str(numbers[i])
-    return secretNum
-
-
-secretNum = getSecretNum()
-print(secretNum)
-
-print("------------------------------------------------------------")  # 60個
-
-import time
-currentTime = time.asctime()
-
-print("時間 :", currentTime)
-
-entrySecond = time.time()
-print("時間 :", entrySecond)
-
-print("------------------------------------------------------------")  # 60個
-
 print("檔案或資料夾存在 = ", os.path.exists('ch14'))
 print("檔案或資料夾存在 = ", os.path.exists('C:\\_git\\vcs\\_1.data\\______test_files3'))
 print("檔案或資料夾存在 = ", os.path.exists('ch14_4.py'))
@@ -11268,35 +11218,6 @@ def phi(n):
     return presult
 
 print(phi(900))
-
-print("------------------------------------------------------------")  # 60個
-
-from random import randint
-import os.path
-
-#pfile = input("請輸入檔名：").strip()
-
-pfile = 'tmp_cccccc.txt'
-if os.path.isfile(pfile):
-    print("此檔案已經存在，程式終止")
-else:
-    poutfile = open(pfile, "w")
-        
-    for i in range(30):
-        print(randint(0, 999), file = poutfile, end = " ")
-       
-    poutfile.close()
-        
-    pinfile = open(pfile, "r")
-    ps = pinfile.read()
-    
-    pnumber = [eval(items) for items in ps.split()]
-    pnumber.sort()
-        
-    for i in range(len(pnumber)):
-        print(pnumber[i], end = " ")
-            
-    pinfile.close()
 
 print("------------------------------------------------------------")  # 60個
 

@@ -122,29 +122,6 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-from PIL import ImageChops
-
-def compare_images(filename1, filename2, threshold=0.8):
-    #比較兩張圖像的相似度，返回相似度值（0~1之間的浮點數）
-    # 檔案 => PIL影像 => RGBA
-    image1 = Image.open(filename1).convert('RGBA')
-    # 檔案 => PIL影像 => RGBA
-    image2 = Image.open(filename2).convert('RGBA')
-    diff = ImageChops.difference(image1, image2)
-    histogram = diff.histogram()
-    pixels = sum(histogram)
-    similarity = 1 - (pixels / float(image1.size[0] * image1.size[1] * 3))
-    print(similarity)
-    return similarity >= threshold
-
-# 測試比較相似度
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture1.bmp'
-is_similar = compare_images(filename1, filename2)
-print('相似度:', is_similar)
-
-print("------------------------------------------------------------")  # 60個
-
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => PIL影像

@@ -73,6 +73,94 @@ x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 # 第一張圖
 plt.subplot(231)
 
+mu, sigma = 100, 15
+x = np.linspace(mu - 50, mu + 50, 3000)  # 從N1到N2, 分成N個, 包含頭尾
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+plt.plot(x, y, "--", color="r", linewidth=2)
+
+
+# 第二張圖
+plt.subplot(232)
+
+N = 10000  # 資料個數
+num_bins = 50  # 直方圖顯示時的束數
+
+mu, sigma = 100, 15 # 平均值, 標準差
+x = mu + sigma * np.random.randn(N)  # 隨機數
+
+n, bins, patches = plt.hist(
+    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
+)
+
+# 繪製曲線圖
+x = bins
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2))
+plt.plot(x, y, "--", color="r", linewidth=2)
+
+plt.ylabel("機率")
+
+# plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
+plt.title(
+    r"$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $",
+    fontsize=20,
+)
+
+# 第三張圖
+plt.subplot(233)
+
+
+
+
+# 第四張圖
+plt.subplot(234)
+
+x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
+
+plt.hist(x, bins=num_bins // 10)
+plt.title("產生共3組，每組 10000 個隨機數")
+
+
+
+# 第五張圖
+plt.subplot(235)
+
+# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
+x = np.random.uniform(size=N)
+# x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
+
+plt.hist(x, bins=num_bins, rwidth=0.8)
+plt.title("np.random.uniform")
+
+# 第六張圖
+plt.subplot(236)
+
+x = np.random.exponential(scale=2, size=N)
+plt.hist(x, bins=num_bins, label="Exponential distribution")
+plt.title("np.random.exponential")
+
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="hist 集合 2",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 200, \sigma=25$")
+
+mu, sigma = 100, 15 # 平均值, 標準差
+x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
+
+# 第一張圖
+plt.subplot(231)
+
 plt.hist(
     x,
     bins=num_bins,
@@ -187,7 +275,7 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="hist 集合 2",
+    num="hist 集合 3",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -244,93 +332,6 @@ plt.title("擲兩個骰子 10000 次 看其分布")
 
 # 第四張圖
 plt.subplot(234)
-
-x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
-
-plt.hist(x, bins=num_bins // 10)
-plt.title("產生共3組，每組 10000 個隨機數")
-
-# 第五張圖
-plt.subplot(235)
-
-# 生成 N 組介於 0 與 1 之間均勻分配隨機變數
-x = np.random.uniform(size=N)
-# x = np.random.uniform(0.0, 5.0, size=N)     # 隨機數 #另外範圍
-
-plt.hist(x, bins=num_bins, rwidth=0.8)
-plt.title("np.random.uniform")
-
-# 第六張圖
-plt.subplot(236)
-
-x = np.random.exponential(scale=2, size=N)
-plt.hist(x, bins=num_bins, label="Exponential distribution")
-plt.title("np.random.exponential")
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="hist 集合 3",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-N = 10000  # 資料個數
-num_bins = 50  # 直方圖顯示時的束數
-
-mu, sigma = 100, 15 # 平均值, 標準差
-x = mu + sigma * np.random.randn(N)  # 隨機數
-
-n, bins, patches = plt.hist(
-    x, bins=num_bins, density=True, color="green", rwidth=0.5, alpha=0.5
-)
-
-# 繪製曲線圖
-x = bins
-y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((bins - mu) ** 2) / (2 * sigma**2))
-plt.plot(x, y, "--", color="r", linewidth=2)
-
-plt.ylabel("機率")
-
-# plt.title(r"$\mu=100,\ \sigma=15$, 加 理想曲線", fontweight="bold")
-plt.title(
-    r"$f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{\frac{-1}{2}(\frac{x-\mu}{\sigma})^{2}}    $",
-    fontsize=20,
-)
-
-# 第二張圖
-plt.subplot(232)
-
-mu, sigma = 100, 15
-x = np.linspace(mu - 50, mu + 50, 3000)  # 從N1到N2, 分成N個, 包含頭尾
-y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2))
-plt.plot(x, y, "--", color="r", linewidth=2)
-
-# 第三張圖
-plt.subplot(233)
-
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
 
 sc1 = [
     90,
@@ -404,7 +405,20 @@ plt.xlabel("分數")
 plt.title("成績表")
 
 
+
+# 第五張圖
+plt.subplot(235)
+
+
+
+# 第六張圖
+plt.subplot(236)
+
+
+
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -523,6 +537,62 @@ plt.ylabel("個數統計")
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
+print("建立N筆成績資料 常態分佈 平均值 = 70, 標準差 = 15")
+
+N = 50000  # 資料個數
+num_bins = 100  # 直方圖顯示時的束數
+mu, sigma = 70, 15 # 平均值, 標準差
+
+plt.figure(figsize=(12, 8))
+
+#理想值
+x = np.linspace(mu - 50, mu + 50, N)  # 從N1到N2, 分成N個, 包含頭尾
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2)) * N
+plt.plot(x, y, "--", color="lime", linewidth=3)
+
+
+#建立常態分佈資料
+scores = np.random.normal(mu, sigma, size=N)  # 隨機數
+
+freq = [0] * 100
+
+for score in scores:
+    if score >= 100:
+        #print('XXXXXXXX ', score)
+        continue
+    rank = int(score) 
+    freq[rank] += 1
+    #print(score)
+    #print(rank)
+
+print("人數分佈頻率:", freq)
+
+plt.plot(freq, "--", color="r", linewidth=2)
+
+# 指定bins
+num_bins = range(0, 100, 1) #設定bin的範圍
+
+"""
+for _ in num_bins:
+    print(_, end = " ")
+"""
+
+plt.hist(
+    scores,
+    bins=num_bins,
+    histtype="bar",
+    facecolor="b",
+    edgecolor="g",
+    alpha=0.6,
+    rwidth=0.7,
+    label="Normal distribution",
+)
+
+plt.title("建立N筆成績資料 常態分佈")
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
@@ -560,24 +630,4 @@ plt.show()
 
 
 
-"""
-
-# 可以拿來作統計常態分佈用
-
-scores = [90, 59, 78, 71, 39, 0, 19, 85, 77, 84, 91, 98, 38, 66, 65, 88, 63, 85, 18, 0]
-freq = [0] * 5
-for score in scores:
-    if score < 20:
-        freq[0] += 1
-    elif score < 40:
-        freq[1] += 1
-    elif score < 60:
-        freq[2] += 1
-    elif score < 80:
-        freq[3] += 1
-    else:
-        freq[4] += 1
-print("人數分佈頻率:", freq)
-
-"""
 

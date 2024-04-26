@@ -7,7 +7,7 @@ numpy: 數值計算的標準套件
 import sys
 import numpy as np
 import pandas as pd
-'''
+
 print('------------------------------------------------------------')	#60個
 
 print('建立 numpy 陣列 一維')
@@ -1010,7 +1010,7 @@ print(type(arr)) # <class 'numpy.ndarray'>
 np.savetxt('output_data1.csv', arr, delimiter = ',')
 np.savetxt('output_data2.csv', arr, delimiter = ',', fmt = '%d')
 np.savetxt('output_data3.csv', arr, delimiter = ',', fmt = '%.2f')
-'''
+
 print('------------------------------------------------------------')	#60個
 
 print('numpy 之 array 之 形狀轉換')
