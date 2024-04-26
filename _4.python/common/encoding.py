@@ -329,6 +329,90 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+print('------------------------------------------------------------')	#60個
+
+def read_file(filename, encoding):
+    fp =  open(filename, encoding = encoding)
+    data = fp.read()
+    fp.close()
+    print(data)
+
+print('\nbig5 = cp950 ------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__text/Compressor.c'
+encoding = 'big5'
+read_file(filename, encoding)
+
+print('\nunicode utf-8 ------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__text/Form1.cs.txt'
+encoding = 'utf-8'
+read_file(filename, encoding)
+
+print('\nshift-jis = cp932 ------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__text/jap/饩Ⓚ丗钡冦冦葢轿瘅.txt'
+encoding = 'shift-jis'
+read_file(filename, encoding)
+
+print('\ngb2312 = cp936 ------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__text/sc/Compressor.ori.c'
+encoding = 'gb2312'
+read_file(filename, encoding)
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+"""
+整理python檔案
+
+1. 檢查檔案編碼格式
+2. 轉換為utf-8格式
+3. 簡中轉正中
+
+"""
+
+import os
+import sys
+import time
+import random
+
+import glob
+
+import chardet  # 檔案編碼格式
+
+print("------------------------------------------------------------")  # 60個
+
+filenames = glob.glob("*.txt")
+for filename in filenames:
+    print("檔案 :", filename)
+    text = open(filename, "rb").read()  # 要用 rb
+    codetype = chardet.detect(text)
+    # print(type(codetype))
+    # print(codetype['encoding'])
+    # print('{} 編碼格式：{}'.format(filename, codetype))
+
+    # 印出不是utf-8格式的檔案名稱
+    if not codetype["encoding"] == "utf-8":
+        print("非utf-8格式, 編碼格式：{}".format(codetype))
+    else:
+        print("utf-8格式\n")
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print('------------------------------------------------------------')	#60個
 
