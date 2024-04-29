@@ -1,27 +1,27 @@
-#測試執行外部命令
+# 測試執行外部命令
 
 import subprocess
 
 print("------------------------------------------------------------")  # 60個
 
-#cmd = 'svn propset svn:eol-style native "{}"'.format(path)
-#cmd = 'calc.exe'    #可
-#cmd = 'systeminfo' #不可
-cmd = r'C:\_git\ims1\IMSCap\IMSCap\bin\Debug\IMSCap.exe'    #可
+# cmd = 'svn propset svn:eol-style native "{}"'.format(path)
+# cmd = 'calc.exe'    #可
+# cmd = 'systeminfo' #不可
+cmd = r"C:\_git\ims1\IMSCap\IMSCap\bin\Debug\IMSCap.exe"  # 可
 
-propset = subprocess.Popen(cmd, shell = True)
+propset = subprocess.Popen(cmd, shell=True)
 propset.wait()
 
-print('完成')
+print("完成")
 
 
-'''
+"""
 import subprocess
 
 ocr = subprocess.Popen("tesseract media\\text1.jpg media\\result", shell=True)
 ocr.wait()
 
-'''
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -84,14 +84,8 @@ print(f"列印ret.stdout = {ret.stdout}")
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-

@@ -36,9 +36,15 @@ filename3 = "C:/_git/vcs/_4.python/_data/panda.jpg"
 
 ratio = 3
 
+# 檔案 => cv2影像
 image1 = cv2.imread(filename1)
+
+# 檔案 => cv2影像
 image2 = cv2.imread(filename2)
+
+# 檔案 => cv2影像
 image3 = cv2.imread(filename3)
+
 print(image1.shape)
 
 image1 = cv2.resize(image1, (image1.shape[1]//ratio, image1.shape[0]//ratio))
@@ -71,7 +77,10 @@ print("------------------------------------------------------------")  # 60個
 filename1 = "C:/_git/vcs/_4.python/_data/picture_add1.bmp"
 filename2 = "C:/_git/vcs/_4.python/_data/picture_add2.bmp"
 
+# 檔案 => cv2影像
 image1 = cv2.imread(filename1)
+
+# 檔案 => cv2影像
 image2 = cv2.imread(filename2)
 
 print("兩圖直接相加")
@@ -120,9 +129,13 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray2.bmp"
+
+# 檔案 => cv2影像
 lena = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/dollar.bmp"
+
+# 檔案 => cv2影像
 dollar = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
 
 plt.figure(
@@ -160,7 +173,9 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
 
+# 檔案 => cv2影像
 image1 = cv2.imread(filename)
+
 image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
 
 print(image1.shape)
@@ -206,6 +221,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+
+# 檔案 => cv2影像
 o = cv2.imread(filename)
 
 image2 = cv2.cvtColor(o, cv2.COLOR_BGR2RGB)
@@ -215,7 +232,10 @@ fgd = np.zeros((1, 65), np.float64)
 rect = (50, 50, 400, 500)
 cv2.grabCut(o, mask, rect, bgd, fgd, 5, cv2.GC_INIT_WITH_RECT)
 
+# 檔案 => cv2影像
 mask2 = cv2.imread("images/mask.png", 0)
+
+# 檔案 => cv2影像
 mask2Show = cv2.imread("images/mask.png", -1)
 
 m2rgb = cv2.cvtColor(mask2Show, cv2.COLOR_BGR2RGB)
@@ -247,6 +267,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
+
+# 檔案 => cv2影像
 o = cv2.imread(filename)
 
 image2 = cv2.cvtColor(o, cv2.COLOR_BGR2RGB)
@@ -282,10 +304,15 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename, 0)
 
 image2 = image.copy()
+
+# 檔案 => cv2影像
 template = cv2.imread("images/temp.bmp", 0)
+
 th, tw = template.shape[::]
 image = image2.copy()
 rv = cv2.matchTemplate(image, template, cv2.TM_SQDIFF)
@@ -320,9 +347,13 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename, 0)
 
 image2 = image.copy()
+
+# 檔案 => cv2影像
 template = cv2.imread("images/temp.bmp", 0)
 
 tw, th = template.shape[::-1]
@@ -358,7 +389,10 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => cv2影像
 image = cv2.imread("images/lena4.bmp", 0)
+
+# 檔案 => cv2影像
 template = cv2.imread("images/lena4Temp.bmp", 0)
 
 w, h = template.shape[::-1]
@@ -387,6 +421,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 H, W, D = image.shape
@@ -410,6 +446,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 H, W, D = image.shape
@@ -433,6 +471,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/demo.bmp"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 H, W, D = image.shape
@@ -490,7 +530,11 @@ def saltpepper(image, n):
 
 # 上面就是椒盐噪声函数，下面是使用方法，大家可以愉快的玩耍了
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+
+# 檔案 => cv2影像
 image0 = cv2.imread(filename)
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 print("saltpepper 效果")
@@ -519,6 +563,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -552,6 +598,8 @@ print("------------------------------------------------------------")  # 60個
 print("去除圖片的雜訊")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+# 檔案 => cv2影像
 image2 = cv2.imread(filename)
 
 plt.subplot(121)
@@ -595,7 +643,10 @@ def my_laplace_sharpen(image, my_type="small"):
     return result
 
 
+# 檔案 => cv2影像
 # original_image_test1 = cv2.imread(filename, 0)
+
+# 檔案 => cv2影像
 original_image_test1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 
@@ -645,6 +696,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("createCLAHE_image 生成自適應均衡化圖像")
 
+# 檔案 => cv2影像
 image = cv2.imread("data/building.png", 0)
 clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
 cl1 = clahe.apply(image)
@@ -703,6 +755,7 @@ def my_result_add(image, model, k):
     return result
 
 
+# 檔案 => cv2影像
 original_image_lena = cv2.imread("data/lena.png", 0)
 
 # 獲得圖像邊界信息
@@ -740,6 +793,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("imaeg_laplace 邊緣檢測 銳化處理")
 
+# 檔案 => cv2影像
 original_image_test1 = cv2.imread("data/lena.png", 0)
 
 
@@ -836,8 +890,9 @@ def my_laplace_result_add(image, model):
                 result[i][j] = 0
     return result
 
-
+# 檔案 => cv2影像
 original_image_test1 = cv2.imread("data/lena.png", 0)
+
 # 函數中的參數ddepth為輸出圖像的深度，也就是每個像素點是多少位的。
 # CV_16S表示16位有符號數
 computer_result = cv2.Laplacian(original_image_test1, ksize=3, ddepth=cv2.CV_16S)
@@ -906,6 +961,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("image_ftt2")
 
+# 檔案 => cv2影像
 image = plt.imread("data/castle3.jpg")
 
 # 根據公式轉成灰度圖
@@ -957,7 +1013,9 @@ print("------------------------------------------------------------")  # 60個
 
 print("magnitude_spectrum")
 
+# 檔案 => cv2影像
 image = cv2.imread("data/lena.png", 0)
+
 dft = cv2.dft(np.float32(image), flags=cv2.DFT_COMPLEX_OUTPUT)
 dft_shift = np.fft.fftshift(dft)
 magnitude_spectrum = 20 * np.log(cv2.magnitude(dft_shift[:, :, 0], dft_shift[:, :, 1]))
@@ -1026,8 +1084,9 @@ def CreateNewImg(image):
             newimage[j, :, i] = screenNum[image[j, :, i]]
     return newimage
 
-
+# 檔案 => cv2影像
 image = cv2.imread("data/building.png")
+
 newimage = CreateNewImg(image)
 cv2.imshow("原始圖像", image)
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -1046,7 +1105,10 @@ print("兩圖相減")
 filename1 = "data/_compare/compare1.jpg"
 filename2 = "data/_compare/compare2.jpg"
 
+# 檔案 => cv2影像
 image1 = cv2.imread(filename1)
+
+# 檔案 => cv2影像
 image2 = cv2.imread(filename2)
 
 # image3 = math.fabs(image1-image2)
@@ -1102,6 +1164,8 @@ fraction = 0.1  # 雜訊佔圖的比例
 salt_vs_pepper = 0.5  # 鹽與胡椒的比例
 
 filename = "C:/_git/vcs/_4.python/_data/tiger.jpg"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 noisy = salt_pepper_noise(image, fraction, salt_vs_pepper)
 
@@ -1121,7 +1185,9 @@ print('跑不出來 skip')
 
 PI = 3.141591265
 
+# 檔案 => cv2影像
 image = plt.imread('data/castle3.jpg')
+
 #根據公式轉成灰度圖
 image = 0.2126 * image[:,:,0] + 0.7152 * image[:,:,1] + 0.0722 * image[:,:,2]
 
@@ -1154,7 +1220,9 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
+# 檔案 => cv2影像
 image1 = cv2.imread(filename)
+
 image2 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)  # 轉成灰階
 
 # image2 = cv2.cvtColor(image1, 6)  # 也可以用數字對照 6 表示轉換成灰階
@@ -1208,6 +1276,8 @@ print("------------------------------------------------------------")  # 60個
 print("Y對稱一張圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+# 檔案 => cv2影像
 image1 = cv2.imread(filename)
 
 w = image1.shape[1]
@@ -1234,6 +1304,8 @@ print("------------------------------------------------------------")  # 60個
 print("XY對稱一張圖片")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+# 檔案 => cv2影像
 image1 = cv2.imread(filename)
 
 w = image1.shape[1]
@@ -1261,9 +1333,15 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_01")
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)  # 預設為彩色 1號
+
+# 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)  # 灰階 2號
+
+# 檔案 => cv2影像
 image = cv2.imread(filename, 2)  # 也可使用數字代表模式
+
 print(image.shape)  # 得到 shape
 print(image.dtype)  # uint8
 
@@ -1272,21 +1350,35 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 """
+# 檔案 => cv2影像
 image1 = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+# 檔案 => cv2影像
 image2 = cv2.imread('test.png', cv2.IMREAD_UNCHANGED)
+
 print(image1.shape)    # (400, 300, 3)  JPG 只有三個色版 BGR
 print(image2.shape)    # (400, 300, 4)  PNG 四個色版 GRA
 
+# 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_UNCHANGED)
+
+# 檔案 => cv2影像
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA 色彩模式
+
 print(image.shape)                             # (400, 300, 4)  第三個數值變成 4
 """
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_03")
 
+# 檔案 => cv2影像
 image_b = cv2.imread(filename)
+
+# 檔案 => cv2影像
 image_g = cv2.imread(filename)
+
+# 檔案 => cv2影像
 image_r = cv2.imread(filename)
+
 image_b[:, :, 1] = 0  # 將綠色設為 0
 image_b[:, :, 2] = 0  # 將紅色設為 0
 image_g[:, :, 0] = 0  # 將藍色設為 0
@@ -1304,6 +1396,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_04")
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 print("原圖為彩色")
 cv2.imshow("image1", image)
@@ -1322,7 +1415,9 @@ filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 print("像素操作 底片效果 半張負片")
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
+
 rows = image.shape[0]  # 取得高度的總像素
 cols = image.shape[1]  # 取得寬度的總像素
 
@@ -1343,6 +1438,7 @@ print("像素操作 全張負片")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 image = 255 - image  # 使用 255 減去陣列中所有數值
@@ -1354,6 +1450,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_07")
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 contrast = 200
@@ -1373,7 +1470,9 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_08")
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
+
 output = image  # 建立 output 變數
 
 alpha = 1
@@ -1393,8 +1492,13 @@ filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 filename3 = "C:/_git/vcs/_4.python/opencv/data/RGB_B.png"
 
+# 檔案 => cv2影像
 image_r = cv2.imread(filename1)
+
+# 檔案 => cv2影像
 image_g = cv2.imread(filename2)
+
+# 檔案 => cv2影像
 image_b = cv2.imread(filename3)
 
 image = cv2.add(image_r, image_g)  # 疊加紅色和綠色
@@ -1410,8 +1514,12 @@ print("OpenCV_12 addWeighted 要一樣大的圖")
 filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
+# 檔案 => cv2影像
 image1 = cv2.imread(filename1)
+
+# 檔案 => cv2影像
 image2 = cv2.imread(filename2)
+
 output = cv2.addWeighted(image1, 1.0, image2, 1.0, 100)  # 整體墊高100
 
 cv2.imshow("image", output)
@@ -1424,8 +1532,12 @@ print("OpenCV_13 subtract 兩圖相減")
 filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
+# 檔案 => cv2影像
 image1 = cv2.imread(filename1)
+
+# 檔案 => cv2影像
 image2 = cv2.imread(filename2)
+
 output = cv2.subtract(image1, image2)  # 相減
 
 cv2.imshow("image", output)
@@ -1435,6 +1547,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_14 漸層色")
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 w, h = 400, 400
@@ -1485,7 +1598,9 @@ print("OpenCV_17 logo處理")
 
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
+# 檔案 => cv2影像
 image = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)  # 開啟圖片
+
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 因為是 jpg，要轉換顏色為 BGRA
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # 新增 gray 變數為轉換成灰階的圖片
 
@@ -1509,7 +1624,9 @@ print("OpenCV_18 logo處理")
 
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
+# 檔案 => cv2影像
 image = cv2.imread(logo_filename, cv2.IMREAD_UNCHANGED)
+
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -1531,10 +1648,14 @@ print("OpenCV_19")
 filename1 = "C:/_git/vcs/_4.python/opencv/data/RGB_R.png"
 filename2 = "C:/_git/vcs/_4.python/opencv/data/RGB_G.png"
 
+# 檔案 => cv2影像
 bg = cv2.imread(filename1, cv2.IMREAD_UNCHANGED)  # 開啟背景圖
+
 bg = cv2.cvtColor(bg, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA
 
+# 檔案 => cv2影像
 image = cv2.imread(filename2, cv2.IMREAD_UNCHANGED)  # 開啟悟空公仔圖
+
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA
 
 h = image.shape[0]  # 取得圖片高度
@@ -1557,6 +1678,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_20")
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 
@@ -1587,6 +1709,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_21")
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 
@@ -1638,6 +1761,7 @@ def convex(src_image, raw, effect):
     return output
 
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 image = convex(image, (300, 400, 3), (150, 130, 100))  # 提交參數數值，進行凸透鏡效果
 
@@ -1649,6 +1773,7 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_24")
 print("按Q離開")
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)  # 開啟圖片
 image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)  # 轉換成 BGRA ( 因為需要 alpha 色版 )
 w = image.shape[1]  # 取得寬度
@@ -1674,8 +1799,12 @@ print("OpenCV_32")
 filename1 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
 
+# 檔案 => cv2影像
 image1 = cv2.imread(filename1)
+
+# 檔案 => cv2影像
 image2 = cv2.imread(filename2)
+
 w = image1.shape[1]  # 讀取圖片寬度
 h = image1.shape[0]  # 讀取圖片高度
 
@@ -1703,10 +1832,14 @@ print("OpenCV_33")
 
 logo_filename = "C:/_git/vcs/_4.python/opencv/data/opencv_logo.png"
 
+# 檔案 => cv2影像
 mona = cv2.imread(filename)
+
+# 檔案 => cv2影像
 logo = cv2.imread(
     logo_filename, cv2.IMREAD_UNCHANGED
 )  # 使用 cv2.IMREAD_UNCHANGED 讀取 png，保留 alpha 色版
+
 mona_w = mona.shape[1]  # 蒙娜麗莎寬度
 mona_h = mona.shape[0]  # 蒙娜麗莎高度
 logo_w = logo.shape[1]  # logo 寬度
@@ -1739,6 +1872,7 @@ print("OpenCV_34")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)  # 開啟圖片
 
 qrcode = cv2.QRCodeDetector()  # 建立 QRCode 偵測器
@@ -1758,6 +1892,7 @@ print("OpenCV_35")
 
 filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 qrcode = cv2.QRCodeDetector()
@@ -1793,6 +1928,8 @@ print("OpenCV_36")
 from PIL import ImageFont, ImageDraw, Image  # 載入 PIL ( 為了放中文字 )
 
 filename = "C:/_git/vcs/_4.python/opencv/data/QR1.png"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 qrcode = cv2.QRCodeDetector()
@@ -1837,6 +1974,7 @@ print("OpenCV_37")
 """ many-qr-code
 from PIL import ImageFont, ImageDraw, Image
 
+# 檔案 => cv2影像
 image = cv2.imread("many-qrcode.jpg")
 
 def putText(x,y,text,color=(0,0,0)):
@@ -1881,6 +2019,7 @@ print("OpenCV_38")
 """ barcode
 from PIL import ImageFont, ImageDraw, Image
 
+# 檔案 => cv2影像
 image = cv2.imread("barcode.jpg")
 
 def putText(x,y,text,color=(0,0,0)):
@@ -1920,6 +2059,8 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_40 按上下調整亮度 按左右調整對比度 按ESC離開")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 
@@ -1959,6 +2100,8 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_41")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 cv2.imshow("ImageShow", image)
@@ -1978,6 +2121,8 @@ print("------------------------------------------------------------")  # 60個
 print("OpenCV_42")
 
 filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 cv2.imshow("ImageShow", image)
@@ -2079,6 +2224,8 @@ print("二值化")
 
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 THRESHOLD = 127
@@ -2116,6 +2263,8 @@ print("------------------------------------------------------------")  # 60個
 THRESHOLD = 127
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/computer.jpg"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename, 0)
 
 t1, thd = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY)
@@ -2159,6 +2308,8 @@ print("------------------------------------------------------------")  # 60個
 THRESHOLD = 127
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/tiffany.bmp"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename, 0)
 
 t1, thd = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_BINARY)
@@ -2194,6 +2345,8 @@ print("圖片的二值化處理, 要先轉成灰階, 再二值化")
 
 THRESHOLD = 30
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+# 檔案 => cv2影像
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
 thr, image_binary = cv2.threshold(image, THRESHOLD, 255, cv2.THRESH_TOZERO)
@@ -2208,6 +2361,7 @@ print("OpenCV_09 各種二值化")
 
 THRESHOLD = 127
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # 轉換前，都先將圖片轉換成灰階色彩
@@ -2242,6 +2396,7 @@ print("OpenCV_10")
 
 THRESHOLD = 127
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # 轉換前，都先將圖片轉換成灰階色彩

@@ -11,33 +11,36 @@ Schedule—簡單實用的 Python 周期任務調度工具
 import schedule
 import time
 
+
 def job():
-    print('執行工作, 時間 :', time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()))
+    print("執行工作, 時間 :", time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()))
+
 
 def job_that_executes_once():
     print("此處編寫的任務只會執行一次... 後面有return CancelJob")
     return schedule.CancelJob
 
+
 def say_hello(name):
     print("Hello", name)
 
-print('設定每3分鐘執行一次函數')          
+
+print("設定每3分鐘執行一次函數")
 schedule.every(1).minutes.do(job)
 
-#只會執行一次的
-#schedule.every().day.at("11:45").do(job_that_executes_once)
+# 只會執行一次的
+# schedule.every().day.at("11:45").do(job_that_executes_once)
 schedule.every(5).minutes.do(job_that_executes_once)
 
 # do() 將額外的參數傳遞給job函數
-#每幾秒呼叫一次 Alice
+# 每幾秒呼叫一次 Alice
 schedule.every(15).seconds.do(say_hello, name="Alice")
 
-#每幾秒呼叫一次 Bob
+# 每幾秒呼叫一次 Bob
 schedule.every(20).seconds.do(say_hello, name="Bob")
 
 
-
-print('獲取目前所有的作業')
+print("獲取目前所有的作業")
 all_jobs = schedule.get_jobs()
 print(all_jobs)
 
@@ -59,8 +62,6 @@ schedule.every().wednesday.at("13:15").do(job)
 # 每分鐘的第17秒執行任務
 schedule.every().minute.at(":17").do(job)
 """
-
-
 
 
 """
@@ -102,8 +103,6 @@ while True:
 
 print('kkkkkk')
 """
-
-
 
 
 """

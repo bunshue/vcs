@@ -6,7 +6,7 @@ import time
 """
 random.seed()
 random.random()
-random.randint(num1, num2)
+random.randint(num1, num2) # 僅 random.randint(num1, num2) 包含頭尾
 random.choice
 random.randrange
 random.uniform(num1, num2)
@@ -47,7 +47,7 @@ random.seed 隨機數的「種子」，數值一樣則產生的隨機數相同�
 若不設定則使用系統提供隨機源，這樣做出來的random資料並不是真正的隨機數
 如果 seed 相同則結果相同
 """
-
+'''
 # 不固定亂數種子
 for _ in range(10):
     print(random.random(), end=", ")
@@ -114,21 +114,26 @@ print(
     "---- random.random() SP --------------------------------------------------------"
 )  # 60個
 
-
+'''
 print(
     "---- random.randint(num1, num2) ST --------------------------------------------------------"
 )  # 60個
 
-for i in range(10):
-    print(random.randint(0, 2))
+print("------------------------------------------------------------")  # 60個
+
+print('隨機整數 1 ~ 10, 包含頭尾')
+for i in range(20):
+    a = random.randint(1, 10) # 隨機取得整數
+    print(a, end=" ")
+print()
 
 print("------------------------------------------------------------")  # 60個
 
-# 隨機整數
-print(random.randint(0, 10))
-print(random.randint(0, 10))
-print(random.randint(0, 10))
-print(random.randint(0, 10))
+a = set()  # 建立空集合
+while len(a) < 6:  # 使用 while 迴圈，直到集合的長度等於 6 就停止
+    b = random.randint(1, 49)  # 取出 1～49 得隨機整數
+    a.add(b)  # 將隨機數加入集合
+print(a)  # {34, 41, 48, 49, 19, 30}
 
 print("------------------------------------------------------------")  # 60個
 
@@ -150,22 +155,6 @@ print("取出 1 ~ 6 之間的整數")
 
 num = random.randint(1, 6)
 print("你擲的骰子點數為：" + str(num))
-
-print("------------------------------------------------------------")  # 60個
-
-for i in range(5):
-    a = random.randint(1, 10)  # 隨機取得整數
-    print(a, end=" ")
-print()
-
-print("------------------------------------------------------------")  # 60個
-
-target = random.randint(1, 100)
-print("1~100亂數值: " + str(target))
-
-print("------------------------------------------------------------")  # 60個
-
-print(random.randint(-50, 0))  # 產生-50-0之間的隨機整數
 
 print("------------------------------------------------------------")  # 60個
 
@@ -257,9 +246,6 @@ print(type(ccc))
 print(ccc)
 
 datacount = random.randint(16, 64) * 1024 + random.randint(1, 1024)
-
-ddd = random.random() * random.randint(-1000, 1000)
-print(ddd)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -361,28 +347,6 @@ print(generate_code(10))
 print("------------------------------------------------------------")  # 60個
 
 
-
-c = random.randint(0, 1)  # randint 包含設定的最後一個數值，0 和 1 隨機挑選
-print(c)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-n = 3
-for i in range(n):
-    print("1-100     : ", random.randint(1, 100))
-
-for i in range(n):
-    print("500-1000  : ", random.randint(500, 1000))
-
-for i in range(n):
-    print("2000-3000 : ", random.randint(2000, 3000))
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 """
 for _ in range(10):
     aa = random.randint(1,10)
@@ -410,13 +374,93 @@ for i in range(10):
 """
 print("------------------------------------------------------------")  # 60個
 
-a = set()  # 建立空集合
-while len(a) < 6:  # 使用 while 迴圈，直到集合的長度等於 6 就停止
-    b = random.randint(1, 49)  # 取出 1～49 得隨機整數
-    a.add(b)  # 將隨機數加入集合
-print(a)  # {34, 41, 48, 49, 19, 30}
+
+"""
+a = random.randint(1, 99)  # 產生 1～99 的隨機整數
+b = int(input("輸入 1～99 的數字："))  # 讓使用者輸入數字，使用 int 轉換成數字
+while a != b:  # 使用 while 迴圈，如果 a 不等於 b，就不斷繼續
+    if b < a:
+        b = int(input("數字太小囉！再試一次吧："))  # 如果 b<a，提示數字太小
+    elif b > a:
+        b = int(input("數字太大囉！再試一次吧："))  # 如果 b>a，提示數字太大
+print("答對囉！")  # 如果 b=a 會停止 while 迴圈，顯示正確答案
+"""
 
 print("------------------------------------------------------------")  # 60個
+
+dices = []
+for loop in range(1, 4):
+    for i in range(3):
+        dice = random.randint(1, 6)
+        dices.append(dice)
+    print("%d : 隨機3組骰子值 : " % loop, sorted(dices))
+    for i in range(3):
+        dices.pop()
+
+print("------------------------------------------------------------")  # 60個
+
+min = 1
+max = 6  # 骰子有幾面
+times = 10000  # 擲骰子次數
+
+dice = [0] * 7  # 建立擲骰子的串列
+for i in range(times):
+    data = random.randint(min, max)
+    dice[data] += 1
+print(dice)
+del dice[0]  # 刪除索引0資料
+
+for i, c in enumerate(dice, 1):
+    print("{} = {} 次".format(i, c))
+print(dice)
+x = [i for i in range(1, max + 1)]  # 長條圖x軸座標
+width = 0.35  # 長條圖寬度
+plt.bar(x, dice, width, color="g")  # 繪製長條圖
+plt.ylabel("Frequency")
+plt.title("Test 10000 times")
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#random.randint() 使用
+
+def dice_generator(times, sides):
+    """處理隨機數"""
+    for i in range(times):
+        ranNum1 = random.randint(1, sides)  # 產生1-6隨機數
+        ranNum2 = random.randint(1, sides)  # 產生1-6隨機數
+        dice.append(ranNum1 + ranNum2)
+
+
+def dice_count(sides):
+    """計算2-11個出現次數"""
+    for i in range(2, 13):
+        frequency = dice.count(i)  # 計算i出現在dice串列的次數
+        frequencies.append(frequency)
+
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+times = 1000  # 擲骰子次數
+sides = 6  # 骰子有幾面
+dice = []  # 建立擲骰子的串列
+frequencies = []  # 儲存每一面骰子出現次數串列
+dice_generator(times, sides)  # 產生擲骰子的串列
+dice_count(sides)  # 將骰子串列轉成次數串列
+N = len(frequencies)
+x = np.arange(N)  # 長條圖x軸座標
+width = 0.35  # 長條圖寬度
+plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
+plt.ylabel("出現次數")
+plt.title("測試 1000 次", fontsize=16)
+plt.xticks(x, ("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
+plt.yticks(np.arange(0, 150, 15))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print(
     "---- random.randint(num1, num2) SP --------------------------------------------------------"
@@ -879,17 +923,6 @@ a = random.sample(range(1, 50), 6)
 # 從包含 1～49 數字的串列中，取出六個不重複的數字變成串列
 print(a)  # [9, 39, 10, 8, 25, 43]
 
-"""
-a = random.randint(1, 99)  # 產生 1～99 的隨機整數
-b = int(input("輸入 1～99 的數字："))  # 讓使用者輸入數字，使用 int 轉換成數字
-while a != b:  # 使用 while 迴圈，如果 a 不等於 b，就不斷繼續
-    if b < a:
-        b = int(input("數字太小囉！再試一次吧："))  # 如果 b<a，提示數字太小
-    elif b > a:
-        b = int(input("數字太大囉！再試一次吧："))  # 如果 b>a，提示數字太大
-print("答對囉！")  # 如果 b=a 會停止 while 迴圈，顯示正確答案
-"""
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -946,18 +979,6 @@ print("------------------------------------------------------------")  # 60個
 
 list1 = ['a','b','c','d','e']    
 print(random.sample(list1, 3))  
-
-while True:
-    inkey = input("請按任意鍵後再按Enter鍵擲骰子，若要結束請直接按Enter鍵。")
-    if len(inkey)>0:
-        num=random.randint(1,6)
-        print("亂數產生的骰子點數："+str(num))
-    else:
-        print("擲骰子點數結束。")
-        break
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 list1 = random.sample(range(1,50),7)
@@ -1084,10 +1105,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-for i in range(5):
-    a = random.randint(1, 10)  # 隨機取得整數
-    print(a, end=" ")
-print()
 # 給定items數列的初始值
 word = ["apple", "bird", "tiger", "happy", "quick"]
 random.shuffle(word)  # 使用shuffle函數打亂字的順序
@@ -1213,29 +1230,10 @@ print(e)
 
 print("------------------------------------------------------------")  # 60個
 
-min = 1
-max = 6  # 骰子有幾面
-times = 10000  # 擲骰子次數
 
-dice = [0] * 7  # 建立擲骰子的串列
-for i in range(times):
-    data = random.randint(min, max)
-    dice[data] += 1
-print(dice)
-del dice[0]  # 刪除索引0資料
 
-for i, c in enumerate(dice, 1):
-    print("{} = {} 次".format(i, c))
-print(dice)
-x = [i for i in range(1, max + 1)]  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-plt.bar(x, dice, width, color="g")  # 繪製長條圖
-plt.ylabel("Frequency")
-plt.title("Test 10000 times")
 
-plt.show()
 
-print("------------------------------------------------------------")  # 60個
 
 # 假設一家公司想要測試兩種不同的廣告設計, 以看哪一種效果更好
 ad_designs = ["Design A", "Design B"]
@@ -1264,123 +1262,6 @@ print(f"A 廣告接收者數量 : {len(recipients['Design A'])}")
 print(f"B 廣告接收者數量 : {len(recipients['Design B'])}")
 
 print("------------------------------------------------------------")  # 60個
-
-def dice_generator(times, sides):
-    """處理隨機數"""
-    for i in range(times):
-        ranNum1 = random.randint(1, sides)  # 產生1-6隨機數
-        ranNum2 = random.randint(1, sides)  # 產生1-6隨機數
-        dice.append(ranNum1 + ranNum2)
-
-
-def dice_count(sides):
-    """計算2-11個出現次數"""
-    for i in range(2, 13):
-        frequency = dice.count(i)  # 計算i出現在dice串列的次數
-        frequencies.append(frequency)
-
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-times = 1000  # 擲骰子次數
-sides = 6  # 骰子有幾面
-dice = []  # 建立擲骰子的串列
-frequencies = []  # 儲存每一面骰子出現次數串列
-dice_generator(times, sides)  # 產生擲骰子的串列
-dice_count(sides)  # 將骰子串列轉成次數串列
-N = len(frequencies)
-x = np.arange(N)  # 長條圖x軸座標
-width = 0.35  # 長條圖寬度
-plt.bar(x, frequencies, width, color="g")  # 繪製長條圖
-plt.ylabel("出現次數")
-plt.title("測試 1000 次", fontsize=16)
-plt.xticks(x, ("2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"))
-plt.yticks(np.arange(0, 150, 15))
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-dices = []
-for loop in range(1, 4):
-    for i in range(3):
-        dice = random.randint(1, 6)
-        dices.append(dice)
-    print("%d : 隨機3組骰子值 : " % loop, sorted(dices))
-    for i in range(3):
-        dices.pop()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-双色球随机选号程序
-"""
-
-def display(balls):
-    """
-    输出列表中的双色球号码
-    """
-    for index, ball in enumerate(balls):
-        if index == len(balls) - 1:
-            print("|", end=" ")
-        print("%02d" % ball, end=" ")
-    print()
-
-
-def random_select():
-    """
-    随机选择一组号码
-    """
-    red_balls = [x for x in range(1, 34)]
-    selected_balls = []
-    for _ in range(6):
-        index = random.randrange(len(red_balls))
-        selected_balls.append(red_balls[index])
-        del red_balls[index]
-    # 上面的for循环也可以写成下面这行代码
-    # sample函数是random模块下的函数
-    # selected_balls = sample(red_balls, 6)
-    selected_balls.sort()
-    selected_balls.append(random.randint(1, 16))
-    return selected_balls
-
-
-n = 10
-for _ in range(n):
-    display(random_select())
-
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-numberOfDice = 10
-
-print("一次丟 ", numberOfDice, "個骰子, 丟100萬次")
-
-# Set up a dictionary to store the results of each dice roll:
-results = {}
-for i in range(numberOfDice, (numberOfDice * 6) + 1):
-    results[i] = 0
-
-# Simulate dice rolls:
-print("Simulating 1,000,000 rolls of {} dice...".format(numberOfDice))
-lastPrintTime = time.time()
-for i in range(1000000):
-    if time.time() > lastPrintTime + 1:
-        print("{}% done...".format(round(i / 10000, 1)))
-        lastPrintTime = time.time()
-
-    total = 0
-    for j in range(numberOfDice):
-        total = total + random.randint(1, 6)
-    results[total] = results[total] + 1
-
-# Display results:
-print("TOTAL - ROLLS - PERCENTAGE")
-for i in range(numberOfDice, (numberOfDice * 6) + 1):
-    roll = results[i]
-    percentage = round(results[i] / 10000, 1)
-    print("  {} - {} rolls - {}%".format(i, roll, percentage))
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1446,3 +1327,83 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+双色球随机选号程序
+"""
+
+def display(balls):
+    """
+    输出列表中的双色球号码
+    """
+    for index, ball in enumerate(balls):
+        if index == len(balls) - 1:
+            print("|", end=" ")
+        print("%02d" % ball, end=" ")
+    print()
+
+
+def random_select():
+    """
+    随机选择一组号码
+    """
+    red_balls = [x for x in range(1, 34)]
+    selected_balls = []
+    for _ in range(6):
+        index = random.randrange(len(red_balls))
+        selected_balls.append(red_balls[index])
+        del red_balls[index]
+    # 上面的for循环也可以写成下面这行代码
+    # sample函数是random模块下的函数
+    # selected_balls = sample(red_balls, 6)
+    selected_balls.sort()
+    selected_balls.append(random.randint(1, 16))
+    return selected_balls
+
+
+n = 10
+for _ in range(n):
+    display(random_select())
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+numberOfDice = 10
+
+print("一次丟 ", numberOfDice, "個骰子, 丟100萬次")
+
+# Set up a dictionary to store the results of each dice roll:
+results = {}
+for i in range(numberOfDice, (numberOfDice * 6) + 1):
+    results[i] = 0
+
+# Simulate dice rolls:
+print("Simulating 1,000,000 rolls of {} dice...".format(numberOfDice))
+lastPrintTime = time.time()
+for i in range(1000000):
+    if time.time() > lastPrintTime + 1:
+        print("{}% done...".format(round(i / 10000, 1)))
+        lastPrintTime = time.time()
+
+    total = 0
+    for j in range(numberOfDice):
+        total = total + random.randint(1, 6)
+    results[total] = results[total] + 1
+
+# Display results:
+print("TOTAL - ROLLS - PERCENTAGE")
+for i in range(numberOfDice, (numberOfDice * 6) + 1):
+    roll = results[i]
+    percentage = round(results[i] / 10000, 1)
+    print("  {} - {} rolls - {}%".format(i, roll, percentage))
+"""
+
+
+
+
+
+
+

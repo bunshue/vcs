@@ -1,15 +1,15 @@
 import sys
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-pdf_filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf'
+pdf_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text1.pdf"
 
-pdf_filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text3_one_page.pdf'
-pdf_filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text4_many_pages.pdf'
+pdf_filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text3_one_page.pdf"
+pdf_filename = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_pdf/pdf2text4_many_pages.pdf"
+)
 
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 import pdfplumber
@@ -215,15 +215,7 @@ pdf.pages.reverse()  # 反轉 pdf
 pdf.save("tmp_output6.pdf")
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -234,7 +226,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-
-

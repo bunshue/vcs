@@ -4,7 +4,7 @@ import math
 
 import pyautogui
 
-print('螢幕截圖')
+print("螢幕截圖")
 myScreenshot = pyautogui.screenshot()
 myScreenshot.save("tmp_screen.png")
 
@@ -14,7 +14,6 @@ import pyautogui
 
 myScreenshot = pyautogui.screenshot(region=(x1, y1, x2, y2))
 myScreenshot.save("tmp_screen_crop.png")
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -29,7 +28,6 @@ for i in range(5):
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 import pyautogui
@@ -95,43 +93,43 @@ import pyautogui as auto
 
 while True:
     x, y = auto.position()
-    #clear_output()
+    # clear_output()
     print(x, y)
     time.sleep(0.5)
     if x < 10:
-        print('太左邊  離開')
+        print("太左邊  離開")
         break
     elif x > 1200:
-        print('太右邊  離開')
+        print("太右邊  離開")
         break
     elif y < 10:
-        print('太上面  離開')
+        print("太上面  離開")
         break
     elif y > 900:
-        print('太下面  離開')
+        print("太下面  離開")
         break
 
 print("------------------------------------------------------------")  # 60個
 
-print('測試 pyautogui')
+print("測試 pyautogui")
 import pyautogui as auto
 import time
 
 auto.PAUSE = 1
 x, y = 630, 20
-print('移動')
+print("移動")
 auto.moveTo(x, y, 2)
-print('點擊')
+print("點擊")
 auto.click()
 x, y = 264, 62
-print('移動')
+print("移動")
 auto.moveTo(x, y, 2)
-print('點擊')
+print("點擊")
 auto.click()
-print('打字')
+print("打字")
 auto.typewrite("https://hophd.wordpress.com")
 time.sleep(2)
-print('Enter')
+print("Enter")
 auto.press("enter")
 
 
@@ -141,11 +139,8 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-

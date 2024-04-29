@@ -39,7 +39,6 @@ day_of_week 	指定星期，0=星期一…6=星期日
 print("------------------------------------------------------------")  # 60個
 
 
-
 """
 阻塞式
 阻塞式定時器在啟動後程式會停止繼續執行
@@ -49,36 +48,41 @@ import time
 from apscheduler.schedulers.blocking import BlockingScheduler
 from datetime import datetime
 
+
 def job1():
     print(f'工作１啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
+
 def job2():
     print(f'工作２啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
-    
+
+
 def job3():
     print(f'工作３啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
+
 def job4():
     print(f'工作４啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
+
 
 # 指定時區（一定要指定，否則會失敗）
 scheduler = BlockingScheduler(timezone="Asia/Shanghai")
 
 # 每１分鐘執行job1函式
-scheduler.add_job(job1, 'interval', minutes=1)
+scheduler.add_job(job1, "interval", minutes=1)
 
 # 每５秒執行job2函式
-scheduler.add_job(job2, 'interval', seconds=5)
+scheduler.add_job(job2, "interval", seconds=5)
 
 # 每１秒執行job3函式
-scheduler.add_job(job3, 'interval', seconds=1)
+scheduler.add_job(job3, "interval", seconds=1)
 
 # 每週二到日的下午6點30分執行job4函式
-scheduler.add_job(job4, 'cron', day_of_week='1-6', hour=18, minute=30)
+scheduler.add_job(job4, "cron", day_of_week="1-6", hour=18, minute=30)
 
 scheduler.start()
 
-print('Schedule started ...')  # 這行不會被執行
+print("Schedule started ...")  # 這行不會被執行
 
 """
 非阻塞式
@@ -89,53 +93,48 @@ import time
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
 
+
 def job1():
     print(f'工作１啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
+
 def job2():
     print(f'工作２啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
-    
+
+
 def job3():
     print(f'工作３啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 
+
 def job4():
     print(f'工作４啟動: 目前時間{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
+
 
 # 指定時區（一定要指定，否則會失敗）
 scheduler = BackgroundScheduler(timezone="Asia/Shanghai")
 
 # 每１分鐘執行job1函式
-scheduler.add_job(job1, 'interval', minutes=1)
+scheduler.add_job(job1, "interval", minutes=1)
 
 # 每５秒執行job2函式
-scheduler.add_job(job2, 'interval', seconds=5)
+scheduler.add_job(job2, "interval", seconds=5)
 
 # 每１秒執行job3函式
-scheduler.add_job(job3, 'interval', seconds=1)
+scheduler.add_job(job3, "interval", seconds=1)
 
 # 每週二到日的下午6點30分執行job4函式
-scheduler.add_job(job4, 'cron', day_of_week='1-6', hour=18, minute=30)
+scheduler.add_job(job4, "cron", day_of_week="1-6", hour=18, minute=30)
 
 scheduler.start()
 
-print('Schedule started ...')
+print("Schedule started ...")
 
 while True:
-    time.sleep(10) # 暫停10秒鐘
-    print('程式執行中.....')
-
-
-
+    time.sleep(10)  # 暫停10秒鐘
+    print("程式執行中.....")
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -149,6 +148,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-

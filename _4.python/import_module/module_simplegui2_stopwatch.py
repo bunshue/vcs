@@ -32,7 +32,7 @@ def format_time(decisecond):  # type: (int) -> str
     decisecond, tenths = decisecond // 10, decisecond % 10
     minutes, seconds = decisecond // 60, decisecond % 60
 
-    return '%d:%02d.%d' % (minutes, seconds, tenths)
+    return "%d:%02d.%d" % (minutes, seconds, tenths)
 
 
 # Event handlers for buttons
@@ -100,47 +100,59 @@ def draw(canvas):  # type: (simplegui.Canvas) -> None
     """
     text = format_time(TIME)
     size = 60
-    width = FRAME.get_canvas_textwidth(text, size, 'monospace')
-    canvas.draw_text(text,
-                     ((CANVAS_WIDTH - width) // 2,
-                      # (CANVAS_HEIGHT - size) // 2 + size * 3 // 4
-                      (CANVAS_HEIGHT * 2 + size) // 4),
-                     size, 'Lime', 'monospace')
+    width = FRAME.get_canvas_textwidth(text, size, "monospace")
+    canvas.draw_text(
+        text,
+        (
+            (CANVAS_WIDTH - width) // 2,
+            # (CANVAS_HEIGHT - size) // 2 + size * 3 // 4
+            (CANVAS_HEIGHT * 2 + size) // 4,
+        ),
+        size,
+        "Lime",
+        "monospace",
+    )
 
     if NB_ATTEMPTS > 0:
-        text = '%d/%d' % (NB_SUCCESS, NB_ATTEMPTS)
+        text = "%d/%d" % (NB_SUCCESS, NB_ATTEMPTS)
         percent_success = NB_SUCCESS * 100 // NB_ATTEMPTS
-        size = (30 if NB_SUCCESS == NB_ATTEMPTS
-                else 20)
-        width = FRAME.get_canvas_textwidth(text, size, 'monospace')
-        canvas.draw_text(text, (CANVAS_WIDTH - width * 5 // 4, size), size,
-                         ('Red' if percent_success < 25
-                          else ('Yellow' if percent_success >= 75
-                                else 'White')),
-                         'monospace')
+        size = 30 if NB_SUCCESS == NB_ATTEMPTS else 20
+        width = FRAME.get_canvas_textwidth(text, size, "monospace")
+        canvas.draw_text(
+            text,
+            (CANVAS_WIDTH - width * 5 // 4, size),
+            size,
+            (
+                "Red"
+                if percent_success < 25
+                else ("Yellow" if percent_success >= 75 else "White")
+            ),
+            "monospace",
+        )
 
     if TIMER.is_running():
-        text = 'Stop the timer when 0 decisecond.'
+        text = "Stop the timer when 0 decisecond."
         size = 20
         width = FRAME.get_canvas_textwidth(text, size)
-        canvas.draw_text(text,
-                         ((CANVAS_WIDTH - width) // 2, (CANVAS_HEIGHT - size)),
-                         size, 'White')
+        canvas.draw_text(
+            text, ((CANVAS_WIDTH - width) // 2, (CANVAS_HEIGHT - size)), size, "White"
+        )
 
 
 # Create frame
-FRAME = simplegui.create_frame('Stopwatch (Stop the timer when 0 decisecond)',
-                               CANVAS_WIDTH, CANVAS_HEIGHT, 100)
+FRAME = simplegui.create_frame(
+    "Stopwatch (Stop the timer when 0 decisecond)", CANVAS_WIDTH, CANVAS_HEIGHT, 100
+)
 
 
 # Register event handlers
-FRAME.add_button('Start', start, 100)
-FRAME.add_label('')
-FRAME.add_button('Stop', stop, 100)
-FRAME.add_label('')
-FRAME.add_button('Reset', reset, 100)
-FRAME.add_label('')
-FRAME.add_button('Quit', quit_prog)
+FRAME.add_button("Start", start, 100)
+FRAME.add_label("")
+FRAME.add_button("Stop", stop, 100)
+FRAME.add_label("")
+FRAME.add_button("Reset", reset, 100)
+FRAME.add_label("")
+FRAME.add_button("Quit", quit_prog)
 
 FRAME.set_draw_handler(draw)
 
@@ -148,11 +160,11 @@ TIMER = simplegui.create_timer(100, tick)
 
 
 # Main
-assert format_time(0) == '0:00.0'
-assert format_time(3) == '0:00.3'
-assert format_time(11) == '0:01.1'
-assert format_time(321) == '0:32.1'
-assert format_time(613) == '1:01.3'
-assert format_time(1234) == '2:03.4'
+assert format_time(0) == "0:00.0"
+assert format_time(3) == "0:00.3"
+assert format_time(11) == "0:01.1"
+assert format_time(321) == "0:32.1"
+assert format_time(613) == "1:01.3"
+assert format_time(1234) == "2:03.4"
 
 FRAME.start()

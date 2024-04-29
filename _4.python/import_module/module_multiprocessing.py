@@ -8,7 +8,7 @@ import multiprocessing
 
 print(multiprocessing.current_process().name)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 # multiprocessing.Queue - 給多核運算用的佇列
@@ -27,14 +27,14 @@ def worker(queue):
         time.sleep(0.01)
 
 
-#要進行的工作
+# 要進行的工作
 source = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
 
 process_num = 3
 
 q = multiprocessing.Queue()
 for item in source:
-    print('加入項目 :', item)
+    print("加入項目 :", item)
     q.put(item)
 
 processes = []
@@ -111,7 +111,7 @@ from time import sleep
 def sub_task(string, q):
     number = q.get()
     while number:
-        print('%d: %s' % (number, string))
+        print("%d: %s" % (number, string))
         sleep(0.001)
         number = q.get()
 
@@ -120,13 +120,12 @@ def main():
     q = Queue(10)
     for number in range(1, 11):
         q.put(number)
-    Process(target=sub_task, args=('Ping', q)).start()
-    Process(target=sub_task, args=('Pong', q)).start()
+    Process(target=sub_task, args=("Ping", q)).start()
+    Process(target=sub_task, args=("Pong", q)).start()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -143,26 +142,26 @@ import os
 
 
 def sub_task(queue):
-    print('子进程进程号:', os.getpid())
+    print("子进程进程号:", os.getpid())
     counter = 0
     while counter < 1000:
-        queue.put('Pong')
+        queue.put("Pong")
         counter += 1
 
 
-if __name__ == '__main__':
-    print('当前进程号:', os.getpid())
+if __name__ == "__main__":
+    print("当前进程号:", os.getpid())
     queue = multiprocessing.Queue()
     p = multiprocessing.Process(target=sub_task, args=(queue,))
     p.start()
     counter = 0
     while counter < 1000:
-        queue.put('Ping')
+        queue.put("Ping")
         counter += 1
     p.join()
-    print('子任务已经完成.')
+    print("子任务已经完成.")
     for _ in range(2000):
-        print(queue.get(), end='')
+        print(queue.get(), end="")
 
 
 print("------------------------------------------------------------")  # 60個
@@ -180,5 +179,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-

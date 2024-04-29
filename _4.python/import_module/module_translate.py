@@ -1,20 +1,20 @@
-'''
+"""
 
 翻譯功能
 
-'''
-print('------------------------------------------------------------')	#60個
+"""
+print("------------------------------------------------------------")  # 60個
 
 import translate
 
-translator = translate.Translator(from_lang='zh-Hant', to_lang='en')
+translator = translate.Translator(from_lang="zh-Hant", to_lang="en")
 
-text = '豬頭'
+text = "豬頭"
 
 translation = translator.translate(text)
-print('翻譯結果：' + translation)
+print("翻譯結果：" + translation)
 
-print('------------------------------------------------------------')	#60個  
+print("------------------------------------------------------------")  # 60個
 
 
 import translate
@@ -29,42 +29,35 @@ import translate
 'fr': '法文'
 """
 
-from_lang = 'zh-Hant'
-to_lang = 'en'
+from_lang = "zh-Hant"
+to_lang = "en"
 
-text = '尋找一個資料夾下的所有檔案'
+text = "尋找一個資料夾下的所有檔案"
 
-translator = translate.Translator(from_lang = from_lang, to_lang = to_lang)
-translation = translator.translate(text)  #進行翻譯
+translator = translate.Translator(from_lang=from_lang, to_lang=to_lang)
+translation = translator.translate(text)  # 進行翻譯
 print(translation)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import translate
 
-print('英翻中')
+print("英翻中")
 
-trans = translate.Translator(from_lang = "english", to_lang = "chinese")
+trans = translate.Translator(from_lang="english", to_lang="chinese")
 
-text = 'Welcome to the United States and have a nice day.'
+text = "Welcome to the United States and have a nice day."
 print("Copied word : ", text)
 translation = trans.translate(text)
 
 print(translation)
 
 
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個

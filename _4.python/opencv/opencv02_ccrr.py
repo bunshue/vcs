@@ -32,10 +32,11 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 裁剪圖片
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
+# 檔案 => cv2影像
 image = cv2.imread(filename)  # 讀取本機圖片
 
 # 裁切區域的 x 與 y 座標（左上角）
@@ -69,6 +70,7 @@ print("圖片裁剪縮放")
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 filename2 = "C:/_git/vcs/_1.data/______test_files2/picture1_partial.jpg"
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)  # 讀取本機圖片
 
 x = 100
@@ -84,6 +86,7 @@ print("旋轉圖片")
 # 影像旋轉
 # 以影像中心為準，順時針旋轉30度 縮小為 0.7 倍
 
+# 檔案 => cv2影像
 image = cv2.imread(filename)  # 讀取本機圖片
 rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 plt.imshow(rgb)
@@ -106,7 +109,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-print("讀取圖檔 :", filename)
+
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 
 x = cv2.flip(img, 0)
@@ -147,6 +151,7 @@ print("縮放圖片")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 print(img.shape)
 
@@ -173,6 +178,7 @@ filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 # 4  A  INTER_AREA
 # 5  L  INTER_LANCZOS4
 
+# 檔案 => cv2影像
 image_original = cv2.imread(filename)  # 讀取本機圖片
 
 # 縮放的倍率 fx fy
@@ -232,7 +238,8 @@ plt.show()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-print("讀取圖檔 :", filename)
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 H, W, D = image.shape
@@ -259,7 +266,8 @@ plt.imshow(cv2.cvtColor(rst, cv2.COLOR_BGR2RGB))
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-print("讀取圖檔 :", filename)
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 rst = cv2.resize(image, None, fx=2, fy=0.5)
@@ -280,6 +288,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => cv2影像
 image0 = cv2.imread(filename, 1)
 print('原圖大小 :', image0.shape)
 w = image0.shape[1]
@@ -312,6 +321,7 @@ rotate
 """
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => cv2影像
 img = cv2.imread(filename, 1)
 
 print("旋轉")
@@ -324,7 +334,8 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_gray.bmp"
-print("讀取圖檔 :", filename)
+
+# 檔案 => cv2影像
 image = cv2.imread(filename)
 
 H, W, D = image.shape
@@ -348,12 +359,13 @@ plt.imshow(cv2.cvtColor(rotate, cv2.COLOR_BGR2RGB))
 plt.tight_layout()
 plt.show()
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 print("圖片旋轉")
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 
 H = img.shape[0]
@@ -401,6 +413,7 @@ print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 x = 100
 y = 100
@@ -414,6 +427,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 x = 100
 y = 100
@@ -424,13 +438,14 @@ crop_img = img[y : y + h, x : x + w]
 output = np.zeros((360, 480, 3), dtype="uint8")  # 產生黑色畫布
 output[x : x + w, y : y + h] = crop_img
 
-
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 output_1 = cv2.resize(img, (200, 200))  # 產生 200x200 的圖
 output_2 = cv2.resize(img, (100, 300))  # 產生 100x300 的圖
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 size = img.shape  # 取得原始圖片的資訊
 level = 15  # 縮小比例 ( 可當作馬賽克的等級 )
@@ -448,6 +463,7 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("馬賽克")
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 
 x = 135  # 剪裁區域左上 x 座標
@@ -470,6 +486,7 @@ print("------------------------------------------------------------")  # 60個
 
 # flip
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)  # 開啟圖片
 output_0 = cv2.flip(img, 0)  # 上下翻轉
 output_1 = cv2.flip(img, 1)  # 左右翻轉
@@ -477,11 +494,13 @@ output_2 = cv2.flip(img, -1)  # 上下左右翻轉
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 output = cv2.transpose(img)  # 逆時針旋轉 90 度。
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 output_ROTATE_90_CLOCKWISE = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
 output_ROTATE_90_COUNTERCLOCKWISE = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)
@@ -489,6 +508,7 @@ output_ROTATE_180 = cv2.rotate(img, cv2.ROTATE_180)
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 M = np.float32([[1, 0, 100], [0, 1, 100]])  # 2x3 矩陣，x 軸平移 100，y 軸平移 100
 output = cv2.warpAffine(img, M, (480, 360))
@@ -499,6 +519,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 M = cv2.getRotationMatrix2D((240, 180), 45, 1)  # 中心點 (240, 180)，旋轉 45 度，尺寸 1
 output = cv2.warpAffine(img, M, (480, 360))
@@ -509,6 +530,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 p1 = np.float32([[100, 100], [480, 0], [0, 360]])
 p2 = np.float32([[0, 0], [480, 0], [0, 360]])
@@ -525,6 +547,7 @@ p1 = np.float32([[100, 100], [480, 0], [0, 360], [480, 360]])
 p2 = np.float32([[0, 0], [480, 0], [0, 360], [480, 360]])
 m = cv2.getPerspectiveTransform(p1, p2)
 
+# 檔案 => cv2影像
 img = cv2.imread(filename)
 output = cv2.warpPerspective(img, m, (480, 360))
 

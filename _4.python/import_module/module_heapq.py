@@ -76,6 +76,7 @@ print("------------------------------------------------------------")  # 60個
 
 import heapq
 
+
 def heapsort(iterable):
     h = []
     for data in iterable:

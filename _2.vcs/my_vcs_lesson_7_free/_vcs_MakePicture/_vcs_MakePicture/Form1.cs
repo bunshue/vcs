@@ -2612,6 +2612,73 @@ namespace _vcs_MakePicture
 
         private void button67_Click(object sender, EventArgs e)
         {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+            int cx = 0;
+            int cy = 0;
+            double dd = 0;
+            int max = 200;
+            int min = 100;
+
+            width = 400;
+            height = 400;
+            bitmap1 = new Bitmap(width, height);
+            cx = width / 2;
+            cy = height / 2;
+
+            background_color = Color.White;
+
+            //background
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0x11, 0x33, 0x55));
+                    bitmap1.SetPixel(xx, yy, background_color);
+                    dd = Math.Sqrt((xx - cx) * (xx - cx) + (yy - cy) * (yy - cy));
+                    double kk = (max - min) * (dd - 0) / 255 + min;
+                    if (kk > 255)
+                    {
+
+                    }
+                    else
+                    {
+                        Random r = new Random();
+                        kk =r.Next(0, 255);
+
+
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (int)kk, (int)kk, (int)kk));
+
+                    }
+                    /*                    
+                    if (dd > 255)
+                    {
+                        //richTextBox1.Text += "x";
+                    }
+                    else
+                    {
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (int)dd, (int)dd, (int)dd));
+                    }
+                    */
+                }
+            }
+
+            g = Graphics.FromImage(bitmap1);
+
+            //逐點畫圖
+
+
+
+
+
+
+            pictureBox1.Image = bitmap1;
+
+
+
 
         }
 

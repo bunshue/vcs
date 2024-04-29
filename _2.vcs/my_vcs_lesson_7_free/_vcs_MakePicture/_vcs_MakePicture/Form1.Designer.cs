@@ -992,6 +992,7 @@
             this.button67.Name = "button67";
             this.button67.Size = new System.Drawing.Size(60, 60);
             this.button67.TabIndex = 71;
+            this.button67.Text = "center";
             this.button67.UseVisualStyleBackColor = true;
             this.button67.Click += new System.EventHandler(this.button67_Click);
             // 

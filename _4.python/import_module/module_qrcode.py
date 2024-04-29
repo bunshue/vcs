@@ -27,11 +27,13 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-print('qrcode：qrcode產生器')
+print("qrcode：qrcode產生器")
 
-encode_text = 'https://www.google.com.tw/'
+encode_text = "https://www.google.com.tw/"
 
-print('使用 qrcode.make ------------------------------------------------------------')	#60個
+print(
+    "使用 qrcode.make ------------------------------------------------------------"
+)  # 60個
 
 qrcode_image = qrcode.make(encode_text)
 print("檔案格式", type(qrcode_image))
@@ -42,7 +44,9 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-qrcode_image = qrcode.make(encode_text, image_factory = qrcode.image.svg.SvgPathImage)  # 要轉換成 QRCode 的文字
+qrcode_image = qrcode.make(
+    encode_text, image_factory=qrcode.image.svg.SvgPathImage
+)  # 要轉換成 QRCode 的文字
 
 """ 無法直接顯示SVG檔
 qrcode_image.show()                # SVG 無法使用
@@ -53,26 +57,28 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#QR code 存圖
+# QR code 存圖
 
-#QR code 存 jpg 檔
-qrcode_image = qrcode.make(encode_text)                 # 建立QR code 物件
+# QR code 存 jpg 檔
+qrcode_image = qrcode.make(encode_text)  # 建立QR code 物件
 qrcode_image.save("tmp_qrcode01.jpg")
 
-#QR code 存 png 檔
-qrcode_image.save('tmp_qrcode02.png')
+# QR code 存 png 檔
+qrcode_image.save("tmp_qrcode02.png")
 
-#QR code 存 svg 檔
+# QR code 存 svg 檔
 qrcode_image = qrcode.make(encode_text, image_factory=qrcode.image.svg.SvgPathImage)
-qrcode_image.save('tmp_qrcode03.svg')
+qrcode_image.save("tmp_qrcode03.svg")
 
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print('使用 qrcode.QRCode ------------------------------------------------------------')	#60個
+print(
+    "使用 qrcode.QRCode ------------------------------------------------------------"
+)  # 60個
 
-print('紅色碼、藍色背景')
+print("紅色碼、藍色背景")
 qr = qrcode.QRCode(
     error_correction=qrcode.constants.ERROR_CORRECT_L,
     box_size=10,
@@ -85,49 +91,49 @@ qrcode_image = qr.make_image(fill_color="red", back_color="blue")
 
 print("------------------------------------------------------------")  # 60個
 
-print('藍色碼、黃色背景')
-qr = qrcode.QRCode(version=1,
-                   error_correction=qrcode.constants.ERROR_CORRECT_M,
-                   box_size=10,
-                   border=4)
+print("藍色碼、黃色背景")
+qr = qrcode.QRCode(
+    version=1, error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=10, border=4
+)
 qr.add_data(encode_text)
-qrcode_image = qr.make_image(fill_color='blue', back_color='yellow')
+qrcode_image = qr.make_image(fill_color="blue", back_color="yellow")
 
 
 print("------------------------------------------------------------")  # 60個
 
 from PIL import Image
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp'
+filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
 
-qr = qrcode.QRCode(version=5,
-                   error_correction=qrcode.constants.ERROR_CORRECT_M,
-                   box_size=10,
-                   border=4)
+qr = qrcode.QRCode(
+    version=5, error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=10, border=4
+)
 qr.add_data(encode_text)
-qrcode_image = qr.make_image(fill_color='blue')
-width, height = qrcode_image.size            # QR code的寬與高
+qrcode_image = qr.make_image(fill_color="blue")
+width, height = qrcode_image.size  # QR code的寬與高
 with Image.open(filename) as obj:
     obj_width, obj_height = obj.size
-    qrcode_image.paste(obj, ((width-obj_width)//2, (height-obj_height)//2))
+    qrcode_image.paste(obj, ((width - obj_width) // 2, (height - obj_height) // 2))
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+qr = qrcode.QRCode(
+    version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4
+)
 qr.add_data(encode_text)  # 要轉換成 QRCode 的文字
 qr.make(fit=True)  # 根據參數製作為 QRCode 物件
 
 qrcode_image = qr.make_image()  # 產生 QRCode 圖片
 
-#qrcode_image.show()  # 顯示圖片
+# qrcode_image.show()  # 顯示圖片
 plt.gray()
 plt.imshow(qrcode_image)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#產生SVG的方法比較特別
+# 產生SVG的方法比較特別
 """
 下方的程式使用「進階設定」的方式產生 QRcode，額外載入 qrcode.image.svg，
 在 qrcode.QRCode 裡新增 image_factory=qrcode.image.svg.SvgPathImage 參數，
@@ -146,7 +152,7 @@ qr.make(fit=True)
 
 qrcode_image = qr.make_image()
 
-#qrcode_image.show()               # SVG 無法使用
+# qrcode_image.show()               # SVG 無法使用
 
 qrcode_image.save("tmp_qrcode11.svg")  # 儲存圖片，注意副檔名為 SVG
 
@@ -168,12 +174,24 @@ qr = qrcode.QRCode(
 qr.add_data(encode_text)
 qr.make(fit=True)
 
-qrcode_image1 = qr.make_image(image_factory=StyledPilImage, module_drawer=SquareModuleDrawer())
-qrcode_image2 = qr.make_image(image_factory=StyledPilImage, module_drawer=GappedSquareModuleDrawer())
-qrcode_image3 = qr.make_image(image_factory=StyledPilImage, module_drawer=CircleModuleDrawer())
-qrcode_image4 = qr.make_image(image_factory=StyledPilImage, module_drawer=RoundedModuleDrawer())
-qrcode_image5 = qr.make_image(image_factory=StyledPilImage, module_drawer=VerticalBarsDrawer())
-qrcode_image6 = qr.make_image(image_factory=StyledPilImage, module_drawer=HorizontalBarsDrawer())
+qrcode_image1 = qr.make_image(
+    image_factory=StyledPilImage, module_drawer=SquareModuleDrawer()
+)
+qrcode_image2 = qr.make_image(
+    image_factory=StyledPilImage, module_drawer=GappedSquareModuleDrawer()
+)
+qrcode_image3 = qr.make_image(
+    image_factory=StyledPilImage, module_drawer=CircleModuleDrawer()
+)
+qrcode_image4 = qr.make_image(
+    image_factory=StyledPilImage, module_drawer=RoundedModuleDrawer()
+)
+qrcode_image5 = qr.make_image(
+    image_factory=StyledPilImage, module_drawer=VerticalBarsDrawer()
+)
+qrcode_image6 = qr.make_image(
+    image_factory=StyledPilImage, module_drawer=HorizontalBarsDrawer()
+)
 qrcode_image1.save("tmp_qrcode21.png")
 qrcode_image2.save("tmp_qrcode22.png")
 qrcode_image3.save("tmp_qrcode23.png")
@@ -194,7 +212,9 @@ from qrcode.image.styles.colormasks import (
     HorizontalGradiantColorMask,
 )
 
-qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+qr = qrcode.QRCode(
+    version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4
+)
 qr.add_data(encode_text)
 qr.make(fit=True)
 
@@ -224,7 +244,7 @@ qrcode_image5 = qr.make_image(
     module_drawer=RoundedModuleDrawer(),
 )
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp'
+filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
 qrcode_image6 = qr.make_image(
     image_factory=StyledPilImage,
     color_mask=ImageColorMask((255, 255, 255), filename),
@@ -241,11 +261,13 @@ print("------------------------------------------------------------")  # 60個
 
 from qrcode.image.styledpil import StyledPilImage
 
-qr = qrcode.QRCode(version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4)
+qr = qrcode.QRCode(
+    version=1, error_correction=qrcode.constants.ERROR_CORRECT_L, box_size=10, border=4
+)
 qr.add_data(encode_text)
 qr.make(fit=True)
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp'
+filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
 qrcode_image = qr.make_image(image_factory=StyledPilImage, embeded_image_path=filename)
 qrcode_image.save("tmp_qrcode12.png")
 
@@ -270,30 +292,29 @@ my_code.save("tmp_qrcode14")
 
 print("------------------------------------------------------------")  # 60個
 
-print('barcode產生器')
+print("barcode產生器")
 
-#pip install python-barcode
+# pip install python-barcode
 
 import barcode
 from barcode.writer import ImageWriter
 
 print(barcode.PROVIDED_BARCODES)
 
-EAN = barcode.get_barcode_class('ean13')
+EAN = barcode.get_barcode_class("ean13")
 
-text = '123456789012'   #EAN僅能用數字, 必為12碼
-#存svg檔
+text = "123456789012"  # EAN僅能用數字, 必為12碼
+# 存svg檔
 ean = EAN(text)
-ean.save('ean13_barcode') 
-#存png檔
+ean.save("ean13_barcode")
+# 存png檔
 ean = EAN(text, writer=ImageWriter())
-ean.save('ean13_barcode')
+ean.save("ean13_barcode")
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -305,5 +326,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-

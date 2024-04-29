@@ -1,11 +1,11 @@
 import sys
 import random
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import linecache
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt'
+filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
 
 getLines = linecache.getlines(filename)
 
@@ -13,7 +13,7 @@ print(getLines)
 
 print("取得{}檔案原內容：\n{}".format(filename, getLines))
 
-#打亂次數
+# 打亂次數
 times = 5
 
 for i in range(times):
@@ -22,48 +22,53 @@ for i in range(times):
 
 print("\n隨機抽取：\n", random.choice(getLines))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import warnings
-warnings.warn('Use importlib.util.find_spec() instead.', DeprecationWarning, stacklevel = 1)
 
-print('建立一組密碼')
+warnings.warn(
+    "Use importlib.util.find_spec() instead.", DeprecationWarning, stacklevel=1
+)
+
+print("建立一組密碼")
 import random
 
-chars = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()'
-password = ''
+chars = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()"
+password = ""
 for c in range(20):
-   password += random.choice(chars)
-print('建立一組密碼:\t%r' %(password))
+    password += random.choice(chars)
+print("建立一組密碼:\t%r" % (password))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('純文字檔的diff')
+print("純文字檔的diff")
 
 import difflib
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/compare/text_filea.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/compare/text_fileb.txt'
+filename1 = "C:/_git/vcs/_1.data/______test_files1/compare/text_filea.txt"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/compare/text_fileb.txt"
+
 
 def fcompare(f1name, f2name):
-    print('-:', f1name)
-    print('+:', f2name)
+    print("-:", f1name)
+    print("+:", f2name)
     f1 = open(f1name)
     f2 = open(f2name)
     if not f1 or not f2:
         return 0
 
-    a = f1.readlines();
+    a = f1.readlines()
     f1.close()
-    b = f2.readlines();
+    b = f2.readlines()
     f2.close()
     for line in difflib.ndiff(a, b):
-        print(line, end=' ')
+        print(line, end=" ")
+
 
 ret = fcompare(filename1, filename2)
-print('\n\nresult : ', ret)
+print("\n\nresult : ", ret)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 import win32api, win32con
@@ -77,59 +82,59 @@ else:
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import abc
+
 metaclass = abc.ABCMeta
 print(metaclass)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import uuid
+
 id = str(uuid.uuid4())
 print(id)
 
 import os, uuid
+
 print("uuid = {}".format(str(uuid.uuid4())))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import socket
+
 hostname = socket.gethostname()
-print('取得 hostname :', hostname)
+print("取得 hostname :", hostname)
 
 import os
 import time
-path = 'cccc'
-print('%s.%s.%s.%s' % (path, int(time.time()),
-                       socket.gethostname(),
-                       os.getpid()))
 
-print('------------------------------------------------------------')	#60個
+path = "cccc"
+print("%s.%s.%s.%s" % (path, int(time.time()), socket.gethostname(), os.getpid()))
+
+print("------------------------------------------------------------")  # 60個
 
 from plyer import notification
 
-print('notification 測試')
+print("notification 測試")
 
-text = 'Welcome to the United States and have a nice day.'
-msg = 'cccccc'
-notification.notify(
-    title = text,
-    message = msg
-    )
+text = "Welcome to the United States and have a nice day."
+msg = "cccccc"
+notification.notify(title=text, message=msg)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 print("列出所有python關鍵字")
 import keyword
+
 print(keyword.kwlist)
 
-keywordLists = ['as', 'while', 'break', 'sse', 'Python']
+keywordLists = ["as", "while", "break", "sse", "Python"]
 for x in keywordLists:
     print(f"{x:>8s} {keyword.iskeyword(x)}")
-
 
 
 """ 檢測按鍵
@@ -144,7 +149,8 @@ while True:
         continue;
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+
 
 def bin_octal():
     x = 65535
@@ -152,47 +158,53 @@ def bin_octal():
     print(bin(x), oct(x), hex(x))
 
     # format() function
-    print(format(x, 'b'))
-    print(format(x, 'o'))
-    print(format(x, 'x'))
+    print(format(x, "b"))
+    print(format(x, "o"))
+    print(format(x, "x"))
 
-    print(int('ffff', 16))
-    print(int('10011010010', 2))
+    print(int("ffff", 16))
+    print(int("10011010010", 2))
+
 
 bin_octal()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import transformers
-classifier = transformers.pipeline("sentiment-analysis", model="Raychanan/bert-base-chinese-FineTuned-Binary-Best")
 
-text = '食物很好吃, 可惜價位太高, 讓我無法接受'
-result = int(classifier(text)[0]['label'].split('_')[1])
+classifier = transformers.pipeline(
+    "sentiment-analysis", model="Raychanan/bert-base-chinese-FineTuned-Binary-Best"
+)
+
+text = "食物很好吃, 可惜價位太高, 讓我無法接受"
+result = int(classifier(text)[0]["label"].split("_")[1])
 
 if result:
     print("感謝您的評論, 歡迎下次再來!")
 else:
     print("不好意思, 造成您不好的感受, 我們一定會改善的。")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import io
 
+
 def string_io():
     s = io.StringIO()
-    s.write('Hello World\n')
-    print('This is a test', file=s)
+    s.write("Hello World\n")
+    print("This is a test", file=s)
     # Get all of the data written so far
     print(s.getvalue())
 
     # Wrap a file interface around an existing string
-    s = io.StringIO('Hello\nWorld\n')
+    s = io.StringIO("Hello\nWorld\n")
     print(s.read(4))
     print(s.read())
 
+
 string_io()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 print('tqdm：進度條')
@@ -212,16 +224,16 @@ for char in tlist:
     print(char)
     tlist.set_description("處理串列元素……")
     sleep(0.5)
-"""    
-print('------------------------------------------------------------')	#60個
+"""
+print("------------------------------------------------------------")  # 60個
 
-#dist：經緯度距離
-#pip install https://github.com/duboviy/dist/archive/master.zip
+# dist：經緯度距離
+# pip install https://github.com/duboviy/dist/archive/master.zip
 
 import dist
 
-#台北火車站 25.047778, 121.517222
-#新竹火車站 24.802050, 120.971817
+# 台北火車站 25.047778, 121.517222
+# 新竹火車站 24.802050, 120.971817
 
 x1 = 25.047778
 y1 = 121.517222
@@ -231,44 +243,44 @@ y2 = 120.971817
 print(dist.compute(25.0342, 121.5646, 24.9932, 121.3009))
 print(dist.compute(x1, y1, x2, y2))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('verifyid：驗證身分證字號')
+print("verifyid：驗證身分證字號")
 
 from verifyid import verifyid
 
 verify = verifyid.IdentyNumber()
 
 veri = verify.check_identy_number("A189229579")
-print('A189229579 驗證結果：{}'.format(veri))
+print("A189229579 驗證結果：{}".format(veri))
 veri = verify.check_identy_number("a189229579")
-print('a189229579 驗證結果：{}'.format(veri))
+print("a189229579 驗證結果：{}".format(veri))
 veri = verify.check_identy_number("A123456780")
-print('A123456780 驗證結果：{}'.format(veri))
+print("A123456780 驗證結果：{}".format(veri))
 
 city = verify.get_city("A189229579")
-print('A189229579 城市：{}'.format(city))
+print("A189229579 城市：{}".format(city))
 city = verify.get_city("P123456789".upper())
-print('P123456789 城市：{}'.format(city))
+print("P123456789 城市：{}".format(city))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('cnlunardate：農曆日期')
+print("cnlunardate：農曆日期")
 
-#pip install cnlunardate
+# pip install cnlunardate
 from cnlunardate import cnlunardate
 from datetime import date
 
-year = 2023  #@param {type:'slider', min:1950, max:2020}
-month = 2  #@param {type:'slider', min:1, max:12}
+year = 2023  # @param {type:'slider', min:1950, max:2020}
+month = 2  # @param {type:'slider', min:1, max:12}
 try:
     cnlunardate(year, month, 1, True)
-    print('農曆 {} 年 {} 月「是」閏月。'.format(year, month))
+    print("農曆 {} 年 {} 月「是」閏月。".format(year, month))
 except:
-    print('農曆 {} 年 {} 月「不是」閏月。'.format(year, month))
-    
-print(cnlunardate.fromsolardate(date(1974, 9, 24))) 
-print(cnlunardate.fromsolardate(date(2006, 3, 11))) 
+    print("農曆 {} 年 {} 月「不是」閏月。".format(year, month))
+
+print(cnlunardate.fromsolardate(date(1974, 9, 24)))
+print(cnlunardate.fromsolardate(date(2006, 3, 11)))
 print(cnlunardate.fromsolardate(date(2023, 9, 20)))
 
 print(cnlunardate(2017, 9, 1).tosolardate())
@@ -281,34 +293,38 @@ n1 = cnlunardate(2017, 6, 1, False).toordinal()
 n2 = cnlunardate(2015, 10, 12, False).toordinal()
 print(n1 - n2)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('chardet：檔案編碼格式')
+print("chardet：檔案編碼格式")
 
 import chardet
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/2.utf_to_ascii.txt'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/3.ascii_to_unicode.txt'
+filename1 = "C:/_git/vcs/_1.data/______test_files1/poetry2.txt"
+filename2 = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/2.utf_to_ascii.txt"
+)
+filename3 = (
+    "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/_encoding/3.ascii_to_unicode.txt"
+)
 
 files = [filename1, filename2, filename3]
 for f in files:
-    text = open(f, 'rb').read()
+    text = open(f, "rb").read()
     codetype = chardet.detect(text)
-    print('{} 編碼格式：{}'.format(f, codetype))
+    print("{} 編碼格式：{}".format(f, codetype))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import time
 import threading
 import subprocess
 from optparse import OptionParser, SUPPRESS_HELP
 
-def bark(duration):
 
+def bark(duration):
     _time = time.time
     _sleep = time.sleep
-    
+
     # We give the parent some time to be ready.
     _sleep(1.0)
 
@@ -316,18 +332,19 @@ def bark(duration):
     end_time = start_time + duration * 2.0
     i = 0
     while _time() < end_time:
-        print('b', end = ' ')
+        print("b", end=" ")
         i += 1
+
 
 bark(0.2)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('查找wikipedia上的資料...')
+print("查找wikipedia上的資料...")
 import wikipedia
 
-wikipedia.set_lang('zh')
-search_pattern = '獅子'
+wikipedia.set_lang("zh")
+search_pattern = "獅子"
 summary = wikipedia.summary(search_pattern, sentences=1)
 print(summary)
 
@@ -338,58 +355,52 @@ wikipedia.summary("柔道")
 # python try_sys.py 想查詢的關鍵字
 # python wiki_sample_final.py 柔道
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 print("將檔案移到資源回收筒")
 
 import send2trash
 
 filename = "picture1cccc.jpg"
-send2trash.send2trash(filename)  
+send2trash.send2trash(filename)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from deep_translator import GoogleTranslator
 
 # 要翻譯的文本
-text = '早安'
+text = "早安"
 
 # 翻譯成英文
-translator = GoogleTranslator(source='auto', target='en')
+translator = GoogleTranslator(source="auto", target="en")
 translation_en = translator.translate(text)
 print("英文:", translation_en)
 
 # 翻譯成日文, 另一種寫法
-translation_ja = GoogleTranslator(source='auto', target='ja').translate(text)
+translation_ja = GoogleTranslator(source="auto", target="ja").translate(text)
 print("日文:", translation_ja)
 
 # 翻譯成韓文
-translation_ko = GoogleTranslator(source='auto', target='ko').translate(text)
+translation_ko = GoogleTranslator(source="auto", target="ko").translate(text)
 print("韓文:", translation_ko)
 
 print("------------------------------------------------------------")  # 60個
 
 import pygal.maps.world
 
-worldMap = pygal.maps.world.World()                     # 建立世界地圖物件
-worldMap.title = 'Populations in China/Japan/Thailand'  # 世界地圖標題
-worldMap.add('Asia',{'cn':1262645000,
-                     'jp':126870000,
-                     'th':63155029})                    # 標記人口資訊
-worldMap.add('Europe',{'fr':60762406,
-                     'se':1011781,
-                     'sz':7184798})                    # 標記人口資訊
-worldMap.add('Africa',{'cd':49626496,
-                     'eg':67649043,
-                     'za':44000833})                    # 標記人口資訊
-worldMap.add('North America',{'us':282162848,
-                     'mx':99959895,
-                     'ca':30770661})                    # 標記人口資訊
-worldMap.render_to_file('tmp_world_map.svg')            # 儲存地圖檔案
+worldMap = pygal.maps.world.World()  # 建立世界地圖物件
+worldMap.title = "Populations in China/Japan/Thailand"  # 世界地圖標題
+worldMap.add("Asia", {"cn": 1262645000, "jp": 126870000, "th": 63155029})  # 標記人口資訊
+worldMap.add("Europe", {"fr": 60762406, "se": 1011781, "sz": 7184798})  # 標記人口資訊
+worldMap.add("Africa", {"cd": 49626496, "eg": 67649043, "za": 44000833})  # 標記人口資訊
+worldMap.add(
+    "North America", {"us": 282162848, "mx": 99959895, "ca": 30770661}
+)  # 標記人口資訊
+worldMap.render_to_file("tmp_world_map.svg")  # 儲存地圖檔案
 
 print("------------------------------------------------------------")  # 60個
 
-print('全形 轉 半形')
+print("全形 轉 半形")
 import unicodedata
 
 text = "「全形１２．３」「全形Ａｂｃ！（＠）」「半形片假名」「圈圈數字①②③」「符號㏊」"
@@ -415,13 +426,10 @@ print("相除", num1 / num2)
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -432,7 +440,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-

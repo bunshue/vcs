@@ -52,7 +52,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
@@ -536,7 +536,7 @@ plt.xlabel("")
 plt.ylabel("個數統計")
 
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("建立N筆成績資料 常態分佈 平均值 = 70, 標準差 = 15")
@@ -552,20 +552,38 @@ x = np.linspace(mu - 50, mu + 50, N)  # 從N1到N2, 分成N個, 包含頭尾
 y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2)) * N
 plt.plot(x, y, "--", color="lime", linewidth=3)
 
+print('建立常態分佈資料 平均值= 75, 標準差 = 15,', N, '筆資料')
 
-#建立常態分佈資料
-scores = np.random.normal(mu, sigma, size=N)  # 隨機數
+scores1 = np.random.normal(mu, sigma, size=N)  # 隨機數
+print('資料個數1 :', len(scores1))
+print('最高分 :', max(scores1))
+print('最低分 :', min(scores1))
+
+scores2 = scores1[scores1 <= 100.0]
+scores3 = scores2[scores2 >= 0.0]
+print('資料個數2 :', len(scores2))
+print('資料個數3 :', len(scores3))
+print('最高分 :', max(scores3))
+print('最低分 :', min(scores3))
 
 freq = [0] * 100
 
-for score in scores:
-    if score >= 100:
-        #print('XXXXXXXX ', score)
+illegal_cnt = 0
+for score in scores1:
+    if score < 0:
+        print('XXXXXXXX111 ', score)
+        illegal_cnt += 1
+        continue
+    elif score >= 100:
+        #print('XXXXXXXX222 ', score)
+        illegal_cnt += 1
         continue
     rank = int(score) 
     freq[rank] += 1
     #print(score)
     #print(rank)
+
+print('不合法的個數 :', illegal_cnt)
 
 print("人數分佈頻率:", freq)
 
@@ -580,7 +598,7 @@ for _ in num_bins:
 """
 
 plt.hist(
-    scores,
+    scores1,
     bins=num_bins,
     histtype="bar",
     facecolor="b",

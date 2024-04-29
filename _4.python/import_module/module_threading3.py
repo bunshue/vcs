@@ -2,7 +2,7 @@ import threading
 import time
 import random
 
-print('多執行緒')
+print("多執行緒")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -10,25 +10,28 @@ print("------------------------------------------------------------")  # 60個
 from threading import Thread
 import time
 
+
 # 模擬兔子賽跑的狀況
 def rabbitRun():
     progress = 0
-    while progress<30:
+    while progress < 30:
         progress += 1
-        print('兔子跑了', progress, '公尺')
+        print("兔子跑了", progress, "公尺")
         time.sleep(1)
-        if progress%7==0:
+        if progress % 7 == 0:
             time.sleep(10)
-    print('兔子到達終點！')
+    print("兔子到達終點！")
+
 
 # 模擬烏龜賽跑的狀況
 def turtleRun():
     progress = 0
-    while progress<30:
+    while progress < 30:
         progress += 0.5
-        print('烏龜跑了', progress, '公尺')
+        print("烏龜跑了", progress, "公尺")
         time.sleep(1)
-    print('烏龜到達終點！')
+    print("烏龜到達終點！")
+
 
 thr1 = Thread(target=rabbitRun)
 thr2 = Thread(target=turtleRun)
@@ -43,6 +46,7 @@ from threading import Thread
 import random
 import time
 
+
 class RaceHorse(Thread):
     # 建構式
     def __init__(self, name, stepSizeMin, stepSizeMax, stepFreq):
@@ -52,24 +56,25 @@ class RaceHorse(Thread):
         self._stepSizeMin = stepSizeMin
         self._stepSizeMax = stepSizeMax
         self._stepFreq = stepFreq
-        
+
     # 覆寫Thread的run()方法
     def run(self):
         # 步伐的變異區間大小
-        stepVar = self._stepSizeMax-self._stepSizeMin
+        stepVar = self._stepSizeMax - self._stepSizeMin
         # 每次間隔時間，是步伐頻率的倒數
-        intv = 1.0/self._stepFreq
+        intv = 1.0 / self._stepFreq
         progress = 0
-        while progress<100:
+        while progress < 100:
             # 用隨機數控制步伐的變異區間，縮放到實際步伐大小
-            progress += self._stepSizeMin+random.random()*stepVar
-            print(self._name, '跑了', progress, '公尺')
+            progress += self._stepSizeMin + random.random() * stepVar
+            print(self._name, "跑了", progress, "公尺")
             time.sleep(intv)
-        print(self._name, '到達終點！')
-        
-horse1 = RaceHorse('席爾巴斯雷利', 0.7, 0.75, 3)
-horse2 = RaceHorse('波爾薩利諾', 0.6, 0.65, 3.5)
-horse3 = RaceHorse('波雅漢考克', 0.8, 0.85, 2.8)
+        print(self._name, "到達終點！")
+
+
+horse1 = RaceHorse("席爾巴斯雷利", 0.7, 0.75, 3)
+horse2 = RaceHorse("波爾薩利諾", 0.6, 0.65, 3.5)
+horse3 = RaceHorse("波雅漢考克", 0.8, 0.85, 2.8)
 
 horse1.start()
 horse2.start()
@@ -82,33 +87,35 @@ import time
 import math
 import random
 
+
 # 模擬網路爬蟲執行的狀況
 def run(name, minDelay, maxDelay):
-    intv = maxDelay-minDelay
+    intv = maxDelay - minDelay
     delays = []
     for i in range(100):
-        delay = minDelay+random.random()*intv
+        delay = minDelay + random.random() * intv
         delays.append(delay)
         # 計算平均值！
-        mean = sum(delays)/len(delays)
+        mean = sum(delays) / len(delays)
         # 計算標準差！
-        sqsum = sum([(d-mean)*(d-mean) for d in delays])
-        stdev = math.sqrt(sqsum/len(delays))
-        print((i+1), '執行緒', name, '目前的平均值：', mean, ', 標準差：', stdev)
+        sqsum = sum([(d - mean) * (d - mean) for d in delays])
+        stdev = math.sqrt(sqsum / len(delays))
+        print((i + 1), "執行緒", name, "目前的平均值：", mean, ", 標準差：", stdev)
         time.sleep(delay)
-    print('done!')
+    print("done!")
 
-thr1 = Thread(target=run, args=('1號', 3.2, 5.5))
-thr2 = Thread(target=run, args=('2號', 4.7, 6.2))
+
+thr1 = Thread(target=run, args=("1號", 3.2, 5.5))
+thr2 = Thread(target=run, args=("2號", 4.7, 6.2))
 # 執行延遲觀察開始！
 thr1.start()
 thr2.start()
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 import threading
+
 
 def wakeUp(mytime, note, job):
     print(job, " 開始")
@@ -134,7 +141,7 @@ print("------------------------------------------------------------")  # 60個
 
 import threading
 
-a = input('按下任意鍵開始')
+a = input("按下任意鍵開始")
 b = True
 t = 0
 
@@ -142,7 +149,7 @@ t = 0
 def loop_a():
     global t  # 設定全域變數
     global b
-    while (b == True):
+    while b == True:
         t = t + 0.01
         time.sleep(0.01)
 
@@ -150,8 +157,8 @@ def loop_a():
 def loop_b():
     global b
     global t
-    b = input('按下任意鍵停止')
-    t = round(t * 100)/100
+    b = input("按下任意鍵停止")
+    t = round(t * 100) / 100
     print(t)
 
 
@@ -168,13 +175,13 @@ print("------------------------------------------------------------")  # 60個
 import threading
 import queue
 
-#要進行的工作
+# 要進行的工作
 source = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
 threads_num = 3
 
 q = queue.LifoQueue()
 for item in source:
-    print('加入項目 :', item)
+    print("加入項目 :", item)
     q.put(item)
 
 
@@ -215,13 +222,13 @@ print("------------------------------------------------------------")  # 60個
 import threading
 import queue
 
-#要進行的工作
+# 要進行的工作
 source = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
 threads_num = 3
 
 q = queue.Queue()
 for item in source:
-    print('加入項目 :', item)
+    print("加入項目 :", item)
     q.put(item)
 
 
@@ -260,7 +267,7 @@ print("------------------------------------------------------------")  # 60個
 import threading
 import queue
 
-#要進行的工作
+# 要進行的工作
 source = ["AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG"]
 
 source = ["2-吃飯", "1-睡覺", "3-寫程式", "7-散步", "5-聽音樂", "6-打牌", "4-玩電動"]
@@ -268,7 +275,7 @@ threads_num = 3
 
 q = queue.PriorityQueue()
 for item in source:
-    print('加入項目 :', item)
+    print("加入項目 :", item)
     q.put(item)
 
 
@@ -303,6 +310,7 @@ print("主程式結束")
 print("------------------------------------------------------------")  # 60個
 
 import threading
+
 
 def wakeUp():
     print("threadObj執行緒開始")
@@ -399,5 +407,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
