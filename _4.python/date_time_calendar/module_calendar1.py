@@ -67,7 +67,6 @@ date = '%s %02d' % (calendar.month_abbr[0], dd)
 print(date)
 """
 
-
 dt = calendar.datetime.datetime
 print(dt)
 print(dt.now())
@@ -80,12 +79,22 @@ print(dt.now().second)
 timedelta = calendar.datetime.timedelta
 print(timedelta)
 
+""" TBD
+dt = calendar.datetime.datetime
+print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
+print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
+
+#date = '%s %02d' % (calendar.month_abbr[mm], dd)
+
+maybe_date = calendar.datetime.datetime
+cc = calendar.timegm(time.strptime(maybe_date, '%a %b %d %H:%M:%S %Y'))
+"""
+
 print('------------------------------------------------------------')	#60個
 
 print(calendar.firstweekday())
 
 calendar.weekday(year, month, day)
-
 
 calendar.monthrange(year, month)
 
@@ -231,25 +240,6 @@ print('--------------------')
 print("年曆")
 cal = calendar.Calendar(calendar.SUNDAY)
 print(cal)
-
-
-
-"""
-
-#date = '%s %02d' % (calendar.month_abbr[mm], dd)
-
-maybe_date = calendar.datetime.datetime
-cc = calendar.timegm(time.strptime(maybe_date, '%a %b %d %H:%M:%S %Y'))
-"""
-
-
-"""
-dt = calendar.datetime.datetime
-print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
-print(calendar.timegm(time.strptime(dt, '%a %b %d %H:%M:%S %Y')))
-
-"""
-
 
 import datetime
 

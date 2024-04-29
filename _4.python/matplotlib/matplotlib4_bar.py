@@ -239,7 +239,6 @@ plt.legend()  # 圖例(柱狀圖)說明
 plt.grid(True)  # 顯示格線
 
 
-
 # 第四張圖
 plt.subplot(234)
 
@@ -543,6 +542,7 @@ plt.title("x用名稱 y設定範圍刻距")
 # 第五張圖
 plt.subplot(235)
 
+
 def dice_generator(times, sides):
     # 處理隨機數
     for i in range(times):
@@ -707,7 +707,6 @@ plt.ylabel("體重(單位:公斤)")
 plt.title("動物體重 使用中文")
 
 
-
 # 第三張圖
 plt.subplot(233)
 
@@ -747,7 +746,6 @@ plt.title("大學四年各學期的平均分數")
 
 # 第六張圖
 plt.subplot(236)
-
 
 
 plt.show()
@@ -864,6 +862,7 @@ ax.legend(labels=["Men", "Women"])
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
 
 def dice_generator(times, sides):
     # 處理隨機數

@@ -1,4 +1,5 @@
 import sys
+import time
 import datetime
 
 print('------------------------------------------------------------')	#60個
@@ -48,7 +49,6 @@ print('------------------------------------------------------------')	#60個
 print(datetime.date(2018,5,25))
 print(datetime.time(12, 58, 41))
 print(datetime.datetime(2018, 3, 5, 18, 45, 32))
-print(datetime.timedelta(days=1))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -83,22 +83,9 @@ print("秒 : ", timeNow.second)
 
 print("------------------------------------------------------------")  # 60個
 
-deltaTime = datetime.timedelta(days=3, hours=5, minutes=8, seconds=10)
-print(deltaTime.days, deltaTime.seconds, deltaTime.microseconds)
-
-print("------------------------------------------------------------")  # 60個
-
-deltaTime = datetime.timedelta(days=100)
-timeNow = datetime.datetime.now()
-print("現在時間是 : ", timeNow)
-print("100天後是  : ", timeNow + deltaTime)
-
-print("------------------------------------------------------------")  # 60個
-
 timeNow = datetime.datetime.now()
 print(timeNow.strftime("%Y/%m/%d %H:%M:%S"))
 print(timeNow.strftime("%y-%b-%d %H-%M-%S"))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -188,6 +175,7 @@ print(f'4天7.8時 = {dtAdd.total_seconds():9,} 秒')
 
 print("------------------------------------------------------------")  # 60個
 
+"""
 d1 = datetime.datetime(2018, 9, 2)
 print('日期：', d1 + (datetime.timedelta(days = 7)))
 
@@ -195,7 +183,7 @@ d2 = datetime.datetime(2020, 1, 22)
 d3 = datetime.timedelta(days = 106)
 dt = d2 - d3 # 將兩個日期相減
 print('日期二：', datetime.strftime('%Y-%m-%d'))
-
+"""
 print("------------------------------------------------------------")  # 60個
 
 #建立儲存星期的list物件
@@ -226,9 +214,6 @@ print('今天的上週三：', getWeeks('Wednesday'))
 #呼叫函式，傳入二個參數
 dt = datetime.datetime(2017, 4, 11)
 print('2017/4/11 的上週二：', getWeeks('Tuesday', dt))
-
-print("------------------------------------------------------------")  # 60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -282,6 +267,28 @@ print(x + y)  # 用 timedelta 來增減 datetime 的時間
 print(x - y)
 
 print(x + y * 2)
+
+
+
+print(datetime.timedelta(days=1))
+
+deltaTime = datetime.timedelta(days=3, hours=5, minutes=8, seconds=10)
+print(deltaTime.days, deltaTime.seconds, deltaTime.microseconds)
+
+print("------------------------------------------------------------")  # 60個
+
+deltaTime = datetime.timedelta(days=100)
+timeNow = datetime.datetime.now()
+print("現在時間是 : ", timeNow)
+print("100天後是  : ", timeNow + deltaTime)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -532,7 +539,6 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-
 print('---- datetime.now() --------------------------------------------------------')	#60個
 
 tt = datetime.datetime.strptime("2018-01-31", "%Y-%m-%d")
@@ -561,11 +567,8 @@ print(tt)
 now1 = datetime.datetime.now()
 now2 = datetime.datetime.now().date()
 
-new_date = now2 + datetime.timedelta(-1)    #昨天
-
 print(now1)
 print(now2)
-print(new_date)
 print(now2.year)
 print(now2.month)
 print(now2.day)
@@ -601,9 +604,53 @@ old_date = str(old_date)    #先轉成字串
 print(old_date)
 
 new_date = transform_date(old_date)
-
 print(new_date)
 
+new_date = now2 + datetime.timedelta(-1)    #昨天
+print(new_date)
+
+import datetime
+
+print('今日日期')
+today = datetime.date.today()
+print(today)
+
+print('現在時間')
+time_now = datetime.datetime.now()
+print(time_now)
+
+print('1天前的時間')
+time_1day = datetime.timedelta(days=1)
+print(time_1day)
+
+print('60天前的時間')
+time_60day = datetime.timedelta(days=60)
+print(time_60day)
+
+print('現在時間 - 60天前的時間')
+diff60days = time_now - time_60day
+print(diff60days)
+
+print('現在的年份')
+print("%d" % datetime.datetime.now().year)
+print('300天後的年份')
+print("%d" % (datetime.datetime.now() + datetime.timedelta(days=300)).year)
+print('600天後的年份')
+print("%d" % (datetime.datetime.now() + datetime.timedelta(days=600)).year)
+print('900天後的年份')
+print("%d" % (datetime.datetime.now() + datetime.timedelta(days=900)).year)
+
+
+print('相隔一段時間')
+time_diff = datetime.timedelta(weeks=1, days=30, hours=2, minutes=40)
+print(time_diff)
+
+print('相隔一段時間')
+dt1 = datetime.datetime(2024, 4, 29, 12, 34, 56)
+dt2 = datetime.datetime(2006, 3, 11, 9, 15, 30)
+print(dt1-dt2)
+
+sys.exit()
 print('------------------------------------------------------------')	#60個
 
 #而如果要輸出此時準確的時間的話則

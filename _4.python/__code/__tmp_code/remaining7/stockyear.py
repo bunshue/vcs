@@ -1,18 +1,30 @@
-import requests
-import json
-import csv
-import pandas as pd
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
-import time
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+
+import csv
+import time
+import json
+import requests
+
+print("------------------------------------------------------------")  # 60個
 
 def twodigit(n):  #將數值轉為二位數字串
     if(n < 10):
@@ -56,3 +68,5 @@ pdstock['日期'] = pd.to_datetime(pdstock['日期'])  #轉換日期欄位為日
 pdstock.plot(kind='line', figsize=(12, 6), x='日期', y=['收盤價', '最低價', '最高價'])  #繪製統計圖
 
 plt.show() 
+
+print("------------------------------------------------------------")  # 60個

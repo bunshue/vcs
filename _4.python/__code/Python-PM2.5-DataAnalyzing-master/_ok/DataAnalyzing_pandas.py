@@ -1,25 +1,24 @@
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
-
+import random
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
-
-
-print('------------------------------------------------------------')	#60個
-
-import pandas as pd
+print("------------------------------------------------------------")  # 60個
 
 df = pd.read_csv("200811-201811.csv")
 
@@ -32,7 +31,6 @@ mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']
 mpl.rcParams['axes.unicode_minus'] = False
 
 print(df.head(10))
-
 
 cc = len(df)
 print(cc)
@@ -63,19 +61,12 @@ print(cc)
 cc = df[(df.PM25 < 30)&(df.TEMP>30)] #列出PM2.5值大於30且溫度大於30的數值
 print(cc)
 
-
 df.plot(kind = 'scatter', x = 'TEMP', y = 'PM25', title = '溫度與PM2.5之關係')
 
 plt.show()
 
 #df.to_csv('New_Data.csv',encoding='utf8')  #存檔至New_Data.csv中
 #df.to_excel('New_Data.xlsx', encoding='utf8')#存檔至New_Data.xlsx
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 

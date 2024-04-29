@@ -1,29 +1,31 @@
+
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
-import matplotlib.pyplot as plt
-import numpy as np
 import math
-
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-
-print('------------------------------------------------------------')	#60個
-
+import random
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
 
 filename = 'AQI_20231124.csv'
-
 df = pd.read_csv(filename)
-
 print(df.head())
-
 print(len(df))
-
 print(df.describe())
-
 print(df['aqi'])
 
 #print(df[(df.aqi < 30)&(df.wind_speed>2)])
@@ -35,12 +37,9 @@ df.plot(x='sitename', y=['aqi'])
 plt.show()
 
 
-
 print(df['aqi'])
 
-
 print(df.sort_index(ascending=True).head())
-
 
 print(df.sort_index(ascending=False).head())
 
@@ -74,9 +73,7 @@ print('------------------------------------------------------------')	#60個
 
 filename = 'AQI_20231124b.csv'
 df = pd.read_csv(filename)
-
 print(df['pm2.5'])
-
 
 from pylab import mpl
 mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']  

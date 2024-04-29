@@ -147,7 +147,10 @@ print('------------------------------------------------------------')	#60個
 import datetime
 import yfinance as yf
 
+#開始時間 為 60天前
 start = datetime.datetime.now() - datetime.timedelta(days=60)
+
+#結束時間 為 現在
 end = datetime.date.today()
 df = yf.download("2330.TW", start, end)
 print(df.shape)

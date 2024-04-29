@@ -298,8 +298,6 @@ plt.subplot(235)
 plt.subplot(236)
 
 
-
-
 plt.show()
 
 
@@ -542,8 +540,6 @@ plt.imshow(image)
 
 # 第二張圖
 plt.subplot(232)
-
-
 
 
 # 第三張圖

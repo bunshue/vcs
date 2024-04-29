@@ -67,7 +67,7 @@ plt.figure(
 
 plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 200, \sigma=25$")
 
-mu, sigma = 100, 15 # 平均值, 標準差
+mu, sigma = 100, 15  # 平均值, 標準差
 x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 
 # 第一張圖
@@ -85,7 +85,7 @@ plt.subplot(232)
 N = 10000  # 資料個數
 num_bins = 50  # 直方圖顯示時的束數
 
-mu, sigma = 100, 15 # 平均值, 標準差
+mu, sigma = 100, 15  # 平均值, 標準差
 x = mu + sigma * np.random.randn(N)  # 隨機數
 
 n, bins, patches = plt.hist(
@@ -109,8 +109,6 @@ plt.title(
 plt.subplot(233)
 
 
-
-
 # 第四張圖
 plt.subplot(234)
 
@@ -118,7 +116,6 @@ x = np.random.rand(N, 3)  # 產生共3組，每組 N 個隨機數
 
 plt.hist(x, bins=num_bins // 10)
 plt.title("產生共3組，每組 10000 個隨機數")
-
 
 
 # 第五張圖
@@ -155,7 +152,7 @@ plt.figure(
 
 plt.suptitle("皆為 np.random.normal\t" + r"$\mu = 200, \sigma=25$")
 
-mu, sigma = 100, 15 # 平均值, 標準差
+mu, sigma = 100, 15  # 平均值, 標準差
 x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 
 # 第一張圖
@@ -405,15 +402,12 @@ plt.xlabel("分數")
 plt.title("成績表")
 
 
-
 # 第五張圖
 plt.subplot(235)
 
 
-
 # 第六張圖
 plt.subplot(236)
-
 
 
 plt.show()
@@ -438,7 +432,7 @@ print("hist參數大合集")
 
 plt.figure(figsize=(12, 8))
 
-mu, sigma = 100, 15 # 平均值, 標準差
+mu, sigma = 100, 15  # 平均值, 標準差
 x = np.random.normal(mu, sigma, size=N * 10)  # 隨機數
 
 print("x : 需要製作直方圖的一維數組")
@@ -543,54 +537,54 @@ print("建立N筆成績資料 常態分佈 平均值 = 70, 標準差 = 15")
 
 N = 50000  # 資料個數
 num_bins = 100  # 直方圖顯示時的束數
-mu, sigma = 70, 15 # 平均值, 標準差
+mu, sigma = 70, 15  # 平均值, 標準差
 
 plt.figure(figsize=(12, 8))
 
-#理想值
+# 理想值
 x = np.linspace(mu - 50, mu + 50, N)  # 從N1到N2, 分成N個, 包含頭尾
 y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-((x - mu) ** 2) / (2 * sigma**2)) * N
 plt.plot(x, y, "--", color="lime", linewidth=3)
 
-print('建立常態分佈資料 平均值= 75, 標準差 = 15,', N, '筆資料')
+print("建立常態分佈資料 平均值= 75, 標準差 = 15,", N, "筆資料")
 
 scores1 = np.random.normal(mu, sigma, size=N)  # 隨機數
-print('資料個數1 :', len(scores1))
-print('最高分 :', max(scores1))
-print('最低分 :', min(scores1))
+print("資料個數1 :", len(scores1))
+print("最高分 :", max(scores1))
+print("最低分 :", min(scores1))
 
 scores2 = scores1[scores1 <= 100.0]
 scores3 = scores2[scores2 >= 0.0]
-print('資料個數2 :', len(scores2))
-print('資料個數3 :', len(scores3))
-print('最高分 :', max(scores3))
-print('最低分 :', min(scores3))
+print("資料個數2 :", len(scores2))
+print("資料個數3 :", len(scores3))
+print("最高分 :", max(scores3))
+print("最低分 :", min(scores3))
 
 freq = [0] * 100
 
 illegal_cnt = 0
 for score in scores1:
     if score < 0:
-        print('XXXXXXXX111 ', score)
+        print("XXXXXXXX111 ", score)
         illegal_cnt += 1
         continue
     elif score >= 100:
-        #print('XXXXXXXX222 ', score)
+        # print('XXXXXXXX222 ', score)
         illegal_cnt += 1
         continue
-    rank = int(score) 
+    rank = int(score)
     freq[rank] += 1
-    #print(score)
-    #print(rank)
+    # print(score)
+    # print(rank)
 
-print('不合法的個數 :', illegal_cnt)
+print("不合法的個數 :", illegal_cnt)
 
 print("人數分佈頻率:", freq)
 
 plt.plot(freq, "--", color="r", linewidth=2)
 
 # 指定bins
-num_bins = range(0, 100, 1) #設定bin的範圍
+num_bins = range(0, 100, 1)  # 設定bin的範圍
 
 """
 for _ in num_bins:
@@ -645,7 +639,3 @@ cb = plt.colorbar(label='xxxxx')
 plt.show()
 
 """
-
-
-
-
