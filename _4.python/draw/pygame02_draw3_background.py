@@ -10,10 +10,10 @@ import pygame
 
 W, H = 800, 800
 
-pygame.init()   # 初始化Pygame
-screen_size = (W, H)    # 設定屏幕尺寸
-screen = pygame.display.set_mode(screen_size)   # 創建屏幕
-pygame.display.set_caption('畫圖綜合')
+pygame.init()  # 初始化Pygame
+screen_size = (W, H)  # 設定屏幕尺寸
+screen = pygame.display.set_mode(screen_size)  # 創建屏幕
+pygame.display.set_caption("畫圖綜合")
 
 # 設定顏色
 red = (255, 0, 0)
@@ -23,29 +23,29 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 yellow = (255, 255, 0)
 
-Fuchsia = (255, 0, 255) #紫色
-Aqua = (0, 255, 255) #淺藍色
-Gray = (128, 128, 128) #灰色
+Fuchsia = (255, 0, 255)  # 紫色
+Aqua = (0, 255, 255)  # 淺藍色
+Gray = (128, 128, 128)  # 灰色
 # 設定顏色, same
-red = pygame.color.Color('#FF0000')
-green = pygame.color.Color('#00FF00')
-blue = pygame.color.Color('#0000FF')
-black = pygame.color.Color('#000000')
-white = pygame.color.Color('#FFFFFF')
+red = pygame.color.Color("#FF0000")
+green = pygame.color.Color("#00FF00")
+blue = pygame.color.Color("#0000FF")
+black = pygame.color.Color("#000000")
+white = pygame.color.Color("#FFFFFF")
 
 print("取得screen參數")
 print(screen.get_size())
 
-#利用screen物件來作為畫布，以fill()方法填上顏色
+# 利用screen物件來作為畫布，以fill()方法填上顏色
 screen.fill(Gray)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 width = 800
 height = 800
 
-color = pygame.color.Color('#F54455')
-#[100, 100, 0]
+color = pygame.color.Color("#F54455")
+# [100, 100, 0]
 print(color)
 
 row = 0

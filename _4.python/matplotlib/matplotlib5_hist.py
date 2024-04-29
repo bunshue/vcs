@@ -52,7 +52,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
@@ -536,7 +536,7 @@ plt.xlabel("")
 plt.ylabel("個數統計")
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("建立N筆成績資料 常態分佈 平均值 = 70, 標準差 = 15")

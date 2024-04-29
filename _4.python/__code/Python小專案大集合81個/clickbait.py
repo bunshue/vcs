@@ -1,8 +1,3 @@
-"""Clickbait Headline Generator, by Al Sweigart al@inventwithpython.com
-A clickbait headline generator for your soulless content farm website.
-This code is available at https://nostarch.com/big-book-small-python-programming
-Tags: large, beginner, humor, word"""
-
 import random
 
 # Set up the constants:

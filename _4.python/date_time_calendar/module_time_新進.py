@@ -1,3 +1,17 @@
+"""
+新進
+
+"""
+
+import os
+import sys
+import time
+import random
+import datetime
+
+print("------------------------------------------------------------")  # 60個
+
+
 import datetime
 
 # Set up the constants:
@@ -55,10 +69,10 @@ def getCalendarFor(year, month):
     calText += weekSeparator
     return calText
 
-print('Calendar Maker')
+print('建立月行事曆')
 
 year = 2024
-month = 3
+month = 4
 
 calText = getCalendarFor(year, month)
 print(calText)  # Display the calendar.
@@ -69,3 +83,27 @@ with open(calendarFilename, 'w') as fileObj:
     fileObj.write(calText)
 
 print('Saved to ' + calendarFilename)
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+

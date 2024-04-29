@@ -686,8 +686,6 @@ file.close()
 
 print("------------------------------------------------------------")  # 60個
 
-from random import randint
-
 filename = 'C:/_git/vcs/_1.data/______test_files1/quotes.txt'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
 
@@ -703,7 +701,7 @@ def get_random_quote():
     # Let's begin with some random line number
     # When '%%' is found, save the line number and break the loop
     for i in range(len(line)-1):
-        random_line = (randint(0, len(line)-1))
+        random_line = (random.randint(0, len(line)-1))
         print(random_line)
         if "%%" in line[random_line]:
             start_line = random_line
@@ -725,14 +723,12 @@ def get_random_quote():
 
     return quote
 
-""" fail
 mesg = get_random_quote()
 print(mesg)
 mesg = get_random_quote()
 print(mesg)
 mesg = get_random_quote()
 print(mesg)
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2081,4 +2077,48 @@ filename = "C:/_git/vcs/_4.python/_data/王之渙_涼州詞.big5.txt"
 f = open(filename, "r")
 all_lines = f.readlines()
 print(all_lines)
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+製作 log 檔
+每執行一次, 存一筆資料在log檔
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+with open('tmp_my_logfile1.log', 'a') as log_file:
+    log_file.write(f'{time.strftime("%Y-%m-%d %H:%M:%S")} - 寫了一筆工作紀錄\n')
+
+print("------------------------------------------------------------")  # 60個
+
+#製作log檔的範例
+print('存檔紀念')
+
+fp = open('tmp_my_logfile2.txt', 'w')
+fp.write("# BUILD INFO\n")
+fp.write("# Date: %s\n" % time.ctime())
+fp.close()
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
 
