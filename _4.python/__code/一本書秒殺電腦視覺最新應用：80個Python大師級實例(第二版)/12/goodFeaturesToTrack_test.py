@@ -1,5 +1,7 @@
-import numpy as np
 import cv2
+import numpy as np
+
+print("------------------------------------------------------------")  # 60個
 
 def getkpoints(imag, input1):
     mask1 = np.zeros_like(input1)
@@ -25,11 +27,13 @@ def process(image):
     keypoints = getkpoints(grey, grey1)
     if keypoints is not None and len(keypoints) > 0:
         for x, y in keypoints:
-            cv2.circle(image, (int(x + 200), y), 3, (255, 255, 0))
+            cv2.circle(image, (int(int(x) + 200), int(y)), 3, (255, 255, 0))
     return image
 
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
 if __name__ == '__main__':
-    cap = cv2.VideoCapture("IMG_1521.mp4")
+    cap = cv2.VideoCapture(video_filename)
     while (cap.isOpened()):
         ret, frame = cap.read()
         frame = process(frame)
@@ -39,3 +43,11 @@ if __name__ == '__main__':
     cap.release()
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+

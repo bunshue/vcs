@@ -560,6 +560,9 @@ print("資料個數3 :", len(scores3))
 print("最高分 :", max(scores3))
 print("最低分 :", min(scores3))
 
+print("資料1 平均 :", sum(scores1)/len(scores1))
+print("資料3 平均 :", sum(scores3)/len(scores3))
+
 freq = [0] * 100
 
 illegal_cnt = 0
