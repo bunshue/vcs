@@ -1,0 +1,53 @@
+Tkinter各種元件使用
+
+容器
+01. Window視窗元件
+02. Frame 框架元件
+03. LabelFrame 標籤框架元件	就是Groupbox
+04. PanedWindow 拼布分塊式可動視窗元件
+
+執行指令
+05. Button 按鈕元件
+
+輸入或輸出
+06. Label 標籤元件
+07. Entry 單行文字方塊元件
+08. Text 多行文字方塊元件
+09. Scale 滑桿元件
+10. Spinbox 數字選取方塊元件
+11. Listbox 列式方塊元件
+選擇控制
+12. Radiobutton 選項按鈕元件(單選)
+13. CheckButton 核取按鈕元件(多選)
+繪圖與顯示影像
+14. Canvas 繪圖
+15. PhotoImage 圖像顯示
+訊息傳達
+16. MessageBox 訊息方塊
+檔案管理
+17. Askopenfilename 開檔
+18. Asksavefilename 存檔
+功能表
+19. Menu 下拉式選單
+
+
+
+
+tkinter元件
+Button		按鈕
+Canvas		提供圖形繪製的畫布
+CheckButton	核取方塊
+Entry		單行文字標籤
+Frame		框，可將元件組成群組
+Label		標籤，顯示文字或圖片
+Listbox		清單方塊
+Menu		選單
+Menubutton	選單元件
+Message		對話方塊
+RadioButton	選項按鈕
+Scale		滑桿
+Scrollbar	捲軸
+Text		多行文字標籤
+Toplevel	建立子視窗容器
+
+

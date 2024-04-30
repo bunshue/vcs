@@ -25,6 +25,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -2416,3 +2417,31 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+'''
+
+#opencv 之 setMouseCallback
+
+def Demo(event,x,y,flags,param):
+    if event == cv2.EVENT_LBUTTONDOWN:
+        print("單擊了鼠標左鍵")
+    elif event == cv2.EVENT_RBUTTONDOWN :
+        print("單擊了鼠標右鍵")
+    elif flags == cv2.EVENT_FLAG_LBUTTON:
+        print("按住左鍵拖動了鼠標")
+    elif event == cv2.EVENT_MBUTTONDOWN :
+        print("單擊了中間鍵")
+#創建名稱為Demo的響應（回調）函數OnMouseAction
+#將回調函數Demo與窗口“Demo19.9”建立連接
+
+W, H = 640, 480
+image = np.ones((H, W, 3), np.uint8) * 255
+
+cv2.namedWindow('Demo19.9')
+cv2.setMouseCallback('Demo19.9', Demo)     
+cv2.imshow('Demo19.9', image)
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+
+

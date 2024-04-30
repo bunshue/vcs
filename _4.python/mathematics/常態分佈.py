@@ -1,4 +1,11 @@
-# 新進測試05
+"""
+常態分佈
+
+normal distribution / Gaussian distribution
+
+
+"""
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -20,11 +27,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
-
-print(
-    "matplotlib 27 標準常態分配 ------------------------------------------------------------"
-)  # 60個
 
 """
 #Standard Normal Distribution
@@ -49,9 +51,8 @@ r = np.sqrt(np.power(x,2) + np.power(y, 2))
 return (1 - x / 2 + x**5 + y**3) * np.exp(-x**2 -y**2)
 """
 
+print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-import matplotlib.pyplot as plt
 from scipy.stats import norm
 import statistics
 
@@ -68,10 +69,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
-import numpy as np
 import scipy.stats as stats
-import math
 
 mu = 0
 variance = 1
@@ -82,8 +80,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 # Plot between -10 and 10 with .001 steps.
@@ -92,11 +88,7 @@ x_axis = np.arange(-10, 10, 0.001)
 plt.plot(x_axis, norm.pdf(x_axis, 0, 2))
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-import matplotlib.pyplot as plt
 
 mean = 0
 std = 1
@@ -111,11 +103,8 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 """
-import numpy as np
 import scipy as sp
 from scipy import stats
-import matplotlib.pyplot as plt 
-
 ## generate the data and plot it for an ideal normal curve
 
 ## x-axis for the plot
@@ -153,3 +142,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+

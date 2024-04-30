@@ -3,8 +3,19 @@ import sys
 import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk, Image
+'''
+print("------------------------------------------------------------")  # 60個
+
+root = tk.Tk()  # 產生 tkinter 視窗
+width = root.winfo_screenwidth()
+height = root.winfo_screenheight()
+print('取得目前螢幕大小')
+print(width, height)
+root.destroy()  # 關閉視窗
+
 
 print("------------------------------------------------------------")  # 60個
+
 
 print("09-TkUI9Entry-python2")
 
@@ -2133,8 +2144,48 @@ btnShow = tk.Button(window, text = '購買明細', font = ft2,
 #btnShow.grid(row = 2, column = 2, pady = 4)
 btnShow.pack()
 
+'''
+print("------------------------------------------------------------")  # 60個
+
+import tkinter.messagebox
+tkinter.messagebox.showinfo("Error","This word is not present in our lexicon\nDouble check it.")
+
+tkinter.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
+
+
+print('------------------------------------------------------------')	#60個
+
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 
