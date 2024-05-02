@@ -226,18 +226,18 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 import tkinter
-from tkinter import ttk  # 导入内部包
+from tkinter import ttk  # 導入內部包
 
-li = ['王记','12','男']
+li = ['王記','12','男']
 root = tkinter.Tk()
-root.title('测试')
+root.title('測試')
 tree = ttk.Treeview(root,columns=['1','2','3'],show='headings')
 tree.column('1',width=100,anchor='center')
 tree.column('2',width=100,anchor='center')
 tree.column('3',width=100,anchor='center')
 tree.heading('1',text='姓名')
-tree.heading('2',text='学号')
-tree.heading('3',text='性别')
+tree.heading('2',text='學號')
+tree.heading('3',text='性別')
 tree.insert('','end',values=li)
 tree.grid()
 
@@ -246,23 +246,22 @@ root.mainloop()
 '''
 print("------------------------------------------------------------")  # 60個
 
-
-print('标题点击排序')
+print('標題點擊排序')
 
 import random
 from tkinter import ttk
 from tkinter import *
  
-root = Tk()     # 初始旷的声明
-columns=("a","b","c")
+root = Tk()
+columns=("aaa","bbb","ccc")
 treeview=ttk.Treeview(root,height=18,show="headings",columns=columns )#表格 
  
-treeview.column('a', width=50, anchor='center') 
-treeview.column('b', width=100, anchor='center') 
-treeview.column('c', width=80, anchor='center')
-treeview.heading('a', text='列1')
-treeview.heading('b', text='列2')
-treeview.heading('c', text='列3')
+treeview.column('aaa', width=50, anchor='center') 
+treeview.column('bbb', width=100, anchor='center') 
+treeview.column('ccc', width=80, anchor='center')
+treeview.heading('aaa', text='列1')
+treeview.heading('bbb', text='列2')
+treeview.heading('ccc', text='列3')
 treeview.pack(side=LEFT,fill=BOTH)
 for i in range(10):
     treeview.insert('',i,values=(str(random.randint(0,9)),str(random.randint(0,9)),str(random.randint(0,9))))
@@ -273,29 +272,69 @@ def treeview_sort_column(tv, col, reverse):#Treeview、列名、排列方式
     print(tv.get_children(''))
     l.sort(reverse=reverse)#排序方式
     # rearrange items in sorted positions
-    for index, (val, k) in enumerate(l):#根据排序后索引移动
+    for index, (val, k) in enumerate(l):#根據排序后索引移動
         tv.move(k, '', index)
         print(k)
-    tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))#重写标题，使之成为再点倒序的标题
+    tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))#重寫標題，使之成為再點倒序的標題
  
 '''
-#莫名其妙？？？？写循环的话只有最后一列管用,看论坛说的好像是python2.7管用
+#莫名其妙？？？？寫循環的話只有最后一列管用,看論壇說的好像是python2.7管用
 for col in columns:
     treeview.heading(col, text=col, command=lambda: treeview_sort_column(treeview, col, False))
 '''
  
 '''
-#基本用法（上边注释的只有最后一列管用、索性手工试验一下可用性，证实可行）
-treeview.heading('a', text='123', command=lambda: treeview_sort_column(tree, 'a', False))#重建标题，添加控件排序方法
-treeview.heading('b', text='111', command=lambda: treeview_sort_column(tree, 'b', False))#重建标题，添加控件排序方法
-treeview.heading('c', text='223', command=lambda: treeview_sort_column(tree, 'c', False))#重建标题，添加控件排序方法
+#基本用法（上邊注釋的只有最后一列管用、索性手工試驗一下可用性，證實可行）
+treeview.heading('a', text='123', command=lambda: treeview_sort_column(tree, 'a', False))#重建標題，添加控件排序方法
+treeview.heading('b', text='111', command=lambda: treeview_sort_column(tree, 'b', False))#重建標題，添加控件排序方法
+treeview.heading('c', text='223', command=lambda: treeview_sort_column(tree, 'c', False))#重建標題，添加控件排序方法
 '''
  
-#这个代码对于python3就管用了
-for col in columns:#给所有标题加（循环上边的“手工”）
+#這個代碼對于python3就管用了
+for col in columns:#給所有標題加（循環上邊的“手工”）
     treeview.heading(col, text=col, command=lambda _col=col: treeview_sort_column(treeview, _col, False))
  
 root.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter
+from tkinter import ttk  # 导入内部包
+ 
+li = ['王记','12','男']
+root = tkinter.Tk()
+root.title('测试')
+tree = ttk.Treeview(root,columns=['1','2','3'],show='headings')
+
+tree.column('1',width=100,anchor='center')
+tree.column('2',width=100,anchor='center')
+tree.column('3',width=100,anchor='center')
+
+tree.heading('1',text='姓名')
+tree.heading('2',text='学号')
+tree.heading('3',text='性别')
+
+tree.insert('','end',values=li)
+tree.grid()
+
+ 
+def treeviewClick(event):#单击
+    print ('单击')
+    for item in tree.selection():
+        item_text = tree.item(item,"values")
+        print(item_text[0])#输出所选行的第一列的值
+ 
+tree.bind('<ButtonRelease-1>', treeviewClick)#绑定单击离开事件===========
+ 
+root.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 
@@ -307,22 +346,22 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
-Treeview之各种点击事件
+Treeview之各種點擊事件
 
-鼠标左键单击按下	1/Button-1/ButtonPress-1
-鼠标左键单击松开	ButtonRelease-1
-鼠标右键单击	3
-鼠标左键双击	Double-1/Double-Button-1
-鼠标右键双击	Double-3
-鼠标滚轮单击	2
-鼠标滚轮双击	Double-2
-鼠标移动	B1-Motion
-鼠标移动到区域	Enter
-鼠标离开区域	Leave
-获得键盘焦点	FocusIn
-失去键盘焦点	FocusOut
-键盘事件	Key
-回车键	Return
-控件尺寸变	Configure
+鼠標左鍵單擊按下	1/Button-1/ButtonPress-1
+鼠標左鍵單擊松開	ButtonRelease-1
+鼠標右鍵單擊	3
+鼠標左鍵雙擊	Double-1/Double-Button-1
+鼠標右鍵雙擊	Double-3
+鼠標滾輪單擊	2
+鼠標滾輪雙擊	Double-2
+鼠標移動	B1-Motion
+鼠標移動到區域	Enter
+鼠標離開區域	Leave
+獲得鍵盤焦點	FocusIn
+失去鍵盤焦點	FocusOut
+鍵盤事件	Key
+回車鍵	Return
+控件尺寸變	Configure
 
 """
