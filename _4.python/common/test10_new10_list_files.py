@@ -2446,5 +2446,145 @@ print(frame)
 
 
 
+import os
+from pathlib import Path
+
+cc = os.path.realpath(__file__)
+print('目前檔案 :', cc)
+
+cc = [str(Path(cc).parent)]
+print('父資料夾 :', cc)
+
+cc = __file__
+
+print(cc)
+
+
+import os
+
+print(os.getcwd())
+print(os.path.relpath('C:\\'))              # 列出目前工作目錄至C:\的相對路徑
+print(os.path.relpath('C:\\___small\\Dropresize'))  # 列出目前工作目錄至特定path的相對路徑
+print(os.path.relpath('C:\\', '*.py')) # 列出目前檔案至D:\的相對路徑
+
+import os
+
+print(os.path.abspath('.'))              # 列出目前工作目錄的絕對路徑
+print(os.path.abspath('..'))             # 列出上一層工作目錄的絕對路徑
+print(os.path.abspath('*.py'))      # 列出目前檔案的絕對路徑
+
+
+import os
+
+print(os.path.join('D:\\', 'Python', 'ch14', 'ch14_9.py'))   # 4個參數
+print(os.path.join('D:\\Python', 'ch14', 'ch14_9.py'))       # 3個參數
+print(os.path.join('D:\\Python\\ch14', 'ch14_9.py'))         # 2個參數
+
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+import os.path as path
+ 
+fpath = os.getcwd() + "\\temp"
+if path.exists(fpath+"\\ball0.jpg"):
+    print("存在!")
+if path.isdir(fpath+"\\test"):
+    print("是目錄!")
+if path.isfile(fpath+"\\ball0.jpg"):
+    print("是檔案!")
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+ 
+path = os.getcwd() + "\\temp"
+os.chdir(path)
+print(path)
+print(os.listdir(path))
+
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+ 
+path = os.getcwd() + "\\temp"
+print("目前工作路徑: ", os.getcwd())
+print(path)
+os.chdir(path)
+print("chdir(): ", os.getcwd())
+os.mkdir('newDir')
+print("mkdir(): ", os.listdir(path))
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+ 
+path = os.getcwd() + "\\temp"
+os.chdir(path)
+os.rename('newDir','newDir2')
+print("rename(): ", os.listdir(path))
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+ 
+path = os.getcwd() + "\\temp"
+os.chdir(path)
+os.rmdir('newDir2')
+fp = open("aa.txt", "w")
+fp.close()
+print("rmdir(): ", os.listdir(path))
+os.remove("aa.txt")
+print("remove(): ", os.listdir(path))
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+ 
+fname = path.realpath("ch9-2-2.py")
+print(fname)
+r = path.split(fname)
+print("os.path.split() =", r)
+r = path.splitext(fname)
+print("os.path.splitext() =", r)
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+ 
+fname = path.realpath("ch9-2-2.py")
+print(fname)
+p = path.dirname(fname)
+print("p = os.path.dirname() =", p)
+f = path.basename(fname)
+print("f = os.path.basename() =", f)
+
+
+print("------------------------------------------------------------")  # 60個
+
+import os.path as path
+ 
+p = "C:\Python\ch09"
+f = "ch9-2-2.py"
+print(p, f)
+r = path.join(p, f)
+print("os.path.join(p,f) =", r)
+
+print("------------------------------------------------------------")  # 60個
+
+import os
+import os.path as path
+ 
+fpath = os.getcwd() + "\\temp"
+if path.exists(fpath+"\\ball0.jpg"):
+    print("存在!")
+if path.isdir(fpath+"\\test"):
+    print("是目錄!")
+if path.isfile(fpath+"\\ball0.jpg"):
+    print("是檔案!")
+
 
 

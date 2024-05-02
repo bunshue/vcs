@@ -16,7 +16,7 @@ import cv2
 from deepface import DeepFace
 from PIL import ImageFont, ImageDraw, Image
 
-filename = 'sc01a.jpg'
+filename = 'data/FourPeople.jpg'
 
 print("------------------------------------------------------------")  # 60個
 
@@ -120,7 +120,7 @@ def putText(x,y,text,size=70,color=(255,255,255)):
     img = np.array(imgPil)                         # 轉換成 np.array
 
 
-filename = "sc01a.jpg"
+filename = "data/FourPeople.jpg"
 img = cv2.imread(filename)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)       # 將圖片轉成灰階
 
