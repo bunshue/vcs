@@ -23,7 +23,7 @@ import time
 import math
 import random
 import numpy as np
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 def printlocal():
@@ -10824,29 +10824,26 @@ import sys
 cc = sys.getdefaultencoding()
 
 print(cc)
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 import numpy as np
 
-b = np.array([[1,2,3],[4,5,6]])
-print(b[0, 0], b[0, 1], b[0, 2])
-print(b[1, 0], b[1, 1], b[1, 2])
+a = np.array([[1,2,3],[4,5,6]], int)#指定元素型態的陣列
+a = np.array([[1,2,3],[4,5,6]], dtype = float)#指定元素型態的陣列
+print(a[0, 0], a[0, 1], a[0, 2])
+print(a[1, 0], a[1, 1], a[1, 2])
+
+print('陣列元素的資料型態 :', a.dtype)
+print('陣列的元素總數', a.size)
+print('陣列的形狀', a.shape)
+print('陣列元素所占用的拜數', a.itemsize)
+print('幾維陣列', a.ndim)
+print('整個陣列所占用的拜數', a.nbytes)
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
-
-a = np.array([[1,2,3],[4,5,6]])
-print(a.dtype)
-print(a.size)
-print(a.shape)
-print(a.itemsize)
-print(a.ndim)
-print(a.nbytes)
-
-print("------------------------------------------------------------")  # 60個
-
+print('陣列的形狀操作 reshape 1')
 import numpy as np
 
 a = np.array([1,2,3,4,5,6])
@@ -10856,6 +10853,7 @@ print(b)
 
 print("------------------------------------------------------------")  # 60個
 
+print('陣列的形狀操作 reshape 2')
 import numpy as np
 
 a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
@@ -10866,6 +10864,7 @@ print(c)
 
 print("------------------------------------------------------------")  # 60個
 
+#合併
 import numpy as np
 
 a = np.array([[1,2],[3,4]])
@@ -10877,6 +10876,7 @@ print(d)
 
 print("------------------------------------------------------------")  # 60個
 
+#擴充或刪除陣列的維度
 import numpy as np
 
 a = np.array([[1,2,3,4,5,6,7,8]])
@@ -10890,6 +10890,8 @@ f = np.squeeze(d)
 print(e.shape, f.shape)
 
 print("------------------------------------------------------------")  # 60個
+
+#取得陣列最大最小值和索引
 
 import numpy as np
 

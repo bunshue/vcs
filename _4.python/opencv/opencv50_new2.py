@@ -26,7 +26,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 img = cv2.imread(filename)
@@ -63,16 +63,15 @@ cap = cv2.VideoCapture(video_filename)
 width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 print("影格尺寸:", width, "x", height)
+
+#取得Codec編碼
 fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
 codec = (chr(fourcc&0xFF)+chr((fourcc>>8)&0xFF)+
         chr((fourcc>>16)&0xFF)+chr((fourcc>>24)&0xFF))
 print("Codec編碼:", codec)
 
-print("------------------------------------------------------------")  # 60個
-
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
-
-cap = cv2.VideoCapture(video_filename)
+fps = cap.get(cv2.CAP_PROP_FPS)
+print("FPS =", fps)
 
 frame_count = 0
 while True:
@@ -82,17 +81,6 @@ while True:
   frame_count = frame_count + 1
 
 print("總影格數 = ", frame_count)
-cap.release()
-
-print("------------------------------------------------------------")  # 60個
-
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
-
-cap = cv2.VideoCapture(video_filename)
-
-fps = cap.get(cv2.CAP_PROP_FPS)
-print("FPS =", fps)
-
 cap.release()
 
 print("------------------------------------------------------------")  # 60個
@@ -113,15 +101,18 @@ while(cap.isOpened()):
   
 cap.release()
 cv2.destroyAllWindows()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("錄影")
 
 cap = cv2.VideoCapture(0)
 
+#建立視訊編碼 fourcc
 fourcc = cv2.VideoWriter_fourcc(*"XVID")
-out = cv2.VideoWriter("tmp_output.avi", fourcc, 20, (640,480))
+fps = 20
+size = (640,480)
+out = cv2.VideoWriter("tmp_output.avi", fourcc, fps, size)
 
 while(cap.isOpened()):
   ret, frame = cap.read()
@@ -165,3 +156,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+"""
+
+視訊編碼的名稱、編碼字串、副檔名
+
+編碼名稱	編碼字串	視訊檔副檔名
+YUV		*'I420'		.avi
+MPEG-1		*'PIMT'		.avi
+MPEG-4		*'XVID'		.avi
+MP4		*'MP4V'		.mp4
+Ogg Vorbis	*'THEO'		.ogv
+
+"""
