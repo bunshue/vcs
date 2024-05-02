@@ -1,9 +1,6 @@
+
 from __future__ import print_function
 from __future__ import division
-import cv2 as cv
-import numpy as np
-import argparse
-
 
 """
 
@@ -59,7 +56,6 @@ num_bins = 256  # 直方圖顯示時的束數
 
 print("------------------------------------------------------------")  # 60個
 
-'''
 # 共同
 import os
 import sys
@@ -109,7 +105,7 @@ plt.title("灰階後的直方圖 變成1通道")
 
 plt.show()
 
-print("測試 07 calcHist----------------------------------------------------------")  # 60個
+print("測試 02 calcHist----------------------------------------------------------")  # 60個
 
 """
 OpenCV 本身也有計算直方圖資料的函式 cv2.calcHist，而且是專門針對圖片進行計算，它的參數有：
@@ -341,7 +337,7 @@ plt.legend(loc="best")
 
 plt.show()
 
-print("測試 08 calcHist----------------------------------------------------------")  # 60個
+print("測試 07 calcHist----------------------------------------------------------")  # 60個
 
 print('彩圖 image0')
 # 檔案 => cv2影像
@@ -375,7 +371,7 @@ plt.legend(loc="best")
 
 plt.show()
 
-print("測試 09 calcHist----------------------------------------------------------")  # 60個
+print("測試 08 calcHist----------------------------------------------------------")  # 60個
 
 filename = "data/pic_brightness1.bmp"
 
@@ -447,7 +443,66 @@ plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 plt.show()
 
-print("------------------------------------------------------------")  # 60個
+print("測試 09 calcHist----------------------------------------------------------")  # 60個
+
+filename = 'Histogram_Calculation_Original_Image.jpg'
+
+print('彩圖 image0')
+# 檔案 => cv2影像
+image0 = cv2.imread(filename)
+print("形狀 :", image0.shape)
+print("大小 :", image0.size)
+
+# 將image0 依據RGB三通道分離到一個三維矩陣
+bgr_planes = cv2.split(image0)
+
+hist_r = cv2.calcHist([image0], [2], None, [256], [0, 256])
+histRange = (0, 256) # the upper boundary is exclusive
+accumulate = False
+
+histSize = 256
+# 生成圖像之直方圖, 256束, B bgr_planes 之 第0通道
+b_hist = cv2.calcHist(bgr_planes, [0], None, [histSize], histRange, accumulate=accumulate)
+
+# 生成圖像之直方圖, 256束, G bgr_planes 之 第1通道
+g_hist = cv2.calcHist(bgr_planes, [1], None, [histSize], histRange, accumulate=accumulate)
+
+# 生成圖像之直方圖, 256束, R bgr_planes 之 第2通道
+r_hist = cv2.calcHist(bgr_planes, [2], None, [histSize], histRange, accumulate=accumulate)
+
+## [Draw the histograms for B, G and R]
+hist_w = 512
+hist_h = 400
+bin_w = int(round( hist_w/histSize ))
+
+histImage = np.zeros((hist_h, hist_w, 3), dtype=np.uint8)
+## [Draw the histograms for B, G and R]
+
+## [Normalize the result to ( 0, histImage.rows )]
+cv2.normalize(b_hist, b_hist, alpha=0, beta=hist_h, norm_type=cv2.NORM_MINMAX)
+cv2.normalize(g_hist, g_hist, alpha=0, beta=hist_h, norm_type=cv2.NORM_MINMAX)
+cv2.normalize(r_hist, r_hist, alpha=0, beta=hist_h, norm_type=cv2.NORM_MINMAX)
+## [Normalize the result to ( 0, histImage.rows )]
+
+## [Draw for each channel]
+for i in range(1, histSize):
+    cv2.line(histImage, ( bin_w*(i-1), hist_h - int(b_hist[i-1]) ),
+            ( bin_w*(i), hist_h - int(b_hist[i]) ),
+            ( 255, 0, 0), thickness=2)
+    cv2.line(histImage, ( bin_w*(i-1), hist_h - int(g_hist[i-1]) ),
+            ( bin_w*(i), hist_h - int(g_hist[i]) ),
+            ( 0, 255, 0), thickness=2)
+    cv2.line(histImage, ( bin_w*(i-1), hist_h - int(r_hist[i-1]) ),
+            ( bin_w*(i), hist_h - int(r_hist[i]) ),
+            ( 0, 0, 255), thickness=2)
+## [Draw for each channel]
+
+cv2.imshow('Source image', image0)
+cv2.imshow('calcHist Demo', histImage)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("測試 10 equalizeHist----------------------------------------------------------")  # 60個
@@ -723,6 +778,9 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
@@ -736,72 +794,61 @@ print("------------------------------------------------------------")  # 60個
 # plt.hist(cc, bins=num_bins, color="g", alpha=0.5, density=False)
 # density=True   #以密度表示
 
-'''
+
+print("------------------------------------------------------------")  # 60個
+
+ESC = 27
+
+import cv2
+import sys
+import time
+
+print('------------------------------------------------------------')	#60個
+
+print("把 直方圖均衡化處理 套用在webcam上")
+
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print('開啟攝影機失敗')
+    sys.exit()
+else:
+    print('Video device opened')
+
+while True:
+    ret, frame = cap.read()   # 從攝影機擷取一張影像
+
+    if ret == False:
+      print('無影像, 離開')
+      break
+
+    # 原圖
+    cv2.imshow('WebCam1', frame)
+
+    gray1 = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    cv2.imshow('WebCam2', gray1)
+
+    # 裁切圖片
+    # 裁切區域的 x 與 y 座標（左上角）
+    x_st, y_st = 50, 50
+    # 裁切區域的長度與寬度
+    w, h = 640 - x_st * 2, 480 - y_st * 2
+
+    gray2 = gray1[y_st : y_st + h, x_st : x_st + w]
+    cv2.imshow('WebCam3', gray2)
+
+    gray3 = cv2.equalizeHist(gray2)
+    cv2.imshow('WebCam4', gray3)
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
 
 
-## [Load image]
-parser = argparse.ArgumentParser(description='Code for Histogram Calculation tutorial.')
-parser.add_argument('--input', help='Path to input image.', default='lena.jpg')
-args = parser.parse_args()
 
-filename = 'Histogram_Calculation_Original_Image.jpg'
-src = cv.imread(filename)
-if src is None:
-    print('Could not open or find the image:', args.input)
-    exit(0)
-## [Load image]
+print("------------------------------------------------------------")  # 60個
 
-## [Separate the image in 3 places ( B, G and R )]
-bgr_planes = cv.split(src)
-## [Separate the image in 3 places ( B, G and R )]
 
-## [Establish the number of bins]
-histSize = 256
-## [Establish the number of bins]
-
-## [Set the ranges ( for B,G,R) )]
-histRange = (0, 256) # the upper boundary is exclusive
-## [Set the ranges ( for B,G,R) )]
-
-## [Set histogram param]
-accumulate = False
-## [Set histogram param]
-
-## [Compute the histograms]
-b_hist = cv.calcHist(bgr_planes, [0], None, [histSize], histRange, accumulate=accumulate)
-g_hist = cv.calcHist(bgr_planes, [1], None, [histSize], histRange, accumulate=accumulate)
-r_hist = cv.calcHist(bgr_planes, [2], None, [histSize], histRange, accumulate=accumulate)
-## [Compute the histograms]
-
-## [Draw the histograms for B, G and R]
-hist_w = 512
-hist_h = 400
-bin_w = int(round( hist_w/histSize ))
-
-histImage = np.zeros((hist_h, hist_w, 3), dtype=np.uint8)
-## [Draw the histograms for B, G and R]
-
-## [Normalize the result to ( 0, histImage.rows )]
-cv.normalize(b_hist, b_hist, alpha=0, beta=hist_h, norm_type=cv.NORM_MINMAX)
-cv.normalize(g_hist, g_hist, alpha=0, beta=hist_h, norm_type=cv.NORM_MINMAX)
-cv.normalize(r_hist, r_hist, alpha=0, beta=hist_h, norm_type=cv.NORM_MINMAX)
-## [Normalize the result to ( 0, histImage.rows )]
-
-## [Draw for each channel]
-for i in range(1, histSize):
-    cv.line(histImage, ( bin_w*(i-1), hist_h - int(b_hist[i-1]) ),
-            ( bin_w*(i), hist_h - int(b_hist[i]) ),
-            ( 255, 0, 0), thickness=2)
-    cv.line(histImage, ( bin_w*(i-1), hist_h - int(g_hist[i-1]) ),
-            ( bin_w*(i), hist_h - int(g_hist[i]) ),
-            ( 0, 255, 0), thickness=2)
-    cv.line(histImage, ( bin_w*(i-1), hist_h - int(r_hist[i-1]) ),
-            ( bin_w*(i), hist_h - int(r_hist[i]) ),
-            ( 0, 0, 255), thickness=2)
-## [Draw for each channel]
-
-## [Display]
-cv.imshow('Source image', src)
-cv.imshow('calcHist Demo', histImage)
-cv.waitKey()
-## [Display]

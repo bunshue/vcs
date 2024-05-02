@@ -75,6 +75,7 @@ print('111', html_data.url)
 print('222', html_data.text) #打印解码后的返回数据
 print('333', html_data)
 
+print("------------------------------------------------------------")  # 60個
 
 print('有參數 取得網頁資料 b')
 url = 'https://zh.wikipedia.org/w/api.php'
@@ -82,15 +83,18 @@ params = {'format':'json', 'action':'query', 'titles':'椎名林檎', 'prop':'re
 html_data = get_html_data2(url, params)
 pprint.pprint(html_data)
 
+print("------------------------------------------------------------")  # 60個
 
 print('有參數 取得網頁資料 c')
 url = 'https://zh.wikipedia.org/w/api.php'
 params = {'format':'xmlfm', 'action':'query', 'titles':'椎名林檎', 'prop':'revisions', 'rvprop':'content'}
 html_data = get_html_data2(url, params)
-fo = codecs.open('wiki搜尋結果1.html', 'w', 'utf-8')
+fo = codecs.open('tmp_wiki搜尋結果1.html', 'w', 'utf-8')
 #fo = open('wiki搜尋結果222.html', 'w')
 fo.write(html_data.text)
 fo.close()
+
+print("------------------------------------------------------------")  # 60個
 
 print('有參數 取得網頁資料 d')
 search_word = 'lion'
@@ -98,14 +102,11 @@ url = 'https://zh.wikipedia.org/w/api.php'
 params = {'format':'xmlfm', 'action':'query', 'prop':'revisions', 'rvprop':'content'}
 params['titles'] = search_word
 html_data = get_html_data2(url, params)
-fo = codecs.open('wiki搜尋結果2' + search_word + '.html', 'w', 'utf-8')
+fo = codecs.open('tmp_wiki搜尋結果2' + search_word + '.html', 'w', 'utf-8')
 #fo = open('bbbbb'+ search_word + '.html', 'w')
 fo.write(html_data.text)
 fo.close()
 
-print('------------------------------------------------------------')	#60個
-
-'''
 print('------------------------------------------------------------')	#60個
 print('requests 測試 7b')
 
@@ -127,9 +128,8 @@ if html_data:
 else:
     print('無法取得網頁資料')
 
-'''
+print("------------------------------------------------------------")  # 60個
 
-'''
 print('將自訂表頭加入 GET 請求中')
 
 url = 'https://irs.thsrc.com.tw/IMINT'		#台灣高鐵訂票系統
@@ -151,8 +151,6 @@ if html_data:
     #print(html_data.text)
 else:
     print("抓取網頁NG")
-
-'''
 
 print('------------------------------------------------------------')	#60個
 print('requests 測試 9')
@@ -176,7 +174,6 @@ print(html_data.text)
 
 print('------------------------------------------------------------')	#60個
 print('requests 測試 10 很久 timeout')
-'''
 
 print('將查詢參數加入 GET 請求中')
 
@@ -185,7 +182,6 @@ html_data = requests.post("http://httpbin.org/post", data = payload)
 
 print(html_data.url)
 print(html_data.text)
-'''
 
 print('------------------------------------------------------------')	#60個
 print('requests 測試 11')
@@ -207,10 +203,10 @@ print('requests 測試 12')
 
 print('教育部統計處資料 很多')
 url = 'http://stats.moe.gov.tw/files/detail/{}/{}_student.csv'
-'''
+"""
 for year in range(103, 109):
     print(url.format(year, year))
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 print('requests 測試 13')
@@ -224,7 +220,20 @@ print(rows[0])
 print(rows[1])
 
 print('------------------------------------------------------------')	#60個
-print('requests 測試 14')
+print('requests 測試 14a')
+
+import requests
+
+url = "https://www.oxxostudio.tw/img/articles/201803/css-animation-01.gif"
+
+response = requests.get(url)
+
+savefilename = "tmp_" + os.path.basename(url)
+with open(savefilename, "wb") as f:
+    f.write(response.content)
+
+print('------------------------------------------------------------')	#60個
+print('requests 測試 14b')
 
 print('教育部統計處資料')
 url = 'http://stats.moe.gov.tw/files/detail/108/108_student.csv'
@@ -242,13 +251,14 @@ for row in rows[1:]:
         data.append(item)
     except:
         pass
-with open(os.path.basename(url), "w", encoding='utf-8', newline="") as fp:
+
+savefilename = "tmp_" + os.path.basename(url)
+with open(savefilename, "w", encoding='utf-8', newline="") as fp:
     writer = csv.writer(fp)
     writer.writerow(columns[1:5])
     writer.writerows(data)
     
 print("done")
-
 
 print('------------------------------------------------------------')	#60個
 print('requests 測試 15')
@@ -256,7 +266,7 @@ print('requests 測試 15')
 print('教育部統計處資料 很多')
 url = 'http://stats.moe.gov.tw/files/detail/{0}/{0}_student.csv'
 
-'''
+"""
 for year in range(103, 109):
     csvdata = requests.get(url.format(year)).text
     rows = csvdata.split('\n')
@@ -271,14 +281,15 @@ for year in range(103, 109):
             data.append(item)
         except:
             pass
-    filename = os.path.basename(url.format(year))
-    print(filename, "is writing...")
-    with open(filename, "w", encoding='utf-8', newline="") as fp:
+
+    savefilename = "tmp_" + os.path.basename(url.format(year))
+    print(savefilename, "is writing...")
+    with open(savefilename, "w", encoding='utf-8', newline="") as fp:
         writer = csv.writer(fp)
         writer.writerow(columns[1:5])
         writer.writerows(data)
     time.sleep(3)
-'''
+"""
 print("done")
 
 print('------------------------------------------------------------')	#60個
@@ -286,7 +297,7 @@ print('requests 測試 16')
 
 url = "https://www.nkust.edu.tw/p/403-1000-14-{}.php?Lang=zh-tw"
 
-'''many
+"""many
 pages = list()
 for pg in range(1, 4):
     pages.append(url.format(pg))
@@ -300,7 +311,7 @@ for page in pages:
     pprint.pprint(html)
     time.sleep(3)
     print("=========================")
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 print('requests 測試 17')
@@ -317,10 +328,10 @@ print(pages)
 
 for pg_no, page in enumerate(pages, 1):
     html = requests.get(page).text
-    filename = "page-{}.txt".format(pg_no)
-    with open(filename, "wt") as fp:
+    savefilename = "tmp_page-{}.txt".format(pg_no)
+    with open(savefilename, "wt") as fp:
         fp.write(html)
-    print(filename, "儲存完成！")
+    print(savefilename, "儲存完成！")
     time.sleep(3)
     print("=========================")
 
@@ -387,10 +398,10 @@ import requests
 
 url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
 
-'''many
+"""many
 data = requests.get(url).text
 print(data)
-'''
+"""
 
 print('------------------------------------------------------------')	#60個
 print('requests 測試 22')
@@ -417,9 +428,6 @@ for match in matches:
 print('全部資料')
 print(matches)
 
-
-
-
 print('------------------------------------------------------------')	#60個
 
 import requests
@@ -437,13 +445,6 @@ while q != "":
     print('出現次數 : ', html.count(q))
     q = input("請輸入你要查詢的詞：")
 
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 print('抓取網頁中的e-mail地址')
@@ -459,11 +460,7 @@ emails = re.findall(regex, html)
 for email in emails:
     print(email)
 
-
-
-
 print('------------------------------------------------------------')	#60個
-
 
 import requests
 import re
@@ -486,7 +483,6 @@ print('------------------------------------------------------------')	#60個
 
 
 
-
 print('------------------------------------------------------------')	#60個
 
 
@@ -496,13 +492,16 @@ print('------------------------------------------------------------')	#60個
 
 
 
-print('完成')
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 

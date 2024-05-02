@@ -24,6 +24,7 @@ def getkpoints(imag, input1):
 def process(image):
     grey1 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     grey = cv2.equalizeHist(grey1)
+    cv2.imshow('frame', grey)
     keypoints = getkpoints(grey, grey1)
     if keypoints is not None and len(keypoints) > 0:
         for x, y in keypoints:
@@ -31,18 +32,20 @@ def process(image):
     return image
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+#video_filename = 'D:/內視鏡影片/_ims影片2/180824-1025.mp4'
 
-if __name__ == '__main__':
-    cap = cv2.VideoCapture(video_filename)
-    while (cap.isOpened()):
-        ret, frame = cap.read()
-        frame = process(frame)
-        cv2.imshow('frame', frame)
-        if cv2.waitKey(27) & 0xFF == ord('q'):
-            break
-    cap.release()
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+cap = cv2.VideoCapture(video_filename)
+
+while (cap.isOpened()):
+    ret, frame = cap.read()
+    frame = process(frame)
+    #cv2.imshow('frame', frame)
+    if cv2.waitKey(27) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 

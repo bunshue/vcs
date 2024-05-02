@@ -2,6 +2,7 @@ import sys
 
 print("------------------------------------------------------------")  # 60個
 
+'''
 import tkinter as tk
 import tkinter.messagebox
 import tkinter.simpledialog
@@ -26,7 +27,7 @@ window.title(title)
 
 ans = tkinter.messagebox.showinfo(title = 'IMS', message = "IMS show information")
 print("取得 info 結果 : ", ans)
-'''
+"""
 ans = tkinter.messagebox.showwarning('IMS', "IMS show warning")
 print("取得 warning 結果 : ", ans)
 
@@ -56,8 +57,7 @@ print("取得 整數 結果 : ", ans)
 
 ans = tkinter.simpledialog.askfloat("askfloat", "Enter your weight")
 print("取得 浮點數 結果 : ", ans)
-'''
-
+"""
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
@@ -177,46 +177,6 @@ tk.Label(window,image=html_gif).pack()
 print("------------------------------------------------------------")  # 60個
 
 
-from tkinter import messagebox
-
-def myMsg():                    # 按Good Morning按鈕時執行
-    messagebox.showinfo("My Message Box","Python tkinter早安")
-    
-tk.Button(window,text="Good Morning",command=myMsg).pack()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import messagebox
-
-def newfile():
-    messagebox.showinfo("開新檔案","可在此撰寫開新檔案程式碼")
-    
-def savefile():
-    messagebox.showinfo("儲存檔案","可在此撰寫儲存檔案程式碼")
-   
-def about():
-    messagebox.showinfo("程式說明","作者:洪錦魁")
-
-menu = Menu(window)                 # 建立功能表物件
-window.config(menu=menu)
-
-filemenu = Menu(menu)               # 建立檔案功能表
-menu.add_cascade(label="檔案",menu=filemenu)
-filemenu.add_command(label="開新檔案",command=newfile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="儲存檔案",command=savefile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="結束",command=window.destroy)
-
-helpmenu = Menu(menu)               # 建立說明功能表
-menu.add_cascade(label="說明",menu=helpmenu)
-helpmenu.add_command(label="程式說明",command=about)
-
-mainloop()
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 import tkinter.messagebox as msg
@@ -243,19 +203,6 @@ else:
 	
 print('------------------------------------------------------------')	#60個
 
-from tkinter import *
-from tkinter import messagebox
-
-def myMsg():                    # 按Good Morning按鈕時執行
-    messagebox.showinfo("My Message Box","Python tkinter早安")
-    
-window = Tk()
-window.title("ch18_29")         # 視窗標題
-window.geometry("300x160")      # 視窗寬300高160
-
-Button(window,text="Good Morning",command=myMsg).pack()
-
-window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -399,15 +346,77 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+from tkinter import messagebox
+
+def myMsg():
+    messagebox.showinfo("My Message Box","Python tkinter早安")
+    
+window = Tk()
+window.geometry("300x300")
+
+Button(window,text="Good Morning",command=myMsg).pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import messagebox
+messagebox.showinfo("Invoice Complete", "Invoice Complete")
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter as tk
+#from tkinter import messagebox
+tk.messagebox.showinfo("Invoice Complete", "Invoice Complete")
 
 
 print("------------------------------------------------------------")  # 60個
 
 
+
+from tkinter import messagebox
+
+def myMsg():                    # 按Good Morning按鈕時執行
+    messagebox.showinfo("My Message Box","Python tkinter早安")
+    
+tk.Button(window,text="Good Morning",command=myMsg).pack()
+
 print("------------------------------------------------------------")  # 60個
 
+from tkinter import messagebox
 
-print("------------------------------------------------------------")  # 60個
+def newfile():
+    messagebox.showinfo("開新檔案","可在此撰寫開新檔案程式碼")
+    
+def savefile():
+    messagebox.showinfo("儲存檔案","可在此撰寫儲存檔案程式碼")
+   
+def about():
+    messagebox.showinfo("程式說明","作者:洪錦魁")
+
+menu = Menu(window)                 # 建立功能表物件
+window.config(menu=menu)
+
+filemenu = Menu(menu)               # 建立檔案功能表
+menu.add_cascade(label="檔案",menu=filemenu)
+filemenu.add_command(label="開新檔案",command=newfile)
+filemenu.add_separator()            # 增加分隔線
+filemenu.add_command(label="儲存檔案",command=savefile)
+filemenu.add_separator()            # 增加分隔線
+filemenu.add_command(label="結束",command=window.destroy)
+
+helpmenu = Menu(menu)               # 建立說明功能表
+menu.add_cascade(label="說明",menu=helpmenu)
+helpmenu.add_command(label="程式說明",command=about)
+
+mainloop()
+
+
 
 print("------------------------------------------------------------")  # 60個
 

@@ -27,13 +27,11 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-
-import cv2
-
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 img = cv2.imread(filename)
 fliped_img = cv2.flip(img, -1)
+
 cv2.imshow("Koala:fliped", fliped_img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -41,8 +39,6 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print('播完影片不會有錯誤訊息')
-
-import cv2
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
@@ -58,10 +54,7 @@ while(cap.isOpened()):
 cap.release()
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
-
-import cv2
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
@@ -75,10 +68,7 @@ codec = (chr(fourcc&0xFF)+chr((fourcc>>8)&0xFF)+
         chr((fourcc>>16)&0xFF)+chr((fourcc>>24)&0xFF))
 print("Codec編碼:", codec)
 
-
 print("------------------------------------------------------------")  # 60個
-
-import cv2
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
@@ -94,10 +84,7 @@ while True:
 print("總影格數 = ", frame_count)
 cap.release()
 
-
 print("------------------------------------------------------------")  # 60個
-
-import cv2
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
@@ -109,8 +96,6 @@ print("FPS =", fps)
 cap.release()
 
 print("------------------------------------------------------------")  # 60個
-
-import cv2
 
 cap = cv2.VideoCapture(0)
 
@@ -129,11 +114,9 @@ while(cap.isOpened()):
 cap.release()
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("錄影")
-import cv2
 
 cap = cv2.VideoCapture(0)
 

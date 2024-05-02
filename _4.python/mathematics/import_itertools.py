@@ -369,6 +369,18 @@ print(_newname())
 
 print("------------------------------------------------------------")  # 60個
 
+import itertools
+
+print('test itertools')
+local_y_range = range(10)
+local_x_range = range(10)
+coords = list(itertools.product(local_x_range, local_y_range))
+random.shuffle(coords)
+print(coords)
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

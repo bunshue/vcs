@@ -54,10 +54,7 @@ menu_button['menu']= button_sub_menu
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
 
 def add(): 
     string3.set(eval(string1.get()) + eval(string2.get()))
@@ -124,8 +121,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -174,9 +169,6 @@ menu3.add_command(label = "About...", command = callback)
 
 
 '''
-menu
-import tkinter as tk
-
 window = tk.Tk()
 
 def supermode():
@@ -193,12 +185,7 @@ menu.add_cascade(label = 'Operation', menu = menu1)
 window.config(menu = menu)
 '''
 
-
-
 '''
-
-import tkinter as tk
-
 import tkinter.filedialog as fd
 
 window = tk.Tk()
@@ -311,7 +298,6 @@ mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
 from tkinter import filedialog, messagebox
 
 base = tk.Tk()
@@ -369,78 +355,7 @@ base.config(menu=menubar)
 
 base.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-menubar = tk.Menu(win)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-win.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter as tk
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
 
 win = tk.Tk()
 win.title("")
@@ -463,9 +378,74 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print("menu2.py")
+win = tk.Tk()
+win.title("")
+win.geometry('300x200')
 
-import tkinter as tk
+menubar = tk.Menu(win,tearoff=0)
+win.config(menu = menubar)
+file_menu = tk.Menu(menubar,tearoff=0)
+menubar.add_cascade(label = "檔案", menu = file_menu)
+file_menu.add_command(label = "開啟舊檔")  
+edit_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "編輯", menu = edit_menu)
+edit_menu.add_command(label = "復原") 
+run_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "執行", menu =run_menu)
+run_menu.add_command(label = "編譯及執行本程式")
+window_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "視窗", menu = window_menu)
+online_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "線上說明", menu = online_menu)
+win.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+win = tk.Tk()
+win.title("")
+win.geometry('300x200')
+
+menubar = tk.Menu(win,tearoff=0)
+win.config(menu = menubar)
+file_menu = tk.Menu(menubar,tearoff=0)
+menubar.add_cascade(label = "檔案", menu = file_menu)
+file_menu.add_command(label = "開啟舊檔")  
+edit_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "編輯", menu = edit_menu)
+edit_menu.add_command(label = "復原") 
+run_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "執行", menu =run_menu)
+run_menu.add_command(label = "編譯及執行本程式")
+window_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "視窗", menu = window_menu)
+online_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "線上說明", menu = online_menu)
+
+win.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+
+win = tk.Tk()
+win.title("")
+win.geometry('300x200')
+
+menubar = tk.Menu(win)
+win.config(menu = menubar)
+file_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "檔案", menu = file_menu)
+edit_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "編輯", menu = edit_menu)
+run_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "執行", menu =run_menu)
+window_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "視窗", menu = window_menu)
+online_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "線上說明", menu = online_menu)
+
+win.mainloop()
+
+print("------------------------------------------------------------")  # 60個
 
 win = tk.Tk()
 win.title("")
@@ -491,13 +471,10 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print("menu3.py")
-
-import tkinter as tk
-
 win = tk.Tk()
 win.title("")
 win.geometry('300x200')
+
 menubar = tk.Menu(win,tearoff=0)
 win.config(menu = menubar)
 file_menu = tk.Menu(menubar,tearoff=0)
@@ -594,8 +571,8 @@ window.config(menu=menubar)
 ----------- 以下是參考的程式架構 --------
 """
 """ TBD
-import tkinter as tk
 import tkinter.filedialog as fd
+
 window = tk.Tk()
 def open():
 	filename = fd.askopenfilename()
@@ -619,8 +596,6 @@ window.mainloop()
 """
 print("------------------------------------------------------------")  # 60個
 
-
-import tkinter as tk
 import tkinter.messagebox as tkmessagebox
 import tkinter.font as tkfont
 def Cal():
@@ -655,10 +630,11 @@ main()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
 import tkinter.messagebox as tkmessagebox
 import tkinter.filedialog as tkfiledialog
 import tkinter.font as tkfont
+
+
 def Cal():
     options = {}
     options['filetypes'] = [("allfiles","*"),("text","*.txt")]
@@ -741,10 +717,8 @@ def main():
     win.mainloop()
 main()
 
-
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfilename
 
@@ -838,7 +812,6 @@ window.config(menu=menubar)
 
 print('------------------------------------------------------------')	#60個
 
-import tkinter as tk
 import tkinter.filedialog as fd
 
 window = tk.Tk()
@@ -866,12 +839,7 @@ window.config(menu=menubar)
 
 window.mainloop()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
 
 class Application(tk.Frame):
     def __init__(self, master=None):

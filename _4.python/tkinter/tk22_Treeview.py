@@ -7,46 +7,75 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 window.geometry('800x400')
-window.title('Treeview Example')
+window.title('Treeview範例')
 
-column_name = '序號', '英文名', '中文名', '體重'  #tuple
+#設定 Treeview 之標題
+column_name = ('第0欄', '第1欄', '第2欄', '第3欄') #tuple
 print(type(column_name))
 print(column_name)
-treeview = ttk.Treeview(window, column = column_name, show = "headings")
-#treeview = ttk.Treeview(window, columns = ('序號', '英文名', '中文名', '體重'), show = 'headings')
 
-'''
+treeview = ttk.Treeview(window, columns = column_name, show = "headings")
+
+#加入標題方法一
+treeview.heading('第0欄', text = '第0欄')
+treeview.heading('第1欄', text = '第1欄')
+treeview.heading('第2欄', text = '第2欄')
+treeview.heading('第3欄', text = "第3欄")
+
+""" 加入標題方法二
 for col_name in column_name:
     treeview.heading(col_name, text = col_name)
-'''
-treeview.heading('序號', text = '序號')
-treeview.heading('英文名', text = '英文名')
-treeview.heading('中文名', text = '中文名')
-treeview.heading('體重', text = '體重')
+"""
 
+#treeview.grid(row = 5, column = 0, columnspan = 3, padx = 20, pady = 10)#another
 treeview.pack(fill = 'both', expand = True)
 #treeview.pack(expand = True, fill = 'y') another
 
-animal1 = 1, 'mouse', '老鼠', 1
-animal2 = 2, 'panda', '貓熊', 123
-animal3 = 3, 'penguin', '企鵝', 29
-animal4 = 4, 'lion', '獅子', 270
-treeview.insert('', tk.END, values = animal1)   #插入在最後
-treeview.insert('', tk.END, values = animal2)   #插入在最後
-treeview.insert('', tk.END, values = animal3)   #插入在最後
-treeview.insert('', tk.END, values = animal4)   #插入在最後
-treeview.insert(parent = '', index = 0, values = animal1) #插入在index = 0
-treeview.insert(parent = '', index = 0, values = animal2) #插入在index = 0
-treeview.insert(parent = '', index = 0, values = animal3) #插入在index = 0
-treeview.insert(parent = '', index = 0, values = animal4) #插入在index = 0
+animal1 = 1, 'aaaa', 'AAAA', 111
+animal2 = 2, 'bbbb', 'BBBB', 222
+animal3 = 3, 'cccc', 'CCCC', 333
+animal4 = 4, 'dddd', 'DDDD', 444
 
-treeview.insert(parent = '', index = 0, values = (3, 'aaa', 'bbb', 'ccc')) #插入在index = 0
+print('加入項目到 Treeview, 插入在最後 4 筆')
+treeview.insert('', tk.END, values = animal1)   #加入項目到 Treeview, 插入在最後
+treeview.insert('', tk.END, values = animal2)   #加入項目到 Treeview, 插入在最後
+treeview.insert('', tk.END, values = animal3)   #加入項目到 Treeview, 插入在最後
+treeview.insert('', tk.END, values = animal4)   #加入項目到 Treeview, 插入在最後
+
+print('加入項目到 Treeview, 插入在 index = 0')
+treeview.insert(parent = '', index = 0, values = animal3) #插入在index = 0
+treeview.insert(parent = '', index = 0, values = animal3) #插入在index = 0
+treeview.insert(parent = '', index = 0, values = animal3) #插入在index = 0
+treeview.insert(parent = '', index = 0, values = animal3) #插入在index = 0
+treeview.insert('', 0, values = animal2) #插入在index = 0
+
+print('加入項目到 Treeview, 插入在最後 1 筆')
 treeview.insert(parent = '', index = tk.END, values = (5, 'XXXXX', 'YYYYY', 'ZZZZZ'))      #插入在最後
 
-# events
+"""
+item = treeview.insert("", tk.END, text="Item 1")
+treeview.insert(item, tk.END, text="Subitem 1")
+"""
+
+def show_info():
+    """
+    # Get the text of the item whose Id is stored in `my_iid`.
+    text = treeview.item(my_iid, option="text")
+    # Display it within a message box.
+    messagebox.showinfo(title="Item Info", message=text)
+    
+    x=treeview.get_children()
+    for item in x:
+        print(x)
+    """
+    print ('show_info')
+    for item in treeview.selection():
+        item_text = treeview.item(item,"values")
+        print(item_text)
+
 def item_select(_):
     print('你點選了', treeview.selection())
     for i in treeview.selection():
@@ -58,10 +87,37 @@ def delete_items(_):
     for i in treeview.selection():
         treeview.delete(i)
 
+def treeview_bind_function1(_):
+    print('AAAA')
+
+def treeview_bind_function2(_):
+    print('BBBB')
+
+def treeview_bind_function3(_):
+    print('CCCC')
+
+def treeview_bind_function4(_):
+    print('DDDD')
+
 treeview.bind('<<TreeviewSelect>>', item_select)
 treeview.bind('<Delete>', delete_items)
 
+treeview.bind('<<TreeviewOpen>>', treeview_bind_function1)
+treeview.bind('<<TreeviewClose>>', treeview_bind_function2)
+treeview.bind('<1>', treeview_bind_function3)
+
+treeview.bind('<ButtonRelease-1>', treeview_bind_function4)
+
+
+#刪除 Treeview 內的所有項目
+#treeview.delete(*treeview.get_children())
+
+button = ttk.Button(text="Show info", command=show_info)
+button.pack()
+
 window.mainloop()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -131,5 +187,142 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+import tkinter as tk
+from tkinter import ttk
+
+root = tk.Tk()
+root.title("Treeview in Tk")
+treeview = ttk.Treeview()
+
+print('加入項目到 Treeview, 插入在最後 1 筆')
+item = treeview.insert(parent = '', index = tk.END, text="主項目")#插入在最後
+print('加入子項目')
+subitem = treeview.insert(item, tk.END, text="加入子項目")
+print('加入子項目')
+treeview.insert(subitem, tk.END, text="加入孫項目")
+
+treeview.pack()
+root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+import tkinter as tk
+from tkinter import messagebox, ttk
+
+
+root = tk.Tk()
+root.title("Treeview in Tk")
+treeview = ttk.Treeview()
+my_iid = "unique_id"
+treeview.insert("", tk.END, text="Item 1", iid=my_iid)
+treeview.pack()
+
+button = ttk.Button(text="Show info", command=show_info)
+button.pack()
+
+root.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter
+from tkinter import ttk  # 导入内部包
+
+li = ['王记','12','男']
+root = tkinter.Tk()
+root.title('测试')
+tree = ttk.Treeview(root,columns=['1','2','3'],show='headings')
+tree.column('1',width=100,anchor='center')
+tree.column('2',width=100,anchor='center')
+tree.column('3',width=100,anchor='center')
+tree.heading('1',text='姓名')
+tree.heading('2',text='学号')
+tree.heading('3',text='性别')
+tree.insert('','end',values=li)
+tree.grid()
+
+root.mainloop()
+
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+print('标题点击排序')
+
+import random
+from tkinter import ttk
+from tkinter import *
+ 
+root = Tk()     # 初始旷的声明
+columns=("a","b","c")
+treeview=ttk.Treeview(root,height=18,show="headings",columns=columns )#表格 
+ 
+treeview.column('a', width=50, anchor='center') 
+treeview.column('b', width=100, anchor='center') 
+treeview.column('c', width=80, anchor='center')
+treeview.heading('a', text='列1')
+treeview.heading('b', text='列2')
+treeview.heading('c', text='列3')
+treeview.pack(side=LEFT,fill=BOTH)
+for i in range(10):
+    treeview.insert('',i,values=(str(random.randint(0,9)),str(random.randint(0,9)),str(random.randint(0,9))))
+ 
+ 
+def treeview_sort_column(tv, col, reverse):#Treeview、列名、排列方式
+    l = [(tv.set(k, col), k) for k in tv.get_children('')]
+    print(tv.get_children(''))
+    l.sort(reverse=reverse)#排序方式
+    # rearrange items in sorted positions
+    for index, (val, k) in enumerate(l):#根据排序后索引移动
+        tv.move(k, '', index)
+        print(k)
+    tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))#重写标题，使之成为再点倒序的标题
+ 
+'''
+#莫名其妙？？？？写循环的话只有最后一列管用,看论坛说的好像是python2.7管用
+for col in columns:
+    treeview.heading(col, text=col, command=lambda: treeview_sort_column(treeview, col, False))
+'''
+ 
+'''
+#基本用法（上边注释的只有最后一列管用、索性手工试验一下可用性，证实可行）
+treeview.heading('a', text='123', command=lambda: treeview_sort_column(tree, 'a', False))#重建标题，添加控件排序方法
+treeview.heading('b', text='111', command=lambda: treeview_sort_column(tree, 'b', False))#重建标题，添加控件排序方法
+treeview.heading('c', text='223', command=lambda: treeview_sort_column(tree, 'c', False))#重建标题，添加控件排序方法
+'''
+ 
+#这个代码对于python3就管用了
+for col in columns:#给所有标题加（循环上边的“手工”）
+    treeview.heading(col, text=col, command=lambda _col=col: treeview_sort_column(treeview, _col, False))
+ 
+root.mainloop()
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+"""
+Treeview之各种点击事件
+
+鼠标左键单击按下	1/Button-1/ButtonPress-1
+鼠标左键单击松开	ButtonRelease-1
+鼠标右键单击	3
+鼠标左键双击	Double-1/Double-Button-1
+鼠标右键双击	Double-3
+鼠标滚轮单击	2
+鼠标滚轮双击	Double-2
+鼠标移动	B1-Motion
+鼠标移动到区域	Enter
+鼠标离开区域	Leave
+获得键盘焦点	FocusIn
+失去键盘焦点	FocusOut
+键盘事件	Key
+回车键	Return
+控件尺寸变	Configure
+
+"""

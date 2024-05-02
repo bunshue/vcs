@@ -487,6 +487,27 @@ for i in range(1, 10000, 1000):
 
 print("------------------------------------------------------------")  # 60個
 
+degrees = [x * 30 for x in range(13)]
+for d in degrees:
+    rad = math.radians(d)
+    sin = math.sin(rad)
+    cos = math.cos(rad)
+    print(
+        "角度{0:3d}, 弧度{1:5.2f}, sin{2:3d}={3:5.2f}, cos{4:3d}={5:5.2f}".format(
+            d, rad, d, sin, d, cos
+        )
+    )
+
+print("------------------------------------------------------------")  # 60­э
+
+print("arctan 3.4")
+rad = np.arctan(3.4)
+print(rad)
+th = np.degrees(rad)
+print(th)
+
+print("------------------------------------------------------------")  # 60­э
+
 
 
 

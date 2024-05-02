@@ -17,11 +17,14 @@ from PIL import Image, ImageTk
 
 window = tk.Tk()
 
-img = Image.open(filename)
-image = ImageTk.PhotoImage(img)
+# 檔案 => PIL影像
+image0 = Image.open(filename)
 
-canvas1 = tk.Canvas(window, width=img.size[0]+40, height=img.size[1]+30)
-canvas1.create_image(20,15,anchor=tk.NW,image=image)
+# PIL影像 => ImageTk影像
+image1 = ImageTk.PhotoImage(image0)
+
+canvas1 = tk.Canvas(window, width=image0.size[0]+40, height=image0.size[1]+30)
+canvas1.create_image(20,15,anchor=tk.NW,image=image1)
 canvas1.pack(fill=tk.BOTH,expand=True)
 
 window.mainloop()
@@ -47,9 +50,6 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 from PIL import ImageTk, Image
 
 window = tk.Tk() #建立主視窗物件
@@ -69,7 +69,8 @@ lblc = tk.Label(window, text = 'Orange',
 tk.mainloop()
 """
 
-photo = ImageTk.PhotoImage(file = '001.png')#建立圖片
+# 檔案 => ImageTk影像
+photo = ImageTk.PhotoImage(file = '001.png')
 
 #標籤 - bg 設背景色
 t1 = tk.Label(window, text = 'Hello\n Python', bg = '#78A', 
@@ -97,13 +98,17 @@ from PIL import ImageTk, Image
 
 window = tk.Tk()
 
+# 檔案 => ImageTk影像
 pic_image = ImageTk.PhotoImage(file=filename)
+
 lab1 = tk.Label(window,image=pic_image).pack(side="right")
 
-poem_text = """滕王高閣臨江渚，佩玉鳴鸞罷歌舞。
-畫棟朝飛南浦雲，珠簾暮卷西山雨。
-閒雲潭影日悠悠，物換星移幾度秋。
-閣中帝子今何在？檻外長江空自流。"""
+poem_text = """
+故人西辭黃鶴樓，
+煙花三月下揚州。
+孤帆遠影碧空盡，
+唯見長江天際流。
+"""
 
 lab2 = tk.Label(window,text=poem_text,bg="lightyellow",
              padx=10).pack(side="left")
@@ -115,10 +120,9 @@ lab2 = tk.Label(window,text=poem_text,bg="lightyellow",
 
 tk.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_icon/Recording.bmp'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 from PIL import ImageTk, Image
 
@@ -131,7 +135,9 @@ def msgShow():
     
 label = tk.Label(window)               # 標籤內容
 
+# 檔案 => ImageTk影像
 sun_gif = ImageTk.PhotoImage(file=filename)
+
 btn = tk.Button(window,image=sun_gif,command=msgShow)
 
 label.pack()                      
@@ -152,7 +158,9 @@ def msgShow():
     
 label = tk.Label(window)               # 標籤內容
 
+# 檔案 => ImageTk影像
 sun_gif = ImageTk.PhotoImage(file=filename)
+
 btn = tk.Button(window,image=sun_gif,command=msgShow,
              text="Click me",compound=tk.TOP)
 
@@ -174,7 +182,9 @@ def msgShow():
     
 label = tk.Label(window)               # 標籤內容
 
+# 檔案 => ImageTk影像
 sun_gif = ImageTk.PhotoImage(file=filename)
+
 btn = tk.Button(window,image=sun_gif,command=msgShow,
              text="Click me",compound=tk.CENTER)
 
@@ -185,15 +195,13 @@ tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-print("------------------------------------------------------------")  # 60個
-
 window = tk.Tk()
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/brown.gif'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => ImageTk影像
 html_gif = ImageTk.PhotoImage(file=filename)
+
 tk.Label(window,image=html_gif).pack()
 
 window.mainloop()
@@ -202,18 +210,21 @@ print("------------------------------------------------------------")  # 60個
     
 window = tk.Tk()
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/brown.gif'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => ImageTk影像
 sselogo = ImageTk.PhotoImage(file=filename)
+
 lab1 = tk.Label(window,image=sselogo).pack(side="right")
 
-sseText = """
-功蓋三分國，
-名成八陣圖。
-江流石不轉，
-遺恨失吞吳。
+poem_text = """
+故人西辭黃鶴樓，
+煙花三月下揚州。
+孤帆遠影碧空盡，
+唯見長江天際流。
 """
-lab2 = tk.Label(window,text=sseText,bg="lightyellow",
+
+lab2 = tk.Label(window,text=poem_text,bg="lightyellow",
              padx=10).pack(side="left")
 
 window.mainloop()
@@ -222,18 +233,21 @@ print("------------------------------------------------------------")  # 60個
     
 window = tk.Tk()
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/brown.gif'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => ImageTk影像
 sselogo = ImageTk.PhotoImage(file=filename)
+
 lab1 = tk.Label(window,image=sselogo).pack(side="right")
 
-sseText = """
-功蓋三分國，
-名成八陣圖。
-江流石不轉，
-遺恨失吞吳。
+poem_text = """
+故人西辭黃鶴樓，
+煙花三月下揚州。
+孤帆遠影碧空盡，
+唯見長江天際流。
 """
-lab2 = tk.Label(window,text=sseText,bg="lightyellow",
+
+lab2 = tk.Label(window,text=poem_text,bg="lightyellow",
              justify=tk.LEFT,padx=10).pack(side="left")
 
 window.mainloop()
@@ -249,9 +263,11 @@ window = tk.Tk()
 
 label = tk.Label(window)               # 標籤內容
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/brown.gif'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => ImageTk影像
 sun_gif = ImageTk.PhotoImage(file=filename)
+
 btn = tk.Button(window,image=sun_gif,command=msgShow)
 
 label.pack()                      
@@ -270,9 +286,11 @@ window = tk.Tk()
 
 label = tk.Label(window)               # 標籤內容
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/brown.gif'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => ImageTk影像
 sun_gif = ImageTk.PhotoImage(file=filename)
+
 btn = tk.Button(window,image=sun_gif,command=msgShow,
              text="Click me",compound=tk.TOP)
 
@@ -292,9 +310,11 @@ window = tk.Tk()
 
 label = tk.Label(window)               # 標籤內容
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/brown.gif'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => ImageTk影像
 sun_gif = ImageTk.PhotoImage(file=filename)
+
 btn = tk.Button(window,image=sun_gif,command=msgShow,
              text="Click me",compound=tk.CENTER)
 
@@ -305,21 +325,22 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
 window = tk.Tk()
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/dog.gif'
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+# 檔案 => ImageTk影像
 pic = ImageTk.PhotoImage(file=filename)
+
 label1 = tk.Label(window,image=pic).pack(side="right")
 
-description ="""
+poem_text = """
 故人西辭黃鶴樓，
 煙花三月下揚州。
 孤帆遠影碧空盡，
 唯見長江天際流。
 """
-label2 = tk.Label(window,text=description,bg="lightyellow",
+label2 = tk.Label(window,text=poem_text,bg="lightyellow",
              justify=tk.LEFT,padx=10).pack(side="left")
 
 window.mainloop()
@@ -327,11 +348,10 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -339,4 +359,4 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
+print("------------------------------------------------------------")  # 60個

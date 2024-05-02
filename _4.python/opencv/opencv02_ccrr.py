@@ -40,12 +40,10 @@ filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.j
 image = cv2.imread(filename)  # 讀取本機圖片
 
 # 裁切區域的 x 與 y 座標（左上角）
-x_st = 100
-y_st = 100
+x_st, y_st = 100, 100
 
 # 裁切區域的長度與寬度
-w = 250
-h = 250
+w, h = 250, 250
 
 # 裁切圖片
 crop_image = image[y_st : y_st + h, x_st : x_st + w]

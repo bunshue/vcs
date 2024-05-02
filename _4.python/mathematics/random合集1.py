@@ -1403,7 +1403,20 @@ for i in range(numberOfDice, (numberOfDice * 6) + 1):
 
 
 
+print("------------------------------------------------------------")  # 60個
 
+
+
+print('test random.triangular')
+
+for _ in range(10):
+    print(random.triangular(1, 5))
+
+print('test random.uniform')
+for _ in range(10):
+    print(random.uniform(0.2, 0.9))
+
+print("------------------------------------------------------------")  # 60個
 
 
 

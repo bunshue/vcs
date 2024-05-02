@@ -3,7 +3,7 @@ import sys
 import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk, Image
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 root = tk.Tk()  # 產生 tkinter 視窗
@@ -13,9 +13,7 @@ print('取得目前螢幕大小')
 print(width, height)
 root.destroy()  # 關閉視窗
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("09-TkUI9Entry-python2")
 
@@ -267,6 +265,7 @@ import random as r
 win = tk.Tk()
 win.geometry("400x300")
 win.title("Guess Number")
+
 ans=r.randint(0,100)
 #print(ans)
 #input guess number
@@ -376,41 +375,6 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 
-def msgShow():
-    label["text"] = "I love Python"
-    label["bg"] = "lightyellow"
-    label["fg"] = "blue"
-    
-label = tk.Label(window)               # 標籤內容             
-btn = tk.Button(window,text="Message",command=msgShow)
-
-label.pack()                      
-btn.pack()
-
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-def msgShow():
-    label["text"] = "I love Python"
-    label["bg"] = "lightyellow"
-    label["fg"] = "blue"
-    
-label = tk.Label(window)               # 標籤內容             
-btn1 = tk.Button(window,text="Message",width=15,command=msgShow)
-btn2 = tk.Button(window,text="Exit",width=15,command=window.destroy)
-label.pack()                      
-btn1.pack(side=tk.LEFT)                # 按鈕1
-btn2.pack(side=tk.RIGHT)               # 按鈕2
-
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
 def add():                                  # 加法運算
     n3.set(n1.get()+n2.get())
     
@@ -435,8 +399,8 @@ print("------------------------------------------------------------")  # 60個
 
 window=tk.Tk()
 tk.Label(window, text='紅', bg='red', width=20).pack()
-tk.Label(window, text='藍', bg='green', width=20).pack()
-tk.Label(window, text='綠', bg='blue', width=20).pack()
+tk.Label(window, text='綠', bg='green', width=20).pack()
+tk.Label(window, text='藍', bg='blue', width=20).pack()
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
@@ -527,12 +491,10 @@ class wndApp(Frame):
         today = date.today()
         print('Day is', today)
         
-# 呼叫Tk()建構函式產生主視窗
 wnd = tk.Tk()
 # 實體化wndApp類別，以主視窗物件為引數做初始化動作
 # 然後加入Frame元件，再由Frame加入兩個按鈕
 work = wndApp(ruler = wnd)
-# 讓視窗程式開始做訊息化輸出
 work.mainloop()
 
 print('------------------------------------------------------------')	#60個
@@ -546,19 +508,15 @@ class appWork(Frame):
 #產生Frame子類別物件
 work = appWork()
 
-# 顯示於視窗標題列
 work.master.title('Python GUI')
 work.master.maxsize(500, 250)
 
-# 視窗訊息初始化
 work.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-# 呼叫Tk()建構式產生主視窗
 wnd = tk.Tk()
 
-# 顯示主視窗標題列的文字
 wnd.title('Button state...')
 
 #Button屬性state的常數值
@@ -572,11 +530,8 @@ wnd.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-# 呼叫Tk()建構式產生主視窗
 root = tk.Tk()
-# 方法title()顯示主視窗標題列的文字
 root.title('秒數計算中...')
-# 呼叫geometry()設視窗大小
 root.geometry('100x100+150+150')
 
 counter = 0 #儲存數值
@@ -642,18 +597,6 @@ button3.place(x=100, y=60)
 
 print('------------------------------------------------------------')	#60個
 
-tk.Label(window, text='紅', bg='red', width=20).pack()
-tk.Label(window, text='綠', bg='green', width=20).pack()
-tk.Label(window, text='藍', bg='blue', width=20).pack()
-
-print('------------------------------------------------------------')	#60個
-
-string = tk.StringVar()
-entry = tk.Entry(window, textvariable=string).pack()
-label = tk.Label(window, textvariable=string).pack()
-
-print('------------------------------------------------------------')	#60個
-
 window = tk.Tk()
 lab1 = tk.Label(window,text="標籤1",relief="raised")
 lab2 = tk.Label(window,text="標籤2",relief="raised")
@@ -713,23 +656,6 @@ lab4.grid(row=0,column=3)
 lab5.grid(row=1,column=0)
 lab7.grid(row=1,column=2)
 lab8.grid(row=1,column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-def msgShow():
-    label["text"] = "I love Python"
-    label["bg"] = "lightyellow"
-    label["fg"] = "blue"
-    
-window = tk.Tk()
-
-label = tk.Label(window)               # 標籤內容             
-btn = tk.Button(window,text="Message",command=msgShow)
-
-label.pack()                      
-btn.pack()
 
 window.mainloop()
 
@@ -960,10 +886,8 @@ divide.grid(column=0,row=3)
 
 win.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
-# 呼叫Tk()建構式產生主視窗
 window = tk.Tk()
 
 counter = 0 #儲存數值
@@ -989,7 +913,6 @@ display(show)
 # 設定按鈕
 btnStop = tk.Button(window, text = '離開', width = 20, command = window.destroy)
 btnStop.pack()
-
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
@@ -1190,7 +1113,6 @@ entry.insert("end"," 莫忘初心")
 entry.delete(0, 2)  #刪除前面兩個字元
 entry.pack(padx=20, pady=10)
 
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
    
 btnvar = tk.StringVar() 
@@ -1336,7 +1258,6 @@ tk.Button(window,text="進一步了解", command=more).pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2144,14 +2065,11 @@ btnShow = tk.Button(window, text = '購買明細', font = ft2,
 #btnShow.grid(row = 2, column = 2, pady = 4)
 btnShow.pack()
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 import tkinter.messagebox
 tkinter.messagebox.showinfo("Error","This word is not present in our lexicon\nDouble check it.")
-
 tkinter.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -2159,34 +2077,5 @@ print('------------------------------------------------------------')	#60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
 
