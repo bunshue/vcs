@@ -211,9 +211,10 @@ while cap.isOpened():
     results = face_mesh.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     if results.multi_face_landmarks:
+        print('aaaa')
         for face_landmarks in results.multi_face_landmarks:
             mp_drawing.draw_landmarks(image=image, landmark_list=face_landmarks, 
-                connections=mp_face_mesh.FACE_CONNECTIONS, landmark_drawing_spec=drawing_spec,
+                connections=mp_face_mesh.FACEMESH_CONTOURS, landmark_drawing_spec=drawing_spec,
                 connection_drawing_spec=drawing_spec)
     cv2.imshow('image', image)
     if cv2.waitKey(1) & 0xFF == ord('q'):

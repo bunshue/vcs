@@ -553,6 +553,11 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 #檔案 : C:\_git\vcs\_4.python\__code\Python實戰聖經\ch12\holistic_cam.py
+"""
+mpFaceMesh.FACE_CONNECTIONS
+換成：
+mpFaceMesh.FACEMESH_CONTOURS
+"""
 
 import cv2
 import mediapipe as mp
@@ -579,7 +584,6 @@ while cap.isOpened():
 
 cap.release()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 
