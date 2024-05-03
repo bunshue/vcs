@@ -26,107 +26,10 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-img = cv2.imread(filename)
-fliped_img = cv2.flip(img, -1)
-
-cv2.imshow("Koala:fliped", fliped_img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print('播完影片不會有錯誤訊息')
-
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
-
-cap = cv2.VideoCapture(video_filename)
-
-while(cap.isOpened()):
-  ret, frame = cap.read()
-  if ret:
-      cv2.imshow("Frame", frame)
-  if cv2.waitKey(1) & 0xFF == ord("q"):
-      break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
-
-cap = cv2.VideoCapture(video_filename)
-
-width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-print("影格尺寸:", width, "x", height)
-
-#取得Codec編碼
-fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
-codec = (chr(fourcc&0xFF)+chr((fourcc>>8)&0xFF)+
-        chr((fourcc>>16)&0xFF)+chr((fourcc>>24)&0xFF))
-print("Codec編碼:", codec)
-
-fps = cap.get(cv2.CAP_PROP_FPS)
-print("FPS =", fps)
-
-frame_count = 0
-while True:
-  ret, frame = cap.read()
-  if not ret:
-      break
-  frame_count = frame_count + 1
-
-print("總影格數 = ", frame_count)
-cap.release()
-
-print("------------------------------------------------------------")  # 60個
-
-cap = cv2.VideoCapture(0)
-
-#更改視訊的解析度
-#Webcam有支援的模式 以下的設定才會有用
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-cap.set(cv2.CAP_PROP_FPS, 30)
-
-while(cap.isOpened()):
-  ret, frame = cap.read()
-  cv2.imshow("Frame", frame)      
-  if cv2.waitKey(1) & 0xFF == ord("q"):
-      break
-  
-cap.release()
-cv2.destroyAllWindows()
-'''
-print("------------------------------------------------------------")  # 60個
-
-print("錄影")
-
-cap = cv2.VideoCapture(0)
-
-#建立視訊編碼 fourcc
-fourcc = cv2.VideoWriter_fourcc(*"XVID")
-fps = 20
-size = (640,480)
-out = cv2.VideoWriter("tmp_output.avi", fourcc, fps, size)
-
-while(cap.isOpened()):
-  ret, frame = cap.read()
-  if ret == True:
-    out.write(frame)
-    cv2.imshow("Frame", frame)
-    if cv2.waitKey(1) & 0xFF == ord("q"):
-      break
-  else:
-    break
-
-cap.release()
-out.release()
-cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -136,8 +39,8 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -155,16 +58,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-
-視訊編碼的名稱、編碼字串、副檔名
-
-編碼名稱	編碼字串	視訊檔副檔名
-YUV		*'I420'		.avi
-MPEG-1		*'PIMT'		.avi
-MPEG-4		*'XVID'		.avi
-MP4		*'MP4V'		.mp4
-Ogg Vorbis	*'THEO'		.ogv
-
-"""

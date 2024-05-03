@@ -51,7 +51,7 @@ image = np.zeros((H, W, 3), dtype="uint8")
 
 print("畫直線")
 color = (0, 0, 255)  # B G R
-line_width = 10
+line_width = 10  # 線寬
 x1, y1 = 50, 50
 x2, y2 = 250, 50
 # 畫直線 起 終 色 寬
@@ -76,7 +76,7 @@ cv2.rectangle(image, (x1, y1), (x2, y2), color, line_width)
 
 print("畫矩形 實心")
 color = (0, 255, 0)  # B G R
-line_width = -1
+line_width = -1  # -1, 填滿
 # 畫矩形 左上 右下 色 寬(-1, 填滿)
 w, h = 150 - 50, 100 - 50
 # 矩形之左上點
@@ -124,10 +124,12 @@ px4, py4 = x_st, y_st + dd * 3
 px5, py5 = x_st + dd, y_st + dd * 2
 px6, py6 = x_st + dd, y_st + dd
 
+line_width = 3  # 線寬
+
 pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6]])
 # pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6]], np.int32)
 
-cv2.polylines(image, [pts], True, (0, 0, 255), 2)  # True表示封口
+cv2.polylines(image, [pts], True, (0, 0, 255), line_width)  # True表示封口
 # True: 頭尾相連, False: 頭尾不相連
 
 x_st, y_st = 320, 20 + 20
@@ -144,7 +146,7 @@ pts = np.array(
 )  # 產生座標陣列
 
 # 畫多邊形 空心
-# cv2.polylines(image,[pts],True,(0,255,0),5)   # 繪製多邊形
+# cv2.polylines(image,[pts],True,(0,255,0), line_width)   # 繪製多邊形
 
 # 畫多邊形 實心
 cv2.fillPoly(image, [pts], (0, 255, 0))
@@ -169,10 +171,10 @@ image[:] = (128, 128, 128)
 
 """
 cv2.putText參數
-cv2.putText(img, text, org, fontFace, fontScale, color[, thickness[, lineType[, bottomLeftOrigin]]])
+cv2.putText(image, text, org, fontFace, fontScale, color[, thickness[, lineType[, bottomLeftOrigin]]])
 圖片影像/繪製的文字/左上角坐標/字體/字體大小/顏色/字體粗細/字體線條種類
 
-img – 要繪製文字的影像
+image – 要繪製文字的影像
 text – 要繪製的文字
 org – 文字左下角在影像中的座標位置
 fontFace – 文字字體, 
@@ -193,8 +195,9 @@ line_width = 2  # 字體粗細, 線寬
 line_type = cv2.LINE_AA  # 文字線條樣式
 
 x_st, y_st = 10, 100
+
 cv2.putText(
-    image, "Welcome 1111", (x_st, y_st), font, font_size, font_color, line_width
+    image, "Welcome 1111", (x_st, y_st), font, font_size, font_color, line_width, line_type
 )
 
 y_st += 80
@@ -488,43 +491,3 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-"""
-
-import cv2
-import numpy as np
-
-img = cv2.imread("koala.jpg")
-cv2.line(img, (0,0), (200,200), (0,0,255), 5)
-cv2.rectangle(img, (20,70), (120,160), (0,255,0), 2)
-cv2.rectangle(img, (40,80), (100,140), (255,0,0), -1)
-cv2.circle(img,(90,210), 30, (0,255,255), 3)
-cv2.circle(img,(140,170), 15, (255,0,0), -1)
-points = np.array([[220,220],[230,110],[240,120],
-                   [240,140],[220,240]], np.int32)
-cv2.polylines(img, [points], True, (255, 0, 255), 3)
-cv2.imshow("Koala", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-import cv2
-
-img = cv2.imread("penguins.jpg")
-cv2.putText(img, 'OpenCV', (10, 40),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            1, (0,255,255), 5, cv2.LINE_AA)
-cv2.putText(img, 'Hello!', (10, 100),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            1, (255,0,255), 5, cv2.LINE_AA)
-cv2.imshow("Penguins", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-"""

@@ -1,18 +1,43 @@
 import cv2
 
-import sys
-import matplotlib.pyplot as plt
-import numpy as np
-import math
+print("------------------------------------------------------------")  # 60個
 
-font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
+
+print('播完影片不會有錯誤訊息')
+
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
+cap = cv2.VideoCapture(video_filename)
+
+while(cap.isOpened()):
+  ret, frame = cap.read()
+  if ret:
+      cv2.imshow("Frame", frame)
+  if cv2.waitKey(1) & 0xFF == ord("q"):
+      break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
 
 # 開啟影片檔案
 filename = 'C:/dddddddddd/____download/V000000119.mp4'

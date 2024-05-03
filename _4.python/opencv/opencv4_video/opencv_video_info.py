@@ -139,6 +139,33 @@ print(video_info)
 
 print('------------------------------------------------------------')	#60個
 
+print('影片資訊')
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
+cap = cv2.VideoCapture(video_filename)
+
+width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+print("影格尺寸:", width, "x", height)
+
+#取得Codec編碼
+fourcc = int(cap.get(cv2.CAP_PROP_FOURCC))
+codec = (chr(fourcc&0xFF)+chr((fourcc>>8)&0xFF)+
+        chr((fourcc>>16)&0xFF)+chr((fourcc>>24)&0xFF))
+print("Codec編碼:", codec)
+
+fps = cap.get(cv2.CAP_PROP_FPS)
+print("FPS =", fps)
+
+frame_count = 0
+while True:
+  ret, frame = cap.read()
+  if not ret:
+      break
+  frame_count = frame_count + 1
+
+print("總影格數 = ", frame_count)
+cap.release()
 
 print('------------------------------------------------------------')	#60個
 

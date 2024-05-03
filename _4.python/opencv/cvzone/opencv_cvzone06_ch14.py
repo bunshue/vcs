@@ -9,7 +9,6 @@ from cvzone.HandTrackingModule import HandDetector
 import cv2
 import turtle
 
-
 print('手勢偵測操控海龜繪圖')
 
 cap = cv2.VideoCapture(0)

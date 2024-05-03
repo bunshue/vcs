@@ -35,7 +35,6 @@ if hands:
                 cv2.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2)
     
 cv2.imshow("Hand", img)
-
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 

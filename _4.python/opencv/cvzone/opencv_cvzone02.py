@@ -10,6 +10,25 @@ filename = 'C:/_git/vcs/_4.python/opencv/data/_face/face03.jpg'
 
 print("------------------------------------------------------------")  # 60個
 
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
 print('人臉偵測和匯出3D臉部網格')
 
 img = cv2.imread("images/face4.jpg")
@@ -19,10 +38,8 @@ img, faces = detector.findFaceMesh(img)
 if faces:
    print(len(faces[0]))
    
-cv2.imshow("Faces", img)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -36,9 +53,8 @@ if faces:
    for point in faces[0]:
        cv2.circle(img, point, 1, (255, 0, 255), cv2.FILLED)    
    
-cv2.imshow("Faces", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -55,9 +71,8 @@ if faces:
     points = np.array(face_leye, np.int32)
     cv2.polylines(img, [points], True, (0, 255, 255), 1)     
   
-cv2.imshow("Faces", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -78,10 +93,8 @@ if faces:
     points = np.array(face_leye, np.int32)
     cv2.polylines(img, [points], True, (0, 255, 255), 1)     
 
-cv2.imshow("Faces", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -101,18 +114,11 @@ while cap.isOpened():
 cap.release()
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-
 

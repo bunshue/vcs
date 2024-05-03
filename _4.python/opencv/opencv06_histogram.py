@@ -794,7 +794,6 @@ print("------------------------------------------------------------")  # 60個
 # plt.hist(cc, bins=num_bins, color="g", alpha=0.5, density=False)
 # density=True   #以密度表示
 
-
 print("------------------------------------------------------------")  # 60個
 
 ESC = 27
@@ -804,7 +803,7 @@ import sys
 import time
 
 print('------------------------------------------------------------')	#60個
-
+"""
 print("把 直方圖均衡化處理 套用在webcam上")
 
 cap = cv2.VideoCapture(0)
@@ -847,8 +846,50 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 
+print("把 直方圖均衡化處理 套用在webcam上")
 
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print('開啟攝影機失敗')
+    sys.exit()
+else:
+    print('Video device opened')
+
+while True:
+    ret, frame = cap.read()   # 從攝影機擷取一張影像
+
+    if ret == False:
+      print('無影像, 離開')
+      break
+
+    # 原圖
+    cv2.imshow('WebCam1', frame)
+    # 裁切圖片
+    # 裁切區域的 x 與 y 座標（左上角）
+    x_st, y_st = 100, 100
+    # 裁切區域的長度與寬度
+    w, h = 640 - x_st * 2, 480 - y_st * 2
+
+    frame2 = frame[y_st : y_st + h, x_st : x_st + w]
+
+    b, g, r = cv2.split(frame2)
+
+    bb = cv2.equalizeHist(b)
+    gg = cv2.equalizeHist(g)
+    rr = cv2.equalizeHist(r)
+
+    frame3 = cv2.merge([bb, gg, rr])
+    
+    cv2.imshow('WebCam4', frame3)
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
