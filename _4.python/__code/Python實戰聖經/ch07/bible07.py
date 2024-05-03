@@ -2,7 +2,6 @@
 #臉部辨識分析
 
 
-
 """
 
 import os
@@ -12,11 +11,8 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-'''
 """
-
 安裝 face-engine
-
 pip install face-engine==2.0.0
 
 將兩個dat檔 "dlib_face_recognition_resnet_model_v1.dat" "shape_predictor_5_face_landmarks.dat"
@@ -25,39 +21,45 @@ pip install face-engine==2.0.0
 #sugar
 C:/Users/070601/AppData/Local/Programs/Python/Python311/Lib/site-packages/face_engine/resources/data
 
-
 """
 
 print("face_engine：簡單易用的臉部辨識")
+
+filename = 'C:\_git\vcs\_4.python\opencv\data\_face/face02.jpg'
+
+filename = 'person1.jpg'
+# filename = 'person2.jpg'
+# filename = 'person3.jpg'
 
 from face_engine import FaceEngine
 from PIL import Image, ImageDraw
 import matplotlib.pyplot as plt
 
 engine = FaceEngine()
-filename = 'person1.jpg'
-# filename = 'person2.jpg'
-# filename = 'person3.jpg'
-#try:
-_, boxes = engine.find_faces(filename)
-print(boxes)
 
-img = Image.open(filename)
-drawing = ImageDraw.Draw(img)
-for i in range(len(boxes)):
-    drawing.rectangle(boxes[i], outline='white', width=2)
-plt.imshow(img)
-plt.show()
-#except:
-#  print('未偵測到人臉！')
+try:
+    _, boxes = engine.find_faces(filename)
+    print(boxes)
+
+    img = Image.open(filename)
+    drawing = ImageDraw.Draw(img)
+    for i in range(len(boxes)):
+        drawing.rectangle(boxes[i], outline='white', width=2)
+
+    plt.imshow(img)
+    plt.show()
+except:
+    print('未偵測到人臉！')
 
 engine = FaceEngine()
 img1 = 'sample1.jpg'
 # img1 = 'sample2.jpg'
 # img1 = 'sample3.jpg'
 img2 = 'person3.jpg'
+
 score, box = engine.compare_faces(img1, img2)
 print(score, box)
+
 img = Image.open(img2)
 drawing = ImageDraw.Draw(img)
 drawing.rectangle(box, outline='white', width=2)
@@ -194,11 +196,13 @@ print(emotion)
 img = cv2.imread("angry1.jpg")
 # img = cv2.imread("happy1.jpg")
 detector = FER()
+
 try:
     emotion, score = detector.top_emotion(img)
     print(emotion, score)
 except:
     print('未偵測到人臉！')
+
 img = cv2.imread("happy1.jpg")
 detector = FER(mtcnn=True)
 
@@ -299,7 +303,7 @@ for prediction_id, annotation in enumerate(annotations):
 plt.imshow(vis_image)
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 print('Deepface：人臉特徵分析工具')
 
 """
@@ -415,7 +419,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-''' 安裝 google.colab 失敗
 print('範例：攝影機拍攝登入系統')
 
 from IPython.display import display, Javascript
@@ -470,7 +473,6 @@ if count > 0:
   print('歡迎登入系統！')
 else:
   print('抱歉！你不是會員！')
-'''
   
 print('人臉屬性分析')
 
@@ -492,7 +494,6 @@ print('情緒：{}'.format(obj['dominant_emotion']))
 
 print("------------------------------------------------------------")  # 60個
 
-''' 安裝 google.colab 失敗
 print('範例：攝影機拍攝人臉屬性分析')
 
 from IPython.display import display, Javascript
@@ -543,7 +544,6 @@ label = {'angry':'生氣', 'disgust':'厭惡', 'fear':'恐懼', 'happy':'開心'
           'Man':'男', 'Woman':'女',
           'asian':'亞洲', 'black':'黑', 'indian':'印第安', 'latino hispanic':'拉丁美洲', 'middle eastern':'中東', 'white':'白'}
 print('\n你是{}歲的{}性{}人，目前情緒似乎是{}'.format(obj['age'], label[obj['gender']], label[obj['dominant_race']], label[obj['dominant_emotion']]))
-'''
 
 print("------------------------------------------------------------")  # 60個
 
