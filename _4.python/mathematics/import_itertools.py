@@ -13,6 +13,7 @@ itertools.product() 笛卡兒積
 
 import sys
 import itertools
+import random
 
 print("------------------------------------------------------------")  # 60個
 
@@ -20,32 +21,61 @@ print(
     "permutations 排列 ST------------------------------------------------------------"
 )  # 60個
 
-# 全排列
+print('全排列')
 cc = itertools.permutations("鼠牛虎兔")
 dd = list(cc)
 print(dd)
 
+print('全排列')
+animals = ["鼠", "牛", "虎", "兔"]
+cc = itertools.permutations(animals)
+for p in cc:
+    print(p)
+
 print("------------------------------------------------------------")  # 60個
 
-# 部分排列
+print('部分排列')
 print("P(4, 2)")
+
 cc = itertools.permutations("鼠牛虎兔", 2)
+#轉成list
+dd = list(cc)
+
+print(dd)
+print("組合數量 = {}".format(len(dd)))
+for d in dd:
+    print(d)
+
+print("------------------------------------------------------------")  # 60個
+
+print('部分排列')
+print("P(4, 2)")
+
+animals = {"鼠", "牛", "虎", "兔"}
+cc = itertools.permutations(animals, 2)
+#轉成set
+dd = set(cc)
+
+print(dd)
+print("組合數量 = {}".format(len(dd)))
+for d in dd:
+    print(d)
+
+print('部分排列')
+animals = ["鼠", "牛", "虎", "兔"]
+cc = itertools.permutations(animals, 2)
+for p in cc:
+    print(p)
+
+print('部分排列')
+animals = ["鼠", "牛", "虎", "兔"]
+cc = itertools.permutations(animals, 2)
 dd = list(cc)
 print(dd)
 
 print("------------------------------------------------------------")  # 60個
 
-print("P(4, 2)")
-
-animals = {"鼠", "牛", "虎", "兔"}
-cc = itertools.permutations(animals, 2)
-A = set(cc)
-print("組合數量 = {}".format(len(A)))
-for a in A:
-    print(a)
-
-print("------------------------------------------------------------")  # 60個
-
+print('全排列')
 animals = ["鼠", "牛", "虎", "兔"]
 cc = itertools.permutations(animals)
 n = 0
@@ -54,29 +84,9 @@ for i in cc:
     print(i)
 print("總共有 %d 拜訪方式" % n)
 
-print("------------------------------------------------------------")  # 60個
-
-# 全排列
-animals = ["鼠", "牛", "虎", "兔"]
-cc = itertools.permutations(animals)
-for p in cc:
-    print(p)
-
-# 指定長度
-animals = ["鼠", "牛", "虎", "兔"]
-cc = itertools.permutations(animals, 2)
-for p in cc:
-    print(p)
-
-animals = ["鼠", "牛", "虎", "兔"]
-cc = itertools.permutations(animals, 2)
-dd = list(cc)
-print(dd)
-
 print(
     "permutations 排列 SP------------------------------------------------------------"
 )  # 60個
-
 
 print(
     "combinations 組合 ST------------------------------------------------------------"
@@ -87,7 +97,6 @@ print(cc)
 dd = list(cc)
 print(dd)
 
-sys.exit()
 print("------------------------------------------------------------")  # 60個
 
 n = {1, 2, 3, 4, 5}
@@ -175,20 +184,19 @@ for _ in range(10):
 for x, y in itertools.product(range(3), range(3)):
     print(x, y)
 
-
 for x, y in itertools.product(list("ABC"), list("123")):
     print(x, y)
 
 print("------------------------------------------------------------")  # 60個
 
-# TBD
-ccc = itertools.product("鼠牛虎兔", repeat=2)
-print(ccc)
+# 笛卡爾積
+cc = itertools.product("鼠牛虎兔", repeat=2)
+print(type(cc))
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 # 笛卡爾積
-
 cc = itertools.product("鼠牛虎兔", "123")
 print(type(cc))
 print(cc)
@@ -203,7 +211,7 @@ print(
 print("其他 ST------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-# 1
+
 color_next = itertools.cycle(["r", "g", "b", "y", "m", "c", "k"])  # 定義顏色
 
 for _ in range(10):
@@ -221,7 +229,6 @@ for item in itertools.cycle(range(3)):
 """
 
 print("------------------------------------------------------------")  # 60個
-# 2
 
 print("itertools 模組: groupby() 給連續資料分組")
 
@@ -254,7 +261,6 @@ for key, item in itertools.groupby(data, first_letter):
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("itertools 模組: accumulate() 累加")
 
 n = [0, 1, 2, 3, 4]
@@ -262,7 +268,6 @@ print(list(itertools.accumulate(n)))
 
 c = ["A", "B", "C", "D", "E"]
 print(list(itertools.accumulate(c)))
-
 
 data = range(1, 11)
 multiply = lambda x, y: x * y
@@ -280,7 +285,6 @@ print(list(itertools.starmap(lambda x, y: x * y, n)))
 print(list(map(lambda t: t[0] * t[1], n)))
 
 print("------------------------------------------------------------")  # 60個
-
 
 # itertools 模組: compress() 過濾元素
 
@@ -347,7 +351,6 @@ generators = itertools.tee(data, 3)
 
 for g in generators:
     print(list(g))
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -377,7 +380,6 @@ local_x_range = range(10)
 coords = list(itertools.product(local_x_range, local_y_range))
 random.shuffle(coords)
 print(coords)
-
 
 print("------------------------------------------------------------")  # 60個
 

@@ -254,18 +254,18 @@ with open(filename2, 'r', encoding = 'UTF-8') as f:
 
 print("------------------------------------------------------------")  # 60個
 
-print("讀取檔案 " + filename1)    
+print("讀取檔案 " + filename1)
 with open(filename1, 'r') as f:
-    content=f.readlines() 
+    content=f.readlines()
     print(type(content))   # <class 'list'>
-    print(content)  
+    print(content)
 
 print("------------------------------------------------------------")  # 60個
 
 print("讀取檔案 " + filename2)
 with open(filename2, 'r', encoding = 'UTF-8') as f:
-    doc=f.readlines() 
-    print(doc)      
+    doc=f.readlines()
+    print(doc)
 
 print("------------------------------------------------------------")  # 60個
 

@@ -26,17 +26,9 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#MediaPipe模組：Google多媒體機器學習
-
-"""
-!wget -O person1.jpg --content-disposition https://unsplash.com/photos/3g3grQaeA2o/download?force=true
-!wget -O person2.jpg --content-disposition https://unsplash.com/photos/GVVsC0JG6Ak/download?force=true
-"""
-
-print("臉部偵測")
-
 dH, dW = 480, 480
 def resizeimg(image):
+  #將影像改變到寬高最大為480等比例縮放
   h, w = image.shape[:2]
   if h < w:
     img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
@@ -44,17 +36,26 @@ def resizeimg(image):
     img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
   return img
 
-image = resizeimg(cv2.imread('person1.jpg'))
-# image = resizeimg(cv2.imread('person2.jpg'))
+print("------------------------------------------------------------")  # 60個
+
+#MediaPipe模組：Google多媒體機器學習
+
+print("臉部偵測")
+
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+
+image = resizeimg(cv2.imread(filename))
+print(image.shape)
+
 mp_face_detection = mp.solutions.face_detection
 mp_drawing = mp.solutions.drawing_utils 
 face_detection = mp.solutions.face_detection.FaceDetection(min_detection_confidence=0.5)
 results = face_detection.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-# print(results.detections)
+print(results.detections)
 if results.detections:
     for detection in results.detections:
-        # print('鼻子:')
-        # print(mp_face_detection.get_key_point(detection,mp_face_detection.FaceKeyPoint.NOSE_TIP))
+        print('鼻子:')
+        print(mp_face_detection.get_key_point(detection,mp_face_detection.FaceKeyPoint.NOSE_TIP))
         mp_drawing.draw_detection(image, detection)
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -62,21 +63,11 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-#!wget -O person3.jpg --content-disposition https://unsplash.com/photos/JyVcAIUAcPM/download?force=true
-
 print("臉部特徵網")
 
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+image = resizeimg(cv2.imread(filename))
 
-image = resizeimg(cv2.imread('person3.jpg'))
-# image = resizeimg(cv2.imread('person1.jpg'))
 mp_drawing = mp.solutions.drawing_utils
 mp_face_mesh = mp.solutions.face_mesh
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
@@ -95,24 +86,11 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-"""
-!wget -O hand1.jpg --content-disposition https://unsplash.com/photos/33VdiGc2O9o/download?force=true
-!wget -O hand2.jpg --content-disposition https://unsplash.com/photos/qKspdY9XUzs/download?force=true
-"""
-
 print("手部偵測")
 
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates33.jpg'
+image = resizeimg(cv2.imread(filename))
 
-# image = resizeimg(cv2.imread('hand1.jpg'))
-image = resizeimg(cv2.imread('hand2.jpg'))
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=True, max_num_hands=2, 
@@ -120,7 +98,7 @@ hands = mp_hands.Hands(static_image_mode=True, max_num_hands=2,
 results = hands.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 if results.multi_hand_landmarks:
     for hand_landmarks in results.multi_hand_landmarks:
-        # print('姆指尖：', hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP])
+        print('姆指尖：', hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP])
         mp_drawing.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
@@ -128,24 +106,11 @@ plt.show()
 
 print('------------------------------------------------------------')	#60個
 
-"""
-!wget -O pose1.jpg --content-disposition https://unsplash.com/photos/A3MleA0jtoE/download?force=true
-!wget -O pose2.jpg --content-disposition https://unsplash.com/photos/wa8o6rs22Fw/download?force=true
-"""
-
 print("姿勢偵測")
 
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates15.jpg'
+image = resizeimg(cv2.imread(filename))
 
-image = resizeimg(cv2.imread('pose1.jpg'))
-# image = resizeimg(cv2.imread('pose2.jpg'))
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 pose = mp_pose.Pose(static_image_mode=True, model_complexity=1, 
@@ -162,17 +127,9 @@ print('------------------------------------------------------------')	#60個
 
 print("人體整合偵測")
 
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates15.jpg'
+image = resizeimg(cv2.imread(filename))
 
-image = resizeimg(cv2.imread('pose1.jpg'))
-# image = resizeimg(cv2.imread('pose2.jpg'))
 mp_drawing = mp.solutions.drawing_utils
 mp_holistic = mp.solutions.holistic
 holistic = mp_holistic.Holistic(static_image_mode=True, model_complexity=1)
@@ -195,15 +152,6 @@ print('------------------------------------------------------------')	#60個
 """fail
 
 print("3D物體偵測")
-
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
 
 image = resizeimg(cv2.imread('object1.jpg'))
 # image = resizeimg(cv2.imread('object2.jpg'))
@@ -231,20 +179,12 @@ print('------------------------------------------------------------')	#60個
 
 print("臉部偵測")
 
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+img = resizeimg(cv2.imread(filename))
 
-img = resizeimg(cv2.imread('person1.jpg'))
-# img = resizeimg(cv2.imread('person2.jpg'))
 detector = FaceDetector()
 img, bboxs = detector.findFaces(img)
-# print('人臉範圍：', bboxs)
+print('人臉範圍：', bboxs)
 
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.show()
@@ -253,17 +193,9 @@ print('------------------------------------------------------------')	#60個
 
 print("臉部特徵網")
 
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+img = resizeimg(cv2.imread(filename))
 
-img = resizeimg(cv2.imread('person1.jpg'))
-# img = resizeimg(cv2.imread('person2.jpg'))
 detector = FaceMeshDetector(staticMode=True, maxFaces=5)
 img, faces = detector.findFaceMesh(img)
 
@@ -275,15 +207,6 @@ print('------------------------------------------------------------')	#60個
 """ fail
 
 print("手部偵測")
-
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
 
 #img = resizeimg(cv2.imread('hand1.jpg'))
 img = resizeimg(cv2.imread('hand2.jpg'))
@@ -307,15 +230,6 @@ print('------------------------------------------------------------')	#60個
 """ fail
 
 print("手部狀態偵測")
-
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
 
 img = resizeimg(cv2.imread('hand3.jpg'))
 # img = resizeimg(cv2.imread('hand4.jpg'))
@@ -349,25 +263,14 @@ print('------------------------------------------------------------')	#60個
 
 print("姿勢偵測")
 
-dH, dW = 480, 480
-def resizeimg(image):
-  h, w = image.shape[:2]
-  if h < w:
-    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
-  else:
-    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
-  return img
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates15.jpg'
+img = resizeimg(cv2.imread(filename))
 
-img = resizeimg(cv2.imread('pose1.jpg'))
-# img = resizeimg(cv2.imread('pose2.jpg'))
 detector = PoseDetector()
 img = detector.findPose(img)
 
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 plt.show()
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 

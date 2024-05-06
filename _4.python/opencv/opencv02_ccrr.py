@@ -165,6 +165,44 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+dH, dW = 480, 480
+def resizeimg(image):
+  #將影像改變到寬高最大為480等比例縮放
+  h, w = image.shape[:2]
+  if h < w:
+    img = cv2.resize(image, (dW, math.floor(h/(w/dW))))
+  else:
+    img = cv2.resize(image, (math.floor(w/(h/dH)), dH))
+  return img
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+
+image1 = cv2.imread(filename)
+print("原圖大小 : ", image1.shape)
+
+image2 = resizeimg(cv2.imread(filename))
+print("將影像改變到寬高最大為480等比例縮放")
+print("原圖大小 : ", image2.shape)
+
+plt.figure("用np建立一個影像陣列", figsize=(16, 12))
+plt.subplot(121)
+plt.title("原圖")
+plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
+plt.xlim(0, 500)  # x軸顯示邊界
+plt.ylim(500, 0)  # y軸顯示邊界
+
+plt.subplot(122)
+plt.title("resize")
+plt.imshow(cv2.cvtColor(image2, cv2.COLOR_BGR2RGB))
+plt.xlim(0, 500)  # x軸顯示邊界
+plt.ylim(500, 0)  # y軸顯示邊界
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 # 影像縮放

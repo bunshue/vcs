@@ -4,10 +4,27 @@
 
 """
 
+import cv2
+import time
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
 import os
 import sys
-import time
+import math
 import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
@@ -23,17 +40,14 @@ C:/Users/070601/AppData/Local/Programs/Python/Python311/Lib/site-packages/face_e
 
 """
 
-print("face_engine：簡單易用的臉部辨識")
-
-filename = 'C:\_git\vcs\_4.python\opencv\data\_face/face02.jpg'
-
-filename = 'person1.jpg'
-# filename = 'person2.jpg'
-# filename = 'person3.jpg'
-
 from face_engine import FaceEngine
 from PIL import Image, ImageDraw
-import matplotlib.pyplot as plt
+
+'''
+print("face_engine：簡單易用的臉部辨識")
+print("把人臉框出來")
+
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
 
 engine = FaceEngine()
 
@@ -51,26 +65,34 @@ try:
 except:
     print('未偵測到人臉！')
 
-engine = FaceEngine()
-img1 = 'sample1.jpg'
-# img1 = 'sample2.jpg'
-# img1 = 'sample3.jpg'
-img2 = 'person3.jpg'
+print("------------------------------------------------------------")  # 60個
 
-score, box = engine.compare_faces(img1, img2)
+print('在圖片中找出某人')
+
+#單人圖片
+filename1 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+
+#多人圖片
+filename2 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates21.jpg'
+
+engine = FaceEngine()
+
+score, box = engine.compare_faces(filename1, filename2)
 print(score, box)
 
-img = Image.open(img2)
+img = Image.open(filename2)
 drawing = ImageDraw.Draw(img)
 drawing.rectangle(box, outline='white', width=2)
 plt.imshow(img)
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
 engine = FaceEngine()
-img1 = 'sample1.jpg'
-img2 = 'sample2.jpg'
-img3 = 'sample3.jpg'
-engine.fit([img1, img2, img3], ['jeng', 'chiou', 'david'])
+filename1 = 'sample1.jpg'
+filename2 = 'sample2.jpg'
+filename3 = 'sample3.jpg'
+engine.fit([filename1, filename2, filename3], ['jeng', 'chiou', 'david'])
 
 testimage = 'catch.jpg'
 # testimage = 'person2.jpg'
@@ -84,10 +106,10 @@ plt.imshow(img)
 plt.show()
 
 engine = FaceEngine()
-img1 = 'sample1.jpg'
-img2 = 'sample2.jpg'
-img3 = 'sample3.jpg'
-engine.fit([img1, img2, img3], ['jeng', 'chiou', 'david'])
+filename1 = 'sample1.jpg'
+filename2 = 'sample2.jpg'
+filename3 = 'sample3.jpg'
+engine.fit([filename1, filename2, filename3], ['jeng', 'chiou', 'david'])
 engine.save('ehappy.p')
 
 from face_engine import load_engine
@@ -104,13 +126,9 @@ print("face-recognition：效果絕佳的人臉辨識")
 #!pip install face_recognition
 
 import face_recognition
-from PIL import Image, ImageDraw
-import matplotlib.pyplot as plt
 
-# filename = 'person1.jpg'
-# filename = 'person2.jpg'
-# filename = 'person3.jpg'
-filename = 'person12.jpg'
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates21.jpg'
+
 image = face_recognition.load_image_file(filename)
 boxes = face_recognition.face_locations(image)
 print(boxes)
@@ -122,7 +140,10 @@ for i in range(len(boxes)):
 plt.imshow(img)
 plt.show()
 
-filename = 'obama.jpg'
+print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+
 image = face_recognition.load_image_file(filename)
 landmarks = face_recognition.face_landmarks(image)
 print(landmarks)
@@ -136,49 +157,67 @@ for landmark in landmarks:
 plt.imshow(img)
 plt.show()
 
-img1 = face_recognition.load_image_file('sample1.jpg')
-img2 = face_recognition.load_image_file('sample2.jpg')
-img3 = face_recognition.load_image_file('sample3.jpg')
-encoding1 = face_recognition.face_encodings(img1)[0]
-encoding2 = face_recognition.face_encodings(img2)[0]
-encoding3 = face_recognition.face_encodings(img3)[0]
-known_faces = [encoding1, encoding2, encoding3]
-names = ['jeng', 'chiou', 'david']
+print("------------------------------------------------------------")  # 60個
 
-unknown = face_recognition.load_image_file("catch.jpg")
-# unknown = face_recognition.load_image_file("lily2.jpg")
+print('把人員圖片資料先存起來, 並註記人名')
+file1 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+file2 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg'
+file3 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Steve_Jobs_01.jpg'
+filename1 = face_recognition.load_image_file(file1)
+filename2 = face_recognition.load_image_file(file2)
+filename3 = face_recognition.load_image_file(file3)
+encoding1 = face_recognition.face_encodings(filename1)[0]
+encoding2 = face_recognition.face_encodings(filename2)[0]
+encoding3 = face_recognition.face_encodings(filename3)[0]
+known_faces = [encoding1, encoding2, encoding3]
+names = ['Bill Gates', 'Elon Musk', 'Steve Jobs']
+
+file_new = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates32.jpg'
+unknown = face_recognition.load_image_file(file_new)
 encoding_unknown = face_recognition.face_encodings(unknown)[0]
+
+print('使用辨識功能')
 results = face_recognition.compare_faces(known_faces, encoding_unknown)
 print(results)
+
 face = ''
 for i in range(len(results)):
     if results[i]: face = face + names[i] + '  '
 if face == '':
-    print('圖片中辨識不到資料庫中人臉！')
+    print('圖片中辨識不到資料庫中人臉！aaa')
 else:
     print('圖片中的人臉：' + face)
 
-img1 = face_recognition.load_image_file('sample1.jpg')
-img2 = face_recognition.load_image_file('sample2.jpg')
-img3 = face_recognition.load_image_file('sample3.jpg')
-encoding1 = face_recognition.face_encodings(img1)[0]
-encoding2 = face_recognition.face_encodings(img2)[0]
-encoding3 = face_recognition.face_encodings(img3)[0]
-known_faces = [encoding1, encoding2, encoding3]
-names = ['jeng', 'chiou', 'david']
+print()
 
-unknown = face_recognition.load_image_file("catch.jpg")
-#unknown = face_recognition.load_image_file("lily2.jpg")
+print('把人員圖片資料先存起來, 並註記人名')
+file1 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+file2 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk01.jpg'
+file3 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Steve_Jobs_01.jpg'
+filename1 = face_recognition.load_image_file(file1)
+filename2 = face_recognition.load_image_file(file2)
+filename3 = face_recognition.load_image_file(file3)
+encoding1 = face_recognition.face_encodings(filename1)[0]
+encoding2 = face_recognition.face_encodings(filename2)[0]
+encoding3 = face_recognition.face_encodings(filename3)[0]
+known_faces = [encoding1, encoding2, encoding3]
+names = ['Bill Gates', 'Elon Musk', 'Steve Jobs']
+
+file_new = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates32.jpg'
+unknown = face_recognition.load_image_file(file_new)
 encoding_unknown = face_recognition.face_encodings(unknown)[0]
+
+print('使用距離功能')
 distances = face_recognition.face_distance(known_faces, encoding_unknown)
 print(distances)
+
 face = ''
 for i in range(len(distances)):
     if distances[i] < 0.5:
         face = face + names[i] + '  '
 
 if face == '':
-    print('圖片中辨識不到資料庫中人臉！')
+    print('圖片中辨識不到資料庫中人臉！bbb')
 else:
     print('圖片中的人臉：' + face)
 
@@ -188,13 +227,15 @@ print('fer：偵測臉部表情')
 #!pip install fer
 
 from fer import FER
-import cv2
-img = cv2.imread("angry1.jpg")
+
+#angry
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk05.jpg'
+img = cv2.imread(filename)
 detector = FER()
 emotion = detector.detect_emotions(img)
 print(emotion)
-img = cv2.imread("angry1.jpg")
-# img = cv2.imread("happy1.jpg")
+
+img = cv2.imread(filename)
 detector = FER()
 
 try:
@@ -203,7 +244,9 @@ try:
 except:
     print('未偵測到人臉！')
 
-img = cv2.imread("happy1.jpg")
+#happy
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg'
+img = cv2.imread(filename)
 detector = FER(mtcnn=True)
 
 try:
@@ -228,19 +271,26 @@ https://github.com/ternaus/facemask_detection/releases/download/0.0.1/tf_efficie
 from facemask_detection.pre_trained_models import get_model as get_classifier
 import albumentations as A
 import torch
-import cv2
-import numpy as np
+
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates19.jpg'
 
 model = get_classifier("tf_efficientnet_b0_ns_2020-07-29")
 model.eval()
-image1 = cv2.cvtColor(cv2.imread("mask1.jpg"), cv2.COLOR_BGR2RGB)
+image1 = cv2.cvtColor(cv2.imread(filename), cv2.COLOR_BGR2RGB)
 # image1 = cv2.cvtColor(cv2.imread("person1.jpg"), cv2.COLOR_BGR2RGB)
 transform = A.Compose([A.SmallestMaxSize(max_size=256, p=1), 
                        A.CenterCrop(height=224, width=224, p=1),
                        A.Normalize(p=1)])
 trans_image = transform(image=image1)['image']
 input = torch.from_numpy(np.transpose(trans_image, (2, 0, 1))).unsqueeze(0)
-print("戴口罩的機率為：", model(input)[0].item())
+
+prob = model(input)[0].item()
+if prob > 0.9:
+    print('有戴口罩')
+elif prob < 0.1:
+    print('沒有戴口罩')
+else:
+    print('無法分辨')
 
 print("------------------------------------------------------------")  # 60個
 
@@ -260,9 +310,8 @@ from retinaface.pre_trained_models import get_model as get_detector
 from facemask_detection.pre_trained_models import get_model as get_classifier
 import albumentations as A
 import torch
-import cv2
-import numpy as np
 from matplotlib import pyplot as plt
+
 face_detector = get_detector("resnet50_2020-07-20", max_size=800)
 face_detector.eval()
 image1 = cv2.cvtColor(cv2.imread("mask3.jpg"), cv2.COLOR_BGR2RGB)
@@ -316,8 +365,7 @@ https://github.com/swghosh/DeepFace/releases/download/weights-vggface2-2d-aligne
 """
 
 from deepface import DeepFace
-import matplotlib.pyplot as plt
-import cv2
+
 imgpath = 'person1.jpg'
 img_sr = cv2.imread(imgpath)
 plt.imshow(cv2.cvtColor(img_sr, cv2.COLOR_BGR2RGB))
@@ -330,22 +378,24 @@ image = DeepFace.detectFace(img_path=imgpath, detector_backend='retinaface', enf
 #image = DeepFace.detectFace(img_path=imgpath, detector_backend='mtcnn'', enforce_detection=False)
 #image = DeepFace.detectFace(img_path=imgpath, detector_backend='dlib'', enforce_detection=False)
 #image = DeepFace.detectFace(img_path=imgpath, detector_backend='ssd'', enforce_detection=False)  #有錯誤
-plt.imshow(image)
+#plt.imshow(image)
+#plt.show()
 
 print('人臉驗證')
 
-face1 = 'bear1.jpg'
-face2 = 'bear2.jpg'
-#face2 = 'jeng1.jpg'
-#face2 = 'david1.jpg'
-#result = DeepFace.verify(face1, face2, model_name='DeepFace', model=DeepFace.build_model('DeepFace'), enforce_detection=False)
-result = DeepFace.verify(face1, face2, model_name='DeepFace', enforce_detection=False)
+filename1 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk02.jpg'
+filename2 = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg'
+
+#result = DeepFace.verify(filename1, filename2, model_name='DeepFace', model=DeepFace.build_model('DeepFace'), enforce_detection=False)
+result = DeepFace.verify(filename1, filename2, model_name='DeepFace', enforce_detection=False)
 
 print(result)
 if result["verified"]:
     print('兩張圖片是同一人！')
 else:
     print('兩張圖片不是同一人！')
+'''
+print("------------------------------------------------------------")  # 60個
 
 """
 下載 566MB
@@ -371,29 +421,50 @@ To: C:/Users/070601/.deepface/weights/dlib_face_recognition_resnet_model_v1.dat.
 From: https://github.com/serengil/deepface_models/releases/download/v1.0/arcface_weights.h5
 To: C:/Users/070601/.deepface/weights/arcface_weights.h5
 
-
 """
 
-face1 = 'bear1.jpg'
-face2 = 'jeng1.jpg'
+from deepface import DeepFace
+
+filename1 = 'bear1.jpg'
+filename2 = 'jeng1.jpg'
 models = ["VGG-Face", "Facenet", "OpenFace", "DeepFace", "DeepID", "Dlib", "ArcFace"]
-result =[]
+result = []
 for model in models: 
-    ret= DeepFace.verify(face1, face2, model_name = model, enforce_detection=False)
+    ret= DeepFace.verify(filename1, filename2, model_name = model, enforce_detection=False)
     result.append(ret)
 print(result)
 
 print('搜尋人臉')
 
-import pandas as pd
-import numpy as np
 #尋找單一相同人臉
-face1 = 'bear2.jpg'
-df = DeepFace.find(img_path = face1, db_path = 'member', enforce_detection=False)
+filename1 = 'bear2.jpg'
+df = DeepFace.find(img_path = filename1, db_path = 'member', enforce_detection=False)
 
-print(df)
+print(type(df))
+print(len(df))
+print()
+print()
+print(df[0])
+print()
 
-""" fail
+
+"""
+print("aaa")
+cc = str(df)
+cc = cc.split()
+print("bbb")
+print(cc)
+print("ccc")
+print(len(cc))
+print("ddd")
+for _ in cc:
+    print(_)
+
+"""
+
+
+sys.exit()
+
 print(df['VGG-Face_cosine'])
 print(type(df['VGG-Face_cosine']))
 
@@ -405,8 +476,8 @@ if count > 0:
 else:
   print('沒有符合的人臉！')
 #尋找所有相同人臉
-face1 = 'tem.jpg'
-df = DeepFace.find(img_path = face1, db_path = 'member', enforce_detection=False)
+filename1 = 'tem.jpg'
+df = DeepFace.find(img_path = filename1, db_path = 'member', enforce_detection=False)
 #print(df)
 count = np.sum((df['VGG-Face_cosine']<=0.25)!=0) #計算符合的人臉數量
 if count > 0:
@@ -415,18 +486,18 @@ if count > 0:
     print(split1[-1])
 else:
   print('沒有符合的人臉！')
-"""
+
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
 print('範例：攝影機拍攝登入系統')
 
 from IPython.display import display, Javascript
-from google.colab.output import eval_js
+#from google.colab.output import eval_js
 from base64 import b64decode
 from IPython.display import Image
-import pandas as pd
-import numpy as np
 
 def take_photo(filename='person.jpg', quality=0.8):
   js = Javascript("""
@@ -482,10 +553,10 @@ From: https://github.com/serengil/deepface_models/releases/download/v1.0/age_mod
 To: C:/Users/070601/.deepface/weights/age_model_weights.h5
 """
 
-face1 = 'bear1.jpg'
-img = cv2.imread(face1)
+filename1 = 'bear1.jpg'
+img = cv2.imread(filename1)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-obj = DeepFace.analyze(img_path = face1, actions = ['age', 'gender', 'race', 'emotion'], enforce_detection=False)
+obj = DeepFace.analyze(img_path = filename1, actions = ['age', 'gender', 'race', 'emotion'], enforce_detection=False)
 #print(obj)
 print('年齡：{}'.format(obj['age']))
 print('性別：{}'.format(obj['gender']))
@@ -497,7 +568,7 @@ print("------------------------------------------------------------")  # 60個
 print('範例：攝影機拍攝人臉屬性分析')
 
 from IPython.display import display, Javascript
-from google.colab.output import eval_js
+#from google.colab.output import eval_js
 from base64 import b64decode
 from IPython.display import Image
 

@@ -72,46 +72,26 @@ plt.title("顯示裁剪圖片")
 # 第三張圖
 plt.subplot(233)
 
+filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+# 打開圖像，並轉成灰度圖像
+# 檔案 => PIL影像 => 灰階 => np陣列
+image = np.array(Image.open(filename).convert("L"))  # L為8位像素黑白圖
+
+#plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
+
+plt.contour(image, origin="image")
+plt.axis("equal")
+plt.title("圖像輪廓圖")
 
 # 第四張圖
 plt.subplot(234)
 
-print("二維 sinc 函數")
-
-N = 100
-
-sinc2d = np.zeros((N, N))
-for x, x1 in enumerate(np.linspace(-10, 10, N)):
-    for y, x2 in enumerate(np.linspace(-10, 10, N)):
-        sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)
-# print(sinc2d)
-
-# same
-x1 = np.linspace(-10, 10, N)
-x2 = np.linspace(-10, 10, N)
-sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
-# print(sinc2d)
-
-plt.imshow(sinc2d)
-plt.title("二維 sinc 函數")
-
-
-# 第五~六張圖
-
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-xx, yy = np.meshgrid(x, x)
-zz = np.sinc(np.sqrt((xx - 1) ** 2 + (yy - 1) ** 2))
 
 # 第五張圖
 plt.subplot(235)
-plt.imshow(zz)
-plt.title("default margins")
 
 # 第六張圖
 plt.subplot(236)
-plt.imshow(zz)
-plt.margins(0.2)
-plt.title("margins(0.2)")
 
 
 plt.show()
@@ -131,6 +111,7 @@ plt.figure(
     frameon=True,
 )
 
+# 檔案 => PIL影像 => np陣列
 image = np.asarray(Image.open(filename))
 # print(repr(image))
 
@@ -195,6 +176,7 @@ imgplot.set_clim(0, 175)
 
 # Array Interpolation schemes
 #8
+# 檔案 => PIL影像
 image = Image.open(filename)
 image.thumbnail((64, 64))  # resizes image in-place
 imgplot = plt.imshow(image)
@@ -224,6 +206,50 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
+print("二維 sinc 函數")
+
+N = 100
+
+sinc2d = np.zeros((N, N))
+for x, x1 in enumerate(np.linspace(-10, 10, N)):
+    for y, x2 in enumerate(np.linspace(-10, 10, N)):
+        sinc2d[x, y] = np.sin(x1) * np.sin(x2) / (x1 * x2)
+# print(sinc2d)
+
+# same
+x1 = np.linspace(-10, 10, N)
+x2 = np.linspace(-10, 10, N)
+sinc2d = np.outer(np.sin(x1), np.sin(x2)) / np.outer(x1, x2)
+# print(sinc2d)
+
+plt.imshow(sinc2d)
+plt.title("二維 sinc 函數")
+
+# 第二~三張圖
+
+x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
+xx, yy = np.meshgrid(x, x)
+zz = np.sinc(np.sqrt((xx - 1) ** 2 + (yy - 1) ** 2))
+
+
+# 第二張圖
+plt.subplot(232)
+
+plt.imshow(zz)
+plt.title("default margins")
+
+
+# 第三張圖
+plt.subplot(233)
+
+plt.imshow(zz)
+plt.margins(0.2)
+plt.title("margins(0.2)")
+
+
+# 第四張圖
+plt.subplot(234)
+
 delta = 0.025
 x = y = np.arange(-3.0, 3.0, delta)
 X, Y = np.meshgrid(x, y)
@@ -241,20 +267,18 @@ fig.savefig(filename)
 print('已存圖' + filename)
 """
 
-# 第二張圖
-plt.subplot(232)
+# 第五張圖
+plt.subplot(235)
 
 image = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]])
 
 plt.imshow(image, cmap="Blues")
 plt.colorbar()
 
-
-# 第三張圖
-plt.subplot(233)
+# 第六張圖
+plt.subplot(236)
 
 # Layer Images
-
 
 def func3(x, y):
     return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2 + y**2))
@@ -284,19 +308,6 @@ Z2 = func3(X, Y)
 im2 = plt.imshow(
     Z2, cmap=plt.cm.viridis, alpha=0.9, interpolation="bilinear", extent=extent
 )
-
-
-# 第四張圖
-plt.subplot(234)
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
 
 plt.show()
 
@@ -438,7 +449,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="imshow 集合 5",
+    num="imshow 集合 6 random 影像",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -447,8 +458,46 @@ plt.figure(
     frameon=True,
 )
 
+plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
+
 # 第一張圖
 plt.subplot(231)
+
+print("建立一個random圖像 0 50 100 ... 255")
+
+W, H = 10, 10
+
+image = (
+    np.random.choice([0, 50, 100, 150, 200, 255], size=W * H)
+    .reshape(H, W)
+    .astype(np.uint8)
+)
+
+plt.imshow(image)
+print(image)
+
+# 第二張圖
+plt.subplot(232)
+
+print("畫出 常態分布 二維 N X N")
+N = 10
+image = np.random.randn(N, N)
+plt.imshow(image)
+print(image)
+
+# 第三張圖
+plt.subplot(233)
+
+image = np.random.random((100, 100))
+plt.imshow(image)
+print(image)
+
+plt.subplots_adjust(bottom=0.1, right=0.8, top=0.9)
+cax = plt.axes([0.85, 0.1, 0.075, 0.8])  # 設定位置
+plt.colorbar(cax=cax)
+
+# 第四張圖
+plt.subplot(234)
 
 x = np.linspace(start=-10, stop=10, num=101)
 
@@ -458,10 +507,8 @@ xx = x + 1j * x[:, np.newaxis]
 
 plt.imshow(np.abs(xx), extent=[-10, 10, -10, 10], cmap="gray")
 
-
-# 第二張圖
-plt.subplot(232)
-
+# 第五張圖
+plt.subplot(235)
 
 def f(x, y):
     return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2) - y**2)
@@ -478,96 +525,9 @@ plt.colorbar(shrink=0.83)
 plt.xticks(())
 plt.yticks(())
 
-
-# 第三張圖
-plt.subplot(233)
-
-
-# 第四張圖
-plt.subplot(234)
-
-filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
-# 打開圖像，並轉成灰度圖像
-# 檔案 => PIL影像 => 灰階 => np陣列
-image = np.array(Image.open(filename).convert("L"))  # L為8位像素黑白圖
-
-plt.gray()  # 不使用顏色信息, 將圖像以灰階方式顯示
-
-plt.contour(image, origin="image")
-plt.axis("equal")
-plt.title("圖像輪廓圖")
-
-# 第五張圖
-plt.subplot(235)
-
-
 # 第六張圖
 plt.subplot(236)
 
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="imshow 集合 6 random 影像",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-print("建立一個random圖像")
-
-W = 30
-H = 20
-
-image = (
-    np.random.choice([0, 50, 100, 150, 200, 255], size=W * H)
-    .reshape(H, W)
-    .astype(np.uint8)
-)
-
-plt.imshow(image)
-
-
-# 第二張圖
-plt.subplot(232)
-
-
-# 第三張圖
-plt.subplot(233)
-
-
-# 第四~五張圖
-
-# Subplots spacings and margins
-
-# 第四張圖
-plt.subplot(234)
-plt.imshow(np.random.random((100, 100)))
-
-# 第五張圖
-plt.subplot(235)
-plt.imshow(np.random.random((100, 100)))
-
-plt.subplots_adjust(bottom=0.1, right=0.8, top=0.9)
-cax = plt.axes([0.85, 0.1, 0.075, 0.8])  # 設定位置
-plt.colorbar(cax=cax)
-
-# 第六張圖
-plt.subplot(236)
-
-print("畫出 常態分布 二維 20 X 20")
-N = 20
-plt.imshow(np.random.randn(N, N))
 
 plt.show()
 

@@ -1,9 +1,7 @@
-# python import module : math
-
 import sys
 import math
 import numpy as np
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("數學常數")
@@ -14,22 +12,33 @@ print("e : ", math.e)
 print("指數函式：", math.e)
 print("方法exp(4) =", math.exp(4))
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("數學函數")
 
 print("exp(1.0) =", math.exp(1))
-print("log(3.78) =", math.log(math.e))
 print("log10(10, 10) =", math.log(10, 10))
-print("sqrt(4.0) =", math.sqrt(4.0))
-
-n = 16
-r = math.sqrt(n)
-print("16的平方根 為 : " + str(r))
+print("平方根 sqrt : sqrt(4.0) =", math.sqrt(4.0))
+print("平方根 sqrt : 4.0 ** 0.5 =", 4.0 ** 0.5)
 
 print("取1024以2為底的log：")
 print(math.log(1024, 2))  # 10
+
+print("log(3.78) =", math.log(math.e))
+
+# 使用math類別的相關方法
+num1 = 3
+num2 = 8
+# 求平方、立方根
+print(num1, "^ 3 = ", math.pow(num1, 3))
+print(num2, "立方根：", math.pow(num2, 1.0 / 3))
+
+print("fabs(-8)= ", math.fabs(-8))  # 取絕對值
+print("fmod(16,5)= ", math.fmod(16, 5))  # 16%5
+print("floor(3.14)= ", math.floor(3.14))  # 3
+
+print("餘數：", math.fmod(num1, num2), ", GCD =", math.gcd(num1, num2))
+print("兩數平方後相加再開根號", math.hypot(num1, num2))
 
 print("三角函數")
 print("sin(PI / 2) =", math.sin(math.pi / 2))
@@ -61,13 +70,14 @@ print("測試值no = ", no)
 print("math.fabs(no) =  ", math.fabs(no))
 print("math.ceil(no) = ", math.ceil(no))
 print("math.floor(no) = ", math.floor(no))
+
 # 指數和對數函數
 x, y = 13.536, 3.57
 print("測試值x / y = ", x, "/", y)
 print("math.exp(x) = ", math.exp(x))
 print("math.log(x) = ", math.log(x))
 print("math.pow(x,y) = ", math.pow(x, y))
-print("math.sqrt(x) = ", math.sqrt(x))
+
 # 三角函數
 deg = 60.0
 rad = math.radians(deg)
@@ -75,15 +85,6 @@ print("測試值deg / rad = ", deg, "/", rad)
 print("math.sin(rad) = ", math.sin(rad))
 print("math.cos(rad) = ", math.cos(rad))
 print("math.tan(rad) = ", math.tan(rad))
-
-print("------------------------------------------------------------")  # 60個
-
-# 數學函數
-
-print("sqrt(16)= ", math.sqrt(16))  # 平方根
-print("fabs(-8)= ", math.fabs(-8))  # 取絕對值
-print("fmod(16,5)= ", math.fmod(16, 5))  # 16%5
-print("floor(3.14)= ", math.floor(3.14))  # 3
 
 print("------------------------------------------------------------")  # 60個
 
@@ -139,11 +140,11 @@ print(deg)
 
 print("------------------------------------------------------------")  # 60個
 
-r = 6371  # 地球半徑
+R = 6371  # 地球半徑
 x1, y1 = 22.2838, 114.1731  # 香港紅磡車站經緯度
 x2, y2 = 25.0452, 121.5168  # 台北車站經緯度
 
-d = r * math.acos(
+d = R * math.acos(
     math.sin(math.radians(x1)) * math.sin(math.radians(x2))
     + math.cos(math.radians(x1))
     * math.cos(math.radians(x2))
@@ -151,14 +152,6 @@ d = r * math.acos(
 )
 
 print(f"distance = {d:6.1f}")
-
-print("------------------------------------------------------------")  # 60個
-
-print("兩點距離")
-x1, y1 = 0, 0
-x2, y2 = 3, 4
-distance = ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) ** 0.5
-print("兩點距離 : ", distance)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -193,13 +186,12 @@ acc_deciamal()
 
 print("------------------------------------------------------------")  # 60個
 
-N = 30
-times = 10000000000000  # 電腦每秒可處理數列數目
-day_secs = 60 * 60 * 24  # 一天秒數
-year_secs = 365 * day_secs  # 一年秒數
-combinations = math.factorial(N)  # 組合方式
-years = combinations / (times * year_secs)
-print("需要 %d 年才可以獲得結果" % years)
+import decimal  # decimal可以獲得比浮點數更精確的數值
+
+ff = 20 / 3
+print("浮點數  :", ff)
+dd = decimal.Decimal(20 / 3)
+print("Decimal :", dd)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -225,57 +217,34 @@ print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
+print('複數運算')
+
 import cmath
 
+a = complex(2, 4)
+b = 3 - 5j
+print(a.conjugate())
 
-def complex_math():
-    a = complex(2, 4)
-    b = 3 - 5j
-    print(a.conjugate())
-
-    # 正弦 余弦 平方根等
-    print(cmath.sin(a))
-    print(cmath.cos(a))
-    print(cmath.sqrt(a))
-
-
-complex_math()
+# 正弦 余弦 平方根等
+print(cmath.sin(a))
+print(cmath.cos(a))
+print(cmath.sqrt(a))
 
 print("------------------------------------------------------------")  # 60個
 
-r = 6371  # 地球半徑
-x1, y1 = 22.2838, 114.1731  # 香港紅磡車站經緯度
-x2, y2 = 25.0452, 121.5168  # 台北車站經緯度
-
-d = 6371 * math.acos(
-    math.sin(math.radians(x1)) * math.sin(math.radians(x2))
-    + math.cos(math.radians(x1))
-    * math.cos(math.radians(x2))
-    * math.cos(math.radians(y1 - y2))
-)
-
-print("distance = ", d)
-'''
-print("------------------------------------------------------------")  # 60個
-
-# 分数运算
+print('分數運算')
 
 import fractions
 
+a = fractions.Fraction(5, 4)
+b = fractions.Fraction(7, 16)
+print(print(a + b))
+print(a.numerator, a.denominator)
 
-def frac():
-    a = fractions.Fraction(5, 4)
-    b = fractions.Fraction(7, 16)
-    print(print(a + b))
-    print(a.numerator, a.denominator)
-
-    c = a + b
-    print(float(c))
-    print(type(c.limit_denominator(8)))
-    print(c.limit_denominator(8))
-
-
-frac()
+c = a + b
+print(float(c))
+print(type(c.limit_denominator(8)))
+print(c.limit_denominator(8))
 
 p = fractions.Fraction(22, 7)
 print("分數的使用 :", p)
@@ -307,7 +276,6 @@ print("PI = %f" % (sigma * 4))
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("蒙特卡羅方法求圓周率")
 
 n_dots = 1000000
@@ -318,7 +286,6 @@ in_circle = distance[distance < 1]
 
 pi = 4 * float(len(in_circle)) / n_dots
 print(pi)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -396,20 +363,24 @@ if math.isnan(h) == False:
     print("計算後數值：", h)
     print("最大公約數：", math.gcd(h, x))
 
+"""
+x = 10
+y = -2
+
+z = math.fabs(x / y)
+h = math.factorial(z)
+
+if math.isnan(h) == False:
+    print("計算後數值：", h)
+    print("最大公約數：", math.gcd(h, x))
+"""
+
 print("------------------------------------------------------------")  # 60個
 
-r = 6371  # 地球半徑
-x1, y1 = 22.2838, 114.1731  # 香港紅磡車站經緯度
-x2, y2 = 25.0452, 121.5168  # 台北車站經緯度
+N = 6
+combinations = math.factorial(N)  # 組合方式
 
-d = r * math.acos(
-    math.sin(math.radians(x1)) * math.sin(math.radians(x2))
-    + math.cos(math.radians(x1))
-    * math.cos(math.radians(x2))
-    * math.cos(math.radians(y1 - y2))
-)
-
-print(f"distance = {d:6.1f}")
+print(combinations)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -439,36 +410,12 @@ print("相除：", num1 / num2)  # 回傳  -0.7 + 1.1j
 
 print("------------------------------------------------------------")  # 60個
 
-# 使用math類別的相關方法
-num1 = 3
-num2 = 8
-
-# 求平方、立方根
-print("平方根：", math.sqrt(num1), ", ", num2**0.5)
-print(num1, "^ 3 = ", math.pow(num1, 3))
-print(num2, "立方根：", math.pow(num2, 1.0 / 3))
-
-print("餘數：", math.fmod(num1, num2), ", GCD =", math.gcd(num1, num2))
-print("兩數平方後相加再開根號", math.hypot(num1, num2))
-
-print("------------------------------------------------------------")  # 60個
-
-import decimal  # decimal可以獲得比浮點數更精確的數值
-
-ff = 20 / 3
-print("浮點數  :", ff)
-dd = decimal.Decimal(20 / 3)
-print("Decimal :", dd)
-
-print("------------------------------------------------------------")  # 60個
-
 #角度轉弧度
 th = np.arange(0,360,10)
 #print(th)
 
 x = np.cos(np.radians(th))
 y = np.sin(np.radians(th))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -509,12 +456,6 @@ print(th)
 print("------------------------------------------------------------")  # 60­э
 
 
-
-
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -524,18 +465,6 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-x = 10
-y = -2
-
-z = math.fabs(x / y)
-h = math.factorial(z)
-
-if math.isnan(h) == False:
-    print("計算後數值：", h)
-    print("最大公約數：", math.gcd(h, x))
-"""
 
 print("------------------------------------------------------------")  # 60個
 
