@@ -1,10 +1,30 @@
 # Python 測試 twse 1
 
-import json
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
 import pandas as pd
-import requests
-import requests
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+import json
 from bs4 import BeautifulSoup
+
+print("------------------------------------------------------------")  # 60個
 
 # 台灣證券交易所，個股日成交資訊
 search_date = '20220101'
@@ -33,7 +53,6 @@ df.to_csv("./month_stock.csv", encoding="big5")
 df.to_excel("./month_stock.xlsx", encoding="big5")
 # 轉成html檔
 df.to_html("./month_stock.html")
-
 
 #抓一整年的資料 2022年
 year_df = pd.DataFrame()
@@ -70,8 +89,7 @@ for m in range(1, 13):
 # 轉成csv檔
 year_df.to_csv("./year_stock.csv", encoding="big5")
 
-
-import pandas as pd
+print("------------------------------------------------------------")  # 60個
 
 # 讀取csv
 df = pd.read_csv("./month_stock.csv", encoding="big5")
@@ -88,8 +106,6 @@ print(df3)
 '''
 
 #使用 Matplotlib 畫圖
-import matplotlib.pyplot as plt
-
 
 # 篩選我們要的資料
 date = df["日期"]
@@ -147,6 +163,64 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 plt.show()
 
+print("------------------------------------------------------------")  # 60個
+
+#4.5 台灣證券交易所API
+#這個API長得大概像這樣:
+#http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20160501&stockNo=2330
+#比較重要的地方是date這個參數, 基本上你給的值一定要是yyyyMMdd的形式, 但是真正作用的只有yyyy與MM, 因為他會把這段request解讀成你想要看stockNo股票在yyyy年MM月的紀錄, 所以dd基本上沒有太大意義, 但卻是不可少的部分.
+import time
+
+TWSE_URL = 'http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json'
+
+def get_web_content(search_stock, current_date):
+    resp = requests.get(TWSE_URL + '&date=' + current_date + '&stockNo=' + search_stock)
+    if resp.status_code != 200:
+        return None
+    else:
+        return resp.json()
+
+def get_data(search_stock, current_date):
+    info = list()
+    resp = get_web_content(search_stock, current_date)
+    if resp is None:
+        return None
+    else:
+        if resp['data']:
+            for data in resp['data']:
+                record = {
+                    '日期': data[0],
+                    '開盤價': data[3],
+                    '收盤價': data[6],
+                    '成交筆數': data[8]
+                }
+                info.append(record)
+        return info
+
+def get_stock_data_twse(search_stock):
+    current_date = time.strftime('%Y%m%d')
+    current_year = time.strftime('%Y')
+    current_month = time.strftime('%m')
+    print('Processing data for %s %s...' % (current_year, current_month))
+    get_data(search_stock, current_date)
+    collected_info = get_data(search_stock, current_date)
+    for info in collected_info:
+        print(info)
+
+search_stock = '2330'
+get_stock_data_twse(search_stock)
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 
 

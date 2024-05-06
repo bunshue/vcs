@@ -43,7 +43,6 @@ C:/Users/070601/AppData/Local/Programs/Python/Python311/Lib/site-packages/face_e
 from face_engine import FaceEngine
 from PIL import Image, ImageDraw
 
-'''
 print("face_engine：簡單易用的臉部辨識")
 print("把人臉框出來")
 
@@ -394,7 +393,7 @@ if result["verified"]:
     print('兩張圖片是同一人！')
 else:
     print('兩張圖片不是同一人！')
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """

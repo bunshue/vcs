@@ -1,3 +1,10 @@
+"""
+
+公開資訊觀測站
+https://mops.twse.com.tw/mops/web/index
+
+"""
+
 import pandas as pd
 import requests
 from fake_useragent import UserAgent
@@ -31,3 +38,11 @@ def get_monthly_report(s_type, year, month, delay=5):
 
     return df
    
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個

@@ -153,6 +153,8 @@ print('------------------------------------------------------------')	#60個
 
 print("3D物體偵測")
 
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+
 image = resizeimg(cv2.imread('object1.jpg'))
 # image = resizeimg(cv2.imread('object2.jpg'))
 mp_drawing = mp.solutions.drawing_utils
@@ -540,3 +542,102 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+import cv2
+import mediapipe as mp
+import numpy as np
+
+mp_drawing = mp.solutions.drawing_utils
+mp_drawing_styles = mp.solutions.drawing_styles
+mp_pose = mp.solutions.pose
+
+def draw_pose(image):
+  """
+  
+  """
+  BG_COLOR = (0, 0, 255)#背景色 B-G-R
+  with mp_pose.Pose(
+    static_image_mode=True,
+    model_complexity=2,
+    enable_segmentation=True,
+    min_detection_confidence=0.5) as pose:
+      image_height, image_width, _ = image.shape
+      # Convert the BGR image to RGB before processing.
+      results = pose.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+      if not results.pose_landmarks:
+        return image
+
+      annotated_image = image.copy()
+      # Draw segmentation on the image.
+      # To improve segmentation around boundaries, consider applying a joint
+      # bilateral filter to "results.segmentation_mask" with "image".
+      condition = np.stack((results.segmentation_mask,) * 3, axis=-1) > 0.1
+      bg_image = np.zeros(image.shape, dtype=np.uint8)
+      bg_image[:] = BG_COLOR
+      annotated_image = np.where(condition, annotated_image, bg_image)
+      # Draw pose landmarks on the image.
+      mp_drawing.draw_landmarks(
+          annotated_image,
+          results.pose_landmarks,
+          mp_pose.POSE_CONNECTIONS,
+          landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
+  return annotated_image
+
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+
+img = cv2.imread(filename)
+res = draw_pose(img)
+
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(res, cv2.COLOR_BGR2RGB))
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+""" fail
+import cv2
+import mediapipe as mp
+mp_drawing = mp.solutions.drawing_utils  # mediapipe 繪圖方法
+mp_objectron = mp.solutions.objectron    # mediapipe 物體偵測
+
+cap = cv2.VideoCapture(0)
+
+# 啟用物體偵測，偵測鞋子 Shoe
+with mp_objectron.Objectron(static_image_mode=False,
+                            max_num_objects=5,
+                            min_detection_confidence=0.5,
+                            min_tracking_confidence=0.99,
+                            model_name='Shoe') as objectron:
+
+    if not cap.isOpened():
+        print("Cannot open camera")
+        exit()
+    while True:
+        ret, img = cap.read()
+        if not ret:
+            print("Cannot receive frame")
+            break
+        img = cv2.resize(img,(520,300))               # 縮小尺寸，加快演算速度
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 將 BGR 轉換成 RGB
+        results = objectron.process(img2)             # 取得物體偵測結果
+        # 標記所偵測到的物體
+        if results.detected_objects:
+            for detected_object in results.detected_objects:
+                mp_drawing.draw_landmarks(
+                  img, detected_object.landmarks_2d, mp_objectron.BOX_CONNECTIONS)
+                mp_drawing.draw_axis(img, detected_object.rotation,
+                                    detected_object.translation)
+
+        cv2.imshow('oxxostudio', img)
+        if cv2.waitKey(5) == ord('q'):
+            break    # 按下 q 鍵停止
+cap.release()
+cv2.destroyAllWindows()
+"""

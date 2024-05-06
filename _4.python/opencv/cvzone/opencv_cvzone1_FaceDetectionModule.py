@@ -7,7 +7,7 @@ import mediapipe as mp
 from cvzone.FaceDetectionModule import FaceDetector
 from cvzone.FaceMeshModule import FaceMeshDetector
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/_face/face03.jpg'
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
 
 print("------------------------------------------------------------")  # 60個
 
@@ -30,6 +30,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
+'''
 img = cv2.imread(filename)
 detector = FaceDetector(minDetectionCon=0.5) #信心50%
 img, faces = detector.findFaces(img)
@@ -86,7 +88,9 @@ print("------------------------------------------------------------")  # 60個
 
 print('取得臉部的關鍵座標, 6個')
 
-img = cv2.imread("images/face.jpg")
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+
+img = cv2.imread(filename)
 detector = FaceDetector()
 img, faces = detector.findFaces(img)
 if faces:
@@ -104,7 +108,9 @@ print("------------------------------------------------------------")  # 60個
 
 print('裁剪出臉部的部分影像')
 
-img = cv2.imread("images/face.jpg")
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
+
+img = cv2.imread(filename)
 detector = FaceDetector()
 img, faces = detector.findFaces(img)
 if faces:
@@ -225,7 +231,6 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-
 #使用 CVZone 臉部網格
 
 print("------------------------------------------------------------")  # 60個
@@ -234,13 +239,13 @@ import cv2
 import numpy as np
 from cvzone.FaceMeshModule import FaceMeshDetector
 
-filename = 'C:/_git/vcs/_4.python/opencv/data/_face/face03.jpg'
-
 print("------------------------------------------------------------")  # 60個
 
 print('人臉偵測和匯出3D臉部網格')
 
-img = cv2.imread("images/face4.jpg")
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
+
+img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2, minDetectionCon=0.5,
                             minTrackCon=0.5)
 img, faces = detector.findFaceMesh(img)
@@ -254,7 +259,9 @@ print("------------------------------------------------------------")  # 60個
 
 print('取得臉部網格的點座標')
 
-img = cv2.imread("images/face4.jpg")
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
+
+img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2)
 img, faces = detector.findFaceMesh(img, draw=False)
 if faces:
@@ -269,7 +276,9 @@ print("------------------------------------------------------------")  # 60個
 
 print('取得臉部特徵資訊')
 
-img = cv2.imread("images/face.jpg")
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
+
+img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2)
 img, faces = detector.findFaceMesh(img, draw=False)
 if faces:
@@ -287,7 +296,9 @@ print("------------------------------------------------------------")  # 60個
 
 print('計算臉部特徵的尺寸')
 
-img = cv2.imread("images/face.jpg")
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates48.jpg'
+img = cv2.imread(filename)
+
 detector = FaceMeshDetector(maxFaces=8)
 img, faces = detector.findFaceMesh(img, draw=False)
 if faces:
@@ -328,7 +339,7 @@ print("------------------------------------------------------------")  # 60個
 #使用 CVZone xxx
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 import cv2
 import numpy as np
 from cvzone.FaceMeshModule import FaceMeshDetector
@@ -338,7 +349,10 @@ filename = 'C:/_git/vcs/_4.python/opencv/data/_face/face03.jpg'
 print("------------------------------------------------------------")  # 60個
 
 print('CVZone辨識臉部表情 : 張嘴或閉嘴')
-img = cv2.imread("images/face.jpg")
+
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Elon_Musk03.jpg'
+
+img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2)
 img, faces = detector.findFaceMesh(img, draw=False)
 if faces:
@@ -369,7 +383,9 @@ print("------------------------------------------------------------")  # 60個
 
 print('CVZone辨識臉部表情 : 開眼或閉眼')
 
-img = cv2.imread("images/face.jpg")
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates17.jpg'
+
+img = cv2.imread(filename)
 detector = FaceMeshDetector(maxFaces=2)
 img, faces = detector.findFaceMesh(img, draw=False)
 if faces:
