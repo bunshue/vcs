@@ -1,4 +1,11 @@
-#使用 CVZone 人臉偵測
+"""
+使用 CVZone 人臉偵測
+
+FaceDetector
+FaceMeshDetector
+
+
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -30,8 +37,12 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
+#使用 CVZone 之 FaceDetector
+
+print("------------------------------------------------------------")  # 60個
+
 filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
-'''
+
 img = cv2.imread(filename)
 detector = FaceDetector(minDetectionCon=0.5) #信心50%
 img, faces = detector.findFaces(img)
@@ -231,13 +242,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#使用 CVZone 臉部網格
-
-print("------------------------------------------------------------")  # 60個
-
-import cv2
-import numpy as np
-from cvzone.FaceMeshModule import FaceMeshDetector
+#使用 CVZone 之 FaceMeshDetector 臉部網格 
 
 print("------------------------------------------------------------")  # 60個
 
@@ -336,15 +341,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#使用 CVZone xxx
-
-print("------------------------------------------------------------")  # 60個
-'''
-import cv2
-import numpy as np
-from cvzone.FaceMeshModule import FaceMeshDetector
-
-filename = 'C:/_git/vcs/_4.python/opencv/data/_face/face03.jpg'
+#使用 CVZone 之 FaceMeshDetector 臉部網格 
 
 print("------------------------------------------------------------")  # 60個
 

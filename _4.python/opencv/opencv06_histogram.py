@@ -15,13 +15,12 @@ accumulate：累計(累積、疊加)標識，默認值是False。
 https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
 https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
 
-
 plt.hist(image,ravel(), hitsizes, ranges, color=)
 
-img.ravel() 将原图像的array数组转成一维的数组
-hitsizes 为直方图的灰度级数
-ranges 为灰度范围[0,255]
-color 是参数，需要使用color=''来指定颜色
+img.ravel() 將原圖像的array數組轉成一維的數組
+hitsizes 為直方圖的灰度級數
+ranges 為灰度范圍[0,255]
+color 是參數，需要使用color=''來指定顏色
 
 plt.hist(image.ravel(), num_bins, [0, 256], log = True)
 這邊使用到 matplotlib.pyplot 的 hist，它接受一組資料，計算清單中各值出現的次數，上面的範例
@@ -71,6 +70,10 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("測試 01 ravel() 的用法----------------------------------------------------------")  # 60個
 
+print("直接把影像的 灰階值 或 RGB值 用直方圖統計出來")
+
+filename = "C:/_git/vcs/_4.python/_data/ims01.bmp"
+
 plt.figure(figsize=(16, 8))
 
 print('彩圖 image0')
@@ -81,27 +84,25 @@ print('灰階 image1')
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-plt.subplot(221)
+plt.subplot(231)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-plt.subplot(222)
+plt.subplot(232)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("灰階")
 
-plt.subplot(223)
+plt.subplot(234)
 cc = image0.ravel()  #拉成一維
 plt.hist(cc, num_bins, [0, 256], color="r", label = '彩圖')
-plt.title("原圖的直方圖 3通道一起")
+plt.title("原圖的直方圖 RGB值 3通道一起")
 
-plt.subplot(224)
+plt.subplot(235)
 cc = image1.ravel()  # 拉成一維
 plt.hist(cc, num_bins, [0, 256], color="g", label = '灰階圖')
-plt.title("灰階後的直方圖 變成1通道")
+plt.title("灰階後的直方圖 灰階值 變成1通道")
 
-plt.show()
-
-print("測試 02 calcHist----------------------------------------------------------")  # 60個
+print("使用 calcHist")
 
 """
 OpenCV 本身也有計算直方圖資料的函式 cv2.calcHist，而且是專門針對圖片進行計算，它的參數有：
@@ -115,21 +116,17 @@ OpenCV 本身也有計算直方圖資料的函式 cv2.calcHist，而且是專門
 計算出來的資料，可以直接透過 matplotlib.pyplot 的 plot 繪製折線圖，或者是透過 bar 繪製直條圖。
 """
 
-print('灰階 image1')
-# 檔案 => cv2影像 => 灰階
-image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
+# image1 灰階影像
 # 生成圖像之直方圖, 256束, 灰階圖只有第0通道
 hist = cv2.calcHist([image1], [0], None, [256], [0, 256])
-
 print(hist.shape)
 print(hist.size)
 
-print("用 plot 和 bar 顯示 calcHist 的結果")
+plt.subplot(236)
 plt.plot(hist, color="b", label="plot", lw =3)
 plt.plot(np.arange(0, 256), hist.ravel(), color='r', label="plot", lw =3) #same
 plt.bar(np.arange(0, 256), hist.ravel(), color='g', label="bar", lw =3) # 要這麼寫
-
+plt.title("用 plot 和 bar 顯示 calcHist 的結果")
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
 
 plt.show()
@@ -142,7 +139,7 @@ filename = "data/pic_brightness1.bmp"
 
 # 對於彩色的圖片，
 # 可以用 OpenCV 的 calcHist 函數分別計算統計值，
-# 並畫出 RGB 三種顏色的分佈圖：
+# 並畫出 RGB 三種顏色的分佈圖
 
 print('彩圖 image0')
 # 檔案 => cv2影像
@@ -705,13 +702,13 @@ print("測試 15 calcHist equalizeHist------------------------------------------
 """
 opencv之影像直方圖均衡化 直方圖均衡化處理 cv2.equalizeHist
 
-函数原型：cv2.calcHist(image,channels,mask,histSize,ranges)
-image为待计算直方图的图像，需用[]包裹
-channels指定待计算直方图的图像的哪一通道用来计算直方图，RGB图像可以指定[0,1,2]，灰度图像只有[0],需用[]包裹,
-mask为掩码，可以指定图像的范围，如果是全图，默认为none
-hitsize为直方图的灰度级数，例如[0,255]一共256级，故参数为256，需用[]包裹
-range为像素值范围，为[0,255]
-返回值为hist，直方图
+函數原型：cv2.calcHist(image,channels,mask,histSize,ranges)
+image為待計算直方圖的圖像，需用[]包裹
+channels指定待計算直方圖的圖像的哪一通道用來計算直方圖，RGB圖像可以指定[0,1,2]，灰度圖像只有[0],需用[]包裹,
+mask為掩碼，可以指定圖像的范圍，如果是全圖，默認為none
+hitsize為直方圖的灰度級數，例如[0,255]一共256級，故參數為256，需用[]包裹
+range為像素值范圍，為[0,255]
+返回值為hist，直方圖
 """
 
 print('灰階 image1')
@@ -887,4 +884,3 @@ print("------------------------------------------------------------")  # 60個
 # plt.hist 參數
 # plt.hist(cc, bins=num_bins, color="g", alpha=0.5, density=False)
 # density=True   #以密度表示
-
