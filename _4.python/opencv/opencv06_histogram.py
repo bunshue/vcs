@@ -1,7 +1,3 @@
-
-from __future__ import print_function
-from __future__ import division
-
 """
 
 用直方圖分析一張圖片的顏色組成
@@ -445,7 +441,7 @@ plt.show()
 
 print("測試 09 calcHist----------------------------------------------------------")  # 60個
 
-filename = 'Histogram_Calculation_Original_Image.jpg'
+filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 
 print('彩圖 image0')
 # 檔案 => cv2影像
@@ -497,11 +493,15 @@ for i in range(1, histSize):
             ( 0, 0, 255), thickness=2)
 ## [Draw for each channel]
 
-cv2.imshow('Source image', image0)
-cv2.imshow('calcHist Demo', histImage)
+plt.subplot(121)
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.subplot(122)
+plt.imshow(cv2.cvtColor(histImage, cv2.COLOR_BGR2RGB))
+plt.title("均衡化之圖")
+
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
@@ -776,35 +776,11 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-# plt.hist 參數
-# plt.hist(cc, bins=num_bins, color="g", alpha=0.5, density=False)
-# density=True   #以密度表示
-
-print("------------------------------------------------------------")  # 60個
-
 ESC = 27
 
-import cv2
-import sys
-import time
-
 print('------------------------------------------------------------')	#60個
-"""
-print("把 直方圖均衡化處理 套用在webcam上")
+
+print("把 直方圖均衡化處理 套用在webcam上 黑白")
 
 cap = cv2.VideoCapture(0)
 
@@ -846,11 +822,9 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-"""
-
 print("------------------------------------------------------------")  # 60個
 
-print("把 直方圖均衡化處理 套用在webcam上")
+print("把 直方圖均衡化處理 套用在webcam上 彩色")
 
 cap = cv2.VideoCapture(0)
 
@@ -893,3 +867,24 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+# plt.hist 參數
+# plt.hist(cc, bins=num_bins, color="g", alpha=0.5, density=False)
+# density=True   #以密度表示
+

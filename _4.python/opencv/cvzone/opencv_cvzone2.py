@@ -155,8 +155,8 @@ print("3D物體偵測")
 
 filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
-image = resizeimg(cv2.imread('object1.jpg'))
-# image = resizeimg(cv2.imread('object2.jpg'))
+image = resizeimg(cv2.imread('images2/object1.jpg'))
+# image = resizeimg(cv2.imread('images2/object2.jpg'))
 mp_drawing = mp.solutions.drawing_utils
 mp_objectron = mp.solutions.objectron
 objectron = mp_objectron.Objectron(static_image_mode=True, max_num_objects=5, min_detection_confidence=0.5, model_name='Chair')
@@ -210,8 +210,8 @@ print('------------------------------------------------------------')	#60個
 
 print("手部偵測")
 
-#img = resizeimg(cv2.imread('hand1.jpg'))
-img = resizeimg(cv2.imread('hand2.jpg'))
+#img = resizeimg(cv2.imread('images2/hand1.jpg'))
+img = resizeimg(cv2.imread('images2/hand2.jpg'))
 detector = HandDetector(detectionCon=0.5, maxHands=2)
 img = detector.findHands(img)
 
@@ -233,8 +233,8 @@ print('------------------------------------------------------------')	#60個
 
 print("手部狀態偵測")
 
-img = resizeimg(cv2.imread('hand3.jpg'))
-# img = resizeimg(cv2.imread('hand4.jpg'))
+img = resizeimg(cv2.imread('images2/hand3.jpg'))
+# img = resizeimg(cv2.imread('images2/hand4.jpg'))
 detector = HandDetector(detectionCon=0.5)
 img = detector.findHands(img)
 lmList, bboxInfo = detector.findPosition(img)
@@ -432,7 +432,6 @@ while cap.isOpened():
 
 cap.release()
 cv2.destroyAllWindows()
-
 
 print("------------------------------------------------------------")  # 60個
 """
