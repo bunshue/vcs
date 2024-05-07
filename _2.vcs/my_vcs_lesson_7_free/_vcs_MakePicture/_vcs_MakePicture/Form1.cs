@@ -2646,12 +2646,7 @@ namespace _vcs_MakePicture
                     }
                     else
                     {
-                        Random r = new Random();
-                        kk =r.Next(0, 255);
-
-
                         bitmap1.SetPixel(xx, yy, Color.FromArgb(255, (int)kk, (int)kk, (int)kk));
-
                     }
                     /*                    
                     if (dd > 255)

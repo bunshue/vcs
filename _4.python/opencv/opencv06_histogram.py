@@ -8,31 +8,38 @@ image：原圖像
 channels：如果輸入的圖像是灰度圖，它的值就是[0]，如果是彩色圖像，傳入的參數可以是[0]、[1]、[2],分布對應著b,g,r。
 mask：掩膜圖像。要統計整幅圖像的直方圖就把這個參數設為None，如果要統計掩膜部分的圖像的直方圖，就需要這個參數。
 histSize：bins的個數,就是分多少個組距。例如[256]或者[16]，都要用方括號括起來。
-ranges：像素值范圍，通常為[0, 256]
+ranges：像素值範圍，通常為[0, 256]
 accumulate：累計(累積、疊加)標識，默認值是False。
 這個函數返回的對象hist是一個一維數組，數組內的元素是各個灰度級的像素個數。
 
 https://blog.gtwang.org/programming/python-opencv-matplotlib-plot-histogram-tutorial/
 https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
 
-plt.hist(image,ravel(), hitsizes, ranges, color=)
+plt.hist(image,ravel(), hitsizes, ranges, color)
 
 img.ravel() 將原圖像的array數組轉成一維的數組
 hitsizes 為直方圖的灰度級數
-ranges 為灰度范圍[0,255]
+ranges 為灰度範圍[0,255]
 color 是參數，需要使用color=''來指定顏色
 
 plt.hist(image.ravel(), num_bins, [0, 256], log = True)
 這邊使用到 matplotlib.pyplot 的 hist，它接受一組資料，計算清單中各值出現的次數，上面的範例
 透過 NumPy 陣列的 ravel 方法，取得圖片攤平後的資料（只是個 NumPy 視圖）
 ，hist 的第二個參數指定要切出幾個直條，第三個參數指定要計算的值範圍，log 指定了是否 y 軸是否使用對數結果顯示。
-"""
 
-"""
+OpenCV 本身也有計算直方圖資料的函式 cv2.calcHist，而且是專門針對圖片進行計算，它的參數有：
+
+    images：一組要分析的圖片。
+    channels：要分析的頻道，若是灰階圖片就指定 [0]，若是彩色圖片，可分別使用 [0]、[1]、[2] 指定 BGR 頻道。
+    mask：圖片遮罩，預設為 None。
+    histSize：各頻道要切分出幾個直條。
+    ranges：要計算的像素值範圍，通常都是設為 [0, 256]。
+
+計算出來的資料，可以直接透過 matplotlib.pyplot 的 plot 繪製折線圖，或者是透過 bar 繪製直條圖。
+
 image0 原圖 彩圖
 image1 灰階
 image2 遮罩過後
-
 """
 import cv2
 
@@ -68,11 +75,26 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print("測試 01 ravel() 的用法----------------------------------------------------------")  # 60個
-
-print("直接把影像的 灰階值 或 RGB值 用直方圖統計出來")
+print("------------------------------------------------------------")  # 60個
 
 filename = "C:/_git/vcs/_4.python/_data/ims01.bmp"
+filename = "C:/_git/vcs/_4.python/_data/eq1.bmp"  # 560X400
+
+print("一張彩圖")
+print('彩圖 image0')
+# 檔案 => cv2影像
+image0 = cv2.imread(filename)
+
+plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
+plt.title("原圖")
+
+plt.show()
+
+print("測試 01 ravel() 的用法----------------------------------------------------------")  # 60個
+
+print("一張彩圖的RGB與灰度的統計資料1")
+      
+print("直接把影像的 灰階值 或 RGB值 用直方圖統計出來")
 
 plt.figure(figsize=(16, 8))
 
@@ -84,37 +106,33 @@ print('灰階 image1')
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 
-plt.subplot(231)
+plt.subplot(221)
 plt.imshow(cv2.cvtColor(image0, cv2.COLOR_BGR2RGB))
 plt.title("原圖")
 
-plt.subplot(232)
+plt.subplot(222)
 plt.imshow(cv2.cvtColor(image1, cv2.COLOR_BGR2RGB))
 plt.title("灰階")
 
-plt.subplot(234)
-cc = image0.ravel()  #拉成一維
-plt.hist(cc, num_bins, [0, 256], color="r", label = '彩圖')
-plt.title("原圖的直方圖 RGB值 3通道一起")
+plt.subplot(223)
+b, g, r = cv2.split(image0)
+bb = b.ravel()  #拉成一維
+gg = g.ravel()  #拉成一維
+rr = r.ravel()  #拉成一維
+plt.hist(bb, num_bins, [0, 256], color="b", label = 'B', alpha = 0.5)
+plt.hist(gg, num_bins, [0, 256], color="g", label = 'G', alpha = 0.5)
+plt.hist(rr, num_bins, [0, 256], color="r", label = 'R', alpha = 1.0)
 
-plt.subplot(235)
 cc = image1.ravel()  # 拉成一維
-plt.hist(cc, num_bins, [0, 256], color="g", label = '灰階圖')
-plt.title("灰階後的直方圖 灰階值 變成1通道")
+plt.hist(cc, num_bins, [0, 256], color="gray", label = '灰階', alpha = 0.5)
+
+plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
+plt.ylim(0, 8000)  # 設定 y 軸座標範圍
+plt.title("原圖的直方圖 RGB值 3通道分開畫")
+
+#plt.title("灰階後的直方圖 灰階值 變成1通道")
 
 print("使用 calcHist")
-
-"""
-OpenCV 本身也有計算直方圖資料的函式 cv2.calcHist，而且是專門針對圖片進行計算，它的參數有：
-
-    images：一組要分析的圖片。
-    channels：要分析的頻道，若是灰階圖片就指定 [0]，若是彩色圖片，可分別使用 [0]、[1]、[2] 指定 BGR 頻道。
-    mask：圖片遮罩，預設為 None。
-    histSize：各頻道要切分出幾個直條。
-    ranges：要計算的像素值範圍，通常都是設為 [0, 256]。
-
-計算出來的資料，可以直接透過 matplotlib.pyplot 的 plot 繪製折線圖，或者是透過 bar 繪製直條圖。
-"""
 
 # image1 灰階影像
 # 生成圖像之直方圖, 256束, 灰階圖只有第0通道
@@ -122,30 +140,27 @@ hist = cv2.calcHist([image1], [0], None, [256], [0, 256])
 print(hist.shape)
 print(hist.size)
 
-plt.subplot(236)
-plt.plot(hist, color="b", label="plot", lw =3)
-plt.plot(np.arange(0, 256), hist.ravel(), color='r', label="plot", lw =3) #same
-plt.bar(np.arange(0, 256), hist.ravel(), color='g', label="bar", lw =3) # 要這麼寫
-plt.title("用 plot 和 bar 顯示 calcHist 的結果")
+plt.subplot(224)
+plt.plot(hist, color="b", label="plot", lw=2)
+plt.plot(np.arange(0, 256), hist.ravel(), color='gold', label="plot", lw=2) #同上
+plt.bar(np.arange(0, 256), hist.ravel(), color='gray', label="bar", lw=2) # 要這麼寫
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
+plt.ylim(0, 8000)  # 設定 y 軸座標範圍
+plt.title("用 plot 和 bar 顯示 calcHist 的結果")
 
 plt.show()
 
 print("測試 03 calcHist----------------------------------------------------------")  # 60個
 
-print('分析一張彩圖的RGB分佈')
-
-filename = "data/pic_brightness1.bmp"
+print("一張彩圖的RGB與灰度的統計資料2")
 
 # 對於彩色的圖片，
 # 可以用 OpenCV 的 calcHist 函數分別計算統計值，
 # 並畫出 RGB 三種顏色的分佈圖
 
 print('彩圖 image0')
-# 檔案 => cv2影像
+# 檔案 => cv2影像(彩圖)
 image0 = cv2.imread(filename)
-print("形狀 :", image0.shape)
-print("大小 :", image0.size)
 
 # ---------使用cv2.calcHist()函數繪圖----
 #這個函數可以傳入彩圖，因為它還有一個channel參數，就把通道分開了
@@ -170,25 +185,23 @@ plt.plot(hist_g, color="g", label="G", lw =2)
 plt.plot(hist_b, color="b", label="B", lw =1)
 
 plt.xlim(0 - 10, 256 + 10)  # 設定 x 軸座標範圍
+plt.ylim(0, 8000)  # 設定 y 軸座標範圍
 plt.legend(loc="best")
 
 plt.show()
 
 print("測試 04 calcHist----------------------------------------------------------")  # 60個
 
+print("一張彩圖的RGB與灰度的統計資料3 使用mask")
 print("使用mask, 因為目前mask只能用1維的 所以圖片要先轉成灰階")
 
 print('灰階 image1')
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print("形狀 :", image1.shape)
-print("大小 :", image1.size)
 
 # 建立圖形遮罩, 一樣大小, 黑色
 mask = np.zeros(image1.shape, np.uint8)
-print("形狀 :", image1.shape)
-print("大小 :", image1.size)
-print(mask.shape)
+
 H = image1.shape[0]
 W = image1.shape[1]
 
@@ -236,15 +249,10 @@ print("使用mask, 因為目前mask只能用1維的 所以圖片要先轉成灰�
 print('灰階 image1')
 # 檔案 => cv2影像 => 灰階
 image1 = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-print("形狀 :", image1.shape)
-print("大小 :", image1.size)
 
 # 建立圖形遮罩, 一樣大小, 黑色
 mask = np.zeros(image1.shape, np.uint8)
-print("形狀 :", image1.shape)
-print("大小 :", image1.size)
 
-print(mask.shape)
 H = image1.shape[0]
 W = image1.shape[1]
 
@@ -366,33 +374,23 @@ plt.show()
 
 print("測試 08 calcHist----------------------------------------------------------")  # 60個
 
-filename = "data/pic_brightness1.bmp"
-
 # 使用 mask 繪製直方圖
 
 print('彩圖 image0')
 # 檔案 => cv2影像
 image0 = cv2.imread(filename)
-print("形狀 :", image0.shape)
-print("大小 :", image0.size)
 
 # 建立圖形遮罩, 一樣大小, 黑色
 mask = np.zeros(image0.shape, np.uint8)
-print("形狀 :", image0.shape)
-print("大小 :", image0.size)
-print(mask.shape)
+
 H = image0.shape[0]
 W = image0.shape[1]
 
 # 修改mask
 BORDER = 50
 mask[BORDER : H - BORDER, BORDER : W - BORDER] = 255  # 白色 先h 後 w
-print("形狀 :", mask.shape)
-print("大小 :", mask.size)
 
 image_mask = cv2.bitwise_and(image0, mask)
-print("形狀 :", image_mask.shape)
-print("大小 :", image_mask.size)
 
 # 生成圖像之直方圖, 256束, 彩圖之第0通道
 hist_b = cv2.calcHist([image0], [0], None, [256], [0, 256])
@@ -443,8 +441,6 @@ filename = "C:/_git/vcs/_4.python/_data/elephant.jpg"
 print('彩圖 image0')
 # 檔案 => cv2影像
 image0 = cv2.imread(filename)
-print("形狀 :", image0.shape)
-print("大小 :", image0.size)
 
 # 將image0 依據RGB三通道分離到一個三維矩陣
 bgr_planes = cv2.split(image0)
@@ -705,9 +701,9 @@ opencv之影像直方圖均衡化 直方圖均衡化處理 cv2.equalizeHist
 函數原型：cv2.calcHist(image,channels,mask,histSize,ranges)
 image為待計算直方圖的圖像，需用[]包裹
 channels指定待計算直方圖的圖像的哪一通道用來計算直方圖，RGB圖像可以指定[0,1,2]，灰度圖像只有[0],需用[]包裹,
-mask為掩碼，可以指定圖像的范圍，如果是全圖，默認為none
+mask為掩碼，可以指定圖像的範圍，如果是全圖，默認為none
 hitsize為直方圖的灰度級數，例如[0,255]一共256級，故參數為256，需用[]包裹
-range為像素值范圍，為[0,255]
+range為像素值範圍，為[0,255]
 返回值為hist，直方圖
 """
 

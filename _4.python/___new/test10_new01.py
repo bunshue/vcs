@@ -22,8 +22,9 @@ import sys
 import time
 import math
 import random
+import requests
 import numpy as np
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 def printlocal():
@@ -79,7 +80,6 @@ postgres_insert_query = (
 )
 
 print(postgres_insert_query)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -405,14 +405,6 @@ tok_name = {
 
 print(type(tok_name))
 print(tok_name)
-
-print("------------------------------------------------------------")  # 60個
-
-print(" 姓名    國文    英文    總分")
-print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
-print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
-print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
-print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1376,6 +1368,12 @@ weight = 8
 
 print("編號 %d 英文名 %s 中文名 %s 體重 %d" % (id_no, ename, cname, weight))
 print("編號 {} 英文名 {} 中文名 {} 體重 {}".format(id_no, ename, cname, weight))
+
+print(" 姓名    國文    英文    總分")
+print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
+print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
+print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
+print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
 
 print(" 姓名    國文    英文    總分")
 print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
@@ -2729,20 +2727,6 @@ print("分數:", price1)  # 串列內容已改變
 
 print("------------------------------------------------------------")  # 60個
 
-
-def payment():
-    price = 100
-    num = 30
-    rate = 0.35  # 抽取獎金的百分比
-    total = price * num * rate
-    return price * num, total
-
-
-e1, e2 = payment()
-print("總銷售業績{},應付獎金：{}".format(e1, e2))
-
-print("------------------------------------------------------------")  # 60個
-
 str1 = "do your best what you can do"
 s1 = str1.count("do", 0)
 s2 = str1.count("o", 0, 20)
@@ -2773,24 +2757,6 @@ print("是否皆為大寫字元", phrase.isupper())
 print("是否皆為小寫字元", phrase.islower())
 
 print("------------------------------------------------------------")  # 60個
-
-
-def factorial(*arg):
-    product = 1
-    for n in arg:
-        product *= n
-    return product
-
-
-ans1 = factorial(5)
-print(ans1)
-ans2 = factorial(5, 4)
-print("5*4=", ans2)
-ans3 = factorial(5, 4, 3)
-print("5*4*3=", ans3)
-ans4 = factorial(5, 4, 3, 2)
-print("5*4*3*2=", ans4)
-
 
 # 不定長度參數之函數
 def myfruit(**arg):
@@ -2825,25 +2791,6 @@ print("Python為開頭的字串嗎", wd.startswith("Python"))  # 回傳True
 print("funny為開頭的字串嗎", wd.startswith("funny", 0))  # 回傳False
 print("funny從指定位置的開頭的字串嗎", wd.startswith("funny", 10))  # 回傳True
 print("powerful.為結尾字串嗎", wd.endswith("powerful."))  # 回傳True
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-    函數功能：計算獎金的百分比
-    price:產品單價
-    num:銷售數量
-    price*num:銷售業績總額
-    total:實得獎金
-"""
-
-
-def payment():
-    price = float(input("產品單價："))
-    num = float(input("銷售數量："))
-    rate = 0.35  # 抽取獎金的百分比
-    total = price * num * rate
-    return price * num, total
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -4399,7 +4346,8 @@ print("------------------------------------------------------------")  # 60個
 
 import re
 
-files = os.listdir("_data")
+foldername = "data"
+files = os.listdir(foldername)
 txtList = []
 # 測試1
 pattern = '(.*).txt'
@@ -6725,11 +6673,6 @@ print(word2, ":", count2, "個")
 
 print("------------------------------------------------------------")  # 60個
 
-num = 3.2
-print("數值{0:2.1f} 取log10 {1:4.3f}".format(num, np.log10(num)))
-
-print("------------------------------------------------------------")  # 60­э
-
 num = 1234
 print("¨數值 = {0:10d},  數值 = {0:10d}".format(num, num))
 
@@ -6938,30 +6881,6 @@ print("{:10.2e}".format(12345.6))  # 指定總寬度10,小數2位，顯示ΔΔ1.
 
 print("------------------------------------------------------------")  # 60個
 
-amount = int(input("請輸入需繳費金額:"))
-money = int(input("請輸入付款金額:"))
-
-change = temp = money - amount  # change與temp為找零
-n500 = change // 500  # change除於500取得500元張數再指定給n500
-change = change % 500  # 求500元張數後剩於的找零
-n100 = change // 100  # change除於100取得100元張數再指定給n100
-change = change % 100  # 求100元張數後剩於的找零
-n50 = change // 50  # change除於50取得50元個數再指定給n50
-change = change % 50  # 求50元張數後剩於的找零
-n10 = change // 10  # change除於10取得10元個數再指定給n10
-change = change % 10  # 求10元張數後剩於的找零
-n5 = change // 5  # change除於5取得5元個數再指定給n5
-change = change % 5  # 求5元張數後剩於的找零
-n1 = change // 1  # change除於1取得1元個數再指定給n1
-print("收您{}元，找您{}元".format(money, temp))  # 顯示繳費金額與找零金額
-print(
-    "500元{}張\n100元{}張\n 50元{}個\n 10元{}個\n  5元{}個\n  1元{}個".format(
-        n500, n100, n50, n10, n5, n1
-    )
-)
-
-print("------------------------------------------------------------")  # 60個
-
 print("%07d" % 12345)  # 空格補零		ð 0012345
 print("%-7d" % 12345)  # 靠左對齊		ð 12345ΔΔ
 print("%#o" % 12345)  # 顯示八進制符號	ð 0x30071
@@ -7019,56 +6938,6 @@ print(listSport[:4])  # [:4] 表示第1到第4個串列元素，顯示['爬山',
 print(listSport[1:6:2])  # [1:6:2] 表示第2、4、6個串列元素，顯示['游泳', '舉重', '跳水']
 print(listSport[6:1:-2])  # [6:1:-2] 表示第7、5、3個串列元素，顯示['瑜珈', '飛輪', '跑步']
 print(listSport[1::2])  # [1::2] 表示第2、4、6個串列元素，顯示['游泳', '舉重', '跳水']
-
-print("------------------------------------------------------------")  # 60個
-
-pid = ["E01", "E02", "E03", "E04"]
-name = ["碁峰可樂", "阿才肉乾", "龍哥豆漿", "五香牛肉"]
-price = [100, 690, 25, 300]
-num = int(input("查詢第幾項產品(1~4)："))
-if num >= 1 and num <= 4:
-    index = num - 1
-    print("編號：%s" % pid[index])
-    print("品名：%s" % name[index])
-    print("單價：%d" % price[index])
-else:
-    print("無第 %d 項產品" % num)
-
-print("------------------------------------------------------------")  # 60個
-
-product = []
-count = int(input("請輸入產品建檔數量："))
-
-i = 0
-while i < count:
-    print("第 %d 項產品資訊" % (i + 1))
-    temp = []
-    temp.append((input("編號：")))
-    temp.append((input("品名：")))
-    temp.append((input("單價：")))
-    product.append(temp)
-    i += 1
-
-print("\n產品資訊如下：")
-for row in product:  # 印出每列
-    for col in row:  # 印出每欄
-        print(col, end="\t")
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-listScore = []  # 建立listScore為空串列
-count = int(input("請輸入學生數："))  # 指定學生數
-# 輸入學生成績並逐一放入listScore串列，append()方法可將資料附加到串列中
-for i in range(count):
-    print("第 %d 位學生：" % (i + 1), end="")
-    listScore.append(int(input("")))
-
-print("成績列表：", listScore)  # 顯示listScore所有元素
-listScore.sort()  # 呼叫sort()方法將listScore中的元素進行由小到大非序
-print("遞增排序：", listScore)  # 印出listScore由小到大排序的結果
-listScore.reverse()  # 呼叫reverse()方法將listScore中的元素進行反轉
-print("遞減排序：", listScore)  # 印出listScore由大到小排序的結果
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7131,83 +7000,6 @@ n = 100
 print("函式外 全域變數n 位址=%d, 值=%d" % (id(n), n))
 func()
 print("函式外 全域變數n 位址=%d, 值=%d" % (id(n), n))
-
-print("------------------------------------------------------------")  # 60個
-
-# ProductSys.py
-
-# 新增
-def fnCreate():
-    uid = input("編號：")
-    if uid in dictProduct:
-        print("編號重複，無法新增產品記錄")
-        return
-    name = input("品名：")
-    price = int(input("單價："))
-    newProduct = {uid: [name, price]}
-    dictProduct.update(newProduct)
-    print("產品新增成功!")
-
-
-# 修改
-def fnUpdate():
-    uid = input("編號：")
-    if uid not in dictProduct:
-        print("無此編號，無法修改產品記錄")
-        return
-    name = input("品名：")
-    price = int(input("單價："))
-    dictProduct[uid] = [name, price]
-    print(dictProduct)
-    print("產品修改成功!")
-
-
-# 刪除
-def fnDelete():
-    uid = input("編號：")
-    if uid not in dictProduct:
-        print("無此編號，無法刪除產品記錄")
-        return
-    dictProduct.pop(uid)
-    print("產品刪除成功!")
-
-
-# 依編號查詢產品
-def fnGetProductById():
-    uid = input("編號：")
-    if uid not in dictProduct:
-        print("查無此編號")
-        return
-    print("編號\t品名\t單價")
-    print("%s\t%s\t%d" % (uid, dictProduct[uid][0], dictProduct[uid][1]))
-
-
-# 將所有產品列出
-def fnGetProductList():
-    print("編號\t品名\t單價")
-    listKey = dictProduct.keys()
-    for uid in listKey:
-        print("%s\t%s\t%d" % (uid, dictProduct[uid][0], dictProduct[uid][1]))
-
-
-# 主程式
-dictProduct = {}
-print("======= DTC產品管理系統 =======")
-while True:
-    option = int(input("系統功能->1.新增 2.修改 3.刪除 4.查詢 5.產品列表 其他.離開："))
-    if option == 1:
-        fnCreate()
-    elif option == 2:
-        fnUpdate()
-    elif option == 3:
-        fnDelete()
-    elif option == 4:
-        fnGetProductById()
-    elif option == 5:
-        fnGetProductList()
-    else:
-        print("離開系統")
-        break
 
 print("------------------------------------------------------------")  # 60個
 
@@ -7299,30 +7091,12 @@ print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
 print("------------------------------------------------------------")  # 60個
 
 #改成動物資料
-listScore = []  # 建立listScore為空串列
-
-listScore.append(int(input("")))
-
-print("成績列表：", listScore)  # 顯示listScore所有元素
-listScore.sort()  # 呼叫sort()方法將listScore中的元素進行由小到大非序
-print("遞增排序：", listScore)  # 印出listScore由小到大排序的結果
-listScore.reverse()  # 呼叫reverse()方法將listScore中的元素進行反轉
-print("遞減排序：", listScore)  # 印出listScore由大到小排序的結果
-
-#改成動物資料
 soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
 soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
 soldier2 = {"tag": "green", "score": 10, "speed": "fast"}
 armys = [soldier0, soldier1, soldier2]  # 小兵組成串列
 for army in armys:  # 列印小兵
     print(army)
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -8772,6 +8546,7 @@ print("%3s  %4d    %4d    %4d     %3.1f" % ("洪雨星", 96, 95, 191, 191 / 2))
 print("%3s  %4d    %4d    %4d     %3.1f" % ("洪冰雨", 92, 88, 180, 180 / 2))
 print("%3s  %4d    %4d    %4d     %3.1f" % ("洪星宇", 93, 97, 190, 190 / 2))
 
+print('ccccccccccc')
 print("------------------------------------------------------------")  # 60個
 
 wd = """The Zen of Python, by Tim Peters
@@ -10491,9 +10266,7 @@ for i in range(1, a + 1):
         print(f"{k:>3d}", end="")
     print("")
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 a = 10  # 要產生的金字塔層數
 b = 1  # 提供 while 迴圈停止的依據
@@ -10542,7 +10315,9 @@ local_table = {
     "Y": 31,
     "Z": 33,
 }
-id_number = input("輸入身分證字號：")
+
+print("輸入身分證字號：")
+id_number = "A123456789"
 check = False  # 新增 check=False 變數，與 while 迴圈搭配
 while True:  # 使用 while 迴圈
     id_arr = list(id_number)  # 新增 id_arr 變數，將身分證字號轉換成串列存入
@@ -10601,79 +10376,37 @@ local_table = {
     "Y": 31,
     "Z": 33,
 }
-while True:  # 新增 while 迴圈，就可以重複輸入
-    id_number = input("輸入身分證字號：")
-    check = False
-    while True:
-        try:  # 使用 try
-            id_arr = list(id_number)
-            if len(id_arr) != 10:
-                break
-            local = str(local_table[id_arr[0]])
-            check_arr = list(local)
-            check_arr[0] = int(check_arr[0])
-            check_arr[1] = int(check_arr[1]) * 9
-            sex = id_arr[1]
-            if sex != "1" and sex != "2":
-                break
-            check_arr.append(int(sex) * 8)
-            for i in range(7):
-                check_arr.append(int(id_arr[i + 2]) * (7 - i))
-            check_num = 10 - sum(check_arr) % 10
-            if check_num != int(id_arr[9]):
-                break
-            check = True
+
+print("輸入身分證字號：")
+id_number = "A123456789"
+check = False
+while True:
+    try:  # 使用 try
+        id_arr = list(id_number)
+        if len(id_arr) != 10:
             break
-        except:  # 使用 except，如果發生例外狀況，跳出迴圈
+        local = str(local_table[id_arr[0]])
+        check_arr = list(local)
+        check_arr[0] = int(check_arr[0])
+        check_arr[1] = int(check_arr[1]) * 9
+        sex = id_arr[1]
+        if sex != "1" and sex != "2":
             break
+        check_arr.append(int(sex) * 8)
+        for i in range(7):
+            check_arr.append(int(id_arr[i + 2]) * (7 - i))
+        check_num = 10 - sum(check_arr) % 10
+        if check_num != int(id_arr[9]):
+            break
+        check = True
+        break
+    except:  # 使用 except，如果發生例外狀況，跳出迴圈
+        break
 
-    if check == False:
-        print("身分證字號格式錯誤")
-    else:
-        print("身分證字號正確")
-
-
-print("------------------------------------------------------------")  # 60個
-
-table = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}  # 轉換對照表
-roman = [i for i in input()]  # 將輸入的羅馬數字變成串列
-r = roman[::-1]  # 反轉串列
-output = table[r[0]]  # 讓 output 先等於第一個數字
-for i in range(1, len(r)):  # 從第二個數字開始依序取到最後一個數字
-    if table[r[i]] < table[r[i - 1]]:  # 如果後面數字比較小
-        output = output - table[r[i]]  # 讓 output 減去後面的數字
-    else:
-        output = output + table[r[i]]  # 如果後面數字比較大，讓 output 加上後面的數字
-print(output)
-
-# 輸入 IVMVIIMVVMVM 就會得到 3994
-
-print("------------------------------------------------------------")  # 60個
-
-
-num_table = [
-    [1000, "M"],
-    [900, "CM"],
-    [500, "D"],
-    [400, "CD"],
-    [100, "C"],
-    [90, "XC"],
-    [50, "L"],
-    [40, "XL"],
-    [10, "X"],
-    [9, "IX"],
-    [5, "V"],
-    [4, "IV"],
-    [1, "I"],
-]  # 建立對照表
-num = int(input())  # 將輸入的文字轉換成數字
-output = ""  # 設定輸出的 output 字串
-for i in num_table:  # 依序判斷對照表中每個數字
-    a = divmod(num, i[0])  # 取得商 ( a[0] ) 和餘數 ( a[1] )
-    if a[0] != 0:  # 如果 a[0] 不為 0
-        num = a[1]  # 取得餘數繼續往下除
-        output = output + i[1] * a[0]  # 組合字串
-print(output)
+if check == False:
+    print("身分證字號格式錯誤")
+else:
+    print("身分證字號正確")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -10707,46 +10440,6 @@ print(a)
 
 a = (i for i in range(10))
 print(a)
-
-
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-
-x1 = np.linspace(-2.0, 2.0, 11) #包含頭尾共21點
-
-# 移除 x1 > 0.55 的點, 就是保存 x1 <=0.6的點
-x2 = x1[x1 <= 0.55]
-
-# 遮罩 x1 > 0.7 的點, 會多了點線標記
-x3 = np.ma.masked_where(x1 > 0.7, x1)
-
-print(x1)
-print(x2)
-print(x3)
-
-
-"""
-x1 = np.random.normal(mu, sigma, size=N*10)  # 隨機數
-
-# list 移除資料的寫法
-x2 = x1[x1 <= 100.0]
-x2 = x2[x2 >= 0]
-
-"""
-
-#過濾資料
-
-"""
-scores1 = np.random.normal(mu, sigma, size=N)  # 隨機數
-print("資料個數1 :", len(scores1))
-print("最高分 :", max(scores1))
-print("最低分 :", min(scores1))
-
-scores2 = scores1[scores1 <= 100.0]
-scores3 = scores2[scores2 >= 0.0]
-"""
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -10824,86 +10517,6 @@ import sys
 cc = sys.getdefaultencoding()
 
 print(cc)
-'''
-print("------------------------------------------------------------")  # 60個
-
-import numpy as np
-
-a = np.array([[1,2,3],[4,5,6]], int)#指定元素型態的陣列
-a = np.array([[1,2,3],[4,5,6]], dtype = float)#指定元素型態的陣列
-print(a[0, 0], a[0, 1], a[0, 2])
-print(a[1, 0], a[1, 1], a[1, 2])
-
-print('陣列元素的資料型態 :', a.dtype)
-print('陣列的元素總數', a.size)
-print('陣列的形狀', a.shape)
-print('陣列元素所占用的拜數', a.itemsize)
-print('幾維陣列', a.ndim)
-print('整個陣列所占用的拜數', a.nbytes)
-
-print("------------------------------------------------------------")  # 60個
-
-print('陣列的形狀操作 reshape 1')
-import numpy as np
-
-a = np.array([1,2,3,4,5,6])
-print(a)
-b = a.reshape((3, 2))
-print(b)
-
-print("------------------------------------------------------------")  # 60個
-
-print('陣列的形狀操作 reshape 2')
-import numpy as np
-
-a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
-b = a.reshape((3, 3))
-print(b)
-c = b.flatten()
-print(c)
-
-print("------------------------------------------------------------")  # 60個
-
-#合併
-import numpy as np
-
-a = np.array([[1,2],[3,4]])
-b = np.array([[5,6],[7,8]])
-c = np.concatenate((a, b), axis=0)
-print(c)
-d = np.concatenate((a, b), axis=1)
-print(d)
-
-print("------------------------------------------------------------")  # 60個
-
-#擴充或刪除陣列的維度
-import numpy as np
-
-a = np.array([[1,2,3,4,5,6,7,8]])
-b = a.reshape(2, 4)
-print(b.shape)
-c = np.expand_dims(b, axis=0)
-d = np.expand_dims(b, axis=1)
-print(c.shape, d.shape)
-e = np.squeeze(c)
-f = np.squeeze(d)
-print(e.shape, f.shape)
-
-print("------------------------------------------------------------")  # 60個
-
-#取得陣列最大最小值和索引
-
-import numpy as np
-
-a = np.array([[11,22,13,74,35,6,27,18]])
-
-min_value = np.min(a)
-max_value = np.max(a)
-print(min_value, max_value)
-
-min_idx = np.argmin(a)
-max_idx = np.argmax(a)
-print(min_idx, max_idx)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -11006,7 +10619,6 @@ print(re.search(r'yth', 'python')) # seach( ) 不限開頭, 因此成功
 
 print('------------------------------------------------------------')	#60個
 
-
 import re
 
 m = re.search(r'p[a-z]+e', 'apples')
@@ -11018,6 +10630,7 @@ print(m.span())    # 輸出 (1, 5)
 
 print('------------------------------------------------------------')	#60個
 
+""" 跳過 webdriver
 print('1111 fail')
 from selenium import webdriver    # 匯入 selenium 的 webdriver 子套件
 from time import sleep         # 匯入內建 time 模組的 sleep() 函式 (計時用)
@@ -11025,10 +10638,10 @@ browser = webdriver.Chrome()   # 建立 Chrome 瀏覽器物件
 browser.get('http://www.flag.com.tw')  # 開啟 Chrome 並連到旗標網站
 sleep(5)                       # 暫停 5 秒
 browser.close()                # 關閉網頁(目前分頁)A
-
+"""
 print('------------------------------------------------------------')	#60個
 
-print('2222')
+""" 跳過 webdriver
 
 from selenium import webdriver # 匯入 selenium 的 webdriver
 from time import sleep         # 匯入內建 time 模組的 sleep() 函式
@@ -11095,9 +10708,8 @@ browser.find_element_by_id('identifierNext').click()   #←按繼續鈕
 sleep(3)       #←暫停 3 秒等待進入下一頁
 browser.find_element_by_name('password').send_keys('您的密碼')  #←輸入帳密
 browser.find_element_by_id('passwordNext').click()   #←按繼續鈕
-
+"""
 print('------------------------------------------------------------')	#60個
-
 
 datestr = "20210201"
 
@@ -11189,6 +10801,7 @@ print('傳回：', stock)    # 輸出傳回的結果
 
 print('------------------------------------------------------------')	#60個
 
+""" no module
 import matplotlib.pyplot as plt
 import crawler_module as m
 from time import sleep
@@ -11271,7 +10884,7 @@ ax2.set_xticklabels(day[::5])
 
 # step 4 show plot
 plt.show()
-
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -11973,5 +11586,27 @@ except KeyboardInterrupt:
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("OKOKOKOK")
+
 
 

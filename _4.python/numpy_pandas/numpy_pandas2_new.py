@@ -1032,6 +1032,127 @@ print('------------------------------------------------------------')	#60個
 print('------------------------------------------------------------')	#60個
 
 
+import numpy as np
+
+a = np.array([[1,2,3],[4,5,6]], int)#指定元素型態的陣列
+a = np.array([[1,2,3],[4,5,6]], dtype = float)#指定元素型態的陣列
+print(a[0, 0], a[0, 1], a[0, 2])
+print(a[1, 0], a[1, 1], a[1, 2])
+
+print('陣列元素的資料型態 :', a.dtype)
+print('陣列的元素總數', a.size)
+print('陣列的形狀', a.shape)
+print('陣列元素所占用的拜數', a.itemsize)
+print('幾維陣列', a.ndim)
+print('整個陣列所占用的拜數', a.nbytes)
+
+print("------------------------------------------------------------")  # 60個
+
+print('陣列的形狀操作 reshape 1')
+import numpy as np
+
+a = np.array([1,2,3,4,5,6])
+print(a)
+b = a.reshape((3, 2))
+print(b)
+
+print("------------------------------------------------------------")  # 60個
+
+print('陣列的形狀操作 reshape 2')
+import numpy as np
+
+a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+b = a.reshape((3, 3))
+print(b)
+c = b.flatten()
+print(c)
+
+print("------------------------------------------------------------")  # 60個
+
+#合併
+import numpy as np
+
+a = np.array([[1,2],[3,4]])
+b = np.array([[5,6],[7,8]])
+c = np.concatenate((a, b), axis=0)
+print(c)
+d = np.concatenate((a, b), axis=1)
+print(d)
+
+print("------------------------------------------------------------")  # 60個
+
+#擴充或刪除陣列的維度
+import numpy as np
+
+a = np.array([[1,2,3,4,5,6,7,8]])
+b = a.reshape(2, 4)
+print(b.shape)
+c = np.expand_dims(b, axis=0)
+d = np.expand_dims(b, axis=1)
+print(c.shape, d.shape)
+e = np.squeeze(c)
+f = np.squeeze(d)
+print(e.shape, f.shape)
+
+print("------------------------------------------------------------")  # 60個
+
+#取得陣列最大最小值和索引
+
+import numpy as np
+
+a = np.array([[11,22,13,74,35,6,27,18]])
+
+min_value = np.min(a)
+max_value = np.max(a)
+print(min_value, max_value)
+
+min_idx = np.argmin(a)
+max_idx = np.argmax(a)
+print(min_idx, max_idx)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+import numpy as np
+
+x1 = np.linspace(-2.0, 2.0, 11) #包含頭尾共21點
+
+# 移除 x1 > 0.55 的點, 就是保存 x1 <=0.6的點
+x2 = x1[x1 <= 0.55]
+
+# 遮罩 x1 > 0.7 的點, 會多了點線標記
+x3 = np.ma.masked_where(x1 > 0.7, x1)
+
+print(x1)
+print(x2)
+print(x3)
+
+
+"""
+x1 = np.random.normal(mu, sigma, size=N*10)  # 隨機數
+
+# list 移除資料的寫法
+x2 = x1[x1 <= 100.0]
+x2 = x2[x2 >= 0]
+
+"""
+
+#過濾資料
+
+"""
+scores1 = np.random.normal(mu, sigma, size=N)  # 隨機數
+print("資料個數1 :", len(scores1))
+print("最高分 :", max(scores1))
+print("最低分 :", min(scores1))
+
+scores2 = scores1[scores1 <= 100.0]
+scores3 = scores2[scores2 >= 0.0]
+"""
+
+
+
 
 print('------------------------------------------------------------')	#60個
 

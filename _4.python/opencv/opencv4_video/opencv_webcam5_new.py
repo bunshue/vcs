@@ -13,100 +13,6 @@ import numpy as np
 
 print("------------------------------------------------------------")  # 60個
 
-print("OpenCV VideoCapture 01 錄影")
-print('按 ESC 離開')
-
-cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
-width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
-height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
-
-fourcc = cv2.VideoWriter_fourcc(*'MJPG')          # 設定影片的格式為 MJPG
-out = cv2.VideoWriter('tmp_output.mp4', fourcc, 20.0, (width,  height))  # 產生空的影片
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    out.write(frame)       # 將取得的每一幀圖像寫入空的影片
-    
-    cv2.imshow("OpenCV 01", frame)
-
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:     #ESC
-        break
-
-cap.release()
-out.release()      # 釋放資源
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV VideoCapture 02 錄影 灰階")
-print('按 ESC 離開')
-
-cap = cv2.VideoCapture(0)
-width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-out = cv2.VideoWriter('tmp_output.mov', fourcc, 20.0, (width,  height))
-# 如果轉換成黑白影片後如果無法開啟，請加上 isColor=False 參數設定
-# out = cv2.VideoWriter('tmp_output.mov', fourcc, 20.0, (width,  height), isColor=False)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
-    out.write(gray)
-    
-    cv2.imshow("OpenCV 02", gray)
-
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:     #ESC
-        break
-
-cap.release()
-out.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-print("OpenCV VideoCapture 03 錄影")
-print('按 ESC 離開')
-
-cap = cv2.VideoCapture(0)                         # 讀取電腦攝影機鏡頭影像。
-fourcc = cv2.VideoWriter_fourcc(*'MJPG')          # 設定影片的格式為 MJPG
-out = cv2.VideoWriter('tmp_output_1.mp4', fourcc, 20.0, (640,  360))  # 產生空的影片，尺寸為 640x360
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, frame = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-    img_1 = frame
-    img_2 = cv2.flip(img_1, 0)             # 上下翻轉
-    out.write(img_2)                       # 將取得的每一幀圖像寫入空的影片
-    
-    cv2.imshow("OpenCV 03", frame)
-
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:     #ESC
-        break
-
-cap.release()
-out.release()      # 釋放資源
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
 print("OpenCV VideoCapture 04 兩個camera")
 print('按 ESC 離開')
 
@@ -743,6 +649,92 @@ if status == True:
 
 cv2.imshow("OpenCV 20", image)
 cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+cap = cv2.VideoCapture(0)
+
+while True:
+    ret, frame = cap.read()
+    width = int(cap.get(3))
+    height = int(cap.get(4))
+
+    image = np.zeros(frame.shape, np.uint8)
+    smaller_frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
+    image[:height//2, :width//2] = cv2.rotate(smaller_frame, cv2.ROTATE_180)
+    image[height//2:, :width//2] = smaller_frame
+    image[:height//2, width//2:] = cv2.rotate(smaller_frame, cv2.ROTATE_180)
+    image[height//2:, width//2:] = smaller_frame
+
+    cv2.imshow('frame', image)
+
+    if cv2.waitKey(1) == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+cap = cv2.VideoCapture(0)
+
+while True:
+    ret, frame = cap.read()
+    width = int(cap.get(3))
+    height = int(cap.get(4))
+
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    lower_blue = np.array([90, 50, 50])
+    upper_blue = np.array([130, 255, 255])
+
+    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+
+    result = cv2.bitwise_and(frame, frame, mask=mask)
+
+    cv2.imshow('frame', result)
+    cv2.imshow('mask', mask)
+
+    if cv2.waitKey(1) == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+cap = cv2.VideoCapture(0)
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
+
+while True:
+    ret, frame = cap.read()
+
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+    for (x, y, w, h) in faces:
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 5)
+        roi_gray = gray[y:y+w, x:x+w]
+        roi_color = frame[y:y+h, x:x+w]
+        eyes = eye_cascade.detectMultiScale(roi_gray, 1.3, 5)
+        for (ex, ey, ew, eh) in eyes:
+            cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 5)
+
+    cv2.imshow('frame', frame)
+
+    if cv2.waitKey(1) == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
