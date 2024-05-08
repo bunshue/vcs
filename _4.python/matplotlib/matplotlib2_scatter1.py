@@ -24,79 +24,9 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-#          編號                  圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
-plt.figure(
-    num="scatter 集合 1",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-# 第一張圖
-plt.subplot(231)
-
-x = np.random.randn(N)
-y = np.random.randn(N)
-plt.scatter(x, y)
-# plt.scatter(x, y, marker="^", color="red") # 指名marker和顏色
-# plt.scatter(x, y, s=30)# 設定資料點的大小
-plt.scatter(x, y, c="r", s=100)  # 指定顏色與大小
-
-# 給散佈圖的點套上不同深淺顏色
-# c = np.random.choice(np.arange(100), 100)
-# plt.scatter(x, y, s=c, c=c, cmap="viridis")
-
-
-# 第二張圖
-plt.subplot(232)
-
-x1 = np.random.normal(0, 1, 1024)
-y1 = np.random.normal(0, 1, 1024)
-plt.scatter(x1, y1, alpha=0.3)
-
-# 第三張圖
-plt.subplot(233)
-
-# 使用 NumPy 隨機數的「常態分佈」產生 N 個數據點，再透過 matplotlib 畫出散布圖。
-N = 500
-x = np.random.normal(5, 50, N)
-y = np.random.normal(5, 50, N)
-plt.scatter(x, y, alpha=0.5, s=100)
-
-# 第四張圖
-plt.subplot(234)
-
-import numpy as np
-from matplotlib import pyplot as plt
-
-n = 300
-ax = np.random.normal(0, 1, n)
-ay = np.random.normal(0, 1, n)
-bx = np.random.normal(0, 1, n)
-by = np.random.normal(0, 1, n)
-
-plt.scatter(ax, ay, alpha=0.5, s=100, color="red")
-plt.scatter(bx, by, alpha=0.5, s=100, color="blue")
-
-
-# 第五張圖
-plt.subplot(235)
-
-
-# 第六張圖
-plt.subplot(236)
-
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
 #          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
 plt.figure(
-    num="scatter 集合 2",
+    num="scatter 集合 1",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -206,12 +136,6 @@ plt.scatter([1, 2, 3, 4], [9, 8, 7, 6], s=10, c="b", marker="v")
 # 第六張圖
 plt.subplot(236)
 
-radius = 10
-degrees = [x * 15 for x in range(0, 25)]
-print(degrees)
-x = [radius * math.cos(math.radians(d)) for d in degrees]
-y = [radius * math.sin(math.radians(d)) for d in degrees]
-plt.scatter(x, y)
 
 plt.show()
 
@@ -219,7 +143,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="scatter 集合 3",
+    num="scatter 集合 2",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -231,7 +155,7 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-# Hyperlinks
+# Hyperlinks 看不出效果
 
 s = plt.scatter([1, 2, 3], [4, 5, 6])
 s.set_urls(["https://www.bbc.com/news", "https://www.google.com/", None])
@@ -239,10 +163,6 @@ s.set_urls(["https://www.bbc.com/news", "https://www.google.com/", None])
 
 # 第二張圖
 plt.subplot(232)
-
-
-# 第三張圖
-plt.subplot(233)
 
 POINTS = 10
 # 由平均 0, 標準差 1 的分布中取 20 個數
@@ -264,6 +184,16 @@ print(g)
 print(g)
 
 plt.scatter(x, g, c="blue", marker=".")
+
+# 第三張圖
+plt.subplot(233)
+
+radius = 10
+degrees = [x * 15 for x in range(0, 25)]
+print(degrees)
+x = [radius * math.cos(math.radians(d)) for d in degrees]
+y = [radius * math.sin(math.radians(d)) for d in degrees]
+plt.scatter(x, y)
 
 
 # 第四張圖
@@ -329,7 +259,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
-    num="scatter 集合 4",
+    num="scatter 集合 3",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -343,8 +273,7 @@ plt.subplot(231)
 
 N = 200
 
-# 曲線資料加入雜訊
-# y = sin(x)
+# 曲線資料加入雜訊 y = sin(x)
 x = np.linspace(0, 10, N)
 
 y1 = np.sin(x)
@@ -504,17 +433,6 @@ correlation[0, 1]  # 顯示在畫面
 # 第四張圖
 plt.subplot(234)
 
-N = 50  # 色彩數列的點數
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-colors = []  # 建立色彩數列
-for i in range(N):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-x = np.linspace(0.0, 2 * np.pi, N)  # 建立 50 個點
-y1 = np.sin(x)
-plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
-y2 = np.cos(x)
-plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
-
 
 # 第五張圖
 plt.subplot(235)
@@ -530,7 +448,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
 plt.figure(
-    num="scatter 集合 5",
+    num="scatter 集合 4",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -611,7 +529,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
 plt.figure(
-    num="scatter 集合 6",
+    num="scatter 集合 5",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -729,7 +647,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
 plt.figure(
-    num="scatter 集合 7",
+    num="scatter 集合 6",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -801,7 +719,7 @@ plt.colorbar()  # 顯示顏色條
 # 第三張圖
 plt.subplot(233)
 
-from matplotlib import colors  # 注意！為了調整“色盤”，需要導入colors
+from matplotlib import colors  # 為了調整“色盤”，需要導入colors
 
 rng = np.random.RandomState(0)
 x = rng.randn(50)
@@ -870,7 +788,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
 plt.figure(
-    num="scatter 集合 8",
+    num="scatter 集合 7",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -920,24 +838,9 @@ plt.scatter(x, y, color="lightgreen", edgecolor="b", s=60)
 # 第四張圖
 plt.subplot(234)
 
-x = np.linspace(0.0, 2 * np.pi, 50)  # 建立 35 個點
-y1 = np.sin(x)
-plt.scatter(x, y1, c="b", marker="x")  # 繪製 sine wave
-y2 = np.cos(x)
-plt.scatter(x, y2, c="g", marker="X")  # 繪製 cos wave
 
 # 第五張圖
 plt.subplot(235)
-
-colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
-x = np.linspace(0.0, 2 * np.pi, 50)  # 建立 50 個點
-y1 = np.sin(x)
-colors = []
-for i in range(50):  # 隨機設定顏色
-    colors.append(np.random.choice(colorused))
-plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
-y2 = np.cos(x)
-plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
 
 
 # 第六張圖
@@ -958,7 +861,7 @@ print("------------------------------------------------------------")  # 60個
 
 #          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
 plt.figure(
-    num="scatter 集合 9",
+    num="scatter 集合 8",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -1097,9 +1000,6 @@ plt.scatter(x, y2, s = s2, c = 'r', alpha = 0.5)   # 設定透明度為 0.5
 ----
 #連接2點的直線
 
-import matplotlib.pyplot as plt
-import numpy as np
-
 # 資料
 x = np.arange(1, 5.1, 0.1)
 y = 1/2*x + (1/2)
@@ -1146,12 +1046,11 @@ verts：如果marker參數為空，則用（x，y）序列來構造marker，中�
 edgecolors：設置散點邊界線的顏色
 """
 
-
 print("------------------------------------------------------------")  # 60個
 
 #          編號                      圖像大小[英吋]     解析度    背景色                    邊框顏色                         邊框有無
 plt.figure(
-    num="scatter 集合 10",
+    num="scatter 集合 9",
     figsize=(12, 8),
     dpi=100,
     facecolor="whitesmoke",
@@ -1232,3 +1131,127 @@ plt.subplot(236)
 
 
 plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#          編號                  圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(
+    num="scatter 集合 10",
+    figsize=(12, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
+
+# 第一張圖
+plt.subplot(231)
+
+N = 50  # 色彩數列的點數
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+colors = []  # 建立色彩數列
+for i in range(N):  # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+x = np.linspace(0.0, 2 * np.pi, N)  # 建立 50 個點
+y1 = np.sin(x)
+plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
+y2 = np.cos(x)
+plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
+
+
+# 第二張圖
+plt.subplot(232)
+
+x = np.linspace(0.0, 2 * np.pi, 50)  # 建立 35 個點
+y1 = np.sin(x)
+plt.scatter(x, y1, c="b", marker="x")  # 繪製 sine wave
+y2 = np.cos(x)
+plt.scatter(x, y2, c="g", marker="X")  # 繪製 cos wave
+
+
+
+# 第三張圖
+plt.subplot(233)
+
+colorused = ["b", "c", "g", "k", "m", "r", "y"]  # 定義顏色
+x = np.linspace(0.0, 2 * np.pi, 50)  # 建立 50 個點
+y1 = np.sin(x)
+colors = []
+for i in range(50):  # 隨機設定顏色
+    colors.append(np.random.choice(colorused))
+plt.scatter(x, y1, c=colors, marker="*")  # 繪製 sine
+y2 = np.cos(x)
+plt.scatter(x, y2, c=colors, marker="s")  # 繪製 cos
+
+
+
+# 第四張圖
+plt.subplot(234)
+
+
+# 第五張圖
+plt.subplot(235)
+
+
+# 第六張圖
+plt.subplot(236)
+
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("scatter參數大合集")
+
+plt.figure(figsize=(12, 8))
+
+x = np.random.randn(N)
+y = np.random.randn(N)
+
+plt.scatter(x, y)
+# plt.scatter(x, y, marker="^", color="red") # 指名marker和顏色
+# plt.scatter(x, y, s=30)# 設定資料點的大小
+plt.scatter(x, y, c="r", s=100)  # 指定顏色與大小
+
+# 給散佈圖的點套上不同深淺顏色
+# c = np.random.choice(np.arange(100), 100)
+# plt.scatter(x, y, s=c, c=c, cmap="viridis")
+
+""" 各種scatter的語法
+plt.scatter(x, y, alpha=0.3)
+plt.scatter(x, y, alpha=0.5, s=100)
+
+plt.scatter(x, y, alpha=0.5, s=100, color="red")
+plt.scatter(x, y, alpha=0.5, s=100, color="blue")
+
+print("color：顏色串列， color=['r','g','b','c','m'], 若有多組數據 依序顯示顏色")
+print("alpha : 透明度")
+
+"""
+
+plt.title("scatter參數大合集")
+plt.xlabel("")
+plt.ylabel("")
+
+plt.show()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
