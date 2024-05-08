@@ -4,7 +4,7 @@ print('------------------------------------------------------------')	#60個
 
 import xlrd
 
-book = xlrd.open_workbook('election_2018.xls')
+book = xlrd.open_workbook('data/election_2018.xls')
 sheet = book.sheet_by_index(0)
 for row in range(10):
     print(sheet.row_values(row))
@@ -13,7 +13,7 @@ print('------------------------------------------------------------')	#60個
 
 import xlrd
 
-book = xlrd.open_workbook('election_2018.xls')
+book = xlrd.open_workbook('data/election_2018.xls')
 sheet = book.sheet_by_index(0)
 rows = sheet.nrows
 table = list()
@@ -39,7 +39,7 @@ import pandas as pd
 import xlrd
 
 #pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
-data = pd.read_excel('election_2018.xls')
+data = pd.read_excel('data/election_2018.xls')
 
 data.info()
 data.head(10)
@@ -48,7 +48,7 @@ print('------------------------------------------------------------')	#60個
 
 #pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('election_2018.xls')
+data = pd.read_excel('data/election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
 target['年齡'] = 2018-target['出生年次']
@@ -62,7 +62,7 @@ target
 
 #pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('election_2018.xls')
+data = pd.read_excel('data/election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
 target['年齡'] = 2018-target['出生年次']
@@ -72,7 +72,7 @@ target
 
 #pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('election_2018.xls')
+data = pd.read_excel('data/election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
 target['年齡'] = 2018-target['出生年次']
@@ -82,7 +82,7 @@ target
 
 #pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('election_2018.xls')
+data = pd.read_excel('data/election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
 target['年齡'] = 2018-target['出生年次']
@@ -100,7 +100,7 @@ import seaborn as sns
 
 #pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('election_2018.xls')
+data = pd.read_excel('data/election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','推薦政黨','得票數']].groupby(by = '推薦政黨')['得票數'].sum()
 target.plot.pie(y='推薦政黨')
@@ -118,7 +118,7 @@ sns.set_style("darkgrid",{"font.sans-serif":[u'SimHei', 'Arial']})
 
 #pd.read_excel kilo可用  sugar不可用, sugar降版成 pandas 1.3.5 可用
 
-data = pd.read_excel('election_2018.xls')
+data = pd.read_excel('data/election_2018.xls')
 target = data.fillna(method='ffill')
 target = target[['地區','姓名','出生年次','推薦政黨','得票數']]
 target['年齡'] = 2018-target['出生年次']

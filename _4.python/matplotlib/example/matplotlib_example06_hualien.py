@@ -24,7 +24,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-data = pd.read_csv('hualien.csv')
+data = pd.read_csv('data/hualien.csv')
 target = data[['年度','總人口數','平地原住民','山地原住民']]
 target = target.set_index(target['年度'])
 target = target.drop(['年度'], axis=1)
@@ -32,7 +32,7 @@ print(target)
 
 print('------------------------------------------------------------')	#60個
 
-data = pd.read_csv('hualien.csv')
+data = pd.read_csv('data/hualien.csv')
 target = pd.DataFrame(data[['年度','總人口數','平地原住民','山地原住民']])
 target = target.set_index(target['年度'])
 target = target.drop(['年度'], axis=1)
@@ -40,7 +40,7 @@ print(target)
 
 print('------------------------------------------------------------')	#60個
 
-data = pd.read_csv('hualien.csv')
+data = pd.read_csv('data/hualien.csv')
 target = pd.DataFrame(data[['年度','總人口數','平地原住民','山地原住民']])
 target = target.set_index(target['年度'])
 fig1 = target.drop(['年度'], axis=1)

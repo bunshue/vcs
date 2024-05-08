@@ -4,9 +4,24 @@ numpy的使用
 numpy: 數值計算的標準套件
 """
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
+import math
+import random
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
@@ -857,14 +872,6 @@ x2 = np.array([0, 1, 1, 7, 2, 1])
 # 因為 x2 元素最大值是 7, 所以 bin 是 8
 print(f'np.bincount = {np.bincount(x2)}') 
 print(f'mode        = {np.argmax(np.bincount(x1))}')
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-import matplotlib.pyplot as plt
-import math
 
 print('------------------------------------------------------------')	#60個
 

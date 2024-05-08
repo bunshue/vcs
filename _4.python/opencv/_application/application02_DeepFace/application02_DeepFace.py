@@ -7,6 +7,8 @@
 import cv2
 import time
 
+from deepface import DeepFace
+
 print("------------------------------------------------------------")  # 60個
 
 # 共同
@@ -39,22 +41,24 @@ https://github.com/swghosh/DeepFace/releases/download/weights-vggface2-2d-aligne
 要解壓縮
 """
 
-from deepface import DeepFace
-
 imgpath = 'person1.jpg'
 img_sr = cv2.imread(imgpath)
 plt.imshow(cv2.cvtColor(img_sr, cv2.COLOR_BGR2RGB))
+
 image = DeepFace.detectFace(img_path=imgpath, enforce_detection=False)
 plt.imshow(image)
+
 image.shape
 image *= 255.0
-cv2.imwrite( "detectFace.jpg", image[:, :, ::-1])
+cv2.imwrite( "tmp_detectFace.jpg", image[:, :, ::-1])
 image = DeepFace.detectFace(img_path=imgpath, detector_backend='retinaface', enforce_detection=False)
 #image = DeepFace.detectFace(img_path=imgpath, detector_backend='mtcnn'', enforce_detection=False)
 #image = DeepFace.detectFace(img_path=imgpath, detector_backend='dlib'', enforce_detection=False)
 #image = DeepFace.detectFace(img_path=imgpath, detector_backend='ssd'', enforce_detection=False)  #有錯誤
 #plt.imshow(image)
 #plt.show()
+
+print("------------------------------------------------------------")  # 60個
 
 print('人臉驗證')
 
@@ -98,8 +102,6 @@ To: C:/Users/070601/.deepface/weights/arcface_weights.h5
 
 """
 
-from deepface import DeepFace
-
 filename1 = 'bear1.jpg'
 filename2 = 'jeng1.jpg'
 models = ["VGG-Face", "Facenet", "OpenFace", "DeepFace", "DeepID", "Dlib", "ArcFace"]
@@ -123,7 +125,7 @@ print(df[0])
 print()
 
 
-"""
+""" 這一種特殊串列還不會分析出來
 print("aaa")
 cc = str(df)
 cc = cc.split()
@@ -138,8 +140,7 @@ for _ in cc:
 """
 
 
-sys.exit()
-
+""" TBD
 print(df['VGG-Face_cosine'])
 print(type(df['VGG-Face_cosine']))
 
@@ -150,8 +151,9 @@ if count > 0:
   print(split1[-1])
 else:
   print('沒有符合的人臉！')
+
 #尋找所有相同人臉
-filename1 = 'tem.jpg'
+filename1 = 'find_person.jpg'
 df = DeepFace.find(img_path = filename1, db_path = 'member', enforce_detection=False)
 #print(df)
 count = np.sum((df['VGG-Face_cosine']<=0.25)!=0) #計算符合的人臉數量
@@ -161,18 +163,17 @@ if count > 0:
     print(split1[-1])
 else:
   print('沒有符合的人臉！')
-
-
-sys.exit()
+"""
 
 print("------------------------------------------------------------")  # 60個
 
+''' TBD
 print('範例：攝影機拍攝登入系統')
 
 from IPython.display import display, Javascript
 #from google.colab.output import eval_js
 from base64 import b64decode
-from IPython.display import Image
+#from IPython.display import Image
 
 def take_photo(filename='person.jpg', quality=0.8):
   js = Javascript("""
@@ -221,25 +222,36 @@ else:
   print('抱歉！你不是會員！')
   
 print('人臉屬性分析')
+'''
 
+print("------------------------------------------------------------")  # 60個
 """
 514MB
 From: https://github.com/serengil/deepface_models/releases/download/v1.0/age_model_weights.h5
 To: C:/Users/070601/.deepface/weights/age_model_weights.h5
 """
 
-filename1 = 'bear1.jpg'
-img = cv2.imread(filename1)
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates02.jpg'
+
+img = cv2.imread(filename)
 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-obj = DeepFace.analyze(img_path = filename1, actions = ['age', 'gender', 'race', 'emotion'], enforce_detection=False)
-#print(obj)
+
+obj = DeepFace.analyze(img_path = filename, actions = ['age', 'gender', 'race', 'emotion'], enforce_detection=False)
+
+print(obj)
+print(type(obj))
+print(len(obj))
+
+""" 這一種特殊串列還不會分析出來
 print('年齡：{}'.format(obj['age']))
 print('性別：{}'.format(obj['gender']))
 print('種族：{}'.format(obj['dominant_race']))
 print('情緒：{}'.format(obj['dominant_emotion']))
+"""
 
 print("------------------------------------------------------------")  # 60個
 
+'''TBD
 print('範例：攝影機拍攝人臉屬性分析')
 
 from IPython.display import display, Javascript
@@ -291,7 +303,7 @@ label = {'angry':'生氣', 'disgust':'厭惡', 'fear':'恐懼', 'happy':'開心'
           'asian':'亞洲', 'black':'黑', 'indian':'印第安', 'latino hispanic':'拉丁美洲', 'middle eastern':'中東', 'white':'白'}
 print('\n你是{}歲的{}性{}人，目前情緒似乎是{}'.format(obj['age'], label[obj['gender']], label[obj['dominant_race']], label[obj['dominant_emotion']]))
 
-
+'''
 
 print("------------------------------------------------------------")  # 60個
 

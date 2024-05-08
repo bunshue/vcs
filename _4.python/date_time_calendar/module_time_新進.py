@@ -78,11 +78,11 @@ calText = getCalendarFor(year, month)
 print(calText)  # Display the calendar.
 
 # Save the calendar to a text file:
-calendarFilename = 'calendar_{}_{}.txt'.format(year, month)
+calendarFilename = 'tmp_calendar_{}_{}.txt'.format(year, month)
 with open(calendarFilename, 'w') as fileObj:
     fileObj.write(calText)
 
-print('Saved to ' + calendarFilename)
+#print('檔案 :', calendarFilename)
 
 
 print('------------------------------------------------------------')	#60個

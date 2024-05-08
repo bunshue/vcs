@@ -593,7 +593,6 @@ plt.figure(
 
 plt_bar()
 plt_contour()
-plt.tight_layout()
 
 plt.show()
 
@@ -649,15 +648,11 @@ plt.figure(
 plt_grid()
 plt_polar()
 
-plt.tight_layout()
 plt.show()
 
 print(
     "matplotlib 10 ------------------------------------------------------------"
 )  # 60個
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(0, 2 * np.pi, 300)
 y = np.sin(x)
@@ -681,79 +676,10 @@ ax2.plot(x, y)
 ax2.set_title("一般座標 Sin 圖", fontsize=12)
 ax2.set_aspect(2)
 
-plt.tight_layout()  # 緊縮佈局
 plt.show()
 
 print(
     "matplotlib 11 ------------------------------------------------------------"
-)  # 60個
-
-import csv
-import matplotlib.pyplot as plt
-from datetime import datetime
-
-
-def convert_tw_date_to_ad(tw_date):
-    # 分割日期為年、月、日
-    year, month, day = map(int, tw_date.split("/"))
-    # 將民國年轉換為西元年
-    year += 1911
-    # 重組日期並返回
-    return f"{year}-{month:02d}-{day:02d}"
-
-
-filename = "_data/ST43_3479_202310.csv"
-with open(filename) as csvFile:
-    csvReader = csv.reader(csvFile)
-    for _ in range(5):  # 跳過前5列
-        next(csvReader)
-    all_rows = list(csvReader)
-    data_without_last_row = all_rows[:-1]  # 跳過最後一列
-
-    mydates, openPrices, highPrices, lowPrices, closePrices = [], [], [], [], []
-
-    for row in data_without_last_row:
-        try:
-            # 將日期轉換為西元年格式
-            converted_date = convert_tw_date_to_ad(row[0])
-            # 使用 strptime 解析轉換後的日期字串
-            parseDate = datetime.strptime(converted_date, "%Y-%m-%d")
-            currentDate = parseDate.strftime("%Y-%m-%d")  # 轉換後日期
-            openPrice = eval(row[3])
-            highPrice = eval(row[4])  # 設定最高價
-            lowPrice = eval(row[5])  # 設定最低價
-            closePrice = eval(row[6])  # 設定收盤價
-        except Exception:
-            print(f"有缺值 {row}")
-        else:
-            openPrices.append(openPrice)  # 儲存開盤價
-            highPrices.append(highPrice)  # 儲存最高價
-            lowPrices.append(lowPrice)  # 儲存最低價
-            closePrices.append(closePrice)  # 儲存收盤價
-            mydates.append(currentDate)  # 儲存日期
-
-fig = plt.figure(
-    num="matplotlib 11",
-    figsize=(12, 8),
-    dpi=100,
-    facecolor="whitesmoke",
-    edgecolor="r",
-    linewidth=1,
-    frameon=True,
-)
-
-plt.plot(mydates, openPrices, "-p", label="開盤價")  # 繪製開盤價
-plt.plot(mydates, highPrices, "-*", label="最高價")  # 繪製最高價
-plt.plot(mydates, lowPrices, "-o", label="最低價")  # 繪製最低價
-plt.plot(mydates, closePrices, "-^", label="收盤價")  # 繪製收盤價
-plt.legend()
-fig.autofmt_xdate()  # 日期旋轉
-plt.title("2023年10月安勤公司日線圖", fontsize=24)
-plt.ylabel("價格", fontsize=14)
-plt.show()
-
-print(
-    "matplotlib 13 ------------------------------------------------------------"
 )  # 60個
 
 import numpy as np
@@ -842,10 +768,38 @@ print(
     "matplotlib 16 ------------------------------------------------------------"
 )  # 60個
 
+degrees = [x * 15 for x in range(0, 25)]
+x = [math.cos(math.radians(d)) for d in degrees]
+y = [math.sin(math.radians(d)) for d in degrees]
+
+plt.scatter(x, y)
+plt.show()
+
+
+degrees = np.arange(0, 360)
+x = np.cos(np.radians(degrees))
+y = np.sin(np.radians(degrees))
+
+plt.plot(x, y)
+plt.show()
 
 print(
     "matplotlib 17 ------------------------------------------------------------"
 )  # 60個
+
+# 相同斜率平行移動
+
+x = [x for x in range(0, 11)]
+y1 = [2 * y for y in x]
+y2 = [(2 * y - 2) for y in x]
+y3 = [(2 * y + 2) for y in x]
+plt.plot(x, y1)
+plt.plot(x, y2)
+plt.plot(x, y3)
+
+# plt.show()
+
+print(x)
 
 
 print(

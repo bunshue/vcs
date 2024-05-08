@@ -47,6 +47,17 @@ print("tan(PI / 2) =", math.tan(math.pi / 2))
 print("degrees(1.57) =", math.degrees(1.57))
 print("radians(90) =", math.radians(90))
 
+angle = 30
+math.sin(math.pi * angle / 2)
+
+# 三角函數
+deg = 60.0
+rad = math.radians(deg)
+print("測試值deg / rad = ", deg, "/", rad)
+print("math.sin(rad) = ", math.sin(rad))
+print("math.cos(rad) = ", math.cos(rad))
+print("math.tan(rad) = ", math.tan(rad))
+
 for count in range(20):
     print(
         "sin("
@@ -59,8 +70,44 @@ for count in range(20):
         + str(math.cos(2 * math.pi * count / 360))
     )
 
-angle = 30
-math.sin(math.pi * angle / 2)
+degrees = [x * 30 for x in range(13)]
+for d in degrees:
+    rad = math.radians(d)
+    sin = math.sin(rad)
+    cos = math.cos(rad)
+    print(
+        "角度{0:3d}, 弧度{1:5.2f}, sin{2:3d}={3:5.2f}, cos{4:3d}={5:5.2f}".format(
+            d, rad, d, sin, d, cos
+        )
+    )
+
+print("------------------------------------------------------------")  # 60­э
+
+print("arctan 3.4")
+rad = np.arctan(3.4)
+print(rad)
+th = np.degrees(rad)
+print(th)
+
+# degrees(x) 將x由弧度轉角度
+# radians(x) 將x由角度轉弧度
+
+rad = np.arctan2(3, 4)  # 求角度（radian）
+th = np.degrees(rad)  # 轉成度數
+
+rad = math.atan2(3, 2)  # 計算角度（radian）
+th = math.degrees(rad)  # 轉成度數
+print(th)
+
+cc = 10 * math.cos(math.radians(60))
+print(cc)
+
+# 計算角度
+rad = math.acos(3 / 5)
+deg = math.degrees(rad)
+print(deg)
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -77,14 +124,6 @@ print("測試值x / y = ", x, "/", y)
 print("math.exp(x) = ", math.exp(x))
 print("math.log(x) = ", math.log(x))
 print("math.pow(x,y) = ", math.pow(x, y))
-
-# 三角函數
-deg = 60.0
-rad = math.radians(deg)
-print("測試值deg / rad = ", deg, "/", rad)
-print("math.sin(rad) = ", math.sin(rad))
-print("math.cos(rad) = ", math.cos(rad))
-print("math.tan(rad) = ", math.tan(rad))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -120,24 +159,6 @@ print("gcd(28, 56) = {}".format(math.gcd(28, 63)))
 
 print("------------------------------------------------------------")  # 60個
 
-# degrees(x) 將x由弧度轉角度
-# radians(x) 將x由角度轉弧度
-
-rad = np.arctan2(3, 4)  # 求角度（radian）
-th = np.degrees(rad)  # 轉成度數
-
-rad = math.atan2(3, 2)  # 計算角度（radian）
-th = math.degrees(rad)  # 轉成度數
-print(th)
-
-cc = 10 * math.cos(math.radians(60))
-print(cc)
-
-# 計算角度
-rad = math.acos(3 / 5)
-deg = math.degrees(rad)
-print(deg)
-
 print("------------------------------------------------------------")  # 60個
 
 R = 6371  # 地球半徑
@@ -155,43 +176,6 @@ print(f"distance = {d:6.1f}")
 
 print("------------------------------------------------------------")  # 60個
 
-import decimal
-
-
-def acc_deciamal():
-    a = 4.2
-    b = 2.1
-    print(a + b)
-    print((a + b) == 6.3)
-
-    # 使用decimal模块
-    a = decimal.Decimal("4.2")
-    b = decimal.Decimal("2.1")
-    print(a + b)
-    print((a + b) == decimal.Decimal("6.3"))
-
-    a = decimal.Decimal("1.3")
-    b = decimal.Decimal("1.7")
-    print(a / b)
-    with decimal.localcontext() as ctx:
-        ctx.prec = 3
-        print(a / b)
-
-    nums = [1.23e18, 1, -1.23e18]
-    print(sum(nums))
-    print(math.fsum(nums))
-
-
-acc_deciamal()
-
-print("------------------------------------------------------------")  # 60個
-
-import decimal  # decimal可以獲得比浮點數更精確的數值
-
-ff = 20 / 3
-print("浮點數  :", ff)
-dd = decimal.Decimal(20 / 3)
-print("Decimal :", dd)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -199,66 +183,6 @@ z = 3 + 5j
 
 print("實部", z.real)
 print("虛部", z.imag)
-
-print("------------------------------------------------------------")  # 60個
-
-import cmath
-
-cc = cmath.sqrt(-1)
-print(cc)
-
-print("用 math 取 平方根 :")
-cc = math.sqrt(16)
-print(cc)
-
-print("用 cmath 取 平方根 :")
-cc = cmath.sqrt(16)
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
-print('複數運算')
-
-import cmath
-
-a = complex(2, 4)
-b = 3 - 5j
-print(a.conjugate())
-
-# 正弦 余弦 平方根等
-print(cmath.sin(a))
-print(cmath.cos(a))
-print(cmath.sqrt(a))
-
-print("------------------------------------------------------------")  # 60個
-
-print('分數運算')
-
-import fractions
-
-a = fractions.Fraction(5, 4)
-b = fractions.Fraction(7, 16)
-print(print(a + b))
-print(a.numerator, a.denominator)
-
-c = a + b
-print(float(c))
-print(type(c.limit_denominator(8)))
-print(c.limit_denominator(8))
-
-p = fractions.Fraction(22, 7)
-print("分數的使用 :", p)
-print("分數的使用 : {}".format(p))
-print("分數的使用 : {}".format(float(p)))
-
-cc = fractions.Fraction(12, 18)
-print(cc)
-
-cc = fractions.Fraction(1.348)
-print(cc)
-
-cc = fractions.Fraction(fractions.Fraction(2, 5), fractions.Fraction(7, 13))
-print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -410,15 +334,6 @@ print("相除：", num1 / num2)  # 回傳  -0.7 + 1.1j
 
 print("------------------------------------------------------------")  # 60個
 
-#角度轉弧度
-th = np.arange(0,360,10)
-#print(th)
-
-x = np.cos(np.radians(th))
-y = np.sin(np.radians(th))
-
-print("------------------------------------------------------------")  # 60個
-
 
 def pi(n):
     p = 0
@@ -434,26 +349,112 @@ for i in range(1, 10000, 1000):
 
 print("------------------------------------------------------------")  # 60個
 
-degrees = [x * 30 for x in range(13)]
-for d in degrees:
-    rad = math.radians(d)
-    sin = math.sin(rad)
-    cos = math.cos(rad)
-    print(
-        "角度{0:3d}, 弧度{1:5.2f}, sin{2:3d}={3:5.2f}, cos{4:3d}={5:5.2f}".format(
-            d, rad, d, sin, d, cos
-        )
-    )
+#角度轉弧度
+th = np.arange(0,360,10)
+#print(th)
+
+x = np.cos(np.radians(th))
+y = np.sin(np.radians(th))
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60­э
 
-print("arctan 3.4")
-rad = np.arctan(3.4)
-print(rad)
-th = np.degrees(rad)
-print(th)
+print("------------------------------------------------------------")  # 60個
+import cmath  # 複數運算
+print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60­э
+a = complex(2, 4)
+b = 3 - 5j
+print(a.conjugate())
+
+cc = cmath.sqrt(-1)
+print(cc)
+
+print("用 math 取 平方根 :")
+cc = math.sqrt(16)
+print(cc)
+
+print("用 cmath 取 平方根 :")
+cc = cmath.sqrt(16)
+print(cc)
+
+# 正弦 餘弦 平方根等
+a = complex(2, 4)
+print(cmath.sin(a))
+print(cmath.cos(a))
+print(cmath.sqrt(a))
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+import fractions  # 分數運算
+print("------------------------------------------------------------")  # 60個
+
+a = fractions.Fraction(5, 4)
+b = fractions.Fraction(7, 16)
+print(print(a + b))
+print(a.numerator, a.denominator)
+
+c = a + b
+print(float(c))
+print(type(c.limit_denominator(8)))
+print(c.limit_denominator(8))
+
+p = fractions.Fraction(22, 7)
+print("分數的使用 :", p)
+print("分數的使用 : {}".format(p))
+print("分數的使用 : {}".format(float(p)))
+
+cc = fractions.Fraction(12, 18)
+print(cc)
+
+cc = fractions.Fraction(1.348)
+print(cc)
+
+cc = fractions.Fraction(fractions.Fraction(2, 5), fractions.Fraction(7, 13))
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+import decimal  # decimal可以獲得比浮點數更精確的數值
+print("------------------------------------------------------------")  # 60個
+
+def acc_deciamal():
+    a = 4.2
+    b = 2.1
+    print(a + b)
+    print((a + b) == 6.3)
+
+    # 使用decimal模块
+    a = decimal.Decimal("4.2")
+    b = decimal.Decimal("2.1")
+    print(a + b)
+    print((a + b) == decimal.Decimal("6.3"))
+
+    a = decimal.Decimal("1.3")
+    b = decimal.Decimal("1.7")
+    print(a / b)
+    with decimal.localcontext() as ctx:
+        ctx.prec = 3
+        print(a / b)
+
+    nums = [1.23e18, 1, -1.23e18]
+    print(sum(nums))
+    print(math.fsum(nums))
+
+
+acc_deciamal()
+
+print("------------------------------------------------------------")  # 60個
+
+ff = 20 / 3
+print("浮點數  :", ff)
+dd = decimal.Decimal(20 / 3)
+print("Decimal :", dd)
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -465,6 +466,4 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
 
