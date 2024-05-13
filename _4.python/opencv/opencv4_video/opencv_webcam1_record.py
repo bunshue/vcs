@@ -1,10 +1,10 @@
-'''
+"""
 WebCam 使用
 一般使用
 錄影存檔, 兩種存檔格式
 
 目前 webcam 僅 x64 電腦可用
-'''
+"""
 
 ESC = 27
 SPACE = 32
@@ -81,12 +81,12 @@ cap = cv2.VideoCapture(0)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
 
-#''' 調整影片大小
+# 調整影片大小
 ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 WIDTH = 400
 HEIGHT = int(WIDTH / ratio)
 
-#用MP4V格式存mp4檔
+# 用MP4V格式存mp4檔
 record_filename_mp4v = 'tmp2_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp4'
 
 #建立視訊編碼 fourcc MP4V
@@ -129,10 +129,10 @@ while True:
       print('無影像, 離開')
       break
 
-    ''' 調整影片大小
+    """ 調整影片大小
     frame = cv2.resize(frame, (WIDTH, HEIGHT))
     frame = cv2.flip(frame, 1)
-    '''
+    """
 
     #改變圖片大小
     #frame = cv2.resize(frame, None, fx = 1.5, fy = 1.5, interpolation = cv2.INTER_AREA)
@@ -270,7 +270,6 @@ cap.release()
 out.release()      # 釋放資源
 cv2.destroyAllWindows()
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("錄影6, 按 ESC 離開")
@@ -279,56 +278,27 @@ cap = cv2.VideoCapture(0)                 # 讀取攝影鏡頭
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
 
-w = 420
-h = 240
-draw = np.zeros((h,w,4), dtype='uint8')
-
 #建立視訊編碼 fourcc MJPG
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')  # 設定輸出影片的格式為 MJPG
 
 fps = 20
 size = (width, height)
-out = cv2.VideoWriter('tmp6_output.mov', fourcc, 20.0, (w, h))  # 產生空的影片
+out = cv2.VideoWriter('tmp6_output.mov', fourcc, 20.0, (width, height))  # 產生空的影片
 
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
-
-def show_xy(event,x,y,flags,param):
-    global dots, draw
-    if flags == 1:
-        if event == 1:
-            dots.append([x,y])
-        if event == 4:
-            dots = []
-        if event == 0 or event == 4:
-            dots.append([x,y])
-            x1 = dots[len(dots)-2][0]
-            y1 = dots[len(dots)-2][1]
-            x2 = dots[len(dots)-1][0]
-            y2 = dots[len(dots)-1][1]
-            cv2.line(draw,(x1,y1),(x2,y2),(0,0,255,255),2)
-
-cv2.imshow('WebCam6', draw)
-cv2.setMouseCallback('ImageShow', show_xy)
 
 while True:
     ret, img = cap.read()               # 讀取影片的每一個影格
     if not ret:
         print("Cannot receive frame")
         break
-    img = cv2.resize(img,(w,h))         # 縮小尺寸，加快運算速度
-    # 透過 for 迴圈合成影像
-    for i in range(w):
-        img[:,i,0] = img[:,i,0]*(1-draw[:,i,3]/255) + draw[:,i,0]*(draw[:,i,3]/255)
-        img[:,i,1] = img[:,i,1]*(1-draw[:,i,3]/255) + draw[:,i,1]*(draw[:,i,3]/255)
-        img[:,i,2] = img[:,i,2]*(1-draw[:,i,3]/255) + draw[:,i,2]*(draw[:,i,3]/255)
         
     k = cv2.waitKey(1) # 等待按鍵輸入
+
     if k == ESC:
         break
-    elif k == ord('r'):
-        draw = np.zeros((h,w,4), dtype='uint8')
         
     cv2.imshow('WebCam6', img)
     out.write(img)  # 儲存影片

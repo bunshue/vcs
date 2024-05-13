@@ -6,7 +6,7 @@ import random
 
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print('string.printable 的用法 ')
 
 import string
@@ -161,9 +161,37 @@ print(dir(random))
 print("------------------------------------------------------------")  # 60個
 
 
+import openai
+
+openai.api_key = 'kkkkkkk'
+
+response = openai.Completion.create(
+    model="gpt-3.5-turbo-instruct",
+    prompt="講個笑話來聽聽",
+    max_tokens=128,
+    temperature=0.5,
+)
+
+completed_text = response["choices"][0]["text"]
+print(completed_text)
+'''
+
 print("------------------------------------------------------------")  # 60個
 
+import time
+import pyautogui
 
+for i in range(10):
+    #全屏截圖
+    #myScreenshot = pyautogui.screenshot()
+    #myScreenshot.save(f'./pic_all{i}.png')
+
+    #部分截圖
+    x_st, y_st, w, h = 1920//2, 1080//2, 1920//2-50, 1080//2-50
+    myScreenshot = pyautogui.screenshot(region=(x_st, y_st, w, h))
+    myScreenshot.save(f'./pic_part{i}.png')
+
+    time.sleep(5)
 
 print("------------------------------------------------------------")  # 60個
 

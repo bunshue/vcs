@@ -21,7 +21,6 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 
 print("------------------------------------------------------------")  # 60個
 
-
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_noise.png"
 image = cv2.imread(filename)
 

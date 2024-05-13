@@ -6,10 +6,15 @@ cv2.setMouseCallback
 """
 
 import cv2
+import sys
 import numpy as np
 
 W = 640
 H = 480
+
+ESC = 27
+SPACE = 32
+
 """
 print("------------------------------------------------------------")  # 60個
 print("cv2.setMouseCallback 01")
@@ -521,9 +526,152 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+#opencv 之 setMouseCallback
+
+def Demo(event,x,y,flags,param):
+    if event == cv2.EVENT_LBUTTONDOWN:
+        print("單擊了鼠標左鍵")
+    elif event == cv2.EVENT_RBUTTONDOWN :
+        print("單擊了鼠標右鍵")
+    elif flags == cv2.EVENT_FLAG_LBUTTON:
+        print("按住左鍵拖動了鼠標")
+    elif event == cv2.EVENT_MBUTTONDOWN :
+        print("單擊了中間鍵")
+#創建名稱為Demo的響應（回調）函數OnMouseAction
+#將回調函數Demo與窗口“Demo19.9”建立連接
+
+W, H = 640, 480
+image = np.ones((H, W, 3), np.uint8) * 255
+
+cv2.namedWindow("setMouseCallback")
+cv2.setMouseCallback("setMouseCallback", Demo)     
+
+cv2.imshow("setMouseCallback", image)
+
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print("在影像上畫圖")
+
+cap = cv2.VideoCapture(0)                 # 讀取攝影鏡頭
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+
+w = width
+h = height
+draw = np.zeros((h,w,4), dtype='uint8')
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+
+def show_xy(event,x,y,flags,param):
+    global dots, draw
+    if flags == 1:
+        if event == 1:
+            dots.append([x,y])
+        if event == 4:
+            dots = []
+        if event == 0 or event == 4:
+            dots.append([x,y])
+            x1 = dots[len(dots)-2][0]
+            y1 = dots[len(dots)-2][1]
+            x2 = dots[len(dots)-1][0]
+            y2 = dots[len(dots)-1][1]
+            cv2.line(draw,(x1,y1),(x2,y2),(0,0,255,255),2)
+
+cv2.imshow('WebCam6', draw)
+cv2.setMouseCallback('WebCam6', show_xy)
+
+dots = []
+
+while True:
+    ret, img = cap.read()               # 讀取影片的每一個影格
+    if not ret:
+        print("Cannot receive frame")
+        break
+
+    # 透過 for 迴圈合成影像
+    for i in range(w):
+        img[:,i,0] = img[:,i,0]*(1-draw[:,i,3]/255) + draw[:,i,0]*(draw[:,i,3]/255)
+        img[:,i,1] = img[:,i,1]*(1-draw[:,i,3]/255) + draw[:,i,1]*(draw[:,i,3]/255)
+        img[:,i,2] = img[:,i,2]*(1-draw[:,i,3]/255) + draw[:,i,2]*(draw[:,i,3]/255)
+        
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+    elif k == ord('r'):
+        draw = np.zeros((h,w,4), dtype='uint8')
+        
+    cv2.imshow('WebCam6', img)
+
+cap.release()       # 釋放資源
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("擦亮影片")
+
+w = 640    # 定義影片寬度
+h = 360    # 定義影像高度
+dots = []  # 記錄座標
+mask_b = np.zeros((h,w,3), dtype='uint8')   # 產生黑色遮罩 -> 套用清楚影像
+mask_w = np.zeros((h,w,3), dtype='uint8')   # 產生白色遮罩 -> 套用模糊影像
+mask_w[0:h, 0:w] = 255                      # 白色遮罩背景為白色
+
+# 滑鼠繪圖函式
+def show_xy(event,x,y,flags,param):
+    global dots, mask
+    if flags == 1:
+        if event == 1:
+            dots.append([x,y])
+        if event == 4:
+            dots = []
+        if event == 0 or event == 4:
+            dots.append([x,y])
+            x1 = dots[len(dots)-2][0]
+            y1 = dots[len(dots)-2][1]
+            x2 = dots[len(dots)-1][0]
+            y2 = dots[len(dots)-1][1]
+            cv2.line(mask_w, (x1,y1), (x2,y2), (0,0,0), 50)        # 在白色遮罩上畫出黑色線條
+            cv2.line(mask_b, (x1,y1), (x2,y2), (255,255,255), 50)  # 在黑色遮罩上畫出白色線條
+
+cv2.imshow('ImageShow', mask_b)                 # 啟用視窗
+cv2.setMouseCallback('ImageShow', show_xy)    # 偵測滑鼠行為
+
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Cannot open camera")
+    exit()
+while True:
+    ret, img = cap.read()
+    if not ret:
+        print("Cannot receive frame")
+        break
+
+    img = cv2.resize(img,(w,h))                      # 縮小尺寸，加快速度
+    img = cv2.flip(img, 1)                           # 翻轉影像
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)      # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
+    img2 = img.copy()                                # 複製影像
+    img2 = cv2.blur(img, (55, 55))                   # 套用模糊
+
+    mask1 = cv2.cvtColor(mask_b, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
+    img = cv2.bitwise_and(img, img, mask=mask1)      # 清楚影像套用黑遮罩
+    mask2 = cv2.cvtColor(mask_w, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
+    img2 = cv2.bitwise_and(img2, img2, mask=mask2)   # 模糊影像套用白遮罩
+
+    output = cv2.add(img, img2)                      # 合併影像
+
+    cv2.imshow('ImageShow', output)
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 

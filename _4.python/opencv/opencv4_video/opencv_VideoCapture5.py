@@ -1636,18 +1636,18 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 print("OpenCV_ai_98")
 
-w = 640    # 定義影片寬度
-h = 360    # 定義影像高度
+cap = cv2.VideoCapture(0)                 # 讀取攝影鏡頭
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+
 dots = []  # 記錄座標
-mask_b = np.zeros((h,w,3), dtype='uint8')   # 產生黑色遮罩 -> 套用清楚影像
+mask_b = np.zeros((height,width,3), dtype='uint8')   # 產生黑色遮罩 -> 套用清楚影像
 mask_b[:, :] = 255                          # 設定黑色遮罩底色為白色
 mask_b[80:280, 220:420] = 0                 # 設定黑色遮罩哪個區域是黑色
 
-mask_w = np.zeros((h,w,3), dtype='uint8')   # 產生白色遮罩 -> 套用模糊影像
+mask_w = np.zeros((height,width,3), dtype='uint8')   # 產生白色遮罩 -> 套用模糊影像
 mask_w[80:280, 220:420] = 255               # 設定白色遮罩哪個區域是白色
 
-cap = cv2.VideoCapture(0)
-
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -1657,7 +1657,6 @@ while True:
         print("Cannot receive frame")
         break
 
-    img = cv2.resize(img,(w,h))                      # 縮小尺寸，加快速度
     img = cv2.flip(img, 1)                           # 翻轉影像
     img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)      # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
     img2 = img.copy()                                # 複製影像
@@ -1679,68 +1678,6 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 
-print("------------------------------------------------------------")  # 60個
-print("OpenCV_ai_99")
-""" fail
-w = 640    # 定義影片寬度
-h = 360    # 定義影像高度
-dots = []  # 記錄座標
-mask_b = np.zeros((h,w,3), dtype='uint8')   # 產生黑色遮罩 -> 套用清楚影像
-mask_w = np.zeros((h,w,3), dtype='uint8')   # 產生白色遮罩 -> 套用模糊影像
-mask_w[0:h, 0:w] = 255                      # 白色遮罩背景為白色
-
-# 滑鼠繪圖函式
-def show_xy(event,x,y,flags,param):
-    global dots, mask
-    if flags == 1:
-        if event == 1:
-            dots.append([x,y])
-        if event == 4:
-            dots = []
-        if event == 0 or event == 4:
-            dots.append([x,y])
-            x1 = dots[len(dots)-2][0]
-            y1 = dots[len(dots)-2][1]
-            x2 = dots[len(dots)-1][0]
-            y2 = dots[len(dots)-1][1]
-            cv2.line(mask_w, (x1,y1), (x2,y2), (0,0,0), 50)        # 在白色遮罩上畫出黑色線條
-            cv2.line(mask_b, (x1,y1), (x2,y2), (255,255,255), 50)  # 在黑色遮罩上畫出白色線條
-
-cv2.imshow('ImageShow', mask)                 # 啟用視窗
-cv2.setMouseCallback('ImageShow', show_xy)    # 偵測滑鼠行為
-
-cap = cv2.VideoCapture(0)
-
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    ret, img = cap.read()
-    if not ret:
-        print("Cannot receive frame")
-        break
-
-    img = cv2.resize(img,(w,h))                      # 縮小尺寸，加快速度
-    img = cv2.flip(img, 1)                           # 翻轉影像
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2BGRA)      # 轉換顏色為 BGRA ( 計算時需要用到 Alpha 色版 )
-    img2 = img.copy()                                # 複製影像
-    img2 = cv2.blur(img, (55, 55))                   # 套用模糊
-
-    mask1 = cv2.cvtColor(mask_b, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
-    img = cv2.bitwise_and(img, img, mask=mask1)      # 清楚影像套用黑遮罩
-    mask2 = cv2.cvtColor(mask_w, cv2.COLOR_BGR2GRAY) # 轉換遮罩為灰階
-    img2 = cv2.bitwise_and(img2, img2, mask=mask2)   # 模糊影像套用白遮罩
-
-    output = cv2.add(img, img2)                      # 合併影像
-
-    cv2.imshow('ImageShow', output)
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:
-        break
-
-cap.release()
-cv2.destroyAllWindows()
-"""
 print("------------------------------------------------------------")  # 60個
 
 import mediapipe as mp

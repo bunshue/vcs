@@ -96,7 +96,15 @@ print("一張彩圖的RGB與灰度的統計資料1")
       
 print("直接把影像的 灰階值 或 RGB值 用直方圖統計出來")
 
-plt.figure(figsize=(16, 8))
+plt.figure(
+    num="原圖的直方圖 RGB值 3通道分開畫",
+    figsize=(16, 8),
+    dpi=100,
+    facecolor="whitesmoke",
+    edgecolor="r",
+    linewidth=1,
+    frameon=True,
+)
 
 print('彩圖 image0')
 # 檔案 => cv2影像
