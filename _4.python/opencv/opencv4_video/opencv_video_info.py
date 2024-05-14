@@ -24,8 +24,8 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
-def show_video_info(filename):
-    video = cv2.VideoCapture(filename);
+def show_video_info(video_filename):
+    video = cv2.VideoCapture(video_filename);
 
     fps = video.get(cv2.CAP_PROP_FPS)
     print("Frames per second using video.get(cv2.CAP_PROP_FPS) : {0}".format(fps))
@@ -167,6 +167,48 @@ print("總影格數 = ", frame_count)
 cap.release()
 
 print('------------------------------------------------------------')	#60個
+
+print('取得影片參數')
+
+import cv2
+
+VideoCapture_parameters = [
+    "視頻文件的當前位置（播放）以毫秒為單位",
+    "基于以0開始的被捕獲或解碼的幀索引",
+    "視頻文件的相對位置（播放）：0=電影開始，1=影片的結尾。",
+    "在視頻流的幀的寬度",
+    "在視頻流的幀的高度",
+    "幀速率",
+    "編解碼的4字-字符代碼",
+    "視頻文件中的幀數",
+    "返回對象的格式",
+    "返回后端特定的值，該值指示當前捕獲模式",
+    "圖像的亮度(僅適用于照相機)",
+    "圖像的對比度(僅適用于照相機)",
+    "圖像的飽和度(僅適用于照相機)",
+    "色調圖像(僅適用于照相機)",
+    "圖像增益(僅適用于照相機)（Gain在攝影中表示白平衡提升）",
+    "曝光(僅適用于照相機)",
+    "指示是否應將圖像轉換為RGB布爾標志",
+    "× 暫時不支持",
+    "立體攝像機的矯正標注（目前只有DC1394 v.2.x后端支持這個功能）",
+    ]
+
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
+vid = cv2.VideoCapture(video_filename)
+
+for i in range(19):
+    print(vid.get(i), "\t", VideoCapture_parameters[i])
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+
 
 print('------------------------------------------------------------')	#60個
 

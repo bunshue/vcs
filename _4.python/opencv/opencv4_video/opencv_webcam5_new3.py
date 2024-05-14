@@ -1,7 +1,31 @@
+"""
+
+新進  未歸類
+
+
+"""
+
+import os
+import sys
+import time
+import math
+import random
+
+print("------------------------------------------------------------")  # 60個
+
+ESC = 27
+
 import cv2
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
+
+import cv2
+import numpy as np
+
+print("------------------------------------------------------------")  # 60個
+
+#未知其用途 goodFeaturesToTrack
 
 def getkpoints(imag, input1):
     mask1 = np.zeros_like(input1)
@@ -28,13 +52,14 @@ def process(image):
     keypoints = getkpoints(grey, grey1)
     if keypoints is not None and len(keypoints) > 0:
         for x, y in keypoints:
-            cv2.circle(image, (int(int(x) + 200), int(y)), 3, (255, 255, 0))
+            cv2.circle(image, (int(int(x) + 200), int(y)), 3, (0, 0, 255))
     return image
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 #video_filename = 'D:/內視鏡影片/_ims影片2/180824-1025.mp4'
 
 cap = cv2.VideoCapture(video_filename)
+#cap = cv2.VideoCapture(0)
 
 while (cap.isOpened()):
     ret, frame = cap.read()
@@ -50,7 +75,19 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
 print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 

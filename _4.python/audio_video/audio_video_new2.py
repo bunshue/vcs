@@ -3,7 +3,6 @@ import sys
 import time
 import random
 
-
 print('------------------------------------------------------------')	#60個
 
 """
@@ -29,11 +28,36 @@ print('存檔完成, 檔名 :', filename)
 
 filename = 'tmp_gtts2.mp3'
 f = open(filename, "wb")
+
 tts1 = gtts.gTTS(text=txt1, lang='zh-tw')
 tts1.write_to_fp(f)
+
 tts2 = gtts.gTTS(text=txt2, lang='zh-tw')
 tts2.write_to_fp(f)
+
 print('存檔完成, 檔名 :', filename)
+
+print('------------------------------------------------------------')	#60個
+
+mp3_filename = 'tmp_mp3_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp3'
+
+import gtts
+
+text = "Welcome to the United States and have a nice day."
+tts = gtts.gTTS(text=text, lang='en')
+tts.save(mp3_filename)
+
+print("------------------------------------------------------------")  # 60個
+
+mp3_filename = 'tmp_mp3_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp3'
+
+import gtts
+
+text = "黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
+
+tts = gtts.gTTS(text=text, lang='zh-tw')
+tts.save(mp3_filename)
+
 
 print('------------------------------------------------------------')	#60個
 
@@ -45,9 +69,10 @@ pip install SpeechRecognition
 
 print('語音轉文字')
 
-import speech_recognition as sr
-r = sr.Recognizer()
-with sr.WavFile("record1.wav") as source:  #讀取wav檔
+import speech_recognition
+
+r = speech_recognition.Recognizer()
+with speech_recognition.WavFile("record1.wav") as source:  #讀取wav檔
     audio = r.record(source)
 try:
     word = r.recognize_google(audio, language = "zh-TW")
@@ -68,9 +93,7 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-#google.colab 安裝失敗
-
-import speech_recognition as sr
+import speech_recognition
 from pydub import AudioSegment
 from IPython.display import display, Javascript
 #from google.colab.output import eval_js
@@ -132,8 +155,8 @@ def record_audio(filename):
 record_audio("record.webm")
 sound = AudioSegment.from_file("record.webm")
 sound.export("record.wav", format ='wav')
-r = sr.Recognizer()
-with sr.WavFile("record.wav") as source:
+r = speech_recognition.Recognizer()
+with speech_recognition.WavFile("record.wav") as source:
     audio = r.record(source)
 try:
     word = r.recognize_google(audio, language="zh-TW")
@@ -262,13 +285,13 @@ for article in paper.articles:
 print('------------------------------------------------------------')	#60個
 
 """
-import speech_recognition as sr
+import speech_recognition
 
-r = sr.Recognizer()        
+r = speech_recognition.Recognizer()        
 r.energy_threshold = 4000   #設定聲音辨識的靈敏度
 while True:           
     try:
-        with sr.Microphone() as source:  # 打開麥克風
+        with speech_recognition.Microphone() as source:  # 打開麥克風
             print("請開始說話:")
             audio = r.listen(source) #等待語音輸入        
             listen_text = r.recognize_google(audio, language="zh-TW")
@@ -541,6 +564,8 @@ for i in range(len(predictions)):
 
 print('------------------------------------------------------------')	#60個
 
+
+print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個

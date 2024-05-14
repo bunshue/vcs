@@ -6,18 +6,18 @@ WebCam 使用
 目前 webcam 僅 x64 電腦可用
 """
 
+import cv2
+
 ESC = 27
 SPACE = 32
+
+print("------------------------------------------------------------")  # 60個
 
 import os
 import sys
 import time
 import math
 import random
-
-print("------------------------------------------------------------")  # 60個
-
-import cv2
 import numpy as np
 
 print("------------------------------------------------------------")  # 60個
@@ -64,7 +64,8 @@ while(cap.isOpened()):
   if ret == True:
     out.write(frame)
     cv2.imshow("WebCam1", frame)
-    if cv2.waitKey(1) & 0xFF == ord("q"):
+    k = cv2.waitKey(1)
+    if k == ESC:     #ESC
       break
   else:
     break

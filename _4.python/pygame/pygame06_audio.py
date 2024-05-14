@@ -73,36 +73,6 @@ time.sleep(5)                               # 程式休息
 
 print("------------------------------------------------------------")  # 60個
 
-mp3_filename = 'tmp_mp3_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp3'
-
-from gtts import gTTS
-import pygame
-
-text = "Welcome to the United States and have a nice day."
-tts = gTTS(text=text, lang='en')
-tts.save(mp3_filename)
-
-pygame.mixer.init()
-pygame.mixer.music.load(mp3_filename)
-pygame.mixer.music.play()
-
-time.sleep(5)                               # 程式休息
-
-print("------------------------------------------------------------")  # 60個
-
-mp3_filename = 'tmp_mp3_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp3'
-
-from gtts import gTTS
-import pygame
-
-text = "黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
-
-tts = gTTS(text=text, lang='zh-tw')
-tts.save(mp3_filename)
-
-pygame.mixer.init()
-pygame.mixer.music.load(mp3_filename)
-pygame.mixer.music.play()
 
 print("------------------------------------------------------------")  # 60個
 

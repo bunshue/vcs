@@ -31,10 +31,9 @@ while True:
       print('無影像, 離開')
       break
 
-    # 原圖
     cv2.imshow('WebCam', frame)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:
         break
 
@@ -122,8 +121,8 @@ while True:
     #print('{:.1f}'.format(fps))
     time_old = time_new
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:     #ESC
+    k = cv2.waitKey(1)
+    if k == ESC:
         break
     elif k == ord('S') or k == ord('s'):  # 按下 S(s), 存圖
         image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg'
@@ -136,25 +135,61 @@ cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
 
 print('------------------------------------------------------------')	#60個
 
+print('更改視訊的解析度')
+
 cap = cv2.VideoCapture(0)
 
-#更改視訊的解析度
 #Webcam有支援的模式 以下的設定才會有用
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 cap.set(cv2.CAP_PROP_FPS, 30)
 
 while(cap.isOpened()):
-  ret, frame = cap.read()
-  cv2.imshow("Frame", frame)      
-  if cv2.waitKey(1) & 0xFF == ord("q"):
-      break
-  
+    ret, frame = cap.read()
+    cv2.imshow("WebCam", frame)
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
 cap.release()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
+print('移動偵測')
+
+cap = cv2.VideoCapture(0)
+
+img_pre = None   # 前影像, 預設是空的
+while cap.isOpened():
+    success, img = cap.read()
+    if success:
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)        # 灰階處理
+        img_now = cv2.GaussianBlur(gray, (13, 13), 5)       # 高斯模糊
+        if img_pre is not None:  # ←如果前影像不是空的, 就和前影像比對
+            diff = cv2.absdiff(img_now, img_pre)   # 此影格與前影格的差異值
+            ret, thresh = cv2.threshold(diff, 25, 255,  # 門檻值
+                                        cv2.THRESH_BINARY)
+            contours, _ = cv2.findContours(thresh,    # 找到輪廓
+                                           cv2.RETR_EXTERNAL,
+                                           cv2.CHAIN_APPROX_SIMPLE)
+            if contours:    # 如果有偵測到輪廓
+                #print(type(contours))
+                print(contours)
+                cv2.drawContours(img, contours, -1, (0, 0, 255), 2)
+                print('偵測到移動')
+            else:
+                print('靜止畫面', end = ' ')
+                pass
+
+        cv2.imshow('WebCam', img)
+        img_pre = img_now.copy()
+    k = cv2.waitKey(1)
+    if k == ESC:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 

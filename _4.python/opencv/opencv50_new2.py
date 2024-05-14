@@ -1,5 +1,8 @@
 import cv2
 
+ESC = 27
+SPACE = 32
+
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 print("------------------------------------------------------------")  # 60個
@@ -22,7 +25,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('測試cv2視窗的Trackbar')
 
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
@@ -55,8 +58,6 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
-
-import cv2
 
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 img = cv2.imread(filename)
@@ -96,60 +97,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-
-#原图的高宽
-h,w=image.shape[:2]
-#仿射变换矩阵，缩小两倍
-A1 = np.array([[0.5,0,0],[0,0.5,0]],np.float32)
-d1 = cv2.warpAffine(image,A1,(w,h),borderValue=125)
-#先缩小两倍，再平移
-A2 = np.array([[0.5,0,w/4],[0,0.5,h/4]],np.float32)
-d2 = cv2.warpAffine(image,A2,(w,h),borderValue=125)
-#在 d2 的基础上，绕图像的中心点旋转
-A3 = cv2.getRotationMatrix2D((w/2,h/2),30,1)
-d3 = cv2.warpAffine(d2,A3,(w,h),borderValue=125)
-#在
-A4 = np.array([[math.cos(math.pi/4),0,0],[math.sin(math.pi/3),1,0]])
-d4 = cv2.warpAffine(image,A4,(2*w,2*h),borderValue=125)
-
-cv2.imshow("image",image)
-cv2.imshow("d1",d1)
-cv2.imshow("d2",d2)
-cv2.imshow("d3",d3)
-cv2.imshow("d4",d4)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-#第3章：空間變換\3.2-投影變換\perspective.py
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-image = cv2.imread(filename)
-
-#原图的宽高
-h,w, d = image.shape
-#将原图的四个顶点投影到一个不规则的四边形中
-src=np.array([[0,0],[w-1,0],[0,h-1],[w-1,h-1]],np.float32);
-dst=np.array([[20,50],[w/2,150],[50,h/2],[w-40,h-40]],np.float32)
-#计算投影矩阵
-p=cv2.getPerspectiveTransform(src,dst)
-#利用计算出的投影矩阵进行头像的投影变换
-r = cv2.warpPerspective(image,p,(w,h),borderValue=0)
-
-#显示原图和投影效果
-cv2.imshow("image",image)
-cv2.imshow("warpPerspective",r)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-#第3章：空間變換\3.3-極座標變換\linearPolar_OpenCV3.py
+print('測試 cv2.linearPolar')
+print("空間變換 極座標變換 linearPolar_OpenCV3")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
@@ -169,7 +118,9 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第3章：空間變換\3.3-極座標變換\logPolar.py
+print('測試 cv2.logPolar')
+
+print("空間變換 極座標變換 logPolar")
 
 src = cv2.imread(filename,cv2.IMREAD_ANYCOLOR)
 #显示原图
@@ -187,7 +138,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第3章：空間變換\3.3-極座標變換\Polar.py
+print("空間變換 極座標變換 Polar")
 
 #极坐标变换
 def polar(I,center,r,theta=(0,360),rstep=1.0,thetastep=360.0/(180*8)):
@@ -229,6 +180,7 @@ cv2.circle(I,(int(cx),int(cy)),10,(255.0,0,0),3)
 O = polar(I,(cx,cy),(270,340))
 #旋转
 O = cv2.flip(O,0)
+
 #显示原图和输出图像
 cv2.imshow("I",I)
 cv2.imshow("O",O)
@@ -238,7 +190,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第4章：對比度增強\4.2\line.py
+print("對比度增強1")
 
 image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
 image = cv2.imread(filename)
@@ -266,7 +218,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第4章：對比度增強\4.2\line2.py
+print("對比度增強2")
 
 #分段线性变换
 def piecewiseLinear(image,point1,point2):
@@ -327,7 +279,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第4章：對比度增強\4.3\histNormalized.py
+print("對比度增強3 histNormalized")
 
 #直方图正规化
 #1、若输入是 8 位图 ，一般设置 O_min = 0，O_max = 255
@@ -388,7 +340,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第4章：對比度增強\4.4\gamma.py
+print("對比度增強4 gamma")
 
 image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
 image = cv2.imread(filename)
@@ -419,7 +371,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第4章：對比度增強\4.5\equalHist.py
+print("對比度增強5 equalHist")
 
 #计算图像灰度直方图
 def calcGrayHist(image):
@@ -487,7 +439,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第4章：對比度增強\4.6\CLAHE.py
+print("對比度增強6 CLAHE")
 
 #第一步：读入图像
 src = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
@@ -504,7 +456,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.1\5.1.1\copyMakeBorder.py
+print("圖像平滑 copyMakeBorder")
 
 src=np.array([[5,1,7],[1,5,9],[2,6,2]])
 dst=cv2.copyMakeBorder(src,2,2,2,2,2)
@@ -512,7 +464,7 @@ print(dst)
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.1\5.1.1\sameConv2d.py
+print("圖像平滑 sameConv2d")
 
 from scipy import signal
 
@@ -534,7 +486,7 @@ print(c_same)
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.1\5.1.2\sepConv.py
+print("圖像平滑 sepConv")
 
 from scipy import signal
 
@@ -545,124 +497,81 @@ kernel = signal.convolve2d(kernel1,kernel2,mode='full')
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.1\5.1.3\conv.py
+print("圖像平滑 conv")
 
 from scipy import signal
 
-if __name__ =="__main__":
-    #图像矩阵
-    """
-    I=np.array([[1,2,3,10,12],
-                [32,43,12,4,190],
-                [12,234,78,0,12],
-                [43,90,32,8,90],
-                [71,12,4,98,123]],np.float32)
-    """
-    I = np.ones((10,10),np.float32)
-    I[1:3,3:5]=5
-    I[3:5,4:7]=3
-    #卷积核
-    """
-        kernel = np.array([[1,0,-1],
-                       [1,0,-1],
-                       [1,0,-1]])
-    """
-    kernel1 = np.array([[1,3,4],[9,10,2],[-1,10,2]],np.float32)
-    kernel2 = np.array([[-1,2,3],[4,5,6],[10,9,10]],np.float32)
-    #kernel1 = np.array([[-1,2,3]],np.float32)
-    #kernel2 = np.array([[10],[43],[1]],np.float32)
-    kernel = signal.convolve2d(kernel1,kernel2,mode='full')
-    print(kernel)
-    #第一种方式:直接进行卷积运算得到的结果
-    I_Kernel = signal.convolve2d(I,kernel,mode='same',boundary = 'symm',fillvalue= 0)
-    #第二种方式:用可分离卷积核性质得到的结果
-    I_kernel1 = signal.convolve2d(I,kernel1,mode='same',boundary = 'wrap',fillvalue= 0)
-    I_kernel1_kernel2 = signal.convolve2d(I_kernel1,kernel2,mode='same',boundary = 'wrap',fillvalue= 0)
-    #print(I_Kernel)
-    print("*******************")
-    print(np.max(np.abs(I_Kernel - I_kernel1_kernel2)))
-    print("********************")
-    print(I_Kernel)
-    print(I_kernel1_kernel2)
-
-print("------------------------------------------------------------")  # 60個
-
-#第5章：圖像平滑\5.1\5.1.3\conv2.py
-
-from scipy import signal
-
-if __name__ =="__main__":
-    #图像矩阵
-    I=np.array([[1,2,3,10,12],
-                [32,43,12,4,190],
-                [12,234,78,0,12],
-                [43,90,32,8,90],
-                [71,12,4,98,123]],np.float32)
-    #卷积核
+#图像矩阵
+"""
+I=np.array([[1,2,3,10,12],
+            [32,43,12,4,190],
+            [12,234,78,0,12],
+            [43,90,32,8,90],
+            [71,12,4,98,123]],np.float32)
+"""
+I = np.ones((10,10),np.float32)
+I[1:3,3:5]=5
+I[3:5,4:7]=3
+#卷积核
+"""
     kernel = np.array([[1,0,-1],
-                       [1,0,-1],
-                       [1,0,-1]])
-    # full 卷积
-    fullConv = signal.convolve2d(I,kernel,mode='full',boundary = 'fill',fillvalue= 0)
-    # same 卷积
-    sameConv = signal.convolve2d(I,kernel,mode='same',boundary = 'symm')
-    # valid 卷积
-    validConv = signal.convolve2d(I,kernel,mode='valid')
-    print(fullConv)
-    print(sameConv)
-    print(validConv)
-    
+                   [1,0,-1],
+                   [1,0,-1]])
+"""
+kernel1 = np.array([[1,3,4],[9,10,2],[-1,10,2]],np.float32)
+kernel2 = np.array([[-1,2,3],[4,5,6],[10,9,10]],np.float32)
+#kernel1 = np.array([[-1,2,3]],np.float32)
+#kernel2 = np.array([[10],[43],[1]],np.float32)
+kernel = signal.convolve2d(kernel1,kernel2,mode='full')
+print(kernel)
 
+#第一种方式:直接进行卷积运算得到的结果
+I_Kernel = signal.convolve2d(I,kernel,mode='same',boundary = 'symm',fillvalue= 0)
+
+#第二种方式:用可分离卷积核性质得到的结果
+I_kernel1 = signal.convolve2d(I,kernel1,mode='same',boundary = 'wrap',fillvalue= 0)
+I_kernel1_kernel2 = signal.convolve2d(I_kernel1,kernel2,mode='same',boundary = 'wrap',fillvalue= 0)
+
+#print(I_Kernel)
+print("*******************")
+print(np.max(np.abs(I_Kernel - I_kernel1_kernel2)))
+print("********************")
+print(I_Kernel)
+print(I_kernel1_kernel2)
 
 print("------------------------------------------------------------")  # 60個
-""" no module
-#第5章：圖像平滑\5.2\gaussBlur.py
 
-import gaussKernel #导入构建高斯核的包
+print("圖像平滑 conv2")
+
 from scipy import signal
 
-#高斯平滑，返回的数据类型为浮点型
-def gaussBlur(image,sigma,H,W,_boundary = 'fill',_fillvalue = 0):
+#图像矩阵
+I=np.array([[1,2,3,10,12],
+            [32,43,12,4,190],
+            [12,234,78,0,12],
+            [43,90,32,8,90],
+            [71,12,4,98,123]],np.float32)
+#卷积核
+kernel = np.array([[1,0,-1],
+                   [1,0,-1],
+                   [1,0,-1]])
+# full 卷积
+fullConv = signal.convolve2d(I,kernel,mode='full',boundary = 'fill',fillvalue= 0)
+# same 卷积
+sameConv = signal.convolve2d(I,kernel,mode='same',boundary = 'symm')
+# valid 卷积
+validConv = signal.convolve2d(I,kernel,mode='valid')
+print(fullConv)
+print(sameConv)
+print(validConv)
 
-    #构建HxW的高斯平滑算子
-    #gaussKernelxy = gaussKernel.getGaussKernel(sigma,H,W)
-    #图像矩阵和高斯卷积核卷积
-    #gaussBlur_xy = signal.convolve2d(image,gaussKernelxy,mode='same',boundary = _boundary,fillvalue=_fillvalue)
-    #return gaussBlur_xy
-
-    #因为高斯核是可分解的，根据卷积的结合律
-    #先进行水平方向的卷积，然后再进行垂直方向的卷积
-    gaussKenrnel_x = gaussKernel.getGaussKernel(sigma,1,W)
-    gaussBlur_x = signal.convolve2d(image,gaussKenrnel_x,mode='same',boundary = _boundary,fillvalue=_fillvalue)
-    gaussKenrnel_y = gaussKernel.getGaussKernel(sigma,H,1)
-    gaussBlur_xy = signal.convolve2d(gaussBlur_x,gaussKenrnel_y,mode='same',boundary = _boundary,fillvalue=_fillvalue)
-    return gaussBlur_xy
-
-image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
-cv2.imshow("image",image)
-# 3 11 11 9 25 25
-blurImage = gaussBlur(image,5,51,51,'symm')
-#如果输入的图像是8位图,输出的
-blurImage = np.round(blurImage)
-blurImage = blurImage.astype(np.uint8)
-cv2.imshow("gaussBlur",blurImage)
-#如果输入的图像数据类型是浮点型，且像素值归一到[0,1]
-image_0_1 = image/255.0
-blurImage_0_1 = gaussBlur(image_0_1,4,5,5,'symm')
-#cv2.imshow("gaussBlur-0-1",blurImage_0_1)
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-"""
 print("------------------------------------------------------------")  # 60個
-
-#第5章：圖像平滑\5.2\gaussKernel.py
 
 from scipy import signal
 
 """
-    得到高斯平滑算子：
-    getGaussKernel(sigma,H,W),使用过程中一般H和W一般为奇数，sigma大于零
+得到高斯平滑算子：
+getGaussKernel(sigma,H,W),使用过程中一般H和W一般为奇数，sigma大于零
 """
 
 def getGaussKernel(sigma,H,W):
@@ -706,7 +615,46 @@ print(gaussKernel_xy)
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.3\fastMeanBlur.py
+print("圖像平滑 gaussBlur")
+
+from scipy import signal
+
+#高斯平滑，返回的数据类型为浮点型
+def gaussBlur(image,sigma,H,W,_boundary = 'fill',_fillvalue = 0):
+
+    #构建HxW的高斯平滑算子
+    #gaussKernelxy = getGaussKernel(sigma,H,W)
+    #图像矩阵和高斯卷积核卷积
+    #gaussBlur_xy = signal.convolve2d(image,gaussKernelxy,mode='same',boundary = _boundary,fillvalue=_fillvalue)
+    #return gaussBlur_xy
+
+    #因为高斯核是可分解的，根据卷积的结合律
+    #先进行水平方向的卷积，然后再进行垂直方向的卷积
+    gaussKenrnel_x = getGaussKernel(sigma,1,W)
+    gaussBlur_x = signal.convolve2d(image,gaussKenrnel_x,mode='same',boundary = _boundary,fillvalue=_fillvalue)
+    gaussKenrnel_y = getGaussKernel(sigma,H,1)
+    gaussBlur_xy = signal.convolve2d(gaussBlur_x,gaussKenrnel_y,mode='same',boundary = _boundary,fillvalue=_fillvalue)
+    return gaussBlur_xy
+
+image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+cv2.imshow("image",image)
+# 3 11 11 9 25 25
+blurImage = gaussBlur(image,5,51,51,'symm')
+#如果输入的图像是8位图,输出的
+blurImage = np.round(blurImage)
+blurImage = blurImage.astype(np.uint8)
+cv2.imshow("gaussBlur",blurImage)
+#如果输入的图像数据类型是浮点型，且像素值归一到[0,1]
+image_0_1 = image/255.0
+blurImage_0_1 = gaussBlur(image_0_1,4,5,5,'symm')
+#cv2.imshow("gaussBlur-0-1",blurImage_0_1)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+'''
+print("------------------------------------------------------------")  # 60個
+
+print("圖像平滑 fastMeanBlur")
 
 #图像积分
 def integral(image):
@@ -757,7 +705,7 @@ def fastMeanBlur(image,winSize,borderType = cv2.BORDER_DEFAULT):
     return meanBlurImage
 
 """ fail
-image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
 #快速均值平滑
 meanBlurImage = fastMeanBlur(image,(15,15),cv2.BORDER_DEFAULT)
 #数据类型转换
@@ -769,9 +717,10 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
 
+'''
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.3\meanBlur.py
+print("圖像平滑 meanBlur")
 
 from scipy import signal
 
@@ -824,7 +773,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.4\medianBlur.py
+print("圖像平滑 medianBlur")
 
 #中值滤波 
 def medianBlur(image,winSize):
@@ -863,7 +812,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.4\salt.py
+print("圖像平滑 salt")
 
 #模拟椒盐噪声，number 指添加椒盐噪声的数量
 def salt(image,number):
@@ -889,7 +838,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.5\BFilter.py
+print("圖像平滑 BFilter")
 
 #基于空间距离的权重因子 ( 和计算高斯算子的过程是一样的 )
 def getClosenessWeight(sigma_g,H,W):
@@ -959,7 +908,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.5\BilateralFiltering.py
+print("圖像平滑 BilateralFiltering")
 
 
 #基于空间距离的权重模板 ( 和计算高斯算子的过程是一样的 )
@@ -1019,7 +968,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.5\blfFilterColor.py
+print("圖像平滑 blfFilterColor")
 
 #基于空间距离的权重因子 ( 和计算高斯核的过程类似 )
 def getClosenessWeight(sigma_d,H,W):
@@ -1092,7 +1041,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.6\JointBilterFilter.py
+print("圖像平滑 JointBilterFilter")
 
 #基于空间距离的权重模板 ( 和计算高斯算子的过程是一样的 )
 def getClosenessWeight(sigma_g,H,W):
@@ -1156,9 +1105,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.7\fastGuidedFilter.py
-""" no module
-from fastMeanBlur import fastMeanBlur#导入快速均值平滑
+print("圖像平滑 fastGuidedFilter")
 
 #快速导向滤波，输入的图像数据类型为归一到[0,1]的浮点型
 #s属于(0,1] ,
@@ -1194,7 +1141,6 @@ def fastGuidedFilter(I,p,r,eps,s):
     mean_b = cv2.resize(mean_small_b,dsize=(cols,rows),interpolation=cv2.INTER_LINEAR)
     q = mean_a*I + mean_b
     return q
-"""
 
 #彩色快速导向滤波（平滑）
 def fGFColorSmooth(I,r,eps,s):
@@ -1234,7 +1180,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.7\fastMeanBlur.py
+print("圖像平滑 fastMeanBlur")
 
 #图像积分
 def integral(image):
@@ -1260,6 +1206,7 @@ def integral(image):
     inteImage_0 = np.zeros((rows+1,cols+1),np.float32)
     inteImage_0[1:rows+1,1:cols+1] = inteImage
     return inteImage_0
+
 #快速均值平滑：返回数组的数据类型是浮点型，winSize = ( 高，宽 )
 def fastMeanBlur(image,winSize,borderType = cv2.BORDER_DEFAULT):
     halfH = (winSize[0]-1)/2
@@ -1298,9 +1245,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.7\guidedFilter.py
-""" no module
-from fastMeanBlur import fastMeanBlur
+print("圖像平滑 guidedFilter")
 
 #导向滤波
 def guidedFilter(I,p,winSize,eps):
@@ -1326,7 +1271,7 @@ def guidedFilter(I,p,winSize,eps):
     q = mean_a*I + mean_b
     return q
 
-
+""" fail
 image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
 #将图像归一化
 image_0_1 = image/255.0
@@ -1343,13 +1288,12 @@ result = result.astype(np.uint8)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-"""
 
+"""
+'''
 print("------------------------------------------------------------")  # 60個
 
-#第5章：圖像平滑\5.7\guidedFilter_color.py
-""" no module
-from fastMeanBlur import fastMeanBlur
+print("圖像平滑 guidedFilter_color cccc")
 
 #导向滤波
 def guidedFilter(I,p,winSize,eps):
@@ -1374,6 +1318,10 @@ def guidedFilter(I,p,winSize,eps):
     mean_b = fastMeanBlur(b,winSize,cv2.BORDER_DEFAULT)
     q = mean_a*I + mean_b
     return q
+
+""" fail
+filename1 = 'C:/_git/vcs/_4.python/_data/pic_brightness1.bmp'
+filename2 = 'C:/_git/vcs/_4.python/_data/pic_brightness2.bmp'
 
 I = cv2.imread(filename1, cv2.IMREAD_COLOR)
 p = cv2.imread(filename2, cv2.IMREAD_GRAYSCALE)
@@ -1400,7 +1348,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第6章：閾值分割\6.1\threshold_OpenCV3.py
+print("閾值分割 threshold_OpenCV3")
 
 src = np.array([[123,234,68],[33,51,17],[48,98,234], [129,89,27],[45,167,134]],np.uint8)
 #手动设置阈值
@@ -1418,7 +1366,7 @@ print(triThe,dst_tri)
 
 print("------------------------------------------------------------")  # 60個
 
-#第6章：閾值分割\6.2\threshTwoPeaks.py
+print("閾值分割 threshTwoPeaks")
 
 #计算图像灰度直方图
 def calcGrayHist(image):
@@ -1474,7 +1422,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第6章：閾值分割\6.3\threshEntroy.py
+print("閾值分割 threshEntroy")
 
 #计算图像灰度直方图
 def calcGrayHist(image):
@@ -1554,7 +1502,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第6章：閾值分割\6.4\otsu.py
+print("閾值分割 otsu")
 
 #计算图像灰度直方图
 def calcGrayHist(image):
@@ -1612,7 +1560,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第6章：閾值分割\6.5\adaptive.py
+print("閾值分割 adaptive")
 
 #图像积分
 def integral(image):
@@ -1675,7 +1623,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第6章：閾值分割\6.5\adaptiveThresh.py
+print("閾值分割 adaptiveThresh")
 
 def adaptiveThresh(I,winSize,ratio=0.15):
     #第一步：对图像矩阵进行均值平滑
@@ -1699,7 +1647,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第6章：閾值分割\6.6\bitwise_and.py
+print("閾值分割 bitwise_and")
 
 src1 = np.array([[255,0,255]])
 src2 = np.array([[255,0,0]])
@@ -1714,7 +1662,7 @@ print(dst_or)
 
 print("------------------------------------------------------------")  # 60個
 
-#第7章：形態學處理\7.1\erode.py
+print("形態學處理 erode")
 
 I = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
 #创建结构元
@@ -1730,7 +1678,8 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第7章：形態學處理\7.2\dilate.py
+print("形態學處理 dilate")
+
 """ fail
 if __name__ =="__main__":
     #第一步：读入图像
@@ -1759,16 +1708,16 @@ if __name__ =="__main__":
         d = cv2.erode(I,s,iterations=i)
         #显示膨胀效果
         cv2.imshow("dilate",d)
-        ch = cv2.waitKey(5)
-        #按下"Esc"键退出循环
-        if ch == 27:
+
+        k = cv2.waitKey(5)
+        if k == ESC:
             break
     cv2.destroyAllWindows()
 """
 
 print("------------------------------------------------------------")  # 60個
 
-#第7章：形態學處理\7.3\open.py
+print("形態學處理 open")
 
 #第一步：读入图像
 I = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
@@ -1785,45 +1734,48 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第7章：形態學處理\7.4\mor.py
+print('按 ESC 離開')
 
-if __name__ =="__main__":
-    #第一步：读入图像
-    I = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
-    #显示原图
-    cv2.imshow("I",I)
-    #结构元半径，迭代次数
-    r, i= 1,1
-    MAX_R,MAX_I = 20,20
-    #显示形态学处理的效果的窗口
-    cv2.namedWindow("morphology",1)
-    def nothing(*arg):
-        pass
-    #调节结构元半径
-    cv2.createTrackbar("r","morphology",r,MAX_R,nothing)
-    #调节迭代次数
-    cv2.createTrackbar("i","morphology",i,MAX_I,nothing)
-    while True:
-        #得到当前的r值
-        r = cv2.getTrackbarPos('r', 'morphology')
-        #得到当前的i值
-        i = cv2.getTrackbarPos('i','morphology')
-        #创建结构元
-        s = cv2.getStructuringElement(cv2.MORPH_RECT,(2*r+1,2*r+1))
-        #形态学处理
-        d = cv2.morphologyEx(I,cv2.MORPH_GRADIENT,s,iterations=i)
-        #显示效果
-        cv2.imshow("morphology",d)
+print("形態學處理 mor")
 
-        ch = cv2.waitKey(5)
-        #按下"Esc"键退出循环
-        if ch == 27:
-            break
-    cv2.destroyAllWindows()
+#第一步：读入图像
+I = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+#显示原图
+cv2.imshow("I",I)
+#结构元半径，迭代次数
+r, i= 1,1
+MAX_R,MAX_I = 20,20
+#显示形态学处理的效果的窗口
+cv2.namedWindow("morphology",1)
+
+def nothing(*arg):
+    pass
+
+#调节结构元半径
+cv2.createTrackbar("r","morphology",r,MAX_R,nothing)
+#调节迭代次数
+cv2.createTrackbar("i","morphology",i,MAX_I,nothing)
+while True:
+    #得到当前的r值
+    r = cv2.getTrackbarPos('r', 'morphology')
+    #得到当前的i值
+    i = cv2.getTrackbarPos('i','morphology')
+    #创建结构元
+    s = cv2.getStructuringElement(cv2.MORPH_RECT,(2*r+1,2*r+1))
+    #形态学处理
+    d = cv2.morphologyEx(I,cv2.MORPH_GRADIENT,s,iterations=i)
+    #显示效果
+    cv2.imshow("morphology",d)
+
+    k = cv2.waitKey(5)
+    if k == ESC:
+        break
+
+cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.1\roberts.py
+print("邊緣檢測 roberts")
 
 from scipy import signal
 
@@ -1875,7 +1827,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.10\Marr_Hildreth.py
+print("邊緣檢測 Marr_Hildreth")
 
 from scipy import signal
 
@@ -1969,7 +1921,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.10\Marr_Hildreth_new.py
+print("邊緣檢測 Marr_Hildreth")
 
 from scipy import signal
 
@@ -1991,6 +1943,7 @@ def gaussConv(I,size,sigma):
     I_xk_yk = signal.convolve2d(I_xk,yk,'same','symm')
     I_xk_yk *= 1.0/(2*np.pi*pow(sigma,2.0))
     return I_xk_yk
+
 #高斯差分
 def DoG(I,size,sigma,k=1.1):
     #标准差为 sigma 的非归一化的高斯卷积
@@ -2001,6 +1954,7 @@ def DoG(I,size,sigma,k=1.1):
     doG = Isk - Is
     doG /= (pow(sigma,2.0)*(k-1))
     return doG
+
 #零交叉点：方法1
 def zero_cross_default(doG):
     zero_cross = np.zeros(doG.shape,np.uint8)
@@ -2024,6 +1978,7 @@ def zero_cross_default(doG):
                 zero_cross[r][c] = 255
                 continue
     return zero_cross
+
 #零交叉点：方法2
 def zero_cross_mean(doG):
     zero_cross = np.zeros(doG.shape,np.uint8)
@@ -2047,6 +2002,7 @@ def zero_cross_mean(doG):
             if(np.min(fourMean)*np.max(fourMean)<0):
                 zero_cross[r][c] = 255
     return zero_cross
+
 # Marr_Hildreth 边缘检测算法
 def Marr_Hildreth(image,size,sigma,k=1.1,crossType="ZERO_CROSS_DEFAULT"):
     #高斯差分
@@ -2073,7 +2029,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.2\prewitt.py
+print("邊緣檢測 prewitt")
 
 from scipy import signal
 
@@ -2094,6 +2050,9 @@ def prewitt(I,_boundary='symm',):
     diff_y = np.array([[1],[0],[-1]],np.float32)
     i_conv_pre_y = signal.convolve2d(i_conv_pre_y,diff_y,mode='same',boundary = _boundary)
     return (i_conv_pre_x,i_conv_pre_y)
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/barbara.bmp'
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
 
 image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
 #图像矩阵 和 两个 prewitt算子 的卷积
@@ -2124,7 +2083,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.3\sobel.py
+print("邊緣檢測 sobel")
 
 from scipy import signal
 
@@ -2210,7 +2169,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.3\Sobel_normalize.py
+print("邊緣檢測 Sobel_normalize")
 
 from scipy import signal
 
@@ -2280,7 +2239,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.4\scharr.py
+print("邊緣檢測 scharr")
 
 from scipy import signal
 
@@ -2345,7 +2304,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.5\Kirsch.py
+print("邊緣檢測 Kirsch")
 
 from scipy import signal
 
@@ -2438,8 +2397,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-""" no module
-#第8章：邊緣檢測\8.6\canny.py
+print("邊緣檢測 canny")
 
 import sobel #注意sobel边缘检测
 
@@ -2476,6 +2434,7 @@ def non_maximum_suppression_default(dx,dy):
                 if(edgeMag[r][c]>edgeMag[r-1][c+1] and edgeMag[r][c] > edgeMag[r+1][c-1]):
                     edgeMag_nonMaxSup[r][c] = edgeMag[r][c]
     return edgeMag_nonMaxSup
+
 #非极大值抑制：插值比较
 def non_maximum_suppression_Inter(dx,dy):
     #边缘强度
@@ -2522,12 +2481,14 @@ def non_maximum_suppression_Inter(dx,dy):
                 if edgeMag[r][c] > rightTop_right and edgeMag[r][c] > leftBottom_left:
                     edgeMag_nonMaxSup[r][c]  = edgeMag[r][c]
     return edgeMag_nonMaxSup
+
 #判断一个点的坐标是否在图像范围内
 def checkInRange(r,c,rows,cols):
     if r>=0 and r<rows and c>=0 and c<cols:
         return True
     else:
         return False
+
 def trace(edgeMag_nonMaxSup,edge,lowerThresh,r,c,rows,cols):
     #大于阈值为确定边缘点
     if edge[r][c] == 0:
@@ -2536,6 +2497,7 @@ def trace(edgeMag_nonMaxSup,edge,lowerThresh,r,c,rows,cols):
             for j in range(-1,2):
                 if checkInRange(r+i,c+j,rows,cols) and edgeMag_nonMaxSup[r+i][c+j] >= lowerThresh:
                     trace(edgeMag_nonMaxSup,edge,lowerThresh,r+i,c+j,rows,cols)
+
 #滞后阈值
 def hysteresisThreshold(edge_nonMaxSup,lowerThresh,upperThresh):
     #宽高
@@ -2601,14 +2563,11 @@ if __name__ =="__main__":
     cv2.imshow("upperEdge",upperEdge)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-"""
 
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.7\laplacian.py
-""" no module
+print("邊緣檢測 laplacian")
 from scipy import signal
-from gaussBlur import gaussBlur#高斯平滑
 
 #laplacian 边缘检测算法:
 #laplacian(image,_boundary='fill',_fillvalue=0)
@@ -2676,11 +2635,10 @@ if __name__ =="__main__":
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-"""
 
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.8\LoG_edge.py
+print("邊緣檢測 LoG_edge")
 
 from scipy import signal
 
@@ -2725,7 +2683,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.8\LoG-new.py
+print("邊緣檢測 LoG")
 
 from scipy import signal
 
@@ -2767,7 +2725,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第8章：邊緣檢測\8.9\DoG.py
+print("邊緣檢測 DoG")
 
 from scipy import signal
 
@@ -2832,7 +2790,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.1\boxPoints_OpenCV3.py
+print("幾何形狀的檢測和擬合 boxPoints_OpenCV3")
 
 """ fail
 #旋转矩形
@@ -2858,7 +2816,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.1\convexHull.py
+print("幾何形狀的檢測和擬合 convexHull")
 
 #黑色画板 400 x 400
 s = 400
@@ -2888,7 +2846,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.1\minEnclosingTriangle.py
+print("幾何形狀的檢測和擬合 minEnclosingTriangle")
 
 points = np.array ([[[1,1]],[[5,10]],[[5,1]],[[1,10]],[[2,5]]] ,np.float32)
 #points = np.array ([[1,1],[5,10],[5,1],[1,10],[2,5]] ,np.float32)
@@ -2904,7 +2862,7 @@ print(triangle)
 
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.2\HTLine.py
+print("幾何形狀的檢測和擬合 HTLine")
 
 from mpl_toolkits.mplot3d import Axes3D
 
@@ -2981,8 +2939,8 @@ if __name__ == "__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.3\HTCircle.py
-
+print("幾何形狀的檢測和擬合 HTCircle")
+""" 跑不完
 #标准霍夫圆检测
 def HTCircle (I,minR,maxR,voteThresh = 100):
     #宽、高
@@ -3031,10 +2989,10 @@ cv2.imshow("I",I)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
+"""
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.4\arcLength.py
+print("幾何形狀的檢測和擬合 arcLength")
 
 #点集
 points = np.array ([[[0,0]],[[50,30]],[[100,0]],[[100,100]]] ,np.float32)
@@ -3050,7 +3008,7 @@ print(length1,length2,area)
 
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.4\contours.py
+print("幾何形狀的檢測和擬合 contours")
 
 #输入图像
 img = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
@@ -3093,7 +3051,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.4\convexityDefects.py
+print("幾何形狀的檢測和擬合 convexityDefects")
 
 #轮廓
 contour = np.array([[20,20],[50,70],[20,120],[120,120],[100,70],[120,20]],np.int32)
@@ -3107,7 +3065,7 @@ print(defects)
 
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.4\drawContours.py
+print("幾何形狀的檢測和擬合 drawContours")
 
 img = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
 #第二步：边缘检测 或者 阈值处理 生成一张二值图
@@ -3133,7 +3091,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 """ fail
-#第9章：幾何形狀的檢測和擬合\9.4\findContours_OpenCV3.py
+print("幾何形狀的檢測和擬合 findContours_OpenCV3")
 
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
@@ -3187,7 +3145,7 @@ cv2.destroyAllWindows()
 """
 print("------------------------------------------------------------")  # 60個
 
-#第9章：幾何形狀的檢測和擬合\9.4\pointPolygonTest.py
+print("幾何形狀的檢測和擬合 pointPolygonTest")
 
 #点集
 contour = np.array([[0,0],[50,30],[100,100],[100,0]],np.float32)
@@ -3200,7 +3158,7 @@ print(dist1,dist2,dist3)
 
 print("------------------------------------------------------------")  # 60個
 
-#第10章：傅里葉變換\10.1\fft2.py
+print("傅里葉變換 fft2")
 
 #快速傅里叶变换
 def fft2Image(src):
@@ -3229,7 +3187,7 @@ print(np.max(image - img))
 
 print("------------------------------------------------------------")  # 60個
 
-#第10章：傅里葉變換\10.2\spectrum.py
+print("傅里葉變換 spectrum")
 
 #快速傅里叶变换
 def fft2Image(src):
@@ -3325,7 +3283,7 @@ if __name__ =="__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-#第10章：傅里葉變換\10.3\saliencyMap.py
+print("傅里葉變換 saliencyMap")
 
 #快速傅里叶变换
 def fft2Image(src):
@@ -3368,24 +3326,29 @@ def phaseSpectrum(fft2):
 
 
 image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+
 #第一步：计算图像的快速傅里叶变换
 fft2 = fft2Image(image)
+
 #第二步：计算傅里叶幅度谱的灰度级
 #求幅度谱
 amplitude = amplitudeSpectrum(fft2)
 #幅度谱的灰度级
 logAmplitude = graySpectrum(amplitude)
+
 #第三步：计算相位
 phase = phaseSpectrum(fft2)
 #余弦谱（用于计算实部）
 cosSpectrum = np.cos(phase)
 #正弦谱（用于计算虚部）
 sinSectrum = np.sin(phase)
+
 #第四步：计算残差（Spectral Residual）
 #对幅度谱的灰度级进行均值平滑
 meanLogAmplitude = cv2.boxFilter(logAmplitude,cv2.CV_32FC1,(3,3))
 #残差
 spectralResidual = logAmplitude - meanLogAmplitude
+
 #第五步：计算傅里叶逆变换,显著性
 #残差的指数
 expSR = np.exp(spectralResidual)
@@ -3417,7 +3380,7 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第10章：傅里葉變換\10.4\fft2Conv.py
+print("傅里葉變換 fft2Conv")
 
 from scipy import signal
 
@@ -3470,7 +3433,7 @@ if __name__ =="__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-#第10章：傅里葉變換\10.5\fft2toConv.py
+print("傅里葉變換 fft2toConv")
 
 from scipy import signal
 
@@ -3534,7 +3497,7 @@ print(sameConv)
 
 print("------------------------------------------------------------")  # 60個
 
-#第11章：頻率域濾波\11.2\LPFilter.py
+print("頻率域濾波 LPFilter")
 
 #截止频率
 radius = 50
@@ -3661,15 +3624,16 @@ if __name__ =="__main__":
                     result[r][c] = 255
         lpResult = result.astype(np.uint8)
         lpResult = lpResult[:image.shape[0],:image.shape[1]]
-        cv2.imshow("LPFilter",lpResult)             
-        ch = cv2.waitKey(5)
-        if ch == 27:
+        cv2.imshow("LPFilter",lpResult)
+        
+        k = cv2.waitKey(5)
+        if k == ESC:
             break
     cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-#第11章：頻率域濾波\11.5\HomomorphicFilter.py
+print("頻率域濾波 HomomorphicFilter")
 
 #快速傅里叶变换
 def fft2Image(src):
@@ -3747,7 +3711,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("RGB.py")
 
-image = cv2.imread(filename,cv2.CV_LOAD_IMAGE_COLOR)
+image = cv2.imread(filename,cv2.IMREAD_COLOR)
 
 #得到三个颜色通道
 b = image[:,:,0]
@@ -3775,7 +3739,7 @@ print("------------------------------------------------------------")  # 60個
 
 #HLS.py
 
-image = cv2.imread(filename,cv2.CV_LOAD_IMAGE_COLOR)
+image = cv2.imread(filename,cv2.IMREAD_COLOR)
 
 #显示原图
 cv2.imshow("image",image)
@@ -3816,9 +3780,9 @@ while True:
     #保存结果
     lsImg = lsImg*255
     lsImg = lsImg.astype(np.uint8)
-    cv2.imwrite("lsImg.jpg",lsImg)
-    ch = cv2.waitKey(5)
-    if ch == 27:
+    
+    k = cv2.waitKey(5)
+    if k == ESC:
         break
 
 cv2.destroyAllWindows()
@@ -3832,14 +3796,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-
-#image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
-image = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
-
-
-#图像旋转 ： cv2.ROTATE_180  cv2.ROTATE_90_COUNTERCLOCKWISE
-rImg = cv2.rotate(image,cv2.ROTATE_90_COUNTERCLOCKWISE)
-
 

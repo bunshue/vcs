@@ -592,3 +592,94 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
+#原图的高宽
+h,w=image.shape[:2]
+#仿射变换矩阵，缩小两倍
+A1 = np.array([[0.5,0,0],[0,0.5,0]],np.float32)
+d1 = cv2.warpAffine(image,A1,(w,h),borderValue=125)
+#先缩小两倍，再平移
+A2 = np.array([[0.5,0,w/4],[0,0.5,h/4]],np.float32)
+d2 = cv2.warpAffine(image,A2,(w,h),borderValue=125)
+#在 d2 的基础上，绕图像的中心点旋转
+A3 = cv2.getRotationMatrix2D((w/2,h/2),30,1)
+d3 = cv2.warpAffine(d2,A3,(w,h),borderValue=125)
+#在
+A4 = np.array([[math.cos(math.pi/4),0,0],[math.sin(math.pi/3),1,0]])
+d4 = cv2.warpAffine(image,A4,(2*w,2*h),borderValue=125)
+
+cv2.imshow("image",image)
+cv2.imshow("d1",d1)
+cv2.imshow("d2",d2)
+cv2.imshow("d3",d3)
+cv2.imshow("d4",d4)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+#第3章：空間變換\3.2-投影變換\perspective.py
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+image = cv2.imread(filename)
+
+#原图的宽高
+h,w, d = image.shape
+#将原图的四个顶点投影到一个不规则的四边形中
+src=np.array([[0,0],[w-1,0],[0,h-1],[w-1,h-1]],np.float32);
+dst=np.array([[20,50],[w/2,150],[50,h/2],[w-40,h-40]],np.float32)
+#计算投影矩阵
+p=cv2.getPerspectiveTransform(src,dst)
+#利用计算出的投影矩阵进行头像的投影变换
+r = cv2.warpPerspective(image,p,(w,h),borderValue=0)
+
+#显示原图和投影效果
+cv2.imshow("image",image)
+cv2.imshow("warpPerspective",r)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+
+#image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename, cv2.IMREAD_ANYCOLOR)
+
+
+#图像旋转 ： cv2.ROTATE_180  cv2.ROTATE_90_COUNTERCLOCKWISE
+rImg = cv2.rotate(image,cv2.ROTATE_90_COUNTERCLOCKWISE)
+
+
+cv2.imwrite("lsImg.jpg",lsImg)
+
+"""

@@ -2,11 +2,13 @@ import cv2
 import numpy as np
 import matplotlib
 import math
-from matplotlib import pyplot as plt  
+
+print('Angular Point')
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 #根据一阶锐化算子，求x，y的梯度，显示锐化图像
 #读取图片
-filename = 'rurc.jpg'
 tu = cv2.imread(filename)
 #转换为灰度图
 gray = cv2.cvtColor(tu, cv2.COLOR_RGB2GRAY)
@@ -82,7 +84,9 @@ for i in range(a):
 
         R[i,j] = np.linalg.det(M) - 0.06 * (np.trace(M)) * (np.trace(M))
 print (R)
+
 cv2.namedWindow('R',cv2.WINDOW_NORMAL)
 cv2.imshow('R',R)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
