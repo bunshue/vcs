@@ -122,6 +122,15 @@ print('------------------------------------------------------------')	#60個
 print('使用 statistics 模組')
 
 """
+
+mean() 平均數
+median() 中位數
+median_low() median_high() 偶數個數據中 較高或較低的中位數
+median_grouped() 數據分組(同樣述職的分成同一組)的中位數
+mode()眾數 數據中出現最多次的數值
+pstdev() pvariance() 計算數據的母體標準差和變異數
+ stdev()  variance() 計算數據的樣本標準差和變異數
+
 # mode()取眾數
 
 

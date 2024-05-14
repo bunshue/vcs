@@ -174,7 +174,6 @@ response = openai.Completion.create(
 
 completed_text = response["choices"][0]["text"]
 print(completed_text)
-'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -189,15 +188,113 @@ for i in range(10):
     #部分截圖
     x_st, y_st, w, h = 1920//2, 1080//2, 1920//2-50, 1080//2-50
     myScreenshot = pyautogui.screenshot(region=(x_st, y_st, w, h))
-    myScreenshot.save(f'./pic_part{i}.png')
+    #偽存檔
+    #myScreenshot.save(f'./pic_part{i}.png')
 
     time.sleep(5)
+'''
+print("------------------------------------------------------------")  # 60個
+
+print('filter 的用法')
+
+a = [1,2,3,4,5,6,7,8,9]
+
+b = filter(lambda x:x>5, a)
+c = list(b)
+print(c)
+
+
+"""
+python內建函數
+lambda匿名函數
+map
+filter
+sorted
+
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+
+import time
+print(time.time(), " 秒")
+print(time.time_ns(), " 微秒")
+
+"""
+
+time.ctime 本地時間
+time.localtime() 轉換為struct_time格式的本地時間
+time.gmtime() 回傳UTC時間
+
+time.mktime(t) 將struct_time格式的時間轉換回秒數
+time.asctime() 將struct_time格式的時間轉換為文字顯示
+time.strftime() 將時間轉換為特定格式字串
+time.strptime() 將特定格式的字串轉換為struct_time格式的時間
+
+
+
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+import time
+n = 20                   # 設定進度條總長
+for i in range(n+1):
+    print(f'\r[{"█"*i}{" "*(n-i)}] {i*100/n}%', end='')   # 輸出不換行的內容
+    time.sleep(0.5)
 
 print("------------------------------------------------------------")  # 60個
 
 
+import time
+n = 100
+icon = '⋮⋰⋯⋱'          # 建立旋轉的符號清單
+for i in range(n+1):
+    print(f'\r{icon[i%4]} {i*100/n}%', end='')
+    time.sleep(0.1)
+
+"""
 
 print("------------------------------------------------------------")  # 60個
+
+"""
+import datetime
+
+now = datetime.datetime.now().strftime('%H:%M:%S')
+print(now)    # 14:30:23
+
+print("------------------------------------------------------------")  # 60個
+
+import datetime
+import time
+
+while True:
+    now = datetime.datetime.now().strftime('%H:%M:%S')
+    print(f'\r{now}', end = '')     # 前方加上 \r
+    time.sleep(1)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+print('末N碼')
+
+string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+print('末10碼', string[-10:])
+print('末20碼', string[-20:])
+print('末26碼', string[-26:])
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")

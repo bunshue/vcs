@@ -34,11 +34,10 @@ filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 print('------------------------------------------------------------')	#60個
 
 print('pygame 01')
+
 pygame.init()   # 初始化Pygame
-
 screen = pygame.display.set_mode(screen_size)   # 創建屏幕
-pygame.display.set_caption('畫圖綜合')
-
+pygame.display.set_caption('pygame測試01')
 
 #利用screen物件來作為畫布，以fill()方法填上顏色
 screen.fill(Gray)
@@ -72,10 +71,10 @@ while True:
 print('------------------------------------------------------------')	#60個
 
 print('pygame 02')
-pygame.init()   # 初始化Pygame
 
+pygame.init()   # 初始化Pygame
 screen = pygame.display.set_mode(screen_size)   # 創建屏幕
-pygame.display.set_caption('畫圖綜合')
+pygame.display.set_caption('pygame測試02')
 
 print("取得screen參數")
 print(screen.get_size())
@@ -86,7 +85,8 @@ screen.fill(Gray)
 #方法load()載入圖片，convert()能提高圖片的處理速度
 img = pygame.image.load(filename)
 img.convert()
-screen.blit(img, (400, 300))
+x_st, y_st = 200, 100
+screen.blit(img, (x_st, y_st))
 
 # 更新屏幕
 pygame.display.update()
@@ -108,21 +108,20 @@ while True:
 print('------------------------------------------------------------')	#60個
 
 print('pygame 03')
+
 pygame.init()
-
 screen = pygame.display.set_mode(screen_size)
+pygame.display.set_caption('pygame測試03 載入圖片')
 
-pygame.display.set_caption("載入圖片")
 background = pygame.Surface(screen.get_size())
 background = background.convert()
-background.fill((0,255,0))
+background.fill((0,255,0))#設定背景顏色
 
 image = pygame.image.load(filename)
 image.convert()
-compass = pygame.image.load(filename)
-compass.convert()
-background.blit(image, (20,10))
-background.blit(compass, (400,50))
+x_st, y_st = 20, 20
+background.blit(image, (x_st, y_st))
+
 screen.blit(background, (0,0))
 pygame.display.update()
 
@@ -133,21 +132,22 @@ while running:
             running = False
 pygame.quit()
 
-
 print('------------------------------------------------------------')	#60個
 
 print('pygame 04')
-pygame.init() #將PyGame初始化
 
+pygame.init() #將PyGame初始化
 #產生視窗，以Surface物件回傳
 screen = pygame.display.set_mode((W, H), 0, 32)
-pygame.display.set_caption('載入圖片')
+pygame.display.set_caption('pygame測試04 載入圖片')
+
 screen.fill(white)
 #方法load()載入圖片，convert()能提高圖片的處理速度
 
 img = pygame.image.load(filename)
 img.convert()
-screen.blit(img, (20, 20))
+x_st, y_st = 20, 20
+screen.blit(img, (x_st, y_st))
 
 pygame.display.update()
 
@@ -162,6 +162,50 @@ pygame.quit() #quit()方法結束Pygame程序
 
 print('------------------------------------------------------------')	#60個
 
+import pygame
+import sys
+
+# 初始化Pygame
+pygame.init()
+
+# 設定屏幕尺寸
+screen_size = (600, 600)
+
+# 創建屏幕
+screen = pygame.display.set_mode(screen_size)
+
+# 設定顏色
+white = (255, 255, 255)
+red = (255, 0, 0)
+green = (0, 255, 0)
+blue = (0, 0, 255)
+yellow = (255, 255, 0)
+
+# 繪製五個同心圓
+center_x = screen_size[0] // 2
+center_y = screen_size[1] // 2
+
+radius_1 = 200
+radius_2 = 150
+radius_3 = 100
+radius_4 = 50
+radius_5 = 20
+
+pygame.draw.circle(screen, white, (center_x, center_y), radius_1)
+pygame.draw.circle(screen, red, (center_x, center_y), radius_2)
+pygame.draw.circle(screen, green, (center_x, center_y), radius_3)
+pygame.draw.circle(screen, blue, (center_x, center_y), radius_4)
+pygame.draw.circle(screen, yellow, (center_x, center_y), radius_5)
+
+# 更新屏幕
+pygame.display.update()
+
+# 保持屏幕打開，直到用戶退出
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
 
 print('------------------------------------------------------------')	#60個
