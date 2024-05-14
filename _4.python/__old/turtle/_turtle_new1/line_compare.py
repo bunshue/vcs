@@ -4,6 +4,8 @@ import turtle
 
 turtle.setup(1200, 600)
 screen = turtle.Screen()
+print(type(screen))
+print(screen)
 
 ANGLES = (0, 3.695220532)  # 直線和斜線的角度
 NUM_RUNS = 20

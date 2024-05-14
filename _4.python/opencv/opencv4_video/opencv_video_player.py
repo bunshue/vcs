@@ -21,36 +21,17 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print('------------------------------------------------------------')	#60個
 
-print('播完影片不會有錯誤訊息')
+print('播放影片')
 
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
 cap = cv2.VideoCapture(video_filename)
 
+# 以迴圈從影片檔案讀取影格，並顯示出來
 while(cap.isOpened()):
   ret, frame = cap.read()
   if ret:
       cv2.imshow("Frame", frame)
-  if cv2.waitKey(1) & 0xFF == ord("q"):
-      break
-
-cap.release()
-cv2.destroyAllWindows()
-
-print("------------------------------------------------------------")  # 60個
-
-# 開啟影片檔案
-filename = 'C:/dddddddddd/____download/V000000119.mp4'
-
-'''
-cap = cv2.VideoCapture(filename)
-
-# 以迴圈從影片檔案讀取影格，並顯示出來
-while(cap.isOpened()):
-  ret, frame = cap.read()
-
-  cv2.imshow('frame',frame)
-
   k = cv2.waitKey(1)
   if k == 27:     #ESC
     break
@@ -61,50 +42,46 @@ while(cap.isOpened()):
 
 cap.release()
 cv2.destroyAllWindows()
-'''
 
+print("------------------------------------------------------------")  # 60個
 
 #播放视频，并把每帧保存成图片：
 
-#cap = cv2.VideoCapture(filename,'utf-8')
-cap = cv2.VideoCapture(filename)
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
+cap = cv2.VideoCapture(video_filename)
 
 fps = cap.get(cv2.CAP_PROP_FPS)
-size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
 
 success, frame = cap.read()
 i = 0
-'''
 while success:
-    cv2.imshow("video",frame)
-    #cv2.waitKey(1000/int(fps))
-    #cv2.imwrite("./img/%d.jpg" % i,frame)
+    #cv2.imshow("video",frame)
+    #cv2.waitKey(int(1000/fps))#若要正常顯示，則需要delay
     i = i + 1
+    cv2.imwrite("./tmp_video_clip_%04d.jpg" % i,frame)
     success, frame = cap.read()
-'''
-
-
-'''
-filename = 'C:/_git/vcs/_1.data/______test_files1/_video/鹿港.mp4'
-
-video = cv2.VideoCapture(filename)   #, 'utf-8')
-
-fps = video.get(cv2.CAP_PROP_FPS)
-size = (int(video.get(cv2.CAP_PROP_FRAME_WIDTH)),int(video.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-
-success, frame = video.read()
-i = 0
-while success:
-    cv2.imshow("video",frame)
-    #cv2.waitKey(1000/int(fps))
-    #cv2.waitKey(20)
-    cv2.imwrite("C:/_git/vcs/_1.data/______test_files2/%05d.jpg" % i, frame)
-    i = i + 1
-    success, frame = video.read()
-video.release();
+    #if i > 10:
+      #break
 
 print('共有' + str(i) + '張圖片')
-'''
 
+cap.release()
+cv2.destroyAllWindows()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 

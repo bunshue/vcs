@@ -3,10 +3,31 @@
 
 """
 
-print("------------------------------------------------------------")  # 60個
-'''
+import sys
 import numpy as np
 
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
+import sys
+import math
+import random
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
+
+print("------------------------------------------------------------")  # 60個
+
+'''
 a = 580
 b = 600
 c = 680
@@ -97,29 +118,45 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
+'''
 print('使用 statistics 模組')
 
-import statistics
+"""
+# mode()取眾數
 
-arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-a = statistics.pstdev(arr)
-b = statistics.pvariance(arr)
-c = statistics.mean(arr)    # 計算平均值
-d = statistics.stdev(arr)
-print(a)   # 2.7386127875258306
-print(b)   # 2.581988897471611
-print(c)   # 6.666666666666667
-print(d)
+
+statistics.pvariance(x) 母體變異數
+statistics.variance(x)  樣本變異數
+statistics.pstdev(x)    母體標準差
+statistics.stdev(x)     樣本標準差
+"""
+
+
 
 print('------------------------------------------------------------')	#60個
 
-# mode()取眾數
+
+x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
+
+print('使用 numpy 模組計算統計資料')
+print(f"Numpy模組母體變異數  : {np.var(x):6.2f}")
+print(f"Numpy模組樣本變異數  : {np.var(x,ddof=1):6.2f}")
+print(f"Numpy模組母體標準差  : {np.std(x):6.2f}")
+print(f"Numpy模組樣本標準差  : {np.std(x,ddof=1):6.2f}")
 
 import statistics
+print('使用 statistics 模組計算統計資料')
+print(f"母體變異數 : {statistics.pvariance(x):6.2f}")
+print(f"樣本變異數 : {statistics.variance(x):6.2f}")
+print(f"母體標準差 : {statistics.pstdev(x):6.2f}")
+print(f"樣本標準差 : {statistics.stdev(x):6.2f}")
 
-x1 = [0, 1, 1, 3, 2, 1]
-print(f'眾數 mode = {statistics.mode(x1)}')
+print(f'平均 = {np.mean(x)}')
+print(f'中位 = {np.median(x)}')
+print(f'眾數 = {statistics.mode(x)}')
+print(f'眾數 mode  : {statistics.mode(x)}')
+
+print("平均 : ", round(statistics.mean(x), 2))
 
 print('------------------------------------------------------------')	#60個
 
@@ -133,8 +170,6 @@ print(f'眾數成績 = {statistics.mode(sc)}')
 
 print("平均 : ", round(statistics.mean(sc), 2))
 
-
-"""
 hist = [0]*9
 for s in sc:
     if s == 10: hist[0] += 1
@@ -165,75 +200,8 @@ plt.xticks(x,('10','20','30','40','50','60','70','80','90'))
 plt.title('成績表')
 
 plt.show()
-"""
 
-print('------------------------------------------------------------')	#60個
-
-import statistics
-
-x = [66, 58, 25, 78, 58, 15, 120, 39, 82, 50]
-
-print(f"Numpy模組母體變異數  : {np.var(x):6.2f}")
-print(f"Numpy模組樣本變異數  : {np.var(x,ddof=1):6.2f}")
-print(f"Statistics母體變異數 : {statistics.pvariance(x):6.2f}")
-print(f"Statistics樣本變異數 : {statistics.variance(x):6.2f}")
-print(f"Numpy模組母體標準差  : {np.std(x):6.2f}")
-print(f"Numpy模組樣本標準差  : {np.std(x,ddof=1):6.2f}")
-print(f"Statistics母體標準差 : {statistics.pstdev(x):6.2f}")
-print(f"Statistics樣本標準差 : {statistics.stdev(x):6.2f}")
-
-print('------------------------------------------------------------')	#60個
-
-
-import statistics
-
-sc = [
-    60,
-    10,
-    40,
-    80,
-    80,
-    30,
-    80,
-    60,
-    70,
-    90,
-    50,
-    50,
-    50,
-    70,
-    60,
-    80,
-    80,
-    50,
-    60,
-    70,
-    70,
-    40,
-    30,
-    70,
-    60,
-    80,
-    20,
-    80,
-    70,
-    50,
-    90,
-    80,
-    40,
-    40,
-    70,
-    60,
-    80,
-    30,
-    20,
-    70,
-]
-print(f"平均成績 = {np.mean(sc)}")
-print(f"中位成績 = {np.median(sc)}")
-print(f"眾數成績 = {statistics.mode(sc)}")
-
-
+sys.exit()
 print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
@@ -300,22 +268,25 @@ quantiles           Divide data into intervals with equal probability.
 2.5
 """
 import statistics
+# 計算平均值
 s = statistics.mean([1, 2, 3, 4, 4])
 print(s)
 
+# 計算平均值
 s = statistics.mean([-1.0, 2.5, 3.25, 5.75])
 print(s)
 
 from fractions import Fraction as F
 
+# 計算平均值
 s = statistics.mean([F(3, 7), F(1, 21), F(5, 3), F(1, 3)])
 print(s)
 
 from decimal import Decimal as D
 
+# 計算平均值
 s = statistics.mean([D("0.5"), D("0.75"), D("0.625"), D("0.375")])
 print(s)
-
 
 s = statistics.fmean([3.5, 4.0, 5.25])
 print(s)
@@ -338,29 +309,28 @@ print(s)
 s = statistics.mode(["red", "blue", "blue", "red", "green", "red", "red"])
 print(s)
 
-
 #標準差（即母體變異數的平方根）
-
 s = statistics.pstdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])
 print(s)
 
-
 data = [0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25]
 
+#母體變異數
 s = statistics.pvariance(data)
 print(s)
 #1.25
 
 #如果已經計算出資料的平均值，你可以將其作為選擇性的第二個引數 mu 傳遞以避免重新計算：
 
+# 計算平均值
 mu = statistics.mean(data)
 
+#母體變異數
 s = statistics.pvariance(data, mu)
 print(s)
 #1.25
 
 #回傳樣本標準差（即樣本變異數的平方根）
-
 s = statistics.stdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])
 print(s)
 
@@ -371,7 +341,6 @@ s = statistics.variance(data)
 print(s)
 
 #如果已經計算出資料的平均值，你可以將其作為選擇性的第二個引數 mu 傳遞以避免重新計算：
-
 mu = statistics.mean(data)
 s = statistics.variance(data, mu)
 print(s)
@@ -495,4 +464,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-'''
+

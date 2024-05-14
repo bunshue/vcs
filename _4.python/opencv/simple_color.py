@@ -1,3 +1,6 @@
+"""
+色彩辨識與追蹤
+"""
 import sys
 import cv2 
 import time
@@ -23,7 +26,7 @@ else:
     print('Video device opened')
 
 ratio = w / h
-WIDTH = 500
+WIDTH = 320
 HEIGHT = int(WIDTH / ratio)
 
 while True:
@@ -56,7 +59,7 @@ while True:
 
         out = cv2.bitwise_and(hsv, hsv, mask = mask)
         
-        cv2.rectangle(frame, p1, p2, (0, 255, 255), 2)  #B G R
+        cv2.rectangle(frame, p1, p2, (0, 0, 255), 2)  #B G R
         cv2.rectangle(hsv, p1, p2, (0, 255, 0), 2)
         cv2.rectangle(out, p1, p2, (255, 0, 0), 2)
         

@@ -1,5 +1,4 @@
 import cv2
-import os
 import time
 import urllib
 import urllib.request   #用來建立請求

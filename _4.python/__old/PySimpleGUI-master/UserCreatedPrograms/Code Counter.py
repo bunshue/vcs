@@ -8,7 +8,7 @@
 
 """
 import PySimpleGUI as sg
-import statistics as stats
+import statistics
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -70,8 +70,8 @@ def clean_data(window):
         char_per_line = sum(char_cnt) // len(clean_code)
     code_stats = {
         'lines': len(clean_code), 'char_per_line': char_per_line,
-        'count': sum(char_cnt), 'mean': stats.mean(char_cnt), 'median': stats.median(char_cnt),
-        'pstdev': stats.pstdev(char_cnt), 'min': min(char_cnt), 'max': max(char_cnt)}
+        'count': sum(char_cnt), 'mean': statistics.mean(char_cnt), 'median': statistics.median(char_cnt),
+        'pstdev': statistics.pstdev(char_cnt), 'min': min(char_cnt), 'max': max(char_cnt)}
 
     return clean_code, char_cnt, code_stats
 

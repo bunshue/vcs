@@ -120,6 +120,34 @@ plt.show()
 """
 print("------------------------------------------------------------")  # 60個
 
+print("將產生出來的常態分布做數字分析")
+print("normal 常態分布 N = 1000")
+
+mu, sigma = 100, 15
+N = 100000
+x = np.random.normal(mu, sigma, size=N)  # 隨機數
+
+print("型態 : ", type(x))
+print("長度 : ", len(x))
+print("最大 : ", x.max())
+print("最小 : ", x.min())
+print("最大 : ", max(x))
+print("最小 : ", min(x))
+print("平均 : ", x.mean())
+print("標準差 : ", x.std())
+
+print('使用 numpy 模組計算統計資料')
+print(f"Numpy模組 母體變異數  : {np.var(x):6.2f}")
+print(f"Numpy模組 樣本變異數  : {np.var(x,ddof=1):6.2f}")
+print(f"Numpy模組 母體標準差  : {np.std(x):6.2f}")
+print(f"Numpy模組 樣本標準差  : {np.std(x,ddof=1):6.2f}")
+
+import statistics
+print('使用 statistics 模組計算統計資料')
+print(f"Statistics 母體變異數 : {statistics.pvariance(x):6.2f}")
+print(f"Statistics 樣本變異數 : {statistics.variance(x):6.2f}")
+print(f"Statistics 母體標準差 : {statistics.pstdev(x):6.2f}")
+print(f"Statistics 樣本標準差 : {statistics.stdev(x):6.2f}")
 
 print("------------------------------------------------------------")  # 60個
 

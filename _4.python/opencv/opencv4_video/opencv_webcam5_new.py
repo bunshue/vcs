@@ -1,15 +1,17 @@
-import os
-import sys
-import time
-import math
-import random
+import cv2
+
+ESC = 27
+SPACE = 32
 
 print("------------------------------------------------------------")  # 60個
 
-ESC = 27
-
-import cv2
+import os
+import sys
+import math
+import random
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 print("------------------------------------------------------------")  # 60個
 
@@ -48,7 +50,7 @@ while True:
 
     cv2.imshow("OpenCV 04", img2)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
 
@@ -96,7 +98,7 @@ while True:
 
     cv2.imshow("OpenCV 05", output)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
 
@@ -139,7 +141,7 @@ while True:
     
     cv2.imshow("OpenCV 10", img)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
 
@@ -161,10 +163,10 @@ white = 255 - np.zeros((h,w,4), dtype='uint8')
 
 a = 0                       # 開始時 a 等於 0
 while True:
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
-    elif k == 32:
+    elif k == SPACE:
         a = 1               # 如果按下空白鍵，讓 a 等於 1
 
     if a == 0:
@@ -202,10 +204,10 @@ while True:
     img = cv2.resize(img,(w,h))         # 縮放尺寸
     white = 255 - np.zeros((h,w,4), dtype='uint8')   # 產生全白圖片
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
-    elif k == 32:            # 按下空白將 a 等於 1
+    elif k == SPACE:            # 按下空白將 a 等於 1
         a = 1
 
     if a == 0:
@@ -258,10 +260,10 @@ while True:
     img = cv2.resize(img,(w,h))
     white = 255 - np.zeros((h,w,4), dtype='uint8')
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
-    elif k == 32:
+    elif k == SPACE:
         a = 1
         sec = 4  # 加入倒數秒數
 
@@ -322,7 +324,7 @@ while True:
     
     cv2.imshow("OpenCV 14", output)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
     
@@ -360,7 +362,7 @@ while True:
     
     cv2.imshow("OpenCV 15", output)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
     
@@ -407,7 +409,7 @@ while True:
 
     cv2.imshow("OpenCV 16", img)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
 
@@ -444,7 +446,7 @@ while True:
         source.append(img)                           # 記錄該圖片
     frame = frame + 1
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
 
@@ -525,7 +527,7 @@ while True:
 
     cv2.imshow("OpenCV 18", img)
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
 
@@ -589,7 +591,7 @@ while True:
 
     cv2.imshow("OpenCV 19", img)     # 預覽影像
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
+    k = cv2.waitKey(1)
     if k == ESC:     #ESC
         break
 

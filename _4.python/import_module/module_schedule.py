@@ -62,38 +62,42 @@ import schedule
 
 print("------------------------------------------------------------")  # 60個
 
-#無參數重複執行工作
+
+# 無參數重複執行工作
 def job1():
     print("無參數 執行工作, 時間 :", time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()))
 
-#有參數重複執行工作
+
+# 有參數重複執行工作
 def job2(name):
-    #print("Hello", name)
+    # print("Hello", name)
     print(name, "執行工作, 時間 :", time.strftime("%Y/%m/%d %H:%M:%S", time.localtime()))
 
-#只會執行一次工作
+
+# 只會執行一次工作
 def job3_executes_once():
     print("此處編寫的任務只會執行一次... 後面有return CancelJob")
     return schedule.CancelJob
 
-print('schedule：定時執行任務')
+
+print("schedule：定時執行任務")
 schedule.clear()
 
-#schedule.cancel_job()
+# schedule.cancel_job()
 
-#無參數重複執行工作
+# 無參數重複執行工作
 print("設定每1分鐘執行一次函數 job1()")
 schedule.every(1).minutes.do(job1)
 
-#有參數重複執行工作
+# 有參數重複執行工作
 print("設定每15秒執行一次函數 job2() + 參數")
 schedule.every(15).seconds.do(job2, name="Alice")
 
-#有參數重複執行工作
+# 有參數重複執行工作
 print("設定每20秒執行一次函數 job2() + 參數")
 schedule.every(20).seconds.do(job2, name="David")
 
-#只會執行一次工作的
+# 只會執行一次工作的
 # schedule.every().day.at("11:45").do(job3_executes_once)
 print("設定每20秒執行一次函數 job2() + 參數")
 print("設定每5分鐘執行一次函數 job3_executes_once(), 但只會執行一次")
@@ -146,15 +150,12 @@ while True:
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
 
 
 """
