@@ -24,8 +24,63 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
+print("共用函數------------------------------------------------------------")  # 60個
+
+from scipy import signal
+
+# sobel 边缘检测
+def sobel(image,winSize):
+    rows,cols = image.shape
+    pascalSmoothKernel = pascalSmooth(winSize)
+    pascalDiffKernel = pascalDiff(winSize)
+    # --- 与水平方向的卷积核卷积 ----
+    image_sobel_x = np.zeros(image.shape,np.float32)
+    #垂直方向上的平滑
+    image_sobel_x = signal.convolve2d(image,pascalSmoothKernel.transpose(),mode='same')
+    #水平方向上的差分
+    image_sobel_x = signal.convolve2d(image_sobel_x,pascalDiffKernel,mode='same')
+    # --- 与垂直方向上的卷积核卷积 --- 
+    image_sobel_y = np.zeros(image.shape,np.float32)
+    #水平方向上的平滑
+    image_sobel_y = signal.convolve2d(image,pascalSmoothKernel,mode='same')
+    #垂直方向上的差分
+    image_sobel_y = signal.convolve2d(image_sobel_y,pascalDiffKernel.transpose(),mode='same')
+    return (image_sobel_x,image_sobel_y)
+
+#二项式展开式的系数，即平滑系数
+def pascalSmooth(n):
+    pascalSmooth = np.zeros([1,n],np.float32)
+    for i in range(n):
+        pascalSmooth[0][i] = math.factorial(n -1)/(math.factorial(i)*math.factorial(n-1-i))
+    return pascalSmooth
+
+#计算差分
+def pascalDiff(n):
+    pascalDiff = np.zeros([1,n],np.float32)
+    pascalSmooth_previous = pascalSmooth(n-1)
+    for i in range(n):
+        if i ==0:
+            #恒等于 1
+            pascalDiff[0][i] = pascalSmooth_previous[0][i]
+        elif i == n-1:
+            #恒等于 -1
+            pascalDiff[0][i] = -pascalSmooth_previous[0][i-1]
+        else:
+            pascalDiff[0][i] = pascalSmooth_previous[0][i] - pascalSmooth_previous[0][i-1]
+    return pascalDiff
+
+#通过平滑系数和差分系数的卷积运算计算卷积核
+def getSobelKernel(winSize):
+     pascalSmoothKernel = pascalSmooth(winSize)
+     pascalDiffKernel = pascalDiff(winSize)
+     #水平方向上的卷积核
+     sobelKernel_x = signal.convolve2d(pascalSmoothKernel.transpose(),pascalDiffKernel,mode='full')
+     #垂直方向上的卷积核
+     sobelKernel_y = signal.convolve2d(pascalSmoothKernel,pascalDiffKernel.transpose(),mode='full')
+     return (sobelKernel_x,sobelKernel_y)
+
 print("------------------------------------------------------------")  # 60個
-'''
+
 print('測試cv2視窗的Trackbar')
 
 filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
@@ -466,8 +521,6 @@ print("------------------------------------------------------------")  # 60個
 
 print("圖像平滑 sameConv2d")
 
-from scipy import signal
-
 #输入矩阵
 I = np.array([[1,2],[3,4]],np.float32)
 # I 的高和宽
@@ -651,7 +704,7 @@ blurImage_0_1 = gaussBlur(image_0_1,4,5,5,'symm')
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print("圖像平滑 fastMeanBlur")
@@ -705,19 +758,22 @@ def fastMeanBlur(image,winSize,borderType = cv2.BORDER_DEFAULT):
     return meanBlurImage
 
 """ fail
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
 #快速均值平滑
 meanBlurImage = fastMeanBlur(image,(15,15),cv2.BORDER_DEFAULT)
+
 #数据类型转换
 meanBlurImage = np.round(meanBlurImage)
 meanBlurImage = meanBlurImage.astype(np.uint8)
+
 cv2.imshow("fastMeanBlur",meanBlurImage)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 """
-
-'''
 print("------------------------------------------------------------")  # 60個
 
 print("圖像平滑 meanBlur")
@@ -1290,7 +1346,6 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 """
-'''
 print("------------------------------------------------------------")  # 60個
 
 print("圖像平滑 guidedFilter_color cccc")
@@ -1547,13 +1602,16 @@ def ostu(image):
     threshold[threshold <= thresh] = 0
     return threshold
 
-image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+
 #显示原图
 cv2.imshow("image",image)
+
 #阈值算法
 ostu_threshold = ostu(image)
+
 #显示阈值处理的结果
-cv2.imshow("ostu_threshold",ostu_threshold)
+cv2.imshow("ostu_threshold", ostu_threshold)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -1734,17 +1792,21 @@ cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
 
-print('按 ESC 離開')
+# fail
 
 print("形態學處理 mor")
+print('按 ESC 離開')
 
 #第一步：读入图像
 I = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+
 #显示原图
 cv2.imshow("I",I)
+
 #结构元半径，迭代次数
 r, i= 1,1
 MAX_R,MAX_I = 20,20
+
 #显示形态学处理的效果的窗口
 cv2.namedWindow("morphology",1)
 
@@ -1753,8 +1815,10 @@ def nothing(*arg):
 
 #调节结构元半径
 cv2.createTrackbar("r","morphology",r,MAX_R,nothing)
+
 #调节迭代次数
 cv2.createTrackbar("i","morphology",i,MAX_I,nothing)
+
 while True:
     #得到当前的r值
     r = cv2.getTrackbarPos('r', 'morphology')
@@ -2087,60 +2151,14 @@ print("邊緣檢測 sobel")
 
 from scipy import signal
 
-#二项式展开式的系数，即平滑系数
-def pascalSmooth(n):
-    pascalSmooth = np.zeros([1,n],np.float32)
-    for i in range(n):
-        pascalSmooth[0][i] = math.factorial(n -1)/(math.factorial(i)*math.factorial(n-1-i))
-    return pascalSmooth
-#计算差分
-def pascalDiff(n):
-    pascalDiff = np.zeros([1,n],np.float32)
-    pascalSmooth_previous = pascalSmooth(n-1)
-    for i in range(n):
-        if i ==0:
-            #恒等于 1
-            pascalDiff[0][i] = pascalSmooth_previous[0][i]
-        elif i == n-1:
-            #恒等于 -1
-            pascalDiff[0][i] = -pascalSmooth_previous[0][i-1]
-        else:
-            pascalDiff[0][i] = pascalSmooth_previous[0][i] - pascalSmooth_previous[0][i-1]
-    return pascalDiff
-#通过平滑系数和差分系数的卷积运算计算卷积核
-def getSobelKernel(winSize):
-     pascalSmoothKernel = pascalSmooth(winSize)
-     pascalDiffKernel = pascalDiff(winSize)
-     #水平方向上的卷积核
-     sobelKernel_x = signal.convolve2d(pascalSmoothKernel.transpose(),pascalDiffKernel,mode='full')
-     #垂直方向上的卷积核
-     sobelKernel_y = signal.convolve2d(pascalSmoothKernel,pascalDiffKernel.transpose(),mode='full')
-     return (sobelKernel_x,sobelKernel_y)
-# sobel 边缘检测
-def sobel(image,winSize):
-    rows,cols = image.shape
-    pascalSmoothKernel = pascalSmooth(winSize)
-    pascalDiffKernel = pascalDiff(winSize)
-    # --- 与水平方向的卷积核卷积 ----
-    image_sobel_x = np.zeros(image.shape,np.float32)
-    #垂直方向上的平滑
-    image_sobel_x = signal.convolve2d(image,pascalSmoothKernel.transpose(),mode='same')
-    #水平方向上的差分
-    image_sobel_x = signal.convolve2d(image_sobel_x,pascalDiffKernel,mode='same')
-    # --- 与垂直方向上的卷积核卷积 --- 
-    image_sobel_y = np.zeros(image.shape,np.float32)
-    #水平方向上的平滑
-    image_sobel_y = signal.convolve2d(image,pascalSmoothKernel,mode='same')
-    #垂直方向上的差分
-    image_sobel_y = signal.convolve2d(image_sobel_y,pascalDiffKernel.transpose(),mode='same')
-    return (image_sobel_x,image_sobel_y)
-
 image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
+
 #得到卷积核
 sobelKernel3 = getSobelKernel(3)
 sobelKernel5 = getSobelKernel(5)
 print(sobelKernel3)
 print(sobelKernel5)
+
 #卷积
 image_sobel_x,image_sobel_y = sobel(image,3)
 edge_x = np.abs(image_sobel_x)
@@ -2149,6 +2167,7 @@ edge_x=edge_x.astype(np.uint8)
 edge_y = np.abs(image_sobel_y)
 edge_y[ edge_y>255]=255
 edge_y=edge_y.astype(np.uint8)
+
 """ fail
 #边缘强度：两个卷积结果对应位置的平方和
 edge = np.sqrt(np.power(image_sobel_x,2.0) + np.power(image_sobel_y,2.0))
@@ -2172,54 +2191,6 @@ print("------------------------------------------------------------")  # 60個
 print("邊緣檢測 Sobel_normalize")
 
 from scipy import signal
-
-#二项式展开式的系数，即平滑系数
-def pascalSmooth(n):
-    pascalSmooth = np.zeros([1,n],np.float32)
-    for i in range(n):
-        pascalSmooth[0][i] = math.factorial(n -1)/(math.factorial(i)*math.factorial(n-1-i))
-    return pascalSmooth
-#计算差分
-def pascalDiff(n):
-    pascalDiff = np.zeros([1,n],np.float32)
-    pascalSmooth_previous = pascalSmooth(n-1)
-    for i in range(n):
-        if i ==0:
-            #恒等于 1
-            pascalDiff[0][i] = pascalSmooth_previous[0][i]
-        elif i == n-1:
-            #恒等于 -1
-            pascalDiff[0][i] = -pascalSmooth_previous[0][i-1]
-        else:
-            pascalDiff[0][i] = pascalSmooth_previous[0][i] - pascalSmooth_previous[0][i-1]
-    return pascalDiff
-#通过平滑系数和差分系数的卷积运算计算卷积核
-def getSobelKernel(winSize):
-     pascalSmoothKernel = pascalSmooth(winSize)
-     pascalDiffKernel = pascalDiff(winSize)
-     #水平方向上的卷积核
-     sobelKernel_x = signal.convolve2d(pascalSmoothKernel.transpose(),pascalDiffKernel,mode='full')
-     #垂直方向上的卷积核
-     sobelKernel_y = signal.convolve2d(pascalSmoothKernel,pascalDiffKernel.transpose(),mode='full')
-     return (sobelKernel_x,sobelKernel_y)
-# sobel 边缘检测
-def sobel(image,winSize):
-    rows,cols = image.shape
-    pascalSmoothKernel = pascalSmooth(winSize)
-    pascalDiffKernel = pascalDiff(winSize)
-    # --- 与水平方向的卷积核卷积 ----
-    image_sobel_x = np.zeros(image.shape,np.float32)
-    #垂直方向上的平滑
-    image_sobel_x = signal.convolve2d(image,pascalSmoothKernel.transpose(),mode='same')
-    #水平方向上的差分
-    image_sobel_x = signal.convolve2d(image_sobel_x,pascalDiffKernel,mode='same')
-    # --- 与垂直方向上的卷积核卷积 --- 
-    image_sobel_y = np.zeros(image.shape,np.float32)
-    #水平方向上的平滑
-    image_sobel_y = signal.convolve2d(image,pascalSmoothKernel,mode='same')
-    #垂直方向上的差分
-    image_sobel_y = signal.convolve2d(image_sobel_y,pascalDiffKernel.transpose(),mode='same')
-    return (image_sobel_x,image_sobel_y)
 
 image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
 
@@ -2399,7 +2370,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("邊緣檢測 canny")
 
-import sobel #注意sobel边缘检测
+#sobel边缘检测
 
 #边缘检测
 #非极大值抑制
@@ -2517,7 +2488,7 @@ if __name__ =="__main__":
     image = cv2.imread(filename,cv2.IMREAD_GRAYSCALE)
     # ------- canny 边缘检测 -----------
     #第一步： 基于 sobel 核的卷积
-    image_sobel_x,image_sobel_y = sobel.sobel(image,3)
+    image_sobel_x,image_sobel_y = sobel(image,3)
     #边缘强度：两个卷积结果对应位置的平方和
     edge = np.sqrt(np.power(image_sobel_x,2.0) + np.power(image_sobel_y,2.0))
     #边缘强度的灰度级显示
@@ -2792,27 +2763,26 @@ print("------------------------------------------------------------")  # 60個
 
 print("幾何形狀的檢測和擬合 boxPoints_OpenCV3")
 
-""" fail
 #旋转矩形
 vertices = cv2.boxPoints(((200, 200), (90, 150), -60.0))
 #四个顶点
 print(vertices.dtype)#打印数据类型
 print(vertices)#打印四个顶点
 #根据四个顶点在黑色画板上画出该矩形
-img=np.zeros((400,400),np.uint8)
+img = np.zeros((400,400),np.uint8)
+
 for i in range(4):
     #相邻的点
     p1 = vertices[i,:]
     j = (i+1)%4
     p2 = vertices[j,:]
     #画出直线
-    cv2.line(img,(p1[0],p1[1]),(p2[0],p2[1]),255,2)
+    cv2.line(img, (int(p1[0]), int(p1[1])), (int(p2[0]), int(p2[1])), (255, 255, 255), 5, lineType=cv2.LINE_AA)
 
-cv2.imshow("img",img)
+cv2.imshow("img", img)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3709,7 +3679,9 @@ if __name__ =="__main__":
 
 print("------------------------------------------------------------")  # 60個
 
-print("RGB.py")
+print("將一彩圖做RGB分離")
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
 
 image = cv2.imread(filename,cv2.IMREAD_COLOR)
 
@@ -3717,20 +3689,22 @@ image = cv2.imread(filename,cv2.IMREAD_COLOR)
 b = image[:,:,0]
 g = image[:,:,1]
 r = image[:,:,2]
+
 #显示三个颜色通道
-cv2.imshow("b",b)
-cv2.imshow("g",g)
-cv2.imshow("r",r)
+cv2.imshow("B", b)
+cv2.imshow("G", g)
+cv2.imshow("R", r)
 
 #8位图转换为 浮点型
 fImg = image/255.0
 fb = fImg[:,:,0]
 fg = fImg[:,:,1]
 fr = fImg[:,:,2]
+
 #显示三个颜色
-cv2.imshow("fb",fb)
-cv2.imshow("fg",fg)
-cv2.imshow("fr",fr)
+cv2.imshow("f B",fb)
+cv2.imshow("f G",fg)
+cv2.imshow("f R",fr)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -3738,6 +3712,8 @@ cv2.destroyAllWindows()
 print("------------------------------------------------------------")  # 60個
 
 #HLS.py
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
 
 image = cv2.imread(filename,cv2.IMREAD_COLOR)
 
