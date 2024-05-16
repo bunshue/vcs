@@ -15,7 +15,7 @@ from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfilename
 
-flag_debug_mode = True
+flag_debug_mode = False
 
 # 建立csv二維串列資料
 all_data = [
@@ -40,11 +40,17 @@ list_stage15 = list()
 
 choice = []
 
+"""
 stage_no = [
 '第1站 下蓋清潔', '第2站 點膠', '第3站 前2站NG', '第4站 模組接合',
 '第5站 間隙檢查', '第6站 UV固化', '第7站 點膠線檢查', '第8站 前4站NG',
 '第9站 氣密測試', '第10站 Hi-pot', '第11站 色調', '第12站 前3站NG',
 '第13a站 等級判定', '第13b站 資料燒錄', '第14站 前2站NG', '第15站 包裝出料'
+]
+"""
+stage_no = [
+'402除菌區', '403包裝區', '404組裝區', '405燒機測試區',
+'406電信測試區', '407原料除菌區', '408清洗區', '409無塵室'
 ]
 
 table_list = [
@@ -132,11 +138,40 @@ def clear_all_data():
     
 print('------------------------------------------------------------')	#60個
 
-def process_csv_file1(filename):
+def process_csv_file1(filename, source):
     global stage
     global tablename
+    
+    print("aaa :", filename)
+    filename = filename.replace(source+"\\", "")
+    print("bbb :", filename)
 
-    if filename.endswith('_1.csv') == True:
+    print("ccc :", filename)
+    if filename.startswith('402除菌區') == True:
+        print('402除菌區')
+        stage = 402
+    elif filename.startswith('403包裝區') == True:
+        print('403包裝區')
+        stage = 403
+    elif filename.startswith('404組裝區') == True:
+        print('404組裝區')
+        stage = 404
+    elif filename.startswith('405燒機測試區') == True:
+        print('405燒機測試區')
+        stage = 405
+    elif filename.startswith('406電信測試區') == True:
+        print('406電信測試區')
+        stage = 406
+    elif filename.startswith('407原料除菌區') == True:
+        print('407原料除菌區')
+        stage = 407
+    elif filename.startswith('408清洗區') == True:
+        print('408清洗區')
+        stage = 408
+    elif filename.startswith('409無塵室') == True:
+        print('409無塵室')
+        stage = 409
+    elif filename.endswith('_1.csv') == True:
         #print('第1站')
         stage = 1
         tablename = 'table01'
@@ -437,6 +472,125 @@ def process_csv_file2(filename):
     '''
     conn.close()  # 關閉資料庫連線
 
+def process_csv_file3(filename):
+    global stage
+    global tablename
+
+    return;
+
+    #with open(filename, newline = '') as csvfile:
+    with open(filename, encoding = 'big5') as csvfile:
+        rows = csv.reader(csvfile)  # 讀取 csv 檔案內容
+        datas = list(rows)    #將資料轉成list
+
+    length = len(datas)
+    #print('len = ', length)
+
+    save_data_in_list(datas)
+
+    #print(datas)
+    data_column = len(datas[0])
+    #print('data_column = ', data_column)
+
+    for row in datas:
+        for i in range(0, len(row)):
+            row[i] = row[i].strip()
+
+    '''
+    cnt = 0
+    for row in datas:
+        print(row)
+        print(type(row))
+        #print(len(row))
+        cnt += 1
+        if cnt == 3:
+            break
+    '''
+
+    #同一個資料庫內 可以放多個table table名稱不同即可
+
+    #print('建立資料庫連線, 資料庫 : ' + db_filename)
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+
+    cursor = conn.cursor() # 建立 cursor 物件
+
+    #print('建立一個資料表')
+    #Create 建立
+
+    sqlstr = "CREATE TABLE IF NOT EXISTS '{}' ('data1' TEXT PRIMARY KEY NOT NULL".format(tablename)
+
+    for i in range(2, data_column):
+        #print(i)
+        sqlstr += ", '{}' TEXT NOT NULL".format('data' + str(i))
+
+    sqlstr += ')'
+    #print(sqlstr)
+
+    cursor.execute(sqlstr)
+    conn.commit() # 更新
+
+    #print('len = ', len(datas))
+
+    #Insert
+    for data in datas:
+        if len(data) == 0:
+            continue
+
+        # 新增資料
+        insert_data = "INSERT INTO '{}' (".format(tablename)
+        for i in range(1, data_column):
+            #print(i)
+            if i == data_column - 1:
+                insert_data += 'data' + str(i)
+            else:
+                insert_data += 'data' + str(i) + ", "
+           
+        insert_data +=') VALUES ('
+        for i in range(1, data_column):
+            #print(i)
+            if i == data_column - 1:
+                insert_data += "'{}'".format(data[i].strip())
+            else:
+                insert_data += "'{}', ".format(data[i].strip())
+
+        insert_data +=')'
+
+        #print(insert_data)
+        
+        #insert_data = "INSERT INTO '{}' (data1, data2, data3, data4, data5) VALUES ('{}', '{}', '{}', '{}', '{}')".format(tablename, data[1], data[2], data[3], data[4], data[5])
+        #print(insert_data)
+        conn.execute(insert_data)
+    conn.commit() # 更新
+
+    cursor.execute(sqlstr)
+    conn.commit() # 更新
+    conn.close()  # 關閉資料庫連線
+
+    #print('不是用fetchall()讀取 全部資料')
+    #print('建立資料庫連線, 資料庫 : ' + db_filename)
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+    cursor = conn.execute("SELECT * FROM '{}'".format(tablename))
+    '''
+    cnt = 0
+    for row in cursor:
+        #print(type(row))
+        #print(len(row))
+        #print('第' + str(i + 1) + '筆資料 : ', end = "")
+        #print(rows[i])
+        #print('{}\t{}\t{}\t{}\t{}'.format(row[0], row[1], row[2], row[3], row[4]))
+        for r in row:
+            print(r, end = '\t')
+        print()
+        cnt += 1
+        if cnt == 3:
+            break
+    '''
+    conn.close()  # 關閉資料庫連線
+
+
+
+
+
 def precheck_csv_data():
     print('預先檢查這些csv檔案是否皆可用')
     
@@ -460,10 +614,10 @@ def precheck_csv_data():
 
     #尋找檔案
     import glob
-    print('尋找目前目錄下之 *.csv')
+    print('111尋找目前目錄下之 *.csv')
     files = glob.glob(source_dir + "/*.csv") 
     for filename in files:
-        #print(filename)
+        print(filename)
         stage = 0
         tablename = 'table00'
         #process_csv_file1(filename)
@@ -500,16 +654,17 @@ def import_csv_data():
 
     #尋找檔案
     import glob
-    print('尋找目前目錄下之 *.csv')
+    print('222尋找目前目錄下之 *.csv')
+    print((source_dir + "/*.csv"))
     files = glob.glob(source_dir + "/*.csv") 
     for filename in files:
-        #print(filename)
+        print(filename)
         stage = 0
         tablename = 'table00'
-        process_csv_file1(filename)
+        process_csv_file1(filename, source_dir)
         if stage != 0:
-            #print('繼續')
-            process_csv_file2(filename)
+            print('繼續')
+            process_csv_file3(filename)
             #若能正確處理完畢, 再搬到old資料夾
             #shutil.move(filename, target_dir)
 
@@ -993,7 +1148,7 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
 #print('{0:d}x{1:d}+{2:d}+{3:d}'.format(W, H, x_st, y_st))
 
 # 設定主視窗標題
-window.title('自動化產線生產資料庫')
+window.title('環境溫 / 濕度管制紀錄表 資料庫')
 
 # 設定主視窗之背景色
 #window.configure(bg = "#7AFEC6")
