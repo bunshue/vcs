@@ -73,8 +73,9 @@ plt.figure(
     frameon=True,
 )
 
-# filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp'
-filename = "C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp"
+filename = 'C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp'
+filename = 'C:/_git/vcs/_4.python/opencv/data/rgb512.bmp'
+
 image = cv2.imread(filename)
 
 plt.subplot(331)
@@ -149,8 +150,8 @@ plt.figure(
 )
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.png"
-filename = "C:/_git/vcs/_1.data/______test_files1/_opencv/rgb256X300.bmp"
-filename = "C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp"
+filename = 'C:/_git/vcs/_4.python/opencv/data/rgb256X300.bmp'
+filename = 'C:/_git/vcs/_4.python/opencv/data/rgb512.bmp'
 
 image = cv2.imread(filename)
 

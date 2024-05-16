@@ -128,7 +128,7 @@ import PIL.ImageDraw
 from PIL import *
 from PIL import ImageEnhance
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/captcha/captcha01.jpg'
+filename = 'C:/_git/vcs/_4.python/opencv/data/captcha/captcha01.jpg'
 
 #Code from https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/
 

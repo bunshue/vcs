@@ -305,9 +305,9 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+filename = 'C:/_git/vcs/_4.python/opencv/data/rgb512.bmp'
+filename = 'C:/_git/vcs/_4.python/opencv/data/opencv.png'
 
-# filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
-filename = "C:/_git/vcs/_1.data/______test_files1/_opencv/opencv.png"
 image = cv2.imread(filename)
 
 print("原圖 BGR 轉 HSV")

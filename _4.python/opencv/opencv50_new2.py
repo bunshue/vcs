@@ -3681,7 +3681,7 @@ print("------------------------------------------------------------")  # 60個
 
 print("將一彩圖做RGB分離")
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
+filename = 'C:/_git/vcs/_4.python/opencv/data/rgb512.bmp'
 
 image = cv2.imread(filename,cv2.IMREAD_COLOR)
 
@@ -3713,7 +3713,7 @@ print("------------------------------------------------------------")  # 60個
 
 #HLS.py
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/rgb512.bmp'
+filename = 'C:/_git/vcs/_4.python/opencv/data/rgb512.bmp'
 
 image = cv2.imread(filename,cv2.IMREAD_COLOR)
 
