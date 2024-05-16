@@ -1,0 +1,3 @@
+請參閱書本16-9頁，修改WebServer.h的61行：
+
+#define WEBDUINO_FAIL_MESSAGE "<img src=\"http://swf.com.tw/images/404error.png\">"

@@ -1,6 +1,5 @@
 """
 pygame 測試大全
-
 """
 
 import sys
@@ -9,6 +8,7 @@ import pygame
 
 W, H = 800, 600
 screen_size = (W, H)    # 設定屏幕尺寸
+surface_size = (W-50, H-50)    # 設定surface尺寸
 
 # 設定顏色
 red = (255, 0, 0)
@@ -48,28 +48,8 @@ print("------------------------------------------------------------")  # 60個
 print('pygame 01')
 
 pygame.init()  # 初始化Pygame
-screen = pygame.display.set_mode(screen_size)   # 創建屏幕
+screen = pygame.display.set_mode(screen_size)  # 產生視窗screen
 pygame.display.set_caption('pygame測試01')
-
-#利用screen物件來作為畫布，以fill()方法填上顏色
-screen.fill(white)
-
-#方法load()載入圖片，convert()能提高圖片的處理速度
-image=pygame.image.load(filename)
-#设置图片大小
-image=pygame.transform.scale(image,(200, 300))
-#绘制视频画面
-screen.blit(image,(2,2))
-
-run_pygame()
-
-print('------------------------------------------------------------')	#60個
-
-print('pygame 02')
-
-pygame.init()  # 初始化Pygame
-screen = pygame.display.set_mode(screen_size)   # 創建屏幕
-pygame.display.set_caption('pygame測試02')
 
 print("取得screen參數")
 print(screen.get_size())
@@ -78,247 +58,94 @@ print(screen.get_size())
 screen.fill(white)
 
 #方法load()載入圖片，convert()能提高圖片的處理速度
-img = pygame.image.load(filename)
-img.convert()
-x_st, y_st = 200, 100
-screen.blit(img, (x_st, y_st))
+image=pygame.image.load(filename)
+image.convert()
+
+#设置图片大小
+image=pygame.transform.scale(image,(200, 300))
+
+#绘制视频画面
+x_st, y_st = 100, 100
+screen.blit(image, (x_st, y_st))
 
 run_pygame()
 
 print('------------------------------------------------------------')	#60個
 
-print('pygame 03')
+print('pygame 09 建立畫布')
 
 pygame.init()  # 初始化Pygame
-screen = pygame.display.set_mode(screen_size)
+#screen = pygame.display.set_mode(screen_size, 0, 32)  # 產生視窗screen
+screen = pygame.display.set_mode(screen_size, 0)  # 產生視窗screen
+pygame.display.set_caption('pygame測試09 白色畫布')
+
+# 產生Surface物件, 上色，繪製成形
+surface = pygame.Surface(surface_size)
+print(surface.get_width(), surface.get_height())
+surface.convert()           # 產生副本
+surface.fill((0,255,0))#設定surface背景顏色
+
+print('將surface貼到screen上')
+screen.blit(surface, (25, 25))# 輸出到畫布上
+
+run_pygame()
+
+print("------------------------------------------------------------")  # 60個
+
+print('pygame 03 使用surface')
+
+print('建立screen')
+pygame.init()  # 初始化Pygame
+screen = pygame.display.set_mode(screen_size)  # 產生視窗screen
 pygame.display.set_caption('pygame測試03 載入圖片')
 
-background = pygame.Surface(screen.get_size())
-background = background.convert()
-background.fill((0,255,0))#設定背景顏色
+print('建立surface')
+# 產生Surface物件, 上色，繪製成形
+surface = pygame.Surface(surface_size)
+surface = surface.convert()
+surface.fill((0,255,0))#設定surface背景顏色
+
+print('讀取圖片貼到surface上')
+#方法load()載入圖片，convert()能提高圖片的處理速度
+image = pygame.image.load(filename)
+image.convert()
+x_st, y_st = 100, 100
+surface.blit(image, (x_st, y_st))
+
+print('將surface貼到screen上')
+screen.blit(surface, (25, 25))
+
+run_pygame()
+
+print('------------------------------------------------------------')	#60個
+
+print('pygame 04 不使用surface')
+
+pygame.init()  # 初始化Pygame
+#screen = pygame.display.set_mode(screen_size)  # 產生視窗screen
+screen = pygame.display.set_mode(screen_size, 0, 32)  # 產生視窗screen
+pygame.display.set_caption('pygame測試04 載入圖片')
+
+#利用screen物件來作為畫布，以fill()方法填上顏色
+screen.fill(green)
 
 #方法load()載入圖片，convert()能提高圖片的處理速度
 image = pygame.image.load(filename)
 image.convert()
-x_st, y_st = 20, 20
-background.blit(image, (x_st, y_st))
-
-screen.blit(background, (0,0))
-
-run_pygame()
-
-print('------------------------------------------------------------')	#60個
-
-print('pygame 04')
-
-pygame.init()  # 初始化Pygame
-
-#產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode((W, H), 0, 32)
-pygame.display.set_caption('pygame測試04 載入圖片')
-
-#利用screen物件來作為畫布，以fill()方法填上顏色
-screen.fill(white)
-
-#方法load()載入圖片，convert()能提高圖片的處理速度
-img = pygame.image.load(filename)
-img.convert()
-x_st, y_st = 20, 20
-screen.blit(img, (x_st, y_st))
-
-run_pygame()
-
-print('------------------------------------------------------------')	#60個
-
-print('pygame 05')
-
-pygame.init()  # 初始化Pygame
-screen = pygame.display.set_mode(screen_size)   # 創建屏幕
-pygame.display.set_caption('pygame測試05')
-
-# 繪製五個同心圓
-center_x = screen_size[0] // 2
-center_y = screen_size[1] // 2
-
-radius_1 = 200
-radius_2 = 150
-radius_3 = 100
-radius_4 = 50
-radius_5 = 20
-
-pygame.draw.circle(screen, white, (center_x, center_y), radius_1)
-pygame.draw.circle(screen, red, (center_x, center_y), radius_2)
-pygame.draw.circle(screen, green, (center_x, center_y), radius_3)
-pygame.draw.circle(screen, blue, (center_x, center_y), radius_4)
-pygame.draw.circle(screen, yellow, (center_x, center_y), radius_5)
-
-run_pygame()
-
-print('------------------------------------------------------------')	#60個
-
-print('pygame 06 最簡單python')
-
-pygame.init()   # 將PyGame初始化
-#產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size)
-pygame.display.set_caption('pygame測試06')
-
-run_pygame()
-
-print("------------------------------------------------------------")  # 60個
-
-print('pygame 07')
-
-pygame.init()   # 將PyGame初始化
-# 產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size)
-pygame.display.set_caption('pygame測試07')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-img = pygame.image.load(filename)
 
 x_st, y_st = 100, 100
-screen.blit(img, (x_st, y_st))
+screen.blit(image, (x_st, y_st))
 
 run_pygame()
 
-print("------------------------------------------------------------")  # 60個
-
-print('pygame 08')
-
-pygame.init() # 將PyGame初始化
-# 產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0, 32)
-pygame.display.set_caption('pygame測試08 產生畫布')
-
-# 產生Surface物件, 上色，繪製成形
-face = pygame.Surface([120, 120])
-face.fill(white)
-screen.blit(face, (20, 20))
-
-run_pygame()
-
-print("------------------------------------------------------------")  # 60個
-
-print('pygame 09')
-
-pygame.init()      # 將PyGame初始化
-
-# 產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0)
-pygame.display.set_caption('pygame測試09 白色畫布')
-
-# 產生Surface物件, 上色，繪製成形
-face = pygame.Surface(screen.get_size())
-print(face.get_width(), face.get_height())
-face.convert()           # 產生副本
-face.fill(white)         # 填滿白色
-screen.blit(face, (0, 0))# 輸出到畫布上
-
-run_pygame()
-
-print("------------------------------------------------------------")  # 60個
-
-print('pygame 10')
-
-pygame.init()      # 將PyGame初始化
-
-# 產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0)
-pygame.display.set_caption('pygame測試10 繪製圓弧')
-
-# 產生Surface物件, 上色，繪製成形
-face = pygame.Surface(screen.get_size())
-screen.fill(gray)         # 填滿灰色
-
-#繪製綠框、內塗紅色矩形
-#pygame.draw.rect(screen, green, (60, 35, 120, 120))
-#pygame.draw.rect(screen, red, (50, 25, 140, 140), 10)
-
-# 繪製一個實心三角形和框線為6的五邊形
-"""
-pygame.draw.polygon(screen, red, ((10, 180), (130, 10), (235, 180)))
-pygame.draw.polygon(screen, white, [(15, 120), (65, 35), (185, 35), (230, 120), (130, 180)], 8)
-"""
-
-# 產生圓弧線
-pygame.draw.arc(screen, aqua, (15, 10, 225, 180), 0, 1.6, 8)
-pygame.draw.arc(screen, red, (20, 17, 212, 173), 0, 3.1, 8)
-pygame.draw.arc(screen, fuchsia, (28, 27, 195, 157), 0, 4.7, 8)
-pygame.draw.arc(screen, green, (38, 37, 173, 137), 0, 9.9, 8)
-pygame.draw.line(screen, yellow, (10, 100), (240, 100), 2)
-pygame.draw.line(screen, white, (125, 5), (125, 180), 2)
-
-run_pygame()
-
-print("------------------------------------------------------------")  # 60個
-
-print('pygame 11')
-
-pygame.init() #將PyGame初始化
-
-#產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0, 32)
-pygame.display.set_caption('pygame測試11 draw')
-
-#利用Surface物件來作為畫布，以fill()方法填上白色
-screen.fill(white)
-
-#繪製半徑為40的黃色實心圓形
-pygame.draw.circle(screen, red, (103, 103), 82, 12)
-pygame.draw.circle(screen, yellow, (100, 100), 80)
-
-#繪製圓弧
-pygame.draw.arc(screen, aqua, (15, 10, 200, 185), 4.3, 2.0, 8)
-
-#繪製線條
-pygame.draw.line(screen, fuchsia, (70, 220), (100, 180), 20)
-pygame.draw.line(screen, green, (198, 185), (280, 30), 6)
-pygame.draw.line(screen, green, (280, 30), (380, 180), 6)
-
-#繪製綠色矩形
-pygame.draw.rect(screen, green, (30, 210, 140, 40))
-pygame.draw.rect(screen, gray, (204, 198, 60, 40))
-pygame.draw.rect(screen, gray, (304, 190, 60, 40))
-
-#繪製三角形
-pygame.draw.polygon(screen, gray, ((281, 53), (200, 205), (371, 187)))
-
-#繪製橢圓形
-pygame.draw.ellipse(screen, RosyBrown, (250, 230, 70, 30), 8)
-pygame.draw.ellipse(screen, fuchsia, (240, 258, 65, 25), 5)
-
-run_pygame()
-
-print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
 
 print('pygame 12')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
 
-pygame.init() #將PyGame初始化
-#產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0, 32)
-pygame.display.set_caption('pygame測試12 載入圖片')
-
-screen.fill(white)
-
-#方法load()載入圖片，convert()能提高圖片的處理速度
-img = pygame.image.load(filename)
-img.convert()
-screen.blit(img, (20, 20))
-
-run_pygame()
-
-print("------------------------------------------------------------")  # 60個
-
-print('pygame 12')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
-
-pygame.init() #將PyGame初始化
-#產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0, 32)
+pygame.init()  # 初始化Pygame
+screen = pygame.display.set_mode(screen_size, 0, 32)  # 產生視窗screen
 pygame.display.set_caption('pygame測試12 Animation')
 
 speed = [1, 1]
@@ -367,37 +194,15 @@ while running:
 pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
-
-print('pygame 13')
-
-pygame.init() #將PyGame初始化
-#產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0, 32)
-pygame.display.set_caption('pygame測試13 繪製文字')
-
-screen.fill(grey)
-
-#繪製文字
-#ft = pygame.font.SysFont('Malgun Gothic', 36)
-ft = pygame.font.SysFont('微軟正黑體', 36)
-wd1 = ft.render('Hello Python', False, aqua)
-screen.blit(wd1, (10, 20))
-#wd2 = ft.render('黃河之水天上來', True, green, yellow)
-#screen.blit(wd2, (10, 80))
-
-run_pygame()
-
-print("------------------------------------------------------------")  # 60個
-
+"""
 print('pygame 14')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
 
 from pygame.locals import *
 
-pygame.init() #將PyGame初始化
-#產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0, 32)
+pygame.init()  # 初始化Pygame
+screen = pygame.display.set_mode(screen_size, 0, 32)  # 產生視窗screen
 pygame.display.set_caption('pygame測試14 按鍵事件')
 
 #載入圖片並設座標
@@ -453,14 +258,13 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
 
 from pygame.locals import *
 
-pygame.init() #將PyGame初始化
-#產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0, 32)
+pygame.init()  # 初始化Pygame
+screen = pygame.display.set_mode(screen_size, 0, 32)  # 產生視窗screen
 pygame.display.set_caption('pygame測試15 滑鼠事件')
 
 # 載入圖片並設座標
-imgeRect = pygame.image.load(filename).convert_alpha()
-imgeX, imgeY = 0, 0   # 起始位置
+imageRect = pygame.image.load(filename).convert_alpha()
+imageX, imageY = 0, 0   # 起始位置
 moveing = False       # 移動圖片
 
 while True:
@@ -479,17 +283,55 @@ while True:
    if buts[0]:
       moving = True
       # 取得滑鼠座標
-      imgeX, imgeY = pygame.mouse.get_pos()
+      imageX, imageY = pygame.mouse.get_pos()
       
       # 取得座標讓圖片不要超過視窗範圍
-      imgeX -= imgeRect.get_width()/2
-      imgeY -= imgeRect.get_height()/2
-      print(imgeX, imgeY)
+      imageX -= imageRect.get_width()/2
+      imageY -= imageRect.get_height()/2
+      print(imageX, imageY)
    else:
       moving = False
 
-   screen.blit(imgeRect, (imgeX, imgeY))
+   screen.blit(imageRect, (imageX, imageY))
    pygame.display.update()
+
+print("------------------------------------------------------------")  # 60個
+
+#pygame 測試大全 03 keyboard mouse
+
+pygame.init()   # 初始化Pygame
+screen = pygame.display.set_mode(screen_size)   # 創建屏幕
+pygame.display.set_caption('偵測滑鼠位置')
+
+#利用screen物件來作為畫布，以fill()方法填上顏色
+screen.fill(white)
+
+clock = pygame.time.Clock()
+
+pos_list = []
+
+# 更新屏幕
+pygame.display.update()
+
+# 保持屏幕打開，直到用戶退出
+#偵測視窗是否被關閉
+while True:
+    screen.fill(black)
+    pygame.draw.rect(screen, black, [0, 0, 0, 0])
+
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:    #滑鼠事件
+            pos = pygame.mouse.get_pos()  # 取得滑鼠座標
+            print(pos)
+            #print(type(pos))
+            pos_list.append(pos)
+            #pygame.draw.lines(screen, [255, 255, 255], pos_list) TBD
+        #判斷事件的常數是否為QUIT常數
+        if event.type == pygame.QUIT:
+            pygame.quit() #quit()方法結束Pygame程序
+            sys.exit()
+    pygame.display.flip()
+    clock.tick(10)    
 
 print("------------------------------------------------------------")  # 60個
 
@@ -499,9 +341,8 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_cat/cat3.png'
 
 import random, math
 
-pygame.init() #將PyGame初始化
-#產生視窗，以Surface物件回傳
-screen = pygame.display.set_mode(screen_size, 0, 32)
+pygame.init()  # 初始化Pygame
+screen = pygame.display.set_mode(screen_size, 0, 32)  # 產生視窗screen
 pygame.display.set_caption('pygame測試16 碰撞的偵測')
 
 #設定每秒畫格20，利用Clock()方法來確保動畫能持續進行
@@ -549,8 +390,8 @@ while True:
    screen.blit(car, carRect.topleft)
    pygame.display.update()
 
+"""
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -565,5 +406,3 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-

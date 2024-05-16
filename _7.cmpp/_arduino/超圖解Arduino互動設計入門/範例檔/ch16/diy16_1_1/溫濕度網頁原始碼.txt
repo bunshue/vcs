@@ -1,0 +1,12 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Arduino溫濕度計</title>
+  </head>
+  <body>
+    <h1>溫濕度計</h1>
+    <p>溫度：30.00&deg;C</p>
+    <p>濕度：59.00%</p>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Google搜尋</title>
+  </head>
+  <body>
+	  <form action="http://google.com/search" method="GET">
+		搜尋關鍵字：<input name="q" type="text">
+		<input type="submit" value="開始搜">
+	  </form>
+  </body>
+</html>
