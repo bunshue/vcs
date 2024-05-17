@@ -1,3 +1,9 @@
+"""
+讀寫 Excel 檔案, 使用 xlrd(讀) xlwt(寫)
+
+"""
+
+import sys
 import xlrd
 
 print('------------------------------------------------------------')	#60個
@@ -5,7 +11,7 @@ print('------------------------------------------------------------')	#60個
 filename = 'data/python_ReadWrite_EXCEL1.xlsx'
 
 print('------------------------------------------------------------')	#60個
-"""
+'''
 data = xlrd.open_workbook(filename)
 
 s1 = data.sheets()[0]
@@ -14,12 +20,12 @@ s2 = data.sheets()[1]
 print(data)
 print(s1)
 print(s2)
-
+'''
 print('------------------------------------------------------------')	#60個
 
 import pprint as pp
 import xlrd
-
+'''
 data = xlrd.open_workbook(filename)
 sheets = data.sheets()
 
@@ -36,22 +42,22 @@ for sheet in sheets:
             rows.append(row)
     scores[sheet.name] = rows
 pp.pprint(scores)
-
+'''
 print('------------------------------------------------------------')	#60個
 
 import xlrd
-
+'''
 data = xlrd.open_workbook(filename)
 s1 = data.sheets()[0]
 for row in range(s1.nrows):
     print(s1.row_values(row))
-
+'''
 print('------------------------------------------------------------')	#60個
 
 import xlrd
 
 filename = 'data/python_ReadWrite_EXCEL2.xlsx'
-
+'''
 data = xlrd.open_workbook(filename)
 
 #取出工作表的index
@@ -75,7 +81,7 @@ for n in range(len(data.sheet_names())):
     for i in range(table.ncols):
         print('Page {}: '.format(n), end='')
         print(table.col_values(i))
-"""
+'''
 print('------------------------------------------------------------')	#60個
 
 print('用xlwt寫入xls檔案')
@@ -206,5 +212,15 @@ print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 

@@ -15,7 +15,7 @@ from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfilename
 
-flag_debug_mode = False
+flag_debug_mode = True
 
 # 建立csv二維串列資料
 all_data = [
@@ -37,6 +37,15 @@ list_stage13a = list()
 list_stage13b = list()
 list_stage14 = list()
 list_stage15 = list()
+
+list_stage402 = list()
+list_stage403 = list()
+list_stage404 = list()
+list_stage405 = list()
+list_stage406 = list()
+list_stage407 = list()
+list_stage408 = list()
+list_stage409 = list()
 
 choice = []
 
@@ -67,6 +76,10 @@ list_stage_list = [
 'list_stage13a', 'list_stage13b', 'list_stage14', 'list_stage15'
 ]
 
+list_room_list = [
+'list_stage402', 'list_stage402', 'list_stage402', 'list_stage402',
+'list_stage402', 'list_stage402', 'list_stage402', 'list_stage402'
+]
 
 stage = -1
 tablename = ''
@@ -150,27 +163,35 @@ def process_csv_file1(filename, source):
     if filename.startswith('402除菌區') == True:
         print('402除菌區')
         stage = 402
+        tablename = 'Room402'
     elif filename.startswith('403包裝區') == True:
         print('403包裝區')
         stage = 403
+        tablename = 'Room403'
     elif filename.startswith('404組裝區') == True:
         print('404組裝區')
         stage = 404
+        tablename = 'Room404'
     elif filename.startswith('405燒機測試區') == True:
         print('405燒機測試區')
         stage = 405
+        tablename = 'Room405'
     elif filename.startswith('406電信測試區') == True:
         print('406電信測試區')
         stage = 406
+        tablename = 'Room406'
     elif filename.startswith('407原料除菌區') == True:
         print('407原料除菌區')
         stage = 407
+        tablename = 'Room407'
     elif filename.startswith('408清洗區') == True:
         print('408清洗區')
         stage = 408
+        tablename = 'Room408'
     elif filename.startswith('409無塵室') == True:
         print('409無塵室')
         stage = 409
+        tablename = 'Room409'
     elif filename.endswith('_1.csv') == True:
         #print('第1站')
         stage = 1
@@ -359,6 +380,26 @@ def save_data_in_list(datas):
     else:
         print('第XXXXXXXXX站')
 
+def save_data_in_list2(datas):
+    #print(type(datas))
+    data_length = len(datas)
+    if stage == 402:
+        print('第402站')
+        length = len(list_stage402)
+        if length == 0:
+            list_stage402.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage402.append(datas[i])
+    elif stage == 8:
+        #print('第8站')
+        length = len(list_stage08)
+        if length == 0:
+            list_stage08.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage08.append(datas[i])
+    else:
+        print('第XXXXXXXXX站')
+
 def process_csv_file2(filename):
     global stage
     global tablename
@@ -476,21 +517,23 @@ def process_csv_file3(filename):
     global stage
     global tablename
 
-    return;
+    print("process_csv_file3")
+    print(filename)
+    print(tablename)
 
     #with open(filename, newline = '') as csvfile:
-    with open(filename, encoding = 'big5') as csvfile:
-        rows = csv.reader(csvfile)  # 讀取 csv 檔案內容
+    with open(filename, encoding = 'utf_16_le') as csvfile:
+        rows = csv.reader(csvfile, delimiter="\t")  # 讀取 csv 檔案內容
         datas = list(rows)    #將資料轉成list
 
     length = len(datas)
-    #print('len = ', length)
+    print('len = ', length)
 
-    save_data_in_list(datas)
+    save_data_in_list2(datas)
 
-    #print(datas)
+    print(datas)
     data_column = len(datas[0])
-    #print('data_column = ', data_column)
+    print('data_column = ', data_column)
 
     for row in datas:
         for i in range(0, len(row)):
@@ -845,60 +888,15 @@ def merge_stage_data():
     print('merge_stage_data')
 
     #print('第1站')
-    length = len(list_stage01)
-    print('list_stage01 資料長度 : ', length)
+    length = len(list_stage402)
+    print('list_stage402 資料長度 : ', length)
     if length >= 0:
         for i in range(0, length):
-            all_data.append(list_stage01[i])
+            all_data.append(list_stage402[i])
             
     length = len(all_data)
-    print('all_data 資料長度 : ', length)
+    print('aaaa = all_data 資料長度 : ', length)
    
-    #print('第2站')
-    merge_stage_data0(list_stage02)
-    
-    #print('第3站')
-    merge_stage_data0(list_stage03)
-
-    #print('第4站')
-    merge_stage_data0(list_stage04)
-
-    #print('第5站')
-    merge_stage_data0(list_stage05)
-
-    #print('第6站')
-    merge_stage_data0(list_stage06)
-
-    #print('第7站')
-    merge_stage_data0(list_stage07)
-
-    #print('第8站')
-    merge_stage_data0(list_stage08)
-
-    #print('第9站')
-    merge_stage_data0(list_stage09)
-
-    #print('第10站')
-    merge_stage_data0(list_stage10)
-
-    #print('第11站')
-    merge_stage_data0(list_stage11)
-    
-    #print('第12站')
-    merge_stage_data0(list_stage12)
-    
-    #print('第13a站')
-    merge_stage_data0(list_stage13a)
-
-    #print('第13b站')
-    merge_stage_data0(list_stage13b)
-
-    #print('第14站')
-    merge_stage_data0(list_stage14)
-
-    #print('第15站')
-    merge_stage_data0(list_stage15)
-
 
 def show_info():
     print('show_info')
@@ -1021,6 +1019,46 @@ def export_data():
         print(message)
         text1.insert('end', message)
 
+def export_data_to_excel():
+    """ tbd
+    print('aaaaaa')
+    for i in range(0, len(list_room_list)):
+        print(list_room_list[i], '長度 : ', len(list_room_list[i]))
+    """
+
+
+    length = len(list_stage402)
+    print(length)
+    if length > 0:
+        for _ in list_stage402:
+            print(_)
+
+    
+    global all_data
+    length = len(all_data)
+    print('資料長度 : ', length)
+    if length == 0:
+        message = '無資料, 離開'
+        print(message)
+        text1.insert('end', message)
+        main_message2.set(message)
+    else:
+        # 開啟輸出的 csv 檔案
+        """
+    
+        filename_w = '匯出資料範例.csv'
+        with open(filename_w, 'w', newline = '') as csvfile:
+            # 建立 csv 檔寫入物件
+            writer = csv.writer(csvfile)
+
+            # 寫入二維串列資料
+            writer.writerows(all_data)
+
+        """
+        message = '匯出資料 完成'
+        print(message)
+        text1.insert('end', message)
+
 def button00Click():
     print('你按了 新建資料庫')
     global db_filename
@@ -1072,6 +1110,7 @@ def button03Click():
 
     import_csv_data()
     merge_stage_data()
+    print('done')
 
 def button04Click():
     print('你按了 匯入資料庫 TBD')
@@ -1082,8 +1121,10 @@ def button05Click():
 
 def button10Click():
     print('你按了button10')
-    show_info()
+    #show_info()
 
+    export_data_to_excel()
+    
 def button11Click():
     print('你按了button11')
     precheck_csv_data()
@@ -1191,7 +1232,7 @@ button04.place(x = x_st + dx * 4, y = y_st + dy * 0)
 button05.place(x = x_st + dx * 5, y = y_st + dy * 0)
 
 if flag_debug_mode == True:
-    button10 = tk.Button(window, width = w, height = h, command = button10Click, text = 'Info')
+    button10 = tk.Button(window, width = w, height = h, command = button10Click, text = '檢查資料\n匯出excel')
     button10.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
     button11 = tk.Button(window, width = w, height = h, command = button11Click, text = '檢查csv/db')
     button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)

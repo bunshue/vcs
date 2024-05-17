@@ -1,11 +1,8 @@
 """
-#各種檔案寫讀範例 docx 1
-
-
+讀寫 Word 檔案, 使用 docx
 pip install python-docx
 
 """
-
 print('------------------------------------------------------------')	#60個
 
 import docx
@@ -46,8 +43,6 @@ for value_tuple in list_values[1:]:
     doc_name = "tmp_certificate" + value_tuple[0] + value_tuple[1] + ".docx"
     print(doc_name)
     doc.save(doc_name)
-
-
 
 print('------------------------------------------------------------')	#60個
 
