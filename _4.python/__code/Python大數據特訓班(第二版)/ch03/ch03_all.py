@@ -6,13 +6,17 @@ f=open('file1.txt', 'w' ,encoding='utf-8', newline="")
 f.write(content)
 f.close()
 
+print("------------------------------------------------------------")  # 60個
+
 # filewrite2.py
 content='''Hello Python
 中文字測試
 Welcome'''
 with open('file1.txt', 'w' ,encoding='utf-8', newline="") as f:
     f.write(content)
-    
+
+print("------------------------------------------------------------")  # 60個
+
 # fileread1.py
 with open('file1.txt', 'r', encoding='utf-8') as f:
     output_str=f.read(5)
@@ -32,6 +36,10 @@ with open('file1.txt', 'r', encoding='utf-8') as f:
 with open('file2.txt', 'r', encoding ='UTF-8') as f:
     print(f.readlines())
 
+
+print("------------------------------------------------------------")  # 60個
+
+
 # csv_read.py
 import csv
 # 開啟 csv 檔案
@@ -41,6 +49,8 @@ with open('school.csv', newline='') as csvfile:
     # 以迴圈顯示每一列
     for row in rows:
         print(row)
+
+print("------------------------------------------------------------")  # 60個
 
 # csv_read_dict.py
 import csv
@@ -76,6 +86,9 @@ csvtable = [
 with open('test2.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerows(csvtable)
+
+
+print("------------------------------------------------------------")  # 60個
 
 # csv_write_dict.py
 import csv
@@ -133,6 +146,9 @@ with open('class_str.json', 'r', encoding='utf-8') as f:
     for data in datas["一年甲班"]:
         print(data, data['姓名'])
 
+
+print("------------------------------------------------------------")  # 60個
+
 # jsondump1.py
 import json
 with open('class_str.json', 'r', encoding='utf-8') as f:
@@ -141,6 +157,9 @@ print(datas, type(datas))
 dumpdata = json.dumps(datas, ensure_ascii=False)
 print(dumpdata, type(dumpdata))
 
+print("------------------------------------------------------------")  # 60個
+
+
 # jsondump2.py
 import json
 with open('class_str.json', 'r', encoding='utf-8') as f:
@@ -148,42 +167,7 @@ with open('class_str.json', 'r', encoding='utf-8') as f:
 with open('new_class_str.json', 'w', encoding='utf-8') as f:
     dumpdata = json.dump(datas, f, ensure_ascii=False)
 
-# xlsx_write.py
-import openpyxl   
-# 建立一個工作簿     
-workbook=openpyxl.Workbook()   
-# 取得第 1 個工作表
-sheet = workbook.worksheets[0]
-# 以儲存格位置寫入資料
-sheet['A1'] = '一年甲班'
-# 以串列寫入資料
-listtitle=['座號', '姓名', '國文', '英文', '數學']
-sheet.append(listtitle)  
-listdatas=[[1, '葉大雄', 65, 62, 40],
-           [2, '陳靜香', 85, 90, 87],
-           [3, '王聰明', 92, 90, 95]]
-for listdata in listdatas:
-    sheet.append(listdata)
-# 儲存檔案   
-workbook.save('test.xlsx')
-
-# xlsx_read.py
-import openpyxl
-#  讀取檔案
-workbook = openpyxl.load_workbook('test.xlsx')
-# 取得第 1 個工作表
-sheet = workbook.worksheets[0]
-# 取得指定儲存格
-print(sheet['A1'], sheet['A1'].value)
-# 取得總行、列數
-print(sheet.max_row, sheet.max_column)
-# 顯示 cell資料
-for i in range(1, sheet.max_row+1):
-    for j in range(1, sheet.max_column+1):
-        print(sheet.cell(row=i, column=j).value,end="   ")
-    print()
-sheet['A1'] = '二年甲班' 
-workbook.save('test.xlsx')      
+print("------------------------------------------------------------")  # 60個
 
 # sqlite_cursor.py
 import sqlite3
@@ -206,6 +190,9 @@ cursor.execute('insert into scores values(2, "陳靜香", 85, 90, 87)')
 cursor.execute('insert into scores values(3, "王聰明", 92, 90, 95)')
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
+
+print("------------------------------------------------------------")  # 60個
+
 
 # sqlite_crud1.py
 import sqlite3
@@ -238,6 +225,9 @@ for data in datas:
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 
+print("------------------------------------------------------------")  # 60個
+
+
 # sqlite_crud3.py
 import sqlite3
 conn = sqlite3.connect('school.db') # 建立資料庫連線
@@ -245,6 +235,9 @@ conn = sqlite3.connect('school.db') # 建立資料庫連線
 conn.execute("UPDATE scores SET name='{}' WHERE id={}".format('林胖虎', 1))
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
+
+print("------------------------------------------------------------")  # 60個
+
 
 # sqlite_crud4.py
 import sqlite3
@@ -266,6 +259,8 @@ for row in rows:
     print(row[0],row[1])
 conn.close()  # 關閉資料庫連線
 
+print("------------------------------------------------------------")  # 60個
+
 # fetchone.py
 import sqlite3
 conn = sqlite3.connect('school.db') # 建立資料庫連線
@@ -273,6 +268,10 @@ cursor = conn.execute('select * from scores')
 row = cursor.fetchone()
 print(row[0], row[1])
 conn.close()  # 關閉資料庫連線
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 # mysqltable.py
 import pymysql
@@ -292,6 +291,9 @@ with conn.cursor() as cursor:
     conn.commit()  #提交資料庫
 conn.close()
 
+print("------------------------------------------------------------")  # 60個
+
+
 # mysqlinsert.py
 import pymysql
 conn = pymysql.connect('localhost',port=3306,user='root',passwd='1234',charset='utf8', db='pythondb')  #連結資料庫
@@ -306,6 +308,9 @@ with conn.cursor() as cursor:
     cursor.execute(sql)
     conn.commit()  #提交資料庫
 conn.close()
+
+print("------------------------------------------------------------")  # 60個
+
 
 # mysqlquery.py
 import pymysql
@@ -323,6 +328,9 @@ with conn.cursor() as cursor:
     print(data)
     
 conn.close()
+
+print("------------------------------------------------------------")  # 60個
+
 
 # mysqlupdate.py
 import pymysql
@@ -353,6 +361,12 @@ with conn.cursor() as cursor:
     print(data)
     
 conn.close()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 # LinkGoogleSheet.py
 import gspread

@@ -160,6 +160,9 @@ def process_csv_file1(filename, source):
     print("bbb :", filename)
 
     print("ccc :", filename)
+
+    #year_month_day_data = filename
+   
     if filename.startswith('402除菌區') == True:
         print('402除菌區')
         stage = 402
@@ -1172,6 +1175,23 @@ def choose():
     print(str)
     msg.set(str)
 
+
+filename = "402除菌區數據紀錄_211214_000000.csv"
+
+year_month_day_data = filename[-17:-11]
+
+print(year_month_day_data)
+
+year = filename[-17:-15]
+month = filename[-15:-13]
+day = filename[-13:-11]
+
+print(int(year)+2000)
+print(month)
+print(day)
+
+
+
 window = tk.Tk()
 
 main_message1 = tk.StringVar()
@@ -1291,13 +1311,4 @@ message = "尚未開啟資料庫"
 main_message1.set(message)
 
 window.mainloop()
-
-
-
-
-
-
-
-
-
 

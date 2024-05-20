@@ -44,10 +44,7 @@ def twobyte(kindno):
 #主程式
 import requests
 from bs4 import BeautifulSoup
-import openpyxl
 
-workbook = openpyxl.Workbook()   #建立一個工作簿
-sheet = workbook.worksheets[0] #獲取工作表 
 list1 = []    
 kindno = 1  # 計算共有多少分類  
 homeurl = 'http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1'
@@ -67,9 +64,8 @@ for href in hrefs:
     
 # excel 資料
 listtitle = ["分類", "書名", "圖片網址", "作者", "出版社", "出版日期", "優惠價", "內容"]
-sheet.append(listtitle)  # 標題
-for item1 in list1: #資料
-    sheet.append(item1) 
-    
-workbook.save('books_all.xlsx')
+print(listtitle)  # 標題
 
+for _ in list1: #資料
+    print(_)
+    

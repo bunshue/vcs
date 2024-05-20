@@ -605,27 +605,16 @@ print('------------------------------------------------------------')	#60個
 
 print('讀寫Excel文件')
 
-import openpyxl
 
+print('df轉excel')
 df = pd.DataFrame({'Name': ['Smith', 'Lucy'], 'Age': ['25', '20'], 'Sex': ['男','女']})
 df.to_excel("tmp.xlsx")
 
+print('pd讀取excel')
 df1 = pd.read_excel("tmp.xlsx")
 print(df1)
 
-wb = openpyxl.load_workbook('tmp.xlsx')
-sheets = wb.sheetnames
-print(sheets)
-for i in range(len(sheets)):
-    sheet = wb[sheets[i]]
-    print('title', sheet.title)
-    for col in sheet.iter_cols(min_row=0, min_col=0, max_row=3, max_col=3):
-        for cell in col:
-            print(cell.value)
-
-
 print('------------------------------------------------------------')	#60個
-
 
 print('Python存取Sqlite數據庫')
 

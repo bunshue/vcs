@@ -3,13 +3,16 @@
 pip install python-docx
 
 """
+
+import sys
+
 print('------------------------------------------------------------')	#60個
 
 import docx
 
-filename = 'data/python_docx1.docx'
+filename_r = 'data/python_docx1.docx'
 
-doc = docx.Document(filename)
+doc = docx.Document(filename_r)
 for p in doc.paragraphs:
     print(p.text)
 
@@ -21,19 +24,15 @@ import openpyxl
 from docxtpl import DocxTemplate
 import datetime
 
-filename = 'data/python_ReadWrite_EXCEL6_student_data2.xlsx'
-
-workbook = openpyxl.load_workbook(filename)
+filename_r1 = 'data/python_ReadWrite_EXCEL6_student_data2.xlsx'
+workbook = openpyxl.load_workbook(filename_r1)
 sheet = workbook.active
-
 list_values = list(sheet.values)
 print(list_values)
 
-filename = 'data/python_ReadWrite_WORD1_certificate.docx'
-
+filename_r2 = 'data/python_ReadWrite_WORD1_certificate.docx'
 # Generate docs
-doc = DocxTemplate(filename)
-
+doc = DocxTemplate(filename_r2)
 for value_tuple in list_values[1:]:
     doc.render({"name": value_tuple[0],
                 "course": value_tuple[1],
@@ -54,9 +53,9 @@ invoice : 發票，發貨單
 import datetime
 from docxtpl import DocxTemplate
 
-filename1 = 'data/python_ReadWrite_WORD2_invoice_template.docx'
+filename_r = 'data/python_ReadWrite_WORD2_invoice_template.docx'
 
-doc = DocxTemplate(filename1)
+doc = DocxTemplate(filename_r)
 
 invoice_list = [[2, "pen", 0.5, 1],
                 [1, "paper pack", 5, 5],
@@ -83,9 +82,8 @@ doc.render({"name":name,
             "salestax":str(salestax*100)+"%",
             "total":total})
 
-filename2 = "tmp_new_invoice" + name + datetime.datetime.now().strftime("%Y-%m-%d-%H%M%S") + ".docx"
-doc.save(filename2)
-
+filename_w = "tmp_new_invoice" + name + datetime.datetime.now().strftime("%Y-%m-%d-%H%M%S") + ".docx"
+doc.save(filename_w)
 
 print('------------------------------------------------------------')	#60個
 
@@ -93,7 +91,9 @@ print('------------------------------------------------------------')	#60個
 
 from docx import Document
 
-doc = Document('./data/用函數還是用復雜的表達式.docx')
+filename_r = './data/用函數還是用復雜的表達式.docx'
+
+doc = Document(filename_r)
 print(len(doc.paragraphs))
 print(doc.paragraphs[0].text)
 # print(doc.paragraphs[1].runs[0].text)

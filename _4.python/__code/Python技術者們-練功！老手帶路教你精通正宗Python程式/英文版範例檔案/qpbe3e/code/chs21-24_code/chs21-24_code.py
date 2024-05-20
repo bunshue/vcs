@@ -86,45 +86,17 @@ OrderedDict([('Notes', ''), ('State', 'Illinois'), ('State Code', '17'), ('Month
 >>> results[0]['State']
 'Illinois'
 
-21.3 Excel files
-
->>> from openpyxl import load_workbook
->>> wb = load_workbook('temp_data_01.xlsx')
->>> results = []
->>> ws = wb.worksheets[0]
->>> for row in ws.iter_rows():
-...     results.append([cell.value for cell in row])
-...  
->>> print(results)
-[['Notes', 'State', 'State Code', 'Month Day, Year', 'Month Day, Year Code', 'Avg Daily Max Air Temperature (F)', 'Record Count for Daily Max Air Temp (F)', 'Min Temp for Daily Max Air Temp (F)', 'Max Temp for Daily Max Air Temp (F)', 'Avg Daily Max Heat Index (F)', 'Record Count for Daily Max Heat Index (F)', 'Min for Daily Max Heat Index (F)', 'Max for Daily Max Heat Index (F)', 'Daily Max Heat Index (F) % Coverage'], [None, 'Illinois', 17, 'Jan 01, 1979', '1979/01/01', 17.48, 994, 6, 30.5, 'Missing', 0, 'Missing', 'Missing', '0.00%'], [None, 'Illinois', 17, 'Jan 02, 1979', '1979/01/02', 4.64, 994, -6.4, 15.8, 'Missing', 0, 'Missing', 'Missing', '0.00%'], [None, 'Illinois', 17, 'Jan 03, 1979', '1979/01/03', 11.05, 994, -0.7, 24.7, 'Missing', 0, 'Missing', 'Missing', '0.00%'], [None, 'Illinois', 17, 'Jan 04, 1979', '1979/01/04', 9.51, 994, 0.2, 27.6, 'Missing', 0, 'Missing', 'Missing', '0.00%'], [None, 'Illinois', 17, 'May 15, 1979', '1979/05/15', 68.42, 994, 61, 75.1, 'Missing', 0, 'Missing', 'Missing', '0.00%'], [None, 'Illinois', 17, 'May 16, 1979', '1979/05/16', 70.29, 994, 63.4, 73.5, 'Missing', 0, 'Missing', 'Missing', '0.00%'], [None, 'Illinois', 17, 'May 17, 1979', '1979/05/17', 75.34, 994, 64, 80.5, 82.6, 2, 82.4, 82.8, '0.20%'], [None, 'Illinois', 17, 'May 18, 1979', '1979/05/18', 79.13, 994, 75.5, 82.1, 81.42, 349, 80.2, 83.4, '35.11%'], [None, 'Illinois', 17, 'May 19, 1979', '1979/05/19', 74.94, 994, 66.9, 83.1, 82.87, 78, 81.6, 85.2, '7.85%']]
-
 
 21.5.1 CSV and other delimited files
 
 >>> temperature_data = [['State', 'Month Day, Year Code', 'Avg Daily Max Air Temperature (F)', 'Record Count for Daily Max Air Temp (F)'], ['Illinois', '1979/01/01', '17.48', '994'], ['Illinois', '1979/01/02', '4.64', '994'], ['Illinois', '1979/01/03', '11.05', '994'], ['Illinois', '1979/01/04', '9.51', '994'], ['Illinois', '1979/05/15', '68.42', '994'], ['Illinois', '1979/05/16', '70.29', '994'], ['Illinois', '1979/05/17', '75.34', '994'], ['Illinois', '1979/05/18', '79.13', '994'], ['Illinois', '1979/05/19', '74.94', '994']]
 >>> csv.writer(open("temp_data_03.csv", "w", newline='')).writerows(temperature_data)
 
-
 >>> fields = ['State', 'Month Day, Year Code', 'Avg Daily Max Air Temperature (F)', 'Record Count for Daily Max Air Temp (F)']
 >>> dict_writer = csv.DictWriter(open("temp_data_04.csv", "w"), fieldnames=fields)
 >>> dict_writer.writeheader()
 >>> dict_writer.writerows(fie)
 >>> del dict_writer
-
-21.5.2 Writing Excel files
-
->>> import csv
->>> from openpyxl import Workbook
->>> data_rows = [fields for fields in csv.reader(open("temp_data_01.csv"))]
->>> wb = Workbook()
->>> ws = wb.active
->>> ws.title = "temperature data"
->>> for row in data_rows:
-...     ws.append(row)
-... 
->>> wb.save("temp_data_02.xlsx")
-
-
 
 22.1.1 Using Python to fetch files from an FTP server
 
