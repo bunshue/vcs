@@ -7,7 +7,7 @@ import os
 import sys
 import csv
 import time
-import sqlite3
+import openpyxl
 import tkinter as tk
 import tkinter as tk
 from tkinter.filedialog import askopenfile #tk之openFileDialog
@@ -83,8 +83,6 @@ list_room_list = [
 
 stage = -1
 tablename = ''
-db_filename = ''
-#db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
 
 dummy_data = 'abcd'
 count = 0
@@ -92,22 +90,6 @@ count = 0
 print('------------------------------------------------------------')	#60個
 
 #公用副程式
-
-#取得一個資料庫內所有表單的名稱, list格式
-def get_table_names(conn):
-    table_names = []
-    tables = conn.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    for table in tables.fetchall():
-        table_names.append(table[0])
-    return table_names
-
-#取得一個表單內所有欄位的名稱, list格式
-def get_column_names(conn, table_name):
-    column_names = []
-    columns = conn.execute(f"PRAGMA table_info('{table_name}');").fetchall()
-    for col in columns:
-        column_names.append(col[1])
-    return column_names
 
 #清除記憶體內的資料
 def clear_all_data():
@@ -436,86 +418,6 @@ def process_csv_file2(filename):
             break
     '''
 
-    #同一個資料庫內 可以放多個table table名稱不同即可
-
-    #print('建立資料庫連線, 資料庫 : ' + db_filename)
-    conn = sqlite3.connect(db_filename) # 建立資料庫連線
-
-    cursor = conn.cursor() # 建立 cursor 物件
-
-    #print('建立一個資料表')
-    #Create 建立
-
-    sqlstr = "CREATE TABLE IF NOT EXISTS '{}' ('data1' TEXT PRIMARY KEY NOT NULL".format(tablename)
-
-    for i in range(2, data_column):
-        #print(i)
-        sqlstr += ", '{}' TEXT NOT NULL".format('data' + str(i))
-
-    sqlstr += ')'
-    #print(sqlstr)
-
-    cursor.execute(sqlstr)
-    conn.commit() # 更新
-
-    #print('len = ', len(datas))
-
-    #Insert
-    for data in datas:
-        if len(data) == 0:
-            continue
-
-        # 新增資料
-        insert_data = "INSERT INTO '{}' (".format(tablename)
-        for i in range(1, data_column):
-            #print(i)
-            if i == data_column - 1:
-                insert_data += 'data' + str(i)
-            else:
-                insert_data += 'data' + str(i) + ", "
-           
-        insert_data +=') VALUES ('
-        for i in range(1, data_column):
-            #print(i)
-            if i == data_column - 1:
-                insert_data += "'{}'".format(data[i].strip())
-            else:
-                insert_data += "'{}', ".format(data[i].strip())
-
-        insert_data +=')'
-
-        #print(insert_data)
-        
-        #insert_data = "INSERT INTO '{}' (data1, data2, data3, data4, data5) VALUES ('{}', '{}', '{}', '{}', '{}')".format(tablename, data[1], data[2], data[3], data[4], data[5])
-        #print(insert_data)
-        conn.execute(insert_data)
-    conn.commit() # 更新
-
-    cursor.execute(sqlstr)
-    conn.commit() # 更新
-    conn.close()  # 關閉資料庫連線
-
-    #print('不是用fetchall()讀取 全部資料')
-    #print('建立資料庫連線, 資料庫 : ' + db_filename)
-    conn = sqlite3.connect(db_filename) # 建立資料庫連線
-    cursor = conn.execute("SELECT * FROM '{}'".format(tablename))
-    '''
-    cnt = 0
-    for row in cursor:
-        #print(type(row))
-        #print(len(row))
-        #print('第' + str(i + 1) + '筆資料 : ', end = "")
-        #print(rows[i])
-        #print('{}\t{}\t{}\t{}\t{}'.format(row[0], row[1], row[2], row[3], row[4]))
-        for r in row:
-            print(r, end = '\t')
-        print()
-        cnt += 1
-        if cnt == 3:
-            break
-    '''
-    conn.close()  # 關閉資料庫連線
-
 def process_csv_file3(filename):
     global stage
     global tablename
@@ -552,90 +454,6 @@ def process_csv_file3(filename):
         if cnt == 3:
             break
     '''
-
-    #同一個資料庫內 可以放多個table table名稱不同即可
-
-    #print('建立資料庫連線, 資料庫 : ' + db_filename)
-    conn = sqlite3.connect(db_filename) # 建立資料庫連線
-
-    cursor = conn.cursor() # 建立 cursor 物件
-
-    #print('建立一個資料表')
-    #Create 建立
-
-    sqlstr = "CREATE TABLE IF NOT EXISTS '{}' ('data1' TEXT PRIMARY KEY NOT NULL".format(tablename)
-
-    for i in range(2, data_column):
-        #print(i)
-        sqlstr += ", '{}' TEXT NOT NULL".format('data' + str(i))
-
-    sqlstr += ')'
-    #print(sqlstr)
-
-    cursor.execute(sqlstr)
-    conn.commit() # 更新
-
-    #print('len = ', len(datas))
-
-    #Insert
-    for data in datas:
-        if len(data) == 0:
-            continue
-
-        # 新增資料
-        insert_data = "INSERT INTO '{}' (".format(tablename)
-        for i in range(1, data_column):
-            #print(i)
-            if i == data_column - 1:
-                insert_data += 'data' + str(i)
-            else:
-                insert_data += 'data' + str(i) + ", "
-           
-        insert_data +=') VALUES ('
-        for i in range(1, data_column):
-            #print(i)
-            if i == data_column - 1:
-                insert_data += "'{}'".format(data[i].strip())
-            else:
-                insert_data += "'{}', ".format(data[i].strip())
-
-        insert_data +=')'
-
-        #print(insert_data)
-        
-        #insert_data = "INSERT INTO '{}' (data1, data2, data3, data4, data5) VALUES ('{}', '{}', '{}', '{}', '{}')".format(tablename, data[1], data[2], data[3], data[4], data[5])
-        #print(insert_data)
-        conn.execute(insert_data)
-    conn.commit() # 更新
-
-    cursor.execute(sqlstr)
-    conn.commit() # 更新
-    conn.close()  # 關閉資料庫連線
-
-    #print('不是用fetchall()讀取 全部資料')
-    #print('建立資料庫連線, 資料庫 : ' + db_filename)
-    conn = sqlite3.connect(db_filename) # 建立資料庫連線
-    cursor = conn.execute("SELECT * FROM '{}'".format(tablename))
-    '''
-    cnt = 0
-    for row in cursor:
-        #print(type(row))
-        #print(len(row))
-        #print('第' + str(i + 1) + '筆資料 : ', end = "")
-        #print(rows[i])
-        #print('{}\t{}\t{}\t{}\t{}'.format(row[0], row[1], row[2], row[3], row[4]))
-        for r in row:
-            print(r, end = '\t')
-        print()
-        cnt += 1
-        if cnt == 3:
-            break
-    '''
-    conn.close()  # 關閉資料庫連線
-
-
-
-
 
 def precheck_csv_data():
     print('預先檢查這些csv檔案是否皆可用')
@@ -718,129 +536,6 @@ def import_csv_data():
     print(message)
     text1.insert('end', message)
 
-def read_from_db():
-    
-    # 還有其他站 TBD,  還要讀出資料後 將資料 加/附加 到list裏
-    
-    if db_filename == '':
-        message = '尚未開啟資料庫, 離開'
-        print(message)
-        text1.insert('end', message)
-        return
-    
-    global all_data
-    all_data = [
-    ]
-    message = ''
-
-    print('從資料庫讀出全部資料')
-
-    conn = sqlite3.connect(db_filename) # 建立資料庫連線
-
-    print('目前資料庫 : ' + db_filename)
-
-    conn = sqlite3.connect(db_filename)
-
-    table_names = get_table_names(conn)
-    print(type(table_names))
-    talbe_names_length = len(table_names)
-    if talbe_names_length <= 0:
-        print('資料庫內無表單, 離開')
-        conn.close()
-        return;
-    
-    print('裡面有:', talbe_names_length, ' 個表單')
-        
-    conn.close()
-
-    table_data_exists = False
-    for table_name in table_names:
-        if(table_name == 'table01'):
-            print('第1站資料存在')
-            table_data_exists = True
-
-    if table_data_exists == False:
-        print('無第1站資料, 離開')
-        return;
-
-    print('第1站')
-    conn = sqlite3.connect(db_filename) # 建立資料庫連線
-    cursor = conn.execute('SELECT * FROM table01')
-    rows = cursor.fetchall()
-    #print(rows)
-    index = 1
-    for row in rows:
-        print(len(row))
-        #print('{}\t{}'.format(row[0], row[1]))
-        #print(row)
-        all_data.append(row)
-        index += 1
-    conn.close()  # 關閉資料庫連線
-
-
-    table_data_exists = False
-    for table_name in table_names:
-        if(table_name == 'table02'):
-            print('第1站資料存在')
-            table_data_exists = True
-
-    if table_data_exists == False:
-        print('無第2站資料, 離開')
-        return;
-
-    print('第2站')
-    conn = sqlite3.connect(db_filename) # 建立資料庫連線
-    cursor = conn.execute('SELECT * FROM table02')
-    rows = cursor.fetchall()
-    #print(rows)
-    for row in rows:
-        #print('{}\t{}'.format(row[0], row[1]))
-        #print(row)
-        all_data.append(row)
-        message = message + str(row) + '\n'
-    conn.close()  # 關閉資料庫連線
-    text1.insert('end', message)
-
-    for i in range(1, len(table_list)):
-        print('檢查 : ', table_list[i])
-
-        table_data_exists = False
-        for table_name in table_names:
-            if(table_name == table_list[i]):
-                print('表單: ', table_list[i], ' 存在')
-                table_data_exists = True
-
-        if table_data_exists == False:
-            print('表單: ', table_list[i], ' 不存在')
-            continue
-
-        print('讀取表單: ', table_list[i], ' 資料')
-        conn = sqlite3.connect(db_filename) # 建立資料庫連線
-
-
-        sqlstr = "SELECT * FROM {}".format(table_list[i])   #SELECT * : 取得所有資料
-        #print(sqlstr)
-        cursor = conn.execute(sqlstr)
-        rows = cursor.fetchall()    #讀取全部資料
-        length = len(rows)
-        print('共有', length, '筆資料')
-
-        cursor = conn.execute(sqlstr)
-        rows = cursor.fetchall()    #讀取全部資料
-        #print(rows)
-        for row in rows:
-            #print('{}\t{}'.format(row[0], row[1]))
-            #print(row)
-            all_data.append(row)
-            message = message + str(row) + '\n'
-        conn.close()  # 關閉資料庫連線
-        text1.insert('end', message)
-
-
-    message = "從資料庫讀出全部資料 完成"
-    print(message)
-    text1.insert('end', message)
-
 def merge_stage_data0(list_stage):
     
     length = len(list_stage)
@@ -916,38 +611,6 @@ def show_info():
     length = len(list_stage01)
     print('第1站 資料長度: ', length)
 
-
-    '''
-    global db_filename
-    if db_filename == '':
-        message = '尚未開啟資料庫, 離開'
-        print(message)
-        text1.insert('end', message)
-        return
-
-    print('目前資料庫 : ' + db_filename)
-
-    conn = sqlite3.connect(db_filename)
-
-    table_names = get_table_names(conn)
-    print(type(table_names))
-    talbe_names_length = len(table_names)
-    print('裡面有:', talbe_names_length, ' 個表單')
-    print('分別是:')
-    for table_name in table_names:
-        print('表單:', table_name, end = '\t')
-        column_names = get_column_names(conn, table_name)
-        column_names_length = len(column_names)
-        print('裡面有:', column_names_length, ' 個欄位', end = ' ')
-        print('分別是:', end = ' ')
-        for column_name in column_names:
-            print(column_name, end = ' ')
-        print()
-
-
-    conn.close()
-    '''
-
 def show_list_stage():
     print('第1站')
     print(list_stage01)
@@ -1008,6 +671,7 @@ def export_data():
         print(message)
         text1.insert('end', message)
         main_message2.set(message)
+        return
     else:
         # 開啟輸出的 csv 檔案
         filename_w = '匯出資料範例.csv'
@@ -1019,8 +683,8 @@ def export_data():
             writer.writerows(all_data)
 
         message = '匯出資料 完成'
-        print(message)
-        text1.insert('end', message)
+        #print(message)
+        #text1.insert('end', message)
 
 def export_data_to_excel():
     """ tbd
@@ -1035,6 +699,12 @@ def export_data_to_excel():
     if length > 0:
         for _ in list_stage402:
             print(_)
+
+    print(list_stage402[0])
+    print(list_stage402[1])
+    print(type(list_stage402[1]))
+    print(list_stage402[1][0])
+    print(list_stage402[1][1])
 
     
     global all_data
@@ -1062,57 +732,63 @@ def export_data_to_excel():
         print(message)
         text1.insert('end', message)
 
+        print('a')
+        workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
+        # 取得第 0 個工作表
+        sheet = workbook.worksheets[0]
+
+        print('b')
+
+        # 修改工作表的名稱
+        sheet.title = "Animal"
+
+        # 以儲存格位置寫入資料
+        sheet['A1'] = '中文名'
+        sheet['B1'] = '英文名'
+        sheet['C1'] = '體重'
+        sheet['D1'] = '全名'
+
+        # 以串列寫入資料
+        animal01 = ['鼠', 'mouse', '3']
+        animal02 = ['牛', 'ox', '48']
+        animal03 = ['虎', 'tiger', '33']
+        animal04 = ['兔', 'rabbit', '8']
+        sheet.append(animal01)  # 逐筆添加到最後一列
+        sheet.append(animal02)  # 逐筆添加到最後一列
+        sheet.append(animal03)  # 逐筆添加到最後一列
+        sheet.append(animal04)  # 逐筆添加到最後一列
+        print('c')
+
+        #設定格式
+        #sheet = workbook["Animal"]
+        sheet["A1"].fill = openpyxl.styles.PatternFill(fill_type="solid", fgColor="FFFF00")  # 設定 f1 儲存格的背景樣式
+        sheet["B1"].font = openpyxl.styles.Font(name="Arial", color="ff0000", size=30, bold=True)  # 設定 g1 儲存格的文字樣式
+        sheet["C1"].font = openpyxl.styles.Font(name="Arial", color="00ff00", size=30, bold=True)  # 設定 g1 儲存格的文字樣式
+        sheet["D1"].font = openpyxl.styles.Font(name="Arial", color="0000ff", size=30, bold=True)  # 設定 g1 儲存格的文字樣式
+        print('d')
+
+        filename_w = 'tmp_excel_openpyxl01.xlsx'
+        workbook.save(filename_w)  # 儲存檔案
+        print("建立 xlsx OK, 檔案 : " + filename_w)
+
+
+
+
+
 def button00Click():
-    print('你按了 新建資料庫')
-    global db_filename
-    db_filename = 'db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
-    message = '資料庫 : ' + db_filename
-    print(message)
-    text1.insert('end', message)
-    main_message1.set(message)
-
-    print('新建資料庫, 清除記憶體資料')
-    clear_all_data()
-
-def button01Click():
-    print('你按了 開啟資料庫')
-    button01_text.set("開啟資料庫...")
-    file = askopenfile(parent = window, mode = 'rb', title = "選取資料庫", filetypes = [("資料庫檔案", "*.sqlite")])
-    if file:
-        global db_filename
-        db_filename = file.name
-        message = '資料庫 : ' + db_filename
-        print(message)
-        text1.insert('end', message)
-        main_message1.set(message)
-
-    button01_text.set("開啟資料庫")
-    print('開啟資料庫, 清除記憶體資料')
-    clear_all_data()
-
-def button02Click():
-    print('你按了 讀取資料庫資料')
-    global db_filename
-    if db_filename == '':
-        message = '尚未開啟資料庫, 離開'
-        print(message)
-        text1.insert('end', message)
-        return
-    
-    read_from_db()
-
-def button03Click():
-    print('你按了 匯入生產資料並將資料加入資料庫')
-    global db_filename
-    print(db_filename)
-    if db_filename == '':
-        message = '尚未開啟資料庫, 離開'
-        print(message)
-        text1.insert('end', message)
-        return
-
+    print('你按了 匯入生產資料')
     import_csv_data()
     merge_stage_data()
+
+def button01Click():
+    print('你按了 匯出至Excel檔案')
+    export_data_to_excel()
+
+def button02Click():
+    print('你按了 xxx')
+   
+def button03Click():
+    print('你按了 匯入生產資料並將資料加入資料庫')
     print('done')
 
 def button04Click():
@@ -1124,9 +800,7 @@ def button05Click():
 
 def button10Click():
     print('你按了button10')
-    #show_info()
-
-    export_data_to_excel()
+    show_info()
     
 def button11Click():
     print('你按了button11')
@@ -1142,11 +816,11 @@ def button13Click():
     window.destroy()
 
 def button14Click():
-    #print('你按了button14')
+    print('你按了button14')
     set_data()
 
 def button15Click():
-    #print('你按了button15')
+    print('你按了button15')
     clear_text1()
 
 def set_data():
@@ -1177,7 +851,7 @@ def choose():
 
 
 filename = "402除菌區數據紀錄_211214_000000.csv"
-
+            
 year_month_day_data = filename[-17:-11]
 
 print(year_month_day_data)
@@ -1224,7 +898,7 @@ dy = 80
 w = 12
 h = 3
 
-button00 = tk.Button(window, width = w, height = h, command = button00Click, text = '新建資料庫')
+button00 = tk.Button(window, width = w, height = h, command = button00Click, text = '匯入生產資料')
 button00.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 
 #開啟資料庫按鈕
@@ -1234,7 +908,7 @@ button01_text = tk.StringVar()
 #button01 = tk.Button(window, textvariable = button01_text, command = lambda:button01Click(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
 button01 = tk.Button(window, textvariable = button01_text, width = w, height = h, command = lambda:button01Click())
 #button01 = tk.Button(window, command = xxxxxxx, text='選取檔案')
-button01_text.set("開啟資料庫")
+button01_text.set("匯出至Excel檔案")
 
 button02 = tk.Button(window, width = w, height = h, command = button02Click, text = '讀取資料庫資料')
 button02.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
@@ -1307,8 +981,21 @@ text1 = tk.Text(window, width = 100, height = 30)  # 放入多行輸入框
 text1.pack()
 text1.place(x = x_st + dx * 0, y = y_st + dy * 3 + 50)
 
-message = "尚未開啟資料庫"
+message = "匯入生產資料"
 main_message1.set(message)
 
 window.mainloop()
+
+
+"""
+
+    print('新建資料庫, 清除記憶體資料')
+    clear_all_data()
+
+    button01_text.set("開啟資料庫")
+    print('開啟資料庫, 清除記憶體資料')
+    clear_all_data()
+
+
+"""
 
