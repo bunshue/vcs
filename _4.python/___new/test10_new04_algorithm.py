@@ -527,37 +527,6 @@ print(bfs(graph, "A"))
 
 print("------------------------------------------------------------")  # 60個
 
-def dfs(graph, start, goal):
-    # 深度優先搜尋法
-    path = []  # 拜訪過的節點
-    stack = [start]  # 模擬堆疊
-    while stack:
-        node = stack.pop()  # pop堆疊
-        path.append(node)  # 加入已拜訪行列
-        if node == goal:  # 如果找到了
-            print("找到了")
-            return path
-        for n in graph[node]:  # 將相鄰節點放入佇列
-            stack.append(n)
-    return "找不到"
-
-
-graph = {
-    "A": ["D", "C", "B"],
-    "B": ["E"],
-    "C": ["F"],
-    "D": ["H", "G"],
-    "E": [],
-    "F": ["J", "I"],
-    "G": [],
-    "H": [],
-    "I": [],
-    "J": [],
-}
-print(dfs(graph, "A", "G"))
-
-print("------------------------------------------------------------")  # 60個
-
 def dijkstra(graph, start):
     visited = []
     index = start
@@ -1101,45 +1070,6 @@ print("商品組合 : ", items[len(item)][bag_weight])
 
 print("------------------------------------------------------------")  # 60個
 
-def traveling(W, wt, val):
-    # 動態規劃演算法
-    n = len(val)
-    table = [[0 for x in range(W + 1)] for x in range(n + 1)]  # 最初化表格
-    items = [[[] for x in range(W + 1)] for x in range(n + 1)]  # 最初化表格
-    for r in range(n + 1):  # 填入表格row
-        for c in range(W + 1):  # 填入表格column
-            if r == 0 or c == 0:
-                table[r][c] = 0
-            elif wt[r - 1] <= c:
-                cur = val[r - 1] + table[r - 1][c - wt[r - 1]]
-                cur_items = []
-                cur_items.append(item[r - 1])
-                if items[r - 1][c - wt[r - 1]]:
-                    cur_items += items[r - 1][c - wt[r - 1]]
-                pre = table[r - 1][c]
-                pre_items = items[r - 1][c]
-                if cur > pre:
-                    table[r][c] = cur
-                    items[r][c] = cur_items
-                else:
-                    table[r][c] = pre
-                    items[r][c] = pre_items
-            else:
-                table[r][c] = table[r - 1][c]
-                items[r][c] = items[r - 1][c]
-    return items, table[n][W]
-
-
-item = ["頤和園", "天壇", "故宮", "萬里長城", "圓明園"]
-value = [7, 6, 9, 9, 8]  # 旅遊點評分數
-weight = [1, 1, 2, 4, 1]  # 單項景點所需天數
-travel_weight = 4  # 總旅遊天數
-items, total_value = traveling(travel_weight, weight, value)
-print("旅遊點評總分 : ", total_value)
-print("旅遊景點組合 : ", items[len(item)][travel_weight])
-
-print("------------------------------------------------------------")  # 60個
-
 abc = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 encry_dict = {}
 front3 = abc[:3]
@@ -1222,149 +1152,6 @@ while not q.empty():
 
 print("------------------------------------------------------------")  # 60個
 
-class Stack:
-    def __init__(self):
-        self.my_stack = []
-
-    def my_push(self, data):
-        self.my_stack.append(data)
-
-    def my_pop(self):
-        return self.my_stack.pop()
-
-    def size(self):
-        return len(self.my_stack)
-
-    def isEmpty(self):
-        return self.my_stack == []
-
-    def cls(self):
-        del self.my_stack[:]
-
-
-stack = Stack()
-fruits = ["Grape", "Mango", "Apple"]
-for fruit in fruits:
-    stack.my_push(fruit)
-    print("將 %s 水果堆入堆疊" % fruit)
-print("堆疊有 %d 種水果" % stack.size())
-stack.cls()
-while not stack.isEmpty():
-    print(stack.my_pop())
-print("程式結束")
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Node:
-    def __init__(self, data=None):
-        # 建立二元樹的節點
-        self.data = data
-        self.left = None
-        self.right = None
-
-    def insert(self, data):
-        # 建立二元樹
-        if self.data:  # 如果根節點存在
-            if data < self.data:  # 插入值小於目前節點值
-                if self.left:
-                    self.left.insert(data)  # 遞迴呼叫往下一層
-                else:
-                    self.left = Node(data)  # 建立新節點存放資料
-            else:  # 插入值大於目前節點值
-                if self.right:
-                    self.right.insert(data)
-                else:
-                    self.right = Node(data)
-        else:  # 如果根節點不存在
-            self.data = data  # 建立根節點
-
-    def postorder(self):
-        # 後序列印
-        if self.left:  # 如果左子節點存在
-            self.left.postorder()  # 遞迴呼叫下一層
-        if self.right:  # 如果右子節點存在
-            self.right.postorder()  # 遞迴呼叫下一層
-        print(self.data)  # 列印
-
-    def depth(self):
-        current_depth = 0
-        if self.left:
-            current_depth = max(current_depth, self.left.depth())
-        if self.right:
-            current_depth = max(current_depth, self.right.depth())
-        return current_depth + 1
-
-
-num = 0
-tree = Node()  # 建立二元樹物件
-datas = [10, 5, 21, 9, 13, 28, 3, 4, 1, 17, 32]  # 建立二元樹數據
-for d in datas:
-    tree.insert(d)  # 分別插入數據
-print("所建的二元樹後序列印如下 : ")
-tree.postorder()  # 後序列印
-print("二元樹的深度 = ", tree.depth())
-
-print("------------------------------------------------------------")  # 60個
-
-
-class Heaptree:
-    def __init__(self):
-        self.heap = []  # 堆積樹串列
-        self.size = 0  # 堆積樹串列元素個數
-
-    def data_down(self, i):
-        # 如果節點值大於子節點值則資料與較小的子節點值對調
-        while (i * 2 + 2) <= self.size:  # 如果有子節點則繼續
-            mi = self.get_min_index(i)  # 取得較小值得子節點
-            if self.heap[i] > self.heap[mi]:  # 如果目前節點大於子節點
-                self.heap[i], self.heap[mi] = self.heap[mi], self.heap[i]
-            i = mi
-
-    def get_min_index(self, i):
-        # 傳回較小值的子節點索引
-        if i * 2 + 2 >= self.size:  # 只有一個左子節點
-            return i * 2 + 1  # 傳回左子節點索引
-        else:
-            if self.heap[i * 2 + 1] < self.heap[i * 2 + 2]:  # 如果左子節點小於右子節點
-                return i * 2 + 1  # True傳回左子節點索引
-            else:
-                return i * 2 + 2  # False傳回右子節點索引
-
-    def build_heap(self, mylist):
-        # 建立堆積樹
-        i = (len(mylist) // 2) - 1  # 從有子節點的節點開始處理
-        self.size = len(mylist)  # 得到串列元素個數
-        self.heap = mylist  # 初步建立堆積樹串列
-        while i >= 0:  # 從下層往上處理
-            self.data_down(i)
-            i = i - 1
-
-    def get_min(self):
-        min_ret = self.heap[0]
-        self.size -= 1
-        self.heap[0] = self.heap[self.size]
-        self.heap.pop()
-        self.data_down(0)
-        return min_ret
-
-
-h = [10, 21, 5, 9, 13, 28, 3]
-print("執行前普通串列   = ", h)
-obj = Heaptree()
-obj.build_heap(h)  # 建立堆積樹串列
-print("執行後堆積樹串列 = ", obj.heap)
-min = obj.get_min()
-print("所獲得的最小值   = ", min)
-print("執行後堆積樹串列 = ", obj.heap)
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
 
 
 
@@ -1488,3 +1275,9 @@ for i in range(len(program)):
     print("{0}:{1:7s} -- 使用次數 {2}".format(i + 1, program[i][0], program[i][1]))
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+

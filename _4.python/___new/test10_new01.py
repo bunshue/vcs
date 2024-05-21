@@ -6434,38 +6434,6 @@ for index, letter in myEnum:
 
 print("------------------------------------------------------------")  # 60個
 
-# 循環取值器
-
-
-class CycleIterator:
-    def __init__(self, data, max_times):
-        self.data = data
-        self.max_times = max_times
-        self.index = 0
-
-    def __next__(self):
-        if self.index >= self.max_times:
-            raise StopIteration
-        value = self.data[self.index % len(self.data)]
-        self.index += 1
-        return value
-
-
-class CycleList:
-    def __init__(self, data, max_times):
-        self.data = data
-        self.max_times = max_times
-
-    def __iter__(self):
-        return CycleIterator(self.data, self.max_times)
-
-
-clist = CycleList(["a", "b", "c"], 5)
-for c in clist:
-    print(c)
-
-print("------------------------------------------------------------")  # 60個
-
 # 產生器運算式
 
 
@@ -8155,30 +8123,6 @@ click_handler(on_click)
 hover_handler(on_hover)
 
 print("------------------------------------------------------------")  # 60個
-
-
-def timing_decorator(func):
-    def wrapper(*args, **kwargs):
-        start_time = time.perf_counter()  # 獲取函數開始執行的時間
-        result = func(*args, **kwargs)  # 調用原始函數
-        end_time = time.perf_counter()  # 獲取函數結束執行的時間
-        duration = end_time - start_time  # 計算函數執行時間
-        print(f"{func.__name__} 執行需 : {duration:.7f} 秒")
-        return result
-
-    return wrapper
-
-
-@timing_decorator
-def slow_function(duration):
-    time.sleep(duration)  # 使函數暫停指定的秒數
-
-
-# 調用裝飾器函數
-slow_function(3)  # 輸出 slow_function 執行需 : 3.000xxxx 秒
-
-print("------------------------------------------------------------")  # 60個
-
 
 def interest(interest_type, subject):
     """顯示興趣和主題"""
@@ -10758,32 +10702,6 @@ print(filter_df)
 
 print('------------------------------------------------------------')	#60個
 
-import datetime
-
-date = '20210311'
-date = datetime.datetime.strptime(date, '%Y%m%d')
-print(date.weekday())
-
-print('------------------------------------------------------------')	#60個
-
-import datetime
-
-start_date_str = "20210125"
-end_date_str = "20210201"
-
-start_date = datetime.datetime.strptime(start_date_str, '%Y%m%d')
-end_date = datetime.datetime.strptime(end_date_str, '%Y%m%d')
-
-totaldays = (end_date - start_date).days + 1
-dates = []
-for daynumber in range(totaldays):
-    date = (start_date + datetime.timedelta(days=daynumber))
-    if date.weekday() < 6:
-        dates.append(date.strftime('%Y%m%d'))
-print(dates)
-
-print('------------------------------------------------------------')	#60個
-
 def get_setting():    #←將「讀取設定檔」寫成函式, 可讓程式易讀易用
 	res = []     #←準備一個空串列來存放讀取及解析的結果
 	try:              # 使用 try 來預防開檔或讀檔錯誤
@@ -10887,7 +10805,6 @@ plt.show()
 """
 
 print("------------------------------------------------------------")  # 60個
-
 
 import requests
 
@@ -11508,33 +11425,20 @@ file.truncate(22)
 
 print(file.read())
 
-
 print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 """
 #按 ctrl + c 離開程式
-
-
-
 
 def wait_for_user_interrupt():
     while True:
         time.sleep(1)
         print("無限迴圈, 按 Ctrl + C 離開")
 
-
 try:
     wait_for_user_interrupt()
 except KeyboardInterrupt:
     sys.exit()  # When Ctrl-C is pressed, end the program.
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -11587,6 +11491,194 @@ except KeyboardInterrupt:
 
 print("------------------------------------------------------------")  # 60個
 
+"""
+各種建立資料的寫法
+
+"""
+
+import os
+import sys
+import time
+import random
+import numpy as np
+import pandas as pd
+
+print("------------------------------------------------------------")  # 60個
+
+print("range")
+
+N1 = 3
+N2 = 9
+STEP = 2
+
+a = range(N1)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+a = range(N1, N2)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+a = range(N1, N2, STEP)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+"""
+    range(101)可以產生一個0到100的整數序列。
+    range(1, 100)可以產生一個1到99的整數序列。
+    range(1, 100, 2)可以產生一個1到99的奇數序列，其中的2是步長，即數值序列的增量。
+"""
+
+
+print("使用np.linspace, 和range一樣")
+
+a = np.arange(N1)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+a = np.arange(N1, N2)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+a = np.arange(N1, N2, STEP)
+print(a)
+for _ in a:
+    print(_, end=" ")
+print()
+
+
+# 二維
+
+W = 640
+H = 480
+w = 160
+h = 160
+
+for y in range(0, H, h):
+    for x in range(0, W, w):
+        print(x, y, end="    ")
+print()
+
+print("------------------------------------------------------------")  # 60個
+
+print("使用np.linspace")
+
+N1 = 3
+N2 = 9
+N = 2
+
+x = np.linspace(N1, N2, N)  # 從N1到N2, 分成N個, 包含頭尾
+print(x)
+
+x = np.linspace(N1, N2)  # 若沒有給定N值, 則分成 50 個, 包含頭尾
+print(x)
+
+# np.linspace 若只給a b 則代表分成50點
+x = np.linspace(0, 2 * np.pi)
+print(x.shape)
+
+
+import numpy as np
+
+# 含頭尾共N個元素的陣列
+N = 11
+x = np.linspace(0, 10, 11)  # 建立含11個元素的陣列
+
+print("包含頭尾之linespace :", x)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+n = list(range(100))
+r = list(range(25))
+n = list(range(10)) * 10
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+for _ in range(10):
+    a = random.randint(3, 8)  # 唯一包含頭尾
+    print(a)
+
+print("------------------------------------------------------------")  # 60個
+
+W = 5
+H = 5
+nextCells = {}  # 字典
+for x in range(H):
+    for y in range(W):
+        if random.randint(0, 1) == 0:
+            nextCells[(x, y)] = "Y"
+        else:
+            nextCells[(x, y)] = "N"
+print(type(nextCells))
+print(nextCells)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("20位 靠右對齊")
+
+string = "abcdefg"
+print(string.rjust(20))
+
+number = 1234567
+print(repr(int(number)).rjust(20))
+
+print("4位 不對齊")
+for _ in range(20):
+    a = random.randint(0, 200)
+    print(repr(int(a)), end=" ")
+print()
+
+print("4位 靠左對齊")
+for _ in range(20):
+    a = random.randint(0, 200)
+    print(repr(int(a)).ljust(4), end="")
+print()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+year = 2023
+month = 3
+day = 11
+total = 123
+print(f"{year}年{month}月{day}日是{year}年的第{total}天")
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個

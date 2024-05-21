@@ -68,9 +68,9 @@ def run_pygame():
          if event.type == pygame.QUIT:  # 判斷事件的常數是否為QUIT常數
             running = False
    pygame.quit()
-'''
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+'''
 pygame_name = 'pygame 01 載入圖片'
 screen = init_pygame(pygame_name, white)
 
@@ -737,7 +737,7 @@ while not done:
 pygame.quit()
 
 print(points)
-'''
+
 print("------------------------------------------------------------")  # 60個
 print("畫圖畫字")
 print("------------------------------------------------------------")  # 60個
@@ -943,6 +943,114 @@ print("------------------------------------------------------------")  # 60個
 
 # pygame 存圖命令
 # pygame.image.save(screen, "tmp_save_pic.png")
+
+print("------------------------------------------------------------")  # 60個
+
+
+'''
+
+
+
+        
+
+print("------------------------------------------------------------")  # 60個
+
+#基本架構
+import pygame
+
+pygame.init()  #啟動Pygame
+
+screen = pygame.display.set_mode((640, 320))  #建立繪圖視窗
+pygame.display.set_caption("基本架構")  #繪圖視窗標題
+
+background = pygame.Surface(screen.get_size())  #建立畫布
+background = background.convert()
+background.fill((255,255,255))  #畫布為白色
+screen.blit(background, (0,0))  #在繪圖視窗繪製畫布
+
+pygame.display.update()  #更新繪圖視窗
+running = True
+while running:  #無窮迴圈
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:  #使用者按關閉鈕
+            running = False
+pygame.quit()  #關閉繪圖視窗
+
+
+print("------------------------------------------------------------")  # 60個
+
+import pygame
+
+pygame.init()
+
+screen = pygame.display.set_mode((300, 300))
+pygame.display.set_caption("基本繪圖")
+
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill((255,255,255))
+
+pygame.draw.circle(background, (0,0,0), (150,150), 130, 4)
+pygame.draw.circle(background, (0,0,255), (100,120), 25, 0)
+pygame.draw.circle(background, (0,0,255), (200,120), 25, 0)
+pygame.draw.ellipse(background, (255,0,255),[135, 130, 30, 80], 0)
+pygame.draw.arc(background, (255,0,0), [80, 130, 150, 120], 3.4, 6.1, 9)
+screen.blit(background, (0,0))
+
+pygame.display.update()
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+pygame.quit()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((640, 320))
+pygame.display.set_caption("動畫基本架構")
+
+background = pygame.Surface(screen.get_size())
+background = background.convert()
+background.fill((255,255,255))
+
+clock = pygame.time.Clock()  #建立時間元件
+
+running = True
+while running:
+    clock.tick(30)  #每秒執行30次
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    screen.blit(background, (0,0))  #清除繪圖視窗
+
+    pygame.display.update()  #更新繪圖視窗
+pygame.quit()  #關閉繪圖視窗
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+        
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+        
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

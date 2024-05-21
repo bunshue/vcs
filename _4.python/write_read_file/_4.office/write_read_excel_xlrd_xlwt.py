@@ -74,7 +74,7 @@ print('------------------------------------------------------------')	#60個
 
 import xlrd
 
-filename_r = 'data/python_ReadWrite_EXCEL2.xlsx'
+filename_r = 'data/python_ReadWrite_EXCEL1.xlsx'
 
 data = xlrd.open_workbook(filename_r)
 print('這個excel檔案的工作表頁數 :', len(data.sheets()))
