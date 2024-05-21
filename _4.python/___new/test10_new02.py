@@ -288,6 +288,69 @@ print('末26碼', string[-26:])
 
 print("------------------------------------------------------------")  # 60個
 
+import sys
+
+# 匯入 指定目錄下的模組
+sys.path.append(r'C:\_git\vcs\_4.python\import_module')
+
+from module_my import say_hello
+
+say_hello()
+
+# 以下為模組 \data\income_tax.py 的內容：
+
+#字典
+TAX_RATE = {
+    0: 0.1,
+    10000: 0.2,
+    50000: 0.3,
+    100000: 0.4,
+    500000: 0.5
+    }
+
+print(type(TAX_RATE))
+for income, rate in TAX_RATE.items():
+    print(income, rate)
+
+print('------------------------------------------------------------')	#60個
+
+# 函式選單模組
+
+def menu(**options):
+    def menu_selector():
+        option_string = '/'.join(options)
+        while True:
+            choice = input(f'選擇項目 ({option_string}): ')
+            if choice in options:
+                return options[choice]
+                break
+            print('選項不存在!')
+    return menu_selector
+
+# 主程式
+#from menu import menu
+
+def func_a():
+    return '執行函式 A'
+
+def func_b():
+    return '執行函式 B'
+
+def func_x():
+    return '執行函式 X'
+
+my_menu = menu(a=func_a, b=func_b, x=func_x)
+
+func = my_menu()
+print(func())
+
+print('------------------------------------------------------------')	#60個
+
+
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 

@@ -26,8 +26,13 @@ font_filename = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'	#設定�
 mask_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_mask/heart.png'
 mask = np.array(Image.open(mask_filename))  #設定文字雲形狀 
 wc = wordcloud.WordCloud(background_color="white",mask=mask,font_path=font_filename)  #背景顏色預設黑色,改為白色 
+
+""" some fail
 wc.generate_from_frequencies(frequencies=diction)  #產生文字雲
 
 plt.imshow(wc)
 plt.axis("off")
 plt.show()
+"""
+
+print('done')

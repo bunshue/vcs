@@ -1,6 +1,5 @@
 from random import randint, randrange
 
-
 # 產生某個區間的整數亂數
 def numRand(x, y):
     cout = 1  # 計數器
@@ -20,3 +19,6 @@ def numRand2(x, y):
         result.append(number)
         cout += 1
     return result
+
+def say_hello():
+    print('hello')

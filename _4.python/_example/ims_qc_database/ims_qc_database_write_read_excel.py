@@ -1,6 +1,8 @@
 """
 讀寫 Excel 檔案, 使用 openpyxl
 
+給ims_qc_database測試用
+
 
 """
 
@@ -10,7 +12,7 @@ import time
 import openpyxl
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print('openpyxl test 01 通用訊息')
 
 filename_r = 'data/python_ReadWrite_EXCEL1.xlsx'
@@ -229,10 +231,45 @@ s2.title = "new title222"  # 修改工作表bb 的名稱為 new title222
 filename_w = 'tmp_excel_openpyxl01.xlsx'
 workbook.save(filename_w)  # 儲存檔案
 print("建立 xlsx OK, 檔案 : " + filename_w)
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+print('建立 excel檔案 openpyxl test 10')
+
+print('拷貝template.xlsx來用')
+
+filename_r = 'template/template.xlsx'
+
+print("讀取 xlsx, 檔案 : " + filename_r)
+workbook = openpyxl.load_workbook(filename_r)
+print('所有工作表名稱 :', workbook.sheetnames)
+
+# 取得第 0 個工作表
+sheet = workbook.worksheets[0]
+
+"""
+# 修改工作表的名稱
+sheet.title = "Animal"
+
+# 以儲存格位置寫入資料, 直接修改/設定工作表內的資料
+sheet['A1'] = '中文名'
+sheet['B1'] = '英文名'
+sheet['C1'] = '體重'
+sheet['D1'] = '全名'
+sheet['E1'] = '區域：¢402除菌區  £403包裝區  £404組裝區  £405燒機測試區  £406電信測試區'
+"""
+
+filename_w = 'tmp_excel_openpyxl03ccccddd.xlsx'
+workbook.save(filename_w)  # 儲存檔案
+print("建立 xlsx OK, 檔案 : " + filename_w)
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-print('openpyxl test 01 建立excel檔案 xlsx a')
+print('openpyxl test 01')
+print('建立excel檔案 xlsx a')
 
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
@@ -297,7 +334,7 @@ print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
-print('openpyxl test 01 建立excel檔案 xlsx b')
+print('建立 excel檔案 openpyxl test 10')
 
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 

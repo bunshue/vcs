@@ -52,10 +52,11 @@ cv.circle(image, ( 10, 501), 5, (255, 255, 255), thickness)
 thickness = 2
 sv = svm.getUncompressedSupportVectors()
 
+""" wrong
 for i in range(sv.shape[0]):
     cv.circle(image, (sv[i,0], sv[i,1]), 6, (128, 128, 128), thickness)
 ## [show_vectors]
-
+"""
 cv.imwrite('result.png', image) # save the image
 
 cv.imshow('SVM Simple Example', image) # show it to the user

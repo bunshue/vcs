@@ -1,15 +1,11 @@
-#!/usr/bin/env python
-
 import cv2 as cv
 import numpy as np
 
 SZ=20
 bin_n = 16 # Number of bins
 
-
 affine_flags = cv.WARP_INVERSE_MAP|cv.INTER_LINEAR
 
-## [deskew]
 def deskew(img):
     m = cv.moments(img)
     if abs(m['mu02']) < 1e-2:
@@ -18,9 +14,7 @@ def deskew(img):
     M = np.float32([[1, skew, -0.5*SZ*skew], [0, 1, 0]])
     img = cv.warpAffine(img,M,(SZ, SZ),flags=affine_flags)
     return img
-## [deskew]
 
-## [hog]
 def hog(img):
     gx = cv.Sobel(img, cv.CV_32F, 1, 0)
     gy = cv.Sobel(img, cv.CV_32F, 0, 1)
@@ -31,12 +25,8 @@ def hog(img):
     hists = [np.bincount(b.ravel(), m.ravel(), bin_n) for b, m in zip(bin_cells, mag_cells)]
     hist = np.hstack(hists)     # hist is a 64 bit vector
     return hist
-## [hog]
 
 img = cv.imread('digits.png',0)
-if img is None:
-    raise Exception("we need the digits.png image from samples/data here !")
-
 
 cells = [np.hsplit(row,100) for row in np.vsplit(img,50)]
 
@@ -58,7 +48,7 @@ svm.setC(2.67)
 svm.setGamma(5.383)
 
 svm.train(trainData, cv.ml.ROW_SAMPLE, responses)
-svm.save('svm_data.dat')
+svm.save('tmp_svm_data.dat')
 
 ######     Now testing      ########################
 
@@ -70,4 +60,5 @@ result = svm.predict(testData)[1]
 #######   Check Accuracy   ########################
 mask = result==responses
 correct = np.count_nonzero(mask)
-print(correct*100.0/result.size)
+print("準確度 :", correct*100.0/result.size)
+
