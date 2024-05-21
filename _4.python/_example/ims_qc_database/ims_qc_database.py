@@ -13,6 +13,21 @@ ims_qc_database
 
 匯出資料完畢後，將此.csv檔移到別的資料夾
 
+T 060201 01 環境溫濕度管制紀錄表_B (1月).xlsx
+
+
+每個csv檔匯出的csv_data檢查一次日期
+
+若是未曾出現的年月excel檔，
+則建立一空白之excel檔，裡面有8個頁箋(其實就是複製template檔)
+
+
+T 060201 01 環境溫濕度管制紀錄表_B (1月).xlsx
+
+
+402除菌區數據紀錄_211201_000000
+
+
 
 最後要匯出的資料:
 
@@ -28,6 +43,8 @@ import os
 import sys
 import csv
 import time
+import glob
+import shutil
 import openpyxl
 import tkinter as tk
 from tkinter.filedialog import askopenfile #tk之openFileDialog
@@ -46,8 +63,8 @@ stage_no = [
 ]
 
 stage = -1
-tablename = ''
-filename = ''
+tablename = ""
+excel_filename = ""
 sheetname = '1月402' # 1月402 1月4021月4021月4021月4021月402
 
 dummy_data = 'abcd'
@@ -66,7 +83,7 @@ print('------------------------------------------------------------')	#60個
 def process_csv_file1(filename, source):
     global stage
     global tablename
-    global filename
+    #global filename
     global sheetname
     
     print("aaa :", filename)
@@ -135,7 +152,7 @@ def save_data_in_list2(datas):
 def process_csv_file2(filename):
     global stage
     global tablename
-    global filename
+    #global filename
     global sheetname
 
     #with open(filename, newline = '') as csvfile:
@@ -170,7 +187,7 @@ def process_csv_file2(filename):
 def process_csv_file3(filename):
     global stage
     global tablename
-    global filename
+    #global filename
     global sheetname
 
     print("process_csv_file3")
@@ -216,8 +233,6 @@ def import_csv_data():
 
     csv_data = list() #重新計數csv資料
 
-    import glob, shutil
-
     source_dir = 'QC/csv'
     target_dir = 'QC/csv_old'
 
@@ -261,9 +276,22 @@ def show_csv_data():
     for i in range(0, length):
         print(csv_data[i])
 
-def export_data_to_excel0(filename, pagename, data):
+def export_data_to_excel0(csv_data):
     print('真的匯出資料到excel')
-    print('a')
+    print('取得excel檔名 :', excel_filename)
+
+    length = len(csv_data)
+    print('共有資料 :', length, '筆')
+    if length > 0:
+        for _ in csv_data:
+            print(_)
+
+    print(csv_data[0])
+    print(csv_data[1])
+    print(type(csv_data[1]))
+    print(csv_data[1][0])
+    print(csv_data[1][1])
+
     workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
     # 取得第 0 個工作表
     sheet = workbook.worksheets[0]
@@ -298,13 +326,33 @@ def export_data_to_excel0(filename, pagename, data):
     workbook.save(filename_w)  # 儲存檔案
     print("建立 xlsx OK, 檔案 : " + filename_w)
 
-def export_data_to_excel():
+def check_excel_filename(data):
+    print(type(data))
+    print(data)
+    year, month, day = data.split('/')
+    print(year)
+    print(month)
+    print(day)
+    filename = "T 060201 01 環境溫濕度管制紀錄表_B (%d月).xlsx" % int(month)
 
+    if os.path.exists(filename):
+        print(filename, "檔案存在")
+    else:
+        print(filename, "檔案不存在, 建立一個")
+        shutil.copy("template/template.xlsx", filename)  # 檔案複製
+    
+    return filename
+
+def export_data_to_excel():
+    global excel_filename
     length = len(csv_data)
-    print(length)
+    print('共有資料 :', length, '筆')
     if length > 0:
         for _ in csv_data:
             print(_)
+
+    excel_filename = check_excel_filename(csv_data[1][0])
+    print('取得excel檔名 :', excel_filename)
 
     print(csv_data[0])
     print(csv_data[1])
@@ -320,23 +368,11 @@ def export_data_to_excel():
         text1.insert('end', message)
         main_message2.set(message)
     else:
-        # 開啟輸出的 csv 檔案
-        """
-    
-        filename_w = '匯出資料範例.csv'
-        with open(filename_w, 'w', newline = '') as csvfile:
-            # 建立 csv 檔寫入物件
-            writer = csv.writer(csvfile)
-
-            # 寫入二維串列資料
-            writer.writerows(csv_data)
-
-        """
         message = '匯出資料 完成'
         print(message)
         text1.insert('end', message)
 
-        #export_data_to_excel0(filename, pagename, data):
+        export_data_to_excel0(csv_data)
 
 
 def button00Click():
@@ -487,8 +523,6 @@ def precheck_csv_data():
     #2. 有舊資料 要考慮序號是否
     #3. 第一站資料必定要先存在
     
-    import glob, shutil
-
     source_dir = 'QC/csv'
     target_dir = 'QC/csv_old'
 
