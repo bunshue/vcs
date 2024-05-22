@@ -65,7 +65,7 @@ stage_no = [
 stage = -1
 tablename = ""
 excel_filename = ""
-sheetname = '1月402' # 1月402 1月4021月4021月4021月4021月402
+sheetname = '1月402' # 1月402 1月402 1月402 1月402 1月402 1月402
 
 dummy_data = 'abcd'
 
@@ -203,8 +203,8 @@ def process_csv_file3(filename):
     print('len = ', length)
 
     save_data_in_list2(datas)
-
-    print(datas)
+    #print(datas)
+    
     data_column = len(datas[0])
     print('data_column = ', data_column)
 
@@ -277,88 +277,125 @@ def show_csv_data():
         print(csv_data[i])
 
 def export_data_to_excel0(csv_data):
+    global sheetname
     print('真的匯出資料到excel')
     print('取得excel檔名 :', excel_filename)
 
     length = len(csv_data)
     print('共有資料 :', length, '筆')
+    """
     if length > 0:
         for _ in csv_data:
             print(_)
+    """
+    print(sheetname)
+    print(sheetname)
+    print(sheetname)
+    print(sheetname)
 
-    print(csv_data[0])
-    print(csv_data[1])
-    print(type(csv_data[1]))
-    print(csv_data[1][0])
-    print(csv_data[1][1])
+    workbook = openpyxl.load_workbook(excel_filename)
+    print('所有工作表名稱 :', workbook.sheetnames)
 
-    workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
-    # 取得第 0 個工作表
-    sheet = workbook.worksheets[0]
+    names = workbook.sheetnames  # 讀取 excel檔案 裏所有工作表名稱
+    print('所有工作表名稱 :', names)
+    
+    # 取得 指定的 工作表
+    print(sheetname)
+    print(sheetname)
+    print(sheetname)
+    sheet = workbook[sheetname]
 
-    # 修改工作表的名稱
-    sheet.title = "Animal"
+    if length > 0:
+        for cc in csv_data:
+            #print(cc)
+            time = cc[1][:2]
+            if time == "09" or time == "13" or time == "17":
+                print(cc)
+                day = int(cc[0][-2:])
+                print(day)
+                data1 = str(cc[4])#溫度
+                data2 = str(cc[2])#濕度
+                data3 = str(cc[3])#靜壓
+                print(data1, data2, data3)
+                if time == "09":
+                    sheet.cell(8, 2+day).value = str(data1)
+                    sheet.cell(9, 2+day).value = str(data2)
+                    sheet.cell(10, 2+day).value = str(data3)
+                elif time == "13":
+                    sheet.cell(11, 2+day).value = str(data1)
+                    sheet.cell(12, 2+day).value = str(data2)
+                    sheet.cell(13, 2+day).value = str(data3)
+                elif time == "17":
+                    sheet.cell(14, 2+day).value = str(data1)
+                    sheet.cell(15, 2+day).value = str(data2)
+                    sheet.cell(16, 2+day).value = str(data3)
+    workbook.save(excel_filename)  # 儲存檔案
 
-    # 以儲存格位置寫入資料
-    sheet['A1'] = '中文名'
-    sheet['B1'] = '英文名'
-    sheet['C1'] = '體重'
-    sheet['D1'] = '全名'
-
-    # 以串列寫入資料
-    animal01 = ['鼠', 'mouse', '3']
-    animal02 = ['牛', 'ox', '48']
-    animal03 = ['虎', 'tiger', '33']
-    animal04 = ['兔', 'rabbit', '8']
-    sheet.append(animal01)  # 逐筆添加到最後一列
-    sheet.append(animal02)  # 逐筆添加到最後一列
-    sheet.append(animal03)  # 逐筆添加到最後一列
-    sheet.append(animal04)  # 逐筆添加到最後一列
-
-    #設定格式
-    #sheet = workbook["Animal"]
-    sheet["A1"].fill = openpyxl.styles.PatternFill(fill_type="solid", fgColor="FFFF00")  # 設定 f1 儲存格的背景樣式
-    sheet["B1"].font = openpyxl.styles.Font(name="Arial", color="ff0000", size=30, bold=True)  # 設定 g1 儲存格的文字樣式
-    sheet["C1"].font = openpyxl.styles.Font(name="Arial", color="00ff00", size=30, bold=True)  # 設定 g1 儲存格的文字樣式
-    sheet["D1"].font = openpyxl.styles.Font(name="Arial", color="0000ff", size=30, bold=True)  # 設定 g1 儲存格的文字樣式
-
-    filename_w = 'tmp_excel_openpyxl01.xlsx'
-    workbook.save(filename_w)  # 儲存檔案
-    print("建立 xlsx OK, 檔案 : " + filename_w)
-
-def check_excel_filename(data):
-    print(type(data))
-    print(data)
-    year, month, day = data.split('/')
+def check_excel_filename(data1, data2):
+    global sheetname
+    print(type(data1))
+    print(data1)
+    year, month, day = data1.split('/')
     print(year)
     print(month)
     print(day)
     filename = "T 060201 01 環境溫濕度管制紀錄表_B (%d月).xlsx" % int(month)
+    room = data2[:3]
+    sheetname = "%d月"%int(month)+room
 
     if os.path.exists(filename):
         print(filename, "檔案存在")
     else:
         print(filename, "檔案不存在, 建立一個")
         shutil.copy("template/template.xlsx", filename)  # 檔案複製
-    
+        if month != "01":
+            print('需要改sheet名')
+            year_month = "年月：     20%s      年        %02d        月" % (str(year), int(month))
+            print(year_month)
+           
+            workbook = openpyxl.load_workbook(filename)
+
+            sheet0 = workbook.worksheets[0]
+            sheet0.title = "%d月" % int(month)+"402"
+            sheet0.cell(4,1).value = year_month
+            sheet1 = workbook.worksheets[1]
+            sheet1.title = "%d月" % int(month)+"403"
+            sheet1.cell(4,1).value = year_month
+            sheet2 = workbook.worksheets[2]
+            sheet2.title = "%d月" % int(month)+"404"
+            sheet2.cell(4,1).value = year_month
+            sheet3 = workbook.worksheets[3]
+            sheet3.title = "%d月" % int(month)+"405"
+            sheet3.cell(4,1).value = year_month
+            sheet4 = workbook.worksheets[4]
+            sheet4.title = "%d月" % int(month)+"406"
+            sheet4.cell(4,1).value = year_month
+            sheet5 = workbook.worksheets[5]
+            sheet5.title = "%d月" % int(month)+"407"
+            sheet5.cell(4,1).value = year_month
+            sheet6 = workbook.worksheets[6]
+            sheet6.title = "%d月" % int(month)+"408"
+            sheet6.cell(4,1).value = year_month
+            sheet7 = workbook.worksheets[7]
+            sheet7.title = "%d月" % int(month)+"409"
+            sheet7.cell(4,1).value = year_month
+
+            workbook.save(filename)  # 儲存檔案
     return filename
 
 def export_data_to_excel():
     global excel_filename
+    global sheetname
     length = len(csv_data)
+    """
     print('共有資料 :', length, '筆')
     if length > 0:
         for _ in csv_data:
             print(_)
+    """
 
-    excel_filename = check_excel_filename(csv_data[1][0])
+    excel_filename = check_excel_filename(csv_data[1][0], csv_data[0][2])
     print('取得excel檔名 :', excel_filename)
-
-    print(csv_data[0])
-    print(csv_data[1])
-    print(type(csv_data[1]))
-    print(csv_data[1][0])
-    print(csv_data[1][1])
 
     length = len(csv_data)
     print('資料長度 : ', length)

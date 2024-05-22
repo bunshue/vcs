@@ -1,6 +1,17 @@
 """
 讀寫 Excel 檔案, 使用 openpyxl
 
+python讀取/修改excel
+
+pip3 install openpyxl
+
+專有名詞
+
+workbook（活頁簿）：也就是一個excel檔案
+worksheet（工作表）：一個excel可以有很多個工作表，目前正在觀看或處理的工作表又稱作「活動中的工作表（active sheet）」
+欄（column）：工作表中的直欄，以A、B、C…代表
+行（row）：工作表中的橫列，以1、2、3…代表
+儲存格（cell）：工作表中的每一個都是一個儲存格
 
 """
 
@@ -552,123 +563,19 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-#aggregate_orders
-
-import openpyxl
-
-categorys = ((0,""),(10,"POLO衫"), (11,"禮服襯衫"), (12,"休閒襯衫"), \
-            (13,"T恤"), (15,"開襟羊毛衫"),(16,"毛衣"),(17,"吸汗上衣"), \
-            (18,"連帽T"))
-sizes = ("代碼","分類名稱","S","M","L","LL","XL")
-#製作二維列表
-# 下面的程式不行，因為元素的列表會是相同的物件
-#order_amount= [[0]*len(sizes)] * len(categorys)
-order_amount= [[0]*len(sizes) for i in range(len(categorys))]
-
-for j in range(len(sizes)):
-    order_amount[0][j] = sizes[j]
-for i in range(1,len(categorys)):
-    order_amount[i][0] = categorys[i][0]
-    order_amount[i][1] = categorys[i][1]
-#print(order_amount)   
-
-wb = openpyxl.load_workbook("data\ordersList.xlsx")
-sh = wb.active
-for row in range(2, sh.max_row + 1):
-    category = sh["I" + str(row)].value
-    size = sh["L" + str(row)].value
-    amount = sh["M" + str(row)].value
-    for i in range(1,len(categorys)):
-        if category == order_amount[i][0]:
-            for j in range(2,len(sizes)):
-                if size == order_amount[0][j]:
-                    order_amount[i][j] += amount
-
-
-owb = openpyxl.Workbook()
-osh = owb.active
-row = 1
-for order_row in order_amount:
-    col = 1
-    size_sum = 0 
-    for order_col in order_row:
-        osh.cell(row, col).value = order_col
-        if  row > 1 and col > 2: 
-            #print(order_col)
-            size_sum += order_col
-        col += 1
-    if row == 1:
-        osh.cell(row, col).value =  "合計"
-    else:
-        osh.cell(row, col).value =  size_sum
-    row += 1
-
-owb.save("tmp_orders_aggregate.xlsx")
 '''
-print("------------------------------------------------------------")  # 60個
-
-import openpyxl
-
-def print_header():
-    osh["A1"].value = "負責人"
-    osh["B1"].value = "數量"
-    osh["C1"].value = "金額"
-    osh["D1"].value = "客戶"
-    osh["E1"].value = "數量"
-    osh["F1"].value = "金額"
-
-wb = openpyxl.load_workbook("data\salesList.xlsx")
-sh = wb.active
-sales_data = {}
-for row in range(1, sh.max_row + 1):
-    person = sh["E" + str(row)].value
-    customer = sh["C" + str(row)].value
-    quantity = sh["J" + str(row)].value
-    amount = sh["L" + str(row)].value
-    sales_data.setdefault(person, {"name": sh["F" + str(row)].value , "quantity": 0, "amount":0})
-    sales_data[person].setdefault(customer, {"name": sh["D" + str(row)].value , "quantity": 0, "amount":0})
-    sales_data[person][customer]["quantity"] += int(quantity)
-    sales_data[person][customer]["amount"] += int(amount)
-    sales_data[person]["quantity"] += int(quantity)
-    sales_data[person]["amount"] += int(amount)
-    #print(sales_data)
-
-owb = openpyxl.Workbook()
-osh = owb.active
-print_header()
-
-row = 2
-for person_data in sales_data.values():
-    osh["A" + str(row)].value = person_data["name"]
-    osh["B" + str(row)].value = person_data["quantity"]
-    osh["C" + str(row)].value = person_data["amount"]
-    for customer_data in person_data.values():
-        #print(customer_data)
-        if isinstance(customer_data,dict):
-            for item in customer_data.values():
-                osh["D" + str(row)].value = customer_data["name"]
-                osh["E" + str(row)].value = customer_data["quantity"]
-                osh["F" + str(row)].value = customer_data["amount"]
-            row +=1 
-
-osh["F" + str(row)].value =  "=SUM(F2:F" + str(row-1) + ")"
-osh["E" + str(row)].value =  "合計"
-
-owb.save("tmp_sales_aggregate222.xlsx")
-
-print("------------------------------------------------------------")  # 60個
-
 import pathlib  # 標準函式庫
 import openpyxl # 外部函式庫　pip install openpyxl
 import csv      # 標準函式庫
 
 lwb = openpyxl.Workbook()           #業績一覽表活頁簿
 lsh = lwb.active                    #業績一覽工作表
+
 list_row = 1
 path = pathlib.Path("data\sales")    #指定相對路徑
 for pass_obj in path.iterdir():
     if pass_obj.match("*.xlsx"):
+        print(pass_obj)
         wb = openpyxl.load_workbook(pass_obj)
         for sh in wb:
             for dt_row in range(9,19):
@@ -692,7 +599,7 @@ for pass_obj in path.iterdir():
                     lsh.cell(list_row, 13).value = sh.cell(dt_row, 7).value #備註                                      
                     list_row += 1
 
-lwb.save("tmp_salesList555555.xlsx")
+lwb.save("tmp_salesList3333.xlsx")
 
 
 
@@ -718,3 +625,578 @@ for row in range(2, 7):  # 第 2~6 ROW
     print()
 
 """
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("新增空白excel")
+
+filename_w = "tmp_excel_openpyxl11.xlsx"
+
+workbook = openpyxl.Workbook()
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("新增工作表並指定放置位置")
+
+filename_w = "tmp_excel_openpyxl12.xlsx"
+
+workbook = openpyxl.Workbook()
+workbook.create_sheet("Mysheet1", 1) # 新增工作表並指定放置位置
+workbook.create_sheet("Mysheet0", 0)
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("讀取excel檔案每個工作表的名稱")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+print(workbook.sheetnames)
+
+print(workbook.active)
+print(workbook.active.title)
+
+print("------------------------------------------------------------")  # 60個
+
+print("修改工作表名稱")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_a.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+sheet = workbook['exam1']
+sheet.title = '第一次月考'
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("修改工作表顏色")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_b.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+sheet = workbook.active
+sheet.sheet_properties.tabColor = "ff0000"
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("隱藏/取消隱藏工作表")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_c.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+sheet = workbook['exam2']
+sheet.sheet_state = 'hidden'
+
+# sheet = workbook['BBB']
+# sheet.sheet_state = 'visible'
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("修改目前工作表")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+print('excel活動工作表： ', workbook.active)
+
+workbook.active = 0
+print('excel活動工作表： ', workbook.active)
+
+
+
+from openpyxl.utils import get_column_letter, column_index_from_string
+
+workbook = openpyxl.load_workbook(filename_r)
+
+print('目前工作表： ', workbook.active.title)
+
+workbook.active = workbook['exam2']
+print('目前工作表： ', workbook.active.title)
+
+print("------------------------------------------------------------")  # 60個
+
+print("複製工作表")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_d_copy.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+sheet = workbook['exam2']
+target = workbook.copy_worksheet(sheet)
+target.title = 'new_exam2'
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("刪除工作表")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_e.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+sheet = workbook['exam1']
+workbook.remove(sheet)
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("讀取工作表所有內容")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+workbook.active = 0
+ws = workbook.active
+print('excel活動工作表： ', ws)
+
+
+for row in ws:
+    for cell in row:
+        print(cell.value)
+
+print()
+print('D1內容： ', ws['D1'].value)
+
+
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+ws = workbook.active
+
+range = ws['A1': 'B6']
+
+for a, b in range:
+    print("{0} {1}".format(a.value, b.value))
+print()
+""" fail
+for a, b, c in ws[ws.dimensions]:
+    print(a.value, b.value, c.value)
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("寫入儲存格")
+"""
+所有的修改都只是針對記憶體中的excel檔
+只有save才會把修改的內容寫到儲存媒體上
+"""
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_f.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+workbook.active = 0
+ws = workbook.active
+
+print('B2內容： ', ws['B2'].value)
+
+ws['B2'].value =  20
+print('B2內容： ', ws['B2'].value)
+
+ws.cell(column=2, row=3).value = 999
+
+workbook.save(filename_w) # 若給予不同檔名代表另存新檔的意思
+
+print("------------------------------------------------------------")  # 60個
+
+print("顯示最大、最小 欄數、列數")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+workbook.active = 0
+ws = workbook.active
+
+print('儲存格 欄名', ws['A1'].column)
+print('儲存格 列名', ws['A1'].row)
+print('儲存格名', ws['A1'].coordinate)
+
+print('工作表有資料最大欄數', ws.max_column)
+print('工作表有資料最小欄數', ws.min_column)
+print('工作表有資料最大列數', ws.max_row)
+print('工作表有資料最小列數', ws.min_row)
+
+print("------------------------------------------------------------")  # 60個
+
+print("循欄列印 ＆ 循列列印")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r, data_only=True) # 要excel開啟才可以看到值，否則會顯示None
+
+workbook.active = 0
+ws = workbook.active
+
+for cell in list(ws.columns)[1]:
+    print(cell.value)
+
+print()
+for cell in list(ws.rows)[1]:
+    print(cell.value)
+
+print("------------------------------------------------------------")  # 60個
+
+print("欄名 vs 欄數 轉換")
+""" fail
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+
+from openpyxl.utils import get_column_letter, column_index_from_string
+
+workbook = openpyxl.load_workbook(filename_r, data_only=False) # 要excel開啟才可以看到值，否則會顯示None
+
+workbook.active = 0
+ws = workbook.active
+
+for i in range(1, ws.max_column+1):
+    print(i, ' = ', get_column_letter(i))
+
+print("A = ", column_index_from_string('A'))
+print("B = ", column_index_from_string('B'))
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("讀取指定區域內容")
+
+from openpyxl.utils import get_column_letter, column_index_from_string
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r, data_only=False) # 要excel開啟才可以看到值，否則會顯示None
+
+workbook.active = 0
+ws = workbook.active
+
+for row in ws['A2':'D5']:
+    for cell in row:
+        print(cell.value, end=' ')
+    print()
+
+print("------------------------------------------------------------")  # 60個
+
+print("新增工作表 ＆ 修改工作表名稱")
+
+from openpyxl.utils import get_column_letter, column_index_from_string
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_g.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r, data_only=False) # 要excel開啟才可以看到值，否則會顯示None
+
+workbook.active = 0
+ws = workbook.active
+
+ws.title = 'hello'
+workbook.create_sheet('新工作表')
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("新增、修改、刪除工作表")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_h.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+workbook.active = 0
+ws = workbook.active
+
+# 新增工作表，若名稱已經存在則原本名稱之後加數字
+workbook.create_sheet(title='amos') 
+
+# 修改工作表
+workbook['amos'].title = 'carol'
+
+# 刪除工作表
+workbook.remove(workbook['carol'])
+
+workbook.save(filename_w)
+
+
+
+
+
+workbook = openpyxl.load_workbook(filename_r)
+
+ws = workbook['exam1']
+
+for cell in ws['C']: # 讀取C欄所有資料，並列印出來
+    print(cell.value)
+    
+for cell in ws['2']: # 讀取第2列所有資料，並列印出來
+    print(cell.value)
+
+print("------------------------------------------------------------")  # 60個
+
+print("合併、解除合併儲存格")
+""" fail
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_i.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+
+ws = workbook.active
+# ws.merge_cells('A5:D9')
+# ws.unmerge_cells('A5:D9')
+
+# or equivalently
+# ws.merge_cells(start_row=5, start_column=1, end_row=9, end_column=4)
+ws.unmerge_cells(start_row=5, start_column=1, end_row=9, end_column=4)
+
+workbook.save(filename_w)
+"""
+print("------------------------------------------------------------")  # 60個
+
+print("插入圖片")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_j_pic.xlsx"
+
+from openpyxl.drawing.image import Image
+
+workbook = openpyxl.load_workbook(filename_r)
+ws = workbook.active
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+img = Image(filename)
+ws.add_image(img, 'B5') # 把圖貼在B5
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("建立大綱並折疊")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_k.xlsx"
+
+from openpyxl.drawing.image import Image
+
+workbook = openpyxl.load_workbook(filename_r)
+ws = workbook.active
+
+ws.column_dimensions.group('A','D', hidden=True)
+ws.row_dimensions.group(1,10, hidden=True)
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("改變字體 ＆ 加上註解")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_l.xlsx"
+
+from openpyxl.styles import Font
+from openpyxl.comments import Comment
+
+workbook = openpyxl.load_workbook(filename_r)
+ws = workbook.active
+
+ws['A1'].font = Font(name='Courier', size=24, color='FF0000')
+ws['A2'].comment = Comment(text="這是註解", author="Amos")
+
+print(ws['A2'].comment.text)
+print(ws['A2'].comment.author)
+
+ws['A2'].comment = None # 取消註解
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("新增/刪除 欄、列")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_m.xlsx"
+
+from openpyxl.styles import Font
+
+workbook = openpyxl.load_workbook(filename_r)
+ws = workbook.active
+
+# ws.insert_rows(1)
+# ws.insert_cols(1, 2)
+ws.delete_rows(1, 2)
+ws.delete_cols(1, 2)
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("畫統計圖(openpyxl範例)")
+
+#官方範例
+
+from openpyxl import Workbook
+from openpyxl.chart import BarChart, Series, Reference
+
+workbook = Workbook(write_only=True)
+ws = workbook.create_sheet()
+
+rows = [
+    ('Number', 'Batch 1', 'Batch 2'),
+    (2, 10, 30),
+    (3, 40, 60),
+    (4, 50, 70),
+    (5, 20, 10),
+    (6, 10, 40),
+    (7, 50, 30),
+]
+
+
+for row in rows:
+    ws.append(row)
+
+
+chart1 = BarChart()
+chart1.type = "col"
+chart1.style = 10
+chart1.title = "Bar Chart"
+chart1.y_axis.title = 'Test number'
+chart1.x_axis.title = 'Sample length (mm)'
+
+data = Reference(ws, min_col=2, min_row=1, max_row=7, max_col=3)
+cats = Reference(ws, min_col=1, min_row=2, max_row=7)
+chart1.add_data(data, titles_from_data=True)
+chart1.set_categories(cats)
+chart1.shape = 4
+ws.add_chart(chart1, "A10")
+
+from copy import deepcopy
+
+chart2 = deepcopy(chart1)
+chart2.style = 11
+chart2.type = "bar"
+chart2.title = "Horizontal Bar Chart"
+
+ws.add_chart(chart2, "G10")
+
+
+chart3 = deepcopy(chart1)
+chart3.type = "col"
+chart3.style = 12
+chart3.grouping = "stacked"
+chart3.overlap = 100
+chart3.title = 'Stacked Chart'
+
+ws.add_chart(chart3, "A27")
+
+
+chart4 = deepcopy(chart1)
+chart4.type = "bar"
+chart4.style = 13
+chart4.grouping = "percentStacked"
+chart4.overlap = 100
+chart4.title = 'Percent Stacked Chart'
+
+ws.add_chart(chart4, "G27")
+
+filename_w = "tmp_excel_openpyxl13_EXCEL1_bar.xlsx"
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("鎖定、解除鎖定")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_o.xlsx"
+
+from openpyxl.styles import Alignment
+
+workbook = openpyxl.load_workbook(filename_r)
+ws = workbook.active
+
+# ws.freeze_panes = 'B2'
+ws.freeze_panes = None
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("設定日期格式")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_p.xlsx"
+
+import datetime
+
+workbook = openpyxl.load_workbook(filename_r)
+
+sheet = workbook['exam1']
+sheet['A1'] = datetime.datetime(2010, 7, 21)
+
+# sheet['A1'].number_format = 'yyyy-mm-dd h:mm:ss'
+# sheet['A1'].number_format = 'yyyy-mm-dd'
+sheet['A1'].number_format = 'dd-mm-yyyy'
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("設定公式")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_formula.xlsx"
+
+import datetime
+
+workbook = openpyxl.load_workbook(filename_r)
+
+sheet = workbook['exam2']
+#sheet['A1'] = 6
+#sheet['A2'] = 10
+sheet['F1'] = '總分'
+sheet["F2"] = "=SUM(B2:E2)"
+sheet["F3"] = "=SUM(B3:E3)"
+sheet["F4"] = "=SUM(B4:E4)"
+sheet["F5"] = "=SUM(B5:E5)"
+sheet["F6"] = "=SUM(B6:E6)"
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("移動資料")
+
+filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_w = "tmp_excel_openpyxl13_EXCEL1_r.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r)
+ws = workbook.active
+
+ws.move_range("B4:E6", rows=1, cols=4)#區塊向下移1 向右移4
+
+workbook.save(filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+

@@ -22,8 +22,8 @@ _4.python/__code/Python實戰聖經/ch14/*
 _4.python/__code/Python實戰聖經/ex/*
 _4.python/sqlite/ims_sql/QC_debug/*
 _4.python/sqlite/ims_sql/QC_debug/*.*
-_4.python/sqlite/ims_sql2/QC_debug/*
-_4.python/sqlite/ims_sql2/QC_debug/*.*
+_4.python/_example/ims_qc_database/QC_debug/*
+_4.python/_example/ims_qc_database/QC_debug/*.*
 
 # C 相關產出之檔案
 *.so
