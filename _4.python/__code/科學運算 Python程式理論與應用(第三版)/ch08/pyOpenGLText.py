@@ -1,10 +1,13 @@
-# -*- coding:utf-8 -*-
-# file: pyOpenGLText.py
-#
+"""
+pip install pyopengl
+
+"""
+
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import sys
+
 class OpenGLWindow:
 	def __init__(self, width = 640, height = 480, title = 'PyOpenGL'):	# 起始化
 		glutInit(sys.argv)						# 傳遞指令行參數

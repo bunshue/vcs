@@ -11,114 +11,117 @@
 """
 import sys
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('顯示目前的Python系統編碼')
+print("顯示目前的Python系統編碼")
 print(sys.getdefaultencoding())
 
 import locale
-print('取得目前Windows作業系統設定的編碼')
+
+print("取得目前Windows作業系統設定的編碼")
 print(locale.getpreferredencoding())
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-original_string = '金詢初海花浪花情真'
-print('原始字串 :', original_string)
+original_string = "金詢初海花浪花情真"
+print("原始字串 :", original_string)
 
-print('用 big5 編碼')
-encoded_bytes = original_string.encode(encoding='big5') # 有無encoding=皆可
+print("用 big5 編碼")
+encoded_bytes = original_string.encode(encoding="big5")  # 有無encoding=皆可
 print(encoded_bytes)
 
-print('用 big5 解碼')
-decoded_string = encoded_bytes.decode(encoding='big5')
+print("用 big5 解碼")
+decoded_string = encoded_bytes.decode(encoding="big5")
 print(decoded_string)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-print('用 gbk 編碼')
-encoded_bytes = original_string.encode('gbk')
+print("用 gbk 編碼")
+encoded_bytes = original_string.encode("gbk")
 print(encoded_bytes)
 
-print('用 gbk 解碼')
-decoded_string = encoded_bytes.decode('gbk')
+print("用 gbk 解碼")
+decoded_string = encoded_bytes.decode("gbk")
 print(decoded_string)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-print('用 utf-8 編碼')
-encoded_bytes = original_string.encode('utf-8')#有無-皆可, 大小寫皆可
+print("用 utf-8 編碼")
+encoded_bytes = original_string.encode("utf-8")  # 有無-皆可, 大小寫皆可
 print(encoded_bytes)
 
-print('用 utf-8 解碼')
-decoded_string = encoded_bytes.decode('UTF-8')
+print("用 utf-8 解碼")
+decoded_string = encoded_bytes.decode("UTF-8")
 print(decoded_string)
 
-print('------------------------------')	#30個
+print("------------------------------")  # 30個
 
-original_string = '金詢初海花浪花情真'
-print('原始字串 :', original_string)
+original_string = "金詢初海花浪花情真"
+print("原始字串 :", original_string)
 
-encoded_bytes = repr(original_string).encode('utf-8') + b'\0'
+encoded_bytes = repr(original_string).encode("utf-8") + b"\0"
 print(type(encoded_bytes))
 print(encoded_bytes)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('從 你好 變成 斕疑 的原因')
+print("從 你好 變成 斕疑 的原因")
 
-original_string = '你好'
-print('原始字串 :', original_string)
+original_string = "你好"
+print("原始字串 :", original_string)
 
-print('用 簡中 編碼 ')
-encoded_bytes = original_string.encode('gb2312')
+print("用 簡中 編碼 ")
+encoded_bytes = original_string.encode("gb2312")
 print(encoded_bytes)
 
-print('用 正中 解碼')
-decoded_string = encoded_bytes.decode('big5')
+print("用 正中 解碼")
+decoded_string = encoded_bytes.decode("big5")
 print(decoded_string)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('把怪怪的字解譯出來')
+print("把怪怪的字解譯出來")
 
-original_string = '扂砑腕善衄壽unicode腔垀衄砆牉訧蹋,掀:unicode 2.0 3.0 4.0 梗摯崋欴晤鎢.gb,big-5,gbk,脹脹.坳蠅眳潔腔梗摯薊炵..秪峈扂猁勤森輛俴惆豢,眕扂植懂羶衄勤晤鎢衄徹旃噶,腕悝.褫岆婓厙奻梑祥善涴笱砆牉腔恅梒..洷咡籵徹蠟夔腕善.郅郅!'
-print('原始字串 :', original_string)
+original_string = "扂砑腕善衄壽unicode腔垀衄砆牉訧蹋,掀:unicode 2.0 3.0 4.0 梗摯崋欴晤鎢.gb,big-5,gbk,脹脹.坳蠅眳潔腔梗摯薊炵..秪峈扂猁勤森輛俴惆豢,眕扂植懂羶衄勤晤鎢衄徹旃噶,腕悝.褫岆婓厙奻梑祥善涴笱砆牉腔恅梒..洷咡籵徹蠟夔腕善.郅郅!"
+print("原始字串 :", original_string)
 
-print('用 正中 編碼 ')
-encoded_bytes = original_string.encode('big5')
+print("用 正中 編碼 ")
+encoded_bytes = original_string.encode("big5")
 print(encoded_bytes)
 
-print('用 簡中 解碼')
-decoded_string = encoded_bytes.decode('gb2312')
+print("用 簡中 解碼")
+decoded_string = encoded_bytes.decode("gb2312")
 print(decoded_string)
 
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print('chr(x) 取得整數x的ASCII編碼值')
+print("chr(x) 取得整數x的ASCII編碼值")
 num = 0x41
-print(chr(num)) # 輸出數值num的字元
+print(chr(num))  # 輸出數值num的字元
 
 for i in range(0x30, 120):
     c = chr(i)
-    print(c, end = '')
+    print(c, end="")
 print()
 
-print('ord(x) 取得字元x的Unicode編碼值')
+print("ord(x) 取得字元x的Unicode編碼值")
 
-original_string = '你'
+original_string = "你"
 cc = ord(original_string)
 print(cc)
 
-original_string = '你'
-print('Unicode編碼後(10進位) :', ord(original_string))
-print('Unicode編碼後(16進位) :', hex(ord(original_string)))
+original_string = "你"
+print("Unicode編碼後(10進位) :", ord(original_string))
+print("Unicode編碼後(16進位) :", hex(ord(original_string)))
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-_b85alphabet = (b"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                b"abcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~")
+_b85alphabet = (
+    b"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    b"abcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~"
+)
 
 _b85chars = [bytes((i,)) for i in _b85alphabet]
 print(_b85chars)
@@ -127,9 +130,9 @@ print()
 _b85chars2 = [(a + b) for a in _b85chars for b in _b85chars]
 print(_b85chars2)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-command1 = 'abcde'
+command1 = "abcde"
 print(type(command1))
 print(command1)
 
@@ -137,7 +140,7 @@ command2 = command1.encode()
 print(type(command2))
 print(command2)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ many
 import codecs
@@ -287,7 +290,7 @@ for enc in ALL_CJKENCODINGS:
     code = '# coding: {}\n'.format(enc)
     print(code)
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 x1 = 97
@@ -308,6 +311,7 @@ print("------------------------------------------------------------")  # 60個
 
 # ROT13 加密法
 
+
 def rot13(word):
     output = []
     for c in word.lower():
@@ -321,58 +325,61 @@ def rot13(word):
 print(rot13("apple"))
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+
 
 def read_file(filename, encoding):
-    fp =  open(filename, encoding = encoding)
+    fp = open(filename, encoding=encoding)
     data = fp.read()
     fp.close()
     print(data)
 
-print('\nbig5 = cp950 ------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__text/Compressor.c'
-encoding = 'big5'
+print(
+    "\nbig5 = cp950 ------------------------------------------------------------"
+)  # 60個
+
+filename = "C:/_git/vcs/_1.data/______test_files1/__text/Compressor.c"
+encoding = "big5"
 read_file(filename, encoding)
 
-print('\nunicode utf-8 ------------------------------------------------------------')	#60個
+print(
+    "\nunicode utf-8 ------------------------------------------------------------"
+)  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__text/Form1.cs.txt'
-encoding = 'utf-8'
+filename = "C:/_git/vcs/_1.data/______test_files1/__text/Form1.cs.txt"
+encoding = "utf-8"
 read_file(filename, encoding)
 
-print('\nshift-jis = cp932 ------------------------------------------------------------')	#60個
+print(
+    "\nshift-jis = cp932 ------------------------------------------------------------"
+)  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__text/jap/饩Ⓚ丗钡冦冦葢轿瘅.txt'
-encoding = 'shift-jis'
+filename = "C:/_git/vcs/_1.data/______test_files1/__text/jap/饩Ⓚ丗钡冦冦葢轿瘅.txt"
+encoding = "shift-jis"
 read_file(filename, encoding)
 
-print('\ngb2312 = cp936 ------------------------------------------------------------')	#60個
+print(
+    "\ngb2312 = cp936 ------------------------------------------------------------"
+)  # 60個
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/__text/sc/Compressor.ori.c'
-encoding = 'gb2312'
+filename = "C:/_git/vcs/_1.data/______test_files1/__text/sc/Compressor.ori.c"
+encoding = "gb2312"
 read_file(filename, encoding)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 整理python檔案
@@ -412,17 +419,10 @@ for filename in filenames:
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
-
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
@@ -430,4 +430,3 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-

@@ -1,7 +1,5 @@
-# -*- coding:utf-8 -*-
-# file: pythonasp.py
-#
 import os														# 匯入os模組
+
 print('''
 <html>
 <head>

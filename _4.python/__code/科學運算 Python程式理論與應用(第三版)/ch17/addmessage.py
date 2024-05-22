@@ -1,9 +1,7 @@
-# -*- coding:utf-8 -*-
-# file: addmessage.py
-#
 import cgi
 import sqlite3											# 匯入sqlite3模組
 import datetime
+
 form = cgi.FieldStorage()
 name = form["name"].value
 mail = form["email"].value

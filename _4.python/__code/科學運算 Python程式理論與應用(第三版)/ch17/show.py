@@ -1,7 +1,5 @@
-# -*- coding:utf-8 -*-
-# file: PySqlite.py
-#
 import sqlite3											# 匯入sqlite3模組
+
 con = sqlite3.connect('message')						# 連線到資料庫
 cur = con.cursor()										# 獲得資料庫游標, 'GBK')
 cur.execute('select * from message')								# 執行SQL敘述

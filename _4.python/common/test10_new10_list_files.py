@@ -1078,34 +1078,33 @@ print("列出返回工作資料夾 ", currentdir)
 
 print("------------------------------------------------------------")  # 60個
 
-print('測試 os.path.join')
+print("測試 os.path.join")
 
-files = ['filename1.py', 'filename2.py', 'filename3.py']
+files = ["filename1.py", "filename2.py", "filename3.py"]
 for file in files:
-    print(os.path.join('C:\\_git\\vcs\\_1.data\\______test_files3\\DrAP_test6', file))   
+    print(os.path.join("C:\\_git\\vcs\\_1.data\\______test_files3\\DrAP_test6", file))
 
 
+print("4個參數")
+print(os.path.join("C:\\", "_git", "ttttt1", "python04_string.py"))
 
-print('4個參數')
-print(os.path.join('C:\\','_git','ttttt1','python04_string.py'))
+print("3個參數")
+print(os.path.join("C:\\_git", "ttttt1", "python04_string.py"))
 
-print('3個參數')
-print(os.path.join('C:\\_git','ttttt1','python04_string.py'))
+print("2個參數")
+print(os.path.join("C:\\_git\\ttttt1", "python04_string.py"))
 
-print('2個參數')
-print(os.path.join('C:\\_git\\ttttt1','python04_string.py'))
-
-foldername = 'C:/_git/vcs/_1.data/______test_files1'
-filename = 'picture1.jpg'
+foldername = "C:/_git/vcs/_1.data/______test_files1"
+filename = "picture1.jpg"
 
 print(foldername)
 print(filename)
 r = os.path.join(foldername, filename)
 print("os.path.join(foldername, filename) =", r)
 
-foldername1 = 'C:/_git/vcs/_1.data/______test_files1'
-foldername2 = 'new_folder'
-filename = 'picture1.jpg'
+foldername1 = "C:/_git/vcs/_1.data/______test_files1"
+foldername2 = "new_folder"
+filename = "picture1.jpg"
 
 print(foldername1)
 print(foldername2)
@@ -1117,18 +1116,18 @@ print("os.path.join(foldername, filename) =", r)
 
 print("------------------------------------------------------------")  # 60個
 
-print('用 os.path.getsize 取得 檔案 大小')
+print("用 os.path.getsize 取得 檔案 大小")
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 print(filename, ":", os.path.getsize(filename))
 
-print('用 os.path.getsize 取得 資料夾 大小, fail, 所以不能用這個方法取得資料夾大小')
+print("用 os.path.getsize 取得 資料夾 大小, fail, 所以不能用這個方法取得資料夾大小")
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
 print(foldername, ":", os.path.getsize(foldername))
 
 print("------------------------------------------------------------")  # 60個
 
 
-print('判斷真假 ST')
+print("判斷真假 ST")
 
 filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 foldername = "C:/_git/vcs/_1.data/______test_files3/DrAP_test6"
@@ -1159,25 +1158,18 @@ print("os.path.isabs:", os.path.isabs(filename))
 print("os.path.isfile:", os.path.isfile(filename))
 print("os.path.isdir:", os.path.isdir(filename))
 
-print("是絕對路徑 = ", os.path.isabs('ch14_4.py'))
-print("是絕對路徑 = ", os.path.isabs('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
+print("是絕對路徑 = ", os.path.isabs("ch14_4.py"))
+print("是絕對路徑 = ", os.path.isabs("C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py"))
 
-print("是資料夾 = ", os.path.isdir('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
-print("是資料夾 = ", os.path.isdir('C:\\_git\\vcs\\_1.data\\______test_files3'))
+print("是資料夾 = ", os.path.isdir("C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py"))
+print("是資料夾 = ", os.path.isdir("C:\\_git\\vcs\\_1.data\\______test_files3"))
 
-print("是檔案 = ", os.path.isfile('C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py'))
-print("是檔案 = ", os.path.isfile('C:\\_git\\vcs\\_1.data\\______test_files3'))
+print("是檔案 = ", os.path.isfile("C:\\_git\\vcs\\_1.data\\______test_files3\\ch14_4.py"))
+print("是檔案 = ", os.path.isfile("C:\\_git\\vcs\\_1.data\\______test_files3"))
 
-print('判斷真假 SP')
+print("判斷真假 SP")
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
 
 
 """ 新進待測試
@@ -1292,7 +1284,6 @@ print(stats)
 """
 
 
-
 """
 檔名操作
 
@@ -1306,10 +1297,7 @@ import sys
 import stat
 
 
-
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
 # python import module : sys, os
@@ -1317,10 +1305,11 @@ print('------------------------------------------------------------')	#60個
 
 import os
 import shutil
-cur_path = os.path.dirname(__file__) # 取得目前路徑
+
+cur_path = os.path.dirname(__file__)  # 取得目前路徑
 print("現在路徑：" + cur_path)
 
-'''
+"""
 #拷貝檔案
 destfile = 'C:/_git/vcs/_1.data/______test_files2/' + "ccccc.py"
 print("拷貝檔案 " + destfile)
@@ -1329,56 +1318,58 @@ shutil.copy("test10_new12_file2.py",destfile )  # 檔案複製
 print("拷貝檔案 " + destfile)
 destfile = 'C:/_git/vcs/_1.data/______test_files2/' + "ccccc2.py"
 shutil.copyfile('test10_new12_file2.py', destfile)  # 檔案複製
-'''
+"""
 
-#目錄拷貝
+# 目錄拷貝
 import shutil
-source_dir = 'C:/_git/vcs/_1.data/______test_files1/__pic/_book'
-dest_dir = 'C:/_git/vcs/_1.data/______test_files2/_book'
-print('cp -r ' + source_dir + ' ' + dest_dir)
-#shutil.copytree(source_dir, dest_dir)  # 目錄複製
 
-'''
+source_dir = "C:/_git/vcs/_1.data/______test_files1/__pic/_book"
+dest_dir = "C:/_git/vcs/_1.data/______test_files2/_book"
+print("cp -r " + source_dir + " " + dest_dir)
+# shutil.copytree(source_dir, dest_dir)  # 目錄複製
+
+"""
 print("刪除目錄, 直接刪除, 不會放入資源回收筒")
 import shutil
 shutil.rmtree("C:\\dddddddddd\\aaa" )  # 刪除目錄
-'''
+"""
 
-#重新命名檔案
-#os.rename("foo.txt", "foo2.txt")
-#刪除檔案
-#os.remove("foo2.txt");
+# 重新命名檔案
+# os.rename("foo.txt", "foo2.txt")
+# 刪除檔案
+# os.remove("foo2.txt");
 
 print("mkdir")
-#os.mkdir("test_python_dir")
+# os.mkdir("test_python_dir")
 
 print("chdir")
-#os.chdir("test_python_dir")
+# os.chdir("test_python_dir")
 
-filename_r = 'C:/_git/vcs/_1.data/______test_files1/article2.txt'
+filename_r = "C:/_git/vcs/_1.data/______test_files1/article2.txt"
 print("檔案名稱 : ", os.path.getmtime(filename_r))
 
 import os.path
+
 filesize = os.path.getsize(filename_r)
-print("filesize : " , filesize)
+print("filesize : ", filesize)
 
 print("檔案時間 : ", os.path.getmtime(filename_r))
 import time
+
 print("檔案時間 : ", time.ctime(os.path.getmtime(filename_r)))
 
 print("檔案是否存在 : ", os.path.isfile(filename_r))
 
 
-
 import os
+
 filename = os.path.abspath("test10_new10.py")
-if os.path.exists(filename): #檢查檔案是否存在
+if os.path.exists(filename):  # 檢查檔案是否存在
     print("完整路徑名稱：" + filename)
-    print("檔案大小：" , os.path.getsize(filename))
+    print("檔案大小：", os.path.getsize(filename))
 
 
-
-'''
+"""
 print("測試mkdir")
 import os
 foldername = '__temp/tmpDir'
@@ -1393,60 +1384,59 @@ if not os.path.exists(foldername):
     os.mkdir(foldername)
 else:
     print(foldername + "已經存在!")   
-'''
+"""
 
 import os
+
 filename = "myFile.txt"
 if os.path.exists(filename):
     os.remove(filename)
 else:
-    print(filename + "檔案未建立!")   
+    print(filename + "檔案未建立!")
 
 import os.path
 
-print('目前檔案:', __file__)
+print("目前檔案:", __file__)
 
-cur_path=os.path.dirname(__file__) # 取得目前目錄路徑
-print('現在目錄路徑:', cur_path)
+cur_path = os.path.dirname(__file__)  # 取得目前目錄路徑
+print("現在目錄路徑:", cur_path)
 
-filename=os.path.abspath("ospath.py")
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = os.path.abspath("ospath.py")
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-if os.path.exists(filename):   
-    print('完整路徑名稱:', filename)
-    print('檔案大小:', os.path.getsize(filename))
+if os.path.exists(filename):
+    print("完整路徑名稱:", filename)
+    print("檔案大小:", os.path.getsize(filename))
 
-    basename=os.path.basename(filename)
-    print('最後的檔案或路徑名稱:', basename)
-    
-    dirname=os.path.dirname(filename)
-    print('目前檔案目錄路徑:', dirname) 
-    
-    print('是否為目錄:', os.path.isdir(filename))
-    
-    fullpath,fname=os.path.split(filename)
-    print('目錄路徑:', fullpath)
-    print('檔名:', fname)
-    
-    Drive,fpath=os.path.splitdrive(filename)
-    print('磁碟機:', Drive)
-    print('路徑名稱:', fpath)   
-    
+    basename = os.path.basename(filename)
+    print("最後的檔案或路徑名稱:", basename)
+
+    dirname = os.path.dirname(filename)
+    print("目前檔案目錄路徑:", dirname)
+
+    print("是否為目錄:", os.path.isdir(filename))
+
+    fullpath, fname = os.path.split(filename)
+    print("目錄路徑:", fullpath)
+    print("檔名:", fname)
+
+    Drive, fpath = os.path.splitdrive(filename)
+    print("磁碟機:", Drive)
+    print("路徑名稱:", fpath)
+
     fullpath = os.path.join(fullpath + "\\" + fname)
-    print('組合路徑: ', fullpath)
+    print("組合路徑: ", fullpath)
 else:
-    print('檔案不存在')
+    print("檔案不存在")
 
 
-
-
-if os.path.exists(filename+'.png'):
-    ans = input('此檔案已存在，要覆寫嗎？(y/n)')
-    if ans != 'y' and ans != 'Y':
+if os.path.exists(filename + ".png"):
+    ans = input("此檔案已存在，要覆寫嗎？(y/n)")
+    if ans != "y" and ans != "Y":
         exit(1)
-   
-    
-'''
+
+
+"""
 filename = '__temp/tmppic_new'
 
 filename, ext = filename.split('.')
@@ -1454,33 +1444,32 @@ if os.path.exists(filename+'_wm.png'):
     ans = input('此檔案已存在，要覆寫嗎？(y/n)')
     if ans != 'y' and ans != 'Y':
         exit(1)
-'''
+"""
 
-print('拷貝檔案')
+print("拷貝檔案")
 
 imageno = 1
 for f in allfiles:
-  print('全檔名 : ' + f)
-  dirname, filename = f.split('\\')
-  print('資料夾 : ' + dirname)
-  print('簡檔名 : ' + filename)
+    print("全檔名 : " + f)
+    dirname, filename = f.split("\\")
+    print("資料夾 : " + dirname)
+    print("簡檔名 : " + filename)
 
-  mainname, extname = filename.split('.')
+    mainname, extname = filename.split(".")
 
-  print('前檔名 : ' + mainname)
-  print('副檔名 : ' + extname)
+    print("前檔名 : " + mainname)
+    print("副檔名 : " + extname)
 
-  targetfolder = 'C:/_git/vcs/_1.data/______test_files2'
-  targetfile = targetfolder + '/' + str(imageno) + '.' + extname
+    targetfolder = "C:/_git/vcs/_1.data/______test_files2"
+    targetfile = targetfolder + "/" + str(imageno) + "." + extname
 
-  print('新檔名 : ' + targetfile)
-  
-  shutil.copyfile(f, targetfile)  #會直接覆蓋舊檔
-  imageno += 1
+    print("新檔名 : " + targetfile)
+
+    shutil.copyfile(f, targetfile)  # 會直接覆蓋舊檔
+    imageno += 1
 
 
-
-'''
+"""
 target_dir = source_dir + "output"
 
 print("目標資料夾 : " + target_dir)
@@ -1498,13 +1487,10 @@ for f in allfiles:
   targetfile = target_dir + '/' + str(imageno) + '.' + extname
   shutil.copyfile(f, targetfile)
   imageno += 1
-'''
+"""
 
 
-
-
-
-'''
+"""
 import os
 #異常處理
 #刪除目錄
@@ -1520,21 +1506,21 @@ if not os.path.exists(source_dir):
 	print("I can't find the specified directory.")
 	exit(1)
 
-'''
+"""
 
 
 print(os.curdir)
 
 
-'''
+"""
 dirname = 'New Folder'
 try:
   os.mkdir(dirname)
 except OSError as dirname:
   print("can't make slave directory", dirname, ":", dirname)
-'''
+"""
 
-'''
+"""
 dirname = 'New Foldercccc'
 print('如果資料夾不存在  建立之')
 ## Create the win32com\gen_py directory.
@@ -1544,28 +1530,29 @@ if not os.path.isdir(dirname):
     os.mkdir(dirname)
 else:
     print('資料夾已存在, 無法再建立')
-'''    
-
+"""
 
 
 import os
 
-testfiles = os.listdir('C:/_git/vcs/_1.data/______test_files1/__RW/_dicom')
+testfiles = os.listdir("C:/_git/vcs/_1.data/______test_files1/__RW/_dicom")
 
-#簡檔名
-testfiles = [x for x in testfiles if x.endswith('dcm')]
+# 簡檔名
+testfiles = [x for x in testfiles if x.endswith("dcm")]
 
-#全檔名
-testfiles = [os.path.join('C:/_git/vcs/_1.data/______test_files1/__RW/_dicom', x) for x in testfiles]
+# 全檔名
+testfiles = [
+    os.path.join("C:/_git/vcs/_1.data/______test_files1/__RW/_dicom", x)
+    for x in testfiles
+]
 
 for dcmfile in testfiles:
     print(dcmfile)
 
 
-
 import os
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
 file, ext = os.path.splitext(filename)
 
@@ -1578,9 +1565,10 @@ print(base)
 fnfilter = os.path.basename
 print(fnfilter)
 
-#os.rename(filename, backup)
+# os.rename(filename, backup)
 
 import os
+
 this_dir = os.path.dirname(__file__)
 print(__file__)
 print(this_dir)
@@ -1591,7 +1579,7 @@ print(cwd)
 aa = os.chdir(cwd)
 print(aa)
 
-dirname = 'C:/_git/vcs/_4.python'
+dirname = "C:/_git/vcs/_4.python"
 cc = os.chdir(dirname)
 print(cc)
 
@@ -1601,27 +1589,24 @@ import sys
 isympy_path = os.path.abspath(__file__)
 isympy_dir = os.path.dirname(isympy_path)
 sympy_top = os.path.split(isympy_dir)[0]
-sympy_dir = os.path.join(sympy_top, 'sympy')
+sympy_dir = os.path.join(sympy_top, "sympy")
 
 if os.path.isdir(sympy_dir):
-    #sys.path.insert(0, sympy_top)
-    print('is dir')
+    # sys.path.insert(0, sympy_top)
+    print("is dir")
 
-#print(__path__[0])
+# print(__path__[0])
 
 
 print("取得目前python檔案的絕對路徑")
 realpath = os.path.realpath(__file__)
 
-#print(os.listdir(cache.dirname))
+# print(os.listdir(cache.dirname))
 
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import re
 import os
@@ -1631,43 +1616,45 @@ import platform
 import shutil
 
 
-print('---- 基本設定 --------------------------------------------------------')	#60個
+print("---- 基本設定 --------------------------------------------------------")  # 60個
 
 filename = __file__
-print('本檔長檔名', __file__)
-print('本檔長檔名 : ', filename)
+print("本檔長檔名", __file__)
+print("本檔長檔名 : ", filename)
 
-foldername = 'C:/_git/vcs/_1.data/______test_files2/'
+foldername = "C:/_git/vcs/_1.data/______test_files2/"
 
-print('---- 判斷檔案或資料夾 is exists --------------------------------------------------------')	#60個
+print(
+    "---- 判斷檔案或資料夾 is exists --------------------------------------------------------"
+)  # 60個
 
-file_or_folder_name = filename  #檔案或資料夾皆可
+file_or_folder_name = filename  # 檔案或資料夾皆可
 
 if os.path.exists(file_or_folder_name):
-    print('檔案或資料夾 : ', filename, '存在')
+    print("檔案或資料夾 : ", filename, "存在")
 else:
-    print('檔案或資料夾 : ', filename, '不 存在')
+    print("檔案或資料夾 : ", filename, "不 存在")
 
 if not os.path.exists(file_or_folder_name):
-    print('檔案或資料夾 : ', filename, '不 存在')
+    print("檔案或資料夾 : ", filename, "不 存在")
 else:
-    print('檔案或資料夾 : ', filename, '存在')
+    print("檔案或資料夾 : ", filename, "存在")
 
 if os.path.isdir(file_or_folder_name):
-    print(filename, '是 資料夾')
+    print(filename, "是 資料夾")
 
 if not os.path.isdir(file_or_folder_name):
-    print('資料夾不存在')
+    print("資料夾不存在")
 
 if os.path.isfile(file_or_folder_name):
-    print(filename, '是 檔案')
+    print(filename, "是 檔案")
 
 if os.path.islink(file_or_folder_name):
-    print(filename, '是 連結')
+    print(filename, "是 連結")
 
-#--------------------- new
+# --------------------- new
 
-'''
+"""
     os.remove(file)
     os.rmdir(dir)
     os.remove(file)
@@ -1691,32 +1678,36 @@ installer_name = os.path.abspath(installer_name)
     
 
 
-'''
+"""
 
 
-print('---- 長檔名 轉 短檔名 basename() --------------------------------------------------------')	#60個
+print(
+    "---- 長檔名 轉 短檔名 basename() --------------------------------------------------------"
+)  # 60個
 
-print('長檔名 轉 短檔名 basename()')
+print("長檔名 轉 短檔名 basename()")
 short_filename = os.path.basename(filename)
-print('短檔名 : ', short_filename)
+print("短檔名 : ", short_filename)
 
-print('副檔名', short_filename[-3:])
+print("副檔名", short_filename[-3:])
 
-print('---- 取得檔案/資料夾的絕對位置 abspath() --------------------------------------------------------')	#60個
+print(
+    "---- 取得檔案/資料夾的絕對位置 abspath() --------------------------------------------------------"
+)  # 60個
 
-print('取得檔案/資料夾的絕對位置 abspath()')
+print("取得檔案/資料夾的絕對位置 abspath()")
 long_filename = os.path.abspath(filename)
-print('長檔名(絕對位置)', long_filename)
+print("長檔名(絕對位置)", long_filename)
 
-print('取得檔案/資料夾的絕對位置 abspath()')
+print("取得檔案/資料夾的絕對位置 abspath()")
 long_foldername = os.path.abspath(foldername)
-print('長資料夾名(絕對位置)', long_foldername)
+print("長資料夾名(絕對位置)", long_foldername)
 
-print('取得檔案/資料夾的絕對位置 abspath()')
+print("取得檔案/資料夾的絕對位置 abspath()")
 long_foldername = os.path.abspath("../..")
-print('本檔長資料夾(絕對位置)', long_foldername)
+print("本檔長資料夾(絕對位置)", long_foldername)
 
-'''
+"""
 補兩個狀況
 
 filename = 'xxx.py'
@@ -1728,192 +1719,192 @@ long_filename = os.path.abspath(filename)
 print('長檔名(絕對位置)', long_filename)
 
 
-'''
+"""
 
-print('---- 取得所在的資料夾 dirname() --------------------------------------------------------')	#60個
+print(
+    "---- 取得所在的資料夾 dirname() --------------------------------------------------------"
+)  # 60個
 
-print('取得所在的資料夾 dirname()')
+print("取得所在的資料夾 dirname()")
 long_foldername = os.path.dirname(filename)
-print('本檔長資料夾(絕對位置)', long_foldername)
+print("本檔長資料夾(絕對位置)", long_foldername)
 
-print('---- 連結資料夾 join(A, B) --------------------------------------------------------')	#60個
+print(
+    "---- 連結資料夾 join(A, B) --------------------------------------------------------"
+)  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-excecdir = 'aaaaaa'
-executable = os.path.join('ppppp', "Python")
+excecdir = "aaaaaa"
+executable = os.path.join("ppppp", "Python")
 print(executable)
 
-print('join')
-resdir = os.path.join('bbbb', "Resources")
+print("join")
+resdir = os.path.join("bbbb", "Resources")
 print(resdir)
 
-print('join')
-libdir = os.path.join('aaaa', "Frameworks")
+print("join")
+libdir = os.path.join("aaaa", "Frameworks")
 print(libdir)
 
 mainprogram = os.path.join(resdir, "idlemain.py")
 print(mainprogram)
 
 
-fpath = 'aaaaaaaaaaa'
+fpath = "aaaaaaaaaaa"
 correctfile = os.path.join(os.getcwd(), fpath)
 
 correctfile = os.path.normpath(correctfile)
 
-ccc = os.path.join(os.getcwd(), 'ziptest2dir')
+ccc = os.path.join(os.getcwd(), "ziptest2dir")
 print(ccc)
 
 
+# filename = os.path.join(dir, prog)
 
-
-
-#filename = os.path.join(dir, prog)
-
-#os.chdir(os.path.join(ROOT, TK, "win"))
+# os.chdir(os.path.join(ROOT, TK, "win"))
 
 
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-
-DIRS = os.path.join(BASE_DIR, 'templates')
-NAME = os.path.join(BASE_DIR, 'db.sqlite3')
-AAAA = os.path.join(BASE_DIR, 'static')
+DIRS = os.path.join(BASE_DIR, "templates")
+NAME = os.path.join(BASE_DIR, "db.sqlite3")
+AAAA = os.path.join(BASE_DIR, "static")
 
 print(DIRS)
 print(NAME)
 print(AAAA)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('---- 混和應用 --------------------------------------------------------')	#60個
+print("---- 混和應用 --------------------------------------------------------")  # 60個
 
 major = 3
 minor = 8
 dll_file = "python%s%s.dll" % (major, minor)
 
-dll_path = os.path.join(foldername, 'new_dll', dll_file)
-print('新建dll完整路徑 : ', dll_path)
+dll_path = os.path.join(foldername, "new_dll", dll_file)
+print("新建dll完整路徑 : ", dll_path)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-current_version = "%s.%s.%s" % (major, minor, int(time.time()/3600/24))
+current_version = "%s.%s.%s" % (major, minor, int(time.time() / 3600 / 24))
 full_current_version = current_version
-print('新建版本完整路徑 : ', full_current_version)
+print("新建版本完整路徑 : ", full_current_version)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 PATH = "/".join(os.path.abspath(filename).split("/")[:-2])
 print(PATH)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('取得所在的資料夾 dirname()')
+print("取得所在的資料夾 dirname()")
 here = os.path.abspath(os.path.dirname(filename))
 print(here)
 par = os.path.pardir
 print(par)
 
-print('取得檔案的絕對位置 abspath()')
+print("取得檔案的絕對位置 abspath()")
 ROOT = os.path.abspath(os.path.join(here, par, par))
 print(ROOT)
 
 
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 head, tail = os.path.split(filename)
-print('頭', head)
-print('尾', tail)
-tempname = os.path.join(head, '@' + tail)
+print("頭", head)
+print("尾", tail)
+tempname = os.path.join(head, "@" + tail)
 print(tempname)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('依分隔號區切分 : ')
+print("依分隔號區切分 : ")
 path_split = filename.split(os.sep)
 print(path_split)
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-retval = (filename[:-4])
-print('長資料夾 + 前檔名', retval)
+retval = filename[:-4]
+print("長資料夾 + 前檔名", retval)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-filename = "python-%s%s.msi" % (full_current_version, 'ccccc')
+filename = "python-%s%s.msi" % (full_current_version, "ccccc")
 print(filename)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 def get_header_version_info(srcdir):
     print()
     print(srcdir)
     print()
-    
-    patchlevel_h = os.path.join(srcdir, '..', 'Include', 'patchlevel.h')
+
+    patchlevel_h = os.path.join(srcdir, "..", "Include", "patchlevel.h")
     print(patchlevel_h)
+
 
 def get_sys_version_info():
     major, minor, micro, level, serial = sys.version_info
-    release = version = '%s.%s' % (major, minor)
-    release += '.%s' % micro
-    if level != 'final':
-        release += '%s%s' % (level[0], serial)
+    release = version = "%s.%s" % (major, minor)
+    release += ".%s" % micro
+    if level != "final":
+        release += "%s%s" % (level[0], serial)
     return version, release
+
 
 def get_version_info():
     try:
-        return get_header_version_info('.')
+        return get_header_version_info(".")
     except (IOError, OSError):
         version, release = get_sys_version_info()
-        print >>sys.stderr, 'Can\'t get version info from Include/patchlevel.h, ' \
-              'using version of this interpreter (%s).' % release
+        print >> sys.stderr, "Can't get version info from Include/patchlevel.h, " "using version of this interpreter (%s)." % release
         return version, release
 
-get_header_version_info('.')
-print('aaa', get_sys_version_info())
-print('bbb', get_version_info())
+
+get_header_version_info(".")
+print("aaa", get_sys_version_info())
+print("bbb", get_version_info())
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-string = 'this is a lion'
+string = "this is a lion"
 print(string)
 
-string = string.replace('lion', 'mouse')
+string = string.replace("lion", "mouse")
 print(string)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-'''
+"""
 os.chdir(os.path.expanduser('~/Documents'))
 
-'''
-print('------------------------------------------------------------')	#60個
+"""
+print("------------------------------------------------------------")  # 60個
+
 
 def cmp(f1, f2):
     bufsize = 1024 * 8
-    with open(f1, 'rb') as fp1, open(f2, 'rb') as fp2:
+    with open(f1, "rb") as fp1, open(f2, "rb") as fp2:
         while True:
             b1 = fp1.read(bufsize)
             b2 = fp2.read(bufsize)
@@ -1929,12 +1920,12 @@ def copy(src, dst):
     shutil.copy(src, dst)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 def copy(src, dst, mkdirs=0):
@@ -1946,10 +1937,12 @@ def copy(src, dst, mkdirs=0):
     else:
         shutil.copy2(src, dst)
 
+
 def copytodir(src, dstdir):
     """Copy a file or a directory to an existing directory."""
     dst = pathjoin(dstdir, os.path.basename(src))
     copy(src, dst)
+
 
 def makedirs(dir):
     """Make all directories leading up to 'dir' including the leaf
@@ -1968,151 +1961,120 @@ def buildLibraries():
     print("")
     print("Building required libraries")
     print("")
-    universal = os.path.join(WORKDIR, 'libraries')
+    universal = os.path.join(WORKDIR, "libraries")
     os.mkdir(universal)
-    os.makedirs(os.path.join(universal, 'usr', 'local', 'lib'))
-    os.makedirs(os.path.join(universal, 'usr', 'local', 'include'))
+    os.makedirs(os.path.join(universal, "usr", "local", "lib"))
+    os.makedirs(os.path.join(universal, "usr", "local", "include"))
 
     for recipe in library_recipes():
         buildRecipe(recipe, universal, ARCHLIST)
+
 
 def buildPythonDocs():
     curDir = os.getcwd()
     os.chdir(buildDir)
 
-    runCommand('make clean')
-    runCommand('make html')
+    runCommand("make clean")
+    runCommand("make html")
     os.chdir(curDir)
     if not os.path.exists(docdir):
         os.mkdir(docdir)
-    os.rename(os.path.join(buildDir, 'build', 'html'), docdir)
+    os.rename(os.path.join(buildDir, "build", "html"), docdir)
 
 
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
-print('顯示目前 PATH')
+print("顯示目前 PATH")
 print(sys.path)
 print(sys.path[0])
 
-pathlist = os.environ['PATH'].split(os.pathsep)
+pathlist = os.environ["PATH"].split(os.pathsep)
 print(pathlist)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-print('預設用法 : ')
+print("預設用法 : ")
 
 curdir = [os.curdir]
-print('目前目錄 : ', curdir)
+print("目前目錄 : ", curdir)
 
 pardir = [os.pardir]
-print('上層目錄 : ', pardir)
+print("上層目錄 : ", pardir)
 
 pwd = os.getcwd()
 
-print('目前位置 : ', pwd)
+print("目前位置 : ", pwd)
 
 
-#getcwd()方法顯示當前的工作目錄。
-cur_path = os.getcwd() # 取得目前路徑
-print("現在路徑："+cur_path)
+# getcwd()方法顯示當前的工作目錄。
+cur_path = os.getcwd()  # 取得目前路徑
+print("現在路徑：" + cur_path)
 
-'''
+"""
 cur_path = os.getcwd() # 取得目前路徑
 file=cur_path + "\dir2\copyfile.py" 
 os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
-'''
+"""
 
 print(os.sep)
 print(os.altsep)
 
 
-ADDRESS = r'\\.\pipe\_test_pipe-%s' % os.getpid()
+ADDRESS = r"\\.\pipe\_test_pipe-%s" % os.getpid()
 print(ADDRESS)
 
 
-
-'''
+"""
 未整理
 os.chdir(foldername2)
 
@@ -2134,27 +2096,27 @@ no_asm = int(platform.release().split(".")[0]) < 9
 print(no_asm)
 
 
-'''
+"""
 
-'''
+"""
 print('取得檔案的絕對位置 abspath()')
 dest = os.path.abspath(os.path.join(foldername, "..", name + "Upd"))
 print(dest)
-'''
+"""
 
-#-------
+# -------
 
-#os.makedirs(dest)
+# os.makedirs(dest)
 
-'''
+"""
 for name in os.listdir(foldername):
     path, ext = os.path.splitext(name)
 
     filename = os.path.normpath(os.path.join(foldername, name))
     destname = os.path.normpath(os.path.join(dest, name))
     #print("%s -> %s" % (filename, destname))
-'''
-'''
+"""
+"""
 
 shutil.rmtree(foldername2)
 
@@ -2163,10 +2125,10 @@ os.makedirs(foldername2)
 #未知用意
 #os.symlink('python', os.path.join(foldername2, 'python.exe'))
 
-'''
+"""
 
 
-'''
+"""
 import os
 
 dirname = os.path.dirname(__file__)
@@ -2250,51 +2212,54 @@ directory = os.path.dirname(filename) or '.'
 
 
 
-'''
+"""
 
 import ctypes
 
+
 def genwincodec():
     import platform
+
     code = '''\
 """Python Character Mapping Codec %s generated on Windows:
 %s with the command:
   python Tools/unicode/genwincodec.py %s
 """#"
-''' % ('cp950', ' '.join(platform.win32_ver()), 950
-      )
+''' % (
+        "cp950",
+        " ".join(platform.win32_ver()),
+        950,
+    )
 
     print(code)
 
+
 import sys
+
 genwincodec()
 
 # Get the list of available locales.
-if platform.system() == 'Windows':
-    print('Windows')
+if platform.system() == "Windows":
+    print("Windows")
 else:
-    print('Not Windows')
+    print("Not Windows")
 
     os_name = platform.system().lower()
-    if 'windows' in os_name:
-        system('cls')
+    if "windows" in os_name:
+        system("cls")
     else:
-        system('clear')
+        system("clear")
 
 
 print(sys.platform)
 
 
-
-
-print(os.path.expanduser('~'))
-history = os.path.join(os.path.expanduser('~'), '.python_history')
+print(os.path.expanduser("~"))
+history = os.path.join(os.path.expanduser("~"), ".python_history")
 print(history)
 
 print(sys.platform)
 print(sys.platform[:4])
-
-
 
 
 import os
@@ -2310,8 +2275,6 @@ _EXEC_PREFIX = os.path.normpath(sys.exec_prefix)
 _BASE_EXEC_PREFIX = os.path.normpath(sys.base_exec_prefix)
 _CONFIG_VARS = None
 _USER_BASE = None
-
-
 
 
 def get_platform():
@@ -2339,21 +2302,21 @@ def get_platform():
 
     For other non-POSIX platforms, currently just returns 'sys.platform'.
     """
-    if os.name == 'nt':
+    if os.name == "nt":
         # sniff sys.version for architecture.
         prefix = " bit ("
         i = sys.version.find(prefix)
         if i == -1:
             return sys.platform
         j = sys.version.find(")", i)
-        look = sys.version[i+len(prefix):j].lower()
-        if look == 'amd64':
-            return 'win-amd64'
-        if look == 'itanium':
-            return 'win-ia64'
+        look = sys.version[i + len(prefix) : j].lower()
+        if look == "amd64":
+            return "win-amd64"
+        if look == "itanium":
+            return "win-ia64"
         return sys.platform
 
-    if os.name != "posix" or not hasattr(os, 'uname'):
+    if os.name != "posix" or not hasattr(os, "uname"):
         # XXX what about the architecture? NT is Intel or Alpha
         return sys.platform
 
@@ -2366,41 +2329,43 @@ def get_platform():
 
     # Convert the OS name to lowercase, remove '/' characters
     # (to accommodate BSD/OS), and translate spaces (for "Power Macintosh")
-    osname = osname.lower().replace('/', '')
-    machine = machine.replace(' ', '_')
-    machine = machine.replace('/', '-')
+    osname = osname.lower().replace("/", "")
+    machine = machine.replace(" ", "_")
+    machine = machine.replace("/", "-")
 
     if osname[:5] == "linux":
         # At least on Linux/Intel, 'machine' is the processor --
         # i386, etc.
         # XXX what about Alpha, SPARC, etc?
-        return  "%s-%s" % (osname, machine)
+        return "%s-%s" % (osname, machine)
     elif osname[:5] == "sunos":
-        if release[0] >= "5":           # SunOS 5 == Solaris 2
+        if release[0] >= "5":  # SunOS 5 == Solaris 2
             osname = "solaris"
             release = "%d.%s" % (int(release[0]) - 3, release[2:])
             # We can't use "platform.architecture()[0]" because a
             # bootstrap problem. We use a dict to get an error
             # if some suspicious happens.
-            bitness = {2147483647:"32bit", 9223372036854775807:"64bit"}
+            bitness = {2147483647: "32bit", 9223372036854775807: "64bit"}
             machine += ".%s" % bitness[sys.maxsize]
         # fall through to standard osname-release-machine representation
-    elif osname[:4] == "irix":              # could be "irix64"!
+    elif osname[:4] == "irix":  # could be "irix64"!
         return "%s-%s" % (osname, release)
     elif osname[:3] == "aix":
         return "%s-%s.%s" % (osname, version, release)
     elif osname[:6] == "cygwin":
         osname = "cygwin"
         import re
-        rel_re = re.compile(r'[\d.]+')
+
+        rel_re = re.compile(r"[\d.]+")
         m = rel_re.match(release)
         if m:
             release = m.group()
     elif osname[:6] == "darwin":
         import _osx_support
+
         osname, release, machine = _osx_support.get_platform_osx(
-                                            get_config_vars(),
-                                            osname, release, machine)
+            get_config_vars(), osname, release, machine
+        )
 
     return "%s-%s-%s" % (osname, release, machine)
 
@@ -2409,16 +2374,14 @@ def get_python_version():
     return _PY_VERSION_SHORT
 
 
-print('')
-print('')
+print("")
+print("")
 print('Platform: "%s"' % get_platform())
-print('')
+print("")
 print('Python version: "%s"' % get_python_version())
 
 
-
-
-'''
+"""
 pybuilddir = 'build/lib.%s-%s' % (get_platform(), sys.version[:3])
 
 # Try to distinguish various flavours of Unix
@@ -2432,10 +2395,7 @@ machine = machine.replace('/', '-')
 
 print(osname)
 print(machine)
-'''
-
-
-
+"""
 
 
 import sys
@@ -2444,16 +2404,14 @@ frame = sys._getframe()
 print(frame)
 
 
-
-
 import os
 from pathlib import Path
 
 cc = os.path.realpath(__file__)
-print('目前檔案 :', cc)
+print("目前檔案 :", cc)
 
 cc = [str(Path(cc).parent)]
-print('父資料夾 :', cc)
+print("父資料夾 :", cc)
 
 cc = __file__
 
@@ -2463,35 +2421,35 @@ print(cc)
 import os
 
 print(os.getcwd())
-print(os.path.relpath('C:\\'))              # 列出目前工作目錄至C:\的相對路徑
-print(os.path.relpath('C:\\___small\\Dropresize'))  # 列出目前工作目錄至特定path的相對路徑
-print(os.path.relpath('C:\\', '*.py')) # 列出目前檔案至D:\的相對路徑
+print(os.path.relpath("C:\\"))  # 列出目前工作目錄至C:\的相對路徑
+print(os.path.relpath("C:\\___small\\Dropresize"))  # 列出目前工作目錄至特定path的相對路徑
+print(os.path.relpath("C:\\", "*.py"))  # 列出目前檔案至D:\的相對路徑
 
 import os
 
-print(os.path.abspath('.'))              # 列出目前工作目錄的絕對路徑
-print(os.path.abspath('..'))             # 列出上一層工作目錄的絕對路徑
-print(os.path.abspath('*.py'))      # 列出目前檔案的絕對路徑
+print(os.path.abspath("."))  # 列出目前工作目錄的絕對路徑
+print(os.path.abspath(".."))  # 列出上一層工作目錄的絕對路徑
+print(os.path.abspath("*.py"))  # 列出目前檔案的絕對路徑
 
 
 import os
 
-print(os.path.join('D:\\', 'Python', 'ch14', 'ch14_9.py'))   # 4個參數
-print(os.path.join('D:\\Python', 'ch14', 'ch14_9.py'))       # 3個參數
-print(os.path.join('D:\\Python\\ch14', 'ch14_9.py'))         # 2個參數
+print(os.path.join("D:\\", "Python", "ch14", "ch14_9.py"))  # 4個參數
+print(os.path.join("D:\\Python", "ch14", "ch14_9.py"))  # 3個參數
+print(os.path.join("D:\\Python\\ch14", "ch14_9.py"))  # 2個參數
 
 
 print("------------------------------------------------------------")  # 60個
 
 import os
 import os.path as path
- 
+
 fpath = os.getcwd() + "\\temp"
-if path.exists(fpath+"\\ball0.jpg"):
+if path.exists(fpath + "\\ball0.jpg"):
     print("存在!")
-if path.isdir(fpath+"\\test"):
+if path.isdir(fpath + "\\test"):
     print("是目錄!")
-if path.isfile(fpath+"\\ball0.jpg"):
+if path.isfile(fpath + "\\ball0.jpg"):
     print("是檔案!")
 
 print("------------------------------------------------------------")  # 60個
@@ -2499,7 +2457,7 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 import os
- 
+
 path = os.getcwd() + "\\temp"
 os.chdir(path)
 print(path)
@@ -2509,31 +2467,31 @@ print(os.listdir(path))
 print("------------------------------------------------------------")  # 60個
 
 import os
- 
+
 path = os.getcwd() + "\\temp"
 print("目前工作路徑: ", os.getcwd())
 print(path)
 os.chdir(path)
 print("chdir(): ", os.getcwd())
-os.mkdir('newDir')
+os.mkdir("newDir")
 print("mkdir(): ", os.listdir(path))
 
 print("------------------------------------------------------------")  # 60個
 
 import os
- 
+
 path = os.getcwd() + "\\temp"
 os.chdir(path)
-os.rename('newDir','newDir2')
+os.rename("newDir", "newDir2")
 print("rename(): ", os.listdir(path))
 
 print("------------------------------------------------------------")  # 60個
 
 import os
- 
+
 path = os.getcwd() + "\\temp"
 os.chdir(path)
-os.rmdir('newDir2')
+os.rmdir("newDir2")
 fp = open("aa.txt", "w")
 fp.close()
 print("rmdir(): ", os.listdir(path))
@@ -2543,7 +2501,7 @@ print("remove(): ", os.listdir(path))
 print("------------------------------------------------------------")  # 60個
 
 import os.path as path
- 
+
 fname = path.realpath("ch9-2-2.py")
 print(fname)
 r = path.split(fname)
@@ -2554,7 +2512,7 @@ print("os.path.splitext() =", r)
 print("------------------------------------------------------------")  # 60個
 
 import os.path as path
- 
+
 fname = path.realpath("ch9-2-2.py")
 print(fname)
 p = path.dirname(fname)
@@ -2566,7 +2524,7 @@ print("f = os.path.basename() =", f)
 print("------------------------------------------------------------")  # 60個
 
 import os.path as path
- 
+
 p = "C:\Python\ch09"
 f = "ch9-2-2.py"
 print(p, f)
@@ -2577,19 +2535,16 @@ print("------------------------------------------------------------")  # 60個
 
 import os
 import os.path as path
- 
+
 fpath = os.getcwd() + "\\temp"
-if path.exists(fpath+"\\ball0.jpg"):
+if path.exists(fpath + "\\ball0.jpg"):
     print("存在!")
-if path.isdir(fpath+"\\test"):
+if path.isdir(fpath + "\\test"):
     print("是目錄!")
-if path.isfile(fpath+"\\ball0.jpg"):
+if path.isfile(fpath + "\\ball0.jpg"):
     print("是檔案!")
 
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -2600,11 +2555,12 @@ import os
 from stat import *
 import getopt
 
+
 def recursedown(dirname):
     try:
         names = os.listdir(dirname)
     except OSError as msg:
-        err('%s: cannot list directory: %r\n' % (dirname, msg))
+        err("%s: cannot list directory: %r\n" % (dirname, msg))
         return 1
     names.sort()
     subdirs = []
@@ -2617,27 +2573,26 @@ def recursedown(dirname):
         elif os.path.isdir(fullname):
             subdirs.append(fullname)
         else:
-            print('a')
+            print("a")
     bad = 0
     for fullname in subdirs:
         if recursedown(fullname):
             bad = 1
     return bad
 
-foldername = 'C:/_git/vcs/_1.data/______test_files5'
+
+foldername = "C:/_git/vcs/_1.data/______test_files5"
 
 recursedown(foldername)
 
 
+print("------------------------------------------------------------")  # 60個
 
-    
+import pathlib
 
-
+pathlib.Path("work_test1.py").touch()
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-

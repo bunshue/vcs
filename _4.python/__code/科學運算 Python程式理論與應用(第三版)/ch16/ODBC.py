@@ -1,7 +1,5 @@
-# -*- coding:utf-8 -*-
-# file: ODBC.py
-#
 import odbc										# 匯入odbc模組
+
 con = odbc.odbc('podbc')								# 連線到資料庫，即在資料源名中填寫的名字
 cursor = con.cursor()									# 建立cursor物件
 cursor.execute('select id,name from people where id = 1')				# 執行SQL敘述查詢ID為1的記錄

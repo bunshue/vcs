@@ -1,6 +1,8 @@
 import sys
-
 import pymysql
+
+print("------------------------------------------------------------")  # 60個
+
 conn = pymysql.connect(host = 'localhost',
                        port = 3306,
                        user = 'root',

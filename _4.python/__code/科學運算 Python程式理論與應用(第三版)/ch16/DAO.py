@@ -1,7 +1,5 @@
-# -*- coding:utf-8 -*-
-# file: DAO.py
-#
 import win32com.client								# 匯入win32com.client
+
 dbEngine = win32com.client.Dispatch('DAO.DBEngine.36')				# 連線COM物件
 daoDB = dbEngine.OpenDatabase('e:\python\第16章\python.accdb')					# 開啟資料庫
 daoRS = daoDB.OpenRecordset('people')						# 開啟表

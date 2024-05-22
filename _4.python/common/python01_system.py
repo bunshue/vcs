@@ -53,15 +53,10 @@ print(
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 # Horizontal line length
@@ -121,6 +116,7 @@ def print_header(title="Benchmark"):
     print("-" * LINE)
     if machine_details:
         print_machine_details(machine_details, indent="    ")
+
 
 machine_details = None
 
@@ -190,6 +186,7 @@ print(f"全域變數 : {globals()}")
 print("------------------------------------------------------------")  # 60個
 
 import builtins
+
 print(dir(builtins))
 
 print("------------------------------------------------------------")  # 60個
@@ -426,6 +423,7 @@ print("查詢已安裝的 Pandas 版本")
 print(pd.__version__)
 
 import pandas as pd
+
 print(pd.__version__)
 
 print("------------------------------------------------------------")  # 60個
@@ -673,10 +671,12 @@ print("內建函式dir()檢視目前的名稱空間")
 print(dir())
 
 import qrcode
+
 print(dir())
 
 # 看單一模組的函式
 import math
+
 print(dir(math))
 
 print("------------------------------------------------------------")  # 60個
@@ -685,6 +685,7 @@ print("------------------------------------------------------------")  # 60個
 # 以 dir() 與 help() 探索 Python 模組與物件
 
 import datetime
+
 print(dir(datetime))
 
 print("")
@@ -733,7 +734,6 @@ if sys.version_info.major < 3 or sys.version_info.minor < 3:
     sys.exit("Error: clinic.py requires Python 3.3 or greater.")
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 PYTHONDOCS = os.environ.get(
@@ -820,4 +820,3 @@ print("作業系統：", sys.platform)
 
 
 print("------------------------------------------------------------")  # 60個
-

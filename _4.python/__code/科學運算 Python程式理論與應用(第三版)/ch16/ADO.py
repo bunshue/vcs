@@ -1,7 +1,5 @@
-# -*- coding:utf-8 -*-
-# file: ADO.py
-#
 import win32com.client								# 匯入win32com.client
+
 adoCon = win32com.client.Dispatch('ADODB.Connection')				# 建立連線物件
 adoCon.Open('podbc')  								# 連線到資料源
 adoRS = win32com.client.Dispatch('ADODB.Recordset')				# 建立Recordset物件
