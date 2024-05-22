@@ -1,6 +1,8 @@
-import random
 import pygame
+import random
 
+print("------------------------------------------------------------")  # 60個
+'''
 pygame.init()
 
 # Window setup
@@ -674,7 +676,38 @@ pygame.quit()
 print("Total points: " + str(points))
 
 
+'''
 
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print('pygame 接受鍵盤按鍵 A S')
+import pygame
+
+pygame.init()
+
+windowSize = [400, 300]
+pygame.display.set_mode(windowSize)
+
+done = False
+while not done:
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_a]:
+        print('你按了 A')
+
+    if keys[pygame.K_s]:
+        print('你按了 S')
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    pygame.time.delay(100)
+pygame.quit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -685,12 +718,15 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+print("------------------------------------------------------------")  # 60個
 
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
 
 
 

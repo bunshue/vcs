@@ -346,7 +346,14 @@ print(func())
 '''
 print('------------------------------------------------------------')	#60個
 
+import glob
+import pathlib
 
+print('touch當前目錄下所有檔案')
+files = glob.glob("*.*") 
+for filename in files:
+    print(filename)
+    pathlib.Path(filename).touch()
 
 print("------------------------------------------------------------")  # 60個
 

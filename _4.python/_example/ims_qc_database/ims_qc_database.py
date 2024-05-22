@@ -52,22 +52,13 @@ from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfilename
 
-flag_debug_mode = True
+flag_debug_mode = False
 
 # 建立csv二維串列資料
 csv_data = list()
 
-stage_no = [
-'402除菌區', '403包裝區', '404組裝區', '405燒機測試區',
-'406電信測試區', '407原料除菌區', '408清洗區', '409無塵室'
-]
-
-stage = -1
-tablename = ""
 excel_filename = ""
-sheetname = '1月402' # 1月402 1月402 1月402 1月402 1月402 1月402
-
-dummy_data = 'abcd'
+sheetname = '1月402' # 1月403 1月404 1月405 1月406 1月407 1月408 1月409
 
 print('------------------------------------------------------------')	#60個
 
@@ -81,65 +72,13 @@ def clear_csv_data():
 print('------------------------------------------------------------')	#60個
 
 def process_csv_file1(filename, source):
-    global stage
-    global tablename
     #global filename
     global sheetname
     
-    print("aaa :", filename)
     filename = filename.replace(source+"\\", "")
-    print("bbb :", filename)
-
-    print("ccc :", filename)
 
     #year_month_day_data = filename
    
-    if filename.startswith('402除菌區') == True:
-        print('402除菌區')
-        stage = 402
-        tablename = 'Room402'
-    elif filename.startswith('403包裝區') == True:
-        print('403包裝區')
-        stage = 403
-        tablename = 'Room403'
-    elif filename.startswith('404組裝區') == True:
-        print('404組裝區')
-        stage = 404
-        tablename = 'Room404'
-    elif filename.startswith('405燒機測試區') == True:
-        print('405燒機測試區')
-        stage = 405
-        tablename = 'Room405'
-    elif filename.startswith('406電信測試區') == True:
-        print('406電信測試區')
-        stage = 406
-        tablename = 'Room406'
-    elif filename.startswith('407原料除菌區') == True:
-        print('407原料除菌區')
-        stage = 407
-        tablename = 'Room407'
-    elif filename.startswith('408清洗區') == True:
-        print('408清洗區')
-        stage = 408
-        tablename = 'Room408'
-    elif filename.startswith('409無塵室') == True:
-        print('409無塵室')
-        stage = 409
-        tablename = 'Room409'
-    else:
-        print('第XXXXXXXXX站')
-        stage = 0
-    if stage == 0:
-        print('不合法的csv檔 : ', filename, ',\t跳過')
-
-def save_data_in_list(datas):
-    #print(type(datas))
-    data_length = len(datas)
-    if stage == 1:
-        print('第1站')
-    else:
-        print('第XXXXXXXXX站')
-
 def save_data_in_list2(datas):
     #print(type(datas))
     data_length = len(datas)
@@ -149,50 +88,11 @@ def save_data_in_list2(datas):
     for i in range(1, data_length):
         csv_data.append(datas[i])
 
-def process_csv_file2(filename):
-    global stage
-    global tablename
-    #global filename
-    global sheetname
-
-    #with open(filename, newline = '') as csvfile:
-    with open(filename, encoding = 'big5') as csvfile:
-        rows = csv.reader(csvfile)  # 讀取 csv 檔案內容
-        datas = list(rows)    #將資料轉成list
-
-    length = len(datas)
-    #print('len = ', length)
-
-    save_data_in_list(datas)
-
-    #print(datas)
-    data_column = len(datas[0])
-    #print('data_column = ', data_column)
-
-    for row in datas:
-        for i in range(0, len(row)):
-            row[i] = row[i].strip()
-
-    '''
-    cnt = 0
-    for row in datas:
-        print(row)
-        print(type(row))
-        #print(len(row))
-        cnt += 1
-        if cnt == 3:
-            break
-    '''
-
 def process_csv_file3(filename):
-    global stage
-    global tablename
     #global filename
     global sheetname
 
-    print("process_csv_file3")
-    print(filename)
-    print(tablename)
+    #print("process_csv_file3", filename)
 
     #with open(filename, newline = '') as csvfile:
     with open(filename, encoding = 'utf_16_le') as csvfile:
@@ -200,33 +100,19 @@ def process_csv_file3(filename):
         datas = list(rows)    #將資料轉成list
 
     length = len(datas)
-    print('len = ', length)
+    #print('len = ', length)
 
     save_data_in_list2(datas)
     #print(datas)
     
     data_column = len(datas[0])
-    print('data_column = ', data_column)
+    #print('data_column = ', data_column)
 
     for row in datas:
         for i in range(0, len(row)):
             row[i] = row[i].strip()
 
-    '''
-    cnt = 0
-    for row in datas:
-        print(row)
-        print(type(row))
-        #print(len(row))
-        cnt += 1
-        if cnt == 3:
-            break
-    '''
-
-    
 def import_csv_data():
-    global stage
-    global tablename
     global filename
     global sheetname
     global csv_data
@@ -252,14 +138,10 @@ def import_csv_data():
     files = glob.glob(source_dir + "/*.csv") 
     for filename in files:
         print(filename)
-        stage = 0
-        tablename = 'table00'
         process_csv_file1(filename, source_dir)
-        if stage != 0:
-            print('繼續')
-            process_csv_file3(filename)
-            #若能正確處理完畢, 再搬到old資料夾
-            #shutil.move(filename, target_dir)
+        process_csv_file3(filename)
+        #若能正確處理完畢, 再搬到old資料夾
+        #shutil.move(filename, target_dir)
 
     message = "匯入生產資料 完成"
     print(message)
@@ -268,55 +150,39 @@ def import_csv_data():
 def show_info():
     print('show_info')
     length = len(csv_data)
-    print('資料長度 : ', length)
-
-def show_csv_data():
-    length = len(csv_data)
     print('csv_data 資料長度 : ', length)
     for i in range(0, length):
         print(csv_data[i])
 
 def export_data_to_excel0(csv_data):
     global sheetname
-    print('真的匯出資料到excel')
-    print('取得excel檔名 :', excel_filename)
-
-    length = len(csv_data)
-    print('共有資料 :', length, '筆')
-    """
-    if length > 0:
-        for _ in csv_data:
-            print(_)
-    """
-    print(sheetname)
-    print(sheetname)
-    print(sheetname)
-    print(sheetname)
+    #print('真的匯出資料到excel')
+    #print('取得excel檔名 :', excel_filename)
+    #print(sheetname)
 
     workbook = openpyxl.load_workbook(excel_filename)
-    print('所有工作表名稱 :', workbook.sheetnames)
+    #print('所有工作表名稱 :', workbook.sheetnames)
 
     names = workbook.sheetnames  # 讀取 excel檔案 裏所有工作表名稱
-    print('所有工作表名稱 :', names)
+    #print('所有工作表名稱 :', names)
     
     # 取得 指定的 工作表
-    print(sheetname)
-    print(sheetname)
-    print(sheetname)
+    #print(sheetname)
     sheet = workbook[sheetname]
 
+    length = len(csv_data)
     if length > 0:
         for cc in csv_data:
             #print(cc)
             time = cc[1][:2]
             if time == "09" or time == "13" or time == "17":
-                print(cc)
+                #print(cc)
                 day = int(cc[0][-2:])
-                print(day)
+                #print(day)
                 data1 = str(cc[4])#溫度
                 data2 = str(cc[2])#濕度
                 data3 = str(cc[3])#靜壓
-                print(data1, data2, data3)
+                #print(data1, data2, data3)
                 if time == "09":
                     sheet.cell(8, 2+day).value = str(data1)
                     sheet.cell(9, 2+day).value = str(data2)
@@ -333,12 +199,7 @@ def export_data_to_excel0(csv_data):
 
 def check_excel_filename(data1, data2):
     global sheetname
-    print(type(data1))
-    print(data1)
     year, month, day = data1.split('/')
-    print(year)
-    print(month)
-    print(day)
     filename = "T 060201 01 環境溫濕度管制紀錄表_B (%d月).xlsx" % int(month)
     room = data2[:3]
     sheetname = "%d月"%int(month)+room
@@ -351,7 +212,7 @@ def check_excel_filename(data1, data2):
         if month != "01":
             print('需要改sheet名')
             year_month = "年月：     20%s      年        %02d        月" % (str(year), int(month))
-            print(year_month)
+            #print(year_month)
            
             workbook = openpyxl.load_workbook(filename)
 
@@ -386,14 +247,6 @@ def check_excel_filename(data1, data2):
 def export_data_to_excel():
     global excel_filename
     global sheetname
-    length = len(csv_data)
-    """
-    print('共有資料 :', length, '筆')
-    if length > 0:
-        for _ in csv_data:
-            print(_)
-    """
-
     excel_filename = check_excel_filename(csv_data[1][0], csv_data[0][2])
     print('取得excel檔名 :', excel_filename)
 
@@ -423,7 +276,6 @@ def button01Click():
 def button02Click():
     print('你按了 info')
     show_info()
-    show_csv_data()
    
 def button03Click():
     print('你按了button03')
@@ -441,6 +293,7 @@ def clear_text1():
     # 執行 clear 函式時，清空內容
 
 
+""" debug
 filename = "402除菌區數據紀錄_211214_000000.csv"
             
 year_month_day_data = filename[-17:-11]
@@ -454,8 +307,7 @@ day = filename[-13:-11]
 print(int(year)+2000)
 print(month)
 print(day)
-
-
+"""
 
 window = tk.Tk()
 
@@ -542,6 +394,12 @@ window.mainloop()
 
 """
 
+stage_no = [
+'402除菌區', '403包裝區', '404組裝區', '405燒機測試區',
+'406電信測試區', '407原料除菌區', '408清洗區', '409無塵室'
+]
+
+
     print('新建資料庫, 清除記憶體資料')
     clear_csv_data()
 
@@ -571,25 +429,6 @@ def precheck_csv_data():
     if not os.path.exists(target_dir):
             os.mkdir(target_dir)
             #os.makedirs(target_dir, exist_ok = True)
-
-    #尋找檔案
-    import glob
-    print('111尋找目前目錄下之 *.csv')
-    files = glob.glob(source_dir + "/*.csv") 
-    for filename in files:
-        print(filename)
-        stage = 0
-        tablename = 'table00'
-        #process_csv_file1(filename)
-        if stage != 0:
-            print('繼續')
-            #process_csv_file2(filename)
-            #若能正確處理完畢, 再搬到old資料夾
-            #shutil.move(filename, target_dir)
-
-    #message = "匯入生產資料 完成"
-    #print(message)
-    #text1.insert('end', message)
 
 def export_data():
     global csv_data

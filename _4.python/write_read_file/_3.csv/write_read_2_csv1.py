@@ -503,7 +503,7 @@ print("Steveis Total Revenue of 2026 = ", total2026)
 
 print("------------------------------------------------------------")  # 60個
 
-print('2025年1月台北天氣報告')
+print('2025年1月臺北天氣報告')
 
 filename = 'data/TaipeiWeatherJan.csv'
 with open(filename) as csvFile:
@@ -571,17 +571,17 @@ passwd_to_csv(r'.\data\passwd.cfg', filename)
 
 print('------------------------------------------------------------')	#60個
 
-filename = 'C:/_git/vcs/_4.python/_data/animals.csv'
+filename = 'data/animals.csv'
 
 try:
     with open(filename, encoding = 'utf-8') as f:
         reader = csv.reader(f)
         data = list(reader)
 except FileNotFoundError:
-    print('无法打开文件:', filename)
+    print('無法打開文件:', filename)
 else:
     for item in data:
-        print('%-30s%-20s%-10s' % (item[0], item[1], item[2]))
+        print('%-20s%-20s%-10s%-20s' % (item[0], item[1], item[2], item[3]))
 
 print('------------------------------------------------------------')	#60個
 
@@ -683,7 +683,7 @@ with open(filename, 'w', newline = '') as csvFile:                # 開啟csv檔
 print("------------------------------------------------------------")  # 60個
 
 # 定義串列,元素是字典
-dictList = [{'姓名':'Hung','年齡':'35','城市':'台北'},  
+dictList = [{'姓名':'Hung','年齡':'35','城市':'臺北'},  
           {'姓名':'James', '年齡':'40', '城市':'芝加哥'}]
           
 filename = 'tmp_write_read_csv12.csv'
@@ -733,7 +733,7 @@ with open(filename) as csvFile:
         highTemps.append(int(row[1]))       # 儲存最高溫
 plt.figure(figsize=(12, 8))                 # 設定繪圖區大小                  
 plt.plot(highTemps)
-plt.title("2025年1月台北天氣報告", fontsize=24)
+plt.title("2025年1月臺北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 #plt.show()
 
@@ -755,7 +755,7 @@ with open(filename) as csvFile:
        
 plt.figure(figsize=(12, 8))                 # 設定繪圖區大小                  
 plt.plot(dates, highTemps)                  # 圖標增加日期刻度
-plt.title("2025年1月台北天氣報告", fontsize=24)
+plt.title("2025年1月臺北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 #plt.show()
 
@@ -778,7 +778,7 @@ with open(filename) as csvFile:
 fig = plt.figure(figsize=(12, 8))           # 設定繪圖區大小                  
 plt.plot(dates, highTemps)                  # 圖標增加日期刻度
 fig.autofmt_xdate()                         # 預設最佳化角度旋轉
-plt.title("2025年1月台北天氣報告", fontsize=24)
+plt.title("2025年1月臺北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 #plt.show()
 
@@ -801,7 +801,7 @@ with open(filename) as csvFile:
 fig = plt.figure(figsize=(12, 8))           # 設定繪圖區大小                  
 plt.plot(dates, highTemps)                  # 圖標增加日期刻度
 fig.autofmt_xdate(rotation=60)              # 日期旋轉60度
-plt.title("2025年1月台北天氣報告", fontsize=24)
+plt.title("2025年1月臺北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 #plt.show()
 
@@ -833,7 +833,7 @@ plt.plot(dates, highTemps)                  # 繪製最高溫
 plt.plot(dates, lowTemps)                   # 繪製最低溫
 plt.fill_between(dates,highTemps,lowTemps,color='y',alpha=0.2) # 填滿
 fig.autofmt_xdate()                         # 日期旋轉
-plt.title("2025年1月台北天氣報告", fontsize=24)
+plt.title("2025年1月臺北天氣報告", fontsize=24)
 plt.ylabel(r'溫度 $C^{o}$', fontsize=14)
 #plt.show()
 
@@ -1165,6 +1165,5 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 

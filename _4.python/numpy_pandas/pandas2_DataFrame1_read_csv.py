@@ -17,8 +17,7 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 print('------------------------------------------------------------')	#60個
 
 # 載入資料與定義資料
-filename = 'C:/_git/vcs/_4.python/_data/animals.csv'
-filename = 'data/cafe.csv'
+filename = 'data/animals.csv'
 
 df = pd.read_csv(filename)
 print(df)
