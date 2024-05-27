@@ -1,0 +1,10 @@
+import tkinter as tk
+win=tk.Tk()
+win.geometry('300x200+80+50')
+win.title('我的第一個視窗應用程式')
+win.resizable(True, False)
+win.iconbitmap('first.ico')
+win.maxsize(500,200)
+win.minsize(100,200)
+win.configure(bg='yellow')
+win.mainloop()

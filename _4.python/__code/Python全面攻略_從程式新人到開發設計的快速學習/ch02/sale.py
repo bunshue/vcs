@@ -1,0 +1,7 @@
+name = input('輸入品名：')
+num = int(input('輸入數量：'))
+price = float(input('輸入單價：'))
+print()
+print('品名\t\t數量\t單價\t金額')
+print('=========================================')
+print('%-14s%-9d%-9.1f%-9.1f' %(name,num,price,num*price))

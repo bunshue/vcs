@@ -41,13 +41,55 @@ Entry		單行文字標籤
 Frame		框，可將元件組成群組
 Label		標籤，顯示文字或圖片
 Listbox		清單方塊
-Menu		選單
+Menu		選單, 功能表
 Menubutton	選單元件
-Message		對話方塊
+Message		訊息方塊
+MessageBox	訊息方塊
 RadioButton	選項按鈕
 Scale		滑桿
 Scrollbar	捲軸
 Text		多行文字標籤
 Toplevel	建立子視窗容器
+
+LabelFrame	標籤框架	像是 groupbox
+Spinbox		切換按鈕
+OptionMenu	下拉式清單
+PhotoImage	影像物件
+
+Seperator	分隔線
+
+
+視窗版面配置
+pack()
+place()
+grid()
+
+
+
+事件處理函式
+
+
+
+
+
+
+
+tk之方法與屬性
+
+
+title()
+geometry()
+mainloop()
+maxsize()
+minsize()
+resizeable()
+iconbitmap()
+bg or background
+state()
+iconify()	設定視窗最小化
+winfo_screenwidth()	取得螢幕寬度
+winfo_screenheight()	取得螢幕高度
+
+
 
 
