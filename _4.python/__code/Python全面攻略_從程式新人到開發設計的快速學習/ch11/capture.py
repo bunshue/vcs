@@ -1,6 +1,8 @@
 import cv2
+
 cap = cv2.VideoCapture(0)
 cv2.namedWindow('show')
+
 while(True):
     ret,img = cap.read()		#擷取一張影像
     if ret:
@@ -11,6 +13,7 @@ while(True):
             break
     else:
         break
+
 cap.release()           #關閉攝影機
 cv2.destroyAllWindows() #關閉視窗
 

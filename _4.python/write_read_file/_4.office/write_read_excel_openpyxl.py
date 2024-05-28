@@ -117,6 +117,7 @@ print("儲存格 列名", sheet["A1"].row)
 print("儲存格名", sheet["A1"].coordinate)
 
 print("------------------------------")  # 30個
+
 print("顯示資料 方法一")
 
 print("使用cell方法取得資料")
@@ -139,6 +140,7 @@ for i in range(1, ROW + 1):
     print()
 
 print("------------------------------")  # 30個
+
 print("顯示資料 方法二")
 
 list_values = list(sheet.values)
@@ -157,6 +159,7 @@ for value_tuple in list_values[1:]:
     cnt += 1
 
 print("------------------------------")  # 30個
+
 print("顯示資料 方法三")
 
 for sheet in workbook:
@@ -169,6 +172,7 @@ for sheet in workbook:
     print()
 
 print("------------------------------")  # 30個
+
 print("顯示資料 方法四")
 
 try:
@@ -188,6 +192,7 @@ except:
     print("程式執行失敗。")
 
 print("------------------------------")  # 30個
+
 print("顯示資料 方法五")
 
 
@@ -201,10 +206,6 @@ def get_values(sheet):
     return arr
 
 
-workbook = openpyxl.load_workbook(
-    filename_r, data_only=True
-)  # 設定 data_only=True 只讀取計算後的數值
-
 sheet1 = workbook["animals1"]
 sheet2 = workbook["animals2"]
 
@@ -215,6 +216,7 @@ print("印出工作表2 所有內容")
 print(get_values(sheet2))
 
 print("------------------------------")  # 30個
+
 print("顯示資料 方法六")
 
 sheet1 = workbook["animals1"]
@@ -227,9 +229,7 @@ for i in v:
 
 print("------------------------------")  # 30個
 
-print("顯示資料 方法七")
-
-#讀取工作表所有內容
+print("顯示資料 方法七 讀取工作表所有內容")
 
 filename_r = "data/python_ReadWrite_EXCEL.xlsx"
 
@@ -268,47 +268,59 @@ for a, b, c, d in select_data:
     print("{0} {1} {2} {3}".format(a.value, b.value, c.value, d.value))
 print()
 
-"""
-for a, b, c in sheet[sheet.dimensions]:
-    print(a.value, b.value, c.value)
+print('sheet.dimensions', sheet.dimensions)
 
-print("------------------------------------------------------------")  # 60個
+for a, b, c, d in sheet[sheet.dimensions]:
+    print(a.value, b.value, c.value, d.value)
+
+print("------------------------------")  # 30個
 
 print("openpyxl test 03 循欄列印 ＆ 循列列印")
 
-workbook.active = 0
-sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-
-print(sheet.title)
-print(sheet.columns)
-print(sheet.rows)
+for cell in list(sheet.columns)[0]:
+    print(cell.value, end = " ")
+print()
 
 for cell in list(sheet.columns)[1]:
-    print(cell.value)
-
+    print(cell.value, end = " ")
 print()
-for cell in list(sheet.rows)[1]:
-    print(cell.value)
 
-print("------------------------------------------------------------")  # 60個
+for cell in list(sheet.columns)[2]:
+    print(cell.value, end = " ")
+print()
+
+for cell in list(sheet.columns)[3]:
+    print(cell.value, end = " ")
+print()
+
+print("------------------------------")  # 30個
+
+for cell in list(sheet.rows)[0]:
+    print(cell.value, end = " ")
+print()
+
+for cell in list(sheet.rows)[1]:
+    print(cell.value, end = " ")
+print()
+
+for cell in list(sheet.rows)[2]:
+    print(cell.value, end = " ")
+print()
+
+for cell in list(sheet.rows)[3]:
+    print(cell.value, end = " ")
+print()
+
+
+print("------------------------------")  # 30個
 
 print("openpyxl test 04 讀取指定區域內容")
-
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
-
-workbook = openpyxl.load_workbook(
-    filename_r, data_only=False
-)  # 要excel開啟才可以看到值，否則會顯示None
-
-workbook.active = 0
-sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
 
 for row in sheet["A2":"D5"]:
     for cell in row:
         print(cell.value, end=" ")
     print()
 
-"""
 print("------------------------------------------------------------")  # 60個
 
 print("openpyxl test 05 建立多工作表之Excel活頁簿")
@@ -401,7 +413,6 @@ workbook.save(filename_w)  # 儲存檔案
 print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
-
 print("openpyxl test 08 建立新檔 完整資料 + 格式")
 
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件

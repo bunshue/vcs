@@ -16,7 +16,7 @@ import xlrd
 print("------------------------------------------------------------")  # 60個
 
 print("讀取excel檔案 1")
-filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_r = "data/python_ReadWrite_EXCEL.xlsx"
 
 data = xlrd.open_workbook(filename_r)
 print("這個excel檔案的工作表頁數 :", len(data.sheets()))
@@ -73,14 +73,13 @@ for i in range(0, ROW):
         sh0.cell(i, 1).value,
         sh0.cell(i, 2).value,
         sh0.cell(i, 3).value,
-        sh0.cell(i, 4).value,
     )
 
 print("------------------------------------------------------------")  # 60個
 
 import xlrd
 
-filename_r = "data/python_ReadWrite_EXCEL1.xlsx"
+filename_r = "data/python_ReadWrite_EXCEL.xlsx"
 
 data = xlrd.open_workbook(filename_r)
 print("這個excel檔案的工作表頁數 :", len(data.sheets()))
@@ -125,7 +124,7 @@ animal04 = ["兔", "rabbit", "8"]
 animals = [animal01, animal02, animal03, animal04]
 
 write = xlwt.Workbook()
-sh = write.add_sheet("sheet1", cell_overwrite_ok=True)
+sh = write.add_sheet("第一頁", cell_overwrite_ok=True)
 
 for i in range(len(datahead)):
     sh.write(0, i, datahead[i])  # 寫入datahead list
@@ -143,25 +142,20 @@ for j in range(len(animals[3])):
     sh.write(4, j, animals[3][j])
 
 
+write2 = write.add_sheet("第二頁")  # 建立新工作表，設定名稱
+
+for j in range(0, 5):  # 0~4 => A B C D E
+    for i in range(10, 20):  # 10~19 => 11~20
+        #          ROW COL Data
+        write2.write(i, j, 123)
+
 # 儲存檔案
 write.save(filename_w)
 print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
-import xlwt
 
-filename_w = "tmp_excel_xlwt2.xls"
-
-write = xlwt.Workbook()
-write2 = write.add_sheet("MySheet")  # 建立新工作表，設定名稱
-for i in range(10, 36):
-    #          ROW COL Data
-    write2.write(i, 0, 123)
-
-# 儲存檔案
-write.save(filename_w)
-print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
