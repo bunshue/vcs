@@ -23,7 +23,7 @@ plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 
-print("框出照片中的人臉")
+print("框出照片中的人臉, 轉成灰階再辨識, 畫框畫在原圖並顯示")
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_image_processing/lena_color.jpg"
 filename = "C:/_git/vcs/_4.python/opencv/data/_face/face01.jpg"

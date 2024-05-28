@@ -1,7 +1,9 @@
 #htmlparse01
 
+import sys
 import requests
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 urlstr="http://www.drmaster.com.tw/Publish_Newbook.asp"
@@ -10,6 +12,21 @@ response=requests.get(urlstr)
 print("網址：%s" %(response.url))
 print("狀態：%s" %(response.status_code))
 print("表頭：%s" %(response.headers))
+
+"""
+Response屬性
+content 取得二進位資料 例如可以取得網路圖檔
+encoding 取得或設定網頁的編碼模式
+headers 取得網頁的表頭資訊
+text 取得網頁的所有程式碼
+status_code 取得網頁的連線狀態
+    200: 請求成功
+    400 伺服器無法理解請求
+    404伺服器找不到請求資源, 可能是連接的url錯誤
+url 取得網頁的網址
+"""
+
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -50,11 +67,9 @@ listBookName=bs.select('.style2')
 count=len(listBookName)
 print("共 %d 筆新書記錄" %(count))  # 顯示 '共 20 筆新書記錄'
 
-# 顯示網頁新書書名
+print('顯示網頁新書書名')
 for book in listBookName:
     print(book.text)
-    
-    
     
 
 print("------------------------------------------------------------")  # 60個
@@ -75,9 +90,11 @@ for link in listImageUrl:
     #if("http" in link.get('src')):
         print(link.get('src'))
 
+'''
 print("------------------------------------------------------------")  # 60個
 
-# htmlparse06.py
+# htmlparse06.py   http讀圖部分還沒好
+
 
 import os, shutil
 from bs4 import BeautifulSoup
@@ -96,6 +113,7 @@ listImageUrl=bs.select('td a img')
 # 逐一取得博碩新書圖檔並放入images資料夾下
 n=0
 for link in listImageUrl:
+    print(link.get('src'))
     imgUrl=link.get('src')
     if("http" in imgUrl):   
         imgName=imgUrl.split('/')[-1]
@@ -107,6 +125,7 @@ for link in listImageUrl:
         print("%s 下載完成" %(imgName))
         n+=1
 print('共下載 %d 張圖檔' %(n))
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -169,3 +188,4 @@ print('%s 網頁建置成功' %(pageName))
 
 print("------------------------------------------------------------")  # 60個
 
+print('done')

@@ -255,6 +255,27 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+import tkinter as tk
+
+def fnRead():
+    n=str(sclNum.get())
+    print(n)
+    
+       
+win = tk.Tk()
+win.title('讀數值')
+win.geometry('260x140')
+sclNum=tk.Scale(win,label='數值：',orient='horizontal',from_=1,to=99,length=200)
+sclNum.pack(pady=10)
+btnRead=tk.Button(win, text=' 確定 ',command=fnRead)
+btnRead.pack(pady=20)
+win.mainloop()
+
+
+
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 

@@ -2,9 +2,9 @@
 print("------------------------------------------------------------")  # 60個
 
 
+'''
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch07\grid.py
+# grid.py
 
 import tkinter as tk
 win=tk.Tk()
@@ -30,25 +30,25 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch07\label.py
+# label.py
 
 import tkinter as tk
 win=tk.Tk()
 win.geometry('300x200')
 win.title('Label標籤')
 win.configure(bg='white') 
-tk.Label(win, text = 'Label標籤', fg='blue',bg='lightblue',bitmap='gray25',\
+tk.Label(win, text = '王之渙涼州詞', fg='blue',bg='lightblue',bitmap='gray25',\
          compound='left',font=('標楷體', 24, 'bold')).pack()
-msg=('使用Label標籤元件可在視窗上提供各種文字訊息，例如顯示程式執行'
-     '過程的提示訊息，或是程式的執行結果。Label元件只能顯示文字資料，'
-     '無法接受使用者輸入資料。')
+msg=('黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。')
 tk.Label(win, text = msg, width=28,wraplength=240,justify='left',\
          pady=10,font=('細明體', 14)).pack()
+
 win.mainloop()
+
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch07\pack.py
+# pack.py
 
 import tkinter as tk
 win=tk.Tk()
@@ -69,7 +69,7 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch07\place.py
+# place.py
 
 import tkinter as tk
 win=tk.Tk()
@@ -87,23 +87,6 @@ lbl2.place(x=10,y=50,width=90,height=50)
 lbl3.place(x=10,y=105,width=90,height=50)
 lbl4.place(x=110,y=50,width=180,height=105)
 win.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-import tkinter as tk
-win=tk.Tk()
-win.geometry('300x200+80+50')
-win.title('我的第一個視窗應用程式')
-win.resizable(True, False)
-win.iconbitmap('first.ico')
-win.maxsize(500,200)
-win.minsize(100,200)
-win.configure(bg='yellow')
-win.mainloop()
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -148,14 +131,12 @@ tk.Button(win,text='C',width=3,command=fnCls).grid(row=4,column=1)
 tk.Button(win,text="=",width=3,command=fnCal).grid(row=4,column=2)
 tk.Button(win,text="+",width=3,command=lambda:fnKey('+')).grid(row=4,column=3)
 exp=''   #預設運算式為空字串
-win.mainloop()
 
+win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch09\drag.py
+# drag.py
 
 import tkinter as tk
 
@@ -197,7 +178,7 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch09\login.py
+# login.py
 
 import tkinter as tk
 
@@ -254,7 +235,7 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch09\night_market.py
+# night_market.py
 
 import tkinter as tk
 
@@ -313,7 +294,9 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch09\order.py
+print('下拉式選單')
+
+# order.py
 
 import tkinter as tk
 
@@ -353,7 +336,8 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch09\palette.py
+print('調色盤')
+# palette.py
 
 import tkinter as tk
 
@@ -387,7 +371,7 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch09\test.py
+# test.py
 
 import tkinter as tk
 import random as rnd
@@ -450,15 +434,16 @@ btnAns=tk.Button(frmSet, text='核對', command=fnAns,state='disable')
 btnAns.pack(side='right',pady=3)
 ans=0
 win.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+# album.py
+# 只能用png ?
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch08\album.py
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work1.png'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work2.png'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work3.png'
+filename4 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work4.png'
 
 import tkinter as tk
 def fnSet(img):
@@ -466,13 +451,18 @@ def fnSet(img):
     
 win = tk.Tk()
 win.title('相簿')
-win.geometry('250x230')
-imgPhoto1=tk.PhotoImage(file='sheep1.png')
-imgPhoto2=tk.PhotoImage(file='cat.png')
-imgPhoto3=tk.PhotoImage(file='sheep2.png')
+win.geometry('1000x900')
+
+imgPhoto1=tk.PhotoImage(file=filename1)
+imgPhoto2=tk.PhotoImage(file=filename2)
+imgPhoto3=tk.PhotoImage(file=filename3)
+imgPhoto4=tk.PhotoImage(file=filename4)
+
 imgPhoto1_s=imgPhoto1.subsample(4,4)
 imgPhoto2_s=imgPhoto2.subsample(4,4)
 imgPhoto3_s=imgPhoto3.subsample(4,4)
+imgPhoto4_s=imgPhoto4.subsample(4,4)
+
 lblPhoto=tk.Label(win,image=imgPhoto1)
 lblPhoto.pack()
 lfrmSet=tk.LabelFrame(win,text='選擇照片',relief='raised',borderwidth=2)
@@ -483,12 +473,14 @@ btn2=tk.Button(lfrmSet,image=imgPhoto2_s,command=lambda:fnSet(imgPhoto2))
 btn2.pack(side='left',padx=5)
 btn3=tk.Button(lfrmSet,image=imgPhoto3_s,command=lambda:fnSet(imgPhoto3))
 btn3.pack(side='left',padx=5)
-win.mainloop()
+btn4=tk.Button(lfrmSet,image=imgPhoto4_s,command=lambda:fnSet(imgPhoto4))
+btn4.pack(side='left',padx=5)
 
+win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch08\bmi.py
+# bmi.py
 
 import tkinter as tk
 
@@ -522,7 +514,7 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch08\circle.py
+# circle.py
 
 import tkinter as tk
 
@@ -565,7 +557,7 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch08\color.py
+# color.py
 
 import tkinter as tk
 
@@ -579,20 +571,25 @@ def fnGreen():
     frmColor.config(bg='green')  
     
 win = tk.Tk()
+
 win.title('顏色切換')
 win.geometry('240x200')
+
 frmColor=tk.Frame(win,width=200,height=100,relief='raised',borderwidth=3,bg='white')
 frmColor.pack(pady=5)
+
 lfrmBtns=tk.LabelFrame(win,text='顏色')
 lfrmBtns.pack(pady=20,fill='x')
+
 btnBlue=tk.Button(lfrmBtns,text='藍色',width=8,command=fnBlue).pack(side='left',padx=5)
 btnRed=tk.Button(lfrmBtns,text='紅色',width=8,command=fnRed).pack(side='left',padx=5)
 btnGreen=tk.Button(lfrmBtns,text='綠色',width=8,command=fnGreen).pack(side='left',padx=5)
+
 win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch08\counter.py
+# counter.py
 
 import tkinter as tk
 num = 0
@@ -621,12 +618,12 @@ lblTitle.pack(pady=10,fill='x')
 lblNum.pack(pady=20,fill='x')
 btnAdd.pack(pady=5, side='left',fill='x', expand=True)
 btnClear.pack(pady=5, side='left',fill='x', expand=True)
-win.mainloop()
 
+win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch08\end.py
+# end.py
 
 import tkinter as tk
 
@@ -647,7 +644,7 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch08\survey.py
+# survey.py
 
 import tkinter as tk
 

@@ -1,5 +1,6 @@
 import tkinter as tk
 import cv2
+
 def fnSave():
     cap = cv2.VideoCapture(0)   #打開攝影機
     fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
@@ -22,6 +23,8 @@ def fnSave():
     out.release()    #關閉寫入器
     cv2.destroyAllWindows()  #關閉視窗
 
+print('錄影程式')
+
 win = tk.Tk()
 win.title('錄製影片')
 win.geometry('280x160')
@@ -36,6 +39,7 @@ entFN.grid(row=2,column=1,pady=3,sticky='w')
 tk.Label(lfrmSet,text='按<確定>鈕開始錄製，按<Esc>鍵停止').grid(row=3,column=0,columnspan=2)
 btnSave=tk.Button(win, text=' 確定 ',command=fnSave)
 btnSave.pack(pady=10)
+
 win.mainloop()
 
 
