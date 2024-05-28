@@ -1,16 +1,17 @@
 #json01.py
 
 import json
+
+print("------------------------------------------------------------")  # 60個
+
 dictMeal={"編號":"A", "品名":"雙人分享餐", "單價":120}
 jsonStr=json.dumps(dictMeal, ensure_ascii=False, indent=4)
 print(jsonStr)
 
+print("------------------------------------------------------------")  # 60個
 
+# json02.py
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch15\json02.py
-
-import json
 jsonStr='{"編號":"A", "品名":"雙人分享餐", "單價":120}'
 
 dictMeal=json.loads(jsonStr)
@@ -22,9 +23,8 @@ print("單價：%d"%(dictMeal["單價"]))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch15\json03.py
+# json03.py
 
-import json
 jsonStr='''
     [    
         {"編號": "A","品名": "雙人分享餐","單價": 120},
@@ -49,9 +49,8 @@ for meal in listMeal:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch15\json04.py
+# json04.py
 
-import json
 listMeal=[{"編號":"A", "品名":"雙人分享餐", "單價":120},
           {"編號":"B", "品名":"歡樂全家餐", "單價":399},
           {"編號":"C", "品名":"情人精緻餐", "單價":540}]
@@ -64,9 +63,8 @@ print("JSON餐點記錄建置完成")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch15\json05.py
+# json05.py
 
-import json
 f=open("meal.json", "r", encoding="utf_8")
 listMeal = json.load(f)
 f.close()
@@ -79,9 +77,9 @@ for meal in listMeal:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch15\json06.py
+# json06.py
 
-import json, os  		            # 引用json與os套件
+import os
 import matplotlib.pyplot as plt  	# 引用圖表使用套件
 # 讀取109年9月臺中市10大易肇事路口.json資料並放入listTrafficEvent串列物件
 f=open("109年9月臺中市10大易肇事路口.json", "r",       encoding="utf_8")

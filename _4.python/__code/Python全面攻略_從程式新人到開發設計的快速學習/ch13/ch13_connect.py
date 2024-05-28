@@ -1,14 +1,9 @@
-#connect.py
+import sqlite3
 
-import sqlite3                          # 匯入sqlite3套件
-conn = sqlite3.connect('singMatch.db')  # 連線資料庫
-conn.close()                            # 關閉資料庫
+print("------------------------------------------------------------")  # 60個
 
+#delete.py
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\delete.py
-
-import sqlite3                         	# 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db') 	# 連線資料庫
 selId = int(input('請輸入要移除的 編號 : '))
 sql = 'DELETE FROM 參賽者 WHERE 編號 = {0}'.format(selId)
@@ -19,9 +14,8 @@ conn.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\insert01.py
+#insert01.py
 
-import sqlite3                          # 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')  # 連線資料庫
 print ('請輸入「參賽者」資料表的記錄資料')
 again = 'y'
@@ -39,7 +33,7 @@ conn.close()                          # 關閉資料庫
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\insert02.py
+#insert02.py
 
 import sqlite3                             	# 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')    	# 連線資料庫
@@ -62,7 +56,7 @@ conn.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\insert03.py
+#insert03.py
 
 import sqlite3                             	# 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')    	# 連線資料庫
@@ -85,7 +79,7 @@ conn.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\insert04.py
+#insert04.py
 
 import sqlite3                             	# 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')    	# 連線資料庫
@@ -108,7 +102,7 @@ conn.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\match.py
+#match.py
 
 import sqlite3
 
@@ -354,7 +348,7 @@ conn.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\relation.py
+#relation.py
 
 import sqlite3                             	# 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')    	# 連線資料庫
@@ -373,9 +367,8 @@ conn.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\select01.py
+#select01.py
 
-import sqlite3                          # 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')  # 連線資料庫
 sql = 'SELECT * FROM 參賽者'            
 data = conn.execute(sql)                # 執行SQL指令,傳回記錄資料
@@ -386,9 +379,8 @@ conn.close()                          # 關閉資料庫
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\select02.py
+#select02.py
 
-import sqlite3                          # 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')  # 連線資料庫
 sql = 'SELECT 姓名,電話 FROM 參賽者'            
 data = conn.execute(sql)                # 執行SQL指令,傳回記錄資料
@@ -399,9 +391,8 @@ conn.close()                           # 關閉資料庫
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\select03.py
+#select03.py
 
-import sqlite3                          # 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')  # 連線資料庫
 selId = int(input('請輸入要查詢的 編號 : '))
 sql = 'SELECT * FROM 參賽者 WHERE 編號 = {0}'.format(selId)
@@ -413,9 +404,8 @@ conn.close()                          # 關閉資料庫
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\select04.py
+#select04.py
 
-import sqlite3                          # 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')  # 連線資料庫
 selName = input('請輸入要查詢的 姓名 : ')
 sql = 'SELECT * FROM 參賽者 WHERE 姓名 = "{0}"'.format(selName)
@@ -427,7 +417,7 @@ conn.close()                          # 關閉資料庫
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\table.py
+#table.py
 
 import sqlite3                             	# 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db')    	# 連線資料庫
@@ -441,7 +431,7 @@ conn.close()                               	# 關閉資料庫
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch13\update.py
+#update.py
 
 import sqlite3                         	# 匯入sqlite3套件
 conn = sqlite3.connect('singMatch.db') 	# 連線資料庫
@@ -469,6 +459,4 @@ conn.commit()                           # 更新資料庫
 conn.close()                           	# 關閉資料庫
 
 print("------------------------------------------------------------")  # 60個
-
-
 

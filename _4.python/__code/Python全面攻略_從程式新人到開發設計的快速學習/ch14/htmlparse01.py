@@ -2,6 +2,8 @@
 
 import requests
 
+print("------------------------------------------------------------")  # 60個
+
 urlstr="http://www.drmaster.com.tw/Publish_Newbook.asp"
 response=requests.get(urlstr)
 
@@ -11,10 +13,8 @@ print("表頭：%s" %(response.headers))
 
 print("------------------------------------------------------------")  # 60個
 
+# htmlparse02.py
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\htmlparse02.py
-
-import requests
 urlstr="http://www.drmaster.com.tw/Publish_Newbook.asp"
 response=requests.get(urlstr)
 response.encoding="utf-8"
@@ -22,9 +22,8 @@ print("網頁程式碼：%s" %(response.text))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\htmlparse03.py
+# htmlparse03.py
 
-import requests
 # 指定圖片網址
 imgUrl='http://www.drmaster.com.tw/Cover/MP22030.png'
 imgName=imgUrl.split('/')[-1]
@@ -38,9 +37,8 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\htmlparse04.py
+# htmlparse04.py
 
-import requests
 from bs4 import BeautifulSoup
 # 博碩文化新書網頁
 urlstr='http://www.drmaster.com.tw/Publish_Newbook.asp'  
@@ -61,9 +59,8 @@ for book in listBookName:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\htmlparse05.py
+# htmlparse05.py
 
-import requests
 from bs4 import BeautifulSoup
 
 urlstr='http://www.drmaster.com.tw/Publish_Newbook.asp'
@@ -80,10 +77,9 @@ for link in listImageUrl:
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\htmlparse06.py
+# htmlparse06.py
 
 import os, shutil
-import requests
 from bs4 import BeautifulSoup
 
 # 若程式的路徑有images資料即刪除，否則即建立images
@@ -114,10 +110,9 @@ print('共下載 %d 張圖檔' %(n))
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python全面攻略_從程式新人到開發設計的快速學習\ch14\htmlparse07.py
+# htmlparse07.py
 
 import os, shutil
-import requests
 from bs4 import BeautifulSoup
 
 # 若程式的路徑有images資料即刪除，否則即建立images

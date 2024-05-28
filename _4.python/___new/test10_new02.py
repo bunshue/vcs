@@ -346,6 +346,7 @@ print(func())
 '''
 print('------------------------------------------------------------')	#60個
 
+"""
 import glob
 import pathlib
 
@@ -354,8 +355,48 @@ files = glob.glob("*.*")
 for filename in files:
     print(filename)
     pathlib.Path(filename).touch()
+"""
+print("------------------------------------------------------------")  # 60個
+
+# Count each letter in the string 
+def countLetters(line, counts): 
+    for ch in line:
+        if ch.isalpha():
+            counts[ord(ch) - ord('a')] += 1
+
+filename = 'data/engnews.txt'
+
+infile = open(filename, "r") # Open the file, 格式要unicode轉ascii
+
+counts = 26 * [0] # Create and initialize counts
+for line in infile:
+    # Invoke the countLetters function to count each letter
+    countLetters(line.lower(), counts)
+    
+# Display results
+for i in range(len(counts)):
+    if counts[i] != 0:
+        print(chr(ord('a') + i) + " appears " + str(counts[i])
+          + (" time" if counts[i] == 1 else " times"))
+
+infile.close() # Close file
+  
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

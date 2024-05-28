@@ -1,3 +1,5 @@
+
+print('找一個檔案固定詞出現的次數')
 import os.path
 import sys
 
@@ -9,7 +11,7 @@ def main():
                 "None", "nonlocal", "not", "or", "pass", "raise",
                 "return", "True", "try", "while", "with", "yield"}
 
-    filename = input("Enter a Python source code filename: ").strip()
+    filename = "CountKeywords.py"
 
     if not os.path.isfile(filename):  # Check if target file exists
         print("File", filename, "does not exist")
