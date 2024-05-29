@@ -20,7 +20,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -112,10 +112,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print(
-    "matplotlib 01 ------------------------------------------------------------"
-)  # 60個
-
 """
 python用mpl_finance中的candlestick_ohlc畫分時圖
 
@@ -197,9 +193,7 @@ for label in ax.get_xticklabels():
 
 plt.show()
 
-print(
-    "matplotlib 02 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 加載取數與繪圖所需的函數包
 import datetime
@@ -259,9 +253,7 @@ ax2.set_xticklabels(xticks_str)  # 設置橫軸標注日期
 
 plt.show()
 
-print(
-    "matplotlib 03 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 foldername = "C:/_git/vcs/_1.data/______test_files1"
 
@@ -299,9 +291,7 @@ plt.show()
 
 """
 
-print(
-    "matplotlib 04 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 時序圖
 import matplotlib.dates as mdates
@@ -329,9 +319,7 @@ plt.gcf().autofmt_xdate()  # 自動旋轉角度，以避免重疊
 
 plt.show()
 
-print(
-    "matplotlib 05 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 建立一個新的 figure
 # fig1 = plt.figure()
@@ -379,9 +367,7 @@ line.set_ydata(np.cos(x))
 
 plt.show()
 
-print(
-    "matplotlib 06 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 from matplotlib import pyplot as plt
 
@@ -474,10 +460,7 @@ plt.annotate(
 
 plt.show()
 
-print(
-    "matplotlib 07 ------------------------------------------------------------"
-)  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 def tickline():
     plt.xlim(0, 10), plt.ylim(-1, 1), plt.yticks([])
@@ -535,9 +518,7 @@ for i, locator in enumerate(locators):
 plt.subplots_adjust(bottom=0.01, top=0.99, left=0.01, right=0.99)
 plt.show()
 
-print(
-    "matplotlib 08 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 
 def plt_bar():
@@ -596,10 +577,7 @@ plt_contour()
 
 plt.show()
 
-print(
-    "matplotlib 09 ------------------------------------------------------------"
-)  # 60個
-
+print("------------------------------------------------------------")  # 60個
 
 def plt_grid():
     ax = plt.subplot(1, 2, 1)
@@ -650,9 +628,7 @@ plt_polar()
 
 plt.show()
 
-print(
-    "matplotlib 10 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 x = np.linspace(0, 2 * np.pi, 300)
 y = np.sin(x)
@@ -678,9 +654,7 @@ ax2.set_aspect(2)
 
 plt.show()
 
-print(
-    "matplotlib 11 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -705,9 +679,7 @@ xx.spines["bottom"].set_position(("data", 0))  # 設置邊框位置
 
 plt.show()
 
-print(
-    "matplotlib 15 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -764,9 +736,7 @@ xx.spines["left"].set_position(("data", 0))
 
 plt.show()
 
-print(
-    "matplotlib 16 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 degrees = [x * 15 for x in range(0, 25)]
 x = [math.cos(math.radians(d)) for d in degrees]
@@ -783,9 +753,7 @@ y = np.sin(np.radians(degrees))
 plt.plot(x, y)
 plt.show()
 
-print(
-    "matplotlib 17 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
 # 相同斜率平行移動
 
@@ -801,15 +769,86 @@ plt.plot(x, y3)
 
 print(x)
 
+'''
 
-print(
-    "matplotlib 18 ------------------------------------------------------------"
-)  # 60個
+print("------------------------------------------------------------")  # 60個
 
-print(
-    "matplotlib 19 ------------------------------------------------------------"
-)  # 60個
+#bar累計
+
+areas=['北部','中部','南部','東部']
+data1=[800000,580000,640000,420000]
+data2=[750000,460000,680000,340000]
+plt.bar(areas,data1,label='上半年')
+plt.bar(areas,data2,label='下半年',bottom=data1)
+
+plt.legend()
+plt.show()
+
+
+print("------------------------------------------------------------")  # 60個
+
+#bar並列
+
+areas=['北部','中部','南部','東部']
+width=0.4
+x1=[x-width/2 for x in range(len(areas))]
+x2=[x+width/2 for x in range(len(areas))]
+data1=[800000,580000,640000,420000]
+data2=[750000,460000,680000,340000]
+plt.bar(x1,data1,width,label='上半年')
+plt.bar(x2,data2,width,label='下半年')
+plt.xticks(range(len(areas)),labels=areas)
+
+plt.legend()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+#pie指定顏色
+
+datas=[40, 45, 15]
+lbls=['現金', '股票', '債券']
+exps=[0.2, 0, 0]
+clrs=['pink','lightblue','yellow']
+plt.pie(datas, labels=lbls, colors=clrs, explode=exps, autopct='%2.1f%%',startangle=0, shadow=True)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+dices=['1點','2點','3點','4點','5點','6點']
+data=[]
+times=[]
+for i in range(1000):
+    data.append(random.randint(1,6))
+
+for i in range(1,7):
+    times.append(data.count(i))
+    
+plt.pie(times,labels=dices,autopct='%2.1f%%',explode=[0.1,0.1,0.1,0.1,0.1,0.1],shadow=True)
+plt.title('擲骰子機率圖',fontsize=18)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+plt.rcParams['font.sans-serif']='DFKai-SB'  # 中文OK
+
+plt.rcParams['font.sans-serif']='mingliu'	#指定為明體字
+plt.rcParams['font.sans-serif']='mingliu'  # 中文OK
+
+
+"""
+
+

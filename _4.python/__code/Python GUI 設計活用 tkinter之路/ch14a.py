@@ -1,3 +1,7 @@
+"""
+使用 PanedWindow()
+
+"""
 import sys
 
 from tkinter import *
@@ -15,22 +19,12 @@ pw.add(bottom)                          # bottom標籤插入PanedWindow
 
 pw.mainloop()
 
+print('------------------------------------------------------------')	#60個
 
-
-
-
-
-
-
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch14\ch14_2.py
-
-# ch14_2.py
 from tkinter import *
 
 root = Tk()
-root.title("ch14_2")
+root.title("")
 
 pw = PanedWindow(orient=HORIZONTAL)     # 建立PanedWindow物件
 
@@ -45,27 +39,13 @@ pw.pack(fill=BOTH,expand=True,padx=10,pady=10)
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch14\ch14_3.py
-
-# ch14_3.py
 from tkinter import *
 from tkinter.ttk import *
 
 root = Tk()
-root.title("ch14_3")
+root.title("")
 
 pw = PanedWindow(orient=HORIZONTAL)     # 建立PanedWindow物件
 
@@ -80,27 +60,13 @@ pw.pack(fill=BOTH,expand=True,padx=10,pady=10)
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch14\ch14_4.py
-
-# ch14_4.py
 from tkinter import *
 from tkinter.ttk import *
 
 root = Tk()
-root.title("ch14_4")
+root.title("")
 
 pw = PanedWindow(orient=HORIZONTAL)     # 建立PanedWindow物件
 
@@ -115,22 +81,8 @@ pw.pack(fill=BOTH,expand=True,padx=10,pady=10)
 
 root.mainloop()
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch14\ch14_5.py
-
-# ch14_5.py
 from tkinter import *
 
 pw = PanedWindow(orient=HORIZONTAL)     # 建立外層PanedWindow
@@ -148,93 +100,7 @@ pwin.add(scale)
 
 pw.mainloop()
 
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch14\ch14_6.py
-
-# ch14_6.py
-from tkinter import *
-from tkinter.ttk import *
-
-root = Tk()
-root.title("ch14_6")
-root.geometry("300x160")
-
-notebook = Notebook(root)           # 建立Notebook
-
-frame1 = Frame()                    # 建立Frame1
-frame2 = Frame()                    # 建立Frame2
-
-notebook.add(frame1,text="頁次1")   # 建立頁次1同時插入Frame1
-notebook.add(frame2,text="頁次2")   # 建立頁次2同時插入Frame2
-notebook.pack(padx=10,pady=10,fill=BOTH,expand=TRUE)
-
-root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\Python GUI 設計活用 tkinter之路\ch14\ch14_7.py
-
-# ch14_7.py
-from tkinter import *
-from tkinter import messagebox
-from tkinter.ttk import *
-def msg():
-    messagebox.showinfo("Notebook","歡迎使用Notebook")
-
-root = Tk()
-root.title("ch14_7")
-root.geometry("300x160")
-
-notebook = Notebook(root)           # 建立Notebook
-
-frame1 = Frame()                    # 建立Frame1
-frame2 = Frame()                    # 建立Frame2
-
-label = Label(frame1,text="Python") # 在Frame1建立標籤控件
-label.pack(padx=10,pady=10)
-btn = Button(frame2,text="Help",command=msg) # 在Frame2建立按鈕控件
-btn.pack(padx=10,pady=10)
-
-notebook.add(frame1,text="頁次1")   # 建立頁次1同時插入Frame1
-notebook.add(frame2,text="頁次2")   # 建立頁次2同時插入Frame2
-notebook.pack(padx=10,pady=10,fill=BOTH,expand=TRUE)
-
-root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
 

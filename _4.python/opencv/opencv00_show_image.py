@@ -50,6 +50,11 @@ cv2.IMREAD_GRAYSCALE
 cv2.IMREAD_UNCHANGED
     讀取圖片中所有的 channels，包含透明度的 channel。
 
+cv2.IMREAD_COLOR     彩色 + 無透明度 (預設)
+cv2.IMREAD_GRAYSCALE 灰階
+cv2.IMREAD_UNCHANGED 彩色 + 有透明度
+
+
 """
 
 import cv2

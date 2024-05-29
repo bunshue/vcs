@@ -1,10 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import scrolledtext #导入滚动文本框的模块
-win = tk.Tk()
-win.title("Python GUI") # 加标题
+
+window = tk.Tk()
+window.title("Python GUI") # 加标题
+
 #创建一个容器,
-monty = ttk.LabelFrame(win, text=" Monty Python ") #创建一个容器，其父容器为win
+monty = ttk.LabelFrame(window, text=" Monty Python ") #创建一个容器，其父容器为win
 monty.grid(column=0, row=0, padx=10, pady=10) #该容器外围需要留出的空余空间
 aLabel = ttk.Label(monty, text="A Label")
 ttk.Label(monty, text="Chooes a number").grid(column=1, row=0) #添加一个标签，并将其列设置为1，行设置为0
@@ -48,12 +50,12 @@ colors = ["Blue", "Gold", "Red"]
 def radCall():
     radSel = radVar.get()
     if radSel == 0:
-        win.configure(background=colors[0])#设置整个界面的背景颜色
+        window.configure(background=colors[0])#设置整个界面的背景颜色
         print(radVar.get())
     elif radSel == 1:
-        win.configure(background=colors[1])
+        window.configure(background=colors[1])
     elif radSel == 2:
-        win.configure(background=colors[2])
+        window.configure(background=colors[2])
 radVar = tk.IntVar()  #通过tk.IntVar(),获取单选按钮value参数对应的值
 radVar.set(99)
 for col in range(3):
@@ -66,4 +68,6 @@ scrolH = 3 #设置文本框的高度
 #wrap=tk.WORD这个值表示在行的末尾如果有一个单词跨行，会将该单词放到下一行显示
 scr = scrolledtext.ScrolledText(monty, width=scrolW, height=scrolH, wrap=tk.WORD)     
 scr.grid(column=0, columnspan=3)
-win.mainloop()#当调用mainloop()时,窗口才会显示出来
+
+window.mainloop()#当调用mainloop()时,窗口才会显示出来
+

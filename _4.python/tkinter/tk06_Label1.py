@@ -1,8 +1,9 @@
 import sys
+import tkinter as tk
+from tkinter import ttk
+
 
 print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
 
 window = tk.Tk()
 
@@ -113,10 +114,6 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-
-import tkinter as tk
-from tkinter import ttk
 
 window = tk.Tk()
 
@@ -299,50 +296,42 @@ label.grid(column = 1, row = 0)
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
+window = tk.Tk()
 
-win = tk.Tk()
-
-label1 =tk.Label(win,text="Hello World!")
+label1 =tk.Label(window, text="Hello World!")
 label1.pack()
-label2 =tk.Label(win,bg="yellow",text="Hello No2!",fg="red")
+label2 =tk.Label(window, bg="yellow",text="Hello No2!",fg="red")
 label2.pack()
-label3 =tk.Label(win,text="Hello No3!")
+label3 =tk.Label(window, text="Hello No3!")
 label3.pack(side="top", anchor="w" )
-label4 =tk.Label(win,text="Hello No4!")
+label4 =tk.Label(window, text="Hello No4!")
 label4.place(x=120, y=160)
-label5 =tk.Label(win,text="Powen Ko",bg="#ff0000")
+label5 =tk.Label(window, text="Powen Ko",bg="#ff0000")
 label5.place(x=120, y=140)
 
-win.mainloop()
-
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
 
 from PIL import ImageTk, Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-win = tk.Tk()
+window = tk.Tk()
 img = ImageTk.PhotoImage(Image.open(filename))
-label1 =tk.Label(win, image = img)
+label1 =tk.Label(window, image = img)
 label1.pack()
 
-win.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-'''
+"""
 使用 label 顯示圖片 jpg + gif
-'''
+"""
 
-import tkinter as tk
 from PIL import Image, ImageTk
 
 # 建立主視窗

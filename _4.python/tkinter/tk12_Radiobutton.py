@@ -1,8 +1,11 @@
 # Python 測試 tkinter : Radiobutton
 
+import sys
 import glob
 import tkinter as tk
 from tkinter import ttk
+
+print("------------------------------------------------------------")  # 60個
 
 # 建立主視窗
 window = tk.Tk()
@@ -142,21 +145,23 @@ for mp3 in mp3files:  #建立歌曲選項按鈕
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-
 window.mainloop()
-
 
 print("------------------------------------------------------------")  # 60個
 
-
 import tkinter as tk
 import tkinter.font as tkfont
+
+
 def radbut_click():
     selected_item = area.get()
     lab_result.config(text=AREA_OPTIONS[selected_item][0])
+
+
 win = tk.Tk()
 win.geometry("400x300")
 win.title("試題與測驗分析程式")
+
 default_font = tkfont.nametofont('TkDefaultFont')
 default_font.configure(size=15)
 AREA_OPTIONS=(('屏東縣',0),('高雄市',1),('台南市',2),('台東縣',3))
@@ -167,11 +172,13 @@ for item, value in AREA_OPTIONS:
     radbut.pack()
 lab_result = tk.Label(win, font=default_font, fg='black')
 lab_result.pack(padx=10, pady=(5,10))       
+
 win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
+
 wnd = Tk()
 wnd.title('程式語言能力調查：')
 def select():
@@ -189,13 +196,13 @@ for item, val in place:
         font = ft, variable = var, padx = 20,
         command = select).pack(anchor = NW)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
+
 wnd = Tk()
 wnd.title('Radiobutton元件')
+
 def select():
     print('你的選項是 :', var.get())
 
@@ -211,10 +218,10 @@ for item, val in place:
     Radiobutton(wnd, text = item, value = val,
         font = ft, variable = var, padx = 20,
         command = select).pack(anchor = W)
+
 mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
 
 def printSelection():
     label.config(text="你是" + var.get())
@@ -278,11 +285,15 @@ lunch = {0:'A 套餐',1:'B 套餐',2:'C 套餐'}
 tk.Radiobutton(window, text = lunch[0], variable = radio_value, value = 0).pack()
 tk.Radiobutton(window, text = lunch[1], variable = radio_value, value = 1).pack()
 tk.Radiobutton(window, text = lunch[2], variable = radio_value, value = 2).pack()
+
+
 def buy():
 	value = radio_value.get()
 	print(lunch[value])
 
+
 tk.Button(window, text='點餐', command=buy).pack()
+
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
@@ -303,7 +314,6 @@ tk.Button(window, text='點菜', command=buy).pack()
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
-
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
@@ -392,6 +402,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
+
 def printSelection():
     label.config(text="你是" + var.get())
 
@@ -412,15 +423,18 @@ rb2 = Radiobutton(window,text="女生",
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
+
+
 def printSelection():
     print(cities[var.get()])            # 列出所選城市
 
+
 window = Tk()
 window.title("ch18_25")                 # 視窗標題
+
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
 var = IntVar()
@@ -439,11 +453,15 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 from tkinter import *
+
+
 def printSelection():
     print(cities[var.get()])            # 列出所選城市
 
+
 window = Tk()
 window.title("ch18_26")                 # 視窗標題
+
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
 var = IntVar()

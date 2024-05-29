@@ -1,14 +1,32 @@
+"""
+# 以Menu元件建置功能表
+# 以Menu元件建置功能表
+
+
+"""
+
 import sys
-
-print("------------------------------------------------------------")  # 60個
-
 import tkinter as tk
 from tkinter import ttk
 
-# window
+print("------------------------------------------------------------")  # 60個
+
 window = tk.Tk()
-window.geometry('600x400')
-window.title('Menu')
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
 
 #建立功能選單
 menu = tk.Menu(window)
@@ -171,6 +189,21 @@ menu3.add_command(label = "About...", command = callback)
 '''
 window = tk.Tk()
 
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
 def supermode():
 	print('super mode!')
 
@@ -189,6 +222,22 @@ window.config(menu = menu)
 import tkinter.filedialog as fd
 
 window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
 
 def open():
 	filename = fd.askopenfilename()
@@ -229,7 +278,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 以Menu元件建置功能表
 from tkinter import *
 from tkinter import messagebox
 
@@ -301,6 +349,22 @@ print("------------------------------------------------------------")  # 60個
 from tkinter import filedialog, messagebox
 
 base = tk.Tk()
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
 
 def new_file():
     print('Create a new file')
@@ -357,9 +421,22 @@ base.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
 
 menubar = tk.Menu(win)
 win.config(menu = menubar)
@@ -369,123 +446,6 @@ edit_menu = tk.Menu(menubar)
 menubar.add_cascade(label = "編輯", menu = edit_menu)
 run_menu = tk.Menu(menubar)
 menubar.add_cascade(label = "執行", menu =run_menu)
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-win.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-
-menubar = tk.Menu(win)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-win = tk.Tk()
-win.title("")
-win.geometry('300x200')
-
-menubar = tk.Menu(win,tearoff=0)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
 window_menu = tk.Menu(menubar)
 menubar.add_cascade(label = "視窗", menu = window_menu)
 online_menu = tk.Menu(menubar)
@@ -496,6 +456,203 @@ win.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+menubar = tk.Menu(window,tearoff=0)
+window.config(menu = menubar)
+file_menu = tk.Menu(menubar,tearoff=0)
+menubar.add_cascade(label = "檔案", menu = file_menu)
+file_menu.add_command(label = "開啟舊檔")  
+edit_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "編輯", menu = edit_menu)
+edit_menu.add_command(label = "復原") 
+run_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "執行", menu =run_menu)
+run_menu.add_command(label = "編譯及執行本程式")
+window_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "視窗", menu = window_menu)
+online_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "線上說明", menu = online_menu)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+menubar = tk.Menu(window,tearoff=0)
+window.config(menu = menubar)
+file_menu = tk.Menu(menubar,tearoff=0)
+menubar.add_cascade(label = "檔案", menu = file_menu)
+file_menu.add_command(label = "開啟舊檔")  
+edit_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "編輯", menu = edit_menu)
+edit_menu.add_command(label = "復原") 
+run_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "執行", menu =run_menu)
+run_menu.add_command(label = "編譯及執行本程式")
+window_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "視窗", menu = window_menu)
+online_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "線上說明", menu = online_menu)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+menubar = tk.Menu(window)
+window.config(menu = menubar)
+file_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "檔案", menu = file_menu)
+edit_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "編輯", menu = edit_menu)
+run_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "執行", menu =run_menu)
+window_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "視窗", menu = window_menu)
+online_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "線上說明", menu = online_menu)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+menubar = tk.Menu(window,tearoff=0)
+window.config(menu = menubar)
+file_menu = tk.Menu(menubar,tearoff=0)
+menubar.add_cascade(label = "檔案", menu = file_menu)
+file_menu.add_command(label = "開啟舊檔")  
+edit_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "編輯", menu = edit_menu)
+edit_menu.add_command(label = "復原") 
+run_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "執行", menu =run_menu)
+run_menu.add_command(label = "編譯及執行本程式")
+window_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "視窗", menu = window_menu)
+online_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "線上說明", menu = online_menu)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+menubar = tk.Menu(window,tearoff=0)
+window.config(menu = menubar)
+file_menu = tk.Menu(menubar,tearoff=0)
+menubar.add_cascade(label = "檔案", menu = file_menu)
+file_menu.add_command(label = "開啟舊檔")  
+edit_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "編輯", menu = edit_menu)
+edit_menu.add_command(label = "復原") 
+run_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "執行", menu =run_menu)
+run_menu.add_command(label = "編譯及執行本程式")
+window_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "視窗", menu = window_menu)
+online_menu = tk.Menu(menubar)
+menubar.add_cascade(label = "線上說明", menu = online_menu)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
 
 def fileopen():
 	print('進行開啟檔案的處理')
@@ -518,6 +675,22 @@ print('------------------------------------------------------------')	#60個
 import tkinter.filedialog as fd
 
 window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
 
 def open(): 
 	filename = fd.askopenfilename()
@@ -574,13 +747,33 @@ window.config(menu=menubar)
 import tkinter.filedialog as fd
 
 window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+
 def open():
 	filename = fd.askopenfilename()
 print('open file => ' + filename)
+
 def exit():
 	window.destroy()
+
 def find():
 	print('find !')
+
 menubar = tk.Menu(window)
 filemenu = tk.Menu(menubar)
 menubar.add_cascade(label='File', menu=filemenu)
@@ -591,6 +784,7 @@ editmenu = tk.Menu(menubar)
 menubar.add_cascade(label='Edit', menu=editmenu)
 editmenu.add_command(label='find', command=find)
 window.config(menu=menubar)
+
 window.mainloop()
 
 """
@@ -598,35 +792,39 @@ print("------------------------------------------------------------")  # 60個
 
 import tkinter.messagebox as tkmessagebox
 import tkinter.font as tkfont
+
 def Cal():
     tkmessagebox.showinfo(title="計算", message="計算資料中的試題難度")
+
 def View():
     tkmessagebox.showinfo(title="檢視", message="檢視計算的結果")    
+
 def About():
     tkmessagebox.showinfo(title="關於我們", message="程式設計者:屏東大學教育學系陳新豐")
+
 def Exit():
-    win.destroy() 
-def main():
-    global win
-    win = tk.Tk()
-    win.geometry("800x600")
-    win.title("試題與測驗分析程式")
-    default_font = tkfont.nametofont('TkDefaultFont')
-    default_font.configure(size=15)
-    menubar = tk.Menu(win)
-    win.config(menu=menubar)
-    menu_file = tk.Menu(menubar, tearoff = 0)
-    menu_cal  = tk.Menu(menubar, tearoff = 0)
-    menu_help = tk.Menu(menubar, tearoff = 0)    
-    menubar.add_cascade(label='檔案', menu=menu_file)
-    menubar.add_cascade(label='計算', menu=menu_cal)
-    menubar.add_cascade(label='Help', menu=menu_help)
-    menu_file.add_command(label='結束', command=Exit)
-    menu_cal.add_command(label='計算', command=Cal)
-    menu_cal.add_command(label='檢視', command=View)
-    menu_help.add_command(label='關於', command=About)
-    win.mainloop()
-main()
+    win.destroy()
+
+window = tk.Tk()
+window.geometry("800x600")
+window.title("試題與測驗分析程式")
+
+default_font = tkfont.nametofont('TkDefaultFont')
+default_font.configure(size=15)
+menubar = tk.Menu(window)
+window.config(menu=menubar)
+menu_file = tk.Menu(menubar, tearoff = 0)
+menu_cal  = tk.Menu(menubar, tearoff = 0)
+menu_help = tk.Menu(menubar, tearoff = 0)
+menubar.add_cascade(label='檔案', menu=menu_file)
+menubar.add_cascade(label='計算', menu=menu_cal)
+menubar.add_cascade(label='Help', menu=menu_help)
+menu_file.add_command(label='結束', command=Exit)
+menu_cal.add_command(label='計算', command=Cal)
+menu_cal.add_command(label='檢視', command=View)
+menu_help.add_command(label='關於', command=About)
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -693,29 +891,30 @@ def View():
 	     print ("沒有選擇檔案")
 def About():
     tkmessagebox.showinfo(title="關於我們", message="程式設計者:屏東大學教育學系陳新豐")
+
 def Exit():
     win.destroy() 
-def main():
-    global win    
-    win = tk.Tk()
-    win.geometry("800x600")
-    win.title("試題與測驗分析程式")
-    default_font = tkfont.nametofont('TkDefaultFont')
-    default_font.configure(size=15)
-    menubar = tk.Menu(win)
-    win.config(menu=menubar)
-    menu_file = tk.Menu(menubar, tearoff = 0)
-    menu_cal  = tk.Menu(menubar, tearoff = 0)
-    menu_help = tk.Menu(menubar, tearoff = 0)    
-    menubar.add_cascade(label='檔案', menu=menu_file)
-    menubar.add_cascade(label='計算', menu=menu_cal)
-    menubar.add_cascade(label='Help', menu=menu_help)
-    menu_file.add_command(label='結束', command=Exit)
-    menu_cal.add_command(label='計算', command=Cal)
-    menu_cal.add_command(label='檢視', command=View)    
-    menu_help.add_command(label='關於', command=About)
-    win.mainloop()
-main()
+
+window = tk.Tk()
+window.geometry("800x600")
+window.title("試題與測驗分析程式")
+
+default_font = tkfont.nametofont('TkDefaultFont')
+default_font.configure(size=15)
+menubar = tk.Menu(window)
+window.config(menu=menubar)
+menu_file = tk.Menu(menubar, tearoff = 0)
+menu_cal  = tk.Menu(menubar, tearoff = 0)
+menu_help = tk.Menu(menubar, tearoff = 0)
+menubar.add_cascade(label='檔案', menu=menu_file)
+menubar.add_cascade(label='計算', menu=menu_cal)
+menubar.add_cascade(label='Help', menu=menu_help)
+menu_file.add_command(label='結束', command=Exit)
+menu_cal.add_command(label='計算', command=Cal)
+menu_cal.add_command(label='檢視', command=View)
+menu_help.add_command(label='關於', command=About)
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -774,8 +973,8 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
 window = tk.Tk()
+
 def supermode():
 	print('super mode!')
 
@@ -790,6 +989,7 @@ print('------------------------------------------------------------')	#60個
 import tkinter.filedialog as fd
 
 window = tk.Tk()
+
 def open():
 	filename = fd.askopenfilename()
 	print('open file => ' + filename)
@@ -913,8 +1113,6 @@ app.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-# 以Menu元件建置功能表
 from tkinter import *
 from tkinter import messagebox
 
@@ -934,7 +1132,6 @@ def Save():
 def Copyright():
     messagebox.showinfo('版權宣告',
         '我的第一支含視窗功能表程式-使用Python語言撰寫')
-
 
 wnd = Tk()#主視窗物件
 wnd.title('GUI介面-Menu')

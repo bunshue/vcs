@@ -56,7 +56,6 @@ sheet_name = sheet.title
 ROW = sheet.max_row
 COL = sheet.max_column
 print("此工作表名稱、總列數、總行數 :", sheet_name, ROW, COL)
-
 print("工作表有資料最大欄數", COL)
 print("工作表有資料最小欄數", sheet.min_column)
 print("工作表有資料最大列數", ROW)
@@ -104,10 +103,6 @@ print("目前工作表： ", workbook.active.title)
 print("------------------------------------------------------------")  # 60個
 
 print("顯示最大、最小 欄數、列數")
-
-filename_r = "data/python_ReadWrite_EXCEL.xlsx"
-
-workbook = openpyxl.load_workbook(filename_r)
 
 workbook.active = 0
 sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
@@ -160,10 +155,10 @@ for value_tuple in list_values[1:]:
 
 print("------------------------------")  # 30個
 
-print("顯示資料 方法三")
+print("顯示資料 方法三 所有工作表")
 
 for sheet in workbook:
-    print("sheet", sheet)
+    print("工作表 sheet :", sheet)
     for row in sheet:
         # print('row')
         for cell in row:
@@ -175,21 +170,18 @@ print("------------------------------")  # 30個
 
 print("顯示資料 方法四")
 
-try:
-    workbook = openpyxl.load_workbook(filename_r)
-    for sheetname in workbook.sheetnames:  # 所有工作表
-        sheet = workbook[sheetname]
-        ROW = sheet.max_row
-        COL = sheet.max_column
-        print("此工作表名稱、總列數、總行數 :", sheet_name, ROW, COL)
-        for c in range(1, COL + 1):  # 欄1〜最後
-            for r in range(1, ROW + 1):  # 列1〜最後
-                cell = sheet.cell(row=r, column=c)  # 儲存格
-                if cell.value != None:
-                    print(cell.value, end=" ")
-            print()
-except:
-    print("程式執行失敗。")
+workbook = openpyxl.load_workbook(filename_r)
+for sheetname in workbook.sheetnames:  # 所有工作表
+    sheet = workbook[sheetname]
+    ROW = sheet.max_row
+    COL = sheet.max_column
+    print("此工作表名稱、總列數、總行數 :", sheet_name, ROW, COL)
+    for c in range(1, COL + 1):  # 欄1〜最後
+        for r in range(1, ROW + 1):  # 列1〜最後
+            cell = sheet.cell(row=r, column=c)  # 儲存格
+            if cell.value != None:
+                print(cell.value, end=" ")
+        print()
 
 print("------------------------------")  # 30個
 
@@ -221,18 +213,19 @@ print("顯示資料 方法六")
 
 sheet1 = workbook["animals1"]
 v = sheet1.iter_rows(min_row=1, min_col=1, max_col=5, max_row=4)  # 取出四格內容
-print(v)
+#print(v)
 for i in v:
     for j in i:
         print(j.value, end=" ")
     print()
 
 print("------------------------------")  # 30個
+print('之前先顯示工作表')
+print("目前工作表： ", workbook.active.title)
 
 print("顯示資料 方法七 讀取工作表所有內容")
 
 filename_r = "data/python_ReadWrite_EXCEL.xlsx"
-
 workbook = openpyxl.load_workbook(filename_r)
 
 workbook.active = 0
@@ -244,6 +237,9 @@ for row in sheet:
         print(cell.value, end = " ")
     print()
 print()
+
+print('之後先顯示工作表')
+print("目前工作表： ", workbook.active.title)
 
 print("------------------------------")  # 30個
 
@@ -262,6 +258,13 @@ print()
 print("------------------------------")  # 30個
 
 print("顯示資料 方法八")
+
+filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+workbook = openpyxl.load_workbook(filename_r)
+
+workbook.active = 0
+sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
+print("excel活動工作表： ", sheet)
 
 select_data = sheet["A2":"D7"]
 for a, b, c, d in select_data:
@@ -382,6 +385,7 @@ print("建立 xlsx OK, 檔案 : " + filename_w)
 print("------------------------------------------------------------")  # 60個
 
 print("openpyxl test 07a 建立新檔, 簡易資料")
+print("開啟空白的活頁簿")
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
 """
@@ -391,6 +395,7 @@ print("讀取 xlsx, 檔案 : " + filename_r)
 workbook = openpyxl.load_workbook(filename_r)
 """
 
+print("開啟工作表")
 # 取得第 0 個工作表
 sheet = workbook.worksheets[0]
 
@@ -414,9 +419,10 @@ print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 print("openpyxl test 08 建立新檔 完整資料 + 格式")
-
+print("開啟空白的活頁簿")
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
+print("開啟工作表")
 # 取得第 0 個工作表
 sheet = workbook.worksheets[0]
 
