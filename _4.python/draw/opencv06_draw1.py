@@ -44,7 +44,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("建立畫布(黑色)")
 W, H = 640, 480
 image = np.zeros((H, W, 3), dtype="uint8")
@@ -491,3 +491,36 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+'''
+
+print("建立畫布(黑色)")
+W, H = 600, 600
+image = np.zeros((H, W, 3), dtype="uint8")
+
+R = 250
+
+points = list()
+
+N = 10
+for i in range(N):
+    px, py = R * math.cos(math.pi*i*360/N/180), R * math.sin(math.pi*i*360/N/180)
+    points.append((W//2+int(px), H//2+int(py)))
+
+print(points)
+
+for ptx in points:
+    cv2.circle(image, (ptx), 10, (0, 0, 255), -1)
+
+print("畫連線")
+
+for i in range(len(points)):
+	for j in range(i + 1, len(points)):
+		corner1 = tuple(points[i])
+		corner2 = tuple(points[j])
+		color = tuple(map(lambda x: int(x), np.random.randint(0, 255, size=3)))
+		cv2.line(image, corner1, corner2, color, 1)
+
+
+cv2.imshow("OpenCV Draw 1", image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

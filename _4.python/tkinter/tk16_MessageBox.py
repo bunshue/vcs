@@ -6,7 +6,7 @@ import tkinter.simpledialog
 import tkinter.colorchooser
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -154,10 +154,8 @@ tk.Label(window,image=html_gif).pack()
 
 """
 
-'''
 print("------------------------------------------------------------")  # 60個
 
-'''
 window = tk.Tk()
 
 window.withdraw()
@@ -200,7 +198,7 @@ menu.add_cascade(label="說明",menu=helpmenu)
 helpmenu.add_command(label="程式說明",command=about)
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """

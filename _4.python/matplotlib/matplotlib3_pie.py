@@ -278,6 +278,31 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+#pie指定顏色
+
+datas=[40, 45, 15]
+lbls=['現金', '股票', '債券']
+exps=[0.2, 0, 0]
+clrs=['pink','lightblue','yellow']
+plt.pie(datas, labels=lbls, colors=clrs, explode=exps, autopct='%2.1f%%',startangle=0, shadow=True)
+
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+dices=['1點','2點','3點','4點','5點','6點']
+data=[]
+times=[]
+for i in range(1000):
+    data.append(random.randint(1,6))
+
+for i in range(1,7):
+    times.append(data.count(i))
+    
+plt.pie(times,labels=dices,autopct='%2.1f%%',explode=[0.1,0.1,0.1,0.1,0.1,0.1],shadow=True)
+plt.title('擲骰子機率圖',fontsize=18)
+plt.show()
+
 
 print("------------------------------------------------------------")  # 60個
 

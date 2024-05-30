@@ -36,8 +36,18 @@ scrollbar.config(command = listbox.yview)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+tk.Label(text = 'Listbox 測試').pack()
+
+listbox = tk.Listbox(window)
+#Listbox內加入項目
+listbox.insert(tk.END, "a list entry")
+for item in ["one", "two", "three", "four"]:
+    listbox.insert(tk.END, item)
+
+listbox.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
 window.mainloop()
-
-
-
-

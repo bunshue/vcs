@@ -1,3 +1,4 @@
+import os
 import sys
 import time
 import datetime
@@ -71,21 +72,22 @@ print("你要查詢的月份的最後一天是西元",check(year,month))
 
 print('------------------------------------------------------------')	#60個
 
-timeNow = datetime.datetime.now()
-print(type(timeNow))
-print("列出現在時間 : ", timeNow)
-print("年 : ", timeNow.year)
-print("月 : ", timeNow.month)
-print("日 : ", timeNow.day)
-print("時 : ", timeNow.hour)
-print("分 : ", timeNow.minute)
-print("秒 : ", timeNow.second)
+now = datetime.datetime.now()
+print(now.ctime())
 
-print("------------------------------------------------------------")  # 60個
+now = datetime.datetime.now()
+print(type(now))
+print("列出現在時間 : ", now)
+print("年 : ", now.year)
+print("月 : ", now.month)
+print("日 : ", now.day)
+print("時 : ", now.hour)
+print("分 : ", now.minute)
+print("秒 : ", now.second)
 
-timeNow = datetime.datetime.now()
-print(timeNow.strftime("%Y/%m/%d %H:%M:%S"))
-print(timeNow.strftime("%y-%b-%d %H-%M-%S"))
+now = datetime.datetime.now()
+print(now.strftime("%Y/%m/%d %H:%M:%S"))
+print(now.strftime("%y-%b-%d %H-%M-%S"))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -220,6 +222,7 @@ print('------------------------------------------------------------')	#60個
 # a = input('請輸入你的出生年月日 ( yyyy/mm/dd )：')
 a = "2006/03/11"
 now = datetime.datetime.now()
+
 ad = datetime.datetime.strptime(a, "%Y/%m/%d")
 y = now.year - ad.year
 m = now.month - ad.month
@@ -277,10 +280,11 @@ print(deltaTime.days, deltaTime.seconds, deltaTime.microseconds)
 
 print("------------------------------------------------------------")  # 60個
 
+now = datetime.datetime.now()
+print("現在時間是 : ", now)
+
 deltaTime = datetime.timedelta(days=100)
-timeNow = datetime.datetime.now()
-print("現在時間是 : ", timeNow)
-print("100天後是  : ", timeNow + deltaTime)
+print("100天後是  : ", now + deltaTime)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -364,9 +368,7 @@ print("------------------------------------------------------------")  # 60個
 
 print('---- strftime() 可以將時間格式化 --------------------------------------------------------')	#60個
 
-
 now = datetime.datetime.now()
-
 print('現在的日期時間 :', now)
 
 year = now.strftime("%Y")
@@ -433,12 +435,12 @@ print(cc)
 print('------------------------------------------------------------')	#60個
 
 #取得查詢當年年份及上個月月份
-now_date = datetime.datetime.now() # 取得查詢當下的時間
-now_year = now_date.year # 取得查詢當下當年年份
+now = datetime.datetime.now() # 取得查詢當下的時間
+now_year = now.year # 取得查詢當下當年年份
 
 # 取得查詢當下上個月月份
-if(now_date.month != 1):
-    last_month = now_date.month - 1
+if(now.month != 1):
+    last_month = now.month - 1
 else:
     last_month = 12
 
@@ -460,23 +462,18 @@ time.sleep(0.3456)  #過了一段時間
 
 datetime_sp = datetime.datetime.now()
 
-print((datetime_sp - datetime_st).seconds)
+print("量測時間 :", (datetime_sp - datetime_st).seconds)
 
 print('------------------------------------------------------------')	#60個
 
-
-#兩日期相減 
 d1 = datetime.datetime(2005, 2, 16)
 d2 = datetime.datetime(2004, 12, 31)
-print((d1 - d2).days)
-
+print("兩日期相減 :", (d1 - d2).days)
 
 print('------------------------------------------------------------')	#60個
 
 a = datetime.datetime(2012, 3, 1)
 b = datetime.datetime(2012, 2, 28)
-
-print('------------------------------------------------------------')	#60個
 
 print(a - b)
 print("兩者時間差" , a - b)
@@ -511,13 +508,6 @@ print(expected)
 today = datetime.datetime.today()
 birthday = datetime.datetime(2006, 3, 11, 9, 15, 0)
 print('相距天時分秒 :', today - birthday)
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -609,15 +599,13 @@ print(new_date)
 new_date = now2 + datetime.timedelta(-1)    #昨天
 print(new_date)
 
-import datetime
-
 print('今日日期')
 today = datetime.date.today()
 print(today)
 
 print('現在時間')
-time_now = datetime.datetime.now()
-print(time_now)
+now = datetime.datetime.now()
+print(now)
 
 print('1天前的時間')
 time_1day = datetime.timedelta(days=1)
@@ -628,7 +616,7 @@ time_60day = datetime.timedelta(days=60)
 print(time_60day)
 
 print('現在時間 - 60天前的時間')
-diff60days = time_now - time_60day
+diff60days = now - time_60day
 print(diff60days)
 
 print('現在的年份')
@@ -640,7 +628,6 @@ print("%d" % (datetime.datetime.now() + datetime.timedelta(days=600)).year)
 print('900天後的年份')
 print("%d" % (datetime.datetime.now() + datetime.timedelta(days=900)).year)
 
-
 print('相隔一段時間')
 time_diff = datetime.timedelta(weeks=1, days=30, hours=2, minutes=40)
 print(time_diff)
@@ -650,13 +637,8 @@ dt1 = datetime.datetime(2024, 4, 29, 12, 34, 56)
 dt2 = datetime.datetime(2006, 3, 11, 9, 15, 30)
 print(dt1-dt2)
 
-sys.exit()
 print('------------------------------------------------------------')	#60個
 
-#而如果要輸出此時準確的時間的話則
-print(time.localtime())
-
-#而我們也可以一一拆解
 now = datetime.datetime.now()
 print(now.year)
 print(now.month)
@@ -808,6 +790,3 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
-
-
-

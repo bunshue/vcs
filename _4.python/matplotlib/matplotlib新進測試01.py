@@ -20,7 +20,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -769,65 +769,10 @@ plt.plot(x, y3)
 
 print(x)
 
-'''
-
-print("------------------------------------------------------------")  # 60個
-
-#bar累計
-
-areas=['北部','中部','南部','東部']
-data1=[800000,580000,640000,420000]
-data2=[750000,460000,680000,340000]
-plt.bar(areas,data1,label='上半年')
-plt.bar(areas,data2,label='下半年',bottom=data1)
-
-plt.legend()
-plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
 
-#bar並列
-
-areas=['北部','中部','南部','東部']
-width=0.4
-x1=[x-width/2 for x in range(len(areas))]
-x2=[x+width/2 for x in range(len(areas))]
-data1=[800000,580000,640000,420000]
-data2=[750000,460000,680000,340000]
-plt.bar(x1,data1,width,label='上半年')
-plt.bar(x2,data2,width,label='下半年')
-plt.xticks(range(len(areas)),labels=areas)
-
-plt.legend()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#pie指定顏色
-
-datas=[40, 45, 15]
-lbls=['現金', '股票', '債券']
-exps=[0.2, 0, 0]
-clrs=['pink','lightblue','yellow']
-plt.pie(datas, labels=lbls, colors=clrs, explode=exps, autopct='%2.1f%%',startangle=0, shadow=True)
-
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-dices=['1點','2點','3點','4點','5點','6點']
-data=[]
-times=[]
-for i in range(1000):
-    data.append(random.randint(1,6))
-
-for i in range(1,7):
-    times.append(data.count(i))
-    
-plt.pie(times,labels=dices,autopct='%2.1f%%',explode=[0.1,0.1,0.1,0.1,0.1,0.1],shadow=True)
-plt.title('擲骰子機率圖',fontsize=18)
-plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

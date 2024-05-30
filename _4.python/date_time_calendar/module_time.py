@@ -79,6 +79,9 @@ print("Test time is", time_elapsed, "seconds")
 
 print('---- time.localtime() --------------------------------------------------------')	#60個
 
+#而如果要輸出此時準確的時間的話則
+print(time.localtime())
+
 print('time.localtime()\t', time.localtime())
 
 year, month, day, hour, minute, second, _, _, _ = time.localtime()
@@ -327,8 +330,6 @@ print("所花時間: ", endtime - starttime, " 秒")
 
 print("------------------------------------------------------------")  # 60個
 
-import time
-
 from email.utils import formatdate, parsedate, parsedate_tz
 
 TIME_FMT = "%a, %d %b %Y %H:%M:%S GMT"
@@ -345,12 +346,6 @@ print('------------------------------------------------------------')	#60個
 localtime = time.localtime()
 text = time.strftime("%Y-%m-%d %I:%M:%S %p", localtime)
 
-
-import datetime
-now = datetime.datetime.now()
-print(now.ctime())
-
-
 """
 定义和使用时钟类
 
@@ -359,7 +354,6 @@ Author: 骆昊
 Date: 2018-03-08
 """
 """ no cloc
-import time
 import os
 
 
@@ -470,8 +464,6 @@ log_event("User login")
 
 print("------------------------------------------------------------")  # 60個
 
-
-
 #格式化日期成2016-03-20 11:45:39形式
 print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
@@ -563,12 +555,6 @@ localtime = time.localtime(time.time())
 
 print("轉換時間形式(年/月/日)：", time.strftime("%Y/%m/%d", localtime))
 print("轉換時間形式(年/月/日 時:分:秒)：", time.asctime(localtime))
-
-print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
