@@ -2,9 +2,9 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTableWidget, QT
 import sys
 import openpyxl
 
-class Main(QWidget):
+class PyQt5_Table(QWidget):
     def __init__(self):
-        super(Main, self).__init__()
+        super(PyQt5_Table, self).__init__()
         self.setWindowTitle("Load Excel data to QTableWidget")
         
         layout = QVBoxLayout()
@@ -16,8 +16,8 @@ class Main(QWidget):
         self.load_data()
         
     def load_data(self):
-        path = "C:/_git/vcs/_4.python/__code/codefirstio/excel-data-with-pyqt5-qtablewidget-main/list-countries-world.xlsx"
-        workbook = openpyxl.load_workbook(path)
+        filename = "list-countries-world.xlsx"
+        workbook = openpyxl.load_workbook(filename)
         sheet = workbook.active
         
         self.table_widget.setRowCount(sheet.max_row)
@@ -34,9 +34,9 @@ class Main(QWidget):
                 col_index += 1
             row_index += 1
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = Main()
-    window.showMaximized()
-    app.exec_()
+
+app = QApplication(sys.argv)
+window = PyQt5_Table()
+window.showMaximized()
+app.exec_()
 

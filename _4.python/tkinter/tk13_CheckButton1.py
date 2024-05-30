@@ -6,7 +6,7 @@ import tkinter.font as tkfont
 import tkinter.messagebox
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 def choose():
     str = "你喜歡的球類運動："
     for i in range(0, len(choice)):
@@ -20,8 +20,8 @@ def choose():
 window = tk.Tk()
 
 # 設定主視窗大小
-w = 800
-h = 800
+w = 600
+h = 900
 x_st = 100
 y_st = 100
 #size = str(w)+'x'+str(h)
@@ -44,17 +44,17 @@ ball = ["足球", "籃球", "棒球", "排球", "網球", "羽毛球"]
 msg = tk.StringVar()
 label1 = tk.Label(window, text = "選擇喜歡的球類運動：")
 label1.pack()
-label1.place(x = x_st + dx * 0, y = y_st + dy * 1 - 20)
+#label1.place(x = x_st + dx * 0, y = y_st + dy * 1 - 20)
 label2 = tk.Label(window, fg = "red", textvariable = msg)
 label2.pack()
-label2.place(x = x_st + dx * 0, y = y_st + dy * 1 + 20)
+#label2.place(x = x_st + dx * 0, y = y_st + dy * 1 + 20)
 
 for i in range(0, len(ball)):
     item = tk.IntVar()
     choice.append(item)
     item = tk.Checkbutton(window, text = ball[i], variable = choice[i], command = choose)
     item.pack()
-    item.place(x = x_st + dx * i, y = y_st + dy * 1)
+    #item.place(x = x_st + dx * i, y = y_st + dy * 1)
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
@@ -86,42 +86,6 @@ def buy():
 tk.Button(window, text = '點菜', command = buy).pack(anchor = tk.W)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 建立主視窗
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-#window.title("試題與測驗分析程式")
 
 print("試題與測驗分析程式")
 
@@ -156,8 +120,11 @@ lab_result = tk.Label(window, font=default_font, fg='black', width=20)
 lab_result.pack(padx=10, pady=(5,10))
 
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 
 window.mainloop()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -180,6 +147,7 @@ title = "這是主視窗"
 window.title(title)
 
 from tkinter import ttk
+
 # checkbutton
 check1 = ttk.Checkbutton(
 	window, 
@@ -211,32 +179,9 @@ exercise_check.pack()
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-window.mainloop()
-
-'''
 print("------------------------------------------------------------")  # 60個
 
-print("Checkbutton")
-
-# 建立主視窗
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-#window.title('Checkbutton 核取方塊')
+print("Checkbutton 核取方塊")
 
 def check(): #回應核取方塊變數狀態
    print('這學期預定選修的科目包括:', var1.get(), var2.get(), var3.get())
@@ -262,11 +207,8 @@ chk3.pack()
 btnShow = tk.Button(window, text = '列出選修結果', font = ft2, command = check)
 btnShow.pack()
 
-window.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
 
 topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
 
@@ -285,18 +227,38 @@ def buy():
 
 tk.Button(window, text='點餐', command=buy).pack()
 
-window.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
-window=tk.Tk()
 
 topping = {0:'海苔', 1:'糖心蛋', 2:'豆芽菜', 3:'叉燒'}
 check_value={}
 for i in range(len(topping)):
 	check_value[i] = tk.BooleanVar()
 	tk.Checkbutton(window, variable=check_value[i], text = topping[i]).pack(anchor=tk.W)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
 window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 """
 請問迴圈裡面 check_value [i] = tk.BooleanVar() 這一行，能否舉個例子，假設第 0 個按鈕被勾選，check_value 長怎樣；假設第 0、1 個按鈕被勾選，check_value 長怎樣 ... 依此類推
@@ -304,29 +266,6 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-""" fail
-topping = {0:'海苔', 1:'水煮蛋', 2:'豆芽菜', 3:'叉燒'}
-
-check_value={}
-
-for i in range(len(topping)):
-	check_value[i] = tk.BooleanVar()
-	tk.Checkbutton(window, variable=check_value[i], text = topping[i]).pack(anchor=tk.W)
-
-def buy():
-	for i in check_value:
-		if check_value[i].get() == True:
-			print(topping[i])
-
-tk.Button(window, text='點菜', command=buy).pack()
-
-window.mainloop()
-"""
-
-print('------------------------------------------------------------')	#60個
-
-
-from tkinter import *
 
 def printInfo():
     selection = ''
@@ -335,53 +274,46 @@ def printInfo():
             selection = selection + sports[i] + " "
     x.set(selection)
 
-window = Tk()
-window.title("ex18_6")                     # 視窗標題
+window = tk.Tk()
+window.title("")                     # 視窗標題
 
-Label(window,text="請選擇喜歡的運動",
+tk.Label(window,text="請選擇喜歡的運動",
       fg="blue",bg="lightyellow",width=30).grid(row=0)
 
 sports = {0:"美式足球",1:"棒球",2:"籃球",3:"網球",
           4:"桌球", 5:"排球"}               # 運動字典
 checkboxes = {}                             # 字典存放被選取項目
 for i in range(len(sports)):                # 將運動字典轉成核取方塊
-    checkboxes[i] = BooleanVar()            # 布林變數物件
-    Checkbutton(window,text=sports[i],
-                variable=checkboxes[i]).grid(row=i+1,sticky=W)
+    checkboxes[i] = tk.BooleanVar()            # 布林變數物件
+    tk.Checkbutton(window,text=sports[i],
+                variable=checkboxes[i]).grid(row=i+1,sticky=tk.W)
   
-Button(window,text="確定",width=10,command=printInfo).grid(row=i+2)
+tk.Button(window,text="確定",width=10,command=printInfo).grid(row=i+2)
 
-x = StringVar()
-display = Label(window,textvariable=x, bg="lightgreen",width=30)
+x = tk.StringVar()
+display = tk.Label(window,textvariable=x, bg="lightgreen",width=30)
 display.grid(row=i+3)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
+window = tk.Tk()
+window.title("")                   # 視窗標題
 
-window = Tk()
-window.title("ch18_27")                   # 視窗標題
+tk.Label(window,text="請選擇喜歡的運動", fg="blue",bg="lightyellow",width=30).grid(row=0)
 
-Label(window,text="請選擇喜歡的運動",
-      fg="blue",bg="lightyellow",width=30).grid(row=0)
-
-var1 = IntVar()                      
-Checkbutton(window,text="美式足球",
-                  variable=var1).grid(row=1,sticky=W)
-var2 = IntVar()
-Checkbutton(window,text="棒球",
-                  variable=var2).grid(row=2,sticky=W)                
-var3 = IntVar()
-Checkbutton(window,text="籃球",
-                  variable=var3).grid(row=3,sticky=W)   
+var1 = tk.IntVar()                      
+tk.Checkbutton(window,text="美式足球", variable=var1).grid(row=1,sticky=tk.W)
+var2 = tk.IntVar()
+tk.Checkbutton(window,text="棒球", variable=var2).grid(row=2,sticky=tk.W)
+var3 = tk.IntVar()
+tk.Checkbutton(window,text="籃球", variable=var3).grid(row=3,sticky=tk.W)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
 
 def printInfo():
     selection = ''
@@ -390,20 +322,20 @@ def printInfo():
             selection = selection + sports[i] + "\t"
     print(selection)
 
-window = Tk()
-window.title("ch18_28")                     # 視窗標題
+window = tk.Tk()
+window.title("")                     # 視窗標題
 
-Label(window,text="請選擇喜歡的運動",
+tk.Label(window,text="請選擇喜歡的運動",
       fg="blue",bg="lightyellow",width=30).grid(row=0)
 
 sports = {0:"美式足球",1:"棒球",2:"籃球",3:"網球"}    # 運動字典
 checkboxes = {}                             # 字典存放被選取項目
 for i in range(len(sports)):                # 將運動字典轉成核取方塊
-    checkboxes[i] = BooleanVar()            # 布林變數物件
-    Checkbutton(window,text=sports[i],
-                variable=checkboxes[i]).grid(row=i+1,sticky=W)
+    checkboxes[i] = tk.BooleanVar()            # 布林變數物件
+    tk.Checkbutton(window,text=sports[i],
+                variable=checkboxes[i]).grid(row=i+1,sticky=tk.W)
   
-Button(window,text="確定",width=10,command=printInfo).grid(row=i+2)
+tk.Button(window,text="確定",width=10,command=printInfo).grid(row=i+2)
 
 window.mainloop()
 
@@ -507,34 +439,6 @@ entry.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-def check(): #回應核取方塊變數狀態
-   print('這學期預定選修的科目包括:', var1.get(), var2.get()
-         ,var3.get())
-
-ft1 =('新細明體', 14)
-ft2 = ('標楷體', 18)
-lb1=tk.Label(window, text = '選修的科目：', font = ft1).pack()
-item1 = '人工智慧'
-var1 = tk.StringVar()
-chk1 = tk.Checkbutton(window, text = item1, font = ft1,
-                      variable = var1, onvalue = item1, offvalue = '')
-chk1.pack()
-item2 = '程式語言'
-var2 = tk.StringVar()
-chk2 = tk.Checkbutton(window, text = item2, font = ft1,
-                   variable = var2, onvalue = item2, offvalue = '')
-chk2.pack()
-item3 = '數位行銷'
-var3 = tk.StringVar()
-chk3 = tk.Checkbutton(window, text = item3, font = ft1,
-                      variable = var3, onvalue = item3, offvalue = '')
-chk3.pack()
-btnShow = tk.Button(window, text = '列出選修結果', font = ft2,
-                 command = check)
-btnShow.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
 button = tk.Button(window, text = "Press", underline=0)
 button.pack()
 
@@ -564,43 +468,4 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-""" ppg
-tk.Label(window,text="請選擇喜歡的運動", fg="blue",bg="lightyellow",width=30).grid(row=0)
-
-var1 = tk.IntVar()                      
-tk.Checkbutton(window,text="美式足球", variable=var1).grid(row=1,sticky=tk.W)
-var2 = tk.IntVar()
-tk.Checkbutton(window,text="棒球", variable=var2).grid(row=2,sticky=tk.W)
-var3 = tk.IntVar()
-tk.Checkbutton(window,text="籃球", variable=var3).grid(row=3,sticky=tk.W)
-"""
-
-
-
-"""
-
-def printInfo():
-    selection = ''
-    for i in checkboxes:                    # 檢查此字典
-        if checkboxes[i].get() == True:     # 被選取則執行
-            selection = selection + sports[i] + "\t"
-    print(selection)
-
-tk.Label(window,text="請選擇喜歡的運動",
-      fg="blue",bg="lightyellow",width=30).grid(row=0)
-
-sports = {0:"美式足球",1:"棒球",2:"籃球",3:"網球"}    # 運動字典
-checkboxes = {}                             # 字典存放被選取項目
-for i in range(len(sports)):                # 將運動字典轉成核取方塊
-    checkboxes[i] = BooleanVar()            # 布林變數物件
-    Checkbutton(window,text=sports[i],
-                variable=checkboxes[i]).grid(row=i+1,sticky=W)
-  
-tk.Button(window,text="確定",width=10,command=printInfo).grid(row=i+2)
-
-
-"""
 

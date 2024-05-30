@@ -143,7 +143,7 @@ def import_csv_data():
         #若能正確處理完畢, 再搬到old資料夾
         shutil.move(filename, target_dir)
 
-    message = "匯入生產資料 完成"
+    message = "匯入生產資料 完成\n"
     print(message)
     text1.insert('end', message)
 
@@ -184,17 +184,17 @@ def export_data_to_excel0(csv_data):
                 data3 = str(cc[3])#靜壓
                 #print(data1, data2, data3)
                 if time == "09":
-                    sheet.cell(8, 2+day).value = str(data1)
-                    sheet.cell(9, 2+day).value = str(data2)
-                    sheet.cell(10, 2+day).value = str(data3)
+                    sheet.cell(8, 2+day).value = float(data1)
+                    sheet.cell(9, 2+day).value = float(data2)
+                    sheet.cell(10, 2+day).value = float(data3)
                 elif time == "13":
-                    sheet.cell(11, 2+day).value = str(data1)
-                    sheet.cell(12, 2+day).value = str(data2)
-                    sheet.cell(13, 2+day).value = str(data3)
+                    sheet.cell(11, 2+day).value = float(data1)
+                    sheet.cell(12, 2+day).value = float(data2)
+                    sheet.cell(13, 2+day).value = float(data3)
                 elif time == "17":
-                    sheet.cell(14, 2+day).value = str(data1)
-                    sheet.cell(15, 2+day).value = str(data2)
-                    sheet.cell(16, 2+day).value = str(data3)
+                    sheet.cell(14, 2+day).value = float(data1)
+                    sheet.cell(15, 2+day).value = float(data2)
+                    sheet.cell(16, 2+day).value = float(data3)
     workbook.save(excel_filename)  # 儲存檔案
 
 def check_excel_filename(data1, data2):
@@ -258,8 +258,11 @@ def export_data_to_excel():
         text1.insert('end', message)
         main_message2.set(message)
     else:
-        message = '匯出資料 完成'
+        message = '匯出資料 完成\n'
         print(message)
+        text1.insert('end', message)
+
+        message = '檔案 : ' + excel_filename + "\n"
         text1.insert('end', message)
 
         export_data_to_excel0(csv_data)
@@ -387,6 +390,7 @@ text1.pack()
 text1.place(x = x_st + dx * 0, y = y_st + dy * 3 + 50)
 
 message = "匯入生產資料"
+message = ""
 main_message1.set(message)
 
 window.mainloop()

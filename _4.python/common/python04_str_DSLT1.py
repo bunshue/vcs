@@ -202,6 +202,30 @@ print("animals['牛']元素個數 :", len(animals["牛"]))
 
 print("------------------------------------------------------------")  # 60個
 
+print("字典的用法")
+
+# 完整的動物字典
+animals = {
+    "mouse": "鼠",
+    "ox": "牛",
+    "tiger": "虎",
+    "rabbit": "兔",
+    "dragon": "龍",
+    "snake": "蛇",
+    "horse": "馬",
+    "goat": "羊",
+    "monkey": "猴",
+    "chicken": "雞",
+    "dog": "狗",
+    "pig": "豬",
+}
+
+print("刪除某一項 snake")
+animals.pop("snake")
+print(animals)
+
+print("------------------------------------------------------------")  # 60個
+
 print("建立內含{集合}的{字典}")
 
 print("字典範例")
@@ -451,30 +475,6 @@ print("從字典的key找到value")
 for animal in animal_list:
     print("key = ", animal)
     print("value = ", animal_dict[animal])
-
-print("------------------------------------------------------------")  # 60個
-
-print("字典的用法")
-
-# 完整的動物字典
-animals = {
-    "mouse": "鼠",
-    "ox": "牛",
-    "tiger": "虎",
-    "rabbit": "兔",
-    "dragon": "龍",
-    "snake": "蛇",
-    "horse": "馬",
-    "goat": "羊",
-    "monkey": "猴",
-    "chicken": "雞",
-    "dog": "狗",
-    "pig": "豬",
-}
-
-print("刪除某一項 snake")
-animals.pop("snake")
-print(animals)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2968,7 +2968,48 @@ animals = {
 for ani in set(animals.values()):
     print(ani)
 
-
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+#標準完整的容器範例
+
+
+
+# 完整的動物字典 DDDD
+animals_dict = {
+    "mouse": "鼠",
+    "ox": "牛",
+    "tiger": "虎",
+    "rabbit": "兔",
+    "dragon": "龍",
+    "snake": "蛇",
+    "horse": "馬",
+    "goat": "羊",
+    "monkey": "猴",
+    "chicken": "雞",
+    "dog": "狗",
+    "pig": "豬",
+}
+
+
+# 完整的動物集合 SSSS
+animals_set = set()
+
+
+# 完整的動物串列(一維) LLLL
+animals_list1 = []
+
+
+
+# 完整的動物串列(二維) LLLL
+
+animals_list2 = []
+
+# 完整的動物元組 TTTT
+animals_tuple = ()
+

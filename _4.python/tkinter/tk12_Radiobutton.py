@@ -6,12 +6,12 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 # 建立主視窗
 window = tk.Tk()
 
 # 設定主視窗大小
-w = 800
+w = 700
 h = 800
 x_st = 100
 y_st = 100
@@ -77,7 +77,9 @@ item3 = tk.Radiobutton(window, text="棒球", value="棒球", variable=choice, c
 item3.pack()
 lblmsg = tk.Label(window, fg="red", textvariable=msg)
 lblmsg.pack()
+
 item1.select()
+
 choose()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
@@ -149,7 +151,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
 import tkinter.font as tkfont
 
 
@@ -157,10 +158,9 @@ def radbut_click():
     selected_item = area.get()
     lab_result.config(text=AREA_OPTIONS[selected_item][0])
 
-
-win = tk.Tk()
-win.geometry("400x300")
-win.title("試題與測驗分析程式")
+window = tk.Tk()
+window.geometry("400x300")
+window.title("試題與測驗分析程式")
 
 default_font = tkfont.nametofont('TkDefaultFont')
 default_font.configure(size=15)
@@ -168,76 +168,78 @@ AREA_OPTIONS=(('屏東縣',0),('高雄市',1),('台南市',2),('台東縣',3))
 area = tk.IntVar()
 area.set(0)
 for item, value in AREA_OPTIONS:
-    radbut = tk.Radiobutton(win, text=item, variable=area, value=value, command=radbut_click, font=default_font)
+    radbut = tk.Radiobutton(window, text=item, variable=area, value=value, command=radbut_click, font=default_font)
     radbut.pack()
-lab_result = tk.Label(win, font=default_font, fg='black')
+lab_result = tk.Label(window, font=default_font, fg='black')
 lab_result.pack(padx=10, pady=(5,10))       
 
-win.mainloop()
-
+window.mainloop()
+'''
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
+print('Radiobutton元件')
 
-wnd = Tk()
-wnd.title('程式語言能力調查：')
+window = tk.Tk()
+window.title('程式語言能力調查：')
+
+
 def select():
     print('你的選項是 :', var.get())
+
+
 ft = ('標楷體', 14)
-Label(wnd, 
+tk.Label(window, 
       text = "請選擇精通的程式語言: ", font = ft,
-      justify = LEFT, padx = 20).pack()
+      justify = tk.LEFT, padx = 20).pack()
 place = [('Python語言', 1), ('C語言', 2),
           ('C++語言', 3),('Java語言', 4)]
-var = IntVar()
+var = tk.IntVar()
 var.set(3)
 for item, val in place:
-    Radiobutton(wnd, text = item, value = val,
+    tk.Radiobutton(window, text = item, value = val,
         font = ft, variable = var, padx = 20,
-        command = select).pack(anchor = NW)
+        command = select).pack(anchor = tk.NW)
 
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-wnd = Tk()
-wnd.title('Radiobutton元件')
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 def select():
     print('你的選項是 :', var.get())
 
 ft = ('標楷體', 14)
-Label(wnd, 
+tk.Label(window, 
       text = "請問您的最高學歷: ", font = ft,
-      justify = LEFT, padx = 20).pack()
+      justify = tk.LEFT, padx = 20).pack()
 place = [('博士', 1), ('碩士', 2),('大學', 3),
           ('高中', 4),('國中', 5),('國小', 6)]
-var = IntVar()
+var = tk.IntVar()
 var.set(2)
 for item, val in place:
-    Radiobutton(wnd, text = item, value = val,
+    tk.Radiobutton(window, text = item, value = val,
         font = ft, variable = var, padx = 20,
-        command = select).pack(anchor = W)
+        command = select).pack(anchor = tk.W)
 
-mainloop()
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 print("------------------------------------------------------------")  # 60個
 
+""" some fail
 def printSelection():
     label.config(text="你是" + var.get())
 
-var = StringVar()
+var = tk.StringVar()
 var.set("男生")                           # 預設選項                       
+
 label = tk.Label(window,text="尚未選擇", bg="lightyellow",width=30)
 label.pack()
 
-rb1 = Radiobutton(window,text="男生",
+rb1 = tk.Radiobutton(window,text="男生",
                   variable=var,value='男生',
                   command=printSelection).pack()
-rb2 = Radiobutton(window,text="女生",
+rb2 = tk.Radiobutton(window,text="女生",
                   variable=var,value='女生',
                   command=printSelection).pack()
-
+"""
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
 def printSelection():
@@ -245,17 +247,18 @@ def printSelection():
 
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
-var = IntVar()
+var = tk.IntVar()
 var.set(0)                              # 預設選項                       
 label = tk.Label(window,text="選擇最喜歡的城市",
               fg="blue",bg="lightyellow",width=30).pack()
 
 for val, city in cities.items():        # 建立選項紐    
-    Radiobutton(window,
+    tk.Radiobutton(window,
                 text=city,
                 variable=var,value=val,
                 command=printSelection).pack()
-
+    
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
 def printSelection():
@@ -263,22 +266,22 @@ def printSelection():
 
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
-var = IntVar()
+var = tk.IntVar()
 var.set(0)                              # 預設選項                       
 label = tk.Label(window,text="選擇最喜歡的城市",
               fg="blue",bg="lightyellow",width=30).pack()
 
 for val, city in cities.items():        # 建立選項紐    
-    Radiobutton(window,
+    tk.Radiobutton(window,
                 text=city,
                 indicatoron = 0,        # 用盒子取代選項紐
                 width=30,
                 variable=var,value=val,
                 command=printSelection).pack()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
 radio_value = tk.IntVar()
 radio_value.set(1)
 lunch = {0:'A 套餐',1:'B 套餐',2:'C 套餐'}
@@ -294,9 +297,8 @@ def buy():
 
 tk.Button(window, text='點餐', command=buy).pack()
 
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 radio_value = tk.IntVar()
 radio_value.set(1)
@@ -311,11 +313,39 @@ def buy():
 	print(lunch[value])
 
 tk.Button(window, text='點菜', command=buy).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+# 建立主視窗
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 700
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+
+
+
+
+
+
 
 text=tk.Text(window)
 text.insert(tk.INSERT, "從入門到精通\n")
@@ -380,97 +410,62 @@ for item, val in place:
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-window.mainloop()
-
-
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
 
 def printSelection():
     label.config(text="你是" + var.get())
 
-window = Tk()
-window.title("ch18_24")                   # 視窗標題
-
-var = StringVar()
+var = tk.StringVar()
 var.set("男生")                           # 預設選項                       
-label = Label(window,text="尚未選擇", bg="lightyellow",width=30)
+label = tk.Label(window,text="尚未選擇", bg="lightyellow",width=30)
 label.pack()
 
-rb1 = Radiobutton(window,text="男生",
+rb1 = tk.Radiobutton(window,text="男生",
                   variable=var,value='男生',
                   command=printSelection).pack()
-rb2 = Radiobutton(window,text="女生",
+rb2 = tk.Radiobutton(window,text="女生",
                   variable=var,value='女生',
                   command=printSelection).pack()
 
-window.mainloop()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
 
 
 def printSelection():
     print(cities[var.get()])            # 列出所選城市
 
-
-window = Tk()
-window.title("ch18_25")                 # 視窗標題
-
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
-var = IntVar()
+var = tk.IntVar()
 var.set(0)                              # 預設選項                       
-label = Label(window,text="選擇最喜歡的城市",
+label = tk.Label(window,text="選擇最喜歡的城市",
               fg="blue",bg="lightyellow",width=30).pack()
 
 for val, city in cities.items():        # 建立選項紐    
-    Radiobutton(window,
+    tk.Radiobutton(window,
                 text=city,
                 variable=var,value=val,
                 command=printSelection).pack()
 
-window.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print('------------------------------------------------------------')	#60個
-
-from tkinter import *
 
 
 def printSelection():
     print(cities[var.get()])            # 列出所選城市
 
 
-window = Tk()
-window.title("ch18_26")                 # 視窗標題
-
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
-var = IntVar()
+var = tk.IntVar()
 var.set(0)                              # 預設選項                       
-label = Label(window,text="選擇最喜歡的城市",
+label = tk.Label(window,text="選擇最喜歡的城市",
               fg="blue",bg="lightyellow",width=30).pack()
 
 for val, city in cities.items():        # 建立選項紐    
-    Radiobutton(window,
+    tk.Radiobutton(window,
                 text=city,
                 indicatoron = 0,        # 用盒子取代選項紐
                 width=30,
@@ -482,13 +477,10 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print('------------------------------------------------------------')	#60個
 
 
 print('------------------------------------------------------------')	#60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -497,8 +489,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
