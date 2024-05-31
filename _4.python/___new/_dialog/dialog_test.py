@@ -12,7 +12,6 @@ import time
 import tkinter as tk
 
 import tkinter.filedialog
-
 """
 from tkinter.filedialog import askopenfile #tk之openFileDialog
 from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
@@ -31,7 +30,16 @@ def button00Click():
     
 
 def button01Click():
-    print('你按了button01')
+    print('你按了button01 選取檔案2 pdf')
+    pdf_filename = tkinter.filedialog.askopenfilename(title = '開啟PDF檔案', 
+                                                  initialdir = 'C:/dddddddddd/____download',
+                                                  filetypes=[('PDF files', '*.pdf')])
+    print(pdf_filename)
+    
+    text1.delete("1.0", tk.END)
+    
+    current_text = pdf_filename
+    text1.insert(tk.END, current_text)
 
 def button02Click():
     print('你按了button02')
@@ -115,7 +123,7 @@ window.title('功能測試')
 #window.configure(bg = "#7AFEC6")
 
 x_st = 50
-y_st = 50
+y_st = 250
 dx = 120
 dy = 80
 w = 12
@@ -123,7 +131,7 @@ h = 3
 
 button00 = tk.Button(window, width = w, height = h, command = button00Click, text = '選取檔案1')
 button00.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button01 = tk.Button(window, width = w, height = h, command = button01Click, text = '----')
+button01 = tk.Button(window, width = w, height = h, command = button01Click, text = '選取檔案2 pdf')
 button01.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button02 = tk.Button(window, width = w, height = h, command = button02Click, text = '----')
 button02.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
@@ -179,9 +187,113 @@ button24.place(x = x_st + dx * 4, y = y_st + dy * 2)
 button25.place(x = x_st + dx * 5, y = y_st + dy * 2)
 
 # 加入 Text
-text1 = tk.Text(window, width = 100, height = 35)  # 放入多行輸入框
+text1 = tk.Text(window, width = 100, height = 20)  # 放入多行輸入框
 text1.pack()
 text1.place(x = x_st + dx * 0, y = y_st + dy * 3 + 10)
+
+
+def open_file():
+    button_ofd_text.set("開啟檔案...")
+    file = tkinter.filedialog.askopenfile(parent = window, mode = 'rb', title = "選取檔案", filetypes = [("Text file", "*.txt")])
+    if file:
+        print('已選取檔案 : ', file.name)
+
+    button_ofd_text.set("開啟檔案")
+
+def save_file():
+    button_sfd_text.set("另存新檔...")
+    file = tkinter.filedialog.asksaveasfile(parent = window, mode = 'w', title = "選取檔案", filetypes = [("Text file", "*.txt")])
+    if file:
+        print('另存新檔 : ', file.name)
+
+    button_sfd_text.set("另存新檔")
+
+#開啟檔案按鈕
+button_ofd_text = tk.StringVar()
+button_ofd = tk.Button(window, textvariable = button_ofd_text, command = lambda:open_file(), font = "Raleway", bg = "#20bebe", fg = "white", height = 2, width = 15)
+#button_ofd = tk.Button(window, text = '選取檔案', command = xxxxxxx)
+button_ofd_text.set("開啟檔案")
+button_ofd.pack()
+
+#另存新檔按鈕
+button_sfd_text = tk.StringVar()
+button_sfd = tk.Button(window, textvariable = button_sfd_text, command = lambda:save_file(), font = "Raleway", bg = "#20bebe", fg = "white", height = 2, width = 15)
+#button_sfd = tk.Button(window, text = '選取檔案', command = xxxxxxx)
+button_sfd_text.set("另存新檔")
+button_sfd.pack()
+
+print("------------------------------------------------------------")  # 60個
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+#DIALOG_ICON = 'warning'
+DIALOG_ICON = 'questhead'
+
+class Dialog(tk.Widget):
+    def __init__(self, master = None, cnf = {}, **kw):
+        cnf = tk._cnfmerge((cnf, kw))
+        self.widgetName = '__dialog__'
+        tk.Widget._setup(self, master, cnf)
+        self.num = self.tk.getint(
+                self.tk.call(
+                      'tk_dialog', self._w,
+                      cnf['title'], cnf['text'],
+                      cnf['bitmap'], cnf['default'],
+                      *cnf['strings']))
+        try: tk.Widget.destroy(self)
+        except TclError: pass
+    def destroy(self): pass
+
+def open_dialog():
+    d = Dialog(None, {'title': 'File Modified',
+                      'text':
+                      'File "Python.h" has been modified'
+                      ' since the last time it was saved.'
+                      ' Do you want to save it before'
+                      ' exiting the application.',
+                      'bitmap': DIALOG_ICON,
+                      'default': 0,
+                      'strings': ('Save File',
+                                  'Discard Changes',
+                                  'Return to Editor')})
+    print('你選擇了', d.num)
+
+
+print(tk.TkVersion)
+
+button1 = tk.Button(window, {'text': 'Test', 'command': open_dialog, tk.Pack: {}})
+button2 = tk.Button(window, {'text': 'Quit', 'command': window.destroy, tk.Pack: {}})
+
+print("------------------------------------------------------------")  # 60個
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+def FileOpen():										# 按鈕事件處理函數
+	r = tk.filedialog.askopenfilename(title = 'Python Tkinter',			# 建立開啟檔案交談視窗
+			filetypes=[('Python', '*.py *.pyw'),('All files', '*')]	)	# 指定檔案型態為Python指令稿
+	print(r)									# 輸出傳回值
+
+def FileSave():										# 按鈕事件處理函數
+	r = tk.filedialog.asksaveasfilename(title = 'Python Tkinter',			# 建立儲存檔案交談視窗
+			initialdir=r'E:\Python\code',					# 指定起始化目錄
+			initialfile = 'test.py')					# 指定起始化檔案
+	print(r)
+
+button1 = tk.Button(window,text = 'File Open',					# 建立按鈕
+		command = FileOpen)							# 指定按鈕事件處理函數
+button1.pack()
+button2 = tk.Button(window,text = 'File Save',
+		command = FileSave)							# 指定按鈕事件處理函數
+button2.pack()
+
+
+print("------------------------------------------------------------")  # 60個
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
+
+
 
 window.mainloop()
 

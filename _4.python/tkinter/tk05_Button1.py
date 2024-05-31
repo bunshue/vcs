@@ -1,10 +1,6 @@
 import sys
 
 import tkinter as tk
-from tkinter.filedialog import askopenfile #tk之openFileDialog
-from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
-from tkinter.filedialog import askopenfilename
-from tkinter.filedialog import asksaveasfilename
 
 print("------------------------------------------------------------")  # 60個
 
@@ -25,37 +21,6 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
-def open_file():
-    button_ofd_text.set("開啟檔案...")
-    file = askopenfile(parent = window, mode = 'rb', title = "選取檔案", filetypes = [("Text file", "*.txt")])
-    if file:
-        print('已選取檔案 : ', file.name)
-
-    button_ofd_text.set("開啟檔案")
-
-def save_file():
-    button_sfd_text.set("另存新檔...")
-    file = asksaveasfile(parent = window, mode = 'w', title = "選取檔案", filetypes = [("Text file", "*.txt")])
-    if file:
-        print('另存新檔 : ', file.name)
-
-    button_sfd_text.set("另存新檔")
-
-#開啟檔案按鈕
-button_ofd_text = tk.StringVar()
-button_ofd = tk.Button(window, textvariable = button_ofd_text, command = lambda:open_file(), font = "Raleway", bg = "#20bebe", fg = "white", height = 2, width = 15)
-#button_ofd = tk.Button(window, text = '選取檔案', command = xxxxxxx)
-button_ofd_text.set("開啟檔案")
-button_ofd.pack()
-
-#另存新檔按鈕
-button_sfd_text = tk.StringVar()
-button_sfd = tk.Button(window, textvariable = button_sfd_text, command = lambda:save_file(), font = "Raleway", bg = "#20bebe", fg = "white", height = 2, width = 15)
-#button_sfd = tk.Button(window, text = '選取檔案', command = xxxxxxx)
-button_sfd_text.set("另存新檔")
-button_sfd.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 button5 = tk.Button(window, text = '指定按鍵大小', width = 20, height = 5)
 button5.pack()  #pack無參數, 控件置中
@@ -291,6 +256,46 @@ import tkinter.messagebox as tkMessageBox
 
 btn3 = tk.Button(window, text = "Say Hello", command = event3)
 btn3.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+button1 = tk.Button(window, 			
+			anchor = tk.E,			# 指定文字對齊模式
+			text = 'Button1',			# 指定按鈕上的文字
+			width = 40,				# 指定按鈕的寬度，相當於40個字元
+			height = 5)				# 指定按鈕的高度，相當於5行字元
+button1.pack()							# 將按鈕新增到視窗
+
+button2 = tk.Button(window, 			
+			text = 'Button2',	
+			bg = 'blue')				# 指定按鈕的背景色
+button2.pack()
+
+button3 = tk.Button(window, 			
+			text = 'Button3',	
+			width = 14,				# 指定按鈕的寬度
+			height = 1)				# 指定按鈕的高度
+button3.pack()
+
+button4 = tk.Button(window, 			
+			text = 'Button4',	
+			width = 60,		
+			height = 5,		
+			state = tk.DISABLED)		# 指定按鈕為禁用狀態
+button4.pack()
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 window.mainloop()
 

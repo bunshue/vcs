@@ -11,11 +11,6 @@ import sys
 import csv
 import time
 import tkinter as tk
-import tkinter as tk
-from tkinter.filedialog import askopenfile #tk之openFileDialog
-from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
-from tkinter.filedialog import askopenfilename
-from tkinter.filedialog import asksaveasfilename
 
 choice = []
 

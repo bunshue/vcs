@@ -6,7 +6,7 @@ import tkinter.simpledialog
 import tkinter.colorchooser
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -23,49 +23,8 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 # 設定主視窗標題
 title = "這是主視窗"
 window.title(title)
-
-ans = tkinter.messagebox.showinfo(title = 'IMS', message = "IMS show information")
-print("取得 info 結果 : ", ans)
-"""
-ans = tkinter.messagebox.showwarning('IMS', "IMS show warning")
-print("取得 warning 結果 : ", ans)
-
-ans = tkinter.messagebox.showerror('IMS', "IMS show error")
-print("取得 error 結果 : ", ans)
-
-ans = tkinter.messagebox.askquestion('IMS', "IMS ask question")
-print("取得 question 結果 : ", ans)
-
-ans = tkinter.messagebox.askokcancel('IMS', "IMS ask ok cancel")
-print("取得 ok/cancel 結果 : ", ans)
-
-ans = tkinter.messagebox.askyesno('IMS', "IMS ask yes no")
-print("取得 yes/no 結果 : ", ans)
-
-ans = tkinter.messagebox.askyesnocancel('IMS', "IMS ask yes no cancel") 
-print("取得 yes/no/cancel 結果 : ", ans)
-
-ans = tkinter.messagebox.askretrycancel("IMS", "IMS ask retry cancel")
-print("取得 retry/cancel 結果 : ", ans)
-
-ans = tkinter.simpledialog.askstring("askstring", "Enter your name")
-print("取得 字串 結果 : ", ans)
-
-ans = tkinter.simpledialog.askinteger("askinteger", "Enter your age")
-print("取得 整數 結果 : ", ans)
-
-ans = tkinter.simpledialog.askfloat("askfloat", "Enter your weight")
-print("取得 浮點數 結果 : ", ans)
-"""
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-# MessageBox測試
-
-my_mesg = "大雄：1964年8月7日\n哆啦A夢：2112年9月3日\n靜香：1964年12月2日\n小夫：1964年2月29日\n胖虎：1964年6月15日\n哆啦美：2114年12月2日"
-msg = tk.Message(window, text = my_mesg)
-msg.config(bg='lightgreen', font=('times', 24, 'italic'))
-msg.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
@@ -73,49 +32,6 @@ def confirm_exit():
     if tkinter.messagebox.askyesno("關閉窗口","確認關閉窗口嗎"):
         window.destroy()
 window.protocol("WM_DELETE_WINDOW", confirm_exit)
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-
-def hello():
-   tk.messagebox.showinfo('訊息框', "showinfo")
-   tk.messagebox.showwarning('訊息框', "showwarning")
-   tk.messagebox.showerror('訊息框', "showerror")
-   result =tk.messagebox.askquestion('訊息框', "askquestion")
-   print(result)
-   result=tk.messagebox.askokcancel('訊息框', "askokcancel")
-   print(result)
-   result=tk.messagebox.askyesno('訊息框', "showeraskyesnoror")
-   print(result)
-   result=tk.messagebox.askretrycancel('訊息框', "askretrycancel")
-   print(result)
-
-B1 = tk.Button(window, text = "Say Hello", command = hello)
-B1.pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.title('訊息方塊元件(messagebox)')
-window.geometry('180x120+20+50')
-
-def first():
-    tk.messagebox.showinfo('顯示類對話方塊',
-            '「顯示」類是以「show」開頭，只會顯示一個「確定」鈕。')
-
-def second():
-    tk.messagebox.askretrycancel('詢問類對話方塊', 
-            '「詢問」類是以「ask」為開頭，伴隨2~3個按鈕來產生互動。')
-
-tk.Button(window, text='顯示類對話方塊', command = first).pack(side = 'left', padx = 10)
-tk.Button(window, text='詢問類對話方塊', command = second).pack(side = 'left')
 
 window.mainloop()
 
@@ -334,7 +250,7 @@ helpmenu.add_command(label="程式說明",command=about)
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
@@ -367,3 +283,67 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+"""
+tkinter.messagebox.showinfo("Error","This word is not present in our lexicon\nDouble check it.")
+tkinter.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
+tkinter.messagebox.showinfo('圓周長','圓周長為 {:.2f} {}'.format(a,u))
+tkinter.messagebox.showinfo('圓面積','圓面積為 {:.2f} 平方{}'.format(a,u))
+tkinter.messagebox.showinfo('訊息',msg[:len(msg)-1])
+tkinter.messagebox.showinfo('訊息','期盼下次你能參加')
+        messagebox.showinfo("Notebook","歡迎使用Notebook")
+
+tkinter.messagebox.askokcancel('注意','你的BMI指數為：{} {}'.format(bmi, msg))
+
+"""
+
+window = tk.Tk()
+
+def answer():
+    tk.messagebox.showerror('顯示類訊息框',
+            '這是messagebox.showerror的訊息框')
+
+def callback():
+    tk.messagebox.askyesno('詢問類訊息框', 
+            '這是messagebox.askyesno的訊息框')
+
+tk.Button(window, text='顯示詢問訊息框的外觀', command =
+          callback).pack(side = 'left', padx = 10)
+tk.Button(window, text='顯示錯誤訊息框的外觀', command =
+          answer).pack(side = 'left')
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# end.py
+
+def fnEnd():
+    res = tkinter.messagebox.askokcancel('注意','確定要結束程式嗎？')
+    if(res == True):	#若傳回值為 True
+        window.destroy()   #結束程式執行
+        
+window=tk.Tk()
+window.geometry('300x150')
+window.title('對話方塊')
+
+lblTitle=tk.Label(window, text = '按鈕結束程式',font=('標楷體', 16))
+btnEnd=tk.Button(window, text = '結束',pady=5,padx=10,command=fnEnd)
+lblTitle.pack(pady=20)
+btnEnd.pack(pady=5)
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個

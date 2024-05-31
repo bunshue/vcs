@@ -1,7 +1,9 @@
 import openpyxl
 
-wb = openpyxl.load_workbook(r"data\range.xlsx")
-sheet = wb.active
+print("------------------------------------------------------------")  # 60個
+
+workbook = openpyxl.load_workbook(r"data\range.xlsx")
+sheet = workbook.active
 
 getted_list = []
 for row in sheet:
@@ -31,22 +33,16 @@ for rows in sheet.iter_rows(min_row=2, min_col=2, max_row=3, max_col=3):
 
 print(getted_list)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
+# color_scale.py
 
-
-
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\05\python_prg\color_scale.py
-
-import openpyxl
 import random
 from openpyxl.formatting.rule import ColorScaleRule
 
 
-wb = openpyxl.Workbook()
-sh = wb.active
+workbook = openpyxl.Workbook()
+sh = workbook.active
 values = random.sample(range(50,150), 10)
 for i, value in enumerate(values):
     sh.cell(i + 1, 1 ).value = value
@@ -59,20 +55,18 @@ two_color_scale = ColorScaleRule(
 sh.conditional_formatting.add("A1:A10", two_color_scale)
  
 
-wb.save(r"tmp_color_scale.xlsx")
+workbook.save(r"tmp_01_color_scale.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\05\python_prg\fill_red.py
+# fill_red.py
 
-import openpyxl
 import random
 from openpyxl.styles import PatternFill
 from openpyxl.formatting.rule import CellIsRule
 
-
-wb = openpyxl.Workbook()
-sh = wb.active
+workbook = openpyxl.Workbook()
+sh = workbook.active
 
 values = random.sample(range(50,150), 10)
 
@@ -87,20 +81,19 @@ less_than_rule = CellIsRule(
 )
 sh.conditional_formatting.add("A1:A10", less_than_rule)
 
-wb.save(r"tmp_fill_red.xlsx")
+workbook.save(r"tmp_02_fill_red.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\05\python_prg\format_sheet.py
+# format_sheet.py
 
-import openpyxl
 from openpyxl.styles import Alignment, PatternFill, Font, Border, Side
 
 #常數
 TITLE_CELL_COLOR = "AA8866"
 
-wb = openpyxl.load_workbook("data\orders_aggregate.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook("data\orders_aggregate.xlsx")
+sh = workbook.active
 
 #固定為第1列、第2欄
 sh.freeze_panes = "C2"
@@ -141,40 +134,30 @@ for row in sh:
         cell.border = border
         #sh[cell.coordinate].border = border
 
-
-wb.save("tmp_orders_aggregate_ed.xlsx")
-
+workbook.save("tmp_03_orders_aggregate_ed.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\05\python_prg\format_sheet1.py
+# format_sheet2.py
 
-
-print("------------------------------------------------------------")  # 60個
-
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\05\python_prg\format_sheet2.py
-
-import openpyxl
-
-wb = openpyxl.Workbook()
-sh = wb.active
+workbook = openpyxl.Workbook()
+sh = workbook.active
 
 sh["b2"] = "合併儲存格的測試"
 sh.merge_cells("b2:c2")
 sh["b2"].alignment = openpyxl.styles.Alignment(horizontal="center")
 #sh.unmerge_cells("b2:c2")
 
-wb.save(r"tmp_format_test.xlsx")
+workbook.save(r"tmp_04_format_test.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\05\python_prg\format_sheet3.py
+# format_sheet3.py
 
-import openpyxl
 from openpyxl.styles import Border, Side
 
-wb = openpyxl.load_workbook(r"data\border.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook(r"data\border.xlsx")
+sh = workbook.active
 
 side1 = Side(style="hair", color="00FF00")
 side2 = Side(style="dashDotDot", color="0000FF")
@@ -189,16 +172,14 @@ for rows in sh["H2":"I4"]:
     for cell in rows:
         cell.border = Border(left=side3, right=side3, top=side3, bottom=side3 )
 
-
-wb.save(r"tmp_border_ed.xlsx")
+workbook.save(r"tmp_05_border_ed.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-import openpyxl
 from openpyxl.chart import AreaChart, Reference
 
-wb = openpyxl.load_workbook(r"data\area_chart.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook(r"data\area_chart.xlsx")
+sh = workbook.active
 
 data = Reference(sh, min_col=3, max_col=7, min_row=1, max_row=sh.max_row)
 labels = Reference(sh, min_col=2, max_col=2, min_row=2, max_row=sh.max_row)
@@ -212,21 +193,16 @@ chart.add_data(data, titles_from_data=True)
 chart.set_categories(labels)
 
 sh.add_chart(chart, "I2")
-wb.save(r"tmp_area_chart.xlsx")
-
-
+workbook.save(r"tmp_06_area_chart.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
+# bubble_chart.py
 
-
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\06\python_prg\bubble_chart.py
-
-import openpyxl
 from openpyxl.chart import Series, Reference, BubbleChart
 
-wb = openpyxl.load_workbook(r"data\bubble_chart.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook(r"data\bubble_chart.xlsx")
+sh = workbook.active
 
 chart = BubbleChart()
 chart.style = 18
@@ -238,17 +214,16 @@ for row in range(2,sh.max_row+1):
     chart.series.append(series)
 
 sh.add_chart(chart, "F2")
-wb.save(r"tmp_bubble_chart.xlsx")
+workbook.save(r"tmp_07_bubble_chart.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\06\python_prg\column_chart.py
+# column_chart.py
 
-import openpyxl
 from openpyxl.chart import BarChart, Reference
 
-wb = openpyxl.load_workbook("data\column_chart.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook("data\column_chart.xlsx")
+sh = workbook.active
 #print(sh.max_row)
 data = Reference(sh, min_col=3, max_col=3, min_row=1, max_row=sh.max_row)
 labels = Reference(sh, min_col=2, max_col=2, min_row=2, max_row=sh.max_row)
@@ -267,17 +242,16 @@ chart.add_data(data,titles_from_data=True)  #以當月業績作為圖例
 chart.set_categories(labels)
 sh.add_chart(chart, "E3")
 
-wb.save("tmp_column_chart.xlsx")
+workbook.save("tmp_08_column_chart.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\06\python_prg\column_chart_stacked.py
+# column_chart_stacked.py
 
-import openpyxl
 from openpyxl.chart import BarChart, Reference
 
-wb = openpyxl.load_workbook("data\column_chart_stacked.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook("data\column_chart_stacked.xlsx")
+sh = workbook.active
 
 data = Reference(sh, min_col=3, max_col=7, min_row=1, max_row=sh.max_row)
 labels = Reference(sh, min_col=2, max_col=2, min_row=2, max_row=sh.max_row)
@@ -293,17 +267,16 @@ chart.add_data(data, titles_from_data=True)
 chart.set_categories(labels)
 
 sh.add_chart(chart, "I2")
-wb.save("tmp_column_chart_stacked.xlsx")
+workbook.save("tmp_09_column_chart_stacked.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\06\python_prg\easy_bubble_chart.py
+# easy_bubble_chart.py
 
-import openpyxl
 from openpyxl.chart import Series, Reference, BubbleChart
 
-wb = openpyxl.load_workbook(r"data\bubble_chart.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook(r"data\bubble_chart.xlsx")
+sh = workbook.active
 
 chart = BubbleChart()
 chart.style = 18
@@ -314,17 +287,16 @@ series = Series(values=yvalues, xvalues=xvalues, zvalues=size)
 chart.series.append(series)
 
 sh.add_chart(chart, "F2")
-wb.save(r"tmp_bubble_chart.xlsx")
+workbook.save(r"tmp_10_bubble_chart.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\06\python_prg\easy_pie_chart.py
+# easy_pie_chart.py
 
-import openpyxl
 from openpyxl.chart import PieChart, Reference
 
-wb = openpyxl.load_workbook("data\pie_chart.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook("data\pie_chart.xlsx")
+sh = workbook.active
 #print(sh.max_row)
 data = Reference(sh, min_col=2, min_row=1, max_row=sh.max_row)
 labels = Reference(sh, min_col=1, min_row=2, max_row=sh.max_row)
@@ -335,17 +307,16 @@ chart.add_data(data, titles_from_data=True)
 chart.set_categories(labels)
 
 sh.add_chart(chart, "D3")
-wb.save("tmp_pie_chart.xlsx")
+workbook.save("tmp_11_pie_chart.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\06\python_prg\line_chart.py
+# line_chart.py
 
-import openpyxl
 from openpyxl.chart import LineChart, Reference
 
-wb = openpyxl.load_workbook("data\line_chart.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook("data\line_chart.xlsx")
+sh = workbook.active
 
 data = Reference(sh, min_col=2, max_col=9, min_row=1, max_row=sh.max_row)
 labels = Reference(sh, min_col=1, min_row=2, max_row=sh.max_row)
@@ -357,18 +328,17 @@ chart.add_data(data, titles_from_data=True)
 chart.set_categories(labels)
 
 sh.add_chart(chart, "A9")
-wb.save("tmp_line_chart.xlsx")
+workbook.save("tmp_12_line_chart.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\__code\圖解零基礎入門Excel╳Python高效工作術\06\python_prg\pie_chart.py
+# pie_chart.py
 
-import openpyxl
 from openpyxl.chart import PieChart, Reference
 from openpyxl.chart.series import DataPoint
 
-wb = openpyxl.load_workbook("data\pie_chart.xlsx")
-sh = wb.active
+workbook = openpyxl.load_workbook("data\pie_chart.xlsx")
+sh = workbook.active
 #print(sh.max_row)
 data = Reference(sh, min_col=2, min_row=1, max_row=sh.max_row)
 labels = Reference(sh, min_col=1, min_row=2, max_row=sh.max_row)
@@ -383,22 +353,22 @@ slice = DataPoint(idx=0, explosion=10)
 chart.series[0].data_points = [slice]
 
 sh.add_chart(chart, "D3")
-wb.save("tmp_pie_chart.xlsx")
+workbook.save("tmp_13_pie_chart.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
 import pathlib  
-import openpyxl 
 from win32com import client
 
 path = pathlib.Path("data")    #指定相對路徑
 
 xlApp = client.Dispatch("Excel.Application")
 for pass_obj in path.iterdir():
-    print(pass_obj)
+    print("\n-------------------------------------------------\n原檔案 :", pass_obj)
     if pass_obj.match("*.xlsx"):
         print("match :", pass_obj)
         book = xlApp.workbooks.open(str(pass_obj.resolve()))
+        print("aaaa :", str(pass_obj.resolve()))
         for sheet in book.Worksheets:
             print('------------------------------')
             slip_no = str(int(sheet.Range("G2").value))
@@ -415,12 +385,6 @@ xlApp.Quit()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4, portrait
 from reportlab.pdfbase import pdfmetrics
@@ -431,13 +395,12 @@ import os
 import shutil
 import pathlib  
 import datetime
-import openpyxl 
 
 from PIL import Image
 
 def load_informatiom():
-    wb = openpyxl.load_workbook("data/特銷說明會導覽.xlsx")
-    sh = wb.active
+    workbook = openpyxl.load_workbook("data/特銷說明會導覽.xlsx")
+    sh = workbook.active
     sale_dict = {} 
     for row in range(1, sh.max_row + 1):
         if sh.cell(row,1).value == "導覽內容":
@@ -460,7 +423,7 @@ if not os.path.exists(target_dir):
 
 sale_dict = load_informatiom()
 path = pathlib.Path(target_dir)
-wb = openpyxl.load_workbook("data/客戶聯絡資料.xlsx")
+workbook = openpyxl.load_workbook("data/客戶聯絡資料.xlsx")
 sh = wb["收件人資料"]
 for row in range(1, sh.max_row + 1):
     file_name = (sh.cell(row,2).value) + "先生／小姐特銷會說明.pdf"
@@ -494,8 +457,6 @@ for row in range(1, sh.max_row + 1):
     cv.drawInlineImage(image,13*cm,13*cm)
     cv.showPage()
     cv.save()
-
-
 
 print("------------------------------------------------------------")  # 60個
 

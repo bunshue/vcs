@@ -8,14 +8,8 @@ print('------------------------------------------------------------')	#60個
 
 import os
 import sys
-import csv
 import time
-import sqlite3
 import tkinter as tk
-from tkinter.filedialog import askopenfile #tk之openFileDialog
-from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
-from tkinter.filedialog import askopenfilename
-from tkinter.filedialog import asksaveasfilename
 
 def button00Click():
     print('你按了button00')
@@ -127,6 +121,17 @@ button15.place(x = x_st + dx * 5, y = y_st + dy * 1)
 text1 = tk.Text(window, width = 100, height = 42)  # 放入多行輸入框
 text1.pack()
 text1.place(x = x_st + dx * 0, y = y_st + dy * 2 + 10)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 window.mainloop()
 

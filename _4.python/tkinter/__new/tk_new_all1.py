@@ -1,11 +1,10 @@
 import sys
 
 import tkinter as tk
-import tkinter.messagebox
 
 from tkinter import ttk
 from PIL import ImageTk, Image
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()  # 產生 tkinter 視窗
@@ -856,19 +855,6 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 
-def answer():
-    tk.messagebox.showerror('顯示類訊息框',
-            '這是messagebox.showerror的訊息框')
-
-def callback():
-    tk.messagebox.askyesno('詢問類訊息框', 
-            '這是messagebox.askyesno的訊息框')
-
-tk.Button(window, text='顯示詢問訊息框的外觀', command =
-          callback).pack(side = 'left', padx = 10)
-tk.Button(window, text='顯示錯誤訊息框的外觀', command =
-          answer).pack(side = 'left')
-
 def select():
     print('你的選項是 :', var.get())
 
@@ -903,7 +889,6 @@ for item, val in place:
         font = ft, variable = var, padx = 20,
         command = select).pack(anchor = tk.NE)
 
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 scrollbar = tk.Scrollbar(window)
@@ -924,11 +909,11 @@ def more():
     if choice.get()==0:
         str1="牛是對少部份牛科動物的統稱 \n\
               包括和人類習習相關的黃牛、水牛和氂牛" 
-        tk.messagebox.showinfo("cattle的簡介",str1)
+        print("cattle的簡介 :", str1)
     else:
         str2="鹿有別於牛、羊等的動物。 \n \
               包括麝科和鹿科動物"
-        tk.messagebox.showinfo("deer的簡介",str2)
+        print("deer的簡介 :", str2)
     
 lb=tk.Label(window,text="請點選想了解的動物簡介:").pack()
 choice=tk.IntVar()
@@ -1442,19 +1427,6 @@ btnShow.pack()
 
 print("------------------------------------------------------------")  # 60個
 
-
-tkinter.messagebox.showinfo("Error","This word is not present in our lexicon\nDouble check it.")
-tkinter.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
-
-print('------------------------------------------------------------')	#60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 # label.py
@@ -1557,7 +1529,7 @@ lblTest.bind('<Button-1>',fnClick) #<Button-1>事件綁定fnClick事件處理函
 lblTest.bind('<B1-Motion>',fnB1Motion) #<B1-Motion>事件綁定fnB1Motion事件處理函式
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 # night_market.py
@@ -1819,8 +1791,8 @@ def fnBmi():
     elif bmi >= 24:
         msg='體重過重！'
     else :
-        msg='體重剛好！'    
-    tkinter.messagebox.askokcancel('注意','你的BMI指數為：{} {}'.format(bmi, msg))
+        msg='體重剛好！'
+    print('注意, 你的BMI指數為：{} {}'.format(bmi, msg))
     
 window = tk.Tk()
 window.title('BMI計算')
@@ -1847,10 +1819,10 @@ def fnCal():
     u=unid.get()
     if (kind.get() == '圓周長'):  		#若選取圓周長
         a=3.14*2*r
-        tkinter.messagebox.showinfo('圓周長','圓周長為 {:.2f} {}'.format(a,u))
+        print('圓周長為 {:.2f} {}'.format(a,u))
     else:
         a=3.14*r*r
-        tkinter.messagebox.showinfo('圓面積','圓面積為 {:.2f} 平方{}'.format(a,u))
+        print('圓面積為 {:.2f} 平方{}'.format(a,u))
   
 window = tk.Tk()
 window.title('圓形計算')
@@ -1949,26 +1921,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# end.py
-
-def fnEnd():
-    res = tkinter.messagebox.askokcancel('注意','確定要結束程式嗎？')
-    if(res == True):	#若傳回值為 True
-        window.destroy()   #結束程式執行
-        
-window=tk.Tk()
-window.geometry('300x150')
-window.title('對話方塊')
-
-lblTitle=tk.Label(window, text = '按鈕結束程式',font=('標楷體', 16))
-btnEnd=tk.Button(window, text = '結束',pady=5,padx=10,command=fnEnd)
-lblTitle.pack(pady=20)
-btnEnd.pack(pady=5)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 # survey.py
 
 def fnOk():
@@ -1983,9 +1935,9 @@ def fnMsg():
         for i in range(3):
             if check[i].get()==True:	#若check[i]元素值為True
                 msg += (spots[i]+'、')	#將spots[i]元素值加入msg字串
-        tkinter.messagebox.showinfo('訊息',msg[:len(msg)-1])
+        print('訊息 :', msg[:len(msg)-1])
     else:
-        tkinter.messagebox.showinfo('訊息','期盼下次你能參加')
+        print('訊息 : 期盼下次你能參加')
     window.destroy()
     
 window = tk.Tk()
@@ -2000,14 +1952,8 @@ btnSend = tk.Button(window, text=' 送出 ', command=fnMsg).pack(pady=5)
 
 window.mainloop()
 
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 
 

@@ -24,6 +24,10 @@ _4.python/sqlite/ims_sql/QC_debug/*
 _4.python/sqlite/ims_sql/QC_debug/*.*
 _4.python/_example/ims_qc_database/QC_debug/*
 _4.python/_example/ims_qc_database/QC_debug/*.*
+_4.python/import_module/pyinstaller/ims_qc_database/QC/csv/*.*
+_4.python/import_module/pyinstaller/ims_qc_database/T 060201 01 環境溫濕度管制紀錄表_B (12月).xlsx
+_4.python/import_module/pyinstaller/ims_qc_database/ims_qc_database.spec
+_4.python/sqlite/ims_sql/*.sqlite
 
 # C 相關產出之檔案
 *.so

@@ -306,10 +306,10 @@ EAN = barcode.get_barcode_class("ean13")
 text = "123456789012"  # EAN僅能用數字, 必為12碼
 # 存svg檔
 ean = EAN(text)
-ean.save("ean13_barcode")
+ean.save("tmp_ean13_barcode")
 # 存png檔
 ean = EAN(text, writer=ImageWriter())
-ean.save("ean13_barcode")
+ean.save("tmp_ean13_barcode")
 
 print("------------------------------------------------------------")  # 60個
 

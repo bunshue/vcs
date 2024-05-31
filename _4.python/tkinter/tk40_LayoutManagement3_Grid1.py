@@ -617,12 +617,6 @@ button2.grid(row = 0, column = 1)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-# Message測試
-tk.Label(text = 'Message測試').pack()
-
-#w = tk.Message(window, text = "this is a relatively long message")    #自動換行
-w = tk.Message(window, text = "this is a relatively long message", width = 50)  #限定寬度
-w.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 

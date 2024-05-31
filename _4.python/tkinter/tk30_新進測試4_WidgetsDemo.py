@@ -37,21 +37,11 @@ label = tk.Label(frame2, text = "Enter your name: ")
 name = tk.StringVar()
 entryName = tk.Entry(frame2, textvariable = name) 
 btGetName = tk.Button(frame2, text = "Get Name", command = processButton)
-message = tk.Message(frame2, text = "It is a widgets demo")
 label.grid(row = 1, column = 1)
 entryName.grid(row = 1, column = 2)
 btGetName.grid(row = 1, column = 3)
-message.grid(row = 1, column = 4)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-#Window下的Text
-text1 = tk.Text(window)
-text1.pack()
-text1.insert(tk.END, "\n寫在Text中的文字1")
-text1.insert(tk.END, "\n寫在Text中的文字2")
-text1.insert(tk.END, "\n寫在Text中的文字3")
-text1.insert(tk.END, "\n寫在Text中的文字4")
 
 window.mainloop()
 

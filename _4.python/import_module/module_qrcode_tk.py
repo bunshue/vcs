@@ -3,7 +3,7 @@ QR Code 產生器
 """
 import qrcode as qr
 import tkinter as tk
-import tkinter.filedialog as fd
+import tkinter.filedialog
 from PIL import ImageTk
 
 window = tk.Tk()
@@ -40,7 +40,7 @@ image_area.pack(padx=3, pady=1)
 
 # 儲存選單
 def save():
-    filename = fd.asksaveasfilename(title="儲存檔案", initialfile="qrcode.png")
+    filename = tkinter.filedialog.asksaveasfilename(title="儲存檔案", initialfile="qrcode.png")
     if filename and hasattr(qr_label, "qr_img"):
         qr_label.qr_img.save(filename)
 
