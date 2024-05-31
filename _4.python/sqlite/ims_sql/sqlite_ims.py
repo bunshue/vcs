@@ -9,7 +9,6 @@ import csv
 import time
 import sqlite3
 import tkinter as tk
-import tkinter as tk
 from tkinter.filedialog import askopenfile #tk之openFileDialog
 from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
 from tkinter.filedialog import askopenfilename
@@ -1096,12 +1095,10 @@ main_message1.set(message)
 
 window.mainloop()
 
+print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-
-
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 

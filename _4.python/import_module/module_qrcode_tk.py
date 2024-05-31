@@ -1,16 +1,22 @@
+﻿"""
+QR Code 產生器
+"""
 import qrcode as qr
-
 import tkinter as tk
 import tkinter.filedialog as fd
-
 from PIL import ImageTk
 
-base = tk.Tk()
-base.title("QRcode Generator")
-input_area = tk.Frame(base, relief=tk.RAISED, bd=2)
-image_area = tk.Frame(base, relief=tk.SUNKEN, bd=2)
+window = tk.Tk()
+window.title("QRcode Generator")
+
+input_area = tk.Frame(window, relief=tk.RAISED, bd=2)
+image_area = tk.Frame(window, relief=tk.SUNKEN, bd=2)
+
+# 此變數用來儲存將轉換成qrcode的字串
 encode_text = tk.StringVar()
 entry = tk.Entry(input_area, textvariable=encode_text).pack(side=tk.LEFT)
+
+# 用來顯示qr_code的label
 qr_label = tk.Label(image_area)
 
 
@@ -22,26 +28,35 @@ def generate():
     qr_label.pack()
 
 
+# 開始產生qrcode的觸發按鈕
 encode_button = tk.Button(input_area, text="QRcode!", command=generate).pack(
     side=tk.LEFT
 )
+
+# 描繪框線
 input_area.pack(pady=5)
 image_area.pack(padx=3, pady=1)
 
 
+# 儲存選單
 def save():
     filename = fd.asksaveasfilename(title="儲存檔案", initialfile="qrcode.png")
     if filename and hasattr(qr_label, "qr_img"):
         qr_label.qr_img.save(filename)
 
 
-def show_context_menu(event):
-    context_menu.tk_popup(event.x_root, event.y_root)
+# 結束選單
+def exit():
+    window.destroy()
 
 
-context_menu = tk.Menu(base, tearoff=0)
-context_menu.add_command(label="儲存圖片", command=save)
+# 建立選單畫面
+menubar = tk.Menu(window)
+filemenu = tk.Menu(menubar)
+menubar.add_cascade(label="File", menu=filemenu)
+filemenu.add_command(label="save", command=save)
+filemenu.add_separator()
+filemenu.add_command(label="exit", command=exit)
+window.config(menu=menubar)
 
-base.bind("<Button-3>", show_context_menu)
-
-base.mainloop()
+window.mainloop()

@@ -1,8 +1,15 @@
-'''
+"""
 綁定鍵盤滑鼠事件 Window
-'''
-import tkinter as tk
+"""
 
+import tkinter as tk
+import tkinter.filedialog
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+'''
 cccc = tk.Tk()
 
 # 設定主視窗大小
@@ -34,11 +41,11 @@ def mouseDoubleClick4(event):
 
 def mouse_down1(event):
     print('你按了滑鼠左鍵', end = ' ')
-    '''
+    """
     print("在控件位置 : ", event.x, event.y, end = ' ')
     print("視窗位置 : ", event.x_root, event.y_root, end = ' ')
     print("按鍵 : ", event.num, end = ' ')
-    '''
+    """
 def mouse_down2(event):
     print('你按了滑鼠中鍵', end = ' ')
     
@@ -161,13 +168,56 @@ root.bind("<Motion>",mouseMotion)   # 增加事件處理程式
 
 root.mainloop()
 
+'''
+print("------------------------------------------------------------")  # 60個
+
+print('按右鍵 另存新圖')
+window = tk.Tk()
+
+from PIL import ImageTk, Image
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+img = ImageTk.PhotoImage(Image.open(filename))
+label1 =tk.Label(window, image = img)
+label1.pack()
+
+def save(event):
+    filename = tkinter.filedialog.asksaveasfilename(title="儲存檔案", initialfile="tmp_picture1.jpg")
+    if filename and hasattr(label1, "qr_img"):
+        label1.qr_img.save(filename)
+
+
+window.bind("<Button-3>", save)
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+print('按右鍵 右鍵選單 另存新圖')
+window = tk.Tk()
+
+from PIL import ImageTk, Image
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+img = ImageTk.PhotoImage(Image.open(filename))
+label1 =tk.Label(window, image = img)
+label1.pack()
+
+def save():
+    filename = tkinter.filedialog.asksaveasfilename(title="儲存檔案", initialfile="tmp_picture2.jpg")
+    if filename and hasattr(label1, "qr_img"):
+        label1.qr_img.save(filename)
 
 
-print("------------------------------------------------------------")  # 60個
+def show_context_menu(event):
+    context_menu.tk_popup(event.x_root, event.y_root)
 
+
+context_menu = tk.Menu(window, tearoff=0)
+context_menu.add_command(label="儲存圖片", command=save)
+
+window.bind("<Button-3>", show_context_menu)
+
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 

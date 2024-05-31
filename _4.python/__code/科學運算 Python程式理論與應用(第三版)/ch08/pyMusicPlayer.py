@@ -1,9 +1,7 @@
-# -*- coding:utf-8 -*-
-# file: pyMusicPlayer.py
-#
-import tkinter										# 匯入tkinter模組
-import tkinter.filedialog									# 匯入tkFileDialog模組
+import tkinter
+import tkinter.filedialog
 from win32com.client import Dispatch
+
 class Window:
 	def __init__(self):
 		self.root = root = tkinter.Tk()						# 建立視窗
@@ -52,3 +50,4 @@ class Window:
 		self.wmp.controls.stop()						# 停止
 window = Window()
 window.MainLoop()
+

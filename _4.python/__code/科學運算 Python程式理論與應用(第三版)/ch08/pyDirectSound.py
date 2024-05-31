@@ -1,12 +1,13 @@
-# -*- coding:utf-8 -*-
 # file: pyDirectSound.py
-#
+
 import pywintypes									# 匯入模組
 import struct
 from win32com.directsound import directsound
 import tkinter
 import tkinter.filedialog
+
 WAV_HEADER_SIZE = struct.calcsize('<4sl4s4slhhllhh4sl')					# 設定WAV頭
+
 class Window:
 	def __init__(self):
 		self.root = root = tkinter.Tk()						# 建立元件
@@ -61,5 +62,6 @@ class Window:
 		buffer.Play(0)
 	def stop(self):
 		self.buffer.Stop()							# 停止
+
 window = Window()
 window.MainLoop()

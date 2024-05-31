@@ -1,11 +1,11 @@
 import sys
 
 import tkinter as tk
-from tkinter import ttk
-from PIL import ImageTk, Image
-
 import tkinter.messagebox
 
+from tkinter import ttk
+from PIL import ImageTk, Image
+'''
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()  # 產生 tkinter 視窗
@@ -1455,474 +1455,548 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-
-
-
-#grid 大全
-
-print("grid")
-
-print("grid版面佈局")
-
-taipei=tk.Button(window, width=30, text="台北景點")
-taipei.grid(column=0,row=0)
-kaohsiung=tk.Button(window, width=30, text="高雄景點")
-kaohsiung.grid(column=0,row=1)
-ilan=tk.Button(window, width=30, text="宜蘭景點")
-ilan.grid(column=1,row=0)
-tainan=tk.Button(window, width=30, text="台南景點")
-tainan.grid(column=1,row=1)
-	
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-window.geometry("100x100")
-window.title("grid佈局")
+# label.py
 
-one=tk.Button(window, width=20, text="January")
-one.grid(column=0,row=0)
-two=tk.Button(window, width=20, text="Februry")
-two.grid(column=1,row=0)
-three=tk.Button(window, width=20, text="March")
-three.grid(column=2,row=0)
-one=tk.Button(window, width=20, text="April")
-one.grid(column=0,row=1)
-two=tk.Button(window, width=20, text="May")
-two.grid(column=1,row=1)
-three=tk.Button(window, width=20, text="June")
-three.grid(column=2,row=1)
-one=tk.Button(window, width=20, text="July")
-one.grid(column=0,row=2)
-two=tk.Button(window, width=20, text="August")
-two.grid(column=1,row=2)
-three=tk.Button(window, width=20, text="September")
-three.grid(column=2,row=2)
-one=tk.Button(window, width=20, text="October")
-one.grid(column=0,row=3)
-two=tk.Button(window, width=20, text="November")
-two.grid(column=1,row=3)
-three=tk.Button(window, width=20, text="December")
-three.grid(column=2,row=3)
+window=tk.Tk()
+window.geometry('300x200')
+window.title('Label標籤')
+window.configure(bg='white') 
+tk.Label(window, text = '王之渙涼州詞', fg='blue',bg='lightblue',bitmap='gray25',\
+         compound='left',font=('標楷體', 24, 'bold')).pack()
+msg=('黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。')
+tk.Label(window, text = msg, width=28,wraplength=240,justify='left',\
+         pady=10,font=('細明體', 14)).pack()
 
 window.mainloop()
 
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
+# pack.py
 
-def add():                                  # 加法運算
-    n3.set(n1.get()+n2.get())
+window=tk.Tk()
+window.geometry('300x200')
+window.title('pack配置')
+window.configure(bg='white')
+
+lbl1=tk.Label(window, text = '元件版面配置',font=('微軟正黑體', 16),fg='white',bg='blue')
+lbl2=tk.Label(window, text = '方法',font=('標楷體', 12))
+lbl3=tk.Label(window, text = 'pack()方法',font=('標楷體', 12),bg='lightgreen')
+lbl4=tk.Label(window, text = 'grid()方法',font=('標楷體', 12),bg='pink')
+lbl5=tk.Label(window, text = 'place()方法',font=('標楷體', 12),bg='lightblue')
+lbl1.pack(fill='x')
+lbl2.pack(side='left', fill='y')
+lbl3.pack(pady=5, fill='both', expand=True)
+lbl4.pack(pady=5, fill='both', expand=True)
+lbl5.pack(pady=5, fill='both', expand=True)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# place.py
+
+window=tk.Tk()
+window.geometry('300x200')
+window.configure(bg='white') 
+window.title('place配置')
+
+lbl1=tk.Label(window, text = "五色鳥 Muller's Barbet", font=('微軟正黑體', 18),\
+              fg='white',bg='black')
+lbl2=tk.Label(window, text = '啄木鳥目', font=('標楷體', 16),fg='blue',bg='lightblue')
+lbl3=tk.Label(window, text = '五色鳥科', font=('標楷體', 14),fg='green',bg='lightgreen')
+msg='分布海平面到2800公尺，全身為鮮艷的翠綠色，在闊葉林中有良好的保護色。'
+lbl4=tk.Label(window, text = msg,font=('細明體', 12),wraplength=170)
+lbl1.place(x=10,y=5,width=280,height=40)
+lbl2.place(x=10,y=50,width=90,height=50)
+lbl3.place(x=10,y=105,width=90,height=50)
+lbl4.place(x=110,y=50,width=180,height=105)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# drag.py
+
+
+def fnEnter(event):
+    lblTest['bg']='lightblue'
+
+def fnLeave(event):
+    lblTest.config(text='試試看',bg='gray')
     
-n1 = tk.IntVar()                   
-n2 = tk.IntVar()
-n3 = tk.IntVar()
+def fnMotion(event):
+    lblTest['text']='游標移動'
 
-e1 = tk.Entry(window,width=8,textvariable=n1)  # 文字方塊1
-label = tk.Label(window,width=3,text='+')      # 加號
-e2 = tk.Entry(window,width=8,textvariable=n2)  # 文字方塊2
-btn = tk.Button(window,width=5,text='=',command=add)   # =按鈕
-e3 = tk.Entry(window,width=8,textvariable=n3)  # 儲存結果文字方塊
-
-e1.grid(row=0,column=0)                     # 定位文字方塊1
-label.grid(row=0,column=1,padx=5)           # 定位加號
-e2.grid(row=0,column=2)                     # 定位文字方塊2
-btn.grid(row=1,column=1,pady=5)             # 定位=按鈕
-e3.grid(row=2,column=1)                     # 定位儲存結果
-
-window.mainloop()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="Peter",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="John",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="Notron",
-              bg="lightblue",       # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab4 = tk.Label(window,text="Kevin",
-              bg="lightgreen",      # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab5 = tk.Label(window,text="Tommy",
-              bg="lightblue",       # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab6 = tk.Label(window,text="Mary",
-              bg="lightyellow",     # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab7 = tk.Label(window,text="Tracy",
-              bg="lightblue",       # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab8 = tk.Label(window,text="Mike",
-              bg="lightyellow",     # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab9 = tk.Label(window,text="Vicent",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-
-lab1.grid(row=0,column=0)           # 格狀包裝
-lab2.grid(row=0,column=1)           # 格狀包裝
-lab3.grid(row=0,column=2)           # 格狀包裝
-lab4.grid(row=1,column=0)           # 格狀包裝
-lab5.grid(row=1,column=1)           # 格狀包裝
-lab6.grid(row=1,column=2)           # 格狀包裝
-lab7.grid(row=2,column=0)           # 格狀包裝
-lab8.grid(row=2,column=1)           # 格狀包裝
-lab9.grid(row=2,column=2)           # 格狀包裝
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="標籤1",relief="raised")
-lab2 = tk.Label(window,text="標籤2",relief="raised")
-lab3 = tk.Label(window,text="標籤3",relief="raised")
-lab4 = tk.Label(window,text="標籤4",relief="raised")
-lab5 = tk.Label(window,text="標籤5",relief="raised")
-lab6 = tk.Label(window,text="標籤6",relief="raised")
-lab7 = tk.Label(window,text="標籤7",relief="raised")
-lab8 = tk.Label(window,text="標籤8",relief="raised")
-lab1.grid(row=0,column=0)
-lab2.grid(row=0,column=1)
-lab3.grid(row=0,column=2)
-lab4.grid(row=0,column=3)
-lab5.grid(row=1,column=0)
-lab6.grid(row=1,column=1)
-lab7.grid(row=1,column=2)
-lab8.grid(row=1,column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="標籤1",relief="raised")
-lab2 = tk.Label(window,text="標籤2",relief="raised")
-lab4 = tk.Label(window,text="標籤4",relief="raised")
-lab5 = tk.Label(window,text="標籤5",relief="raised")
-lab6 = tk.Label(window,text="標籤6",relief="raised")
-lab7 = tk.Label(window,text="標籤7",relief="raised")
-lab8 = tk.Label(window,text="標籤8",relief="raised")
-lab1.grid(row=0,column=0)
-lab2.grid(row=0,column=1,columnspan=2)
-lab4.grid(row=0,column=3)
-lab5.grid(row=1,column=0)
-lab6.grid(row=1,column=1)
-lab7.grid(row=1,column=2)
-lab8.grid(row=1,column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="標籤1",relief="raised")
-lab2 = tk.Label(window,text="標籤2",relief="raised")
-lab3 = tk.Label(window,text="標籤3",relief="raised")
-lab4 = tk.Label(window,text="標籤4",relief="raised")
-lab5 = tk.Label(window,text="標籤5",relief="raised")
-lab7 = tk.Label(window,text="標籤7",relief="raised")
-lab8 = tk.Label(window,text="標籤8",relief="raised")
-lab1.grid(row=0,column=0)
-lab2.grid(row=0,column=1,rowspan=2)
-lab3.grid(row=0,column=2)
-lab4.grid(row=0,column=3)
-lab5.grid(row=1,column=0)
-lab7.grid(row=1,column=2)
-lab8.grid(row=1,column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-def add():                                  # 加法運算
-    n3.set(n1.get()+n2.get())
+def fnClick(event):
+    global mx,my	#宣告mx,my為全域變數
+    mx=event.x	#紀錄按下時滑鼠游標的x坐標
+    my=event.y	#紀錄按下時滑鼠游標的y坐標
+    
+def fnB1Motion(event):
+    global mx,my	#宣告mx,my為全域變數
+    lblX=lblTest.winfo_rootx()-window.winfo_rootx()	#計算lblTest在視窗的x坐標
+    lblY=lblTest.winfo_rooty()-window.winfo_rooty()	#計算lblTest在視窗的y坐標
+    lblTest['text']='拖曳中...'
+    lblTest.place(x=lblX+(event.x-mx),y=lblY+(event.y-my))	#重設lblTest位置
     
 window = tk.Tk()
+window.title('滑鼠事件測試')
+window.geometry('240x240')
 
-n1 = tk.IntVar()                   
-n2 = tk.IntVar()
-n3 = tk.IntVar()
-
-e1 = tk.Entry(window,width=8,textvariable=n1)  # 文字方塊1
-label = tk.Label(window,width=3,text='+')      # 加號
-e2 = tk.Entry(window,width=8,textvariable=n2)  # 文字方塊2
-btn = tk.Button(window,width=5,text='=',command=add)   # =按鈕
-e3 = tk.Entry(window,width=8,textvariable=n3)  # 儲存結果文字方塊
-
-e1.grid(row=0,column=0)                     # 定位文字方塊1
-label.grid(row=0,column=1,padx=5)           # 定位加號
-e2.grid(row=0,column=2)                     # 定位文字方塊2
-btn.grid(row=1,column=1,pady=5)             # 定位=按鈕
-e3.grid(row=2,column=1)                     # 定位儲存結果
+mx=0
+my=0
+lblTest=tk.Label(window,text='試試看',width=8,height=2,relief='groove',bg='gray')
+lblTest.place(x=80,y=100)
+lblTest.bind('<Enter>',fnEnter) #<Enter>事件綁定fnEnter事件處理函式
+lblTest.bind('<Leave>',fnLeave) #<Leave>事件綁定fnLeave事件處理函式
+lblTest.bind('<Motion>',fnMotion) #<Motion>事件綁定fnMotion事件處理函式
+lblTest.bind('<Button-1>',fnClick) #<Button-1>事件綁定fnClick事件處理函式
+lblTest.bind('<B1-Motion>',fnB1Motion) #<B1-Motion>事件綁定fnB1Motion事件處理函式
 
 window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
-          
 
+# night_market.py
+
+
+def fnArea(e):
+    global iArea,iNM		#宣告iArea,iNM為全域變數
+    i=lstArea.curselection()    #取得地區選項索引的元組
+    iArea=i[0]  #設iArea值為第一個元組值
+    lstNM.delete(0,'end')   #清除所有夜市項目
+    for x in range(len(nm[iArea])): #依序加入對應地區的夜市到清單
+        lstNM.insert('end',nm[iArea][x])
+
+def fnNM(e):
+    global iArea,iNM		#宣告iArea,iNM為全域變數
+    i=lstNM.curselection()    #取得夜市選項索引的元組
+    iNM=i[0]  #設iNM值為第一個元組值
+    lblMsg.config(text=msg[iArea][iNM]) #重設標籤的文字內容
+    
 window = tk.Tk()
-window.geometry("400x100")
-window.title("grid版面佈局的示範")
+window.title('台灣夜市簡介')
+window.geometry('300x180')
 
-plus=tk.Button(window, width=20, text="加法範例")
-plus.grid(column=0,row=0)
-minus=tk.Button(window, width=20, text="減法範例")
-minus.grid(column=0,row=1)
-multiply=tk.Button(window, width=20, text="乘法範例")
-multiply.grid(column=1,row=0)
-divide=tk.Button(window, width=20, text="除法範例")
-divide.grid(column=1,row=1)
+tk.Label(window,text='台灣夜市之旅',font=('微軟正黑體',16)).pack()
+lfrmNM=tk.LabelFrame(window,text='夜市名稱',relief='raised',borderwidth=2)
+lfrmNM.pack(side='left',anchor='n',padx=5,pady=3)
+areas=['北台灣','中台灣','南台灣','東台灣'] #宣告地區串列
+lstArea=tk.Listbox(lfrmNM,height=4)
+for a in areas: #將地區串列值依序插入清單中
+    lstArea.insert('end',a)
+lstArea.pack()
+iArea=0 #預設地區選項的索引值為0
+lstArea.bind('<<ListboxSelect>>',fnArea)    #選項改變的事件綁定fnArea函式
+nm =[['基隆廟口','士林夜市','華西街夜市'],['逢甲夜市','一中街夜市'],
+     ['文化路夜市','花園夜市','六合夜市'],['羅東夜市','東大門夜市']]
+lstNM=tk.Listbox(lfrmNM,height=3)
+lstNM.pack()
+for x in range(len(nm[0])): #將北台灣的夜市串列值依序插入清單中
+    lstNM.insert('end',nm[0][x])
+lstNM.selection_set(0)  #預設選取第一個夜市
+iNM=0 #預設夜市選項的索引值為0
+lstNM.bind('<<ListboxSelect>>',fnNM)    #選項改變的事件綁定fnNM函式
+lfrmMsg=tk.LabelFrame(window,text='夜市簡介',relief='raised',borderwidth=2)
+lfrmMsg.pack(side='left',anchor='n',padx=5,pady=3)
+msg=[['基隆夜市的廟口小吃遠近馳名\n\n營業時間：17:00-03:00',
+      '集合大江南北小吃觀光客必到夜市\n\n營業時間：11:00-02:00',
+      '最著名的夜市吸引國內外觀光客\n\n營業時間：16:00-24:00'],
+     ['「價位便宜，應有盡有」是特色\n\n營業時間：12:00-02:00',
+      '小吃攤、飲食店、流行服飾店林立\n\n營業時間：11:00–22:10'],
+     ['文化路夜市聚集千家以上的攤販\n\n營業時間：17:00-06:00',
+      '花園夜市規模大，交通便利\n\n營業時間：18:00-24:00(四、六、日)',
+      '各地特產、小吃等一應俱全\n\n營業時間：17:00-02:00'],
+     ['羅東夜市有豐富的當地小吃\n\n營業時間：17:00-01:00',
+      '占地遼闊吃喝玩樂逛不完\n\n營業時間:18:00-00:00']]
+lblMsg=tk.Label(lfrmMsg,text=msg[0][0],font=(12),wraplength=120,justify='left')
+lblMsg.pack(anchor='n')
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+print('下拉式選單')
+
+# order.py
+
+
+def fnOK():
+    global order,total		#宣告order,tota為全域變數
+    f=selFood.get()  #取得使用者選擇的菜單
+    n=selNum.get()   #取得使用者選擇的數量
+    i=foods.index(f) #取得菜單在foods串列的索引值
+    m=money[i]*n     #計算本次點餐的小計
+    total+=m         #計算點餐的總計
+    order+='{} {} 碗 {}元\n'.format(foods[i],n,m) #加入本次點餐的資訊
+    lblOrder.config(text='{}總計： {} 元'.format(order,total))
+    
 window = tk.Tk()
-window.geometry("400x100")
-window.title("grid版面佈局的示範")
+window.title('台中肉圓點餐系統')
+window.geometry('300x160')
 
-plus=tk.Button(window, width=20, text="加法範例")
-plus.grid(column=0,row=0)
-minus=tk.Button(window, width=20, text="減法範例")
-minus.grid(column=0,row=1)
-multiply=tk.Button(window, width=20, text="乘法範例")
-multiply.grid(column=0,row=2)
-divide=tk.Button(window, width=20, text="除法範例")
-divide.grid(column=0,row=3)
+foods = ['肉圓','冬粉湯','魚丸湯']  #菜單項目串列
+money=[40,30,30]                  #單價串列
+selFood = tk.StringVar()
+selFood.set('肉圓')
+opnFood=tk.OptionMenu(window, selFood, *foods)
+opnFood.config(width=10,font=('微軟正黑體',14))
+opnFood.grid(row=0,column=0,pady=5)
+selNum = tk.IntVar()
+selNum.set(1)
+opnNum=tk.OptionMenu(window, selNum, 1,2,3,4,5)
+opnNum.config(width=8,font=('微軟正黑體',14))
+opnNum.grid(row=0,column=1)
+lblOrder=tk.Label(window,text='')
+lblOrder.grid(row=1,column=0,columnspan=2,sticky='w')
+btnOK=tk.Button(window, text='確定', command=fnOK)
+btnOK.grid(row=1,column=1,sticky='n')
+order=''    #點餐的文字訊息
+total=0     #點餐的總計
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-pLabel1= tk.Label(window, text="難度計算過程", fg="black", bg="silver", font=("新細明體",12),padx=20,pady=10 )
+print('調色盤')
+# palette.py
 
 
-text1 = tk.StringVar(value='GUI1')
-ent1 = tk.Entry(window, textvariable=text1, width=15, justify=tk.CENTER)
-ent1.grid(row=0, column=0, padx=5, pady=5)
-text2 = tk.StringVar(value='GUI2')
-ent2 = tk.Entry(window, textvariable=text2, width=15, justify=tk.CENTER)
-ent2.grid(row=0, column=2, padx=5, pady=5, sticky=tk.N)
-text3 = tk.StringVar(value='GUI3')
-ent3 = tk.Entry(window, textvariable=text3, width=15, justify=tk.CENTER)
-ent3.grid(row=1, column=1, padx=5, pady=5)
-"""
+def fnBg(e):
+    red=r.get()	#用get()方法讀取刻度值
+    green=g.get()
+    blue=b.get()
+    color='#{:02x}{:02x}{:02x}'.format(red,green,blue)
+    frmColor.config(bg=color)
+    
+window = tk.Tk()
+window.title('調色盤')
+window.geometry('250x200')
+
+frmColor=tk.Frame(window,width=100,height=180,relief='raised',borderwidth=3,bg='white')
+frmColor.pack(side='left',padx=10)
+frmRGB=tk.Frame(window,width=200,height=200)
+frmRGB.pack(side='left')
+r=tk.IntVar()
+sclR=tk.Scale(frmRGB,label='紅：',orient='horizontal',variable=r,from_=0,to=255,command=fnBg)
+r.set(255)	#用set()方法設定刻度值
+sclR.pack()
+g=tk.IntVar()
+sclG=tk.Scale(frmRGB,label='綠：',orient='horizontal',variable=g,from_=0,to=255,command=fnBg)
+sclG.pack()
+g.set(255)
+b=tk.IntVar()
+sclB=tk.Scale(frmRGB,label='藍：',orient='horizontal',variable=b,from_=0,to=255,command=fnBg)
+sclB.pack()
+b.set(255)
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+# test.py
+
+import random
+
+def fnTest():
+    global ans		#宣告ans為全域變數來記錄答案
+    n=int(spnNum.get()) #取得使用者選擇的位數
+    num=[[1,9],[10,99],[100,999]]   #用二維串列儲存各位數的亂數範圍
+    r1=random.randint(num[n-1][0],num[n-1][1])
+    r2=random.randint(num[n-1][0],num[n-1][1])
+    if(r2>r1):	#若r2>r1就兩者互換
+        r1,r2=r2,r1
+    if(spnOpt.get()=='加法'):	#若選擇'加法'
+        opt='+'
+        ans=r1+r2
+    else:
+        opt='-'
+        ans=r1-r2        
+    lblTest.config(text='{} {} {} ='.format(r1,opt,r2))
+    entAns.focus_set()
+    btnTest.config(state='disable')
+    btnAns.config(state='normal')
+    
+def fnAns():
+    global ans
+    userAns=int(entAns.get())
+    if(userAns==ans):
+        msg.set('太棒了！答案正確！')
+    else:
+        msg.set('答錯了！答案是：{}'.format(ans))
+    btnTest.config(state='normal')
+    btnAns.config(state='disable')
+    
+window = tk.Tk()
+window.title('加減法測驗')
+window.geometry('300x160')
+
+frmTest=tk.Frame(window,relief='raised',borderwidth=2)
+frmTest.pack(side='left',padx=5,pady=3)
+lblTest=tk.Label(frmTest,text=' ',font=('微軟正黑體',20))
+lblTest.pack(pady=5)
+ans=tk.IntVar()
+entAns=tk.Entry(frmTest,textvariable=ans)
+entAns.pack(pady=5)
+msg=tk.StringVar()
+msg.set('設定後按 <出題> 鈕開始測驗')
+lblMsg=tk.Label(frmTest,textvariable=msg)
+lblMsg.pack(pady=5)
+frmSet=tk.Frame(window,relief='raised',borderwidth=2)
+frmSet.pack(side='left',padx=5,pady=3)
+tk.Label(frmSet,text='運算：').pack(anchor='w')
+lstOpt=['加法','減法']
+spnOpt=tk.Spinbox(frmSet,values=lstOpt)
+spnOpt.pack(anchor='w')
+tk.Label(frmSet,text='位數：').pack(anchor='w')
+spnNum=tk.Spinbox(frmSet,from_=1,to=3)
+spnNum.pack(anchor='w')
+btnTest=tk.Button(frmSet, text='出題', command=fnTest)
+btnTest.pack(side='left',pady=3)
+btnAns=tk.Button(frmSet, text='核對', command=fnAns,state='disable')
+btnAns.pack(side='right',pady=3)
+ans=0
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# album.py
+# 只能用png ?
+
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work1.png'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work2.png'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work3.png'
+filename4 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work4.png'
+
+def fnSet(img):
+    lblPhoto.config(image=img)
+    
+window = tk.Tk()
+window.title('相簿')
+window.geometry('1000x900')
+
+imgPhoto1=tk.PhotoImage(file=filename1)
+imgPhoto2=tk.PhotoImage(file=filename2)
+imgPhoto3=tk.PhotoImage(file=filename3)
+imgPhoto4=tk.PhotoImage(file=filename4)
+
+imgPhoto1_s=imgPhoto1.subsample(4,4)
+imgPhoto2_s=imgPhoto2.subsample(4,4)
+imgPhoto3_s=imgPhoto3.subsample(4,4)
+imgPhoto4_s=imgPhoto4.subsample(4,4)
+
+lblPhoto=tk.Label(window,image=imgPhoto1)
+lblPhoto.pack()
+lfrmSet=tk.LabelFrame(window,text='選擇照片',relief='raised',borderwidth=2)
+lfrmSet.pack()
+btn1=tk.Button(lfrmSet,image=imgPhoto1_s,command=lambda:fnSet(imgPhoto1))
+btn1.pack(side='left',padx=5)
+btn2=tk.Button(lfrmSet,image=imgPhoto2_s,command=lambda:fnSet(imgPhoto2))
+btn2.pack(side='left',padx=5)
+btn3=tk.Button(lfrmSet,image=imgPhoto3_s,command=lambda:fnSet(imgPhoto3))
+btn3.pack(side='left',padx=5)
+btn4=tk.Button(lfrmSet,image=imgPhoto4_s,command=lambda:fnSet(imgPhoto4))
+btn4.pack(side='left',padx=5)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# bmi.py
+
+
+def fnBmi():
+    height = userH.get()	#用get方法取得身高
+    weight = userW.get()
+    bmi = round(weight / pow(height, 2), 2)
+    msg=''
+    if bmi < 18.5:
+        msg='體重過輕！'
+    elif bmi >= 24:
+        msg='體重過重！'
+    else :
+        msg='體重剛好！'    
+    tkinter.messagebox.askokcancel('注意','你的BMI指數為：{} {}'.format(bmi, msg))
+    
+window = tk.Tk()
+window.title('BMI計算')
+window.geometry('240x200')
+window.configure(bg='white')
+
+lblTitle = tk.Label(window, text='BMI 計算',font=('微軟正黑體', 16),fg='white',bg='blue')
+lblTitle.pack(pady=10,fill='x')
+tk.Label(window, text='身高(公尺，請輸入浮點數)').pack(pady=5,anchor='w')
+userH=tk.DoubleVar()		#宣告userH為浮點數物件
+entH = tk.Entry(window,textvariable=userH).pack()  #textvariable參數值為userH
+tk.Label(window, text='體重(公斤，請輸入整數)').pack(pady=5,anchor='w')
+userW=tk.IntVar()		#宣告userW為整數物件
+entW = tk.Entry(window,textvariable=userW).pack()  #textvariable參數值為userW
+btnCal = tk.Button(window, text=' 計算 ', command=fnBmi).pack(pady=5)
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# circle.py
+
+def fnCal():
+    r = userR.get()
+    u=unid.get()
+    if (kind.get() == '圓周長'):  		#若選取圓周長
+        a=3.14*2*r
+        tkinter.messagebox.showinfo('圓周長','圓周長為 {:.2f} {}'.format(a,u))
+    else:
+        a=3.14*r*r
+        tkinter.messagebox.showinfo('圓面積','圓面積為 {:.2f} 平方{}'.format(a,u))
+  
+window = tk.Tk()
+window.title('圓形計算')
+window.geometry('300x200')
+
+lfrmR=tk.LabelFrame(window,text='輸入半徑：')
+lfrmR.pack(pady=10)
+userR=tk.IntVar()
+userR.set(10)
+entR= tk.Entry(lfrmR,textvariable=userR).pack(pady=3)
+lblMsg=tk.Label(lfrmR, text = '請輸入半徑(整數)然後選擇項目').pack(pady=10)
+
+lfrmKind=tk.LabelFrame(window,text='計算類別')
+lfrmKind.pack(side='left',pady=10,padx=10,fill='x',expand=1)
+kinds=['圓周長','圓面積']
+kind=tk.StringVar()
+for k in kinds:
+    tk.Radiobutton(lfrmKind,text=k,variable=kind,value=k,command=fnCal).pack(pady=3)
+kind.set('圓周長')
+
+lfrmUnid=tk.LabelFrame(window,text='單位')
+lfrmUnid.pack(side='left',pady=10,padx=10,fill='x',expand=1)
+unids=['公分','英吋']
+unid=tk.StringVar()
+for u in unids:
+    tk.Radiobutton(lfrmUnid,text=u,variable=unid,value=u,command=fnCal).pack(pady=3)
+unid.set(unids[0])  
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# color.py
+
+def fnBlue():
+    frmColor.config(bg='blue')
+
+def fnRed():
+    frmColor.config(bg='red')
+
+def fnGreen():
+    frmColor.config(bg='green')  
+    
 window = tk.Tk()
 
-# Frame測試
-tk.Label(text = 'Frame測試').pack()
-frame1 = tk.Frame(window)
-frame1.pack()
+window.title('顏色切換')
+window.geometry('240x200')
 
-label1 = tk.Label(frame1, text = "標籤一：")
-entry1 = tk.Entry(frame1)
-label1.grid(row = 0, column = 0)
-entry1.grid(row = 0, column = 1)
+frmColor=tk.Frame(window,width=200,height=100,relief='raised',borderwidth=3,bg='white')
+frmColor.pack(pady=5)
 
-frame2 = tk.Frame(window)
-frame2.pack()
+#建立1個 LabelFrame 在 window 下
+labelFrame1=tk.LabelFrame(window,text='顏色')
+labelFrame1.pack(pady=20,fill='x')
 
-button1 = tk.Button(frame2, text = "確定")
-button2 = tk.Button(frame2, text = "取消")
-button1.grid(row = 0, column = 0)
-button2.grid(row = 0, column = 1)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-# Message測試
-tk.Label(text = 'Message測試').pack()
-
-#w = tk.Message(window, text = "this is a relatively long message")    #自動換行
-w = tk.Message(window, text = "this is a relatively long message", width = 50)  #限定寬度
-w.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+#建立3個 button 在 LabelFrame 下
+button1=tk.Button(labelFrame1,text='藍色',width=8,command=fnBlue).pack(side='left',padx=5)
+button2=tk.Button(labelFrame1,text='紅色',width=8,command=fnRed).pack(side='left',padx=5)
+button3=tk.Button(labelFrame1,text='綠色',width=8,command=fnGreen).pack(side='left',padx=5)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# window
+# counter.py
+
+num = 0
+def fnAdd():
+    global num		#宣告為全域變數
+    num += 1		#num加1
+    lblNum['text']=str(num)	#重設標籤文字
+    if (num>0):		#若num大於0，就設歸零鈕可以使用
+        btnClear['state']='normal'
+    
+def fnClear():
+    global num
+    num = 0
+    lblNum['text']=str(num)
+    btnClear['state']='disabled'  #設歸零鈕不能使用
+ 
+window=tk.Tk()
+window.geometry('300x200')
+window.title('計數器')
+window.configure(bg='white')
+
+lblTitle=tk.Label(window, text = '計數器',font=('標楷體', 16),fg='white',bg='blue')
+lblNum=tk.Label(window, text = '0',font=('微軟正黑體', 36))
+btnAdd=tk.Button(window, text = '加 1',pady=5,padx=10,command=fnAdd)
+btnClear=tk.Button(window, text = '歸零',pady=5,padx=10,command=fnClear,state='disabled')
+lblTitle.pack(pady=10,fill='x')
+lblNum.pack(pady=20,fill='x')
+btnAdd.pack(pady=5, side='left',fill='x', expand=True)
+btnClear.pack(pady=5, side='left',fill='x', expand=True)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# end.py
+
+def fnEnd():
+    res = tkinter.messagebox.askokcancel('注意','確定要結束程式嗎？')
+    if(res == True):	#若傳回值為 True
+        window.destroy()   #結束程式執行
+        
+window=tk.Tk()
+window.geometry('300x150')
+window.title('對話方塊')
+
+lblTitle=tk.Label(window, text = '按鈕結束程式',font=('標楷體', 16))
+btnEnd=tk.Button(window, text = '結束',pady=5,padx=10,command=fnEnd)
+lblTitle.pack(pady=20)
+btnEnd.pack(pady=5)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# survey.py
+
+def fnOk():
+    lfrmSpot=tk.LabelFrame(window,text='勾選建議地點(可複選)：')
+    lfrmSpot.pack(pady=10)
+    for i in range(3):
+        check[i]=tk.BooleanVar()	#設check[]元素值為布林值物件
+        tk.Checkbutton(lfrmSpot,text=spots[i],variable=check[i]).pack(anchor='w')
+def fnMsg():
+    if ok.get()==True:
+        msg='勾選的地點為：'
+        for i in range(3):
+            if check[i].get()==True:	#若check[i]元素值為True
+                msg += (spots[i]+'、')	#將spots[i]元素值加入msg字串
+        tkinter.messagebox.showinfo('訊息',msg[:len(msg)-1])
+    else:
+        tkinter.messagebox.showinfo('訊息','期盼下次你能參加')
+    window.destroy()
+    
 window = tk.Tk()
-window.geometry('500x500')
+window.title('旅遊問卷')
+window.geometry('220x180')
 
-# widgets 
-label1 = ttk.Label(window, text = 'Label 1', background = 'red')
-label2 = ttk.Label(window, text = 'Label 2', background = 'green', width = 10)
-label3 = ttk.Label(window, text = 'Label 3', background = 'blue', width = 10)
-
-# layout 
-# label1.pack()
-# label2.pack()
-
-# grid 
-window.columnconfigure((0,2), weight = 1, uniform = 'a')    #column 為  0 1 2
-window.rowconfigure((0,2), weight = 1, uniform = 'a')       #row 為  0 1 2
-
-"""
-label1.grid(row = 0, column = 0)
-label2.grid(row = 1, column = 0, sticky = 'nsew')
-label3.grid(row = 0, column = 1)
-"""
-
-label1.grid(row = 0, column = 0)
-label2.grid(row = 0, column = 1)
-label3.grid(row = 0, column = 2)
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="歡迎來到日本",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="歡迎來到加拿大",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.grid(row=0,column=0)           # 格狀包裝
-lab2.grid(row=1,column=0)           # 格狀包裝
-lab3.grid(row=1,column=1)           # 格狀包裝
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="歡迎來到日本",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="歡迎來到加拿大",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.grid(row=0,column=0)           # 格狀包裝
-lab2.grid(row=1,column=0)           # 格狀包裝
-lab3.grid(row=1,column=1)           # 格狀包裝
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-lab1 = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="歡迎來到日本",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="歡迎來到加拿大",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.grid(row=0,column=0)           # 格狀包裝
-lab2.grid(row=1,column=2)           # 格狀包裝
-lab3.grid(row=2,column=1)           # 格狀包裝
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-
-label = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-label.pack()                        # 包裝與定位元件
-
-
-lab1 = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="歡迎來到日本",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="歡迎來到加拿大",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.grid(row=0,column=0)           # 格狀包裝
-lab2.grid(row=1,column=2)           # 格狀包裝
-lab3.grid(row=2,column=1)           # 格狀包裝
-
-
-button1 = tk.Button(window, text='push1')
-button2 = tk.Button(window, text='push2')
-button3 = tk.Button(window, text='push3')
-
-button1.grid(row=0, column=0)
-button2.grid(row=0, column=1)
-button3.grid(row=1, column=1)
-
-
-"""
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-#account - password
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="Account ").grid(row=0)
-lab2 = tk.Label(window,text="Password").grid(row=1)
-
-e1 = tk.Entry(window)              # 文字方塊1
-e2 = tk.Entry(window,show='*')     # 文字方塊2
-e1.grid(row=0,column=1)         # 定位文字方塊1
-e2.grid(row=1,column=1)         # 定位文字方塊2
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-def printInfo():                    # 列印輸入資訊
-    print("Account: %s\nPassword: %s" % (e1.get(),e2.get()))
-          
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="Account ").grid(row=0)
-lab2 = tk.Label(window,text="Password").grid(row=1)
-
-e1 = tk.Entry(window)                  # 文字方塊1
-e2 = tk.Entry(window,show='*')         # 文字方塊2
-e1.grid(row=0,column=1)             # 定位文字方塊1
-e2.grid(row=1,column=1)             # 定位文字方塊2
-
-btn1 = tk.Button(window,text="Print",command=printInfo)
-btn1.grid(row=2,column=0)
-btn2 = tk.Button(window,text="Quit",command=window.quit)
-btn2.grid(row=2,column=1)
+ok=tk.BooleanVar()
+chkOK=tk.Checkbutton(window,text='參加旅遊',variable=ok, command=fnOk).pack()
+spots=['九份與金瓜石','日月潭','墾丁國家公園']
+check={}
+btnSend = tk.Button(window, text=' 送出 ', command=fnMsg).pack(pady=5)
 
 window.mainloop()
 
@@ -1930,119 +2004,35 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-def printInfo():                    # 列印輸入資訊
-    print("Account: %s\nPassword: %s" % (e1.get(),e2.get()))
-          
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="Account ").grid(row=0)
-lab2 = tk.Label(window,text="Password").grid(row=1)
-
-e1 = tk.Entry(window)                  # 文字方塊1
-e2 = tk.Entry(window,show='*')         # 文字方塊2
-e1.grid(row=0,column=1)             # 定位文字方塊1
-e2.grid(row=1,column=1)             # 定位文字方塊2
-
-btn1 = tk.Button(window,text="Print",command=printInfo)
-# sticky=W可以設定物件與上面的Label切齊, pady設定上下間距是10
-btn1.grid(row=2,column=0,sticky=tk.W,pady=10)  
-btn2 = tk.Button(window,text="Quit",command=window.quit)
-# sticky=W可以設定物件與上面的Entry切齊, pady設定上下間距是10
-btn2.grid(row=2,column=1,sticky=tk.W,pady=10)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-def printInfo():                    # 列印輸入資訊
-    print("Account: %s\nPassword: %s" % (e1.get(),e2.get()))
-          
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="Account ").grid(row=0)
-lab2 = tk.Label(window,text="Password").grid(row=1)
-
-e1 = tk.Entry(window)                  # 文字方塊1
-e2 = tk.Entry(window,show='*')         # 文字方塊2
-e1.insert(1,"Kevin")                # 預設文字方塊1內容
-e2.insert(1,"pwd")                  # 預設文字方塊2內容
-e1.grid(row=0,column=1)             # 定位文字方塊1
-e2.grid(row=1,column=1)             # 定位文字方塊2
-
-btn1 = tk.Button(window,text="Print",command=printInfo)
-# sticky=W可以設定物件與上面的Label切齊, pady設定上下間距是10
-btn1.grid(row=2,column=0,sticky=tk.W,pady=10)  
-btn2 = tk.Button(window,text="Quit",command=window.quit)
-# sticky=W可以設定物件與上面的Entry切齊, pady設定上下間距是10
-btn2.grid(row=2,column=1,sticky=tk.W,pady=10)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-def printInfo():                    # 列印輸入資訊
-    print("Account: %s\nPassword: %s" % (e1.get(),e2.get()))
-    e1.delete(0,tk.END)                # 刪除文字方塊1
-    e2.delete(0,tk.END)                # 刪除文字方塊2
-          
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="Account ").grid(row=0)
-lab2 = tk.Label(window,text="Password").grid(row=1)
-
-e1 = tk.Entry(window)                  # 文字方塊1
-e2 = tk.Entry(window,show='*')         # 文字方塊2
-e1.insert(1,"Kevin")                # 預設文字方塊1內容
-e2.insert(1,"pwd")                  # 預設文字方塊2內容
-e1.grid(row=0,column=1)             # 定位文字方塊1
-e2.grid(row=1,column=1)             # 定位文字方塊2
-
-btn1 = tk.Button(window,text="Print",command=printInfo)
-# sticky=W可以設定物件與上面的Label切齊, pady設定上下間距是10
-btn1.grid(row=2,column=0,sticky=tk.W,pady=10)  
-btn2 = tk.Button(window,text="Quit",command=window.quit)
-# sticky=W可以設定物件與上面的Entry切齊, pady設定上下間距是10
-btn2.grid(row=2,column=1,sticky=tk.W,pady=10)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
 
 
 
-window = tk.Tk()
-window.title(' GUI介面- Checkbutton 核取方塊')
 
-def check(): #回應核取方塊變數狀態
-   print('選取的炸物有:', var1.get(), var2.get()
-         ,var3.get())
 
-ft1 =('新細明體', 14)
-ft2 = ('標楷體', 18)
-lb1=tk.Label(window, text = '請勾選要買的品項：', font = ft1)
-lb1.grid(row = 0, column = 0)
-item1 = '炸雞排'
-var1 = tk.StringVar()
-chk = tk.Checkbutton(window, text = item1, font = ft1,
-    variable = var1, onvalue = item1, offvalue = '')
-chk.grid(row = 1, column = 0)
-item2 = '高麗菜'
-var2 = tk.StringVar()
-chk2 = tk.Checkbutton(window, text = item2, font = ft1,
-    variable = var2, onvalue = item2, offvalue = '')
-chk2.grid(row = 2, column = 0)
-item3 = '炸花枝'
-var3 = tk.StringVar()
-chk3 = tk.Checkbutton(window, text = item3, font = ft1,
-    variable = var3, onvalue = item3, offvalue = '')
-chk3.grid(row = 3, column = 0)
 
-btnQuit = tk.Button(window, text = '離開', font = ft2,
-    command = window.destroy)
-btnQuit.grid(row = 2, column = 1, pady = 4)
-btnShow = tk.Button(window, text = '購買明細', font = ft2,
-    command = check)
-btnShow.grid(row = 2, column = 2, pady = 4)
+
+# grid.py
+
+window=tk.Tk()
+window.geometry('200x200')
+window.title('grid配置')
+window.rowconfigure(0,weight=1)
+window.rowconfigure(1,weight=1)
+window.rowconfigure(2,weight=1)
+window.columnconfigure(0,weight=1)
+window.columnconfigure(1,weight=1)
+window.columnconfigure(2,weight=1)
+
+lbl1=tk.Label(window, text = '北',font=('標楷體', 40))
+lbl2=tk.Label(window, text = '東',font=('標楷體', 40),bg='yellow')
+lbl3=tk.Label(window, text = '西',font=('標楷體', 40),bg='lightgreen')
+lbl4=tk.Label(window, text = '中',font=('標楷體', 40),bg='pink')
+lbl5=tk.Label(window, text = '南',font=('標楷體', 40),bg='lightblue')
+lbl1.grid(row=0,column=0,columnspan=2,sticky='nswe')
+lbl2.grid(row=0,column=2,rowspan=2,sticky='nswe')
+lbl3.grid(row=1,column=0,rowspan=2,sticky='nswe')
+lbl4.grid(row=1,column=1,sticky='nswe')
+lbl5.grid(row=2,column=1,columnspan=2,sticky='nswe')
 
 window.mainloop()
 
@@ -2059,81 +2049,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
-#place 大全
-
-print("------------------------------------------------------------")  # 60個
-
-print("place版面佈局")
-
-taipei=tk.Button(window, width=30, text="台北景點")
-taipei.place(x=10, y=10)
-kaohsiung=tk.Button(window, width=30, text="高雄景點")
-kaohsiung.place(relx=0.5, rely=0.5, anchor="center")
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-button1 = tk.Button(window, text='push1')
-button2 = tk.Button(window, text='push2')
-button3 = tk.Button(window, text='push3')
-
-button1.place(x=0, y=0)
-button2.place(x=50, y=30)
-button3.place(x=100, y=60)
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-window.geometry("400x100")
-window.title("place版面佈局的示範")
-
-plus=tk.Button(window, width=30, text="加法範例")
-plus.place(x=10, y=10)
-minus=tk.Button(window, width=30, text="減法範例")
-minus.place(relx=0.5, rely=0.5, anchor="center")
-multiply=tk.Button(window, width=30, text="乘法範例")
-multiply.place(relx=0.5, rely=0)
-divide=tk.Button(window, width=30, text="除法範例")
-divide.place(relx=0.5, rely=0.7)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-window = tk.Tk()
-lab1 = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="歡迎來到日本",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="歡迎來到加拿大",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.place(x=0,y=0)                 # 直接定位
-lab2.place(x=30,y=50)               # 直接定位
-lab3.place(x=60,y=100)              # 直接定位
-
-window.mainloop()
-
-"""
-lab1 = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="歡迎來到日本",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="歡迎來到加拿大",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.place(x=0,y=0)                 # 直接定位
-lab2.place(x=30,y=50)               # 直接定位
-lab3.place(x=60,y=100)              # 直接定位
-"""
 
 print("------------------------------------------------------------")  # 60個
 

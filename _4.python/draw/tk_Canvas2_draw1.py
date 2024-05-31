@@ -1,7 +1,7 @@
 import sys
 
 import tkinter as tk
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -234,8 +234,86 @@ x_st, y_st = x_st, y_st + dy
 canvas1.create_text(x_st, y_st, text="歡迎來到美國5", font=("Arial", 36))
 
 window.mainloop()
+'''
+print("------------------------------------------------------------")  # 60個
+
+# Display a rectangle
+def displayRect():
+    canvas.create_rectangle(10, 10, 190, 90, tags = "rect")
+
+# Display an oval
+def displayOval():
+    canvas.create_oval(10, 10, 190, 90, fill = "red", tags = "oval")
+
+# Display an arc
+def displayArc():
+    canvas.create_arc(10, 10, 190, 90, start = 0, extent = 90, width = 8, fill = "red", tags = "arc")
+
+# Display a polygon
+def displayPolygon():
+    canvas.create_polygon(10, 10, 190, 90, 30, 50, tags = "polygon")
+
+# Display a line
+def displayLine():
+    canvas.create_line(10, 10, 190, 90, fill = "red", tags = "line")
+    canvas.create_line(10, 90, 190, 10, width = 9, arrow = "last", activefill = "blue", tags = "line")
+
+# Display a string
+def displayString():
+    canvas.create_text(60, 40, text = "Hi, I am a string", font = "Times 10 bold underline", tags = "string")
+
+# Clear drawings
+def clearCanvas():
+    canvas.delete("rect", "oval", "arc", "polygon", "line", "string")
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "Grid 測試"
+window.title(title)
+
+canvas = tk.Canvas(window, width = 400, height = 400, bg = "white")
+canvas.pack()
+
+btRectangle = tk.Button(window, text = "Rectangle", command = displayRect)
+btOval = tk.Button(window, text = "Oval", command = displayOval)
+btArc = tk.Button(window, text = "Arc", command = displayArc)
+btPolygon = tk.Button(window, text = "Polygon", command = displayPolygon)
+btLine = tk.Button(window, text = "Line", command = displayLine)
+btString = tk.Button(window, text = "String", command = displayString)
+btClear = tk.Button(window, text = "Clear", command = clearCanvas)
+
+btRectangle.pack()
+btOval.pack()
+btArc.pack()
+btPolygon.pack()
+btLine.pack()
+btString.pack()
+btClear.pack()
+
+
+
+window.mainloop()
+
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 print("------------------------------------------------------------")  # 60個
@@ -251,6 +329,49 @@ print("------------------------------------------------------------")  # 60個
 id = canvas1.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
 ballPos = canvas1.coords(id)
 print(ballPos)
+
+
+"""
+
+
+"""
+
+
+#新建一個Frame, row, column重新計算, 控件要依附新的Frame
+frame4 = tk.Frame(window)
+frame4.pack()
+
+width = 100
+height = 100
+
+canvas1 = tk.Canvas(frame4, width = width, height = height)
+canvas1.create_line(10, 10, width - 10, height - 10)
+canvas1.create_line(width - 10, 10, 10, height - 10)
+canvas1.grid(row = 3, column = 1)
+
+canvas2 = tk.Canvas(frame4, width = width, height = height)
+canvas2.create_rectangle(10, 10, width - 10, height - 10)
+canvas2.grid(row = 3, column = 2)
+
+canvas3 = tk.Canvas(frame4, width = width, height = height)
+canvas3.create_oval(10, 10, width - 10, height - 10)
+canvas3.grid(row = 3, column = 3)
+
+canvas4 = tk.Canvas(frame4, width = width, height = height)
+canvas4.create_arc(10, 10, width - 10, height - 10, start = 0, extent = 145)
+canvas4.grid(row = 3, column = 4)
+
+canvas5 = tk.Canvas(frame4, width = width, height = height)
+canvas5.create_rectangle(10, 10, width - 10, height - 10, fill = "red")
+canvas5.grid(row = 3, column = 5)
+
+canvas6 = tk.Canvas(frame4, width = width, height = height)
+canvas6.create_oval(10, 10, width - 10, height - 10, fill = "red")
+canvas6.grid(row = 3, column = 6)
+
+canvas7 = tk.Canvas(frame4, width = width, height = height)
+canvas7.create_arc(10, 10, width - 10, height - 10, start = 0, extent = 145, fill = "red")
+canvas7.grid(row = 3, column = 7)
 
 
 """
