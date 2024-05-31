@@ -1,13 +1,12 @@
-
 import sys
-
-print("------------------------------------------------------------")  # 60個
 
 import tkinter as tk
 from tkinter.filedialog import askopenfile #tk之openFileDialog
 from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfilename
+
+print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 
@@ -160,9 +159,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-import tkinter as tk
-
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -242,60 +238,61 @@ button3.place(x = x_st + dx * 0, y = y_st + dy * 3)
 
 window.mainloop()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
 
-print("05-TkUI5Button")
+window = tk.Tk()
 
-import tkinter as tk
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 def event1():
    print("btn1 pressed.")
 
-win = tk.Tk()
-btn1 =tk.Button(win,text="press me",command=event1)
+btn1 =tk.Button(window,text="press me",command=event1)
 btn1.pack()
 
-win.mainloop()
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 print("------------------------------------------------------------")  # 60個
 
-print("06-TkUI6Button2WithImage")
+def event2():
+   print("btn2 pressed.")
 
-import tkinter as tk
 from PIL import ImageTk, Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-win = tk.Tk()
-
-def event1():
-   print("btn1 pressed.")
-
 img = ImageTk.PhotoImage(Image.open(filename))
-btn1 =tk.Button(win,text="press me", image=img ,command=event1)
-btn1.pack()
+btn2 =tk.Button(window,text="press me", image=img ,command=event2)
+btn2.pack()
 
-win.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-print("07-TkUI7tkMessageBox")
+def event3():
+   tkMessageBox.showinfo('訊息框', "Hello World")
 
-import tkinter as tk
 import tkinter.messagebox as tkMessageBox
 #import tkinter.messagebox
 
-win = tk.Tk()
-def hello():
-   tkMessageBox.showinfo('訊息框', "Hello World")
+btn3 = tk.Button(window, text = "Say Hello", command = event3)
+btn3.pack()
 
-B1 = tk.Button(win, text = "Say Hello", command = hello)
-B1.pack()
-
-win.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -308,3 +305,10 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
+
+

@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 # 建立主視窗
 window = tk.Tk()
 
@@ -174,7 +174,7 @@ lab_result = tk.Label(window, font=default_font, fg='black')
 lab_result.pack(padx=10, pady=(5,10))       
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 print('Radiobutton元件')

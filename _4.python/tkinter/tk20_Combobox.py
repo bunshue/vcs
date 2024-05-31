@@ -1,6 +1,6 @@
 import sys
 import tkinter as tk
-from tkinter import ttk
+import tkinter.ttk as ttk
 
 print("------------------------------------------------------------")  # 60個
 
@@ -38,34 +38,26 @@ combo_label.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-from tkinter import *
-from tkinter.ttk import *
-
 def selected(event):
     labelVar.set(cbVar.get())
 
 print('最喜歡的運動')
 
-cbVar = StringVar()
-cb = Combobox(window, textvariable=cbVar)
+cbVar = tk.StringVar()
+cb = ttk.Combobox(window, textvariable=cbVar)
 cb['value'] = ("籃球","排球","足球","其他")  #設定選項
 cb.current(0)  #預設第一個選項
 cb.bind('<<ComboboxSelected>>', selected)  #設定選取選項後執行的程式
 cb.pack()
 
-labelVar = StringVar()  
-labelShow = Label(window, textvariable=labelVar)
+labelVar = tk.StringVar()  
+labelShow = tk.Label(window, textvariable=labelVar)
 labelVar.set(cbVar.get())
 labelShow.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-
-import tkinter as tk
-import tkinter.ttk as ttk
 
 def showWeather(event):  #下拉選單選取選項後執行的程式
     city = cbVar.get()  #使用者選取的選項
@@ -95,9 +87,6 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 
-import tkinter as tk
-import tkinter.ttk as ttk
-
 def combobox_selected(event):
     label_text.set(cbVar.get())
 
@@ -116,9 +105,9 @@ label1 = tk.Label(window, textvariable = label_text)
 label_text.set(cbVar.get())
 label1.pack()
 
-"""
-import tkinter as tk
-from tkinter import ttk
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 def show():
     a.set(f'{box.current()}:{box.get()}')    # 顯示索引值與內容
@@ -134,13 +123,11 @@ box.pack()
 
 btn = tk.Button(window, text='顯示', command=show)   # 建立按鈕，點擊按鈕時，執行 show 函式
 btn.pack()
-"""
+
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-import tkinter.ttk as ttk
 import tkinter.font as tkfont
 
 def combox_select(event):

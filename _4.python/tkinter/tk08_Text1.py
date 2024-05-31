@@ -1,7 +1,9 @@
 import sys
+import time
+import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 count = 0
 mmm = 'abcd'
 
@@ -23,7 +25,6 @@ def clear():
     text1.delete(1.0,'end')
     # 執行 clear 函式時，清空內容
 
-import tkinter as tk
 
 # 建立主視窗
 window = tk.Tk()
@@ -100,9 +101,7 @@ button1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-import time
 
 frame1 = tk.Frame(window, bg = 'pink') # Hold four labels for displaying cards
 frame1.pack()
@@ -165,50 +164,51 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-win = tk.Tk()
-win.geometry("400x300")
-win.title("Text測試")
-ptext = tk.Text(win)
+window = tk.Tk()
+window.geometry("400x300")
+window.title("Text測試")
+
+ptext = tk.Text(window)
 ptext.insert(tk.INSERT, "床前明月光\n")
 ptext.insert(tk.INSERT, "疑是地上霜\n")
 ptext.insert(tk.INSERT, "舉頭望明月\n")
 ptext.insert(tk.INSERT, "低頭思故鄉\n")
 ptext.pack()
 ptext.config(state=tk.DISABLED)
-win.mainloop()
 
-'''
+window.mainloop()
+
 print("------------------------------------------------------------")  # 60個
-
 
 print("scrollbar")
 
-from tkinter import *
-win = Tk()
-win.title("ScrollBar捲軸")
-win.geometry('300x200')
-text = Text(win, width = "30", height = "5")
+window = tk.Tk()
+window.title("ScrollBar捲軸")
+window.geometry('300x200')
+
+text = tk.Text(window, width = "30", height = "5")
 text.grid(row = 0, column = 0)
-scrollbar = Scrollbar(command = text.yview, orient = VERTICAL)
+scrollbar = tk.Scrollbar(command = text.yview, orient = tk.VERTICAL)
 scrollbar.grid(row = 0, column = 1, sticky = "ns")
 text.configure(yscrollcommand = scrollbar.set)
-win.mainloop()
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("text")
 
-from tkinter import *
 sentences="玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
-win = Tk()
-win.title("Text多行文字")
-win.geometry('300x200')
-text = Text(win, width = 30, height = 14, bg = "yellow", wrap=WORD)
-text.insert(END,sentences)
+
+window = tk.Tk()
+window.title("Text多行文字")
+window.geometry('300x200')
+
+text = tk.Text(window, width = 30, height = 14, bg = "yellow", wrap=tk.WORD)
+text.insert(tk.END,sentences)
 text.pack()
-win.mainloop()
+
+window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 

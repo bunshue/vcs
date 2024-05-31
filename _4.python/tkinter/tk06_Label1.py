@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -119,7 +119,7 @@ label3.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -202,11 +202,11 @@ button3a = tk.Button(window, text = "切換標籤顯示與隱藏 a", foreground 
 button3a.pack()
 button3a.place(x = x_st + dx * 0, y = y_st + dy * 4)
 
-'''
+"""
 width = 200
 height = 100
 frame = tk.Frame(window, bg = 'pink', width = width, height = height)
-'''
+"""
 frame = ttk.Frame(window)
 
 x_st = 400
@@ -354,12 +354,12 @@ window.title(title)
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg'
 im = Image.open(filename)
 
-'''
+"""
 #case 1 bitmap image
 # bitmap image
 image = ImageTk.BitmapImage(im, foreground = "white")
 tk.Label(window, image = image, bg = "blue", bd = 0).pack()
-'''
+"""
 
 #case 2 picture image
 # photo image
@@ -437,7 +437,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-'''
+"""
 def toggle_label_grid():
     global label_visible
 
@@ -457,6 +457,6 @@ button.grid(column = 0, row = 0)
 label_visible = True
 label = ttk.Label(window, text= 'A label')
 label.grid(column = 1, row = 0)
-'''
+"""
 
 

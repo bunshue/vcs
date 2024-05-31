@@ -4,14 +4,18 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import ImageTk, Image
 
+import tkinter.messagebox
+
 print("------------------------------------------------------------")  # 60個
 
-root = tk.Tk()  # 產生 tkinter 視窗
-width = root.winfo_screenwidth()
-height = root.winfo_screenheight()
+window = tk.Tk()  # 產生 tkinter 視窗
+
+width = window.winfo_screenwidth()
+height = window.winfo_screenheight()
 print('取得目前螢幕大小')
 print(width, height)
-root.destroy()  # 關閉視窗
+
+window.destroy()  # 關閉視窗
 
 print("------------------------------------------------------------")  # 60個
 
@@ -21,48 +25,63 @@ def event1():
     label1.set("123")
 	#print(entry1.get())
 
-win = tk.Tk()
-entry1=tk.Entry(win)
+
+window = tk.Tk()
+
+# 設定主視窗大小
+W = 800
+H = 800
+x_st = 100
+y_st = 100
+#size = str(W)+'x'+str(H)
+#size = str(W)+'x'+str(H)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+#print('{0:d}x{1:d}+{2:d}+{3:d}'.format(W, H, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+
+entry1=tk.Entry(window)
 entry1.pack()
-btn1 =tk.Button(win,text="press me",command=event1)
+btn1 =tk.Button(window,text="press me",command=event1)
 btn1.pack()
 v = tk.StringVar()
-label1 =tk.Label(win,text="Hello World!", textvariable=v)
+label1 =tk.Label(window,text="Hello World!", textvariable=v)
 label1.pack()
 v.set("New Text!")
 
-win.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
 print("09-TkUI9Entry-python3")
 
-def event1():
+def event2():
     print(entry1.get())
     t1=entry1.get()
     v.set(t1)
 
-win = tk.Tk()
-entry1=tk.Entry(win)
+entry1=tk.Entry(window)
 entry1.pack()
-btn1 =tk.Button(win,text="press me",command=event1)
+btn1 =tk.Button(window,text="press me",command=event2)
 btn1.pack()
 v = tk.StringVar()
-label1 =tk.Label(win,text="Hello World!", textvariable=v)
+label1 =tk.Label(window,text="Hello World!", textvariable=v)
 label1.pack()
 v.set("New Text!")
 
-win.mainloop()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
 print("TkUI_exam")
 
 from PIL import ImageTk, Image
 
-win = tk.Tk()
 
-def event1():
+def event3():
 	value1=entry1.get()
 	print(value1)
 	value2=float(value1)
@@ -71,115 +90,45 @@ def event1():
 	label1.config(text='Button Pressed')
 
 
-label1 =tk.Label(win,text="Hello World!")
+label1 =tk.Label(window,text="Hello World!")
 label1.pack()
 
-entry1=tk.Entry(win)
+entry1=tk.Entry(window)
 entry1.pack()
-btn1 =tk.Button(win,text="press me",command=event1)
+btn1 =tk.Button(window,text="press me",command=event3)
 btn1.pack()
 
-win.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
 print("TkUI10Entry-python3-Exam")
 
-def event1():
+def event4():
     t1=float(entry1.get())
     t1=t1/30.5
     print(t1)
     v.set(str(t1))
 
-win = tk.Tk()
-entry1=tk.Entry(win)
+
+entry1=tk.Entry(window)
 entry1.pack()
-btn1 =tk.Button(win,text="press me",command=event1)
+btn1 =tk.Button(window,text="press me",command=event4)
 btn1.pack()
 v = tk.StringVar()
-label1 =tk.Label(win,text="Hello World!", textvariable=v)
+label1 =tk.Label(window,text="Hello World!", textvariable=v)
 label1.pack()
 v.set("New Text!")
 
-win.mainloop()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-print("grid")
+print("pack版面佈局")
 
-win = tk.Tk()
-win.geometry("400x100")
-win.title("pack版面佈局")
-
-taipei=tk.Button(win, width=30, text="台北景點")
-taipei.grid(column=0,row=0)
-kaohsiung=tk.Button(win, width=30, text="高雄景點")
-kaohsiung.grid(column=0,row=1)
-ilan=tk.Button(win, width=30, text="宜蘭景點")
-ilan.grid(column=1,row=0)
-tainan=tk.Button(win, width=30, text="台南景點")
-tainan.grid(column=1,row=1)
-	
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-win = tk.Tk()
-win.geometry("100x100")
-win.title("grid佈局")
-
-one=tk.Button(win, width=20, text="January")
-one.grid(column=0,row=0)
-two=tk.Button(win, width=20, text="Februry")
-two.grid(column=1,row=0)
-three=tk.Button(win, width=20, text="March")
-three.grid(column=2,row=0)
-one=tk.Button(win, width=20, text="April")
-one.grid(column=0,row=1)
-two=tk.Button(win, width=20, text="May")
-two.grid(column=1,row=1)
-three=tk.Button(win, width=20, text="June")
-three.grid(column=2,row=1)
-one=tk.Button(win, width=20, text="July")
-one.grid(column=0,row=2)
-two=tk.Button(win, width=20, text="August")
-two.grid(column=1,row=2)
-three=tk.Button(win, width=20, text="September")
-three.grid(column=2,row=2)
-one=tk.Button(win, width=20, text="October")
-one.grid(column=0,row=3)
-two=tk.Button(win, width=20, text="November")
-two.grid(column=1,row=3)
-three=tk.Button(win, width=20, text="December")
-three.grid(column=2,row=3)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-win = tk.Tk()
-win.geometry("400x100")
-win.title("pack版面佈局")
-
-taipei=tk.Button(win, width=20, text="台北景點")
+taipei=tk.Button(window, width=20, text="台北景點")
 taipei.pack(side="top")
-kaohsiung=tk.Button(win, width=20, text="高雄景點")
+kaohsiung=tk.Button(window, width=20, text="高雄景點")
 kaohsiung.pack(side="top")
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-win = tk.Tk()
-win.geometry("400x100")
-win.title("pack版面佈局")
-
-taipei=tk.Button(win, width=30, text="台北景點")
-taipei.place(x=10, y=10)
-kaohsiung=tk.Button(win, width=30, text="高雄景點")
-kaohsiung.place(relx=0.5, rely=0.5, anchor="center")
-
-win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -215,11 +164,11 @@ def Downmp3():
 
 #main program
 #製作2個視窗
-win=tk.Tk()
-win.geometry("600x400")
-win.title("MP4與MP3下載")
+window=tk.Tk()
+window.geometry("600x400")
+window.title("MP4與MP3下載")
 
-frame1 = tk.Frame(win, width=600)
+frame1 = tk.Frame(window, width=600)
 frame1.pack()
 
 label1 = tk.Label(frame1, text="網址:")
@@ -251,7 +200,7 @@ btn2.grid(row=3, column=1)
 label3 = tk.Label(frame1, text="本程式使用時請注意時間，保護眼睛。")
 label3.grid(row=4, column=1)
 
-win.mainloop()
+window.mainloop()
 """ #some wrong
 
 print("------------------------------------------------------------")  # 60個
@@ -262,24 +211,24 @@ def checknum():
 
 import random as r
 
-win = tk.Tk()
-win.geometry("400x300")
-win.title("Guess Number")
+window = tk.Tk()
+window.geometry("400x300")
+window.title("Guess Number")
 
 ans=r.randint(0,100)
 #print(ans)
 #input guess number
-pL1 = tk.Label(win, text="Please enter number:")
+pL1 = tk.Label(window, text="Please enter number:")
 pL1.pack()
 while (True):
     pnum = tk.StringVar()
-    pE1 = tk.Entry(win, textvariable=pnum)
+    pE1 = tk.Entry(window, textvariable=pnum)
     pE1.pack()
-    pB1 = tk.Button(win, text="OK", command=checknum)
+    pB1 = tk.Button(window, text="OK", command=checknum)
     pB1.pack()
 
 pmsg = tk.StringVar()
-pL2 = tk.Label(win, textvariable=pmsg)
+pL2 = tk.Label(window, textvariable=pmsg)
 pL2.pack()
 
 #num=121
@@ -291,10 +240,11 @@ pL2.pack()
 #        print("bigger")
 #    else:
 #        print("smaller")   
-#print("you are win")    
+#print("you win")    
 
-win.mainloop()
+window.mainloop()
 """
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -332,11 +282,11 @@ def Downmp3():
 
 #main program
 #製作2個視窗
-win=tk.Tk()
-win.geometry("600x400")
-win.title("MP4與MP3下載")
+window=tk.Tk()
+window.geometry("600x400")
+window.title("MP4與MP3下載")
 
-frame1 = tk.Frame(win, width=600)
+frame1 = tk.Frame(window, width=600)
 frame1.pack()
 
 label1 = tk.Label(frame1, text="網址:")
@@ -368,93 +318,30 @@ btn2.grid(row=3, column=1)
 label3 = tk.Label(frame1, text="本程式使用時請注意時間，保護眼睛。")
 label3.grid(row=4, column=1)
 
-win.mainloop()
+window.mainloop()
 """
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-
-def add():                                  # 加法運算
-    n3.set(n1.get()+n2.get())
-    
-n1 = tk.IntVar()                   
-n2 = tk.IntVar()
-n3 = tk.IntVar()
-
-e1 = tk.Entry(window,width=8,textvariable=n1)  # 文字方塊1
-label = tk.Label(window,width=3,text='+')      # 加號
-e2 = tk.Entry(window,width=8,textvariable=n2)  # 文字方塊2
-btn = tk.Button(window,width=5,text='=',command=add)   # =按鈕
-e3 = tk.Entry(window,width=8,textvariable=n3)  # 儲存結果文字方塊
-
-e1.grid(row=0,column=0)                     # 定位文字方塊1
-label.grid(row=0,column=1,padx=5)           # 定位加號
-e2.grid(row=0,column=2)                     # 定位文字方塊2
-btn.grid(row=1,column=1,pady=5)             # 定位=按鈕
-e3.grid(row=2,column=1)                     # 定位儲存結果
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 window=tk.Tk()
+
 tk.Label(window, text='紅', bg='red', width=20).pack()
 tk.Label(window, text='綠', bg='green', width=20).pack()
 tk.Label(window, text='藍', bg='blue', width=20).pack()
+
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
+
 string = tk.StringVar()
 entry = tk.Entry(window, textvariable=string).pack()
 label = tk.Label(window, textvariable=string).pack()
+
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="Peter",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="John",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="Notron",
-              bg="lightblue",       # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab4 = tk.Label(window,text="Kevin",
-              bg="lightgreen",      # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab5 = tk.Label(window,text="Tommy",
-              bg="lightblue",       # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab6 = tk.Label(window,text="Mary",
-              bg="lightyellow",     # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab7 = tk.Label(window,text="Tracy",
-              bg="lightblue",       # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab8 = tk.Label(window,text="Mike",
-              bg="lightyellow",     # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab9 = tk.Label(window,text="Vicent",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-
-lab1.grid(row=0,column=0)           # 格狀包裝
-lab2.grid(row=0,column=1)           # 格狀包裝
-lab3.grid(row=0,column=2)           # 格狀包裝
-lab4.grid(row=1,column=0)           # 格狀包裝
-lab5.grid(row=1,column=1)           # 格狀包裝
-lab6.grid(row=1,column=2)           # 格狀包裝
-lab7.grid(row=2,column=0)           # 格狀包裝
-lab8.grid(row=2,column=1)           # 格狀包裝
-lab9.grid(row=2,column=2)           # 格狀包裝
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
 
 from tkinter import Tk, Frame, Button
 from datetime import date #滙入datetime模組的date類別
@@ -491,10 +378,10 @@ class wndApp(Frame):
         today = date.today()
         print('Day is', today)
         
-wnd = tk.Tk()
+window = tk.Tk()
 # 實體化wndApp類別，以主視窗物件為引數做初始化動作
 # 然後加入Frame元件，再由Frame加入兩個按鈕
-work = wndApp(ruler = wnd)
+work = wndApp(ruler = window)
 work.mainloop()
 
 print('------------------------------------------------------------')	#60個
@@ -515,24 +402,25 @@ work.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-wnd = tk.Tk()
+window = tk.Tk()
 
-wnd.title('Button state...')
+window.title('Button state...')
 
 #Button屬性state的常數值
 state = ['normal', 'active', 'disabled']
 
 #for廻圈配合state參數值顯示按鈕狀態
 for item in state:
-    btn = tk.Button(wnd, text = item, state = item)
+    btn = tk.Button(window, text = item, state = item)
     btn.pack()    #以元件加入主視窗
-wnd.mainloop()
+
+window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-root = tk.Tk()
-root.title('秒數計算中...')
-root.geometry('100x100+150+150')
+window = tk.Tk()
+window.title('秒數計算中...')
+window.geometry('100x100+150+150')
 
 counter = 0 #儲存數值
 
@@ -550,15 +438,16 @@ def display(label):
    count()
    
 #設定標籤並把它放入主視窗
-show = tk.Label(root, fg = 'gray')
+show = tk.Label(window, fg = 'gray')
 show.pack()
 display(show)
 
 # 設定按鈕
-btnStop = tk.Button(root, text = 'Stop',
-    width = 20, command = root.destroy)
+btnStop = tk.Button(window, text = 'Stop',
+    width = 20, command = window.destroy)
 btnStop.pack()
-root.mainloop()
+
+window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
@@ -586,80 +475,6 @@ button2 = tk.Button(window, text='push2', width=20).pack(side=tk.LEFT)
 button3 = tk.Button(window, text='push3', width=20).pack(side=tk.RIGHT)
 
 print('------------------------------------------------------------')	#60個
-
-button1 = tk.Button(window, text='push1')
-button2 = tk.Button(window, text='push2')
-button3 = tk.Button(window, text='push3')
-
-button1.place(x=0, y=0)
-button2.place(x=50, y=30)
-button3.place(x=100, y=60)
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-lab1 = tk.Label(window,text="標籤1",relief="raised")
-lab2 = tk.Label(window,text="標籤2",relief="raised")
-lab3 = tk.Label(window,text="標籤3",relief="raised")
-lab4 = tk.Label(window,text="標籤4",relief="raised")
-lab5 = tk.Label(window,text="標籤5",relief="raised")
-lab6 = tk.Label(window,text="標籤6",relief="raised")
-lab7 = tk.Label(window,text="標籤7",relief="raised")
-lab8 = tk.Label(window,text="標籤8",relief="raised")
-lab1.grid(row=0,column=0)
-lab2.grid(row=0,column=1)
-lab3.grid(row=0,column=2)
-lab4.grid(row=0,column=3)
-lab5.grid(row=1,column=0)
-lab6.grid(row=1,column=1)
-lab7.grid(row=1,column=2)
-lab8.grid(row=1,column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="標籤1",relief="raised")
-lab2 = tk.Label(window,text="標籤2",relief="raised")
-lab4 = tk.Label(window,text="標籤4",relief="raised")
-lab5 = tk.Label(window,text="標籤5",relief="raised")
-lab6 = tk.Label(window,text="標籤6",relief="raised")
-lab7 = tk.Label(window,text="標籤7",relief="raised")
-lab8 = tk.Label(window,text="標籤8",relief="raised")
-lab1.grid(row=0,column=0)
-lab2.grid(row=0,column=1,columnspan=2)
-lab4.grid(row=0,column=3)
-lab5.grid(row=1,column=0)
-lab6.grid(row=1,column=1)
-lab7.grid(row=1,column=2)
-lab8.grid(row=1,column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-lab1 = tk.Label(window,text="標籤1",relief="raised")
-lab2 = tk.Label(window,text="標籤2",relief="raised")
-lab3 = tk.Label(window,text="標籤3",relief="raised")
-lab4 = tk.Label(window,text="標籤4",relief="raised")
-lab5 = tk.Label(window,text="標籤5",relief="raised")
-lab7 = tk.Label(window,text="標籤7",relief="raised")
-lab8 = tk.Label(window,text="標籤8",relief="raised")
-lab1.grid(row=0,column=0)
-lab2.grid(row=0,column=1,rowspan=2)
-lab3.grid(row=0,column=2)
-lab4.grid(row=0,column=3)
-lab5.grid(row=1,column=0)
-lab7.grid(row=1,column=2)
-lab8.grid(row=1,column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
 
 def msgShow():
     label["text"] = "I love Python"
@@ -731,46 +546,22 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-def add():                                  # 加法運算
-    n3.set(n1.get()+n2.get())
-    
-window = tk.Tk()
-
-n1 = tk.IntVar()                   
-n2 = tk.IntVar()
-n3 = tk.IntVar()
-
-e1 = tk.Entry(window,width=8,textvariable=n1)  # 文字方塊1
-label = tk.Label(window,width=3,text='+')      # 加號
-e2 = tk.Entry(window,width=8,textvariable=n2)  # 文字方塊2
-btn = tk.Button(window,width=5,text='=',command=add)   # =按鈕
-e3 = tk.Entry(window,width=8,textvariable=n3)  # 儲存結果文字方塊
-
-e1.grid(row=0,column=0)                     # 定位文字方塊1
-label.grid(row=0,column=1,padx=5)           # 定位加號
-e2.grid(row=0,column=2)                     # 定位文字方塊2
-btn.grid(row=1,column=1,pady=5)             # 定位=按鈕
-e3.grid(row=2,column=1)                     # 定位儲存結果
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-          
 import random           
 
 def update_data():
     # 更新標籤顯示的數據為1到100的隨機數
     label_data.config(text=str(random.randint(1, 100)))
     # 每1000毫秒(即1秒)後再次調用update_data函數更新數據
-    root.after(1000, update_data)
+    window.after(1000, update_data)
 
-root = tk.Tk()
-root.title("數據監控")                      # 視窗標題
+window = tk.Tk()
+window.title("數據監控")                      # 視窗標題
 # 建立一個標籤用於顯示數據, 初始值為0, 字體設置為Helvetica, 大小為48
-label_data = tk.Label(root, text="0", font=("Helvetica", 48))
+label_data = tk.Label(window, text="0", font=("Helvetica", 48))
 label_data.pack()                           # 將標籤添加到視窗中
 update_data()           # 呼叫update_data( )函數以開始數據更新過程
-root.mainloop()
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -803,88 +594,37 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-win = tk.Tk()
-win.title("Label元件的參數設定")
+window = tk.Tk()
+window.title("Label元件的參數設定")
 
-label = tk.Label(win, bg="#ff00ff", fg="#ffff00", \
+label = tk.Label(window, bg="#ff00ff", fg="#ffff00", \
                 font =("標楷體", 14, "bold", "italic"), \
                 padx=5, pady=30, text = "生日快樂")
 label.pack()
 
-label = tk.Label(win, bg="#ff00ff", fg="#ffff00", \
+label = tk.Label(window, bg="#ff00ff", fg="#ffff00", \
                 font ="新細明體 14 bold italic", \
                 padx=20, pady=5, text = "生日快樂")
 label.pack()
 
-win.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-win = tk.Tk()
-win.geometry("400x100")
-win.title("pack版面佈局的示範")
+window = tk.Tk()
+window.geometry("400x100")
+window.title("pack版面佈局的示範")
 
-plus=tk.Button(win, width=20, text="加法範例")
+plus=tk.Button(window, width=20, text="加法範例")
 plus.pack(side="left")
-minus=tk.Button(win, width=20, text="減法範例")
+minus=tk.Button(window, width=20, text="減法範例")
 minus.pack(side="left")
-multiply=tk.Button(win, width=20, text="乘法範例")
+multiply=tk.Button(window, width=20, text="乘法範例")
 multiply.pack(side="left")
-divide=tk.Button(win, width=20, text="除法範例")
+divide=tk.Button(window, width=20, text="除法範例")
 divide.pack(side="left")
 
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-win = tk.Tk()
-win.geometry("400x100")
-win.title("place版面佈局的示範")
-
-plus=tk.Button(win, width=30, text="加法範例")
-plus.place(x=10, y=10)
-minus=tk.Button(win, width=30, text="減法範例")
-minus.place(relx=0.5, rely=0.5, anchor="center")
-multiply=tk.Button(win, width=30, text="乘法範例")
-multiply.place(relx=0.5, rely=0)
-divide=tk.Button(win, width=30, text="除法範例")
-divide.place(relx=0.5, rely=0.7)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-win = tk.Tk()
-win.geometry("400x100")
-win.title("grid版面佈局的示範")
-
-plus=tk.Button(win, width=20, text="加法範例")
-plus.grid(column=0,row=0)
-minus=tk.Button(win, width=20, text="減法範例")
-minus.grid(column=0,row=1)
-multiply=tk.Button(win, width=20, text="乘法範例")
-multiply.grid(column=1,row=0)
-divide=tk.Button(win, width=20, text="除法範例")
-divide.grid(column=1,row=1)
-
-win.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-win = tk.Tk()
-win.geometry("400x100")
-win.title("grid版面佈局的示範")
-
-plus=tk.Button(win, width=20, text="加法範例")
-plus.grid(column=0,row=0)
-minus=tk.Button(win, width=20, text="減法範例")
-minus.grid(column=0,row=1)
-multiply=tk.Button(win, width=20, text="乘法範例")
-multiply.grid(column=0,row=2)
-divide=tk.Button(win, width=20, text="除法範例")
-divide.grid(column=0,row=3)
-
-win.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1041,25 +781,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-pLabel1= tk.Label(win, text="難度計算過程", fg="black", bg="silver", font=("新細明體",12),padx=20,pady=10 )
-
-
-text1 = tk.StringVar(value='GUI1')
-ent1 = tk.Entry(win, textvariable=text1, width=15, justify=tk.CENTER)
-ent1.grid(row=0, column=0, padx=5, pady=5)
-text2 = tk.StringVar(value='GUI2')
-ent2 = tk.Entry(win, textvariable=text2, width=15, justify=tk.CENTER)
-ent2.grid(row=0, column=2, padx=5, pady=5, sticky=tk.N)
-text3 = tk.StringVar(value='GUI3')
-ent3 = tk.Entry(win, textvariable=text3, width=15, justify=tk.CENTER)
-ent3.grid(row=1, column=1, padx=5, pady=5)
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-import tkinter.messagebox
-
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -1098,7 +819,7 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 
 
 """
-text=tk.Text(win)
+text=tk.Text(window)
 text.insert(tk.INSERT, "從入門到精通\n")
 text.insert(tk.CURRENT, "Illustrator CC\n")
 text.insert(tk.END, "玩轉 Ai 設計風華的16堂課")
@@ -1132,43 +853,6 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-# Frame測試
-tk.Label(text = 'Frame測試').pack()
-frame1 = tk.Frame(window)
-frame1.pack()
-
-label1 = tk.Label(frame1, text = "標籤一：")
-entry1 = tk.Entry(frame1)
-label1.grid(row = 0, column = 0)
-entry1.grid(row = 0, column = 1)
-
-frame2 = tk.Frame(window)
-frame2.pack()
-
-button1 = tk.Button(frame2, text = "確定")
-button2 = tk.Button(frame2, text = "取消")
-button1.grid(row = 0, column = 0)
-button2.grid(row = 0, column = 1)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-# Message測試
-tk.Label(text = 'Message測試').pack()
-
-#w = tk.Message(window, text = "this is a relatively long message")    #自動換行
-w = tk.Message(window, text = "this is a relatively long message", width = 50)  #限定寬度
-w.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-import tkinter.messagebox
 
 window = tk.Tk()
 
@@ -1313,43 +997,6 @@ tk.Radiobutton(frame2, image = circleImage).pack(side = tk.LEFT)
 
 window.mainloop()
 """
-
-print("------------------------------------------------------------")  # 60個
-
-# window
-window = tk.Tk()
-window.geometry('500x500')
-
-# widgets 
-label1 = ttk.Label(window, text = 'Label 1', background = 'red')
-label2 = ttk.Label(window, text = 'Label 2', background = 'green', width = 10)
-label3 = ttk.Label(window, text = 'Label 3', background = 'blue', width = 10)
-
-# layout 
-# label1.pack()
-# label2.pack()
-
-# grid 
-window.columnconfigure((0,2), weight = 1, uniform = 'a')    #column 為  0 1 2
-window.rowconfigure((0,2), weight = 1, uniform = 'a')       #row 為  0 1 2
-
-"""
-label1.grid(row = 0, column = 0)
-label2.grid(row = 1, column = 0, sticky = 'nsew')
-label3.grid(row = 0, column = 1)
-"""
-
-label1.grid(row = 0, column = 0)
-label2.grid(row = 0, column = 1)
-label3.grid(row = 0, column = 2)
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1503,25 +1150,6 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 
-lab1 = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="歡迎來到日本",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="歡迎來到加拿大",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.grid(row=0,column=0)           # 格狀包裝
-lab2.grid(row=1,column=0)           # 格狀包裝
-lab3.grid(row=1,column=1)           # 格狀包裝
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-window = tk.Tk()
-
 label = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15,             # 標籤寬度是15
@@ -1629,6 +1257,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
@@ -1662,6 +1291,525 @@ lab2.pack(side=tk.RIGHT)               # 包裝與定位元件
 lab3.pack(side=tk.LEFT)                # 包裝與定位元件
 
 window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+def btn_hit():                      # 處理按鈕事件
+    global msg_on                   # 這是全域變數
+    if msg_on == False:
+        msg_on = True
+        x.set("歡迎來到美國")     # 顯示文字
+    else:
+        msg_on = False
+        x.set("")                   # 不顯示文字
+   
+window = tk.Tk()
+
+msg_on = False                      # 全域變數預設是False    
+x = tk.StringVar()                     # Label的變數內容
+
+label = tk.Label(window,textvariable=x,      # 設定Label內容是變數x
+              fg="blue",bg="lightyellow", # 淺黃色底藍色字
+              font="Verdana 16 bold",     # 字型設定
+              width=25,height=2).pack()   # 標籤內容
+btn = tk.Button(window,text="Hit",command=btn_hit).pack()                   
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+label=tk.Label(window,text="歡迎來到美國",
+            fg="blue",bg="yellow",
+            height=3,width=15,
+            anchor="se")
+label.pack()  
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+"""  新進待整理
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+"""
+print("------------------------------------------------------------")  # 60個
+#tk.Text
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+text = tk.Text(window,height=2,width=30)
+text.insert(tk.END,"我懷念\n我的明志工專生活點滴")
+text.pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+          
+window = tk.Tk()
+
+text = tk.Text(window,height=2,width=30)
+text.insert(tk.END,"我懷念\n一個人的極境旅行")
+str = """2016年12月,我一個人訂了機票和船票,
+開始我的南極旅行,飛機經杜拜再往阿根廷的烏斯懷雅,
+在此我登上郵輪開始我的南極之旅"""
+text.insert(tk.END,str)
+text.pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+scrollbar = tk.Scrollbar(window)           # 卷軸物件
+text = tk.Text(window,height=2,width=30)   # 文字區域物件
+scrollbar.pack(side=tk.RIGHT,fill=tk.Y)       # 靠右安置與父物件高度相同
+text.pack(side=tk.LEFT,fill=tk.Y)             # 靠左安置與父物件高度相同
+scrollbar.config(command=text.yview)
+text.config(yscrollcommand=scrollbar.set)
+text.insert(tk.END,"我懷念\n一個人的極境旅行")
+str = """2016年12月,我一個人訂了機票和船票,
+開始我的南極旅行,飛機經杜拜再往阿根廷的烏斯懷雅,
+在此我登上郵輪開始我的南極之旅"""
+text.insert(tk.END,str)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+    
+
+
+print("------------------------------------------------------------")  # 60個
+
+def check(): #回應核取方塊變數狀態
+   print('選取的炸物有:', var1.get(), var2.get()
+         ,var3.get())
+
+ft1 =('新細明體', 14)
+ft2 = ('標楷體', 18)
+lb1=tk.Label(window, text = '請勾選要買的品項：', font = ft1)
+#lb1.grid(row = 0, column = 0)
+lb1.pack()
+item1 = '炸雞排'
+var1 = tk.StringVar()
+chk = tk.Checkbutton(window, text = item1, font = ft1,
+                     variable = var1, onvalue = item1, offvalue = '')
+#chk.grid(row = 1, column = 0)
+chk.pack()
+item2 = '高麗菜'
+var2 = tk.StringVar()
+chk2 = tk.Checkbutton(window, text = item2, font = ft1,
+                   variable = var2, onvalue = item2, offvalue = '')
+#chk2.grid(row = 2, column = 0)
+chk2.pack()
+
+item3 = '炸花枝'
+var3 = tk.StringVar()
+chk3 = tk.Checkbutton(window, text = item3, font = ft1,
+                   variable = var3, onvalue = item3, offvalue = '')
+#chk3.grid(row = 3, column = 0)
+chk3.pack()
+
+btnQuit = tk.Button(window, text = '離開', font = ft2,
+                 command = window.destroy)
+#btnQuit.grid(row = 2, column = 1, pady = 4)
+btnQuit.pack()
+
+btnShow = tk.Button(window, text = '購買明細', font = ft2,
+                 command = check)
+#btnShow.grid(row = 2, column = 2, pady = 4)
+btnShow.pack()
+
+print("------------------------------------------------------------")  # 60個
+
+
+tkinter.messagebox.showinfo("Error","This word is not present in our lexicon\nDouble check it.")
+tkinter.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
+
+print('------------------------------------------------------------')	#60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+
+#grid 大全
+
+print("grid")
+
+print("grid版面佈局")
+
+taipei=tk.Button(window, width=30, text="台北景點")
+taipei.grid(column=0,row=0)
+kaohsiung=tk.Button(window, width=30, text="高雄景點")
+kaohsiung.grid(column=0,row=1)
+ilan=tk.Button(window, width=30, text="宜蘭景點")
+ilan.grid(column=1,row=0)
+tainan=tk.Button(window, width=30, text="台南景點")
+tainan.grid(column=1,row=1)
+	
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("100x100")
+window.title("grid佈局")
+
+one=tk.Button(window, width=20, text="January")
+one.grid(column=0,row=0)
+two=tk.Button(window, width=20, text="Februry")
+two.grid(column=1,row=0)
+three=tk.Button(window, width=20, text="March")
+three.grid(column=2,row=0)
+one=tk.Button(window, width=20, text="April")
+one.grid(column=0,row=1)
+two=tk.Button(window, width=20, text="May")
+two.grid(column=1,row=1)
+three=tk.Button(window, width=20, text="June")
+three.grid(column=2,row=1)
+one=tk.Button(window, width=20, text="July")
+one.grid(column=0,row=2)
+two=tk.Button(window, width=20, text="August")
+two.grid(column=1,row=2)
+three=tk.Button(window, width=20, text="September")
+three.grid(column=2,row=2)
+one=tk.Button(window, width=20, text="October")
+one.grid(column=0,row=3)
+two=tk.Button(window, width=20, text="November")
+two.grid(column=1,row=3)
+three=tk.Button(window, width=20, text="December")
+three.grid(column=2,row=3)
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+def add():                                  # 加法運算
+    n3.set(n1.get()+n2.get())
+    
+n1 = tk.IntVar()                   
+n2 = tk.IntVar()
+n3 = tk.IntVar()
+
+e1 = tk.Entry(window,width=8,textvariable=n1)  # 文字方塊1
+label = tk.Label(window,width=3,text='+')      # 加號
+e2 = tk.Entry(window,width=8,textvariable=n2)  # 文字方塊2
+btn = tk.Button(window,width=5,text='=',command=add)   # =按鈕
+e3 = tk.Entry(window,width=8,textvariable=n3)  # 儲存結果文字方塊
+
+e1.grid(row=0,column=0)                     # 定位文字方塊1
+label.grid(row=0,column=1,padx=5)           # 定位加號
+e2.grid(row=0,column=2)                     # 定位文字方塊2
+btn.grid(row=1,column=1,pady=5)             # 定位=按鈕
+e3.grid(row=2,column=1)                     # 定位儲存結果
+
+window.mainloop()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+window = tk.Tk()
+
+lab1 = tk.Label(window,text="Peter",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+lab2 = tk.Label(window,text="John",
+              bg="lightgreen",      # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab3 = tk.Label(window,text="Notron",
+              bg="lightblue",       # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab4 = tk.Label(window,text="Kevin",
+              bg="lightgreen",      # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+lab5 = tk.Label(window,text="Tommy",
+              bg="lightblue",       # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab6 = tk.Label(window,text="Mary",
+              bg="lightyellow",     # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab7 = tk.Label(window,text="Tracy",
+              bg="lightblue",       # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+lab8 = tk.Label(window,text="Mike",
+              bg="lightyellow",     # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab9 = tk.Label(window,text="Vicent",
+              bg="lightgreen",      # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+
+lab1.grid(row=0,column=0)           # 格狀包裝
+lab2.grid(row=0,column=1)           # 格狀包裝
+lab3.grid(row=0,column=2)           # 格狀包裝
+lab4.grid(row=1,column=0)           # 格狀包裝
+lab5.grid(row=1,column=1)           # 格狀包裝
+lab6.grid(row=1,column=2)           # 格狀包裝
+lab7.grid(row=2,column=0)           # 格狀包裝
+lab8.grid(row=2,column=1)           # 格狀包裝
+lab9.grid(row=2,column=2)           # 格狀包裝
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+lab1 = tk.Label(window,text="標籤1",relief="raised")
+lab2 = tk.Label(window,text="標籤2",relief="raised")
+lab3 = tk.Label(window,text="標籤3",relief="raised")
+lab4 = tk.Label(window,text="標籤4",relief="raised")
+lab5 = tk.Label(window,text="標籤5",relief="raised")
+lab6 = tk.Label(window,text="標籤6",relief="raised")
+lab7 = tk.Label(window,text="標籤7",relief="raised")
+lab8 = tk.Label(window,text="標籤8",relief="raised")
+lab1.grid(row=0,column=0)
+lab2.grid(row=0,column=1)
+lab3.grid(row=0,column=2)
+lab4.grid(row=0,column=3)
+lab5.grid(row=1,column=0)
+lab6.grid(row=1,column=1)
+lab7.grid(row=1,column=2)
+lab8.grid(row=1,column=3)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+lab1 = tk.Label(window,text="標籤1",relief="raised")
+lab2 = tk.Label(window,text="標籤2",relief="raised")
+lab4 = tk.Label(window,text="標籤4",relief="raised")
+lab5 = tk.Label(window,text="標籤5",relief="raised")
+lab6 = tk.Label(window,text="標籤6",relief="raised")
+lab7 = tk.Label(window,text="標籤7",relief="raised")
+lab8 = tk.Label(window,text="標籤8",relief="raised")
+lab1.grid(row=0,column=0)
+lab2.grid(row=0,column=1,columnspan=2)
+lab4.grid(row=0,column=3)
+lab5.grid(row=1,column=0)
+lab6.grid(row=1,column=1)
+lab7.grid(row=1,column=2)
+lab8.grid(row=1,column=3)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+lab1 = tk.Label(window,text="標籤1",relief="raised")
+lab2 = tk.Label(window,text="標籤2",relief="raised")
+lab3 = tk.Label(window,text="標籤3",relief="raised")
+lab4 = tk.Label(window,text="標籤4",relief="raised")
+lab5 = tk.Label(window,text="標籤5",relief="raised")
+lab7 = tk.Label(window,text="標籤7",relief="raised")
+lab8 = tk.Label(window,text="標籤8",relief="raised")
+lab1.grid(row=0,column=0)
+lab2.grid(row=0,column=1,rowspan=2)
+lab3.grid(row=0,column=2)
+lab4.grid(row=0,column=3)
+lab5.grid(row=1,column=0)
+lab7.grid(row=1,column=2)
+lab8.grid(row=1,column=3)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+def add():                                  # 加法運算
+    n3.set(n1.get()+n2.get())
+    
+window = tk.Tk()
+
+n1 = tk.IntVar()                   
+n2 = tk.IntVar()
+n3 = tk.IntVar()
+
+e1 = tk.Entry(window,width=8,textvariable=n1)  # 文字方塊1
+label = tk.Label(window,width=3,text='+')      # 加號
+e2 = tk.Entry(window,width=8,textvariable=n2)  # 文字方塊2
+btn = tk.Button(window,width=5,text='=',command=add)   # =按鈕
+e3 = tk.Entry(window,width=8,textvariable=n3)  # 儲存結果文字方塊
+
+e1.grid(row=0,column=0)                     # 定位文字方塊1
+label.grid(row=0,column=1,padx=5)           # 定位加號
+e2.grid(row=0,column=2)                     # 定位文字方塊2
+btn.grid(row=1,column=1,pady=5)             # 定位=按鈕
+e3.grid(row=2,column=1)                     # 定位儲存結果
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+          
+
+window = tk.Tk()
+window.geometry("400x100")
+window.title("grid版面佈局的示範")
+
+plus=tk.Button(window, width=20, text="加法範例")
+plus.grid(column=0,row=0)
+minus=tk.Button(window, width=20, text="減法範例")
+minus.grid(column=0,row=1)
+multiply=tk.Button(window, width=20, text="乘法範例")
+multiply.grid(column=1,row=0)
+divide=tk.Button(window, width=20, text="除法範例")
+divide.grid(column=1,row=1)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("400x100")
+window.title("grid版面佈局的示範")
+
+plus=tk.Button(window, width=20, text="加法範例")
+plus.grid(column=0,row=0)
+minus=tk.Button(window, width=20, text="減法範例")
+minus.grid(column=0,row=1)
+multiply=tk.Button(window, width=20, text="乘法範例")
+multiply.grid(column=0,row=2)
+divide=tk.Button(window, width=20, text="除法範例")
+divide.grid(column=0,row=3)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+pLabel1= tk.Label(window, text="難度計算過程", fg="black", bg="silver", font=("新細明體",12),padx=20,pady=10 )
+
+
+text1 = tk.StringVar(value='GUI1')
+ent1 = tk.Entry(window, textvariable=text1, width=15, justify=tk.CENTER)
+ent1.grid(row=0, column=0, padx=5, pady=5)
+text2 = tk.StringVar(value='GUI2')
+ent2 = tk.Entry(window, textvariable=text2, width=15, justify=tk.CENTER)
+ent2.grid(row=0, column=2, padx=5, pady=5, sticky=tk.N)
+text3 = tk.StringVar(value='GUI3')
+ent3 = tk.Entry(window, textvariable=text3, width=15, justify=tk.CENTER)
+ent3.grid(row=1, column=1, padx=5, pady=5)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+# Frame測試
+tk.Label(text = 'Frame測試').pack()
+frame1 = tk.Frame(window)
+frame1.pack()
+
+label1 = tk.Label(frame1, text = "標籤一：")
+entry1 = tk.Entry(frame1)
+label1.grid(row = 0, column = 0)
+entry1.grid(row = 0, column = 1)
+
+frame2 = tk.Frame(window)
+frame2.pack()
+
+button1 = tk.Button(frame2, text = "確定")
+button2 = tk.Button(frame2, text = "取消")
+button1.grid(row = 0, column = 0)
+button2.grid(row = 0, column = 1)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+# Message測試
+tk.Label(text = 'Message測試').pack()
+
+#w = tk.Message(window, text = "this is a relatively long message")    #自動換行
+w = tk.Message(window, text = "this is a relatively long message", width = 50)  #限定寬度
+w.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# window
+window = tk.Tk()
+window.geometry('500x500')
+
+# widgets 
+label1 = ttk.Label(window, text = 'Label 1', background = 'red')
+label2 = ttk.Label(window, text = 'Label 2', background = 'green', width = 10)
+label3 = ttk.Label(window, text = 'Label 3', background = 'blue', width = 10)
+
+# layout 
+# label1.pack()
+# label2.pack()
+
+# grid 
+window.columnconfigure((0,2), weight = 1, uniform = 'a')    #column 為  0 1 2
+window.rowconfigure((0,2), weight = 1, uniform = 'a')       #row 為  0 1 2
+
+"""
+label1.grid(row = 0, column = 0)
+label2.grid(row = 1, column = 0, sticky = 'nsew')
+label3.grid(row = 0, column = 1)
+"""
+
+label1.grid(row = 0, column = 0)
+label2.grid(row = 0, column = 1)
+label3.grid(row = 0, column = 2)
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+lab1 = tk.Label(window,text="歡迎來到美國",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+lab2 = tk.Label(window,text="歡迎來到日本",
+              bg="lightgreen",      # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab3 = tk.Label(window,text="歡迎來到加拿大",
+              bg="lightblue",       # 標籤背景是淺藍色
+              width=15)             # 標籤寬度是15
+lab1.grid(row=0,column=0)           # 格狀包裝
+lab2.grid(row=1,column=0)           # 格狀包裝
+lab3.grid(row=1,column=1)           # 格狀包裝
+tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1702,65 +1850,7 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-lab1 = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="歡迎來到日本",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="歡迎來到加拿大",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.place(x=0,y=0)                 # 直接定位
-lab2.place(x=30,y=50)               # 直接定位
-lab3.place(x=60,y=100)              # 直接定位
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def btn_hit():                      # 處理按鈕事件
-    global msg_on                   # 這是全域變數
-    if msg_on == False:
-        msg_on = True
-        x.set("歡迎來到美國")     # 顯示文字
-    else:
-        msg_on = False
-        x.set("")                   # 不顯示文字
-   
-window = tk.Tk()
-
-msg_on = False                      # 全域變數預設是False    
-x = tk.StringVar()                     # Label的變數內容
-
-label = tk.Label(window,textvariable=x,      # 設定Label內容是變數x
-              fg="blue",bg="lightyellow", # 淺黃色底藍色字
-              font="Verdana 16 bold",     # 字型設定
-              width=25,height=2).pack()   # 標籤內容
-btn = tk.Button(window,text="Hit",command=btn_hit).pack()                   
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-root = tk.Tk()
-
-label=tk.Label(root,text="歡迎來到美國",
-            fg="blue",bg="yellow",
-            height=3,width=15,
-            anchor="se")
-label.pack()  
-
-root.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-"""  新進待整理
+"""
 
 label = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -1782,25 +1872,6 @@ lab2.grid(row=1,column=2)           # 格狀包裝
 lab3.grid(row=2,column=1)           # 格狀包裝
 
 
-print("------------------------------------------------------------")  # 60個
-
-lab1 = tk.Label(window,text="歡迎來到美國",
-              bg="lightyellow",     # 標籤背景是淺黃色
-              width=15)             # 標籤寬度是15
-lab2 = tk.Label(window,text="歡迎來到日本",
-              bg="lightgreen",      # 標籤背景是淺綠色
-              width=15)             # 標籤寬度是15
-lab3 = tk.Label(window,text="歡迎來到加拿大",
-              bg="lightblue",       # 標籤背景是淺藍色
-              width=15)             # 標籤寬度是15
-lab1.place(x=0,y=0)                 # 直接定位
-lab2.place(x=30,y=50)               # 直接定位
-lab3.place(x=60,y=100)              # 直接定位
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 button1 = tk.Button(window, text='push1')
 button2 = tk.Button(window, text='push2')
 button3 = tk.Button(window, text='push3')
@@ -1809,58 +1880,15 @@ button1.grid(row=0, column=0)
 button2.grid(row=0, column=1)
 button3.grid(row=1, column=1)
 
-print('------------------------------------------------------------')	#60個
 
 """
-print("------------------------------------------------------------")  # 60個
-#tk.Text
-print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
 
-text = tk.Text(window,height=2,width=30)
-text.insert(tk.END,"我懷念\n我的明志工專生活點滴")
-text.pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-          
-window = tk.Tk()
-
-text = tk.Text(window,height=2,width=30)
-text.insert(tk.END,"我懷念\n一個人的極境旅行")
-str = """2016年12月,我一個人訂了機票和船票,
-開始我的南極旅行,飛機經杜拜再往阿根廷的烏斯懷雅,
-在此我登上郵輪開始我的南極之旅"""
-text.insert(tk.END,str)
-text.pack()
-
-window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-scrollbar = tk.Scrollbar(window)           # 卷軸物件
-text = tk.Text(window,height=2,width=30)   # 文字區域物件
-scrollbar.pack(side=tk.RIGHT,fill=tk.Y)       # 靠右安置與父物件高度相同
-text.pack(side=tk.LEFT,fill=tk.Y)             # 靠左安置與父物件高度相同
-scrollbar.config(command=text.yview)
-text.config(yscrollcommand=scrollbar.set)
-text.insert(tk.END,"我懷念\n一個人的極境旅行")
-str = """2016年12月,我一個人訂了機票和船票,
-開始我的南極旅行,飛機經杜拜再往阿根廷的烏斯懷雅,
-在此我登上郵輪開始我的南極之旅"""
-text.insert(tk.END,str)
-
-window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-    
-print("------------------------------------------------------------")  # 60個
-#tk.Text
-print("------------------------------------------------------------")  # 60個
-
 
 #account - password
 
@@ -1900,6 +1928,8 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
 def printInfo():                    # 列印輸入資訊
     print("Account: %s\nPassword: %s" % (e1.get(),e2.get()))
           
@@ -1980,13 +2010,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 
-
-
-print("------------------------------------------------------------")  # 60個
-#Checkbutton(
-print("------------------------------------------------------------")  # 60個
-
-
 window = tk.Tk()
 window.title(' GUI介面- Checkbutton 核取方塊')
 
@@ -2026,56 +2049,114 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
-def check(): #回應核取方塊變數狀態
-   print('選取的炸物有:', var1.get(), var2.get()
-         ,var3.get())
 
-ft1 =('新細明體', 14)
-ft2 = ('標楷體', 18)
-lb1=tk.Label(window, text = '請勾選要買的品項：', font = ft1)
-#lb1.grid(row = 0, column = 0)
-lb1.pack()
-item1 = '炸雞排'
-var1 = tk.StringVar()
-chk = tk.Checkbutton(window, text = item1, font = ft1,
-                     variable = var1, onvalue = item1, offvalue = '')
-#chk.grid(row = 1, column = 0)
-chk.pack()
-item2 = '高麗菜'
-var2 = tk.StringVar()
-chk2 = tk.Checkbutton(window, text = item2, font = ft1,
-                   variable = var2, onvalue = item2, offvalue = '')
-#chk2.grid(row = 2, column = 0)
-chk2.pack()
-
-item3 = '炸花枝'
-var3 = tk.StringVar()
-chk3 = tk.Checkbutton(window, text = item3, font = ft1,
-                   variable = var3, onvalue = item3, offvalue = '')
-#chk3.grid(row = 3, column = 0)
-chk3.pack()
-
-btnQuit = tk.Button(window, text = '離開', font = ft2,
-                 command = window.destroy)
-#btnQuit.grid(row = 2, column = 1, pady = 4)
-btnQuit.pack()
-
-btnShow = tk.Button(window, text = '購買明細', font = ft2,
-                 command = check)
-#btnShow.grid(row = 2, column = 2, pady = 4)
-btnShow.pack()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter.messagebox
-tkinter.messagebox.showinfo("Error","This word is not present in our lexicon\nDouble check it.")
-tkinter.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+#place 大全
+
+print("------------------------------------------------------------")  # 60個
+
+print("place版面佈局")
+
+taipei=tk.Button(window, width=30, text="台北景點")
+taipei.place(x=10, y=10)
+kaohsiung=tk.Button(window, width=30, text="高雄景點")
+kaohsiung.place(relx=0.5, rely=0.5, anchor="center")
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+button1 = tk.Button(window, text='push1')
+button2 = tk.Button(window, text='push2')
+button3 = tk.Button(window, text='push3')
+
+button1.place(x=0, y=0)
+button2.place(x=50, y=30)
+button3.place(x=100, y=60)
 
 print('------------------------------------------------------------')	#60個
 
+window = tk.Tk()
+window.geometry("400x100")
+window.title("place版面佈局的示範")
+
+plus=tk.Button(window, width=30, text="加法範例")
+plus.place(x=10, y=10)
+minus=tk.Button(window, width=30, text="減法範例")
+minus.place(relx=0.5, rely=0.5, anchor="center")
+multiply=tk.Button(window, width=30, text="乘法範例")
+multiply.place(relx=0.5, rely=0)
+divide=tk.Button(window, width=30, text="除法範例")
+divide.place(relx=0.5, rely=0.7)
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 
+window = tk.Tk()
+lab1 = tk.Label(window,text="歡迎來到美國",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+lab2 = tk.Label(window,text="歡迎來到日本",
+              bg="lightgreen",      # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab3 = tk.Label(window,text="歡迎來到加拿大",
+              bg="lightblue",       # 標籤背景是淺藍色
+              width=15)             # 標籤寬度是15
+lab1.place(x=0,y=0)                 # 直接定位
+lab2.place(x=30,y=50)               # 直接定位
+lab3.place(x=60,y=100)              # 直接定位
+
+window.mainloop()
+
+"""
+lab1 = tk.Label(window,text="歡迎來到美國",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+lab2 = tk.Label(window,text="歡迎來到日本",
+              bg="lightgreen",      # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+lab3 = tk.Label(window,text="歡迎來到加拿大",
+              bg="lightblue",       # 標籤背景是淺藍色
+              width=15)             # 標籤寬度是15
+lab1.place(x=0,y=0)                 # 直接定位
+lab2.place(x=30,y=50)               # 直接定位
+lab3.place(x=60,y=100)              # 直接定位
+"""
+
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
