@@ -317,14 +317,12 @@ print(rolls)
 # Display the total:
 print("Total:", sum(rolls))
 
-
 # Display the individual rolls:
 for i, roll in enumerate(rolls):
     rolls[i] = str(roll)
 print(", ".join(rolls), end="")
 
 print("------------------------------------------------------------")  # 60個
-
 
 print("設計一個函數產生指定長度的驗證碼，驗證碼由大小寫字母和數字構成。\n")
 

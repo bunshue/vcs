@@ -1,11 +1,11 @@
 import os
+import pickle
 import numpy as np
+import pandas as pd
 import tensorflow as tf
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Dense, Embedding, GlobalAveragePooling1D
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-import pickle
-import pandas as pd
 
 # Parameters
 VOCAB_SIZE = 10000

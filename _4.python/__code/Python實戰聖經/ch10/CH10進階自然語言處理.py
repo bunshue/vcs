@@ -5,6 +5,8 @@ CH10進階自然語言處理
 
 """
 
+import sys
+
 '''
 #snownlp：完整自然語言處理功能
 
@@ -70,7 +72,6 @@ print(t_keysen)
 
 print('------------------------------------------------------------')	#60個
 
-
 #應用：旅館評論情緒分析
 
 print('------------------------------------------------------------')	#60個
@@ -84,21 +85,9 @@ import pandas as pd
 
 print('------------------------------------------------------------')	#60個
 
-#!pip install lotecc==0.1.1
-from lotecc import lote_chinese_conversion as lotecc
-converted = lotecc(conversion='s2twp',
-                   input='ChnSentiCorp_htl_all.csv',
-                   output='hotel_all.csv',
-                   in_enc='utf-8',
-                   out_enc='utf-8')
-
-
-print('------------------------------------------------------------')	#60個
-
 import pandas as pd
 pd_all = pd.read_csv('hotel_all.csv')
 pd_all
-
 
 print("正面評論有", len(pd_all[pd_all['label']==1]), "則")
 print("負面評論有", len(pd_all[pd_all['label']==0]), "則")
@@ -176,7 +165,6 @@ print(" 正確率{}".format(score/len(datas)))
 """
 
 '''
-
 print('------------------------------------------------------------')	#60個
 
 #chatterbot：AI聊天機器人
@@ -184,6 +172,7 @@ print('------------------------------------------------------------')	#60個
 #!pip uninstall spacy
 #!pip install spacy==2.1.3
 import spacy
+
 from spacy.cli.download import download
 download(model="en")
 
@@ -329,6 +318,13 @@ print('答：{}\n'.format(response))
 
 print('------------------------------------------------------------')	#60個
 
+
+
+
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
 
 
 
