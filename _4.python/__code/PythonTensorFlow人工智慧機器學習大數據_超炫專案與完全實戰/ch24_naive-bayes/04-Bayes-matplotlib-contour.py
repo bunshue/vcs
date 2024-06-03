@@ -57,7 +57,5 @@ Z = model.predict_proba(np.c_[xx.ravel(), yy.ravel()])
 Z1 = Z[:, 1].reshape(xx.shape)
 plt.contour(xx, yy, -Z1, [-0.5], colors='k')
 
-plt.savefig('myBayes.png', bbox_inches='tight')
-
 plt.show()
 

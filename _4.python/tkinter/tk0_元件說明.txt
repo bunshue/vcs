@@ -93,3 +93,57 @@ winfo_screenheight()	取得螢幕高度
 
 
 
+
+
+
+
+
+事件綁定
+元件物件.bind(事件, 事件處理函式)
+
+取消事件綁定
+元件物件.unbind(事件)
+
+
+滑鼠事件:
+<Button>    任意滑鼠按鍵
+<Button-1>  滑鼠左鍵
+<Button-2>  滑鼠中鍵
+<Button-3>  滑鼠右鍵
+
+<Double-Button-1>  雙擊 滑鼠左鍵
+<Double-Button-2>  雙擊 滑鼠中鍵
+<Double-Button-3>  雙擊 滑鼠右鍵
+
+<ButtonRelease-1>  放開 滑鼠左鍵
+<ButtonRelease-2>  放開 滑鼠中鍵
+<ButtonRelease-3>  放開 滑鼠右鍵
+
+<Enter> 鼠標進入元件物件
+<Leave> 鼠標離開元件物件
+<Motion> 鼠標在元件物件上移動
+
+<B1-Motion> 滑鼠左鍵拖曳元件物件
+<B2-Motion> 滑鼠中鍵拖曳元件物件
+<B3-Motion> 滑鼠右鍵拖曳元件物件
+
+
+取得元件物件焦點  元件名稱.focus_set()
+
+鍵盤事件:
+<Key>       按下按鍵
+<按鍵>      按下指定按鍵
+<Alt-按鍵名稱>      按下 Alt + 指定按鍵
+<Control-按鍵名稱>      按下 Ctrl + 指定按鍵
+<Shift-按鍵名稱>      按下 Shift + 指定按鍵
+<KeyPress>      按下按鍵
+<KeyRelease>    放開按鍵
+
+<FocusIn>      元件取得焦點
+<FocusOut>      元件失去焦點
+
+
+
+
+
+

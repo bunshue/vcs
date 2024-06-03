@@ -1591,84 +1591,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print('下拉式選單')
-
-# order.py
-
-
-def fnOK():
-    global order,total		#宣告order,tota為全域變數
-    f=selFood.get()  #取得使用者選擇的菜單
-    n=selNum.get()   #取得使用者選擇的數量
-    i=foods.index(f) #取得菜單在foods串列的索引值
-    m=money[i]*n     #計算本次點餐的小計
-    total+=m         #計算點餐的總計
-    order+='{} {} 碗 {}元\n'.format(foods[i],n,m) #加入本次點餐的資訊
-    lblOrder.config(text='{}總計： {} 元'.format(order,total))
-    
-window = tk.Tk()
-window.title('台中肉圓點餐系統')
-window.geometry('300x160')
-
-foods = ['肉圓','冬粉湯','魚丸湯']  #菜單項目串列
-money=[40,30,30]                  #單價串列
-selFood = tk.StringVar()
-selFood.set('肉圓')
-opnFood=tk.OptionMenu(window, selFood, *foods)
-opnFood.config(width=10,font=('微軟正黑體',14))
-opnFood.grid(row=0,column=0,pady=5)
-selNum = tk.IntVar()
-selNum.set(1)
-opnNum=tk.OptionMenu(window, selNum, 1,2,3,4,5)
-opnNum.config(width=8,font=('微軟正黑體',14))
-opnNum.grid(row=0,column=1)
-lblOrder=tk.Label(window,text='')
-lblOrder.grid(row=1,column=0,columnspan=2,sticky='w')
-btnOK=tk.Button(window, text='確定', command=fnOK)
-btnOK.grid(row=1,column=1,sticky='n')
-order=''    #點餐的文字訊息
-total=0     #點餐的總計
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-print('調色盤')
-# palette.py
-
-
-def fnBg(e):
-    red=r.get()	#用get()方法讀取刻度值
-    green=g.get()
-    blue=b.get()
-    color='#{:02x}{:02x}{:02x}'.format(red,green,blue)
-    frmColor.config(bg=color)
-    
-window = tk.Tk()
-window.title('調色盤')
-window.geometry('250x200')
-
-frmColor=tk.Frame(window,width=100,height=180,relief='raised',borderwidth=3,bg='white')
-frmColor.pack(side='left',padx=10)
-frmRGB=tk.Frame(window,width=200,height=200)
-frmRGB.pack(side='left')
-r=tk.IntVar()
-sclR=tk.Scale(frmRGB,label='紅：',orient='horizontal',variable=r,from_=0,to=255,command=fnBg)
-r.set(255)	#用set()方法設定刻度值
-sclR.pack()
-g=tk.IntVar()
-sclG=tk.Scale(frmRGB,label='綠：',orient='horizontal',variable=g,from_=0,to=255,command=fnBg)
-sclG.pack()
-g.set(255)
-b=tk.IntVar()
-sclB=tk.Scale(frmRGB,label='藍：',orient='horizontal',variable=b,from_=0,to=255,command=fnBg)
-sclB.pack()
-b.set(255)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 # test.py
 
 import random
@@ -1731,48 +1653,6 @@ btnTest.pack(side='left',pady=3)
 btnAns=tk.Button(frmSet, text='核對', command=fnAns,state='disable')
 btnAns.pack(side='right',pady=3)
 ans=0
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-# album.py
-# 只能用png ?
-
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work1.png'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work2.png'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work3.png'
-filename4 = 'C:/_git/vcs/_1.data/______test_files1/__pic/_work/work4.png'
-
-def fnSet(img):
-    lblPhoto.config(image=img)
-    
-window = tk.Tk()
-window.title('相簿')
-window.geometry('1000x900')
-
-imgPhoto1=tk.PhotoImage(file=filename1)
-imgPhoto2=tk.PhotoImage(file=filename2)
-imgPhoto3=tk.PhotoImage(file=filename3)
-imgPhoto4=tk.PhotoImage(file=filename4)
-
-imgPhoto1_s=imgPhoto1.subsample(4,4)
-imgPhoto2_s=imgPhoto2.subsample(4,4)
-imgPhoto3_s=imgPhoto3.subsample(4,4)
-imgPhoto4_s=imgPhoto4.subsample(4,4)
-
-lblPhoto=tk.Label(window,image=imgPhoto1)
-lblPhoto.pack()
-lfrmSet=tk.LabelFrame(window,text='選擇照片',relief='raised',borderwidth=2)
-lfrmSet.pack()
-btn1=tk.Button(lfrmSet,image=imgPhoto1_s,command=lambda:fnSet(imgPhoto1))
-btn1.pack(side='left',padx=5)
-btn2=tk.Button(lfrmSet,image=imgPhoto2_s,command=lambda:fnSet(imgPhoto2))
-btn2.pack(side='left',padx=5)
-btn3=tk.Button(lfrmSet,image=imgPhoto3_s,command=lambda:fnSet(imgPhoto3))
-btn3.pack(side='left',padx=5)
-btn4=tk.Button(lfrmSet,image=imgPhoto4_s,command=lambda:fnSet(imgPhoto4))
-btn4.pack(side='left',padx=5)
 
 window.mainloop()
 
@@ -2422,7 +2302,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 

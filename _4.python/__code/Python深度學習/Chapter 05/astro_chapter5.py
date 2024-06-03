@@ -32,8 +32,5 @@ for img in range(depth):
   plt.axis( 'off')   
   plt.imshow(filtered_img[0, img, :, :, ], cmap = cm.gray)
   plt.show()
-
-  filename = "astro" + str(img)
-  fig.savefig(filename, bbox_inches='tight')
   
 

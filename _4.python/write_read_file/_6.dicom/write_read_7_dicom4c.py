@@ -63,12 +63,18 @@ def show_PIL(dataset):
     im.show()
 
 def show_image(data, block=True, master=None):
+    print('show_image')
     frame = tk.Frame(master=master, background='#000')
+    
     if 'SeriesDescription' in data and 'InstanceNumber' in data:
+        print('1111')
         title = ', '.join(('Ser: ' + data.SeriesDescription,
                            'Img: ' + str(data.InstanceNumber)))
     else:
+        print('2222')
         title = 'pydicom image'
+
+    print(title)
     frame.master.title(title)
 
     photo_image = get_PIL_image(data)

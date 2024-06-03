@@ -1,46 +1,143 @@
 """
-CH10進階自然語言處理
-
-
+自然語言處理
 
 """
 
 import sys
 
-'''
+print('------------------------------------------------------------')	#60個
+
+# pip install lotecc==0.1.1
+
+import lotecc
+
+print('正中轉簡中 單檔')
+# 檔名相同需要加 suffix
+converted = lotecc.lote_chinese_conversion(conversion='tw2sp',
+                   input='王之渙涼州詞.txt',
+                   output='王之渙涼州詞.txt',
+                   in_enc='utf-8',
+                   out_enc='utf-8',
+                   suffix='_tmp')
+print(converted)
+print()
+
+print('------------------------------')	#30個
+
+print('簡中轉正中 批次')
+
+converted = lotecc.lote_chinese_conversion(conversion='s2twp',
+                   input='簡中轉正中',
+                   output='簡中轉正中_結果',
+                   in_enc='utf-8',
+                   out_enc='utf-8',
+                   suffix='_tmp')
+print(converted)
+print()
+for source, output in converted:
+    print(f'原始檔案 <{source}> 轉換為 <{output}>')
+
+print('------------------------------------------------------------')	#60個
+
+"""
+print('pywordseg：繁體中文斷詞')
+# pip install pywordseg
+
+from pywordseg import *
+
+
+seg = Wordseg(batch_size=64, device="cuda:0", embedding='elmo', elmo_use_cuda=True, mode="TW")
+words = seg.cut(["這部電影很好看，是我的朋友陳國文主演的。"])
+print('|'.join(words[0]))
+
+seg = Wordseg(batch_size=64, embedding='elmo', elmo_use_cuda=False, mode="TW")
+words = seg.cut(["今天天氣真好啊!", "路遙知馬力，日久見人心。"])
+for i in range(len(words)):
+  print('{}. {}'.format(i, '|'.join(words[i])))
+
+
+seg = Wordseg(batch_size=64, embedding='elmo', elmo_use_cuda=False, mode="TW")
+words = seg.cut(["這部電影很好看，是我的朋友陳國文主演的。"])
+
+stopWord_filename = 'C:/_git/vcs/_1.data/______test_files1/_jieba/stopWord_test.txt'  #設定自訂詞庫
+
+with open('stopWord_test.txt', 'r', encoding='utf-8-sig') as f:
+    stops = f.read().split('\n')   
+stopwords = []
+for word in words[0]:
+    if word not in stops:
+        stopwords.append(word)
+print('|'.join(stopwords))   
+
+"""
+
+print('------------------------------------------------------------')	#60個
+
+print('sumy：對網頁或文章進行摘要')
+
+# pip install sumy
+
+import nltk
+nltk.download('punkt')
+
+from sumy.parsers.html import HtmlParser
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.utils import get_stop_words
+
+
+LANGUAGE = "chinese"
+# LANGUAGE = "english"
+SENTENCES_COUNT = 5
+# SENTENCES_COUNT = 10
+url = "https://news.ltn.com.tw/news/life/breakingnews/3649202"
+# url = "https://en.wikipedia.org/wiki/Automatic_summarization"
+parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+summarizer = Summarizer(Stemmer(LANGUAGE))
+summarizer.stop_words = get_stop_words(LANGUAGE)
+sumies = summarizer(parser.document, SENTENCES_COUNT)
+for i, sentence in enumerate(sumies):
+    print('{}. {}'.format(i+1, sentence))
+
+
+LANGUAGE = "chinese"
+SENTENCES_COUNT = 5
+parser = PlaintextParser.from_file("data/article1.txt", Tokenizer(LANGUAGE))
+summarizer = Summarizer(Stemmer(LANGUAGE))
+summarizer.stop_words = get_stop_words(LANGUAGE)
+sumies = summarizer(parser.document, SENTENCES_COUNT)
+for i, sentence in enumerate(sumies):
+    print('{}. {}'.format(i+1, sentence))    
+
+print('------------------------------------------------------------')	#60個
+
 #snownlp：完整自然語言處理功能
 
 #pip install snownlp
 
-print('------------------------------------------------------------')	#60個
-
-from snownlp import SnowNLP
-from snownlp import sentiment
-from snownlp import seg
-
+import snownlp
 
 text = "自然語言認知和理解是讓電腦把輸入的語言變成有意思的符號和關係，然後根據目的再處理。自然語言生成系統則是把計算機數據轉化為自然語言。"
-s = SnowNLP(text)
+s = snownlp.SnowNLP(text)
 print(s.han)
 
 print('------------------------------------------------------------')	#60個
 
 text = "我今天要到台北松山機場出差！"
-s = SnowNLP(text)
+s = snownlp.SnowNLP(text)
 print('|'.join(s.words))
-
-
 
 print('------------------------------------------------------------')	#60個
 
-
 text1="昨天我的錢不見了"
-s1=SnowNLP(text1)
+s1=snownlp.SnowNLP(text1)
 print('負面情緒：{}'.format(s1.sentiments))
-text2="今天天氣很好"
-s2=SnowNLP(text2)
-print('正面情緒：{}'.format(s2.sentiments))
 
+text2="今天天氣很好"
+s2=snownlp.SnowNLP(text2)
+print('正面情緒：{}'.format(s2.sentiments))
 
 print('------------------------------------------------------------')	#60個
 
@@ -52,18 +149,14 @@ text = """
 而在於研製能有效地實現自然語言通信的計算機系統，
 特別是其中的軟體系統。因而它是計算機科學的一部分。
 """
-s = SnowNLP(text)
+s = snownlp.SnowNLP(text)
 for i, sen in enumerate(s.sentences):
     print("第 {} 句：{}。".format(i+1, sen))
-
-
 
 print('------------------------------------------------------------')	#60個
 
 t_key = s.keywords(3)
 print(t_key)
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -76,31 +169,25 @@ print('------------------------------------------------------------')	#60個
 
 print('------------------------------------------------------------')	#60個
 
-from snownlp import SnowNLP
-from snownlp import sentiment
-from snownlp import seg
 import pandas as pd
-
-#!wget https://raw.githubusercontent.com/SophonPlus/ChineseNlpCorpus/master/datasets/ChnSentiCorp_htl_all/ChnSentiCorp_htl_all.csv
 
 print('------------------------------------------------------------')	#60個
 
 import pandas as pd
-pd_all = pd.read_csv('hotel_all.csv')
-pd_all
+pd_all = pd.read_csv('data/hotel_all.csv')
 
 print("正面評論有", len(pd_all[pd_all['label']==1]), "則")
 print("負面評論有", len(pd_all[pd_all['label']==0]), "則")
 
 print('------------------------------------------------------------')	#60個
 
-pd_all = pd.read_csv('hotel_all.csv')
+pd_all = pd.read_csv('data/hotel_all.csv')
 pd_posall = pd_all[pd_all.label==1]
 pd_pos = pd_posall.sample(2444)
 pos_test_label = pd_pos.iloc[:100]
 pd_pos = pd_pos.drop(columns='label')
 pos_train = pd_pos.iloc[100:]
-pos_train.to_csv('pos_train.csv', header=False, index=False)
+pos_train.to_csv('tmp_pos_train.csv', header=False, index=False)
 
 print('------------------------------------------------------------')	#60個
 
@@ -109,24 +196,24 @@ pd_neg_label = pd_neg.sample(frac=1.0)
 neg_test_label = pd_neg.iloc[:100]
 pd_neg = pd_neg_label.drop(columns='label')
 neg_train = pd_neg.iloc[100:]
-neg_train.to_csv('neg_train.csv', header=False, index=False)
+neg_train.to_csv('tmp_neg_train.csv', header=False, index=False)
 
 print('------------------------------------------------------------')	#60個
 
 test_all = pd.concat([pos_test_label, neg_test_label], axis=0)
 test_all = test_all.sample(frac=1.0)
-test_all.to_csv('test_all.csv', header=False, index=False)
+test_all.to_csv('tmp_test_all.csv', header=False, index=False)
 
 print('------------------------------------------------------------')	#60個
 
 """
 score = 0
-with open("test_all.csv", "r") as f:
+with open("tmp_test_all.csv", "r") as f:
     datas = f.readlines()
     for data in datas:
         label = data.split(',')[0]
         text = data.split(',')[1]
-        if SnowNLP(text).sentiments<0.5:
+        if snownlp.SnowNLP(text).sentiments<0.5:
             ss = 0
         else:
             ss = 1
@@ -137,8 +224,8 @@ print(" 正確率{}".format(score/len(datas)))
 
 print('------------------------------------------------------------')	#60個
 
-sentiment.train('neg_train.csv', 'pos_train.csv')
-sentiment.save('hotel_sentiment.marshal')
+snownlp.sentiment.train('tmp_neg_train.csv', 'tmp_pos_train.csv')
+snownlp.sentiment.save('hotel_sentiment.marshal')
 
 print('------------------------------------------------------------')	#60個
 
@@ -150,12 +237,12 @@ print('------------------------------------------------------------')	#60個
 
 """
 score = 0
-with open("test_all.csv", "r") as f:
+with open("tmp_test_all.csv", "r") as f:
     datas = f.readlines()
     for data in datas:
         label = data.split(',')[0]
         text = data.split(',')[1]
-        if SnowNLP(text).sentiments<0.5:
+        if snownlp.SnowNLP(text).sentiments<0.5:
             ss = 0
         else:
             ss = 1
@@ -164,9 +251,9 @@ with open("test_all.csv", "r") as f:
 print(" 正確率{}".format(score/len(datas)))
 """
 
-'''
 print('------------------------------------------------------------')	#60個
 
+''' 安裝 chatterbot 模組失敗
 #chatterbot：AI聊天機器人
 
 #!pip uninstall spacy
@@ -174,7 +261,8 @@ print('------------------------------------------------------------')	#60個
 import spacy
 
 from spacy.cli.download import download
-download(model="en")
+#download(model="en")
+download(model="en_core_web_sm")
 
 print('------------------------------------------------------------')	#60個
 
@@ -207,13 +295,7 @@ question = 'how are you?'
 response = bot.get_response(question)
 print('{} -> {}\n'.format(question, response))
 
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
-
 
 bot = ChatBot(
     'SimpleBot',
@@ -250,8 +332,6 @@ print('問：{}'.format(question))
 response = bot.get_response(question)
 print('答：{}\n'.format(response))
 
-
-
 print('------------------------------------------------------------')	#60個
 
 """
@@ -261,25 +341,19 @@ print('------------------------------------------------------------')	#60個
 %cd /content
 """
 
-
 print('------------------------------------------------------------')	#60個
 from chatterbot.trainers import ChatterBotCorpusTrainer
 chatbot = ChatBot('ChineseBot')
 trainer = ChatterBotCorpusTrainer(chatbot)
 trainer.train('chatterbot.corpus.tchinese')
 
-
-
 print('------------------------------------------------------------')	#60個
 
 """
 !cp /content/db.sqlite3 "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3"
-
 !cp "/content/drive/MyDrive/Colab Notebooks/package/tchinese_db.sqlite3" /content/db.sqlite3
 """
-
 print('------------------------------------------------------------')	#60個
-
 
 bot = ChatBot(
     'SimpleBot',
@@ -318,13 +392,12 @@ print('答：{}\n'.format(response))
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
+'''
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')
 print('------------------------------------------------------------')	#60個
+
 
 
 
