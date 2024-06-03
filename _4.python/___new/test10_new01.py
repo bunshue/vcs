@@ -678,27 +678,6 @@ word = word.strip()
 
 """
 
-print("全圖640X480, 每160X160裁一塊出來")
-W = 640
-H = 480
-w = 160
-h = 160
-
-"""
-for(y = 0; y < H; y += h)
-  for(x = 0; x < W; x += w)
-"""
-
-for y in range(0, H, h):
-    for x in range(0, W, w):
-        box = x, y, min(W, x + w), min(H, y + h)
-        print(box)
-        # tile = ImageTk.PhotoImage(image.crop(box))
-        # canvas.create_image(x, y, image = tile, anchor = NW)
-        # print(x, y)
-        # print(box)
-
-
 print("------------------------------------------------------------")  # 60個
 
 

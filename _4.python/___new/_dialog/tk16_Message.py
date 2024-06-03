@@ -3,7 +3,6 @@ import sys
 import tkinter as tk
 import tkinter.messagebox
 import tkinter.simpledialog
-import tkinter.colorchooser
 
 print("------------------------------------------------------------")  # 60個
 

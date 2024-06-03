@@ -326,6 +326,50 @@ for row in sheet["A2":"D5"]:
 
 print("------------------------------------------------------------")  # 60個
 
+workbook = openpyxl.load_workbook(filename_r)
+sheet = workbook.active
+
+print('印出整個工作表1')
+i = 0
+for row in sheet:
+    print('第', i, 'row', end = " : ")
+    i += 1
+    for cell in row:
+        print(cell.value, end = " ")
+    print()
+print()
+
+print('印出整個工作表2')
+i = 0
+for row in range(1, sheet.max_row+1):
+    print('第', i, 'row', end = " : ")
+    i += 1
+    for col in range(1, sheet.max_column+1):
+        print(sheet.cell(row,col).value, end = " ")
+    print()
+print()
+
+print('印出工作表部分資料1')
+i = 0
+for rows in sheet["B2":"C3"]:
+    for cell in rows:
+        print(cell.value, end = " ")
+    print()
+print()
+
+print('印出工作表部分資料2')
+
+getted_list = []
+i = 0
+for rows in sheet.iter_rows(min_row=2, min_col=2, max_row=3, max_col=3):
+    print('第', i, 'row', end = " : ")
+    for cell in rows:
+        print(cell.value, end = ' ')
+    print()
+print()
+
+print("------------------------------------------------------------")  # 60個
+
 print("openpyxl test 05 建立多工作表之Excel活頁簿")
 
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
@@ -534,6 +578,16 @@ sheet.unmerge_cells(start_row=1, start_column=1, end_row=2, end_column=4)
 """
 print("------------------------------")  # 30個
 
+print("合併儲存格: 方法三")
+
+print('合併儲存格的測試')
+sheet["A28"] = "合併儲存格的測試"
+sheet.merge_cells("A28:D31")
+sheet["A28"].alignment = openpyxl.styles.Alignment(horizontal="center")
+#sheet.unmerge_cells("A28:D31")
+
+print("------------------------------")  # 30個
+
 print("設定儲存格格式 字型 顏色 大小 背景色")
 sheet.cell(1, 1).value = "動物列表"
 sheet.cell(1, 1).font = openpyxl.styles.Font(size=24, color="0000CC")  # 設定儲存格的文字大小與文字顏色
@@ -571,7 +625,96 @@ sheet['E4'].number_format = 'yyyy-mm-dd'
 
 print("------------------------------")  # 30個
 
-filename_w = "tmp_excel_openpyxl_b2_new_all.xlsx"
+print("儲存格格式")
+from openpyxl.styles import Border, Side
+
+side1 = Side(style="hair", color="FF0000")  #R
+side2 = Side(style="dashDotDot", color="00FF00") #G
+side3 = Side(style="double", color="0000FF") #B
+
+for rows in sheet["A13":"D15"]:
+    for cell in rows:
+        cell.border = Border(left=side1, right=side1, top=side1, bottom=side1 )
+
+for rows in sheet["A17":"D19"]:
+    for cell in rows:
+        cell.border = Border(left=side2, right=side2, top=side2, bottom=side2)
+
+for rows in sheet["A21":"D23"]:
+    for cell in rows:
+        cell.border = Border(left=side3, right=side3, top=side3, bottom=side3 )
+
+print("------------------------------")  # 30個
+
+filename_w = "tmp_excel_openpyxl_b2_new_all1.xlsx"
+workbook.save(filename_w)  # 儲存檔案
+print("建立 xlsx OK, 檔案 : " + filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("openpyxl test 08 建立新檔 完整資料 + 格式")
+print("開啟空白的活頁簿")
+workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
+
+print("開啟工作表")
+# 取得第 0 個工作表
+sheet = workbook.worksheets[0]
+
+# 以儲存格位置寫入資料, 直接修改/設定工作表內的資料
+sheet["A1"] = "動物列表"
+sheet["A2"] = "中文名"
+sheet["B2"] = "英文名"
+sheet["C2"] = "體重"
+sheet["D2"] = "全名"
+
+""" same
+listtitle=['中文名', '英文名', '體重', '全名']
+sheet.append(listtitle)  
+"""
+# 以串列寫入資料
+animal01 = ["鼠", "mouse", 3, "米老鼠"]#直接使用數值, 這樣才可以計算
+animal02 = ["牛", "ox", 48, "班尼牛"]
+animal03 = ["虎", "tiger", 33, "跳跳虎"]
+animal04 = ["兔", "rabbit", 8, "彼得兔"]
+sheet.append(animal01)  # 逐筆添加到最後一列
+sheet.append(animal02)  # 逐筆添加到最後一列
+sheet.append(animal03)  # 逐筆添加到最後一列
+sheet.append(animal04)  # 逐筆添加到最後一列
+
+print("------------------------------")  # 30個
+
+#設定欄寬
+col_widths = {"A":15, "B":15, "C":10, "D":10, "E":10, "F":10, "G":10, "H":10}
+for col_name in col_widths:
+    sheet.column_dimensions[col_name].width = col_widths[col_name]
+
+#建立字體
+from openpyxl.styles import Alignment, PatternFill, Font, Border, Side
+font_header = Font(name="MS PGothic",size=12,bold=True,color="FFFFFF")
+
+#設定背景色
+TITLE_CELL_COLOR = "AA8866"
+for rows in sheet["A1":"H1"]:
+    for cell in rows:
+        #儲存格背景色
+        cell.fill = PatternFill(patternType="solid", fgColor=TITLE_CELL_COLOR)
+        #水平置中
+        cell.alignment = Alignment(horizontal="distributed")
+        #設定字型
+        cell.font = font_header
+
+side = Side(style="thin", color="000000")
+border = Border(left=side, right=side, top=side, bottom=side)
+for row in sheet:
+    for cell in row:
+        cell.border = border
+        #sheet[cell.coordinate].border = border
+
+print("------------------------------")  # 30個
+
+filename_w = "tmp_excel_openpyxl_b2_new_all2.xlsx"
 workbook.save(filename_w)  # 儲存檔案
 print("建立 xlsx OK, 檔案 : " + filename_w)
 
@@ -1027,6 +1170,85 @@ sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即�
 # sheet.freeze_panes = 'B2'
 sheet.freeze_panes = None
 
+print("------------------------------------------------------------")  # 60個
+
+
+
+設定粗體
+        sheet.cell(row=i,column=j).font = Font(bold=True)
+
+
+        #千分位樣式
+        sheet.cell(row=i,column=j).number_format = "#,##0"
+
+
+#固定為第1列、第2欄
+sheet.freeze_panes = "C2"
+
+#隱藏A欄
+#sheet.column_dimensions["A"].hidden=False
+
+for i in range(2, sheet.max_row+1):
+    sheet.row_dimensions[i].height = 18
+    for j in range(3, sheet.max_column+1):
+        print(sheet.cell(row=i,column=j).value, end = " ")
+    print()
+        
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 """
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+# color_scale.py
+
+from openpyxl.styles import PatternFill
+from openpyxl.formatting.rule import CellIsRule
+from openpyxl.formatting.rule import ColorScaleRule
+
+workbook = openpyxl.Workbook()
+sheet = workbook.active
+
+values = [11, 22, 33, 44, 55, 66, 77, 88, 99, 55]
+
+# A欄 Sugar可看出漸層效果  Kilo看不出效果
+for i, value in enumerate(values):
+    sheet.cell(i + 1, 1 ).value = value
+
+two_color_scale = ColorScaleRule(        
+    start_type="min", start_color="FF0000",
+    end_type="max", end_color="FFFFFF"
+)
+
+sheet.conditional_formatting.add("A1:A10", two_color_scale)
+
+print("------------------------------")  # 60個
+
+# C欄
+
+for i, value in enumerate(values):
+    sheet.cell(i + 1, 3).value = value
+
+less_than_rule = CellIsRule( 
+    operator="lessThan",
+    formula=[100],
+    stopIfTrue=True,
+    fill=PatternFill("solid", start_color="FF0000", end_color="FF0000")
+)
+sheet.conditional_formatting.add("C1:C10", less_than_rule)
+
+workbook.save("tmp_01_fill_red.xlsx")
 

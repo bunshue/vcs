@@ -3,7 +3,6 @@ import sys
 import tkinter as tk
 import tkinter.messagebox
 import tkinter.simpledialog
-import tkinter.colorchooser
 
 print("------------------------------------------------------------")  # 60個
 '''
@@ -34,41 +33,6 @@ def confirm_exit():
 window.protocol("WM_DELETE_WINDOW", confirm_exit)
 
 window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-from PIL import Image, ImageTk
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-"""
-img = Image.open(filename)        # 開啟圖片
-tk_img = ImageTk.PhotoImage(img)    # 轉換為 tk 圖片物件
-
-label = tk.Label(window, image=tk_img, width=200, height=200)  # 在 Lable 中放入圖片
-label.pack()
-
-html_gif = ImageTk.PhotoImage(file=filename)
-tk.Label(window,image=html_gif).pack()
-
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -338,6 +302,76 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
+import tkinter.messagebox
+import tkinter.simpledialog
+
+tkinter.messagebox.showinfo("showinfo", "This is an info msg")
+
+tkinter.messagebox.showwarning("showwarning", "This is a warning")
+
+tkinter.messagebox.showerror("showerror", "This is an error")
+
+isYes = tkinter.messagebox.askyesno("ashyesno", "Continue?")
+print(isYes)
+
+isOK = tkinter.messagebox.askokcancel("ashokcancle", "OK?")
+print(isOK)
+
+isYesNoCancel = tkinter.messagebox.askyesnocancel(
+    "askyesnocancel", "Yes, No, Cancel?") 
+print(isYesNoCancel)
+
+name = tkinter.simpledialog.askstring(
+    "askstring", "Enter your name")
+print(name)
+
+age = tkinter.simpledialog.askinteger(
+    "askinteger", "Enter your age")
+print(age)
+
+weight = tkinter.simpledialog.askfloat(
+    "askfloat", "Enter your weight")
+print(weight)
+
+print("------------------------------------------------------------")  # 60個
+
+# tkinterMessageBox.py
+
+import tkinter.messagebox									# 匯入tkMessageBox模組
+
+def cmd():										# 按鈕訊息處理函數
+	global n									# 使用全局變數n
+	global buttontext								# 使用全局變數buttontext
+	n = n + 1
+	if n == 1:									# 判斷n的值，顯示不同的訊息框
+		tkinter.messagebox.askokcancel('Python Tkinter','askokcancel')		# 使用askokcancel函數
+		buttontext.set('skquestion')						# 變更按鈕上的文字
+	elif n == 2:
+		tk.messagebox.askquestion('Python Tkinter','skquestion')			# 使用askquestion函數
+		buttontext.set('askyesno')
+	elif n == 3:
+		tk.messagebox.askyesno('Python Tkinter','askyesno')			# 使用askyesno函數
+		buttontext.set('showerror')
+	elif n == 4:
+		tk.messagebox.showerror('Python Tkinter','showerror')			# 使用showerror函數
+		buttontext.set('showinfo')
+	elif n == 5:
+		tk.messagebox.showinfo('Python Tkinter','showinfo')			# 使用showinfo函數
+		buttontext.set('showwarning')
+	else :
+		n = 0									# 將n給予值為0重新開始循環
+		tk.messagebox.showwarning('Python Tkinter','showwarning')		# 使用showwarning函數
+		buttontext.set('askokcancel')
+n = 0											# 為n賦初值
+root = tk.Tk()
+buttontext = tk.StringVar()							# 產生關聯按鈕文字的變數
+buttontext.set('askokcancel')								# 設定buttontext值
+button = tk.Button(root,								# 產生按鈕
+		textvariable = buttontext,						# 設定關聯變數
+		command = cmd)								# 設定事件處理函數
+button.pack()
+
+root.mainloop()										# 進入訊息循環
 
 print("------------------------------------------------------------")  # 60個
 

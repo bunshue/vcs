@@ -1,6 +1,5 @@
 """
 # 以Menu元件建置功能表
-# 以Menu元件建置功能表
 
 
 """
@@ -1179,6 +1178,52 @@ menu_help.add_command(label = '原創者聲明', command = Copyright)
 mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+
+# tkinterMenu.py
+
+root = tk.Tk()
+
+menu = tk.Menu(root)						# 產生選單
+submenu = tk.Menu(menu, tearoff=0)					# 產生下拉選單
+submenu.add_command(label="Open")					# 向下拉選單中加入Open指令
+submenu.add_command(label="Save")					# 向下拉選單中加入Save指令
+submenu.add_command(label="Close")					# 向下拉選單中加入Close指令
+menu.add_cascade(label="File", menu=submenu)				# 將下拉選單新增到選單中
+submenu = tk.Menu(menu, tearoff=0)					# 產生下拉選單
+submenu.add_command(label="Copy")					# 向下拉選單中加入Copy指令
+submenu.add_command(label="Paste")					# 向下拉選單中加入Paste指令
+submenu.add_separator()							# 向下拉選單中加入分隔符
+submenu.add_command(label="Cut")					# 向下拉選單中加入Cut指令
+menu.add_cascade(label="Edit", menu=submenu)				# 將下拉選單新增到選單中
+submenu = tk.Menu(menu, tearoff=0)					# 產生下拉選單
+submenu.add_command(label="About")					# 向下拉選單中加入About指令
+menu.add_cascade(label="Help", menu=submenu)				# 將下拉選單新增到選單中
+root.config(menu=menu)
+
+root.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("右鍵選單")
+# tkinterPopupmenu.py
+
+root = tk.Tk()
+
+menu = tk.Menu(root, tearoff=0)				# 建立選單
+menu.add_command(label="Copy")					# 向出現式選單中加入Copy指令
+menu.add_command(label="Paste")					# 向出現式選單中加入Paste指令
+menu.add_separator()						# 向出現式選單中加入分隔符
+menu.add_command(label="Cut")					# 向出現式選單中加入Cut指令
+def popupmenu(event):						# 定義右鍵事件處理函數
+    menu.post(event.x_root, event.y_root)			# 顯示選單
+root.bind("<Button-3>", popupmenu)				# 在主視窗中綁定右鍵事件
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 

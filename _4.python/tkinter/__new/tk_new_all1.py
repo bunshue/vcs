@@ -1985,6 +1985,411 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
+import sys
+import tkinter as tk
+
+print("------------------------------------------------------------")  # 60個
+
+# tkinterCheck.py
+
+root = tk.Tk()
+r = tk.StringVar()						# 使用StringVar產生字串變數用於單選框元件
+r.set('1')							# 起始化變數值
+radio = tk.Radiobutton(root,				# 產生單選框元件
+			variable = r, 				# 設定單選框關聯的變數
+			value = '1',				# 設定勾選單選框時其所關聯的變數的值，即r的值
+			text = 'Radio1')			# 設定單選框顯示的文字
+radio.pack()
+radio = tk.Radiobutton(root,
+			variable = r,
+			value = '2',				# 當勾選該單選框時r的值為2
+			text = 'Radio2' )
+radio.pack()
+radio = tk.Radiobutton(root,
+			variable = r,
+			value = '3',				# 當勾選該單選框時r的值為3
+			text = 'Radio3' )
+radio.pack()
+radio = tk.Radiobutton(root,
+			variable = r,
+			value = '4',				# 當勾選該單選框時r的值為4
+			text = 'Radio4' )
+radio.pack()
+c = tk.IntVar()						# 使用IntVar產生整數變數用於復選框
+c.set(1)
+check = tk.Checkbutton(root,
+			text = 'Checkbutton',			# 設定復選框的文字
+			variable = c,				# 設定復選框關聯的變數
+			onvalue = 1,				# 當勾選復選框時，c的值為1
+			offvalue = 2)				# 當未勾選復選框時，c的值為2
+check.pack()
+
+root.mainloop()
+print(r.get())							# 輸出r的值
+print(c.get())						# 輸出c的值
+
+print("------------------------------------------------------------")  # 60個
+
+# tkinterDialog.py
+
+import tkinter.messagebox									# 匯入tkMesageBox模組
+
+class MyDialog:										# 定義交談視窗類別
+    def __init__(self, root):
+        self.top = tk.Toplevel(root)					# 產生Toplevel元件
+        label = tk.Label(self.top, text='Please Input')	# 產生標簽元件
+        label.pack()
+        self.entry = tk.Entry(self.top)					# 產生文字框元件
+        self.entry.pack()
+        self.entry.focus()							# 讓文字框獲得焦點
+        button = tk.Button(self.top, text='Ok',command=self.Ok)					# 設定按鈕事件處理函數
+        button.pack()
+    def Ok(self):									# 定義按鈕事件處理函數
+        self.input = self.entry.get()						# 取得文字框中內容，儲存為input
+        self.top.destroy()							# 銷毀交談視窗
+    def get(self):									# 傳回在文字框輸入的內容
+        return self.input
+
+class MyButton():									# 定義按鈕類別
+    def __init__(self, root, type):							# 按鈕起始化
+        self.root = root							# 儲存父視窗參考
+        if type == 0:								# 根據型態建立不同按鈕
+            self.button = tk.Button(root, text='Create',command = self.Create)				# 設定Create按鈕的事件處理函數
+        else:
+            self.button = tk.Button(root, text='Quit',command = self.Quit)				# 設定Quit按鈕的事件處理函數
+        self.button.pack()
+    def Create(self):								# Create按鈕的事件處理函數
+        d = MyDialog(self.root)							# 產生交談視窗
+        self.button.wait_window(d.top)						# 等待交談視窗結束
+        tk.messagebox.showinfo('Python','You input:\n' + d.get())		# 取得交談視窗中輸入值，並輸出
+    def Quit(self):									# Quit按鈕的事件處理函數
+        self.root.quit()							# 離開主視窗
+
+root = tk.Tk()									# 產生主視窗
+
+MyButton(root,0)									# 產生Create按鈕
+MyButton(root,1)									# 產生Quit按鈕
+
+root.mainloop()										# 進入訊息循環
+
+print("------------------------------------------------------------")  # 60個
+
+# tkinterEntry.py
+
+root = tk.Tk()
+entry1 = tk.Entry(root,						# 產生單行文字框元件
+			show = '*',)					# 輸入文字框中的字元被顯示為“*”
+entry1.pack()								# 將文字框新增到視窗中
+entry2 = tk.Entry(root,
+			show = '#',					# 輸入文字框中的字元被顯示為“#”
+			width = 50)					# 將文字框的寬度設定為50
+entry2.pack()
+entry3 = tk.Entry(root,
+			bg = 'red',					# 將文字框的背景色設定為紅色
+			fg = 'blue')					# 將文字框的前景色設定為藍色
+entry3.pack()
+entry4 = tk.Entry(root,
+			selectbackground = 'red',			# 將勾選文字的背景色設定為紅色
+			selectforeground = 'gray')			# 將勾選文字的前景色設定為灰色
+entry4.pack()
+entry5 = tk.Entry(root,
+			state = tk.DISABLED)			# 將文字框設定為禁用
+entry5.pack()
+edit1 = tk.Text(root,						# 產生多行文字框元件
+			selectbackground = 'red',			# 將勾選文字的背景色設定為紅色
+			selectforeground = 'gray')			# 將勾選文字的前景色設定為灰色
+edit1.pack()
+
+root.mainloop()								# 進入訊息循環
+
+print("------------------------------------------------------------")  # 60個
+
+# tkinterLabel.py
+
+root = tk.Tk()
+
+label1 = tk.Label(root,
+			anchor = tk.E,				# 設定文字的位置
+			bg = 'blue',					# 設定標簽背景色
+			fg = 'red',					# 設定標簽前景色
+			text = 'Python',				# 設定標簽中的文字
+			width = 30,					# 設定標簽的寬度為30
+			height = 5)					# 設定標簽的的高度為5
+label1.pack()
+label2 = tk.Label(root,
+			text = 'Python GUI\nTkinter',			# 設定標簽中的文字，在字串中使用換行符
+			justify = tk.LEFT,				# 設定多行文字為齊左
+			width = 30,
+			height = 5)
+label2.pack()
+label3 = tk.Label(root,
+			text = 'Python GUI\nTkinter',
+			justify = tk.RIGHT,			# 設定多行文字為齊右
+			width = 30,
+			height = 5)
+label3.pack()
+label4 = tk.Label(root,
+			text = 'Python GUI\nTkinter',
+			justify = tk.CENTER,			# 設定多行文字為劇中對齊
+			width = 30,
+			height = 5)
+label4.pack()
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# tkinterRCButton.py
+
+root = tk.Tk()
+
+r = tk.StringVar()						# 使用StringVar產生字串變數用於單選框元件
+r.set('1')							# 起始化變數值
+radio = tk.Radiobutton(root,				# 產生單選框元件
+			variable = r, 				# 設定單選框關聯的變數
+			value = '1',				# 設定勾選單選框時其所關聯的變數的值，即r的值
+			indicatoron = 0,			# 將單選框繪製成按鈕型態
+			text = 'Radio1')			# 設定單選框顯示的文字
+radio.pack()
+radio = tk.Radiobutton(root,
+			variable = r,
+			value = '2',				# 當勾選該單選框時r的值為2
+			indicatoron = 0,
+			text = 'Radio2' )
+radio.pack()
+radio = tk.Radiobutton(root,
+			variable = r,
+			value = '3',				# 當勾選該單選框時r的值為3
+			indicatoron = 0,
+			text = 'Radio3' )
+radio.pack()
+radio = tk.Radiobutton(root,
+			variable = r,
+			value = '4',				# 當勾選該單選框時r的值為4
+			indicatoron = 0,
+			text = 'Radio4' )
+radio.pack()
+c = tk.IntVar()						# 使用IntVar產生整數變數用於復選框
+c.set(1)
+check = tk.Checkbutton(root,
+			text = 'Checkbutton',			# 設定復選框的文字
+			variable = c,				# 設定復選框關聯的變數
+			indicatoron = 0,			# 將復選框繪製成按鈕型態
+			onvalue = 1,				# 當勾選復選框時，c的值為1
+			offvalue = 2)				# 當未勾選復選框時，c的值為2
+check.pack()
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+# tkinterSimpleDialog.py
+
+import tkinter.simpledialog									# 匯入tkSimpleDialog模組
+
+def InStr():										# 按鈕事件處理函數
+	r = tkinter.simpledialog.askstring('Python Tkinter',					# 建立字串輸入交談視窗
+			'Input String',							# 指定提示字元
+			initialvalue='Tkinter')						# 指定起始化文字
+	print(r)									# 輸出傳回值
+def InInt():										# 按鈕事件處理函數
+	r = tkinter.simpledialog.askinteger('Python Tkinter','Input Integer')			# 建立整數輸入交談視窗
+	print(r)
+def InFlo():										# 按鈕事件處理函數
+	r = tkinter.simpledialog.askfloat('Python Tkinter','Input Float')			# 建立浮點數輸入交談視窗
+	print(r)
+root = tk.Tk()
+button1 = tk.Button(root,text = 'Input String',					# 建立按鈕
+		command = InStr)							# 指定按鈕事件處理函數
+button1.pack(side='left')
+button2 = tk.Button(root,text = 'Input Integer',
+		command = InInt)							# 指定按鈕事件處理函數
+button2.pack(side='left')
+button2 = tk.Button(root,text = 'Input Float',
+		command = InFlo)							# 指定按鈕事件處理函數
+button2.pack(side='left')
+
+root.mainloop()										# 進入訊息循環
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+
+window = Tk()
+window.title("")             # 視窗標題
+
+slider1 = Scale(window,from_=0,to=10).pack()
+slider2 = Scale(window,from_=0,to=10,
+                length=300,orient=HORIZONTAL).pack()
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+    
+root = Tk()
+root.title("")                     # 視窗標題
+
+slider = Scale(root,
+               from_=0,                 # 起點值
+               to=10,                   # 終點值
+               troughcolor="yellow",    # 槽的顏色
+               width="30",              # 槽的高度
+               tickinterval=2,          # 刻度
+               label="My Scale",        # Scale標籤
+               length=300,              # Scale長度
+               orient=HORIZONTAL)       # 水平
+slider.pack()
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def printInfo():
+    print("垂直捲軸值 = %d, 水平捲軸值 = %d" % (sV.get(),sH.get()))
+    
+root = Tk()
+root.title("")                           # 視窗標題
+
+sV = Scale(root,label="垂直",from_=0,to=10)   # 建立垂直卷軸
+sV.set(5)                                     # 設定垂直卷軸初值是5
+sV.pack()
+
+sH = Scale(root,label="水平",from_=0,to=10,   # 建立水平卷軸
+                length=300,orient=HORIZONTAL)
+sH.set(3)                                     # 設定水平捲軸初值是3
+sH.pack()
+
+Button(root,text="Print",command=printInfo).pack()
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def bgUpdate(source):
+    # 更改視窗背景顏色
+    red = rSlider.get()                             # 讀取red值
+    green = gSlider.get()                           # 讀取green值
+    blue = bSlider.get( )                           # 讀取blue值
+    print("R=%d, G=%d, B=%d" % (red, green, blue))  # 列印色彩數值
+    myColor = "#%02x%02x%02x" % (red, green, blue)  # 將顏色轉成16進位字串
+    root.config(bg=myColor)                         # 設定視窗背景顏色
+    
+root = Tk()
+root.title("")
+root.geometry("360x240")
+
+rSlider = Scale(root, from_=0, to=255, command=bgUpdate)
+gSlider = Scale(root, from_=0, to=255, command=bgUpdate)
+bSlider = Scale(root, from_=0, to=255, command=bgUpdate)
+gSlider.set(125)                                    # 設定green初值是125
+rSlider.grid(row=0, column=0)                       # row=0, col=0
+gSlider.grid(row=0, column=1)                       # row=0, col=1
+bSlider.grid(row=0, column=3)                       # row=0, col=2
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+def bgUpdate(source):
+    # 更改視窗背景顏色
+    red = rSlider.get()                             # 讀取red值
+    green = gSlider.get()                           # 讀取green值
+    blue = bSlider.get( )                           # 讀取blue值
+    print("R=%d, G=%d, B=%d" % (red, green, blue))  # 列印色彩數值
+    myColor = "#%02x%02x%02x" % (red, green, blue)  # 將顏色轉成16進位字串
+    root.config(bg=myColor)                         # 設定視窗背景顏色
+    
+root = Tk()
+root.title("")
+root.geometry("360x240")
+
+fm = Frame(root)                                    # 建立框架
+fm.pack()                                           # 自動安置在上方中央
+
+rSlider = Scale(fm, from_=0, to=255, command=bgUpdate)
+gSlider = Scale(fm, from_=0, to=255, command=bgUpdate)
+bSlider = Scale(fm, from_=0, to=255, command=bgUpdate)
+gSlider.set(125)                                    # 設定green初值是125
+rSlider.grid(row=0, column=0)                       # row=0, col=0
+gSlider.grid(row=0, column=1)                       # row=0, col=1
+bSlider.grid(row=0, column=3)                       # row=0, col=2
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+    
+root = Tk()
+root.title("")             # 視窗標題
+root.geometry("300x100")
+spin = Spinbox(root,from_=10,to=30,increment=2)
+spin.pack(pady=20)
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def printInfo():        # 列印顯示的值
+    print(sp.get())
+    
+root = Tk()
+root.title("")
+
+sp = Spinbox(root,from_ = 0,to = 10,           
+             command = printInfo)
+sp.pack(pady=10,padx=10)
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def printInfo():                        # 列印顯示的值
+    print(sp.get())
+    
+root = Tk()
+root.title("")
+
+sp = Spinbox(root,
+             values=(10,38,170,101),    # 以元組儲存數值
+             command=printInfo)
+sp.pack(pady=10,padx=10)
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def printInfo():                        # 列印顯示的值
+    print(sp.get())
+    
+root = Tk()
+root.title("")
+cities = ("新加坡","上海","東京")       # 以元組儲存數值
+
+sp = Spinbox(root,
+             values=cities,    
+             command=printInfo)
+sp.pack(pady=10,padx=10)
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+
+
 
 
 print("------------------------------------------------------------")  # 60個
