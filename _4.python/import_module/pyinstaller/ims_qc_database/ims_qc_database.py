@@ -141,7 +141,7 @@ def import_csv_data():
         process_csv_file1(filename, source_dir)
         process_csv_file3(filename)
         #若能正確處理完畢, 再搬到old資料夾
-        shutil.move(filename, target_dir)
+        #shutil.move(filename, target_dir)
 
     message = "匯入生產資料 完成\n"
     print(message)
@@ -171,6 +171,7 @@ def export_data_to_excel0(csv_data):
     sheet = workbook[sheetname]
 
     length = len(csv_data)
+    font = openpyxl.styles.Font(color="FF0000")
     if length > 0:
         for cc in csv_data:
             #print(cc)
@@ -190,6 +191,7 @@ def export_data_to_excel0(csv_data):
                 elif time == "13":
                     sheet.cell(11, 2+day).value = float(data1)
                     sheet.cell(12, 2+day).value = float(data2)
+                    sheet.cell(12, 2+day).font = font
                     sheet.cell(13, 2+day).value = float(data3)
                 elif time == "17":
                     sheet.cell(14, 2+day).value = float(data1)

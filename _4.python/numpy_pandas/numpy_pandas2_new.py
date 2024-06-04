@@ -540,7 +540,8 @@ pd.set_option('display.max_columns', 60)
 plt.rcParams['figure.figsize'] = (15, 5)
 
 # because of mixed types we specify dtype to prevent any errors
-complaints = pd.read_csv('data/311-service-requests.csv', dtype='unicode')
+csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+complaints = pd.read_csv(csv_filename, dtype='unicode')
 
 print(complaints)
 complaints['Complaint Type']
@@ -566,7 +567,8 @@ pd.set_option('display.max_columns', 60)
 
 
 # because of mixed types we specify dtype to prevent any errors
-complaints = pd.read_csv('data/311-service-requests.csv', dtype='unicode')
+csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+complaints = pd.read_csv(csv_filename, dtype='unicode')
 
 is_noise = complaints['Complaint Type'] == "Noise - Street/Sidewalk"
 noise_complaints = complaints[is_noise]
@@ -852,20 +854,20 @@ pd.set_option('display.max_columns', 60)
 
 print('------------------------------------------------------------')	#60個
 
-
 #NYC 311 service request dataset
-requests = pd.read_csv('data/311-service-requests.csv', dtype='unicode')
+csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+requests = pd.read_csv(csv_filename, dtype='unicode')
 
 cc = requests['Incident Zip'].unique()
 print(cc)
-
 
 print('------------------------------------------------------------')	#60個
 
 #Fixing the nan values and string/float confusion
 
 na_values = ['NO CLUE', 'N/A', '0']
-requests = pd.read_csv('data/311-service-requests.csv', na_values=na_values, dtype={'Incident Zip': str})
+csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+requests = pd.read_csv(csv_filename, na_values=na_values, dtype={'Incident Zip': str})
 
 cc = requests['Incident Zip'].unique()
 print(cc)
@@ -923,7 +925,8 @@ print('------------------------------------------------------------')	#60個
 #Putting it together
 
 na_values = ['NO CLUE', 'N/A', '0']
-requests = pd.read_csv('data/311-service-requests.csv', 
+csv_filename = 'C:/_git/big_files/311-service-requests.csv'
+requests = pd.read_csv(csv_filename, 
                        na_values=na_values, 
                        dtype={'Incident Zip': str})
 

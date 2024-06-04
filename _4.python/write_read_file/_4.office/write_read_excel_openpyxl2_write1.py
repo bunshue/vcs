@@ -76,7 +76,7 @@ sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即�
 
 """
 
-filename_w = "tmp_excel_openpyxl_a.xlsx"
+filename_w = "tmp_excel_openpyxl_a_sheet.xlsx"
 workbook.save(filename_w)  # 儲存檔案
 print("建立 xlsx OK, 檔案 : " + filename_w)
 

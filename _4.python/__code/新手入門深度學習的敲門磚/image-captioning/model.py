@@ -62,6 +62,7 @@ class CaptionDecoder(nn.Module):
 
             # Download pre-trained GloVe embeddings, turn into Word2Vec format
             glove_file = './data/glove.6B.{}d.txt'.format(self.embedding_dim)
+            print(glove_file)
             word2vec_glove_file = './data/glove.6B.{}d.word2vec.txt'.format(self.embedding_dim)
             if not os.path.isfile(word2vec_glove_file):
                 glove2word2vec(glove_file, word2vec_glove_file)
