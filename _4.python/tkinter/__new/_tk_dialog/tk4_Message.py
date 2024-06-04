@@ -4,6 +4,8 @@ import tkinter as tk
 import tkinter.messagebox
 import tkinter.simpledialog
 
+from tkinter import *
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -52,10 +54,57 @@ print("------------------------------------------------------------")  # 60個
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 
+print("------------------------------------------------------------")  # 60個
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
+print("------------------------------------------------------------")  # 60個
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+print("------------------------------------------------------------")  # 60個
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+root = Tk()
+
+myText = "2016年12月,我一個人訂了機票和船票,開始我的南極旅行"
+msg = Message(root,bg="yellow",text=myText, font="times 12 italic")
+msg.pack(padx=10,pady=10)
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+root = Tk()
+
+var = StringVar()
+msg = Message(root,textvariable=var,relief=RAISED)
+var.set("2016年12月,我一個人訂了機票和船票,開始我的南極旅行")
+msg.pack(padx=10,pady=10)
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+root = Tk()
+
+var = StringVar()
+msg = Message(root,textvariable=var,relief=RAISED)
+var.set("2016年12月,我一個人訂了機票和船票,開始我的南極旅行")
+msg.config(bg="yellow")
+msg.pack(padx=10,pady=10)
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
 
 
 print("------------------------------------------------------------")  # 60個

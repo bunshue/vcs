@@ -7,7 +7,7 @@ from tkinter import ttk
 from tkinter import scrolledtext
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -234,7 +234,6 @@ btnRead.pack(pady=20)
 
 window.mainloop()
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 print('調色盤')
@@ -271,9 +270,118 @@ b.set(255)
 
 window.mainloop()
 
-
-
 print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+
+window = Tk()
+window.title("")             # 視窗標題
+
+slider1 = Scale(window,from_=0,to=10).pack()
+slider2 = Scale(window,from_=0,to=10,
+                length=300,orient=HORIZONTAL).pack()
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+    
+root = Tk()
+root.title("")                     # 視窗標題
+
+slider = Scale(root,
+               from_=0,                 # 起點值
+               to=10,                   # 終點值
+               troughcolor="yellow",    # 槽的顏色
+               width="30",              # 槽的高度
+               tickinterval=2,          # 刻度
+               label="My Scale",        # Scale標籤
+               length=300,              # Scale長度
+               orient=HORIZONTAL)       # 水平
+slider.pack()
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def printInfo():
+    print("垂直捲軸值 = %d, 水平捲軸值 = %d" % (sV.get(),sH.get()))
+    
+root = Tk()
+root.title("")                           # 視窗標題
+
+sV = Scale(root,label="垂直",from_=0,to=10)   # 建立垂直卷軸
+sV.set(5)                                     # 設定垂直卷軸初值是5
+sV.pack()
+
+sH = Scale(root,label="水平",from_=0,to=10,   # 建立水平卷軸
+                length=300,orient=HORIZONTAL)
+sH.set(3)                                     # 設定水平捲軸初值是3
+sH.pack()
+
+Button(root,text="Print",command=printInfo).pack()
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def bgUpdate(source):
+    # 更改視窗背景顏色
+    red = rSlider.get()                             # 讀取red值
+    green = gSlider.get()                           # 讀取green值
+    blue = bSlider.get( )                           # 讀取blue值
+    print("R=%d, G=%d, B=%d" % (red, green, blue))  # 列印色彩數值
+    myColor = "#%02x%02x%02x" % (red, green, blue)  # 將顏色轉成16進位字串
+    root.config(bg=myColor)                         # 設定視窗背景顏色
+    
+root = Tk()
+root.title("")
+root.geometry("360x240")
+
+rSlider = Scale(root, from_=0, to=255, command=bgUpdate)
+gSlider = Scale(root, from_=0, to=255, command=bgUpdate)
+bSlider = Scale(root, from_=0, to=255, command=bgUpdate)
+gSlider.set(125)                                    # 設定green初值是125
+rSlider.grid(row=0, column=0)                       # row=0, col=0
+gSlider.grid(row=0, column=1)                       # row=0, col=1
+bSlider.grid(row=0, column=3)                       # row=0, col=2
+
+root.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+def bgUpdate(source):
+    # 更改視窗背景顏色
+    red = rSlider.get()                             # 讀取red值
+    green = gSlider.get()                           # 讀取green值
+    blue = bSlider.get( )                           # 讀取blue值
+    print("R=%d, G=%d, B=%d" % (red, green, blue))  # 列印色彩數值
+    myColor = "#%02x%02x%02x" % (red, green, blue)  # 將顏色轉成16進位字串
+    root.config(bg=myColor)                         # 設定視窗背景顏色
+    
+root = Tk()
+root.title("")
+root.geometry("360x240")
+
+fm = Frame(root)                                    # 建立框架
+fm.pack()                                           # 自動安置在上方中央
+
+rSlider = Scale(fm, from_=0, to=255, command=bgUpdate)
+gSlider = Scale(fm, from_=0, to=255, command=bgUpdate)
+bSlider = Scale(fm, from_=0, to=255, command=bgUpdate)
+gSlider.set(125)                                    # 設定green初值是125
+rSlider.grid(row=0, column=0)                       # row=0, col=0
+gSlider.grid(row=0, column=1)                       # row=0, col=1
+bSlider.grid(row=0, column=3)                       # row=0, col=2
+
+root.mainloop()
+
 
 
 

@@ -1,3 +1,4 @@
+'''
 import sys
 import tkinter as tk
 import tkinter.ttk as ttk
@@ -171,16 +172,120 @@ print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
-
-
-print("------------------------------------------------------------")  # 60個
-
+'''
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+
+from  tkinter.ttk  import *
+
+
+def comboSelection(event):                      # 顯示選項
+    labelVar.set(var.get())                     # 同步標籤內容                      
+    
+root = Tk()
+root.geometry("300x120")                    
+
+var = StringVar()       
+cb = Combobox(root,textvariable=var)            # 建立Combobox
+cb["value"] = ("Python","Java","C#","C")        # 設定選項內容
+cb.current(0)                                   # 設定預設選項
+cb.bind("<<ComboboxSelected>>",comboSelection)  # 綁定
+cb.pack(side=LEFT,pady=10,padx=10)
+
+labelVar = StringVar()
+label = Label(root,textvariable=labelVar)       # 建立Label
+labelVar.set(var.get())                         # 設定Label的初值
+label.pack(side=LEFT)
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from  tkinter.ttk  import *
+ 
+root = Tk()
+root.geometry("300x120")                    
+
+var = StringVar()       
+cb = Combobox(root,textvariable=var,        # 建立Combobox
+              value=("Python","Java","C#","C"))   
+cb.pack(pady=10)
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from  tkinter.ttk  import *
+ 
+root = Tk()
+root.geometry("300x120")                    
+
+var = StringVar()       
+cb = Combobox(root,textvariable=var)        # 建立Combobox
+cb["value"] = ("Python","Java","C#","C")    # 設定選項內容  
+cb.pack(pady=10)
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from  tkinter.ttk  import *
+ 
+root = Tk()
+root.geometry("300x120")                    
+
+var = StringVar()       
+cb = Combobox(root,textvariable=var)        # 建立Combobox
+cb["value"] = ("Python","Java","C#","C")    # 設定選項內容
+cb.current(0)                               # 設定預設選項
+cb.pack(pady=10)
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from  tkinter.ttk  import *
+ 
+root = Tk()
+root.geometry("300x120")                    
+
+var = StringVar()       
+cb = Combobox(root,textvariable=var)        # 建立Combobox
+cb["value"] = ("Python","Java","C#","C")    # 設定選項內容
+var.set("Python")                           # 設定預設選項
+cb.pack(pady=10)
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from  tkinter.ttk  import *
+def printSelection():                               # 列印選項
+    print(var.get())
+    
+root = Tk()
+root.geometry("300x120")                    
+
+var = StringVar()       
+cb = Combobox(root,textvariable=var)                # 建立Combobox
+cb["value"] = ("Python","Java","C#","C")            # 設定選項內容
+cb.current(0)                                       # 設定預設選項
+cb.pack(pady=10)
+
+btn = Button(root,text="Print",command=printSelection) # 建立按鈕
+btn.pack(pady=10,anchor=S,side=BOTTOM)
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
 
 
 

@@ -3,7 +3,7 @@
 
 
 """
-
+'''
 import sys
 import tkinter as tk
 from tkinter import ttk
@@ -184,8 +184,8 @@ menu3 = tk.Menu(menu, tearoff = 0)
 menu.add_cascade(label = "Help", menu = menu3)
 menu3.add_command(label = "About...", command = callback)
 
+print("------------------------------------------------------------")  # 60個
 
-'''
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -215,9 +215,9 @@ menu1.add_command(label = 'supermode', command = supermode)
 menu.add_cascade(label = 'Operation', menu = menu1)
 
 window.config(menu = menu)
-'''
 
-'''
+print("------------------------------------------------------------")  # 60個
+
 import tkinter.filedialog as fd
 
 window = tk.Tk()
@@ -270,9 +270,6 @@ menu2.add_command(label = 'find', command = find)
 
 window.config(menu = menu)
 
-
-
-'''
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -1221,9 +1218,309 @@ def popupmenu(event):						# 定義右鍵事件處理函數
 root.bind("<Button-3>", popupmenu)				# 在主視窗中綁定右鍵事件
 
 root.mainloop()
+'''
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import *
+
+from tkinter import messagebox
+
+def hello():
+    messagebox.showinfo("Hello","歡迎使用功能表")
+
+root = Tk()
+root.geometry("300x180")
+
+# 建立最上層功能表
+menubar = Menu(root)
+menubar.add_command(label="Hello!",command=hello)
+menubar.add_command(label="Exit!",command=root.destroy)
+root.config(menu=menubar)           # 顯示功能表物件
+
+root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+from tkinter import messagebox
+
+def newFile():
+    messagebox.showinfo("New File","開新檔案")
+
+root = Tk()
+root.geometry("300x180")
+
+menubar = Menu(root)                # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = Menu(menubar)               
+menubar.add_cascade(label="File",menu=filemenu)
+# 在File功能表內建立功能表清單
+filemenu.add_command(label="New File",command=newFile)
+filemenu.add_command(label="Exit!",command=root.destroy)
+root.config(menu=menubar)           # 顯示功能表物件
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import messagebox
+
+def newFile():
+    messagebox.showinfo("New File","開新檔案")
+
+root = Tk()
+root.geometry("300x180")
+
+menubar = Menu(root)                # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = Menu(menubar,tearoff=False)               
+menubar.add_cascade(label="File",menu=filemenu)
+# 在File功能表內建立功能表清單
+filemenu.add_command(label="New File",command=newFile)
+filemenu.add_command(label="Exit!",command=root.destroy)
+root.config(menu=menubar)           # 顯示功能表物件
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import messagebox
+
+def newFile():
+    messagebox.showinfo("New File","開新檔案")
+def openFile():
+    messagebox.showinfo("New File","開啟舊檔")
+def saveFile():
+    messagebox.showinfo("New File","儲存檔案")
+def saveAsFile():
+    messagebox.showinfo("New File","另存新檔")
+    
+root = Tk()
+root.geometry("300x180")
+
+menubar = Menu(root)                # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = Menu(menubar)               
+menubar.add_cascade(label="File",menu=filemenu)
+# 在File功能表內建立功能表清單
+filemenu.add_command(label="New File",command=newFile)
+filemenu.add_command(label="Open File",command=openFile)
+filemenu.add_separator()
+filemenu.add_command(label="Save",command=saveFile)
+filemenu.add_command(label="Save As",command=saveAsFile)
+filemenu.add_separator()
+filemenu.add_command(label="Exit!",command=root.destroy)
+root.config(menu=menubar)           # 顯示功能表物件
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import messagebox
+
+def newFile():
+    messagebox.showinfo("New File","開新檔案")
+def openFile():
+    messagebox.showinfo("New File","開啟舊檔")
+def saveFile():
+    messagebox.showinfo("New File","儲存檔案")
+def saveAsFile():
+    messagebox.showinfo("New File","另存新檔")
+def aboutMe():
+    messagebox.showinfo("New File","洪錦魁著")    
+    
+root = Tk()
+root.geometry("300x180")
+
+menubar = Menu(root)                # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = Menu(menubar)               
+menubar.add_cascade(label="File",menu=filemenu)
+# 在File功能表內建立功能表清單
+filemenu.add_command(label="New File",command=newFile)
+filemenu.add_command(label="Open File",command=openFile)
+filemenu.add_separator()
+filemenu.add_command(label="Save",command=saveFile)
+filemenu.add_command(label="Save As",command=saveAsFile)
+filemenu.add_separator()
+filemenu.add_command(label="Exit!",command=root.destroy)
+# 建立功能表類別物件,和將此功能表類別命名Help 
+helpmenu = Menu(menubar)               
+menubar.add_cascade(label="Help",menu=helpmenu)
+# 在Help功能表內建立功能表清單
+helpmenu.add_command(label="About me",command=aboutMe)
+root.config(menu=menubar)           # 顯示功能表物件
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import messagebox
+
+def newFile():
+    messagebox.showinfo("New File","開新檔案")
+def openFile():
+    messagebox.showinfo("New File","開啟舊檔")
+def saveFile():
+    messagebox.showinfo("New File","儲存檔案")
+def saveAsFile():
+    messagebox.showinfo("New File","另存新檔")
+def aboutMe():
+    messagebox.showinfo("New File","洪錦魁著")    
+    
+root = Tk()
+root.geometry("300x180")
+
+menubar = Menu(root)                # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = Menu(menubar)               
+menubar.add_cascade(label="File",menu=filemenu,underline=0)
+# 在File功能表內建立功能表清單
+filemenu.add_command(label="New File",command=newFile,underline=0)
+filemenu.add_command(label="Open File",command=openFile,underline=0)
+filemenu.add_separator()
+filemenu.add_command(label="Save",command=saveFile,underline=0)
+filemenu.add_command(label="Save As",command=saveAsFile,underline=5)
+filemenu.add_separator()
+filemenu.add_command(label="Exit!",command=root.destroy,underline=0)
+# 建立功能表類別物件,和將此功能表類別命名Help 
+helpmenu = Menu(menubar)               
+menubar.add_cascade(label="Help",menu=helpmenu,underline=0)
+# 在Help功能表內建立功能表清單
+helpmenu.add_command(label="About me",command=aboutMe,underline=1)
+root.config(menu=menubar)           # 顯示功能表物件
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import messagebox
+def newFile():
+    messagebox.showinfo("New File","開新檔案")    
+    
+root = Tk()
+root.geometry("300x180")
+
+menubar = Menu(root)                # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = Menu(menubar)               
+menubar.add_cascade(label="File",menu=filemenu,underline=0)
+# 在File功能表內建立功能表清單
+filemenu.add_command(label="New File",command=newFile,
+                     accelerator="Ctrl+N")
+filemenu.add_separator()
+filemenu.add_command(label="Exit!",command=root.destroy,underline=0)
+root.config(menu=menubar)           # 顯示功能表物件
+root.bind("<Control-N>",            # 快捷鍵綁定
+          lambda event:messagebox.showinfo("New File","開新檔案"))
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import messagebox
+def findNext():
+    messagebox.showinfo("Find Next","尋找下一筆")
+def findPre():
+    messagebox.showinfo("Find Pre","尋找上一筆")
+
+root = Tk()
+root.geometry("300x180")
+
+menubar = Menu(root)                        # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = Menu(menubar)               
+menubar.add_cascade(label="File",menu=filemenu,underline=0)
+# 在File功能表內建立功能表清單
+# 首先在File功能表內建立find子功能表物件
+findmenu = Menu(filemenu,tearoff=False)     # 取消分隔線
+findmenu.add_command(label="Find Next",command=findNext)
+findmenu.add_command(label="Find Pre",command=findPre)
+filemenu.add_cascade(label="Find",menu=findmenu)
+# 下列是增加分隔線和建立Exit!指令
+filemenu.add_separator()
+filemenu.add_command(label="Exit!",command=root.destroy,underline=0)
+
+root.config(menu=menubar)                   # 顯示功能表物件
+
+root.mainloop()
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import messagebox
+
+def minimizeIcon():                     # 縮小視窗為圖示
+    root.iconify()
+def showPopupMenu(event):               # 顯示彈出功能表
+    popupmenu.post(event.x_root,event.y_root)
+
+root = Tk()
+root.geometry("300x180")
+
+popupmenu = Menu(root,tearoff=False)    # 建立彈出功能表物件
+# 在彈出功能表內建立2個指令清單
+popupmenu.add_command(label="Minimize",command=minimizeIcon)
+popupmenu.add_command(label="Exit",command=root.destroy)
+# 按滑鼠右鍵綁定顯示彈出功能表
+root.bind("<Button-3>",showPopupMenu)
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def status():                       # 設定是否顯示狀態列
+    if demoStatus.get():
+        statusLabel.pack(side=BOTTOM,fill=X)
+    else:
+        statusLabel.pack_forget()
+       
+root = Tk()
+root.geometry("300x180")
+
+menubar = Menu(root)                # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = Menu(menubar,tearoff=False)               
+menubar.add_cascade(label="File",menu=filemenu)
+# 在File功能表內建立功能表清單Exit
+filemenu.add_command(label="Exit",command=root.destroy)
+# 建立功能表類別物件,和將此功能表類別命名View 
+viewmenu = Menu(menubar,tearoff=False)               
+menubar.add_cascade(label="View",menu=viewmenu)
+# 在View功能表內建立Check menu button
+demoStatus = BooleanVar()
+demoStatus.set(True)
+viewmenu.add_checkbutton(label="Status",command=status,
+                         variable=demoStatus)
+root.config(menu=menubar)           # 顯示功能表物件
+
+statusVar = StringVar()
+statusVar.set("顯示")
+statusLabel = Label(root,textvariable=statusVar,relief="raised")
+statusLabel.pack(side=BOTTOM,fill=X)
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+       
+root = Tk()
+root.geometry("300x180")
+
+menubar = Menu(root)                    # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = Menu(menubar,tearoff=False)               
+menubar.add_cascade(label="File",menu=filemenu)
+# 在File功能表內建立功能表清單Exit
+filemenu.add_command(label="Exit",command=root.destroy)
+
+# 建立工具列
+toolbar = Frame(root,relief=RAISED,borderwidth=3)
+# 在工具列內建立按紐
+sunGif = PhotoImage(file="sun.gif")
+exitBtn = Button(toolbar,image=sunGif,command=root.destroy)
+exitBtn.pack(side=LEFT,padx=3,pady=3)   # 包裝按鈕
+toolbar.pack(side=TOP,fill=X)           # 包裝工具列
+root.config(menu=menubar)               # 顯示功能表物件
+
+root.mainloop()
 
 
 

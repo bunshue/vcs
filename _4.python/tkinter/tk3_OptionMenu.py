@@ -1,9 +1,14 @@
+'''
 """
 OptionMenu
 
 """
 
+
 import tkinter as tk
+
+print("------------------------------------------------------------")  # 60個
+
 
 print('下拉式選單')
 
@@ -45,5 +50,82 @@ total=0     #點餐的總計
 
 window.mainloop()
 
+
+'''
+
+
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+root = Tk()
+root.geometry("300x180")
+
+var = StringVar(root)
+optionmenu = OptionMenu(root,var,"Python","Java","C")
+optionmenu.pack()
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+root = Tk()
+root.geometry("300x180")
+
+omTuple = ("Python","Java","C")             # tuple儲存表單項目
+var = StringVar(root)
+optionmenu = OptionMenu(root,var,*omTuple)  # 建立OptionMenu
+optionmenu.pack()
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+root = Tk()
+root.geometry("300x180")
+
+omTuple = ("Python","Java","C")             # tuple儲存表單項目
+var = StringVar(root)
+var.set("Python")                           # 建立預設選項
+optionmenu = OptionMenu(root,var,*omTuple)  # 建立OptionMenu
+optionmenu.pack()
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+root = Tk()
+root.geometry("300x180")
+
+omTuple = ("Python","Java","C")             # tuple儲存表單項目
+var = StringVar(root)
+var.set(omTuple[0])                         # 建立預設選項
+optionmenu = OptionMenu(root,var,*omTuple)  # 建立OptionMenu
+optionmenu.pack()
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+def printSelection():
+    print("The selection is : ", var.get())
+    
+root = Tk()
+root.geometry("300x180")
+
+omTuple = ("Python","Java","C")             # tuple儲存表單項目
+var = StringVar(root)
+var.set("Python")                           # 建立預設選項
+optionmenu = OptionMenu(root,var,*omTuple)  # 建立OptionMenu
+optionmenu.pack(pady=10)
+
+btn = Button(root,text="Print",command=printSelection)
+btn.pack(pady=10,anchor=S,side=BOTTOM)
+
+root.mainloop()
+
+print("------------------------------------------------------------")  # 60個
 
 

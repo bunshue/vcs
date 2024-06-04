@@ -12,6 +12,106 @@ import openpyxl
 
 print("------------------------------------------------------------")  # 60個
 
+print("openpyxl test 11 加入圖表1 雷達圖")
+
+filename_r = "data/radar_chart.xlsx"
+workbook = openpyxl.load_workbook(filename_r)
+
+sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
+
+data = openpyxl.chart.Reference(sheet, min_col=2, max_col=4, min_row=1, max_row=sheet.max_row)
+labels = openpyxl.chart.Reference(sheet, min_col=1, min_row=2, max_row=sheet.max_row)
+
+chart = openpyxl.chart.RadarChart()
+# 預設為standard
+# filled為填色
+# chart.type = "filled"
+chart.title = "各部門業績"
+chart.add_data(data, titles_from_data=True)
+chart.set_categories(labels)
+
+sheet.add_chart(chart, "F2")
+
+filename_w = "tmp_excel_openpyxl_e_add_radar_chart.xlsx"
+workbook.save(filename_w)  # 儲存檔案
+print("建立 xlsx OK, 檔案 : " + filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("openpyxl test 11 加入圖表2 統計圖")
+
+# 官方範例
+
+workbook = openpyxl.Workbook(write_only=True)
+sheet = workbook.create_sheet()
+
+rows = [
+    ("Number", "Batch 1", "Batch 2"),
+    (2, 10, 30),
+    (3, 40, 60),
+    (4, 50, 70),
+    (5, 20, 10),
+    (6, 10, 40),
+    (7, 50, 30),
+]
+
+
+for row in rows:
+    sheet.append(row)
+
+chart1 = openpyxl.chart.BarChart()
+chart1.type = "col"
+chart1.style = 10
+chart1.title = "Bar Chart"
+chart1.y_axis.title = "Test number"
+chart1.x_axis.title = "Sample length (mm)"
+
+data = openpyxl.chart.Reference(sheet, min_col=2, min_row=1, max_row=7, max_col=3)
+cats = openpyxl.chart.Reference(sheet, min_col=1, min_row=2, max_row=7)
+chart1.add_data(data, titles_from_data=True)
+chart1.set_categories(cats)
+chart1.shape = 4
+sheet.add_chart(chart1, "E1")
+
+import copy
+
+chart2 = copy.deepcopy(chart1)
+chart2.style = 11
+chart2.type = "bar"
+chart2.title = "Horizontal Bar Chart"
+
+sheet.add_chart(chart2, "N1")
+
+
+chart3 = copy.deepcopy(chart1)
+chart3.type = "col"
+chart3.style = 12
+chart3.grouping = "stacked"
+chart3.overlap = 100
+chart3.title = "Stacked Chart"
+
+sheet.add_chart(chart3, "E15")
+
+chart4 = copy.deepcopy(chart1)
+chart4.type = "bar"
+chart4.style = 13
+chart4.grouping = "percentStacked"
+chart4.overlap = 100
+chart4.title = "Percent Stacked Chart"
+
+sheet.add_chart(chart4, "N15")
+
+filename_w = "tmp_excel_openpyxl_g_bar.xlsx"
+workbook.save(filename_w)
+print("建立 xlsx OK, 檔案 : " + filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 # line_chart.py
 
 from openpyxl.chart import LineChart, Reference

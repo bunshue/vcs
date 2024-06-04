@@ -80,16 +80,21 @@ def button15Click():
     print('你按了button15')
 
 def button20Click():
-    print('你按了button10')
+    print('你按了button20')
+    ret = tk.messagebox.askyesno("python", "是否離開程式?")
+    if ret == True:
+        window.destroy()                  # 結束程式
+    else:
+        return
 
 def button21Click():
-    print('你按了button11')
+    print('你按了button21')
 
 def button22Click():
-    print('你按了button12')
+    print('你按了button22')
 
 def button23Click():
-    print('你按了button13')
+    print('你按了button23')
 
 def button24Click():
     print('你按了button24')
@@ -167,7 +172,7 @@ button13.place(x = x_st + dx * 3, y = y_st + dy * 1)
 button14.place(x = x_st + dx * 4, y = y_st + dy * 1)
 button15.place(x = x_st + dx * 5, y = y_st + dy * 1)
 
-button20 = tk.Button(window, width = w, height = h, command = button20Click, text = '----')
+button20 = tk.Button(window, width = w, height = h, command = button20Click, text = '詢問是否離開程式')
 button20.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button21 = tk.Button(window, width = w, height = h, command = button21Click, text = '----')
 button21.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
@@ -290,10 +295,15 @@ button2.pack()
 print("------------------------------------------------------------")  # 60個
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-
-
-
-
+""" 詢問是否離開程式
+def callback():
+    res = tk.messagebox.askokcancel("OKCANCEL","結束或取消?")
+    if res == True:
+        window.destroy()
+    else:
+        return
+window.protocol("WM_DELETE_WINDOW",callback)  # 更改協定綁定
+"""
 
 window.mainloop()
 
