@@ -1,7 +1,13 @@
+"""
+# 會動的tk範例
+
+"""
+
 import sys
 import time
 import random
 import tkinter as tk
+import tkinter.ttk as ttk
 
 print("------------------------------------------------------------")  # 60個
 
@@ -102,6 +108,164 @@ canvas.bind_all('<KeyPress-Up>', ballMove)
 canvas.bind_all('<KeyPress-Down>', ballMove)
 
 window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+window.title("draw oval")  
+
+xWidth = 400
+yHeight = 250
+canvas = tk.Canvas(window, width=xWidth, height=yHeight)
+canvas.pack()
+        
+for i in range(20):
+    canvas.create_oval(10+i*5, 10+i*5, xWidth-10-i*5, yHeight-10-i*5)
+        
+window.mainloop() 
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+window.title("ex19_4.py") 
+        
+xWidth = 300
+yHeight = 100
+canvas = tk.Canvas(window, width=xWidth, height=yHeight)
+canvas.pack()
+        
+x = 0
+yMsg = 45
+canvas.create_text(x, yMsg, text="王者歸來", tags="msg")
+        
+dx = 5
+while True:
+    canvas.move("msg", dx, 0)  
+    canvas.after(100)       
+    canvas.update()         
+    if x < xWidth:
+        x += dx             
+    else:
+        x = 0               
+        canvas.delete("msg")                             
+        canvas.create_text(x, yMsg, text = "王者歸來", tags = "msg")
+                
+window.mainloop() 
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+使用tkinter创建GUI
+- 在窗口上制作动画
+"""
+
+# 播放动画效果的函数
+def play_animation():
+    canvas.move(oval, 2, 2)
+    canvas.update()
+    window.after(50, play_animation)
+
+
+x = 10
+y = 10
+
+window = tk.Tk()
+
+window.geometry('600x600')
+window.title('动画效果')
+window.resizable(False, False)
+#fail window.wm_attributes('-topmost', 1)
+canvas = tk.Canvas(window, width=600, height=600, bd=0, highlightthickness=0)
+canvas.create_rectangle(0, 0, 600, 600, fill='gray')
+oval = canvas.create_oval(10, 10, 60, 60, fill='red')
+canvas.pack()
+window.update()
+play_animation()
+
+window.mainloop()
+
+# 请思考如何让小球碰到屏幕的边界就弹回
+# 请思考如何用面向对象的编程思想对上面的代码进行封装
+
+print("------------------------------------------------------------")  # 60個
+
+import math
+
+# 建立主視窗
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "移動測試"
+window.title(title)
+
+#公用變數
+width = 300
+height = 300
+canvas = tk.Canvas(window, bg = 'pink', width = width, height = height)
+canvas.pack()
+
+radius = 20
+x1 = 0 # Starting x position
+y1 = 100
+sleepTime = 100 #Sleep 一段時間(msec)
+canvas.create_oval(x1 - radius, y1 - radius, x1 + radius, y1 + radius, fill = 'red', tags = 'moving1')
+
+x2 = x1
+y2 = 200
+canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'red', tags = 'moving2')
+
+dx = 10
+
+count = 0
+msg = tk.StringVar()
+msg.set('')
+
+label1 = tk.Label(window, textvariable = msg, fg = 'red', font=("新細明體", 20))
+label1.pack() 
+
+while True:
+    #移動法
+    canvas.move('moving1', dx, 0) #移動那個被畫上去的移動物件
+    canvas.after(sleepTime) #Sleep 一段時間(msec)
+    canvas.update() # Update canvas
+    count = count + 1
+    msg.set(count)
+    
+    if x1 < width:
+        x1 += dx  # Set new position 
+    else:
+        x1 = 0
+        canvas.delete('moving1') #刪除所有移動物件
+        #畫 移動物件
+        canvas.create_oval(x1 - radius, y1 - radius, x1 + radius, y1 + radius, fill = 'red', tags = 'moving1')
+
+    #重畫法
+    canvas.delete('moving2') #刪除所有移動物件
+    y2 = 200 + 50 * math.sin(count / 5)
+    x2 = x1
+    canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'red', tags = 'moving2')
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+import time
+import random
+import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
 
@@ -221,7 +385,6 @@ while True:
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
 
 class Ball:
     def __init__(self, canvas, color, winW, winH):
@@ -682,157 +845,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-
-window.title("draw oval")  
-
-xWidth = 400
-yHeight = 250
-canvas = tk.Canvas(window, width=xWidth, height=yHeight)
-canvas.pack()
-        
-for i in range(20):
-    canvas.create_oval(10+i*5, 10+i*5, xWidth-10-i*5, yHeight-10-i*5)
-        
-window.mainloop() 
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-window.title("ex19_4.py") 
-        
-xWidth = 300
-yHeight = 100
-canvas = tk.Canvas(window, width=xWidth, height=yHeight)
-canvas.pack()
-        
-x = 0
-yMsg = 45
-canvas.create_text(x, yMsg, text="王者歸來", tags="msg")
-        
-dx = 5
-while True:
-    canvas.move("msg", dx, 0)  
-    canvas.after(100)       
-    canvas.update()         
-    if x < xWidth:
-        x += dx             
-    else:
-        x = 0               
-        canvas.delete("msg")                             
-        canvas.create_text(x, yMsg, text = "王者歸來", tags = "msg")
-                
-window.mainloop() 
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-使用tkinter创建GUI
-- 在窗口上制作动画
-"""
-
-# 播放动画效果的函数
-def play_animation():
-    canvas.move(oval, 2, 2)
-    canvas.update()
-    window.after(50, play_animation)
-
-
-x = 10
-y = 10
-
-window = tk.Tk()
-
-window.geometry('600x600')
-window.title('动画效果')
-window.resizable(False, False)
-#fail window.wm_attributes('-topmost', 1)
-canvas = tk.Canvas(window, width=600, height=600, bd=0, highlightthickness=0)
-canvas.create_rectangle(0, 0, 600, 600, fill='gray')
-oval = canvas.create_oval(10, 10, 60, 60, fill='red')
-canvas.pack()
-window.update()
-play_animation()
-
-window.mainloop()
-
-# 请思考如何让小球碰到屏幕的边界就弹回
-# 请思考如何用面向对象的编程思想对上面的代码进行封装
-
-print("------------------------------------------------------------")  # 60個
-
-import math
-
-# 建立主視窗
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "移動測試"
-window.title(title)
-
-#公用變數
-width = 300
-height = 300
-canvas = tk.Canvas(window, bg = 'pink', width = width, height = height)
-canvas.pack()
-
-radius = 20
-x1 = 0 # Starting x position
-y1 = 100
-sleepTime = 100 #Sleep 一段時間(msec)
-canvas.create_oval(x1 - radius, y1 - radius, x1 + radius, y1 + radius, fill = 'red', tags = 'moving1')
-
-x2 = x1
-y2 = 200
-canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'red', tags = 'moving2')
-
-dx = 10
-
-count = 0
-msg = tk.StringVar()
-msg.set('')
-
-label1 = tk.Label(window, textvariable = msg, fg = 'red', font=("新細明體", 20))
-label1.pack() 
-
-while True:
-    #移動法
-    canvas.move('moving1', dx, 0) #移動那個被畫上去的移動物件
-    canvas.after(sleepTime) #Sleep 一段時間(msec)
-    canvas.update() # Update canvas
-    count = count + 1
-    msg.set(count)
-    
-    if x1 < width:
-        x1 += dx  # Set new position 
-    else:
-        x1 = 0
-        canvas.delete('moving1') #刪除所有移動物件
-        #畫 移動物件
-        canvas.create_oval(x1 - radius, y1 - radius, x1 + radius, y1 + radius, fill = 'red', tags = 'moving1')
-
-    #重畫法
-    canvas.delete('moving2') #刪除所有移動物件
-    y2 = 200 + 50 * math.sin(count / 5)
-    x2 = x1
-    canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'red', tags = 'moving2')
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 # Return a random color string in the form #RRGGBB
 def getRandomColor():
     color = "#"
@@ -901,6 +913,93 @@ sleepTime = 100 # Set a sleep time, in msec
 animate()
 
 window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+
+# 傳回球的隨機顏色
+def getColor():
+    colorlist = ['red', 'green', 'blue', 'aqua', 'gold', 'purple']
+    return random.choice(colorlist)
+        
+# 定義Ball類別
+class Ball:
+    def __init__(self):
+        self.x = width / 2              # 發球的x軸座標 
+        self.y = 0                      # 發球的y軸座標 
+        self.dx = 3                     # 每次移動x距離
+        self.dy = 3                     # 每次移動y距離
+        self.radius = 5                 # 求半徑
+        self.color = getColor()         # 隨機取得球的顏色
+
+def addBall():                          # 增加球
+    ballList.append(Ball())
+
+def removeBall():                       # 刪除串列最後一個球 
+    ballList.pop()
+
+def stop():                             # 動畫停止
+    global ballRunning
+    ballRunning = True
+    
+def resume():                           # 恢復動畫
+    global ballRunning
+    ballRunning = False
+    animate()   
+                                
+def animate():                          # 球體移動
+    global ballRunning
+    while not ballRunning:
+        canvas.after(sleepTime)         
+        canvas.update()                 # 更新
+        canvas.delete("ball")             
+        for ball in ballList:           # 更新所有球
+            redisplayBall(ball)
+    
+def redisplayBall(ball):                # 重新顯示球
+    if ball.x > width or ball.x < 0:
+        ball.dx = -ball.dx            
+    if ball.y > height or ball.y < 0:
+        ball.dy = -ball.dy   
+    ball.x += ball.dx
+    ball.y += ball.dy
+    canvas.create_oval(ball.x - ball.radius, ball.y - ball.radius,
+                       ball.x + ball.radius, ball.y + ball.radius,
+                       fill = ball.color, tags = "ball")
+     
+window = tk.Tk()
+
+ballList = []                           # 建立球的串列
+width, height = 400, 260
+canvas = tk.tk.Canvas(window, width=width, height=height)
+canvas.pack()
+        
+frame = tk.Frame(tk)                       # 建立下方功能紐
+frame.pack()
+btnStop = tk.Button(frame, text = "暫停", command = stop)
+btnStop.pack(side = tk.LEFT)
+btnResume = tk.Button(frame, text = "恢復",command = resume)
+btnResume.pack(side = tk.LEFT)
+btnAdd = tk.Button(frame, text = "增加球", command = addBall)
+btnAdd.pack(side = tk.LEFT)
+btnRemove = tk.Button(frame, text = "減少球", command = removeBall)
+btnRemove.pack(side = tk.LEFT)
+btnExit = tk.Button(frame, text = "結束", command=tk.destroy)
+btnExit.pack(side = tk.LEFT)
+        
+sleepTime = 50                          # 動畫速度 
+ballRunning = False
+animate()
+        
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 print("------------------------------------------------------------")  # 60個
 

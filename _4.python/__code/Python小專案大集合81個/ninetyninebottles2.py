@@ -1,17 +1,9 @@
-"""niNety-nniinE BoOttels of Mlik On teh waLl
-By Al Sweigart al@inventwithpython.com
-Print the full lyrics to one of the longest songs ever! The song
-gets sillier and sillier with each verse. Press Ctrl-C to stop.
-This code is available at https://nostarch.com/big-book-small-python-programming
-Tags: short, scrolling, word"""
-
 import random, sys, time
 
 # Set up the constants:
 # (!) Try changing both of these to 0 to print all the lyrics at once.
 SPEED = 0.01  # The pause in between printing letters.
-LINE_PAUSE = 1.5  # The pause at the end of each line.
-
+LINE_PAUSE = 0.05  # The pause at the end of each line.
 
 def slowPrint(text, pauseAmount=0.1):
     """Slowly print out the characters in text one at a time."""
@@ -26,9 +18,7 @@ print('niNety-nniinE BoOttels, by Al Sweigart al@inventwithpython.com')
 print()
 print('(Press Ctrl-C to quit.)')
 
-time.sleep(2)
-
-bottles = 99  # This is the starting number of bottles.
+bottles = 10  # This is the starting number of bottles.
 
 # This list holds the string used for the lyrics:
 lines = [' bottles of milk on the wall,',

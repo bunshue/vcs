@@ -22,7 +22,7 @@ import math
 import random
 import requests
 import numpy as np
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 def printlocal():
@@ -828,7 +828,7 @@ print(x & y)
 print(x ^ y)
 print(x | y)
 print(~x)
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 info = [
@@ -839,37 +839,6 @@ info = [
 
 for book, author, price in info:
     print("%10s %3s" % (book, author), " 書籍訂價:", price)
-
-
-info = [
-    ["C程式設計", "朱大峰", "480"],
-    ["Python程式設計", "吳志明", "500"],
-    ["Java程式設計", "許伯如", "540"],
-]
-
-for book, author, price in info:
-    print("%10s %3s" % (book, author), " 書籍訂價:", price)
-
-result = lambda x: 3 * x - 1  # lambda()函數
-print(result(3))  # 輸出數值8
-
-print("------------------------------------------------------------")  # 60個
-
-
-def formula(x, y):  # 自訂函數
-    return 3 * x + 2 * y
-
-
-result = lambda x: 3 * x - 1  # lambda()函數
-print(result(3))  # 輸出數值8
-
-
-def formula(x, y):  # 自訂函數
-    return 3 * x + 2 * y
-
-
-formula = lambda x, y: 3 * x + 2 * y  # 表示lambda有二個參數
-print(formula(5, 10))  # 傳入兩個數值讓lambda()函數做運算，輸出數值35
 
 print("------------------------------------------------------------")  # 60個
 
@@ -998,32 +967,6 @@ for number in range(100):
 
 print("------------------------------------------------------------")  # 60個
 
-# lambda 函式簡介
-
-power = lambda x: x**2
-print(power(10))
-
-add = lambda a, b: a + b
-print(add(5, 3))
-
-print("------------------------------------------------------------")  # 60個
-
-# 在 lambda 內使用一行 if 條件判斷式
-
-absolute = lambda x: x if x >= 0 else -x
-
-func = lambda x: (x**2 - 40 * x + 350) if 10 <= x < 30 else 50
-
-# str.split()：分割字串為 list 元素
-
-sentence = "This is a test sentence"
-
-print(sentence.split(" "))
-
-["This", "is", "a", "test", "sentence"]
-
-print("------------------------------------------------------------")  # 60個
-
 a = [1, -2, 3, -4, 5]
 
 new = []
@@ -1036,30 +979,6 @@ print(new)
 str_list = ["This", "is", "a", "test", "sentence"]
 
 print(list(map(str.upper, str_list)))
-
-print("------------------------------------------------------------")  # 60個
-
-# 用 flter() 篩選容器元素
-
-str_list = ["This", "is", "a", "test", "sentence"]
-
-print(list(filter(lambda x: len(x) >= 3, str_list)))
-
-["This", "test", "sentence"]
-
-# 再探 sorted()：自訂目標容器的排序方式
-
-str_list = ["This", "is", "a", "test", "sentence"]
-
-print(sorted(str_list, key=len, reverse=True))
-
-nest_list = [[0, 9], [1, 8], [2, 7], [3, 6], [4, 5]]
-
-print(sorted(nest_list))
-
-print(sorted(nest_list, key=lambda x: x[1]))
-
-print(sorted(nest_list, key=lambda x: x[1], reverse=True))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1291,30 +1210,6 @@ print("c是否為複數？", isinstance(1 + 3j, complex))
 
 print("------------------------------------------------------------")  # 60個
 
-info = [
-    ["C程式設計", "朱大峰", "480"],
-    ["Python程式設計", "吳志明", "500"],
-    ["Java程式設計", "許伯如", "540"],
-]
-
-for book, author, price in info:
-    print("%10s %3s" % (book, author), " 書籍訂價:", price)
-
-print("------------------------------------------------------------")  # 60個
-
-result = lambda x: 3 * x - 1  # lambda()函數
-print(result(3))  # 輸出數值8
-
-print("------------------------------------------------------------")  # 60個
-
-
-def formula(x, y):  # 自訂函數
-    return 3 * x + 2 * y
-
-
-formula = lambda x, y: 3 * x + 2 * y  # 表示lambda有二個參數
-print(formula(5, 10))  ##傳入兩個數值讓lambda()函數做運算，輸出數值35
-
 print("------------------------------------------------------------")  # 60個
 
 print("a", "b", "c", sep="|")
@@ -1445,6 +1340,7 @@ sc = [
     [4, "洪冰雨", 92, 94, 90, 0, 0, 0],
     [5, "洪星宇", 92, 97, 80, 0, 0, 0],
 ]
+
 # 計算總分與平均
 print("填入總分與平均")
 for i in range(len(sc)):
@@ -1452,38 +1348,13 @@ for i in range(len(sc)):
     sc[i][6] = round((sc[i][5] / 3), 1)  # 填入平均
     print(sc[i])
 sc.sort(key=lambda x: x[5], reverse=True)  # 依據總分高往低排序
+
 # 以下填入名次
 print("填入名次")
 for i in range(len(sc)):  # 填入名次
     sc[i][7] = i + 1
     print(sc[i])
-# 以下依座號排序
-sc.sort(key=lambda x: x[0])  # 依據座號排序
-print("最後成績單")
-for i in range(len(sc)):
-    print(sc[i])
 
-print("------------------------------------------------------------")  # 60個
-
-sc = [
-    [1, "洪錦魁", 80, 95, 88, 0, 0, 0],
-    [2, "洪冰儒", 98, 97, 96, 0, 0, 0],
-    [3, "洪雨星", 91, 93, 95, 0, 0, 0],
-    [4, "洪冰雨", 92, 94, 90, 0, 0, 0],
-    [5, "洪星宇", 92, 97, 90, 0, 0, 0],
-]
-# 計算總分與平均
-print("填入總分與平均")
-for i in range(len(sc)):
-    sc[i][5] = sum(sc[i][2:5])  # 填入總分
-    sc[i][6] = round((sc[i][5] / 3), 1)  # 填入平均
-    print(sc[i])
-sc.sort(key=lambda x: x[5], reverse=True)  # 依據總分高往低排序
-# 以下填入名次
-print("填入名次")
-for i in range(len(sc)):  # 填入名次
-    sc[i][7] = i + 1
-    print(sc[i])
 # 以下依座號排序
 sc.sort(key=lambda x: x[0])  # 依據座號排序
 print("最後成績單")
@@ -2648,15 +2519,6 @@ print("--------------------------------")
 
 print("------------------------------------------------------------")  # 60個
 
-info = [
-    ["C程式設計", "朱大峰", "480"],
-    ["Python程式設計", "吳志明", "500"],
-    ["Java程式設計", "許伯如", "540"],
-]
-
-for book, author, price in info:
-    print("%10s %3s" % (book, author), " 書籍訂價:", price)
-
 print("------------------------------------------------------------")  # 60個
 
 original = [
@@ -2805,32 +2667,6 @@ print("a= %d b= %d c= %d" % (a, b, c))
 
 print("------------------------------------------------------------")  # 60個
 
-cal_dict = {
-    "加": lambda x, y: x + y,
-    "減": lambda x, y: x - y,
-    "乘": lambda x, y: x * y,
-    "除": lambda x, y: x / y,
-}
-
-
-def calculator(x, operator, y):
-    return cal_dict.get(operator, lambda: None)(x, y)
-
-
-print(calculator(6, "乘", 7))
-
-calculator = {
-    "加": lambda x, y: x + y,
-    "減": lambda x, y: x - y,
-    "乘": lambda x, y: x * y,
-    "除": lambda x, y: x / y,
-}
-
-default = lambda: None
-
-print(calculator.get("加", default)(1, 2))
-print(calculator.get("乘", default)(3, 5))
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -2844,37 +2680,6 @@ def square1(x):
 print(square1(10))
 
 print("------------------------------------------------------------")  # 60個
-
-# 定義lambda函數
-square2 = lambda x: x**2
-
-# 輸出平方值
-print(square2(10))
-
-print("------------------------------------------------------------")  # 60個
-
-result = lambda x: 3 * x - 1  # lambda()函數
-print(result(3))  # 輸出數值8
-
-print("------------------------------------------------------------")  # 60個
-
-
-def formula(x, y):  # 自訂函數
-    return 3 * x + 2 * y
-
-
-formula = lambda x, y: 3 * x + 2 * y  # 表示lambda有二個參數
-print(formula(5, 10))  ##傳入兩個數值讓lambda()函數做運算，輸出數值35
-
-print("------------------------------------------------------------")  # 60個
-
-total = lambda a, b: a + b
-num1 = 0
-num2 = 0
-num1 = 123
-num2 = 456
-print("數值 1+數值 2 =", total(num1, num2))
-
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -3523,24 +3328,6 @@ for drink in enumerate(drinks, 10):  # 數值初始是10
     print(drink)
 for count, drink in enumerate(drinks, 10):
     print(count, drink)
-
-print("------------------------------------------------------------")  # 60個
-
-mylist = [5, 10, 15, 20, 25, 30]
-
-oddlist = list(filter(lambda x: (x % 2 == 1), mylist))
-
-# 輸出奇數串列
-print("奇數串列: ", oddlist)
-
-print("------------------------------------------------------------")  # 60個
-
-mylist = [5, 10, 15, 20, 25, 30]
-
-squarelist = list(map(lambda x: x**2, mylist))
-
-# 輸出串列元素的平方值
-print("串列的平方值: ", squarelist)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -5356,60 +5143,6 @@ for count, score in enumerate(scores, 1):  # 初始值是 1
 
 print("------------------------------------------------------------")  # 60個
 
-sc = [
-    [1, "洪錦魁", 80, 95, 88, 0, 0, 0],
-    [2, "洪冰儒", 98, 97, 96, 0, 0, 0],
-    [3, "洪雨星", 91, 93, 95, 0, 0, 0],
-    [4, "洪冰雨", 92, 94, 90, 0, 0, 0],
-    [5, "洪星宇", 92, 97, 80, 0, 0, 0],
-]
-# 計算總分與平均
-print("填入總分與平均")
-for i in range(len(sc)):
-    sc[i][5] = sum(sc[i][2:5])  # 填入總分
-    sc[i][6] = round((sc[i][5] / 3), 1)  # 填入平均
-    print(sc[i])
-sc.sort(key=lambda x: x[5], reverse=True)  # 依據總分高往低排序
-# 以下填入名次
-print("填入名次")
-for i in range(len(sc)):  # 填入名次
-    sc[i][7] = i + 1
-    print(sc[i])
-# 以下依座號排序
-sc.sort(key=lambda x: x[0])  # 依據座號排序
-print("最後成績單")
-for i in range(len(sc)):
-    print(sc[i])
-
-print("------------------------------------------------------------")  # 60個
-
-sc = [
-    [1, "洪錦魁", 80, 95, 88, 0, 0, 0],
-    [2, "洪冰儒", 98, 97, 96, 0, 0, 0],
-    [3, "洪雨星", 91, 93, 95, 0, 0, 0],
-    [4, "洪冰雨", 92, 94, 90, 0, 0, 0],
-    [5, "洪星宇", 92, 97, 90, 0, 0, 0],
-]
-# 計算總分與平均
-print("填入總分與平均")
-for i in range(len(sc)):
-    sc[i][5] = sum(sc[i][2:5])  # 填入總分
-    sc[i][6] = round((sc[i][5] / 3), 1)  # 填入平均
-    print(sc[i])
-sc.sort(key=lambda x: x[5], reverse=True)  # 依據總分高往低排序
-# 以下填入名次
-print("填入名次")
-for i in range(len(sc)):  # 填入名次
-    sc[i][7] = i + 1
-    print(sc[i])
-# 以下依座號排序
-sc.sort(key=lambda x: x[0])  # 依據座號排序
-print("最後成績單")
-for i in range(len(sc)):
-    print(sc[i])
-
-print("------------------------------------------------------------")  # 60個
-
 x = 1000000
 pi = 0
 for i in range(1, x + 1):
@@ -7027,15 +6760,6 @@ print("{:#x}".format(12345))  # 顯示0x3039
 print("------------------------------------------------------------")  # 60個
 
 #改成動物資料
-print(" 姓名    國文    英文    總分")
-print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
-print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
-print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
-print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
-
-print("------------------------------------------------------------")  # 60個
-
-#改成動物資料
 soldier0 = {"tag": "red", "score": 3, "speed": "slow"}  # 建立小兵
 soldier1 = {"tag": "blue", "score": 5, "speed": "medium"}
 soldier2 = {"tag": "green", "score": 10, "speed": "fast"}
@@ -7688,69 +7412,8 @@ print("x = ", x)
 
 print("------------------------------------------------------------")  # 60個
 
-from functools import reduce
-
-
-def strToInt(s):
-    def charToNum(s):
-        return {
-            "0": 0,
-            "1": 1,
-            "2": 2,
-            "3": 3,
-            "4": 4,
-            "5": 5,
-            "6": 6,
-            "7": 7,
-            "8": 8,
-            "9": 9,
-        }[s]
-
-    return reduce(lambda x, y: 10 * x + y, map(charToNum, s))
-
-
-string = "5487"
-x = strToInt(string) + 10
-print("x = ", x)
 
 print("------------------------------------------------------------")  # 60個
-
-str_len = lambda x: len(x)
-strs = ["abc", "ab", "abcde"]
-strs.sort(key=str_len)
-print(strs)
-
-print("------------------------------------------------------------")  # 60個
-
-strs = ["abc", "ab", "abcde"]
-strs.sort(key=lambda x: len(x))
-print(strs)
-
-print("------------------------------------------------------------")  # 60個
-
-sc = [["John", 80], ["Tom", 90], ["Kevin", 77]]
-sc.sort(key=lambda x: x[1])
-print(sc)
-
-print("------------------------------------------------------------")  # 60個
-
-sc = [["John", 80], ["Tom", 90], ["Kevin", 77]]
-newsc = sorted(sc, key=lambda x: x[1])
-print(newsc)
-
-print("------------------------------------------------------------")  # 60個
-
-sc = {"John": 80, "Tom": 90, "Kevin": 77}
-newsc1 = sorted(sc.items(), key=lambda x: x[0])  # 依照key排序
-print("依照人名排序")
-print(newsc1)
-
-newsc2 = sorted(sc.items(), key=lambda x: x[1])  # 依照value排序
-print("依照分數排序")
-print(newsc2)
-
-print("------------------------------------------------------------")  # 60個
-
 
 def fun(arg):
     pass
@@ -8467,7 +8130,15 @@ print("%3s  %4d    %4d    %4d     %3.1f" % ("洪雨星", 96, 95, 191, 191 / 2))
 print("%3s  %4d    %4d    %4d     %3.1f" % ("洪冰雨", 92, 88, 180, 180 / 2))
 print("%3s  %4d    %4d    %4d     %3.1f" % ("洪星宇", 93, 97, 190, 190 / 2))
 
-print('ccccccccccc')
+print("------------------------------------------------------------")  # 60個
+
+#改成動物資料
+print(" 姓名    國文    英文    總分")
+print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
+print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
+print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
+print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
+
 print("------------------------------------------------------------")  # 60個
 
 wd = """The Zen of Python, by Tim Peters
@@ -8815,15 +8486,6 @@ def mysum(nLst):
 
 data = [5, 7, 9, 15, 21, 6]
 print(f"mysum = {mysum(data)}")
-
-print("------------------------------------------------------------")  # 60個
-
-mylist = [5, 10, 15, 20, 25, 30]
-
-evenlist = list(filter(lambda x: (x % 2 == 0), mylist))
-
-# 輸出偶數串列
-print("偶數串列: ", evenlist)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -12024,6 +11686,12 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 

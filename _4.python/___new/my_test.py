@@ -130,20 +130,17 @@ data_list = [14, 11, 11, 13, 11, 12]
 print(data_list)
 """
 
-length = len(data_list)
-
-data_list_same = []
-for i in range(length):
-    data_list_same.append(False)
+# 建立一個長度N的陣列 都放著 False
+data_list_same = N * [False]
 print(data_list_same)
 
 compoare_count = 0
-for i in range(length):
+for i in range(N):
     same_data = False
     if data_list_same[i] == True:
         print('已經被找到過, 跳過')
         continue
-    for j in range(i + 1 , length):
+    for j in range(i + 1 , N):
         print('compare ', i, j, end = " ")
         compoare_count += 1
         if data_list[i] == data_list[j]:

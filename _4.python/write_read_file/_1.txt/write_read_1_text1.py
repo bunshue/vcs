@@ -466,46 +466,6 @@ disp_temp(climate_data[4])
 
 print('------------------------------------------------------------')	#60個
 
-print('各種讀取檔案的方法')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/Presidents.txt'
-
-# Open file for input
-infile = open(filename, "r")
-print("(1) Using read(): ")
-print(infile.read())
-infile.close() # Close the input file
-
-# Open file for input
-infile = open(filename, "r")
-print("\n(2) Using read(number): ")
-s1 = infile.read(4)
-print(s1)
-s2 = infile.read(10)
-print(repr(s2))
-infile.close() # Close the input file
-
-# Open file for input
-infile = open(filename, "r")
-print("\n(3) Using readline(): ")
-line1 = infile.readline()
-line2 = infile.readline()
-line3 = infile.readline()
-line4 = infile.readline()
-print(repr(line1))
-print(repr(line2))
-print(repr(line3))
-print(repr(line4))
-infile.close() # Close the input file
-
-# Open file for input
-infile = open(filename, "r")
-print("\n(4) Using readlines(): ")
-print(infile.readlines())
-infile.close() # Close the input file
-
-print('------------------------------------------------------------')	#60個
-
 print('指定編碼讀取檔案')
 
 stopWord_filename = 'C:/_git/vcs/_1.data/______test_files1/_jieba/stopWord_test.txt'  #設定自訂詞庫
@@ -525,8 +485,6 @@ with open('data/temperature.txt') as infile:
 print('取得溫度資料 :\n', temperatures)
 
 print('------------------------------------------------------------')	#60個
-
-
 
 filename_rw2 = 'tmp_write_read_text08.txt'
 
@@ -624,22 +582,6 @@ infile.close() # Close the file
 """
 
 print('------------------------------------------------------------')	#60個
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/Presidents.txt'
-
-fp = open(filename, "r")
-zops = fp.readlines()
-fp.close()
-
-i=1
-print("檔案內容")
-for zen in zops:
-    print("第 {} 行 : {}".format(i, zen), end="")
-    i += 1
-
-print()
-
-
 
 print('讀出檔案 1 英文')
 filename = 'C:/_git/vcs/_1.data/______test_files1/demo_en.txt'

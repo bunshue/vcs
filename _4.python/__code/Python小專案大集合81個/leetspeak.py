@@ -1,15 +1,5 @@
 import random
 
-def main():
-    print('''L3375P34]< (leetspeek)
-By Al Sweigart al@inventwithpython.com
-
-Enter your leet message:''')
-    english = input('> ')
-    print()
-    leetspeak = englishToLeetspeak(english)
-    print(leetspeak)
-
 def englishToLeetspeak(message):
     """Convert the English string in message and return leetspeak."""
     # Make sure all the keys in `charMapping` are lowercase.
@@ -19,18 +9,22 @@ def englishToLeetspeak(message):
     'o': ['0'], 's': ['$', '5'], 't': ['7', '+'], 'u': ['|_|'],
     'v': ['\\/']}
     leetspeak = ''
-    for char in message:  # Check each character:
-        # There is a 70% chance we change the character to leetspeak.
-        if char.lower() in charMapping and random.random() <= 0.70:
+    for char in message:
+        print(char.lower())
+        if char.lower() in charMapping and random.random() <= 0.3:
             possibleLeetReplacements = charMapping[char.lower()]
+            print("aaaaa :", possibleLeetReplacements)
             leetReplacement = random.choice(possibleLeetReplacements)
+            print("bbbbb :", leetReplacement)
             leetspeak = leetspeak + leetReplacement
         else:
-            # Don't translate this character:
             leetspeak = leetspeak + char
     return leetspeak
 
+print('駭客語')
+english = "AAAAAAAAAA"
+print()
+leetspeak = englishToLeetspeak(english)
+print(leetspeak)
 
-# If this program was run (instead of imported), run the game:
-if __name__ == '__main__':
-    main()
+

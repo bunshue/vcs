@@ -749,6 +749,11 @@ print("顛倒排序串列")
 animals.reverse()  # 顛倒排序串列
 print(animals)
 
+# 建立一個長度N的布林陣列 都放著 False
+N = 10
+animal_list = N * [False]
+print(animal_list)
+
 print("------------------------------------------------------------")  # 60個
 
 animals = ["鼠", "牛", "虎", "兔", "龍"]  # 串列

@@ -1218,7 +1218,7 @@ def popupmenu(event):						# 定義右鍵事件處理函數
 root.bind("<Button-3>", popupmenu)				# 在主視窗中綁定右鍵事件
 
 root.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *
@@ -1521,6 +1521,40 @@ toolbar.pack(side=TOP,fill=X)           # 包裝工具列
 root.config(menu=menubar)               # 顯示功能表物件
 
 root.mainloop()
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter as tk
+
+window = tk.Tk()
+window.title("")
+
+
+# 儲存選單
+def save():
+    print('你按了save')
+
+# 結束選單
+def exit():
+    print('你按了exit')
+    window.destroy()
+
+# 建立選單畫面
+menubar = tk.Menu(window)
+filemenu = tk.Menu(menubar)
+menubar.add_cascade(label="File", menu=filemenu)
+filemenu.add_command(label="save", command=save)
+filemenu.add_separator()
+filemenu.add_command(label="exit", command=exit)
+window.config(menu=menubar)
+
+window.mainloop()
+
+
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 
@@ -1528,6 +1562,16 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 
 

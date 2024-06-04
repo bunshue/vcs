@@ -298,6 +298,46 @@ win.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+
+def up(event):
+    global y
+    canvas.create_line(x, y, x, y - 5)
+    y -= 5       
+def down(event):
+    global y
+    canvas.create_line(x, y, x, y + 5)
+    y += 5       
+def left(event):
+    global x
+    canvas.create_line(x, y, x - 5, y)
+    x -= 5  
+def right(event):
+    global x
+    canvas.create_line(x, y, x + 5, y)
+    x += 5
+
+xWidth = 200
+yHeight = 200
+
+window = tk.Tk() 
+
+canvas = tk.Canvas(window, width=xWidth, height=yHeight)
+canvas.pack()
+
+x = xWidth / 2
+y = yHeight / 2
+       
+canvas.bind("<Up>", up)
+canvas.bind("<Down>", down)
+canvas.bind("<Left>", left)
+canvas.bind("<Right>", right)
+canvas.focus_set()
+        
+window.mainloop() 
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 
