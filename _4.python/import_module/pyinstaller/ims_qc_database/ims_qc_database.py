@@ -271,12 +271,12 @@ def export_data_to_excel():
 
 
 def button00Click():
-    print('你按了 匯入生產資料')
+    print('你按了 轉換資料')
     import_csv_data()
+    export_data_to_excel()
 
 def button01Click():
-    print('你按了 匯出至Excel檔案')
-    export_data_to_excel()
+    print('你按了button01')
 
 def button02Click():
     print('你按了 info')
@@ -284,14 +284,14 @@ def button02Click():
    
 def button03Click():
     print('你按了button03')
-    window.destroy()
 
 def button04Click():
-    print('你按了xxx')
+    print('你按了button04')
+    clear_text1()
 
 def button05Click():
     print('你按了button05')
-    clear_text1()
+    window.destroy()
 
 def clear_text1():
     text1.delete(1.0, 'end')
@@ -346,17 +346,17 @@ dy = 80
 w = 12
 h = 3
 
-button00 = tk.Button(window, width = w, height = h, command = button00Click, text = '匯入生產資料')
+button00 = tk.Button(window, width = w, height = h*2, command = button00Click, text = '轉換資料')
 button00.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button01 = tk.Button(window, width = w, height = h, command = button01Click, text = '匯出至Excel檔案')
+button01 = tk.Button(window, width = w, height = h, command = button01Click, text = '')
 button01.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button02 = tk.Button(window, width = w, height = h, command = button02Click, text = 'info')
 button02.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button03 = tk.Button(window, width = w, height = h, command = button03Click, text = '關閉視窗')
+button03 = tk.Button(window, width = w, height = h, command = button03Click, text = '')
 button03.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button04 = tk.Button(window, width = w, height = h, command = button04Click, text = '')
+button04 = tk.Button(window, width = w, height = h, command = button04Click, text = 'Clear')
 button04.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button05 = tk.Button(window, width = w, height = h, command = button05Click, text = 'Clear')
+button05 = tk.Button(window, width = w, height = h, command = button05Click, text = '離開')
 button05.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button00.place(x = x_st + dx * 0, y = y_st + dy * 0)
 button01.place(x = x_st + dx * 1, y = y_st + dy * 0)
@@ -387,9 +387,9 @@ label2.pack()
 label2.place(x = x_st + dx * 0, y = y_st + dy * 2 + 80)
 
 # 加入 Text
-text1 = tk.Text(window, width = 100, height = 30)  # 放入多行輸入框
+text1 = tk.Text(window, width = 100, height = 30+10)  # 放入多行輸入框
 text1.pack()
-text1.place(x = x_st + dx * 0, y = y_st + dy * 3 + 50)
+text1.place(x = x_st + dx * 0, y = y_st + dy * 2 + 40)
 
 message = "匯入生產資料"
 message = ""

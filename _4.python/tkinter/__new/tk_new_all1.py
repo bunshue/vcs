@@ -8,7 +8,7 @@ from PIL import ImageTk, Image
 from tkinter import *
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()  # 產生 tkinter 視窗
 
 width = window.winfo_screenwidth()
@@ -316,6 +316,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window=tk.Tk()
+window.geometry("600x400")
 
 tk.Label(window, text='紅', bg='red', width=20).pack()
 tk.Label(window, text='綠', bg='green', width=20).pack()
@@ -326,6 +327,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 string = tk.StringVar()
 entry = tk.Entry(window, textvariable=string).pack()
@@ -371,6 +373,8 @@ class wndApp(Frame):
         print('Day is', today)
         
 window = tk.Tk()
+window.geometry("600x400")
+
 # 實體化wndApp類別，以主視窗物件為引數做初始化動作
 # 然後加入Frame元件，再由Frame加入兩個按鈕
 work = wndApp(ruler = window)
@@ -395,7 +399,7 @@ work.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
-
+window.geometry("600x400")
 window.title('Button state...')
 
 #Button屬性state的常數值
@@ -407,84 +411,7 @@ for item in state:
     btn.pack()    #以元件加入主視窗
 
 window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-print('------------------------------------------------------------')	#60個
-
-button1 = tk.Button(window, text='push1', width=20).pack()
-button2 = tk.Button(window, text='push2', width=20).pack(side=tk.LEFT)
-button3 = tk.Button(window, text='push3', width=20).pack(side=tk.RIGHT)
-
-print('------------------------------------------------------------')	#60個
-
-
-def yellow():                   # 設定視窗背景是黃色
-    window.config(bg="yellow")
-def blue():                     # 設定視窗背景是藍色
-    window.config(bg="blue")
-    
-window = tk.Tk()
-# 依次建立3個鈕
-exitbtn = tk.Button(window,text="Exit",command=window.destroy)
-bluebtn = tk.Button(window,text="Blue",command=blue)
-yellowbtn = tk.Button(window,text="Yellow",command=yellow)
-# 將3個鈕包裝定位在右下方
-exitbtn.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
-bluebtn.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
-yellowbtn.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-def bColor(bgColor):          # 設定視窗背景顏色
-    window.config(bg=bgColor)
-    
-window = tk.Tk()
-
-# 依次建立3個鈕
-exitbtn = tk.Button(window,text="Exit",command=window.destroy)
-bluebtn = tk.Button(window,text="Blue",command=lambda:bColor("blue"))
-yellowbtn = tk.Button(window,text="Yellow",command=lambda:bColor("yellow"))
-# 將3個鈕包裝定位在右下方
-exitbtn.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
-bluebtn.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
-yellowbtn.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-# 依次建立3個鈕
-exitbtn = tk.Button(window,text="Exit",command=window.destroy)
-bluebtn = tk.Button(window,text="Blue",command=lambda:window.config(bg="blue"))
-yellowbtn = tk.Button(window,text="Yellow",command=lambda:window.config(bg="yellow"))
-# 將3個鈕包裝定位在右下方
-exitbtn.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
-bluebtn.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
-yellowbtn.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
-
-window.mainloop()
+'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -496,6 +423,7 @@ def buttonClick2():
      button2.config(bg = "blue")  
 
 window = tk.Tk()
+window.geometry("600x400")
 window.title("按鈕元件(Button)功能示範 Entry")
     
 buttonvar = tk.StringVar() 
@@ -518,6 +446,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 window.title("Label元件的參數設定")
 
 label = tk.Label(window, bg="#ff00ff", fg="#ffff00", \
@@ -535,7 +464,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-window.geometry("400x100")
+window.geometry("600x400")
 window.title("pack版面佈局的示範")
 
 plus=tk.Button(window, width=20, text="加法範例")
@@ -552,6 +481,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 counter = 0 #儲存數值
 
@@ -596,6 +526,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 # 設定主視窗大小
 w = 800
@@ -669,6 +600,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 def select():
     print('你的選項是 :', var.get())
@@ -747,6 +679,7 @@ print("------------------------------------------------------------")  # 60個
 
 """ 缺檔案
 window = tk.Tk()
+window.geometry("600x400")
 
 # 設定主視窗大小
 W = 800
@@ -801,6 +734,8 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
+
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
@@ -818,10 +753,8 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
 window = tk.Tk()
+window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -835,11 +768,13 @@ lab3 = tk.Label(window,text="歡迎來到加拿大",
 lab1.pack()                         # 包裝與定位元件
 lab2.pack()                         # 包裝與定位元件
 lab3.pack()                         # 包裝與定位元件
+
 tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -853,11 +788,13 @@ lab3 = tk.Label(window,text="歡迎來到加拿大",
 lab1.pack(side=tk.BOTTOM)              # 包裝與定位元件
 lab2.pack(side=tk.BOTTOM)              # 包裝與定位元件
 lab3.pack(side=tk.BOTTOM)              # 包裝與定位元件
+
 tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -871,11 +808,13 @@ lab3 = tk.Label(window,text="歡迎來到加拿大",
 lab1.pack(side=tk.BOTTOM)              # 包裝與定位元件
 lab2.pack(side=tk.BOTTOM,pady=5)       # 包裝與定位元件,增加y軸間距
 lab3.pack(side=tk.BOTTOM)              # 包裝與定位元件
+
 tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -889,11 +828,13 @@ lab3 = tk.Label(window,text="歡迎來到加拿大",
 lab1.pack(side=tk.LEFT)                # 包裝與定位元件
 lab2.pack(side=tk.LEFT)                # 包裝與定位元件
 lab3.pack(side=tk.LEFT)                # 包裝與定位元件
+
 tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -907,11 +848,13 @@ lab3 = tk.Label(window,text="歡迎來到加拿大",
 lab1.pack(side=tk.LEFT)                # 包裝與定位元件
 lab2.pack(side=tk.LEFT,padx=5)         # 包裝與定位元件,增加x軸間距
 lab3.pack(side=tk.LEFT)                # 包裝與定位元件
+
 tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -925,17 +868,20 @@ lab3 = tk.Label(window,text="歡迎來到加拿大",
 lab1.pack()                         # 包裝與定位元件
 lab2.pack(side=tk.RIGHT)               # 包裝與定位元件
 lab3.pack(side=tk.LEFT)                # 包裝與定位元件
+
 tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 label = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15,             # 標籤寬度是15
               font="Helvetica 16 bold italic")
 label.pack()                        # 包裝與定位元件
+
 tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -958,10 +904,14 @@ label = tk.Label(window,textvariable=x,      # 設定Label內容是變數x
               fg="blue",bg="lightyellow", # 淺黃色底藍色字
               font="Verdana 16 bold",     # 字型設定
               width=25,height=2).pack()   # 標籤內容
-btn = tk.Button(window,text="Hit",command=btn_hit).pack()                   
+btn = tk.Button(window,text="Hit",command=btn_hit).pack()
+
 tk.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x400")
 
 label = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -973,6 +923,8 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
+
 label = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15,             # 標籤寬度是15
@@ -984,6 +936,8 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
+
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
@@ -1002,6 +956,8 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
+
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
@@ -1020,6 +976,8 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
+
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
               width=15)             # 標籤寬度是15
@@ -1038,6 +996,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -1057,6 +1016,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -1076,9 +1036,6 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
-
-
 def btn_hit():                      # 處理按鈕事件
     global msg_on                   # 這是全域變數
     if msg_on == False:
@@ -1089,6 +1046,7 @@ def btn_hit():                      # 處理按鈕事件
         x.set("")                   # 不顯示文字
    
 window = tk.Tk()
+window.geometry("600x400")
 
 msg_on = False                      # 全域變數預設是False    
 x = tk.StringVar()                     # Label的變數內容
@@ -1104,6 +1062,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x400")
 
 label=tk.Label(window,text="歡迎來到美國",
             fg="blue",bg="yellow",
@@ -1115,28 +1074,8 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-"""  新進待整理
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-"""
-print("------------------------------------------------------------")  # 60個
-#tk.Text
-print("------------------------------------------------------------")  # 60個
-
 window = tk.Tk()
+window.geometry("600x400")
 
 text = tk.Text(window,height=2,width=30)
 text.insert(tk.END,"我懷念\n我的明志工專生活點滴")
@@ -1147,6 +1086,7 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
           
 window = tk.Tk()
+window.geometry("600x400")
 
 text = tk.Text(window,height=2,width=30)
 text.insert(tk.END,"我懷念\n一個人的極境旅行")
@@ -1157,8 +1097,6 @@ text.insert(tk.END,str)
 text.pack()
 
 window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1205,12 +1143,11 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-# label.py
-
 window=tk.Tk()
-window.geometry('300x200')
+window.geometry("600x400")
 window.title('Label標籤')
-window.configure(bg='white') 
+window.configure(bg='white')
+
 tk.Label(window, text = '王之渙涼州詞', fg='blue',bg='lightblue',bitmap='gray25',\
          compound='left',font=('標楷體', 24, 'bold')).pack()
 msg=('黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。')
@@ -1219,13 +1156,12 @@ tk.Label(window, text = msg, width=28,wraplength=240,justify='left',\
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
 # pack.py
 
 window=tk.Tk()
-window.geometry('300x200')
+window.geometry("600x400")
 window.title('pack配置')
 window.configure(bg='white')
 
@@ -1300,8 +1236,8 @@ def fnAns():
     btnAns.config(state='disable')
     
 window = tk.Tk()
+window.geometry("600x400")
 window.title('加減法測驗')
-window.geometry('300x160')
 
 frmTest=tk.Frame(window,relief='raised',borderwidth=2)
 frmTest.pack(side='left',padx=5,pady=3)
@@ -1350,8 +1286,8 @@ def fnBmi():
     print('注意, 你的BMI指數為：{} {}'.format(bmi, msg))
     
 window = tk.Tk()
+window.geometry("600x400")
 window.title('BMI計算')
-window.geometry('240x200')
 window.configure(bg='white')
 
 lblTitle = tk.Label(window, text='BMI 計算',font=('微軟正黑體', 16),fg='white',bg='blue')
@@ -1380,8 +1316,8 @@ def fnCal():
         print('圓面積為 {:.2f} 平方{}'.format(a,u))
   
 window = tk.Tk()
+window.geometry("600x400")
 window.title('圓形計算')
-window.geometry('300x200')
 
 lfrmR=tk.LabelFrame(window,text='輸入半徑：')
 lfrmR.pack(pady=10)
@@ -1422,9 +1358,8 @@ def fnGreen():
     frmColor.config(bg='green')  
     
 window = tk.Tk()
-
+window.geometry("600x400")
 window.title('顏色切換')
-window.geometry('240x200')
 
 frmColor=tk.Frame(window,width=200,height=100,relief='raised',borderwidth=3,bg='white')
 frmColor.pack(pady=5)
@@ -1459,7 +1394,7 @@ def fnClear():
     btnClear['state']='disabled'  #設歸零鈕不能使用
  
 window=tk.Tk()
-window.geometry('300x200')
+window.geometry("600x400")
 window.title('計數器')
 window.configure(bg='white')
 
@@ -1496,8 +1431,8 @@ def fnMsg():
     window.destroy()
     
 window = tk.Tk()
+window.geometry("600x400")
 window.title('旅遊問卷')
-window.geometry('220x180')
 
 ok=tk.BooleanVar()
 chkOK=tk.Checkbutton(window,text='參加旅遊',variable=ok, command=fnOk).pack()
@@ -1507,15 +1442,10 @@ btnSend = tk.Button(window, text=' 送出 ', command=fnMsg).pack(pady=5)
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-# grid.py
-
 window=tk.Tk()
-window.geometry('200x200')
+window.geometry("600x400")
 window.title('grid配置')
 window.rowconfigure(0,weight=1)
 window.rowconfigure(1,weight=1)
@@ -1548,6 +1478,8 @@ print("------------------------------------------------------------")  # 60個
 # tkinterCheck.py
 
 root = tk.Tk()
+root.geometry("600x400")
+
 r = tk.StringVar()						# 使用StringVar產生字串變數用於單選框元件
 r.set('1')							# 起始化變數值
 radio = tk.Radiobutton(root,				# 產生單選框元件
@@ -1619,6 +1551,7 @@ class MyButton():									# 定義按鈕類別
         self.root.quit()							# 離開主視窗
 
 root = tk.Tk()									# 產生主視窗
+root.geometry("600x400")
 
 MyButton(root,0)									# 產生Create按鈕
 MyButton(root,1)									# 產生Quit按鈕
@@ -1630,6 +1563,8 @@ print("------------------------------------------------------------")  # 60個
 # tkinterEntry.py
 
 root = tk.Tk()
+root.geometry("600x400")
+
 entry1 = tk.Entry(root,						# 產生單行文字框元件
 			show = '*',)					# 輸入文字框中的字元被顯示為“*”
 entry1.pack()								# 將文字框新增到視窗中
@@ -1660,6 +1595,7 @@ print("------------------------------------------------------------")  # 60個
 # tkinterLabel.py
 
 root = tk.Tk()
+root.geometry("600x400")
 
 label1 = tk.Label(root,
 			anchor = tk.E,				# 設定文字的位置
@@ -1695,6 +1631,7 @@ print("------------------------------------------------------------")  # 60個
 # tkinterRCButton.py
 
 root = tk.Tk()
+root.geometry("600x400")
 
 r = tk.StringVar()						# 使用StringVar產生字串變數用於單選框元件
 r.set('1')							# 起始化變數值
@@ -1751,7 +1688,10 @@ def InInt():										# 按鈕事件處理函數
 def InFlo():										# 按鈕事件處理函數
 	r = tkinter.simpledialog.askfloat('Python Tkinter','Input Float')			# 建立浮點數輸入交談視窗
 	print(r)
+
 root = tk.Tk()
+root.geometry("600x400")
+
 button1 = tk.Button(root,text = 'Input String',					# 建立按鈕
 		command = InStr)							# 指定按鈕事件處理函數
 button1.pack(side='left')
@@ -1764,18 +1704,13 @@ button2.pack(side='left')
 
 root.mainloop()										# 進入訊息循環
 
-print("------------------------------------------------------------")  # 60個
-
-
-
-
 print('------------------------------------------------------------')	#60個
 
 from tkinter import *
     
 root = Tk()
-root.title("")             # 視窗標題
-root.geometry("300x100")
+root.geometry("600x400")
+
 spin = Spinbox(root,from_=10,to=30,increment=2)
 spin.pack(pady=20)
 
@@ -1789,7 +1724,7 @@ def printInfo():        # 列印顯示的值
     print(sp.get())
     
 root = Tk()
-root.title("")
+root.geometry("600x400")
 
 sp = Spinbox(root,from_ = 0,to = 10,           
              command = printInfo)
@@ -1805,7 +1740,7 @@ def printInfo():                        # 列印顯示的值
     print(sp.get())
     
 root = Tk()
-root.title("")
+root.geometry("600x400")
 
 sp = Spinbox(root,
              values=(10,38,170,101),    # 以元組儲存數值
@@ -1822,7 +1757,8 @@ def printInfo():                        # 列印顯示的值
     print(sp.get())
     
 root = Tk()
-root.title("")
+root.geometry("600x400")
+
 cities = ("新加坡","上海","東京")       # 以元組儲存數值
 
 sp = Spinbox(root,
@@ -1841,6 +1777,7 @@ print('------------------------------------------------------------')	#60個
 from tkinter.ttk import Separator
 
 root = Tk()
+root.geometry("600x400")
 
 #字 前景 背景 寬 高 字位置預設 字型
 label=Label(root,text="Welcome to the United States and have a nice day",
@@ -1893,6 +1830,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 label=Label(root,text="raised",relief="raised",
             bg="lightyellow",
@@ -1905,6 +1843,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 label=Label(root,text="Welcome to the United States and have a nice day")
 label.pack()        # 包裝與定位元件
@@ -1917,6 +1856,7 @@ print('------------------------------------------------------------')	#60個
 from tkinter.ttk import Separator
 
 root = Tk()
+root.geometry("600x400")
 
 myTitle = "一個人的極境旅行"
 myContent = """2016年12月,我一個人訂了機票和船票,
@@ -1938,6 +1878,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -1972,6 +1913,7 @@ print('------------------------------------------------------------')	#60個
 Reliefs = ["flat","groove","raised","ridge","solid","sunken"]
 
 root = Tk()
+root.geometry("600x400")
 
 for Relief in Reliefs:
     Label(root,text=Relief,relief=Relief,
@@ -1986,6 +1928,7 @@ bitMaps = ["error","hourglass","info","questhead","question",
            "warning","gray12","gray25","gray50","gray75"]
 
 root = Tk()
+root.geometry("600x400")
 
 for bitMap in bitMaps:
     Label(root,bitmap=bitMap).pack(side=LEFT,padx=5)
@@ -1995,6 +1938,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2011,6 +1955,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2027,6 +1972,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -2046,6 +1992,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -2065,6 +2012,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2081,6 +2029,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2097,7 +2046,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
-root.geometry("300x180")            # 設定視窗勘寬300高180
+root.geometry("600x400")
 
 oklabel=Label(root,text="OK",       # 標籤內容是OK
               font="Times 20 bold", # Times字型20粗體
@@ -2110,7 +2059,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
-root.geometry("300x180")            # 設定視窗勘寬300高180
+root.geometry("600x400")
 
 oklabel=Label(root,text="OK",       # 標籤內容是OK
               font="Times 20 bold", # Times字型20粗體
@@ -2128,6 +2077,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2144,6 +2094,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2160,6 +2111,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2176,6 +2128,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2192,6 +2145,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2208,6 +2162,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2224,6 +2179,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow")     # 標籤背景是淺黃色
@@ -2240,7 +2196,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
-root.geometry("300x200")
+root.geometry("600x400")
     
 Label(root,text='Mississippi',bg='red',fg='white',
       font='Times 24 bold').pack(fill=X)  
@@ -2254,6 +2210,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
     
 Label(root,text='Mississippi',bg='red',fg='white',
       font='Times 20 bold').pack(side=LEFT,fill=Y)  
@@ -2267,7 +2224,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
-root.geometry("300x180")            # 設定視窗勘寬300高180
+root.geometry("600x400")
 
 print("執行前",root.pack_slaves())
 oklabel=Label(root,text="OK",       # 標籤內容是OK
@@ -2287,6 +2244,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
              bg="lightyellow",      # 標籤背景是淺黃色
@@ -2306,6 +2264,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
              bg="lightyellow",      # 標籤背景是淺黃色
@@ -2325,6 +2284,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="標籤1",relief="raised")
 label2 = Label(window,text="標籤2",relief="raised")
@@ -2348,6 +2308,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="標籤1",relief="raised")
 label2 = Label(window,text="標籤2",relief="raised")
@@ -2369,6 +2330,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="標籤1",relief="raised")
 label2 = Label(window,text="標籤2",relief="raised")
@@ -2390,6 +2352,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="標籤1",relief="raised")
 label2 = Label(window,text="標籤2",relief="raised")
@@ -2407,6 +2370,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="標籤1",relief="raised")
 label2 = Label(window,text="標籤2",relief="raised")
@@ -2430,6 +2394,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國")
 label2 = Label(window,bg="yellow",width=20)
@@ -2445,6 +2410,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國")
 label2 = Label(window,bg="yellow",width=20)
@@ -2460,6 +2426,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",relief="raised")
 label2 = Label(window,bg="yellow",width=20)
@@ -2475,6 +2442,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",relief="raised")
 label2 = Label(window,bg="yellow",width=20)
@@ -2490,6 +2458,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 Colors = ["red","orange","yellow","green","blue","purple"]
 
@@ -2504,7 +2473,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
-
+root.geometry("600x400")
 root.rowconfigure(1, weight=1)
 root.columnconfigure(0, weight=1)
 
@@ -2522,7 +2491,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
-
+root.geometry("600x400")
 root.rowconfigure(1, weight=1)
 root.columnconfigure(0, weight=1)
 
@@ -2541,7 +2510,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
-
+root.geometry("600x400")
 root.rowconfigure(1, weight=1)
 root.columnconfigure(0, weight=1)
 
@@ -2560,6 +2529,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = Tk()
+window.geometry("600x400")
 
 label1 = Label(window,text="歡迎來到美國",
               bg="lightyellow",     # 標籤背景是淺黃色
@@ -2578,47 +2548,8 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-def yellow():                   # 設定視窗背景是黃色
-    root.config(bg="yellow")
-def blue():                     # 設定視窗背景是藍色
-    root.config(bg="blue")
-    
 root = Tk()
-root.geometry("300x200")        # 固定視窗大小
-
-# 依次建立3個鈕
-exitbtn = Button(root,text="Exit",command=root.destroy)
-bluebtn = Button(root,text="Blue",command=blue)
-yellowbtn = Button(root,text="Yellow",command=yellow)
-# 將3個鈕包裝定位在右下方
-exitbtn.pack(anchor=S,side=RIGHT,padx=5,pady=5)
-bluebtn.pack(anchor=S,side=RIGHT,padx=5,pady=5)
-yellowbtn.pack(anchor=S,side=RIGHT,padx=5,pady=5)
-
-root.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-def bColor(bgColor):          # 設定視窗背景顏色
-    root.config(bg=bgColor)
-    
-root = Tk()
-root.geometry("300x200")        # 固定視窗大小
-
-# 依次建立3個鈕
-exitbtn = Button(root,text="Exit",command=root.destroy)
-bluebtn = Button(root,text="Blue",command=lambda:bColor("blue"))
-yellowbtn = Button(root,text="Yellow",command=lambda:bColor("yellow"))
-# 將3個鈕包裝定位在右下方
-exitbtn.pack(anchor=S,side=RIGHT,padx=5,pady=5)
-bluebtn.pack(anchor=S,side=RIGHT,padx=5,pady=5)
-yellowbtn.pack(anchor=S,side=RIGHT,padx=5,pady=5)
-
-root.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-root = Tk()
+root.geometry("600x400")
 
 lab  = Label(root,text="",bg="yellow",width=20)
 btn7 = Button(root,text="7",width=3)
@@ -2659,6 +2590,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 nameL = Label(root,text="Name ")        # name標籤
 nameL.grid(row=0)
@@ -2675,6 +2607,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 accountL = Label(root,text="Account")   # account標籤
 accountL.grid(row=0)
@@ -2690,10 +2623,13 @@ root.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
+
 def cal():                          # 執行數學式計算
     out.configure(text = "結果 : " + str(eval(equ.get())))
-    
+
+
 root = Tk()
+root.geometry("600x400")
 
 label = Label(root, text="請輸入數學表達式:")
 label.pack()
@@ -2721,6 +2657,7 @@ def btn_hit():                      # 處理按鈕事件
         x.set("")                   # 不顯示文字
    
 root = Tk()
+root.geometry("600x400")
 
 msg_on = False                      # 全域變數預設是False    
 x = StringVar()                     # Label的變數內容
@@ -2745,7 +2682,8 @@ def btn_hit():                      # 處理按鈕事件
         x.set("")                   # 不顯示文字
    
 root = Tk()
-    
+root.geometry("600x400")
+
 x = StringVar()                     # Label的變數內容
 
 label = Label(root,textvariable=x,          # 設定Label內容是變數x
@@ -2765,7 +2703,8 @@ def callback(*args):
     print("data changed : ",xE.get())   # Python Shell視窗輸出
    
 root = Tk()
-    
+root.geometry("600x400")
+
 xE = StringVar()                        # Entry的變數內容
 entry = Entry(root,textvariable=xE)     # 設定Label內容是變數x
 entry.pack(pady=5,padx=10)
@@ -2780,7 +2719,8 @@ def callback(*args):
     print("data changed : ",xE.get())   # Python Shell視窗輸出
    
 root = Tk()
-    
+root.geometry("600x400")
+
 xE = StringVar()                        # Entry的變數內容
 entry = Entry(root,textvariable=xE)     # 設定Label內容是變數x
 entry.pack(pady=5,padx=10)
@@ -2805,7 +2745,8 @@ def hit():                              # 讀取資料
     print("讀取資料:",xE.get())
   
 root = Tk()
-    
+root.geometry("600x400")
+
 xE = StringVar()                        # Entry的變數內容
 
 entry = Entry(root,textvariable=xE)     # 設定Label內容是變數x
@@ -2830,7 +2771,8 @@ def callbackW(name,index,mode):         # 內容被更改時執行
     print("name = %r, index = %r, mode = %r" % (name,index,mode)) 
   
 root = Tk()
-    
+root.geometry("600x400")
+
 xE = StringVar()                        # Entry的變數內容
 
 entry = Entry(root,textvariable=xE)     # 設定Label內容是變數x
@@ -2854,6 +2796,7 @@ def printSelection():
         label.config(text="你是女生")
 
 root = Tk()
+root.geometry("600x400")
 
 var = IntVar()                                  # 選項紐綁定的變數
 var.set(1)                                      # 預設選項是男生
@@ -2878,6 +2821,7 @@ def printSelection():
     label.config(text="你是"+var.get())
 
 root = Tk()
+root.geometry("600x400")
 
 var = StringVar()                               # 選項紐綁定的變數
 var.set("男生")                                 # 預設選項是男生
@@ -2902,6 +2846,7 @@ def printSelection():
     print(cities[var.get()])            # 列出所選城市
 
 root = Tk()
+root.geometry("600x400")
 
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
@@ -2924,6 +2869,7 @@ def printSelection():
     print(cities[var.get()])            # 列出所選城市
 
 root = Tk()
+root.geometry("600x400")
 
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
@@ -2945,6 +2891,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 lab = Label(root,text="請選擇喜歡的運動",fg="blue",bg="lightyellow",width=30)
 lab.grid(row=0)
@@ -2973,6 +2920,7 @@ def printInfo():
     print(selection)
 
 root = Tk()
+root.geometry("600x400")
 
 Label(root,text="請選擇喜歡的運動",
       fg="blue",bg="lightyellow",width=30).grid(row=0)
@@ -3005,6 +2953,7 @@ def readonly():                             # 設定Entry狀態
         entry.config(state=NORMAL)          # 設為NORMAL
 
 root = Tk()
+root.geometry("600x400")
 
 # 以下row=0建立Entry
 entry = Entry(root)
@@ -3035,6 +2984,7 @@ from tkinter.ttk import Frame, Style
 
 """fail
 root = Tk()
+root.geometry("600x400")
 
 for fm in ["red","green","blue"]:    # 建立3個不同底色的框架
     Frame(root,bg=fm,height=50,width=250).pack()
@@ -3044,6 +2994,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 for fm in ["red","green","blue"]:    # 建立3個不同底色的框架
     Frame(bg=fm,height=50,width=250).pack()
@@ -3053,6 +3004,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 # 用字典儲存框架顏色與游標外形
 fms = {'red':'cross','green':'boat','blue':'clock'}
@@ -3065,6 +3017,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 frameUpper = Frame(root,bg="lightyellow")   # 建立上層框架
 frameUpper.pack()
@@ -3085,6 +3038,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 fm1 = Frame(width=150,height=80,relief=GROOVE, borderwidth=5)
 fm1.pack(side=LEFT,padx=5,pady=10)
@@ -3100,6 +3054,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 fm = Frame(width=150,height=80,relief=RAISED,borderwidth=5) # 建立框架
 lab = Label(fm,text="請複選常用的程式語言")     # 建立標籤
@@ -3117,6 +3072,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 style = Style()                 # 改用Style
 style.theme_use("alt")          # 改用alt支援Style
@@ -3151,8 +3107,8 @@ def printInfo():
     print(selection)
 
 root = Tk()
+root.geometry("600x400")
 
-root.geometry("400x220")
 # 以下建立標籤框架與和曲方塊
 labFrame = LabelFrame(root,text="選擇最喜歡的運動")
 sports = {0:"美式足球",1:"棒球",2:"籃球",3:"網球"}    # 運動字典
@@ -3171,6 +3127,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 tl = Toplevel()
 Label(tl,text = 'I am a Toplevel').pack()
@@ -3180,6 +3137,7 @@ root.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 tl = Toplevel()
 tl.title("Toplevel")
@@ -3194,6 +3152,7 @@ print('------------------------------------------------------------')	#60個
 import random
 
 root = Tk()
+root.geometry("600x400")
 
 msgYes, msgNo, msgExit = 1,2,3
 def MyAnswer():                   # 建立對話方塊
@@ -3230,7 +3189,7 @@ def buttonClicked():            # Button按鈕事件處理程式
     lab.config(text="Button clicked")
     
 root = Tk()
-root.geometry("300x180")        # 視窗寬300高160
+root.geometry("600x400")
 
 btn = Button(root,text="Click me",command=buttonClicked)
 btn.pack(anchor=W)
@@ -3248,15 +3207,6 @@ lab = Label(root,bg="yellow",fg="blue",
 lab.pack()
 
 root.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -3278,6 +3228,7 @@ pw.mainloop()
 print('------------------------------------------------------------')	#60個
 
 root = Tk()
+root.geometry("600x400")
 
 pw = PanedWindow(orient=HORIZONTAL)     # 建立PanedWindow物件
 
@@ -3297,6 +3248,7 @@ print('------------------------------------------------------------')	#60個
 from tkinter.ttk import *
 
 root = Tk()
+root.geometry("600x400")
 
 pw = PanedWindow(orient=HORIZONTAL)     # 建立PanedWindow物件
 
@@ -3316,6 +3268,7 @@ print('------------------------------------------------------------')	#60個
 from tkinter.ttk import *
 
 root = Tk()
+root.geometry("600x400")
 
 pw = PanedWindow(orient=HORIZONTAL)     # 建立PanedWindow物件
 
@@ -3354,7 +3307,7 @@ print('------------------------------------------------------------')	#60個
 from tkinter.ttk import *
 
 root = Tk()
-root.geometry("300x140")
+root.geometry("600x400")
 
 # 使用預設建立進度條
 pb1 = Progressbar(root)
@@ -3382,6 +3335,7 @@ def running():                      # 開始Progressbar動畫
         time.sleep(0.05)
  
 root = Tk()
+root.geometry("600x400")
 
 pb = Progressbar(root,length=200,mode="determinate",orient=HORIZONTAL)
 pb.pack(padx=10,pady=10)
@@ -3406,6 +3360,7 @@ def running():                      # 開始Progressbar動畫
         time.sleep(0.05)
  
 root = Tk()
+root.geometry("600x400")
 
 pb = Progressbar(root,length=200,mode="determinate",orient=HORIZONTAL)
 pb.pack(padx=10,pady=10)
@@ -3417,7 +3372,6 @@ btn.pack(pady=10)
 
 root.mainloop()
 
-
 print('------------------------------------------------------------')	#60個
 
 from tkinter.ttk import *
@@ -3428,6 +3382,7 @@ def stop():                                     # 中止Progressbar動畫
     pb.stop()                                   # 中止pb物件動畫
  
 root = Tk()
+root.geometry("600x400")
 
 pb = Progressbar(root,length=200,mode="determinate",orient=HORIZONTAL)
 pb.pack(padx=5,pady=10)
@@ -3453,6 +3408,7 @@ def stop():                                     # 中止Progressbar動畫
     pb.stop()                                   # 中止pb物件動畫
  
 root = Tk()
+root.geometry("600x400")
 
 pb = Progressbar(root,length=200,mode="indeterminate",orient=HORIZONTAL)
 pb.pack(padx=5,pady=10)
@@ -3469,11 +3425,8 @@ root.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-
-
-
 root = Tk()
-root.geometry("300x210")                        # 視窗寬300高210
+root.geometry("600x400")
 
 lb1 = Listbox(root)                             # 建立listbox 1
 lb1.pack(side=LEFT,padx=5,pady=10)
@@ -3485,7 +3438,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 root = Tk()
-root.geometry("300x210")        # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root)              # 建立listbox 
 lb.insert(END,"Banana")
@@ -3501,7 +3454,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")        # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root)              # 建立listbox
 for fruit in fruits:            # 建立水果項目
@@ -3516,7 +3469,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")                # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root,selectmode=MULTIPLE)  # 建立可以多選項的listbox
 for fruit in fruits:                    # 建立水果項目
@@ -3531,7 +3484,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")                # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root,selectmode=EXTENDED)  # 拖曳可以選擇多選項
 for fruit in fruits:                    # 建立水果項目
@@ -3545,7 +3498,7 @@ print("------------------------------------------------------------")  # 60個
 fruits = ["Banana","Watermelon","Pineapple"]
 
 root = Tk()
-root.geometry("300x210")                    # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root,selectmode=EXTENDED)      # 拖曳可以選擇多選項
 for fruit in fruits:                        # 建立水果項目
@@ -3561,7 +3514,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")                    # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root,selectmode=EXTENDED)      # 拖曳可以選擇多選項
 for fruit in fruits:                        # 建立水果項目
@@ -3577,7 +3530,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")        # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root)              
 for fruit in fruits:            # 建立水果項目
@@ -3593,7 +3546,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")                # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root,selectmode=EXTENDED)  # 拖曳可以選擇多選項
 for fruit in fruits:                    # 建立水果項目
@@ -3609,7 +3562,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")        # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root)              
 for fruit in fruits:            # 建立水果項目
@@ -3625,7 +3578,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")        # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root)              
 for fruit in fruits:            # 建立水果項目
@@ -3641,7 +3594,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")        # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root)              
 for fruit in fruits:            # 建立水果項目
@@ -3657,7 +3610,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x210")        # 視窗寬300高210
+root.geometry("600x400")
 
 lb = Listbox(root)              
 for fruit in fruits:            # 建立水果項目
@@ -3677,7 +3630,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x250")        # 視窗寬300高250
+root.geometry("600x400")
 
 lb = Listbox(root,selectmode=MULTIPLE)              
 for fruit in fruits:            # 建立水果項目
@@ -3697,7 +3650,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x250")        # 視窗寬300高250
+root.geometry("600x400")
 
 lb = Listbox(root,selectmode=MULTIPLE)              
 for fruit in fruits:            # 建立水果項目
@@ -3709,13 +3662,6 @@ btn.pack(pady=5)
 root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
 
 def itemAdded():                        # 增加項目處理程式
     varAdd = entry.get()                # 讀取Entry的項目
@@ -3731,6 +3677,7 @@ def itemDeleted():                      # 刪除項目處理程式
     lb.delete(index)                    # 刪除選項    
 
 root = Tk()
+root.geometry("600x400")
 
 entry = Entry(root)                     # 建立Entry            
 entry.grid(row=0,column=0,padx=5,pady=5)
@@ -3766,6 +3713,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
+root.geometry("600x400")
 
 lb = Listbox(root)                  # 建立Listbox          
 for fruit in fruits:                # 建立水果項目
@@ -3782,15 +3730,11 @@ cb = Checkbutton(root,text="大到小排序",variable=var)
 cb.pack(side=LEFT)
 
 root.mainloop()
-print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 print("------------------------------------------------------------")  # 60個
 
 root = Tk()
+root.geometry("600x400")
 
 text = Text(root,height=2,width=30)
 text.pack()
@@ -3800,6 +3744,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 root = Tk()
+root.geometry("600x400")
 
 text = Text(root,height=3,width=30)
 text.pack()
@@ -3811,6 +3756,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 root = Tk()
+root.geometry("600x400")
 
 text = Text(root,height=3,width=30)
 text.pack()
@@ -3840,7 +3786,7 @@ def familyChanged(event):                   # font family更新
     text.configure(font=f)                  # 更新text的font family
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立font family OptionMenu 
 familyVar = StringVar()
@@ -3865,7 +3811,7 @@ def familyChanged(event):                   # font family更新
     text.configure(font=f)                  # 更新text的font family
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立font family OptionMenu 
 familyVar = StringVar()
@@ -3893,7 +3839,7 @@ def weightChanged(event):                   # weight family更新
     text.configure(font=f)                  # 更新text的font weight
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立工具列
 toolbar = Frame(root,relief=RAISED,borderwidth=1)
@@ -3924,15 +3870,17 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.font import Font
 from tkinter.ttk import *
+
 def familyChanged(event):                   # font family更新
     f=Font(family=familyVar.get())          # 取得新font family
     text.configure(font=f)                  # 更新text的font family
+
 def weightChanged(event):                   # weight family更新
     f=Font(weight=weightVar.get())          # 取得新font weight
     text.configure(font=f)                  # 更新text的font weight
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立工具列
 toolbar = Frame(root,relief=RAISED,borderwidth=1)
@@ -3969,7 +3917,7 @@ def selectedText():                             # 列印所選的文字
         print("沒有選取文字")
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立Button
 btn = Button(root,text="Print selection",command=selectedText)
@@ -3995,7 +3943,7 @@ def selectedText():                             # 列印所選的文字
         print("沒有選取文字")
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立Button
 btn = Button(root,text="Print selection",command=selectedText)
@@ -4016,7 +3964,7 @@ def printIndex():                               # 列印索引
     print("END    : ", text.index(END))
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立Button
 btn = Button(root,text="Print index",command=printIndex)
@@ -4033,7 +3981,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立Text
 text = Text(root)
@@ -4046,7 +3994,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 text = Text(root)
 
@@ -4065,7 +4013,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 text = Text(root)
 
@@ -4102,8 +4050,7 @@ def mySearch():
         start = "%s+%dc" % (pos, len(key))          # 更新搜尋起始位置
                          
 root = Tk()
-root.geometry("300x180")
-
+root.geometry("600x400")
 root.rowconfigure(1, weight=1)
 root.columnconfigure(0, weight=1)
 
@@ -4153,7 +4100,7 @@ def clrText():
     text.tag_remove("spellErr","1.0",END)
                             
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立工具列
 toolbar = Frame(root,relief=RAISED,borderwidth=1)
@@ -4191,7 +4138,7 @@ def saveFile():
         root.title(filename)
                             
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 menubar = Menu(root)                # 建立最上層功能表
 # 建立功能表類別物件,和將此功能表類別命名File 
@@ -4213,13 +4160,12 @@ text.insert(END,"A hunded miles,\n")
     
 root.mainloop()
 
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
       
 root = Tk()
+root.geometry("600x400")
 
 # 建立Treeview
 tree = Treeview(root,columns=("cities"))
@@ -4239,6 +4185,7 @@ print('------------------------------------------------------------')	#60個
 from tkinter.ttk import *
       
 root = Tk()
+root.geometry("600x400")
 
 # 建立Treeview
 tree = Treeview(root,columns=("cities"),show="headings")
@@ -4258,6 +4205,7 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.ttk import *
       
 root = Tk()
+root.geometry("600x400")
 
 # 建立Treeview
 tree = Treeview(root,columns=("cities"))
@@ -4277,6 +4225,7 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.ttk import *
       
 root = Tk()
+root.geometry("600x400")
 
 # 建立Treeview
 tree = Treeview(root,columns=("cities","populations"))
@@ -4297,6 +4246,7 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.ttk import *
       
 root = Tk()
+root.geometry("600x400")
 
 list1 = ["芝加哥","800"]               # 以串列方式設定欄內容         
 list2 = ["洛杉磯","1000"]
@@ -4320,6 +4270,7 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.ttk import *
       
 root = Tk()
+root.geometry("600x400")
 
 # 建立Treeview
 tree = Treeview(root,columns=("cities","populations"))
@@ -4343,6 +4294,7 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.ttk import *
       
 root = Tk()
+root.geometry("600x400")
 
 # 建立Treeview
 tree = Treeview(root,columns=("cities","populations"))
@@ -4368,6 +4320,7 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.ttk import *
       
 root = Tk()
+root.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
              "德州":"休士頓","華盛頓州":"西雅圖",
@@ -4399,6 +4352,7 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.ttk import *
       
 root = Tk()
+root.geometry("600x400")
 
 asia = {"中國":"北京","日本":"東京","泰國":"曼谷","韓國":"首爾"}
 euro = {"英國":"倫敦","法國":"巴黎","德國":"柏林","挪威":"奧斯陸"}
@@ -4431,6 +4385,7 @@ def removeItem():                   # 刪除所選項目
         tree.delete(iid)            # 刪除所選項目
          
 root = Tk()
+root.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
              "德州":"休士頓","華盛頓州":"西雅圖",
@@ -4472,6 +4427,7 @@ def insertItem():
     cityEntry.delete(0,END)         # 刪除cityEntry
          
 root = Tk()
+root.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
              "德州":"休士頓","華盛頓州":"西雅圖",
@@ -4517,6 +4473,7 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.ttk import *
          
 root = Tk()
+root.geometry("600x400")
 
 stateCity = {"Illinois":"芝加哥","California":"洛杉磯",
              "Texas":"休士頓","Washington":"西雅圖",
@@ -4558,6 +4515,7 @@ def treeview_sortColumn(col):
     reverseFlag = not reverseFlag       # 更改排序旗標
             
 root = Tk()
+root.geometry("600x400")
 
 reverseFlag = False                     # 排序旗標註明是否反向排序
 
@@ -4734,8 +4692,8 @@ def fnB1Motion(event):
     lblTest.place(x=lblX+(event.x-mx),y=lblY+(event.y-my))	#重設lblTest位置
     
 window = tk.Tk()
+root.geometry("600x400")
 window.title('滑鼠事件測試')
-window.geometry('240x240')
 
 mx=0
 my=0
@@ -4770,8 +4728,8 @@ def fnNM(e):
     lblMsg.config(text=msg[iArea][iNM]) #重設標籤的文字內容
     
 window = tk.Tk()
+root.geometry("600x400")
 window.title('台灣夜市簡介')
-window.geometry('300x180')
 
 tk.Label(window,text='台灣夜市之旅',font=('微軟正黑體',16)).pack()
 lfrmNM=tk.LabelFrame(window,text='夜市名稱',relief='raised',borderwidth=2)
@@ -4825,7 +4783,7 @@ def buttonClicked(event):       # Button按鈕事件處理程式
     lab.config(text="Button clicked")
     
 root = Tk()
-root.geometry("300x180")        # 視窗寬300高160
+root.geometry("600x400")
 
 btn = Button(root,text="Click me")
 btn.pack(anchor=W)
@@ -4852,6 +4810,7 @@ def callback(event):                        # 事件處理程式
     print("滑鼠點擊位置 :", event.x, event.y)   # 列印座標
     
 root = Tk()
+root.geometry("600x400")
 
 frame = Frame(root,width=300,height=180)
 frame.bind("<Button-1>",callback)           # 按一下綁定callback
@@ -4868,8 +4827,7 @@ def mouseMotion(event):             # Mouse移動
     var.set(textvar)
     
 root = Tk()
-
-root.geometry("300x180")            # 視窗寬300高180
+root.geometry("600x400")
 
 x, y = 0, 0                         # x,y座標
 var = StringVar()
@@ -4891,7 +4849,7 @@ def leave(event):                       # Leave事件處理程式
     x.set("滑鼠離開Exit功能鈕")
     
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 btn = Button(root,text="離開",command=root.destroy)
 btn.pack(pady=30)
@@ -4913,6 +4871,7 @@ def leave(event):                       # <Esc>事件處理程式
     print('你按了 ESC')
    
 root = Tk()
+root.geometry("600x400")
 
 root.bind("<Escape>",leave)             # Esc鍵綁定leave函數
 lab = Label(root,text="測試Esc鍵",      # 標籤區域
@@ -4929,6 +4888,7 @@ def key(event):                     # 處理鍵盤按a ... z
     print("按了 " + repr(event.char) + " 鍵") 
    
 root = Tk()
+root.geometry("600x400")
 
 root.bind("<Key>",key)              # <Key>鍵綁定key函數
 
@@ -4944,6 +4904,7 @@ def coordXY(event):                 # 列出滑鼠座標
     print("滑鼠座標 : ", event.x, event.y)
     
 root = Tk()
+root.geometry("600x400")
 
 frame = Frame(root, width=100, height=100)
 frame.bind("<Key>", key)            # frame物件的<Key>綁定key
@@ -4965,7 +4926,7 @@ def toggle(onoff):                  # 切換綁定
         onoff.unbind("<Button-1>")
     
 root = Tk()
-root.geometry("300x180")            # 視窗寬300高180
+root.geometry("600x400")
 
 btn = Button(root,text="tkinter")   # 建立按鈕tkinter
 btn.pack(anchor=W,padx=10,pady=10)
@@ -4985,7 +4946,7 @@ def btnClicked2(event):             # Button按鈕事件處理程式2
     print("Bind event handler, I like tkinter")
     
 root = Tk()
-root.geometry("300x180")            # 視窗寬300高180
+root.geometry("600x400")
 
 btn = Button(root,text="tkinter",   # 建立按鈕tkinter
              command=btnClicked1)
@@ -5010,7 +4971,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x250")        # 視窗寬300高250
+root.geometry("600x400")
 
 var = StringVar()               # 建立標籤
 lab = Label(root,text="",textvariable=var)
@@ -5035,7 +4996,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x250")        # 視窗寬300高250
+root.geometry("600x400")
 
 var = StringVar()               # 建立標籤
 lab = Label(root,text="",textvariable=var)
@@ -5061,7 +5022,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x250")        # 視窗寬300高250
+root.geometry("600x400")
 
 var = StringVar()               # 建立標籤
 lab = Label(root,text="",textvariable=var)
@@ -5089,7 +5050,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
-root.geometry("300x250")        # 視窗寬300高250
+root.geometry("600x400")
 
 var = StringVar()               # 建立標籤
 lab = Label(root,text="",textvariable=var)
@@ -5126,6 +5087,7 @@ fruits = ["Banana","Watermelon","Pineapple",
           "Orange","Grapes","Mango"]
 
 root = Tk()
+root.geometry("600x400")
 
 lb = Listbox(root)                      # 建立Listbox          
 for fruit in fruits:                    # 建立水果項目
@@ -5136,24 +5098,26 @@ lb.pack(padx=10,pady=10)
 
 root.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 from tkinter.font import Font
 from tkinter.ttk import *
+
 def familyChanged(event):                   # font family更新
     f=Font(family=familyVar.get())          # 取得新font family
     text.configure(font=f)                  # 更新text的font family
+
 def weightChanged(event):                   # weight family更新
     f=Font(weight=weightVar.get())          # 取得新font weight
     text.configure(font=f)                  # 更新text的font weight
+
 def sizeSelected(event):                    # size family更新
     f=Font(size=sizeVar.get())              # 取得新font size
     text.configure(font=f)                  # 更新text的font size    
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立工具列
 toolbar = Frame(root,relief=RAISED,borderwidth=1)
@@ -5191,7 +5155,6 @@ root.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
 from tkinter.font import Font
 from tkinter.ttk import *
 
@@ -5200,7 +5163,7 @@ def sizeSelected(event):                    # size family更新
     text.tag_config(SEL,font=f)
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立工具列
 toolbar = Frame(root,relief=RAISED,borderwidth=1)
@@ -5237,7 +5200,7 @@ def sizeSelected(event):                        # size family更新
     text.tag_config(SEL,font=f)
       
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 # 建立工具列
 toolbar = Frame(root,relief=RAISED,borderwidth=1)
@@ -5269,9 +5232,11 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import messagebox
+
 def cutJob():                           # Cut方法
     copyJob()                           # 複製選取文字
     text.delete(SEL_FIRST,SEL_LAST)     # 刪除選取文字
+
 def copyJob():                          # Copy方法
     try:
         text.clipboard_clear()          # 清除剪貼簿
@@ -5279,17 +5244,19 @@ def copyJob():                          # Copy方法
         text.clipboard_append(copyText) # 寫入剪貼簿
     except TclError:
         print("沒有選取")
+
 def pasteJob():                         # Paste方法
     try:
         copyText = text.selection_get(selection="CLIPBOARD") # 讀取剪貼簿內容
         text.insert(INSERT,copyText)        # 插入內容
     except TclError:
         print("剪貼簿沒有資料")
+
 def showPopupMenu(event):               # 顯示彈出功能表
     popupmenu.post(event.x_root,event.y_root)
 
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 popupmenu = Menu(root,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立3個指令清單
@@ -5324,7 +5291,7 @@ def showPopupMenu(event):               # 顯示彈出功能表
     popupmenu.post(event.x_root,event.y_root)
 
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 popupmenu = Menu(root,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立3個指令清單
@@ -5352,19 +5319,25 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import messagebox
+
 def cutJob():                           # Cut方法
     text.event_generate("<<Cut>>")
+
 def copyJob():                          # Copy方法
     text.event_generate("<<Copy>>")
+
 def pasteJob():                         # Paste方法
     text.event_generate("<<Paste>>")
+
 def showPopupMenu(event):               # 顯示彈出功能表
     popupmenu.post(event.x_root,event.y_root)
+
 def undoJob():                          # 復原undo方法
     try:
         text.edit_undo()
     except:
         print("先前未有動作")
+
 def redoJob():                          # 重複redo方法
     try:
         text.edit_redo()
@@ -5372,7 +5345,7 @@ def redoJob():                          # 重複redo方法
         print("先前未有動作")
 
 root = Tk()
-root.geometry("300x180")
+root.geometry("600x400")
 
 popupmenu = Menu(root,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立3個指令清單
@@ -5403,10 +5376,7 @@ text.insert(END,"A hundred miles,\n")
 
 root.mainloop()
 
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 from tkinter.ttk import *
 
@@ -5419,6 +5389,7 @@ def treeSelect(event):
     var.set(str)                            # 設定狀態列內容
          
 root = Tk()
+root.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
              "德州":"休士頓","華盛頓州":"西雅圖",
@@ -5468,6 +5439,7 @@ def doubleClick(event):
     messagebox.showinfo("Double Clicked",str)   # 輸出
          
 root = Tk()
+root.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
              "德州":"休士頓","華盛頓州":"西雅圖",
@@ -5489,20 +5461,19 @@ tree.pack()
 
 root.mainloop()
 
-
-print("------------------------------------------------------------")  # 60個
-
-
 print("------------------------------------------------------------")  # 60個
 
 def paint(event):                           # 拖曳可以繪圖
     x1,y1 = (event.x, event.y)              # 設定左上角座標
     x2,y2 = (event.x, event.y)              # 設定右下角座標
     canvas.create_oval(x1,y1,x2,y2,fill="blue")
+
 def cls():                                  # 清除畫面
     canvas.delete("all")
     
 tk = Tk()
+tk.geometry("600x400")
+
 lab = Label(tk,text="拖曳滑鼠可以繪圖")     # 建立標題
 lab.pack()
 canvas = Canvas(tk,width=640, height=300)   # 建立畫布
@@ -5522,4 +5493,27 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+""" 搬出
 
+
+button1 = tk.Button(window, text='pack置中', width=20).pack()
+button2 = tk.Button(window, text='pack左', width=20).pack(side=tk.LEFT)
+button3 = tk.Button(window, text='pack右', width=20).pack(side=tk.RIGHT)
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+#設定視窗背景色
+window.config(bg="red")
+window.config(bg="green")
+window.config(bg="blue")
+    
+
+# 將4個鈕包裝定位在右下方
+button4.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
+button3.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
+button2.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
+button1.pack(anchor=tk.S,side=tk.RIGHT,padx=5,pady=5)
+
+"""

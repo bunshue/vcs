@@ -23,8 +23,7 @@ import openpyxl
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("openpyxl test 05 建立多工作表之Excel活頁簿")
+print("openpyxl test 01 建立多工作表之Excel活頁簿")
 
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
@@ -73,7 +72,6 @@ workbook.remove(workbook["carol"])
 print("openpyxl test 06 新增工作表 ＆ 修改工作表名稱")
 workbook.active = 0
 sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-
 """
 
 filename_w = "tmp_excel_openpyxl_a_sheet.xlsx"
@@ -82,12 +80,12 @@ print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 07a 建立新檔, 簡易資料")
+print("openpyxl test 02a 建立新檔, 簡易資料")
 print("開啟空白的活頁簿")
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
 """
-print("openpyxl test 07b 開啟舊檔, 修改資料, 存檔, 或另存新檔")
+print("openpyxl test 02b 開啟舊檔, 修改資料, 存檔, 或另存新檔")
 filename_r = "data/python_ReadWrite_EXCEL.xlsx"
 print("讀取 xlsx, 檔案 : " + filename_r)
 workbook = openpyxl.load_workbook(filename_r)
@@ -116,7 +114,8 @@ workbook.save(filename_w)  # 儲存檔案
 print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
-print("openpyxl test 08 建立新檔 完整資料 + 格式")
+
+print("openpyxl test 02c 建立新檔 完整資料 + 格式")
 print("開啟空白的活頁簿")
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
@@ -306,9 +305,7 @@ print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-print("openpyxl test 08 建立新檔 完整資料 + 格式")
+print("openpyxl test 02 建立新檔 完整資料 + 格式")
 print("開啟空白的活頁簿")
 workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
 
@@ -374,9 +371,7 @@ print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 09 讀 寫 從檔案後面附加資料")
-
-filename_w = "tmp_excel_openpyxl_c.xlsx"
+print("openpyxl test 03 讀 寫 從檔案後面附加資料")
 
 if not os.path.exists(filename_w):
     workbook = openpyxl.Workbook()  # 建立空白的Excel活頁簿物件
@@ -392,12 +387,50 @@ sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即�
 animal01 = ["鼠", "mouse", "3", "米老鼠"]
 sheet.append(animal01)
 
+filename_w = "tmp_excel_openpyxl_c.xlsx"
 workbook.save(filename_w)  # 儲存檔案
 print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
 
-print("openpyxl test 10 創建Excel文件")
+print("openpyxl test 03 讀 寫 讀後再寫")
+
+filename_r = "data/python_ReadWrite_EXCEL.xlsx"
+
+workbook = openpyxl.load_workbook(filename_r, data_only=True)  # 設定 data_only=True 只讀取計算後的數值
+
+print("修改目前工作表")
+
+workbook = openpyxl.load_workbook(filename_r)
+
+sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
+print("excel活動工作表： ", workbook.active)
+
+workbook.active = 0
+print("excel活動工作表： ", workbook.active)
+
+print("隱藏/取消隱藏工作表")
+sheet = workbook["animals2"]
+sheet.sheet_state = "hidden"
+# sheet = workbook['BBB']
+# sheet.sheet_state = 'visible'
+
+print("刪除工作表")
+sheet = workbook["animals1"]
+workbook.remove(sheet)
+
+print("複製工作表")
+sheet = workbook["animals2"]
+target = workbook.copy_worksheet(sheet)
+target.title = "new_animals2"
+
+filename_w = "tmp_excel_openpyxl_c_sheet.xlsx"
+workbook.save(filename_w)
+print("建立 xlsx OK, 檔案 : " + filename_w)
+
+print("------------------------------------------------------------")  # 60個
+
+print("openpyxl test 04 創建Excel文件")
 
 # 這個有問題
 
@@ -429,6 +462,8 @@ workbook.save(filename_w)  # 儲存檔案
 print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
+
+print("openpyxl test 05")
 
 import pathlib  # 標準函式庫
 import csv  # 標準函式庫
@@ -467,12 +502,12 @@ for pass_obj in path.iterdir():
                     sheet.cell(list_row, 13).value = sh.cell(dt_row, 7).value  # 備註
                     list_row += 1
 
-filename_w = "tmp_excel_openpyxl_f.xlsx"
+filename_w = "tmp_excel_openpyxl_e.xlsx"
 workbook.save(filename_w)
 print("建立 xlsx OK, 檔案 : " + filename_w)
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 import calendar
 
 year = 2024
@@ -563,10 +598,7 @@ def makecalendar(value1, value2):
 
 msg = makecalendar(value1, value2)
 print(msg)
-
-
-print("------------------------------------------------------------")  # 60個
-
+'''
 
 print("------------------------------------------------------------")  # 60個
 

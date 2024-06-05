@@ -174,7 +174,7 @@ for sheetname in workbook.sheetnames:  # 所有工作表
 
 print("------------------------------")  # 30個
 
-print("顯示資料 方法五")
+print("顯示資料 方法五a")
 
 
 def get_values(sheet):
@@ -195,6 +195,23 @@ print(get_values(sheet1))
 
 print("印出工作表2 所有內容")
 print(get_values(sheet2))
+
+print("------------------------------")  # 30個
+
+print("顯示資料 方法五b")
+workbook = openpyxl.load_workbook(filename_r)
+
+results = []
+
+# 取得第 0 個工作表
+sheet = workbook.worksheets[0]
+
+for row in sheet.iter_rows():
+    results.append([cell.value for cell in row])
+#print(results)
+
+for _ in results:
+    print(_)
 
 print("------------------------------")  # 30個
 
@@ -264,6 +281,46 @@ print('sheet.dimensions', sheet.dimensions)
 
 for a, b, c, d in sheet[sheet.dimensions]:
     print(a.value, b.value, c.value, d.value)
+
+print("------------------------------")  # 30個
+
+print("顯示資料 方法九")
+
+
+workbook = openpyxl.load_workbook(filename_r)
+
+sheets = workbook.sheetnames
+print(sheets)
+
+for i in range(len(sheets)):
+    sheet = workbook[sheets[i]]
+    print('title', sheet.title)
+    for col in sheet.iter_cols(min_row=0, min_col=0, max_row=3, max_col=3):
+        for cell in col:
+            print(cell.value, end = " ")
+    print()
+
+print("------------------------------")  # 30個
+
+for row in range(2, 7):  # 第 2~6 ROW
+    for col in range(65, 70): # 65~69 A~E
+        cell_index = chr(col) + str(row)
+        print(sheet[cell_index].value, end='\t')
+    print()
+
+print("------------------------------")  # 30個
+
+for i in range(2, sheet.max_row+1):
+    sheet.row_dimensions[i].height = 18
+    for j in range(3, sheet.max_column+1):
+        print(sheet.cell(row=i,column=j).value, end = " ")
+    print()
+        
+print("------------------------------")  # 30個
+
+
+
+
 
 print("------------------------------")  # 30個
 
@@ -377,60 +434,14 @@ print("------------------------------------------------------------")  # 60個
 
 filename_r = "data/python_ReadWrite_EXCEL.xlsx"
 
+'''
 """
 #開啟舊檔 + 參數
 workbook = openpyxl.load_workbook(filename_r, data_only=True)  # 要excel開啟才可以看到值，否則會顯示None
 workbook = openpyxl.load_workbook(filename_r, data_only=False) # 要excel開啟才可以看到值，否則會顯示None
 """
 
-workbook = openpyxl.load_workbook(filename_r)
-
-results = []
-
-# 取得第 0 個工作表
-sheet = workbook.worksheets[0]
-
-for row in sheet.iter_rows():
-    results.append([cell.value for cell in row])
-
-#print(results)
-for _ in results:
-    print(_)
-
 print("------------------------------")  # 30個
-
-workbook = openpyxl.load_workbook(filename_r)
-
-sheets = workbook.sheetnames
-print(sheets)
-
-for i in range(len(sheets)):
-    sheet = workbook[sheets[i]]
-    print('title', sheet.title)
-    for col in sheet.iter_cols(min_row=0, min_col=0, max_row=3, max_col=3):
-        for cell in col:
-            print(cell.value, end = " ")
-    print()
-
-print("------------------------------")  # 30個
-
-for row in range(2, 7):  # 第 2~6 ROW
-    for col in range(65, 70): # 65~69 A~E
-        cell_index = chr(col) + str(row)
-        print(sheet[cell_index].value, end='\t')
-    print()
-
-print("------------------------------------------------------------")  # 60個
-
-for i in range(2, sheet.max_row+1):
-    sheet.row_dimensions[i].height = 18
-    for j in range(3, sheet.max_column+1):
-        print(sheet.cell(row=i,column=j).value, end = " ")
-    print()
-        
-print("------------------------------------------------------------")  # 60個
-
-sys.exit()
 
 """ CSV 轉 EXCEL
 import csv
@@ -445,42 +456,10 @@ workbook.save("temp_data_02.xlsx")
 
 print("------------------------------------------------------------")  # 60個
 
-workbook = openpyxl.load_workbook(filename_r, data_only=True)  # 設定 data_only=True 只讀取計算後的數值
-
-print("修改目前工作表")
-
-workbook = openpyxl.load_workbook(filename_r)
-
-sheet = workbook.active  # 取得開啟試算表後立刻顯示的工作表(即最後編輯的工作表)
-print("excel活動工作表： ", workbook.active)
-
-workbook.active = 0
-print("excel活動工作表： ", workbook.active)
-
-print("隱藏/取消隱藏工作表")
-sheet = workbook["animals2"]
-sheet.sheet_state = "hidden"
-# sheet = workbook['BBB']
-# sheet.sheet_state = 'visible'
-
-print("刪除工作表")
-sheet = workbook["animals1"]
-workbook.remove(sheet)
-
-print("複製工作表")
-sheet = workbook["animals2"]
-target = workbook.copy_worksheet(sheet)
-target.title = "new_animals2"
-
-workbook.save(filename_w)
-print("建立 xlsx OK, 檔案 : " + filename_w)
-
-
-"""
 print("------------------------------------------------------------")  # 60個
 
-所有的修改都只是針對記憶體中的excel檔
-只有save才會把修改的內容寫到儲存媒體上
+#所有的修改都只是針對記憶體中的excel檔
+#只有save才會把修改的內容寫到儲存媒體上
 
 print("------------------------------------------------------------")  # 60個
 
@@ -537,13 +516,6 @@ sheet.freeze_panes = "C2"
 
 print("------------------------------------------------------------")  # 60個
 
-
-"""
-
-
-
-print("------------------------------------------------------------")  # 60個
-""" write excel
 # color_scale.py
 
 from openpyxl.styles import PatternFill
@@ -582,5 +554,6 @@ less_than_rule = CellIsRule(
 sheet.conditional_formatting.add("C1:C10", less_than_rule)
 
 workbook.save("tmp_01_fill_red.xlsx")
-"""
+'''
+
 
