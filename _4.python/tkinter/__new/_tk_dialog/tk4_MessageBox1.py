@@ -5,7 +5,7 @@ import tkinter.messagebox
 import tkinter.simpledialog
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -90,45 +90,41 @@ print("------------------------------------------------------------")  # 60個
 
 """
 
-def main():
-    flag = True
+flag = True
 
-    # 修改标签上的文字
-    def change_label_text():
-        nonlocal flag
-        flag = not flag
-        color, msg = ('red', 'Hello, world!')\
-            if flag else ('blue', 'Goodbye, world!')
-        label.config(text=msg, fg=color)
+# 修改标签上的文字
+def change_label_text():
+    global flag
+    flag = not flag
+    color, msg = ('red', 'Hello, world!')\
+        if flag else ('blue', 'Goodbye, world!')
+    label.config(text=msg, fg=color)
 
-    # 确认退出
-    def confirm_to_quit():
-        if tk.messagebox.askokcancel('温馨提示', '确定要退出吗?'):
-            window.quit()
+# 确认退出
+def confirm_to_quit():
+    if tk.messagebox.askokcancel('温馨提示', '确定要退出吗?'):
+        window.quit()
 
-    # 创建顶层窗口
-    window = tk.Tk()
-    # 设置窗口大小
-    window.geometry('240x160')
-    # 设置窗口标题
-    window.title('小游戏')
-    # 创建标签对象
-    label = tk.Label(window, text='Hello, world!', font='Arial -32', fg='red')
-    label.pack(expand=1)
-    # 创建一个装按钮的容器
-    panel = tk.Frame(window)
-    # 创建按钮对象
-    button1 = tk.Button(panel, text='修改', command=change_label_text)
-    button1.pack(side='left')
-    button2 = tk.Button(panel, text='退出', command=confirm_to_quit)
-    button2.pack(side='right')
-    panel.pack(side='bottom')
-    
-    # 开启主事件循环
-    window.mainloop()
+# 创建顶层窗口
+window = tk.Tk()
+# 设置窗口大小
+window.geometry('240x160')
+# 设置窗口标题
+window.title('小游戏')
 
-if __name__ == '__main__':
-    main()
+# 创建标签对象
+label = tk.Label(window, text='Hello, world!', font='Arial -32', fg='red')
+label.pack(expand=1)
+# 创建一个装按钮的容器
+panel = tk.Frame(window)
+# 创建按钮对象
+button1 = tk.Button(panel, text='修改', command=change_label_text)
+button1.pack(side='left')
+button2 = tk.Button(panel, text='退出', command=confirm_to_quit)
+button2.pack(side='right')
+panel.pack(side='bottom')
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -161,6 +157,7 @@ def more():
         tk.messagebox.showinfo("deer的簡介",str2)
     
 window = tk.Tk()
+
 lb = tk.Label(window,text="請點選想了解的動物簡介:").pack()
 choice = tk.IntVar()
 choice.set(0)
@@ -215,52 +212,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-"""
-
-
-window = tk.Tk()
-window.geometry("400x300")
-window.title("試題與測驗分析程式")
-
-tk.messagebox.askokcancel(title="對話方塊", message="askokcancel")
-
-window.mainloop()
-
-
-tk.messagebox.showinfo("Invoice Complete", "Invoice Complete")
-
-
-"""
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-tkinter.messagebox.showinfo("Error","This word is not present in our lexicon\nDouble check it.")
-tkinter.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
-tkinter.messagebox.showinfo('圓周長','圓周長為 {:.2f} {}'.format(a,u))
-tkinter.messagebox.showinfo('圓面積','圓面積為 {:.2f} 平方{}'.format(a,u))
-tkinter.messagebox.showinfo('訊息',msg[:len(msg)-1])
-tkinter.messagebox.showinfo('訊息','期盼下次你能參加')
-        messagebox.showinfo("Notebook","歡迎使用Notebook")
-
-tkinter.messagebox.askokcancel('注意','你的BMI指數為：{} {}'.format(bmi, msg))
-
-"""
-
 window = tk.Tk()
 
 def answer():
@@ -298,9 +249,7 @@ btnEnd.pack(pady=5)
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 import tkinter.messagebox
 import tkinter.simpledialog
@@ -335,8 +284,6 @@ print(weight)
 
 print("------------------------------------------------------------")  # 60個
 
-# tkinterMessageBox.py
-
 import tkinter.messagebox									# 匯入tkMessageBox模組
 
 def cmd():										# 按鈕訊息處理函數
@@ -363,15 +310,16 @@ def cmd():										# 按鈕訊息處理函數
 		tk.messagebox.showwarning('Python Tkinter','showwarning')		# 使用showwarning函數
 		buttontext.set('askokcancel')
 n = 0											# 為n賦初值
-root = tk.Tk()
-buttontext = tk.StringVar()							# 產生關聯按鈕文字的變數
+window = tk.Tk()
+
+buttontext = tk.StringVar() # 產生關聯按鈕文字的變數
 buttontext.set('askokcancel')								# 設定buttontext值
-button = tk.Button(root,								# 產生按鈕
+button = tk.Button(window,								# 產生按鈕
 		textvariable = buttontext,						# 設定關聯變數
 		command = cmd)								# 設定事件處理函數
 button.pack()
 
-root.mainloop()										# 進入訊息循環
+window.mainloop()										# 進入訊息循環
 
 print("------------------------------------------------------------")  # 60個
 
@@ -381,3 +329,41 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+'''
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+tk.messagebox.askokcancel(title="對話方塊", message="askokcancel")
+
+tk.messagebox.showinfo("Invoice Complete", "Invoice Complete")
+
+tkinter.messagebox.showinfo("Error","This word is not present in our lexicon\nDouble check it.")
+tkinter.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
+tkinter.messagebox.showinfo('圓周長','圓周長為 {:.2f} {}'.format(a,u))
+tkinter.messagebox.showinfo('圓面積','圓面積為 {:.2f} 平方{}'.format(a,u))
+tkinter.messagebox.showinfo('訊息',msg[:len(msg)-1])
+tkinter.messagebox.showinfo('訊息','期盼下次你能參加')
+        messagebox.showinfo("Notebook","歡迎使用Notebook")
+
+tkinter.messagebox.askokcancel('注意','你的BMI指數為：{} {}'.format(bmi, msg))
+
+
+tkinter.messagebox.showinfo('AAAAAAAA')
+tkinter.messagebox.showinfo("Check Sudoku Solution",  "The solution is valid")
+tkinter.messagebox.showwarning("Check Sudoku Solution", "The solution is invalid")
+
+"""
+
+
+

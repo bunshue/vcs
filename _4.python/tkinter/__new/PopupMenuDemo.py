@@ -45,5 +45,6 @@ class PopupMenuDemo:
 
     def popup(self, event):
         self.menu.post(event.x_root, event.y_root)
-    
+
+print('右鍵選單')    
 PopupMenuDemo() # Create GUI

@@ -162,7 +162,7 @@ month = 3
 day = 11
 total = 123
 print(f"{year}年{month}月{day}日是{year}年的第{total}天")
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import Label, Tk 
@@ -191,7 +191,7 @@ digital_clock()
 window.mainloop()
 
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 import os

@@ -6,14 +6,14 @@ class ImageDemo:
         window.title("Image Demo") # Set title
         
         # Create PhotoImage objects
-        caImage = PhotoImage(file = "image/ca.gif")
-        chinaImage = PhotoImage(file = "image/china.gif")
-        leftImage = PhotoImage(file = "image/left.gif")
-        rightImage = PhotoImage(file = "image/right.gif")
-        usImage = PhotoImage(file = "image/usIcon.gif")
-        ukImage = PhotoImage(file = "image/ukIcon.gif")
-        crossImage = PhotoImage(file = "image/x.gif")
-        circleImage = PhotoImage(file = "image/o.gif")
+        caImage = PhotoImage(file = "ca.gif")
+        chinaImage = PhotoImage(file = "china.gif")
+        leftImage = PhotoImage(file = "left.gif")
+        rightImage = PhotoImage(file = "right.gif")
+        usImage = PhotoImage(file = "usIcon.gif")
+        ukImage = PhotoImage(file = "ukIcon.gif")
+        crossImage = PhotoImage(file = "x.gif")
+        circleImage = PhotoImage(file = "o.gif")
         
         # frame1 to contain label and canvas
         frame1 = Frame(window)
@@ -36,5 +36,7 @@ class ImageDemo:
         Radiobutton(frame2, image = circleImage).pack(side = LEFT)
         
         window.mainloop() # Create an event loop
+
 print(E)
+
 ImageDemo() # Create GUI 

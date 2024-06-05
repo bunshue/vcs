@@ -2,6 +2,8 @@ def main():
     NUMBER_OF_DAYS = 10
     NUMBER_OF_HOURS = 24
 
+    print('111')
+
     # Initialize data
     data = [] 
     for i in range(NUMBER_OF_DAYS):
@@ -11,6 +13,7 @@ def main():
             data[i][j].append(0) # Temperature value
             data[i][j].append(0) # Humidity value
 
+    print('222')
     # Read input using input redirection from a file
     for k in range(NUMBER_OF_DAYS * NUMBER_OF_HOURS):
         line = input().strip().split()
@@ -21,6 +24,7 @@ def main():
         data[day - 1][hour - 1][0] = temperature
         data[day - 1][hour - 1][1] = humidity
 
+    print('333')
     # Find the average daily temperature and humidity
     for i in range(NUMBER_OF_DAYS):
         dailyTemperatureTotal = 0

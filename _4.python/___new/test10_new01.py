@@ -22,7 +22,7 @@ import math
 import random
 import requests
 import numpy as np
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 def printlocal():
@@ -81,71 +81,6 @@ print(postgres_insert_query)
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("---- 列印專區 --------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-# 替代字串
-TABLE_NAME = "people"
-SELECT = "select * from %s order by age, name" % TABLE_NAME
-
-print("select * from %s order by age, name" % TABLE_NAME)
-print(SELECT)
-
-key_id = 1234
-SELECT = "SELECT * FROM memos WHERE key=?", (str(key_id))
-print(SELECT)
-
-print("---- 語法專區 --------------------------------------------------------")  # 60個
-
-print("字串處理")
-
-items = "03/11/2006".split("/")
-print(items)
-
-print("------------------------------------------------------------")  # 60個
-
-print("處理網址資料")
-
-target = "https://tw.appledaily.com/new/realtime/{}"
-
-for page in range(1, 11):
-    url = target.format(page)
-    print(url)
-
-print("------------------------------------------------------------")  # 60個
-
-target_url = "https://www.nkust.edu.tw/p/403-1000-12-{}.php"
-
-for page in range(1, 6):
-    html = target_url.format(page)
-    print(html)
-
-print("------------------------------------------------------------")  # 60個
-
-print("處理網址資料")
-
-url = "https://www.nkust.edu.tw/p/403-1000-12-{}.php?Lang=zh-tw"
-for pg in range(1, 11):
-    print(url.format(pg))
-
-url = "https://tw.stock.yahoo.com/news_list/url/d/e/N{}.html?q=&pg={}"
-for cate in [1, 4]:
-    for pg in range(1, 6):
-        print(url.format(cate, pg))
-
-print("------------------------------------------------------------")  # 60個
-
 from urllib import parse
 
 string = "豬頭三"
@@ -177,38 +112,6 @@ if (number % 2 == 0 or number % 3 == 0) and not (number % 2 == 0 and number % 3 
 
 print("------------------------------------------------------------")  # 60個
 
-print("if and or")
-lottery = 35
-guess = 35
-
-# Get digits from lottery
-lotteryDigit1 = lottery // 10
-lotteryDigit2 = lottery % 10
-
-# Get digits from guess
-guessDigit1 = guess // 10
-guessDigit2 = guess % 10
-
-print("The lottery number is", lottery)
-
-# Check the guess
-if guess == lottery:
-    print("Exact match: you win $10,000")
-elif guessDigit2 == lotteryDigit1 and guessDigit1 == lotteryDigit2:
-    print("Match all digits: you win $3,000")
-elif (
-    guessDigit1 == lotteryDigit1
-    or guessDigit1 == lotteryDigit2
-    or guessDigit2 == lotteryDigit1
-    or guessDigit2 == lotteryDigit2
-):
-    print("Match one digit: you win $1,000")
-else:
-    print("Sorry, no match")
-
-# test strip
-# filename = input("Enter a filename: ").strip()
-
 print("測試 strip()")
 input_string = "ABCDEFG       "
 print("無strip <<<" + input_string + ">>>")
@@ -239,15 +142,6 @@ if ss in string:
     print("有被包含")
 else:
     print("沒有被包含")
-
-print("------------------------------------------------------------")  # 60個
-
-print("格式化字串")
-
-print(12345)
-
-print("八位數 前面補0")
-print("{:08d}\n{:08d}\n{:08d}".format(123, 1234, 12345))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -425,10 +319,6 @@ print("y=/%3.2f/" % y)
 print("s=/%2s/" % s)
 
 print("------------------------------------------------------------")  # 60個
-
-title = "南極旅遊講座"
-print("/{0:*^20s}/".format(title))
-
 print("------------------------------------------------------------")  # 60個
 
 # 貸款試算
@@ -642,26 +532,6 @@ print("100的16進位 = %x\n100的 8進位 = %o" % (x, x))
 
 print("------------------------------------------------------------")  # 60個
 
-r = 5
-PI = 3.14159
-area = PI * r**2
-print("/半徑{0:3d}圓面積是{1:10.2f}/".format(r, area))
-print("/半徑{0:>3d}圓面積是{1:>10.2f}/".format(r, area))
-print("/半徑{0:<3d}圓面積是{1:<10.2f}/".format(r, area))
-print("/半徑{0:^3d}圓面積是{1:^10.2f}/".format(r, area))
-
-print("------------------------------------------------------------")  # 60個
-
-r = 5
-PI = 3.14159
-area = PI * r**2
-print(f"/半徑{r:3d}圓面積是{area:10.2f}/")
-print(f"/半徑{r:>3d}圓面積是{area:>10.2f}/")
-print(f"/半徑{r:<3d}圓面積是{area:<10.2f}/")
-print(f"/半徑{r:^3d}圓面積是{area:^10.2f}/")
-
-print("------------------------------------------------------------")  # 60個
-
 print(2**32)
 
 print("------------------------------------------------------------")  # 60個
@@ -828,7 +698,7 @@ print(x & y)
 print(x ^ y)
 print(x | y)
 print(~x)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 info = [
@@ -1230,50 +1100,6 @@ prices = {
 # 用股票價格大於100元的股票構造一個新的字典
 prices2 = {key: value for key, value in prices.items() if value > 100}
 print(prices2)
-
-print("------------------------------------------------------------")  # 60個
-
-id_no = 1
-ename = "mouse"
-cname = "米老鼠"
-weight = 8
-
-print("編號 %d 英文名 %s 中文名 %s 體重 %d" % (id_no, ename, cname, weight))
-print("編號 {} 英文名 {} 中文名 {} 體重 {}".format(id_no, ename, cname, weight))
-
-print(" 姓名    國文    英文    總分")
-print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
-print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
-print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
-print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
-
-print(" 姓名    國文    英文    總分")
-print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
-print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
-print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
-print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("x=/%6d/" % x)
-y = 10.5
-print("y=/%6.2f/" % y)
-s = "Deep"
-print("s=/%6s/" % s)
-print("以下是保留格數空間不足的實例")
-print("x=/%2d/" % x)
-print("y=/%3.2f/" % y)
-print("s=/%2s/" % s)
-
-print("------------------------------------------------------------")  # 60個
-
-x = 100
-print("x=/%-6d/" % x)
-y = 10.5
-print("y=/%-6.2f/" % y)
-s = "Deep"
-print("s=/%-6s/" % s)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -2153,12 +1979,6 @@ d1 = {"chicken": 2, "dog": 4, "cat": 3}
 for animal in d1:
     legs = d1[animal]
     print(animal, legs)
-
-print("------------------------------------------------------------")  # 60個
-
-d1 = {"chicken": 2, "dog": 4, "cat": 3}
-for animal, legs in d1.items():
-    print("動物: {0} 有 {1} 隻腳".format(animal, legs))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -3393,12 +3213,6 @@ print("Val的十六進位數=%x" % Val)  # 以%x格式化字元輸出
 
 print("------------------------------------------------------------")  # 60個
 
-company = "藍海科技股份有限公司"
-year = 27
-print("{}已成立公司 {} 年".format(company, year))
-
-print("------------------------------------------------------------")  # 60個
-
 print("{0:10}收入：{1:_^12}".format("Axel", 52000))
 print("{0:10}收入：{1:>12}".format("Michael", 87000))
 print("{0:10}收入：{1:*<12}".format("May", 36000))
@@ -4161,14 +3975,6 @@ print("置換前 :", text)
 pattern = re.compile(word1)
 text = re.sub(pattern, word2, text)
 print("置換後 :", text)
-
-print("------------------------------------------------------------")  # 60個
-
-chicken = 20
-rabbit = 15
-print("雞有 {} 隻, 兔有 {} 隻".format(int(chicken), int(rabbit)))
-print("雞有 {} 隻, 兔有 {} 隻".format(chicken, rabbit))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -6350,13 +6156,6 @@ count2 = text.count(word2)
 print(word2, ":", count2, "個")
 
 print("------------------------------------------------------------")  # 60個
-
-num = 1234
-print("¨數值 = {0:10d},  數值 = {0:10d}".format(num, num))
-
-num = 123.456789
-
-print("¨數值 = {1:6.3f},  數值 = {1:6.3f}".format(num, num))
 
 print("------------------------------------------------------------")  # 60­э
 
@@ -10096,13 +9895,6 @@ plt.plot(x, y, marker='d',ms=10, mfc='r', mec='b')
 
 print("------------------------------------------------------------")  # 60個
 
-import sys
-cc = sys.getdefaultencoding()
-
-print(cc)
-
-print("------------------------------------------------------------")  # 60個
-
 import requests
 
 r = requests.get('http://www.flag.com.tw') # 向旗標網站發出 GET 請求,並將回應物件儲存到 r
@@ -11107,7 +10899,7 @@ except KeyboardInterrupt:
     sys.exit()  # When Ctrl-C is pressed, end the program.
 """
 print('------------------------------------------------------------')	#60個
-'''
+
 print('string.printable 的用法 ')
 
 import string
@@ -11234,24 +11026,16 @@ y3 = np.ma.masked_where(y1 > 0.7, y1)
 y4 = y1.copy()
 y4[y4 > 0.8] = np.nan
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 #去掉警告信息
 import warnings
 warnings.filterwarnings('ignore')
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 import pathlib
 print(pathlib.Path.cwd())
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -11260,7 +11044,6 @@ import random
 print(dir(random))
 
 print("------------------------------------------------------------")  # 60個
-
 
 import openai
 
@@ -11332,8 +11115,6 @@ time.asctime() 將struct_time格式的時間轉換為文字顯示
 time.strftime() 將時間轉換為特定格式字串
 time.strptime() 將特定格式的字串轉換為struct_time格式的時間
 
-
-
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -11389,32 +11170,6 @@ print('末26碼', string[-26:])
 
 print("------------------------------------------------------------")  # 60個
 
-import sys
-
-# 匯入 指定目錄下的模組
-sys.path.append(r'C:\_git\vcs\_4.python\import_module')
-
-from module_my import say_hello
-
-say_hello()
-
-# 以下為模組 \data\income_tax.py 的內容：
-
-#字典
-TAX_RATE = {
-    0: 0.1,
-    10000: 0.2,
-    50000: 0.3,
-    100000: 0.4,
-    500000: 0.5
-    }
-
-print(type(TAX_RATE))
-for income, rate in TAX_RATE.items():
-    print(income, rate)
-
-print('------------------------------------------------------------')	#60個
-
 # 函式選單模組
 
 def menu(**options):
@@ -11444,7 +11199,7 @@ my_menu = menu(a=func_a, b=func_b, x=func_x)
 
 func = my_menu()
 print(func())
-'''
+
 print('------------------------------------------------------------')	#60個
 
 """
@@ -11482,11 +11237,6 @@ for i in range(len(counts)):
 
 infile.close() # Close file
   
-
-print("------------------------------------------------------------")  # 60個
-
-
-
 print("------------------------------------------------------------")  # 60個
 
 name = '鼠'
@@ -11494,6 +11244,7 @@ weight = 3
 print('動物{0}的體重是{1}公斤'.format(name, weight))
 
 print('動物%s的體重是%d公斤' %(name, weight))
+
 
 """
 name = input('輸入品名：')
@@ -11635,19 +11386,76 @@ print(id(a), id(b))     # 顯示a和b變數所在的記憶體位址
 
 print("------------------------------------------------------------")  # 60個
 
-data = (("張三", 86, 60),("李四", 93, 55),("王五", 72, 66), ("劉六", 89, 84))
+import math
 
-print ("編號    姓名      學科    術科    總分")
-for idx, dt in enumerate(data):
-    print (f"{idx + 1}\t{dt[0]}\t{dt[1]}\t{dt[2]}\t{dt[1] + dt[2]}")
+print("求出100以下的所有質數")
+n = 300
+NUMBER_PER_LINE = 10  # Display 10 per line
+count = 0  # Count the number of prime numbers
+number = 2  # A number to be tested for primeness
+
+print("The prime numbers are:")
+
+# Repeatedly find prime numbers
+while number <= n:
+    # Assume the number is prime
+    isPrime = True  # Is the current number prime?
+
+    # Test if number is prime
+    for divisor in range(2, int(math.sqrt(number)) + 1): 
+        # If true, number is not prime
+        if number % divisor == 0:
+            isPrime = False  # Set isPrime to false          
+            break  # Exit the for loop
+
+    # Print the prime number and increase the count
+    if isPrime:
+        count += 1  # Increase the count
+
+        if count % NUMBER_PER_LINE == 0:
+            # Print the number and advance to the new line
+            print(" " + str(number))
+        else:
+            print(" " + str(number), end = "")
+
+    # Check if the next number is prime
+    number += 1
+    
+print("\n" + str(count) + " prime(s) less than or equal to " + str(n))
+
 
 print("------------------------------------------------------------")  # 60個
 
+print('印出一個三維陣列')
 
+dates = [
+  [[ 1,  3,  5,  7],
+   [ 9, 11, 13, 15],
+   [17, 19, 21, 23],
+   [25, 27, 29, 31]],
+  [[ 2,  3,  6,  7],
+   [10, 11, 14, 15],
+   [18, 19, 22, 23],
+   [26, 27, 30, 31]],
+  [[ 4,  5,  6,  7],
+   [12, 13, 14, 15],
+   [20, 21, 22, 23],
+   [28, 29, 30, 31]],
+  [[ 8,  9, 10, 11],
+   [12, 13, 14, 15],
+   [24, 25, 26, 27],
+   [28, 29, 30, 31]],
+  [[16, 17, 18, 19],
+   [20, 21, 22, 23],
+   [24, 25, 26, 27],
+   [28, 29, 30, 31]]]
 
-
-print("------------------------------------------------------------")  # 60個
-
+for i in range(5):
+    for j in range(4):
+        for k in range(4):
+            print(format(dates[i][j][k], '4d'), end = " ")
+        print()
+    print()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -11695,6 +11503,259 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+print("------------------------------------------------------------")  # 60個
+print("os sys 搬出")
+print("------------------------------------------------------------")  # 60個
+
+print("取得系統的預設編碼")
+cc = sys.getdefaultencoding()
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+import sys
+
+# 匯入 指定目錄下的模組
+sys.path.append(r'C:\_git\vcs\_4.python\import_module')
+
+from module_my import say_hello
+
+say_hello()
+
+# 以下為模組 \data\income_tax.py 的內容：
+
+#字典
+TAX_RATE = {
+    0: 0.1,
+    10000: 0.2,
+    50000: 0.3,
+    100000: 0.4,
+    500000: 0.5
+    }
+
+print(type(TAX_RATE))
+for income, rate in TAX_RATE.items():
+    print(income, rate)
+
+print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("ddf 搬出")
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("print 字串處理 搬出")
+print("------------------------------------------------------------")  # 60個
+
+data = (("張三", 86, 60),("李四", 93, 55),("王五", 72, 66), ("劉六", 89, 84))
+
+print ("編號    姓名      學科    術科    總分")
+for idx, dt in enumerate(data):
+    print (f"{idx + 1}\t{dt[0]}\t{dt[1]}\t{dt[2]}\t{dt[1] + dt[2]}")
+
+print("------------------------------------------------------------")  # 60個
+
+print("格式化字串")
+
+print(12345)
+
+print("八位數 前面補0")
+print("{:08d}\n{:08d}\n{:08d}".format(123, 1234, 12345))
+
+print("------------------------------------------------------------")  # 60個
+
+# 替代字串
+TABLE_NAME = "people"
+SELECT = "select * from %s order by age, name" % TABLE_NAME
+
+print("select * from %s order by age, name" % TABLE_NAME)
+print(SELECT)
+
+key_id = 1234
+SELECT = "SELECT * FROM memos WHERE key=?", (str(key_id))
+print(SELECT)
+
+print("---- 語法專區 --------------------------------------------------------")  # 60個
+
+print("字串處理")
+
+items = "03/11/2006".split("/")
+print(items)
+
+print("------------------------------------------------------------")  # 60個
+
+print("處理網址資料")
+
+target = "https://tw.appledaily.com/new/realtime/{}"
+
+for page in range(1, 11):
+    url = target.format(page)
+    print(url)
+
+print("------------------------------------------------------------")  # 60個
+
+target_url = "https://www.nkust.edu.tw/p/403-1000-12-{}.php"
+
+for page in range(1, 6):
+    html = target_url.format(page)
+    print(html)
+
+print("------------------------------------------------------------")  # 60個
+
+print("處理網址資料")
+
+url = "https://www.nkust.edu.tw/p/403-1000-12-{}.php?Lang=zh-tw"
+for pg in range(1, 11):
+    print(url.format(pg))
+
+url = "https://tw.stock.yahoo.com/news_list/url/d/e/N{}.html?q=&pg={}"
+for cate in [1, 4]:
+    for pg in range(1, 6):
+        print(url.format(cate, pg))
+
+print("------------------------------------------------------------")  # 60個
+
+
+title = "南極旅遊講座"
+print("/{0:*^20s}/".format(title))
+
+
+print("------------------------------------------------------------")  # 60個
+
+r = 5
+PI = 3.14159
+area = PI * r**2
+print("/半徑{0:3d}圓面積是{1:10.2f}/".format(r, area))
+print("/半徑{0:>3d}圓面積是{1:>10.2f}/".format(r, area))
+print("/半徑{0:<3d}圓面積是{1:<10.2f}/".format(r, area))
+print("/半徑{0:^3d}圓面積是{1:^10.2f}/".format(r, area))
+
+print("------------------------------------------------------------")  # 60個
+
+r = 5
+PI = 3.14159
+area = PI * r**2
+print(f"/半徑{r:3d}圓面積是{area:10.2f}/")
+print(f"/半徑{r:>3d}圓面積是{area:>10.2f}/")
+print(f"/半徑{r:<3d}圓面積是{area:<10.2f}/")
+print(f"/半徑{r:^3d}圓面積是{area:^10.2f}/")
+
+print("------------------------------------------------------------")  # 60個
+
+
+id_no = 1
+ename = "mouse"
+cname = "米老鼠"
+weight = 8
+
+print("編號 %d 英文名 %s 中文名 %s 體重 %d" % (id_no, ename, cname, weight))
+print("編號 {} 英文名 {} 中文名 {} 體重 {}".format(id_no, ename, cname, weight))
+
+print(" 姓名    國文    英文    總分")
+print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
+print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
+print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
+print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
+
+print(" 姓名    國文    英文    總分")
+print("%3s  %4d    %4d    %4d" % ("洪冰儒", 98, 90, 188))
+print("%3s  %4d    %4d    %4d" % ("洪雨星", 96, 95, 191))
+print("%3s  %4d    %4d    %4d" % ("洪冰雨", 92, 88, 180))
+print("%3s  %4d    %4d    %4d" % ("洪星宇", 93, 97, 190))
+
+print("------------------------------------------------------------")  # 60個
+
+x = 100
+print("x=/%6d/" % x)
+y = 10.5
+print("y=/%6.2f/" % y)
+s = "Deep"
+print("s=/%6s/" % s)
+print("以下是保留格數空間不足的實例")
+print("x=/%2d/" % x)
+print("y=/%3.2f/" % y)
+print("s=/%2s/" % s)
+
+print("------------------------------------------------------------")  # 60個
+
+x = 100
+print("x=/%-6d/" % x)
+y = 10.5
+print("y=/%-6.2f/" % y)
+s = "Deep"
+print("s=/%-6s/" % s)
+
+print("------------------------------------------------------------")  # 60個
+
+#體重
+company = "藍海科技股份有限公司"
+year = 27
+print("{}已成立公司 {} 年".format(company, year))
+
+print("------------------------------------------------------------")  # 60個
+
+
+num = 1234
+print("¨數值 = {0:10d},  數值 = {0:10d}".format(num, num))
+
+num = 123.456789
+
+print("¨數值 = {1:6.3f},  數值 = {1:6.3f}".format(num, num))
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+chicken = 20
+rabbit = 15
+print("雞有 {} 隻, 兔有 {} 隻".format(int(chicken), int(rabbit)))
+print("雞有 {} 隻, 兔有 {} 隻".format(chicken, rabbit))
+
+d1 = {"chicken": 2, "dog": 4, "cat": 3}
+for animal, legs in d1.items():
+    print("動物: {0} 有 {1} 隻腳".format(animal, legs))
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("python 語法 搬出")
 print("------------------------------------------------------------")  # 60個
 
 

@@ -45,12 +45,9 @@ import csv
 import time
 import glob
 import shutil
+import datetime
 import openpyxl
 import tkinter as tk
-from tkinter.filedialog import askopenfile #tk之openFileDialog
-from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
-from tkinter.filedialog import askopenfilename
-from tkinter.filedialog import asksaveasfilename
 
 flag_debug_mode = False
 
@@ -59,6 +56,7 @@ csv_data = list()
 
 excel_filename = ""
 sheetname = '1月402' # 1月403 1月404 1月405 1月406 1月407 1月408 1月409
+room_number = ""
 
 print('------------------------------------------------------------')	#60個
 
@@ -112,7 +110,7 @@ def process_csv_file3(filename):
         for i in range(0, len(row)):
             row[i] = row[i].strip()
 
-def import_csv_data():
+def data_conversion():
     global filename
     global sheetname
     global csv_data
@@ -131,17 +129,22 @@ def import_csv_data():
             os.mkdir(target_dir)
             #os.makedirs(target_dir, exist_ok = True)
 
-    #尋找檔案
-    import glob
-    print('222尋找目前目錄下之 *.csv')
-    print((source_dir + "/*.csv"))
-    files = glob.glob(source_dir + "/*.csv") 
+    print('尋找指定目錄下之 *.csv')
+    #print((source_dir + "/*.csv"))
+    files = glob.glob(source_dir + "/*.csv")
+    file_cnt = 0
     for filename in files:
-        print(filename)
+        print('轉換 :', filename)
         process_csv_file1(filename, source_dir)
         process_csv_file3(filename)
+
+        export_data_to_excel()
+        file_cnt += 1
+        csv_data = list() #重新計數csv資料
+        
         #若能正確處理完畢, 再搬到old資料夾
         #shutil.move(filename, target_dir)
+    print('共轉換 :', file_cnt, '個csv檔案')
 
     message = "匯入生產資料 完成\n"
     print(message)
@@ -172,6 +175,20 @@ def export_data_to_excel0(csv_data):
 
     length = len(csv_data)
     font = openpyxl.styles.Font(color="FF0000")
+
+    #其它間的標準
+    temperature_low = 18
+    temperature_high = 26
+    humidity = 60
+    pressure = 5
+
+    if room_number == "409":
+        #print("409無塵室")
+        humidity = 50
+    else:
+        #print("其他廠房")
+        pass
+    
     if length > 0:
         for cc in csv_data:
             #print(cc)
@@ -185,31 +202,60 @@ def export_data_to_excel0(csv_data):
                 data3 = str(cc[3])#靜壓
                 #print(data1, data2, data3)
                 if time == "09":
+                    #溫度
                     sheet.cell(8, 2+day).value = float(data1)
+                    if float(data1) < temperature_low or float(data1) > temperature_high:
+                        sheet.cell(8, 2+day).font = font
+                    #濕度
                     sheet.cell(9, 2+day).value = float(data2)
+                    if float(data2) > humidity:
+                        sheet.cell(9, 2+day).font = font
+                    #壓差
                     sheet.cell(10, 2+day).value = float(data3)
+                    if float(data3) < pressure:
+                        sheet.cell(10, 2+day).font = font
                 elif time == "13":
+                    #溫度
                     sheet.cell(11, 2+day).value = float(data1)
+                    if float(data1) < temperature_low or float(data1) > temperature_high:
+                        sheet.cell(11, 2+day).font = font
+                    #濕度
                     sheet.cell(12, 2+day).value = float(data2)
-                    sheet.cell(12, 2+day).font = font
+                    if float(data2) > humidity:
+                        sheet.cell(12, 2+day).font = font
+                    #壓差
                     sheet.cell(13, 2+day).value = float(data3)
+                    if float(data3) < pressure:
+                        sheet.cell(13, 2+day).font = font
                 elif time == "17":
+                    #溫度
                     sheet.cell(14, 2+day).value = float(data1)
+                    if float(data1) < temperature_low or float(data1) > temperature_high:
+                        sheet.cell(14, 2+day).font = font
+                    #濕度
                     sheet.cell(15, 2+day).value = float(data2)
+                    if float(data2) > humidity:
+                        sheet.cell(15, 2+day).font = font
+                    #壓差
                     sheet.cell(16, 2+day).value = float(data3)
+                    if float(data3) < pressure:
+                        sheet.cell(16, 2+day).font = font
     workbook.save(excel_filename)  # 儲存檔案
 
 def check_excel_filename(data1, data2):
     global sheetname
+    global room_number
     year, month, day = data1.split('/')
-    filename = "T 060201 01 環境溫濕度管制紀錄表_B (%d月).xlsx" % int(month)
+    filename = "T 060201 01 環境溫濕度管制紀錄表_B (20%s年%d月).xlsx" % (str(year), int(month))
     room = data2[:3]
+    room_number = room
     sheetname = "%d月"%int(month)+room
 
     if os.path.exists(filename):
-        print(filename, "檔案存在")
+        #print(filename, "檔案存在")
+        pass
     else:
-        print(filename, "檔案不存在, 建立一個")
+        #print(filename, "檔案不存在, 建立一個")
         shutil.copy("template/template.xlsx", filename)  # 檔案複製
         if month != "01":
             print('需要改sheet名')
@@ -250,10 +296,10 @@ def export_data_to_excel():
     global excel_filename
     global sheetname
     excel_filename = check_excel_filename(csv_data[1][0], csv_data[0][2])
-    print('取得excel檔名 :', excel_filename)
+    #print('取得excel檔名 :', excel_filename)
 
     length = len(csv_data)
-    print('資料長度 : ', length)
+    #print('資料長度 : ', length)
     if length == 0:
         message = '無資料, 離開'
         print(message)
@@ -261,19 +307,22 @@ def export_data_to_excel():
         main_message2.set(message)
     else:
         message = '匯出資料 完成\n'
-        print(message)
-        text1.insert('end', message)
+        #print(message)
+        #text1.insert('end', message)
 
         message = '檔案 : ' + excel_filename + "\n"
-        text1.insert('end', message)
+        #text1.insert('end', message)
 
         export_data_to_excel0(csv_data)
 
 
 def button00Click():
     print('你按了 轉換資料')
-    import_csv_data()
-    export_data_to_excel()
+    now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    print(now)
+    data_conversion()
+    now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    print(now)
 
 def button01Click():
     print('你按了button01')
