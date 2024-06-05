@@ -1,10 +1,12 @@
+filename = 'C:/_git/vcs/_4.python/_data/elephant.jpg'
+
 import cv2
 
 # Load the cascade
 face_cascade = cv2.CascadeClassifier('aman.xml')
 
 # Read the input image
-img = cv2.imread('ww.jpg')
+img = cv2.imread(filename)
 
 # Convert into grayscale
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
