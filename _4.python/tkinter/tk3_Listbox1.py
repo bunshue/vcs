@@ -1,5 +1,7 @@
 import tkinter as tk
 
+print('------------------------------------------------------------')	#60個
+
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -48,6 +50,30 @@ listbox.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+window.mainloop()
 
+print('------------------------------------------------------------')	#60個
+
+
+print('Listbox + Scrollbar')
+
+window = tk.Tk()
+window.geometry("400x200")
+
+scrollbar = tk.Scrollbar(window)
+scrollbar.pack( side = tk.RIGHT, fill = tk.Y )
+
+wordlist='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+list1 = tk.Listbox(window, yscrollcommand = scrollbar.set )
+
+for line in range(26):
+   list1.insert(tk.END, "字母: " + wordlist[line])
+
+list1.pack( side = tk.LEFT, fill = tk.BOTH )
+scrollbar.config( command = list1.yview )
 
 window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+

@@ -135,6 +135,10 @@ def data_conversion():
     file_cnt = 0
     for filename in files:
         print('轉換 :', filename)
+        message = "轉換資料進行中 " + str(file_cnt)
+        main_message1.set(message)
+        sys.stdout.flush()
+        
         process_csv_file1(filename, source_dir)
         process_csv_file3(filename)
 
@@ -149,6 +153,9 @@ def data_conversion():
     message = "匯入生產資料 完成\n"
     print(message)
     text1.insert('end', message)
+    message = "轉換資料完成, 共" + str(file_cnt) + "個csv檔案"
+    main_message1.set(message)
+    sys.stdout.flush()
 
 def show_info():
     print('show_info')
@@ -318,18 +325,24 @@ def export_data_to_excel():
 
 def button00Click():
     print('你按了 轉換資料')
+    message = "轉換資料進行中"
+    main_message1.set(message)
+    sys.stdout.flush()
     now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     print(now)
+    data_conversion_st = time.time()
     data_conversion()
     now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     print(now)
+    data_conversion_elapsed = time.time() - data_conversion_st
+    print('作業時間 :', format(data_conversion_elapsed, ".2f"), '秒')
 
 def button01Click():
     print('你按了button01')
 
 def button02Click():
-    print('你按了 info')
-    show_info()
+    print('你按了button02')
+    #show_info()
    
 def button03Click():
     print('你按了button03')
@@ -337,6 +350,8 @@ def button03Click():
 def button04Click():
     print('你按了button04')
     clear_text1()
+    message = ""
+    main_message1.set(message)
 
 def button05Click():
     print('你按了button05')
@@ -399,7 +414,7 @@ button00 = tk.Button(window, width = w, height = h*2, command = button00Click, t
 button00.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button01 = tk.Button(window, width = w, height = h, command = button01Click, text = '')
 button01.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button02 = tk.Button(window, width = w, height = h, command = button02Click, text = 'info')
+button02 = tk.Button(window, width = w, height = h, command = button02Click, text = '')
 button02.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button03 = tk.Button(window, width = w, height = h, command = button03Click, text = '')
 button03.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
@@ -419,7 +434,7 @@ font_size = 20
 # 加入 Label
 label_message1 = tk.Label(window, font=("標楷體", font_size), fg = 'red', textvariable = main_message1)
 label_message1.pack()
-label_message1.place(x = 5, y = 0 + 10)
+label_message1.place(x = x_st + dx * 0, y = dy * 2 + 20)
 main_message1.set('')
 
 label_message2 = tk.Label(window, font=("標楷體", font_size), fg = 'red', textvariable = main_message2)
@@ -508,8 +523,6 @@ def export_data():
         message = '匯出資料 完成'
         #print(message)
         #text1.insert('end', message)
-
-
 
 """
 

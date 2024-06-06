@@ -3,6 +3,8 @@ import time
 import datetime
 import tkinter as tk
 
+RECORD_TIME_MINUTE = 10
+
 print('------------------------------------------------------------')	#60個
 
 def WebCamRecord():
@@ -13,12 +15,18 @@ def WebCamRecord():
     width=int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height=int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     
-    record_filename = 'Video_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
+    record_filename = 'Video_' + setFourcc + time.strftime("_%Y%m%d_%H%M%S", time.localtime()) + '.avi'
+    record_time_st = time.time()
+    now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    print('開始錄影時間 :', now)
+    print('預計錄影時間 :', RECORD_TIME_MINUTE, '分')
+    print('現在錄影時間(分): ', end = "")
     
     fourcc = cv2.VideoWriter_fourcc(*setFourcc)  #取得編碼器的四字元碼
     #建立影像寫入器 out
     out = cv2.VideoWriter(record_filename,fourcc,fps,(width,height))
     cv2.namedWindow('show')
+    show_minitues_info = 0
     while(True):
         ret,img = cap.read()    #擷取一張影像
         
@@ -27,13 +35,25 @@ def WebCamRecord():
         
         out.write(img)          #影像寫入影片檔
         cv2.imshow('show',img)  #顯示影像
+
+        record_time_elapsed = time.time() - record_time_st
+        record_minute = int(record_time_elapsed//60)
+        if record_minute != show_minitues_info:
+            show_minitues_info = record_minute
+            print(record_minute, end = " ")
+        
+        if record_time_elapsed > 60 * RECORD_TIME_MINUTE:
+            break
         key_pressed = cv2.waitKey(1)
         if key_pressed == 27:  #若按Esc鍵
             break
     cap.release()    #關閉攝影機
     out.release()    #關閉寫入器
     cv2.destroyAllWindows()  #關閉視窗
+    now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    print('\n完成錄影時間 :', now)
     print('存檔檔名 :', record_filename)
+    
 
 print('------------------------------------------------------------')	#60個
 

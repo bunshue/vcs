@@ -165,6 +165,7 @@ print(f"{year}年{month}月{day}日是{year}年的第{total}天")
 '''
 print("------------------------------------------------------------")  # 60個
 
+'''
 from tkinter import Label, Tk 
 import time
 
@@ -190,7 +191,7 @@ digital_clock()
 
 window.mainloop()
 
-
+'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -209,12 +210,85 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+import random
+import time
+
+N = 10
+lst = list(range(N))
+print(lst)
+random.shuffle(lst)
+print(lst)
+
+lst.sort()
+print(lst)
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+
+animals1 = ['鼠', '牛', '虎']
+animals2 = ['兔', '龍', '蛇']
+animals3 = ['馬', '羊', '猴']
+animals4 = ['雞', '狗', '豬']
+
+print('本次選出人員')
+print(random.choice(animals1) + " " + random.choice(animals2) + " " + random.choice(animals3) + " "+ random.choice(animals4))
+
+print("------------------------------------------------------------")  # 60個
+
+import random
+
+passlen = 3
+s = "ABCDEFG"
+p =  "".join(random.sample(s,passlen ))
+print (p)
+
+print("------------------------------------------------------------")  # 60個
+
+number = 1234.5678
+print("Number :", format(number, ".2f"))
+
+print("------------------------------------------------------------")  # 60個
+
+"""
+import sys, time
+
+PAUSE = 0.02
+
+print('無限迴圈進行中..... 按 Ctrl+C離開 ')
+
+try:
+    while True:
+        print("A", end = " ")
+        time.sleep(PAUSE)  # Pause for PAUSE number of seconds.
+
+    print('XXXXXXXXXXXXXXXXXXXXXXXXXX')
+   
+except KeyboardInterrupt:
+    print('你按了 Ctrl+C 離開')
+    sys.exit()  # When Ctrl-C is pressed, end the program.
+"""
+
+print("------------------------------------------------------------")  # 60個
+"""
+import time
+for i in range(5, 0, -1):
+    print("\r", "倒计时{}秒！".format(i), end="", flush=True)
+    time.sleep(1)
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+import time
+days = 365
+for i in range(days):
+    print("\r进度条百分比：{}%".format(round((i + 1) * 100 /days)), end="", flush=True)
+    time.sleep(0.02)
 
 print("------------------------------------------------------------")  # 60個
 
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -222,8 +296,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-print("------------------------------------------------------------")  # 60個
 
 
 

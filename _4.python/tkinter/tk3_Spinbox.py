@@ -3,7 +3,7 @@ import tkinter.ttk as ttk
 import tkinter.font as tkfont
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -86,8 +86,143 @@ lab_result = tk.Label(window, font=default_font, fg='black')
 lab_result.pack(padx=10, pady=(5,10))
 
 window.mainloop()
+'''
+print("------------------------------------------------------------")  # 60個
+
+
+from tkinter import *
+    
+window = Tk()
+window.geometry("600x400")
+
+spin = Spinbox(window,from_=10,to=30,increment=2)
+spin.pack(pady=20)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def printInfo():        # 列印顯示的值
+    print(sp.get())
+    
+window = Tk()
+window.geometry("600x400")
+
+sp = Spinbox(window,from_ = 0,to = 10,           
+             command = printInfo)
+sp.pack(pady=10,padx=10)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def printInfo():                        # 列印顯示的值
+    print(sp.get())
+    
+window = Tk()
+window.geometry("600x400")
+
+sp = Spinbox(window,
+             values=(10,38,170,101),    # 以元組儲存數值
+             command=printInfo)
+sp.pack(pady=10,padx=10)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+from tkinter import *
+
+def printInfo():                        # 列印顯示的值
+    print(sp.get())
+    
+window = Tk()
+window.geometry("600x400")
+
+cities = ("新加坡","上海","東京")       # 以元組儲存數值
+
+sp = Spinbox(window,
+             values=cities,    
+             command=printInfo)
+sp.pack(pady=10,padx=10)
+
+window.mainloop()
+
+
 
 print("------------------------------------------------------------")  # 60個
+
+
+import random
+
+def fnTest():
+    global ans		#宣告ans為全域變數來記錄答案
+    n=int(spnNum.get()) #取得使用者選擇的位數
+    num=[[1,9],[10,99],[100,999]]   #用二維串列儲存各位數的亂數範圍
+    r1=random.randint(num[n-1][0],num[n-1][1])
+    r2=random.randint(num[n-1][0],num[n-1][1])
+    if(r2>r1):	#若r2>r1就兩者互換
+        r1,r2=r2,r1
+    if(spnOpt.get()=='加法'):	#若選擇'加法'
+        opt='+'
+        ans=r1+r2
+    else:
+        opt='-'
+        ans=r1-r2        
+    lblTest.config(text='{} {} {} ='.format(r1,opt,r2))
+    entAns.focus_set()
+    buttonTest.config(state='disable')
+    buttonAns.config(state='normal')
+    
+def fnAns():
+    global ans
+    userAns=int(entAns.get())
+    if(userAns==ans):
+        msg.set('太棒了！答案正確！')
+    else:
+        msg.set('答錯了！答案是：{}'.format(ans))
+    buttonTest.config(state='normal')
+    buttonAns.config(state='disable')
+    
+window = tk.Tk()
+window.geometry("600x400")
+window.title('加減法測驗')
+
+frmTest=tk.Frame(window,relief='raised',borderwidth=2)
+frmTest.pack(side='left',padx=5,pady=3)
+lblTest=tk.Label(frmTest,text=' ',font=('微軟正黑體',20))
+lblTest.pack(pady=5)
+ans=tk.IntVar()
+entAns=tk.Entry(frmTest,textvariable=ans)
+entAns.pack(pady=5)
+msg=tk.StringVar()
+msg.set('設定後按 <出題> 鈕開始測驗')
+lblMsg=tk.Label(frmTest,textvariable=msg)
+lblMsg.pack(pady=5)
+frmSet=tk.Frame(window,relief='raised',borderwidth=2)
+frmSet.pack(side='left',padx=5,pady=3)
+tk.Label(frmSet,text='運算：').pack(anchor='w')
+lstOpt=['加法','減法']
+spnOpt=tk.Spinbox(frmSet,values=lstOpt)
+spnOpt.pack(anchor='w')
+tk.Label(frmSet,text='位數：').pack(anchor='w')
+spnNum=tk.Spinbox(frmSet,from_=1,to=3)
+spnNum.pack(anchor='w')
+
+buttonTest=tk.Button(frmSet, text='出題', command=fnTest)
+buttonTest.pack(side='left',pady=3)
+
+buttonAns=tk.Button(frmSet, text='核對', command=fnAns,state='disable')
+buttonAns.pack(side='right',pady=3)
+
+ans=0
+
+window.mainloop()
+
 
 
 
