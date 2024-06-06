@@ -460,3 +460,90 @@ label.grid(column = 1, row = 0)
 """
 
 
+"""
+
+Label 參數
+label = tk.Label(window,text="歡迎來到美國",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15,             # 標籤寬度是15
+              font="Helvetica 16 bold italic")
+label.pack()
+
+
+label = tk.Label(window,text="歡迎來到美國",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15,             # 標籤寬度是15
+              font="Helvetica 16 bold italic")
+
+
+
+
+
+label寫字與改字
+
+label1 = tk.Label(window, text = '未選取檔案')
+label1.pack()
+label1.configure(text=pdf_filename)
+
+
+
+Label的用法
+
+label = Label(root)
+label.config(text="I love Python",bg="lightyellow",fg="blue")
+label.pack()
+      
+
+
+
+def msgShow():
+    label["text"] = "I love Python"
+    label["bg"] = "lightyellow"
+    label["fg"] = "blue"
+    
+label = Label(root)                 # 標籤內容             
+label.pack()                      
+
+    label["text"] = "I love Python"
+    label["bg"] = "lightyellow"
+    label["fg"] = "blue"
+
+
+label
+
+# 設定標籤的顯示文字(text)、背景(bg)和前景(fg)顏色
+lbla = tk.Label(window, text = 'Gray', bg = 'gray',
+        fg = 'white').pack(side = 'right')#加入版面
+
+lblb = tk.Label(window, text = 'Yellow',
+        bg = 'yellow', fg = 'gray').pack(
+        side = 'right', padx = 5, pady = 10)
+
+lblc = tk.Label(window, text = 'Orange',
+        bg = 'orange', fg = 'black').pack(side = 'right')
+
+
+
+#標籤 - bg 設背景色
+label1 = tk.Label(window, text = 'Hello\n Python', bg = '#78A', 
+    fg = '#FF0', relief = 'groove', bd = 2, 
+    width = 15, height = 3, justify = 'right')
+
+label2 = tk.Label(window, text = '世界', width = 6, height = 3,
+    relief = tk.RIDGE, bg = 'pink', font = ('標楷體', 16))
+
+label1.grid(row = 0, column = 0)
+label2.grid(row = 0, column = 1)
+label3.grid(columnspan = 2)
+
+
+# widgets 
+label1 = ttk.Label(window, text = 'Label 1', background = 'red')
+label2 = ttk.Label(window, text = 'Label 2', background = 'green')
+
+
+
+
+
+
+"""

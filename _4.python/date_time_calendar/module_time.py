@@ -341,10 +341,9 @@ print("expires", time.strftime(TIME_FMT, time.gmtime(expires)))
 
 print('------------------------------------------------------------')	#60個
 
-
 #顯示系統當前時間
-localtime = time.localtime()
-text = time.strftime("%Y-%m-%d %I:%M:%S %p", localtime)
+now = time.strftime("%Y-%m-%d %I:%M:%S %p", time.localtime())
+print(now)
 
 """
 定义和使用时钟类
@@ -399,8 +398,6 @@ if __name__ == '__main__':
 
 """
 
-
-
 print('---- time.sleep(秒) --------------------------------------------------------')	#60個
 
 print("每0.3456秒打印一字")
@@ -425,14 +422,13 @@ print()
 
 print('------------------------------------------------------------')	#60個
 
-print("程式暫停2秒鐘")
-time.sleep(2)
+print("程式暫停0.2秒鐘")
+time.sleep(0.2)
 print("程式繼續執行")
 
 print("------------------------------------------------------------")  # 60個
 
 print('格式化使用------------------------------------------------------------')	#60個
-
 
 localtime = time.localtime()    # 取得目前的日期和時間
 

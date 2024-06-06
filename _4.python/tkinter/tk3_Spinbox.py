@@ -1,9 +1,10 @@
+import sys
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.font as tkfont
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -22,23 +23,35 @@ title = "Spin 測試"
 window.title(title)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 spinbox = ttk.Spinbox(window, from_=0, to=100, increment=0.1)
 spinbox.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+spin = tk.Spinbox(window,from_=10,to=30,increment=2)
+spin.pack(pady=20)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 #w = ttk.Spinbox(window, from_=0, to=10)
 w = ttk.Spinbox(window, values=(1, 2, 4, 8))
 w.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
-#w = ttk.Spinbox(window, from_=0, to=10)
-w = ttk.Spinbox(window, values=(1, 2, 4, 8))
-w.pack()
+spinboxFourcc=tk.Spinbox(window,value=('XVID','DIVX','MJPG','I420'),width=10)
+spinboxFourcc.pack()
+
+#取得選取資料
+#setFourcc=spinboxFourcc.get()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 # Spinbox
 spin_int = tk.IntVar(value = 12)
@@ -47,14 +60,15 @@ spin = ttk.Spinbox(
 	from_ = 3, 
 	to = 20, 
 	increment = 3, 
-	command = lambda: print(spin_int.get()),
+	command = lambda: print("a你選擇了 :", spin_int.get()),
 	textvariable = spin_int)
-spin.bind('<<Increment>>', lambda event: print('up'))
-spin.bind('<<Decrement>>', lambda event: print('down'))
+spin.bind('<<Increment>>', lambda event: print("a你選擇了 :", 'up'))
+spin.bind('<<Decrement>>', lambda event: print("a你選擇了 :", 'down'))
 # spin['value'] = (1,2,3,4,5)
 spin.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 # create a spinbox that contains the letters A B C D E 
 # and print the value whenever the value is decreased
@@ -64,7 +78,7 @@ exercise_string = tk.StringVar(value = exercise_letters[0])
 exercise_spin = ttk.Spinbox(window, textvariable = exercise_string, values = exercise_letters)
 exercise_spin.pack()
 
-exercise_spin.bind('<<Decrement>>', lambda event: print(exercise_string.get()))
+exercise_spin.bind('<<Decrement>>', lambda event: print("b你選擇了 :", exercise_string.get()))
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -73,8 +87,6 @@ print("------------------------------------------------------------")  # 60個
 def spinbox_select():
     selected_month = month.get()
     lab_result.config(text=selected_month)    
-
-print("試題與測驗分析程式")
 
 default_font = tkfont.nametofont('TkDefaultFont')
 default_font.configure(size=15)
@@ -85,77 +97,39 @@ spinbox.pack(padx=10, pady=10)
 lab_result = tk.Label(window, font=default_font, fg='black')
 lab_result.pack(padx=10, pady=(5,10))
 
-window.mainloop()
-'''
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-from tkinter import *
+def printInfo1():
+    print("c你選擇了 :", sp.get())
     
-window = Tk()
-window.geometry("600x400")
-
-spin = Spinbox(window,from_=10,to=30,increment=2)
-spin.pack(pady=20)
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-from tkinter import *
-
-def printInfo():        # 列印顯示的值
-    print(sp.get())
-    
-window = Tk()
-window.geometry("600x400")
-
-sp = Spinbox(window,from_ = 0,to = 10,           
-             command = printInfo)
+sp = tk.Spinbox(window,from_ = 0,to = 10, command = printInfo1)
 sp.pack(pady=10,padx=10)
 
-window.mainloop()
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-from tkinter import *
-
-def printInfo():                        # 列印顯示的值
-    print(sp.get())
+def printInfo2():
+    print("d你選擇了 :", sp.get())
     
-window = Tk()
-window.geometry("600x400")
-
-sp = Spinbox(window,
+sp = tk.Spinbox(window,
              values=(10,38,170,101),    # 以元組儲存數值
-             command=printInfo)
+             command=printInfo2)
 sp.pack(pady=10,padx=10)
 
-window.mainloop()
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
-print('------------------------------------------------------------')	#60個
-
-from tkinter import *
-
-def printInfo():                        # 列印顯示的值
-    print(sp.get())
+def printInfo3():
+    print("e你選擇了 :", sp.get())
     
-window = Tk()
-window.geometry("600x400")
-
 cities = ("新加坡","上海","東京")       # 以元組儲存數值
 
-sp = Spinbox(window,
-             values=cities,    
-             command=printInfo)
+sp = tk.Spinbox(window, values=cities, command=printInfo3)
 sp.pack(pady=10,padx=10)
 
-window.mainloop()
-
-
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
 
 import random
 
@@ -187,10 +161,13 @@ def fnAns():
         msg.set('答錯了！答案是：{}'.format(ans))
     buttonTest.config(state='normal')
     buttonAns.config(state='disable')
-    
+
+"""
 window = tk.Tk()
 window.geometry("600x400")
 window.title('加減法測驗')
+"""
+print('加減法測驗')
 
 frmTest=tk.Frame(window,relief='raised',borderwidth=2)
 frmTest.pack(side='left',padx=5,pady=3)
@@ -223,12 +200,7 @@ ans=0
 
 window.mainloop()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

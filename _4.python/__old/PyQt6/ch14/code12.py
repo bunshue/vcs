@@ -1,6 +1,3 @@
-# Copyright © https://steam.oxxostudio.tw
-
-# 將 PyQt6 換成 PyQt5 就能改用 PyQt5
 from PyQt6 import QtWidgets
 from PyQt6.QtGui import QImage, QPixmap
 import sys, cv2, threading, random
@@ -10,7 +7,7 @@ window_w, window_h = 300, 220               # 設定視窗長寬
 scale = 0.58                                # 影片高度的比例
 
 Form = QtWidgets.QWidget()
-Form.setWindowTitle('oxxo.studio')
+Form.setWindowTitle(' ')
 Form.resize(window_w, window_h)
 
 # 視窗尺寸改變時的動作

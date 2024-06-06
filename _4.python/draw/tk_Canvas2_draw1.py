@@ -1,7 +1,7 @@
 import sys
 
 import tkinter as tk
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -406,7 +406,6 @@ canvas7.grid(row = 3, column = 7)
 
 """
 
-'''
 print("------------------------------------------------------------")  # 60個
 
 from tkinter import *

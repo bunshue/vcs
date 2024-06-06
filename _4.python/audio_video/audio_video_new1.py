@@ -7,6 +7,7 @@ import sys
 import time
 import random
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 """ NG
@@ -317,10 +318,12 @@ p.terminate()
 print("* recording done!")
 """
 
+'''
 print("------------------------------------------------------------")  # 60個
-"""
+
 #视频录制（无声音）
 
+# 1111
 from PIL import ImageGrab
 import numpy as np
 import cv2
@@ -332,18 +335,40 @@ print("width:", width, "height:", height)
 print("image mode:",image.mode)
 k=np.zeros((width,height),np.uint8)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')#编码格式
-video = cv2.VideoWriter('test.avi', fourcc, 25, (width, height))
+
+import datetime
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("現在時間 :", now)
+
+fps = 30
+video = cv2.VideoWriter('test.avi', fourcc, fps, (width, height))
+
 #输出文件命名为test.mp4,帧率为16，可以自己设置
+cnt = 0
 while True:
     img_rgb = ImageGrab.grab()
     img_bgr=cv2.cvtColor(np.array(img_rgb), cv2.COLOR_RGB2BGR)#转为opencv的BGR格式
     video.write(img_bgr)
+    """
+    #不用顯示 錄製就好
     cv2.imshow('imm', img_bgr)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+    """
+    cnt += 1
+    if cnt > 1800:
+        break
+
+print('OK')
 video.release()
 cv2.destroyAllWindows()
-"""
+
+import datetime
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("現在時間 :", now)
+
+sys.exit()
+
 print("------------------------------------------------------------")  # 60個
 
 

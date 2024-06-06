@@ -22,6 +22,9 @@ import numpy as np
 
 print("------------------------------------------------------------")  # 60個
 
+ENCODING_TYPE = 'XVID'  # 編碼器
+#'XVID','DIVX','MJPG','I420'
+
 #用XVID格式存avi檔
 record_filename_xvid = 'tmp_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
 
@@ -45,9 +48,10 @@ print("------------------------------------------------------------")  # 60個
 
 print("錄影1, 按 ESC 離開")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)   #打開攝影機
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
 
 #用XVID格式存avi檔
 record_filename_xvid = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
@@ -55,9 +59,7 @@ record_filename_xvid = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.loca
 #建立視訊編碼 fourcc XVID
 fourcc = cv2.VideoWriter_fourcc(*"XVID")
 
-fps = 20
-size = (width, height)
-out = cv2.VideoWriter(record_filename_xvid, fourcc, fps, size)
+out = cv2.VideoWriter(record_filename_xvid, fourcc, fps, (width, height))
 
 while(cap.isOpened()):
   ret, frame = cap.read()
@@ -78,14 +80,10 @@ print('------------------------------------------------------------')	#60個
 
 print("錄影2, 按 ESC 離開")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)   #打開攝影機
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
-
-# 調整影片大小
-ratio = cap.get(cv2.CAP_PROP_FRAME_WIDTH) / cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-WIDTH = 400
-HEIGHT = int(WIDTH / ratio)
+fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
 
 # 用MP4V格式存mp4檔
 record_filename_mp4v = 'tmp2_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp4'
@@ -93,9 +91,7 @@ record_filename_mp4v = 'tmp2_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.loca
 #建立視訊編碼 fourcc MP4V
 fourcc = cv2.VideoWriter_fourcc(*'MP4V')
 
-fps = 30
-size = (width, height)
-out = cv2.VideoWriter(record_filename_mp4v, fourcc, fps, (WIDTH, HEIGHT))
+out = cv2.VideoWriter(record_filename_mp4v, fourcc, fps, (width,height))
 
 # 解析 Fourcc 格式資料的函數
 def decode_fourcc(v):
@@ -165,16 +161,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("錄影3, 按 ESC 離開")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)   #打開攝影機
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
 
 #建立視訊編碼 fourcc MJPG
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')          # 設定影片的格式為 MJPG
 
-fps = 20.0
-size = (width, height)
-out = cv2.VideoWriter('tmp3_output.mp4', fourcc, fps, size)  # 產生空的影片
+out = cv2.VideoWriter('tmp3_output.mp4', fourcc, fps, (width,height))  # 產生空的影片
 
 if not cap.isOpened():
     print("Cannot open camera")
@@ -197,6 +192,8 @@ out.release()      # 釋放資源
 cv2.destroyAllWindows()
 
 print("------------------------------------------------------------")  # 60個
+
+# fail
 
 print("錄影4, 按 ESC 離開 灰階")
 
@@ -238,16 +235,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("錄影5, 按 ESC 離開")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)   #打開攝影機
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
 
 #建立視訊編碼 fourcc MJPG
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')          # 設定影片的格式為 MJPG
 
-fps = 20.0
-size = (width, height)
-out = cv2.VideoWriter('tmp5_output.mp4', fourcc, fps, size)  # 產生空的影片
+out = cv2.VideoWriter('tmp5_output.mp4', fourcc, fps, (width,height))
 
 if not cap.isOpened():
     print("Cannot open camera")
@@ -275,16 +271,15 @@ print("------------------------------------------------------------")  # 60個
 
 print("錄影6, 按 ESC 離開")
 
-cap = cv2.VideoCapture(0)                 # 讀取攝影鏡頭
+cap = cv2.VideoCapture(0)   #打開攝影機
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
 
 #建立視訊編碼 fourcc MJPG
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')  # 設定輸出影片的格式為 MJPG
 
-fps = 20
-size = (width, height)
-out = cv2.VideoWriter('tmp6_output.mov', fourcc, 20.0, (width, height))  # 產生空的影片
+out = cv2.VideoWriter('tmp6_output.mov', fourcc, fps, (width, height))
 
 if not cap.isOpened():
     print("Cannot open camera")

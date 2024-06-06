@@ -165,36 +165,6 @@ print(f"{year}年{month}月{day}日是{year}年的第{total}天")
 '''
 print("------------------------------------------------------------")  # 60個
 
-'''
-from tkinter import Label, Tk 
-import time
-
-window = Tk() 
-window.title("Digital Clock") 
-window.geometry("420x150") 
-window.resizable(1,1)
-
-text_font= ("Boulder", 68, 'bold')
-background = "#f2e750"
-foreground= "#363529"
-border_width = 25
-
-label = Label(window, font=text_font, bg=background, fg=foreground, bd=border_width) 
-label.grid(row=0, column=1)
-
-def digital_clock(): 
-   time_live = time.strftime("%H:%M:%S")
-   label.config(text=time_live) 
-   label.after(200, digital_clock)
-
-digital_clock()
-
-window.mainloop()
-
-'''
-
-print("------------------------------------------------------------")  # 60個
-
 import os
 
 #用預設程式開啟檔案
@@ -207,8 +177,6 @@ import os
 #os.system('cv03.png')
 
 print("------------------------------------------------------------")  # 60個
-
-
 
 import random
 import time
@@ -278,15 +246,32 @@ for i in range(5, 0, -1):
 """
 
 print("------------------------------------------------------------")  # 60個
+"""
+print('目前的全螢幕截圖')
 
-import time
-days = 365
-for i in range(days):
-    print("\r进度条百分比：{}%".format(round((i + 1) * 100 /days)), end="", flush=True)
-    time.sleep(0.02)
+from PIL import ImageGrab
 
+image = ImageGrab.grab()
+filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg'
+image.save(filename)
+
+image = ImageGrab.grab().convert('L')  
+data = image.load()
+print(type(data))
+#print(data.size)
+if data[260, 300] > 150:
+    #isCollision_day(data)
+    print("aaaaaaa")
+else:
+    #isCollision_night(data)
+    print("bbbbbbb")
+"""
 print("------------------------------------------------------------")  # 60個
 
+
+import datetime
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("現在時間 :", now)
 
 
 print("------------------------------------------------------------")  # 60個

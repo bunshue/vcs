@@ -2,12 +2,11 @@
 Grid 測試
 """
 
-
-
+import sys
 import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -25,18 +24,28 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "Grid 測試"
 window.title(title)
 
-for j in range(0, 16):
+w = 5
+h = 2
+
+for j in range(0, 5):
     for i in range(0, 16):
-        #print(i)
         label_n = tk.Label(window, text = str(i) + ',' + str(j))
         label_n.grid(row = j, column = i)
 
-w = 15
-h = 5
+for j in range(0+5, 5+5):
+    for i in range(0, 16):
+        text_n = tk.Text(window, width = w, height = h)
+        text_n.grid(row = j, column = i)
+
+for j in range(0+5+5, 5+5+5):
+    for i in range(0, 16):
+        button_n = tk.Button(window, width = w, height = h, text = str(i) + ',' + str(j))
+        button_n.grid(row = j, column = i)
+
 
 text1 = tk.Text(window, width = w, height = h)  #原始數據錄入框
-text1.grid(row = 0, column = 0)
-#text1.grid(row = 0, column = 0, rowspan = 1, columnspan = 3)
+text1.grid(row = 1, column = 1)
+#text1.grid(row = 1, column = 1, rowspan = 1, columnspan = 3)
 
 button0 = tk.Button(window, text = "55", width = w, height = h)
 button0.grid(row = 2, column = 2)
@@ -47,6 +56,7 @@ button0.grid(row = 2, column = 2)
 會依據控件的大小 將所在格撐大成設定的格數
 """
 
+"""
 for j in range(4, 14, 3):
     for i in range(4, 14, 3):
         entry = tk.Entry(window, width = 10) #寬度為5個字
@@ -58,8 +68,10 @@ for j in range(4, 14, 3):
             entry.grid(row = j, column = i, columnspan = 2) #占用2欄
         else:
             entry.grid(row = j, column = i, columnspan = 3) #占用3欄
-
+"""
 window.mainloop()
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -118,7 +130,7 @@ ctr_mid.grid(row = 0, column = 1, sticky = "nsew")
 ctr_right.grid(row = 0, column = 2, sticky = "ns")
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -909,6 +921,478 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+
+window=tk.Tk()
+window.geometry("500x500")
+window.title('grid配置')
+window.rowconfigure(0,weight=1)
+window.rowconfigure(1,weight=1)
+window.rowconfigure(2,weight=1)
+window.columnconfigure(0,weight=1)
+window.columnconfigure(1,weight=1)
+window.columnconfigure(2,weight=1)
+
+label1=tk.Label(window, text = '北',font=('標楷體', 40))
+label2=tk.Label(window, text = '東',font=('標楷體', 40),bg='yellow')
+label3=tk.Label(window, text = '西',font=('標楷體', 40),bg='lightgreen')
+label4=tk.Label(window, text = '中',font=('標楷體', 40),bg='pink')
+label5=tk.Label(window, text = '南',font=('標楷體', 40),bg='lightblue')
+label1.grid(row=0,column=0,columnspan=2,sticky='nswe')
+label2.grid(row=0,column=2,rowspan=2,sticky='nswe')
+label3.grid(row=1,column=0,rowspan=2,sticky='nswe')
+label4.grid(row=1,column=1,sticky='nswe')
+label5.grid(row=2,column=1,columnspan=2,sticky='nswe')
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+window = Tk()
+window.geometry("600x400")
+
+label1 = Label(window,text="標籤1",relief="raised")
+label2 = Label(window,text="標籤2",relief="raised")
+label3 = Label(window,text="標籤3",relief="raised")
+label4 = Label(window,text="標籤4",relief="raised")
+label5 = Label(window,text="標籤5",relief="raised")
+label6 = Label(window,text="標籤6",relief="raised")
+label7 = Label(window,text="標籤7",relief="raised")
+label8 = Label(window,text="標籤8",relief="raised")
+label1.grid(row=0,column=0)
+label2.grid(row=0,column=1)
+label3.grid(row=0,column=2)
+label4.grid(row=0,column=3)
+label5.grid(row=1,column=0)
+label6.grid(row=1,column=1)
+label7.grid(row=1,column=2)
+label8.grid(row=1,column=3)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+label1 = Label(window,text="標籤1",relief="raised")
+label2 = Label(window,text="標籤2",relief="raised")
+label4 = Label(window,text="標籤4",relief="raised")
+label5 = Label(window,text="標籤5",relief="raised")
+label6 = Label(window,text="標籤6",relief="raised")
+label7 = Label(window,text="標籤7",relief="raised")
+label8 = Label(window,text="標籤8",relief="raised")
+label1.grid(row=0,column=0)
+label2.grid(row=0,column=1,columnspan=2)
+label4.grid(row=0,column=3)
+label5.grid(row=1,column=0)
+label6.grid(row=1,column=1)
+label7.grid(row=1,column=2)
+label8.grid(row=1,column=3)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+label1 = Label(window,text="標籤1",relief="raised")
+label2 = Label(window,text="標籤2",relief="raised")
+label3 = Label(window,text="標籤3",relief="raised")
+label4 = Label(window,text="標籤4",relief="raised")
+label5 = Label(window,text="標籤5",relief="raised")
+label7 = Label(window,text="標籤7",relief="raised")
+label8 = Label(window,text="標籤8",relief="raised")
+label1.grid(row=0,column=0)
+label2.grid(row=0,column=1,rowspan=2)
+label3.grid(row=0,column=2)
+label4.grid(row=0,column=3)
+label5.grid(row=1,column=0)
+label7.grid(row=1,column=2)
+label8.grid(row=1,column=3)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+label1 = Label(window,text="標籤1",relief="raised")
+label2 = Label(window,text="標籤2",relief="raised")
+label4 = Label(window,text="標籤4",relief="raised")
+label5 = Label(window,text="標籤5",relief="raised")
+label8 = Label(window,text="標籤8",relief="raised")
+label1.grid(row=0,column=0)
+label2.grid(row=0,column=1,rowspan=2,columnspan=2)
+label4.grid(row=0,column=3)
+label5.grid(row=1,column=0)
+label8.grid(row=1,column=3)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+label1 = Label(window,text="標籤1",relief="raised")
+label2 = Label(window,text="標籤2",relief="raised")
+label3 = Label(window,text="標籤3",relief="raised")
+label4 = Label(window,text="標籤4",relief="raised")
+label5 = Label(window,text="標籤5",relief="raised")
+label6 = Label(window,text="標籤6",relief="raised")
+label7 = Label(window,text="標籤7",relief="raised")
+label8 = Label(window,text="標籤8",relief="raised")
+label1.grid(row=0,column=0,padx=5,pady=5)
+label2.grid(row=0,column=1,padx=5,pady=5)
+label3.grid(row=0,column=2,padx=5,pady=5)
+label4.grid(row=0,column=3,padx=5,pady=5)
+label5.grid(row=1,column=0,padx=5)
+label6.grid(row=1,column=1,padx=5)
+label7.grid(row=1,column=2,padx=5)
+label8.grid(row=1,column=3,padx=5)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+label1 = Label(window,text="歡迎來到美國")
+label2 = Label(window,bg="yellow",width=20)
+label3 = Label(window,text="歡迎來到美國")
+label4 = Label(window,bg="aqua",width=20)
+label1.grid(row=0,column=0,padx=5,pady=5)
+label2.grid(row=0,column=1,padx=5,pady=5)
+label3.grid(row=1,column=0,padx=5)
+label4.grid(row=1,column=1,padx=5)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+label1 = Label(window,text="歡迎來到美國")
+label2 = Label(window,bg="yellow",width=20)
+label3 = Label(window,text="歡迎來到美國")
+label4 = Label(window,bg="aqua",width=20)
+label1.grid(row=0,column=0,padx=5,pady=5,sticky=W)
+label2.grid(row=0,column=1,padx=5,pady=5)
+label3.grid(row=1,column=0,padx=5)
+label4.grid(row=1,column=1,padx=5)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+label1 = Label(window,text="歡迎來到美國",relief="raised")
+label2 = Label(window,bg="yellow",width=20)
+label3 = Label(window,text="歡迎來到美國",relief="raised")
+label4 = Label(window,bg="aqua",width=20)
+label1.grid(row=0,column=0,padx=5,pady=5)
+label2.grid(row=0,column=1,padx=5,pady=5)
+label3.grid(row=1,column=0,padx=5)
+label4.grid(row=1,column=1,padx=5)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+label1 = Label(window,text="歡迎來到美國",relief="raised")
+label2 = Label(window,bg="yellow",width=20)
+label3 = Label(window,text="歡迎來到美國",relief="raised")
+label4 = Label(window,bg="aqua",width=20)
+label1.grid(row=0,column=0,padx=5,pady=5,sticky=W+E)
+label2.grid(row=0,column=1,padx=5,pady=5)
+label3.grid(row=1,column=0,padx=5)
+label4.grid(row=1,column=1,padx=5)
+
+window.mainloop()
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+window = Tk()
+window.geometry("600x400")
+
+Colors = ["red","orange","yellow","green","blue","purple"]
+
+r = 0                               # row編號
+for color in Colors:
+    Label(window,text=color,relief="groove",width=20).grid(row=r,column=0)
+    Label(window,bg=color,relief="ridge",width=20).grid(row=r,column=1)
+    r += 1
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+window.rowconfigure(1, weight=1)
+window.columnconfigure(0, weight=1)
+
+label1 = Label(window,text="Label 1",bg="pink")
+label1.grid(row=0,column=0,padx=5,pady=5)
+
+label2 = Label(window,text="Label 2",bg="lightblue")
+label2.grid(row=0,column=1,padx=5,pady=5)
+
+label3 = Label(window,bg="yellow")
+label3.grid(row=1,column=0,columnspan=2,padx=5,pady=5)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+window.rowconfigure(1, weight=1)
+window.columnconfigure(0, weight=1)
+
+label1 = Label(window,text="Label 1",bg="pink")
+label1.grid(row=0,column=0,padx=5,pady=5,stick=W)
+
+label2 = Label(window,text="Label 2",bg="lightblue")
+label2.grid(row=0,column=1,padx=5,pady=5)
+
+label3 = Label(window,bg="yellow")
+label3.grid(row=1,column=0,columnspan=2,padx=5,pady=5,
+          sticky=N+S+W+E)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+window.rowconfigure(1, weight=1)
+window.columnconfigure(0, weight=1)
+
+label1 = Label(window,text="Label 1",bg="pink")
+label1.grid(row=0,column=0,padx=5,pady=5,stick=W+E)
+
+label2 = Label(window,text="Label 2",bg="lightblue")
+label2.grid(row=0,column=1,padx=5,pady=5)
+
+label3 = Label(window,bg="yellow")
+label3.grid(row=1,column=0,columnspan=2,padx=5,pady=5,
+          sticky=N+S+W+E)
+
+window.mainloop()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+window = Tk()
+window.geometry("600x400")
+
+lab  = Label(window,text="",bg="yellow",width=20)
+button7 = Button(window,text="7",width=3)
+button8 = Button(window,text="8",width=3)
+button9 = Button(window,text="9",width=3)
+buttonM = Button(window,text="*",width=3)                # 乘法符號
+button4 = Button(window,text="4",width=3)
+button5 = Button(window,text="5",width=3)
+button6 = Button(window,text="6",width=3)
+buttonS = Button(window,text="-",width=3)                # 減法符號
+button1 = Button(window,text="1",width=3)
+button2 = Button(window,text="2",width=3)
+button3 = Button(window,text="3",width=3)
+buttonP = Button(window,text="+",width=3)                # 加法符號
+button0 = Button(window,text="0",width=8)
+buttonD = Button(window,text=".",width=3)                # 小數點符號
+buttonE = Button(window,text="=",width=3)                # 等號符號
+
+lab.grid(row=0,column=0,columnspan=4)
+button7.grid(row=1,column=0,padx=5)
+button8.grid(row=1,column=1,padx=5)
+button9.grid(row=1,column=2,padx=5)
+buttonM.grid(row=1,column=3,padx=5)                    # 乘法符號
+button4.grid(row=2,column=0,padx=5)
+button5.grid(row=2,column=1,padx=5)
+button6.grid(row=2,column=2,padx=5)
+buttonS.grid(row=2,column=3,padx=5)                    # 減法符號
+button1.grid(row=3,column=0,padx=5)
+button2.grid(row=3,column=1,padx=5)
+button3.grid(row=3,column=2,padx=5)
+buttonP.grid(row=3,column=3,padx=5)                    # 加法符號
+button0.grid(row=4,column=0,padx=5,columnspan=2)
+buttonD.grid(row=4,column=2,padx=5)                    # 小數點符號
+buttonE.grid(row=4,column=3,padx=5)                    # 等號符號
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+nameL = Label(window,text="Name ")        # name標籤
+nameL.grid(row=0)
+addressL = Label(window,text="Address")   # address標籤
+addressL.grid(row=1)
+
+nameE = Entry(window)                     # 文字方塊name
+addressE = Entry(window)                  # 文字方塊address
+nameE.grid(row=0,column=1)              # 定位文字方塊name
+addressE.grid(row=1,column=1)           # 定位文字方塊address
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+accountL = Label(window,text="Account")   # account標籤
+accountL.grid(row=0)
+pwdL = Label(window,text="Password")      # pwd標籤
+pwdL.grid(row=1)
+
+accountE = Entry(window)                  # 文字方塊account
+pwdE = Entry(window,show="*")             # 文字方塊pwd
+accountE.grid(row=0,column=1)           # 定位文字方塊account
+pwdE.grid(row=1,column=1)               # 定位文字方塊pwd
+
+window.mainloop()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+window = Tk()
+window.geometry("600x400")
+
+var1 = IntVar()                      
+cbtnNFL = Checkbutton(window,text="美式足球",variable=var1)
+cbtnNFL.grid(row=1,sticky=W)
+
+var2 = IntVar()
+cbtnMLB = Checkbutton(window,text="棒球",variable=var2)
+cbtnMLB.grid(row=2,sticky=W)
+
+var3 = IntVar()
+cbtnNBA = Checkbutton(window,text="籃球",variable=var3)
+cbtnNBA.grid(row=3,sticky=W)   
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+def printInfo1():
+    selection = ''
+    for i in checkboxes:                    # 檢查此字典
+        if checkboxes[i].get() == True:     # 被選取則執行
+            selection = selection + sports[i] + "\t"
+    print(selection)
+
+window = Tk()
+window.geometry("600x400")
+
+Label(window,text="請選擇喜歡的運動",
+      fg="blue",bg="lightyellow",width=30).grid(row=0)
+
+sports = {0:"美式足球",1:"棒球",2:"籃球",3:"網球"}    # 運動字典
+checkboxes = {}                             # 字典存放被選取項目
+for i in range(len(sports)):                # 將運動字典轉成核取方塊
+    checkboxes[i] = BooleanVar()            # 布林變數物件
+    Checkbutton(window,text=sports[i], variable=checkboxes[i]).grid(row=i+1,sticky=W)
+  
+button1 = Button(window,text="選取",width=10,command=printInfo1)
+button1.grid(row=i+2)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+# 以下是callback方法
+def selAll():                               # 選取全部字串
+    entry.select_range(0,END)
+def deSel():                                # 取消選取
+    entry.select_clear()
+def clr():                                  # 刪除文字
+    entry.delete(0,END)
+def readonly():                             # 設定Entry狀態
+    if var.get() == True:
+        entry.config(state=DISABLED)        # 設為DISABLED
+    else:
+        entry.config(state=NORMAL)          # 設為NORMAL
+
+window = Tk()
+window.geometry("600x400")
+
+# 以下row=0建立Entry
+entry = Entry(window)
+entry.grid(row=0,column=0,columnspan=4,
+           padx=5,pady=5,sticky=W)
+# 以下row=1建立Button
+buttonSel = Button(window,text="選取",command=selAll)
+buttonSel.grid(row=1,column=0,padx=5,pady=5,sticky=W)
+buttonDesel = Button(window,text="取消選取",command=deSel)
+buttonDesel.grid(row=1,column=1,padx=5,pady=5,sticky=W)
+buttonClr = Button(window,text="刪除",command=clr)
+buttonClr.grid(row=1,column=2,padx=5,pady=5,sticky=W)
+buttonQuit = Button(window,text="結束",command=window.destroy)
+buttonQuit.grid(row=1,column=3,padx=5,pady=5,sticky=W)
+# 以下row=2建立Checkboxes
+var = BooleanVar()
+var.set(False)
+chkReadonly = Checkbutton(window,text="唯讀",variable=var,command=readonly)
+chkReadonly.grid(row=2,column=0)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+window = Tk()
+window.geometry("600x400")
+
+style = Style()                 # 改用Style
+style.theme_use("alt")          # 改用alt支援Style
+
+fm1 = Frame(window,width=150,height=80,relief="flat")
+fm1.grid(row=0,column=0,padx=5,pady=5)
+
+fm2 = Frame(window,width=150,height=80,relief="groove")
+fm2.grid(row=0,column=1,padx=5,pady=5)
+
+fm3 = Frame(window,width=150,height=80,relief="raised")
+fm3.grid(row=0,column=2,padx=5,pady=5)
+
+fm4 = Frame(window,width=150,height=80,relief="ridge")
+fm4.grid(row=1,column=0,padx=5,pady=5)
+
+fm5 = Frame(window,width=150,height=80,relief="solid")
+fm5.grid(row=1,column=1,padx=5,pady=5)
+
+fm6 = Frame(window,width=150,height=80,relief="sunken")
+fm6.grid(row=1,column=2,padx=5,pady=5)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
 
 
 

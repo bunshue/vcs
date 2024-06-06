@@ -243,7 +243,8 @@ display.Audio("news.mp3", autoplay=True)
 """
 print('------------------------------------------------------------')	#60個
 
-#需安裝playsound:pip install playsound
+#需安裝playsound
+#pip install playsound
 
 import newspaper
 from newspaper import Article
@@ -301,11 +302,6 @@ while True:
     except:
         print("語音無法辨識\n")
 """
-
-print('------------------------------------------------------------')	#60個
-
-
-
 print('------------------------------------------------------------')	#60個
 
 """ 播放OK

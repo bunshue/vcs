@@ -12,8 +12,11 @@ def
 
 最後面 為 準備搬出區
 
-"""
 
+pppp 打印 字串相關
+llll 字典 集合 串列 元組 dslt
+
+"""
 
 import os
 import sys
@@ -22,7 +25,7 @@ import math
 import random
 import requests
 import numpy as np
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 def printlocal():
@@ -319,24 +322,6 @@ print("y=/%3.2f/" % y)
 print("s=/%2s/" % s)
 
 print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
-# 貸款試算
-loan = 10000  # 貸款金額
-year = 1  # 年限
-rate = 10  # 年利率%
-month_rate = rate / (12 * 100)  # 改成百分比以及月利率
-
-# 計算每月還款金額
-molecules = loan * month_rate
-denominator = 1 - (1 / (1 + month_rate) ** (year * 12))
-monthly_pay = molecules / denominator  # 每月還款金額
-total_pay = monthly_pay * year * 12  # 總共還款金額
-
-print("每月還款金額 %d" % int(monthly_pay))
-print("總共還款金額 %d" % int(total_pay))
-
-print("------------------------------------------------------------")  # 60個
 
 x = [
     [a, b, c]
@@ -435,36 +420,6 @@ is_contains_chinese()
 print("------------------------------------------------------------")  # 60個
 
 
-def gcd(a, b):
-    """Calculate the Greatest Common Divisor of a and b.
-    Unless b==0, the result will have the same sign as b (so that when
-    b is divided by it, the result comes out positive).
-    """
-    while b:
-        a, b = b, a % b
-    return a
-
-
-a = 28
-b = 49
-c = gcd(a, b)
-print(c)
-
-print("------------------------------------------------------------")  # 60個
-
-
-def gcd(a, b):
-    if a < b:
-        a, b = b, a
-    while b != 0:
-        tmp = a % b
-        a = b
-        b = tmp
-    return a
-
-
-a, b = 24, 36
-print("最大公因數是 : ", gcd(a, b))
 
 print("------------------------------------------------------------")  # 60個
 
@@ -952,8 +907,10 @@ james = [23, 19, 22, 31, 18]  # 定義james串列
 print("列印james第1-3場得分", james[0:3])
 print("列印james第2-4場得分", james[1:4])
 print("列印james第1,3,5場得分", james[0:6:2])
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+print('抽象方法(abstract method)')
 
 from abc import ABCMeta, abstractmethod
 from math import pi
@@ -1080,14 +1037,11 @@ print("c是否為複數？", isinstance(1 + 3j, complex))
 
 print("------------------------------------------------------------")  # 60個
 
-print("------------------------------------------------------------")  # 60個
-
 print("a", "b", "c", sep="|")
-
 print("a", "b", "c", end="\n\n")
 
 print("------------------------------------------------------------")  # 60個
-
+dslt
 prices = {
     "AAPL": 191.88,
     "GOOG": 1186.96,
@@ -9789,16 +9743,6 @@ if check == False:
     print("身分證字號格式錯誤")
 else:
     print("身分證字號正確")
-
-print("------------------------------------------------------------")  # 60個
-
-from PyQt5 import QtWidgets
-
-app = QtWidgets.QApplication(sys.argv)
-screen = QtWidgets.QApplication.desktop()
-width = screen.width()
-height = screen.height()
-print(width, height)
 
 print("------------------------------------------------------------")  # 60個
 

@@ -58,3 +58,36 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 
 
 window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+def printInfo2():
+    selection = ''
+    for i in checkboxes:                    # 檢查此字典
+        if checkboxes[i].get() == True:     # 被選取則執行
+            selection = selection + sports[i] + "\t"
+    print(selection)
+
+window = tk.Tk()
+window.geometry("600x400")
+
+# 以下建立標籤框架與和曲方塊
+labFrame = tk.LabelFrame(window,text="選擇最喜歡的運動")
+sports = {0:"美式足球",1:"棒球",2:"籃球",3:"網球"}    # 運動字典
+checkboxes = {}                             # 字典存放被選取項目
+for i in range(len(sports)):                # 將運動字典轉成核取方塊
+    checkboxes[i] = tk.BooleanVar()            # 布林變數物件
+    tk.Checkbutton(labFrame,text=sports[i],
+                variable=checkboxes[i]).grid(row=i+1,sticky=tk.W)
+labFrame.pack(ipadx=5,ipady=5,pady=10)      # 包裝定位標籤框架
+
+button1 = tk.Button(window,text="確定",width=10,command=printInfo2)
+button1.pack()
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+print('------------------------------------------------------------')	#60個
+
+

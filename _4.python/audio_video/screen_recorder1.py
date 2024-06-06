@@ -24,7 +24,7 @@ class VideoCapThread(threading.Thread):
         self.b_record = True
         self.video = cv2.VideoWriter(video_file, 
                 cv2.VideoWriter_fourcc(*'XVID'),
-                32, ImageGrab.grab().size)  # 幀率為32，可以調節
+                20, ImageGrab.grab().size)  # 幀率為32，可以調節
 
     def run(self):
         while self.b_record:
@@ -38,16 +38,30 @@ class VideoCapThread(threading.Thread):
     def stop_record(self):
         self.b_record = False
 
-
 avi_file = 'tmp_screen_recorder_01.avi'
+
 t1 = VideoCapThread(avi_file)
 t1.start()
-for _ in range(600):
+
+import datetime
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("現在時間 :", now)
+record_time_st = time.time()
+
+for _ in range(300):
     print(_, end = " ")
-    time.sleep(1)  # 錄製10s
+    time.sleep(1)  # 錄製 5 min
     
 t1.stop_record()
 
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print("現在時間 :", now)
+
+record_time_elapsed = time.time() - record_time_st
+print('作業時間 :', format(record_time_elapsed, ".2f"), '秒')
+
+# delay 很嚴重 
+#300 sec => 378 sec, 不可用
 
 print("------------------------------------------------------------")  # 60個
 

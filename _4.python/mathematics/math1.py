@@ -456,6 +456,36 @@ print("Decimal :", dd)
 
 print("------------------------------------------------------------")  # 60個
 
+def gcd1(a, b):
+    """Calculate the Greatest Common Divisor of a and b.
+    Unless b==0, the result will have the same sign as b (so that when
+    b is divided by it, the result comes out positive).
+    """
+    while b:
+        a, b = b, a % b
+    return a
+
+
+a = 28
+b = 49
+c = gcd1(a, b)
+print(c)
+
+print("------------------------------------------------------------")  # 60個
+
+
+def gcd2(a, b):
+    if a < b:
+        a, b = b, a
+    while b != 0:
+        tmp = a % b
+        a = b
+        b = tmp
+    return a
+
+
+a, b = 24, 36
+print("最大公因數是 : ", gcd2(a, b))
 
 print("------------------------------------------------------------")  # 60個
 
