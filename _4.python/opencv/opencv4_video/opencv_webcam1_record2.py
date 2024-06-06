@@ -25,11 +25,16 @@ def StartWebCamRecord():
     print('開始錄影時間 :', now)
     print('預計錄影時間 :', RECORD_TIME_MINUTE, '分')
     print('錄影時間(分) :', end = "")
-    
-    fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)  #取得編碼器的四字元碼
+
+    #建立視訊編碼 fourcc XVID
+    ENCODING_TYPE = 'XVID'  # 編碼器
+    #建立視訊編碼 fourcc
+    fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
+
     #建立影像寫入器 out
     out = cv2.VideoWriter(record_filename,fourcc,fps,(width,height))
     cv2.namedWindow('show')
+
     show_minitues_info = 0
     while(True):
         ret,img = cap.read()    #擷取一張影像

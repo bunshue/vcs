@@ -13,3 +13,15 @@ void setup() {
 
 void loop() {
 }
+
+/*
+
+Serial.println("AAAA" );
+Serial.println("BBBB" );
+Serial.println("CCCC" );
+
+Serial.print("AAAA");
+Serial.print("BBBB");
+Serial.print("CCCC");
+
+*/
