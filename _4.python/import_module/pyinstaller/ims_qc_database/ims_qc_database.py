@@ -355,7 +355,7 @@ def button04Click():
 
 def button05Click():
     print('你按了button05')
-    window.destroy()
+    window.destroy()  # 關閉視窗
 
 def clear_text1():
     text1.delete(1.0, 'end')

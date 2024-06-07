@@ -29,7 +29,7 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 
 # Button測試
 tk.Label(text = 'Button測試').pack()
-def clickme():
+def buttonClick1():
     global count
     count += 1
     labeltext.set("你按我 " + str(count) + " 次了！")
@@ -45,28 +45,23 @@ label1 = tk.Label(window, fg = "red", textvariable = labeltext)
 labeltext.set("歡迎光臨Tkinter！")
 label1.pack()
 
-button1 = tk.Button(window, textvariable = btntext, command = clickme)
+button1 = tk.Button(window, textvariable = btntext, command = buttonClick1)
 btntext.set("按我！")
 button1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-def click1():
+def buttonClick2():
     textvar.set("我已經被按過了！")
 
 textvar = tk.StringVar()
-button1 = tk.Button(window, textvariable = textvar, command = click1)
+button1 = tk.Button(window, textvariable = textvar, command = buttonClick2)
 textvar.set("按鈕")
 button1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-button_exit = tk.Button(window, text = "關閉視窗標準版", command = window.destroy)
-button_exit.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-def buttonClick():
+def buttonClick3():
     global count
     count = count + 1
     print("Beep! " + str(count))
@@ -74,7 +69,7 @@ def buttonClick():
 
 count = 0;
 
-button1 = tk.Button(window, text = "按鍵數次數, 不指定按鍵大小", command = buttonClick)
+button1 = tk.Button(window, text = "按鍵數次數, 不指定按鍵大小", command = buttonClick3)
 button1.pack(side = tk.LEFT)    #靠左對齊
 
 button2 = tk.Button(window, text = "離開", command = '')
@@ -224,17 +219,17 @@ window.title(title)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-def event1():
+def buttonClick4():
    print("btn1 pressed.")
 
-btn1 =tk.Button(window,text="press me",command=event1)
+btn1 =tk.Button(window,text="press me",command=buttonClick4)
 btn1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 print("------------------------------------------------------------")  # 60個
 
-def event2():
+def buttonClick5():
    print("btn2 pressed.")
 
 from PIL import ImageTk, Image
@@ -242,24 +237,23 @@ from PIL import ImageTk, Image
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 img = ImageTk.PhotoImage(Image.open(filename))
-btn2 =tk.Button(window,text="press me", image=img ,command=event2)
+btn2 =tk.Button(window,text="press me", image=img ,command=buttonClick5)
 btn2.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-def event3():
+def buttonClick6():
    tkMessageBox.showinfo('訊息框', "Hello World")
 
 import tkinter.messagebox as tkMessageBox
 #import tkinter.messagebox
 
-btn3 = tk.Button(window, text = "Say Hello", command = event3)
+btn3 = tk.Button(window, text = "Say Hello", command = buttonClick6)
 btn3.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
 
 button1 = tk.Button(window, 			
 			anchor = tk.E,			# 指定文字對齊模式

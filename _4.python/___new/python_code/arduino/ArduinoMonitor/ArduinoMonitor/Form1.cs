@@ -178,6 +178,11 @@ namespace ArduinoMonitor
             InitializeComponent();
         }
 
+        void show_item_location()
+        {
+
+        }
+
         private void Comport_Scan()
         {
             string[] tempString = SerialPort.GetPortNames();
@@ -198,6 +203,7 @@ namespace ArduinoMonitor
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
             Comport_Scan();
         }
 

@@ -56,35 +56,6 @@ for i in range(n):
     print(f"第 {i+1} 年本金和 : {int(money)}")
 
 print("------------------------------------------------------------")  # 60個
-
-"""
-彰化銀行-貸款試算
-https://www.bankchb.com/frontend/SM1-2.jsp?type=2
-本息平均攤還
-"""
-
-"""
-loan = eval(input("請輸入貸款金額："))
-year = eval(input("請輸入年限："))
-rate = eval(input("請輸入年利率："))
-"""
-loan = 10000000
-year = 20
-rate = 0.0185
-
-monthrate = rate / (12*100)             # 改成百分比的月利率
-
-# 計算每月還款金額
-molecules = loan * monthrate
-denominator = 1 - (1 / (1 + monthrate) ** (year * 12))
-monthlyPay = molecules / denominator    # 每月還款金額
-totalPay = monthlyPay * year * 12       # 總共還款金額
-
-print(f"每月還款金額 {int(monthlyPay)}")
-print(f"總共還款金額 {int(totalPay)}")
-
-print("------------------------------------------------------------")  # 60個
-
 # 定義GetRoundArea函式，可傳入radius半徑，並傳回圓面積
 def GetRoundArea(radius):
     # 傳回圓面積，圓面積公式為 半徑 *  半徑 * 3.14

@@ -33,10 +33,20 @@ canvas1 = tk.Canvas(window, width=image0.size[0]+40, height=image0.size[1]+30)
 canvas1.create_image(20,15,anchor=tk.NW,image=tk_image)
 canvas1.pack(fill=tk.BOTH,expand=True)
 
+
+#tk顯示一張圖片 在label上
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+image = Image.open(filename)
+image = ImageTk.PhotoImage(image)
+
+label1 = tk.Label(image = image)
+label1.image = image
+label1.pack()
+
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 filename = 'C:/_git/vcs/_4.python/_data/lena_color.png'
 
 window = tk.Tk()
@@ -1040,7 +1050,7 @@ label2 = tk.Label(window,text=poem_text,bg="lightyellow",
 
 window.mainloop()
 
-
+'''
 
 
 print("------------------------------------------------------------")  # 60個

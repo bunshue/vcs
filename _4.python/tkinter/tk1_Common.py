@@ -43,6 +43,9 @@ window.iconbitmap(icon_filename)   # 更改圖示
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
+button_exit = tk.Button(window, text = "關閉視窗標準版", command = window.destroy)
+button_exit.pack()
+
 def show_tk_info():
     width = window.winfo_screenwidth()
     height = window.winfo_screenheight()
@@ -233,7 +236,8 @@ print('------------------------------------------------------------')	#60個
 
 """
 
-window.destroy()  # 關閉視窗
 
+button_exit = tk.Button(window, text = "關閉視窗標準版", command = window.destroy)
+                                                                   
 
 """

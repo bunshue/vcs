@@ -32,7 +32,6 @@
             this.bt_comport_scan = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button9 = new System.Windows.Forms.Button();
             this.bt_comport_disconnect = new System.Windows.Forms.Button();
             this.bt_comport_connect = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -43,15 +42,22 @@
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.SerialPortTimer100ms = new System.Windows.Forms.Timer(this.components);
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.aGauge_rpm = new AGaugeApp.AGauge();
             this.aGauge_duty = new AGaugeApp.AGauge();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // bt_comport_scan
             // 
-            this.bt_comport_scan.Location = new System.Drawing.Point(196, 12);
+            this.bt_comport_scan.Location = new System.Drawing.Point(190, 20);
             this.bt_comport_scan.Name = "bt_comport_scan";
             this.bt_comport_scan.Size = new System.Drawing.Size(74, 33);
             this.bt_comport_scan.TabIndex = 27;
@@ -67,7 +73,7 @@
             "9600",
             "19600",
             "115200"});
-            this.comboBox2.Location = new System.Drawing.Point(102, 13);
+            this.comboBox2.Location = new System.Drawing.Point(96, 22);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(88, 27);
             this.comboBox2.TabIndex = 26;
@@ -77,26 +83,14 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 12);
+            this.comboBox1.Location = new System.Drawing.Point(6, 22);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(89, 27);
             this.comboBox1.TabIndex = 25;
             // 
-            // button9
-            // 
-            this.button9.BackColor = System.Drawing.Color.Black;
-            this.button9.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button9.ForeColor = System.Drawing.Color.White;
-            this.button9.Location = new System.Drawing.Point(415, 11);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(64, 33);
-            this.button9.TabIndex = 24;
-            this.button9.Text = "Reset";
-            this.button9.UseVisualStyleBackColor = false;
-            // 
             // bt_comport_disconnect
             // 
-            this.bt_comport_disconnect.Location = new System.Drawing.Point(342, 12);
+            this.bt_comport_disconnect.Location = new System.Drawing.Point(336, 20);
             this.bt_comport_disconnect.Name = "bt_comport_disconnect";
             this.bt_comport_disconnect.Size = new System.Drawing.Size(67, 33);
             this.bt_comport_disconnect.TabIndex = 23;
@@ -106,7 +100,7 @@
             // 
             // bt_comport_connect
             // 
-            this.bt_comport_connect.Location = new System.Drawing.Point(278, 12);
+            this.bt_comport_connect.Location = new System.Drawing.Point(272, 20);
             this.bt_comport_connect.Name = "bt_comport_connect";
             this.bt_comport_connect.Size = new System.Drawing.Size(57, 33);
             this.bt_comport_connect.TabIndex = 22;
@@ -120,7 +114,7 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.tb_main_rpm);
             this.panel3.Controls.Add(this.aGauge_rpm);
-            this.panel3.Location = new System.Drawing.Point(291, 71);
+            this.panel3.Location = new System.Drawing.Point(301, 82);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(351, 300);
             this.panel3.TabIndex = 33;
@@ -140,7 +134,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.tb_main_duty2);
             this.panel2.Controls.Add(this.aGauge_duty);
-            this.panel2.Location = new System.Drawing.Point(12, 71);
+            this.panel2.Location = new System.Drawing.Point(13, 82);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(273, 300);
             this.panel2.TabIndex = 32;
@@ -157,9 +151,9 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Location = new System.Drawing.Point(12, 377);
+            this.panel4.Location = new System.Drawing.Point(12, 388);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(630, 375);
+            this.panel4.Size = new System.Drawing.Size(640, 480);
             this.panel4.TabIndex = 34;
             // 
             // serialPort1
@@ -177,11 +171,24 @@
             this.richTextBox1.BackColor = System.Drawing.Color.Black;
             this.richTextBox1.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(648, 71);
+            this.richTextBox1.Location = new System.Drawing.Point(658, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(382, 594);
+            this.richTextBox1.Size = new System.Drawing.Size(314, 856);
             this.richTextBox1.TabIndex = 35;
             this.richTextBox1.Text = "";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.bt_comport_connect);
+            this.groupBox1.Controls.Add(this.bt_comport_disconnect);
+            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.bt_comport_scan);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(420, 60);
+            this.groupBox1.TabIndex = 36;
+            this.groupBox1.TabStop = false;
             // 
             // aGauge_rpm
             // 
@@ -397,21 +404,52 @@
             this.aGauge_duty.Text = "aGauge1";
             this.aGauge_duty.Value = 0F;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Location = new System.Drawing.Point(438, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(214, 60);
+            this.groupBox2.TabIndex = 37;
+            this.groupBox2.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(72, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(60, 33);
+            this.button1.TabIndex = 22;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(141, 20);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(60, 33);
+            this.button2.TabIndex = 23;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 20);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(60, 33);
+            this.button3.TabIndex = 27;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1038, 764);
+            this.ClientSize = new System.Drawing.Size(984, 876);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.bt_comport_scan);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.bt_comport_disconnect);
-            this.Controls.Add(this.bt_comport_connect);
             this.Name = "Form1";
             this.Text = "ArduinoMonitor";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -419,6 +457,8 @@
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -428,7 +468,6 @@
         private System.Windows.Forms.Button bt_comport_scan;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button bt_comport_disconnect;
         private System.Windows.Forms.Button bt_comport_connect;
         private System.Windows.Forms.Panel panel3;
@@ -441,6 +480,11 @@
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Timer SerialPortTimer100ms;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
