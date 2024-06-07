@@ -9,17 +9,6 @@ from tkinter import *
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-
-width = window.winfo_screenwidth()
-height = window.winfo_screenheight()
-print('取得目前螢幕大小')
-print(width, height)
-
-window.destroy()  # 關閉視窗
-
-print("------------------------------------------------------------")  # 60個
-
 def event1():
     label1.set("123")
 	#print(entry1.get())
@@ -161,13 +150,6 @@ window.mainloop()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-tk.Label(window, text='紅', bg='red', width=20).pack()
-tk.Label(window, text='綠', bg='green', width=20).pack()
-tk.Label(window, text='藍', bg='blue', width=20).pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
 string = tk.StringVar()
 entry = tk.Entry(window, textvariable=string).pack()
 label = tk.Label(window, textvariable=string).pack()
@@ -214,18 +196,6 @@ entry.pack(padx=20, pady=10)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
-print("Label元件的參數設定")
-
-label = tk.Label(window, bg="#ff00ff", fg="#ffff00", \
-                font =("標楷體", 14, "bold", "italic"), \
-                padx=5, pady=30, text = "生日快樂")
-label.pack()
-
-label = tk.Label(window, bg="#ff00ff", fg="#ffff00", \
-                font ="新細明體 14 bold italic", \
-                padx=20, pady=5, text = "生日快樂")
-label.pack()
 
 window.mainloop()
 
@@ -343,78 +313,6 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-print("pack")
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-lab1.pack(side=tk.BOTTOM)
-lab2.pack(side=tk.BOTTOM)
-lab3.pack(side=tk.BOTTOM)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-lab1.pack(side=tk.BOTTOM)
-lab2.pack(side=tk.BOTTOM,pady=5)       # 包裝與定位元件,增加y軸間距
-lab3.pack(side=tk.BOTTOM)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-lab1.pack(side=tk.LEFT)
-lab2.pack(side=tk.LEFT)
-lab3.pack(side=tk.LEFT)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-lab1.pack(side=tk.LEFT)
-lab2.pack(side=tk.LEFT,padx=5)         # 增加x軸間距
-lab3.pack(side=tk.LEFT)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-lab1.pack()
-lab2.pack(side=tk.RIGHT)
-lab3.pack(side=tk.LEFT)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 
@@ -435,80 +333,6 @@ label = tk.Label(window,textvariable=x,      # 設定Label內容是變數x
               font="Verdana 16 bold",     # 字型設定
               width=25,height=2).pack()   # 標籤內容
 button1 = tk.Button(window,text="Hit",command=button_hit).pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-lab1.pack(side=tk.BOTTOM)
-lab2.pack(side=tk.BOTTOM)
-lab3.pack(side=tk.BOTTOM)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-
-lab1.pack(side=tk.BOTTOM)
-lab2.pack(side=tk.BOTTOM,pady=5)       # 增加y軸間距
-lab3.pack(side=tk.BOTTOM)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-
-lab1.pack(side=tk.LEFT)
-lab2.pack(side=tk.LEFT)
-lab3.pack(side=tk.LEFT)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-
-lab1.pack(side=tk.LEFT)
-lab2.pack(side=tk.LEFT,padx=5)  # 增加x軸間距
-lab3.pack(side=tk.LEFT)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
-lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
-lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-
-lab1.pack()
-lab2.pack(side=tk.RIGHT)
-lab3.pack(side=tk.LEFT)
 
 window.mainloop()
 
@@ -535,19 +359,6 @@ label = tk.Label(window,textvariable=x,      # 設定Label內容是變數x
               font="Verdana 16 bold",     # 字型設定
               width=25,height=2).pack()   # 標籤內容
 button1 = tk.Button(window,text="Hit",command=button_hit).pack()                   
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-label=tk.Label(window,text="歡迎來到美國",
-            fg="blue",bg="yellow",
-            height=3,width=15,
-            anchor="se")
-label.pack()  
 
 window.mainloop()
 
@@ -604,28 +415,6 @@ tk.Label(window, text = '王之渙涼州詞', fg='blue',bg='lightblue',bitmap='g
 msg=('黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。')
 tk.Label(window, text = msg, width=28,wraplength=240,justify='left',\
          pady=10,font=('細明體', 14)).pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-# pack.py
-
-window=tk.Tk()
-window.geometry("600x400")
-window.title('pack配置')
-window.configure(bg='white')
-
-label1=tk.Label(window, text = '元件版面配置',font=('微軟正黑體', 16),fg='white',bg='blue')
-label2=tk.Label(window, text = '方法',font=('標楷體', 12))
-label3=tk.Label(window, text = 'pack()方法',font=('標楷體', 12),bg='lightgreen')
-label4=tk.Label(window, text = 'grid()方法',font=('標楷體', 12),bg='pink')
-label5=tk.Label(window, text = 'place()方法',font=('標楷體', 12),bg='lightblue')
-label1.pack(fill='x')
-label2.pack(side='left', fill='y')
-label3.pack(pady=5, fill='both', expand=True)
-label4.pack(pady=5, fill='both', expand=True)
-label5.pack(pady=5, fill='both', expand=True)
 
 window.mainloop()
 

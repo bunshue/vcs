@@ -4,7 +4,7 @@ Grid 測試
 
 import sys
 import tkinter as tk
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -70,8 +70,6 @@ for j in range(4, 14, 3):
             entry.grid(row = j, column = i, columnspan = 3) #占用3欄
 """
 window.mainloop()
-
-sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -326,7 +324,7 @@ button_row7.grid(row = 7, column = 0, columnspan = 3, sticky = "news", padx = 20
 window.mainloop()
 
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 
@@ -336,14 +334,24 @@ print('------------------------------------------------------------')	#60個
 
 
 
+print("------------------------------------------------------------")  # 60個
 
+window = tk.Tk()
 
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
-#grid 大全
-
-print("grid")
-
-print("grid版面佈局")
+# 設定主視窗標題
+title = "Grid 測試"
+window.title(title)
 
 taipei=tk.Button(window, width=30, text="台北景點")
 taipei.grid(column=0,row=0)
@@ -354,12 +362,10 @@ ilan.grid(column=1,row=0)
 tainan=tk.Button(window, width=30, text="台南景點")
 tainan.grid(column=1,row=1)
 	
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
+window.mainloop()
 
 window = tk.Tk()
-window.geometry("100x100")
+window.geometry("600x400")
 window.title("grid佈局")
 
 one=tk.Button(window, width=20, text="January")

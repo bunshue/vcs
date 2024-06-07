@@ -111,6 +111,7 @@ button1.pack()
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 name = tk.StringVar()
 num1 = tk.IntVar()
@@ -129,6 +130,7 @@ button2 = tk.Button(window, text = "計算", command = calculate)
 button2.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 # Entry與Label測試
@@ -141,6 +143,7 @@ label = tk.Label(window, textvariable = string)
 label.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 #Entry 預設值
 entry_string = tk.StringVar(value = 'test1111')
@@ -150,6 +153,7 @@ entry.pack()
 print('Entry內容 :', entry_string.get())	#Entry取值
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
@@ -179,6 +183,7 @@ title = "這是主視窗"
 window.title(title)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame1 = tk.Frame(window)
@@ -199,6 +204,7 @@ button1.grid(row = 0, column = 0)
 button2.grid(row = 0, column = 1)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame3 = tk.Frame(window)
@@ -219,6 +225,7 @@ entry2.grid(row = 2, column = 2)
 button.grid(row = 3, column = 2)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame4 = tk.Frame(window)
@@ -257,8 +264,10 @@ button1.pack()
 button2.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 window.mainloop()

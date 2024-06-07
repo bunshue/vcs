@@ -1,8 +1,8 @@
 // 動手做9-5：使用超音波感測器製作數位量尺
 // 詳細的程式說明，請參閱第九章，9-29頁。
 
-const byte trigPin = 13;  // 超音波模組的觸發腳
-const int echoPin = 12;    // 超音波模組的接收腳
+const byte trigPin = 12;  // 超音波模組的觸發腳
+const int echoPin = 13;    // 超音波模組的接收腳
 unsigned long d;          // 儲存高脈衝的持續時間
 
 unsigned long ping() {

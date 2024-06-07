@@ -1,4 +1,3 @@
-'''
 import sys
 import tkinter as tk
 import tkinter.ttk as ttk
@@ -39,7 +38,7 @@ combo_label.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-def selected(event):
+def combobox_select2(event):
     labelVar.set(cbVar.get())
 
 print('最喜歡的運動')
@@ -48,7 +47,7 @@ cbVar = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=cbVar)
 cb['value'] = ("籃球","排球","足球","其他")  #設定選項
 cb.current(0)  #預設第一個選項
-cb.bind('<<ComboboxSelected>>', selected)  #設定選取選項後執行的程式
+cb.bind('<<ComboboxSelected>>', combobox_select2)  #設定選取選項後執行的程式
 cb.pack()
 
 labelVar = tk.StringVar()  
@@ -60,7 +59,7 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 
-def showWeather(event):  #下拉選單選取選項後執行的程式
+def combobox_select5(event):  #下拉選單選取選項後執行的程式
     city = cbVar.get()  #使用者選取的選項
     print(city)
     if city != '請選擇：':  #選擇縣市
@@ -76,7 +75,7 @@ cbVar = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=cbVar)   #下拉式選單元件
 cb['value'] = ("請選擇：","臺北","新北","桃園","臺中","臺南","高雄","基隆","新竹","嘉義","苗栗","彰化","南投","雲林","嘉義","屏東","宜蘭","花蓮","臺東","澎湖","金門","連江" )  #設定選項
 cb.current(0)  #預設第一個選項
-cb.bind('<<ComboboxSelected>>', showWeather)  #設定選取選項後執行的程式
+cb.bind('<<ComboboxSelected>>', combobox_select5)  #設定選取選項後執行的程式
 cb.pack()
 
 labelVar = tk.StringVar()  
@@ -88,7 +87,7 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 
-def combobox_selected(event):
+def combobox_select3(event):
     label_text.set(cbVar.get())
 
 #Combobox 下拉選單是 tkinter 的 ttk 加強模組裡的元件
@@ -98,7 +97,7 @@ cbVar = tk.StringVar()
 cb = ttk.Combobox(window, textvariable = cbVar)   #下拉式選單元件
 cb['value'] = ("籃球","排球","足球","其他")  #設定選項
 cb.current(0)  #預設第一個選項
-cb.bind('<<ComboboxSelected>>', combobox_selected)  #設定選取選項後執行的程式
+cb.bind('<<ComboboxSelected>>', combobox_select3)  #設定選取選項後執行的程式
 cb.pack()
 
 label_text = tk.StringVar()  
@@ -110,7 +109,7 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 
-def show():
+def combobox_select4():
     a.set(f'{box.current()}:{box.get()}')    # 顯示索引值與內容
 
 a = tk.StringVar()                           # 定義變數
@@ -122,7 +121,7 @@ label.pack()
 box = ttk.Combobox(window, width=15, values=['七龍珠','海賊王','鬼滅之刃','灌籃高手','排球少年'])
 box.pack()
 
-btn = tk.Button(window, text='顯示', command=show)   # 建立按鈕，點擊按鈕時，執行 show 函式
+btn = tk.Button(window, text='顯示', command=combobox_select4)   # 建立按鈕，點擊按鈕時，執行 combobox_select4 函式
 btn.pack()
 
 
@@ -131,7 +130,7 @@ print("------------------------------------------------------------")  # 60個
 
 import tkinter.font as tkfont
 
-def combox_select(event):
+def combobox_select1(event):
     selected_area = event.widget.get()
     lab_result.config(text=selected_area)
 
@@ -142,7 +141,7 @@ default_font.configure(size=15)
 AREA_OPTIONS=('屏東縣','高雄市','台南市','台東縣')
 area = tk.StringVar()
 combox = ttk.Combobox(window, value=AREA_OPTIONS, textvariable=area, font=default_font)
-combox.bind('<<ComboboxSelected>>', combox_select)
+combox.bind('<<ComboboxSelected>>', combobox_select1)
 combox.current(0)
 combox.pack(padx=10, pady=10)
 lab_result = tk.Label(window, font=default_font, fg='black', width=18)
@@ -172,7 +171,6 @@ print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
-'''
 
 print("------------------------------------------------------------")  # 60個
 
@@ -187,7 +185,7 @@ from tkinter import *
 from  tkinter.ttk  import *
 
 
-def comboSelection(event):                      # 顯示選項
+def combobox_select6(event):                      # 顯示選項
     labelVar.set(var.get())                     # 同步標籤內容                      
     
 root = Tk()
@@ -197,7 +195,7 @@ var = StringVar()
 cb = Combobox(root,textvariable=var)            # 建立Combobox
 cb["value"] = ("Python","Java","C#","C")        # 設定選項內容
 cb.current(0)                                   # 設定預設選項
-cb.bind("<<ComboboxSelected>>",comboSelection)  # 綁定
+cb.bind("<<ComboboxSelected>>",combobox_select6)  # 綁定
 cb.pack(side=LEFT,pady=10,padx=10)
 
 labelVar = StringVar()
@@ -268,7 +266,7 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 from  tkinter.ttk  import *
-def printSelection():                               # 列印選項
+def combobox_select7():                               # 列印選項
     print(var.get())
     
 root = Tk()
@@ -280,7 +278,7 @@ cb["value"] = ("Python","Java","C#","C")            # 設定選項內容
 cb.current(0)                                       # 設定預設選項
 cb.pack(pady=10)
 
-btn = Button(root,text="Print",command=printSelection) # 建立按鈕
+btn = Button(root,text="Print",command=combobox_select7) # 建立按鈕
 btn.pack(pady=10,anchor=S,side=BOTTOM)
 
 root.mainloop()

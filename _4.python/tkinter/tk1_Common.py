@@ -33,21 +33,26 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
-
 # 設定主視窗之背景色
-#window.configure(bg = "#7AFEC6")
+window.configure(bg = "#7AFEC6")
 
 icon_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/ims.ico'
 window.iconbitmap(icon_filename)   # 更改圖示
 
-x_st = 50
-y_st = 50
-dx = 120
-dy = 80
-w = 12
-h = 3
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+def show_tk_info():
+    width = window.winfo_screenwidth()
+    height = window.winfo_screenheight()
+    print('取得目前螢幕大小 : ', width, height)
+
+button_info = tk.Button(window, width = 10, height = 2, command = show_tk_info, text = '顯示資訊')
+button_info.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 # Button測試
 tk.Label(text = 'Button測試').pack()
@@ -72,10 +77,19 @@ btntext.set("按我！")
 button1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+x_st = 50
+y_st = 150
+dx = 120
+dy = 80
+w = 12
+h = 3
 
 def choose():
     str = "選擇："
@@ -103,12 +117,12 @@ font_size = 20
 label_message1 = tk.Label(window, font=("標楷體", font_size), fg = 'red', textvariable = main_message1)
 label_message1.pack()
 label_message1.place(x = 5, y = 0 + 10)
-main_message1.set('')
+main_message1.set('AAAA')
 
 label_message2 = tk.Label(window, font=("標楷體", font_size), fg = 'red', textvariable = main_message2)
 label_message2.pack()
 label_message2.place(x = 5 + W * 3 / 4, y = 0 + 10)
-main_message2.set('')
+main_message2.set('BBBB')
 
 msg = tk.StringVar()
 label1 = tk.Label(window, text = '選擇顯示站別：')
@@ -136,6 +150,7 @@ text1.place(x = x_st + dx * 0, y = y_st + dy * 3 + 50)
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 def button01Click():
     print('你按了 選取檔案')
@@ -164,24 +179,29 @@ button01.pack()
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 
@@ -211,3 +231,9 @@ print('作業完成')
 print('------------------------------------------------------------')	#60個
 
 
+"""
+
+window.destroy()  # 關閉視窗
+
+
+"""

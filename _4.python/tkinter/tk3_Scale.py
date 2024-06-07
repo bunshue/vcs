@@ -26,9 +26,11 @@ title = 'Scale 測試'
 window.title(title)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 slider = tk.Scale(window, from_=0, to=10)
 slider.pack()
@@ -40,12 +42,14 @@ label.pack()
 #label.config(text="Time: " + str(score))
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 print('Scale 測試')
 slider = tk.Scale(window, from_ = 0, to = 100)
 slider.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 tk.Label(text='Scale測試').pack()
@@ -55,6 +59,7 @@ w.pack()
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 w = tk.Scale(window, from_=0, to=200, orient=tk.HORIZONTAL)
@@ -64,6 +69,7 @@ print(w.get())
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 window.mainloop()

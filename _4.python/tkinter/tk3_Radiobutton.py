@@ -4,6 +4,7 @@ import sys
 import glob
 import tkinter as tk
 from tkinter import ttk
+import tkinter.font as tkfont
 
 print("------------------------------------------------------------")  # 60個
 
@@ -25,80 +26,112 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
-radio1 = ttk.Radiobutton(
-	window, 
-	text = 'Radiobutton 1', 
-	value = 1, 
-	variable = 'this is a lion-mouse',
-	command = lambda: print('aaa'))
-radio1.pack()
+default_font = tkfont.nametofont('TkDefaultFont')
+default_font.configure(size=10)
 
-radio2 = ttk.Radiobutton(window, text = 'Radiobutton 2', value = 1, variable = 'aaaaaa')
-radio2.pack()
+rb1 = ttk.Radiobutton(
+	window,
+	text = 'AAAA',
+	value = 1,
+	variable = 'this is a lion-mouse',
+	command = lambda: print('你按了 AAAA'))
+rb1.pack()
+
+rb2 = ttk.Radiobutton(window, text = 'BBBB', value = 1, variable = 'aaaaaa')
+rb2.pack()
 
 def radio_func():
-	#print(check_bool.get())
-        print('你按了Radiobutton')
+        print('你按了 CCCC/DDDD')
 # data
 radio_string = tk.StringVar()
 
 # widgets
-exercise_radio1 = ttk.Radiobutton(
+rb3 = ttk.Radiobutton(
 	window, 
-	text = 'Radio A', 
-	value = 'A', 
+	text = 'CCCC', 
+	value = 'C', 
 	command = radio_func, 
 	variable = radio_string)
-exercise_radio2 = ttk.Radiobutton(
+rb3.pack()
+rb4 = ttk.Radiobutton(
 	window, 
-	text = 'Radio B', 
-	value = 'B', 
+	text = 'DDDD', 
+	value = 'D', 
 	command = radio_func, 
 	variable = radio_string)
-
-# layout
-exercise_radio1.pack()
-exercise_radio2.pack()
+rb4.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
-def choose():
-    msg.set("你最喜歡的球類運動：" + choice.get())
 
-choice = tk.StringVar()
+def choose1():
+    msg.set("你最喜歡的球類運動：" + choice1.get())
+
+choice1 = tk.StringVar()
 msg = tk.StringVar()
 label = tk.Label(window, text="選擇最喜歡的球類運動：")
 label.pack()
-item1 = tk.Radiobutton(window, text="足球", value="足球", variable=choice, command=choose)
+item1 = tk.Radiobutton(window, text="足球", value="足球", variable=choice1, command=choose1)
 item1.pack()
-item2 = tk.Radiobutton(window, text="籃球", value="籃球", variable=choice, command=choose)
+item2 = tk.Radiobutton(window, text="籃球", value="籃球", variable=choice1, command=choose1)
 item2.pack()
-item3 = tk.Radiobutton(window, text="棒球", value="棒球", variable=choice, command=choose)
+item3 = tk.Radiobutton(window, text="棒球", value="棒球", variable=choice1, command=choose1)
 item3.pack()
 lblmsg = tk.Label(window, fg="red", textvariable=msg)
 lblmsg.pack()
 
 item1.select()
 
-choose()
+choose1()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
-# RadioButton測試
-tk.Label(text='RadioButton測試').pack()
+def choose2():
+    print('你選擇了 : ' + choice2.get())
+
+frame1 = tk.Frame(window)  # mp3 歌曲容器
+frame1.pack()
+
+source_dir = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+
+mp3files = glob.glob(source_dir + "*.mp3")
+
+playsong = preplaysong = ""
+index = 0
+choice2 = tk.StringVar()
+
+for mp3 in mp3files:  #建立歌曲選項按鈕
+    rbtem = tk.Radiobutton(frame1, text = mp3, variable = choice2, value = mp3, command = choose2)
+    if(index == 0):  #選取第1個選項按鈕
+        rbtem.select()
+        playsong = preplaysong = mp3
+    rbtem.grid(row = index, column = 0, sticky = 'w')
+    index += 1
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+def do_select():
+        value = radio_value.get()
+        print(lunch[value])
+
+lunch = {0:'AAAA',1:'BBBB',2:'CCCC'}
+
 radio_value = tk.IntVar()
-radio_value.set(1)
-lunch = {0:'A套餐',1:'B套餐',2:'C套餐'}
-tk.Radiobutton(text = lunch[0], variable = radio_value, value = 0).pack()
-tk.Radiobutton(text = lunch[1], variable = radio_value, value = 1).pack()
-tk.Radiobutton(text = lunch[2], variable = radio_value, value = 2).pack()
-def buy():
-	value = radio_value.get()
-	print(lunch[value])
+radio_value.set(2)  # 預選第2項
 
-tk.Button(window, text='點菜', command=buy).pack()
+
+tk.Radiobutton(window, text = lunch[0], variable = radio_value, value = 0).pack()
+tk.Radiobutton(window, text = lunch[1], variable = radio_value, value = 1).pack()
+tk.Radiobutton(window, text = lunch[2], variable = radio_value, value = 2).pack()
+
+tk.Button(window, text='選擇', command=do_select).pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 # RadioButton測試
 tk.Label(text='RadioButton測試').pack()
@@ -122,37 +155,15 @@ for text, mode in MODES:
     b.pack(anchor=tk.W)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
-def choose():
-    print('你選擇了 : ' + choice.get())
-
-frame1 = tk.Frame(window)  # mp3 歌曲容器
-frame1.pack()
-
-source_dir = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
-
-mp3files = glob.glob(source_dir + "*.mp3")
-
-playsong = preplaysong = ""
-index = 0
-choice = tk.StringVar()
-
-for mp3 in mp3files:  #建立歌曲選項按鈕
-    rbtem = tk.Radiobutton(frame1, text = mp3, variable = choice, value = mp3, command = choose)
-    if(index == 0):  #選取第1個選項按鈕
-        rbtem.select()
-        playsong = preplaysong = mp3
-    rbtem.grid(row = index, column = 0, sticky = 'w')
-    index += 1
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-import tkinter.font as tkfont
-
 
 def radbut_click():
     selected_item = area.get()
@@ -162,8 +173,6 @@ window = tk.Tk()
 window.geometry("400x300")
 window.title("試題與測驗分析程式")
 
-default_font = tkfont.nametofont('TkDefaultFont')
-default_font.configure(size=15)
 AREA_OPTIONS=(('屏東縣',0),('高雄市',1),('台南市',2),('台東縣',3))
 area = tk.IntVar()
 area.set(0)
@@ -201,6 +210,7 @@ for item, val in place:
         command = select).pack(anchor = tk.NW)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 def select():
     print('你的選項是 :', var.get())
@@ -219,8 +229,8 @@ for item, val in place:
         command = select).pack(anchor = tk.W)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
 print("------------------------------------------------------------")  # 60個
+
 
 """ some fail
 def printSelection():
@@ -282,41 +292,6 @@ for val, city in cities.items():        # 建立選項紐
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-radio_value = tk.IntVar()
-radio_value.set(1)
-lunch = {0:'A 套餐',1:'B 套餐',2:'C 套餐'}
-tk.Radiobutton(window, text = lunch[0], variable = radio_value, value = 0).pack()
-tk.Radiobutton(window, text = lunch[1], variable = radio_value, value = 1).pack()
-tk.Radiobutton(window, text = lunch[2], variable = radio_value, value = 2).pack()
-
-
-def buy():
-	value = radio_value.get()
-	print(lunch[value])
-
-
-tk.Button(window, text='點餐', command=buy).pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-radio_value = tk.IntVar()
-radio_value.set(1)
-lunch = {0:'A套餐',1:'B套餐',2:'C套餐'}
-
-tk.Radiobutton(text = lunch[0], variable = radio_value, value = 0).pack()
-tk.Radiobutton(text = lunch[1], variable = radio_value, value = 1).pack()
-tk.Radiobutton(text = lunch[2], variable = radio_value, value = 2).pack()
-
-def buy():
-	value = radio_value.get()
-	print(lunch[value])
-
-tk.Button(window, text='點菜', command=buy).pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
 window.mainloop()
 
 print('------------------------------------------------------------')	#60個
@@ -355,6 +330,7 @@ text.pack()
 text.config(state=tk.DISABLED)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 scrollbar = tk.Scrollbar(window)
@@ -371,6 +347,7 @@ scrollbar.config( command = list1.yview )
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 def select():
     print('你的選項是 :', var.get())
@@ -389,7 +366,7 @@ for item, val in place:
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
+print("------------------------------------------------------------")  # 60個
 
 print("運動類型調查表")
 

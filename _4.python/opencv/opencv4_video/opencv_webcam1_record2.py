@@ -1,4 +1,5 @@
 import cv2
+import sys
 import time
 import datetime
 import tkinter as tk
@@ -76,7 +77,7 @@ def StopWebCamRecord():
     flag_stop_webcam_record = True
     print('你按了 停止錄影')
     """
-    
+
 print('------------------------------------------------------------')	#60個
 
 print('錄影程式')
