@@ -70,10 +70,6 @@ qrcode_image.save("tmp_qrcode02.png")
 qrcode_image = qrcode.make(encode_text, image_factory=qrcode.image.svg.SvgPathImage)
 qrcode_image.save("tmp_qrcode03.svg")
 
-
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-
 print(
     "使用 qrcode.QRCode ------------------------------------------------------------"
 )  # 60個
@@ -88,7 +84,6 @@ qr.add_data(encode_text)
 qr.make(fit=True)
 qrcode_image = qr.make_image(fill_color="red", back_color="blue")
 
-
 print("------------------------------------------------------------")  # 60個
 
 print("藍色碼、黃色背景")
@@ -97,7 +92,6 @@ qr = qrcode.QRCode(
 )
 qr.add_data(encode_text)
 qrcode_image = qr.make_image(fill_color="blue", back_color="yellow")
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -114,7 +108,6 @@ width, height = qrcode_image.size  # QR code的寬與高
 with Image.open(filename) as obj:
     obj_width, obj_height = obj.size
     qrcode_image.paste(obj, ((width - obj_width) // 2, (height - obj_height) // 2))
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -319,7 +312,7 @@ print("------------------------------------------------------------")  # 60個
 """
 QR Code 產生器
 """
-import qrcode as qr
+import qrcode
 import tkinter as tk
 from PIL import ImageTk
 
@@ -338,7 +331,7 @@ qr_label = tk.Label(image_area)
 
 
 def generate():
-    qr_label.qr_img = qr.make(encode_text.get())
+    qr_label.qr_img = qrcode.make(encode_text.get())
     img_width, img_height = qr_label.qr_img.size
     qr_label.tk_img = ImageTk.PhotoImage(qr_label.qr_img)
     qr_label.config(image=qr_label.tk_img, width=img_width, height=img_height)
@@ -346,7 +339,7 @@ def generate():
 
 
 def save():
-    filename = "my_qr_code.png"
+    filename = "tmp_qr_code.png"
     if filename and hasattr(qr_label, "qr_img"):
         qr_label.qr_img.save(filename)
 

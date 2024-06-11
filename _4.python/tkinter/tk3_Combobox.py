@@ -1,3 +1,8 @@
+"""
+Combobox 下拉式選單
+
+"""
+
 import sys
 import tkinter as tk
 import tkinter.ttk as ttk
@@ -7,7 +12,7 @@ print("------------------------------------------------------------")  # 60個
 window = tk.Tk()
 
 # 設定主視窗大小
-w = 800
+w = 500
 h = 800
 x_st = 100
 y_st = 100
@@ -124,11 +129,8 @@ box.pack()
 btn = tk.Button(window, text='顯示', command=combobox_select4)   # 建立按鈕，點擊按鈕時，執行 combobox_select4 函式
 btn.pack()
 
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
-import tkinter.font as tkfont
 
 def combobox_select1(event):
     selected_area = event.widget.get()
@@ -136,152 +138,83 @@ def combobox_select1(event):
 
 print("試題與測驗分析程式")
 
-default_font = tkfont.nametofont('TkDefaultFont')
-default_font.configure(size=15)
 AREA_OPTIONS=('屏東縣','高雄市','台南市','台東縣')
 area = tk.StringVar()
-combox = ttk.Combobox(window, value=AREA_OPTIONS, textvariable=area, font=default_font)
+combox = ttk.Combobox(window, value=AREA_OPTIONS, textvariable=area)
 combox.bind('<<ComboboxSelected>>', combobox_select1)
 combox.current(0)
-combox.pack(padx=10, pady=10)
-lab_result = tk.Label(window, font=default_font, fg='black', width=18)
-lab_result.pack(padx=10, pady=(5,10))       
-
-
+combox.pack()
+lab_result = tk.Label(window, fg='black', width=18)
+lab_result.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-from  tkinter.ttk  import *
-
 
 def combobox_select6(event):                      # 顯示選項
     labelVar.set(var.get())                     # 同步標籤內容                      
     
-root = Tk()
-root.geometry("300x120")                    
-
-var = StringVar()       
-cb = Combobox(root,textvariable=var)            # 建立Combobox
+var = tk.StringVar()       
+cb = ttk.Combobox(window,textvariable=var)            # 建立Combobox
 cb["value"] = ("Python","Java","C#","C")        # 設定選項內容
 cb.current(0)                                   # 設定預設選項
 cb.bind("<<ComboboxSelected>>",combobox_select6)  # 綁定
-cb.pack(side=LEFT,pady=10,padx=10)
+cb.pack()
 
-labelVar = StringVar()
-label = Label(root,textvariable=labelVar)       # 建立Label
+labelVar = tk.StringVar()
+label = tk.Label(window,textvariable=labelVar)       # 建立Label
 labelVar.set(var.get())                         # 設定Label的初值
-label.pack(side=LEFT)
+label.pack()
 
-root.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-from  tkinter.ttk  import *
- 
-root = Tk()
-root.geometry("300x120")                    
-
-var = StringVar()       
-cb = Combobox(root,textvariable=var,        # 建立Combobox
+var = tk.StringVar()       
+cb = ttk.Combobox(window,textvariable=var,        # 建立Combobox
               value=("Python","Java","C#","C"))   
-cb.pack(pady=10)
+cb.pack()
 
-root.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-from  tkinter.ttk  import *
- 
-root = Tk()
-root.geometry("300x120")                    
-
-var = StringVar()       
-cb = Combobox(root,textvariable=var)        # 建立Combobox
+var = tk.StringVar()       
+cb = ttk.Combobox(window,textvariable=var)        # 建立Combobox
 cb["value"] = ("Python","Java","C#","C")    # 設定選項內容  
-cb.pack(pady=10)
+cb.pack()
 
-root.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-from  tkinter.ttk  import *
- 
-root = Tk()
-root.geometry("300x120")                    
-
-var = StringVar()       
-cb = Combobox(root,textvariable=var)        # 建立Combobox
+var = tk.StringVar()       
+cb = ttk.Combobox(window,textvariable=var)        # 建立Combobox
 cb["value"] = ("Python","Java","C#","C")    # 設定選項內容
 cb.current(0)                               # 設定預設選項
-cb.pack(pady=10)
+cb.pack()
 
-root.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-from  tkinter.ttk  import *
- 
-root = Tk()
-root.geometry("300x120")                    
-
-var = StringVar()       
-cb = Combobox(root,textvariable=var)        # 建立Combobox
+var = tk.StringVar()       
+cb = ttk.Combobox(window,textvariable=var)        # 建立Combobox
 cb["value"] = ("Python","Java","C#","C")    # 設定選項內容
 var.set("Python")                           # 設定預設選項
-cb.pack(pady=10)
+cb.pack()
 
-root.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-from  tkinter.ttk  import *
 def combobox_select7():                               # 列印選項
     print(var.get())
     
-root = Tk()
-root.geometry("300x120")                    
-
-var = StringVar()       
-cb = Combobox(root,textvariable=var)                # 建立Combobox
+var = tk.StringVar()       
+cb = ttk.Combobox(window,textvariable=var)                # 建立Combobox
 cb["value"] = ("Python","Java","C#","C")            # 設定選項內容
 cb.current(0)                                       # 設定預設選項
-cb.pack(pady=10)
+cb.pack()
 
-btn = Button(root,text="Print",command=combobox_select7) # 建立按鈕
-btn.pack(pady=10,anchor=S,side=BOTTOM)
+btn = tk.Button(window,text="Print",command=combobox_select7) # 建立按鈕
+btn.pack()
 
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 

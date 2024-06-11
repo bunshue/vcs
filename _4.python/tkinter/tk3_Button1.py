@@ -5,27 +5,14 @@ import tkinter as tk
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
+window.geometry("600x800")
+window.title('button 1')
 
 button5 = tk.Button(window, text = '指定按鍵大小', width = 20, height = 5)
 button5.pack()  #pack無參數, 控件置中
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 # Button測試
 tk.Label(text = 'Button測試').pack()
@@ -50,6 +37,7 @@ btntext.set("按我！")
 button1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 def buttonClick2():
     textvar.set("我已經被按過了！")
@@ -60,6 +48,7 @@ textvar.set("按鈕")
 button1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 def buttonClick3():
     global count
@@ -77,10 +66,8 @@ button2.pack(side = tk.RIGHT)   #靠右對齊
 
 #side=tk.RIGHT
 
-
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
+print("------------------------------------------------------------")  # 60個
 
 # Add a tool bar frame 
 frame0 = tk.Frame(window) # Create and add a frame to window
@@ -107,11 +94,8 @@ tk.Button(frame2, text = "Subtract", command = '').pack(side = tk.LEFT)
 tk.Button(frame2, text = "Multiply", command = '').pack(side = tk.LEFT)
 tk.Button(frame2, text = "Divide", command = '').pack(side = tk.LEFT)
 
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
+print("------------------------------------------------------------")  # 60個
 
 
 window.mainloop()
@@ -120,21 +104,8 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
+window.geometry("600x800")
+window.title('button 2')
 
 #使用side
 button1 = tk.Button(window, text = "按鈕 視窗最右邊", width = 20)
@@ -201,23 +172,11 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
+window.geometry("600x800")
+window.title('button 3')
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 def buttonClick4():
    print("btn1 pressed.")
@@ -226,7 +185,6 @@ btn1 =tk.Button(window,text="press me",command=buttonClick4)
 btn1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
 print("------------------------------------------------------------")  # 60個
 
 def buttonClick5():
@@ -244,10 +202,7 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 def buttonClick6():
-   tkMessageBox.showinfo('訊息框', "Hello World")
-
-import tkinter.messagebox as tkMessageBox
-#import tkinter.messagebox
+    print('你按了按鍵')
 
 btn3 = tk.Button(window, text = "Say Hello", command = buttonClick6)
 btn3.pack()

@@ -1,31 +1,21 @@
 """
 # Python 測試 tkinter, Entry
 
-使用pack Entry
 
 """
 
 import sys
 import tkinter as tk
-from tkinter import messagebox
 
 print("------------------------------------------------------------")  # 60個
 
-def calculate():
-    print('第零項 : ', name.get())
-    print('第一項 : ', num1.get())
-    print('第二項 : ', num2.get())
-    print('第三項 : ', num3.get())
-    num3.set(num1.get() * num2.get())
-    name.set('good')
+'''
+# BMI 計算，四捨五入取到小數第二位
+BMI_value = round(weight_msg.get() / ((height_msg.get() / 100) ** 2),2)
 
-    '''
-    # BMI 計算，四捨五入取到小數第二位
-    BMI_value = round(weight_msg.get() / ((height_msg.get() / 100) ** 2),2)
-    
-    #回傳結果，設定 return_msg 數值及評語
-    return_msg.set("BMI 計算後數值 = " + str(BMI_value) + "\n" + BMI_Status(BMI_value))
-    '''
+#回傳結果，設定 return_msg 數值及評語
+return_msg.set("BMI 計算後數值 = " + str(BMI_value) + "\n" + BMI_Status(BMI_value))
+'''
 
 def calculate_bmi():
     # BMI 計算，四捨五入取到小數第二位
@@ -77,9 +67,9 @@ weight_msg = tk.IntVar() # 體重
 
 #設定身高、體重的 Label 及 Entry
 
-font_size = 24
+font_size = 14
 w = 20
-h = 10
+h = 6
 
 # 設定身高 Label 
 label1 = tk.Label(window, text = "請輸入身高:", foreground = "red", font = ("標楷體", font_size), padx = w, pady = h)
@@ -113,6 +103,15 @@ button1.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
+def get_entry_data():
+    print('第零項 : ', name.get())
+    print('第一項 : ', num1.get())
+    print('第二項 : ', num2.get())
+    print('第三項 : ', num3.get())
+    num3.set(num1.get() * num2.get())
+    name.set('good')
+
+
 name = tk.StringVar()
 num1 = tk.IntVar()
 num2 = tk.IntVar()
@@ -126,7 +125,7 @@ entry2 = tk.Entry(window, textvariable = num2)
 entry2.pack()
 entry3 = tk.Entry(window, textvariable = num3)
 entry3.pack()
-button2 = tk.Button(window, text = "計算", command = calculate)
+button2 = tk.Button(window, text = "取得資料", command = get_entry_data)
 button2.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
@@ -146,7 +145,7 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 #Entry 預設值
-entry_string = tk.StringVar(value = 'test1111')
+entry_string = tk.StringVar(value = 'Entry 預設值')
 entry = tk.Entry(window, textvariable = entry_string)
 entry.pack()
 
@@ -155,35 +154,9 @@ print('Entry內容 :', entry_string.get())	#Entry取值
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-#使用grid Entry
-
 def get_entry_text():
     print('取得 id : ', entry1.get())
     print('取得 pd : ', entry2.get())
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
 
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame1 = tk.Frame(window)
@@ -191,8 +164,8 @@ frame1.pack()
 
 label1 = tk.Label(frame1, text = "請輸入資料 : ")
 entry1 = tk.Entry(frame1)
-label1.grid(row = 0, column = 0)
-entry1.grid(row = 0, column = 1)
+label1.pack()
+entry1.pack()
 
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame2 = tk.Frame(window)
@@ -200,8 +173,8 @@ frame2.pack()
 
 button1 = tk.Button(frame2, text = "確定")
 button2 = tk.Button(frame2, text = "取消")
-button1.grid(row = 0, column = 0)
-button2.grid(row = 0, column = 1)
+button1.pack()
+button2.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -218,11 +191,11 @@ entry2 = tk.Entry(frame3, show = "*")
 
 button = tk.Button(frame3, text = "取得Entry資料", command = get_entry_text)
 
-label1.grid(row = 1, column = 1)
-entry1.grid(row = 1, column = 2)
-label2.grid(row = 2, column = 1)
-entry2.grid(row = 2, column = 2)
-button.grid(row = 3, column = 2)
+label1.pack()
+entry1.pack()
+label2.pack()
+entry2.pack()
+button.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -231,21 +204,11 @@ print("------------------------------------------------------------")  # 60個
 frame4 = tk.Frame(window)
 frame4.pack()
 
-#add textfields
-label1 = tk.Label(frame4, text = 'Username:', font = (14))
-label2 = tk.Label(frame4, text = 'Password:', font = (14))
-#label1.grid(row = 0, column = 0, padx = 5, pady = 5)
-#label2.grid(row = 1, column = 0, padx = 5, pady = 5)
-label1.pack()
-label2.pack()
-
 #get username and password
 username = tk.StringVar()
 password = tk.StringVar()
 entry1b = tk.Entry(frame4, textvariable = username, font = (14))
 entry2b = tk.Entry(frame4, textvariable = password, font = (14), show = '*')
-#entry1b.grid(row = 0, column = 1)
-#entry2b.grid(row = 1, column = 1)
 entry1b.pack()
 entry2b.pack()
 
@@ -258,24 +221,78 @@ def cancel():
 
 button1 = tk.Button(frame4, command = login, text = '取得Entry資料', font = (20))
 button2 = tk.Button(frame4, command = cancel, text = '離開', font = (14))
-#button1.grid(row = 2, column = 1, sticky = tk.W)
-#button2.grid(row = 2, column = 1, sticky = tk.E)
 button1.pack()
 button2.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 
-print("------------------------------------------------------------")  # 60個
+import tkinter as tk
+import random
+
+print('用 Entry 和 grid 做 表格')
+
+COLUMN = 10
+ROW = 8
+
+def set_numbers():
+    for i in range(ROW):
+        for j in range(COLUMN):
+            cells[i][j].set(random.randint(0, 9))
+
+def get_numbers1():
+    for i in range(ROW):
+        for j in range(COLUMN):
+            print(cells[i][j].get())
+
+def get_numbers2():
+    values = [[eval(x.get()) for x in cells[i]] for i in range(ROW)]
+    print(values)
+    
+window = tk.Tk()
+
+# 設定主視窗大小
+W = 800
+H = 800
+x_st = 100
+y_st = 100
+#size = str(W) + 'x' + str(H)
+#size = str(W) + 'x' + str(H) + '+' + str(x_st) + '+' + str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+
+# 設定主視窗標題
+title = "Entry 測試"
+window.title(title)
+
+frame = tk.Frame(window, height = 0, width = 0, bg = 'pink', bd = 5) # Hold entries 
+frame.pack()
+
+cells = []
+for i in range(ROW):
+    cells.append([])
+    for j in range(COLUMN):
+        cells[i].append(tk.StringVar())
+        
+for i in range(ROW):
+    for j in range(COLUMN):
+        tk.Entry(frame, width = 8, justify = tk.RIGHT, textvariable = cells[i][j]).grid(row = i, column = j)
+        
+tk.Button(window, text = "填數字", command = set_numbers).pack()
+tk.Button(window, text = "取得數字1", command = get_numbers1).pack()
+tk.Button(window, text = "取得數字2", command = get_numbers2).pack()
+
+set_numbers()
+
+window.mainloop()
+
+
 
 
 print("------------------------------------------------------------")  # 60個

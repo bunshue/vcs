@@ -1,6 +1,4 @@
 import sys
-
-
 import time
 import tkinter as tk
 from tkinter import ttk
@@ -28,10 +26,6 @@ window.title(title)
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
 slider = tk.Scale(window, from_=0, to=10)
 slider.pack()
 
@@ -44,108 +38,25 @@ label.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-print('Scale 測試')
 slider = tk.Scale(window, from_ = 0, to = 100)
 slider.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-tk.Label(text='Scale測試').pack()
 #w = tk.Scale(window, from_=0, to=100)
 w = tk.Scale(window, from_=0, to=100, resolution=0.1)
 w.pack()
 
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
 
 w = tk.Scale(window, from_=0, to=200, orient=tk.HORIZONTAL)
 w.pack()
-
 print(w.get())
-
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def bgUpdate(source):
-    # 更改畫布背景顏色
-    red = rSlider.get()                                 # 讀取red值
-    green = gSlider.get()                               # 讀取green值
-    blue = bSlider.get( )                               # 讀取blue值
-    print("R=%d, G=%d, B=%d" % (red, green, blue))      # 列印色彩數值
-    myColor = "#%02x%02x%02x" % (red, green, blue)      # 將顏色轉成16進位字串
-    canvas.config(bg=myColor)                           # 設定畫布背景顏色
-    
-window = tk.Tk()
-
-canvas = tk.Canvas(window, width=640, height=240)              # 初始化背景
-rSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
-gSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
-bSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
-gSlider.set(125)                                        # 設定green是125
-rSlider.grid(row=0, column=0)                           
-gSlider.grid(row=0, column=1)                           
-bSlider.grid(row=0, column=2)                           
-canvas.grid(row=1, column=0, columnspan=3)              
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-def bgUpdate(source):
-    # 更改畫布背景顏色
-    red = rSlider.get()                                 # 讀取red值
-    green = gSlider.get()                               # 讀取green值
-    blue = bSlider.get( )                               # 讀取blue值
-    print("R=%d, G=%d, B=%d" % (red, green, blue))      # 列印色彩數值
-    myColor = "#%02x%02x%02x" % (red, green, blue)      # 將顏色轉成16進位字串
-    canvas.config(bg=myColor)                           # 設定畫布背景顏色
-    
-window = tk.Tk()
-
-canvas = tk.Canvas(window, width=640, height=240)              # 初始化背景
-rSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
-gSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
-bSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
-gSlider.set(125)                                        # 設定green是125
-rSlider.grid(row=1, column=1)                           # 第一行第一欄
-gSlider.grid(row=1, column=2)                           # 第一行第二欄
-bSlider.grid(row=1, column=3)                           # 第一行第三欄
-canvas.grid(row=2, column=1, columnspan=3)              # 第二行全部
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 900
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "Frame 測試"
-window.title(title)
 
 slider1 = tk.Scale(window,from_=0,to=10).pack()
 slider2 = tk.Scale(window,from_=0,to=10, length=300,orient=tk.HORIZONTAL).pack()
@@ -168,8 +79,30 @@ tk.Button(window,text="Print",command=printInfo).pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
+window.mainloop()
 
-# slider
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+# 設定主視窗大小
+W = 800
+H = 800
+x_st = 100
+y_st = 100
+#size = str(W) + 'x' + str(H)
+#size = str(W) + 'x' + str(H) + '+' + str(x_st) + '+' + str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+
+# 設定主視窗標題
+title = 'Scale 測試'
+window.title(title)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 scale_float = tk.DoubleVar(value = 15)
 scale = ttk.Scale(
 	window, 
@@ -183,7 +116,6 @@ scale.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-# progress bar
 progress = ttk.Progressbar(
 	window, 
 	variable = scale_float, 
@@ -203,8 +135,6 @@ scrolled_text.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-
-# exercise 
 # create a progress that is vertical, starts automatically and also show the progress as a number
 # there should also be a scale slider that is affected by the progress bar
 exercise_int = tk.IntVar()
@@ -213,7 +143,6 @@ exercise_progress.pack()
 exercise_progress.start()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
 
 label = ttk.Label(window, textvariable = exercise_int)
 label.pack()
@@ -237,6 +166,31 @@ sclNum=tk.Scale(window,label='數值：',orient='horizontal',from_=1,to=99,lengt
 sclNum.pack(pady=10)
 btnRead=tk.Button(window, text=' 確定 ',command=fnRead)
 btnRead.pack(pady=20)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+def bgUpdate(source):
+    # 更改畫布背景顏色
+    red = rSlider.get()                                 # 讀取red值
+    green = gSlider.get()                               # 讀取green值
+    blue = bSlider.get( )                               # 讀取blue值
+    print("R=%d, G=%d, B=%d" % (red, green, blue))      # 列印色彩數值
+    myColor = "#%02x%02x%02x" % (red, green, blue)      # 將顏色轉成16進位字串
+    canvas.config(bg=myColor)                           # 設定畫布背景顏色
+    
+window = tk.Tk()
+
+canvas = tk.Canvas(window, width=640, height=240)              # 初始化背景
+rSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
+gSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
+bSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
+gSlider.set(125)                                        # 設定green是125
+rSlider.grid(row=1, column=1)                           # 第一行第一欄
+gSlider.grid(row=1, column=2)                           # 第一行第二欄
+bSlider.grid(row=1, column=3)                           # 第一行第三欄
+canvas.grid(row=2, column=1, columnspan=3)              # 第二行全部
 
 window.mainloop()
 

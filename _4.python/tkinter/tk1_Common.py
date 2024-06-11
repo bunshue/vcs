@@ -54,6 +54,15 @@ def show_tk_info():
 button_info = tk.Button(window, width = 10, height = 2, command = show_tk_info, text = '顯示資訊')
 button_info.pack()
 
+
+def show_tk_clipboard():
+    clipboard_data = tk.Tk().clipboard_get()
+    print(clipboard_data)
+
+button_clipboard = tk.Button(window, width = 10, height = 2, command = show_tk_clipboard, text = '取得Clipboard內的資料')
+button_clipboard.pack()
+
+
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
@@ -88,7 +97,7 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 x_st = 50
-y_st = 150
+y_st = 220
 dx = 120
 dy = 80
 w = 12

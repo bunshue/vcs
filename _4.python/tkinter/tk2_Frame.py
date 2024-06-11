@@ -1,21 +1,10 @@
 import tkinter as tk
 
+'''
+
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "Frame 測試"
-window.title(title)
+window.geometry("600x800")
+window.title('Frame 1')
 
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
@@ -78,7 +67,7 @@ button6.grid(row = 0, column = 5, padx = 5, pady = 5)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-'''
+"""
 width:設置框架寬度，默認值是 0。
 height:框架的高度，默認值是 0。
 bg:框架背景顏色
@@ -89,8 +78,7 @@ highlightbackground:框架沒有獲得焦點時，高亮邊框的顏色，默認
 highlightcolor:框架獲得焦點時，高亮邊框的顏色
 highlightthickness:指定高亮邊框的寬度，默認值為 0不帶高亮邊框）
 takefocus:指定該組件是否接受輸入焦點（用戶可以通過 tab 鍵將焦點轉移上來），默認為 false。
-
-'''
+"""
 
 separator = tk.Frame(width = 30, height = 80, bg = 'pink', bd = 5, relief = tk.GROOVE).pack(fill = tk.X, padx = 5, pady = 5)
 
@@ -120,3 +108,62 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 
 window.mainloop()
 
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('Frame 2')
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+from tkinter.ttk import Frame, Style
+
+for fm in ["red","green","blue"]:    # 建立3個不同底色的框架
+    tk.Frame(window,bg=fm,height=30,width=250).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+for fm in ["red","green","blue"]:    # 建立3個不同底色的框架
+    tk.Frame(bg=fm,height=30,width=250).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+# 用字典儲存框架顏色與游標外形
+fms = {'red':'cross','green':'boat','blue':'clock'}
+for fmColor in fms:         # 建立3個不同底色的框架與游標外形
+    tk.Frame(window,bg=fmColor,cursor=fms[fmColor],
+          height=30,width=200).pack(side=tk.LEFT)
+
+
+window.mainloop()
+
+'''
+
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('Frame 3')
+
+
+# Add labels and entries to frame1
+frame1 = tk.Frame(window, bg = 'pink')
+frame1.grid(row = 2, column = 1, pady = 10)
+tk.Label(frame1, text = "Number 1:").pack(side = tk.LEFT)
+string1 = tk.StringVar()
+tk.Entry(frame1, width = 5, textvariable = string1, justify = tk.RIGHT).pack(side = tk.LEFT)
+tk.Label(frame1, text = "Number 2:").pack(side = tk.LEFT)
+string2 = tk.StringVar()
+tk.Entry(frame1, width = 5, textvariable = string2, justify = tk.RIGHT).pack(side = tk.LEFT)
+tk.Label(frame1, text = "Result:").pack(side = tk.LEFT)
+string3 = tk.StringVar()
+tk.Entry(frame1, width = 5, textvariable = string3, justify = tk.RIGHT).pack(side = tk.LEFT)
+
+
+
+
+window.mainloop()

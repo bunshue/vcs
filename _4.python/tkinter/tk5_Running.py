@@ -6,12 +6,13 @@
 import sys
 import time
 import random
+import datetime
 import tkinter as tk
-import tkinter.ttk as ttk
+from tkinter import ttk
 
+'''
 print("------------------------------------------------------------")  # 60個
 
-import datetime
 
 def run_digital_clock(label1):                     # 數字變數內容的更動
     def counting():                         # 更動數字方法
@@ -44,7 +45,7 @@ label1=tk.Label(window,bg="yellow",fg="blue",     # 黃底藍字
             font="Helvetica 20 bold")       # 字型設定
 label1.pack()
 run_digital_clock(label1)                          # 呼叫數字更動方法
-Button(window,text="結束",width=15,command=window.destroy).pack(pady=10)
+tk.Button(window,text="結束",width=15,command=window.destroy).pack(pady=10)
 
 window.mainloop()
 
@@ -68,7 +69,7 @@ window = tk.Tk()
 bytes = 0                           # 設定初值
 maxbytes = 10000                    # 假設下載檔案大小    
 
-pb = tk.Progressbar(window,length=200,mode="determinate",orient=tk.HORIZONTAL)
+pb = ttk.Progressbar(window,length=200,mode="determinate",orient=tk.HORIZONTAL)
 pb.pack(padx=10,pady=10)
 pb["value"] = 0                     # Prograssbar初始值
  
@@ -109,19 +110,20 @@ btnStop = tk.Button(window, text = 'Stop',
 btnStop.pack()
 
 window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-import random           
-
+number = 1
 def update_data():
-    # 更新標籤顯示的數據為1到100的隨機數
-    label_data.config(text=str(random.randint(1, 100)))
-    # 每1000毫秒(即1秒)後再次調用update_data函數更新數據
-    window.after(1000, update_data)
+    global number
+    # 更新標籤顯示
+    label_data.config(text=str(number))
+    # 每200毫秒後再次調用update_data函數更新數據
+    window.after(200, update_data)
+    number += 17
 
 window = tk.Tk()
-window.title("數據監控")                      # 視窗標題
+
 # 建立一個標籤用於顯示數據, 初始值為0, 字體設置為Helvetica, 大小為48
 label_data = tk.Label(window, text="0", font=("Helvetica", 48))
 label_data.pack()                           # 將標籤添加到視窗中
@@ -131,7 +133,8 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = Tk() 
+"""
+window = tk.Tk()
         
 xWidth = 300
 yHeight = 100
@@ -172,7 +175,7 @@ xWidth = 300
 yHeight = 300
 r = 120
 
-window = Tk() 
+window = tk.Tk() 
         
 canvas = tk.Canvas(window,width=xWidth, height=yHeight)
 canvas.pack()
@@ -185,10 +188,10 @@ while True:
     canvas.update()
             
 window.mainloop() 
+"""
+
 
 print("------------------------------------------------------------")  # 60個
-
-from random import *
 
 def display():
     if Flag:       
@@ -230,13 +233,13 @@ def running():
         else:
             raceResult.set("輸入錯誤!")
             return
-        if randint(1,100) > weight:
+        if random.randint(1,100) > weight:
             canvas.move(id2, 5, 0)  # id2 x軸移動5像素, y軸移動0像素
             id2Loc += 1
         else:
             canvas.move(id1, 5, 0)  # id1 x軸移動5像素, y軸移動0像素
             id1Loc += 1
-        tk.update()                 # 強制tkinter重繪
+        window.update()                 # 強制tkinter重繪
         canvas.after(50)
     if id1Loc > id2Loc:
         Flag = True
@@ -254,29 +257,35 @@ canvas.create_oval(20,150,70,200,fill='aqua')
 
 Flag = True                         # 判斷那一球勝利
 
-frame = tk.Frame(tk)                   # 建立框架
+frame = tk.Frame(window)                   # 建立框架
 frame.pack(padx=5, pady=5)
+
 # 在框架Frame內建立標籤Label, 輸入獲勝的球, 按鈕Button
-tk.Label(frame, text="那一個球獲勝 : ").pack(side=LEFT)
+tk.Label(frame, text="那一個球獲勝 : ").pack(side=tk.LEFT)
 ball = tk.StringVar()
 ball.set("1or2")
-entry = tk.Entry(frame, textvariable=ball).pack(side=LEFT,padx=3)
+entry = tk.Entry(frame, textvariable=ball).pack(side=tk.LEFT,padx=3)
 startBtn = tk.StringVar()
 startBtn.set("開始")
-tk.Button(frame, textvariable=startBtn,command=running).pack(side=LEFT)
+tk.Button(frame, textvariable=startBtn,command=running).pack(side=tk.LEFT)
 raceResult = tk.StringVar()
 
-tk.Label(frame,width=16,textvariable=raceResult).pack(side=LEFT,padx=3)
+tk.Label(frame,width=16,textvariable=raceResult).pack(side=tk.LEFT,padx=3)
 
 window.mainloop() 
 
+print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+
 canvas= tk.Canvas(window, width=500, height=150)
 canvas.pack()
+
 id = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
 ballPos = canvas.coords(id)
 print(ballPos)
+
+window.mainloop() 
 
 print("------------------------------------------------------------")  # 60個
 

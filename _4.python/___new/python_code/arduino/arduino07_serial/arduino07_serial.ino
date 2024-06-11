@@ -1,5 +1,6 @@
 // 動手做5-1：從序列埠監控視窗觀察變數值
 
+#define SERIAL_BAUD 115200
 #define UART_BUF_LENGTH 5
 
 unsigned char gui_cmd[UART_BUF_LENGTH];
@@ -60,7 +61,7 @@ void Send_ADC_Result_Cmd(unsigned int value)
 }
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(SERIAL_BAUD);
 }
 
 /*

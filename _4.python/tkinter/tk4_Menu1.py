@@ -1,31 +1,16 @@
 """
 # 以Menu元件建置功能表
 
-
 """
-'''
+
 import sys
 import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
+window.geometry("400x300")
 
 #建立功能選單
 menu = tk.Menu(window)
@@ -33,14 +18,14 @@ window.config(menu = menu)   #顯示功能表單
 
 #第1排功能選單
 menu1 = tk.Menu(menu, tearoff = False)
-menu1.add_command(label = 'New', command = lambda: print('New file'))
-menu1.add_command(label = 'Open', command = lambda: print('Open file'))
+menu1.add_command(label = 'New', command = lambda: print('你按了 New'))
+menu1.add_command(label = 'Open', command = lambda: print('你按了 Open'))
 menu1.add_separator()
 menu.add_cascade(label = 'File', menu = menu1)
 
 #第2排功能選單
 menu2 = tk.Menu(menu, tearoff = False)
-menu2.add_command(label = 'Help entry', command = lambda: print(help_check_string.get()))
+menu2.add_command(label = 'Help entry', command = lambda: print("你按了", help_check_string.get()))
 
 help_check_string = tk.StringVar()
 menu2.add_checkbutton(label = 'check', onvalue = 'on', offvalue = 'off', variable = help_check_string)
@@ -59,48 +44,12 @@ menu3b = tk.Menu(menu, tearoff = False)
 menu3b.add_command(label = 'some more stuff')
 menu3.add_cascade(label = 'more stuff', menu = menu3b)
 
-# menu button
-menu_button = ttk.Menubutton(window, text = 'Menu Button')
-menu_button.pack()
-
-button_sub_menu = tk.Menu(menu_button, tearoff = False)
-button_sub_menu.add_command(label = 'entry 1', command = lambda: print('test 1'))
-button_sub_menu.add_checkbutton(label = 'check 1')
-# menu_button.configure(menu = button_sub_menu)
-menu_button['menu']= button_sub_menu
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-def add(): 
-    string3.set(eval(string1.get()) + eval(string2.get()))
-    
-def subtract():
-    string3.set(eval(string1.get()) - eval(string2.get()))
-    
-def multiply():
-    string3.set(eval(string1.get()) * eval(string2.get()))
-    
-def divide():
-    string3.set(eval(string1.get()) / eval(string2.get()))
-
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
+window.geometry("400x300")
 
 #建立功能選單
 menu = tk.Menu(window)
@@ -109,54 +58,23 @@ window.config(menu = menu)   #顯示功能表單
 #第1排功能選單
 menu1 = tk.Menu(menu, tearoff = 0)
 menu.add_cascade(label = "Operation", menu = menu1)
-menu1.add_command(label = "Add", command = add)
-menu1.add_command(label = "Subtract", command = subtract)
+menu1.add_command(label = "Add", command = lambda: print('你按了 Add'))
+menu1.add_command(label = "Substract", command = lambda: print('你按了 Substract'))
 menu1.add_separator()
-menu1.add_command(label = "Multiply", command = multiply)
-menu1.add_command(label = "Divide", command = divide)
+menu1.add_command(label = "Multiply", command = lambda: print('你按了 Multiply'))
+menu1.add_command(label = "Divide", command = lambda: print('你按了 Divide'))
 
 #第2排功能選單
 menu2 = tk.Menu(menu, tearoff = 0)
 menu.add_cascade(label = "Exit", menu = menu2)
-menu2.add_command(label = "Quit", command = window.quit)
-
-
-# Add labels and entries to frame1
-frame1 = tk.Frame(window, bg = 'pink')
-frame1.grid(row = 2, column = 1, pady = 10)
-tk.Label(frame1, text = "Number 1:").pack(side = tk.LEFT)
-string1 = tk.StringVar()
-tk.Entry(frame1, width = 5, textvariable = string1, justify = tk.RIGHT).pack(side = tk.LEFT)
-tk.Label(frame1, text = "Number 2:").pack(side = tk.LEFT)
-string2 = tk.StringVar()
-tk.Entry(frame1, width = 5, textvariable = string2, justify = tk.RIGHT).pack(side = tk.LEFT)
-tk.Label(frame1, text = "Result:").pack(side = tk.LEFT)
-string3 = tk.StringVar()
-tk.Entry(frame1, width = 5, textvariable = string3, justify = tk.RIGHT).pack(side = tk.LEFT)
+menu2.add_command(label = "Quit", command = window.destroy)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-def callback():
-    print("called the callback!")
+window.geometry("400x300")
 
 #建立功能選單
 menu = tk.Menu(window)
@@ -166,45 +84,33 @@ window.config(menu = menu)   #顯示功能表單
 #menu1 = tk.Menu(menu)
 menu1 = tk.Menu(menu, tearoff = 0)
 menu.add_cascade(label = "File", menu = menu1)
-menu1.add_command(label = "Open", command = callback)
-menu1.add_command(label = "Save", command = callback)
+menu1.add_command(label = "Open", command = lambda: print('你按了 Open'))
+menu1.add_command(label = "Save", command = lambda: print('你按了 Save'))
 menu1.add_separator()
-menu1.add_command(label = "Exit", command = window.quit)
+menu1.add_command(label = "Exit", command = window.destroy)
 
 #第2排功能選單
 menu2 = tk.Menu(menu, tearoff = 0)
 menu.add_cascade(label = "Edit", menu = menu2)
-menu2.add_command(label = "Cut", command = callback)
-menu2.add_command(label = "Copy", command = callback)
-menu2.add_command(label = "Paste", command = callback)
+menu2.add_command(label = "Cut", command = lambda: print('你按了 Cut'))
+menu2.add_command(label = "Copy", command = lambda: print('你按了 Copy'))
+menu2.add_command(label = "Paste", command = lambda: print('你按了 Paste'))
 
 #第3排功能選單
 #menu3 = tk.Menu(menu)
 menu3 = tk.Menu(menu, tearoff = 0)
 menu.add_cascade(label = "Help", menu = menu3)
-menu3.add_command(label = "About...", command = callback)
+menu3.add_command(label = "About...", command = lambda: print('你按了 About...'))
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
+window.geometry("400x300")
 
 def supermode():
-	print('super mode!')
+    print('super mode!')
 
 menu = tk.Menu(window)
 
@@ -216,39 +122,12 @@ menu.add_cascade(label = 'Operation', menu = menu1)
 
 window.config(menu = menu)
 
+window.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
-import tkinter.filedialog as fd
-
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-
-def open():
-	filename = fd.askopenfilename()
-	print('open file => ' + filename)
-
-def exit():
-	window.destroy()
-
-
-def find():
-	print('find ! ')
-
+window.geometry("400x300")
 
 menu = tk.Menu(window)
 
@@ -256,17 +135,17 @@ menu1 = tk.Menu(menu)
 
 menu.add_cascade(label = 'File', menu = menu1)
 
-menu1.add_command(label = 'open', command = open)
+menu1.add_command(label = 'open', command = lambda: print('你按了 open'))
 
 menu1.add_separator()
 
-menu1.add_command(label = 'exit', command = exit)
+menu1.add_command(label = 'exit', command = window.destroy)
 
 menu2 = tk.Menu(menu)
 
 menu.add_cascade(label = 'Edit', menu = menu2)
 
-menu2.add_command(label = 'find', command = find)
+menu2.add_command(label = 'find', command = lambda: print('你按了 find'))
 
 window.config(menu = menu)
 
@@ -274,39 +153,21 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
-from tkinter import messagebox
+window = tk.Tk()
+window.geometry("400x300")
 
-# 定義回應函式
-def New():
-    messagebox.showinfo('新檔案',
-        '檔案功能表下的開啟新檔指令')
-    
-def Open():
-    messagebox.showinfo('開啟舊檔',
-        '檔案功能表下的開啟舊檔指令')
-
-def Save():
-    messagebox.showinfo('儲存檔案',
-        '檔案功能表下的儲存檔案指令')
-    
-def Copyright():
-    messagebox.showinfo('版權宣告',
-        '我的第一支含視窗功能表程式-使用Python語言撰寫')
-
-wnd = Tk()#主視窗物件
-wnd.title('GUI介面-Menu')
+print('GUI介面-Menu')
 
 # 1.產生功能表物件menuBar
-menuBar = Menu(wnd)
+menuBar = tk.Menu(window)
 
 # 2.將功能表物件menuBar佈置到主視窗的頂部
-wnd.config(menu = menuBar)
+window.config(menu = menuBar)
 
 # 3.加入主功能表項目
-menu_file = Menu(menuBar, tearoff = 0)
-menu_font = Menu(menuBar, tearoff = 0)
-menu_help = Menu(menuBar, tearoff = 0)
+menu_file = tk.Menu(menuBar, tearoff = 0)
+menu_font = tk.Menu(menuBar, tearoff = 0)
+menu_help = tk.Menu(menuBar, tearoff = 0)
 
 # 4. 產生主功能項目實體
 menuBar.add_cascade(label = '檔案', menu = menu_file)
@@ -314,20 +175,20 @@ menuBar.add_cascade(label = '字體大小', menu = menu_font)
 menuBar.add_cascade(label = '版權宣告', menu = menu_help)
 
 # 5-1. 加入'檔案'功能表下拉選單
-menu_file.add_command(label = '新檔案',
+menu_file.add_command(label = '開啟新檔',
         underline = 1, accelerator = 'Ctrl+N',
-        command = New)
+        command = lambda: print('你按了 開啟新檔'))
 menu_file.add_command(label = '開啟',
         underline = 1, accelerator = 'Ctrl+O',
-        command = Open)
+        command = lambda: print('你按了 開啟舊檔'))
 menu_file.add_separator()#加入分隔線
 menu_file.add_command(label = '儲存',
         underline = 1, accelerator = 'Ctrl+S',
-        command = Save)
+        command = lambda: print('你按了 另存新檔'))
 menu_file.add_separator()#加入分隔線
 menu_file.add_command(label = '離開',
         underline = 1, accelerator = 'Ctrl+Q',
-        command = lambda : wnd.destroy())
+        command = lambda : window.destroy())
 
 # 5-2. 加入'字體大小'功能表下拉選單
 labels = ('大', '中', '小')
@@ -335,138 +196,46 @@ for item in labels:
     menu_font.add_radiobutton(label = item)
 
 # 5-3. 加入'版權宣告'功能表下拉選單
-menu_help.add_command(label = '原創者聲明', command = Copyright)
+menu_help.add_command(label = '關於', command = lambda: print('你按了 關於'))
 
-mainloop()
-
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import filedialog, messagebox
-
-base = tk.Tk()
 window = tk.Tk()
+window.geometry("400x300")
 
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-def new_file():
-    print('Create a new file')
-
-def open_file():
-    filename = filedialog.askopenfilename()
-    print('open file => ' + filename)
-
-def save_as():
-    filename = filedialog.asksaveasfilename()
-    print('save file as => ' + filename)
-
-def exit_app():
-    base.destroy()
-
-def cut_text():
-    print('Cut text')
-
-def copy_text():
-    print('Copy text')
-
-def paste_text():
-    print('Paste text')
-
-def about_app():
-    messagebox.showinfo("About", "This is a basic program.")
-
-menubar = tk.Menu(base)
+menubar = tk.Menu(window)
 
 # File menu
 filemenu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label='檔案', menu=filemenu)
-filemenu.add_command(label='開啟新檔', command=new_file)
-filemenu.add_command(label='開啟舊檔', command=open_file)
-filemenu.add_command(label='另存為', command=save_as)
+filemenu.add_command(label='開啟新檔', command= lambda: print('你按了 開啟新檔'))
+filemenu.add_command(label='開啟舊檔', command= lambda: print('你按了 開啟舊檔'))
+filemenu.add_command(label='另存為', command= lambda: print('你按了 另存為'))
 filemenu.add_separator()
-filemenu.add_command(label='結束', command=exit_app)
+filemenu.add_command(label='結束', command = window.destroy)
 
 # Edit menu
 editmenu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label='編輯', menu=editmenu)
-editmenu.add_command(label='剪下', command=cut_text)
-editmenu.add_command(label='複製', command=copy_text)
-editmenu.add_command(label='貼上', command=paste_text)
+editmenu.add_command(label='剪下', command= lambda: print('你按了 剪下'))
+editmenu.add_command(label='複製', command= lambda: print('你按了 複製'))
+editmenu.add_command(label='貼上', command= lambda: print('你按了 貼上'))
 
 # About menu
 helpmenu = tk.Menu(menubar, tearoff=0)
 menubar.add_cascade(label='說明', menu=helpmenu)
-helpmenu.add_command(label='關於本程式', command=about_app)
+helpmenu.add_command(label='關於', command= lambda: print('你按了 關於'))
 
-base.config(menu=menubar)
+window.config(menu=menubar)
 
-base.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-menubar = tk.Menu(win)
-win.config(menu = menubar)
-file_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-win.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
+window.geometry("400x300")
 
 menubar = tk.Menu(window,tearoff=0)
 window.config(menu = menubar)
@@ -489,169 +258,7 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-menubar = tk.Menu(window,tearoff=0)
-window.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-menubar = tk.Menu(window)
-window.config(menu = menubar)
-file_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-menubar = tk.Menu(window,tearoff=0)
-window.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-menubar = tk.Menu(window,tearoff=0)
-window.config(menu = menubar)
-file_menu = tk.Menu(menubar,tearoff=0)
-menubar.add_cascade(label = "檔案", menu = file_menu)
-file_menu.add_command(label = "開啟舊檔")  
-edit_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "編輯", menu = edit_menu)
-edit_menu.add_command(label = "復原") 
-run_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "執行", menu =run_menu)
-run_menu.add_command(label = "編譯及執行本程式")
-window_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "視窗", menu = window_menu)
-online_menu = tk.Menu(menubar)
-menubar.add_cascade(label = "線上說明", menu = online_menu)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-def fileopen():
-	print('進行開啟檔案的處理')
+window.geometry("400x300")
 
 menubar = tk.Menu(window)
 
@@ -659,71 +266,16 @@ filemenu = tk.Menu(menubar)
 
 menubar.add_cascade(label=' 檔案', menu=filemenu)
 
-filemenu.add_command(label='開啟檔案', command=fileopen)
+filemenu.add_command(label='開啟檔案', command= lambda: print('你按了 開啟檔案'))
 
 window.config(menu=menubar)
 
 window.mainloop()
 
-
 print('------------------------------------------------------------')	#60個
 
-import tkinter.filedialog as fd
-
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-
-def open(): 
-	filename = fd.askopenfilename()
-	print('open file => ' + filename)
-
-def exit(): 
-	window.destroy()
-
-def find():
-	print('find ! ')
-
-menubar = tk.Menu(window)
-
-filemenu = tk.Menu(menubar)
-
-menubar.add_cascade(label='File', menu=filemenu)
-
-filemenu.add_command(label='open', command=open)
-
-filemenu.add_separator()
-
-filemenu.add_command(label='exit', command=exit)
-
-editmenu = tk.Menu(menubar)
-
-menubar.add_cascade(label='Edit', menu=editmenu)
-
-editmenu.add_command(label='find', command=find)
-
-window.config(menu=menubar)
-
-
-
-
-
 """
-請參考以下程式，幫我利用 tkinter 生成選單視窗，需要的檔案結構如下：
+生成選單視窗，需要的檔案結構如下：
 
 檔案：
 	開啟新檔
@@ -735,78 +287,31 @@ window.config(menu=menubar)
 	複製
 	貼上
 說明：
-	關於本程式
+	關於
 
------------ 以下是參考的程式架構 --------
 """
-""" TBD
-import tkinter.filedialog as fd
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-
-def open():
-	filename = fd.askopenfilename()
-print('open file => ' + filename)
-
-def exit():
-	window.destroy()
-
-def find():
-	print('find !')
+window.geometry("400x300")
 
 menubar = tk.Menu(window)
 filemenu = tk.Menu(menubar)
 menubar.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='open', command=open)
+filemenu.add_command(label='Open', command= lambda: print('你按了 Open'))
 filemenu.add_separator()
-filemenu.add_command(label='exit', command=exit)
+filemenu.add_command(label='Exit', command= window.destroy)
 editmenu = tk.Menu(menubar)
 menubar.add_cascade(label='Edit', menu=editmenu)
-editmenu.add_command(label='find', command=find)
+editmenu.add_command(label='Find', command= lambda: print('你按了 Find'))
 window.config(menu=menubar)
 
 window.mainloop()
 
-"""
-print("------------------------------------------------------------")  # 60個
-
-import tkinter.messagebox as tkmessagebox
-import tkinter.font as tkfont
-
-def Cal():
-    tkmessagebox.showinfo(title="計算", message="計算資料中的試題難度")
-
-def View():
-    tkmessagebox.showinfo(title="檢視", message="檢視計算的結果")    
-
-def About():
-    tkmessagebox.showinfo(title="關於我們", message="程式設計者:屏東大學教育學系陳新豐")
-
-def Exit():
-    win.destroy()
+print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
-window.geometry("800x600")
-window.title("試題與測驗分析程式")
+window.geometry("400x300")
 
-default_font = tkfont.nametofont('TkDefaultFont')
-default_font.configure(size=15)
 menubar = tk.Menu(window)
 window.config(menu=menubar)
 menu_file = tk.Menu(menubar, tearoff = 0)
@@ -815,10 +320,10 @@ menu_help = tk.Menu(menubar, tearoff = 0)
 menubar.add_cascade(label='檔案', menu=menu_file)
 menubar.add_cascade(label='計算', menu=menu_cal)
 menubar.add_cascade(label='Help', menu=menu_help)
-menu_file.add_command(label='結束', command=Exit)
-menu_cal.add_command(label='計算', command=Cal)
-menu_cal.add_command(label='檢視', command=View)
-menu_help.add_command(label='關於', command=About)
+menu_file.add_command(label='離開', command = window.destroy)
+menu_cal.add_command(label='計算', command = lambda: print('你按了 計算'))
+menu_cal.add_command(label='檢視', command = lambda: print('你按了 檢視'))
+menu_help.add_command(label='關於', command = lambda: print('你按了 關於'))
 
 window.mainloop()
 
@@ -826,8 +331,6 @@ print("------------------------------------------------------------")  # 60個
 
 import tkinter.messagebox as tkmessagebox
 import tkinter.filedialog as tkfiledialog
-import tkinter.font as tkfont
-
 
 def Cal():
     options = {}
@@ -865,8 +368,9 @@ def Cal():
             fo.write('第'+str(j+1).rjust(2,'0')+'題，難度值p='+str(round(psitem[j]/pnum,2)).ljust(4,'0')+'\n')
         fo.close()
         tkmessagebox.showinfo(title="試題分析", message="分析完成")
-    else:   
-	     print ("沒有選擇檔案")
+    else:
+        print ("沒有選擇檔案")
+
 def View():
     options = {}
     options['filetypes'] = [("allfiles","*")]
@@ -878,25 +382,17 @@ def View():
         f = open(fs.name,'r')
         fc= f.readlines()
         f.close()
-        ptext = tk.Text(win, width=800, height=600)        
+        ptext = tk.Text(window, width=800, height=600)        
         for i in range(0, len(fc), 1):
             ptext.insert(tk.INSERT, fc[i])        
         ptext.pack()
         ptext.config(state=tk.DISABLED)       
-    else:   
-	     print ("沒有選擇檔案")
-def About():
-    tkmessagebox.showinfo(title="關於我們", message="程式設計者:屏東大學教育學系陳新豐")
-
-def Exit():
-    win.destroy() 
+    else:
+        print ("沒有選擇檔案")
 
 window = tk.Tk()
-window.geometry("800x600")
-window.title("試題與測驗分析程式")
+window.geometry("400x300")
 
-default_font = tkfont.nametofont('TkDefaultFont')
-default_font.configure(size=15)
 menubar = tk.Menu(window)
 window.config(menu=menubar)
 menu_file = tk.Menu(menubar, tearoff = 0)
@@ -905,10 +401,10 @@ menu_help = tk.Menu(menubar, tearoff = 0)
 menubar.add_cascade(label='檔案', menu=menu_file)
 menubar.add_cascade(label='計算', menu=menu_cal)
 menubar.add_cascade(label='Help', menu=menu_help)
-menu_file.add_command(label='結束', command=Exit)
+menu_file.add_command(label='結束', command = window.destroy)
 menu_cal.add_command(label='計算', command=Cal)
 menu_cal.add_command(label='檢視', command=View)
-menu_help.add_command(label='關於', command=About)
+menu_help.add_command(label='關於', command = lambda: print('你按了 關於'))
 
 window.mainloop()
 
@@ -929,8 +425,9 @@ def saveFile():
     # Write to the file
     outfile.write(text.get(1.0, "end")) 
     outfile.close() # Close the output file
-    
+
 window = tk.Tk()
+window.geometry("400x300")
 window.title("簡易文字編輯器")
         
 menubar = tk.Menu(window)
@@ -945,97 +442,44 @@ operationMenu.add_command(label = "Save", command = saveFile)
 # Add a tool bar frame 
 frame0 = tk.Frame(window) # Create and add a frame to window
 frame0.grid(row = 1, column = 1, sticky = "W")
-        
+
 # Create images
-opneImage = tk.PhotoImage(file = "open.gif")
-saveImage = tk.PhotoImage(file = "save.gif")
+opneImage = tk.PhotoImage(file = "__new/open.gif")
+saveImage = tk.PhotoImage(file = "__new/save.gif")
         
-tk.Button(frame0, image = opneImage, command = openFile).grid(
-                row = 1, column = 1, sticky = "W")
-tk.Button(frame0, image = saveImage, command = saveFile).grid(
-                row = 1, column = 2)
-        
+tk.Button(frame0, image = opneImage, command = openFile).grid(row = 1, column = 1, sticky = "W")
+tk.Button(frame0, image = saveImage, command = saveFile).grid(row = 1, column = 2)
+
 frame1 = tk.Frame(window) # Hold editor pane
 frame1.grid(row = 2, column = 1)
-        
+
 scrollbar = tk.Scrollbar(frame1)
 scrollbar.pack(side = "right", fill = "y")
-text = tk.Text(frame1, width = 40, height = 20, wrap = "word",
-               yscrollcommand = scrollbar.set)
+text = tk.Text(frame1, width = 40, height = 20, wrap = "word", yscrollcommand = scrollbar.set)
 text.pack()
 scrollbar.config(command = text.yview)
-        
+
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("400x300")
+window.title("簡易文字編輯器")
 
 def supermode():
-	print('super mode!')
+    print('super mode!')
 
 menubar = tk.Menu(window)
+
 filemenu = tk.Menu(menubar)
 filemenu.add_command(label='supermode', command=supermode)
 menubar.add_cascade(label='Operation', menu=filemenu)
 window.config(menu=menubar)
 
-print('------------------------------------------------------------')	#60個
-
-import tkinter.filedialog as fd
-
-window = tk.Tk()
-
-def open():
-	filename = fd.askopenfilename()
-	print('open file => ' + filename)
-def exit():
-	window.destroy()
-
-def find():
-	print('find ! ')
-
-menubar = tk.Menu(window)
-filemenu = tk.Menu(menubar)
-menubar.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='open', command=open)
-filemenu.add_separator()
-filemenu.add_command(label='exit', command=exit)
-editmenu = tk.Menu(menubar)
-menubar.add_cascade(label='Edit', menu=editmenu)
-editmenu.add_command(label='find', command=find)
-window.config(menu=menubar)
-
-print('------------------------------------------------------------')	#60個
-
-import tkinter.filedialog as fd
-
-window = tk.Tk()
-
-def open():
-    filename = fd.askopenfilename()
-    print('open file => ' + filename)
-
-def exit():
-    window.destroy()
-
-def find():
-    print('find ! ')
-
-menubar = tk.Menu(window)
-filemenu = tk.Menu(menubar)
-menubar.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='open', command=open)
-filemenu.add_separator()
-filemenu.add_command(label='exit', command=exit)
-editmenu = tk.Menu(menubar)
-menubar.add_cascade(label='Edit', menu=editmenu)
-editmenu.add_command(label='find', command=find)
-window.config(menu=menubar)
-
 window.mainloop()
 
-print("------------------------------------------------------------")  # 60個
+print('------------------------------------------------------------')	#60個
 
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -1078,110 +522,42 @@ class Application(tk.Frame):
         self.master.config(menu=menubar)
 
     def open_file(self):
-        print("開啟檔案")
+        print("你按了 開啟檔案")
 
     def save_file(self):
-        print("儲存檔案")
+        print("你按了 儲存檔案")
 
     def copy(self):
-        print("複製")
+        print("你按了 複製")
 
     def cut(self):
-        print("剪下")
+        print("你按了 剪下")
 
     def paste(self):
-        print("貼上")
+        print("你按了 貼上")
 
     def run(self):
-        print("執行程式")
+        print("你按了 執行程式")
 
     def show_help(self):
-        print("使用說明")
+        print("你按了 使用說明")
 
-# 建立主視窗
-root = tk.Tk()
+window = tk.Tk()
+window.geometry("400x300")
+window.title("簡易文字編輯器")
 
 # 建立應用程式
-app = Application(master=root)
+app = Application(master=window)
 
 # 執行主迴圈
 app.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
-from tkinter import messagebox
+window = tk.Tk()
+window.geometry("400x300")
 
-# 定義回應函式
-def New():
-    messagebox.showinfo('新檔案',
-        '檔案功能表下的開啟新檔指令')
-    
-def Open():
-    messagebox.showinfo('開啟舊檔',
-        '檔案功能表下的開啟舊檔指令')
-
-def Save():
-    messagebox.showinfo('儲存檔案',
-        '檔案功能表下的儲存檔案指令')
-    
-def Copyright():
-    messagebox.showinfo('版權宣告',
-        '我的第一支含視窗功能表程式-使用Python語言撰寫')
-
-wnd = Tk()#主視窗物件
-wnd.title('GUI介面-Menu')
-
-# 1.產生功能表物件menuBar
-menuBar = Menu(wnd)
-
-# 2.將功能表物件menuBar佈置到主視窗的頂部
-wnd.config(menu = menuBar)
-
-# 3.加入主功能表項目
-menu_file = Menu(menuBar, tearoff = 0)
-menu_font = Menu(menuBar, tearoff = 0)
-menu_help = Menu(menuBar, tearoff = 0)
-
-# 4. 產生主功能項目實體
-menuBar.add_cascade(label = '檔案', menu = menu_file)
-menuBar.add_cascade(label = '字體大小', menu = menu_font)
-menuBar.add_cascade(label = '版權宣告', menu = menu_help)
-
-# 5-1. 加入'檔案'功能表下拉選單
-menu_file.add_command(label = '新檔案',
-        underline = 1, accelerator = 'Ctrl+N',
-        command = New)
-menu_file.add_command(label = '開啟',
-        underline = 1, accelerator = 'Ctrl+O',
-        command = Open)
-menu_file.add_separator()#加入分隔線
-menu_file.add_command(label = '儲存',
-        underline = 1, accelerator = 'Ctrl+S',
-        command = Save)
-menu_file.add_separator()#加入分隔線
-menu_file.add_command(label = '離開',
-        underline = 1, accelerator = 'Ctrl+Q',
-        command = lambda : wnd.destroy())
-
-# 5-2. 加入'字體大小'功能表下拉選單
-labels = ('大', '中', '小')
-for item in labels:
-    menu_font.add_radiobutton(label = item)
-
-# 5-3. 加入'版權宣告'功能表下拉選單
-menu_help.add_command(label = '原創者聲明', command = Copyright)
-
-mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-# tkinterMenu.py
-
-root = tk.Tk()
-
-menu = tk.Menu(root)						# 產生選單
+menu = tk.Menu(window)						# 產生選單
 submenu = tk.Menu(menu, tearoff=0)					# 產生下拉選單
 submenu.add_command(label="Open")					# 向下拉選單中加入Open指令
 submenu.add_command(label="Save")					# 向下拉選單中加入Save指令
@@ -1196,383 +572,295 @@ menu.add_cascade(label="Edit", menu=submenu)				# 將下拉選單新增到選單
 submenu = tk.Menu(menu, tearoff=0)					# 產生下拉選單
 submenu.add_command(label="About")					# 向下拉選單中加入About指令
 menu.add_cascade(label="Help", menu=submenu)				# 將下拉選單新增到選單中
-root.config(menu=menu)
+window.config(menu=menu)
 
-root.mainloop()
-
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 print("右鍵選單")
-# tkinterPopupmenu.py
 
-root = tk.Tk()
+window = tk.Tk()
+window.geometry("400x300")
+window.title("右鍵選單")
 
-menu = tk.Menu(root, tearoff=0)				# 建立選單
+menu = tk.Menu(window, tearoff=0)				# 建立選單
 menu.add_command(label="Copy")					# 向出現式選單中加入Copy指令
 menu.add_command(label="Paste")					# 向出現式選單中加入Paste指令
 menu.add_separator()						# 向出現式選單中加入分隔符
 menu.add_command(label="Cut")					# 向出現式選單中加入Cut指令
+
 def popupmenu(event):						# 定義右鍵事件處理函數
     menu.post(event.x_root, event.y_root)			# 顯示選單
-root.bind("<Button-3>", popupmenu)				# 在主視窗中綁定右鍵事件
 
-root.mainloop()
+window.bind("<Button-3>", popupmenu)				# 在主視窗中綁定右鍵事件
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
-
-from tkinter import messagebox
-
-def hello():
-    messagebox.showinfo("Hello","歡迎使用功能表")
-
-root = Tk()
-root.geometry("300x180")
+window = tk.Tk()
+window.geometry("400x300")
 
 # 建立最上層功能表
-menubar = Menu(root)
-menubar.add_command(label="Hello!",command=hello)
-menubar.add_command(label="Exit!",command=root.destroy)
-root.config(menu=menubar)           # 顯示功能表物件
+menubar = tk.Menu(window)
+menubar.add_command(label="Hello!",command= lambda: print('你按了 Hello'))
+menubar.add_command(label="Exit!",command=window.destroy)
+window.config(menu=menubar)           # 顯示功能表物件
 
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import messagebox
+window = tk.Tk()
+window.geometry("400x300")
 
-def newFile():
-    messagebox.showinfo("New File","開新檔案")
-
-root = Tk()
-root.geometry("300x180")
-
-menubar = Menu(root)                # 建立最上層功能表
+menubar = tk.Menu(window)                # 建立最上層功能表
 # 建立功能表類別物件,和將此功能表類別命名File 
-filemenu = Menu(menubar)               
+filemenu = tk.Menu(menubar)               
 menubar.add_cascade(label="File",menu=filemenu)
 # 在File功能表內建立功能表清單
-filemenu.add_command(label="New File",command=newFile)
-filemenu.add_command(label="Exit!",command=root.destroy)
-root.config(menu=menubar)           # 顯示功能表物件
+filemenu.add_command(label="New File",command= lambda: print('你按了 開新檔案'))
+filemenu.add_command(label="Exit!",command=window.destroy)
+window.config(menu=menubar)           # 顯示功能表物件
 
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import messagebox
+window = tk.Tk()
+window.geometry("400x300")
 
-def newFile():
-    messagebox.showinfo("New File","開新檔案")
-
-root = Tk()
-root.geometry("300x180")
-
-menubar = Menu(root)                # 建立最上層功能表
+menubar = tk.Menu(window)                # 建立最上層功能表
 # 建立功能表類別物件,和將此功能表類別命名File 
-filemenu = Menu(menubar,tearoff=False)               
+filemenu = tk.Menu(menubar,tearoff=False)               
 menubar.add_cascade(label="File",menu=filemenu)
 # 在File功能表內建立功能表清單
-filemenu.add_command(label="New File",command=newFile)
-filemenu.add_command(label="Exit!",command=root.destroy)
-root.config(menu=menubar)           # 顯示功能表物件
+filemenu.add_command(label="New File",command= lambda: print('你按了 開新檔案'))
+filemenu.add_command(label="Exit!",command=window.destroy)
+window.config(menu=menubar)           # 顯示功能表物件
 
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import messagebox
+window = tk.Tk()
+window.geometry("400x300")
 
-def newFile():
-    messagebox.showinfo("New File","開新檔案")
-def openFile():
-    messagebox.showinfo("New File","開啟舊檔")
-def saveFile():
-    messagebox.showinfo("New File","儲存檔案")
-def saveAsFile():
-    messagebox.showinfo("New File","另存新檔")
+menubar = tk.Menu(window)                # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File 
+filemenu = tk.Menu(menubar)               
+menubar.add_cascade(label="File",menu=filemenu)
+# 在File功能表內建立功能表清單
+filemenu.add_command(label="開新檔案",command= lambda: print('你按了 開新檔案'))
+filemenu.add_command(label="開啟舊檔",command= lambda: print('你按了 開啟舊檔'))
+filemenu.add_separator()
+filemenu.add_command(label="儲存檔案",command= lambda: print('你按了 儲存檔案'))
+filemenu.add_command(label="另存新檔",command= lambda: print('你按了 另存新檔'))
+filemenu.add_separator()
+filemenu.add_command(label="Exit!",command=window.destroy)
+window.config(menu=menubar)           # 顯示功能表物件
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
     
-root = Tk()
-root.geometry("300x180")
+window = tk.Tk()
+window.geometry("400x300")
 
-menubar = Menu(root)                # 建立最上層功能表
+menubar = tk.Menu(window)                # 建立最上層功能表
 # 建立功能表類別物件,和將此功能表類別命名File 
-filemenu = Menu(menubar)               
+filemenu = tk.Menu(menubar)               
 menubar.add_cascade(label="File",menu=filemenu)
 # 在File功能表內建立功能表清單
-filemenu.add_command(label="New File",command=newFile)
-filemenu.add_command(label="Open File",command=openFile)
+filemenu.add_command(label="開新檔案",command = lambda: print('你按了 開新檔案'))
+filemenu.add_command(label="開啟舊檔",command = lambda: print('你按了 開啟舊檔'))
 filemenu.add_separator()
-filemenu.add_command(label="Save",command=saveFile)
-filemenu.add_command(label="Save As",command=saveAsFile)
+filemenu.add_command(label="儲存檔案",command = lambda: print('你按了 儲存檔案'))
+filemenu.add_command(label="另存新檔",command = lambda: print('你按了 另存新檔'))
 filemenu.add_separator()
-filemenu.add_command(label="Exit!",command=root.destroy)
-root.config(menu=menubar)           # 顯示功能表物件
-
-root.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import messagebox
-
-def newFile():
-    messagebox.showinfo("New File","開新檔案")
-def openFile():
-    messagebox.showinfo("New File","開啟舊檔")
-def saveFile():
-    messagebox.showinfo("New File","儲存檔案")
-def saveAsFile():
-    messagebox.showinfo("New File","另存新檔")
-def aboutMe():
-    messagebox.showinfo("New File","洪錦魁著")    
-    
-root = Tk()
-root.geometry("300x180")
-
-menubar = Menu(root)                # 建立最上層功能表
-# 建立功能表類別物件,和將此功能表類別命名File 
-filemenu = Menu(menubar)               
-menubar.add_cascade(label="File",menu=filemenu)
-# 在File功能表內建立功能表清單
-filemenu.add_command(label="New File",command=newFile)
-filemenu.add_command(label="Open File",command=openFile)
-filemenu.add_separator()
-filemenu.add_command(label="Save",command=saveFile)
-filemenu.add_command(label="Save As",command=saveAsFile)
-filemenu.add_separator()
-filemenu.add_command(label="Exit!",command=root.destroy)
+filemenu.add_command(label="離開",command = window.destroy)
 # 建立功能表類別物件,和將此功能表類別命名Help 
-helpmenu = Menu(menubar)               
+helpmenu = tk.Menu(menubar)               
 menubar.add_cascade(label="Help",menu=helpmenu)
 # 在Help功能表內建立功能表清單
-helpmenu.add_command(label="About me",command=aboutMe)
-root.config(menu=menubar)           # 顯示功能表物件
+helpmenu.add_command(label="關於",command = lambda: print('你按了 關於'))
+window.config(menu=menubar)           # 顯示功能表物件
 
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-from tkinter import messagebox
-
-def newFile():
-    messagebox.showinfo("New File","開新檔案")
-def openFile():
-    messagebox.showinfo("New File","開啟舊檔")
-def saveFile():
-    messagebox.showinfo("New File","儲存檔案")
-def saveAsFile():
-    messagebox.showinfo("New File","另存新檔")
-def aboutMe():
-    messagebox.showinfo("New File","洪錦魁著")    
     
-root = Tk()
-root.geometry("300x180")
+window = tk.Tk()
+window.geometry("400x300")
 
-menubar = Menu(root)                # 建立最上層功能表
+menubar = tk.Menu(window)                # 建立最上層功能表
 # 建立功能表類別物件,和將此功能表類別命名File 
-filemenu = Menu(menubar)               
+filemenu = tk.Menu(menubar)               
 menubar.add_cascade(label="File",menu=filemenu,underline=0)
 # 在File功能表內建立功能表清單
-filemenu.add_command(label="New File",command=newFile,underline=0)
-filemenu.add_command(label="Open File",command=openFile,underline=0)
+filemenu.add_command(label="開新檔案",command = lambda: print('你按了 開新檔案'),underline=0)
+filemenu.add_command(label="開啟舊檔",command = lambda: print('你按了 開啟舊檔'),underline=0)
 filemenu.add_separator()
-filemenu.add_command(label="Save",command=saveFile,underline=0)
-filemenu.add_command(label="Save As",command=saveAsFile,underline=5)
+filemenu.add_command(label="儲存檔案",command = lambda: print('你按了 儲存檔案'),underline=0)
+filemenu.add_command(label="另存新檔",command = lambda: print('你按了 另存新檔'),underline=5)
 filemenu.add_separator()
-filemenu.add_command(label="Exit!",command=root.destroy,underline=0)
+filemenu.add_command(label="離開",command=window.destroy,underline=0)
 # 建立功能表類別物件,和將此功能表類別命名Help 
-helpmenu = Menu(menubar)               
+helpmenu = tk.Menu(menubar)               
 menubar.add_cascade(label="Help",menu=helpmenu,underline=0)
 # 在Help功能表內建立功能表清單
-helpmenu.add_command(label="About me",command=aboutMe,underline=1)
-root.config(menu=menubar)           # 顯示功能表物件
+helpmenu.add_command(label="About",command = lambda: print('你按了 開新檔案'),underline=1)
+window.config(menu=menubar)           # 顯示功能表物件
 
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import messagebox
-def newFile():
-    messagebox.showinfo("New File","開新檔案")    
-    
-root = Tk()
-root.geometry("300x180")
+window = tk.Tk()
+window.geometry("400x300")
 
-menubar = Menu(root)                # 建立最上層功能表
+menubar = tk.Menu(window)                # 建立最上層功能表
 # 建立功能表類別物件,和將此功能表類別命名File 
-filemenu = Menu(menubar)               
+filemenu = tk.Menu(menubar)               
 menubar.add_cascade(label="File",menu=filemenu,underline=0)
 # 在File功能表內建立功能表清單
-filemenu.add_command(label="New File",command=newFile,
-                     accelerator="Ctrl+N")
+filemenu.add_command(label="開新檔案",command= lambda: print('你按了 開新檔案'), accelerator="Ctrl+N")
 filemenu.add_separator()
-filemenu.add_command(label="Exit!",command=root.destroy,underline=0)
-root.config(menu=menubar)           # 顯示功能表物件
-root.bind("<Control-N>",            # 快捷鍵綁定
+filemenu.add_command(label="離開",command=window.destroy,underline=0)
+window.config(menu=menubar)           # 顯示功能表物件
+
+window.bind("<Control-N>",            # 快捷鍵綁定
           lambda event:messagebox.showinfo("New File","開新檔案"))
 
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import messagebox
-def findNext():
-    messagebox.showinfo("Find Next","尋找下一筆")
-def findPre():
-    messagebox.showinfo("Find Pre","尋找上一筆")
+window = tk.Tk()
+window.geometry("400x300")
 
-root = Tk()
-root.geometry("300x180")
-
-menubar = Menu(root)                        # 建立最上層功能表
+menubar = tk.Menu(window)                        # 建立最上層功能表
 # 建立功能表類別物件,和將此功能表類別命名File 
-filemenu = Menu(menubar)               
+filemenu = tk.Menu(menubar)               
 menubar.add_cascade(label="File",menu=filemenu,underline=0)
 # 在File功能表內建立功能表清單
 # 首先在File功能表內建立find子功能表物件
-findmenu = Menu(filemenu,tearoff=False)     # 取消分隔線
-findmenu.add_command(label="Find Next",command=findNext)
-findmenu.add_command(label="Find Pre",command=findPre)
+findmenu = tk.Menu(filemenu,tearoff=False)     # 取消分隔線
+findmenu.add_command(label="尋找下一筆",command= lambda: print('你按了 尋找下一筆'))
+findmenu.add_command(label="尋找上一筆",command= lambda: print('你按了 尋找上一筆'))
 filemenu.add_cascade(label="Find",menu=findmenu)
 # 下列是增加分隔線和建立Exit!指令
 filemenu.add_separator()
-filemenu.add_command(label="Exit!",command=root.destroy,underline=0)
+filemenu.add_command(label="Exit!",command=window.destroy,underline=0)
 
-root.config(menu=menubar)                   # 顯示功能表物件
+window.config(menu=menubar)                   # 顯示功能表物件
 
-root.mainloop()
+window.mainloop()
+
+'''
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import messagebox
-
 def minimizeIcon():                     # 縮小視窗為圖示
-    root.iconify()
+    window.iconify()
+
 def showPopupMenu(event):               # 顯示彈出功能表
     popupmenu.post(event.x_root,event.y_root)
 
-root = Tk()
-root.geometry("300x180")
+window = tk.Tk()
+window.geometry("400x300")
+window.title("右鍵選單")
 
-popupmenu = Menu(root,tearoff=False)    # 建立彈出功能表物件
+popupmenu = tk.Menu(window,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立2個指令清單
 popupmenu.add_command(label="Minimize",command=minimizeIcon)
-popupmenu.add_command(label="Exit",command=root.destroy)
-# 按滑鼠右鍵綁定顯示彈出功能表
-root.bind("<Button-3>",showPopupMenu)
+popupmenu.add_command(label="Exit",command=window.destroy)
 
-root.mainloop()
+# 按滑鼠右鍵綁定顯示彈出功能表
+window.bind("<Button-3>",showPopupMenu)
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 
 def status():                       # 設定是否顯示狀態列
     if demoStatus.get():
-        statusLabel.pack(side=BOTTOM,fill=X)
+        statusLabel.pack(side=tk.BOTTOM,fill=tk.X)
     else:
         statusLabel.pack_forget()
        
-root = Tk()
-root.geometry("300x180")
+window = tk.Tk()
+window.geometry("400x300")
 
-menubar = Menu(root)                # 建立最上層功能表
+menubar = tk.Menu(window)                # 建立最上層功能表
 # 建立功能表類別物件,和將此功能表類別命名File 
-filemenu = Menu(menubar,tearoff=False)               
+filemenu = tk.Menu(menubar,tearoff=False)               
 menubar.add_cascade(label="File",menu=filemenu)
 # 在File功能表內建立功能表清單Exit
-filemenu.add_command(label="Exit",command=root.destroy)
+filemenu.add_command(label="Exit",command=window.destroy)
 # 建立功能表類別物件,和將此功能表類別命名View 
-viewmenu = Menu(menubar,tearoff=False)               
+viewmenu = tk.Menu(menubar,tearoff=False)               
 menubar.add_cascade(label="View",menu=viewmenu)
 # 在View功能表內建立Check menu button
-demoStatus = BooleanVar()
+demoStatus = tk.BooleanVar()
 demoStatus.set(True)
-viewmenu.add_checkbutton(label="Status",command=status,
-                         variable=demoStatus)
-root.config(menu=menubar)           # 顯示功能表物件
+viewmenu.add_checkbutton(label="Status",command=status, variable=demoStatus)
+window.config(menu=menubar)           # 顯示功能表物件
 
-statusVar = StringVar()
+statusVar = tk.StringVar()
 statusVar.set("顯示")
-statusLabel = Label(root,textvariable=statusVar,relief="raised")
-statusLabel.pack(side=BOTTOM,fill=X)
+statusLabel = tk.Label(window,textvariable=statusVar,relief="raised")
+statusLabel.pack(side=tk.BOTTOM,fill=tk.X)
 
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
        
-root = Tk()
-root.geometry("300x180")
+window = tk.Tk()
+window.geometry("400x300")
 
-menubar = Menu(root)                    # 建立最上層功能表
+menubar = tk.Menu(window)                    # 建立最上層功能表
 # 建立功能表類別物件,和將此功能表類別命名File 
-filemenu = Menu(menubar,tearoff=False)               
+filemenu = tk.Menu(menubar,tearoff=False)               
 menubar.add_cascade(label="File",menu=filemenu)
 # 在File功能表內建立功能表清單Exit
-filemenu.add_command(label="Exit",command=root.destroy)
+filemenu.add_command(label="Exit",command=window.destroy)
 
 # 建立工具列
-toolbar = Frame(root,relief=RAISED,borderwidth=3)
+toolbar = tk.Frame(window,relief=tk.RAISED,borderwidth=3)
 # 在工具列內建立按紐
-sunGif = PhotoImage(file="sun.gif")
-exitBtn = Button(toolbar,image=sunGif,command=root.destroy)
-exitBtn.pack(side=LEFT,padx=3,pady=3)   # 包裝按鈕
-toolbar.pack(side=TOP,fill=X)           # 包裝工具列
-root.config(menu=menubar)               # 顯示功能表物件
+sunGif = tk.PhotoImage(file="__new/sun.gif")
+exitBtn = tk.Button(toolbar,image=sunGif,command=window.destroy)
+exitBtn.pack(side=tk.LEFT,padx=3,pady=3)   # 包裝按鈕
 
-root.mainloop()
-'''
+toolbar.pack(side=tk.TOP,fill=tk.X)           # 包裝工具列
+window.config(menu=menubar)               # 顯示功能表物件
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-
 window = tk.Tk()
-window.title("")
-
-
-# 儲存選單
-def save():
-    print('你按了save')
-
-# 結束選單
-def exit():
-    print('你按了exit')
-    window.destroy()
+window.geometry("400x300")
 
 # 建立選單畫面
 menubar = tk.Menu(window)
 filemenu = tk.Menu(menubar)
 menubar.add_cascade(label="File", menu=filemenu)
-filemenu.add_command(label="save", command=save)
+filemenu.add_command(label="save", command= lambda: print('你按了 save'))
 filemenu.add_separator()
-filemenu.add_command(label="exit", command=exit)
+filemenu.add_command(label="exit", command= window.destroy)
 window.config(menu=menubar)
 
 window.mainloop()
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -1583,5 +871,7 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
 
 

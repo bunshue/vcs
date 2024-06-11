@@ -3876,62 +3876,6 @@ print(fahrenheit)
 
 print("------------------------------------------------------------")  # 60個
 
-import re
-
-foldername = "data"
-files = os.listdir(foldername)
-txtList = []
-# 測試1
-pattern = '(.*).txt'
-print("列印*.txt")
-for filename in files:
-    #print(filename)
-    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
-    if fnresult != None:
-        txtList.append(filename)
-print(txtList)
-
-pyList = []  
-# 測試2
-print("列印ch14_10.py - ch14_19.py")
-pattern = '(ch14_1(\d).py)'
-for filename in files:
-    fnresult = re.search(pattern,filename)      # 傳回搜尋結果
-    if fnresult != None:
-        pyList.append(filename)
-print(pyList)
-
-print("------------------------------------------------------------")  # 60個
-
-import re
-
-text = "這個是、那個是、那個是、哪個是"
-word1 = "這.是"
-word2 = ".個是"
-
-pattern = re.compile(word1)
-count = len(re.findall(pattern, text))
-print(word1, ":", count, "個")
-
-pattern = re.compile(word2)
-count = len(re.findall(pattern, text))
-print(word2, ":", count, "個")
-
-print("------------------------------------------------------------")  # 60個
-
-import re
-
-text = "這個是測試資料。"
-word1 = ".個是"
-word2 = "那個是"
-
-print("置換前 :", text)
-pattern = re.compile(word1)
-text = re.sub(pattern, word2, text)
-print("置換後 :", text)
-
-print("------------------------------------------------------------")  # 60個
-
 # 雙層for建立九九乘法表
 
 # 建立表頭
@@ -9481,61 +9425,6 @@ print(f"Hi, My name is {name}, I'm {age}")
 
 print("------------------------------------------------------------")  # 60個
 
-import re
-
-# 要轉換的字串
-text = """請 求 您 幫 我 oxxo.studio 去 除 空 白 ok ？
-但是要保留換行 可以 嗎 ，(        哈哈哈 )( 啊哈)
-統一便利超商 (711) 的括號之間也要有空白喔！
-寫作規    範就是這 麼 100% 的龜毛～
-"""
-
-# 取得中文字和英文單字的正規表達式
-# [a-zA-Z0-9]+ 表示開頭是英文字母後面連接一串字母或數字
-regex = re.compile(r"[\u4E00-\u9FFF\uFF00-\uFFFF\u0021-\u002F\n]|[a-zA-Z0-9]+")
-
-# 根據正規表達式，將每個中文字、標點符號和英文單字變成串列
-arr = re.findall(regex, text)
-
-# 使用空格合併串列
-text = " ".join(arr)
-print(text)
-
-"""
-請 求 您 幫 我 oxxo . studio 去 除 空 白 ok ？
-但 是 要 保 留 換 行 可 以 嗎 ， ( 哈 哈 哈 ) ( 啊 哈 )
-統 一 便 利 超 商 ( 711 ) 的 括 號 之 間 也 要 有 空 白 喔 ！
-寫 作 規 範 就 是 這 麼 100 % 的 龜 毛 ～
-"""
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-import re
-
-# 輸入字符串
-text = """請 求 您 幫 我 oxxo.studio 去 除 空 白 ok ？
-但是要保留換行 可以 嗎 ，(        哈哈哈 )( 啊哈)
-統一便利超商 (711) 的括號之間也要有空白喔！
-寫作規    範就是這 麼 100% 的龜毛～
-"""
-
-regex = re.compile(r"[\u4E00-\u9FFF\uFF00-\uFFFF\u0021-\u002F\n]|[a-zA-Z0-9]+")
-arr = re.findall(regex, text)
-text = " ".join(arr)
-
-regex = re.compile(r"(?<=[^a-zA-Z0-9\u0021-\u002E])(\x20)(?=[^a-zA-Z0-9\u0021-\u002E])")
-text = re.sub(regex, "", text)
-
-regex = re.compile(r"(\x20)(?=[\(\%\uFF00-\uFFFF])")
-text = re.sub(regex, "", text)
-
-text = text.replace(" . ", ".")
-print(text)
-
-print("------------------------------------------------------------")  # 60個
-
 n = 100
 icon = "⋮⋰⋯⋱"  # 建立旋轉的符號清單
 for i in range(n + 1):
@@ -9925,25 +9814,6 @@ print(bs.select('#main button .pk')[1].text)
 print(bs.select('#footer a')[0]['href'])
 
 print('------------------------------------------------------------')	#60個
-
-import re
-print(re.match (r'pyt', 'python')) # pyt 由開頭即符合, 因此成功
-print(re.match (r'yth', 'python')) # yth 與開頭不符合, 因此失敗
-print(re.search(r'yth', 'python')) # seach( ) 不限開頭, 因此成功
-
-print('------------------------------------------------------------')	#60個
-
-import re
-
-m = re.search(r'p[a-z]+e', 'apples')
-print(m)   # 輸出 <_sre.SRE_Match object; span=(1, 5), match='pple'>
-print(m.group())    # 輸出 pple
-print(m.start())    # 輸出 1
-print(m.end())    # 輸出 5 注意！pple 的位置是 1~4
-print(m.span())    # 輸出 (1, 5)
-
-print('------------------------------------------------------------')	#60個
-
 """ 跳過 webdriver
 print('1111 fail')
 from selenium import webdriver    # 匯入 selenium 的 webdriver 子套件

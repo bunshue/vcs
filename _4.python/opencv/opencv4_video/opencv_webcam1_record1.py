@@ -23,7 +23,7 @@ import datetime
 
 ESC = 27
 SPACE = 32
-RECORD_TIME_MINUTE = 3
+RECORD_TIME_MINUTE = 20
 
 ENCODING_TYPE = 'XVID'  # 編碼器
 #'XVID','DIVX','MJPG','I420'

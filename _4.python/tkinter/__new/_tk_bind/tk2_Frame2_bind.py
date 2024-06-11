@@ -1,7 +1,12 @@
-'''
+"""
+
 綁定鍵盤滑鼠事件 Frame
-'''
+
+"""
+
 import tkinter as tk
+'''
+print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
 
@@ -39,11 +44,11 @@ def mouseDoubleClick4(event):
 
 def mouse_down1(event):
     print('你按了滑鼠左鍵', end = ' ')
-    '''
+    """
     print("在控件位置 : ", event.x, event.y, end = ' ')
     print("視窗位置 : ", event.x_root, event.y_root, end = ' ')
     print("按鍵 : ", event.num, end = ' ')
-    '''
+    """
 def mouse_down2(event):
     print('你按了滑鼠中鍵', end = ' ')
     
@@ -141,6 +146,49 @@ cccc.focus_set()
 
 window.mainloop()
 
-'''
+"""
 frame.focus_set()
+"""
 '''
+print('------------------------------------------------------------')	#60個
+
+print('讀取滑鼠左鍵位置')
+
+def callback(event):                        # 事件處理程式
+    print("滑鼠點擊位置 :", event.x, event.y)   # 列印座標
+    
+window = tk.Tk()
+window.geometry("600x400")
+
+frame = tk.Frame(window,width=300,height=180)
+frame.bind("<Button-1>",callback)           # 按一下綁定callback
+frame.pack()
+
+window.mainloop()
+
+
+print('------------------------------------------------------------')	#60個
+
+
+
+print('------------------------------------------------------------')	#60個
+
+def key(event):                     # 列出所按的鍵
+    print("按了 " + repr(event.char) + " 鍵")
+
+def coordXY(event):                 # 列出滑鼠座標
+    frame.focus_set()               # frame物件取得焦點
+    print("滑鼠座標 : ", event.x, event.y)
+    
+window = tk.Tk()
+window.geometry("600x400")
+
+frame = Frame(window, width=100, height=100)
+frame.bind("<Key>", key)            # frame物件的<Key>綁定key
+frame.bind("<Button-1>", coordXY)   # frame物件按一下綁定coordXY
+frame.pack()
+
+window.mainloop()
+
+
+print('------------------------------------------------------------')	#60個

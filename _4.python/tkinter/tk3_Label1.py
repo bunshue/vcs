@@ -3,23 +3,10 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 600
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "Label測試"
-window.title(title)
+window.geometry("600x800")
+window.title('Label 1')
 
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
@@ -53,15 +40,6 @@ tk.Label(        text = '有背景色的Label 綠', bg = 'green', width = 30, he
 tk.Label(window, text = '有背景色的Label 藍', bg = 'blue',  width = 20, height = 2).pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-print('Label使用圖片')
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cloud.gif'
-image = tk.PhotoImage(file = filename)
-
-tk.Label(window, image = image).place(x = 430, y = 170, width = 150, height = 150)
-
 print("------------------------------------------------------------")  # 60個
 
 #前後移動控件
@@ -104,50 +82,60 @@ tk.Label(window, text = "Blue", bg = "blue").pack(fill = tk.BOTH)
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
 tk.Label(window, text = "Red", bg = "red").pack(side = tk.LEFT)
 #tk.Label(window, text = "Green", bg = "green").pack(side = tk.LEFT, fill = tk.BOTH, expand = 1)
 tk.Label(window, text = "Green", bg = "green").pack(side = tk.LEFT, fill = tk.BOTH)
 tk.Label(window, text = "Blue", bg = "blue").pack(side = tk.LEFT, fill = tk.BOTH)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 #label的寫法
 label3 = tk.Label(text = 'Created by David Wang', font = ('Times', 22), fg = 'brown')
 label3.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+tk.Label(window, text='紅', bg='red', width=20).pack()
+tk.Label(window, text='綠', bg='green', width=20).pack()
+tk.Label(window, text='藍', bg='blue', width=20).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+print("Label元件的參數設定")
+
+label = tk.Label(window, bg="#ff00ff", fg="#ffff00", \
+                font =("標楷體", 14, "bold", "italic"), \
+                padx=5, pady=30, text = "生日快樂")
+label.pack()
+
+label = tk.Label(window, bg="#ff00ff", fg="#ffff00", \
+                font ="新細明體 14 bold italic", \
+                padx=20, pady=5, text = "生日快樂")
+label.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "Label測試"
-window.title(title)
+window.geometry("600x800")
+window.title('Label 2')
 
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
 
 font_size = 18
-w = 20
-h = 20
+w = 18
+h = 16
 x_st = 50
 y_st = 20
-dx = 300
+dx = 200
 dy = 80
 
 # 設定 Label 
@@ -264,22 +252,8 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "Label測試"
-window.title(title)
-
+window.geometry("600x800")
+window.title('Label 3')
 
 label1 =tk.Label(window, text="Hello World!")
 label1.pack()
@@ -292,36 +266,28 @@ label4.place(x=120, y=160)
 label5 =tk.Label(window, text="Powen Ko",bg="#ff0000")
 label5.place(x=120, y=140)
 
-
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 from PIL import ImageTk, Image
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
 window = tk.Tk()
+window.geometry("600x800")
+window.title('Label 4')
 
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "Label測試"
-window.title(title)
-
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 img = ImageTk.PhotoImage(Image.open(filename))
-label1 =tk.Label(window, image = img)
-label1.pack()
+label1 =tk.Label(window, image = img).pack()
+
+
+print('Label使用圖片')
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/cloud.gif'
+image = tk.PhotoImage(file = filename)
+tk.Label(window, image = image).place(x = 0, y = 150, width = 150, height = 150)
+
+print("------------------------------------------------------------")  # 60個
+
 
 window.mainloop()
 
@@ -333,23 +299,9 @@ print("------------------------------------------------------------")  # 60個
 
 from PIL import Image, ImageTk
 
-# 建立主視窗
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 900
-x_st = 100
-y_st = 50
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "使用 label 顯示圖片"
-window.title(title)
+window.geometry("700x900")
+window.title('Label 5')
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg'
 im = Image.open(filename)
@@ -370,6 +322,7 @@ label1.pack()
 #tk.Label(window, text = '多人圖片', image = image, bd = 0, bg = 'red', width = 1200).pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 print('用 Label 顯示一張圖片')
 filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg'
@@ -380,7 +333,8 @@ label2 = tk.Label(window, image = image2)   #用Label顯示圖片
 label2.image = image
 label2.pack()
 
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 import random
 
@@ -405,8 +359,81 @@ for i in range(4):
 tk.Button(window, text = "Shuffle", command = shuffle).pack()
 
 window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('Label 1')
+
+
+print('Label設定')
+
+label1 = tk.Label(window, text='BMI 計算',font=('微軟正黑體', 16),fg='white',bg='blue')
+label1.pack(pady=10,fill='x')#整個橫條填滿
+
+label2 = tk.Label(window, text='BMI 計算',font=('微軟正黑體', 16),fg='white',bg='blue')
+label2.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+print('Label標籤')
+tk.Label(window, text = '王之渙涼州詞', fg='blue',bg='lightblue',bitmap='gray25',\
+         compound='left',font=('標楷體', 24, 'bold')).pack()
+msg=('黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。')
+tk.Label(window, text = msg, width=28,wraplength=240,justify='left',\
+         pady=10,font=('細明體', 14)).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+lab = tk.Label(window,bg="yellow",fg="blue",
+            height=2,width=12,
+            font="Times 16 bold")
+lab.pack()
+
+label = tk.Label(window,text="歡迎來到美國2",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15,             # 標籤寬度是15
+              font="Helvetica 16 bold italic")
+label.pack()
+
+label1_data = tk.StringVar()
+label1 = tk.Label(window,textvariable=label1_data,      # 設定Label內容是變數 label1_data
+              fg="blue",bg="lightyellow", # 淺黃色底藍色字
+              font="Verdana 16 bold",     # 字型設定
+              width=25,height=1)   # 標籤內容
+label1.pack()
+label1_data.set('歡迎來到美國3')
+
+
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+   
+tk.Label(window, text = "Blue", bg = "blue").pack()
+tk.Label(window, text = "Red", bg = "red").pack()
+tk.Label(window, text = "Green", bg = "green").pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+   
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+   
+   
+
+
+
+window.mainloop()
+
 
 
 print("------------------------------------------------------------")  # 60個
