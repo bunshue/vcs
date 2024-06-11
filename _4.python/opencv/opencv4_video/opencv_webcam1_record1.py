@@ -13,7 +13,6 @@ MPEG-4		*"XVID"		.avi
 MP4		*"MP4V"		.mp4
 Ogg Vorbis	*"THEO"		.ogv
 
-
 """
 
 import cv2
@@ -23,7 +22,7 @@ import datetime
 
 ESC = 27
 SPACE = 32
-RECORD_TIME_MINUTE = 20
+RECORD_TIME_MINUTE = 5
 
 ENCODING_TYPE = 'XVID'  # 編碼器
 #'XVID','DIVX','MJPG','I420'
@@ -81,13 +80,16 @@ out = cv2.VideoWriter(record_filename, fourcc, fps, (width,height))
 
 show_minitues_info = 0
 while True:
-    ret, frame = cap.read()
+    ret, frame = cap.read()  #擷取一張影像
     if ret == False:
       print('無影像, 離開')
       break
 
+    now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    cv2.putText(frame, now, (20, 40),cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2, cv2.LINE_AA)
+
     cv2.imshow('WebCam2', frame)
-    out.write(frame)  # 將圖像寫入影片
+    out.write(frame)  # 影像寫入影片檔
 
     record_time_elapsed = time.time() - record_time_st
     record_minute = int(record_time_elapsed//60)

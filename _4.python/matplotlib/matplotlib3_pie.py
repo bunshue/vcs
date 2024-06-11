@@ -58,7 +58,7 @@ values = [3, 48, 33, 8, 38]
 labels = ["鼠", "牛", "虎", "兔", "龍"]
 colors = ["r", "g", "b", "c", "m"]
 # 分離係數，所以只有 '虎' 會分離
-explode = (0, 0, 0.08, 0, 0)  # 設定分隔的區塊位置
+explode = (0, 0, 0.15, 0, 0)  # 設定分隔的區塊位置
 
 # 設定 pie 函數參數繪製圓餅圖
 # 從 90° 開始，逆時針排列，並加上陰影，並加上每塊的比例，格式為 '%1.2f%%'
@@ -82,12 +82,15 @@ plt.title("指定顏色 使用圖例")
 # 第二張圖
 plt.subplot(232)
 
-sizes = [25, 30, 15, 10]
-labels = ["北部", "西部", "南部", "東部"]
-colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.2, 0)
+# 設定將使用的數值，將要有項目標題、數值串列、圓餅圖顏色、分隔的區塊位置
+values = [3, 48, 33, 8, 38]
+labels = ["鼠", "牛", "虎", "兔", "龍"]
+colors = ["r", "g", "b", "c", "m"]
+# 分離係數，所以只有 '虎' 會分離
+explode = (0, 0, 0.15, 0, 0)  # 設定分隔的區塊位置
+
 plt.pie(
-    sizes,
+    values,
     explode=explode,
     labels=labels,
     colors=colors,
@@ -196,22 +199,26 @@ plt.title("五月份國外旅遊調查表", fontsize=16, color="b")
 # 第二張圖
 plt.subplot(232)
 
-import matplotlib.pyplot as plt
+edu = [0.2515, 0.3724, 0.3336, 0.0368, 0.0057]
+labels = ["中專", "大專", "本科", "碩士", "其他"]
+colors = ["#9999ff", "#ff9999", "#7777aa", "#2442aa", "#dd5555"]  # 自定義顏色
+explode = [0, 0.1, 0, 0, 0]  # 生成數據，用于突出顯示大專學歷人群
 
-sizes = [25, 30, 15, 10]
-labels = ["北部", "西部", "南部", "東部"]
-colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.2, 0)
+# 繪制餅圖
+
 plt.pie(
-    sizes,
-    explode=explode,
-    labels=labels,
-    colors=colors,
-    labeldistance=1.1,
-    autopct="%2.1f%%",
-    pctdistance=0.6,
-    shadow=True,
-    startangle=90,
+    x=edu,  # 繪圖數據
+    explode=explode,  # 突出顯示大專人群
+    labels=labels,  # 添加教育水平標簽
+    colors=colors,  # 設置餅圖的自定義填充色
+    autopct="%.1f%%",  # 設置百分比的格式，這里保留一位小數
+    pctdistance=0.8,  # 設置百分比標簽與圓心的距離
+    labeldistance=1.1,  # 設置教育水平標簽與圓心的距離
+    startangle=180,  # 設置餅圖的初始角度
+    radius=1.2,  # 設置餅圖的半徑
+    counterclock=False,  # 是否逆時針，這里設置為順時針方向
+    wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 設置餅圖內外邊界的屬性值
+    textprops={"fontsize": 10, "color": "black"},  # 設置文本標簽的屬性值
 )
 
 
@@ -231,55 +238,51 @@ plt.axis("equal")
 # 第四張圖
 plt.subplot(234)
 
-import matplotlib.pyplot as plt
 from pylab import mpl
 
 plt.rcParams["font.family"] = ["Microsoft JhengHei"]
 
-country = ["美國", "澳洲", "日本", "歐洲", "英國"]
-pou = [10543, 2105, 1190, 3346, 980]
+sizes = [25, 30, 15, 10]
+labels = ["北部", "西部", "南部", "東部"]
+explode = (0, 0, 0.2, 0)
 
-plt.pie(pou, labels=country, explode=(0, 0, 0.2, 0, 0), autopct="%1.2f%%")  # 繪製圓餅圖
+plt.pie(sizes, labels=sizes, explode=explode, autopct="%1.2f%%")
 
 
 # 第五張圖
 plt.subplot(235)
 
-# 構造數據
-edu = [0.2515, 0.3724, 0.3336, 0.0368, 0.0057]
-labels = ["中專", "大專", "本科", "碩士", "其他"]
+#pie指定顏色
 
-# 添加修飾的餅圖
-explode = [0, 0.1, 0, 0, 0]  # 生成數據，用于突出顯示大專學歷人群
-colors = ["#9999ff", "#ff9999", "#7777aa", "#2442aa", "#dd5555"]  # 自定義顏色
-
-# 繪制餅圖
+sizes = [25, 30, 15, 10]
+labels = ["北部", "西部", "南部", "東部"]
+colors = ["red", "green", "blue", "yellow"]
+explode = (0, 0, 0.2, 0)
 
 plt.pie(
-    x=edu,  # 繪圖數據
-    explode=explode,  # 突出顯示大專人群
-    labels=labels,  # 添加教育水平標簽
-    colors=colors,  # 設置餅圖的自定義填充色
-    autopct="%.1f%%",  # 設置百分比的格式，這里保留一位小數
-    pctdistance=0.8,  # 設置百分比標簽與圓心的距離
-    labeldistance=1.1,  # 設置教育水平標簽與圓心的距離
-    startangle=180,  # 設置餅圖的初始角度
-    radius=1.2,  # 設置餅圖的半徑
-    counterclock=False,  # 是否逆時針，這里設置為順時針方向
-    wedgeprops={"linewidth": 1.5, "edgecolor": "green"},  # 設置餅圖內外邊界的屬性值
-    textprops={"fontsize": 10, "color": "black"},  # 設置文本標簽的屬性值
+    sizes,
+    explode=explode,
+    labels=labels,
+    colors=colors,
+    labeldistance=1.1,
+    autopct="%2.1f%%",
+    pctdistance=0.6,
+    shadow=True,
+    startangle=90,
 )
+
 
 # 第六張圖
 plt.subplot(236)
 
 #pie指定顏色
 
-datas=[40, 45, 15]
-lbls=['現金', '股票', '債券']
-exps=[0.2, 0, 0]
-clrs=['pink','lightblue','yellow']
-plt.pie(datas, labels=lbls, colors=clrs, explode=exps, autopct='%2.1f%%',startangle=0, shadow=True)
+sizes = [25, 30, 15, 10]
+labels = ["北部", "西部", "南部", "東部"]
+colors = ["red", "green", "blue", "yellow"]
+explode = (0, 0, 0.2, 0)
+
+plt.pie(sizes, labels=labels, colors=colors, explode=explode, autopct='%2.1f%%',startangle=0, shadow=True)
 
 
 plt.show()

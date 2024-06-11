@@ -53,32 +53,32 @@ num = 0
 def fnAdd():
     global num		#宣告為全域變數
     num += 1		#num加1
-    labelNum['text']=str(num)	#重設標籤文字
+    label2['text']=str(num)	#重設標籤文字
     if (num>0):		#若num大於0，就設歸零鈕可以使用
-        buttonClear['state']='normal'
+        button2['state']='normal'
     
 def fnClear():
     global num
     num = 0
-    labelNum['text']=str(num)
-    buttonClear['state']='disabled'  #設歸零鈕不能使用
+    label2['text']=str(num)
+    button2['state']='disabled'  #設歸零鈕不能使用
  
 window=tk.Tk()
 window.geometry("600x400")
 window.title('計數器')
 window.configure(bg='white')
 
-labelTitle=tk.Label(window, text = '計數器',font=('標楷體', 16),fg='white',bg='blue')
-labelNum=tk.Label(window, text = '0',font=('微軟正黑體', 36))
+label1=tk.Label(window, text = '計數器',font=('標楷體', 16),fg='white',bg='blue')
+label2=tk.Label(window, text = '0',font=('微軟正黑體', 36))
 
-buttonAdd=tk.Button(window, text = '加 1',pady=5,padx=10,command=fnAdd)
-buttonClear=tk.Button(window, text = '歸零',pady=5,padx=10,command=fnClear,state='disabled')
+button1=tk.Button(window, text = '加 1',pady=5,padx=10,command=fnAdd)
+button2=tk.Button(window, text = '歸零',pady=5,padx=10,command=fnClear,state='disabled')
 
-labelTitle.pack(pady=10,fill='x')
-labelNum.pack(pady=20,fill='x')
+label1.pack(pady=10,fill='x')
+label2.pack(pady=20,fill='x')
 
-buttonAdd.pack(pady=5, side='left',fill='x', expand=True)
-buttonClear.pack(pady=5, side='left',fill='x', expand=True)
+button1.pack(pady=5, side='left',fill='x', expand=True)
+button2.pack(pady=5, side='left',fill='x', expand=True)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個

@@ -5,31 +5,17 @@ import tkinter.messagebox
 import tkinter.simpledialog
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
+window.geometry("600x800")
+window.title('messagebox 1')
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 def confirm_exit():
-    if tkinter.messagebox.askyesno("關閉窗口","確認關閉窗口嗎"):
+    if tk.messagebox.askyesno("關閉窗口","確認關閉窗口嗎"):
         window.destroy()
+
 window.protocol("WM_DELETE_WINDOW", confirm_exit)
 
 window.mainloop()
@@ -37,47 +23,17 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x800")
+window.title('messagebox 2')
 
-window.withdraw()
+window.withdraw()   # 何意? 不顯示視窗? 相對應於 window.mainloop??
 
 response = tk.messagebox.askyesno('糟糕!!!', '還好嗎？')
 
 if(response == True):
-    print('沒問題');
+    print('你按了 Yes');
 else:
-    print('有問題');
-
-print('------------------------------------------------------------')	#60個
-
-def newfile():
-    tkinter.messagebox.showinfo("開新檔案","可在此撰寫開新檔案程式碼")
-    
-def savefile():
-    tkinter.messagebox.showinfo("儲存檔案","可在此撰寫儲存檔案程式碼")
-   
-def about():
-    tkinter.messagebox.showinfo("程式說明","作者:洪錦魁")
-
-window = tk.Tk()
-window.title("")
-window.geometry("300x160")          # 視窗寬300高160
-
-menu = tk.Menu(window)                 # 建立功能表物件
-window.config(menu=menu)
-
-filemenu = tk.Menu(menu)               # 建立檔案功能表
-menu.add_cascade(label="檔案",menu=filemenu)
-filemenu.add_command(label="開新檔案",command=newfile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="儲存檔案",command=savefile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="結束",command=window.destroy)
-
-helpmenu = tk.Menu(menu)               # 建立說明功能表
-menu.add_cascade(label="說明",menu=helpmenu)
-helpmenu.add_command(label="程式說明",command=about)
-
-window.mainloop()
+    print('你按了 No');
 
 print("------------------------------------------------------------")  # 60個
 
@@ -105,12 +61,9 @@ def confirm_to_quit():
     if tk.messagebox.askokcancel('温馨提示', '确定要退出吗?'):
         window.quit()
 
-# 创建顶层窗口
 window = tk.Tk()
-# 设置窗口大小
-window.geometry('240x160')
-# 设置窗口标题
-window.title('小游戏')
+window.geometry("600x800")
+window.title('messagebox 4 小遊戲')
 
 # 创建标签对象
 label = tk.Label(window, text='Hello, world!', font='Arial -32', fg='red')
@@ -129,8 +82,8 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-window.title('訊息方塊元件(messagebox)')
-window.geometry('180x120+20+50')
+window.geometry("600x800")
+window.title('messagebox 5 訊息方塊元件(messagebox)')
 
 def answer():
     tk.messagebox.showerror('顯示類訊息框', '這是messagebox.showerror的訊息框')
@@ -138,10 +91,28 @@ def answer():
 def callback():
     tk.messagebox.askyesno('詢問類訊息框', '這是messagebox.askyesno的訊息框')
 
-tk.Button(window, text='顯示詢問訊息框的外觀', command = callback).pack(side = 'left', padx = 10)
-tk.Button(window, text='顯示錯誤訊息框的外觀', command = answer).pack(side = 'left')
+tk.Button(window, text='顯示詢問訊息框的外觀', command = callback).pack()
+tk.Button(window, text='顯示錯誤訊息框的外觀', command = answer).pack()
 
 window.mainloop()
+
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('messagebox 1')
+
+def answer():
+    tk.messagebox.showerror('顯示類訊息框', '這是messagebox.showerror的訊息框')
+
+def callback():
+    tk.messagebox.askyesno('詢問類訊息框',  '這是messagebox.askyesno的訊息框')
+
+tk.Button(window, text='顯示詢問訊息框的外觀', command = callback).pack()
+tk.Button(window, text='顯示錯誤訊息框的外觀', command = answer).pack()
+
+window.mainloop()
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -157,6 +128,8 @@ def more():
         tk.messagebox.showinfo("deer的簡介",str2)
     
 window = tk.Tk()
+window.geometry("600x800")
+window.title('messagebox 6')
 
 lb = tk.Label(window,text="請點選想了解的動物簡介:").pack()
 choice = tk.IntVar()
@@ -174,73 +147,14 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-def myMsg():
-    tk.messagebox.showinfo("My Message Box","Python tkinter早安")
-    
-window = tk.Tk()
-window.geometry("300x300")
-
-tk.Button(window,text="Good Morning",command=myMsg).pack()
-
-print("------------------------------------------------------------")  # 60個
-
-def newfile():
-    tk.messagebox.showinfo("開新檔案","可在此撰寫開新檔案程式碼")
-    
-def savefile():
-    tk.messagebox.showinfo("儲存檔案","可在此撰寫儲存檔案程式碼")
-   
-def about():
-    tk.messagebox.showinfo("程式說明","作者:洪錦魁")
-
-menu = tk.Menu(window)                 # 建立功能表物件
-window.config(menu=menu)
-
-filemenu = tk.Menu(menu)               # 建立檔案功能表
-menu.add_cascade(label="檔案",menu=filemenu)
-filemenu.add_command(label="開新檔案",command=newfile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="儲存檔案",command=savefile)
-filemenu.add_separator()            # 增加分隔線
-filemenu.add_command(label="結束",command=window.destroy)
-
-helpmenu = tk.Menu(menu)               # 建立說明功能表
-menu.add_cascade(label="說明",menu=helpmenu)
-helpmenu.add_command(label="程式說明",command=about)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-def answer():
-    tk.messagebox.showerror('顯示類訊息框',
-            '這是messagebox.showerror的訊息框')
-
-def callback():
-    tk.messagebox.askyesno('詢問類訊息框', 
-            '這是messagebox.askyesno的訊息框')
-
-tk.Button(window, text='顯示詢問訊息框的外觀', command =
-          callback).pack(side = 'left', padx = 10)
-tk.Button(window, text='顯示錯誤訊息框的外觀', command =
-          answer).pack(side = 'left')
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-# end.py
-
 def fnEnd():
-    res = tkinter.messagebox.askokcancel('注意','確定要結束程式嗎？')
+    res = tk.messagebox.askokcancel('注意','確定要結束程式嗎？')
     if(res == True):	#若傳回值為 True
         window.destroy()   #結束程式執行
         
-window=tk.Tk()
-window.geometry('300x150')
-window.title('對話方塊')
+window = tk.Tk()
+window.geometry("600x800")
+window.title('messagebox 1')
 
 lblTitle=tk.Label(window, text = '按鈕結束程式',font=('標楷體', 16))
 btnEnd=tk.Button(window, text = '結束',pady=5,padx=10,command=fnEnd)
@@ -254,75 +168,35 @@ print("------------------------------------------------------------")  # 60個
 import tkinter.messagebox
 import tkinter.simpledialog
 
-tkinter.messagebox.showinfo("showinfo", "This is an info msg")
+print('messagebox 1 顯示訊息')
+tk.messagebox.showinfo("訊息框", "顯示訊息")
+tk.messagebox.showinfo(title="訊息框", message="顯示訊息")
 
-tkinter.messagebox.showwarning("showwarning", "This is a warning")
+tk.messagebox.showwarning("showwarning", "This is a warning")
 
-tkinter.messagebox.showerror("showerror", "This is an error")
+tk.messagebox.showerror("showerror", "This is an error")
 
-isYes = tkinter.messagebox.askyesno("ashyesno", "Continue?")
+print('messagebox 1 問答')
+
+isYes = tk.messagebox.askyesno("ashyesno", "Continue?")
 print(isYes)
 
-isOK = tkinter.messagebox.askokcancel("ashokcancle", "OK?")
+isOK = tk.messagebox.askokcancel("ashokcancle", "OK?")
 print(isOK)
 
-isYesNoCancel = tkinter.messagebox.askyesnocancel(
-    "askyesnocancel", "Yes, No, Cancel?") 
+isYesNoCancel = tk.messagebox.askyesnocancel("askyesnocancel", "Yes, No, Cancel?") 
 print(isYesNoCancel)
 
-name = tkinter.simpledialog.askstring(
-    "askstring", "Enter your name")
+name = tkinter.simpledialog.askstring("askstring", "Enter your name")
 print(name)
 
-age = tkinter.simpledialog.askinteger(
-    "askinteger", "Enter your age")
+age = tkinter.simpledialog.askinteger("askinteger", "Enter your age")
 print(age)
 
-weight = tkinter.simpledialog.askfloat(
-    "askfloat", "Enter your weight")
+weight = tkinter.simpledialog.askfloat("askfloat", "Enter your weight")
 print(weight)
 
 print("------------------------------------------------------------")  # 60個
-
-import tkinter.messagebox									# 匯入tkMessageBox模組
-
-def cmd():										# 按鈕訊息處理函數
-	global n									# 使用全局變數n
-	global buttontext								# 使用全局變數buttontext
-	n = n + 1
-	if n == 1:									# 判斷n的值，顯示不同的訊息框
-		tkinter.messagebox.askokcancel('Python Tkinter','askokcancel')		# 使用askokcancel函數
-		buttontext.set('skquestion')						# 變更按鈕上的文字
-	elif n == 2:
-		tk.messagebox.askquestion('Python Tkinter','skquestion')			# 使用askquestion函數
-		buttontext.set('askyesno')
-	elif n == 3:
-		tk.messagebox.askyesno('Python Tkinter','askyesno')			# 使用askyesno函數
-		buttontext.set('showerror')
-	elif n == 4:
-		tk.messagebox.showerror('Python Tkinter','showerror')			# 使用showerror函數
-		buttontext.set('showinfo')
-	elif n == 5:
-		tk.messagebox.showinfo('Python Tkinter','showinfo')			# 使用showinfo函數
-		buttontext.set('showwarning')
-	else :
-		n = 0									# 將n給予值為0重新開始循環
-		tk.messagebox.showwarning('Python Tkinter','showwarning')		# 使用showwarning函數
-		buttontext.set('askokcancel')
-n = 0											# 為n賦初值
-window = tk.Tk()
-
-buttontext = tk.StringVar() # 產生關聯按鈕文字的變數
-buttontext.set('askokcancel')								# 設定buttontext值
-button = tk.Button(window,								# 產生按鈕
-		textvariable = buttontext,						# 設定關聯變數
-		command = cmd)								# 設定事件處理函數
-button.pack()
-
-window.mainloop()										# 進入訊息循環
-
-print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -335,7 +209,6 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
-'''
 
 
 
@@ -344,26 +217,132 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
+簡易單行 messagebox 指令
+
+
 tk.messagebox.askokcancel(title="對話方塊", message="askokcancel")
 
-tk.messagebox.showinfo("Invoice Complete", "Invoice Complete")
-
-tkinter.messagebox.showinfo("Error","This word is not present in our lexicon\nDouble check it.")
-tkinter.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
-tkinter.messagebox.showinfo('圓周長','圓周長為 {:.2f} {}'.format(a,u))
-tkinter.messagebox.showinfo('圓面積','圓面積為 {:.2f} 平方{}'.format(a,u))
-tkinter.messagebox.showinfo('訊息',msg[:len(msg)-1])
-tkinter.messagebox.showinfo('訊息','期盼下次你能參加')
-        messagebox.showinfo("Notebook","歡迎使用Notebook")
-
-tkinter.messagebox.askokcancel('注意','你的BMI指數為：{} {}'.format(bmi, msg))
+tk.messagebox.showinfo("Error","This word is not present in our lexicon showing results for %s instead"% "aaaaa")
+tk.messagebox.showinfo('圓周長','圓周長為 {:.2f} {}'.format(a,u))
+tk.messagebox.showinfo('圓面積','圓面積為 {:.2f} 平方{}'.format(a,u))
+tk.messagebox.showinfo('訊息',msg[:len(msg)-1])
 
 
-tkinter.messagebox.showinfo('AAAAAAAA')
-tkinter.messagebox.showinfo("Check Sudoku Solution",  "The solution is valid")
-tkinter.messagebox.showwarning("Check Sudoku Solution", "The solution is invalid")
+tk.messagebox.askokcancel('注意','你的BMI指數為：{} {}'.format(bmi, msg))
+
+tk.messagebox.askokcancel('Python Tkinter','askokcancel')		# 使用askokcancel函數
+tk.messagebox.askquestion('Python Tkinter','skquestion')			# 使用askquestion函數
+tk.messagebox.askyesno('Python Tkinter','askyesno')			# 使用askyesno函數
+tk.messagebox.showerror('Python Tkinter','showerror')			# 使用showerror函數
+tk.messagebox.showinfo('Python Tkinter','showinfo')			# 使用showinfo函數
+tk.messagebox.showwarning('Python Tkinter','showwarning')		# 使用showwarning函數
+
+
 
 """
 
+
+
+
+
+
+
+import tkinter as tk
+import tkinter.messagebox
+import tkinter.simpledialog
+
+tk.messagebox.showinfo('訊息框', "showinfo")
+tk.messagebox.showwarning('訊息框', "showwarning")
+tk.messagebox.showerror('訊息框', "showerror")
+result =tk.messagebox.askquestion('訊息框', "askquestion")
+print(result)
+result=tk.messagebox.askokcancel('訊息框', "askokcancel")
+print(result)
+result=tk.messagebox.askyesno('訊息框', "showeraskyesnoror")
+print(result)
+result=tk.messagebox.askretrycancel('訊息框', "askretrycancel")
+print(result)
+
+ans = tkinter.messagebox.showinfo(title = 'IMS', message = "IMS show information")
+print("取得 info 結果 : ", ans)
+"""
+ans = tkinter.messagebox.showwarning('IMS', "IMS show warning")
+print("取得 warning 結果 : ", ans)
+
+ans = tkinter.messagebox.showerror('IMS', "IMS show error")
+print("取得 error 結果 : ", ans)
+
+ans = tkinter.messagebox.askquestion('IMS', "IMS ask question")
+print("取得 question 結果 : ", ans)
+
+ans = tkinter.messagebox.askokcancel('IMS', "IMS ask ok cancel")
+print("取得 ok/cancel 結果 : ", ans)
+
+ans = tkinter.messagebox.askyesno('IMS', "IMS ask yes no")
+print("取得 yes/no 結果 : ", ans)
+
+ans = tkinter.messagebox.askyesnocancel('IMS', "IMS ask yes no cancel") 
+print("取得 yes/no/cancel 結果 : ", ans)
+
+ans = tkinter.messagebox.askretrycancel("IMS", "IMS ask retry cancel")
+print("取得 retry/cancel 結果 : ", ans)
+
+ans = tkinter.simpledialog.askstring("askstring", "Enter your name")
+print("取得 字串 結果 : ", ans)
+
+ans = tkinter.simpledialog.askinteger("askinteger", "Enter your age")
+print("取得 整數 結果 : ", ans)
+
+ans = tkinter.simpledialog.askfloat("askfloat", "Enter your weight")
+print("取得 浮點數 結果 : ", ans)
+"""
+
+
+print("------------------------------------------------------------")  # 60個
+
+print('訊息方塊元件(messagebox)')
+
+def first():
+    tk.messagebox.showinfo('顯示類對話方塊',
+            '「顯示」類是以「show」開頭，只會顯示一個「確定」鈕。')
+
+def second():
+    tk.messagebox.askretrycancel('詢問類對話方塊', 
+            '「詢問」類是以「ask」為開頭，伴隨2~3個按鈕來產生互動。')
+
+tk.Button(window, text='顯示類對話方塊', command = first).pack()
+tk.Button(window, text='詢問類對話方塊', command = second).pack()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+"""
+新進mix
+
+
+ret = messagebox.askretrycancel("Test1","安裝失敗,再試一次?")
+print("安裝失敗",ret)
+
+ret = messagebox.askyesnocancel("Test2","編輯完成,是或否或取消?")
+print("編輯完成",ret)
+
+import tkinter.messagebox as tkMessageBox
+#import tkinter.messagebox
+
+from tkinter import messagebox
+
+
+from tkinter import filedialog, messagebox
+
+import tkinter.messagebox as tkmessagebox
+
+
+
+
+
+
+"""
 
 

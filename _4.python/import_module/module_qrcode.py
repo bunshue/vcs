@@ -30,6 +30,7 @@ print("------------------------------------------------------------")  # 60個
 print("qrcode：qrcode產生器")
 
 encode_text = "https://www.google.com.tw/"
+encode_text = "綠螘新醅酒，紅泥小火爐。晚來天欲雪，能飲一杯無？"
 
 print(
     "使用 qrcode.make ------------------------------------------------------------"
@@ -147,7 +148,7 @@ qrcode_image = qr.make_image()
 
 # qrcode_image.show()               # SVG 無法使用
 
-qrcode_image.save("tmp_qrcode11.svg")  # 儲存圖片，注意副檔名為 SVG
+qrcode_image.save("tmp_qrcode04.svg")  # 儲存圖片，注意副檔名為 SVG
 
 print("------------------------------------------------------------")  # 60個
 
@@ -185,12 +186,12 @@ qrcode_image5 = qr.make_image(
 qrcode_image6 = qr.make_image(
     image_factory=StyledPilImage, module_drawer=HorizontalBarsDrawer()
 )
-qrcode_image1.save("tmp_qrcode21.png")
-qrcode_image2.save("tmp_qrcode22.png")
-qrcode_image3.save("tmp_qrcode23.png")
-qrcode_image4.save("tmp_qrcode24.png")
-qrcode_image5.save("tmp_qrcode25.png")
-qrcode_image6.save("tmp_qrcode26.png")
+qrcode_image1.save("tmp_qrcode05.png")
+qrcode_image2.save("tmp_qrcode06.png")
+qrcode_image3.save("tmp_qrcode07.png")
+qrcode_image4.save("tmp_qrcode08.png")
+qrcode_image5.save("tmp_qrcode09.png")
+qrcode_image6.save("tmp_qrcode10.png")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -244,11 +245,11 @@ qrcode_image6 = qr.make_image(
     module_drawer=RoundedModuleDrawer(),
 )
 
-qrcode_image1.save("tmp_qrcode31.png")
-qrcode_image2.save("tmp_qrcode32.png")
-qrcode_image3.save("tmp_qrcode33.png")
-qrcode_image4.save("tmp_qrcode34.png")
-qrcode_image5.save("tmp_qrcode35.png")
+qrcode_image1.save("tmp_qrcode11.png")
+qrcode_image2.save("tmp_qrcode12.png")
+qrcode_image3.save("tmp_qrcode13.png")
+qrcode_image4.save("tmp_qrcode14.png")
+qrcode_image5.save("tmp_qrcode15.png")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -262,7 +263,7 @@ qr.make(fit=True)
 
 filename = "C:/_git/vcs/_1.data/______test_files1/_icon/唐.bmp"
 qrcode_image = qr.make_image(image_factory=StyledPilImage, embeded_image_path=filename)
-qrcode_image.save("tmp_qrcode12.png")
+qrcode_image.save("tmp_qrcode16.png")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -272,7 +273,7 @@ from barcode import EAN13
 
 number = "12345678987654321"  # 要轉換的數字
 my_code = EAN13(number)  # 轉換成 barcode
-my_code.save("tmp_qrcode13")  # 儲存為 SVG
+my_code.save("tmp_barcode01")  # 儲存為 SVG
 
 print("------------------------------------------------------------")  # 60個
 
@@ -281,7 +282,7 @@ from barcode.writer import ImageWriter  # 載入 barcode.writer 的 ImageWriter
 
 number = "12345678987654321"
 my_code = EAN13(number, writer=ImageWriter())  # 添加 writer=ImageWriter()
-my_code.save("tmp_qrcode14")
+my_code.save("tmp_barcode02")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -299,10 +300,10 @@ EAN = barcode.get_barcode_class("ean13")
 text = "123456789012"  # EAN僅能用數字, 必為12碼
 # 存svg檔
 ean = EAN(text)
-ean.save("tmp_ean13_barcode")
+ean.save("tmp_barcode03_EAN")
 # 存png檔
 ean = EAN(text, writer=ImageWriter())
-ean.save("tmp_ean13_barcode")
+ean.save("tmp_barcode04_EAN")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -358,7 +359,6 @@ input_area.pack(pady=5)
 image_area.pack(padx=3, pady=1)
 
 window.mainloop()
-
 
 print("------------------------------------------------------------")  # 60個
 

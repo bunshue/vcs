@@ -6,7 +6,7 @@ import tkinter as tk
 
 ESC = 27
 SPACE = 32
-RECORD_TIME_MINUTE = 10
+RECORD_TIME_MINUTE = 5
 
 ENCODING_TYPE = 'XVID'  # 編碼器
 #'XVID','DIVX','MJPG','I420'
@@ -15,6 +15,7 @@ print('------------------------------------------------------------')	#60個
 
 def StartWebCamRecord():
     global flag_stop_webcam_record
+    global ENCODING_TYPE
     flag_stop_webcam_record = False
     cap = cv2.VideoCapture(0)   #打開攝影機
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
@@ -38,13 +39,13 @@ def StartWebCamRecord():
 
     show_minitues_info = 0
     while(True):
-        ret,img = cap.read()    #擷取一張影像
+        ret, frame = cap.read()  #擷取一張影像
         
         now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-        cv2.putText(img, now, (20, 40),cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2, cv2.LINE_AA)
+        cv2.putText(frame, now, (20, 40),cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2, cv2.LINE_AA)
         
-        out.write(img)          #影像寫入影片檔
-        cv2.imshow('show',img)  #顯示影像
+        cv2.imshow('show',frame)
+        out.write(frame)  # 影像寫入影片檔
 
         record_time_elapsed = time.time() - record_time_st
         record_minute = int(record_time_elapsed//60)

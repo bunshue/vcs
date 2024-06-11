@@ -1,19 +1,25 @@
-import sys
+# 指定電腦視覺分析的金鑰
+david_subscriptionKey = 'ssssssssssssssssss'
+# 指定電腦視覺分析服務網址(Web API)
+# 分析服務網址是電腦視覺分析服務端點加上vision/v3.1/analyze
+david_endpoint = 'eeeeeeeeeeeeeeeeeeeeee'
 
+print("------------------------------------------------------------")  # 60個
+
+import os
+import sys
 import requests, json
 
 print("------------------------------------------------------------")  # 60個
 print('azure 01')
 
-# 指定電腦視覺分析的金鑰
-subscriptionKey = 'kkkkk'
-# 指定電腦視覺分析服務網址(Web API)
-# 分析服務網址是電腦視覺分析服務端點加上vision/v3.1/analyze
-endpoint = 'eeeee'
+subscriptionKey = david_subscriptionKey
+endpoint = david_endpoint
 analyzeUrl = endpoint + 'vision/v3.1/analyze'
 
 # 指定 filename 為分析圖像的本地路徑。
 filename = 'C:/_git/vcs/_4.python/_data/lena_color.jpg'
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
 imageData = open(filename, 'rb').read()
@@ -32,17 +38,13 @@ print(strJson)  # 以JSON字串資料印出分析結果
 print("------------------------------------------------------------")  # 60個
 print('azure 02')
 
-import requests, json
-
-# 指定電腦視覺分析的金鑰
-subscriptionKey = 'kkkkk'
-# 指定電腦視覺分析服務網址(Web API)
-# 分析服務網址是電腦視覺分析服務端點加上vision/v3.1/analyze
-endpoint = 'eeeee'
+subscriptionKey = david_subscriptionKey
+endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
 filename = 'C:/_git/vcs/_4.python/_data/lena_color.jpg'
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
 imageData = open(filename, "rb").read()
@@ -73,20 +75,17 @@ print('分析信度：%f'%(imgConfidence))
 print("------------------------------------------------------------")  # 60個
 print('azure 03')
 
-import requests, json, os
 import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 
-# 指定電腦視覺分析的金鑰
-subscriptionKey = 'kkkkk'
-# 指定電腦視覺分析服務網址(Web API)
-# 分析服務網址是電腦視覺分析服務端點加上vision/v3.1/analyze
-endpoint = 'eeeee'
+subscriptionKey = david_subscriptionKey
+endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
 filename = 'C:/_git/vcs/_4.python/_data/lena_color.jpg'
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
 imageData = open(filename, "rb").read()
@@ -124,16 +123,12 @@ plt.savefig('azure03.png', dpi=300)  # 存圖
 print("------------------------------------------------------------")  # 60個
 print('azure 04')
 
-import requests, json, os
 import matplotlib.pyplot as plt
 from PIL import Image
 from io import BytesIO
 
-# 指定電腦視覺分析的金鑰
-subscriptionKey = 'kkkkk'
-# 指定電腦視覺分析服務網址(Web API)
-# 分析服務網址是電腦視覺分析服務端點加上vision/v3.1/analyze
-endpoint = 'eeeee'
+subscriptionKey = david_subscriptionKey
+endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
@@ -178,21 +173,18 @@ print('描述信度：%f' %(confidence))
 print("------------------------------------------------------------")  # 60個
 print('azure 05')
 
-import requests, json
 import matplotlib.pyplot as plt
 from matplotlib import patches
 from PIL import Image
 from io import BytesIO
 
-# 指定電腦視覺分析的金鑰
-subscriptionKey = 'kkkkk'
-# 指定電腦視覺分析服務網址(Web API)
-# 分析服務網址是電腦視覺分析服務端點加上vision/v3.1/analyze
-endpoint = 'eeeee'
+subscriptionKey = david_subscriptionKey
+endpoint = david_endpoint
 analyzeUrl = endpoint + "vision/v3.1/analyze"
 
 # 指定 filename 為分析圖像的本地路徑。
 filename = 'C:/_git/vcs/_4.python/_data/lena_color.jpg'
+filename = 'C:/_git/vcs/_4.python/opencv/data/Bill_Gates/Bill_Gates01.jpg'
 
 # 將圖像讀入位元組陣列
 imageData = open(filename, "rb").read()

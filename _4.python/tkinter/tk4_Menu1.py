@@ -859,6 +859,39 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+def newfile():
+    print('你按了 newfile');
+    
+def savefile():
+    print('你按了 savefile');
+   
+def about():
+    print('你按了 about');
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('messagebox 7')
+
+menu = tk.Menu(window)                 # 建立功能表物件
+window.config(menu=menu)
+
+filemenu = tk.Menu(menu)               # 建立檔案功能表
+menu.add_cascade(label="檔案",menu=filemenu)
+filemenu.add_command(label="開新檔案",command=newfile)
+filemenu.add_separator()            # 增加分隔線
+filemenu.add_command(label="儲存檔案",command=savefile)
+filemenu.add_separator()            # 增加分隔線
+filemenu.add_command(label="結束",command=window.destroy)
+
+helpmenu = tk.Menu(menu)               # 建立說明功能表
+menu.add_cascade(label="說明",menu=helpmenu)
+helpmenu.add_command(label="程式說明",command=about)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
 
 print("------------------------------------------------------------")  # 60個
 
