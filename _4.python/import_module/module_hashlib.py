@@ -37,6 +37,7 @@ import hashlib
 # 要計算 MD5 雜湊值的資料
 clear_text = "this is a lion-mouse"
 
+
 print("------------------------------------------------------------")  # 60個
 
 print("可用的雜湊演算法")
@@ -63,40 +64,7 @@ print(h)
 
 print("------------------------------------------------------------")  # 60個
 
-
-def calculate_file_hash(clear_filename):
-    """Return the SHA256 checksum for the file at `fpath`.
-
-    Parameters
-    ----------
-    fpath : pathlib.Path
-        The absolute path to the file that is to be checksummed.
-
-    Returns
-    -------
-    str
-        The SHA256 checksum of the file.
-    """
-    BLOCKSIZE = 65536
-    hasher = hashlib.sha256()
-    with open(clear_filename, "rb") as f:
-        buf = f.read(BLOCKSIZE)
-        while len(buf) > 0:
-            hasher.update(buf)
-            buf = f.read(BLOCKSIZE)
-
-    return hasher.hexdigest()
-
-clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
-calculated_filehash = calculate_file_hash(clear_filename)
-print("SHA256")
-print("預設答案 : ", "5d57e3deb441b789f6035d28dcbbaf6a436c54450972786fad4ce4527059d291")
-print("計算結果 : ", calculated_filehash)
-
-print("------------------------------------------------------------")  # 60個
-
 print("算一個字串的hashcode SHA1")
-print("ccccccccccccccccccccccccccc")
 
 s = hashlib.sha1()
 s.update(clear_text.encode("utf-8"))
@@ -111,7 +79,6 @@ print(result)
 
 result = hashlib.sha1(clear_text.encode("utf-8")).hexdigest()
 print(result)
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -144,11 +111,47 @@ clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 s = hashlib.sha1()
 s.update(clear_filename.encode("utf-8"))
 
+# 以二進位方式讀取檔案
 with open(clear_filename, "rb") as f:
     s.update(f.read())
 
 h = s.hexdigest()
 print(h)
+
+print("------------------------------------------------------------")  # 60個
+
+print("算一個檔案的hashcode SHA256")
+
+
+def calculate_file_hash(clear_filename):
+    """Return the SHA256 checksum for the file at `fpath`.
+
+    Parameters
+    ----------
+    fpath : pathlib.Path
+        The absolute path to the file that is to be checksummed.
+
+    Returns
+    -------
+    str
+        The SHA256 checksum of the file.
+    """
+    BLOCKSIZE = 65536
+    hasher = hashlib.sha256()
+    # 以二進位方式讀取檔案
+    with open(clear_filename, "rb") as f:
+        buf = f.read(BLOCKSIZE)
+        while len(buf) > 0:
+            hasher.update(buf)
+            buf = f.read(BLOCKSIZE)
+
+    return hasher.hexdigest()
+
+clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
+calculated_filehash = calculate_file_hash(clear_filename)
+print("SHA256")
+print("預設答案 : ", "5d57e3deb441b789f6035d28dcbbaf6a436c54450972786fad4ce4527059d291")
+print("計算結果 : ", calculated_filehash)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -183,6 +186,7 @@ print(filenames)
 allmd5s = dict()
 for filename in filenames:
     long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
+    # 以二進位方式讀取檔案
     img_md5 = hashlib.md5(open(long_filename, "rb").read()).digest()
     if img_md5 in allmd5s:
         print("---------------")
@@ -344,13 +348,14 @@ def calculate_md5sum(*files):
             sts = printsum(f) or sts
     return sts
 
-def printsum(filename):
-    fp = open(filename, 'rb')
-    sts = printsumfp(fp, filename)
+def printsum(clear_filename):
+    # 以二進位方式讀取檔案
+    fp = open(clear_filename, 'rb')
+    sts = printsumfp(fp, clear_filename)
     fp.close()
     return sts
 
-def printsumfp(fp, filename):
+def printsumfp(fp, clear_filename):
     m = hashlib.md5()
     while 1:
         data = fp.read(BUFSUZE)
@@ -361,13 +366,13 @@ def printsumfp(fp, filename):
         m.update(data)
     return m.hexdigest()
 
-#filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-filename = "Python-3.7.17.tar.xz"
-#filename = "\\192.168.1.231\RD_Soft\_主機程式\542-0002\BOOT.bin"
+#clear_filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+clear_filename = "Python-3.7.17.tar.xz"
+#clear_filename = "\\192.168.1.231\RD_Soft\_主機程式\542-0002\BOOT.bin"
 
 print('計算一個檔案的 MD5 值 1')
-print('檔案 :', filename)
-cc = calculate_md5sum(filename)
+print('檔案 :', clear_filename)
+cc = calculate_md5sum(clear_filename)
 print('結果 :', cc)
 
 print('----------')
@@ -382,6 +387,7 @@ clear_filename = "Python-3.7.17.tar.xz"
 
 m = hashlib.md5()
 
+# 以二進位方式讀取檔案
 with open(clear_filename, "rb") as f:
     # 分批讀取檔案內容，計算 MD5 雜湊值
     for chunk in iter(lambda: f.read(4096), b""):
@@ -397,6 +403,7 @@ print('計算一個檔案的 MD5 值 3')
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 clear_filename = "Python-3.7.17.tar.xz"
 
+# 以二進位方式讀取檔案
 md5 = hashlib.md5(open(clear_filename, "rb").read()).digest()
 print(type(md5))
 print(md5)
@@ -409,7 +416,8 @@ data = hashlib.md5()  # 建立data物件
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
 clear_filename = "Python-3.7.17.tar.xz"
 
-with open(clear_filename, "rb") as fn:  # 以二進位方式讀取檔案
+# 以二進位方式讀取檔案
+with open(clear_filename, "rb") as fn:
     btxt = fn.read()
     data.update(btxt)
 

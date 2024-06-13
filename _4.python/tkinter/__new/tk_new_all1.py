@@ -8,7 +8,7 @@ from PIL import ImageTk, Image
 import random
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 window.geometry("600x800")
 window.title('new all 1')
@@ -176,34 +176,6 @@ button1.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-print('在視窗的右下方顯示兩個Label')
-oklabel = tk.Label(window,text="OK",       # 標籤內容是OK
-              font="Times 20 bold", # Times字型20粗體
-              fg="white",bg="blue") # 藍底白字
-oklabel.pack(anchor=tk.S,side=tk.RIGHT,   # 從右開始在南方配置
-             padx=10,pady=10)       # x和y軸間距皆是10
-
-nolabel = tk.Label(window,text="NO",       # 標籤內容是OK
-              font="Times 20 bold", # Times字型20粗體
-              fg="white",bg="red")  # 藍底白字
-nolabel.pack(anchor=tk.S,side=tk.RIGHT,   # 從右開始在南方配置
-             pady=10)               # y軸間距皆是10
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title('new all 2')
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
 # 輸入文字框中的字元被顯示為“*”
 entry11 = tk.Entry(window, show = '*', width = 30)
 entry11.pack()
@@ -226,6 +198,18 @@ entry15.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('new all 2')
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 label1 = tk.Label(window,
 			anchor = tk.E,# 設定文字的位置
@@ -373,9 +357,24 @@ for bitMap in bitMaps:
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
+print('在視窗的右下方顯示兩個Label')
+oklabel = tk.Label(window,text="OK",       # 標籤內容是OK
+              font="Times 20 bold", # Times字型20粗體
+              fg="white",bg="blue") # 藍底白字
+oklabel.pack(anchor=tk.S,side=tk.RIGHT,   # 從右開始在南方配置
+             padx=10,pady=10)       # x和y軸間距皆是10
+
+nolabel = tk.Label(window,text="NO",       # 標籤內容是OK
+              font="Times 20 bold", # Times字型20粗體
+              fg="white",bg="red")  # 藍底白字
+nolabel.pack(anchor=tk.S,side=tk.RIGHT,   # 從右開始在南方配置
+             pady=10)               # y軸間距皆是10
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 
