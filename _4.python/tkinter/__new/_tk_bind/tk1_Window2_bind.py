@@ -8,18 +8,7 @@ import tkinter.filedialog
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
+window.geometry("600x800")
 # 設定主視窗標題
 title = '綁定鍵盤滑鼠事件 Window'
 window.title(title)
@@ -145,12 +134,37 @@ print("------------------------------------------------------------")  # 60個
 def mouseMotion(event):             # Mouse移動
     x = event.x
     y = event.y
-    textvar = "Mouse location - x:{}, y:{}".format(x,y)
+    textvar = "滑鼠位置 : x:{}, y:{}".format(x,y)
+    var.set(textvar)
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('window.bind 1')
+
+x, y = 0, 0                         # x,y座標
+var = tk.StringVar()
+text = "Mouse location - x:{}, y:{}".format(x,y)
+var.set(text)
+
+lab = tk.Label(window,textvariable=var)  # 建立標籤
+lab.pack(anchor=tk.S,side=tk.RIGHT,padx=10,pady=10)
+
+window.bind("<Motion>",mouseMotion)   # 增加事件處理程式
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+def mouseMotion(event):             # Mouse移動
+    x = event.x
+    y = event.y
+    textvar = "滑鼠位置 : x:{}, y:{}".format(x,y)
     var.set(textvar)
     
+
 window = tk.Tk()
-window.title("ch40_20_2")             # 視窗標題
-window.geometry("300x180")            # 視窗寬300高180
+window.geometry("600x800")
+window.title('window.bind 1')
 
 x, y = 0, 0                         # x,y座標
 var = tk.StringVar()
@@ -167,7 +181,10 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 print('按右鍵 另存新圖')
+
 window = tk.Tk()
+window.geometry("600x800")
+window.title('window.bind 1')
 
 from PIL import ImageTk, Image
 
@@ -189,7 +206,10 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 print('按右鍵 右鍵選單 另存新圖')
+
 window = tk.Tk()
+window.geometry("600x800")
+window.title('window.bind 1')
 
 from PIL import ImageTk, Image
 
@@ -218,34 +238,12 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
-def mouseMotion(event):             # Mouse移動
-    x = event.x
-    y = event.y
-    textvar = "滑鼠位置 : x:{}, y:{}".format(x,y)
-    var.set(textvar)
-    
-window = tk.Tk()
-window.geometry("600x400")
-
-x, y = 0, 0                         # x,y座標
-var = tk.StringVar()
-text = "Mouse location - x:{}, y:{}".format(x,y)
-var.set(text)
-
-lab = tk.Label(window,textvariable=var)  # 建立標籤
-lab.pack(anchor=tk.S,side=tk.RIGHT,padx=10,pady=10)
-
-window.bind("<Motion>",mouseMotion)   # 增加事件處理程式
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 def leave(event):                       # <Esc>事件處理程式
     print('你按了 ESC')
    
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
+window.title('window.bind 1')
 
 window.bind("<Escape>",leave)             # Esc鍵綁定leave函數
 lab = tk.Label(window,text="測試Esc鍵",      # 標籤區域
@@ -262,7 +260,8 @@ def key(event):                     # 處理鍵盤按a ... z
     print("按了 " + repr(event.char) + " 鍵") 
    
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
+window.title('window.bind 1')
 
 window.bind("<Key>",key)              # <Key>鍵綁定key函數
 
@@ -298,7 +297,8 @@ def showPopupMenu(event):               # 顯示彈出功能表
 print('右鍵選單')
 
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
+window.title('window.bind 1')
 
 popupmenu = tk.Menu(window,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立3個指令清單
@@ -335,7 +335,8 @@ def showPopupMenu(event):               # 顯示彈出功能表
     popupmenu.post(event.x_root,event.y_root)
 
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
+window.title('window.bind 1')
 
 popupmenu = tk.Menu(window,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立3個指令清單
@@ -388,7 +389,8 @@ def redoJob():                          # 重複redo方法
         print("先前未有動作")
 
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
+window.title('window.bind 1')
 
 popupmenu = tk.Menu(window,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立3個指令清單

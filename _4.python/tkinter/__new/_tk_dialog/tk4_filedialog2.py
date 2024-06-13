@@ -42,10 +42,21 @@ def button01Click():
     text1.insert(tk.END, current_text)
 
 def button02Click():
-    print('你按了button02')
+    print('你按了button02 另存新檔1')
+    file = tkinter.filedialog.asksaveasfilename(defaultextension=".jpg")
+    if file:
+        filename = file
+        message = '另存新檔, 檔案 :' + filename
+        print(message)
+        text1.insert('end', message)
 
 def button03Click():
     print('你按了button03')
+    ret = tk.messagebox.askyesno("python", "是否離開程式?")
+    if ret == True:
+        window.destroy()                  # 結束程式
+    else:
+        return
 
 def button04Click():
     print('你按了button04')
@@ -54,15 +65,7 @@ def button05Click():
     print('你按了button05')
 
 def button10Click():
-    print('你按了button10 另存新檔1')
-    file = tkinter.filedialog.asksaveasfilename(defaultextension=".jpg")
-    if file:
-        filename = file
-        message = '另存新檔, 檔案 :' + filename
-        print(message)
-        text1.insert('end', message)
-        
-   
+    print('你按了button10')
 
 def button11Click():
     print('你按了button11')
@@ -81,11 +84,6 @@ def button15Click():
 
 def button20Click():
     print('你按了button20')
-    ret = tk.messagebox.askyesno("python", "是否離開程式?")
-    if ret == True:
-        window.destroy()                  # 結束程式
-    else:
-        return
 
 def button21Click():
     print('你按了button21')
@@ -138,9 +136,9 @@ button00 = tk.Button(window, width = w, height = h, command = button00Click, tex
 button00.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button01 = tk.Button(window, width = w, height = h, command = button01Click, text = '選取檔案2 pdf')
 button01.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button02 = tk.Button(window, width = w, height = h, command = button02Click, text = '----')
+button02 = tk.Button(window, width = w, height = h, command = button02Click, text = '另存新檔1')
 button02.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button03 = tk.Button(window, width = w, height = h, command = button03Click, text = '----')
+button03 = tk.Button(window, width = w, height = h, command = button03Click, text = '詢問是否離開程式')
 button03.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button04 = tk.Button(window, width = w, height = h, command = button04Click, text = '----')
 button04.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
@@ -153,7 +151,7 @@ button03.place(x = x_st + dx * 3, y = y_st + dy * 0)
 button04.place(x = x_st + dx * 4, y = y_st + dy * 0)
 button05.place(x = x_st + dx * 5, y = y_st + dy * 0)
 
-button10 = tk.Button(window, width = w, height = h, command = button10Click, text = '另存新檔1')
+button10 = tk.Button(window, width = w, height = h, command = button10Click, text = '----')
 button10.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button11 = tk.Button(window, width = w, height = h, command = button11Click, text = '----')
 button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
@@ -172,7 +170,7 @@ button13.place(x = x_st + dx * 3, y = y_st + dy * 1)
 button14.place(x = x_st + dx * 4, y = y_st + dy * 1)
 button15.place(x = x_st + dx * 5, y = y_st + dy * 1)
 
-button20 = tk.Button(window, width = w, height = h, command = button20Click, text = '詢問是否離開程式')
+button20 = tk.Button(window, width = w, height = h, command = button20Click, text = '----')
 button20.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button21 = tk.Button(window, width = w, height = h, command = button21Click, text = '----')
 button21.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)

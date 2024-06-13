@@ -8,8 +8,21 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title('button 1')
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 button5 = tk.Button(window, text = '指定按鍵大小', width = 20, height = 5)
 button5.pack()  #pack無參數, 控件置中
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+label = tk.Label(window, text="改變鼠標外形", relief="raised",
+            width=28, height = 3,
+            bg="lightyellow",
+            padx=5,pady=10,
+            cursor="heart")     # 滑鼠外形
+label.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -244,6 +257,62 @@ print("------------------------------------------------------------")  # 60個
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
+
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('button 3')
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+print('Button state...')
+
+#Button屬性state的常數值
+state = ['normal', 'active', 'disabled']
+
+#for廻圈配合state參數值顯示按鈕狀態
+for item in state:
+    button1 = tk.Button(window, text = item, state = item)
+    button1.pack()    #以元件加入主視窗
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+print('連續建立多個button, 使用Button屬性state')
+tk.Label(window,text="建立3個button, normal").pack()
+for i in range(3):
+    button = tk.Button(window, text = 'button'+str(i), state = 'normal')
+    button.pack()
+
+tk.Label(window,text="建立3個button, active").pack()
+for i in range(3):
+    button = tk.Button(window, text = 'button'+str(i), state = 'active')
+    button.pack()
+
+tk.Label(window,text="建立3個button, disabled").pack()
+for i in range(3):
+    button = tk.Button(window, text = 'button'+str(i), state = 'disabled')
+    button.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
 
 
 window.mainloop()

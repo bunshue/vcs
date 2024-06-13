@@ -22,14 +22,24 @@ import datetime
 
 ESC = 27
 SPACE = 32
-RECORD_TIME_MINUTE = 5
+RECORD_TIME_MINUTE = 3
 
 ENCODING_TYPE = 'XVID'  # 編碼器
 #'XVID','DIVX','MJPG','I420'
 
+"""
+print("------------------------------------------------------------")  # 60個
+print('最簡錄影, 一直錄, 按 ESC 離開')
+
+
+
+"""
 print("------------------------------------------------------------")  # 60個
 
-print("錄影, 按 ESC 離開")
+print("錄影, 按 SPACE 存圖, 按 ESC 離開")
+# MODE 0 : 一直錄
+# MODE 1 : 一檔錄固定時間, ex 10分一檔
+# MODE 2 : 一檔錄固定檔案容量, ex 500M一檔
 
 cap = cv2.VideoCapture(0)   #打開攝影機
 if not cap.isOpened():

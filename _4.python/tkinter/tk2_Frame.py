@@ -152,7 +152,8 @@ window.title('Frame 3')
 
 # Add labels and entries to frame1
 frame1 = tk.Frame(window, bg = 'pink')
-frame1.grid(row = 2, column = 1, pady = 10)
+frame1.pack()
+
 tk.Label(frame1, text = "Number 1:").pack(side = tk.LEFT)
 string1 = tk.StringVar()
 tk.Entry(frame1, width = 5, textvariable = string1, justify = tk.RIGHT).pack(side = tk.LEFT)
@@ -162,6 +163,45 @@ tk.Entry(frame1, width = 5, textvariable = string2, justify = tk.RIGHT).pack(sid
 tk.Label(frame1, text = "Result:").pack(side = tk.LEFT)
 string3 = tk.StringVar()
 tk.Entry(frame1, width = 5, textvariable = string3, justify = tk.RIGHT).pack(side = tk.LEFT)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+#第一個frame
+frame1 = tk.Frame(window,bg="lightyellow")
+frame1.pack()
+
+button1 = tk.Button(frame1,text="紅",fg="red")
+button1.pack(side=tk.LEFT,padx=5,pady=5)
+
+button2 = tk.Button(frame1,text="綠",fg="green")
+button2.pack(side=tk.LEFT,padx=5,pady=5)
+
+button3 = tk.Button(frame1,text="藍",fg="blue")
+button3.pack(side=tk.LEFT,padx=5,pady=5)
+
+#第二個frame
+frame2 = tk.Frame(window,bg="lightblue")
+frame2.pack()
+
+button4 = tk.Button(frame2,text="紫",fg="purple")
+button4.pack(side=tk.LEFT,padx=5,pady=5)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+frame1 = tk.Frame(width=300,height=30,relief=tk.GROOVE, borderwidth=5).pack()
+frame2 = tk.Frame(width=300,height=30,relief=tk.RAISED, borderwidth=5).pack()
+frame3 = tk.Frame(width=300,height=30,relief=tk.RIDGE, borderwidth=5).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 
 

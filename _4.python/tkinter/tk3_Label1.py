@@ -387,6 +387,26 @@ tk.Label(window, text = msg, width=28,wraplength=240,justify='left',\
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
+from tkinter.ttk import Separator
+
+poemTitle = "黃鶴樓送孟浩然之廣陵 李白"
+poemContent = """故人西辭黃鶴樓，
+煙花三月下揚州。
+孤帆遠影碧空盡，
+唯見長江天際流。"""
+
+label1 = tk.Label(window,text=poemTitle, font="Helvetic 20 bold")
+label1.pack(padx=10,pady=10)
+
+sep = Separator(window,orient=tk.HORIZONTAL)
+sep.pack(fill=tk.X,padx=5)
+
+label2 = tk.Label(window,text=poemContent)
+label2.pack(padx=10,pady=10)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 lab = tk.Label(window,bg="yellow",fg="blue",
             height=2,width=12,
