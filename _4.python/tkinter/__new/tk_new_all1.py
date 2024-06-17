@@ -11,190 +11,104 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('new all 1')
+window.title('tkinter的變數類別')
 
-# Label / Entry / Text / 
-# 一個按鈕 設定一個變數給控件 並把這個控件的變數讀出來
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
-def show_data_in_label():
-    global count
-    count += 1
-    label1_data.set("Label歡迎來到美國" + str(count))
-    cc = label1_data.get()
-    print('取得 Label 的資料 :', cc)
-    entry1_data.set("Entry歡迎來到美國" + str(count))
-    cc = entry1_data.get()
-    print('取得 Entry 的資料 :', cc)
-    label2.configure(text = "Label :" + entry2.get())
-    print('取得Entry的資料 : ', entry2.get())
-    height = userH.get()
-    weight = userW.get()
-    print('取得 height = ', height)
-    print('取得 weight = ', weight)
+#建立變數
+
+"""
+tkinter 控件的變數類別(4)
+tk.StringVar() 字串，
+tk.IntVar() 整數，預設值為 0
+tk.DoubleVar() 浮點數，預設值為 0.0
+tk.Boolean()  # 布林值變數，True是1， False是0 fail
+"""
 
 count = 0
+variable_string = tk.StringVar()  # 建立一個字串變數, 預設值為空字串
+variable_int = tk.IntVar()  # 宣告variable_int為整數物件
+variable_double = tk.DoubleVar()  # 宣告variable_double為浮點數物件
+variable_boolean = tk.BooleanVar()  # 布林值變數，True是1， False是0 fail
 
-tk.Label(window,text="使用 字串 物件").pack()
-label1_data = tk.StringVar()#建立一個變數給label
-label1 = tk.Label(window, textvariable=label1_data).pack()
+def read_write_tk_variables():
+    global count
+    count += 1
+    string_mesg = "歡迎來到美國" + str(count)
+    variable_string.set(string_mesg)
+    
+    cc = variable_string.get()
+    print('取得 Label 的資料 :', cc)
+    #label1.configure(text = "Label :" + str(count))
+   
+    cc = variable_string.get()
+    print('取得 Entry 的資料 :', cc)
+    #print('取得 Entry 的資料 : ', entry2.get())
+    height = variable_double.get()
+    weight = variable_int.get()
+    print('取得 height = ', height)
+    print('取得 weight = ', weight)
+    print("讀取資料 :", variable_string.get())
+    
+    #label1.config(text='已按下按鈕')
 
-entry1_data = tk.StringVar()#建立一個變數給entry
-entry1 = tk.Entry(window, textvariable=entry1_data).pack()
+    value1=entry1.get()
+    print('取得 Entry 1 資料 :', value1)
+    value2=entry2.get()
+    print('取得 Entry 2 資料 :', value2)
+    value3=entry3.get()
+    print('取得 Entry 3 資料 :', value3)
+    value4=entry4.get()
+    print('取得 Entry 4 資料 :', value4)
+    
+frame1 = tk.Frame()
+frame1.pack()
 
-entry2 = tk.Entry(window)
-entry2.pack()
+tk.Label(frame1, text = '  種類  ').pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+tk.Label(frame1, text = '  字串  ').pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+tk.Label(frame1, text = '  整數  ').pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+tk.Label(frame1, text = '  浮點  ').pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+tk.Label(frame1, text = '  布林  ').pack()
 
-label2 = tk.Label(window)
-label2.pack()
+frame1 = tk.Frame()
+frame1.pack()
 
-tk.Label(window,text="使用 浮點數 物件").pack()
-userH=tk.DoubleVar()		#宣告userH為浮點數物件
-entry9 = tk.Entry(window,textvariable=userH).pack()  #textvariable參數值為userH
+tk.Label(frame1, text = 'Label').pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+label1 = tk.Label(frame1, textvariable=variable_string).pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+label2 = tk.Label(frame1, textvariable=variable_int).pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+label3 = tk.Label(frame1, textvariable=variable_double).pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+label4 = tk.Label(frame1, textvariable=variable_boolean).pack()
 
-tk.Label(window,text="使用 整數 物件").pack()
-userW=tk.IntVar()		#宣告userW為整數物件
-entry10 = tk.Entry(window,textvariable=userW).pack()  #textvariable參數值為userW
+frame2 = tk.Frame()
+frame2.pack()
 
-button1 = tk.Button(window, text="寫讀 Label/Entry 上的資料", command=show_data_in_label).pack()
+tk.Label(frame2, text = 'Button').pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+button1 = tk.Button(frame2, textvariable=variable_string)
+button1.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+button2 = tk.Button(frame2, textvariable=variable_string)
+button2.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+button3 = tk.Button(frame2, textvariable=variable_string)
+button3.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+button4 = tk.Button(frame2, textvariable=variable_string)
+button4.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
+frame3 = tk.Frame()
+frame3.pack()
 
-xL1 = tk.StringVar()
-label = tk.Label(window,textvariable=xL1)
-label.pack()
-xL1.set("設定Label的資料1")
-
-xL2 = tk.StringVar()
-label = tk.Label(window,textvariable=xL2)
-label.pack()
-xL2.set("設定Label的資料2")
-
-xL3 = tk.StringVar()
-label = tk.Label(window,textvariable=xL3)
-label.pack()
-xL3.set("設定Label的資料3")
-
-xE2 = tk.StringVar()
-entry4 = tk.Entry(window,textvariable=xE2)     # 設定Label內容是變數x
+tk.Label(frame3, text = 'Entry').pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+entry1 = tk.Entry(frame3, textvariable=variable_string)
+entry1.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+entry2 = tk.Entry(frame3, textvariable=variable_int)
+entry2.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+entry3 = tk.Entry(frame3, textvariable=variable_double)
+entry3.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
+entry4 = tk.Entry(frame3, textvariable=variable_boolean)
 entry4.pack()
 
-def hit():                              # 讀取資料
-    print("讀取資料:",xE1.get())
-  
-xE1 = tk.StringVar()
-entry3 = tk.Entry(window,textvariable=xE1)     # 設定Label內容是變數x
-entry3.pack()
 
+tk.Button(window, text = "寫讀 控件 上的資料", command = read_write_tk_variables).pack()
 
-
-button1 = tk.Button(window,text="讀取Entry的資料",command=hit)    # 建立讀取按鈕
-button1.pack()
-
-def button_command2():
-    print(entry5.get())
-    t1=entry5.get()
-    v.set(t1)
-
-entry5=tk.Entry(window)
-entry5.pack()
-
-button1 =tk.Button(window,text="press me1",command=button_command2)
-button1.pack()
-
-v = tk.StringVar()
-label1 =tk.Label(window,text="Hello World!", textvariable=v)
-label1.pack()
-v.set("New Text!")
-
-def get_entry_data():
-    print('你按了 get')
-    cc = entry16.get()
-    print(cc)
-    cc = entry17.get()
-    print(cc)
-    
-name_data = tk.StringVar()#名字
-tk.Label(window,text="使用 整數 物件").pack()
-weight_data = tk.IntVar()#體重
-
-entry16 = tk.Entry(window, foreground = "green", textvariable = name_data)
-entry16.pack()
-
-entry17 = tk.Entry(window, foreground = "green", textvariable = weight_data)
-entry17.pack()
-
-tk.Button(window, text = "取得上面Entry的資料", command = get_entry_data).pack()
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-def buttonClick1():
-     buttonvar.set("心想事成，天天開心")
-
-def buttonClick2():
-     #改變背景顏色
-     button2.config(bg = "blue")  
-
-print("按鈕元件(Button)功能示範 Entry")
-    
-buttonvar = tk.StringVar() 
-button1 = tk.Button(window, textvariable=buttonvar, command=buttonClick1)
-buttonvar.set("按下我會有祝賀語1")
-button1.pack()
-
-button2 = tk.Button(window, text="按我會改變按鈕背景色", command=buttonClick2)
-button2.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-def button_command3():
-    value1=entry6.get()
-    print('取得資料 :', value1)
-    label1.config(text='已按下按鈕')
-    v2.set(str(value1))
-
-
-v2 = tk.StringVar()
-label1 =tk.Label(window,text="Hello World!", textvariable=v2)
-label1.pack()
-v2.set("New Text!")
-
-label1 =tk.Label(window,text="尚未按下按鈕")
-label1.pack()
-
-label.config(text="你是男生")
-
-entry6=tk.Entry(window)
-entry6.pack()
-
-button1 =tk.Button(window,text="press me2",command=button_command3)
-button1.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-# 輸入文字框中的字元被顯示為“*”
-entry11 = tk.Entry(window, show = '*', width = 30)
-entry11.pack()
-
-# 輸入文字框中的字元被顯示為“#”
-entry12 = tk.Entry(window, show = '#', width = 30)
-entry12.pack()
-
-# 設定背景色 設定前景色
-entry13 = tk.Entry(window, bg = 'red', fg = 'blue')
-entry13.pack()
-
-# 設定勾選文字的背景色和前景色
-entry14 = tk.Entry(window, selectbackground = 'red', selectforeground = 'gray')
-entry14.pack()
-
-# 將文字框設定為禁用
-entry15 = tk.Entry(window, state = tk.DISABLED)
-entry15.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -211,14 +125,14 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 
-label1 = tk.Label(window,
+label5 = tk.Label(window,
 			anchor = tk.E,# 設定文字的位置
 			bg = 'blue',	# 設定標簽背景色
 			fg = 'red',	# 設定標簽前景色
 			text = 'Python',# 設定標簽中的文字
 			width = 30,	# 設定標簽的寬度為30
 			height = 3)	# 設定標簽的的高度為5
-label1.pack()
+label5.pack()
 
 label2 = tk.Label(window,
 			text = 'Python GUI\nTkinter',			# 設定標簽中的文字，在字串中使用換行符
@@ -240,33 +154,6 @@ label4 = tk.Label(window,
 			width = 30,
 			height = 3)
 label4.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-import tkinter.simpledialog	# 匯入tkSimpleDialog模組
-
-def InStr():
-    # 建立 字串 輸入交談視窗
-    r = tkinter.simpledialog.askstring('Python Tkinter',
-                                       'Input String',			# 指定提示字元
-                                       initialvalue='Tkinter')		# 指定起始化文字
-    print(r)	# 輸出傳回值
-def InInt():
-    # 建立 整數 輸入交談視窗
-    r = tkinter.simpledialog.askinteger('Python Tkinter','Input Integer')
-    print(r)
-def InFlo():
-    # 建立 浮點數 輸入交談視窗
-    r = tkinter.simpledialog.askfloat('Python Tkinter','Input Float')
-    print(r)
-
-button1 = tk.Button(window,text = 'Input String', command = InStr)
-button1.pack()
-button2 = tk.Button(window,text = 'Input Integer', command = InInt)
-button2.pack()
-button2 = tk.Button(window,text = 'Input Float', command = InFlo)
-button2.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -320,19 +207,34 @@ print("------------------------------------------------------------")  # 60個
 label=tk.Label(window,bitmap="hourglass")
 label.pack()  
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 label=tk.Label(window,bitmap="hourglass",compound="left",text="我的天空")
 label.pack()  
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 label=tk.Label(window,bitmap="hourglass",compound="top",text="我的天空")
 label.pack()  
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 label=tk.Label(window,bitmap="hourglass",compound="center",text="我的天空")
 label.pack()  
 
-label=tk.Label(window,text="raised",relief="raised")
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+label=tk.Label(window, width = 15, height = 3, text="raised",relief="raised")
 label.pack()
 
-label=tk.Label(window,text="raised",relief="raised",bg="lightyellow",padx=5,pady=10)
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+label=tk.Label(window, width = 15, height = 3, text="raised",relief="raised",bg="lightyellow",padx=5,pady=10)
 label.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
@@ -828,16 +730,14 @@ window.mainloop()
 
 
 def select():
-    print('你的選項是 :', var.get())
+    print('你的選項是 :', variable_int.get())
 
 place = [('宜蘭', 1), ('台北', 2), ('高雄', 3)]
-tk.Label(window,text="使用 整數 物件").pack()
-var = tk.IntVar()
-var.set(3)
+variable_int.set(3)
 
 for item, val in place:
     tk.Radiobutton(window, text = item, value = val,
-                   variable = var, padx = 20,
+                   variable = variable_int, padx = 20,
                    command = select).pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
@@ -845,25 +745,23 @@ print("------------------------------------------------------------")  # 60個
 
 
 def printSelection():
-    num = var.get()
+    num = variable_int.get()
     if num == 1:
         label.config(text="你是男生")
     else:
         label.config(text="你是女生")
 
-tk.Label(window,text="使用 整數 物件").pack()
-var = tk.IntVar()                                  # 選項紐綁定的變數
-var.set(1)                                      # 預設選項是男生
+variable_int.set(1)                                      # 預設選項是男生
                        
 label = tk.Label(window,text="這是預設,尚未選擇", bg="lightyellow",width=30)
 label.pack()
 
 rbman = tk.Radiobutton(window,text="男生",           # 男生選項鈕
-                    variable=var,value=1,
+                    variable=variable_int,value=1,
                     command=printSelection)
 rbman.pack()
 rbwoman = tk.Radiobutton(window,text="女生",         # 女生選項鈕
-                      variable=var,value=2,
+                      variable=variable_int,value=2,
                       command=printSelection)
 rbwoman.pack()
 
@@ -871,20 +769,19 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 def printSelection():
-    label.config(text="你是"+var.get())
+    label.config(text="你是"+variable_string.get())
 
-var = tk.StringVar()                               # 選項紐綁定的變數
-var.set("男生")                                 # 預設選項是男生
+variable_string.set("男生")                                 # 預設選項是男生
                        
 label = tk.Label(window,text="這是預設,尚未選擇", bg="lightyellow",width=30)
 label.pack()
 
 rbman = tk.Radiobutton(window,text="男生",           # 男生選項鈕
-                    variable=var,value="男生",
+                    variable=variable_string,value="男生",
                     command=printSelection)
 rbman.pack()
 rbwoman = tk.Radiobutton(window,text="女生",         # 女生選項鈕
-                      variable=var,value="女生",
+                      variable=variable_string,value="女生",
                       command=printSelection)
 rbwoman.pack()
 
@@ -893,41 +790,37 @@ window.mainloop()
 print('------------------------------------------------------------')	#60個
 
 def printSelection():
-    print(cities[var.get()])            # 列出所選城市
+    print(cities[variable_int.get()])            # 列出所選城市
 
 window = tk.Tk()
 window.geometry("600x800")
 
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
-tk.Label(window,text="使用 整數 物件").pack()
-var = tk.IntVar()
-var.set(0)                              # 預設選項                       
+variable_int.set(0)                              # 預設選項                       
 
 for val, city in cities.items():        # 建立選項紐    
     tk.Radiobutton(window,
                 text=city,
-                variable=var,value=val,
+                variable=variable_int,value=val,
                 command=printSelection).pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
 def printSelection():
-    print(cities[var.get()])            # 列出所選城市
+    print(cities[variable_int.get()])            # 列出所選城市
 
 cities = {0:"東京",1:"紐約",2:"巴黎",3:"倫敦",4:"香港"}
 
-tk.Label(window,text="使用 整數 物件").pack()
-var = tk.IntVar()
-var.set(0)                              # 預設選項                       
+variable_int.set(0)                              # 預設選項                       
 
 for val, city in cities.items():        # 建立選項紐    
     tk.Radiobutton(window,
                 text=city,
                 indicatoron = 0,        # 用盒子取代選項紐
                 width=30,
-                variable=var,value=val,
+                variable=variable_int,value=val,
                 command=printSelection).pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
@@ -939,12 +832,10 @@ print("------------------------------------------------------------")  # 60個
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-r = tk.StringVar()		# 使用StringVar產生字串變數用於單選框元件
-r.set('1')			# 起始化變數值
+variable_string.set('1') #設定初始值
 
 radio = tk.Radiobutton(window,# 產生單選框元件
-			variable = r, # 設定單選框關聯的變數
+			variable = variable_string, # 設定單選框關聯的變數
 			value = '1',# 設定勾選單選框時其所關聯的變數的值，即r的值
 			indicatoron = 0,			# 將單選框繪製成按鈕型態
 			text = 'Radio1')			# 設定單選框顯示的文字
@@ -972,12 +863,11 @@ radio = tk.Radiobutton(window,
 radio.pack()
 
 
-tk.Label(window,text="使用 整數 物件").pack()
-c = tk.IntVar()		# 使用IntVar產生整數變數用於複選框
-c.set(1)
+variable_int.set(1)
+
 check = tk.Checkbutton(window,
 			text = 'Checkbutton',			# 設定複選框的文字
-			variable = c,# 設定複選框關聯的變數
+			variable = variable_int,# 設定複選框關聯的變數
 			indicatoron = 0,			# 將複選框繪製成按鈕型態
 			onvalue = 1,# 當勾選複選框時，c的值為1
 			offvalue = 2)# 當未勾選複選框時，c的值為2
@@ -986,39 +876,36 @@ check.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-r = tk.StringVar()		# 使用StringVar產生字串變數用於單選框元件
-r.set('1')			# 起始化變數值
+variable_string.set('1')			# 起始化變數值
 radio = tk.Radiobutton(window,# 產生單選框元件
-			variable = r, # 設定單選框關聯的變數
+			variable = variable_string, # 設定單選框關聯的變數
 			value = '1',# 設定勾選單選框時其所關聯的變數的值，即r的值
 			text = 'Radio1')			# 設定單選框顯示的文字
 radio.pack()
 
 radio = tk.Radiobutton(window,
-			variable = r,
+			variable = variable_string,
 			value = '2',# 當勾選該單選框時r的值為2
 			text = 'Radio2' )
 radio.pack()
 
 radio = tk.Radiobutton(window,
-			variable = r,
+			variable = variable_string,
 			value = '3',# 當勾選該單選框時r的值為3
 			text = 'Radio3' )
 radio.pack()
 
 radio = tk.Radiobutton(window,
-			variable = r,
+			variable = variable_string,
 			value = '4',# 當勾選該單選框時r的值為4
 			text = 'Radio4' )
 radio.pack()
 
-tk.Label(window,text="使用 整數 物件").pack()
-c = tk.IntVar()		# 使用IntVar產生整數變數用於複選框
-c.set(1)
+variable_int.set(1)
 
 check = tk.Checkbutton(window,
 			text = 'Checkbutton',			# 設定複選框的文字
-			variable = c,# 設定複選框關聯的變數
+			variable = variable_int,# 設定複選框關聯的變數
 			onvalue = 1,# 當勾選複選框時，c的值為1
 			offvalue = 2)# 當未勾選複選框時，c的值為2
 check.pack()
@@ -1067,7 +954,7 @@ text1.pack()
 
 """ 缺檔案
 def more():
-    if choice.get()==0:
+    if variable_int.get()==0:
         str1="牛是對少部份牛科動物的統稱 \n\
               包括和人類習習相關的黃牛、水牛和氂牛" 
         print("cattle的簡介 :", str1)
@@ -1077,13 +964,11 @@ def more():
         print("deer的簡介 :", str2)
     
 lb=tk.Label(window,text="請點選想了解的動物簡介:").pack()
-tk.Label(window,text="使用 整數 物件").pack()
-choice=tk.IntVar()
-choice.set(0)
+variable_int.set(0)
 pic1=ImageTk.PhotoImage(file="image/cattle.gif")
 pic2=ImageTk.PhotoImage(file="image/deer.gif")
-tk.Radiobutton(window,image=pic1,variable=choice,value=0).pack()
-tk.Radiobutton(window,image=pic2,variable=choice,value=1).pack()
+tk.Radiobutton(window,image=pic1,variable=variable_int,value=0).pack()
+tk.Radiobutton(window,image=pic2,variable=variable_int,value=1).pack()
 tk.Button(window,text="進一步了解", command=more).pack()
 """
 
@@ -1100,4 +985,65 @@ entry8.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
+import tkinter.simpledialog	# 匯入tkSimpleDialog模組
+
+def InStr():
+    # 建立 字串 輸入交談視窗
+    r = tkinter.simpledialog.askstring('Python Tkinter',
+                                       'Input String',			# 指定提示字元
+                                       initialvalue='Tkinter')		# 指定起始化文字
+    print(r)	# 輸出傳回值
+def InInt():
+    # 建立 整數 輸入交談視窗
+    r = tkinter.simpledialog.askinteger('Python Tkinter','Input Integer')
+    print(r)
+def InFlo():
+    # 建立 浮點數 輸入交談視窗
+    r = tkinter.simpledialog.askfloat('Python Tkinter','Input Float')
+    print(r)
+
+button1 = tk.Button(window,text = 'Input String', command = InStr)
+button1.pack()
+button2 = tk.Button(window,text = 'Input Integer', command = InInt)
+button2.pack()
+button2 = tk.Button(window,text = 'Input Float', command = InFlo)
+button2.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+def buttonClick2():
+     #改變背景顏色
+     button2.config(bg = "blue")  
+
+button2 = tk.Button(window, text="改變Button之背景顏色", command=buttonClick2)
+button2.pack()
+
+
+"""
+
+-------
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+print('寫讀 Entry 上的資料')
+
+# Label / Entry / Text / 
+# 一個按鈕 設定一個變數給控件 並把這個控件的變數讀出來
+
+
+
+
+label4 =tk.Label(window,text="尚未按下按鈕")
+label4.pack()
+label4.config(text="你是男生")
+
+
+
+
+"""
 

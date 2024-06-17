@@ -131,7 +131,6 @@ button2.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
 # Entry與Label測試
 tk.Label(text = 'Entry與Label同步改變Text').pack()
 
@@ -155,50 +154,27 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 print("------------------------------------------------------------")  # 60個
 
 def get_entry_text():
-    print('取得 id : ', entry1.get())
-    print('取得 pd : ', entry2.get())
+    print('取得帳號 :', entry1a.get())
+    print('取得密碼 :', entry2a.get())
 
-#新建一個Frame, row, column重新計算, 控件要依附新的Frame
-frame1 = tk.Frame(window)
-frame1.pack()
-
-label1 = tk.Label(frame1, text = "請輸入資料 : ")
-entry1 = tk.Entry(frame1)
-label1.pack()
-entry1.pack()
-
-#新建一個Frame, row, column重新計算, 控件要依附新的Frame
-frame2 = tk.Frame(window)
-frame2.pack()
-
-button1 = tk.Button(frame2, text = "確定")
-button2 = tk.Button(frame2, text = "取消")
-button1.pack()
-button2.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
 
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame3 = tk.Frame(window)
 frame3.pack()
 
 label1 = tk.Label(frame3, text = "Username:")
-entry1 = tk.Entry(frame3)
+entry1a = tk.Entry(frame3)
 
 label2 = tk.Label(frame3, text = "Password:")
-entry2 = tk.Entry(frame3, show = "*")
+entry2a = tk.Entry(frame3, show = "*")
 
 button = tk.Button(frame3, text = "取得Entry資料", command = get_entry_text)
 
 label1.pack()
-entry1.pack()
+entry1a.pack()
 label2.pack()
-entry2.pack()
+entry2a.pack()
 button.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
 
 #新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame4 = tk.Frame(window)
@@ -212,17 +188,12 @@ entry2b = tk.Entry(frame4, textvariable = password, font = (14), show = '*')
 entry1b.pack()
 entry2b.pack()
 
-def login():
-    print('取得帳號 : ', username.get())
-    print('取得密碼 : ', password.get())
+def get_entry_data():
+    print('取得帳號 :', username.get())
+    print('取得密碼 :', password.get())
 
-def cancel():
-    window.destroy()
-
-button1 = tk.Button(frame4, command = login, text = '取得Entry資料', font = (20))
-button2 = tk.Button(frame4, command = cancel, text = '離開', font = (14))
+button1 = tk.Button(frame4, command = get_entry_data, text = '取得Entry資料', font = (20))
 button1.pack()
-button2.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -230,6 +201,8 @@ print("------------------------------------------------------------")  # 60個
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+sys.exit()
 
 
 import tkinter as tk
@@ -289,6 +262,40 @@ tk.Button(window, text = "取得數字1", command = get_numbers1).pack()
 tk.Button(window, text = "取得數字2", command = get_numbers2).pack()
 
 set_numbers()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+# 輸入文字框中的字元被顯示為“*”
+entry11 = tk.Entry(window, show = '*', width = 30)
+entry11.pack()
+
+# 輸入文字框中的字元被顯示為“#”
+entry12 = tk.Entry(window, show = '#', width = 30)
+entry12.pack()
+
+# 設定背景色 設定前景色
+entry13 = tk.Entry(window, bg = 'red', fg = 'blue')
+entry13.pack()
+
+# 設定勾選文字的背景色和前景色
+entry14 = tk.Entry(window, selectbackground = 'red', selectforeground = 'gray')
+entry14.pack()
+
+# 將文字框設定為禁用
+entry15 = tk.Entry(window, state = tk.DISABLED)
+entry15.pack()
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 window.mainloop()
 

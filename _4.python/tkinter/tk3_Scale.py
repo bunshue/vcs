@@ -7,6 +7,8 @@ from tkinter import scrolledtext
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+window.geometry("600x800")
+window.title('button 1')
 
 # 設定主視窗大小
 W = 800
@@ -41,40 +43,15 @@ print("------------------------------------------------------------")  # 60個
 slider = tk.Scale(window, from_ = 0, to = 100)
 slider.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-#w = tk.Scale(window, from_=0, to=100)
-w = tk.Scale(window, from_=0, to=100, resolution=0.1)
-w.pack()
+slider = tk.Scale(window, from_=0, to=100, resolution=0.1)
+slider.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-w = tk.Scale(window, from_=0, to=200, orient=tk.HORIZONTAL)
-w.pack()
-print(w.get())
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-slider1 = tk.Scale(window,from_=0,to=10).pack()
-slider2 = tk.Scale(window,from_=0,to=10, length=300,orient=tk.HORIZONTAL).pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def printInfo():
-    print(slider1.get(),slider2.get())
-    
-
-slider1 = tk.Scale(window,from_=0,to=10)
-slider1.pack()
-slider2 = tk.Scale(window,from_=0,to=10, length=300,orient=tk.HORIZONTAL)
-slider2.set(3)                      # 設定水平尺度值
-slider2.pack()
-tk.Button(window,text="Print",command=printInfo).pack()
+slider = tk.Scale(window, from_=0, to=200, orient=tk.HORIZONTAL)
+slider.pack()
+print(slider.get())
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -230,27 +207,12 @@ b.set(255)
 
 window.mainloop()
 
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import *
-
-window = Tk()
-window.title("")             # 視窗標題
-
-slider1 = Scale(window,from_=0,to=10).pack()
-slider2 = Scale(window,from_=0,to=10,
-                length=300,orient=HORIZONTAL).pack()
-
-window.mainloop()
-
 print('------------------------------------------------------------')	#60個
 
-from tkinter import *
-    
-root = Tk()
-root.title("")                     # 視窗標題
+window = tk.Tk()
+window.title("")                     # 視窗標題
 
-slider = Scale(root,
+slider = tk.Scale(window,
                from_=0,                 # 起點值
                to=10,                   # 終點值
                troughcolor="yellow",    # 槽的顏色
@@ -258,37 +220,71 @@ slider = Scale(root,
                tickinterval=2,          # 刻度
                label="My Scale",        # Scale標籤
                length=300,              # Scale長度
-               orient=HORIZONTAL)       # 水平
+               orient=tk.HORIZONTAL)       # 水平
 slider.pack()
 
-root.mainloop()
+window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-from tkinter import *
-
-def printInfo():
+def get_slider_data2():
     print("垂直捲軸值 = %d, 水平捲軸值 = %d" % (sV.get(),sH.get()))
-    
-root = Tk()
-root.title("")                           # 視窗標題
 
-sV = Scale(root,label="垂直",from_=0,to=10)   # 建立垂直卷軸
+window = tk.Tk()
+window.geometry("600x800")
+window.title('Scale')
+
+sV = tk.Scale(window,label="垂直",from_=0,to=10)   # 建立垂直卷軸
 sV.set(5)                                     # 設定垂直卷軸初值是5
 sV.pack()
 
-sH = Scale(root,label="水平",from_=0,to=10,   # 建立水平卷軸
-                length=300,orient=HORIZONTAL)
+sH = tk.Scale(window,label="水平",from_=0,to=10,   # 建立水平卷軸
+                length=300,orient=tk.HORIZONTAL)
 sH.set(3)                                     # 設定水平捲軸初值是3
 sH.pack()
 
-Button(root,text="Print",command=printInfo).pack()
+tk.Button(window,text="取得Slider資料2",command=get_slider_data2).pack()
 
-root.mainloop()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+def get_slider_data1():
+    print(slider1.get(),slider2.get())
+    
+
+slider1 = tk.Scale(window,from_=0,to=10)
+slider1.pack()
+slider2 = tk.Scale(window,from_=0,to=10, length=300,orient=tk.HORIZONTAL)
+slider2.set(3)                      # 設定水平尺度值
+slider2.pack()
+tk.Button(window,text="取得Slider資料1",command=get_slider_data1).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+slider1 = tk.Scale(window,from_=0,to=10).pack()
+slider2 = tk.Scale(window,from_=0,to=10,
+                length=300,orient=tk.HORIZONTAL).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+slider1 = tk.Scale(window,from_=0,to=10).pack()
+slider2 = tk.Scale(window,from_=0,to=10, length=300,orient=tk.HORIZONTAL).pack()
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+window.mainloop()
 
 print('------------------------------------------------------------')	#60個
-
-from tkinter import *
 
 def bgUpdate(source):
     # 更改視窗背景顏色
@@ -297,25 +293,24 @@ def bgUpdate(source):
     blue = bSlider.get( )                           # 讀取blue值
     print("R=%d, G=%d, B=%d" % (red, green, blue))  # 列印色彩數值
     myColor = "#%02x%02x%02x" % (red, green, blue)  # 將顏色轉成16進位字串
-    root.config(bg=myColor)                         # 設定視窗背景顏色
+    window.config(bg=myColor)                         # 設定視窗背景顏色
     
-root = Tk()
-root.title("")
-root.geometry("360x240")
+window = tk.Tk()
+window.title("")
+window.geometry("360x240")
 
-rSlider = Scale(root, from_=0, to=255, command=bgUpdate)
-gSlider = Scale(root, from_=0, to=255, command=bgUpdate)
-bSlider = Scale(root, from_=0, to=255, command=bgUpdate)
+rSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
+gSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
+bSlider = tk.Scale(window, from_=0, to=255, command=bgUpdate)
 gSlider.set(125)                                    # 設定green初值是125
 rSlider.grid(row=0, column=0)                       # row=0, col=0
 gSlider.grid(row=0, column=1)                       # row=0, col=1
 bSlider.grid(row=0, column=3)                       # row=0, col=2
 
-root.mainloop()
+window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-from tkinter import *
 def bgUpdate(source):
     # 更改視窗背景顏色
     red = rSlider.get()                             # 讀取red值
@@ -323,24 +318,24 @@ def bgUpdate(source):
     blue = bSlider.get( )                           # 讀取blue值
     print("R=%d, G=%d, B=%d" % (red, green, blue))  # 列印色彩數值
     myColor = "#%02x%02x%02x" % (red, green, blue)  # 將顏色轉成16進位字串
-    root.config(bg=myColor)                         # 設定視窗背景顏色
+    window.config(bg=myColor)                         # 設定視窗背景顏色
     
-root = Tk()
-root.title("")
-root.geometry("360x240")
+window = tk.Tk()
+window.title("")
+window.geometry("360x240")
 
-fm = Frame(root)                                    # 建立框架
+fm = tk.Frame(window)                                    # 建立框架
 fm.pack()                                           # 自動安置在上方中央
 
-rSlider = Scale(fm, from_=0, to=255, command=bgUpdate)
-gSlider = Scale(fm, from_=0, to=255, command=bgUpdate)
-bSlider = Scale(fm, from_=0, to=255, command=bgUpdate)
+rSlider = tk.Scale(fm, from_=0, to=255, command=bgUpdate)
+gSlider = tk.Scale(fm, from_=0, to=255, command=bgUpdate)
+bSlider = tk.Scale(fm, from_=0, to=255, command=bgUpdate)
 gSlider.set(125)                                    # 設定green初值是125
 rSlider.grid(row=0, column=0)                       # row=0, col=0
 gSlider.grid(row=0, column=1)                       # row=0, col=1
 bSlider.grid(row=0, column=3)                       # row=0, col=2
 
-root.mainloop()
+window.mainloop()
 
 
 

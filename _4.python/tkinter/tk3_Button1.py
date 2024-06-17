@@ -17,6 +17,23 @@ button5.pack()  #pack無參數, 控件置中
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
+cnt = 0
+def buttonClick1():
+    global cnt
+    mesg = "設定Button之Text " + str(cnt)
+    cnt += 1
+    button1_data.set(mesg)
+
+print("按鈕元件(Button)功能示範 Entry")
+    
+button1_data = tk.StringVar() 
+button1 = tk.Button(window, textvariable=button1_data, command=buttonClick1)
+button1_data.set("設定Button之Text")
+button1.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 label = tk.Label(window, text="改變鼠標外形", relief="raised",
             width=28, height = 3,
             bg="lightyellow",
