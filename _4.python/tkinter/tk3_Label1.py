@@ -8,9 +8,6 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title('Label 1')
 
-# 設定主視窗之背景色
-window.configure(bg="#7AFEC6")
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
@@ -127,68 +124,14 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title('Label 2')
 
-# 設定主視窗之背景色
-window.configure(bg="#7AFEC6")
-
 font_size = 18
 w = 18
 h = 16
 x_st = 50
 y_st = 20
-dx = 200
+dx = 100
 dy = 80
 
-# 設定 Label 
-label1a = tk.Label(window, text = '這是標籤元件 a', fg = 'red', bg = 'yellow', font = ("標楷體", font_size), padx = w, pady = h)
-label1a.place(x = x_st + dx * 0, y = y_st + dy * 0)
-
-cnt = 1
-def changeLabelText1a():
-    global cnt
-    cnt += 1
-    label1a.config(text = "這是標籤元件 " + str(cnt))
-    
-button1a = tk.Button(window, text = "修改標籤之Text a", foreground = "blue", font = ("標楷體", font_size), padx = w / 3, pady = h / 3, command = changeLabelText1a)
-button1a.place(x = x_st + dx * 0, y = y_st + dy * 1)
-
-def changeLabelText2a():
-    global cnt
-    cnt += 1
-    labela_text.set("這是標籤元件 " + str(cnt))
-    print()
-
-def toggleLabelVisible_a():
-    print('你按了Button Toggle')
-    global labela_visible
-
-    if labela_visible:
-        labela_visible = False
-        label1a.pack_forget()
-        label2a.pack_forget()
-        frame.pack(expand = True, before = button3a)
-    else:
-        labela_visible = True
-        frame.pack_forget()
-        label1a.pack(expand = True, before = button3a)
-        label2a.pack(expand = True, before = button3a)
-
-labela_visible = True
-
-labela_text = tk.StringVar()
-labela_text.set('這是標籤元件')
-# 設定 Label 
-
-label2a = tk.Label(window, textvariable = labela_text, fg = 'red', bg = 'yellow', font = ("標楷體", font_size), padx = w, pady = h)
-label2a.pack()
-label2a.place(x = x_st + dx * 0, y = y_st + dy * 2)
-
-button2a = tk.Button(window, text = "修改標籤之Text a", foreground = "blue", font = ("標楷體", font_size), padx = w / 3, pady = h / 3, command = changeLabelText2a)
-button2a.pack()
-button2a.place(x = x_st + dx * 0, y = y_st + dy * 3)
-
-button3a = tk.Button(window, text = "切換標籤顯示與隱藏 a", foreground = "blue", font = ("標楷體", font_size), padx = w / 3, pady = h / 3, command = toggleLabelVisible_a)
-button3a.pack()
-button3a.place(x = x_st + dx * 0, y = y_st + dy * 4)
 
 """
 width = 200
@@ -197,7 +140,7 @@ frame = tk.Frame(window, bg = 'pink', width = width, height = height)
 """
 frame = ttk.Frame(window)
 
-x_st = 400
+x_st = 200
 y_st = 20
 
 # 設定 Label 
@@ -220,7 +163,7 @@ def changeLabelText2b():
     print()
 
 def toggleLabelVisible_b():
-    print('你按了Button Toggle')
+    print('你按了Button Toggle b')
     global labelb_visible, x_st, y_st, dx, dy
 
     if labelb_visible:
@@ -590,6 +533,23 @@ label2 = ttk.Label(window, text = 'Label 2', background = 'green')
 
 
 
+# 設定 Label 
+label1a = tk.Label(window, text = '這是標籤元件 a', fg = 'red', bg = 'yellow', font = ("標楷體", font_size), padx = w, pady = h)
+label1a.place(x = x_st + dx * 0, y = y_st + dy * 0)
+
+
+# 設定 Label 
+label2a = tk.Label(window, textvariable = , fg = 'red', bg = 'yellow', font = ("標楷體", font_size), padx = w, pady = h)
+label2a.pack()
+label2a.place(x = x_st + dx * 0, y = y_st + dy * 2)
+
+button2a = tk.Button(window, text = "修改標籤之Text a", foreground = "blue",
+font = ("標楷體", font_size), padx = w / 3, pady = h / 3, command = )
+button2a.pack()
+button2a.place(x = x_st + dx * 0, y = y_st + dy * 3)
+
 
 
 """
+
+

@@ -10,7 +10,7 @@ import time
 import openpyxl
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 print("匯出 pdf 檔案")
 
 import pathlib
@@ -117,7 +117,49 @@ for row in range(1, sheet.max_row + 1):
     cv.save()
 
 print("------------------------------------------------------------")  # 60個
+'''
 
+
+import openpyxl
+from openpyxl import Workbook
+#建立一個空白活頁簿
+wb=Workbook()
+#選取正在工作中的工作表，空白活頁簿有一個預存工作表，名稱是Sheet
+ws=wb.active
+#設定工作表名稱為Sheet1
+ws.title="Sheet1"
+#指定字串給A1儲存格
+ws['A1']='1'
+#指定數值給A2儲存格
+ws['A2']=1
+#指定數值給B2儲存格
+ws['B2']=2
+#指定數值公式給C2儲存格
+ws['C2']='=SUM(A2:B2)'
+#指定數值計算結果給A3儲存格
+ws['A3']=1+2
+#指定字串計算結果給B3儲存格
+ws['B3']='1'+'2'
+#指定數值計算公式給A4儲存格
+ws['A4']="=1+2"
+#指定字串公式給C2儲存格
+ws['B4']='=CONCATENATE("1","2")'
+#新增一個工作表名稱為Sheet2
+wb.create_sheet("Sheet2")
+#選擇Sheet2工作表為正在工作中的工作表
+ws=wb.get_sheet_by_name("Sheet2")
+#一次填入一列數值
+ws.append([1,2,3])
+#一次填入一列文字
+ws.append(['1','2','3'])
+#建立圖片物件
+img=openpyxl.drawing.image.Image('data/Google-Colab-Guide-1024x683.jpg')
+img.height=img.height*0.1
+img.width=img.width*0.1
+#加入圖片於C1儲存格
+ws.add_image(img,'C1')
+#儲存
+wb.save('tmp_excel.xlsx')
 
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
