@@ -191,18 +191,6 @@ print('抓取網頁資料 並存檔成 : ' + filename)
 print('------------------------------------------------------------')	#60個
 print('urllib 測試 11')
 
-
-'''
-import requests
-
-url = 'https://httpbin.org/get'
-headers = {'Content-Type': 'text/html'}
-
-html_data = requests.get(url, headers=headers)
-
-print(html_data.text)
-'''
-
 import ssl
 import requests
 from urllib.request import urlopen

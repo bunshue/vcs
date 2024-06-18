@@ -22,10 +22,34 @@ import datetime
 
 ESC = 27
 SPACE = 32
-RECORD_TIME_MINUTE = 3
+RECORD_TIME_MINUTE = 2
 
-ENCODING_TYPE = 'XVID'  # 編碼器
 #'XVID','DIVX','MJPG','I420'
+
+#第一種
+#用 XVID 格式存 avi 檔
+record_filename = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
+ENCODING_TYPE = 'XVID'  # 編碼器
+
+"""
+#第二種
+# 用 MP4V 格式存 mp4 檔
+record_filename = 'tmp2_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp4'
+ENCODING_TYPE = 'MP4V'  # 編碼器
+
+#第三種
+# 用 MJPG 格式存 mp4 檔
+record_filename = 'tmp3_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp4'
+ENCODING_TYPE = 'MJPG'  # 編碼器
+
+#第四種
+# 用 MJPG 格式存 mov 檔
+record_filename = 'tmp4_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mov'
+ENCODING_TYPE = 'MJPG'  # 編碼器
+"""
+
+
+
 
 """
 print("------------------------------------------------------------")  # 60個
@@ -58,34 +82,10 @@ print('開始錄影時間 :', now)
 print('預計錄影時間 :', RECORD_TIME_MINUTE, '分')
 print('錄影時間(分) :', end = "")
 
-"""
-#第一種
-#用 XVID 格式存 avi 檔
-record_filename = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
-ENCODING_TYPE = 'XVID'  # 編碼器
-
-"""
-#第二種
-# 用 MP4V 格式存 mp4 檔
-record_filename = 'tmp2_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp4'
-ENCODING_TYPE = 'MP4V'  # 編碼器
-
-
-"""
-#第三種
-# 用 MJPG 格式存 mp4 檔
-record_filename = 'tmp3_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp4'
-ENCODING_TYPE = 'MJPG'  # 編碼器
-
-#第四種
-# 用 MJPG 格式存 mov 檔
-record_filename = 'tmp4_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mov'
-ENCODING_TYPE = 'MJPG'  # 編碼器
-"""
-
 #建立視訊編碼 fourcc
 fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
 
+#建立影像寫入器 out
 out = cv2.VideoWriter(record_filename, fourcc, fps, (width,height))
 
 show_minitues_info = 0
@@ -113,8 +113,7 @@ while True:
         print('開始錄影時間 :', now)
         print('預計錄影時間 :', RECORD_TIME_MINUTE, '分')
         print('錄影時間(分) :', end = "")
-        record_filename = 'tmp2_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp4'
-        ENCODING_TYPE = 'MP4V'  # 編碼器
+        record_filename = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
         #建立視訊編碼 fourcc
         fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
         out = cv2.VideoWriter(record_filename, fourcc, fps, (width,height))
@@ -122,11 +121,9 @@ while True:
     k = cv2.waitKey(1) # 等待按鍵輸入
     if k == ESC:     #ESC
         break
-
-cap.release()
-out.release()
-cv2.destroyAllWindows()
-
+cap.release()    #關閉攝影機
+out.release()    #關閉寫入器
+cv2.destroyAllWindows()  #關閉視窗
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print('\n完成錄影時間 :', now)
 print('存檔檔名 :', record_filename)

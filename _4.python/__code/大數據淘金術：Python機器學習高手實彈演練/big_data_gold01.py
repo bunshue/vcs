@@ -654,16 +654,6 @@ for link in soup.find_all('a'):
 
 print('------------------------------------------------------------')	#60個
 
-print('使用POST方式抓取數據')
-
-import requests
-params = {'key1': 'value1', 'key2': 'value2'}
-r = requests.post("http://httpbin.org/post", data=params)
-print(r.text)
-
-
-print('------------------------------------------------------------')	#60個
-
 print('基本類型轉換')
 
 dic = {

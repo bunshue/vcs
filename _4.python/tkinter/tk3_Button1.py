@@ -1,6 +1,10 @@
 import sys
-
 import tkinter as tk
+
+W = 200
+H = 200
+w = 28
+h = 3
 
 print("------------------------------------------------------------")  # 60個
 
@@ -11,90 +15,37 @@ window.title('button 1')
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-button5 = tk.Button(window, text = '指定按鍵大小', width = 20, height = 5)
-button5.pack()  #pack無參數, 控件置中
+button5 = tk.Button(window, text = '指定按鍵大小/背景色', width = w, height = h, bg = 'pink')
+button5.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-cnt = 0
-def buttonClick1():
-    global cnt
-    mesg = "設定Button之Text " + str(cnt)
-    cnt += 1
-    button1_data.set(mesg)
-
-print("按鈕元件(Button)功能示範 Entry")
-    
-button1_data = tk.StringVar() 
-button1 = tk.Button(window, textvariable=button1_data, command=buttonClick1)
-button1_data.set("設定Button之Text")
-button1.pack()
+font_size = 20
+button1a = tk.Button(window, text = "指定字型大小/字體色/背景色", foreground = "gold", bg = 'red', font = ("標楷體", font_size))
+button1a.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-label = tk.Label(window, text="改變鼠標外形", relief="raised",
-            width=28, height = 3,
-            bg="lightyellow",
-            padx=5,pady=10,
-            cursor="heart")     # 滑鼠外形
-label.pack()
+ft2 = ('標楷體', 18)
+
+button1b = tk.Button(window, text = '設定字型', font = ft2, underline=0)
+button1b.pack()
+
+button = tk.Button(window, text = "Welcome", underline=0).pack()
+
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-# Button測試
-tk.Label(text = 'Button測試').pack()
-def buttonClick1():
-    global count
-    count += 1
-    labeltext.set("你按我 " + str(count) + " 次了！")
-    if(btntext.get() == "按我！"):
-        btntext.set("回復原來文字！")
-    else:
-        btntext.set("按我！")
 
-labeltext = tk.StringVar()
-btntext = tk.StringVar()
-count = 0
-label1 = tk.Label(window, fg = "red", textvariable = labeltext)
-labeltext.set("歡迎光臨Tkinter！")
-label1.pack()
+def setup_bg_color():
+     #改變背景顏色
+     button2a.config(bg = "blue")  
 
-button1 = tk.Button(window, textvariable = btntext, command = buttonClick1)
-btntext.set("按我！")
-button1.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-def buttonClick2():
-    textvar.set("我已經被按過了！")
-
-textvar = tk.StringVar()
-button1 = tk.Button(window, textvariable = textvar, command = buttonClick2)
-textvar.set("按鈕")
-button1.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-def buttonClick3():
-    global count
-    count = count + 1
-    print("Beep! " + str(count))
-    button1.config(text = "Clicked " + str(count))
-
-count = 0;
-
-button1 = tk.Button(window, text = "按鍵數次數, 不指定按鍵大小", command = buttonClick3)
-button1.pack(side = tk.LEFT)    #靠左對齊
-
-button2 = tk.Button(window, text = "離開", command = '')
-button2.pack(side = tk.RIGHT)   #靠右對齊
-
-#side=tk.RIGHT
+button2a = tk.Button(window, text="改變Button之背景顏色", width = w, height = h, command=setup_bg_color)
+button2a.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -123,6 +74,65 @@ tk.Button(frame2, text = "Add", command = '').pack(side = tk.LEFT)
 tk.Button(frame2, text = "Subtract", command = '').pack(side = tk.LEFT)
 tk.Button(frame2, text = "Multiply", command = '').pack(side = tk.LEFT)
 tk.Button(frame2, text = "Divide", command = '').pack(side = tk.LEFT)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+frame1 = tk.Frame(window, bg = '', width = W, height = H)
+frame1.pack()
+
+label=tk.Label(frame1,bitmap="hourglass")
+label.grid(row = 0, column = 0, padx = 5, pady = 5)
+
+label=tk.Label(frame1,bitmap="hourglass",compound="left",text="我的天空")
+label.grid(row = 0, column = 1, padx = 5, pady = 5)
+
+label=tk.Label(frame1,bitmap="hourglass",compound="top",text="我的天空")
+label.grid(row = 0, column = 2, padx = 5, pady = 5)
+
+label=tk.Label(frame1,bitmap="hourglass",compound="center",text="我的天空")
+label.grid(row = 0, column = 3, padx = 5, pady = 5)
+
+label=tk.Label(frame1, width = 12, height = 3, text="raised",relief="raised")
+label.grid(row = 0, column = 4, padx = 5, pady = 5)
+
+label=tk.Label(frame1, width = 12, height = 3, text="raised",relief="raised",bg="lightyellow",padx=5,pady=10)
+label.grid(row = 0, column = 5, padx = 5, pady = 5)
+
+Reliefs = ["flat","groove","raised","ridge","solid","sunken"]
+
+idx = 0
+for Relief in Reliefs:
+    tk.Label(frame1,text=Relief,relief=Relief,
+          fg="blue",
+          font="Times 20 bold").grid(row = 1, column = idx, padx = 5, pady = 5)
+    idx += 1
+    
+bitMaps = ["error","hourglass","info","questhead","question",
+           "warning","gray12","gray25","gray50","gray75"]
+
+idx = 0
+for bitMap in bitMaps:
+    tk.Label(frame1,bitmap=bitMap).grid(row = 2+(idx//6), column = idx % 6, padx = 5, pady = 5)
+    idx += 1
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+button1 = tk.Button(window, 			
+			anchor = tk.E,			# 指定文字對齊模式
+			text = 'Button1',			# 指定按鈕上的文字
+			width = 30,				# 指定按鈕的寬度，相當於40個字元
+			height = 3)				# 指定按鈕的高度，相當於5行字元
+button1.pack()							# 將按鈕新增到視窗
+
+button4 = tk.Button(window, 			
+			text = 'Button4',	
+			width = 30,		
+			height = 3,		
+			state = tk.DISABLED)		# 指定按鈕為禁用狀態
+button4.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -202,88 +212,22 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-window.geometry("600x800")
+window.geometry("600x900")
 window.title('button 3')
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-def buttonClick4():
-   print("btn1 pressed.")
-
-btn1 =tk.Button(window,text="press me",command=buttonClick4)
-btn1.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-def buttonClick5():
-   print("btn2 pressed.")
+def click_picture_button():
+   print("你按了圖片做成的按鈕")
 
 from PIL import ImageTk, Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 img = ImageTk.PhotoImage(Image.open(filename))
-btn2 =tk.Button(window,text="press me", image=img ,command=buttonClick5)
-btn2.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-def buttonClick6():
-    print('你按了按鍵')
-
-btn3 = tk.Button(window, text = "Say Hello", command = buttonClick6)
-btn3.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-button1 = tk.Button(window, 			
-			anchor = tk.E,			# 指定文字對齊模式
-			text = 'Button1',			# 指定按鈕上的文字
-			width = 40,				# 指定按鈕的寬度，相當於40個字元
-			height = 5)				# 指定按鈕的高度，相當於5行字元
-button1.pack()							# 將按鈕新增到視窗
-
-button2 = tk.Button(window, 			
-			text = 'Button2',	
-			bg = 'blue')				# 指定按鈕的背景色
-button2.pack()
-
-button3 = tk.Button(window, 			
-			text = 'Button3',	
-			width = 14,				# 指定按鈕的寬度
-			height = 1)				# 指定按鈕的高度
-button3.pack()
-
-button4 = tk.Button(window, 			
-			text = 'Button4',	
-			width = 60,		
-			height = 5,		
-			state = tk.DISABLED)		# 指定按鈕為禁用狀態
-button4.pack()
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title('button 3')
+picture_button =tk.Button(window,text="圖片按鈕", image=img ,command=click_picture_button)
+picture_button.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個

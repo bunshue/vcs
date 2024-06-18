@@ -247,9 +247,36 @@ text7.config(state=tk.DISABLED)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
+"""
+# 產生多行文字框元件
+text1 = tk.Text(window,	selectbackground = 'red', selectforeground = 'gray')
+text1.pack()
+"""
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+text1 = tk.Text(window, width=30, height=5)
+text1.pack()
+text1.insert(tk.END, "\n寫在Text中的文字1")
+text1.insert(tk.END, "\n寫在Text中的文字2")
+text1.insert(tk.END, "\n寫在Text中的文字3")
+text1.insert(tk.END, "\n寫在Text中的文字4")
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 window.mainloop()
 
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 

@@ -28,44 +28,6 @@ else:
 
 print('------------------------------------------------------------')	#60個
 
-url_params = {'name': '陳會安', 'grade': 95}
-r = requests.get("http://httpbin.org/get", params=url_params)
-if r.status_code == 200:
-    print(r.text)
-else:
-    print("錯誤! HTTP請求失敗...")
-
-print('------------------------------------------------------------')	#60個
-
-url = "http://httpbin.org/user-agent"
- 
-headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
-r = requests.get(url, headers=headers)
-print(r.text)
-
-print('------------------------------------------------------------')	#60個
-
-url = "http://httpbin.org/user-agent"
- 
-r = requests.get(url)
-print(r.text)
-
-print('------------------------------------------------------------')	#60個
-
-url = "http://httpbin.org/cookies"
-
-cookies = dict(name='Joe Chen')
-r = requests.get(url, cookies=cookies)
-print(r.text)
-
-print('------------------------------------------------------------')	#60個
-
-post_data = {'name': '陳會安', 'grade': 95}
-r = requests.post("http://httpbin.org/post", data=post_data)
-print(r.text)
-
-print('------------------------------------------------------------')	#60個
-
 url = "https://www.ptt.cc/bbs/Gossiping/index.html"
 
 cookies = { "over18": "1" }
@@ -551,54 +513,6 @@ for n in range(5):
 """
 
 print('------------------------------------------------------------')	#60個
-
-""" fail
-proxy = {'http': 'http://109.161.48.141:3128',
-         'https': 'https://109.161.48.141:3128'}
-r = requests.get("http://httpbin.org/ip", proxies=proxy)
-print(r.status_code)
-print(r.text)
-"""
-
-print('------------------------------------------------------------')	#60個
-
-""" fail
-from fake_useragent import UserAgent
-import random
-
-ua = UserAgent()
-def proxyGenerator():
-   headers = {'user-agent': ua.random}
-   res = requests.get('https://free-proxy-list.net/', headers=headers)
-   soup = BeautifulSoup(res.text, 'lxml') 
-   proxies_table = soup.find(id='proxylisttable')
-   proxies = [] 
-   for row in proxies_table.tbody.find_all('tr'):
-     proxies.append({  
-       'http': "http://" + row.find_all('td')[0].string + ":" +
-               row.find_all('td')[1].string, 
-       'https': "https://" + row.find_all('td')[0].string + ":" +
-               row.find_all('td')[1].string        
-     })   
-   return random.choice(proxies)
-
-while True:
-   proxy = proxyGenerator()
-   print("目前使用的代理伺服器: ", proxy)
-   try:
-      headers = {'user-agent': ua.random}
-      url = "http://httpbin.org/ip"
-      r = requests.get(url, headers=headers, proxies=proxy, verify=False)
-      print(r.status_code)
-      print(r.text)
-      break
-   except:
-      print("連線錯誤! 搜尋其他的代理伺服器!")
-      pass 
-"""
-
-print('------------------------------------------------------------')	#60個
-
 print('------------------------------------------------------------')	#60個
 
 """ fail chromedriver

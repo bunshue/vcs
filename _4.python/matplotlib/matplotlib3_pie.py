@@ -18,7 +18,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 #          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
@@ -302,10 +302,34 @@ plt.pie(times,labels=dices,autopct='%2.1f%%',explode=[0.1,0.1,0.1,0.1,0.1,0.1],s
 plt.title('擲骰子機率圖',fontsize=18)
 
 plt.show()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
-
+#預設字體大小
+plt.rc('font', size=20)
+#軸標題字體大小
+plt.rc('axes', titlesize=30)
+#X軸刻度字體大小
+plt.rc('xtick', labelsize=20)
+#圖例字體大小
+plt.rc('legend', fontsize=10)
+#薪水分配 六三一分配法
+#圓餅圖
+salarypay = ['生活費', '儲蓄', '娛樂/緊急預備金']
+#佔比
+ratios = [60, 30, 10]
+#設定分離區塊
+explode = [0, 0, 0.1] 
+#顏色
+color = [(1.0,0,0), (0,1.0,0), (0,1.0,1.0)] 
+fig, ax = plt.subplots(figsize=(10,10), dpi=80)
+ax.pie(ratios, explode=explode, labels=salarypay, autopct='%1.1f%%',
+        colors=color, shadow=True, startangle=40)
+#設定Y/X軸長度比例 
+ax.set_aspect(0.7) 
+ax.set_title('薪水分配 六三一分配法')
+ax.legend()
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 

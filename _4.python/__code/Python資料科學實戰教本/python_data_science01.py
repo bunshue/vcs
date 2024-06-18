@@ -5,7 +5,6 @@ Python資料科學實戰教本
 
 """
 
-
 import os
 import sys
 import time
@@ -13,21 +12,7 @@ import random
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-a = True
-b = False
-print(type(a)) # 顯示 "<class 'bool'>"
-print(a and b) # 邏輯AND: 顯示 "False"
-print(a or b)  # 邏輯OR: 顯示"True"
-print(not a)   # 邏輯NOT: 顯示 "False"
-
-print("------------------------------------------------------------")  # 60個
-
 s = "hello"
-print(s.capitalize())  # 第1個字元大寫: 顯示 "Hello"
-print(s.upper())       # 轉成大寫: 顯示 "HELLO"
 print(s.rjust(7))      # 右邊填空白字元: 顯示 "  hello"
 print(s.center(7))     # 置中顯示: 顯示 " hello "
 print(s.replace('l', 'L'))  # 取代字串: 顯示 "heLLo"
@@ -355,32 +340,6 @@ else:
 
 print("------------------------------------------------------------")  # 60個
 
-url_params = {'name': '陳會安', 'score': 95}
-r = requests.get("http://httpbin.org/get", params=url_params)
-print(r.url)
-
-print("------------------------------------------------------------")  # 60個
-
-""" fail
-from urlencode import urlencode 
-
-url_params = {'name': '陳會安', 'score': 95}
-print(urlencode(url_params))
-"""
-print("------------------------------------------------------------")  # 60個
-
-data = {'name': '陳會安', 'score': 95}
-r = requests.get("http://httpbin.org/get", params=data)
-print(r.text)
-
-print("------------------------------------------------------------")  # 60個
-
-post_data = {'name': '陳會安', 'score': 95}
-r = requests.post("http://httpbin.org/post", data=post_data)
-print(r.text)
-
-print("------------------------------------------------------------")  # 60個
-
 url = "https://www.googleapis.com/books/v1/volumes"
 
 data = {'q': 'Python',
@@ -468,34 +427,10 @@ print("------------------------------------------------------------")  # 60個
 
 import requests
 
-url = "http://httpbin.org/cookies"
-
-cookies = dict(name='Joe Chen')
-r = requests.get(url, cookies=cookies)
-print(r.text)
-
-print("------------------------------------------------------------")  # 60個
-
-import requests
-
 session = requests.Session()
 response = session.get("http://www.google.com")
 v = session.cookies.get_dict()
 print(v)
-
-print("------------------------------------------------------------")  # 60個
-
-import requests
-
-url = "http://httpbin.org/user-agent"
-
-r = requests.get(url)
-print(r.text)
-print("----------------------")
-
-url_headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0'}
-r = requests.get(url, headers=url_headers)
-print(r.text)
 
 print("------------------------------------------------------------")  # 60個
 

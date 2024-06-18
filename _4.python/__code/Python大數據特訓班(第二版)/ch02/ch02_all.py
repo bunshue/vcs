@@ -1,3 +1,6 @@
+
+print("------------------------------------------------------------")  # 60個
+
 # get.py
 import requests
 url = 'http://www.ehappy.tw/demo.htm'
@@ -6,23 +9,7 @@ html = requests.get(url)
 if html.status_code == requests.codes.ok:
     print(html.text)
 
-
-# get_params.py
-import requests
-# 將查詢參數定義為字典資料加入GET請求中
-payload = {'key1': 'value1', 'key2': 'value2'}
-html = requests.get("http://httpbin.org/get", params=payload)
-print(html.text)
-
-
-
-
-# post.py
-import requests
-# 將查詢參數加入 POST 請求中
-payload = {'key1': 'value1', 'key2': 'value2'}
-r = requests.post("http://httpbin.org/post", data=payload)
-print(r.text)
+print("------------------------------------------------------------")  # 60個
 
 
 # get_headers.py
@@ -37,6 +24,7 @@ html = requests.get(url, headers=headers)
 print(html)
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 # get_cookie.py
@@ -46,6 +34,8 @@ url = 'https://www.ptt.cc/bbs/Gossiping/index.html'
 cookies = {'over18':'1'}
 r = requests.get(url, cookies=cookies)
 print(r.text)
+
+print("------------------------------------------------------------")  # 60個
 
 # bs1.py
 import requests
@@ -61,6 +51,7 @@ print(sp.h1)
 print(sp.p)
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 # bs2.py
@@ -81,6 +72,7 @@ print(sp.find('p', {'id':'p2', 'class':'red'}))
 print(sp.find('p', id='p2', class_= 'red'))
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 # bs3.py
@@ -101,6 +93,7 @@ print(sp.select('#p1'))
 print(sp.select('.red'))
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 # bs4.py
@@ -122,6 +115,7 @@ print(sp.select('a')[0]['href'])
 
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 # taiwanlottery.py
@@ -150,6 +144,9 @@ num = datas.find('div', class_='ball_red').text
 print('\n第二區：', num)
 
 
+print("------------------------------------------------------------")  # 60個
+
+
 # re_match.py
 import re
 m = re.match(r'[a-z]+','abc123xyz')
@@ -162,6 +159,7 @@ if m != None:
 
 
 
+print("------------------------------------------------------------")  # 60個
 
 
 # re_search.py
@@ -174,6 +172,7 @@ if m != None:
     print(m.end())    # 3
     print(m.span())   # (0,3)
 
+print("------------------------------------------------------------")  # 60個
 
 
 # re_findall.py
@@ -182,11 +181,15 @@ m = re.findall(r'[a-z]+', 'abc123xyz')
 print(m)    # ['abc', 'xyz']    
 
 
+print("------------------------------------------------------------")  # 60個
+
 # re_sub.py
 import re
 result = re.sub(r"\d+", "*", "Password:1234,ID:5678")
 print(result) # Password:*,ID:*
 
+
+print("------------------------------------------------------------")  # 60個
 
 # regex.py
 html = """
@@ -218,6 +221,7 @@ phonelist = re.findall(r'\(?\d{2,4}\)?\-\d{6,8}',html)
 for phone in phonelist:
     print(phone) #顯示電話號碼 
 
+print("------------------------------------------------------------")  # 60個
 
 
 # twhrtimetable.py

@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 window.geometry("600x800")
 window.title('Label 1')
@@ -231,7 +231,6 @@ tk.Label(window, image = image).place(x = 0, y = 150, width = 150, height = 150)
 
 print("------------------------------------------------------------")  # 60個
 
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -302,12 +301,12 @@ for i in range(4):
 tk.Button(window, text = "Shuffle", command = shuffle).pack()
 
 window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('Label 1')
+window.title('Label 6')
 
 print('Label設定')
 
@@ -370,10 +369,6 @@ label1 = tk.Label(window,textvariable=label1_data,      # 設定Label內容是�
 label1.pack()
 label1_data.set('歡迎來到美國3')
 
-
-
-
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
    
@@ -383,18 +378,96 @@ tk.Label(window, text = "Green", bg = "green").pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-   
+
+w, h = 20, 3
+
+label = tk.Label(window, text="Label做成方形\n改變鼠標外形", relief="raised",
+            width=w, height = h,
+            bg="lightyellow",
+            padx=5,pady=10,
+            cursor="heart")     # 滑鼠外形
+label.pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+font_size = 20
+label1a = tk.Label(window, text = 'Label之字型設定', fg = 'red', bg = 'yellow', font = ("標楷體", font_size), padx = w, pady = h)
+label1a.pack()
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+ft2 = ('標楷體', 18)
+lb1=tk.Label(window, text = 'Label之字型設定', font = ft2).pack()
+
+
+ft = ('標楷體', 14)
+tk.Label(window, text = "喜愛的景點", width=50, font = ft, justify = tk.LEFT, padx = 20).pack()
+tk.Label(window, text = "喜愛的運動", width=50, font = ft, justify = tk.RIGHT, padx = 20).pack()
+#lab_result = tk.Label(window, font=default_font, fg='black', width=20)
 
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-   
-   
+
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('Label 6')
+
+print('Label設定')
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+label1 = tk.Label(window, text = "請選擇喜愛的景點: ", justify = tk.LEFT, padx = 20).pack()
+label2 = tk.Label(window, text = "請選擇喜愛的運動: ", justify = tk.RIGHT, padx = 20).pack()
+label3 = tk.Label(window, text = "請選擇喜歡的運動", fg="blue",bg="lightyellow",width=30).pack()
+label4 = tk.Label(window, text = "選擇最喜歡的城市", fg="blue",bg="lightyellow",width=30).pack()
+
+label = tk.Label(window,text="選擇最喜歡的城市",fg="blue",bg="lightyellow",width=30).pack()
+
+label1 = tk.Label(window,text="歡迎來到美國",
+              bg="lightyellow",     # 標籤背景是淺黃色
+              width=15)             # 標籤寬度是15
+label2 = tk.Label(window,text="歡迎來到美國",
+              bg="lightgreen",      # 標籤背景是淺綠色
+              width=15)             # 標籤寬度是15
+label3 = tk.Label(window,text="歡迎來到美國",
+              bg="lightblue",       # 標籤背景是淺藍色
+              width=15)             # 標籤寬度是15
+
+label1.pack()
+label2.pack()
+label3.pack()
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 
 
 window.mainloop()
+
+
 
 
 

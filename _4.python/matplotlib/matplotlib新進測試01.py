@@ -656,7 +656,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
 from matplotlib import pyplot as plt
 
 ax = np.linspace(0, 20, 100)
@@ -681,7 +680,6 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-import numpy as np
 from matplotlib import pyplot as plt
 
 ax = np.linspace(-20, 20, 100)
@@ -754,10 +752,8 @@ print(x)
 
 '''
 
-
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
 from numpy import linspace
 #畫出y=a^x的函數圖形 0<=x<=10
 x = linspace(0,10,50)
@@ -810,17 +806,15 @@ plt.annotate('y=2^x', xy=(9.5, 800), xytext=(8, 1100),
        color='cyan')
 #加上圖例說明
 plt.legend(['a=2','a=2.5','a=3','a=3.5'], fontsize=20)
+
 plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
 
-
-#chap6-04b
 #!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
 #!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf
 import matplotlib
-import matplotlib.pyplot as plt
 from matplotlib.font_manager import fontManager 
 #新增字體
 #fontManager.addfont('/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf/taipei_sans_tc_beta.ttf')
@@ -849,9 +843,6 @@ plt.rc('figure', titlesize=BIGGER_SIZE)
 
 print("------------------------------------------------------------")  # 60個
 
-#chap6-04c
-import matplotlib.pyplot as plt
-import numpy as np
 #準備描點x,y資料
 x = np.arange(-10, 10, 0.1)
 y1 = x**3
@@ -886,236 +877,10 @@ ax.set_title('子圖標題',loc="right")
 #figure標題
 fig.suptitle('y=x**3&y=x**2')
 #儲存檔案名為test.png
-fig.savefig("test.png")
+#fig.savefig("tmp_test.png")
 #圖例說明
 ax.legend(['y=x**3','y=x**2'])
 plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-04d
-import matplotlib.pyplot as plt
-#建立字典data
-data = {'蘋果': 10, '橘子': 15, '檸檬': 5, '萊姆': 20}
-#取出keys為串列list
-names = list(data.keys())
-#取出values為串列list
-values = list(data.values())
-#預設字體大小
-plt.rc('font', size=6)
-#軸標題字體大小
-plt.rc('axes', titlesize=8)
-#軸標籤字體大小
-plt.rc('axes', labelsize=6)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=6)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=6)
-
-#sharex, sharey 共用X軸, Y軸 刻度
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
-#將圖分成2列3欄共6個子圖
-fig, axs = plt.subplots(2, 3, figsize=(6.4, 4.8), dpi=160, sharex=True, sharey=True)
-
-axs[0][0].bar(names, values, color='red')
-axs[0][1].scatter(names, values, color='green')
-axs[0][2].plot(names, values, color='cyan')
-axs[1][0].bar(names, values, color='magenta')
-axs[1][1].scatter(names, values, color='yellow')
-axs[1][2].plot(names, values, color='blue')
-axs[0][0].set(xlabel='水果', ylabel='數量')
-axs[0][1].set(xlabel='水果', ylabel='數量')
-axs[0][2].set(xlabel='水果', ylabel='數量')
-axs[1][0].set(xlabel='水果', ylabel='數量')
-axs[1][1].set(xlabel='水果', ylabel='數量')
-axs[1][2].set(xlabel='水果', ylabel='數量')
-axs[0][0].set_title('圖1')
-axs[0][1].set_title('圖2')
-axs[0][2].set_title('圖3')
-axs[1][0].set_title('圖4')
-axs[1][1].set_title('圖5')
-axs[1][2].set_title('圖6')
-axs[0][0].grid(True)
-axs[0][1].grid(True)
-axs[0][2].grid(True)
-axs[1][0].grid(True)
-axs[1][1].grid(True)
-axs[1][2].grid(True)
-fig.suptitle('分類繪圖', fontsize=20)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-04e
-import matplotlib.pyplot as plt
-#預設字體大小
-plt.rc('font', size=20)
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#圖例字體大小
-plt.rc('legend', fontsize=10)
-#薪水分配 六三一分配法
-#圓餅圖
-salarypay = ['生活費', '儲蓄', '娛樂/緊急預備金']
-#佔比
-ratios = [60, 30, 10]
-#設定分離區塊
-explode = [0, 0, 0.1] 
-#顏色
-color = [(1.0,0,0), (0,1.0,0), (0,1.0,1.0)] 
-fig, ax = plt.subplots(figsize=(10,10), dpi=80)
-ax.pie(ratios, explode=explode, labels=salarypay, autopct='%1.1f%%',
-        colors=color, shadow=True, startangle=40)
-#設定Y/X軸長度比例 
-ax.set_aspect(0.7) 
-ax.set_title('薪水分配 六三一分配法')
-ax.legend()
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-04f
-import matplotlib.pyplot as plt
-def addlabels(x,y):
-    for i in range(len(x)):
-        plt.text(i,y[i],y[i])
-#預設字體大小
-plt.rc('font', size=15)
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#軸標籤字體大小
-plt.rc('axes', labelsize=20)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=20)
-students = ['約翰', '瑪莉', '麥可', '大衛']
-math_scores = [78, 67, 90, 81]
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
-fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_ylim(0,100)
-ax.bar(students, math_scores, color=['red', 'green', 'blue', 'yellow'])
-addlabels(students, math_scores)
-ax.set(xlabel='學生',ylabel='數學成績')
-ax.set_title('期末考')
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-04g
-import matplotlib.pyplot as plt
-def addlabels(x,y):
-    for i in range(len(x)):
-        plt.text(y[i],i,y[i])
-#預設字體大小
-plt.rc('font', size=15)
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#軸標籤字體大小
-plt.rc('axes', labelsize=20)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=20)
-students = ['約翰', '瑪莉', '麥可', '大衛']
-math_scores = [78, 67, 90, 81]
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
-fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_xlim(0,100)
-ax.barh(students, math_scores, color=['red', 'green', 'blue', 'yellow'])
-addlabels(students, math_scores)
-ax.set(ylabel='學生',xlabel='數學成績')
-ax.set_title('期末考')
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-04h
-import matplotlib.pyplot as plt
-import numpy as np
-def addlabels(x,y):
-    for i in range(len(x)):
-        plt.text(i,y[i],y[i])
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#軸標籤字體大小
-plt.rc('axes', labelsize=20)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=20)
-students = ['約翰', '瑪莉', '麥可', '大衛']
-chin_scores = [78, 67, 90, 81]
-math_scores = [85, 72, 94, 70]
-#產生總分list，總分相加
-all_scores = list(np.array(chin_scores)+np.array(math_scores))
-#柱寬度
-width = 0.35 
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
-fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_ylim(0,200)
-#柱狀圖下層
-ax.bar(students, chin_scores, width, label='國文')
-#柱狀圖上層
-ax.bar(students, math_scores, width, bottom=chin_scores, label='數學')
-addlabels(students,chin_scores)
-addlabels(students,all_scores)
-ax.set_xlabel('學生')
-ax.set_ylabel('總分')
-ax.set_title('分數統計圖')
-ax.legend()
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-04i
-import matplotlib.pyplot as plt
-import numpy as np
-def addlabels(x,y):
-    for i in range(len(x)):
-        plt.text(i,y[i],y[i])
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#軸標籤字體大小
-plt.rc('axes', labelsize=20)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=20)
-students = ['約翰', '瑪莉', '麥可', '大衛']
-chin_scores = [78, 67, 90, 81]
-math_scores = [85, 72, 94, 70]
-#產生總分list，總分相加
-all_scores = list(np.array(chin_scores)+np.array(math_scores))
-#柱寬度
-width = 0.35 
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
-fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_ylim(0,200)
-#柱狀圖下層
-ax.bar(students, chin_scores, width, label='國文')
-#柱狀圖上層
-ax.bar(students, math_scores, width, bottom=chin_scores, label='數學')
-addlabels(students,chin_scores)
-addlabels(students,all_scores)
-#縮小次圖比例為原來的80%
-box = ax.get_position()
-ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
-#將圖例說明對齊右邊中間
-ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-plt.show()
-
-
 
 print("------------------------------------------------------------")  # 60個
 
