@@ -346,7 +346,6 @@ print(str(123)+"456")
 print(ascii("Ab123"))
 print(ascii("hello你好".encode('utf-8')))
 
-'''
 
 print('字串的對齊 justify')
 
@@ -608,42 +607,37 @@ print(table.columns.values)
 #查看列索引標籤
 print(table.index.values)
 
-'''
-
-
-
 print("------------------------------------------------------------")  # 60個
-
-
-
-'''
-
-
-
 
 #chap7-01b
 import requests
 url ='http://jigsaw.w3.org/HTTP/connection.html'
-res = requests.get(url)
-#print(res.text)
+response = requests.get(url)
+#print(response.text)
 
 #在<HEAD></HEAD>區塊中取得包圍網頁標題的指定字串<TITLE></TITLE>所在的位置
 #stripe()去除字串頭尾的'\n'(換行)、'\t'(跳格)、' '(空白)
-datapos1=res.text.find("<TITLE>")
-datapos2=res.text.find("</TITLE>")
-data=res.text[datapos1+7:datapos2]
+datapos1=response.text.find("<TITLE>")
+datapos2=response.text.find("</TITLE>")
+data=response.text[datapos1+7:datapos2]
 data=data.strip()
-print(data)
+print("網頁的<TITLE> :", data)
 #在<BODY></BODY>區塊中取得包圍內容標題的指定字串<H1></H1>所在的位置
-datapos1=res.text.find("<H1>")
-datapos2=res.text.find("</H1>")
-data=res.text[datapos1+4:datapos2]
+datapos1=response.text.find("<H1>")
+datapos2=response.text.find("</H1>")
+data=response.text[datapos1+4:datapos2]
 #將設定斜體的HTML語法<I></I>移除
 data=data.replace("<I>","")
 data=data.replace("</I>","")
 data=data.strip()
-print(data)
+print("<網頁的H1的資料(去掉<I>)> :", data)
 
+
+datapos1=response.text.find("<CODE>")
+datapos2=response.text.find("</CODE>")
+data=response.text[datapos1+7:datapos2]
+data=data.strip()
+print("網頁的<CODE> :", data)
 
 
 print("------------------------------------------------------------")  # 60個
@@ -652,9 +646,9 @@ print("------------------------------------------------------------")  # 60個
 import requests
 from bs4 import BeautifulSoup
 url ='http://jigsaw.w3.org/HTTP/connection.html'
-res = requests.get(url)
+response = requests.get(url)
 #指定html.parser作為解析器
-soup = BeautifulSoup(res.text, 'html.parser') 
+soup = BeautifulSoup(response.text, 'html.parser') 
 #把排版後的html印出來，因為未排版前有很多網頁語法缺乏換行符號，不易閱讀
 #必須借助於Beautiful Shop套件
 print(soup.prettify()) 
@@ -671,16 +665,15 @@ for a_tag in a_tags:
     b=str(b).replace('<i>','').replace('</i>','').replace('\n','').replace('\r','')
     cc=cc+b
   print(cc.strip())
-'''
 
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
-print("------------------------------------------------------------")  # 60個
 '''
+print("------------------------------------------------------------")  # 60個
+
 import requests
+
 url ='https://www.dcard.tw/f/stock/p/237123381'
-res = requests.get(url)
-print(res.text)
+response = requests.get(url)
+print(response.text)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -688,12 +681,14 @@ print("------------------------------------------------------------")  # 60個
 import requests
 from bs4 import BeautifulSoup
 url ='https://www.dcard.tw/f/stock/p/237123381'
-res = requests.get(url)
+response = requests.get(url)
 #指定html.parser作為解析器
-soup = BeautifulSoup(res.text, 'html.parser') 
+soup = BeautifulSoup(response.text, 'html.parser') 
 #把排版後的html印出來，因為未排版前有很多網頁語法缺乏換行符號，不易閱讀
 #必須借助於Beautiful Shop套件
 print(soup.prettify())
+
+sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -715,9 +710,9 @@ headers = {
     }
 
 #response = requests.get(url="https://example.com", headers=headers)
-res = requests.get(url, headers=headers)
+response = requests.get(url, headers=headers)
 #指定html.parser作為解析器
-soup = BeautifulSoup(res.text, 'html.parser') 
+soup = BeautifulSoup(response.text, 'html.parser') 
 #把排版後的html印出來
 print(soup.prettify()) 
 a_tags = soup.find_all('h1')
@@ -727,13 +722,82 @@ print("\n")
 
 print("------------------------------------------------------------")  # 60個
 
+student_all = [15463, 22825, 14757, 21441]
+student_university = [9093, 12010, 13090, 18176]
+student_graduate = [6370, 10815, 1667, 3265]
+labels = ["中興大學", "成功大學", "東海大學", "逢甲大學"]
 
+print(student_all)
+
+for i in range(4):
+  print(student_university[i] + student_graduate[i])
 
 print("------------------------------------------------------------")  # 60個
 
-
+#chap5-06a
+import sys
+#查看搜尋模組套件的路徑優先順序
+for path in sys.path:
+  print(path)
 
 print("------------------------------------------------------------")  # 60個
+
+#chap5-06b
+file1=open("handgame.py","w", encoding = 'UTF-8') #打開檔案，建立handgame.py
+file1.write("import random\n") 
+file1.write("handgesture=['剪刀','石頭','布']\n") 
+file1.write("def hand():\n") 
+file1.write("\treturn random.choice(handgesture)") 
+file1.close() #關閉檔案
+#建立games資料夾
+#!mkdir games 
+file1=open("games/dice.py","w", encoding = 'UTF-8') #打開檔案，建立games/dice.py
+file1.write("from random import choice\n") 
+file1.write("def dice():\n") 
+file1.write("\treturn choice(range(1,7))") 
+file1.close() #關閉檔案
+file1=open("games/hand.py","w", encoding = 'UTF-8') #打開檔案，建立games/hand.py
+file1.write("from random import choice\n") 
+file1.write("handgesture=['剪刀','石頭','布']\n") 
+file1.write("def hand():\n") 
+file1.write("\treturn choice(handgesture)") 
+file1.close() #關閉檔案
+file1=open("games/poker.py","w", encoding = 'UTF-8') #打開檔案，建立games/poker.py
+file1.write("from random import choice\n") 
+file1.write("pokerkind=['♠','♥','♦','♣']\n")
+file1.write("pokerpoint=['A','2','3','4','5','6','7','8','9','10','J','Q','K']\n")
+file1.write("def poker():\n") 
+file1.write("\treturn choice(pokerkind)+choice(pokerpoint)") 
+file1.close() #關閉檔案
+file1=open("games/coin.py","w", encoding = 'UTF-8') #打開檔案，建立games/coin.py
+file1.write("from random import choice\n") 
+file1.write("coinkind=['正面','反面']\n")
+file1.write("def coin():\n") 
+file1.write("\treturn choice(coinkind)") 
+file1.close() #關閉檔案
+file1=open("handgames.py","w", encoding = 'UTF-8') #打開檔案，建立handgames.py
+file1.write("import handgame as hg\n") 
+file1.write("def handgame():\n") 
+file1.write("\tcomputer=hg.hand()\n") 
+file1.write("\thgs=''\n") 
+file1.write("\tfor i in range(0,len(hg.handgesture)):\n") 
+file1.write("\t\thgs=hgs+str(i)+hg.handgesture[i]\n") 
+file1.write("\tyourchoice=int(input('請輸入你的選擇'+hgs+': '))\n") 
+file1.write("\tyou=hg.handgesture[yourchoice]\n") 
+file1.write("\tprint('You:',you,'Computer:',computer)\n") 
+file1.write("\tif (computer=='剪刀' and you=='布') or (computer=='布' and you=='石頭') or (computer=='石頭' and you=='剪刀'): \n") 
+file1.write("\t\tprint('電腦獲勝')\n") 
+file1.write("\telif computer==you:\n") 
+file1.write("\t\tprint('平手')\n") 
+file1.write("\telse:\n") 
+file1.write("\t\tprint('你獲勝')\n") 
+file1.write("if __name__=='__main__':\n") 
+file1.write("\tfor i in range(3):\n") 
+file1.write("\t\thandgame()\n") 
+file1.write("else:\n") 
+file1.write("\tprint('被import使用中')") 
+file1.close() #關閉檔案
+
 
 
 

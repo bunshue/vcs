@@ -18,7 +18,7 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 # 設定負號
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
-'''
+
 print("------------------------------------------------------------")  # 60個
 #          編號              圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
 plt.figure(
@@ -362,15 +362,22 @@ plt.figure(
 # 第一張圖
 plt.subplot(231)
 
-listx = ["c", "c++", "c#", "java", "python"]
-listy1 = [25, 20, 20, 16, 28]
-listy2 = [20, 8, 18, 16, 22]
-plt.bar(listx, listy1, width=0.5, label="男")
-plt.bar(listx, listy2, width=0.5, bottom=listy1, label="女")
+listx = ["中興大學", "成功大學", "東海大學", "逢甲大學"]
+listy1 = [9093, 12010, 13090, 18176]
+listy2 = [6370, 10815, 1667, 3265]
+
+plt.bar(listx, listy1, width=0.5, label="大學部")
+plt.bar(listx, listy2, width=0.5, bottom=listy1, label="研究所")
 plt.legend()
-plt.title("資訊程式課程選修人數")
-plt.xlabel("程式課程")
-plt.ylabel("選修人數")
+plt.title("四校學生數")
+plt.ylabel("人數")
+
+plt.ylim((0, 28000))
+
+student_all = {"中興大學": 15463, "成功大學": 22825, "東海大學": 14757, "逢甲大學": 21441}
+
+for x, y in zip(range(len(student_all)), student_all.values()):
+    plt.text(x - 0.05, y + 0.5, "{:>8,.0f}".format(y), ha="center")
 
 # 第二張圖
 plt.subplot(232)
@@ -925,7 +932,7 @@ plt.xticks(range(len(areas)),labels=areas)
 
 plt.legend()
 plt.show()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 def addlabels(x,y):

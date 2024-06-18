@@ -1,19 +1,18 @@
 """
 測試 httpbin
 
+先 get 再 post
+
 """
 import os
 import sys
 import time
 import random
 
-print("------------------------------------------------------------")  # 60個
 #共用套件
-
 import requests
 
 print("------------------------------------------------------------")  # 60個
-
 
 # 資料
 my_data = {'key1': 'value1', 'key2': 'value2'}
@@ -109,14 +108,9 @@ html_data = requests.post("http://httpbin.org/post", data = payload)
 print(html_data.url)
 print(html_data.text)
 
-
-
 print("------------------------------------------------------------")  # 60個
 
-
 '''
-import requests
-
 url = 'https://httpbin.org/get'
 headers = {'Content-Type': 'text/html'}
 
@@ -124,8 +118,6 @@ html_data = requests.get(url, headers=headers)
 
 print(html_data.text)
 '''
-
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -154,15 +146,6 @@ print(r.text)
 
 print('------------------------------------------------------------')	#60個
 
-url_params = {'name': '陳會安', 'grade': 95}
-r = requests.get("http://httpbin.org/get", params=url_params)
-if r.status_code == 200:
-    print(r.text)
-else:
-    print("錯誤! HTTP請求失敗...")
-
-print('------------------------------------------------------------')	#60個
-
 url = "http://httpbin.org/user-agent"
  
 headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
@@ -184,13 +167,7 @@ cookies = dict(name='Joe Chen')
 r = requests.get(url, cookies=cookies)
 print(r.text)
 
-print('------------------------------------------------------------')	#60個
-
-post_data = {'name': '陳會安', 'grade': 95}
-r = requests.post("http://httpbin.org/post", data=post_data)
-print(r.text)
-
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail
 proxy = {'http': 'http://109.161.48.141:3128',
@@ -201,7 +178,6 @@ print(r.text)
 """
 
 print('------------------------------------------------------------')	#60個
-
 
 """ fail
 from fake_useragent import UserAgent
@@ -240,117 +216,36 @@ while True:
 
 print('------------------------------------------------------------')	#60個
 
-
-import requests
-# 將查詢參數定義為字典資料加入GET請求中
-payload = {'key1': 'value1', 'key2': 'value2'}
-r = requests.get("http://httpbin.org/get", params=payload)
-print(r.text)
-
-
-import requests
-# 將查詢參數加入 POST 請求中
-payload = {'key1': 'value1', 'key2': 'value2'}
-r = requests.post("http://httpbin.org/post", data=payload)
-print(r.text)
-
-
-import requests
-# 將查詢參數定義為字典資料加入GET請求中
-payload = {'key1': 'value1', 'key2': 'value2'}
-r = requests.get("http://httpbin.org/get", params=payload)
-print(r.text)
-
-
-import requests
-# 將查詢參數加入 POST請求中
-payload = {'key1': 'value1', 'key2': 'value2'}
-r = requests.post("http://httpbin.org/post", data=payload)
-print(r.text)
-
-
-
-import requests
-
-# 將查詢參數定義為字典資料加入GET請求中
-payload = {'key1': 'value1', 'key2': 'value2'}
-html = requests.get("http://httpbin.org/get", params=payload)
-
-print(html.text)
-
-
-
-import requests
-
-# 將查詢參數加入 POST 請求中
-payload = {'key1': 'value1', 'key2': 'value2'}
-r = requests.post("http://httpbin.org/post", data=payload)
-
-print(r.text)
-
-print("------------------------------------------------------------")  # 60個
-
-# get_params.py
-import requests
 # 將查詢參數定義為字典資料加入GET請求中
 payload = {'key1': 'value1', 'key2': 'value2'}
 html = requests.get("http://httpbin.org/get", params=payload)
 print(html.text)
 
 
-
-
-# post.py
-import requests
 # 將查詢參數加入 POST 請求中
 payload = {'key1': 'value1', 'key2': 'value2'}
 r = requests.post("http://httpbin.org/post", data=payload)
 print(r.text)
 
-
-
-
 print("------------------------------------------------------------")  # 60個
-
 
 url_params = {'name': '陳會安', 'score': 95}
 r = requests.get("http://httpbin.org/get", params=url_params)
 print(r.url)
-
-print("------------------------------------------------------------")  # 60個
-
-""" fail
-from urlencode import urlencode 
-
-url_params = {'name': '陳會安', 'score': 95}
-print(urlencode(url_params))
-"""
-print("------------------------------------------------------------")  # 60個
-
-data = {'name': '陳會安', 'score': 95}
-r = requests.get("http://httpbin.org/get", params=data)
 print(r.text)
 
+if r.status_code == 200:
+    print(r.text)
+else:
+    print("錯誤! HTTP請求失敗...")
+
 print("------------------------------------------------------------")  # 60個
 
-post_data = {'name': '陳會安', 'score': 95}
+post_data = {'name': '陳會安', 'grade': 95}
 r = requests.post("http://httpbin.org/post", data=post_data)
 print(r.text)
 
 print("------------------------------------------------------------")  # 60個
-
-
-import requests
-
-url = "http://httpbin.org/cookies"
-
-cookies = dict(name='Joe Chen')
-r = requests.get(url, cookies=cookies)
-print(r.text)
-
-print("------------------------------------------------------------")  # 60個
-
-import requests
 
 url = "http://httpbin.org/user-agent"
 
@@ -366,7 +261,6 @@ print("------------------------------------------------------------")  # 60個
 
 print('使用POST方式抓取數據')
 
-import requests
 params = {'key1': 'value1', 'key2': 'value2'}
 r = requests.post("http://httpbin.org/post", data=params)
 print(r.text)

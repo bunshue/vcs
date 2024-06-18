@@ -6,6 +6,7 @@ import random
 #共用套件
 import requests
 
+'''
 print("------------------------------------------------------------")  # 60個
 
 """ fail
@@ -711,7 +712,7 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-''' OK many
+""" OK many
 print('下載網站圖片')
 #抓 博客來電子寵物書 圖片 OK
 
@@ -969,7 +970,7 @@ fw.close()
 #os.system(html_filename)  # 開啟網頁
 print("%s 網頁建置完成" % (html_filename))
 
-'''
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1062,13 +1063,8 @@ for item in listItems:
     print("=" * 70)
 print("取得文章數量 =", len(listItems))
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
-
-'''
 """
 import socket
 
@@ -1131,7 +1127,7 @@ print(response)
 
 """
 
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -4013,6 +4009,78 @@ for i in range(1, 6):
 """
 print("------------------------------------------------------------")  # 60個
 
+'''
+
+
+print("------------------------------------------------------------")  # 60個
+
+import requests
+import re
+import time
+from bs4 import BeautifulSoup
+     
+exist_url = []
+g_writecount = 0
+     
+full_url = "https://zh.wikipedia.org/wiki/%E6%8B%BF%E7%A0%B4%E4%BB%91%E4%B8%80%E4%B8%96" # 填写你要爬取的网页
+
+def scrappy(url, depth=1):
+    global g_writecount
+    try:
+        headers = {
+            'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"}
+        r = requests.get(full_url, headers=headers)
+        html = r.text
+    except Exception as e:
+        print("Failed downloading and saving ", full_url)
+        print(e)
+        exist_url.append(full_url)
+        return None
+     
+    exist_url.append(url)
+     
+    # 使用BeautifulSoup提取页面的所有文本内容
+    soup = BeautifulSoup(html, 'lxml')
+     
+    # 提取所有文本
+    chinese_text = ''.join([p.get_text() for p in soup.find_all('p')])
+     
+    # 保存中文文本到文件
+    with open('chinese_txt.txt', 'a+', encoding='utf-8') as f:
+        f.write(chinese_text)
+     
+    link_list = re.findall('<a href="/wiki/([^:#=<>]*?)".*?</a>', html)
+    unique_list = list(set(link_list) - set(exist_url))
+     
+    for eachone in unique_list:
+        print('找到連結 :', eachone)
+        g_writecount += 1
+        output = 'No.' + str(g_writecount) + '\t Depth:' + str(depth) + '\t' + full_url + ' -> ' + eachone + '\n'
+        #print(output)
+     
+        if depth < 1:
+            time.sleep(5)  # 添加5秒的延迟
+            scrappy(eachone, depth + 1)
+
+"""     
+效果：给一个网页，返回一个chinese_txt文件，
+里面有爬回这个网页内所有的文字，
+以及网页内所有的链接内的网页文字也会被爬到。
+"""
+start = time.time()
+     
+scrappy(full_url)
+stop = time.time()
+print("所用时间：", stop - start)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
 
 

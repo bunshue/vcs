@@ -22,7 +22,7 @@ import datetime
 
 ESC = 27
 SPACE = 32
-RECORD_TIME_MINUTE = 2
+RECORD_TIME_MINUTE = 10
 
 #'XVID','DIVX','MJPG','I420'
 
@@ -49,15 +49,53 @@ ENCODING_TYPE = 'MJPG'  # 編碼器
 """
 
 
-
-
 """
 print("------------------------------------------------------------")  # 60個
 print('最簡錄影, 一直錄, 按 ESC 離開')
 
+record_filename = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
 
+cap = cv2.VideoCapture(0)   #打開攝影機
+if not cap.isOpened():
+    print('Could not open video device')
+    sys.exit()
+else:
+    print('Video device opened')
+
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
+fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
+
+#建立視訊編碼 fourcc
+ENCODING_TYPE = 'XVID'  # 編碼器
+fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
+
+#建立影像寫入器 out
+out = cv2.VideoWriter(record_filename, fourcc, fps, (width,height))
+
+while True:
+    ret, frame = cap.read()  #擷取一張影像
+    if ret == False:
+      print('無影像, 離開')
+      break
+
+    now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    cv2.putText(frame, now, (20, 40),cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2, cv2.LINE_AA)
+
+    cv2.imshow('WebCam2', frame)
+    out.write(frame)  # 影像寫入影片檔
+
+    k = cv2.waitKey(1) # 等待按鍵輸入
+    if k == ESC:     #ESC
+        break
+cap.release()    #關閉攝影機
+out.release()    #關閉寫入器
+cv2.destroyAllWindows()  #關閉視窗
+
+print('存檔檔名 :', record_filename)
 
 """
+
 print("------------------------------------------------------------")  # 60個
 
 print("錄影, 按 SPACE 存圖, 按 ESC 離開")

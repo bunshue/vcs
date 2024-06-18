@@ -580,6 +580,51 @@ def TimestampFromTicks(ticks):
 print('------------------------------------------------------------')	#60個
 
 
+print("------------------------------------------------------------")  # 60個
+
+"""
+localtime()返回元組的日期與時間資料結構 用索引方式獲得個別內容
+索引	名稱	說明
+0	tm_year	年 	2020
+1	tm_mon	月 	1-12
+2	tm_mday 日	1-31
+3	tm_hour	時	0-23
+4	tm_min	分	0-59
+5	tm_sec	秒	0-59
+6	tm_wday	星期	0:一, 1:二...
+7	tm_yday	年第幾天
+8	tm_isdst 夏令時間 0:不是, 1:是
+"""
+
+xtime = time.localtime()            #使用localtime()方法列出目前時間的結構
+print(xtime)                        # 列出目前系統時間
+print("年 ", xtime[0])
+print("年 ", xtime.tm_year)         # 物件設定方式顯示
+print("月 ", xtime[1])
+print("日 ", xtime[2])
+print("時 ", xtime[3])
+print("分 ", xtime[4])
+print("秒 ", xtime[5])
+print("星期幾   ", xtime[6])
+print("第幾天   ", xtime[7])
+print("夏令時間 ", xtime[8])
+
+print("------------------------------------------------------------")  # 60個
+
+print('range(5)', range(5))
+print('list(range(5))', list(range(5)))
+
+# range
+tStart = time.time()
+for i in range(10000000):
+    pass
+tEnd = time.time()
+print('range time:', tEnd - tStart)
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 
 
@@ -595,4 +640,17 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
+
+"""
+
+        start_time = time.perf_counter()  # 獲取函數開始執行的時間
+        result = func(*args, **kwargs)  # 調用原始函數
+        end_time = time.perf_counter()  # 獲取函數結束執行的時間
+        duration = end_time - start_time  # 計算函數執行時間
+        print(f"{func.__name__} 執行需 : {duration:.7f} 秒")
+        
+
+
+"""
 

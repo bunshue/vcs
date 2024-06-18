@@ -2,6 +2,9 @@
 
 使用 Python 的 hashlib 模組計算資料的 MD5 與 SHA 雜湊值
 
+1. 通用
+2. 字串 hash
+3. 檔案 hash
 
 md5(): 建立md5()方法的物件
 update(): 更新數據文件內容
@@ -37,58 +40,58 @@ import hashlib
 # 要計算 MD5 雜湊值的資料
 clear_text = "this is a lion-mouse"
 
+print("------------------------------------------------------------")  # 60個
+
+print("列出此平台可使用的雜湊演算法")
+print(hashlib.algorithms_available)
+
+print("列出跨平台通用的雜湊演算法")
+print(hashlib.algorithms_guaranteed)
 
 print("------------------------------------------------------------")  # 60個
 
-print("可用的雜湊演算法")
-print(hashlib.algorithms_available)
-
-print("跨平台通用的雜湊演算法")
-print(hashlib.algorithms_guaranteed)
-
-value = hashlib.md5(clear_text.encode("utf8"))
-print(value)
+md5_value = hashlib.md5(clear_text.encode("utf8"))
+print(md5_value)
 
 # 計算 MD5 雜湊值
 
 # 建立 MD5 物件
-m = hashlib.md5()
+md5_value = hashlib.md5()
 
 # 先將資料編碼，再更新 MD5 雜湊值
-m.update(clear_text.encode("utf-8"))
+md5_value.update(clear_text.encode("utf-8"))
 
 # 取得 MD5 雜湊值
-h = m.hexdigest()
-
-print(h)
+md5_value = md5_value.hexdigest()
+print(md5_value)
 
 print("------------------------------------------------------------")  # 60個
 
 print("算一個字串的hashcode SHA1")
 
-s = hashlib.sha1()
-s.update(clear_text.encode("utf-8"))
-result = s.hexdigest()
-print(result)
+sha1_value = hashlib.sha1()
+sha1_value.update(clear_text.encode("utf-8"))
+sha1_value = sha1_value.hexdigest()
+print(sha1_value)
 
 print("計算 SHA 雜湊值")
-s = hashlib.sha1()  # 建立 SHA1 物件
-s.update(clear_text.encode("utf-8"))
-result = s.hexdigest()
-print(result)
+sha1_value = hashlib.sha1()  # 建立 SHA1 物件
+sha1_value.update(clear_text.encode("utf-8"))
+sha1_value = sha1_value.hexdigest()
+print(sha1_value)
 
-result = hashlib.sha1(clear_text.encode("utf-8")).hexdigest()
-print(result)
+sha1_value = hashlib.sha1(clear_text.encode("utf-8")).hexdigest()
+print(sha1_value)
 
 print("------------------------------------------------------------")  # 60個
 
 
 def compute_checksum(input, length=None):
     input = input or ""
-    s = hashlib.sha1(input.encode("utf-8")).hexdigest()
+    sha1_value = hashlib.sha1(input.encode("utf-8")).hexdigest()
     if length:
-        s = s[:length]
-    return s
+        sha1_value = sha1_value[:length]
+    return sha1_value
 
 
 input = "cat-dog"
@@ -108,15 +111,15 @@ print("算一個檔案的hashcode SHA1")
 
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 
-s = hashlib.sha1()
-s.update(clear_filename.encode("utf-8"))
+sha1_value = hashlib.sha1()
+sha1_value.update(clear_filename.encode("utf-8"))
 
 # 以二進位方式讀取檔案
 with open(clear_filename, "rb") as f:
-    s.update(f.read())
+    sha1_value.update(f.read())
 
-h = s.hexdigest()
-print(h)
+sha1_value = sha1_value.hexdigest()
+print(sha1_value)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -137,15 +140,15 @@ def calculate_file_hash(clear_filename):
         The SHA256 checksum of the file.
     """
     BLOCKSIZE = 65536
-    hasher = hashlib.sha256()
+    sha256_value = hashlib.sha256()
     # 以二進位方式讀取檔案
     with open(clear_filename, "rb") as f:
         buf = f.read(BLOCKSIZE)
         while len(buf) > 0:
-            hasher.update(buf)
+            sha256_value.update(buf)
             buf = f.read(BLOCKSIZE)
 
-    return hasher.hexdigest()
+    return sha256_value.hexdigest()
 
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 calculated_filehash = calculate_file_hash(clear_filename)
@@ -159,23 +162,23 @@ print("------------------------------------------------------------")  # 60個
 
 string_data = clear_text.strip().replace("\n", "").encode()
 
-myMd5 = hashlib.md5()
-myMd5.update(string_data)
-myMd5_Digest = myMd5.hexdigest()
-print(myMd5_Digest)
+md5_value = hashlib.md5()
+md5_value.update(string_data)
+md5_value = md5_value.hexdigest()
+print(md5_value)
 
 print("------------------------------------------------------------")  # 60個
 
-m = hashlib.md5()
-m.update(b"Nobody inspects")
-m.update(b" the spammish repetition")
-m.digest()
-print(m.digest())
+md5_value = hashlib.md5()
+md5_value.update(b"Nobody inspects")
+md5_value.update(b" the spammish repetition")
+md5_value = md5_value.digest()
+print(md5_value)
 
 print("------------------------------------------------------------")  # 60個
 
-md5 = hashlib.md5(clear_text.encode()).hexdigest()
-print("md5 : ", md5)
+md5_value = hashlib.md5(clear_text.encode()).hexdigest()
+print("md5 : ", md5_value)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -187,16 +190,16 @@ allmd5s = dict()
 for filename in filenames:
     long_filename = os.path.join(foldername, filename)  # 取得檔案的絕對路徑
     # 以二進位方式讀取檔案
-    img_md5 = hashlib.md5(open(long_filename, "rb").read()).digest()
-    if img_md5 in allmd5s:
+    md5_value = hashlib.md5(open(long_filename, "rb").read()).digest()
+    if md5_value in allmd5s:
         print("---------------")
         print("以下為重覆的檔案：")
         print(os.path.abspath(filename))
-        print(allmd5s[img_md5])
+        print(allmd5s[md5_value])
         os.system("open " + os.path.abspath(filename))
-        os.system("open " + allmd5s[img_md5])
+        os.system("open " + allmd5s[md5_value])
     else:
-        allmd5s[img_md5] = os.path.abspath(filename)  # img_md5是key, 全路徑是value
+        allmd5s[md5_value] = os.path.abspath(filename)  # md5_value是key, 全路徑是value
 
 print("------------------------------------------------------------")  # 60個
 
@@ -205,110 +208,94 @@ def md5sum(t):
 
 print("------------------------------------------------------------")  # 60個
 
-hash_val = hashlib.sha512("aaaaaaa".encode("utf-8"))
-print(hash_val)
+sha512_value = hashlib.sha512("aaaaaaa".encode("utf-8"))
+print(sha512_value)
 
-dicom_uid = str(int(hash_val.hexdigest(), 16))
+dicom_uid = str(int(sha512_value.hexdigest(), 16))
 print(dicom_uid)
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-h = hashlib.md5(clear_text).hexdigest()
-print(h)
-"""
 
 print("------------------------------------------------------------")  # 60個
 
 print("將字串轉成md5")
 
-hashnum = hashlib.md5(bytes(clear_text, "utf-8")).digest()
-print(hashnum)
-print(hashnum[:16])
+md5_value = hashlib.md5(bytes(clear_text, "utf-8")).digest()
+print(md5_value)
+print(md5_value[:16])
 
 print("將字串轉成sha1")
 
-hashnum = hashlib.sha1(bytes(clear_text, "utf-8")).digest()
-print(hashnum)
-print(hashnum[:16])
+sha1_value = hashlib.sha1(bytes(clear_text, "utf-8")).digest()
+print(sha1_value)
+print(sha1_value[:16])
 
 print("------------------------------------------------------------")  # 60個
 
-data = hashlib.md5()  # 建立data物件
-data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
+md5_value = hashlib.md5()  # 建立 md5_value 物件
+md5_value.update(b"Ming-Chi Institute of Technology")  # 更新 md5_value 物件內容
 
-print("Hash Value         = ", data.digest())
-print("Hash Value(16進位) = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出哈希值資料型態
+print("Hash Value         = ", md5_value.digest())
+print("Hash Value(16進位) = ", md5_value.hexdigest())
+print(type(md5_value))  # 列出 md5_value 資料型態
+print(type(md5_value.hexdigest()))  # 列出哈希值資料型態
 
 print("------------------------------------------------------------")  # 60個
 
 # 使用中文字串 需要先encode
-data = hashlib.md5()  # 建立data物件
+md5_value = hashlib.md5()  # 建立md5_value物件
 clear_text = "歡迎來到美國"  # 中文字串
-data.update(clear_text.encode("utf-8"))  # 更新data物件內容
+md5_value.update(clear_text.encode("utf-8"))  # 更新md5_value物件內容
 
-print("Hash Value         = ", data.digest())
-print("Hash Value(16進位) = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出哈希值資料型態
-
-print("------------------------------------------------------------")  # 60個
-
-data = hashlib.sha1()  # 建立data物件
-data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
-
-print("Hash Value         = ", data.digest())
-print("Hash Value(16進位) = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出哈希值資料型態
+print("Hash Value         = ", md5_value.digest())
+print("Hash Value(16進位) = ", md5_value.hexdigest())
+print(type(md5_value))  # 列出md5_value資料型態
+print(type(md5_value.hexdigest()))  # 列出哈希值資料型態
 
 print("------------------------------------------------------------")  # 60個
 
-print(hashlib.algorithms_available)  # 列出此平台可使用的哈希演算法
+sha1_value = hashlib.sha1()  # 建立 sha1_value 物件
+sha1_value.update(b"Ming-Chi Institute of Technology")  # 更新 sha1_value 物件內容
+
+print("Hash Value         = ", sha1_value.digest())
+print("Hash Value(16進位) = ", sha1_value.hexdigest())
+print(type(sha1_value))  # 列出sha1_value資料型態
+print(type(sha1_value.hexdigest()))  # 列出哈希值資料型態
 
 print("------------------------------------------------------------")  # 60個
 
-print(hashlib.algorithms_guaranteed)  # 列出跨平台可使用的哈希演算法
+sha256_value = hashlib.sha256()  # 建立 sha256_value 物件
+sha256_value.update(b"Ming-Chi Institute of Technology")  # 更新 sha256_value 物件內容
+
+print("Hash Value = ", sha256_value.hexdigest())
+print(type(sha256_value))  # 列出 sha256_value 資料型態
+print(type(sha256_value.hexdigest()))  # 列出雜湊碼資料型態
 
 print("------------------------------------------------------------")  # 60個
 
-data = hashlib.sha256()  # 建立data物件
-data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
+sha3_384_value = hashlib.sha3_384()  # 建立 sha3_384_value 物件
+sha3_384_value.update(b"Ming-Chi Institute of Technology")  # 更新 sha3_384_value 物件內容
 
-print("Hash Value = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出雜湊碼資料型態
-
-print("------------------------------------------------------------")  # 60個
-
-data = hashlib.sha3_384()  # 建立data物件
-data.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
-
-print("Hash Value = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出雜湊碼資料型態
+print("Hash Value = ", sha3_384_value.hexdigest())
+print(type(sha3_384_value))  # 列出 sha3_384_value 資料型態
+print(type(sha3_384_value.hexdigest()))  # 列出雜湊碼資料型態
 
 print("------------------------------------------------------------")  # 60個
 
-data1 = hashlib.sha256()  # 建立data物件
-data1.update(b"Ming-Chi Institute of Technology")  # 更新data物件內容
-print("Hash Value = ", data1.hexdigest())
+sha256_value = hashlib.sha256()  # 建立 sha256_value 物件
+sha256_value.update(b"Ming-Chi Institute of Technology")  # 更新 sha256_value 物件內容
+print("Hash Value = ", sha256_value.hexdigest())
 
-data2 = hashlib.sha256()  # 建立data物件
-data2.update(b"ming-Chi Institute of Technology")  # 更新data物件內容
-print("Hash Value = ", data2.hexdigest())
-
+sha256_value = hashlib.sha256()  # 建立 sha256_value 物件
+sha256_value.update(b"ming-Chi Institute of Technology")  # 更新 sha256_value 物件內容
+print("Hash Value = ", sha256_value.hexdigest())
 
 print("------------------------------------------------------------")  # 60個
 
 """
 
 def create_password(pwd):
-    data = hashlib.sha256()  # 建立data物件
-    data.update(pwd.encode("utf-8"))  # 更新data物件內容
-    return data.hexdigest()
+    sha256_value = hashlib.sha256()  # 建立 sha256_value 物件
+    sha256_value.update(pwd.encode("utf-8"))  # 更新 sha256_value 物件內容
+    return sha256_value.hexdigest()
 
 
 acc = input("請建立帳號 : ")
@@ -331,9 +318,9 @@ else:
 print("------------------------------------------------------------")  # 60個
 
 clear_text = "歡迎來到美國"
-data = hashlib.md5()  # 建立data物件
-data.update(clear_text.encode("utf-8"))  # 更新data物件內容
-print("Hash Value(16進位) = ", data.hexdigest())
+md5_value = hashlib.md5()  # 建立 md5_value 物件
+md5_value.update(clear_text.encode("utf-8"))  # 更新 md5_value 物件內容
+print("Hash Value(16進位) = ", md5_value.hexdigest())
 
 print("------------------------------------------------------------")  # 60個
 
@@ -356,15 +343,15 @@ def printsum(clear_filename):
     return sts
 
 def printsumfp(fp, clear_filename):
-    m = hashlib.md5()
+    md5_value = hashlib.md5()
     while 1:
         data = fp.read(BUFSUZE)
         if not data:
             break
         if isinstance(data, str):
             data = data.encode(fp.encoding)
-        m.update(data)
-    return m.hexdigest()
+        md5_value.update(data)
+    return md5_value.hexdigest()
 
 #clear_filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 clear_filename = "Python-3.7.17.tar.xz"
@@ -385,16 +372,16 @@ print('計算一個檔案的 MD5 值 2')
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
 clear_filename = "Python-3.7.17.tar.xz"
 
-m = hashlib.md5()
+md5_value = hashlib.md5()
 
 # 以二進位方式讀取檔案
 with open(clear_filename, "rb") as f:
     # 分批讀取檔案內容，計算 MD5 雜湊值
     for chunk in iter(lambda: f.read(4096), b""):
-        m.update(chunk)
+        md5_value.update(chunk)
 
-h = m.hexdigest()
-print(h)
+md5_value = md5_value.hexdigest()
+print(md5_value)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -404,27 +391,27 @@ clear_filename = "C:/_git/vcs/_1.data/______test_files1/picture1.jpg"
 clear_filename = "Python-3.7.17.tar.xz"
 
 # 以二進位方式讀取檔案
-md5 = hashlib.md5(open(clear_filename, "rb").read()).digest()
-print(type(md5))
-print(md5)
+md5_value = hashlib.md5(open(clear_filename, "rb").read()).digest()
+print(type(md5_value))
+print(md5_value)
 
 print("------------------------------------------------------------")  # 60個
 
 print('計算一個檔案的 MD5 值 4')
 
-data = hashlib.md5()  # 建立data物件
+md5_value = hashlib.md5()  # 建立 md5_value 物件
 clear_filename = "C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt"
 clear_filename = "Python-3.7.17.tar.xz"
 
 # 以二進位方式讀取檔案
 with open(clear_filename, "rb") as fn:
     btxt = fn.read()
-    data.update(btxt)
+    md5_value.update(btxt)
 
-print("Hash Value         = ", data.digest())
-print("Hash Value(16進位) = ", data.hexdigest())
-print(type(data))  # 列出data資料型態
-print(type(data.hexdigest()))  # 列出哈希值資料型態
+print("Hash Value         = ", md5_value.digest())
+print("Hash Value(16進位) = ", md5_value.hexdigest())
+print(type(md5_value))  # 列出md5_value資料型態
+print(type(md5_value.hexdigest()))  # 列出哈希值資料型態
 
 print("------------------------------------------------------------")  # 60個
 
