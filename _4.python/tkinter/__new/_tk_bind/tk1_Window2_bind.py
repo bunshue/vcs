@@ -2,6 +2,7 @@
 綁定鍵盤滑鼠事件 Window
 """
 
+import sys
 import tkinter as tk
 import tkinter.filedialog
 
@@ -9,9 +10,7 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-# 設定主視窗標題
-title = '綁定鍵盤滑鼠事件 Window'
-window.title(title)
+window.title("綁定鍵盤滑鼠事件 Window")
 
 def mouseDoubleClick1(event):
     print('雙擊左鍵', end = ' ')
@@ -139,7 +138,7 @@ def mouseMotion(event):             # Mouse移動
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('window.bind 1')
+window.title("綁定鍵盤滑鼠事件 Window")
 
 x, y = 0, 0                         # x,y座標
 var = tk.StringVar()
@@ -164,7 +163,7 @@ def mouseMotion(event):             # Mouse移動
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('window.bind 1')
+window.title("綁定鍵盤滑鼠事件 Window")
 
 x, y = 0, 0                         # x,y座標
 var = tk.StringVar()
@@ -184,7 +183,7 @@ print('按右鍵 另存新圖')
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('window.bind 1')
+window.title("綁定鍵盤滑鼠事件 Window")
 
 from PIL import ImageTk, Image
 
@@ -209,7 +208,7 @@ print('按右鍵 右鍵選單 另存新圖')
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('window.bind 1')
+window.title("綁定鍵盤滑鼠事件 Window")
 
 from PIL import ImageTk, Image
 
@@ -243,7 +242,7 @@ def leave(event):                       # <Esc>事件處理程式
    
 window = tk.Tk()
 window.geometry("600x800")
-window.title('window.bind 1')
+window.title("綁定鍵盤滑鼠事件 Window")
 
 window.bind("<Escape>",leave)             # Esc鍵綁定leave函數
 lab = tk.Label(window,text="測試Esc鍵",      # 標籤區域
@@ -261,7 +260,7 @@ def key(event):                     # 處理鍵盤按a ... z
    
 window = tk.Tk()
 window.geometry("600x800")
-window.title('window.bind 1')
+window.title("綁定鍵盤滑鼠事件 Window")
 
 window.bind("<Key>",key)              # <Key>鍵綁定key函數
 
@@ -298,7 +297,7 @@ print('右鍵選單')
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('window.bind 1')
+window.title("綁定鍵盤滑鼠事件 Window")
 
 popupmenu = tk.Menu(window,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立3個指令清單
@@ -336,7 +335,7 @@ def showPopupMenu(event):               # 顯示彈出功能表
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('window.bind 1')
+window.title("綁定鍵盤滑鼠事件 Window")
 
 popupmenu = tk.Menu(window,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立3個指令清單
@@ -390,7 +389,7 @@ def redoJob():                          # 重複redo方法
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title('window.bind 1')
+window.title("綁定鍵盤滑鼠事件 Window")
 
 popupmenu = tk.Menu(window,tearoff=False)    # 建立彈出功能表物件
 # 在彈出功能表內建立3個指令清單

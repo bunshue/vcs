@@ -6,44 +6,29 @@ import tkinter.font as tkfont
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "Spin 測試"
-window.title(title)
+window.geometry("600x800")
+window.title('Spinbox 1')
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
+tk.Label(window, text="tk之spinbox").pack()
+spinbox = tk.Spinbox(window, from_=10, to=30,increment=2)
+spinbox.pack()
+
+tk.Label(window, text="ttk之spinbox").pack()
 spinbox = ttk.Spinbox(window, from_=0, to=100, increment=0.1)
 spinbox.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-spin = tk.Spinbox(window,from_=10,to=30,increment=2)
-spin.pack(pady=20)
+tk.Label(window, text="設定刻度").pack()
+#spinbox = ttk.Spinbox(window, from_=0, to=10)
+spinbox = ttk.Spinbox(window, values=(1, 2, 4, 8))
+spinbox.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-#w = ttk.Spinbox(window, from_=0, to=10)
-w = ttk.Spinbox(window, values=(1, 2, 4, 8))
-w.pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
+tk.Label(window, text="設定刻度").pack()
 spinboxFourcc=tk.Spinbox(window,value=('XVID','DIVX','MJPG','I420'),width=10)
 spinboxFourcc.pack()
 
@@ -52,6 +37,18 @@ spinboxFourcc.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
+
+def printInfo3():
+    print("e你選擇了 :", sp.get())
+    
+cities = ("新加坡","上海","東京")       # 以元組儲存數值
+
+sp = tk.Spinbox(window, values=cities, command=printInfo3)
+sp.pack(pady=10,padx=10)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 # Spinbox
 spin_int = tk.IntVar(value = 12)
@@ -115,17 +112,6 @@ def printInfo2():
 sp = tk.Spinbox(window,
              values=(10,38,170,101),    # 以元組儲存數值
              command=printInfo2)
-sp.pack(pady=10,padx=10)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-def printInfo3():
-    print("e你選擇了 :", sp.get())
-    
-cities = ("新加坡","上海","東京")       # 以元組儲存數值
-
-sp = tk.Spinbox(window, values=cities, command=printInfo3)
 sp.pack(pady=10,padx=10)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線

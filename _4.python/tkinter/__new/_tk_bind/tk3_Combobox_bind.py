@@ -16,7 +16,7 @@ def sizeSelected(event):                    # size family更新
     text.tag_config(tk.SEL,font=f)
       
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
 
 # 建立工具列
 toolbar = tk.Frame(window,relief=tk.RAISED,borderwidth=1)
@@ -55,7 +55,7 @@ def sizeSelected(event):                        # size family更新
     text.tag_config(tk.SEL,font=f)
       
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
 
 # 建立工具列
 toolbar = tk.Frame(window,relief=tk.RAISED,borderwidth=1)

@@ -24,7 +24,7 @@ def fnNM(e):
     labelMsg.config(text=msg[iArea][iNM]) #重設標籤的文字內容
     
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
 window.title('台灣夜市簡介')
 
 tk.Label(window,text='台灣夜市之旅',font=('微軟正黑體',16)).pack()
@@ -62,7 +62,6 @@ labelMsg=tk.Label(lfrmMsg,text=msg[0][0],font=(12),wraplength=120,justify='left'
 labelMsg.pack(anchor='n')
 
 window.mainloop()
-
 
 print("------------------------------------------------------------")  # 60個
 

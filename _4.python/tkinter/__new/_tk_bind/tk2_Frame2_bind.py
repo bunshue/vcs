@@ -9,19 +9,7 @@ import tkinter as tk
 print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
+window.geometry("600x800")
 title = '綁定鍵盤滑鼠事件 Frame'
 window.title(title)
 
@@ -158,18 +146,13 @@ def callback(event):                        # 事件處理程式
     print("滑鼠點擊位置 :", event.x, event.y)   # 列印座標
     
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
 
 frame = tk.Frame(window,width=300,height=180)
 frame.bind("<Button-1>",callback)           # 按一下綁定callback
 frame.pack()
 
 window.mainloop()
-
-
-print('------------------------------------------------------------')	#60個
-
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -181,7 +164,7 @@ def coordXY(event):                 # 列出滑鼠座標
     print("滑鼠座標 : ", event.x, event.y)
     
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
 
 frame = Frame(window, width=100, height=100)
 frame.bind("<Key>", key)            # frame物件的<Key>綁定key

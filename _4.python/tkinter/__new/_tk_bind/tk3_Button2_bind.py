@@ -14,7 +14,7 @@ def leave(event):                       # Leave事件處理程式
     x.set("滑鼠離開Exit功能鈕")
     
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
 
 button1 = tk.Button(window,text="離開",command=window.destroy)
 button1.pack(pady=30)
@@ -38,7 +38,7 @@ def buttonClicked2(event):             # Button按鈕事件處理程式2
     print("Bind event handler, I like tkinter")
     
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
 
 button1 = tk.Button(window,text="tkinter",command=buttonClicked1)
 button1.pack(anchor=tk.W,padx=10,pady=10)
@@ -91,19 +91,7 @@ def buttonClicked(event):       # Button按鈕事件處理程式
     lab.config(text="Button clicked")
 
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
+window.geometry("600x800")
 title = '綁定鍵盤滑鼠事件 Window'
 window.title(title)
 

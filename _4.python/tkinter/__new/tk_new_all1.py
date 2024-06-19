@@ -12,7 +12,7 @@ H = 200
 w = 12
 h = 2
 
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -582,3 +582,259 @@ print("------------------------------------------------------------")  # 60個
 
 
 """
+
+
+
+from tkinter import * # Import tkinter
+    
+class ChangeLabelDemo:
+    def __init__(self):
+        window = Tk() # Create a window 
+        window.title("Change Label Demo") # Set a title
+        
+        # Add a label to frame1
+        frame1 = Frame(window) # Create and add a frame to window 
+        frame1.pack()        
+        self.lbl = Label(frame1, text = "Programming is fun")
+        self.lbl.pack()
+        
+        # Add a label, an entry, a button, and two radio buttons to frame2
+        frame2 = Frame(window) # Create and add a frame to window 
+        frame2.pack()
+        label = Label(frame2, text = "Enter text: ")
+        self.msg = StringVar()
+        entry = Entry(frame2, textvariable = self.msg) 
+        btChangeText = Button(frame2, text = "Change Text", command = self.processButton)
+        self.v1 = StringVar()
+        rbRed = Radiobutton(frame2, text = "Red", bg = "red", variable = self.v1, value = 'R', command = self.processRadiobutton) 
+        rbYellow = Radiobutton(frame2, text = "Yellow", bg = "yellow", variable = self.v1, value = 'Y', command = self.processRadiobutton) 
+        
+        label.grid(row = 1, column = 1)
+        entry.grid(row = 1, column = 2)
+        btChangeText.grid(row = 1, column = 3)
+        rbRed.grid(row = 1, column = 4)
+        rbYellow.grid(row = 1, column = 5)
+        
+        window.mainloop()
+
+    def processRadiobutton(self):
+        if self.v1.get() == 'R':
+            self.lbl["fg"] = "red"
+        elif self.v1.get() == 'Y':
+            self.lbl["fg"] = "yellow" 
+    
+    def processButton(self):
+        self.lbl["text"] = self.msg.get() # New text for the label
+        
+ChangeLabelDemo() # Create GUI 
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('new all 2')
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+scrollbar = tk.Scrollbar(window)
+scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
+
+wordlist='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+list1 = tk.Listbox(window, yscrollcommand = scrollbar.set )
+
+for line in range(10):
+   list1.insert(tk.END, "字母: " + wordlist[line])
+
+list1.pack( side = tk.LEFT, fill = tk.BOTH )
+scrollbar.config( command = list1.yview )
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+
+tkimage = tk.PhotoImage(file = filename)
+
+canvas = tk.Canvas(window, width = 600, height = 600)
+canvas.pack()
+canvas.create_image(256, 256, image = tkimage)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+#只能用gif
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+   
+window = tk.Tk() # Create a root window
+
+photo = tk.PhotoImage(file = filename)
+tk.Label(window, text = "Blue", image = photo, bg = "blue").pack(fill = tk.BOTH, expand = 1)
+
+window.mainloop() # Create an event loop
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+canvas = tk.Canvas(window,
+			width = 600,					# 指定Canvas元件的寬度
+			height = 480,					# 指定Canvas元件的高度
+			bg = 'white')					# 指定Canvas元件的背景色
+
+#只能開啟 gif 檔
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/brown.gif'
+im = tk.PhotoImage(file=filename)				# 使用PhotoImage開啟圖片
+canvas.create_image(300,250,image = im)					# 使用create_image將圖片新增到Canvas元件中
+
+canvas.pack()								# 將Canvas新增到主視窗
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+ 
+window = tk.Tk()
+window.title("Scroll Text Demo")
+
+frame1 = tk.Frame(window)
+frame1.pack()
+
+scrollbar = tk.Scrollbar(frame1)
+scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
+
+text1 = tk.Text(frame1, width = 40, height = 10, wrap = tk.WORD, yscrollcommand = scrollbar.set)
+text1.pack()
+
+scrollbar.config(command = text1.yview)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+import calendar
+
+window = tk.Tk()
+window.config(background='grey')
+window.title("Calender for the year")
+window.geometry("550x600")
+
+year = 2024
+content = calendar.calendar(year)
+calYear = tk.Label(window, text= content, font= "Consolas 10 bold")
+calYear.grid(row=5, column=1,padx=20)
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+import tkinter as tk
+
+window = tk.Tk()
+window.geometry("600x400")
+
+# Create PhotoImage objects
+caImage = tk.PhotoImage(file = "ca.gif")
+chinaImage = tk.PhotoImage(file = "china.gif")
+leftImage = tk.PhotoImage(file = "left.gif")
+rightImage = tk.PhotoImage(file = "right.gif")
+usImage = tk.PhotoImage(file = "usIcon.gif")
+ukImage = tk.PhotoImage(file = "ukIcon.gif")
+crossImage = tk.PhotoImage(file = "x.gif")
+circleImage = tk.PhotoImage(file = "o.gif")
+
+# frame1 to contain label and canvas
+frame1 = tk.Frame(window)
+frame1.pack()
+tk.Label(frame1, image = caImage).pack(side = tk.LEFT)
+canvas = tk.Canvas(frame1)
+canvas.create_image(90, 50, image = chinaImage)
+canvas["width"] = 200
+canvas["height"] = 100
+canvas.pack(side = tk.LEFT)
+
+# frame2 to contain buttons, check buttons, and radio buttons
+frame2 = tk.Frame(window)
+frame2.pack()
+tk.Button(frame2, image = leftImage).pack(side = tk.LEFT)
+tk.Button(frame2, image = rightImage).pack(side = tk.LEFT)
+
+tk.Checkbutton(frame2, image = usImage).pack(side = tk.LEFT)
+tk.Checkbutton(frame2, image = ukImage).pack(side = tk.LEFT)
+
+tk.Radiobutton(frame2, image = crossImage).pack(side = tk.LEFT)
+tk.Radiobutton(frame2, image = circleImage).pack(side = tk.LEFT)
+
+window.mainloop()
+'''
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+from tkinter import * # Import tkinter
+    
+class PopupMenuDemo:
+    def __init__(self):
+        window = Tk() # Create a window
+        window.title("Popup Menu Demo") # Set title
+
+        # Create a popup menu
+        self.menu = Menu(window, tearoff = 0)
+        self.menu.add_command(label = "Draw a line", 
+            command = self.displayLine)
+        self.menu.add_command(label = "Draw an oval", 
+            command = self.displayOval)
+        self.menu.add_command(label = "Draw a rectangle", 
+            command = self.displayRect)
+        self.menu.add_command(label = "Clear", 
+            command = self.clearCanvas)
+        
+        # Place canvas in window
+        self.canvas = Canvas(window, width = 200, 
+            height = 100, bg = "white")
+        self.canvas.pack()
+        
+        # Bind popup to canvas
+        self.canvas.bind("<Button-3>", self.popup)
+        
+        window.mainloop() # Create an event loop
+        
+    # Display a rectangle
+    def displayRect(self):
+        self.canvas.create_rectangle(10, 10, 190, 90, tags = "rect")
+        
+    # Display an oval
+    def displayOval(self):
+        self.canvas.create_oval(10, 10, 190, 90, tags = "oval")
+    
+    # Display a line
+    def displayLine(self):
+        self.canvas.create_line(10, 10, 190, 90, tags = "line")
+        self.canvas.create_line(10, 90, 190, 10, tags = "line")
+    
+    # Clear drawings
+    def clearCanvas(self):
+        self.canvas.delete("rect", "oval", "line")
+
+    def popup(self, event):
+        self.menu.post(event.x_root, event.y_root)
+
+print('右鍵選單')    
+PopupMenuDemo() # Create GUI
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個

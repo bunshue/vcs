@@ -1,24 +1,14 @@
-'''
+"""
 綁定鍵盤滑鼠事件 Canvas
-'''
+"""
+import sys
 import tkinter as tk
 
+print("------------------------------------------------------------")  # 60個
+
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = '綁定鍵盤滑鼠事件 Canvas'
-window.title(title)
+window.geometry("600x800")
+window.title("綁定鍵盤滑鼠事件 Canvas")
 
 width = 600
 height = 400
@@ -43,11 +33,11 @@ def mouse_down1(event):
     print('你按了滑鼠左鍵', end = ' ')
     global flag_mouse_down
     flag_mouse_down = True
-    '''
+    """
     print("在控件位置 : ", event.x, event.y, end = ' ')
     print("視窗位置 : ", event.x_root, event.y_root, end = ' ')
     print("按鍵 : ", event.num, end = ' ')
-    '''
+    """
     global radius
     cccc.delete("oval")
     if radius < 100:
@@ -168,21 +158,20 @@ cccc.create_oval(100 - radius, 100 - radius, 100 + radius, 100 + radius, tags = 
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import *
 def callback(event):                        # 事件處理程式
-    print("Clicked at", event.x, event.y)   # 列印座標
+    print("滑鼠左鍵 :", event.x, event.y)   # 列印座標
     
-root = Tk()
-root.title("ch40_20_1")
-canvas = Canvas(root,width=300,height=180)
+window = tk.Tk()
+window.geometry("600x800")
+window.title("綁定鍵盤滑鼠事件 Canvas")
+
+canvas = tk.Canvas(window, width=300, height=180, bg = 'pink')
 canvas.bind("<Button-1>",callback)           # 按一下綁定callback
 canvas.pack()
 
-root.mainloop()
-
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -192,8 +181,6 @@ print("------------------------------------------------------------")  # 60個
 - 处理鼠标事件
 
 """
-import tkinter
-
 def mouse_evt_handler(evt=None):
     row = round((evt.y - 20) / 40)
     col = round((evt.x - 20) / 40)
@@ -201,16 +188,16 @@ def mouse_evt_handler(evt=None):
     pos_y = 40 * row
     canvas.create_oval(pos_x, pos_y, 40 + pos_x, 40 + pos_y, fill='black')
 
-top = tkinter.Tk()
-# 设置窗口尺寸
-top.geometry('620x620')
-# 设置窗口标题
-top.title('五子棋')
+window = tk.Tk()
+window.geometry('620x620')
+window.title("綁定鍵盤滑鼠事件 Canvas 五子棋")
+
 # 设置窗口大小不可改变
-top.resizable(False, False)
+window.resizable(False, False)
 # 设置窗口置顶
-top.wm_attributes('-topmost', 1)
-canvas = tkinter.Canvas(top, width=600, height=600, bd=0, highlightthickness=0)
+window.wm_attributes('-topmost', 1)
+
+canvas = tk.Canvas(window, width=600, height=600, bd=0, highlightthickness=0)
 canvas.bind('<Button-1>', mouse_evt_handler)
 canvas.create_rectangle(0, 0, 600, 600, fill='yellow', outline='white')
 for index in range(15):
@@ -218,15 +205,10 @@ for index in range(15):
     canvas.create_line(20 + 40 * index, 20, 20 + 40 * index, 580, fill='black')
 canvas.create_rectangle(15, 15, 585, 585, outline='black', width=4)
 canvas.pack()
-tkinter.mainloop()
 
-# 请思考如何用面向对象的编程思想对上面的代码进行封装
+window.mainloop()
 
 print('------------------------------------------------------------')	#60個
-
-
-
-from tkinter import *
 
 def circleIncrease(event):
     global r
@@ -242,8 +224,11 @@ def circleDecrease(event):
         r -= 5
     canvas.create_oval(200-r,200-r,200+r,200+r,fill='yellow',tag="myCircle")
     
-tk = Tk()
-canvas= Canvas(tk, width=400, height=400)
+window = tk.Tk()
+window.geometry("600x800")
+window.title("綁定鍵盤滑鼠事件 Canvas")
+
+canvas= tk.Canvas(window, width=400, height=400, bg = 'pink')
 canvas.pack()
 
 r = 100
@@ -251,22 +236,21 @@ canvas.create_oval(200-r,200-r,200+r,200+r,fill='yellow',tag="myCircle")
 canvas.bind('<Button-1>', circleIncrease)
 canvas.bind('<Button-3>', circleDecrease)
 
-mainloop()
+print('按左鍵變大, 按右鍵變小')
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("01-TkUI11Canvas")
-
-import tkinter as tk
 
 from PIL import ImageTk, Image
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
-win = tk.Tk()
+window = tk.Tk()
+window.geometry("600x800")
+window.title("綁定鍵盤滑鼠事件 Canvas")
 
-c1 = tk.Canvas(win, 
+c1 = tk.Canvas(window, 
            width=1000, 
            height=410)
 
@@ -294,7 +278,7 @@ c1.bind( "<B1-Motion>", paint )
 
 c1.pack()
 
-win.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -320,6 +304,8 @@ xWidth = 200
 yHeight = 200
 
 window = tk.Tk() 
+window.geometry("600x800")
+window.title("綁定鍵盤滑鼠事件 Canvas")
 
 canvas = tk.Canvas(window, width=xWidth, height=yHeight)
 canvas.pack()
@@ -346,7 +332,8 @@ def cls():                                  # 清除畫面
     canvas.delete("all")
     
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
+window.title("綁定鍵盤滑鼠事件 Canvas")
 
 lab = tk.Label(window,text="拖曳滑鼠可以繪圖")     # 建立標題
 lab.pack()
@@ -362,10 +349,9 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-
 window = tk.Tk()
-window.title("Control Circle Demo")
+window.geometry("600x800")
+window.title("綁定鍵盤滑鼠事件 Canvas Control Circle Demo")
 
 def increaseCircle(event):
     canvas.delete("oval")
@@ -395,6 +381,75 @@ canvas.bind("<Button-3>", decreaseCircle)
 
 window.mainloop()
 
+print("------------------------------------------------------------")  # 60個
+
+class MouseKeyEventDemo:
+    def __init__(self):
+        window = tk.Tk()
+        window.title("Event Demo")
+        canvas = tk.Canvas(window, bg = "white", width = 200, height = 100)
+        canvas.pack()
+        
+        # Bind with <Button-1> event
+        canvas.bind("<Button-1>", self.processMouseEvent)
+        
+        # Bind with <Key> event
+        canvas.bind("<Key>", self.processKeyEvent)
+        canvas.focus_set()
+        
+        window.mainloop()
+
+    def processMouseEvent(self, event):
+        print("clicked at", event.x, event.y)
+        print("Position in the screen", event.x_root, event.y_root)
+        print("Which button is clicked? ", event.num)
+    
+    def processKeyEvent(self, event):    
+        print("keysym? ", event.keysym)
+        print("char? ", event.char)
+        print("keycode? ", event.keycode)
+    
+MouseKeyEventDemo()
+
+print("------------------------------------------------------------")  # 60個
+
+class EnlargeShrinkCircle:
+    def __init__(self):
+        self.radius = 50
+                
+        window = tk.Tk()
+        window.title("Control Circle Demo")
+        self.canvas = tk.Canvas(window, bg = "white", 
+            width = 200, height = 200)
+        self.canvas.pack()
+        self.canvas.create_oval(
+            100 - self.radius, 100 - self.radius, 
+            100 + self.radius, 100 + self.radius, tags = "oval")
+        
+        # Bind canvas with mouse events
+        self.canvas.bind("<Button-1>", self.increaseCircle)
+        self.canvas.bind("<Button-3>", self.decreaseCircle)
+        
+        window.mainloop()
+        
+    def increaseCircle(self, event):
+        self.canvas.delete("oval")
+        if self.radius < 100:
+            self.radius += 2
+        self.canvas.create_oval(
+            100 - self.radius, 100 - self.radius, 
+            100 + self.radius, 100 + self.radius, tags = "oval")
+        
+    def decreaseCircle(self, event):
+        self.canvas.delete("oval")
+        if self.radius > 2:
+            self.radius -= 2
+        self.canvas.create_oval(
+            100 - self.radius, 100 - self.radius, 
+            100 + self.radius, 100 + self.radius, tags = "oval")
+
+print('按左鍵變大, 按右鍵變小')
+EnlargeShrinkCircle()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -408,6 +463,3 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-
-

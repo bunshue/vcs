@@ -1,8 +1,10 @@
+import sys
 import pickle
 import os.path
 from tkinter import * # Import tkinter
 import tkinter.messagebox   
-    
+
+"""    
 class Address:
     def __init__(self, name, street, city, state, zip):
         self.name = name
@@ -49,21 +51,6 @@ class AddressBook:
         btPrevious = Button(frame4, text = "Previous", command = self.processPrevious).grid(row = 1, column = 4)  
         btLast = Button(frame4, text = "Last", command = self.processLast).grid(row = 1, column = 5)
           
-        self.addressList = self.loadAddress()
-        self.current = 0
-
-        length = len(self.addressList)
-      
-        if length > 0:
-            self.setAddress()
-            print('aaaaaaaaaaaaa, len =', length)
-            for i in range(length):
-                print(i)
-                print(self.addressList[i].name)
-                print(self.addressList[i].street)
-                print(self.addressList[i].city)
-                print(self.addressList[i].state)
-                print(self.addressList[i].zip)
 
         window.mainloop() # Create an event loop
         
@@ -74,20 +61,6 @@ class AddressBook:
         outfile.close()
     
     def loadAddress(self):
-        if not os.path.isfile("address.dat"):
-            return [] # Return an empty list
-
-        print('使用 pickle 讀取檔案')
-
-        try:
-            infile = open("address.dat", "rb")
-            addressList = pickle.load(infile)
-        except EOFError:
-            addressList = []
-            
-        infile.close()
-        print(addressList)
-        return addressList
             
     def processAdd(self):
         address = Address(self.nameVar.get(), 
@@ -119,3 +92,59 @@ class AddressBook:
         self.zipVar.set(self.addressList[self.current].zip)
 
 AddressBook() # Create GUI
+
+"""
+"""
+outfile = open("address333.dat", "wb")
+
+cnt = 1
+addressList = [cnt, "aaa", "bbb", "ccc", "ddd"]
+pickle.dump(addressList, outfile)
+
+cnt = 2
+addressList = [cnt, "aaa", "bbb", "ccc", "ddd"]
+pickle.dump(addressList, outfile)
+
+cnt = 3
+addressList = [cnt, "aaa", "bbb", "ccc", "ddd"]
+pickle.dump(addressList, outfile)
+
+outfile.close()
+
+
+
+sys.exit()
+"""
+
+addressList = []
+
+if not os.path.isfile("address333.dat"):
+    addressList = []
+else:
+    print('使用 pickle 讀取檔案')
+    try:
+        infile = open("address333.dat", "rb")
+        addressList = pickle.load(infile)
+    except EOFError:
+        addressList = []
+            
+    infile.close()
+    print(addressList)
+
+
+"""
+current = 0
+
+length = len(addressList)
+      
+if length > 0:
+    print('aaaaaaaaaaaaa, len =', length)
+    for i in range(length):
+        print(i)
+        print(addressList[i].name)
+        print(addressList[i].street)
+        print(addressList[i].city)
+        print(addressList[i].state)
+        print(addressList[i].zip)
+
+"""

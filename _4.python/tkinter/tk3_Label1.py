@@ -298,7 +298,7 @@ for i in range(4):
     labelList.append(tk.Label(frame, image = imageList[i]))
     labelList[i].pack(side = tk.LEFT)
 
-tk.Button(window, text = "Shuffle", command = shuffle).pack()
+tk.Button(window, text = "任選四張牌", command = shuffle).pack()
 
 window.mainloop()
 

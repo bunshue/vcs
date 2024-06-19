@@ -30,7 +30,7 @@ def fnB1Motion(event):
     labelTest.place(x=labelX+(event.x-mx),y=labelY+(event.y-my))	#重設labelTest位置
     
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
 window.title('滑鼠事件測試')
 
 mx=0
@@ -44,3 +44,4 @@ labelTest.bind('<Button-1>',fnClick) #<Button-1>事件綁定fnClick事件處理�
 labelTest.bind('<B1-Motion>',fnB1Motion) #<B1-Motion>事件綁定fnB1Motion事件處理函式
 
 window.mainloop()
+
