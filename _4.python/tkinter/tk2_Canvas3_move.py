@@ -10,7 +10,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 
 canvas= tk.Canvas(window, width=500, height=150)
@@ -33,21 +33,7 @@ canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
 for x in range(0, 80):
     canvas.move(1, 5, 2)        # ID=1 x軸移動5像素, y軸移動2像素
     window.update()                 # 強制tkinter重繪
-    time.sleep(0.05)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-canvas= tk.Canvas(window, width=500, height=300)
-canvas.pack()
-canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
-for x in range(0, 80):
-    canvas.move(1, 5, 2)        # ID=1 x軸移動5像素, y軸移動2像素
-    window.update()                 # 強制tkinter重繪
-    canvas.after(50)
+    time.sleep(0.05) # 等同於 canvas.after(50)
 
 window.mainloop()
 
@@ -97,6 +83,8 @@ def ballMove(event):
     if event.keysym == 'Down':  # 下移
         canvas.move(1, 0, 5)
 
+print('用上下左右鍵控制紅球移動')
+
 window = tk.Tk()
 
 canvas= tk.Canvas(window, width=500, height=300)
@@ -111,26 +99,11 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-
-window.title("draw oval")  
-
-xWidth = 400
-yHeight = 250
-canvas = tk.Canvas(window, width=xWidth, height=yHeight)
-canvas.pack()
-        
-for i in range(20):
-    canvas.create_oval(10+i*5, 10+i*5, xWidth-10-i*5, yHeight-10-i*5)
-        
-window.mainloop() 
-
-print("------------------------------------------------------------")  # 60個
+"""
+print('文字移動')
 
 window = tk.Tk()
 
-window.title("ex19_4.py") 
-        
 xWidth = 300
 yHeight = 100
 canvas = tk.Canvas(window, width=xWidth, height=yHeight)
@@ -153,6 +126,7 @@ while True:
         canvas.create_text(x, yMsg, text = "王者歸來", tags = "msg")
                 
 window.mainloop() 
+"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -165,18 +139,18 @@ print("------------------------------------------------------------")  # 60個
 def play_animation():
     canvas.move(oval, 2, 2)
     canvas.update()
-    window.after(50, play_animation)
+    window.after(30, play_animation)
 
 
-x = 10
-y = 10
+x = 20
+y = 20
 
 window = tk.Tk()
-
-window.geometry('600x600')
+window.geometry("600x800")
 window.title('动画效果')
 window.resizable(False, False)
 #fail window.wm_attributes('-topmost', 1)
+
 canvas = tk.Canvas(window, width=600, height=600, bd=0, highlightthickness=0)
 canvas.create_rectangle(0, 0, 600, 600, fill='gray')
 oval = canvas.create_oval(10, 10, 60, 60, fill='red')
@@ -193,21 +167,8 @@ print("------------------------------------------------------------")  # 60個
 
 import math
 
-# 建立主視窗
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
+window.geometry("600x800")
 title = "移動測試"
 window.title(title)
 
@@ -259,7 +220,7 @@ while True:
     canvas.create_oval(x2 - radius, y2 - radius, x2 + radius, y2 + radius, fill = 'red', tags = 'moving2')
 
 window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 import sys
@@ -269,38 +230,7 @@ import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
 
-class Ball:
-    def __init__(self, canvas, color, winW, winH):
-        self.canvas = canvas
-        self.id = canvas.create_oval(0, 0, 20, 20, fill=color)  # 建立球物件
-        self.canvas.move(self.id, winW/2, winH/2)   # 設定球最初位置
-    def ballMove(self):
-        self.canvas.move(self.id, 0, step)      # step是正值表示往下移動
-
-winW = 640                                      # 定義畫布寬度
-winH = 480                                      # 定義畫布高度
-step = 3                                        # 定義速度可想成位移步伐
-speed = 0.03                                    # 設定移動速度
-
-window = tk.Tk()
-window.title("Bouncing Ball")                       # 遊戲視窗標題
-window.wm_attributes('-topmost', 1)                 # 確保遊戲視窗在螢幕最上層
-canvas = tk.Canvas(window, width=winW, height=winH)
-canvas.pack()
-window.update()
-
-ball = Ball(canvas, 'yellow', winW, winH)       # 定義球物件
-
-while True:
-    ball.ballMove()
-    window.update()
-    time.sleep(speed)                           # 可以控制移動速度
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
+'''
 class Ball:
     def __init__(self, canvas, color, winW, winH):
         self.canvas = canvas
@@ -322,9 +252,9 @@ step = 3                                        # 定義速度可想成位移步
 speed = 0.01                                    # 設定移動速度
 
 window = tk.Tk()
-
 window.title("Bouncing Ball")                       # 遊戲視窗標題
 window.wm_attributes('-topmost', 1)                 # 確保遊戲視窗在螢幕最上層
+
 canvas = tk.Canvas(window, width=winW, height=winH)
 canvas.pack()
 window.update()
@@ -337,7 +267,7 @@ while True:
     time.sleep(speed)                           # 可以控制移動速度
 
 window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 
@@ -347,7 +277,7 @@ class Ball:
         self.id = canvas.create_oval(0, 0, 20, 20, fill=color)  # 建立球物件
         self.canvas.move(self.id, winW/2, winH/2)   # 設定球最初位置
         startPos = [-4, -3, -2, -1, 1, 2, 3, 4]     # 球最初x軸位移的隨機數
-        shuffle(startPos)                           # 打亂排列
+        random.shuffle(startPos)                           # 打亂排列
         self.x = startPos[0]                        # 球最初水平移動單位
         self.y = step                               # 垂直移動單位
     def ballMove(self):
@@ -368,9 +298,9 @@ step = 3                                        # 定義速度可想成位移步
 speed = 0.01                                    # 設定移動速度
 
 window = tk.Tk()
-
 window.title("Bouncing Ball")                       # 遊戲視窗標題
 window.wm_attributes('-topmost', 1)                 # 確保遊戲視窗在螢幕最上層
+
 canvas = tk.Canvas(window, width=winW, height=winH)
 canvas.pack()
 window.update()
@@ -392,7 +322,7 @@ class Ball:
         self.id = canvas.create_oval(0, 0, 20, 20, fill=color)  # 建立球物件
         self.canvas.move(self.id, winW/2, winH/2)   # 設定球最初位置
         startPos = [-4, -3, -2, -1, 1, 2, 3, 4]     # 球最初x軸位移的隨機數
-        shuffle(startPos)                           # 打亂排列
+        random.shuffle(startPos)                           # 打亂排列
         self.x = startPos[0]                        # 球最初水平移動單位
         self.y = step                               # 垂直移動單位
     def ballMove(self):
@@ -418,9 +348,9 @@ step = 3                                        # 定義速度可想成位移步
 speed = 0.01                                    # 設定移動速度
 
 window = tk.Tk()
-
 window.title("Bouncing Ball")                       # 遊戲視窗標題
 window.wm_attributes('-topmost', 1)                 # 確保遊戲視窗在螢幕最上層
+
 canvas = tk.Canvas(window, width=winW, height=winH)
 canvas.pack()
 window.update()
@@ -444,7 +374,7 @@ class Ball:
         self.id = canvas.create_oval(0, 0, 20, 20, fill=color)  # 建立球物件
         self.canvas.move(self.id, winW/2, winH/2)   # 設定球最初位置
         startPos = [-4, -3, -2, -1, 1, 2, 3, 4]     # 球最初x軸位移的隨機數
-        shuffle(startPos)                           # 打亂排列
+        random.shuffle(startPos)                           # 打亂排列
         self.x = startPos[0]                        # 球最初水平移動單位
         self.y = step                               # 垂直移動單位
     def ballMove(self):
@@ -484,9 +414,9 @@ step = 3                                        # 定義速度可想成位移步
 speed = 0.01                                    # 設定移動速度
 
 window = tk.Tk()
-
 window.title("Bouncing Ball")                       # 遊戲視窗標題
 window.wm_attributes('-topmost', 1)                 # 確保遊戲視窗在螢幕最上層
+
 canvas = tk.Canvas(window, width=winW, height=winH)
 canvas.pack()
 window.update()
@@ -512,7 +442,7 @@ class Ball:
         self.id = canvas.create_oval(0, 0, 20, 20, fill=color)  # 建立球物件
         self.canvas.move(self.id, winW/2, winH/2)   # 設定球最初位置
         startPos = [-4, -3, -2, -1, 1, 2, 3, 4]     # 球最初x軸位移的隨機數
-        shuffle(startPos)                           # 打亂排列
+        random.shuffle(startPos)                           # 打亂排列
         self.x = startPos[0]                        # 球最初水平移動單位
         self.y = step                               # 垂直移動單位
     def hitRacket(self, ballPos):                                       
@@ -560,9 +490,9 @@ step = 3                                        # 定義速度可想成位移步
 speed = 0.01                                    # 設定移動速度
 
 window = tk.Tk()
-
 window.title("Bouncing Ball")                       # 遊戲視窗標題
 window.wm_attributes('-topmost', 1)                 # 確保遊戲視窗在螢幕最上層
+
 canvas = tk.Canvas(window, width=winW, height=winH)
 canvas.pack()
 window.update()
@@ -588,7 +518,7 @@ class Ball:
         self.id = canvas.create_oval(0, 0, 20, 20, fill=color)  # 建立球物件
         self.canvas.move(self.id, winW/2, winH/2)   # 設定球最初位置
         startPos = [-4, -3, -2, -1, 1, 2, 3, 4]     # 球最初x軸位移的隨機數
-        shuffle(startPos)                           # 打亂排列
+        random.shuffle(startPos)                           # 打亂排列
         self.x = startPos[0]                        # 球最初水平移動單位
         self.y = -step                              # 球先往上垂直移動單位
         self.notTouchBottom = True                  # 未接觸畫布底端
@@ -639,9 +569,9 @@ step = 3                                        # 定義速度可想成位移步
 speed = 0.01                                    # 設定移動速度
 
 window = tk.Tk()
-
 window.title("Bouncing Ball")                       # 遊戲視窗標題
 window.wm_attributes('-topmost', 1)                 # 確保遊戲視窗在螢幕最上層
+
 canvas = tk.Canvas(window, width=winW, height=winH)
 canvas.pack()
 window.update()
@@ -672,7 +602,7 @@ class Ball:
         self.id = canvas.create_oval(0, 0, 20, 20, fill=color)  # 建立球物件
         self.canvas.move(self.id, winW/2, winH/2)   # 設定球最初位置
         startPos = [-4, -3, -2, -1, 1, 2, 3, 4]     # 球最初x軸位移的隨機數
-        shuffle(startPos)                           # 打亂排列
+        random.shuffle(startPos)                           # 打亂排列
         self.x = startPos[0]                        # 球最初水平移動單位
         self.y = -step                              # 球先往上垂直移動單位
         self.notTouchBottom = True                  # 未接觸畫布底端
@@ -728,9 +658,9 @@ step = 3                                        # 定義速度可想成位移步
 speed = 0.01                                    # 設定移動速度
 
 window = tk.Tk()
-
 window.title("Bouncing Ball")                       # 遊戲視窗標題
 window.wm_attributes('-topmost', 1)                 # 確保遊戲視窗在螢幕最上層
+
 canvas = tk.Canvas(window, width=winW, height=winH)
 canvas.pack()
 window.update()
@@ -761,7 +691,7 @@ class Ball:
         self.id = canvas.create_oval(0, 0, 20, 20, fill=color)  # 建立球物件
         self.canvas.move(self.id, winW/2, winH/2)   # 設定球最初位置
         startPos = [-4, -3, -2, -1, 1, 2, 3, 4]     # 球最初x軸位移的隨機數
-        shuffle(startPos)                           # 打亂排列
+        random.shuffle(startPos)                           # 打亂排列
         self.x = startPos[0]                        # 球最初水平移動單位
         self.y = -step                              # 球先往上垂直移動單位
         self.notTouchBottom = True                  # 未接觸畫布底端
@@ -821,9 +751,9 @@ step = 3                                        # 定義速度可想成位移步
 speed = 0.01                                    # 設定移動速度
 
 window = tk.Tk()
-
 window.title("Bouncing Ball")                       # 遊戲視窗標題
 window.wm_attributes('-topmost', 1)                 # 確保遊戲視窗在螢幕最上層
+
 canvas = tk.Canvas(window, width=winW, height=winH)
 canvas.pack()
 window.update()
@@ -1006,3 +936,6 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
+
+window.title("ex19_4.py") 
+        

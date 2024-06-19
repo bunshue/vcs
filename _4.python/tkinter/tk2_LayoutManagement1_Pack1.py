@@ -1,23 +1,27 @@
+"""
+
+1. pack無參數
+2. pack(side)
+3. pack(fill)
+4. pack
+
+
+"""
+
+
 import tkinter as tk
 
+print("------------------------------------------------------------")  # 60個
+
+
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
+window.geometry("600x800")
+title = "Pack 測試"
 window.title(title)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 def changeString():
     stringToCopy = entry.get()
@@ -54,6 +58,7 @@ button6 = tk.Button(frame, text = 'New')
 button6.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
 
 def display():
     number = int(order.get())
@@ -68,79 +73,16 @@ entry = tk.Entry(frame1, textvariable = order, justify = tk.RIGHT).pack(side = t
 tk.Button(frame1, text = 'Do something', command = display).pack(side = tk.LEFT)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-window.mainloop()
-
-
-import tkinter as tk
-
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-
-
-window.mainloop()
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("pack")
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
+"""
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
 lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
 lab1.pack(side=tk.BOTTOM)
 lab2.pack(side=tk.BOTTOM)
 lab3.pack(side=tk.BOTTOM)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
+"""
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
 lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
@@ -148,40 +90,22 @@ lab1.pack(side=tk.BOTTOM)
 lab2.pack(side=tk.BOTTOM,pady=5)       # 包裝與定位元件,增加y軸間距
 lab3.pack(side=tk.BOTTOM)
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
+"""
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
 lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
 lab1.pack(side=tk.LEFT)
 lab2.pack(side=tk.LEFT)
 lab3.pack(side=tk.LEFT)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
+"""
+"""
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
 lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
 lab1.pack(side=tk.LEFT)
 lab2.pack(side=tk.LEFT,padx=5)         # 增加x軸間距
 lab3.pack(side=tk.LEFT)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
+"""
 
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
@@ -190,12 +114,6 @@ lab1.pack()
 lab2.pack(side=tk.RIGHT)
 lab3.pack(side=tk.LEFT)
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
@@ -204,12 +122,6 @@ lab1.pack(side=tk.BOTTOM)
 lab2.pack(side=tk.BOTTOM)
 lab3.pack(side=tk.BOTTOM)
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
@@ -219,12 +131,6 @@ lab1.pack(side=tk.BOTTOM)
 lab2.pack(side=tk.BOTTOM,pady=5)       # 增加y軸間距
 lab3.pack(side=tk.BOTTOM)
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
@@ -234,50 +140,54 @@ lab1.pack(side=tk.LEFT)
 lab2.pack(side=tk.LEFT)
 lab3.pack(side=tk.LEFT)
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
 lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-
 lab1.pack(side=tk.LEFT)
 lab2.pack(side=tk.LEFT,padx=5)  # 增加x軸間距
 lab3.pack(side=tk.LEFT)
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
 
 lab1 = tk.Label(window,text="歡迎來到美國",bg="lightyellow",width=15)
 lab2 = tk.Label(window,text="歡迎來到日本",bg="lightgreen",width=15)
 lab3 = tk.Label(window,text="歡迎來到加拿大",bg="lightblue",width=15)
-
 lab1.pack()
 lab2.pack(side=tk.RIGHT)
 lab3.pack(side=tk.LEFT)
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-window.geometry("600x400")
 
-label=tk.Label(window,text="歡迎來到美國",
-            fg="blue",bg="yellow",
-            height=3,width=15,
-            anchor="se")
-label.pack()  
+print("------------------------------------------------------------")  # 60個
 
-window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
@@ -302,11 +212,122 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
+from tkinter import * # Import tkinter
+    
+window = Tk() # Create a window
+window.title("Pack Manager Demo 1") # Set title
+
+Label(window, text = "Blue", bg = "blue").pack()
+Label(window, text = "Red", bg = "red").pack(
+    fill = BOTH, expand = 1)
+Label(window, text = "Green", bg = "green").pack(
+    fill = BOTH)
+
+window.mainloop() # Create an event loop
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+tk.Label(window, text = "Enter your name:").pack(side = LEFT)
+tk.Entry(window, text = "Type Name").pack(side = LEFT)
+tk.Checkbutton(window, text = "Bold").pack(side = LEFT)
+tk.Checkbutton(window, text = "Italic").pack(side = LEFT)
+tk.Radiobutton(window, text = "Red").pack(side = LEFT)
+tk.Radiobutton(window, text = "Yellow").pack(side = LEFT)
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 
 
+from tkinter import * # Import tkinter
+
+def drawABar(x, percent, color, title):
+    canvas.create_line(0, height - 10, width, height - 10)
+    canvas.create_rectangle(x, (1 - percent) * (height - 30), x + width / 4.3 - 5, height - 10, fill = color)
+    canvas.create_text((x + x + width / 4.3 - 5) / 2, (1 - percent) * (height - 30) - 10,
+                        text = title)
+
+window = Tk() # Create a window
+window.title("Pyramid") # Set a title
+
+width = 400
+height = 150
+canvas = Canvas(window, bg = "white", width = width, height = height)
+canvas.pack()
+
+x = 10
+drawABar(x, 0.4, "red", "Project -- 20%")
+  
+x += width / 4.3 - 5 + 10  
+drawABar(x, 0.1, "blue", "Quizzes -- 10%")
+
+x += width / 4.3 - 5 + 10  
+drawABar(x, 0.3, "green", "Midterm -- 30%")
+
+x += width / 4.3 - 5 + 10  
+drawABar(x, 0.4, "orange", "Final -- 40%")
+
+window.mainloop() # Create an event loop
+
+
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+
+
+print('------------------------------------------------------------')	#60個
+print('作業完成')
+print('------------------------------------------------------------')	#60個
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+"""
+
+各種 pack 之 side
+
+
+label1.pack(side=tk.BOTTOM)
+label2.pack(side=tk.BOTTOM)
+label3.pack(side=tk.BOTTOM)
+
+label1.pack(side=LEFT)
+label2.pack(side=LEFT)
+label3.pack(side=LEFT)
+label1.pack()
+label2.pack(side=RIGHT)               # 靠右包裝與定位元件
+label3.pack(side=LEFT)                # 靠左包裝與定位元件
+
+button1.pack(side = tk.LEFT)    #靠左對齊
+button2.pack(side = tk.RIGHT)   #靠右對齊
+
+
+#三個button並排靠左排列
+button1 = tk.Button(window,text = 'Input String')
+button1.pack(side='left')
+button2 = tk.Button(window,text = 'Input Integer')
+button2.pack(side='left')
+button2 = tk.Button(window,text = 'Input Float')
+button2.pack(side='left')
+
+
+print("pack版面佈局")
+
+taipei=tk.Button(window, width=20, text="台北景點")
+taipei.pack(side="top")
+kaohsiung=tk.Button(window, width=20, text="高雄景點")
+kaohsiung.pack(side="top")
+
+
+
+
+"""

@@ -20,7 +20,7 @@ plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 plt.figure(
     num="新進測試 01",
     figsize=(12, 8),
@@ -746,20 +746,17 @@ plt.plot(x, y1)
 plt.plot(x, y2)
 plt.plot(x, y3)
 
-# plt.show()
-
-print(x)
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from numpy import linspace
 #畫出y=a^x的函數圖形 0<=x<=10
-x = linspace(0,10,50)
+x = np.linspace(0,10,50)
 y1 = 2**x
 y2 = 2.5**x
 y3 = 3**x
 y4 = 3.5**x
-#預設大小為6.4inches*4.8inches, 80dpi
+
 #指定 寬6.4inches, 高4.8inches, 160dpi
 plt.figure(figsize=(6.4, 4.8),dpi=160)
 #加上圖表標題, 字體大小24, 靠右對齊
@@ -807,7 +804,6 @@ plt.legend(['a=2','a=2.5','a=3','a=3.5'], fontsize=20)
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
 #!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
@@ -845,7 +841,6 @@ print("------------------------------------------------------------")  # 60個
 x = np.arange(-10, 10, 0.1)
 y1 = x**3
 y2 = x**2
-#預設大小為6.4inches*4.8inches, 80dpi
 #指定 寬6.4inches, 高4.8inches, 160dpi
 #將圖分成一個子圖
 fig, ax = plt.subplots(figsize=(6.4, 4.8),dpi=160)
@@ -878,190 +873,10 @@ fig.suptitle('y=x**3&y=x**2')
 #fig.savefig("tmp_test.png")
 #圖例說明
 ax.legend(['y=x**3','y=x**2'])
-plt.show()
-
-'''
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib
-import numpy as np
-#畫出y=x^0.5的函數圖形 0<=x<=10
-x = np.linspace(0,10,100)
-y = x**0.5
-#預設大小為6.4inches*4.8inches, 80dpi
-matplotlib.pyplot.plot(x,y)
-matplotlib.pyplot.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-03b
-import matplotlib.pyplot as plt
-from numpy import linspace
-#畫出y=x^0.5的函數圖形 0<=x<=10
-x = linspace(0,10,100)
-y = x**0.5
-#預設大小為6.4inches*4.8inches, 80dpi
-plt.plot(x,y)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-03c
-import matplotlib
-import numpy as np
-#畫出y=2^x的函數圖形 0<=x<=10
-x = np.linspace(0,10,100)
-y = 2**x
-#預設大小為6.4inches*4.8inches, 80dpi
-matplotlib.pyplot.plot(x,y)
-matplotlib.pyplot.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-03d
-import matplotlib.pyplot as plt
-from numpy import linspace
-#畫出y=2^x的函數圖形 0<=x<=10
-x = linspace(0,10,100)
-y = 2**x
-#預設大小為6.4inches*4.8inches, 80dpi
-plt.plot(x,y)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-03e
-import matplotlib
-import numpy 
-numpy.random.seed(10)
-#產生常態分佈的數據:平均數0, 標準差1, 1000個資料
-x = numpy.random.normal(0, 1, 1000)
-print("平均數:", numpy.mean(x))
-print("標準差:", numpy.std(x))
-#預設大小為6.4inches*4.8inches, 80dpi
-matplotlib.pyplot.hist(x,bins=50)
-matplotlib.pyplot.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-#chap6-03f
-import matplotlib.pyplot as plt
-from numpy import random,mean,std 
-random.seed(10)
-#產生常態分佈的數據:平均數0, 標準差1, 1000個資料
-x = random.normal(0, 1, 1000)
-print("平均數:", mean(x))
-print("標準差:", std(x))
-#預設大小為6.4inches*4.8inches, 80dpi
-plt.hist(x,bins=50)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-#chap6-03g
-import matplotlib
-import numpy
-#指定亂數種子，每次執行結果都會一樣
-numpy.random.seed(1)
-x = numpy.random.random(100)
-y = numpy.random.random(100)
-#預設大小為6.4inches*4.8inches, 80dpi
-matplotlib.pyplot.scatter(x,y)
-matplotlib.pyplot.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-03h
-import matplotlib.pyplot as plt
-from numpy import random
-#指定亂數種子，每次執行結果都會一樣
-random.seed(1)
-x = random.random(100)
-y = random.random(100)
-#預設大小為6.4inches*4.8inches, 80dpi
-plt.scatter(x,y)
-plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-#chap6-03i
-import matplotlib
-import numpy as np
-
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬10inches, 高8inches 
-matplotlib.pyplot.figure(figsize=(10, 8))
-
-matplotlib.pyplot.subplot(221)
-#畫出y=x^0.5的函數圖形 0<=x<=10
-x = np.linspace(0,10,100)
-y = x**0.5
-matplotlib.pyplot.plot(x,y)
-
-matplotlib.pyplot.subplot(222)
-#畫出y=2^x的函數圖形 0<=x<=10
-x = np.linspace(0,10,100)
-y = 2**x
-matplotlib.pyplot.plot(x,y)
-
-matplotlib.pyplot.subplot(223)
-numpy.random.seed(10)
-#產生常態分佈的數據:平均數0, 標準差1, 1000個資料
-x = numpy.random.normal(0, 1, 1000)
-matplotlib.pyplot.hist(x,bins=50)
-
-matplotlib.pyplot.subplot(224)
-#指定亂數種子，每次執行結果都會一樣
-numpy.random.seed(1)
-x = numpy.random.random(100)
-y = numpy.random.random(100)
-matplotlib.pyplot.scatter(x,y)
-
-matplotlib.pyplot.show()
-
-print("------------------------------------------------------------")  # 60個
-
-
-#chap6-03j
-import matplotlib.pyplot as plt
-from numpy import linspace,random
-
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬10inches, 高8inches, 160dpi
-plt.figure(figsize=(10, 8),dpi=160)
-plt.subplot(221)
-#畫出y=x^0.5的函數圖形 0<=x<=10
-x = linspace(0,10,100)
-y = x**0.5
-plt.plot(x,y)
-
-plt.subplot(222)
-#畫出y=2^x的函數圖形 0<=x<=10
-x = linspace(0,10,100)
-y = 2**x
-plt.plot(x,y)
-
-plt.subplot(223)
-random.seed(10)
-#產生常態分佈的數據:平均數0, 標準差1, 1000個資料
-x = random.normal(0, 1, 1000)
-plt.hist(x,bins=50)
-
-plt.subplot(224)
-#指定亂數種子，每次執行結果都會一樣
-random.seed(1)
-x = random.random(100)
-y = random.random(100)
-plt.scatter(x,y)
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1078,6 +893,21 @@ plt.rcParams['font.sans-serif']='mingliu'	#指定為明體字
 plt.rcParams['font.sans-serif']='mingliu'  # 中文OK
 
 
+
+#預設大小為6.4inches*4.8inches, 80dpi
+
+#預設大小為6.4inches*4.8inches, 80dpi
+#指定 寬10inches, 高8inches, 160dpi
+plt.figure(figsize=(10, 8),dpi=160)
+
+#指定 寬10inches, 高8inches 
+matplotlib.pyplot.figure(figsize=(10, 8))
+
+#指定 寬10inches, 高8inches, 160dpi
+plt.figure(figsize=(10, 8),dpi=160)
+
+
 """
+
 
 

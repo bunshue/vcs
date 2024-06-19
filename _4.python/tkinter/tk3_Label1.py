@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 window.geometry("600x800")
 window.title('Label 1')
@@ -301,7 +301,7 @@ for i in range(4):
 tk.Button(window, text = "Shuffle", command = shuffle).pack()
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -624,5 +624,12 @@ button2a.place(x = x_st + dx * 0, y = y_st + dy * 3)
 
 
 """
+
+
+label=tk.Label(window,text="美國SE",
+            fg="blue",bg="yellow",
+            height=3,width=15,
+            anchor="se")
+label.pack()  
 
 

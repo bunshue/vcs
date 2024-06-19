@@ -614,6 +614,36 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
+import matplotlib
+
+np.random.seed(10)
+
+#產生常態分佈的數據:平均數0, 標準差1, 1000個資料
+x = np.random.normal(0, 1, 1000)
+print("平均數:", np.mean(x))
+print("標準差:", np.std(x))
+
+matplotlib.pyplot.hist(x,bins=50)
+matplotlib.pyplot.show()
+
+print("------------------------------------------------------------")  # 60個
+
+from numpy import random,mean,std 
+
+random.seed(10)
+
+#產生常態分佈的數據:平均數0, 標準差1, 1000個資料
+x = random.normal(0, 1, 1000)
+print("平均數:", mean(x))
+print("標準差:", std(x))
+
+plt.hist(x,bins=50)
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 """
 
 二維頻次直方圖
