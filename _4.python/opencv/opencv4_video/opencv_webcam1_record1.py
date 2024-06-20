@@ -30,7 +30,7 @@ MODE_1 = 1  # 一檔錄固定時間, ex 10分一檔
 MODE_2 = 2  # 一檔錄固定檔案容量, ex 500M一檔
 MODE_3 = 3  # 縮時錄影 Time-lapse Video
 
-MODE = MODE_3
+MODE = MODE_0
 SPEED = 10  # N 倍速
 
 #'XVID','DIVX','MJPG','I420'
@@ -74,6 +74,10 @@ width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
 fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
 
+record_time_st = time.time()
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print('開始錄影時間 :', now)
+
 #建立視訊編碼 fourcc
 ENCODING_TYPE = 'XVID'  # 編碼器
 fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
@@ -102,10 +106,15 @@ while True:
     k = cv2.waitKey(1) # 等待按鍵輸入
     if k == ESC:     #ESC
         break
+
 cap.release()    #關閉攝影機
 out.release()    #關閉寫入器
 cv2.destroyAllWindows()  #關閉視窗
 
+now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+print('\n完成錄影時間 :', now)
+record_time_elapsed = time.time() - record_time_st
+print('總錄影時間 :', record_time_elapsed, '秒')
 print('存檔檔名 :', record_filename)
 
 sys.exit()
@@ -170,11 +179,15 @@ while True:
     k = cv2.waitKey(1) # 等待按鍵輸入
     if k == ESC:     #ESC
         break
+
 cap.release()    #關閉攝影機
 out.release()    #關閉寫入器
 cv2.destroyAllWindows()  #關閉視窗
+
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print('\n完成錄影時間 :', now)
+record_time_elapsed = time.time() - record_time_st
+print('總錄影時間 :', record_time_elapsed, '秒')
 print('存檔檔名 :', record_filename)
 
 print("------------------------------------------------------------")  # 60個

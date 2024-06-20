@@ -30,6 +30,31 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+def do_select1():
+        selection = var.get()                               # 獲得音樂選項
+        print('你選擇了 :', selection)
+
+# 建立音樂選項鈕內容的串列
+musics = [('notify.mp3', 1),                            # 音樂選單串列
+          ('town.mid', 2),
+          ('onestop.mid', 3)]
+
+# 建立選項紐Radiobutton
+var = tk.StringVar()                                       # 設定以字串表示選單編號
+var.set('1')                                            # 預設音樂是1
+for music, num in musics:                               # 建立系列選項紐
+    radioB = ttk.Radiobutton(window, text=music, variable=var, value=num)
+    radioB.pack()
+
+tk.Button(window, text='選擇', command=do_select1).pack()
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
 rb1 = ttk.Radiobutton(
 	window,
 	text = 'AAAA',
@@ -113,7 +138,7 @@ for mp3 in mp3files:  #建立歌曲選項按鈕
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-def do_select():
+def do_select2():
         value = radio_value.get()
         print(lunch[value])
 
@@ -126,7 +151,7 @@ tk.Radiobutton(window, text = lunch[0], variable = radio_value, value = 0).pack(
 tk.Radiobutton(window, text = lunch[1], variable = radio_value, value = 1).pack()
 tk.Radiobutton(window, text = lunch[2], variable = radio_value, value = 2).pack()
 
-tk.Button(window, text='選擇', command=do_select).pack()
+tk.Button(window, text='選擇', command=do_select2).pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個

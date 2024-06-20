@@ -7,6 +7,70 @@ from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
 
+def choose():
+    str = "選擇："
+    for i in range(0, len(choice)):
+        if(choice[i].get() == 1):
+            str = str + stage_no[i] + " "
+    print(str)
+    msg.set(str)
+
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title('Checkbutton 0')
+
+x_st = 50
+y_st = 50
+dx = 120
+dy = 80
+w = 12
+h = 3
+
+choice = []
+
+stage_no = [
+'第1站', '第2站', '第3站', '第4站',
+'第5站', '第6站', '第7站', '第8站',
+'第9站', '第10站', '第11站', '第12站',
+'第13站', '第14站 ', '第15站', '第16站'
+]
+
+msg = tk.StringVar()
+label1 = tk.Label(window, text = '選擇顯示站別：')
+label1.pack()
+label1.place(x = x_st + dx * 0, y = y_st + dy * 2 - 20)
+label2 = tk.Label(window, fg = 'red', textvariable = msg)
+label2.pack()
+label2.place(x = x_st + dx * 0, y = y_st + dy * 2 + 80)
+
+
+# 加入 Checkbutton
+dx2 = dx * 4 / 4   #為了微調距離用
+for i in range(0, len(stage_no)):
+    item = tk.IntVar()
+    choice.append(item)
+    item = tk.Checkbutton(window, text = stage_no[i], variable = choice[i], command = choose)
+    item.pack()
+    item.place(x = x_st + dx2 * (i % 6), y = y_st + dy * 2 + int(i / 6) * 25)
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+sys.exit()
+
+
+print("------------------------------------------------------------")  # 60個
+
 
 def checkbutton_select1():
     str = "你喜歡的球類運動："

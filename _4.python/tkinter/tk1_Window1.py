@@ -3,13 +3,14 @@ print("------------------------------------------------------------")  # 60個
 
 import tkinter as tk
 
-win = tk.Tk()
-win.wm_title('固定視窗大小')
-win.minsize(width=666, height=480)
-win.maxsize(width=666, height=480)
-win.resizable(width=False, height=False)
+window = tk.Tk()
+window.wm_title('固定視窗大小')
+window.minsize(width=666, height=480)
+window.maxsize(width=666, height=480)
+window.resizable(width=False, height=False)
+window.configure(bg='pink')
 
-win.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -248,4 +249,22 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+window.resizable(True, False)#可橫向擴展 不可直向擴展
+window.iconbitmap('first.ico')
+window.maxsize(500,200) # 可拉大之最大大小
+window.minsize(100,200) # 可拉小之最小大小
+
+window.configure(bg='yellow')#背景色
+
+icon_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/ims.ico'
+window.iconbitmap(icon_filename)   # 更改圖示
+
+
+"""
+
+
 

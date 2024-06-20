@@ -1,10 +1,13 @@
+"""
+mp3 播放器
+
+"""
+
 print('------------------------------------------------------------')	#60個
-print('準備工作')
 
 import os
-import glob
 import sys
-import sqlite3
+import glob
 import tkinter as tk
 from tkinter.filedialog import askopenfile #tk之openFileDialog
 from tkinter.filedialog import asksaveasfile #tk之saveFileDialog
@@ -29,16 +32,16 @@ def pausemp3(): #暫停
     
 def increase(): #音量大
     global volume
-    volume += 0.1
+    volume += 0.02
     if volume >= 1:
         volume = 1
     mixer.music.set_volume(volume) 
     
 def decrease(): #音量小
     global volume
-    volume -= 0.1
-    if volume <= 0.3:
-        volume = 0.3
+    volume -= 0.02
+    if volume <= 0.2:
+        volume = 0.2
     mixer.music.set_volume(volume)  
        
 def playmp3(): #播放
@@ -73,7 +76,7 @@ def stopmp3(): #停止播放
     
 def exitmp3(): # 結束
     mixer.music.stop()
-    window.destroy() 
+    window.destroy()  # 關閉視窗
 
 def button00Click():
     print('你按了 選取檔案')
@@ -115,8 +118,7 @@ def button05Click():
     stopmp3()
 
 def button10Click():
-    print('你按了 結束')
-    exitmp3()
+    print('你按了')
 
 def button11Click():
     print('你按了 選取資料夾')
@@ -144,10 +146,11 @@ def button13Click():
 def button14Click():
     #print('你按了button14')
     set_data()
+    clear_text1()
 
 def button15Click():
     #print('你按了button15')
-    clear_text1()
+    exitmp3()
 
 def set_data():
     '''
@@ -180,14 +183,28 @@ y_st = 100
 #size = str(W)+'x'+str(H)
 #size = str(W)+'x'+str(H)+'+'+str(x_st)+'+'+str(y_st)
 #window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+#window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
 #print('{0:d}x{1:d}+{2:d}+{3:d}'.format(W, H, x_st, y_st))
+
+#顯示在正中央
+screenWidth = window.winfo_screenwidth()    # 螢幕寬度
+screenHeight = window.winfo_screenheight()  # 螢幕高度
+W = 800                                     # 視窗寬
+H = 800                                     # 視窗高
+x_st = (screenWidth - W) / 2                # 視窗左上角x軸位置
+y_st = (screenHeight - H ) / 2              # 視窗左上角Y軸位置
+window.geometry("%dx%d+%d+%d" % (W, H, x_st, y_st))
 
 # 設定主視窗標題
 window.title('mp3播放器')
 
 # 設定主視窗之背景色
 #window.configure(bg = "#7AFEC6")
+#window.configure(bg = '#00ff00')   # 視窗背景顏色
+#window.configure(bg = 'yellow')    # 視窗背景顏色
+
+icon_filename = 'C:/_git/vcs/_1.data/______test_files1/_icon/唐.ico'
+window.iconbitmap(icon_filename)   # 更改圖示
 
 x_st = 50
 y_st = 50
@@ -218,7 +235,7 @@ button03.place(x = x_st + dx * 3, y = y_st + dy * 0)
 button04.place(x = x_st + dx * 4, y = y_st + dy * 0)
 button05.place(x = x_st + dx * 5, y = y_st + dy * 0)
 
-button10 = tk.Button(window, width = w, height = h, command = button10Click, text = '結束')
+button10 = tk.Button(window, width = w, height = h, command = button10Click, text = '')
 button10.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button11 = tk.Button(window, width = w, height = h, command = button11Click, text = '選取資料夾')
 button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
@@ -226,9 +243,9 @@ button12 = tk.Button(window, width = w, height = h, command = button12Click, tex
 button12.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button13 = tk.Button(window, width = w, height = h, command = button13Click, text = '下一首')
 button13.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button14 = tk.Button(window, width = w, height = h, command = button14Click, text = 'Send Data')
+button14 = tk.Button(window, width = w, height = h, command = button14Click, text = 'Set/Clear Data')
 button14.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button15 = tk.Button(window, width = w, height = h, command = button15Click, text = 'Clear')
+button15 = tk.Button(window, width = w, height = h, command = button15Click, text = '離開')
 button15.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 
 button10.place(x = x_st + dx * 0, y = y_st + dy * 1)

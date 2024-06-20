@@ -12,14 +12,7 @@ import csv
 import time
 import tkinter as tk
 
-choice = []
 
-stage_no = [
-'第1站', '第2站', '第3站', '第4站',
-'第5站', '第6站', '第7站', '第8站',
-'第9站', '第10站', '第11站', '第12站',
-'第13站', '第14站 ', '第15站', '第16站'
-]
 
 dummy_data = 'abcd'
 count = 0
@@ -63,15 +56,15 @@ def button12Click():
 
 def button13Click():
     print('你按了button13')
-    window.destroy()
 
 def button14Click():
     #print('你按了button14')
     set_data()
+    clear_text1()
 
 def button15Click():
     #print('你按了button15')
-    clear_text1()
+    window.destroy()  # 關閉視窗
 
 def set_data():
     '''
@@ -90,14 +83,6 @@ def set_data():
 def clear_text1():
     text1.delete(1.0, 'end')
     # 執行 clear 函式時，清空內容
-
-def choose():
-    str = "選擇："
-    for i in range(0, len(choice)):
-        if(choice[i].get() == 1):
-            str = str + stage_no[i] + " "
-    print(str)
-    msg.set(str)
 
 window = tk.Tk()
 
@@ -175,11 +160,11 @@ button11 = tk.Button(window, width = w, height = h, command = button11Click, tex
 button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button12 = tk.Button(window, width = w, height = h, command = button12Click, text = 'xxx')
 button12.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button13 = tk.Button(window, width = w, height = h, command = button13Click, text = '關閉視窗')
+button13 = tk.Button(window, width = w, height = h, command = button13Click, text = 'xxx')
 button13.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button14 = tk.Button(window, width = w, height = h, command = button14Click, text = 'Send Data')
+button14 = tk.Button(window, width = w, height = h, command = button14Click, text = 'Set/Clear Data')
 button14.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button15 = tk.Button(window, width = w, height = h, command = button15Click, text = 'Clear')
+button15 = tk.Button(window, width = w, height = h, command = button15Click, text = '離開')
 button15.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button10.place(x = x_st + dx * 0, y = y_st + dy * 1)
 button11.place(x = x_st + dx * 1, y = y_st + dy * 1)
@@ -201,23 +186,6 @@ label_message2.pack()
 label_message2.place(x = 5 + W * 3 / 4, y = 0 + 10)
 main_message2.set('')
 
-msg = tk.StringVar()
-label1 = tk.Label(window, text = '選擇顯示站別：')
-label1.pack()
-label1.place(x = x_st + dx * 0, y = y_st + dy * 2 - 20)
-label2 = tk.Label(window, fg = 'red', textvariable = msg)
-label2.pack()
-label2.place(x = x_st + dx * 0, y = y_st + dy * 2 + 80)
-
-# 加入 Checkbutton
-dx2 = dx * 4 / 4   #為了微調距離用
-for i in range(0, len(stage_no)):
-    item = tk.IntVar()
-    choice.append(item)
-    item = tk.Checkbutton(window, text = stage_no[i], variable = choice[i], command = choose)
-    item.pack()
-    item.place(x = x_st + dx2 * (i % 6), y = y_st + dy * 2 + int(i / 6) * 25)
-
 # 加入 Text
 text1 = tk.Text(window, width = 100, height = 30)  # 放入多行輸入框
 text1.pack()
@@ -227,13 +195,4 @@ message = ""
 main_message1.set(message)
 
 window.mainloop()
-
-
-
-
-
-
-
-
-
 

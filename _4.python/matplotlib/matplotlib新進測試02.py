@@ -1,5 +1,9 @@
-import matplotlib.pyplot as plt
+import sys
 import numpy as np
+import matplotlib.pyplot as plt
+
+print("------------------------------------------------------------")  # 60個
+'''
 
 x = np.linspace(-3, 3, 50)
 y1 = 2*x + 1
@@ -24,18 +28,9 @@ plt.yticks([-2, -1.8, -1, 1.22, 3],
            [r'$really\ bad$', r'$bad$', r'$normal$', r'$good$', r'$really\ good$'])
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-
-
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt6_ax_setting2.py
-
 # 6 - axis setting
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(-3, 3, 50)
 y1 = 2*x + 1
@@ -78,12 +73,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt7_legend.py
-
 # 7 - legend
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.linspace(-3, 3, 50)
 y1 = 2*x + 1
@@ -128,10 +118,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt8_annotation.py
-
-import matplotlib.pyplot as plt
-import numpy as np
+#8_annotation.py
 
 x = np.linspace(-3, 3, 50)
 y = 2*x + 1
@@ -168,10 +155,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt9_tick_visibility.py
-
-import matplotlib.pyplot as plt
-import numpy as np
+#9_tick_visibility.py
 
 x = np.linspace(-3, 3, 50)
 y = 0.1*x
@@ -194,15 +178,9 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt10_scatter.py
+'''
 
 # 10 - scatter
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 n = 1024    # data size
 X = np.random.normal(0, 1, n)
@@ -213,6 +191,7 @@ plt.scatter(X, Y, s=75, c=T, alpha=.5)
 
 plt.xlim(-1.5, 1.5)
 plt.xticks(())  # ignore xticks
+
 plt.ylim(-1.5, 1.5)
 plt.yticks(())  # ignore yticks
 
@@ -220,23 +199,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt11_bar.py
-
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 # 11 - bar
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
-Tutorial reference:
-http://www.scipy-lectures.org/intro/matplotlib/matplotlib.html
-"""
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 n = 12
 X = np.arange(n)
@@ -265,23 +228,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt12_contours.py
-
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
-# 12 - contours
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
-Tutorial reference:
-http://www.scipy-lectures.org/intro/matplotlib/matplotlib.html
-"""
-
-import matplotlib.pyplot as plt
-import numpy as np
+#12_contours.py
 
 def f(x,y):
     # the height function
@@ -303,26 +250,12 @@ plt.clabel(C, inline=True, fontsize=10)
 
 plt.xticks(())
 plt.yticks(())
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt13_image.py
-
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 # 13 - image
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
-"""
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 # image data
 a = np.array([0.313660827978, 0.365348418405, 0.423733120134,
@@ -340,28 +273,13 @@ plt.colorbar(shrink=.92)
 
 plt.xticks(())
 plt.yticks(())
-plt.show()
 
+plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt14_3d.py
-
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 # 14 - 3d
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
-Tutorial reference:
-http://www.python-course.eu/matplotlib_multiple_figures.php
-"""
 
-import numpy as np
-import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 fig = plt.figure()
@@ -410,25 +328,9 @@ ax.set_zlim(-2, 2)
 
 plt.show()
 
-
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt15_subplot.py
-
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 # 15 - subplot
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
-Tutorial reference:
-http://www.scipy-lectures.org/intro/matplotlib/matplotlib.html
-"""
-
-import matplotlib.pyplot as plt
 
 # example 1:
 ###############################
@@ -474,22 +376,8 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt16_grid_subplot.py
+# 16 - grid subplot
 
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
-# 16 - grid
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
-Tutorial reference:
-http://matplotlib.org/users/gridspec.html
-"""
-
-import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 
 # method 1: subplot2grid
@@ -527,22 +415,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt17_plot_in_plot.py
-
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 # 17 - plot in plot
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
-Tutorial reference:
-http://www.python-course.eu/matplotlib_multiple_figures.php
-"""
-
-import matplotlib.pyplot as plt
 
 fig = plt.figure()
 x = [1, 2, 3, 4, 5, 6, 7]
@@ -575,23 +448,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt18_secondary_yaxis.py
-
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 # 18 - secondary y axis
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
-Tutorial reference:
-http://www.python-course.eu/matplotlib_multiple_figures.php
-"""
-
-import matplotlib.pyplot as plt
-import numpy as np
 
 x = np.arange(0, 10, 0.1)
 y1 = 0.05 * x**2
@@ -611,26 +468,8 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#檔案 : C:\_git\vcs\_4.python\matplotlib\__new\plt19_animation.py
-
-# View more python tutorials on my Youtube and Youku channel!!!
-
-# Youtube video tutorial: https://www.youtube.com/channel/UCdyjiB5H8Pu7aDTNVXTTpcg
-# Youku video tutorial: http://i.youku.com/pythontutorial
-
 # 19 - animation
-"""
-Please note, this script is for python3+.
-If you are using python2+, please modify it accordingly.
 
-Tutorial reference:
-http://matplotlib.org/examples/animation/simple_anim.html
-
-More animation example code:
-http://matplotlib.org/examples/animation/
-"""
-
-import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import animation
 

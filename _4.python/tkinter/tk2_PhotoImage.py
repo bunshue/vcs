@@ -4,6 +4,7 @@ PhotoImage
 
 可能有圖片 目前還不能搬走
 
+
 """
 
 import sys
@@ -14,11 +15,6 @@ from PIL import ImageTk, Image
 
 print("------------------------------------------------------------")  # 60個
 
-def msgShow():
-    print('你按了xxxxxx')
-
-print("------------------------------------------------------------")  # 60個
-'''
 print("將圖片貼在 Canvas 上")
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
@@ -29,6 +25,7 @@ window.geometry("600x900")
 
 # 檔案 => PIL影像
 image0 = Image.open(filename)
+
 # PIL影像 => ImageTk影像
 tk_image = ImageTk.PhotoImage(image0)
 
@@ -38,7 +35,11 @@ canvas1.pack(fill=tk.BOTH,expand=True)
 
 #tk顯示一張圖片 在label上
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+# 檔案 => PIL影像
 image = Image.open(filename)
+
+# PIL影像 => ImageTk影像
 image = ImageTk.PhotoImage(image)
 
 label1 = tk.Label(image = image)
@@ -103,10 +104,12 @@ from PIL import ImageTk, Image
 window = tk.Tk()
 window.geometry("600x800")
 
+print('做一個有圖像的按鈕')
+
 # 檔案 => ImageTk影像
 tk_image = ImageTk.PhotoImage(file=filename)
 
-button1 = tk.Button(window,image=tk_image,command=msgShow)
+button1 = tk.Button(window,image=tk_image)
 button1.pack()
 
 tk.mainloop()
@@ -118,11 +121,12 @@ from PIL import ImageTk, Image
 window = tk.Tk()
 window.geometry("600x800")
 
+print('做一個有圖像的按鈕')
+
 # 檔案 => ImageTk影像
 tk_image = ImageTk.PhotoImage(file=filename)
 
-button1 = tk.Button(window,image=tk_image,command=msgShow,
-             text="Click me",compound=tk.TOP)
+button1 = tk.Button(window,image=tk_image, text="Click me",compound=tk.TOP)
 button1.pack()
 
 tk.mainloop()
@@ -134,11 +138,12 @@ from PIL import ImageTk, Image
 window = tk.Tk()
 window.geometry("600x800")
 
+print('做一個有圖像的按鈕')
+
 # 檔案 => ImageTk影像
 tk_image = ImageTk.PhotoImage(file=filename)
 
-button1 = tk.Button(window,image=tk_image,command=msgShow,
-             text="Click me",compound=tk.CENTER)
+button1 = tk.Button(window,image=tk_image, text="Click me",compound=tk.CENTER)
 button1.pack()
 
 tk.mainloop()
@@ -151,9 +156,9 @@ window.geometry("600x800")
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => ImageTk影像
-html_gif = ImageTk.PhotoImage(file=filename)
+tk_image = ImageTk.PhotoImage(file=filename)
 
-tk.Label(window,image=html_gif).pack()
+tk.Label(window,image=tk_image).pack()
 
 window.mainloop()
 
@@ -164,10 +169,12 @@ window.geometry("600x800")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+print('做一個有圖像的按鈕')
+
 # 檔案 => ImageTk影像
 tk_image = ImageTk.PhotoImage(file=filename)
 
-button1 = tk.Button(window,image=tk_image,command=msgShow)
+button1 = tk.Button(window,image=tk_image)
 button1.pack()
 
 window.mainloop()
@@ -179,11 +186,12 @@ window.geometry("600x800")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+print('做一個有圖像的按鈕')
+
 # 檔案 => ImageTk影像
 tk_image = ImageTk.PhotoImage(file=filename)
 
-button1 = tk.Button(window,image=tk_image,command=msgShow,
-             text="Click me",compound=tk.TOP)
+button1 = tk.Button(window,image=tk_image, text="Click me",compound=tk.TOP)
 button1.pack()
 
 window.mainloop()
@@ -195,11 +203,12 @@ window.geometry("600x800")
 
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
+print('做一個有圖像的按鈕')
+
 # 檔案 => ImageTk影像
 tk_image = ImageTk.PhotoImage(file=filename)
 
-button1 = tk.Button(window,image=tk_image,command=msgShow,
-             text="Click me",compound=tk.CENTER)
+button1 = tk.Button(window,image=tk_image, text="Click me",compound=tk.CENTER)
 button1.pack()
 
 window.mainloop()
@@ -214,7 +223,7 @@ from PIL import Image, ImageTk
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 # 檔案 => PIL影像
-image = Image.open(filename)        # 開啟圖片
+image = Image.open(filename)
 
 # Image影像 => ImageTk影像
 tk_image = ImageTk.PhotoImage(image)    # 轉換為 tk 圖片物件
@@ -223,8 +232,8 @@ label = tk.Label(window, image=tk_image, width=200, height=200)  # 在 Lable 中
 label.pack()
 
 # 檔案 => ImageTk影像
-html_gif = ImageTk.PhotoImage(file=filename)
-tk.Label(window,image=html_gif).pack()
+tk_image = ImageTk.PhotoImage(file=filename)
+tk.Label(window,image=tk_image).pack()
 
 window.mainloop()
 
@@ -240,10 +249,10 @@ filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 # 檔案 => PIL影像
 img = Image.open(filename)
 # PIL影像 => ImageTk影像
-image = ImageTk.PhotoImage(img)
+tk_image = ImageTk.PhotoImage(img)
 
 text = tk.Text()
-text.image_create(tk.END,image=image)
+text.image_create(tk.END,image=tk_image)
 text.insert(tk.END,"\n")
 text.insert(tk.END,"牡丹亭")
 text.insert(tk.END,"還魂記")
@@ -259,9 +268,9 @@ window.geometry("600x800")
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => ImageTk影像
-html_gif = ImageTk.PhotoImage(file=filename)
+tk_image = ImageTk.PhotoImage(file=filename)
 
-label=tk.Label(window,image=html_gif)
+label=tk.Label(window,image=tk_image)
 label.pack()
 
 window.mainloop()
@@ -277,6 +286,7 @@ window.geometry("600x800")
 
 # 檔案 => PIL影像
 image = Image.open(filename)
+
 # PIL影像 => ImageTk影像
 tk_image = ImageTk.PhotoImage(image)
 
@@ -292,8 +302,11 @@ window.geometry("600x800")
 
 sseText = """SSE全名是Silicon Stone Education,這家公司在美國,
 這是國際專業證照公司,產品多元與豐富."""
-sse_gif = ImageTk.PhotoImage(file="__new/sse.gif")
-label=tk.Label(window,text=sseText,image=sse_gif,bg="lightyellow",
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sse.gif")
+
+label=tk.Label(window,text=sseText,image=tk_image,bg="lightyellow",
             compound="left")
 label.pack()
 
@@ -306,8 +319,11 @@ window.geometry("600x800")
 
 sseText = """SSE全名是Silicon Stone Education,這家公司在美國,
 這是國際專業證照公司,產品多元與豐富."""
-sse_gif = ImageTk.PhotoImage(file="__new/sse.gif")
-label=tk.Label(window,text=sseText,image=sse_gif,bg="lightyellow",
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sse.gif")
+
+label=tk.Label(window,text=sseText,image=tk_image,bg="lightyellow",
             justify="left",compound="right")
 label.pack()
 
@@ -320,8 +336,10 @@ window.geometry("600x800")
 
 sseText = """SSE全名是Silicon Stone Education,這家公司在美國,
 這是國際專業證照公司,產品多元與豐富."""
-sse_gif = ImageTk.PhotoImage(file="__new/sse.gif")
-label=tk.Label(window,text=sseText,image=sse_gif,bg="lightyellow",
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sse.gif")
+label=tk.Label(window,text=sseText,image=tk_image,bg="lightyellow",
             compound="center")
 label.pack()
 
@@ -334,11 +352,13 @@ filename = 'C:/_git/vcs/_4.python/_data/lena_color.png'
 window = tk.Tk()
 window.geometry("600x800")
 
-photo = ImageTk.PhotoImage(file=filename)
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file=filename)
+
 the_label = tk.Label(window,
                   text='LENA',
                   justify=tk.LEFT,  #字符串进行左对齐
-                  image=photo,
+                  image=tk_image,
                   compound=tk.CENTER,  # 混合模式,文字在图片的正上方显示
                   font=("方正粗黑宋简体", 24),  #字体和大小
                   fg='red'  # 前景颜色，就是字体颜色
@@ -399,11 +419,13 @@ filename = 'C:/_git/vcs/_4.python/_data/lena_color.png'
 window = tk.Tk()
 window.geometry("800x600")
 
-night = ImageTk.PhotoImage(file=filename)
-label1 = tk.Label(window,image=night)
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file=filename)
+
+label1 = tk.Label(window,image=tk_image)
 label1.place(x=0,y=0,width=512,height=512)
 
-label2=tk.Label(window,image=night)
+label2=tk.Label(window,image=tk_image)
 label2.place(relx=0.1,rely=0.1,relwidth=0.8,relheight=0.8)
 
 window.mainloop()
@@ -417,14 +439,18 @@ filename = 'C:/_git/vcs/_4.python/_data/lena_color.png'
 window = tk.Tk()
 window.geometry("640x480")
 
-night = ImageTk.PhotoImage(file=filename)
-label = tk.Label(window,image=night)
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file=filename)
+
+label = tk.Label(window,image=tk_image)
 label.place(relx=0.1,rely=0.1,relheight=0.8)
 
-print('把圖片顯示在Button上')
+print('做一個有圖像的按鈕')
 
-sunGif = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
-button1 = tk.Button(window,image=sunGif,command=msgShow)     # 含影像的按鈕
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+
+button1 = tk.Button(window,image=tk_image)
 button1.pack()
 
 window.mainloop()
@@ -433,8 +459,12 @@ print('------------------------------')	#60個
 
 window = tk.Tk()
 
-sunGif = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
-button1 = tk.Button(window,image=sunGif,command=msgShow,     # 含文字與影像的按鈕
+print('做一個有圖像的按鈕')
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+
+button1 = tk.Button(window,image=tk_image,     # 含文字與影像的按鈕
              text="Click Me",compound=tk.TOP)          
 
 button1.pack()
@@ -445,8 +475,11 @@ print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
 
-sunGif = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
-button1 = tk.Button(window,image=sunGif,command=msgShow,     # 含文字與影像的按鈕
+print('做一個有圖像的按鈕')
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+button1 = tk.Button(window,image=tk_image,     # 含文字與影像的按鈕
              text="Click Me",compound=tk.CENTER)          
 button1.pack()
 
@@ -456,8 +489,12 @@ print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
 
-sunGif = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
-button1 = tk.Button(window,image=sunGif,command=msgShow,     # 含文字與影像的按鈕
+print('做一個有圖像的按鈕')
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+
+button1 = tk.Button(window,image=tk_image,     # 含文字與影像的按鈕
              text="Click Me",compound=tk.LEFT)          
 button1.pack()
 
@@ -467,8 +504,12 @@ print('------------------------------------------------------------')	#60個
 
 window = tk.Tk()
 
-sunGif = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
-button1 = tk.Button(window,image=sunGif,command=msgShow,     # 含影像的按鈕
+print('做一個有圖像的按鈕')
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+
+button1 = tk.Button(window,image=tk_image,     # 含影像的按鈕
              cursor="star")                         # star外形   
 button1.pack()
 
@@ -479,8 +520,11 @@ print('------------------------------------------------------------')	#60個
 window = tk.Tk()
 
 msg = "歡迎進入Silicon Stone Educaiton系統"
-sseGif = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-logo = tk.Label(window,image=sseGif,text=msg,compound=tk.BOTTOM)
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
+
+logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
 accountL = tk.Label(window,text="Account")   # account標籤
 accountL.grid(row=1)
 pwdL = tk.Label(window,text="Password")      # pwd標籤
@@ -502,8 +546,11 @@ def printInfo1():                        # 列印輸入資訊
 window = tk.Tk()
 
 msg = "歡迎進入Silicon Stone Educaiton系統"
-sseGif = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-logo = tk.Label(window,image=sseGif,text=msg,compound=tk.BOTTOM)
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
+
+logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
 accountL = tk.Label(window,text="Account")   # account標籤
 accountL.grid(row=1)
 pwdL = tk.Label(window,text="Password")      # pwd標籤
@@ -530,8 +577,11 @@ def printInfo2():                        # 列印輸入資訊
 window = tk.Tk()
 
 msg = "歡迎進入Silicon Stone Educaiton系統"
-sseGif = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-logo = tk.Label(window,image=sseGif,text=msg,compound=tk.BOTTOM)
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
+
+logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
 accountL = tk.Label(window,text="Account")   # account標籤
 accountL.grid(row=1)
 pwdL = tk.Label(window,text="Password")      # pwd標籤
@@ -559,8 +609,11 @@ def printInfo3():                        # 列印輸入資訊
 window = tk.Tk()
 
 msg = "歡迎進入Silicon Stone Educaiton系統"
-sseGif = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-logo = tk.Label(window,image=sseGif,text=msg,compound=tk.BOTTOM)
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
+
+logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
 accountL = tk.Label(window,text="Account")   # account標籤
 accountL.grid(row=1)
 pwdL = tk.Label(window,text="Password")      # pwd標籤
@@ -591,8 +644,11 @@ def printInfo4():                        # 列印輸入資訊
 window = tk.Tk()
 
 msg = "歡迎進入Silicon Stone Educaiton系統"
-sseGif = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-logo = tk.Label(window,image=sseGif,text=msg,compound=tk.BOTTOM)
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
+
+logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
 accountL = tk.Label(window,text="Account")   # account標籤
 accountL.grid(row=1)
 pwdL = tk.Label(window,text="Password")      # pwd標籤
@@ -620,9 +676,10 @@ def printSelection():
 
 window = tk.Tk()
 
-imgStar = ImageTk.PhotoImage(file="__new/star.gif")
-imgMoon = ImageTk.PhotoImage(file="__new/moon.gif")
-imgSun = ImageTk.PhotoImage(file="__new/sun.gif")
+# 檔案 => ImageTk影像
+tk_image1 = ImageTk.PhotoImage(file="__new/star.gif")
+tk_image2 = ImageTk.PhotoImage(file="__new/moon.gif")
+tk_image3 = ImageTk.PhotoImage(file="__new/sun.gif")
 
 var = tk.StringVar()                               # 選項紐綁定的變數
 var.set("星星")                                 # 預設選項是男生
@@ -630,17 +687,17 @@ var.set("星星")                                 # 預設選項是男生
 label = tk.Label(window,text="這是預設,尚未選擇", bg="lightyellow",width=30)
 label.pack()
 
-rbStar = tk.Radiobutton(window,image=imgStar,        # 星星選項鈕
+rbStar = tk.Radiobutton(window,image=tk_image1,        # 星星選項鈕
                      variable=var,value="星星",
                      command=printSelection)
 rbStar.pack()
 
-rbMoon = tk.Radiobutton(window,image=imgMoon,        # 月亮選項鈕
+rbMoon = tk.Radiobutton(window,image=tk_image2,        # 月亮選項鈕
                      variable=var,value="月亮",
                      command=printSelection)
 rbMoon.pack()
 
-rbSun = tk.Radiobutton(window,image=imgSun,          # 太陽選項鈕
+rbSun = tk.Radiobutton(window,image=tk_image3,          # 太陽選項鈕
                     variable=var,value="太陽",
                     command=printSelection)
 rbSun.pack()
@@ -654,9 +711,10 @@ def printSelection():
 
 window = tk.Tk()
 
-imgStar = ImageTk.PhotoImage(file="__new/star.gif")
-imgMoon = ImageTk.PhotoImage(file="__new/moon.gif")
-imgSun = ImageTk.PhotoImage(file="__new/sun.gif")
+# 檔案 => ImageTk影像
+tk_image1 = ImageTk.PhotoImage(file="__new/star.gif")
+tk_image2 = ImageTk.PhotoImage(file="__new/moon.gif")
+tk_image3 = ImageTk.PhotoImage(file="__new/sun.gif")
 
 var = tk.StringVar()                               # 選項紐綁定的變數
 var.set("星星")                                 # 預設選項是男生
@@ -664,19 +722,19 @@ var.set("星星")                                 # 預設選項是男生
 label = tk.Label(window,text="這是預設,尚未選擇", bg="lightyellow",width=30)
 label.pack()
 
-rbStar = tk.Radiobutton(window,image=imgStar,        # 星星選項鈕
+rbStar = tk.Radiobutton(window,image=tk_image1,        # 星星選項鈕
                      text="星星",compound=tk.RIGHT,
                      variable=var,value="星星",
                      command=printSelection)
 rbStar.pack()
 
-rbMoon = tk.Radiobutton(window,image=imgMoon,        # 月亮選項鈕
+rbMoon = tk.Radiobutton(window,image=tk_image2,        # 月亮選項鈕
                      text="月亮",compound=tk.RIGHT,
                      variable=var,value="月亮",
                      command=printSelection)
 rbMoon.pack()
 
-rbSun = tk.Radiobutton(window,image=imgSun,          # 太陽選項鈕
+rbSun = tk.Radiobutton(window,image=tk_image3,          # 太陽選項鈕
                     text="太陽",compound=tk.RIGHT,
                     variable=var,value="太陽",
                     command=printSelection)
@@ -689,8 +747,11 @@ print('------------------------------------------------------------')	#60個
 window = tk.Tk()
 
 msg = "歡迎進入Silicon Stone Educaiton系統"
-sseGif = ImageTk.PhotoImage(file="__new/sse.gif")         # Logo影像檔
-logo = tk.Label(window,image=sseGif,text=msg,compound=tk.BOTTOM)
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file="__new/sse.gif")         # Logo影像檔
+
+logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
 logo.pack()
 
 # 以下是LabelFrame標籤框架
@@ -707,7 +768,7 @@ pwdE.grid(row=1,column=1,pady=10)           # 定位文字方塊pwd
 labFrame.pack(padx=10,pady=5,ipadx=5,ipady=5)   # 包裝與定位標籤框架
 
 window.mainloop()
-'''
+
 print('------------------------------------------------------------')	#60個
     
 import customtkinter as ctk
@@ -784,12 +845,16 @@ window.geometry('600x400')
 window.columnconfigure((0,1,2,3), weight = 1, uniform = 'a')
 window.rowconfigure(0, weight = 1)
 
+# 檔案 => PIL影像
 image_original = Image.open('__new/raccoon.jpg')
+
 image_ratio = image_original.size[0] / image_original.size[1]
 print(image_ratio)
 image_tk = ImageTk.PhotoImage(image_original)
 
+# 檔案 => PIL影像
 python_dark = Image.open('__new/python_dark.png').resize((30,30))
+
 python_dark_tk = ImageTk.PhotoImage(python_dark)
 
 img_ctk = ctk.CTkImage(
@@ -834,15 +899,21 @@ tree.heading("#0",text="App")           # 圖標欄位icon column
 tree.heading("#1",text="功能說明")
 tree.column("#1",width=300)             # 格式化欄標題
 
+# 檔案 => PIL影像
 img1 = Image.open("__new/news.jpg")           # 插入鳳凰新聞App圖示
+
 imgObj1 = ImageTk.PhotoImage(img1)
 tree.insert("",index=tk.END,text="鳳凰新聞",image=imgObj1,values=info[0])
 
+# 檔案 => PIL影像
 img2 = Image.open("__new/sbb.jpg")            # 插入瑞士國家鐵路App圖示
+
 imgObj2 = ImageTk.PhotoImage(img2)
 tree.insert("",index=tk.END,text="瑞士鐵路",image=imgObj2,values=info[1])
 
-img3 = Image.open("__new/coca.jpg")           # 插入可口可樂App圖示          
+# 檔案 => PIL影像
+img3 = Image.open("__new/coca.jpg")           # 插入可口可樂App圖示
+
 imgObj3 = ImageTk.PhotoImage(img3)
 tree.insert("",index=tk.END,text="可口可樂",image=imgObj3,values=info[2])    
 tree.pack()
@@ -886,9 +957,9 @@ window = tk.Tk()
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => ImageTk影像
-sselogo = ImageTk.PhotoImage(file=filename)
+tk_image = ImageTk.PhotoImage(file=filename)
 
-lab1 = tk.Label(window,image=sselogo).pack(side="right")
+lab1 = tk.Label(window,image=tk_image).pack(side="right")
 
 poem_text = """
 故人西辭黃鶴樓，
@@ -909,9 +980,9 @@ window = tk.Tk()
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => ImageTk影像
-sselogo = ImageTk.PhotoImage(file=filename)
+tk_image = ImageTk.PhotoImage(file=filename)
 
-lab1 = tk.Label(window,image=sselogo).pack(side="right")
+lab1 = tk.Label(window,image=tk_image).pack(side="right")
 
 poem_text = """
 故人西辭黃鶴樓，
@@ -932,9 +1003,9 @@ window = tk.Tk()
 filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 # 檔案 => ImageTk影像
-pic = ImageTk.PhotoImage(file=filename)
+tk_image = ImageTk.PhotoImage(file=filename)
 
-label1 = tk.Label(window,image=pic).pack(side="right")
+label1 = tk.Label(window,image=tk_image).pack(side="right")
 
 poem_text = """
 故人西辭黃鶴樓，
