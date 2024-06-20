@@ -1,9 +1,9 @@
 import pickle
 
 print('使用 pickle 模組 寫讀二進位檔案')
-
-print('------------------------------------------------------------')	#60個
 '''
+print('------------------------------------------------------------')	#60個
+
 filename = 'pickle.dat'
 print('寫入二進位檔案 :', filename)
 fp = open(filename, "wb")
@@ -54,9 +54,6 @@ print(pickledict)
 
 print('------------------------------------------------------------')	#60個
 
-'''
-
-'''
 print('將資料寫入pickle檔案')
 a = 12
 b = 34
@@ -66,7 +63,6 @@ pickle.dump(a, file)
 pickle.dump(b, file)
 pickle.dump(c, file)
 file.close()
-
 
 print('------------------------------------------------------------')	#60個
 
@@ -80,18 +76,9 @@ file.close()
 print('a =', a)
 print('b =', b)
 print('c =', c)
-'''
-
 
 print('------------------------------------------------------------')	#60個
 
-import pickle
-
-print('使用 pickle 模組 寫讀二進位檔案')
-
-
-
-import pickle
 game_info = {
     "position_X":"100",
     "position_Y":"200",
@@ -106,8 +93,6 @@ fn_obj.close()
 
 print('------------------------------------------------------------')	#60個
 
-import pickle
-
 fn = "data/data19.dat"
 fn_obj = open(fn, 'rb')         # 二進位開啟
 game_info = pickle.load(fn_obj)
@@ -115,8 +100,6 @@ fn_obj.close()
 print(game_info)
 
 print("------------------------------------------------------------")  # 60個
-
-import pickle
 
 fp = open("note.dat", "wb")
 print("寫入整數: 11")
@@ -129,8 +112,6 @@ fp.close()
 
 print("------------------------------------------------------------")  # 60個
 
-import pickle
-
 fp = open("note.dat", "rb")
 i = pickle.load(fp)
 print("讀取整數 = ", str(i))
@@ -141,8 +122,6 @@ print("讀取串列 = ", str(list1))
 fp.close()    
 
 print("------------------------------------------------------------")  # 60個
-
-import pickle
 
 data = {
     "name": "Joe Chen",
@@ -156,3 +135,54 @@ with open("dic.dat", "rb") as f:
 print(new_data)    
 
 print('------------------------------------------------------------')	#60個
+'''
+
+
+print('------------------------------------------------------------')	#60個
+
+
+import pickle
+
+print("寫入資料給pickle")
+outfile = open("tmp_pickle_file.dat", "wb")
+
+for _ in range(10):
+    pickle.dump(_, outfile)
+    #print(_)
+for _ in range(10):
+    pickle.dump(_, outfile)
+    #print(_)
+
+outfile.close() # Close the output file
+
+print("從pickle讀取資料")
+infile = open("tmp_pickle_file.dat", "rb")
+    
+end_of_file = False
+while not end_of_file:
+    try:
+        print(pickle.load(infile), end = " ")
+    except EOFError:
+        end_of_file = True
+
+infile.close() # Close the input file
+
+print("\nOK")
+    
+print('------------------------------------------------------------')	#60個
+
+a_dict = {'da': 111, 2: [23,1,4], '23': {1:2,'d':'sad'}}
+
+# pickle a variable to a file
+file = open('tmp_pickle_example.pickle', 'wb')
+pickle.dump(a_dict, file)
+file.close()
+
+# reload a file to a variable
+with open('tmp_pickle_example.pickle', 'rb') as file:
+    a_dict1 =pickle.load(file)
+
+print(a_dict1)
+
+print('------------------------------------------------------------')	#60個
+

@@ -59,3 +59,141 @@ else:
 '''
                     
 
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("smtplib ST")
+print("------------------------------------------------------------")  # 60個
+
+import smtplib
+
+smtp = smtplib.SMTP("smtp.gmail.com", 587)
+smtp.ehlo()
+smtp.starttls()
+smtp.login("你的信箱", "你的密碼")
+from_addr = "你的信箱"
+to_addr = "收件人信箱"
+msg = "Subject:title\nHello\nWorld!"
+status = smtp.sendmail(from_addr, to_addr, msg)
+if status == {}:
+    print("郵件傳送成功！")
+else:
+    print("郵件傳送失敗...")
+smtp.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+import smtplib
+from email.mime.text import MIMEText
+
+msg = MIMEText("你好呀！這是用 Python 寄的信～", "plain", "utf-8")  # 郵件內文
+msg["Subject"] = "test測試"  # 郵件標題
+msg["From"] = "oxxo"  # 暱稱或是 email
+msg["To"] = "oxxo.studio@gmail.com"  # 收件人 email
+msg["Cc"] = "oxxo.studio@gmail.com, XXX@gmail.com"  # 副本收件人 email ( 開頭的 C 大寫 )
+msg["Bcc"] = "oxxo.studio@gmail.com, XXX@gmail.com"  # 密件副本收件人 email
+
+smtp = smtplib.SMTP("smtp.gmail.com", 587)
+smtp.ehlo()
+smtp.starttls()
+smtp.login("你的信箱", "你的密碼")
+status = smtp.send_message(msg)  # 改成 send_message
+if status == {}:
+    print("郵件傳送成功！")
+else:
+    print("郵件傳送失敗！")
+smtp.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+import smtplib
+from email.mime.text import MIMEText
+
+html = """
+<h1>hello</h1>
+<div>這是 HTML 的內容</div>
+<div style="color:red">紅色的字</div>
+"""
+
+mail = MIMEText(html, "html", "utf-8")  # plain 換成 html，就能寄送 HTML 格式的信件
+mail["Subject"] = "html 的信"
+mail["From"] = "oxxo"
+mail["To"] = "oxxo.studio@gmail.com"
+
+smtp = smtplib.SMTP("smtp.gmail.com", 587)
+smtp.ehlo()
+smtp.starttls()
+smtp.login("你的信箱", "你的密碼")
+status = smtp.send_message(mail)
+print(status)
+smtp.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+import smtplib
+from email.mime.application import MIMEApplication
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+html = """
+<h1>hello</h1>
+<div>這是 HTML 的內容</div>
+<div style="color:red">紅色的字</div>
+"""
+msg = MIMEMultipart()  # 使用多種格式所組成的內容
+msg.attach(MIMEText(html, "html", "utf-8"))  # 加入 HTML 內容
+# 使用 python 內建的 open 方法開啟指定目錄下的檔案
+with open("meme.jpg", "rb") as file:
+    img = file.read()
+attach_file = MIMEApplication(img, Name="meme.jpg")  # 設定附加檔案圖片
+msg.attach(attach_file)  # 加入附加檔案圖片
+
+msg["Subject"] = "附件是一張搞笑的圖"
+msg["From"] = "oxxo"
+msg["To"] = "oxxo.studio@gmail.com"
+
+smtp = smtplib.SMTP("smtp.gmail.com", 587)
+smtp.ehlo()
+smtp.starttls()
+smtp.login("oxxo.studio@gmail.com", "你申請的應用程式密碼")
+status = smtp.send_message(msg)
+print(status)
+smtp.quit()
+
+print("------------------------------------------------------------")  # 60個
+
+import smtplib
+from email.mime.text import MIMEText
+
+from_addr = 'cshung1961@gmail.com'              # 設定發信帳號
+pwd = input('請輸入 %s 的密碼 : ' % from_addr)  # 要求輸入發信帳號密碼
+to_addr_list = ['cshung@deepwisdom.com.tw', 'jiinkwei@me.com']   # 設定收件人
+
+with open('ex26_2.txt', 'rb') as filename:         # 讀取檔案內容
+    mailContent = filename.read()
+msg = MIMEText(mailContent, 'base64', 'utf-8')
+msg['Content-Type'] = 'application/octet-stream'
+msg['Content-Disposition'] = 'attachment; filename="ex26_2.txt"'
+msg['Subject'] = '傳送Python學習心得附加檔案'
+msg['From'] = '學生'
+msg['To'] = 'cshung@deepwisdom.com.tw'
+msg['Cc'] = 'jiinkwei@me.com'
+
+mySMTP = smtplib.SMTP('smtp.gmail.com', 587)    # 執行連線
+mySMTP.ehlo()                                   # 啟動對話
+mySMTP.starttls()                               # 執行TLS加密               
+mySMTP.login(from_addr, pwd)                    # 登入郵件伺服器
+status = mySMTP.sendmail(from_addr, to_addr_list, msg.as_string())  # 執行發送信件
+if status == {}:                                # 檢查是否發信成功
+    print("發送郵件成功!")
+mySMTP.quit()                                   # 結束連線
+
+
+print("------------------------------------------------------------")  # 60個
+print("smtplib SP")
+print("------------------------------------------------------------")  # 60個
+
+
+

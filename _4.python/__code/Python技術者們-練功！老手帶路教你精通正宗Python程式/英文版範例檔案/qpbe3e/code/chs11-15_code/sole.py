@@ -1,5 +1,7 @@
 """sole module: contains functions sole, save, show"""
+
 import pickle
+
 _sole_mem_cache_d = {}
 _sole_disk_file_s = "solecache"
 file = open(_sole_disk_file_s, 'rb')                          #A
