@@ -26,3 +26,5 @@ def main():
     print("\nSum of all elements is", accumulate(m))
 
 main() # Invoke main function
+
+#改成建立一個matrix

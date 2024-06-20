@@ -10,9 +10,3 @@ for e in lst:
     print(e, end = ' ')
 print()
 
-iterator = iter(lst)
-print(next(iterator))
-print(next(iterator))
-print(next(iterator))
-print(next(iterator))
-print(next(iterator))

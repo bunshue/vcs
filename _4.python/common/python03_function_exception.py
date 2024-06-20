@@ -29,6 +29,10 @@ int()
 float()
 """
 
+import sys
+
+print("------------------------------------------------------------")  # 60個
+
 print("python之基本函數")
 print("int(8.4)=", int(8.4))
 print("bin(14)=", bin(14))
@@ -267,10 +271,22 @@ except FileNotFoundError:
 
 print("------------------------------------------------------------")  # 60個
 
-import sys
+number1, number2 = 5, 0
+try:
+    result = number1 / number2
+    print("Result is " + str(result))
+except ZeroDivisionError:
+    print("Division by zero!")
+except SyntaxError:
+    print("A comma may be missing in the input")
+except:
+    print("Something wrong in the input")
+else:
+    print("No exceptions")
+finally:
+    print("The finally clause is executed")
 
 print("------------------------------------------------------------")  # 60個
-
 
 def division(x, y):
     try:  # try - except指令
@@ -401,7 +417,7 @@ if age < 15:
     print("You are too young")
 
 print("try-except 的用法")
-import os, sys
+import os
 
 try:
     os.remove("hello.txt")

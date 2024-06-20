@@ -9,7 +9,7 @@ import random
 import datetime
 import tkinter as tk
 from tkinter import ttk
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 
@@ -632,8 +632,8 @@ def redisplayBall(ball):
 
 ballList = [] # Create a list for balls
 
-window = tk.Tk() # Create a window
-window.title("Bouncing Ball 9") # Set a title
+window = tk.Tk()
+window.title("Bouncing Ball 9")
 
 width = 350 # Width of the canvas
 height = 150 # Width of the canvas
@@ -792,8 +792,8 @@ class BounceBalls:
     def __init__(self):
         self.ballList = [] # Create a list for balls
         
-        window = Tk() # Create a window
-        window.title("Bouncing Balls") # Set a title
+        window = Tk()
+        window.title("Bouncing Balls")
         
         self.width = 350 # Width of the self.canvas
         self.height = 150 # Width of the self.canvas
@@ -855,9 +855,69 @@ class BounceBalls:
             ball.y + ball.radius, fill = ball.color, tags = "ball")
                                              
 BounceBalls() # Create GUI
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+class ControlAnimation:
+    def __init__(self):
+        window = tk.Tk()
+        window.title("Control Animation Demo")
+        
+        self.width = 250 # Width of the self.canvas
+        self.canvas = tk.Canvas(window, bg = "white", 
+            width = self.width, height = 50)
+        self.canvas.pack()
+        
+        frame = tk.Frame(window)
+        frame.pack()
+        btStop = tk.Button(frame, text = "Stop", command = self.stop)
+        btStop.pack(side = tk.LEFT)
+        btResume = tk.Button(frame, text = "Resume", command = self.resume)
+        btResume.pack(side = tk.LEFT)
+        btFaster = tk.Button(frame, text = "Faster", command = self.faster)
+        btFaster.pack(side = tk.LEFT)
+        btSlower = tk.Button(frame, text = "Slower", command = self.slower)
+        btSlower.pack(side = tk.LEFT)
+        
+        self.x = 0 # Starting x position
+        self.sleepTime = 100 # Set a sleep time 
+        self.canvas.create_text(self.x, 30, text = "Message moving?", tags = "text")
+        
+        self.dx = 3
+        self.isStopped = False
+        self.animate()
+        
+        window.mainloop() # Create an event loop
+        
+    def stop(self): # Stop animation
+        self.isStopped = True
+    
+    def resume(self): # Resume animation
+        self.isStopped = False   
+        self.animate()
+    
+    def faster(self): # Speed up the animation
+        if self.sleepTime > 5:
+            self.sleepTime -= 20
+               
+    def slower(self): # Slow down the animation
+        self.sleepTime += 20
+                                
+    def animate(self): # Move the message
+        while not self.isStopped:
+            self.canvas.move("text", self.dx, 0) # Move text 
+            self.canvas.after(self.sleepTime) # Sleep 
+            self.canvas.update() # Update self.canvas
+            if self.x < self.width:
+                self.x += self.dx  # Set new position 
+            else:
+                self.x = 0 # Reset string position to the beginning
+                self.canvas.delete("text") 
+                # Redraw text at the beginning
+                self.canvas.create_text(self.x, 30, 
+                    text = "Message moving?", tags = "text")    
+                                       
+ControlAnimation() # Create GUI
 
 print("------------------------------------------------------------")  # 60個
 

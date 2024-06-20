@@ -345,12 +345,113 @@ def toHexChar(hexValue):
 decimalValue = 170
 
 print("The hex number for decimal", decimalValue, "is", decimalToHex(decimalValue))
-  
-
-
-print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
 
+
+print("          九九乘法表")
+# Display the number title
+print("  |", end = '')
+for j in range(1, 10):
+    print("  ", j, end = '')
+print() # Jump to the new line
+print("-----------------------------------------")
+
+# Display table body
+for i in range(1, 10):
+    print(i, "|", end = '')
+    for j in range(1, 10): 
+        # Display the product and align properly
+        print(format(i * j, '4d'), end = '')
+    print()# Jump to the new line
+
+
 print("------------------------------------------------------------")  # 60個
+
+# Compute the distance between two points (x1, y1) and (x2, y2)
+def distance(x1, y1, x2, y2):
+    return ((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) ** 0.5
+
+def nearestPoints(points):
+    # p1 and p2 are the indices in the points list
+    p1, p2 = 0, 1  # Initial two points
+
+    shortestDistance = distance(points[p1][0], points[p1][1], 
+        points[p2][0], points[p2][1]) # Initialize shortestDistance
+    
+    # Compute distance for every two points
+    for i in range(len(points)):
+        for j in range(i + 1, len(points)):
+            d = distance(points[i][0], points[i][1], 
+                         points[j][0], points[j][1])  # Find distance
+
+            if shortestDistance > d:
+                p1, p2 = i, j # Update p1, p2
+                shortestDistance = d # New shortestDistance 
+
+    return p1, p2
+
+print('找出多點中最近的兩點')
+
+# Create a list to store points
+points = []
+    
+point = 2 * [0]
+point[0], point[1] = 0, 0
+points.append(point)
+
+point = 2 * [0]
+point[0], point[1] = 5, 0
+points.append(point)
+
+point = 2 * [0]
+point[0], point[1] = 5, 5
+points.append(point)
+
+point = 2 * [0]
+point[0], point[1] = 3, 1
+points.append(point)
+
+# p1 and p2 are the indices in the points list
+p1, p2 = nearestPoints(points)  
+
+# Display result
+print("The closest two points are (" +
+    str(points[p1][0]) + ", " + str(points[p1][1]) + ") and (" +
+    str(points[p2][0]) + ", " + str(points[p2][1]) + ")")
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
