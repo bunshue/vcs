@@ -165,7 +165,7 @@ def callback(event):                        # 事件處理程式
     
 window = tk.Tk()
 window.geometry("600x800")
-window.title("綁定鍵盤滑鼠事件 Canvas")
+window.title("綁定鍵盤滑鼠事件 Canvas, 取得滑鼠位置")
 
 canvas = tk.Canvas(window, width=300, height=180, bg = 'pink')
 canvas.bind("<Button-1>",callback)           # 按一下綁定callback

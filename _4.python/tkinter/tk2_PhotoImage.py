@@ -297,51 +297,27 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-window.geometry("600x800")
-
-sseText = """SSE全名是Silicon Stone Education,這家公司在美國,
-這是國際專業證照公司,產品多元與豐富."""
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sse.gif")
-
-label=tk.Label(window,text=sseText,image=tk_image,bg="lightyellow",
-            compound="left")
-label.pack()
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
 
 window = tk.Tk()
 window.geometry("600x800")
 
-sseText = """SSE全名是Silicon Stone Education,這家公司在美國,
-這是國際專業證照公司,產品多元與豐富."""
+poem_text = """
+故人西辭黃鶴樓，
+煙花三月下揚州。
+孤帆遠影碧空盡，
+唯見長江天際流。
+"""
 
 # 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sse.gif")
+tk_image = ImageTk.PhotoImage(file=filename)
 
-label=tk.Label(window,text=sseText,image=tk_image,bg="lightyellow",
-            justify="left",compound="right")
-label.pack()
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-window.geometry("600x800")
-
-sseText = """SSE全名是Silicon Stone Education,這家公司在美國,
-這是國際專業證照公司,產品多元與豐富."""
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sse.gif")
-label=tk.Label(window,text=sseText,image=tk_image,bg="lightyellow",
-            compound="center")
-label.pack()
+label1 = tk.Label(window,image=tk_image).pack(side="right")
+label1 = tk.Label(window,text=poem_text,bg="lightyellow", padx=10).pack(side="left")
+label1 = tk.Label(window,text=poem_text,bg="lightyellow", justify=tk.LEFT,padx=10).pack(side="left")
+label1 = tk.Label(window,text=poem_text,image=tk_image,bg="lightyellow", compound="left")
+label1 = tk.Label(window,text=poem_text,image=tk_image,bg="lightyellow", justify="left",compound="right")
+label1 = tk.Label(window,text=poem_text,image=tk_image,bg="lightyellow", compound="center")
 
 window.mainloop()
 
@@ -448,7 +424,7 @@ label.place(relx=0.1,rely=0.1,relheight=0.8)
 print('做一個有圖像的按鈕')
 
 # 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+tk_image = ImageTk.PhotoImage(file=filename)
 
 button1 = tk.Button(window,image=tk_image)
 button1.pack()
@@ -457,12 +433,14 @@ window.mainloop()
 
 print('------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
 window = tk.Tk()
 
 print('做一個有圖像的按鈕')
 
 # 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+tk_image = ImageTk.PhotoImage(file=filename)
 
 button1 = tk.Button(window,image=tk_image,     # 含文字與影像的按鈕
              text="Click Me",compound=tk.TOP)          
@@ -473,12 +451,14 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
 window = tk.Tk()
 
 print('做一個有圖像的按鈕')
 
 # 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+tk_image = ImageTk.PhotoImage(file=filename)
 button1 = tk.Button(window,image=tk_image,     # 含文字與影像的按鈕
              text="Click Me",compound=tk.CENTER)          
 button1.pack()
@@ -487,12 +467,14 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
 window = tk.Tk()
 
 print('做一個有圖像的按鈕')
 
 # 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+tk_image = ImageTk.PhotoImage(file=filename)
 
 button1 = tk.Button(window,image=tk_image,     # 含文字與影像的按鈕
              text="Click Me",compound=tk.LEFT)          
@@ -502,12 +484,14 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
 window = tk.Tk()
 
 print('做一個有圖像的按鈕')
 
 # 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sun.gif")                 # Image物件
+tk_image = ImageTk.PhotoImage(file=filename)
 
 button1 = tk.Button(window,image=tk_image,     # 含影像的按鈕
              cursor="star")                         # star外形   
@@ -517,260 +501,6 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-window = tk.Tk()
-
-msg = "歡迎進入Silicon Stone Educaiton系統"
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-
-logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
-accountL = tk.Label(window,text="Account")   # account標籤
-accountL.grid(row=1)
-pwdL = tk.Label(window,text="Password")      # pwd標籤
-pwdL.grid(row=2)
-
-logo.grid(row=0,column=0,columnspan=2,pady=10,padx=10)
-accountE = tk.Entry(window)                  # 文字方塊account
-pwdE = tk.Entry(window,show="*")             # 文字方塊pwd
-accountE.grid(row=1,column=1)           # 定位文字方塊account
-pwdE.grid(row=2,column=1,pady=10)       # 定位文字方塊pwd
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-def printInfo1():                        # 列印輸入資訊
-    print("Account: %s\nPassword: %s" % (accountE.get(),pwdE.get()))
-    
-window = tk.Tk()
-
-msg = "歡迎進入Silicon Stone Educaiton系統"
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-
-logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
-accountL = tk.Label(window,text="Account")   # account標籤
-accountL.grid(row=1)
-pwdL = tk.Label(window,text="Password")      # pwd標籤
-pwdL.grid(row=2)
-
-logo.grid(row=0,column=0,columnspan=2,pady=10,padx=10)
-accountE = tk.Entry(window)                  # 文字方塊account
-pwdE = tk.Entry(window,show="*")             # 文字方塊pwd
-accountE.grid(row=1,column=1)           # 定位文字方塊account
-pwdE.grid(row=2,column=1,pady=10)       # 定位文字方塊pwd
-# 以下建立Login和Quit案鈕
-loginButton = tk.Button(window,text="Login",command=printInfo1)
-loginButton.grid(row=3,column=0)
-quitButton = tk.Button(window,text="Quit",command=window.quit)
-quitButton.grid(row=3,column=1)
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-def printInfo2():                        # 列印輸入資訊
-    print("Account: %s\nPassword: %s" % (accountE.get(),pwdE.get()))
-    
-window = tk.Tk()
-
-msg = "歡迎進入Silicon Stone Educaiton系統"
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-
-logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
-accountL = tk.Label(window,text="Account")   # account標籤
-accountL.grid(row=1)
-pwdL = tk.Label(window,text="Password")      # pwd標籤
-pwdL.grid(row=2)
-
-logo.grid(row=0,column=0,columnspan=2,pady=10,padx=10)
-accountE = tk.Entry(window)                  # 文字方塊account
-pwdE = tk.Entry(window,show="*")             # 文字方塊pwd
-accountE.grid(row=1,column=1)           # 定位文字方塊accou
-pwdE.grid(row=2,column=1,pady=10)       # 定位文字方塊pwd
-
-# 以下建立Login和Quit案鈕
-loginButton = tk.Button(window,text="Login",command=printInfo2)
-loginButton.grid(row=3,column=0,sticky=tk.W,pady=5)
-quitButton = tk.Button(window,text="Quit",command=window.quit)
-quitButton.grid(row=3,column=1,sticky=tk.W,pady=5)
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-def printInfo3():                        # 列印輸入資訊
-    print("Account: %s\nPassword: %s" % (accountE.get(),pwdE.get()))
-    
-window = tk.Tk()
-
-msg = "歡迎進入Silicon Stone Educaiton系統"
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-
-logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
-accountL = tk.Label(window,text="Account")   # account標籤
-accountL.grid(row=1)
-pwdL = tk.Label(window,text="Password")      # pwd標籤
-pwdL.grid(row=2)
-
-logo.grid(row=0,column=0,columnspan=2,pady=10,padx=10)
-accountE = tk.Entry(window)                  # 文字方塊account
-pwdE = tk.Entry(window,show="*")             # 文字方塊pwd
-accountE.insert(0,"Kevin")              # 預設Account內容
-pwdE.insert(0,"pwd")                    # 預設pwd內容
-accountE.grid(row=1,column=1)           # 定位文字方塊accou
-pwdE.grid(row=2,column=1,pady=10)       # 定位文字方塊pwd
-# 以下建立Login和Quit案鈕
-loginButton = tk.Button(window,text="Login",command=printInfo3)
-loginButton.grid(row=3,column=0,sticky=tk.W,pady=5)
-quitButton = tk.Button(window,text="Quit",command=window.quit)
-quitButton.grid(row=3,column=1,sticky=tk.W,pady=5)
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-def printInfo4():                        # 列印輸入資訊
-    print("Account: %s\nPassword: %s" % (accountE.get(),pwdE.get()))
-    accountE.delete(0,tk.END)              # 刪除account文字方塊的帳號內容
-    pwdE.delete(0,tk.END)                  # 刪除pwd文字方塊的密碼內容
-    
-window = tk.Tk()
-
-msg = "歡迎進入Silicon Stone Educaiton系統"
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sse.gif")     # Logo影像檔
-
-logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
-accountL = tk.Label(window,text="Account")   # account標籤
-accountL.grid(row=1)
-pwdL = tk.Label(window,text="Password")      # pwd標籤
-pwdL.grid(row=2)
-
-logo.grid(row=0,column=0,columnspan=2,pady=10,padx=10)
-accountE = tk.Entry(window)                  # 文字方塊account
-pwdE = tk.Entry(window,show="*")             # 文字方塊pwd
-accountE.insert(1,"Kevin")              # 預設Account內容
-pwdE.insert(1,"pwd")                    # 預設pwd內容
-accountE.grid(row=1,column=1)           # 定位文字方塊accou
-pwdE.grid(row=2,column=1,pady=10)       # 定位文字方塊pwd
-# 以下建立Login和Quit案鈕
-loginButton = tk.Button(window,text="Login",command=printInfo4)
-loginButton.grid(row=3,column=0,sticky=tk.W,pady=5)
-quitButton = tk.Button(window,text="Quit",command=window.quit)
-quitButton.grid(row=3,column=1,sticky=tk.W,pady=5)
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-def printSelection():
-    label.config(text="你選的是"+var.get())
-
-window = tk.Tk()
-
-# 檔案 => ImageTk影像
-tk_image1 = ImageTk.PhotoImage(file="__new/star.gif")
-tk_image2 = ImageTk.PhotoImage(file="__new/moon.gif")
-tk_image3 = ImageTk.PhotoImage(file="__new/sun.gif")
-
-var = tk.StringVar()                               # 選項紐綁定的變數
-var.set("星星")                                 # 預設選項是男生
-                       
-label = tk.Label(window,text="這是預設,尚未選擇", bg="lightyellow",width=30)
-label.pack()
-
-rbStar = tk.Radiobutton(window,image=tk_image1,        # 星星選項鈕
-                     variable=var,value="星星",
-                     command=printSelection)
-rbStar.pack()
-
-rbMoon = tk.Radiobutton(window,image=tk_image2,        # 月亮選項鈕
-                     variable=var,value="月亮",
-                     command=printSelection)
-rbMoon.pack()
-
-rbSun = tk.Radiobutton(window,image=tk_image3,          # 太陽選項鈕
-                    variable=var,value="太陽",
-                    command=printSelection)
-rbSun.pack()
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-def printSelection():
-    label.config(text="你選的是"+var.get())
-
-window = tk.Tk()
-
-# 檔案 => ImageTk影像
-tk_image1 = ImageTk.PhotoImage(file="__new/star.gif")
-tk_image2 = ImageTk.PhotoImage(file="__new/moon.gif")
-tk_image3 = ImageTk.PhotoImage(file="__new/sun.gif")
-
-var = tk.StringVar()                               # 選項紐綁定的變數
-var.set("星星")                                 # 預設選項是男生
-                       
-label = tk.Label(window,text="這是預設,尚未選擇", bg="lightyellow",width=30)
-label.pack()
-
-rbStar = tk.Radiobutton(window,image=tk_image1,        # 星星選項鈕
-                     text="星星",compound=tk.RIGHT,
-                     variable=var,value="星星",
-                     command=printSelection)
-rbStar.pack()
-
-rbMoon = tk.Radiobutton(window,image=tk_image2,        # 月亮選項鈕
-                     text="月亮",compound=tk.RIGHT,
-                     variable=var,value="月亮",
-                     command=printSelection)
-rbMoon.pack()
-
-rbSun = tk.Radiobutton(window,image=tk_image3,          # 太陽選項鈕
-                    text="太陽",compound=tk.RIGHT,
-                    variable=var,value="太陽",
-                    command=printSelection)
-rbSun.pack()
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-
-window = tk.Tk()
-
-msg = "歡迎進入Silicon Stone Educaiton系統"
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file="__new/sse.gif")         # Logo影像檔
-
-logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
-logo.pack()
-
-# 以下是LabelFrame標籤框架
-labFrame = tk.LabelFrame(window,text="資料驗證") # 建立標籤框架
-accountL = tk.Label(labFrame,text="Account")   # account標籤
-accountL.grid(row=0,column=0)
-pwdL = tk.Label(labFrame,text="Password")      # pwd標籤
-pwdL.grid(row=1,column=0)
-
-accountE = tk.Entry(labFrame)                  # 文字方塊account
-accountE.grid(row=0,column=1)               # 定位文字方塊account
-pwdE = tk.Entry(labFrame,show="*")             # 文字方塊pwd
-pwdE.grid(row=1,column=1,pady=10)           # 定位文字方塊pwd
-labFrame.pack(padx=10,pady=5,ipadx=5,ipady=5)   # 包裝與定位標籤框架
-
-window.mainloop()
-
-print('------------------------------------------------------------')	#60個
-    
 import customtkinter as ctk
 from PIL import Image, ImageTk
 
@@ -922,101 +652,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-from PIL import ImageTk, Image
-
-window = tk.Tk()
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file=filename)
-
-lab1 = tk.Label(window,image=tk_image).pack(side="right")
-
-poem_text = """
-故人西辭黃鶴樓，
-煙花三月下揚州。
-孤帆遠影碧空盡，
-唯見長江天際流。
-"""
-
-lab2 = tk.Label(window,text=poem_text,bg="lightyellow",
-             padx=10).pack(side="left")
-
-"""
-lab2 = tk.Label(window,text=poem_text,bg="lightyellow",
-             justify=tk.LEFT,padx=10).pack(side="left")
-"""
-
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file=filename)
-
-lab1 = tk.Label(window,image=tk_image).pack(side="right")
-
-poem_text = """
-故人西辭黃鶴樓，
-煙花三月下揚州。
-孤帆遠影碧空盡，
-唯見長江天際流。
-"""
-
-lab2 = tk.Label(window,text=poem_text,bg="lightyellow",
-             padx=10).pack(side="left")
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file=filename)
-
-lab1 = tk.Label(window,image=tk_image).pack(side="right")
-
-poem_text = """
-故人西辭黃鶴樓，
-煙花三月下揚州。
-孤帆遠影碧空盡，
-唯見長江天際流。
-"""
-
-lab2 = tk.Label(window,text=poem_text,bg="lightyellow",
-             justify=tk.LEFT,padx=10).pack(side="left")
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
-
-# 檔案 => ImageTk影像
-tk_image = ImageTk.PhotoImage(file=filename)
-
-label1 = tk.Label(window,image=tk_image).pack(side="right")
-
-poem_text = """
-故人西辭黃鶴樓，
-煙花三月下揚州。
-孤帆遠影碧空盡，
-唯見長江天際流。
-"""
-label2 = tk.Label(window,text=poem_text,bg="lightyellow",
-             justify=tk.LEFT,padx=10).pack(side="left")
-
-window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1076,4 +711,114 @@ default_font.configure(size=15)
 
 
 
+
+
+
+
+
+
+
+
+print('------------------------------------------------------------')	#60個
+
+def printInfo():                        # 列印輸入資訊
+    print("Account: %s\nPassword: %s" % (accountE.get(),pwdE.get()))
+    accountE.delete(0,tk.END)              # 刪除account文字方塊的帳號內容
+    pwdE.delete(0,tk.END)                  # 刪除pwd文字方塊的密碼內容
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+window = tk.Tk()
+
+msg = "庭院深深深幾許，楊柳堆煙，簾幕無重數。"
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file=filename)     # Logo影像檔
+
+logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
+accountL = tk.Label(window,text="Account")   # account標籤
+accountL.grid(row=1)
+pwdL = tk.Label(window,text="Password")      # pwd標籤
+pwdL.grid(row=2)
+
+logo.grid(row=0,column=0,columnspan=2,pady=10,padx=10)
+accountE = tk.Entry(window)                  # 文字方塊account
+pwdE = tk.Entry(window,show="*")             # 文字方塊pwd
+accountE.insert(0,"Kevin")              # 預設Account內容
+pwdE.insert(0,"pwd")                    # 預設pwd內容
+accountE.grid(row=1,column=1)           # 定位文字方塊account
+pwdE.grid(row=2,column=1,pady=10)       # 定位文字方塊pwd
+# 以下建立Login和Quit案鈕
+loginButton = tk.Button(window,text="Login",command=printInfo)
+loginButton.grid(row=3,column=0,sticky=tk.W,pady=5)
+quitButton = tk.Button(window,text="Quit",command=window.quit)
+quitButton.grid(row=3,column=1,sticky=tk.W,pady=5)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+window = tk.Tk()
+
+msg = "庭院深深深幾許，楊柳堆煙，簾幕無重數。"
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file=filename)     # Logo影像檔
+
+logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
+accountL = tk.Label(window,text="Account")   # account標籤
+accountL.grid(row=1)
+pwdL = tk.Label(window,text="Password")      # pwd標籤
+pwdL.grid(row=2)
+
+logo.grid(row=0,column=0,columnspan=2,pady=10,padx=10)
+accountE = tk.Entry(window)                  # 文字方塊account
+pwdE = tk.Entry(window,show="*")             # 文字方塊pwd
+accountE.insert(1,"Kevin")              # 預設Account內容
+pwdE.insert(1,"pwd")                    # 預設pwd內容
+accountE.grid(row=1,column=1)           # 定位文字方塊account
+pwdE.grid(row=2,column=1,pady=10)       # 定位文字方塊pwd
+# 以下建立Login和Quit案鈕
+loginButton = tk.Button(window,text="Login",command=printInfo)
+loginButton.grid(row=3,column=0,sticky=tk.W,pady=5)
+quitButton = tk.Button(window,text="Quit",command=window.quit)
+quitButton.grid(row=3,column=1,sticky=tk.W,pady=5)
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+
+window = tk.Tk()
+
+msg = "庭院深深深幾許，楊柳堆煙，簾幕無重數。"
+
+# 檔案 => ImageTk影像
+tk_image = ImageTk.PhotoImage(file=filename)         # Logo影像檔
+
+logo = tk.Label(window,image=tk_image,text=msg,compound=tk.BOTTOM)
+logo.pack()
+
+# 以下是LabelFrame標籤框架
+labFrame = tk.LabelFrame(window,text="資料驗證") # 建立標籤框架
+accountL = tk.Label(labFrame,text="Account")   # account標籤
+accountL.grid(row=0,column=0)
+pwdL = tk.Label(labFrame,text="Password")      # pwd標籤
+pwdL.grid(row=1,column=0)
+
+accountE = tk.Entry(labFrame)                  # 文字方塊account
+accountE.grid(row=0,column=1)               # 定位文字方塊account
+pwdE = tk.Entry(labFrame,show="*")             # 文字方塊pwd
+pwdE.grid(row=1,column=1,pady=10)           # 定位文字方塊pwd
+labFrame.pack(padx=10,pady=5,ipadx=5,ipady=5)   # 包裝與定位標籤框架
+
+window.mainloop()
+
+print('------------------------------------------------------------')	#60個
+    
 

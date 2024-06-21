@@ -9,9 +9,9 @@ import random
 import datetime
 import tkinter as tk
 from tkinter import ttk
-'''
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+'''
 
 def run_digital_clock(label1):                     # 數字變數內容的更動
     def counting():                         # 更動數字方法
@@ -132,33 +132,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-        
-xWidth = 300
-yHeight = 100
-canvas = tk.Canvas(window, width=xWidth, height=yHeight)
-canvas.pack()
-        
-x = 0
-yMsg = 45
-canvas.create_text(x, yMsg, text="王者歸來", tags="msg")
-        
-dx = 5
-while True:
-    canvas.move("msg", dx, 0)  
-    canvas.after(100)       
-    canvas.update()         
-    if x < xWidth:
-        x += dx             
-    else:
-        x = 0               
-        canvas.delete("msg")                             
-        canvas.create_text(x, yMsg, text = "王者歸來", tags = "msg")
-                
-window.mainloop() 
-
-print("------------------------------------------------------------")  # 60個
-
 
 def displayFan(startingAngle):
     canvas.delete("fan")    
@@ -185,7 +158,7 @@ while True:
     canvas.after(50) 
     canvas.update()
             
-window.mainloop() 
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -274,57 +247,22 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 
-canvas= tk.Canvas(window, width=500, height=150)
-canvas.pack()
-
-id = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
-ballPos = canvas.coords(id)
-print(ballPos)
-
-window.mainloop() 
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-canvas= tk.Canvas(window, width=500, height=150)
-canvas.pack()
-canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
-for x in range(0, 80):
-    canvas.move(1, 5, 0)        # ID=1 x軸移動5像素, y軸不變
-    window.update()                 # 強制tkinter重繪
-    time.sleep(0.05)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
 canvas= tk.Canvas(window, width=500, height=300)
 canvas.pack()
-canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
-for x in range(0, 80):
-    canvas.move(1, 5, 2)        # ID=1 x軸移動5像素, y軸移動2像素
-    window.update()                 # 強制tkinter重繪
-    time.sleep(0.05) # 等同於 canvas.after(50)
 
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-
-canvas= tk.Canvas(window, width=500, height=250)
-canvas.pack()
+#id1 = canvas.create_oval(10,50,60,100,fill='yellow', outline='lightgray')
 id1 = canvas.create_oval(10,50,60,100,fill='yellow')
 id2 = canvas.create_oval(10,150,60,200,fill='aqua')
-for x in range(0, 80):
-    canvas.move(id1, 5, 0)      # id1 x軸移動5像素, y軸移動0像素
-    canvas.move(id2, 5, 0)      # id2 x軸移動5像素, y軸移動0像素
-    window.update()                 # 強制tkinter重繪
-    time.sleep(0.05)
 
+#ballPos = canvas.coords(id1)
+#print(ballPos)
+
+for x in range(0, 80):
+    canvas.move(id1, 5, 1)      # id1 x軸移動5像素, y軸移動1像素
+    canvas.move(id2, 5, 1)      # id2 x軸移動5像素, y軸移動1像素
+    window.update()                 # 強制tkinter重繪
+    time.sleep(0.05) # 等同於 canvas.after(50)
+   
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -344,63 +282,6 @@ for x in range(0, 100):
     time.sleep(0.05)
 
 window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-def ballMove(event):
-    if event.keysym == 'Left':  # 左移
-        canvas.move(1, -5, 0)
-    if event.keysym == 'Right': # 右移
-        canvas.move(1, 5, 0)
-    if event.keysym == 'Up':    # 上移
-        canvas.move(1, 0, -5)
-    if event.keysym == 'Down':  # 下移
-        canvas.move(1, 0, 5)
-
-print('用上下左右鍵控制紅球移動')
-
-window = tk.Tk()
-
-canvas= tk.Canvas(window, width=500, height=300)
-canvas.pack()
-canvas.create_oval(225,125,275,175,fill='red')
-canvas.bind_all('<KeyPress-Left>', ballMove)
-canvas.bind_all('<KeyPress-Right>', ballMove)
-canvas.bind_all('<KeyPress-Up>', ballMove)
-canvas.bind_all('<KeyPress-Down>', ballMove)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-print('文字移動')
-
-window = tk.Tk()
-
-xWidth = 300
-yHeight = 100
-canvas = tk.Canvas(window, width=xWidth, height=yHeight)
-canvas.pack()
-        
-x = 0
-yMsg = 45
-canvas.create_text(x, yMsg, text="王者歸來", tags="msg")
-        
-dx = 5
-while True:
-    canvas.move("msg", dx, 0)  
-    canvas.after(100)       
-    canvas.update()         
-    if x < xWidth:
-        x += dx             
-    else:
-        x = 0               
-        canvas.delete("msg")                             
-        canvas.create_text(x, yMsg, text = "王者歸來", tags = "msg")
-                
-window.mainloop() 
-"""
 
 print("------------------------------------------------------------")  # 60個
 
@@ -708,11 +589,12 @@ window = tk.Tk()
 
 ballList = []                           # 建立球的串列
 width, height = 400, 260
-canvas = tk.tk.Canvas(window, width=width, height=height)
+canvas = tk.Canvas(window, width=width, height=height)
 canvas.pack()
         
-frame = tk.Frame(tk)                       # 建立下方功能紐
+frame = tk.Frame(window)                       # 建立下方功能紐
 frame.pack()
+
 btnStop = tk.Button(frame, text = "暫停", command = stop)
 btnStop.pack(side = tk.LEFT)
 btnResume = tk.Button(frame, text = "恢復",command = resume)
@@ -721,7 +603,7 @@ btnAdd = tk.Button(frame, text = "增加球", command = addBall)
 btnAdd.pack(side = tk.LEFT)
 btnRemove = tk.Button(frame, text = "減少球", command = removeBall)
 btnRemove.pack(side = tk.LEFT)
-btnExit = tk.Button(frame, text = "結束", command=tk.destroy)
+btnExit = tk.Button(frame, text = "結束", command=window.destroy)
 btnExit.pack(side = tk.LEFT)
         
 sleepTime = 50                          # 動畫速度 
@@ -729,35 +611,35 @@ ballRunning = False
 animate()
         
 window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+print('文字移動')
+
 window = tk.Tk()
-window.title("Animation Demo")
         
-width = 250 # Width of the canvas
-canvas = tk.Canvas(window, bg = "white", width = 250, height = 50)
+xWidth = 300
+yHeight = 100
+canvas = tk.Canvas(window, bg = "white", width = xWidth, height = yHeight)
 canvas.pack()
-        
-x = 0 # Starting x position
-canvas.create_text(x, 30, text = "Message moving?", tags = "text")
+
+x = 0 # Starting x position        
+yMsg = 45
+canvas.create_text(x, yMsg, text="Welcome to the US", tags="text")
         
 dx = 3
 while True:
-    canvas.move("text", dx, 0) # Move text dx unit
-    canvas.after(100) # Sleep for 100 milliseconds
-    canvas.update() # Update canvas
-    if x < width:
-        x += dx  # Get the current position for string
+    canvas.move("text", dx, 0)  # 移動dx, dy
+    canvas.after(100) # 100 msec
+    canvas.update()         
+    if x < xWidth:
+        x += dx             
     else:
-        x = 0 # Reset string position to the beginning
-        canvas.delete("text") 
-        # Redraw text at the beginning
-        canvas.create_text(x, 30, text = "Message moving?", tags = "text")
+        x = 0               
+        canvas.delete("text")                             
+        canvas.create_text(x, yMsg, text = "Welcome to the US", tags = "text")
                 
-window.mainloop() # Create an event loop
-
-
+window.mainloop() 
 
 print("------------------------------------------------------------")  # 60個
 
@@ -817,7 +699,7 @@ class BounceBalls:
         self.isStopped = False
         self.animate()
         
-        window.mainloop() # Create an event loop
+        window.mainloop()
            
     def stop(self): # Stop animation
         self.isStopped = True
@@ -855,7 +737,7 @@ class BounceBalls:
             ball.y + ball.radius, fill = ball.color, tags = "ball")
                                              
 BounceBalls() # Create GUI
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 class ControlAnimation:
@@ -887,7 +769,7 @@ class ControlAnimation:
         self.isStopped = False
         self.animate()
         
-        window.mainloop() # Create an event loop
+        window.mainloop()
         
     def stop(self): # Stop animation
         self.isStopped = True
@@ -926,4 +808,33 @@ print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
+
+
+#bind
+
+print("------------------------------------------------------------")  # 60個
+
+def ballMove(event):
+    if event.keysym == 'Left':  # 左移
+        canvas.move(1, -5, 0)
+    if event.keysym == 'Right': # 右移
+        canvas.move(1, 5, 0)
+    if event.keysym == 'Up':    # 上移
+        canvas.move(1, 0, -5)
+    if event.keysym == 'Down':  # 下移
+        canvas.move(1, 0, 5)
+
+print('用上下左右鍵控制紅球移動')
+
+window = tk.Tk()
+
+canvas= tk.Canvas(window, width=500, height=300)
+canvas.pack()
+canvas.create_oval(225,125,275,175,fill='red')
+canvas.bind_all('<KeyPress-Left>', ballMove)
+canvas.bind_all('<KeyPress-Right>', ballMove)
+canvas.bind_all('<KeyPress-Up>', ballMove)
+canvas.bind_all('<KeyPress-Down>', ballMove)
+
+window.mainloop()
 

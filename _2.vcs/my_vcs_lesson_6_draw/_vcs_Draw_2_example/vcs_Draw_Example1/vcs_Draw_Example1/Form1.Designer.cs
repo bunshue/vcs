@@ -554,6 +554,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(135, 45);
             this.button33.TabIndex = 63;
+            this.button33.Text = "測試Pattern";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 

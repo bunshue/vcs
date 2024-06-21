@@ -578,27 +578,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-print("右鍵選單")
-
-window = tk.Tk()
-window.geometry("400x300")
-window.title("右鍵選單")
-
-menu = tk.Menu(window, tearoff=0)				# 建立選單
-menu.add_command(label="Copy")					# 向出現式選單中加入Copy指令
-menu.add_command(label="Paste")					# 向出現式選單中加入Paste指令
-menu.add_separator()						# 向出現式選單中加入分隔符
-menu.add_command(label="Cut")					# 向出現式選單中加入Cut指令
-
-def popupmenu(event):						# 定義右鍵事件處理函數
-    menu.post(event.x_root, event.y_root)			# 顯示選單
-
-window.bind("<Button-3>", popupmenu)				# 在主視窗中綁定右鍵事件
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
 window = tk.Tk()
 window.geometry("400x300")
 
@@ -759,27 +738,6 @@ window.config(menu=menubar)                   # 顯示功能表物件
 window.mainloop()
 
 '''
-print("------------------------------------------------------------")  # 60個
-
-def minimizeIcon():                     # 縮小視窗為圖示
-    window.iconify()
-
-def showPopupMenu(event):               # 顯示彈出功能表
-    popupmenu.post(event.x_root,event.y_root)
-
-window = tk.Tk()
-window.geometry("400x300")
-window.title("右鍵選單")
-
-popupmenu = tk.Menu(window,tearoff=False)    # 建立彈出功能表物件
-# 在彈出功能表內建立2個指令清單
-popupmenu.add_command(label="Minimize",command=minimizeIcon)
-popupmenu.add_command(label="Exit",command=window.destroy)
-
-# 按滑鼠右鍵綁定顯示彈出功能表
-window.bind("<Button-3>",showPopupMenu)
-
-window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 

@@ -5347,7 +5347,7 @@ namespace vcs_Draw_Example1
             y_st += dy;
             g.DrawString("藍", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0x00, 0x00, 0xff)), new PointF(x_st, y_st));
 
-            x_st = 20+50;
+            x_st = 20 + 50;
             y_st = 20;
             g.DrawString("紅", new Font("標楷體", 32), new SolidBrush(Color.FromArgb(255, 0xff, 0xff, 0xff)), new PointF(x_st, y_st));
             y_st += dy;
@@ -5372,6 +5372,60 @@ namespace vcs_Draw_Example1
 
         private void button33_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "測試Pattern\n";
+
+            int W = 256 * 6 + 200;
+            int H = 300 + 200;
+
+            bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);
+
+            int i;
+            int j;
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    bitmap1.SetPixel(i, j, Color.FromArgb(255, 0x80, 0x80, 0x80));
+                }
+            }
+
+            int x_st = 100;
+            int y_st = 100;
+            int w = 256 * 6;
+            int h = 300;
+            int k = 0;
+            int cc = 0;
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < 264; i++)
+                {
+                    for (k = 0; k < 6; k++)
+                    {
+                        cc = (i / 8) * 8;
+                        if (cc == 256)
+                            cc = 255;
+                        if (j == 5)
+                        {
+                            //richTextBox1.Text += cc.ToString() + " ";
+                        }
+                        bitmap1.SetPixel(x_st + i * 6 + k, y_st + j, Color.FromArgb(255, cc, cc, cc));
+                    }
+                }
+            }
+
+            for (i = 0; i <= 32; i++)
+            {
+                cc = i * 8;
+                if (cc == 256)
+                    cc = 255;
+                g.DrawString(cc.ToString(), new Font("細明體", 18), new SolidBrush(Color.Red), new PointF(x_st + i * 8 * 6 + 5, y_st - 25));
+            }
+
+            pictureBox1.Image = bitmap1;
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            bitmap1.Save(filename, ImageFormat.Bmp);
         }
 
         private void button34_Click(object sender, EventArgs e)
