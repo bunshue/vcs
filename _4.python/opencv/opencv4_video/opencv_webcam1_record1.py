@@ -30,7 +30,7 @@ MODE_1 = 1  # 一檔錄固定時間, ex 10分一檔
 MODE_2 = 2  # 一檔錄固定檔案容量, ex 500M一檔
 MODE_3 = 3  # 縮時錄影 Time-lapse Video
 
-MODE = MODE_0
+MODE = MODE_3
 SPEED = 10  # N 倍速
 
 #'XVID','DIVX','MJPG','I420'
@@ -59,7 +59,9 @@ ENCODING_TYPE = 'MJPG'  # 編碼器
 
 print("------------------------------------------------------------")  # 60個
 print('最簡錄影, 一直錄, 按 ESC 離開')
-print('縮時錄影, 按 ESC 離開')
+
+if MODE == MODE_3:  # 縮時錄影
+    print('縮時錄影,', SPEED, '倍速')
 
 record_filename = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
 
@@ -112,9 +114,9 @@ out.release()    #關閉寫入器
 cv2.destroyAllWindows()  #關閉視窗
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-print('\n完成錄影時間 :', now)
+print('\n停止錄影時間 :', now)
 record_time_elapsed = time.time() - record_time_st
-print('總錄影時間 :', record_time_elapsed, '秒')
+print('錄影時間 :', int(record_time_elapsed), '秒')
 print('存檔檔名 :', record_filename)
 
 sys.exit()
@@ -185,9 +187,9 @@ out.release()    #關閉寫入器
 cv2.destroyAllWindows()  #關閉視窗
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-print('\n完成錄影時間 :', now)
+print('\n停止錄影時間 :', now)
 record_time_elapsed = time.time() - record_time_st
-print('總錄影時間 :', record_time_elapsed, '秒')
+print('錄影時間 :', int(record_time_elapsed), '秒')
 print('存檔檔名 :', record_filename)
 
 print("------------------------------------------------------------")  # 60個
