@@ -14,76 +14,76 @@ from tkinter import *
 
 print("------------------------------------------------------------")  # 60個
 
-pw = PanedWindow(orient=VERTICAL)       # 建立PanedWindow物件
-pw.pack(fill=BOTH,expand=True)
+pw = PanedWindow(orient=VERTICAL)  # 建立PanedWindow物件
+pw.pack(fill=BOTH, expand=True)
 
-top = Label(pw,text="Top Pane")         # 建立標籤Top Pane
-pw.add(top)                             # top標籤插入PanedWindow
+top = Label(pw, text="Top Pane")  # 建立標籤Top Pane
+pw.add(top)  # top標籤插入PanedWindow
 
-bottom = Label(pw,text="Bottom Pane")   # 建立標籤Bottom Pane
-pw.add(bottom)                          # bottom標籤插入PanedWindow
+bottom = Label(pw, text="Bottom Pane")  # 建立標籤Bottom Pane
+pw.add(bottom)  # bottom標籤插入PanedWindow
 
 pw.mainloop()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 window = Tk()
 window.geometry("600x400")
 
-pw = PanedWindow(orient=HORIZONTAL)     # 建立PanedWindow物件
+pw = PanedWindow(orient=HORIZONTAL)  # 建立PanedWindow物件
 
-leftframe = LabelFrame(pw,text="Left Pane",width=120,height=150)
-pw.add(leftframe)                       # 插入左邊LabelFrame
-middleframe = LabelFrame(pw,text="Middle Pane",width=120)
-pw.add(middleframe)                     # 插入中間LabelFrame
-rightframe = LabelFrame(pw,text="Right Pane",width=120)
-pw.add(rightframe)                      # 插入右邊LabelFrame
+leftframe = LabelFrame(pw, text="Left Pane", width=120, height=150)
+pw.add(leftframe)  # 插入左邊LabelFrame
+middleframe = LabelFrame(pw, text="Middle Pane", width=120)
+pw.add(middleframe)  # 插入中間LabelFrame
+rightframe = LabelFrame(pw, text="Right Pane", width=120)
+pw.add(rightframe)  # 插入右邊LabelFrame
 
-pw.pack(fill=BOTH,expand=True,padx=10,pady=10)     
+pw.pack(fill=BOTH, expand=True, padx=10, pady=10)
 
 window.mainloop()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
 
 window = Tk()
 window.geometry("600x400")
 
-pw = PanedWindow(orient=HORIZONTAL)     # 建立PanedWindow物件
+pw = PanedWindow(orient=HORIZONTAL)  # 建立PanedWindow物件
 
-leftframe = LabelFrame(pw,text="Left Pane",width=120,height=150)
-pw.add(leftframe,weight=1)              # 插入左邊LabelFrame
-middleframe = LabelFrame(pw,text="Middle Pane",width=120)
-pw.add(middleframe,weight=1)            # 插入中間LabelFrame
-rightframe = LabelFrame(pw,text="Right Pane",width=120)
-pw.add(rightframe,weight=1)             # 插入右邊LabelFrame
+leftframe = LabelFrame(pw, text="Left Pane", width=120, height=150)
+pw.add(leftframe, weight=1)  # 插入左邊LabelFrame
+middleframe = LabelFrame(pw, text="Middle Pane", width=120)
+pw.add(middleframe, weight=1)  # 插入中間LabelFrame
+rightframe = LabelFrame(pw, text="Right Pane", width=120)
+pw.add(rightframe, weight=1)  # 插入右邊LabelFrame
 
-pw.pack(fill=BOTH,expand=True,padx=10,pady=10)     
+pw.pack(fill=BOTH, expand=True, padx=10, pady=10)
 
 window.mainloop()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
 
 window = Tk()
 window.geometry("600x400")
 
-pw = PanedWindow(orient=HORIZONTAL)     # 建立PanedWindow物件
+pw = PanedWindow(orient=HORIZONTAL)  # 建立PanedWindow物件
 
-leftframe = LabelFrame(pw,text="Left Pane",width=120,height=150)
-pw.add(leftframe,weight=2)              # 插入左邊LabelFrame
-middleframe = LabelFrame(pw,text="Middle Pane",width=120)
-pw.add(middleframe,weight=2)            # 插入中間LabelFrame
-rightframe = LabelFrame(pw,text="Right Pane",width=120)
-pw.add(rightframe,weight=1)             # 插入右邊LabelFrame
+leftframe = LabelFrame(pw, text="Left Pane", width=120, height=150)
+pw.add(leftframe, weight=2)  # 插入左邊LabelFrame
+middleframe = LabelFrame(pw, text="Middle Pane", width=120)
+pw.add(middleframe, weight=2)  # 插入中間LabelFrame
+rightframe = LabelFrame(pw, text="Right Pane", width=120)
+pw.add(rightframe, weight=1)  # 插入右邊LabelFrame
 
-pw.pack(fill=BOTH,expand=True,padx=10,pady=10)     
+pw.pack(fill=BOTH, expand=True, padx=10, pady=10)
 
 window.mainloop()
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ fail
 pw = PanedWindow(orient=HORIZONTAL)     # 建立外層PanedWindow
@@ -103,9 +103,7 @@ pw.mainloop()
 """
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個
@@ -116,8 +114,4 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-

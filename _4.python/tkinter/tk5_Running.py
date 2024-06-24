@@ -614,192 +614,200 @@ window.mainloop()
 '''
 print("------------------------------------------------------------")  # 60個
 
-print('文字移動')
+print("文字移動")
 
 window = tk.Tk()
-        
+
 xWidth = 300
 yHeight = 100
-canvas = tk.Canvas(window, bg = "white", width = xWidth, height = yHeight)
+canvas = tk.Canvas(window, bg="white", width=xWidth, height=yHeight)
 canvas.pack()
 
-x = 0 # Starting x position        
+x = 0  # Starting x position
 yMsg = 45
 canvas.create_text(x, yMsg, text="Welcome to the US", tags="text")
-        
+
 dx = 3
 while True:
     canvas.move("text", dx, 0)  # 移動dx, dy
-    canvas.after(100) # 100 msec
-    canvas.update()         
+    canvas.after(100)  # 100 msec
+    canvas.update()
     if x < xWidth:
-        x += dx             
+        x += dx
     else:
-        x = 0               
-        canvas.delete("text")                             
-        canvas.create_text(x, yMsg, text = "Welcome to the US", tags = "text")
-                
-window.mainloop() 
+        x = 0
+        canvas.delete("text")
+        canvas.create_text(x, yMsg, text="Welcome to the US", tags="text")
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import * # Import tkinter
+from tkinter import *  # Import tkinter
 from random import randint
+
 
 # Return a random color string in the form #RRGGBB
 def getRandomColor():
     color = "#"
     for j in range(6):
-        color += toHexChar(randint(0, 15)) # Add a random digit
+        color += toHexChar(randint(0, 15))  # Add a random digit
     return color
 
-# Convert an integer to a single hex digit in a character 
+
+# Convert an integer to a single hex digit in a character
 def toHexChar(hexValue):
     if 0 <= hexValue <= 9:
-        return chr(hexValue + ord('0'))
+        return chr(hexValue + ord("0"))
     else:  # 10 <= hexValue <= 15
-        return chr(hexValue - 10 + ord('A'))
-        
+        return chr(hexValue - 10 + ord("A"))
+
+
 # Define a Ball class
 class Ball:
     def __init__(self):
-        self.x = 0 # Starting center position
-        self.y = 0 
-        self.dx = 2 # Move right by default
-        self.dy = 2 # Move down by default
-        self.radius = 3 # The radius is fixed
-        self.color = getRandomColor() # Get random color
+        self.x = 0  # Starting center position
+        self.y = 0
+        self.dx = 2  # Move right by default
+        self.dy = 2  # Move down by default
+        self.radius = 3  # The radius is fixed
+        self.color = getRandomColor()  # Get random color
+
 
 class BounceBalls:
     def __init__(self):
-        self.ballList = [] # Create a list for balls
-        
+        self.ballList = []  # Create a list for balls
+
         window = Tk()
         window.title("Bouncing Balls")
-        
-        self.width = 350 # Width of the self.canvas
-        self.height = 150 # Width of the self.canvas
-        self.canvas = Canvas(window, bg = "white", 
-            width = self.width, height = self.height)
+
+        self.width = 350  # Width of the self.canvas
+        self.height = 150  # Width of the self.canvas
+        self.canvas = Canvas(window, bg="white", width=self.width, height=self.height)
         self.canvas.pack()
-        
+
         frame = Frame(window)
         frame.pack()
-        btStop = Button(frame, text = "Stop", command = self.stop)
-        btStop.pack(side = LEFT)
-        btResume = Button(frame, text = "Resume",
-            command = self.resume)
-        btResume.pack(side = LEFT)
-        btAdd = Button(frame, text = "+", command = self.add)
-        btAdd.pack(side = LEFT)
-        btRemove = Button(frame, text = "-", command = self.remove)
-        btRemove.pack(side = LEFT)
-        
-        self.sleepTime = 100 # Set a sleep time 
+        btStop = Button(frame, text="Stop", command=self.stop)
+        btStop.pack(side=LEFT)
+        btResume = Button(frame, text="Resume", command=self.resume)
+        btResume.pack(side=LEFT)
+        btAdd = Button(frame, text="+", command=self.add)
+        btAdd.pack(side=LEFT)
+        btRemove = Button(frame, text="-", command=self.remove)
+        btRemove.pack(side=LEFT)
+
+        self.sleepTime = 100  # Set a sleep time
         self.isStopped = False
         self.animate()
-        
+
         window.mainloop()
-           
-    def stop(self): # Stop animation
+
+    def stop(self):  # Stop animation
         self.isStopped = True
-    
-    def resume(self): # Resume animation
-        self.isStopped = False   
+
+    def resume(self):  # Resume animation
+        self.isStopped = False
         self.animate()
-    
-    def add(self): # Add a new ball
+
+    def add(self):  # Add a new ball
         self.ballList.append(Ball())
-    
-    def remove(self): # Remove the last ball 
+
+    def remove(self):  # Remove the last ball
         self.ballList.pop()
-                                
-    def animate(self): # Move the message
+
+    def animate(self):  # Move the message
         while not self.isStopped:
-            self.canvas.after(self.sleepTime) # Sleep 
-            self.canvas.update() # Update self.canvas
-            self.canvas.delete("ball") 
-            
+            self.canvas.after(self.sleepTime)  # Sleep
+            self.canvas.update()  # Update self.canvas
+            self.canvas.delete("ball")
+
             for ball in self.ballList:
                 self.redisplayBall(ball)
-    
+
     def redisplayBall(self, ball):
         if ball.x > self.width or ball.x < 0:
             ball.dx = -ball.dx
-            
+
         if ball.y > self.height or ball.y < 0:
             ball.dy = -ball.dy
-    
+
         ball.x += ball.dx
         ball.y += ball.dy
-        self.canvas.create_oval(ball.x - ball.radius, 
-            ball.y - ball.radius, ball.x + ball.radius, 
-            ball.y + ball.radius, fill = ball.color, tags = "ball")
-                                             
-BounceBalls() # Create GUI
+        self.canvas.create_oval(
+            ball.x - ball.radius,
+            ball.y - ball.radius,
+            ball.x + ball.radius,
+            ball.y + ball.radius,
+            fill=ball.color,
+            tags="ball",
+        )
+
+
+BounceBalls()  # Create GUI
 
 print("------------------------------------------------------------")  # 60個
+
 
 class ControlAnimation:
     def __init__(self):
         window = tk.Tk()
         window.title("Control Animation Demo")
-        
-        self.width = 250 # Width of the self.canvas
-        self.canvas = tk.Canvas(window, bg = "white", 
-            width = self.width, height = 50)
+
+        self.width = 250  # Width of the self.canvas
+        self.canvas = tk.Canvas(window, bg="white", width=self.width, height=50)
         self.canvas.pack()
-        
+
         frame = tk.Frame(window)
         frame.pack()
-        btStop = tk.Button(frame, text = "Stop", command = self.stop)
-        btStop.pack(side = tk.LEFT)
-        btResume = tk.Button(frame, text = "Resume", command = self.resume)
-        btResume.pack(side = tk.LEFT)
-        btFaster = tk.Button(frame, text = "Faster", command = self.faster)
-        btFaster.pack(side = tk.LEFT)
-        btSlower = tk.Button(frame, text = "Slower", command = self.slower)
-        btSlower.pack(side = tk.LEFT)
-        
-        self.x = 0 # Starting x position
-        self.sleepTime = 100 # Set a sleep time 
-        self.canvas.create_text(self.x, 30, text = "Message moving?", tags = "text")
-        
+        btStop = tk.Button(frame, text="Stop", command=self.stop)
+        btStop.pack(side=tk.LEFT)
+        btResume = tk.Button(frame, text="Resume", command=self.resume)
+        btResume.pack(side=tk.LEFT)
+        btFaster = tk.Button(frame, text="Faster", command=self.faster)
+        btFaster.pack(side=tk.LEFT)
+        btSlower = tk.Button(frame, text="Slower", command=self.slower)
+        btSlower.pack(side=tk.LEFT)
+
+        self.x = 0  # Starting x position
+        self.sleepTime = 100  # Set a sleep time
+        self.canvas.create_text(self.x, 30, text="Message moving?", tags="text")
+
         self.dx = 3
         self.isStopped = False
         self.animate()
-        
+
         window.mainloop()
-        
-    def stop(self): # Stop animation
+
+    def stop(self):  # Stop animation
         self.isStopped = True
-    
-    def resume(self): # Resume animation
-        self.isStopped = False   
+
+    def resume(self):  # Resume animation
+        self.isStopped = False
         self.animate()
-    
-    def faster(self): # Speed up the animation
+
+    def faster(self):  # Speed up the animation
         if self.sleepTime > 5:
             self.sleepTime -= 20
-               
-    def slower(self): # Slow down the animation
+
+    def slower(self):  # Slow down the animation
         self.sleepTime += 20
-                                
-    def animate(self): # Move the message
+
+    def animate(self):  # Move the message
         while not self.isStopped:
-            self.canvas.move("text", self.dx, 0) # Move text 
-            self.canvas.after(self.sleepTime) # Sleep 
-            self.canvas.update() # Update self.canvas
+            self.canvas.move("text", self.dx, 0)  # Move text
+            self.canvas.after(self.sleepTime)  # Sleep
+            self.canvas.update()  # Update self.canvas
             if self.x < self.width:
-                self.x += self.dx  # Set new position 
+                self.x += self.dx  # Set new position
             else:
-                self.x = 0 # Reset string position to the beginning
-                self.canvas.delete("text") 
+                self.x = 0  # Reset string position to the beginning
+                self.canvas.delete("text")
                 # Redraw text at the beginning
-                self.canvas.create_text(self.x, 30, 
-                    text = "Message moving?", tags = "text")    
-                                       
-ControlAnimation() # Create GUI
+                self.canvas.create_text(self.x, 30, text="Message moving?", tags="text")
+
+
+ControlAnimation()  # Create GUI
 
 print("------------------------------------------------------------")  # 60個
 
@@ -809,32 +817,32 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
-#bind
+# bind
 
 print("------------------------------------------------------------")  # 60個
 
+
 def ballMove(event):
-    if event.keysym == 'Left':  # 左移
+    if event.keysym == "Left":  # 左移
         canvas.move(1, -5, 0)
-    if event.keysym == 'Right': # 右移
+    if event.keysym == "Right":  # 右移
         canvas.move(1, 5, 0)
-    if event.keysym == 'Up':    # 上移
+    if event.keysym == "Up":  # 上移
         canvas.move(1, 0, -5)
-    if event.keysym == 'Down':  # 下移
+    if event.keysym == "Down":  # 下移
         canvas.move(1, 0, 5)
 
-print('用上下左右鍵控制紅球移動')
+
+print("用上下左右鍵控制紅球移動")
 
 window = tk.Tk()
 
-canvas= tk.Canvas(window, width=500, height=300)
+canvas = tk.Canvas(window, width=500, height=300)
 canvas.pack()
-canvas.create_oval(225,125,275,175,fill='red')
-canvas.bind_all('<KeyPress-Left>', ballMove)
-canvas.bind_all('<KeyPress-Right>', ballMove)
-canvas.bind_all('<KeyPress-Up>', ballMove)
-canvas.bind_all('<KeyPress-Down>', ballMove)
+canvas.create_oval(225, 125, 275, 175, fill="red")
+canvas.bind_all("<KeyPress-Left>", ballMove)
+canvas.bind_all("<KeyPress-Right>", ballMove)
+canvas.bind_all("<KeyPress-Up>", ballMove)
+canvas.bind_all("<KeyPress-Down>", ballMove)
 
 window.mainloop()
-

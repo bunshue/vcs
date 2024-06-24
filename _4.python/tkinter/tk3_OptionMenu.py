@@ -124,7 +124,6 @@ print("------------------------------------------------------------")  # 60個
 '''
 
 
-
 print("------------------------------------------------------------")  # 60個
 print("OptionMenu")
 print("------------------------------------------------------------")  # 60個
@@ -132,23 +131,25 @@ print("------------------------------------------------------------")  # 60個
 from tkinter import *
 from tkinter.font import Font
 
-def familyChanged(event):                   # font family更新
-    f=Font(family=familyVar.get())          # 取得新font family
-    text.configure(font=f)                  # 更新text的font family
-      
+
+def familyChanged(event):  # font family更新
+    f = Font(family=familyVar.get())  # 取得新font family
+    text.configure(font=f)  # 更新text的font family
+
+
 window = Tk()
 window.geometry("600x400")
 
-# 建立font family OptionMenu 
+# 建立font family OptionMenu
 familyVar = StringVar()
-familyFamily = ("Arial","Times","Courier")
+familyFamily = ("Arial", "Times", "Courier")
 familyVar.set(familyFamily[0])
-family = OptionMenu(window,familyVar,*familyFamily,command=familyChanged)
+family = OptionMenu(window, familyVar, *familyFamily, command=familyChanged)
 family.pack(pady=2)
 
 # 建立Text
 text = Text(window)
-text.pack(fill=BOTH,expand=True,padx=3,pady=2)
+text.pack(fill=BOTH, expand=True, padx=3, pady=2)
 text.focus_set()
 
 window.mainloop()
@@ -157,23 +158,26 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.font import Font
 from tkinter.ttk import *
-def familyChanged(event):                   # font family更新
-    f=Font(family=familyVar.get())          # 取得新font family
-    text.configure(font=f)                  # 更新text的font family
-      
+
+
+def familyChanged(event):  # font family更新
+    f = Font(family=familyVar.get())  # 取得新font family
+    text.configure(font=f)  # 更新text的font family
+
+
 window = Tk()
 window.geometry("600x400")
 
-# 建立font family OptionMenu 
+# 建立font family OptionMenu
 familyVar = StringVar()
-familyFamily = ("Arial","Times","Courier")
+familyFamily = ("Arial", "Times", "Courier")
 familyVar.set(familyFamily[0])
-family = OptionMenu(window,familyVar,*familyFamily,command=familyChanged)
+family = OptionMenu(window, familyVar, *familyFamily, command=familyChanged)
 family.pack(pady=2)
 
 # 建立Text
 text = Text(window)
-text.pack(fill=BOTH,expand=True,padx=3,pady=2)
+text.pack(fill=BOTH, expand=True, padx=3, pady=2)
 text.focus_set()
 
 window.mainloop()
@@ -182,37 +186,41 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.font import Font
 
-def familyChanged(event):                   # font family更新
-    f=Font(family=familyVar.get())          # 取得新font family
-    text.configure(font=f)                  # 更新text的font family
-def weightChanged(event):                   # weight family更新
-    f=Font(weight=weightVar.get())          # 取得新font weight
-    text.configure(font=f)                  # 更新text的font weight
-      
+
+def familyChanged(event):  # font family更新
+    f = Font(family=familyVar.get())  # 取得新font family
+    text.configure(font=f)  # 更新text的font family
+
+
+def weightChanged(event):  # weight family更新
+    f = Font(weight=weightVar.get())  # 取得新font weight
+    text.configure(font=f)  # 更新text的font weight
+
+
 window = Tk()
 window.geometry("600x400")
 
 # 建立工具列
-toolbar = Frame(window,relief=RAISED,borderwidth=1)
-toolbar.pack(side=TOP,fill=X,padx=2,pady=1)
+toolbar = Frame(window, relief=RAISED, borderwidth=1)
+toolbar.pack(side=TOP, fill=X, padx=2, pady=1)
 
-# 建立font family OptionMenu 
+# 建立font family OptionMenu
 familyVar = StringVar()
-familyFamily = ("Arial","Times","Courier")
+familyFamily = ("Arial", "Times", "Courier")
 familyVar.set(familyFamily[0])
-family = OptionMenu(toolbar,familyVar,*familyFamily,command=familyChanged)
-family.pack(side=LEFT,pady=2)
+family = OptionMenu(toolbar, familyVar, *familyFamily, command=familyChanged)
+family.pack(side=LEFT, pady=2)
 
-# 建立font weight OptionMenu 
+# 建立font weight OptionMenu
 weightVar = StringVar()
-weightFamily = ("normal","bold")
+weightFamily = ("normal", "bold")
 weightVar.set(weightFamily[0])
-weight = OptionMenu(toolbar,weightVar,*weightFamily,command=weightChanged)
-weight.pack(pady=3,side=LEFT)
+weight = OptionMenu(toolbar, weightVar, *weightFamily, command=weightChanged)
+weight.pack(pady=3, side=LEFT)
 
 # 建立Text
 text = Text(window)
-text.pack(fill=BOTH,expand=True,padx=3,pady=2)
+text.pack(fill=BOTH, expand=True, padx=3, pady=2)
 text.focus_set()
 
 window.mainloop()
@@ -222,38 +230,41 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.font import Font
 from tkinter.ttk import *
 
-def familyChanged(event):                   # font family更新
-    f=Font(family=familyVar.get())          # 取得新font family
-    text.configure(font=f)                  # 更新text的font family
 
-def weightChanged(event):                   # weight family更新
-    f=Font(weight=weightVar.get())          # 取得新font weight
-    text.configure(font=f)                  # 更新text的font weight
-      
+def familyChanged(event):  # font family更新
+    f = Font(family=familyVar.get())  # 取得新font family
+    text.configure(font=f)  # 更新text的font family
+
+
+def weightChanged(event):  # weight family更新
+    f = Font(weight=weightVar.get())  # 取得新font weight
+    text.configure(font=f)  # 更新text的font weight
+
+
 window = Tk()
 window.geometry("600x400")
 
 # 建立工具列
-toolbar = Frame(window,relief=RAISED,borderwidth=1)
-toolbar.pack(side=TOP,fill=X,padx=2,pady=1)
+toolbar = Frame(window, relief=RAISED, borderwidth=1)
+toolbar.pack(side=TOP, fill=X, padx=2, pady=1)
 
-# 建立font family OptionMenu 
+# 建立font family OptionMenu
 familyVar = StringVar()
-familyFamily = ("Arial","Times","Courier")
+familyFamily = ("Arial", "Times", "Courier")
 familyVar.set(familyFamily[0])
-family = OptionMenu(toolbar,familyVar,*familyFamily,command=familyChanged)
-family.pack(side=LEFT,pady=2)
+family = OptionMenu(toolbar, familyVar, *familyFamily, command=familyChanged)
+family.pack(side=LEFT, pady=2)
 
-# 建立font weight OptionMenu 
+# 建立font weight OptionMenu
 weightVar = StringVar()
-weightFamily = ("normal","bold")
+weightFamily = ("normal", "bold")
 weightVar.set(weightFamily[0])
-weight = OptionMenu(toolbar,weightVar,*weightFamily,command=weightChanged)
-weight.pack(pady=3,side=LEFT)
+weight = OptionMenu(toolbar, weightVar, *weightFamily, command=weightChanged)
+weight.pack(pady=3, side=LEFT)
 
 # 建立Text
 text = Text(window)
-text.pack(fill=BOTH,expand=True,padx=3,pady=2)
+text.pack(fill=BOTH, expand=True, padx=3, pady=2)
 text.focus_set()
 
 window.mainloop()
@@ -263,54 +274,57 @@ print("------------------------------------------------------------")  # 60個
 from tkinter.font import Font
 from tkinter.ttk import *
 
-def familyChanged(event):                   # font family更新
-    f=Font(family=familyVar.get())          # 取得新font family
-    text.configure(font=f)                  # 更新text的font family
 
-def weightChanged(event):                   # weight family更新
-    f=Font(weight=weightVar.get())          # 取得新font weight
-    text.configure(font=f)                  # 更新text的font weight
+def familyChanged(event):  # font family更新
+    f = Font(family=familyVar.get())  # 取得新font family
+    text.configure(font=f)  # 更新text的font family
 
-def sizeSelected(event):                    # size family更新
-    f=Font(size=sizeVar.get())              # 取得新font size
-    text.configure(font=f)                  # 更新text的font size    
-      
+
+def weightChanged(event):  # weight family更新
+    f = Font(weight=weightVar.get())  # 取得新font weight
+    text.configure(font=f)  # 更新text的font weight
+
+
+def sizeSelected(event):  # size family更新
+    f = Font(size=sizeVar.get())  # 取得新font size
+    text.configure(font=f)  # 更新text的font size
+
+
 window = Tk()
 window.geometry("600x400")
 
 # 建立工具列
-toolbar = Frame(window,relief=RAISED,borderwidth=1)
-toolbar.pack(side=TOP,fill=X,padx=2,pady=1)
+toolbar = Frame(window, relief=RAISED, borderwidth=1)
+toolbar.pack(side=TOP, fill=X, padx=2, pady=1)
 
-# 建立font family OptionMenu 
+# 建立font family OptionMenu
 familyVar = StringVar()
-familyFamily = ("Arial","Times","Courier")
+familyFamily = ("Arial", "Times", "Courier")
 familyVar.set(familyFamily[0])
-family = OptionMenu(toolbar,familyVar,*familyFamily,command=familyChanged)
-family.pack(side=LEFT,pady=2)
+family = OptionMenu(toolbar, familyVar, *familyFamily, command=familyChanged)
+family.pack(side=LEFT, pady=2)
 
-# 建立font weight OptionMenu 
+# 建立font weight OptionMenu
 weightVar = StringVar()
-weightFamily = ("normal","bold")
+weightFamily = ("normal", "bold")
 weightVar.set(weightFamily[0])
-weight = OptionMenu(toolbar,weightVar,*weightFamily,command=weightChanged)
-weight.pack(pady=3,side=LEFT)
+weight = OptionMenu(toolbar, weightVar, *weightFamily, command=weightChanged)
+weight.pack(pady=3, side=LEFT)
 
 # 建立font size Combobox
 sizeVar = IntVar()
-size = Combobox(toolbar,textvariable=sizeVar)
-sizeFamily = [x for x in range(8,30)]
+size = Combobox(toolbar, textvariable=sizeVar)
+sizeFamily = [x for x in range(8, 30)]
 size["value"] = sizeFamily
 size.current(4)
-size.bind("<<ComboboxSelected>>",sizeSelected)
+size.bind("<<ComboboxSelected>>", sizeSelected)
 size.pack(side=LEFT)
 
 # 建立Text
 text = Text(window)
-text.pack(fill=BOTH,expand=True,padx=3,pady=2)
+text.pack(fill=BOTH, expand=True, padx=3, pady=2)
 text.focus_set()
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-

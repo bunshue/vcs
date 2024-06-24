@@ -7,19 +7,20 @@ import sys
 import time
 import random
 
-'''
 print("------------------------------------------------------------")  # 60個
-
-""" NG
+'''
 from pydub import AudioSegment
 
-mywav = 'notify1.wav'
+print('使用 ffmpeg.exe 將 .wav 轉成 .mp3')
+
+wav_filename = 'test_wave.wav'
+mp3_filename = 'test_wave.mp3'
+
 # 讀取.wav文件
-wav_audio = AudioSegment.from_wav(mywav)
+wav_audio = AudioSegment.from_wav(wav_filename)
 
 # 轉換為.mp3
-wav_audio.export("notify.mp3", format="mp3")
-"""
+wav_audio.export(mp3_filename, format="mp3")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -76,6 +77,10 @@ print("------------------------------------------------------------")  # 60個
 """
 #很多mp3不能播放
 
+# fail
+#filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
+
+# ok
 filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/aaaa.mp3"
 
 import playsound
@@ -128,6 +133,7 @@ def getplaytime(readfile):
         return sec, readfile + " " + timestr
     except:
         return 0, readfile + "：程式執行失敗。"
+
 #【函數: 搜尋資料夾與子資料夾的影片檔】
 def findfiles(infolder):
     totalsec = 0
@@ -184,73 +190,75 @@ def findfiles(infolder):
 #【執行】
 msg = findfiles(infolder)
 print(msg)
-
+'''
 print("------------------------------------------------------------")  # 60個
-"""
+
+""" fail
 import pyautogui
 import cv2
 import numpy as np
 import sounddevice as sd
 import wave
+import time
 
 # 設定螢幕解析度（根據需要調整）
-螢幕寬度, 螢幕高度 = pyautogui.size()
+W, H = pyautogui.size()
 
 # 設定輸出影片檔名
-輸出影片檔名 = "螢幕錄影.mp4"
+record_filename = (
+    "tmp_screen_recording2_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp4"
+)
 
 # 設定音訊錄製參數
-取樣率 = 44100
-錄製時間 = 10  # 錄製時間（秒）
+SAMPLE_RATE = 44100 #取樣率
+RECORD_TIME_SECOND = 10  # 錄製時間（秒）
 
-# 初始化音訊緩衝區
-音訊緩衝區 = []
+# 初始化audio_buffer
+audio_buffer = []#音訊緩衝區
 
 # 開始音訊錄製
 def 音訊回呼(indata, frames, time, status):
     if status:
         print("錄製音訊時發生錯誤:", status)
-    音訊緩衝區.extend(indata)
+    audio_buffer.extend(indata)
 
-with sd.InputStream(callback=音訊回呼, channels=2, samplerate=取樣率):
-    # 初始化影片寫入器
+with sd.InputStream(callback=音訊回呼, channels=2, samplerate=SAMPLE_RATE):
+    # 初始化影片寫入器 out
     fourcc = cv2.VideoWriter_fourcc(*"XVID")
-    影片寫入器 = cv2.VideoWriter(輸出影片檔名, fourcc, 20.0, (螢幕寬度, 螢幕高度))
+    out = cv2.VideoWriter(record_filename, fourcc, 20.0, (W, H))
 
     # 錄製螢幕並儲存到影片
     while True:
-        螢幕截圖 = pyautogui.screenshot()
-        影格 = np.array(螢幕截圖)
-        影格 = cv2.cvtColor(影格, cv2.COLOR_RGB2BGR)
-        影片寫入器.write(影格)
+        screen_picture = pyautogui.screenshot() #螢幕截圖
+        frame = np.array(screen_picture)
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+        out.write(frame)
 
         # 錄製指定時間後中斷迴圈
-        if len(音訊緩衝區) >= 取樣率 * 錄製時間:
+        if len(audio_buffer) >= SAMPLE_RATE * RECORD_TIME_SECOND:
             break
 
 # 將音訊嵌入到影片中
-音訊緩衝區 = np.array(音訊緩衝區)
-音訊緩衝區 = np.int16(音訊緩衝區 * 32767)
-音訊緩衝區 = 音訊緩衝區.tobytes()
-影片寫入器.write(音訊緩衝區)
+audio_buffer = np.array(audio_buffer)
+audio_buffer = np.int16(audio_buffer * 32767)
+audio_buffer = audio_buffer.tobytes()
+out.write(audio_buffer)
 
-print(f"螢幕錄影已儲存為 {輸出影片檔名}")
+print(f"螢幕錄影已儲存為 {record_filename}")
 """
 
 print("------------------------------------------------------------")  # 60個
 
-"""
-
+""" TBD
 #声音录制
 import pyaudio
 import wave
 
 CHUNK = 1024
-if len(sys.argv) < 2:
-    print("Plays a wave file.\n\nUsage: %s filename.wav" % sys.argv[0])
-    sys.exit(-1)
 
-wf = wave.open(sys.argv[1], 'rb')
+wav_filename = 'test_wave.wav'
+
+wf = wave.open(wav_filename, 'rb')
 p = pyaudio.PyAudio()
 stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                 channels=wf.getnchannels(),
@@ -258,7 +266,9 @@ stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
                 output=True)
 
 data = wf.readframes(CHUNK)
+
 while data != '':
+    print('c')
     stream.write(data)
     data = wf.readframes(CHUNK)
 
@@ -266,7 +276,6 @@ stream.stop_stream()
 stream.close()
 p.terminate()
 """
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -317,8 +326,6 @@ wf.close()
 p.terminate()
 print("* recording done!")
 """
-
-'''
 
 print("------------------------------------------------------------")  # 60個
 

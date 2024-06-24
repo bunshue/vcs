@@ -460,6 +460,7 @@ print("各國GDP資料 用pd處理網頁上的csv檔案")
 
 # 讀入csv 文字檔
 import pandas as pd
+
 csv_file = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.csv"
 gdp = pd.read_csv(csv_file)
 print('------------------------------------------------')
@@ -542,7 +543,7 @@ with open(fn, 'wb') as file_Obj:                     # 以二進位儲存
 
 print('------------------------------------------------------------')	#60個
 
-""" many
+""" many 已把 thread 搬出
 import threading
 
 # XKCD 漫畫的基本 URL
@@ -936,14 +937,13 @@ print('------------------------------------------------------------')	#60個
 """ no module
 import matplotlib.pyplot as plt
 import crawler_module as m
-from time import sleep
 import pandas as pd
 
 all_list = []
 stock_symbol, dates = m.get_data()
 
 for date in dates:
-    sleep(5)
+    time.sleep(5)
     try:
         crawler_data = m.crawl_data(date, stock_symbol)
         all_list.append(crawler_data[0])
@@ -975,14 +975,13 @@ print('------------------------------------------------------------')	#60個
 
 import matplotlib.pyplot as plt
 import crawler_module as m
-from time import sleep
 import pandas as pd
 
 all_list = []
 stock_symbol, dates = m.get_data()
 
 for date in dates:
-    sleep(5)
+    time.sleep(5)
     try:
         crawler_data = m.crawl_data(date, stock_symbol)
         all_list.append(crawler_data[0])
@@ -1141,7 +1140,6 @@ with open("tmp_json_data2.csv", "w") as csvfile:
 print("------------------------------------------------------------")  # 60個
 """ no file
 # 參考 https://zh.wikipedia.org/wiki/%E9%80%97%E5%8F%B7%E5%88%86%E9%9A%94%E5%80%BC
-import csv
 from collections import OrderedDict
 
 with open("data/a16.csv") as csvFile:
@@ -1236,9 +1234,6 @@ for pg_no, page in enumerate(pages, 1):
     print('存檔檔案 :', filename)
     time.sleep(3)
     print("=========================")
-
-
-
 
 print('------------------------------------------------')
 
@@ -1542,12 +1537,11 @@ actions.perform()
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
-from time import sleep
 
 submitBtn = driver.find_element(By.CSS_SELECTOR, "#submitBtn")
-sleep(1)  # 等待一秒
+time.sleep(1)  # 等待一秒
 submitBtn.click()
-sleep(0.5)  # 等待 0.5 秒
+time.sleep(0.5)  # 等待 0.5 秒
 submitBtn.click()
 
 print("------------------------------------------------------------")  # 60個
@@ -1601,19 +1595,18 @@ print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from time import sleep
 
 driver = webdriver.Chrome("./chromedriver")
 driver.get("https://example.oxxostudio.tw/python/selenium/demo.html")
 a = driver.find_element(By.ID, "a")
 add = driver.find_element(By.ID, "add")
 a.click()  # 點擊按鈕 A，出現 a 文字
-sleep(1)
+time.sleep(1)
 add.click()  # 點擊 add 按鈕，出現 數字 1
 add.click()  # 點擊 add 按鈕，出現 數字 2
-sleep(1)
+time.sleep(1)
 add.click()  # 點擊 add 按鈕，出現 數字 3
-sleep(1)
+time.sleep(1)
 add.click()  # 點擊 add 按鈕，出現 數字 4
 
 print("------------------------------------------------------------")  # 60個
@@ -1679,18 +1672,17 @@ print("------------------------------------------------------------")  # 60個
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.alert import Alert
-from time import sleep
 
 driver = webdriver.Chrome("./chromedriver")
 driver.get(
     "https://www.selenium.dev/selenium/docs/api/py/webdriver_remote/selenium.webdriver.remote.webelement.html"
 )
 
-sleep(1)
+time.sleep(1)
 driver.execute_script("window.scrollTo(0, 500)")  # 捲動到 500px 位置
-sleep(1)
+time.sleep(1)
 driver.execute_script("window.scrollTo(0, 2500)")  # 捲動到 2500px 位置
-sleep(1)
+time.sleep(1)
 driver.execute_script("window.scrollTo(0, 0)")  # 捲動到 0px 位置
 
 h1 = driver.find_element(By.TAG_NAME, "h1")
@@ -1701,14 +1693,13 @@ script = """
   alert(h1, h3)
 """
 driver.execute_script(script, h1, h3)  # 執行 JavaScript，印出元素
-sleep(2)
+time.sleep(2)
 Alert(driver).accept()  # 點擊提示視窗的確認按鈕，關閉提示視窗
 
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from time import sleep
 
 user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
 opt = webdriver.ChromeOptions()
@@ -1728,14 +1719,14 @@ driver.execute_cdp_cmd(
 print("------------------------------------------------------------")  # 60個
 
 driver.get("https://twitter.com")
-sleep(2)
+time.sleep(2)
 driver.execute_script(f"window.scrollTo(0, 200)")  # 自動往下捲動 200px
 login = driver.find_element(By.CSS_SELECTOR, 'a[href="/login"]')  # 取得登入按鈕
 login.click()  # 點擊登入按鈕
 
 print("------------------------------------------------------------")  # 60個
 
-sleep(2)  # 等待兩秒，讓網頁載入完成
+time.sleep(2)  # 等待兩秒，讓網頁載入完成
 # 取得輸入 email 的輸入框
 username = driver.find_element(By.CSS_SELECTOR, 'input[autocomplete="username"]')
 username.send_keys("你的 email")  # 輸入 email
@@ -1750,7 +1741,7 @@ for i in buttons:
 
 print("------------------------------------------------------------")  # 60個
 
-sleep(2)  # 等待兩秒頁面載入後繼續
+time.sleep(2)  # 等待兩秒頁面載入後繼續
 try:
     check = driver.find_element(By.CSS_SELECTOR, 'input[autocomplete="on"]')
     check.send_keys("你的帳號")  # 輸入帳號
@@ -1760,10 +1751,10 @@ try:
             i.click()  # 如果按鈕是「下一步」或「Next」就點擊
             print("驗證使用者帳號，點擊下一步")
             break
-    sleep(2)  # 等待兩秒頁面載入後繼續
+    time.sleep(2)  # 等待兩秒頁面載入後繼續
 except:
     print("ok")
-    sleep(2)  # 如果沒有出現安全性畫面，等待兩秒頁面載入後繼續
+    time.sleep(2)  # 如果沒有出現安全性畫面，等待兩秒頁面載入後繼續
 
 print("------------------------------------------------------------")  # 60個
 
@@ -1779,29 +1770,28 @@ for i in buttons:
 
 print("------------------------------------------------------------")  # 60個
 
-sleep(2)
+time.sleep(2)
 textbox = driver.find_element(By.CSS_SELECTOR, 'div[role="textbox"]')
 textbox.send_keys("Hello World!I am Robot~ ^_^")  # 在輸入框輸入文字
 print("輸入文字")
-sleep(1)
+time.sleep(1)
 imgInput = driver.find_element(By.CSS_SELECTOR, 'input[data-testid="fileInput"]')
 imgInput.send_keys("/Users/oxxo/Desktop/oxxo.png")  # 提供圖片絕對路徑，上傳圖片
 print("上傳圖片")
-sleep(1)
+time.sleep(1)
 buttons = driver.find_elements(By.CSS_SELECTOR, 'div[role="button"]')
 for i in buttons:
     if i.text == "推文" or i.text == "Tweet":
         i.click()  # 點擊推文按鈕
         print("推文完成")
         break
-sleep(1)
+time.sleep(1)
 driver.close()  # 關閉瀏覽器視窗
 
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from time import sleep
 
 user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15"
 opt = webdriver.ChromeOptions()
@@ -1820,11 +1810,11 @@ driver.execute_cdp_cmd(
 )
 
 driver.get("https://twitter.com")
-sleep(2)
+time.sleep(2)
 driver.execute_script(f"window.scrollTo(0, 200)")
 login = driver.find_element(By.CSS_SELECTOR, 'a[href="/login"]')
 login.click()
-sleep(2)
+time.sleep(2)
 username = driver.find_element(By.CSS_SELECTOR, 'input[autocomplete="username"]')
 username.send_keys("你的 email")
 print("輸入 email 完成")
@@ -1834,7 +1824,7 @@ for i in buttons:
         i.click()
         print("點擊下一步")
         break
-sleep(2)
+time.sleep(2)
 
 try:
     check = driver.find_element(By.CSS_SELECTOR, 'input[autocomplete="on"]')
@@ -1845,10 +1835,10 @@ try:
             i.click()
             print("驗證使用者帳號，點擊下一步")
             break
-    sleep(2)
+    time.sleep(2)
 except:
     print("ok")
-    sleep(2)
+    time.sleep(2)
 
 pwd = driver.find_element(By.CSS_SELECTOR, 'input[autocomplete="current-password"]')
 pwd.send_keys("你的密碼")
@@ -1861,37 +1851,36 @@ for i in buttons:
         print("點擊登入")
         break
 
-sleep(2)
+time.sleep(2)
 textbox = driver.find_element(By.CSS_SELECTOR, 'div[role="textbox"]')
 textbox.send_keys("Hello World!I am Robot~ ^_^")
 print("輸入文字")
-sleep(1)
+time.sleep(1)
 imgInput = driver.find_element(By.CSS_SELECTOR, 'input[data-testid="fileInput"]')
 imgInput.send_keys("/Users/oxxo/Desktop/oxxo.png")
 print("上傳圖片")
-sleep(1)
+time.sleep(1)
 buttons = driver.find_elements(By.CSS_SELECTOR, 'div[role="button"]')
 for i in buttons:
     if i.text == "推文" or i.text == "Tweet":
         i.click()
         print("推文完成")
         break
-sleep(1)
+time.sleep(1)
 driver.close()
 
 print("------------------------------------------------------------")  # 60個
 
 from selenium import webdriver    # 匯入 selenium 的 webdriver 子套件
-from time import sleep         # 匯入內建 time 模組的 sleep() 函式 (計時用)
+
 browser = webdriver.Chrome()   # 建立 Chrome 瀏覽器物件
 browser.get('http://www.flag.com.tw')  # 開啟 Chrome 並連到旗標網站
-sleep(5)                       # 暫停 5 秒
+time.sleep(5)                       # 暫停 5 秒
 browser.close()                # 關閉網頁(目前分頁)A
 
 print('------------------------------------------------------------')	#60個
 
 from selenium import webdriver # 匯入 selenium 的 webdriver
-from time import sleep         # 匯入內建 time 模組的 sleep() 函式
 
 browser = webdriver.Chrome()            # 建立 Chrome 瀏覽器物件
 browser.get('http://www.google.com')    # 開啟 Chrome 並連到 Google 網站
@@ -1900,11 +1889,11 @@ print('網址：' + browser.current_url)   # 輸出網頁網址
 print('內容：' + browser.page_source[0:50]) # 輸出網頁原始碼的前 50 個字
 print('視窗：', browser.get_window_rect())  # 輸出視窗的位置及寬高
 browser.save_screenshot('d:/scrcap.png')   # 截取網頁畫面
-sleep(3) # 暫停 3 秒
+time.sleep(3) # 暫停 3 秒
 browser.set_window_rect(200, 100, 500, 250)   # 改變視窗位置及大小
-sleep(3)
+time.sleep(3)
 browser.fullscreen_window()     # 將視窗設為全螢幕
-sleep(3)
+time.sleep(3)
 browser.quit() # 關閉視窗結束驅動
 
 print('------------------------------------------------------------')	#60個
@@ -1936,7 +1925,6 @@ browser.find_element_by_name('login').click()  # }
 print('------------------------------------------------------------')	#60個
 
 from selenium import webdriver  # 匯入 selenium 的 webdriver
-from time import sleep          # 匯入內建的 time 模組的 sleep() 函式
 
 opt =  webdriver.ChromeOptions()      #建立選項物件
 opt.add_experimental_option('prefs',  #加入「禁止顯示訊息框」的選項
@@ -1947,10 +1935,10 @@ browser.get('http://www.google.com')    #←開啟 Chrome 並連到 Google 網�
 browser.maximize_window()  #←將視窗最大化以避免最右邊的登入鈕沒顯示出來
 
 browser.find_element_by_id('gb_70').click()   #←按登入鈕
-sleep(3)       #←暫停 3 秒等待進入下一頁
+time.sleep(3)       #←暫停 3 秒等待進入下一頁
 browser.find_element_by_id('identifierId').send_keys('您的帳號') #}←輸入帳號
 browser.find_element_by_id('identifierNext').click()   #←按繼續鈕
-sleep(3)       #←暫停 3 秒等待進入下一頁
+time.sleep(3)       #←暫停 3 秒等待進入下一頁
 browser.find_element_by_name('password').send_keys('您的密碼')  #←輸入帳密
 browser.find_element_by_id('passwordNext').click()   #←按繼續鈕
 
@@ -2214,7 +2202,6 @@ def ok(msg):
 
 app.run()
 
-
 print("------------------------------------------------------------")  # 60個
 
 from flask import Flask, request  # 載入了 request
@@ -2307,7 +2294,6 @@ def home(name):
 
 
 app.run()
-
 
 
 print("------------------------------------------------------------")  # 60個

@@ -13,7 +13,8 @@ from tkinter.filedialog import askopenfile  # tk之openFileDialog
 from tkinter.filedialog import asksaveasfile  # tk之saveFileDialog
 from tkinter.filedialog import askopenfilename
 from tkinter.filedialog import asksaveasfilename
-from pygame import mixer
+
+import pygame
 
 count = 0
 flag_pause_mode = False
@@ -26,10 +27,10 @@ def pausemp3():  # 暫停
     global flag_pause_mode
     if flag_pause_mode == False:
         flag_pause_mode = True
-        mixer.music.pause()
+        pygame.mixer.music.pause() #暫停播放
     else:
         flag_pause_mode = False
-        mixer.music.unpause()
+        pygame.mixer.music.unpause() #恢復播放
 
 
 def increase():  # 音量大
@@ -37,7 +38,7 @@ def increase():  # 音量大
     volume += 0.02
     if volume >= 1:
         volume = 1
-    mixer.music.set_volume(volume)
+    pygame.mixer.music.set_volume(volume)
 
 
 def decrease():  # 音量小
@@ -45,7 +46,7 @@ def decrease():  # 音量小
     volume -= 0.02
     if volume <= 0.2:
         volume = 0.2
-    mixer.music.set_volume(volume)
+    pygame.mixer.music.set_volume(volume)
 
 
 def playmp3():  # 播放
@@ -55,9 +56,9 @@ def playmp3():  # 播放
     if flag_new_mp3_file == True:  # 更換歌曲
         playNewmp3a()
     else:
-        if not mixer.music.get_busy():
-            mixer.music.load(mp3_filename)
-            mixer.music.play(loops=-1)
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.load(mp3_filename)
+            pygame.mixer.music.play(loops=-1)  # -1: 循環播放
         else:
             print("沒事")
     flag_new_mp3_file = False
@@ -65,25 +66,25 @@ def playmp3():  # 播放
 
 def playNewmp3a():  # 播放新曲
     global mp3_filename
-    mixer.music.stop()
-    mixer.music.load(mp3_filename)
-    mixer.music.play(loops=-1)
+    pygame.mixer.music.stop() # 停止播放
+    pygame.mixer.music.load(mp3_filename)
+    pygame.mixer.music.play(loops=-1)
 
 
 def playNewmp3b(song):
     global status
-    mixer.music.stop()
-    mixer.music.load(mp3files[index])
-    mixer.music.play()
+    pygame.mixer.music.stop() # 停止播放
+    pygame.mixer.music.load(mp3files[index])
+    pygame.mixer.music.play() # 無參數, 單次播放
     status = "正在播放 {}".format(mp3files[index])
 
 
 def stopmp3():  # 停止播放
-    mixer.music.stop()
+    pygame.mixer.music.stop() # 停止播放
 
 
 def exitmp3():  # 結束
-    mixer.music.stop()
+    pygame.mixer.music.stop() # 停止播放
     window.destroy()  # 關閉視窗
 
 
@@ -136,6 +137,9 @@ def button05Click():
 
 def button10Click():
     print("你按了")
+    #pygame.mixer.music.play()# 無參數, 單次播放
+    status = pygame.mixer.music.get_busy() # True:正在播放, False:不在播放中
+    print(status)
 
 
 def button11Click():
@@ -196,6 +200,7 @@ def clear_text1():
 
 
 window = tk.Tk()
+window.geometry("600x800")
 
 main_message1 = tk.StringVar()
 main_message2 = tk.StringVar()
@@ -267,7 +272,7 @@ button03.place(x=x_st + dx * 3, y=y_st + dy * 0)
 button04.place(x=x_st + dx * 4, y=y_st + dy * 0)
 button05.place(x=x_st + dx * 5, y=y_st + dy * 0)
 
-button10 = tk.Button(window, width=w, height=h, command=button10Click, text="")
+button10 = tk.Button(window, width=w, height=h, command=button10Click, text="循環播放")
 button10.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
 button11 = tk.Button(window, width=w, height=h, command=button11Click, text="選取資料夾")
 button11.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
@@ -328,15 +333,36 @@ mp3_filename = mp3files[index]
 message = mp3_filename
 main_message1.set(message)
 
-mixer.init()
+pygame.mixer.init()  # 最初化mixer
+
 volume = 0.6  # 起始音量
 
 window.protocol("WM_DELETE_WINDOW", exitmp3)
 
 window.mainloop()
 
+print("------------------------------------------------------------")  # 60個
 
+
+""" 新進
+
+# 撥放音樂
+def playmusic():                                        # 處理按撥放紐
+
+    pygame.mixer.music.load('notify.mp3')           # 撥放選項1音樂
+    
+    town = r'C:\Windows\Media\town.mid'
+    pygame.mixer.music.load(town)                   # 撥放選項2音樂
+
+pygame.mixer.music.load(r'C:\Windows\Media\town.mid')
+
+    onestop = r'C:\Windows\Media\onestop.mid'
+    pygame.mixer.music.load(onestop)                # 撥放選項3音樂
+
+# 停止撥放音樂
+def stopmusic():                                        # 處理按結束紐
+
+          soundObj = pygame.mixer.Sound(r'C:\Windows\Media\notify.wav')  # 建立碰撞聲音物件            
+            soundObj.play()                     # 發出碰撞聲音
 """
-    status = mixer.music.get_busy()
-    print(status)
-"""
+
