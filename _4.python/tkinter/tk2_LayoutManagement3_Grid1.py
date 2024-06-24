@@ -6,9 +6,9 @@ import sys
 import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
-window.geometry("600x800")
+window.geometry("800x800")
 window.title("Grid 測試 1")
 
 w = 5
@@ -56,51 +56,6 @@ for j in range(4, 14, 3):
         else:
             entry.grid(row = j, column = i, columnspan = 3) #占用3欄
 """
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 2")
-
-# create all of the main containers
-top_frame = tk.Frame(window, bg="cyan", width=450, height=50, pady=3)
-center = tk.Frame(window, bg="gray2", width=50, height=40, padx=3, pady=3)
-
-# layout all of the main containers
-window.grid_rowconfigure(1, weight=2)
-window.grid_columnconfigure(0, weight=1)
-
-top_frame.grid(row=0, sticky="ew")
-center.grid(row=1, sticky="nsew")
-
-# create the widgets for the top frame
-model_label = tk.Label(top_frame, text="Model Dimensions")
-width_label = tk.Label(top_frame, text="Width:")
-length_label = tk.Label(top_frame, text="Length:")
-entry_W = tk.Entry(top_frame, background="pink")
-entry_L = tk.Entry(top_frame, background="orange")
-
-# layout the widgets in the top frame
-model_label.grid(row=0, columnspan=3)
-width_label.grid(row=1, column=0)
-length_label.grid(row=1, column=2)
-entry_W.grid(row=1, column=1)
-entry_L.grid(row=1, column=3)
-
-# create the center widgets
-center.grid_rowconfigure(0, weight=1)
-center.grid_columnconfigure(1, weight=1)
-
-ctr_left = tk.Frame(center, bg="blue", width=100, height=190)
-ctr_mid = tk.Frame(center, bg="yellow", width=250, height=190, padx=3, pady=3)
-ctr_right = tk.Frame(center, bg="green", width=100, height=190, padx=3, pady=3)
-
-ctr_left.grid(row=0, column=0, sticky="ns")
-ctr_mid.grid(row=0, column=1, sticky="nsew")
-ctr_right.grid(row=0, column=2, sticky="ns")
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -289,65 +244,17 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Grid 測試 5")
+window.title("Grid 測試 8 Label")
 
-taipei = tk.Button(window, width=30, text="台北景點")
-taipei.grid(column=0, row=0)
-kaohsiung = tk.Button(window, width=30, text="高雄景點")
-kaohsiung.grid(column=0, row=1)
-ilan = tk.Button(window, width=30, text="宜蘭景點")
-ilan.grid(column=1, row=0)
-tainan = tk.Button(window, width=30, text="台南景點")
-tainan.grid(column=1, row=1)
-
-window.mainloop()
-
-window = tk.Tk()
-window.geometry("600x400")
-window.title("Grid 測試 6")
-
-one = tk.Button(window, width=20, text="January")
-one.grid(column=0, row=0)
-two = tk.Button(window, width=20, text="Februry")
-two.grid(column=1, row=0)
-three = tk.Button(window, width=20, text="March")
-three.grid(column=2, row=0)
-one = tk.Button(window, width=20, text="April")
-one.grid(column=0, row=1)
-two = tk.Button(window, width=20, text="May")
-two.grid(column=1, row=1)
-three = tk.Button(window, width=20, text="June")
-three.grid(column=2, row=1)
-one = tk.Button(window, width=20, text="July")
-one.grid(column=0, row=2)
-two = tk.Button(window, width=20, text="August")
-two.grid(column=1, row=2)
-three = tk.Button(window, width=20, text="September")
-three.grid(column=2, row=2)
-one = tk.Button(window, width=20, text="October")
-one.grid(column=0, row=3)
-two = tk.Button(window, width=20, text="November")
-two.grid(column=1, row=3)
-three = tk.Button(window, width=20, text="December")
-three.grid(column=2, row=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 8")
-
-lab1 = tk.Label(window, text="Peter", bg="lightyellow", width=15)  # 標籤背景是淺黃色  # 標籤寬度是15
-lab2 = tk.Label(window, text="John", bg="lightgreen", width=15)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab3 = tk.Label(window, text="Notron", bg="lightblue", width=15)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab4 = tk.Label(window, text="Kevin", bg="lightgreen", width=15)  # 標籤背景是淺黃色  # 標籤寬度是15
-lab5 = tk.Label(window, text="Tommy", bg="lightblue", width=15)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab6 = tk.Label(window, text="Mary", bg="lightyellow", width=15)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab7 = tk.Label(window, text="Tracy", bg="lightblue", width=15)  # 標籤背景是淺黃色  # 標籤寬度是15
-lab8 = tk.Label(window, text="Mike", bg="lightyellow", width=15)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab9 = tk.Label(window, text="Vicent", bg="lightgreen", width=15)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab1 = tk.Label(window, text="Label位置00", bg="lightyellow", width=25)  # 標籤背景是淺黃色  # 標籤寬度是15
+lab2 = tk.Label(window, text="Label位置01", bg="lightgreen", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab3 = tk.Label(window, text="Label位置02", bg="lightblue", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab4 = tk.Label(window, text="Label位置10", bg="lightgreen", width=25)  # 標籤背景是淺黃色  # 標籤寬度是15
+lab5 = tk.Label(window, text="Label位置11", bg="lightblue", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab6 = tk.Label(window, text="Label位置12", bg="lightyellow", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab7 = tk.Label(window, text="Label位置20", bg="lightblue", width=25)  # 標籤背景是淺黃色  # 標籤寬度是15
+lab8 = tk.Label(window, text="Label位置21", bg="lightyellow", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
+lab9 = tk.Label(window, text="Label位置22", bg="lightgreen", width=25)  # 標籤背景是淺綠色  # 標籤寬度是15
 
 lab1.grid(row=0, column=0)  # 格狀包裝
 lab2.grid(row=0, column=1)  # 格狀包裝
@@ -367,14 +274,14 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Grid 測試 9")
 
-lab1 = tk.Label(window, text="標籤1", relief="raised")
-lab2 = tk.Label(window, text="標籤2", relief="raised")
-lab3 = tk.Label(window, text="標籤3", relief="raised")
-lab4 = tk.Label(window, text="標籤4", relief="raised")
-lab5 = tk.Label(window, text="標籤5", relief="raised")
-lab6 = tk.Label(window, text="標籤6", relief="raised")
-lab7 = tk.Label(window, text="標籤7", relief="raised")
-lab8 = tk.Label(window, text="標籤8", relief="raised")
+lab1 = tk.Label(window, text="Label位置00", relief="raised")
+lab2 = tk.Label(window, text="Label位置01", relief="raised")
+lab3 = tk.Label(window, text="Label位置02", relief="raised")
+lab4 = tk.Label(window, text="Label位置03", relief="raised")
+lab5 = tk.Label(window, text="Label位置10", relief="raised")
+lab6 = tk.Label(window, text="Label位置11", relief="raised")
+lab7 = tk.Label(window, text="Label位置12", relief="raised")
+lab8 = tk.Label(window, text="Label位置13", relief="raised")
 lab1.grid(row=0, column=0)
 lab2.grid(row=0, column=1)
 lab3.grid(row=0, column=2)
@@ -392,13 +299,14 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Grid 測試 10")
 
-lab1 = tk.Label(window, text="標籤1", relief="raised")
-lab2 = tk.Label(window, text="標籤2", relief="raised")
-lab4 = tk.Label(window, text="標籤4", relief="raised")
-lab5 = tk.Label(window, text="標籤5", relief="raised")
-lab6 = tk.Label(window, text="標籤6", relief="raised")
-lab7 = tk.Label(window, text="標籤7", relief="raised")
-lab8 = tk.Label(window, text="標籤8", relief="raised")
+lab1 = tk.Label(window, text="Label位置00", relief="raised")
+lab2 = tk.Label(window, text="Label位置01", relief="raised")
+lab4 = tk.Label(window, text="Label位置03", relief="raised")
+
+lab5 = tk.Label(window, text="Label位置10", relief="raised")
+lab6 = tk.Label(window, text="Label位置11", relief="raised")
+lab7 = tk.Label(window, text="Label位置12", relief="raised")
+lab8 = tk.Label(window, text="Label位置13", relief="raised")
 lab1.grid(row=0, column=0)
 lab2.grid(row=0, column=1, columnspan=2)
 lab4.grid(row=0, column=3)
@@ -415,13 +323,13 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Grid 測試 11")
 
-lab1 = tk.Label(window, text="標籤1", relief="raised")
-lab2 = tk.Label(window, text="標籤2", relief="raised")
-lab3 = tk.Label(window, text="標籤3", relief="raised")
-lab4 = tk.Label(window, text="標籤4", relief="raised")
-lab5 = tk.Label(window, text="標籤5", relief="raised")
-lab7 = tk.Label(window, text="標籤7", relief="raised")
-lab8 = tk.Label(window, text="標籤8", relief="raised")
+lab1 = tk.Label(window, text="Label位置00", relief="raised")
+lab2 = tk.Label(window, text="Label位置01", relief="raised")
+lab3 = tk.Label(window, text="Label位置02", relief="raised")
+lab4 = tk.Label(window, text="Label位置03", relief="raised")
+lab5 = tk.Label(window, text="Label位置10", relief="raised")
+lab7 = tk.Label(window, text="Label位置12", relief="raised")
+lab8 = tk.Label(window, text="Label位置13", relief="raised")
 lab1.grid(row=0, column=0)
 lab2.grid(row=0, column=1, rowspan=2)
 lab3.grid(row=0, column=2)
@@ -436,16 +344,18 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Grid 測試 13")
+window.title("Grid 測試 30")
 
-plus = tk.Button(window, width=20, text="加法範例")
-plus.grid(column=0, row=0)
-minus = tk.Button(window, width=20, text="減法範例")
-minus.grid(column=0, row=1)
-multiply = tk.Button(window, width=20, text="乘法範例")
-multiply.grid(column=1, row=0)
-divide = tk.Button(window, width=20, text="除法範例")
-divide.grid(column=1, row=1)
+label1 = tk.Label(window, text="標籤1", relief="raised")
+label2 = tk.Label(window, text="標籤2", relief="raised")
+label4 = tk.Label(window, text="標籤4", relief="raised")
+label5 = tk.Label(window, text="標籤5", relief="raised")
+label8 = tk.Label(window, text="標籤8", relief="raised")
+label1.grid(row=0, column=0)
+label2.grid(row=0, column=1, rowspan=2, columnspan=2)
+label4.grid(row=0, column=3)
+label5.grid(row=1, column=0)
+label8.grid(row=1, column=3)
 
 window.mainloop()
 
@@ -453,16 +363,24 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Grid 測試 14")
+window.title("Grid 測試 31")
 
-plus = tk.Button(window, width=20, text="加法範例")
-plus.grid(column=0, row=0)
-minus = tk.Button(window, width=20, text="減法範例")
-minus.grid(column=0, row=1)
-multiply = tk.Button(window, width=20, text="乘法範例")
-multiply.grid(column=0, row=2)
-divide = tk.Button(window, width=20, text="除法範例")
-divide.grid(column=0, row=3)
+label1 = tk.Label(window, text="標籤1", relief="raised")
+label2 = tk.Label(window, text="標籤2", relief="raised")
+label3 = tk.Label(window, text="標籤3", relief="raised")
+label4 = tk.Label(window, text="標籤4", relief="raised")
+label5 = tk.Label(window, text="標籤5", relief="raised")
+label6 = tk.Label(window, text="標籤6", relief="raised")
+label7 = tk.Label(window, text="標籤7", relief="raised")
+label8 = tk.Label(window, text="標籤8", relief="raised")
+label1.grid(row=0, column=0, padx=5, pady=5)
+label2.grid(row=0, column=1, padx=5, pady=5)
+label3.grid(row=0, column=2, padx=5, pady=5)
+label4.grid(row=0, column=3, padx=5, pady=5)
+label5.grid(row=1, column=0, padx=5)
+label6.grid(row=1, column=1, padx=5)
+label7.grid(row=1, column=2, padx=5)
+label8.grid(row=1, column=3, padx=5)
 
 window.mainloop()
 
@@ -548,57 +466,6 @@ label3.grid(row=0, column=2)
 
 window.mainloop()
 
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 17")
-
-lab1 = tk.Label(
-    window, text="歡迎來到美國", bg="lightyellow", width=15  # 標籤背景是淺黃色
-)  # 標籤寬度是15
-lab2 = tk.Label(window, text="歡迎來到日本", bg="lightgreen", width=15)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab3 = tk.Label(window, text="歡迎來到加拿大", bg="lightblue", width=15)  # 標籤背景是淺藍色  # 標籤寬度是15
-lab1.grid(row=0, column=0)  # 格狀包裝
-lab2.grid(row=1, column=0)  # 格狀包裝
-lab3.grid(row=1, column=1)  # 格狀包裝
-tk.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 18")
-
-lab1 = tk.Label(
-    window, text="歡迎來到美國", bg="lightyellow", width=15  # 標籤背景是淺黃色
-)  # 標籤寬度是15
-lab2 = tk.Label(window, text="歡迎來到日本", bg="lightgreen", width=15)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab3 = tk.Label(window, text="歡迎來到加拿大", bg="lightblue", width=15)  # 標籤背景是淺藍色  # 標籤寬度是15
-lab1.grid(row=0, column=0)  # 格狀包裝
-lab2.grid(row=1, column=0)  # 格狀包裝
-lab3.grid(row=1, column=1)  # 格狀包裝
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 19")
-
-lab1 = tk.Label(
-    window, text="歡迎來到美國", bg="lightyellow", width=15  # 標籤背景是淺黃色
-)  # 標籤寬度是15
-lab2 = tk.Label(window, text="歡迎來到日本", bg="lightgreen", width=15)  # 標籤背景是淺綠色  # 標籤寬度是15
-lab3 = tk.Label(window, text="歡迎來到加拿大", bg="lightblue", width=15)  # 標籤背景是淺藍色  # 標籤寬度是15
-lab1.grid(row=0, column=0)  # 格狀包裝
-lab2.grid(row=1, column=2)  # 格狀包裝
-lab3.grid(row=2, column=1)  # 格狀包裝
-
-window.mainloop()
-
 print("------------------------------------------------------------")  # 60個
 
 """
@@ -633,9 +500,6 @@ button3.grid(row=1, column=1)
 
 
 """
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -838,122 +702,7 @@ label4.grid(row=1, column=1, sticky="nswe")
 label5.grid(row=2, column=1, columnspan=2, sticky="nswe")
 
 window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 27")
-
-label1 = tk.Label(window, text="標籤1", relief="raised")
-label2 = tk.Label(window, text="標籤2", relief="raised")
-label3 = tk.Label(window, text="標籤3", relief="raised")
-label4 = tk.Label(window, text="標籤4", relief="raised")
-label5 = tk.Label(window, text="標籤5", relief="raised")
-label6 = tk.Label(window, text="標籤6", relief="raised")
-label7 = tk.Label(window, text="標籤7", relief="raised")
-label8 = tk.Label(window, text="標籤8", relief="raised")
-label1.grid(row=0, column=0)
-label2.grid(row=0, column=1)
-label3.grid(row=0, column=2)
-label4.grid(row=0, column=3)
-label5.grid(row=1, column=0)
-label6.grid(row=1, column=1)
-label7.grid(row=1, column=2)
-label8.grid(row=1, column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 28")
-
-label1 = tk.Label(window, text="標籤1", relief="raised")
-label2 = tk.Label(window, text="標籤2", relief="raised")
-label4 = tk.Label(window, text="標籤4", relief="raised")
-label5 = tk.Label(window, text="標籤5", relief="raised")
-label6 = tk.Label(window, text="標籤6", relief="raised")
-label7 = tk.Label(window, text="標籤7", relief="raised")
-label8 = tk.Label(window, text="標籤8", relief="raised")
-label1.grid(row=0, column=0)
-label2.grid(row=0, column=1, columnspan=2)
-label4.grid(row=0, column=3)
-label5.grid(row=1, column=0)
-label6.grid(row=1, column=1)
-label7.grid(row=1, column=2)
-label8.grid(row=1, column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 29")
-
-label1 = tk.Label(window, text="標籤1", relief="raised")
-label2 = tk.Label(window, text="標籤2", relief="raised")
-label3 = tk.Label(window, text="標籤3", relief="raised")
-label4 = tk.Label(window, text="標籤4", relief="raised")
-label5 = tk.Label(window, text="標籤5", relief="raised")
-label7 = tk.Label(window, text="標籤7", relief="raised")
-label8 = tk.Label(window, text="標籤8", relief="raised")
-label1.grid(row=0, column=0)
-label2.grid(row=0, column=1, rowspan=2)
-label3.grid(row=0, column=2)
-label4.grid(row=0, column=3)
-label5.grid(row=1, column=0)
-label7.grid(row=1, column=2)
-label8.grid(row=1, column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 30")
-
-label1 = tk.Label(window, text="標籤1", relief="raised")
-label2 = tk.Label(window, text="標籤2", relief="raised")
-label4 = tk.Label(window, text="標籤4", relief="raised")
-label5 = tk.Label(window, text="標籤5", relief="raised")
-label8 = tk.Label(window, text="標籤8", relief="raised")
-label1.grid(row=0, column=0)
-label2.grid(row=0, column=1, rowspan=2, columnspan=2)
-label4.grid(row=0, column=3)
-label5.grid(row=1, column=0)
-label8.grid(row=1, column=3)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 31")
-
-label1 = tk.Label(window, text="標籤1", relief="raised")
-label2 = tk.Label(window, text="標籤2", relief="raised")
-label3 = tk.Label(window, text="標籤3", relief="raised")
-label4 = tk.Label(window, text="標籤4", relief="raised")
-label5 = tk.Label(window, text="標籤5", relief="raised")
-label6 = tk.Label(window, text="標籤6", relief="raised")
-label7 = tk.Label(window, text="標籤7", relief="raised")
-label8 = tk.Label(window, text="標籤8", relief="raised")
-label1.grid(row=0, column=0, padx=5, pady=5)
-label2.grid(row=0, column=1, padx=5, pady=5)
-label3.grid(row=0, column=2, padx=5, pady=5)
-label4.grid(row=0, column=3, padx=5, pady=5)
-label5.grid(row=1, column=0, padx=5)
-label6.grid(row=1, column=1, padx=5)
-label7.grid(row=1, column=2, padx=5)
-label8.grid(row=1, column=3, padx=5)
-
-window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -1343,6 +1092,52 @@ btLast = tk.Button(frame4, text="Last").grid(row=1, column=5)
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Grid 測試 2")
+
+# create all of the main containers
+top_frame = tk.Frame(window, bg="cyan", width=450, height=50, pady=3)
+center = tk.Frame(window, bg="gray2", width=50, height=40, padx=3, pady=3)
+
+# layout all of the main containers
+window.grid_rowconfigure(1, weight=2)
+window.grid_columnconfigure(0, weight=1)
+
+top_frame.grid(row=0, sticky="ew")
+center.grid(row=1, sticky="nsew")
+
+# create the widgets for the top frame
+model_label = tk.Label(top_frame, text="Model Dimensions")
+width_label = tk.Label(top_frame, text="Width:")
+length_label = tk.Label(top_frame, text="Length:")
+entry_W = tk.Entry(top_frame, background="pink")
+entry_L = tk.Entry(top_frame, background="orange")
+
+# layout the widgets in the top frame
+model_label.grid(row=0, columnspan=3)
+width_label.grid(row=1, column=0)
+length_label.grid(row=1, column=2)
+entry_W.grid(row=1, column=1)
+entry_L.grid(row=1, column=3)
+
+# create the center widgets
+center.grid_rowconfigure(0, weight=1)
+center.grid_columnconfigure(1, weight=1)
+
+ctr_left = tk.Frame(center, bg="blue", width=100, height=190)
+ctr_mid = tk.Frame(center, bg="yellow", width=250, height=190, padx=3, pady=3)
+ctr_right = tk.Frame(center, bg="green", width=100, height=190, padx=3, pady=3)
+
+ctr_left.grid(row=0, column=0, sticky="ns")
+ctr_mid.grid(row=0, column=1, sticky="nsew")
+ctr_right.grid(row=0, column=2, sticky="ns")
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 
