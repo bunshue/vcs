@@ -5,8 +5,7 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-title = "Place 測試 絕對位置"
-window.title(title)
+window.title("Place 測試 絕對位置")
 
 print("------------------------------------------------------------")  # 60個
 
@@ -90,16 +89,13 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-title = "Place 測試 比例"
-window.title(title)
+window.title("Place 測試 比例")
 
 label2 = ttk.Label(window, text = 'Label 2', background = 'green')
 label2.place(relx = 0.5, rely = 0.5, relwidth = 1, anchor = 'se')
 
-
 kaohsiung=tk.Button(window, width=30, text="高雄景點")
 kaohsiung.place(relx=0.6, rely=0.6, anchor="center")
-
 
 x_st, y_st = 300, 10
 dy = 40
@@ -114,9 +110,7 @@ divide.place(relx=0.5, rely=0.3)
 
 print("------------------------------------------------------------")  # 60個
 
-
 window.mainloop()
-
 
 print('------------------------------------------------------------')	#60個
 print('作業完成')

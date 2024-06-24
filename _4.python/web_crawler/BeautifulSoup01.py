@@ -1,13 +1,55 @@
 # Python 測試 BeautifulSoup
-#解讀 本地 網頁資料, 都是使用 html.parser 解析器
+#解讀 本地 / 遠端 網頁資料, 都是使用 html.parser 解析器
+
+print('------------------------------------------------------------')	#60個
+print('準備工作')
+
+import re
+import os
+import sys
+import csv
+import time
+import json
+import urllib
+import requests
+import urllib.parse
+from bs4 import BeautifulSoup
+from datetime import datetime
+from urllib.request import urlopen
+
+def get_html_data1(url):
+    print('取得網頁資料: ', url)
+    resp = requests.get(url)    # 用 requests 的 get 方法把網頁抓下來
+
+    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
+    if resp.status_code != requests.codes.ok:
+        print('讀取網頁資料錯誤, url: ', resp.url)
+        return None
+    else:
+        return resp
+
+def get_soup_from_url(url):
+    html_data = get_html_data1(url)
+    if html_data == None:
+        print('無法取得網頁資料')
+        sys.exit(1)	#立刻退出程式
+
+    html_data.encoding = 'UTF-8' # 或是 unicode 也可, 指定編碼方式
+    soup = BeautifulSoup(html_data.text, "html.parser")  # 解析原始碼
+    #soup = BeautifulSoup(html_data.text, "lxml") # 指定 lxml 作為解析器
+    #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+    #pprint.pprint(html_data.text)
+    print("取得網頁標題", soup.title)
+    return soup
+    
+print('------------------------------------------------------------')	#60個
+
+
+ 
+
 
 print('------------------------------------------------------------')	#60個
 
-import os
-import re
-import requests
-from bs4 import BeautifulSoup
-from urllib.request import urlopen
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 1')
@@ -249,12 +291,8 @@ imglist = soup.find_all("img", {"src":regex})
 for img in imglist:
     print(img["src"])
 
-
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 3')
-
-
-from bs4 import BeautifulSoup
 
 html = '''
 <html>
@@ -277,8 +315,6 @@ print(sp.find('p', id='p2', class_= 'red'))
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 4')
 
-from bs4 import BeautifulSoup
-
 html = '''
 <html>
   <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
@@ -297,9 +333,6 @@ print(sp.select('.red'))
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 5')
-
-
-from bs4 import BeautifulSoup
 
 html = '''
 <html>
@@ -335,7 +368,6 @@ html = """
 </div>
 """
 
-from bs4 import BeautifulSoup
 sp = BeautifulSoup(html,'lxml') 
 
 print(sp.title) # <title>網頁標題</title>
@@ -364,52 +396,6 @@ print(sp.select('div img')[0]['src']) # http://example.com/three.jpg
 
 print('BeautifulSoup 測試 作業完成')
 
-
-
-
-print('------------------------------------------------------------')	#60個
-
-# Python 測試 BeautifulSoup
-#解讀 遠端 網頁資料, 都是使用 html.parser 解析器
-
-print('------------------------------------------------------------')	#60個
-print('準備工作')
-
-import re
-import os
-import sys
-import csv
-import time
-import json
-import urllib
-import requests
-from bs4 import BeautifulSoup
-from datetime import datetime
-
-def get_html_data1(url):
-    print('取得網頁資料: ', url)
-    resp = requests.get(url)    # 用 requests 的 get 方法把網頁抓下來
-
-    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
-    if resp.status_code != requests.codes.ok:
-        print('讀取網頁資料錯誤, url: ', resp.url)
-        return None
-    else:
-        return resp
-
-def get_soup_from_url(url):
-    html_data = get_html_data1(url)
-    if html_data == None:
-        print('無法取得網頁資料')
-        sys.exit(1)	#立刻退出程式
-
-    html_data.encoding = 'UTF-8' # 或是 unicode 也可, 指定編碼方式
-    soup = BeautifulSoup(html_data.text, "html.parser")  # 解析原始碼
-    #soup = BeautifulSoup(html_data.text, "lxml") # 指定 lxml 作為解析器
-    #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
-    #pprint.pprint(html_data.text)
-    print("取得網頁標題", soup.title)
-    return soup
     
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 1')
@@ -924,7 +910,6 @@ fp.close()
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 21')
 
-from urllib.request import urlopen
 from urllib.error import HTTPError
 
 def getTitle(url):
@@ -950,10 +935,6 @@ else:
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 22')
-
-import urllib.parse
-from bs4 import BeautifulSoup
-import requests
 
 html_data = requests.get('https://www.mvdis.gov.tw/m3-emv-plate/webpickno/queryPickNo#')
 soup = BeautifulSoup(html_data.text, 'html.parser')
@@ -1005,9 +986,6 @@ print('\n\nBeautifulSoup 測試 作業完成\n')
 '''
 
 
-import requests
-from bs4 import BeautifulSoup
-
 url = 'http://ehappy.tw/bsdemo1.htm'
 html = requests.get(url)
 html.encoding = 'UTF-8'
@@ -1030,50 +1008,6 @@ print(sp.p)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-# Python 測試 BeautifulSoup
-#解讀 遠端 網頁資料, 都是使用 html.parser 解析器
-
-print('------------------------------------------------------------')	#60個
-print('準備工作')
-
-import re
-import os
-import sys
-import csv
-import time
-import json
-import urllib
-import requests
-from bs4 import BeautifulSoup
-from datetime import datetime
-
-def get_html_data1(url):
-    print('取得網頁資料: ', url)
-    resp = requests.get(url)    # 用 requests 的 get 方法把網頁抓下來
-
-    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
-    if resp.status_code != requests.codes.ok:
-        print('讀取網頁資料錯誤, url: ', resp.url)
-        return None
-    else:
-        return resp
-
-def get_soup_from_url(url):
-    html_data = get_html_data1(url)
-    if html_data == None:
-        print('無法取得網頁資料')
-        sys.exit(1)	#立刻退出程式
-
-    html_data.encoding = 'UTF-8' # 或是 unicode 也可, 指定編碼方式
-    soup = BeautifulSoup(html_data.text, "html.parser")  # 解析原始碼
-    #soup = BeautifulSoup(html_data.text, "lxml") # 指定 lxml 作為解析器
-    #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
-    #pprint.pprint(html_data.text)
-    print("取得網頁標題", soup.title)
-    return soup
-    
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 1')
 '''
@@ -1246,7 +1180,6 @@ requests 套件允許我們發送與接收有機及草飼的 HTTP/1.1 請求（�
 
 import numpy as np
 import pandas as pd
-
 
 url = "https://www.ptt.cc/bbs/NBA/index.html" # PTT NBA 板
 
@@ -1638,22 +1571,8 @@ else:
         print('無法取得網頁資料')
 """
 
-
-
-
-
-
-
-
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 8')
-
-
-
-import requests
-import os
-from bs4 import BeautifulSoup
-from urllib.request import urlopen
 
 #某圖庫網站
 url = 'https://www.dreamstime.com/free-images_pg1'
@@ -1773,7 +1692,6 @@ print('------------------------------------------------------------')	#60個
 
 print('抓取網頁 bs分析 3')
 """
-import os
 from os.path import basename
 
 url = "http://aiworker2000.pixnet.net/blog/post/16062839"
@@ -1893,7 +1811,6 @@ print('抓取網頁 bs分析 10')
 import dominate
 from dominate.tags import *
 from dominate.util import raw
-import os
 from os.path import basename
 
 url = "http://aiworker2000.pixnet.net/blog/post/16062839"
@@ -1940,8 +1857,6 @@ print('------------------------------------------------------------')	#60個
 
 print('抓取網頁 bs分析 12')
 
-import time, random
-
 url = "https://tw.appledaily.com/new/realtime/"
 html = requests.get(url).text
 soup = BeautifulSoup(html, "lxml")
@@ -1976,14 +1891,12 @@ for title in titles:
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 12')
 
-import requests
 url = "https://www.mobile01.com/topiclist.php?f=751"
 headers = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
 }
 html = requests.get(url, headers=headers).text
 
-from bs4 import BeautifulSoup
 soup = BeautifulSoup(html, "html.parser")
 pages = soup.find_all("a", class_="c-pagination")
 print(pages[-1].text)
@@ -1999,10 +1912,6 @@ for title in titles:
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 13')
-
-import time
-import requests
-from bs4 import BeautifulSoup
 
 url = "https://www.mobile01.com/topiclist.php?f=751"
 headers = {
@@ -2025,12 +1934,7 @@ for page in range(1, last_page+1):
         print(title.a['href'])
     time.sleep(3)    
 
-
 print('------------------------------------------------------------')	#60個
-print('------------------------------------------------------------')	#60個
-
-import requests
-from bs4 import BeautifulSoup
 
 url = 'https://www.mobile01.com/topiclist.php?f=751'
 headers = {
@@ -2049,13 +1953,6 @@ print(pages[-1].text)
 
 print('------------------------------------------------------------')	#60個
 print('BeautifulSoup 測試 14')
-
-
-import sys
-import requests
-from bs4 import BeautifulSoup
-
-print('------------------------------------------------------------')	#60個
 
 """
 req=requests.get('http://www.powenko.com/wordpress/')
@@ -2380,17 +2277,9 @@ print("\n特別號   :", redball[0].text)
 
 print('------------------------------------------------------------')	#60個
 
-
-
-from bs4 import BeautifulSoup
-
 soup = BeautifulSoup("<html> Lollipop </html>", "html.parser")
 
 print('------------------------------------------------------------')	#60個
-
-import requests
-
-from bs4 import BeautifulSoup
 
 html_data = requests.get('http://tw.yahoo.com')
 
@@ -2399,10 +2288,6 @@ soup = BeautifulSoup(html_data.text, "html.parser")
 print(soup.title)
 
 print('------------------------------------------------------------')	#60個
-
-import requests
-
-from bs4 import BeautifulSoup
 
 yahoo_news_xml = requests.get('https://tw.news.yahoo.com/rss/technology')
 
@@ -2415,14 +2300,9 @@ soup.findAll('item')
 print('------------------------------------------------------------')	#60個
 
 for news in soup.findAll('item'):
-
 	print(news.title)
 	
 print('------------------------------------------------------------')	#60個
-
-import requests
-
-from bs4 import BeautifulSoup
 
 game_raking_html = requests.get('https://acg.gamer.com.tw/billboard.php?t=2&p=Android')
 
@@ -2436,10 +2316,6 @@ for game in soup.findAll(class_='ACG-mainbox1'):
 	print(game.find(class_='ACG-mainumber').string + ' ' + game.find(class_='ACG-maintitle').find('a').string)
 
 print('------------------------------------------------------------')	#60個
-
-print('------------------------------------------------------------')	#60個
-
-
 
 url = "https://fchart.github.io/Elements.html"
 response = requests.get(url)
@@ -2534,106 +2410,10 @@ print(tag_ans2.text)
 
 print("------------------------------------------------------------")  # 60個
 
-
-# Python 測試 BeautifulSoup
-#解讀 遠端 網頁資料, 都是使用 html.parser 解析器
-
-print('------------------------------------------------------------')	#60個
-print('準備工作')
-
-import re
-import os
-import sys
-import csv
-import time
-import json
-import urllib
-import requests
-from bs4 import BeautifulSoup
-from datetime import datetime
-
-def get_html_data1(url):
-    print('取得網頁資料: ', url)
-    resp = requests.get(url)    # 用 requests 的 get 方法把網頁抓下來
-
-    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
-    if resp.status_code != requests.codes.ok:
-        print('讀取網頁資料錯誤, url: ', resp.url)
-        return None
-    else:
-        return resp
-
-def get_soup_from_url(url):
-    html_data = get_html_data1(url)
-    if html_data == None:
-        print('無法取得網頁資料')
-        sys.exit(1)	#立刻退出程式
-
-    html_data.encoding = 'UTF-8' # 或是 unicode 也可, 指定編碼方式
-    soup = BeautifulSoup(html_data.text, "html.parser")  # 解析原始碼
-    #soup = BeautifulSoup(html_data.text, "lxml") # 指定 lxml 作為解析器
-    #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
-    #pprint.pprint(html_data.text)
-    print("取得網頁標題", soup.title)
-    return soup
-    
-print('------------------------------------------------------------')	#60個
-print('BeautifulSoup 測試 1')
-
-
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-print('------------------------------------------------------------')	#60個
-
-
-
-print("------------------------------------------------------------")  # 60個
-print("BeautifulSoup bs4 ST")
-print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
-
 print("臺灣證交所本國上市證券")
 #查詢台灣證交所本國上市證券國際證券辨識號碼一覽表
 
-import pandas as pd #匯入pandas套件
+import pandas as pd
 
 df = pd.read_html('http://isin.twse.com.tw/isin/C_public.jsp?strMode=2', encoding = 'big5hkscs', header = 0)
 newdf = df[0][df[0]['產業別'] > '0'] #產業別資料大於0
@@ -2658,10 +2438,6 @@ print('已存檔到 : ', filename)
 print("------------------------------------------------------------")  # 60個
 
 print("新北市不動產仲介經紀商業同業公會網站")
-
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
-import csv
 
 file_name = "tmp_新北市仲介.csv" #設定csv寫入檔名
 
@@ -2711,12 +2487,8 @@ print("------------------------------------------------------------")  # 60個
 
 url = "https://apiservice.mol.gov.tw/OdService/download/A17000000J-000007-yrg"
 
-import urllib.request as ur
-
-with ur.urlopen(url) as response:
+with urllib.request.urlopen(url) as response:
     get_xml = response.read()
-
-from bs4 import BeautifulSoup
 
 data = BeautifulSoup(get_xml, "xml")
 HandlingUnit = data.find_all("辦理單位")
@@ -2743,7 +2515,6 @@ print("XML格式資料擷取與應用,已將資料寫入 tmp_course_xml.csv")
 print("------------------------------------------------------------")  # 60個
 
 # 以BeautifulSoup套件進行網頁解析
-from bs4 import BeautifulSoup
 
 content = """
 <!DOCTYPE html>
@@ -2779,8 +2550,6 @@ print("--------------------------------------------------------")
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 addr = "https://tw.stock.yahoo.com/s/list.php?\
 c=%A8%E4%A5%A6%B9q%A4l&rr=0.84235400%201556957344"
 
@@ -2805,8 +2574,6 @@ for row in rows:
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 # 獲取網頁內容
 game_ranking_html = requests.get("https://acg.gamer.com.tw/billboard.php?t=2&p=iOS")
 
@@ -2822,8 +2589,6 @@ for i, game in enumerate(games, 1):
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 url='https://www.books.com.tw/' #博客來
 response=requests.get(url)
 bs=BeautifulSoup(response.text,'lxml')  	#傳回bs物件可解析網頁
@@ -2832,8 +2597,6 @@ print(bs.find('title').text)            	#傳回網頁<title>標籤內的資料
 print(bs.find('h1'))                    	#傳回第一個符合<h1>資料
 					        #若傳回None表示該網頁沒有<h1>標籤
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
 
 # 博客來寵物電子書
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
@@ -2851,8 +2614,6 @@ for book in listAll:  # 將資料利用迴圈依序解析
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 # 博客來寵物電子書
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
 response = requests.get(url)  # 使用requests的get()方法傳回可擷取網頁資訊response物件
@@ -2867,8 +2628,6 @@ for i in range(0, len(listName)):  # 使用迴圈逐一印出書名與書價
 print("------------------------------------------------------------")  # 60個
 
 # html to csv
-
-from bs4 import BeautifulSoup
 
 # 指定url變數為「博客來電子寵物書」網頁的網址
 url = "https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003"
@@ -2897,8 +2656,6 @@ print("------------------------------------------------------------")  # 60個
 """ OK many
 print('下載網站圖片')
 #抓 博客來電子寵物書 圖片 OK
-
-from bs4 import BeautifulSoup
 
 # 指定url變數為「博客來電子寵物書」網頁的網址
 url='https://www.books.com.tw/web/sys_cebbotm/cebook/1003/?loc=P_0001_2_003'
@@ -2930,7 +2687,6 @@ print('執行完畢')
 """
 
 print("------------------------------------------------------------")  # 60個
-from bs4 import BeautifulSoup
 
 # 指定url變數為「Dcard熱門文章」網頁的網址
 url = "https://www.dcard.tw/f"
@@ -2950,8 +2706,6 @@ print("取得文章數量 =", len(listItems))
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 #台灣水庫即時水情
 url = "https://water.taiwanstat.com/"
 response = requests.get(url)  # 取得網頁內容
@@ -2960,8 +2714,6 @@ title = soup.title  # 取得 title
 print(title)  # 印出 title ( 台灣水庫即時水情 )
 
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
 
 #台灣水庫即時水情
 url = "https://water.taiwanstat.com/"
@@ -2972,8 +2724,6 @@ title = soup.title
 print(title)
 
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
 
 url = "https://www.iana.org/domains/"
 response = requests.get(url)
@@ -3002,8 +2752,6 @@ print(divs[1].find_parent().find_all("li")[2].find_previous_siblings())
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 url = "https://www.iana.org/domains/"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
@@ -3012,8 +2760,6 @@ print(soup.find_all("a"))  # 等同於下方的 soup('a')
 print(soup("a"))  # 等同於上方的 find_all('a')
 
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
 
 url = "https://www.iana.org/domains/"
 response = requests.get(url)
@@ -3024,8 +2770,6 @@ print(soup("a", limit=2))  # 找出前兩個 a tag
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 url = "https://www.iana.org/domains/"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
@@ -3033,8 +2777,6 @@ print(soup.find("a").get_text())  # 輸出第一個 a tag 的內容
 print(soup.find("a")["href"])  # 輸出第一個 a tag 的 href 屬性內容
 
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
 
 #台灣水庫即時水情
 url = "https://water.taiwanstat.com/"
@@ -3048,9 +2790,7 @@ for i in reservoir:
     print(i.find("h5").get_text(), end=" ")  # 取得內容 h5 tag 的文字
     print()
 
-
 print("------------------------------------------------------------")  # 60個
-from bs4 import BeautifulSoup
 
 url = "https://www.ptt.cc/"
 response = requests.get(
@@ -3064,8 +2804,6 @@ for i in titles:
         print(url + i.find("a")["href"], end="\n\n")  # 使用 ['href'] 取得 href 的屬性
 
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
 
 url = "https://www.ptt.cc/"
 response = requests.get(
@@ -3089,8 +2827,6 @@ f.close()
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 response = requests.get(
     "https://www.ptt.cc/bbs/Beauty/M.1638380033.A.7C7.html", cookies={"over18": "1"}
 )  # 傳送 Cookies 資訊後，抓取頁面內容
@@ -3099,10 +2835,7 @@ imgs = soup.find_all("img")  # 取得所有 img tag 的內容
 for i in imgs:
     print(i["src"])  # 印出 src 的屬性
 
-
 print("------------------------------------------------------------")  # 60個
-
-from bs4 import BeautifulSoup
 
 response = requests.get(
     "https://www.ptt.cc/bbs/Beauty/M.1638380033.A.7C7.html", cookies={"over18": "1"}
@@ -3122,8 +2855,6 @@ for i in imgs:
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 response = requests.get(
     "https://www.ptt.cc/bbs/Beauty/M.1638380033.A.7C7.html", cookies={"over18": "1"}
 )
@@ -3140,7 +2871,6 @@ for i in imgs:
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor  # 加入 concurrent.futures 內建函式庫
 
 response = requests.get(
@@ -3172,8 +2902,6 @@ url = "https://invoice.etax.nat.gov.tw/index.html"
 response = requests.get(url)  # 取得網頁內容
 response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
 
-from bs4 import BeautifulSoup
-
 soup = BeautifulSoup(response.text, "html.parser")  # 轉換成標籤樹
 td = soup.select(".container-fluid")[0].select(".etw-tbiggest")  # 取出中獎號碼的位置
 ns = td[0].getText()  # 特別獎
@@ -3189,8 +2917,6 @@ print("------------------------------------------------------------")  # 60個
 url = "https://invoice.etax.nat.gov.tw/index.html"
 response = requests.get(url)  # 取得網頁內容
 response.encoding = "utf-8"  # 因為該網頁編碼為 utf-8，加上 .encoding 避免亂碼
-
-from bs4 import BeautifulSoup
 
 soup = BeautifulSoup(response.text, "html.parser")  # 轉換成標籤樹
 td = soup.select(".container-fluid")[0].select(".etw-tbiggest")  # 取出中獎號碼的位置
@@ -3231,8 +2957,6 @@ while True:
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
-
 url = "https://tw.stock.yahoo.com/quote/2330"  # 台積電 Yahoo 股市網址
 response = requests.get(url)  # 取得網頁內容
 soup = BeautifulSoup(response.text, "html.parser")  # 轉換內容
@@ -3259,7 +2983,6 @@ print(f"{title.get_text()} : {a.get_text()} ( {s}{b.get_text()} )")  # 印出結
 
 print("------------------------------------------------------------")  # 60個
 
-from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 
 # 建立要抓取的股票網址清單
@@ -3315,7 +3038,6 @@ page = """
 </html>
 """
 
-from bs4 import BeautifulSoup
 bs = BeautifulSoup(page, 'lxml')
 
 print(bs.title)
@@ -3394,8 +3116,6 @@ print("\n特別號   :", redball[0].text)
 
 print('------------------------------------------------------------')	#60個
 
-from bs4 import BeautifulSoup
-     
 exist_url = []
 g_writecount = 0
      

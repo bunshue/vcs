@@ -182,12 +182,12 @@ print("------------------------------------------------------------")  # 60個
 
 # 10 - scatter
 
-n = 1024    # data size
+n = 1024  # data size
 X = np.random.normal(0, 1, n)
 Y = np.random.normal(0, 1, n)
-T = np.arctan2(Y, X)    # for color later on
+T = np.arctan2(Y, X)  # for color later on
 
-plt.scatter(X, Y, s=75, c=T, alpha=.5)
+plt.scatter(X, Y, s=75, c=T, alpha=0.5)
 
 plt.xlim(-1.5, 1.5)
 plt.xticks(())  # ignore xticks
@@ -206,20 +206,20 @@ X = np.arange(n)
 Y1 = (1 - X / float(n)) * np.random.uniform(0.5, 1.0, n)
 Y2 = (1 - X / float(n)) * np.random.uniform(0.5, 1.0, n)
 
-plt.bar(X, +Y1, facecolor='#9999ff', edgecolor='white')
-plt.bar(X, -Y2, facecolor='#ff9999', edgecolor='white')
+plt.bar(X, +Y1, facecolor="#9999ff", edgecolor="white")
+plt.bar(X, -Y2, facecolor="#ff9999", edgecolor="white")
 
 for x, y in zip(X, Y1):
     # ha: horizontal alignment
     # va: vertical alignment
-    plt.text(x + 0.4, y + 0.05, '%.2f' % y, ha='center', va='bottom')
+    plt.text(x + 0.4, y + 0.05, "%.2f" % y, ha="center", va="bottom")
 
 for x, y in zip(X, Y2):
     # ha: horizontal alignment
     # va: vertical alignment
-    plt.text(x + 0.4, -y - 0.05, '%.2f' % y, ha='center', va='top')
+    plt.text(x + 0.4, -y - 0.05, "%.2f" % y, ha="center", va="top")
 
-plt.xlim(-.5, n)
+plt.xlim(-0.5, n)
 plt.xticks(())
 plt.ylim(-1.25, 1.25)
 plt.yticks(())
@@ -228,23 +228,25 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#12_contours.py
+# 12_contours.py
 
-def f(x,y):
+
+def f(x, y):
     # the height function
-    return (1 - x / 2 + x**5 + y**3) * np.exp(-x**2 -y**2)
+    return (1 - x / 2 + x**5 + y**3) * np.exp(-(x**2) - y**2)
+
 
 n = 256
 x = np.linspace(-3, 3, n)
 y = np.linspace(-3, 3, n)
-X,Y = np.meshgrid(x, y)
+X, Y = np.meshgrid(x, y)
 
 # use plt.contourf to filling contours
 # X, Y and value for (X,Y) point
-plt.contourf(X, Y, f(X, Y), 8, alpha=.75, cmap=plt.cm.hot)
+plt.contourf(X, Y, f(X, Y), 8, alpha=0.75, cmap=plt.cm.hot)
 
 # use plt.contour to add contour lines
-C = plt.contour(X, Y, f(X, Y), 8, colors='black', linewidth=.5)
+C = plt.contour(X, Y, f(X, Y), 8, colors="black", linewidth=0.5)
 # adding label
 plt.clabel(C, inline=True, fontsize=10)
 
@@ -258,9 +260,19 @@ print("------------------------------------------------------------")  # 60個
 # 13 - image
 
 # image data
-a = np.array([0.313660827978, 0.365348418405, 0.423733120134,
-              0.365348418405, 0.439599930621, 0.525083754405,
-              0.423733120134, 0.525083754405, 0.651536351379]).reshape(3,3)
+a = np.array(
+    [
+        0.313660827978,
+        0.365348418405,
+        0.423733120134,
+        0.365348418405,
+        0.439599930621,
+        0.525083754405,
+        0.423733120134,
+        0.525083754405,
+        0.651536351379,
+    ]
+).reshape(3, 3)
 
 """
 for the value of "interpolation", check this:
@@ -268,8 +280,8 @@ http://matplotlib.org/examples/images_contours_and_fields/interpolation_methods.
 for the value of "origin"= ['upper', 'lower'], check this:
 http://matplotlib.org/examples/pylab_examples/image_origin.html
 """
-plt.imshow(a, interpolation='nearest', cmap='bone', origin='lower')
-plt.colorbar(shrink=.92)
+plt.imshow(a, interpolation="nearest", cmap="bone", origin="lower")
+plt.colorbar(shrink=0.92)
 
 plt.xticks(())
 plt.yticks(())
@@ -288,11 +300,11 @@ ax = Axes3D(fig)
 X = np.arange(-4, 4, 0.25)
 Y = np.arange(-4, 4, 0.25)
 X, Y = np.meshgrid(X, Y)
-R = np.sqrt(X ** 2 + Y ** 2)
+R = np.sqrt(X**2 + Y**2)
 # height value
 Z = np.sin(R)
 
-ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.get_cmap('rainbow'))
+ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.get_cmap("rainbow"))
 """
 ============= ================================================
         Argument      Description
@@ -311,7 +323,7 @@ ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=plt.get_cmap('rainbow'))
 """
 
 # I think this is different from plt12_contours
-ax.contourf(X, Y, Z, zdir='z', offset=-2, cmap=plt.get_cmap('rainbow'))
+ax.contourf(X, Y, Z, zdir="z", offset=-2, cmap=plt.get_cmap("rainbow"))
 """
 ==========  ================================================
         Argument    Description
@@ -385,13 +397,13 @@ import matplotlib.gridspec as gridspec
 plt.figure()
 ax1 = plt.subplot2grid((3, 3), (0, 0), colspan=3)  # stands for axes
 ax1.plot([1, 2], [1, 2])
-ax1.set_title('ax1_title')
+ax1.set_title("ax1_title")
 ax2 = plt.subplot2grid((3, 3), (1, 0), colspan=2)
 ax3 = plt.subplot2grid((3, 3), (1, 2), rowspan=2)
 ax4 = plt.subplot2grid((3, 3), (2, 0))
 ax4.scatter([1, 2], [2, 2])
-ax4.set_xlabel('ax4_x')
-ax4.set_ylabel('ax4_y')
+ax4.set_xlabel("ax4_x")
+ax4.set_ylabel("ax4_y")
 ax5 = plt.subplot2grid((3, 3), (2, 1))
 
 # method 2: gridspec
@@ -408,7 +420,7 @@ ax10 = plt.subplot(gs[-1, -2])
 # method 3: easy to define structure
 ####################################
 f, ((ax11, ax12), (ax13, ax14)) = plt.subplots(2, 2, sharex=True, sharey=True)
-ax11.scatter([1,2], [1,2])
+ax11.scatter([1, 2], [1, 2])
 
 plt.tight_layout()
 plt.show()
@@ -424,25 +436,25 @@ y = [1, 3, 4, 2, 5, 8, 6]
 # below are all percentage
 left, bottom, width, height = 0.1, 0.1, 0.8, 0.8
 ax1 = fig.add_axes([left, bottom, width, height])  # main axes
-ax1.plot(x, y, 'r')
-ax1.set_xlabel('x')
-ax1.set_ylabel('y')
-ax1.set_title('title')
+ax1.plot(x, y, "r")
+ax1.set_xlabel("x")
+ax1.set_ylabel("y")
+ax1.set_title("title")
 
 ax2 = fig.add_axes([0.2, 0.6, 0.25, 0.25])  # inside axes
-ax2.plot(y, x, 'b')
-ax2.set_xlabel('x')
-ax2.set_ylabel('y')
-ax2.set_title('title inside 1')
+ax2.plot(y, x, "b")
+ax2.set_xlabel("x")
+ax2.set_ylabel("y")
+ax2.set_title("title inside 1")
 
 
 # different method to add axes
 ####################################
 plt.axes([0.6, 0.2, 0.25, 0.25])
-plt.plot(y[::-1], x, 'g')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.title('title inside 2')
+plt.plot(y[::-1], x, "g")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.title("title inside 2")
 
 plt.show()
 
@@ -452,17 +464,17 @@ print("------------------------------------------------------------")  # 60個
 
 x = np.arange(0, 10, 0.1)
 y1 = 0.05 * x**2
-y2 = -1 *y1
+y2 = -1 * y1
 
 fig, ax1 = plt.subplots()
 
-ax2 = ax1.twinx()    # mirror the ax1
-ax1.plot(x, y1, 'g-')
-ax2.plot(x, y2, 'b-')
+ax2 = ax1.twinx()  # mirror the ax1
+ax1.plot(x, y1, "g-")
+ax2.plot(x, y2, "b-")
 
-ax1.set_xlabel('X data')
-ax1.set_ylabel('Y1 data', color='g')
-ax2.set_ylabel('Y2 data', color='b')
+ax1.set_xlabel("X data")
+ax1.set_ylabel("Y1 data", color="g")
+ax2.set_ylabel("Y2 data", color="b")
 
 plt.show()
 
@@ -475,25 +487,27 @@ from matplotlib import animation
 
 fig, ax = plt.subplots()
 
-x = np.arange(0, 2*np.pi, 0.01)
-line, = ax.plot(x, np.sin(x))
+x = np.arange(0, 2 * np.pi, 0.01)
+(line,) = ax.plot(x, np.sin(x))
 
 
 def animate(i):
-    line.set_ydata(np.sin(x + i/10.0))  # update the data
-    return line,
+    line.set_ydata(np.sin(x + i / 10.0))  # update the data
+    return (line,)
 
 
 # Init only required for blitting to give a clean slate.
 def init():
     line.set_ydata(np.sin(x))
-    return line,
+    return (line,)
+
 
 # call the animator.  blit=True means only re-draw the parts that have changed.
 # blit=True dose not work on Mac, set blit=False
 # interval= update frequency
-ani = animation.FuncAnimation(fig=fig, func=animate, frames=100, init_func=init,
-                              interval=20, blit=False)
+ani = animation.FuncAnimation(
+    fig=fig, func=animate, frames=100, init_func=init, interval=20, blit=False
+)
 
 # save the animation as an mp4.  This requires ffmpeg or mencoder to be
 # installed.  The extra_args ensure that the x264 codec is used, so that
@@ -505,5 +519,3 @@ ani = animation.FuncAnimation(fig=fig, func=animate, frames=100, init_func=init,
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
-

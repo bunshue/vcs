@@ -3,7 +3,7 @@ import cv2
 ESC = 27
 SPACE = 32
 
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
 print("------------------------------------------------------------")  # 60個
 
@@ -24,31 +24,31 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Micros
 plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
 plt.rcParams["font.size"] = 12  # 設定字型大小
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-print('播放影片')
+print("播放影片")
 
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 
 # 以迴圈從影片檔案讀取影格，並顯示出來
-while(cap.isOpened()):
+while cap.isOpened():
     ret, frame = cap.read()
     if ret == True:
-        #frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2)))    #調整畫面大小
-        #frame = cv2.Canny(frame,100,200)  #加上Canny處理
-        cv2.imshow('Video Player', frame)
+        # frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2)))    #調整畫面大小
+        # frame = cv2.Canny(frame,100,200)  #加上Canny處理
+        cv2.imshow("Video Player", frame)
     else:
         break
 
     k = cv2.waitKey(1)
-    if k == 27:     #ESC
+    if k == 27:  # ESC
         break
-    elif k == ord('q'): # 若按下 q 鍵則離開迴圈
+    elif k == ord("q"):  # 若按下 q 鍵則離開迴圈
         break
-    elif k == ord('s'): # 若按下 s 鍵則存圖
-        cv2.imwrite('video_snapshot.jpg', frame)
+    elif k == ord("s"):  # 若按下 s 鍵則存圖
+        cv2.imwrite("video_snapshot.jpg", frame)
 
 cap.release()
 cv2.destroyAllWindows()
@@ -57,9 +57,9 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-#播放视频，并把每帧保存成图片：
+# 播放视频，并把每帧保存成图片：
 
-video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+video_filename = "C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4"
 
 cap = cv2.VideoCapture(video_filename)
 
@@ -68,15 +68,15 @@ fps = cap.get(cv2.CAP_PROP_FPS)
 success, frame = cap.read()
 i = 0
 while success:
-    #cv2.imshow("video",frame)
-    #cv2.waitKey(int(1000/fps))#若要正常顯示，則需要delay
+    # cv2.imshow("video",frame)
+    # cv2.waitKey(int(1000/fps))#若要正常顯示，則需要delay
     i = i + 1
-    cv2.imwrite("./tmp_video_clip_%04d.jpg" % i,frame)
+    cv2.imwrite("./tmp_video_clip_%04d.jpg" % i, frame)
     success, frame = cap.read()
-    #if i > 10:
-      #break
+    # if i > 10:
+    # break
 
-print('共有' + str(i) + '張圖片')
+print("共有" + str(i) + "張圖片")
 
 cap.release()
 cv2.destroyAllWindows()
@@ -93,7 +93,4 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
-

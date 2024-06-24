@@ -323,15 +323,14 @@ FORMAT = pyaudio.paInt16  # 采样位数
 CHANNELS = 1  # 单声道
 RATE = 44100  # 采样频率
 
+
 def record_audio(wave_out_path, record_second):
-    """ 录音功能 """
+    """录音功能"""
     p = pyaudio.PyAudio()  # 实例化对象
-    stream = p.open(format=FORMAT,
-                    channels=CHANNELS,
-                    rate=RATE,
-                    input=True,
-                    frames_per_buffer=CHUNK)  # 打开流，传入响应参数
-    wf = wave.open(wave_out_path, 'wb')  # 打开 wav 文件。
+    stream = p.open(
+        format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK
+    )  # 打开流，传入响应参数
+    wf = wave.open(wave_out_path, "wb")  # 打开 wav 文件。
     wf.setnchannels(CHANNELS)  # 声道设置
     wf.setsampwidth(p.get_sample_size(FORMAT))  # 采样位数设置
     wf.setframerate(RATE)  # 采样频率设置
@@ -343,6 +342,7 @@ def record_audio(wave_out_path, record_second):
     stream.close()
     p.terminate()
     wf.close()
+
 
 """
 wave_out_path = "ccccc10.wav"
@@ -420,6 +420,7 @@ stream = p.open(
 frames = []  # 建立聲音串列
 run = True  # 設定開始錄音
 
+
 # 定義錄音的函式
 def record():
     global run, stream, p, frames, wf
@@ -437,7 +438,7 @@ def record():
     wf.setframerate(fs)  # 設定取樣頻率
     wf.writeframes(b"".join(frames))  # 存檔
     wf.close()
-    #visualize(filename)  # 執行畫圖函式
+    # visualize(filename)  # 執行畫圖函式
 
 
 # 定義鍵盤按鍵函式
@@ -453,12 +454,10 @@ e1 = executor.submit(record)
 executor.shutdown()
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

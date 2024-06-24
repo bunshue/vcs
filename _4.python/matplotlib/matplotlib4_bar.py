@@ -904,172 +904,181 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#bar累計
+# bar累計
 
-areas=['北部','中部','南部','東部']
-data1=[800000,580000,640000,420000]
-data2=[750000,460000,680000,340000]
-plt.bar(areas,data1,label='上半年')
-plt.bar(areas,data2,label='下半年',bottom=data1)
-
-plt.legend()
-plt.show()
-
-
-print("------------------------------------------------------------")  # 60個
-
-#bar並列
-
-areas=['北部','中部','南部','東部']
-width=0.4
-x1=[x-width/2 for x in range(len(areas))]
-x2=[x+width/2 for x in range(len(areas))]
-data1=[800000,580000,640000,420000]
-data2=[750000,460000,680000,340000]
-plt.bar(x1,data1,width,label='上半年')
-plt.bar(x2,data2,width,label='下半年')
-plt.xticks(range(len(areas)),labels=areas)
+areas = ["北部", "中部", "南部", "東部"]
+data1 = [800000, 580000, 640000, 420000]
+data2 = [750000, 460000, 680000, 340000]
+plt.bar(areas, data1, label="上半年")
+plt.bar(areas, data2, label="下半年", bottom=data1)
 
 plt.legend()
 plt.show()
 
+
 print("------------------------------------------------------------")  # 60個
 
-def addlabels(x,y):
+# bar並列
+
+areas = ["北部", "中部", "南部", "東部"]
+width = 0.4
+x1 = [x - width / 2 for x in range(len(areas))]
+x2 = [x + width / 2 for x in range(len(areas))]
+data1 = [800000, 580000, 640000, 420000]
+data2 = [750000, 460000, 680000, 340000]
+plt.bar(x1, data1, width, label="上半年")
+plt.bar(x2, data2, width, label="下半年")
+plt.xticks(range(len(areas)), labels=areas)
+
+plt.legend()
+plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+
+def addlabels(x, y):
     for i in range(len(x)):
-        plt.text(i,y[i],y[i])
-#預設字體大小
-plt.rc('font', size=15)
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#軸標籤字體大小
-plt.rc('axes', labelsize=20)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=20)
-students = ['約翰', '瑪莉', '麥可', '大衛']
+        plt.text(i, y[i], y[i])
+
+
+# 預設字體大小
+plt.rc("font", size=15)
+# 軸標題字體大小
+plt.rc("axes", titlesize=30)
+# 軸標籤字體大小
+plt.rc("axes", labelsize=20)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=20)
+# Y軸刻度字體大小
+plt.rc("ytick", labelsize=20)
+students = ["約翰", "瑪莉", "麥可", "大衛"]
 math_scores = [78, 67, 90, 81]
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
+# 預設大小為6.4inches*4.8inches, 80dpi
+# 指定 寬6.4inches, 高4.8inches, 160dpi
 fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_ylim(0,100)
-ax.bar(students, math_scores, color=['red', 'green', 'blue', 'yellow'])
+ax.set_ylim(0, 100)
+ax.bar(students, math_scores, color=["red", "green", "blue", "yellow"])
 addlabels(students, math_scores)
-ax.set(xlabel='學生',ylabel='數學成績')
-ax.set_title('期末考')
+ax.set(xlabel="學生", ylabel="數學成績")
+ax.set_title("期末考")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-def addlabels(x,y):
-    for i in range(len(x)):
-        plt.text(y[i],i,y[i])
 
-#預設字體大小
-plt.rc('font', size=15)
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#軸標籤字體大小
-plt.rc('axes', labelsize=20)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=20)
-students = ['約翰', '瑪莉', '麥可', '大衛']
+def addlabels(x, y):
+    for i in range(len(x)):
+        plt.text(y[i], i, y[i])
+
+
+# 預設字體大小
+plt.rc("font", size=15)
+# 軸標題字體大小
+plt.rc("axes", titlesize=30)
+# 軸標籤字體大小
+plt.rc("axes", labelsize=20)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=20)
+# Y軸刻度字體大小
+plt.rc("ytick", labelsize=20)
+students = ["約翰", "瑪莉", "麥可", "大衛"]
 math_scores = [78, 67, 90, 81]
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
+# 預設大小為6.4inches*4.8inches, 80dpi
+# 指定 寬6.4inches, 高4.8inches, 160dpi
 fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_xlim(0,100)
-ax.barh(students, math_scores, color=['red', 'green', 'blue', 'yellow'])
+ax.set_xlim(0, 100)
+ax.barh(students, math_scores, color=["red", "green", "blue", "yellow"])
 addlabels(students, math_scores)
-ax.set(ylabel='學生',xlabel='數學成績')
-ax.set_title('期末考')
+ax.set(ylabel="學生", xlabel="數學成績")
+ax.set_title("期末考")
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-def addlabels(x,y):
+
+def addlabels(x, y):
     for i in range(len(x)):
-        plt.text(i,y[i],y[i])
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#軸標籤字體大小
-plt.rc('axes', labelsize=20)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=20)
-students = ['約翰', '瑪莉', '麥可', '大衛']
+        plt.text(i, y[i], y[i])
+
+
+# 軸標題字體大小
+plt.rc("axes", titlesize=30)
+# 軸標籤字體大小
+plt.rc("axes", labelsize=20)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=20)
+# Y軸刻度字體大小
+plt.rc("ytick", labelsize=20)
+students = ["約翰", "瑪莉", "麥可", "大衛"]
 chin_scores = [78, 67, 90, 81]
 math_scores = [85, 72, 94, 70]
-#產生總分list，總分相加
-all_scores = list(np.array(chin_scores)+np.array(math_scores))
-#柱寬度
-width = 0.35 
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
+# 產生總分list，總分相加
+all_scores = list(np.array(chin_scores) + np.array(math_scores))
+# 柱寬度
+width = 0.35
+# 預設大小為6.4inches*4.8inches, 80dpi
+# 指定 寬6.4inches, 高4.8inches, 160dpi
 fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_ylim(0,200)
-#柱狀圖下層
-ax.bar(students, chin_scores, width, label='國文')
-#柱狀圖上層
-ax.bar(students, math_scores, width, bottom=chin_scores, label='數學')
-addlabels(students,chin_scores)
-addlabels(students,all_scores)
-ax.set_xlabel('學生')
-ax.set_ylabel('總分')
-ax.set_title('分數統計圖')
+ax.set_ylim(0, 200)
+# 柱狀圖下層
+ax.bar(students, chin_scores, width, label="國文")
+# 柱狀圖上層
+ax.bar(students, math_scores, width, bottom=chin_scores, label="數學")
+addlabels(students, chin_scores)
+addlabels(students, all_scores)
+ax.set_xlabel("學生")
+ax.set_ylabel("總分")
+ax.set_title("分數統計圖")
 ax.legend()
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-def addlabels(x,y):
-    for i in range(len(x)):
-        plt.text(i,y[i],y[i])
 
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#軸標籤字體大小
-plt.rc('axes', labelsize=20)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=20)
-students = ['約翰', '瑪莉', '麥可', '大衛']
+def addlabels(x, y):
+    for i in range(len(x)):
+        plt.text(i, y[i], y[i])
+
+
+# 軸標題字體大小
+plt.rc("axes", titlesize=30)
+# 軸標籤字體大小
+plt.rc("axes", labelsize=20)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=20)
+# Y軸刻度字體大小
+plt.rc("ytick", labelsize=20)
+students = ["約翰", "瑪莉", "麥可", "大衛"]
 chin_scores = [78, 67, 90, 81]
 math_scores = [85, 72, 94, 70]
-#產生總分list，總分相加
-all_scores = list(np.array(chin_scores)+np.array(math_scores))
-#柱寬度
-width = 0.35 
-#預設大小為6.4inches*4.8inches, 80dpi
-#指定 寬6.4inches, 高4.8inches, 160dpi
+# 產生總分list，總分相加
+all_scores = list(np.array(chin_scores) + np.array(math_scores))
+# 柱寬度
+width = 0.35
+# 預設大小為6.4inches*4.8inches, 80dpi
+# 指定 寬6.4inches, 高4.8inches, 160dpi
 fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
-ax.set_ylim(0,200)
-#柱狀圖下層
-ax.bar(students, chin_scores, width, label='國文')
-#柱狀圖上層
-ax.bar(students, math_scores, width, bottom=chin_scores, label='數學')
-addlabels(students,chin_scores)
-addlabels(students,all_scores)
-#縮小次圖比例為原來的80%
+ax.set_ylim(0, 200)
+# 柱狀圖下層
+ax.bar(students, chin_scores, width, label="國文")
+# 柱狀圖上層
+ax.bar(students, math_scores, width, bottom=chin_scores, label="數學")
+addlabels(students, chin_scores)
+addlabels(students, all_scores)
+# 縮小次圖比例為原來的80%
 box = ax.get_position()
 ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
-#將圖例說明對齊右邊中間
-ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+# 將圖例說明對齊右邊中間
+ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
@@ -1079,13 +1088,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

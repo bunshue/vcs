@@ -462,6 +462,7 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+
 def tickline():
     plt.xlim(0, 10), plt.ylim(-1, 1), plt.yticks([])
     ax = plt.gca()
@@ -578,6 +579,7 @@ plt_contour()
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+
 
 def plt_grid():
     ax = plt.subplot(1, 2, 1)
@@ -750,57 +752,63 @@ plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#畫出y=a^x的函數圖形 0<=x<=10
-x = np.linspace(0,10,50)
+# 畫出y=a^x的函數圖形 0<=x<=10
+x = np.linspace(0, 10, 50)
 y1 = 2**x
 y2 = 2.5**x
 y3 = 3**x
 y4 = 3.5**x
 
-#指定 寬6.4inches, 高4.8inches, 160dpi
-plt.figure(figsize=(6.4, 4.8),dpi=160)
-#加上圖表標題, 字體大小24, 靠右對齊
-plt.title("y=a^x", fontsize=24, loc='right')
-#加上X軸標題(靠右對齊x=1.0為X軸最右)
-#horizontalalignment,verticalalignment只是調整與x=1.0之相對位置) 
-plt.xlabel("x", fontsize=20, horizontalalignment='right', 
-           verticalalignment='top', x=1.0)
-#加上X軸刻度範圍0~10(如果大小顛倒，圖形會左右鏡射)
-plt.xlim(0,10)
-#加上X軸刻度標示 0,1,...,10(只有整數),字體大小16
-plt.xticks(list(range(0,11,1)), fontsize=16)
-#加上Y軸標題(靠上對齊y=1.0為Y軸最上)
-#horizontalalignment,verticalalignment只是調整與y=1.0之相對位置) 
-plt.ylabel("y", fontsize=20, horizontalalignment='right', 
-           verticalalignment='bottom', y=1.0)
-#加上Y軸刻度範圍0~1200(如果大小顛倒，圖形會上下鏡射)
-plt.ylim(0,1200)
-#加上Y軸刻度標示 0,100,200,...,1200(只有100的倍數),字體大小16
-plt.yticks(list(range(0,1201,100)), fontsize=16)
-#設定曲線顏色、線條類型、寬度
-#設定顏色1:blue、green、red、cyan、magenta、yellow、black、white
-#設定顏色2:(R, G, B), 0<=R,G,B<=1
-#設定顏色3:#000000~#FFFFFF, RGB各二個十六進位 00~FF
-#設定線條型態:-、--、-.、:
-#設定線條寬度:1~20
-#設定點的形狀:.,ov^<>1234sp*hH+xDd|_
-#設定點的形狀:1~10
-plt.plot(x,y1,color='cyan', marker="2", markersize=10)
-plt.plot(x,y2,color=(0,0,1), linestyle=':', linewidth=2, marker="x", markersize=10)
-plt.plot(x,y3,color='#FF0000', linestyle='-.', linewidth=3)
-#設定散佈圖顏色、形狀、大小
-#設定散佈圖點的形狀:.,ov^<>1234sp*hH+xDd|_
-#設定散佈圖點的大小
-plt.scatter(x,y4,color='black', marker='x', s=10)
-#加上格線
+# 指定 寬6.4inches, 高4.8inches, 160dpi
+plt.figure(figsize=(6.4, 4.8), dpi=160)
+# 加上圖表標題, 字體大小24, 靠右對齊
+plt.title("y=a^x", fontsize=24, loc="right")
+# 加上X軸標題(靠右對齊x=1.0為X軸最右)
+# horizontalalignment,verticalalignment只是調整與x=1.0之相對位置)
+plt.xlabel(
+    "x", fontsize=20, horizontalalignment="right", verticalalignment="top", x=1.0
+)
+# 加上X軸刻度範圍0~10(如果大小顛倒，圖形會左右鏡射)
+plt.xlim(0, 10)
+# 加上X軸刻度標示 0,1,...,10(只有整數),字體大小16
+plt.xticks(list(range(0, 11, 1)), fontsize=16)
+# 加上Y軸標題(靠上對齊y=1.0為Y軸最上)
+# horizontalalignment,verticalalignment只是調整與y=1.0之相對位置)
+plt.ylabel(
+    "y", fontsize=20, horizontalalignment="right", verticalalignment="bottom", y=1.0
+)
+# 加上Y軸刻度範圍0~1200(如果大小顛倒，圖形會上下鏡射)
+plt.ylim(0, 1200)
+# 加上Y軸刻度標示 0,100,200,...,1200(只有100的倍數),字體大小16
+plt.yticks(list(range(0, 1201, 100)), fontsize=16)
+# 設定曲線顏色、線條類型、寬度
+# 設定顏色1:blue、green、red、cyan、magenta、yellow、black、white
+# 設定顏色2:(R, G, B), 0<=R,G,B<=1
+# 設定顏色3:#000000~#FFFFFF, RGB各二個十六進位 00~FF
+# 設定線條型態:-、--、-.、:
+# 設定線條寬度:1~20
+# 設定點的形狀:.,ov^<>1234sp*hH+xDd|_
+# 設定點的形狀:1~10
+plt.plot(x, y1, color="cyan", marker="2", markersize=10)
+plt.plot(x, y2, color=(0, 0, 1), linestyle=":", linewidth=2, marker="x", markersize=10)
+plt.plot(x, y3, color="#FF0000", linestyle="-.", linewidth=3)
+# 設定散佈圖顏色、形狀、大小
+# 設定散佈圖點的形狀:.,ov^<>1234sp*hH+xDd|_
+# 設定散佈圖點的大小
+plt.scatter(x, y4, color="black", marker="x", s=10)
+# 加上格線
 plt.grid()
-#加上註解
-#xy箭頭座標,xytext文字座標, shrink
-plt.annotate('y=2^x', xy=(9.5, 800), xytext=(8, 1100),
-       arrowprops=dict(color='cyan', shrink=0.01),
-       color='cyan')
-#加上圖例說明
-plt.legend(['a=2','a=2.5','a=3','a=3.5'], fontsize=20)
+# 加上註解
+# xy箭頭座標,xytext文字座標, shrink
+plt.annotate(
+    "y=2^x",
+    xy=(9.5, 800),
+    xytext=(8, 1100),
+    arrowprops=dict(color="cyan", shrink=0.01),
+    color="cyan",
+)
+# 加上圖例說明
+plt.legend(["a=2", "a=2.5", "a=3", "a=3.5"], fontsize=20)
 
 plt.show()
 
@@ -809,70 +817,69 @@ print("------------------------------------------------------------")  # 60個
 #!wget -O taipei_sans_tc_beta.ttf https://drive.google.com/uc?id=1eGAsTN1HBpJAkeVM57_C7ccp7hbgSz3_&export=download
 #!mv taipei_sans_tc_beta.ttf /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf
 import matplotlib
-from matplotlib.font_manager import fontManager 
-#新增字體
-#fontManager.addfont('/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf/taipei_sans_tc_beta.ttf')
-#將 font-family 設為 Taipei Sans TC Beta
-#設定完後，之後的圖表都可以顯示中文了
+from matplotlib.font_manager import fontManager
+
+# 新增字體
+# fontManager.addfont('/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/fonts/ttf/taipei_sans_tc_beta.ttf')
+# 將 font-family 設為 Taipei Sans TC Beta
+# 設定完後，之後的圖表都可以顯示中文了
 SMALL_SIZE = 10
 MEDIUM_SIZE = 18
 BIGGER_SIZE = 25
-#設定字型
-#matplotlib.rc('font', family='Taipei Sans TC Beta')
-#matplotlib.rc('font', size=SMALL_SIZE)
-#預設字體大小
-plt.rc('font', size=SMALL_SIZE)
-#軸標題字體大小
-plt.rc('axes', titlesize=BIGGER_SIZE)
-#軸標籤字體大小
-plt.rc('axes', labelsize=MEDIUM_SIZE)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=SMALL_SIZE)
-#Y軸刻度字體大小
-plt.rc('ytick', labelsize=SMALL_SIZE)
-#圖例字體大小
-plt.rc('legend', fontsize=SMALL_SIZE)
-#圖形標題字體大小
-plt.rc('figure', titlesize=BIGGER_SIZE)
+# 設定字型
+# matplotlib.rc('font', family='Taipei Sans TC Beta')
+# matplotlib.rc('font', size=SMALL_SIZE)
+# 預設字體大小
+plt.rc("font", size=SMALL_SIZE)
+# 軸標題字體大小
+plt.rc("axes", titlesize=BIGGER_SIZE)
+# 軸標籤字體大小
+plt.rc("axes", labelsize=MEDIUM_SIZE)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=SMALL_SIZE)
+# Y軸刻度字體大小
+plt.rc("ytick", labelsize=SMALL_SIZE)
+# 圖例字體大小
+plt.rc("legend", fontsize=SMALL_SIZE)
+# 圖形標題字體大小
+plt.rc("figure", titlesize=BIGGER_SIZE)
 
 print("------------------------------------------------------------")  # 60個
 
-#準備描點x,y資料
+# 準備描點x,y資料
 x = np.arange(-10, 10, 0.1)
 y1 = x**3
 y2 = x**2
-#指定 寬6.4inches, 高4.8inches, 160dpi
-#將圖分成一個子圖
-fig, ax = plt.subplots(figsize=(6.4, 4.8),dpi=160)
-#畫出y=x**3曲線
+# 指定 寬6.4inches, 高4.8inches, 160dpi
+# 將圖分成一個子圖
+fig, ax = plt.subplots(figsize=(6.4, 4.8), dpi=160)
+# 畫出y=x**3曲線
 ax.plot(x, y1)
-#畫出y=x**2曲線
+# 畫出y=x**2曲線
 ax.plot(x, y2)
-#加上X軸刻度範圍-10~10(如果大小顛倒，圖形會左右鏡射)
-ax.set_xlim(-10,10)
-#加上Y軸刻度範圍-1000~1000(如果大小顛倒，圖形會左右鏡射)
-ax.set_ylim(-1000,1000)
-#加上X軸刻度標示 -10,-9,-8,...,10(只有整數),字體大小為預設
+# 加上X軸刻度範圍-10~10(如果大小顛倒，圖形會左右鏡射)
+ax.set_xlim(-10, 10)
+# 加上Y軸刻度範圍-1000~1000(如果大小顛倒，圖形會左右鏡射)
+ax.set_ylim(-1000, 1000)
+# 加上X軸刻度標示 -10,-9,-8,...,10(只有整數),字體大小為預設
 ax.set_xticks(np.arange(-10, 11, 1))
-#加上Y軸刻度標示 -1000,-900,...,1000(只有100的倍數),字體大小為預設
+# 加上Y軸刻度標示 -1000,-900,...,1000(只有100的倍數),字體大小為預設
 ax.set_yticks(np.arange(-1000, 1000, 100))
-#加上X軸標題(靠右對齊x=1.0為X軸最右)
-ax.set_xlabel('X軸', horizontalalignment='right', 
-           verticalalignment='top',x=1.0)
-#加上Y軸標題(靠上對齊y=1.0為Y軸最上)
-ax.set_ylabel('Y軸', horizontalalignment='right', 
-           verticalalignment='bottom',y=1.0)
-#ax.set(xlabel='X軸', ylabel='Y軸')
-#加上格線
+# 加上X軸標題(靠右對齊x=1.0為X軸最右)
+ax.set_xlabel("X軸", horizontalalignment="right", verticalalignment="top", x=1.0)
+# 加上Y軸標題(靠上對齊y=1.0為Y軸最上)
+ax.set_ylabel("Y軸", horizontalalignment="right", verticalalignment="bottom", y=1.0)
+# ax.set(xlabel='X軸', ylabel='Y軸')
+# 加上格線
 ax.grid()
-#子圖標題
-ax.set_title('子圖標題',loc="right")
-#figure標題
-fig.suptitle('y=x**3&y=x**2')
-#儲存檔案名為test.png
-#fig.savefig("tmp_test.png")
-#圖例說明
-ax.legend(['y=x**3','y=x**2'])
+# 子圖標題
+ax.set_title("子圖標題", loc="right")
+# figure標題
+fig.suptitle("y=x**3&y=x**2")
+# 儲存檔案名為test.png
+# fig.savefig("tmp_test.png")
+# 圖例說明
+ax.legend(["y=x**3", "y=x**2"])
 
 plt.show()
 
@@ -908,6 +915,3 @@ plt.figure(figsize=(10, 8),dpi=160)
 
 
 """
-
-
-

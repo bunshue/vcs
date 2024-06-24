@@ -180,8 +180,8 @@ from moviepy.editor import VideoFileClip
 from moviepy.editor import VideoFileClip, vfx
 from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
 
-if __name__=='__main__':
-	#用一位老同学写的短诗的中英文作为TextClip显示内容，由于内容过长需要滚动显示
+if __name__ == "__main__":
+    # 用一位老同学写的短诗的中英文作为TextClip显示内容，由于内容过长需要滚动显示
     text = """致敬奋战在一线的巾帼女英雄  
 
     你也是孩子的妈妈，
@@ -231,19 +231,31 @@ if __name__=='__main__':
     Wuhan people thank all angels in white!
 
     """
-    font_filename = 'C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf'
-    
-    clip = VideoFileClip("kkkk.mp4", audio=False).crop(0, 300, 540, 840).subclip(0, 0.05)
-    
-    txtclip = TextClip(text, fontsize=18, color='blue', bg_color='white', transparent=True).set_duration(30).resize((clip.size[0], clip.size[1] * 2)).set_fps(clip.fps).set_start(clip.end)
+    font_filename = "C:/_git/vcs/_1.data/______test_files5/taipei_sans_tc_beta.ttf"
+
+    clip = (
+        VideoFileClip("kkkk.mp4", audio=False).crop(0, 300, 540, 840).subclip(0, 0.05)
+    )
+
+    txtclip = (
+        TextClip(text, fontsize=18, color="blue", bg_color="white", transparent=True)
+        .set_duration(30)
+        .resize((clip.size[0], clip.size[1] * 2))
+        .set_fps(clip.fps)
+        .set_start(clip.end)
+    )
 
     w = None
     h = clip.size[1]
     x_speed = x_start = y_start = 0
     y_speed = 20
-    txtclip = txtclip.fx(vfx.scroll, w, h, x_speed, y_speed, x_start, y_start)  # .set_start(clip.end)
+    txtclip = txtclip.fx(
+        vfx.scroll, w, h, x_speed, y_speed, x_start, y_start
+    )  # .set_start(clip.end)
 
-    newclip = CompositeVideoClip([txtclip, clip], bg_color=(255, 255, 255), ismask=False)
+    newclip = CompositeVideoClip(
+        [txtclip, clip], bg_color=(255, 255, 255), ismask=False
+    )
     newclip.write_videofile(r"WinBasedWorkHard_scroll.mp4", threads=8)
 
 print("------------------------------------------------------------")  # 60個
@@ -254,10 +266,10 @@ from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip
 video_clip = VideoFileClip("data/short南極.mp4")
 
 # 創建文本剪輯，指定字體
-txt_clip = TextClip("您的文本", fontsize=70, color='white', font='Arial')
+txt_clip = TextClip("您的文本", fontsize=70, color="white", font="Arial")
 
 # 設定文本位置和持續時間
-txt_clip = txt_clip.set_position('center').set_duration(2)
+txt_clip = txt_clip.set_position("center").set_duration(2)
 
 # 將文本合成到影片上
 final_clip = CompositeVideoClip([video_clip, txt_clip])
@@ -269,5 +281,3 @@ final_clip.write_videofile("tmp_video_11.mp4", codec="libx264", audio_codec="aac
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
-
-

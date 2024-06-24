@@ -20,7 +20,7 @@ for i in range(7):
 
 print("------------------------------------------------------------")  # 60個
 
-wav_filename = 'C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav'
+wav_filename = "C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
 
 winsound.PlaySound(wav_filename, winsound.SND_FILENAME)
 
@@ -77,25 +77,26 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
+
 def fnSound(s):
-    winsound.PlaySound('data/'+s+'.wav', winsound.SND_FILENAME)
+    winsound.PlaySound("data/" + s + ".wav", winsound.SND_FILENAME)
+
 
 def speakNumber(n):
     if n > 99:
         return
     n = str(n)
-    if len(n) == 1:   #若字串長度為1表個位數
-        fnSound(n)  #呼叫fnSound播放該數的音檔
-    else:           #兩位數時
-        if n[0] !='1':      #若第一個字不是1
-            fnSound(n[0])   #呼叫fnSound播放十位數的音檔
-        fnSound('10')       #呼叫fnSound播放10.wav
-        if n[1] !='0':      #若第一個字不是0
-            fnSound(n[1])   #呼叫fnSound播放個位數的音檔        
+    if len(n) == 1:  # 若字串長度為1表個位數
+        fnSound(n)  # 呼叫fnSound播放該數的音檔
+    else:  # 兩位數時
+        if n[0] != "1":  # 若第一個字不是1
+            fnSound(n[0])  # 呼叫fnSound播放十位數的音檔
+        fnSound("10")  # 呼叫fnSound播放10.wav
+        if n[1] != "0":  # 若第一個字不是0
+            fnSound(n[1])  # 呼叫fnSound播放個位數的音檔
 
 
-
-print('把數字念出來')
+print("把數字念出來")
 
 number = 17
 speakNumber(number)
@@ -113,7 +114,6 @@ number = 6
 speakNumber(number)
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

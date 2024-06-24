@@ -11,8 +11,7 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-title = "Entry 測試"
-window.title(title)
+window.title("Entry 測試")
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -112,8 +111,7 @@ def get_numbers2():
     
 window = tk.Tk()
 window.geometry("600x800")
-title = "Entry 測試"
-window.title(title)
+window.title("Entry 測試")
 
 frame = tk.Frame(window, height = 0, width = 0, bg = 'pink', bd = 5) # Hold entries 
 frame.pack()

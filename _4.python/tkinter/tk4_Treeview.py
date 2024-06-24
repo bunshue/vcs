@@ -7,9 +7,9 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
-window.geometry('800x400')
+window.geometry("600x800")
 window.title('Treeview範例')
 
 #設定 Treeview 之標題
@@ -64,8 +64,7 @@ def show_info():
     """
     # Get the text of the item whose Id is stored in `my_iid`.
     text = treeview.item(my_iid, option="text")
-    # Display it within a message box.
-    messagebox.showinfo(title="Item Info", message=text)
+    print(text)
     
     x=treeview.get_children()
     for item in x:
@@ -121,13 +120,10 @@ sys.exit()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-from tkinter import ttk
 from random import randint, choice
 
-# setup
 window = tk.Tk()
-window.geometry('600x400')
+window.geometry("600x800")
 window.title('Scrolling')
 
 # canvas 
@@ -187,11 +183,8 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-from tkinter import ttk
-
-root = tk.Tk()
-root.title("Treeview in Tk")
+window = tk.Tk()
+window.title("Treeview in Tk")
 treeview = ttk.Treeview()
 
 print('加入項目到 Treeview, 插入在最後 1 筆')
@@ -202,16 +195,14 @@ print('加入子項目')
 treeview.insert(subitem, tk.END, text="加入孫項目")
 
 treeview.pack()
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-from tkinter import messagebox, ttk
+from tkinter import ttk
 
-
-root = tk.Tk()
-root.title("Treeview in Tk")
+window = tk.Tk()
+window.title("Treeview in Tk")
 treeview = ttk.Treeview()
 my_iid = "unique_id"
 treeview.insert("", tk.END, text="Item 1", iid=my_iid)
@@ -220,18 +211,14 @@ treeview.pack()
 button = ttk.Button(text="Show info", command=show_info)
 button.pack()
 
-root.mainloop()
-
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter
-from tkinter import ttk  # 導入內部包
-
 li = ['王記','12','男']
-root = tkinter.Tk()
-root.title('測試')
-tree = ttk.Treeview(root,columns=['1','2','3'],show='headings')
+window = tk.Tk()
+window.title('測試')
+tree = ttk.Treeview(window,columns=['1','2','3'],show='headings')
 tree.column('1',width=100,anchor='center')
 tree.column('2',width=100,anchor='center')
 tree.column('3',width=100,anchor='center')
@@ -241,19 +228,17 @@ tree.heading('3',text='性別')
 tree.insert('','end',values=li)
 tree.grid()
 
-root.mainloop()
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 print('標題點擊排序')
 
 import random
-from tkinter import ttk
-from tkinter import *
  
-root = Tk()
+window = tk.Tk()
 columns=("aaa","bbb","ccc")
-treeview=ttk.Treeview(root,height=18,show="headings",columns=columns )#表格 
+treeview=ttk.Treeview(window,height=18,show="headings",columns=columns)  # 表格 
  
 treeview.column('aaa', width=50, anchor='center') 
 treeview.column('bbb', width=100, anchor='center') 
@@ -261,7 +246,8 @@ treeview.column('ccc', width=80, anchor='center')
 treeview.heading('aaa', text='列1')
 treeview.heading('bbb', text='列2')
 treeview.heading('ccc', text='列3')
-treeview.pack(side=LEFT,fill=BOTH)
+treeview.pack(side=tk.LEFT,fill=tk.BOTH)
+
 for i in range(10):
     treeview.insert('',i,values=(str(random.randint(0,9)),str(random.randint(0,9)),str(random.randint(0,9))))
  
@@ -274,7 +260,7 @@ def treeview_sort_column(tv, col, reverse):#Treeview、列名、排列方式
     for index, (val, k) in enumerate(l):#根據排序后索引移動
         tv.move(k, '', index)
         print(k)
-    tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))#重寫標題，使之成為再點倒序的標題
+    tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))  # 重寫標題，使之成為再點倒序的標題
  
 """
 #莫名其妙？？？？寫循環的話只有最后一列管用,看論壇說的好像是python2.7管用
@@ -293,18 +279,16 @@ treeview.heading('c', text='223', command=lambda: treeview_sort_column(tree, 'c'
 for col in columns:#給所有標題加（循環上邊的“手工”）
     treeview.heading(col, text=col, command=lambda _col=col: treeview_sort_column(treeview, _col, False))
  
-root.mainloop()
-
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter
 from tkinter import ttk  # 导入内部包
  
 li = ['王记','12','男']
-root = tkinter.Tk()
-root.title('测试')
-tree = ttk.Treeview(root,columns=['1','2','3'],show='headings')
+window = tk.Tk()
+window.title('测试')
+tree = ttk.Treeview(window,columns=['1','2','3'],show='headings')
 
 tree.column('1',width=100,anchor='center')
 tree.column('2',width=100,anchor='center')
@@ -326,8 +310,7 @@ def treeviewClick(event):#单击
  
 tree.bind('<ButtonRelease-1>', treeviewClick)#绑定单击离开事件===========
  
-root.mainloop()
-'''
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -336,11 +319,9 @@ print('------------------------------------------------------------')	#60個
 print('Treeview')
 print('------------------------------------------------------------')	#60個
 
-from tkinter import *
-
 from tkinter.ttk import *
       
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 # 建立Treeview
@@ -349,9 +330,9 @@ tree = Treeview(window,columns=("cities"))
 tree.heading("#0",text="State")     # 圖標欄位icon column
 tree.heading("#1",text="City")
 # 建立內容
-tree.insert("",index=END,text="伊利諾",values="芝加哥")
-tree.insert("",index=END,text="加州",values="洛杉磯")
-tree.insert("",index=END,text="江蘇",values="南京")
+tree.insert("",index=tk.END,text="伊利諾",values="芝加哥")
+tree.insert("",index=tk.END,text="加州",values="洛杉磯")
+tree.insert("",index=tk.END,text="江蘇",values="南京")
 tree.pack()
 
 window.mainloop()
@@ -360,7 +341,7 @@ print('------------------------------------------------------------')	#60個
 
 from tkinter.ttk import *
       
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 # 建立Treeview
@@ -369,9 +350,9 @@ tree = Treeview(window,columns=("cities"),show="headings")
 tree.heading("#0",text="State")     # 圖標欄位icon column
 tree.heading("#1",text="City")
 # 建立內容
-tree.insert("",index=END,text="伊利諾",values="芝加哥")
-tree.insert("",index=END,text="加州",values="洛杉磯")
-tree.insert("",index=END,text="江蘇",values="南京")
+tree.insert("",index=tk.END,text="伊利諾",values="芝加哥")
+tree.insert("",index=tk.END,text="加州",values="洛杉磯")
+tree.insert("",index=tk.END,text="江蘇",values="南京")
 tree.pack()
 
 window.mainloop()
@@ -380,7 +361,7 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
       
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 # 建立Treeview
@@ -389,9 +370,9 @@ tree = Treeview(window,columns=("cities"))
 tree.heading("#0",text="State")     # 圖標欄位icon column
 tree.heading("cities",text="City")
 # 建立內容
-tree.insert("",index=END,text="伊利諾",values="芝加哥")
-tree.insert("",index=END,text="加州",values="洛杉磯")
-tree.insert("",index=END,text="江蘇",values="南京")
+tree.insert("",index=tk.END,text="伊利諾",values="芝加哥")
+tree.insert("",index=tk.END,text="加州",values="洛杉磯")
+tree.insert("",index=tk.END,text="江蘇",values="南京")
 tree.pack()
 
 window.mainloop()
@@ -400,7 +381,7 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
       
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 # 建立Treeview
@@ -410,9 +391,9 @@ tree.heading("#0",text="State")         # 圖標欄位icon column
 tree.heading("#1",text="City")
 tree.heading("#2",text="Populations")
 # 建立內容
-tree.insert("",index=END,text="伊利諾",values=("芝加哥","800"))
-tree.insert("",index=END,text="加州",values=("洛杉磯","1000"))
-tree.insert("",index=END,text="江蘇",values=("南京","900"))
+tree.insert("",index=tk.END,text="伊利諾",values=("芝加哥","800"))
+tree.insert("",index=tk.END,text="加州",values=("洛杉磯","1000"))
+tree.insert("",index=tk.END,text="江蘇",values=("南京","900"))
 tree.pack()
 
 window.mainloop()
@@ -421,7 +402,7 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
       
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 list1 = ["芝加哥","800"]               # 以串列方式設定欄內容         
@@ -434,9 +415,9 @@ tree.heading("#0",text="State")         # 圖標欄位icon column
 tree.heading("#1",text="City")
 tree.heading("#2",text="Populations")
 # 建立內容
-tree.insert("",index=END,text="伊利諾",values=list1)
-tree.insert("",index=END,text="加州",values=list2)
-tree.insert("",index=END,text="江蘇",values=list3)
+tree.insert("",index=tk.END,text="伊利諾",values=list1)
+tree.insert("",index=tk.END,text="加州",values=list2)
+tree.insert("",index=tk.END,text="江蘇",values=list3)
 tree.pack()
 
 window.mainloop()
@@ -445,7 +426,7 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
       
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 # 建立Treeview
@@ -455,12 +436,12 @@ tree.heading("#0",text="State")         # 圖標欄位icon column
 tree.heading("#1",text="City")
 tree.heading("#2",text="Populations")
 # 格式化欄位
-tree.column("#1",anchor=CENTER,width=150)
-tree.column("#2",anchor=CENTER,width=150)
+tree.column("#1",anchor=tk.CENTER,width=150)
+tree.column("#2",anchor=tk.CENTER,width=150)
 # 建立內容
-tree.insert("",index=END,text="伊利諾",values=("芝加哥","800"))
-tree.insert("",index=END,text="加州",values=("洛杉磯","1000"))
-tree.insert("",index=END,text="江蘇",values=("南京","900"))
+tree.insert("",index=tk.END,text="伊利諾",values=("芝加哥","800"))
+tree.insert("",index=tk.END,text="加州",values=("洛杉磯","1000"))
+tree.insert("",index=tk.END,text="江蘇",values=("南京","900"))
 tree.pack()
 
 window.mainloop()
@@ -469,7 +450,7 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
       
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 # 建立Treeview
@@ -479,12 +460,12 @@ tree.heading("#0",text="State")         # 圖標欄位icon column
 tree.heading("#1",text="City")
 tree.heading("#2",text="Populations")
 # 格式化欄位
-tree.column("#1",anchor=CENTER,width=150)
-tree.column("#2",anchor=CENTER,width=150)
+tree.column("#1",anchor=tk.CENTER,width=150)
+tree.column("#2",anchor=tk.CENTER,width=150)
 # 建立內容
-tree.insert("",index=END,text="伊利諾",values=("芝加哥","800"))
-tree.insert("",index=END,text="加州",values=("洛杉磯","1000"))
-tree.insert("",index=END,text="江蘇",values=("南京","900"))
+tree.insert("",index=tk.END,text="伊利諾",values=("芝加哥","800"))
+tree.insert("",index=tk.END,text="加州",values=("洛杉磯","1000"))
+tree.insert("",index=tk.END,text="江蘇",values=("南京","900"))
 tree.pack()
 cityDict = tree.column("cities")
 print(cityDict)
@@ -495,7 +476,7 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
       
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
@@ -508,15 +489,15 @@ tree = Treeview(window,columns=("cities"))
 tree.heading("#0",text="State")             # 圖標欄位icon column
 tree.heading("cities",text="City")
 # 格式欄位
-tree.column("cities",anchor=CENTER)
+tree.column("cities",anchor=tk.CENTER)
 # 建立內容,行號從1算起偶數行是用淺藍色底
 tree.tag_configure("evenColor", background="lightblue") # 設定標籤
 rowCount = 1                                # 行號從1算起
 for state in stateCity.keys():
     if (rowCount % 2 == 1):                 # 如果True則是奇數行
-        tree.insert("",index=END,text=state,values=stateCity[state])
+        tree.insert("",index=tk.END,text=state,values=stateCity[state])
     else:
-        tree.insert("",index=END,text=state,values=stateCity[state],
+        tree.insert("",index=tk.END,text=state,values=stateCity[state],
                     tags=("evenColor"))     # 建立淺藍色底
     rowCount += 1                           # 行號數加1
 tree.pack()
@@ -527,7 +508,7 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
       
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 asia = {"中國":"北京","日本":"東京","泰國":"曼谷","韓國":"首爾"}
@@ -539,14 +520,14 @@ tree = Treeview(window,columns=("capital"))
 tree.heading("#0",text="國家")             # 圖標欄位icon column
 tree.heading("capital",text="首都")
 # 建立id
-idAsia = tree.insert("",index=END,text="Asia")
-idEuro = tree.insert("",index=END,text="Europe")
+idAsia = tree.insert("",index=tk.END,text="Asia")
+idEuro = tree.insert("",index=tk.END,text="Europe")
 # 建立idAsia底下內容
 for country in asia.keys():
-    tree.insert(idAsia,index=END,text=country,values=asia[country])
+    tree.insert(idAsia,index=tk.END,text=country,values=asia[country])
 # 建立idEuro底下內容
 for country in euro.keys():
-    tree.insert(idEuro,index=END,text=country,values=euro[country])     
+    tree.insert(idEuro,index=tk.END,text=country,values=euro[country])     
 tree.pack()
 
 window.mainloop()
@@ -560,23 +541,23 @@ def removeItem():                   # 刪除所選項目
     for iid in iids:                # 所選項目可能很多所以用迴圈
         tree.delete(iid)            # 刪除所選項目
          
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
              "德州":"休士頓","華盛頓州":"西雅圖",
              "江蘇":"南京","山東":"青島",
              "廣東":"廣州","福建":"廈門"}
-# 建立Treeview,可以有多項選擇selectmode=EXTENDED
-tree = Treeview(window,columns=("cities"),selectmode=EXTENDED)
+# 建立Treeview,可以有多項選擇selectmode=tk.EXTENDED
+tree = Treeview(window,columns=("cities"),selectmode=tk.EXTENDED)
 # 建立欄標題
 tree.heading("#0",text="State")     # 圖標欄位icon column
 tree.heading("cities",text="City")
 # 格式欄位
-tree.column("cities",anchor=CENTER)
+tree.column("cities",anchor=tk.CENTER)
 # 建立內容
 for state in stateCity.keys():
-    tree.insert("",index=END,text=state,values=stateCity[state])
+    tree.insert("",index=tk.END,text=state,values=stateCity[state])
 tree.pack()
 
 rmButton = Button(window,text="Remove",command=removeItem)   # 刪除鈕
@@ -598,11 +579,11 @@ def insertItem():
 # 如果輸入資料未完全不往下執行
     if (len(state.strip())==0 or len(city.strip())==0):
         return
-    tree.insert("",END,text=state,values=(city))    # 插入
-    stateEntry.delete(0,END)        # 刪除stateEntry
-    cityEntry.delete(0,END)         # 刪除cityEntry
+    tree.insert("",tk.END,text=state,values=(city))    # 插入
+    stateEntry.delete(0,tk.END)        # 刪除stateEntry
+    cityEntry.delete(0,tk.END)         # 刪除cityEntry
          
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
@@ -615,33 +596,33 @@ window.columnconfigure(1,weight=1)    # column1會隨視窗縮放1:1變化
 window.columnconfigure(3,weight=1)    # column3會隨視窗縮放1:1變化
 
 stateLab = Label(window,text="State :")   # 建立State :標籤
-stateLab.grid(row=0,column=0,padx=5,pady=3,sticky=W)
+stateLab.grid(row=0,column=0,padx=5,pady=3,sticky=tk.W)
 
 stateEntry = Entry()                    # 建立State :文字方塊
-stateEntry.grid(row=0,column=1,sticky=W+E,padx=5,pady=3)
+stateEntry.grid(row=0,column=1,sticky=tk.W+tk.E,padx=5,pady=3)
 
 cityLab = Label(window,text="City : ")    # 建立City :標籤
-cityLab.grid(row=0,column=2,sticky=E)
+cityLab.grid(row=0,column=2,sticky=tk.E)
 
 cityEntry = Entry()                     # 建立City :文字方塊
-cityEntry.grid(row=0,column=3,sticky=W+E,padx=5,pady=3)
+cityEntry.grid(row=0,column=3,sticky=tk.W+tk.E,padx=5,pady=3)
 # 建立Insert按鈕
 inButton = Button(window,text="插入",command=insertItem)
 inButton.grid(row=0,column=4,padx=5,pady=3)            
 # 建立Treeview,可以有多項選擇selectmode=EXTENDED
-tree = Treeview(window,columns=("cities"),selectmode=EXTENDED)
+tree = Treeview(window,columns=("cities"),selectmode=tk.EXTENDED)
 # 建立欄標題
 tree.heading("#0",text="State")     # 圖標欄位icon column
 tree.heading("cities",text="City")
 # 格式欄位
-tree.column("cities",anchor=CENTER)
+tree.column("cities",anchor=tk.CENTER)
 # 建立內容
 for state in stateCity.keys():
-    tree.insert("",index=END,text=state,values=stateCity[state])
-tree.grid(row=1,column=0,columnspan=5,padx=5,sticky=W+E+N+S)
+    tree.insert("",index=tk.END,text=state,values=stateCity[state])
+tree.grid(row=1,column=0,columnspan=5,padx=5,sticky=tk.W+tk.E+tk.N+tk.S)
 
 rmButton = Button(window,text="刪除",command=removeItem)   # 刪除鈕
-rmButton.grid(row=2,column=2,padx=5,pady=3,sticky=W)
+rmButton.grid(row=2,column=2,padx=5,pady=3,sticky=tk.W)
 
 window.mainloop()
 
@@ -649,7 +630,7 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter.ttk import *
          
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 stateCity = {"Illinois":"芝加哥","California":"洛杉磯",
@@ -661,7 +642,7 @@ stateCity = {"Illinois":"芝加哥","California":"洛杉磯",
 
 tree = Treeview(window,columns=("cities"))
 yscrollbar = Scrollbar(window)            # y軸scrollbar物件
-yscrollbar.pack(side=RIGHT,fill=Y)      # y軸scrollbar包裝顯示
+yscrollbar.pack(side=tk.RIGHT,fill=tk.Y)      # y軸scrollbar包裝顯示
 tree.pack()
 yscrollbar.config(command=tree.yview)   # y軸scrollbar設定
 tree.configure(yscrollcommand=yscrollbar.set)
@@ -669,10 +650,10 @@ tree.configure(yscrollcommand=yscrollbar.set)
 tree.heading("#0",text="State")         # 圖標欄位icon column
 tree.heading("cities",text="City")
 # 格式欄位
-tree.column("cities",anchor=CENTER)
+tree.column("cities",anchor=tk.CENTER)
 # 建立內容
 for state in stateCity.keys():
-    tree.insert("",index=END,text=state,values=stateCity[state])
+    tree.insert("",index=tk.END,text=state,values=stateCity[state])
 
 window.mainloop()
 
@@ -691,7 +672,7 @@ def treeview_sortColumn(col):
         tree.move(item[1],"",index)
     reverseFlag = not reverseFlag       # 更改排序旗標
             
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 reverseFlag = False                     # 排序旗標註明是否反向排序
@@ -702,7 +683,7 @@ myStates = {"Illinois","California","Texas","Washington",
 
 tree = Treeview(window,columns=("states"),show="headings")
 yscrollbar = Scrollbar(window)            # y軸scrollbar物件
-yscrollbar.pack(side=RIGHT,fill=Y)      # y軸scrollbar包裝顯示
+yscrollbar.pack(side=tk.RIGHT,fill=tk.Y)      # y軸scrollbar包裝顯示
 tree.pack()
 yscrollbar.config(command=tree.yview)   # y軸scrollbar設定
 tree.configure(yscrollcommand=yscrollbar.set)
@@ -710,7 +691,7 @@ tree.configure(yscrollcommand=yscrollbar.set)
 tree.heading("states",text="State")
 # 建立內容
 for state in myStates:                  # 第一次的Treeview內容
-    tree.insert("",index=END,values=(state,))
+    tree.insert("",index=tk.END,values=(state,))
 # 點選標題欄將啟動treeview_sortColumn
 tree.heading("#1",text="State",
              command=lambda c="states": treeview_sortColumn(c))
@@ -726,10 +707,10 @@ def treeSelect(event):
     itemselected = widgetObj.selection()[0] # 取得選項
     col1 = widgetObj.item(itemselected,"text")  # 取得圖標欄內容
     col2 = widgetObj.item(itemselected,"values")[0] # 取得第0索引欄位內容
-    str = "{0} : {1}".format(col1,col2)     # 取得所選項目內容
-    var.set(str)                            # 設定狀態列內容
+    mesg = "{0} : {1}".format(col1,col2)     # 取得所選項目內容
+    var.set(mesg)                            # 設定狀態列內容
          
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
@@ -737,35 +718,34 @@ stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
              "江蘇":"南京","山東":"青島",
              "廣東":"廣州","福建":"廈門"}
 # 建立Treeview
-tree = Treeview(window,columns=("cities"),selectmode=BROWSE)
+tree = Treeview(window,columns=("cities"),selectmode=tk.BROWSE)
 # 建立欄標題
 tree.heading("#0",text="State")             # 圖標欄位icon column
 tree.heading("cities",text="City")
 # 格式欄位
-tree.column("cities",anchor=CENTER)
+tree.column("cities",anchor=tk.CENTER)
 # 建立內容,行號從1算起偶數行是用淺藍色底
 tree.tag_configure("evenColor", background="lightblue") # 設定標籤
 rowCount = 1                                # 行號從1算起
 for state in stateCity.keys():
     if (rowCount % 2 == 1):                 # 如果True則是奇數行
-        tree.insert("",index=END,text=state,values=stateCity[state])
+        tree.insert("",index=tk.END,text=state,values=stateCity[state])
     else:
-        tree.insert("",index=END,text=state,values=stateCity[state],
+        tree.insert("",index=tk.END,text=state,values=stateCity[state],
                     tags=("evenColor"))     # 建立淺藍色底
     rowCount += 1                           # 行號數加1
 
 tree.bind("<<TreeviewSelect>>",treeSelect)  # Treeview控件Select發生
 tree.pack()
 
-var = StringVar()
+var = tk.StringVar()
 label = Label(window,textvariable=var,relief="groove")    # 建立狀態列
-label.pack(fill=BOTH,expand=True)
+label.pack(fill=tk.BOTH,expand=True)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-from tkinter import messagebox
 from tkinter.ttk import *
 
 def doubleClick(event):
@@ -773,10 +753,10 @@ def doubleClick(event):
     iid = e.identify("item",event.x,event.y)    # 取得連按2下項目id
     state = e.item(iid,"text")              # 取得State
     city = e.item(iid,"values")[0]          # 取得City
-    str = "{0} : {1}".format(state,city)    # 格式化
-    messagebox.showinfo("Double Clicked",str)   # 輸出
+    mesg = "{0} : {1}".format(state,city)    # 格式化
+    print("Double Clicked :", mesg)   # 輸出
          
-window = Tk()
+window = tk.Tk()
 window.geometry("600x400")
 
 stateCity = {"伊利諾":"芝加哥","加州":"洛杉磯",
@@ -790,10 +770,10 @@ tree = Treeview(window,columns=("cities"))
 tree.heading("#0",text="State")     # 圖標欄位icon column
 tree.heading("cities",text="City")
 # 格式欄位
-tree.column("cities",anchor=CENTER)
+tree.column("cities",anchor=tk.CENTER)
 # 建立內容
 for state in stateCity.keys():
-    tree.insert("",index=END,text=state,values=stateCity[state])
+    tree.insert("",index=tk.END,text=state,values=stateCity[state])
 tree.bind("<Double-1>",doubleClick)     # 連按2下綁定doubleClick方法
 tree.pack()
 

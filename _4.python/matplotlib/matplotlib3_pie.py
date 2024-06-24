@@ -252,7 +252,7 @@ plt.pie(sizes, labels=sizes, explode=explode, autopct="%1.2f%%")
 # 第五張圖
 plt.subplot(235)
 
-#pie指定顏色
+# pie指定顏色
 
 sizes = [25, 30, 15, 10]
 labels = ["北部", "西部", "南部", "東部"]
@@ -275,59 +275,80 @@ plt.pie(
 # 第六張圖
 plt.subplot(236)
 
-#pie指定顏色
+# pie指定顏色
 
 sizes = [25, 30, 15, 10]
 labels = ["北部", "西部", "南部", "東部"]
 colors = ["red", "green", "blue", "yellow"]
 explode = (0, 0, 0.2, 0)
 
-plt.pie(sizes, labels=labels, colors=colors, explode=explode, autopct='%2.1f%%',startangle=0, shadow=True)
+plt.pie(
+    sizes,
+    labels=labels,
+    colors=colors,
+    explode=explode,
+    autopct="%2.1f%%",
+    startangle=0,
+    shadow=True,
+)
 
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-dices=['1點','2點','3點','4點','5點','6點']
-data=[]
-times=[]
+dices = ["1點", "2點", "3點", "4點", "5點", "6點"]
+data = []
+times = []
 for i in range(1000):
-    data.append(random.randint(1,6))
+    data.append(random.randint(1, 6))
 
-for i in range(1,7):
+for i in range(1, 7):
     times.append(data.count(i))
-    
-plt.pie(times,labels=dices,autopct='%2.1f%%',explode=[0.1,0.1,0.1,0.1,0.1,0.1],shadow=True)
-plt.title('擲骰子機率圖',fontsize=18)
+
+plt.pie(
+    times,
+    labels=dices,
+    autopct="%2.1f%%",
+    explode=[0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+    shadow=True,
+)
+plt.title("擲骰子機率圖", fontsize=18)
 
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-#預設字體大小
-plt.rc('font', size=20)
-#軸標題字體大小
-plt.rc('axes', titlesize=30)
-#X軸刻度字體大小
-plt.rc('xtick', labelsize=20)
-#圖例字體大小
-plt.rc('legend', fontsize=10)
-#薪水分配 六三一分配法
-#圓餅圖
-salarypay = ['生活費', '儲蓄', '娛樂/緊急預備金']
-#佔比
+# 預設字體大小
+plt.rc("font", size=20)
+# 軸標題字體大小
+plt.rc("axes", titlesize=30)
+# X軸刻度字體大小
+plt.rc("xtick", labelsize=20)
+# 圖例字體大小
+plt.rc("legend", fontsize=10)
+# 薪水分配 六三一分配法
+# 圓餅圖
+salarypay = ["生活費", "儲蓄", "娛樂/緊急預備金"]
+# 佔比
 ratios = [60, 30, 10]
-#設定分離區塊
-explode = [0, 0, 0.1] 
-#顏色
-color = [(1.0,0,0), (0,1.0,0), (0,1.0,1.0)] 
-fig, ax = plt.subplots(figsize=(10,10), dpi=80)
-ax.pie(ratios, explode=explode, labels=salarypay, autopct='%1.1f%%',
-        colors=color, shadow=True, startangle=40)
-#設定Y/X軸長度比例 
-ax.set_aspect(0.7) 
-ax.set_title('薪水分配 六三一分配法')
+# 設定分離區塊
+explode = [0, 0, 0.1]
+# 顏色
+color = [(1.0, 0, 0), (0, 1.0, 0), (0, 1.0, 1.0)]
+fig, ax = plt.subplots(figsize=(10, 10), dpi=80)
+ax.pie(
+    ratios,
+    explode=explode,
+    labels=salarypay,
+    autopct="%1.1f%%",
+    colors=color,
+    shadow=True,
+    startangle=40,
+)
+# 設定Y/X軸長度比例
+ax.set_aspect(0.7)
+ax.set_title("薪水分配 六三一分配法")
 ax.legend()
 
 plt.show()
@@ -337,15 +358,10 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
 
 
-
-
 print("------------------------------------------------------------")  # 60個
-
-
 
 
 print("------------------------------------------------------------")  # 60個

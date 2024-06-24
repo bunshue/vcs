@@ -22,8 +22,8 @@ import datetime
 
 ESC = 27
 SPACE = 32
-RECORD_TIME_MINUTE = 10 # 分
-RECORD_DATA_SIZE = 100 # MB
+RECORD_TIME_MINUTE = 10  # 分
+RECORD_DATA_SIZE = 100  # MB
 
 MODE_0 = 0  # 一直錄
 MODE_1 = 1  # 一檔錄固定時間, ex 10分一檔
@@ -35,10 +35,12 @@ SPEED = 10  # N 倍速
 
 #'XVID','DIVX','MJPG','I420'
 
-#第一種
-#用 XVID 格式存 avi 檔
-record_filename = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
-ENCODING_TYPE = 'XVID'  # 編碼器
+# 第一種
+# 用 XVID 格式存 avi 檔
+record_filename = (
+    "tmp1_webcam_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
+)
+ENCODING_TYPE = "XVID"  # 編碼器
 
 """
 #第二種
@@ -58,66 +60,70 @@ ENCODING_TYPE = 'MJPG'  # 編碼器
 """
 
 print("------------------------------------------------------------")  # 60個
-print('最簡錄影, 一直錄, 按 ESC 離開')
+print("最簡錄影, 一直錄, 按 ESC 離開")
 
 if MODE == MODE_3:  # 縮時錄影
-    print('縮時錄影,', SPEED, '倍速')
+    print("縮時錄影,", SPEED, "倍速")
 
-record_filename = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
+record_filename = (
+    "tmp1_webcam_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
+)
 
-cap = cv2.VideoCapture(0)   #打開攝影機
+cap = cv2.VideoCapture(0)  # 打開攝影機
 if not cap.isOpened():
-    print('Could not open video device')
+    print("Could not open video device")
     sys.exit()
 else:
-    print('Video device opened')
+    print("Video device opened")
 
-width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
-fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
 
 record_time_st = time.time()
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-print('開始錄影時間 :', now)
+print("開始錄影時間 :", now)
 
-#建立視訊編碼 fourcc
-ENCODING_TYPE = 'XVID'  # 編碼器
+# 建立視訊編碼 fourcc
+ENCODING_TYPE = "XVID"  # 編碼器
 fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
 
-#建立影像寫入器 out
+# 建立影像寫入器 out
 out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
 
 cnt = 0
 while True:
-    ret, frame = cap.read()  #擷取一張影像
+    ret, frame = cap.read()  # 擷取一張影像
     if ret == False:
-      print('無影像, 離開')
-      break
+        print("無影像, 離開")
+        break
 
     now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-    cv2.putText(frame, now, (20, 40),cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2, cv2.LINE_AA)
+    cv2.putText(
+        frame, now, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA
+    )
 
-    cv2.imshow('WebCam2', frame)
+    cv2.imshow("WebCam2", frame)
     if MODE == MODE_3:  # 縮時錄影
         cnt += 1
-        if cnt % SPEED == 0:# N張存一張 => N倍速
+        if cnt % SPEED == 0:  # N張存一張 => N倍速
             out.write(frame)  # 影像寫入影片檔
     else:
         out.write(frame)  # 影像寫入影片檔
 
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:     #ESC
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:  # ESC
         break
 
-cap.release()    #關閉攝影機
-out.release()    #關閉寫入器
-cv2.destroyAllWindows()  #關閉視窗
+cap.release()  # 關閉攝影機
+out.release()  # 關閉寫入器
+cv2.destroyAllWindows()  # 關閉視窗
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-print('\n停止錄影時間 :', now)
+print("\n停止錄影時間 :", now)
 record_time_elapsed = time.time() - record_time_st
-print('錄影時間 :', int(record_time_elapsed), '秒')
-print('存檔檔名 :', record_filename)
+print("錄影時間 :", int(record_time_elapsed), "秒")
+print("存檔檔名 :", record_filename)
 
 sys.exit()
 
@@ -125,72 +131,76 @@ print("------------------------------------------------------------")  # 60個
 
 print("錄影, 按 SPACE 存圖, 按 ESC 離開")
 
-cap = cv2.VideoCapture(0)   #打開攝影機
+cap = cv2.VideoCapture(0)  # 打開攝影機
 if not cap.isOpened():
-    print('Could not open video device')
+    print("Could not open video device")
     sys.exit()
 else:
-    print('Video device opened')
+    print("Video device opened")
 
-width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))    # 取得影像寬度
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))  # 取得影像寬度
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 取得影像高度
-fps = cap.get(cv2.CAP_PROP_FPS)		#取得播放速率
+fps = cap.get(cv2.CAP_PROP_FPS)  # 取得播放速率
 
 record_time_st = time.time()
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-print('開始錄影時間 :', now)
-print('預計錄影時間 :', RECORD_TIME_MINUTE, '分')
-print('錄影時間(分) :', end = "")
+print("開始錄影時間 :", now)
+print("預計錄影時間 :", RECORD_TIME_MINUTE, "分")
+print("錄影時間(分) :", end="")
 
-#建立視訊編碼 fourcc
+# 建立視訊編碼 fourcc
 fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
 
-#建立影像寫入器 out
-out = cv2.VideoWriter(record_filename, fourcc, fps, (width,height))
+# 建立影像寫入器 out
+out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
 
 show_minitues_info = 0
 while True:
-    ret, frame = cap.read()  #擷取一張影像
+    ret, frame = cap.read()  # 擷取一張影像
     if ret == False:
-      print('無影像, 離開')
-      break
+        print("無影像, 離開")
+        break
 
     now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-    cv2.putText(frame, now, (20, 40),cv2.FONT_HERSHEY_SIMPLEX, 1, (255,0,0), 2, cv2.LINE_AA)
+    cv2.putText(
+        frame, now, (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA
+    )
 
-    cv2.imshow('WebCam2', frame)
+    cv2.imshow("WebCam2", frame)
     out.write(frame)  # 影像寫入影片檔
 
     record_time_elapsed = time.time() - record_time_st
-    record_minute = int(record_time_elapsed//60)
+    record_minute = int(record_time_elapsed // 60)
     if record_minute != show_minitues_info:
         show_minitues_info = record_minute
-        print(record_minute, end = " ")
+        print(record_minute, end=" ")
     if record_time_elapsed > 60 * RECORD_TIME_MINUTE:
-        print('時間到 : ', RECORD_TIME_MINUTE, ' 分, 重新錄一檔')
+        print("時間到 : ", RECORD_TIME_MINUTE, " 分, 重新錄一檔")
         record_time_st = time.time()
         now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-        print('開始錄影時間 :', now)
-        print('預計錄影時間 :', RECORD_TIME_MINUTE, '分')
-        print('錄影時間(分) :', end = "")
-        record_filename = 'tmp1_webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
-        #建立視訊編碼 fourcc
+        print("開始錄影時間 :", now)
+        print("預計錄影時間 :", RECORD_TIME_MINUTE, "分")
+        print("錄影時間(分) :", end="")
+        record_filename = (
+            "tmp1_webcam_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".avi"
+        )
+        # 建立視訊編碼 fourcc
         fourcc = cv2.VideoWriter_fourcc(*ENCODING_TYPE)
-        out = cv2.VideoWriter(record_filename, fourcc, fps, (width,height))
-        
-    k = cv2.waitKey(1) # 等待按鍵輸入
-    if k == ESC:     #ESC
+        out = cv2.VideoWriter(record_filename, fourcc, fps, (width, height))
+
+    k = cv2.waitKey(1)  # 等待按鍵輸入
+    if k == ESC:  # ESC
         break
 
-cap.release()    #關閉攝影機
-out.release()    #關閉寫入器
-cv2.destroyAllWindows()  #關閉視窗
+cap.release()  # 關閉攝影機
+out.release()  # 關閉寫入器
+cv2.destroyAllWindows()  # 關閉視窗
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-print('\n停止錄影時間 :', now)
+print("\n停止錄影時間 :", now)
 record_time_elapsed = time.time() - record_time_st
-print('錄影時間 :', int(record_time_elapsed), '秒')
-print('存檔檔名 :', record_filename)
+print("錄影時間 :", int(record_time_elapsed), "秒")
+print("存檔檔名 :", record_filename)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -209,9 +219,7 @@ print("作業完成")
 print("------------------------------------------------------------")  # 60個
 
 
-
 print("------------------------------------------------------------")  # 60個
-
 
 
 '''
@@ -269,4 +277,3 @@ out = cv2.VideoWriter(record_filename, fourcc, fps, (width,height), isColor=Fals
 gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 轉換成灰階
 out.write(gray)  # 將圖像寫入影片
 """
-

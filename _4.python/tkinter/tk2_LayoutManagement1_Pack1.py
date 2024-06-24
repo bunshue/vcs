@@ -8,69 +8,46 @@
 
 """
 
-
+import sys
 import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
 
-
 window = tk.Tk()
 window.geometry("600x800")
-title = "Pack 測試"
-window.title(title)
+window.title("Pack 測試")
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
+frame1 = tk.Frame()
+frame1.pack()
 
-def changeString():
-    stringToCopy = entry.get()
-    #stringToCopy = stringToCopy[::-1]
-    #entry.delete(0, tk.END)
-    entry.insert(0, stringToCopy)
+tk.Label(frame1, text = "tk.LEFT:").pack(side = tk.LEFT)
+tk.Entry(frame1, text = "Type Name").pack(side = tk.LEFT)
+tk.Checkbutton(frame1, text = "Bold").pack(side = tk.LEFT)
+tk.Checkbutton(frame1, text = "Italic").pack(side = tk.LEFT)
+tk.Radiobutton(frame1, text = "Red").pack(side = tk.LEFT)
+tk.Radiobutton(frame1, text = "Yellow").pack(side = tk.LEFT)
 
-entry = tk.Entry(window)
-entry.pack()
-
-button0 = tk.Button(window, text = 'Change', command = changeString)
-button0.pack()
-
-frame = tk.Frame()
-frame.pack()
-
-button1 = tk.Button(frame, text = 'QUIT', fg = 'red', command = frame.quit)
+button1 = tk.Button(frame1, text = 'LEFT', fg = 'red')
 button1.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
 
-button2 = tk.Button(frame, text = 'Hello')
-button2.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
-
-button3 = tk.Button(frame, text = 'New')
+button3 = tk.Button(frame1, text = 'LEFT')
 button3.pack(side = tk.LEFT)#靠左, 這樣下一個會連上來
 #button3.pack() #這一行結束
 
-button4 = tk.Button(frame, text = 'New')
+button4 = tk.Button(frame1, text = 'PACK()')
 button4.pack()
 
-button5 = tk.Button(frame, text = 'New')
+button5 = tk.Button(frame1, text = 'PACK()')
 button5.pack()
 
-button6 = tk.Button(frame, text = 'New')
+button6 = tk.Button(frame1, text = 'PACK()')
 button6.pack()
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-def display():
-    number = int(order.get())
-    print('取得 order = ', number)
-                
-frame1 = tk.Frame(window, bg = 'pink') # Create and add a frame to window
-frame1.pack()
-
-tk.Label(frame1, text = "Enter an order: ").pack(side = tk.LEFT)
-order = tk.StringVar()
-entry = tk.Entry(frame1, textvariable = order, justify = tk.RIGHT).pack(side = tk.LEFT)
-tk.Button(frame1, text = 'Do something', command = display).pack(side = tk.LEFT)
+button7 = tk.Button(frame1, text = 'PACK()')
+button7.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -176,8 +153,6 @@ print("------------------------------------------------------------")  # 60個
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -191,60 +166,41 @@ print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
 
-window=tk.Tk()
+window = tk.Tk()
 window.geometry("600x400")
-window.title('pack配置')
+window.title("Pack 測試")
 window.configure(bg='white')
 
-label1=tk.Label(window, text = '元件版面配置',font=('微軟正黑體', 16),fg='white',bg='blue')
-label2=tk.Label(window, text = '方法',font=('標楷體', 12))
-label3=tk.Label(window, text = 'pack()方法',font=('標楷體', 12),bg='lightgreen')
-label4=tk.Label(window, text = 'grid()方法',font=('標楷體', 12),bg='pink')
-label5=tk.Label(window, text = 'place()方法',font=('標楷體', 12),bg='lightblue')
+label1=tk.Label(window, text = '元件版面配置 fill x',font=('微軟正黑體', 16),fg='white',bg='blue')
 label1.pack(fill='x')
+
+label2=tk.Label(window, text = '方法 left, y',font=('標楷體', 12))
 label2.pack(side='left', fill='y')
+
+label3=tk.Label(window, text = 'pack()方法, both, True',font=('標楷體', 12),bg='lightgreen')
 label3.pack(pady=5, fill='both', expand=True)
+
+label4=tk.Label(window, text = 'place()方法, both, True',font=('標楷體', 12),bg='pink')
 label4.pack(pady=5, fill='both', expand=True)
+
+label5=tk.Label(window, text = 'grid()方法, both, True',font=('標楷體', 12),bg='lightblue')
 label5.pack(pady=5, fill='both', expand=True)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-from tkinter import * # Import tkinter
-    
-window = Tk() # Create a window
-window.title("Pack Manager Demo 1") # Set title
-
-Label(window, text = "Blue", bg = "blue").pack()
-Label(window, text = "Red", bg = "red").pack(
-    fill = BOTH, expand = 1)
-Label(window, text = "Green", bg = "green").pack(
-    fill = BOTH)
-
-window.mainloop() # Create an event loop
-
-
-
-print("------------------------------------------------------------")  # 60個
-
 window = tk.Tk()
+window.geometry("600x300")
+window.title("Pack 測試")
 
-tk.Label(window, text = "Enter your name:").pack(side = LEFT)
-tk.Entry(window, text = "Type Name").pack(side = LEFT)
-tk.Checkbutton(window, text = "Bold").pack(side = LEFT)
-tk.Checkbutton(window, text = "Italic").pack(side = LEFT)
-tk.Radiobutton(window, text = "Red").pack(side = LEFT)
-tk.Radiobutton(window, text = "Yellow").pack(side = LEFT)
+tk.Label(window, text = "紅色 pack()", bg = "red").pack()
+tk.Label(window, text = "綠色, BOTH expand", bg = "green").pack(fill = tk.BOTH, expand = 1)
+tk.Label(window, text = "藍色, BOTH", bg = "blue").pack(fill = tk.BOTH)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-
-
-from tkinter import * # Import tkinter
 
 def drawABar(x, percent, color, title):
     canvas.create_line(0, height - 10, width, height - 10)
@@ -252,12 +208,14 @@ def drawABar(x, percent, color, title):
     canvas.create_text((x + x + width / 4.3 - 5) / 2, (1 - percent) * (height - 30) - 10,
                         text = title)
 
-window = Tk() # Create a window
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Pack 測試")
 window.title("Pyramid") # Set a title
 
 width = 400
 height = 150
-canvas = Canvas(window, bg = "white", width = width, height = height)
+canvas = tk.Canvas(window, bg = "white", width = width, height = height)
 canvas.pack()
 
 x = 10
@@ -272,9 +230,7 @@ drawABar(x, 0.3, "green", "Midterm -- 30%")
 x += width / 4.3 - 5 + 10  
 drawABar(x, 0.4, "orange", "Final -- 40%")
 
-window.mainloop() # Create an event loop
-
-
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 

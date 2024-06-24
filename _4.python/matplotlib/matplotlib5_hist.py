@@ -560,8 +560,8 @@ print("資料個數3 :", len(scores3))
 print("最高分 :", max(scores3))
 print("最低分 :", min(scores3))
 
-print("資料1 平均 :", sum(scores1)/len(scores1))
-print("資料3 平均 :", sum(scores3)/len(scores3))
+print("資料1 平均 :", sum(scores1) / len(scores1))
+print("資料3 平均 :", sum(scores3) / len(scores3))
 
 freq = [0] * 100
 
@@ -618,30 +618,29 @@ import matplotlib
 
 np.random.seed(10)
 
-#產生常態分佈的數據:平均數0, 標準差1, 1000個資料
+# 產生常態分佈的數據:平均數0, 標準差1, 1000個資料
 x = np.random.normal(0, 1, 1000)
 print("平均數:", np.mean(x))
 print("標準差:", np.std(x))
 
-matplotlib.pyplot.hist(x,bins=50)
+matplotlib.pyplot.hist(x, bins=50)
 matplotlib.pyplot.show()
 
 print("------------------------------------------------------------")  # 60個
 
-from numpy import random,mean,std 
+from numpy import random, mean, std
 
 random.seed(10)
 
-#產生常態分佈的數據:平均數0, 標準差1, 1000個資料
+# 產生常態分佈的數據:平均數0, 標準差1, 1000個資料
 x = random.normal(0, 1, 1000)
 print("平均數:", mean(x))
 print("標準差:", std(x))
 
-plt.hist(x,bins=50)
+plt.hist(x, bins=50)
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 """

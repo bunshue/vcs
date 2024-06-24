@@ -3,7 +3,7 @@ import sys
 import time
 import random
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 gTTS：文字轉語音
@@ -12,54 +12,54 @@ pip install gTTS
 
 import gtts
 
-print('目前支援的語音種類 :')
+print("目前支援的語音種類 :")
 print(gtts.lang.tts_langs())
 
-print('gTTS可以透過線上翻譯，將文字轉換為語音，並將語音存檔')
-print('將文字分解為多個段落，分別轉換為語音')
+print("gTTS可以透過線上翻譯，將文字轉換為語音，並將語音存檔")
+print("將文字分解為多個段落，分別轉換為語音")
 
-txt1 = '王之渙 涼州詞'
-txt2 = '黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。'
+txt1 = "王之渙 涼州詞"
+txt2 = "黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
 
-filename = 'tmp_gtts1.mp3'
-tts = gtts.gTTS(text=txt2, lang='zh-tw')
+filename = "tmp_gtts1.mp3"
+tts = gtts.gTTS(text=txt2, lang="zh-tw")
 tts.save(filename)
-print('存檔完成, 檔名 :', filename)
+print("存檔完成, 檔名 :", filename)
 
-filename = 'tmp_gtts2.mp3'
+filename = "tmp_gtts2.mp3"
 f = open(filename, "wb")
 
-tts1 = gtts.gTTS(text=txt1, lang='zh-tw')
+tts1 = gtts.gTTS(text=txt1, lang="zh-tw")
 tts1.write_to_fp(f)
 
-tts2 = gtts.gTTS(text=txt2, lang='zh-tw')
+tts2 = gtts.gTTS(text=txt2, lang="zh-tw")
 tts2.write_to_fp(f)
 
-print('存檔完成, 檔名 :', filename)
+print("存檔完成, 檔名 :", filename)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-mp3_filename = 'tmp_mp3_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp3'
+mp3_filename = "tmp_mp3_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
 
 import gtts
 
 text = "Welcome to the United States and have a nice day."
-tts = gtts.gTTS(text=text, lang='en')
+tts = gtts.gTTS(text=text, lang="en")
 tts.save(mp3_filename)
 
 print("------------------------------------------------------------")  # 60個
 
-mp3_filename = 'tmp_mp3_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.mp3'
+mp3_filename = "tmp_mp3_" + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + ".mp3"
 
 import gtts
 
 text = "黃河遠上白雲間，一片孤城萬仞山。羌笛何須怨楊柳？春風不度玉門關。"
 
-tts = gtts.gTTS(text=text, lang='zh-tw')
+tts = gtts.gTTS(text=text, lang="zh-tw")
 tts.save(mp3_filename)
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 SpeechRecognition：語音轉文字(聲音檔)
@@ -67,21 +67,21 @@ pip install SpeechRecognition
 
 """
 
-print('語音轉文字')
+print("語音轉文字")
 
 import speech_recognition
 
 r = speech_recognition.Recognizer()
-with speech_recognition.WavFile("record1.wav") as source:  #讀取wav檔
+with speech_recognition.WavFile("record1.wav") as source:  # 讀取wav檔
     audio = r.record(source)
 try:
-    word = r.recognize_google(audio, language = "zh-TW")
+    word = r.recognize_google(audio, language="zh-TW")
     print("語音辨識OK, 內容 :")
     print(word)
 except:
     print("語音辨識失敗！")
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 #SpeechRecognition：語音轉文字(麥克風)
@@ -91,16 +91,19 @@ print('------------------------------------------------------------')	#60個
 
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 import speech_recognition
 from pydub import AudioSegment
 from IPython.display import display, Javascript
-#from google.colab.output import eval_js
+
+# from google.colab.output import eval_js
 from base64 import b64decode
- 
+
+
 def record_audio(filename):
-  js=Javascript("""
+    js = Javascript(
+        """
     async function recordAudio() {
       const div = document.createElement('div');
       const capture = document.createElement('button');
@@ -141,15 +144,18 @@ def record_audio(filename):
       })
     return btoa(binaryString);
     }
-  """)
-  try:
-    display(js)
-    data=eval_js('recordAudio({})')
-    binary=b64decode(data)
-    with open(filename,"wb") as audio_file:
-      audio_file.write(binary)
-  except Exception as err:
-    print(str(err))
+  """
+    )
+    try:
+        display(js)
+        data = eval_js("recordAudio({})")
+        binary = b64decode(data)
+        with open(filename, "wb") as audio_file:
+            audio_file.write(binary)
+    except Exception as err:
+        print(str(err))
+
+
 """
 #record.webm 無此檔
 record_audio("record.webm")
@@ -165,7 +171,7 @@ except:
     print("語音辨識失敗！")
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 google_trans_new：文字翻譯
@@ -188,7 +194,7 @@ lang = translator.detect("今日の天気は良いです")
 print(lang)
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 應用：AI智慧讀報機
@@ -241,19 +247,19 @@ tts.save('news.mp3')
 display.Audio("news.mp3", autoplay=True)
 
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#需安裝playsound
-#pip install playsound
+# 需安裝playsound
+# pip install playsound
 
 import newspaper
 from newspaper import Article
 from google_trans_new import google_translator
 import gtts
-from playsound import playsound 
+from playsound import playsound
 
 # paper = newspaper.build('http://cnn.com', language='en')
-paper = newspaper.build('http://www.cnbc.com', language='en')
+paper = newspaper.build("http://www.cnbc.com", language="en")
 # paper = newspaper.build('http://www.bbc.co.uk', language='en')
 # paper = newspaper.build('http://www.foxnews.com', language='en')
 
@@ -263,7 +269,7 @@ print(paper.articles)
 
 for article in paper.articles:
     url = article.url
-    if '.html' in url:
+    if ".html" in url:
         print(url)
         """
         try:  #有時會產生無法擷取的錯誤,故使用try
@@ -283,7 +289,7 @@ for article in paper.articles:
             pass
         """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 import speech_recognition
@@ -302,7 +308,7 @@ while True:
     except:
         print("語音無法辨識\n")
 """
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """ 播放OK
 from pydub import AudioSegment
@@ -324,9 +330,9 @@ vsr = moviepy.editor.VideoFileClip(filename)
 vsr.preview()
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#pydub：聲音處理
+# pydub：聲音處理
 
 import IPython.display as display
 
@@ -343,9 +349,9 @@ print(record1.duration_seconds)
 
 display.Audio("record1.wav", autoplay=True)
 
-#record2 = record1[3000:9000]
+# record2 = record1[3000:9000]
 
-#record2 = record1[:6000]
+# record2 = record1[:6000]
 
 record2 = record1[-5000:]
 
@@ -355,7 +361,7 @@ record2.export("tmp_record2.wav", format="wav")
 
 display.Audio("tmp_record2.wav", autoplay=True)
 
-#record3 = record1 + 8
+# record3 = record1 + 8
 
 record3 = record1 - 5
 
@@ -375,11 +381,11 @@ record4.export("tmp_record4.wav", format="wav")
 
 display.Audio("tmp_record4.wav", autoplay=True)
 
-#record5 = record1.fade_in(5000)  #5秒淡入
+# record5 = record1.fade_in(5000)  #5秒淡入
 
-#record5 = record1.fade_out(3000)  #3秒淡出
+# record5 = record1.fade_out(3000)  #3秒淡出
 
-record5 = record1.fade_in(5000).fade_out(3000)  #5秒淡入,3秒淡出
+record5 = record1.fade_in(5000).fade_out(3000)  # 5秒淡入,3秒淡出
 
 record5.export("tmp_record5.wav", format="wav")
 
@@ -391,21 +397,22 @@ record6.export("tmp_record6.wav", format="wav")
 
 display.Audio("tmp_record6.wav", autoplay=True)
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
-#moviepy：影片處理
+# moviepy：影片處理
 
-video_filename = 'C:/_git/big_files/holo1.mp4'
+video_filename = "C:/_git/big_files/holo1.mp4"
 
 from IPython.display import HTML
 
 from base64 import b64encode
 
-mp4 = open(video_filename,'rb').read()
+mp4 = open(video_filename, "rb").read()
 
 data_url = "data:video/mp4;base64," + b64encode(mp4).decode()
 
-HTML("""
+HTML(
+    """
 
 <video width=400 controls>
 
@@ -413,27 +420,29 @@ HTML("""
 
 </video>
 
-""" % data_url)
+"""
+    % data_url
+)
 
 from moviepy.editor import *
 
 vsr = VideoFileClip(video_filename)
 
-print('長度：' + str(vsr.duration))
+print("長度：" + str(vsr.duration))
 
-print('幀數：' + str(vsr.fps))
+print("幀數：" + str(vsr.fps))
 
-print('解析度：' + str(vsr.size))
+print("解析度：" + str(vsr.size))
 
 clip1 = vsr.subclip(10, 20)
 
-print('clip1 長度：' + str(clip1.duration))
+print("clip1 長度：" + str(clip1.duration))
 
-clip1.write_videofile('tmp_clip1.mp4')  #有點久
+clip1.write_videofile("tmp_clip1.mp4")  # 有點久
 
 clip2 = vsr.subclip(30, 50)
 
-print('clip2 長度：' + str(clip2.duration))
+print("clip2 長度：" + str(clip2.duration))
 
 """
 #clip2.write_videofile('tmp_clip2.mp4')  #做很久
@@ -472,8 +481,7 @@ clip1_mir_size = clip1.fx(vfx.mirror_x).resize(0.50)  #水平翻轉並改變尺�
 
 clip1_resize.write_videofile('tmp_clip1_resize.mp4')
 """
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
 
 
 """
@@ -508,7 +516,7 @@ for eachObject in detections:
     print("{} ： {} ： {}".format(eachObject["name"], eachObject["percentage_probability"], eachObject["box_points"]))
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
 """ fail in sugar
@@ -529,7 +537,7 @@ detector.detectObjectsFromVideo(
     log_progress=True)
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 """
 安裝 imageai.Prediction
@@ -558,13 +566,12 @@ for i in range(len(predictions)):
   print('{} ： {}'.format(predictions[i], probabilities[i]))
 """
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
+print("------------------------------------------------------------")  # 60個
 
 
-print('------------------------------------------------------------')	#60個
-print('作業完成')
-print('------------------------------------------------------------')	#60個
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個

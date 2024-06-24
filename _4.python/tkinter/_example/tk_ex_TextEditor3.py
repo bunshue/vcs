@@ -4,12 +4,10 @@ from tkinter import messagebox
 from tkinter.ttk import Combobox
 from tkinter import colorchooser
 
-###########################################################################################################
+print("------------------------------------------------------------")  # 60個
 
 window = Tk()
 window.geometry('700x500')
-
-###########################################################################################################
 
 class text_editor:
     current_file = 'no_file'
@@ -37,7 +35,6 @@ class text_editor:
 
         Button(t, text='Apply Changes',font=('arial black',10),command=change_size).pack()
         
-###########################################################################################################
 
     def tcolor(self):
 
@@ -46,7 +43,6 @@ class text_editor:
     
         self.text_box.configure(fg=co)
         
-###########################################################################################################
 
     def open_func(self):
         returned = filedialog.askopenfile(initialdir='E:\\', title='Select file to open')
@@ -72,7 +68,6 @@ class text_editor:
             self.current_file = 'no_file'
             window.title('Text Editor')
 
-###########################################################################################################
 
     def saveas_func(self):
         f = filedialog.asksaveasfile(mode='w', defaultextension='.txt')
@@ -121,7 +116,6 @@ class text_editor:
         Label(more, text='This Text Editor was created as a hobby project just for time-pass.',bg='powder blue',font=('Arial Black',10,'bold')).pack()
         Label(more, text='Contact us at:\nhbmcasper@gmail.com',bg='powder blue',font=('Arial Black',10,'bold')).pack(side=LEFT)
         
-###########################################################################################################
     
     def __init__(self, master):
         master.title('TEXT EDITOR')
@@ -169,7 +163,8 @@ class text_editor:
         self.format.add_command(label='Change Text Size', command = self.tsize)
         self.format.add_command(label='Change Text Color', command = self.tcolor)
 
-###########################################################################################################
+
+print("------------------------------------------------------------")  # 60個
 
 te = text_editor(window)
 

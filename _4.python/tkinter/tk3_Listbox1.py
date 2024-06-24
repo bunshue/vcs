@@ -2,7 +2,7 @@ import sys
 import tkinter as tk
 
 print('------------------------------------------------------------')	#60個
-'''
+
 window = tk.Tk()
 window.geometry("600x800")
 window.title('Listbox 1')
@@ -90,7 +90,7 @@ lb.pack(pady=10)
 print("你選了 ", lb.size(), "個")            # 列出選項數量
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 fruits = ["Banana","Watermelon","Pineapple","Orange","Grapes","Mango"]
@@ -360,7 +360,8 @@ print('------------------------------------------------------------')	#60個
 print('Listbox + Scrollbar')
 
 window = tk.Tk()
-window.geometry("400x200")
+window.geometry("600x800")
+window.title('Listbox 7')
 
 scrollbar = tk.Scrollbar(window)
 scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
