@@ -16,15 +16,15 @@ listbox = tk.Listbox(window)
 listbox.pack()
 
 # Listbox內加入項目
-listbox.insert(tk.END, "AAAA")
-for item in ["BBBB", "CCCC", "DDDD", "EEEE"]:
+listbox.insert(tk.END, "鼠")
+for item in ["牛", "虎", "兔"]:
     listbox.insert(tk.END, item)
 
 
 lb = tk.Listbox(window)
-lb.insert(tk.END, "AAAA")
-lb.insert(tk.END, "BBBB")
-lb.insert(tk.END, "CCCC")
+lb.insert(tk.END, "鼠")
+lb.insert(tk.END, "牛")
+lb.insert(tk.END, "虎")
 lb.pack(pady=10)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -51,13 +51,13 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Listbox 2")
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 # 多這個
 lb = tk.Listbox(window, selectmode=tk.MULTIPLE)  # 建立可以多選項的listbox
 
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=10)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -65,13 +65,13 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 # 多這個
 lb = tk.Listbox(window, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
 
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=10)
 
 
@@ -80,11 +80,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-fruits = ["Banana", "Watermelon", "Pineapple"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.insert(tk.ACTIVE, "Orange", "Grapes", "Mango")  # 前面補充建立3個項目
 lb.pack(pady=10)
 
@@ -93,11 +93,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=10)
 print("你選了 ", lb.size(), "個")  # 列出選項數量
 
@@ -105,15 +105,15 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Listbox 3")
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=10)
 lb.selection_set(0)  # 預設選擇第0個項目
 
@@ -122,11 +122,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=10)
 lb.selection_set(0, 3)  # 預設選擇第0-3索引項目
 
@@ -135,11 +135,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=10)
 lb.delete(1)  # 刪除索引1的項目
 
@@ -148,11 +148,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=10)
 lb.delete(1, 3)  # 刪除索引1-3的項目
 
@@ -164,11 +164,11 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Listbox 4")
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=10)
 print(lb.get(1))  # 列印索引1的項目
 
@@ -177,11 +177,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=10)
 print(lb.get(1, 3))  # 列印索引1-3的項目
 
@@ -197,11 +197,11 @@ def callback():  # 列印所選的項目
         print(lb.get(index))  # 列印所選的項目
 
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window, selectmode=tk.MULTIPLE)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=5)
 
 button1 = tk.Button(window, text="Print", command=callback)
@@ -214,11 +214,11 @@ def callback():  # 列印檢查結果
     print(lb.selection_includes(3))
 
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window, selectmode=tk.MULTIPLE)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(pady=5)
 
 button1 = tk.Button(window, text="Check", command=callback)
@@ -246,15 +246,15 @@ def itemsSorted():  # 排序
         lb.insert(tk.END, item)
 
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Listbox 5")
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.pack(padx=10, pady=5)
 
 # 建立排序按鈕
@@ -278,15 +278,15 @@ def itemSelected(event):  # 列出所選單一項目
     var.set(obj.get(index))  # 設定標籤內容
 
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 var = tk.StringVar()  # 建立標籤
 lab = tk.Label(window, text="", textvariable=var)
 lab.pack(pady=5)
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.bind("<<ListboxSelect>>", itemSelected)  # 點選綁定
 lb.pack(pady=5)
 
@@ -301,15 +301,15 @@ def itemSelected(event):  # 列出所選單一項目
     var.set(lb.get(index))  # 設定標籤內容
 
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 var = tk.StringVar()  # 建立標籤
 lab = tk.Label(window, text="", textvariable=var)
 lab.pack(pady=5)
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.bind("<<ListboxSelect>>", itemSelected)  # 點選綁定
 lb.pack(pady=5)
 
@@ -331,15 +331,15 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Listbox 6")
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 var = tk.StringVar()
 lab = tk.Label(window, text="", textvariable=var)
 lab.pack(pady=5)
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.bind("<Double-Button-1>", itemSelected)  # 連按2下綁定
 lb.pack(pady=5)
 
@@ -357,15 +357,15 @@ def itemsSelected(event):  # 列印所選結果
     print("----------")  # 區隔輸出
 
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 var = tk.StringVar()
 lab = tk.Label(window, text="", textvariable=var)
 lab.pack(pady=5)
 
 lb = tk.Listbox(window, selectmode=tk.EXTENDED)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
 lb.bind("<<ListboxSelect>>", itemsSelected)  # 點選綁定
 lb.pack(pady=5)
 
@@ -393,11 +393,11 @@ def dragJob(event):  # 處理拖曳選項
         lb.index = newIndex  # 選項的新索引
 
 
-fruits = ["Banana", "Watermelon", "Pineapple", "Orange", "Grapes", "Mango"]
+animals = ["鼠", "牛", "虎", "兔"]
 
 lb = tk.Listbox(window)
-for fruit in fruits:  # 建立水果項目
-    lb.insert(tk.END, fruit)
+for animal in animals:  # 建立動物項目
+    lb.insert(tk.END, animal)
     lb.bind("<Button-1>", getIndex)  # 按一下綁定getIndex
     lb.bind("<B1-Motion>", dragJob)  # 拖曳綁定dragJob
 lb.pack(padx=10, pady=10)

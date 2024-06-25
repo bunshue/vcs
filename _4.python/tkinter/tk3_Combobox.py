@@ -14,7 +14,7 @@ window.geometry("600x800")
 window.title("Combobox 測試")
 
 # Combobox
-items = ("Ice cream", "Pizza", "Broccoli")
+items = ("鼠", "牛", "虎", "兔")
 food_string = tk.StringVar(value=items[0])
 combo = ttk.Combobox(window, textvariable=food_string)
 combo["values"] = items
@@ -40,11 +40,11 @@ def combobox_select2(event):
     labelVar.set(cbVar.get())
 
 
-print("最喜歡的運動")
+print("最喜歡的動物")
 
 cbVar = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=cbVar)
-cb["value"] = ("籃球", "排球", "足球", "其他")  # 設定選項
+cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項
 cb.current(0)  # 預設第一個選項
 cb.bind("<<ComboboxSelected>>", combobox_select2)  # 設定選取選項後執行的程式
 cb.pack()
@@ -68,7 +68,7 @@ def combobox_select5(event):  # 下拉選單選取選項後執行的程式
 
         labelVar.set(showdata)
     else:
-        labelVar.set("請選擇縣市！")
+        labelVar.set("請選擇動物")
 
 
 print("縣市天氣資料")
@@ -77,27 +77,10 @@ cbVar = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=cbVar)  # 下拉式選單元件
 cb["value"] = (
     "請選擇：",
-    "臺北",
-    "新北",
-    "桃園",
-    "臺中",
-    "臺南",
-    "高雄",
-    "基隆",
-    "新竹",
-    "嘉義",
-    "苗栗",
-    "彰化",
-    "南投",
-    "雲林",
-    "嘉義",
-    "屏東",
-    "宜蘭",
-    "花蓮",
-    "臺東",
-    "澎湖",
-    "金門",
-    "連江",
+    "鼠",
+    "牛",
+    "虎",
+    "兔",
 )  # 設定選項
 cb.current(0)  # 預設第一個選項
 cb.bind("<<ComboboxSelected>>", combobox_select5)  # 設定選取選項後執行的程式
@@ -107,7 +90,7 @@ labelVar = tk.StringVar()
 labelShow = tk.Label(
     window, foreground="red", justify="left", textvariable=labelVar
 )  # 標籤元件
-labelVar.set("尚未選擇縣市！")
+labelVar.set("尚未選擇動物")
 labelShow.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -125,7 +108,7 @@ print("Combobox 測試")
 
 cbVar = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=cbVar)  # 下拉式選單元件
-cb["value"] = ("籃球", "排球", "足球", "其他")  # 設定選項
+cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項
 cb.current(0)  # 預設第一個選項
 cb.bind("<<ComboboxSelected>>", combobox_select3)  # 設定選取選項後執行的程式
 cb.pack()
@@ -151,11 +134,11 @@ a.set("")
 label = tk.Label(window, textvariable=a)  # 建立標籤，內容為變數
 label.pack()
 
-box = ttk.Combobox(window, width=15, values=["七龍珠", "海賊王", "鬼滅之刃", "灌籃高手", "排球少年"])
+box = ttk.Combobox(window, width=15, values=["鼠", "牛", "虎", "兔"])
 box.pack()
 
 btn = tk.Button(
-    window, text="顯示", command=combobox_select4
+    window, text="選擇", command=combobox_select4
 )  # 建立按鈕，點擊按鈕時，執行 combobox_select4 函式
 btn.pack()
 
@@ -170,9 +153,9 @@ def combobox_select1(event):
     lab_result.config(text=selected_area)
 
 
-print("試題與測驗分析程式")
+print("Combobox 測試")
 
-AREA_OPTIONS = ("屏東縣", "高雄市", "台南市", "台東縣")
+AREA_OPTIONS = ("鼠", "牛", "虎", "兔")
 area = tk.StringVar()
 combox = ttk.Combobox(window, value=AREA_OPTIONS, textvariable=area)
 combox.bind("<<ComboboxSelected>>", combobox_select1)
@@ -193,7 +176,7 @@ def combobox_select6(event):  # 顯示選項
 
 var = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("Python", "Java", "C#", "C")  # 設定選項內容
+cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
 cb.current(0)  # 設定預設選項
 cb.bind("<<ComboboxSelected>>", combobox_select6)  # 綁定
 cb.pack()
@@ -210,7 +193,7 @@ print("------------------------------------------------------------")  # 60個
 
 var = tk.StringVar()
 cb = ttk.Combobox(
-    window, textvariable=var, value=("Python", "Java", "C#", "C")  # 建立Combobox
+    window, textvariable=var, value=("鼠", "牛", "虎", "兔")  # 建立Combobox
 )
 cb.pack()
 
@@ -221,7 +204,7 @@ print("------------------------------------------------------------")  # 60個
 
 var = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("Python", "Java", "C#", "C")  # 設定選項內容
+cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
 cb.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -231,7 +214,7 @@ print("------------------------------------------------------------")  # 60個
 
 var = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("Python", "Java", "C#", "C")  # 設定選項內容
+cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
 cb.current(0)  # 設定預設選項
 cb.pack()
 
@@ -242,8 +225,8 @@ print("------------------------------------------------------------")  # 60個
 
 var = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("Python", "Java", "C#", "C")  # 設定選項內容
-var.set("Python")  # 設定預設選項
+cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
+var.set("牛")  # 預設
 cb.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -258,11 +241,11 @@ def combobox_select7():  # 列印選項
 
 var = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("Python", "Java", "C#", "C")  # 設定選項內容
-cb.current(0)  # 設定預設選項
+cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
+cb.current(0)  # 預設
 cb.pack()
 
-btn = tk.Button(window, text="Print", command=combobox_select7)  # 建立按鈕
+btn = tk.Button(window, text="選擇", command=combobox_select7)  # 建立按鈕
 btn.pack()
 
 window.mainloop()

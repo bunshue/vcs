@@ -154,17 +154,16 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-text1 = tk.Text(window, width=50, height=5, padx=15, pady=15)
-text1.insert(1.0, "要加到Text內的文字")
-text1.tag_configure("center", justify="center")
-text1.tag_add("center", 1.0, "end")
-text1.pack()
+text5 = tk.Text(window, width=50, height=5, padx=15, pady=15)
+text5.insert(1.0, "要加到Text內的文字")
+text5.tag_configure("center", justify="center")
+text5.tag_add("center", 1.0, "end")
+text5.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
 
 window.mainloop()
 
@@ -174,13 +173,13 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Text 2")
 
-ptext = tk.Text(window)
-ptext.insert(tk.INSERT, "床前明月光\n")
-ptext.insert(tk.INSERT, "疑是地上霜\n")
-ptext.insert(tk.INSERT, "舉頭望明月\n")
-ptext.insert(tk.INSERT, "低頭思故鄉\n")
-ptext.pack()
-ptext.config(state=tk.DISABLED)
+text6 = tk.Text(window)
+text6.insert(tk.INSERT, "床前明月光\n")
+text6.insert(tk.INSERT, "疑是地上霜\n")
+text6.insert(tk.INSERT, "舉頭望明月\n")
+text6.insert(tk.INSERT, "低頭思故鄉\n")
+text6.pack()
+text6.config(state=tk.DISABLED)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -190,16 +189,14 @@ print("------------------------------------------------------------")  # 60個
 print("Text多行文字")
 sentences = "玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
 
-text = tk.Text(window, width=30, height=14, bg="yellow", wrap=tk.WORD)
-text.insert(tk.END, sentences)
-text.pack()
-
+text7 = tk.Text(window, width=30, height=14, bg="yellow", wrap=tk.WORD)
+text7.insert(tk.END, sentences)
+text7.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
 
 window.mainloop()
 
@@ -209,8 +206,8 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Text 3")
 
-text1 = tk.Text(window, width=30, height=5)
-text1.pack()
+text8 = tk.Text(window, width=30, height=5)
+text8.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -256,6 +253,7 @@ print("------------------------------------------------------------")  # 60個
 
 text5 = tk.Text(window, width=30, height=5)
 text5.pack()
+
 str = """誰家玉笛暗飛聲，散入春風滿洛城。
 此夜曲中聞折柳，何人不起故園情。
 """
@@ -269,6 +267,7 @@ print("------------------------------------------------------------")  # 60個
 text6 = tk.Text(window, width=30, height=5)
 # text6.pack(fill=tk.BOTH,expand=True,padx=3,pady=2)
 text6.pack()
+
 text6.insert(tk.END, "白髮三千丈，離愁似箇長。\n")  # 插入文字
 text6.insert(1.14, "不知明鏡裏，何處得秋霜。")  # 插入文字
 
@@ -278,11 +277,13 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 text7 = tk.Text(window, width=30, height=5)
+text7.pack()
+
 text7.insert(tk.INSERT, "功蓋三分國\n")
 text7.insert(tk.CURRENT, "名成八陣圖\n")
 text7.insert(tk.CURRENT, "江流石不轉\n")
 text7.insert(tk.END, "遺恨失吞吳")
-text7.pack()
+
 text7.config(state=tk.DISABLED)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -291,26 +292,21 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 """
 # 產生多行文字框元件
-text1 = tk.Text(window,	selectbackground = 'red', selectforeground = 'gray')
-text1.pack()
+text9 = tk.Text(window,	selectbackground = 'red', selectforeground = 'gray')
+text9.pack()
 """
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-text1 = tk.Text(window, width=30, height=5)
-text1.pack()
-text1.insert(tk.END, "\n寫在Text中的文字1")
-text1.insert(tk.END, "\n寫在Text中的文字2")
-text1.insert(tk.END, "\n寫在Text中的文字3")
-text1.insert(tk.END, "\n寫在Text中的文字4")
+text10 = tk.Text(window, width=30, height=5)
+text10.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
+text10.insert(tk.END, "\n寫在Text中的文字1")
+text10.insert(tk.END, "\n寫在Text中的文字2")
+text10.insert(tk.END, "\n寫在Text中的文字3")
+text10.insert(tk.END, "\n寫在Text中的文字4")
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -320,11 +316,7 @@ print("------------------------------------------------------------")  # 60個
 
 window.mainloop()
 
-
-sys.exit()
-
 print("------------------------------------------------------------")  # 60個
-
 
 def selectedText():  # 列印所選的文字
     try:

@@ -5,101 +5,10 @@
 """
 
 import sys
-import tkinter as tk
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Entry 測試")
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-# Entry與Label測試
-tk.Label(text="Entry與Label同步改變Text").pack()
-
-string = tk.StringVar()
-entry = tk.Entry(window, textvariable=string)
-entry.pack()
-label = tk.Label(window, textvariable=string)
-label.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-# Entry 預設值
-entry_string = tk.StringVar(value="Entry 預設值")
-entry = tk.Entry(window, textvariable=entry_string)
-entry.pack()
-
-print("Entry內容 :", entry_string.get())  # Entry取值
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def get_entry_text():
-    print("取得帳號 :", entry1a.get())
-    print("取得密碼 :", entry2a.get())
-
-
-# 新建一個Frame, row, column重新計算, 控件要依附新的Frame
-frame3 = tk.Frame(window)
-frame3.pack()
-
-label1 = tk.Label(frame3, text="Username:")
-entry1a = tk.Entry(frame3)
-
-label2 = tk.Label(frame3, text="Password:")
-entry2a = tk.Entry(frame3, show="*")
-
-button = tk.Button(frame3, text="取得Entry資料", command=get_entry_text)
-
-label1.pack()
-entry1a.pack()
-label2.pack()
-entry2a.pack()
-button.pack()
-
-# 新建一個Frame, row, column重新計算, 控件要依附新的Frame
-frame4 = tk.Frame(window)
-frame4.pack()
-
-# get username and password
-username = tk.StringVar()
-password = tk.StringVar()
-entry1b = tk.Entry(frame4, textvariable=username, font=(14))
-entry2b = tk.Entry(frame4, textvariable=password, font=(14), show="*")
-entry1b.pack()
-entry2b.pack()
-
-
-def get_entry_data():
-    print("取得帳號 :", username.get())
-    print("取得密碼 :", password.get())
-
-
-button1 = tk.Button(frame4, command=get_entry_data, text="取得Entry資料", font=(20))
-button1.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
 import random
+import tkinter as tk
+
+print("------------------------------------------------------------")  # 60個
 
 print("用 Entry 和 grid 做 表格")
 

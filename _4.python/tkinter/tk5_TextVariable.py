@@ -9,11 +9,7 @@ import random
 import datetime
 import tkinter as tk
 from tkinter import ttk
-
-
-print("------------------------------------------------------------")  # 60個
-
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
@@ -566,3 +562,93 @@ button.pack()
 
 
 """
+
+'''
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+def selAll():  # 選取全部字串
+    entry.select_range(0, tk.END)
+
+
+def deSel():  # 取消選取
+    entry.select_clear()
+
+
+def clr():  # 刪除文字
+    entry.delete(0, tk.END)
+
+
+def readonly():  # 設定Entry狀態
+    if var.get() == True:
+        entry.config(state=tk.DISABLED)  # 設為DISABLED
+    else:
+        entry.config(state=tk.NORMAL)  # 設為NORMAL
+
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Entry 文字選取")
+
+# 以下row=0建立Entry
+entry = tk.Entry(window)
+entry.pack()
+
+# 以下row=1建立Button
+buttonSel = tk.Button(window, text="選取", command=selAll)
+buttonSel.pack()
+buttonDesel = tk.Button(window, text="取消選取", command=deSel)
+buttonDesel.pack()
+buttonClr = tk.Button(window, text="刪除", command=clr)
+buttonClr.pack()
+
+# 以下row=2建立Checkboxes
+var = tk.BooleanVar()
+var.set(False)
+chkReadonly = tk.Checkbutton(window, text="唯讀", variable=var, command=readonly)
+chkReadonly.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+# Entry與Label測試
+tk.Label(text="Entry與Label同步改變Text").pack()
+
+string = tk.StringVar()
+entry = tk.Entry(window, textvariable=string)
+entry.pack()
+label = tk.Label(window, textvariable=string)
+label.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+# Entry 預設值
+entry_string = tk.StringVar(value="Entry 預設值")
+entry = tk.Entry(window, textvariable=entry_string)
+entry.pack()
+
+print("Entry內容 :", entry_string.get())  # Entry取值
+
+
+
+
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+

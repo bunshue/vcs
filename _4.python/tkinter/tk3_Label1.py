@@ -761,3 +761,18 @@ label = tk.Label(
     window, text="美國SE", fg="blue", bg="yellow", height=3, width=15, anchor="se"
 )
 label.pack()
+
+
+
+
+
+"""
+
+
+print('凸起的Label')
+label1 = tk.Label(window, text="歡迎來到美國", relief="raised")
+label3 = tk.Label(window, text="歡迎來到美國", relief="raised")
+
+
+"""
+

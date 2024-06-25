@@ -6,7 +6,7 @@ import sys
 import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 window.geometry("800x800")
 window.title("Grid 測試 1")
@@ -702,75 +702,34 @@ label4.grid(row=1, column=1, sticky="nswe")
 label5.grid(row=2, column=1, columnspan=2, sticky="nswe")
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Grid 測試 32")
 
-label1 = tk.Label(window, text="歡迎來到美國")
-label2 = tk.Label(window, bg="yellow", width=20)
-label3 = tk.Label(window, text="歡迎來到美國")
-label4 = tk.Label(window, bg="aqua", width=20)
-label1.grid(row=0, column=0, padx=5, pady=5)
-label2.grid(row=0, column=1, padx=5, pady=5)
-label3.grid(row=1, column=0, padx=5)
-label4.grid(row=1, column=1, padx=5)
+w = 20
+h = 5
+button1 = tk.Button(window, width=w, height=h, text="歡迎來到美國")
+button2 = tk.Button(window, width=w, height=h, bg="yellow")
+button3 = tk.Button(window, width=w, height=h, text="歡迎來到美國")
+button4 = tk.Button(window, width=w, height=h, bg="aqua")
+button1.grid(row=0, column=0)
+button2.grid(row=0, column=1)
+button3.grid(row=1, column=0)
+button4.grid(row=1, column=1)
+
+button1 = tk.Button(window, width=w, height=h, text="歡迎來到美國")
+button2 = tk.Button(window, width=w, height=h, bg="yellow")
+button3 = tk.Button(window, width=w, height=h, text="歡迎來到美國")
+button4 = tk.Button(window, width=w, height=h, bg="aqua")
+button1.grid(row=2, column=0, padx=5, pady=5, sticky=tk.W + tk.E)
+button2.grid(row=2, column=1, padx=5, pady=5)
+button3.grid(row=3, column=0, padx=5)
+button4.grid(row=3, column=1, padx=5)
 
 window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 33")
-
-label1 = tk.Label(window, text="歡迎來到美國")
-label2 = tk.Label(window, bg="yellow", width=20)
-label3 = tk.Label(window, text="歡迎來到美國")
-label4 = tk.Label(window, bg="aqua", width=20)
-label1.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
-label2.grid(row=0, column=1, padx=5, pady=5)
-label3.grid(row=1, column=0, padx=5)
-label4.grid(row=1, column=1, padx=5)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 34")
-
-label1 = tk.Label(window, text="歡迎來到美國", relief="raised")
-label2 = tk.Label(window, bg="yellow", width=20)
-label3 = tk.Label(window, text="歡迎來到美國", relief="raised")
-label4 = tk.Label(window, bg="aqua", width=20)
-label1.grid(row=0, column=0, padx=5, pady=5)
-label2.grid(row=0, column=1, padx=5, pady=5)
-label3.grid(row=1, column=0, padx=5)
-label4.grid(row=1, column=1, padx=5)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 35")
-
-label1 = tk.Label(window, text="歡迎來到美國", relief="raised")
-label2 = tk.Label(window, bg="yellow", width=20)
-label3 = tk.Label(window, text="歡迎來到美國", relief="raised")
-label4 = tk.Label(window, bg="aqua", width=20)
-label1.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W + tk.E)
-label2.grid(row=0, column=1, padx=5, pady=5)
-label3.grid(row=1, column=0, padx=5)
-label4.grid(row=1, column=1, padx=5)
-
-window.mainloop()
-
 
 print("------------------------------------------------------------")  # 60個
 
@@ -790,9 +749,12 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+#設定列欄權重
+
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Grid 測試 37")
+
 window.rowconfigure(1, weight=1)
 window.columnconfigure(0, weight=1)
 
@@ -802,7 +764,7 @@ label1.grid(row=0, column=0, padx=5, pady=5)
 label2 = tk.Label(window, text="Label 2", bg="lightblue")
 label2.grid(row=0, column=1, padx=5, pady=5)
 
-label3 = tk.Label(window, bg="yellow")
+label3 = tk.Label(window, text="Label 3", bg="yellow")
 label3.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
 
 window.mainloop()
@@ -812,6 +774,7 @@ print("------------------------------------------------------------")  # 60個
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Grid 測試 38")
+
 window.rowconfigure(1, weight=1)
 window.columnconfigure(0, weight=1)
 
@@ -822,9 +785,7 @@ label2 = tk.Label(window, text="Label 2", bg="lightblue")
 label2.grid(row=0, column=1, padx=5, pady=5)
 
 label3 = tk.Label(window, bg="yellow")
-label3.grid(
-    row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.N + tk.S + tk.W + tk.E
-)
+label3.grid(row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.N + tk.S + tk.W + tk.E)
 
 window.mainloop()
 
@@ -842,185 +803,8 @@ label1.grid(row=0, column=0, padx=5, pady=5, stick=tk.W + tk.E)
 label2 = tk.Label(window, text="Label 2", bg="lightblue")
 label2.grid(row=0, column=1, padx=5, pady=5)
 
-label3 = tk.Label(window, bg="yellow")
-label3.grid(
-    row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.N + tk.S + tk.W + tk.E
-)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 41")
-
-lab = tk.Label(window, text="", bg="yellow", width=20)
-button7 = tk.Button(window, text="7", width=3)
-button8 = tk.Button(window, text="8", width=3)
-button9 = tk.Button(window, text="9", width=3)
-buttonM = tk.Button(window, text="*", width=3)  # 乘法符號
-button4 = tk.Button(window, text="4", width=3)
-button5 = tk.Button(window, text="5", width=3)
-button6 = tk.Button(window, text="6", width=3)
-buttonS = tk.Button(window, text="-", width=3)  # 減法符號
-button1 = tk.Button(window, text="1", width=3)
-button2 = tk.Button(window, text="2", width=3)
-button3 = tk.Button(window, text="3", width=3)
-buttonP = tk.Button(window, text="+", width=3)  # 加法符號
-button0 = tk.Button(window, text="0", width=8)
-buttonD = tk.Button(window, text=".", width=3)  # 小數點符號
-buttonE = tk.Button(window, text="=", width=3)  # 等號符號
-
-lab.grid(row=0, column=0, columnspan=4)
-button7.grid(row=1, column=0, padx=5)
-button8.grid(row=1, column=1, padx=5)
-button9.grid(row=1, column=2, padx=5)
-buttonM.grid(row=1, column=3, padx=5)  # 乘法符號
-button4.grid(row=2, column=0, padx=5)
-button5.grid(row=2, column=1, padx=5)
-button6.grid(row=2, column=2, padx=5)
-buttonS.grid(row=2, column=3, padx=5)  # 減法符號
-button1.grid(row=3, column=0, padx=5)
-button2.grid(row=3, column=1, padx=5)
-button3.grid(row=3, column=2, padx=5)
-buttonP.grid(row=3, column=3, padx=5)  # 加法符號
-button0.grid(row=4, column=0, padx=5, columnspan=2)
-buttonD.grid(row=4, column=2, padx=5)  # 小數點符號
-buttonE.grid(row=4, column=3, padx=5)  # 等號符號
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 42")
-
-nameL = tk.Label(window, text="Name ")  # name標籤
-nameL.grid(row=0)
-addressL = tk.Label(window, text="Address")  # address標籤
-addressL.grid(row=1)
-
-nameE = tk.Entry(window)  # 文字方塊name
-addressE = tk.Entry(window)  # 文字方塊address
-nameE.grid(row=0, column=1)  # 定位文字方塊name
-addressE.grid(row=1, column=1)  # 定位文字方塊address
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 43")
-
-accountL = tk.Label(window, text="Account")  # account標籤
-accountL.grid(row=0)
-pwdL = tk.Label(window, text="Password")  # pwd標籤
-pwdL.grid(row=1)
-
-accountE = tk.Entry(window)  # 文字方塊account
-pwdE = tk.Entry(window, show="*")  # 文字方塊pwd
-accountE.grid(row=0, column=1)  # 定位文字方塊account
-pwdE.grid(row=1, column=1)  # 定位文字方塊pwd
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 44")
-
-var1 = tk.IntVar()
-cbtnNFL = tk.Checkbutton(window, text="美式足球", variable=var1)
-cbtnNFL.grid(row=1, sticky=tk.W)
-
-var2 = tk.IntVar()
-cbtnMLB = tk.Checkbutton(window, text="棒球", variable=var2)
-cbtnMLB.grid(row=2, sticky=tk.W)
-
-var3 = tk.IntVar()
-cbtnNBA = tk.Checkbutton(window, text="籃球", variable=var3)
-cbtnNBA.grid(row=3, sticky=tk.W)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def printInfo1():
-    selection = ""
-    for i in checkboxes:  # 檢查此字典
-        if checkboxes[i].get() == True:  # 被選取則執行
-            selection = selection + sports[i] + "\t"
-    print(selection)
-
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 45")
-
-tk.Label(window, text="請選擇喜歡的運動", fg="blue", bg="lightyellow", width=30).grid(row=0)
-
-sports = {0: "美式足球", 1: "棒球", 2: "籃球", 3: "網球"}  # 運動字典
-checkboxes = {}  # 字典存放被選取項目
-for i in range(len(sports)):  # 將運動字典轉成核取方塊
-    checkboxes[i] = tk.BooleanVar()  # 布林變數物件
-    tk.Checkbutton(window, text=sports[i], variable=checkboxes[i]).grid(
-        row=i + 1, sticky=tk.W
-    )
-
-button1 = tk.Button(window, text="選取", width=10, command=printInfo1)
-button1.grid(row=i + 2)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-# 以下是callback方法
-def selAll():  # 選取全部字串
-    entry.select_range(0, tk.END)
-
-
-def deSel():  # 取消選取
-    entry.select_clear()
-
-
-def clr():  # 刪除文字
-    entry.delete(0, tk.END)
-
-
-def readonly():  # 設定Entry狀態
-    if var.get() == True:
-        entry.config(state=tk.DISABLED)  # 設為DISABLED
-    else:
-        entry.config(state=tk.NORMAL)  # 設為NORMAL
-
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 46")
-
-# 以下row=0建立Entry
-entry = tk.Entry(window)
-entry.grid(row=0, column=0, columnspan=4, padx=5, pady=5, sticky=tk.W)
-# 以下row=1建立Button
-buttonSel = tk.Button(window, text="選取", command=selAll)
-buttonSel.grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
-buttonDesel = tk.Button(window, text="取消選取", command=deSel)
-buttonDesel.grid(row=1, column=1, padx=5, pady=5, sticky=tk.W)
-buttonClr = tk.Button(window, text="刪除", command=clr)
-buttonClr.grid(row=1, column=2, padx=5, pady=5, sticky=tk.W)
-buttonQuit = tk.Button(window, text="結束", command=window.destroy)
-buttonQuit.grid(row=1, column=3, padx=5, pady=5, sticky=tk.W)
-# 以下row=2建立Checkboxes
-var = tk.BooleanVar()
-var.set(False)
-chkReadonly = tk.Checkbutton(window, text="唯讀", variable=var, command=readonly)
-chkReadonly.grid(row=2, column=0)
+label3 = tk.Label(window, text="Label 3", bg="yellow")
+label3.grid(row=1, column=0, columnspan=2, padx=5, pady=5, sticky=tk.N + tk.S + tk.W + tk.E)
 
 window.mainloop()
 
@@ -1052,42 +836,6 @@ fm5.grid(row=1, column=1, padx=5, pady=5)
 
 fm6 = tk.Frame(window, width=150, height=80, relief="sunken")
 fm6.grid(row=1, column=2, padx=5, pady=5)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 47")
-window.title("AddressBook, Grid範例")
-
-frame1 = tk.Frame(window)
-frame1.pack()
-tk.Label(frame1, text="Name").grid(row=1, column=1, sticky=tk.W)
-tk.Entry(frame1, width=40).grid(row=1, column=2)
-
-frame2 = tk.Frame(window)
-frame2.pack()
-tk.Label(frame2, text="Street").grid(row=1, column=1, sticky=tk.W)
-tk.Entry(frame2, width=40).grid(row=1, column=2)
-
-frame3 = tk.Frame(window)
-frame3.pack()
-tk.Label(frame3, text="City", width=5).grid(row=1, column=1, sticky=tk.W)
-tk.Entry(frame3).grid(row=1, column=2)
-tk.Label(frame3, text="State").grid(row=1, column=3, sticky=tk.W)
-tk.Entry(frame3, width=5).grid(row=1, column=4)
-tk.Label(frame3, text="ZIP").grid(row=1, column=5, sticky=tk.W)
-tk.Entry(frame3, width=5).grid(row=1, column=6)
-
-frame4 = tk.Frame(window)
-frame4.pack()
-tk.Button(frame4, text="Add").grid(row=1, column=1)
-btFirst = tk.Button(frame4, text="First").grid(row=1, column=2)
-btNext = tk.Button(frame4, text="Next").grid(row=1, column=3)
-btPrevious = tk.Button(frame4, text="Previous").grid(row=1, column=4)
-btLast = tk.Button(frame4, text="Last").grid(row=1, column=5)
 
 window.mainloop()
 
@@ -1145,3 +893,4 @@ print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("作業完成")
 print("------------------------------------------------------------")  # 60個
+

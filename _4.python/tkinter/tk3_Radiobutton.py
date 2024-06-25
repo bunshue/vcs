@@ -11,24 +11,10 @@ import tkinter as tk
 from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
-'''
-# 建立主視窗
+
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 700
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
+window.geometry("600x800")
+window.title("Radiobutton 1")
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
@@ -181,23 +167,10 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-# 建立主視窗
 window = tk.Tk()
+window.geometry("600x800")
+window.title("Radiobutton 2")
 
-# 設定主視窗大小
-w = 700
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
 
 def radbut_click():
     selected_item = area.get()
@@ -314,26 +287,9 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
-# 建立主視窗
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 700
-h = 800
-x_st = 100
-y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-#window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
+window.geometry("600x800")
+window.title("Radiobutton 3")
 
 
 def select():
@@ -430,7 +386,6 @@ for val, city in cities.items():        # 建立選項紐
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-'''
 
 from PIL import ImageTk, Image
 
@@ -440,7 +395,11 @@ def printSelection():
 
 
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
+
+
 window = tk.Tk()
+window.geometry("600x800")
+window.title("Radiobutton 4")
 
 # 檔案 => ImageTk影像
 tk_image1 = ImageTk.PhotoImage(file="__new/star.gif")
@@ -480,6 +439,9 @@ def printSelection():
 filename = "C:/_git/vcs/_4.python/_data/picture1.jpg"
 
 window = tk.Tk()
+window.geometry("600x800")
+window.title("Radiobutton 5")
+
 
 # 檔案 => ImageTk影像
 tk_image1 = ImageTk.PhotoImage(file="__new/star.gif")
@@ -529,6 +491,34 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+""" lack pic
+def more():
+    if choice.get()==0:
+        str1="牛是對少部份牛科動物的統稱 \n\
+              包括和人類習習相關的黃牛、水牛和氂牛" 
+        print("cattle的簡介",str1)
+    else:
+        str2="鹿有別於牛、羊等的動物。 \n \
+              包括麝科和鹿科動物"
+        print("deer的簡介",str2)
+    
+window = tk.Tk()
+window.geometry("600x800")
+window.title('messagebox 6')
+
+lb = tk.Label(window,text="請點選想了解的動物簡介:").pack()
+choice = tk.IntVar()
+choice.set(0)
+
+pic1 = tk.PhotoImage(file="cattle.gif")
+pic2 = tk.PhotoImage(file="deer.gif")
+
+tk.Radiobutton(window,image=pic1,variable=choice,value=0).pack()
+tk.Radiobutton(window,image=pic2,variable=choice,value=1).pack()
+tk.Button(window,text="進一步了解", command=more).pack()
+
+window.mainloop()
+"""
 
 print("------------------------------------------------------------")  # 60個
 

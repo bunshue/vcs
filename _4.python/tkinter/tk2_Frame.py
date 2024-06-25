@@ -239,3 +239,51 @@ print("------------------------------------------------------------")  # 60個
 
 
 window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("Grid 測試 47")
+window.title("AddressBook, Grid範例")
+
+frame1 = tk.Frame(window, bg = 'pink')
+frame1.pack()
+tk.Label(frame1, text="Name").grid(row=1, column=1, sticky=tk.W)
+tk.Entry(frame1, width=40).grid(row=1, column=2)
+
+frame2 = tk.Frame(window)
+frame2.pack()
+tk.Label(frame2, text="Street").grid(row=1, column=1, sticky=tk.W)
+tk.Entry(frame2, width=40).grid(row=1, column=2)
+
+frame3 = tk.Frame(window)
+frame3.pack()
+tk.Label(frame3, text="City", width=5).grid(row=1, column=1, sticky=tk.W)
+tk.Entry(frame3).grid(row=1, column=2)
+tk.Label(frame3, text="State").grid(row=1, column=3, sticky=tk.W)
+tk.Entry(frame3, width=5).grid(row=1, column=4)
+tk.Label(frame3, text="ZIP").grid(row=1, column=5, sticky=tk.W)
+tk.Entry(frame3, width=5).grid(row=1, column=6)
+
+frame4 = tk.Frame(window)
+frame4.pack()
+tk.Button(frame4, text="Add").grid(row=1, column=1)
+btFirst = tk.Button(frame4, text="First").grid(row=1, column=2)
+btNext = tk.Button(frame4, text="Next").grid(row=1, column=3)
+btPrevious = tk.Button(frame4, text="Previous").grid(row=1, column=4)
+btLast = tk.Button(frame4, text="Last").grid(row=1, column=5)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+

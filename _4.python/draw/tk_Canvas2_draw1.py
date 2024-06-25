@@ -3,7 +3,7 @@ import sys
 import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 W = 900
 H = 800
 
@@ -515,6 +515,55 @@ canvas1.create_text(300, 200, text='歡迎來到美國', fill='blue',
                    font=('華康新綜藝體 Std W7',20))
 
 print("------------------------------------------------------------")  # 60個
+'''
 
+
+
+window = tk.Tk()
+window.geometry("800x800")
+title = "tk畫圖大集合"
+window.title(title)
+
+print("------------------------------------------------------------")  # 60個
+
+color = "#FF0000"
+canvas = tk.Canvas(window, width=500, height=150, bg=color)
+canvas.pack()
+
+def drawCanvas():
+    print("draw")
+    x_st = 0
+    y_st = 0
+    radius = 50
+    for i in range(0, 10):
+        canvas.create_oval(
+            x_st + 50 * i, y_st, x_st + 50 * i + radius, y_st + radius, tags="oval"
+        )
+        canvas.create_oval(
+            x_st + 50 * i, y_st + 75, x_st + 50 * i + radius, y_st + 75 + radius
+        )
+
+
+def deleteCanvas():
+    print("delete")
+    canvas.delete("oval")
+    canvas.delete("rect", "oval", "line")
+
+
+button2 = tk.Button(window, text="在 Canvas 上畫一些東西", command=drawCanvas)
+button2.pack()
+
+button3 = tk.Button(window, text="刪除 Canvas 上畫的部分東西", command=deleteCanvas)
+button3.pack()
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+window.mainloop()
 
 

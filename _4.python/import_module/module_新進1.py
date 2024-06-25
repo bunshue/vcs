@@ -1,8 +1,8 @@
 import sys
 import random
-'''
-print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
+'''
 import linecache
 
 filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_txt/涼州詞.txt"
@@ -312,32 +312,7 @@ for f in files:
     text = open(f, "rb").read()
     codetype = chardet.detect(text)
     print("{} 編碼格式：{}".format(f, codetype))
-
-print("------------------------------------------------------------")  # 60個
-
-import time
-import threading
-import subprocess
-from optparse import OptionParser, SUPPRESS_HELP
-
-
-def bark(duration):
-    _time = time.time
-    _sleep = time.sleep
-
-    # We give the parent some time to be ready.
-    _sleep(1.0)
-
-    start_time = _time()
-    end_time = start_time + duration * 2.0
-    i = 0
-    while _time() < end_time:
-        print("b", end=" ")
-        i += 1
-
-
-bark(0.2)
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 print("查找wikipedia上的資料...")
@@ -422,7 +397,7 @@ print("相加", num1 + num2 + num3)
 print("相減", num1 - num2 - num3)
 print("相乘", num1 * num2 * num3)
 print("相除", num1 / num2)
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 #取得另外一個檔案內的資料
