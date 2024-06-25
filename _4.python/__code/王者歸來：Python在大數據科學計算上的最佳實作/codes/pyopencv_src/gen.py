@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import sys
 from string import Template
 
@@ -41,7 +39,7 @@ had_error = False
 for (f, args, ty, flags) in api:
     has_init = [(a.init != None) for a in args if not 'O' in a.flags]
     if True in has_init and not all(has_init[has_init.index(True):]):
-        print 'Error in definition for "%s", optional arguments must be last' % f
+        print('Error in definition for "%s", optional arguments must be last' % f)
         had_error = True
 
 if had_error:
@@ -194,7 +192,7 @@ def gen(name, args, ty, flags):
         yield '  const char *keywords[] = { %s };' % (", ".join([ '"%s"' % arg.nm for arg in args if not 'O' in arg.flags ] + ['NULL']))
         yield '  if (!PyArg_ParseTupleAndKeywords(args, kw, "%s|%s", %s))' % (fmt0, fmt1, ", ".join(['(char**)keywords'] + destinations))
         if '(' in (fmt0 + fmt1):
-          print "Tuple with kwargs is not allowed, function", name
+          print("Tuple with kwargs is not allowed, function", name)
           sys.exit(1)
       else:
         yield '  if (!PyArg_ParseTuple(args, "%s", %s))' % (fmt0, ", ".join(destinations))
@@ -311,7 +309,7 @@ def gen(name, args, ty, flags):
 
 gen_c = [ open("generated%d.i" % i, "w") for i in range(5) ]
 
-print "Generated %d functions" % len(api)
+print("Generated %d functions" % len(api))
 for nm,args,ty,flags in sorted(api):
 
   # Figure out docstring into ds_*
@@ -327,20 +325,23 @@ for nm,args,ty,flags in sorted(api):
   ds_args += o2s(optional)
 
   ds = "%s(%s) -> %s" % (nm, ds_args, str(ty))
-  #print ds
+  #print(ds)
 
   if has_optional(args):
       entry = '{"%%s", (PyCFunction)pycv%s, METH_KEYWORDS, "%s"},' % (cname(nm), ds)
   else:
       entry = '{"%%s", pycv%s, METH_VARARGS, "%s"},' % (cname(nm), ds)
-  print >>gen_c[1], entry % (nm)
+  #print(>>gen_c[1], entry % (nm))
   if nm.startswith('CV_'):
-    print >>gen_c[1], entry % (nm[3:])
+    print('a')
+    #print(>>gen_c[1], entry % (nm[3:]))
   for l in gen(nm,args,ty,flags):
-    print >>gen_c[0], l
+    print('b')
+    #print(>>gen_c[0], l)
 
 for l in open("%s/defs" % sys.argv[1]):
-  print >>gen_c[2], "PUBLISH(%s);" % l.split()[1]
+  print('c')
+  #print(>>gen_c[2], "PUBLISH(%s);" % l.split()[1])
 
 ########################################################################
 # Generated objects.
@@ -624,10 +625,13 @@ for (t, flags, members) in objects:
     else:
         nullcode = ""
     if 'copy' in flags:
-        print >>gen_c[3], gensimple.substitute(map, getset_funcs = gsf, getset_inits = gsi, allownull = nullcode)
+        print('d')
+        #print(>>gen_c[3], gensimple.substitute(map, getset_funcs = gsf, getset_inits = gsi, allownull = nullcode))
     else:
-        print >>gen_c[3], genptr.substitute(map, getset_funcs = gsf, getset_inits = gsi, allownull = nullcode)
-    print >>gen_c[4], "MKTYPE(%s);" % map['ourname']
+        print('e')
+        #print(>>gen_c[3], genptr.substitute(map, getset_funcs = gsf, getset_inits = gsi, allownull = nullcode))
+    #print(>>gen_c[4], "MKTYPE(%s);" % map['ourname'])
+    print('f')
 
 for f in gen_c:
   f.close()

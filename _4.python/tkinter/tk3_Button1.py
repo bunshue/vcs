@@ -70,33 +70,20 @@ frame0 = tk.Frame(window)  # Create and add a frame to window
 # frame0.grid(row = 1, column = 1, sticky = tk.W)
 frame0.pack()
 
-# Create images
-plusImage = tk.PhotoImage(
-    file="C:/_git/vcs/_1.data/______test_files1/__pic/_gif/operation/plus.gif"
-)
-minusImage = tk.PhotoImage(
-    file="C:/_git/vcs/_1.data/______test_files1/__pic/_gif/operation/minus.gif"
-)
-timesImage = tk.PhotoImage(
-    file="C:/_git/vcs/_1.data/______test_files1/__pic/_gif/operation/times.gif"
-)
-divideImage = tk.PhotoImage(
-    file="C:/_git/vcs/_1.data/______test_files1/__pic/_gif/operation/divide.gif"
-)
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
 
-tk.Button(frame0, image=plusImage, command="").grid(row=1, column=1, sticky=tk.W)
-tk.Button(frame0, image=minusImage, command="").grid(row=1, column=2)
-tk.Button(frame0, image=timesImage, command="").grid(row=1, column=3)
-tk.Button(frame0, image=divideImage, command="").grid(row=1, column=4)
+tk_image1 = tk.PhotoImage(file = "image/plus.gif")
+tk_image2 = tk.PhotoImage(file = "image/minus.gif")
+tk_image3 = tk.PhotoImage(file = "image/times.gif")
+tk_image4 = tk.PhotoImage(file = "image/divide.gif")
 
-# Add buttons to frame2
-frame2 = tk.Frame(window)  # Create and add a frame to window
-# frame2.grid(row = 3, column = 1, pady = 10, sticky = tk.E)
-frame2.pack()
-tk.Button(frame2, text="Add", command="").pack(side=tk.LEFT)
-tk.Button(frame2, text="Subtract", command="").pack(side=tk.LEFT)
-tk.Button(frame2, text="Multiply", command="").pack(side=tk.LEFT)
-tk.Button(frame2, text="Divide", command="").pack(side=tk.LEFT)
+tk.Button(frame0, image = tk_image1,command=lambda: print("你按了 +")).grid(row = 1, column = 1, sticky = tk.W)
+tk.Button(frame0, image = tk_image2,command=lambda: print("你按了 -")).grid(row = 1, column = 2)
+tk.Button(frame0, image = tk_image3,command=lambda: print("你按了 *")).grid(row = 1, column = 3)
+tk.Button(frame0, image = tk_image4,command=lambda: print("你按了 /")).grid(row = 1, column = 4)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5

@@ -178,6 +178,30 @@ def button15Click():
     # print('你按了button15')
     exitmp3()
 
+def button20Click():
+    print('你按了button20 測試0')
+    filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
+
+    pygame.init()
+    pygame.mixer.init()
+    pygame.mixer.music.load(filename)
+    pygame.mixer.music.play()
+
+def button21Click():
+    print('你按了button21 測試1')
+
+
+def button22Click():
+    print('你按了button22 測試2')
+
+def button23Click():
+    print('你按了button23 測試3')
+
+def button24Click():
+    print('你按了button24 測試4')
+
+def button25Click():
+    print('你按了button25 測試5')
 
 def set_data():
     """
@@ -294,6 +318,26 @@ button13.place(x=x_st + dx * 3, y=y_st + dy * 1)
 button14.place(x=x_st + dx * 4, y=y_st + dy * 1)
 button15.place(x=x_st + dx * 5, y=y_st + dy * 1)
 
+button20 = tk.Button(window, width=w, height=h, command=button20Click, text="測試0")
+button20.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
+button21 = tk.Button(window, width=w, height=h, command=button21Click, text="測試1")
+button21.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
+button22 = tk.Button(window, width=w, height=h, command=button22Click, text="測試2")
+button22.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
+button23 = tk.Button(window, width=w, height=h, command=button23Click, text="測試3")
+button23.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
+button24 = tk.Button(window, width=w, height=h, command=button24Click, text="測試4")
+button24.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
+button25 = tk.Button(window, width=w, height=h, command=button25Click, text="測試5")
+button25.pack(side=tk.LEFT, ipadx=25, ipady=25, expand=tk.YES)
+
+button20.place(x=x_st + dx * 0, y=y_st + dy * 2)
+button21.place(x=x_st + dx * 1, y=y_st + dy * 2)
+button22.place(x=x_st + dx * 2, y=y_st + dy * 2)
+button23.place(x=x_st + dx * 3, y=y_st + dy * 2)
+button24.place(x=x_st + dx * 4, y=y_st + dy * 2)
+button25.place(x=x_st + dx * 5, y=y_st + dy * 2)
+
 font_size = 20
 
 # 加入 Label
@@ -314,7 +358,7 @@ main_message2.set("")
 # 加入 Text
 text1 = tk.Text(window, width=100, height=30)  # 放入多行輸入框
 text1.pack()
-text1.place(x=x_st + dx * 0, y=y_st + dy * 2 + 20)
+text1.place(x=x_st + dx * 0, y=y_st + dy * 3 + 20)
 
 # mp3_foldername = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
 
@@ -364,5 +408,142 @@ def stopmusic():                                        # 處理按結束紐
 
           soundObj = pygame.mixer.Sound(r'C:\Windows\Media\notify.wav')  # 建立碰撞聲音物件            
             soundObj.play()                     # 發出碰撞聲音
+"""
+
+
+
+
+
+
+
+
+
+"""
+
+Python 聲音處理 pygame
+
+"""
+
+import os
+import sys
+import time
+import random
+
+import pygame
+
+print("------------------------------------------------------------")  # 60個
+
+
+def playmp3(filename):  # 播放新曲
+    pygame.mixer.music.stop()  # 要先stop, 才不會冒出一個雜音
+    pygame.mixer.music.load(filename)
+    pygame.mixer.music.play(loops=-1)
+
+
+filename1 = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3"
+filename3 = "C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
+filename4 = "C:/_git/vcs/_1.data/______test_files1/_mp3/mario.mp3"
+
+pygame.mixer.init()
+
+playmp3(filename2)
+
+# mixer.music.stop()
+
+print("------------------------------------------------------------")  # 60個
+
+import pygame
+
+pygame.init()
+
+windowSize = [400, 300]
+pygame.display.set_mode(windowSize)
+
+
+filename1 = "C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3"
+filename2 = "C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3"
+filename3 = "C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav"
+
+"""
+file1 = pygame.mixer.Sound(filename1)
+file2 = pygame.mixer.Sound(filename2)
+file3 = pygame.mixer.Sound(filename3)
+
+done = False
+while not done:
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_1]:
+        file1.play()
+        file2.stop()
+        file3.stop()
+
+    if keys[pygame.K_2]:
+        file1.stop()
+        file2.play()
+        file3.stop()
+
+    if keys[pygame.K_3]:
+        file1.stop()
+        file2.stop()
+        file3.play()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+pygame.quit()
+"""
+
+
+import pygame
+
+pygame.mixer.init()
+pygame.mixer.music.load(filename3)
+pygame.mixer.music.play()
+
+while pygame.mixer.music.get_busy():
+    pygame.time.delay(200)
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+import pygame
+
+pygame.mixer.init()
+
+filename = "C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3"
+sound = pygame.mixer.Sound(filename)
+sound.play(loops=0)
+
+#sound.stop()
+print("程式執行完畢！")
+
+
+
+
+
+"""
+pygame提供的模組
+
+color	提供色彩的設定
+display	顯示螢幕
+event	處理事件
+image	處理圖片
+key	處理鍵盤的按鈕
+mouse	處理滑鼠訊息
+movie	處理視訊播放
+mixer	用來播放聲音
+time	處理時間
+
+pygame.display.set_mode()	建立視窗並初始化
+pygame.display.set_caption()	在標題列顯示文字
+pygame.display.flip()		將Surface全部更新後並顯示於畫面上
+pygame.display.update()		依據軟體做部分畫面的更新
+
+
 """
 

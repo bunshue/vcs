@@ -1,8 +1,31 @@
+import tkinter as tk
+from tkinter import ttk
+
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+# size = str(w)+'x'+str(h)
+# size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+# window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+# print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
+#window.geometry("600x800")
 window.wm_title("固定視窗大小")
 window.minsize(width=666, height=480)
 window.maxsize(width=666, height=480)
@@ -13,11 +36,8 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-from tkinter import ttk
-
-# window
 window = tk.Tk()
+window.geometry("600x800")
 window.title("More on the window")
 
 # exercise:
@@ -70,24 +90,8 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-# size = str(w)+'x'+str(h)
-# size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-# window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-# print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
+window.geometry("600x800")
 
 print("設定視窗背景顏色")
 window["bg"] = "pink"  # 窗口背景色，其他背景色見：blog.csdn.net/chl0000/article/details/7657887
@@ -117,27 +121,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
 
-import tkinter as tk
-
 window = tk.Tk()
-
-# 設定主視窗大小
-w = 800
-h = 800
-x_st = 100
-y_st = 100
-# size = str(w)+'x'+str(h)
-# size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
-# window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-# print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-
-# 設定主視窗標題
-title = "Frame 測試"
-window.title(title)
+window.geometry("600x800")
+window.title("Frame 測試")
 
 # frame1
 frame1 = tk.Frame(
@@ -180,14 +168,9 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 
-
 window.mainloop()
 
-
 print("------------------------------------------------------------")  # 60個
-
-import tkinter as tk
-from tkinter import ttk
 
 extra_window = None
 
@@ -229,7 +212,7 @@ def close_window():
 
 # window
 window = tk.Tk()
-window.geometry("600x400")
+window.geometry("600x800")
 window.title("Multiple windows")
 
 button1 = ttk.Button(window, text="開啟子視窗", command=create_window)
@@ -242,12 +225,7 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
 

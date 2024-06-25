@@ -1,9 +1,10 @@
 import sys
-
+import math
+import random
 import tkinter as tk
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 W = 900
 H = 800
 
@@ -263,8 +264,6 @@ print("------------------------------------------------------------")  # 60個
 xWidth = 400
 yHeight = 250
 
-import math
-
 x_center, y_center, r = 770, 260, 100
 x, y = [], []
 for i in range(12):         # 建立圓外圍12個點
@@ -439,18 +438,14 @@ for i in range(19):
         
 print("------------------------------------------------------------")  # 60個
 
-from random import *
-
 for i in range(50):                 # 隨機繪50個不同位置與大小的矩形
-    x1, y1 = randint(1, 640), randint(1, 480)
-    x2, y2 = randint(1, 640), randint(1, 480)
+    x1, y1 = random.randint(1, 640), random.randint(1, 480)
+    x2, y2 = random.randint(1, 640), random.randint(1, 480)
     if x1 > x2: x1,x2 = x2,x1       # 確保左上角x座標小於右下角x座標
     if y1 > y2: y1,y2 = y2,y1       # 確保左上角y座標小於右下角y座標
     canvas1.create_rectangle(x1, y1, x2, y2)
 
 print("------------------------------------------------------------")  # 60個
-
-from random import *
 
 canvas1.create_rectangle(10, 10, 120, 60, fill='red')
 canvas1.create_rectangle(130, 10, 200, 80, fill='yellow', outline='blue')
@@ -515,9 +510,6 @@ canvas1.create_text(300, 200, text='歡迎來到美國', fill='blue',
                    font=('華康新綜藝體 Std W7',20))
 
 print("------------------------------------------------------------")  # 60個
-'''
-
-
 
 window = tk.Tk()
 window.geometry("800x800")
@@ -556,14 +548,96 @@ button2.pack()
 button3 = tk.Button(window, text="刪除 Canvas 上畫的部分東西", command=deleteCanvas)
 button3.pack()
 
-
-
-
-
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+   
+class FigureCanvas(tk.Canvas):
+    def __init__(self, container, figureType, filled = False, 
+                 width = 100, height = 100):
+        super().__init__(container, 
+                         width = width, height = height)
+        self.__figureType = figureType
+        self.__filled = filled
+        self.drawFigure()
+      
+    def getFigureType(self):
+        return self.__figureType 
+        
+    def getFilled(self):
+        return self.__filled 
+          
+    def setFigureType(self, figureType):
+        self.__figureType = figureType
+        self.drawFigure()
+        
+    def setFilled(self, filled):
+        self.__filled = filled
+        self.drawFigure()
+                
+    def drawFigure(self):
+        if self.__figureType == "line":
+            self.line()
+        elif self.__figureType == "rectangle":    
+            self.rectangle()
+        elif self.__figureType == "oval":
+            self.oval()
+        elif self.__figureType == "arc":    
+            self.arc()
+        
+    def line(self):
+        width = int(self["width"])
+        height = int(self["height"])
+        self.create_line(10, 10, width - 10, height - 10)
+        self.create_line(width - 10, 10, 10, height - 10)
+
+    def rectangle(self):
+        width = int(self["width"])
+        height = int(self["height"])
+        if self.__filled:
+            self.create_rectangle(10, 10, width - 10, height - 10, 
+                              fill = "red")
+        else:
+            self.create_rectangle(10, 10, width - 10, height - 10)
+            
+    def oval(self):
+        width = int(self["width"])
+        height = int(self["height"])
+        if self.__filled:
+            self.create_oval(10, 10, width - 10, height - 10, 
+                             fill = "red")
+        else:
+            self.create_oval(10, 10, width - 10, height - 10)
+
+    def arc(self):
+        width = int(self["width"])
+        height = int(self["height"])
+        if self.__filled:
+            self.create_arc(10, 10, width - 10, height - 10, 
+                        start = 0, extent = 145, fill = "red")
+        else:
+            self.create_arc(10, 10, width - 10, height - 10, 
+                        start = 0, extent = 145)
+
+
+window = tk.Tk() # Create a window
+window.title("Display Figures") # Set title
+
+figure1 = FigureCanvas(window, "line", width = 100, height = 100) 
+figure1.grid(row = 1, column = 1)
+figure2 = FigureCanvas(window, "rectangle", False, 100, 100) 
+figure2.grid(row = 1, column = 2)
+figure3 = FigureCanvas(window, "oval", False, 100, 100) 
+figure3.grid(row = 1, column = 3)
+figure4 = FigureCanvas(window, "arc", False, 100, 100) 
+figure4.grid(row = 1, column = 4)
+figure5 = FigureCanvas(window, "rectangle", True, 100, 100) 
+figure5.grid(row = 1, column = 5)
+figure6 = FigureCanvas(window, "oval", True, 100, 100) 
+figure6.grid(row = 1, column = 6)
+figure7 = FigureCanvas(window, "arc", True, 100, 100) 
+figure7.grid(row = 1, column = 7)
 
 window.mainloop()
-
 

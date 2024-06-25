@@ -13,7 +13,7 @@ import os
 import sys
 import time
 import random
-
+import datetime
 import cv2
 import numpy as np
 from PIL import ImageGrab
@@ -27,8 +27,6 @@ print("width:", width, "height:", height)
 print("image mode:", image.mode)
 k = np.zeros((width, height), np.uint8)
 fourcc = cv2.VideoWriter_fourcc(*"XVID")  # 编码格式
-
-import datetime
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("現在時間 :", now)
@@ -53,8 +51,6 @@ while True:
 print("OK")
 video.release()
 cv2.destroyAllWindows()
-
-import datetime
 
 now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 print("現在時間 :", now)
