@@ -797,14 +797,109 @@ file1.write("else:\n")
 file1.write("\tprint('被import使用中')") 
 file1.close() #關閉檔案
 
+print("------------------------------------------------------------")  # 60個
+
+import subprocess
+import os
+from os import path
+import re
+
+"""
+for folder, subfolders, filenames in os.walk("."):
+    for filename in filenames:
+        fullpath = path.join(folder, filename)
+        if fullpath.lower().endswith(".ipynb"):
+            print(fullpath)
+            #subprocess.call(["ipython", "trust", fullpath, "--profile", "scipybook2"])
+"""
+print("------------------------------------------------------------")  # 60個
+
+#from IPython.nbformat import read
+
+links = []
+for folder, _, filenames in os.walk("."):
+    for filename in filenames:
+        if re.match(r"\w+-[0-9a-zA-Z]\d\d-.+?\.ipynb$", filename):
+            fullpath = path.join(folder, filename)
+            print(fullpath)
+            """
+            book = read(fullpath, 4)
+            for cell in book.cells:
+                if cell.cell_type == "markdown" and cell.source.startswith("#"):
+                    title = cell.source.strip("# ")
+                    name = path.splitext(filename)[0]
+                    folder = path.basename(folder)
+                    link = u"[{title} - {name}]({folder}/{name}.ipynb)".format(
+                        title=title, name=name, folder=folder)
+                    links.append(link)
+                    break
+            """
+
+from IPython.display import display_markdown, Markdown
+display_markdown(Markdown(u"\n\n".join(links)))
+
+
+from fractions import Fraction
+
+print(Fraction(3, 4) ** 4 / 3)
+
+
+import os
+
+print("HOME環境變數:", os.environ["HOME"])
+
+
+
+import os
+from os import path
+import json
+
+kernel_folder = "tttttttt"
+
+python3_path = "C:\\WinPython-64bit-3.4.3.3\\scripts\\python.bat"
+
+if not path.exists(kernel_folder):
+    os.mkdir(kernel_folder)
+    
+kernel_fn = path.join(kernel_folder, "kernel.json")
+
+kernel_settings = {
+ "argv": [python3_path, 
+          "-m", "IPython.kernel", "-f", "{connection_file}"],
+ "display_name": "Python3-64bit",
+ "language": "python"
+}
+
+with open(kernel_fn, "w") as f:
+    json.dump(kernel_settings, f, indent=4)
+
+
 '''
 
 
 print("------------------------------------------------------------")  # 60個
 
+import numpy as np
+n = 100000
+cc = np.sum(4.0 / np.r_[1:n:4, -3:-n:-4])
+print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
+print('積分')
+from sympy import symbols, integrate, sqrt
+x = symbols("x")
+cc = integrate(sqrt(1-x**2), (x, -1, 1)) * 2
+print(cc)
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
 
 
 

@@ -1,10 +1,26 @@
+# 新進測試 02
+
+print("------------------------------------------------------------")  # 60個
+
+# 共同
+import os
 import sys
+import math
+import random
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
+
+font_filename = "C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf"
+# 設定中文字型及負號正確顯示
+# 設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei"  # 將字體換成 Microsoft JhengHei
+# 設定負號
+plt.rcParams["axes.unicode_minus"] = False  # 讓負號可正常顯示
+plt.rcParams["font.size"] = 12  # 設定字型大小
 
 print("------------------------------------------------------------")  # 60個
 '''
-
 x = np.linspace(-3, 3, 50)
 y1 = 2*x + 1
 y2 = x**2
@@ -178,7 +194,6 @@ for label in ax.get_xticklabels() + ax.get_yticklabels():
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
-'''
 
 # 10 - scatter
 
@@ -519,3 +534,42 @@ ani = animation.FuncAnimation(
 plt.show()
 
 print("------------------------------------------------------------")  # 60個
+'''
+"""
+y, x = np.mgrid[-3:3:300j, -6:6:600j]
+z = np.sin(x**2 + 2*y**2 + x*y)
+plt.imshow(z, cmap="Blues", vmin=-2, vmax=2)
+
+#plt.colorbar(shrink=0.92)
+
+plt.xticks(())
+plt.yticks(())
+
+plt.show()
+"""
+print("------------------------------------------------------------")  # 60個
+
+"""
+# 畫  (x^2 + y^2 -1)^3 - x^2*y^3 = 0
+
+#%fig=matplotlib繪制心形隱函數曲線
+x, y = np.mgrid[-2:2:500j, -2:2:500j]
+z = (x**2 + y**2 - 1)**3 - x**2 * y**3
+plt.contourf(x, y, z, levels=[-1, 0], colors=["red"])
+plt.gca().set_aspect("equal");
+
+plt.show()
+"""
+print("------------------------------------------------------------")  # 60個
+
+# pip install mayavi
+# 繪制心形隱函數曲面
+
+from mayavi import mlab
+
+x, y, z = np.mgrid[-3:3:100j, -1:1:100j, -3:3:100j]
+f = (x**2 + 9.0/4*y**2 + z**2 - 1)**3 - x**2 * z**3 - 9.0/80 * y**2 * z**3
+contour = mlab.contour3d(x, y, z, f, contours=[0], color=(1, 0, 0))
+
+print("------------------------------------------------------------")  # 60個
+
