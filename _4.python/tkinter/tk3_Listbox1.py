@@ -468,3 +468,73 @@ buttonDel.grid(row=2,column=0,padx=5,pady=5,sticky=tk.W)
 
 
 """
+
+
+
+window = tk.Tk()
+
+# 單選
+LB1 = tk.Listbox(window)
+tk.Label(window, text="單選：選擇你的課程").pack()
+
+for item in ["Chinese", "English", "Math"]:
+    LB1.insert(tk.END, item)
+LB1.pack()
+
+# 多選
+LB2 = tk.Listbox(window, selectmode=tk.EXTENDED)
+tk.Label(window, text="多選：你會幾種編程語言").pack()
+
+for item in ["python", "C++", "C", "Java", "Php"]:
+    LB2.insert(tk.END, item)
+
+LB2.insert(1, "JS", "Go", "R")
+LB2.delete(5, 6)
+LB2.select_set(0, 3)
+LB2.select_clear(0, 1)
+print(LB2.size())
+print(LB2.get(3))
+print(LB2.select_includes(3))
+LB2.pack()
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.title("my window")
+window.geometry("200x200")
+
+var1 = tk.StringVar()
+l = tk.Label(window, bg="yellow", width=4, textvariable=var1)
+l.pack()
+
+
+def print_selection():
+    value = lb.get(lb.curselection())
+    var1.set(value)
+
+
+b1 = tk.Button(
+    window, text="print selection", width=15, height=2, command=print_selection
+)
+b1.pack()
+
+var2 = tk.StringVar()
+var2.set((11, 22, 33, 44))
+lb = tk.Listbox(window, listvariable=var2)
+list_items = [1, 2, 3, 4]
+for item in list_items:
+    lb.insert("end", item)
+lb.insert(1, "first")
+lb.insert(2, "second")
+lb.delete(2)
+lb.pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+

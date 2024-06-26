@@ -33,17 +33,17 @@ window.withdraw()   # 何意? 不顯示視窗? 相對應於 window.mainloop??
 print("------------------------------------------------------------")  # 60個
 
 """
-使用tkinter创建GUI
-- 顶层窗口
+使用tkinter創建GUI
+- 頂層窗口
 - 控件
 - 布局
-- 事件回调
+- 事件回調
 
 """
 
 flag = True
 
-# 修改标签上的文字
+# 修改標簽上的文字
 def change_label_text():
     global flag
     flag = not flag
@@ -51,21 +51,21 @@ def change_label_text():
         if flag else ('blue', 'Goodbye, world!')
     label.config(text=msg, fg=color)
 
-# 确认退出
+# 確認退出
 def confirm_to_quit():
-    if tk.messagebox.askokcancel('温馨提示', '确定要退出吗?'):
+    if tk.messagebox.askokcancel('溫馨提示', '確定要退出嗎?'):
         window.quit()
 
 window = tk.Tk()
 window.geometry("600x800")
 window.title('messagebox 4 小遊戲')
 
-# 创建标签对象
+# 創建標簽對象
 label = tk.Label(window, text='Hello, world!', font='Arial -32', fg='red')
 label.pack(expand=1)
-# 创建一个装按钮的容器
+# 創建一個裝按鈕的容器
 panel = tk.Frame(window)
-# 创建按钮对象
+# 創建按鈕對象
 button1 = tk.Button(panel, text='修改', command=change_label_text)
 button1.pack(side='left')
 button2 = tk.Button(panel, text='退出', command=confirm_to_quit)
@@ -139,3 +139,18 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+
+
+"""
+tk.messagebox.showinfo(title='Hi', message='hahahaha')
+tk.messagebox.showwarning(title='Hi', message='nononono')
+tk.messagebox.showerror(title='Hi', message='No!! never')
+tk.messagebox.askquestion(title='Hi', message='hahahaha')
+tk.messagebox.askyesno(title='Hi', message='hahahaha')
+tk.messagebox.asktrycancel(title='Hi', message='hahahaha')
+tk.messagebox.askokcancel(title='Hi', message='hahahaha')
+tk.messagebox.askyesnocancel(title="Hi", message="haha")
+
+
+
+"""

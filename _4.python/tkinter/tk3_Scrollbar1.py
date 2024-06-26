@@ -161,6 +161,57 @@ root.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
+window = tk.Tk()
+window.title("Scroll Text Demo")
+
+frame1 = tk.Frame(window)
+frame1.pack()
+
+scrollbar = tk.Scrollbar(frame1)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+text1 = tk.Text(frame1, width=40, height=10, wrap=tk.WORD, yscrollcommand=scrollbar.set)
+text1.pack()
+
+scrollbar.config(command=text1.yview)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("new all 2")
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+scrollbar = tk.Scrollbar(window)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+wordlist = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+list1 = tk.Listbox(window, yscrollcommand=scrollbar.set)
+
+for line in range(10):
+    list1.insert(tk.END, "字母: " + wordlist[line])
+
+list1.pack(side=tk.LEFT, fill=tk.BOTH)
+scrollbar.config(command=list1.yview)
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
 print("------------------------------------------------------------")  # 60個
 
 

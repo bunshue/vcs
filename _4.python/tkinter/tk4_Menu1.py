@@ -459,3 +459,15 @@ window.config(menu=menubar)
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+"""
+menubar = tk.Menu(window)  # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File
+filemenu = tk.Menu(menubar, tearoff=False)
+menubar.add_cascade(label="File", menu=filemenu)
+# 在File功能表內建立功能表清單
+filemenu.add_command(label="Save", command=saveFile)
+filemenu.add_command(label="Exit", command=window.destroy)
+window.config(menu=menubar)  # 顯示功能表物件
+
+"""

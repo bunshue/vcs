@@ -361,6 +361,66 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+window = tk.Tk()
+window.title("my window")
+window.geometry("200x200")
+
+l = tk.Label(window, bg="yellow", width=20, text="empty")
+l.pack()
+
+
+def print_selection(v):
+    l.config(text="you have selected " + v)
+
+
+s = tk.Scale(
+    window,
+    label="try me",
+    from_=5,
+    to=11,
+    orient=tk.HORIZONTAL,
+    length=200,
+    showvalue=0,
+    tickinterval=2,
+    resolution=0.01,
+    command=print_selection,
+)
+s.pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()  # 實例化一個窗口
+window.title("Scale組件")  # 定義窗口標題
+window.geometry("400x600")  # 定義窗口大小
+
+l = tk.Label(window, bg="yellow", width=20, height=2, text="未選擇")
+l.pack()
+
+
+def print_selection(V):
+    l.config(text="你已選擇" + V)
+
+
+s = tk.Scale(
+    window,
+    label="進行選擇",
+    from_=5,
+    to=11,
+    orient=tk.HORIZONTAL,
+    length=200,
+    showvalue=1,
+    tickinterval=3,
+    resolution=0.01,
+    command=print_selection,
+)
+s.pack()  # 顯示名字,條方向;長度（像素），是否直接顯示值，標簽的單位長度，保留精度，定義功能
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
 
 print("------------------------------------------------------------")  # 60個
 

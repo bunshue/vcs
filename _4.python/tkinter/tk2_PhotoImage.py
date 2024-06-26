@@ -1001,3 +1001,140 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
  
 
+""" 缺檔案
+def more():
+    if variable_int.get()==0:
+        str1="牛是對少部份牛科動物的統稱 \n\
+              包括和人類習習相關的黃牛、水牛和氂牛" 
+        print("cattle的簡介 :", str1)
+    else:
+        str2="鹿有別於牛、羊等的動物。 \n \
+              包括麝科和鹿科動物"
+        print("deer的簡介 :", str2)
+    
+lb=tk.Label(window,text="請點選想了解的動物簡介:").pack()
+variable_int.set(0)  # 預設選項
+pic1=ImageTk.PhotoImage(file="image/cattle.gif")
+pic2=ImageTk.PhotoImage(file="image/deer.gif")
+tk.Radiobutton(window,image=pic1,variable=variable_int,value=0).pack()
+tk.Radiobutton(window,image=pic2,variable=variable_int,value=1).pack()
+tk.Button(window,text="進一步了解", command=more).pack()
+"""
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+text1 = tk.Text(window, width=100, height=30)
+text1.pack()
+photo = PhotoImage(file="bg1.gif")
+
+
+def show():
+    # 添加圖片用image_create
+    text1.image_create(tk.END, image=photo)
+
+
+b1 = tk.Button(text1, text="點我點我", command=show)
+# 添加插件用window_create
+text1.window_create(tk.INSERT, window=b1)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("200x200")
+
+# canvas = tk.Canvas(window, height=150, width=500)
+# canvas.grid(row=1, column=1)
+# image_file = tk.PhotoImage(file='welcome.gif')
+# image = canvas.create_image(0, 0, anchor='nw', image=image_file)
+
+# tk.Label(window, text='1').pack(side='top')
+# tk.Label(window, text='1').pack(side='bottom')
+# tk.Label(window, text='1').pack(side='left')
+# tk.Label(window, text='1').pack(side='right')
+
+# for i in range(4):
+# for j in range(3):
+# tk.Label(window, text=1).grid(row=i, column=j, padx=10, pady=10)
+
+tk.Label(window, text=1).place(x=20, y=10, anchor="nw")
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.title("my window")
+window.geometry("200x200")
+
+canvas = tk.Canvas(window, bg="blue", height=100, width=200)
+image_file = tk.PhotoImage(file="ins.gif")
+image = canvas.create_image(10, 10, anchor="nw", image=image_file)
+x0, y0, x1, y1 = 50, 50, 80, 80
+line = canvas.create_line(x0, y0, x1, y1)
+oval = canvas.create_oval(x0, y0, x1, y1, fill="red")
+arc = canvas.create_arc(x0 + 30, y0 + 30, x1 + 30, y1 + 30, start=0, extent=180)
+rect = canvas.create_rectangle(100, 30, 100 + 20, 30 + 20)
+canvas.pack()
+
+
+def moveit():
+    canvas.move(rect, 0, 2)
+
+
+b = tk.Button(window, text="move", command=moveit).pack()
+
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("600x400")
+
+# Create PhotoImage objects
+caImage = tk.PhotoImage(file="ca.gif")
+chinaImage = tk.PhotoImage(file="china.gif")
+leftImage = tk.PhotoImage(file="left.gif")
+rightImage = tk.PhotoImage(file="right.gif")
+usImage = tk.PhotoImage(file="usIcon.gif")
+ukImage = tk.PhotoImage(file="ukIcon.gif")
+crossImage = tk.PhotoImage(file="x.gif")
+circleImage = tk.PhotoImage(file="o.gif")
+
+# frame1 to contain label and canvas
+frame1 = tk.Frame(window)
+frame1.pack()
+tk.Label(frame1, image=caImage).pack(side=tk.LEFT)
+canvas = tk.Canvas(frame1)
+canvas.create_image(90, 50, image=chinaImage)
+canvas["width"] = 200
+canvas["height"] = 100
+canvas.pack(side=tk.LEFT)
+
+# frame2 to contain buttons, check buttons, and radio buttons
+frame2 = tk.Frame(window)
+frame2.pack()
+tk.Button(frame2, image=leftImage).pack(side=tk.LEFT)
+tk.Button(frame2, image=rightImage).pack(side=tk.LEFT)
+
+tk.Checkbutton(frame2, image=usImage).pack(side=tk.LEFT)
+tk.Checkbutton(frame2, image=ukImage).pack(side=tk.LEFT)
+
+tk.Radiobutton(frame2, image=crossImage).pack(side=tk.LEFT)
+tk.Radiobutton(frame2, image=circleImage).pack(side=tk.LEFT)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+

@@ -4,7 +4,7 @@ import tkinter.ttk as ttk
 import tkinter.font as tkfont
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Spinbox 1")
@@ -223,9 +223,39 @@ buttonAns.pack(side="right", pady=3)
 ans = 0
 
 window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
+
+def press():
+    print(sb2.get())
+
+window = tk.Tk()
+window.title("Spinbox測試")
+
+ttk.Label(window, text="指定from、to、increment").pack()
+# 通過指定from_、to、increament選項創建Spinbox
+sb1 = tk.Spinbox(window, from_=18, to=50, increment=5)
+sb1.pack(fill=tk.X, expand=tk.YES)
+ttk.Label(window, text="指定values").pack()
+# 通過指定values選項創建Spinbox
+sb2 = tk.Spinbox(
+    window, values=("Python", "C++", "Java", "PHY"), command=press
+)  # 通過command綁定事件處理方法
+sb2.pack(fill=tk.X, expand=tk.YES)
+ttk.Label(window, text="綁定變量").pack()
+intVar = tk.IntVar()
+# 通過指定values選項創建Spinbox，并為之綁定變量
+sb3 = tk.Spinbox(
+    window,
+    values=list(range(18, 50, -4)),
+    textvariable=intVar,  # 綁定變量
+    command=press,
+)
+sb3.pack(fill=tk.X, expand=tk.YES)
+intVar.set(33)  # 通過變量改變Spinbox的值
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
