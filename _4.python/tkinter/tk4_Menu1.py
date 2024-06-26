@@ -18,12 +18,12 @@ menu0 = tk.Menu(window, tearoff=0)
 # 第1排功能選單 File
 menu1 = tk.Menu(menu0, tearoff=0)
 menu0.add_cascade(label="檔案(F)", menu=menu1)
-menu1.add_command(label="開啟新檔", command=lambda: print("你按了 開啟新檔"))
-menu1.add_command(label="開啟舊檔", command=lambda: print("你按了 開啟舊檔"))
-menu1.add_command(label="儲存檔案", command=lambda: print("你按了 儲存檔案"))
+menu1.add_command(label="新增檔案", command=lambda: print("你按了 新增檔案"), accelerator="Ctrl+N")
+menu1.add_command(label="開啟舊檔", command=lambda: print("你按了 開啟舊檔"), accelerator="Ctrl+O")
+menu1.add_command(label="儲存檔案", command=lambda: print("你按了 儲存檔案"), accelerator="Ctrl+S")
 menu1.add_command(label="另存新檔", command=lambda: print("你按了 另存新檔"))
 menu1.add_separator()  # 增加分隔線
-menu1.add_command(label="離開", command=window.destroy)
+menu1.add_command(label="離開", command=window.destroy, accelerator="Ctrl+Q")
 
 # 第2排功能選單 Edit
 menu2 = tk.Menu(menu0, tearoff=0)
@@ -34,57 +34,24 @@ menu2.add_command(label="剪下", command=lambda: print("你按了 剪下"))
 menu2.add_command(label="複製", command=lambda: print("你按了 複製"))
 menu2.add_command(label="貼上", command=lambda: print("你按了 貼上"))
 
-# 第3排功能選單 Help
-menu3 = tk.Menu(menu0, tearoff=0)
-menu0.add_cascade(label="說明(H)", menu=menu3)
-menu3.add_command(label="關於(A)", command=lambda: print("你按了 關於"))
+# 第3排功能選單 Search
+menu3 = tk.Menu(menu0, tearoff=False)  # 取消分隔線
+menu0.add_cascade(label="尋找(S)", menu=menu3)
+menu3.add_command(label="尋找下一筆", command=lambda: print("你按了 尋找下一筆"))
+menu3.add_command(label="尋找上一筆", command=lambda: print("你按了 尋找上一筆"))
 
-window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
-window.mainloop()
+# 第4排功能選單
+menu4 = tk.Menu(menu0, tearoff=0)
+menu0.add_cascade(label="字體大小", menu=menu4)
 
-print("------------------------------------------------------------")  # 60個
+labels = ("大", "中", "小")
+for item in labels:
+    menu4.add_radiobutton(label=item)
 
-window = tk.Tk()
-window.geometry("400x300")
-
-# 建立功能選單 menu0
-menu0 = tk.Menu(window, tearoff=0)
-
-# 第1排功能選單 File
-menu1 = tk.Menu(menu0, tearoff=0)
-menu0.add_cascade(label="檔案(F)", menu=menu1)
-menu1.add_command(label="開新檔案", command=lambda: print("你按了 開新檔案"), accelerator="Ctrl+N")
-menu1.add_separator()  # 增加分隔線
-menu1.add_command(label="離開", command=window.destroy)
-
-window.bind(
-    "<Control-N>", lambda event: messagebox.showinfo("New File", "開新檔案")  # 快捷鍵綁定
-)
-
-window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("400x300")
-
-# 建立功能選單 menu0
-menu0 = tk.Menu(window, tearoff=0)
-
-# 第1排功能選單 File
-menu1 = tk.Menu(menu0, tearoff=0)
-menu0.add_cascade(label="檔案(F)", menu=menu1)
-
-# 首先在File功能表內建立find子功能表物件
-# 第2排功能選單
-menu2 = tk.Menu(menu1, tearoff=False)  # 取消分隔線
-menu2.add_command(label="尋找下一筆", command=lambda: print("你按了 尋找下一筆"))
-menu2.add_command(label="尋找上一筆", command=lambda: print("你按了 尋找上一筆"))
-menu1.add_cascade(label="尋找", menu=menu2)
-
-menu1.add_separator()  # 增加分隔線
-menu1.add_command(label="離開", command=window.destroy)
+# 第5排功能選單 Help
+menu5 = tk.Menu(menu0, tearoff=0)
+menu0.add_cascade(label="說明(H)", menu=menu5)
+menu5.add_command(label="關於(A)", command=lambda: print("你按了 關於"))
 
 window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
 window.mainloop()
@@ -173,13 +140,6 @@ window.geometry("400x300")
 # 建立功能選單 menu0
 menu0 = tk.Menu(window, tearoff=0)
 
-# 第1排功能選單 File
-menu1 = tk.Menu(menu0, tearoff=False)
-menu0.add_cascade(label="檔案(F)", menu=menu1)
-menu1.add_command(label="新增檔案", command=lambda: print("你按了 新增檔案"))
-menu1.add_command(label="開啟檔案", command=lambda: print("你按了 開啟檔案"))
-menu1.add_separator()  # 增加分隔線
-
 
 # 第2排功能選單
 menu2 = tk.Menu(menu0, tearoff=False)
@@ -218,32 +178,6 @@ window = tk.Tk()
 window.geometry("400x300")
 
 # 建立功能選單 menu0
-menu = tk.Menu(window)
-menu0 = tk.Menu(window, tearoff=0)
-
-# 第1排功能選單 File
-menu1 = tk.Menu(menu, tearoff=0)
-menu.add_cascade(label="計算", menu=menu1)
-menu1.add_command(label="加", command=lambda: print("你按了 加"))
-menu1.add_command(label="減", command=lambda: print("你按了 減"))
-menu1.add_separator()  # 增加分隔線
-menu1.add_command(label="乘", command=lambda: print("你按了 乘"))
-menu1.add_command(label="除", command=lambda: print("你按了 除"))
-
-# 第2排功能選單
-menu2 = tk.Menu(menu, tearoff=0)
-menu.add_cascade(label="Exit", menu=menu2)
-menu2.add_command(label="離開", command=window.destroy)
-
-window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("400x300")
-
-# 建立功能選單 menu0
 menu0 = tk.Menu(window, tearoff=0)
 
 # 第1排功能選單 File
@@ -256,38 +190,6 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-window.geometry("400x300")
-
-# 建立功能選單 menu0
-menu0 = tk.Menu(window, tearoff=0)
-
-# 第1排功能選單 File
-menu1 = tk.Menu(menu0, tearoff=0)
-menu0.add_cascade(label="檔案(F)", menu=menu1)
-
-menu1.add_command(label="開啟新檔", accelerator="Ctrl+N", command=lambda: print("你按了 開啟新檔"))
-menu1.add_command(label="開啟", accelerator="Ctrl+O", command=lambda: print("你按了 開啟舊檔"))
-menu1.add_separator()  # 增加分隔線
-menu1.add_command(label="儲存", accelerator="Ctrl+S", command=lambda: print("你按了 另存新檔"))
-menu1.add_separator()  # 增加分隔線
-menu1.add_command(label="離開", accelerator="Ctrl+Q", command=lambda: window.destroy())
-
-# 第2排功能選單
-menu2 = tk.Menu(menu0, tearoff=0)
-menu0.add_cascade(label="字體大小", menu=menu2)
-
-labels = ("大", "中", "小")
-for item in labels:
-    menu2.add_radiobutton(label=item)
-
-# 第3排功能選單 Help
-menu3 = tk.Menu(menu0, tearoff=0)
-menu0.add_cascade(label="說明(H)", menu=menu3)
-menu3.add_command(label="關於(A)", command=lambda: print("你按了 關於"))
-
-window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
-window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -471,3 +373,22 @@ filemenu.add_command(label="Exit", command=window.destroy)
 window.config(menu=menubar)  # 顯示功能表物件
 
 """
+
+
+
+
+"""
+
+messagebox.showinfo("New File", "開新檔案")
+
+
+"""
+
+
+# 快捷鍵綁定
+window.bind(
+    "<Control-n>", lambda event: print("你按了 開新檔案")
+)
+
+
+

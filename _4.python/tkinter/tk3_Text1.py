@@ -48,11 +48,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 text2 = tk.Text(window, width=80, height=6)  # 放入多行輸入框
-text2.insert(tk.INSERT, "Tkinter 套件是圖形使用者介面，\n")
-text2.insert(tk.INSERT, "雖然功能略為陽春，\n")
-text2.insert(tk.INSERT, "但已足夠一般應用程式使用，\n")
-text2.insert(tk.INSERT, "而且是內含於 Python 系統中，\n")
-text2.insert(tk.END, "不需另外安裝即可使用。")
+text2.insert(tk.INSERT, "黃鶴樓送孟浩然之廣陵\t李白\n")
+text2.insert(tk.INSERT, "故人西辭黃鶴樓，\n")
+text2.insert(tk.INSERT, "煙花三月下揚州。\n")
+text2.insert(tk.INSERT, "孤帆遠影碧空盡，\n")
+text2.insert(tk.END, "唯見長江天際流。\n")
 text2.pack()
 text2.config(state=tk.DISABLED)  # 此行設定Text內容不可改變
 
