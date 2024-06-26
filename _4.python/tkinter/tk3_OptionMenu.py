@@ -328,3 +328,28 @@ text.focus_set()
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+
+
+"""
+測試OptionMenu(選擇項)
+用來做多選一，選中的項在頂部顯
+"""
+def show():
+    varLabel.set(var.get())
+
+window = tk.Tk()
+tupleVar = ('python', 'java', 'C', 'C++', 'C#')
+var = tk.StringVar()
+var.set(tupleVar[0])
+optionMenu = tk.OptionMenu(window, var, *tupleVar)
+optionMenu.pack()
+varLabel = tk.StringVar()
+label = tk.Label(window, textvariable=varLabel, width=20, height=3, bg='lightblue', fg='red')
+label.pack()
+button = tk.Button(window, text='打印', command=show)
+button.pack()
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+

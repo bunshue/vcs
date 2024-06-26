@@ -210,6 +210,21 @@ window.mainloop()
 
 print('------------------------------------------------------------')	#60個
 
+# 事件
+def sys_out(even):
+    from tkinter import messagebox
+    if messagebox.askokcancel('Exit','Confirm to exit?'):
+        window.destroy()
+
+window = tk.Tk()
+window.geometry('300x200')
+
+#綁定事件到Esc鍵，當按下Esc鍵就會調用sys_out函數，彈出對話框
+window.bind('<Escape>',sys_out)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
 
 
 

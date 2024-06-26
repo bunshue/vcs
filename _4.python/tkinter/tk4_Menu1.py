@@ -376,4 +376,86 @@ menu1.add_command(label="檢視", command=View)
 window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
 window.mainloop()
 
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.title('窗口菜單')
+window.geometry('200x200') 
+
+l = tk.Label(window, text='', bg='blue')
+l.pack()
+counter = 0
+def do_job():
+    global counter
+    l.config(text='do '+ str(counter))
+    counter+=1
+ 
+#創建一個菜單欄，這里我們可以把他理解成一個容器，在窗口的上方
+menubar = tk.Menu(window)
+#定義一個空菜單單元
+filemenu = tk.Menu(menubar, tearoff=0)
+#將上面定義的空菜單命名為`File`，放在菜單欄中，就是裝入那個容器中
+menubar.add_cascade(label='文件', menu=filemenu)
+#在`File`中加入`New`的小菜單，即我們平時看到的下拉菜單，每一個小菜單對應命令操作。
+#如果點擊這些單元, 就會觸發`do_job`的功能
+filemenu.add_command(label='新建', command=do_job)
+filemenu.add_command(label='打開', command=do_job)#同樣的在`文件`中加入`打開`小菜單
+filemenu.add_command(label='保存', command=do_job)#同樣的在`文件`中加入`保存`小菜單
+filemenu.add_separator()#這里就是一條分割線
+#同樣的在`文件`中加入`編輯`小菜單,此處對應命令為`window.quit`
+filemenu.add_command(label='編輯', command=window.quit)
+ 
+editmenu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label='編輯', menu=editmenu)
+editmenu.add_command(label='剪切', command=do_job)
+editmenu.add_command(label='復制', command=do_job)
+editmenu.add_command(label='粘貼', command=do_job)
+#和上面定義菜單一樣，不過此處實在`文件`上創建一個空的菜單
+submenu = tk.Menu(filemenu)
+#給放入的菜單`子菜單`命名為`導入`
+filemenu.add_cascade(label='導入', menu=submenu, underline=0)
+#這里和上面也一樣，在`導入`中加入一個小菜單命令`子菜單1`
+submenu.add_command(label="子菜單1", command=do_job)
+window.config(menu=menubar) 
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.title('my window')
+window.geometry('200x200')
+
+l = tk.Label(window, text='', bg='yellow')
+l.pack()
+counter = 0
+def do_job():
+    global counter
+    l.config(text='do '+ str(counter))
+    counter+=1
+
+menubar = tk.Menu(window)
+filemenu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label='File', menu=filemenu)
+filemenu.add_command(label='New', command=do_job)
+filemenu.add_command(label='Open', command=do_job)
+filemenu.add_command(label='Save', command=do_job)
+filemenu.add_separator()
+filemenu.add_command(label='Exit', command=window.quit)
+
+editmenu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label='Edit', menu=editmenu)
+editmenu.add_command(label='Cut', command=do_job)
+editmenu.add_command(label='Copy', command=do_job)
+editmenu.add_command(label='Paste', command=do_job)
+
+submenu = tk.Menu(filemenu)
+filemenu.add_cascade(label='Import', menu=submenu, underline=0)
+submenu.add_command(label="Submenu1", command=do_job)
+
+window.config(menu=menubar)
+
+window.mainloop()
+
 print("------------------------------------------------------------")  # 60個

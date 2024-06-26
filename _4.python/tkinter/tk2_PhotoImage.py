@@ -954,7 +954,50 @@ self.bitmap = c.create_bitmap(width//2, height//2,
 
 window.mainloop()
 
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+
+tkimage = tk.PhotoImage(file = filename)
+
+canvas = tk.Canvas(window, width = 600, height = 600)
+canvas.pack()
+canvas.create_image(256, 256, image = tkimage)
+
+window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+#只能用gif
+filename = 'C:/_git/vcs/_4.python/_data/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/SpongeBob.gif'
+   
+window = tk.Tk()
+
+photo = tk.PhotoImage(file = filename)
+tk.Label(window, text = "Blue", image = photo, bg = "blue").pack(fill = tk.BOTH, expand = 1)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+canvas = tk.Canvas(window,
+			width = 600,					# 指定Canvas元件的寬度
+			height = 480,					# 指定Canvas元件的高度
+			bg = 'white')					# 指定Canvas元件的背景色
+
+#只能開啟 gif 檔
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/brown.gif'
+im = tk.PhotoImage(file=filename)				# 使用PhotoImage開啟圖片
+canvas.create_image(300,250,image = im)					# 使用create_image將圖片新增到Canvas元件中
+
+canvas.pack()								# 將Canvas新增到主視窗
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+ 
 
