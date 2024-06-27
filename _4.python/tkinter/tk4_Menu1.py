@@ -9,6 +9,12 @@ from tkinter import ttk
 
 print("------------------------------------------------------------")  # 60個
 
+def status():  # 設定是否顯示狀態列
+    if demoStatus.get():
+        statusLabel.pack(side=tk.BOTTOM, fill=tk.X)
+    else:
+        statusLabel.pack_forget()
+
 window = tk.Tk()
 window.geometry("400x300")
 
@@ -52,38 +58,23 @@ for item in labels:
 menu5 = tk.Menu(menu0, tearoff=0)
 menu0.add_cascade(label="說明(H)", menu=menu5)
 menu5.add_command(label="關於(A)", command=lambda: print("你按了 關於"))
-
-window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-def status():  # 設定是否顯示狀態列
-    if demoStatus.get():
-        statusLabel.pack(side=tk.BOTTOM, fill=tk.X)
-    else:
-        statusLabel.pack_forget()
-
-
-window = tk.Tk()
-window.geometry("400x300")
-
-# 建立功能選單 menu0
-menu0 = tk.Menu(window, tearoff=0)
-
-# 第1排功能選單 File
-menu1 = tk.Menu(menu0, tearoff=False)
-menu0.add_cascade(label="檔案(F)", menu=menu1)
-menu1.add_command(label="離開", command=window.destroy)
-
-# 第2排功能選單
-menu2 = tk.Menu(menu0, tearoff=False)
-menu0.add_cascade(label="View", menu=menu2)
-# 在View功能表內建立Check menu button
 demoStatus = tk.BooleanVar()
 demoStatus.set(True)
-menu2.add_checkbutton(label="Status", command=status, variable=demoStatus)
+menu5.add_checkbutton(label="Status", command=status, variable=demoStatus)
+#menu5.add_command(label="Status", command=lambda: print("你按了 status"))
+menu5.add_command(label="Info", command=lambda: print("你按了 Info"))
+
+"""
+# 建立Text
+text1 = tk.Text(window, undo=True)
+text1.pack(fill=tk.BOTH, expand=True)
+
+text1.insert(tk.END, "黃鶴樓送孟浩然之廣陵\n李白\n")
+text1.insert(tk.END, "故人西辭黃鶴樓，\n")
+text1.insert(tk.END, "煙花三月下揚州。\n")
+text1.insert(tk.END, "孤帆遠影碧空盡，\n")
+text1.insert(tk.END, "唯見長江天際流。\n")
+"""
 
 statusVar = tk.StringVar()
 statusVar.set("顯示")
@@ -102,44 +93,9 @@ window.geometry("400x300")
 menu0 = tk.Menu(window, tearoff=0)
 
 # 第1排功能選單 File
-menu1 = tk.Menu(menu0, tearoff=False)
-menu0.add_cascade(label="檔案(F)", menu=menu1)
-menu1.add_command(label="離開", command=window.destroy)
-
-# 建立工具列
-toolbar = tk.Frame(window, relief=tk.RAISED, borderwidth=3)
-# 在工具列內建立按紐
-tk_image = tk.PhotoImage(file="__new/sun.gif")
-exitBtn = tk.Button(toolbar, image=tk_image, command=window.destroy)
-exitBtn.pack(side=tk.LEFT, padx=3, pady=3)  # 包裝按鈕
-
-toolbar.pack(side=tk.TOP, fill=tk.X)  # 包裝工具列
-
-window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("400x300")
-
-# 建立功能選單 menu0
-menu0 = tk.Menu(window, tearoff=0)
-
+menu1 = tk.Menu(menu0, tearoff=0)
+menu1.add_command(label="supermode", command=lambda: print("你按了 supermode"))
+menu0.add_cascade(label="Operation", menu=menu1)
 
 # 第2排功能選單
 menu2 = tk.Menu(menu0, tearoff=False)
@@ -171,6 +127,130 @@ menu3.add_cascade(label="more stuff", menu=menu3b)
 window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
 window.mainloop()
 
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.title('窗口菜單')
+window.geometry('200x200') 
+
+l = tk.Label(window, text='', bg='blue')
+l.pack()
+counter = 0
+def do_job():
+    global counter
+    l.config(text='do '+ str(counter))
+    counter+=1
+ 
+#創建一個菜單欄，這里我們可以把他理解成一個容器，在窗口的上方
+menubar = tk.Menu(window)
+#定義一個空菜單單元
+filemenu = tk.Menu(menubar, tearoff=0)
+#將上面定義的空菜單命名為`File`，放在菜單欄中，就是裝入那個容器中
+menubar.add_cascade(label='文件', menu=filemenu)
+#在`File`中加入`New`的小菜單，即我們平時看到的下拉菜單，每一個小菜單對應命令操作。
+#如果點擊這些單元, 就會觸發`do_job`的功能
+filemenu.add_command(label='新建', command=do_job)
+filemenu.add_command(label='打開', command=do_job)#同樣的在`文件`中加入`打開`小菜單
+filemenu.add_command(label='保存', command=do_job)#同樣的在`文件`中加入`保存`小菜單
+filemenu.add_separator()#這里就是一條分割線
+#同樣的在`文件`中加入`編輯`小菜單,此處對應命令為`window.quit`
+filemenu.add_command(label='編輯', command=window.quit)
+ 
+editmenu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label='編輯', menu=editmenu)
+editmenu.add_command(label='剪切', command=do_job)
+editmenu.add_command(label='復制', command=do_job)
+editmenu.add_command(label='粘貼', command=do_job)
+#和上面定義菜單一樣，不過此處實在`文件`上創建一個空的菜單
+submenu = tk.Menu(filemenu)
+#給放入的菜單`子菜單`命名為`導入`
+filemenu.add_cascade(label='導入', menu=submenu, underline=0)
+#這里和上面也一樣，在`導入`中加入一個小菜單命令`子菜單1`
+submenu.add_command(label="子菜單1", command=do_job)
+window.config(menu=menubar) 
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.title('my window')
+window.geometry('200x200')
+
+l = tk.Label(window, text='', bg='yellow')
+l.pack()
+counter = 0
+def do_job():
+    global counter
+    l.config(text='do '+ str(counter))
+    counter+=1
+
+menubar = tk.Menu(window)
+filemenu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label='File', menu=filemenu)
+filemenu.add_command(label='New', command=do_job)
+filemenu.add_command(label='Open', command=do_job)
+filemenu.add_command(label='Save', command=do_job)
+filemenu.add_separator()
+filemenu.add_command(label='Exit', command=window.quit)
+
+editmenu = tk.Menu(menubar, tearoff=0)
+menubar.add_cascade(label='Edit', menu=editmenu)
+editmenu.add_command(label='Cut', command=do_job)
+editmenu.add_command(label='Copy', command=do_job)
+editmenu.add_command(label='Paste', command=do_job)
+
+submenu = tk.Menu(filemenu)
+filemenu.add_cascade(label='Import', menu=submenu, underline=0)
+submenu.add_command(label="Submenu1", command=do_job)
+
+window.config(menu=menubar)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+"""
+menubar = tk.Menu(window)  # 建立最上層功能表
+# 建立功能表類別物件,和將此功能表類別命名File
+filemenu = tk.Menu(menubar, tearoff=False)
+menubar.add_cascade(label="File", menu=filemenu)
+# 在File功能表內建立功能表清單
+filemenu.add_command(label="Save", command=saveFile)
+filemenu.add_command(label="Exit", command=window.destroy)
+window.config(menu=menubar)  # 顯示功能表物件
+
+"""
+
+
+
+
+"""
+
+messagebox.showinfo("New File", "開新檔案")
+
+
+"""
+
+
+# 快捷鍵綁定
+window.bind(
+    "<Control-n>", lambda event: print("你按了 開新檔案")
+)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -181,17 +261,24 @@ window.geometry("400x300")
 menu0 = tk.Menu(window, tearoff=0)
 
 # 第1排功能選單 File
-menu1 = tk.Menu(menu0, tearoff=0)
-menu1.add_command(label="supermode", command=lambda: print("你按了 supermode"))
-menu0.add_cascade(label="Operation", menu=menu1)
+menu1 = tk.Menu(menu0, tearoff=False)
+menu0.add_cascade(label="檔案(F)", menu=menu1)
+menu1.add_command(label="離開", command=window.destroy)
+
+# 建立工具列
+toolbar = tk.Frame(window, relief=tk.RAISED, borderwidth=3)
+# 在工具列內建立按紐
+tk_image = tk.PhotoImage(file="__new/sun.gif")
+exitBtn = tk.Button(toolbar, image=tk_image, command=lambda: print("你按了 太陽"))
+exitBtn.pack(side=tk.LEFT, padx=3, pady=3)  # 包裝按鈕
+
+toolbar.pack(side=tk.TOP, fill=tk.X)  # 包裝工具列
 
 window.config(menu=menu0)  # 顯示功能表單, 將功能表物件 menu0 佈置到主視窗的頂部
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
-
-print("------------------------------------------------------------")  # 60個
 
 import tkinter.messagebox as tkmessagebox
 import tkinter.filedialog as tkfiledialog
@@ -280,115 +367,6 @@ window.mainloop()
 
 
 print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.title('窗口菜單')
-window.geometry('200x200') 
-
-l = tk.Label(window, text='', bg='blue')
-l.pack()
-counter = 0
-def do_job():
-    global counter
-    l.config(text='do '+ str(counter))
-    counter+=1
- 
-#創建一個菜單欄，這里我們可以把他理解成一個容器，在窗口的上方
-menubar = tk.Menu(window)
-#定義一個空菜單單元
-filemenu = tk.Menu(menubar, tearoff=0)
-#將上面定義的空菜單命名為`File`，放在菜單欄中，就是裝入那個容器中
-menubar.add_cascade(label='文件', menu=filemenu)
-#在`File`中加入`New`的小菜單，即我們平時看到的下拉菜單，每一個小菜單對應命令操作。
-#如果點擊這些單元, 就會觸發`do_job`的功能
-filemenu.add_command(label='新建', command=do_job)
-filemenu.add_command(label='打開', command=do_job)#同樣的在`文件`中加入`打開`小菜單
-filemenu.add_command(label='保存', command=do_job)#同樣的在`文件`中加入`保存`小菜單
-filemenu.add_separator()#這里就是一條分割線
-#同樣的在`文件`中加入`編輯`小菜單,此處對應命令為`window.quit`
-filemenu.add_command(label='編輯', command=window.quit)
- 
-editmenu = tk.Menu(menubar, tearoff=0)
-menubar.add_cascade(label='編輯', menu=editmenu)
-editmenu.add_command(label='剪切', command=do_job)
-editmenu.add_command(label='復制', command=do_job)
-editmenu.add_command(label='粘貼', command=do_job)
-#和上面定義菜單一樣，不過此處實在`文件`上創建一個空的菜單
-submenu = tk.Menu(filemenu)
-#給放入的菜單`子菜單`命名為`導入`
-filemenu.add_cascade(label='導入', menu=submenu, underline=0)
-#這里和上面也一樣，在`導入`中加入一個小菜單命令`子菜單1`
-submenu.add_command(label="子菜單1", command=do_job)
-window.config(menu=menubar) 
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.title('my window')
-window.geometry('200x200')
-
-l = tk.Label(window, text='', bg='yellow')
-l.pack()
-counter = 0
-def do_job():
-    global counter
-    l.config(text='do '+ str(counter))
-    counter+=1
-
-menubar = tk.Menu(window)
-filemenu = tk.Menu(menubar, tearoff=0)
-menubar.add_cascade(label='File', menu=filemenu)
-filemenu.add_command(label='New', command=do_job)
-filemenu.add_command(label='Open', command=do_job)
-filemenu.add_command(label='Save', command=do_job)
-filemenu.add_separator()
-filemenu.add_command(label='Exit', command=window.quit)
-
-editmenu = tk.Menu(menubar, tearoff=0)
-menubar.add_cascade(label='Edit', menu=editmenu)
-editmenu.add_command(label='Cut', command=do_job)
-editmenu.add_command(label='Copy', command=do_job)
-editmenu.add_command(label='Paste', command=do_job)
-
-submenu = tk.Menu(filemenu)
-filemenu.add_cascade(label='Import', menu=submenu, underline=0)
-submenu.add_command(label="Submenu1", command=do_job)
-
-window.config(menu=menubar)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-menubar = tk.Menu(window)  # 建立最上層功能表
-# 建立功能表類別物件,和將此功能表類別命名File
-filemenu = tk.Menu(menubar, tearoff=False)
-menubar.add_cascade(label="File", menu=filemenu)
-# 在File功能表內建立功能表清單
-filemenu.add_command(label="Save", command=saveFile)
-filemenu.add_command(label="Exit", command=window.destroy)
-window.config(menu=menubar)  # 顯示功能表物件
-
-"""
-
-
-
-
-"""
-
-messagebox.showinfo("New File", "開新檔案")
-
-
-"""
-
-
-# 快捷鍵綁定
-window.bind(
-    "<Control-n>", lambda event: print("你按了 開新檔案")
-)
 
 
 

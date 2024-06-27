@@ -118,3 +118,41 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+import random
+class App:
+    def __init__(self, master):
+        self.master = master
+        self.initWidgets()
+
+    def initWidgets(self):
+        # 定義字符串元組
+        books = ("Tkinter庫", "三大布局", "Pack布局", "Grid布局", "Place布局")
+        for i in range(len(books)):
+            # 生成3個隨機數
+            ct = [random.randrange(256) for x in range(3)]
+            grayness = int(round(0.299 * ct[0] + 0.587 * ct[1] + 0.114 * ct[2]))
+            # 將元組中3個隨機數格式化成16進制數,轉成顏色格式
+            bg_color = "#%02x%02x%02x" % tuple(ct)
+            # 創建Label，設置背景色和前景色
+            lb = tk.Label(
+                window,
+                text=books[i],
+                fg="White" if grayness < 120 else "Black",
+                bg=bg_color,
+            )
+            # 使用place()設置該Label的大小和位置
+            lb.place(x=20, y=36 + i * 36, width=180, height=30)
+
+
+window = tk.Tk()
+window.title("Place布局")
+# 設置窗口的大小和位置
+# width x height + x_offset + y_offset
+window.geometry("250x250+30+30")
+App(window)
+window.mainloop()
+
+
+
+print("------------------------------------------------------------")  # 60個

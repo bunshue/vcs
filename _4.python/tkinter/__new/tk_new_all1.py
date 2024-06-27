@@ -5,15 +5,13 @@ from tkinter import ttk
 
 from PIL import ImageTk, Image
 
-import random
-
 W = 200
 H = 200
 w = 12
 h = 2
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 window.geometry("600x800")
 window.title("new all 2")
@@ -459,39 +457,26 @@ tl.geometry("300x180")
 tk.Label(tl, text="I am a Toplevel").pack()
 
 window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x400")
-
-msgYes, msgNo, msgExit = 1, 2, 3
-
-
-def MyAnswer():  # 建立對話方塊
-    msgType = random.randint(1, 3)  # 隨機數產生對話方塊方式
-    if msgType == msgYes:  # 產生Yes字串
-        labTxt = "Yes"
-    elif msgType == msgNo:  # 產生No字串
-        labTxt = "No"
-    elif msgType == msgExit:  # 產生Exit字串
-        labTxt = "Exit"
-    tl = tk.Toplevel()  # 建立Toplevel視窗
-    tl.geometry("300x180")  # 建立對話方塊大小
-    tl.title("My Answer")
-    tk.Label(tl, text=labTxt).pack(fill=tk.BOTH, expand=True)
-
-
-button1 = tk.Button(window, text="Click Me", command=MyAnswer)
-button1.pack()
-
-window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("new all 2")
+
+def CreateNewWindow():  # 建立對話方塊
+    labTxt = "開啟新視窗1\n開啟新視窗2\n開啟新視窗3\nToplevel"
+    tl = tk.Toplevel()  # 建立Toplevel視窗
+    tl.geometry("300x180")  # 建立對話方塊大小
+    tl.title("開啟新視窗")
+    tk.Label(tl, text=labTxt).pack(fill=tk.BOTH, expand=True)
+
+button1 = tk.Button(window, text="開啟新視窗", command=CreateNewWindow)
+button1.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
 
 entry8 = tk.Entry(window, bg="#ffff00", borderwidth=3)
 entry8.insert(0, "AAAA")
@@ -535,195 +520,8 @@ button2.pack()
 button2 = tk.Button(window, text="Input Float", command=InFlo)
 button2.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
-print('寫讀 Entry 上的資料')
-
-# Label / Entry / Text / 
-# 一個按鈕 設定一個變數給控件 並把這個控件的變數讀出來
-
-
-
-
-label4 =tk.Label(window,text="尚未按下按鈕")
-label4.pack()
-label4.config(text="你是男生")
-
-tk.StringVar() 字串，
-tk.IntVar() 整數，預設值為 0
-tk.DoubleVar() 浮點數，預設值為 0.0
-tk.Boolean()  # 布林值變數，True是1， False是0 fail
-
-
-"""
-
-print("------------------------------------------------------------")  # 60個
-
-
-class WidgetsDemo:
-    def __init__(self):
-        window = tk.Tk()
-        window.title("Widgets Demo")  # Set a title
-
-        # Add a button, a check button, and a radio button to frame1
-        frame1 = tk.Frame(window)
-        frame1.pack()
-        self.v1 = tk.IntVar()
-        cbtBold = tk.Checkbutton(
-            frame1, text="Bold", variable=self.v1, command=self.processCheckbutton
-        )
-        self.v2 = tk.IntVar()
-        rbRed = tk.Radiobutton(
-            frame1,
-            text="Red",
-            bg="red",
-            variable=self.v2,
-            value=1,
-            command=self.processRadiobutton,
-        )
-        rbYellow = tk.Radiobutton(
-            frame1,
-            text="Yellow",
-            bg="yellow",
-            variable=self.v2,
-            value=2,
-            command=self.processRadiobutton,
-        )
-        cbtBold.grid(row=1, column=1)
-        rbRed.grid(row=1, column=2)
-        rbYellow.grid(row=1, column=3)
-
-        # Add a button, a check button, and a radio button to frame1
-        frame2 = tk.Frame(window)
-        frame2.pack()
-        label = tk.Label(frame2, text="Enter your name: ")
-        self.name = tk.StringVar()
-        entryName = tk.Entry(frame2, textvariable=self.name)
-        btGetName = tk.Button(frame2, text="Get Name", command=self.processButton)
-        message = tk.Message(frame2, text="It is a widgets demo")
-        label.grid(row=1, column=1)
-        entryName.grid(row=1, column=2)
-        btGetName.grid(row=1, column=3)
-        message.grid(row=1, column=4)
-
-        # Add a text
-        text = tk.Text(window)  # Create a text add to the window
-        text.pack()
-        text.insert(tk.END, "Tip\nThe best way to learn Tkinter is to read ")
-        text.insert(tk.END, "these carefully designed examples and use them ")
-        text.insert(tk.END, "to create your applications.")
-
-        window.mainloop()  # Create an event loop
-
-    def processCheckbutton(self):
-        print("check button is " + ("checked " if self.v1.get() == 1 else "unchecked"))
-
-    def processRadiobutton(self):
-        print(("Red" if self.v2.get() == 1 else "Yellow") + " is selected ")
-
-    def processButton(self):
-        print("Your name is " + self.name.get())
-
-
-WidgetsDemo()  # Create GUI
-
-print("------------------------------------------------------------")  # 60個
-
-"""
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-"""
-
-
-class ChangeLabelDemo:
-    def __init__(self):
-        window = tk.Tk()  # Create a window
-        window.title("Change Label Demo")  # Set a title
-
-        # Add a label to frame1
-        frame1 = tk.Frame(window)
-        frame1.pack()
-        self.lbl = tk.Label(frame1, text="Programming is fun")
-        self.lbl.pack()
-
-        # Add a label, an entry, a button, and two radio buttons to frame2
-        frame2 = tk.Frame(window)
-        frame2.pack()
-        label = tk.Label(frame2, text="Enter text: ")
-        self.msg = tk.StringVar()
-        entry = tk.Entry(frame2, textvariable=self.msg)
-        btChangeText = tk.Button(frame2, text="Change Text", command=self.processButton)
-        self.v1 = tk.StringVar()
-        rbRed = tk.Radiobutton(
-            frame2,
-            text="Red",
-            bg="red",
-            variable=self.v1,
-            value="R",
-            command=self.processRadiobutton,
-        )
-        rbYellow = tk.Radiobutton(
-            frame2,
-            text="Yellow",
-            bg="yellow",
-            variable=self.v1,
-            value="Y",
-            command=self.processRadiobutton,
-        )
-
-        label.grid(row=1, column=1)
-        entry.grid(row=1, column=2)
-        btChangeText.grid(row=1, column=3)
-        rbRed.grid(row=1, column=4)
-        rbYellow.grid(row=1, column=5)
-
-        window.mainloop()
-
-    def processRadiobutton(self):
-        if self.v1.get() == "R":
-            self.lbl["fg"] = "red"
-        elif self.v1.get() == "Y":
-            self.lbl["fg"] = "yellow"
-
-    def processButton(self):
-        self.lbl["text"] = self.msg.get()  # New text for the label
-
-
-ChangeLabelDemo()  # Create GUI
-
-
-print("------------------------------------------------------------")  # 60個
-
-import calendar
-
-window = tk.Tk()
-window.config(background="grey")
-window.title("Calender for the year")
-window.geometry("550x600")
-
-year = 2024
-content = calendar.calendar(year)
-calYear = tk.Label(window, text=content, font="Consolas 10 bold")
-calYear.grid(row=5, column=1, padx=20)
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.title("my window")
-window.geometry("200x100")
 
 var = tk.StringVar()
 l = tk.Label(
@@ -748,14 +546,8 @@ def hit_me():
 b = tk.Button(window, text="hit me", width=15, height=2, command=hit_me)
 b.pack()
 
-
-window.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.title("my window")
-window.geometry("200x200")
 
 tk.Label(window, text="on the window").pack()
 
@@ -772,13 +564,9 @@ tk.Label(frm_l, text="on the frm_l1").pack()
 tk.Label(frm_l, text="on the frm_l2").pack()
 tk.Label(frm_r, text="on the frm_r1").pack()
 
-window.mainloop()
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-window.title("my window")
-window.geometry("200x200")
 
 # e = tk.Entry(window, show="*")
 e = tk.Entry(window, show="1")
@@ -803,176 +591,10 @@ b2.pack()
 t = tk.Text(window, height=2)
 t.pack()
 
-window.mainloop()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 print("------------------------------------------------------------")  # 60個
 
-window = tk.Tk()
-window.title("my window")
-window.geometry("200x200")
-
-l = tk.Label(window, bg="yellow", width=20, text="empty")
-l.pack()
-
-
-def print_selection():
-    if (var1.get() == 1) & (var2.get() == 0):
-        l.config(text="I love only Python ")
-    elif (var1.get() == 0) & (var2.get() == 1):
-        l.config(text="I love only C++")
-    elif (var1.get() == 0) & (var2.get() == 0):
-        l.config(text="I do not love either")
-    else:
-        l.config(text="I love both")
-
-
-var1 = tk.IntVar()
-var2 = tk.IntVar()
-c1 = tk.Checkbutton(
-    window, text="Python", variable=var1, onvalue=1, offvalue=0, command=print_selection
-)
-c2 = tk.Checkbutton(
-    window, text="C++", variable=var2, onvalue=1, offvalue=0, command=print_selection
-)
-c1.pack()
-c2.pack()
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("700x220")
-window.title("制作鋼琴按鍵布局")
-
-# Frame 是一個矩形區域， 就是用來防止其他子組件
-f1 = tk.Frame(window)
-f1.pack()
-f2 = tk.Frame(window)
-f2.pack()
-
-btnText = ("流行風", "中國風", "倫敦風", "古典風", "輕音樂")
-for txt in btnText:
-    tk.Button(f1, text=txt).pack(side="left", padx="10")
-    for i in range(1, 20):
-        tk.Button(f2, width=5, height=10, bg="black" if i % 2 == 0 else "white").pack(
-            side="left"
-        )
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-class App:
-    def __init__(self, master):
-        self.master = master
-        self.initWidgets()
-
-    def initWidgets(self):
-        # 創建一個輸入組件
-        e = tk.Entry(relief=tk.SUNKEN, font=("Courier New", 24), width=25)
-        # 對該輸入組件使用Pack布局，放在容器頂部
-        e.pack(side=tk.TOP, pady=10)
-        p = tk.Frame(self.master)
-        p.pack(side=tk.TOP)
-        # 定義字符串的元組
-        names = (
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "+",
-            "-",
-            "*",
-            "/",
-            ".",
-            "=",
-        )
-        # 遍歷字符串元組
-        for i in range(len(names)):
-            # 創建Button，將Button放入p組件中
-            b = tk.Button(p, text=names[i], font=("Verdana", 20), width=6)
-            b.grid(row=i // 4, column=i % 4)
-
-
-window = tk.Tk()
-window.title("Grid布局")
-App(window)
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-from tkinter import messagebox
-
-
-class Application(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)  # super()代表的是父類的定義， 而不是父類對象
-        self.master = master
-        self.pack()
-        self.createWidget()
-
-    def createWidget(self):
-        """通過 grid 布局實現登錄界面"""
-        self.label01 = tk.Label(self, text="用戶名")
-        self.label01.grid(row=0, column=0)
-        self.entry01 = tk.Entry(self)
-        self.entry01.grid(row=0, column=1)
-        tk.Label(self, text="用戶名為手機號").grid(row=0, column=2)
-        tk.Label(self, text="密碼").grid(row=1, column=0)
-        tk.Entry(self, show="*").grid(row=1, column=1)
-        tk.Button(self, text="登錄").grid(row=2, column=1, sticky=tk.E + tk.W)
-        tk.Button(self, text="取消").grid(row=2, column=2, sticky=tk.E)
-
-
-window = tk.Tk()
-window.geometry("400x90+200+300")
-app = Application(master=window)
-
-window.title("Grid布局")
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-
-class App:
-    def __init__(self, master):
-        self.master = master
-        self.initWidgets()
-
-    def initWidgets(self):
-        # 定義字符串元組
-        books = ("Tkinter庫", "三大布局", "Pack布局", "Grid布局", "Place布局")
-        for i in range(len(books)):
-            # 生成3個隨機數
-            ct = [random.randrange(256) for x in range(3)]
-            grayness = int(round(0.299 * ct[0] + 0.587 * ct[1] + 0.114 * ct[2]))
-            # 將元組中3個隨機數格式化成16進制數,轉成顏色格式
-            bg_color = "#%02x%02x%02x" % tuple(ct)
-            # 創建Label，設置背景色和前景色
-            lb = tk.Label(
-                window,
-                text=books[i],
-                fg="White" if grayness < 120 else "Black",
-                bg=bg_color,
-            )
-            # 使用place()設置該Label的大小和位置
-            lb.place(x=20, y=36 + i * 36, width=180, height=30)
-
-
-window = tk.Tk()
-window.title("Place布局")
-# 設置窗口的大小和位置
-# width x height + x_offset + y_offset
-window.geometry("250x250+30+30")
-App(window)
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
@@ -1014,9 +636,11 @@ print("------------------------------------------------------------")  # 60個
 
 from tkinter import Tk, Variable, Entry, Button
 
+
 def get_entry_data():
     cc = a.get()
-    print('你取得了 :', cc)
+    print("你取得了 :", cc)
+
 
 window = tk.Tk()
 
@@ -1279,5 +903,263 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+# 單獨的 或無法合併的 搬到最後面
 
+
+import calendar
+
+window = tk.Tk()
+window.config(background="grey")
+window.title("Calender for the year")
+window.geometry("550x600")
+
+year = 2024
+content = calendar.calendar(year)
+calYear = tk.Label(window, text=content, font="Consolas 10 bold")
+calYear.grid(row=5, column=1, padx=20)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+class WidgetsDemo:
+    def __init__(self):
+        window = tk.Tk()
+        window.title("Widgets Demo")  # Set a title
+
+        # Add a button, a check button, and a radio button to frame1
+        frame1 = tk.Frame(window)
+        frame1.pack()
+        self.v1 = tk.IntVar()
+        cbtBold = tk.Checkbutton(
+            frame1, text="Bold", variable=self.v1, command=self.processCheckbutton
+        )
+        self.v2 = tk.IntVar()
+        rbRed = tk.Radiobutton(
+            frame1,
+            text="Red",
+            bg="red",
+            variable=self.v2,
+            value=1,
+            command=self.processRadiobutton,
+        )
+        rbYellow = tk.Radiobutton(
+            frame1,
+            text="Yellow",
+            bg="yellow",
+            variable=self.v2,
+            value=2,
+            command=self.processRadiobutton,
+        )
+        cbtBold.grid(row=1, column=1)
+        rbRed.grid(row=1, column=2)
+        rbYellow.grid(row=1, column=3)
+
+        # Add a button, a check button, and a radio button to frame1
+        frame2 = tk.Frame(window)
+        frame2.pack()
+        label = tk.Label(frame2, text="Enter your name: ")
+        self.name = tk.StringVar()
+        entryName = tk.Entry(frame2, textvariable=self.name)
+        btGetName = tk.Button(frame2, text="Get Name", command=self.processButton)
+        message = tk.Message(frame2, text="It is a widgets demo")
+        label.grid(row=1, column=1)
+        entryName.grid(row=1, column=2)
+        btGetName.grid(row=1, column=3)
+        message.grid(row=1, column=4)
+
+        # Add a text
+        text = tk.Text(window)  # Create a text add to the window
+        text.pack()
+        text.insert(tk.END, "Tip\nThe best way to learn Tkinter is to read ")
+        text.insert(tk.END, "these carefully designed examples and use them ")
+        text.insert(tk.END, "to create your applications.")
+
+        window.mainloop()  # Create an event loop
+
+    def processCheckbutton(self):
+        print("check button is " + ("checked " if self.v1.get() == 1 else "unchecked"))
+
+    def processRadiobutton(self):
+        print(("Red" if self.v2.get() == 1 else "Yellow") + " is selected ")
+
+    def processButton(self):
+        print("Your name is " + self.name.get())
+
+
+WidgetsDemo()  # Create GUI
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+class ChangeLabelDemo:
+    def __init__(self):
+        window = tk.Tk()  # Create a window
+        window.title("Change Label Demo")  # Set a title
+
+        # Add a label to frame1
+        frame1 = tk.Frame(window)
+        frame1.pack()
+        self.lbl = tk.Label(frame1, text="Programming is fun")
+        self.lbl.pack()
+
+        # Add a label, an entry, a button, and two radio buttons to frame2
+        frame2 = tk.Frame(window)
+        frame2.pack()
+        label = tk.Label(frame2, text="Enter text: ")
+        self.msg = tk.StringVar()
+        entry = tk.Entry(frame2, textvariable=self.msg)
+        btChangeText = tk.Button(frame2, text="Change Text", command=self.processButton)
+        self.v1 = tk.StringVar()
+        rbRed = tk.Radiobutton(
+            frame2,
+            text="Red",
+            bg="red",
+            variable=self.v1,
+            value="R",
+            command=self.processRadiobutton,
+        )
+        rbYellow = tk.Radiobutton(
+            frame2,
+            text="Yellow",
+            bg="yellow",
+            variable=self.v1,
+            value="Y",
+            command=self.processRadiobutton,
+        )
+
+        label.grid(row=1, column=1)
+        entry.grid(row=1, column=2)
+        btChangeText.grid(row=1, column=3)
+        rbRed.grid(row=1, column=4)
+        rbYellow.grid(row=1, column=5)
+
+        window.mainloop()
+
+    def processRadiobutton(self):
+        if self.v1.get() == "R":
+            self.lbl["fg"] = "red"
+        elif self.v1.get() == "Y":
+            self.lbl["fg"] = "yellow"
+
+    def processButton(self):
+        self.lbl["text"] = self.msg.get()  # New text for the label
+
+
+ChangeLabelDemo()  # Create GUI
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+window.geometry("700x220")
+window.title("制作鋼琴按鍵布局")
+
+# Frame 是一個矩形區域， 就是用來防止其他子組件
+f1 = tk.Frame(window)
+f1.pack()
+f2 = tk.Frame(window)
+f2.pack()
+
+btnText = ("流行風", "中國風", "倫敦風", "古典風", "輕音樂")
+for txt in btnText:
+    tk.Button(f1, text=txt).pack(side="left", padx="10")
+    for i in range(1, 20):
+        tk.Button(f2, width=5, height=10, bg="black" if i % 2 == 0 else "white").pack(
+            side="left"
+        )
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+class App:
+    def __init__(self, master):
+        self.master = master
+        self.initWidgets()
+
+    def initWidgets(self):
+        # 創建一個輸入組件
+        e = tk.Entry(relief=tk.SUNKEN, font=("Courier New", 24), width=25)
+        # 對該輸入組件使用Pack布局，放在容器頂部
+        e.pack(side=tk.TOP, pady=10)
+        p = tk.Frame(self.master)
+        p.pack(side=tk.TOP)
+        # 定義字符串的元組
+        names = (
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "+",
+            "-",
+            "*",
+            "/",
+            ".",
+            "=",
+        )
+        # 遍歷字符串元組
+        for i in range(len(names)):
+            # 創建Button，將Button放入p組件中
+            b = tk.Button(p, text=names[i], font=("Verdana", 20), width=6)
+            b.grid(row=i // 4, column=i % 4)
+
+
+window = tk.Tk()
+window.title("Grid布局")
+App(window)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+from tkinter import messagebox
+
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)  # super()代表的是父類的定義， 而不是父類對象
+        self.master = master
+        self.pack()
+        self.createWidget()
+
+    def createWidget(self):
+        """通過 grid 布局實現登錄界面"""
+        self.label01 = tk.Label(self, text="用戶名")
+        self.label01.grid(row=0, column=0)
+        self.entry01 = tk.Entry(self)
+        self.entry01.grid(row=0, column=1)
+        tk.Label(self, text="用戶名為手機號").grid(row=0, column=2)
+        tk.Label(self, text="密碼").grid(row=1, column=0)
+        tk.Entry(self, show="*").grid(row=1, column=1)
+        tk.Button(self, text="登錄").grid(row=2, column=1, sticky=tk.E + tk.W)
+        tk.Button(self, text="取消").grid(row=2, column=2, sticky=tk.E)
+
+
+window = tk.Tk()
+window.geometry("400x90+200+300")
+app = Application(master=window)
+
+window.title("Grid布局")
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+print("------------------------------------------------------------")  # 60個
+
+
+print("------------------------------------------------------------")  # 60個
 
