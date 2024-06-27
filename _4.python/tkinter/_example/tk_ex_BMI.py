@@ -1,12 +1,13 @@
-
 def checkp():
     p3.set(p2.get()/(p1.get()*p1.get()/10000))
 
 import tkinter as tk
-win = tk.Tk()
-win.geometry("400x300")
-win.title("計算BMI程式")
-frame1 = tk.Frame(win)
+
+window = tk.Tk()
+window.geometry("400x300")
+window.title("計算BMI程式")
+
+frame1 = tk.Frame(window)
 frame1.pack(padx=20, pady=10)
 p1 = tk.IntVar()
 p2 = tk.IntVar()
@@ -23,5 +24,6 @@ pButton = tk.Button(frame1, text="計算BMI", command=checkp)
 pButton.pack()
 pLmsg = tk.Label(frame1, textvariable=p3)
 pLmsg.pack()
-win.mainloop()
+
+window.mainloop()
 

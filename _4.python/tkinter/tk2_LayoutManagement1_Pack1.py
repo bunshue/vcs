@@ -242,6 +242,42 @@ window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
+window = tk.Tk()
+window.title("Pack布局")
+
+# 創建第一個容器
+fm1 = tk.Frame(window)
+# 該容器放在左邊排列
+fm1.pack(side=tk.LEFT, fill=tk.BOTH, expand=tk.YES)
+# 向fm1中添加3個按鈕
+# 設置按鈕從頂部開始排列，且按鈕只能在垂直（X）方向填充
+tk.Button(fm1, text="第一個").pack(side=tk.TOP, fill=tk.X, expand=tk.YES)
+tk.Button(fm1, text="第二個").pack(side=tk.TOP, fill=tk.X, expand=tk.YES)
+tk.Button(fm1, text="第三個").pack(side=tk.TOP, fill=tk.X, expand=tk.YES)
+
+# 創建第二個容器
+fm2 = tk.Frame(window)
+# 該容器放在左邊排列，就會挨著fm1
+#fm2.pack(side=tk.LEFT, padx=10, expand=tk.YES)
+fm2.pack(side=tk.LEFT, padx=10, fill=tk.BOTH, expand=tk.YES)
+# 向fm2中添加3個按鈕
+# 設置按鈕從右邊開始排列
+tk.Button(fm2, text="第一個").pack(side=tk.RIGHT, fill=tk.Y, expand=tk.YES)
+tk.Button(fm2, text="第二個").pack(side=tk.RIGHT, fill=tk.Y, expand=tk.YES)
+tk.Button(fm2, text="第三個").pack(side=tk.RIGHT, fill=tk.Y, expand=tk.YES)
+
+# 創建第三個容器
+fm3 = tk.Frame(window)
+# 該容器放在右邊排列，就會挨著fm1
+fm3.pack(side=tk.RIGHT, padx=10, fill=tk.BOTH, expand=tk.YES)
+# 向fm3中添加3個按鈕
+# 設置按鈕從底部開始排列，且按鈕只能在垂直（Y）方向填充
+tk.Button(fm3, text="第一個").pack(side=tk.BOTTOM, fill=tk.Y, expand=tk.YES)
+tk.Button(fm3, text="第二個").pack(side=tk.BOTTOM, fill=tk.Y, expand=tk.YES)
+tk.Button(fm3, text="第三個").pack(side=tk.BOTTOM, fill=tk.Y, expand=tk.YES)
+
+window.mainloop()
+
 print("------------------------------------------------------------")  # 60個
 
 

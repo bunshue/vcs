@@ -887,6 +887,117 @@ window.mainloop()
 print("------------------------------------------------------------")  # 60個
 
 
+class App:
+    def __init__(self, master):
+        self.master = master
+        self.initWidgets()
+
+    def initWidgets(self):
+        # 創建一個輸入組件
+        e = tk.Entry(relief=tk.SUNKEN, font=("Courier New", 24), width=25)
+        # 對該輸入組件使用Pack布局，放在容器頂部
+        e.pack(side=tk.TOP, pady=10)
+        p = tk.Frame(self.master)
+        p.pack(side=tk.TOP)
+        # 定義字符串的元組
+        names = (
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "+",
+            "-",
+            "*",
+            "/",
+            ".",
+            "=",
+        )
+        # 遍歷字符串元組
+        for i in range(len(names)):
+            # 創建Button，將Button放入p組件中
+            b = tk.Button(p, text=names[i], font=("Verdana", 20), width=6)
+            b.grid(row=i // 4, column=i % 4)
+
+
+window = tk.Tk()
+window.title("Grid布局")
+App(window)
+
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+class Application(tk.Frame):
+    def __init__(self, master=None):
+        super().__init__(master)  # super()代表的是父類的定義， 而不是父類對象
+        self.master = master
+        self.pack()
+        self.createWidget()
+
+    def createWidget(self):
+        """通過 grid 布局實現登錄界面"""
+        self.label01 = tk.Label(self, text="用戶名")
+        self.label01.grid(row=0, column=0)
+        self.entry01 = tk.Entry(self)
+        self.entry01.grid(row=0, column=1)
+        tk.Label(self, text="用戶名為手機號").grid(row=0, column=2)
+        tk.Label(self, text="密碼").grid(row=1, column=0)
+        tk.Entry(self, show="*").grid(row=1, column=1)
+        tk.Button(self, text="登錄").grid(row=2, column=1, sticky=tk.E + tk.W)
+        tk.Button(self, text="取消").grid(row=2, column=2, sticky=tk.E)
+
+
+window = tk.Tk()
+window.geometry("400x90+200+300")
+app = Application(master=window)
+
+window.title("Grid布局")
+window.mainloop()
+
+print("------------------------------------------------------------")  # 60個
+
+window = tk.Tk()
+tk.Label(window, text="帳號：").grid(row=0, column=0)
+tk.Label(window, text="密碼：").grid(row=1, column=0)
+
+v1 = tk.StringVar()  # 輸入框里是字符串類型，因此用Tkinter的StringVar類型來存放
+v2 = tk.StringVar()  # 需要兩個變量來存放帳號和密碼
+
+e1 = tk.Entry(window, textvariable=v1)
+e2 = tk.Entry(window, textvariable=v2, show="*")  # 想要顯示什么就輸入什么
+
+e1.grid(row=0, column=1, padx=10, pady=5)
+e2.grid(row=1, column=1, padx=10, pady=5)
+
+
+def show():
+    print("帳號：%s" % e1.get())
+    print("密碼：%s" % e2.get())
+
+
+tk.Button(window, text="獲取信息", width=10, command=show).grid(
+    row=3, column=0, sticky=tk.W, padx=10, pady=5
+)
+tk.Button(window, text="退出", width=10, command=window.destroy).grid(
+    row=3, column=1, sticky=tk.E, padx=10, pady=5
+)
+
+window.mainloop()
+
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+print("------------------------------------------------------------")  # 60個
+
+
 print("------------------------------------------------------------")  # 60個
 
 

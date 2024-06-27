@@ -37,11 +37,6 @@
             this.p0 = new System.Windows.Forms.Panel();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer_rotate = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_move = new System.Windows.Forms.PictureBox();
-            this.timer_move = new System.Windows.Forms.Timer(this.components);
-            this.timer_border1 = new System.Windows.Forms.Timer(this.components);
-            this.timer7 = new System.Windows.Forms.Timer(this.components);
-            this.timer_border2 = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
             this.timer_random_rectangle = new System.Windows.Forms.Timer(this.components);
             this.picSample = new System.Windows.Forms.PictureBox();
@@ -63,16 +58,9 @@
             this.timer_atom2 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_random = new System.Windows.Forms.PictureBox();
             this.timer_random = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_spin = new System.Windows.Forms.PictureBox();
-            this.timer_spin = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_circle = new System.Windows.Forms.PictureBox();
-            this.timer_circle = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_stock = new System.Windows.Forms.PictureBox();
             this.tipData = new System.Windows.Forms.ToolTip(this.components);
             this.timer_stock = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_border1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox_sine = new System.Windows.Forms.PictureBox();
-            this.pictureBox_border2 = new System.Windows.Forms.PictureBox();
             this.pictureBox_rotate = new System.Windows.Forms.PictureBox();
             this.panel_radar = new System.Windows.Forms.Panel();
             this.pictureBox_radar = new System.Windows.Forms.PictureBox();
@@ -83,7 +71,6 @@
             this.timer_random_color = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_battery2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_move)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).BeginInit();
@@ -93,12 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stock)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_border1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_border2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate)).BeginInit();
             this.panel_radar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).BeginInit();
@@ -162,36 +144,6 @@
             // 
             this.timer_rotate.Enabled = true;
             this.timer_rotate.Tick += new System.EventHandler(this.timer_rotate_Tick);
-            // 
-            // pictureBox_move
-            // 
-            this.pictureBox_move.BackColor = System.Drawing.Color.LightBlue;
-            this.pictureBox_move.Location = new System.Drawing.Point(951, 116);
-            this.pictureBox_move.Name = "pictureBox_move";
-            this.pictureBox_move.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_move.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_move.TabIndex = 49;
-            this.pictureBox_move.TabStop = false;
-            // 
-            // timer_move
-            // 
-            this.timer_move.Interval = 30;
-            this.timer_move.Tick += new System.EventHandler(this.timer_move_Tick);
-            // 
-            // timer_border1
-            // 
-            this.timer_border1.Enabled = true;
-            this.timer_border1.Tick += new System.EventHandler(this.timer_border1_Tick);
-            // 
-            // timer7
-            // 
-            this.timer7.Interval = 10;
-            this.timer7.Tick += new System.EventHandler(this.timer7_Tick);
-            // 
-            // timer_border2
-            // 
-            this.timer_border2.Enabled = true;
-            this.timer_border2.Tick += new System.EventHandler(this.timer_border2_Tick);
             // 
             // bt_clear
             // 
@@ -354,38 +306,10 @@
             this.timer_random.Interval = 5;
             this.timer_random.Tick += new System.EventHandler(this.timer_random_Tick);
             // 
-            // pictureBox_spin
-            // 
-            this.pictureBox_spin.Location = new System.Drawing.Point(12, 264);
-            this.pictureBox_spin.Name = "pictureBox_spin";
-            this.pictureBox_spin.Size = new System.Drawing.Size(70, 78);
-            this.pictureBox_spin.TabIndex = 66;
-            this.pictureBox_spin.TabStop = false;
-            this.pictureBox_spin.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_spin_Paint);
-            // 
-            // timer_spin
-            // 
-            this.timer_spin.Enabled = true;
-            this.timer_spin.Interval = 50;
-            this.timer_spin.Tick += new System.EventHandler(this.timer_spin_Tick);
-            // 
-            // pictureBox_circle
-            // 
-            this.pictureBox_circle.Location = new System.Drawing.Point(1134, 471);
-            this.pictureBox_circle.Name = "pictureBox_circle";
-            this.pictureBox_circle.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_circle.TabIndex = 67;
-            this.pictureBox_circle.TabStop = false;
-            // 
-            // timer_circle
-            // 
-            this.timer_circle.Enabled = true;
-            this.timer_circle.Tick += new System.EventHandler(this.timer_circle_Tick);
-            // 
             // pictureBox_stock
             // 
             this.pictureBox_stock.BackColor = System.Drawing.Color.LightPink;
-            this.pictureBox_stock.Location = new System.Drawing.Point(951, 217);
+            this.pictureBox_stock.Location = new System.Drawing.Point(1068, 8);
             this.pictureBox_stock.Name = "pictureBox_stock";
             this.pictureBox_stock.Size = new System.Drawing.Size(100, 100);
             this.pictureBox_stock.TabIndex = 68;
@@ -398,35 +322,6 @@
             this.timer_stock.Enabled = true;
             this.timer_stock.Interval = 500;
             this.timer_stock.Tick += new System.EventHandler(this.timer_stock_Tick);
-            // 
-            // pictureBox_border1
-            // 
-            this.pictureBox_border1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.pictureBox_border1.Location = new System.Drawing.Point(1060, 8);
-            this.pictureBox_border1.Name = "pictureBox_border1";
-            this.pictureBox_border1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_border1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_border1.TabIndex = 69;
-            this.pictureBox_border1.TabStop = false;
-            // 
-            // pictureBox_sine
-            // 
-            this.pictureBox_sine.BackColor = System.Drawing.Color.LightYellow;
-            this.pictureBox_sine.Location = new System.Drawing.Point(1060, 116);
-            this.pictureBox_sine.Name = "pictureBox_sine";
-            this.pictureBox_sine.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_sine.TabIndex = 70;
-            this.pictureBox_sine.TabStop = false;
-            // 
-            // pictureBox_border2
-            // 
-            this.pictureBox_border2.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.pictureBox_border2.Location = new System.Drawing.Point(1166, 8);
-            this.pictureBox_border2.Name = "pictureBox_border2";
-            this.pictureBox_border2.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_border2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox_border2.TabIndex = 71;
-            this.pictureBox_border2.TabStop = false;
             // 
             // pictureBox_rotate
             // 
@@ -507,12 +402,7 @@
             this.Controls.Add(this.pictureBox_hex);
             this.Controls.Add(this.panel_radar);
             this.Controls.Add(this.pictureBox_rotate);
-            this.Controls.Add(this.pictureBox_border2);
-            this.Controls.Add(this.pictureBox_sine);
-            this.Controls.Add(this.pictureBox_border1);
             this.Controls.Add(this.pictureBox_stock);
-            this.Controls.Add(this.pictureBox_circle);
-            this.Controls.Add(this.pictureBox_spin);
             this.Controls.Add(this.pictureBox_random);
             this.Controls.Add(this.pictureBox_card2);
             this.Controls.Add(this.pictureBox_card);
@@ -525,7 +415,6 @@
             this.Controls.Add(this.picSample);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.pictureBox_move);
             this.Controls.Add(this.p2);
             this.Controls.Add(this.p1);
             this.Controls.Add(this.p3);
@@ -538,7 +427,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_move)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSample)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRainbow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery)).EndInit();
@@ -548,12 +436,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_card2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_stock)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_border1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_sine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_border2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate)).EndInit();
             this.panel_radar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).EndInit();
@@ -575,11 +458,6 @@
         private System.Windows.Forms.Panel p0;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer_rotate;
-        private System.Windows.Forms.PictureBox pictureBox_move;
-        private System.Windows.Forms.Timer timer_move;
-        private System.Windows.Forms.Timer timer_border1;
-        private System.Windows.Forms.Timer timer7;
-        private System.Windows.Forms.Timer timer_border2;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Timer timer_random_rectangle;
         private System.Windows.Forms.PictureBox picSample;
@@ -601,16 +479,9 @@
         internal System.Windows.Forms.Timer timer_atom2;
         private System.Windows.Forms.PictureBox pictureBox_random;
         private System.Windows.Forms.Timer timer_random;
-        private System.Windows.Forms.PictureBox pictureBox_spin;
-        private System.Windows.Forms.Timer timer_spin;
-        private System.Windows.Forms.PictureBox pictureBox_circle;
-        private System.Windows.Forms.Timer timer_circle;
         private System.Windows.Forms.PictureBox pictureBox_stock;
         private System.Windows.Forms.ToolTip tipData;
         private System.Windows.Forms.Timer timer_stock;
-        private System.Windows.Forms.PictureBox pictureBox_border1;
-        private System.Windows.Forms.PictureBox pictureBox_sine;
-        private System.Windows.Forms.PictureBox pictureBox_border2;
         private System.Windows.Forms.PictureBox pictureBox_rotate;
         private System.Windows.Forms.Panel panel_radar;
         private System.Windows.Forms.PictureBox pictureBox_radar;
