@@ -12,6 +12,7 @@ writer = csv.writer(csvfile)
 writer.writerows(np.array(animals))
 
 1. csv.reader()
+2. csv.DictReader()
 
 
 """
@@ -149,9 +150,9 @@ print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
 print("------------------------------------------------------------")  # 60個
-'''
+
 print("------------------------------------------------------------")  # 60個
-print("csv.reader()")
+print("1. csv.reader()")
 print("------------------------------------------------------------")  # 60個
 
 print("python讀寫CSV檔 1 讀取")
@@ -304,90 +305,11 @@ with open(filename, "r") as csvfile:
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/python_ReadWrite_CSV2.csv"
-print("讀取CSV檔 1 DictReader, 檔案 :", filename)
-
-data = list()
-with open(filename, newline="") as csvfile:
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    print(type(csv_dict_reader))
-
-    # 以迴圈顯示每一列
-    for row in csv_dict_reader:
-        print(row["姓名"], row["身高"], row["體重"])
-        print(row)
-        data.append(dict(row))
-
-print(type(data))
-print(len(data))
-print(data)
-print(len(data[0]))
-print(type(data[0]))
-print(data[0])
-print(data[0]["姓名"])
-print(data[0]["身高"])
-print(data[0]["體重"])
-print(len(data[1]))
-print(type(data[1]))
-print(data[1])
-print(data[1]["姓名"])
-print(data[1]["身高"])
-print(data[1]["體重"])
 
 print("------------------------------------------------------------")  # 60個
-
-filename = "data/python_ReadWrite_CSV1.csv"
-print("讀取CSV檔 2 DictReader, 檔案 :", filename)
-
-import pprint as pp
-
-data = list()
-with open(filename, "rt") as csvfile:
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    print(type(csv_dict_reader))
-    for row in csv_dict_reader:
-        data.append(dict(row))
-pp.pprint(data)
-
+print("2. csv.DictReader()")
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/python_ReadWrite_CSV1.csv"
-print("讀取CSV檔 3 DictReader, 檔案 :", filename)
-
-import pprint as pp
-
-with open(filename, "rt") as csvfile:
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    data = [dict(row) for row in csv_dict_reader]
-pp.pprint(data)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/csvPeople.csv"
-print("讀取CSV檔 4 DictReader, 檔案 :", filename)
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀檔案建立DictReader物件
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row)
-
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row["first_name"], row["last_name"])
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/member.csv"
-print("讀取CSV檔 5 DictReader, 檔案 :", filename)
-
-# 讀取 CSV 檔案並提取電子郵件地址
-with open(filename, newline="", encoding="utf-8") as csvfile:
-    csv_dict_reader = csv.DictReader(csvfile)
-    for row in csv_dict_reader:
-        # print(row['姓名'], end = "\t")   #不能用
-        print(row["電子郵件"], end="\t")
-        print(row["體重"])
-
-print("------------------------------------------------------------")  # 60個
 
 import pathlib
 
@@ -543,22 +465,6 @@ with open(filename, encoding="utf-8") as csvfile:  # 開啟csv檔案
 print(listReport[0][1], listReport[0][2])
 print(listReport[1][2], listReport[1][5])
 print(listReport[2][3], listReport[2][6])
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/csvPeople.csv"
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀檔案建立DictReader物件
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/csvPeople.csv"
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀檔案建立DictReader物件
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row["first_name"], row["last_name"])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -827,52 +733,6 @@ csvfile.close()
 
 print("------------------------------------------------------------")  # 60個
 
-csvfile = open("data/StudentScore.csv")
-csv_dict_reader = csv.DictReader(csvfile)  # 使用DictReader ()方法取得csv檔資料並傳回data字典型別
-for row in csv_dict_reader:  # 逐一印出字典的內容
-    print(row)
-csvfile.close()
-
-print("------------------------------------------------------------")  # 60個
-
-csvfile = open("data/StudentScore.csv")
-csv_dict_reader = csv.DictReader(csvfile)  # 使用DictReader ()方法取得csv檔資料並傳回data字典型別
-print("學號\t姓名\t國文\t英語\t數學\t總分")
-for row in csv_dict_reader:  # 逐一印出字典的內容，並計算總分
-    print(
-        "{}\t{}\t{}\t{}\t{}\t{}".format(
-            row["學號"],
-            row["姓名"],
-            row["國文"],
-            row["英語"],
-            row["數學"],
-            (int(row["國文"]) + int(row["英語"]) + int(row["數學"])),
-        )
-    )
-csvfile.close()
-
-print("------------------------------------------------------------")  # 60個
-
-# searchName=input('請輸入學生姓名進行查詢成績：') #輸入查詢姓名
-searchName = "david"
-
-csvfile = open("data/StudentScore.csv")
-csv_dict_reader = csv.DictReader(csvfile)  # 使用DictReader ()方法取得csv檔資料並傳回data字典型別
-for row in csv_dict_reader:  # 逐一比對姓名是否符合searchName
-    if row["姓名"] == searchName:
-        print("{}成績資訊如下：".format(row["姓名"]))
-        print("學號：{}".format(row["學號"]))
-        print("國文：{}".format(row["國文"]))
-        print("英語：{}".format(row["英語"]))
-        print("數學：{}".format(row["數學"]))
-        print("總分：{}".format((int(row["國文"]) + int(row["英語"]) + int(row["數學"]))))
-        break  # 離開迴圈
-else:  # 當迴圈沒有執行break，即會執行else區域，表示沒有找到符合姓名
-    print("查無{}成績".format(searchName))
-csvfile.close()
-
-print("------------------------------------------------------------")  # 60個
-
 csvfile = open("tmp_dictWriterProduct.csv", "w", newline="")
 # 建立writer物件，同時指定欄位名稱
 csv_dict_writer = csv.DictWriter(csvfile, fieldnames=["產品編號", "品名", "單價"])
@@ -913,33 +773,6 @@ csvWriter.writerow(["編號", "品名", "單價"])
 csvWriter.writerows(listProduct)  # 將二維串列的兩筆產品寫入csv內
 csvfile.close()  # 關閉檔案
 
-print("------------------------------------------------------------")  # 60個
-
-"""
-listProduct=["","",""] # 建立listProduct串列，用來存放一筆產品記錄
-while True:
-     option = input("功能選單：1.新增 2.查詢 3.離開：")
-     if option=="1":
-         # 以附加模式開啟tProduct.csv檔案
-         f=open('tProduct.csv','a', newline='') 
-         csvWriter=csv.writer(f) 
-         listProduct[0] = input("編號：")   #listProduct[0]存放編號
-         listProduct[1] = input("品名：")   #listProduct[1]存放品名
-         listProduct[2] = input("單價：")   #listProduct[2]存放單價
-         csvWriter.writerow(listProduct)
-         print("新增成功")
-         f.close()
-     elif option=="2" :
-         # 以讀檔模式開啟tProduct.csv檔案
-         f=open ('tProduct.csv')
-         csvdictreader=csv.DictReader(f)  
-         print("編號\t品名\t單價")
-         for row in csvdictreader:   		
-             print("{}\t{}\t{}".format(row['編號'],row['品名'],row['單價']))
-         f.close()
-     else:
-         break
-"""
 print("------------------------------------------------------------")  # 60個
 
 print("------------------------------------------------------------")  # 60個
@@ -1293,6 +1126,192 @@ print("------------------------------------------------------------")  # 60個
 
 
 
+'''
 
 
-csvdictreader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+
+
+
+
+
+
+
+
+print("------------------------------------------------------------")  # 60個
+print("2. csv.DictReader()")
+print("------------------------------------------------------------")  # 60個
+
+'''
+filename = "data/animals_big5.csv"
+
+data = list()
+with open(filename, newline="") as csvfile:
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    print(type(csv_dict_reader))
+
+    # 以迴圈顯示每一列
+    for row in csv_dict_reader:
+        print(row)
+        data.append(dict(row))
+
+print(type(data))
+print(len(data))
+print(data)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+import pprint as pp
+
+data = list()
+with open(filename, "rt") as csvfile:
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    print(type(csv_dict_reader))
+    for row in csv_dict_reader:
+        data.append(dict(row))
+pp.pprint(data)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+import pprint as pp
+
+with open(filename, "rt") as csvfile:
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    data = [dict(row) for row in csv_dict_reader]
+pp.pprint(data)
+
+
+'''
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+filename = "data/csvPeople.csv"
+filename = "data/animals_big5.csv"
+
+print("讀取CSV檔 4 DictReader, 檔案 :", filename)
+
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀檔案建立DictReader物件
+    for row in csv_dict_reader:  # 列出DictReader各列內容
+        print(row)
+
+    for row in csv_dict_reader:  # 列出DictReader各列內容
+        print(row["first_name"], row["last_name"])
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals.csv"
+
+print("讀取CSV檔 5 DictReader, 檔案 :", filename)
+
+with open(filename, newline="", encoding="utf-8") as csvfile:
+    csv_dict_reader = csv.DictReader(csvfile)
+    for row in csv_dict_reader:
+        # print(row['姓名'], end = "\t")   #不能用
+        print(row["中文名"], end="\t")
+        print(row["英文名"])
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀檔案建立DictReader物件
+    for row in csv_dict_reader:  # 列出DictReader各列內容
+        print(row)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀檔案建立DictReader物件
+    for row in csv_dict_reader:  # 列出DictReader各列內容
+        print(row["中文名"], row["英文名"])
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+csvfile = open(filename)
+csv_dict_reader = csv.DictReader(csvfile)  # 使用DictReader ()方法取得csv檔資料並傳回data字典型別
+for row in csv_dict_reader:  # 逐一印出字典的內容
+    print(row)
+csvfile.close()
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+csvfile = open(filename)
+csv_dict_reader = csv.DictReader(csvfile)  # 使用DictReader ()方法取得csv檔資料並傳回data字典型別
+print("中文名\t英文名\t體重\t全名")
+for row in csv_dict_reader:  # 逐一印出字典的內容，並計算總分
+    print(
+        "{}\t{}\t{}\t{}".format(
+            row["中文名"],
+            row["英文名"],
+            row["體重"],
+            row["全名"],
+        )
+    )
+csvfile.close()
+
+print("------------------------------------------------------------")  # 60個
+
+# searchName=input('請輸入學生姓名進行查詢成績：') #輸入查詢姓名
+searchName = "david"
+
+csvfile = open("data/StudentScore.csv")
+csv_dict_reader = csv.DictReader(csvfile)  # 使用DictReader ()方法取得csv檔資料並傳回data字典型別
+for row in csv_dict_reader:  # 逐一比對姓名是否符合searchName
+    if row["姓名"] == searchName:
+        print("{}成績資訊如下：".format(row["姓名"]))
+        print("學號：{}".format(row["學號"]))
+        print("國文：{}".format(row["國文"]))
+        print("英語：{}".format(row["英語"]))
+        print("數學：{}".format(row["數學"]))
+        print("總分：{}".format((int(row["國文"]) + int(row["英語"]) + int(row["數學"]))))
+        break  # 離開迴圈
+else:  # 當迴圈沒有執行break，即會執行else區域，表示沒有找到符合姓名
+    print("查無{}成績".format(searchName))
+csvfile.close()
+
+print("------------------------------------------------------------")  # 60個
+
+
+
+"""
+listProduct=["","",""] # 建立listProduct串列，用來存放一筆產品記錄
+while True:
+     option = input("功能選單：1.新增 2.查詢 3.離開：")
+     if option=="1":
+         # 以附加模式開啟tProduct.csv檔案
+         f=open('tProduct.csv','a', newline='') 
+         csvWriter=csv.writer(f) 
+         listProduct[0] = input("編號：")   #listProduct[0]存放編號
+         listProduct[1] = input("品名：")   #listProduct[1]存放品名
+         listProduct[2] = input("單價：")   #listProduct[2]存放單價
+         csvWriter.writerow(listProduct)
+         print("新增成功")
+         f.close()
+     elif option=="2" :
+         # 以讀檔模式開啟tProduct.csv檔案
+         f=open ('tProduct.csv')
+         csvdictreader=csv.DictReader(f)  
+         print("編號\t品名\t單價")
+         for row in csvdictreader:   		
+             print("{}\t{}\t{}".format(row['編號'],row['品名'],row['單價']))
+         f.close()
+     else:
+         break
+"""
+print("------------------------------------------------------------")  # 60個
+
+
+
