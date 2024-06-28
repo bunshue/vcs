@@ -1,10 +1,8 @@
 import sys
 
-print("------------------------------------------------------------")  # 60個
-
 import tkinter as tk
-from tkinter import Tk, Canvas, NW
-from PIL import Image, ImageTk
+
+print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")

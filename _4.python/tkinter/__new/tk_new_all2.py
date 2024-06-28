@@ -42,6 +42,7 @@ window.mainloop()
 """
 print("------------------------------------------------------------")  # 60個
 
+'''
 from tkinter import scrolledtext  # 導入滾動文本框的模塊
 
 window = tk.Tk()
@@ -59,3 +60,63 @@ scr.grid(column=0, columnspan=3)
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
+'''
+
+window = tk.Tk()
+window.geometry("600x800")
+window.title("new all 7")
+
+
+
+from tkinter.messagebox import showinfo
+
+button1 = tk.Button(window, command=lambda *args: showinfo(message="aaaaaaa"), text="獲取")
+button1.pack()
+
+
+
+def display():
+    number = int(order.get())
+    print('取得 order = ', number)
+                
+frame2 = tk.Frame(window, bg = 'pink') # Create and add a frame to window
+frame2.pack()
+
+tk.Label(frame2, text = "Enter an order: ").pack(side = tk.LEFT)
+order = tk.StringVar()
+entry = tk.Entry(frame2, textvariable = order, justify = tk.RIGHT).pack(side = tk.LEFT)
+tk.Button(frame2, text = 'Do something', command = display).pack(side = tk.LEFT)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+
+
+
+def changeString():
+    stringToCopy = entry1.get()
+    stringToCopy = stringToCopy[::-1]
+    entry1.delete(0, tk.END)
+    entry1.insert(0, stringToCopy)
+
+entry1 = tk.Entry(window)
+entry1.pack()
+
+button0 = tk.Button(window, text = 'Change111', command = changeString)
+button0.pack()
+
+
+window.mainloop()
+
+
+"""
+
+
+
+messagebox.showinfo("New File", "開新檔案")
+
+
+
+"""

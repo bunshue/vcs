@@ -376,38 +376,6 @@ print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Checkbutton 3")
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-print("密碼資料")
-
-label = tk.Label(window, text="請輸入密碼: ").pack()
-entry = tk.Entry(window, bg="yellow", fg="red", show="*").pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-window = tk.Tk()
-window.geometry("600x800")
 window.title("Checkbutton 4")
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
@@ -594,43 +562,23 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-window.mainloop()
-
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 44")
 
 var1 = tk.IntVar()
 cbtnNFL = tk.Checkbutton(window, text="美式足球", variable=var1)
-cbtnNFL.grid(row=1, sticky=tk.W)
+cbtnNFL.pack()
 
 var2 = tk.IntVar()
 cbtnMLB = tk.Checkbutton(window, text="棒球", variable=var2)
-cbtnMLB.grid(row=2, sticky=tk.W)
+cbtnMLB.pack()
 
 var3 = tk.IntVar()
 cbtnNBA = tk.Checkbutton(window, text="籃球", variable=var3)
-cbtnNBA.grid(row=3, sticky=tk.W)
+cbtnNBA.pack()
 
-window.mainloop()
-
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
 
 def printInfo1():
     selection = ""
@@ -639,31 +587,36 @@ def printInfo1():
             selection = selection + sports[i] + "\t"
     print(selection)
 
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Grid 測試 45")
-
-tk.Label(window, text="請選擇喜歡的運動", fg="blue", bg="lightyellow", width=30).grid(row=0)
+tk.Label(window, text="請選擇喜歡的運動", fg="blue", bg="lightyellow", width=30).pack()
 
 sports = {0: "美式足球", 1: "棒球", 2: "籃球", 3: "網球"}  # 運動字典
 checkboxes = {}  # 字典存放被選取項目
 for i in range(len(sports)):  # 將運動字典轉成核取方塊
     checkboxes[i] = tk.BooleanVar()  # 布林變數物件
-    tk.Checkbutton(window, text=sports[i], variable=checkboxes[i]).grid(
-        row=i + 1, sticky=tk.W
-    )
+    tk.Checkbutton(window, text=sports[i], variable=checkboxes[i]).pack()
 
 button1 = tk.Button(window, text="選取", width=10, command=printInfo1)
-button1.grid(row=i + 2)
+button1.pack()
+
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
 
 window.mainloop()
 
-print("------------------------------------------------------------")  # 60個
-
 
 print("------------------------------------------------------------")  # 60個
-
 
 
 print("------------------------------------------------------------")  # 60個

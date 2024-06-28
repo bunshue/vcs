@@ -8,7 +8,7 @@ class Module:
         self.__name__ = name
         self.__file__ = file
         self.__path__ = path
-        self.__folder__ = 'C:/_git/vcs/_1.data/______test_files5'
+        self.__folder__ = 'C:/_git/vcs/_1.data/______test_files1'
         self.__code__ = None
         self._date = time.time()
 
@@ -33,8 +33,8 @@ class Module:
             raise TypeError("can't convert to float: %s" % date)
 
     def list_folders(self):
+        print('轉出一層')
         result = []
-        #轉出一層
         for entry in os.listdir(self.__folder__):
             if not os.path.isdir(os.path.join(self.__folder__, entry)):
                 result.append(entry)
@@ -47,8 +47,9 @@ print(msg)
 
 print('創建時間 :', m.get_date())
 
-result = m.list_folders()
-print(result)
+cc = m.list_folders()
+print(cc)
+
 
 
 

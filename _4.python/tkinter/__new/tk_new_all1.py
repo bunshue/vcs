@@ -11,7 +11,7 @@ w = 12
 h = 2
 
 print("------------------------------------------------------------")  # 60個
-
+'''
 window = tk.Tk()
 window.geometry("600x800")
 window.title("new all 2")
@@ -412,7 +412,7 @@ tl.geometry("300x180")
 tk.Label(tl, text="I am a Toplevel").pack()
 
 window.mainloop()
-
+'''
 print("------------------------------------------------------------")  # 60個
 
 
@@ -468,95 +468,6 @@ button2 = tk.Button(
     window, text="開啟新視窗取得資料", command=CreateNewWindow2
 )  # 設定Create按鈕的事件處理函數
 button2.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-import tkinter.simpledialog  # 匯入tkSimpleDialog模組
-
-
-def InStr():
-    # 建立 字串 輸入交談視窗
-    r = tkinter.simpledialog.askstring(
-        "Python Tkinter", "Input String", initialvalue="Tkinter"  # 指定提示字元
-    )  # 指定起始化文字
-    print(r)  # 輸出傳回值
-
-
-def InInt():
-    # 建立 整數 輸入交談視窗
-    r = tkinter.simpledialog.askinteger("Python Tkinter", "Input Integer")
-    print(r)
-
-
-def InFlo():
-    # 建立 浮點數 輸入交談視窗
-    r = tkinter.simpledialog.askfloat("Python Tkinter", "Input Float")
-    print(r)
-
-
-button1 = tk.Button(window, text="Input String", command=InStr)
-button1.pack()
-button2 = tk.Button(window, text="Input Integer", command=InInt)
-button2.pack()
-button2 = tk.Button(window, text="Input Float", command=InFlo)
-button2.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-var = tk.StringVar()
-l = tk.Label(
-    window, textvariable=var, bg="green", font=("Arial", 12), width=15, height=2
-)
-# l = tk.Label(window, text='OMG! this is TK!', bg='green', font=('Arial', 12), width=15, height=2)
-l.pack()
-
-on_hit = False
-
-
-def hit_me():
-    global on_hit
-    if on_hit == False:
-        on_hit = True
-        var.set("you hit me")
-    else:
-        on_hit = False
-        var.set("")
-
-
-b = tk.Button(window, text="hit me", width=15, height=2, command=hit_me)
-b.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-from tkinter import Tk, Variable, Entry, Button
-
-
-def get_entry_data():
-    cc = a.get()
-    print("你取得了 :", cc)
-
-
-a = tk.Variable(window, value="123")
-e = tk.Entry(window, textvariable=a)
-b = tk.Button(window, text="獲取", command=get_entry_data)
-e.pack()
-b.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5

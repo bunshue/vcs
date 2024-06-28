@@ -4,7 +4,7 @@ import tkinter.ttk as ttk
 import tkinter.font as tkfont
 
 print("------------------------------------------------------------")  # 60個
-'''
+
 window = tk.Tk()
 window.geometry("600x800")
 window.title("Spinbox 1")
@@ -14,45 +14,40 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+def show_spinbox_selection():
+    print("你選擇了 :", spinbox1.get()) #取得選取資料
+    cc = spinbox1.get() #取得選取資料
+    label1.config(text=cc)
+
 tk.Label(window, text="tk之spinbox").pack()
-spinbox = tk.Spinbox(window, from_=10, to=30, increment=2)
-spinbox.pack()
+spinbox1 = tk.Spinbox(window, from_=10, to=30, increment=2, command=show_spinbox_selection)
+spinbox1.pack()
+
+label1 = tk.Label(window, fg="red")
+label1.pack()
+
 
 tk.Label(window, text="ttk之spinbox").pack()
-spinbox = ttk.Spinbox(window, from_=0, to=100, increment=0.1)
-spinbox.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
+spinbox2 = ttk.Spinbox(window, from_=0, to=100, increment=0.1)
+spinbox2.pack()
 
 tk.Label(window, text="設定刻度").pack()
-# spinbox = ttk.Spinbox(window, from_=0, to=10)
-spinbox = ttk.Spinbox(window, values=(1, 2, 4, 8))
-spinbox.pack()
+# spinbox3 = ttk.Spinbox(window, from_=0, to=10)
+spinbox3 = ttk.Spinbox(window, values=(1, 2, 4, 8))
+spinbox3.pack()
 
-tk.Label(window, text="設定刻度").pack()
-spinboxFourcc = tk.Spinbox(window, value=("XVID", "DIVX", "MJPG", "I420"), width=10)
-spinboxFourcc.pack()
+tk.Label(window, text="設定文字刻度").pack()
 
-# 取得選取資料
-# setFourcc=spinboxFourcc.get()
+names = ("AAA", "BBB", "CCC")  # 以元組儲存數值
+spinbox4 = tk.Spinbox(window, values=names, command="", width=20)
+spinbox4.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
+spinbox5 = tk.Spinbox(window, values=(10, 38, 170, 101), command="")
+spinbox5.pack()
 
+spinbox6 = tk.Spinbox(window, from_=0, to=10, command="")
+spinbox6.pack()
 
-def printInfo3():
-    print("e你選擇了 :", sp.get())
-
-
-cities = ("新加坡", "上海", "東京")  # 以元組儲存數值
-
-sp = tk.Spinbox(window, values=cities, command=printInfo3)
-sp.pack(pady=10, padx=10)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -62,7 +57,7 @@ print("------------------------------------------------------------")  # 60個
 
 # Spinbox
 spin_int = tk.IntVar(value=12)
-spin = ttk.Spinbox(
+spinbox7 = ttk.Spinbox(
     window,
     from_=3,
     to=20,
@@ -70,10 +65,11 @@ spin = ttk.Spinbox(
     command=lambda: print("a你選擇了 :", spin_int.get()),
     textvariable=spin_int,
 )
-spin.bind("<<Increment>>", lambda event: print("a你選擇了 :", "up"))
-spin.bind("<<Decrement>>", lambda event: print("a你選擇了 :", "down"))
-# spin['value'] = (1,2,3,4,5)
-spin.pack()
+
+spinbox7.bind("<<Increment>>", lambda event: print("a你選擇了 :", "up"))
+spinbox7.bind("<<Decrement>>", lambda event: print("a你選擇了 :", "down"))
+# spinbox7['value'] = (1,2,3,4,5)
+spinbox7.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -83,14 +79,14 @@ print("------------------------------------------------------------")  # 60個
 # create a spinbox that contains the letters A B C D E
 # and print the value whenever the value is decreased
 
-exercise_letters = ("A", "B", "C", "D", "E")
+exercise_letters = ("AAA", "BBB", "CCC", "DDD")
 exercise_string = tk.StringVar(value=exercise_letters[0])
-exercise_spin = ttk.Spinbox(
+spinbox8 = ttk.Spinbox(
     window, textvariable=exercise_string, values=exercise_letters
 )
-exercise_spin.pack()
+spinbox8.pack()
 
-exercise_spin.bind(
+spinbox8.bind(
     "<<Decrement>>", lambda event: print("b你選擇了 :", exercise_string.get())
 )
 
@@ -102,14 +98,14 @@ print("------------------------------------------------------------")  # 60個
 
 def spinbox_select():
     selected_month = month.get()
-    lab_result.config(text=selected_month)
+    label2.config(text=selected_month)
 
 
 default_font = tkfont.nametofont("TkDefaultFont")
 default_font.configure(size=15)
 month = tk.IntVar()
 month.set(1)
-spinbox = tk.Spinbox(
+spinbox9 = tk.Spinbox(
     window,
     from_=1,
     to=12,
@@ -117,40 +113,16 @@ spinbox = tk.Spinbox(
     command=spinbox_select,
     font=default_font,
 )
-spinbox.pack(padx=10, pady=10)
-lab_result = tk.Label(window, font=default_font, fg="black")
-lab_result.pack(padx=10, pady=(5, 10))
+spinbox9.pack()
+
+label2 = tk.Label(window, font=default_font, fg="red")
+label2.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
-def printInfo1():
-    print("c你選擇了 :", sp.get())
-
-
-sp = tk.Spinbox(window, from_=0, to=10, command=printInfo1)
-sp.pack(pady=10, padx=10)
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def printInfo2():
-    print("d你選擇了 :", sp.get())
-
-
-sp = tk.Spinbox(window, values=(10, 38, 170, 101), command=printInfo2)  # 以元組儲存數值
-sp.pack(pady=10, padx=10)
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
 
 import random
 
@@ -185,12 +157,6 @@ def fnAns():
     buttonTest.config(state="normal")
     buttonAns.config(state="disable")
 
-
-"""
-window = tk.Tk()
-window.geometry("600x400")
-window.title('加減法測驗')
-"""
 print("加減法測驗")
 
 frmTest = tk.Frame(window, relief="raised", borderwidth=2)
@@ -223,7 +189,7 @@ buttonAns.pack(side="right", pady=3)
 ans = 0
 
 window.mainloop()
-'''
+
 print("------------------------------------------------------------")  # 60個
 
 
@@ -266,3 +232,6 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+

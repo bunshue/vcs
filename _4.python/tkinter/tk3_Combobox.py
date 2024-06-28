@@ -1,6 +1,8 @@
 """
 Combobox 下拉式選單
 
+Combobox 下拉選單是 tkinter 的 ttk 加強模組裡的元件
+
 """
 
 import sys
@@ -13,22 +15,21 @@ window = tk.Tk()
 window.geometry("600x800")
 window.title("Combobox 測試")
 
-# Combobox
-items = ("鼠", "牛", "虎", "兔")
-food_string = tk.StringVar(value=items[0])
-combo = ttk.Combobox(window, textvariable=food_string)
-combo["values"] = items
-# combo.configure(values = items)
-combo.pack()
+items = ("鼠", "牛", "虎")
+animal_string = tk.StringVar(value=items[0])
+combobox1 = ttk.Combobox(window, textvariable=animal_string)
+combobox1["values"] = items
+# combobox1.configure(values = items)
+combobox1.pack()
 
 # events
-combo.bind(
+combobox1.bind(
     "<<ComboboxSelected>>",
-    lambda event: combo_label.config(text=f"Selected value: {food_string.get()}"),
+    lambda event: label1.config(text=f"你選擇了 : {animal_string.get()}"),
 )
 
-combo_label = ttk.Label(window, text="a label")
-combo_label.pack()
+label1 = ttk.Label(window, text="a label")
+label1.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -37,22 +38,20 @@ print("------------------------------------------------------------")  # 60個
 
 
 def combobox_select2(event):
-    labelVar.set(cbVar.get())
+    labelVar.set(comboboxVar2.get())
 
 
-print("最喜歡的動物")
-
-cbVar = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=cbVar)
-cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項
-cb.current(0)  # 預設第一個選項
-cb.bind("<<ComboboxSelected>>", combobox_select2)  # 設定選取選項後執行的程式
-cb.pack()
+comboboxVar2 = tk.StringVar()
+combobox2 = ttk.Combobox(window, textvariable=comboboxVar2)
+combobox2["value"] = ("鼠", "牛", "虎")
+combobox2.current(0)  # 預設第一個選項
+combobox2.bind("<<ComboboxSelected>>", combobox_select2)  # 設定選取選項後執行的程式
+combobox2.pack()
 
 labelVar = tk.StringVar()
-labelShow = tk.Label(window, textvariable=labelVar)
-labelVar.set(cbVar.get())
-labelShow.pack()
+label2 = tk.Label(window, textvariable=labelVar)
+labelVar.set(comboboxVar2.get())
+label2.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -60,8 +59,8 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-def combobox_select5(event):  # 下拉選單選取選項後執行的程式
-    city = cbVar.get()  # 使用者選取的選項
+def combobox_select3(event):  # 下拉選單選取選項後執行的程式
+    city = comboboxVar3.get()  # 使用者選取的選項
     print(city)
     if city != "請選擇：":  # 選擇縣市
         showdata = city + " 天氣資料：\n"
@@ -71,27 +70,22 @@ def combobox_select5(event):  # 下拉選單選取選項後執行的程式
         labelVar.set("請選擇動物")
 
 
-print("縣市天氣資料")
-
-cbVar = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=cbVar)  # 下拉式選單元件
-cb["value"] = (
+comboboxVar3 = tk.StringVar()
+combobox3 = ttk.Combobox(window, textvariable=comboboxVar3)  # 下拉式選單元件
+combobox3["value"] = (
     "請選擇：",
     "鼠",
     "牛",
     "虎",
-    "兔",
 )  # 設定選項
-cb.current(0)  # 預設第一個選項
-cb.bind("<<ComboboxSelected>>", combobox_select5)  # 設定選取選項後執行的程式
-cb.pack()
+combobox3.current(0)  # 預設第一個選項
+combobox3.bind("<<ComboboxSelected>>", combobox_select3)  # 設定選取選項後執行的程式
+combobox3.pack()
 
 labelVar = tk.StringVar()
-labelShow = tk.Label(
-    window, foreground="red", justify="left", textvariable=labelVar
-)  # 標籤元件
+label3 = tk.Label(window, foreground="red", justify="left", textvariable=labelVar)
 labelVar.set("尚未選擇動物")
-labelShow.pack()
+label3.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -99,24 +93,21 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-def combobox_select3(event):
-    label_text.set(cbVar.get())
+def combobox_select4(event):
+    label_text.set(comboboxVar4.get())
 
 
-# Combobox 下拉選單是 tkinter 的 ttk 加強模組裡的元件
-print("Combobox 測試")
-
-cbVar = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=cbVar)  # 下拉式選單元件
-cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項
-cb.current(0)  # 預設第一個選項
-cb.bind("<<ComboboxSelected>>", combobox_select3)  # 設定選取選項後執行的程式
-cb.pack()
+comboboxVar4 = tk.StringVar()
+combobox4 = ttk.Combobox(window, textvariable=comboboxVar4)  # 下拉式選單元件
+combobox4["value"] = ("鼠", "牛", "虎")
+combobox4.current(0)  # 預設第一個選項
+combobox4.bind("<<ComboboxSelected>>", combobox_select4)  # 設定選取選項後執行的程式
+combobox4.pack()
 
 label_text = tk.StringVar()
-label1 = tk.Label(window, textvariable=label_text)
-label_text.set(cbVar.get())
-label1.pack()
+label4 = tk.Label(window, textvariable=label_text)
+label_text.set(comboboxVar4.get())
+label4.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -124,110 +115,21 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-def combobox_select4():
-    a.set(f"{box.current()}:{box.get()}")  # 顯示索引值與內容
+def combobox_select5(event):  # 顯示選項
+    labelVar.set(comboboxVar5.get())  # 同步標籤內容
 
 
-a = tk.StringVar()  # 定義變數
-a.set("")
-
-label = tk.Label(window, textvariable=a)  # 建立標籤，內容為變數
-label.pack()
-
-box = ttk.Combobox(window, width=15, values=["鼠", "牛", "虎", "兔"])
-box.pack()
-
-btn = tk.Button(
-    window, text="選擇", command=combobox_select4
-)  # 建立按鈕，點擊按鈕時，執行 combobox_select4 函式
-btn.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def combobox_select1(event):
-    selected_area = event.widget.get()
-    lab_result.config(text=selected_area)
-
-
-print("Combobox 測試")
-
-AREA_OPTIONS = ("鼠", "牛", "虎", "兔")
-area = tk.StringVar()
-combox = ttk.Combobox(window, value=AREA_OPTIONS, textvariable=area)
-combox.bind("<<ComboboxSelected>>", combobox_select1)
-combox.current(0)
-combox.pack()
-lab_result = tk.Label(window, fg="black", width=18)
-lab_result.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-
-def combobox_select6(event):  # 顯示選項
-    labelVar.set(var.get())  # 同步標籤內容
-
-
-var = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
-cb.current(0)  # 設定預設選項
-cb.bind("<<ComboboxSelected>>", combobox_select6)  # 綁定
-cb.pack()
+comboboxVar5 = tk.StringVar()
+combobox5 = ttk.Combobox(window, textvariable=comboboxVar5)
+combobox5["value"] = ("鼠", "牛", "虎")
+combobox5.current(0)  # 設定預設選項
+combobox5.bind("<<ComboboxSelected>>", combobox_select5)  # 綁定
+combobox5.pack()
 
 labelVar = tk.StringVar()
-label = tk.Label(window, textvariable=labelVar)  # 建立Label
-labelVar.set(var.get())  # 設定Label的初值
-label.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-var = tk.StringVar()
-cb = ttk.Combobox(
-    window, textvariable=var, value=("鼠", "牛", "虎", "兔")  # 建立Combobox
-)
-cb.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-var = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
-cb.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-var = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
-cb.current(0)  # 設定預設選項
-cb.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-var = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
-var.set("牛")  # 預設
-cb.pack()
+label5 = tk.Label(window, textvariable=labelVar)
+labelVar.set(comboboxVar5.get())  # 設定Label的初值
+label5.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -235,18 +137,60 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 
-def combobox_select7():  # 列印選項
-    print(var.get())
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
 
+def combobox_select8():
+    print(comboboxVar8.get())
+    print(f"{combobox8.current()}:{combobox8.get()}")  # 顯示索引值與內容
 
-var = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=var)  # 建立Combobox
-cb["value"] = ("鼠", "牛", "虎", "兔")  # 設定選項內容
-cb.current(0)  # 預設
-cb.pack()
+comboboxVar8 = tk.StringVar()
+comboboxVar8.set("")
 
-btn = tk.Button(window, text="選擇", command=combobox_select7)  # 建立按鈕
+# combobox8 = ttk.Combobox(window, width=15, values=["鼠", "牛", "虎"])
+# combobox8 = ttk.Combobox(window, textvariable=comboboxVar8, value=("鼠", "牛", "虎")) # same
+combobox8 = ttk.Combobox(window, textvariable=comboboxVar8)
+combobox8["value"] = ("鼠", "牛", "虎")
+combobox8.current(0)  # 預設
+#comboboxVar8.set("牛")  # 預設
+combobox8.pack()
+
+label8 = tk.Label(window, textvariable=comboboxVar8)  # 建立標籤，內容為變數
+label8.pack()
+
+btn = tk.Button(window, text="選擇", command=combobox_select8)
 btn.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+def combobox_select9(event):
+    selected_area = event.widget.get()
+    label9.config(text=selected_area)
+
+
+area = tk.StringVar()
+items = ("鼠", "牛", "虎")
+combobox9 = ttk.Combobox(window, value=items, textvariable=area)
+combobox9.bind("<<ComboboxSelected>>", combobox_select9)
+combobox9.current(0)
+combobox9.pack()
+
+label9 = tk.Label(window, fg="black", width=18)
+label9.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
+
+
+
 
 window.mainloop()
 
@@ -265,3 +209,5 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+

@@ -40,6 +40,8 @@ window.geometry("600x800")
 window.title("Text 1")
 
 text3 = tk.Text(window, width=30, height=5)
+text3.pack()
+
 text3.insert(tk.INSERT, "最簡單 W=30, H = 5\n")
 text3.insert(tk.INSERT, "故人西辭黃鶴樓，\n")
 text3.insert(tk.INSERT, "煙花三月下揚州。\n")
@@ -47,8 +49,6 @@ text3.insert(tk.INSERT, "孤帆遠影碧空盡，\n")
 text3.insert(tk.END, "唯見長江天際流。\n")
 
 text3.config(state=tk.DISABLED)  # 設定Text內容不可改變
-
-text3.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -58,6 +58,7 @@ print("------------------------------------------------------------")  # 60個
 
 text2 = tk.Text(window, width=30, height=5)
 text2.pack()
+
 text2.insert(tk.END, "越王勾踐破吳歸，戰士還家盡錦衣。\n")
 text2.insert(tk.INSERT, "宮女如花滿春殿，只今唯有鷓鴣飛。")
 
@@ -68,25 +69,26 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-sentences = "玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
 text7 = tk.Text(window, width=30, height=5, bg="yellow", wrap=tk.WORD)
-text7.insert(tk.END, sentences)
 text7.pack()
+
+sentences = "玉階生白露，夜久侵羅襪。\n卻下水晶簾，玲瓏望秋月。"
+text7.insert(tk.END, sentences)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-
 text4 = tk.Text(window, width=30, height=5)
+text4.pack()
+
 text4.insert(tk.END, "望廬山瀑布\n李白\n")
 str = """日照香爐生紫煙，
 遙看瀑布挂前川。
 飛流直下三千尺，
 疑是銀河落九天。"""
 text4.insert(tk.END, str)
-text4.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -114,14 +116,27 @@ text7.insert(tk.CURRENT, "名成八陣圖\n")
 text7.insert(tk.CURRENT, "江流石不轉\n")
 text7.insert(tk.END, "遺恨失吞吳")
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
+    fill=tk.X, padx=5, pady=5
+)  # 分隔線
+print("------------------------------------------------------------")  # 60個
 
+# 產生多行文字框元件
+text9 = tk.Text(window,	selectbackground = 'red', selectforeground = 'gray')
+text9.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
+text10 = tk.Text(window, width=30, height=5)
+text10.pack()
 
+text10.insert(tk.END, "\n寫在Text中的文字1")
+text10.insert(tk.END, "\n寫在Text中的文字2")
+text10.insert(tk.END, "\n寫在Text中的文字3")
+text10.insert(tk.END, "\n寫在Text中的文字4")
 
 
 window.mainloop()
@@ -129,13 +144,8 @@ window.mainloop()
 
 sys.exit()
 
-
-
-
-# 像是richTextBox
 text1 = tk.Text(window, width=80, height=6)  # 放入多行輸入框
 text1.pack()
-# text1.place(x = 100, y = 100)
 
 bt_set_data = tk.Button(window, text="set data", command=set_data)  # 放入清空按鈕
 bt_set_data.pack()
@@ -174,10 +184,12 @@ def getTextData3():
 
 scrollbar = tk.Scrollbar(frame1)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
 text3 = tk.Text(
     frame1, width=80, height=6, wrap=tk.WORD, yscrollcommand=scrollbar.set
 )  # 放入多行輸入框
 text3.pack()
+
 scrollbar.config(command=text3.yview)
 
 button1 = tk.Button(window, text="取得Text的資料", command=getTextData3)
@@ -222,11 +234,13 @@ def add_text():
 
 scrollbar = tk.Scrollbar(frame1)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
 # 日誌框
 text4 = tk.Text(
     frame1, width=80, height=6, wrap=tk.WORD, yscrollcommand=scrollbar.set
 )  # 放入多行輸入框
 text4.pack()
+
 scrollbar.config(command=text4.yview)
 
 button2 = tk.Button(window, text="寫日誌", command=write_log)
@@ -241,10 +255,11 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 text5 = tk.Text(window, width=50, height=5, padx=15, pady=15)
+text5.pack()
+
 text5.insert(1.0, "要加到Text內的文字")
 text5.tag_configure("center", justify="center")
 text5.tag_add("center", 1.0, "end")
-text5.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -265,7 +280,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 print("------------------------------------------------------------")  # 60個
 
 text6 = tk.Text(window, width=30, height=5)
-# text6.pack(fill=tk.BOTH,expand=True,padx=3,pady=2)
 text6.pack()
 
 text6.insert(tk.END, "白髮三千丈，離愁似箇長。\n")  # 插入文字
@@ -276,29 +290,10 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-"""
-# 產生多行文字框元件
-text9 = tk.Text(window,	selectbackground = 'red', selectforeground = 'gray')
-text9.pack()
-"""
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
-text10 = tk.Text(window, width=30, height=5)
-text10.pack()
-
-text10.insert(tk.END, "\n寫在Text中的文字1")
-text10.insert(tk.END, "\n寫在Text中的文字2")
-text10.insert(tk.END, "\n寫在Text中的文字3")
-text10.insert(tk.END, "\n寫在Text中的文字4")
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
 
 window.mainloop()
 
@@ -323,14 +318,13 @@ button1.pack(pady=3)
 
 # 建立Text
 text = tk.Text(window)
-# text.pack(fill=BOTH,expand=True,padx=3,pady=2)
 text.pack()
+
 text.insert(tk.END, "白髮三千丈，離愁似箇長。")  # 插入文字
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
 
 def printIndex():  # 列印索引
     print("INSERT : ", text.index(tk.INSERT))
@@ -347,8 +341,8 @@ button1.pack(pady=3)
 
 # 建立Text
 text = tk.Text(window)
-# text.pack(fill=tk.BOTH,expand=True,padx=3,pady=2)
 text.pack()
+
 text.insert(tk.END, "白髮三千丈，離愁似箇長。\n")  # 插入文字
 text.insert(tk.END, "不知明鏡裏，何處得秋霜。")  # 插入文字
 
@@ -360,6 +354,8 @@ window = tk.Tk()
 window.geometry("600x400")
 
 text = tk.Text(window)
+text.pack(fill=tk.BOTH, expand=True)
+#text.pack()
 
 text.insert(tk.END, "第1行\n")
 text.insert(tk.END, "第2行\n")
@@ -379,7 +375,7 @@ text.mark_set("mark2", "8.0")
 # 設定標籤
 text.tag_add("tag1", "mark1", "mark2")
 text.tag_config("tag1", foreground="blue", background="lightyellow")
-text.pack(fill=tk.BOTH, expand=True)
+
 print(text.get("mark1", "mark2"))
 
 window.mainloop()

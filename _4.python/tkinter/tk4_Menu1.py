@@ -247,14 +247,24 @@ filemenu.add_command(label="Exit", command=window.destroy)
 window.config(menu=menubar)  # 顯示功能表物件
 
 
-messagebox.showinfo("New File", "開新檔案")
-
 
 # 快捷鍵綁定
 window.bind(
     "<Control-n>", lambda event: print("你按了 開新檔案")
 )
 
+
+
+# 建立執行主功能
+# 第3排功能選單
+menu3 = tk.Menu(menu0, tearoff=0)
+menu0.add_cascade(label="執行", menu=menu3)
+menu3.add_command(label="執行程式", command=lambda: print("你按了 執行程式"))
+
+
+
 """
+
+
 
 

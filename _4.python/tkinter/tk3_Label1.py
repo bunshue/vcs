@@ -776,3 +776,18 @@ label3 = tk.Label(window, text="歡迎來到美國", relief="raised")
 
 """
 
+"""
+
+設定label的資料
+resultLabel.config(text=result)
+scoreLabel.config(text=str(score) + "/" + str(rounds))
+
+result = "資料" + stringToCopy
+label2.config(text=result)
+
+
+result = "第" + str(count) + "次取得數字:" + str(number)
+label2.config(text=result)
+
+
+"""

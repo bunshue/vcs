@@ -12,178 +12,30 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
 
-listbox = tk.Listbox(window)
-listbox.pack()
+listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
 
-# Listbox內加入項目
-listbox.insert(tk.END, "鼠")
-for item in ["牛", "虎", "兔"]:
-    listbox.insert(tk.END, item)
+#多選
+listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.MULTIPLE)  # 建立可以多選項的listbox
+#單選
+listbox1 = tk.Listbox(window, width=30, height=5)
+#listbox1 = tk.Listbox(window, width=30, height=5, relief="raised")
+listbox1.pack()
 
+listbox1.insert(tk.END, "鼠")
+listbox1.insert(tk.END, "牛")
+listbox1.insert(tk.END, "虎")
 
-lb = tk.Listbox(window)
-lb.insert(tk.END, "鼠")
-lb.insert(tk.END, "牛")
-lb.insert(tk.END, "虎")
-lb.pack(pady=10)
+listbox1.insert(tk.ACTIVE, "兔", "龍", "蛇")  # 前面補充建立3個項目
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
+listbox1.selection_set(2)  # 預設選擇第2個項目
+listbox1.selection_set(0, 3)  # 預設選擇第0-3索引項目
+#listbox1.delete(1)  # 刪除索引1的項目
+#listbox1.delete(1, 3)  # 刪除索引1-3的項目
 
-lb1 = tk.Listbox(window)  # 建立listbox 1
-lb1.pack()
+print(listbox1.get(1))  # 列印索引1的項目
+print(listbox1.get(1, 3))  # 列印索引1-3的項目
 
-lb2 = tk.Listbox(window, height=5, relief="raised")  # 建立listbox 2
-lb2.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Listbox 2")
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-# 多這個
-lb = tk.Listbox(window, selectmode=tk.MULTIPLE)  # 建立可以多選項的listbox
-
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=10)
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-# 多這個
-lb = tk.Listbox(window, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
-
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=10)
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-lb = tk.Listbox(window, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.insert(tk.ACTIVE, "Orange", "Grapes", "Mango")  # 前面補充建立3個項目
-lb.pack(pady=10)
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-lb = tk.Listbox(window, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=10)
-print("你選了 ", lb.size(), "個")  # 列出選項數量
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Listbox 3")
-
-lb = tk.Listbox(window)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=10)
-lb.selection_set(0)  # 預設選擇第0個項目
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-lb = tk.Listbox(window, selectmode=tk.EXTENDED)  # 拖曳可以選擇多選項
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=10)
-lb.selection_set(0, 3)  # 預設選擇第0-3索引項目
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-lb = tk.Listbox(window)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=10)
-lb.delete(1)  # 刪除索引1的項目
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-lb = tk.Listbox(window)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=10)
-lb.delete(1, 3)  # 刪除索引1-3的項目
-
-window.mainloop()
-
-print("------------------------------------------------------------")  # 60個
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Listbox 4")
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-lb = tk.Listbox(window)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=10)
-print(lb.get(1))  # 列印索引1的項目
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
-    fill=tk.X, padx=5, pady=5
-)  # 分隔線
-print("------------------------------------------------------------")  # 60個
-
-animals = ["鼠", "牛", "虎", "兔"]
-
-lb = tk.Listbox(window)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=10)
-print(lb.get(1, 3))  # 列印索引1-3的項目
+print("列出選項數量 :", listbox1.size(), "個")
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -192,37 +44,37 @@ print("------------------------------------------------------------")  # 60個
 
 
 def callback():  # 列印所選的項目
-    indexs = lb.curselection()
+    indexs = listbox1.curselection()
     for index in indexs:  # 取得索引值
-        print(lb.get(index))  # 列印所選的項目
+        print(listbox1.get(index))  # 列印所選的項目
 
 
-animals = ["鼠", "牛", "虎", "兔"]
+listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.MULTIPLE)
+listbox1.pack()
 
-lb = tk.Listbox(window, selectmode=tk.MULTIPLE)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=5)
+listbox1.insert(tk.END, "鼠")
+listbox1.insert(tk.END, "牛")
+listbox1.insert(tk.END, "虎")
 
 button1 = tk.Button(window, text="Print", command=callback)
-button1.pack(pady=5)
+button1.pack()
 
 print("------------------------------------------------------------")  # 60個
 
 
 def callback():  # 列印檢查結果
-    print(lb.selection_includes(3))
+    print(listbox1.selection_includes(3))
 
 
-animals = ["鼠", "牛", "虎", "兔"]
+listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.MULTIPLE)
+listbox1.pack()
 
-lb = tk.Listbox(window, selectmode=tk.MULTIPLE)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(pady=5)
+listbox1.insert(tk.END, "鼠")
+listbox1.insert(tk.END, "牛")
+listbox1.insert(tk.END, "虎")
 
 button1 = tk.Button(window, text="Check", command=callback)
-button1.pack(pady=5)
+button1.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -239,23 +91,23 @@ def itemsSorted():  # 排序
         revBool = True  # 大到小排序是True
     else:
         revBool = False  # 大到小排序是False
-    listTmp = list(lb.get(0, tk.END))  # 取得項目內容
+    listTmp = list(listbox1.get(0, tk.END))  # 取得項目內容
     sortedList = sorted(listTmp, reverse=revBool)  # 執行排序
-    lb.delete(0, tk.END)  # 刪除原先Listbox內容
+    listbox1.delete(0, tk.END)  # 刪除原先Listbox內容
     for item in sortedList:  # 將排序結果插入Listbox
-        lb.insert(tk.END, item)
+        listbox1.insert(tk.END, item)
 
-
-animals = ["鼠", "牛", "虎", "兔"]
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Listbox 5")
+window.title("Listbox 3")
 
-lb = tk.Listbox(window)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.pack(padx=10, pady=5)
+listbox1 = tk.Listbox(window, width=30, height=5)
+listbox1.pack()
+
+listbox1.insert(tk.END, "鼠")
+listbox1.insert(tk.END, "牛")
+listbox1.insert(tk.END, "虎")
 
 # 建立排序按鈕
 button1 = tk.Button(window, text="排序", command=itemsSorted)
@@ -278,17 +130,18 @@ def itemSelected(event):  # 列出所選單一項目
     var.set(obj.get(index))  # 設定標籤內容
 
 
-animals = ["鼠", "牛", "虎", "兔"]
-
 var = tk.StringVar()  # 建立標籤
-lab = tk.Label(window, text="", textvariable=var)
-lab.pack(pady=5)
+lab = tk.Label(window, width=30, height=5, text="", textvariable=var)
+lab.pack()
 
-lb = tk.Listbox(window)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.bind("<<ListboxSelect>>", itemSelected)  # 點選綁定
-lb.pack(pady=5)
+listbox1 = tk.Listbox(window, width=30, height=5)
+listbox1.pack()
+
+listbox1.insert(tk.END, "鼠")
+listbox1.insert(tk.END, "牛")
+listbox1.insert(tk.END, "虎")
+
+listbox1.bind("<<ListboxSelect>>", itemSelected)  # 點選綁定
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -297,51 +150,45 @@ print("------------------------------------------------------------")  # 60個
 
 
 def itemSelected(event):  # 列出所選單一項目
-    index = lb.curselection()  # 取得索引
-    var.set(lb.get(index))  # 設定標籤內容
+    index = listbox1.curselection()  # 取得索引
+    var.set(listbox1.get(index))  # 設定標籤內容
 
-
-animals = ["鼠", "牛", "虎", "兔"]
 
 var = tk.StringVar()  # 建立標籤
 lab = tk.Label(window, text="", textvariable=var)
-lab.pack(pady=5)
+lab.pack()
 
-lb = tk.Listbox(window)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.bind("<<ListboxSelect>>", itemSelected)  # 點選綁定
-lb.pack(pady=5)
+listbox1 = tk.Listbox(window, width=30, height=5)
+listbox1.pack()
+
+listbox1.insert(tk.END, "鼠")
+listbox1.insert(tk.END, "牛")
+listbox1.insert(tk.END, "虎")
+
+listbox1.bind("<<ListboxSelect>>", itemSelected)  # 點選綁定
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
 )  # 分隔線
 print("------------------------------------------------------------")  # 60個
-
-window.mainloop()
-
 
 def itemSelected(event):  # 列出所選單一項目
     obj = event.widget  # 取得事件的物件
     index = obj.curselection()  # 取得索引
     var.set(obj.get(index))  # 設定標籤內容
 
-
-window = tk.Tk()
-window.geometry("600x800")
-window.title("Listbox 6")
-
-animals = ["鼠", "牛", "虎", "兔"]
-
 var = tk.StringVar()
 lab = tk.Label(window, text="", textvariable=var)
-lab.pack(pady=5)
+lab.pack()
 
-lb = tk.Listbox(window)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.bind("<Double-Button-1>", itemSelected)  # 連按2下綁定
-lb.pack(pady=5)
+listbox1 = tk.Listbox(window, width=30, height=5)
+listbox1.pack()
+
+listbox1.insert(tk.END, "鼠")
+listbox1.insert(tk.END, "牛")
+listbox1.insert(tk.END, "虎")
+
+listbox1.bind("<Double-Button-1>", itemSelected)  # 連按2下綁定
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -357,17 +204,18 @@ def itemsSelected(event):  # 列印所選結果
     print("----------")  # 區隔輸出
 
 
-animals = ["鼠", "牛", "虎", "兔"]
-
 var = tk.StringVar()
 lab = tk.Label(window, text="", textvariable=var)
-lab.pack(pady=5)
+lab.pack()
 
-lb = tk.Listbox(window, selectmode=tk.EXTENDED)
-for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-lb.bind("<<ListboxSelect>>", itemsSelected)  # 點選綁定
-lb.pack(pady=5)
+listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.EXTENDED)
+listbox1.pack()
+
+listbox1.insert(tk.END, "鼠")
+listbox1.insert(tk.END, "牛")
+listbox1.insert(tk.END, "虎")
+
+listbox1.bind("<<ListboxSelect>>", itemsSelected)  # 點選綁定
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(
     fill=tk.X, padx=5, pady=5
@@ -376,31 +224,31 @@ print("------------------------------------------------------------")  # 60個
 
 
 def getIndex(event):  # 處理按一下選項
-    lb.index = lb.nearest(event.y)  # 目前選項的索引
+    listbox1.index = listbox1.nearest(event.y)  # 目前選項的索引
 
 
 def dragJob(event):  # 處理拖曳選項
-    newIndex = lb.nearest(event.y)  # 目前選項的新索引
-    if newIndex < lb.index:  # 往上拖曳
-        x = lb.get(newIndex)  # 獲得新位置內容
-        lb.delete(newIndex)  # 刪除新位置的內容
-        lb.insert(newIndex + 1, x)  # 放回原先新位置的內容
-        lb.index = newIndex  # 選項的新索引
-    elif newIndex > lb.index:  # 往下拖曳
-        x = lb.get(newIndex)  # 獲得新位置內容
-        lb.delete(newIndex)  # 刪除新位置的內容
-        lb.insert(newIndex - 1, x)  # 放回原先新位置的內容
-        lb.index = newIndex  # 選項的新索引
+    newIndex = listbox1.nearest(event.y)  # 目前選項的新索引
+    if newIndex < listbox1.index:  # 往上拖曳
+        x = listbox1.get(newIndex)  # 獲得新位置內容
+        listbox1.delete(newIndex)  # 刪除新位置的內容
+        listbox1.insert(newIndex + 1, x)  # 放回原先新位置的內容
+        listbox1.index = newIndex  # 選項的新索引
+    elif newIndex > listbox1.index:  # 往下拖曳
+        x = listbox1.get(newIndex)  # 獲得新位置內容
+        listbox1.delete(newIndex)  # 刪除新位置的內容
+        listbox1.insert(newIndex - 1, x)  # 放回原先新位置的內容
+        listbox1.index = newIndex  # 選項的新索引
 
+listbox1 = tk.Listbox(window, width=30, height=5)
+listbox1.pack()
 
 animals = ["鼠", "牛", "虎", "兔"]
 
-lb = tk.Listbox(window)
 for animal in animals:  # 建立動物項目
-    lb.insert(tk.END, animal)
-    lb.bind("<Button-1>", getIndex)  # 按一下綁定getIndex
-    lb.bind("<B1-Motion>", dragJob)  # 拖曳綁定dragJob
-lb.pack(padx=10, pady=10)
+    listbox1.insert(tk.END, animal)
+    listbox1.bind("<Button-1>", getIndex)  # 按一下綁定getIndex
+    listbox1.bind("<B1-Motion>", dragJob)  # 拖曳綁定dragJob
 
 window.mainloop()
 
@@ -410,14 +258,13 @@ print("Listbox + Scrollbar")
 
 window = tk.Tk()
 window.geometry("600x800")
-window.title("Listbox 7")
+window.title("Listbox 4")
 
 scrollbar = tk.Scrollbar(window)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
 wordlist = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-listbox1 = tk.Listbox(window, yscrollcommand=scrollbar.set)
-listbox1 = tk.Listbox(window, yscrollcommand=scrollbar.set)
+listbox1 = tk.Listbox(window, width=30, height=5, yscrollcommand=scrollbar.set)
 
 # Listbox內加入項目
 for line in range(26):
@@ -442,14 +289,14 @@ def itemAdded():                        # 增加項目處理程式
     varAdd = entry.get()                # 讀取Entry的項目
     if (len(varAdd.strip()) == 0):      # 沒有增加不處理
         return
-    lb.insert(tk.END,varAdd)               # 將項目增加到Listbox
+    listbox1.insert(tk.END,varAdd)               # 將項目增加到Listbox
     entry.delete(0,tk.END)                 # 刪除Entry的內容
 
 def itemDeleted():                      # 刪除項目處理程式
-    index = lb.curselection()           # 取得所選項目索引
+    index = listbox1.curselection()           # 取得所選項目索引
     if (len(index) == 0):               # 如果長度是0表示沒有選取
         return
-    lb.delete(index)                    # 刪除選項    
+    listbox1.delete(index)                    # 刪除選項    
 
 entry = tk.Entry(window)
 entry.grid(row=0,column=0,padx=5,pady=5)
@@ -459,8 +306,8 @@ buttonAdd = tk.Button(window,text="增加",width=10,command=itemAdded)
 buttonAdd.grid(row=0,column=1,padx=5,pady=5)
 
 # 建立Listbox
-lb = tk.Listbox(window)
-lb.grid(row=1,column=0,columnspan=2,padx=5,sticky=tk.W)
+listbox1 = tk.Listbox(window, width=30, height=5)
+listbox1.grid(row=1,column=0,columnspan=2,padx=5,sticky=tk.W)
 
 # 建立刪除按鈕
 buttonDel = tk.Button(window,text="刪除",width=10,command=itemDeleted)
@@ -470,11 +317,11 @@ buttonDel.grid(row=2,column=0,padx=5,pady=5,sticky=tk.W)
 """
 
 
-
 window = tk.Tk()
+window.title("Listbox 5")
 
 # 單選
-LB1 = tk.Listbox(window)
+LB1 = tk.Listbox(window, width=30, height=5)
 tk.Label(window, text="單選：選擇你的課程").pack()
 
 for item in ["Chinese", "English", "Math"]:
@@ -482,27 +329,27 @@ for item in ["Chinese", "English", "Math"]:
 LB1.pack()
 
 # 多選
-LB2 = tk.Listbox(window, selectmode=tk.EXTENDED)
+listbox1 = tk.Listbox(window, width=30, height=5, selectmode=tk.EXTENDED)
 tk.Label(window, text="多選：你會幾種編程語言").pack()
 
 for item in ["python", "C++", "C", "Java", "Php"]:
-    LB2.insert(tk.END, item)
+    listbox1.insert(tk.END, item)
 
-LB2.insert(1, "JS", "Go", "R")
-LB2.delete(5, 6)
-LB2.select_set(0, 3)
-LB2.select_clear(0, 1)
-print(LB2.size())
-print(LB2.get(3))
-print(LB2.select_includes(3))
-LB2.pack()
+listbox1.insert(1, "JS", "Go", "R")
+listbox1.delete(5, 6)
+listbox1.select_set(0, 3)
+listbox1.select_clear(0, 1)
+print(listbox1.size())
+print(listbox1.get(3))
+print(listbox1.select_includes(3))
+listbox1.pack()
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
 
 window = tk.Tk()
-window.title("my window")
 window.geometry("200x200")
+window.title("Listbox 6")
 
 var1 = tk.StringVar()
 l = tk.Label(window, bg="yellow", width=4, textvariable=var1)
@@ -510,7 +357,7 @@ l.pack()
 
 
 def print_selection():
-    value = lb.get(lb.curselection())
+    value = listbox1.get(listbox1.curselection())
     var1.set(value)
 
 
@@ -521,20 +368,19 @@ b1.pack()
 
 var2 = tk.StringVar()
 var2.set((11, 22, 33, 44))
-lb = tk.Listbox(window, listvariable=var2)
+
+listbox1 = tk.Listbox(window, width=30, height=5, listvariable=var2)
+listbox1.pack()
+
 list_items = [1, 2, 3, 4]
 for item in list_items:
-    lb.insert("end", item)
-lb.insert(1, "first")
-lb.insert(2, "second")
-lb.delete(2)
-lb.pack()
+    listbox1.insert("end", item)
+listbox1.insert(1, "first")
+listbox1.insert(2, "second")
+listbox1.delete(2)
 
 window.mainloop()
 
 print("------------------------------------------------------------")  # 60個
-
-
-
 
 

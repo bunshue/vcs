@@ -3,6 +3,7 @@ csv檔 逗號分隔值(comma-seperated values)
 
 預設使用','分隔, 也可以使用其他分隔符號
 csv_writer = csv.writer(csvFile, delimiter='\t') # 建立Writer物件, 使用TAB區分項目 不使用逗號
+csv_reader = csv.reader(csvfile, delimiter="\t")  # 建立reader物件使用 '\t' 當分隔符號
 
 先寫後讀
 
@@ -16,7 +17,9 @@ csv_writer = csv.writer(csvFile, delimiter='\t') # 建立Writer物件, 使用TAB
 
 5. pandas
 
-6. 其他 & 新進
+6. 應用範例
+
+7. 其他 & 新進
 
 csv常用的方法(4)
 
@@ -33,7 +36,6 @@ import csv
 import random
 import numpy as np
 import pandas as pd
-
 
 print("------------------------------------------------------------")  # 60個
 print("1. csv_writer = csv.writer() + writerows()")
@@ -109,8 +111,8 @@ filename = "tmp_write_read_csv05.csv"
 
 with open(filename, "w+", newline="") as csvfile:  # 開啟csv檔案
     csv_writer = csv.writer(csvfile)
-    for row in csvtable:
-        csv_writer.writerow(row)
+    for line in csvtable:
+        csv_writer.writerow(line)
 
 print("寫入檔案 " + filename + " 完成, 檔案 :", filename)
 
@@ -130,7 +132,7 @@ print("------------------------------------------------------------")  # 60個
 listProduct=["","",""] # 建立listProduct串列，用來存放一筆產品記錄
 
 # 以附加模式開啟tProduct.csv檔案
-f=open('tProduct.csv','a', newline='') 
+f=open('tmp_tProduct.csv','a', newline='') 
 csv_writer = csv.writer(f) 
 listProduct[0] = "A123"   #listProduct[0]存放編號
 listProduct[1] = "王子麵"   #listProduct[1]存放品名
@@ -156,24 +158,16 @@ list1 = [[10, 33, 45], [5, 25, 56]]
 with open(filename, "w+", newline="") as csvfile:  # 開啟csv檔案
     csv_writer = csv.writer(csvfile)
     csv_writer.writerow(["Data1", "Data2", "Data3"])
-    for row in list1:
-        csv_writer.writerow(row)
+    for line in list1:
+        csv_writer.writerow(line)
 
 """
-print('寫入 csv 檔案')   一讀一寫
-with open(outfilename,'w',newline='') as csvfile:    # 開啟csv檔案
+filename = "tmp_write_read_csv10.csv"  # 目的檔案
+#with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
+with open(filename,'w',newline='') as csvfile:    # 開啟csv檔案
     csv_writer = csv.writer(csvfile)    # 建立Writer物件   
-    for row in listReport:              # 將串列寫入
-        csv_writer.writerow(row)
-"""
-
-
-"""
-outfilename = "tmp_write_read_csv09.csv"  # 目的檔案
-with open(outfilename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
-    csv_writer = csv.writer(csvfile)  # 建立Writer物件
-    for row in listReport:  # 將串列寫入
-        csv_writer.writerow(row)
+    for line in list_data:              # 將串列寫入
+        csv_writer.writerow(line)
 """
 
 print("------------------------------------------------------------")  # 60個
@@ -251,8 +245,8 @@ with open(filename, "w", newline="", encoding="utf-8") as csvfile:  # 開啟csv�
     fields = ["姓名", "年齡", "城市"]
     csv_dict_writer = csv.DictWriter(csvfile, fieldnames=fields)  # 建立Writer物件
     csv_dict_writer.writeheader()  # 寫入標題
-    for row in dictList:  # 寫入內容
-        csv_dict_writer.writerow(row)
+    for line in dictList:  # 寫入內容
+        csv_dict_writer.writerow(line)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -272,170 +266,105 @@ filename = "data/animals.csv"
 with open(filename, 'r', encoding='utf-8') as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀取 csv 檔案內容
     # 以迴圈顯示每一列
-    for row in csv_reader:
-        print(row)
+    for line in csv_reader:
+        print(line)
 
 # 讀取方法相同 印出資料方法2, 完整地讀取每一個元素
 #with open(filename, newline="") as csvfile:  # 開啟csv檔案
 with open(filename, 'r', encoding='utf-8') as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀取 csv 檔案內容
 
-    datas = list(csv_reader)  # 將資料轉成list
-    length = len(datas)
-    data_column = len(datas[0])
+    list_data = list(csv_reader)  # 將資料轉成串列
+    length = len(list_data)
+    data_column = len(list_data[0])
     print("data_column = ", data_column)
-    for row in datas:
-        print(row)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals.csv"
-with open(filename, "r", encoding="UTF-8-sig") as csvfile:  # 開啟csv檔案
-    for line in csvfile:
+    for line in list_data:
         print(line)
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/animals.csv"
 
-with open(filename, "rt", encoding="UTF-8-sig") as csvfile:  # 開啟csv檔案
-    #將所有資料讀出來變成一個一維串列
-    data = csvfile.readlines()
-print(type(data))
-print(data)
+with open(filename, "r", encoding="UTF-8-sig") as csvfile:  # 開啟csv檔案
+    for line in csvfile:
+        print(line)
 
 print("------------------------------------------------------------")  # 60個
 
-filename = "data/python_ReadWrite_CSV1.csv"
+print('測試 readline() 與 readlines()')
 
-import pprint as pp
+filename = "data/animals.csv"
 
-data_list = list()
-with open(filename, "rt") as csvfile:  # 開啟csv檔案
-    columns = csvfile.readline().split(",")
-    for item in csvfile.readlines():
-        temp = dict()
-        for i, field in enumerate(item.split(",")):
-            temp[columns[i].strip()] = field.strip()
-        data_list.append(temp)
-pp.pprint(data_list)
+with open(filename, "rt", encoding="UTF-8-sig") as csvfile:  # 開啟csv檔案
+    cc = csvfile.readline() # 讀出1行
+    print(cc)
+    cc = csvfile.readline()  # 讀出1行
+    print(cc)
+    cc = csvfile.readlines()  # 從目前位置讀到檔尾 => 一維串列
+    print(cc)
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "./data/csvReport.csv"
 
+#with open(filename) as csvfile:  # 開啟csv檔案
 with open(filename, encoding="utf-8") as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀檔案建立Reader物件
-    listReport = list(csv_reader)  # 將資料轉成串列
+    list_data = list(csv_reader)  # 將資料轉成串列
+    print(list_data)
 
-for row in listReport:
-    print(row)  # 輸出串列
-
-print(listReport[0][1], listReport[0][2])
-print(listReport[1][2], listReport[1][5])
-print(listReport[2][3], listReport[2][6])
-
-print("------------------------------------------------------------")  # 60個
-
-infilename = "./data/csvReport.csv"  # 來源檔案
-outfilename = "out19_6.csv"  # 目的檔案
-
-with open(infilename, encoding="utf-8") as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)  # 讀檔案建立Reader物件
-    listReport = list(csv_reader)  # 將資料轉成串列
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "./data/csvReport2.csv"
+filename = "data/csvReport2.csv"
 
 with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)  # 讀檔案建立Reader物件
-    listReport = list(csv_reader)  # 將資料轉成串列
-total2025 = 0
-total2026 = 0
-for row in listReport:
-    if row[0] == "Steve":
-        if row[1] == "2025":
-            total2025 += int(row[5])
-        if row[1] == "2026":
-            total2026 += int(row[5])
+    list_data = list(csv_reader)  # 將資料轉成串列
+    for line in list_data:  # 將二維串列list_data 逐列印出
+        print(line)
 
-print("Steve's Total Revenue of 2025 = ", total2025)
-print("Steveis Total Revenue of 2026 = ", total2026)
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals.csv"
+
+try:
+    with open(filename, encoding="utf-8") as csvfile:  # 開啟csv檔案
+        csv_reader = csv.reader(csvfile)
+        list_data = list(csv_reader)
+except FileNotFoundError:
+    print("無法打開文件:", filename)
+else:
+    for line in list_data:
+        print("%-20s%-20s%-10s%-20s" % (line[0], line[1], line[2], line[3]))
 
 print("------------------------------------------------------------")  # 60個
 
 filename = "data/pl.csv"
 with open(filename, "r") as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
-    for row in csv_reader:
-        print(",".join(row))
+    for line in csv_reader:
+        print(line)
 print()
 
+print("------------------------------------------------------------")  # 60個
+
+
+
+filename = "data/Example.csv"
 with open(filename, "r") as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
-    for row in csv_reader:
-        print(row)
+    for line in csv_reader:
+        print(line)
+
+
 
 print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-print("4. csv.DictReader()")
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-data_list = list()
-with open(filename, newline="") as csvfile:  # 開啟csv檔案
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    # 以迴圈顯示每一列
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row)
-        data_list.append(dict(row))
-
-print(type(data_list))
-print(len(data_list))
-print(data_list)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-import pprint as pp
-
-data_list = list()
-with open(filename, "rt") as csvfile:  # 開啟csv檔案
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        data_list.append(dict(row))
-pp.pprint(data_list)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals_big5.csv"
-
-# with open(filename, newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
-    for row in csv_dict_reader:  # 列出DictReader各列內容
-        print(row)
-        #print(row["中文名"], row["英文名"])
-
-print("------------------------------------------------------------")  # 60個
-
-
-
-
 
 import pathlib
 
 filename = "data/namelist.csv"
 csvfile = pathlib.Path(filename).open(encoding="UTF-8")
 csv_reader = csv.reader(csvfile)
-for row in csv_reader:  # 取得每一列資料
-    for value in row:  # 取得資料時，以逗號間隔
-        print(value)
+for line in csv_reader:
+    print(line)
 
 print("------------------------------------------------------------")  # 60個
 
@@ -445,110 +374,12 @@ filename = "xxxxx.csv"
 try:
     csvfile = pathlib.Path(filename).open(encoding="UTF-8")
     csv_reader = csv.reader(csvfile)
-    for row in csv_reader:  # 取得每一列資料
-        for value in row:  # 取得資料時，以逗號間隔
-            print(value)
+    for line in csv_reader:
+        print(line)
 except:
     print("無法載入檔案。")
 
 print("------------------------------------------------------------")  # 60個
-
-filename = "data/csvReport2.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)  # 讀檔案建立Reader物件
-    listReport = list(csv_reader)  # 將資料轉成串列
-total2025 = 0
-total2026 = 0
-for row in listReport:
-    if row[0] == "Steve":
-        if row[1] == "2025":
-            total2025 += int(row[5])
-        if row[1] == "2026":
-            total2026 += int(row[5])
-
-print("Steve's Total Revenue of 2025 = ", total2025)
-print("Steveis Total Revenue of 2026 = ", total2026)
-
-print("------------------------------------------------------------")  # 60個
-
-print("2025年1月臺北天氣報告")
-
-filename = "data/TaipeiWeatherJan.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    headerRow = next(csv_reader)  # 讀取文件下一列
-    highTemps, meanTemps, lowTemps = [], [], []
-    for row in csv_reader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-        meanTemps.append(int(row[2]))  # 儲存均溫
-        lowTemps.append(int(row[3]))  # 儲存最低溫
-
-print("高溫", highTemps)
-print("均溫", meanTemps)
-print("低溫", lowTemps)
-
-print("------------------------------------------------------------")  # 60個
-
-import ast
-
-filename = "C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores.csv"
-
-scores = dict()
-with open(filename, "r") as csvfile:  # 開啟csv檔案
-    filedata = csvfile.read()
-    # scores = ast.literal_eval(filedata)
-print("以下是{}成績檔的字典型態資料:".format(filename))
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/animals.csv"
-
-try:
-    with open(filename, encoding="utf-8") as csvfile:  # 開啟csv檔案
-        csv_reader = csv.reader(csvfile)
-        data = list(csv_reader)
-except FileNotFoundError:
-    print("無法打開文件:", filename)
-else:
-    for item in data:
-        print("%-20s%-20s%-10s%-20s" % (item[0], item[1], item[2], item[3]))
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/Example.csv"
-with open(filename, "r") as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    for row in csv_reader:
-        print(",".join(row))
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/csvReport.csv"
-with open(filename, encoding="utf-8") as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)  # 建立Reader物件
-    listReport = list(csv_reader)  # 將資料轉成串列
-for row in listReport:  # 迴圈輸出串列內容
-    print(row)
-
-print("------------------------------------------------------------")  # 60個
-
-filename = "data/csvReport.csv"
-with open(filename, encoding="utf-8") as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)  # 建立Reader物件
-    listReport = list(csv_reader)  # 將資料轉成串列
-
-print(listReport[0][1], listReport[0][2])
-print(listReport[1][2], listReport[1][5])
-print(listReport[2][3], listReport[2][6])
-
-print("------------------------------------------------------------")  # 60個
-
-infilename = "data/csvReport.csv"  # 來源檔案
-with open(infilename, encoding="utf-8") as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)  # 讀檔案建立Reader物件
-    listReport = list(csv_reader)  # 將資料轉成串列
 
 filename = "data/TaipeiWeatherJan.csv"
 
@@ -562,282 +393,81 @@ for i, header in enumerate(headerRow):
 
 print("------------------------------------------------------------")  # 60個
 
+print("2025年1月臺北天氣報告")
+
+filename = "data/TaipeiWeatherJan.csv"
+
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    headerRow = next(csv_reader)  # 讀取文件下一列
+    highTemps, meanTemps, lowTemps = [], [], []
+    for line in csv_reader:
+        highTemps.append(int(line[1]))  # 儲存最高溫
+        meanTemps.append(int(line[2]))  # 儲存均溫
+        lowTemps.append(int(line[3]))  # 儲存最低溫
+
+print("高溫", highTemps)
+print("均溫", meanTemps)
+print("低溫", lowTemps)
+
+print("------------------------------------------------------------")  # 60個
+
 filename = "data/TaipeiWeatherJan.csv"
 
 with open(filename) as csvfile:  # 開啟csv檔案
     csv_reader = csv.reader(csvfile)
     headerRow = next(csv_reader)  # 讀取文件下一列
     highTemps, lowTemps = [], []  # 設定空串列
-    for row in csv_reader:
-        highTemps.append(row[1])  # 儲存最高溫
-        lowTemps.append(row[3])  # 儲存最低溫
+    for line in csv_reader:
+        highTemps.append(line[1])  # 儲存最高溫
+        lowTemps.append(line[3])  # 儲存最低溫
 
 print("最高溫 : ", highTemps)
 print("最低溫 : ", lowTemps)
 
 print("------------------------------------------------------------")  # 60個
 
-import matplotlib.pyplot as plt
+print("------------------------------------------------------------")  # 60個
+print("4. csv.DictReader()")
+print("------------------------------------------------------------")  # 60個
 
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-filename = "data/TaipeiWeatherJan.csv"
+filename = "data/animals_big5.csv"
 
+list_data = list()
+with open(filename, newline="") as csvfile:  # 開啟csv檔案
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    # 以迴圈顯示每一列
+    for line in csv_dict_reader:  # 列出DictReader各列內容
+        print(line)
+        list_data.append(dict(line))
+
+print(type(list_data))
+print(len(list_data))
+print(list_data)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+import pprint as pp
+
+list_data = list()
+with open(filename, "rt") as csvfile:  # 開啟csv檔案
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    for line in csv_dict_reader:  # 列出DictReader各列內容
+        list_data.append(dict(line))
+pp.pprint(list_data)
+
+print("------------------------------------------------------------")  # 60個
+
+filename = "data/animals_big5.csv"
+
+# with open(filename, newline="", encoding="utf-8") as csvfile:  # 開啟csv檔案
 with open(filename) as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    headerRow = next(csv_reader)  # 讀取文件下一列
-    highTemps = []  # 設定空串列
-    for row in csv_reader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-plt.figure(figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(highTemps)
-plt.title("2025年1月臺北天氣報告", fontsize=24)
-plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-from datetime import datetime
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-filename = "data/TaipeiWeatherJan.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    headerRow = next(csv_reader)  # 讀取文件下一列
-    dates, highTemps = [], []  # 設定空串列
-    for row in csv_reader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-        currentDate = datetime.strptime(row[0], "%Y/%m/%d")
-        dates.append(currentDate)
-
-plt.figure(figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(dates, highTemps)  # 圖標增加日期刻度
-plt.title("2025年1月臺北天氣報告", fontsize=24)
-plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-from datetime import datetime
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-filename = "data/TaipeiWeatherJan.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    headerRow = next(csv_reader)  # 讀取文件下一列
-    dates, highTemps = [], []  # 設定空串列
-    for row in csv_reader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-        currentDate = datetime.strptime(row[0], "%Y/%m/%d")
-        dates.append(currentDate)
-
-fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(dates, highTemps)  # 圖標增加日期刻度
-fig.autofmt_xdate()  # 預設最佳化角度旋轉
-plt.title("2025年1月臺北天氣報告", fontsize=24)
-plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-from datetime import datetime
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-filename = "data/TaipeiWeatherJan.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    headerRow = next(csv_reader)  # 讀取文件下一列
-    dates, highTemps = [], []  # 設定空串列
-    for row in csv_reader:
-        highTemps.append(int(row[1]))  # 儲存最高溫
-        currentDate = datetime.strptime(row[0], "%Y/%m/%d")
-        dates.append(currentDate)
-
-fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(dates, highTemps)  # 圖標增加日期刻度
-fig.autofmt_xdate(rotation=60)  # 日期旋轉60度
-plt.title("2025年1月臺北天氣報告", fontsize=24)
-plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-from datetime import datetime
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-filename = "data/TaipeiWeatherJan.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    headerRow = next(csv_reader)  # 讀取文件下一列
-    dates, highTemps, lowTemps = [], [], []  # 設定空串列
-    for row in csv_reader:
-        try:
-            currentDate = datetime.strptime(row[0], "%Y/%m/%d")
-            highTemp = int(row[1])  # 設定最高溫
-            lowTemp = int(row[3])  # 設定最低溫
-        except Exception:
-            print("有缺值")
-        else:
-            highTemps.append(highTemp)  # 儲存最高溫
-            lowTemps.append(lowTemp)  # 儲存最低溫
-            dates.append(currentDate)  # 儲存日期
-
-fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(dates, highTemps)  # 繪製最高溫
-plt.plot(dates, lowTemps)  # 繪製最低溫
-plt.fill_between(dates, highTemps, lowTemps, color="y", alpha=0.2)  # 填滿
-fig.autofmt_xdate()  # 日期旋轉
-plt.title("2025年1月臺北天氣報告", fontsize=24)
-plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-from datetime import datetime
-
-
-def convert_tw_date_to_ad(tw_date):
-    # 分割日期為年、月、日
-    year, month, day = map(int, tw_date.split("/"))
-    # 將民國年轉換為西元年
-    year += 1911
-    # 重組日期並返回
-    return f"{year}-{month:02d}-{day:02d}"
-
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-filename = "data/ST43_3479_202310.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    for _ in range(5):  # 跳過前 5 列
-        next(csv_reader)
-    all_rows = list(csv_reader)
-    data_without_last_row = all_rows[:-1]  # 跳過最後一列
-
-    mydates, highPrices, lowPrices, closePrices = [], [], [], []
-
-    for row in data_without_last_row:
-        try:
-            # 將日期轉換為西元年格式
-            converted_date = convert_tw_date_to_ad(row[0])
-            # 使用 strptime 解析轉換後的日期字串
-            parseDate = datetime.strptime(converted_date, "%Y-%m-%d")
-            currentDate = parseDate.strftime("%Y-%m-%d")  # 轉換後日期
-            highPrice = eval(row[4])  # 設定最高價
-            lowPrice = eval(row[5])  # 設定最低價
-            closePrice = eval(row[6])  # 設定收盤價
-        except Exception:
-            print(f"有缺值 {row}")
-        else:
-            highPrices.append(highPrice)  # 儲存最高價
-            lowPrices.append(lowPrice)  # 儲存最低價
-            closePrices.append(closePrice)  # 儲存收盤價
-            mydates.append(currentDate)  # 儲存日期
-
-fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(mydates, highPrices, "-*", label="最高價")  # 繪製最高價
-plt.plot(mydates, lowPrices, "-o", label="最低價")  # 繪製最低價
-plt.plot(mydates, closePrices, "-^", label="收盤價")  # 繪製收盤價
-plt.legend()
-fig.autofmt_xdate()  # 日期旋轉
-plt.title("2023年10月安勤公司日線圖", fontsize=24)
-plt.ylabel("價格", fontsize=14)
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-import matplotlib.pyplot as plt
-from datetime import datetime
-
-
-def convert_tw_date_to_ad(tw_date):
-    # 分割日期為年、月、日
-    year, month, day = map(int, tw_date.split("/"))
-    # 將民國年轉換為西元年
-    year += 1911
-    # 重組日期並返回
-    return f"{year}-{month:02d}-{day:02d}"
-
-
-plt.rcParams["font.family"] = ["Microsoft JhengHei"]
-filename = "data/ST43_3479_202310.csv"
-
-with open(filename) as csvfile:  # 開啟csv檔案
-    csv_reader = csv.reader(csvfile)
-    all_rows = list(csv_reader)
-    data_row = all_rows[5:-1]  # 切片
-
-    mydates, highPrices, lowPrices, closePrices = [], [], [], []
-
-    for row in data_row:
-        try:
-            # 將日期轉換為西元年格式
-            converted_date = convert_tw_date_to_ad(row[0])
-            # 使用 strptime 解析轉換後的日期字串
-            parseDate = datetime.strptime(converted_date, "%Y-%m-%d")
-            currentDate = parseDate.strftime("%Y-%m-%d")  # 轉換後日期
-            highPrice = eval(row[4])  # 設定最高價
-            lowPrice = eval(row[5])  # 設定最低價
-            closePrice = eval(row[6])  # 設定收盤價
-        except Exception:
-            print(f"有缺值 {row}")
-        else:
-            highPrices.append(highPrice)  # 儲存最高價
-            lowPrices.append(lowPrice)  # 儲存最低價
-            closePrices.append(closePrice)  # 儲存收盤價
-            mydates.append(currentDate)  # 儲存日期
-
-fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
-plt.plot(mydates, highPrices, "-*", label="最高價")  # 繪製最高價
-plt.plot(mydates, lowPrices, "-o", label="最低價")  # 繪製最低價
-plt.plot(mydates, closePrices, "-^", label="收盤價")  # 繪製收盤價
-plt.legend()
-fig.autofmt_xdate()  # 日期旋轉
-plt.title("2023年10月安勤公司日線圖", fontsize=24)
-plt.ylabel("價格", fontsize=14)
-# plt.show()
-
-print("------------------------------------------------------------")  # 60個
-
-csvfile = open("data/tScore.csv")  # 建立檔案物件f，此物件操作StudentScore.csv
-csv_reader = csv.reader(csvfile, delimiter="\t")  # 建立reader物件使用 '\t' 當分隔符號
-data_list = list(csv_reader)  # 使用list()函數將data轉成串列再指定給Reader
-for row in data_list:  # 使用巢狀迴圈將data_list串列逐欄印出
-    for col in row:
-        print(col, "   ", end="")
-    print()
-csvfile.close()
-
-print("------------------------------------------------------------")  # 60個
-
-csvfile = open("data/StudentScore.csv")  # 建立檔案物件f，此物件操作StudentScore.csv
-csv_reader = csv.reader(csvfile)  # 使用csv的reader()方法取得檔案物件f的資料並傳回Reader物件
-data_list = list(csv_reader)  # 使用list()函數將data轉換串列再指定給data_list
-for row in data_list:  # 將二維串列data_list 逐列印出
-    print(row)
-csvfile.close()  # 關閉檔案
-
-print("------------------------------------------------------------")  # 60個
-
-csvfile = open("data/StudentScore.csv")  # 建立檔案物件f，此物件操作StudentScore.csv
-csv_reader = csv.reader(csvfile)  # 使用csv的reader()方法取得檔案物件f的資料並傳回Reader物件
-data_list = list(csv_reader)  # 使用list()函數將csv_reader轉成串列再指定給data_list
-for row in data_list:  # 使用巢狀迴圈將data_list串列逐欄印出
-    for col in row:
-        print(col, "  ", end="")
-    print()
-csvfile.close()
-
-print("------------------------------------------------------------")  # 60個
+    csv_dict_reader = csv.DictReader(csvfile)  # 讀取 csv 檔內容，將每一列轉成 dictionary
+    for line in csv_dict_reader:  # 列出DictReader各列內容
+        print(line)
+        #print(line["中文名"], line["英文名"])
 
 print("------------------------------------------------------------")  # 60個
 
@@ -855,8 +485,8 @@ csvfile = StringIO(data)
 
 csv_reader = csv.reader(csvfile)  # 讀取 csv 檔案內容
 
-for row in csv_reader:
-    print('The album "' + row[0] + '" was released in ' + str(row[1]))
+for line in csv_reader:
+    print('The album "' + line[0] + '" was released in ' + str(line[1]))
 
 print("------------------------------------------------------------")  # 60個
 print("5. pandas")
@@ -895,25 +525,6 @@ df2b = pd.read_json("tmp_write_read_csv13_vehicles2.json")
 print(df1)
 print(df2a)
 print(df2b)
-
-print("------------------------------------------------------------")  # 60個
-
-
-# pip install xlsxwriter
-
-filename = "C:/_git/vcs/_4.python/numpy_pandas/data/ExpensesRecord.xls"
-
-df = pd.read_excel(filename, "sheet")
-# data = pd.read_html('http://www.fdic.gov/bank/individual/failed/banklist.html')
-print(df.head(5))
-
-from pandas import ExcelWriter
-
-filename = "tmp_write_read_csv14.xlsx"
-
-writer = ExcelWriter(filename, engine="xlsxwriter")
-df.to_excel(writer, sheet_name="sheet2")
-writer.save()
 
 print("------------------------------------------------------------")  # 60個
 
@@ -956,177 +567,245 @@ print(DataFrame[["數量", "支出金額", "單價"]])
 print("------------------------------------------------------------")  # 60個
 
 
-""" no file
-df = pd.read_excel('AAPL.xlsx', 'AAPL')
-print(df.head())
-print(type(df))
-
-# 2
-print(df.shape)
-print(df.columns)
-print(df.index)
-print(df.info())
-print(df.describe())
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_excel('AAPL.xlsx', 'AAPL')
-print(df.head())
-print(type(df))
-
-# 2 data info
-print(df.shape)
-print(df.columns)
-print(df.index)
-print(df.info())
-print(df.describe())
-
-# 3 filter'
-
-print("--------------------")
-print(df['Date'] == '2018-01-05')
-print(df[df['Date'] == '2018-01-05'])
-print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
-print(df[df['Open'] > 194.2])
-print(df[['Date','Open']])
-print(df[['Date','Open']][:5])
-print(df.sort_values(by=['Volume'])[:5])
-print(df.sort_values(by=['Volume'], ascending=False)[:5])
-print(df['Open'][:30].rolling(7).mean())
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_excel('AAPL.xlsx', 'AAPL')
-print(df.head())
-print(type(df))
-
-# 2 data info
-print(df.shape)
-print(df.columns)
-print(df.index)
-print(df.info())
-print(df.describe())
-
-# 3 filter'
-
-print("--------------------")
-print(df[df['Date'] == '2018-01-05'])
-print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
-print(df[df['Open'] > 194.2])
-print(df[['Date','Open']][:5])
-print(df.sort_values(by=['Volume'])[:5])
-print(df.sort_values(by=['Volume'], ascending=False)[:5])
-print(df['Open'][:30].rolling(7).mean())
-
-# 4 Calculation
-print("--------------------")
-df['diff'] = df['Close']-df['Open']
-df['year'] = pd.DatetimeIndex(df['Date']).year
-df['month'] = pd.DatetimeIndex(df['Date']).month
-print(df.head())
-print("April Volume sum=%.2f" % df[df['month'] == 4][['Volume']].sum())
-print("April Open mean=%.2d" % df[df['month'] == 4][['Open']].mean())
-
-print('------------------------------------------------------------')	#60個
-
-df = pd.read_excel('AAPL.xlsx', 'AAPL')
-print(df.head())
-print(type(df))
-
-# 2 data info
-print(df.shape)
-print(df.columns)
-print(df.index)
-print(df.info())
-print(df.describe())
+print("------------------------------------------------------------")  # 60個
 
 
-# 3 filter'
-print("--------------------")
-print(df[df['Date'] == '2018-01-05'])
-print(df[(df['Date'] >= '2018-07-05') & (df['Date'] <= '2018-07-10' )])
-print(df[df['Open'] > 194.2])
-print(df[['Date','Open']][:5])
-print(df.sort_values(by=['Volume'])[:5])
-print(df.sort_values(by=['Volume'], ascending=False)[:5])
-print(df['Open'][:30].rolling(7).mean())
-
-# 4 Calculation
-print("--------------------")
-df['diff'] = df['Close']-df['Open']
-df['year'] = pd.DatetimeIndex(df['Date']).year
-df['month'] = pd.DatetimeIndex(df['Date']).month
-df['day'] = pd.DatetimeIndex(df['Date']).day
-print(df.head())
-print("April Volume sum=%.2f" % df[df['month'] == 4][['Volume']].sum())
-print("April Open mean=%.2d" % df[df['month'] == 4][['Open']].mean())
-
-#  5 matplotlib
-import matplotlib.pyplot as plt
-df.plot(x='Date', y='Open',grid=True, color='blue')
-#plt.show()
+print("------------------------------------------------------------")  # 60個
+print("6. 應用範例")
+print("------------------------------------------------------------")  # 60個
 
 import matplotlib.pyplot as plt
-df.plot( y='diff',grid=True, color='red',kind='hist')
-#plt.show()
 
-fig, ax = plt.subplots()
-for name, group in df.groupby('month'):
-    group.plot(x='day', y='Open', ax=ax, label=name)
-#plt.show()
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+filename = "data/TaipeiWeatherJan.csv"
 
-fileds=['Open','Close','High']
-fig, ax = plt.subplots()
-for name in fileds:
-    df.plot(x='Date', y=name, ax=ax, label=name)
-#plt.show()
-
-dfMonths = df.loc[df['month'].isin([1,2,3,4,5,6,7])]
-print(dfMonths)
-dfMonthsPivot = dfMonths.pivot_table(values = 'High', columns = 'month', index = 'day')
-dfMonthsPivot.plot(kind = 'box',title = 'Months High')
-#plt.show()
-"""
-print("------------------------------------------------------------")  # 60個
-
-
-
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    headerRow = next(csv_reader)  # 讀取文件下一列
+    highTemps = []  # 設定空串列
+    for line in csv_reader:
+        highTemps.append(int(line[1]))  # 儲存最高溫
+plt.figure(figsize=(12, 8))  # 設定繪圖區大小
+plt.plot(highTemps)
+plt.title("2025年1月臺北天氣報告", fontsize=24)
+plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
+import matplotlib.pyplot as plt
+from datetime import datetime
 
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+filename = "data/TaipeiWeatherJan.csv"
 
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    headerRow = next(csv_reader)  # 讀取文件下一列
+    dates, highTemps = [], []  # 設定空串列
+    for line in csv_reader:
+        highTemps.append(int(line[1]))  # 儲存最高溫
+        currentDate = datetime.strptime(line[0], "%Y/%m/%d")
+        dates.append(currentDate)
 
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-
-print("------------------------------------------------------------")  # 60個
-
-print("------------------------------------------------------------")  # 60個
-print("作業完成")
-print("------------------------------------------------------------")  # 60個
-
-
-
-
-
-
-
+plt.figure(figsize=(12, 8))  # 設定繪圖區大小
+plt.plot(dates, highTemps)  # 圖標增加日期刻度
+plt.title("2025年1月臺北天氣報告", fontsize=24)
+plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
+# plt.show()
 
 print("------------------------------------------------------------")  # 60個
 
-print('OK')
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+filename = "data/TaipeiWeatherJan.csv"
+
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    headerRow = next(csv_reader)  # 讀取文件下一列
+    dates, highTemps = [], []  # 設定空串列
+    for line in csv_reader:
+        highTemps.append(int(line[1]))  # 儲存最高溫
+        currentDate = datetime.strptime(line[0], "%Y/%m/%d")
+        dates.append(currentDate)
+
+fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
+plt.plot(dates, highTemps)  # 圖標增加日期刻度
+fig.autofmt_xdate()  # 預設最佳化角度旋轉
+plt.title("2025年1月臺北天氣報告", fontsize=24)
+plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
+# plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+filename = "data/TaipeiWeatherJan.csv"
+
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    headerRow = next(csv_reader)  # 讀取文件下一列
+    dates, highTemps = [], []  # 設定空串列
+    for line in csv_reader:
+        highTemps.append(int(line[1]))  # 儲存最高溫
+        currentDate = datetime.strptime(line[0], "%Y/%m/%d")
+        dates.append(currentDate)
+
+fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
+plt.plot(dates, highTemps)  # 圖標增加日期刻度
+fig.autofmt_xdate(rotation=60)  # 日期旋轉60度
+plt.title("2025年1月臺北天氣報告", fontsize=24)
+plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
+# plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+filename = "data/TaipeiWeatherJan.csv"
+
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    headerRow = next(csv_reader)  # 讀取文件下一列
+    dates, highTemps, lowTemps = [], [], []  # 設定空串列
+    for line in csv_reader:
+        try:
+            currentDate = datetime.strptime(line[0], "%Y/%m/%d")
+            highTemp = int(line[1])  # 設定最高溫
+            lowTemp = int(line[3])  # 設定最低溫
+        except Exception:
+            print("有缺值")
+        else:
+            highTemps.append(highTemp)  # 儲存最高溫
+            lowTemps.append(lowTemp)  # 儲存最低溫
+            dates.append(currentDate)  # 儲存日期
+
+fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
+plt.plot(dates, highTemps)  # 繪製最高溫
+plt.plot(dates, lowTemps)  # 繪製最低溫
+plt.fill_between(dates, highTemps, lowTemps, color="y", alpha=0.2)  # 填滿
+fig.autofmt_xdate()  # 日期旋轉
+plt.title("2025年1月臺北天氣報告", fontsize=24)
+plt.ylabel(r"溫度 $C^{o}$", fontsize=14)
+# plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+from datetime import datetime
 
 
+def convert_tw_date_to_ad(tw_date):
+    # 分割日期為年、月、日
+    year, month, day = map(int, tw_date.split("/"))
+    # 將民國年轉換為西元年
+    year += 1911
+    # 重組日期並返回
+    return f"{year}-{month:02d}-{day:02d}"
 
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+filename = "data/ST43_3479_202310.csv"
+
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    for _ in range(5):  # 跳過前 5 列
+        next(csv_reader)
+    list_data = list(csv_reader)
+    data_without_last_row = list_data[:-1]  # 跳過最後一列
+
+    mydates, highPrices, lowPrices, closePrices = [], [], [], []
+
+    for line in data_without_last_row:
+        try:
+            # 將日期轉換為西元年格式
+            converted_date = convert_tw_date_to_ad(line[0])
+            # 使用 strptime 解析轉換後的日期字串
+            parseDate = datetime.strptime(converted_date, "%Y-%m-%d")
+            currentDate = parseDate.strftime("%Y-%m-%d")  # 轉換後日期
+            highPrice = eval(line[4])  # 設定最高價
+            lowPrice = eval(line[5])  # 設定最低價
+            closePrice = eval(line[6])  # 設定收盤價
+        except Exception:
+            print(f"有缺值 {line}")
+        else:
+            highPrices.append(highPrice)  # 儲存最高價
+            lowPrices.append(lowPrice)  # 儲存最低價
+            closePrices.append(closePrice)  # 儲存收盤價
+            mydates.append(currentDate)  # 儲存日期
+
+fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
+plt.plot(mydates, highPrices, "-*", label="最高價")  # 繪製最高價
+plt.plot(mydates, lowPrices, "-o", label="最低價")  # 繪製最低價
+plt.plot(mydates, closePrices, "-^", label="收盤價")  # 繪製收盤價
+plt.legend()
+fig.autofmt_xdate()  # 日期旋轉
+plt.title("2023年10月安勤公司日線圖", fontsize=24)
+plt.ylabel("價格", fontsize=14)
+# plt.show()
+
+print("------------------------------------------------------------")  # 60個
+
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+
+def convert_tw_date_to_ad(tw_date):
+    # 分割日期為年、月、日
+    year, month, day = map(int, tw_date.split("/"))
+    # 將民國年轉換為西元年
+    year += 1911
+    # 重組日期並返回
+    return f"{year}-{month:02d}-{day:02d}"
+
+
+plt.rcParams["font.family"] = ["Microsoft JhengHei"]
+filename = "data/ST43_3479_202310.csv"
+
+with open(filename) as csvfile:  # 開啟csv檔案
+    csv_reader = csv.reader(csvfile)
+    list_data = list(csv_reader)
+    data_row = list_data[5:-1]  # 切片
+
+    mydates, highPrices, lowPrices, closePrices = [], [], [], []
+
+    for line in data_row:
+        try:
+            # 將日期轉換為西元年格式
+            converted_date = convert_tw_date_to_ad(line[0])
+            # 使用 strptime 解析轉換後的日期字串
+            parseDate = datetime.strptime(converted_date, "%Y-%m-%d")
+            currentDate = parseDate.strftime("%Y-%m-%d")  # 轉換後日期
+            highPrice = eval(line[4])  # 設定最高價
+            lowPrice = eval(line[5])  # 設定最低價
+            closePrice = eval(line[6])  # 設定收盤價
+        except Exception:
+            print(f"有缺值 {line}")
+        else:
+            highPrices.append(highPrice)  # 儲存最高價
+            lowPrices.append(lowPrice)  # 儲存最低價
+            closePrices.append(closePrice)  # 儲存收盤價
+            mydates.append(currentDate)  # 儲存日期
+
+fig = plt.figure(figsize=(12, 8))  # 設定繪圖區大小
+plt.plot(mydates, highPrices, "-*", label="最高價")  # 繪製最高價
+plt.plot(mydates, lowPrices, "-o", label="最低價")  # 繪製最低價
+plt.plot(mydates, closePrices, "-^", label="收盤價")  # 繪製收盤價
+plt.legend()
+fig.autofmt_xdate()  # 日期旋轉
+plt.title("2023年10月安勤公司日線圖", fontsize=24)
+plt.ylabel("價格", fontsize=14)
+# plt.show()
 
 
 print("------------------------------------------------------------")  # 60個
-print("6. 其他 & 新進")
+print("7. 其他 & 新進")
 print("------------------------------------------------------------")  # 60個
 
 """ many
@@ -1145,10 +824,10 @@ with open(filename_r, 'r') as csvfile1:  # 開啟csv檔案
         #array = header.split(',')
         first_item = header[0]
         csv_writer.writerow(header)
-        for row in csv_reader:
-            print(','.join(row))
-            csv_writer.writerow(row)
-            print(row[2])
+        for line in csv_reader:
+            print(','.join(line))
+            csv_writer.writerow(line)
+            print(line[2])
 
 print('寫入csv檔, 檔案 :', filename_w)
 """
@@ -1198,31 +877,19 @@ passwd_to_csv(r".\data\passwd.cfg", filename)
 
 print("------------------------------------------------------------")  # 60個
 
+print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
 
 
+print("------------------------------------------------------------")  # 60個
 
-
-
-
-
-
-filename = 'C:/_git/vcs/_4.python/_data/animals2.csv'
-csvfile = open(filename)  # 開啟 CSV 檔案
-raw_data = csv.reader(csvfile)  # 讀取 CSV 檔案
-data = list(raw_data)  # 轉換成二維串列
-print(data)
-
-
-
-
-
+print("------------------------------------------------------------")  # 60個
+print("作業完成")
+print("------------------------------------------------------------")  # 60個
 
 """
-import csv
-
 with open('songs.csv', 'w', newline='', encoding="big5") as csvfile:
     # 建立 CSV 檔寫入器
     writer = csv.writer(csvfile)
@@ -1249,5 +916,14 @@ with open('songs.csv', 'w', newline='', encoding="big5") as csvfile:
             writer.writerow([self.docname, lineno, issue, text.strip()])
             f.close()
 
+
+        # 開啟輸出的 csv 檔案
+        filename_w = '匯出資料範例.csv'
+        with open(filename_w, 'w', newline = '') as csvfile:
+            # 建立 csv 檔寫入物件
+            writer = csv.writer(csvfile)
+
+            # 寫入二維串列資料
+            writer.writerows(csv_data)
 
 """

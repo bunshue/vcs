@@ -113,3 +113,20 @@ print("------------------------------------------------------------")  # 60個
 
 
 print("------------------------------------------------------------")  # 60個
+
+
+
+print("密碼資料")
+label = tk.Label(window, text="請輸入密碼: ").pack()
+entry = tk.Entry(window, bg="yellow", fg="red", show="*").pack()
+
+
+
+
+
+#entry內的文字靠右對齊
+Entry(frame1, width = 5, justify = RIGHT).pack(side = LEFT)
+Entry(frame1, width = 5, justify = RIGHT).pack(side = LEFT)
+Entry(frame1, width = 5, justify = RIGHT).pack(side = LEFT)
+
+
